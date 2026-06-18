@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spawner</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101315;
+      --panel: #171d20;
+      --panel-2: #20282b;
+      --ink: #e4e9ea;
+      --muted: #9aa7aa;
+      --line: #314044;
+      --accent: #75c4b6;
+      --amber: #d6b26b;
+      --danger: #c06b62;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, "Malgun Gothic", sans-serif;
+      overflow: hidden;
+    }
+
+    .app {
+      display: grid;
+      grid-template-rows: 1fr;
+      min-height: 100vh;
+    }
+
+    .stage {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 0;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(117, 196, 182, 0.08), transparent 36%),
+        linear-gradient(180deg, #111719, #0d1012);
+    }
+
+    canvas {
+      width: min(100vw, 1200px);
+      height: min(100vh, 760px);
+      max-width: 100%;
+      max-height: 100%;
+      border: 1px solid #263538;
+      background: #111619;
+      image-rendering: crisp-edges;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <main class="stage">
+      <canvas id="world" width="1200" height="760" tabindex="0" aria-label="Spawner world canvas"></canvas>
+    </main>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("world");
+    const ctx = canvas.getContext("2d");
+
+    const WORLD_SIZE = 10000;
+    const COLONY_SIZE = 5;
+    const COLONY_ORIGIN = {
+      x: WORLD_SIZE / 2 - Math.floor(COLONY_SIZE / 2),
+      y: WORLD_SIZE / 2 - Math.floor(COLONY_SIZE / 2)
+    };
+    const COLONY_CENTER = {
+      x: COLONY_ORIGIN.x + COLONY_SIZE / 2,
+      y: COLONY_ORIGIN.y + COLONY_SIZE / 2
+    };
+    const TIME_SCALE = 1;
+    const COLONY_LIFETIME = 10000;
+    const MIN_ZOOM = 10;
+    const MAX_ZOOM = 90;
+
+    const state = {
+      camera: {
+        x: COLONY_CENTER.x,
+        y: COLONY_CENTER.y,
+        zoom: 48
+      },
+      simSeconds: 0,
+      lastFrame: performance.now(),
+      flashes: [],
+      dragging: false,
+      dragStart: { x: 0, y: 0 },
+      cameraStart: { x: 0, y: 0 }
+    };
+
+    function clamp(value, min, max) {
+      return Math.max(min, Math.min(max, value));
+    }
+
+    function worldToScreen(x, y) {
+      return {
+        x: canvas.width / 2 + (x - state.camera.x) * state.camera.zoom,
+        y: canvas.height / 2 + (y - state.camera.y) * state.camera.zoom
+      };
+    }
+
+    function screenToWorld(x, y) {
+      return {
+        x: state.camera.x + (x - canvas.width / 2) / state.camera.zoom,
+        y: state.camera.y + (y - canvas.height / 2) / state.camera.zoom
+      };
+    }
+
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.max(1, Math.floor(rect.width * dpr));
+      canvas.height = Math.max(1, Math.floor(rect.height * dpr));
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+    }
+
+    function drawGrid() {
+      const zoom = state.camera.zoom;
+      const gridStep = zoom >= 28 ? 1 : zoom >= 14 ? 2 : 5;
+      const topLeft = screenToWorld(0, 0);
+      const bottomRight = screenToWorld(canvas.width, canvas.height);
+      const startX = Math.floor(topLeft.x / gridStep) * gridStep;
+      const startY = Math.floor(topLeft.y / gridStep) * gridStep;
+
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = "rgba(82, 103, 108, 0.18)";
+      ctx.beginPath();
+
+      for (let x = startX; x <= bottomRight.x; x += gridStep) {
+        const screen = worldToScreen(x, 0).x;
+        ctx.moveTo(Math.round(screen) + 0.5, 0);
+        ctx.lineTo(Math.round(screen) + 0.5, canvas.height);
+      }
+
+      for (let y = startY; y <= bottomRight.y; y += gridStep) {
+        const screen = worldToScreen(0, y).y;
+        ctx.moveTo(0, Math.round(screen) + 0.5);
+        ctx.lineTo(canvas.width, Math.round(screen) + 0.5);
+      }
+
+      ctx.stroke();
+    }
+
+    function drawWorldBounds() {
+      const topLeft = worldToScreen(0, 0);
+      const bottomRight = worldToScreen(WORLD_SIZE, WORLD_SIZE);
+
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = "rgba(117, 196, 182, 0.26)";
+      ctx.strokeRect(
+        topLeft.x,
+        topLeft.y,
+        bottomRight.x - topLeft.x,
+        bottomRight.y - topLeft.y
+      );
+    }
+
+    function drawColony(now) {
+      const cell = state.camera.zoom;
+      const size = COLONY_SIZE * cell;
+      const topLeft = worldToScreen(COLONY_ORIGIN.x, COLONY_ORIGIN.y);
+      const pulse = (Math.sin(now / 760) + 1) / 2;
+      const center = worldToScreen(COLONY_CENTER.x, COLONY_CENTER.y);
+
+      const glowRadius = size * (0.62 + pulse * 0.16);
+      const glow = ctx.createRadialGradient(
+        center.x,
+        center.y,
+        0,
+        center.x,
+        center.y,
+        glowRadius
+      );
+      glow.addColorStop(0, "rgba(117, 196, 182, 0.38)");
+      glow.addColorStop(0.56, "rgba(117, 196, 182, 0.12)");
+      glow.addColorStop(1, "rgba(117, 196, 182, 0)");
+      ctx.fillStyle = glow;
+      ctx.beginPath();
+      ctx.arc(center.x, center.y, glowRadius, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(topLeft.x, topLeft.y, size, size);
+      ctx.clip();
+
+      for (let y = 0; y < COLONY_SIZE; y += 1) {
+        for (let x = 0; x < COLONY_SIZE; x += 1) {
+          const isCorner =
+            (x === 0 && y === 0) ||
+            (x === COLONY_SIZE - 1 && y === 0) ||
+            (x === 0 && y === COLONY_SIZE - 1) ||
+            (x === COLONY_SIZE - 1 && y === COLONY_SIZE - 1);
+
+          if (isCorner) {
+            continue;
+          }
+
+          const dx = x - 2;
+          const dy = y - 2;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          const localPulse = (Math.sin(now / 560 + x * 0.8 + y * 0.55) + 1) / 2;
+          const alpha = 0.34 + Math.max(0, 1.8 - distance) * 0.13 + localPulse * 0.14;
+          const green = Math.floor(136 + localPulse * 34);
+          const blue = Math.floor(126 + pulse * 22);
+          const px = topLeft.x + x * cell;
+          const py = topLeft.y + y * cell;
+
+          ctx.fillStyle = `rgba(74, ${green}, ${blue}, ${alpha})`;
+          ctx.fillRect(px - 0.5, py - 0.5, cell + 1, cell + 1);
+        }
+      }
+
+      const softCore = ctx.createRadialGradient(
+        center.x,
+        center.y,
+        size * 0.08,
+        center.x,
+        center.y,
+        size * 0.74
+      );
+      softCore.addColorStop(0, "rgba(180, 218, 197, 0.18)");
+      softCore.addColorStop(0.74, "rgba(70, 104, 99, 0.04)");
+      softCore.addColorStop(1, "rgba(7, 12, 13, 0.18)");
+      ctx.fillStyle = softCore;
+      ctx.fillRect(topLeft.x, topLeft.y, size, size);
+      ctx.restore();
+
+      drawRemainingGauge(topLeft, size);
+    }
+
+    function drawRemainingGauge(topLeft, colonyPixelSize) {
+      const remaining = Math.max(0, COLONY_LIFETIME - state.simSeconds);
+      const ratio = remaining / COLONY_LIFETIME;
+      const width = colonyPixelSize * 0.72;
+      const height = 4;
+      const x = topLeft.x + (colonyPixelSize - width) / 2;
+      const y = topLeft.y + colonyPixelSize - height - 9;
+
+      ctx.save();
+      ctx.fillStyle = "rgba(25, 34, 34, 0.38)";
+      ctx.fillRect(x, y, width, height);
+      ctx.fillStyle = "rgba(196, 216, 202, 0.52)";
+      ctx.fillRect(x, y, width * ratio, height);
+      ctx.restore();
+    }
+
+    function drawFlashes(now) {
+      state.flashes = state.flashes.filter((flash) => now - flash.startedAt < 680);
+
+      for (const flash of state.flashes) {
+        const age = now - flash.startedAt;
+        const ratio = 1 - age / 680;
+        const pos = worldToScreen(flash.x, flash.y);
+        const cell = state.camera.zoom;
+        const glow = ctx.createRadialGradient(
+          pos.x + cell / 2,
+          pos.y + cell / 2,
+          0,
+          pos.x + cell / 2,
+          pos.y + cell / 2,
+          cell * 0.74
+        );
+        glow.addColorStop(0, `rgba(220, 196, 130, ${0.34 * ratio})`);
+        glow.addColorStop(0.72, `rgba(196, 174, 112, ${0.12 * ratio})`);
+        glow.addColorStop(1, "rgba(196, 174, 112, 0)");
+
+        ctx.save();
+        ctx.fillStyle = glow;
+        ctx.fillRect(pos.x, pos.y, cell, cell);
+        ctx.restore();
+      }
+    }
+
+    function render(now) {
+      const elapsed = Math.min(0.25, (now - state.lastFrame) / 1000);
+      state.lastFrame = now;
+      state.simSeconds += elapsed * TIME_SCALE;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#111619";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      drawGrid();
+      drawWorldBounds();
+      drawFlashes(now);
+      drawColony(now);
+
+      requestAnimationFrame(render);
+    }
+
+    function setZoom(nextZoom, anchorX = canvas.width / 2, anchorY = canvas.height / 2) {
+      const before = screenToWorld(anchorX, anchorY);
+      state.camera.zoom = clamp(nextZoom, MIN_ZOOM, MAX_ZOOM);
+      const after = screenToWorld(anchorX, anchorY);
+      state.camera.x += before.x - after.x;
+      state.camera.y += before.y - after.y;
+      clampCamera();
+    }
+
+    function focusColony() {
+      state.camera.x = COLONY_CENTER.x;
+      state.camera.y = COLONY_CENTER.y;
+      state.camera.zoom = 48;
+      clampCamera();
+    }
+
+    function clampCamera() {
+      state.camera.x = clamp(state.camera.x, 0, WORLD_SIZE);
+      state.camera.y = clamp(state.camera.y, 0, WORLD_SIZE);
+    }
+
+    canvas.addEventListener("wheel", (event) => {
+      event.preventDefault();
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      const anchorX = (event.clientX - rect.left) * dpr;
+      const anchorY = (event.clientY - rect.top) * dpr;
+      const factor = event.deltaY < 0 ? 1.12 : 0.88;
+      setZoom(state.camera.zoom * factor, anchorX, anchorY);
+    }, { passive: false });
+
+    canvas.addEventListener("pointerdown", (event) => {
+      canvas.setPointerCapture(event.pointerId);
+      state.dragging = true;
+      state.didDrag = false;
+      state.dragStart.x = event.clientX;
+      state.dragStart.y = event.clientY;
+      state.cameraStart.x = state.camera.x;
+      state.cameraStart.y = state.camera.y;
+    });
+
+    canvas.addEventListener("pointermove", (event) => {
+      if (!state.dragging) {
+        return;
+      }
+
+      const dpr = window.devicePixelRatio || 1;
+      const dx = (event.clientX - state.dragStart.x) * dpr;
+      const dy = (event.clientY - state.dragStart.y) * dpr;
+      if (Math.abs(dx) + Math.abs(dy) > 4) {
+        state.didDrag = true;
+      }
+      state.camera.x = state.cameraStart.x - dx / state.camera.zoom;
+      state.camera.y = state.cameraStart.y - dy / state.camera.zoom;
+      clampCamera();
+    });
+
+    canvas.addEventListener("pointerup", (event) => {
+      if (!state.didDrag) {
+        const rect = canvas.getBoundingClientRect();
+        const dpr = window.devicePixelRatio || 1;
+        const world = screenToWorld(
+          (event.clientX - rect.left) * dpr,
+          (event.clientY - rect.top) * dpr
+        );
+        state.flashes.push({
+          x: Math.floor(world.x),
+          y: Math.floor(world.y),
+          startedAt: performance.now()
+        });
+      }
+
+      state.dragging = false;
+    });
+
+    canvas.addEventListener("pointercancel", () => {
+      state.dragging = false;
+    });
+
+    canvas.addEventListener("dblclick", focusColony);
+
+    window.addEventListener("resize", resizeCanvas);
+
+    resizeCanvas();
+    focusColony();
+    requestAnimationFrame(render);
+  </script>
+</body>
+</html>
