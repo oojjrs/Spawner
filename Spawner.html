@@ -170,10 +170,9 @@
       const cell = state.camera.zoom;
       const size = COLONY_SIZE * cell;
       const topLeft = worldToScreen(COLONY_ORIGIN.x, COLONY_ORIGIN.y);
-      const pulse = (Math.sin(now / 760) + 1) / 2;
       const center = worldToScreen(COLONY_CENTER.x, COLONY_CENTER.y);
 
-      const glowRadius = size * (0.62 + pulse * 0.16);
+      const glowRadius = size * 0.7;
       const glow = ctx.createRadialGradient(
         center.x,
         center.y,
@@ -207,17 +206,37 @@
             continue;
           }
 
-          const dx = x - 2;
-          const dy = y - 2;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          const localPulse = (Math.sin(now / 560 + x * 0.8 + y * 0.55) + 1) / 2;
-          const alpha = 0.34 + Math.max(0, 1.8 - distance) * 0.13 + localPulse * 0.14;
-          const green = Math.floor(136 + localPulse * 34);
-          const blue = Math.floor(126 + pulse * 22);
+          const isCenter = x === 2 && y === 2;
           const px = topLeft.x + x * cell;
           const py = topLeft.y + y * cell;
 
-          ctx.fillStyle = `rgba(74, ${green}, ${blue}, ${alpha})`;
+          ctx.fillStyle = "rgba(66, 132, 122, 0.58)";
+
+          if (isCenter) {
+            const inset = Math.max(2, Math.floor(cell * 0.08));
+            const gaugeHeight = Math.max(3, Math.floor(cell * 0.1));
+            const gap = Math.max(2, Math.floor(cell * 0.04));
+            const contentWidth = cell - inset * 2;
+            const gaugeY = py + inset;
+            const coreY = gaugeY + gaugeHeight + gap;
+            const coreHeight = py + cell - inset - coreY;
+            const remaining = Math.max(0, COLONY_LIFETIME - state.simSeconds);
+            const remainingRatio = remaining / COLONY_LIFETIME;
+
+            ctx.fillStyle = "rgba(34, 47, 50, 0.72)";
+            ctx.fillRect(px + inset, gaugeY, contentWidth, gaugeHeight);
+            ctx.fillStyle = "rgba(214, 178, 107, 0.78)";
+            ctx.fillRect(px + inset, gaugeY, contentWidth * remainingRatio, gaugeHeight);
+            const corePulse = (Math.sin(now / 260) + 1) / 2;
+            const coreRed = Math.floor(112 + corePulse * 28);
+            const coreGreen = Math.floor(168 + corePulse * 30);
+            const coreBlue = Math.floor(156 + corePulse * 26);
+            const coreAlpha = 0.48 + corePulse * 0.18;
+            ctx.fillStyle = `rgba(${coreRed}, ${coreGreen}, ${coreBlue}, ${coreAlpha})`;
+            ctx.fillRect(px + inset, coreY, contentWidth, coreHeight);
+            continue;
+          }
+
           ctx.fillRect(px - 0.5, py - 0.5, cell + 1, cell + 1);
         }
       }
@@ -237,23 +256,6 @@
       ctx.fillRect(topLeft.x, topLeft.y, size, size);
       ctx.restore();
 
-      drawRemainingGauge(topLeft, size);
-    }
-
-    function drawRemainingGauge(topLeft, colonyPixelSize) {
-      const remaining = Math.max(0, COLONY_LIFETIME - state.simSeconds);
-      const ratio = remaining / COLONY_LIFETIME;
-      const width = colonyPixelSize * 0.72;
-      const height = 4;
-      const x = topLeft.x + (colonyPixelSize - width) / 2;
-      const y = topLeft.y + colonyPixelSize - height - 9;
-
-      ctx.save();
-      ctx.fillStyle = "rgba(25, 34, 34, 0.38)";
-      ctx.fillRect(x, y, width, height);
-      ctx.fillStyle = "rgba(196, 216, 202, 0.52)";
-      ctx.fillRect(x, y, width * ratio, height);
-      ctx.restore();
     }
 
     function drawFlashes(now) {
