@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Spawner</title>
+  <title>Spawner · 작은 숲의 밤</title>
   <style>
     :root {
       color-scheme: dark;
@@ -268,9 +268,142 @@
       width: 100%;
       accent-color: var(--accent);
     }
+    :root { --accent: #b5d996; --amber: #e4c997; --ink: #f0eee3; --muted: #acb6a4; }
+    body { font-family: "Malgun Gothic", system-ui, sans-serif; }
+    button { font-family: inherit; touch-action: manipulation; }
+    button:focus-visible { outline: 2px solid #e4c997; outline-offset: 4px; }
+    canvas { touch-action: none; cursor: grab; }
+    canvas.is-planting { cursor: crosshair; }
+    .game-header { position: fixed; inset: 0 0 auto; z-index: 5; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 22px 28px; background: linear-gradient(#101914ed, #10191400); pointer-events: none; }
+    .game-brand { display: flex; align-items: center; gap: 13px; }
+    .brand-mark { display: grid; place-items: center; width: 38px; height: 38px; border: 1px solid #b5d99655; border-radius: 12px; color: #b5d996; font-size: 22px; }
+    .game-brand strong { display: block; font-size: 16px; font-weight: 700; letter-spacing: 5px; }
+    .game-brand small { display: block; margin-top: 5px; color: #aebca5; font-size: 10px; letter-spacing: 3px; }
+    .game-time { text-align: center; }
+    .game-time span { color: #d4dcc7; font-size: 12px; letter-spacing: 1px; }
+    .game-time strong { display: block; margin-top: 4px; color: #f1ecd7; font-size: 24px; font-weight: 500; font-variant-numeric: tabular-nums; letter-spacing: 3px; }
+    .header-controls { display: flex; align-items: center; gap: 8px; pointer-events: auto; }
+    .header-controls button { height: 36px; padding: 0 12px; border: 1px solid #d2dfbd30; border-radius: 9px; background: #142019b8; color: #d7e0cb; cursor: pointer; }
+    .mission-panel { position: fixed; top: 106px; left: 26px; z-index: 3; width: 238px; padding: 19px; border: 1px solid #bfd3a527; border-radius: 15px; background: #142019de; backdrop-filter: blur(14px); }
+    .eyebrow { margin: 0 0 12px; color: #b8c6a6; font-size: 10px; letter-spacing: 3px; }
+    .mission-panel h1 { margin: 0 0 9px; color: #eeeada; font-size: 20px; font-weight: 500; }
+    .mission-panel > p { margin: 0 0 19px; color: #a6b59c; font-size: 11px; line-height: 1.8; }
+    .objective { display: grid; gap: 8px; margin: 13px 0; }
+    .objective-label { display: flex; justify-content: space-between; color: #c6d3b6; font-size: 11px; }
+    .objective-label strong { color: #efe5c6; font-weight: 500; }
+    .objective-track { height: 4px; overflow: hidden; border-radius: 4px; background: #d7e8bb13; }
+    .objective-track i { display: block; height: 100%; width: 0; background: #b5d996; transition: width 180ms; }
+    .mission-status { margin-top: 15px; padding-top: 13px; border-top: 1px solid #d7e8bb18; color: #879a81; font-size: 10px; line-height: 1.8; }
+    .event-list { margin: 15px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; color: #a9b99b; font-size: 10px; line-height: 1.65; }
+    .event-list li { border-left: 2px solid #b5d99633; padding-left: 9px; }
+    .resource-bar { position: fixed; top: 104px; right: 26px; z-index: 3; display: flex; gap: 0; border: 1px solid #bfd3a527; border-radius: 13px; background: #142019e8; backdrop-filter: blur(14px); }
+    .resource { min-width: 85px; padding: 12px 16px; border-right: 1px solid #d7e8bb16; }
+    .resource:last-child { border: 0; }
+    .resource span { display: block; margin-bottom: 5px; color: #9fb28d; font-size: 10px; }
+    .resource strong { color: #e8e2c9; font-size: 22px; font-weight: 500; font-variant-numeric: tabular-nums; }
+    .resource small { margin-left: 3px; color: #9ba98a; font-size: 10px; }
+    .resource.health.is-low strong { color: #efad92; }
+    .weather-badge { position: fixed; top: 188px; right: 26px; z-index: 3; display: flex; align-items: center; gap: 10px; padding: 10px 13px; border: 1px solid #bfd3a51b; border-radius: 10px; background: #142019bd; color: #adbd9d; font-size: 11px; }
+    .weather-badge.is-warning { border-color: #dfaa6b77; color: #efc48c; background: #372919eb; }
+    .weather-dot { width: 6px; height: 6px; border-radius: 50%; background: #b5d996; box-shadow: 0 0 10px #b5d99677; }
+    .weather-badge.is-warning .weather-dot { background: #efaa71; }
+    .agent-panel { top: auto; bottom: 125px; left: 26px; width: 238px; max-height: 270px; border-radius: 15px; padding: 13px; border-color: #bfd3a527; background: #142019e8; backdrop-filter: blur(14px); }
+    .agent-panel h2 { color: #c6d3b6; font-size: 11px; font-weight: 500; }
+    .agent-panel h2 span { color: #e4c997; margin-left: 5px; }
+    .agent-list { grid-template-columns: repeat(4, 1fr); gap: 5px; max-height: 136px; }
+    .agent-item { min-height: 62px; padding: 4px; border-color: #b5d9961e; border-radius: 8px; }
+    .agent-item img { width: 34px; height: 34px; }
+    .agent-item span { font-size: 9px; }
+    .agent-item small { display: none; }
+    .agent-detail { margin-top: 8px; padding-top: 8px; border-color: #b5d99622; font-size: 10px; line-height: 1.6; }
+    .agent-detail-grid { gap: 3px 8px; font-size: 9px; }
+    .colony-action-bar { left: auto; right: 26px; bottom: 130px; transform: none; }
+    .colony-focus-button { border-color: #bfd3a530; color: #c6d3b6; background: #142019da; font-size: 11px; }
+    .colony-panel { top: 245px; right: 26px; bottom: 185px; width: 285px; max-height: none; border-radius: 15px; border-color: #bfd3a530; background: #142019f5; }
+    .panel-header h2 { color: #dce1cc; font-size: 13px; }
+    .panel-note { font-size: 10px; line-height: 1.7; }
+    .colony-stats, .evolution-stat, .factor-label { font-size: 11px; }
+    .factor-list { gap: 9px; }
+    .factor-controls button { height: 27px; }
+    .action-dock { position: fixed; bottom: 22px; left: 50%; z-index: 5; display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; width: min(610px, calc(100vw - 40px)); padding: 9px; transform: translateX(-50%); border: 1px solid #bfd3a536; border-radius: 18px; background: #142019ed; backdrop-filter: blur(16px); box-shadow: 0 14px 40px #0005; }
+    .action-button { position: relative; min-width: 0; min-height: 67px; display: grid; grid-template-columns: 24px 1fr; align-content: center; align-items: center; gap: 4px 8px; padding: 10px; border: 1px solid transparent; border-radius: 11px; background: #b5d99608; color: #dbe2cc; text-align: left; cursor: pointer; transition: background 140ms, border-color 140ms; }
+    .action-button:hover { background: #b5d99618; border-color: #b5d99644; }
+    .action-button.is-active { background: #b5d99620; border-color: #b5d9969c; }
+    .action-button:disabled { opacity: .4; cursor: default; }
+    .action-icon { grid-row: 1 / 3; font-size: 22px; color: #b5d996; text-align: center; }
+    .action-button strong { font-size: 11px; font-weight: 500; }
+    .action-button small { color: #9fac8d; font-size: 9px; }
+    .action-button kbd { position: absolute; top: 4px; right: 7px; color: #789168; font-size: 8px; font-family: inherit; }
+    .canvas-hint { position: fixed; left: 50%; bottom: 106px; z-index: 3; transform: translateX(-50%); max-width: calc(100vw - 24px); text-align: center; color: #bac7a8; font-size: 10px; white-space: nowrap; text-shadow: 0 1px 8px #000; pointer-events: none; }
+    .game-toast { position: fixed; left: 50%; bottom: 145px; z-index: 8; padding: 12px 20px; max-width: calc(100vw - 30px); border: 1px solid #c7d9aa50; border-radius: 12px; background: #233226f5; color: #ece9d9; font-size: 12px; line-height: 1.7; text-align: center; opacity: 0; transform: translate(-50%, 6px); transition: opacity 160ms, transform 160ms; pointer-events: none; }
+    .game-toast.is-visible { opacity: 1; transform: translate(-50%, 0); }
+    .game-overlay { position: fixed; inset: 0; z-index: 10; display: grid; place-items: center; overflow: auto; padding: 25px; background: #08110dbc; backdrop-filter: blur(8px); }
+    .game-overlay[hidden] { display: none; }
+    .overlay-card { position: relative; width: min(490px, 100%); padding: 35px 38px; border: 1px solid #b5d99642; border-radius: 26px; background: radial-gradient(ellipse at 50% 0, #30432a70, transparent 65%), #17251dec; box-shadow: 0 24px 100px #0007; text-align: center; }
+    .overlay-sprout { width: 80px; height: 92px; object-fit: contain; margin: -12px auto 15px; filter: drop-shadow(0 8px 20px #9fcb6340); }
+    .overlay-card .eyebrow { color: #bbce9e; font-size: 10px; letter-spacing: 4px; }
+    .overlay-card h2 { margin: 12px 0 16px; color: #eeeadb; font-size: clamp(25px, 5vw, 35px); font-weight: 500; letter-spacing: -1px; }
+    .overlay-description { margin: 0; color: #b3c2a1; font-size: 12px; line-height: 1.9; }
+    .overlay-goals { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 25px 0; }
+    .overlay-goals div { padding: 13px 10px; border: 1px solid #b5d99625; border-radius: 12px; background: #b5d99606; color: #a8bb95; font-size: 10px; }
+    .overlay-goals strong { display: block; margin-bottom: 5px; color: #e0dfc7; font-size: 21px; font-weight: 500; }
+    .overlay-rules { margin: 0 0 24px; padding: 0; list-style: none; display: grid; gap: 9px; color: #acbd9e; font-size: 11px; line-height: 1.8; text-align: left; }
+    .overlay-rules b { color: #d7dfbd; font-weight: 500; }
+    .primary-button, .secondary-button { width: 100%; min-height: 44px; padding: 11px 14px; border: 1px solid #bdd8a344; border-radius: 11px; font-size: 12px; cursor: pointer; }
+    .primary-button { background: #bdd8a3; color: #1c2d1b; font-weight: 700; }
+    .primary-button:hover { background: #cbe6b0; }
+    .secondary-button { margin-top: 9px; background: transparent; color: #b8c7a5; }
+    .overlay-footer { margin: 18px 0 0; color: #829475; font-size: 9px; line-height: 1.8; }
+    .game-progress { position: fixed; inset: auto 0 0; height: 3px; z-index: 5; background: #b5d99616; pointer-events: none; }
+    .game-progress i { display: block; height: 100%; width: 0; background: #b5d99688; }
+    @media (max-height: 720px) and (min-width: 801px) { .mission-panel { top: 90px; padding: 15px; } .mission-panel > p { margin-bottom: 11px; } .mission-status { display: none; } .event-list { gap: 5px; margin-top: 8px; } .agent-panel { max-height: 205px; } .agent-list { max-height: 75px; } .resource-bar { top: 90px; } .weather-badge { top: 174px; } .colony-panel { top: 220px; } }
+    @media (max-width: 800px) { .game-header { padding: 14px 16px; gap: 8px; } .game-brand strong { font-size: 12px; letter-spacing: 3px; } .game-brand small { font-size: 8px; letter-spacing: 1px; } .brand-mark { display: none; } .game-time strong { font-size: 18px; } .game-time span { font-size: 9px; } .header-controls button { height: 30px; padding: 0 8px; font-size: 10px; } .mission-panel { top: 81px; left: 14px; width: 180px; padding: 12px; } .mission-panel h1 { font-size: 15px; } .mission-panel > p, .eyebrow, .mission-status, .event-list { display: none; } .objective { margin: 10px 0 0; } .objective-label { font-size: 10px; } .resource-bar { top: 81px; right: 14px; } .resource { min-width: 56px; padding: 10px; } .resource strong { font-size: 18px; } .resource span { font-size: 9px; } .resource small { font-size: 8px; } .weather-badge { top: 163px; right: 14px; padding: 8px 10px; font-size: 9px; } .agent-panel { left: 14px; bottom: 125px; width: 180px; max-height: 170px; } .agent-list { max-height: 65px; } .agent-detail-grid { display: none; } .colony-action-bar { right: 14px; bottom: 125px; flex-direction: column; gap: 5px; } .colony-focus-button { min-width: 75px; padding: 0 8px; height: 28px; font-size: 10px; } .colony-panel { top: 210px; right: 14px; bottom: 125px; width: min(280px, calc(100vw - 28px)); } .action-dock { bottom: 18px; width: calc(100vw - 28px); } .action-button { grid-template-columns: 1fr; min-height: 62px; padding: 8px 3px; text-align: center; gap: 3px; } .action-icon { display: none; } .action-button strong { font-size: 10px; } .action-button small { font-size: 8px; } .action-button kbd { display: none; } .canvas-hint { bottom: 100px; font-size: 9px; } .game-toast { bottom: 198px; font-size: 10px; } .overlay-card { padding: 28px 24px; } }
+    @media (max-width: 420px) { .mission-panel { width: 154px; } .resource { min-width: 48px; padding: 10px 8px; } .game-brand small { display: none; } .header-controls { gap: 4px; } .agent-panel { width: 150px; } .agent-list { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-height: 500px) { .game-overlay { display: block; } .overlay-card { margin: auto; } .agent-panel { display: none; } .mission-panel { top: 70px; } .resource-bar { top: 70px; } .weather-badge { top: 152px; } .colony-panel { top: 70px; bottom: 115px; } .overlay-sprout { display: none; } }
+
   </style>
 </head>
 <body>
+  <header class="game-header">
+    <div class="game-brand"><span class="brand-mark" aria-hidden="true">♧</span><div><strong>SPAWNER</strong><small>THE LITTLE NIGHT GARDEN</small></div></div>
+    <div class="game-time"><span id="phase-label">작은 숲의 밤</span><strong id="night-time">08:00</strong></div>
+    <div class="header-controls"><button id="speed-button" type="button" aria-label="시간 배속 변경">1×</button><button id="help-button" type="button" aria-label="게임 도움말">?</button><button id="pause-button" type="button">일시정지</button></div>
+  </header>
+  <section class="mission-panel" aria-label="군락 목표">
+    <div class="eyebrow">BEFORE THE DAWN</div><h1>작은 숲의 밤</h1><p>씨앗 하나가 길이 되고,<br>작은 군락이 숲을 밝힙니다.</p>
+    <div class="objective"><div class="objective-label"><span>생명체 모으기</span><strong id="population-goal">3 / 12</strong></div><div class="objective-track"><i id="population-progress"></i></div></div>
+    <div class="objective"><div class="objective-label"><span>군락 등불 키우기</span><strong id="beacon-goal">0 / 3</strong></div><div class="objective-track"><i id="beacon-progress"></i></div></div>
+    <div class="mission-status">두 목표를 채우고 새벽까지 지켜내세요.<br>먹이 운반으로 번식과 양분을 얻습니다.</div>
+    <ul class="event-list" id="event-list" aria-label="최근 군락 소식"></ul>
+  </section>
+  <section class="resource-bar" aria-label="군락 자원">
+    <div class="resource health" id="health-resource"><span>군락 생명</span><strong id="health-value">100</strong><small>%</small></div>
+    <div class="resource"><span>이슬</span><strong id="dew-value">6</strong><small>/ 10</small></div>
+    <div class="resource"><span>양분</span><strong id="nutrient-value">0</strong></div>
+  </section>
+  <div class="weather-badge" id="weather-badge"><i class="weather-dot"></i><span id="weather-text">첫 바람까지 90초</span></div>
+  <div class="canvas-hint" id="canvas-hint">드래그 이동 · 휠 확대 · 개체를 눌러 관찰</div>
+  <nav class="action-dock" aria-label="군락 명령">
+    <button class="action-button" id="plant-button" type="button" aria-pressed="false"><kbd>1</kbd><span class="action-icon" aria-hidden="true">♧</span><strong>먹이 정원</strong><small>이슬 2 · 땅에 심기</small></button>
+    <button class="action-button" id="recall-button" type="button"><kbd>2</kbd><span class="action-icon" aria-hidden="true">⌂</span><strong>귀환 종</strong><small id="recall-cost">이슬 1 · 모두 귀환</small></button>
+    <button class="action-button" id="shield-button" type="button"><kbd>3</kbd><span class="action-icon" aria-hidden="true">◇</span><strong>바람 보호막</strong><small id="shield-cost">이슬 4 · 폭풍 1회</small></button>
+    <button class="action-button" id="beacon-button" type="button"><kbd>4</kbd><span class="action-icon" aria-hidden="true">✧</span><strong>군락 등불</strong><small id="beacon-cost">양분 60 · 성장</small></button>
+  </nav>
+  <div class="game-toast" id="game-toast" role="status" aria-live="polite"></div>
+  <div class="game-progress" aria-hidden="true"><i id="night-progress"></i></div>
+  <div class="game-overlay" id="game-overlay">
+    <section class="overlay-card" role="dialog" aria-modal="true" aria-labelledby="overlay-title" id="overlay-card">
+      <img class="overlay-sprout" src="DesignAssets/starter-sprout-bean-sprite.png" alt="새싹 콩">
+      <p class="eyebrow">SPAWNER</p><h2 id="overlay-title">작은 숲의 밤</h2>
+      <p class="overlay-description">바람이 거세지기 전, 작은 생명들이 살 곳을 만드세요.<br>먹이를 심으면 콩들이 길을 배우고 군락이 자랍니다.</p>
+      <div class="overlay-goals"><div><strong>12마리</strong>함께 살아갈 생명체</div><div><strong>3단계</strong>숲을 밝히는 등불</div></div>
+      <ul class="overlay-rules"><li><b>정원</b> · 군락에서 6~22칸 거리의 땅에 심으세요.</li><li><b>보호막</b> · 90초마다 오는 폭풍을 막으세요.</li><li><b>등불</b> · 운반한 양분으로 군락을 키우세요.</li></ul>
+      <button class="primary-button" id="start-button" type="button">작은 숲 깨우기</button>
+      <button class="secondary-button" id="continue-button" type="button" hidden>저장한 숲 이어하기</button>
+      <p class="overlay-footer" id="overlay-footer">한 판 최대 8분 · 자동 저장 · 1 / 2 / 3 / 4 명령</p>
+    </section>
+  </div>
+
   <div class="app">
     <main class="stage">
       <canvas id="world" width="1200" height="760" tabindex="0" aria-label="Spawner world canvas"></canvas>
@@ -708,12 +841,8 @@
       return spot;
     }
 
-    function birthCost(population = state.agents.length) {
-      const livingPopulation = Math.max(1, population);
-      return Math.max(
-        5,
-        Math.round(5 * Math.pow(livingPopulation, 1.3))
-      );
+    function birthCost(population) {
+      return Math.max(5, Math.round(5 * Math.pow(Math.max(1, population), 1.3)));
     }
 
     function ensureFoodAround(x, y, radius) {
@@ -1277,15 +1406,20 @@
         }
       }
 
+      onFoodDelivered(agent.carrying);
       state.colonyFood += agent.carrying;
       agent.carrying = 0;
       registerRoadJourney(agent);
 
-      while (state.colonyFood >= birthCost()) {
-        state.colonyFood -= birthCost();
-        spawnAgent();
+      while (state.agents.length < 32 && state.colonyFood >= birthCost(state.agents.length)) {
+        state.colonyFood -= birthCost(state.agents.length);
+        spawnAgent(true);
       }
 
+      if (game.elapsed < game.recallUntil) {
+        agent.mode = "rest";
+        return;
+      }
       const rememberedFood = agent.rememberedFoodKey ?
         foodCellMap.get(agent.rememberedFoodKey) : null;
       if (
@@ -1305,6 +1439,11 @@
     }
 
     function stepAgent(agent) {
+      if (game.elapsed < game.recallUntil && isColonyBoundaryCell(agent.x, agent.y) && agent.carrying === 0) {
+        agent.mode = "rest";
+        return;
+      }
+      if (agent.mode === "rest") forgetFoodRoute(agent);
       if (agent.mode === "return") {
         if (isColonyBoundaryCell(agent.x, agent.y)) {
           depositFood(agent);
@@ -1642,8 +1781,7 @@
             const gaugeY = py + inset;
             const coreY = gaugeY + gaugeHeight + gap;
             const coreHeight = py + cell - inset - coreY;
-            const remaining = Math.max(0, COLONY_LIFETIME - state.simSeconds);
-            const remainingRatio = remaining / COLONY_LIFETIME;
+            const remainingRatio = game.health / 100;
 
             ctx.fillStyle = "rgba(34, 47, 50, 0.72)";
             ctx.fillRect(px + inset, gaugeY, contentWidth, gaugeHeight);
@@ -1845,8 +1983,7 @@
     function render(now) {
       const elapsed = Math.min(0.25, (now - state.lastFrame) / 1000);
       state.lastFrame = now;
-      state.simSeconds += elapsed * TIME_SCALE;
-      updateAgents(elapsed * TIME_SCALE);
+      advanceGarden(elapsed * game.speed);
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = "#111619";
@@ -1859,6 +1996,7 @@
       drawWorldBounds();
       drawFlashes(now);
       drawColony(now);
+      drawGardenAtmosphere(now);
       drawAgents(now);
 
       requestAnimationFrame(render);
@@ -1876,7 +2014,7 @@
     function focusColony() {
       state.camera.x = COLONY_CENTER.x;
       state.camera.y = COLONY_CENTER.y;
-      state.camera.zoom = 48;
+      state.camera.zoom = Math.min(60, (window.innerWidth <= 800 ? 19 : 28) * (window.devicePixelRatio || 1));
       clampCamera();
     }
 
@@ -1906,6 +2044,10 @@
     });
 
     canvas.addEventListener("pointermove", (event) => {
+      const pointerRect = canvas.getBoundingClientRect();
+      const pointerDpr = window.devicePixelRatio || 1;
+      const pointerWorld = screenToWorld((event.clientX - pointerRect.left) * pointerDpr, (event.clientY - pointerRect.top) * pointerDpr);
+      game.pointer = { x: Math.floor(pointerWorld.x), y: Math.floor(pointerWorld.y) };
       if (!state.dragging) {
         return;
       }
@@ -1937,10 +2079,16 @@
           cellY >= COLONY_ORIGIN.y &&
           cellY < COLONY_ORIGIN.y + COLONY_SIZE;
 
-        if (isColonyCell) {
+        if (game.tool === "plant") {
+          plantGarden(cellX, cellY);
+        } else if (isColonyCell) {
           openColonyPanel();
         } else {
-          state.selectedAgentId = null;
+          const hit = state.agents.find(agent => {
+            const pos = interpolatedAgentPosition(agent);
+            return Math.hypot(world.x - pos.x - 0.5, world.y - pos.y - 0.5) < 0.7;
+          });
+          state.selectedAgentId = hit ? hit.id : null;
           updateAgentList();
           state.flashes.push({
             x: cellX,
@@ -2022,7 +2170,7 @@ function openColonyPanel() {
 
     const AGENT_MODE_LABELS = {
       search: "탐색", approach: "먹이 접근", harvest: "채집",
-      return: "귀환", commute: "길 왕복"
+      return: "귀환", commute: "길 왕복", rest: "휴식"
     };
 
     function selectAgent(agent) {
@@ -2112,7 +2260,7 @@ function openColonyPanel() {
       });
     });
     function updateColonyPanel() {
-      const requiredFood = birthCost();
+      const requiredFood = birthCost(state.agents.length);
       storedFoodOutput.textContent = Math.floor(state.colonyFood).toString();
       birthCostOutput.textContent = requiredFood.toString();
       foodProgressFill.style.width =
@@ -2137,6 +2285,618 @@ function openColonyPanel() {
     setInterval(updateColonyPanel, 200);
     updateColonyPanel();
     requestAnimationFrame(render);
+  </script>
+  <script>
+    const NIGHT_DURATION = 480;
+    const STORM_INTERVAL = 90;
+    const BEACON_COSTS = [60, 120, 180];
+    const SAVE_KEY = "spawner-night-garden-v1";
+    const BEST_KEY = "spawner-night-garden-best";
+    const game = {
+      status: "menu", elapsed: 0, health: 100, dew: 6, nutrients: 0,
+      beacon: 0, shield: false, stormCount: 0, nextStorm: STORM_INTERVAL,
+      lastDelivery: 0, dewClock: 0, recallUntil: 0, recallCooldown: 0,
+      tool: "observe", pointer: null, totalFood: 0, planted: 0,
+      gardens: new Map(), events: [], toastUntil: 0, weatherUntil: 0,
+      autoSaveClock: 0, speed: 1, saveAvailable: false, saveFailed: false,
+      best: 0, lastHud: 0, previousFocus: null
+    };
+    const gameOverlay = document.getElementById("game-overlay");
+    const overlayCard = document.getElementById("overlay-card");
+    const menuContent = overlayCard.innerHTML;
+    const hud = Object.fromEntries([
+      "phase-label", "night-time", "population-goal", "beacon-goal",
+      "population-progress", "beacon-progress", "health-value", "dew-value",
+      "nutrient-value", "health-resource", "weather-badge", "weather-text",
+      "canvas-hint", "plant-button", "recall-button", "shield-button",
+      "beacon-button", "recall-cost", "shield-cost", "beacon-cost",
+      "night-progress", "game-toast", "event-list", "pause-button", "speed-button"
+    ].map(id => [id, document.getElementById(id)]));
+
+    function gameTimeLabel(seconds) {
+      const whole = Math.max(0, Math.ceil(seconds));
+      return Math.floor(whole / 60).toString().padStart(2, "0") + ":" +
+        (whole % 60).toString().padStart(2, "0");
+    }
+
+    function gameNotice(message) {
+      hud["game-toast"].textContent = message;
+      game.toastUntil = performance.now() + 3200;
+      hud["game-toast"].classList.add("is-visible");
+    }
+
+    function addGameEvent(message) {
+      game.events.unshift(gameTimeLabel(game.elapsed) + " · " + message);
+      game.events = game.events.slice(0, 3);
+      hud["event-list"].replaceChildren(...game.events.map(text => {
+        const item = document.createElement("li");
+        item.textContent = text;
+        return item;
+      }));
+    }
+
+    function resetGarden() {
+      state.simSeconds = 0;
+      state.colonyFood = 0;
+      state.evolutionPoints = 3;
+      state.nextAgentId = 1;
+      state.selectedAgentId = null;
+      state.agents = [];
+      state.roads.clear();
+      state.sharedTrails.clear();
+      state.flashes = [];
+      foodSpotCache.clear();
+      foodCellMap.clear();
+      state.draftProfile = {
+        speed: 1.25, capacity: 2, vision: 3, direction: 0.65,
+        novelty: 0.5, richness: 0.45, memoryTrips: 12, routeSense: 0.65
+      };
+      Object.assign(game, {
+        elapsed: 0, health: 100, dew: 6, nutrients: 0, beacon: 0,
+        shield: false, stormCount: 0, nextStorm: STORM_INTERVAL,
+        lastDelivery: 0, dewClock: 0, recallUntil: 0, recallCooldown: 0,
+        tool: "observe", totalFood: 0, planted: 0, speed: 1,
+        weatherUntil: 0, autoSaveClock: 0, events: []
+      });
+      game.gardens.clear();
+      ensureFoodAround(COLONY_CENTER.x, COLONY_CENTER.y, 35);
+      for (let index = 0; index < 3; index += 1) spawnAgent(false);
+      for (const input of document.querySelectorAll("[data-profile]")) {
+        input.value = state.draftProfile[input.dataset.profile].toString();
+        document.querySelector('[data-output="' + input.dataset.profile + '"]').textContent =
+          profileOutputText(input.dataset.profile, Number(input.value));
+      }
+      colonyPanel.classList.remove("is-open");
+      colonyPanel.setAttribute("aria-hidden", "true");
+      hud["event-list"].replaceChildren();
+      renderedAgentListSignature = "";
+      focusColony();
+      updateColonyPanel();
+    }
+
+    function closeGameOverlay() {
+      gameOverlay.hidden = true;
+      state.lastFrame = performance.now();
+      canvas.focus({ preventScroll: true });
+    }
+
+    function startGarden() {
+      resetGarden();
+      game.status = "playing";
+      closeGameOverlay();
+      addGameEvent("세 새싹이 작은 숲을 깨웠습니다.");
+      gameNotice("먹이 정원을 선택하고 군락 가까운 땅에 심어 보세요.");
+      updateGameHud();
+      saveGarden();
+    }
+
+    function setGardenTool(tool) {
+      game.tool = tool;
+      canvas.classList.toggle("is-planting", tool === "plant");
+      hud["plant-button"].classList.toggle("is-active", tool === "plant");
+      hud["plant-button"].setAttribute("aria-pressed", (tool === "plant").toString());
+      hud["canvas-hint"].textContent = tool === "plant" ?
+        "군락에서 6~22칸 거리 · 이슬 2 · Esc 취소" :
+        "드래그 이동 · 휠 확대 · 개체를 눌러 관찰";
+    }
+
+    function canPlantGarden(x, y) {
+      const distance = Math.hypot(x + 0.5 - COLONY_CENTER.x, y + 0.5 - COLONY_CENTER.y);
+      return isWalkable(x, y) && !isColonyBodyCell(x, y) && distance >= 5.5 && distance <= 22;
+    }
+
+    function isColonyBodyCell(x, y) {
+      return x >= COLONY_ORIGIN.x && x < COLONY_ORIGIN.x + COLONY_SIZE &&
+        y >= COLONY_ORIGIN.y && y < COLONY_ORIGIN.y + COLONY_SIZE;
+    }
+
+    function plantGarden(x, y) {
+      if (game.status !== "playing") return false;
+      if (game.dew < 2) { gameNotice("이슬이 부족합니다. 18초마다 1씩 모입니다."); return false; }
+      if (!canPlantGarden(x, y)) {
+        gameNotice("군락에서 6~22칸 떨어진 땅에 심어 주세요.");
+        return false;
+      }
+      ensureFoodAround(x, y, 2);
+      const candidates = [{ x, y }, { x: x + 1, y }, { x: x - 1, y },
+        { x, y: y + 1 }, { x, y: y - 1 }].filter(cell => canPlantGarden(cell.x, cell.y));
+      const growable = candidates.filter(cell => (foodCellMap.get(cell.x + "," + cell.y)?.amount || 0) < 50);
+      if (growable.length === 0) { gameNotice("이미 먹이가 가득한 정원입니다."); return false; }
+      game.dew -= 2;
+      game.planted += 1;
+      for (const cell of growable) {
+        const key = cell.x + "," + cell.y;
+        let food = foodCellMap.get(key);
+        if (!food) {
+          food = { x: cell.x, y: cell.y, amount: 0 };
+          foodCellMap.set(key, food);
+        }
+        food.amount = Math.min(50, food.amount + 24);
+        game.gardens.set(key, food);
+      }
+      state.flashes.push({ x, y, startedAt: performance.now() });
+      addGameEvent("먹이 정원이 싹텄습니다.");
+      gameNotice("정원을 심었습니다. 콩들이 향기를 따라 찾아옵니다.");
+      updateGameHud();
+      return true;
+    }
+
+    function ringRecallBell() {
+      if (game.status !== "playing" || game.dew < 1 || game.elapsed < game.recallCooldown) return false;
+      game.dew -= 1;
+      game.recallUntil = game.elapsed + 12;
+      game.recallCooldown = game.elapsed + 24;
+      for (const agent of state.agents) {
+        if (agent.mode === "return") continue;
+        let route = agent.path;
+        if (agent.mode === "commute" && agent.rememberedRoute) {
+          route = agent.rememberedRoute.slice(0, Math.max(1, agent.routeIndex));
+        }
+        let boundaryIndex = 0;
+        for (let index = route.length - 1; index >= 0; index -= 1) {
+          if (isColonyBoundaryCell(route[index].x, route[index].y)) {
+            boundaryIndex = index;
+            break;
+          }
+        }
+        agent.rememberedRoute = route.slice(boundaryIndex).map(cell => ({ ...cell }));
+        agent.routeIndex = agent.rememberedRoute.length - 2;
+        agent.mode = "return";
+        agent.targetFoodKey = null;
+        agent.rememberedFoodKey = null;
+        agent.sharedTrailFoodKey = null;
+      }
+      addGameEvent("귀환 종이 울렸습니다.");
+      gameNotice("모든 콩이 돌아옵니다. 12초 동안 군락에 머뭅니다.");
+      updateGameHud();
+      return true;
+    }
+
+    function raiseWindShield() {
+      if (game.status !== "playing" || game.shield || game.dew < 4) return false;
+      game.dew -= 4;
+      game.shield = true;
+      addGameEvent("다음 폭풍을 막을 보호막이 준비됐습니다.");
+      gameNotice("보호막 준비 완료. 다음 폭풍을 한 번 막습니다.");
+      updateGameHud();
+      return true;
+    }
+
+    function growBeacon() {
+      if (game.status !== "playing" || game.beacon >= 3 || game.nutrients < BEACON_COSTS[game.beacon]) return false;
+      game.nutrients -= BEACON_COSTS[game.beacon];
+      game.beacon += 1;
+      game.health = Math.min(100, game.health + 12);
+      game.dew = Math.min(10, game.dew + 2);
+      state.evolutionPoints += 2;
+      addGameEvent("군락 등불 " + game.beacon + "단계가 피어났습니다.");
+      gameNotice("등불 성장! 생명 +12 · 이슬 +2 · 진화 +2");
+      checkGardenOutcome();
+      updateGameHud();
+      return true;
+    }
+
+    function onFoodDelivered(amount) {
+      if (amount <= 0) return;
+      game.totalFood += amount;
+      game.nutrients += amount;
+      game.health = Math.min(100, game.health + amount * 0.35);
+      game.lastDelivery = game.elapsed;
+    }
+
+    function passStorm() {
+      game.stormCount += 1;
+      game.nextStorm += STORM_INTERVAL;
+      game.weatherUntil = game.elapsed + 9;
+      if (game.shield) {
+        game.shield = false;
+        addGameEvent("보호막이 폭풍을 막아냈습니다.");
+        gameNotice("폭풍을 막아냈습니다. 작은 숲은 안전합니다.");
+        return;
+      }
+      const damage = Math.max(6, 12 + game.stormCount * 3 - game.beacon * 3);
+      game.health = Math.max(0, game.health - damage);
+      const exposed = state.agents.filter(agent =>
+        Math.hypot(agent.x + 0.5 - COLONY_CENTER.x, agent.y + 0.5 - COLONY_CENTER.y) > 18
+      ).sort((a, b) => Math.hypot(b.x - COLONY_CENTER.x, b.y - COLONY_CENTER.y) -
+        Math.hypot(a.x - COLONY_CENTER.x, a.y - COLONY_CENTER.y));
+      const lost = game.stormCount >= 2 ? exposed.slice(0, 2) : [];
+      const lostIds = new Set(lost.map(agent => agent.id));
+      state.agents = state.agents.filter(agent => !lostIds.has(agent.id));
+      for (const food of game.gardens.values()) food.amount = Math.floor(food.amount * 0.72);
+      const lossText = lost.length ? " · 바깥 생명체 " + lost.length + "마리 잃음" : "";
+      addGameEvent("폭풍이 지나갔습니다. 생명 −" + damage + lossText);
+      gameNotice("폭풍 피해 " + damage + lossText + ". 먹이를 운반하면 회복합니다.");
+    }
+
+    function advanceGarden(elapsed) {
+      if (game.status !== "playing" || elapsed <= 0) return;
+      const gameStep = Math.min(elapsed, NIGHT_DURATION - game.elapsed);
+      const previousTime = game.elapsed;
+      game.elapsed += gameStep;
+      if (previousTime < game.nextStorm - 12 && game.elapsed >= game.nextStorm - 12) {
+        gameNotice(game.shield ? "폭풍 접근. 준비한 보호막이 군락을 지킵니다." : "12초 뒤 폭풍! 보호막을 준비하거나 귀환 종을 울리세요.");
+      }
+      game.dewClock += gameStep;
+      game.autoSaveClock += gameStep;
+      while (game.dewClock >= 18) {
+        game.dewClock -= 18;
+        game.dew = Math.min(10, game.dew + 1);
+      }
+      game.health = Math.max(0, game.health - gameStep *
+        (game.elapsed - game.lastDelivery > 35 ? 0.12 : 0.025));
+      while (game.elapsed >= game.nextStorm && game.nextStorm < NIGHT_DURATION) passStorm();
+      let remaining = gameStep * 2;
+      while (remaining > 0.00001) {
+        const step = Math.min(remaining, 1 / 12);
+        state.simSeconds += step;
+        updateAgents(step);
+        remaining -= step;
+      }
+      checkGardenOutcome();
+      if (game.autoSaveClock >= 12 && game.status === "playing") {
+        game.autoSaveClock = 0;
+        saveGarden();
+      }
+    }
+
+    function checkGardenOutcome() {
+      if (game.status !== "playing") return;
+      if (game.health <= 0 || state.agents.length === 0) {
+        finishGarden(false, game.health <= 0 ? "군락의 등불이 꺼졌습니다." : "작은 숲에 콩이 남지 않았습니다.");
+      } else if (game.elapsed >= NIGHT_DURATION && state.agents.length >= 12 && game.beacon >= 3) {
+        finishGarden(true, "열두 생명이 모여, 작은 숲에 아침을 불렀습니다.");
+      } else if (game.elapsed >= NIGHT_DURATION) {
+        finishGarden(false, "새벽이 왔습니다. 다음 숲은 더 크게 자랄 거예요.");
+      }
+    }
+
+    function finishGarden(won, message) {
+      game.status = won ? "victory" : "defeat";
+      const score = Math.round(game.totalFood * 10 + state.agents.length * 100 +
+        game.health * 3 + (won ? 1000 : 0));
+      game.best = Math.max(game.best, score);
+      try { localStorage.removeItem(SAVE_KEY); localStorage.setItem(BEST_KEY, game.best.toString()); } catch {}
+      game.saveAvailable = false;
+      setGardenTool("observe");
+      showGameOverlay('<p class="eyebrow">' + (won ? "A FOREST IS BORN" : "ANOTHER SEED, ANOTHER NIGHT") +
+        '</p><h2 id="overlay-title">' + (won ? "작은 숲이 깨어났습니다" : "다음 씨앗을 기다리며") +
+        '</h2><p class="overlay-description">' + message + '</p>' +
+        '<div class="overlay-goals"><div><strong>' + score.toLocaleString() +
+        '</strong>이번 숲의 점수</div><div><strong>' + game.best.toLocaleString() +
+        '</strong>가장 빛났던 숲</div></div><p class="overlay-description">생명체 ' +
+        state.agents.length + '마리 · 등불 ' + game.beacon + '단계 · 운반 ' + game.totalFood +
+        '</p><button class="primary-button" data-overlay-action="restart" type="button" style="margin-top:24px">새 씨앗으로 다시 시작</button>' +
+        '<button class="secondary-button" data-overlay-action="observe" type="button">남은 숲 둘러보기</button>');
+      updateGameHud();
+    }
+
+    function showGameOverlay(content) {
+      game.previousFocus = document.activeElement;
+      overlayCard.innerHTML = content;
+      gameOverlay.hidden = false;
+      overlayCard.querySelector("button")?.focus({ preventScroll: true });
+    }
+
+    function pauseGarden(showHelp) {
+      if (game.status !== "playing" && game.status !== "paused") return;
+      game.status = "paused";
+      saveGarden();
+      const rules = '<ul class="overlay-rules" style="margin-top:25px">' +
+        '<li><b>먹이 정원</b> · 이슬 2로 근처 땅에 먹이를 심습니다.</li>' +
+        '<li><b>귀환 종</b> · 이슬 1로 12초간 모입니다. 재사용 24초.</li>' +
+        '<li><b>보호막</b> · 이슬 4로 다음 폭풍 피해를 막습니다.</li>' +
+        '<li><b>등불</b> · 양분 60 / 120 / 180으로 성장합니다.</li>' +
+        '<li>이슬은 18초마다 1씩 모이고 먹이 운반은 생명을 회복합니다.</li>' +
+        '<li>90초마다 폭풍이 옵니다. 18칸 밖의 콩은 위험합니다.</li>' +
+        '<li>새벽 전 생명체 12마리와 등불 3단계를 달성하세요.</li></ul>';
+      showGameOverlay('<p class="eyebrow">THE GARDEN IS RESTING</p><h2 id="overlay-title">' +
+        (showHelp ? "작은 숲을 돌보는 법" : "잠시 쉬어가는 숲") +
+        '</h2><p class="overlay-description">숲의 시간은 멈춰 있습니다.</p>' +
+        (showHelp ? rules : '<div class="overlay-goals"><div><strong>' + state.agents.length +
+        '마리</strong>살아 있는 생명체</div><div><strong>' + gameTimeLabel(NIGHT_DURATION - game.elapsed) +
+        '</strong>새벽까지 남은 시간</div></div>') +
+        '<button class="primary-button" data-overlay-action="resume" type="button">숲으로 돌아가기</button>' +
+        '<button class="secondary-button" data-overlay-action="restart" type="button">새 숲 시작하기</button>' +
+        '<p class="overlay-footer">Space / Esc로 돌아가기 · 탭을 떠나면 자동 일시정지</p>');
+      updateGameHud();
+    }
+
+    function resumeGarden() {
+      if (game.status !== "paused") return;
+      game.status = "playing";
+      closeGameOverlay();
+      updateGameHud();
+    }
+
+    function saveGarden() {
+      if (game.status !== "playing" && game.status !== "paused") return false;
+      const snapshot = {
+        version: 1,
+        game: Object.fromEntries(["elapsed", "health", "dew", "nutrients", "beacon", "shield",
+          "stormCount", "nextStorm", "lastDelivery", "dewClock", "recallUntil", "recallCooldown",
+          "totalFood", "planted", "speed", "events", "weatherUntil"].map(key => [key, game[key]])),
+        state: {
+          simSeconds: state.simSeconds, colonyFood: state.colonyFood, evolutionPoints: state.evolutionPoints,
+          nextAgentId: state.nextAgentId, draftProfile: state.draftProfile, camera: state.camera,
+          agents: state.agents.map(agent => ({ ...agent, visited: [...agent.visited] })),
+          roads: [...state.roads].map(([key, road]) => [key, { ...road, knownCells: [...road.knownCells] }])
+        },
+        spots: [...foodSpotCache],
+        gardens: [...game.gardens].map(([key, food]) => [key, { ...food }])
+      };
+      try {
+        localStorage.setItem(SAVE_KEY, JSON.stringify(snapshot));
+        game.saveAvailable = true;
+        return true;
+      } catch {
+        if (!game.saveFailed) gameNotice("이 브라우저에서는 저장할 수 없습니다. 현재 숲은 계속 플레이됩니다.");
+        game.saveFailed = true;
+        return false;
+      }
+    }
+
+    function readGardenSave() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(SAVE_KEY));
+        if (!saved || saved.version !== 1 || !saved.game || !saved.state ||
+          !Array.isArray(saved.state.agents) || saved.state.agents.length === 0 ||
+          saved.state.agents.length > 32 || !Array.isArray(saved.spots) || !Array.isArray(saved.gardens)) return null;
+        const numbers = [saved.game.elapsed, saved.game.health, saved.game.dew, saved.game.nutrients,
+          saved.game.beacon, saved.game.nextStorm, saved.state.simSeconds, saved.state.nextAgentId,
+          saved.state.evolutionPoints, saved.state.colonyFood];
+        if (numbers.some(value => !Number.isFinite(value) || value < 0) ||
+          saved.game.elapsed >= NIGHT_DURATION || saved.game.health <= 0 || saved.game.health > 100 ||
+          saved.game.dew > 10 || !Number.isInteger(saved.game.beacon) || saved.game.beacon > 3) return null;
+        for (const agent of saved.state.agents) {
+          if (!agent.profile || !Array.isArray(agent.visited) || !Array.isArray(agent.path) ||
+            !Number.isInteger(agent.x) || !Number.isInteger(agent.y) || !Number.isInteger(agent.id) ||
+            agent.x < 0 || agent.y < 0 || agent.x >= WORLD_SIZE || agent.y >= WORLD_SIZE ||
+            !Number.isFinite(agent.profile.speed) || agent.profile.speed <= 0) return null;
+        }
+        return saved;
+      } catch { return null; }
+    }
+
+    function continueGarden() {
+      const saved = readGardenSave();
+      if (!saved) { gameNotice("이어갈 수 있는 저장이 없습니다. 새 숲을 시작해 주세요."); return false; }
+      try {
+        resetGarden();
+        Object.assign(game, saved.game);
+        Object.assign(state, saved.state);
+        state.agents = saved.state.agents.map(agent => ({ ...agent, visited: new Set(agent.visited) }));
+        state.roads = new Map(saved.state.roads.map(([key, road]) => [key, {
+          ...road, knownCells: new Set(road.knownCells)
+        }]));
+        state.sharedTrails = new Map();
+        for (const road of state.roads.values()) registerSharedTrail(road.route, road.foodKey, road.usageCount);
+        foodSpotCache.clear();
+        foodCellMap.clear();
+        for (const [key, spot] of saved.spots) {
+          foodSpotCache.set(key, spot);
+          if (spot.cells) for (const food of spot.cells) foodCellMap.set(food.x + "," + food.y, food);
+        }
+        game.gardens = new Map();
+        for (const [key, food] of saved.gardens) {
+          const cell = foodCellMap.get(key) || food;
+          cell.amount = food.amount;
+          foodCellMap.set(key, cell);
+          game.gardens.set(key, cell);
+        }
+        game.status = "playing";
+        setGardenTool("observe");
+        clampCamera();
+        for (const input of document.querySelectorAll("[data-profile]")) {
+          input.value = state.draftProfile[input.dataset.profile].toString();
+          document.querySelector('[data-output="' + input.dataset.profile + '"]').textContent =
+            profileOutputText(input.dataset.profile, Number(input.value));
+        }
+        closeGameOverlay();
+        addGameEvent("저장한 숲이 다시 깨어났습니다.");
+        updateColonyPanel();
+        updateGameHud();
+        return true;
+      } catch {
+        resetGarden();
+        game.status = "menu";
+        gameNotice("저장한 숲을 읽을 수 없습니다. 새 숲을 시작해 주세요.");
+        return false;
+      }
+    }
+
+    function updateGameHud() {
+      const remaining = NIGHT_DURATION - game.elapsed;
+      hud["night-time"].textContent = gameTimeLabel(remaining);
+      hud["phase-label"].textContent = game.elapsed < 90 ? "저녁 · 숲을 깨우는 시간" :
+        game.elapsed < 270 ? "한밤 · 함께 버티는 시간" : "새벽 앞 · 등불을 피우는 시간";
+      hud["population-goal"].textContent = state.agents.length + " / 12";
+      hud["beacon-goal"].textContent = game.beacon + " / 3";
+      hud["population-progress"].style.width = Math.min(100, state.agents.length / 12 * 100) + "%";
+      hud["beacon-progress"].style.width = game.beacon / 3 * 100 + "%";
+      hud["health-value"].textContent = Math.ceil(game.health).toString();
+      hud["health-resource"].classList.toggle("is-low", game.health < 30);
+      hud["dew-value"].textContent = game.dew.toString();
+      hud["nutrient-value"].textContent = game.nutrients.toString();
+      hud["night-progress"].style.width = game.elapsed / NIGHT_DURATION * 100 + "%";
+      const stormRemaining = Math.max(0, Math.ceil(game.nextStorm - game.elapsed));
+      hud["weather-badge"].classList.toggle("is-warning", stormRemaining <= 12 && !game.shield);
+      hud["weather-text"].textContent = game.shield ? "보호막 준비 · 폭풍까지 " + stormRemaining + "초" :
+        stormRemaining <= 12 ? "폭풍 접근 · " + stormRemaining + "초" : "다음 바람까지 " + stormRemaining + "초";
+      const active = game.status === "playing";
+      hud["plant-button"].disabled = !active || game.dew < 2;
+      hud["recall-button"].disabled = !active || game.dew < 1 || game.elapsed < game.recallCooldown;
+      hud["shield-button"].disabled = !active || game.dew < 4 || game.shield;
+      hud["beacon-button"].disabled = !active || game.beacon >= 3 || game.nutrients < BEACON_COSTS[game.beacon];
+      hud["recall-cost"].textContent = game.elapsed < game.recallCooldown ?
+        Math.ceil(game.recallCooldown - game.elapsed) + "초 뒤 사용" : "이슬 1 · 모두 귀환";
+      hud["shield-cost"].textContent = game.shield ? "다음 폭풍 방어 준비" : "이슬 4 · 폭풍 1회";
+      hud["beacon-cost"].textContent = game.beacon >= 3 ? "등불 성장 완료" :
+        "양분 " + BEACON_COSTS[game.beacon] + " · 성장";
+      hud["pause-button"].textContent = game.status === "paused" ? "계속하기" : "일시정지";
+      hud["pause-button"].disabled = !active && game.status !== "paused";
+      hud["speed-button"].textContent = game.speed + "×";
+      hud["speed-button"].disabled = !active;
+      if (game.tool === "plant" && game.dew < 2) setGardenTool("observe");
+    }
+
+    function drawGardenAtmosphere(now) {
+      const cell = state.camera.zoom;
+      for (const food of game.gardens.values()) {
+        if (food.amount <= 0) continue;
+        const pos = worldToScreen(food.x, food.y);
+        if (pos.x < -cell || pos.y < -cell || pos.x > canvas.width || pos.y > canvas.height) continue;
+        ctx.fillStyle = "rgba(153, 193, 102, 0.4)";
+        ctx.fillRect(pos.x + cell * 0.18, pos.y + cell * 0.18, cell * 0.64, cell * 0.64);
+        if (cell >= 14) {
+          ctx.fillStyle = "#c3d696";
+          ctx.font = Math.min(18, cell * 0.5) + "px serif";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText("♧", pos.x + cell / 2, pos.y + cell / 2);
+        }
+      }
+      const center = worldToScreen(COLONY_CENTER.x, COLONY_CENTER.y);
+      if (game.beacon > 0) {
+        const radius = cell * (3.8 + game.beacon * 0.5);
+        const light = ctx.createRadialGradient(center.x, center.y, 0, center.x, center.y, radius);
+        light.addColorStop(0, "rgba(232, 205, 130, " + (0.08 + game.beacon * 0.025) + ")");
+        light.addColorStop(1, "rgba(232, 205, 130, 0)");
+        ctx.fillStyle = light;
+        ctx.fillRect(center.x - radius, center.y - radius, radius * 2, radius * 2);
+        ctx.fillStyle = "#e6cf9c";
+        for (let index = 0; index < game.beacon; index += 1) {
+          ctx.beginPath();
+          ctx.arc(center.x + (index - (game.beacon - 1) / 2) * cell * 0.6,
+            center.y - cell * 3, Math.max(2, cell * 0.1), 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+      if (game.shield || game.elapsed < game.recallUntil) {
+        ctx.save();
+        ctx.strokeStyle = game.shield ? "rgba(186, 219, 161, 0.65)" : "rgba(228, 201, 151, 0.5)";
+        ctx.lineWidth = Math.max(1, cell * 0.045);
+        ctx.setLineDash([cell * 0.18, cell * 0.25]);
+        ctx.lineDashOffset = -now / 160;
+        ctx.beginPath();
+        ctx.arc(center.x, center.y, cell * 4.4, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.restore();
+      }
+      if (game.tool === "plant" && game.pointer) {
+        const pos = worldToScreen(game.pointer.x, game.pointer.y);
+        const valid = canPlantGarden(game.pointer.x, game.pointer.y);
+        ctx.strokeStyle = valid ? "#c7df9c" : "#df977b";
+        ctx.fillStyle = valid ? "#b5d99622" : "#df977b22";
+        ctx.fillRect(pos.x, pos.y, cell, cell);
+        ctx.lineWidth = 2;
+        ctx.strokeRect(pos.x + 1, pos.y + 1, cell - 2, cell - 2);
+      }
+      const vignette = ctx.createRadialGradient(canvas.width * 0.53, canvas.height * 0.5,
+        canvas.height * 0.2, canvas.width * 0.53, canvas.height * 0.5, canvas.width * 0.72);
+      vignette.addColorStop(0, "rgba(5, 13, 8, 0)");
+      vignette.addColorStop(1, "rgba(5, 13, 8, 0.6)");
+      ctx.fillStyle = vignette;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      for (let index = 0; index < 32; index += 1) {
+        const x = hashNoise(index, 21) * canvas.width + Math.sin(now / 8000 + index) * 18;
+        const y = hashNoise(index, 77) * canvas.height + Math.cos(now / 6200 + index) * 14;
+        ctx.fillStyle = "rgba(213, 226, 159, " + (0.1 + (Math.sin(now / 1500 + index) + 1) * 0.14) + ")";
+        ctx.beginPath(); ctx.arc(x, y, 1.2, 0, Math.PI * 2); ctx.fill();
+      }
+      if (game.elapsed < game.weatherUntil) {
+        ctx.fillStyle = "rgba(92, 125, 143, 0.12)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeStyle = "rgba(163, 192, 189, 0.22)";
+        ctx.lineWidth = 1;
+        for (let index = 0; index < 55; index += 1) {
+          const x = (hashNoise(index, 10) * canvas.width + now * 0.15) % canvas.width;
+          const y = (hashNoise(index, 15) * canvas.height + now * 0.28) % canvas.height;
+          ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + 9, y + 19); ctx.stroke();
+        }
+      }
+      if (performance.now() > game.toastUntil) hud["game-toast"].classList.remove("is-visible");
+      if (now - game.lastHud > 100) { updateGameHud(); game.lastHud = now; }
+    }
+
+    hud["plant-button"].addEventListener("click", () => setGardenTool(game.tool === "plant" ? "observe" : "plant"));
+    hud["recall-button"].addEventListener("click", ringRecallBell);
+    hud["shield-button"].addEventListener("click", raiseWindShield);
+    hud["beacon-button"].addEventListener("click", growBeacon);
+    hud["pause-button"].addEventListener("click", () => game.status === "paused" ? resumeGarden() : pauseGarden(false));
+    hud["speed-button"].addEventListener("click", () => { game.speed = game.speed === 3 ? 1 : game.speed + 1; updateGameHud(); });
+    document.getElementById("help-button").addEventListener("click", () => pauseGarden(true));
+    gameOverlay.addEventListener("click", event => {
+      const button = event.target.closest("button");
+      if (!button) return;
+      const action = button.dataset.overlayAction;
+      if (button.id === "start-button" || action === "restart") startGarden();
+      if (button.id === "continue-button") continueGarden();
+      if (action === "resume") resumeGarden();
+      if (action === "observe") closeGameOverlay();
+    });
+    window.addEventListener("keydown", event => {
+      if (!gameOverlay.hidden && event.key === "Tab") {
+        const buttons = [...overlayCard.querySelectorAll("button:not([hidden])")];
+        if (!buttons.length) return;
+        const first = buttons[0], last = buttons[buttons.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+        return;
+      }
+      if (event.target.matches("input, textarea, select") || event.repeat) return;
+      if (event.code === "Space") {
+        event.preventDefault();
+        if (game.status === "playing") pauseGarden(false);
+        else if (game.status === "paused") resumeGarden();
+        return;
+      }
+      if (event.key === "Escape") {
+        if (game.status === "paused") resumeGarden();
+        else if (game.tool !== "observe") setGardenTool("observe");
+        else if (colonyPanel.classList.contains("is-open")) panelClose.click();
+        return;
+      }
+      if (game.status !== "playing") return;
+      if (event.key === "1" && game.dew >= 2) hud["plant-button"].click();
+      if (event.key === "2") ringRecallBell();
+      if (event.key === "3") raiseWindShield();
+      if (event.key === "4") growBeacon();
+      if (event.key.toLowerCase() === "h") focusColony();
+      if (event.key === "+" || event.key === "=") setZoom(state.camera.zoom * 1.15, canvas.width / 2, canvas.height / 2);
+      if (event.key === "-") setZoom(state.camera.zoom / 1.15, canvas.width / 2, canvas.height / 2);
+    });
+    document.addEventListener("visibilitychange", () => { if (document.hidden && game.status === "playing") pauseGarden(false); });
+    window.addEventListener("beforeunload", saveGarden);
+    resetGarden();
+    try { game.best = Math.max(0, Number(localStorage.getItem(BEST_KEY)) || 0); } catch {}
+    game.saveAvailable = !!readGardenSave();
+    document.getElementById("continue-button").hidden = !game.saveAvailable;
+    if (game.best > 0) document.getElementById("overlay-footer").textContent =
+      "최고 " + game.best.toLocaleString() + "점 · 최대 8분 · 자동 저장";
+    updateGameHud();
+    document.getElementById(game.saveAvailable ? "continue-button" : "start-button").focus({ preventScroll: true });
+
   </script>
 </body>
 </html>
