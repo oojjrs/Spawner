@@ -7,6 +7,7 @@
   <style>
     :root {
       color-scheme: dark;
+      --agent-panel-width: clamp(min(220px, 55vw), 280px, 70vw);
       --bg: #101315;
       --panel: #171d20;
       --panel-2: #20282b;
@@ -34,13 +35,15 @@
     .app {
       display: grid;
       grid-template-rows: 1fr;
-      min-height: 100vh;
+      height: 100vh;
+      padding-right: var(--agent-panel-width);
     }
 
     .stage {
       position: relative;
       display: grid;
       place-items: center;
+      min-width: 0;
       min-height: 0;
       background:
         radial-gradient(circle at 50% 50%, rgba(117, 196, 182, 0.08), transparent 36%),
@@ -48,7 +51,8 @@
     }
 
     canvas {
-      width: 100vw;
+      display: block;
+      width: 100%;
       height: 100vh;
       border: 0;
       background: #111619;
@@ -56,15 +60,6 @@
       outline: none;
     }
 
-    .colony-action-bar {
-      position: fixed;
-      left: 50%;
-      bottom: 16px;
-      z-index: 3;
-      display: flex;
-      gap: 8px;
-      transform: translateX(-50%);
-    }
     .colony-focus-button {
       min-width: 88px;
       height: 32px;
@@ -80,7 +75,7 @@
     .colony-focus-button:hover { border-color: #75c4b6a8; background: #1b2d2d; color: #ecf5f3; }
     .colony-focus-button:focus-visible { outline: 2px solid #75c4b6; outline-offset: 2px; }
     .controls-guide {
-      position: fixed; right: 16px; bottom: 64px; z-index: 3;
+      position: fixed; right: calc(var(--agent-panel-width) + 16px); bottom: 64px; z-index: 3;
       width: 218px; padding: 12px;
       border: 1px solid #ffffff1f; border-radius: 9px;
       background: rgba(18, 25, 27, 0.94); box-shadow: 0 8px 24px #0006;
@@ -92,53 +87,56 @@
     .controls-guide li { display: flex; align-items: center; gap: 10px; font-size: 0.78rem; }
     .controls-guide svg { flex: 0 0 32px; width: 32px; height: 36px; color: var(--accent); }
     .controls-guide small { display: block; margin-top: 3px; color: var(--muted); font-size: 0.68rem; }
-    .controls-guide-toggle { position: fixed; right: 16px; bottom: 16px; z-index: 3; }
+    .controls-guide-toggle { position: fixed; right: calc(var(--agent-panel-width) + 16px); bottom: 16px; z-index: 3; }
     .controls-guide[hidden], .controls-guide-toggle[hidden] { display: none; }
     .controls-guide .panel-close:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
     .agent-panel {
-      position: fixed; top: 16px; left: 16px; z-index: 4;
-      width: min(280px, calc(100vw - 32px)); max-height: 82vh;
-      padding: 12px; overflow: hidden; border: 1px solid #ffffff1f;
-      border-radius: 9px; background: rgba(18, 25, 27, 0.9);
-      box-shadow: 0 12px 36px #0007;
+      position: fixed; top: 0; right: 0; bottom: 0; z-index: 4;
+      display: flex; flex-direction: column; width: var(--agent-panel-width);
+      padding: 16px 12px; border-left: 1px solid var(--line);
+      background: var(--panel);
     }
-    .agent-panel h2 { margin: 0 0 8px; font-size: 0.9rem; }
-    .agent-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 7px; max-height: 42vh; overflow: auto; }
+    .agent-panel h2 { flex: none; margin: 0 0 12px; font-size: 0.9rem; }
+    .agent-panel-scroll { flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; scrollbar-gutter: stable; }
+    .agent-panel-resize { position: absolute; top: 0; bottom: 0; left: -5px; width: 10px; cursor: col-resize; touch-action: none; z-index: 1; }
+    .agent-panel-resize::after { position: absolute; top: 0; bottom: 0; left: 4px; width: 2px; background: var(--line); content: ""; }
+    .agent-panel-resize:hover::after, .agent-panel-resize:focus-visible::after { background: var(--accent); }
+    .agent-panel-resize:focus-visible { outline: none; }
+    .agent-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 7px; }
     .agent-item { display: grid; justify-items: center; gap: 3px; min-width: 0; min-height: 98px; padding: 7px 5px; border: 1px solid #314044; border-radius: 8px; background: #ffffff08; color: #e4e9ea; text-align: center; cursor: pointer; }
     .agent-item:hover { border-color: #75c4b688; background: #75c4b612; }
     .agent-item img { width: 52px; height: 52px; object-fit: contain; image-rendering: pixelated; }
     .agent-item span { max-width: 100%; overflow: hidden; color: #dce4e2; font-size: 0.72rem; text-overflow: ellipsis; white-space: nowrap; }
     .agent-item small { color: #9aa7aa; font-size: 0.66rem; }
     .agent-item.is-selected { border-color: #d6b26baa; background: #d6b26b16; box-shadow: inset 0 0 0 1px #d6b26b44; }
-    .colony-panel, .evolution-panel {
-      position: fixed;
-      top: 18px;
-      left: 18px;
-      z-index: 4;
-      width: min(260px, calc((100vw - 30px) / 2));
-      max-height: calc(100vh - 36px);
-      overflow-x: hidden;
-      overflow-y: auto;
-      padding: 16px;
-      border: 1px solid #ffffff1f;
-      border-radius: 10px;
-      background: rgba(18, 25, 27, 0.94);
-      box-shadow: 0 18px 52px #0009;
-      opacity: 0;
-      pointer-events: none;
-      transform: translateX(18px);
-      transition: opacity 140ms ease, transform 140ms ease;
+    .panel-tabs { display: flex; flex: none; gap: 4px; margin-bottom: 16px; border-bottom: 1px solid var(--line); }
+    .panel-tabs button { flex: 1; padding: 10px 6px; border: 0; border-bottom: 2px solid transparent; background: transparent; color: var(--muted); font: inherit; font-size: 0.86rem; cursor: pointer; }
+    .panel-tabs button[aria-selected="true"] { border-bottom-color: var(--accent); color: var(--ink); }
+    .panel-tabs button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+    .agent-panel-scroll[hidden], .evolution-panel[hidden] { display: none; }
+    .colony-browser { display: flex; flex-direction: column; height: 100%; min-height: 0; gap: 10px; }
+    .colony-search { width: 100%; padding: 9px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink); }
+    .colony-list { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; display: flex; flex-direction: column; gap: 6px; }
+    .colony-item { flex: none; display: grid; gap: 5px; width: 100%; padding: 10px; border: 1px solid var(--line); border-radius: 6px; background: #ffffff08; color: var(--ink); text-align: left; cursor: pointer; }
+    .colony-item strong { overflow-wrap: anywhere; }
+    .colony-item small, .colony-results { color: var(--muted); font-size: 0.72rem; }
+    .colony-item:hover, .colony-item[aria-current="true"] { border-color: var(--accent); background: #75c4b612; }
+    .colony-item:focus-visible, .colony-search:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+    .colony-pages { display: flex; align-items: center; justify-content: space-between; gap: 6px; font-size: 0.72rem; }
+    .colony-pages button { min-width: 0; padding: 0 10px; }
+    .colony-pages button:disabled { opacity: 0.35; cursor: default; }
+    .colony-empty { color: var(--muted); font-size: 0.8rem; }
+    .colony-stats { flex-wrap: wrap; }
+    .colony-menu, .evolution-panel {
+      position: fixed; z-index: 5; width: 260px; max-height: calc(100vh - 20px);
+      padding: 14px; overflow-x: hidden; overflow-y: auto;
+      border: 1px solid var(--line); border-radius: 10px;
+      background: rgba(18, 25, 27, 0.96); box-shadow: 0 18px 52px #0009;
     }
-
-    .colony-panel.is-open, .evolution-panel.is-open {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateX(0);
-    }
-
-    .colony-panel[aria-hidden="true"], .evolution-panel[aria-hidden="true"] { visibility: hidden; }
-    .evolution-panel { width: min(240px, calc((100vw - 30px) / 2)); padding: 12px; z-index: 5; }
+    .colony-menu[hidden], .evolution-panel[hidden] { display: none; }
+    .colony-menu > .panel-header { margin-bottom: 12px; }
+    .evolution-panel { width: 240px; padding: 12px; }
     .evolution-panel .panel-header h2 { font-size: 0.9rem; }
     .evolution-panel .factor-list { gap: 8px; }
     .evolution-panel .factor-controls button { height: 28px; }
@@ -289,10 +287,6 @@
     <main class="stage">
       <canvas id="world" width="1200" height="760" tabindex="0" aria-label="Spawner world canvas"></canvas>
     </main>
-<div class="colony-action-bar" aria-label="군락 바로가기">
-      <button class="colony-focus-button" id="colony-focus-button" type="button">군락 보기</button>
-      <button class="colony-focus-button" id="colony-open-button" type="button">군락 열기</button>
-    </div>
     <aside class="controls-guide" id="controls-guide" aria-labelledby="controls-guide-title">
       <div class="panel-header">
         <h2 id="controls-guide-title">마우스 조작</h2>
@@ -327,15 +321,36 @@
       </ul>
     </aside>
     <button class="colony-focus-button controls-guide-toggle" id="controls-guide-toggle" type="button" aria-controls="controls-guide" aria-expanded="true" hidden>조작 안내</button>
-    <aside class="agent-panel" aria-label="생명체 목록">
-      <h2>생명체 <span id="agent-list-count">1</span></h2>
-      <div class="agent-list" id="agent-list"></div>
-    </aside>
-    <aside class="colony-panel" id="colony-panel" aria-label="해처리" aria-hidden="true" inert>
-      <div class="panel-header">
-        <h2>해처리</h2>
-        <button class="panel-close" id="panel-close" type="button" aria-label="닫기">×</button>
+    <aside class="agent-panel" id="agent-panel" aria-label="생명체 및 군락">
+      <div class="agent-panel-resize" id="agent-panel-resize" role="separator" tabindex="0" aria-label="오른쪽 패널 너비" aria-orientation="vertical" aria-controls="agent-panel"></div>
+      <div class="panel-tabs" role="tablist" aria-label="정보 패널">
+        <button id="agent-tab" type="button" role="tab" aria-selected="true" aria-controls="agent-tab-panel">생명체</button>
+        <button id="colony-tab" type="button" role="tab" aria-selected="false" aria-controls="colony-panel" tabindex="-1">군락</button>
       </div>
+      <section class="agent-panel-scroll" id="agent-tab-panel" role="tabpanel" aria-labelledby="agent-tab" tabindex="0">
+        <h2>생명체 <span id="agent-list-count">1</span></h2>
+        <div class="agent-list" id="agent-list"></div>
+      </section>
+      <section class="agent-panel-scroll colony-panel" id="colony-panel" role="tabpanel" aria-labelledby="colony-tab" tabindex="0" hidden>
+      <section class="colony-browser" id="colony-browser" aria-label="군락 목록">
+        <input class="colony-search" id="colony-search" type="search" placeholder="군락 이름·번호 검색" aria-label="군락 이름 또는 번호 검색">
+        <span class="colony-results" id="colony-results" role="status"></span>
+        <div class="colony-list" id="colony-list"></div>
+        <nav class="colony-pages" aria-label="군락 목록 페이지">
+          <button class="colony-focus-button" id="colony-previous" type="button">이전</button>
+          <span id="colony-page"></span>
+          <button class="colony-focus-button" id="colony-next" type="button">다음</button>
+        </nav>
+      </section>
+      </section>
+    </aside>
+  </div>
+
+  <aside class="colony-menu" id="colony-menu" aria-label="군락 메뉴" hidden>
+    <div class="panel-header">
+      <h2>해처리</h2>
+      <button class="panel-close" id="colony-menu-close" type="button" aria-label="군락 메뉴 닫기">×</button>
+    </div>
       <div class="colony-stats">
         <span class="food-progress-stat">먹이 <strong id="stored-food">0</strong> / <strong id="birth-cost">5</strong></span>
         <span>개체 <strong id="agent-count">1</strong></span>
@@ -348,7 +363,7 @@
         <strong><span id="evolution-points">0</span>점 <span aria-hidden="true" style="margin-left: 8px;">›</span></strong>
       </button>
     </aside>
-    <aside class="evolution-panel" id="evolution-panel" aria-label="진화" aria-hidden="true" inert>
+      <section class="evolution-panel" id="evolution-panel" aria-label="진화" hidden>
       <div class="panel-header">
         <h2>진화</h2>
         <button class="panel-close" id="evolution-close" type="button" aria-label="진화 닫기">×</button>
@@ -361,8 +376,7 @@
         <div class="factor"><span class="factor-label"><span class="factor-name">기억력<button class="factor-help" type="button" aria-label="기억력 설명" data-tooltip="발견한 먹이 위치와 왕복 경로를 기억해 다시 이용하는 횟수입니다.">?</button></span><output data-output="memoryTrips">8회</output></span><div class="factor-controls"><button type="button" data-profile-adjust="memoryTrips" data-direction="-1">−</button><input data-profile="memoryTrips" type="range" min="2" max="20" step="2" value="8" hidden><button type="button" data-profile-adjust="memoryTrips" data-direction="1">+</button></div></div>
         <div class="factor"><span class="factor-label"><span class="factor-name">길눈<button class="factor-help" type="button" aria-label="길눈 설명" data-tooltip="이미 확인한 칸 안에서 기존 왕복길보다 짧은 경로를 찾아내는 능력입니다.">?</button></span><output data-output="routeSense">55%</output></span><div class="factor-controls"><button type="button" data-profile-adjust="routeSense" data-direction="-1">−</button><input data-profile="routeSense" type="range" min="0.05" max="0.95" step="0.1" value="0.55" hidden><button type="button" data-profile-adjust="routeSense" data-direction="1">+</button></div></div>
       </div>
-    </aside>
-  </div>
+      </section>
 
   <div class="factor-tooltip" id="factor-tooltip" role="tooltip" hidden></div>
 
@@ -387,8 +401,12 @@
       controlsGuideClose.focus();
     });
 
-    const colonyFocusButton = document.getElementById("colony-focus-button");
-    const colonyOpenButton = document.getElementById("colony-open-button");
+    const colonyMenu = document.getElementById("colony-menu");
+    const colonyMenuClose = document.getElementById("colony-menu-close");
+    let colonyMenuEntry = null;
+    const agentTab = document.getElementById("agent-tab");
+    const colonyTab = document.getElementById("colony-tab");
+    const agentTabPanel = document.getElementById("agent-tab-panel");
     const agentList = document.getElementById("agent-list");
     const agentListCount = document.getElementById("agent-list-count");
     const colonyPanel = document.getElementById("colony-panel");
@@ -436,7 +454,6 @@
     });
     evolutionPanel.addEventListener("scroll", hideFactorTooltip);
 
-    const panelClose = document.getElementById("panel-close");
     const storedFoodOutput = document.getElementById("stored-food");
     const birthCostOutput = document.getElementById("birth-cost");
     const foodProgressFill = document.getElementById("food-progress-fill");
@@ -1958,7 +1975,7 @@
       drawFlashes(now);
       drawColony(now);
       drawAgents(now);
-      positionColonyPanels();
+      positionColonyMenus();
       positionFactorTooltip();
 
       requestAnimationFrame(render);
@@ -2031,11 +2048,12 @@
         );
         const cellX = Math.floor(world.x);
         const cellY = Math.floor(world.y);
-        const isColonyCell = colonyAt(cellX, cellY) !== null;
+        const colony = colonyAt(cellX, cellY);
 
-        if (isColonyCell) {
-          openColonyPanel();
+        if (colony) {
+          openColonyPanel(colony);
         } else {
+          closeColonyMenu();
           state.selectedAgentId = null;
           updateAgentList();
           state.flashes.push({
@@ -2053,80 +2071,162 @@
       state.dragging = false;
     });
 
-    function positionColonyPanels() {
-      if (!colonyPanel.classList.contains("is-open")) return;
+    function selectPanelTab(tab) {
+      const showColony = tab === colonyTab;
+      agentTab.setAttribute("aria-selected", String(!showColony));
+      colonyTab.setAttribute("aria-selected", String(showColony));
+      agentTab.tabIndex = showColony ? -1 : 0;
+      colonyTab.tabIndex = showColony ? 0 : -1;
+      agentTabPanel.hidden = showColony;
+      colonyPanel.hidden = !showColony;
+      hideFactorTooltip();
+    }
+
+    function positionColonyMenus() {
+      if (colonyMenu.hidden) return;
       const rect = canvas.getBoundingClientRect();
-      const anchor = worldToScreen(COLONY_ORIGIN.x + COLONY_SIZE, COLONY_ORIGIN.y);
-      const scaleX = rect.width / canvas.width;
-      const scaleY = rect.height / canvas.height;
+      const anchor = worldToScreen(colonyMenuEntry.x + COLONY_SIZE, colonyMenuEntry.y);
       const gap = 10;
-      const childWidth = evolutionPanel.classList.contains("is-open") ? evolutionPanel.offsetWidth + gap : 0;
-      const left = clamp(rect.left + anchor.x * scaleX + gap, gap,
-        Math.max(gap, window.innerWidth - colonyPanel.offsetWidth - childWidth - gap));
-      const top = clamp(rect.top + anchor.y * scaleY, gap,
-        Math.max(gap, window.innerHeight - colonyPanel.offsetHeight - gap));
-      colonyPanel.style.left = left + "px";
-      colonyPanel.style.top = top + "px";
-      evolutionPanel.style.left = left + colonyPanel.offsetWidth + gap + "px";
-      evolutionPanel.style.top = clamp(top, gap,
-        Math.max(gap, window.innerHeight - evolutionPanel.offsetHeight - gap)) + "px";
+      const availableWidth = Math.max(1, rect.width - gap * 2);
+      colonyMenu.style.width = Math.min(260, availableWidth) + "px";
+      evolutionPanel.style.width = Math.min(240, availableWidth) + "px";
+      const beside = !evolutionPanel.hidden && colonyMenu.offsetWidth + evolutionPanel.offsetWidth + gap <= availableWidth;
+      const childWidth = beside ? evolutionPanel.offsetWidth + gap : 0;
+      const left = clamp(rect.left + anchor.x * rect.width / canvas.width + gap, rect.left + gap,
+        Math.max(rect.left + gap, rect.right - colonyMenu.offsetWidth - childWidth - gap));
+      const top = clamp(rect.top + anchor.y * rect.height / canvas.height, gap,
+        Math.max(gap, window.innerHeight - colonyMenu.offsetHeight - gap));
+      colonyMenu.style.left = left + "px";
+      colonyMenu.style.top = top + "px";
+      evolutionPanel.style.left = (beside ? left + colonyMenu.offsetWidth + gap : left) + "px";
+      const childTop = beside ? top : Math.min(top + colonyMenu.offsetHeight + gap, window.innerHeight / 2);
+      evolutionPanel.style.top = childTop + "px";
+      evolutionPanel.style.maxHeight = Math.max(1, window.innerHeight - childTop - gap) + "px";
+    }
+
+    function closeColonyMenu() {
+      closeEvolutionPanel();
+      colonyMenu.hidden = true;
+      canvas.focus();
     }
 
     function closeEvolutionPanel() {
       hideFactorTooltip();
-      evolutionPanel.classList.remove("is-open");
-      evolutionPanel.setAttribute("aria-hidden", "true");
-      evolutionPanel.inert = true;
+      evolutionPanel.hidden = true;
       evolutionOpenButton.setAttribute("aria-expanded", "false");
     }
 
     evolutionOpenButton.addEventListener("click", () => {
-      if (evolutionPanel.classList.contains("is-open")) {
-        closeEvolutionPanel();
-      } else {
-        evolutionPanel.classList.add("is-open");
-        evolutionPanel.setAttribute("aria-hidden", "false");
-        evolutionPanel.inert = false;
-        evolutionOpenButton.setAttribute("aria-expanded", "true");
-      }
-      positionColonyPanels();
-      positionFactorTooltip();
+      evolutionPanel.hidden = !evolutionPanel.hidden;
+      evolutionOpenButton.setAttribute("aria-expanded", String(!evolutionPanel.hidden));
+      positionColonyMenus();
+      hideFactorTooltip();
     });
     evolutionClose.addEventListener("click", () => {
       closeEvolutionPanel();
       evolutionOpenButton.focus();
     });
 
-    function openColonyPanel() {
-      colonyPanel.classList.add("is-open");
-      colonyPanel.setAttribute("aria-hidden", "false");
-      colonyPanel.inert = false;
-      positionColonyPanels();
-      positionFactorTooltip();
+    const colonySearch = document.getElementById("colony-search");
+    const colonyList = document.getElementById("colony-list");
+    const colonyResults = document.getElementById("colony-results");
+    const colonyPrevious = document.getElementById("colony-previous");
+    const colonyNext = document.getElementById("colony-next");
+    const colonyPage = document.getElementById("colony-page");
+    let colonyListPage = 0;
+    let selectedColonyId = null;
+
+    function renderColonyList() {
+      const query = colonySearch.value.trim().toLocaleLowerCase();
+      const matches = colonyEntries.filter((entry) => entry.name.toLocaleLowerCase().includes(query) || String(entry.id).includes(query));
+      const pageCount = Math.max(1, Math.ceil(matches.length / 50));
+      colonyListPage = clamp(colonyListPage, 0, pageCount - 1);
+      const start = colonyListPage * 50;
+      const fragment = document.createDocumentFragment();
+      for (const entry of matches.slice(start, start + 50)) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "colony-item";
+        button.dataset.colonyId = String(entry.id);
+        button.setAttribute("aria-current", String(entry.id === selectedColonyId));
+        const name = document.createElement("strong");
+        name.textContent = entry.name;
+        const location = document.createElement("small");
+        location.textContent = "#" + entry.id + " · (" + entry.x + ", " + entry.y + ")";
+        button.append(name, location);
+        button.addEventListener("click", () => selectColonyEntry(entry));
+        fragment.append(button);
+      }
+      if (!matches.length) {
+        const empty = document.createElement("p");
+        empty.className = "colony-empty";
+        empty.textContent = query ? "검색 결과가 없습니다." : "군락이 없습니다.";
+        fragment.append(empty);
+      }
+      colonyList.replaceChildren(fragment);
+      colonyResults.textContent = "전체 " + colonyEntries.length.toLocaleString() + "개 · 검색 " + matches.length.toLocaleString() + "개";
+      colonyPage.textContent = (colonyListPage + 1) + " / " + pageCount;
+      colonyPrevious.disabled = colonyListPage === 0;
+      colonyNext.disabled = colonyListPage >= pageCount - 1;
     }
 
-    colonyFocusButton.addEventListener("click", focusColony);
-    colonyOpenButton.addEventListener("click", openColonyPanel);
+    function selectColonyEntry(entry) {
+      state.camera.x = entry.x + COLONY_SIZE / 2;
+      state.camera.y = entry.y + COLONY_SIZE / 2;
+      state.camera.zoom = 72;
+      clampCamera();
+      openColonyPanel(entry);
+    }
 
-    function closeColonyPanel() {
-      colonyPanel.classList.remove("is-open");
-      colonyPanel.setAttribute("aria-hidden", "true");
-      colonyPanel.inert = true;
+    colonySearch.addEventListener("input", () => {
+      colonyListPage = 0;
+      renderColonyList();
+      colonyList.scrollTop = 0;
+    });
+    colonyPrevious.addEventListener("click", () => {
+      colonyListPage -= 1;
+      renderColonyList();
+      colonyList.scrollTop = 0;
+    });
+    colonyNext.addEventListener("click", () => {
+      colonyListPage += 1;
+      renderColonyList();
+      colonyList.scrollTop = 0;
+    });
+    renderColonyList();
+
+    function openColonyPanel(entry) {
+      selectedColonyId = entry.id;
+      for (const item of colonyList.children) {
+        if (item.dataset.colonyId) item.setAttribute("aria-current", String(item.dataset.colonyId === String(entry.id)));
+      }
+      colonyMenuEntry = entry;
       closeEvolutionPanel();
-      colonyOpenButton.focus();
+      colonyMenu.hidden = false;
+      positionColonyMenus();
+      colonyMenuClose.focus();
     }
 
-    panelClose.addEventListener("click", closeColonyPanel);
+    colonyMenuClose.addEventListener("click", closeColonyMenu);
+    [agentTab, colonyTab].forEach((tab) => {
+      tab.addEventListener("click", () => selectPanelTab(tab));
+      tab.addEventListener("keydown", (event) => {
+        if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+        event.preventDefault();
+        const next = event.key === "Home" ? agentTab : event.key === "End" ? colonyTab : tab === agentTab ? colonyTab : agentTab;
+        selectPanelTab(next);
+        next.focus();
+      });
+    });
     document.addEventListener("keydown", (event) => {
-      if (event.key !== "Escape") return;
-      if (evolutionPanel.classList.contains("is-open")) {
+      if (event.key !== "Escape" || colonyMenu.hidden) return;
+      if (!evolutionPanel.hidden) {
         closeEvolutionPanel();
         evolutionOpenButton.focus();
-        event.preventDefault();
-      } else if (colonyPanel.classList.contains("is-open")) {
-        closeColonyPanel();
-        event.preventDefault();
+      } else {
+        closeColonyMenu();
       }
+      event.preventDefault();
     });
 
     function profileOutputText(name, value) {
@@ -2276,7 +2376,47 @@
       });
     }
 
-    window.addEventListener("resize", resizeCanvas);
+    const agentPanel = document.getElementById("agent-panel");
+    const agentPanelResize = document.getElementById("agent-panel-resize");
+    let agentPanelDrag = null;
+
+    function setAgentPanelWidth(width) {
+      const minimum = Math.min(220, window.innerWidth * 0.55);
+      const maximum = Math.min(560, window.innerWidth * 0.7);
+      const value = Math.max(minimum, Math.min(maximum, width));
+      document.documentElement.style.setProperty("--agent-panel-width", value + "px");
+      agentPanelResize.setAttribute("aria-valuemin", Math.round(minimum));
+      agentPanelResize.setAttribute("aria-valuemax", Math.round(maximum));
+      agentPanelResize.setAttribute("aria-valuenow", Math.round(value));
+      resizeCanvas();
+    }
+
+    agentPanelResize.addEventListener("pointerdown", (event) => {
+      if (event.button !== 0 || agentPanelDrag) return;
+      event.preventDefault();
+      agentPanelDrag = { pointerId: event.pointerId, x: event.clientX, width: agentPanel.getBoundingClientRect().width };
+      agentPanelResize.setPointerCapture(event.pointerId);
+    });
+    agentPanelResize.addEventListener("pointermove", (event) => {
+      if (!agentPanelDrag || event.pointerId !== agentPanelDrag.pointerId) return;
+      setAgentPanelWidth(agentPanelDrag.width + agentPanelDrag.x - event.clientX);
+    });
+    function stopAgentPanelResize(event) {
+      if (!agentPanelDrag || event.pointerId !== agentPanelDrag.pointerId) return;
+      agentPanelDrag = null;
+      if (agentPanelResize.hasPointerCapture(event.pointerId)) agentPanelResize.releasePointerCapture(event.pointerId);
+    }
+    agentPanelResize.addEventListener("pointerup", stopAgentPanelResize);
+    agentPanelResize.addEventListener("pointercancel", stopAgentPanelResize);
+    agentPanelResize.addEventListener("lostpointercapture", stopAgentPanelResize);
+    agentPanelResize.addEventListener("keydown", (event) => {
+      if (event.key !== "ArrowLeft" && event.key !== "ArrowRight" && event.key !== "Home" && event.key !== "End") return;
+      event.preventDefault();
+      const width = agentPanel.getBoundingClientRect().width;
+      setAgentPanelWidth(event.key === "Home" ? 0 : event.key === "End" ? window.innerWidth : width + (event.key === "ArrowLeft" ? 20 : -20));
+    });
+    window.addEventListener("resize", () => setAgentPanelWidth(agentPanel.getBoundingClientRect().width));
+    setAgentPanelWidth(agentPanel.getBoundingClientRect().width);
 
     resizeCanvas();
     focusColony();
