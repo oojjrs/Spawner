@@ -953,6 +953,9 @@
         memoryTripsRemaining: 0,
         routeIndex: 0,
         path: [{ ...position }],
+        returnPath: [],
+        movementTargetKey: null,
+        movementVisits: new Map(),
         visited: new Set([position.x + "," + position.y]),
         lastDirection: null,
         straightSteps: 0,
@@ -1025,11 +1028,7 @@
       }
       if (!isWalkable(destination.x, destination.y) ||
         Math.abs(destination.x - agent.x) + Math.abs(destination.y - agent.y) !== 1) {
-        forgetFoodRoute(agent);
-        if (agent.carrying > 0) {
-          agent.mode = "return";
-        }
-        return;
+        return false;
       }
       const nextDirection = {
         dx: destination.x - agent.x,
@@ -1051,6 +1050,8 @@
       agent.visited.add(agent.x + "," + agent.y);
       if (rememberPath) {
         agent.path.push({ x: agent.x, y: agent.y });
+      } else {
+        agent.returnPath.push({ x: agent.x, y: agent.y });
       }
       return true;
     }
@@ -1234,6 +1235,10 @@
       }
 
       if (!best) {
+        const foodCell = foodCellMap.get(agent.sharedTrailFoodKey);
+        if (foodCell && foodCell.amount > 0) {
+          return chooseStepToward(agent, foodCell, neighbors);
+        }
         agent.sharedTrailFoodKey = null;
         return null;
       }
@@ -1250,9 +1255,7 @@
       agent.sharedTrailFoodKey = best.entry.foodKey;
       return best.neighbor;
     }
-    function chooseExplorationStep(agent) {
-      const neighbors = walkableNeighbors(agent.x, agent.y)
-        .filter((cell) => !isAgentCellOccupied(cell.x, cell.y, agent));
+    function chooseExplorationStep(agent, neighbors) {
       if (neighbors.length === 0) {
         return null;
       }
@@ -1314,9 +1317,17 @@
 
       return best;
     }
-    function chooseStepToward(agent, target) {
-      const neighbors = walkableNeighbors(agent.x, agent.y)
-        .filter((cell) => !isAgentCellOccupied(cell.x, cell.y, agent));
+    function chooseStepToward(agent, target, neighbors) {
+      if (neighbors.length === 0) {
+        return null;
+      }
+      const targetKey = agent.mode + ":" + target.x + "," + target.y;
+      if (agent.movementTargetKey !== targetKey) {
+        agent.movementTargetKey = targetKey;
+        agent.movementVisits.clear();
+      }
+      const currentKey = agent.x + "," + agent.y;
+      agent.movementVisits.set(currentKey, (agent.movementVisits.get(currentKey) || 0) + 1);
       let best = null;
       let bestScore = Infinity;
 
@@ -1327,13 +1338,36 @@
           neighbor.x + agent.id * 211,
           neighbor.y + agent.stepCount * 97
         ) * 0.16;
-        const score = distance + jitter;
+        if (distance === 0) {
+          return neighbor;
+        }
+        const visits = agent.movementVisits.get(neighbor.x + "," + neighbor.y) || 0;
+        const score = distance + visits * 3 + jitter;
         if (score < bestScore) {
           best = neighbor;
           bestScore = score;
         }
       }
       return best;
+    }
+
+    function moveAgentAlongRoute(agent, direction, neighbors) {
+      const route = agent.rememberedRoute;
+      const preferred = route[agent.routeIndex];
+      const goal = direction < 0 ? route[0] : route[route.length - 1];
+      const destination = neighbors.find(
+        (cell) => preferred && cell.x === preferred.x && cell.y === preferred.y
+      ) || chooseStepToward(agent, goal, neighbors);
+      if (!destination || !moveAgent(agent, destination, direction > 0)) {
+        return;
+      }
+      for (let index = agent.routeIndex; index >= 0 && index < route.length; index += direction) {
+        const cell = route[index];
+        if (cell.x === agent.x && cell.y === agent.y) {
+          agent.routeIndex = index + direction;
+          break;
+        }
+      }
     }
 
     function knownPath(agent, start, goal, expansionBudget) {
@@ -1442,6 +1476,9 @@
       agent.routeIndex = 0;
       agent.mode = "search";
       agent.path = [{ x: agent.x, y: agent.y }];
+      agent.returnPath = [];
+      agent.movementTargetKey = null;
+      agent.movementVisits.clear();
     }
 
     function harvestAtCurrentCell(agent) {
@@ -1477,20 +1514,21 @@
             .map((cell) => ({ ...cell }));
         }
         agent.memoryTripsRemaining = agent.profile.memoryTrips;
+      } else {
+        agent.rememberedRoute = agent.path.map((cell) => ({ ...cell }));
       }
 
+      agent.returnPath = [{ x: agent.x, y: agent.y }];
       agent.mode = "return";
       agent.routeIndex = agent.rememberedRoute.length - 2;
     }
 
     function depositFood(agent) {
-      if (agent.rememberedRoute) {
-        const arrivalIndex = agent.rememberedRoute.findIndex(
-          (cell) => cell.x === agent.x && cell.y === agent.y
-        );
-        if (arrivalIndex > 0) {
-          agent.rememberedRoute = agent.rememberedRoute.slice(arrivalIndex);
-        }
+      if (agent.returnPath.length > 0) {
+        agent.rememberedRoute = agent.returnPath
+          .map((cell) => ({ ...cell }))
+          .reverse();
+        agent.returnPath = [];
       }
 
       state.colonyFood += agent.carrying;
@@ -1516,21 +1554,21 @@
     }
 
     function stepAgent(agent) {
+      const neighbors = walkableNeighbors(agent.x, agent.y)
+        .filter((cell) => !isAgentCellOccupied(cell.x, cell.y, agent));
       if (agent.mode === "return") {
         if (isColonyBoundaryCell(agent.x, agent.y)) {
           depositFood(agent);
           return;
         }
         if (agent.rememberedRoute && agent.routeIndex >= 0) {
-          const destination = agent.rememberedRoute[agent.routeIndex];
-          if (moveAgent(agent, destination, false)) {
-            agent.routeIndex -= 1;
-          }
+          moveAgentAlongRoute(agent, -1, neighbors);
           return;
         }
         const homeStep = chooseStepToward(
           agent,
-          nearestColonyBoundaryCell(agent.x, agent.y)
+          nearestColonyBoundaryCell(agent.x, agent.y),
+          neighbors
         );
         if (homeStep) {
           moveAgent(agent, homeStep, false);
@@ -1543,10 +1581,7 @@
           agent.rememberedRoute &&
           agent.routeIndex < agent.rememberedRoute.length
         ) {
-          const destination = agent.rememberedRoute[agent.routeIndex];
-          if (moveAgent(agent, destination)) {
-            agent.routeIndex += 1;
-          }
+          moveAgentAlongRoute(agent, 1, neighbors);
           return;
         }
         harvestAtCurrentCell(agent);
@@ -1564,11 +1599,9 @@
           harvestAtCurrentCell(agent);
           return;
         }
-        const targetStep = chooseStepToward(agent, target);
+        const targetStep = chooseStepToward(agent, target, neighbors);
         if (targetStep) {
           moveAgent(agent, targetStep);
-        } else {
-          forgetFoodRoute(agent);
         }
         return;
       }
@@ -1580,7 +1613,7 @@
         return;
       }
 
-      const explorationStep = chooseExplorationStep(agent);
+      const explorationStep = chooseExplorationStep(agent, neighbors);
       if (explorationStep) {
         moveAgent(agent, explorationStep);
       }
