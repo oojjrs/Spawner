@@ -111,10 +111,6 @@
     .agent-item span { max-width: 100%; overflow: hidden; color: #dce4e2; font-size: 0.72rem; text-overflow: ellipsis; white-space: nowrap; }
     .agent-item small { color: #9aa7aa; font-size: 0.66rem; }
     .agent-item.is-selected { border-color: #d6b26baa; background: #d6b26b16; box-shadow: inset 0 0 0 1px #d6b26b44; }
-    .agent-detail { margin-top: 9px; padding-top: 9px; border-top: 1px solid #314044; color: #9aa7aa; font-size: 0.76rem; }
-    .agent-detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px 10px; margin-top: 7px; }
-    .agent-detail-grid span { display: flex; justify-content: space-between; gap: 6px; }
-    .agent-detail-grid strong { color: #e4e9ea; font-weight: 500; }
     .colony-panel, .evolution-panel {
       position: fixed;
       top: 18px;
@@ -334,7 +330,6 @@
     <aside class="agent-panel" aria-label="생명체 목록">
       <h2>생명체 <span id="agent-list-count">1</span></h2>
       <div class="agent-list" id="agent-list"></div>
-      <section class="agent-detail" id="agent-detail">개체를 선택하면 DNA를 표시합니다.</section>
     </aside>
     <aside class="colony-panel" id="colony-panel" aria-label="해처리" aria-hidden="true" inert>
       <div class="panel-header">
@@ -360,9 +355,6 @@
       </div>
       <p class="panel-note">아래 수치는 다음 탄생부터 적용됩니다.</p>
       <div class="factor-list">
-        <div class="factor"><span class="factor-label"><span class="factor-name">발걸음<button class="factor-help" type="button" aria-label="발걸음 설명" data-tooltip="높을수록 한 칸을 더 빨리 이동해 탐색과 운반 주기가 짧아집니다.">?</button></span><output data-output="speed">1.0칸/초</output></span><div class="factor-controls"><button type="button" data-profile-adjust="speed" data-direction="-1">−</button><input data-profile="speed" type="range" min="0.5" max="3" step="0.25" value="1" hidden><button type="button" data-profile-adjust="speed" data-direction="1">+</button></div></div>
-        <div class="factor"><span class="factor-label"><span class="factor-name">운반력<button class="factor-help" type="button" aria-label="운반력 설명" data-tooltip="먹이를 발견했을 때 한 번에 군락으로 가져오는 양입니다.">?</button></span><output data-output="capacity">1</output></span><div class="factor-controls"><button type="button" data-profile-adjust="capacity" data-direction="-1">−</button><input data-profile="capacity" type="range" min="1" max="5" step="1" value="1" hidden><button type="button" data-profile-adjust="capacity" data-direction="1">+</button></div></div>
-        <div class="factor"><span class="factor-label"><span class="factor-name">시야<button class="factor-help" type="button" aria-label="시야 설명" data-tooltip="주변 먹이의 정확한 위치를 알아차릴 수 있는 반경입니다.">?</button></span><output data-output="vision">1칸</output></span><div class="factor-controls"><button type="button" data-profile-adjust="vision" data-direction="-1">−</button><input data-profile="vision" type="range" min="1" max="8" step="1" value="1" hidden><button type="button" data-profile-adjust="vision" data-direction="1">+</button></div></div>
         <div class="factor"><span class="factor-label"><span class="factor-name">직진성<button class="factor-help" type="button" aria-label="직진성 설명" data-tooltip="높을수록 현재 방향을 유지합니다. 오래 직진하면 방향 피로로 확률이 낮아집니다.">?</button></span><output data-output="direction">65%</output></span><div class="factor-controls"><button type="button" data-profile-adjust="direction" data-direction="-1">−</button><input data-profile="direction" type="range" min="0.05" max="0.95" step="0.1" value="0.65" hidden><button type="button" data-profile-adjust="direction" data-direction="1">+</button></div></div>
         <div class="factor"><span class="factor-label"><span class="factor-name">개척성<button class="factor-help" type="button" aria-label="개척성 설명" data-tooltip="높을수록 이미 지나간 길보다 아직 방문하지 않은 칸을 우선합니다.">?</button></span><output data-output="novelty">70%</output></span><div class="factor-controls"><button type="button" data-profile-adjust="novelty" data-direction="-1">−</button><input data-profile="novelty" type="range" min="0" max="1" step="0.1" value="0.7" hidden><button type="button" data-profile-adjust="novelty" data-direction="1">+</button></div></div>
         <div class="factor"><span class="factor-label"><span class="factor-name">풍요 선호<button class="factor-help" type="button" aria-label="풍요 선호 설명" data-tooltip="높을수록 가까운 먹이보다 많이 남은 먹이를 우선합니다.">?</button></span><output data-output="richness">45%</output></span><div class="factor-controls"><button type="button" data-profile-adjust="richness" data-direction="-1">−</button><input data-profile="richness" type="range" min="0.05" max="0.95" step="0.1" value="0.45" hidden><button type="button" data-profile-adjust="richness" data-direction="1">+</button></div></div>
@@ -399,7 +391,6 @@
     const colonyOpenButton = document.getElementById("colony-open-button");
     const agentList = document.getElementById("agent-list");
     const agentListCount = document.getElementById("agent-list-count");
-    const agentDetail = document.getElementById("agent-detail");
     const colonyPanel = document.getElementById("colony-panel");
     const evolutionPanel = document.getElementById("evolution-panel");
     const evolutionOpenButton = document.getElementById("evolution-open-button");
@@ -539,6 +530,9 @@
       shallow: "#0b1e29",
       deep: "#06131d"
     };
+    const AGENT_SPEED = 1;
+    const AGENT_CAPACITY = 1;
+    const AGENT_VISION = 1;
     const FOOD_REGION_SIZE = 18;
     const FOOD_PER_CELL = 50;
     const FOOD_SCENT_RADIUS = 6;
@@ -570,9 +564,6 @@
       roads: new Map(),
       sharedTrails: new Map(),
       draftProfile: {
-        speed: 1,
-        capacity: 1,
-        vision: 1,
         direction: 0.65,
         novelty: 0.7,
         richness: 0.45,
@@ -903,7 +894,7 @@
     }
 
     function visibleFoodFor(agent) {
-      const radius = agent.profile.vision;
+      const radius = AGENT_VISION;
       ensureFoodAround(agent.x, agent.y, radius);
       let best = null;
       let bestScore = -Infinity;
@@ -956,7 +947,7 @@
       agent.renderFromX = rendered.x;
       agent.renderFromY = rendered.y;
       agent.moveStartedAt = state.simSeconds;
-      agent.moveDuration = 1 / Math.max(0.01, agent.profile.speed);
+      agent.moveDuration = 1 / AGENT_SPEED;
       agent.x = destination.x;
       agent.y = destination.y;
       agent.stepCount += 1;
@@ -1360,7 +1351,7 @@
         agent.mode === "commute" && agent.rememberedRoute;
       const followedRoad = agent.sharedTrailFoodKey === agent.x + "," + agent.y ?
         state.roads.get(agent.sharedTrailFoodKey) : null;
-      const amount = Math.min(agent.profile.capacity, foodCell.amount);
+      const amount = Math.min(AGENT_CAPACITY, foodCell.amount);
       foodCell.amount -= amount;
       agent.carrying = amount;
       agent.sharedTrailFoodKey = null;
@@ -1503,7 +1494,7 @@
       for (const agent of agentsAtFrameStart) {
         agent.moveBudget = Math.min(
           1,
-          agent.moveBudget + elapsed * agent.profile.speed
+          agent.moveBudget + elapsed * AGENT_SPEED
         );
         if (agent.moveBudget >= 1) {
           agent.moveBudget -= 1;
@@ -1847,7 +1838,7 @@
           ctx.strokeStyle = "rgba(117, 196, 182, 0.075)";
           ctx.lineWidth = Math.max(1, cell * 0.025);
           ctx.beginPath();
-          ctx.arc(centerX, centerY, agent.profile.vision * cell, 0, Math.PI * 2);
+          ctx.arc(centerX, centerY, AGENT_VISION * cell, 0, Math.PI * 2);
           ctx.fill();
           ctx.stroke();
           ctx.restore();
@@ -2158,17 +2149,8 @@
     });
 
     function profileOutputText(name, value) {
-      if (name === "speed") {
-        return value.toFixed(1) + "칸/초";
-      }
-      if (name === "vision") {
-        return Math.round(value) + "칸";
-      }
       if (name === "memoryTrips") {
         return Math.round(value) + "회";
-      }
-      if (name === "capacity") {
-        return Math.round(value).toString();
       }
       return Math.round(value * 100) + "%";
     }
@@ -2282,11 +2264,8 @@
       const selected = state.agents.find((agent) => agent.id === state.selectedAgentId);
       if (!selected) {
         state.selectedAgentId = null;
-        agentDetail.textContent = "개체를 선택하면 DNA를 표시합니다.";
         return;
       }
-      const p = selected.profile;
-      agentDetail.innerHTML = "<strong>개체 #" + selected.id + " · " + (AGENT_MODE_LABELS[selected.mode] || selected.mode) + "</strong><div class=\"agent-detail-grid\"><span>운반 <strong>" + selected.carrying + "</strong></span><span>발걸음 <strong>" + profileOutputText("speed", p.speed) + "</strong></span><span>운반력 <strong>" + p.capacity + "</strong></span><span>시야 <strong>" + p.vision + "칸</strong></span><span>직진성 <strong>" + profileOutputText("direction", p.direction) + "</strong></span><span>개척성 <strong>" + profileOutputText("novelty", p.novelty) + "</strong></span><span>풍요 선호 <strong>" + profileOutputText("richness", p.richness) + "</strong></span><span>기억력 <strong>" + p.memoryTrips + "회</strong></span><span>길눈 <strong>" + profileOutputText("routeSense", p.routeSense) + "</strong></span></div>";
     }
     document.querySelectorAll("[data-profile-adjust]").forEach((button) => {
       button.addEventListener("click", () => {
