@@ -139,21 +139,34 @@
     .colony-menu > .panel-header { margin-bottom: 12px; }
     .evolution-panel { width: 240px; padding: 12px; }
     .evolution-panel .panel-header h2 { font-size: 0.9rem; }
-    .evolution-panel .factor-list { gap: 8px; }
-    .evolution-panel .factor-controls button { height: 28px; }
     .evolution-traits { display: grid; gap: 6px; margin-bottom: 14px; }
-    .evolution-traits button { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 9px; border: 1px solid var(--line); border-radius: 6px; background: #ffffff08; color: var(--ink); text-align: left; cursor: pointer; }
+    .evolution-trait { display: flex; align-items: center; gap: 8px; }
+    .evolution-traits [data-evolution] { flex: 1; min-width: 0; display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 9px; border: 1px solid var(--line); border-radius: 6px; background: #ffffff08; color: var(--ink); text-align: left; cursor: pointer; }
     .evolution-traits small { display: block; margin-top: 4px; color: var(--muted); }
-    .evolution-traits button[aria-pressed="true"] { border-color: var(--accent); background: #75c4b618; }
+    .evolution-traits [data-evolution][aria-pressed="true"] { border-color: var(--accent); background: #75c4b618; }
     .evolution-traits strong { color: var(--accent); }
-    .evolution-traits button:disabled { opacity: 0.5; cursor: default; }
+    .evolution-traits [data-evolution]:disabled { opacity: 0.5; cursor: default; }
+    .evolution-stat-row { display: flex; align-items: center; gap: 8px; margin: 2px 0 12px; }
+    .evolution-stat-row .evolution-stat { flex: 1; min-width: 0; margin: 0; }
+    .help-button { display: inline-grid; flex: none; place-items: center; width: 22px; height: 22px; padding: 0; border: 1px solid #75c4b67a; border-radius: 50%; background: transparent; color: var(--accent); font: inherit; font-size: 0.75rem; cursor: help; }
+    .help-button:hover, .help-button:focus-visible { border-color: var(--accent); background: #75c4b618; outline: 1px solid var(--accent); outline-offset: 2px; }
+    .help-tooltip { position: fixed; z-index: 20; width: min(280px, calc(100vw - 20px)); padding: 12px; border: 1px solid #75c4b64a; border-radius: 8px; background: #101719fa; box-shadow: 0 8px 24px #0009; color: #d7e0df; font-size: 0.76rem; line-height: 1.65; white-space: pre-line; overflow-wrap: anywhere; pointer-events: none; }
+    .help-tooltip[hidden], .agent-details[hidden] { display: none; }
+    .agent-details { position: sticky; top: 0; z-index: 1; background: var(--panel); margin-bottom: 18px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+    .agent-details h2 { overflow-wrap: anywhere; }
+    .agent-details label { display: block; margin-bottom: 6px; color: var(--muted); font-size: 0.76rem; }
+    .agent-name-controls { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px; }
+    .agent-name-controls input { width: 100%; min-width: 0; padding: 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink); font: inherit; font-size: 0.8rem; }
+    .agent-name-controls button { padding: 0 10px; border: 1px solid #75c4b65c; border-radius: 6px; background: #75c4b612; color: var(--ink); font: inherit; font-size: 0.76rem; cursor: pointer; }
+    .agent-name-controls input:focus-visible, .agent-name-controls button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .agent-name-status { min-height: 1em; margin: 6px 0 0; color: var(--muted); font-size: 0.72rem; }
+    .agent-item strong { max-width: 100%; overflow: hidden; font-size: 0.75rem; text-overflow: ellipsis; white-space: nowrap; }
     .evolution-stat { width: 100%; font-family: inherit; cursor: pointer; }
     .evolution-stat:hover, .evolution-stat[aria-expanded="true"] { border-color: var(--accent); background: #75c4b618; }
     .evolution-stat:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
     .panel-header,
-    .colony-stats,
-    .factor-label {
+    .colony-stats {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -227,66 +240,6 @@
       background: linear-gradient(90deg, #8b754c, var(--amber));
       transition: width 160ms ease;
     }
-    .factor-list {
-      display: grid;
-      gap: 11px;
-    }
-
-    .factor {
-      display: grid;
-      gap: 5px;
-    }
-
-    .factor-label {
-      color: var(--muted);
-      font-size: 0.82rem;
-    }
-
-    .factor-label output {
-      color: var(--ink);
-      font-variant-numeric: tabular-nums;
-    }
-    .factor-name { display: inline-flex; align-items: center; gap: 5px; }
-    .factor-help {
-      position: relative;
-      display: inline-grid;
-      place-items: center;
-      width: 16px;
-      height: 16px;
-      padding: 0;
-      border: 1px solid #75c4b67a;
-      border-radius: 50%;
-      background: transparent;
-      color: var(--accent);
-      font-size: 0.65rem;
-      line-height: 1;
-      cursor: help;
-    }
-    .factor-tooltip {
-      position: fixed;
-      z-index: 20;
-      width: min(218px, calc(100vw - 20px));
-      padding: 8px 10px;
-      border: 1px solid #75c4b64a;
-      border-radius: 7px;
-      background: #101719f5;
-      box-shadow: 0 8px 24px #0009;
-      color: #d7e0df;
-      font-size: 0.72rem;
-      line-height: 1.45;
-      overflow-wrap: anywhere;
-      pointer-events: none;
-    }
-    .factor-help:focus-visible { outline: 1px solid var(--accent); outline-offset: 2px; }
-
-    .factor-controls { display: grid; grid-template-columns: 40px 40px; justify-content: end; gap: 6px; align-items: center; }
-    .factor-controls input[hidden] { display: none; }
-    .factor-controls button { height: 34px; border: 1px solid var(--line); border-radius: 6px; background: #ffffff0a; color: var(--ink); font-size: 1.05rem; cursor: pointer; }
-    .factor-controls button:disabled { opacity: 0.28; cursor: default; }
-    .factor input {
-      width: 100%;
-      accent-color: var(--accent);
-    }
   </style>
 </head>
 <body>
@@ -328,22 +281,33 @@
       </ul>
     </aside>
     <button class="colony-focus-button controls-guide-toggle" id="controls-guide-toggle" type="button" aria-controls="controls-guide" aria-expanded="true" hidden>조작 안내</button>
-    <aside class="agent-panel" id="agent-panel" aria-label="생명체 및 군락">
+    <aside class="agent-panel" id="agent-panel" aria-label="생명체 및 둥지">
       <div class="agent-panel-resize" id="agent-panel-resize" role="separator" tabindex="0" aria-label="오른쪽 패널 너비" aria-orientation="vertical" aria-controls="agent-panel"></div>
       <div class="panel-tabs" role="tablist" aria-label="정보 패널">
         <button id="agent-tab" type="button" role="tab" aria-selected="true" aria-controls="agent-tab-panel">생명체</button>
-        <button id="colony-tab" type="button" role="tab" aria-selected="false" aria-controls="colony-panel" tabindex="-1">군락</button>
+        <button id="colony-tab" type="button" role="tab" aria-selected="false" aria-controls="colony-panel" tabindex="-1">둥지</button>
       </div>
       <section class="agent-panel-scroll" id="agent-tab-panel" role="tabpanel" aria-labelledby="agent-tab" tabindex="0">
+        <section class="agent-details" id="agent-details" aria-label="선택한 생명체" hidden>
+          <h2 id="selected-agent-name"></h2>
+          <form id="agent-name-form">
+            <label for="agent-name-input">이름</label>
+            <div class="agent-name-controls">
+              <input id="agent-name-input" type="text" maxlength="24" required autocomplete="off">
+              <button type="submit">변경</button>
+            </div>
+            <p class="agent-name-status" id="agent-name-status" role="status"></p>
+          </form>
+        </section>
         <h2>생명체 <span id="agent-list-count">1</span></h2>
         <div class="agent-list" id="agent-list"></div>
       </section>
       <section class="agent-panel-scroll colony-panel" id="colony-panel" role="tabpanel" aria-labelledby="colony-tab" tabindex="0" hidden>
-      <section class="colony-browser" id="colony-browser" aria-label="군락 목록">
-        <input class="colony-search" id="colony-search" type="search" placeholder="군락 이름·번호 검색" aria-label="군락 이름 또는 번호 검색">
+      <section class="colony-browser" id="colony-browser" aria-label="둥지 목록">
+        <input class="colony-search" id="colony-search" type="search" placeholder="둥지 이름·번호 검색" aria-label="둥지 이름 또는 번호 검색">
         <span class="colony-results" id="colony-results" role="status"></span>
         <div class="colony-list" id="colony-list"></div>
-        <nav class="colony-pages" aria-label="군락 목록 페이지">
+        <nav class="colony-pages" aria-label="둥지 목록 페이지">
           <button class="colony-focus-button" id="colony-previous" type="button">이전</button>
           <span id="colony-page"></span>
           <button class="colony-focus-button" id="colony-next" type="button">다음</button>
@@ -353,10 +317,10 @@
     </aside>
   </div>
 
-  <aside class="colony-menu" id="colony-menu" aria-label="군락 메뉴" hidden>
+  <aside class="colony-menu" id="colony-menu" aria-label="둥지 메뉴" hidden>
     <div class="panel-header">
-      <h2>해처리</h2>
-      <button class="panel-close" id="colony-menu-close" type="button" aria-label="군락 메뉴 닫기">×</button>
+      <h2>둥지</h2>
+      <button class="panel-close" id="colony-menu-close" type="button" aria-label="둥지 메뉴 닫기">×</button>
     </div>
       <div class="colony-stats">
         <span class="food-progress-stat">먹이 <strong id="stored-food">0</strong> / <strong id="birth-cost">5</strong></span>
@@ -365,32 +329,37 @@
       <div class="food-progress-track" aria-label="다음 생명체 탄생 먹이 진행도">
         <i class="food-progress-fill" id="food-progress-fill"></i>
       </div>
+      <div class="evolution-stat-row">
       <button class="evolution-stat" id="evolution-open-button" type="button" aria-controls="evolution-panel" aria-expanded="false">
         <span>진화 포인트</span>
         <strong><span id="evolution-points">0</span>점 <span aria-hidden="true" style="margin-left: 8px;">›</span></strong>
       </button>
+      <button class="help-button" type="button" aria-label="진화 포인트 설명" data-help="개체가 새로 태어날 때마다 진화 포인트가 1점 늘어납니다.&#10;처음 주어진 개체의 1점을 포함해 1점으로 시작합니다.&#10;현재 세 진화는 적용과 해제에 포인트를 쓰지 않습니다.">?</button>
+      </div>
     </aside>
       <section class="evolution-panel" id="evolution-panel" aria-label="진화" hidden>
       <div class="panel-header">
         <h2>진화</h2>
         <button class="panel-close" id="evolution-close" type="button" aria-label="진화 닫기">×</button>
       </div>
-      <p class="panel-note">다음 탄생부터 적용 · ON/OFF 각각 5점</p>
+      <p class="panel-note">다음 탄생부터 적용 · 0포인트</p>
       <div class="evolution-traits">
-        <button type="button" data-evolution="antenna" aria-pressed="false"><span>새싹 파라볼라<small>시야 1 → 3칸</small></span><strong>OFF</strong></button>
-        <button type="button" data-evolution="arms" aria-pressed="false"><span>긴팔<small>운반 1 → 3개</small></span><strong>OFF</strong></button>
-        <button type="button" data-evolution="feet" aria-pressed="false"><span>큰발<small>이동 속도 1.5배</small></span><strong>OFF</strong></button>
-      </div>
-      <div class="factor-list">
-        <div class="factor"><span class="factor-label"><span class="factor-name">직진성<button class="factor-help" type="button" aria-label="직진성 설명" data-tooltip="높을수록 현재 방향을 유지합니다. 오래 직진하면 방향 피로로 확률이 낮아집니다.">?</button></span><output data-output="direction">65%</output></span><div class="factor-controls"><button type="button" data-profile-adjust="direction" data-direction="-1">−</button><input data-profile="direction" type="range" min="0.05" max="0.95" step="0.1" value="0.65" hidden><button type="button" data-profile-adjust="direction" data-direction="1">+</button></div></div>
-        <div class="factor"><span class="factor-label"><span class="factor-name">개척성<button class="factor-help" type="button" aria-label="개척성 설명" data-tooltip="높을수록 이미 지나간 길보다 아직 방문하지 않은 칸을 우선합니다.">?</button></span><output data-output="novelty">70%</output></span><div class="factor-controls"><button type="button" data-profile-adjust="novelty" data-direction="-1">−</button><input data-profile="novelty" type="range" min="0" max="1" step="0.1" value="0.7" hidden><button type="button" data-profile-adjust="novelty" data-direction="1">+</button></div></div>
-        <div class="factor"><span class="factor-label"><span class="factor-name">풍요 선호<button class="factor-help" type="button" aria-label="풍요 선호 설명" data-tooltip="높을수록 가까운 먹이보다 많이 남은 먹이를 우선합니다.">?</button></span><output data-output="richness">45%</output></span><div class="factor-controls"><button type="button" data-profile-adjust="richness" data-direction="-1">−</button><input data-profile="richness" type="range" min="0.05" max="0.95" step="0.1" value="0.45" hidden><button type="button" data-profile-adjust="richness" data-direction="1">+</button></div></div>
-        <div class="factor"><span class="factor-label"><span class="factor-name">기억력<button class="factor-help" type="button" aria-label="기억력 설명" data-tooltip="발견한 먹이 위치와 왕복 경로를 기억해 다시 이용하는 횟수입니다.">?</button></span><output data-output="memoryTrips">8회</output></span><div class="factor-controls"><button type="button" data-profile-adjust="memoryTrips" data-direction="-1">−</button><input data-profile="memoryTrips" type="range" min="2" max="20" step="2" value="8" hidden><button type="button" data-profile-adjust="memoryTrips" data-direction="1">+</button></div></div>
-        <div class="factor"><span class="factor-label"><span class="factor-name">길눈<button class="factor-help" type="button" aria-label="길눈 설명" data-tooltip="이미 확인한 칸 안에서 기존 왕복길보다 짧은 경로를 찾아내는 능력입니다.">?</button></span><output data-output="routeSense">55%</output></span><div class="factor-controls"><button type="button" data-profile-adjust="routeSense" data-direction="-1">−</button><input data-profile="routeSense" type="range" min="0.05" max="0.95" step="0.1" value="0.55" hidden><button type="button" data-profile-adjust="routeSense" data-direction="1">+</button></div></div>
+        <div class="evolution-trait">
+          <button type="button" data-evolution="antenna" aria-pressed="false"><span><span class="evolution-name">시야 확장</span><small>시야 1 → 3칸</small></span><strong>미적용</strong></button>
+          <button class="help-button" type="button" aria-label="시야 확장 설명" data-help="먹이를 발견하는 시야가 반경 1칸에서 3칸으로 넓어집니다.&#10;새싹 중앙에 감각 기관이 자라 더 멀리 있는 먹이를 찾습니다.&#10;다음에 태어나는 개체부터 적용되며, 기존 개체는 변하지 않습니다.">?</button>
+        </div>
+        <div class="evolution-trait">
+          <button type="button" data-evolution="arms" aria-pressed="false"><span><span class="evolution-name">운반 강화</span><small>운반 1 → 3개</small></span><strong>미적용</strong></button>
+          <button class="help-button" type="button" aria-label="운반 강화 설명" data-help="한 번에 가져오는 먹이량이 1개에서 최대 3개로 늘어납니다.&#10;짧은 잎으로 쟁반을 높이 들며, 먹이가 부족하면 남은 만큼만 가져옵니다.&#10;다음에 태어나는 개체부터 적용되며, 기존 개체는 변하지 않습니다.">?</button>
+        </div>
+        <div class="evolution-trait">
+          <button type="button" data-evolution="feet" aria-pressed="false"><span><span class="evolution-name">이동 가속</span><small>이동 속도 1.5배</small></span><strong>미적용</strong></button>
+          <button class="help-button" type="button" aria-label="이동 가속 설명" data-help="이동 속도가 초당 1칸에서 1.5칸으로 빨라집니다.&#10;발이 커지고 낮게 흔들리는 걸음으로 이동합니다.&#10;다음에 태어나는 개체부터 적용되며, 기존 개체는 변하지 않습니다.">?</button>
+        </div>
       </div>
       </section>
 
-  <div class="factor-tooltip" id="factor-tooltip" role="tooltip" hidden></div>
+  <div class="help-tooltip" id="help-tooltip" role="tooltip" hidden></div>
 
   <script>
     const canvas = document.getElementById("world");
@@ -421,51 +390,61 @@
     const agentTabPanel = document.getElementById("agent-tab-panel");
     const agentList = document.getElementById("agent-list");
     const agentListCount = document.getElementById("agent-list-count");
+    const agentDetails = document.getElementById("agent-details");
+    const selectedAgentName = document.getElementById("selected-agent-name");
+    const agentNameForm = document.getElementById("agent-name-form");
+    const agentNameInput = document.getElementById("agent-name-input");
+    const agentNameStatus = document.getElementById("agent-name-status");
+    let editedAgentId = null;
     const colonyPanel = document.getElementById("colony-panel");
     const evolutionPanel = document.getElementById("evolution-panel");
     const evolutionOpenButton = document.getElementById("evolution-open-button");
     const evolutionClose = document.getElementById("evolution-close");
-    const factorTooltip = document.getElementById("factor-tooltip");
-    let factorTooltipTarget = null;
+    const helpTooltip = document.getElementById("help-tooltip");
+    let helpTooltipTarget = null;
 
-    function hideFactorTooltip() {
-      if (factorTooltipTarget) factorTooltipTarget.removeAttribute("aria-describedby");
-      factorTooltipTarget = null;
-      factorTooltip.hidden = true;
+    function hideHelpTooltip() {
+      if (helpTooltipTarget) helpTooltipTarget.removeAttribute("aria-describedby");
+      helpTooltipTarget = null;
+      helpTooltip.hidden = true;
     }
 
-    function positionFactorTooltip() {
-      if (!factorTooltipTarget) return;
-      const rect = factorTooltipTarget.getBoundingClientRect();
-      const panelRect = evolutionPanel.getBoundingClientRect();
-      if (rect.bottom <= panelRect.top || rect.top >= panelRect.bottom) {
-        hideFactorTooltip();
+    function positionHelpTooltip() {
+      if (!helpTooltipTarget) return;
+      const rect = helpTooltipTarget.getBoundingClientRect();
+      const panel = helpTooltipTarget.closest(".colony-menu, .evolution-panel");
+      const panelRect = panel.getBoundingClientRect();
+      if (!helpTooltipTarget.getClientRects().length || rect.bottom <= panelRect.top || rect.top >= panelRect.bottom) {
+        hideHelpTooltip();
         return;
       }
-      factorTooltip.style.left = clamp(rect.left, 10,
-        Math.max(10, window.innerWidth - factorTooltip.offsetWidth - 10)) + "px";
-      const below = rect.bottom + 7;
-      factorTooltip.style.top = (below + factorTooltip.offsetHeight <= window.innerHeight - 10
-        ? below : Math.max(10, rect.top - factorTooltip.offsetHeight - 7)) + "px";
+      const width = helpTooltip.offsetWidth;
+      const left = rect.right + 8 + width <= window.innerWidth - 10 ? rect.right + 8 : rect.left - width - 8;
+      helpTooltip.style.left = clamp(left, 10, Math.max(10, window.innerWidth - width - 10)) + "px";
+      helpTooltip.style.top = clamp(rect.top, 10, Math.max(10, window.innerHeight - helpTooltip.offsetHeight - 10)) + "px";
     }
 
-    function showFactorTooltip(button) {
-      hideFactorTooltip();
-      factorTooltipTarget = button;
-      factorTooltip.textContent = button.dataset.tooltip;
-      factorTooltip.hidden = false;
-      button.setAttribute("aria-describedby", "factor-tooltip");
-      positionFactorTooltip();
+    function showHelpTooltip(button) {
+      hideHelpTooltip();
+      helpTooltipTarget = button;
+      helpTooltip.textContent = button.dataset.help;
+      helpTooltip.hidden = false;
+      button.setAttribute("aria-describedby", "help-tooltip");
+      positionHelpTooltip();
     }
 
-    document.querySelectorAll(".factor-help").forEach((button) => {
-      button.addEventListener("pointerenter", () => showFactorTooltip(button));
-      button.addEventListener("pointerleave", hideFactorTooltip);
-      button.addEventListener("focus", () => showFactorTooltip(button));
-      button.addEventListener("blur", hideFactorTooltip);
+    document.querySelectorAll("[data-help]").forEach((button) => {
+      button.addEventListener("pointerenter", () => showHelpTooltip(button));
+      button.addEventListener("pointerleave", () => {
+        if (document.activeElement !== button) hideHelpTooltip();
+      });
+      button.addEventListener("focus", () => showHelpTooltip(button));
+      button.addEventListener("blur", hideHelpTooltip);
+      button.addEventListener("click", () => showHelpTooltip(button));
     });
-    evolutionPanel.addEventListener("scroll", hideFactorTooltip);
-
+    document.addEventListener("pointerdown", (event) => {
+      if (!event.target.closest("[data-help]")) hideHelpTooltip();
+    });
     const storedFoodOutput = document.getElementById("stored-food");
     const birthCostOutput = document.getElementById("birth-cost");
     const foodProgressFill = document.getElementById("food-progress-fill");
@@ -496,7 +475,7 @@
     };
     const colonyEntries = [{
       id: 1,
-      name: "군락 1",
+      name: "둥지 1",
       x: COLONY_ORIGIN.x,
       y: COLONY_ORIGIN.y,
       occupiedCells: new Set([
@@ -587,7 +566,9 @@
     const AGENT_SPEED = 1;
     const AGENT_CAPACITY = 1;
     const AGENT_VISION = 1;
-    const EVOLUTION_COST = 5;
+    const EVOLUTION_COST = 0;
+    const AGENT_NAME_PREFIXES = ["반짝이는", "느긋한", "씩씩한", "졸린", "수줍은", "용감한", "포근한", "명랑한", "작은", "날쌘", "조용한", "초록"];
+    const AGENT_NAME_SUFFIXES = ["콩", "새싹", "이슬", "도토리", "솔방울", "클로버", "보리", "완두", "모래", "구름", "나뭇잎", "민들레"];
     const evolutionSprites = new Map();
     for (let mask = 0; mask < 8; mask += 1) {
       for (let amount = 0; amount <= ((mask & 2) ? 3 : 1); amount += 1) {
@@ -935,6 +916,20 @@
         terrain === "lowMountain";
     }
 
+    function createAgentName() {
+      const prefix = AGENT_NAME_PREFIXES[Math.floor(Math.random() * AGENT_NAME_PREFIXES.length)];
+      const suffix = AGENT_NAME_SUFFIXES[Math.floor(Math.random() * AGENT_NAME_SUFFIXES.length)];
+      const base = prefix + " " + suffix;
+      const usedNames = new Set(state.agents.map((agent) => agent.name));
+      let name = base;
+      let number = state.nextAgentId;
+      while (usedNames.has(name)) {
+        name = base + " " + number;
+        number += 1;
+      }
+      return name;
+    }
+
     function spawnAgent(grantEvolutionPoint = true) {
       const position = chooseSpawnPosition();
       if (!position) {
@@ -942,6 +937,7 @@
       }
       const agent = {
         id: state.nextAgentId,
+        name: createAgentName(),
         x: position.x,
         y: position.y,
         profile: { ...state.draftProfile },
@@ -1747,6 +1743,7 @@
 
     function selectObject(kind, target) {
       state.selection = target ? { kind, target } : null;
+      if (kind === "agent" && target) selectPanelTab(agentTab);
       for (const item of colonyList.children) {
         if (item.dataset.colonyId) {
           item.setAttribute("aria-current", String(kind === "colony" &&
@@ -1873,7 +1870,7 @@
               ctx.fillRect(screen.x + barInset, barY, barWidth * remainingRatio, barHeight);
               if (cell >= 24) {
                 const label = Math.ceil(foodCell.amount).toString();
-                const labelX = screen.x + barInset + barWidth + labelGap;
+                const labelX = screen.x + barInset + barWidth * remainingRatio + labelGap;
                 ctx.fillStyle = "rgba(255, 244, 214, 0.98)";
                 ctx.strokeStyle = "rgba(13, 21, 20, 0.95)";
                 ctx.lineWidth = Math.max(2, Math.min(3, cell * 0.04));
@@ -1936,16 +1933,6 @@
         ctx.drawImage(colonySprite, topLeft.x, topLeft.y, size, size);
       }
 
-      const inset = Math.max(2, Math.floor(cell * 0.08));
-      const gaugeHeight = Math.max(3, Math.floor(cell * 0.1));
-      const gaugeWidth = cell - inset * 2;
-      const gaugeX = center.x - gaugeWidth / 2;
-      const gaugeY = topLeft.y - gaugeHeight - inset;
-      const remaining = Math.max(0, COLONY_LIFETIME - state.simSeconds);
-      ctx.fillStyle = "rgba(34, 47, 50, 0.72)";
-      ctx.fillRect(gaugeX, gaugeY, gaugeWidth, gaugeHeight);
-      ctx.fillStyle = "rgba(214, 178, 107, 0.78)";
-      ctx.fillRect(gaugeX, gaugeY, gaugeWidth * remaining / COLONY_LIFETIME, gaugeHeight);
       ctx.restore();
     }
 
@@ -1993,15 +1980,7 @@
           continue;
         }
 
-        const age = state.simSeconds - agent.bornAt;
-        const remainingRatio = clamp(
-          (STARTER_OBJECT_LIFETIME - age) / STARTER_OBJECT_LIFETIME,
-          0,
-          1
-        );
         const bob = Math.sin(now / 520 + agent.id) * cell * 0.015;
-        const gaugeInset = Math.max(2, cell * 0.14);
-        const gaugeHeight = Math.max(2, cell * 0.07);
 
         ctx.save();
         ctx.beginPath();
@@ -2025,21 +2004,6 @@
           Math.PI * 2
         );
         ctx.fill();
-        ctx.fillStyle = "rgba(27, 40, 42, 0.82)";
-        ctx.fillRect(
-          topLeft.x + gaugeInset,
-          topLeft.y - cell * 0.09,
-          cell - gaugeInset * 2,
-          gaugeHeight
-        );
-        ctx.fillStyle = "rgba(151, 211, 150, 0.88)";
-        ctx.fillRect(
-          topLeft.x + gaugeInset,
-          topLeft.y - cell * 0.09,
-          (cell - gaugeInset * 2) * remainingRatio,
-          gaugeHeight
-        );
-
         const sprite = agentSprite(agent);
         if (sprite.complete && sprite.naturalWidth > 0) {
           const spriteHeight = cell * 0.98;
@@ -2108,7 +2072,7 @@
       drawColony(now);
       drawAgents(now);
       positionColonyMenus();
-      positionFactorTooltip();
+      positionHelpTooltip();
 
       requestAnimationFrame(render);
     }
@@ -2229,7 +2193,6 @@
       colonyTab.tabIndex = showColony ? 0 : -1;
       agentTabPanel.hidden = showColony;
       colonyPanel.hidden = !showColony;
-      hideFactorTooltip();
     }
 
     function positionColonyMenus() {
@@ -2261,16 +2224,16 @@
     }
 
     function closeEvolutionPanel() {
-      hideFactorTooltip();
+      hideHelpTooltip();
       evolutionPanel.hidden = true;
       evolutionOpenButton.setAttribute("aria-expanded", "false");
     }
 
     evolutionOpenButton.addEventListener("click", () => {
+      hideHelpTooltip();
       evolutionPanel.hidden = !evolutionPanel.hidden;
       evolutionOpenButton.setAttribute("aria-expanded", String(!evolutionPanel.hidden));
       positionColonyMenus();
-      hideFactorTooltip();
     });
     evolutionClose.addEventListener("click", () => {
       closeEvolutionPanel();
@@ -2309,7 +2272,7 @@
       if (!matches.length) {
         const empty = document.createElement("p");
         empty.className = "colony-empty";
-        empty.textContent = query ? "검색 결과가 없습니다." : "군락이 없습니다.";
+        empty.textContent = query ? "검색 결과가 없습니다." : "둥지가 없습니다.";
         fragment.append(empty);
       }
       colonyList.replaceChildren(fragment);
@@ -2364,7 +2327,13 @@
       });
     });
     document.addEventListener("keydown", (event) => {
-      if (event.key !== "Escape" || colonyMenu.hidden) return;
+      if (event.key !== "Escape") return;
+      if (!helpTooltip.hidden) {
+        hideHelpTooltip();
+        event.preventDefault();
+        return;
+      }
+      if (colonyMenu.hidden) return;
       if (!evolutionPanel.hidden) {
         closeEvolutionPanel();
         evolutionOpenButton.focus();
@@ -2384,46 +2353,41 @@
       });
     });
 
-    function profileOutputText(name, value) {
-      if (name === "memoryTrips") {
-        return Math.round(value) + "회";
-      }
-      return Math.round(value * 100) + "%";
-    }
-
-    document.querySelectorAll("[data-profile]").forEach((input) => {
-      input.addEventListener("input", () => {
-        const name = input.dataset.profile;
-        const currentValue = state.draftProfile[name];
-        const requestedValue = Number(input.value);
-        const step = Number(input.step);
-        const requestedSteps = Math.round(
-          Math.abs(requestedValue - currentValue) / step
-        );
-        const appliedSteps = Math.min(
-          requestedSteps,
-          state.evolutionPoints
-        );
-        if (appliedSteps <= 0) {
-          input.value = currentValue.toString();
-          return;
-        }
-        const direction = Math.sign(requestedValue - currentValue);
-        const appliedValue = Number(
-          (currentValue + direction * appliedSteps * step).toFixed(4)
-        );
-        state.evolutionPoints -= appliedSteps;
-        state.draftProfile[name] = appliedValue;
-        input.value = appliedValue.toString();
-        const output = document.querySelector(
-          '[data-output="' + name + '"]'
-        );
-        if (output) {
-          output.textContent = profileOutputText(name, appliedValue);
-        }
-        updateColonyPanel();
-      });
+    agentNameInput.addEventListener("input", () => {
+      agentNameInput.setCustomValidity("");
+      agentNameStatus.textContent = "";
     });
+    agentNameForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const agent = state.selection && state.selection.kind === "agent" ? state.selection.target : null;
+      if (!agent || !state.agents.includes(agent)) return;
+      const name = agentNameInput.value.trim();
+      if (!name) {
+        agentNameInput.setCustomValidity("이름을 입력해 주세요.");
+        agentNameInput.reportValidity();
+        return;
+      }
+      agent.name = name;
+      agentNameInput.value = name;
+      agentNameStatus.textContent = "이름을 변경했습니다.";
+      updateAgentList();
+    });
+
+    function updateAgentDetails() {
+      const agent = state.selection && state.selection.kind === "agent" ? state.selection.target : null;
+      agentDetails.hidden = !agent;
+      if (!agent) {
+        editedAgentId = null;
+        return;
+      }
+      selectedAgentName.textContent = agent.name;
+      if (editedAgentId !== agent.id) {
+        agentNameInput.value = agent.name;
+        agentNameInput.setCustomValidity("");
+        agentNameStatus.textContent = "";
+        editedAgentId = agent.id;
+      }
+    }
 
     const AGENT_MODE_LABELS = {
       search: "탐색", approach: "먹이 접근", harvest: "채집",
@@ -2447,6 +2411,7 @@
     let renderedAgentListSignature = "";
 
     function updateAgentList() {
+      updateAgentDetails();
       agentListCount.textContent = state.agents.length.toString();
       const signature = state.agents.map((agent) => agent.id).join(",");
       if (signature !== renderedAgentListSignature) {
@@ -2458,13 +2423,11 @@
           button.dataset.agentId = agent.id.toString();
           button.innerHTML =
             "<img data-agent-avatar alt=\"\">" +
+            "<strong data-agent-name></strong>" +
             "<span data-agent-mode></span>" +
             "<small data-agent-carry></small>";
           const avatar = button.querySelector("[data-agent-avatar]");
           avatar.src = agentSprite(agent).src;
-          avatar.alt = "개체 #" + agent.id;
-          button.setAttribute("aria-label", "개체 #" + agent.id + " 선택");
-          button.title = "개체 #" + agent.id;
           button.addEventListener("click", () => {
             const current = state.agents.find(
               (candidate) => candidate.id === Number(button.dataset.agentId)
@@ -2493,6 +2456,10 @@
         const avatar = button.querySelector("[data-agent-avatar]");
         const sprite = agentSprite(agent);
         if (avatar.src !== sprite.src) avatar.src = sprite.src;
+        avatar.alt = agent.name;
+        button.setAttribute("aria-label", agent.name + " 선택");
+        button.title = agent.name;
+        button.querySelector("[data-agent-name]").textContent = agent.name;
         button.querySelector("[data-agent-mode]").textContent =
           AGENT_MODE_LABELS[agent.mode] || agent.mode;
         button.querySelector("[data-agent-carry]").textContent =
@@ -2501,16 +2468,6 @@
       }
 
     }
-    document.querySelectorAll("[data-profile-adjust]").forEach((button) => {
-      button.addEventListener("click", () => {
-        const name = button.dataset.profileAdjust;
-        const input = document.querySelector('[data-profile="' + name + '"]');
-        const nextValue = clamp(state.draftProfile[name] + Number(button.dataset.direction) * Number(input.step), Number(input.min), Number(input.max));
-        if (nextValue === state.draftProfile[name]) return;
-        input.value = nextValue.toString();
-        input.dispatchEvent(new Event("input"));
-      });
-    });
     function updateColonyPanel() {
       const requiredFood = birthCost();
       storedFoodOutput.textContent = Math.floor(state.colonyFood).toString();
@@ -2522,18 +2479,13 @@
       document.querySelectorAll("[data-evolution]").forEach((button) => {
         const enabled = state.draftEvolution[button.dataset.evolution];
         button.setAttribute("aria-pressed", String(enabled));
-        button.querySelector("strong").textContent = enabled ? "ON" : "OFF";
+        button.querySelector("strong").textContent = enabled ? "적용" : "미적용";
         button.disabled = state.evolutionPoints < EVOLUTION_COST;
-        button.title = (enabled ? "OFF" : "ON") + " · " + EVOLUTION_COST + "점";
+        const action = enabled ? "적용 해제" : "적용";
+        button.title = action + " · " + EVOLUTION_COST + "포인트";
+        button.setAttribute("aria-label", button.querySelector(".evolution-name").textContent + " " + action);
       });
       updateAgentList();
-      document.querySelectorAll("[data-profile]").forEach((input) => {
-        input.disabled = state.evolutionPoints <= 0;
-      });      document.querySelectorAll("[data-profile-adjust]").forEach((button) => {
-        const input = document.querySelector('[data-profile="' + button.dataset.profileAdjust + '"]');
-        const atLimit = Number(button.dataset.direction) < 0 ? Number(input.value) <= Number(input.min) : Number(input.value) >= Number(input.max);
-        button.disabled = state.evolutionPoints <= 0 || atLimit;
-      });
     }
 
     const agentPanel = document.getElementById("agent-panel");
