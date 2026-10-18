@@ -840,6 +840,7 @@
     const AGENT_SPEED = 1;
     const AGENT_CAPACITY = 1;
     const AGENT_VISION = 1;
+    const AGENT_HEIGHT = 0.35;
 
     const FOOD_REGION_SIZE = 18;
     const FOOD_PER_CELL = 50;
@@ -1232,7 +1233,7 @@
         context.fillRect(0, 0, sizeX, sizeY);
         entry.index = index;
       }
-      const thickness = Math.max(2, state.camera.zoom * 0.06);
+      const thickness = Math.max(2, (sprite === starterObjectSprite ? height : state.camera.zoom) * 0.06);
       ctx.save();
       ctx.globalAlpha = 1;
       ctx.filter = "none";
@@ -1466,6 +1467,7 @@
 
     function drawAgents(now) {
       const cell = state.camera.zoom;
+      const spriteHeight = cell * AGENT_HEIGHT;
 
       for (const agent of [...state.agents, ...state.rivals]) {
         const renderPosition = interpolatedAgentPosition(agent);
@@ -1476,7 +1478,7 @@
         const centerX = topLeft.x + cell / 2;
         const centerY = topLeft.y + cell / 2;
         const stride = Math.sin(renderPosition.progress * Math.PI);
-        const jumpOffset = stride * cell * (agent.attributes.feet ? 0.035 : 0.18);
+        const jumpOffset = stride * spriteHeight * (agent.attributes.feet ? 0.035 : 0.18);
 
         const isSelected = isSelectedObject("agent", agent);
         if (cell < 8) {
@@ -1494,7 +1496,8 @@
           continue;
         }
 
-        const bob = Math.sin(now / 520 + Number(String(agent.id).split(":").pop())) * cell * 0.015;
+        const bob = Math.sin(now / 520 + Number(String(agent.id).split(":").pop())) * spriteHeight * 0.015;
+        const spriteY = centerY - spriteHeight / 2 + bob - jumpOffset;
 
         ctx.save();
         ctx.beginPath();
@@ -1506,13 +1509,13 @@
         );
         ctx.clip();
         ctx.imageSmoothingEnabled = false;
-        ctx.fillStyle = "rgba(5, 9, 10, " + (0.18 - jumpOffset / cell * 0.45) + ")";
+        ctx.fillStyle = "rgba(5, 9, 10, " + (0.18 - jumpOffset / spriteHeight * 0.45) + ")";
         ctx.beginPath();
         ctx.ellipse(
           centerX,
-          topLeft.y + cell * 0.84,
-          cell * (0.18 - jumpOffset / cell * 0.2),
-          cell * 0.055,
+          centerY + spriteHeight * 0.44,
+          spriteHeight * (0.18 - jumpOffset / spriteHeight * 0.2),
+          spriteHeight * 0.055,
           0,
           0,
           Math.PI * 2
@@ -1520,10 +1523,8 @@
         ctx.fill();
         const sprite = agentSprite(agent);
         if (sprite.complete && sprite.naturalWidth > 0) {
-          const spriteHeight = cell * 0.98;
           const spriteWidth = spriteHeight * sprite.naturalWidth / sprite.naturalHeight;
           const spriteX = topLeft.x + (cell - spriteWidth) / 2;
-          const spriteY = topLeft.y + cell * 0.02 + bob - jumpOffset;
           const footY = spriteY + spriteHeight * 0.94;
           ctx.translate(centerX, footY);
           if (agent.attributes.feet) {
@@ -1538,10 +1539,13 @@
         }
         ctx.restore();
         if (agent.faction === "rival" || agent.health < agent.stats.health) {
+          const barWidth = spriteHeight * 0.5;
+          const barHeight = Math.max(2, spriteHeight * 0.035);
+          const barY = spriteY - spriteHeight * 0.08 - barHeight;
           ctx.fillStyle = "#101719";
-          ctx.fillRect(centerX - cell * 0.24, topLeft.y - cell * 0.06, cell * 0.48, Math.max(2, cell * 0.035));
+          ctx.fillRect(centerX - barWidth / 2, barY, barWidth, barHeight);
           ctx.fillStyle = agent.faction === "rival" ? "#e29b91" : "#75c4b6";
-          ctx.fillRect(centerX - cell * 0.24, topLeft.y - cell * 0.06, cell * 0.48 * Math.max(0, agent.health / agent.stats.health), Math.max(2, cell * 0.035));
+          ctx.fillRect(centerX - barWidth / 2, barY, barWidth * Math.max(0, agent.health / agent.stats.health), barHeight);
         }
       }
     }
@@ -1717,13 +1721,14 @@
         const food = foodCellAt(cellX, cellY);
         const agent = [...state.agents].reverse().find((candidate) => {
           const position = interpolatedAgentPosition(candidate);
-          const jump = Math.sin(position.progress * Math.PI) * 0.18;
-          const bob = Math.sin(state.lastFrame / 520 + Number(String(candidate.id).split(":").pop())) * 0.015;
-          const height = state.camera.zoom < 8 ? 3 / state.camera.zoom : 0.72;
+          const jump = Math.sin(position.progress * Math.PI) * AGENT_HEIGHT * (candidate.attributes.feet ? 0.035 : 0.18);
+          const bob = state.camera.zoom < 8 ? 0 :
+            Math.sin(state.lastFrame / 520 + Number(String(candidate.id).split(":").pop())) * AGENT_HEIGHT * 0.015;
+          const height = state.camera.zoom < 8 ? 3 / state.camera.zoom : AGENT_HEIGHT;
           const width = state.camera.zoom < 8 ? height : height *
             starterObjectSprite.naturalWidth / starterObjectSprite.naturalHeight;
           const left = position.x + (1 - width) / 2;
-          const top = position.y + (state.camera.zoom < 8 ? (1 - height) / 2 : 0.23 + bob) - jump;
+          const top = position.y + (1 - height) / 2 + bob - jump;
           return world.x >= left && world.x <= left + width &&
             world.y >= top && world.y <= top + height;
         });
@@ -2125,7 +2130,9 @@
         ctx.filter = "grayscale(1)";
         const sprite = agentSprite({ attributes: corpse.attributes, carrying: 0 });
         if (sprite.complete && sprite.naturalWidth > 0) {
-          ctx.drawImage(sprite, -cell * 0.36, -cell * 0.36, cell * 0.72, cell * 0.72);
+          const spriteHeight = cell * AGENT_HEIGHT;
+          const spriteWidth = spriteHeight * sprite.naturalWidth / sprite.naturalHeight;
+          ctx.drawImage(sprite, -spriteWidth / 2, -spriteHeight / 2, spriteWidth, spriteHeight);
         }
         ctx.restore();
       }
