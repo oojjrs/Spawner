@@ -21,6 +21,8 @@ export function createGame(environment, colony) {
 
     const AGENT_VISION = 1;
 
+    const FOOD_PER_CELL = 50;
+
     const FOOD_REGION_SIZE = 18;
 
     const FOOD_SCENT_RADIUS = 6;
