@@ -11,6 +11,16 @@ function requireName(value) {
   if (typeof value !== "string" || !value.trim() || value.trim().length > 24) fail(400, "이름은 1~24자로 입력해 주세요.");
   return value.trim();
 }
+function renameColony(room, ownerId, action) {
+  if (!Number.isInteger(action.colonyId)) fail(400, "둥지를 선택해 주세요.");
+  const colony = room.colonies.find((entry) => entry.id === action.colonyId);
+  if (!colony || colony.ownerId !== ownerId) fail(403, "자신의 둥지만 이름을 바꿀 수 있습니다.");
+  if (typeof action.name !== "string" || !action.name.trim() || action.name.trim().length > 32) fail(400, "둥지 이름은 1~32자로 입력해 주세요.");
+  colony.name = action.name.trim();
+  colony.hasCustomName = true;
+  return { colonyId: colony.id };
+}
+
 function reply(value, status, cookie) {
   const headers = new Headers({ "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff", "Referrer-Policy": "same-origin" });
   if (cookie) headers.set("Set-Cookie", cookie);
@@ -55,7 +65,8 @@ function advance(room) {
 }
 function join(room, player) {
   if (room.games.has(player.id)) {
-    room.colonies.find((colony) => colony.ownerId === player.id).name = player.name + "의 둥지";
+    const colony = room.colonies.find((entry) => entry.ownerId === player.id);
+    if (!colony.hasCustomName) colony.name = player.name + "의 둥지";
     return;
   }
   if (room.colonies.length >= room.world.sites.length) fail(409, "방이 가득 찼습니다.");
@@ -154,7 +165,8 @@ async function route(request, db, revision) {
     if (!player.room_id) fail(404, "먼저 방에 참가해 주세요.");
     const result = await changeRoom(db, player.room_id, (room) => {
       if (!room.games.has(player.id)) fail(404, "먼저 방에 참가해 주세요.");
-      room.colonies.find((colony) => colony.ownerId === player.id).name = player.name + "의 둥지";
+      const colony = room.colonies.find((entry) => entry.ownerId === player.id);
+      if (!colony.hasCustomName) colony.name = player.name + "의 둥지";
     });
     return reply(payload(result.room, player, url.searchParams.get("world") === "1"), 200, null);
   }
@@ -218,7 +230,10 @@ async function route(request, db, revision) {
       const previous = commands.find((command) => command.id === action.requestId);
       if (previous) return previous.result;
       let value;
-      try { value = game.command(action); } catch (error) { fail(400, error.message); }
+      if (action.type === "rename-colony") value = renameColony(room, player.id, action);
+      else {
+        try { value = game.command(action); } catch (error) { fail(400, error.message); }
+      }
       room.commands.set(player.id, [...commands.slice(-63), { id: action.requestId, result: value }]);
       return value;
     });

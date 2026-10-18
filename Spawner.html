@@ -245,6 +245,17 @@
     .colony-menu { width: 360px; }
     .nest-heading { display: flex; flex: 1; flex-direction: column; align-items: flex-start; gap: 8px; min-width: 0; }
     .nest-heading h2 { margin: 0; color: var(--ink); font-size: 1.3rem; font-weight: 800; line-height: 1.3; overflow-wrap: anywhere; }
+    .nest-name-row { display: flex; align-items: flex-start; gap: 8px; width: 100%; min-width: 0; }
+    .nest-name-row h2 { flex: 1; min-width: 0; }
+    .nest-rename-open { flex: none; display: grid; place-items: center; width: 28px; height: 28px; padding: 0; border: 1px solid var(--line); border-radius: 6px; background: #ffffff05; color: var(--muted); font: inherit; font-size: 1rem; cursor: pointer; }
+    .nest-rename-open:hover { border-color: var(--accent); color: var(--accent); }
+    .nest-name-form { display: grid; gap: 7px; width: 100%; }
+    .nest-name-row[hidden], .nest-name-form[hidden] { display: none; }
+    .nest-name-input { width: 100%; min-width: 0; padding: 9px 10px; border: 1px solid #75c4b670; border-radius: 6px; background: #101719; color: var(--ink); font: inherit; font-size: .9rem; }
+    .nest-name-actions { display: flex; gap: 6px; }
+    .nest-name-actions button { min-height: 30px; padding: 6px 10px; font-size: .72rem; }
+    .nest-name-status { margin: 0; color: var(--amber); font-size: .72rem; }
+    .nest-name-status:empty { display: none; }
     .nest-heading .nest-level { display: inline-flex; padding: 4px 9px; border: 1px solid #75c4b670; border-radius: 6px; background: #75c4b615; color: var(--accent); font-size: .92rem; font-weight: 800; line-height: 1.3; font-variant-numeric: tabular-nums; }
     .nest-resources { display: flex; align-items: center; gap: 12px; margin: 15px 0 14px; }
     .nest-resource-meter { flex: 1; min-width: 0; }
@@ -417,7 +428,7 @@
     .design-status { margin: 0; color: var(--amber); font-size: .75rem; }
     .design-status:empty { display: none; }
     .agent-birth-stats { margin: 10px 0 0; color: var(--muted); font-size: .72rem; line-height: 1.7; overflow-wrap: anywhere; }
-    .template-spawn:focus-visible, .template-edit:focus-visible, .nest-growth-info:focus-visible, .template-add:focus-visible, .design-slot:focus-visible, .attribute-choice:focus-visible, .attribute-info:focus-visible, .primary-action:focus-visible, .secondary-action:focus-visible, .first-design:focus-visible, .design-name-input:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .template-spawn:focus-visible, .template-edit:focus-visible, .nest-rename-open:focus-visible, .nest-name-input:focus-visible, .nest-growth-info:focus-visible, .template-add:focus-visible, .design-slot:focus-visible, .attribute-choice:focus-visible, .attribute-info:focus-visible, .primary-action:focus-visible, .secondary-action:focus-visible, .first-design:focus-visible, .design-name-input:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
     @media (max-width: 600px) {
       .evolution-panel { padding: 16px; }
       .design-body { grid-template-columns: 1fr; gap: 16px; }
@@ -543,7 +554,15 @@
 
   <aside class="colony-menu" id="colony-menu" aria-label="둥지 메뉴" hidden>
     <div class="panel-header">
-      <div class="nest-heading"><h2 id="nest-name">둥지</h2><span class="nest-level" id="nest-level">Lv.1</span></div>
+      <div class="nest-heading">
+        <div class="nest-name-row" id="nest-name-display"><h2 id="nest-name">둥지</h2><button class="nest-rename-open" id="nest-rename-open" type="button" aria-label="둥지 이름 변경" title="이름 변경" aria-controls="nest-name-form" aria-expanded="false">✎</button></div>
+        <form class="nest-name-form" id="nest-name-form" hidden>
+          <input class="nest-name-input" id="nest-name-input" type="text" maxlength="32" required autocomplete="off" aria-label="둥지 이름">
+          <div class="nest-name-actions"><button class="primary-action" id="nest-name-save" type="submit">저장</button><button class="secondary-action" id="nest-name-cancel" type="button">취소</button></div>
+          <p class="nest-name-status" id="nest-name-status" role="status"></p>
+        </form>
+        <span class="nest-level" id="nest-level">Lv.1</span>
+      </div>
       <button class="panel-close" id="colony-menu-close" type="button" aria-label="둥지 메뉴 닫기">×</button>
     </div>
     <div class="nest-resources">
@@ -663,6 +682,14 @@
     const colonyMenu = document.getElementById("colony-menu");
     const colonyMenuClose = document.getElementById("colony-menu-close");
     let colonyMenuEntry = null;
+    const nestNameDisplay = document.getElementById("nest-name-display");
+    const nestRenameOpen = document.getElementById("nest-rename-open");
+    const nestNameForm = document.getElementById("nest-name-form");
+    const nestNameInput = document.getElementById("nest-name-input");
+    const nestNameSave = document.getElementById("nest-name-save");
+    const nestNameCancel = document.getElementById("nest-name-cancel");
+    const nestNameStatus = document.getElementById("nest-name-status");
+    let renamedColonyId = null;
     const agentTab = document.getElementById("agent-tab");
     const colonyTab = document.getElementById("colony-tab");
     const agentTabPanel = document.getElementById("agent-tab-panel");
@@ -1709,7 +1736,31 @@
       colonyPanel.hidden = !showColony;
     }
 
+    function closeNestNameEditor(restoreFocus) {
+      nestNameForm.hidden = true;
+      nestNameDisplay.hidden = false;
+      nestRenameOpen.setAttribute("aria-expanded", "false");
+      renamedColonyId = null;
+      nestNameStatus.textContent = "";
+      nestNameInput.setCustomValidity("");
+      if (restoreFocus && !colonyMenu.hidden) nestRenameOpen.focus();
+    }
+
+    function openNestNameEditor() {
+      if (!colonyMenuEntry || connection.busy || !connection.online) return;
+      renamedColonyId = colonyMenuEntry.id;
+      nestNameInput.value = colonyMenuEntry.name;
+      nestNameInput.setCustomValidity("");
+      nestNameStatus.textContent = "";
+      nestNameDisplay.hidden = true;
+      nestNameForm.hidden = false;
+      nestRenameOpen.setAttribute("aria-expanded", "true");
+      nestNameInput.focus();
+      nestNameInput.select();
+    }
+
     function closeColonyMenu() {
+      closeNestNameEditor(false);
       closeEvolutionPanel();
       colonyMenu.hidden = true;
       canvas.focus();
@@ -1785,6 +1836,38 @@
     });
     renderColonyList();
 
+    nestRenameOpen.addEventListener("click", openNestNameEditor);
+    nestNameCancel.addEventListener("click", () => closeNestNameEditor(true));
+    nestNameInput.addEventListener("input", () => {
+      nestNameInput.setCustomValidity("");
+      nestNameStatus.textContent = "";
+    });
+    nestNameForm.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      event.preventDefault();
+      event.stopPropagation();
+      if (!connection.busy) closeNestNameEditor(true);
+    });
+    nestNameForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (renamedColonyId === null || connection.busy) return;
+      const name = nestNameInput.value.trim();
+      if (!name) {
+        nestNameInput.setCustomValidity("둥지 이름을 입력해 주세요.");
+        nestNameInput.reportValidity();
+        return;
+      }
+      const colonyId = renamedColonyId;
+      nestNameStatus.textContent = "";
+      nestStatus.textContent = "";
+      const result = await sendCommand({ type: "rename-colony", colonyId, name });
+      if (renamedColonyId !== colonyId) return;
+      if (result) closeNestNameEditor(true);
+      else {
+        nestNameStatus.textContent = nestStatus.textContent || "이름을 저장하지 못했습니다.";
+        nestNameInput.focus();
+      }
+    });
     colonyMenuClose.addEventListener("click", closeColonyMenu);
     [agentTab, colonyTab].forEach((tab) => {
       tab.addEventListener("click", () => selectPanelTab(tab));
@@ -2261,6 +2344,7 @@
         connectionStatus.textContent = entry.name + " · 다른 유저의 둥지";
         return;
       }
+      closeNestNameEditor(false);
       selectObject("colony", entry);
       colonyMenuEntry = entry;
       closeEvolutionPanel();
@@ -2282,6 +2366,10 @@
       document.getElementById("point-capacity").textContent = capacity;
       const own = colonyEntries.find((entry) => entry.id === connection.colonyId);
       document.getElementById("nest-name").textContent = own ? own.name : "둥지";
+      nestRenameOpen.disabled = connection.busy || !connection.online || !own;
+      nestNameSave.disabled = connection.busy || !connection.online;
+      nestNameInput.disabled = connection.busy;
+      nestNameCancel.disabled = connection.busy;
       document.getElementById("nest-level").textContent = "Lv." + state.nestLevel;
       document.getElementById("nest-upgrade-points").textContent = upgradeCost();
       document.getElementById("nest-upgrade-help").dataset.help = nestGrowthBenefits();

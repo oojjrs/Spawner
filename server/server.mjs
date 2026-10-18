@@ -28,6 +28,16 @@ function name(value) {
   return value.trim();
 }
 
+function renameColony(room, ownerId, action) {
+  if (!Number.isInteger(action.colonyId)) fail(400, "둥지를 선택해 주세요.");
+  const colony = room.colonies.find((entry) => entry.id === action.colonyId);
+  if (!colony || colony.ownerId !== ownerId) fail(403, "자신의 둥지만 이름을 바꿀 수 있습니다.");
+  if (typeof action.name !== "string" || !action.name.trim() || action.name.trim().length > 32) fail(400, "둥지 이름은 1~32자로 입력해 주세요.");
+  colony.name = action.name.trim();
+  colony.hasCustomName = true;
+  return { colonyId: colony.id };
+}
+
 function makeRoom(roomId, title, hostId, seed) {
   const world = generateWorld(seed);
   const room = { id: roomId, title, hostId, seed, world, simSeconds: 0, revision: 0,
@@ -160,7 +170,7 @@ async function route(request, response) {
     return json(response, 200, { rooms: [...rooms.values()].map((room) => ({ id: room.id, title: room.title,
       players: room.colonies.length, capacity: 12, joined: !!session && room.games.has(session.id),
       isHost: !!session && room.hostId === session.id,
-      host: room.colonies.find((colony) => colony.ownerId === room.hostId)?.name.replace(/의 둥지$/, "") || "" })) });
+      host: [...sessions.values()].find((entry) => entry.id === room.hostId)?.name || "" })) });
   }
   if (request.method === "GET" && url.pathname === "/api/state") {
     if (!session) fail(401, "이름을 입력하고 입장해 주세요.");
@@ -178,8 +188,9 @@ async function route(request, response) {
         if (session) {
           session.name = userName;
           for (const room of rooms.values()) {
-            const colony = room.colonies.find((entry) => entry.ownerId === session.id);
-            if (colony) colony.name = userName + "의 둥지";
+            for (const colony of room.colonies) {
+              if (colony.ownerId === session.id && !colony.hasCustomName) colony.name = userName + "의 둥지";
+            }
           }
           await persist();
           return json(response, 200, { name: userName });
@@ -215,8 +226,11 @@ async function route(request, response) {
         const room = currentRoom(session);
         if (action.roomId !== room.id) fail(409, "참가한 방이 변경되었습니다. 다시 입장해 주세요.");
         prepare(room);
-        try { result = room.games.get(session.id).command(action); }
-        catch (error) { fail(400, error.message); }
+        if (action.type === "rename-colony") result = renameColony(room, session.id, action);
+        else {
+          try { result = room.games.get(session.id).command(action); }
+          catch (error) { fail(400, error.message); }
+        }
         room.revision += 1;
       } else fail(404, "요청을 찾을 수 없습니다.");
       session.commands.push({ id: action.requestId, result });
