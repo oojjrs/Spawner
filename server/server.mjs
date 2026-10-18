@@ -12,7 +12,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const dataDirectory = resolve(process.env.SPAWNER_DATA_DIR || resolve(root, ".data"));
 const dataPath = resolve(dataDirectory, "rooms.json");
 const instanceId = createHash("sha256").update(root.replace(/[\\/]+$/, "").toLowerCase()).digest("hex");
-const revision = (await Promise.all(["game.mjs", "server.mjs", "world.mjs", "creatures.mjs"].map(async (file) =>
+const revision = (await Promise.all(["game.mjs", "server.mjs", "world.mjs", "attributes.mjs", "creatures.mjs", "utility.mjs"].map(async (file) =>
   createHash("sha256").update(await readFile(resolve(root, "server", file))).digest("hex")))).join("");
 const sessions = new Map();
 const rooms = new Map();
@@ -86,8 +86,8 @@ function payload(room, session, includeWorld) {
   prepare(room);
   return { roomId: room.id, title: room.title, hostId: room.hostId, userId: session.id,
     revision: room.revision, colonyId: room.colonies.find((colony) => colony.ownerId === session.id).id,
-    colonies: room.colonies.map((colony) => ({ ...colony, nestLevel: room.games.get(colony.ownerId).nestLevel, occupiedCells: [...colony.occupiedCells] })),
-    world: includeWorld ? { size: 320, seed: room.seed, terrain: [...room.world.terrain] } : undefined,
+    colonies: room.colonies.filter(colony => room.games.get(session.id).colonyKnown(colony)).map((colony) => ({ ...colony, nestLevel: room.games.get(colony.ownerId).nestLevel, occupiedCells: [...colony.occupiedCells] })),
+    world: includeWorld ? { size: 320, seed: room.seed, terrain: [...room.world.terrain], hazards: [...room.world.hazards] } : undefined,
     state: room.games.get(session.id).snapshot() };
 }
 
@@ -252,6 +252,10 @@ async function route(request, response) {
   if (request.method === "GET" && CREATURE_ASSETS.includes(url.pathname.slice(1))) {
     response.writeHead(200, { "Content-Type": url.pathname.endsWith(".png") ? "image/png" : "image/webp", "Cache-Control": "no-cache" });
     return response.end(await readFile(resolve(root, url.pathname.slice(1))));
+  }
+  if (request.method === "GET" && url.pathname === "/server/attributes.mjs") {
+    response.writeHead(200, { "Content-Type": "text/javascript; charset=utf-8", "Cache-Control": "no-cache" });
+    return response.end(await readFile(resolve(root, "server/attributes.mjs")));
   }
   fail(404, "페이지를 찾을 수 없습니다.");
 }

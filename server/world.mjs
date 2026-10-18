@@ -136,15 +136,21 @@ export function generateWorld(seed) {
         return {size,radius,seed,sites:placement.sites,closePair:placement.closePair,minDistance:placement.minDistance,fields,foodIndices,food:Array.from(foodIndices, index => [index % size, Math.floor(index / size)])};
       }
       const generated = generateMap(seed);
+      const hazards = new Uint8Array(320 * 320);
       const creatureDensity = new Uint8Array(320 * 320);
       for (let y = 0; y < 320; y++) for (let x = 0; x < 320; x++) {
         const index = y * 320 + x, terrain = generated.fields.terrain[index];
         if (terrain < 2 || terrain > 6) continue;
         const distance = Math.min(...generated.sites.map(site => Math.hypot(x - site[0], y - site[1])));
         if (distance >= 26) creatureDensity[index] = terrainByte(terrainFbm(x + 613, y - 487, 32, seed + 8101) * 0.5 + 0.5);
+        if (distance <= 14) continue;
+        const noise = terrainNoise(x, y, 14, seed + 7109);
+        if (generated.fields.risk[index] > 45 && noise > 0.12) hazards[index] = 1;
+        else if (generated.fields.risk[index] > 35 && noise < -0.16) hazards[index] = 2;
       }
       return {
         seed,
+        hazards,
         creatureDensity,
         terrain: generated.fields.terrain,
         food: generated.food,

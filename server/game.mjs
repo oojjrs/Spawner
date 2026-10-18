@@ -1,3 +1,6 @@
+import { ATTRIBUTES, attributeCounts, unitStats, birthCost, hasSynergy } from "./attributes.mjs";
+import { createPersonality, personalityLabels, createUtilityAI } from "./utility.mjs";
+
 export function createGame(environment, colony) {
     const worldMap = environment.world;
     const WORLD_SIZE = 320;
@@ -17,9 +20,9 @@ export function createGame(environment, colony) {
 
     const AGENT_SPEED = 1;
 
-    const AGENT_CAPACITY = 1;
+    const AGENT_CAPACITY = 2;
 
-    const AGENT_VISION = 1;
+    const AGENT_VISION = 3;
 
     const FOOD_PER_CELL = 50;
 
@@ -36,21 +39,17 @@ export function createGame(environment, colony) {
       "forest", "lowMountain", "highMountain", "ridge"
     ];
 
-    const ATTRIBUTES = [
-      { key: "antenna", name: "감각", symbol: "◉", color: "#b2bffa", effect: "시야 +2칸" },
-      { key: "arms", name: "운반", symbol: "◇", color: "#e5c78c", effect: "운반량 +2개" },
-      { key: "feet", name: "이동", symbol: "↗", color: "#8cd2bb", effect: "이동 속도 +0.5칸/초" },
-      { key: "strength", name: "힘", symbol: "✦", color: "#e6a79c", effect: "공격력 +2" },
-      { key: "shell", name: "저항", symbol: "⬡", color: "#a7cbd2", effect: "체력 +4" }
-    ];
-
     const foodSpotCache = environment.foodSpots;
     const foodCellMap = environment.food;
 
     const state = {
       simSeconds: 0,
       colonyFood: 0,
-      evolutionPoints: 30,
+      evolutionPoints: 25,
+      explored: new Set(),
+      knownFood: new Map(),
+      markers: [],
+      rulesVersion: 2,
       nestLevel: 1,
       templates: [],
       nextTemplateId: 1,
@@ -68,6 +67,137 @@ export function createGame(environment, colony) {
         routeSense: 0.55
       }
     };
+
+    let visibleCells = new Set();
+    let updatingAgents = false;
+    const utilityAI = createUtilityAI({ state, size: WORLD_SIZE, homeCells: colonyBoundaryCells,
+      walkable: isWalkable, hazardAt: (x, y) => state.explored.has(y * WORLD_SIZE + x) ? hazardAt(x, y) : 0,
+      enemies: () => state.rivals.filter(enemy => visibleCells.has(enemy.y * WORLD_SIZE + enemy.x)), synergy });
+
+    function synergy(agent, keys) {
+      return hasSynergy(agent.attributes, keys);
+    }
+
+    function hazardAt(x, y) {
+      return worldMap.hazards?.[y * WORLD_SIZE + x] || 0;
+    }
+
+    function revealAround(x, y, radius) {
+      for (let dy = -radius; dy <= radius; dy++) {
+        for (let dx = -radius; dx <= radius; dx++) {
+          const cx = x + dx, cy = y + dy;
+          if (cx < 0 || cy < 0 || cx >= WORLD_SIZE || cy >= WORLD_SIZE || dx * dx + dy * dy > radius * radius) continue;
+          const index = cy * WORLD_SIZE + cx;
+          visibleCells.add(index);
+          state.explored.add(index);
+          const key = cx + "," + cy;
+          const food = foodCellMap.get(key);
+          if (food?.amount > 0) state.knownFood.set(key, { ...food });
+          else state.knownFood.delete(key);
+        }
+      }
+    }
+
+    function updatePerception() {
+      visibleCells = new Set();
+      revealAround(COLONY_ORIGIN.x + 2, COLONY_ORIGIN.y + 2, 6);
+      const markers = new Map();
+      for (const agent of state.agents) {
+        if (agent.health <= 0) continue;
+        revealAround(agent.x, agent.y, agent.stats.vision + (agent.waveUntil > state.simSeconds ? 4 : 0));
+      }
+      for (const agent of state.agents) {
+        if (agent.health <= 0 || !synergy(agent, ["antenna", "antenna"])) continue;
+        for (let dy = -18; dy <= 18; dy++) {
+          for (let dx = -18; dx <= 18; dx++) {
+            const x = agent.x + dx, y = agent.y + dy, index = y * WORLD_SIZE + x;
+            if (x < 0 || y < 0 || x >= WORLD_SIZE || y >= WORLD_SIZE || dx * dx + dy * dy > 324 || visibleCells.has(index)) continue;
+            const food = foodCellMap.get(x + "," + y);
+            const unknownFood = food?.amount > 0 && !state.knownFood.has(x + "," + y);
+            const landmark = terrainAt(x, y) === "lowMountain" && hashNoise(x + (worldMap.seed || 0), y) < 0.012;
+            if (unknownFood || landmark && !state.explored.has(index)) markers.set(index, { x, y });
+          }
+        }
+        for (const target of [...state.rivals, ...environment.colonies.filter(entry => entry.id !== colony.id).map(entry => ({ x: entry.x + 2, y: entry.y + 2 }))]) {
+          const index = target.y * WORLD_SIZE + target.x;
+          if (Math.hypot(target.x - agent.x, target.y - agent.y) <= 18 && !visibleCells.has(index)) markers.set(index, { x: target.x, y: target.y });
+        }
+      }
+      state.markers = [...markers.values()];
+    }
+
+    function initializeAgent(agent) {
+      if (!agent.personality || !["boldness", "aggression", "curiosity"].every(key =>
+        Number.isFinite(agent.personality[key]) && agent.personality[key] >= 0 && agent.personality[key] <= 1)) {
+        const seed = [...String(agent.id)].reduce((value, character) => Math.imul(value, 31) + character.charCodeAt(0), worldMap.seed || 0);
+        let axis = 0;
+        agent.personality = createPersonality(() => hashNoise(seed + ++axis * 17417, (agent.bornAt || 0) + axis * 7919));
+      } else agent.personality = Object.freeze({ ...agent.personality });
+      agent.knownEnemyIds = agent.knownEnemyIds instanceof Set ? agent.knownEnemyIds : new Set();
+      agent.decisionPending = agent.decisionPending || "birth";
+      agent.nextDecisionAt = Number.isFinite(agent.nextDecisionAt) ? agent.nextDecisionAt : state.simSeconds;
+      agent.attributes = attributeCounts(agent.slots);
+      if (agent.rulesVersion === 2) agent.stats = unitStats(agent.attributes);
+      agent.stats.resistance = 0.75 ** agent.attributes.shell;
+      agent.shield = Number.isFinite(agent.shield) ? agent.shield : 0;
+      agent.shieldUntil = agent.shieldUntil || 0;
+      agent.shieldReady = agent.shieldReady || 0;
+      agent.warningUntil = agent.warningUntil || 0;
+      agent.warningReady = agent.warningReady || 0;
+      agent.hazardKind = agent.hazardKind || 0;
+      agent.hazardExposure = agent.hazardExposure || 0;
+      agent.lastHazardAt = agent.lastHazardAt || 0;
+      agent.lastHazardKind = agent.lastHazardKind || agent.hazardKind;
+      agent.waveUntil = agent.waveUntil || 0;
+      agent.preciseHarvestTimes = agent.preciseHarvestTimes instanceof Map ? agent.preciseHarvestTimes : new Map();
+      agent.harvestReady = agent.harvestReady || 0;
+      agent.harvestStarted = agent.harvestStarted || 0;
+      agent.unloadReady = agent.unloadReady || 0;
+      agent.attackReady = agent.attackReady || 0;
+    }
+
+    function damageAgent(agent, amount, environmental) {
+      if (environmental && agent.warningUntil > state.simSeconds) return;
+      let damage = amount;
+      if (environmental) {
+        damage *= agent.stats.resistance;
+        if (synergy(agent, ["shell", "shell"]) && agent.hazardExposure >= 1) damage *= 0.1;
+      }
+      if (agent.shieldUntil > state.simSeconds) {
+        const absorbed = Math.min(agent.shield, damage);
+        agent.shield -= absorbed;
+        damage -= absorbed;
+      }
+      agent.health = Math.max(0, agent.health - damage);
+      if (amount > 0 && state.agents.includes(agent)) agent.decisionPending = "damage";
+      if (damage > 0 && synergy(agent, ["strength", "shell"]) && state.simSeconds >= agent.shieldReady) {
+        agent.shield = 4;
+        agent.shieldUntil = state.simSeconds + 4;
+        agent.shieldReady = state.simSeconds + 12;
+      }
+    }
+
+    function updateEnvironment(agent, elapsed) {
+      const kind = hazardAt(agent.x, agent.y);
+      const moving = state.simSeconds - agent.moveStartedAt < agent.moveDuration;
+      const active = kind === 1 || kind === 2 && (moving || agent.mode === "harvest");
+      if (active) {
+        if (agent.lastHazardKind !== kind || state.simSeconds - agent.lastHazardAt >= 5) agent.hazardExposure = 0;
+        if (agent.hazardKind !== kind && synergy(agent, ["antenna", "shell"]) && state.simSeconds >= agent.warningReady) {
+          agent.warningUntil = state.simSeconds + 1;
+          agent.warningReady = state.simSeconds + 15;
+        }
+        agent.hazardKind = kind;
+        agent.lastHazardKind = kind;
+        const rate = kind === 2 && agent.mode === "harvest" ? 4 : 0.3;
+        damageAgent(agent, rate * elapsed, true);
+        agent.hazardExposure += elapsed;
+        agent.lastHazardAt = state.simSeconds;
+      } else {
+        if (!kind) agent.hazardKind = 0;
+        if (state.simSeconds - agent.lastHazardAt >= 5) agent.hazardExposure = 0;
+      }
+    }
 
     function colonyAt(x, y) {
       return environment.colonies.find((entry) =>
@@ -176,37 +306,6 @@ export function createGame(environment, colony) {
         terrain === "lowMountain";
     }
 
-    function visibleFoodFor(agent) {
-      const radius = agent.stats.vision;
-      ensureFoodAround(agent.x, agent.y, radius);
-      let best = null;
-      let bestScore = -Infinity;
-
-      for (let offsetY = -radius; offsetY <= radius; offsetY += 1) {
-        for (let offsetX = -radius; offsetX <= radius; offsetX += 1) {
-          const distance = Math.hypot(offsetX, offsetY);
-          if (distance > radius) {
-            continue;
-          }
-          const x = agent.x + offsetX;
-          const y = agent.y + offsetY;
-          const foodCell = foodCellMap.get(x + "," + y);
-          if (!foodCell || foodCell.amount <= 0) {
-            continue;
-          }
-          const richness = foodCell.amount / FOOD_PER_CELL;
-          const score =
-            -distance * (1 - agent.profile.richness) +
-            richness * radius * agent.profile.richness;
-          if (score > bestScore) {
-            best = foodCell;
-            bestScore = score;
-          }
-        }
-      }
-      return best;
-    }
-
     function walkableNeighbors(x, y) {
       return [
         { x: x + 1, y, dx: 1, dy: 0 },
@@ -238,10 +337,11 @@ export function createGame(environment, colony) {
       agent.renderFromX = rendered.x;
       agent.renderFromY = rendered.y;
       agent.moveStartedAt = state.simSeconds;
-      agent.moveDuration = 1 / agentSpeed(agent);
       agent.x = destination.x;
       agent.y = destination.y;
+      agent.moveDuration = 1 / agentSpeed(agent);
       agent.stepCount += 1;
+      if (synergy(agent, ["feet", "antenna"]) && agent.stepCount % 8 === 0) agent.waveUntil = state.simSeconds + 1;
       agent.visited.add(agent.x + "," + agent.y);
       if (rememberPath) {
         agent.path.push({ x: agent.x, y: agent.y });
@@ -261,7 +361,7 @@ export function createGame(environment, colony) {
           if (distance > FOOD_SCENT_RADIUS) {
             continue;
           }
-          const foodCell = foodCellMap.get((x + offsetX) + "," + (y + offsetY));
+          const foodCell = state.knownFood.get((x + offsetX) + "," + (y + offsetY));
           if (!foodCell || foodCell.amount <= 0) {
             continue;
           }
@@ -410,7 +510,7 @@ export function createGame(environment, colony) {
         ) {
           continue;
         }
-        const foodCell = foodCellMap.get(entry.foodKey);
+        const foodCell = state.knownFood.get(entry.foodKey);
         if (!foodCell || foodCell.amount <= 0) {
           continue;
         }
@@ -432,7 +532,7 @@ export function createGame(environment, colony) {
       }
 
       if (!best) {
-        const foodCell = foodCellMap.get(agent.sharedTrailFoodKey);
+        const foodCell = state.knownFood.get(agent.sharedTrailFoodKey);
         if (foodCell && foodCell.amount > 0) {
           return chooseStepToward(agent, foodCell, neighbors);
         }
@@ -457,6 +557,10 @@ export function createGame(environment, colony) {
       if (neighbors.length === 0) {
         return null;
       }
+
+      const marker = state.markers.toSorted((first, second) =>
+        Math.hypot(first.x - agent.x, first.y - agent.y) - Math.hypot(second.x - agent.x, second.y - agent.y))[0];
+      if (marker) return chooseStepToward(agent, marker, neighbors);
 
       const trailStep = sharedTrailStep(agent, neighbors);
       if (trailStep) {
@@ -614,6 +718,7 @@ export function createGame(environment, colony) {
 
         expansions += 1;
         for (const neighbor of walkableNeighbors(current.x, current.y)) {
+          if (!state.explored.has(neighbor.y * WORLD_SIZE + neighbor.x)) continue;
           const neighborKey = neighbor.x + "," + neighbor.y;
           if (
             neighborKey !== goalKey &&
@@ -681,21 +786,47 @@ export function createGame(environment, colony) {
     }
 
     function harvestAtCurrentCell(agent) {
-      const foodCell = foodCellAt(agent.x, agent.y);
-      if (!foodCell || foodCell.amount <= 0) {
-        forgetFoodRoute(agent);
-        return;
+      const food = foodCellAt(agent.x, agent.y);
+      if (!food || food.amount <= 0) { agent.decisionPending = "targetLost"; return; }
+      agent.harvestWasCommute = agent.mode === "commute";
+      agent.mode = "harvest";
+      agent.harvestStarted = state.simSeconds;
+      agent.harvestReady = state.simSeconds + 1;
+      agent.harvestPrepared = false;
+      agent.rememberedFoodKey = agent.x + "," + agent.y;
+      agent.straightSteps = 0;
+    }
+
+    function updateHarvest(agent) {
+      if (state.simSeconds < agent.harvestReady) return;
+      const key = agent.x + "," + agent.y;
+      const food = foodCellAt(agent.x, agent.y);
+      const capacity = Math.min(agent.utility?.plannedCargo ?? Infinity, agent.stats.capacity + (synergy(agent, ["strength", "strength"]) ? 4 : 0));
+      const take = amount => {
+        const collected = Math.min(amount, Math.max(0, capacity - agent.carrying), Math.max(0, food?.amount || 0));
+        if (collected > 0) { food.amount -= collected; agent.carrying += collected; }
+      };
+      if (!agent.harvestPrepared) {
+        agent.harvestPrepared = true;
+        if (synergy(agent, ["strength", "antenna"]) && state.simSeconds - (agent.preciseHarvestTimes.get(key) ?? -Infinity) >= 30) {
+          take(2);
+          agent.preciseHarvestTimes.set(key, state.simSeconds);
+        }
+        agent.harvestReady += 1.5;
+      } else {
+        while (state.simSeconds >= agent.harvestReady && agent.carrying < capacity && food?.amount > 0) {
+          take(1);
+          agent.harvestReady += 1.5;
+        }
       }
+      if (agent.carrying >= capacity || !food || food.amount <= 0) agent.decisionPending = "completed";
+    }
+
+    function returnToColony(agent) {
       const isRememberedTrip =
-        agent.mode === "commute" && agent.rememberedRoute;
+        (agent.harvestWasCommute || agent.mode === "commute") && agent.rememberedRoute;
       const followedRoad = agent.sharedTrailFoodKey === agent.x + "," + agent.y ?
         state.roads.get(agent.sharedTrailFoodKey) : null;
-      const amount = Math.min(agent.stats.capacity, foodCell.amount);
-      foodCell.amount -= amount;
-      agent.carrying = amount;
-      agent.sharedTrailFoodKey = null;
-      agent.rememberedFoodKey = agent.x + "," + agent.y;
-
       if (!isRememberedTrip) {
         if (followedRoad && followedRoad.route.length >= 2) {
           agent.rememberedRoute = followedRoad.route.map((cell) => ({ ...cell }));
@@ -719,6 +850,7 @@ export function createGame(environment, colony) {
 
       agent.returnPath = [{ x: agent.x, y: agent.y }];
       agent.mode = "return";
+      agent.harvestWasCommute = false;
       agent.routeIndex = agent.rememberedRoute.length - 2;
     }
 
@@ -730,93 +862,126 @@ export function createGame(environment, colony) {
         agent.returnPath = [];
       }
 
-      state.colonyFood += agent.carrying;
-      state.evolutionPoints = Math.min(pointCapacity(), state.evolutionPoints + agent.carrying);
-      agent.carrying = 0;
-      registerRoadJourney(agent);
-
-      const rememberedFood = agent.rememberedFoodKey ?
-        foodCellMap.get(agent.rememberedFoodKey) : null;
-      if (
-        rememberedFood &&
-        rememberedFood.amount > 0 &&
-        agent.rememberedRoute &&
-        agent.memoryTripsRemaining > 0
-      ) {
-        agent.rememberedRoute = optimizeRememberedRoute(agent);
-        agent.memoryTripsRemaining -= 1;
-        agent.mode = "commute";
-        agent.routeIndex = 1;
-        agent.path = [{ x: agent.x, y: agent.y }];
-        return;
-      }
-      forgetFoodRoute(agent);
+      const deposited = Math.min(agent.carrying, Math.max(0, pointCapacity() - state.evolutionPoints));
+      agent.carryingBeforeDeposit = deposited;
+      state.colonyFood += deposited;
+      state.evolutionPoints += deposited;
+      agent.carrying -= deposited;
+      if (deposited > 0) registerRoadJourney(agent);
+      agent.mode = "search";
+      agent.utility = null;
+      agent.decisionPending = "completed";
     }
 
-    function stepAgent(agent) {
-      const neighbors = walkableNeighbors(agent.x, agent.y)
-        .filter((cell) => !isAgentCellOccupied(cell.x, cell.y, agent));
-      if (agent.mode === "return") {
-        if (isColonyBoundaryCell(agent.x, agent.y)) {
-          depositFood(agent);
-          return;
-        }
-        if (agent.rememberedRoute && agent.routeIndex >= 0) {
-          moveAgentAlongRoute(agent, -1, neighbors);
-          return;
-        }
-        const homeStep = chooseStepToward(
-          agent,
-          nearestColonyBoundaryCell(agent.x, agent.y),
-          neighbors
-        );
-        if (homeStep) {
-          moveAgent(agent, homeStep, false);
-        }
+    function reconsiderAgent(agent, reason) {
+      if (agent.health <= 0) return;
+      const candidates = utilityAI.evaluate(agent, !["completed", "targetLost", "restore"].includes(reason));
+      const best = candidates[0];
+      agent.decisionCount = (agent.decisionCount || 0) + 1;
+      agent.lastDecisionAt = state.simSeconds;
+      agent.lastDecisionReason = reason;
+      agent.nextDecisionAt = state.simSeconds + 3;
+      agent.decisionPending = null;
+      agent.knownEnemyIds = new Set(state.rivals.filter(enemy => enemy.health > 0 &&
+        visibleCells.has(enemy.y * WORLD_SIZE + enemy.x)).map(enemy => enemy.id));
+      if (!best) {
+        agent.utility = null;
+        agent.mode = "wait";
         return;
       }
-
-      if (agent.mode === "commute") {
-        if (
-          agent.rememberedRoute &&
-          agent.routeIndex < agent.rememberedRoute.length
-        ) {
-          moveAgentAlongRoute(agent, 1, neighbors);
-          return;
-        }
-        harvestAtCurrentCell(agent);
-        return;
-      }
-
-      if (agent.mode === "approach") {
-        const target = agent.targetFoodKey ?
-          foodCellMap.get(agent.targetFoodKey) : null;
-        if (!target || target.amount <= 0) {
-          forgetFoodRoute(agent);
-          return;
-        }
-        if (agent.x === target.x && agent.y === target.y) {
-          harvestAtCurrentCell(agent);
-          return;
-        }
-        const targetStep = chooseStepToward(agent, target, neighbors);
-        if (targetStep) {
-          moveAgent(agent, targetStep, true);
-        }
-        return;
-      }
-
-      const visibleFood = visibleFoodFor(agent);
-      if (visibleFood) {
-        agent.targetFoodKey = visibleFood.x + "," + visibleFood.y;
+      const previous = agent.utility;
+      const same = previous?.action === best.action && previous.target?.key === best.target.key;
+      agent.utility = { action: best.action, target: best.target, route: best.route,
+        plannedCargo: best.plannedCargo, recoverHealth: same && best.action === "recover" && reason !== "completed" ? previous.recoverHealth : best.recoverHealth,
+        score: best.score, scores: candidates.map(candidate => ({ action: candidate.action, score: candidate.score, key: candidate.target.key })) };
+      if (same) return;
+      agent.straightSteps = 0;
+      agent.movementTargetKey = null;
+      agent.movementVisits.clear();
+      if (best.action === "collect") {
+        agent.targetFoodKey = best.target.key;
         agent.mode = "approach";
-        return;
-      }
+      } else if (best.action === "return") {
+        returnToColony(agent);
+      } else if (best.action === "recover") agent.mode = "recover";
+      else if (best.action === "fight") agent.mode = "fight";
+      else if (best.action === "flee") agent.mode = "flee";
+      else agent.mode = "search";
+    }
 
-      const explorationStep = chooseExplorationStep(agent, neighbors);
-      if (explorationStep) {
-        moveAgent(agent, explorationStep, true);
+    function decisionEvent(agent) {
+      if (agent.decisionPending) return agent.decisionPending;
+      const visible = state.rivals.filter(enemy => enemy.health > 0 && visibleCells.has(enemy.y * WORLD_SIZE + enemy.x));
+      const ids = new Set(visible.map(enemy => enemy.id));
+      const discovered = visible.some(enemy => !agent.knownEnemyIds.has(enemy.id));
+      agent.knownEnemyIds = ids;
+      if (discovered) return "enemyDiscovered";
+      const plan = agent.utility;
+      if (plan?.action === "collect" && !(state.knownFood.get(plan.target.key)?.amount > 0)) return "targetLost";
+      if (plan?.action === "collect" && agent.carrying >= plan.plannedCargo) return "completed";
+      if (plan?.action === "fight" && !ids.has(plan.target.id)) return "targetLost";
+      if (plan?.action === "return" && (agent.carrying <= 0 || state.evolutionPoints >= pointCapacity())) return "completed";
+      if (plan?.action === "recover" && agent.health >= plan.recoverHealth) return "completed";
+      if (plan?.action === "explore" && state.explored.has(plan.target.y * WORLD_SIZE + plan.target.x) &&
+        agent.x === plan.target.x && agent.y === plan.target.y) return "completed";
+      if (plan?.action === "flee" && agent.x === plan.target.x && agent.y === plan.target.y) return "completed";
+      if (state.simSeconds >= agent.nextDecisionAt) return "periodic";
+      return null;
+    }
+
+    function stepUtilityAgent(agent) {
+      const plan = agent.utility;
+      if (!plan) return false;
+      if (state.simSeconds - agent.moveStartedAt < agent.moveDuration) return false;
+      const home = isColonyBoundaryCell(agent.x, agent.y);
+      if (plan.action === "collect" && agent.x === plan.target.x && agent.y === plan.target.y) {
+        if (agent.mode !== "harvest") harvestAtCurrentCell(agent);
+        return false;
       }
+      if (plan.action === "return" && home) {
+        if (agent.mode !== "unload") {
+          agent.mode = "unload";
+          agent.unloadReady = state.simSeconds + 1;
+        }
+        return false;
+      }
+      if (plan.action === "recover" && home) { agent.mode = "rest"; return false; }
+      let target = plan.target;
+      if (plan.action === "fight") {
+        target = state.rivals.find(enemy => enemy.id === plan.target.id && enemy.health > 0 &&
+          visibleCells.has(enemy.y * WORLD_SIZE + enemy.x));
+        if (!target) { agent.decisionPending = "targetLost"; return false; }
+        if (Math.abs(agent.x - target.x) + Math.abs(agent.y - target.y) <= 1) {
+          if (state.simSeconds >= agent.attackReady) {
+            agent.attackReady = state.simSeconds + 1 / agent.stats.speed;
+            const owner = [...environment.games.values()].find(game => game.agents.includes(target));
+            if (owner) owner.receiveDamage(target, agent.stats.attack);
+            else target.health = Math.max(0, target.health - agent.stats.attack);
+            if (target.health <= 0) agent.decisionPending = "targetLost";
+          }
+          return false;
+        }
+        target = walkableNeighbors(target.x, target.y).filter(cell => !isAgentCellOccupied(cell.x, cell.y, agent))
+          .sort((first, second) => Math.abs(first.x - agent.x) + Math.abs(first.y - agent.y) -
+            Math.abs(second.x - agent.x) - Math.abs(second.y - agent.y))[0];
+        if (!target) return false;
+      }
+      if (agent.moveBudget < 1 || state.simSeconds - agent.moveStartedAt < agent.moveDuration) return false;
+      const candidates = walkableNeighbors(agent.x, agent.y).filter(cell => !isAgentCellOccupied(cell.x, cell.y, agent));
+      let destination = plan.route.find((cell, index) => index > 0 && plan.route[index - 1].x === agent.x && plan.route[index - 1].y === agent.y);
+      if (plan.action === "fight" || !destination || !candidates.some(cell => cell.x === destination.x && cell.y === destination.y)) {
+        destination = utilityAI.nextStep(agent, target);
+      }
+      if (destination && !candidates.some(cell => cell.x === destination.x && cell.y === destination.y)) {
+        destination = chooseStepToward(agent, target, candidates);
+      }
+      if (!destination) {
+        agent.nextDecisionAt = Math.min(agent.nextDecisionAt, state.simSeconds + 0.5);
+        return false;
+      }
+      const moved = moveAgent(agent, destination, !["return", "recover", "flee"].includes(plan.action));
+      if (moved) agent.moveBudget -= 1;
+      return moved;
     }
 
     function interpolatedAgentPosition(agent) {
@@ -837,7 +1002,7 @@ export function createGame(environment, colony) {
     }
 
     function slotCapacity() {
-      return state.nestLevel + 3;
+      return 2;
     }
 
     function pointCapacity() {
@@ -848,28 +1013,16 @@ export function createGame(environment, colony) {
       return state.nestLevel * 40;
     }
 
-    function attributeCounts(slots) {
-      const counts = Object.fromEntries(ATTRIBUTES.map((attribute) => [attribute.key, 0]));
-      for (const key of slots) counts[key] += 1;
-      return counts;
-    }
-
-    function unitStats(attributes) {
-      return {
-        speed: AGENT_SPEED + attributes.feet * 0.5,
-        capacity: AGENT_CAPACITY + attributes.arms * 2,
-        vision: AGENT_VISION + attributes.antenna * 2,
-        attack: 1 + attributes.strength * 2,
-        health: 8 + attributes.shell * 4
-      };
-    }
-
     function agentSpeed(agent) {
-      return agent.stats.speed;
-    }
-
-    function birthCost(template) {
-      return 3 + template.slots.length * 2;
+      let speed = agent.stats.speed;
+      if (agent.carrying > agent.stats.capacity) speed *= 0.8;
+      if (synergy(agent, ["strength", "feet"])) speed *= 1 + 0.5 * Math.min(1, agent.carrying / agent.stats.capacity);
+      if (synergy(agent, ["feet", "feet"]) && agent.straightSteps > 4) speed *= 1.75;
+      if (hazardAt(agent.x, agent.y)) {
+        speed *= 0.5;
+        if (synergy(agent, ["feet", "shell"])) speed *= 3;
+      }
+      return speed;
     }
 
     function spawnAgent(template, faction) {
@@ -887,7 +1040,9 @@ export function createGame(environment, colony) {
         slots: [...template.slots],
         attributes,
         stats,
+        rulesVersion: 2,
         health: stats.health,
+        personality: createPersonality(Math.random),
         faction,
         cost: birthCost(template),
         x: position.x,
@@ -916,6 +1071,7 @@ export function createGame(environment, colony) {
         moveStartedAt: state.simSeconds,
         moveDuration: 0
       };
+      initializeAgent(agent);
       state.nextAgentId += 1;
       state.agents.push(agent);
       return agent;
@@ -959,48 +1115,42 @@ export function createGame(environment, colony) {
 
     }
 
-    function stepCombat(agent) {
-      const opponents = state.rivals;
-      const target = opponents.filter((candidate) => candidate.health > 0)
-        .sort((left, right) => Math.abs(agent.x - left.x) + Math.abs(agent.y - left.y) -
-          Math.abs(agent.x - right.x) - Math.abs(agent.y - right.y))[0];
-      if (!target) {
-        if (agent.mode === "defend") forgetFoodRoute(agent);
-        return false;
-      }
-      const distance = Math.abs(agent.x - target.x) + Math.abs(agent.y - target.y);
-      if (distance > agent.stats.vision + 2 && agent.faction === "colony") {
-        if (agent.mode === "defend") forgetFoodRoute(agent);
-        return false;
-      }
-      if (distance <= 1) {
-        target.health -= agent.stats.attack;
-        if (agent.carrying === 0) agent.mode = "defend";
-        removeDeadAgents();
-        return true;
-      }
-      if (agent.carrying > 0 && agent.faction === "colony") return false;
-      if (agent.mode !== "defend") forgetFoodRoute(agent);
-      agent.mode = "defend";
-      const neighbors = walkableNeighbors(agent.x, agent.y)
-        .filter((cell) => !isAgentCellOccupied(cell.x, cell.y, agent));
-      const step = chooseStepToward(agent, target, neighbors);
-      if (step) moveAgent(agent, step, false);
-      return true;
-    }
-
     function updateAgents(elapsed) {
+      updatingAgents = true;
       removeDeadAgents();
+      updatePerception();
       for (const agent of state.agents) {
         if (agent.health <= 0) continue;
+        updateEnvironment(agent, elapsed);
+        if (agent.health <= 0) continue;
+        const reason = decisionEvent(agent);
+        if (reason) reconsiderAgent(agent, reason);
         agent.moveBudget = Math.min(1, agent.moveBudget + elapsed * agentSpeed(agent));
-        if (agent.moveBudget < 1 || state.simSeconds - agent.moveStartedAt < agent.moveDuration) continue;
-        agent.moveBudget -= 1;
-        if (stepCombat(agent)) continue;
-        if (agent.faction === "colony") stepAgent(agent);
+        if (agent.mode === "rest") {
+          agent.straightSteps = 0;
+          if (isColonyBoundaryCell(agent.x, agent.y)) {
+            agent.health = Math.min(agent.stats.health, agent.utility.recoverHealth, agent.health + elapsed * 0.25);
+            if (agent.health >= agent.utility.recoverHealth) agent.decisionPending = "completed";
+          } else agent.mode = "recover";
+        } else if (agent.mode === "unload") {
+          if (state.simSeconds >= agent.unloadReady) depositFood(agent);
+        } else if (agent.mode === "harvest") updateHarvest(agent);
+        else {
+          const moved = stepUtilityAgent(agent);
+          if (!moved && state.simSeconds - agent.moveStartedAt >= agent.moveDuration) agent.straightSteps = 0;
+        }
+        if (agent.decisionPending) reconsiderAgent(agent, agent.decisionPending);
       }
-      state.corpses = [...foodCellMap.values()].filter((cell) => cell.kind === "corpse" && cell.amount > 0);
+      removeDeadAgents();
+      state.corpses = [...foodCellMap.values()].filter(cell => cell.kind === "corpse" && cell.amount > 0);
+      updatePerception();
+      for (const agent of state.agents) {
+        const reason = decisionEvent(agent);
+        if (reason) reconsiderAgent(agent, reason);
+      }
+      updatingAgents = false;
     }
+
     function requireName(value) {
       if (typeof value !== "string" || !value.trim() || value.trim().length > 24) {
         throw new Error("이름은 1~24자로 입력해 주세요.");
@@ -1009,6 +1159,9 @@ export function createGame(environment, colony) {
     }
 
     function birth(template) {
+      if (template.slots.length > 2 || template.slots.some(key => !ATTRIBUTES.some(attribute => attribute.key === key))) {
+        throw new Error("설계를 2칸·4속성으로 수정한 뒤 탄생시켜 주세요.");
+      }
       if (state.agents.length >= 200) throw new Error("생명체는 최대 200개까지 유지할 수 있습니다.");
       if (state.evolutionPoints < birthCost(template)) throw new Error("진화 포인트가 부족합니다.");
       const agent = spawnAgent(template, "colony");
@@ -1063,17 +1216,19 @@ export function createGame(environment, colony) {
     }
 
     function snapshot() {
+      updatePerception();
       const visibleAgent = (agent) => {
-        const { visited, movementVisits, path, returnPath, rememberedRoute, profile, ...visible } = agent;
-        return visible;
+        const { visited, movementVisits, path, returnPath, rememberedRoute, profile, personality, utility, knownEnemyIds, ...visible } = agent;
+        return { ...visible, action: utility?.action || "wait", personalityLabels: personality ? personalityLabels(personality) : null };
       };
       return {
         simSeconds: state.simSeconds, colonyFood: state.colonyFood,
         evolutionPoints: state.evolutionPoints, nestLevel: state.nestLevel,
         templates: state.templates, agents: state.agents.map(visibleAgent),
-        rivals: state.rivals.filter(agent => agent.health > 0).map((agent) => ({ ...visibleAgent(agent), faction: agent.species ? "hostile" : "rival" })),
-        corpses: [...foodCellMap.values()].filter((cell) => cell.kind === "corpse" && cell.amount > 0),
-        sharedTrails: [...state.sharedTrails], food: [...foodCellMap.values()]
+        rivals: state.rivals.filter(agent => agent.health > 0 && visibleCells.has(agent.y * WORLD_SIZE + agent.x)).map((agent) => ({ ...visibleAgent(agent), faction: agent.species ? "hostile" : "rival" })),
+        corpses: [...state.knownFood.values()].filter(cell => cell.kind === "corpse" && cell.amount > 0),
+        sharedTrails: [...state.sharedTrails], food: [...state.knownFood.values()],
+        explored: [...state.explored], visible: [...visibleCells], markers: state.markers
       };
     }
 
@@ -1088,6 +1243,19 @@ export function createGame(environment, colony) {
         value?.collection === "Map" ? new Map(value.entries) :
         value?.collection === "Set" ? new Set(value.entries) : value);
       Object.assign(state, data.state);
+      state.explored = state.explored instanceof Set ? state.explored : new Set();
+      state.knownFood = state.knownFood instanceof Map ? state.knownFood : new Map();
+      for (const agent of state.agents) {
+        initializeAgent(agent);
+        agent.utility = null;
+        agent.mode = "search";
+        agent.decisionPending = "restore";
+        for (const key of agent.visited) {
+          const [x, y] = key.split(",").map(Number);
+          state.explored.add(y * WORLD_SIZE + x);
+        }
+      }
+      updatePerception();
 
     }
 
@@ -1097,9 +1265,11 @@ export function createGame(environment, colony) {
       get nestLevel() { return state.nestLevel; },
       receiveDamage(agent, amount) {
         if (!state.agents.includes(agent) || agent.health <= 0) return;
-        agent.health = Math.max(0, agent.health - amount);
+        damageAgent(agent, amount, false);
         removeDeadAgents();
+        if (agent.health > 0 && !updatingAgents) { updatePerception(); reconsiderAgent(agent, "damage"); }
       },
+      colonyKnown(entry) { return entry.id === colony.id || state.explored.has((entry.y + 2) * WORLD_SIZE + entry.x + 2); },
       prepare(simSeconds) {
         state.simSeconds = simSeconds;
         state.rivals = [...environment.games.values()].filter((game) => game !== this).flatMap((game) => game.agents).concat(environment.creatureSystem?.agents || []);

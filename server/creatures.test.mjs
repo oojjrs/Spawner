@@ -98,7 +98,7 @@ test("공격 중 저장·복원해도 공격 시간과 단발 피해를 유지�
   assert.equal(hits.length, 1);
 });
 
-test("처치 시 사체를 한 번 남기고 저장 후 다시 생성하지 않는다", () => {
+test("시야 안에서만 표시하고 처치 시 사체를 한 번 남긴다", () => {
   const room = environment();
   const colony = { id: 1, ownerId: "owner", x: 98, y: 98, occupiedCells: new Set(["2,2"]) };
   room.colonies.push(colony);
@@ -110,6 +110,7 @@ test("처치 시 사체를 한 번 남기고 저장 후 다시 생성하지 않�
   const agent = game.agents[0];
   Object.assign(agent, { x: 100, y: 102, renderFromX: 100, renderFromY: 102 });
   game.prepare(0);
+  assert.equal(game.snapshot().rivals.length, 0);
   Object.assign(agent, { x: 139, y: 140, renderFromX: 139, renderFromY: 140 });
   assert.equal(game.snapshot().rivals[0].species, "spiny-back-beetle");
   assert.equal(game.snapshot().rivals[0].faction, "hostile");
@@ -137,27 +138,32 @@ function fight(count) {
   const game = createGame(room, colony);
   room.games.set("owner", game);
   const positions = [[139, 140], [140, 139], [141, 140]];
+  const actions = new Set();
   for (let index = 0; index < count; index++) {
     game.command({ type: "design", templateId: null, name: "기본 콩 " + index, slots: [], birth: true });
     const [x, y] = positions[index];
-    Object.assign(game.agents[index], { x, y, renderFromX: x, renderFromY: y });
+    Object.assign(game.agents[index], { x, y, renderFromX: x, renderFromY: y,
+      personality: Object.freeze({ boldness: 0.2, aggression: 0.2, curiosity: 0.2 }) });
   }
   for (let step = 1; step <= 600 && beetle.health > 0 && game.agents.length > 0; step++) {
     room.simSeconds = step / 10;
     game.prepare(room.simSeconds);
     game.tick(0.1);
+    for (const agent of game.agents) actions.add(agent.utility?.action);
     room.creatureSystem.tick();
   }
-  return { beetle, agents: game.agents, duration: room.simSeconds };
+  return { beetle, agents: game.agents, duration: room.simSeconds, actions };
 }
 
-test("기본 콩 한 마리는 패배하고 두세 마리의 협공으로 싸울 수 있다", () => {
-  const solo = fight(1), pair = fight(2), group = fight(3);
-  assert.equal(solo.agents.length, 0);
-  assert.ok(solo.beetle.health > 0);
-  assert.ok(pair.beetle.health < solo.beetle.health);
-  assert.ok(group.beetle.health <= 0);
-  assert.ok(group.agents.length > 0);
+test("신중한 개체는 이득이 낮은 강적과 강제 교전하지 않고 생존한다", () => {
+  for (const count of [1, 2, 3]) {
+    const result = fight(count);
+    assert.equal(result.agents.length, count);
+    assert.equal(result.beetle.health, result.beetle.stats.health);
+    assert.ok(result.agents.every(agent => agent.health > 0));
+    assert.ok(!result.actions.has("fight"));
+    if (count === 1) assert.ok(result.actions.has("flee"));
+  }
 });
 
 test("몹 밀도 0인 지역에는 생성하지 않고 별도 노이즈맵의 안전 거리를 지킨다", () => {
