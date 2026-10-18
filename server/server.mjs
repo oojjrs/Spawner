@@ -1,4 +1,5 @@
 import { createServer } from "node:http";
+import { createServer as createControlServer } from "node:net";
 import { randomBytes, randomInt, createHash } from "node:crypto";
 import { readFile, mkdir, writeFile, rename } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
@@ -151,7 +152,7 @@ async function route(request, response) {
   response.setHeader("Referrer-Policy", "same-origin");
   const token = request.headers.cookie?.split(";").map((part) => part.trim()).find((part) => part.startsWith("spawner="))?.slice(8);
   const session = sessions.get(token);
-  if (request.method === "GET" && url.pathname === "/api/health") return json(response, 200, { app: "Spawner", instanceId, revision, ready: true, storageError });
+  if (request.method === "GET" && url.pathname === "/api/health") return json(response, 200, { app: "Spawner", instanceId, revision, ready: !stopping, storageError, shutdownProtocol: "pipe-v1" });
   if (request.method === "GET" && url.pathname === "/api/session") {
     return json(response, 200, { user: session ? { name: session.name, roomId: session.roomId } : null });
   }
@@ -234,13 +235,17 @@ async function route(request, response) {
   fail(404, "페이지를 찾을 수 없습니다.");
 }
 
+const requests = new Set();
 const server = createServer((request, response) => {
-  route(request, response).catch((error) => {
+  if (stopping) return json(response, 503, { error: "서버를 저장하고 재시작하고 있습니다." });
+  const task = route(request, response).catch((error) => {
     if (!error.status) console.error(error);
     if (!response.headersSent) json(response, error.status || 503,
       { error: error.status ? error.message : "서버 저장을 완료하지 못했습니다. 잠시 후 다시 연결해 주세요." });
     else response.end();
   });
+  requests.add(task);
+  task.finally(() => requests.delete(task));
 });
 server.requestTimeout = 10000;
 let lastTick = performance.now();
@@ -248,7 +253,7 @@ const simulation = setInterval(() => {
   const now = performance.now();
   const elapsed = Math.min(0.25, (now - lastTick) / 1000);
   lastTick = now;
-  if (storageError) return;
+  if (storageError || stopping) return;
   for (const room of rooms.values()) {
     if (Date.now() - room.lastActive > 30000) continue;
     room.simSeconds += elapsed;
@@ -257,20 +262,46 @@ const simulation = setInterval(() => {
     room.revision += 1;
   }
 }, 100);
-const autosave = setInterval(() => { persist().catch((error) => console.error(error)); }, 5000);
+const autosave = setInterval(() => { if (stopping) return; persist().catch((error) => console.error(error)); }, 5000);
 const host = process.env.HOST || "127.0.0.1";
 const port = Number(process.env.PORT || 3000);
 server.listen(port, host, () => { process.stdout.write("SYSTEM> 서버 시작 : http://" + host + ":" + server.address().port + "\n"); });
 let stopping = false;
-async function stop() {
-  if (stopping) return;
+let shutdown;
+const control = createControlServer((socket) => {
+  socket.on("error", () => {});
+  socket.setTimeout(30000, () => socket.destroy());
+  let command = "";
+  socket.on("data", (chunk) => {
+    command += chunk.toString("utf8");
+    if (command.length > 128) return socket.destroy();
+    if (!command.includes("\n")) return;
+    socket.removeAllListeners("data");
+    if (command.trim() !== "stop") return socket.end("invalid\n");
+    stop().then(() => socket.end("saved\n"), () => socket.end("failed\n"));
+  });
+});
+if (process.platform === "win32") control.listen(String.raw`\\.\pipe\Spawner-${instanceId}-${port}`);
+function stop() {
+  if (shutdown) return shutdown;
   stopping = true;
-  clearInterval(simulation);
-  clearInterval(autosave);
-  server.close();
-  await mutation.catch(() => {});
-  await persist();
-  server.closeAllConnections();
+  shutdown = (async () => {
+    try {
+      await Promise.allSettled([...requests]);
+      await mutation.catch(() => {});
+      await persist();
+      clearInterval(simulation);
+      clearInterval(autosave);
+      server.close();
+      server.closeIdleConnections();
+      if (control.listening) control.close();
+    } catch (error) {
+      stopping = false;
+      shutdown = undefined;
+      throw error;
+    }
+  })();
+  return shutdown;
 }
-process.on("SIGINT", () => { stop().catch((error) => { console.error(error); process.exitCode = 1; }); });
-process.on("SIGTERM", () => { stop().catch((error) => { console.error(error); process.exitCode = 1; }); });
+process.on("SIGINT", () => { stop().catch((error) => { console.error(error); }); });
+process.on("SIGTERM", () => { stop().catch((error) => { console.error(error); }); });
