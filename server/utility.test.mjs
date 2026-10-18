@@ -177,3 +177,20 @@ test("이동이 끝나기 전에는 도착 칸의 채집을 시작하지 않는�
   advance(f, 1.1);
   assert.ok(f.agent.carrying >= 2);
 });
+
+test("상태 요청마다 저장·복원해도 채집과 하역을 이어간다", () => {
+  const f = fixture(["strength", "antenna"]);
+  f.environment.food.set("46,42", { x: 46, y: 42, amount: 50, terrain: "grassland" });
+  const before = f.game.snapshot().evolutionPoints;
+  for (let request = 0; request < 80; request++) {
+    const saved = f.game.save();
+    f.game = createGame(f.environment, f.environment.colonies[0]);
+    f.game.restore(saved);
+    f.environment.games.set("test", f.game);
+    f.agent = f.game.agents[0];
+    advance(f, 0.5);
+  }
+  assert.ok(f.environment.food.get("46,42").amount < 50);
+  assert.ok(f.game.snapshot().colonyFood > 0);
+  assert.ok(f.game.snapshot().evolutionPoints > before);
+});

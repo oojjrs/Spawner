@@ -134,7 +134,7 @@ export function createGame(environment, colony) {
         agent.personality = createPersonality(() => hashNoise(seed + ++axis * 17417, (agent.bornAt || 0) + axis * 7919));
       } else agent.personality = Object.freeze({ ...agent.personality });
       agent.knownEnemyIds = agent.knownEnemyIds instanceof Set ? agent.knownEnemyIds : new Set();
-      agent.decisionPending = agent.decisionPending || "birth";
+      if (agent.decisionPending === undefined) agent.decisionPending = "birth";
       agent.nextDecisionAt = Number.isFinite(agent.nextDecisionAt) ? agent.nextDecisionAt : state.simSeconds;
       agent.attributes = attributeCounts(agent.slots);
       if (agent.rulesVersion === 2) agent.stats = unitStats(agent.attributes);
@@ -1247,9 +1247,11 @@ export function createGame(environment, colony) {
       state.knownFood = state.knownFood instanceof Map ? state.knownFood : new Map();
       for (const agent of state.agents) {
         initializeAgent(agent);
-        agent.utility = null;
-        agent.mode = "search";
-        agent.decisionPending = "restore";
+        if (!agent.utility) {
+          agent.utility = null;
+          agent.mode = "search";
+          agent.decisionPending = "restore";
+        }
         for (const key of agent.visited) {
           const [x, y] = key.split(",").map(Number);
           state.explored.add(y * WORLD_SIZE + x);
