@@ -1,0 +1,51 @@
+[
+  {
+    "name": "left-petals",
+    "manual": true,
+    "path": "M0 130 H256 V419 H0 Z",
+    "anchor": 419,
+    "reach": 289,
+    "dx": -10,
+    "dy": 0,
+    "delay": 0.025,
+    "bounds": [
+      0,
+      115,
+      274,
+      419
+    ]
+  },
+  {
+    "name": "right-petals",
+    "manual": true,
+    "mirror": true,
+    "anchor": 419,
+    "reach": 289,
+    "dx": 10,
+    "dy": 0,
+    "delay": 0.04,
+    "path": "M0 130 H256 V419 H0 Z",
+    "bounds": [
+      234,
+      115,
+      512,
+      419
+    ]
+  },
+  {
+    "name": "crown",
+    "manual": true,
+    "path": "M187 184 Q224 139 256 120 Q291 140 327 184 L313 205 Q289 202 256 165 Q228 200 203 206 Z",
+    "anchor": 208,
+    "reach": 88,
+    "dx": 0,
+    "dy": -7,
+    "delay": 0,
+    "bounds": [
+      165,
+      105,
+      349,
+      224
+    ]
+  }
+]

@@ -84,7 +84,7 @@ function payload(room, session, includeWorld) {
   prepare(room);
   return { roomId: room.id, title: room.title, hostId: room.hostId, userId: session.id,
     revision: room.revision, colonyId: room.colonies.find((colony) => colony.ownerId === session.id).id,
-    colonies: room.colonies.map((colony) => ({ ...colony, occupiedCells: [...colony.occupiedCells] })),
+    colonies: room.colonies.map((colony) => ({ ...colony, nestLevel: room.games.get(colony.ownerId).nestLevel, occupiedCells: [...colony.occupiedCells] })),
     world: includeWorld ? { size: 320, seed: room.seed, terrain: [...room.world.terrain] } : undefined,
     state: room.games.get(session.id).snapshot() };
 }

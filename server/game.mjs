@@ -1094,6 +1094,7 @@ export function createGame(environment, colony) {
     return {
       command, snapshot, save, restore,
       get agents() { return state.agents; },
+      get nestLevel() { return state.nestLevel; },
       prepare(simSeconds) {
         state.simSeconds = simSeconds;
         state.rivals = [...environment.games.values()].filter((game) => game !== this).flatMap((game) => game.agents);

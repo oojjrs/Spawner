@@ -117,7 +117,7 @@ async function changeRoom(db, roomId, change) {
 function payload(room, player, includeWorld) {
   return { roomId: room.id, title: room.title, hostId: room.hostId, userId: player.id, revision: room.revision,
     colonyId: room.colonies.find((colony) => colony.ownerId === player.id).id,
-    colonies: room.colonies.map((colony) => ({ ...colony, occupiedCells: [...colony.occupiedCells] })),
+    colonies: room.colonies.map((colony) => ({ ...colony, nestLevel: room.games.get(colony.ownerId).nestLevel, occupiedCells: [...colony.occupiedCells] })),
     world: includeWorld ? { size: 320, seed: room.seed, terrain: [...room.world.terrain] } : undefined,
     state: room.games.get(player.id).snapshot() };
 }
