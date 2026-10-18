@@ -312,11 +312,11 @@
     .session-bar button { border: 1px solid var(--line); border-radius: 6px; padding: 7px 10px; color: var(--ink); background: var(--panel-2); cursor: pointer; }
     #connection-status { color: var(--muted); }
     .welcome { width: min(620px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); overflow: auto; box-sizing: border-box; padding: clamp(20px, 5vw, 40px); border: 1px solid #526c64; border-radius: 22px; background: radial-gradient(ellipse at top right, #24443b, transparent 65%), #171d20; color: var(--ink); box-shadow: 0 24px 100px #0009; }
+    .welcome:focus { outline: none; }
     .welcome::backdrop { background: #0c1419ee; }
     .welcome-heading > span { color: var(--accent); letter-spacing: .28em; font-size: .8rem; }
-    .welcome h1 { font-size: clamp(1.4rem, 4vw, 2rem); line-height: 1.4; margin: 18px 0 12px; word-break: keep-all; }
     .welcome p { color: var(--muted); font-size: .85rem; line-height: 1.6; }
-    .welcome form { display: grid; gap: 10px; margin: 24px 0; }
+    .welcome form, .welcome-identity { display: grid; gap: 10px; margin: 24px 0; }
     .welcome label { font-size: .8rem; color: #c8d7d5; }
     .welcome input { width: 100%; min-width: 0; box-sizing: border-box; padding: 12px; border: 1px solid #466057; border-radius: 8px; background: #101819; color: var(--ink); font: inherit; }
     .welcome input:focus-visible, .welcome button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
@@ -464,11 +464,12 @@
 
   <div class="help-tooltip" id="help-tooltip" role="tooltip" hidden></div>
 
-  <dialog class="welcome" id="welcome" aria-labelledby="welcome-title">
-    <div class="welcome-heading"><span>SPAWNER</span><h1 id="welcome-title">작은 생명에서, 나만의 군락으로.</h1><p>공개된 세계에 합류하거나 새로운 방을 여세요.</p></div>
-    <form id="welcome-form"><label for="user-name">유저 이름</label><div class="user-name-controls"><input id="user-name" maxlength="24" required autocomplete="nickname" placeholder="어떤 이름으로 시작할까요?"><button class="secondary-action" id="user-name-random" type="button" aria-label="유저 이름 무작위로 뽑기" title="이름 다시 뽑기"><span aria-hidden="true">🎲</span></button></div><label for="room-title">새 방 이름</label><div class="room-create"><input id="room-title" maxlength="24" placeholder="나의 새로운 세계" aria-label="새 방 이름"><button class="primary-action" type="submit">새 방 만들기</button></div></form>
+  <dialog class="welcome" id="welcome" aria-labelledby="welcome-title" autofocus>
+    <div class="welcome-heading"><span id="welcome-title">SPAWNER</span></div>
+    <div class="welcome-identity"><label for="user-name">유저 이름</label><div class="user-name-controls"><input id="user-name" form="welcome-form" maxlength="24" required autocomplete="nickname" placeholder="어떤 이름으로 시작할까요?"><button class="secondary-action" id="user-name-random" type="button" aria-label="유저 이름 무작위로 뽑기" title="이름 다시 뽑기"><span aria-hidden="true">🎲</span></button></div></div>
+    <button class="secondary-action" id="room-resume" type="button" hidden>마지막 방에 다시 참가하기</button>
     <div class="room-heading"><h2>열려 있는 방</h2><button class="secondary-action" id="rooms-refresh" type="button">새로고침</button></div><div id="room-list" class="room-list"></div>
-    <p id="welcome-status" role="status"></p><button class="secondary-action" id="room-resume" type="button" hidden>현재 방으로 돌아가기</button>
+    <form id="welcome-form"><label for="room-title">새 방 이름</label><div class="room-create"><input id="room-title" maxlength="24" placeholder="나의 새로운 세계" aria-label="새 방 이름"><button class="primary-action" type="submit">새 방 만들기</button></div></form><p id="welcome-status" role="status"></p>
   </dialog>
 
   <script>
@@ -2359,7 +2360,7 @@
     });
     document.getElementById("rooms-refresh").addEventListener("click", refreshRooms);
     document.getElementById("lobby-open").addEventListener("click", openLobby);
-    roomResume.addEventListener("click", () => enterRoom(connection.roomId));
+    roomResume.addEventListener("click", () => lobbyAction("/api/join", { roomId: connection.roomId }));
     welcome.addEventListener("cancel", (event) => event.preventDefault());
     try { userName.value = (localStorage.getItem("spawner.userName") || "").trim(); } catch {}
     if (!userName.value || userName.value.length > 24) randomUserName();
