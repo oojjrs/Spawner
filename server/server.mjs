@@ -6,12 +6,13 @@ import { fileURLToPath } from "node:url";
 import { resolve, dirname } from "node:path";
 import { generateWorld } from "./world.mjs";
 import { createGame } from "./game.mjs";
+import { createCreatures, CREATURE_ASSETS } from "./creatures.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const dataDirectory = resolve(process.env.SPAWNER_DATA_DIR || resolve(root, ".data"));
 const dataPath = resolve(dataDirectory, "rooms.json");
 const instanceId = createHash("sha256").update(root.replace(/[\\/]+$/, "").toLowerCase()).digest("hex");
-const revision = (await Promise.all(["game.mjs", "server.mjs", "world.mjs"].map(async (file) =>
+const revision = (await Promise.all(["game.mjs", "server.mjs", "world.mjs", "creatures.mjs"].map(async (file) =>
   createHash("sha256").update(await readFile(resolve(root, "server", file))).digest("hex")))).join("");
 const sessions = new Map();
 const rooms = new Map();
@@ -48,6 +49,7 @@ function makeRoom(roomId, title, hostId, seed) {
     room.food.set(x + "," + y, cell);
   }
   indexFood(room);
+  room.creatureSystem = createCreatures(room, null);
   return room;
 }
 
@@ -93,7 +95,7 @@ function persist() {
   const body = JSON.stringify({ version: 1, sessions: [...sessions], rooms: [...rooms.values()].map((room) => ({
     id: room.id, title: room.title, hostId: room.hostId, seed: room.seed, simSeconds: room.simSeconds,
     revision: room.revision, colonies: room.colonies.map((colony) => ({ ...colony, occupiedCells: [...colony.occupiedCells] })),
-    food: [...room.food], games: [...room.games].map(([owner, game]) => [owner, game.save()])
+    food: [...room.food], creatures: room.creatureSystem.save(), games: [...room.games].map(([owner, game]) => [owner, game.save()])
   })) });
   const task = persistence.catch(() => {}).then(async () => {
     await mkdir(dataDirectory, { recursive: true });
@@ -121,6 +123,7 @@ try {
       game.restore(savedGame);
       room.games.set(owner, game);
     }
+    room.creatureSystem = createCreatures(room, savedRoom.creatures);
     prepare(room);
     rooms.set(room.id, room);
   }
@@ -241,10 +244,14 @@ async function route(request, response) {
     mutation = task;
     return task;
   }
-  if (request.method === "GET" && ["/", "/Spawner.html"].includes(url.pathname)) {
-    const html = await readFile(resolve(root, "Spawner.html"));
+  if (request.method === "GET" && ["/", "/Spawner.html", "/MapDesign.html"].includes(url.pathname)) {
+    const html = await readFile(resolve(root, url.pathname === "/MapDesign.html" ? "MapDesign.html" : "Spawner.html"));
     response.writeHead(200, { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-cache" });
     return response.end(html);
+  }
+  if (request.method === "GET" && CREATURE_ASSETS.includes(url.pathname.slice(1))) {
+    response.writeHead(200, { "Content-Type": url.pathname.endsWith(".png") ? "image/png" : "image/webp", "Cache-Control": "no-cache" });
+    return response.end(await readFile(resolve(root, url.pathname.slice(1))));
   }
   fail(404, "페이지를 찾을 수 없습니다.");
 }
@@ -273,6 +280,7 @@ const simulation = setInterval(() => {
     room.simSeconds += elapsed;
     prepare(room);
     for (const game of room.games.values()) game.tick(elapsed);
+    room.creatureSystem.tick();
     room.revision += 1;
   }
 }, 100);

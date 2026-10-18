@@ -991,7 +991,7 @@ export function createGame(environment, colony) {
 
     function updateAgents(elapsed) {
       removeDeadAgents();
-      for (const agent of [...state.agents, ...state.rivals]) {
+      for (const agent of state.agents) {
         if (agent.health <= 0) continue;
         agent.moveBudget = Math.min(1, agent.moveBudget + elapsed * agentSpeed(agent));
         if (agent.moveBudget < 1 || state.simSeconds - agent.moveStartedAt < agent.moveDuration) continue;
@@ -1071,7 +1071,7 @@ export function createGame(environment, colony) {
         simSeconds: state.simSeconds, colonyFood: state.colonyFood,
         evolutionPoints: state.evolutionPoints, nestLevel: state.nestLevel,
         templates: state.templates, agents: state.agents.map(visibleAgent),
-        rivals: state.rivals.map((agent) => ({ ...visibleAgent(agent), faction: "rival" })),
+        rivals: state.rivals.filter(agent => agent.health > 0).map((agent) => ({ ...visibleAgent(agent), faction: agent.species ? "hostile" : "rival" })),
         corpses: [...foodCellMap.values()].filter((cell) => cell.kind === "corpse" && cell.amount > 0),
         sharedTrails: [...state.sharedTrails], food: [...foodCellMap.values()]
       };
@@ -1095,9 +1095,14 @@ export function createGame(environment, colony) {
       command, snapshot, save, restore,
       get agents() { return state.agents; },
       get nestLevel() { return state.nestLevel; },
+      receiveDamage(agent, amount) {
+        if (!state.agents.includes(agent) || agent.health <= 0) return;
+        agent.health = Math.max(0, agent.health - amount);
+        removeDeadAgents();
+      },
       prepare(simSeconds) {
         state.simSeconds = simSeconds;
-        state.rivals = [...environment.games.values()].filter((game) => game !== this).flatMap((game) => game.agents);
+        state.rivals = [...environment.games.values()].filter((game) => game !== this).flatMap((game) => game.agents).concat(environment.creatureSystem?.agents || []);
       },
       tick(elapsed) {
         updateAgents(elapsed);

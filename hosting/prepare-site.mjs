@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { CREATURE_ASSETS } from "../server/creatures.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const destination = process.argv[2] ? resolve(process.argv[2]) : null;
@@ -29,9 +30,15 @@ const html = tracked("Spawner.html").toString("utf8").replace(/data:([a-zA-Z0-9/
 mkdirSync(join(destination, "public/game-assets"), { recursive: true });
 for (const [name, bytes] of assets) writeFileSync(join(destination, "public/game-assets", name), bytes);
 text("public/Spawner.html", html);
-text("hosting/server.mjs", readFileSync(join(root, "hosting/server.mjs"), "utf8"));
+text("public/MapDesign.html", tracked("MapDesign.html").toString("utf8"));
+text("hosting/server.mjs", tracked("hosting/server.mjs").toString("utf8"));
 text("db/spawner-schema.ts", readFileSync(join(root, "hosting/site-schema.ts"), "utf8"));
-for (const name of ["game.mjs", "world.mjs"]) text("server/" + name, tracked("server/" + name).toString("utf8"));
+for (const name of ["game.mjs", "world.mjs", "creatures.mjs"]) text("server/" + name, tracked("server/" + name).toString("utf8"));
+for (const file of CREATURE_ASSETS) {
+  const target = join(destination, "public", file);
+  mkdirSync(dirname(target), { recursive: true });
+  writeFileSync(target, tracked(file));
+}
 const schemaPath = join(destination, "db/schema.ts");
 const schema = readFileSync(schemaPath, "utf8");
 if (!schema.includes('from "./spawner-schema"')) text("db/schema.ts", schema.trimEnd() + '\n\nexport { spawnerPlayers, spawnerRooms, spawnerRequests } from "./spawner-schema";\n');

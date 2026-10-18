@@ -1,0 +1,15 @@
+{
+  "name": "spiny-back-beetle",
+  "action": "walk",
+  "frameSize": 512,
+  "columns": 8,
+  "frameCount": 32,
+  "frameMs": 40,
+  "durationMs": 1280,
+  "loop": true,
+  "rootMotion": false,
+  "layers": "spiny-back-beetle-parts/layout.json",
+  "sheet": "spiny-back-beetle-walk.png",
+  "animation": "spiny-back-beetle-walk.webp",
+  "preview": "spiny-back-beetle-walk.gif"
+}

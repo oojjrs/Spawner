@@ -19,7 +19,7 @@ foreach ($candidate in $nodeCandidates) {
 if (-not $nodeExecutable) { throw 'Node.js 22 이상 실행 파일을 찾을 수 없습니다.' }
 $normalizedRoot = [IO.Path]::GetFullPath($PSScriptRoot).TrimEnd('\', '/').ToLowerInvariant()
 $instanceId = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($normalizedRoot))).ToLowerInvariant()
-$revision = ((@('server\game.mjs', 'server\server.mjs', 'server\world.mjs') | ForEach-Object {
+$revision = ((@('server\game.mjs', 'server\server.mjs', 'server\world.mjs', 'server\creatures.mjs') | ForEach-Object {
     (Get-FileHash -LiteralPath (Join-Path $PSScriptRoot $_) -Algorithm SHA256).Hash.ToLowerInvariant()
 }) -join '')
 $candidatePorts = if ($env:PORT) { @([int]$env:PORT) } else { @(3000..3020) }

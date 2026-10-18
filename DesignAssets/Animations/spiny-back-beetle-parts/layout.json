@@ -1,0 +1,76 @@
+{
+  "frameSize": 512,
+  "source": "../../spiny-back-beetle-sprite.png",
+  "parts": [
+    {
+      "name": "far-leg",
+      "root": [
+        107,
+        297
+      ],
+      "foot": [
+        27,
+        389
+      ]
+    },
+    {
+      "name": "rear-leg",
+      "root": [
+        457,
+        328
+      ],
+      "foot": [
+        480,
+        404
+      ]
+    },
+    {
+      "name": "middle-leg",
+      "root": [
+        375,
+        350
+      ],
+      "foot": [
+        411,
+        439
+      ]
+    },
+    {
+      "name": "front-leg",
+      "root": [
+        299,
+        346
+      ],
+      "foot": [
+        275,
+        471
+      ]
+    },
+    {
+      "name": "left-mandible",
+      "root": [
+        114,
+        327
+      ],
+      "foot": null
+    },
+    {
+      "name": "right-mandible",
+      "root": [
+        211,
+        339
+      ],
+      "foot": null
+    }
+  ],
+  "occluder": "carapace.png",
+  "order": [
+    "far-leg",
+    "rear-leg",
+    "middle-leg",
+    "front-leg",
+    "carapace",
+    "left-mandible",
+    "right-mandible"
+  ]
+}

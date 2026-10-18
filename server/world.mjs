@@ -136,7 +136,16 @@ export function generateWorld(seed) {
         return {size,radius,seed,sites:placement.sites,closePair:placement.closePair,minDistance:placement.minDistance,fields,foodIndices,food:Array.from(foodIndices, index => [index % size, Math.floor(index / size)])};
       }
       const generated = generateMap(seed);
+      const creatureDensity = new Uint8Array(320 * 320);
+      for (let y = 0; y < 320; y++) for (let x = 0; x < 320; x++) {
+        const index = y * 320 + x, terrain = generated.fields.terrain[index];
+        if (terrain < 2 || terrain > 6) continue;
+        const distance = Math.min(...generated.sites.map(site => Math.hypot(x - site[0], y - site[1])));
+        if (distance >= 26) creatureDensity[index] = terrainByte(terrainFbm(x + 613, y - 487, 32, seed + 8101) * 0.5 + 0.5);
+      }
       return {
+        seed,
+        creatureDensity,
         terrain: generated.fields.terrain,
         food: generated.food,
         origin: { x: generated.sites[0][0], y: generated.sites[0][1] },

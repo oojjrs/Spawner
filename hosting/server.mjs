@@ -1,4 +1,5 @@
 import { createGame } from "../server/game.mjs";
+import { createCreatures } from "../server/creatures.mjs";
 import { generateWorld } from "../server/world.mjs";
 
 const worlds = new Map();
@@ -38,6 +39,7 @@ function makeRoom(roomId, title, hostId, seed) {
     lastStepAt: Date.now(), colonies: [], games: new Map(), food: new Map(), foodSpots: new Map(), commands: new Map() };
   for (const [x, y] of room.world.food) room.food.set(x + "," + y, { x, y, amount: 50, terrain: terrainTypes[room.world.terrain[y * 320 + x]] });
   indexFood(room);
+  room.creatureSystem = createCreatures(room, null);
   return room;
 }
 function indexFood(room) {
@@ -58,6 +60,7 @@ function advance(room) {
     room.simSeconds += elapsed;
     prepare(room);
     for (const game of room.games.values()) game.tick(elapsed);
+    room.creatureSystem.tick();
     remaining -= elapsed;
   }
   room.lastStepAt = now;
@@ -79,7 +82,7 @@ function join(room, player) {
 function save(room) {
   return JSON.stringify({ simSeconds: room.simSeconds, lastStepAt: room.lastStepAt,
     colonies: room.colonies.map((colony) => ({ ...colony, occupiedCells: [...colony.occupiedCells] })),
-    food: [...room.food], games: [...room.games].map(([owner, game]) => [owner, game.save()]), commands: [...room.commands] });
+    food: [...room.food], creatures: room.creatureSystem.save(), games: [...room.games].map(([owner, game]) => [owner, game.save()]), commands: [...room.commands] });
 }
 async function loadRoom(db, roomId) {
   const row = await db.prepare("SELECT * FROM spawner_rooms WHERE id = ?").bind(roomId).first();
@@ -98,6 +101,7 @@ async function loadRoom(db, roomId) {
     game.restore(data);
     room.games.set(owner, game);
   }
+  room.creatureSystem = createCreatures(room, saved.creatures);
   return room;
 }
 async function changeRoom(db, roomId, change) {

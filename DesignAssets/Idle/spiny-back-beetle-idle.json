@@ -1,0 +1,14 @@
+{
+  "name": "spiny-back-beetle",
+  "frameSize": 512,
+  "columns": 8,
+  "frameCount": 64,
+  "frameMs": 50,
+  "restMs": 0,
+  "durationMs": 3200,
+  "loop": true,
+  "layers": "spiny-back-beetle-parts/layout.json",
+  "sheet": "spiny-back-beetle-idle.png",
+  "animation": "spiny-back-beetle-idle.webp",
+  "preview": "spiny-back-beetle-idle.gif"
+}
