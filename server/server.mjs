@@ -21,6 +21,7 @@ const mask = ["1,0", "2,0", "3,0", "0,1", "1,1", "2,1", "3,1", "4,1",
 let persistence = Promise.resolve();
 let mutation = Promise.resolve();
 let storageError = false;
+let autosave = null;
 
 function id() { return randomBytes(24).toString("hex"); }
 function fail(status, message) { throw Object.assign(new Error(message), { status }); }
@@ -42,7 +43,7 @@ function renameColony(room, ownerId, action) {
 function makeRoom(roomId, title, hostId, seed) {
   const world = generateWorld(seed);
   const room = { id: roomId, title, hostId, seed, world, simSeconds: 0, revision: 0,
-    colonies: [], games: new Map(), food: new Map(), foodSpots: new Map(), lastActive: 0 };
+    colonies: [], games: new Map(), food: new Map(), foodSpots: new Map(), lastActive: 0, lastVisitedAt: Date.now(), played: false };
   const terrainTypes = ["deep", "shallow", "coast", "land", "grassland", "forest", "lowMountain", "highMountain", "ridge"];
   for (const [x, y] of world.food) {
     const cell = { x, y, amount: 50, terrain: terrainTypes[world.terrain[y * 320 + x]] };
@@ -75,6 +76,8 @@ function join(room, session) {
   }
   session.roomId = room.id;
   room.lastActive = Date.now();
+  room.lastVisitedAt = room.lastActive;
+  resumeAutosave();
   prepare(room);
 }
 
@@ -94,7 +97,7 @@ function payload(room, session, includeWorld) {
 function persist() {
   const body = JSON.stringify({ version: 1, sessions: [...sessions], rooms: [...rooms.values()].map((room) => ({
     id: room.id, title: room.title, hostId: room.hostId, seed: room.seed, simSeconds: room.simSeconds,
-    revision: room.revision, colonies: room.colonies.map((colony) => ({ ...colony, occupiedCells: [...colony.occupiedCells] })),
+    revision: room.revision, lastVisitedAt: room.lastVisitedAt, played: room.played, colonies: room.colonies.map((colony) => ({ ...colony, occupiedCells: [...colony.occupiedCells] })),
     food: [...room.food], creatures: room.creatureSystem.save(), games: [...room.games].map(([owner, game]) => [owner, game.save()])
   })) });
   const task = persistence.catch(() => {}).then(async () => {
@@ -107,12 +110,34 @@ function persist() {
   return task.catch((error) => { storageError = true; throw error; });
 }
 
+function resumeAutosave() {
+  if (stopping || autosave) return;
+  autosave = setTimeout(autosaveRooms, 5000);
+}
+
+async function autosaveRooms() {
+  if (stopping) return;
+  const lastActive = Math.max(0, ...[...rooms.values()].map((room) => room.lastActive));
+  const active = Date.now() - lastActive <= 30000;
+  try {
+    await persist();
+    autosave = null;
+    if (active || [...rooms.values()].some((room) => room.lastActive > lastActive)) resumeAutosave();
+  } catch (error) {
+    autosave = null;
+    console.error(error);
+    resumeAutosave();
+  }
+}
+
 try {
   const saved = JSON.parse(await readFile(dataPath, "utf8"));
   if (saved.version !== 1) throw new Error("지원하지 않는 저장 형식입니다.");
   for (const [token, session] of saved.sessions) sessions.set(token, session);
   for (const savedRoom of saved.rooms) {
     const room = makeRoom(savedRoom.id, savedRoom.title, savedRoom.hostId, savedRoom.seed);
+    room.lastVisitedAt = Number.isFinite(savedRoom.lastVisitedAt) ? savedRoom.lastVisitedAt : Date.now();
+    room.played = typeof savedRoom.played === "boolean" ? savedRoom.played : true;
     room.simSeconds = savedRoom.simSeconds;
     room.revision = savedRoom.revision;
     room.food = new Map(savedRoom.food);
@@ -156,7 +181,27 @@ function currentRoom(session) {
   const room = rooms.get(session.roomId);
   if (!room || !room.games.has(session.id)) fail(404, "먼저 방에 참가해 주세요.");
   room.lastActive = Date.now();
+  room.lastVisitedAt = room.lastActive;
+  resumeAutosave();
   return room;
+}
+
+function roomDeletionReason(room, session) {
+  if (!session || room.hostId !== session.id) return "방장만 삭제할 수 있습니다.";
+  if (room.colonies.some((colony) => colony.ownerId !== session.id) ||
+    [...room.games.keys()].some((owner) => owner !== session.id)) return "다른 참가자의 둥지가 남아 있습니다.";
+  return "";
+}
+
+function roomExpiresAt(room) {
+  return room.lastVisitedAt + (room.played ? 30 : 1) * 86400000;
+}
+
+function deleteRoom(room) {
+  rooms.delete(room.id);
+  for (const session of sessions.values()) {
+    if (session.roomId === room.id) session.roomId = null;
+  }
 }
 
 async function route(request, response) {
@@ -172,7 +217,8 @@ async function route(request, response) {
   if (request.method === "GET" && url.pathname === "/api/rooms") {
     return json(response, 200, { rooms: [...rooms.values()].map((room) => ({ id: room.id, title: room.title,
       players: room.colonies.length, capacity: 12, joined: !!session && room.games.has(session.id),
-      isHost: !!session && room.hostId === session.id,
+      isHost: !!session && room.hostId === session.id, deletionReason: roomDeletionReason(room, session),
+      expiresAt: roomExpiresAt(room),
       host: [...sessions.values()].find((entry) => entry.id === room.hostId)?.name || "" })) });
   }
   if (request.method === "GET" && url.pathname === "/api/state") {
@@ -225,6 +271,14 @@ async function route(request, response) {
         if (!room) fail(404, "방을 찾을 수 없습니다.");
         join(room, session);
         result = { roomId: room.id };
+      } else if (url.pathname === "/api/rooms/delete") {
+        const room = rooms.get(action.roomId);
+        if (!room) fail(404, "이미 삭제되었거나 존재하지 않는 방입니다.");
+        const reason = roomDeletionReason(room, session);
+        if (reason) fail(403, reason);
+        if (action.title !== room.title) fail(400, "방 이름이 일치하지 않습니다.");
+        deleteRoom(room);
+        result = { deletedRoomId: room.id };
       } else if (url.pathname === "/api/action") {
         const room = currentRoom(session);
         if (action.roomId !== room.id) fail(409, "참가한 방이 변경되었습니다. 다시 입장해 주세요.");
@@ -234,6 +288,7 @@ async function route(request, response) {
           try { result = room.games.get(session.id).command(action); }
           catch (error) { fail(400, error.message); }
         }
+        room.played = true;
         room.revision += 1;
       } else fail(404, "요청을 찾을 수 없습니다.");
       session.commands.push({ id: action.requestId, result });
@@ -288,7 +343,17 @@ const simulation = setInterval(() => {
     room.revision += 1;
   }
 }, 100);
-const autosave = setInterval(() => { if (stopping) return; persist().catch((error) => console.error(error)); }, 5000);
+const roomCleanup = setInterval(() => {
+  if (stopping || storageError) return;
+  const task = mutation.catch(() => {}).then(async () => {
+    const expired = [...rooms.values()].filter((room) => Date.now() >= roomExpiresAt(room));
+    if (!expired.length) return;
+    for (const room of expired) deleteRoom(room);
+    await persist();
+  });
+  mutation = task;
+  task.catch(() => {});
+}, 60000);
 const host = process.env.HOST || "127.0.0.1";
 const port = Number(process.env.PORT || 3000);
 server.listen(port, host, () => { process.stdout.write("SYSTEM> 서버 시작 : http://" + host + ":" + server.address().port + "\n"); });
@@ -317,7 +382,8 @@ function stop() {
       await mutation.catch(() => {});
       await persist();
       clearInterval(simulation);
-      clearInterval(autosave);
+      clearTimeout(autosave);
+      clearInterval(roomCleanup);
       server.close();
       server.closeIdleConnections();
       if (control.listening) control.close();
