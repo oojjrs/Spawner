@@ -158,6 +158,7 @@ async function route(request, response) {
   if (request.method === "GET" && url.pathname === "/api/rooms") {
     return json(response, 200, { rooms: [...rooms.values()].map((room) => ({ id: room.id, title: room.title,
       players: room.colonies.length, capacity: 12, joined: !!session && room.games.has(session.id),
+      isHost: !!session && room.hostId === session.id,
       host: room.colonies.find((colony) => colony.ownerId === room.hostId)?.name.replace(/의 둥지$/, "") || "" })) });
   }
   if (request.method === "GET" && url.pathname === "/api/state") {

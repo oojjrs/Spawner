@@ -320,12 +320,16 @@
     .welcome label { font-size: .8rem; color: #c8d7d5; }
     .welcome input { width: 100%; min-width: 0; box-sizing: border-box; padding: 12px; border: 1px solid #466057; border-radius: 8px; background: #101819; color: var(--ink); font: inherit; }
     .welcome input:focus-visible, .welcome button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .user-name-controls { display: flex; gap: 8px; }
+    .user-name-controls button { flex: 0 0 46px; padding: 0; font-size: 1.4rem; }
     .room-create { display: flex; gap: 8px; }
     .room-create button { flex: 0 0 auto; }
     .room-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
     .room-heading h2 { font-size: 1rem; }
     .room-list { display: grid; gap: 8px; margin-top: 8px; max-height: 260px; overflow: auto; }
     .room-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: #10181988; }
+    .room-item.is-host { border-color: #75c4b680; background: #23423999; }
+    .room-owner-badge { display: inline-block; margin-left: 8px; padding: 3px 7px; border-radius: 999px; background: #75c4b6; color: #102923; font-size: .7rem; white-space: nowrap; vertical-align: middle; }
     .room-item > div { min-width: 0; overflow-wrap: anywhere; }
     .room-item strong { display: block; font-size: .9rem; }
     .room-item small { display: block; margin-top: 5px; color: var(--muted); }
@@ -462,7 +466,7 @@
 
   <dialog class="welcome" id="welcome" aria-labelledby="welcome-title">
     <div class="welcome-heading"><span>SPAWNER</span><h1 id="welcome-title">작은 생명에서, 나만의 군락으로.</h1><p>공개된 세계에 합류하거나 새로운 방을 여세요.</p></div>
-    <form id="welcome-form"><label for="user-name">유저 이름</label><input id="user-name" maxlength="24" required autocomplete="nickname" placeholder="어떤 이름으로 시작할까요?"><label for="room-title">새 방 이름</label><div class="room-create"><input id="room-title" maxlength="24" placeholder="나의 새로운 세계" aria-label="새 방 이름"><button class="primary-action" type="submit">새 방 만들기</button></div></form>
+    <form id="welcome-form"><label for="user-name">유저 이름</label><div class="user-name-controls"><input id="user-name" maxlength="24" required autocomplete="nickname" placeholder="어떤 이름으로 시작할까요?"><button class="secondary-action" id="user-name-random" type="button" aria-label="유저 이름 무작위로 뽑기" title="이름 다시 뽑기"><span aria-hidden="true">🎲</span></button></div><label for="room-title">새 방 이름</label><div class="room-create"><input id="room-title" maxlength="24" placeholder="나의 새로운 세계" aria-label="새 방 이름"><button class="primary-action" type="submit">새 방 만들기</button></div></form>
     <div class="room-heading"><h2>열려 있는 방</h2><button class="secondary-action" id="rooms-refresh" type="button">새로고침</button></div><div id="room-list" class="room-list"></div>
     <p id="welcome-status" role="status"></p><button class="secondary-action" id="room-resume" type="button" hidden>현재 방으로 돌아가기</button>
   </dialog>
@@ -2268,10 +2272,16 @@
         const fragment = document.createDocumentFragment();
         for (const room of result.rooms) {
           const row = document.createElement("div");
-          row.className = "room-item";
+          row.className = "room-item" + (room.isHost ? " is-host" : "");
           const text = document.createElement("div");
           const title = document.createElement("strong");
           title.textContent = room.title;
+          if (room.isHost) {
+            const badge = document.createElement("span");
+            badge.className = "room-owner-badge";
+            badge.textContent = "내 방";
+            title.append(badge);
+          }
           const detail = document.createElement("small");
           detail.textContent = "호스트 " + room.host + " · " + room.players + "/" + room.capacity;
           text.append(title, detail);
@@ -2322,7 +2332,27 @@
       refreshRooms();
     }
 
-    userName.addEventListener("input", () => userName.setCustomValidity(""));
+    let userNameEdited = false;
+
+    function randomUserName() {
+      const adjectives = ["느긋한", "용감한", "졸린", "반짝이는", "호기심많은", "씩씩한", "춤추는", "행복한"];
+      const creatures = ["새싹", "콩알", "버섯", "도토리", "민들레", "반딧불", "달팽이", "풀잎"];
+      const prefix = adjectives[Math.floor(Math.random() * adjectives.length)] +
+        creatures[Math.floor(Math.random() * creatures.length)];
+      let number = Math.floor(Math.random() * 1000);
+      if (prefix + number === userName.value) number = (number + 1) % 1000;
+      userName.value = prefix + number;
+      userName.setCustomValidity("");
+    }
+
+    userName.addEventListener("input", () => {
+      userNameEdited = true;
+      userName.setCustomValidity("");
+    });
+    document.getElementById("user-name-random").addEventListener("click", () => {
+      userNameEdited = true;
+      randomUserName();
+    });
     document.getElementById("welcome-form").addEventListener("submit", (event) => {
       event.preventDefault();
       lobbyAction("/api/rooms", { title: roomTitle.value.trim() || (userName.value.trim() + "의 세계").slice(0, 24) });
@@ -2331,14 +2361,15 @@
     document.getElementById("lobby-open").addEventListener("click", openLobby);
     roomResume.addEventListener("click", () => enterRoom(connection.roomId));
     welcome.addEventListener("cancel", (event) => event.preventDefault());
-    try { userName.value = localStorage.getItem("spawner.userName") || ""; } catch {}
+    try { userName.value = (localStorage.getItem("spawner.userName") || "").trim(); } catch {}
+    if (!userName.value || userName.value.length > 24) randomUserName();
     welcome.showModal();
     if (location.protocol === "file:") {
       welcomeStatus.textContent = "서버 실행 후 http://localhost:3000 에서 접속해 주세요.";
     } else {
       request("/api/session", "GET", null).then((result) => {
         if (result.user) {
-          userName.value = result.user.name;
+          if (!userNameEdited) userName.value = result.user.name;
           connection.roomId = result.user.roomId;
           roomResume.hidden = !connection.roomId;
         }
