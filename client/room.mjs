@@ -24,14 +24,14 @@ function prepare(room) {
   for (const game of room.games.values()) game.prepare(room.simSeconds);
 }
 
-export function createRoom(title, playerName, seed) {
-  const room = { id: crypto.randomUUID(), title: requireName(title, 24), playerName: requireName(playerName, 24),
+export function createRoom(title, seed) {
+  const room = { id: crypto.randomUUID(), title: requireName(title, 24),
     hostId: crypto.randomUUID(), seed, simSeconds: 0, revision: 0, updatedAt: Date.now(),
     world: generateWorld(seed), colonies: [], games: new Map(), food: new Map(), foodSpots: new Map() };
   for (const [x, y] of room.world.food) room.food.set(x + "," + y, { x, y, amount: 50, terrain: terrainTypes[room.world.terrain[y * 320 + x]] });
   indexFood(room);
   const site = room.world.sites[0];
-  const colony = { id: 1, ownerId: room.hostId, name: room.playerName + "의 둥지", x: site[0] - 2, y: site[1] - 2, occupiedCells: new Set(mask) };
+  const colony = { id: 1, ownerId: room.hostId, name: room.title + "의 둥지", x: site[0] - 2, y: site[1] - 2, occupiedCells: new Set(mask) };
   room.colonies.push(colony);
   room.games.set(room.hostId, createGame(room, colony));
   room.creatureSystem = createCreatures(room, null);
@@ -40,7 +40,7 @@ export function createRoom(title, playerName, seed) {
 }
 
 export function saveRoom(room) {
-  return { version: 1, id: room.id, title: room.title, hostId: room.hostId, playerName: room.playerName, seed: room.seed,
+  return { version: 1, id: room.id, title: room.title, hostId: room.hostId, seed: room.seed,
     simSeconds: room.simSeconds, revision: room.revision, updatedAt: Date.now(),
     colonies: room.colonies.map(colony => ({ ...colony, occupiedCells: [...colony.occupiedCells] })),
     food: [...room.food], creatures: room.creatureSystem.save(), games: [...room.games].map(([owner, game]) => [owner, game.save()]) };
@@ -53,7 +53,7 @@ export function restoreRoom(saved) {
       saved.colonies.length < 1 || saved.colonies.length > 12 || !Array.isArray(saved.games) ||
       saved.games.length !== saved.colonies.length || !Array.isArray(saved.food) || saved.food.length > 102400 ||
       !saved.creatures || ![1, 2, 3].includes(saved.creatures.version) || !Array.isArray(saved.creatures.agents)) throw new Error("월드 저장 형식이 올바르지 않습니다.");
-  const room = { id: saved.id, title: requireName(saved.title, 24), playerName: requireName(saved.playerName, 24),
+  const room = { id: saved.id, title: requireName(saved.title, 24),
     hostId: saved.hostId, seed: saved.seed, simSeconds: saved.simSeconds, revision: 0, updatedAt: saved.updatedAt,
     world: generateWorld(saved.seed), colonies: [], games: new Map(), food: new Map(saved.food), foodSpots: new Map() };
   const owners = new Set();
@@ -98,7 +98,7 @@ export function tickRoom(room, elapsed) {
 export function snapshotRoom(room, includeWorld) {
   prepare(room);
   const game = room.games.get(room.hostId);
-  return { roomId: room.id, title: room.title, hostId: room.hostId, userId: room.hostId, playerName: room.playerName,
+  return { roomId: room.id, title: room.title, hostId: room.hostId, userId: room.hostId,
     revision: room.revision, colonyId: room.colonies.find(colony => colony.ownerId === room.hostId).id,
     colonies: room.colonies.filter(colony => game.colonyKnown(colony)).map(colony => ({ ...colony, occupiedCells: [...colony.occupiedCells], nestLevel: room.games.get(colony.ownerId).nestLevel })),
     world: includeWorld ? { size: 320, seed: room.seed, terrain: room.world.terrain, hazards: room.world.hazards } : undefined,
@@ -123,8 +123,7 @@ export function importRooms(value) {
   let entries;
   if (value?.format === "spawner-local" && value.version === 1 && Array.isArray(value.rooms)) entries = value.rooms;
   else if (value?.version === 1 && Array.isArray(value.rooms) && Array.isArray(value.sessions)) {
-    entries = value.rooms.map(room => ({ ...room, version: 1,
-      playerName: value.sessions.find(entry => entry[1]?.id === room.hostId)?.[1].name || "나" }));
+    entries = value.rooms.map(room => ({ ...room, version: 1 }));
   } else throw new Error("Spawner 백업 파일을 선택해 주세요.");
   if (!entries.length || entries.length > 64) throw new Error("백업에는 1~64개의 월드가 필요합니다.");
   return entries.map(entry => {

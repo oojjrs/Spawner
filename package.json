@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node hosting/static-server.mjs"
+    "build": "node client/build.mjs"
   },
   "engines": { "node": ">=22" }
 }

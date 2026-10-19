@@ -31,8 +31,7 @@ mkdirSync(join(destination, "public/game-assets"), { recursive: true });
 for (const [name, bytes] of assets) writeFileSync(join(destination, "public/game-assets", name), bytes);
 text("public/Spawner.html", html);
 text("public/MapDesign.html", tracked("MapDesign.html").toString("utf8"));
-for (const name of ["game.mjs", "world.mjs", "attributes.mjs", "creatures.mjs", "utility.mjs", "nests.mjs"]) text("public/server/" + name, tracked("server/" + name).toString("utf8"));
-for (const name of ["client.mjs", "worker.mjs", "room.mjs", "storage.mjs"]) text("public/client/" + name, tracked("client/" + name).toString("utf8"));
+text("public/client/runtime.js", tracked("client/runtime.js").toString("utf8"));
 for (const file of CREATURE_ASSETS) {
   const target = join(destination, "public", file);
   mkdirSync(dirname(target), { recursive: true });

@@ -1,4 +1,4 @@
-import { createRoom, saveRoom, restoreRoom, tickRoom, snapshotRoom, commandRoom, importRooms, requireName } from "./room.mjs";
+import { createRoom, saveRoom, restoreRoom, tickRoom, snapshotRoom, commandRoom, importRooms } from "./room.mjs";
 import { openStorage } from "./storage.mjs";
 
 let storage;
@@ -50,19 +50,14 @@ function publish(includeWorld) {
 }
 
 async function handle(type, data) {
-  if (type === "session") return { name: await storage.setting("name"), roomId: await storage.setting("roomId") };
+  if (type === "session") return { roomId: await storage.setting("roomId") };
   if (type === "list") {
-    return (await storage.list()).map(saved => ({ id: saved.id, title: saved.title, playerName: saved.playerName,
+    return (await storage.list()).map(saved => ({ id: saved.id, title: saved.title,
       updatedAt: saved.updatedAt, simSeconds: saved.simSeconds })).sort((a, b) => b.updatedAt - a.updatedAt);
-  }
-  if (type === "name") {
-    const name = requireName(data.name, 24);
-    await storage.setSetting("name", name);
-    return { name };
   }
   if (type === "create") {
     await persist();
-    const next = createRoom(data.title, data.name, crypto.getRandomValues(new Uint32Array(1))[0]);
+    const next = createRoom(data.title, crypto.getRandomValues(new Uint32Array(1))[0]);
     await storage.put(saveRoom(next));
     room = next;
     dirty = false;
