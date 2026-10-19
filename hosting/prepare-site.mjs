@@ -9,7 +9,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const destination = process.argv[2] ? resolve(process.argv[2]) : null;
 if (!destination || process.argv.length !== 3) throw new Error("Sites 체크아웃의 절대 경로가 필요합니다.");
 const manifest = JSON.parse(readFileSync(join(destination, ".openai/hosting.json"), "utf8"));
-if (manifest.project_id !== "appgprj_6ac621eeeac08191bc0b96446dec8f6c" || manifest.d1 !== "DB") throw new Error("Spawner Site와 D1 바인딩을 확인해 주세요.");
+if (manifest.project_id !== "appgprj_6ac621eeeac08191bc0b96446dec8f6c") throw new Error("Spawner Site를 확인해 주세요.");
 const revision = execFileSync("git", ["rev-parse", "HEAD"], { cwd: root, encoding: "utf8" }).trim();
 function tracked(name) { return execFileSync("git", ["show", "HEAD:" + name], { cwd: root, maxBuffer: 128 * 1024 * 1024 }); }
 function text(name, value) {
@@ -31,26 +31,15 @@ mkdirSync(join(destination, "public/game-assets"), { recursive: true });
 for (const [name, bytes] of assets) writeFileSync(join(destination, "public/game-assets", name), bytes);
 text("public/Spawner.html", html);
 text("public/MapDesign.html", tracked("MapDesign.html").toString("utf8"));
-text("hosting/server.mjs", tracked("hosting/server.mjs").toString("utf8"));
-text("db/spawner-schema.ts", readFileSync(join(root, "hosting/site-schema.ts"), "utf8"));
-for (const name of ["game.mjs", "world.mjs", "attributes.mjs", "creatures.mjs", "utility.mjs", "nests.mjs"]) text("server/" + name, tracked("server/" + name).toString("utf8"));
-text("public/server/attributes.mjs", tracked("server/attributes.mjs").toString("utf8"));
-text("public/server/nests.mjs", tracked("server/nests.mjs").toString("utf8"));
+for (const name of ["game.mjs", "world.mjs", "attributes.mjs", "creatures.mjs", "utility.mjs", "nests.mjs"]) text("public/server/" + name, tracked("server/" + name).toString("utf8"));
+for (const name of ["client.mjs", "worker.mjs", "room.mjs", "storage.mjs"]) text("public/client/" + name, tracked("client/" + name).toString("utf8"));
 for (const file of CREATURE_ASSETS) {
   const target = join(destination, "public", file);
   mkdirSync(dirname(target), { recursive: true });
   writeFileSync(target, tracked(file));
 }
-const schemaPath = join(destination, "db/schema.ts");
-const schema = readFileSync(schemaPath, "utf8");
-if (!schema.includes('from "./spawner-schema"')) text("db/schema.ts", schema.trimEnd() + '\n\nexport { spawnerPlayers, spawnerRooms, spawnerRequests } from "./spawner-schema";\n');
-text("app/api/[...path]/route.ts", `import { env } from "cloudflare:workers";
-import { handleSpawnerRequest } from "../../../hosting/server.mjs";
-
-export const dynamic = "force-dynamic";
-const revision = "${revision}";
-
-export function GET(request: Request) { return handleSpawnerRequest(request, env.DB, revision); }
-export function POST(request: Request) { return handleSpawnerRequest(request, env.DB, revision); }
+text("app/api/[...path]/route.ts", `export const dynamic = "force-dynamic";
+export function GET() { return Response.json({ error: "브라우저의 내 월드에서 플레이해 주세요." }, { status: 410 }); }
+export function POST() { return GET(); }
 `);
 console.log(`ENV> SITE PREPARED : ${JSON.stringify({ project_id: manifest.project_id, source_revision: revision, html_bytes: Buffer.byteLength(html), assets: assets.size, largest_asset_bytes: Math.max(...[...assets.values()].map((bytes) => bytes.length)) })}`);

@@ -298,6 +298,7 @@
     button:disabled { opacity: .4; cursor: default; }
     .nest-status { margin: 9px 0 0; color: var(--amber); font-size: .74rem; line-height: 1.5; }
     .nest-status:empty { display: none; }
+    .evolution-text-icon { width: 24px; height: 28px; object-fit: contain; vertical-align: middle; image-rendering: pixelated; }
     .codex-growth-table-wrap { max-width: 100%; overflow-x: auto; }
     .codex-growth-table { width: 100%; min-width: 440px; border-collapse: collapse; font-variant-numeric: tabular-nums; }
     .codex-growth-table th, .codex-growth-table td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
@@ -480,7 +481,10 @@
     .room-item strong { display: block; font-size: .9rem; }
     .room-item small { display: block; margin-top: 5px; color: var(--muted); }
     .room-item button { flex-shrink: 0; }
-    .room-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .room-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; flex-wrap: wrap; justify-content: flex-end; }
+    .backup-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .room-item > div:first-child { flex: 1; }
+    @media (max-width: 520px) { .room-item { align-items: flex-start; flex-direction: column; } .room-actions { width: 100%; justify-content: flex-start; } }
     .room-delete[aria-disabled="true"] { opacity: .45; cursor: not-allowed; }
     .room-delete:not([aria-disabled="true"]) { color: #ffaaa3; }
     #welcome-status { min-height: 1.6em; color: #d6b26b; }
@@ -490,7 +494,7 @@
 </head>
 <body>
   <div class="app" inert>
-    <div class="session-bar"><span id="session-name"></span><span id="connection-status" role="status"></span><button id="codex-open" type="button" aria-haspopup="dialog" aria-controls="codex">코덱스</button><button id="lobby-open" type="button">방 목록 · 새 게임</button></div>
+    <div class="session-bar"><span id="session-name"></span><span id="connection-status" role="status"></span><button id="codex-open" type="button" aria-haspopup="dialog" aria-controls="codex">코덱스</button><button id="lobby-open" type="button">내 월드 · 저장</button></div>
     <main class="stage">
       <canvas id="world" width="1200" height="760" tabindex="0" aria-label="Spawner world canvas"></canvas>
       <button class="first-design" id="first-design" type="button">둥지를 눌러 첫 생명체를 설계하세요</button>
@@ -673,13 +677,17 @@
   <dialog class="welcome" id="welcome" aria-labelledby="welcome-title" autofocus>
     <div class="welcome-heading"><span id="welcome-title">SPAWNER</span></div>
     <div class="welcome-identity"><label for="user-name">유저 이름</label><div class="user-name-controls"><input id="user-name" form="welcome-form" maxlength="24" required autocomplete="nickname" placeholder="어떤 이름으로 시작할까요?"><button class="secondary-action" id="user-name-random" type="button" aria-label="유저 이름 무작위로 뽑기" title="이름 다시 뽑기"><span aria-hidden="true">🎲</span></button></div></div>
-    <div class="room-heading"><h2>열려 있는 방</h2><button class="secondary-action" id="rooms-refresh" type="button">새로고침</button></div><div id="room-list" class="room-list"></div>
-    <form id="welcome-form"><label for="room-title">새 방 이름</label><div class="room-create"><input id="room-title" maxlength="24" placeholder="나의 새로운 세계" aria-label="새 방 이름"><button class="primary-action" type="submit">새 방 만들기</button></div></form><p id="welcome-status" role="status"></p>
+    <p>이 브라우저에 자동 저장됩니다. 다른 탭으로 이동하면 진행이 멈춥니다.</p>
+    <div class="room-heading"><h2>내 월드</h2><button class="secondary-action" id="rooms-refresh" type="button">새로고침</button></div><div id="room-list" class="room-list"></div>
+    <form id="welcome-form"><label for="room-title">새 월드 이름</label><div class="room-create"><input id="room-title" maxlength="24" placeholder="나의 새로운 세계" aria-label="새 월드 이름"><button class="primary-action" type="submit">새 월드 만들기</button></div></form>
+    <div class="backup-actions"><button class="secondary-action" id="backup-import" type="button">백업 가져오기</button><button class="secondary-action" id="storage-persist" type="button">저장 보호 요청</button><input id="backup-file" type="file" accept=".json,application/json" hidden></div>
+    <p>사이트 데이터 삭제에 대비해 백업을 보관하세요. 기존 서버 저장도 가져올 수 있습니다.</p><p id="welcome-status" role="status"></p>
   </dialog>
 
   <script type="module">
     import { ATTRIBUTES, ATTRIBUTE_COMBINATIONS, attributeCounts, unitStats, birthCost, hasSynergy } from "./server/attributes.mjs";
     import { NEST_LEVELS } from "./server/nests.mjs";
+    import { createClient } from "./client/client.mjs";
     const connection = { active: false, online: false, busy: false, roomId: null, colonyId: null, revision: -1, simSeconds: 0, receivedAt: 0 };
     const connectionStatus = document.getElementById("connection-status");
     const canvas = document.getElementById("world");
@@ -753,6 +761,20 @@
       const left = rect.right + 8 + width <= window.innerWidth - 10 ? rect.right + 8 : rect.left - width - 8;
       helpTooltip.style.left = clamp(left, 10, Math.max(10, window.innerWidth - width - 10)) + "px";
       helpTooltip.style.top = clamp(rect.top, 10, Math.max(10, window.innerHeight - helpTooltip.offsetHeight - 10)) + "px";
+    }
+
+    function setEvolutionText(element, text) {
+      element.replaceChildren();
+      for (const [index, part] of String(text).split("진화 포인트").entries()) {
+        if (index) {
+          const image = document.createElement("img");
+          image.className = "evolution-text-icon";
+          image.src = EVOLUTION_SYMBOL;
+          image.alt = "진화 포인트";
+          element.append(image);
+        }
+        element.append(part);
+      }
     }
 
     function showHelpTooltip(button) {
@@ -3030,24 +3052,18 @@
     const roomTitle = document.getElementById("room-title");
     const roomList = document.getElementById("room-list");
     let lobbyBusy = false;
-    let pendingCommand = null;
-    let polling = null;
     let lobbyVersion = 0;
     let roomsSignature = "";
-
-    async function request(path, method, data) {
-      let response;
-      try {
-        response = await fetch(path, { method, credentials: "same-origin", cache: "no-store",
-          headers: data ? { "Content-Type": "application/json" } : {},
-          body: data ? JSON.stringify(data) : undefined, signal: AbortSignal.timeout(10000) });
-      } catch {
-        throw new Error("서버에 연결할 수 없습니다. 연결을 확인하고 다시 시도해 주세요.");
-      }
-      const result = await response.json();
-      if (!response.ok) throw Object.assign(new Error(result.error || "요청을 처리하지 못했습니다."), { status: response.status });
-      return result;
-    }
+    const client = createClient(packet => {
+      if (connection.active && !welcome.open) applySnapshot(packet);
+    }, message => {
+      connection.online = false;
+      setEvolutionText(connectionStatus, message);
+      setEvolutionText(welcomeStatus, message);
+      updateColonyPanel();
+    }, message => {
+      if (connection.active && message.roomId === connection.roomId) connectionStatus.textContent = "자동 저장됨";
+    });
 
     function applySnapshot(packet) {
       if (packet.roomId !== connection.roomId || packet.revision < connection.revision) return;
@@ -3057,7 +3073,7 @@
       connection.simSeconds = packet.state.simSeconds;
       connection.receivedAt = performance.now();
       connection.online = true;
-      connectionStatus.textContent = packet.title + " · " + packet.colonies.length + "/12";
+      connectionStatus.textContent = packet.title + " · 브라우저 저장";
       if (packet.world) {
         worldMap.terrain = Uint8Array.from(packet.world.terrain);
         worldMap.hazards = Uint8Array.from(packet.world.hazards || []);
@@ -3099,39 +3115,17 @@
       updateColonyPanel();
     }
 
-    async function refreshState(includeWorld) {
-      if (!connection.active) return;
-      const roomId = connection.roomId;
-      const packet = await request("/api/state" + (includeWorld ? "?world=1" : ""), "GET", null);
-      if (!connection.active || connection.roomId !== roomId) return;
-      if (packet.roomId !== roomId) {
-        openLobby();
-        welcomeStatus.textContent = "다른 탭에서 참가한 방이 바뀌었습니다. 방을 다시 선택해 주세요.";
-        return;
-      }
-      applySnapshot(packet);
-    }
-
     async function sendCommand(action) {
       if (connection.busy || !connection.active || !connection.online) return null;
-      const signature = JSON.stringify(action);
-      if (pendingCommand && pendingCommand.signature !== signature) {
-        connectionStatus.textContent = "이전 요청의 결과를 확인하려면 같은 동작을 다시 눌러 주세요.";
-        return null;
-      }
-      if (!pendingCommand) pendingCommand = { signature, body: { ...action, roomId: connection.roomId, requestId: crypto.randomUUID() } };
       connection.busy = true;
       updateColonyPanel();
       try {
-        const result = await request("/api/action", "POST", pendingCommand.body);
-        await refreshState(false);
-        pendingCommand = null;
+        const result = await client.call("command", { roomId: connection.roomId, action });
         return result;
       } catch (error) {
-        if (error.status && error.status < 500) pendingCommand = null;
-        connectionStatus.textContent = error.message;
+        setEvolutionText(connectionStatus, error.message);
         if (unitDraft) unitDraft.error = error.message;
-        nestStatus.textContent = error.message;
+        setEvolutionText(nestStatus, error.message);
         return null;
       } finally {
         connection.busy = false;
@@ -3140,13 +3134,13 @@
     }
 
     async function enterRoom(roomId) {
-      pendingCommand = null;
       connection.roomId = roomId;
       connection.revision = -1;
       connection.active = true;
       connection.online = false;
       try {
-        await refreshState(true);
+        const packet = await client.call("enter", { roomId, visible: !document.hidden });
+        applySnapshot(packet);
         if (!connection.online) return;
         closeEvolutionPanel();
         closeColonyMenu();
@@ -3156,101 +3150,93 @@
         focusColony();
         welcome.close();
         document.querySelector(".app").inert = false;
-        document.getElementById("session-name").textContent = userName.value.trim();
+        document.getElementById("session-name").textContent = packet.playerName;
         canvas.focus();
       } catch (error) {
         connection.active = false;
-        welcomeStatus.textContent = error.message;
+        setEvolutionText(welcomeStatus, error.message);
       }
     }
 
     async function refreshRooms() {
       const version = ++lobbyVersion;
       try {
-        const result = await request("/api/rooms", "GET", null);
+        const rooms = await client.call("list", null);
         if (version !== lobbyVersion) return;
-        const signature = JSON.stringify([connection.roomId, result.rooms]);
+        const signature = JSON.stringify([connection.roomId, rooms]);
         if (signature === roomsSignature) return;
         roomsSignature = signature;
         const fragment = document.createDocumentFragment();
-        for (const room of result.rooms.toSorted((a, b) => Number(b.id === connection.roomId) - Number(a.id === connection.roomId))) {
+        for (const room of rooms.toSorted((a, b) => Number(b.id === connection.roomId) - Number(a.id === connection.roomId))) {
           const row = document.createElement("div");
-          row.className = "room-item" + (room.isHost ? " is-host" : "");
+          row.className = "room-item" + (room.id === connection.roomId ? " is-host" : "");
           const text = document.createElement("div");
           const title = document.createElement("strong");
           title.textContent = room.title;
-          if (room.isHost) {
-            const badge = document.createElement("span");
-            badge.className = "room-owner-badge";
-            badge.textContent = "내 방";
-            title.append(badge);
-          }
           if (room.id === connection.roomId) {
             const badge = document.createElement("span");
             badge.className = "room-owner-badge";
-            badge.textContent = "최근에 참가했던 방";
+            badge.textContent = "최근 월드";
             title.append(badge);
           }
           const detail = document.createElement("small");
-          detail.textContent = "호스트 " + room.host + " · " + room.players + "/" + room.capacity;
+          detail.textContent = room.playerName + " · " + Math.floor(room.simSeconds / 60) + "분 진행 · " + new Date(room.updatedAt).toLocaleString("ko-KR");
           text.append(title, detail);
           const join = document.createElement("button");
           join.type = "button";
           join.className = "secondary-action";
-          join.textContent = room.joined ? "다시 참가" : room.players >= room.capacity ? "가득 참" : "참가";
-          join.disabled = !room.joined && room.players >= room.capacity;
-          join.addEventListener("click", () => lobbyAction("/api/join", { roomId: room.id }));
+          join.textContent = "이어하기";
+          join.addEventListener("click", () => lobbyAction("enter", { roomId: room.id }));
+          const backup = document.createElement("button");
+          backup.type = "button";
+          backup.className = "secondary-action";
+          backup.textContent = "백업";
+          backup.setAttribute("aria-label", room.title + " 백업");
+          backup.addEventListener("click", () => exportRoom(room));
           const remove = document.createElement("button");
           remove.type = "button";
           remove.className = "secondary-action room-delete";
           remove.textContent = "×";
           remove.setAttribute("aria-label", room.title + " 삭제");
-          remove.setAttribute("aria-disabled", String(!!room.deletionReason));
-          remove.title = room.deletionReason || "방 삭제";
-          remove.addEventListener("click", () => {
-            if (room.deletionReason) {
-              welcomeStatus.textContent = room.deletionReason;
-              return;
-            }
-            deleteRoom(room);
-          });
+          remove.title = "월드 삭제";
+          remove.addEventListener("click", () => deleteRoom(room));
           const actions = document.createElement("div");
           actions.className = "room-actions";
-          actions.append(join, remove);
+          actions.append(join, backup, remove);
           row.append(text, actions);
           fragment.append(row);
         }
-        if (!result.rooms.length) {
+        if (!rooms.length) {
           const empty = document.createElement("p");
-          empty.textContent = "아직 열린 방이 없습니다. 첫 번째 세계를 만들어 보세요.";
+          empty.textContent = "저장된 월드가 없습니다. 첫 번째 세계를 만들어 보세요.";
           fragment.append(empty);
         }
         roomList.replaceChildren(fragment);
-      } catch (error) { welcomeStatus.textContent = error.message; }
+      } catch (error) { setEvolutionText(welcomeStatus, error.message); }
     }
 
     async function deleteRoom(room) {
       if (lobbyBusy) return;
-      const title = window.prompt("이 방의 모든 진행 기록이 영구 삭제됩니다.\n삭제하려면 방 이름을 입력해 주세요: " + room.title);
+      const title = window.prompt("이 월드의 진행 기록을 삭제합니다.\n삭제하려면 월드 이름을 입력해 주세요: " + room.title);
       if (title === null) return;
       if (title !== room.title) {
-        welcomeStatus.textContent = "방 이름이 일치하지 않습니다.";
+        welcomeStatus.textContent = "월드 이름이 일치하지 않습니다.";
         return;
       }
       lobbyBusy = true;
-      welcomeStatus.textContent = "방 삭제 중…";
+      welcomeStatus.textContent = "월드 삭제 중…";
       try {
-        await request("/api/rooms/delete", "POST", { roomId: room.id, title, requestId: crypto.randomUUID() });
+        await client.call("delete", { roomId: room.id, title });
         if (connection.roomId === room.id) connection.roomId = null;
-        welcomeStatus.textContent = "방을 삭제했습니다.";
-      } catch (error) { welcomeStatus.textContent = error.message; }
+        welcomeStatus.textContent = "월드를 삭제했습니다.";
+      } catch (error) { setEvolutionText(welcomeStatus, error.message); }
       finally {
         await refreshRooms();
         lobbyBusy = false;
       }
     }
 
-    async function lobbyAction(path, data) {
+    async function lobbyAction(type, data) {
       if (lobbyBusy) return;
       if (!userName.value.trim()) {
         userName.setCustomValidity("유저 이름을 입력해 주세요.");
@@ -3260,23 +3246,63 @@
       lobbyBusy = true;
       welcomeStatus.textContent = "입장 준비 중…";
       try {
-        await request("/api/session", "POST", { name: userName.value.trim() });
-        try { localStorage.setItem("spawner.userName", userName.value.trim()); } catch {}
-        const result = await request(path, "POST", { ...data, requestId: crypto.randomUUID() });
+        await client.call("name", { name: userName.value.trim() });
+        const result = type === "create" ? await client.call("create", { ...data, name: userName.value.trim() }) : data;
         await enterRoom(result.roomId);
         if (!welcome.open) welcomeStatus.textContent = "";
-      } catch (error) { welcomeStatus.textContent = error.message; }
+      } catch (error) { setEvolutionText(welcomeStatus, error.message); }
       finally { lobbyBusy = false; }
     }
 
-    function openLobby() {
+    async function openLobby() {
       closeEvolutionPanel();
       closeColonyMenu();
       connection.active = false;
       document.querySelector(".app").inert = true;
       if (!welcome.open) welcome.showModal();
-      refreshRooms();
+      try { await client.call("pause", null); }
+      catch (error) { setEvolutionText(welcomeStatus, error.message); }
+      await refreshRooms();
     }
+
+    async function exportRoom(room) {
+      if (lobbyBusy) return;
+      lobbyBusy = true;
+      try {
+        const backup = await client.call("export", { roomId: room.id });
+        const url = URL.createObjectURL(new Blob([backup.text], { type: "application/json" }));
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = backup.title.replace(/[\\/:*?"<>|]/g, "_") + ".spawner.json";
+        link.click();
+        setTimeout(() => URL.revokeObjectURL(url), 10000);
+        welcomeStatus.textContent = "백업 파일을 내보냈습니다.";
+      } catch (error) { setEvolutionText(welcomeStatus, error.message); }
+      finally { lobbyBusy = false; }
+    }
+
+    const backupFile = document.getElementById("backup-file");
+    document.getElementById("backup-import").addEventListener("click", () => { if (!lobbyBusy) backupFile.click(); });
+    backupFile.addEventListener("change", async () => {
+      const file = backupFile.files[0];
+      backupFile.value = "";
+      if (!file || lobbyBusy) return;
+      if (file.size > 64 * 1024 * 1024) { welcomeStatus.textContent = "64MB 이하의 백업을 선택해 주세요."; return; }
+      lobbyBusy = true;
+      welcomeStatus.textContent = "백업을 가져오는 중…";
+      try {
+        const result = await client.call("import", { text: await file.text() });
+        welcomeStatus.textContent = result.count + "개 월드를 가져왔습니다. 기존 월드는 보존됩니다.";
+        await refreshRooms();
+      } catch (error) { setEvolutionText(welcomeStatus, "백업을 가져오지 못했습니다. " + error.message); }
+      finally { lobbyBusy = false; }
+    });
+    document.getElementById("storage-persist").addEventListener("click", async () => {
+      try {
+        const granted = await navigator.storage?.persist?.();
+        welcomeStatus.textContent = granted ? "자동 공간 정리로부터 저장을 보호합니다. 백업도 함께 보관하세요." : "저장 보호가 허용되지 않았습니다. 백업 파일을 보관해 주세요.";
+      } catch (error) { setEvolutionText(welcomeStatus, error.message); }
+    });
 
     let userNameEdited = false;
 
@@ -3301,7 +3327,7 @@
     });
     document.getElementById("welcome-form").addEventListener("submit", (event) => {
       event.preventDefault();
-      lobbyAction("/api/rooms", { title: roomTitle.value.trim() || (userName.value.trim() + "의 세계").slice(0, 24) });
+      lobbyAction("create", { title: roomTitle.value.trim() || (userName.value.trim() + "의 세계").slice(0, 24) });
     });
     document.getElementById("rooms-refresh").addEventListener("click", refreshRooms);
     document.getElementById("lobby-open").addEventListener("click", openLobby);
@@ -3310,30 +3336,24 @@
     if (!userName.value || userName.value.length > 24) randomUserName();
     welcome.showModal();
     if (location.protocol === "file:") {
-      welcomeStatus.textContent = "서버 실행 후 http://localhost:3000 에서 접속해 주세요.";
+      welcomeStatus.textContent = "Start-Server.bat으로 로컬 페이지를 열거나 배포된 주소로 접속해 주세요.";
     } else {
-      request("/api/session", "GET", null).then((result) => {
-        if (result.user) {
-          if (!userNameEdited) userName.value = result.user.name;
-          connection.roomId = result.user.roomId;
-        }
+      client.call("session", null).then((result) => {
+        if (result.name && !userNameEdited) userName.value = result.name;
+        connection.roomId = result.roomId;
         refreshRooms();
-      }).catch((error) => { welcomeStatus.textContent = error.message; });
-      setInterval(() => {
-        if (connection.active && !polling) {
-          polling = refreshState(false).catch((error) => {
-            connection.online = false;
-            if (error.status === 404) {
-              connection.roomId = null;
-              openLobby();
-              welcomeStatus.textContent = error.message;
-            }
-            connectionStatus.textContent = error.message;
-            updateColonyPanel();
-          }).finally(() => { polling = null; });
-        }
-      }, 250);
-      setInterval(() => { if (welcome.open && !lobbyBusy) refreshRooms(); }, 5000);
+      }).catch((error) => { setEvolutionText(welcomeStatus, error.message); });
+      document.addEventListener("visibilitychange", () => {
+        if (!connection.active || welcome.open) return;
+        client.call(document.hidden ? "pause" : "resume", null).catch(error => {
+          connection.online = false;
+          setEvolutionText(connectionStatus, error.message);
+        });
+      });
+      window.addEventListener("pagehide", () => { client.call("pause", null).catch(() => {}); });
+      window.addEventListener("pageshow", event => {
+        if (event.persisted && connection.active && !welcome.open && !document.hidden) client.call("resume", null).catch(error => setEvolutionText(connectionStatus, error.message));
+      });
     }
 
     resizeCanvas();

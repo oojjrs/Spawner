@@ -1,7 +1,7 @@
 #requires -Version 7.0
 param([switch]$NoOpen)
 $ErrorActionPreference = 'Stop'
-$serverFile = Join-Path $PSScriptRoot 'server\server.mjs'
+$serverFile = Join-Path $PSScriptRoot 'hosting\static-server.mjs'
 $nodeCandidates = @(
     (Get-Command node.exe -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source)
     (Join-Path $env:ProgramFiles 'nodejs\node.exe')
@@ -19,9 +19,7 @@ foreach ($candidate in $nodeCandidates) {
 if (-not $nodeExecutable) { throw 'Node.js 22 이상 실행 파일을 찾을 수 없습니다.' }
 $normalizedRoot = [IO.Path]::GetFullPath($PSScriptRoot).TrimEnd('\', '/').ToLowerInvariant()
 $instanceId = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($normalizedRoot))).ToLowerInvariant()
-$revision = ((@('server\game.mjs', 'server\server.mjs', 'server\world.mjs', 'server\attributes.mjs', 'server\creatures.mjs', 'server\utility.mjs') | ForEach-Object {
-    (Get-FileHash -LiteralPath (Join-Path $PSScriptRoot $_) -Algorithm SHA256).Hash.ToLowerInvariant()
-}) -join '')
+$revision = (Get-FileHash -LiteralPath $serverFile -Algorithm SHA256).Hash.ToLowerInvariant()
 $candidatePorts = if ($env:PORT) { @([int]$env:PORT) } else { @(3000..3020) }
 if ($candidatePorts[0] -lt 1 -or $candidatePorts[-1] -gt 65535) { throw '서버 포트는 1~65535여야 합니다.' }
 $playerUrl = $null
@@ -35,7 +33,7 @@ foreach ($candidatePort in $candidatePorts) {
     $candidateUrl = "http://127.0.0.1:$candidatePort"
     $health = $null
     try { $health = Invoke-RestMethod -Uri "$candidateUrl/api/health" -TimeoutSec 1 } catch {}
-    if ($health.app -ne 'Spawner' -or $health.instanceId -ne $instanceId) { continue }
+    if ($health.app -ne 'SpawnerClient' -or $health.instanceId -ne $instanceId) { continue }
     if ($health.revision -ne $revision) {
         $owners = @(Get-NetTCPConnection -LocalPort $candidatePort -State Listen | Select-Object -ExpandProperty OwningProcess -Unique)
         if ($owners.Count -ne 1) { throw '이전 서버의 프로세스를 확인할 수 없습니다.' }
@@ -93,7 +91,7 @@ if (-not $playerUrl) {
         if ($process.HasExited) { break }
         try {
             $health = Invoke-RestMethod -Uri "$playerUrl/api/health" -TimeoutSec 1
-            $ready = $health.app -eq 'Spawner' -and $health.instanceId -eq $instanceId -and $health.revision -eq $revision
+            $ready = $health.app -eq 'SpawnerClient' -and $health.instanceId -eq $instanceId -and $health.revision -eq $revision
         } catch {}
         if ($ready) { break }
     }
