@@ -1,5 +1,6 @@
 import { ATTRIBUTES, attributeCounts, unitStats, birthCost, hasSynergy } from "./attributes.mjs";
 import { createPersonality, personalityLabels, createUtilityAI } from "./utility.mjs";
+import { NEST_LEVELS } from "./nests.mjs";
 
 export function createGame(environment, colony) {
     const worldMap = environment.world;
@@ -1002,15 +1003,15 @@ export function createGame(environment, colony) {
     }
 
     function slotCapacity() {
-      return 2;
+      return NEST_LEVELS[state.nestLevel - 1].slotCapacity;
     }
 
     function pointCapacity() {
-      return state.nestLevel * 100;
+      return NEST_LEVELS[state.nestLevel - 1].pointCapacity;
     }
 
     function upgradeCost() {
-      return state.nestLevel * 40;
+      return NEST_LEVELS[state.nestLevel - 1].upgradeCost;
     }
 
     function agentSpeed(agent) {
@@ -1159,8 +1160,8 @@ export function createGame(environment, colony) {
     }
 
     function birth(template) {
-      if (template.slots.length > 2 || template.slots.some(key => !ATTRIBUTES.some(attribute => attribute.key === key))) {
-        throw new Error("설계를 2칸·4속성으로 수정한 뒤 탄생시켜 주세요.");
+      if (template.slots.length > slotCapacity() || template.slots.some(key => !ATTRIBUTES.some(attribute => attribute.key === key))) {
+        throw new Error("현재 둥지의 슬롯 수와 사용 가능한 속성에 맞춰 설계를 수정해 주세요.");
       }
       if (state.agents.length >= 200) throw new Error("생명체는 최대 200개까지 유지할 수 있습니다.");
       if (state.evolutionPoints < birthCost(template)) throw new Error("진화 포인트가 부족합니다.");
@@ -1200,7 +1201,7 @@ export function createGame(environment, colony) {
         return { agentId: birth(template) };
       }
       if (action.type === "upgrade") {
-        if (state.nestLevel >= 20) throw new Error("최고 둥지 레벨입니다.");
+        if (state.nestLevel >= NEST_LEVELS.length) throw new Error("최고 둥지 레벨입니다.");
         if (state.evolutionPoints < upgradeCost()) throw new Error("진화 포인트가 부족합니다.");
         state.evolutionPoints -= upgradeCost();
         state.nestLevel += 1;

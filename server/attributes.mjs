@@ -6,12 +6,12 @@ export const ATTRIBUTES = [
 ];
 
 export const ATTRIBUTE_COMBINATIONS = [
-  { keys: ["strength", "strength"], name: "과적", description: "운반량 6개를 넘겨 최대 10개까지 적재합니다. 초과 적재 중 이동 속도는 20% 감소합니다." },
+  { keys: ["strength", "strength"], name: "과적", description: "기본 운반량을 넘겨 먹이 4개를 추가로 적재합니다. 초과 적재 중 이동 속도는 20% 감소합니다." },
   { keys: ["strength", "feet"], name: "적재 가속", description: "적재율에 비례해 이동 속도가 최대 50% 증가합니다." },
   { keys: ["strength", "antenna"], name: "맥 짚기", description: "현장 준비 후 먹이 2개를 즉시 담습니다. 같은 먹이 더미에 개체별 30초 간격으로 발동합니다." },
   { keys: ["strength", "shell"], name: "충격 경화", description: "피격 직후 피해 4를 흡수하는 보호막이 4초간 생깁니다. 재사용 대기시간은 12초입니다." },
   { keys: ["feet", "feet"], name: "질주", description: "직선으로 4칸 이동하면 이동 속도가 75% 증가합니다. 정지하거나 방향을 바꾸면 해제됩니다." },
-  { keys: ["feet", "antenna"], name: "탐색 파동", description: "8칸 이동할 때마다 1초간 시야 반경이 5칸에서 9칸으로 넓어집니다." },
+  { keys: ["feet", "antenna"], name: "탐색 파동", description: "8칸 이동할 때마다 1초간 시야 반경이 4칸 넓어집니다." },
   { keys: ["feet", "shell"], name: "위험 가속", description: "위험 지형 안에서 이동 속도가 3배가 됩니다. 위험 지형의 기본 감속은 함께 적용됩니다." },
   { keys: ["antenna", "antenna"], name: "미지 감지", description: "반경 18칸 안개 속 미확인 대상에 느낌표를 표시합니다. 정체와 수량은 실제 시야로 확인합니다." },
   { keys: ["antenna", "shell"], name: "위험 예감", description: "위험 지역 진입 시 1초간 환경 피해를 막습니다. 재사용 대기시간은 15초입니다." },
@@ -44,5 +44,5 @@ export function unitStats(attributes) {
 }
 
 export function birthCost(template) {
-  return [3, 5, 8][template.slots.length] ?? Infinity;
+  return [3, 5, 8, 12, 17, 23][template.slots.length] ?? Infinity;
 }

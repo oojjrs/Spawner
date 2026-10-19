@@ -1,3 +1,5 @@
+import { NEST_LEVELS } from "./nests.mjs";
+
 export function createPersonality(random) {
   return Object.freeze({ boldness: random(), aggression: random(), curiosity: random() });
 }
@@ -238,7 +240,7 @@ export function createUtilityAI(context) {
       candidates.push(candidate);
     };
     const home = homeRoute(agent, agent);
-    const storage = Math.max(0, state.nestLevel * 100 - state.evolutionPoints);
+    const storage = Math.max(0, NEST_LEVELS[state.nestLevel - 1].pointCapacity - state.evolutionPoints);
     const homeTime = home ? travelTime(agent, home, agent.carrying) : Infinity;
     if (agent.carrying > 0 && storage > 0 && home) {
       const unload = agent.mode === "unload" ? Math.max(0.05, agent.unloadReady - state.simSeconds) : 1;

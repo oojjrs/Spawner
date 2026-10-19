@@ -33,8 +33,9 @@ text("public/Spawner.html", html);
 text("public/MapDesign.html", tracked("MapDesign.html").toString("utf8"));
 text("hosting/server.mjs", tracked("hosting/server.mjs").toString("utf8"));
 text("db/spawner-schema.ts", readFileSync(join(root, "hosting/site-schema.ts"), "utf8"));
-for (const name of ["game.mjs", "world.mjs", "attributes.mjs", "creatures.mjs", "utility.mjs"]) text("server/" + name, tracked("server/" + name).toString("utf8"));
+for (const name of ["game.mjs", "world.mjs", "attributes.mjs", "creatures.mjs", "utility.mjs", "nests.mjs"]) text("server/" + name, tracked("server/" + name).toString("utf8"));
 text("public/server/attributes.mjs", tracked("server/attributes.mjs").toString("utf8"));
+text("public/server/nests.mjs", tracked("server/nests.mjs").toString("utf8"));
 for (const file of CREATURE_ASSETS) {
   const target = join(destination, "public", file);
   mkdirSync(dirname(target), { recursive: true });
