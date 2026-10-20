@@ -856,6 +856,8 @@
     foodSelectionShape.getContext("2d").fillRect(0, 0, 1, 1);
     const starterObjectSprite = new Image();
     const agentSprites = new Map();
+    const agentSproutMotions = new Map();
+    const foodDeliveries = new Map();
     const agentSpriteSet = new WeakSet([starterObjectSprite]);
     const beetleSprite = new Image();
     beetleSprite.src = globalThis.Spawner.assets["DesignAssets/spiny-back-beetle-sprite.png"];
@@ -1620,6 +1622,132 @@
       ctx.fillRect(centerX - cell * 0.3, topLeft.y - cell * 0.08, cell * 0.6 * Math.max(0, agent.health / agent.stats.health), Math.max(2, cell * 0.035));
     }
 
+    function foodDeliveryPose(agent) {
+      const delivery = foodDeliveries.get(agent.id);
+      if (!delivery || delivery.receivedAtFrame != null) return { scaleX: 1, scaleY: 1 };
+      const progress = clamp((state.simSeconds - delivery.startedAt) / (delivery.arrivesAt - delivery.startedAt), 0, 1);
+      return foodDeliveryPoseAt(progress);
+    }
+
+    function foodDeliveryPoseAt(progress) {
+      const stretch = progress >= 0.12 && progress < 0.56 ? Math.sin((progress - 0.12) / 0.44 * Math.PI) : 0;
+      return { scaleX: 1 - stretch * 0.025, scaleY: 1 + stretch * 0.08 };
+    }
+
+    function agentIdlePose(agent, now) {
+      let motion = agentSproutMotions.get(agent.id);
+      const end = agent.moveStartedAt + (agent.moveDuration || 0);
+      if (["harvest", "unload", "fight"].includes(agent.mode) ||
+        agent.moveDuration && state.simSeconds < end + 0.36) {
+        if (motion) motion.idleStartedAt = null;
+        return null;
+      }
+      if (!motion) {
+        motion = { step: agent.moveStartedAt + ":" + agent.stepCount, end,
+          duration: agent.moveDuration, landedAt: -Infinity, time: state.simSeconds };
+        agentSproutMotions.set(agent.id, motion);
+      }
+      if (motion.idleStartedAt == null || now < motion.idleStartedAt) motion.idleStartedAt = now;
+      const phase = (now - motion.idleStartedAt) / 1000 % 6.8;
+      const shrugDuration = Math.PI * 2 / 7.2;
+      const shrug = phase / shrugDuration;
+      const body = shrug < 1 ? Math.sin(shrug * Math.PI) ** 2 : 0;
+      let flap = shrug < 1 ? -Math.sin(shrug * Math.PI * 2) * 0.24 : 0;
+      const rest = phase < 2.52 ? (phase - shrugDuration) / (2.52 - shrugDuration) :
+        (phase - 2.84) / (6.8 - 2.84);
+      if (rest >= 0 && rest < 1) flap += Math.sin(rest * Math.PI) ** 2 * 0.1;
+      const flutter = (phase - 2.52) / 0.32;
+      if (flutter >= 0 && flutter < 1) flap -= Math.sin(flutter * Math.PI * 2) * Math.sin(flutter * Math.PI) * 0.34;
+      return { bodyOffset: -AGENT_HEIGHT * body * 0.02, flap };
+    }
+
+    function agentBobOffset(agent, now) {
+      if (idleMotion.matches) return 0;
+      const idle = agentIdlePose(agent, now);
+      if (idle) return idle.bodyOffset;
+      const seconds = now / 1000;
+      const phase = Number(String(agent.id).split(":").pop()) || 0;
+      return AGENT_HEIGHT * (Math.sin(seconds * 2.4 + phase) * 0.03 +
+        Math.sin(seconds * 4.1 + phase * 1.7) * 0.012 +
+        Math.sin(seconds * 6.8 + phase * 0.63) * 0.006);
+    }
+
+    function agentBodyPose(agent, now, deliveryPose) {
+      const appearance = agent.appearanceAttributes || agent.attributes || {};
+      const lift = appearance.feet ? 24 + appearance.feet * 7 : 0;
+      return { pivot: (460 - lift) / 512, scaleX: deliveryPose.scaleX,
+        scaleY: deliveryPose.scaleY - agentBobOffset(agent, now) / (AGENT_HEIGHT * 350 / 512) };
+    }
+
+    function agentSproutPose(agent, now) {
+      if (idleMotion.matches) return { leftRotation: 0, rightRotation: 0, leftScaleY: 1, rightScaleY: 1 };
+      const time = state.simSeconds;
+      const step = agent.moveStartedAt + ":" + agent.stepCount;
+      const end = agent.moveStartedAt + (agent.moveDuration || 0);
+      let motion = agentSproutMotions.get(agent.id);
+      if (!motion || time < motion.time) {
+        motion = { step, end, duration: agent.moveDuration, landedAt: -Infinity, time,
+          idleStartedAt: motion?.idleStartedAt };
+        agentSproutMotions.set(agent.id, motion);
+      } else if (motion.step !== step) {
+        if (motion.duration && time >= motion.end) motion.landedAt = motion.end;
+        motion.step = step;
+      }
+      motion.end = end;
+      motion.duration = agent.moveDuration;
+      motion.time = time;
+      const elapsed = agent.moveDuration ? Math.max(0, time - agent.moveStartedAt) : 0;
+      const progress = agent.moveDuration ? clamp(elapsed / agent.moveDuration, 0, 1) : 1;
+      const launch = progress < 1 ? clamp(progress / 0.18, 0, 1) : 0;
+      let flap = -0.46 * launch * launch * (3 - 2 * launch);
+      const landedAt = agent.moveDuration && time >= end ? end : motion.landedAt;
+      const landing = (time - landedAt) / 0.36;
+      if (landing >= 0 && landing < 1) flap -= 0.46 * Math.cos(landing * Math.PI * 3) * (1 - landing) ** 1.35;
+      if (agent.mode === "harvest") {
+        const age = Math.max(0, time - agent.harvestStarted);
+        flap += Math.sin(age * Math.PI * 2 / 0.42) * 0.44 * clamp(age / 0.12, 0, 1);
+      }
+      let actionAge = -1;
+      if (agent.mode === "unload") {
+        const delivery = foodDeliveries.get(agent.id) || agent.foodDelivery;
+        if (delivery) actionAge = time - delivery.startedAt - (delivery.arrivesAt - delivery.startedAt) * 0.24;
+      } else if (agent.mode === "fight" && agent.attackReady > 0) {
+        actionAge = time - agent.attackReady + 1 / agent.stats.speed;
+      }
+      if (actionAge >= 0 && actionAge < 0.3) flap -= Math.sin(actionAge / 0.3 * Math.PI) * 0.44 * (1 - actionAge / 0.3);
+      const idle = agentIdlePose(agent, now);
+      if (idle) flap += idle.flap;
+      flap = clamp(flap, -0.75, 0.75);
+      const fold = 1 - Math.max(0, -flap) * 0.7;
+      return { leftRotation: flap, rightRotation: -flap, leftScaleY: fold, rightScaleY: fold };
+    }
+
+    function drawAgentSprout(agent, x, y, width, height, now, selected) {
+      const left = agentSprite(agent, "sprout-left");
+      const right = agentSprite(agent, "sprout-right");
+      const stem = agentSprite(agent, "sprout-stem");
+      if (![left, right, stem].every(sprite => sprite.complete && sprite.naturalWidth)) return;
+      const appearance = agent.appearanceAttributes || agent.attributes || {};
+      const lift = appearance.feet ? 24 + appearance.feet * 7 : 0;
+      const root = (110 - lift + 350 * 80 / starterObjectSprite.naturalHeight) / 512;
+      const pose = agentSproutPose(agent, now);
+      for (const [sprite, sourceX, rotation, scaleY] of [
+        [left, 135, pose.leftRotation, pose.leftScaleY],
+        [right, 151, pose.rightRotation, pose.rightScaleY]
+      ]) {
+        const pivot = (136 + 240 * sourceX / starterObjectSprite.naturalWidth) / 512;
+        ctx.save();
+        ctx.translate(x + width * pivot, y + height * root);
+        ctx.rotate(rotation);
+        ctx.scale(1, scaleY);
+        if (selected) drawSelectionOutline(sprite, -width * pivot, -height * root, width, height, null);
+        else ctx.drawImage(sprite, -width * pivot, -height * root, width, height);
+        ctx.restore();
+      }
+      if (selected) drawSelectionOutline(stem, x, y, width, height, null);
+      else ctx.drawImage(stem, x, y, width, height);
+    }
+
     function drawAgents(now) {
       const cell = state.camera.zoom;
       const spriteHeight = cell * AGENT_HEIGHT;
@@ -1637,7 +1765,9 @@
         const centerX = topLeft.x + cell / 2;
         const centerY = topLeft.y + cell / 2;
         const stride = Math.sin(renderPosition.progress * Math.PI);
-        const jumpOffset = stride * spriteHeight * (agent.attributes.feet ? 0.035 : 0.18);
+        const appearance = agent.appearanceAttributes || agent.attributes;
+        const bodyPose = agentBodyPose(agent, now, foodDeliveryPose(agent));
+        const jumpOffset = stride * spriteHeight * (appearance.feet ? 0.035 : 0.18);
 
         const isSelected = isSelectedObject("agent", agent);
         if (cell < 8) {
@@ -1655,16 +1785,15 @@
           continue;
         }
 
-        const bob = Math.sin(now / 520 + Number(String(agent.id).split(":").pop())) * spriteHeight * 0.015;
-        const spriteY = centerY - spriteHeight / 2 + bob - jumpOffset;
+        const spriteY = centerY - spriteHeight / 2 - jumpOffset;
 
         ctx.save();
         ctx.beginPath();
         ctx.rect(
           topLeft.x - cell * 0.1,
-          topLeft.y - cell * 0.3,
+          topLeft.y - cell * 0.6,
           cell * 1.2,
-          cell * 1.4
+          cell * 1.7
         );
         ctx.clip();
         ctx.imageSmoothingEnabled = false;
@@ -1680,20 +1809,37 @@
           Math.PI * 2
         );
         ctx.fill();
-        const sprite = agentSprite(agent);
+        const sprite = agentSprite(agent, "body");
+        const feet = appearance.feet ? agentSprite(agent, "feet") : null;
         if (sprite.complete && sprite.naturalWidth > 0) {
           const spriteWidth = spriteHeight * sprite.naturalWidth / sprite.naturalHeight;
           const spriteX = topLeft.x + (cell - spriteWidth) / 2;
           const footY = spriteY + spriteHeight * 0.94;
+          const bodyOffset = spriteHeight * (bodyPose.pivot - 0.94);
+          const feetReady = feet && feet.complete && feet.naturalWidth > 0;
           ctx.translate(centerX, footY);
-          if (agent.attributes.feet) {
+          if (appearance.feet) {
             ctx.rotate(stride * (agent.stepCount % 2 ? 1 : -1) * 0.09);
           }
           if (isSelected) {
-            drawSelectionOutline(sprite, spriteX - centerX, spriteY - footY,
+            if (feetReady) drawSelectionOutline(feet, spriteX - centerX, spriteY - footY,
               spriteWidth, spriteHeight);
+            ctx.save();
+            ctx.translate(0, bodyOffset);
+            ctx.scale(bodyPose.scaleX, bodyPose.scaleY);
+            drawAgentSprout(agent, spriteX - centerX, -spriteHeight * bodyPose.pivot,
+              spriteWidth, spriteHeight, now, true);
+            drawSelectionOutline(sprite, spriteX - centerX, -spriteHeight * bodyPose.pivot,
+              spriteWidth, spriteHeight);
+            ctx.restore();
           }
-          ctx.drawImage(sprite, spriteX - centerX, spriteY - footY,
+          if (feetReady) ctx.drawImage(feet, spriteX - centerX, spriteY - footY,
+            spriteWidth, spriteHeight);
+          ctx.translate(0, bodyOffset);
+          ctx.scale(bodyPose.scaleX, bodyPose.scaleY);
+          drawAgentSprout(agent, spriteX - centerX, -spriteHeight * bodyPose.pivot,
+            spriteWidth, spriteHeight, now, false);
+          ctx.drawImage(sprite, spriteX - centerX, -spriteHeight * bodyPose.pivot,
             spriteWidth, spriteHeight);
         }
         ctx.restore();
@@ -2312,22 +2458,22 @@
       return NEST_LEVELS[state.nestLevel - 1].upgradeCost;
     }
 
-    function agentSprite(agent) {
+    function agentSprite(agent, layer) {
       if (agent?.species === "spiny-back-beetle") return beetleSprite;
-      const attributes = agent?.attributes || {};
+      const attributes = agent?.appearanceAttributes || agent?.attributes || {};
       const counts = { strength: attributes.strength ?? attributes.arms ?? 0,
         feet: attributes.feet || 0, antenna: attributes.antenna || 0, shell: attributes.shell || 0 };
-      const key = [counts.strength, counts.feet, counts.antenna, counts.shell].join(":");
+      const key = [counts.strength, counts.feet, counts.antenna, counts.shell, layer || "full"].join(":");
       if (!agentSprites.has(key)) {
         const sprite = new Image();
-        sprite.src = composeAgentSprite(counts);
+        sprite.src = composeAgentSprite(counts, layer);
         agentSprites.set(key, sprite);
         agentSpriteSet.add(sprite);
       }
       return agentSprites.get(key);
     }
 
-    function composeAgentSprite(attributes) {
+    function composeAgentSprite(attributes, layer) {
       const sprite = document.createElement("canvas");
       sprite.width = 384;
       sprite.height = 384;
@@ -2335,13 +2481,36 @@
       context.scale(0.75, 0.75);
       context.imageSmoothingEnabled = false;
       const lift = attributes.feet ? 24 + attributes.feet * 7 : 0;
-      if (attributes.feet) {
+      if (layer === "sprout-left" || layer === "sprout-right" || layer === "sprout-stem") {
+        context.save();
+        context.translate(136, 110 - lift);
+        context.scale(240 / starterObjectSprite.naturalWidth, 350 / starterObjectSprite.naturalHeight);
+        context.beginPath();
+        if (layer === "sprout-stem") context.rect(127, 78, 32, 28);
+        else if (layer === "sprout-left") {
+          context.rect(0, 0, 143, 78);
+          context.rect(0, 78, 127, 28);
+        } else {
+          context.rect(143, 0, starterObjectSprite.naturalWidth - 143, 78);
+          context.rect(159, 78, starterObjectSprite.naturalWidth - 159, 28);
+        }
+        context.clip();
+        context.drawImage(starterObjectSprite, 0, 0);
+        context.restore();
+        return sprite.toDataURL("image/png");
+      }
+      if (attributes.feet && layer !== "body") {
         const width = 280 + attributes.feet * 16;
         const height = 92 + attributes.feet * 8;
         context.drawImage(agentParts.get("feet-" + (attributes.feet === 1 ? 1 : 2)),
           256 - width / 2, 500 - height, width, height);
       }
-      context.drawImage(starterObjectSprite, 136, 110 - lift, 240, 350);
+      if (layer === "feet") return sprite.toDataURL("image/png");
+      if (layer === "body") {
+        const top = 350 * 104 / starterObjectSprite.naturalHeight;
+        context.drawImage(starterObjectSprite, 0, 104, starterObjectSprite.naturalWidth,
+          starterObjectSprite.naturalHeight - 104, 136, 110 - lift + top, 240, 350 - top);
+      } else context.drawImage(starterObjectSprite, 136, 110 - lift, 240, 350);
       if (attributes.shell) {
         const width = 304 + (attributes.shell - 1) * 16;
         const height = 254 + (attributes.shell - 1) * 12;
@@ -3184,6 +3353,7 @@
     function applySnapshot(packet) {
       if (packet.roomId !== connection.roomId || packet.revision < connection.revision) return;
       const selection = state.selection;
+      const firstSnapshot = connection.revision < 0;
       connection.revision = packet.revision;
       connection.colonyId = packet.colonyId;
       connection.simSeconds = packet.state.simSeconds;
@@ -3203,6 +3373,9 @@
       Object.assign(COLONY_CENTER, { x: own.x + 2.5, y: own.y + 2.5 });
       const { food, sharedTrails, explored, visible, ...view } = packet.state;
       Object.assign(state, view);
+      if (firstSnapshot) agentSproutMotions.clear();
+      const agents = new Set([...state.agents, ...state.rivals].map(agent => agent.id));
+      for (const id of agentSproutMotions.keys()) if (!agents.has(id)) agentSproutMotions.delete(id);
       state.sharedTrails = new Map(sharedTrails);
       state.explored = new Set(explored);
       state.visible = new Set(visible);
