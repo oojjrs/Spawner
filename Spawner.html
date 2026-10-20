@@ -3316,16 +3316,11 @@
 
     async function deleteRoom(room) {
       if (lobbyBusy) return;
-      const title = window.prompt("이 방의 진행 기록을 삭제합니다.\n삭제하려면 방 이름을 입력해 주세요: " + room.title);
-      if (title === null) return;
-      if (title !== room.title) {
-        welcomeStatus.textContent = "방 이름이 일치하지 않습니다.";
-        return;
-      }
+      if (!window.confirm(room.title + " 방의 진행 기록을 삭제할까요?\n삭제한 진행 기록은 복구할 수 없습니다.")) return;
       lobbyBusy = true;
       welcomeStatus.textContent = "방 삭제 중…";
       try {
-        await client.call("delete", { roomId: room.id, title });
+        await client.call("delete", { roomId: room.id, title: room.title });
         if (connection.roomId === room.id) connection.roomId = null;
         welcomeStatus.textContent = "방을 삭제했습니다.";
       } catch (error) { setEvolutionText(welcomeStatus, error.message); }
