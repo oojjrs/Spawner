@@ -877,7 +877,11 @@ export function createGame(environment, colony) {
     function reconsiderAgent(agent, reason) {
       if (agent.health <= 0) return;
       const candidates = utilityAI.evaluate(agent, !["completed", "targetLost", "restore"].includes(reason));
-      const best = candidates[0];
+      let best = candidates[0];
+      if (agent.actionPriorities?.includes(best?.action)) {
+        best = agent.actionPriorities.map(action => candidates.find(candidate =>
+          candidate.action === action && candidate.score > 0)).find(Boolean) || best;
+      }
       agent.decisionCount = (agent.decisionCount || 0) + 1;
       agent.lastDecisionAt = state.simSeconds;
       agent.lastDecisionReason = reason;
@@ -1261,6 +1265,14 @@ export function createGame(environment, colony) {
       updatePerception();
 
     }
+
+    for (const priorities of [["explore", "collect"], ["collect", "explore"]]) {
+      const agent = spawnAgent({ id: null, name: "개체", slots: [], revision: 1 }, "colony");
+      if (!agent) throw new Error("둥지 주변에 초기 개체를 배치할 공간이 없습니다.");
+      agent.actionPriorities = priorities;
+    }
+    updatePerception();
+    for (const agent of state.agents) reconsiderAgent(agent, "birth");
 
     return {
       command, snapshot, save, restore,
