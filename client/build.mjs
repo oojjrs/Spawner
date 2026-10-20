@@ -37,4 +37,11 @@ const assets = Object.fromEntries(CREATURE_ASSETS.map(name => [name, `data:${nam
 const browser = bundle(["server/attributes.mjs", "server/nests.mjs", "client/client.mjs"]);
 const content = `(() => {\n${browser}\nconst workerSource = ${JSON.stringify(worker)};\nglobalThis.Spawner = Object.freeze({ ...modules["server/attributes.mjs"], NEST_LEVELS: modules["server/nests.mjs"].NEST_LEVELS, createClient: (onState, onError, onSaved) => modules["client/client.mjs"].createClient(onState, onError, onSaved, workerSource), assets: ${JSON.stringify(assets)} });\n})();\n`;
 writeFileSync(resolve(root, "client/runtime.js"), content.replace(/\r?\n/g, "\r\n"), "utf8");
+const designPath = resolve(root, "Design.html");
+const design = readFileSync(designPath, "utf8");
+if (design.includes('<script id="world-model">')) {
+  const model = `(() => {\n${bundle(["server/world.mjs"])}\nglobalThis.SpawnerWorld = modules["server/world.mjs"];\n})();`;
+  const updated = design.replace(/(<script id="world-model">)[\s\S]*?(<\/script>)/, (match, start, end) => start + "\n" + model + "\n" + end).replace(/\r?\n/g, "\r\n");
+  if (updated !== design) writeFileSync(designPath, updated, "utf8");
+}
 console.log(`ENV> CLIENT BUNDLE : ${Buffer.byteLength(content)} BYTES`);

@@ -1409,7 +1409,7 @@
             }
 
             const screen = worldToScreen(foodCell.x, foodCell.y);
-            const remainingRatio = clamp(foodCell.amount / FOOD_PER_CELL, 0, 1);
+            const remainingRatio = clamp(foodCell.amount / (foodCell.initialAmount || FOOD_PER_CELL), 0, 1);
             const spriteReady = foodSprite.complete && foodSprite.naturalWidth > 0;
             const labelSize = Math.max(8, Math.min(12, cell * 0.17));
             const barInset = Math.max(1, cell * 0.1);

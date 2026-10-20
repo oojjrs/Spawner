@@ -1,3 +1,6 @@
+export const STARTING_FOOD_RADIUS = 22;
+export const STARTING_FOOD_CAP = 10;
+
 export function generateWorld(seed) {
       function seededRandom(seed) {
         let state = seed >>> 0;
@@ -128,11 +131,6 @@ export function generateWorld(seed) {
           }
           for (const [x, y] of patch) foodIndices.add(y * size + x);
         }
-        placement.sites.forEach(([sx, sy], i) => {
-          const angle = terrainHash(i, 17, seed + 5003) * Math.PI * 2;
-          const cx = sx + Math.round(Math.cos(angle) * 8), cy = sy + Math.round(Math.sin(angle) * 8);
-          for (const [ox, oy] of [[0,0],[1,0],[0,1]]) { const index = (cy + oy) * size + cx + ox; fields.terrain[index] = 4; foodIndices.add(index); }
-        });
         return {size,radius,seed,sites:placement.sites,closePair:placement.closePair,minDistance:placement.minDistance,fields,foodIndices,food:Array.from(foodIndices, index => [index % size, Math.floor(index / size)])};
       }
       const generated = generateMap(seed);
@@ -148,13 +146,76 @@ export function generateWorld(seed) {
         if (generated.fields.risk[index] > 45 && noise > 0.12) hazards[index] = 1;
         else if (generated.fields.risk[index] > 35 && noise < -0.16) hazards[index] = 2;
       }
-      return {
+      const world = {
         seed,
         hazards,
         creatureDensity,
         terrain: generated.fields.terrain,
-        food: generated.food,
+        food: generated.food.filter(([x, y]) => generated.sites.every(site => Math.hypot(x - site[0], y - site[1]) > STARTING_FOOD_RADIUS)).map(([x, y]) => [x, y, 50]),
         origin: { x: generated.sites[0][0], y: generated.sites[0][1] },
         sites: generated.sites
       };
+      world.food.push(...generateStartingFood(world, STARTING_FOOD_CAP));
+      return world;
     }
+
+function foodHash(x, y, seed) {
+  let value = Math.imul(x, 374761393) ^ Math.imul(y, 668265263) ^ Math.imul(seed, 1442695041);
+  value = Math.imul(value ^ (value >>> 13), 1274126177);
+  return ((value ^ (value >>> 16)) >>> 0) / 4294967296;
+}
+
+function foodNoise(x, y, scale, seed) {
+  const px = x / scale, py = y / scale;
+  const ix = Math.floor(px), iy = Math.floor(py);
+  let tx = px - ix, ty = py - iy;
+  tx = tx * tx * (3 - 2 * tx); ty = ty * ty * (3 - 2 * ty);
+  return ((foodHash(ix, iy, seed) * (1 - tx) + foodHash(ix + 1, iy, seed) * tx) * (1 - ty) +
+    (foodHash(ix, iy + 1, seed) * (1 - tx) + foodHash(ix + 1, iy + 1, seed) * tx) * ty) * 2 - 1;
+}
+
+export function generateStartingFood(world, cap) {
+  const size = 320, radius = STARTING_FOOD_RADIUS, seed = world.seed;
+  const contexts = world.sites.map(([cx, cy]) => {
+    const distances = new Int16Array(size * size).fill(-1);
+    const queue = [[cx, cy]];
+    distances[cy * size + cx] = 0;
+    for (let cursor = 0; cursor < queue.length; cursor++) {
+      const [x, y] = queue[cursor];
+      for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+        const nx = x + dx, ny = y + dy, index = ny * size + nx;
+        if (nx < 0 || ny < 0 || nx >= size || ny >= size || Math.hypot(nx - cx, ny - cy) > radius) continue;
+        if (distances[index] >= 0 || world.terrain[index] < 2 || world.terrain[index] > 6 || world.hazards[index]) continue;
+        distances[index] = distances[y * size + x] + 1;
+        queue.push([nx, ny]);
+      }
+    }
+    const candidates = [];
+    for (const [x, y] of queue) {
+      if (world.terrain[y * size + x] < 3 || world.sites.some(site => Math.hypot(x - site[0], y - site[1]) < 3)) continue;
+      const density = Math.max(0.02, 0.5 + foodNoise(x + 317, y - 193, 13, seed + 9721) * 0.34 + foodNoise(x - 51, y + 93, 5, seed + 9743) * 0.16);
+      const priority = -Math.log(Math.max(0.000001, foodHash(x + 1379, y - 411, seed + 9973))) / (0.025 + density ** 3);
+      candidates.push({ x, y, distance: Math.hypot(x - cx, y - cy), path: distances[y * size + x], priority });
+    }
+    candidates.sort((a, b) => a.priority - b.priority);
+    const first = candidates.find(point => point.distance <= 6 && point.path <= 10);
+    return { cx, cy, distances, candidates: first ? [first, ...candidates.filter(point => point !== first)] : candidates,
+      remaining: Math.round(300 + foodNoise(cx + 791, cy - 431, 37, seed + 9901) * 90) };
+  });
+  const food = [];
+  for (const context of contexts) {
+    for (const separation of [3.4, 2.2, 1]) {
+      for (const point of context.candidates) {
+        if (context.remaining <= 0) break;
+        if (food.some(([x, y]) => Math.hypot(point.x - x, point.y - y) < separation)) continue;
+        const neighbors = contexts.filter(other => Math.hypot(point.x - other.cx, point.y - other.cy) <= radius);
+        if (neighbors.some(other => other.distances[point.y * size + point.x] < 0 || other.remaining <= 0)) continue;
+        const low = Math.ceil(cap * 0.75);
+        const amount = Math.min(low + Math.floor(foodHash(point.x + 41, point.y - 67, seed + 9989) * (cap - low + 1)), ...neighbors.map(other => other.remaining));
+        food.push([point.x, point.y, amount]);
+        for (const other of neighbors) other.remaining -= amount;
+      }
+    }
+  }
+  return food;
+}

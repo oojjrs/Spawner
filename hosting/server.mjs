@@ -37,7 +37,7 @@ function world(seed) {
 function makeRoom(roomId, title, hostId, seed) {
   const room = { id: roomId, title, hostId, seed, world: world(seed), revision: 0, simSeconds: 0,
     lastStepAt: Date.now(), colonies: [], games: new Map(), food: new Map(), foodSpots: new Map(), commands: new Map() };
-  for (const [x, y] of room.world.food) room.food.set(x + "," + y, { x, y, amount: 50, terrain: terrainTypes[room.world.terrain[y * 320 + x]] });
+  for (const [x, y, amount] of room.world.food) room.food.set(x + "," + y, { x, y, amount, initialAmount: amount, terrain: terrainTypes[room.world.terrain[y * 320 + x]] });
   indexFood(room);
   room.creatureSystem = createCreatures(room, null);
   return room;

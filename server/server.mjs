@@ -45,8 +45,8 @@ function makeRoom(roomId, title, hostId, seed) {
   const room = { id: roomId, title, hostId, seed, world, simSeconds: 0, revision: 0,
     colonies: [], games: new Map(), food: new Map(), foodSpots: new Map(), lastActive: 0, lastVisitedAt: Date.now(), played: false };
   const terrainTypes = ["deep", "shallow", "coast", "land", "grassland", "forest", "lowMountain", "highMountain", "ridge"];
-  for (const [x, y] of world.food) {
-    const cell = { x, y, amount: 50, terrain: terrainTypes[world.terrain[y * 320 + x]] };
+  for (const [x, y, amount] of world.food) {
+    const cell = { x, y, amount, initialAmount: amount, terrain: terrainTypes[world.terrain[y * 320 + x]] };
     room.food.set(x + "," + y, cell);
   }
   indexFood(room);
@@ -299,8 +299,8 @@ async function route(request, response) {
     mutation = task;
     return task;
   }
-  if (request.method === "GET" && ["/", "/Spawner.html", "/MapDesign.html"].includes(url.pathname)) {
-    const html = await readFile(resolve(root, url.pathname === "/MapDesign.html" ? "MapDesign.html" : "Spawner.html"));
+  if (request.method === "GET" && ["/", "/Spawner.html"].includes(url.pathname)) {
+    const html = await readFile(resolve(root, "Spawner.html"));
     response.writeHead(200, { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-cache" });
     return response.end(html);
   }

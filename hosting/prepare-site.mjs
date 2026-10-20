@@ -30,7 +30,6 @@ const html = tracked("Spawner.html").toString("utf8").replace(/data:([a-zA-Z0-9/
 mkdirSync(join(destination, "public/game-assets"), { recursive: true });
 for (const [name, bytes] of assets) writeFileSync(join(destination, "public/game-assets", name), bytes);
 text("public/Spawner.html", html);
-text("public/MapDesign.html", tracked("MapDesign.html").toString("utf8"));
 text("public/client/runtime.js", tracked("client/runtime.js").toString("utf8"));
 for (const file of CREATURE_ASSETS) {
   const target = join(destination, "public", file);

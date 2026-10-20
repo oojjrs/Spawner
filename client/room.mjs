@@ -28,7 +28,7 @@ export function createRoom(title, seed) {
   const room = { id: crypto.randomUUID(), title: requireName(title, 24),
     hostId: crypto.randomUUID(), seed, simSeconds: 0, revision: 0, updatedAt: Date.now(),
     world: generateWorld(seed), colonies: [], games: new Map(), food: new Map(), foodSpots: new Map() };
-  for (const [x, y] of room.world.food) room.food.set(x + "," + y, { x, y, amount: 50, terrain: terrainTypes[room.world.terrain[y * 320 + x]] });
+  for (const [x, y, amount] of room.world.food) room.food.set(x + "," + y, { x, y, amount, initialAmount: amount, terrain: terrainTypes[room.world.terrain[y * 320 + x]] });
   indexFood(room);
   const site = room.world.sites[0];
   const colony = { id: 1, ownerId: room.hostId, name: room.title + "의 둥지", x: site[0] - 2, y: site[1] - 2, occupiedCells: new Set(mask) };

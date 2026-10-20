@@ -15,12 +15,489 @@
 <header><h1>Spawner</h1><p>유닛을 직접 설계하고 생명체를 탄생시켜 군락을 번성시키는 전략 게임</p></header>
 <div class="layout">
 <nav class="side-nav" aria-label="기획 문서 목차">
-<div class="nav-group" data-section-group="core"><span class="nav-group-title">핵심</span><div class="nav-items"><a href="#direction">방향</a></div></div>
+<div class="nav-group" data-section-group="core"><span class="nav-group-title">핵심</span><div class="nav-items"><a href="#direction">방향</a><a href="#world">맵 디자인</a></div></div>
 <div class="nav-group" data-section-group="codex"><span class="nav-group-title">코덱스</span><div class="nav-items"><a href="#codex-attributes">속성</a><a href="#codex-synergies">조합 시너지</a><a href="#codex-nest">둥지 성장</a></div></div>
 </nav>
 <main>
 <details class="section-group" data-section-group="core"><summary>핵심</summary><div class="section-group-body">
 <details id="direction"><summary>방향</summary><div class="details-body"><ul class="rule"><li>속성을 조합해 유닛 템플릿을 만들고 군락을 번성시키는 전략 게임이다.</li><li>첫 화면은 개체 없이 둥지만 있으며 첫 생명체부터 직접 설계한다.</li><li>이름 붙인 설계로 개체를 탄생시키고 채집·운반·방어를 관찰한다.</li><li>개체 생산과 둥지 성장에 진화 포인트를 나눠 쓴다.</li><li>군락과 월드의 시뮬레이션은 브라우저 클라이언트에서 실행한다.</li></ul></div></details>
+<details id="world"><summary>맵 디자인</summary><div class="details-body"><ul class="rule"><li>320×320칸에 동급 둥지 후보 12곳을 두고 생활권·노이즈를 합성한다.</li><li>숨은 후보는 생성에만 쓰며, 개체는 발견한 먹이·지형으로 판단한다.</li><li>둥지 주변 반경 약22칸에 시작 먹이 약300개를 분산하며 총량은 시드에 따라 변한다.</li><li>먹이1개는 진화1점이며, 시작 먹이는 지점당 최대10개를 배치한다.</li><li>총량·반경·상한은 조정값이며, 15개 상한은 비교용이다.</li></ul>
+<div id="starting-food-map">
+  <style>
+    #starting-food-map { display: grid; gap: 14px; max-width:800px; --background:var(--paper); --foreground:var(--ink); --border:var(--line); --blue:#6194b4; --yellow:#c9b271; --green:#78a784; --viz-series-1:var(--accent); --food-water: color-mix(in srgb, var(--blue) 24%, var(--background)); --food-coast: color-mix(in srgb, var(--yellow) 12%, var(--background)); --food-plain: color-mix(in srgb, var(--yellow) 17%, var(--background)); --food-grass: color-mix(in srgb, var(--green) 17%, var(--background)); --food-forest: color-mix(in srgb, var(--green) 32%, var(--background)); --food-hill: color-mix(in srgb, var(--foreground) 15%, var(--background)); --food-mountain: color-mix(in srgb, var(--foreground) 28%, var(--background)); --food-mark: color-mix(in srgb, var(--viz-series-1) 36%, var(--background)); }
+    #starting-food-map h3, #starting-food-map figure { margin: 0; }
+    #starting-food-map .food-heading {  }
+    #starting-food-map .food-legend { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+    #starting-food-map .food-key { display: inline-flex; align-items: center; gap: 6px; }
+    #starting-food-map .food-swatch { width: 12px; height: 12px; display: inline-block; background: var(--swatch); }
+    #starting-food-map .food-swatch.round { border-radius: 50%; }
+    #starting-food-map .food-map { display: block; width: 100%; aspect-ratio: 1; touch-action: pan-y; }
+    #starting-food-map .food-detail { min-width: 0; overflow-wrap: anywhere; }
+    #starting-food-map .food-figure { min-width: 0; }
+    #starting-food-map .food-meta { color: var(--muted-foreground); }
+    #starting-food-map .food-stats { gap: 8px 22px; }
+    #starting-food-map .food-detail-row { display: grid; grid-template-columns: minmax(150px, 1fr) minmax(0, 2fr); gap: 14px; align-items: center; }
+    @media (max-width: 480px) { #starting-food-map .food-detail-row { grid-template-columns: minmax(0, 1fr); } }
+    #starting-food-map .viz-controls, #starting-food-map .viz-row { display:flex; flex-wrap:wrap; align-items:center; gap:10px 16px; }
+    #starting-food-map .form-label { display:grid; gap:5px; min-width:0; }
+    #starting-food-map #food-controls .form-label { flex:1 1 180px; }
+    #starting-food-map input, #starting-food-map select, #starting-food-map button { max-width:100%; min-width:0; min-height:38px; border:1px solid var(--line); border-radius:6px; padding:7px 10px; color:var(--ink); background:var(--bg); font:inherit; }
+    #starting-food-map button { cursor:pointer; }
+    #starting-food-map button:disabled { opacity:.45; cursor:default; }
+    #starting-food-map .btn-primary { background:var(--soft); border-color:var(--accent); }
+    #starting-food-map .text-small { font-size:.86rem; }
+    #starting-food-map .tabular-nums { font-variant-numeric:tabular-nums; }
+    #starting-food-map [hidden] { display:none; }
+    #starting-food-map #food-error { color:#e5a18b; }
+  </style>
+  <div class="food-heading"><h3>둥지 주변의 시작 먹이</h3><span class="text-small food-meta">반경 22칸 · 실게임 기본 상한 10개</span></div>
+  <div class="viz-controls" id="food-controls">
+    <label class="form-label" for="food-seed">시드<input class="form-control tabular-nums" id="food-seed" type="number" min="0" max="4294967295" step="1" value="731047" required></label>
+    <button class="btn btn-primary" id="food-apply" type="button">적용</button>
+    <button class="btn" id="food-prev" type="button">이전</button>
+    <button class="btn" id="food-next" type="button">다음</button>
+    <label class="form-label" for="food-cap">지점당 먹이 상한<select class="form-select" id="food-cap"><option value="10">10개 · 여러 곳에 분산</option><option value="15">15개 · 지점 수 감소</option></select></label>
+  </div>
+  <div class="viz-row food-stats tabular-nums" aria-live="polite" id="food-stats">
+    <span>총량 <strong id="food-total">—</strong> 포인트</span>
+    <span>먹이 <strong id="food-count">—</strong>곳</span>
+    <span>지점당 <strong id="food-range">—</strong>개</span>
+  </div>
+  <figure class="food-figure">
+    <canvas class="food-map cursor-interaction" id="food-canvas" role="img" aria-label="시작 둥지와 주변 먹이 분포"></canvas>
+    <figcaption class="food-legend text-small">
+      <span class="food-key"><span aria-hidden="true">◆</span>시작 둥지</span>
+      <span class="food-key"><i class="food-swatch round" style="--swatch:var(--viz-series-1)" aria-hidden="true"></i>숫자 = 먹이 개수</span>
+      <span class="food-key"><i class="food-swatch" style="--swatch:var(--food-water)" aria-hidden="true"></i>물</span>
+      <span class="food-key"><i class="food-swatch" style="--swatch:var(--food-forest)" aria-hidden="true"></i>숲</span>
+      <span class="food-key">점선 = 배치 범위</span>
+    </figcaption>
+  </figure>
+  <div class="viz-row text-small tabular-nums" id="food-bands"></div>
+  <div class="food-detail-row">
+    <label class="form-label" for="food-inspect">먹이 지점<select class="form-select" id="food-inspect"><option value="">선택 안 함</option></select></label>
+    <output class="food-detail text-small tabular-nums" id="food-detail" aria-live="polite">지점을 선택하면 양과 거리를 확인할 수 있습니다.</output>
+  </div>
+  <div class="text-small food-meta tabular-nums" id="food-origin"></div>
+  <div class="text-destructive" id="food-error" role="alert" hidden></div>
+  <script id="world-model">
+(() => {
+const modules = Object.create(null);
+modules["server/world.mjs"] = (() => {
+const STARTING_FOOD_RADIUS = 22;
+const STARTING_FOOD_CAP = 10;
+
+function generateWorld(seed) {
+      function seededRandom(seed) {
+        let state = seed >>> 0;
+        return function () {
+          state = (state + 0x6D2B79F5) >>> 0;
+          let t = Math.imul(state ^ (state >>> 15), 1 | state);
+          t ^= t + Math.imul(t ^ (t >>> 7), 61 | t);
+          return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+        };
+      }
+      function createSites(seed) {
+        const random = seededRandom((seed ^ 0x91E10DA5) >>> 0);
+        let sites = [];
+        for (let restart = 0; restart < 12 && sites.length < 12; restart++) {
+          sites = [];
+          for (let attempt = 0; attempt < 4000 && sites.length < 12; attempt++) {
+            const point = [24 + Math.floor(random() * 272), 24 + Math.floor(random() * 272)];
+            if (sites.every(p => Math.hypot(p[0] - point[0], p[1] - point[1]) >= 58)) sites.push(point);
+          }
+        }
+        if (sites.length < 12) {
+          sites = [];
+          for (let row = 0; row < 3; row++) for (let col = 0; col < 4; col++) sites.push([40 + col * 80 + Math.floor(random() * 19) - 9, 50 + row * 110 + Math.floor(random() * 19) - 9]);
+        }
+        const closeRandom = seededRandom((seed ^ 0xA24BAED4) >>> 0);
+        let closePair = null;
+        if (closeRandom() < 0.25) {
+          for (let attempt = 0; attempt < 800; attempt++) {
+            const anchor = Math.floor(closeRandom() * 11);
+            const angle = closeRandom() * Math.PI * 2;
+            const distance = 27 + closeRandom() * 10;
+            const point = [Math.round(sites[anchor][0] + Math.cos(angle) * distance), Math.round(sites[anchor][1] + Math.sin(angle) * distance)];
+            if (point.some(v => v < 24 || v > 295)) continue;
+            if (sites.slice(0, 11).some((p, i) => i !== anchor && Math.hypot(p[0] - point[0], p[1] - point[1]) < 58)) continue;
+            sites[11] = point;
+            closePair = [anchor + 1, 12];
+            break;
+          }
+        }
+        let minDistance = Infinity;
+        for (let i = 0; i < sites.length; i++) for (let j = i + 1; j < sites.length; j++) minDistance = Math.min(minDistance, Math.hypot(sites[i][0] - sites[j][0], sites[i][1] - sites[j][1]));
+        return {sites, closePair, minDistance};
+      }
+      function terrainHash(x, y, seed) {
+        let h = Math.imul(x | 0, 374761393) ^ Math.imul(y | 0, 668265263) ^ Math.imul(seed | 0, 1442695041);
+        h = Math.imul(h ^ (h >>> 13), 1274126177);
+        return ((h ^ (h >>> 16)) >>> 0) / 4294967296;
+      }
+      function terrainNoise(x, y, scale, seed) {
+        const fx = x / scale, fy = y / scale;
+        const ix = Math.floor(fx), iy = Math.floor(fy);
+        let tx = fx - ix, ty = fy - iy;
+        tx = tx * tx * tx * (tx * (tx * 6 - 15) + 10);
+        ty = ty * ty * ty * (ty * (ty * 6 - 15) + 10);
+        const a = terrainHash(ix, iy, seed) * (1 - tx) + terrainHash(ix + 1, iy, seed) * tx;
+        const b = terrainHash(ix, iy + 1, seed) * (1 - tx) + terrainHash(ix + 1, iy + 1, seed) * tx;
+        return (a * (1 - ty) + b * ty) * 2 - 1;
+      }
+      function terrainFbm(x, y, scale, seed) {
+        return terrainNoise(x, y, scale, seed) * 0.57 + terrainNoise(x, y, scale / 2.3, seed + 31) * 0.29 + terrainNoise(x, y, scale / 5.7, seed + 79) * 0.14;
+      }
+      function terrainSmooth(a, b, value) {
+        const t = Math.max(0, Math.min(1, (value - a) / (b - a)));
+        return t * t * (3 - 2 * t);
+      }
+      function terrainByte(value) { return Math.round(Math.max(0, Math.min(1, value)) * 255); }
+      function generateMap(seed) {
+        const size = 320, radius = 22, count = size * size;
+        const placement = createSites(seed);
+        const fields = {terrain:new Uint8Array(count), risk:new Uint8Array(count), reward:new Uint8Array(count), noise:new Uint8Array(count)};
+        const water = new Uint8Array(count);
+        for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+          const index = y * size + x;
+          let rawDistance = Infinity, distance = Infinity, weightSum = 0, noiseSum = 0;
+          for (let i = 0; i < placement.sites.length; i++) {
+            const site = placement.sites[i];
+            const d = Math.hypot(x - site[0], y - site[1]);
+            const local = terrainFbm(x + site[0] * 0.41, y - site[1] * 0.36, 52, seed + i * 137);
+            const q = d / radius * (1 + 0.30 * local);
+            const weight = 1 / Math.pow(Math.max(q, 0.0001), 4);
+            rawDistance = Math.min(rawDistance, d); distance = Math.min(distance, q);
+            weightSum += weight; noiseSum += weight * local;
+          }
+          const localBlend = noiseSum / weightSum;
+          const gate = terrainSmooth(0.65, 2.4, distance);
+          const structural = terrainFbm(x + 397, y - 219, 105, seed + 901);
+          const moisture = terrainFbm(x - 741, y + 522, 57, seed + 403);
+          const hazard = terrainFbm(x - 379, y + 816, 39, seed + 719);
+          const resource = terrainFbm(x + 927, y - 312, 27, seed + 1163);
+          const risk = Math.max(0, Math.min(1, Math.max(0, distance - 0.85) * 0.46 + gate * hazard * 0.13));
+          const reward = 0.18 + Math.max(0, distance - 0.30) * 0.24 + gate * (0.12 * resource + 0.07 * localBlend);
+          const land = terrainFbm(x + 168, y + 93, 102, seed + 1709) + (1 - terrainSmooth(8, 30, rawDistance)) * 0.5;
+          const height = 0.14 + risk * 0.48 + gate * (structural * 0.42 + Math.abs(hazard) * 0.14);
+          let terrain = moisture > -0.26 ? 4 : 3;
+          if (moisture + localBlend * 0.25 > 0.07 && rawDistance > 9) terrain = 5;
+          if (height > 0.48) terrain = 6;
+          if (height > 0.63) terrain = 7;
+          if (height > 0.77) terrain = 8;
+          if (land < -0.17 && rawDistance > 12) { terrain = land > -0.32 ? 1 : 0; water[index] = 1; }
+          fields.terrain[index] = terrain; fields.risk[index] = terrainByte(risk);
+          fields.reward[index] = terrainByte(reward); fields.noise[index] = terrainByte(localBlend * 0.5 + 0.5);
+        }
+        const directions = [[1,0],[0,1],[-1,0],[0,-1]];
+        for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+          const index = y * size + x;
+          if (water[index]) continue;
+          for (let oy = -1; oy <= 1; oy++) for (let ox = -1; ox <= 1; ox++) {
+            const nx = x + ox, ny = y + oy;
+            if (nx >= 0 && nx < size && ny >= 0 && ny < size && water[ny * size + nx]) fields.terrain[index] = 2;
+          }
+        }
+        const foodIndices = new Set();
+        for (let by = 0; by < size; by += 12) for (let bx = 0; bx < size; bx += 12) {
+          const cx = Math.min(size - 2, bx + 2 + Math.floor(terrainHash(bx, by, seed + 2201) * 8));
+          const cy = Math.min(size - 2, by + 2 + Math.floor(terrainHash(bx, by, seed + 2203) * 8));
+          const index = cy * size + cx, potential = fields.reward[index] / 255;
+          if (fields.terrain[index] < 3 || fields.terrain[index] > 6 || terrainHash(bx, by, seed + 2237) > 0.18 + potential * 0.48) continue;
+          const target = 2 + Math.floor(potential * 11), patch = [[cx, cy]], visited = new Set([index]);
+          for (let cursor = 0; cursor < patch.length && patch.length < target; cursor++) {
+            const [px, py] = patch[cursor];
+            const first = Math.floor(terrainHash(px, py, seed + 2311) * 4);
+            for (let step = 0; step < 4 && patch.length < target; step++) {
+              const [ox, oy] = directions[(first + step) % 4], nx = px + ox, ny = py + oy, key = ny * size + nx;
+              if (nx < 0 || ny < 0 || nx >= size || ny >= size || visited.has(key)) continue;
+              visited.add(key);
+              if (fields.terrain[key] >= 3 && fields.terrain[key] <= 6) patch.push([nx, ny]);
+            }
+          }
+          for (const [x, y] of patch) foodIndices.add(y * size + x);
+        }
+        return {size,radius,seed,sites:placement.sites,closePair:placement.closePair,minDistance:placement.minDistance,fields,foodIndices,food:Array.from(foodIndices, index => [index % size, Math.floor(index / size)])};
+      }
+      const generated = generateMap(seed);
+      const hazards = new Uint8Array(320 * 320);
+      const creatureDensity = new Uint8Array(320 * 320);
+      for (let y = 0; y < 320; y++) for (let x = 0; x < 320; x++) {
+        const index = y * 320 + x, terrain = generated.fields.terrain[index];
+        if (terrain < 2 || terrain > 6) continue;
+        const distance = Math.min(...generated.sites.map(site => Math.hypot(x - site[0], y - site[1])));
+        if (distance >= 26) creatureDensity[index] = terrainByte(terrainFbm(x + 613, y - 487, 32, seed + 8101) * 0.5 + 0.5);
+        if (distance <= 14) continue;
+        const noise = terrainNoise(x, y, 14, seed + 7109);
+        if (generated.fields.risk[index] > 45 && noise > 0.12) hazards[index] = 1;
+        else if (generated.fields.risk[index] > 35 && noise < -0.16) hazards[index] = 2;
+      }
+      const world = {
+        seed,
+        hazards,
+        creatureDensity,
+        terrain: generated.fields.terrain,
+        food: generated.food.filter(([x, y]) => generated.sites.every(site => Math.hypot(x - site[0], y - site[1]) > STARTING_FOOD_RADIUS)).map(([x, y]) => [x, y, 50]),
+        origin: { x: generated.sites[0][0], y: generated.sites[0][1] },
+        sites: generated.sites
+      };
+      world.food.push(...generateStartingFood(world, STARTING_FOOD_CAP));
+      return world;
+    }
+
+function foodHash(x, y, seed) {
+  let value = Math.imul(x, 374761393) ^ Math.imul(y, 668265263) ^ Math.imul(seed, 1442695041);
+  value = Math.imul(value ^ (value >>> 13), 1274126177);
+  return ((value ^ (value >>> 16)) >>> 0) / 4294967296;
+}
+
+function foodNoise(x, y, scale, seed) {
+  const px = x / scale, py = y / scale;
+  const ix = Math.floor(px), iy = Math.floor(py);
+  let tx = px - ix, ty = py - iy;
+  tx = tx * tx * (3 - 2 * tx); ty = ty * ty * (3 - 2 * ty);
+  return ((foodHash(ix, iy, seed) * (1 - tx) + foodHash(ix + 1, iy, seed) * tx) * (1 - ty) +
+    (foodHash(ix, iy + 1, seed) * (1 - tx) + foodHash(ix + 1, iy + 1, seed) * tx) * ty) * 2 - 1;
+}
+
+function generateStartingFood(world, cap) {
+  const size = 320, radius = STARTING_FOOD_RADIUS, seed = world.seed;
+  const contexts = world.sites.map(([cx, cy]) => {
+    const distances = new Int16Array(size * size).fill(-1);
+    const queue = [[cx, cy]];
+    distances[cy * size + cx] = 0;
+    for (let cursor = 0; cursor < queue.length; cursor++) {
+      const [x, y] = queue[cursor];
+      for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+        const nx = x + dx, ny = y + dy, index = ny * size + nx;
+        if (nx < 0 || ny < 0 || nx >= size || ny >= size || Math.hypot(nx - cx, ny - cy) > radius) continue;
+        if (distances[index] >= 0 || world.terrain[index] < 2 || world.terrain[index] > 6 || world.hazards[index]) continue;
+        distances[index] = distances[y * size + x] + 1;
+        queue.push([nx, ny]);
+      }
+    }
+    const candidates = [];
+    for (const [x, y] of queue) {
+      if (world.terrain[y * size + x] < 3 || world.sites.some(site => Math.hypot(x - site[0], y - site[1]) < 3)) continue;
+      const density = Math.max(0.02, 0.5 + foodNoise(x + 317, y - 193, 13, seed + 9721) * 0.34 + foodNoise(x - 51, y + 93, 5, seed + 9743) * 0.16);
+      const priority = -Math.log(Math.max(0.000001, foodHash(x + 1379, y - 411, seed + 9973))) / (0.025 + density ** 3);
+      candidates.push({ x, y, distance: Math.hypot(x - cx, y - cy), path: distances[y * size + x], priority });
+    }
+    candidates.sort((a, b) => a.priority - b.priority);
+    const first = candidates.find(point => point.distance <= 6 && point.path <= 10);
+    return { cx, cy, distances, candidates: first ? [first, ...candidates.filter(point => point !== first)] : candidates,
+      remaining: Math.round(300 + foodNoise(cx + 791, cy - 431, 37, seed + 9901) * 90) };
+  });
+  const food = [];
+  for (const context of contexts) {
+    for (const separation of [3.4, 2.2, 1]) {
+      for (const point of context.candidates) {
+        if (context.remaining <= 0) break;
+        if (food.some(([x, y]) => Math.hypot(point.x - x, point.y - y) < separation)) continue;
+        const neighbors = contexts.filter(other => Math.hypot(point.x - other.cx, point.y - other.cy) <= radius);
+        if (neighbors.some(other => other.distances[point.y * size + point.x] < 0 || other.remaining <= 0)) continue;
+        const low = Math.ceil(cap * 0.75);
+        const amount = Math.min(low + Math.floor(foodHash(point.x + 41, point.y - 67, seed + 9989) * (cap - low + 1)), ...neighbors.map(other => other.remaining));
+        food.push([point.x, point.y, amount]);
+        for (const other of neighbors) other.remaining -= amount;
+      }
+    }
+  }
+  return food;
+}
+
+return { STARTING_FOOD_RADIUS, STARTING_FOOD_CAP, generateWorld, generateStartingFood };
+})();
+globalThis.SpawnerWorld = modules["server/world.mjs"];
+})();
+</script>
+  <script>
+    (() => {
+      const { generateWorld, generateStartingFood, STARTING_FOOD_RADIUS, STARTING_FOOD_CAP } = globalThis.SpawnerWorld;
+      const root = document.getElementById('starting-food-map');
+      const seedInput = root.querySelector('#food-seed');
+      const capInput = root.querySelector('#food-cap');
+      const canvas = root.querySelector('#food-canvas');
+      const inspectInput = root.querySelector('#food-inspect');
+      const detail = root.querySelector('#food-detail');
+      const errorBox = root.querySelector('#food-error');
+      const radius = STARTING_FOOD_RADIUS;
+      const worldCache = new Map();
+      let data = null;
+      let selected = '';
+      let rendering = false;
+      let drawing = false;
+      let plot = null;
+      const probe = document.createElement('span');
+      probe.hidden = true;
+      root.appendChild(probe);
+
+      function terrain(seed) {
+        if (!worldCache.has(seed)) worldCache.set(seed, generateWorld(seed));
+        const world = worldCache.get(seed);
+        worldCache.delete(seed); worldCache.set(seed, world);
+        while (worldCache.size > 3) worldCache.delete(worldCache.keys().next().value);
+        return world;
+      }
+      function generateFood(seed, cap) {
+        const world = terrain(seed), center = world.origin, size = 320;
+        const distances = new Int16Array(size * size).fill(-1);
+        const queue = [[center.x, center.y]];
+        distances[center.y * size + center.x] = 0;
+        for (let cursor = 0; cursor < queue.length; cursor++) {
+          const [x, y] = queue[cursor];
+          for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+            const nx = x + dx, ny = y + dy, index = ny * size + nx;
+            if (nx < 0 || ny < 0 || nx >= size || ny >= size || Math.hypot(nx - center.x, ny - center.y) > radius) continue;
+            if (distances[index] >= 0 || world.terrain[index] < 2 || world.terrain[index] > 6 || world.hazards[index]) continue;
+            distances[index] = distances[y * size + x] + 1;
+            queue.push([nx, ny]);
+          }
+        }
+        const source = cap === STARTING_FOOD_CAP ? world.food : generateStartingFood(world, cap);
+        const food = source.filter(([x, y]) => Math.hypot(x - center.x, y - center.y) <= radius).map(([x, y, amount]) =>
+          ({ x, y, amount, distance: Math.hypot(x - center.x, y - center.y), path: distances[y * size + x] }));
+        food.sort((a, b) => a.distance - b.distance || a.y - b.y || a.x - b.x);
+        food.forEach((point, index) => { point.id = String(index + 1); });
+        return { seed, cap, radius, world, center, food, total: food.reduce((sum, point) => sum + point.amount, 0), remaining: 0 };
+      }
+      function color(value) {
+        probe.style.color = value;
+        return getComputedStyle(probe).color;
+      }
+      function setDetail(id) {
+        selected = id;
+        inspectInput.value = id;
+        const point = data.food.find(item => item.id === id);
+        detail.textContent = point ? '(' + point.x + ', ' + point.y + ') · 먹이 ' + point.amount + '개 = ' + point.amount + '포인트 · 둥지에서 ' + point.distance.toFixed(1) + '칸 · 보행 ' + point.path + '칸' : '지점을 선택하면 양과 거리를 확인할 수 있습니다.';
+        scheduleDraw();
+      }
+      function update() {
+        root.dataset.seed = String(data.seed);
+        root.dataset.cap = String(data.cap);
+        root.querySelector('#food-total').textContent = data.total.toLocaleString('ko-KR');
+        root.querySelector('#food-count').textContent = String(data.food.length);
+        const amounts = data.food.map(point => point.amount);
+        root.querySelector('#food-range').textContent = Math.min(...amounts) + '–' + Math.max(...amounts);
+        root.querySelector('#food-origin').textContent = '월드 320×320칸 · 시작 둥지 (' + data.center.x + ', ' + data.center.y + ') · 먹이 1개 = 진화 포인트 1점';
+        root.querySelector('#food-bands').replaceChildren(...[[0, 8], [8, 16], [16, radius]].map(([lower, upper]) => {
+          const span = document.createElement('span');
+          const points = data.food.filter(point => point.distance > lower && point.distance <= upper);
+          span.textContent = (lower === 0 ? '8칸 이내' : lower + '–' + upper + '칸') + ' ' + points.reduce((sum, point) => sum + point.amount, 0) + '점';
+          return span;
+        }));
+        inspectInput.replaceChildren(new Option('선택 안 함', ''), ...data.food.map(point => new Option('#' + point.id + ' · ' + point.amount + '개 · ' + point.distance.toFixed(1) + '칸', point.id)));
+        setDetail('');
+        canvas.setAttribute('aria-label', '시드 ' + data.seed + ', 둥지 주변 반경 ' + radius + '칸에 먹이 ' + data.food.length + '곳, 총 ' + data.total + '개. 먹이 1개는 진화 포인트 1점. 지점 선택 목록에서 각 위치와 양을 확인할 수 있습니다.');
+        root.foodPreview = { seed: data.seed, cap: data.cap, radius, center: data.center, total: data.total, food: data.food.map(point => ({ x: point.x, y: point.y, amount: point.amount, distance: point.distance, path: point.path, id: point.id })) };
+        if (data.remaining) { errorBox.hidden = false; errorBox.textContent = '이 지형에서 배치할 수 있는 먹이는 ' + data.total + '개입니다.'; }
+        else { errorBox.hidden = true; errorBox.textContent = ''; }
+        draw();
+      }
+      function draw() {
+        drawing = false;
+        if (!data) return;
+        const width = Math.max(240, canvas.getBoundingClientRect().width);
+        const ratio = Math.min(2, window.devicePixelRatio || 1);
+        canvas.width = Math.round(width * ratio); canvas.height = Math.round(width * ratio);
+        const ctx = canvas.getContext('2d');
+        ctx.scale(ratio, ratio);
+        const gutter = 24, span = radius * 2 + 10, cell = (width - gutter * 2) / span;
+        const left = data.center.x - span / 2, top = data.center.y - span / 2;
+        plot = { width, gutter, span, cell, left, top };
+        const px = x => gutter + (x + 0.5 - left) * cell;
+        const py = y => gutter + (y + 0.5 - top) * cell;
+        const foreground = color('var(--foreground)'), background = color('var(--background)'), border = color('var(--border)');
+        const palette = ['--food-water', '--food-water', '--food-coast', '--food-plain', '--food-grass', '--food-forest', '--food-hill', '--food-mountain', '--food-mountain'].map(name => color('var(' + name + ')'));
+        const baseFont = parseFloat(getComputedStyle(root).fontSize) || 14;
+        ctx.clearRect(0, 0, width, width);
+        ctx.fillStyle = background; ctx.fillRect(gutter, gutter, width - gutter * 2, width - gutter * 2);
+        for (let y = Math.floor(top); y < top + span; y++) for (let x = Math.floor(left); x < left + span; x++) {
+          if (x < 0 || y < 0 || x >= 320 || y >= 320) continue;
+          ctx.fillStyle = palette[data.world.terrain[y * 320 + x]];
+          ctx.fillRect(gutter + (x - left) * cell, gutter + (y - top) * cell, cell + 0.5, cell + 0.5);
+        }
+        ctx.strokeStyle = border; ctx.lineWidth = 0.5; ctx.globalAlpha = 0.4;
+        for (let position = 0; position <= span; position += 1) {
+          ctx.beginPath(); ctx.moveTo(gutter + position * cell, gutter); ctx.lineTo(gutter + position * cell, width - gutter); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(gutter, gutter + position * cell); ctx.lineTo(width - gutter, gutter + position * cell); ctx.stroke();
+        }
+        ctx.globalAlpha = 1;
+        ctx.strokeStyle = foreground; ctx.lineWidth = 1; ctx.setLineDash([4, 5]); ctx.globalAlpha = 0.55;
+        ctx.beginPath(); ctx.arc(px(data.center.x), py(data.center.y), radius * cell, 0, Math.PI * 2); ctx.stroke();
+        ctx.setLineDash([]); ctx.globalAlpha = 1;
+        const mark = color('var(--food-mark)');
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.font = '500 ' + Math.max(11, baseFont - 1) + 'px sans-serif';
+        for (const point of data.food) {
+          const x = px(point.x), y = py(point.y);
+          const markerRadius = Math.max(9, Math.min(13, cell * 0.9));
+          ctx.fillStyle = mark;
+          ctx.beginPath(); ctx.arc(x, y, markerRadius, 0, Math.PI * 2); ctx.fill();
+          ctx.fillStyle = foreground; ctx.fillText(String(point.amount), x, y + 0.5);
+          if (selected === point.id) {
+            ctx.strokeStyle = foreground; ctx.lineWidth = 1.5;
+            ctx.beginPath(); ctx.arc(x, y, markerRadius + 4, 0, Math.PI * 2); ctx.stroke();
+          }
+        }
+        const cx = px(data.center.x), cy = py(data.center.y), nestSize = Math.max(9, cell * 1.15);
+        ctx.fillStyle = background;
+        ctx.beginPath(); ctx.arc(cx, cy, nestSize + 5, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = foreground;
+        ctx.beginPath(); ctx.moveTo(cx, cy - nestSize); ctx.lineTo(cx + nestSize, cy); ctx.lineTo(cx, cy + nestSize); ctx.lineTo(cx - nestSize, cy); ctx.closePath(); ctx.fill();
+        ctx.font = '400 ' + Math.max(11, baseFont - 1) + 'px sans-serif';
+        ctx.textBaseline = 'alphabetic'; ctx.fillStyle = foreground;
+        ctx.textAlign = 'left'; ctx.fillText('월드 좌표', gutter, 15);
+        ctx.textAlign = 'right'; ctx.fillText('반경 ' + radius + '칸', width - gutter, 15);
+        ctx.textAlign = 'center';
+        for (const offset of [-20, 0, 20]) {
+          ctx.fillText(String(data.center.x + offset), px(data.center.x + offset), width - 5);
+          ctx.save(); ctx.translate(12, py(data.center.y + offset)); ctx.rotate(-Math.PI / 2); ctx.fillText(String(data.center.y + offset), 0, 0); ctx.restore();
+        }
+        root.dataset.rendered = 'true';
+      }
+      function scheduleDraw() { if (!drawing) { drawing = true; requestAnimationFrame(draw); } }
+      function controls(busy) {
+        root.querySelectorAll('#food-controls input, #food-controls button, #food-controls select').forEach(element => { element.disabled = busy; });
+        if (!busy && data) { root.querySelector('#food-prev').disabled = data.seed === 0; root.querySelector('#food-next').disabled = data.seed === 4294967295; }
+        root.setAttribute('aria-busy', String(busy));
+      }
+      async function regenerate(seed, cap) {
+        if (rendering) return;
+        if (!Number.isInteger(seed) || seed < 0 || seed > 4294967295) { errorBox.hidden = false; errorBox.textContent = '시드는 0–4294967295 사이의 정수로 입력해 주세요.'; return; }
+        rendering = true; controls(true);
+        await new Promise(resolve => setTimeout(resolve, 0));
+        try {
+          data = generateFood(seed, cap);
+          seedInput.value = String(seed); capInput.value = String(cap);
+          update();
+        } catch (error) { errorBox.hidden = false; errorBox.textContent = '지도를 만들지 못했습니다: ' + error.message; }
+        finally { rendering = false; controls(false); }
+      }
+      function applySeed() { if (seedInput.reportValidity()) regenerate(Number(seedInput.value), Number(capInput.value)); }
+      root.querySelector('#food-apply').addEventListener('click', applySeed);
+      seedInput.addEventListener('keydown', event => { if (event.key === 'Enter') { event.preventDefault(); applySeed(); } });
+      root.querySelector('#food-next').addEventListener('click', () => regenerate(data.seed + 1, data.cap));
+      root.querySelector('#food-prev').addEventListener('click', () => regenerate(data.seed - 1, data.cap));
+      capInput.addEventListener('change', () => regenerate(data.seed, Number(capInput.value)));
+      inspectInput.addEventListener('change', () => { setDetail(inspectInput.value);  });
+      canvas.addEventListener('click', event => {
+        if (!data || !plot) return;
+        const box = canvas.getBoundingClientRect();
+        const x = (event.clientX - box.left - plot.gutter) / plot.cell + plot.left - 0.5;
+        const y = (event.clientY - box.top - plot.gutter) / plot.cell + plot.top - 0.5;
+        let nearest = null, distance = Infinity;
+        for (const point of data.food) { const d = Math.hypot(point.x - x, point.y - y); if (d < distance) { nearest = point; distance = d; } }
+        setDetail(nearest && distance * plot.cell <= 24 ? nearest.id : '');
+      });
+      new ResizeObserver(scheduleDraw).observe(canvas);
+      new MutationObserver(scheduleDraw).observe(document.documentElement, { attributes: true, attributeFilter: ['class', 'style', 'data-theme'] });
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', scheduleDraw);
+      regenerate(731047, STARTING_FOOD_CAP);
+    })();
+  </script>
+</div>
+
+</div></details>
 </div></details>
 <details class="section-group" data-section-group="codex"><summary>코덱스</summary><div class="section-group-body">
 <details id="codex-attributes"><summary>속성</summary><div class="details-body"><div class="table-wrap"><table class="codex-attributes-table"><thead><tr><th>속성</th><th>효과</th><th>설명</th><th>중첩</th><th>관련 시너지</th></tr></thead><tbody>
