@@ -8,6 +8,8 @@
     :root {
       color-scheme: dark;
       --agent-panel-width: clamp(min(220px, 55vw), 280px, 70vw);
+      --ui-icon-size: 96px;
+      --ui-icon-button-size: calc(var(--ui-icon-size) + 18px);
       --bg: #101315;
       --panel: #171d20;
       --panel-2: #20282b;
@@ -113,10 +115,10 @@
     .agent-panel-resize::after { position: absolute; top: 0; bottom: 0; left: 4px; width: 2px; background: var(--line); content: ""; }
     .agent-panel-resize:hover::after, .agent-panel-resize:focus-visible::after { background: var(--accent); }
     .agent-panel-resize:focus-visible { outline: none; }
-    .agent-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 7px; }
+    .agent-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(calc(var(--ui-icon-size) + 16px), 1fr)); gap: 7px; }
     .agent-item { display: grid; justify-items: center; gap: 3px; min-width: 0; min-height: 98px; padding: 7px 5px; border: 1px solid #314044; border-radius: 8px; background: #ffffff08; color: #e4e9ea; text-align: center; cursor: pointer; }
     .agent-item:hover { border-color: #75c4b688; background: #75c4b612; }
-    .agent-item img { width: 52px; height: 52px; object-fit: contain; image-rendering: pixelated; }
+    .agent-item img { display: block; }
     .agent-item span { max-width: 100%; overflow: hidden; color: #dce4e2; font-size: 0.72rem; text-overflow: ellipsis; white-space: nowrap; }
     .agent-item small { color: #9aa7aa; font-size: 0.66rem; }
     .agent-item.is-selected { border-color: #f4f7fa; background: #f4f7fa16; box-shadow: inset 0 0 0 1px #f4f7fa44; }
@@ -259,7 +261,7 @@
     }
     .first-design { position: absolute; left: 50%; bottom: 22px; z-index: 2; transform: translateX(-50%); width: max-content; max-width: calc(100% - 24px); padding: 13px 20px; border: 1px solid #75c4b680; border-radius: 12px; background: #122220ef; color: var(--ink); font: inherit; font-size: .86rem; cursor: pointer; box-shadow: 0 8px 28px #0008; }
     .first-design[hidden] { display: none; }
-    .colony-menu { width: 360px; }
+    .colony-menu { width: min(480px, calc(100vw - 20px)); }
     .nest-heading { display: flex; flex: 1; flex-direction: column; align-items: flex-start; gap: 8px; min-width: 0; }
     .nest-heading h2 { margin: 0; color: var(--ink); font-size: 1.3rem; font-weight: 800; line-height: 1.3; overflow-wrap: anywhere; }
     .nest-name-row { display: flex; align-items: flex-start; gap: 8px; width: 100%; min-width: 0; }
@@ -274,14 +276,13 @@
     .nest-name-status { margin: 0; color: var(--amber); font-size: .72rem; }
     .nest-name-status:empty { display: none; }
     .nest-heading .nest-level { display: inline-flex; padding: 4px 9px; border: 1px solid #75c4b670; border-radius: 6px; background: #75c4b615; color: var(--accent); font-size: .92rem; font-weight: 800; line-height: 1.3; font-variant-numeric: tabular-nums; }
-    .nest-resources { display: flex; align-items: center; gap: 12px; margin: 15px 0 14px; }
-    .nest-resource-meter { flex: 1; min-width: 0; }
+    .nest-resources { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 15px 0 14px; }
+    .nest-resource-meter { flex: 1 1 240px; min-width: 0; }
     .nest-points { display: flex; align-items: center; gap: 7px; color: var(--muted); font-size: .85rem; font-variant-numeric: tabular-nums; }
-    .nest-points > img { flex: none; width: 56px; height: 64px; object-fit: contain; image-rendering: pixelated; }
+    .nest-points > span { min-width: 0; overflow-wrap: anywhere; }
     .nest-points strong { color: var(--accent); font-size: 1.45rem; }
     .nest-resource-meter .food-progress-track { margin: 7px 0 0; }
     .evolution-cost { display: inline-flex; align-items: center; gap: 3px; white-space: nowrap; font-variant-numeric: tabular-nums; }
-    .evolution-cost img { flex: none; width: 36px; height: 44px; object-fit: contain; image-rendering: pixelated; }
     .evolution-cost strong { color: var(--accent); font-size: .76rem; }
     .nest-upgrade-actions { position: relative; display: flex; flex: none; margin: 6px 6px 0 0; --attribute-color: var(--accent); }
     .nest-upgrade-help { display: inline-flex; }
@@ -290,15 +291,13 @@
     .template-heading h3 { margin: 0; font-size: .84rem; }
     .template-list > .template-add { display: grid; place-items: center; align-content: center; width: 100%; min-height: 160px; padding: 12px; border: 1px dashed #75c4b670; border-radius: 9px; background: #75c4b609; color: var(--accent); font: inherit; font-size: 3rem; cursor: pointer; }
     .template-list > .template-add:hover { border-color: var(--accent); background: #75c4b618; }
-    .template-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }
+    .template-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr)); gap: 7px; }
     .template-card { display: grid; align-content: start; min-width: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 9px; background: #ffffff05; }
     .template-card:has(.template-spawn:not(:disabled):hover) { border-color: var(--accent); background: #75c4b612; }
     .template-spawn { display: grid; justify-items: center; align-content: start; gap: 5px; width: 100%; min-width: 0; padding: 9px 5px 6px; border: 0; background: transparent; color: var(--ink); font: inherit; cursor: pointer; }
-    .template-spawn > img { width: 65px; height: 65px; object-fit: contain; }
     .template-spawn > strong { max-width: 100%; font-size: .75rem; overflow-wrap: anywhere; }
     .template-card-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px; padding: 3px 5px 7px; }
     .template-card-footer .evolution-cost { gap: 1px; }
-    .template-card-footer .evolution-cost img { width: 32px; height: 36px; }
     .template-card-footer .evolution-cost strong { font-size: .7rem; }
     .template-edit { min-height: 24px; padding: 3px 4px; border: 1px solid var(--line); border-radius: 5px; background: #ffffff05; color: var(--muted); font: inherit; font-size: .63rem; white-space: nowrap; cursor: pointer; }
     .template-edit:hover { border-color: var(--accent); color: var(--ink); }
@@ -308,7 +307,7 @@
     button:disabled { opacity: .4; cursor: default; }
     .nest-status { margin: 9px 0 0; color: var(--amber); font-size: .74rem; line-height: 1.5; }
     .nest-status:empty { display: none; }
-    .evolution-text-icon { width: 24px; height: 28px; object-fit: contain; vertical-align: middle; image-rendering: pixelated; }
+    :is(.agent-item, .template-spawn, .nest-points, .evolution-cost, .design-slot, .attribute-choice, .codex-nav-images, .codex-article-icons, .codex-attribute-link, .design-birth-icon) > img, .evolution-text-icon { display: inline-block; flex: none; width: var(--ui-icon-size); height: var(--ui-icon-size); object-fit: contain; vertical-align: middle; image-rendering: auto; }
     .codex-growth-table-wrap { max-width: 100%; overflow-x: auto; }
     .codex-growth-table { width: 100%; min-width: 440px; border-collapse: collapse; font-variant-numeric: tabular-nums; }
     .codex-growth-table th, .codex-growth-table td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
@@ -317,46 +316,51 @@
     .codex-growth-table tr[aria-current="true"] { background: #75c4b615; color: #c0e8de; }
     .design-backdrop { position: fixed; inset: 0; z-index: 10; background: #060c10b8; backdrop-filter: blur(4px); }
     .design-backdrop[hidden] { display: none; }
-    .evolution-panel { top: 50%; left: 50%; z-index: 11; transform: translate(-50%, -50%); width: min(860px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); padding: 24px; border-color: #75c4b64d; background: #171f22; }
+    .evolution-panel { top: 50%; left: 50%; z-index: 11; transform: translate(-50%, -50%); width: min(960px, calc(100vw - 24px)); height: min(760px, calc(100dvh - 24px)); max-height: calc(100dvh - 24px); padding: 24px; border-color: #75c4b64d; background: #171f22; }
     .evolution-panel .panel-header h2 { font-size: 1.1rem; }
-    .design-kicker { margin: 0 0 5px; color: var(--accent); font-size: .68rem; letter-spacing: .15em; }
     .evolution-panel { display: flex; flex-direction: column; overflow: hidden; }
     .evolution-panel > .panel-header { flex: none; }
-    #unit-design-form { display: flex; flex-direction: column; min-height: 0; }
-    .design-body { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 24px; min-height: 0; margin-top: 16px; padding: 3px 4px; overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable; }
-    .design-preview { display: grid; align-content: start; justify-items: center; gap: 10px; padding: 16px 12px; border: 1px solid var(--line); border-radius: 12px; background: radial-gradient(circle at 50% 25%, #75c4b617, transparent 70%), #11191b; }
-    .design-preview img { width: 150px; height: 180px; object-fit: contain; image-rendering: pixelated; }
-    .design-preview dl { display: grid; grid-template-columns: 1fr auto; gap: 9px 18px; width: 100%; margin: 7px 0 0; font-size: .76rem; }
-    .design-preview dt { color: var(--muted); }
-    .design-preview dd { margin: 0; color: var(--ink); font-variant-numeric: tabular-nums; }
+    #unit-design-form { display: flex; flex: 1; flex-direction: column; min-height: 0; }
+    .design-body { display: grid; flex: 1; align-content: start; grid-template-columns: 190px minmax(0, 1fr); gap: 24px; min-height: 0; margin-top: 16px; padding: 3px 4px; overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable; }
+    .design-preview { display: grid; align-self: start; grid-template-rows: 180px auto; align-content: start; justify-items: center; gap: 10px; padding: 16px 12px; border: 1px solid var(--line); border-radius: 12px; background: radial-gradient(circle at 50% 25%, #75c4b617, transparent 70%), #11191b; }
+    .design-preview img { width: 150px; height: 180px; object-fit: contain; image-rendering: auto; }
+    .design-preview dl { display: grid; grid-template-columns: minmax(0, 1fr) max-content; gap: 9px 10px; width: 100%; margin: 7px 0 0; font-size: .76rem; line-height: 1.5; }
+    .design-preview dt { color: var(--muted); white-space: nowrap; }
+    .design-preview dd { margin: 0; color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
     .design-name { display: block; margin-bottom: 7px; color: var(--muted); font-size: .76rem; }
     .design-name-input { width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 7px; background: #101719; color: var(--ink); font: inherit; font-size: .9rem; }
     .design-slot-heading { display: flex; justify-content: space-between; gap: 10px; margin: 18px 0 9px; font-size: .8rem; }
-    .design-slot-heading span { color: var(--muted); font-size: .72rem; }
-    .design-slots { display: grid; grid-template-columns: repeat(auto-fill, 64px); gap: 8px; }
-    .design-slot { display: grid; place-items: center; width: 64px; height: 64px; padding: 4px; border: 1px dashed #526267; border-radius: 8px; background: #ffffff03; color: var(--muted); font: inherit; font-size: 1.2rem; cursor: pointer; }
+    .design-slots { display: grid; grid-template-columns: repeat(auto-fill, var(--ui-icon-button-size)); gap: 8px; }
+    .design-slot { display: grid; place-items: center; width: var(--ui-icon-button-size); height: var(--ui-icon-button-size); padding: 8px; border: 1px dashed #526267; border-radius: 8px; background: #ffffff03; color: var(--muted); font: inherit; font-size: 1.2rem; cursor: pointer; }
     .design-slot.has-attribute { border-style: solid; border-color: var(--attribute-color); background: #ffffff08; }
-    .design-slot img { width: 52px; height: 52px; object-fit: contain; image-rendering: pixelated; }
     .attribute-palette { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
     .attribute-item { position: relative; display: flex; margin: 6px 6px 0 0; }
     .attribute-info, .nest-growth-info { position: absolute; top: -6px; right: -6px; display: grid; place-items: center; width: 24px; height: 24px; padding: 0; border: 1px solid #526267; border-radius: 50%; background: #11191d; color: var(--muted); font: 700 .9rem Georgia, serif; cursor: pointer; }
     .attribute-info:hover, .attribute-info[aria-expanded="true"], .nest-growth-info:hover, .nest-growth-info[aria-expanded="true"] { border-color: var(--attribute-color); color: var(--attribute-color); background: #ffffff09; }
-    .attribute-choice { position: relative; display: grid; place-items: center; width: 72px; height: 72px; flex: 0 0 72px; padding: 0; border: 1px solid #46555a; border-radius: 9px; background: radial-gradient(circle, color-mix(in srgb, var(--attribute-color) 12%, transparent), transparent 80%), #11191d; color: var(--ink); font: inherit; cursor: pointer; }
-    .attribute-choice:not(:disabled):hover { border-color: var(--attribute-color); box-shadow: 0 0 0 1px var(--attribute-color), 0 4px 18px #0004; }
+    .attribute-choice { position: relative; display: grid; place-items: center; width: var(--ui-icon-button-size); height: var(--ui-icon-button-size); flex: none; padding: 8px; border: 1px solid #46555a; border-radius: 9px; background: radial-gradient(circle, color-mix(in srgb, var(--attribute-color) 12%, transparent), transparent 80%), #11191d; color: var(--ink); font: inherit; cursor: pointer; }
+    .attribute-choice:not([aria-disabled="true"]):hover { border-color: var(--attribute-color); box-shadow: 0 0 0 1px var(--attribute-color), 0 4px 18px #0004; }
+    .attribute-choice[aria-disabled="true"] { opacity: .4; cursor: default; }
     .attribute-choice[data-equipped="true"] { background-color: color-mix(in srgb, var(--attribute-color) 9%, #11191d); }
-    .attribute-choice img { display: block; width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; }
+    .attribute-choice img { display: block; }
     .attribute-choice b { position: absolute; right: -5px; bottom: -5px; min-width: 22px; padding: 3px 5px; border: 1px solid var(--attribute-color); border-radius: 6px; background: #101719; color: var(--attribute-color); font-size: .67rem; font-variant-numeric: tabular-nums; }
     .attribute-choice b:empty { display: none; }
-    .codex { width: min(1020px, calc(100vw - 32px)); height: min(760px, calc(100dvh - 32px)); max-width: none; max-height: none; margin: auto; padding: 0; overflow: hidden; border: 1px solid #56736d; border-radius: 14px; background: #101719; color: var(--ink); font: inherit; box-shadow: 0 24px 80px #000b; }
+    .design-effects { display: grid; gap: 10px; margin-top: 18px; }
+    .design-effects[hidden] { display: none; }
+    .design-effect { min-width: 0; padding: 10px 12px; border-left: 2px solid var(--attribute-color, var(--accent)); border-radius: 0 6px 6px 0; background: #ffffff04; }
+    .design-effect strong { color: var(--attribute-color, var(--accent)); font-size: .8rem; }
+    .design-effect span { margin-left: 8px; color: #dce5e3; font-size: .74rem; }
+    .design-effect p { margin: 5px 0 0; color: var(--muted); font-size: .74rem; line-height: 1.6; overflow-wrap: anywhere; }
+    .design-effect.is-synergy { border-color: var(--amber); background: #d6b26b0a; }
+    .design-effect.is-synergy strong { color: var(--amber); }
+    .codex { width: min(1280px, calc(100vw - 32px)); height: min(760px, calc(100dvh - 32px)); max-width: none; max-height: none; margin: auto; padding: 0; overflow: hidden; border: 1px solid #56736d; border-radius: 14px; background: #101719; color: var(--ink); font: inherit; box-shadow: 0 24px 80px #000b; }
     .codex[open] { display: flex; flex-direction: column; }
     .codex::backdrop { background: #060c10cf; backdrop-filter: blur(4px); }
     .codex-toolbar { display: flex; flex: none; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 22px; border-bottom: 1px solid var(--line); background: #172124; }
     .codex-toolbar h2 { margin: 3px 0 0; font-size: 1.12rem; }
-    .codex-toolbar .design-kicker { margin: 0; }
     .codex-history { display: flex; align-items: center; gap: 7px; }
     .codex-history button, .codex-filter button { padding: 7px 10px; border: 1px solid var(--line); border-radius: 6px; background: #ffffff05; color: var(--ink); font: inherit; font-size: .74rem; cursor: pointer; }
     .codex-history .codex-close { width: 32px; height: 32px; margin-left: 6px; padding: 0; font-size: 1.1rem; }
-    .codex-layout { display: grid; flex: 1; min-height: 0; grid-template-columns: 222px minmax(0, 1fr); }
+    .codex-layout { display: grid; flex: 1; min-height: 0; grid-template-columns: 360px minmax(0, 1fr); }
     .codex-sidebar { display: flex; flex-direction: column; min-height: 0; padding: 18px 14px; border-right: 1px solid var(--line); background: #141e21; }
     .codex-search { width: 100%; min-width: 0; padding: 10px; border: 1px solid #40534f; border-radius: 7px; background: #0e1719; color: var(--ink); font: inherit; font-size: .8rem; }
     .codex-filter { display: flex; flex: none; flex-wrap: wrap; gap: 5px; margin: 10px 0 14px; }
@@ -365,18 +369,14 @@
     .codex-list { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 2px 4px 2px 2px; scrollbar-gutter: stable; }
     .codex-list h3 { margin: 16px 7px 8px; color: var(--muted); font-size: .69rem; font-weight: 400; }
     .codex-list h3:first-child { margin-top: 2px; }
-    .codex-entry { display: flex; align-items: center; gap: 8px; width: 100%; min-height: 40px; margin: 3px 0; padding: 7px; border: 1px solid transparent; border-radius: 6px; background: transparent; color: #c0cdce; text-align: left; font: inherit; font-size: .76rem; cursor: pointer; }
+    .codex-entry { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; width: 100%; min-height: 40px; margin: 3px 0; padding: 7px; border: 1px solid transparent; border-radius: 6px; background: transparent; color: #c0cdce; text-align: left; font: inherit; font-size: .76rem; cursor: pointer; }
     .codex-entry:hover { background: #ffffff06; }
     .codex-entry[aria-current="page"] { border-color: #75c4b661; background: #75c4b615; color: #e4f6ee; }
-    .codex-nav-images { display: flex; flex: none; align-items: center; gap: 1px; }
-    .codex-nav-images img { width: 24px; height: 24px; object-fit: contain; image-rendering: pixelated; }
+    .codex-nav-images { display: flex; flex-wrap: wrap; flex: none; max-width: 100%; align-items: center; gap: 1px; }
     .codex-empty { margin: 12px 5px; color: var(--muted); font-size: .76rem; }
     .codex-article { display: flex; flex-direction: column; min-width: 0; min-height: 0; padding: 24px; }
-    .codex-article-header { display: flex; flex: none; align-items: center; gap: 16px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
-    .codex-article-icons { display: flex; flex: none; align-items: center; gap: 5px; color: var(--muted); }
-    .codex-article-icons > img { width: 64px; height: 64px; object-fit: contain; image-rendering: pixelated; }
-    .codex-nav-images img.evolution-symbol { width: 48px; height: 48px; }
-    .codex-article-icons > img.evolution-symbol { width: 128px; height: 128px; }
+    .codex-article-header { display: flex; flex: none; flex-wrap: wrap; align-items: center; gap: 16px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+    .codex-article-icons { display: flex; flex-wrap: wrap; flex: none; max-width: 100%; align-items: center; gap: 5px; color: var(--muted); }
     .codex-entry-kind { margin: 0 0 6px; color: var(--muted); font-size: .68rem; }
     .codex-article-heading { min-width: 0; }
     .codex-article-heading h3 { margin: 0 0 7px; color: var(--attribute-color, var(--accent)); font-size: 1.3rem; outline: none; }
@@ -388,11 +388,10 @@
     .attribute-combinations { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
     .attribute-combinations li { padding: 12px; border: 1px solid var(--line); border-radius: 8px; background: #ffffff03; }
     .attribute-combinations li[data-active="true"] { border-color: #75c4b66b; background: #75c4b60b; }
-    .attribute-combination-heading { display: flex; align-items: center; gap: 12px; }
-    .attribute-combination-icons { display: flex; flex: none; align-items: center; gap: 5px; color: var(--muted); }
+    .attribute-combination-heading { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+    .attribute-combination-icons { display: flex; flex-wrap: wrap; flex: none; max-width: 100%; align-items: center; gap: 5px; color: var(--muted); }
     .attribute-combination-label { min-width: 0; }
-    .codex-attribute-link { display: inline-grid; flex: none; place-items: center; width: 40px; height: 40px; padding: 2px; border: 1px solid color-mix(in srgb, var(--attribute-color) 35%, transparent); border-radius: 6px; background: #0e171b; color: var(--ink); font: inherit; cursor: pointer; }
-    .codex-attribute-link img { width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; }
+    .codex-attribute-link { display: inline-grid; flex: none; place-items: center; width: var(--ui-icon-button-size); height: var(--ui-icon-button-size); padding: 8px; border: 1px solid color-mix(in srgb, var(--attribute-color) 35%, transparent); border-radius: 6px; background: #0e171b; color: var(--ink); font: inherit; cursor: pointer; }
     .codex-attribute-link:hover { border-color: var(--attribute-color); background: #ffffff09; }
     .codex-synergy-link { padding: 0; border: 0; background: transparent; color: #dce9e4; text-align: left; font: inherit; font-size: .8rem; cursor: pointer; }
     .codex-synergy-link:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
@@ -400,53 +399,44 @@
     .attribute-combinations small { margin-top: 3px; color: var(--muted); font-size: .72rem; }
     .attribute-combinations p { margin: 7px 0 0; color: #b4c1c2; }
     .codex-components { display: grid; gap: 10px; }
-    .codex-component { display: flex; align-items: center; gap: 14px; width: 100%; height: auto; padding: 14px; text-align: left; }
-    .codex-component img { flex: none; width: 52px; height: 52px; }
+    .codex-component { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; width: 100%; height: auto; padding: 14px; text-align: left; }
+    .codex-component > span { flex: 1 1 180px; min-width: 0; overflow-wrap: anywhere; }
     .codex-component strong, .codex-component small { display: block; }
     .codex-component strong { color: var(--attribute-color); font-size: .9rem; }
     .codex-component small { margin: 4px 0; color: var(--muted); font-size: .76rem; }
     .codex-component-description { display: block; font-size: .76rem; line-height: 1.7; }
-    .codex-actions { display: flex; flex: none; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); }
-    .codex-actions[hidden], .codex-actions button[hidden], .attribute-stack[hidden] { display: none; }
-    .codex-design-context { flex: 1; margin: 0; color: var(--muted); font-size: .72rem; line-height: 1.7; }
-    .codex-actions .primary-action { flex: none; }
+    .attribute-stack[hidden] { display: none; }
     .codex button:focus-visible, .codex input:focus-visible, .codex-content:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-    @media (max-width: 700px) {
+    @media (max-width: 1000px) {
       .codex { width: calc(100vw - 20px); height: calc(100dvh - 20px); border-radius: 10px; }
       .codex-toolbar { padding: 12px 14px; }
       .codex-history button span { display: none; }
       .codex-layout { grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); }
       .codex-sidebar { padding: 12px 14px 10px; border-right: 0; border-bottom: 1px solid var(--line); }
       .codex-filter { margin: 8px 0; }
-      .codex-list { display: grid; grid-template-columns: 1fr 1fr; align-content: start; gap: 2px 6px; flex: auto; max-height: 116px; }
+      .codex-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); align-content: start; gap: 2px 6px; flex: auto; max-height: 184px; }
       .codex-list h3, .codex-empty { grid-column: 1 / -1; }
       .codex-list h3 { margin: 7px 5px 2px; }
       .codex-entry { margin: 0; padding: 5px; min-height: 34px; font-size: .71rem; }
-      .codex-nav-images img { width: 20px; height: 20px; }
       .codex-article { padding: 16px 14px; }
       .codex-article-header { gap: 12px; padding-bottom: 12px; }
-      .codex-article-icons > img { width: 48px; height: 48px; }
-      .codex-nav-images img.evolution-symbol { width: 40px; height: 40px; }
-      .codex-article-icons > img.evolution-symbol { width: 96px; height: 96px; }
       .codex-article-heading h3 { font-size: 1.1rem; }
       .codex-content { margin-top: 12px; font-size: .76rem; }
-      .codex-actions { margin-top: 12px; padding-top: 12px; }
-      .codex-actions .primary-action { width: 100%; }
       .attribute-combinations li { padding: 10px; }
       .attribute-combination-heading { gap: 9px; }
-      .codex-attribute-link { width: 34px; height: 34px; }
       .codex-component { width: 100%; height: auto; gap: 10px; padding: 12px; }
     }
     .design-footer { display: grid; flex: none; gap: 12px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); }
-    .design-budget { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .design-budget-card { display: grid; gap: 5px; padding: 13px 16px; border: 1px solid #75c4b65c; border-radius: 9px; background: #75c4b60c; }
-    .design-budget-card strong { display: flex; align-items: center; gap: 8px; color: #bcf0da; font-size: 1.75rem; line-height: 1.2; font-variant-numeric: tabular-nums; }
-    .design-budget-card strong > img { width: 56px; height: 64px; object-fit: contain; image-rendering: pixelated; }
-    .design-budget-card.is-cost { border-color: #d6b26b70; background: #d6b26b0c; }
-    .design-budget-card.is-cost strong { color: #f2d696; }
-    .design-budget[data-insufficient="true"] .is-cost { border-color: #e8998c; background: #c06b6220; }
-    .design-budget[data-insufficient="true"] .is-cost strong { color: #ffb4a4; }
-    .design-buttons { display: flex; gap: 8px; }
+    #design-birth { display: flex; flex: 0 0 208px; flex-direction: column; align-items: center; justify-content: center; gap: 6px; width: 208px; height: 208px; min-width: 0; min-height: 208px; padding: 6px; border-color: #777; border-radius: 10px; background: #333; color: #f5f5f5; }
+    #design-birth:not(:disabled):hover { border-color: #bfbfbf; background: #424242; }
+    #design-birth:not(:disabled):active { background: #292929; }
+    #design-birth:focus-visible { outline: 2px solid #e0e0e0; }
+    #design-birth-label { min-width: 0; font-size: 1.25rem; line-height: 1.2; text-align: center; white-space: nowrap; }
+    .design-budget { display: inline-flex; flex: none; align-items: center; gap: 4px; color: inherit; font-size: 1.05rem; line-height: 1.2; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .design-birth-icon { display: grid; place-items: center; flex: none; width: var(--ui-icon-size); height: var(--ui-icon-size); }
+    #design-points { color: inherit; }
+    .design-budget-separator, #birth-cost { color: #ccc; font-weight: 400; }
+    .design-buttons { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; }
     .design-status { margin: 0; color: var(--amber); font-size: .75rem; }
     .design-status:empty { display: none; }
     .agent-birth-stats { margin: 10px 0 0; color: var(--muted); font-size: .72rem; line-height: 1.7; overflow-wrap: anywhere; }
@@ -454,12 +444,9 @@
     @media (max-width: 600px) {
       .evolution-panel { padding: 16px; }
       .design-body { grid-template-columns: 1fr; gap: 16px; }
-      .design-preview { grid-template-columns: 90px 1fr; gap: 16px; padding: 10px; }
+      .design-preview { grid-template-columns: 90px minmax(0, 1fr); grid-template-rows: auto; gap: 16px; padding: 10px; }
       .design-preview img { width: 90px; height: 110px; }
       .attribute-palette { gap: 9px; }
-      .attribute-choice { width: 60px; height: 60px; flex-basis: 60px; }
-      .design-budget-card { padding: 12px; }
-      .design-budget-card strong { font-size: 1.5rem; }
       .design-preview dl { margin: 0; gap: 5px 10px; }
       .design-footer { margin-top: 14px; padding-top: 12px; }
       .controls-guide { width: min(218px, calc(100vw - var(--agent-panel-width) - 24px)); }
@@ -563,8 +550,8 @@
       <section class="agent-panel-scroll" id="agent-tab-panel" role="tabpanel" aria-labelledby="agent-tab" tabindex="0">
         <section class="agent-details corpse-details" id="corpse-details" aria-labelledby="corpse-title" hidden>
           <div class="panel-header"><h2 id="corpse-title">사체 회수</h2><button class="panel-close" id="corpse-close" type="button" aria-label="사체 안내 닫기">×</button></div>
-          <p class="corpse-value">회수 가능한 진화 포인트 <strong id="corpse-value"></strong></p>
-          <p class="corpse-guide">사체를 둥지로 운반하면 진화 포인트를 얻습니다. 감각·힘 속성을 조합한 유닛을 만들어 회수해 보세요.</p>
+          <p class="corpse-value"><span>회수 가능한 <img class="evolution-text-icon" data-evolution-symbol alt="진화 포인트"></span><strong id="corpse-value"></strong></p>
+          <p class="corpse-guide">사체를 둥지로 운반하면 <img class="evolution-text-icon" data-evolution-symbol alt="진화 포인트">를 얻습니다. 감각·힘 속성을 조합한 유닛을 만들어 회수해 보세요.</p>
           <button class="primary-action" id="corpse-design" type="button" aria-haspopup="dialog" aria-controls="evolution-panel">회수 유닛 설계</button>
         </section>
         <section class="agent-details" id="agent-details" aria-label="선택한 생명체" hidden>
@@ -628,7 +615,7 @@
   <div class="design-backdrop" id="design-backdrop" hidden></div>
   <section class="evolution-panel" id="evolution-panel" role="dialog" aria-modal="true" aria-labelledby="design-title" hidden>
     <div class="panel-header">
-      <div><p class="design-kicker">SPAWNER / UNIT DESIGN</p><h2 id="design-title">첫 생명체 설계</h2></div>
+      <h2 id="design-title">첫 생명체 설계</h2>
       <button class="panel-close" id="evolution-close" type="button" aria-label="설계 닫기">×</button>
     </div>
     <form id="unit-design-form">
@@ -640,25 +627,22 @@
         <div>
           <label class="design-name" for="design-name">템플릿 이름</label>
           <input class="design-name-input" id="design-name" type="text" maxlength="24" required autocomplete="off" placeholder="이 생명체를 뭐라고 부를까요?">
-          <div class="design-slot-heading"><strong>속성 슬롯</strong><span id="design-slot-count"></span></div>
+          <div class="design-slot-heading"><strong>속성 슬롯</strong></div>
           <div class="design-slots" id="design-slots" aria-label="설계 속성 슬롯"></div>
           <div class="attribute-palette" id="attribute-palette" role="group" aria-label="속성 장착과 디테일"></div>
+          <div class="design-effects" id="design-effects" aria-label="장착 속성과 시너지 효과" hidden></div>
         </div>
       </div>
       <div class="design-footer">
-        <div class="design-budget" id="design-budget">
-          <div class="design-budget-card is-cost" aria-label="탄생 비용"><strong><img data-evolution-symbol alt=""><span id="birth-cost">3</span></strong></div>
-          <div class="design-budget-card" aria-label="총 보유 점수"><strong><img data-evolution-symbol alt=""><span id="design-points">30</span></strong></div>
-        </div>
         <p class="design-status" id="design-status" role="status"></p>
-        <div class="design-buttons"><button class="secondary-action" id="design-save" type="button" hidden>설계 저장</button><button class="primary-action" id="design-birth" type="submit">설계 완료하고 탄생</button></div>
+        <div class="design-buttons"><button class="secondary-action" id="design-save" type="button" hidden>설계 저장</button><button class="primary-action" id="design-birth" type="submit" data-help="현재 둥지가 보유한 진화 포인트 / 탄생에 필요한 비용입니다."><span class="design-budget" id="design-budget" aria-label="보유 진화 포인트와 탄생 비용"><span class="design-birth-icon" aria-hidden="true"><img data-evolution-symbol alt=""></span><span id="design-points">30</span><span class="design-budget-separator" aria-hidden="true">/</span><span id="birth-cost">3</span></span><span id="design-birth-label">탄생</span></button></div>
       </div>
     </form>
   </section>
 
   <dialog class="codex" id="codex" aria-labelledby="codex-title">
     <header class="codex-toolbar">
-      <div><p class="design-kicker">SPAWNER / CODEX</p><h2 id="codex-title">코덱스</h2></div>
+      <h2 id="codex-title">코덱스</h2>
       <div class="codex-history">
         <button id="codex-back" type="button" aria-label="이전 항목" disabled>← <span>뒤로</span></button>
         <button id="codex-forward" type="button" aria-label="다음 항목" disabled>→ <span>앞으로</span></button>
@@ -685,10 +669,6 @@
           <p id="codex-description"></p><p class="attribute-stack" id="codex-stack"></p>
           <h4 id="codex-related-title"></h4><div id="codex-related"></div>
         </div>
-        <footer class="codex-actions" id="codex-actions" hidden>
-          <p class="codex-design-context" id="codex-design-context"></p>
-          <button class="primary-action" id="codex-equip" type="button">설계에 장착 · +2점</button>
-        </footer>
       </article>
     </div>
   </dialog>
@@ -809,7 +789,7 @@
       helpTooltipTarget = button;
       const host = button.closest("dialog[open]") || document.body;
       if (helpTooltip.parentElement !== host) host.append(helpTooltip);
-      helpTooltip.replaceChildren(document.createTextNode(button.dataset.help));
+      setEvolutionText(helpTooltip, button.dataset.help);
       if (button.dataset.helpHint) {
         const hint = document.createElement("span");
         hint.className = "help-tooltip-hint";
@@ -3825,7 +3805,6 @@
     const codex = document.getElementById("codex");
     const codexSearch = document.getElementById("codex-search");
     const codexList = document.getElementById("codex-list");
-    const codexEquip = document.getElementById("codex-equip");
     const codexBack = document.getElementById("codex-back");
     const codexForward = document.getElementById("codex-forward");
     const codexState = { entry: "attribute:antenna", history: [], index: -1, category: "all", returnFocus: null };
@@ -3909,7 +3888,7 @@
       document.getElementById("design-title").textContent = template ? "유닛 설계 수정" :
         state.templates.length ? "새 유닛 설계" : "첫 생명체 설계";
       designSave.hidden = !template;
-      designBirth.textContent = template ? "수정하고 탄생" : "설계 완료하고 탄생";
+      document.getElementById("design-birth-label").textContent = template ? "수정 후 탄생" : "탄생";
       evolutionPanel.hidden = false;
       designBackdrop.hidden = false;
       document.querySelector(".app").inert = true;
@@ -3922,6 +3901,7 @@
 
     function renderDesignSlots() {
       if (!unitDraft) return;
+      hideHelpTooltip();
       const fragment = document.createDocumentFragment();
       for (let index = 0; index < Math.max(slotCapacity(), unitDraft.slots.length); index += 1) {
         const key = unitDraft.slots[index];
@@ -3936,7 +3916,8 @@
           const image = document.createElement("img");
           image.src = attribute.image;
           image.alt = "";
-          button.title = attribute.name + " 빼기";
+          attachAttributeHelp(button, attribute);
+          button.dataset.helpHint = "클릭해서 속성 빼기";
           button.append(image);
         } else {
           button.textContent = "+";
@@ -3947,11 +3928,46 @@
           unitDraft.error = "";
           renderDesignSlots();
           updateUnitDesign();
-          designSlots.children[Math.min(index, slotCapacity() - 1)].focus();
+          designSlots.children[Math.min(index, slotCapacity() - 1)]?.focus();
         });
         fragment.append(button);
       }
       designSlots.replaceChildren(fragment);
+    }
+
+    function renderDesignEffects(counts) {
+      const fragment = document.createDocumentFragment();
+      for (const attribute of ATTRIBUTES) {
+        const count = counts[attribute.key];
+        if (!count) continue;
+        const card = document.createElement("div");
+        card.className = "design-effect";
+        card.dataset.attribute = attribute.key;
+        card.style.setProperty("--attribute-color", attribute.color);
+        const name = document.createElement("strong");
+        name.textContent = attribute.name + (count > 1 ? " ×" + count : "");
+        const effect = document.createElement("span");
+        effect.textContent = count === 1 ? attribute.effect : attribute.stat + " +" +
+          (attribute.key === "shell" ? Math.round((1 - 0.75 ** count) * 10000) / 100 : attribute.bonus * count) + attribute.unit;
+        const description = document.createElement("p");
+        description.textContent = attribute.description;
+        card.append(name, effect, description);
+        fragment.append(card);
+      }
+      for (const combination of ATTRIBUTE_COMBINATIONS) {
+        if (!hasSynergy(counts, combination.keys)) continue;
+        const card = document.createElement("div");
+        card.className = "design-effect is-synergy";
+        const name = document.createElement("strong");
+        name.textContent = "시너지 · " + combination.name;
+        const description = document.createElement("p");
+        description.textContent = combination.description;
+        card.append(name, description);
+        fragment.append(card);
+      }
+      const effects = document.getElementById("design-effects");
+      effects.replaceChildren(fragment);
+      effects.hidden = !effects.childElementCount;
     }
 
     function updateUnitDesign() {
@@ -3959,11 +3975,9 @@
       const counts = attributeCounts(unitDraft.slots);
       const stats = unitStats(counts);
       document.getElementById("design-preview-image").src = agentSprite({ attributes: counts, carrying: 0 }).src;
-      document.getElementById("design-slot-count").textContent = unitDraft.slots.length + " / " + slotCapacity() + " · 둥지 Lv." + state.nestLevel;
-      const statValues = [["시야", stats.vision + "칸"], ["운반", stats.capacity + "개" + (hasSynergy(counts, ["strength", "strength"]) ? " · 과적 10개" : "")],
-        ["이동", stats.speed.toFixed(1) + "칸/초"], ["체력", stats.health],
-        ["환경 피해 감소", ((1 - stats.resistance) * 100).toFixed(2).replace(/\.?0+$/, "") + "%"],
-        ["시너지", ATTRIBUTE_COMBINATIONS.filter(effect => hasSynergy(counts, effect.keys)).map(effect => effect.name).join(" · ") || "없음"]];
+      const statValues = [["시야", stats.vision + "칸"], ["운반", stats.capacity + "개"],
+        ["이동", Number(agentSpeed({ stats }).toFixed(2)) + "칸/초"], ["체력", stats.health],
+        ["환경 피해 감소", ((1 - stats.resistance) * 100).toFixed(2).replace(/\.?0+$/, "") + "%"]];
       const statsFragment = document.createDocumentFragment();
       for (const [label, value] of statValues) {
         const term = document.createElement("dt");
@@ -3973,11 +3987,12 @@
         statsFragment.append(term, description);
       }
       document.getElementById("design-stats").replaceChildren(statsFragment);
+      renderDesignEffects(counts);
       for (const button of designPalette.querySelectorAll(".attribute-choice")) {
         const count = counts[button.dataset.attribute];
         button.querySelector("b").textContent = count ? "×" + count : "";
         button.dataset.equipped = String(count > 0);
-        button.disabled = unitDraft.slots.length >= slotCapacity();
+        button.setAttribute("aria-disabled", String(unitDraft.slots.length >= slotCapacity()));
         const attribute = ATTRIBUTES.find((candidate) => candidate.key === button.dataset.attribute);
         button.setAttribute("aria-label", attribute.name + (count ? " " + count + "개 장착, " : ", ") + "속성 장착");
       }
@@ -3989,11 +4004,10 @@
       document.getElementById("design-points").textContent = state.evolutionPoints;
       document.getElementById("design-budget").dataset.insufficient = String(state.evolutionPoints < cost);
       updateCodex();
-      designBirth.disabled = connection.busy || !connection.online || state.evolutionPoints < cost;
+      designBirth.disabled = connection.busy || !connection.online || unitDraft.slots.length > slotCapacity();
       designSave.disabled = connection.busy || !connection.online || unitDraft.slots.length > slotCapacity();
-      designStatus.textContent = unitDraft.error || (state.evolutionPoints < cost ?
-        "탄생에 " + (cost - state.evolutionPoints) + "점이 더 필요합니다." :
-        unitDraft.slots.length === slotCapacity() ? "슬롯이 가득 찼습니다. 속성을 빼서 조합을 바꿀 수 있습니다." : "");
+      setEvolutionText(designStatus, unitDraft.error || (state.evolutionPoints < cost ?
+        "탄생에 " + (cost - state.evolutionPoints) + "점이 더 필요해 템플릿만 저장합니다." : ""));
     }
 
     async function saveUnitDesign(shouldBirth) {
@@ -4010,10 +4024,6 @@
       state.selectedTemplateId = result.templateId;
       closeEvolutionPanel();
       updateColonyPanel();
-      if (result.agentId) {
-        closeColonyMenu();
-        selectObject("agent", state.agents.find((agent) => agent.id === result.agentId));
-      }
     }
 
     function positionColonyMenus() {
@@ -4111,7 +4121,7 @@
     }
 
     function attachAttributeHelp(button, attribute) {
-      button.dataset.help = attribute.name + " · " + attribute.effect;
+      button.dataset.help = attribute.name + " · " + attribute.effect + "\n" + attribute.description;
       button.addEventListener("pointerenter", () => showHelpTooltip(button));
       button.addEventListener("pointerleave", hideHelpTooltip);
       button.addEventListener("focus", () => showHelpTooltip(button));
@@ -4159,7 +4169,7 @@
             ...(value.keys || []).map((key) => ATTRIBUTES.find((attribute) => attribute.key === key).name)].join(" ").toLocaleLowerCase().includes(query));
         if (!matches.length) continue;
         const heading = document.createElement("h3");
-        heading.textContent = title + " · " + matches.length;
+        heading.textContent = title;
         fragment.append(heading);
         for (const { value, key } of matches) {
           const entry = kind + ":" + key;
@@ -4206,9 +4216,9 @@
       article.style.setProperty("--attribute-color", kind === "attribute" ? value.color : "#b4dfcf");
       document.getElementById("codex-entry-kind").textContent = kind === "attribute" ? "속성" : kind === "nest" ? "둥지" : "조합 시너지";
       document.getElementById("codex-article-name").textContent = value.name;
-      document.getElementById("codex-article-effect").textContent = kind !== "synergy" ? value.effect :
-        value.keys.map((attributeKey) => ATTRIBUTES.find((attribute) => attribute.key === attributeKey).name).join(" + ");
-      document.getElementById("codex-description").textContent = value.description;
+      setEvolutionText(document.getElementById("codex-article-effect"), kind !== "synergy" ? value.effect :
+        value.keys.map((attributeKey) => ATTRIBUTES.find((attribute) => attribute.key === attributeKey).name).join(" + "));
+      setEvolutionText(document.getElementById("codex-description"), value.description);
       const hero = document.getElementById("codex-article-icons");
       hero.replaceChildren();
       const related = document.getElementById("codex-related");
@@ -4222,6 +4232,7 @@
         list.className = "attribute-combinations";
         for (const [index, combination] of ATTRIBUTE_COMBINATIONS.entries()) {
           if (!combination.keys.includes(key)) continue;
+          const keys = [...combination.keys].sort((left, right) => Number(right === key) - Number(left === key));
           const item = document.createElement("li");
           item.dataset.combination = index;
           const heading = document.createElement("div");
@@ -4237,15 +4248,15 @@
           link.append(name);
           link.addEventListener("click", () => navigateCodex("synergy:" + index, true));
           const effects = document.createElement("small");
-          effects.textContent = combination.keys.map((attributeKey) => ATTRIBUTES.find((attribute) => attribute.key === attributeKey).effect).join(" · ");
+          effects.textContent = keys.map((attributeKey) => ATTRIBUTES.find((attribute) => attribute.key === attributeKey).effect).join(" · ");
           const description = document.createElement("p");
           description.textContent = combination.description;
           label.append(link, effects);
-          heading.append(codexAttributeIcons(combination.keys), label);
+          heading.append(codexAttributeIcons(keys), label);
           item.append(heading, description);
           list.append(item);
         }
-        document.getElementById("codex-related-title").textContent = "관련 시너지 · " + list.childElementCount;
+        document.getElementById("codex-related-title").textContent = "관련 시너지";
         related.append(list);
       } else if (kind === "nest") {
         const image = document.createElement("img");
@@ -4294,7 +4305,7 @@
       for (const title of ["레벨", "유닛 속성 슬롯", "속성 종류(목표)", "진화 포인트 보관량", "진화 포인트 다음 성장 비용"]) {
         const cell = document.createElement("th");
         cell.scope = "col";
-        cell.textContent = title;
+        setEvolutionText(cell, title);
         headings.append(cell);
       }
       head.append(headings);
@@ -4353,13 +4364,6 @@
         item.dataset.active = String(active);
         item.querySelector("strong").textContent = combination.name + (active ? " · 조합 중" : "");
       }
-      const designing = !!unitDraft && !evolutionPanel.hidden;
-      document.getElementById("codex-actions").hidden = !designing || entry.kind === "nest";
-      codexEquip.hidden = entry.kind !== "attribute";
-      codexEquip.disabled = !designing || unitDraft.slots.length >= slotCapacity();
-      codexEquip.textContent = codexEquip.disabled ? "슬롯 가득 참" : "설계에 장착 · +2점";
-      if (designing) document.getElementById("codex-design-context").textContent =
-        "장착 " + unitDraft.slots.length + " / " + slotCapacity() + " · 탄생 " + birthCost(unitDraft) + "점 · 보유 " + state.evolutionPoints + "점";
       codexBack.disabled = codexState.index <= 0;
       codexForward.disabled = codexState.index >= codexState.history.length - 1;
     }
@@ -4453,10 +4457,6 @@
       designPalette.append(item);
     }
     document.querySelector(".design-body").addEventListener("scroll", hideHelpTooltip);
-    codexEquip.addEventListener("click", () => {
-      equipDesignAttribute(selectedAttribute);
-      if (codexEquip.disabled) document.getElementById("codex-close").focus();
-    });
     document.getElementById("codex-open").addEventListener("click", () => openCodex(codexState.entry));
     document.getElementById("codex-close").addEventListener("click", () => closeCodex(true));
     codexBack.addEventListener("click", () => moveCodexHistory(-1));
@@ -4476,6 +4476,13 @@
       event.preventDefault();
       closeCodex(true);
     });
+    for (const type of ["mousedown", "mouseup", "auxclick"]) {
+      codex.addEventListener(type, (event) => {
+        if (!codex.open || event.button !== 3) return;
+        event.preventDefault();
+        if (event.type === "mouseup") moveCodexHistory(-1);
+      });
+    }
     codex.addEventListener("keydown", (event) => {
       if (!event.altKey || !["ArrowLeft", "ArrowRight"].includes(event.key)) return;
       event.preventDefault();
