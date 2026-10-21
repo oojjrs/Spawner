@@ -1,8 +1,5 @@
 export const CREATURE_ASSETS = [
-  "DesignAssets/spiny-back-beetle-sprite.png",
-  "DesignAssets/Animations/spiny-back-beetle-idle-runtime.webp",
-  "DesignAssets/Animations/spiny-back-beetle-walk-runtime.webp",
-  "DesignAssets/Animations/spiny-back-beetle-attack-runtime.webp"
+  "DesignAssets/Units/spiny-back-beetle.png"
 ];
 
 export function createCreatures(environment, saved) {

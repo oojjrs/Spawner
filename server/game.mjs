@@ -896,6 +896,11 @@ export function createGame(environment, colony) {
 
       const deposited = Math.min(agent.carrying, Math.max(0, pointCapacity() - state.evolutionPoints));
       agent.carryingBeforeDeposit = deposited;
+      agent.foodDelivery = deposited > 0 ? {
+        ...agent.foodDelivery, colonyId: colony.id, x: agent.x + 0.5, y: agent.y + 0.5,
+        startedAt: agent.foodDelivery?.startedAt ?? agent.unloadReady - 1,
+        arrivesAt: agent.unloadReady, receivedAt: state.simSeconds, amount: deposited
+      } : null;
       state.colonyFood += deposited;
       state.evolutionPoints += deposited;
       agent.carrying -= deposited;
@@ -932,6 +937,7 @@ export function createGame(environment, colony) {
         plannedCargo: best.plannedCargo, recoverHealth: same && best.action === "recover" && reason !== "completed" ? previous.recoverHealth : best.recoverHealth,
         score: best.score, scores: candidates.map(candidate => ({ action: candidate.action, score: candidate.score, key: candidate.target.key })) };
       if (same) return;
+      if (agent.foodDelivery?.receivedAt === null) agent.foodDelivery = null;
       agent.straightSteps = 0;
       agent.movementTargetKey = null;
       agent.movementVisits.clear();
@@ -982,6 +988,11 @@ export function createGame(environment, colony) {
         if (agent.mode !== "unload") {
           agent.mode = "unload";
           agent.unloadReady = state.simSeconds + 1;
+          agent.foodDelivery = {
+            colonyId: colony.id, x: agent.x + 0.5, y: agent.y + 0.5,
+            startedAt: state.simSeconds, arrivesAt: agent.unloadReady, receivedAt: null,
+            amount: Math.min(agent.carrying, Math.max(0, pointCapacity() - state.evolutionPoints))
+          };
         }
         return false;
       }
