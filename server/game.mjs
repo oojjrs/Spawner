@@ -1,6 +1,7 @@
 import { ATTRIBUTES, attributeCounts, unitStats, unitMovementSpeed, birthCost, hasSynergy } from "./attributes.mjs";
 import { createPersonality, personalityLabels, createUtilityAI } from "./utility.mjs";
 import { NEST_LEVELS } from "./nests.mjs";
+import { AGENT_BIRTH_DURATION } from "./birth.mjs";
 import { isTreeFood } from "./food.mjs";
 import { createRoadOptimizer } from "./roads.mjs";
 
@@ -117,11 +118,11 @@ export function createGame(environment, colony) {
       revealAround(COLONY_ORIGIN.x + 2, COLONY_ORIGIN.y + 2, 6);
       const markers = new Map();
       for (const agent of state.agents) {
-        if (agent.health <= 0) continue;
+        if (agent.health <= 0 || agent.birth && state.simSeconds < agent.birth.readyAt) continue;
         revealAround(agent.x, agent.y, agent.stats.vision + (agent.waveUntil > state.simSeconds ? 4 : 0));
       }
       for (const agent of state.agents) {
-        if (agent.health <= 0 || !synergy(agent, ["antenna", "antenna"])) continue;
+        if (agent.health <= 0 || agent.birth && state.simSeconds < agent.birth.readyAt || !synergy(agent, ["antenna", "antenna"])) continue;
         for (let dy = -18; dy <= 18; dy++) {
           for (let dx = -18; dx <= 18; dx++) {
             const x = agent.x + dx, y = agent.y + dy, index = y * WORLD_SIZE + x;
@@ -267,8 +268,12 @@ export function createGame(environment, colony) {
       return nearest;
     }
 
-    function chooseSpawnPosition() {
+    function chooseSpawnPosition(randomized) {
       const cells = colonyBoundaryCells();
+      if (randomized) {
+        const available = cells.filter(cell => !isAgentCellOccupied(cell.x, cell.y, null));
+        return available.length ? { ...available[Math.floor(Math.random() * available.length)] } : null;
+      }
       const startIndex = (state.nextAgentId - 1) % cells.length;
       for (let offset = 0; offset < cells.length; offset += 1) {
         const cell = cells[(startIndex + offset) % cells.length];
@@ -899,7 +904,7 @@ export function createGame(environment, colony) {
     }
 
     function reconsiderAgent(agent, reason) {
-      if (agent.health <= 0) return;
+      if (agent.health <= 0 || agent.birth && state.simSeconds < agent.birth.readyAt) return;
       const candidates = utilityAI.evaluate(agent, !["completed", "targetLost", "restore"].includes(reason));
       let best = candidates[0];
       if (agent.actionPriorities?.includes(best?.action)) {
@@ -939,6 +944,7 @@ export function createGame(environment, colony) {
     }
 
     function decisionEvent(agent) {
+      if (agent.birth && state.simSeconds < agent.birth.readyAt) return null;
       if (agent.decisionPending) return agent.decisionPending;
       const visible = state.rivals.filter(enemy => enemy.health > 0 && visibleCells.has(enemy.y * WORLD_SIZE + enemy.x));
       const ids = new Set(visible.map(enemy => enemy.id));
@@ -1057,7 +1063,7 @@ export function createGame(environment, colony) {
     }
 
     function spawnAgent(template, faction) {
-      const position = chooseSpawnPosition();
+      const position = chooseSpawnPosition(template.id !== null);
       if (!position) return null;
       const attributes = attributeCounts(template.slots);
       const stats = unitStats(attributes);
@@ -1103,6 +1109,12 @@ export function createGame(environment, colony) {
         moveDuration: 0
       };
       initializeAgent(agent);
+      if (template.id !== null) {
+        agent.mode = "birth";
+        agent.birth = { colonyId: colony.id, startedAt: state.simSeconds,
+          readyAt: state.simSeconds + AGENT_BIRTH_DURATION,
+          fromX: COLONY_CENTER.x - .5, fromY: COLONY_CENTER.y - .5 };
+      }
       state.nextAgentId += 1;
       state.agents.push(agent);
       return agent;
@@ -1163,6 +1175,12 @@ export function createGame(environment, colony) {
       updatePerception();
       for (const agent of state.agents) {
         if (agent.health <= 0) continue;
+        if (agent.birth) {
+          if (state.simSeconds < agent.birth.readyAt) continue;
+          agent.birth = null;
+          agent.moveBudget = 0;
+          agent.decisionPending = "birth";
+        }
         updateEnvironment(agent, elapsed);
         if (agent.health <= 0) continue;
         const reason = decisionEvent(agent);
@@ -1201,14 +1219,23 @@ export function createGame(environment, colony) {
       return value.trim();
     }
 
-    function birth(template) {
+    function birth(template, required) {
       if (template.slots.length > slotCapacity() || template.slots.some(key => !ATTRIBUTES.some(attribute => attribute.key === key))) {
         throw new Error("현재 둥지의 슬롯 수와 사용 가능한 속성에 맞춰 설계를 수정해 주세요.");
       }
-      if (state.agents.length >= 200) throw new Error("생명체는 최대 200개까지 유지할 수 있습니다.");
-      if (state.evolutionPoints < birthCost(template)) throw new Error("진화 포인트가 부족합니다.");
+      if (state.agents.length >= 200) {
+        if (!required) return null;
+        throw new Error("생명체는 최대 200개까지 유지할 수 있습니다.");
+      }
+      if (state.evolutionPoints < birthCost(template)) {
+        if (!required) return null;
+        throw new Error("진화 포인트가 부족합니다.");
+      }
       const agent = spawnAgent(template, "colony");
-      if (!agent) throw new Error("둥지 주변이 가득 찼습니다.");
+      if (!agent) {
+        if (!required) return null;
+        throw new Error("둥지 주변이 가득 찼습니다.");
+      }
       state.evolutionPoints -= birthCost(template);
       return agent.id;
     }
@@ -1229,7 +1256,7 @@ export function createGame(environment, colony) {
         }
         const template = { id: previous ? previous.id : state.nextTemplateId, name,
           slots: [...action.slots], revision: previous ? previous.revision + 1 : 1 };
-        const agentId = action.birth ? birth(template) : null;
+        const agentId = action.birth ? birth(template, false) : null;
         if (previous) state.templates[state.templates.indexOf(previous)] = template;
         else {
           state.templates.push(template);
@@ -1240,7 +1267,7 @@ export function createGame(environment, colony) {
       if (action.type === "birth") {
         const template = state.templates.find((candidate) => candidate.id === action.templateId);
         if (!template) throw new Error("설계를 찾을 수 없습니다.");
-        return { agentId: birth(template) };
+        return { agentId: birth(template, true) };
       }
       if (action.type === "upgrade") {
         if (state.nestLevel >= NEST_LEVELS.length) throw new Error("최고 둥지 레벨입니다.");
