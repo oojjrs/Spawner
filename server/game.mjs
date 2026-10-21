@@ -1,6 +1,7 @@
 import { ATTRIBUTES, attributeCounts, unitStats, birthCost, hasSynergy } from "./attributes.mjs";
 import { createPersonality, personalityLabels, createUtilityAI } from "./utility.mjs";
 import { NEST_LEVELS } from "./nests.mjs";
+import { createRoadOptimizer } from "./roads.mjs";
 
 export function createGame(environment, colony) {
     const worldMap = environment.world;
@@ -74,6 +75,14 @@ export function createGame(environment, colony) {
     const utilityAI = createUtilityAI({ state, size: WORLD_SIZE, homeCells: colonyBoundaryCells,
       walkable: isWalkable, hazardAt: (x, y) => state.explored.has(y * WORLD_SIZE + x) ? hazardAt(x, y) : 0,
       enemies: () => state.rivals.filter(enemy => visibleCells.has(enemy.y * WORLD_SIZE + enemy.x)), synergy });
+    const roadOptimizer = createRoadOptimizer({ size: WORLD_SIZE, boundary: colonyBoundaryCells,
+      neighbors: walkableNeighbors, explored: index => state.explored.has(index),
+      apply(road, route) {
+        const previous = road.route;
+        road.route = route;
+        road.optimizationCount += 1;
+        rebuildSharedTrailIndex(road, previous);
+      } });
 
     function synergy(agent, keys) {
       return hasSynergy(agent.attributes, keys);
@@ -436,8 +445,11 @@ export function createGame(environment, colony) {
       }
     }
 
-    function rebuildSharedTrailIndex(road) {
-      for (const [cellKey, entries] of state.sharedTrails) {
+    function rebuildSharedTrailIndex(road, previousRoute) {
+      for (const cell of previousRoute) {
+        const cellKey = cell.x + "," + cell.y;
+        const entries = state.sharedTrails.get(cellKey);
+        if (!entries) continue;
         const remaining = entries.filter(
           (entry) => entry.foodKey !== road.foodKey
         );
@@ -469,6 +481,7 @@ export function createGame(environment, colony) {
         };
         state.roads.set(foodKey, road);
       }
+      const previousRoute = road.route;
       road.usageCount += 1;
       for (const cellKey of agent.visited) {
         road.knownCells.add(cellKey);
@@ -480,23 +493,8 @@ export function createGame(environment, colony) {
         road.route = route.map((cell) => ({ ...cell }));
       }
 
-      const goal = road.route[road.route.length - 1];
-      const collectiveScale = 1 + Math.log2(road.usageCount + 1) * 5;
-      const expansionBudget = Math.max(
-        road.route.length,
-        Math.floor(road.route.length * collectiveScale)
-      );
-      const optimized = bestKnownColonyRoute(
-        { visited: road.knownCells },
-        goal,
-        expansionBudget,
-        road.route
-      );
-      if (optimized && optimized.length < road.route.length) {
-        road.route = optimized;
-        road.optimizationCount += 1;
-      }
-      rebuildSharedTrailIndex(road);
+      rebuildSharedTrailIndex(road, previousRoute);
+      roadOptimizer.enqueue(road);
     }
 
     function sharedTrailStep(agent, neighbors) {
@@ -1244,6 +1242,7 @@ export function createGame(environment, colony) {
     }
 
     function restore(saved) {
+      roadOptimizer.clear();
       const data = JSON.parse(saved, (key, value) =>
         value?.collection === "Map" ? new Map(value.entries) :
         value?.collection === "Set" ? new Set(value.entries) : value);
