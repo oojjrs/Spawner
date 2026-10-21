@@ -1,0 +1,34 @@
+{
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 4,
+  "frameCount": 16,
+  "pivot": [
+    256,
+    448
+  ],
+  "durationsMs": [
+    60,
+    70,
+    60,
+    80,
+    30,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    70,
+    80,
+    90,
+    100,
+    60
+  ],
+  "hitFrame": 6,
+  "hitAtMs": 300,
+  "impactHoldMs": 300,
+  "leafCount": 2
+}
