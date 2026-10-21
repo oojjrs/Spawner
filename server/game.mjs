@@ -2,6 +2,7 @@ import { ATTRIBUTES, attributeCounts, unitStats, unitMovementSpeed, birthCost, h
 import { createPersonality, personalityLabels, createUtilityAI } from "./utility.mjs";
 import { NEST_LEVELS } from "./nests.mjs";
 import { AGENT_BIRTH_DURATION } from "./birth.mjs";
+import { AGENT_ATTACK_DURATION, AGENT_ATTACK_HIT_TIME } from "./attack.mjs";
 import { isTreeFood } from "./food.mjs";
 import { createRoadOptimizer } from "./roads.mjs";
 
@@ -177,6 +178,7 @@ export function createGame(environment, colony) {
       agent.harvestStarted = agent.harvestStarted || 0;
       agent.unloadReady = agent.unloadReady || 0;
       agent.attackReady = agent.attackReady || 0;
+      agent.attack = agent.attack || null;
     }
 
     function damageAgent(agent, amount, environmental) {
@@ -904,7 +906,8 @@ export function createGame(environment, colony) {
     }
 
     function reconsiderAgent(agent, reason) {
-      if (agent.health <= 0 || agent.birth && state.simSeconds < agent.birth.readyAt) return;
+      if (agent.health <= 0 || agent.birth && state.simSeconds < agent.birth.readyAt ||
+        agent.attack && state.simSeconds < agent.attack.endsAt) return;
       const candidates = utilityAI.evaluate(agent, !["completed", "targetLost", "restore"].includes(reason));
       let best = candidates[0];
       if (agent.actionPriorities?.includes(best?.action)) {
@@ -944,7 +947,8 @@ export function createGame(environment, colony) {
     }
 
     function decisionEvent(agent) {
-      if (agent.birth && state.simSeconds < agent.birth.readyAt) return null;
+      if (agent.birth && state.simSeconds < agent.birth.readyAt ||
+        agent.attack && state.simSeconds < agent.attack.endsAt) return null;
       if (agent.decisionPending) return agent.decisionPending;
       const visible = state.rivals.filter(enemy => enemy.health > 0 && visibleCells.has(enemy.y * WORLD_SIZE + enemy.x));
       const ids = new Set(visible.map(enemy => enemy.id));
@@ -989,11 +993,13 @@ export function createGame(environment, colony) {
         if (!target) { agent.decisionPending = "targetLost"; return false; }
         if (Math.abs(agent.x - target.x) + Math.abs(agent.y - target.y) <= 1) {
           if (state.simSeconds >= agent.attackReady) {
-            agent.attackReady = state.simSeconds + 1 / agent.stats.speed;
-            const owner = [...environment.games.values()].find(game => game.agents.includes(target));
-            if (owner) owner.receiveDamage(target, agent.stats.attack);
-            else target.health = Math.max(0, target.health - agent.stats.attack);
-            if (target.health <= 0) agent.decisionPending = "targetLost";
+            agent.attack = { startedAt: state.simSeconds, speed: agent.stats.speed,
+              hitAt: state.simSeconds + AGENT_ATTACK_HIT_TIME / agent.stats.speed,
+              endsAt: state.simSeconds + AGENT_ATTACK_DURATION / agent.stats.speed,
+              targetId: target.id, targetX: target.x, targetY: target.y,
+              directionX: Math.sign(target.x - agent.x) || 1, damage: agent.stats.attack,
+              resolved: false, hit: false };
+            agent.attackReady = agent.attack.endsAt;
           }
           return false;
         }
@@ -1168,6 +1174,28 @@ export function createGame(environment, colony) {
       footprintCleanupAt = state.simSeconds + 1;
     }
 
+    function updateAttack(agent) {
+      const attack = agent.attack;
+      if (!attack) return false;
+      if (!attack.resolved && state.simSeconds + 1e-8 >= attack.hitAt) {
+        attack.resolved = true;
+        const owner = [...environment.games.values()].find(game => game.agents.some(target => target.id === attack.targetId));
+        const target = owner ? owner.agents.find(target => target.id === attack.targetId) :
+          environment.creatureSystem?.agents.find(target => target.id === attack.targetId);
+        if (target?.health > 0) {
+          attack.targetX = target.x;
+          attack.targetY = target.y;
+          attack.hit = true;
+          if (owner) owner.receiveDamage(target, attack.damage);
+          else target.health = Math.max(0, target.health - attack.damage);
+          if (target.health <= 0) agent.decisionPending = "targetLost";
+        }
+      }
+      if (state.simSeconds + 1e-8 >= attack.endsAt) return false;
+      agent.moveBudget = 0;
+      return true;
+    }
+
     function updateAgents(elapsed) {
       if (state.simSeconds >= footprintCleanupAt) expireFootprints();
       updatingAgents = true;
@@ -1183,6 +1211,7 @@ export function createGame(environment, colony) {
         }
         updateEnvironment(agent, elapsed);
         if (agent.health <= 0) continue;
+        if (updateAttack(agent)) continue;
         const reason = decisionEvent(agent);
         if (reason) reconsiderAgent(agent, reason);
         agent.moveBudget = Math.min(1, agent.moveBudget + elapsed * agentSpeed(agent));
