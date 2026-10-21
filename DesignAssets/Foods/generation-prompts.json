@@ -1,0 +1,82 @@
+{
+  "provider": "built-in image_gen",
+  "sourceResolution": [
+    1254,
+    1254
+  ],
+  "canvas": [
+    1024,
+    1024
+  ],
+  "styleReference": "DesignAssets/Nests/nest-stage-03.png",
+  "assets": [
+    {
+      "file": "DesignAssets/Foods/food-mushroom-cluster.png",
+      "source": "D:\\.codex\\generated_images\\01a15964-c034-78d1-9ce2-1e5e419e018b\\exec-d0558e2a-934e-47cc-b2c3-3d6ecd74078f.png",
+      "rawSource": "$Trash/smooth-foods/food-mushroom-cluster-source.png",
+      "alphaBounds": "928x924+48+48",
+      "basePivot": [
+        0.5,
+        0.94921875
+      ],
+      "gameCanvas": [
+        1024,
+        1024
+      ],
+      "oldFootprintPreserved": true,
+      "role": "runtime cluster; idle/harvest must not use old pixel sheets",
+      "prompt": "Use case: stylized-concept. Asset type: production static transparent 2D strategy game food sprite, one mushroom cluster. Reference image 1 is the new in-game nest and is the style authority. Reference image 2 is the old mushroom cluster and is the identity/composition reference only. Redraw this golden honey-mushroom cluster from scratch as a smooth, high-resolution hand-painted botanical fantasy game illustration that belongs to the same world as the reference nest. Preserve a large umbrella cap behind and two smaller umbrella mushrooms lower left and lower right, warm honey-gold wavy caps with a few creamy golden patches, visible beige gills, thick ivory stems, sparse rounded sage-green moss/leaves at the feet. Three mushrooms total, compact triangular cluster. Soft warm upper-left light, smooth rounded gradients and fine dark deep-teal/olive contours with anti-aliased edges, charming calm storybook rendering. Keep broad simple highlights and limited organic detail like the nest, no speckled noise. Mild three-quarter top view, centered, full silhouette visible, compact near-square framing with 7% clear padding. True transparent alpha background. No soil disc, no ground tile, no broad cast shadow. No pixel art, no pixel grid, no blocky stair-step edges, no low-res texture, no dithering, no text, no labels, no watermark. This is a single static source illustration, not an animation sheet or preview."
+    },
+    {
+      "file": "DesignAssets/Foods/food-mushroom-single.png",
+      "source": "D:\\.codex\\generated_images\\01a15964-c034-78d1-9ce2-1e5e419e018b\\exec-b8e7e2fc-5ab8-4f25-aea1-fd4bb0bfe48b.png",
+      "rawSource": "$Trash/smooth-foods/food-mushroom-single-source.png",
+      "alphaBounds": "940x878+42+122",
+      "basePivot": [
+        0.5,
+        0.9765625
+      ],
+      "gameCanvas": [
+        1024,
+        1024
+      ],
+      "oldFootprintPreserved": false,
+      "role": "dedicated single mushroom; replaces 106px crop",
+      "prompt": "Use case: stylized-concept. Asset type: production static transparent 2D strategy game single honey-mushroom food sprite. Reference image 1 is the smooth illustrated in-game nest, the style authority. Reference image 2 is the approved new smooth honey-mushroom cluster, the exact mushroom species/style reference. Create one separate small honey-gold mushroom in precisely the same hand-painted style as the right-hand little mushroom in reference 2, not a cluster. One warm honey-gold rounded wavy umbrella cap, a few simple creamy golden cap highlights, clear beige gills, one thick ivory stem with a tiny softly scalloped collar, and only two small simple sage-green leaves touching its base. Smooth rounded gradients and slender deep-teal/olive contours, clean anti-aliased edges. Compact broad silhouette, wider cap and short thick stem, mild three-quarter top view, gently leaning organic form. Soft warm upper-left light. Complete isolated single mushroom centered with 8% clear padding in square canvas. Genuine transparent alpha, no ground disc, no broad shadow, no accompanying mushrooms, no face, no text, no watermark. Absolutely no pixel art, no stair-step/blocky edges, no grid, no dithering, no low-res texture. Single static source illustration only, not animation sheet or preview."
+    },
+    {
+      "file": "DesignAssets/Foods/food-berry-bush.png",
+      "source": "D:\\.codex\\generated_images\\01a15964-c034-78d1-9ce2-1e5e419e018b\\exec-4e5a910d-abea-4949-a19d-4050c8a97ee1.png",
+      "rawSource": "$Trash/smooth-foods/food-berry-bush-source.png",
+      "alphaBounds": "892x752+72+132",
+      "basePivot": [
+        0.505859375,
+        0.86328125
+      ],
+      "gameCanvas": [
+        1024,
+        1024
+      ],
+      "oldFootprintPreserved": true,
+      "role": "reference-only; runtime has no berry food mechanics",
+      "prompt": "Use case: stylized-concept. Asset type: production static transparent 2D strategy game berry bush food sprite. Reference image 1 is the new in-game nest and is the style authority. Reference image 2 is the old berry bush and is the identity/composition reference only. Redraw from scratch as a smooth high-resolution hand-painted botanical fantasy game illustration belonging exactly to the same art family as the nest. Preserve three vivid raspberry-red clustered berries arranged in a triangle with one upper center, one lower left, one lower right, each composed of a few softly rounded juicy lobes, held by compact sage/olive-green broad leaves and small stems. Broad simple cream highlights, soft rounded gradients, fine dark deep-teal/olive contours with clean anti-aliased edges. Limited organic detail, no noise. Soft warm upper-left light, mild three-quarter top view, full compact near-square silhouette centered with 7% clear padding. Genuine transparent alpha background. No pot, no ground tile, no soil disc, no cast shadow. No pixel art, no blocky edges, no visible grid, no dithering, no text, no labels, no watermark. Single static source illustration only, not animation frames or a preview."
+    },
+    {
+      "file": "DesignAssets/Foods/carried-food.png",
+      "source": "D:\\.codex\\generated_images\\01a15964-c034-78d1-9ce2-1e5e419e018b\\exec-c3c72576-c4b8-40ee-87bd-eb108c3f4419.png",
+      "rawSource": "$Trash/smooth-foods/carried-food-source.png",
+      "alphaBounds": "813x940+106+60",
+      "basePivot": [
+        0.50048828125,
+        0.9765625
+      ],
+      "gameCanvas": [
+        1024,
+        1024
+      ],
+      "oldFootprintPreserved": false,
+      "role": "reference-only carried nutrient concept; runtime carry and throw retain mushroom cluster",
+      "prompt": "Use case: stylized-concept. Asset type: production static transparent 2D strategy game carried food/nutrient sprite. Reference image 1 is the new in-game nest and is the style authority. Reference image 2 is the old carried golden nutrient and is identity reference only. Redraw this single small rounded honey-gold nutrient droplet from scratch as a smooth high-resolution hand-painted botanical fantasy game illustration matching the warm golden center of the nest. Preserve the simple upright teardrop/seed silhouette: rounded broad base, gently tapering point at top, asymmetrically warm ivory-gold left upper highlight, warm amber shaded right edge, slender dark deep-teal/olive outer outline. Softly painted gradients, smooth anti-aliased contour, tangible gentle rounded volume, no internal texture, no leaves, no face. Full silhouette centered with 8% clear padding, true transparent alpha background. No ground tile, no drop shadow, no text, no labels, no watermark. Absolutely no pixel art, no blocky stair edges, no dithering. One static source illustration, not animation sheet or preview."
+    }
+  ]
+}

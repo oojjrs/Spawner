@@ -1,0 +1,78 @@
+{
+  "source": "Adopted high-resolution artwork with separate upper and fixed base layers",
+  "animations": [
+    {
+      "kind": "cluster",
+      "file": "DesignAssets/Animations/food-mushroom-harvest.png",
+      "frameSize": 1152,
+      "viewportSize": 1024,
+      "padding": 64,
+      "columns": 4,
+      "frameCount": 8,
+      "frameMs": 250,
+      "fixedRootY": 864,
+      "source": "DesignAssets/Foods/food-mushroom-cluster.png",
+      "sourceResolution": [
+        1024,
+        1024
+      ],
+      "shears": [
+        0,
+        0.024250063223133014,
+        0.03429476829855972,
+        0.024250063223133018,
+        4.1998978224331284e-18,
+        -0.024250063223133014,
+        -0.03429476829855972,
+        -0.02425006322313302
+      ]
+    },
+    {
+      "kind": "single",
+      "file": "DesignAssets/Animations/food-mushroom-single-harvest.png",
+      "frameSize": 1152,
+      "viewportSize": 1024,
+      "padding": 64,
+      "columns": 4,
+      "frameCount": 8,
+      "frameMs": 250,
+      "fixedRootY": 864,
+      "source": "DesignAssets/Foods/food-mushroom-single.png",
+      "sourceResolution": [
+        1024,
+        1024
+      ],
+      "shears": [
+        0,
+        0.033080573032321495,
+        0.04678299503338273,
+        0.0330805730323215,
+        5.729264512215868e-18,
+        -0.033080573032321495,
+        -0.04678299503338273,
+        -0.03308057303232151
+      ]
+    }
+  ],
+  "playback": {
+    "mode": "continuous-small-left-right",
+    "cycleMs": 2000,
+    "frameMs": 250,
+    "poses": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ]
+  },
+  "style": "Current smooth hand-painted food sprites",
+  "motionAdjustment": {
+    "fixedRoots": true,
+    "motionGuide": "Previous lateral range and two-second cycle",
+    "interpolation": "high"
+  }
+}
