@@ -1,0 +1,89 @@
+{
+  "provider": "ElevenLabs",
+  "endpoint": "https://api.elevenlabs.io/v1/sound-generation",
+  "model_id": "eleven_text_to_sound_v2",
+  "output_format": "mp3_44100_128",
+  "input_sources": [],
+  "sounds": [
+    {
+      "file": "mushroom-harvest-loop.mp3",
+      "text": "Close-up foley of tiny hands gently rummaging through dry moss and soft leaf litter while loosening a mushroom. Delicate irregular leafy rustles and faint fibrous scrapes, quiet earthy texture, small intimate scale, dry recording. No speech, music, birds, insects, or heavy impacts.",
+      "duration_seconds": 4,
+      "loop": true,
+      "prompt_influence": 0.65,
+      "generated_at": "2026-10-20T12:18:17.7809458+00:00",
+      "sha256": "3f57b21da357ccd4e00da93729d75675d6fb51fbb54662a9b72cc6e2168e001b",
+      "bytes": 65244
+    },
+    {
+      "file": "bean-landing.mp3",
+      "text": "One tiny soft seed creature lands once on firm mossy soil. A light crisp muted tuk, a little dry leaf grit, and soft rounded body weight. Miniature close-up organic foley with one quick transient and a very short dry decay. Exactly one landing. No voices, music, squeaks, or extra steps.",
+      "duration_seconds": 0.5,
+      "loop": false,
+      "prompt_influence": 0.8,
+      "generated_at": "2026-10-20T12:18:21.1540142+00:00",
+      "sha256": "6d248a30021775962af0875cce49bddc9804a1ce323ca8be5836f66ce2e6eaaa",
+      "bytes": 8820
+    },
+    {
+      "file": "mushroom-throw.mp3",
+      "text": "A small soft mushroom cap is flicked quickly through still air past a close microphone. One short light airy swish, a tiny soft leafy flutter, a quick start and immediate dry fade. Delicate miniature game foley. No impact, speech, music, dramatic bass, or long reverberation.",
+      "duration_seconds": 0.5,
+      "loop": false,
+      "prompt_influence": 0.75,
+      "generated_at": "2026-10-20T12:18:23.0809110+00:00",
+      "sha256": "5bffb9907a8e4a0e953bd2adf1ccdaa38bd428085b80eee767df23c9271d7c2e",
+      "bytes": 8820
+    },
+    {
+      "file": "nest-catch.mp3",
+      "text": "One small fresh mushroom drops into a soft cushion of fleshy flower petals and moss. A gentle rounded plup followed by a brief delicate petal rustle settling into place. Warm organic close-up foley, light cushioned impact, tiny satisfying body, short dry tail. No mouth sounds, speech, music, or echo.",
+      "duration_seconds": 0.8,
+      "loop": false,
+      "prompt_influence": 0.75,
+      "generated_at": "2026-10-20T12:18:25.7269886+00:00",
+      "sha256": "c2d0696256d71d7f4d695ecb4bb0a363538423a1c734e812a0cc0a162b4267dd",
+      "bytes": 13835
+    },
+    {
+      "file": "nest-seed-eject.mp3",
+      "text": "A small fleshy seed pod squeezes and ejects one firm seed upward with a single rounded pneumatic thup and a brief airy upward puff. Spring-loaded organic plant mechanism, warm soft body with a crisp attack, tiny dry petal flutter in the short decay. Close dry miniature game foley. One immediate release only. No voice, mouth sounds, liquid, music, echo, or extra impacts.",
+      "duration_seconds": 0.5,
+      "loop": false,
+      "prompt_influence": 0.8,
+      "generated_at": "2026-10-21T11:54:37.9565141+00:00",
+      "sha256": "cab8ee84feaa2ccff4a57b1d4bd95da8d3d7b85fb684b75edfc3fe850bad6419",
+      "bytes": 8820
+    },
+    {
+      "file": "seed-shell-crack.mp3",
+      "text": "One small dry seed shell strikes firm soil and snaps open in a single crisp brittle pak. Light woody fibrous husk splitting sharply, a few tiny papery shell flakes scatter with a very brief dry tickle. Close miniature organic foley, clean immediate attack, delicate short decay. Exactly one crack. No glass, metal, explosion, liquid, voice, music, or reverberation.",
+      "duration_seconds": 0.5,
+      "loop": false,
+      "prompt_influence": 0.8,
+      "generated_at": "2026-10-21T11:54:40.0334743+00:00",
+      "sha256": "db82bb32efd91d88dc8a431aec28ce2127c43d95d6d99d87153e76b3e4a35112",
+      "bytes": 8820
+    },
+    {
+      "file": "bean-sprout-pop.mp3",
+      "text": "One tiny plump bean sprout springs upward as compressed soft plant tissue releases. A playful rounded elastic plop with a quick rising rubbery resonance and a delicate pair of leaves flicking open. Warm organic cartoon foley, buoyant and compact, immediate soft attack and very short dry tail. One spring release only. No voice, whistle, electronic tone, liquid, music, or echo.",
+      "duration_seconds": 0.5,
+      "loop": false,
+      "prompt_influence": 0.8,
+      "generated_at": "2026-10-21T11:54:41.9824732+00:00",
+      "sha256": "804ec29028138f23052d8973aeb2631d80b13eafb35506bd61e0f38b47339f13",
+      "bytes": 8820
+    },
+    {
+      "file": "bean-footstep.mp3",
+      "text": "One tiny plant creature leaf foot taps firm dry soil with a trace of leaf litter: a light crisp tik followed by a very short papery shff. Close dry miniature foley, nimble walking weight, almost no bass or body thump. Immediate onset and quick decay. Exactly one isolated footfall for frequent rhythmic repetition. No extra steps, bounce, wet squish, squeak, voice, music, or reverb.",
+      "duration_seconds": 0.5,
+      "loop": false,
+      "prompt_influence": 0.85,
+      "generated_at": "2026-10-21T13:08:17.530Z",
+      "sha256": "5488f45937c7e728ac13bcd3cf5b76833381b9d121cce31fdd471c27c62ef283",
+      "bytes": 8820
+    }
+  ]
+}
