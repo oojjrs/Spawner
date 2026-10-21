@@ -1,0 +1,172 @@
+{
+  "name": "spiny-back-beetle",
+  "action": "hurt",
+  "status": "motion study; not installed in runtime",
+  "provider": "built-in image_gen",
+  "workflow": "oojjrs-game-studio-sprite-pipeline",
+  "artworkMethod": "one full strip of redrawn cels; no part transforms or synthetic motion interpolation",
+  "reference": "../BeetleAttackThreePhase/Frames/attack-00.png",
+  "frameSize": 512,
+  "columns": 8,
+  "frameCount": 17,
+  "frameMs": 40,
+  "durationMs": 670,
+  "loop": false,
+  "rootMotion": false,
+  "sourcePoseCount": 4,
+  "uniquePoseCount": 3,
+  "previewPauseMs": 900,
+  "phases": [
+    {
+      "name": "flinch-and-hold",
+      "fromMs": 40,
+      "toMs": 510
+    },
+    {
+      "name": "release",
+      "fromMs": 510,
+      "toMs": 590
+    },
+    {
+      "name": "neutral",
+      "fromMs": 590,
+      "toMs": 670
+    }
+  ],
+  "poseDurationsMs": [
+    40,
+    470,
+    80,
+    80
+  ],
+  "poseOrder": [
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    2,
+    2,
+    3,
+    3
+  ],
+  "seedFrameLocked": true,
+  "firstAndLastFrameIdentical": true,
+  "rearFootAnchor": [
+    432,
+    416
+  ],
+  "normalization": {
+    "script": "D:\\.codex\\plugins\\cache\\openai-curated\\game-studio\\1dc19589\\scripts\\normalize_sprite_strip.py",
+    "frameSize": 361,
+    "sharedScale": 0.7536534446764092,
+    "calibration": "match approved neutral width using one scale for the entire strip",
+    "sourceBounds": [
+      {
+        "index": 0,
+        "width": 472,
+        "height": 374
+      },
+      {
+        "index": 1,
+        "width": 460,
+        "height": 366
+      },
+      {
+        "index": 2,
+        "width": 479,
+        "height": 374
+      },
+      {
+        "index": 3,
+        "width": 474,
+        "height": 376
+      }
+    ],
+    "approvedNeutralWidth": 356
+  },
+  "sheet": "hurt.png",
+  "runtimeSheet": "hurt-runtime.webp",
+  "poseSheet": "hurt-poses.png",
+  "preview": "hurt-preview.gif",
+  "source": "hurt-source.png",
+  "frames": [
+    {
+      "index": 0,
+      "file": "Frames/hurt-00.png",
+      "source": "approved-neutral",
+      "exactSeedLock": true,
+      "rearFootAnchor": [
+        432,
+        416
+      ]
+    },
+    {
+      "index": 1,
+      "file": "Frames/hurt-01.png",
+      "sourcePose": 1,
+      "sharedScale": 0.7536534446764092,
+      "translation": [
+        80,
+        88
+      ],
+      "rearFootAnchor": [
+        432,
+        416
+      ]
+    },
+    {
+      "index": 2,
+      "file": "Frames/hurt-02.png",
+      "sourcePose": 2,
+      "sharedScale": 0.7536534446764092,
+      "translation": [
+        73,
+        94
+      ],
+      "rearFootAnchor": [
+        432,
+        416
+      ]
+    },
+    {
+      "index": 3,
+      "file": "Frames/hurt-03.png",
+      "source": "approved-neutral",
+      "exactSeedLock": true,
+      "rearFootAnchor": [
+        432,
+        416
+      ]
+    }
+  ],
+  "prompt": "Use case: precise-object-edit. Create actual production 2D GAME HURT/FLINCH ANIMATION CEL ART. Edit image 1, the transparent FOUR-slot horizontal canvas, into ONE horizontal strip of exactly FOUR equal frame slots in a single row. Keep a wide canvas, ideally 2048x512, never a grid or a poster. Image 2 is the APPROVED beetle neutral frame and is the character/style/scale authority. Preserve its exact head facing lower-left in front-left three-quarter view, same compact rigid burgundy armored body proportions, same carapace width, EXACTLY THREE ivory dorsal spikes with unchanged shape, two inward-curving ivory pincers, golden amber eyes, six articulated burgundy legs and dark pointed toes, smooth painted game rendering with fine dark teal contours. Do not grow or shrink the beetle between cels. Keep the large rear carapace, rear spikes, and rear foot contact coordinates registered in exactly the same position in all four slots. Character must fit in each equal square slot with transparent margins; roughly same 355px body width as the approved 512px seed.\n\nThis is a SMALL SHARP REACTION TO GETTING HIT from the front-left. It is NOT an attack, not jumping, not a death animation, not a body squash, not repeated wobbling. The reaction comes from a newly drawn HEAD/FRONT JOINT pose and braced front legs, not translating/rotating the whole sprite. Keep the large abdomen rigid. Avoid rubbery deformation and excessive movement.\n\nCEL 1, top-level neutral: reproduce the approved neutral stance, original eye expression and original pincer gap exactly. CEL 2, peak hit reaction: head suddenly recoils BACK toward the body and very slightly DOWN, chin tucks, eyebrows and upper eyelids wince so amber eyes narrow but stay recognizable. Pincer bases draw back close to the face, pincers tighten slightly WITHOUT snapping fully shut or opening wide; no attacking gesture. The front leg joints flex and brace against the impact while the rear feet remain planted. Head shifts only about 18-24 pixels back; small but visibly different head/leg joint construction, no generic same-image wobble. The stern hard abdomen and dorsal spikes keep their size and placement. CEL 3, controlled release: head and front legs return halfway toward neutral, eyes partially reopen, pincers ease back toward normal gap. No second recoil, no bounce, no overshoot. CEL 4: EXACT original neutral stance, identical to cel1 including body scale, pincer gap and foot contacts.\n\nThe final playback will take only 0.32 seconds: neutral 40ms, peak flinch held 120ms, controlled release 80ms, neutral 80ms. Readability depends on one compact crisp flinch and a short hold. Render four freshly painted coherent cels in one generation pass with consistent shell details and palette. Output clean TRUE TRANSPARENT RGBA background. No blood, no bruises, no impact stars, no particles, no weapon/attacker, no scene, no cast shadow, no labels, no text, no gridlines, no motion trails, no blur, no black or checkerboard painted into the transparent backdrop.\n",
+  "timingMode": "per-frame-durations",
+  "frameDurationsMs": [
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    30,
+    40,
+    40,
+    40,
+    40
+  ]
+}
