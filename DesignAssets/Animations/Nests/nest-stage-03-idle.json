@@ -1,0 +1,50 @@
+{
+  "name": "nest-stage-03-idle",
+  "frameSize": 2048,
+  "drawnCels": 4,
+  "frameCount": 7,
+  "order": [
+    0,
+    1,
+    2,
+    3,
+    2,
+    1,
+    0
+  ],
+  "frameMs": 650,
+  "restMs": 7800,
+  "crop": {
+    "left": 0,
+    "top": 0,
+    "width": 2048,
+    "height": 2048
+  },
+  "packedBytes": 10399846,
+  "fixed": "original golden core, central crown and bottom base leaves",
+  "files": [
+    "nest-stage-03-idle-cel-00.webp",
+    "nest-stage-03-idle-cel-01.webp",
+    "nest-stage-03-idle-cel-02.webp",
+    "nest-stage-03-idle-cel-03.webp"
+  ],
+  "animation": "nest-stage-03-idle.frames",
+  "source": "DesignAssets/Nests/nest-stage-03.png",
+  "sourceResolution": [
+    2048,
+    2048
+  ],
+  "parts": [
+    "left-petals",
+    "right-petals",
+    "fixed-core-base"
+  ],
+  "preview": "nest-stage-03-idle-preview.webp",
+  "fixedRootY": 1584,
+  "goldenCore": {
+    "left": 769,
+    "top": 548,
+    "right": 1281,
+    "bottom": 1037
+  }
+}
