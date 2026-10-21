@@ -21,7 +21,7 @@ export function riskValue(agent, damage) {
 }
 
 export function createUtilityAI(context) {
-  const { state, size, homeCells, walkable, hazardAt, enemies, synergy } = context;
+  const { state, size, homeCells, walkable, hazardAt, enemies, synergy, canHarvest } = context;
   let frontierSize = -1;
   let frontiers = [];
   const limit = value => Math.max(0, Math.min(1, value));
@@ -222,7 +222,8 @@ export function createUtilityAI(context) {
     const allies = state.agents.filter(ally => ally !== agent && ally.health > 0);
     const reservation = food => allies.reduce((sum, ally) => sum + (ally.utility?.action === "collect" &&
       ally.utility.target?.key === food.x + "," + food.y ? Math.max(0, ally.utility.plannedCargo - ally.carrying) : 0), 0);
-    const availableFood = [...state.knownFood.values()].reduce((sum, food) => sum + Math.max(0, food.amount - reservation(food)), 0);
+    const availableFood = [...state.knownFood.values()].filter(canHarvest)
+      .reduce((sum, food) => sum + Math.max(0, food.amount - reservation(food)), 0);
     const perAgent = availableFood / Math.max(1, state.agents.length);
     const underAttack = visible.some(enemy => allies.concat(agent).some(ally => distance(ally, enemy) <= 1) ||
       homeCells().some(cell => distance(cell, enemy) <= 1));
@@ -256,7 +257,7 @@ export function createUtilityAI(context) {
         { recoverHealth: Math.min(agent.stats.health, agent.health + amount) });
     }
     if (agent.carrying < capacity && storage > 0) {
-      const foods = [...state.knownFood.values()].filter(food => food.amount > 0)
+      const foods = [...state.knownFood.values()].filter(food => food.amount > 0 && canHarvest(food))
         .sort((first, second) => distance(agent, first) - distance(agent, second));
       const currentFood = foods.find(food => food.x + "," + food.y === agent.utility?.target?.key);
       const targets = [...new Set([currentFood, ...foods.slice(0, 8)].filter(Boolean))];
@@ -333,7 +334,7 @@ export function createUtilityAI(context) {
       const own = power(agent), withMe = (support + own) / (support + own + opponents);
       const withoutMe = support / Math.max(0.01, support + opponents);
       const homeThreat = homeCells().some(cell => distance(cell, enemy) <= 3);
-      const foodThreat = [...state.knownFood.values()].some(food => food.amount > 0 && distance(food, enemy) <= 4);
+      const foodThreat = [...state.knownFood.values()].some(food => food.amount > 0 && canHarvest(food) && distance(food, enemy) <= 4);
       const value = homeThreat ? 120 : foodThreat ? 80 : 40;
       add("fight", { id: enemy.id, x: enemy.x, y: enemy.y, key: enemy.id }, cells,
         { combatGain: value * (withMe - withoutMe) * 10 / (10 + time) }, {});

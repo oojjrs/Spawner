@@ -1,6 +1,7 @@
 import { ATTRIBUTES, attributeCounts, unitStats, birthCost, hasSynergy } from "./attributes.mjs";
 import { createPersonality, personalityLabels, createUtilityAI } from "./utility.mjs";
 import { NEST_LEVELS } from "./nests.mjs";
+import { isTreeFood } from "./food.mjs";
 import { createRoadOptimizer } from "./roads.mjs";
 
 export function createGame(environment, colony) {
@@ -74,7 +75,8 @@ export function createGame(environment, colony) {
     let updatingAgents = false;
     const utilityAI = createUtilityAI({ state, size: WORLD_SIZE, homeCells: colonyBoundaryCells,
       walkable: isWalkable, hazardAt: (x, y) => state.explored.has(y * WORLD_SIZE + x) ? hazardAt(x, y) : 0,
-      enemies: () => state.rivals.filter(enemy => visibleCells.has(enemy.y * WORLD_SIZE + enemy.x)), synergy });
+      enemies: () => state.rivals.filter(enemy => visibleCells.has(enemy.y * WORLD_SIZE + enemy.x)), synergy,
+      canHarvest: food => !isTreeFood(food, worldMap) });
     const roadOptimizer = createRoadOptimizer({ size: WORLD_SIZE, boundary: colonyBoundaryCells,
       neighbors: walkableNeighbors, explored: index => state.explored.has(index),
       apply(road, route) {
@@ -786,7 +788,7 @@ export function createGame(environment, colony) {
 
     function harvestAtCurrentCell(agent) {
       const food = foodCellAt(agent.x, agent.y);
-      if (!food || food.amount <= 0) { agent.decisionPending = "targetLost"; return; }
+      if (!food || food.amount <= 0 || isTreeFood(food, worldMap)) { agent.decisionPending = "targetLost"; return; }
       agent.harvestWasCommute = agent.mode === "commute";
       agent.mode = "harvest";
       agent.harvestStarted = state.simSeconds;
@@ -800,6 +802,7 @@ export function createGame(environment, colony) {
       if (state.simSeconds < agent.harvestReady) return;
       const key = agent.x + "," + agent.y;
       const food = foodCellAt(agent.x, agent.y);
+      if (isTreeFood(food, worldMap)) { agent.decisionPending = "targetLost"; return; }
       const capacity = Math.min(agent.utility?.plannedCargo ?? Infinity, agent.stats.capacity + (synergy(agent, ["strength", "strength"]) ? 4 : 0));
       const take = amount => {
         const collected = Math.min(amount, Math.max(0, capacity - agent.carrying), Math.max(0, food?.amount || 0));
@@ -920,7 +923,8 @@ export function createGame(environment, colony) {
       agent.knownEnemyIds = ids;
       if (discovered) return "enemyDiscovered";
       const plan = agent.utility;
-      if (plan?.action === "collect" && !(state.knownFood.get(plan.target.key)?.amount > 0)) return "targetLost";
+      if (plan?.action === "collect" && (!(state.knownFood.get(plan.target.key)?.amount > 0) ||
+        isTreeFood(state.knownFood.get(plan.target.key), worldMap))) return "targetLost";
       if (plan?.action === "collect" && agent.carrying >= plan.plannedCargo) return "completed";
       if (plan?.action === "fight" && !ids.has(plan.target.id)) return "targetLost";
       if (plan?.action === "return" && (agent.carrying <= 0 || state.evolutionPoints >= pointCapacity())) return "completed";
