@@ -1,0 +1,269 @@
+{
+  "starter": "DesignAssets/Units/starter-sprout-bean.png",
+  "parts": {
+    "strength-1": "DesignAssets/Units/Parts/strength-1.png",
+    "strength-2": "DesignAssets/Units/Parts/strength-2.png",
+    "feet-1": "DesignAssets/Units/Parts/feet-1.png",
+    "feet-2": "DesignAssets/Units/Parts/feet-2.png",
+    "antenna-1": "DesignAssets/Units/Parts/antenna-1.png",
+    "antenna-2": "DesignAssets/Units/Parts/antenna-2.png",
+    "shell-1": "DesignAssets/Units/Parts/shell-1.png",
+    "shell-2": "DesignAssets/Units/Parts/shell-2.png"
+  },
+  "baseParts": {
+    "body": "DesignAssets/Units/BaseParts/body.png",
+    "sprout-left": "DesignAssets/Units/BaseParts/sprout-left.png",
+    "sprout-right": "DesignAssets/Units/BaseParts/sprout-right.png",
+    "sprout-stem": "DesignAssets/Units/BaseParts/sprout-stem.png"
+  },
+  "coordinateSpace": {
+    "canvas": [
+      1144,
+      1668
+    ],
+    "virtualSize": [
+      286,
+      417
+    ],
+    "scale": 4,
+    "sproutPivots": {
+      "left": [
+        535,
+        592.6
+      ],
+      "right": [
+        607.8,
+        592.6
+      ]
+    },
+    "bodyRootY": 1636,
+    "sourceTransform": {
+      "crop": [
+        146,
+        400,
+        935,
+        844
+      ],
+      "uniformSize": [
+        1117,
+        1008
+      ],
+      "offset": [
+        14,
+        628
+      ],
+      "note": "New body only, uniformly resized and padded. Existing sprout-left/right/stem images and pivots are reused unchanged; full image composites those approved layers over the new body."
+    }
+  },
+  "assets": {
+    "starter": {
+      "path": "DesignAssets/Units/starter-sprout-bean.png",
+      "width": 1144,
+      "height": 1668,
+      "alphaBounds": [
+        15,
+        260,
+        1116,
+        1376
+      ],
+      "sourceWidth": 1230,
+      "sourceHeight": 1278
+    },
+    "strength-1": {
+      "path": "DesignAssets/Units/Parts/strength-1.png",
+      "width": 1692,
+      "height": 636,
+      "alphaBounds": [
+        0,
+        0,
+        1692,
+        636
+      ],
+      "sourceWidth": 2045,
+      "sourceHeight": 769
+    },
+    "strength-2": {
+      "path": "DesignAssets/Units/Parts/strength-2.png",
+      "width": 1792,
+      "height": 716,
+      "alphaBounds": [
+        0,
+        0,
+        1792,
+        716
+      ],
+      "sourceWidth": 1983,
+      "sourceHeight": 793
+    },
+    "feet-1": {
+      "path": "DesignAssets/Units/Parts/feet-1.png",
+      "width": 1512,
+      "height": 620,
+      "alphaBounds": [
+        0,
+        0,
+        1512,
+        620
+      ],
+      "sourceWidth": 1959,
+      "sourceHeight": 803
+    },
+    "feet-2": {
+      "path": "DesignAssets/Units/Parts/feet-2.png",
+      "width": 1748,
+      "height": 804,
+      "alphaBounds": [
+        1,
+        0,
+        1747,
+        804
+      ],
+      "sourceWidth": 1849,
+      "sourceHeight": 851
+    },
+    "antenna-1": {
+      "path": "DesignAssets/Units/Parts/antenna-1.png",
+      "width": 1185,
+      "height": 850,
+      "alphaBounds": [
+        16,
+        16,
+        1153,
+        818
+      ],
+      "sourceWidth": 1536,
+      "sourceHeight": 1024
+    },
+    "antenna-2": {
+      "path": "DesignAssets/Units/Parts/antenna-2.png",
+      "width": 1688,
+      "height": 706,
+      "alphaBounds": [
+        16,
+        16,
+        1656,
+        674
+      ],
+      "sourceWidth": 1733,
+      "sourceHeight": 907
+    },
+    "shell-1": {
+      "path": "DesignAssets/Units/Parts/shell-1.png",
+      "width": 1728,
+      "height": 1132,
+      "alphaBounds": [
+        0,
+        0,
+        1728,
+        1132
+      ],
+      "sourceWidth": 1536,
+      "sourceHeight": 1024
+    },
+    "shell-2": {
+      "path": "DesignAssets/Units/Parts/shell-2.png",
+      "width": 1896,
+      "height": 1432,
+      "alphaBounds": [
+        0,
+        0,
+        1896,
+        1432
+      ],
+      "sourceWidth": 1443,
+      "sourceHeight": 1090
+    },
+    "body": {
+      "path": "DesignAssets/Units/BaseParts/body.png",
+      "width": 1144,
+      "height": 1668,
+      "alphaBounds": [
+        15,
+        628,
+        1116,
+        1008
+      ]
+    },
+    "sprout-left": {
+      "path": "DesignAssets/Units/BaseParts/sprout-left.png",
+      "width": 1144,
+      "height": 1668,
+      "alphaBounds": [
+        34,
+        260,
+        538,
+        345
+      ]
+    },
+    "sprout-right": {
+      "path": "DesignAssets/Units/BaseParts/sprout-right.png",
+      "width": 1144,
+      "height": 1668,
+      "alphaBounds": [
+        571,
+        260,
+        541,
+        345
+      ]
+    },
+    "sprout-stem": {
+      "path": "DesignAssets/Units/BaseParts/sprout-stem.png",
+      "width": 1144,
+      "height": 1668,
+      "alphaBounds": [
+        507,
+        569,
+        129,
+        115
+      ]
+    }
+  },
+  "faceLandmarks": {
+    "eyes": {
+      "left": [
+        224.3,
+        1059.3,
+        152.9,
+        167.3
+      ],
+      "right": [
+        767.8,
+        1059.3,
+        151.7,
+        167.3
+      ]
+    },
+    "pupils": {
+      "left": {
+        "center": [
+          300.7,
+          1142.9
+        ],
+        "radius": [
+          76.5,
+          83.6
+        ]
+      },
+      "right": {
+        "center": [
+          843.7,
+          1142.9
+        ],
+        "radius": [
+          75.9,
+          83.6
+        ]
+      }
+    },
+    "body": {
+      "bounds": [
+        14,
+        628,
+        1117,
+        945
+      ],
+      "approximate": true
+    },
+    "footBaseline": 1636
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "provider": "built-in image_gen",
+  "assets": {
+    "spiny-back-beetle.png": {
+      "prompt": "Use case: style-transfer. Asset type: one final static 2D game creature sprite, transparent RGBA background. Image 1 is the identity and pose reference (the maroon spiny-back beetle). Image 2 is the accepted game art STYLE reference (smooth cream/sage fantasy flower nest). Redraw ONLY the beetle from image 1 as a polished smooth hand-painted fantasy illustration matching image 2's clean curved fine dark-teal contours, flowing shaded surfaces, soft luminous gradients, and restrained painted highlights. Preserve its compact low oval maroon carapace, three prominent ivory back spikes, two large inward curved ivory mandibles, tiny amber eyes, six short segmented burgundy legs, and facing left in a front three-quarter view. Keep the same recognizable silhouette, approximate proportions and ground orientation as image 1. The creature is an enemy, keep muted burgundy shell and ivory spikes so it remains distinct from the sage plant units. No extra plant leaves or flower parts on the beetle. Entire creature centered with all legs/spikes included and generous transparent margin. No floor, no cast background, no scenery, no text, no frame, no watermark. Render smooth anti-aliased contours and continuous brush shading, not pixel art, not retro, no pixelated edge stairs, no dithering, no coarse block patterns. High resolution production artwork. One static illustration only, no animation frames or sprite sheet.",
+      "path": "DesignAssets/Units/spiny-back-beetle.png",
+      "source": "exec-48dc4b85-9bf2-4e6a-890d-7b9c37e00cf1.png"
+    }
+  }
+}
+
