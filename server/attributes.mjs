@@ -1,6 +1,6 @@
 export const ATTRIBUTES = [
   { key: "strength", name: "힘", color: "#e6a79c", effect: "운반량 +2개", description: "한 번에 운반할 수 있는 먹이의 양을 늘립니다.", bonus: 2, stat: "운반량", unit: "개" },
-  { key: "feet", name: "이동", color: "#8cd2bb", effect: "이동 속도 +0.5칸/초", description: "탐색과 왕복 이동을 빠르게 합니다.", bonus: 0.5, stat: "이동 속도", unit: "칸/초" },
+  { key: "feet", name: "이동", color: "#8cd2bb", effect: "이동 속도 +0.3칸/초", description: "탐색과 왕복 이동을 빠르게 합니다.", bonus: 0.3, stat: "이동 속도", unit: "칸/초" },
   { key: "antenna", name: "감각", color: "#b2bffa", effect: "시야 반경 +2칸", description: "군락과 공유하는 실제 시야를 넓힙니다.", bonus: 2, stat: "시야 반경", unit: "칸" },
   { key: "shell", name: "저항", color: "#a7cbd2", effect: "환경 피해 25% 감소", description: "환경 피해를 곱셈으로 줄입니다. 두 개 장착하면 43.75% 감소합니다.", bonus: 25, stat: "환경 피해 감소", unit: "%" }
 ];
@@ -41,6 +41,10 @@ export function unitStats(attributes) {
     health: 12,
     resistance: 0.75 ** attributes.shell
   };
+}
+
+export function unitMovementSpeed(stats) {
+  return 0.5 + (stats.speed - 1) * 0.6;
 }
 
 export function birthCost(template) {

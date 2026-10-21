@@ -129,7 +129,7 @@ export function createCreatures(environment, saved) {
       if (current.first && Math.abs(current.x - goal.x) + Math.abs(current.y - goal.y) <= reach) return current.first;
       for (const cell of neighbors(current.x, current.y)) {
         const key = cell.x + "," + cell.y;
-        if (visited.has(key) || Math.hypot(cell.x - agent.homeX, cell.y - agent.homeY) > 8 || occupied(cell.x, cell.y, agent)) continue;
+        if (visited.has(key) || Math.hypot(cell.x - agent.homeX, cell.y - agent.homeY) > 8) continue;
         visited.add(key);
         queue.push({ ...cell, first: current.first || cell });
       }
@@ -197,7 +197,7 @@ export function createCreatures(environment, saved) {
         else idle(agent, 1);
         continue;
       }
-      const destinations = neighbors(agent.x, agent.y).filter(cell => !occupied(cell.x, cell.y, agent) && Math.hypot(cell.x - agent.homeX, cell.y - agent.homeY) <= 5);
+      const destinations = neighbors(agent.x, agent.y).filter(cell => Math.hypot(cell.x - agent.homeX, cell.y - agent.homeY) <= 5);
       if (destinations.length) move(agent, destinations[Math.floor(noise(agent.stepCount + 41, agent.homeY) * destinations.length) % destinations.length]);
       else idle(agent, 1);
     }

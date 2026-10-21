@@ -1,4 +1,4 @@
-import { ATTRIBUTES, attributeCounts, unitStats, birthCost, hasSynergy } from "./attributes.mjs";
+import { ATTRIBUTES, attributeCounts, unitStats, unitMovementSpeed, birthCost, hasSynergy } from "./attributes.mjs";
 import { createPersonality, personalityLabels, createUtilityAI } from "./utility.mjs";
 import { NEST_LEVELS } from "./nests.mjs";
 import { isTreeFood } from "./food.mjs";
@@ -19,7 +19,7 @@ export function createGame(environment, colony) {
 
     const colonyEntries = [colony];
 
-    const STARTER_OBJECT_LIFETIME = 60 * 60;
+    const FOOTPRINT_LIFETIME = 180;
 
     const AGENT_SPEED = 1;
 
@@ -48,7 +48,7 @@ export function createGame(environment, colony) {
     const state = {
       simSeconds: 0,
       colonyFood: 0,
-      evolutionPoints: 25,
+      evolutionPoints: 0,
       explored: new Set(),
       knownFood: new Map(),
       markers: [],
@@ -62,6 +62,7 @@ export function createGame(environment, colony) {
       agents: [],
       roads: new Map(),
       sharedTrails: new Map(),
+      footprints: new Map(),
       draftProfile: {
         direction: 0.65,
         novelty: 0.7,
@@ -73,6 +74,7 @@ export function createGame(environment, colony) {
 
     let visibleCells = new Set();
     let updatingAgents = false;
+    let footprintCleanupAt = 0;
     const utilityAI = createUtilityAI({ state, size: WORLD_SIZE, homeCells: colonyBoundaryCells,
       walkable: isWalkable, hazardAt: (x, y) => state.explored.has(y * WORLD_SIZE + x) ? hazardAt(x, y) : 0,
       enemies: () => state.rivals.filter(enemy => visibleCells.has(enemy.y * WORLD_SIZE + enemy.x)), synergy,
@@ -138,6 +140,13 @@ export function createGame(environment, colony) {
       state.markers = [...markers.values()];
     }
 
+    function agentAppearanceAttributes(agent) {
+      const priority = agent.templateId === null && !agent.slots.length ? agent.actionPriorities?.[0] : null;
+      if (priority === "explore") return attributeCounts(["feet", "antenna"]);
+      if (priority === "collect") return attributeCounts(["strength"]);
+      return { ...agent.attributes };
+    }
+
     function initializeAgent(agent) {
       if (!agent.personality || !["boldness", "aggression", "curiosity"].every(key =>
         Number.isFinite(agent.personality[key]) && agent.personality[key] >= 0 && agent.personality[key] <= 1)) {
@@ -149,6 +158,7 @@ export function createGame(environment, colony) {
       if (agent.decisionPending === undefined) agent.decisionPending = "birth";
       agent.nextDecisionAt = Number.isFinite(agent.nextDecisionAt) ? agent.nextDecisionAt : state.simSeconds;
       agent.attributes = attributeCounts(agent.slots);
+      agent.appearanceAttributes = agentAppearanceAttributes(agent);
       if (agent.rulesVersion === 2) agent.stats = unitStats(agent.attributes);
       agent.stats.resistance = 0.75 ** agent.attributes.shell;
       agent.shield = Number.isFinite(agent.shield) ? agent.shield : 0;
@@ -328,8 +338,7 @@ export function createGame(environment, colony) {
     }
 
     function moveAgent(agent, destination, rememberPath) {
-      if (state.simSeconds - agent.moveStartedAt < agent.moveDuration ||
-        isAgentCellOccupied(destination.x, destination.y, agent)) {
+      if (state.simSeconds - agent.moveStartedAt < agent.moveDuration) {
         return false;
       }
       if (!isWalkable(destination.x, destination.y) ||
@@ -351,8 +360,22 @@ export function createGame(environment, colony) {
       agent.moveStartedAt = state.simSeconds;
       agent.x = destination.x;
       agent.y = destination.y;
-      agent.moveDuration = 1 / agentSpeed(agent);
+      const speedModifier = agentSpeed(agent) / unitMovementSpeed(agent.stats);
+      const appearance = agent.appearanceAttributes || agent.attributes;
+      agent.moveDuration = appearance.feet ? 1 / agentSpeed(agent) : 1 / (agent.stats.speed * speedModifier);
       agent.stepCount += 1;
+      const footprintKey = agent.x + "," + agent.y;
+      let footprint = state.footprints.get(footprintKey);
+      if (!footprint) {
+        footprint = { x: agent.x, y: agent.y, visits: 0, marks: [] };
+        state.footprints.set(footprintKey, footprint);
+      }
+      const footprintSeed = [...String(agent.id)].reduce((value, letter) => Math.imul(value, 31) + letter.charCodeAt(0), worldMap.seed || 0);
+      footprint.visits += 1;
+      footprint.marks.push({ ...nextDirection,
+        seed: hashNoise(footprintSeed, agent.stepCount) * 100000,
+        at: state.simSeconds + agent.moveDuration });
+      if (footprint.marks.length > 6) footprint.marks.shift();
       if (synergy(agent, ["feet", "antenna"]) && agent.stepCount % 8 === 0) agent.waveUntil = state.simSeconds + 1;
       agent.visited.add(agent.x + "," + agent.y);
       if (rememberPath) {
@@ -968,13 +991,13 @@ export function createGame(environment, colony) {
           }
           return false;
         }
-        target = walkableNeighbors(target.x, target.y).filter(cell => !isAgentCellOccupied(cell.x, cell.y, agent))
+        target = walkableNeighbors(target.x, target.y)
           .sort((first, second) => Math.abs(first.x - agent.x) + Math.abs(first.y - agent.y) -
             Math.abs(second.x - agent.x) - Math.abs(second.y - agent.y))[0];
         if (!target) return false;
       }
       if (agent.moveBudget < 1 || state.simSeconds - agent.moveStartedAt < agent.moveDuration) return false;
-      const candidates = walkableNeighbors(agent.x, agent.y).filter(cell => !isAgentCellOccupied(cell.x, cell.y, agent));
+      const candidates = walkableNeighbors(agent.x, agent.y);
       let destination = plan.route.find((cell, index) => index > 0 && plan.route[index - 1].x === agent.x && plan.route[index - 1].y === agent.y);
       if (plan.action === "fight" || !destination || !candidates.some(cell => cell.x === destination.x && cell.y === destination.y)) {
         destination = utilityAI.nextStep(agent, target);
@@ -1000,7 +1023,8 @@ export function createGame(environment, colony) {
         0,
         1
       );
-      const smoothProgress = rawProgress * rawProgress * (3 - 2 * rawProgress);
+      const appearance = agent.appearanceAttributes || agent.attributes;
+      const smoothProgress = appearance.feet ? rawProgress : rawProgress * rawProgress * (3 - 2 * rawProgress);
       return {
         x: agent.renderFromX + (agent.x - agent.renderFromX) * smoothProgress,
         y: agent.renderFromY + (agent.y - agent.renderFromY) * smoothProgress,
@@ -1021,7 +1045,7 @@ export function createGame(environment, colony) {
     }
 
     function agentSpeed(agent) {
-      let speed = agent.stats.speed;
+      let speed = unitMovementSpeed(agent.stats);
       if (agent.carrying > agent.stats.capacity) speed *= 0.8;
       if (synergy(agent, ["strength", "feet"])) speed *= 1 + 0.5 * Math.min(1, agent.carrying / agent.stats.capacity);
       if (synergy(agent, ["feet", "feet"]) && agent.straightSteps > 4) speed *= 1.75;
@@ -1103,7 +1127,8 @@ export function createGame(environment, colony) {
             const key = x + "," + y;
             if (!isWalkable(x, y) || foodCellMap.get(key)?.amount > 0) continue;
             const corpse = { x, y, amount: Math.max(1, Math.floor(agent.cost / 2)) + agent.carrying,
-              kind: "corpse", attributes: { ...agent.attributes } };
+              kind: "corpse", attributes: { ...agent.attributes },
+              appearanceAttributes: { ...agent.appearanceAttributes } };
             foodCellMap.set(key, corpse);
             state.corpses.push(corpse);
             return;
@@ -1114,7 +1139,7 @@ export function createGame(environment, colony) {
 
     function removeDeadAgents() {
       for (const agent of state.agents) {
-        if (agent.health > 0 && state.simSeconds - agent.bornAt < STARTER_OBJECT_LIFETIME) continue;
+        if (agent.health > 0) continue;
         dropCorpse(agent);
         agent.health = 0;
       }
@@ -1122,7 +1147,17 @@ export function createGame(environment, colony) {
 
     }
 
+    function expireFootprints() {
+      for (const [key, footprint] of state.footprints) {
+        const marks = footprint.marks.filter(mark => state.simSeconds - mark.at < FOOTPRINT_LIFETIME);
+        if (!marks.length) state.footprints.delete(key);
+        else if (marks.length !== footprint.marks.length) footprint.marks = marks;
+      }
+      footprintCleanupAt = state.simSeconds + 1;
+    }
+
     function updateAgents(elapsed) {
+      if (state.simSeconds >= footprintCleanupAt) expireFootprints();
       updatingAgents = true;
       removeDeadAgents();
       updatePerception();
@@ -1144,7 +1179,8 @@ export function createGame(environment, colony) {
         } else if (agent.mode === "harvest") updateHarvest(agent);
         else {
           const moved = stepUtilityAgent(agent);
-          if (!moved && state.simSeconds - agent.moveStartedAt >= agent.moveDuration) agent.straightSteps = 0;
+          if (!moved && agent.moveBudget >= 1 &&
+            state.simSeconds - agent.moveStartedAt >= agent.moveDuration) agent.straightSteps = 0;
         }
         if (agent.decisionPending) reconsiderAgent(agent, agent.decisionPending);
       }
@@ -1234,7 +1270,8 @@ export function createGame(environment, colony) {
         templates: state.templates, agents: state.agents.map(visibleAgent),
         rivals: state.rivals.filter(agent => agent.health > 0 && visibleCells.has(agent.y * WORLD_SIZE + agent.x)).map((agent) => ({ ...visibleAgent(agent), faction: agent.species ? "hostile" : "rival" })),
         corpses: [...state.knownFood.values()].filter(cell => cell.kind === "corpse" && cell.amount > 0),
-        sharedTrails: [...state.sharedTrails], food: [...state.knownFood.values()],
+        sharedTrails: [...state.sharedTrails], footprints: [...state.footprints.values()],
+        footprintLifetime: FOOTPRINT_LIFETIME, food: [...state.knownFood.values()],
         explored: [...state.explored], visible: [...visibleCells], markers: state.markers
       };
     }
@@ -1253,6 +1290,19 @@ export function createGame(environment, colony) {
       Object.assign(state, data.state);
       state.explored = state.explored instanceof Set ? state.explored : new Set();
       state.knownFood = state.knownFood instanceof Map ? state.knownFood : new Map();
+      state.footprints = data.state.footprints instanceof Map ? data.state.footprints : new Map();
+      if (!(data.state.footprints instanceof Map)) {
+        for (const [key, entries] of state.sharedTrails) {
+          const entry = entries[0];
+          if (!entry) continue;
+          state.footprints.set(key, { x: entry.fromX, y: entry.fromY,
+            visits: Math.max(1, entry.strength), marks: entries.slice(-6).map(mark => ({
+              dx: mark.nextX - mark.fromX, dy: mark.nextY - mark.fromY,
+              seed: hashNoise(mark.fromX, mark.fromY) * 100000, at: state.simSeconds
+            })) });
+        }
+      }
+      expireFootprints();
       for (const agent of state.agents) {
         initializeAgent(agent);
         if (!agent.utility) {
@@ -1273,6 +1323,7 @@ export function createGame(environment, colony) {
       const agent = spawnAgent({ id: null, name: "개체", slots: [], revision: 1 }, "colony");
       if (!agent) throw new Error("둥지 주변에 초기 개체를 배치할 공간이 없습니다.");
       agent.actionPriorities = priorities;
+      agent.appearanceAttributes = agentAppearanceAttributes(agent);
     }
     updatePerception();
     for (const agent of state.agents) reconsiderAgent(agent, "birth");

@@ -1,4 +1,5 @@
 import { NEST_LEVELS } from "./nests.mjs";
+import { unitMovementSpeed } from "./attributes.mjs";
 
 export function createPersonality(random) {
   return Object.freeze({ boldness: random(), aggression: random(), curiosity: random() });
@@ -37,7 +38,7 @@ export function createUtilityAI(context) {
   }
 
   function speed(agent, cell, carrying, straight) {
-    let value = agent.stats.speed;
+    let value = unitMovementSpeed(agent.stats);
     if (carrying > agent.stats.capacity) value *= 0.8;
     if (synergy(agent, ["strength", "feet"])) value *= 1 + 0.5 * Math.min(1, carrying / agent.stats.capacity);
     if (straight >= 4 && synergy(agent, ["feet", "feet"])) value *= 1.75;
@@ -81,7 +82,7 @@ export function createUtilityAI(context) {
     if (!state.explored.has(goal) || !walkable(target.x, target.y)) return null;
     if (start === goal) return [{ x: agent.x, y: agent.y }];
     const open = [], costs = new Map([[start, 0]]), parents = new Map();
-    const heuristicSpeed = agent.stats.speed * 3;
+    const heuristicSpeed = unitMovementSpeed(agent.stats) * 3;
     push(open, { index: start, cost: 0, priority: distance(agent, target) / heuristicSpeed });
     let expanded = 0;
     while (open.length && expanded < 2048) {
@@ -131,7 +132,7 @@ export function createUtilityAI(context) {
     let damage = 0;
     for (const enemy of visible) {
       const gap = Math.max(0, distance(cell, enemy) - 1);
-      const reach = Math.max(0, seconds - gap / Math.max(0.1, enemy.stats.speed));
+      const reach = Math.max(0, seconds - gap / Math.max(0.1, enemy.species ? enemy.stats.speed : unitMovementSpeed(enemy.stats)));
       if (!reach) continue;
       if (enemy.species && Math.hypot(cell.x - enemy.homeX, cell.y - enemy.homeY) > 8) continue;
       const supporters = state.agents.filter(ally => ally !== agent && ally.health > 0)
@@ -151,7 +152,7 @@ export function createUtilityAI(context) {
     if (["flee", "return", "recover"].includes(intention)) return 0;
     if (intention === "fight" && ally.utility.target?.id !== enemy.id) return 0;
     return (intention === "fight" ? 1 : 0.5) *
-      limit(1 - Math.max(0, distance(ally, enemy) - 1) / ally.stats.speed / 10);
+      limit(1 - Math.max(0, distance(ally, enemy) - 1) / unitMovementSpeed(ally.stats) / 10);
   }
 
   function predictedDamage(agent, cells, action, visible, carrying) {
@@ -289,14 +290,31 @@ export function createUtilityAI(context) {
       }
     }
     const frontier = frontierCells();
-    const prioritized = frontier.toSorted((first, second) => distance(agent, first) - distance(agent, second)).slice(0, 6);
-    for (const marker of state.markers.toSorted((first, second) => distance(agent, first) - distance(agent, second)).slice(0, 2)) {
-      const nearest = frontier.toSorted((first, second) => distance(marker, first) - distance(marker, second))[0];
-      if (nearest) prioritized.push(nearest);
-    }
-    if (agent.utility?.action === "explore") {
-      const current = frontier.find(cell => indexOf(cell) === indexOf(agent.utility.target));
-      if (current) prioritized.push(current);
+    const nearbyScout = agent.templateId === null && !agent.slots.length && agent.actionPriorities?.[0] === "explore";
+    const prioritized = [];
+    if (nearbyScout) {
+      const boundary = homeCells();
+      const nearby = frontier.map(cell => ({ cell,
+        homeDistance: Math.min(...boundary.map(home => distance(home, cell))) }))
+        .sort((first, second) => first.homeDistance - second.homeDistance ||
+          distance(agent, first.cell) - distance(agent, second.cell));
+      let nearestHomeDistance = Infinity;
+      for (const { cell, homeDistance } of nearby) {
+        if (homeDistance > nearestHomeDistance || prioritized.length >= 6) break;
+        if (!path(cell)) continue;
+        nearestHomeDistance = homeDistance;
+        prioritized.push(cell);
+      }
+    } else {
+      prioritized.push(...frontier.toSorted((first, second) => distance(agent, first) - distance(agent, second)).slice(0, 6));
+      for (const marker of state.markers.toSorted((first, second) => distance(agent, first) - distance(agent, second)).slice(0, 2)) {
+        const nearest = frontier.toSorted((first, second) => distance(marker, first) - distance(marker, second))[0];
+        if (nearest) prioritized.push(nearest);
+      }
+      if (agent.utility?.action === "explore") {
+        const current = frontier.find(cell => indexOf(cell) === indexOf(agent.utility.target));
+        if (current) prioritized.push(current);
+      }
     }
     for (const target of [...new Map(prioritized.map(cell => [indexOf(cell), cell])).values()]) {
       const cells = path(target);
@@ -309,7 +327,7 @@ export function createUtilityAI(context) {
         const x = target.x + dx, y = target.y + dy;
         if (x < 0 || y < 0 || x >= size || y >= size || dx * dx + dy * dy > radius * radius || state.explored.has(y * size + x)) continue;
         const assigned = allies.some(ally => ally.utility?.action === "explore" &&
-          distance(ally, ally.utility.target) / ally.stats.speed <= seconds &&
+          distance(ally, ally.utility.target) / unitMovementSpeed(ally.stats) <= seconds &&
           Math.hypot(x - ally.utility.target.x, y - ally.utility.target.y) <= ally.stats.vision);
         if (!assigned) uncovered++;
       }
@@ -330,7 +348,7 @@ export function createUtilityAI(context) {
         Math.max(0.01, unit.stats.attack * (unit.species ? 1 / 2.08 : unit.stats.speed)));
       const support = allies.reduce((sum, ally) => sum + power(ally) * participation(ally, enemy), 0);
       const opponents = visible.filter(other => other === enemy || distance(other, enemy) <= 5)
-        .reduce((sum, other) => sum + power(other) * limit(1 - Math.max(0, distance(other, enemy) - 1) / other.stats.speed / 10), 0);
+        .reduce((sum, other) => sum + power(other) * limit(1 - Math.max(0, distance(other, enemy) - 1) / (other.species ? other.stats.speed : unitMovementSpeed(other.stats)) / 10), 0);
       const own = power(agent), withMe = (support + own) / (support + own + opponents);
       const withoutMe = support / Math.max(0.01, support + opponents);
       const homeThreat = homeCells().some(cell => distance(cell, enemy) <= 3);
