@@ -2384,7 +2384,7 @@
 
     function foodCarryPlacement(appearance) {
       const strength = appearance.strength ?? appearance.arms ?? 0;
-      const width = strength ? 0.2 : 0.44;
+      const width = strength ? 0.3 : 0.22;
       const height = width * 0.75;
       if (!strength) return { x: AGENT_HEIGHT * 0.28, y: -AGENT_HEIGHT * 0.3, width, height };
       const lift = appearance.feet ? 24 + appearance.feet * 7 : 0;
@@ -2460,7 +2460,7 @@
           const arc = cell * Math.max(1.1, Math.hypot(target.x - delivery.x, target.y - delivery.y) * 0.45);
           const x = start.x + (end.x - start.x) * flight;
           const y = start.y + (end.y - start.y) * flight - 4 * arc * flight * (1 - flight);
-          const width = Math.max(1, cell * FOOD_SPRITE_WIDTH), height = Math.max(1, width * 0.75);
+          const width = Math.max(4, cell * placement.width), height = width * 0.75;
           ctx.translate(x, y);
           ctx.rotate(flight * Math.PI * 0.65 * Math.sign(end.x - start.x || 1));
           if (carriedFoodSprite.complete && carriedFoodSprite.naturalWidth > 0) ctx.drawImage(carriedFoodSprite, -width / 2, -height / 2, width, height);
