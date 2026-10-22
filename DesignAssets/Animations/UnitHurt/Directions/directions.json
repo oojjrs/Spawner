@@ -1,0 +1,35 @@
+{
+  "name": "starter-sprout-bean",
+  "action": "directional-hurt",
+  "status": "preview, awaiting review",
+  "source": "../V3/hurt.json",
+  "coordinateSystem": "screen x right, y down; front is screen bottom",
+  "durationMs": 760,
+  "closedEyeHoldMs": 400,
+  "directions": [
+    {
+      "hitFrom": "front",
+      "label": "앞에서 맞음",
+      "animation": "front/hurt.json",
+      "gif": "front/hurt-preview.gif"
+    },
+    {
+      "hitFrom": "back",
+      "label": "뒤에서 맞음",
+      "animation": "back/hurt.json",
+      "gif": "back/hurt-preview.gif"
+    },
+    {
+      "hitFrom": "left",
+      "label": "왼쪽에서 맞음",
+      "animation": "left/hurt.json",
+      "gif": "left/hurt-preview.gif"
+    },
+    {
+      "hitFrom": "right",
+      "label": "오른쪽에서 맞음",
+      "animation": "right/hurt.json",
+      "gif": "right/hurt-preview.gif"
+    }
+  ]
+}

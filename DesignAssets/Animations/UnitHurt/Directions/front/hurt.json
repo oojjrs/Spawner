@@ -1,0 +1,192 @@
+{
+  "name": "starter-sprout-bean",
+  "action": "hurt",
+  "hitFrom": "front",
+  "label": "앞에서 맞음",
+  "status": "preview, awaiting review",
+  "incomingSideVector": [
+    0,
+    1
+  ],
+  "coordinateSystem": "screen x right, y down; front is screen bottom",
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 4,
+  "frameCount": 16,
+  "pivot": [
+    256,
+    450
+  ],
+  "durationMs": 760,
+  "durationsMs": [
+    20,
+    30,
+    30,
+    30,
+    400,
+    30,
+    30,
+    30,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+  ],
+  "previewPauseMs": 900,
+  "loop": false,
+  "rootMotion": false,
+  "closedEyeHoldMs": 400,
+  "holdFrame": 4,
+  "poses": [
+    {
+      "sourceFrame": 0,
+      "rotationDegrees": 0,
+      "renderOffsetPixels": [
+        0.0,
+        -0.0
+      ],
+      "durationMs": 20
+    },
+    {
+      "sourceFrame": 1,
+      "rotationDegrees": 0,
+      "renderOffsetPixels": [
+        0.0,
+        -4.2
+      ],
+      "durationMs": 30
+    },
+    {
+      "sourceFrame": 2,
+      "rotationDegrees": 0,
+      "renderOffsetPixels": [
+        0.0,
+        -9.799999999999999
+      ],
+      "durationMs": 30
+    },
+    {
+      "sourceFrame": 3,
+      "rotationDegrees": 0,
+      "renderOffsetPixels": [
+        0.0,
+        -12.879999999999999
+      ],
+      "durationMs": 30
+    },
+    {
+      "sourceFrame": 4,
+      "rotationDegrees": 0,
+      "renderOffsetPixels": [
+        0.0,
+        -14.0
+      ],
+      "durationMs": 400
+    },
+    {
+      "sourceFrame": 4,
+      "rotationDegrees": 0,
+      "renderOffsetPixels": [
+        0.0,
+        -13.16
+      ],
+      "durationMs": 30
+    },
+    {
+      "sourceFrame": 4,
+      "rotationDegrees": 0,
+      "renderOffsetPixels": [
+        0.0,
+        -9.799999999999999
+      ],
+      "durationMs": 30
+    },
+    {
+      "sourceFrame": 4,
+      "rotationDegrees": 0,
+      "renderOffsetPixels": [
+        0.0,
+        -6.160000000000001
+      ],
+      "durationMs": 30
+    },
+    {
+      "sourceFrame": 7,
+      "rotationDegrees": 0,
+      "renderOffsetPixels": [
+        0.0,
+        -3.0800000000000005
+      ],
+      "durationMs": 20
+    },
+    {
+      "sourceFrame": 8,
+      "rotationDegrees": 0,
+      "renderOffsetPixels": [
+        0.0,
+        -0.84
+      ],
+      "durationMs": 20
+    },
+    {
+      "sourceFrame": 9,
+      "rotationDegrees": 0,
+      "renderOffsetPixels": [
+        0.0,
+        -0.0
+      ],
+      "durationMs": 20
+    },
+    {
+      "sourceFrame": 10,
+      "rotationDegrees": 0,
+      "renderOffsetPixels": [
+        0.0,
+        -0.0
+      ],
+      "durationMs": 20
+    },
+    {
+      "sourceFrame": 11,
+      "rotationDegrees": 0,
+      "renderOffsetPixels": [
+        0.0,
+        -0.0
+      ],
+      "durationMs": 20
+    },
+    {
+      "sourceFrame": 12,
+      "rotationDegrees": 0,
+      "renderOffsetPixels": [
+        0.0,
+        -0.0
+      ],
+      "durationMs": 20
+    },
+    {
+      "sourceFrame": 14,
+      "rotationDegrees": 0,
+      "renderOffsetPixels": [
+        0.0,
+        -0.0
+      ],
+      "durationMs": 20
+    },
+    {
+      "sourceFrame": 15,
+      "rotationDegrees": 0,
+      "renderOffsetPixels": [
+        0.0,
+        -0.0
+      ],
+      "durationMs": 20
+    }
+  ]
+}

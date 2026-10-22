@@ -1,0 +1,190 @@
+{
+  "eyePrompt": "Use case: precise-object-edit. Asset type: actual reusable transparent 2D game sprite animation EYE PARTS, not preview/mockup. Input is the approved round pale-green bean character body, identity/style authority ONLY. Draw ONLY two small shut-eye wince marks as separate production parts; omit the body and every other feature. Output a true-transparent 2 columns x 1 row atlas, exactly two equal square 512x512 cells, ideally 1024x512 total. Left cell: ONE soft rounded inward-pointing > shaped shut-eye mark, centered at (256,256), approximately 160 pixels wide x 140 pixels tall. Right cell: its exact symmetrical mirror < shaped shut-eye mark, centered identically. Each mark is made from two gently curved strokes joined at a soft apex, outer stroke tips fully rounded. Smooth high-resolution antialiasing. Uniform stroke thickness about 22 pixels, restrained small playful wince matching this mouthless bean. Solid very dark desaturated forest green RGB(12,43,32), no black rim, no inner fill area, no highlights, no eyelashes, no eyebrows, no eye socket, no nose or mouth. Nothing else on canvas. No labels, no grid, no shadows, no background color or checkerboard. These are actual sprite-part source layers for the hurt animation, not icons for an interface and not a contact sheet.",
+  "prompt": "Use case: precise-object-edit. Asset type: one actual reusable FACE BACKPLATE/BODY LAYER for production 2D game sprite animation, not a preview. Input image is the exact approved sprout-bean BODY PART, pixel and design authority. Remove ONLY BOTH DARK EYES and their little green highlights, filling those two tiny eye areas with the existing smooth pale yellow-green face shading that would naturally continue behind the eyes. The result is a completely featureless eyeless bean body part. Keep EVERYTHING ELSE UNCHANGED: same exact image dimensions and framing 1144x1668, same body scale, silhouette, outline width and color, foot nubs, foot spacing, highlights, gradients, transparent background, top short stem stump, canvas margins and baseline. No mouth, no facial marks, no new detail, no leaves, no added body parts, no flattened/squashed/resized body. This is surgical inpainting inside the two eye regions only. Exact outline preservation is critical. True alpha outside original body.",
+  "name": "starter-sprout-bean",
+  "action": "hurt",
+  "revision": 2,
+  "status": "preview, awaiting review",
+  "provider": "built-in image_gen and original source layers",
+  "artworkMethod": "original body, feet and outline retained; eye-region inpainting only; original eye layers and sprout parts animated at 4x",
+  "reference": "DesignAssets/Units/BaseParts/body.png",
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 4,
+  "frameCount": 16,
+  "pivot": [
+    256,
+    450
+  ],
+  "durationsMs": [
+    20,
+    20,
+    30,
+    40,
+    310,
+    40,
+    40,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    10
+  ],
+  "durationMs": 670,
+  "previewPauseMs": 900,
+  "loop": false,
+  "rootMotion": false,
+  "bodyScalePerFrame": 1,
+  "bodyPositionPerFrame": [
+    0,
+    0
+  ],
+  "renderScale": 4,
+  "gifPalette": "one shared 256-color palette; dithering fixed for unchanged source pixels",
+  "eyeCentersInSource": [
+    [
+      300.5,
+      1143.0
+    ],
+    [
+      843.5,
+      1143.0
+    ]
+  ],
+  "eyeRegionsInSource": [
+    [
+      190,
+      1000,
+      425,
+      1290
+    ],
+    [
+      720,
+      1000,
+      960,
+      1290
+    ]
+  ],
+  "generatedSourceSha256": "587fcaf1ae111d927f5ceba6bc5fef62ff0174909c41faccd13146faf15c1e21",
+  "originalBodySha256": "3374a9599334b2712e0f8e115990894e6c6c16e8a8b2b7179dd1e97661b2ae5e",
+  "poses": [
+    {
+      "expression": "open",
+      "openness": 1.0,
+      "leafAngleDegrees": 0,
+      "headOffsetPixels": 0,
+      "durationMs": 20
+    },
+    {
+      "expression": "open",
+      "openness": 0.55,
+      "leafAngleDegrees": 3,
+      "headOffsetPixels": 1,
+      "durationMs": 20
+    },
+    {
+      "expression": "hurt",
+      "openness": 0.85,
+      "leafAngleDegrees": 6,
+      "headOffsetPixels": 2,
+      "durationMs": 30
+    },
+    {
+      "expression": "hurt",
+      "openness": 1.0,
+      "leafAngleDegrees": 10,
+      "headOffsetPixels": 4,
+      "durationMs": 40
+    },
+    {
+      "expression": "hurt",
+      "openness": 1.0,
+      "leafAngleDegrees": 12,
+      "headOffsetPixels": 4,
+      "durationMs": 310
+    },
+    {
+      "expression": "hurt",
+      "openness": 1.0,
+      "leafAngleDegrees": 9,
+      "headOffsetPixels": 3,
+      "durationMs": 40
+    },
+    {
+      "expression": "hurt",
+      "openness": 1.0,
+      "leafAngleDegrees": 7,
+      "headOffsetPixels": 3,
+      "durationMs": 40
+    },
+    {
+      "expression": "open",
+      "openness": 0.15,
+      "leafAngleDegrees": 4,
+      "headOffsetPixels": 2,
+      "durationMs": 20
+    },
+    {
+      "expression": "open",
+      "openness": 0.3,
+      "leafAngleDegrees": 0,
+      "headOffsetPixels": 1,
+      "durationMs": 20
+    },
+    {
+      "expression": "open",
+      "openness": 0.55,
+      "leafAngleDegrees": -3,
+      "headOffsetPixels": 0,
+      "durationMs": 20
+    },
+    {
+      "expression": "open",
+      "openness": 0.8,
+      "leafAngleDegrees": -5,
+      "headOffsetPixels": -1,
+      "durationMs": 20
+    },
+    {
+      "expression": "open",
+      "openness": 1.0,
+      "leafAngleDegrees": -4,
+      "headOffsetPixels": -1,
+      "durationMs": 20
+    },
+    {
+      "expression": "open",
+      "openness": 1.0,
+      "leafAngleDegrees": -2,
+      "headOffsetPixels": 0,
+      "durationMs": 20
+    },
+    {
+      "expression": "open",
+      "openness": 1.0,
+      "leafAngleDegrees": 1,
+      "headOffsetPixels": 0,
+      "durationMs": 20
+    },
+    {
+      "expression": "open",
+      "openness": 1.0,
+      "leafAngleDegrees": 0.5,
+      "headOffsetPixels": 0,
+      "durationMs": 20
+    },
+    {
+      "expression": "open",
+      "openness": 1.0,
+      "leafAngleDegrees": 0,
+      "headOffsetPixels": 0,
+      "durationMs": 10
+    }
+  ]
+}
