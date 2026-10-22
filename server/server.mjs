@@ -12,7 +12,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const dataDirectory = resolve(process.env.SPAWNER_DATA_DIR || resolve(root, ".data"));
 const dataPath = resolve(dataDirectory, "rooms.json");
 const instanceId = createHash("sha256").update(root.replace(/[\\/]+$/, "").toLowerCase()).digest("hex");
-const revision = (await Promise.all(["game.mjs", "server.mjs", "world.mjs", "attributes.mjs", "creatures.mjs", "utility.mjs", "nests.mjs"].map(async (file) =>
+const revision = (await Promise.all(["game.mjs", "server.mjs", "world.mjs", "attributes.mjs", "creatures.mjs", "beetle-animation.mjs", "utility.mjs", "nests.mjs"].map(async (file) =>
   createHash("sha256").update(await readFile(resolve(root, "server", file))).digest("hex")))).join("");
 const sessions = new Map();
 const rooms = new Map();

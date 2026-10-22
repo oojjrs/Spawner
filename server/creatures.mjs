@@ -1,5 +1,7 @@
+import { BEETLE_ANIMATIONS, BEETLE_ANIMATION_ASSET, BEETLE_NEUTRAL_ASSET } from "./beetle-animation.mjs";
+
 export const CREATURE_ASSETS = [
-  "DesignAssets/Units/spiny-back-beetle.png"
+  "DesignAssets/Units/spiny-back-beetle.png", BEETLE_ANIMATION_ASSET, BEETLE_NEUTRAL_ASSET
 ];
 
 export function createCreatures(environment, saved) {
@@ -38,6 +40,7 @@ export function createCreatures(environment, saved) {
       renderFromX: x, renderFromY: y, moveStartedAt: environment.simSeconds, moveDuration: 0,
       mode: "idle", animationStartedAt: environment.simSeconds, facing: -1, stepCount: 0,
       nextActionAt: environment.simSeconds + 1.5 + noise(x, y) * 2, attackStartedAt: -10,
+      hurtStartedAt: -10, deathStartedAt: null,
       attackTargetId: null, attackHit: false, attackReadyAt: 0 };
     state.agents.push(agent);
     return agent;
@@ -96,13 +99,34 @@ export function createCreatures(environment, saved) {
     agent.nextActionAt = environment.simSeconds + duration;
   }
 
+  function beginDeath(agent) {
+    const progress = agent.moveDuration ? Math.max(0, Math.min(1,
+      (environment.simSeconds - agent.moveStartedAt) / agent.moveDuration)) : 1;
+    agent.deathRenderX = agent.renderFromX + (agent.x - agent.renderFromX) * progress;
+    agent.deathRenderY = agent.renderFromY + (agent.y - agent.renderFromY) * progress;
+    agent.deathStartedAt = environment.simSeconds;
+    agent.animationStartedAt = environment.simSeconds;
+    agent.mode = "death";
+    agent.attackHit = true;
+    agent.attackTargetId = null;
+  }
+
+  function receiveDamage(agent, amount) {
+    if (!state.agents.includes(agent) || agent.health <= 0 || amount <= 0) return;
+    agent.health = Math.max(0, agent.health - amount);
+    if (agent.health <= 0) beginDeath(agent);
+    else agent.hurtStartedAt = environment.simSeconds;
+  }
+
   function dropCorpse(agent) {
     for (let radius = 0; radius <= 3; radius++) {
       for (let dy = -radius; dy <= radius; dy++) {
         for (let dx = -radius; dx <= radius; dx++) {
           const x = agent.x + dx, y = agent.y + dy, key = x + "," + y;
           if (!walkable(x, y) || environment.food.get(key)?.amount > 0) continue;
-          environment.food.set(key, { x, y, kind: "corpse", species, amount: 4, attributes: {} });
+          environment.food.set(key, { x, y, kind: "corpse", species, amount: 4, attributes: {}, facing: agent.facing,
+            renderX: x === agent.x && y === agent.y ? agent.deathRenderX : x,
+            renderY: x === agent.x && y === agent.y ? agent.deathRenderY : y });
           return;
         }
       }
@@ -110,8 +134,13 @@ export function createCreatures(environment, saved) {
   }
 
   function removeDead() {
-    for (const agent of state.agents) if (agent.health <= 0) dropCorpse(agent);
-    state.agents = state.agents.filter(agent => agent.health > 0);
+    for (const agent of state.agents) {
+      if (agent.health > 0) continue;
+      if (!Number.isFinite(agent.deathStartedAt)) beginDeath(agent);
+      if ((environment.simSeconds - agent.deathStartedAt) * 1000 + 1e-6 >= BEETLE_ANIMATIONS.death.durationMs) dropCorpse(agent);
+    }
+    state.agents = state.agents.filter(agent => agent.health > 0 ||
+      (environment.simSeconds - agent.deathStartedAt) * 1000 + 1e-6 < BEETLE_ANIMATIONS.death.durationMs);
   }
 
   function neighbors(x, y) {
@@ -152,15 +181,16 @@ export function createCreatures(environment, saved) {
     const now = environment.simSeconds;
     const opponents = players();
     for (const agent of state.agents) {
+      if (agent.health <= 0) continue;
       if (agent.mode === "attack") {
-        if (!agent.attackHit && now >= agent.attackStartedAt + 0.52) {
+        if (!agent.attackHit && now + 1e-8 >= agent.attackStartedAt + BEETLE_ANIMATIONS.attack.hitTimeMs / 1000) {
           agent.attackHit = true;
           const target = opponents.find(entry => entry.agent.id === agent.attackTargetId);
           if (target && target.agent.health > 0 && Math.abs(agent.x - target.agent.x) + Math.abs(agent.y - target.agent.y) <= 1) {
             target.game.receiveDamage(target.agent, agent.stats.attack);
           }
         }
-        if (now < agent.attackStartedAt + 1.28) continue;
+        if (now < agent.attackStartedAt + BEETLE_ANIMATIONS.attack.durationMs / 1000) continue;
         idle(agent, 0.8);
       }
       if (now < agent.moveStartedAt + agent.moveDuration) continue;
@@ -201,5 +231,5 @@ export function createCreatures(environment, saved) {
     removeDead();
   }
 
-  return { tick, save: () => state, get agents() { return state.agents; } };
+  return { tick, receiveDamage, save: () => state, get agents() { return state.agents; } };
 }

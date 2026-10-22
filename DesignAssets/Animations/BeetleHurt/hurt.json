@@ -1,7 +1,7 @@
 {
   "name": "spiny-back-beetle",
   "action": "hurt",
-  "status": "motion study; not installed in runtime",
+  "status": "installed in runtime",
   "provider": "built-in image_gen",
   "workflow": "oojjrs-game-studio-sprite-pipeline",
   "artworkMethod": "one full strip of redrawn cels; no part transforms or synthetic motion interpolation",
@@ -168,5 +168,10 @@
     40,
     40,
     40
-  ]
+  ],
+  "runtime": {
+    "action": "hurt",
+    "atlas": "../Beetle/atlas.webp",
+    "manifest": "../Beetle/animations.json"
+  }
 }

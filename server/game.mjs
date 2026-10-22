@@ -78,10 +78,11 @@ export function createGame(environment, colony) {
     let updatingAgents = false;
     let footprintCleanupAt = 0;
     const utilityAI = createUtilityAI({ state, size: WORLD_SIZE, homeCells: colonyBoundaryCells,
+      deliveryCells: colonyDeliveryCells,
       walkable: isWalkable, hazardAt: (x, y) => state.explored.has(y * WORLD_SIZE + x) ? hazardAt(x, y) : 0,
       enemies: () => state.rivals.filter(enemy => visibleCells.has(enemy.y * WORLD_SIZE + enemy.x)), synergy,
       canHarvest: food => !isTreeFood(food, worldMap) });
-    const roadOptimizer = createRoadOptimizer({ size: WORLD_SIZE, boundary: colonyBoundaryCells,
+    const roadOptimizer = createRoadOptimizer({ size: WORLD_SIZE, boundary: colonyDeliveryCells,
       neighbors: walkableNeighbors, explored: index => state.explored.has(index),
       apply(road, route) {
         const previous = road.route;
@@ -255,6 +256,17 @@ export function createGame(environment, colony) {
         }
       }
       return cells;
+    }
+
+    function colonyDeliveryCells() {
+      const edge = COLONY_SIZE - 1;
+      return [[0, 0], [edge, 0], [0, edge], [edge, edge]]
+        .map(([x, y]) => ({ x: colony.x + x, y: colony.y + y }))
+        .filter(cell => isWalkable(cell.x, cell.y));
+    }
+
+    function isColonyDeliveryCell(x, y) {
+      return colonyDeliveryCells().some(cell => cell.x === x && cell.y === y);
     }
 
     function nearestColonyBoundaryCell(x, y) {
@@ -984,7 +996,7 @@ export function createGame(environment, colony) {
         if (agent.mode !== "harvest") harvestAtCurrentCell(agent);
         return false;
       }
-      if (plan.action === "return" && home) {
+      if (plan.action === "return" && isColonyDeliveryCell(agent.x, agent.y)) {
         if (agent.mode !== "unload") {
           agent.mode = "unload";
           agent.unloadReady = state.simSeconds + 1;
@@ -1198,7 +1210,7 @@ export function createGame(environment, colony) {
           attack.targetY = target.y;
           attack.hit = true;
           if (owner) owner.receiveDamage(target, attack.damage);
-          else target.health = Math.max(0, target.health - attack.damage);
+          else environment.creatureSystem.receiveDamage(target, attack.damage);
           if (target.health <= 0) agent.decisionPending = "targetLost";
         }
       }
@@ -1233,7 +1245,11 @@ export function createGame(environment, colony) {
             if (agent.health >= agent.utility.recoverHealth) agent.decisionPending = "completed";
           } else agent.mode = "recover";
         } else if (agent.mode === "unload") {
-          if (state.simSeconds >= agent.unloadReady) depositFood(agent);
+          if (!isColonyDeliveryCell(agent.x, agent.y)) {
+            agent.mode = "return";
+            agent.foodDelivery = null;
+            agent.decisionPending = "restore";
+          } else if (state.simSeconds >= agent.unloadReady) depositFood(agent);
         } else if (agent.mode === "harvest") updateHarvest(agent);
         else {
           const moved = stepUtilityAgent(agent);
@@ -1335,7 +1351,8 @@ export function createGame(environment, colony) {
         simSeconds: state.simSeconds, colonyFood: state.colonyFood,
         evolutionPoints: state.evolutionPoints, nestLevel: state.nestLevel,
         templates: state.templates, agents: state.agents.map(visibleAgent),
-        rivals: state.rivals.filter(agent => agent.health > 0 && visibleCells.has(agent.y * WORLD_SIZE + agent.x)).map((agent) => ({ ...visibleAgent(agent), faction: agent.species ? "hostile" : "rival" })),
+        rivals: state.rivals.filter(agent => (agent.health > 0 || agent.species === "spiny-back-beetle" && agent.mode === "death") &&
+          visibleCells.has(agent.y * WORLD_SIZE + agent.x)).map((agent) => ({ ...visibleAgent(agent), faction: agent.species ? "hostile" : "rival" })),
         corpses: [...state.knownFood.values()].filter(cell => cell.kind === "corpse" && cell.amount > 0),
         sharedTrails: [...state.sharedTrails], footprints: [...state.footprints.values()],
         footprintLifetime: FOOTPRINT_LIFETIME, food: [...state.knownFood.values()],

@@ -1,0 +1,256 @@
+{
+  "name": "spiny-back-beetle",
+  "action": "death",
+  "status": "death and dead-state motion study; not installed in runtime",
+  "revision": 1,
+  "provider": "built-in image_gen",
+  "workflow": "oojjrs-game-studio-sprite-pipeline",
+  "artworkMethod": "one full strip of five drawn cels, one shared scale and ground anchor; no part transforms or synthetic interpolation",
+  "reference": "../BeetleWalk/BodyLockV3/reference.png",
+  "frameSize": 512,
+  "columns": 8,
+  "frameCount": 18,
+  "frameMs": 40,
+  "durationMs": 720,
+  "sourcePoseCount": 5,
+  "uniquePoseCount": 5,
+  "poseDurationsMs": [
+    80,
+    120,
+    160,
+    160,
+    200
+  ],
+  "poseOrder": [
+    0,
+    0,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    2,
+    3,
+    3,
+    3,
+    3,
+    4,
+    4,
+    4,
+    4,
+    4
+  ],
+  "loop": false,
+  "rootMotion": false,
+  "stopOnLastFrame": true,
+  "terminalState": "dead",
+  "terminalPose": 4,
+  "terminalFrame": 17,
+  "terminalPoseFile": "dead.png",
+  "phases": [
+    {
+      "name": "legs-buckle",
+      "fromMs": 0,
+      "toMs": 200
+    },
+    {
+      "name": "collapse-and-roll",
+      "fromMs": 200,
+      "toMs": 520
+    },
+    {
+      "name": "settle-into-dead-state",
+      "fromMs": 520,
+      "toMs": 720
+    }
+  ],
+  "groundAnchor": [
+    265,
+    450
+  ],
+  "anchorKind": "bottom-center-at-shared-ground-line",
+  "seedFrameLocked": true,
+  "normalization": {
+    "script": "D:\\.codex\\plugins\\cache\\openai-curated\\game-studio\\1dc19589\\scripts\\normalize_sprite_strip.py",
+    "frameSize": 396,
+    "sharedScale": 0.9565217391304348,
+    "approvedShellWidth": 290,
+    "sourceInfo": [
+      {
+        "sourceColumns": [
+          6,
+          388
+        ],
+        "width": 382,
+        "height": 793,
+        "bounds": [
+          1,
+          273,
+          381,
+          578
+        ],
+        "contentWidth": 380,
+        "contentHeight": 305,
+        "shellWidth": 303
+      },
+      {
+        "sourceColumns": [
+          408,
+          780
+        ],
+        "width": 372,
+        "height": 793,
+        "bounds": [
+          1,
+          321,
+          371,
+          579
+        ],
+        "contentWidth": 370,
+        "contentHeight": 258,
+        "shellWidth": 299
+      },
+      {
+        "sourceColumns": [
+          784,
+          1200
+        ],
+        "width": 416,
+        "height": 793,
+        "bounds": [
+          1,
+          338,
+          415,
+          585
+        ],
+        "contentWidth": 414,
+        "contentHeight": 247,
+        "shellWidth": 307
+      },
+      {
+        "sourceColumns": [
+          1221,
+          1539
+        ],
+        "width": 318,
+        "height": 793,
+        "bounds": [
+          1,
+          319,
+          317,
+          586
+        ],
+        "contentWidth": 316,
+        "contentHeight": 267,
+        "shellWidth": 264
+      },
+      {
+        "sourceColumns": [
+          1580,
+          1965
+        ],
+        "width": 385,
+        "height": 793,
+        "bounds": [
+          1,
+          351,
+          384,
+          582
+        ],
+        "contentWidth": 383,
+        "contentHeight": 231,
+        "shellWidth": 246
+      }
+    ],
+    "spacingCorrection": "complete alpha-separated cels repacked without per-cel scaling before official shared-scale normalization"
+  },
+  "sheet": "death.png",
+  "runtimeSheet": "death-runtime.webp",
+  "poseSheet": "death-poses-v1.png",
+  "source": "death-source.png",
+  "normalizedSourceStrip": "death-source-spaced.png",
+  "preview": "death-preview-v1.gif",
+  "previewWebp": "death-preview-v1.webp",
+  "previewLeadHoldMs": 400,
+  "previewFinalHoldMs": 1400,
+  "previewLoop": true,
+  "previewDurationsMs": [
+    480,
+    120,
+    160,
+    160,
+    1600
+  ],
+  "previewPalette": "preview-palette.png",
+  "previewDithering": false,
+  "frames": [
+    {
+      "index": 0,
+      "file": "Frames/death-00.png",
+      "source": "approved-neutral",
+      "exactSeedLock": true
+    },
+    {
+      "index": 1,
+      "file": "Frames/death-01.png",
+      "sourcePose": 1,
+      "sharedScale": 0.9565217391304348,
+      "translation": [
+        67,
+        55
+      ],
+      "groundAnchor": [
+        265,
+        450
+      ],
+      "orientation": "front-left-standing-view"
+    },
+    {
+      "index": 2,
+      "file": "Frames/death-02.png",
+      "sourcePose": 2,
+      "sharedScale": 0.9565217391304348,
+      "translation": [
+        67,
+        55
+      ],
+      "groundAnchor": [
+        265,
+        450
+      ],
+      "orientation": "front-left-standing-view"
+    },
+    {
+      "index": 3,
+      "file": "Frames/death-03.png",
+      "sourcePose": 3,
+      "sharedScale": 0.9565217391304348,
+      "translation": [
+        67,
+        55
+      ],
+      "groundAnchor": [
+        265,
+        450
+      ],
+      "orientation": "rolling-onto-right-flank"
+    },
+    {
+      "index": 4,
+      "file": "Frames/death-04.png",
+      "sourcePose": 4,
+      "sharedScale": 0.9565217391304348,
+      "translation": [
+        67,
+        55
+      ],
+      "groundAnchor": [
+        265,
+        450
+      ],
+      "orientation": "rolling-onto-right-flank"
+    }
+  ],
+  "prompt": "Use case: precise-object-edit.\nProduction 2D game animation artwork, ONE COMPLETE FIVE-CEL HORIZONTAL DEATH STRIP.\nImage 1 is the EDIT TARGET: a transparent five-slot horizontal reference canvas with the approved neutral beetle in slot 1. Image 2 is the APPROVED neutral beetle and the exact identity, scale, palette, and style authority. Paint the five full-body death-animation cels in one coherent generation. Output exactly five equally spaced full-body beetles, ONE ROW of FIVE equal slots, ideally 2560x512, with generous true-transparent margins. No grid layout, labels or scene.\n\nCharacter invariants: same compact burgundy armored beetle facing lower-left in three-quarter front-left view; EXACTLY THREE large ivory dorsal spikes, two smooth ivory inward-curving mandibles, amber eyes, six short sturdy articulated burgundy legs and dark purple pointed feet. Smooth detailed hand-painted game sprite, thin dark teal outlines. Match image 2 with clean solid ivory gradients, no gray or stippled/checkerboard patches. Keep every anatomical part, rigid shell proportions, shell width, spike sizes and physical scale consistent through the entire motion. The shell is hard and cannot squash or shrink. Lighting and palette are fixed. Death changes the joint poses and body orientation, not the character size. Same camera, no camera motion. Genuine redrawn cels showing changed anatomy/pose; do not just rotate the flat neutral sprite.\n\nThe action is a restrained heavy DEATH: legs lose strength, the creature drops, rolls onto its right flank, then lies completely still. No attack, no bouncing, no repeated twitching and no return to life. Stage one coherent event, not a collection of unrelated corpse concepts. The ground contact stays on the same invisible baseline and the body stays near the same location within each slot.\n\nCEL 1: EXACT approved neutral standing pose from image 2. Same full silhouette and feet, original open amber eyes and relaxed inward-curved ivory pincer gap. It will be replaced by the approved seed exactly in final assembly, so match it very closely.\n\nCEL 2: knees buckle. The legs bend deeper under the same rigid shell, lowering the body about 20px. Head droops slightly and eyes narrow with loss of strength; pincers retain their smooth shape and relaxed pose. No attack wind-up. Rear feet still touch the ground.\n\nCEL 3: collapse. The shell drops another 20px toward the ground as the supporting legs fold/splay and can no longer hold it up. The front/head reaches the ground, eyes fully closed. The main body is still its original solid size. Clear low silhouette with the heavy body almost resting on the ground. No elastic flattening.\n\nCEL 4: falling onto right flank. Newly drawn intermediate roll about 25 degrees toward its right side, head still to the lower-left. The far side of the shell meets the ground and the near-side legs lift and fold loosely inward. Reveal only a restrained narrow dark underside as anatomically needed. Keep all three dorsal spikes readable, attached to the same rigid shell. The ivory mandibles droop with the head, no snapping.\n\nCEL 5: FINAL DEAD CORPSE, resting naturally on its right flank at about a 35 degree roll, a very clear settled low pose continuing cel 4. Head lies low at the left, both eyes closed with no visible bright amber pupils, legs slack and bent inward/upward rather than planted under the body, no standing support. Preserve the same shell mass and the same three spikes, two clean ivory pincers and original body size. The pose is completely lifeless and will be held indefinitely as the separate DEAD state. Do not return to neutral. No extra twitch or secondary motion.\n\nKeep the animation compact and weighty, with a readable leg-failure -> collapse/roll -> dead-hold flow. Different body height comes from bent legs and physical roll only. All five entire creatures must fit within their equal slots with transparent margins; do not clip feet or spikes. Truly transparent RGBA background, no checkerboard painted in the backdrop, no floor, shadows, dust, impact effects, trails, blood, gore, text, X marks, labels, numbers, frames, borders, extra characters or props. EXACTLY FIVE FULL-BODY CELLS IN ONE HORIZONTAL ROW.\n"
+}

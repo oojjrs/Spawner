@@ -15,7 +15,13 @@
     let muted = false;
     let failed = !globalThis.AudioContext;
     let harvest = null;
+    const music = globalThis.SpawnerMusic.create();
     const buffers = new Map();
+    const names = Object.keys(sources);
+    const channels = [];
+    const refills = [];
+    let refillTimer = null;
+    let prepared = false;
     const voices = new Set();
     const lastPlayed = new Map();
     const levels = { harvest: 0.8, landing: 1.2, footstep: 0.6, throw: 1.5, catch: 2, "seed-eject": 1, "seed-crack": 1, "sprout-pop": 1 };
@@ -25,7 +31,7 @@
       button.disabled = failed;
       button.textContent = failed ? "소리 사용 불가" : muted ? "소리 꺼짐" : "소리 켜짐";
       button.setAttribute("aria-pressed", String(!muted && !failed));
-      button.title = muted ? "효과음 켜기" : "효과음 끄기";
+      button.title = muted ? "배경음악·효과음 켜기" : "배경음악·효과음 끄기";
     }
 
     function stop() {
@@ -40,43 +46,76 @@
       try {
         if (!context) context = new AudioContext();
         if (context.state === "suspended") await context.resume();
+        if (!muted && !document.hidden) music.unlock(context);
         if (!loading) loading = Promise.all(Object.entries(sources).map(async ([name, source]) => {
-          const encoded = source.startsWith("data:") ? Uint8Array.from(atob(source.split(",")[1]), character => character.charCodeAt(0)).buffer :
-            await fetch(source).then(response => {
+          const encoded = await fetch(source).then(response => {
               if (!response.ok) throw new Error("효과음을 불러오지 못했습니다.");
               return response.arrayBuffer();
             });
           buffers.set(name, await context.decodeAudioData(encoded));
-        }));
+        })).then(() => {
+          for (let index = 0; index < 8; index++) {
+            const gain = context.createGain();
+            gain.gain.value = 0;
+            gain.connect(context.destination);
+            const channel = { gain, sources: new Map(), source: null, name: null };
+            channels.push(channel);
+            for (const name of names) channel.sources.set(name, prepareSource(channel, name));
+          }
+          prepared = true;
+        });
         await loading;
       } catch {
         failed = true;
         stop();
+        music.suspend();
         updateButton();
       }
     }
 
     function available() {
-      return !muted && !failed && !document.hidden && context?.state === "running" && buffers.size === Object.keys(sources).length;
+      return !muted && !failed && !document.hidden && prepared && context?.state === "running";
+    }
+
+    function prepareSource(channel, name) {
+      const source = context.createBufferSource();
+      source.buffer = buffers.get(name);
+      source.connect(channel.gain);
+      source.onended = () => {
+        source.disconnect();
+        if (channel.source === source) {
+          voices.delete(channel);
+          channel.source = null;
+          if (harvest === channel) harvest = null;
+        }
+        refills.push({ channel, name });
+        if (refillTimer === null) refillTimer = setTimeout(refillSources, 0);
+      };
+      return source;
+    }
+
+    function refillSources() {
+      refillTimer = null;
+      const deadline = performance.now() + 1;
+      while (refills.length) {
+        const { channel, name } = refills.pop();
+        channel.sources.set(name, prepareSource(channel, name));
+        if (performance.now() >= deadline) break;
+      }
+      if (refills.length) refillTimer = setTimeout(refillSources, 0);
     }
 
     function start(name, volume, loop) {
       if (!available() || volume <= 0 || voices.size >= 8) return null;
-      const source = context.createBufferSource();
-      const gain = context.createGain();
-      source.buffer = buffers.get(name);
+      const voice = channels.find(channel => channel.source === null && channel.sources.has(name));
+      if (!voice) return null;
+      const source = voice.sources.get(name);
+      voice.sources.delete(name);
+      voice.source = source;
+      voice.name = name;
       source.loop = loop;
-      gain.gain.value = levels[name] * Math.min(1, volume);
-      source.connect(gain);
-      gain.connect(context.destination);
-      const voice = { source, gain, name };
+      voice.gain.gain.value = levels[name] * Math.min(1, volume);
       voices.add(voice);
-      source.onended = () => {
-        voices.delete(voice);
-        source.disconnect();
-        gain.disconnect();
-        if (harvest === voice) harvest = null;
-      };
       source.start();
       return voice;
     }
@@ -85,8 +124,9 @@
       if (!available() || volume <= 0) return;
       const interval = name === "footstep" ? 0.04 : name === "landing" ? 0.075 : 0.1;
       if (context.currentTime - (lastPlayed.get(name) ?? -Infinity) < interval) return;
-      if (name === "landing" && [...voices].filter(voice => voice.name === name).length >= 3) return;
-      if (name === "footstep" && [...voices].filter(voice => voice.name === name).length >= 6) return;
+      let concurrent = 0;
+      for (const voice of voices) if (voice.name === name) concurrent++;
+      if (name === "landing" && concurrent >= 3 || name === "footstep" && concurrent >= 6) return;
       if (start(name, volume, false)) lastPlayed.set(name, context.currentTime);
     }
 
@@ -102,17 +142,18 @@
 
     button.addEventListener("click", () => {
       muted = !muted;
-      if (muted) stop();
+      if (muted) { stop(); music.suspend(); }
       else unlock();
       updateButton();
     });
     document.addEventListener("pointerdown", unlock, true);
     document.addEventListener("keydown", unlock, true);
     document.addEventListener("visibilitychange", () => {
-      if (document.hidden) stop();
+      if (document.hidden) { stop(); music.suspend(); }
+      else unlock();
     });
-    window.addEventListener("pagehide", stop);
+    window.addEventListener("pagehide", () => { stop(); music.suspend(); });
     updateButton();
-    return { available, play, setHarvest, stop };
+    return { available, play, setHarvest, stop, updateMusic: music.update };
   } });
 })();

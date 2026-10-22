@@ -35,8 +35,8 @@ function bundle(entries) {
 
 const worker = `(() => {\n${bundle(["client/worker.mjs"])}\n})();`;
 const assets = Object.fromEntries([...CREATURE_ASSETS, AGENT_ATTACK_ASSET, "DesignAssets/Foods/food-berry-bush.png", "DesignAssets/Terrain/standing-tree-smooth-atlas.png", "DesignAssets/Terrain/poison-spore-atlas.png", "DesignAssets/Terrain/thorn-root-atlas.png"].map(name => [name, `data:${name.endsWith(".png") ? "image/png" : "image/webp"};base64,${readFileSync(resolve(root, name)).toString("base64")}`]));
-const browser = bundle(["server/attributes.mjs", "server/nests.mjs", "server/food.mjs", "server/birth.mjs", "server/attack.mjs", "client/birth.mjs", "client/client.mjs"]);
-const content = `(() => {\n${browser}\nconst workerSource = ${JSON.stringify(worker)};\nglobalThis.Spawner = Object.freeze({ ...modules["server/attributes.mjs"], ...modules["server/food.mjs"], ...modules["server/birth.mjs"], ...modules["server/attack.mjs"], ...modules["client/birth.mjs"], NEST_LEVELS: modules["server/nests.mjs"].NEST_LEVELS, createClient: (onState, onError, onSaved) => modules["client/client.mjs"].createClient(onState, onError, onSaved, workerSource), assets: ${JSON.stringify(assets)} });\n})();\n`;
+const browser = bundle(["server/attributes.mjs", "server/nests.mjs", "server/food.mjs", "server/birth.mjs", "server/attack.mjs", "server/beetle-animation.mjs", "client/birth.mjs", "client/client.mjs"]);
+const content = `(() => {\n${browser}\nconst workerSource = ${JSON.stringify(worker)};\nglobalThis.Spawner = Object.freeze({ ...modules["server/attributes.mjs"], ...modules["server/food.mjs"], ...modules["server/birth.mjs"], ...modules["server/attack.mjs"], ...modules["server/beetle-animation.mjs"], ...modules["client/birth.mjs"], NEST_LEVELS: modules["server/nests.mjs"].NEST_LEVELS, createClient: (onState, onError, onSaved) => modules["client/client.mjs"].createClient(onState, onError, onSaved, workerSource), assets: ${JSON.stringify(assets)} });\n})();\n`;
 writeFileSync(resolve(root, "client/runtime.js"), content.replace(/\r?\n/g, "\r\n"), "utf8");
 const designPath = resolve(root, "Design.html");
 const design = readFileSync(designPath, "utf8");

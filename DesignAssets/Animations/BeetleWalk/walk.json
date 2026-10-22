@@ -1,0 +1,212 @@
+{
+  "name": "spiny-back-beetle",
+  "action": "walk",
+  "status": "installed in runtime",
+  "provider": "built-in image_gen",
+  "workflow": "oojjrs-game-studio-sprite-pipeline",
+  "artworkMethod": "one corrected six-cel strip; one exact torso/head/mandible reference restored across all cels; drawn leg poses retained without part transforms",
+  "reference": "../BeetleAttackThreePhase/Frames/attack-00.png",
+  "frameSize": 512,
+  "columns": 8,
+  "frameCount": 32,
+  "frameMs": 40,
+  "durationMs": 1280,
+  "gaitCycleDurationMs": 640,
+  "gaitCyclesPerCellMove": 2,
+  "loop": true,
+  "rootMotion": false,
+  "sourcePoseCount": 6,
+  "uniquePoseCount": 6,
+  "poseDurationsMsPerCycle": [
+    120,
+    80,
+    120,
+    120,
+    80,
+    120
+  ],
+  "poseOrder": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    2,
+    2,
+    2,
+    3,
+    3,
+    3,
+    4,
+    4,
+    5,
+    5,
+    5,
+    0,
+    0,
+    0,
+    1,
+    1,
+    2,
+    2,
+    2,
+    3,
+    3,
+    3,
+    4,
+    4,
+    5,
+    5,
+    5
+  ],
+  "previewPauseMs": 0,
+  "bodyAnchor": [
+    270,
+    168
+  ],
+  "anchorKind": "main-ivory-spike-apex",
+  "normalization": {
+    "script": "D:\\.codex\\plugins\\cache\\openai-curated\\game-studio\\1dc19589\\scripts\\normalize_sprite_strip.py",
+    "frameSize": 379,
+    "sharedScale": 1.2718120805369129,
+    "approvedShellWidth": 290,
+    "sourceShellWidths": [
+      228,
+      230,
+      233,
+      231,
+      233,
+      231
+    ],
+    "calibration": "shared strip scale and spine apex registration followed by exact rigid body/head lock"
+  },
+  "sheet": "walk-v3.png",
+  "runtimeSheet": "walk-runtime-v3.webp",
+  "poseSheet": "walk-poses-v3.png",
+  "preview": "walk-preview-v3.gif",
+  "source": "walk-body-clean-source-v3.png",
+  "frames": [
+    {
+      "index": 0,
+      "file": "FramesV3/walk-00.png",
+      "sharedScale": 1.2718120805369129,
+      "shellWidth": 290,
+      "bodyAnchor": [
+        270,
+        168
+      ],
+      "anchorKind": "main-ivory-spike-apex",
+      "translation": [
+        74,
+        73
+      ],
+      "bodyLock": "BodyLockV3/reference.png"
+    },
+    {
+      "index": 1,
+      "file": "FramesV3/walk-01.png",
+      "sharedScale": 1.2718120805369129,
+      "shellWidth": 290,
+      "bodyAnchor": [
+        270,
+        168
+      ],
+      "anchorKind": "main-ivory-spike-apex",
+      "translation": [
+        73,
+        69
+      ],
+      "bodyLock": "BodyLockV3/reference.png"
+    },
+    {
+      "index": 2,
+      "file": "FramesV3/walk-02.png",
+      "sharedScale": 1.2718120805369129,
+      "shellWidth": 290,
+      "bodyAnchor": [
+        270,
+        168
+      ],
+      "anchorKind": "main-ivory-spike-apex",
+      "translation": [
+        76,
+        77
+      ],
+      "bodyLock": "BodyLockV3/reference.png"
+    },
+    {
+      "index": 3,
+      "file": "FramesV3/walk-03.png",
+      "sharedScale": 1.2718120805369129,
+      "shellWidth": 290,
+      "bodyAnchor": [
+        270,
+        168
+      ],
+      "anchorKind": "main-ivory-spike-apex",
+      "translation": [
+        75,
+        73
+      ],
+      "bodyLock": "BodyLockV3/reference.png"
+    },
+    {
+      "index": 4,
+      "file": "FramesV3/walk-04.png",
+      "sharedScale": 1.2718120805369129,
+      "shellWidth": 290,
+      "bodyAnchor": [
+        270,
+        168
+      ],
+      "anchorKind": "main-ivory-spike-apex",
+      "translation": [
+        73,
+        76
+      ],
+      "bodyLock": "BodyLockV3/reference.png"
+    },
+    {
+      "index": 5,
+      "file": "FramesV3/walk-05.png",
+      "sharedScale": 1.2718120805369129,
+      "shellWidth": 290,
+      "bodyAnchor": [
+        270,
+        168
+      ],
+      "anchorKind": "main-ivory-spike-apex",
+      "translation": [
+        77,
+        65
+      ],
+      "bodyLock": "BodyLockV3/reference.png"
+    }
+  ],
+  "prompt": "Use case: precise-object-edit.\nAsset type: production six-cel 2D game beetle walk-cycle correction.\nImage 1 is the EDIT TARGET: one horizontal strip of six walking poses. Image 2 is the clean neutral REFERENCE and exact torso/head/pincer authority.\n\nCorrect image 1 as ONE COMPLETE SIX-CEL HORIZONTAL STRIP. Preserve the six distinct hand-painted alternating leg poses and their order. Correct ONLY the unwanted changes to the rigid upper body, face and ivory pincers. The beetle is walking in place facing lower-left, in three-quarter front-left view.\n\nIn every slot COPY the same identical rigid torso, exactly three ivory dorsal spikes, same face with amber eyes and red nose, and same two relaxed ivory mandibles from reference image 2. Their outlines, width, height, coordinates relative to the slot, highlights, outlines and palette MUST MATCH BETWEEN ALL SIX CELLS. Body and head are held absolutely steady as the short articulated legs walk. No body resizing, no rocking, no rotating, no squashing, no perspective shifts. Pincers never open or close, their tips and gap never change. The ivory must stay smooth warm cream with continuous stable shading, no gray checkerboard, mottling, white noise or flickering highlights. The burgundy carapace must stay the same size and color as the reference. Only the legs may change pose between cels.\n\nKeep the original painterly high-quality game sprite style, thin dark teal outlines, burgundy shell, exactly three large ivory dorsal spikes, two ivory pincers and six short sturdy legs. Keep crisp clean true-alpha silhouette edges. Preserve the original six-step grounded alternating tripod gait and correct overlaps; legs attach naturally beneath the same static carapace in every cell. All cels show the same camera, lighting and scale. Do not redesign the character or draw an attack.\n\nLayout: exactly SIX equal-width slots in ONE ROW. A full beetle in each slot. Identical fixed body registration in each slot, generous transparent margins, no cut-off feet or spikes. Transparent RGBA background, NO checkerboard painted into the image, no ground or cast shadow, no labels/text, no numbers, no borders, no scenery, no additional cels or rows. Match reference image 2 exactly for the neutral face, smooth ivory material and rigid torso.\n",
+  "revision": 3,
+  "previewWebp": "walk-preview-v3.webp",
+  "bodyLock": {
+    "reference": "BodyLockV3/reference.png",
+    "mask": "BodyLockV3/mask.png",
+    "transition": "BodyLockV3/transition.png",
+    "transitionFeatherPx": 6,
+    "fixedRegions": [
+      "carapace",
+      "three dorsal spikes",
+      "face",
+      "mandibles"
+    ],
+    "pixelIdenticalAcrossFrames": true
+  },
+  "previewColor": {
+    "palette": "BodyLockV3/preview-palette.png",
+    "mode": "one global 256-color palette for every cel",
+    "dithering": false
+  },
+  "runtime": {
+    "action": "walk",
+    "atlas": "../Beetle/atlas.webp",
+    "manifest": "../Beetle/animations.json"
+  }
+}

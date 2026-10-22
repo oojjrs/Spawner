@@ -22,7 +22,7 @@ export function riskValue(agent, damage) {
 }
 
 export function createUtilityAI(context) {
-  const { state, size, homeCells, walkable, hazardAt, enemies, synergy, canHarvest } = context;
+  const { state, size, homeCells, deliveryCells, walkable, hazardAt, enemies, synergy, canHarvest } = context;
   let frontierSize = -1;
   let frontiers = [];
   const limit = value => Math.max(0, Math.min(1, value));
@@ -119,9 +119,9 @@ export function createUtilityAI(context) {
     return seconds;
   }
 
-  function homeRoute(agent, source) {
+  function homeRoute(agent, source, targets) {
     const proxy = { ...agent, x: source.x, y: source.y };
-    for (const cell of homeCells().toSorted((first, second) => distance(source, first) - distance(source, second)).slice(0, 4)) {
+    for (const cell of targets.toSorted((first, second) => distance(source, first) - distance(source, second)).slice(0, 4)) {
       const cells = route(proxy, cell);
       if (cells) return cells;
     }
@@ -241,13 +241,15 @@ export function createUtilityAI(context) {
       candidate.retention = retain && same ? 3 : 0;
       candidates.push(candidate);
     };
-    const home = homeRoute(agent, agent);
+    const home = homeRoute(agent, agent, homeCells());
     const storage = Math.max(0, NEST_LEVELS[state.nestLevel - 1].pointCapacity - state.evolutionPoints);
     const homeTime = home ? travelTime(agent, home, agent.carrying) : Infinity;
-    if (agent.carrying > 0 && storage > 0 && home) {
+    const delivery = agent.carrying > 0 && storage > 0 ? homeRoute(agent, agent, deliveryCells()) : null;
+    if (delivery) {
       const unload = agent.mode === "unload" ? Math.max(0.05, agent.unloadReady - state.simSeconds) : 1;
-      add("return", { ...home.at(-1), key: "home" }, home,
-        { foodGain: 60 * limit(Math.min(agent.carrying, storage) / (homeTime + unload) / 0.25) }, {});
+      const deliveryTime = travelTime(agent, delivery, agent.carrying);
+      add("return", { ...delivery.at(-1), key: "home" }, delivery,
+        { foodGain: 60 * limit(Math.min(agent.carrying, storage) / (deliveryTime + unload) / 0.25) }, {});
     }
     const missing = agent.stats.health - agent.health;
     if (missing > 0.01 && home) {
@@ -265,7 +267,7 @@ export function createUtilityAI(context) {
       for (const food of targets) {
         const cells = path(food);
         if (!cells) continue;
-        const back = homeRoute(agent, food);
+        const back = homeRoute(agent, food, deliveryCells());
         if (!back) continue;
         const available = Math.floor(Math.max(0, food.amount - reservation(food)));
         const maximum = Math.min(capacity - agent.carrying, available);

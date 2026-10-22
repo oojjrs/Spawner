@@ -1,0 +1,103 @@
+{
+  "name": "starter-sprout-bean",
+  "action": "hurt",
+  "status": "preview, awaiting review",
+  "provider": "built-in image_gen",
+  "workflow": "oojjrs-2d-sprite-animation",
+  "artworkMethod": "redrawn hurt and recovery body cels composited with original separate sprout parts",
+  "reference": "DesignAssets/Units/starter-sprout-bean.png",
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 4,
+  "frameCount": 8,
+  "pivot": [
+    256,
+    450
+  ],
+  "durationMs": 670,
+  "durationsMs": [
+    40,
+    40,
+    350,
+    80,
+    50,
+    40,
+    40,
+    30
+  ],
+  "loop": false,
+  "rootMotion": false,
+  "previewPauseMs": 900,
+  "firstAndLastFrameIdentical": true,
+  "sourceBodyBounds": [
+    [
+      84,
+      140,
+      647,
+      670
+    ],
+    [
+      61,
+      180,
+      660,
+      670
+    ],
+    [
+      75,
+      140,
+      638,
+      670
+    ]
+  ],
+  "sharedBodyScale": 0.5190734850675369,
+  "headOffsets": [
+    0,
+    7,
+    -14
+  ],
+  "poses": [
+    {
+      "body": 0,
+      "leafAngleDegrees": 0,
+      "durationMs": 40
+    },
+    {
+      "body": 1,
+      "leafAngleDegrees": 7,
+      "durationMs": 40
+    },
+    {
+      "body": 1,
+      "leafAngleDegrees": 15,
+      "durationMs": 350
+    },
+    {
+      "body": 1,
+      "leafAngleDegrees": 11,
+      "durationMs": 80
+    },
+    {
+      "body": 2,
+      "leafAngleDegrees": 3,
+      "durationMs": 50
+    },
+    {
+      "body": 0,
+      "leafAngleDegrees": -7,
+      "durationMs": 40
+    },
+    {
+      "body": 0,
+      "leafAngleDegrees": 3,
+      "durationMs": 40
+    },
+    {
+      "body": 0,
+      "leafAngleDegrees": 0,
+      "durationMs": 30
+    }
+  ],
+  "sourceSha256": "e45c4ef68a3df49c5a53c725e60e62e403fb0830a83baadf7e8a7b3639dbbc7b"
+}

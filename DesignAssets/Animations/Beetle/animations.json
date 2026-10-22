@@ -1,0 +1,230 @@
+{
+  "species": "spiny-back-beetle",
+  "frameSize": 512,
+  "columns": 5,
+  "frameCount": 19,
+  "sheet": "atlas.webp",
+  "neutral": "neutral.webp",
+  "pivot": [
+    265,
+    450
+  ],
+  "renderSize": 1.6,
+  "animations": {
+    "idle": {
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        0
+      ],
+      "durations": [
+        600,
+        320,
+        400,
+        320,
+        360
+      ],
+      "durationMs": 2000,
+      "loop": true
+    },
+    "walk": {
+      "frames": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "durations": [
+        120,
+        80,
+        120,
+        120,
+        80,
+        120,
+        120,
+        80,
+        120,
+        120,
+        80,
+        120
+      ],
+      "durationMs": 1280,
+      "loop": true
+    },
+    "attack": {
+      "frames": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        10
+      ],
+      "durations": [
+        80,
+        160,
+        280,
+        440,
+        160,
+        160
+      ],
+      "durationMs": 1280,
+      "loop": false,
+      "hitTimeMs": 520
+    },
+    "hurt": {
+      "frames": [
+        10,
+        15,
+        16,
+        10
+      ],
+      "durations": [
+        40,
+        470,
+        80,
+        80
+      ],
+      "durationMs": 670,
+      "loop": false
+    },
+    "death": {
+      "frames": [
+        0,
+        17,
+        18
+      ],
+      "durations": [
+        80,
+        120,
+        520
+      ],
+      "durationMs": 720,
+      "loop": false
+    },
+    "dead": {
+      "frames": [
+        18
+      ],
+      "durations": [
+        0
+      ],
+      "durationMs": 0,
+      "loop": false
+    }
+  },
+  "sources": {
+    "idle": {
+      "metadata": "DesignAssets/Animations/BeetleIdle/idle.json",
+      "revision": 1
+    },
+    "walk": {
+      "metadata": "DesignAssets/Animations/BeetleWalk/walk.json",
+      "revision": 3
+    },
+    "attack": {
+      "metadata": "DesignAssets/Animations/BeetleAttackThreePhase/attack.json",
+      "revision": 1
+    },
+    "hurt": {
+      "metadata": "DesignAssets/Animations/BeetleHurt/hurt.json",
+      "revision": 1
+    },
+    "death": {
+      "metadata": "DesignAssets/Animations/BeetleDeath/death.json",
+      "revision": 2
+    },
+    "dead": {
+      "metadata": "DesignAssets/Animations/BeetleDeath/dead.json",
+      "revision": 2
+    }
+  },
+  "poses": [
+    {
+      "file": "DesignAssets/Animations/BeetleIdle/Frames/idle-00.png",
+      "sha256": "a3093aec58c079ca58d2b0c3286b4a58bd20f57552049106036942aad819cba4"
+    },
+    {
+      "file": "DesignAssets/Animations/BeetleIdle/Frames/idle-01.png",
+      "sha256": "96ce8b2e05041985905e35847907fa6f311c6fb805afa7446d2afcb998f2ee7e"
+    },
+    {
+      "file": "DesignAssets/Animations/BeetleIdle/Frames/idle-02.png",
+      "sha256": "4d64c02e68c3b96b8fa231f9ed7415180e4517f2a7bed11cdc913c54da5c058e"
+    },
+    {
+      "file": "DesignAssets/Animations/BeetleIdle/Frames/idle-03.png",
+      "sha256": "21cfc2ae3752841cad57dc1c55383c4172f96c7b390a5500efd03d0288641548"
+    },
+    {
+      "file": "DesignAssets/Animations/BeetleWalk/FramesV3/walk-00.png",
+      "sha256": "a38b38e8b893cd0bed3272f78aebb75a06ecd306025619e7454015b9dce271f4"
+    },
+    {
+      "file": "DesignAssets/Animations/BeetleWalk/FramesV3/walk-01.png",
+      "sha256": "90a2caa73397596d4630449b46a31cd209941c70d3731cf96877b2d957a19b7c"
+    },
+    {
+      "file": "DesignAssets/Animations/BeetleWalk/FramesV3/walk-02.png",
+      "sha256": "5281b80040a33a89fa8d79cc7a565e2c5593c868b85800b77fee8305feb79f7f"
+    },
+    {
+      "file": "DesignAssets/Animations/BeetleWalk/FramesV3/walk-03.png",
+      "sha256": "bdb5720f1ab97d67ba3ea63ec9e55ed251f56fd30eb3f5196dbb3ec01419797c"
+    },
+    {
+      "file": "DesignAssets/Animations/BeetleWalk/FramesV3/walk-04.png",
+      "sha256": "33316251998edfcf3f8ecc04e3c84fda63ca366555cdb1c01f6121085327a4a2"
+    },
+    {
+      "file": "DesignAssets/Animations/BeetleWalk/FramesV3/walk-05.png",
+      "sha256": "eeac8f2d4740da3de5ce9ba692bb7278ecfe3079b6ae5b8226b179f49f89649c"
+    },
+    {
+      "file": "DesignAssets/Animations/BeetleAttackThreePhase/Frames/attack-00.png",
+      "sha256": "fb26a4557a1029229beb829afd8a397bf55ccceec2bb3c1d909f2b65be92be57"
+    },
+    {
+      "file": "DesignAssets/Animations/BeetleAttackThreePhase/Frames/attack-01.png",
+      "sha256": "75732667caf447d08077042d81f67c3b9811c260b9767a99e546b082a2168815"
+    },
+    {
+      "file": "DesignAssets/Animations/BeetleAttackThreePhase/Frames/attack-02.png",
+      "sha256": "0d9cb92ddf808b2fff71418c91a051281ecc5fbdbd8aad8cc4f560ea73fef2d2"
+    },
+    {
+      "file": "DesignAssets/Animations/BeetleAttackThreePhase/Frames/attack-03.png",
+      "sha256": "d430f5d143d00ee127a30a7fd70daef3be7859d8f4ec6990a97b7e29c3bcfdd3"
+    },
+    {
+      "file": "DesignAssets/Animations/BeetleAttackThreePhase/Frames/attack-04.png",
+      "sha256": "ca7b0fdb94c0135c45715713d9830c47f8e9d15ac12a905576d43b6aa1d14059"
+    },
+    {
+      "file": "DesignAssets/Animations/BeetleHurt/Frames/hurt-01.png",
+      "sha256": "0e713d5237b747f65ae99e86e32e1065a71846514b2cd5b34510e80633ecd901"
+    },
+    {
+      "file": "DesignAssets/Animations/BeetleHurt/Frames/hurt-02.png",
+      "sha256": "4f2eefec192c072ca52dd5aa2446be1fa539b3f5e64d0c69b35d285a9b6bf290"
+    },
+    {
+      "file": "DesignAssets/Animations/BeetleDeath/FramesV2/death-01.png",
+      "sha256": "a67a702a91b194590825a9e2c337698714aad8567eb8561426fbb5d67747982d"
+    },
+    {
+      "file": "DesignAssets/Animations/BeetleDeath/FramesV2/death-02.png",
+      "sha256": "166466e56a70b27662f8c7359a78c2177db5efb7ce120a3e1e3df4689c05380a"
+    }
+  ]
+}

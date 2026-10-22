@@ -9,7 +9,7 @@
       "padding": 64,
       "columns": 4,
       "frameCount": 8,
-      "frameMs": 250,
+      "frameMs": 62.5,
       "fixedRootY": 864,
       "source": "DesignAssets/Foods/food-mushroom-cluster.png",
       "sourceResolution": [
@@ -25,7 +25,8 @@
         -0.024250063223133014,
         -0.03429476829855972,
         -0.02425006322313302
-      ]
+      ],
+      "restMs": 500
     },
     {
       "kind": "single",
@@ -35,7 +36,7 @@
       "padding": 64,
       "columns": 4,
       "frameCount": 8,
-      "frameMs": 250,
+      "frameMs": 62.5,
       "fixedRootY": 864,
       "source": "DesignAssets/Foods/food-mushroom-single.png",
       "sourceResolution": [
@@ -51,13 +52,14 @@
         -0.033080573032321495,
         -0.04678299503338273,
         -0.03308057303232151
-      ]
+      ],
+      "restMs": 500
     }
   ],
   "playback": {
-    "mode": "continuous-small-left-right",
-    "cycleMs": 2000,
-    "frameMs": 250,
+    "mode": "single-sway-with-pause",
+    "cycleMs": 1000,
+    "frameMs": 62.5,
     "poses": [
       0,
       1,
@@ -67,12 +69,13 @@
       5,
       6,
       7
-    ]
+    ],
+    "restMs": 500
   },
   "style": "Current smooth hand-painted food sprites",
   "motionAdjustment": {
     "fixedRoots": true,
-    "motionGuide": "Previous lateral range and two-second cycle",
+    "motionGuide": "Half-second sway followed by a half-second rest",
     "interpolation": "high"
   }
 }

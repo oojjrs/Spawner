@@ -1,0 +1,162 @@
+{
+  "batchId": "AMG_Spawner_Slow_20261022",
+  "importedDate": "2026-10-22",
+  "provider": "ai-music-generator.ai",
+  "processing": "original bytes",
+  "tracks": [
+    {
+      "id": "151ca49c-18c7-4d8b-8004-af288c44fdc8",
+      "number": 1,
+      "title": "들판의 긴 호흡",
+      "mode": "peace",
+      "file": "DesignAssets/Audio/Bgm/peace/Pastoral_Largo-A-151ca49c.mp3",
+      "durationSeconds": 178.38097916666666,
+      "sourceFile": "Spawner/batches/AMG_Spawner_Slow_20261022/01_Pastoral_Largo/Pastoral_Largo-A-151ca49c.mp3",
+      "sourcePage": "https://ai-music-generator.ai/ko/song/151ca49c-18c7-4d8b-8004-af288c44fdc8",
+      "sha256": "de94b46141b02dd9393ec812c7d70021e4ce6d3e4bcf1f45481df3b74886301e"
+    },
+    {
+      "id": "e6202828-eebd-4e02-ad4e-0359b0b68e73",
+      "number": 2,
+      "title": "식물원의 아다지오",
+      "mode": "peace",
+      "file": "DesignAssets/Audio/Bgm/peace/Botanical_Adagio-A-e6202828.mp3",
+      "durationSeconds": 149.98897916666667,
+      "sourceFile": "Spawner/batches/AMG_Spawner_Slow_20261022/02_Botanical_Adagio/Botanical_Adagio-A-e6202828.mp3",
+      "sourcePage": "https://ai-music-generator.ai/ko/song/e6202828-eebd-4e02-ad4e-0359b0b68e73",
+      "sha256": "19e4d7d9201ee6d8711f895c874a3b4b499b67a832918419e49e52f7368ef65d"
+    },
+    {
+      "id": "69581a1e-e8fa-40dc-93ea-9cb7695aa2ae",
+      "number": 3,
+      "title": "연초록 초원의 여백",
+      "mode": "peace",
+      "file": "DesignAssets/Audio/Bgm/peace/Sage_Meadow-A-69581a1e.mp3",
+      "durationSeconds": 173.05297916666666,
+      "sourceFile": "Spawner/batches/AMG_Spawner_Slow_20261022/03_Sage_Meadow/Sage_Meadow-A-69581a1e.mp3",
+      "sourcePage": "https://ai-music-generator.ai/ko/song/69581a1e-e8fa-40dc-93ea-9cb7695aa2ae",
+      "sha256": "742e21b3befe5813bef93378fdfeb245c9f870e3a935c60da4b9daf96890d43e"
+    },
+    {
+      "id": "4f75cb49-bb45-4958-a113-90761650814b",
+      "number": 4,
+      "title": "아이보리 꽃잎의 정적",
+      "mode": "peace",
+      "file": "DesignAssets/Audio/Bgm/peace/Ivory_Petals-A-4f75cb49.mp3",
+      "durationSeconds": 172.81297916666668,
+      "sourceFile": "Spawner/batches/AMG_Spawner_Slow_20261022/04_Ivory_Petals/Ivory_Petals-A-4f75cb49.mp3",
+      "sourcePage": "https://ai-music-generator.ai/ko/song/4f75cb49-bb45-4958-a113-90761650814b",
+      "sha256": "57a6e031e40ca16dd7cc50e0a62f2f6150b8600c0f6bdd1de974fa1fe6d1f03c"
+    },
+    {
+      "id": "76ebee84-a974-4349-9d9b-c2dc90965893",
+      "number": 5,
+      "title": "새싹 안식처",
+      "mode": "peace",
+      "file": "DesignAssets/Audio/Bgm/peace/Seedling_Sanctuary-A-76ebee84.mp3",
+      "durationSeconds": 193.02097916666668,
+      "sourceFile": "Spawner/batches/AMG_Spawner_Slow_20261022/05_Seedling_Sanctuary/Seedling_Sanctuary-A-76ebee84.mp3",
+      "sourcePage": "https://ai-music-generator.ai/ko/song/76ebee84-a974-4349-9d9b-c2dc90965893",
+      "sha256": "771ba37411e343834303fa269d9a317493f8c52e26cc7c64ee256903edd075b3"
+    },
+    {
+      "id": "cc60334c-5495-4f2b-b669-f26675963a0e",
+      "number": 6,
+      "title": "들판의 긴 호흡",
+      "mode": "peace",
+      "file": "DesignAssets/Audio/Bgm/peace/Pastoral_Largo-B-cc60334c.mp3",
+      "durationSeconds": 163.90897916666665,
+      "sourceFile": "Spawner/batches/AMG_Spawner_Slow_20261022/01_Pastoral_Largo/Pastoral_Largo-B-cc60334c.mp3",
+      "sourcePage": "https://ai-music-generator.ai/ko/song/cc60334c-5495-4f2b-b669-f26675963a0e",
+      "sha256": "6f3296fe8c3932cb81569d0db592cee899c52d0db510a64b8248c9602164c4e4"
+    },
+    {
+      "id": "c1cadc9f-7915-4c8c-9ca9-0ae77d63f7a7",
+      "number": 7,
+      "title": "식물원의 아다지오",
+      "mode": "peace",
+      "file": "DesignAssets/Audio/Bgm/peace/Botanical_Adagio-B-c1cadc9f.mp3",
+      "durationSeconds": 142.33297916666666,
+      "sourceFile": "Spawner/batches/AMG_Spawner_Slow_20261022/02_Botanical_Adagio/Botanical_Adagio-B-c1cadc9f.mp3",
+      "sourcePage": "https://ai-music-generator.ai/ko/song/c1cadc9f-7915-4c8c-9ca9-0ae77d63f7a7",
+      "sha256": "caa61a168e1d4e75864f08ef2907baee2a008c46ab05765843bebca9f8a35333"
+    },
+    {
+      "id": "d8113a38-b0c6-4ba9-b468-1d17794a1697",
+      "number": 8,
+      "title": "연초록 초원의 여백",
+      "mode": "peace",
+      "file": "DesignAssets/Audio/Bgm/peace/Sage_Meadow-B-d8113a38.mp3",
+      "durationSeconds": 212.58097916666668,
+      "sourceFile": "Spawner/batches/AMG_Spawner_Slow_20261022/03_Sage_Meadow/Sage_Meadow-B-d8113a38.mp3",
+      "sourcePage": "https://ai-music-generator.ai/ko/song/d8113a38-b0c6-4ba9-b468-1d17794a1697",
+      "sha256": "3c27903e4a68ca1ae802682386625fda7bfca3928d7c3ce5bd913189dc529742"
+    },
+    {
+      "id": "4ae4053d-6da6-4ec9-91f1-d09c3b67a67b",
+      "number": 9,
+      "title": "아이보리 꽃잎의 정적",
+      "mode": "peace",
+      "file": "DesignAssets/Audio/Bgm/peace/Ivory_Petals-B-4ae4053d.mp3",
+      "durationSeconds": 153.61297916666666,
+      "sourceFile": "Spawner/batches/AMG_Spawner_Slow_20261022/04_Ivory_Petals/Ivory_Petals-B-4ae4053d.mp3",
+      "sourcePage": "https://ai-music-generator.ai/ko/song/4ae4053d-6da6-4ec9-91f1-d09c3b67a67b",
+      "sha256": "7b89dacbcaa57062edbdf7b15729d312b3496242aeecde2c9063c3d7c71e7a44"
+    },
+    {
+      "id": "f7493288-4cf5-4acb-851b-a6793cc08713",
+      "number": 10,
+      "title": "새싹 안식처",
+      "mode": "peace",
+      "file": "DesignAssets/Audio/Bgm/peace/Seedling_Sanctuary-B-f7493288.mp3",
+      "durationSeconds": 198.37297916666665,
+      "sourceFile": "Spawner/batches/AMG_Spawner_Slow_20261022/05_Seedling_Sanctuary/Seedling_Sanctuary-B-f7493288.mp3",
+      "sourcePage": "https://ai-music-generator.ai/ko/song/f7493288-4cf5-4acb-851b-a6793cc08713",
+      "sha256": "bef4208209a2647777df60619e5f701ec5a2ec0aa00f2d16dbc796f5cca09627"
+    },
+    {
+      "id": "dbcd7048-2b96-4e47-a740-e983d6391a4a",
+      "number": 25,
+      "title": "목관·피치카토 · 지속 긴장",
+      "mode": "combat",
+      "file": "DesignAssets/Audio/Bgm/combat/Dry_Chamber_Tension-A-dbcd7048.mp3",
+      "durationSeconds": 58.812979166666665,
+      "sourceFile": "Spawner/batches/AMG_Spawner_Slow_20261022/13_Dry_Chamber_Tension/Dry_Chamber_Tension-A-dbcd7048.mp3",
+      "sourcePage": "https://ai-music-generator.ai/ko/song/dbcd7048-2b96-4e47-a740-e983d6391a4a",
+      "sha256": "96db5db593f1288beb83125f1a567dc85fb101a5d05992002621dc98856070f1"
+    },
+    {
+      "id": "550b7075-f828-4dbd-a24a-036c30f3851a",
+      "number": 26,
+      "title": "목관·피치카토 · 지속 긴장",
+      "mode": "combat",
+      "file": "DesignAssets/Audio/Bgm/combat/Dry_Chamber_Tension-B-550b7075.mp3",
+      "durationSeconds": 66.97297916666666,
+      "sourceFile": "Spawner/batches/AMG_Spawner_Slow_20261022/13_Dry_Chamber_Tension/Dry_Chamber_Tension-B-550b7075.mp3",
+      "sourcePage": "https://ai-music-generator.ai/ko/song/550b7075-f828-4dbd-a24a-036c30f3851a",
+      "sha256": "7d3fb0a9081cab0ca8bb10d2be87127f72c6cac0578e2fdf6d5c953206b0fa72"
+    },
+    {
+      "id": "a969b162-ab48-4f4d-90ae-238983f016b5",
+      "number": 27,
+      "title": "목관·피치카토 · 지속 긴장",
+      "mode": "combat",
+      "file": "DesignAssets/Audio/Bgm/combat/Dry_Chamber_240-A-a969b162.mp3",
+      "durationSeconds": 240.01297916666667,
+      "sourceFile": "Spawner/batches/AMG_Spawner_Slow_20261022/14_Dry_Chamber_240/Dry_Chamber_240-A-a969b162.mp3",
+      "sourcePage": "https://ai-music-generator.ai/ko/song/a969b162-ab48-4f4d-90ae-238983f016b5",
+      "sha256": "63dc9a1a1ff7f270ad144fdb1523f88d5d95344de6d0f795fb177e672e978ec1"
+    },
+    {
+      "id": "f0ac58f1-65a3-4466-8e6c-b59fa64e3a92",
+      "number": 28,
+      "title": "목관·피치카토 · 지속 긴장",
+      "mode": "combat",
+      "file": "DesignAssets/Audio/Bgm/combat/Dry_Chamber_240-B-f0ac58f1.mp3",
+      "durationSeconds": 240.01297916666667,
+      "sourceFile": "Spawner/batches/AMG_Spawner_Slow_20261022/14_Dry_Chamber_240/Dry_Chamber_240-B-f0ac58f1.mp3",
+      "sourcePage": "https://ai-music-generator.ai/ko/song/f0ac58f1-65a3-4466-8e6c-b59fa64e3a92",
+      "sha256": "e7b889594e4d172aad1ec85fc14ff235ae63d1e1986796a422966de00d3a21c9"
+    }
+  ]
+}

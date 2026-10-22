@@ -1,0 +1,22 @@
+{
+  "name": "spiny-back-beetle",
+  "action": "dead",
+  "status": "installed in runtime",
+  "frameSize": 512,
+  "frameCount": 1,
+  "loop": false,
+  "rootMotion": false,
+  "static": true,
+  "hold": "indefinite",
+  "sourceAnimation": "death.json",
+  "sourcePose": 2,
+  "image": "dead-v2.png",
+  "runtimeImage": "dead-v2.webp",
+  "revision": 2,
+  "pose": "forward-collapse with closed eyes and slack legs; no side roll",
+  "runtime": {
+    "action": "dead",
+    "atlas": "../Beetle/atlas.webp",
+    "manifest": "../Beetle/animations.json"
+  }
+}

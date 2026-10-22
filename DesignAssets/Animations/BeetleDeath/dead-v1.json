@@ -1,0 +1,15 @@
+{
+  "name": "spiny-back-beetle",
+  "action": "dead",
+  "status": "terminal corpse pose; not installed in runtime",
+  "frameSize": 512,
+  "frameCount": 1,
+  "loop": false,
+  "rootMotion": false,
+  "static": true,
+  "hold": "indefinite",
+  "sourceAnimation": "death.json",
+  "sourcePose": 4,
+  "image": "dead.png",
+  "runtimeImage": "dead.webp"
+}
