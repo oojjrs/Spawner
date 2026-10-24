@@ -218,6 +218,7 @@
     foodSelectionShape.getContext("2d").fillRect(0, 0, 1, 1);
     const starterObjectSprite = new Image();
     const agentSprites = new Map();
+    const agentImageSources = new WeakMap();
     const attackSprites = new Map();
     const attackSheet = new Image();
     attackSheet.src = assetSource(AGENT_ATTACK_ASSET);
@@ -2777,8 +2778,8 @@
     function agentBirthPose(agent, spread) {
       const birth = agent.birth;
       if (!birth) return null;
-      const elapsed = state.simSeconds - birth.startedAt;
-      if (elapsed < 0 || elapsed >= AGENT_BIRTH_DURATION) return null;
+      const elapsed = Math.max(0, state.simSeconds - birth.startedAt);
+      if (elapsed >= AGENT_BIRTH_DURATION) return null;
       const entry = colonyEntries.find(candidate => candidate.id === birth.colonyId);
       const mouth = entry ? foodDeliveryTarget(entry) : null;
       const fromX = mouth ? mouth.x - .5 : birth.fromX;
@@ -4790,6 +4791,12 @@
       return agentSprites.get(key);
     }
 
+    function agentImageSource(agent) {
+      const sprite = agentSprite(agent);
+      if (!agentImageSources.has(sprite)) agentImageSources.set(sprite, sprite.toDataURL("image/png"));
+      return agentImageSources.get(sprite);
+    }
+
     function composeAgentAntennae(context, attributes) {
       const count = attributes.antenna;
       if (!count) return;
@@ -4922,7 +4929,7 @@
         button.className = "template-spawn";
         button.setAttribute("aria-label", template.name + " 탄생, 진화 포인트 " + birthCost(template) + "점");
         const image = document.createElement("img");
-        image.src = agentSprite({ attributes: attributeCounts(template.slots), carrying: 0 }).src;
+        image.src = agentImageSource({ attributes: attributeCounts(template.slots), carrying: 0 });
         image.alt = "";
         const name = document.createElement("strong");
         name.textContent = template.name;
@@ -5049,7 +5056,7 @@
       if (!unitDraft || evolutionPanel.hidden) return;
       const counts = attributeCounts(unitDraft.slots);
       const stats = unitStats(counts);
-      document.getElementById("design-preview-image").src = agentSprite({ attributes: counts, carrying: 0 }).src;
+      document.getElementById("design-preview-image").src = agentImageSource({ attributes: counts, carrying: 0 });
       const statValues = [["시야", stats.vision + "칸"], ["운반", stats.capacity + "개"],
         ["이동", Number(agentSpeed({ stats }).toFixed(2)) + "칸/초"], ["체력", stats.health],
         ["환경 피해 감소", ((1 - stats.resistance) * 100).toFixed(2).replace(/\.?0+$/, "") + "%"]];
@@ -5679,19 +5686,44 @@
     const welcomeStatus = document.getElementById("welcome-status");
     const roomTitle = document.getElementById("room-title");
     const roomList = document.getElementById("room-list");
+    const roomImport = document.getElementById("room-import");
+    const roomImportFile = document.getElementById("room-import-file");
     let lobbyBusy = false;
     let lobbyVersion = 0;
     let roomsSignature = "";
     const client = createClient(packet => {
       if (connection.active && welcome.hidden && !document.hidden) applySnapshot(packet);
-    }, message => {
+    }, showConnectionError, () => {});
+
+    function showConnectionError(message, storageError) {
       connection.online = false;
       audio.updateMusic(null);
       setEvolutionText(connectionStatus, message);
       connectionStatus.hidden = false;
       setEvolutionText(welcomeStatus, message);
+      if (storageError) {
+        const actions = document.createElement("span");
+        actions.className = "storage-recovery";
+        const retry = document.createElement("button");
+        retry.type = "button";
+        retry.className = "secondary-action";
+        retry.textContent = "저장 재시도";
+        retry.addEventListener("click", async () => {
+          retry.disabled = true;
+          try { await client.call("resume", { visible: !document.hidden }); }
+          catch (error) { showConnectionError(error.message, true); }
+          finally { retry.disabled = false; }
+        });
+        const backup = document.createElement("button");
+        backup.type = "button";
+        backup.className = "secondary-action";
+        backup.textContent = "백업 내보내기";
+        backup.addEventListener("click", () => exportRoom({ id: connection.roomId }));
+        actions.append(retry, backup);
+        connectionStatus.append(actions);
+      }
       updateColonyPanel();
-    }, () => {});
+    }
 
     function beginSynchronization() {
       connection.synchronizing = true;
@@ -5806,7 +5838,9 @@
         const result = await client.call("command", { roomId: connection.roomId, action });
         return result;
       } catch (error) {
-        setEvolutionText(connectionStatus, error.message);
+        if (!connectionStatus.querySelector(".storage-recovery")) {
+          setEvolutionText(connectionStatus, error.message);
+        }
         connectionStatus.hidden = false;
         if (unitDraft) unitDraft.error = error.message;
         setEvolutionText(nestStatus, error.message);
@@ -5966,7 +6000,10 @@
         link.click();
         setTimeout(() => URL.revokeObjectURL(url), 10000);
         welcomeStatus.textContent = "백업 파일을 내보냈습니다.";
-      } catch (error) { setEvolutionText(welcomeStatus, error.message); }
+      } catch (error) {
+        if (welcome.hidden) showConnectionError(error.message, true);
+        else setEvolutionText(welcomeStatus, error.message);
+      }
       finally { lobbyBusy = false; }
     }
 
@@ -5988,6 +6025,26 @@
       lobbyAction("create", { title: roomTitle.value.trim() });
     });
     document.getElementById("rooms-refresh").addEventListener("click", refreshRooms);
+    roomImport.addEventListener("click", () => {
+      if (!lobbyBusy) roomImportFile.click();
+    });
+    roomImportFile.addEventListener("change", async () => {
+      const file = roomImportFile.files[0];
+      if (!file || lobbyBusy) { roomImportFile.value = ""; return; }
+      lobbyBusy = true;
+      roomImport.disabled = true;
+      welcomeStatus.textContent = "백업 불러오는 중…";
+      try {
+        const result = await client.call("import", { text: await file.text() });
+        welcomeStatus.textContent = result.count + "개 방을 불러왔습니다.";
+        await refreshRooms();
+      } catch (error) { setEvolutionText(welcomeStatus, error.message); }
+      finally {
+        roomImportFile.value = "";
+        roomImport.disabled = false;
+        lobbyBusy = false;
+      }
+    });
     randomRoomName();
     {
       client.call("session", null).then((result) => {
@@ -6012,7 +6069,9 @@
         client.call("visibility", { visible }).catch(error => {
           connection.online = false;
           connection.synchronizing = false;
-          setEvolutionText(connectionStatus, error.message);
+          if (!connectionStatus.querySelector(".storage-recovery")) {
+            setEvolutionText(connectionStatus, error.message);
+          }
           connectionStatus.hidden = false;
           scheduleRender();
         });

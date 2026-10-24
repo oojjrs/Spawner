@@ -8,7 +8,7 @@ export function createClient(onState, onError, onSaved, workerSource) {
     if (workerUrl) { URL.revokeObjectURL(workerUrl); workerUrl = null; }
     const message = event.data;
     if (message.type === "state") { onState(message.packet); return; }
-    if (message.type === "error") { onError(message.error); return; }
+    if (message.type === "error") { onError(message.error, message.storageError === true); return; }
     if (message.type === "saved") { onSaved(message); return; }
     const request = requests.get(message.id);
     if (!request) return;

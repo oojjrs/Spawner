@@ -7,6 +7,7 @@ let running = false;
 let visible = true;
 let dirty = false;
 let storageError = false;
+let resumeAfterStorageError = false;
 let lastTick = Date.now();
 let lastSave = 0;
 let queue = Promise.resolve();
@@ -33,14 +34,20 @@ async function persist() {
     await storage.put(saved);
     room.updatedAt = saved.updatedAt;
     dirty = false;
+    if (storageError && resumeAfterStorageError) {
+      running = true;
+      lastTick = Date.now();
+    }
     storageError = false;
+    resumeAfterStorageError = false;
     lastSave = Date.now();
     savedNotice();
   } catch (error) {
     storageError = true;
+    resumeAfterStorageError ||= running;
     running = false;
     const failure = new Error("브라우저에 저장하지 못해 진행을 멈췄습니다. 공간을 확보한 뒤 다시 시도하거나 백업을 내보내 주세요.", { cause: error });
-    postMessage({ type: "error", error: failure.message });
+    postMessage({ type: "error", error: failure.message, storageError: true });
     throw failure;
   }
 }
@@ -108,6 +115,7 @@ async function handle(type, data) {
   }
   if (type === "pause") {
     running = false;
+    resumeAfterStorageError = false;
     await persist();
     return null;
   }
@@ -186,7 +194,7 @@ setInterval(() => {
       if (Date.now() - lastSave >= 5000) await persist();
     } catch (error) {
       running = false;
-      postMessage({ type: "error", error: error.message });
+      postMessage({ type: "error", error: error.message, storageError });
     } finally { stepping = false; }
   });
 }, 100);

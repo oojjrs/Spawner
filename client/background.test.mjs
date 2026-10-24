@@ -176,6 +176,38 @@ test("백그라운드 저장 실패 시 진행을 멈추고 오류를 알린다"
   assert.equal(client.steps.length, count);
 });
 
+test("저장 실패 뒤 복귀하여 재저장하면 정지한 시간을 건너뛰고 진행을 재개한다", async () => {
+  const client = worker();
+  await client.start();
+  client.failSaving(true);
+  client.jump(6000);
+  await client.pulse();
+  const stoppedAt = (await client.saved()).simSeconds;
+  assert.ok(stoppedAt > 0 && stoppedAt <= 6);
+  client.jump(10000);
+  client.failSaving(false);
+  await client.call("visibility", { visible: true });
+  assert.ok(Math.abs((await client.saved()).simSeconds - stoppedAt) < 1e-9);
+  client.jump(1000);
+  await client.pulse();
+  assert.ok(Math.abs((await client.saved()).simSeconds - stoppedAt - 1) < 1e-9);
+});
+
+test("저장 오류 뒤 명시적으로 일시정지하면 재저장해도 자동으로 재개하지 않는다", async () => {
+  const client = worker();
+  await client.start();
+  client.failSaving(true);
+  client.jump(6000);
+  await client.pulse();
+  const stoppedAt = (await client.saved()).simSeconds;
+  client.failSaving(false);
+  await client.call("pause", null);
+  client.jump(1000);
+  await client.call("visibility", { visible: true });
+  await client.pulse();
+  assert.ok(Math.abs((await client.saved()).simSeconds - stoppedAt) < 1e-9);
+});
+
 function audio() {
   const listeners = new Map();
   const starts = [];
