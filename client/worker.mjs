@@ -4,10 +4,10 @@ import { openStorage } from "./storage.mjs";
 let storage;
 let room = null;
 let running = false;
+let visible = true;
 let dirty = false;
 let storageError = false;
-let lastTick = performance.now();
-let lastSnapshot = 0;
+let lastTick = Date.now();
 let lastSave = 0;
 let queue = Promise.resolve();
 
@@ -34,7 +34,7 @@ async function persist() {
     room.updatedAt = saved.updatedAt;
     dirty = false;
     storageError = false;
-    lastSave = performance.now();
+    lastSave = Date.now();
     savedNotice();
   } catch (error) {
     storageError = true;
@@ -46,7 +46,34 @@ async function persist() {
 }
 
 function publish(includeWorld) {
-  if (room) postMessage({ type: "state", packet: snapshotRoom(room, includeWorld) });
+  if (room && visible) postMessage({ type: "state", packet: { ...snapshotRoom(room, includeWorld),
+    sampledAt: performance.timeOrigin + performance.now() - Math.max(0, Date.now() - lastTick) } });
+}
+
+async function advance() {
+  if (!running || !room) return;
+  const now = Date.now();
+  if (now < lastTick) lastTick = now;
+  const catchingUp = now - lastTick > 250;
+  if (visible && catchingUp) postMessage({ type: "state", packet: { roomId: room.id, catchingUp: true } });
+  let startedAt = performance.now();
+  try {
+    while (lastTick < now) {
+      const milliseconds = Math.min(100, now - lastTick);
+      tickRoom(room, milliseconds / 1000);
+      lastTick += milliseconds;
+      dirty = true;
+      if (performance.now() - startedAt >= 8 && lastTick < now) {
+        if (Date.now() - lastSave >= 5000) await persist();
+        await new Promise(resolve => setTimeout(resolve, 0));
+        startedAt = performance.now();
+      }
+    }
+    if (catchingUp) await persist();
+  } catch (error) {
+    running = false;
+    throw error;
+  }
 }
 
 async function handle(type, data) {
@@ -74,10 +101,10 @@ async function handle(type, data) {
     }
     await storage.setSetting("roomId", room.id);
     storageError = false;
-    lastTick = performance.now();
+    lastTick = Date.now();
     lastSave = lastTick;
     running = data.visible;
-    return snapshotRoom(room, true);
+    return { ...snapshotRoom(room, true), sampledAt: performance.timeOrigin + performance.now() };
   }
   if (type === "pause") {
     running = false;
@@ -87,10 +114,17 @@ async function handle(type, data) {
   if (type === "resume") {
     await persist();
     storageError = false;
-    lastTick = performance.now();
-    lastSave = lastTick;
+    if (!running) {
+      lastTick = Date.now();
+      lastSave = lastTick;
+    }
     running = !!room;
     publish(false);
+    return null;
+  }
+  if (type === "visibility") {
+    await persist();
+    if (visible) publish(false);
     return null;
   }
   if (type === "command") {
@@ -129,8 +163,13 @@ function enqueue(action) {
 
 self.onmessage = event => {
   const { id, type, data } = event.data;
+  if (type === "visibility" || type === "resume") visible = data.visible;
   enqueue(async () => {
-    try { await ready; postMessage({ id, result: await handle(type, data) }); }
+    try {
+      await ready;
+      await advance();
+      postMessage({ id, result: await handle(type, data) });
+    }
     catch (error) { postMessage({ id, error: error.message }); }
   });
 };
@@ -142,13 +181,9 @@ setInterval(() => {
   enqueue(async () => {
     try {
       if (!running || !room) return;
-      const now = performance.now();
-      const elapsed = Math.min(0.25, Math.max(0, (now - lastTick) / 1000));
-      lastTick = now;
-      tickRoom(room, elapsed);
-      dirty = true;
-      if (now - lastSnapshot >= 250) { publish(false); lastSnapshot = now; }
-      if (now - lastSave >= 5000) await persist();
+      await advance();
+      publish(false);
+      if (Date.now() - lastSave >= 5000) await persist();
     } catch (error) {
       running = false;
       postMessage({ type: "error", error: error.message });

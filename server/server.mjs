@@ -7,12 +7,15 @@ import { resolve, dirname } from "node:path";
 import { generateWorld } from "./world.mjs";
 import { createGame } from "./game.mjs";
 import { createCreatures, CREATURE_ASSETS } from "./creatures.mjs";
+import { populateResourceNodes, clearResourceHazards, RESOURCE_TYPES } from "./resources.mjs";
+import { isTreeFood } from "./food.mjs";
+import { RESOURCE_HARVEST_ANIMATIONS } from "../client/harvest-assets.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const dataDirectory = resolve(process.env.SPAWNER_DATA_DIR || resolve(root, ".data"));
 const dataPath = resolve(dataDirectory, "rooms.json");
 const instanceId = createHash("sha256").update(root.replace(/[\\/]+$/, "").toLowerCase()).digest("hex");
-const revision = (await Promise.all(["game.mjs", "server.mjs", "world.mjs", "attributes.mjs", "creatures.mjs", "beetle-animation.mjs", "utility.mjs", "nests.mjs"].map(async (file) =>
+const revision = (await Promise.all(["game.mjs", "server.mjs", "world.mjs", "resources.mjs", "food.mjs", "burrows.mjs", "tribes.mjs", "attributes.mjs", "creatures.mjs", "raids.mjs", "beetle-animation.mjs", "utility.mjs", "nests.mjs"].map(async (file) =>
   createHash("sha256").update(await readFile(resolve(root, "server", file))).digest("hex")))).join("");
 const sessions = new Map();
 const rooms = new Map();
@@ -40,15 +43,17 @@ function renameColony(room, ownerId, action) {
   return { colonyId: colony.id };
 }
 
-function makeRoom(roomId, title, hostId, seed) {
-  const world = generateWorld(seed);
+function makeRoom(roomId, title, hostId, seed, generationVersion) {
+  const world = generateWorld(seed, generationVersion);
   const room = { id: roomId, title, hostId, seed, world, simSeconds: 0, revision: 0,
     colonies: [], games: new Map(), food: new Map(), foodSpots: new Map(), lastActive: 0, lastVisitedAt: Date.now(), played: false };
   const terrainTypes = ["deep", "shallow", "coast", "land", "grassland", "forest", "lowMountain", "highMountain", "ridge"];
-  for (const [x, y, amount] of world.food) {
-    const cell = { x, y, amount, initialAmount: amount, terrain: terrainTypes[world.terrain[y * 320 + x]] };
+  for (const [x, y, amount, resourceType] of world.food) {
+    const cell = { x, y, amount, initialAmount: amount, resourceType, terrain: terrainTypes[world.terrain[y * 320 + x]] };
     room.food.set(x + "," + y, cell);
   }
+  populateResourceNodes(room);
+  clearResourceHazards(room);
   indexFood(room);
   room.creatureSystem = createCreatures(room, null);
   return room;
@@ -89,15 +94,19 @@ function payload(room, session, includeWorld) {
   prepare(room);
   return { roomId: room.id, title: room.title, hostId: room.hostId, userId: session.id,
     revision: room.revision, colonyId: room.colonies.find((colony) => colony.ownerId === session.id).id,
-    colonies: room.colonies.filter(colony => room.games.get(session.id).colonyKnown(colony)).map((colony) => ({ ...colony, nestLevel: room.games.get(colony.ownerId).nestLevel, occupiedCells: [...colony.occupiedCells] })),
-    world: includeWorld ? { size: 320, seed: room.seed, terrain: [...room.world.terrain], hazards: [...room.world.hazards] } : undefined,
+    colonies: room.colonies.filter(colony => room.games.get(session.id).colonyKnown(colony)).map((colony) => ({ ...colony, nestLevel: room.games.get(colony.ownerId).nestLevel,
+      nestHealth: room.games.get(colony.ownerId).nest.health, nestMaxHealth: room.games.get(colony.ownerId).nest.maxHealth, occupiedCells: [...colony.occupiedCells] })),
+    world: includeWorld ? { size: 320, seed: room.seed, terrain: [...room.world.terrain], hazards: [...room.world.hazards], burrows: room.world.burrows,
+      resourceCells: [...room.food.values()].filter(cell => cell.kind !== "corpse" && !isTreeFood(cell, room.world)).map(cell => [cell.x, cell.y]) } : undefined,
     state: room.games.get(session.id).snapshot() };
 }
 
 function persist() {
   const body = JSON.stringify({ version: 1, sessions: [...sessions], rooms: [...rooms.values()].map((room) => ({
     id: room.id, title: room.title, hostId: room.hostId, seed: room.seed, simSeconds: room.simSeconds,
-    revision: room.revision, lastVisitedAt: room.lastVisitedAt, played: room.played, colonies: room.colonies.map((colony) => ({ ...colony, occupiedCells: [...colony.occupiedCells] })),
+    worldGenerationVersion: room.world.generationVersion,
+    revision: room.revision, lastVisitedAt: room.lastVisitedAt, played: room.played, resourceVersion: room.resourceVersion,
+    colonies: room.colonies.map((colony) => ({ ...colony, occupiedCells: [...colony.occupiedCells] })),
     food: [...room.food], creatures: room.creatureSystem.save(), games: [...room.games].map(([owner, game]) => [owner, game.save()])
   })) });
   const task = persistence.catch(() => {}).then(async () => {
@@ -135,12 +144,15 @@ try {
   if (saved.version !== 1) throw new Error("지원하지 않는 저장 형식입니다.");
   for (const [token, session] of saved.sessions) sessions.set(token, session);
   for (const savedRoom of saved.rooms) {
-    const room = makeRoom(savedRoom.id, savedRoom.title, savedRoom.hostId, savedRoom.seed);
+    const room = makeRoom(savedRoom.id, savedRoom.title, savedRoom.hostId, savedRoom.seed, savedRoom.worldGenerationVersion ?? 1);
     room.lastVisitedAt = Number.isFinite(savedRoom.lastVisitedAt) ? savedRoom.lastVisitedAt : Date.now();
     room.played = typeof savedRoom.played === "boolean" ? savedRoom.played : true;
     room.simSeconds = savedRoom.simSeconds;
     room.revision = savedRoom.revision;
     room.food = new Map(savedRoom.food);
+    room.resourceVersion = Number.isInteger(savedRoom.resourceVersion) ? savedRoom.resourceVersion : 0;
+    populateResourceNodes(room);
+    clearResourceHazards(room);
     indexFood(room);
     room.colonies = savedRoom.colonies.map((colony) => ({ ...colony, occupiedCells: new Set(colony.occupiedCells) }));
     for (const [owner, savedGame] of savedRoom.games) {
@@ -304,11 +316,12 @@ async function route(request, response) {
     response.writeHead(200, { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-cache" });
     return response.end(html);
   }
-  if (request.method === "GET" && CREATURE_ASSETS.includes(url.pathname.slice(1))) {
+  if (request.method === "GET" && (CREATURE_ASSETS.includes(url.pathname.slice(1)) || RESOURCE_TYPES.some(definition => definition.image === url.pathname.slice(1)) ||
+      RESOURCE_HARVEST_ANIMATIONS.some(animation => animation.image === url.pathname.slice(1)))) {
     response.writeHead(200, { "Content-Type": url.pathname.endsWith(".png") ? "image/png" : "image/webp", "Cache-Control": "no-cache" });
     return response.end(await readFile(resolve(root, url.pathname.slice(1))));
   }
-  if (request.method === "GET" && ["/server/attributes.mjs", "/server/nests.mjs"].includes(url.pathname)) {
+  if (request.method === "GET" && ["/server/attributes.mjs", "/server/nests.mjs", "/server/resources.mjs", "/server/food.mjs"].includes(url.pathname)) {
     response.writeHead(200, { "Content-Type": "text/javascript; charset=utf-8", "Cache-Control": "no-cache" });
     return response.end(await readFile(resolve(root, url.pathname.slice(1))));
   }

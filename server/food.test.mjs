@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { isTreeFood } from "./food.mjs";
+import { RESOURCE_TYPES, canHarvestResource } from "./resources.mjs";
 import { createGame } from "./game.mjs";
 
 function fixture(terrain, kind, slots) {
@@ -49,13 +50,34 @@ test("새싹콩과 기존 속성은 열매를 채집 대상으로 선택하거�
   }
 });
 
-test("빈 땅의 버섯과 숲에 놓인 사체는 계속 수확한다", () => {
-  for (const [terrain, kind] of [["grassland", undefined], ["forest", "corpse"]]) {
+test("빈 땅의 기존 버섯은 계속 수확한다", () => {
+  for (const [terrain, kind] of [["grassland", undefined]]) {
     const f = fixture(terrain, kind, ["strength", "antenna"]);
     advance(f, 20);
     assert.ok(f.food.amount < 20);
     assert.ok(f.game.snapshot().colonyFood > 0);
   }
+});
+
+test("무속성 개체는 버섯만 채집하고 다른 먹이·재료·사체는 선택하지 않는다", () => {
+  const world = { hazards: new Uint8Array(320 * 320) };
+  assert.equal(canHarvestResource(null, world), false);
+  assert.equal(canHarvestResource({ x: 43, y: 42, terrain: "grassland", resourceType: "unknown" }, world), false);
+  assert.equal(canHarvestResource({ x: 43, y: 42, terrain: "forest", resourceType: "honey-mushrooms" }, world), true);
+  for (const definition of RESOURCE_TYPES) {
+    assert.equal(canHarvestResource({ x: 43, y: 42, terrain: "grassland", resourceType: definition.key }, world),
+      definition.key === "honey-mushrooms");
+    if (definition.key === "honey-mushrooms") continue;
+    const f = fixture("grassland", undefined, []);
+    f.food.resourceType = definition.key;
+    f.food.kind = definition.key === "meat" ? "corpse" : "resource";
+    f.game.restore(f.game.save());
+    advance(f, 10);
+    assert.equal(f.food.amount, 20, definition.key);
+    assert.ok(f.game.agents.every(agent => agent.carrying === 0 &&
+      !agent.utility?.scores.some(score => score.action === "collect" && score.key === "43,42")), definition.key);
+  }
+  assert.equal(canHarvestResource({ x: 43, y: 42, terrain: "forest", kind: "corpse" }, world), false);
 });
 
 test("기존 저장의 열매 채집 명령은 복원 후 수확 전에 취소한다", () => {

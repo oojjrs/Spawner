@@ -200,3 +200,29 @@ test("상태 요청마다 저장·복원해도 채집과 하역을 이어간다"
   assert.ok(f.game.snapshot().colonyFood > 0);
   assert.ok(f.game.snapshot().evolutionPoints > before);
 });
+
+test("식량 비축량과 무관하게 버섯을 모으고 잠긴 재료는 선택하지 않는다", () => {
+  const f = fixture([]);
+  f.game.agents.splice(1);
+  Object.assign(f.agent, { actionPriorities: ["collect", "explore"],
+    personality: Object.freeze({ boldness: 0, aggression: 0, curiosity: 0 }) });
+  f.environment.food.set("43,42", { x: 43, y: 42, amount: 30, terrain: "grassland", resourceType: "honey-mushrooms" });
+  f.environment.food.set("42,43", { x: 42, y: 43, amount: 30, terrain: "grassland", kind: "resource", resourceType: "twigs" });
+  let saved = JSON.parse(f.game.save());
+  saved.state.evolutionPoints = 0;
+  saved.state.agents[0].decisionPending = "completed";
+  f.game.restore(JSON.stringify(saved));
+  f.agent = f.game.agents[0];
+  advance(f, 0.1);
+  assert.equal(f.agent.utility.action, "collect");
+  assert.equal(f.agent.utility.target.key, "43,42");
+  saved = JSON.parse(f.game.save());
+  saved.state.evolutionPoints = 25;
+  saved.state.agents[0].decisionPending = "completed";
+  f.game.restore(JSON.stringify(saved));
+  f.agent = f.game.agents[0];
+  advance(f, 0.1);
+  assert.equal(f.agent.utility.action, "collect");
+  assert.equal(f.agent.utility.target.key, "43,42");
+  assert.ok(!f.agent.utility.scores.some(score => score.action === "collect" && score.key === "42,43"));
+});

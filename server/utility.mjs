@@ -1,5 +1,7 @@
 import { NEST_LEVELS } from "./nests.mjs";
 import { unitMovementSpeed } from "./attributes.mjs";
+import { resourceDefinition, resourceTypeForCell } from "./resources.mjs";
+import { burrowApproaches } from "./burrows.mjs";
 
 export function createPersonality(random) {
   return Object.freeze({ boldness: random(), aggression: random(), curiosity: random() });
@@ -11,7 +13,8 @@ export function personalityLabels(personality) {
 }
 
 export function actionScore(personality, needs, action) {
-  return needs.food * action.foodGain + needs.defense * (0.5 + personality.aggression) * action.combatGain +
+  return needs.food * action.foodGain + (needs.material || 0) * (action.materialGain || 0) +
+    needs.defense * (0.5 + personality.aggression) * action.combatGain +
     needs.information * (0.5 + personality.curiosity) * action.informationGain +
     (1.5 - personality.boldness) * (action.healingGain + action.riskReduction);
 }
@@ -23,7 +26,9 @@ export function riskValue(agent, damage) {
 
 export function createUtilityAI(context) {
   const { state, size, homeCells, deliveryCells, walkable, hazardAt, enemies, synergy, canHarvest } = context;
-  let frontierSize = -1;
+  const resourceType = context.resourceType || (food => resourceTypeForCell(food, {}));
+  let frontierExplored = null, frontierIterator = null, frontierProcessed = 0;
+  const frontierByIndex = new Map();
   let frontiers = [];
   const limit = value => Math.max(0, Math.min(1, value));
   const indexOf = cell => cell.y * size + cell.x;
@@ -134,7 +139,7 @@ export function createUtilityAI(context) {
       const gap = Math.max(0, distance(cell, enemy) - 1);
       const reach = Math.max(0, seconds - gap / Math.max(0.1, enemy.species ? enemy.stats.speed : unitMovementSpeed(enemy.stats)));
       if (!reach) continue;
-      if (enemy.species && Math.hypot(cell.x - enemy.homeX, cell.y - enemy.homeY) > 8) continue;
+      if (enemy.species && !enemy.raid && Math.hypot(cell.x - enemy.homeX, cell.y - enemy.homeY) > 8) continue;
       const supporters = state.agents.filter(ally => ally !== agent && ally.health > 0)
         .reduce((sum, ally) => sum + participation(ally, enemy), 0);
       const supportDamage = state.agents.filter(ally => ally !== agent && ally.health > 0)
@@ -196,18 +201,39 @@ export function createUtilityAI(context) {
     return damage;
   }
 
+  function updateFrontier(index) {
+    const cell = at(index);
+    const boundary = walkable(cell.x, cell.y) && [[1, 0], [-1, 0], [0, 1], [0, -1]].some(([dx, dy]) => {
+      const x = cell.x + dx, y = cell.y + dy;
+      return x >= 0 && y >= 0 && x < size && y < size && !state.explored.has(y * size + x);
+    });
+    if (!boundary) return frontierByIndex.delete(index);
+    if (frontierByIndex.has(index)) return false;
+    frontierByIndex.set(index, cell);
+    return true;
+  }
+
   function frontierCells() {
-    if (frontierSize === state.explored.size) return frontiers;
-    frontierSize = state.explored.size;
-    frontiers = [];
-    for (const index of state.explored) {
-      const cell = at(index);
-      if (!walkable(cell.x, cell.y)) continue;
-      if ([[1, 0], [-1, 0], [0, 1], [0, -1]].some(([dx, dy]) => {
-        const x = cell.x + dx, y = cell.y + dy;
-        return x >= 0 && y >= 0 && x < size && y < size && !state.explored.has(y * size + x);
-      })) frontiers.push(cell);
+    if (frontierExplored !== state.explored || state.explored.size < frontierProcessed) {
+      frontierExplored = state.explored;
+      frontierIterator = state.explored.values();
+      frontierProcessed = 0;
+      frontierByIndex.clear();
+      frontiers = [];
     }
+    let changed = false;
+    while (frontierProcessed < state.explored.size) {
+      const index = frontierIterator.next().value;
+      frontierProcessed++;
+      changed = updateFrontier(index) || changed;
+      const x = index % size, y = Math.floor(index / size);
+      for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+        const nx = x + dx, ny = y + dy, neighbor = ny * size + nx;
+        if (nx < 0 || ny < 0 || nx >= size || ny >= size || !frontierByIndex.has(neighbor)) continue;
+        changed = updateFrontier(neighbor) || changed;
+      }
+    }
+    if (changed) frontiers = [...frontierByIndex.values()];
     return frontiers;
   }
 
@@ -221,20 +247,24 @@ export function createUtilityAI(context) {
       return routes.get(key);
     };
     const allies = state.agents.filter(ally => ally !== agent && ally.health > 0);
+    const carryingType = agent.carryingType || "honey-mushrooms";
+    const carryingMaterial = resourceDefinition(carryingType).category === "material";
+    const materialNeed = key => 1 / (1 + (state.resourceInventory?.[key] || 0) / Math.max(6, state.agents.length * 2));
     const reservation = food => allies.reduce((sum, ally) => sum + (ally.utility?.action === "collect" &&
       ally.utility.target?.key === food.x + "," + food.y ? Math.max(0, ally.utility.plannedCargo - ally.carrying) : 0), 0);
-    const availableFood = [...state.knownFood.values()].filter(canHarvest)
+    const availableFood = [...state.knownFood.values()].filter(food => canHarvest(food, agent) && resourceDefinition(resourceType(food)).category === "food")
       .reduce((sum, food) => sum + Math.max(0, food.amount - reservation(food)), 0);
     const perAgent = availableFood / Math.max(1, state.agents.length);
     const underAttack = visible.some(enemy => allies.concat(agent).some(ally => distance(ally, enemy) <= 1) ||
       homeCells().some(cell => distance(cell, enemy) <= 1));
     const needs = { food: state.evolutionPoints < 5 ? 1.5 : state.evolutionPoints < 20 ? 1 : 0.5,
+      material: carryingMaterial && agent.carrying > 0 ? 1.1 : state.evolutionPoints < 5 ? 0.4 : state.evolutionPoints < 20 ? 0.85 : 1.1,
       information: perAgent < 4 ? 1.5 : perAgent < 8 ? 1 : 0.5, defense: underAttack ? 1.5 : 1 };
     const baseline = riskValue(agent, predictedDamage(agent, [{ x: agent.x, y: agent.y }], "wait", visible, agent.carrying));
     const add = (action, target, cells, gains, extra) => {
       if (!cells) return;
       const risk = riskValue(agent, predictedDamage(agent, cells, action, visible, agent.carrying));
-      const candidate = { action, target, route: cells, foodGain: 0, combatGain: 0, informationGain: 0,
+      const candidate = { action, target, route: cells, foodGain: 0, materialGain: 0, combatGain: 0, informationGain: 0,
         healingGain: 0, riskReduction: baseline - risk, ...gains, ...extra };
       candidate.score = actionScore(agent.personality, needs, candidate);
       const same = agent.utility?.action === action && agent.utility.target?.key === target.key;
@@ -244,12 +274,13 @@ export function createUtilityAI(context) {
     const home = homeRoute(agent, agent, homeCells());
     const storage = Math.max(0, NEST_LEVELS[state.nestLevel - 1].pointCapacity - state.evolutionPoints);
     const homeTime = home ? travelTime(agent, home, agent.carrying) : Infinity;
-    const delivery = agent.carrying > 0 && storage > 0 ? homeRoute(agent, agent, deliveryCells()) : null;
+    const delivery = agent.carrying > 0 && (carryingMaterial || storage > 0) ? homeRoute(agent, agent, deliveryCells()) : null;
     if (delivery) {
       const unload = agent.mode === "unload" ? Math.max(0.05, agent.unloadReady - state.simSeconds) : 1;
       const deliveryTime = travelTime(agent, delivery, agent.carrying);
       add("return", { ...delivery.at(-1), key: "home" }, delivery,
-        { foodGain: 60 * limit(Math.min(agent.carrying, storage) / (deliveryTime + unload) / 0.25) }, {});
+        carryingMaterial ? { materialGain: 60 * limit(agent.carrying / (deliveryTime + unload) / 0.25) } :
+          { foodGain: 60 * limit(Math.min(agent.carrying, storage) / (deliveryTime + unload) / 0.25) }, {});
     }
     const missing = agent.stats.health - agent.health;
     if (missing > 0.01 && home) {
@@ -259,12 +290,19 @@ export function createUtilityAI(context) {
         { healingGain: 60 * missing / agent.stats.health * 10 / (10 + time) },
         { recoverHealth: Math.min(agent.stats.health, agent.health + amount) });
     }
-    if (agent.carrying < capacity && storage > 0) {
-      const foods = [...state.knownFood.values()].filter(food => food.amount > 0 && canHarvest(food))
+    if (agent.carrying < capacity) {
+      const foods = [...state.knownFood.values()].filter(food => food.amount > 0 && canHarvest(food, agent) &&
+        (!agent.carrying || carryingType === resourceType(food)) &&
+        (resourceDefinition(resourceType(food)).category === "material" || storage > 0))
         .sort((first, second) => distance(agent, first) - distance(agent, second));
       const currentFood = foods.find(food => food.x + "," + food.y === agent.utility?.target?.key);
-      const targets = [...new Set([currentFood, ...foods.slice(0, 8)].filter(Boolean))];
+      const targets = [...new Set([currentFood,
+        ...foods.filter(food => resourceDefinition(resourceType(food)).category === "food").slice(0, 6),
+        ...foods.filter(food => resourceDefinition(resourceType(food)).category === "material").slice(0, 6)].filter(Boolean))];
       for (const food of targets) {
+        const type = resourceType(food);
+        const definition = resourceDefinition(type);
+        const material = definition.category === "material";
         const cells = path(food);
         if (!cells) continue;
         const back = homeRoute(agent, food, deliveryCells());
@@ -277,53 +315,33 @@ export function createUtilityAI(context) {
           state.simSeconds - (agent.preciseHarvestTimes.get(key) ?? -Infinity) >= 30 ? 2 : 0;
         let best = null;
         for (let amount = 1; amount <= maximum; amount++) {
-          let harvestTime = 1 + Math.max(0, amount - precise) * 1.5;
+          let harvestTime = 1 + Math.max(0, amount - precise) * definition.harvestSeconds;
           if (present) {
             const ready = Math.max(0, agent.harvestReady - state.simSeconds);
-            harvestTime = ready + (agent.harvestPrepared ? Math.max(0, amount - 1) * 1.5 : Math.max(0, amount - precise) * 1.5);
+            harvestTime = ready + (agent.harvestPrepared ? Math.max(0, amount - 1) : Math.max(0, amount - precise)) * definition.harvestSeconds;
           }
           const time = travelTime(agent, cells, agent.carrying) + harvestTime +
             travelTime(agent, back, agent.carrying + amount) + 1;
-          const gain = 60 * limit(Math.min(storage, agent.carrying + amount) / Math.max(0.05, time) / 0.25);
+          const gain = 60 * limit((material ? agent.carrying + amount : Math.min(storage, agent.carrying + amount)) /
+            Math.max(0.05, time) / 0.25) * (material ? materialNeed(type) : 1);
           if (!best || gain > best.gain) best = { gain, amount };
         }
-        if (best) add("collect", { x: food.x, y: food.y, key }, cells, { foodGain: best.gain },
+        if (best) add("collect", { x: food.x, y: food.y, key }, cells, material ? { materialGain: best.gain } : { foodGain: best.gain },
           { plannedCargo: agent.carrying + best.amount });
       }
     }
     const frontier = frontierCells();
-    const nearbyScout = agent.templateId === null && !agent.slots.length && agent.actionPriorities?.[0] === "explore";
-    const prioritized = [];
-    if (nearbyScout) {
-      const boundary = homeCells();
-      const nearby = frontier.map(cell => ({ cell,
-        homeDistance: Math.min(...boundary.map(home => distance(home, cell))) }))
-        .sort((first, second) => first.homeDistance - second.homeDistance ||
-          distance(agent, first.cell) - distance(agent, second.cell));
-      let nearestHomeDistance = Infinity;
-      for (const { cell, homeDistance } of nearby) {
-        if (homeDistance > nearestHomeDistance || prioritized.length >= 6) break;
-        if (!path(cell)) continue;
-        nearestHomeDistance = homeDistance;
-        prioritized.push(cell);
-      }
-    } else {
-      prioritized.push(...frontier.toSorted((first, second) => distance(agent, first) - distance(agent, second)).slice(0, 6));
-      for (const marker of state.markers.toSorted((first, second) => distance(agent, first) - distance(agent, second)).slice(0, 2)) {
-        const nearest = frontier.toSorted((first, second) => distance(marker, first) - distance(marker, second))[0];
-        if (nearest) prioritized.push(nearest);
-      }
-      if (agent.utility?.action === "explore") {
-        const current = frontier.find(cell => indexOf(cell) === indexOf(agent.utility.target));
-        if (current) prioritized.push(current);
-      }
-    }
-    for (const target of [...new Map(prioritized.map(cell => [indexOf(cell), cell])).values()]) {
-      const cells = path(target);
-      if (!cells) continue;
-      const radius = agent.stats.vision + (synergy(agent, ["feet", "antenna"]) &&
-        Math.floor(agent.stepCount / 8) < Math.floor((agent.stepCount + cells.length - 1) / 8) ? 4 : 0);
-      const seconds = travelTime(agent, cells, agent.carrying) + 5;
+    const frontierScout = agent.templateId === null && !agent.slots.length && agent.actionPriorities?.[0] === "explore";
+    const boundary = frontierScout ? homeCells() : [];
+    const frontierWeight = target => {
+      const homeDistance = boundary.length ? Math.min(...boundary.map(home => distance(home, target))) : 0;
+      const length = Math.max(1, distance(agent, target));
+      const forward = agent.lastDirection ? ((target.x - agent.x) * agent.lastDirection.dx +
+        (target.y - agent.y) * agent.lastDirection.dy) / length : 0;
+      const revisit = agent.visited.has(target.x + "," + target.y) ? 0.8 : 1;
+      return (1 + 0.15 * forward) * revisit / (1 + homeDistance / 80);
+    };
+    const uncoveredAt = (target, radius, seconds) => {
       let uncovered = 0;
       for (let dy = -radius; dy <= radius; dy++) for (let dx = -radius; dx <= radius; dx++) {
         const x = target.x + dx, y = target.y + dy;
@@ -333,11 +351,43 @@ export function createUtilityAI(context) {
           Math.hypot(x - ally.utility.target.x, y - ally.utility.target.y) <= ally.stats.vision);
         if (!assigned) uncovered++;
       }
-      const markers = state.markers.filter(marker => Math.hypot(marker.x - target.x, marker.y - target.y) <= radius &&
+      return uncovered;
+    };
+    const prioritized = [];
+    if (frontierScout) {
+      const ranked = frontier.map(cell => {
+        const seconds = distance(agent, cell) / unitMovementSpeed(agent.stats) + 5;
+        return { cell, gain: uncoveredAt(cell, agent.stats.vision, seconds) * frontierWeight(cell) / seconds };
+      }).filter(candidate => candidate.gain > 0).sort((first, second) => second.gain - first.gain);
+      for (const { cell } of ranked) {
+        if (prioritized.length >= 12) break;
+        if (!path(cell)) continue;
+        prioritized.push(cell);
+      }
+    } else {
+      prioritized.push(...frontier.toSorted((first, second) => distance(agent, first) - distance(agent, second)).slice(0, 6));
+      for (const marker of state.markers.toSorted((first, second) => distance(agent, first) - distance(agent, second)).slice(0, 2)) {
+        const nearest = frontier.toSorted((first, second) => distance(marker, first) - distance(marker, second))[0];
+        if (nearest) prioritized.push(nearest);
+      }
+    }
+    if (agent.utility?.action === "explore") {
+      const current = frontier.find(cell => indexOf(cell) === indexOf(agent.utility.target));
+      if (current) prioritized.push(current);
+    }
+    for (const target of [...new Map(prioritized.map(cell => [indexOf(cell), cell])).values()]) {
+      const cells = path(target);
+      if (!cells) continue;
+      const radius = agent.stats.vision + (synergy(agent, ["feet", "antenna"]) &&
+        Math.floor(agent.stepCount / 8) < Math.floor((agent.stepCount + cells.length - 1) / 8) ? 4 : 0);
+      const seconds = travelTime(agent, cells, agent.carrying) + 5;
+      const uncovered = uncoveredAt(target, radius, seconds);
+      const markers = frontierScout ? 0 : state.markers.filter(marker => Math.hypot(marker.x - target.x, marker.y - target.y) <= radius &&
         !allies.some(ally => ally.utility?.action === "explore" && Math.hypot(marker.x - ally.utility.target.x,
           marker.y - ally.utility.target.y) <= ally.stats.vision)).length;
       if (uncovered || markers) add("explore", { ...target, key: "frontier:" + indexOf(target) }, cells,
-        { informationGain: 60 * limit((uncovered + 20 * markers) / (10 * seconds)) }, {});
+        { informationGain: 60 * limit((uncovered + 20 * markers) / (10 * seconds)) *
+          (frontierScout ? frontierWeight(target) : 1) }, {});
     }
     for (const enemy of visible.toSorted((first, second) => distance(agent, first) - distance(agent, second)).slice(0, 6)) {
       const approaches = neighbors(enemy).map(cell => path(cell)).filter(Boolean)
@@ -354,10 +404,17 @@ export function createUtilityAI(context) {
       const own = power(agent), withMe = (support + own) / (support + own + opponents);
       const withoutMe = support / Math.max(0.01, support + opponents);
       const homeThreat = homeCells().some(cell => distance(cell, enemy) <= 3);
-      const foodThreat = [...state.knownFood.values()].some(food => food.amount > 0 && canHarvest(food) && distance(food, enemy) <= 4);
+      const foodThreat = [...state.knownFood.values()].some(food => food.amount > 0 && canHarvest(food, agent) && distance(food, enemy) <= 4);
       const value = homeThreat ? 120 : foodThreat ? 80 : 40;
       add("fight", { id: enemy.id, x: enemy.x, y: enemy.y, key: enemy.id }, cells,
         { combatGain: value * (withMe - withoutMe) * 10 / (10 + time) }, {});
+    }
+    for (const building of [...(context.burrows ? context.burrows() : []), ...(context.nests ? context.nests() : [])]) {
+      const cells = burrowApproaches(building).map(cell => path(cell)).filter(Boolean).sort((first, second) => first.length - second.length)[0];
+      if (!cells) continue;
+      const time = travelTime(agent, cells, agent.carrying) + building.health / Math.max(0.1, agent.stats.attack * agent.stats.speed);
+      add("fight", { id: building.id, kind: building.kind || "burrow", x: building.x, y: building.y, key: building.id }, cells,
+        { combatGain: 40 * 10 / (10 + time) }, {});
     }
     if (baseline > 0.01) {
       const safe = new Map();

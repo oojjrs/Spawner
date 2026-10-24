@@ -1,7 +1,16 @@
+import { generateBurrows } from "./burrows.mjs";
+import { generateTribes } from "./tribes.mjs";
+import { RESOURCE_TYPES, FOOD_HABITATS, isFoodHabitat, RESOURCE_HABITATS, RESOURCE_PLACEMENT, isResourceHabitat } from "./resources.mjs";
+
 export const STARTING_FOOD_RADIUS = 22;
 export const STARTING_FOOD_CAP = 10;
 
-export function generateWorld(seed) {
+export const WORLD_GENERATION_VERSION = 4;
+
+export function generateWorld(seed, version) {
+      if (version !== undefined && ![1, 2, 3, WORLD_GENERATION_VERSION].includes(version)) {
+        throw new Error("지원하지 않는 월드 생성 버전입니다.");
+      }
       function seededRandom(seed) {
         let state = seed >>> 0;
         return function () {
@@ -148,6 +157,7 @@ export function generateWorld(seed) {
       }
       const world = {
         seed,
+        generationVersion: version ?? WORLD_GENERATION_VERSION,
         hazards,
         creatureDensity,
         terrain: generated.fields.terrain,
@@ -155,7 +165,13 @@ export function generateWorld(seed) {
         origin: { x: generated.sites[0][0], y: generated.sites[0][1] },
         sites: generated.sites
       };
+      if (world.generationVersion >= 2) populateStartingForests(world);
       world.food.push(...generateStartingFood(world, STARTING_FOOD_CAP));
+      world.food = world.food.map(([x, y, amount, resourceType]) => [x, y, amount, resourceType || foodType(world, x, y)])
+        .filter(([, , , resourceType]) => resourceType !== null);
+      world.burrows = generateBurrows(world);
+      world.resources = generateResources(world);
+      world.tribes = generateTribes(world);
       return world;
     }
 
@@ -172,6 +188,23 @@ function foodNoise(x, y, scale, seed) {
   tx = tx * tx * (3 - 2 * tx); ty = ty * ty * (3 - 2 * ty);
   return ((foodHash(ix, iy, seed) * (1 - tx) + foodHash(ix + 1, iy, seed) * tx) * (1 - ty) +
     (foodHash(ix, iy + 1, seed) * (1 - tx) + foodHash(ix + 1, iy + 1, seed) * tx) * ty) * 2 - 1;
+}
+
+function populateStartingForests(world) {
+  for (const [cx, cy] of world.sites) {
+    const angle = foodHash(cx, cy, world.seed + 13001) * Math.PI * 2;
+    const centerX = cx + Math.round(Math.cos(angle) * 7);
+    const centerY = cy + Math.round(Math.sin(angle) * 7);
+    for (let y = centerY - 7; y <= centerY + 7; y++) for (let x = centerX - 7; x <= centerX + 7; x++) {
+      if (x < 0 || y < 0 || x >= 320 || y >= 320) continue;
+      const index = y * 320 + x;
+      const radius = 6 + foodNoise(x + 193, y - 317, 5, world.seed + 13003);
+      if (Math.hypot(x - centerX, y - centerY) > radius || world.hazards[index] ||
+        world.terrain[index] < 3 || world.terrain[index] > 5 ||
+        world.sites.some(([sx, sy]) => Math.hypot(x - sx, y - sy) < 4)) continue;
+      world.terrain[index] = 5;
+    }
+  }
 }
 
 export function generateStartingFood(world, cap) {
@@ -192,7 +225,8 @@ export function generateStartingFood(world, cap) {
     }
     const candidates = [];
     for (const [x, y] of queue) {
-      if (world.terrain[y * size + x] < 3 || world.sites.some(site => Math.hypot(x - site[0], y - site[1]) < 3)) continue;
+      if (world.terrain[y * size + x] < 3 || world.sites.some(site => Math.hypot(x - site[0], y - site[1]) < 3) ||
+        world.generationVersion !== 1 && !isFoodHabitat("honey-mushrooms", world, x, y)) continue;
       const density = Math.max(0.02, 0.5 + foodNoise(x + 317, y - 193, 13, seed + 9721) * 0.34 + foodNoise(x - 51, y + 93, 5, seed + 9743) * 0.16);
       const priority = -Math.log(Math.max(0.000001, foodHash(x + 1379, y - 411, seed + 9973))) / (0.025 + density ** 3);
       candidates.push({ x, y, distance: Math.hypot(x - cx, y - cy), path: distances[y * size + x], priority });
@@ -212,10 +246,185 @@ export function generateStartingFood(world, cap) {
         if (neighbors.some(other => other.distances[point.y * size + point.x] < 0 || other.remaining <= 0)) continue;
         const low = Math.ceil(cap * 0.75);
         const amount = Math.min(low + Math.floor(foodHash(point.x + 41, point.y - 67, seed + 9989) * (cap - low + 1)), ...neighbors.map(other => other.remaining));
-        food.push([point.x, point.y, amount]);
+        food.push([point.x, point.y, amount, "honey-mushrooms"]);
         for (const other of neighbors) other.remaining -= amount;
       }
     }
   }
   return food;
+}
+
+function foodType(world, x, y) {
+  if (world.generationVersion !== 1) {
+    const choices = FOOD_HABITATS.filter(habitat => (world.generationVersion >= 4 || habitat.key !== "tree-fruit") &&
+      isFoodHabitat(habitat.key, world, x, y));
+    if (!choices.length) return null;
+    return choices[Math.floor(foodHash(x, y, world.seed + 10531) * choices.length)].key;
+  }
+  const terrain = world.terrain[y * 320 + x];
+  const value = foodHash(x, y, world.seed + 10531);
+  if (terrain === 5) return value < 0.45 ? "honey-mushrooms" : value < 0.75 ? "berry-bush" : "nutrient-moss";
+  if (terrain === 4) return value < 0.3 ? "honey-mushrooms" : value < 0.55 ? "root-bulbs" : value < 0.8 ? "berry-bush" : "nutrient-moss";
+  return value < 0.7 ? "seed-pods" : "root-bulbs";
+}
+
+export function generateResources(world) {
+  if (world.generationVersion === 1 || world.generationVersion === 2) return generateLegacyResources(world);
+  const size = 320, blocked = new Uint8Array(size * size), occupied = new Uint8Array(size * size);
+  const distances = new Int32Array(size * size).fill(-1);
+  for (let index = 0; index < blocked.length; index++) {
+    if (world.terrain[index] < 2 || world.terrain[index] > 6 || world.hazards[index]) blocked[index] = 1;
+  }
+  for (const burrow of world.burrows || []) {
+    for (let y = burrow.y - 1; y <= burrow.y + burrow.height; y++) {
+      for (let x = burrow.x - 1; x <= burrow.x + burrow.width; x++) {
+        if (x >= 0 && y >= 0 && x < size && y < size) blocked[y * size + x] = 1;
+      }
+    }
+  }
+  const queue = [];
+  for (const [x, y] of world.sites) {
+    const index = y * size + x;
+    if (!blocked[index] && distances[index] < 0) { distances[index] = 0; queue.push(index); }
+  }
+  for (let cursor = 0; cursor < queue.length; cursor++) {
+    const index = queue[cursor], x = index % size, y = Math.floor(index / size);
+    for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+      const nx = x + dx, ny = y + dy, next = ny * size + nx;
+      if (nx < 0 || ny < 0 || nx >= size || ny >= size || blocked[next] || distances[next] >= 0) continue;
+      distances[next] = distances[index] + 1;
+      queue.push(next);
+    }
+  }
+  for (const [x, y] of world.food) occupied[y * size + x] = 1;
+  const points = [];
+  for (const index of queue) {
+    if (occupied[index]) continue;
+    const x = index % size, y = Math.floor(index / size), nearSites = [];
+    let distance = Infinity;
+    world.sites.forEach(([cx, cy], siteIndex) => {
+      const gap = Math.hypot(x - cx, y - cy);
+      distance = Math.min(distance, gap);
+      if (gap <= RESOURCE_PLACEMENT.nearRadius) nearSites.push(siteIndex);
+    });
+    if (distance >= 4) points.push({ x, y, index, distance, nearSites });
+  }
+  const candidates = new Map(RESOURCE_HABITATS.map((habitat, typeIndex) => [habitat.key,
+    points.filter(point => point.distance >= habitat.minDistance && distances[point.index] >= habitat.minDistance &&
+      isResourceHabitat(habitat.key, world, point.x, point.y)).map(point => ({ ...point,
+      priority: foodNoise(point.x + 617, point.y - 349, 36, world.seed + 14009 + typeIndex * 137) * 0.8 +
+        foodNoise(point.x - 193, point.y + 431, 13, world.seed + 14011 + typeIndex * 139) * 0.2 +
+        foodHash(point.x, point.y, world.seed + 14029 + typeIndex * 149) * 0.08
+    })).sort((left, right) => right.priority - left.priority || left.index - right.index)]));
+  const nearTypes = world.sites.map(([cx, cy], siteIndex) => new Set(RESOURCE_HABITATS
+    .filter(habitat => habitat.rarity === "common" && candidates.get(habitat.key).some(point => point.nearSites.includes(siteIndex)))
+    .map(habitat => ({ key: habitat.key, priority: foodHash(cx + RESOURCE_HABITATS.indexOf(habitat) * 31, cy, world.seed + 15013) }))
+    .sort((left, right) => left.priority - right.priority).slice(0, RESOURCE_PLACEMENT.nearTypes).map(entry => entry.key)));
+  const nearCounts = world.sites.map(() => new Map());
+  const resources = [];
+  RESOURCE_HABITATS.forEach((habitat, typeIndex) => {
+    const entries = candidates.get(habitat.key), placed = [];
+    const available = point => !occupied[point.index] &&
+      point.nearSites.every(siteIndex => nearTypes[siteIndex].has(habitat.key) &&
+        (nearCounts[siteIndex].get(habitat.key) || 0) < RESOURCE_PLACEMENT.nearNodes) &&
+      placed.every(other => Math.hypot(point.x - other.x, point.y - other.y) >= habitat.separation);
+    const add = point => {
+      if (!point || !available(point)) return;
+      occupied[point.index] = 1;
+      placed.push(point);
+      for (const siteIndex of point.nearSites) nearCounts[siteIndex].set(habitat.key,
+        (nearCounts[siteIndex].get(habitat.key) || 0) + 1);
+      const local = point.nearSites.length > 0;
+      const amount = (local ? 8 : habitat.rarity === "rare" ? 6 : 12) +
+        Math.floor(foodHash(point.x, point.y, world.seed + 16001 + typeIndex * 139) * (local ? 7 : habitat.rarity === "rare" ? 9 : 17));
+      resources.push([point.x, point.y, amount, habitat.key]);
+    };
+    world.sites.forEach((site, siteIndex) => {
+      if (nearTypes[siteIndex].has(habitat.key)) add(entries.find(point => point.nearSites.includes(siteIndex) && available(point)));
+    });
+    for (const point of entries) {
+      if (placed.length >= habitat.nodes) break;
+      add(point);
+    }
+  });
+  return resources;
+}
+
+function generateLegacyResources(world) {
+  const size = 320;
+  const blocked = new Uint8Array(size * size);
+  const occupied = new Uint8Array(size * size);
+  const reachable = new Uint8Array(size * size);
+  const terrains = new Map([
+    ["twigs", [5, 4]], ["bark", [5]], ["pebbles", [6, 2, 3]],
+    ["clay", [2, 4]], ["sand", [2, 3]], ["dry-leaves", [5, 4]],
+    ["grass-fiber", [4, 3]], ["root-fiber", [5, 2, 4]], ["spider-silk", [5, 6]],
+    ["water", [2, 4]], ["tree-sap", [5]], ["leaf-mold", [5, 4]],
+    ["resin", [5]], ["beeswax", [5]], ["carapace", [4, 5, 6]],
+    ["iron-ore", [6, 3]], ["copper-ore", [6, 3]], ["quartz", [6, 2]]
+  ]);
+  for (let index = 0; index < blocked.length; index++) {
+    if (world.terrain[index] < 2 || world.terrain[index] > 6 || world.hazards[index]) blocked[index] = 1;
+  }
+  for (const burrow of world.burrows || []) {
+    for (let y = burrow.y - 1; y <= burrow.y + burrow.height; y++) {
+      for (let x = burrow.x - 1; x <= burrow.x + burrow.width; x++) {
+        if (x >= 0 && y >= 0 && x < size && y < size) blocked[y * size + x] = 1;
+      }
+    }
+  }
+  const queue = [];
+  for (const [x, y] of world.sites) {
+    const index = y * size + x;
+    if (!blocked[index] && !reachable[index]) { reachable[index] = 1; queue.push(index); }
+    for (let dy = -4; dy <= 4; dy++) for (let dx = -4; dx <= 4; dx++) {
+      if (dx * dx + dy * dy >= 16 || x + dx < 0 || y + dy < 0 || x + dx >= size || y + dy >= size) continue;
+      occupied[(y + dy) * size + x + dx] = 1;
+    }
+  }
+  for (let cursor = 0; cursor < queue.length; cursor++) {
+    const index = queue[cursor], x = index % size, y = Math.floor(index / size);
+    for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+      const nx = x + dx, ny = y + dy, next = ny * size + nx;
+      if (nx < 0 || ny < 0 || nx >= size || ny >= size || blocked[next] || reachable[next]) continue;
+      reachable[next] = 1;
+      queue.push(next);
+    }
+  }
+  for (const [x, y] of world.food) occupied[y * size + x] = 1;
+  const candidates = Array.from({ length: 7 }, () => []);
+  for (const index of queue) {
+    if (!occupied[index]) candidates[world.terrain[index]].push(index);
+  }
+  const resources = [];
+  let typeIndex = 0;
+  for (const definition of RESOURCE_TYPES.filter(entry => entry.category === "material")) {
+    const terrainOrder = terrains.get(definition.key);
+    const entries = terrainOrder.flatMap((terrain, rank) => candidates[terrain].map(index => {
+      const x = index % size, y = Math.floor(index / size);
+      return { x, y, index, priority: rank + foodHash(x, y, world.seed + 11003 + typeIndex * 137) };
+    }));
+    entries.sort((left, right) => left.priority - right.priority || left.index - right.index);
+    const placed = [];
+    const add = point => {
+      if (!point || occupied[point.index]) return false;
+      occupied[point.index] = 1;
+      placed.push(point);
+      const amount = 16 + Math.floor(foodHash(point.x, point.y, world.seed + 12007 + typeIndex * 139) * 25);
+      resources.push([point.x, point.y, amount, definition.key]);
+      return true;
+    };
+    for (const [cx, cy] of world.sites) {
+      add(entries.find(point => !occupied[point.index] && Math.hypot(point.x - cx, point.y - cy) <= 28 &&
+        placed.every(other => Math.hypot(point.x - other.x, point.y - other.y) >= 5)));
+    }
+    for (const point of entries) {
+      if (placed.length >= Math.max(24, world.sites.length * 2)) break;
+      if (placed.some(other => Math.hypot(point.x - other.x, point.y - other.y) < 9)) continue;
+      add(point);
+    }
+    if (!placed.length) add(entries.find(point => !occupied[point.index]));
+    typeIndex++;
+  }
+  return resources;
 }

@@ -2,13 +2,19 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createCreatures } from "./creatures.mjs";
+import { BEETLE_ANIMATIONS } from "./beetle-animation.mjs";
 import { createGame } from "./game.mjs";
 import { generateWorld } from "./world.mjs";
+import { createRoom, saveRoom, restoreRoom, snapshotRoom } from "../client/room.mjs";
 
 const attack = JSON.parse(readFileSync(new URL("../DesignAssets/Animations/spiny-back-beetle-attack.json", import.meta.url), "utf8"));
 
 function environment() {
-  return { seed: 7, simSeconds: 0, world: { seed: 7, sites: [[100, 100]], terrain: new Uint8Array(320 * 320).fill(4), creatureDensity: new Uint8Array(320 * 320).fill(255) },
+  return { seed: 7, simSeconds: 0, world: { seed: 7, sites: [[100, 100]], terrain: new Uint8Array(320 * 320).fill(4), creatureDensity: new Uint8Array(320 * 320).fill(255),
+    hazards: new Uint8Array(320 * 320), burrows: [
+      { id: "burrow:small:64130", type: "small", x: 130, y: 200, width: 1, height: 1, entrance: { x: 130, y: 201 } },
+      { id: "burrow:large:64230", type: "large", x: 230, y: 200, width: 3, height: 1, entrance: { x: 231, y: 201 } }
+    ] },
     games: new Map(), colonies: [], food: new Map(), foodSpots: new Map() };
 }
 
@@ -28,15 +34,21 @@ function encounter() {
   return { room, beetle, victim, hits };
 }
 
-test("둥지에서 떨어진 통행 가능한 위치에 중복 없이 생성한다", () => {
+test("굴마다 작은 굴 1마리·큰 굴 3마리를 입구 주변 빈 칸에 중복 없이 생성한다", () => {
   const room = environment();
   room.world.sites.push([130, 130], [160, 160]);
   const system = createCreatures(room, null);
-  assert.ok(system.agents.length > room.world.sites.length * 3);
+  assert.equal(system.agents.length, 4);
   assert.equal(new Set(system.agents.map(agent => agent.x + "," + agent.y)).size, system.agents.length);
   assert.equal(new Set(system.agents.map(agent => agent.id)).size, system.agents.length);
   assert.ok(system.agents.some(agent => room.world.sites.every(site => Math.hypot(agent.x - site[0], agent.y - site[1]) > 80)));
   for (const agent of system.agents) {
+    const burrow = room.world.burrows.find(burrow => burrow.id === agent.burrowId);
+    assert.ok(burrow);
+    assert.equal(agent.homeX, burrow.entrance.x);
+    assert.equal(agent.homeY, burrow.entrance.y);
+    assert.equal(system.agents.filter(other => other.burrowId === burrow.id).length, burrow.type === "small" ? 1 : 3);
+    assert.ok(agent.x < burrow.x || agent.x >= burrow.x + burrow.width || agent.y !== burrow.y);
     assert.ok(room.world.sites.every(site => Math.hypot(agent.x - site[0], agent.y - site[1]) >= 26));
     assert.equal(room.world.terrain[agent.y * 320 + agent.x], 4);
     assert.equal(agent.mode, "idle");
@@ -118,6 +130,8 @@ test("시야 안에서만 표시하고 처치 시 사체를 한 번 남긴다", 
   room.simSeconds = 1;
   game.prepare(1);
   game.tick(1);
+  room.creatureSystem.receiveDamage(beetle, 100);
+  room.simSeconds += BEETLE_ANIMATIONS.death.durationMs / 1000;
   room.creatureSystem.tick();
   room.creatureSystem.tick();
   assert.equal(room.creatureSystem.agents.length, 0);
@@ -166,16 +180,16 @@ test("신중한 개체는 이득이 낮은 강적과 강제 교전하지 않고 
   }
 });
 
-test("몹 밀도 0인 지역에는 생성하지 않고 별도 노이즈맵의 안전 거리를 지킨다", () => {
+test("밀도 대신 생성된 굴을 개체 생성 기준으로 삼고 월드 안전 거리를 지킨다", () => {
   const empty = environment();
-  empty.world.creatureDensity.fill(0);
+  empty.world.burrows = [];
   assert.equal(createCreatures(empty, null).agents.length, 0);
   const room = environment();
   room.world = generateWorld(7);
   const system = createCreatures(room, null);
   assert.ok(system.agents.length > 0);
   for (const agent of system.agents) {
-    assert.ok(room.world.creatureDensity[agent.y * 320 + agent.x] > 0);
+    assert.ok(room.world.burrows.some(burrow => burrow.id === agent.burrowId));
     assert.ok(room.world.sites.every(site => Math.hypot(agent.x - site[0], agent.y - site[1]) >= 26));
   }
   for (let y = 0; y < 320; y++) for (let x = 0; x < 320; x++) {
@@ -205,8 +219,9 @@ test("이전 저장의 생존 개체는 체력 비율과 식별자를 유지하�
   const saved = { version: 1, agents: [original] };
   const system = createCreatures(room, saved);
   const beetle = system.agents.find(agent => agent.id === original.id);
-  assert.equal(system.save().version, 3);
-  assert.ok(system.agents.length > 1);
+  assert.equal(system.save().version, 5);
+  assert.equal(system.agents.length, 1);
+  assert.ok(beetle.burrowId);
   assert.equal(beetle.id, original.id);
   assert.equal(beetle.health / beetle.stats.health, 0.5);
   assert.equal(beetle.stats.attack, 3);
@@ -228,35 +243,133 @@ test("이전 저장 개체는 밀도 후보가 없어도 안전한 빈 칸으로
   assert.ok(Math.hypot(system.agents[0].x - 100, system.agents[0].y - 100) >= 26);
 });
 
-test("같은 면적에서 노이즈 밀도가 높은 지역에 여러 마리가 더 많이 생성된다", () => {
+test("같은 굴 배치에서는 밀도 노이즈를 바꿔도 개체를 추가로 흩뿌리지 않는다", () => {
   const room = environment();
-  room.world.creatureDensity.fill(0);
-  for (let y = 180; y < 260; y++) for (let offset = 0; offset < 80; offset++) {
-    room.world.creatureDensity[y * 320 + 40 + offset] = 96;
-    room.world.creatureDensity[y * 320 + 200 + offset] = 224;
-  }
   const system = createCreatures(room, null);
-  const sparse = system.agents.filter(agent => agent.x < 160);
-  const dense = system.agents.filter(agent => agent.x >= 160);
-  assert.ok(dense.length > 1);
-  assert.ok(dense.length > sparse.length * 2);
-  for (const agent of system.agents) {
-    assert.ok(room.world.creatureDensity[agent.y * 320 + agent.x] > 0);
-    for (const other of system.agents) if (agent !== other) assert.ok(Math.hypot(agent.x - other.x, agent.y - other.y) >= 6);
-  }
+  room.world.creatureDensity.fill(0);
+  assert.deepEqual(createCreatures(room, null).save(), system.save());
 });
 
-test("기존 방에는 한 번만 추가하며 저장·복원과 전멸 뒤에 재생성하지 않는다", () => {
+test("기존 방 개체의 식별자·체력·위치를 보존해 가까운 굴에 연결하고 불러오기만으로 추가하지 않는다", () => {
   const room = environment();
   const original = loneCreature(room);
   original.health = 7;
   const system = createCreatures(room, { version: 2, agents: [original] });
-  assert.ok(system.agents.length > 1);
+  assert.equal(system.agents.length, 1);
   assert.equal(system.agents.find(agent => agent.id === original.id).health, 7);
   const saved = JSON.parse(JSON.stringify(system.save()));
-  saved.agents.splice(1, 1);
+  assert.equal(system.agents[0].burrowId, room.world.burrows[0].id);
+  assert.equal(system.agents[0].x, original.x);
   const restored = createCreatures(room, saved);
   assert.deepEqual(restored.save(), saved);
   assert.equal(createCreatures(room, { version: 2, agents: [] }).agents.length, 0);
   assert.equal(createCreatures(room, { version: 3, agents: [] }).agents.length, 0);
+});
+
+function population(system, room) {
+  return room.world.burrows.map(burrow => system.agents.filter(agent => agent.burrowId === burrow.id && agent.health > 0).length);
+}
+
+test("작은 굴 120초·큰 굴 60초 주기로 한 마리씩 늘고 각 상한 3·6마리를 지킨다", () => {
+  const room = environment(), system = createCreatures(room, null);
+  assert.deepEqual(population(system, room), [1, 3]);
+  for (const [time, counts] of [[59.999, [1, 3]], [60, [1, 4]], [119.999, [1, 4]], [120, [2, 5]], [180, [2, 6]], [240, [3, 6]], [3600, [3, 6]]]) {
+    room.simSeconds = time; system.tick();
+    assert.deepEqual(population(system, room), counts, String(time));
+  }
+});
+
+test("굴에서 멀리 나간 개체도 생존 상한에 포함하며 상한 중 지난 회차를 쌓아 두지 않는다", () => {
+  const room = environment(), system = createCreatures(room, null);
+  room.simSeconds = 360; system.tick();
+  const small = system.agents.filter(agent => agent.burrowId === room.world.burrows[0].id);
+  for (const [index, agent] of small.entries()) Object.assign(agent, { x: 280 + index, y: 280, renderFromX: 280 + index, renderFromY: 280 });
+  room.simSeconds = 480; system.tick();
+  assert.deepEqual(population(system, room), [3, 6]);
+  system.receiveDamage(small[0], 100);
+  room.simSeconds = 480.1; system.tick();
+  assert.deepEqual(population(system, room), [2, 6]);
+  room.simSeconds = 600; system.tick();
+  assert.deepEqual(population(system, room), [3, 6]);
+});
+
+test("전멸해도 굴이 남으면 다음 회차에 한 마리씩 다시 생성한다", () => {
+  const room = environment(), system = createCreatures(room, null);
+  for (const agent of system.agents) system.receiveDamage(agent, 100);
+  room.simSeconds = 59.99; system.tick();
+  assert.deepEqual(population(system, room), [0, 0]);
+  room.simSeconds = 60; system.tick();
+  assert.deepEqual(population(system, room), [0, 1]);
+  room.simSeconds = 120; system.tick();
+  assert.deepEqual(population(system, room), [1, 2]);
+});
+
+test("저장·복원으로 증식 시각이 초기화되지 않고 새 개체 식별자를 재사용하지 않는다", () => {
+  const room = environment(); let system = createCreatures(room, null);
+  room.simSeconds = 60; system.tick();
+  const ids = new Set(system.agents.map(agent => agent.id));
+  room.simSeconds = 90;
+  const saved = JSON.parse(JSON.stringify(system.save()));
+  system = createCreatures(room, saved);
+  assert.deepEqual(system.save(), saved);
+  room.simSeconds = 119.99; system.tick();
+  assert.deepEqual(population(system, room), [1, 4]);
+  room.simSeconds = 120; system.tick();
+  assert.deepEqual(population(system, room), [2, 5]);
+  const newer = system.agents.filter(agent => !ids.has(agent.id));
+  assert.equal(newer.length, 2);
+  for (const agent of system.agents) system.receiveDamage(agent, 100);
+  room.simSeconds = 240; system.tick();
+  assert.ok(system.agents.every(agent => !ids.has(agent.id) && !newer.some(previous => previous.id === agent.id)));
+});
+
+test("입구 주변이 막히면 겹쳐 생성하지 않고 빈 칸이 생긴 다음 회차에 증식한다", () => {
+  const room = environment(), system = createCreatures(room, null), burrow = room.world.burrows[0];
+  for (let y = 198; y <= 204; y++) for (let x = 127; x <= 133; x++) room.world.hazards[y * 320 + x] = 1;
+  room.simSeconds = 120; system.tick();
+  assert.deepEqual(population(system, room), [1, 5]);
+  room.world.hazards.fill(0);
+  room.simSeconds = 240; system.tick();
+  assert.deepEqual(population(system, room), [2, 6]);
+  const births = system.agents.filter(agent => agent.burrowId === burrow.id);
+  assert.equal(new Set(births.map(agent => agent.x + "," + agent.y)).size, births.length);
+});
+
+test("굴이 파괴된 저장 상태에서는 기존 개체를 남기고 추가 증식만 중단한다", () => {
+  const room = environment(), original = createCreatures(room, null), saved = JSON.parse(JSON.stringify(original.save()));
+  saved.burrows[0].health = 0;
+  const system = createCreatures(room, saved), survivor = system.agents[0];
+  room.simSeconds = 360; system.tick();
+  assert.deepEqual(population(system, room), [1, 6]);
+  assert.ok(system.agents.includes(survivor));
+  system.receiveDamage(survivor, 100);
+  room.simSeconds = 480; system.tick();
+  assert.deepEqual(population(system, room), [0, 6]);
+});
+
+test("이전 저장에서 상한보다 많은 생존 개체를 보존하고 빈자리 전에는 더 만들지 않는다", () => {
+  const room = environment(), original = createCreatures(room, null).agents[0];
+  const agents = Array.from({ length: 4 }, (_, index) => ({ ...original, id: "legacy:" + index, x: 130 + index, renderFromX: 130 + index }));
+  const system = createCreatures(room, { version: 3, agents });
+  assert.deepEqual(population(system, room), [4, 0]);
+  room.simSeconds = 120; system.tick();
+  assert.deepEqual(population(system, room), [4, 2]);
+});
+
+test("실제 월드를 저장·복원하고 스냅샷에서 소속 굴을 유지하며 증식을 이어간다", () => {
+  const room = createRoom("굴 저장 확인", 731047);
+  room.simSeconds = 90; room.creatureSystem.tick();
+  const saved = JSON.parse(JSON.stringify(saveRoom(room))), restored = restoreRoom(saved);
+  assert.deepEqual(restored.creatureSystem.save(), room.creatureSystem.save());
+  restored.simSeconds = 120; restored.creatureSystem.tick();
+  for (const burrow of restored.world.burrows) {
+    const count = restored.creatureSystem.agents.filter(agent => agent.health > 0 && agent.burrowId === burrow.id).length;
+    assert.equal(count, burrow.type === "small" ? 2 : 5);
+  }
+  const colony = restored.colonies[0], beetle = restored.creatureSystem.agents[0];
+  Object.assign(beetle, { x: colony.x + 2, y: colony.y + 3 });
+  const packet = snapshotRoom(restored, true);
+  assert.equal(packet.state.rivals.find(agent => agent.id === beetle.id).burrowId, beetle.burrowId);
+  const broken = JSON.parse(JSON.stringify(saved)); broken.creatures.burrows[0].nextSpawnAt = null;
+  assert.throws(() => restoreRoom(broken), /굴 저장 형식/);
 });

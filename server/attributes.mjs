@@ -1,4 +1,8 @@
 export const ATTRIBUTES = [
+  { key: "harvest", name: "채집", color: "#adc979", effect: "식물·재료 채집 · 2개면 정밀 채집", description: "열매·잎·섬유 등을 회수합니다. 두 개 장착하면 거미줄을 채집합니다.", bonus: 1, stat: "채집 숙련", unit: "단계" },
+  { key: "digging", name: "굴착", color: "#cca478", effect: "구근·점토·광물 채집 해금", description: "흙과 암반에서 자원을 꺼냅니다. 단단한 광물에는 힘 두 개가 함께 필요합니다. 중복 장착 추가 효과는 없습니다.", bonus: 1, stat: "굴착 능력", unit: "", stacking: false },
+  { key: "absorption", name: "흡수", color: "#86cbd5", effect: "물·수액·수지 채집 해금", description: "액체를 모아 운반합니다. 끈끈한 수지는 힘이 함께 필요합니다. 중복 장착 추가 효과는 없습니다.", bonus: 1, stat: "흡수 능력", unit: "", stacking: false },
+  { key: "climbing", name: "등반", color: "#c6b6e3", effect: "높은 나무 열매에 접근", description: "채집과 함께 장착하면 나무에 달린 열매를 땁니다. 중복 장착 추가 효과는 없습니다.", bonus: 1, stat: "등반 능력", unit: "", stacking: false },
   { key: "strength", name: "힘", color: "#e6a79c", effect: "운반량 +2개", description: "한 번에 운반할 수 있는 먹이의 양을 늘립니다.", bonus: 2, stat: "운반량", unit: "개" },
   { key: "feet", name: "이동", color: "#8cd2bb", effect: "이동 속도 +0.3칸/초", description: "탐색과 왕복 이동을 빠르게 합니다.", bonus: 0.3, stat: "이동 속도", unit: "칸/초" },
   { key: "antenna", name: "감각", color: "#b2bffa", effect: "시야 반경 +2칸", description: "군락과 공유하는 실제 시야를 넓힙니다.", bonus: 2, stat: "시야 반경", unit: "칸" },
