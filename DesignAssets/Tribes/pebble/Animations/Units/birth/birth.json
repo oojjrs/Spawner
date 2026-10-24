@@ -1,0 +1,39 @@
+{
+  "tribe": "pebble",
+  "action": "birth",
+  "durationsMs": [
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60
+  ],
+  "loop": false,
+  "layers": "DesignAssets/Tribes/pebble/BaseParts/layers.json",
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 4,
+  "frameCount": 16,
+  "pivot": [
+    256,
+    448
+  ],
+  "rootMotion": false,
+  "atlas": "DesignAssets/Tribes/pebble/Animations/Units/birth/birth.png",
+  "runtimeAtlas": "DesignAssets/Tribes/pebble/Animations/Units/birth/birth.webp",
+  "preview": "DesignAssets/Tribes/pebble/Animations/Units/birth/birth-preview.gif",
+  "contact": "DesignAssets/Tribes/pebble/Animations/Units/birth/birth-contact.png"
+}

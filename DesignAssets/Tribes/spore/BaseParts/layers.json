@@ -1,0 +1,32 @@
+{
+  "frameSize": [
+    512,
+    512
+  ],
+  "footBaseline": 448,
+  "bodyPivot": [
+    256,
+    423
+  ],
+  "body": "DesignAssets/Tribes/spore/BaseParts/body.png",
+  "closedBody": "DesignAssets/Tribes/spore/BaseParts/body-closed.png",
+  "feet": [
+    "DesignAssets/Tribes/spore/BaseParts/foot-left.png",
+    "DesignAssets/Tribes/spore/BaseParts/foot-right.png"
+  ],
+  "neutral": "DesignAssets/Tribes/spore/BaseParts/neutral.png",
+  "eyes": [
+    [
+      214,
+      368,
+      14
+    ],
+    [
+      297,
+      368,
+      14
+    ]
+  ],
+  "source": "DesignAssets/TribeConcepts/base-spore-mushroom-coral-v2.png",
+  "note": "Approved source retained. Separate body and foot layers; frames are composed afresh. Closed expression uses local painted face samples."
+}

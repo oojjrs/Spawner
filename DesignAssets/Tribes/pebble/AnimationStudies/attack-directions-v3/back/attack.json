@@ -1,0 +1,50 @@
+{
+  "tribe": "pebble",
+  "action": "attack",
+  "direction": "back",
+  "status": "review-candidate",
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 4,
+  "frameCount": 16,
+  "durationsMs": [
+    60,
+    70,
+    60,
+    80,
+    30,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    70,
+    80,
+    90,
+    100,
+    60
+  ],
+  "durationMs": 1000,
+  "loop": false,
+  "hitFrame": 6,
+  "hitFrameIndex": 5,
+  "hitAtMs": 300,
+  "impactHoldMs": 300,
+  "pivot": [
+    256,
+    448
+  ],
+  "rootMotion": false,
+  "atlas": "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/back/attack.png",
+  "runtimeAtlas": "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/back/attack.webp",
+  "contact": "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/back/contact.png",
+  "mirroredFrom": null,
+  "facing": "rear surface with eyes occluded",
+  "screenDirection": [
+    0,
+    -1
+  ]
+}

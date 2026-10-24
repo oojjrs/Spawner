@@ -1,0 +1,74 @@
+{
+  "tribe": "spring",
+  "assets": [
+    {
+      "key": "nest-stage-01",
+      "sourcePath": "D:/.codex/generated_images/01a1682a-4d49-7db2-96cc-0f1ccff0d568/exec-8d5029b3-ab40-46ad-96e7-7d7aa326be34.png",
+      "postprocess": "copy",
+      "revision": 2
+    },
+    {
+      "key": "nest-stage-02",
+      "sourcePath": "D:/.codex/generated_images/01a1682a-4d49-7db2-96cc-0f1ccff0d568/exec-310262fa-4a3b-430c-abe2-04d2e76a915e.png",
+      "postprocess": "copy",
+      "revision": 2
+    },
+    {
+      "key": "nest-stage-03",
+      "sourcePath": "D:/.codex/generated_images/01a1682a-4d49-7db2-96cc-0f1ccff0d568/exec-c3679d4a-51dc-48e9-9999-0b1526a9eb2b.png",
+      "postprocess": "copy",
+      "revision": 2
+    },
+    {
+      "key": "nest-stage-04",
+      "sourcePath": "D:/.codex/generated_images/01a1682a-4d49-7db2-96cc-0f1ccff0d568/exec-39e97394-3dc6-4dcf-83dc-e3245c8a775d.png",
+      "postprocess": "copy",
+      "revision": 2
+    },
+    {
+      "key": "nest-ground",
+      "sourcePath": "D:\\.codex\\generated_images\\01a16860-018a-7493-a9c0-c2647f7ee270\\exec-722cada3-5bc6-4244-acb8-d8897dff0d62.png",
+      "postprocess": "copy"
+    },
+    {
+      "key": "strength-1",
+      "sourcePath": "D:\\.codex\\generated_images\\01a16860-018a-7493-a9c0-c2647f7ee270\\exec-d7adc246-4a56-44ca-b810-0a26ded3475c.png",
+      "postprocess": "copy"
+    },
+    {
+      "key": "strength-2",
+      "sourcePath": "D:\\.codex\\generated_images\\01a16860-018a-7493-a9c0-c2647f7ee270\\exec-3f20926c-d0ff-4742-b098-56f7cd45b642.png",
+      "postprocess": "alpha-threshold-65-percent-with-0.35-pixel-soft-edge"
+    },
+    {
+      "key": "feet-1",
+      "sourcePath": "D:\\.codex\\generated_images\\01a16860-018a-7493-a9c0-c2647f7ee270\\exec-ada825e6-9bc4-4d60-809d-da1329ba23a0.png",
+      "postprocess": "copy"
+    },
+    {
+      "key": "feet-2",
+      "sourcePath": "D:\\.codex\\generated_images\\01a16860-018a-7493-a9c0-c2647f7ee270\\exec-7b81c98d-310c-4abd-ad57-374856fd00a7.png",
+      "postprocess": "copy"
+    },
+    {
+      "key": "antenna-1",
+      "sourcePath": "D:\\.codex\\generated_images\\01a16860-018a-7493-a9c0-c2647f7ee270\\exec-dc340f06-3d7e-44cb-a1ea-ef75abd9421d.png",
+      "postprocess": "alpha-threshold-65-percent-with-0.35-pixel-soft-edge"
+    },
+    {
+      "key": "antenna-2",
+      "sourcePath": "D:\\.codex\\generated_images\\01a16860-018a-7493-a9c0-c2647f7ee270\\exec-946fa6cd-7441-470c-b5c7-74bee09c6913.png",
+      "postprocess": "copy"
+    },
+    {
+      "key": "shell-1",
+      "sourcePath": "D:\\.codex\\generated_images\\01a16860-018a-7493-a9c0-c2647f7ee270\\exec-d2286186-31ed-441f-bfd1-0f1443ec73cd.png",
+      "postprocess": "copy"
+    },
+    {
+      "key": "shell-2",
+      "sourcePath": "D:\\.codex\\generated_images\\01a16860-018a-7493-a9c0-c2647f7ee270\\exec-35e590d9-4cc7-425e-ac8a-ec5af1ec43d0.png",
+      "postprocess": "copy"
+    }
+  ]
+}

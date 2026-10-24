@@ -1,0 +1,2466 @@
+{
+  "cap": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    {
+      "center": 257,
+      "radius": 11.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 257,
+      "radius": 21.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 257,
+      "radius": 28.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 257,
+      "radius": 33.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 257,
+      "radius": 37.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 257,
+      "radius": 41.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 257,
+      "radius": 45.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256.5,
+      "radius": 49,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 257,
+      "radius": 52.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256.5,
+      "radius": 55,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256.5,
+      "radius": 58,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 257,
+      "radius": 60.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256.5,
+      "radius": 63,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 257,
+      "radius": 65.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256.5,
+      "radius": 68,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256.5,
+      "radius": 70,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256.5,
+      "radius": 72,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256.5,
+      "radius": 74,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256.5,
+      "radius": 76,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256.5,
+      "radius": 78,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256.5,
+      "radius": 80,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 81.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 83.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256.5,
+      "radius": 85,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 86.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 88.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 90,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 91.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 93,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 94.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 96,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 97.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 98.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 100,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 101,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 103,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 104,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 105,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 106,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 107,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255,
+      "radius": 108.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 110,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 111,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 112,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 113,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 114,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 115,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255,
+      "radius": 116.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255,
+      "radius": 117.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255,
+      "radius": 118.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255,
+      "radius": 119.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255,
+      "radius": 120.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255,
+      "radius": 121.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255,
+      "radius": 122.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255,
+      "radius": 123.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255,
+      "radius": 124.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 254.5,
+      "radius": 125,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 254.5,
+      "radius": 126,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 254.5,
+      "radius": 127,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 254.5,
+      "radius": 128,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 254.5,
+      "radius": 129,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255,
+      "radius": 129.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255,
+      "radius": 130.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255,
+      "radius": 131.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255,
+      "radius": 132.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255,
+      "radius": 133.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255,
+      "radius": 134.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 254.5,
+      "radius": 135,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 254.5,
+      "radius": 136,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 254.5,
+      "radius": 137,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 254.5,
+      "radius": 138,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 254.5,
+      "radius": 139,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255,
+      "radius": 139.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255,
+      "radius": 140.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255,
+      "radius": 141.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255,
+      "radius": 142.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255,
+      "radius": 143.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255,
+      "radius": 144.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255,
+      "radius": 145.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 146,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 147,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 148,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 149,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 150,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 151,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255,
+      "radius": 151.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 153,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 154,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 155,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 155.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 156.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 157.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 158.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 159.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 161,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 162,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 163,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 164,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 165.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 166.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 167.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 168.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 170,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 171.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 172.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 173.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 175,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 176.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 178,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 179,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 180,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 182,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 183,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 184,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 186,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 187,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 188,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 189,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 190,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255,
+      "radius": 191.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 193,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 194,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 195,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 196,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 197,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 198,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 199,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 200,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255,
+      "radius": 200.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 201,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 202,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 203,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 204,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 204,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 205,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 206,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 206,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 207,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255,
+      "radius": 207.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 208,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255,
+      "radius": 208.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 209,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 210,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 210,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 210,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 211,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 211,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 211,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 211.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 212,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 212,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 255.5,
+      "radius": 212,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 210.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 210.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 210.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 210.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 210.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 210.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 209.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 209.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 208.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 208.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 207.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 206.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 205.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 204.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 203.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 202.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 200.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 199.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 197.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 196.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 194.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 192.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 190.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 188.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 186.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 183.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 181.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 178.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 176.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 173.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 170.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 166.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 163.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 159.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 155.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 151.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 147.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 143.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 138.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 133.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 127.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 121.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 115.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 108.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 101.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 92.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 83.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 72.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 59.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 42.5,
+      "depthRatio": 0.62
+    },
+    {
+      "center": 256,
+      "radius": 0.5,
+      "depthRatio": 0.62
+    },
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "stalk": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    {
+      "center": 256,
+      "radius": 64.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 256,
+      "radius": 64.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 256,
+      "radius": 64.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 256,
+      "radius": 64.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 256,
+      "radius": 64.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 256,
+      "radius": 64.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 256,
+      "radius": 64.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 256,
+      "radius": 64.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 256,
+      "radius": 64.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 256,
+      "radius": 64.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 256,
+      "radius": 64.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 256,
+      "radius": 64.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 256,
+      "radius": 64.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 256,
+      "radius": 64.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 256,
+      "radius": 64.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 256,
+      "radius": 64.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 256,
+      "radius": 64.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 256,
+      "radius": 64.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 256,
+      "radius": 64.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 256,
+      "radius": 64.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 256,
+      "radius": 64.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 256,
+      "radius": 64.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 256,
+      "radius": 64.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 256,
+      "radius": 64.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 256,
+      "radius": 64.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 256,
+      "radius": 64.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255.5,
+      "radius": 65,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 256,
+      "radius": 65.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255.5,
+      "radius": 66,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 256,
+      "radius": 66.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 256,
+      "radius": 66.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255.5,
+      "radius": 67,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 256,
+      "radius": 67.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255.5,
+      "radius": 68,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255.5,
+      "radius": 68,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255.5,
+      "radius": 68,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255.5,
+      "radius": 68,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255.5,
+      "radius": 68,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255.5,
+      "radius": 68,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255.5,
+      "radius": 68,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255.5,
+      "radius": 68,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 68.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 68.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 68.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255.5,
+      "radius": 69,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255.5,
+      "radius": 69,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 69.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 69.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255.5,
+      "radius": 70,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255.5,
+      "radius": 70,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 70.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255.5,
+      "radius": 71,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 71.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 71.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255.5,
+      "radius": 72,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 72.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 72.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255.5,
+      "radius": 73,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 73.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255.5,
+      "radius": 74,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 74.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 74.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 75.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 75.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255.5,
+      "radius": 76,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 76.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 76.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 77.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 77.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 77.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 78.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 78.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 79,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 79.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 79.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 80,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 80.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 80.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254,
+      "radius": 81.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 81.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 81.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 82,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 82,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255.5,
+      "radius": 83,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 83.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 83,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 83,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255.5,
+      "radius": 84,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 84.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 84,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 84,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 84.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 85,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 85,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 85,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 85,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 85,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 85,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 86,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 86,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 86,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 86,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 86,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 86,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 86,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 86,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 86,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 86,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 86,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254,
+      "radius": 86.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254,
+      "radius": 86.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 86,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 86,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 86,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254,
+      "radius": 85.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 85,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 85,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 85.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 85.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254,
+      "radius": 84.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 84,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 84.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 84.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 83,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 83.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254,
+      "radius": 82.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 82,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 82.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 81,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254,
+      "radius": 81.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 80,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 79,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 79,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 79,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 254.5,
+      "radius": 78,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 78.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 77.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 75.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 74.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 73.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 71.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 69.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 68.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 66.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 64.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 62.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 60.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 58.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 55.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 53.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 50.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 46.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 42.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 37.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 30.5,
+      "depthRatio": 0.82
+    },
+    {
+      "center": 255,
+      "radius": 16.5,
+      "depthRatio": 0.82
+    },
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ]
+}

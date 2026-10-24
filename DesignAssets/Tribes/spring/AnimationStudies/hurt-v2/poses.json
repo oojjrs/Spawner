@@ -1,0 +1,178 @@
+[
+  {
+    "frame": 0,
+    "timeMs": 0,
+    "recoil": 0,
+    "ripple": 0,
+    "maximumLocalDentPixels": 0,
+    "bottomSourceY": 434,
+    "bottomOutputY": 447,
+    "coherentInverse": true,
+    "eyesClosed": false
+  },
+  {
+    "frame": 1,
+    "timeMs": 20,
+    "recoil": 0.3,
+    "ripple": 0,
+    "maximumLocalDentPixels": 9.6,
+    "bottomSourceY": 434,
+    "bottomOutputY": 447,
+    "coherentInverse": true,
+    "eyesClosed": false
+  },
+  {
+    "frame": 2,
+    "timeMs": 50,
+    "recoil": 0.7,
+    "ripple": 0,
+    "maximumLocalDentPixels": 22.4,
+    "bottomSourceY": 434,
+    "bottomOutputY": 447,
+    "coherentInverse": true,
+    "eyesClosed": false
+  },
+  {
+    "frame": 3,
+    "timeMs": 80,
+    "recoil": 0.92,
+    "ripple": 0,
+    "maximumLocalDentPixels": 29.44,
+    "bottomSourceY": 434,
+    "bottomOutputY": 447,
+    "coherentInverse": true,
+    "eyesClosed": true
+  },
+  {
+    "frame": 4,
+    "timeMs": 110,
+    "recoil": 1,
+    "ripple": 0,
+    "maximumLocalDentPixels": 32,
+    "bottomSourceY": 434,
+    "bottomOutputY": 447,
+    "coherentInverse": true,
+    "eyesClosed": true
+  },
+  {
+    "frame": 5,
+    "timeMs": 510,
+    "recoil": 0.94,
+    "ripple": 0.35,
+    "maximumLocalDentPixels": 30.08,
+    "bottomSourceY": 434,
+    "bottomOutputY": 447,
+    "coherentInverse": true,
+    "eyesClosed": true
+  },
+  {
+    "frame": 6,
+    "timeMs": 540,
+    "recoil": 0.7,
+    "ripple": 0.75,
+    "maximumLocalDentPixels": 22.4,
+    "bottomSourceY": 434,
+    "bottomOutputY": 447,
+    "coherentInverse": true,
+    "eyesClosed": true
+  },
+  {
+    "frame": 7,
+    "timeMs": 570,
+    "recoil": 0.44,
+    "ripple": 0.55,
+    "maximumLocalDentPixels": 14.08,
+    "bottomSourceY": 434,
+    "bottomOutputY": 447,
+    "coherentInverse": true,
+    "eyesClosed": true
+  },
+  {
+    "frame": 8,
+    "timeMs": 600,
+    "recoil": 0.22,
+    "ripple": -0.35,
+    "maximumLocalDentPixels": 7.04,
+    "bottomSourceY": 434,
+    "bottomOutputY": 447,
+    "coherentInverse": true,
+    "eyesClosed": false
+  },
+  {
+    "frame": 9,
+    "timeMs": 620,
+    "recoil": 0.06,
+    "ripple": -0.25,
+    "maximumLocalDentPixels": 1.92,
+    "bottomSourceY": 434,
+    "bottomOutputY": 447,
+    "coherentInverse": true,
+    "eyesClosed": false
+  },
+  {
+    "frame": 10,
+    "timeMs": 640,
+    "recoil": 0,
+    "ripple": 0.12,
+    "maximumLocalDentPixels": 0,
+    "bottomSourceY": 434,
+    "bottomOutputY": 447,
+    "coherentInverse": true,
+    "eyesClosed": false
+  },
+  {
+    "frame": 11,
+    "timeMs": 660,
+    "recoil": 0,
+    "ripple": 0.08,
+    "maximumLocalDentPixels": 0,
+    "bottomSourceY": 434,
+    "bottomOutputY": 447,
+    "coherentInverse": true,
+    "eyesClosed": false
+  },
+  {
+    "frame": 12,
+    "timeMs": 680,
+    "recoil": 0,
+    "ripple": 0,
+    "maximumLocalDentPixels": 0,
+    "bottomSourceY": 434,
+    "bottomOutputY": 447,
+    "coherentInverse": true,
+    "eyesClosed": false
+  },
+  {
+    "frame": 13,
+    "timeMs": 700,
+    "recoil": 0,
+    "ripple": 0,
+    "maximumLocalDentPixels": 0,
+    "bottomSourceY": 434,
+    "bottomOutputY": 447,
+    "coherentInverse": true,
+    "eyesClosed": false
+  },
+  {
+    "frame": 14,
+    "timeMs": 720,
+    "recoil": 0,
+    "ripple": 0,
+    "maximumLocalDentPixels": 0,
+    "bottomSourceY": 434,
+    "bottomOutputY": 447,
+    "coherentInverse": true,
+    "eyesClosed": false
+  },
+  {
+    "frame": 15,
+    "timeMs": 740,
+    "recoil": 0,
+    "ripple": 0,
+    "maximumLocalDentPixels": 0,
+    "bottomSourceY": 434,
+    "bottomOutputY": 447,
+    "coherentInverse": true,
+    "eyesClosed": false
+  }
+]

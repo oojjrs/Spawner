@@ -1,0 +1,32 @@
+{
+  "frameSize": [
+    512,
+    512
+  ],
+  "footBaseline": 448,
+  "bodyPivot": [
+    256,
+    420
+  ],
+  "body": "DesignAssets/Tribes/pebble/BaseParts/body.png",
+  "closedBody": "DesignAssets/Tribes/pebble/BaseParts/body-closed.png",
+  "feet": [
+    "DesignAssets/Tribes/pebble/BaseParts/foot-left.png",
+    "DesignAssets/Tribes/pebble/BaseParts/foot-right.png"
+  ],
+  "neutral": "DesignAssets/Tribes/pebble/BaseParts/neutral.png",
+  "eyes": [
+    [
+      171,
+      315,
+      17
+    ],
+    [
+      339,
+      315,
+      17
+    ]
+  ],
+  "source": "DesignAssets/TribeConcepts/base-river-pebble-ochre-v2.png",
+  "note": "Approved source retained. Separate body and foot layers; frames are composed afresh. Closed expression uses local painted face samples."
+}

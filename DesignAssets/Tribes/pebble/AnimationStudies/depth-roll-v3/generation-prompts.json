@@ -1,0 +1,7 @@
+{
+  "provider": "built-in image_gen",
+  "use": "hidden rear surface painting",
+  "prompt": "Use case: precise-object-edit. Asset type: hidden rear-surface source painting for a 2D game character animation, NOT an animation frame or preview. Edit target: the referenced approved Mongdol ochre river-pebble creature body without feet. Create its plain BACK VIEW as a single isolated sprite. Preserve the EXACT wide low rounded hexagonal stone silhouette, proportions, ochre sandstone material, softly painted broad polygon facets, dark muted green-brown outline and image composition of the reference. Remove both eyes completely; the rear surface has no eyes, face, appendages or decorative marks. Paint a coherent subtly different faceted rear surface of the same stone with matching warm muted ochre palette and broad shallow facets; do not introduce new cracks, gems or features. Keep same overall outline and empty padding as reference, centered on a square canvas. Transparent background, no cast shadow, no labels, no text. The front reference is identity and palette authority. This will be used as the actual rear texture of a thick rotating body, so keep the complete stone filled to the contour and avoid any central dark eye-like spots.",
+  "reference": "DesignAssets/Tribes/pebble/AnimationStudies/roll-v2/Parts/stone.png",
+  "output": "DesignAssets/Tribes/pebble/AnimationStudies/depth-roll-v3/Parts/rear-source.png"
+}

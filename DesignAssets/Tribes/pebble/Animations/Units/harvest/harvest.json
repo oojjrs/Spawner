@@ -1,0 +1,39 @@
+{
+  "tribe": "pebble",
+  "action": "harvest",
+  "durationsMs": [
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70
+  ],
+  "loop": true,
+  "layers": "DesignAssets/Tribes/pebble/BaseParts/layers.json",
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 4,
+  "frameCount": 16,
+  "pivot": [
+    256,
+    448
+  ],
+  "rootMotion": false,
+  "atlas": "DesignAssets/Tribes/pebble/Animations/Units/harvest/harvest.png",
+  "runtimeAtlas": "DesignAssets/Tribes/pebble/Animations/Units/harvest/harvest.webp",
+  "preview": "DesignAssets/Tribes/pebble/Animations/Units/harvest/harvest-preview.gif",
+  "contact": "DesignAssets/Tribes/pebble/Animations/Units/harvest/harvest-contact.png"
+}

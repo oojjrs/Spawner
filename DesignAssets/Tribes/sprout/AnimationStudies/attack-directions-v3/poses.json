@@ -1,0 +1,345 @@
+{
+  "right": [],
+  "left": [
+    {
+      "frame": 0,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 1,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 2,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 3,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 4,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 5,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 6,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 7,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 8,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 9,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 10,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 11,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 12,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 13,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 14,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 15,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    }
+  ],
+  "front": [
+    {
+      "frame": 0,
+      "timeMs": 0,
+      "direction": "front",
+      "gaze": "toward camera",
+      "lungeY": 0,
+      "sourceScale": 1.1458333333333333
+    },
+    {
+      "frame": 1,
+      "timeMs": 60,
+      "direction": "front",
+      "gaze": "toward camera",
+      "lungeY": 0,
+      "sourceScale": 1.1458333333333333
+    },
+    {
+      "frame": 2,
+      "timeMs": 130,
+      "direction": "front",
+      "gaze": "toward camera",
+      "lungeY": 0,
+      "sourceScale": 1.1458333333333333
+    },
+    {
+      "frame": 3,
+      "timeMs": 190,
+      "direction": "front",
+      "gaze": "toward camera",
+      "lungeY": 0,
+      "sourceScale": 1.1458333333333333
+    },
+    {
+      "frame": 4,
+      "timeMs": 270,
+      "direction": "front",
+      "gaze": "toward camera",
+      "lungeY": 5.04,
+      "sourceScale": 1.1458333333333333
+    },
+    {
+      "frame": 5,
+      "timeMs": 300,
+      "direction": "front",
+      "gaze": "toward camera",
+      "lungeY": 12,
+      "sourceScale": 1.1458333333333333
+    },
+    {
+      "frame": 6,
+      "timeMs": 350,
+      "direction": "front",
+      "gaze": "toward camera",
+      "lungeY": 12,
+      "sourceScale": 1.1458333333333333
+    },
+    {
+      "frame": 7,
+      "timeMs": 400,
+      "direction": "front",
+      "gaze": "toward camera",
+      "lungeY": 11.76,
+      "sourceScale": 1.1458333333333333
+    },
+    {
+      "frame": 8,
+      "timeMs": 450,
+      "direction": "front",
+      "gaze": "toward camera",
+      "lungeY": 11.52,
+      "sourceScale": 1.1458333333333333
+    },
+    {
+      "frame": 9,
+      "timeMs": 500,
+      "direction": "front",
+      "gaze": "toward camera",
+      "lungeY": 11.28,
+      "sourceScale": 1.1458333333333333
+    },
+    {
+      "frame": 10,
+      "timeMs": 550,
+      "direction": "front",
+      "gaze": "toward camera",
+      "lungeY": 10.56,
+      "sourceScale": 1.1458333333333333
+    },
+    {
+      "frame": 11,
+      "timeMs": 600,
+      "direction": "front",
+      "gaze": "toward camera",
+      "lungeY": 8.040000000000001,
+      "sourceScale": 1.1458333333333333
+    },
+    {
+      "frame": 12,
+      "timeMs": 670,
+      "direction": "front",
+      "gaze": "toward camera",
+      "lungeY": 4.32,
+      "sourceScale": 1.1458333333333333
+    },
+    {
+      "frame": 13,
+      "timeMs": 750,
+      "direction": "front",
+      "gaze": "toward camera",
+      "lungeY": 1.56,
+      "sourceScale": 1.1458333333333333
+    },
+    {
+      "frame": 14,
+      "timeMs": 840,
+      "direction": "front",
+      "gaze": "toward camera",
+      "lungeY": -0.54,
+      "sourceScale": 1.1458333333333333
+    },
+    {
+      "frame": 15,
+      "timeMs": 940,
+      "direction": "front",
+      "gaze": "toward camera",
+      "lungeY": 0,
+      "sourceScale": 1.1458333333333333
+    }
+  ],
+  "back": [
+    {
+      "frame": 0,
+      "timeMs": 0,
+      "direction": "back",
+      "gaze": "away; no eyes",
+      "lungeY": 0,
+      "sourceScale": 1.1458333333333333
+    },
+    {
+      "frame": 1,
+      "timeMs": 60,
+      "direction": "back",
+      "gaze": "away; no eyes",
+      "lungeY": 0,
+      "sourceScale": 1.1458333333333333
+    },
+    {
+      "frame": 2,
+      "timeMs": 130,
+      "direction": "back",
+      "gaze": "away; no eyes",
+      "lungeY": 0,
+      "sourceScale": 1.1458333333333333
+    },
+    {
+      "frame": 3,
+      "timeMs": 190,
+      "direction": "back",
+      "gaze": "away; no eyes",
+      "lungeY": 0,
+      "sourceScale": 1.1458333333333333
+    },
+    {
+      "frame": 4,
+      "timeMs": 270,
+      "direction": "back",
+      "gaze": "away; no eyes",
+      "lungeY": -5.04,
+      "sourceScale": 1.1458333333333333
+    },
+    {
+      "frame": 5,
+      "timeMs": 300,
+      "direction": "back",
+      "gaze": "away; no eyes",
+      "lungeY": -12,
+      "sourceScale": 1.1458333333333333
+    },
+    {
+      "frame": 6,
+      "timeMs": 350,
+      "direction": "back",
+      "gaze": "away; no eyes",
+      "lungeY": -12,
+      "sourceScale": 1.1458333333333333
+    },
+    {
+      "frame": 7,
+      "timeMs": 400,
+      "direction": "back",
+      "gaze": "away; no eyes",
+      "lungeY": -11.76,
+      "sourceScale": 1.1458333333333333
+    },
+    {
+      "frame": 8,
+      "timeMs": 450,
+      "direction": "back",
+      "gaze": "away; no eyes",
+      "lungeY": -11.52,
+      "sourceScale": 1.1458333333333333
+    },
+    {
+      "frame": 9,
+      "timeMs": 500,
+      "direction": "back",
+      "gaze": "away; no eyes",
+      "lungeY": -11.28,
+      "sourceScale": 1.1458333333333333
+    },
+    {
+      "frame": 10,
+      "timeMs": 550,
+      "direction": "back",
+      "gaze": "away; no eyes",
+      "lungeY": -10.56,
+      "sourceScale": 1.1458333333333333
+    },
+    {
+      "frame": 11,
+      "timeMs": 600,
+      "direction": "back",
+      "gaze": "away; no eyes",
+      "lungeY": -8.040000000000001,
+      "sourceScale": 1.1458333333333333
+    },
+    {
+      "frame": 12,
+      "timeMs": 670,
+      "direction": "back",
+      "gaze": "away; no eyes",
+      "lungeY": -4.32,
+      "sourceScale": 1.1458333333333333
+    },
+    {
+      "frame": 13,
+      "timeMs": 750,
+      "direction": "back",
+      "gaze": "away; no eyes",
+      "lungeY": -1.56,
+      "sourceScale": 1.1458333333333333
+    },
+    {
+      "frame": 14,
+      "timeMs": 840,
+      "direction": "back",
+      "gaze": "away; no eyes",
+      "lungeY": 0.54,
+      "sourceScale": 1.1458333333333333
+    },
+    {
+      "frame": 15,
+      "timeMs": 940,
+      "direction": "back",
+      "gaze": "away; no eyes",
+      "lungeY": 0,
+      "sourceScale": 1.1458333333333333
+    }
+  ]
+}

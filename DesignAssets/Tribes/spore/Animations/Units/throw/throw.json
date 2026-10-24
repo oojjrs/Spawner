@@ -1,0 +1,39 @@
+{
+  "tribe": "spore",
+  "action": "throw",
+  "durationsMs": [
+    60,
+    70,
+    60,
+    80,
+    30,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    70,
+    80,
+    90,
+    100,
+    60
+  ],
+  "loop": false,
+  "layers": "DesignAssets/Tribes/spore/BaseParts/layers.json",
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 4,
+  "frameCount": 16,
+  "pivot": [
+    256,
+    448
+  ],
+  "rootMotion": false,
+  "atlas": "DesignAssets/Tribes/spore/Animations/Units/throw/throw.png",
+  "runtimeAtlas": "DesignAssets/Tribes/spore/Animations/Units/throw/throw.webp",
+  "preview": "DesignAssets/Tribes/spore/Animations/Units/throw/throw-preview.gif",
+  "contact": "DesignAssets/Tribes/spore/Animations/Units/throw/throw-contact.png"
+}

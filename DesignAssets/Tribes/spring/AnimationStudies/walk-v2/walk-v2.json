@@ -1,0 +1,58 @@
+{
+  "tribe": "spring",
+  "action": "walk",
+  "status": "review-candidate",
+  "approvedDesignSource": "DesignAssets/Tribes/spring/BaseParts/neutral.png",
+  "sourceSha256": "b2ca83c2b7607f4b8c94d3a49a9b04c17f6d7d4dc375f84ef679882d338d372e",
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 4,
+  "frameCount": 16,
+  "durationsMs": [
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70
+  ],
+  "loop": true,
+  "rootMotion": false,
+  "pivot": [
+    256,
+    448
+  ],
+  "stridePxPerCycle": 56,
+  "atlas": "DesignAssets/Tribes/spring/AnimationStudies/walk-v2/walk-v2.png",
+  "runtimeAtlas": "DesignAssets/Tribes/spring/AnimationStudies/walk-v2/walk-v2.webp",
+  "preview": "DesignAssets/Tribes/spring/AnimationStudies/walk-v2/walk-preview.gif",
+  "comparison": "DesignAssets/Tribes/spring/AnimationStudies/walk-v2/walk-comparison-preview.gif",
+  "parts": [
+    "DesignAssets/Tribes/spring/AnimationStudies/walk-v2/Parts/torso.png",
+    "DesignAssets/Tribes/spring/AnimationStudies/walk-v2/Parts/wave-tip.png",
+    "DesignAssets/Tribes/spring/AnimationStudies/walk-v2/Parts/face.png",
+    "DesignAssets/Tribes/spring/AnimationStudies/walk-v2/Parts/foot-left.png",
+    "DesignAssets/Tribes/spring/AnimationStudies/walk-v2/Parts/foot-right.png"
+  ],
+  "motion": {
+    "torso": "area-preserving squeeze and shear",
+    "tip": "delayed bend with a fixed blending joint",
+    "face": "rigid translation to preserve eyes",
+    "feet": "alternating linear stance and arced recovery",
+    "resampling": "bilinear premultiplied-alpha",
+    "bodyAreaMin": 45509.35076798918,
+    "bodyAreaMax": 45764.089875135396
+  }
+}

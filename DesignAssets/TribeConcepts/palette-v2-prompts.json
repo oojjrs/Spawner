@@ -1,0 +1,26 @@
+{
+  "generator": "built-in image_gen",
+  "intent": "4부족 같은 높이 비교 및 3종 색상 변경 시안",
+  "unchangedReference": "DesignAssets/Units/starter-sprout-bean.png",
+  "normalization": "visible alpha bounds, same full height of 300 pixels including sprouts and crest; aspect ratios preserved; common bottom baseline",
+  "concepts": [
+    {
+      "key": "mushroom",
+      "source": "base-spore-mushroom-v1.png",
+      "output": "base-spore-mushroom-coral-v2.png",
+      "prompt": "Use case: precise-object-edit. Make ONE palette variant of the attached existing Spawner character artwork. This is a COLOR-ONLY edit of this exact sprite, not a redraw or redesign. Strictly preserve every anatomical shape, exact silhouette, relative body/foot proportions, pose, eye placement and eye size, camera, crop, original hand-painted shading layout, thin dark teal outline and matte 2D illustration style. Do not add or remove any object or feature. Keep true transparent background and original canvas orientation and full character visible. No labels, text, swatches, other characters, ground or shadow. Keep the image soft and restrained, avoid fluorescent saturation. Recolor ONLY the blue-lilac mushroom cap to muted warm coral/terracotta: upper-left soft peach coral highlight, primary cap dusty coral-red (#C97876 direction), lower cap edge deeper terracotta, underside muted wine-brown. Keep the cream ivory stalk and feet and exact dark eyes. Maintain the same clear difference between ivory stalk and colored cap. This cap must stay coral-red, never orange-yellow honey or golden food mushroom."
+    },
+    {
+      "key": "pebble",
+      "source": "base-river-pebble-v1.png",
+      "output": "base-river-pebble-ochre-v2.png",
+      "prompt": "Use case: precise-object-edit. Make ONE palette variant of the attached existing Spawner character artwork. This is a COLOR-ONLY edit of this exact sprite, not a redraw or redesign. Strictly preserve every anatomical shape, exact silhouette, relative body/foot proportions, pose, eye placement and eye size, camera, crop, original hand-painted shading layout, thin dark teal outline and matte 2D illustration style. Do not add or remove any object or feature. Keep true transparent background and original canvas orientation and full character visible. No labels, text, swatches, other characters, ground or shadow. Keep the image soft and restrained, avoid fluorescent saturation. Recolor ONLY the stone body and feet from pale mauve-gray to warm muted ochre sandstone. Main midtone warm sandy ochre (#B79B67 direction), upper-left pale warm sand, lower and side stone planes deeper olive-brown ochre. Increase color identity so it is visibly earthy golden-brown instead of neutral gray, but keep it natural matte rock, never shiny gold or luminous amber. Keep the original dark green eyes and broad stone planes."
+    },
+    {
+      "key": "droplet",
+      "source": "base-water-droplet-v1.png",
+      "output": "base-water-droplet-teal-v2.png",
+      "prompt": "Use case: precise-object-edit. Make ONE palette variant of the attached existing Spawner character artwork. This is a COLOR-ONLY edit of this exact sprite, not a redraw or redesign. Strictly preserve every anatomical shape, exact silhouette, relative body/foot proportions, pose, eye placement and eye size, camera, crop, original hand-painted shading layout, thin dark teal outline and matte 2D illustration style. Do not add or remove any object or feature. Keep true transparent background and original canvas orientation and full character visible. No labels, text, swatches, other characters, ground or shadow. Keep the image soft and restrained, avoid fluorescent saturation. Recolor ONLY the pale powder-blue body and feet to moderately saturated aqua-teal. Midtone muted turquoise (#50AFA9 direction), left and central highlights pale mint-aqua rather than mostly white, lower-right shadows deep desaturated teal. Darken the midtone noticeably relative to original powder blue so water reads clearly against pale-green bean. Preserve original dark blue-teal eyes. Remain opaque matte softly painted liquid, never transparent glass or glossy jelly."
+    }
+  ]
+}

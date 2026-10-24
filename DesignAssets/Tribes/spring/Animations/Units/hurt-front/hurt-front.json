@@ -1,0 +1,42 @@
+{
+  "tribe": "spring",
+  "action": "hurt-front",
+  "durationsMs": [
+    20,
+    30,
+    30,
+    30,
+    400,
+    30,
+    30,
+    30,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+  ],
+  "loop": false,
+  "layers": "DesignAssets/Tribes/spring/BaseParts/layers.json",
+  "hitFrom": "front",
+  "holdFrame": 4,
+  "closedEyeHoldMs": 400,
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 4,
+  "frameCount": 16,
+  "pivot": [
+    256,
+    448
+  ],
+  "rootMotion": false,
+  "atlas": "DesignAssets/Tribes/spring/Animations/Units/hurt-front/hurt-front.png",
+  "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Units/hurt-front/hurt-front.webp",
+  "preview": "DesignAssets/Tribes/spring/Animations/Units/hurt-front/hurt-front-preview.gif",
+  "contact": "DesignAssets/Tribes/spring/Animations/Units/hurt-front/hurt-front-contact.png"
+}

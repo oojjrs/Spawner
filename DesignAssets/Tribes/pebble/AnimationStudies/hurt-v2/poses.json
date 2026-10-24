@@ -1,0 +1,258 @@
+[
+  {
+    "frame": 0,
+    "timeMs": 0,
+    "recoil": 0,
+    "rotationRadians": 0,
+    "center": [
+      256,
+      292
+    ],
+    "scale": [
+      1,
+      1
+    ],
+    "supportRadius": 155,
+    "eyesClosed": false
+  },
+  {
+    "frame": 1,
+    "timeMs": 20,
+    "recoil": 0.3,
+    "rotationRadians": -0.0225,
+    "center": [
+      253.9,
+      289.0769320507196
+    ],
+    "scale": [
+      1,
+      1
+    ],
+    "supportRadius": 157.3230679492804,
+    "eyesClosed": false
+  },
+  {
+    "frame": 2,
+    "timeMs": 50,
+    "recoil": 0.7,
+    "rotationRadians": -0.0525,
+    "center": [
+      251.1,
+      285.30359227183135
+    ],
+    "scale": [
+      1,
+      1
+    ],
+    "supportRadius": 160.29640772816867,
+    "eyesClosed": false
+  },
+  {
+    "frame": 3,
+    "timeMs": 80,
+    "recoil": 0.92,
+    "rotationRadians": -0.069,
+    "center": [
+      249.56,
+      283.28957867053504
+    ],
+    "scale": [
+      1,
+      1
+    ],
+    "supportRadius": 161.87042132946502,
+    "eyesClosed": true
+  },
+  {
+    "frame": 4,
+    "timeMs": 110,
+    "recoil": 1,
+    "rotationRadians": -0.075,
+    "center": [
+      249,
+      282.56811392896986
+    ],
+    "scale": [
+      1,
+      1
+    ],
+    "supportRadius": 162.4318860710301,
+    "eyesClosed": true
+  },
+  {
+    "frame": 5,
+    "timeMs": 510,
+    "recoil": 0.94,
+    "rotationRadians": -0.0705,
+    "center": [
+      249.42,
+      283.10866538096246
+    ],
+    "scale": [
+      1,
+      1
+    ],
+    "supportRadius": 162.01133461903754,
+    "eyesClosed": true
+  },
+  {
+    "frame": 6,
+    "timeMs": 540,
+    "recoil": 0.7,
+    "rotationRadians": -0.0525,
+    "center": [
+      251.1,
+      285.30359227183135
+    ],
+    "scale": [
+      1,
+      1
+    ],
+    "supportRadius": 160.29640772816867,
+    "eyesClosed": true
+  },
+  {
+    "frame": 7,
+    "timeMs": 570,
+    "recoil": 0.44,
+    "rotationRadians": -0.033,
+    "center": [
+      252.92,
+      287.7400187044623
+    ],
+    "scale": [
+      1,
+      1
+    ],
+    "supportRadius": 158.3799812955377,
+    "eyesClosed": true
+  },
+  {
+    "frame": 8,
+    "timeMs": 600,
+    "recoil": 0.22,
+    "rotationRadians": -0.0165,
+    "center": [
+      255.86,
+      289.84867750742967
+    ],
+    "scale": [
+      1,
+      1
+    ],
+    "supportRadius": 156.71132249257033,
+    "eyesClosed": false
+  },
+  {
+    "frame": 9,
+    "timeMs": 620,
+    "recoil": 0.06,
+    "rotationRadians": -0.0045,
+    "center": [
+      254.88000000000002,
+      291.40907096703756
+    ],
+    "scale": [
+      1,
+      1
+    ],
+    "supportRadius": 155.47092903296243,
+    "eyesClosed": false
+  },
+  {
+    "frame": 10,
+    "timeMs": 640,
+    "recoil": 0,
+    "rotationRadians": 0,
+    "center": [
+      256.3,
+      292
+    ],
+    "scale": [
+      1,
+      1
+    ],
+    "supportRadius": 155,
+    "eyesClosed": false
+  },
+  {
+    "frame": 11,
+    "timeMs": 660,
+    "recoil": 0,
+    "rotationRadians": 0,
+    "center": [
+      256,
+      292
+    ],
+    "scale": [
+      1,
+      1
+    ],
+    "supportRadius": 155,
+    "eyesClosed": false
+  },
+  {
+    "frame": 12,
+    "timeMs": 680,
+    "recoil": 0,
+    "rotationRadians": 0,
+    "center": [
+      256,
+      292
+    ],
+    "scale": [
+      1,
+      1
+    ],
+    "supportRadius": 155,
+    "eyesClosed": false
+  },
+  {
+    "frame": 13,
+    "timeMs": 700,
+    "recoil": 0,
+    "rotationRadians": 0,
+    "center": [
+      256,
+      292
+    ],
+    "scale": [
+      1,
+      1
+    ],
+    "supportRadius": 155,
+    "eyesClosed": false
+  },
+  {
+    "frame": 14,
+    "timeMs": 720,
+    "recoil": 0,
+    "rotationRadians": 0,
+    "center": [
+      256,
+      292
+    ],
+    "scale": [
+      1,
+      1
+    ],
+    "supportRadius": 155,
+    "eyesClosed": false
+  },
+  {
+    "frame": 15,
+    "timeMs": 740,
+    "recoil": 0,
+    "rotationRadians": 0,
+    "center": [
+      256,
+      292
+    ],
+    "scale": [
+      1,
+      1
+    ],
+    "supportRadius": 155,
+    "eyesClosed": false
+  }
+]

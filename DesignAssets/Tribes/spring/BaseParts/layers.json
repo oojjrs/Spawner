@@ -1,0 +1,32 @@
+{
+  "frameSize": [
+    512,
+    512
+  ],
+  "footBaseline": 448,
+  "bodyPivot": [
+    256,
+    424
+  ],
+  "body": "DesignAssets/Tribes/spring/BaseParts/body.png",
+  "closedBody": "DesignAssets/Tribes/spring/BaseParts/body-closed.png",
+  "feet": [
+    "DesignAssets/Tribes/spring/BaseParts/foot-left.png",
+    "DesignAssets/Tribes/spring/BaseParts/foot-right.png"
+  ],
+  "neutral": "DesignAssets/Tribes/spring/BaseParts/neutral.png",
+  "eyes": [
+    [
+      203,
+      342,
+      17
+    ],
+    [
+      307,
+      342,
+      17
+    ]
+  ],
+  "source": "DesignAssets/TribeConcepts/base-water-droplet-teal-v2.png",
+  "note": "Approved source retained. Separate body and foot layers; frames are composed afresh. Closed expression uses local painted face samples."
+}

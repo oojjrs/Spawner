@@ -1,0 +1,41 @@
+{
+  "baseline": "current sprout faction artwork, excluding archived candidates and experiments",
+  "newStaticSourceCount": 37,
+  "approvedStaticSourcesReused": 5,
+  "newTribes": [
+    {
+      "id": "spore",
+      "starter": 1,
+      "nests": 4,
+      "ground": 1,
+      "attributeParts": 8,
+      "unitMotions": 12,
+      "nestIdle": 4,
+      "nestGrowth": 3,
+      "runtimeConnected": false
+    },
+    {
+      "id": "pebble",
+      "starter": 1,
+      "nests": 4,
+      "ground": 1,
+      "attributeParts": 8,
+      "unitMotions": 12,
+      "nestIdle": 4,
+      "nestGrowth": 3,
+      "runtimeConnected": false
+    },
+    {
+      "id": "spring",
+      "starter": 1,
+      "nests": 4,
+      "ground": 1,
+      "attributeParts": 8,
+      "unitMotions": 12,
+      "nestIdle": 4,
+      "nestGrowth": 3,
+      "runtimeConnected": false
+    }
+  ],
+  "manifest": "DesignAssets/Tribes/manifest.json"
+}

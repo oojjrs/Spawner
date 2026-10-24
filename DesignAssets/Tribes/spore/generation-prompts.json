@@ -1,0 +1,118 @@
+{
+  "tribe": "spore",
+  "generatedAt": "2026-10-23",
+  "approvedReferences": {
+    "starter": "H:\\Spawner\\DesignAssets\\TribeConcepts\\base-spore-mushroom-coral-v2.png",
+    "nest": "H:\\Spawner\\DesignAssets\\TribeConcepts\\Nests\\nest-stage-01-spore-coral-v1.png"
+  },
+  "assets": [
+    {
+      "file": "Nests/nest-stage-02.png",
+      "source": "D:\\.codex\\generated_images\\01a1685f-30d3-7320-af5c-79d5468759c9\\exec-b5d251fe-47ae-4d74-a531-a7081a2381dc.png",
+      "prompt": "Use case: stylized-concept. Asset type: production-ready static 2D sprite for a cute PVE game. Match the provided approved coral mushroom tribe art: warm coral mushroom caps, creamy ivory mycelium, dark deep-teal clean contour, softly hand-painted broad shading, upper-left light, sparse detail and round readable forms. Native transparent background with real alpha; isolated single asset; no ground plane, no cast shadow outside the object, no text, no border, no watermark. Front-facing camera with just enough top surface visible to match reference. Never green leaves, metal, cloth, faces or a character body unless specifically requested. grow this approved level 1 mushroom nursery into LEVEL 2. Preserve its unmistakable broad coral umbrella, ivory curled mycelium cradle and two smooth coral spore eggs. Slightly widen and thicken the ivory braided base, raise the canopy on a stronger cream stalk, add one small coral shelf cap on each side. One compact nest, modest upgrade, simple silhouette. No character eyes or mouth. Keep frontal nursery opening visible. Use image 1 as actual parent design; image 2 only shows the overall game's equivalent upgrade complexity.",
+      "references": [
+        "H:\\Spawner\\DesignAssets\\TribeConcepts\\Nests\\nest-stage-01-spore-coral-v1.png",
+        "H:\\Spawner\\DesignAssets\\Nests\\nest-stage-02.png"
+      ]
+    },
+    {
+      "file": "Nests/nest-stage-03.png",
+      "source": "D:\\.codex\\generated_images\\01a1685f-30d3-7320-af5c-79d5468759c9\\exec-8ea775e5-f0b6-45a8-9e28-f10a8c62ac65.png",
+      "prompt": "Use case: stylized-concept. Asset type: production-ready static 2D sprite for a cute PVE game. Match the provided approved coral mushroom tribe art: warm coral mushroom caps, creamy ivory mycelium, dark deep-teal clean contour, softly hand-painted broad shading, upper-left light, sparse detail and round readable forms. Native transparent background with real alpha; isolated single asset; no ground plane, no cast shadow outside the object, no text, no border, no watermark. Front-facing camera with just enough top surface visible to match reference. Never green leaves, metal, cloth, faces or a character body unless specifically requested. grow this approved level 1 mushroom nursery into LEVEL 3. Preserve broad coral mushroom umbrella and ivory curled mycelium cradle, two smooth coral spore eggs, but make a substantial mid-stage colony nest: a large central coral canopy with two lower flanking shelf caps, stout creamy mycelium arches weaving around the open cradle, thicker braided base, restrained fine gill hints. No stairs, doors, windows, green leaves, faces, or humanoids. One nest only; tiered silhouette clearly stronger than level 2. Use image 1 as parent design, image 2 only for equivalent game's growth complexity.",
+      "references": [
+        "H:\\Spawner\\DesignAssets\\TribeConcepts\\Nests\\nest-stage-01-spore-coral-v1.png",
+        "H:\\Spawner\\DesignAssets\\Nests\\nest-stage-03.png"
+      ]
+    },
+    {
+      "file": "Nests/nest-stage-04.png",
+      "source": "D:\\.codex\\generated_images\\01a1685f-30d3-7320-af5c-79d5468759c9\\exec-2be1e4a0-0357-4d17-bdbb-6b3d753c0ea4.png",
+      "prompt": "Use case: stylized-concept. Asset type: production-ready static 2D sprite for a cute PVE game. Match the provided approved coral mushroom tribe art: warm coral mushroom caps, creamy ivory mycelium, dark deep-teal clean contour, softly hand-painted broad shading, upper-left light, sparse detail and round readable forms. Native transparent background with real alpha; isolated single asset; no ground plane, no cast shadow outside the object, no text, no border, no watermark. Front-facing camera with just enough top surface visible to match reference. Never green leaves, metal, cloth, faces or a character body unless specifically requested. grow this approved level 1 mushroom nursery into LEVEL 4 final evolution. Keep its broad coral umbrella mushroom, ivory mycelium cradle and two smooth coral spore eggs as the unmistakable center. Build a mature protected colony with central largest coral canopy high above, a stepped fan of three substantial shelf caps at each side, layered ivory braided buttress-roots, two small closed spore pods low left and right. Strong broad symmetrical crown silhouette, readable at game size, no excessive tiny detail. One compact organic nest, no architecture, no green leaves, no faces. Use image 1 as parent design and image 2 only for overall complexity at final upgrade.",
+      "references": [
+        "H:\\Spawner\\DesignAssets\\TribeConcepts\\Nests\\nest-stage-01-spore-coral-v1.png",
+        "H:\\Spawner\\DesignAssets\\Nests\\nest-stage-04.png"
+      ]
+    },
+    {
+      "file": "Terrain/nest-ground.png",
+      "source": "D:\\.codex\\generated_images\\01a1685f-30d3-7320-af5c-79d5468759c9\\exec-c4c7733d-0ece-432f-b175-0475ea06bf8d.png",
+      "prompt": "Use case: stylized-concept. Asset type: production-ready static 2D sprite for a cute PVE game. Match the provided approved coral mushroom tribe art: warm coral mushroom caps, creamy ivory mycelium, dark deep-teal clean contour, softly hand-painted broad shading, upper-left light, sparse detail and round readable forms. Native transparent background with real alpha; isolated single asset; no ground plane, no cast shadow outside the object, no text, no border, no watermark. Front-facing camera with just enough top surface visible to match reference. Never green leaves, metal, cloth, faces or a character body unless specifically requested. a single FLAT ground patch for this mushroom tribe nest, top-down game terrain overlay. Low shallow earthy mauve-brown organic patch, irregular rounded perimeter, ivory thin mycelium threads subtly embedded around outer edge with a few very small coral button mushrooms only at edges. Center is broad empty subdued soil for placing the nest. Do not draw a nest, characters, large mushrooms, leaves, elevations or thick rock platform. Match reference image 1 material/color family, image 2 ground footprint and role. True transparent alpha everywhere beyond patch.",
+      "references": [
+        "H:\\Spawner\\DesignAssets\\TribeConcepts\\Nests\\nest-stage-01-spore-coral-v1.png",
+        "H:\\Spawner\\DesignAssets\\Terrain\\nest-soil-ground.png"
+      ]
+    },
+    {
+      "file": "Parts/strength-1.png",
+      "source": "D:\\.codex\\generated_images\\01a1685f-30d3-7320-af5c-79d5468759c9\\exec-c515f947-c728-47fd-b753-b289e2b545ba.png",
+      "prompt": "Use case: stylized-concept. Asset type: production-ready static 2D sprite for a cute PVE game. Match the provided approved coral mushroom tribe art: warm coral mushroom caps, creamy ivory mycelium, dark deep-teal clean contour, softly hand-painted broad shading, upper-left light, sparse detail and round readable forms. Native transparent background with real alpha; isolated single asset; no ground plane, no cast shadow outside the object, no text, no border, no watermark. Front-facing camera with just enough top surface visible to match reference. Never green leaves, metal, cloth, faces or a character body unless specifically requested. Create ONLY a detachable strength equipment sprite: a symmetrical pair of short creamy ivory mycelium arms bending inward, each ending in one chunky soft coral two-finger carrying pincer. The two arms float apart left/right with completely empty transparent space between them for the face and body. No central basket, no linking body, no shoulder torso. Basic level 1 simple pair, front view; wrist attachment ends point inward, pincers hold at lower sides. Match image 1 tribe material, image 2 role only.",
+      "references": [
+        "H:\\Spawner\\DesignAssets\\TribeConcepts\\base-spore-mushroom-coral-v2.png",
+        "H:\\Spawner\\DesignAssets\\Units\\Parts\\strength-1.png"
+      ]
+    },
+    {
+      "file": "Parts/strength-2.png",
+      "source": "D:\\.codex\\generated_images\\01a1685f-30d3-7320-af5c-79d5468759c9\\exec-4d6093b3-cf3b-4fa7-89ce-d09cad654e61.png",
+      "prompt": "Use case: stylized-concept. Asset type: production-ready static 2D sprite for a cute PVE game. Match the provided approved coral mushroom tribe art: warm coral mushroom caps, creamy ivory mycelium, dark deep-teal clean contour, softly hand-painted broad shading, upper-left light, sparse detail and round readable forms. Native transparent background with real alpha; isolated single asset; no ground plane, no cast shadow outside the object, no text, no border, no watermark. Front-facing camera with just enough top surface visible to match reference. Never green leaves, metal, cloth, faces or a character body unless specifically requested. Create ONLY a detachable strength equipment sprite at LEVEL 2: a symmetrical pair of stout braided ivory mycelium arms, each with broad coral cap-like carrying pincers and a small reinforced mushroom cuff. Clearly sturdier than a basic short arm, two simple rounded prongs on each pincer, strong chunky silhouette. Float apart left and right with transparent central face/body space and no connecting bar/basket/torso. Front view. Match image 1 approved mushroom art and image 2 functional role only.",
+      "references": [
+        "H:\\Spawner\\DesignAssets\\TribeConcepts\\base-spore-mushroom-coral-v2.png",
+        "H:\\Spawner\\DesignAssets\\Units\\Parts\\strength-2.png"
+      ]
+    },
+    {
+      "file": "Parts/feet-1.png",
+      "source": "D:\\.codex\\generated_images\\01a1685f-30d3-7320-af5c-79d5468759c9\\exec-8a07ded9-bc9f-4c86-923f-908a0031bf1d.png",
+      "prompt": "Use case: stylized-concept. Asset type: production-ready static 2D sprite for a cute PVE game. Match the provided approved coral mushroom tribe art: warm coral mushroom caps, creamy ivory mycelium, dark deep-teal clean contour, softly hand-painted broad shading, upper-left light, sparse detail and round readable forms. Native transparent background with real alpha; isolated single asset; no ground plane, no cast shadow outside the object, no text, no border, no watermark. Front-facing camera with just enough top surface visible to match reference. Never green leaves, metal, cloth, faces or a character body unless specifically requested. Create ONLY detachable movement equipment, simple LEVEL 1 PAIR OF LEGS AND FEET for approved mushroom creature. Two short ivory mycelium stalk legs, each ending in a soft broad coral mushroom-pad foot, rounded toes and cream upper ankle cuff. Left and right symmetrical separate pieces in one asset, with transparent empty space between, short leg attachment ends at top. No body, no head, no eyes, no mouth. Facing forward, slight top of foot visible. Do not use green plant shoes. Image 1 approved materials, image 2 role.",
+      "references": [
+        "H:\\Spawner\\DesignAssets\\TribeConcepts\\base-spore-mushroom-coral-v2.png",
+        "H:\\Spawner\\DesignAssets\\Units\\Parts\\feet-1.png"
+      ]
+    },
+    {
+      "file": "Parts/feet-2.png",
+      "source": "D:\\.codex\\generated_images\\01a1685f-30d3-7320-af5c-79d5468759c9\\exec-61d6e507-36fe-4a33-9b4f-f617fbb6e16f.png",
+      "prompt": "Use case: stylized-concept. Asset type: production-ready static 2D sprite for a cute PVE game. Match the provided approved coral mushroom tribe art: warm coral mushroom caps, creamy ivory mycelium, dark deep-teal clean contour, softly hand-painted broad shading, upper-left light, sparse detail and round readable forms. Native transparent background with real alpha; isolated single asset; no ground plane, no cast shadow outside the object, no text, no border, no watermark. Front-facing camera with just enough top surface visible to match reference. Never green leaves, metal, cloth, faces or a character body unless specifically requested. Create ONLY detachable movement equipment LEVEL 2 PAIR OF LEGS AND FEET for approved mushroom creature. Two longer springy ivory mycelium legs with one rounded segmented knot joint each, larger coral mushroom-pad feet with layered cream ankle collar. Clearly stronger than basic short feet, but cute and simple. Separate symmetrical left/right pieces, transparent central gap. No body, head, face, eyes or mouth. Front view. Image 1 approved materials, image 2 only role/complexity.",
+      "references": [
+        "H:\\Spawner\\DesignAssets\\TribeConcepts\\base-spore-mushroom-coral-v2.png",
+        "H:\\Spawner\\DesignAssets\\Units\\Parts\\feet-2.png"
+      ]
+    },
+    {
+      "file": "Parts/antenna-1.png",
+      "source": "D:\\.codex\\generated_images\\01a1685f-30d3-7320-af5c-79d5468759c9\\exec-32a93d40-3fc5-4a85-94ea-5e79fb0d54a3.png",
+      "prompt": "Use case: stylized-concept. Asset type: production-ready static 2D sprite for a cute PVE game. Match the provided approved coral mushroom tribe art: warm coral mushroom caps, creamy ivory mycelium, dark deep-teal clean contour, softly hand-painted broad shading, upper-left light, sparse detail and round readable forms. Native transparent background with real alpha; isolated single asset; no ground plane, no cast shadow outside the object, no text, no border, no watermark. Front-facing camera with just enough top surface visible to match reference. Never green leaves, metal, cloth, faces or a character body unless specifically requested. Create ONLY one detachable mushroom-shaped SENSING ANTENNA equipment at LEVEL 1: a short ivory mycelium stalk topped by a shallow open coral mushroom cap, turned slightly upward like an organic sound receiver, with subtle broad gill ridges inside cap, one tiny rounded spore node at center. Compact single stalk attachment beneath. No creature body, no face, no eyes or mouth, no leaf dish, no satellite metal. Isolated transparent sprite. Match image 1 coral cap materials and image 2 only functional role.",
+      "references": [
+        "H:\\Spawner\\DesignAssets\\TribeConcepts\\base-spore-mushroom-coral-v2.png",
+        "H:\\Spawner\\DesignAssets\\Units\\Parts\\antenna-1.png"
+      ]
+    },
+    {
+      "file": "Parts/antenna-2.png",
+      "source": "D:\\.codex\\generated_images\\01a1685f-30d3-7320-af5c-79d5468759c9\\exec-2b583452-2ede-4a1d-8264-2ca91ac2f302.png",
+      "prompt": "Use case: stylized-concept. Asset type: production-ready static 2D sprite for a cute PVE game. Match the provided approved coral mushroom tribe art: warm coral mushroom caps, creamy ivory mycelium, dark deep-teal clean contour, softly hand-painted broad shading, upper-left light, sparse detail and round readable forms. Native transparent background with real alpha; isolated single asset; no ground plane, no cast shadow outside the object, no text, no border, no watermark. Front-facing camera with just enough top surface visible to match reference. Never green leaves, metal, cloth, faces or a character body unless specifically requested. Create ONLY detachable mushroom-shaped SENSING ANTENNA equipment at LEVEL 2: a short ivory Y-branch mycelium stalk topped by TWO shallow coral mushroom receiver caps facing gently up and outward, each with simple broad gill ridges and a tiny central rounded spore node. Two heads on one small Y stem, clear increase over single basic sensor. Organic mushroom sensing structure, no leaf material or metal satellite dish, no body, face, eyes, mouth or loose sparkle particles. Native transparent isolated sprite. Image 1 approved materials, image 2 role only.",
+      "references": [
+        "H:\\Spawner\\DesignAssets\\TribeConcepts\\base-spore-mushroom-coral-v2.png",
+        "H:\\Spawner\\DesignAssets\\Units\\Parts\\antenna-2.png"
+      ]
+    },
+    {
+      "file": "Parts/shell-1.png",
+      "source": "D:\\.codex\\generated_images\\01a1685f-30d3-7320-af5c-79d5468759c9\\exec-e2b9e080-9d08-4af8-986c-443c9cd8b401.png",
+      "prompt": "Use case: stylized-concept. Asset type: production-ready static 2D sprite for a cute PVE game. Match the provided approved coral mushroom tribe art: warm coral mushroom caps, creamy ivory mycelium, dark deep-teal clean contour, softly hand-painted broad shading, upper-left light, sparse detail and round readable forms. Native transparent background with real alpha; isolated single asset; no ground plane, no cast shadow outside the object, no text, no border, no watermark. Front-facing camera with just enough top surface visible to match reference. Never green leaves, metal, cloth, faces or a character body unless specifically requested. Create ONLY a detachable resistance armor equipment sprite LEVEL 1 for approved mushroom creature. A U-shaped collar of overlapping CORAL MUSHROOM CAP PLATES with creamy undersides: three rounded cap plates rising at each flank and one low front rim. The large middle and face aperture is ACTUAL EMPTY TRANSPARENCY, an open U gap extending from top through center; no flat filled interior or hidden body. Cute soft thick mushroom membrane plates, dark teal contour, no spikes, no green leaves, no metal, no body, face, eyes, mouth. Match image 1 materials, image 2 open silhouette/role only.",
+      "references": [
+        "H:\\Spawner\\DesignAssets\\TribeConcepts\\base-spore-mushroom-coral-v2.png",
+        "H:\\Spawner\\DesignAssets\\Units\\Parts\\shell-1.png"
+      ]
+    },
+    {
+      "file": "Parts/shell-2.png",
+      "source": "D:\\.codex\\generated_images\\01a1685f-30d3-7320-af5c-79d5468759c9\\exec-29080c10-c66a-45f9-9148-55fdc0ec8c6c.png",
+      "prompt": "Use case: stylized-concept. Asset type: production-ready static 2D sprite for a cute PVE game. Match the provided approved coral mushroom tribe art: warm coral mushroom caps, creamy ivory mycelium, dark deep-teal clean contour, softly hand-painted broad shading, upper-left light, sparse detail and round readable forms. Native transparent background with real alpha; isolated single asset; no ground plane, no cast shadow outside the object, no text, no border, no watermark. Front-facing camera with just enough top surface visible to match reference. Never green leaves, metal, cloth, faces or a character body unless specifically requested. Create ONLY detachable resistance armor equipment sprite LEVEL 2 for approved mushroom creature. Strong U-shaped flanking armor formed of four substantial overlapping coral MUSHROOM CAP PLATES at each side, layered ivory gill undersides, lower front reinforced coral rim with cream inset. Slightly taller and denser than basic level 1. Keep a LARGE OPEN TRANSPARENT FACE/BODY SPACE between the two flanks, center hollow all the way from top to lower rim. No body, head, eyes, mouth, background fill, leaves, metal or sharp spikes. Match image 1 materials and image 2 functional silhouette only.",
+      "references": [
+        "H:\\Spawner\\DesignAssets\\TribeConcepts\\base-spore-mushroom-coral-v2.png",
+        "H:\\Spawner\\DesignAssets\\Units\\Parts\\shell-2.png"
+      ]
+    }
+  ]
+}

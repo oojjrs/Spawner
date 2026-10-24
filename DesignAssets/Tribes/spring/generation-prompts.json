@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 1,
+  "tribe": "spring",
+  "label": "샘방울",
+  "tool": "built-in image_gen",
+  "assets": [
+    {
+      "key": "nest-stage-01",
+      "prompt": "Use case: precise-object-edit.\nAsset type: ONE production static 2D game nest sprite, level 1; an actual source asset, not a comparison board.\nImage 1 is the current teal Spring tribe nest to redesign. Image 2 is the four-faction context, only for matching the painterly cartoon rendering and game camera, not a target to reproduce.\nPrimary request: replace the entire architecture of Image 1 with a distinct small natural SPRING. Keep the same opaque teal water material, mint highlights, dark teal contours, hand-painted shading, and elevated near-front 3/4 game view.\nDesign: a low WIDE oval spring pool with a deep flat open water surface in the middle, two broad elliptical ripple strokes on that surface. Its single continuous thick soft water rim winds around the pool as a flowing ribbon, smoothly raised on the rear left and dipping to a small broad spillway on the front right. Only one small low rounded sideways wave curl on the rear left edge. Quiet compact level-1 starter nest, 3-4 main readable masses, width roughly twice height. The center is a visible HORIZONTAL POOL, completely empty of sculpture. Relate to the creature through water material and curled edge language only.\nAvoid: central droplet, water bead, egg, seed, unit silhouette, face, large pointed ornament, inward paired waves, petal/leaf/lotus, symmetrical cradle around a central object, heart-shaped gap, stone/metal/manmade fountain, high tower, particles, foam, bubbles.\nComposition: one whole centered isolated sprite, generous transparent margins, clean genuine alpha background, no cast shadow/glow/ground, no text/labels.",
+      "sourcePath": "D:/.codex/generated_images/01a1682a-4d49-7db2-96cc-0f1ccff0d568/exec-8d5029b3-ab40-46ad-96e7-7d7aa326be34.png",
+      "referenceImages": [
+        "DesignAssets/Tribes/spring/Nests/nest-stage-01.png",
+        "DesignAssets/Tribes/Previews/nest-growth-all-tribes.png"
+      ],
+      "postprocess": "copy",
+      "transparentBackground": true,
+      "revision": 2
+    },
+    {
+      "key": "nest-stage-02",
+      "prompt": "Use case: stylized-concept. Asset type: ONE isolated production 2D game nest sprite, not an animation or sheet or review board. The reference is the newly revised LEVEL 1 Spring tribe nest. Strictly preserve its family: low wide asymmetric OPEN SPRING POOLS, continuous flowing water rims, broad flat inner water surfaces and elliptical ripples, short wide spillways, one-sided sideways low wave crest. Opaque sculpted teal water, soft mint highlights, dark teal painted outlines, same hand-painted cartoon rendering, same near-front elevated 3/4 camera. This is a nest architecture made from water, not a creature. Growth is expressed by offset pools and water terraces, not pointed petals. Empty horizontal water surfaces must remain the focal point. Absolutely no central droplet/bead/egg/seed/unit shape/pointed ornament; no paired inward curls, symmetrical cradle, lotus/flower/leaf forms, heart opening, face, character, rock, metal, manmade fountain, foam, bubbles, particles, glow, text, ground tile or cast shadow. Clean actual alpha around the entire sprite, ample margins, no clipping.\nMake LEVEL 2: retain the recognizable main low oval pool and front-right broad spillway. Add ONE smaller crescent-shaped raised pool behind its left half, whose open flat surface is visible, and a short broad sheet of water connecting down into the main pool. Keep the back-right area lower and open. One gentle lateral wave curl at the raised pool's left edge. Simple intermediate upgrade, just two connected pool levels; still wide and low, width about 2.2 times height.",
+      "sourcePath": "D:/.codex/generated_images/01a1682a-4d49-7db2-96cc-0f1ccff0d568/exec-310262fa-4a3b-430c-abe2-04d2e76a915e.png",
+      "referenceImages": [
+        "D:/.codex/generated_images/01a1682a-4d49-7db2-96cc-0f1ccff0d568/exec-8d5029b3-ab40-46ad-96e7-7d7aa326be34.png"
+      ],
+      "postprocess": "copy",
+      "transparentBackground": true,
+      "revision": 2
+    },
+    {
+      "key": "nest-stage-03",
+      "prompt": "Use case: stylized-concept. Asset type: ONE isolated production 2D game nest sprite, not an animation or sheet or review board. The reference is the newly revised LEVEL 1 Spring tribe nest. Strictly preserve its family: low wide asymmetric OPEN SPRING POOLS, continuous flowing water rims, broad flat inner water surfaces and elliptical ripples, short wide spillways, one-sided sideways low wave crest. Opaque sculpted teal water, soft mint highlights, dark teal painted outlines, same hand-painted cartoon rendering, same near-front elevated 3/4 camera. This is a nest architecture made from water, not a creature. Growth is expressed by offset pools and water terraces, not pointed petals. Empty horizontal water surfaces must remain the focal point. Absolutely no central droplet/bead/egg/seed/unit shape/pointed ornament; no paired inward curls, symmetrical cradle, lotus/flower/leaf forms, heart opening, face, character, rock, metal, manmade fountain, foam, bubbles, particles, glow, text, ground tile or cast shadow. Clean actual alpha around the entire sprite, ample margins, no clipping.\nMake LEVEL 3: retain the main broad oval foreground spring pool, and grow a gently ascending sequence of THREE offset open crescent terraces along the back-left to back-middle, linked by two short WIDE cascade ribbons. Two small lower side spill pockets extend the base. Keep the center of the foreground pool EMPTY and flat with calm elliptical ripple strokes. Rounded substantial rims, no tall thin forms. Asymmetrical layered landscape silhouette, broader and moderately taller than level 2, width about 2 times height.",
+      "sourcePath": "D:/.codex/generated_images/01a1682a-4d49-7db2-96cc-0f1ccff0d568/exec-c3679d4a-51dc-48e9-9999-0b1526a9eb2b.png",
+      "referenceImages": [
+        "D:/.codex/generated_images/01a1682a-4d49-7db2-96cc-0f1ccff0d568/exec-8d5029b3-ab40-46ad-96e7-7d7aa326be34.png"
+      ],
+      "postprocess": "copy",
+      "transparentBackground": true,
+      "revision": 2
+    },
+    {
+      "key": "nest-stage-04",
+      "prompt": "Use case: stylized-concept. Asset type: ONE isolated production 2D game nest sprite, not an animation or sheet or review board. The reference is the newly revised LEVEL 1 Spring tribe nest. Strictly preserve its family: low wide asymmetric OPEN SPRING POOLS, continuous flowing water rims, broad flat inner water surfaces and elliptical ripples, short wide spillways, one-sided sideways low wave crest. Opaque sculpted teal water, soft mint highlights, dark teal painted outlines, same hand-painted cartoon rendering, same near-front elevated 3/4 camera. This is a nest architecture made from water, not a creature. Growth is expressed by offset pools and water terraces, not pointed petals. Empty horizontal water surfaces must remain the focal point. Absolutely no central droplet/bead/egg/seed/unit shape/pointed ornament; no paired inward curls, symmetrical cradle, lotus/flower/leaf forms, heart opening, face, character, rock, metal, manmade fountain, foam, bubbles, particles, glow, text, ground tile or cast shadow. Clean actual alpha around the entire sprite, ample margins, no clipping.\nMake LEVEL 4: final mature natural spring nest, a broad low sanctuary of FOUR open water terraces ascending diagonally from the large foreground oval pool toward the back-left, with short broad cascading water sheets and a pair of low side pools. The tallest terrace is at rear LEFT; the right side stays lower and open. Every pool is a horizontal hollow water surface, with no central pedestal or unit-shaped object. Integrate just two gentle low sideways crest curls at outer terrace edges; no vertical arch or paired petals. More architectural mass and stepped depth than level 3 but compact and readable, 7-8 large simple masses, width about 1.9 times height.",
+      "sourcePath": "D:/.codex/generated_images/01a1682a-4d49-7db2-96cc-0f1ccff0d568/exec-39e97394-3dc6-4dcf-83dc-e3245c8a775d.png",
+      "referenceImages": [
+        "D:/.codex/generated_images/01a1682a-4d49-7db2-96cc-0f1ccff0d568/exec-8d5029b3-ab40-46ad-96e7-7d7aa326be34.png"
+      ],
+      "postprocess": "copy",
+      "transparentBackground": true,
+      "revision": 2
+    },
+    {
+      "key": "nest-ground",
+      "sourcePath": "D:\\.codex\\generated_images\\01a16860-018a-7493-a9c0-c2647f7ee270\\exec-722cada3-5bc6-4244-acb8-d8897dff0d62.png",
+      "prompt": "Use case: stylized-concept. Asset type: one production 2D game nest terrain underlay sprite, transparent PNG. Input image 1 is the accepted nest ground shape/layout reference. Input image 2 is the approved teal Spring tribe nest palette/material reference. Create the Spring tribe version of the ground underlay: a flat irregular roughly oval patch of damp cool gray-brown river silt with a shallow muted teal water wash in the center, soft curved stream marks, and a few small dark smooth pebbles plus sparse short muted reeds at the outer edge only. Mostly empty center to place a large water nest on top. Same painterly cartoon style and subtly elevated top-down game camera as the ground reference. No nest, characters, deep water rim, thick pool bowl, eyes, mouth, ice, glass, shiny sparkles, foam, bubbles, dramatic reflections, text or watermark. The palette is subdued supporting ground, not a bright teal building. Whole patch unclipped with clean true alpha around its irregular perimeter, no background or cast shadow. One source image only.",
+      "postprocess": "copy",
+      "referenceImages": [
+        "DesignAssets/Terrain/nest-soil-ground.png",
+        "DesignAssets/TribeConcepts/Nests/nest-stage-01-spring-teal-v1.png"
+      ],
+      "transparentBackground": true
+    },
+    {
+      "key": "strength-1",
+      "sourcePath": "D:\\.codex\\generated_images\\01a16860-018a-7493-a9c0-c2647f7ee270\\exec-d7adc246-4a56-44ca-b810-0a26ded3475c.png",
+      "prompt": "Use case: stylized-concept. Asset type: ONE standalone modular equipment sprite for a 2D game, actual transparent PNG, NOT a character or preview. Reference image 1 is the approved teal Spring tribe creature for palette, opaque water material, dark teal contour and painterly cartoon rendering. Reference image 2 indicates only the analogous equipment function and front/elevated game camera; do NOT copy its leaf material. The new equipment must be water-shaped, soft opaque teal, mint highlights, simple thick dark teal outlines. No body, face, eyes, mouth, clothing, text, labels, watermark, scene, shadow, ice, glass, metal, foam, floating bubbles or particles. Output the complete isolated equipment with generous transparent margins. It will be layered around the approved creature's pear-shaped torso, so the center/body area stays transparent wherever no equipment exists. Primary request: LEVEL 1 STRENGTH equipment. A symmetric pair of short thick water arms with rounded pincer-like hands, joined by a shallow narrow curved water carrying cradle at the lower front. Simple compact level 1 form. Hands sit at far left and right, softly split into two blunt gripping lobes. Clear empty transparent space above the low cradle and between the arms for the creature's torso and face. A low wide U silhouette, no tall spikes or receiver. Single equipment sprite.",
+      "postprocess": "copy",
+      "referenceImages": [
+        "DesignAssets/TribeConcepts/base-water-droplet-teal-v2.png",
+        "DesignAssets/Units/Parts/strength-1.png"
+      ],
+      "transparentBackground": true
+    },
+    {
+      "key": "strength-2",
+      "sourcePath": "D:\\.codex\\generated_images\\01a16860-018a-7493-a9c0-c2647f7ee270\\exec-3f20926c-d0ff-4742-b098-56f7cd45b642.png",
+      "prompt": "Use case: stylized-concept. Asset type: ONE standalone modular equipment sprite for a 2D game, actual transparent PNG, NOT a character or preview. Reference image 1 is the approved teal Spring tribe creature for palette, opaque water material, dark teal contour and painterly cartoon rendering. Reference image 2 indicates only the analogous equipment function and front/elevated game camera; do NOT copy its leaf material. The new equipment must be water-shaped, soft opaque teal, mint highlights, simple thick dark teal outlines. No body, face, eyes, mouth, clothing, text, labels, watermark, scene, shadow, ice, glass, metal, foam, floating bubbles or particles. Output the complete isolated equipment with generous transparent margins. It will be layered around the approved creature's pear-shaped torso, so the center/body area stays transparent wherever no equipment exists. Primary request: LEVEL 2 STRENGTH equipment. A symmetric pair of stronger water arms, each visibly thicker than level 1 with a broad double-lobed blunt pincer hand and a small folded water cuff. Connected by a broader shallow rigid-looking but soft water carrying cradle at lower front. Wide low U shape. Two broad scalloped ribs reinforce the cradle, low enough not to cover the creature's face. Keep large transparent body/face opening above the cradle. Friendly work tool silhouette, no weapons or sharp crab claws. Single equipment sprite.",
+      "postprocess": "alpha-threshold-65-percent-with-0.35-pixel-soft-edge",
+      "referenceImages": [
+        "DesignAssets/TribeConcepts/base-water-droplet-teal-v2.png",
+        "DesignAssets/Units/Parts/strength-2.png"
+      ],
+      "transparentBackground": true
+    },
+    {
+      "key": "feet-1",
+      "sourcePath": "D:\\.codex\\generated_images\\01a16860-018a-7493-a9c0-c2647f7ee270\\exec-ada825e6-9bc4-4d60-809d-da1329ba23a0.png",
+      "prompt": "Use case: stylized-concept. Asset type: ONE standalone modular equipment sprite for a 2D game, actual transparent PNG, NOT a character or preview. Reference image 1 is the approved teal Spring tribe creature for palette, opaque water material, dark teal contour and painterly cartoon rendering. Reference image 2 indicates only the analogous equipment function and front/elevated game camera; do NOT copy its leaf material. The new equipment must be water-shaped, soft opaque teal, mint highlights, simple thick dark teal outlines. No body, face, eyes, mouth, clothing, text, labels, watermark, scene, shadow, ice, glass, metal, foam, floating bubbles or particles. Output the complete isolated equipment with generous transparent margins. It will be layered around the approved creature's pear-shaped torso, so the center/body area stays transparent wherever no equipment exists. Primary request: LEVEL 1 MOBILITY equipment. A left/right pair of low short water legs ending in smooth webbed paddle feet. Two broad rounded toe lobes per foot, not separate long human toes. Teal opaque soft water with mint front highlights. The two feet separated by a transparent gap, short top stubs connect underneath the creature body. Three-quarter front view and wide outward stance; no full body or shoes. Each foot simple, compact and broad. Single paired equipment sprite.",
+      "postprocess": "copy",
+      "referenceImages": [
+        "DesignAssets/TribeConcepts/base-water-droplet-teal-v2.png",
+        "DesignAssets/Units/Parts/feet-1.png"
+      ],
+      "transparentBackground": true
+    },
+    {
+      "key": "feet-2",
+      "sourcePath": "D:\\.codex\\generated_images\\01a16860-018a-7493-a9c0-c2647f7ee270\\exec-7b81c98d-310c-4abd-ad57-374856fd00a7.png",
+      "prompt": "Use case: stylized-concept. Asset type: ONE standalone modular equipment sprite for a 2D game, actual transparent PNG, NOT a character or preview. Reference image 1 is the approved teal Spring tribe creature for palette, opaque water material, dark teal contour and painterly cartoon rendering. Reference image 2 indicates only the analogous equipment function and front/elevated game camera; do NOT copy its leaf material. The new equipment must be water-shaped, soft opaque teal, mint highlights, simple thick dark teal outlines. No body, face, eyes, mouth, clothing, text, labels, watermark, scene, shadow, ice, glass, metal, foam, floating bubbles or particles. Output the complete isolated equipment with generous transparent margins. It will be layered around the approved creature's pear-shaped torso, so the center/body area stays transparent wherever no equipment exists. Primary request: LEVEL 2 MOBILITY equipment. A left/right pair of thick springy water legs ending in broad webbed paddle feet. Clearly reinforced and larger than level 1: three rounded fused toe lobes on each paddle and a curved raised water ankle cuff. Keep legs short and creature-like rather than long human shins. Transparent gap between left/right feet, thick short upper stubs for attachment beneath the body. Three-quarter front view with wide outward stance. No shoes, metal, claws or full character. Single paired equipment sprite.",
+      "postprocess": "copy",
+      "referenceImages": [
+        "DesignAssets/TribeConcepts/base-water-droplet-teal-v2.png",
+        "DesignAssets/Units/Parts/feet-2.png"
+      ],
+      "transparentBackground": true
+    },
+    {
+      "key": "antenna-1",
+      "sourcePath": "D:\\.codex\\generated_images\\01a16860-018a-7493-a9c0-c2647f7ee270\\exec-dc340f06-3d7e-44cb-a1ea-ef75abd9421d.png",
+      "prompt": "Use case: stylized-concept. Asset type: ONE standalone modular equipment sprite for a 2D game, actual transparent PNG, NOT a character or preview. Reference image 1 is the approved teal Spring tribe creature for palette, opaque water material, dark teal contour and painterly cartoon rendering. Reference image 2 indicates only the analogous equipment function and front/elevated game camera; do NOT copy its leaf material. The new equipment must be water-shaped, soft opaque teal, mint highlights, simple thick dark teal outlines. No body, face, eyes, mouth, clothing, text, labels, watermark, scene, shadow, ice, glass, metal, foam, floating bubbles or particles. Output the complete isolated equipment with generous transparent margins. It will be layered around the approved creature's pear-shaped torso, so the center/body area stays transparent wherever no equipment exists. Primary request: LEVEL 1 SENSE equipment. A very low crescent-shaped wave receiver that attaches behind the creature's curled top tip. One shallow curved water dish, broad and low, with a tiny central droplet bump on a very short stem. Similar functional readability to a small receiving dish, made entirely of opaque soft water. The receiver is no taller than half its width; low smooth wave edges not sharp horns. One equipment unit only with a short centered attachment nub underneath.",
+      "postprocess": "alpha-threshold-65-percent-with-0.35-pixel-soft-edge",
+      "referenceImages": [
+        "DesignAssets/TribeConcepts/base-water-droplet-teal-v2.png",
+        "DesignAssets/Units/Parts/antenna-1.png"
+      ],
+      "transparentBackground": true
+    },
+    {
+      "key": "antenna-2",
+      "sourcePath": "D:\\.codex\\generated_images\\01a16860-018a-7493-a9c0-c2647f7ee270\\exec-946fa6cd-7441-470c-b5c7-74bee09c6913.png",
+      "prompt": "Use case: stylized-concept. Asset type: ONE standalone modular equipment sprite for a 2D game, actual transparent PNG, NOT a character or preview. Reference image 1 is the approved teal Spring tribe creature for palette, opaque water material, dark teal contour and painterly cartoon rendering. Reference image 2 indicates only the analogous equipment function and front/elevated game camera; do NOT copy its leaf material. The new equipment must be water-shaped, soft opaque teal, mint highlights, simple thick dark teal outlines. No body, face, eyes, mouth, clothing, text, labels, watermark, scene, shadow, ice, glass, metal, foam, floating bubbles or particles. Output the complete isolated equipment with generous transparent margins. It will be layered around the approved creature's pear-shaped torso, so the center/body area stays transparent wherever no equipment exists. Primary request: LEVEL 2 SENSE equipment. A reinforced low twin-wave receiver attaches behind the creature's curled top tip. Two small very shallow curved water receiving dishes mounted side by side on one short forked water bridge, each with a tiny central droplet bump. One wide low accessory, with thick smoothly curled wave edges, clearly stronger than level 1 yet no tall stalks or spike forest. Entire accessory width much greater than height, gentle broad oval dishes seen from slightly above. One equipment sprite.",
+      "postprocess": "copy",
+      "referenceImages": [
+        "DesignAssets/TribeConcepts/base-water-droplet-teal-v2.png",
+        "DesignAssets/Units/Parts/antenna-2.png"
+      ],
+      "transparentBackground": true
+    },
+    {
+      "key": "shell-1",
+      "sourcePath": "D:\\.codex\\generated_images\\01a16860-018a-7493-a9c0-c2647f7ee270\\exec-d2286186-31ed-441f-bfd1-0f1443ec73cd.png",
+      "prompt": "Use case: stylized-concept. Asset type: ONE standalone modular equipment sprite for a 2D game, actual transparent PNG, NOT a character or preview. Reference image 1 is the approved teal Spring tribe creature for palette, opaque water material, dark teal contour and painterly cartoon rendering. Reference image 2 indicates only the analogous equipment function and front/elevated game camera; do NOT copy its leaf material. The new equipment must be water-shaped, soft opaque teal, mint highlights, simple thick dark teal outlines. No body, face, eyes, mouth, clothing, text, labels, watermark, scene, shadow, ice, glass, metal, foam, floating bubbles or particles. Output the complete isolated equipment with generous transparent margins. It will be layered around the approved creature's pear-shaped torso, so the center/body area stays transparent wherever no equipment exists. Primary request: LEVEL 1 RESISTANCE equipment. A protective U-shaped water-film mantle, two thick rounded curved water membrane plates around the lower left and right sides of the creature, linked by a very low front rim. A large fully transparent central opening leaves the body and both eyes visible. Rounded soft shell plates with single broad highlight, not separate leaves, no sharp leaf tips, no crest above the head. Simple compact level 1 armour silhouette, turquoise and deeper teal edge with pale mint highlights. One equipment sprite.",
+      "postprocess": "copy",
+      "referenceImages": [
+        "DesignAssets/TribeConcepts/base-water-droplet-teal-v2.png",
+        "DesignAssets/Units/Parts/shell-1.png"
+      ],
+      "transparentBackground": true
+    },
+    {
+      "key": "shell-2",
+      "sourcePath": "D:\\.codex\\generated_images\\01a16860-018a-7493-a9c0-c2647f7ee270\\exec-35e590d9-4cc7-425e-ac8a-ec5af1ec43d0.png",
+      "prompt": "Use case: stylized-concept. Asset type: ONE standalone modular equipment sprite for a 2D game, actual transparent PNG, NOT a character or preview. Reference image 1 is the approved teal Spring tribe creature for palette, opaque water material, dark teal contour and painterly cartoon rendering. Reference image 2 indicates only the analogous equipment function and front/elevated game camera; do NOT copy its leaf material. The new equipment must be water-shaped, soft opaque teal, mint highlights, simple thick dark teal outlines. No body, face, eyes, mouth, clothing, text, labels, watermark, scene, shadow, ice, glass, metal, foam, floating bubbles or particles. Output the complete isolated equipment with generous transparent margins. It will be layered around the approved creature's pear-shaped torso, so the center/body area stays transparent wherever no equipment exists. Primary request: LEVEL 2 RESISTANCE equipment. A reinforced protective U-shaped water-film mantle with two visibly thicker doubled rounded membrane plates per side and a broad low front water rim. Curved layered water folds absorb impact, smooth opaque teal material, deeper teal seams with pale mint highlights. A large completely transparent central opening leaves body and both eyes unobstructed. Broad low plates frame only the lower flanks, do not form a full circular helmet or cover the head. Clearly stronger than level 1, no leaf shapes or sharp points. One equipment sprite.",
+      "postprocess": "copy",
+      "referenceImages": [
+        "DesignAssets/TribeConcepts/base-water-droplet-teal-v2.png",
+        "DesignAssets/Units/Parts/shell-2.png"
+      ],
+      "transparentBackground": true
+    }
+  ]
+}

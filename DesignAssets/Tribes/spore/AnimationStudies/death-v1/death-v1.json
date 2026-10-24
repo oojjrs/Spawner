@@ -1,0 +1,62 @@
+{
+  "tribe": "spore",
+  "action": "death",
+  "status": "review-candidate",
+  "directionModel": "one generic front-facing death",
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 4,
+  "frameCount": 24,
+  "durationsMs": [
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60
+  ],
+  "durationMs": 1440,
+  "loop": false,
+  "rootMotion": false,
+  "pivot": [
+    256,
+    448
+  ],
+  "atlas": "DesignAssets/Tribes/spore/AnimationStudies/death-v1/death-v1.png",
+  "runtimeAtlas": "DesignAssets/Tribes/spore/AnimationStudies/death-v1/death-v1.webp",
+  "contact": "DesignAssets/Tribes/spore/AnimationStudies/death-v1/death-contact.png",
+  "remains": "DesignAssets/Tribes/spore/AnimationStudies/death-v1/remains.png",
+  "poses": "DesignAssets/Tribes/spore/AnimationStudies/death-v1/poses.json",
+  "parts": [
+    "DesignAssets/Tribes/spore/AnimationStudies/death-v1/Parts/cap-full.png",
+    "DesignAssets/Tribes/spore/AnimationStudies/death-v1/Parts/cap-occluder.png",
+    "DesignAssets/Tribes/spore/AnimationStudies/death-v1/Parts/eye-left.png",
+    "DesignAssets/Tribes/spore/AnimationStudies/death-v1/Parts/eye-right.png",
+    "DesignAssets/Tribes/spore/AnimationStudies/death-v1/Parts/foot-left.png",
+    "DesignAssets/Tribes/spore/AnimationStudies/death-v1/Parts/foot-right.png",
+    "DesignAssets/Tribes/spore/AnimationStudies/death-v1/Parts/stem-skin.png"
+  ],
+  "preview": "DesignAssets/Tribes/Previews/death-lineup-v1.webp",
+  "finalFrameBehavior": "hold the remains; preview restarts only for review",
+  "motion": "stem buckles first; heavy cap folds and drops late, covering the fallen body"
+}

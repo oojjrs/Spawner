@@ -1,0 +1,1051 @@
+[
+  {
+    "frame": 0,
+    "timeMs": 0,
+    "crack": 0,
+    "collapse": 0,
+    "fragments": [],
+    "rigidFragments": true,
+    "lastPosePersists": true
+  },
+  {
+    "frame": 1,
+    "timeMs": 60,
+    "crack": 0,
+    "collapse": 0,
+    "fragments": [],
+    "rigidFragments": true,
+    "lastPosePersists": true
+  },
+  {
+    "frame": 2,
+    "timeMs": 120,
+    "crack": 0,
+    "collapse": 0,
+    "fragments": [],
+    "rigidFragments": true,
+    "lastPosePersists": true
+  },
+  {
+    "frame": 3,
+    "timeMs": 180,
+    "crack": 0.010840385676163453,
+    "collapse": 0,
+    "fragments": [],
+    "rigidFragments": true,
+    "lastPosePersists": true
+  },
+  {
+    "frame": 4,
+    "timeMs": 240,
+    "crack": 0.23793308239959496,
+    "collapse": 0,
+    "fragments": [],
+    "rigidFragments": true,
+    "lastPosePersists": true
+  },
+  {
+    "frame": 5,
+    "timeMs": 300,
+    "crack": 0.6085605153907463,
+    "collapse": 0,
+    "fragments": [],
+    "rigidFragments": true,
+    "lastPosePersists": true
+  },
+  {
+    "frame": 6,
+    "timeMs": 360,
+    "crack": 0.9219748017577016,
+    "collapse": 0,
+    "fragments": [],
+    "rigidFragments": true,
+    "lastPosePersists": true
+  },
+  {
+    "frame": 7,
+    "timeMs": 420,
+    "crack": 1,
+    "collapse": 0.0024230630393687978,
+    "fragments": [
+      {
+        "index": 0,
+        "center": [
+          166.29258754156288,
+          254.84733141725545
+        ],
+        "rotationRadians": 0.002059603583463478,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 1,
+        "center": [
+          338.9626528515561,
+          237.25128869979991
+        ],
+        "rotationRadians": -0.0021201801594476983,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 2,
+        "center": [
+          196.08203081128892,
+          374.084123541404
+        ],
+        "rotationRadians": -0.0006057657598421994,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 3,
+        "center": [
+          350.5055134872598,
+          358.06446620556324
+        ],
+        "rotationRadians": 0.0006057657598421994,
+        "scale": [
+          1,
+          1
+        ]
+      }
+    ],
+    "rigidFragments": true,
+    "lastPosePersists": true
+  },
+  {
+    "frame": 8,
+    "timeMs": 480,
+    "crack": 1,
+    "collapse": 0.037032481959398386,
+    "fragments": [
+      {
+        "index": 0,
+        "center": [
+          166.1783562102893,
+          256.2148518763815
+        ],
+        "rotationRadians": 0.031477609665488626,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 1,
+        "center": [
+          339.20680293815315,
+          239.9666551491137
+        ],
+        "rotationRadians": -0.032403421714473586,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 2,
+        "center": [
+          194.5179781229145,
+          373.51604052159405
+        ],
+        "rotationRadians": -0.009258120489849597,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 3,
+        "center": [
+          351.1818451318204,
+          357.52509341841295
+        ],
+        "rotationRadians": 0.009258120489849597,
+        "scale": [
+          1,
+          1
+        ]
+      }
+    ],
+    "rigidFragments": true,
+    "lastPosePersists": true
+  },
+  {
+    "frame": 9,
+    "timeMs": 540,
+    "crack": 1,
+    "collapse": 0.10651656184762068,
+    "fragments": [
+      {
+        "index": 0,
+        "center": [
+          165.9490180937988,
+          259.6882943799614
+        ],
+        "rotationRadians": 0.09053907757047758,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 1,
+        "center": [
+          339.6969742455948,
+          246.19849441938715
+        ],
+        "rotationRadians": -0.09320199161666809,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 2,
+        "center": [
+          191.37788605146105,
+          372.4701849207521
+        ],
+        "rotationRadians": -0.02662914046190517,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 3,
+        "center": [
+          352.539691737976,
+          356.5470053575806
+        ],
+        "rotationRadians": 0.02662914046190517,
+        "scale": [
+          1,
+          1
+        ]
+      }
+    ],
+    "rigidFragments": true,
+    "lastPosePersists": true
+  },
+  {
+    "frame": 10,
+    "timeMs": 600,
+    "crack": 1,
+    "collapse": 0.20298510791485166,
+    "fragments": [
+      {
+        "index": 0,
+        "center": [
+          165.6306154511902,
+          266.462325448231
+        ],
+        "rotationRadians": 0.17253734172762392,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 1,
+        "center": [
+          340.3775058641877,
+          254.3978785718345
+        ],
+        "rotationRadians": -0.1776119694254952,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 2,
+        "center": [
+          187.0183245931003,
+          371.2015020214013
+        ],
+        "rotationRadians": -0.050746276978712916,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 3,
+        "center": [
+          354.4248644003884,
+          355.5403980221402
+        ],
+        "rotationRadians": 0.050746276978712916,
+        "scale": [
+          1,
+          1
+        ]
+      }
+    ],
+    "rigidFragments": true,
+    "lastPosePersists": true
+  },
+  {
+    "frame": 11,
+    "timeMs": 660,
+    "crack": 1,
+    "collapse": 0.3185479253719077,
+    "fragments": [
+      {
+        "index": 0,
+        "center": [
+          165.2491905415624,
+          277.5780235556676
+        ],
+        "rotationRadians": 0.2707657365661215,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 1,
+        "center": [
+          341.19273688423846,
+          263.82340706052906
+        ],
+        "rotationRadians": -0.2787294347004192,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 2,
+        "center": [
+          181.79586374400395,
+          370.21948410177646
+        ],
+        "rotationRadians": -0.07963698134297692,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 3,
+        "center": [
+          356.6831742137194,
+          355.09167627503876
+        ],
+        "rotationRadians": 0.07963698134297692,
+        "scale": [
+          1,
+          1
+        ]
+      }
+    ],
+    "rigidFragments": true,
+    "lastPosePersists": true
+  },
+  {
+    "frame": 12,
+    "timeMs": 720,
+    "crack": 1,
+    "collapse": 0.44531481942960466,
+    "fragments": [
+      {
+        "index": 0,
+        "center": [
+          164.8307856240142,
+          289.7766891383477
+        ],
+        "rotationRadians": 0.3785175965151639,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 1,
+        "center": [
+          342.0870063960538,
+          274.9615385560775
+        ],
+        "rotationRadians": -0.38965046700090405,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 2,
+        "center": [
+          176.06707350034375,
+          369.87172488920805
+        ],
+        "rotationRadians": -0.11132870485740116,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 3,
+        "center": [
+          359.1604322726306,
+          355.60809751800855
+        ],
+        "rotationRadians": 0.11132870485740116,
+        "scale": [
+          1,
+          1
+        ]
+      }
+    ],
+    "rigidFragments": true,
+    "lastPosePersists": true
+  },
+  {
+    "frame": 13,
+    "timeMs": 780,
+    "crack": 1,
+    "collapse": 0.5753955952987589,
+    "fragments": [
+      {
+        "index": 0,
+        "center": [
+          164.4014429576445,
+          300.8090900493878
+        ],
+        "rotationRadians": 0.48908625600394506,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 1,
+        "center": [
+          343.0046534899403,
+          288.0295864519059
+        ],
+        "rotationRadians": -0.5034711458864141,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 2,
+        "center": [
+          170.1885238582914,
+          370.46302550091985
+        ],
+        "rotationRadians": -0.14384889882468974,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 3,
+        "center": [
+          361.70244967178394,
+          357.39426392786214
+        ],
+        "rotationRadians": 0.14384889882468974,
+        "scale": [
+          1,
+          1
+        ]
+      }
+    ],
+    "rigidFragments": true,
+    "lastPosePersists": true
+  },
+  {
+    "frame": 14,
+    "timeMs": 840,
+    "crack": 1,
+    "collapse": 0.7009000581901867,
+    "fragments": [
+      {
+        "index": 0,
+        "center": [
+          163.9872048015521,
+          312.83764069595173
+        ],
+        "rotationRadians": 0.5957650494616588,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 1,
+        "center": [
+          343.89001725620477,
+          302.6566593945978
+        ],
+        "rotationRadians": -0.6132875509164134,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 2,
+        "center": [
+          164.51678481401865,
+          371.7354070773348
+        ],
+        "rotationRadians": -0.1752250145475467,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 3,
+        "center": [
+          364.1550375058411,
+          360.11907789911476
+        ],
+        "rotationRadians": 0.1752250145475467,
+        "scale": [
+          1,
+          1
+        ]
+      }
+    ],
+    "rigidFragments": true,
+    "lastPosePersists": true
+  },
+  {
+    "frame": 15,
+    "timeMs": 900,
+    "crack": 1,
+    "collapse": 0.8139380133147037,
+    "fragments": [
+      {
+        "index": 0,
+        "center": [
+          163.6141134148359,
+          324.9009198287936
+        ],
+        "rotationRadians": 0.6918473113174981,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 1,
+        "center": [
+          344.6874367851537,
+          317.63185648594566
+        ],
+        "rotationRadians": -0.7121957616503658,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 2,
+        "center": [
+          159.4084263636973,
+          373.28986387785335
+        ],
+        "rotationRadians": -0.20348450332867593,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 3,
+        "center": [
+          366.3640068694639,
+          363.2361568846852
+        ],
+        "rotationRadians": 0.20348450332867593,
+        "scale": [
+          1,
+          1
+        ]
+      }
+    ],
+    "rigidFragments": true,
+    "lastPosePersists": true
+  },
+  {
+    "frame": 16,
+    "timeMs": 960,
+    "crack": 1,
+    "collapse": 0.9066192658831266,
+    "fragments": [
+      {
+        "index": 0,
+        "center": [
+          163.30821105659479,
+          335.57658527625057
+        ],
+        "rotationRadians": 0.7706263760006575,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 1,
+        "center": [
+          345.3412511670938,
+          331.09638423814226
+        ],
+        "rotationRadians": -0.7932918576477358,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 2,
+        "center": [
+          155.22001850349895,
+          374.7774425553818
+        ],
+        "rotationRadians": -0.22665481647078164,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 3,
+        "center": [
+          368.1751688573139,
+          366.1862543096595
+        ],
+        "rotationRadians": 0.22665481647078164,
+        "scale": [
+          1,
+          1
+        ]
+      }
+    ],
+    "rigidFragments": true,
+    "lastPosePersists": true
+  },
+  {
+    "frame": 17,
+    "timeMs": 1020,
+    "crack": 1,
+    "collapse": 0.9710536211062709,
+    "fragments": [
+      {
+        "index": 0,
+        "center": [
+          163.09553998592753,
+          343.12421571968645
+        ],
+        "rotationRadians": 0.8253955779403302,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 1,
+        "center": [
+          345.7957994923317,
+          340.88916214268085
+        ],
+        "rotationRadians": -0.8496719184679871,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 2,
+        "center": [
+          152.3081312295954,
+          375.8597031037751
+        ],
+        "rotationRadians": -0.24276340527656773,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 3,
+        "center": [
+          369.4343345640531,
+          368.3820529141379
+        ],
+        "rotationRadians": 0.24276340527656773,
+        "scale": [
+          1,
+          1
+        ]
+      }
+    ],
+    "rigidFragments": true,
+    "lastPosePersists": true
+  },
+  {
+    "frame": 18,
+    "timeMs": 1080,
+    "crack": 1,
+    "collapse": 0.9993508841949537,
+    "fragments": [
+      {
+        "index": 0,
+        "center": [
+          163.00214246193306,
+          346.46698064599946
+        ],
+        "rotationRadians": 0.8494482515657106,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 1,
+        "center": [
+          345.99542085117406,
+          345.31706432977234
+        ],
+        "rotationRadians": -0.8744320236705845,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 2,
+        "center": [
+          151.0293345381584,
+          376.25146822811064
+        ],
+        "rotationRadians": -0.24983772104873841,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 3,
+        "center": [
+          369.98731508434304,
+          369.28799676650175
+        ],
+        "rotationRadians": 0.24983772104873841,
+        "scale": [
+          1,
+          1
+        ]
+      }
+    ],
+    "rigidFragments": true,
+    "lastPosePersists": true
+  },
+  {
+    "frame": 19,
+    "timeMs": 1140,
+    "crack": 1,
+    "collapse": 1,
+    "fragments": [
+      {
+        "index": 0,
+        "center": [
+          163,
+          345.45270789186134
+        ],
+        "rotationRadians": 0.85,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 1,
+        "center": [
+          346,
+          344.3281558379719
+        ],
+        "rotationRadians": -0.875,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 2,
+        "center": [
+          151,
+          375.71381318847364
+        ],
+        "rotationRadians": -0.25,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 3,
+        "center": [
+          370,
+          368.7623168984297
+        ],
+        "rotationRadians": 0.25,
+        "scale": [
+          1,
+          1
+        ]
+      }
+    ],
+    "rigidFragments": true,
+    "lastPosePersists": true
+  },
+  {
+    "frame": 20,
+    "timeMs": 1200,
+    "crack": 1,
+    "collapse": 1,
+    "fragments": [
+      {
+        "index": 0,
+        "center": [
+          163,
+          345.460379794694
+        ],
+        "rotationRadians": 0.85,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 1,
+        "center": [
+          346,
+          344.3358277408046
+        ],
+        "rotationRadians": -0.875,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 2,
+        "center": [
+          151,
+          375.71764913988994
+        ],
+        "rotationRadians": -0.25,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 3,
+        "center": [
+          370,
+          368.766152849846
+        ],
+        "rotationRadians": 0.25,
+        "scale": [
+          1,
+          1
+        ]
+      }
+    ],
+    "rigidFragments": true,
+    "lastPosePersists": true
+  },
+  {
+    "frame": 21,
+    "timeMs": 1260,
+    "crack": 1,
+    "collapse": 1,
+    "fragments": [
+      {
+        "index": 0,
+        "center": [
+          163,
+          346.4023713181293
+        ],
+        "rotationRadians": 0.85,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 1,
+        "center": [
+          346,
+          345.2778192642399
+        ],
+        "rotationRadians": -0.875,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 2,
+        "center": [
+          151,
+          376.18864490160763
+        ],
+        "rotationRadians": -0.25,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 3,
+        "center": [
+          370,
+          369.23714861156367
+        ],
+        "rotationRadians": 0.25,
+        "scale": [
+          1,
+          1
+        ]
+      }
+    ],
+    "rigidFragments": true,
+    "lastPosePersists": true
+  },
+  {
+    "frame": 22,
+    "timeMs": 1320,
+    "crack": 1,
+    "collapse": 1,
+    "fragments": [
+      {
+        "index": 0,
+        "center": [
+          163,
+          346.41398929998604
+        ],
+        "rotationRadians": 0.85,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 1,
+        "center": [
+          346,
+          345.2894372460966
+        ],
+        "rotationRadians": -0.875,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 2,
+        "center": [
+          151,
+          376.194453892536
+        ],
+        "rotationRadians": -0.25,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 3,
+        "center": [
+          370,
+          369.242957602492
+        ],
+        "rotationRadians": 0.25,
+        "scale": [
+          1,
+          1
+        ]
+      }
+    ],
+    "rigidFragments": true,
+    "lastPosePersists": true
+  },
+  {
+    "frame": 23,
+    "timeMs": 1380,
+    "crack": 1,
+    "collapse": 1,
+    "fragments": [
+      {
+        "index": 0,
+        "center": [
+          163,
+          346.544041540329
+        ],
+        "rotationRadians": 0.85,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 1,
+        "center": [
+          346,
+          345.41948948643955
+        ],
+        "rotationRadians": -0.875,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 2,
+        "center": [
+          151,
+          376.25948001270746
+        ],
+        "rotationRadians": -0.25,
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "index": 3,
+        "center": [
+          370,
+          369.3079837226635
+        ],
+        "rotationRadians": 0.25,
+        "scale": [
+          1,
+          1
+        ]
+      }
+    ],
+    "rigidFragments": true,
+    "lastPosePersists": true
+  }
+]

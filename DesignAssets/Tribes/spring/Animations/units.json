@@ -1,0 +1,488 @@
+{
+  "tribe": "spring",
+  "animations": [
+    {
+      "tribe": "spring",
+      "action": "idle",
+      "durationsMs": [
+        140,
+        140,
+        140,
+        140,
+        140,
+        140,
+        140,
+        140,
+        140,
+        140,
+        140,
+        140,
+        140,
+        140,
+        140,
+        140
+      ],
+      "loop": true,
+      "layers": "DesignAssets/Tribes/spring/BaseParts/layers.json",
+      "frameSize": [
+        512,
+        512
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "pivot": [
+        256,
+        448
+      ],
+      "rootMotion": false,
+      "atlas": "DesignAssets/Tribes/spring/Animations/Units/idle/idle.png",
+      "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Units/idle/idle.webp",
+      "preview": "DesignAssets/Tribes/spring/Animations/Units/idle/idle-preview.gif",
+      "contact": "DesignAssets/Tribes/spring/Animations/Units/idle/idle-contact.png"
+    },
+    {
+      "tribe": "spring",
+      "action": "walk",
+      "durationsMs": [
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "loop": true,
+      "layers": "DesignAssets/Tribes/spring/BaseParts/layers.json",
+      "frameSize": [
+        512,
+        512
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "pivot": [
+        256,
+        448
+      ],
+      "rootMotion": false,
+      "atlas": "DesignAssets/Tribes/spring/Animations/Units/walk/walk.png",
+      "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Units/walk/walk.webp",
+      "preview": "DesignAssets/Tribes/spring/Animations/Units/walk/walk-preview.gif",
+      "contact": "DesignAssets/Tribes/spring/Animations/Units/walk/walk-contact.png"
+    },
+    {
+      "tribe": "spring",
+      "action": "jump",
+      "durationsMs": [
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "loop": false,
+      "layers": "DesignAssets/Tribes/spring/BaseParts/layers.json",
+      "frameSize": [
+        512,
+        512
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "pivot": [
+        256,
+        448
+      ],
+      "rootMotion": false,
+      "atlas": "DesignAssets/Tribes/spring/Animations/Units/jump/jump.png",
+      "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Units/jump/jump.webp",
+      "preview": "DesignAssets/Tribes/spring/Animations/Units/jump/jump-preview.gif",
+      "contact": "DesignAssets/Tribes/spring/Animations/Units/jump/jump-contact.png"
+    },
+    {
+      "tribe": "spring",
+      "action": "harvest",
+      "durationsMs": [
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "loop": true,
+      "layers": "DesignAssets/Tribes/spring/BaseParts/layers.json",
+      "frameSize": [
+        512,
+        512
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "pivot": [
+        256,
+        448
+      ],
+      "rootMotion": false,
+      "atlas": "DesignAssets/Tribes/spring/Animations/Units/harvest/harvest.png",
+      "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Units/harvest/harvest.webp",
+      "preview": "DesignAssets/Tribes/spring/Animations/Units/harvest/harvest-preview.gif",
+      "contact": "DesignAssets/Tribes/spring/Animations/Units/harvest/harvest-contact.png"
+    },
+    {
+      "tribe": "spring",
+      "action": "carry",
+      "durationsMs": [
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "loop": true,
+      "layers": "DesignAssets/Tribes/spring/BaseParts/layers.json",
+      "frameSize": [
+        512,
+        512
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "pivot": [
+        256,
+        448
+      ],
+      "rootMotion": false,
+      "atlas": "DesignAssets/Tribes/spring/Animations/Units/carry/carry.png",
+      "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Units/carry/carry.webp",
+      "preview": "DesignAssets/Tribes/spring/Animations/Units/carry/carry-preview.gif",
+      "contact": "DesignAssets/Tribes/spring/Animations/Units/carry/carry-contact.png"
+    },
+    {
+      "tribe": "spring",
+      "action": "throw",
+      "durationsMs": [
+        60,
+        70,
+        60,
+        80,
+        30,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        70,
+        80,
+        90,
+        100,
+        60
+      ],
+      "loop": false,
+      "layers": "DesignAssets/Tribes/spring/BaseParts/layers.json",
+      "frameSize": [
+        512,
+        512
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "pivot": [
+        256,
+        448
+      ],
+      "rootMotion": false,
+      "atlas": "DesignAssets/Tribes/spring/Animations/Units/throw/throw.png",
+      "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Units/throw/throw.webp",
+      "preview": "DesignAssets/Tribes/spring/Animations/Units/throw/throw-preview.gif",
+      "contact": "DesignAssets/Tribes/spring/Animations/Units/throw/throw-contact.png"
+    },
+    {
+      "tribe": "spring",
+      "action": "attack",
+      "durationsMs": [
+        60,
+        70,
+        60,
+        80,
+        30,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        70,
+        80,
+        90,
+        100,
+        60
+      ],
+      "loop": false,
+      "layers": "DesignAssets/Tribes/spring/BaseParts/layers.json",
+      "hitFrame": 6,
+      "hitAtMs": 300,
+      "impactHoldMs": 300,
+      "frameSize": [
+        512,
+        512
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "pivot": [
+        256,
+        448
+      ],
+      "rootMotion": false,
+      "atlas": "DesignAssets/Tribes/spring/Animations/Units/attack/attack.png",
+      "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Units/attack/attack.webp",
+      "preview": "DesignAssets/Tribes/spring/Animations/Units/attack/attack-preview.gif",
+      "contact": "DesignAssets/Tribes/spring/Animations/Units/attack/attack-contact.png"
+    },
+    {
+      "tribe": "spring",
+      "action": "hurt-front",
+      "durationsMs": [
+        20,
+        30,
+        30,
+        30,
+        400,
+        30,
+        30,
+        30,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20
+      ],
+      "loop": false,
+      "layers": "DesignAssets/Tribes/spring/BaseParts/layers.json",
+      "hitFrom": "front",
+      "holdFrame": 4,
+      "closedEyeHoldMs": 400,
+      "frameSize": [
+        512,
+        512
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "pivot": [
+        256,
+        448
+      ],
+      "rootMotion": false,
+      "atlas": "DesignAssets/Tribes/spring/Animations/Units/hurt-front/hurt-front.png",
+      "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Units/hurt-front/hurt-front.webp",
+      "preview": "DesignAssets/Tribes/spring/Animations/Units/hurt-front/hurt-front-preview.gif",
+      "contact": "DesignAssets/Tribes/spring/Animations/Units/hurt-front/hurt-front-contact.png"
+    },
+    {
+      "tribe": "spring",
+      "action": "hurt-back",
+      "durationsMs": [
+        20,
+        30,
+        30,
+        30,
+        400,
+        30,
+        30,
+        30,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20
+      ],
+      "loop": false,
+      "layers": "DesignAssets/Tribes/spring/BaseParts/layers.json",
+      "hitFrom": "back",
+      "holdFrame": 4,
+      "closedEyeHoldMs": 400,
+      "frameSize": [
+        512,
+        512
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "pivot": [
+        256,
+        448
+      ],
+      "rootMotion": false,
+      "atlas": "DesignAssets/Tribes/spring/Animations/Units/hurt-back/hurt-back.png",
+      "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Units/hurt-back/hurt-back.webp",
+      "preview": "DesignAssets/Tribes/spring/Animations/Units/hurt-back/hurt-back-preview.gif",
+      "contact": "DesignAssets/Tribes/spring/Animations/Units/hurt-back/hurt-back-contact.png"
+    },
+    {
+      "tribe": "spring",
+      "action": "hurt-left",
+      "durationsMs": [
+        20,
+        30,
+        30,
+        30,
+        400,
+        30,
+        30,
+        30,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20
+      ],
+      "loop": false,
+      "layers": "DesignAssets/Tribes/spring/BaseParts/layers.json",
+      "hitFrom": "left",
+      "holdFrame": 4,
+      "closedEyeHoldMs": 400,
+      "frameSize": [
+        512,
+        512
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "pivot": [
+        256,
+        448
+      ],
+      "rootMotion": false,
+      "atlas": "DesignAssets/Tribes/spring/Animations/Units/hurt-left/hurt-left.png",
+      "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Units/hurt-left/hurt-left.webp",
+      "preview": "DesignAssets/Tribes/spring/Animations/Units/hurt-left/hurt-left-preview.gif",
+      "contact": "DesignAssets/Tribes/spring/Animations/Units/hurt-left/hurt-left-contact.png"
+    },
+    {
+      "tribe": "spring",
+      "action": "hurt-right",
+      "durationsMs": [
+        20,
+        30,
+        30,
+        30,
+        400,
+        30,
+        30,
+        30,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20
+      ],
+      "loop": false,
+      "layers": "DesignAssets/Tribes/spring/BaseParts/layers.json",
+      "hitFrom": "right",
+      "holdFrame": 4,
+      "closedEyeHoldMs": 400,
+      "frameSize": [
+        512,
+        512
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "pivot": [
+        256,
+        448
+      ],
+      "rootMotion": false,
+      "atlas": "DesignAssets/Tribes/spring/Animations/Units/hurt-right/hurt-right.png",
+      "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Units/hurt-right/hurt-right.webp",
+      "preview": "DesignAssets/Tribes/spring/Animations/Units/hurt-right/hurt-right-preview.gif",
+      "contact": "DesignAssets/Tribes/spring/Animations/Units/hurt-right/hurt-right-contact.png"
+    },
+    {
+      "tribe": "spring",
+      "action": "birth",
+      "durationsMs": [
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60
+      ],
+      "loop": false,
+      "layers": "DesignAssets/Tribes/spring/BaseParts/layers.json",
+      "frameSize": [
+        512,
+        512
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "pivot": [
+        256,
+        448
+      ],
+      "rootMotion": false,
+      "atlas": "DesignAssets/Tribes/spring/Animations/Units/birth/birth.png",
+      "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Units/birth/birth.webp",
+      "preview": "DesignAssets/Tribes/spring/Animations/Units/birth/birth-preview.gif",
+      "contact": "DesignAssets/Tribes/spring/Animations/Units/birth/birth-contact.png"
+    }
+  ]
+}

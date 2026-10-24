@@ -1,0 +1,39 @@
+{
+  "tribe": "pebble",
+  "action": "idle",
+  "durationsMs": [
+    140,
+    140,
+    140,
+    140,
+    140,
+    140,
+    140,
+    140,
+    140,
+    140,
+    140,
+    140,
+    140,
+    140,
+    140,
+    140
+  ],
+  "loop": true,
+  "layers": "DesignAssets/Tribes/pebble/BaseParts/layers.json",
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 4,
+  "frameCount": 16,
+  "pivot": [
+    256,
+    448
+  ],
+  "rootMotion": false,
+  "atlas": "DesignAssets/Tribes/pebble/Animations/Units/idle/idle.png",
+  "runtimeAtlas": "DesignAssets/Tribes/pebble/Animations/Units/idle/idle.webp",
+  "preview": "DesignAssets/Tribes/pebble/Animations/Units/idle/idle-preview.gif",
+  "contact": "DesignAssets/Tribes/pebble/Animations/Units/idle/idle-contact.png"
+}

@@ -1,0 +1,522 @@
+{
+  "right": [
+    {
+      "frame": 0,
+      "timeMs": 0,
+      "yawRadians": 0,
+      "reachPx": 0,
+      "crestDropPx": 0,
+      "frontEyes": true,
+      "fixedRoot": true
+    },
+    {
+      "frame": 1,
+      "timeMs": 60,
+      "yawRadians": 0.25,
+      "reachPx": -5.5,
+      "crestDropPx": -3,
+      "frontEyes": true,
+      "fixedRoot": true
+    },
+    {
+      "frame": 2,
+      "timeMs": 130,
+      "yawRadians": 0.48,
+      "reachPx": -14.3,
+      "crestDropPx": -7.800000000000001,
+      "frontEyes": true,
+      "fixedRoot": true
+    },
+    {
+      "frame": 3,
+      "timeMs": 190,
+      "yawRadians": 0.65,
+      "reachPx": -22,
+      "crestDropPx": -12,
+      "frontEyes": true,
+      "fixedRoot": true
+    },
+    {
+      "frame": 4,
+      "timeMs": 270,
+      "yawRadians": 0.78,
+      "reachPx": 64.8,
+      "crestDropPx": 34.199999999999996,
+      "frontEyes": true,
+      "fixedRoot": true
+    },
+    {
+      "frame": 5,
+      "timeMs": 300,
+      "yawRadians": 0.78,
+      "reachPx": 170,
+      "crestDropPx": 90,
+      "frontEyes": true,
+      "fixedRoot": true
+    },
+    {
+      "frame": 6,
+      "timeMs": 350,
+      "yawRadians": 0.78,
+      "reachPx": 170,
+      "crestDropPx": 90,
+      "frontEyes": true,
+      "fixedRoot": true
+    },
+    {
+      "frame": 7,
+      "timeMs": 400,
+      "yawRadians": 0.78,
+      "reachPx": 166.6,
+      "crestDropPx": 88.2,
+      "frontEyes": true,
+      "fixedRoot": true
+    },
+    {
+      "frame": 8,
+      "timeMs": 450,
+      "yawRadians": 0.78,
+      "reachPx": 163.2,
+      "crestDropPx": 86.39999999999999,
+      "frontEyes": true,
+      "fixedRoot": true
+    },
+    {
+      "frame": 9,
+      "timeMs": 500,
+      "yawRadians": 0.75,
+      "reachPx": 159.79999999999998,
+      "crestDropPx": 84.6,
+      "frontEyes": true,
+      "fixedRoot": true
+    },
+    {
+      "frame": 10,
+      "timeMs": 550,
+      "yawRadians": 0.7,
+      "reachPx": 149.6,
+      "crestDropPx": 79.2,
+      "frontEyes": true,
+      "fixedRoot": true
+    },
+    {
+      "frame": 11,
+      "timeMs": 600,
+      "yawRadians": 0.6,
+      "reachPx": 113.9,
+      "crestDropPx": 60.300000000000004,
+      "frontEyes": true,
+      "fixedRoot": true
+    },
+    {
+      "frame": 12,
+      "timeMs": 670,
+      "yawRadians": 0.43,
+      "reachPx": 61.199999999999996,
+      "crestDropPx": 32.4,
+      "frontEyes": true,
+      "fixedRoot": true
+    },
+    {
+      "frame": 13,
+      "timeMs": 750,
+      "yawRadians": 0.22,
+      "reachPx": 22.1,
+      "crestDropPx": 11.700000000000001,
+      "frontEyes": true,
+      "fixedRoot": true
+    },
+    {
+      "frame": 14,
+      "timeMs": 840,
+      "yawRadians": 0.07,
+      "reachPx": -7.6499999999999995,
+      "crestDropPx": -4.05,
+      "frontEyes": true,
+      "fixedRoot": true
+    },
+    {
+      "frame": 15,
+      "timeMs": 940,
+      "yawRadians": 0,
+      "reachPx": 0,
+      "crestDropPx": 0,
+      "frontEyes": true,
+      "fixedRoot": true
+    }
+  ],
+  "left": [
+    {
+      "frame": 0,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 1,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 2,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 3,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 4,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 5,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 6,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 7,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 8,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 9,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 10,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 11,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 12,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 13,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 14,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 15,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    }
+  ],
+  "front": [
+    {
+      "frame": 0,
+      "timeMs": 0,
+      "yawRadians": 0,
+      "reachPx": 0,
+      "crestDropPx": 0,
+      "frontEyes": true,
+      "fixedRoot": true
+    },
+    {
+      "frame": 1,
+      "timeMs": 60,
+      "yawRadians": 0,
+      "reachPx": 0,
+      "crestDropPx": -2.5,
+      "frontEyes": true,
+      "fixedRoot": true
+    },
+    {
+      "frame": 2,
+      "timeMs": 130,
+      "yawRadians": 0,
+      "reachPx": 0,
+      "crestDropPx": -6.5,
+      "frontEyes": true,
+      "fixedRoot": true
+    },
+    {
+      "frame": 3,
+      "timeMs": 190,
+      "yawRadians": 0,
+      "reachPx": 0,
+      "crestDropPx": -10,
+      "frontEyes": true,
+      "fixedRoot": true
+    },
+    {
+      "frame": 4,
+      "timeMs": 270,
+      "yawRadians": 0,
+      "reachPx": 0,
+      "crestDropPx": 39,
+      "frontEyes": true,
+      "fixedRoot": true
+    },
+    {
+      "frame": 5,
+      "timeMs": 300,
+      "yawRadians": 0,
+      "reachPx": 0,
+      "crestDropPx": 100,
+      "frontEyes": true,
+      "fixedRoot": true
+    },
+    {
+      "frame": 6,
+      "timeMs": 350,
+      "yawRadians": 0,
+      "reachPx": 0,
+      "crestDropPx": 100,
+      "frontEyes": true,
+      "fixedRoot": true
+    },
+    {
+      "frame": 7,
+      "timeMs": 400,
+      "yawRadians": 0,
+      "reachPx": 0,
+      "crestDropPx": 98,
+      "frontEyes": true,
+      "fixedRoot": true
+    },
+    {
+      "frame": 8,
+      "timeMs": 450,
+      "yawRadians": 0,
+      "reachPx": 0,
+      "crestDropPx": 96,
+      "frontEyes": true,
+      "fixedRoot": true
+    },
+    {
+      "frame": 9,
+      "timeMs": 500,
+      "yawRadians": 0,
+      "reachPx": 0,
+      "crestDropPx": 94,
+      "frontEyes": true,
+      "fixedRoot": true
+    },
+    {
+      "frame": 10,
+      "timeMs": 550,
+      "yawRadians": 0,
+      "reachPx": 0,
+      "crestDropPx": 88,
+      "frontEyes": true,
+      "fixedRoot": true
+    },
+    {
+      "frame": 11,
+      "timeMs": 600,
+      "yawRadians": 0,
+      "reachPx": 0,
+      "crestDropPx": 67,
+      "frontEyes": true,
+      "fixedRoot": true
+    },
+    {
+      "frame": 12,
+      "timeMs": 670,
+      "yawRadians": 0,
+      "reachPx": 0,
+      "crestDropPx": 36,
+      "frontEyes": true,
+      "fixedRoot": true
+    },
+    {
+      "frame": 13,
+      "timeMs": 750,
+      "yawRadians": 0,
+      "reachPx": 0,
+      "crestDropPx": 13,
+      "frontEyes": true,
+      "fixedRoot": true
+    },
+    {
+      "frame": 14,
+      "timeMs": 840,
+      "yawRadians": 0,
+      "reachPx": 0,
+      "crestDropPx": -4.5,
+      "frontEyes": true,
+      "fixedRoot": true
+    },
+    {
+      "frame": 15,
+      "timeMs": 940,
+      "yawRadians": 0,
+      "reachPx": 0,
+      "crestDropPx": 0,
+      "frontEyes": true,
+      "fixedRoot": true
+    }
+  ],
+  "back": [
+    {
+      "frame": 0,
+      "timeMs": 0,
+      "yawRadians": 3.141592653589793,
+      "reachPx": 0,
+      "crestDropPx": 0,
+      "frontEyes": false,
+      "fixedRoot": true
+    },
+    {
+      "frame": 1,
+      "timeMs": 60,
+      "yawRadians": 3.141592653589793,
+      "reachPx": 0,
+      "crestDropPx": 2,
+      "frontEyes": false,
+      "fixedRoot": true
+    },
+    {
+      "frame": 2,
+      "timeMs": 130,
+      "yawRadians": 3.141592653589793,
+      "reachPx": 0,
+      "crestDropPx": 5.2,
+      "frontEyes": false,
+      "fixedRoot": true
+    },
+    {
+      "frame": 3,
+      "timeMs": 190,
+      "yawRadians": 3.141592653589793,
+      "reachPx": 0,
+      "crestDropPx": 8,
+      "frontEyes": false,
+      "fixedRoot": true
+    },
+    {
+      "frame": 4,
+      "timeMs": 270,
+      "yawRadians": 3.141592653589793,
+      "reachPx": 0,
+      "crestDropPx": -24.900000000000002,
+      "frontEyes": false,
+      "fixedRoot": true
+    },
+    {
+      "frame": 5,
+      "timeMs": 300,
+      "yawRadians": 3.141592653589793,
+      "reachPx": 0,
+      "crestDropPx": -65,
+      "frontEyes": false,
+      "fixedRoot": true
+    },
+    {
+      "frame": 6,
+      "timeMs": 350,
+      "yawRadians": 3.141592653589793,
+      "reachPx": 0,
+      "crestDropPx": -65,
+      "frontEyes": false,
+      "fixedRoot": true
+    },
+    {
+      "frame": 7,
+      "timeMs": 400,
+      "yawRadians": 3.141592653589793,
+      "reachPx": 0,
+      "crestDropPx": -63.699999999999996,
+      "frontEyes": false,
+      "fixedRoot": true
+    },
+    {
+      "frame": 8,
+      "timeMs": 450,
+      "yawRadians": 3.141592653589793,
+      "reachPx": 0,
+      "crestDropPx": -62.4,
+      "frontEyes": false,
+      "fixedRoot": true
+    },
+    {
+      "frame": 9,
+      "timeMs": 500,
+      "yawRadians": 3.141592653589793,
+      "reachPx": 0,
+      "crestDropPx": -61.099999999999994,
+      "frontEyes": false,
+      "fixedRoot": true
+    },
+    {
+      "frame": 10,
+      "timeMs": 550,
+      "yawRadians": 3.141592653589793,
+      "reachPx": 0,
+      "crestDropPx": -57.2,
+      "frontEyes": false,
+      "fixedRoot": true
+    },
+    {
+      "frame": 11,
+      "timeMs": 600,
+      "yawRadians": 3.141592653589793,
+      "reachPx": 0,
+      "crestDropPx": -43.550000000000004,
+      "frontEyes": false,
+      "fixedRoot": true
+    },
+    {
+      "frame": 12,
+      "timeMs": 670,
+      "yawRadians": 3.141592653589793,
+      "reachPx": 0,
+      "crestDropPx": -23.4,
+      "frontEyes": false,
+      "fixedRoot": true
+    },
+    {
+      "frame": 13,
+      "timeMs": 750,
+      "yawRadians": 3.141592653589793,
+      "reachPx": 0,
+      "crestDropPx": -8.450000000000001,
+      "frontEyes": false,
+      "fixedRoot": true
+    },
+    {
+      "frame": 14,
+      "timeMs": 840,
+      "yawRadians": 3.141592653589793,
+      "reachPx": 0,
+      "crestDropPx": 2.925,
+      "frontEyes": false,
+      "fixedRoot": true
+    },
+    {
+      "frame": 15,
+      "timeMs": 940,
+      "yawRadians": 3.141592653589793,
+      "reachPx": 0,
+      "crestDropPx": 0,
+      "frontEyes": false,
+      "fixedRoot": true
+    }
+  ]
+}

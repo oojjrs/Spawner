@@ -1,0 +1,121 @@
+{
+  "tribe": "pebble",
+  "approvedSources": {
+    "starter": "DesignAssets/TribeConcepts/base-river-pebble-ochre-v2.png",
+    "nestStage01": "DesignAssets/TribeConcepts/Nests/nest-stage-01-pebble-ochre-v1.png"
+  },
+  "generations": [
+    {
+      "file": "DesignAssets/Tribes/pebble/Nests/nest-stage-02.png",
+      "referenceFiles": [
+        "DesignAssets/TribeConcepts/Nests/nest-stage-01-pebble-ochre-v1.png",
+        "DesignAssets/TribeConcepts/base-river-pebble-ochre-v2.png"
+      ],
+      "sourceCache": "D:\\.codex\\generated_images\\01a1685f-879e-7e60-a777-e4988de5ff1f\\exec-4ecaff05-c868-46f3-a397-73c64311121f.png",
+      "prompt": "Use case: game-asset. Create the LEVEL 2 nest source sprite for the warm ochre pebble tribe shown by reference 1 (approved level 1 nest); reference 2 shows the tribe's approved unit and must guide material/color. Evolve that exact low cradle of three rounded faceted sandstone stones and one pale stone egg into a slightly taller, broader two-course stone cradle: five or six large smooth ochre stones, simple wide planes, pale honey highlights, dark deep-teal outer contour, soft painterly 2D casual game finish. Protect the one central pale stone egg in a front-open alcove; the egg remains visible. Rounded sloping stones on each side lean inward, with one low rear stone slab forming a protective back. This is a modest level 2 growth, not a castle. Fixed front view with a slight view of the top, grounded horizontal base. One isolated static nest sprite centered with comfortable transparent margins. No plants, leaves, wood, metal, gems, runes, spikes, fire, lights, scenery, text, characters or faces. Match the source's warm sandstone material and illustration style exactly. Actual transparent background.",
+      "transparentBackground": true
+    },
+    {
+      "file": "DesignAssets/Tribes/pebble/Nests/nest-stage-03.png",
+      "referenceFiles": [
+        "DesignAssets/TribeConcepts/Nests/nest-stage-01-pebble-ochre-v1.png",
+        "DesignAssets/TribeConcepts/base-river-pebble-ochre-v2.png"
+      ],
+      "sourceCache": "D:\\.codex\\generated_images\\01a1685f-879e-7e60-a777-e4988de5ff1f\\exec-3c50806d-0e3d-4646-9194-3cdd45f7f205.png",
+      "prompt": "Use case: game-asset. Create the LEVEL 3 nest source sprite in the exact lineage of reference 1, the approved ochre pebble nest, and the sandstone material in reference 2, the approved unit. A substantial rounded sandstone sanctuary cradle: broad stepped base of large smoothly faceted ochre stones, two rising side walls of overlapping rounded boulders, a tall curved rear slab with a shallow rounded stone arch, and one protected pale central stone egg visible inside the front-open alcove. More developed than level 2, clear tiered height, around ten large readable stone pieces rather than tiny clutter. Warm ochre/caramel rock, wide cream-lit planes, deep teal contour and creases, softly painted 2D cute strategy game art. Keep the silhouette squat and welcoming, not threatening. Front view with slight top visibility and horizontal grounded base. One centered isolated static sprite, true alpha transparent background, generous edge margin. No plants, leaves, wood, metal, gemstones, crystals, runes, ornaments, spikes, fortress towers, fire, magical glows, text, characters or faces.",
+      "transparentBackground": true
+    },
+    {
+      "file": "DesignAssets/Tribes/pebble/Nests/nest-stage-04.png",
+      "referenceFiles": [
+        "DesignAssets/TribeConcepts/Nests/nest-stage-01-pebble-ochre-v1.png",
+        "DesignAssets/TribeConcepts/base-river-pebble-ochre-v2.png"
+      ],
+      "sourceCache": "D:\\.codex\\generated_images\\01a1685f-879e-7e60-a777-e4988de5ff1f\\exec-11e50637-a9b3-4cb1-a066-6a342720fc91.png",
+      "prompt": "Use case: game-asset. Create the final LEVEL 4 nest source sprite belonging to the approved warm ochre pebble tribe in references. Reference 1 is the exact level 1 design ancestry, reference 2 defines the tribe's rock material, palette and contour. Evolve it into a mature broad sandstone nursery sanctuary: three tiers of large smooth faceted rounded ochre boulders, a tall protective stone arch at the rear, and two compact lower side cradles flanking the central cradle, each with a smaller pale stone egg; one main large pale egg is visible at the center. Strong broad stepped base, heavier and taller than prior levels, all forms still very simple and organic, around fifteen broad readable stones, no tiny detail. Soft painterly cute 2D game sprite, honey-cream lit rock planes, caramel shadows, dark deep-teal outline, frontal slight-top-view camera same as source, horizontal ground. Single centered isolated sprite with transparent background and comfortable margin all around. No faces, plants, leaves, wood, metal, gems, crystal, rune, spikes, crenellations, buildings, light beams, magical glow, text or scenery. True alpha transparency.",
+      "transparentBackground": true
+    },
+    {
+      "file": "DesignAssets/Tribes/pebble/Terrain/nest-soil-ground.png",
+      "referenceFiles": [
+        "DesignAssets/TribeConcepts/Nests/nest-stage-01-pebble-ochre-v1.png",
+        "DesignAssets/TribeConcepts/base-river-pebble-ochre-v2.png"
+      ],
+      "sourceCache": "D:\\.codex\\generated_images\\01a1685f-879e-7e60-a777-e4988de5ff1f\\exec-92449d22-a4c2-4e1e-8cd2-7147cd913fc8.png",
+      "prompt": "Use case: game-asset. Create one isolated ground decal source sprite for the warm ochre pebble tribe's nest in reference 1, matching the soft 2D painterly casual strategy-game illustration and dark deep teal contours. A very low wide ellipse patch of pale warm sand and ochre packed clay, with an irregular but clean rounded edge, a few small flattened smooth sandstone pebbles around the outer rim and broad subtle natural soil planes. The center stays mostly empty and visually quiet, intended for placing the nest on top. Slight top-down view, low flat footprint, no upright props, no nest, no egg, no character, no plants, grass, leaves, wood, metal, gems, runes or text. Warm muted sandy ochre ground complements the exact approved nest and unit palette, understated texture, not photorealistic gravel. Single centered wide oval sprite on actual alpha transparent background with ample margins. No rectangular background, checkerboard, drop shadow or scenery.",
+      "transparentBackground": true
+    },
+    {
+      "file": "DesignAssets/Tribes/pebble/Parts/strength-1.png",
+      "referenceFiles": [
+        "DesignAssets/TribeConcepts/base-river-pebble-ochre-v2.png"
+      ],
+      "sourceCache": "D:\\.codex\\generated_images\\01a1685f-879e-7e60-a777-e4988de5ff1f\\exec-09b88dee-7b52-4b62-9c8e-fd2883f9ea81.png",
+      "prompt": "Use case: game-asset, modular equipment source sprite. Reference 1 is the approved warm ochre pebble creature; use its exact sandstone color/material, broad softly painted faceted planes, pale honey top-left light, and dark deep-teal contour. Do not redraw the creature. Produce ONLY the detached equipment described below, no body, head, eyes, mouth or face. Match the same front-facing camera with a slight top view. Keep all intended empty spaces truly alpha transparent, especially the large central space where the creature face would be. No text, scenery, background rectangle, drop shadow, metal, gems, crystals, runes, spikes or plants. One asset per image, centered fully visible with generous transparent margins. EQUIPMENT: level 1 strength arms, a matching symmetrical left and right pair of short chunky sandstone arms curving inward to broad mitten-like rock hands, holding opposite ends of one shallow simple oval stone carrying tray along the bottom. The upper central region above the tray must be empty transparent. Friendly compact rounded boulder shapes, simple 1-segment arms and small hands. A practical natural stone hauling appendage, not weapons. Transparent background.",
+      "transparentBackground": true
+    },
+    {
+      "file": "DesignAssets/Tribes/pebble/Parts/strength-2.png",
+      "referenceFiles": [
+        "DesignAssets/TribeConcepts/base-river-pebble-ochre-v2.png"
+      ],
+      "sourceCache": "D:\\.codex\\generated_images\\01a1685f-879e-7e60-a777-e4988de5ff1f\\exec-459cee4a-5622-4c4e-a81f-668f0d312d78.png",
+      "prompt": "Use case: game-asset, modular equipment source sprite. Reference 1 is the approved warm ochre pebble creature; use its exact sandstone color/material, broad softly painted faceted planes, pale honey top-left light, and dark deep-teal contour. Do not redraw the creature. Produce ONLY the detached equipment described below, no body, head, eyes, mouth or face. Match the same front-facing camera with a slight top view. Keep all intended empty spaces truly alpha transparent, especially the large central space where the creature face would be. No text, scenery, background rectangle, drop shadow, metal, gems, crystals, runes, spikes or plants. One asset per image, centered fully visible with generous transparent margins. EQUIPMENT: level 2 strength arms, a matching symmetrical left and right pair of visibly stronger short chunky sandstone arms with two rounded rock segments and broad simple blocky mitten-like hands, holding opposite ends of one thicker shallow oval sandstone carrying basin along the bottom. The upper central region above the carrying basin must be empty transparent. Clearly upgraded bulk and broad hands compared to level 1, but still compact friendly smooth stones. No fingers, fists raised in air, weapons or ornament. Actual transparent background.",
+      "transparentBackground": true
+    },
+    {
+      "file": "DesignAssets/Tribes/pebble/Parts/feet-1.png",
+      "referenceFiles": [
+        "DesignAssets/TribeConcepts/base-river-pebble-ochre-v2.png"
+      ],
+      "sourceCache": "D:\\.codex\\generated_images\\01a1685f-879e-7e60-a777-e4988de5ff1f\\exec-fe057c0b-8fd7-4ac4-9bba-188e9c86dec0.png",
+      "prompt": "Use case: game-asset, modular equipment source sprite. Reference 1 is the approved warm ochre pebble creature; use its exact sandstone color/material, broad softly painted faceted planes, pale honey top-left light, and dark deep-teal contour. Do not redraw the creature. Produce ONLY the detached equipment described below, no body, head, eyes, mouth or face. Match the same front-facing camera with a slight top view. Keep all intended empty spaces truly alpha transparent, especially the large central space where the creature face would be. No text, scenery, background rectangle, drop shadow, metal, gems, crystals, runes, spikes or plants. One asset per image, centered fully visible with generous transparent margins. EQUIPMENT: level 1 movement feet, ONLY one separated matching pair of two short sandstone leg-and-foot appendages, left and right, shown from the front. Each is one small rounded rock ankle resting on a wide flat pebble foot, slight outward toe. Wide empty transparent gap between the two feet. Cute squat smooth simple broad planes, no nails, no claws, no shoes. No joining platform or central body. Actual transparent background.",
+      "transparentBackground": true
+    },
+    {
+      "file": "DesignAssets/Tribes/pebble/Parts/feet-2.png",
+      "referenceFiles": [
+        "DesignAssets/TribeConcepts/base-river-pebble-ochre-v2.png"
+      ],
+      "sourceCache": "D:\\.codex\\generated_images\\01a1685f-879e-7e60-a777-e4988de5ff1f\\exec-0e82a66a-5866-4ec7-895b-93d6659cf0b4.png",
+      "prompt": "Use case: game-asset, modular equipment source sprite. Reference 1 is the approved warm ochre pebble creature; use its exact sandstone color/material, broad softly painted faceted planes, pale honey top-left light, and dark deep-teal contour. Do not redraw the creature. Produce ONLY the detached equipment described below, no body, head, eyes, mouth or face. Match the same front-facing camera with a slight top view. Keep all intended empty spaces truly alpha transparent, especially the large central space where the creature face would be. No text, scenery, background rectangle, drop shadow, metal, gems, crystals, runes, spikes or plants. One asset per image, centered fully visible with generous transparent margins. EQUIPMENT: level 2 movement feet, ONLY one separated matching pair of two visibly stronger articulated short sandstone legs and wide feet, left and right, front-facing. Each has two compact rounded stone segments with a soft bend above a broad flat pebble foot. More stable, thicker and clearly upgraded compared to level 1 but still short and cute. Wide empty alpha transparent gap between the legs, no central body or connecting base. No nails, no claws, no footwear. Actual transparent background.",
+      "transparentBackground": true
+    },
+    {
+      "file": "DesignAssets/Tribes/pebble/Parts/antenna-1.png",
+      "referenceFiles": [
+        "DesignAssets/TribeConcepts/base-river-pebble-ochre-v2.png"
+      ],
+      "sourceCache": "D:\\.codex\\generated_images\\01a1685f-879e-7e60-a777-e4988de5ff1f\\exec-b3e32afe-73a1-4852-bbb4-03c7294a88ff.png",
+      "prompt": "Use case: game-asset, modular equipment source sprite. Reference 1 is the approved warm ochre pebble creature; use its exact sandstone color/material, broad softly painted faceted planes, pale honey top-left light, and dark deep-teal contour. Do not redraw the creature. Produce ONLY the detached equipment described below, no body, head, eyes, mouth or face. Match the same front-facing camera with a slight top view. Keep all intended empty spaces truly alpha transparent, especially the large central space where the creature face would be. No text, scenery, background rectangle, drop shadow, metal, gems, crystals, runes, spikes or plants. One asset per image, centered fully visible with generous transparent margins. EQUIPMENT: level 1 sensing organ, ONLY a pair of low rounded sandstone hearing cups growing from a very short forked stone stem like living rock ears. Two small shallow oval bowl depressions tilted outwards, simple thick rounded rims, broad calm stone planes. Biological soft-shaped stone receiver, not technology, not a machine or antenna mast. Compact horizontal pair, no satellite dish hardware. One centered equipment piece with little stem visible at bottom, actual transparent background.",
+      "transparentBackground": true
+    },
+    {
+      "file": "DesignAssets/Tribes/pebble/Parts/antenna-2.png",
+      "referenceFiles": [
+        "DesignAssets/TribeConcepts/base-river-pebble-ochre-v2.png"
+      ],
+      "sourceCache": "D:\\.codex\\generated_images\\01a1685f-879e-7e60-a777-e4988de5ff1f\\exec-99622c68-3a68-413d-a877-7b274cbbc1f6.png",
+      "prompt": "Use case: game-asset, modular equipment source sprite. Reference 1 is the approved warm ochre pebble creature; use its exact sandstone color/material, broad softly painted faceted planes, pale honey top-left light, and dark deep-teal contour. Do not redraw the creature. Produce ONLY the detached equipment described below, no body, head, eyes, mouth or face. Match the same front-facing camera with a slight top view. Keep all intended empty spaces truly alpha transparent, especially the large central space where the creature face would be. No text, scenery, background rectangle, drop shadow, metal, gems, crystals, runes, spikes or plants. One asset per image, centered fully visible with generous transparent margins. EQUIPMENT: level 2 sensing organ, ONLY a pair of noticeably larger deeper sandstone hearing cups branching from one short stout Y-shaped stone stem. Each rounded natural rock receiver has a larger broad concave oval inner plane and one simple small rounded pebble node at its center. Two cups fan outward like living stone ears. Clearly wider and more sensitive than level 1, still soft compact stone biology, not technology or machinery. No mast, bolts, circuits or metal. Actual transparent background.",
+      "transparentBackground": true
+    },
+    {
+      "file": "DesignAssets/Tribes/pebble/Parts/shell-1.png",
+      "referenceFiles": [
+        "DesignAssets/TribeConcepts/base-river-pebble-ochre-v2.png"
+      ],
+      "sourceCache": "D:\\.codex\\generated_images\\01a1685f-879e-7e60-a777-e4988de5ff1f\\exec-865ba180-6d29-4469-9f55-e04b5b8369ef.png",
+      "prompt": "Use case: game-asset, modular equipment source sprite. Reference 1 is the approved warm ochre pebble creature; use its exact sandstone color/material, broad softly painted faceted planes, pale honey top-left light, and dark deep-teal contour. Do not redraw the creature. Produce ONLY the detached equipment described below, no body, head, eyes, mouth or face. Match the same front-facing camera with a slight top view. Keep all intended empty spaces truly alpha transparent, especially the large central space where the creature face would be. No text, scenery, background rectangle, drop shadow, metal, gems, crystals, runes, spikes or plants. One asset per image, centered fully visible with generous transparent margins. EQUIPMENT: level 1 resistance armor, ONLY a natural sandstone armor frame shaped as a low open U: a pair of thick rounded stone shoulder/side guards and two simple lower rim plates. The large entire center and top opening are transparent so the creature's round face and eyes will remain completely unobstructed when placed behind this equipment. Two broad upper side plates and low lower stones, compact simple light protection. No helmet across forehead, no central shield, no enclosed solid torso. Actual transparent background.",
+      "transparentBackground": true
+    },
+    {
+      "file": "DesignAssets/Tribes/pebble/Parts/shell-2.png",
+      "referenceFiles": [
+        "DesignAssets/TribeConcepts/base-river-pebble-ochre-v2.png"
+      ],
+      "sourceCache": "D:\\.codex\\generated_images\\01a1685f-879e-7e60-a777-e4988de5ff1f\\exec-b106302b-85a1-4dfd-a3cc-1c7e7c7ba741.png",
+      "prompt": "Use case: game-asset, modular equipment source sprite. Reference 1 is the approved warm ochre pebble creature; use its exact sandstone color/material, broad softly painted faceted planes, pale honey top-left light, and dark deep-teal contour. Do not redraw the creature. Produce ONLY the detached equipment described below, no body, head, eyes, mouth or face. Match the same front-facing camera with a slight top view. Keep all intended empty spaces truly alpha transparent, especially the large central space where the creature face would be. No text, scenery, background rectangle, drop shadow, metal, gems, crystals, runes, spikes or plants. One asset per image, centered fully visible with generous transparent margins. EQUIPMENT: level 2 resistance armor, ONLY a visibly heavier natural sandstone armor frame shaped as an open U: three overlapping rounded broad stone plates on each side, connected by two low bottom rim stones. The large entire center and top opening are transparent for the face to remain unobstructed. Thick curved rounded armor flanks, heavy lower guard, clear upgrade from level 1. Warm ochre outer faces, darker caramel overlaps, not leaf shapes or scales. No enclosed solid torso, no central shield, no helmet or forehead cover. Actual transparent background.",
+      "transparentBackground": true
+    }
+  ]
+}

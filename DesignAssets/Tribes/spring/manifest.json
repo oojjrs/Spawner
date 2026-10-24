@@ -1,0 +1,274 @@
+{
+  "schemaVersion": 1,
+  "tribe": "spring",
+  "label": "샘방울",
+  "palette": "teal and mint",
+  "createdDate": "2026-10-23",
+  "assetCount": 14,
+  "newlyGeneratedSourceCount": 13,
+  "reusedApprovedCount": 1,
+  "mounting": {
+    "coordinateSpace": "alpha-trimmed starter content bounds",
+    "origin": "top-left",
+    "center": "normalized body bounds",
+    "width": "ratio of trimmed body width",
+    "previewBodyBox": {
+      "x": 95,
+      "y": 100,
+      "width": 250,
+      "height": 262
+    },
+    "note": "Mounts are authored static composition coordinates; runtime integration should use the same trimmed coordinate space."
+  },
+  "assets": [
+    {
+      "id": "starter",
+      "kind": "starter",
+      "source": "DesignAssets/TribeConcepts/base-water-droplet-teal-v2.png",
+      "reusedApproved": true,
+      "path": "DesignAssets/Tribes/spring/starter.png",
+      "width": 1254,
+      "height": 1254,
+      "channels": "srgba 4.0",
+      "meanAlpha": 0.362141,
+      "alphaBounds10Percent": "798x1042+235+130"
+    },
+    {
+      "id": "nest-stage-01",
+      "kind": "nest",
+      "stage": 1,
+      "source": "DesignAssets/TribeConcepts/Nests/nest-stage-01-spring-teal-v2.png",
+      "reusedApproved": false,
+      "path": "DesignAssets/Tribes/spring/Nests/nest-stage-01.png",
+      "width": 1774,
+      "height": 887,
+      "channels": "srgba 4.0",
+      "meanAlpha": 0.379672,
+      "alphaBounds10Percent": "1492x589+142+185",
+      "revision": 2
+    },
+    {
+      "id": "nest-stage-02",
+      "kind": "nest",
+      "stage": 2,
+      "path": "DesignAssets/Tribes/spring/Nests/nest-stage-02.png",
+      "width": 1860,
+      "height": 846,
+      "channels": "srgba 4.0",
+      "meanAlpha": 0.479506,
+      "alphaBounds10Percent": "1655x674+119+106",
+      "source": "DesignAssets/TribeConcepts/Nests/nest-stage-02-spring-teal-v2.png",
+      "reusedApproved": false,
+      "revision": 2
+    },
+    {
+      "id": "nest-stage-03",
+      "kind": "nest",
+      "stage": 3,
+      "path": "DesignAssets/Tribes/spring/Nests/nest-stage-03.png",
+      "width": 1774,
+      "height": 887,
+      "channels": "srgba 4.0",
+      "meanAlpha": 0.473781,
+      "alphaBounds10Percent": "1670x667+52+122",
+      "source": "DesignAssets/TribeConcepts/Nests/nest-stage-03-spring-teal-v2.png",
+      "reusedApproved": false,
+      "revision": 2
+    },
+    {
+      "id": "nest-stage-04",
+      "kind": "nest",
+      "stage": 4,
+      "path": "DesignAssets/Tribes/spring/Nests/nest-stage-04.png",
+      "width": 1731,
+      "height": 909,
+      "channels": "srgba 4.0",
+      "meanAlpha": 0.463686,
+      "alphaBounds10Percent": "1568x716+96+118",
+      "source": "DesignAssets/TribeConcepts/Nests/nest-stage-04-spring-teal-v2.png",
+      "reusedApproved": false,
+      "revision": 2
+    },
+    {
+      "id": "nest-ground",
+      "kind": "terrain",
+      "path": "DesignAssets/Tribes/spring/Terrain/nest-ground.png",
+      "width": 1254,
+      "height": 1254,
+      "channels": "srgba 4.0",
+      "meanAlpha": 0.608926,
+      "alphaBounds10Percent": "1192x1136+31+58"
+    },
+    {
+      "id": "strength-1",
+      "kind": "part",
+      "stage": 1,
+      "mount": {
+        "center": [
+          0.5,
+          0.83
+        ],
+        "width": 1.4,
+        "layer": "front"
+      },
+      "path": "DesignAssets/Tribes/spring/Units/Parts/strength-1.png",
+      "width": 1683,
+      "height": 934,
+      "channels": "srgba 4.0",
+      "meanAlpha": 0.321377,
+      "alphaBounds10Percent": "1615x712+34+179"
+    },
+    {
+      "id": "strength-2",
+      "kind": "part",
+      "stage": 2,
+      "mount": {
+        "center": [
+          0.5,
+          0.81
+        ],
+        "width": 1.55,
+        "layer": "front"
+      },
+      "path": "DesignAssets/Tribes/spring/Units/Parts/strength-2.png",
+      "width": 1536,
+      "height": 1024,
+      "channels": "srgba 4.0",
+      "meanAlpha": 0.400358,
+      "alphaBounds10Percent": "1496x787+20+148"
+    },
+    {
+      "id": "feet-1",
+      "kind": "part",
+      "stage": 1,
+      "mount": {
+        "center": [
+          0.5,
+          1.01
+        ],
+        "width": 1.05,
+        "layer": "behind-body"
+      },
+      "path": "DesignAssets/Tribes/spring/Units/Parts/feet-1.png",
+      "width": 1774,
+      "height": 887,
+      "channels": "srgba 4.0",
+      "meanAlpha": 0.273058,
+      "alphaBounds10Percent": "1571x641+107+181"
+    },
+    {
+      "id": "feet-2",
+      "kind": "part",
+      "stage": 2,
+      "mount": {
+        "center": [
+          0.5,
+          1.04
+        ],
+        "width": 1.12,
+        "layer": "behind-body"
+      },
+      "path": "DesignAssets/Tribes/spring/Units/Parts/feet-2.png",
+      "width": 1660,
+      "height": 948,
+      "channels": "srgba 4.0",
+      "meanAlpha": 0.304234,
+      "alphaBounds10Percent": "1529x791+66+93"
+    },
+    {
+      "id": "antenna-1",
+      "kind": "part",
+      "stage": 1,
+      "mount": {
+        "center": [
+          0.5,
+          0.06
+        ],
+        "width": 0.88,
+        "layer": "behind-body"
+      },
+      "path": "DesignAssets/Tribes/spring/Units/Parts/antenna-1.png",
+      "width": 1536,
+      "height": 1024,
+      "channels": "srgba 4.0",
+      "meanAlpha": 0.261082,
+      "alphaBounds10Percent": "1394x583+71+278"
+    },
+    {
+      "id": "antenna-2",
+      "kind": "part",
+      "stage": 2,
+      "mount": {
+        "center": [
+          0.5,
+          0.05
+        ],
+        "width": 1.17,
+        "layer": "behind-body"
+      },
+      "path": "DesignAssets/Tribes/spring/Units/Parts/antenna-2.png",
+      "width": 1774,
+      "height": 887,
+      "channels": "srgba 4.0",
+      "meanAlpha": 0.30574,
+      "alphaBounds10Percent": "1726x527+24+160"
+    },
+    {
+      "id": "shell-1",
+      "kind": "part",
+      "stage": 1,
+      "mount": {
+        "center": [
+          0.5,
+          0.8
+        ],
+        "width": 1.37,
+        "layer": "front"
+      },
+      "path": "DesignAssets/Tribes/spring/Units/Parts/shell-1.png",
+      "width": 1550,
+      "height": 1015,
+      "channels": "srgba 4.0",
+      "meanAlpha": 0.328032,
+      "alphaBounds10Percent": "1527x836+12+151"
+    },
+    {
+      "id": "shell-2",
+      "kind": "part",
+      "stage": 2,
+      "mount": {
+        "center": [
+          0.5,
+          0.79
+        ],
+        "width": 1.48,
+        "layer": "front"
+      },
+      "path": "DesignAssets/Tribes/spring/Units/Parts/shell-2.png",
+      "width": 1444,
+      "height": 1089,
+      "channels": "srgba 4.0",
+      "meanAlpha": 0.449425,
+      "alphaBounds10Percent": "1427x975+9+73"
+    }
+  ],
+  "previews": {
+    "growth": "DesignAssets/Tribes/spring/Previews/nest-growth-lineup.png",
+    "equipped": "DesignAssets/Tribes/spring/Previews/parts-equipped.png",
+    "isolated": "DesignAssets/Tribes/spring/Previews/parts-isolated.png",
+    "beforeAfter": "DesignAssets/Tribes/spring/Previews/nest-before-after-v2.png"
+  },
+  "generationPrompts": "DesignAssets/Tribes/spring/generation-prompts.json",
+  "postprocess": {
+    "alphaCleaned": [
+      "strength-2",
+      "antenna-1"
+    ],
+    "operation": "65% alpha threshold and alpha-only 0.35 pixel soft edge; generated RGB art unchanged"
+  },
+  "nestRevision": {
+    "version": 2,
+    "design": "비대칭 샘과 계단식 수면, 중앙 물방울 제거",
+    "prompts": "DesignAssets/Tribes/spring/nest-revision-v2-prompts.json"
+  }
+}

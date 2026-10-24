@@ -1,0 +1,666 @@
+{
+  "right": [
+    {
+      "frame": 0,
+      "timeMs": 0,
+      "yawRadians": 0,
+      "lungeY": 0,
+      "capPosition": [
+        256,
+        302
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": true
+    },
+    {
+      "frame": 1,
+      "timeMs": 60,
+      "yawRadians": 0.25,
+      "lungeY": 0,
+      "capPosition": [
+        252.67947191151973,
+        299.25300558820396
+      ],
+      "capAngleRadians": -0.0775,
+      "frontEyes": true
+    },
+    {
+      "frame": 2,
+      "timeMs": 130,
+      "yawRadians": 0.48,
+      "lungeY": 0,
+      "capPosition": [
+        247.3087243228562,
+        294.9497542565993
+      ],
+      "capAngleRadians": -0.2015,
+      "frontEyes": true
+    },
+    {
+      "frame": 3,
+      "timeMs": 190,
+      "yawRadians": 0.65,
+      "lungeY": 0,
+      "capPosition": [
+        242.55323715558902,
+        291.27941975650344
+      ],
+      "capAngleRadians": -0.31,
+      "frontEyes": true
+    },
+    {
+      "frame": 4,
+      "timeMs": 270,
+      "yawRadians": 0.78,
+      "lungeY": 0,
+      "capPosition": [
+        262.8528351701621,
+        305.52000370863044
+      ],
+      "capAngleRadians": 0.08339999999999997,
+      "frontEyes": true
+    },
+    {
+      "frame": 5,
+      "timeMs": 300,
+      "yawRadians": 0.78,
+      "lungeY": 0,
+      "capPosition": [
+        280.9244356335061,
+        318.8516086732897
+      ],
+      "capAngleRadians": 0.42,
+      "frontEyes": true
+    },
+    {
+      "frame": 6,
+      "timeMs": 350,
+      "yawRadians": 0.78,
+      "lungeY": 0,
+      "capPosition": [
+        280.9244356335061,
+        318.8516086732897
+      ],
+      "capAngleRadians": 0.42,
+      "frontEyes": true
+    },
+    {
+      "frame": 7,
+      "timeMs": 400,
+      "yawRadians": 0.78,
+      "lungeY": 0,
+      "capPosition": [
+        280.4457494571444,
+        318.5032927882229
+      ],
+      "capAngleRadians": 0.41159999999999997,
+      "frontEyes": true
+    },
+    {
+      "frame": 8,
+      "timeMs": 450,
+      "yawRadians": 0.78,
+      "lungeY": 0,
+      "capPosition": [
+        279.96624085787397,
+        318.15539720954024
+      ],
+      "capAngleRadians": 0.40319999999999995,
+      "frontEyes": true
+    },
+    {
+      "frame": 9,
+      "timeMs": 500,
+      "yawRadians": 0.75,
+      "lungeY": 0,
+      "capPosition": [
+        279.48591063827433,
+        317.80792447291634
+      ],
+      "capAngleRadians": 0.3948,
+      "frontEyes": true
+    },
+    {
+      "frame": 10,
+      "timeMs": 550,
+      "yawRadians": 0.7,
+      "lungeY": 0,
+      "capPosition": [
+        278.03999838862956,
+        316.76806864922224
+      ],
+      "capAngleRadians": 0.3696,
+      "frontEyes": true
+    },
+    {
+      "frame": 11,
+      "timeMs": 600,
+      "yawRadians": 0.6,
+      "lungeY": 0,
+      "capPosition": [
+        272.92145707343894,
+        313.15970718609873
+      ],
+      "capAngleRadians": 0.2814,
+      "frontEyes": true
+    },
+    {
+      "frame": 12,
+      "timeMs": 670,
+      "yawRadians": 0.43,
+      "lungeY": 0,
+      "capPosition": [
+        265.20278896346593,
+        307.9264908910523
+      ],
+      "capAngleRadians": 0.1512,
+      "frontEyes": true
+    },
+    {
+      "frame": 13,
+      "timeMs": 750,
+      "yawRadians": 0.22,
+      "lungeY": 0,
+      "capPosition": [
+        259.35252860862994,
+        304.1205969339369
+      ],
+      "capAngleRadians": 0.0546,
+      "frontEyes": true
+    },
+    {
+      "frame": 14,
+      "timeMs": 840,
+      "yawRadians": 0.07,
+      "lungeY": 0,
+      "capPosition": [
+        254.83382716251342,
+        301.68637302338306
+      ],
+      "capAngleRadians": -0.0189,
+      "frontEyes": true
+    },
+    {
+      "frame": 15,
+      "timeMs": 940,
+      "yawRadians": 0,
+      "lungeY": 0,
+      "capPosition": [
+        256,
+        302
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": true
+    }
+  ],
+  "left": [
+    {
+      "frame": 0,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 1,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 2,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 3,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 4,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 5,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 6,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 7,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 8,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 9,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 10,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 11,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 12,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 13,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 14,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    },
+    {
+      "frame": 15,
+      "mirroredFrom": "right",
+      "mirrorAxisX": 255.5
+    }
+  ],
+  "front": [
+    {
+      "frame": 0,
+      "timeMs": 0,
+      "yawRadians": 0,
+      "lungeY": 0,
+      "capPosition": [
+        256,
+        302
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": true
+    },
+    {
+      "frame": 1,
+      "timeMs": 60,
+      "yawRadians": 0,
+      "lungeY": 0,
+      "capPosition": [
+        256,
+        299.48125
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": true
+    },
+    {
+      "frame": 2,
+      "timeMs": 130,
+      "yawRadians": 0,
+      "lungeY": 0,
+      "capPosition": [
+        256,
+        295.45124999999996
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": true
+    },
+    {
+      "frame": 3,
+      "timeMs": 190,
+      "yawRadians": 0,
+      "lungeY": 0,
+      "capPosition": [
+        256,
+        291.925
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": true
+    },
+    {
+      "frame": 4,
+      "timeMs": 270,
+      "yawRadians": 0,
+      "lungeY": 3.36,
+      "capPosition": [
+        256,
+        323.85200000000003
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": true
+    },
+    {
+      "frame": 5,
+      "timeMs": 300,
+      "yawRadians": 0,
+      "lungeY": 8,
+      "capPosition": [
+        256,
+        361.225
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": true
+    },
+    {
+      "frame": 6,
+      "timeMs": 350,
+      "yawRadians": 0,
+      "lungeY": 8,
+      "capPosition": [
+        256,
+        361.225
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": true
+    },
+    {
+      "frame": 7,
+      "timeMs": 400,
+      "yawRadians": 0,
+      "lungeY": 7.84,
+      "capPosition": [
+        256,
+        360.04049999999995
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": true
+    },
+    {
+      "frame": 8,
+      "timeMs": 450,
+      "yawRadians": 0,
+      "lungeY": 7.68,
+      "capPosition": [
+        256,
+        358.856
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": true
+    },
+    {
+      "frame": 9,
+      "timeMs": 500,
+      "yawRadians": 0,
+      "lungeY": 7.52,
+      "capPosition": [
+        256,
+        357.6715
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": true
+    },
+    {
+      "frame": 10,
+      "timeMs": 550,
+      "yawRadians": 0,
+      "lungeY": 7.04,
+      "capPosition": [
+        256,
+        354.118
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": true
+    },
+    {
+      "frame": 11,
+      "timeMs": 600,
+      "yawRadians": 0,
+      "lungeY": 5.36,
+      "capPosition": [
+        256,
+        341.68075
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": true
+    },
+    {
+      "frame": 12,
+      "timeMs": 670,
+      "yawRadians": 0,
+      "lungeY": 2.88,
+      "capPosition": [
+        256,
+        323.321
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": true
+    },
+    {
+      "frame": 13,
+      "timeMs": 750,
+      "yawRadians": 0,
+      "lungeY": 1.04,
+      "capPosition": [
+        256,
+        309.69925
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": true
+    },
+    {
+      "frame": 14,
+      "timeMs": 840,
+      "yawRadians": 0,
+      "lungeY": -0.36,
+      "capPosition": [
+        256,
+        299.75
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": true
+    },
+    {
+      "frame": 15,
+      "timeMs": 940,
+      "yawRadians": 0,
+      "lungeY": 0,
+      "capPosition": [
+        256,
+        302
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": true
+    }
+  ],
+  "back": [
+    {
+      "frame": 0,
+      "timeMs": 0,
+      "yawRadians": 3.141592653589793,
+      "lungeY": 0,
+      "capPosition": [
+        256,
+        302
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": false
+    },
+    {
+      "frame": 1,
+      "timeMs": 60,
+      "yawRadians": 3.141592653589793,
+      "lungeY": 0,
+      "capPosition": [
+        256,
+        302.48125
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": false
+    },
+    {
+      "frame": 2,
+      "timeMs": 130,
+      "yawRadians": 3.141592653589793,
+      "lungeY": 0,
+      "capPosition": [
+        256,
+        303.25124999999997
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": false
+    },
+    {
+      "frame": 3,
+      "timeMs": 190,
+      "yawRadians": 3.141592653589793,
+      "lungeY": 0,
+      "capPosition": [
+        256,
+        303.925
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": false
+    },
+    {
+      "frame": 4,
+      "timeMs": 270,
+      "yawRadians": 3.141592653589793,
+      "lungeY": -3.36,
+      "capPosition": [
+        256,
+        289.652
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": false
+    },
+    {
+      "frame": 5,
+      "timeMs": 300,
+      "yawRadians": 3.141592653589793,
+      "lungeY": -8,
+      "capPosition": [
+        256,
+        271.225
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": false
+    },
+    {
+      "frame": 6,
+      "timeMs": 350,
+      "yawRadians": 3.141592653589793,
+      "lungeY": -8,
+      "capPosition": [
+        256,
+        271.225
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": false
+    },
+    {
+      "frame": 7,
+      "timeMs": 400,
+      "yawRadians": 3.141592653589793,
+      "lungeY": -7.84,
+      "capPosition": [
+        256,
+        271.8405
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": false
+    },
+    {
+      "frame": 8,
+      "timeMs": 450,
+      "yawRadians": 3.141592653589793,
+      "lungeY": -7.68,
+      "capPosition": [
+        256,
+        272.456
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": false
+    },
+    {
+      "frame": 9,
+      "timeMs": 500,
+      "yawRadians": 3.141592653589793,
+      "lungeY": -7.52,
+      "capPosition": [
+        256,
+        273.0715
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": false
+    },
+    {
+      "frame": 10,
+      "timeMs": 550,
+      "yawRadians": 3.141592653589793,
+      "lungeY": -7.04,
+      "capPosition": [
+        256,
+        274.91799999999995
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": false
+    },
+    {
+      "frame": 11,
+      "timeMs": 600,
+      "yawRadians": 3.141592653589793,
+      "lungeY": -5.36,
+      "capPosition": [
+        256,
+        281.38075
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": false
+    },
+    {
+      "frame": 12,
+      "timeMs": 670,
+      "yawRadians": 3.141592653589793,
+      "lungeY": -2.88,
+      "capPosition": [
+        256,
+        290.92100000000005
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": false
+    },
+    {
+      "frame": 13,
+      "timeMs": 750,
+      "yawRadians": 3.141592653589793,
+      "lungeY": -1.04,
+      "capPosition": [
+        256,
+        297.99924999999996
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": false
+    },
+    {
+      "frame": 14,
+      "timeMs": 840,
+      "yawRadians": 3.141592653589793,
+      "lungeY": 0.36,
+      "capPosition": [
+        256,
+        303.8
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": false
+    },
+    {
+      "frame": 15,
+      "timeMs": 940,
+      "yawRadians": 3.141592653589793,
+      "lungeY": 0,
+      "capPosition": [
+        256,
+        302
+      ],
+      "capAngleRadians": 0,
+      "frontEyes": false
+    }
+  ]
+}

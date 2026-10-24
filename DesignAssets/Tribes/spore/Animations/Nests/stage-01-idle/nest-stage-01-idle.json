@@ -1,0 +1,59 @@
+{
+  "tribe": "spore",
+  "action": "nest-stage-01-idle",
+  "source": "DesignAssets/Tribes/spore/Nests/nest-stage-01.png",
+  "drawnCels": 4,
+  "order": [
+    0,
+    1,
+    2,
+    3,
+    2,
+    1,
+    0
+  ],
+  "durationsMs": [
+    650,
+    650,
+    650,
+    650,
+    650,
+    650,
+    650
+  ],
+  "frameMs": 650,
+  "restMs": 7800,
+  "loop": true,
+  "fixedFromY": 440,
+  "visibleBounds": [
+    190,
+    128,
+    161,
+    320
+  ],
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 4,
+  "frameCount": 4,
+  "pivot": [
+    256,
+    448
+  ],
+  "rootMotion": false,
+  "atlas": "DesignAssets/Tribes/spore/Animations/Nests/stage-01-idle/nest-stage-01-idle.png",
+  "runtimeAtlas": "DesignAssets/Tribes/spore/Animations/Nests/stage-01-idle/nest-stage-01-idle.webp",
+  "preview": "DesignAssets/Tribes/spore/Animations/Nests/stage-01-idle/nest-stage-01-idle-preview.gif",
+  "contact": "DesignAssets/Tribes/spore/Animations/Nests/stage-01-idle/nest-stage-01-idle-contact.png",
+  "runtime": {
+    "format": "SCG1",
+    "frameSize": 2048,
+    "frameCount": 7,
+    "frameMs": 650,
+    "restMs": 7800,
+    "groupSize": 1,
+    "data": "DesignAssets/Tribes/spore/Animations/Nests/stage-01-idle/nest-stage-01-idle.frames",
+    "neutral": "DesignAssets/Tribes/spore/Animations/Nests/stage-01-idle/nest-stage-01-idle-cel-00.webp"
+  }
+}

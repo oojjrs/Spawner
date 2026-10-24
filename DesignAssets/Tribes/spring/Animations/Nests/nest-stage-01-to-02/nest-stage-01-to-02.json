@@ -1,0 +1,41 @@
+{
+  "tribe": "spring",
+  "action": "nest-stage-01-to-02",
+  "durationsMs": [
+    90,
+    90,
+    90,
+    90,
+    90,
+    90,
+    90,
+    90,
+    90,
+    90,
+    90,
+    90,
+    90,
+    90,
+    90,
+    90
+  ],
+  "loop": false,
+  "transition": "anchored crossfade between approved growth artwork",
+  "fromLevel": 1,
+  "toLevel": 2,
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 4,
+  "frameCount": 16,
+  "pivot": [
+    256,
+    448
+  ],
+  "rootMotion": false,
+  "atlas": "DesignAssets/Tribes/spring/Animations/Nests/nest-stage-01-to-02/nest-stage-01-to-02.png",
+  "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Nests/nest-stage-01-to-02/nest-stage-01-to-02.webp",
+  "preview": "DesignAssets/Tribes/spring/Animations/Nests/nest-stage-01-to-02/nest-stage-01-to-02-preview.gif",
+  "contact": "DesignAssets/Tribes/spring/Animations/Nests/nest-stage-01-to-02/nest-stage-01-to-02-contact.png"
+}

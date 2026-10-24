@@ -1,0 +1,624 @@
+{
+  "kind": "four-tribe-four-direction-attack-comparison",
+  "directionOrder": [
+    "right",
+    "left",
+    "front",
+    "back"
+  ],
+  "fixedScaleAcrossDirections": true,
+  "status": "review-candidate",
+  "canvas": [
+    1680,
+    500
+  ],
+  "layout": [
+    "sprout",
+    "spore",
+    "pebble",
+    "spring"
+  ],
+  "neutralVisibleHeightPx": 220,
+  "fixedScaleAcrossFrames": true,
+  "normalization": {
+    "sprout": {
+      "referenceBounds": [
+        112,
+        118,
+        406,
+        447
+      ],
+      "referenceHeight": 330,
+      "scale": 0.6666666666666666,
+      "centerX": 256,
+      "floorY": 447
+    },
+    "spore": {
+      "referenceBounds": [
+        44,
+        148,
+        467,
+        447
+      ],
+      "referenceHeight": 300,
+      "scale": 0.7333333333333333,
+      "centerX": 256,
+      "floorY": 447
+    },
+    "pebble": {
+      "referenceBounds": [
+        56,
+        146,
+        453,
+        446
+      ],
+      "referenceHeight": 301,
+      "scale": 0.7308970099667774,
+      "centerX": 256,
+      "floorY": 446
+    },
+    "spring": {
+      "referenceBounds": [
+        141,
+        161,
+        370,
+        447
+      ],
+      "referenceHeight": 287,
+      "scale": 0.7665505226480837,
+      "centerX": 256,
+      "floorY": 447
+    }
+  },
+  "durationMs": 8000,
+  "frameCount": 72,
+  "durationsMs": [
+    500,
+    60,
+    70,
+    60,
+    80,
+    30,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    70,
+    80,
+    90,
+    100,
+    60,
+    500,
+    500,
+    60,
+    70,
+    60,
+    80,
+    30,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    70,
+    80,
+    90,
+    100,
+    60,
+    500,
+    500,
+    60,
+    70,
+    60,
+    80,
+    30,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    70,
+    80,
+    90,
+    100,
+    60,
+    500,
+    500,
+    60,
+    70,
+    60,
+    80,
+    30,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    70,
+    80,
+    90,
+    100,
+    60,
+    500
+  ],
+  "loop": true,
+  "actionDurationMs": 1000,
+  "hitAtActionMs": 300,
+  "hitAtPreviewMs": 800,
+  "preview": "DesignAssets/Tribes/Previews/attack-directions-lineup-v3.webp",
+  "still": "DesignAssets/Tribes/Previews/attack-directions-lineup-v3.png",
+  "contact": "DesignAssets/Tribes/Previews/attack-directions-lineup-v3-contact.png",
+  "sourceSha256": {
+    "DesignAssets/Animations/UnitAttack/attack.png": "c1904d29070ff245cdafb2d75829662284454247c5c097a972154c1bd7f4abc6",
+    "DesignAssets/Animations/UnitAttack/attack.json": "132cab76e3fd7c53c831d905b491964cd8e312b24f4982ead3adb41b09522d81",
+    "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/Parts/body-skin.png": "fed30a6ebd40e90a656236a8a0befb7d9d61cfbd6deda07938880753802de56d",
+    "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/Parts/eye-left.png": "330fe70e4ed5c84d8dd7ad7e683057b1a9bf3d962fa3255dc895fdc713cb280c",
+    "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/Parts/eye-right.png": "632978795bb2e73c3574111854cd188d8b7bbf52cc68e93a54c15acafb5d1d4f",
+    "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/Parts/leaf-left.png": "19e00cad0f3bc0aa23f13fd733a919f7d477e50d36d1194f2230b4763cc69737",
+    "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/Parts/leaf-right.png": "87f1a958ad89f0be147e41b4ce291be8f65a004425f31cdb1895301efa998a0f",
+    "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/Parts/stem.png": "974fd499e452ecd28b36ee96f9a6a3d7aa3435d19b367b434468796306323be4",
+    "DesignAssets/Tribes/spore/AnimationStudies/idle-v4/Parts/cap-full.png": "7a3f9e05c7ea58ba71fc2c1a388558f73b85d98ae6d35f92189bc7eb91ffefcc",
+    "DesignAssets/Tribes/spore/AnimationStudies/idle-v4/Parts/cap-occluder.png": "2a5f948616a7eca633799797b04acdccd87cdd6a6174146facbb67e0fffa7438",
+    "DesignAssets/Tribes/spore/AnimationStudies/idle-v4/Parts/stem-skin.png": "d676f737a25611f2133635a77702f570f81527ea4a04e6369c64e2a9a23aee03",
+    "DesignAssets/Tribes/spore/AnimationStudies/idle-v4/Parts/eye-left.png": "72b9b5e1a9a07e7b2952bf78cf2db008bd76825088f4f7396b67d6e28f1b1c33",
+    "DesignAssets/Tribes/spore/AnimationStudies/idle-v4/Parts/eye-right.png": "f7d43aea1d24948d35b4a657cb585d31d94a48cbfcea1e0cca61e9ff390716f0",
+    "DesignAssets/Tribes/spore/AnimationStudies/idle-v4/Parts/foot-left.png": "f30d5d4f4cdbc3bab498de92545c6e1492cc30bb5ce5740261bc53c3d9e6cd55",
+    "DesignAssets/Tribes/spore/AnimationStudies/idle-v4/Parts/foot-right.png": "b88b489cd3759ee5e3f8d1d2997c5a272ed9f4473e94f1e62954d405bff618c4",
+    "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/Parts/body.png": "f9c79abdd79310d797a249d363afad89791fb51206a13cf75a3a8c80a406c96e",
+    "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/Parts/tip.png": "7ff3e6d9f1a6880fa86c26cdc76d1b00a635b41e494f366a98ff09dc31534041",
+    "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/Parts/eye-left.png": "c3f63fd9b9f1f72d347c2da5168bbd458050956ec7056682b5ad8d9954c13cd3",
+    "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/Parts/eye-right.png": "4e976bc4460310eb94917189e5f08286f596e647eae4c9a535431cedbd678bad",
+    "DesignAssets/Tribes/pebble/AnimationStudies/depth-roll-v3/Parts/stone-front.png": "b7588654a71d3f7835ee1e66600636e338ff767059640da4e8d7ea7aff97046f",
+    "DesignAssets/Tribes/pebble/AnimationStudies/depth-roll-v3/Parts/stone-back.png": "62fad7db0048618843de8cf7e3d99c190a1ff41dad01d8dcdbb7666cbd0ed146",
+    "DesignAssets/Tribes/pebble/AnimationStudies/attack-v2/Parts/foot-left.png": "b4c6983a206f2cd04b8d29828c352b0f1284edc5b9fb2bacfbbf839ed4da96f7",
+    "DesignAssets/Tribes/pebble/AnimationStudies/attack-v2/Parts/foot-right.png": "3017edc6797f12225905554844996510f462c2104dda785b5e7b772bb85e391f"
+  },
+  "sproutSourceMode": "right original, left exact mirror, front and back added",
+  "sproutAtlas": "DesignAssets/Animations/UnitAttack/attack.png",
+  "sproutMetadata": "DesignAssets/Animations/UnitAttack/attack.json",
+  "studies": [
+    "DesignAssets/Tribes/sprout/AnimationStudies/attack-directions-v3/attack-directions-v3.json",
+    "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/attack-directions-v3.json",
+    "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/attack-directions-v3.json",
+    "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/attack-directions-v3.json"
+  ],
+  "timeline": [
+    {
+      "direction": "right",
+      "sourceFrame": 0,
+      "durationMs": 500,
+      "phase": "rest"
+    },
+    {
+      "direction": "right",
+      "sourceFrame": 0,
+      "durationMs": 60,
+      "phase": "prepare"
+    },
+    {
+      "direction": "right",
+      "sourceFrame": 1,
+      "durationMs": 70,
+      "phase": "prepare"
+    },
+    {
+      "direction": "right",
+      "sourceFrame": 2,
+      "durationMs": 60,
+      "phase": "prepare"
+    },
+    {
+      "direction": "right",
+      "sourceFrame": 3,
+      "durationMs": 80,
+      "phase": "prepare"
+    },
+    {
+      "direction": "right",
+      "sourceFrame": 4,
+      "durationMs": 30,
+      "phase": "prepare"
+    },
+    {
+      "direction": "right",
+      "sourceFrame": 5,
+      "durationMs": 50,
+      "phase": "hit"
+    },
+    {
+      "direction": "right",
+      "sourceFrame": 6,
+      "durationMs": 50,
+      "phase": "hit"
+    },
+    {
+      "direction": "right",
+      "sourceFrame": 7,
+      "durationMs": 50,
+      "phase": "hit"
+    },
+    {
+      "direction": "right",
+      "sourceFrame": 8,
+      "durationMs": 50,
+      "phase": "hit"
+    },
+    {
+      "direction": "right",
+      "sourceFrame": 9,
+      "durationMs": 50,
+      "phase": "hit"
+    },
+    {
+      "direction": "right",
+      "sourceFrame": 10,
+      "durationMs": 50,
+      "phase": "hit"
+    },
+    {
+      "direction": "right",
+      "sourceFrame": 11,
+      "durationMs": 70,
+      "phase": "recover"
+    },
+    {
+      "direction": "right",
+      "sourceFrame": 12,
+      "durationMs": 80,
+      "phase": "recover"
+    },
+    {
+      "direction": "right",
+      "sourceFrame": 13,
+      "durationMs": 90,
+      "phase": "recover"
+    },
+    {
+      "direction": "right",
+      "sourceFrame": 14,
+      "durationMs": 100,
+      "phase": "recover"
+    },
+    {
+      "direction": "right",
+      "sourceFrame": 15,
+      "durationMs": 60,
+      "phase": "recover"
+    },
+    {
+      "direction": "right",
+      "sourceFrame": 0,
+      "durationMs": 500,
+      "phase": "rest"
+    },
+    {
+      "direction": "left",
+      "sourceFrame": 0,
+      "durationMs": 500,
+      "phase": "rest"
+    },
+    {
+      "direction": "left",
+      "sourceFrame": 0,
+      "durationMs": 60,
+      "phase": "prepare"
+    },
+    {
+      "direction": "left",
+      "sourceFrame": 1,
+      "durationMs": 70,
+      "phase": "prepare"
+    },
+    {
+      "direction": "left",
+      "sourceFrame": 2,
+      "durationMs": 60,
+      "phase": "prepare"
+    },
+    {
+      "direction": "left",
+      "sourceFrame": 3,
+      "durationMs": 80,
+      "phase": "prepare"
+    },
+    {
+      "direction": "left",
+      "sourceFrame": 4,
+      "durationMs": 30,
+      "phase": "prepare"
+    },
+    {
+      "direction": "left",
+      "sourceFrame": 5,
+      "durationMs": 50,
+      "phase": "hit"
+    },
+    {
+      "direction": "left",
+      "sourceFrame": 6,
+      "durationMs": 50,
+      "phase": "hit"
+    },
+    {
+      "direction": "left",
+      "sourceFrame": 7,
+      "durationMs": 50,
+      "phase": "hit"
+    },
+    {
+      "direction": "left",
+      "sourceFrame": 8,
+      "durationMs": 50,
+      "phase": "hit"
+    },
+    {
+      "direction": "left",
+      "sourceFrame": 9,
+      "durationMs": 50,
+      "phase": "hit"
+    },
+    {
+      "direction": "left",
+      "sourceFrame": 10,
+      "durationMs": 50,
+      "phase": "hit"
+    },
+    {
+      "direction": "left",
+      "sourceFrame": 11,
+      "durationMs": 70,
+      "phase": "recover"
+    },
+    {
+      "direction": "left",
+      "sourceFrame": 12,
+      "durationMs": 80,
+      "phase": "recover"
+    },
+    {
+      "direction": "left",
+      "sourceFrame": 13,
+      "durationMs": 90,
+      "phase": "recover"
+    },
+    {
+      "direction": "left",
+      "sourceFrame": 14,
+      "durationMs": 100,
+      "phase": "recover"
+    },
+    {
+      "direction": "left",
+      "sourceFrame": 15,
+      "durationMs": 60,
+      "phase": "recover"
+    },
+    {
+      "direction": "left",
+      "sourceFrame": 0,
+      "durationMs": 500,
+      "phase": "rest"
+    },
+    {
+      "direction": "front",
+      "sourceFrame": 0,
+      "durationMs": 500,
+      "phase": "rest"
+    },
+    {
+      "direction": "front",
+      "sourceFrame": 0,
+      "durationMs": 60,
+      "phase": "prepare"
+    },
+    {
+      "direction": "front",
+      "sourceFrame": 1,
+      "durationMs": 70,
+      "phase": "prepare"
+    },
+    {
+      "direction": "front",
+      "sourceFrame": 2,
+      "durationMs": 60,
+      "phase": "prepare"
+    },
+    {
+      "direction": "front",
+      "sourceFrame": 3,
+      "durationMs": 80,
+      "phase": "prepare"
+    },
+    {
+      "direction": "front",
+      "sourceFrame": 4,
+      "durationMs": 30,
+      "phase": "prepare"
+    },
+    {
+      "direction": "front",
+      "sourceFrame": 5,
+      "durationMs": 50,
+      "phase": "hit"
+    },
+    {
+      "direction": "front",
+      "sourceFrame": 6,
+      "durationMs": 50,
+      "phase": "hit"
+    },
+    {
+      "direction": "front",
+      "sourceFrame": 7,
+      "durationMs": 50,
+      "phase": "hit"
+    },
+    {
+      "direction": "front",
+      "sourceFrame": 8,
+      "durationMs": 50,
+      "phase": "hit"
+    },
+    {
+      "direction": "front",
+      "sourceFrame": 9,
+      "durationMs": 50,
+      "phase": "hit"
+    },
+    {
+      "direction": "front",
+      "sourceFrame": 10,
+      "durationMs": 50,
+      "phase": "hit"
+    },
+    {
+      "direction": "front",
+      "sourceFrame": 11,
+      "durationMs": 70,
+      "phase": "recover"
+    },
+    {
+      "direction": "front",
+      "sourceFrame": 12,
+      "durationMs": 80,
+      "phase": "recover"
+    },
+    {
+      "direction": "front",
+      "sourceFrame": 13,
+      "durationMs": 90,
+      "phase": "recover"
+    },
+    {
+      "direction": "front",
+      "sourceFrame": 14,
+      "durationMs": 100,
+      "phase": "recover"
+    },
+    {
+      "direction": "front",
+      "sourceFrame": 15,
+      "durationMs": 60,
+      "phase": "recover"
+    },
+    {
+      "direction": "front",
+      "sourceFrame": 0,
+      "durationMs": 500,
+      "phase": "rest"
+    },
+    {
+      "direction": "back",
+      "sourceFrame": 0,
+      "durationMs": 500,
+      "phase": "rest"
+    },
+    {
+      "direction": "back",
+      "sourceFrame": 0,
+      "durationMs": 60,
+      "phase": "prepare"
+    },
+    {
+      "direction": "back",
+      "sourceFrame": 1,
+      "durationMs": 70,
+      "phase": "prepare"
+    },
+    {
+      "direction": "back",
+      "sourceFrame": 2,
+      "durationMs": 60,
+      "phase": "prepare"
+    },
+    {
+      "direction": "back",
+      "sourceFrame": 3,
+      "durationMs": 80,
+      "phase": "prepare"
+    },
+    {
+      "direction": "back",
+      "sourceFrame": 4,
+      "durationMs": 30,
+      "phase": "prepare"
+    },
+    {
+      "direction": "back",
+      "sourceFrame": 5,
+      "durationMs": 50,
+      "phase": "hit"
+    },
+    {
+      "direction": "back",
+      "sourceFrame": 6,
+      "durationMs": 50,
+      "phase": "hit"
+    },
+    {
+      "direction": "back",
+      "sourceFrame": 7,
+      "durationMs": 50,
+      "phase": "hit"
+    },
+    {
+      "direction": "back",
+      "sourceFrame": 8,
+      "durationMs": 50,
+      "phase": "hit"
+    },
+    {
+      "direction": "back",
+      "sourceFrame": 9,
+      "durationMs": 50,
+      "phase": "hit"
+    },
+    {
+      "direction": "back",
+      "sourceFrame": 10,
+      "durationMs": 50,
+      "phase": "hit"
+    },
+    {
+      "direction": "back",
+      "sourceFrame": 11,
+      "durationMs": 70,
+      "phase": "recover"
+    },
+    {
+      "direction": "back",
+      "sourceFrame": 12,
+      "durationMs": 80,
+      "phase": "recover"
+    },
+    {
+      "direction": "back",
+      "sourceFrame": 13,
+      "durationMs": 90,
+      "phase": "recover"
+    },
+    {
+      "direction": "back",
+      "sourceFrame": 14,
+      "durationMs": 100,
+      "phase": "recover"
+    },
+    {
+      "direction": "back",
+      "sourceFrame": 15,
+      "durationMs": 60,
+      "phase": "recover"
+    },
+    {
+      "direction": "back",
+      "sourceFrame": 0,
+      "durationMs": 500,
+      "phase": "rest"
+    }
+  ]
+}

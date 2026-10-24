@@ -1,0 +1,42 @@
+{
+  "tribe": "pebble",
+  "action": "hurt-back",
+  "durationsMs": [
+    20,
+    30,
+    30,
+    30,
+    400,
+    30,
+    30,
+    30,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+  ],
+  "loop": false,
+  "layers": "DesignAssets/Tribes/pebble/BaseParts/layers.json",
+  "hitFrom": "back",
+  "holdFrame": 4,
+  "closedEyeHoldMs": 400,
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 4,
+  "frameCount": 16,
+  "pivot": [
+    256,
+    448
+  ],
+  "rootMotion": false,
+  "atlas": "DesignAssets/Tribes/pebble/Animations/Units/hurt-back/hurt-back.png",
+  "runtimeAtlas": "DesignAssets/Tribes/pebble/Animations/Units/hurt-back/hurt-back.webp",
+  "preview": "DesignAssets/Tribes/pebble/Animations/Units/hurt-back/hurt-back-preview.gif",
+  "contact": "DesignAssets/Tribes/pebble/Animations/Units/hurt-back/hurt-back-contact.png"
+}

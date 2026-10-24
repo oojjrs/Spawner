@@ -1,0 +1,41 @@
+{
+  "tribe": "pebble",
+  "action": "nest-stage-02-to-03",
+  "durationsMs": [
+    90,
+    90,
+    90,
+    90,
+    90,
+    90,
+    90,
+    90,
+    90,
+    90,
+    90,
+    90,
+    90,
+    90,
+    90,
+    90
+  ],
+  "loop": false,
+  "transition": "anchored crossfade between approved growth artwork",
+  "fromLevel": 2,
+  "toLevel": 3,
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 4,
+  "frameCount": 16,
+  "pivot": [
+    256,
+    448
+  ],
+  "rootMotion": false,
+  "atlas": "DesignAssets/Tribes/pebble/Animations/Nests/nest-stage-02-to-03/nest-stage-02-to-03.png",
+  "runtimeAtlas": "DesignAssets/Tribes/pebble/Animations/Nests/nest-stage-02-to-03/nest-stage-02-to-03.webp",
+  "preview": "DesignAssets/Tribes/pebble/Animations/Nests/nest-stage-02-to-03/nest-stage-02-to-03-preview.gif",
+  "contact": "DesignAssets/Tribes/pebble/Animations/Nests/nest-stage-02-to-03/nest-stage-02-to-03-contact.png"
+}

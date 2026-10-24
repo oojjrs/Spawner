@@ -1,0 +1,58 @@
+{
+  "tribe": "pebble",
+  "action": "hurt",
+  "status": "review-candidate",
+  "directionModel": "one generic front-facing reaction",
+  "incomingReference": [
+    1,
+    0
+  ],
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 4,
+  "frameCount": 16,
+  "durationsMs": [
+    20,
+    30,
+    30,
+    30,
+    400,
+    30,
+    30,
+    30,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+  ],
+  "durationMs": 760,
+  "holdFrame": 4,
+  "closedEyeHoldMs": 400,
+  "loop": false,
+  "rootMotion": false,
+  "pivot": [
+    256,
+    448
+  ],
+  "atlas": "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.png",
+  "runtimeAtlas": "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp",
+  "contact": "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-contact.png",
+  "poses": "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/poses.json",
+  "parts": [
+    "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/Parts/body-skin.png",
+    "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/Parts/eye-left.png",
+    "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/Parts/eye-right.png",
+    "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/Parts/closed-left.png",
+    "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/Parts/closed-right.png",
+    "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/Parts/foot-left.png",
+    "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/Parts/foot-right.png"
+  ],
+  "preview": "DesignAssets/Tribes/Previews/hurt-lineup-v1.webp",
+  "motion": "constant rigid body shape; brief recoil and a firm small stop"
+}

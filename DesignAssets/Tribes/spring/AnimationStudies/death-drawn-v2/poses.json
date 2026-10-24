@@ -1,0 +1,274 @@
+[
+  {
+    "frame": 0,
+    "sourceCrop": [
+      60,
+      95,
+      214,
+      260
+    ],
+    "constantArtworkScale": 1.1811023622047243,
+    "registrationOffset": [
+      129,
+      146
+    ],
+    "alphaCleanupPixels": 2351,
+    "artwork": "new drawing from source sheet cell",
+    "interpolation": "none"
+  },
+  {
+    "frame": 1,
+    "sourceCrop": [
+      366,
+      100,
+      214,
+      255
+    ],
+    "constantArtworkScale": 1.1811023622047243,
+    "registrationOffset": [
+      129,
+      152
+    ],
+    "alphaCleanupPixels": 2630,
+    "artwork": "new drawing from source sheet cell",
+    "interpolation": "none"
+  },
+  {
+    "frame": 2,
+    "sourceCrop": [
+      664,
+      136,
+      228,
+      219
+    ],
+    "constantArtworkScale": 1.1811023622047243,
+    "registrationOffset": [
+      121,
+      194
+    ],
+    "alphaCleanupPixels": 2197,
+    "artwork": "new drawing from source sheet cell",
+    "interpolation": "none"
+  },
+  {
+    "frame": 3,
+    "sourceCrop": [
+      973,
+      167,
+      241,
+      188
+    ],
+    "constantArtworkScale": 1.1811023622047243,
+    "registrationOffset": [
+      113,
+      231
+    ],
+    "alphaCleanupPixels": 1953,
+    "artwork": "new drawing from source sheet cell",
+    "interpolation": "none"
+  },
+  {
+    "frame": 4,
+    "sourceCrop": [
+      34,
+      472,
+      268,
+      199
+    ],
+    "constantArtworkScale": 1.1811023622047243,
+    "registrationOffset": [
+      97,
+      218
+    ],
+    "alphaCleanupPixels": 2962,
+    "artwork": "new drawing from source sheet cell",
+    "interpolation": "none"
+  },
+  {
+    "frame": 5,
+    "sourceCrop": [
+      324,
+      499,
+      292,
+      177
+    ],
+    "constantArtworkScale": 1.1811023622047243,
+    "registrationOffset": [
+      83,
+      244
+    ],
+    "alphaCleanupPixels": 2246,
+    "artwork": "new drawing from source sheet cell",
+    "interpolation": "none"
+  },
+  {
+    "frame": 6,
+    "sourceCrop": [
+      638,
+      539,
+      292,
+      139
+    ],
+    "constantArtworkScale": 1.1811023622047243,
+    "registrationOffset": [
+      83,
+      289
+    ],
+    "alphaCleanupPixels": 2027,
+    "artwork": "new drawing from source sheet cell",
+    "interpolation": "none"
+  },
+  {
+    "frame": 7,
+    "sourceCrop": [
+      948,
+      575,
+      287,
+      106
+    ],
+    "constantArtworkScale": 1.1811023622047243,
+    "registrationOffset": [
+      86,
+      328
+    ],
+    "alphaCleanupPixels": 2422,
+    "artwork": "new drawing from source sheet cell",
+    "interpolation": "none"
+  },
+  {
+    "frame": 8,
+    "sourceCrop": [
+      17,
+      831,
+      290,
+      112
+    ],
+    "constantArtworkScale": 1.1811023622047243,
+    "registrationOffset": [
+      84,
+      320
+    ],
+    "alphaCleanupPixels": 2874,
+    "artwork": "new drawing from source sheet cell",
+    "interpolation": "none"
+  },
+  {
+    "frame": 9,
+    "sourceCrop": [
+      326,
+      831,
+      296,
+      117
+    ],
+    "constantArtworkScale": 1.1811023622047243,
+    "registrationOffset": [
+      81,
+      315
+    ],
+    "alphaCleanupPixels": 2244,
+    "artwork": "new drawing from source sheet cell",
+    "interpolation": "none"
+  },
+  {
+    "frame": 10,
+    "sourceCrop": [
+      638,
+      829,
+      293,
+      120
+    ],
+    "constantArtworkScale": 1.1811023622047243,
+    "registrationOffset": [
+      83,
+      311
+    ],
+    "alphaCleanupPixels": 2310,
+    "artwork": "new drawing from source sheet cell",
+    "interpolation": "none"
+  },
+  {
+    "frame": 11,
+    "sourceCrop": [
+      947,
+      832,
+      290,
+      119
+    ],
+    "constantArtworkScale": 1.1811023622047243,
+    "registrationOffset": [
+      84,
+      312
+    ],
+    "alphaCleanupPixels": 2404,
+    "artwork": "new drawing from source sheet cell",
+    "interpolation": "none"
+  },
+  {
+    "frame": 12,
+    "sourceCrop": [
+      28,
+      1086,
+      289,
+      122
+    ],
+    "constantArtworkScale": 1.1811023622047243,
+    "registrationOffset": [
+      85,
+      309
+    ],
+    "alphaCleanupPixels": 2000,
+    "artwork": "new drawing from source sheet cell",
+    "interpolation": "none"
+  },
+  {
+    "frame": 13,
+    "sourceCrop": [
+      338,
+      1088,
+      279,
+      116
+    ],
+    "constantArtworkScale": 1.1811023622047243,
+    "registrationOffset": [
+      91,
+      316
+    ],
+    "alphaCleanupPixels": 2371,
+    "artwork": "new drawing from source sheet cell",
+    "interpolation": "none"
+  },
+  {
+    "frame": 14,
+    "sourceCrop": [
+      636,
+      1087,
+      293,
+      115
+    ],
+    "constantArtworkScale": 1.1811023622047243,
+    "registrationOffset": [
+      83,
+      317
+    ],
+    "alphaCleanupPixels": 2719,
+    "artwork": "new drawing from source sheet cell",
+    "interpolation": "none"
+  },
+  {
+    "frame": 15,
+    "sourceCrop": [
+      942,
+      1090,
+      288,
+      116
+    ],
+    "constantArtworkScale": 1.1811023622047243,
+    "registrationOffset": [
+      86,
+      316
+    ],
+    "alphaCleanupPixels": 2378,
+    "artwork": "new drawing from source sheet cell",
+    "interpolation": "none"
+  }
+]

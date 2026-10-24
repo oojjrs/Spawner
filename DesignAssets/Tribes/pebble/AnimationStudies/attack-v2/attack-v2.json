@@ -1,0 +1,53 @@
+{
+  "tribe": "pebble",
+  "action": "attack",
+  "status": "review-candidate",
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 4,
+  "frameCount": 16,
+  "durationsMs": [
+    60,
+    70,
+    60,
+    80,
+    30,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    70,
+    80,
+    90,
+    100,
+    60
+  ],
+  "loop": false,
+  "hitFrame": 6,
+  "hitFrameIndex": 5,
+  "hitAtMs": 300,
+  "impactHoldMs": 300,
+  "durationMs": 1000,
+  "pivot": [
+    256,
+    448
+  ],
+  "rootMotion": false,
+  "atlas": "DesignAssets/Tribes/pebble/AnimationStudies/attack-v2/attack-v2.png",
+  "runtimeAtlas": "DesignAssets/Tribes/pebble/AnimationStudies/attack-v2/attack-v2.webp",
+  "contact": "DesignAssets/Tribes/pebble/AnimationStudies/attack-v2/attack-contact.png",
+  "preview": "DesignAssets/Tribes/Previews/attack-lineup-v1.webp",
+  "previewColumn": 2,
+  "parts": [
+    "DesignAssets/Tribes/pebble/AnimationStudies/attack-v2/Parts/body-skin.png",
+    "DesignAssets/Tribes/pebble/AnimationStudies/attack-v2/Parts/eye-left.png",
+    "DesignAssets/Tribes/pebble/AnimationStudies/attack-v2/Parts/eye-right.png",
+    "DesignAssets/Tribes/pebble/AnimationStudies/attack-v2/Parts/foot-left.png",
+    "DesignAssets/Tribes/pebble/AnimationStudies/attack-v2/Parts/foot-right.png"
+  ],
+  "motion": "feet pass behind a geometric stone boundary; the rigid body rolls backward briefly and charges forward on its support contour"
+}

@@ -1,0 +1,2677 @@
+{
+  "version": 1,
+  "baseline": {
+    "id": "sprout",
+    "name": "새싹콩",
+    "staticManifest": "DesignAssets/Units/manifest.json",
+    "nests": [
+      "DesignAssets/Nests/nest-stage-01.png",
+      "DesignAssets/Nests/nest-stage-02.png",
+      "DesignAssets/Nests/nest-stage-03.png",
+      "DesignAssets/Nests/nest-stage-04.png"
+    ],
+    "runtimeConnected": true
+  },
+  "tribes": {
+    "spore": {
+      "name": "포자버섯",
+      "status": "art-ready",
+      "runtimeConnected": false,
+      "starter": "DesignAssets/Tribes/spore/starter.png",
+      "approvedStarter": "DesignAssets/TribeConcepts/base-spore-mushroom-coral-v2.png",
+      "staticManifest": "DesignAssets/Tribes/spore/manifest.json",
+      "parts": {
+        "strength-1": "DesignAssets/Tribes/spore/Parts/strength-1.png",
+        "strength-2": "DesignAssets/Tribes/spore/Parts/strength-2.png",
+        "feet-1": "DesignAssets/Tribes/spore/Parts/feet-1.png",
+        "feet-2": "DesignAssets/Tribes/spore/Parts/feet-2.png",
+        "antenna-1": "DesignAssets/Tribes/spore/Parts/antenna-1.png",
+        "antenna-2": "DesignAssets/Tribes/spore/Parts/antenna-2.png",
+        "shell-1": "DesignAssets/Tribes/spore/Parts/shell-1.png",
+        "shell-2": "DesignAssets/Tribes/spore/Parts/shell-2.png"
+      },
+      "baseLayers": "DesignAssets/Tribes/spore/BaseParts/layers.json",
+      "nests": [
+        "DesignAssets/Tribes/spore/Nests/nest-stage-01.png",
+        "DesignAssets/Tribes/spore/Nests/nest-stage-02.png",
+        "DesignAssets/Tribes/spore/Nests/nest-stage-03.png",
+        "DesignAssets/Tribes/spore/Nests/nest-stage-04.png"
+      ],
+      "ground": "DesignAssets/Tribes/spore/Terrain/nest-ground.png",
+      "units": [
+        {
+          "tribe": "spore",
+          "action": "idle",
+          "durationsMs": [
+            140,
+            140,
+            140,
+            140,
+            140,
+            140,
+            140,
+            140,
+            140,
+            140,
+            140,
+            140,
+            140,
+            140,
+            140,
+            140
+          ],
+          "loop": true,
+          "layers": "DesignAssets/Tribes/spore/BaseParts/layers.json",
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spore/Animations/Units/idle/idle.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spore/Animations/Units/idle/idle.webp",
+          "preview": "DesignAssets/Tribes/spore/Animations/Units/idle/idle-preview.gif",
+          "contact": "DesignAssets/Tribes/spore/Animations/Units/idle/idle-contact.png"
+        },
+        {
+          "tribe": "spore",
+          "action": "walk",
+          "durationsMs": [
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70
+          ],
+          "loop": true,
+          "layers": "DesignAssets/Tribes/spore/BaseParts/layers.json",
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spore/Animations/Units/walk/walk.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spore/Animations/Units/walk/walk.webp",
+          "preview": "DesignAssets/Tribes/spore/Animations/Units/walk/walk-preview.gif",
+          "contact": "DesignAssets/Tribes/spore/Animations/Units/walk/walk-contact.png"
+        },
+        {
+          "tribe": "spore",
+          "action": "jump",
+          "durationsMs": [
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70
+          ],
+          "loop": false,
+          "layers": "DesignAssets/Tribes/spore/BaseParts/layers.json",
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spore/Animations/Units/jump/jump.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spore/Animations/Units/jump/jump.webp",
+          "preview": "DesignAssets/Tribes/spore/Animations/Units/jump/jump-preview.gif",
+          "contact": "DesignAssets/Tribes/spore/Animations/Units/jump/jump-contact.png"
+        },
+        {
+          "tribe": "spore",
+          "action": "harvest",
+          "durationsMs": [
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70
+          ],
+          "loop": true,
+          "layers": "DesignAssets/Tribes/spore/BaseParts/layers.json",
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spore/Animations/Units/harvest/harvest.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spore/Animations/Units/harvest/harvest.webp",
+          "preview": "DesignAssets/Tribes/spore/Animations/Units/harvest/harvest-preview.gif",
+          "contact": "DesignAssets/Tribes/spore/Animations/Units/harvest/harvest-contact.png"
+        },
+        {
+          "tribe": "spore",
+          "action": "carry",
+          "durationsMs": [
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70
+          ],
+          "loop": true,
+          "layers": "DesignAssets/Tribes/spore/BaseParts/layers.json",
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spore/Animations/Units/carry/carry.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spore/Animations/Units/carry/carry.webp",
+          "preview": "DesignAssets/Tribes/spore/Animations/Units/carry/carry-preview.gif",
+          "contact": "DesignAssets/Tribes/spore/Animations/Units/carry/carry-contact.png"
+        },
+        {
+          "tribe": "spore",
+          "action": "throw",
+          "durationsMs": [
+            60,
+            70,
+            60,
+            80,
+            30,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            70,
+            80,
+            90,
+            100,
+            60
+          ],
+          "loop": false,
+          "layers": "DesignAssets/Tribes/spore/BaseParts/layers.json",
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spore/Animations/Units/throw/throw.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spore/Animations/Units/throw/throw.webp",
+          "preview": "DesignAssets/Tribes/spore/Animations/Units/throw/throw-preview.gif",
+          "contact": "DesignAssets/Tribes/spore/Animations/Units/throw/throw-contact.png"
+        },
+        {
+          "tribe": "spore",
+          "action": "attack",
+          "durationsMs": [
+            60,
+            70,
+            60,
+            80,
+            30,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            70,
+            80,
+            90,
+            100,
+            60
+          ],
+          "loop": false,
+          "layers": "DesignAssets/Tribes/spore/BaseParts/layers.json",
+          "hitFrame": 6,
+          "hitAtMs": 300,
+          "impactHoldMs": 300,
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spore/Animations/Units/attack/attack.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spore/Animations/Units/attack/attack.webp",
+          "preview": "DesignAssets/Tribes/spore/Animations/Units/attack/attack-preview.gif",
+          "contact": "DesignAssets/Tribes/spore/Animations/Units/attack/attack-contact.png"
+        },
+        {
+          "tribe": "spore",
+          "action": "hurt-front",
+          "durationsMs": [
+            20,
+            30,
+            30,
+            30,
+            400,
+            30,
+            30,
+            30,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20
+          ],
+          "loop": false,
+          "layers": "DesignAssets/Tribes/spore/BaseParts/layers.json",
+          "hitFrom": "front",
+          "holdFrame": 4,
+          "closedEyeHoldMs": 400,
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spore/Animations/Units/hurt-front/hurt-front.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spore/Animations/Units/hurt-front/hurt-front.webp",
+          "preview": "DesignAssets/Tribes/spore/Animations/Units/hurt-front/hurt-front-preview.gif",
+          "contact": "DesignAssets/Tribes/spore/Animations/Units/hurt-front/hurt-front-contact.png"
+        },
+        {
+          "tribe": "spore",
+          "action": "hurt-back",
+          "durationsMs": [
+            20,
+            30,
+            30,
+            30,
+            400,
+            30,
+            30,
+            30,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20
+          ],
+          "loop": false,
+          "layers": "DesignAssets/Tribes/spore/BaseParts/layers.json",
+          "hitFrom": "back",
+          "holdFrame": 4,
+          "closedEyeHoldMs": 400,
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spore/Animations/Units/hurt-back/hurt-back.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spore/Animations/Units/hurt-back/hurt-back.webp",
+          "preview": "DesignAssets/Tribes/spore/Animations/Units/hurt-back/hurt-back-preview.gif",
+          "contact": "DesignAssets/Tribes/spore/Animations/Units/hurt-back/hurt-back-contact.png"
+        },
+        {
+          "tribe": "spore",
+          "action": "hurt-left",
+          "durationsMs": [
+            20,
+            30,
+            30,
+            30,
+            400,
+            30,
+            30,
+            30,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20
+          ],
+          "loop": false,
+          "layers": "DesignAssets/Tribes/spore/BaseParts/layers.json",
+          "hitFrom": "left",
+          "holdFrame": 4,
+          "closedEyeHoldMs": 400,
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spore/Animations/Units/hurt-left/hurt-left.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spore/Animations/Units/hurt-left/hurt-left.webp",
+          "preview": "DesignAssets/Tribes/spore/Animations/Units/hurt-left/hurt-left-preview.gif",
+          "contact": "DesignAssets/Tribes/spore/Animations/Units/hurt-left/hurt-left-contact.png"
+        },
+        {
+          "tribe": "spore",
+          "action": "hurt-right",
+          "durationsMs": [
+            20,
+            30,
+            30,
+            30,
+            400,
+            30,
+            30,
+            30,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20
+          ],
+          "loop": false,
+          "layers": "DesignAssets/Tribes/spore/BaseParts/layers.json",
+          "hitFrom": "right",
+          "holdFrame": 4,
+          "closedEyeHoldMs": 400,
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spore/Animations/Units/hurt-right/hurt-right.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spore/Animations/Units/hurt-right/hurt-right.webp",
+          "preview": "DesignAssets/Tribes/spore/Animations/Units/hurt-right/hurt-right-preview.gif",
+          "contact": "DesignAssets/Tribes/spore/Animations/Units/hurt-right/hurt-right-contact.png"
+        },
+        {
+          "tribe": "spore",
+          "action": "birth",
+          "durationsMs": [
+            60,
+            60,
+            60,
+            60,
+            60,
+            60,
+            60,
+            60,
+            60,
+            60,
+            60,
+            60,
+            60,
+            60,
+            60,
+            60
+          ],
+          "loop": false,
+          "layers": "DesignAssets/Tribes/spore/BaseParts/layers.json",
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spore/Animations/Units/birth/birth.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spore/Animations/Units/birth/birth.webp",
+          "preview": "DesignAssets/Tribes/spore/Animations/Units/birth/birth-preview.gif",
+          "contact": "DesignAssets/Tribes/spore/Animations/Units/birth/birth-contact.png"
+        }
+      ],
+      "nestIdle": [
+        {
+          "tribe": "spore",
+          "action": "nest-stage-01-idle",
+          "source": "DesignAssets/Tribes/spore/Nests/nest-stage-01.png",
+          "drawnCels": 4,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            2,
+            1,
+            0
+          ],
+          "durationsMs": [
+            650,
+            650,
+            650,
+            650,
+            650,
+            650,
+            650
+          ],
+          "frameMs": 650,
+          "restMs": 7800,
+          "loop": true,
+          "fixedFromY": 440,
+          "visibleBounds": [
+            190,
+            128,
+            161,
+            320
+          ],
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 4,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spore/Animations/Nests/stage-01-idle/nest-stage-01-idle.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spore/Animations/Nests/stage-01-idle/nest-stage-01-idle.webp",
+          "preview": "DesignAssets/Tribes/spore/Animations/Nests/stage-01-idle/nest-stage-01-idle-preview.gif",
+          "contact": "DesignAssets/Tribes/spore/Animations/Nests/stage-01-idle/nest-stage-01-idle-contact.png",
+          "runtime": {
+            "format": "SCG1",
+            "frameSize": 2048,
+            "frameCount": 7,
+            "frameMs": 650,
+            "restMs": 7800,
+            "groupSize": 1,
+            "data": "DesignAssets/Tribes/spore/Animations/Nests/stage-01-idle/nest-stage-01-idle.frames",
+            "neutral": "DesignAssets/Tribes/spore/Animations/Nests/stage-01-idle/nest-stage-01-idle-cel-00.webp"
+          }
+        },
+        {
+          "tribe": "spore",
+          "action": "nest-stage-02-idle",
+          "source": "DesignAssets/Tribes/spore/Nests/nest-stage-02.png",
+          "drawnCels": 4,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            2,
+            1,
+            0
+          ],
+          "durationsMs": [
+            650,
+            650,
+            650,
+            650,
+            650,
+            650,
+            650
+          ],
+          "frameMs": 650,
+          "restMs": 7800,
+          "loop": true,
+          "fixedFromY": 422,
+          "visibleBounds": [
+            250,
+            210,
+            131,
+            238
+          ],
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 4,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spore/Animations/Nests/stage-02-idle/nest-stage-02-idle.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spore/Animations/Nests/stage-02-idle/nest-stage-02-idle.webp",
+          "preview": "DesignAssets/Tribes/spore/Animations/Nests/stage-02-idle/nest-stage-02-idle-preview.gif",
+          "contact": "DesignAssets/Tribes/spore/Animations/Nests/stage-02-idle/nest-stage-02-idle-contact.png",
+          "runtime": {
+            "format": "SCG1",
+            "frameSize": 2048,
+            "frameCount": 7,
+            "frameMs": 650,
+            "restMs": 7800,
+            "groupSize": 1,
+            "data": "DesignAssets/Tribes/spore/Animations/Nests/stage-02-idle/nest-stage-02-idle.frames",
+            "neutral": "DesignAssets/Tribes/spore/Animations/Nests/stage-02-idle/nest-stage-02-idle-cel-00.webp"
+          }
+        },
+        {
+          "tribe": "spore",
+          "action": "nest-stage-03-idle",
+          "source": "DesignAssets/Tribes/spore/Nests/nest-stage-03.png",
+          "drawnCels": 4,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            2,
+            1,
+            0
+          ],
+          "durationsMs": [
+            650,
+            650,
+            650,
+            650,
+            650,
+            650,
+            650
+          ],
+          "frameMs": 650,
+          "restMs": 7800,
+          "loop": true,
+          "fixedFromY": 411,
+          "visibleBounds": [
+            310,
+            258,
+            101,
+            190
+          ],
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 4,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spore/Animations/Nests/stage-03-idle/nest-stage-03-idle.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spore/Animations/Nests/stage-03-idle/nest-stage-03-idle.webp",
+          "preview": "DesignAssets/Tribes/spore/Animations/Nests/stage-03-idle/nest-stage-03-idle-preview.gif",
+          "contact": "DesignAssets/Tribes/spore/Animations/Nests/stage-03-idle/nest-stage-03-idle-contact.png",
+          "runtime": {
+            "format": "SCG1",
+            "frameSize": 2048,
+            "frameCount": 7,
+            "frameMs": 650,
+            "restMs": 7800,
+            "groupSize": 1,
+            "data": "DesignAssets/Tribes/spore/Animations/Nests/stage-03-idle/nest-stage-03-idle.frames",
+            "neutral": "DesignAssets/Tribes/spore/Animations/Nests/stage-03-idle/nest-stage-03-idle-cel-00.webp"
+          }
+        },
+        {
+          "tribe": "spore",
+          "action": "nest-stage-04-idle",
+          "source": "DesignAssets/Tribes/spore/Nests/nest-stage-04.png",
+          "drawnCels": 4,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            2,
+            1,
+            0
+          ],
+          "durationsMs": [
+            650,
+            650,
+            650,
+            650,
+            650,
+            650,
+            650
+          ],
+          "frameMs": 650,
+          "restMs": 7800,
+          "loop": true,
+          "fixedFromY": 398,
+          "visibleBounds": [
+            370,
+            317,
+            71,
+            131
+          ],
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 4,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spore/Animations/Nests/stage-04-idle/nest-stage-04-idle.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spore/Animations/Nests/stage-04-idle/nest-stage-04-idle.webp",
+          "preview": "DesignAssets/Tribes/spore/Animations/Nests/stage-04-idle/nest-stage-04-idle-preview.gif",
+          "contact": "DesignAssets/Tribes/spore/Animations/Nests/stage-04-idle/nest-stage-04-idle-contact.png",
+          "runtime": {
+            "format": "SCG1",
+            "frameSize": 2048,
+            "frameCount": 7,
+            "frameMs": 650,
+            "restMs": 7800,
+            "groupSize": 1,
+            "data": "DesignAssets/Tribes/spore/Animations/Nests/stage-04-idle/nest-stage-04-idle.frames",
+            "neutral": "DesignAssets/Tribes/spore/Animations/Nests/stage-04-idle/nest-stage-04-idle-cel-00.webp"
+          }
+        }
+      ],
+      "nestGrowth": [
+        {
+          "tribe": "spore",
+          "action": "nest-stage-01-to-02",
+          "durationsMs": [
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90
+          ],
+          "loop": false,
+          "transition": "anchored crossfade between approved growth artwork",
+          "fromLevel": 1,
+          "toLevel": 2,
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spore/Animations/Nests/nest-stage-01-to-02/nest-stage-01-to-02.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spore/Animations/Nests/nest-stage-01-to-02/nest-stage-01-to-02.webp",
+          "preview": "DesignAssets/Tribes/spore/Animations/Nests/nest-stage-01-to-02/nest-stage-01-to-02-preview.gif",
+          "contact": "DesignAssets/Tribes/spore/Animations/Nests/nest-stage-01-to-02/nest-stage-01-to-02-contact.png"
+        },
+        {
+          "tribe": "spore",
+          "action": "nest-stage-02-to-03",
+          "durationsMs": [
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90
+          ],
+          "loop": false,
+          "transition": "anchored crossfade between approved growth artwork",
+          "fromLevel": 2,
+          "toLevel": 3,
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spore/Animations/Nests/nest-stage-02-to-03/nest-stage-02-to-03.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spore/Animations/Nests/nest-stage-02-to-03/nest-stage-02-to-03.webp",
+          "preview": "DesignAssets/Tribes/spore/Animations/Nests/nest-stage-02-to-03/nest-stage-02-to-03-preview.gif",
+          "contact": "DesignAssets/Tribes/spore/Animations/Nests/nest-stage-02-to-03/nest-stage-02-to-03-contact.png"
+        },
+        {
+          "tribe": "spore",
+          "action": "nest-stage-03-to-04",
+          "durationsMs": [
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90
+          ],
+          "loop": false,
+          "transition": "anchored crossfade between approved growth artwork",
+          "fromLevel": 3,
+          "toLevel": 4,
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spore/Animations/Nests/nest-stage-03-to-04/nest-stage-03-to-04.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spore/Animations/Nests/nest-stage-03-to-04/nest-stage-03-to-04.webp",
+          "preview": "DesignAssets/Tribes/spore/Animations/Nests/nest-stage-03-to-04/nest-stage-03-to-04-preview.gif",
+          "contact": "DesignAssets/Tribes/spore/Animations/Nests/nest-stage-03-to-04/nest-stage-03-to-04-contact.png"
+        }
+      ],
+      "equippedPreview": "DesignAssets/Tribes/spore/Previews/parts-equipped.png",
+      "designApproval": {
+        "status": "approved",
+        "approvedOn": "2026-10-23",
+        "nestRevision": 1
+      }
+    },
+    "pebble": {
+      "name": "몽돌",
+      "status": "art-ready",
+      "runtimeConnected": false,
+      "starter": "DesignAssets/Tribes/pebble/starter.png",
+      "approvedStarter": "DesignAssets/TribeConcepts/base-river-pebble-ochre-v2.png",
+      "staticManifest": "DesignAssets/Tribes/pebble/manifest.json",
+      "parts": {
+        "strength-1": "DesignAssets/Tribes/pebble/Parts/strength-1.png",
+        "strength-2": "DesignAssets/Tribes/pebble/Parts/strength-2.png",
+        "feet-1": "DesignAssets/Tribes/pebble/Parts/feet-1.png",
+        "feet-2": "DesignAssets/Tribes/pebble/Parts/feet-2.png",
+        "antenna-1": "DesignAssets/Tribes/pebble/Parts/antenna-1.png",
+        "antenna-2": "DesignAssets/Tribes/pebble/Parts/antenna-2.png",
+        "shell-1": "DesignAssets/Tribes/pebble/Parts/shell-1.png",
+        "shell-2": "DesignAssets/Tribes/pebble/Parts/shell-2.png"
+      },
+      "baseLayers": "DesignAssets/Tribes/pebble/BaseParts/layers.json",
+      "nests": [
+        "DesignAssets/Tribes/pebble/Nests/nest-stage-01.png",
+        "DesignAssets/Tribes/pebble/Nests/nest-stage-02.png",
+        "DesignAssets/Tribes/pebble/Nests/nest-stage-03.png",
+        "DesignAssets/Tribes/pebble/Nests/nest-stage-04.png"
+      ],
+      "ground": "DesignAssets/Tribes/pebble/Terrain/nest-soil-ground.png",
+      "units": [
+        {
+          "tribe": "pebble",
+          "action": "idle",
+          "durationsMs": [
+            140,
+            140,
+            140,
+            140,
+            140,
+            140,
+            140,
+            140,
+            140,
+            140,
+            140,
+            140,
+            140,
+            140,
+            140,
+            140
+          ],
+          "loop": true,
+          "layers": "DesignAssets/Tribes/pebble/BaseParts/layers.json",
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/pebble/Animations/Units/idle/idle.png",
+          "runtimeAtlas": "DesignAssets/Tribes/pebble/Animations/Units/idle/idle.webp",
+          "preview": "DesignAssets/Tribes/pebble/Animations/Units/idle/idle-preview.gif",
+          "contact": "DesignAssets/Tribes/pebble/Animations/Units/idle/idle-contact.png"
+        },
+        {
+          "tribe": "pebble",
+          "action": "walk",
+          "durationsMs": [
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70
+          ],
+          "loop": true,
+          "layers": "DesignAssets/Tribes/pebble/BaseParts/layers.json",
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/pebble/Animations/Units/walk/walk.png",
+          "runtimeAtlas": "DesignAssets/Tribes/pebble/Animations/Units/walk/walk.webp",
+          "preview": "DesignAssets/Tribes/pebble/Animations/Units/walk/walk-preview.gif",
+          "contact": "DesignAssets/Tribes/pebble/Animations/Units/walk/walk-contact.png"
+        },
+        {
+          "tribe": "pebble",
+          "action": "jump",
+          "durationsMs": [
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70
+          ],
+          "loop": false,
+          "layers": "DesignAssets/Tribes/pebble/BaseParts/layers.json",
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.png",
+          "runtimeAtlas": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.webp",
+          "preview": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump-preview.gif",
+          "contact": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump-contact.png"
+        },
+        {
+          "tribe": "pebble",
+          "action": "harvest",
+          "durationsMs": [
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70
+          ],
+          "loop": true,
+          "layers": "DesignAssets/Tribes/pebble/BaseParts/layers.json",
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/pebble/Animations/Units/harvest/harvest.png",
+          "runtimeAtlas": "DesignAssets/Tribes/pebble/Animations/Units/harvest/harvest.webp",
+          "preview": "DesignAssets/Tribes/pebble/Animations/Units/harvest/harvest-preview.gif",
+          "contact": "DesignAssets/Tribes/pebble/Animations/Units/harvest/harvest-contact.png"
+        },
+        {
+          "tribe": "pebble",
+          "action": "carry",
+          "durationsMs": [
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70
+          ],
+          "loop": true,
+          "layers": "DesignAssets/Tribes/pebble/BaseParts/layers.json",
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/pebble/Animations/Units/carry/carry.png",
+          "runtimeAtlas": "DesignAssets/Tribes/pebble/Animations/Units/carry/carry.webp",
+          "preview": "DesignAssets/Tribes/pebble/Animations/Units/carry/carry-preview.gif",
+          "contact": "DesignAssets/Tribes/pebble/Animations/Units/carry/carry-contact.png"
+        },
+        {
+          "tribe": "pebble",
+          "action": "throw",
+          "durationsMs": [
+            60,
+            70,
+            60,
+            80,
+            30,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            70,
+            80,
+            90,
+            100,
+            60
+          ],
+          "loop": false,
+          "layers": "DesignAssets/Tribes/pebble/BaseParts/layers.json",
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/pebble/Animations/Units/throw/throw.png",
+          "runtimeAtlas": "DesignAssets/Tribes/pebble/Animations/Units/throw/throw.webp",
+          "preview": "DesignAssets/Tribes/pebble/Animations/Units/throw/throw-preview.gif",
+          "contact": "DesignAssets/Tribes/pebble/Animations/Units/throw/throw-contact.png"
+        },
+        {
+          "tribe": "pebble",
+          "action": "attack",
+          "durationsMs": [
+            60,
+            70,
+            60,
+            80,
+            30,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            70,
+            80,
+            90,
+            100,
+            60
+          ],
+          "loop": false,
+          "layers": "DesignAssets/Tribes/pebble/BaseParts/layers.json",
+          "hitFrame": 6,
+          "hitAtMs": 300,
+          "impactHoldMs": 300,
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/pebble/Animations/Units/attack/attack.png",
+          "runtimeAtlas": "DesignAssets/Tribes/pebble/Animations/Units/attack/attack.webp",
+          "preview": "DesignAssets/Tribes/pebble/Animations/Units/attack/attack-preview.gif",
+          "contact": "DesignAssets/Tribes/pebble/Animations/Units/attack/attack-contact.png"
+        },
+        {
+          "tribe": "pebble",
+          "action": "hurt-front",
+          "durationsMs": [
+            20,
+            30,
+            30,
+            30,
+            400,
+            30,
+            30,
+            30,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20
+          ],
+          "loop": false,
+          "layers": "DesignAssets/Tribes/pebble/BaseParts/layers.json",
+          "hitFrom": "front",
+          "holdFrame": 4,
+          "closedEyeHoldMs": 400,
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/pebble/Animations/Units/hurt-front/hurt-front.png",
+          "runtimeAtlas": "DesignAssets/Tribes/pebble/Animations/Units/hurt-front/hurt-front.webp",
+          "preview": "DesignAssets/Tribes/pebble/Animations/Units/hurt-front/hurt-front-preview.gif",
+          "contact": "DesignAssets/Tribes/pebble/Animations/Units/hurt-front/hurt-front-contact.png"
+        },
+        {
+          "tribe": "pebble",
+          "action": "hurt-back",
+          "durationsMs": [
+            20,
+            30,
+            30,
+            30,
+            400,
+            30,
+            30,
+            30,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20
+          ],
+          "loop": false,
+          "layers": "DesignAssets/Tribes/pebble/BaseParts/layers.json",
+          "hitFrom": "back",
+          "holdFrame": 4,
+          "closedEyeHoldMs": 400,
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/pebble/Animations/Units/hurt-back/hurt-back.png",
+          "runtimeAtlas": "DesignAssets/Tribes/pebble/Animations/Units/hurt-back/hurt-back.webp",
+          "preview": "DesignAssets/Tribes/pebble/Animations/Units/hurt-back/hurt-back-preview.gif",
+          "contact": "DesignAssets/Tribes/pebble/Animations/Units/hurt-back/hurt-back-contact.png"
+        },
+        {
+          "tribe": "pebble",
+          "action": "hurt-left",
+          "durationsMs": [
+            20,
+            30,
+            30,
+            30,
+            400,
+            30,
+            30,
+            30,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20
+          ],
+          "loop": false,
+          "layers": "DesignAssets/Tribes/pebble/BaseParts/layers.json",
+          "hitFrom": "left",
+          "holdFrame": 4,
+          "closedEyeHoldMs": 400,
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/pebble/Animations/Units/hurt-left/hurt-left.png",
+          "runtimeAtlas": "DesignAssets/Tribes/pebble/Animations/Units/hurt-left/hurt-left.webp",
+          "preview": "DesignAssets/Tribes/pebble/Animations/Units/hurt-left/hurt-left-preview.gif",
+          "contact": "DesignAssets/Tribes/pebble/Animations/Units/hurt-left/hurt-left-contact.png"
+        },
+        {
+          "tribe": "pebble",
+          "action": "hurt-right",
+          "durationsMs": [
+            20,
+            30,
+            30,
+            30,
+            400,
+            30,
+            30,
+            30,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20
+          ],
+          "loop": false,
+          "layers": "DesignAssets/Tribes/pebble/BaseParts/layers.json",
+          "hitFrom": "right",
+          "holdFrame": 4,
+          "closedEyeHoldMs": 400,
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/pebble/Animations/Units/hurt-right/hurt-right.png",
+          "runtimeAtlas": "DesignAssets/Tribes/pebble/Animations/Units/hurt-right/hurt-right.webp",
+          "preview": "DesignAssets/Tribes/pebble/Animations/Units/hurt-right/hurt-right-preview.gif",
+          "contact": "DesignAssets/Tribes/pebble/Animations/Units/hurt-right/hurt-right-contact.png"
+        },
+        {
+          "tribe": "pebble",
+          "action": "birth",
+          "durationsMs": [
+            60,
+            60,
+            60,
+            60,
+            60,
+            60,
+            60,
+            60,
+            60,
+            60,
+            60,
+            60,
+            60,
+            60,
+            60,
+            60
+          ],
+          "loop": false,
+          "layers": "DesignAssets/Tribes/pebble/BaseParts/layers.json",
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/pebble/Animations/Units/birth/birth.png",
+          "runtimeAtlas": "DesignAssets/Tribes/pebble/Animations/Units/birth/birth.webp",
+          "preview": "DesignAssets/Tribes/pebble/Animations/Units/birth/birth-preview.gif",
+          "contact": "DesignAssets/Tribes/pebble/Animations/Units/birth/birth-contact.png"
+        }
+      ],
+      "nestIdle": [
+        {
+          "tribe": "pebble",
+          "action": "nest-stage-01-idle",
+          "source": "DesignAssets/Tribes/pebble/Nests/nest-stage-01.png",
+          "drawnCels": 4,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            2,
+            1,
+            0
+          ],
+          "durationsMs": [
+            650,
+            650,
+            650,
+            650,
+            650,
+            650,
+            650
+          ],
+          "frameMs": 650,
+          "restMs": 7800,
+          "loop": true,
+          "fixedFromY": 430,
+          "visibleBounds": [
+            190,
+            93,
+            161,
+            355
+          ],
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 4,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/pebble/Animations/Nests/stage-01-idle/nest-stage-01-idle.png",
+          "runtimeAtlas": "DesignAssets/Tribes/pebble/Animations/Nests/stage-01-idle/nest-stage-01-idle.webp",
+          "preview": "DesignAssets/Tribes/pebble/Animations/Nests/stage-01-idle/nest-stage-01-idle-preview.gif",
+          "contact": "DesignAssets/Tribes/pebble/Animations/Nests/stage-01-idle/nest-stage-01-idle-contact.png",
+          "runtime": {
+            "format": "SCG1",
+            "frameSize": 2048,
+            "frameCount": 7,
+            "frameMs": 650,
+            "restMs": 7800,
+            "groupSize": 1,
+            "data": "DesignAssets/Tribes/pebble/Animations/Nests/stage-01-idle/nest-stage-01-idle.frames",
+            "neutral": "DesignAssets/Tribes/pebble/Animations/Nests/stage-01-idle/nest-stage-01-idle-cel-00.webp"
+          }
+        },
+        {
+          "tribe": "pebble",
+          "action": "nest-stage-02-idle",
+          "source": "DesignAssets/Tribes/pebble/Nests/nest-stage-02.png",
+          "drawnCels": 4,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            2,
+            1,
+            0
+          ],
+          "durationsMs": [
+            650,
+            650,
+            650,
+            650,
+            650,
+            650,
+            650
+          ],
+          "frameMs": 650,
+          "restMs": 7800,
+          "loop": true,
+          "fixedFromY": 430,
+          "visibleBounds": [
+            250,
+            142,
+            131,
+            306
+          ],
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 4,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/pebble/Animations/Nests/stage-02-idle/nest-stage-02-idle.png",
+          "runtimeAtlas": "DesignAssets/Tribes/pebble/Animations/Nests/stage-02-idle/nest-stage-02-idle.webp",
+          "preview": "DesignAssets/Tribes/pebble/Animations/Nests/stage-02-idle/nest-stage-02-idle-preview.gif",
+          "contact": "DesignAssets/Tribes/pebble/Animations/Nests/stage-02-idle/nest-stage-02-idle-contact.png",
+          "runtime": {
+            "format": "SCG1",
+            "frameSize": 2048,
+            "frameCount": 7,
+            "frameMs": 650,
+            "restMs": 7800,
+            "groupSize": 1,
+            "data": "DesignAssets/Tribes/pebble/Animations/Nests/stage-02-idle/nest-stage-02-idle.frames",
+            "neutral": "DesignAssets/Tribes/pebble/Animations/Nests/stage-02-idle/nest-stage-02-idle-cel-00.webp"
+          }
+        },
+        {
+          "tribe": "pebble",
+          "action": "nest-stage-03-idle",
+          "source": "DesignAssets/Tribes/pebble/Nests/nest-stage-03.png",
+          "drawnCels": 4,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            2,
+            1,
+            0
+          ],
+          "durationsMs": [
+            650,
+            650,
+            650,
+            650,
+            650,
+            650,
+            650
+          ],
+          "frameMs": 650,
+          "restMs": 7800,
+          "loop": true,
+          "fixedFromY": 430,
+          "visibleBounds": [
+            310,
+            235,
+            101,
+            213
+          ],
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 4,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/pebble/Animations/Nests/stage-03-idle/nest-stage-03-idle.png",
+          "runtimeAtlas": "DesignAssets/Tribes/pebble/Animations/Nests/stage-03-idle/nest-stage-03-idle.webp",
+          "preview": "DesignAssets/Tribes/pebble/Animations/Nests/stage-03-idle/nest-stage-03-idle-preview.gif",
+          "contact": "DesignAssets/Tribes/pebble/Animations/Nests/stage-03-idle/nest-stage-03-idle-contact.png",
+          "runtime": {
+            "format": "SCG1",
+            "frameSize": 2048,
+            "frameCount": 7,
+            "frameMs": 650,
+            "restMs": 7800,
+            "groupSize": 1,
+            "data": "DesignAssets/Tribes/pebble/Animations/Nests/stage-03-idle/nest-stage-03-idle.frames",
+            "neutral": "DesignAssets/Tribes/pebble/Animations/Nests/stage-03-idle/nest-stage-03-idle-cel-00.webp"
+          }
+        },
+        {
+          "tribe": "pebble",
+          "action": "nest-stage-04-idle",
+          "source": "DesignAssets/Tribes/pebble/Nests/nest-stage-04.png",
+          "drawnCels": 4,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            2,
+            1,
+            0
+          ],
+          "durationsMs": [
+            650,
+            650,
+            650,
+            650,
+            650,
+            650,
+            650
+          ],
+          "frameMs": 650,
+          "restMs": 7800,
+          "loop": true,
+          "fixedFromY": 430,
+          "visibleBounds": [
+            370,
+            237,
+            71,
+            211
+          ],
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 4,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/pebble/Animations/Nests/stage-04-idle/nest-stage-04-idle.png",
+          "runtimeAtlas": "DesignAssets/Tribes/pebble/Animations/Nests/stage-04-idle/nest-stage-04-idle.webp",
+          "preview": "DesignAssets/Tribes/pebble/Animations/Nests/stage-04-idle/nest-stage-04-idle-preview.gif",
+          "contact": "DesignAssets/Tribes/pebble/Animations/Nests/stage-04-idle/nest-stage-04-idle-contact.png",
+          "runtime": {
+            "format": "SCG1",
+            "frameSize": 2048,
+            "frameCount": 7,
+            "frameMs": 650,
+            "restMs": 7800,
+            "groupSize": 1,
+            "data": "DesignAssets/Tribes/pebble/Animations/Nests/stage-04-idle/nest-stage-04-idle.frames",
+            "neutral": "DesignAssets/Tribes/pebble/Animations/Nests/stage-04-idle/nest-stage-04-idle-cel-00.webp"
+          }
+        }
+      ],
+      "nestGrowth": [
+        {
+          "tribe": "pebble",
+          "action": "nest-stage-01-to-02",
+          "durationsMs": [
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90
+          ],
+          "loop": false,
+          "transition": "anchored crossfade between approved growth artwork",
+          "fromLevel": 1,
+          "toLevel": 2,
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/pebble/Animations/Nests/nest-stage-01-to-02/nest-stage-01-to-02.png",
+          "runtimeAtlas": "DesignAssets/Tribes/pebble/Animations/Nests/nest-stage-01-to-02/nest-stage-01-to-02.webp",
+          "preview": "DesignAssets/Tribes/pebble/Animations/Nests/nest-stage-01-to-02/nest-stage-01-to-02-preview.gif",
+          "contact": "DesignAssets/Tribes/pebble/Animations/Nests/nest-stage-01-to-02/nest-stage-01-to-02-contact.png"
+        },
+        {
+          "tribe": "pebble",
+          "action": "nest-stage-02-to-03",
+          "durationsMs": [
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90
+          ],
+          "loop": false,
+          "transition": "anchored crossfade between approved growth artwork",
+          "fromLevel": 2,
+          "toLevel": 3,
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/pebble/Animations/Nests/nest-stage-02-to-03/nest-stage-02-to-03.png",
+          "runtimeAtlas": "DesignAssets/Tribes/pebble/Animations/Nests/nest-stage-02-to-03/nest-stage-02-to-03.webp",
+          "preview": "DesignAssets/Tribes/pebble/Animations/Nests/nest-stage-02-to-03/nest-stage-02-to-03-preview.gif",
+          "contact": "DesignAssets/Tribes/pebble/Animations/Nests/nest-stage-02-to-03/nest-stage-02-to-03-contact.png"
+        },
+        {
+          "tribe": "pebble",
+          "action": "nest-stage-03-to-04",
+          "durationsMs": [
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90
+          ],
+          "loop": false,
+          "transition": "anchored crossfade between approved growth artwork",
+          "fromLevel": 3,
+          "toLevel": 4,
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/pebble/Animations/Nests/nest-stage-03-to-04/nest-stage-03-to-04.png",
+          "runtimeAtlas": "DesignAssets/Tribes/pebble/Animations/Nests/nest-stage-03-to-04/nest-stage-03-to-04.webp",
+          "preview": "DesignAssets/Tribes/pebble/Animations/Nests/nest-stage-03-to-04/nest-stage-03-to-04-preview.gif",
+          "contact": "DesignAssets/Tribes/pebble/Animations/Nests/nest-stage-03-to-04/nest-stage-03-to-04-contact.png"
+        }
+      ],
+      "equippedPreview": "DesignAssets/Tribes/pebble/Previews/parts-contact.png",
+      "designApproval": {
+        "status": "approved",
+        "approvedOn": "2026-10-23",
+        "nestRevision": 1
+      }
+    },
+    "spring": {
+      "name": "샘방울",
+      "status": "art-ready",
+      "runtimeConnected": false,
+      "starter": "DesignAssets/Tribes/spring/starter.png",
+      "approvedStarter": "DesignAssets/TribeConcepts/base-water-droplet-teal-v2.png",
+      "staticManifest": "DesignAssets/Tribes/spring/manifest.json",
+      "parts": {
+        "strength-1": "DesignAssets/Tribes/spring/Units/Parts/strength-1.png",
+        "strength-2": "DesignAssets/Tribes/spring/Units/Parts/strength-2.png",
+        "feet-1": "DesignAssets/Tribes/spring/Units/Parts/feet-1.png",
+        "feet-2": "DesignAssets/Tribes/spring/Units/Parts/feet-2.png",
+        "antenna-1": "DesignAssets/Tribes/spring/Units/Parts/antenna-1.png",
+        "antenna-2": "DesignAssets/Tribes/spring/Units/Parts/antenna-2.png",
+        "shell-1": "DesignAssets/Tribes/spring/Units/Parts/shell-1.png",
+        "shell-2": "DesignAssets/Tribes/spring/Units/Parts/shell-2.png"
+      },
+      "baseLayers": "DesignAssets/Tribes/spring/BaseParts/layers.json",
+      "nests": [
+        "DesignAssets/Tribes/spring/Nests/nest-stage-01.png",
+        "DesignAssets/Tribes/spring/Nests/nest-stage-02.png",
+        "DesignAssets/Tribes/spring/Nests/nest-stage-03.png",
+        "DesignAssets/Tribes/spring/Nests/nest-stage-04.png"
+      ],
+      "ground": "DesignAssets/Tribes/spring/Terrain/nest-ground.png",
+      "units": [
+        {
+          "tribe": "spring",
+          "action": "idle",
+          "durationsMs": [
+            140,
+            140,
+            140,
+            140,
+            140,
+            140,
+            140,
+            140,
+            140,
+            140,
+            140,
+            140,
+            140,
+            140,
+            140,
+            140
+          ],
+          "loop": true,
+          "layers": "DesignAssets/Tribes/spring/BaseParts/layers.json",
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spring/Animations/Units/idle/idle.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Units/idle/idle.webp",
+          "preview": "DesignAssets/Tribes/spring/Animations/Units/idle/idle-preview.gif",
+          "contact": "DesignAssets/Tribes/spring/Animations/Units/idle/idle-contact.png"
+        },
+        {
+          "tribe": "spring",
+          "action": "walk",
+          "durationsMs": [
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70
+          ],
+          "loop": true,
+          "layers": "DesignAssets/Tribes/spring/BaseParts/layers.json",
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spring/Animations/Units/walk/walk.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Units/walk/walk.webp",
+          "preview": "DesignAssets/Tribes/spring/Animations/Units/walk/walk-preview.gif",
+          "contact": "DesignAssets/Tribes/spring/Animations/Units/walk/walk-contact.png"
+        },
+        {
+          "tribe": "spring",
+          "action": "jump",
+          "durationsMs": [
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70
+          ],
+          "loop": false,
+          "layers": "DesignAssets/Tribes/spring/BaseParts/layers.json",
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spring/Animations/Units/jump/jump.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Units/jump/jump.webp",
+          "preview": "DesignAssets/Tribes/spring/Animations/Units/jump/jump-preview.gif",
+          "contact": "DesignAssets/Tribes/spring/Animations/Units/jump/jump-contact.png"
+        },
+        {
+          "tribe": "spring",
+          "action": "harvest",
+          "durationsMs": [
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70
+          ],
+          "loop": true,
+          "layers": "DesignAssets/Tribes/spring/BaseParts/layers.json",
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spring/Animations/Units/harvest/harvest.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Units/harvest/harvest.webp",
+          "preview": "DesignAssets/Tribes/spring/Animations/Units/harvest/harvest-preview.gif",
+          "contact": "DesignAssets/Tribes/spring/Animations/Units/harvest/harvest-contact.png"
+        },
+        {
+          "tribe": "spring",
+          "action": "carry",
+          "durationsMs": [
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70,
+            70
+          ],
+          "loop": true,
+          "layers": "DesignAssets/Tribes/spring/BaseParts/layers.json",
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spring/Animations/Units/carry/carry.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Units/carry/carry.webp",
+          "preview": "DesignAssets/Tribes/spring/Animations/Units/carry/carry-preview.gif",
+          "contact": "DesignAssets/Tribes/spring/Animations/Units/carry/carry-contact.png"
+        },
+        {
+          "tribe": "spring",
+          "action": "throw",
+          "durationsMs": [
+            60,
+            70,
+            60,
+            80,
+            30,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            70,
+            80,
+            90,
+            100,
+            60
+          ],
+          "loop": false,
+          "layers": "DesignAssets/Tribes/spring/BaseParts/layers.json",
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spring/Animations/Units/throw/throw.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Units/throw/throw.webp",
+          "preview": "DesignAssets/Tribes/spring/Animations/Units/throw/throw-preview.gif",
+          "contact": "DesignAssets/Tribes/spring/Animations/Units/throw/throw-contact.png"
+        },
+        {
+          "tribe": "spring",
+          "action": "attack",
+          "durationsMs": [
+            60,
+            70,
+            60,
+            80,
+            30,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            70,
+            80,
+            90,
+            100,
+            60
+          ],
+          "loop": false,
+          "layers": "DesignAssets/Tribes/spring/BaseParts/layers.json",
+          "hitFrame": 6,
+          "hitAtMs": 300,
+          "impactHoldMs": 300,
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spring/Animations/Units/attack/attack.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Units/attack/attack.webp",
+          "preview": "DesignAssets/Tribes/spring/Animations/Units/attack/attack-preview.gif",
+          "contact": "DesignAssets/Tribes/spring/Animations/Units/attack/attack-contact.png"
+        },
+        {
+          "tribe": "spring",
+          "action": "hurt-front",
+          "durationsMs": [
+            20,
+            30,
+            30,
+            30,
+            400,
+            30,
+            30,
+            30,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20
+          ],
+          "loop": false,
+          "layers": "DesignAssets/Tribes/spring/BaseParts/layers.json",
+          "hitFrom": "front",
+          "holdFrame": 4,
+          "closedEyeHoldMs": 400,
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spring/Animations/Units/hurt-front/hurt-front.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Units/hurt-front/hurt-front.webp",
+          "preview": "DesignAssets/Tribes/spring/Animations/Units/hurt-front/hurt-front-preview.gif",
+          "contact": "DesignAssets/Tribes/spring/Animations/Units/hurt-front/hurt-front-contact.png"
+        },
+        {
+          "tribe": "spring",
+          "action": "hurt-back",
+          "durationsMs": [
+            20,
+            30,
+            30,
+            30,
+            400,
+            30,
+            30,
+            30,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20
+          ],
+          "loop": false,
+          "layers": "DesignAssets/Tribes/spring/BaseParts/layers.json",
+          "hitFrom": "back",
+          "holdFrame": 4,
+          "closedEyeHoldMs": 400,
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spring/Animations/Units/hurt-back/hurt-back.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Units/hurt-back/hurt-back.webp",
+          "preview": "DesignAssets/Tribes/spring/Animations/Units/hurt-back/hurt-back-preview.gif",
+          "contact": "DesignAssets/Tribes/spring/Animations/Units/hurt-back/hurt-back-contact.png"
+        },
+        {
+          "tribe": "spring",
+          "action": "hurt-left",
+          "durationsMs": [
+            20,
+            30,
+            30,
+            30,
+            400,
+            30,
+            30,
+            30,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20
+          ],
+          "loop": false,
+          "layers": "DesignAssets/Tribes/spring/BaseParts/layers.json",
+          "hitFrom": "left",
+          "holdFrame": 4,
+          "closedEyeHoldMs": 400,
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spring/Animations/Units/hurt-left/hurt-left.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Units/hurt-left/hurt-left.webp",
+          "preview": "DesignAssets/Tribes/spring/Animations/Units/hurt-left/hurt-left-preview.gif",
+          "contact": "DesignAssets/Tribes/spring/Animations/Units/hurt-left/hurt-left-contact.png"
+        },
+        {
+          "tribe": "spring",
+          "action": "hurt-right",
+          "durationsMs": [
+            20,
+            30,
+            30,
+            30,
+            400,
+            30,
+            30,
+            30,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20
+          ],
+          "loop": false,
+          "layers": "DesignAssets/Tribes/spring/BaseParts/layers.json",
+          "hitFrom": "right",
+          "holdFrame": 4,
+          "closedEyeHoldMs": 400,
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spring/Animations/Units/hurt-right/hurt-right.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Units/hurt-right/hurt-right.webp",
+          "preview": "DesignAssets/Tribes/spring/Animations/Units/hurt-right/hurt-right-preview.gif",
+          "contact": "DesignAssets/Tribes/spring/Animations/Units/hurt-right/hurt-right-contact.png"
+        },
+        {
+          "tribe": "spring",
+          "action": "birth",
+          "durationsMs": [
+            60,
+            60,
+            60,
+            60,
+            60,
+            60,
+            60,
+            60,
+            60,
+            60,
+            60,
+            60,
+            60,
+            60,
+            60,
+            60
+          ],
+          "loop": false,
+          "layers": "DesignAssets/Tribes/spring/BaseParts/layers.json",
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spring/Animations/Units/birth/birth.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Units/birth/birth.webp",
+          "preview": "DesignAssets/Tribes/spring/Animations/Units/birth/birth-preview.gif",
+          "contact": "DesignAssets/Tribes/spring/Animations/Units/birth/birth-contact.png"
+        }
+      ],
+      "nestIdle": [
+        {
+          "tribe": "spring",
+          "action": "nest-stage-01-idle",
+          "source": "DesignAssets/Tribes/spring/Nests/nest-stage-01.png",
+          "drawnCels": 4,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            2,
+            1,
+            0
+          ],
+          "durationsMs": [
+            650,
+            650,
+            650,
+            650,
+            650,
+            650,
+            650
+          ],
+          "frameMs": 650,
+          "restMs": 7800,
+          "loop": true,
+          "fixedFromY": 436,
+          "visibleBounds": [
+            190,
+            75,
+            161,
+            373
+          ],
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 4,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spring/Animations/Nests/stage-01-idle/nest-stage-01-idle.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Nests/stage-01-idle/nest-stage-01-idle.webp",
+          "preview": "DesignAssets/Tribes/spring/Animations/Nests/stage-01-idle/nest-stage-01-idle-preview.gif",
+          "contact": "DesignAssets/Tribes/spring/Animations/Nests/stage-01-idle/nest-stage-01-idle-contact.png",
+          "runtime": {
+            "format": "SCG1",
+            "frameSize": 2048,
+            "frameCount": 7,
+            "frameMs": 650,
+            "restMs": 7800,
+            "groupSize": 1,
+            "data": "DesignAssets/Tribes/spring/Animations/Nests/stage-01-idle/nest-stage-01-idle.frames",
+            "neutral": "DesignAssets/Tribes/spring/Animations/Nests/stage-01-idle/nest-stage-01-idle-cel-00.webp"
+          }
+        },
+        {
+          "tribe": "spring",
+          "action": "nest-stage-02-idle",
+          "source": "DesignAssets/Tribes/spring/Nests/nest-stage-02.png",
+          "drawnCels": 4,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            2,
+            1,
+            0
+          ],
+          "durationsMs": [
+            650,
+            650,
+            650,
+            650,
+            650,
+            650,
+            650
+          ],
+          "frameMs": 650,
+          "restMs": 7800,
+          "loop": true,
+          "fixedFromY": 434,
+          "visibleBounds": [
+            250,
+            102,
+            131,
+            346
+          ],
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 4,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spring/Animations/Nests/stage-02-idle/nest-stage-02-idle.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Nests/stage-02-idle/nest-stage-02-idle.webp",
+          "preview": "DesignAssets/Tribes/spring/Animations/Nests/stage-02-idle/nest-stage-02-idle-preview.gif",
+          "contact": "DesignAssets/Tribes/spring/Animations/Nests/stage-02-idle/nest-stage-02-idle-contact.png",
+          "runtime": {
+            "format": "SCG1",
+            "frameSize": 2048,
+            "frameCount": 7,
+            "frameMs": 650,
+            "restMs": 7800,
+            "groupSize": 1,
+            "data": "DesignAssets/Tribes/spring/Animations/Nests/stage-02-idle/nest-stage-02-idle.frames",
+            "neutral": "DesignAssets/Tribes/spring/Animations/Nests/stage-02-idle/nest-stage-02-idle-cel-00.webp"
+          }
+        },
+        {
+          "tribe": "spring",
+          "action": "nest-stage-03-idle",
+          "source": "DesignAssets/Tribes/spring/Nests/nest-stage-03.png",
+          "drawnCels": 4,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            2,
+            1,
+            0
+          ],
+          "durationsMs": [
+            650,
+            650,
+            650,
+            650,
+            650,
+            650,
+            650
+          ],
+          "frameMs": 650,
+          "restMs": 7800,
+          "loop": true,
+          "fixedFromY": 429,
+          "visibleBounds": [
+            310,
+            124,
+            101,
+            324
+          ],
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 4,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spring/Animations/Nests/stage-03-idle/nest-stage-03-idle.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Nests/stage-03-idle/nest-stage-03-idle.webp",
+          "preview": "DesignAssets/Tribes/spring/Animations/Nests/stage-03-idle/nest-stage-03-idle-preview.gif",
+          "contact": "DesignAssets/Tribes/spring/Animations/Nests/stage-03-idle/nest-stage-03-idle-contact.png",
+          "runtime": {
+            "format": "SCG1",
+            "frameSize": 2048,
+            "frameCount": 7,
+            "frameMs": 650,
+            "restMs": 7800,
+            "groupSize": 1,
+            "data": "DesignAssets/Tribes/spring/Animations/Nests/stage-03-idle/nest-stage-03-idle.frames",
+            "neutral": "DesignAssets/Tribes/spring/Animations/Nests/stage-03-idle/nest-stage-03-idle-cel-00.webp"
+          }
+        },
+        {
+          "tribe": "spring",
+          "action": "nest-stage-04-idle",
+          "source": "DesignAssets/Tribes/spring/Nests/nest-stage-04.png",
+          "drawnCels": 4,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            2,
+            1,
+            0
+          ],
+          "durationsMs": [
+            650,
+            650,
+            650,
+            650,
+            650,
+            650,
+            650
+          ],
+          "frameMs": 650,
+          "restMs": 7800,
+          "loop": true,
+          "fixedFromY": 419,
+          "visibleBounds": [
+            370,
+            169,
+            71,
+            279
+          ],
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 4,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spring/Animations/Nests/stage-04-idle/nest-stage-04-idle.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Nests/stage-04-idle/nest-stage-04-idle.webp",
+          "preview": "DesignAssets/Tribes/spring/Animations/Nests/stage-04-idle/nest-stage-04-idle-preview.gif",
+          "contact": "DesignAssets/Tribes/spring/Animations/Nests/stage-04-idle/nest-stage-04-idle-contact.png",
+          "runtime": {
+            "format": "SCG1",
+            "frameSize": 2048,
+            "frameCount": 7,
+            "frameMs": 650,
+            "restMs": 7800,
+            "groupSize": 1,
+            "data": "DesignAssets/Tribes/spring/Animations/Nests/stage-04-idle/nest-stage-04-idle.frames",
+            "neutral": "DesignAssets/Tribes/spring/Animations/Nests/stage-04-idle/nest-stage-04-idle-cel-00.webp"
+          }
+        }
+      ],
+      "nestGrowth": [
+        {
+          "tribe": "spring",
+          "action": "nest-stage-01-to-02",
+          "durationsMs": [
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90
+          ],
+          "loop": false,
+          "transition": "anchored crossfade between approved growth artwork",
+          "fromLevel": 1,
+          "toLevel": 2,
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spring/Animations/Nests/nest-stage-01-to-02/nest-stage-01-to-02.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Nests/nest-stage-01-to-02/nest-stage-01-to-02.webp",
+          "preview": "DesignAssets/Tribes/spring/Animations/Nests/nest-stage-01-to-02/nest-stage-01-to-02-preview.gif",
+          "contact": "DesignAssets/Tribes/spring/Animations/Nests/nest-stage-01-to-02/nest-stage-01-to-02-contact.png"
+        },
+        {
+          "tribe": "spring",
+          "action": "nest-stage-02-to-03",
+          "durationsMs": [
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90
+          ],
+          "loop": false,
+          "transition": "anchored crossfade between approved growth artwork",
+          "fromLevel": 2,
+          "toLevel": 3,
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spring/Animations/Nests/nest-stage-02-to-03/nest-stage-02-to-03.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Nests/nest-stage-02-to-03/nest-stage-02-to-03.webp",
+          "preview": "DesignAssets/Tribes/spring/Animations/Nests/nest-stage-02-to-03/nest-stage-02-to-03-preview.gif",
+          "contact": "DesignAssets/Tribes/spring/Animations/Nests/nest-stage-02-to-03/nest-stage-02-to-03-contact.png"
+        },
+        {
+          "tribe": "spring",
+          "action": "nest-stage-03-to-04",
+          "durationsMs": [
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90
+          ],
+          "loop": false,
+          "transition": "anchored crossfade between approved growth artwork",
+          "fromLevel": 3,
+          "toLevel": 4,
+          "frameSize": [
+            512,
+            512
+          ],
+          "columns": 4,
+          "frameCount": 16,
+          "pivot": [
+            256,
+            448
+          ],
+          "rootMotion": false,
+          "atlas": "DesignAssets/Tribes/spring/Animations/Nests/nest-stage-03-to-04/nest-stage-03-to-04.png",
+          "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Nests/nest-stage-03-to-04/nest-stage-03-to-04.webp",
+          "preview": "DesignAssets/Tribes/spring/Animations/Nests/nest-stage-03-to-04/nest-stage-03-to-04-preview.gif",
+          "contact": "DesignAssets/Tribes/spring/Animations/Nests/nest-stage-03-to-04/nest-stage-03-to-04-contact.png"
+        }
+      ],
+      "equippedPreview": "DesignAssets/Tribes/spring/Previews/parts-equipped.png",
+      "nestRevision": 2,
+      "designApproval": {
+        "status": "approved",
+        "approvedOn": "2026-10-23",
+        "nestRevision": 2
+      }
+    }
+  },
+  "shared": {
+    "food": [
+      "DesignAssets/Foods/food-mushroom-cluster.png",
+      "DesignAssets/Foods/food-mushroom-single.png",
+      "DesignAssets/Foods/food-berry-bush.png"
+    ],
+    "music": "DesignAssets/Audio/Bgm/catalog.json",
+    "attributeSymbols": [
+      "DesignAssets/Codex/strength.png",
+      "DesignAssets/Codex/feet.png",
+      "DesignAssets/Codex/antenna.png",
+      "DesignAssets/Codex/shell.png"
+    ]
+  },
+  "previews": {
+    "starters": "DesignAssets/Tribes/Previews/approved-units.png",
+    "starterNests": "DesignAssets/Tribes/Previews/starter-nests-current.png",
+    "growth": "DesignAssets/Tribes/Previews/nest-growth-all-tribes.png"
+  }
+}

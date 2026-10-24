@@ -1,0 +1,50 @@
+{
+  "tribe": "spore",
+  "action": "attack",
+  "direction": "left",
+  "status": "review-candidate",
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 4,
+  "frameCount": 16,
+  "durationsMs": [
+    60,
+    70,
+    60,
+    80,
+    30,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    70,
+    80,
+    90,
+    100,
+    60
+  ],
+  "durationMs": 1000,
+  "loop": false,
+  "hitFrame": 6,
+  "hitFrameIndex": 5,
+  "hitAtMs": 300,
+  "impactHoldMs": 300,
+  "pivot": [
+    256,
+    448
+  ],
+  "rootMotion": false,
+  "atlas": "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/left/attack.png",
+  "runtimeAtlas": "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/left/attack.webp",
+  "contact": "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/left/contact.png",
+  "mirroredFrom": "right",
+  "facing": "turns toward attack before impact",
+  "screenDirection": [
+    -1,
+    0
+  ]
+}
