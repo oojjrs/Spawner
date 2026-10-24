@@ -130,6 +130,10 @@
 
     function setMode(next) {
       if (mode === next) return;
+      if (!mode && next) {
+        cursors.peace = Math.floor(Math.random() * playlists.peace.length);
+        cursors.combat = Math.floor(Math.random() * playlists.combat.length);
+      }
       mode = next;
       generation++;
       clearGap();
