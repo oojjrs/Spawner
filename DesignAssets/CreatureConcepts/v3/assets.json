@@ -1,0 +1,134 @@
+{
+  "planned": 18,
+  "available": 18,
+  "basicAvailable": 12,
+  "uniqueAvailable": 6,
+  "assets": [
+    {
+      "name": "꽃꼬리새",
+      "file": "flower-tail-bird.png",
+      "category": "기본 · 공생",
+      "status": "available",
+      "revision": "retained"
+    },
+    {
+      "name": "이슬토끼",
+      "file": "dew-rabbit.png",
+      "category": "기본 · 공생",
+      "status": "available",
+      "revision": "retained"
+    },
+    {
+      "name": "흙두더지",
+      "file": "soil-mole.png",
+      "category": "기본 · 공생",
+      "status": "available",
+      "revision": "retained"
+    },
+    {
+      "name": "보따리달팽이",
+      "file": "bundle-snail.png",
+      "category": "기본 · 생활 중립",
+      "status": "available",
+      "revision": "retained"
+    },
+    {
+      "name": "솜양",
+      "file": "cotton-sheep.png",
+      "category": "기본 · 생활 중립",
+      "status": "available",
+      "revision": "retained"
+    },
+    {
+      "name": "굴림도토리",
+      "file": "rolling-acorn.png",
+      "category": "기본 · 생활 중립",
+      "status": "available",
+      "revision": "retained"
+    },
+    {
+      "name": "흙멧돼지",
+      "file": "soil-boar.png",
+      "category": "기본 · 영역",
+      "status": "available",
+      "revision": "retained"
+    },
+    {
+      "name": "방울두꺼비",
+      "file": "bubble-toad.png",
+      "category": "기본 · 영역",
+      "status": "available",
+      "revision": "retained"
+    },
+    {
+      "name": "넝쿨거북",
+      "file": "vine-turtle.png",
+      "category": "기본 · 영역",
+      "status": "available",
+      "revision": "retained"
+    },
+    {
+      "name": "그늘족제비",
+      "file": "shadow-weasel.png",
+      "category": "기본 · 상위 포식자",
+      "status": "available",
+      "revision": "retained"
+    },
+    {
+      "name": "올가미덩굴",
+      "file": "snare-vine.png",
+      "category": "기본 · 상위 포식자",
+      "status": "available",
+      "revision": "new"
+    },
+    {
+      "name": "갈퀴부엉이",
+      "file": "talon-owl.png",
+      "category": "기본 · 상위 포식자",
+      "status": "available",
+      "revision": "retained"
+    },
+    {
+      "name": "봄지기",
+      "file": "spring-keeper.png",
+      "category": "유니크 · 꽃꼬리새",
+      "status": "available",
+      "revision": "unique-redesign"
+    },
+    {
+      "name": "등불지기",
+      "file": "lantern-keeper.png",
+      "category": "유니크 · 이슬토끼",
+      "status": "available",
+      "revision": "unique-redesign"
+    },
+    {
+      "name": "오래된 등짐",
+      "file": "old-garden-snail.png",
+      "category": "유니크 · 보따리달팽이",
+      "status": "available",
+      "revision": "unique-redesign"
+    },
+    {
+      "name": "걸어가는 숲",
+      "file": "walking-forest.png",
+      "category": "유니크 · 넝쿨거북",
+      "status": "available",
+      "revision": "unique-redesign"
+    },
+    {
+      "name": "흰발",
+      "file": "white-paw.png",
+      "category": "유니크 · 그늘족제비",
+      "status": "available",
+      "revision": "unique-redesign"
+    },
+    {
+      "name": "가시등 우두머리",
+      "file": "spiny-back-leader.png",
+      "category": "유니크 · 딱정벌레",
+      "status": "available",
+      "revision": "unique-redesign"
+    }
+  ]
+}
