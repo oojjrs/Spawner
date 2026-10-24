@@ -1,0 +1,213 @@
+{
+  "frameSize": [
+    400,
+    240
+  ],
+  "columns": 4,
+  "frameCount": 16,
+  "periodMs": 3960,
+  "artwork": "Redrawn leaf contours with coherent veins and highlights; small vertical motion matching the late bean idle.",
+  "runtimeTransforms": false,
+  "opacityBlending": false,
+  "fixedStem": {
+    "x": 180,
+    "y": 161,
+    "width": 40,
+    "height": 79,
+    "differences": 0
+  },
+  "frames": [
+    {
+      "index": 0,
+      "progress": 0,
+      "leftTip": [
+        45,
+        98
+      ],
+      "rightTip": [
+        355,
+        95.03870967741935
+      ]
+    },
+    {
+      "index": 1,
+      "progress": 0.06666666666666667,
+      "leftTip": [
+        45,
+        97.30903225806452
+      ],
+      "rightTip": [
+        355,
+        94.34774193548387
+      ]
+    },
+    {
+      "index": 2,
+      "progress": 0.13333333333333333,
+      "leftTip": [
+        45,
+        96.61806451612904
+      ],
+      "rightTip": [
+        355,
+        93.65677419354839
+      ]
+    },
+    {
+      "index": 3,
+      "progress": 0.2,
+      "leftTip": [
+        45,
+        95.92709677419354
+      ],
+      "rightTip": [
+        355,
+        92.96580645161289
+      ]
+    },
+    {
+      "index": 4,
+      "progress": 0.26666666666666666,
+      "leftTip": [
+        45,
+        95.23612903225806
+      ],
+      "rightTip": [
+        355,
+        92.27483870967741
+      ]
+    },
+    {
+      "index": 5,
+      "progress": 0.3333333333333333,
+      "leftTip": [
+        45,
+        94.54516129032258
+      ],
+      "rightTip": [
+        355,
+        91.58387096774193
+      ]
+    },
+    {
+      "index": 6,
+      "progress": 0.4,
+      "leftTip": [
+        45,
+        93.8541935483871
+      ],
+      "rightTip": [
+        355,
+        90.89290322580645
+      ]
+    },
+    {
+      "index": 7,
+      "progress": 0.4666666666666667,
+      "leftTip": [
+        45,
+        93.1632258064516
+      ],
+      "rightTip": [
+        355,
+        90.20193548387095
+      ]
+    },
+    {
+      "index": 8,
+      "progress": 0.5333333333333333,
+      "leftTip": [
+        45,
+        92.47225806451613
+      ],
+      "rightTip": [
+        355,
+        89.51096774193547
+      ]
+    },
+    {
+      "index": 9,
+      "progress": 0.6,
+      "leftTip": [
+        45,
+        91.78129032258065
+      ],
+      "rightTip": [
+        355,
+        88.82
+      ]
+    },
+    {
+      "index": 10,
+      "progress": 0.6666666666666666,
+      "leftTip": [
+        45,
+        91.09032258064516
+      ],
+      "rightTip": [
+        355,
+        88.12903225806451
+      ]
+    },
+    {
+      "index": 11,
+      "progress": 0.7333333333333333,
+      "leftTip": [
+        45,
+        90.39935483870968
+      ],
+      "rightTip": [
+        355,
+        87.43806451612903
+      ]
+    },
+    {
+      "index": 12,
+      "progress": 0.8,
+      "leftTip": [
+        45,
+        89.70838709677419
+      ],
+      "rightTip": [
+        355,
+        86.74709677419354
+      ]
+    },
+    {
+      "index": 13,
+      "progress": 0.8666666666666667,
+      "leftTip": [
+        45,
+        89.01741935483871
+      ],
+      "rightTip": [
+        355,
+        86.05612903225806
+      ]
+    },
+    {
+      "index": 14,
+      "progress": 0.9333333333333333,
+      "leftTip": [
+        45,
+        88.32645161290323
+      ],
+      "rightTip": [
+        355,
+        85.36516129032258
+      ]
+    },
+    {
+      "index": 15,
+      "progress": 1,
+      "leftTip": [
+        45,
+        87.63548387096775
+      ],
+      "rightTip": [
+        355,
+        84.6741935483871
+      ]
+    }
+  ]
+}

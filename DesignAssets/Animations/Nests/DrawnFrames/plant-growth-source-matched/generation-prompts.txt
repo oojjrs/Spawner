@@ -1,0 +1,50 @@
+Tool: image_gen.imagegen (built-in); transparent_background=true; mode: production sprite editing.
+Final animation: 23 frames, 512x512 RGBA, fixed root/pivot at (256,465), duration 3900ms.
+Original endpoints: DesignAssets/Nests/nest-stage-01.png and nest-stage-02.png at identical quarter scale.
+Method: Four drawn closing poses; six coherent compact-bud growth poses from the existing clean bud part; eleven drawn unfolding poses; original start and end.
+Closed-bud maximum height:206px; final artwork height:289px. Growth continues during unfolding.
+Native source output paths:
+D:/.codex/generated_images/01a163ce-56da-7d30-98e5-53addf14f35d/exec-3c5e3140-e083-465e-a18a-b7a7e41c22d7.png
+D:/.codex/generated_images/01a163ce-56da-7d30-98e5-53addf14f35d/exec-f78aeb8c-32a4-414d-b7b3-00a028a8b649.png
+D:/.codex/generated_images/01a163ce-56da-7d30-98e5-53addf14f35d/exec-98304c36-a48d-4201-a6fc-aeb4cba90089.png
+Source cleanup: opening sprite sheet has a one-pixel alpha bridge cleared at x721,y740 onward before connected-component extraction.
+Existing production parts: TransformParts/nest-growth-closed-bud-clean.png and nest-transform-ground-leaves.png.
+
+Prompt 1 / three closing production drawings
+Use case: precise-object-edit.
+Asset type: THREE complete production sprite animation drawings, transparent strip of 3 equal square512px cells in one row, 1536x512. Directly used as PNG game animation frames. No text, labels, borders, numbers, ground shadow or checkerboard.
+Input1 is the EXACT stage-1 start sprite and must remain the visual model. Input2 is the later small closed-bud shape. Both share a 512px world canvas and fixed ground contact local(256,465). Do not center or enlarge each sprite to fill its cell.
+Create just the THREE CLOSING IN-BETWEENS before the closed bud:
+Cell1: close25%. The existing two ivory petals curl slightly inward/up, while the seed and its two sprout leaves stay EXACTLY the same size and location as Input1. Keep its original broad low cradle proportions and identical basal leaf pair. Whole size approximately218 wide x172 tall.
+Cell2: close50%. The same petals visibly wrap a little higher, partially occluding the SAME seed from the sides; the original sprout leaves fold gently inward, still partly visible, same stem location. Whole size202 wide x175 tall.
+Cell3: close85%. Existing ivory petal tips nearly meet above the tucked sprout, leaving only a very narrow gold glimpse through the upper seam, about184 wide x179 tall. No pointed giant roof or new leaf rows yet; same two basal leaves.
+Important: these are subtle edits to the original Input1 plant, NOT a redesigned icon. Do NOT replace its seed with a different round fruit, move the seed upward, simplify its curled petal contours, change the lighting or make its petals balloon outward. The starting reference is authoritative for the petal, seed and sprout identity.
+Preserve the exact cream/sage painted game-art style, dark teal outlines and smooth shading. Keep the lower root fixed at(256,450) and basal leaf pair identical size, angle and placement to Input1; no leaves move away from the root. Ground contact y465. Source1 is230 wide x170 tall, so closing poses get gradually narrower and only slightly taller. The plant must not become a giant inflated bud. Continuous whole petals and clean anatomy, no broken pixels, floating pieces, layered ghosting or crossfades.
+
+Prompt 2 / single closing in-between production drawing
+Use case: precise-object-edit. Asset type: ONE actual production 2D sprite animation drawing with transparent background, a complete sprite on a512x512 square PNG, directly used in the animation. Not a storyboard or preview.
+Draw the exact single IN-BETWEEN pose halfway between the two supplied consecutive full-sprite references. Reference1 has curled white petals partly enclosing a gold seed with two green sprout leaves; reference2 has those same petals nearly meeting as a bud. The desired pose is60-70percent closed: the curls have unrolled upward partway but have NOT yet become the straight pointed tips of reference2. Petal tips should bend inward and rise to halfway between the two references, around local y299, with the same two sprout leaves partly occluded; the same original gold seed is still partly visible in the narrower central opening. Continuous coherent whole petals, preserve their exact root seams, ivory/sage colors, soft painted shading and dark teal outlines. No redraw of the organ identity or new parts.
+Keep common source framing: root local(256,450), ground contacty465, centerx256. Sprite whole visible bounds approximately192wide x177tall. Do not enlarge to fill the canvas. The exact same original basal green leaf pair must stay identical in shape, location, size, angle and shading. No camera movement, light change, shadows, extra bits, text, duplicate sprites, outlines or background. True hand-painted intermediate petal anatomy, no dissolve or ghost blend.
+
+Prompt 3 / twelve unfolding production drawings (first eleven used)
+Use case: precise-object-edit.
+Asset type: PRODUCTION sprite sheet of12 full-sprite hand-painted animation drawings, real PNG frames directly used in a2D game. Not a storyboard or preview.
+Input1: compact CLOSED ivory bud on its original two basal leaves, size about172wide x206tall in a512 canvas.
+Input2: EXACT final stage2 nest,345wide x289tall in the SAME512 world canvas. This exact final design, painting and proportions are authoritative.
+Create4columns x3rows,12 equal512 square cells,2048x1536 transparent. No text, labels, numbers, borders, grid lines, checkerboard or shadow. Every sprite stays rooted at local(256,465), centerline256, same world camera/scale. Do NOT independently enlarge small poses to fill cells. ALL intermediate poses are SHORTER than the final stage2; NO overshoot or shrinking after growth.
+Action: the compact bud's existing petal folds slowly peel open from INSIDE. Inner folded layers unroll upward into the pointed roof as the outer wrap unrolls outward into the two curled side petals. Growth CONTINUES while unfolding, so the final flower is the largest pose. The original gold seed and two-leaf sprout reappear gradually in the opening. The front heart and new basal leaves unroll directly from existing lower central folds, never appear from outside. Keep the original two basal leaves fixed until new folds start unfurling around them.
+12 chronological cells left-right top-bottom:
+1. First tiny central opening/slit in compact bud, gold glimpse, no sprout yet. height212,width185.
+2. Slit widens just enough for tips of the original two sprout leaves, outer wraps still mostly closed. h218,w196.
+3. Upper outer petal rims start peeling outward, still three-quarters wrapped, inner pointed roof fold starts extending upward from INSIDE. h226,w212.
+4. Quarter open. Small continuous curled side tips, sprout partially revealed, seed lower tip near y400. A very small connected front ivory heart-fold at the root. h236,w230.
+5. Nearly half open. Roof layers unroll higher from the bud apex, gold chamber partially exposed, seed lower tipy392. Front heart slowly spreads and basal leaves begin fanning out from the root. h247,w250.
+6. Half open. Side petals visibly uncurled into broad continuous surfaces with reference's curl identity, seed tipy382, original sprout preserved. New rosette leaf folds remain partly rolled, no tall tendrils yet. h258,w277.
+7. Two-thirds open. Reference roof arch nearly extended, seed tipy374, heart front and rosette continue unfurling as connected surfaces. Tiny attached curled shoots begin from outer leaf tips. h269,w306.
+8. Nearly open. Reference anatomy complete, side curled shoots still only two-thirds height. Petal overlaps exactly like Input2, seed tipy368. h278,w326.
+9. Almost settled. Rosette and side shoots nearly full, lower center heart opens, seed tipy364. h284,w337.
+10. Very near final, a small last opening of basal leaf tips, keep roof and seed steady. h287,w342.
+11. Faithful near-exact Input2 pose with only the lowest leaves still slightly curled, correct roof, two ivory side curls, gold seed+two-leaf sprout, front heart and full leaf fan. h289,w345.
+12. Faithful copy of Input2 final, h289,w345, for calibration. Do not redesign it.
+Strong model consistency: The seed/sprout must remain the same original organ, smoothly moving up and becoming the final reference proportions; no large new seed suddenly appearing. Same petal shapes, creases, highlight placements and outline thickness across frames. Match Input2's detailed silhouette and leaf layout closely as it opens, not a generic alternate nest.
+Smooth ivory/cream, sage green shadows, dark teal contours, warm gold, exactly two sprout leaves. No fragmentation, extra bits, new isolated organs, double outlines, mesh or strip distortion, camera zoom, color flashes or fully sized parts popping into existence. True hand-painted intermediate folds, not dissolves or scaled copies.
