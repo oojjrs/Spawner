@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "key": "iron-ore",
+  "name": "철광석",
+  "motion": "철광석 원석은 고정하고 작은 철맥 접촉면만 약하게 빛났다 원래 광택으로 돌아온다.",
+  "source": "DesignAssets/ResourceConcepts/v1/resource-iron-ore.png",
+  "sheet": "sheet.png",
+  "preview": "preview.gif",
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "frameCount": 24,
+  "columns": 6,
+  "rows": 4,
+  "frameDurationMs": 100,
+  "durationMs": 2400,
+  "loop": true,
+  "pivot": [
+    128,
+    224
+  ],
+  "previewBackground": "#173a34",
+  "parts": [
+    "parts/fixed-base.png",
+    "parts/contact-a.png",
+    "parts/root-occluder.png"
+  ],
+  "loopRefresh": "pre와 post 구간마다 한 번 작게 반응한 뒤 크기 변화 없이 중립으로 복귀한다.",
+  "status": "실제 채집 성공 시점에 연결",
+  "runtimeIntegrated": true,
+  "runtime": {
+    "contactFrame": 5,
+    "settleFrame": 20,
+    "postSeconds": 0.6,
+    "loop": false,
+    "method": "harvest-sheet"
+  },
+  "sourceMethod": "온전한 원석 원화와 그 접촉면에서 분리한 국소 광택 레이어",
+  "fixedAnchors": [
+    [
+      71,
+      217
+    ],
+    [
+      72,
+      217
+    ],
+    [
+      73,
+      217
+    ],
+    [
+      74,
+      217
+    ],
+    [
+      75,
+      217
+    ],
+    [
+      76,
+      217
+    ],
+    [
+      77,
+      217
+    ],
+    [
+      78,
+      217
+    ],
+    [
+      79,
+      217
+    ],
+    [
+      80,
+      217
+    ],
+    [
+      81,
+      217
+    ],
+    [
+      82,
+      217
+    ]
+  ],
+  "runtimePreview": "runtime.gif"
+}

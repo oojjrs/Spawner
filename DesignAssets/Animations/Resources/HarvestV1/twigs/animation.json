@@ -1,0 +1,53 @@
+{
+  "key": "twigs",
+  "name": "나뭇가지",
+  "motion": "뒤쪽 가지 더미를 고정하고 앞쪽 Y자 가지 두 개가 각각 약 3도 반대 방향으로 눌렸다 중립으로 돌아온다.",
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "frameCount": 24,
+  "frameMs": 100,
+  "durationMs": 2400,
+  "columns": 6,
+  "rows": 4,
+  "pivot": [
+    128,
+    228
+  ],
+  "sheet": "sheet.png",
+  "preview": "preview.gif",
+  "source": "DesignAssets/ResourceConcepts/v1/resource-twigs.png",
+  "mode": "layered-parts",
+  "runtimeInstalled": true,
+  "fixedPixelMask": "parts/fixed-pixel-mask.png",
+  "runtimeIntegrated": true,
+  "runtime": {
+    "contactFrame": 4,
+    "settleFrame": 20,
+    "postSeconds": 0.6,
+    "loop": false,
+    "method": "harvest-sheet"
+  },
+  "sourceMethod": "built-in imagegen으로 고정 더미와 온전한 이동 조각 두 개의 숨은 면까지 다시 그린 source-parts atlas를 제작해 독립 레이어로 합성한다.",
+  "parts": [
+    "fixed-base",
+    "moving-a",
+    "moving-b"
+  ],
+  "fixedAnchors": [
+    [
+      194,
+      95
+    ],
+    [
+      65,
+      120
+    ],
+    [
+      35,
+      162
+    ]
+  ],
+  "loopRenewal": "준비 구간과 성공 후 구간 각각에서 작은 반응 후 중립으로 돌아온다. 추출·소멸·재생성은 없고 남은 프레임은 중립이다.",
+  "hiddenAreaRestoration": "source-parts-atlas.png의 각 물체는 가려진 뒷면과 바닥까지 온전하게 그려졌으며 픽셀 연장이나 복제 띠를 사용하지 않는다.",
+  "runtimePreview": "runtime.gif"
+}

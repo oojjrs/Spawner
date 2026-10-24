@@ -1,0 +1,32 @@
+{
+  "key": "seed-pods",
+  "name": "씨앗 꼬투리",
+  "motion": "왼쪽 꼬투리는 왼쪽 5도, 오른쪽 꼬투리는 오른쪽 5도 기울었다가 제자리로 돌아오기",
+  "source": "parts-atlas.png",
+  "frameSize": 256,
+  "frameCount": 24,
+  "frameMs": 100,
+  "columns": 6,
+  "durationMs": 2400,
+  "sheet": "sheet.png",
+  "preview": "preview.gif",
+  "parts": [
+    "shell-open-left",
+    "shell-closed-right",
+    "source"
+  ],
+  "fixedAnchors": [],
+  "status": "실제 채집 성공 시점에 연결",
+  "sourceMethod": "Built-in imagegen complete right pod including the formerly occluded flank; original left pod; five-degree outward rotations with fixed runtime size",
+  "runtimeIntegrated": true,
+  "runtime": {
+    "contactFrame": 8,
+    "settleFrame": 19,
+    "postSeconds": 0.6,
+    "loop": false,
+    "method": "harvest-sheet"
+  },
+  "runtimePreview": "runtime.gif",
+  "repairSource": "parts/shell-closed-right-repaint-source.png",
+  "repairPrompts": "repair-prompts.json"
+}

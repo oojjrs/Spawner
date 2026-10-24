@@ -1,0 +1,483 @@
+{
+  "tool": "built-in image_gen",
+  "description": "Production source parts and completed hidden faces for resource contact animations. Existing clean parts were reused where noted.",
+  "items": [
+    {
+      "key": "berry-bush",
+      "prompts": {
+        "tool": "built-in image_gen",
+        "prompt": "Production 2D game animation PARTS atlas, not a mockup or preview. Use the input sprite as the visual identity, palette, shape and hand-painted botanical fantasy game style reference. Produce a 1024x1024 square, genuinely transparent background, divided into an invisible 2x2 grid with 512x512 cells. Every requested component is isolated inside its cell, centered, no touching other cells, generous transparent margin, no labels, lines, shadows on the canvas, text or watermark. Every component must be a COMPLETE coherent object including its normally occluded back/side, with painted contours and continuous texture; no cropped bottoms, holes, pasted strips or smeared pixels. These components will actually be independently animated and composited, so hidden sides must be finished. Cell top-left: a complete upper raspberry-like red berry cluster with a short green petiole. Cell top-right: a complete left-lower red berry cluster with a short petiole, slightly wider than upper. Cell bottom-left: a complete right-lower red berry cluster with a short petiole. Each cluster is made of glossy red drupelets matching the reference and has its own clean rear contour. Cell bottom-right: the reference bush's green leafy stems and low leafy base, but with every red berry cluster removed; behind the berries show fully painted natural leaves and stem connections. Do not put berries into the base cell. Keep the same recognizable low leafy raspberry bush design.",
+        "referenceImages": [
+          "parts/reference-original.png"
+        ],
+        "generatedSource": "source-atlas-rummage.png",
+        "usedSourceCells": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "savedAssets": [
+        "berry-bush/sheet.png",
+        "berry-bush/source-atlas-rummage.png",
+        "berry-bush/parts/fixed-base.png",
+        "berry-bush/parts/left-cluster.png",
+        "berry-bush/parts/reference-original.png",
+        "berry-bush/parts/right-cluster.png",
+        "berry-bush/parts/source.png",
+        "berry-bush/parts/upper-cluster.png"
+      ]
+    },
+    {
+      "key": "root-bulbs",
+      "prompts": {
+        "tool": "built-in image_gen",
+        "prompt": "Production 2D game animation PARTS atlas, not a mockup or preview. Use the input sprite as the visual identity, palette, shape and hand-painted botanical fantasy game style reference. Produce a 1024x1024 square, genuinely transparent background, divided into an invisible 2x2 grid with 512x512 cells. Every requested component is isolated inside its cell, centered, no touching other cells, generous transparent margin, no labels, lines, shadows on the canvas, text or watermark. Every component must be a COMPLETE coherent object including its normally occluded back/side, with painted contours and continuous texture; no cropped bottoms, holes, pasted strips or smeared pixels. These components will actually be independently animated and composited, so hidden sides must be finished. Cell top-left: complete left rear cream-golden root bulb with green leaves, pointed wispy roots and a finished rounded side. Cell top-right: complete central front larger cream and pale-orange round bulb with green leaves and wispy roots. Cell bottom-left: complete right rear cream-golden bulb with green leaves and roots, its hidden left face fully painted. Cell bottom-right: empty and transparent. The three bulbs must match the source's onion-like round root vegetable identity and brushwork. Keep each bulb with its attached leaves and roots as one coherent part; no detached leaves, soil or extra props.",
+        "referenceImages": [
+          "parts/reference-original.png"
+        ],
+        "generatedSource": "source-atlas-rummage.png",
+        "usedSourceCells": [
+          0,
+          2
+        ]
+      },
+      "savedAssets": [
+        "root-bulbs/sheet.png",
+        "root-bulbs/source-atlas-rummage.png",
+        "root-bulbs/parts/front-bulb.png",
+        "root-bulbs/parts/left-bulb.png",
+        "root-bulbs/parts/reference-original.png",
+        "root-bulbs/parts/right-bulb.png",
+        "root-bulbs/parts/source.png"
+      ]
+    },
+    {
+      "key": "nutrient-moss",
+      "prompts": {
+        "tool": "built-in image_gen",
+        "prompt": "Production 2D game animation PARTS atlas, not a mockup or preview. Use the input sprite as the visual identity, palette, shape and hand-painted botanical fantasy game style reference. Produce a 1024x1024 square, genuinely transparent background, divided into an invisible 2x2 grid with 512x512 cells. Every requested component is isolated inside its cell, centered, no touching other cells, generous transparent margin, no labels, lines, shadows on the canvas, text or watermark. Every component must be a COMPLETE coherent object including its normally occluded back/side, with painted contours and continuous texture; no cropped bottoms, holes, pasted strips or smeared pixels. These components will actually be independently animated and composited, so hidden sides must be finished. Cell top-left: a low fixed dark-green moss bed, no amber globes, complete smooth mossy silhouette. Cell top-right: complete left tuft of bright yellow-green plump moss fronds with ONE small amber nutrient globule nestled within. Cell bottom-left: complete right tuft with ONE amber nutrient globule. Cell bottom-right: complete front tuft with ONE amber nutrient globule. Each tuft is a finished coherent rounded mound of small succulent-like moss fronds, all hidden side fronds fully drawn; no roots cut in half. Match the reference's dense living moss colors and fine warm highlights. These tufts will gently yield in different directions while the bed remains still.",
+        "referenceImages": [
+          "parts/reference-original.png"
+        ],
+        "generatedSource": "source-atlas-rummage.png",
+        "usedSourceCells": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "savedAssets": [
+        "nutrient-moss/sheet.png",
+        "nutrient-moss/source-atlas-rummage.png",
+        "nutrient-moss/parts/fixed-base.png",
+        "nutrient-moss/parts/front-tuft.png",
+        "nutrient-moss/parts/left-tuft.png",
+        "nutrient-moss/parts/reference-original.png",
+        "nutrient-moss/parts/right-tuft.png",
+        "nutrient-moss/parts/source.png"
+      ]
+    },
+    {
+      "key": "meat",
+      "prompts": {
+        "tool": "built-in image_gen",
+        "prompt": "Production 2D game animation PARTS atlas, not a mockup or preview. Use the input sprite as the visual identity, palette, shape and hand-painted botanical fantasy game style reference. Produce a 1024x1024 square, genuinely transparent background, divided into an invisible 2x2 grid with 512x512 cells. Every requested component is isolated inside its cell, centered, no touching other cells, generous transparent margin, no labels, lines, shadows on the canvas, text or watermark. Every component must be a COMPLETE coherent object including its normally occluded back/side, with painted contours and continuous texture; no cropped bottoms, holes, pasted strips or smeared pixels. These components will actually be independently animated and composited, so hidden sides must be finished. Cell top-left: the complete large rear raw red meat chunk from the reference, with its pale fat rim and finished hidden lower-right face. Cell top-right: the complete smaller front meat chunk from the reference, including the folded cut edge, pale fat rim and fully finished rear-facing surface. Cells bottom-left and bottom-right: empty and transparent. Exactly two coherent irregular meat chunks. Preserve the simple generic game-food meat appearance and warm hand-painted style. No carcass, animal body, bones, gore, knife or props.",
+        "referenceImages": [
+          "parts/reference-original.png"
+        ],
+        "generatedSource": "source-atlas-rummage.png",
+        "usedSourceCells": [
+          0,
+          1
+        ]
+      },
+      "savedAssets": [
+        "meat/sheet.png",
+        "meat/source-atlas-rummage.png",
+        "meat/parts/fixed-base.png",
+        "meat/parts/front-piece.png",
+        "meat/parts/reference-original.png",
+        "meat/parts/source.png"
+      ]
+    },
+    {
+      "key": "twigs",
+      "prompts": {
+        "key": "twigs",
+        "mode": "built-in imagegen source-parts atlas",
+        "reference": "DesignAssets/ResourceConcepts/v1/resource-twigs.png",
+        "prompt": "Use case: precise-object-edit. Production source layers for a 2D resource harvest animation, not a preview. Reference is the existing complete resource artwork. Match its hand-painted rounded natural fantasy game style, dark olive outlines, cream highlights, upper-left light, 3/4 view, material textures and subdued colors exactly. Create ONE wide transparent source-parts atlas with THREE well-separated equal-width columns. No dividers, text, numbers, labels, scene, tools, faces or tiled background. Each column contains just its specified complete asset, all at the SAME pixel scale. Every object must have a fully drawn silhouette and naturally painted hidden back/underside surfaces, never a clipped crescent, cloned stripe, stretched edge, black cut or ghost of an overlapping piece. Leave clear transparent gaps at 1/3 and 2/3 width. This bitmap is actually used to compose layered frames. LEFT: a compact back/base pile of three short Y-shaped brown twigs, with complete wood surfaces and cream broken ends; exclude the two front moving twigs. CENTER: one separate complete front Y-shaped twig, diagonal lower-left to upper-right, about 60% as wide as the base pile, with authentic intact bark grain all around. RIGHT: a second separate complete shorter Y-shaped twig, diagonal upper-left to lower-right, about 55% as wide as the base pile. Keep twig forms short and thick as in reference, not thin sticks.",
+        "transparent_background": true,
+        "usedFor": [
+          "fixed-base",
+          "moving-part-a",
+          "moving-part-b"
+        ]
+      },
+      "savedAssets": [
+        "twigs/sheet.png",
+        "twigs/parts/fixed-base.png",
+        "twigs/parts/fixed-pixel-mask.png",
+        "twigs/parts/moving-a.png",
+        "twigs/parts/moving-b.png",
+        "twigs/parts/shadow.png",
+        "twigs/parts/source-parts-atlas.png",
+        "twigs/parts/source.png"
+      ]
+    },
+    {
+      "key": "bark",
+      "prompts": {
+        "key": "bark",
+        "mode": "built-in imagegen source-parts atlas",
+        "reference": "DesignAssets/ResourceConcepts/v1/resource-bark.png",
+        "prompt": "Use case: precise-object-edit. Production source layers for a 2D resource harvest animation, not a preview. Reference is the existing complete resource artwork. Match its hand-painted rounded natural fantasy game style, dark olive outlines, cream highlights, upper-left light, 3/4 view, material textures and subdued colors exactly. Create ONE wide transparent source-parts atlas with THREE well-separated equal-width columns. No dividers, text, numbers, labels, scene, tools, faces or tiled background. Each column contains just its specified complete asset, all at the SAME pixel scale. Every object must have a fully drawn silhouette and naturally painted hidden back/underside surfaces, never a clipped crescent, cloned stripe, stretched edge, black cut or ghost of an overlapping piece. Leave clear transparent gaps at 1/3 and 2/3 width. This bitmap is actually used to compose layered frames. LEFT: a compact fixed back/base stack of two thick curved brown bark chunks with pale concave inner wood and ridged orange-brown exterior; no front moving curls. CENTER: a separate complete small curled exterior bark chunk facing left, about 55% as wide as the base stack, including its full rim, concave pale interior and dark underside. RIGHT: a second separate complete curled exterior bark chunk facing right, about 50% as wide as the base stack. These are full naturally drawn bark curls, not isolated cut strips or crescents.",
+        "transparent_background": true,
+        "usedFor": [
+          "fixed-base",
+          "moving-part-a",
+          "moving-part-b"
+        ]
+      },
+      "savedAssets": [
+        "bark/sheet.png",
+        "bark/parts/fixed-base.png",
+        "bark/parts/fixed-pixel-mask.png",
+        "bark/parts/moving-a.png",
+        "bark/parts/moving-b.png",
+        "bark/parts/shadow.png",
+        "bark/parts/source-parts-atlas.png",
+        "bark/parts/source.png"
+      ]
+    },
+    {
+      "key": "pebbles",
+      "prompts": {
+        "key": "pebbles",
+        "mode": "built-in imagegen source-parts atlas",
+        "reference": "DesignAssets/ResourceConcepts/v1/resource-pebbles.png",
+        "prompt": "Use case: precise-object-edit. Production source layers for a 2D resource harvest animation, not a preview. Reference is the existing complete resource artwork. Match its hand-painted rounded natural fantasy game style, dark olive outlines, cream highlights, upper-left light, 3/4 view, material textures and subdued colors exactly. Create ONE wide transparent source-parts atlas with THREE well-separated equal-width columns. No dividers, text, numbers, labels, scene, tools, faces or tiled background. Each column contains just its specified complete asset, all at the SAME pixel scale. Every object must have a fully drawn silhouette and naturally painted hidden back/underside surfaces, never a clipped crescent, cloned stripe, stretched edge, black cut or ghost of an overlapping piece. Leave clear transparent gaps at 1/3 and 2/3 width. This bitmap is actually used to compose layered frames. LEFT: fixed compact back/base pile of four round gray pebbles, naturally painted gray, cool slate shadows and cream upper-left reflections, full surfaces behind the absent two front stones. CENTER: one separate complete squat round gray front stone, 35% as wide as base pile, with full outline, softly mottled stone surface and intact bottom. RIGHT: a second separate complete low oval gray front stone, 40% as wide as base pile, with full outline and full bottom. Do not let fragments or crescents of other stones cling to the isolated stones.",
+        "transparent_background": true,
+        "usedFor": [
+          "fixed-base",
+          "moving-part-a",
+          "moving-part-b"
+        ]
+      },
+      "savedAssets": [
+        "pebbles/sheet.png",
+        "pebbles/parts/fixed-base.png",
+        "pebbles/parts/fixed-pixel-mask.png",
+        "pebbles/parts/moving-a.png",
+        "pebbles/parts/moving-b.png",
+        "pebbles/parts/shadow.png",
+        "pebbles/parts/source-parts-atlas.png",
+        "pebbles/parts/source.png"
+      ]
+    },
+    {
+      "key": "clay",
+      "prompts": {
+        "mode": "reuse existing source art",
+        "imagegen": false,
+        "source": "DesignAssets/ResourceConcepts/v1/resource-clay.png",
+        "method": "부드러운 국소 표면 레이어의 연속 좌표 변형만 사용하며 숨은 면이나 새로운 그림을 만들지 않는다."
+      },
+      "savedAssets": [
+        "clay/sheet.png",
+        "clay/parts/concept-original.png",
+        "clay/parts/fixed-base.png",
+        "clay/parts/fixed-pixel-mask.png",
+        "clay/parts/local-surface.png",
+        "clay/parts/shadow.png",
+        "clay/parts/source.png",
+        "clay/parts/surface-mask.png"
+      ]
+    },
+    {
+      "key": "sand",
+      "prompts": {
+        "mode": "reuse existing source art",
+        "imagegen": false,
+        "source": "DesignAssets/ResourceConcepts/v1/resource-sand.png",
+        "method": "부드러운 국소 표면 레이어의 연속 좌표 변형만 사용하며 숨은 면이나 새로운 그림을 만들지 않는다."
+      },
+      "savedAssets": [
+        "sand/sheet.png",
+        "sand/parts/concept-original.png",
+        "sand/parts/fixed-base.png",
+        "sand/parts/fixed-pixel-mask.png",
+        "sand/parts/local-surface.png",
+        "sand/parts/shadow.png",
+        "sand/parts/source.png",
+        "sand/parts/surface-mask.png"
+      ]
+    },
+    {
+      "key": "dry-leaves",
+      "prompts": {
+        "key": "dry-leaves",
+        "mode": "built-in imagegen source-parts atlas",
+        "reference": "DesignAssets/ResourceConcepts/v1/resource-dry-leaves.png",
+        "prompt": "Use case: precise-object-edit. Production source layers for a 2D resource harvest animation, not a preview. Reference is the existing complete resource artwork. Match its hand-painted rounded natural fantasy game style, dark olive outlines, cream highlights, upper-left light, 3/4 view, material textures and subdued colors exactly. Create ONE wide transparent source-parts atlas with THREE well-separated equal-width columns. No dividers, text, numbers, labels, scene, tools, faces or tiled background. Each column contains just its specified complete asset, all at the SAME pixel scale. Every object must have a fully drawn silhouette and naturally painted hidden back/underside surfaces, never a clipped crescent, cloned stripe, stretched edge, black cut or ghost of an overlapping piece. Leave clear transparent gaps at 1/3 and 2/3 width. This bitmap is actually used to compose layered frames. LEFT: compact fixed back/base pile of three dry leaves in gold ochre and burnt orange, same clear dark olive outline and natural veins as reference, full coherent leaves behind absent front leaves. CENTER: one separate complete small ochre oak-like front leaf with its full lobed edge, tip and stem, about 50% as wide as base pile, diagonal upper-right tip to lower-left stem. RIGHT: one separate complete smaller rusty brown front leaf with full edge and stem, about 50% as wide as base pile, tip toward upper-left and stem lower-right. No tiny floating scraps, extra leaf fragments or contours of neighboring leaves.",
+        "transparent_background": true,
+        "usedFor": [
+          "fixed-base",
+          "moving-part-a",
+          "moving-part-b"
+        ]
+      },
+      "savedAssets": [
+        "dry-leaves/sheet.png",
+        "dry-leaves/parts/fixed-base.png",
+        "dry-leaves/parts/fixed-pixel-mask.png",
+        "dry-leaves/parts/moving-a.png",
+        "dry-leaves/parts/moving-b.png",
+        "dry-leaves/parts/shadow.png",
+        "dry-leaves/parts/source-parts-atlas.png",
+        "dry-leaves/parts/source.png"
+      ]
+    },
+    {
+      "key": "grass-fiber",
+      "prompts": {
+        "key": "grass-fiber",
+        "sourceMethod": "기존의 온전한 독립 재질 파츠 재사용; 고정 원화 위 국소 반응",
+        "sources": [
+          "raw/original.png"
+        ],
+        "generation": []
+      },
+      "savedAssets": [
+        "grass-fiber/sheet.png",
+        "grass-fiber/parts/base.png",
+        "grass-fiber/parts/strand-a.png",
+        "grass-fiber/parts/strand-b.png",
+        "grass-fiber/raw/original.png"
+      ]
+    },
+    {
+      "key": "root-fiber",
+      "prompts": {
+        "key": "root-fiber",
+        "sourceMethod": "기존의 온전한 독립 재질 파츠 재사용; 고정 원화 위 국소 반응",
+        "sources": [
+          "raw/original.png"
+        ],
+        "generation": []
+      },
+      "savedAssets": [
+        "root-fiber/sheet.png",
+        "root-fiber/parts/base.png",
+        "root-fiber/parts/strand-a.png",
+        "root-fiber/parts/strand-b.png",
+        "root-fiber/raw/original.png"
+      ]
+    },
+    {
+      "key": "spider-silk",
+      "prompts": {
+        "key": "spider-silk",
+        "sourceMethod": "기존의 온전한 독립 재질 파츠 재사용; 고정 원화 위 국소 반응",
+        "sources": [
+          "raw/original.png"
+        ],
+        "generation": []
+      },
+      "savedAssets": [
+        "spider-silk/sheet.png",
+        "spider-silk/parts/base.png",
+        "spider-silk/parts/strand-a.png",
+        "spider-silk/parts/strand-b.png",
+        "spider-silk/raw/original.png"
+      ]
+    },
+    {
+      "key": "water",
+      "prompts": {
+        "key": "water",
+        "sourceMethod": "imagegen으로 가려진 고정 면을 복원한 production 베이스 + 기존 온전한 움직임 파츠",
+        "sources": [
+          "raw/original.png",
+          "raw/fixed-base.png"
+        ],
+        "generation": [
+          {
+            "tool": "built-in image_gen",
+            "prompt": "Use case: precise-object-edit.\nAsset type: ACTUAL production fixed base layer for a layered 2D game water-node animation, not a preview, contact sheet, sprite sheet, or display mockup.\nEdit the reference image very narrowly: REMOVE ONLY the SINGLE LARGEST water droplet in the FRONT LEFT of the leaf bowl, including its blue/white rim and cast reflection. Reconstruct the previously occluded green leaf surface completely, with the same hand-painted leaf shading, continuous curved veins, natural olive/sage color, and coherent bowl curvature. This repaired surface will be visible behind the separately animated large water drop. The two smaller water droplets on the RIGHT must remain exactly where they are with the same shapes and apparent sizes.\nPreserve all already-visible parts of the original broad leaf: exact outer silhouette, top curl, lower front lip, orientation, perspective, lighting, palette, object size, and composition. Do not cut or simplify the leaf, do not leave any flat-color patch, empty notch, cut contour, dark hole, duplicate edge, smeared texture or striped pixels. Hidden leaf is a real complete painted surface.\nSame high-resolution smooth botanical fantasy game illustration with fine dark teal outline and creamy highlights. Whole object centered on the same square canvas. Genuine transparent alpha outside the leaf. No added scenery, labels, shadows, tools, particles, or text.",
+            "source": "D:\\.codex\\generated_images\\01a1686b-c2b5-7eb3-98cf-2649e12368bd\\exec-a61e90b6-d0e6-4f81-b83f-d1271736825b.png",
+            "result": "raw/fixed-base.png"
+          }
+        ]
+      },
+      "savedAssets": [
+        "water/sheet.png",
+        "water/parts/base.png",
+        "water/parts/large-drop.png",
+        "water/raw/fixed-base.png",
+        "water/raw/original.png"
+      ]
+    },
+    {
+      "key": "tree-sap",
+      "prompts": {
+        "key": "tree-sap",
+        "sourceMethod": "imagegen으로 가려진 고정 면을 복원한 production 베이스 + 기존 온전한 움직임 파츠",
+        "sources": [
+          "raw/original.png",
+          "raw/fixed-base.png"
+        ],
+        "generation": [
+          {
+            "tool": "built-in image_gen",
+            "prompt": "Use case: precise-object-edit.\nAsset type: ACTUAL production fixed base layer for a layered 2D game tree-sap animation, not a preview, contact sheet, sprite sheet, or display mockup.\nEdit the reference very narrowly: REMOVE ONLY the SINGLE LARGE LONG DANGLING TEARDROP on the upper-right front face of the bark (the longest prominent hanging drop approximately halfway up). Leave the golden sap stream above its attachment, the smaller hanging teardrop lower-left, and the golden sap pool at the bottom exactly as the original. Completely paint in the bark that was hidden behind the removed hanging drop. Restore solid coherent overlapping wood ridges, grain, local brown shading and panel edges that naturally connect to the surrounding bark; no flat brown oval or vertical patch, no smearing, no duplicated stripes, no empty hole, no chopped outline. This restored bark will be visible behind the separately animated intact drop.\nPreserve the exact original outer bark silhouette, little leaves and moss, lighting, perspective, palette, object size and placement. The golden flow at the top must keep a small natural attachment point, not a new large droplet. Same detailed smooth botanical game illustration, fine dark teal contours, warm hand-painted wooden material. Same square composition, genuine transparent alpha outside. No added objects, tools, labels, text, background, frames, or watermarks.",
+            "source": "D:\\.codex\\generated_images\\01a1686b-c2b5-7eb3-98cf-2649e12368bd\\exec-5431c246-60b2-458e-818c-5705b32ecacb.png",
+            "result": "raw/fixed-base.png"
+          }
+        ]
+      },
+      "savedAssets": [
+        "tree-sap/sheet.png",
+        "tree-sap/parts/attached-drop.png",
+        "tree-sap/parts/base.png",
+        "tree-sap/raw/fixed-base.png",
+        "tree-sap/raw/original.png"
+      ]
+    },
+    {
+      "key": "leaf-mold",
+      "prompts": {
+        "key": "leaf-mold",
+        "sourceMethod": "기존의 온전한 독립 재질 파츠 재사용; 고정 원화 위 국소 반응",
+        "sources": [
+          "raw/original.png"
+        ],
+        "generation": []
+      },
+      "savedAssets": [
+        "leaf-mold/sheet.png",
+        "leaf-mold/parts/base.png",
+        "leaf-mold/parts/upper-crumb-a.png",
+        "leaf-mold/parts/upper-crumb-b.png",
+        "leaf-mold/raw/original.png"
+      ]
+    },
+    {
+      "key": "resin",
+      "prompts": {
+        "generator": "built-in image_gen",
+        "purpose": "실제 사용할 온전한 파츠와 가려진 면 원화",
+        "source": "H:\\Spawner\\DesignAssets\\ResourceConcepts\\v1\\resource-resin.png",
+        "prompt": "Use case: precise-object-edit. Create an actual production source-parts atlas for a layered 2D game sprite, using image 1 as exact material, palette and hand-painted style reference. This is NOT an animation sheet and NOT a preview. Draw a square transparent canvas divided conceptually into a clean 2 by 2 grid with no drawn grid lines. Each of the three requested source layers is fully contained in its own cell with ample transparent separation: top-left fixed complete base, top-right complete movable piece A, bottom-left complete movable piece B, bottom-right completely empty transparent. Do not add text, labels, frames, background, shadows outside the objects, numbers, watermarks or tools. Preserve the source's smooth warm cream highlights, even dark teal/olive contours, calm botanical fantasy illustration rendering, soft top-left light, and slightly overhead 3/4 perspective. Every individual piece must be a finished WHOLE object including all hidden/back/side edges, not a cropped visible fragment, not a clipped polygon, not an animation sequence, not alternate poses. The base must have a fully painted continuous intact underlying surface behind the removable pieces, no holes, no gaps, no empty silhouettes, no cut walls, no clone stripes or smeared texture. The parts will move only 1 to 4 degrees and return, so intact overlaps and a clean finished neutral appearance matter. Do not repeat the movable pieces on the fixed base. Keep object size and source design close to the reference. All cells genuine transparent alpha.\nSource image 1 is amber resin. TOP-LEFT: a compact complete fixed cluster of the large amber globule behind and the medium front-left globule, with the natural gold flowing resin tail retained; paint a continuous amber surface, leave out two small surface nodules. TOP-RIGHT: one complete small rounded amber resin surface nodule, warm honey-gold translucent chunky teardrop pebble, smooth cream glint, finished full sides and base. BOTTOM-LEFT: a second complete slightly different smaller rounded amber surface nodule, same resin material and light. The two nodules are separate coherent tiny chunky resin pieces intended to overlap the upper-right and lower-right surfaces of the base; not droplets falling, no flying scraps. Keep all three source layers clean and rounded.",
+        "transparent_background": true
+      },
+      "savedAssets": [
+        "resin/sheet.png",
+        "resin/parts/contact-a.png",
+        "resin/parts/contact-b.png",
+        "resin/parts/fixed-base.png",
+        "resin/parts/raw-production-parts.png",
+        "resin/parts/root-occluder.png",
+        "resin/parts/source-a.png",
+        "resin/parts/source-b.png",
+        "resin/parts/source-base.png"
+      ]
+    },
+    {
+      "key": "beeswax",
+      "prompts": {
+        "generator": "built-in image_gen",
+        "purpose": "실제 사용할 온전한 파츠와 가려진 면 원화",
+        "source": "H:\\Spawner\\DesignAssets\\ResourceConcepts\\v1\\resource-beeswax.png",
+        "prompt": "Use case: precise-object-edit. Create an actual production source-parts atlas for a layered 2D game sprite, using image 1 as exact material, palette and hand-painted style reference. This is NOT an animation sheet and NOT a preview. Draw a square transparent canvas divided conceptually into a clean 2 by 2 grid with no drawn grid lines. Each of the three requested source layers is fully contained in its own cell with ample transparent separation: top-left fixed complete base, top-right complete movable piece A, bottom-left complete movable piece B, bottom-right completely empty transparent. Do not add text, labels, frames, background, shadows outside the objects, numbers, watermarks or tools. Preserve the source's smooth warm cream highlights, even dark teal/olive contours, calm botanical fantasy illustration rendering, soft top-left light, and slightly overhead 3/4 perspective. Every individual piece must be a finished WHOLE object including all hidden/back/side edges, not a cropped visible fragment, not a clipped polygon, not an animation sequence, not alternate poses. The base must have a fully painted continuous intact underlying surface behind the removable pieces, no holes, no gaps, no empty silhouettes, no cut walls, no clone stripes or smeared texture. The parts will move only 1 to 4 degrees and return, so intact overlaps and a clean finished neutral appearance matter. Do not repeat the movable pieces on the fixed base. Keep object size and source design close to the reference. All cells genuine transparent alpha.\nSource image 1 is pale yellow beeswax honeycomb. TOP-LEFT: the complete thick honeycomb plate with its recognizable open empty hexagonal cells and lower small loose comb chunk; keep all hexagonal cell structure stable and fully intact. Do not cut out a cell. Paint intact complete wax beneath two outer flexible rim pieces. TOP-RIGHT: one small complete curved thick wax RIM FLAP, pale cream-yellow with a short rounded hexagonal edge segment, full thickness and finished underside, gently bent arc. BOTTOM-LEFT: a second small complete wax rim flap of slightly different curve, matching thick wax and soft lighting. These are tiny flexible edge lobes to overlap the upper-left and upper-right outer comb rim, never entire separate honeycombs and never holes. No honey, bees or sticky drips.",
+        "transparent_background": true
+      },
+      "savedAssets": [
+        "beeswax/sheet.png",
+        "beeswax/parts/contact-a.png",
+        "beeswax/parts/contact-b.png",
+        "beeswax/parts/fixed-base.png",
+        "beeswax/parts/raw-production-parts.png",
+        "beeswax/parts/root-occluder.png",
+        "beeswax/parts/source-a.png",
+        "beeswax/parts/source-b.png",
+        "beeswax/parts/source-base.png"
+      ]
+    },
+    {
+      "key": "carapace",
+      "prompts": {
+        "generator": "built-in image_gen",
+        "purpose": "실제 사용할 온전한 파츠와 가려진 면 원화",
+        "source": "H:\\Spawner\\DesignAssets\\ResourceConcepts\\v1\\resource-carapace.png",
+        "prompt": "Use case: precise-object-edit. Create an actual production source-parts atlas for a layered 2D game sprite, using image 1 as exact material, palette and hand-painted style reference. This is NOT an animation sheet and NOT a preview. Draw a square transparent canvas divided conceptually into a clean 2 by 2 grid with no drawn grid lines. Each of the three requested source layers is fully contained in its own cell with ample transparent separation: top-left fixed complete base, top-right complete movable piece A, bottom-left complete movable piece B, bottom-right completely empty transparent. Do not add text, labels, frames, background, shadows outside the objects, numbers, watermarks or tools. Preserve the source's smooth warm cream highlights, even dark teal/olive contours, calm botanical fantasy illustration rendering, soft top-left light, and slightly overhead 3/4 perspective. Every individual piece must be a finished WHOLE object including all hidden/back/side edges, not a cropped visible fragment, not a clipped polygon, not an animation sequence, not alternate poses. The base must have a fully painted continuous intact underlying surface behind the removable pieces, no holes, no gaps, no empty silhouettes, no cut walls, no clone stripes or smeared texture. The parts will move only 1 to 4 degrees and return, so intact overlaps and a clean finished neutral appearance matter. Do not repeat the movable pieces on the fixed base. Keep object size and source design close to the reference. All cells genuine transparent alpha.\nSource image 1 is empty teal-green carapace shell pieces. TOP-LEFT: keep a complete fixed pile of the large rear domed empty shell and lower rounded shell fragments, with all underlying shell curvature fully painted; omit two tiny overlapping external rim plates but keep their supporting surface complete. No cropped missing chunks or rectangular holes. TOP-RIGHT: one finished complete small curved teal shell rim plate, shield-like broad rounded triangle with a cream cut underside and dark teal outline, full back side and complete contour. BOTTOM-LEFT: a second finished small curved teal shell rim plate, slightly different rounded wedge, full back side and cream underside. Both external plates should look like coherent overlapping armor panels, not shredded bits. Material and angle must match the fixed main pile. No animal, body, legs, eyes or blood.",
+        "transparent_background": true
+      },
+      "savedAssets": [
+        "carapace/sheet.png",
+        "carapace/parts/contact-a.png",
+        "carapace/parts/contact-b.png",
+        "carapace/parts/fixed-base.png",
+        "carapace/parts/raw-production-parts.png",
+        "carapace/parts/root-occluder.png",
+        "carapace/parts/source-a.png",
+        "carapace/parts/source-b.png",
+        "carapace/parts/source-base.png"
+      ]
+    },
+    {
+      "key": "iron-ore",
+      "prompts": {
+        "generator": null,
+        "source": "before/iron-ore/original-resource.png",
+        "method": "온전한 원석을 재사용하고 원화 접촉면의 미세 광택만 강조한다.",
+        "imagegenUsed": false
+      },
+      "savedAssets": [
+        "iron-ore/sheet.png",
+        "iron-ore/parts/contact-a.png",
+        "iron-ore/parts/fixed-base.png",
+        "iron-ore/parts/root-occluder.png"
+      ]
+    },
+    {
+      "key": "copper-ore",
+      "prompts": {
+        "generator": null,
+        "source": "before/copper-ore/original-resource.png",
+        "method": "온전한 원석을 재사용하고 원화 접촉면의 미세 광택만 강조한다.",
+        "imagegenUsed": false
+      },
+      "savedAssets": [
+        "copper-ore/sheet.png",
+        "copper-ore/parts/contact-a.png",
+        "copper-ore/parts/fixed-base.png",
+        "copper-ore/parts/root-occluder.png"
+      ]
+    },
+    {
+      "key": "quartz",
+      "prompts": {
+        "generator": "built-in image_gen",
+        "purpose": "실제 사용할 온전한 파츠와 가려진 면 원화",
+        "source": "H:\\Spawner\\DesignAssets\\ResourceConcepts\\v1\\resource-quartz.png",
+        "prompt": "Use case: precise-object-edit. Create an actual production source-parts atlas for a layered 2D game sprite, using image 1 as exact material, palette and hand-painted style reference. This is NOT an animation sheet and NOT a preview. Draw a square transparent canvas divided conceptually into a clean 2 by 2 grid with no drawn grid lines. Each of the three requested source layers is fully contained in its own cell with ample transparent separation: top-left fixed complete base, top-right complete movable piece A, bottom-left complete movable piece B, bottom-right completely empty transparent. Do not add text, labels, frames, background, shadows outside the objects, numbers, watermarks or tools. Preserve the source's smooth warm cream highlights, even dark teal/olive contours, calm botanical fantasy illustration rendering, soft top-left light, and slightly overhead 3/4 perspective. Every individual piece must be a finished WHOLE object including all hidden/back/side edges, not a cropped visible fragment, not a clipped polygon, not an animation sequence, not alternate poses. The base must have a fully painted continuous intact underlying surface behind the removable pieces, no holes, no gaps, no empty silhouettes, no cut walls, no clone stripes or smeared texture. The parts will move only 1 to 4 degrees and return, so intact overlaps and a clean finished neutral appearance matter. Do not repeat the movable pieces on the fixed base. Keep object size and source design close to the reference. All cells genuine transparent alpha.\nSource image 1 is a milky white pale aqua quartz crystal cluster. TOP-LEFT: a complete fixed source layer containing ONLY the main tall rear quartz prism and its entire low pale stony crystal foot/base. Paint the main crystal faces and complete base behind two smaller prisms so there are no holes or missing surfaces. Leave out the left leaning prism and the small front prism. TOP-RIGHT: a complete separate smaller quartz crystal prism for the left side, milky-white translucent pale-aqua hexagonal column with a softly pointed tip, full uncut lower root and all hidden sides, naturally slightly leaning left. BOTTOM-LEFT: a second complete separate short front quartz prism, same milky pale-aqua hexagonal material and softly pointed tip, full root and complete hidden sides. The small prisms will pivot only one or two degrees about their roots and return while still attached. No purple gems, no glitter cloud, no glow, no cropped bases.",
+        "transparent_background": true
+      },
+      "savedAssets": [
+        "quartz/sheet.png",
+        "quartz/parts/contact-a.png",
+        "quartz/parts/contact-b.png",
+        "quartz/parts/fixed-base.png",
+        "quartz/parts/raw-production-parts.png",
+        "quartz/parts/root-occluder.png",
+        "quartz/parts/source-a.png",
+        "quartz/parts/source-b.png",
+        "quartz/parts/source-base.png"
+      ]
+    }
+  ]
+}

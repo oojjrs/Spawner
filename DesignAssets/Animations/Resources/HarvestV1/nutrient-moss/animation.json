@@ -1,0 +1,129 @@
+{
+  "key": "nutrient-moss",
+  "name": "영양 이끼",
+  "motion": "이끼 술의 내부 표면이 서로 다른 시점에 작게 눌렸다 복귀한다.",
+  "source": "DesignAssets/FoodConcepts/v1/food-nutrient-moss.png",
+  "frameSize": 256,
+  "frameCount": 24,
+  "frameMs": 100,
+  "columns": 6,
+  "durationMs": 2400,
+  "sheet": "sheet.png",
+  "preview": "preview.gif",
+  "parts": [
+    "parts/style-fixed-base.png",
+    "parts/style-contact-01.png",
+    "parts/style-contact-02.png",
+    "parts/style-contact-03.png"
+  ],
+  "fixedAnchors": [
+    [
+      127,
+      221
+    ],
+    [
+      128,
+      221
+    ],
+    [
+      129,
+      221
+    ],
+    [
+      130,
+      221
+    ],
+    [
+      131,
+      221
+    ],
+    [
+      132,
+      221
+    ],
+    [
+      133,
+      221
+    ],
+    [
+      134,
+      221
+    ],
+    [
+      135,
+      221
+    ],
+    [
+      136,
+      221
+    ],
+    [
+      137,
+      221
+    ],
+    [
+      126,
+      222
+    ],
+    [
+      127,
+      222
+    ],
+    [
+      128,
+      222
+    ],
+    [
+      129,
+      222
+    ],
+    [
+      134,
+      222
+    ]
+  ],
+  "status": "실제 채집 성공 시점에 연결",
+  "sourceMethod": "승인한 단순화 원화를 고정 베이스와 부드러운 내부 표면 레이어로 분리하고, 외곽과 지면을 고정한 국소 접촉 반응을 합성한다.",
+  "runtimeIntegrated": true,
+  "runtime": {
+    "contactFrame": 8,
+    "settleFrame": 19,
+    "postSeconds": 0.6,
+    "loop": false,
+    "method": "harvest-sheet"
+  },
+  "runtimePreview": "runtime.gif",
+  "approvedStyleSource": "DesignAssets/ResourceStyleStudies/v1/food-nutrient-moss.png",
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "rows": 4,
+  "pivot": [
+    128,
+    224
+  ],
+  "fixedParts": [
+    "parts/style-fixed-base.png"
+  ],
+  "movingParts": [
+    "parts/style-contact-01.png",
+    "parts/style-contact-02.png",
+    "parts/style-contact-03.png"
+  ],
+  "fixedPixelMask": "parts/style-fixed-pixel-mask.png",
+  "fixedGroundRegion": [
+    0,
+    212,
+    256,
+    44
+  ],
+  "neutralFrames": [
+    0,
+    7,
+    8,
+    19,
+    21,
+    22,
+    23
+  ],
+  "hiddenAreaRestoration": "외곽 알파와 지면을 고정하고 외곽에서 떨어진 내부 면에서만 연속 좌표로 반응하므로 숨은 면을 노출하지 않는다."
+}

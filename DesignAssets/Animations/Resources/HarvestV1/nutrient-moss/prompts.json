@@ -1,0 +1,14 @@
+{
+  "tool": "built-in image_gen",
+  "prompt": "Production 2D game animation PARTS atlas, not a mockup or preview. Use the input sprite as the visual identity, palette, shape and hand-painted botanical fantasy game style reference. Produce a 1024x1024 square, genuinely transparent background, divided into an invisible 2x2 grid with 512x512 cells. Every requested component is isolated inside its cell, centered, no touching other cells, generous transparent margin, no labels, lines, shadows on the canvas, text or watermark. Every component must be a COMPLETE coherent object including its normally occluded back/side, with painted contours and continuous texture; no cropped bottoms, holes, pasted strips or smeared pixels. These components will actually be independently animated and composited, so hidden sides must be finished. Cell top-left: a low fixed dark-green moss bed, no amber globes, complete smooth mossy silhouette. Cell top-right: complete left tuft of bright yellow-green plump moss fronds with ONE small amber nutrient globule nestled within. Cell bottom-left: complete right tuft with ONE amber nutrient globule. Cell bottom-right: complete front tuft with ONE amber nutrient globule. Each tuft is a finished coherent rounded mound of small succulent-like moss fronds, all hidden side fronds fully drawn; no roots cut in half. Match the reference's dense living moss colors and fine warm highlights. These tufts will gently yield in different directions while the bed remains still.",
+  "referenceImages": [
+    "parts/reference-original.png"
+  ],
+  "generatedSource": "source-atlas-rummage.png",
+  "usedSourceCells": [
+    0,
+    1,
+    2,
+    3
+  ]
+}

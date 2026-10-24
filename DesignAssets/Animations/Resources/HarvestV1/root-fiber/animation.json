@@ -1,0 +1,61 @@
+{
+  "key": "root-fiber",
+  "name": "뿌리섬유",
+  "motion": "고정된 뿌리 더미 위의 두 잔뿌리 파츠가 짧게 당겨졌다 풀린다. 가닥이 떨어지거나 사라지지 않는다.",
+  "source": "DesignAssets/ResourceConcepts/v1/resource-root-fiber.png",
+  "frameSize": 256,
+  "frameCount": 24,
+  "frameMs": 100,
+  "durationMs": 2400,
+  "columns": 6,
+  "rows": 4,
+  "sheet": "sheet.png",
+  "preview": "preview.gif",
+  "previewBackground": "#173a34",
+  "loop": true,
+  "anchor": [
+    128,
+    224
+  ],
+  "parts": [
+    "parts/base.png",
+    "parts/strand-a.png",
+    "parts/strand-b.png"
+  ],
+  "fixedParts": [
+    "parts/base.png"
+  ],
+  "runtimeIntegrated": true,
+  "runtime": {
+    "contactFrame": 7,
+    "settleFrame": 20,
+    "postSeconds": 0.6,
+    "loop": false,
+    "method": "harvest-sheet"
+  },
+  "sourceMethod": "기존 온전한 독립 재질 파츠와 고정 원화를 재사용한 국소 반응",
+  "movingParts": [
+    "parts/strand-a.png",
+    "parts/strand-b.png"
+  ],
+  "fixedAnchors": [
+    {
+      "part": "parts/base.png",
+      "role": "고정된 원화와 지면",
+      "position": [
+        128,
+        224
+      ]
+    }
+  ],
+  "neutralFrames": [
+    0,
+    6,
+    7,
+    20,
+    21,
+    22,
+    23
+  ],
+  "runtimePreview": "runtime.gif"
+}

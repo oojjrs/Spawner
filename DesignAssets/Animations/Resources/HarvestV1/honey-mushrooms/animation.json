@@ -1,0 +1,129 @@
+{
+  "key": "honey-mushrooms",
+  "name": "꿀버섯 무리",
+  "motion": "버섯 갓의 내부 면이 작게 눌렸다가 복귀하며 외곽과 밑동은 고정한다.",
+  "source": "DesignAssets/FoodConcepts/v1/food-honey-mushrooms.png",
+  "frameSize": 256,
+  "frameCount": 24,
+  "frameMs": 100,
+  "columns": 6,
+  "durationMs": 2400,
+  "sheet": "sheet.png",
+  "preview": "preview.gif",
+  "parts": [
+    "parts/style-fixed-base.png",
+    "parts/style-contact-01.png",
+    "parts/style-contact-02.png",
+    "parts/style-contact-03.png"
+  ],
+  "fixedAnchors": [
+    [
+      197,
+      221
+    ],
+    [
+      198,
+      221
+    ],
+    [
+      199,
+      221
+    ],
+    [
+      200,
+      221
+    ],
+    [
+      201,
+      221
+    ],
+    [
+      202,
+      221
+    ],
+    [
+      203,
+      221
+    ],
+    [
+      194,
+      222
+    ],
+    [
+      195,
+      222
+    ],
+    [
+      196,
+      222
+    ],
+    [
+      197,
+      222
+    ],
+    [
+      198,
+      222
+    ],
+    [
+      199,
+      222
+    ],
+    [
+      200,
+      222
+    ],
+    [
+      201,
+      222
+    ],
+    [
+      202,
+      222
+    ]
+  ],
+  "status": "실제 채집 성공 시점에 연결",
+  "runtimeIntegrated": true,
+  "runtime": {
+    "contactFrame": 8,
+    "settleFrame": 20,
+    "postSeconds": 0.6,
+    "loop": false,
+    "method": "harvest-sheet"
+  },
+  "approvedStyleSource": "DesignAssets/ResourceStyleStudies/v1/food-honey-mushrooms.png",
+  "sourceMethod": "승인한 단순화 원화를 고정 베이스와 부드러운 내부 표면 레이어로 분리하고, 외곽과 지면을 고정한 국소 접촉 반응을 합성한다.",
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "rows": 4,
+  "pivot": [
+    128,
+    224
+  ],
+  "fixedParts": [
+    "parts/style-fixed-base.png"
+  ],
+  "movingParts": [
+    "parts/style-contact-01.png",
+    "parts/style-contact-02.png",
+    "parts/style-contact-03.png"
+  ],
+  "fixedPixelMask": "parts/style-fixed-pixel-mask.png",
+  "fixedGroundRegion": [
+    0,
+    212,
+    256,
+    44
+  ],
+  "neutralFrames": [
+    0,
+    7,
+    8,
+    20,
+    21,
+    22,
+    23
+  ],
+  "hiddenAreaRestoration": "외곽 알파와 지면을 고정하고 외곽에서 떨어진 내부 면에서만 연속 좌표로 반응하므로 숨은 면을 노출하지 않는다.",
+  "runtimePreview": "runtime.gif"
+}

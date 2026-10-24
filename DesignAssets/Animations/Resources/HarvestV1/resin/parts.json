@@ -1,0 +1,54 @@
+{
+  "name": "수지",
+  "motion": "고정된 수지 덩어리에서 오른쪽 가장자리 조각을 짧게 늘여 뜯어낸다.",
+  "polygons": [
+    [
+      [
+        208,
+        145
+      ],
+      [
+        216,
+        151
+      ],
+      [
+        218,
+        160
+      ],
+      [
+        214,
+        170
+      ],
+      [
+        206,
+        174
+      ],
+      [
+        204,
+        165
+      ],
+      [
+        207,
+        156
+      ]
+    ]
+  ],
+  "pivot": [
+    205,
+    160
+  ],
+  "travel": [
+    17,
+    -15
+  ],
+  "angle": -17,
+  "key": "resin",
+  "fragments": [
+    "moving-fragment.png"
+  ],
+  "frameSize": [
+    256,
+    256
+  ],
+  "source": "DesignAssets/ResourceConcepts/v1/resource-resin.png"
+}

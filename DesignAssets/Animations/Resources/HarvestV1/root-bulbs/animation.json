@@ -1,0 +1,31 @@
+{
+  "key": "root-bulbs",
+  "name": "뿌리 구근",
+  "motion": "구근 세 덩이가 뿌리 아래쪽을 축으로 번갈아 들썩였다가 돌아오기",
+  "source": "source-atlas-rummage.png",
+  "frameSize": 256,
+  "frameCount": 24,
+  "frameMs": 100,
+  "columns": 6,
+  "durationMs": 2400,
+  "sheet": "sheet.png",
+  "preview": "preview.gif",
+  "parts": [
+    "left-bulb",
+    "right-bulb",
+    "front-bulb",
+    "source"
+  ],
+  "fixedAnchors": [],
+  "status": "실제 채집 성공 시점에 연결",
+  "sourceMethod": "Built-in imagegen complete independent parts; bounded material-specific contact reaction and return, no part removal",
+  "runtimeIntegrated": true,
+  "runtime": {
+    "contactFrame": 8,
+    "settleFrame": 19,
+    "postSeconds": 0.6,
+    "loop": false,
+    "method": "harvest-sheet"
+  },
+  "runtimePreview": "runtime.gif"
+}

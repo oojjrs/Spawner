@@ -1,0 +1,75 @@
+{
+  "key": "spider-silk",
+  "name": "거미줄",
+  "motion": "실의 부착점은 고정하고 주변 실과 작은 고리만 2~3픽셀 안에서 국소적으로 긴장했다 풀린다.",
+  "source": "DesignAssets/ResourceConcepts/v1/resource-spider-silk.png",
+  "frameSize": 256,
+  "frameCount": 24,
+  "frameMs": 100,
+  "durationMs": 2400,
+  "columns": 6,
+  "rows": 4,
+  "sheet": "sheet.png",
+  "preview": "preview.gif",
+  "previewBackground": "#173a34",
+  "loop": true,
+  "anchor": [
+    128,
+    224
+  ],
+  "parts": [
+    "parts/base.png",
+    "parts/strand-a.png",
+    "parts/strand-b.png"
+  ],
+  "fixedParts": [
+    "parts/base.png"
+  ],
+  "runtimeIntegrated": true,
+  "runtime": {
+    "contactFrame": 7,
+    "settleFrame": 20,
+    "postSeconds": 0.6,
+    "loop": false,
+    "method": "harvest-sheet"
+  },
+  "sourceMethod": "기존 온전한 독립 재질 파츠와 고정 원화를 재사용한 국소 반응",
+  "movingParts": [
+    "parts/strand-a.png",
+    "parts/strand-b.png"
+  ],
+  "fixedAnchors": [
+    {
+      "part": "parts/base.png",
+      "role": "고정된 원화와 지면",
+      "position": [
+        128,
+        224
+      ]
+    },
+    {
+      "part": "parts/strand-a.png",
+      "position": [
+        132,
+        132
+      ]
+    },
+    {
+      "part": "parts/strand-b.png",
+      "position": [
+        163,
+        86
+      ]
+    }
+  ],
+  "neutralFrames": [
+    0,
+    6,
+    7,
+    20,
+    21,
+    22,
+    23
+  ],
+  "runtimePreview": "runtime.gif"
+}

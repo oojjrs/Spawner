@@ -1,0 +1,11 @@
+{
+  "tool": "built-in image_gen",
+  "intent": "Repair the hidden left flank of the right seed pod",
+  "prompt": "Use case: precise-object-edit. Production game animation source-layer repair, not a preview.\nImage 1 is the EDIT TARGET: an isolated pale olive-green seed pod on a 1024x1024 transparent animation canvas. Its lower-left side is currently damaged: it has horizontal stretched pixel bands and an abruptly clipped diagonal outline where another pod used to cover it.\nImage 2 is a CONTEXT REFERENCE of the original two-pod illustration. Only reconstruct the closed pod from the RIGHT of that reference. Do not include the open left pod or its yellow seeds.\nRepair the missing lower-left flank of the closed right pod as a complete, organic, rounded seed-pod surface. Draw real continuous softly shaded parchment-like green shell panels and curved longitudinal veins that join the existing raised veins, with the same fine warm outline and painterly botanical game-sprite style. Remove every horizontal smear, scanline, repeated band, hard diagonal cut and pixel extrusion from the damaged left flank. Complete the organic hidden silhouette.\nPreserve the existing upper tip, top/right silhouette, pale cream highlights, main veins, orientation, proportions and lighting as closely as possible. Do NOT rotate, recenter, enlarge or redesign the pod. Keep the same 1024x1024 canvas and registration: upper tip near (832,280), rightmost body near (916,560), lower end near (716,788); the pod stays on the right side of the canvas with empty space to its left. This image is an animation layer and alignment matters.\nOutput one single complete closed seed pod, genuinely transparent background, no cast ground shadow, no text, labels, frame, extra pod, loose seeds or background.",
+  "referenceImages": [
+    "parts/shell-closed-right-repair-reference.png",
+    "parts/shell-closed-right-repair-context.png"
+  ],
+  "generatedSource": "parts/shell-closed-right-repaint-source.png",
+  "method": "Complete painted right-pod layer, registered to the original; left pod, five-degree movement and fixed runtime size preserved."
+}

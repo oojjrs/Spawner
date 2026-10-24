@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "key": "carapace",
+  "name": "갑각",
+  "motion": "큰 등딱지는 고정하고 숨은 면까지 온전한 외곽 갑각판 두 개가 3~4도 벌어졌다가 닫힌다.",
+  "source": "DesignAssets/ResourceConcepts/v1/resource-carapace.png",
+  "sheet": "sheet.png",
+  "preview": "preview.gif",
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "frameCount": 24,
+  "columns": 6,
+  "rows": 4,
+  "frameDurationMs": 100,
+  "durationMs": 2400,
+  "loop": true,
+  "pivot": [
+    128,
+    224
+  ],
+  "previewBackground": "#173a34",
+  "parts": [
+    "parts/fixed-base.png",
+    "parts/contact-a.png",
+    "parts/contact-b.png",
+    "parts/root-occluder.png"
+  ],
+  "loopRefresh": "pre와 post 구간마다 한 번 작게 반응한 뒤 크기 변화 없이 중립으로 복귀한다.",
+  "status": "실제 채집 성공 시점에 연결",
+  "runtimeIntegrated": true,
+  "runtime": {
+    "contactFrame": 5,
+    "settleFrame": 20,
+    "postSeconds": 0.6,
+    "loop": false,
+    "method": "harvest-sheet"
+  },
+  "sourceMethod": "온전한 고정 베이스와 독립 파츠 원화를 imagegen으로 제작하여 실제 사용",
+  "fixedAnchors": [
+    [
+      174,
+      217
+    ],
+    [
+      175,
+      217
+    ],
+    [
+      176,
+      217
+    ],
+    [
+      177,
+      217
+    ],
+    [
+      178,
+      217
+    ],
+    [
+      179,
+      217
+    ],
+    [
+      180,
+      217
+    ],
+    [
+      181,
+      217
+    ],
+    [
+      182,
+      217
+    ],
+    [
+      183,
+      217
+    ],
+    [
+      184,
+      217
+    ],
+    [
+      185,
+      217
+    ]
+  ],
+  "runtimePreview": "runtime.gif"
+}

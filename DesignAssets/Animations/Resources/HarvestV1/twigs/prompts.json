@@ -1,0 +1,12 @@
+{
+  "key": "twigs",
+  "mode": "built-in imagegen source-parts atlas",
+  "reference": "DesignAssets/ResourceConcepts/v1/resource-twigs.png",
+  "prompt": "Use case: precise-object-edit. Production source layers for a 2D resource harvest animation, not a preview. Reference is the existing complete resource artwork. Match its hand-painted rounded natural fantasy game style, dark olive outlines, cream highlights, upper-left light, 3/4 view, material textures and subdued colors exactly. Create ONE wide transparent source-parts atlas with THREE well-separated equal-width columns. No dividers, text, numbers, labels, scene, tools, faces or tiled background. Each column contains just its specified complete asset, all at the SAME pixel scale. Every object must have a fully drawn silhouette and naturally painted hidden back/underside surfaces, never a clipped crescent, cloned stripe, stretched edge, black cut or ghost of an overlapping piece. Leave clear transparent gaps at 1/3 and 2/3 width. This bitmap is actually used to compose layered frames. LEFT: a compact back/base pile of three short Y-shaped brown twigs, with complete wood surfaces and cream broken ends; exclude the two front moving twigs. CENTER: one separate complete front Y-shaped twig, diagonal lower-left to upper-right, about 60% as wide as the base pile, with authentic intact bark grain all around. RIGHT: a second separate complete shorter Y-shaped twig, diagonal upper-left to lower-right, about 55% as wide as the base pile. Keep twig forms short and thick as in reference, not thin sticks.",
+  "transparent_background": true,
+  "usedFor": [
+    "fixed-base",
+    "moving-part-a",
+    "moving-part-b"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "key": "pebbles",
+  "mode": "built-in imagegen source-parts atlas",
+  "reference": "DesignAssets/ResourceConcepts/v1/resource-pebbles.png",
+  "prompt": "Use case: precise-object-edit. Production source layers for a 2D resource harvest animation, not a preview. Reference is the existing complete resource artwork. Match its hand-painted rounded natural fantasy game style, dark olive outlines, cream highlights, upper-left light, 3/4 view, material textures and subdued colors exactly. Create ONE wide transparent source-parts atlas with THREE well-separated equal-width columns. No dividers, text, numbers, labels, scene, tools, faces or tiled background. Each column contains just its specified complete asset, all at the SAME pixel scale. Every object must have a fully drawn silhouette and naturally painted hidden back/underside surfaces, never a clipped crescent, cloned stripe, stretched edge, black cut or ghost of an overlapping piece. Leave clear transparent gaps at 1/3 and 2/3 width. This bitmap is actually used to compose layered frames. LEFT: fixed compact back/base pile of four round gray pebbles, naturally painted gray, cool slate shadows and cream upper-left reflections, full surfaces behind the absent two front stones. CENTER: one separate complete squat round gray front stone, 35% as wide as base pile, with full outline, softly mottled stone surface and intact bottom. RIGHT: a second separate complete low oval gray front stone, 40% as wide as base pile, with full outline and full bottom. Do not let fragments or crescents of other stones cling to the isolated stones.",
+  "transparent_background": true,
+  "usedFor": [
+    "fixed-base",
+    "moving-part-a",
+    "moving-part-b"
+  ]
+}

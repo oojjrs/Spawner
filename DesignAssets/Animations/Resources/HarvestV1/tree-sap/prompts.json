@@ -1,0 +1,16 @@
+{
+  "key": "tree-sap",
+  "sourceMethod": "imagegen으로 가려진 고정 면을 복원한 production 베이스 + 기존 온전한 움직임 파츠",
+  "sources": [
+    "raw/original.png",
+    "raw/fixed-base.png"
+  ],
+  "generation": [
+    {
+      "tool": "built-in image_gen",
+      "prompt": "Use case: precise-object-edit.\nAsset type: ACTUAL production fixed base layer for a layered 2D game tree-sap animation, not a preview, contact sheet, sprite sheet, or display mockup.\nEdit the reference very narrowly: REMOVE ONLY the SINGLE LARGE LONG DANGLING TEARDROP on the upper-right front face of the bark (the longest prominent hanging drop approximately halfway up). Leave the golden sap stream above its attachment, the smaller hanging teardrop lower-left, and the golden sap pool at the bottom exactly as the original. Completely paint in the bark that was hidden behind the removed hanging drop. Restore solid coherent overlapping wood ridges, grain, local brown shading and panel edges that naturally connect to the surrounding bark; no flat brown oval or vertical patch, no smearing, no duplicated stripes, no empty hole, no chopped outline. This restored bark will be visible behind the separately animated intact drop.\nPreserve the exact original outer bark silhouette, little leaves and moss, lighting, perspective, palette, object size and placement. The golden flow at the top must keep a small natural attachment point, not a new large droplet. Same detailed smooth botanical game illustration, fine dark teal contours, warm hand-painted wooden material. Same square composition, genuine transparent alpha outside. No added objects, tools, labels, text, background, frames, or watermarks.",
+      "source": "D:\\.codex\\generated_images\\01a1686b-c2b5-7eb3-98cf-2649e12368bd\\exec-5431c246-60b2-458e-818c-5705b32ecacb.png",
+      "result": "raw/fixed-base.png"
+    }
+  ]
+}

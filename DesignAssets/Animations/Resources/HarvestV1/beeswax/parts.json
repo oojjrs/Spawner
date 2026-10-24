@@ -1,0 +1,54 @@
+{
+  "name": "밀랍",
+  "motion": "고정된 벌집의 오른쪽 가장자리 밀랍 조각을 기울여 분리한다.",
+  "polygons": [
+    [
+      [
+        212,
+        104
+      ],
+      [
+        220,
+        109
+      ],
+      [
+        224,
+        119
+      ],
+      [
+        220,
+        132
+      ],
+      [
+        211,
+        137
+      ],
+      [
+        207,
+        131
+      ],
+      [
+        212,
+        119
+      ]
+    ]
+  ],
+  "pivot": [
+    209,
+    120
+  ],
+  "travel": [
+    16,
+    -12
+  ],
+  "angle": 18,
+  "key": "beeswax",
+  "fragments": [
+    "moving-fragment.png"
+  ],
+  "frameSize": [
+    256,
+    256
+  ],
+  "source": "DesignAssets/ResourceConcepts/v1/resource-beeswax.png"
+}

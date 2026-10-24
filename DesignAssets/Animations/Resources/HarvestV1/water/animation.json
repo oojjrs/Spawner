@@ -1,0 +1,59 @@
+{
+  "key": "water",
+  "name": "물",
+  "motion": "잎과 수위와 물방울 크기는 유지하고 큰 물방울만 작게 출렁이며 주변에 국소 잔물결이 생겼다 잦아든다.",
+  "source": "DesignAssets/ResourceConcepts/v1/resource-water.png",
+  "frameSize": 256,
+  "frameCount": 24,
+  "frameMs": 100,
+  "durationMs": 2400,
+  "columns": 6,
+  "rows": 4,
+  "sheet": "sheet.png",
+  "preview": "preview.gif",
+  "previewBackground": "#173a34",
+  "loop": true,
+  "anchor": [
+    128,
+    224
+  ],
+  "parts": [
+    "parts/base.png",
+    "parts/large-drop.png"
+  ],
+  "fixedParts": [
+    "parts/base.png"
+  ],
+  "runtimeIntegrated": true,
+  "runtime": {
+    "contactFrame": 5,
+    "settleFrame": 20,
+    "postSeconds": 0.6,
+    "loop": false,
+    "method": "harvest-sheet"
+  },
+  "sourceMethod": "생산용 숨은 면을 imagegen으로 완전히 복원하고 독립 원화 파츠만 국소 반응",
+  "movingParts": [
+    "parts/large-drop.png"
+  ],
+  "fixedAnchors": [
+    {
+      "part": "parts/base.png",
+      "role": "고정된 원화와 지면",
+      "position": [
+        128,
+        224
+      ]
+    }
+  ],
+  "neutralFrames": [
+    0,
+    4,
+    5,
+    20,
+    21,
+    22,
+    23
+  ],
+  "runtimePreview": "runtime.gif"
+}

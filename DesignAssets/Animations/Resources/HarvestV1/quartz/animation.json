@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "key": "quartz",
+  "name": "수정",
+  "motion": "밑동과 큰 결정은 고정하고 작은 두 결정 기둥이 1~2도 접촉 반응한 뒤 약한 광택과 함께 돌아온다.",
+  "source": "DesignAssets/ResourceConcepts/v1/resource-quartz.png",
+  "sheet": "sheet.png",
+  "preview": "preview.gif",
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "frameCount": 24,
+  "columns": 6,
+  "rows": 4,
+  "frameDurationMs": 100,
+  "durationMs": 2400,
+  "loop": true,
+  "pivot": [
+    128,
+    224
+  ],
+  "previewBackground": "#173a34",
+  "parts": [
+    "parts/fixed-base.png",
+    "parts/contact-a.png",
+    "parts/contact-b.png",
+    "parts/root-occluder.png"
+  ],
+  "loopRefresh": "pre와 post 구간마다 한 번 작게 반응한 뒤 크기 변화 없이 중립으로 복귀한다.",
+  "status": "실제 채집 성공 시점에 연결",
+  "runtimeIntegrated": true,
+  "runtime": {
+    "contactFrame": 5,
+    "settleFrame": 20,
+    "postSeconds": 0.6,
+    "loop": false,
+    "method": "harvest-sheet"
+  },
+  "sourceMethod": "온전한 고정 베이스와 독립 파츠 원화를 imagegen으로 제작하여 실제 사용",
+  "fixedAnchors": [
+    [
+      91,
+      217
+    ],
+    [
+      92,
+      217
+    ],
+    [
+      93,
+      217
+    ],
+    [
+      94,
+      217
+    ],
+    [
+      95,
+      217
+    ],
+    [
+      96,
+      217
+    ],
+    [
+      97,
+      217
+    ],
+    [
+      98,
+      217
+    ],
+    [
+      99,
+      217
+    ],
+    [
+      100,
+      217
+    ],
+    [
+      101,
+      217
+    ],
+    [
+      102,
+      217
+    ]
+  ],
+  "runtimePreview": "runtime.gif"
+}

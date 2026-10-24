@@ -1,0 +1,127 @@
+{
+  "key": "bark",
+  "name": "나무껍질",
+  "motion": "말린 껍질의 안쪽 면이 조금 눌렸다가 복귀하며 더미 외곽과 밑동은 고정한다.",
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "frameCount": 24,
+  "frameMs": 100,
+  "durationMs": 2400,
+  "columns": 6,
+  "rows": 4,
+  "pivot": [
+    128,
+    224
+  ],
+  "sheet": "sheet.png",
+  "preview": "preview.gif",
+  "source": "DesignAssets/ResourceConcepts/v1/resource-bark.png",
+  "mode": "layered-parts",
+  "runtimeInstalled": true,
+  "fixedPixelMask": "parts/style-fixed-pixel-mask.png",
+  "runtimeIntegrated": true,
+  "runtime": {
+    "contactFrame": 3,
+    "settleFrame": 20,
+    "postSeconds": 0.6,
+    "loop": false,
+    "method": "harvest-sheet"
+  },
+  "sourceMethod": "승인한 단순화 원화를 고정 베이스와 부드러운 내부 표면 레이어로 분리하고, 외곽과 지면을 고정한 국소 접촉 반응을 합성한다.",
+  "parts": [
+    "parts/style-fixed-base.png",
+    "parts/style-contact-01.png",
+    "parts/style-contact-02.png"
+  ],
+  "fixedAnchors": [
+    [
+      87,
+      221
+    ],
+    [
+      88,
+      221
+    ],
+    [
+      89,
+      221
+    ],
+    [
+      90,
+      221
+    ],
+    [
+      91,
+      221
+    ],
+    [
+      92,
+      221
+    ],
+    [
+      93,
+      221
+    ],
+    [
+      94,
+      221
+    ],
+    [
+      95,
+      221
+    ],
+    [
+      88,
+      222
+    ],
+    [
+      89,
+      222
+    ],
+    [
+      90,
+      222
+    ],
+    [
+      91,
+      222
+    ],
+    [
+      92,
+      222
+    ],
+    [
+      93,
+      222
+    ],
+    [
+      94,
+      222
+    ]
+  ],
+  "hiddenAreaRestoration": "외곽 알파와 지면을 고정하고 외곽에서 떨어진 내부 면에서만 연속 좌표로 반응하므로 숨은 면을 노출하지 않는다.",
+  "runtimePreview": "runtime.gif",
+  "approvedStyleSource": "DesignAssets/ResourceStyleStudies/v1/resource-bark.png",
+  "fixedParts": [
+    "parts/style-fixed-base.png"
+  ],
+  "movingParts": [
+    "parts/style-contact-01.png",
+    "parts/style-contact-02.png"
+  ],
+  "fixedGroundRegion": [
+    0,
+    212,
+    256,
+    44
+  ],
+  "neutralFrames": [
+    0,
+    2,
+    3,
+    20,
+    21,
+    22,
+    23
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "key": "tree-sap",
+  "name": "수액",
+  "motion": "나무껍질과 수액의 부착점은 고정하고 달린 수액 끝만 짧게 늘어났다 복귀한다. 방울이 떨어져 분리되지 않는다.",
+  "source": "DesignAssets/ResourceConcepts/v1/resource-tree-sap.png",
+  "frameSize": 256,
+  "frameCount": 24,
+  "frameMs": 100,
+  "durationMs": 2400,
+  "columns": 6,
+  "rows": 4,
+  "sheet": "sheet.png",
+  "preview": "preview.gif",
+  "previewBackground": "#173a34",
+  "loop": true,
+  "anchor": [
+    128,
+    224
+  ],
+  "parts": [
+    "parts/base.png",
+    "parts/attached-drop.png"
+  ],
+  "fixedParts": [
+    "parts/base.png"
+  ],
+  "runtimeIntegrated": true,
+  "runtime": {
+    "contactFrame": 9,
+    "settleFrame": 19,
+    "postSeconds": 0.6,
+    "loop": false,
+    "method": "harvest-sheet"
+  },
+  "sourceMethod": "생산용 숨은 면을 imagegen으로 완전히 복원하고 독립 원화 파츠만 국소 반응",
+  "movingParts": [
+    "parts/attached-drop.png"
+  ],
+  "fixedAnchors": [
+    {
+      "part": "parts/base.png",
+      "role": "고정된 원화와 지면",
+      "position": [
+        128,
+        224
+      ]
+    }
+  ],
+  "neutralFrames": [
+    0,
+    8,
+    9,
+    19,
+    20,
+    21,
+    22,
+    23
+  ],
+  "runtimePreview": "runtime.gif"
+}

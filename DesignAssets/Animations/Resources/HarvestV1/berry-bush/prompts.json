@@ -1,0 +1,14 @@
+{
+  "tool": "built-in image_gen",
+  "prompt": "Production 2D game animation PARTS atlas, not a mockup or preview. Use the input sprite as the visual identity, palette, shape and hand-painted botanical fantasy game style reference. Produce a 1024x1024 square, genuinely transparent background, divided into an invisible 2x2 grid with 512x512 cells. Every requested component is isolated inside its cell, centered, no touching other cells, generous transparent margin, no labels, lines, shadows on the canvas, text or watermark. Every component must be a COMPLETE coherent object including its normally occluded back/side, with painted contours and continuous texture; no cropped bottoms, holes, pasted strips or smeared pixels. These components will actually be independently animated and composited, so hidden sides must be finished. Cell top-left: a complete upper raspberry-like red berry cluster with a short green petiole. Cell top-right: a complete left-lower red berry cluster with a short petiole, slightly wider than upper. Cell bottom-left: a complete right-lower red berry cluster with a short petiole. Each cluster is made of glossy red drupelets matching the reference and has its own clean rear contour. Cell bottom-right: the reference bush's green leafy stems and low leafy base, but with every red berry cluster removed; behind the berries show fully painted natural leaves and stem connections. Do not put berries into the base cell. Keep the same recognizable low leafy raspberry bush design.",
+  "referenceImages": [
+    "parts/reference-original.png"
+  ],
+  "generatedSource": "source-atlas-rummage.png",
+  "usedSourceCells": [
+    0,
+    1,
+    2,
+    3
+  ]
+}

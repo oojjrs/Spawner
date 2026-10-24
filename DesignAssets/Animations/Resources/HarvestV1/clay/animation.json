@@ -1,0 +1,52 @@
+{
+  "key": "clay",
+  "name": "점토",
+  "motion": "점토 더미의 외곽과 바닥은 고정하고 앞쪽 표면 두 영역이 부드럽게 눌려 납작해졌다 원래 곡면으로 돌아온다.",
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "frameCount": 24,
+  "frameMs": 100,
+  "durationMs": 2400,
+  "columns": 6,
+  "rows": 4,
+  "pivot": [
+    128,
+    228
+  ],
+  "sheet": "sheet.png",
+  "preview": "preview.gif",
+  "source": "DesignAssets/ResourceConcepts/v1/resource-clay.png",
+  "mode": "layered-parts",
+  "runtimeInstalled": true,
+  "fixedPixelMask": "parts/fixed-pixel-mask.png",
+  "runtimeIntegrated": true,
+  "runtime": {
+    "contactFrame": 4,
+    "settleFrame": 20,
+    "postSeconds": 0.6,
+    "loop": false,
+    "method": "harvest-sheet"
+  },
+  "sourceMethod": "기존 원화의 국소 표면 레이어를 연속 좌표로만 눌러 복원한다. 외곽 알파와 베이스는 고정한다.",
+  "parts": [
+    "fixed-base",
+    "local-surface"
+  ],
+  "fixedAnchors": [
+    [
+      130,
+      114
+    ],
+    [
+      217,
+      153
+    ],
+    [
+      104,
+      196
+    ]
+  ],
+  "loopRenewal": "준비 구간과 성공 후 구간 각각에서 작은 반응 후 중립으로 돌아온다. 추출·소멸·재생성은 없고 남은 프레임은 중립이다.",
+  "hiddenAreaRestoration": "숨은 면을 노출하지 않는 국소 표면 반응이다.",
+  "runtimePreview": "runtime.gif"
+}
