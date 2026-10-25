@@ -151,22 +151,36 @@ function fight(count) {
   Object.assign(beetle, { x: 140, y: 140, homeX: 140, homeY: 140, renderFromX: 140, renderFromY: 140 });
   const game = createGame(room, colony);
   room.games.set("owner", game);
+  const saved = JSON.parse(game.save());
+  saved.state.agents = [];
+  saved.state.evolutionPoints = 20;
+  game.restore(JSON.stringify(saved));
   const positions = [[139, 140], [140, 139], [141, 140]];
   const actions = new Set();
+  let retreats = false;
   for (let index = 0; index < count; index++) {
-    game.command({ type: "design", templateId: null, name: "기본 콩 " + index, slots: [], birth: true });
+    const result = game.command({ type: "design", templateId: null, name: "기본 콩 " + index, slots: [], birth: true });
+    assert.ok(result.agentId, "교전 검사에 필요한 개체가 실제로 생성되어야 합니다.");
+    const agent = game.agents.find(candidate => candidate.id === result.agentId);
     const [x, y] = positions[index];
-    Object.assign(game.agents[index], { x, y, renderFromX: x, renderFromY: y,
+    Object.assign(agent, { x, y, renderFromX: x, renderFromY: y, birth: null,
       personality: Object.freeze({ boldness: 0.2, aggression: 0.2, curiosity: 0.2 }) });
   }
+  assert.equal(game.agents.length, count);
   for (let step = 1; step <= 600 && beetle.health > 0 && game.agents.length > 0; step++) {
     room.simSeconds = step / 10;
     game.prepare(room.simSeconds);
     game.tick(0.1);
-    for (const agent of game.agents) actions.add(agent.utility?.action);
+    for (const agent of game.agents) {
+      actions.add(agent.utility?.action);
+      if (step !== 1) continue;
+      const next = agent.utility?.route?.[1];
+      if (next && Math.abs(next.x - beetle.x) + Math.abs(next.y - beetle.y) >
+        Math.abs(agent.x - beetle.x) + Math.abs(agent.y - beetle.y)) retreats = true;
+    }
     room.creatureSystem.tick();
   }
-  return { beetle, agents: game.agents, duration: room.simSeconds, actions };
+  return { beetle, agents: game.agents, duration: room.simSeconds, actions, retreats };
 }
 
 test("신중한 개체는 이득이 낮은 강적과 강제 교전하지 않고 생존한다", () => {
@@ -176,7 +190,7 @@ test("신중한 개체는 이득이 낮은 강적과 강제 교전하지 않고 
     assert.equal(result.beetle.health, result.beetle.stats.health);
     assert.ok(result.agents.every(agent => agent.health > 0));
     assert.ok(!result.actions.has("fight"));
-    if (count === 1) assert.ok(result.actions.has("flee"));
+    if (count === 1) assert.ok(result.retreats, "혼자인 개체는 첫 이동부터 강적과 거리를 벌려야 합니다.");
   }
 });
 

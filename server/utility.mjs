@@ -1,5 +1,5 @@
 import { NEST_LEVELS } from "./nests.mjs";
-import { unitMovementSpeed } from "./attributes.mjs";
+import { unitMovementSpeed, unitTerrainSpeedMultiplier } from "./attributes.mjs";
 import { resourceDefinition, resourceTypeForCell } from "./resources.mjs";
 import { burrowApproaches } from "./burrows.mjs";
 
@@ -26,7 +26,9 @@ export function riskValue(agent, damage) {
 
 export function createUtilityAI(context) {
   const { state, size, homeCells, deliveryCells, walkable, hazardAt, enemies, synergy, canHarvest } = context;
+  const terrainAt = context.terrainAt || (() => 4);
   const resourceType = context.resourceType || (food => resourceTypeForCell(food, {}));
+  const isFood = context.isFood || (type => resourceDefinition(type)?.category === "food");
   let frontierExplored = null, frontierIterator = null, frontierProcessed = 0;
   const frontierByIndex = new Map();
   let frontiers = [];
@@ -51,7 +53,7 @@ export function createUtilityAI(context) {
       value *= 0.5;
       if (synergy(agent, ["feet", "shell"])) value *= 3;
     }
-    return value;
+    return value * unitTerrainSpeedMultiplier(agent, terrainAt(cell.x, cell.y));
   }
 
   function push(queue, entry) {
@@ -248,11 +250,11 @@ export function createUtilityAI(context) {
     };
     const allies = state.agents.filter(ally => ally !== agent && ally.health > 0);
     const carryingType = agent.carryingType || "honey-mushrooms";
-    const carryingMaterial = resourceDefinition(carryingType).category === "material";
+    const carryingMaterial = !isFood(carryingType);
     const materialNeed = key => 1 / (1 + (state.resourceInventory?.[key] || 0) / Math.max(6, state.agents.length * 2));
     const reservation = food => allies.reduce((sum, ally) => sum + (ally.utility?.action === "collect" &&
       ally.utility.target?.key === food.x + "," + food.y ? Math.max(0, ally.utility.plannedCargo - ally.carrying) : 0), 0);
-    const availableFood = [...state.knownFood.values()].filter(food => canHarvest(food, agent) && resourceDefinition(resourceType(food)).category === "food")
+    const availableFood = [...state.knownFood.values()].filter(food => canHarvest(food, agent) && isFood(resourceType(food)))
       .reduce((sum, food) => sum + Math.max(0, food.amount - reservation(food)), 0);
     const perAgent = availableFood / Math.max(1, state.agents.length);
     const underAttack = visible.some(enemy => allies.concat(agent).some(ally => distance(ally, enemy) <= 1) ||
@@ -293,16 +295,16 @@ export function createUtilityAI(context) {
     if (agent.carrying < capacity) {
       const foods = [...state.knownFood.values()].filter(food => food.amount > 0 && canHarvest(food, agent) &&
         (!agent.carrying || carryingType === resourceType(food)) &&
-        (resourceDefinition(resourceType(food)).category === "material" || storage > 0))
+        (!isFood(resourceType(food)) || storage > 0))
         .sort((first, second) => distance(agent, first) - distance(agent, second));
       const currentFood = foods.find(food => food.x + "," + food.y === agent.utility?.target?.key);
       const targets = [...new Set([currentFood,
-        ...foods.filter(food => resourceDefinition(resourceType(food)).category === "food").slice(0, 6),
-        ...foods.filter(food => resourceDefinition(resourceType(food)).category === "material").slice(0, 6)].filter(Boolean))];
+        ...foods.filter(food => isFood(resourceType(food))).slice(0, 6),
+        ...foods.filter(food => !isFood(resourceType(food))).slice(0, 6)].filter(Boolean))];
       for (const food of targets) {
         const type = resourceType(food);
         const definition = resourceDefinition(type);
-        const material = definition.category === "material";
+        const material = !isFood(type);
         const cells = path(food);
         if (!cells) continue;
         const back = homeRoute(agent, food, deliveryCells());
@@ -331,7 +333,7 @@ export function createUtilityAI(context) {
       }
     }
     const frontier = frontierCells();
-    const frontierScout = agent.templateId === null && !agent.slots.length && agent.actionPriorities?.[0] === "explore";
+    const frontierScout = agent.templateId === null && agent.actionPriorities?.[0] === "explore";
     const boundary = frontierScout ? homeCells() : [];
     const frontierWeight = target => {
       const homeDistance = boundary.length ? Math.min(...boundary.map(home => distance(home, target))) : 0;

@@ -1,16 +1,14 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { RESOURCE_TYPES, RESOURCE_HABITATS, isResourceHabitat } from "./resources.mjs";
+import { RESOURCE_TYPES, RESOURCE_HABITATS, isResourceHabitat, populateResourceNodes, populateForestResources } from "./resources.mjs";
 import { generateWorld, generateResources } from "./world.mjs";
 
 const terrains = {
-  twigs: [5], bark: [5], pebbles: [2, 3, 6], clay: [2, 4], sand: [2],
-  "dry-leaves": [5], "grass-fiber": [4], "root-fiber": [4, 5], "spider-silk": [5, 6],
-  water: [2], "tree-sap": [5], "leaf-mold": [5], resin: [5], beeswax: [5],
-  carapace: [4, 5, 6], "iron-ore": [6], "copper-ore": [6], quartz: [6]
+  pebbles: [2, 3, 6], clay: [2, 4], sand: [2],
+  "grass-fiber": [4], "iron-ore": [6], "copper-ore": [6], quartz: [6]
 };
-const rareDistances = { resin: 42, beeswax: 42, "iron-ore": 48, "copper-ore": 48, quartz: 56 };
+const rareDistances = { "iron-ore": 48, "copper-ore": 48, quartz: 56 };
 
 function fixture() {
   const world = { seed: 13, sites: [[160, 160]], terrain: new Uint8Array(320 * 320).fill(4),
@@ -57,30 +55,25 @@ function checkDistribution(world, resources) {
   return counts;
 }
 
-test("재료 18종의 서식 지형과 물가·나무 인접 조건이 정해져 있다", () => {
-  assert.equal(RESOURCE_HABITATS.length, 18);
+test("지면 재료 7종은 서식 지형에 배치하고 나무는 숲에서 관리한다", () => {
+  assert.equal(RESOURCE_HABITATS.length, 7);
   assert.deepEqual(RESOURCE_HABITATS.map(entry => entry.key).sort(),
-    RESOURCE_TYPES.filter(entry => entry.category === "material").map(entry => entry.key).sort());
+    RESOURCE_TYPES.filter(entry => entry.category === "material" && !entry.harvestLocked).map(entry => entry.key).sort());
   const world = fixture();
-  assert.equal(isResourceHabitat("twigs", world, 160, 160), false);
-  assert.equal(isResourceHabitat("twigs", world, 140, 160), true);
+  assert.equal(isResourceHabitat("grass-fiber", world, 160, 160), true);
+  assert.equal(isResourceHabitat("grass-fiber", world, 140, 160), false);
   assert.equal(isResourceHabitat("iron-ore", world, 170, 152), false);
   assert.equal(isResourceHabitat("iron-ore", world, 240, 160), true);
-  assert.equal(isResourceHabitat("water", world, 160, 160), false);
-  assert.equal(isResourceHabitat("water", world, 160, 128), true);
   assert.equal(isResourceHabitat("clay", world, 160, 160), false);
   assert.equal(isResourceHabitat("clay", world, 160, 129), true);
-  assert.equal(isResourceHabitat("root-fiber", world, 160, 160), false);
-  assert.equal(isResourceHabitat("root-fiber", world, 148, 160), true);
 });
 
 test("둥지 주변은 일부 기본 재료만 제한 배치하고 희귀 자원은 먼 서식지에 적게 배치한다", () => {
   const world = fixture(), resources = generateResources(world);
   const counts = checkDistribution(world, resources);
-  assert.equal(counts.size, 18);
+  assert.equal(counts.size, 7);
   assert.ok(resources.some(([x, y]) => Math.hypot(x - 160, y - 160) <= 22));
   assert.ok(counts.get("quartz") < counts.get("grass-fiber"));
-  assert.ok(counts.get("beeswax") < counts.get("twigs"));
   assert.deepEqual(generateResources(world), resources);
 });
 
@@ -109,4 +102,21 @@ test("저장된 2세대 월드의 자원·굴·부족 배치는 바꾸지 않는
   assert.equal(digest(world.resources), "4e78be66eb772d97f18dd5c2655e91f6f9693394987d14b3757dd13a975f1163");
   assert.equal(digest(world.burrows), "004d7cbff3d53c72e90ce98d219591f51f04ddb47e2fda7c073642ffe929e305");
   assert.equal(digest(world.tribes), "49f16aacc73040601831a7393ef09a5685b2b5081b7ba5d8f777003e26a0fcb4");
+  const room = { world, food: new Map() };
+  populateResourceNodes(room);
+  assert.deepEqual([...room.food.values()].map(cell => [cell.x, cell.y, cell.amount, cell.resourceType]),
+    world.resources.filter(([, , , key]) => key !== "dry-leaves"));
+});
+
+test("숲 나무와 열매는 같은 칸에 존재하고 지면 자원·굴·위험 칸에는 나무가 없다", () => {
+  const world = { terrain: new Uint8Array(320 * 320).fill(5), hazards: new Uint8Array(320 * 320),
+    burrows: [{ x: 4, y: 4, width: 2, height: 2 }] };
+  world.hazards[2 * 320 + 2] = 1;
+  const fruit = { x: 1, y: 1, amount: 10, resourceType: "tree-fruit", terrain: "forest" };
+  const grass = { x: 3, y: 3, amount: 10, resourceType: "grass-fiber", kind: "resource" };
+  const room = { world, food: new Map([["1,1", fruit], ["3,3", grass]]) };
+  populateForestResources(room);
+  assert.equal(world.treeCells[1 * 320 + 1], 1);
+  for (const [x, y] of [[2, 2], [3, 3], [4, 4], [5, 5]]) assert.equal(world.treeCells[y * 320 + x], 0);
+  assert.equal(room.food.get("1,1"), fruit);
 });

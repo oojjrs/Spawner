@@ -26,7 +26,7 @@ function tribeHash(x, y, seed) {
 }
 
 export function generateTribes(world) {
-  if (world.sites.length < 2) return [];
+  if (!world.sites.length) return [];
   const origin = world.sites[0], blocked = new Uint8Array(SIZE * SIZE);
   const valid = (x, y) => x >= 0 && y >= 0 && x < SIZE && y < SIZE;
   for (let index = 0; index < blocked.length; index++) {
@@ -78,7 +78,7 @@ export function generateTribes(world) {
     return times;
   }
 
-  const fromHome = distances(origin, TRIBE_PLACEMENT.farMaxDistance).values, times = scoutTimes();
+  const home = distances(origin, TRIBE_PLACEMENT.farMaxDistance), fromHome = home.values, times = scoutTimes();
   const sight = [];
   for (let dy = -TRIBE_PLACEMENT.contactRadius; dy <= TRIBE_PLACEMENT.contactRadius; dy++) {
     for (let dx = -TRIBE_PLACEMENT.contactRadius; dx <= TRIBE_PLACEMENT.contactRadius; dx++) {
@@ -113,8 +113,8 @@ export function generateTribes(world) {
   function compatible(first, second) {
     const ax = first.x - origin[0], ay = first.y - origin[1], bx = second.x - origin[0], by = second.y - origin[1];
     if ((ax * bx + ay * by) / Math.hypot(ax, ay) / Math.hypot(bx, by) > cosine + 1e-10) return false;
-    if (!fields.has(first.siteIndex)) fields.set(first.siteIndex, distances([first.x, first.y], blocked.length).values);
-    const distance = fields.get(first.siteIndex)[second.y * SIZE + second.x];
+    if (!fields.has(first.id)) fields.set(first.id, distances([first.x, first.y], blocked.length).values);
+    const distance = fields.get(first.id)[second.y * SIZE + second.x];
     return distance !== UNREACHABLE && distance >= TRIBE_PLACEMENT.separation;
   }
   let selected = [], score = Infinity;
@@ -136,5 +136,34 @@ export function generateTribes(world) {
     choose(slot + 1, group, priority);
   }
   choose(0, [], 0);
+  function fill(positions) {
+    while (selected.length < TRIBE_PLACEMENT.target) {
+      const occupied = [{ x: origin[0], y: origin[1] }, ...selected];
+      const separation = selected.map(tribe => {
+        if (!fields.has(tribe.id)) fields.set(tribe.id, distances([tribe.x, tribe.y], blocked.length).values);
+        return fields.get(tribe.id);
+      });
+      let best = null, bestScore = -Infinity;
+      for (const index of positions) {
+        const x = index % SIZE, y = Math.floor(index / SIZE), pathDistance = fromHome[index];
+        if (pathDistance === UNREACHABLE || pathDistance === 0 ||
+            occupied.some(other => Math.max(Math.abs(x - other.x), Math.abs(y - other.y)) < 5) || !clearNest([x, y])) continue;
+        const gap = Math.min(pathDistance, ...separation.map(field => field[index]));
+        const priority = gap + tribeHash(x, y, world.seed) * 0.25;
+        if (priority > bestScore) { best = { x, y, pathDistance }; bestScore = priority; }
+      }
+      if (!best) return;
+      const { x, y, pathDistance } = best;
+      const siteIndex = world.sites.findIndex(site => site[0] === x && site[1] === y);
+      selected.push({ id: siteIndex > 0 ? "tribe:" + siteIndex : "tribe:cell:" + (y * SIZE + x),
+        siteIndex: siteIndex > 0 ? siteIndex : null, x, y,
+        distanceBand: pathDistance <= TRIBE_PLACEMENT.nearMaxDistance ? "near" : "far", pathDistance,
+        contactSeconds: contactSeconds([x, y]), activityRadius: TRIBE_PLACEMENT.activityRadius });
+    }
+  }
+  if (selected.length < TRIBE_PLACEMENT.target) {
+    fill(world.sites.slice(1).map(([x, y]) => y * SIZE + x));
+    if (selected.length < TRIBE_PLACEMENT.target) fill(home.cells);
+  }
   return selected.map(({ priority, ...tribe }) => tribe);
 }

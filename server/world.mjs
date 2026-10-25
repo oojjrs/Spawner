@@ -1,14 +1,15 @@
 import { generateBurrows } from "./burrows.mjs";
 import { generateTribes } from "./tribes.mjs";
-import { RESOURCE_TYPES, FOOD_HABITATS, isFoodHabitat, RESOURCE_HABITATS, RESOURCE_PLACEMENT, isResourceHabitat } from "./resources.mjs";
+import { LEGACY_RESOURCE_HABITATS } from "./resource-legacy.mjs";
+import { FOOD_HABITATS, isFoodHabitat, RESOURCE_HABITATS, RESOURCE_PLACEMENT, isResourceHabitat } from "./resources.mjs";
 
 export const STARTING_FOOD_RADIUS = 22;
 export const STARTING_FOOD_CAP = 10;
 
-export const WORLD_GENERATION_VERSION = 4;
+export const WORLD_GENERATION_VERSION = 5;
 
 export function generateWorld(seed, version) {
-      if (version !== undefined && ![1, 2, 3, WORLD_GENERATION_VERSION].includes(version)) {
+      if (version !== undefined && ![1, 2, 3, 4, WORLD_GENERATION_VERSION].includes(version)) {
         throw new Error("지원하지 않는 월드 생성 버전입니다.");
       }
       function seededRandom(seed) {
@@ -270,6 +271,9 @@ function foodType(world, x, y) {
 
 export function generateResources(world) {
   if (world.generationVersion === 1 || world.generationVersion === 2) return generateLegacyResources(world);
+  const habitats = [...(world.generationVersion >= 3 && world.generationVersion <= 4 ? LEGACY_RESOURCE_HABITATS : RESOURCE_HABITATS)];
+  if (world.generationVersion === 3) habitats.splice(5, 0, { key: "dry-leaves", terrains: ["forest"],
+    neighbors: [], rarity: "common", minDistance: 4, nodes: 42, separation: 6 });
   const size = 320, blocked = new Uint8Array(size * size), occupied = new Uint8Array(size * size);
   const distances = new Int32Array(size * size).fill(-1);
   for (let index = 0; index < blocked.length; index++) {
@@ -309,20 +313,20 @@ export function generateResources(world) {
     });
     if (distance >= 4) points.push({ x, y, index, distance, nearSites });
   }
-  const candidates = new Map(RESOURCE_HABITATS.map((habitat, typeIndex) => [habitat.key,
+  const candidates = new Map(habitats.map((habitat, typeIndex) => [habitat.key,
     points.filter(point => point.distance >= habitat.minDistance && distances[point.index] >= habitat.minDistance &&
-      isResourceHabitat(habitat.key, world, point.x, point.y)).map(point => ({ ...point,
+      (habitat.key === "dry-leaves" ? world.terrain[point.index] === 5 : isResourceHabitat(habitat.key, world, point.x, point.y))).map(point => ({ ...point,
       priority: foodNoise(point.x + 617, point.y - 349, 36, world.seed + 14009 + typeIndex * 137) * 0.8 +
         foodNoise(point.x - 193, point.y + 431, 13, world.seed + 14011 + typeIndex * 139) * 0.2 +
         foodHash(point.x, point.y, world.seed + 14029 + typeIndex * 149) * 0.08
     })).sort((left, right) => right.priority - left.priority || left.index - right.index)]));
-  const nearTypes = world.sites.map(([cx, cy], siteIndex) => new Set(RESOURCE_HABITATS
+  const nearTypes = world.sites.map(([cx, cy], siteIndex) => new Set(habitats
     .filter(habitat => habitat.rarity === "common" && candidates.get(habitat.key).some(point => point.nearSites.includes(siteIndex)))
-    .map(habitat => ({ key: habitat.key, priority: foodHash(cx + RESOURCE_HABITATS.indexOf(habitat) * 31, cy, world.seed + 15013) }))
+    .map(habitat => ({ key: habitat.key, priority: foodHash(cx + habitats.indexOf(habitat) * 31, cy, world.seed + 15013) }))
     .sort((left, right) => left.priority - right.priority).slice(0, RESOURCE_PLACEMENT.nearTypes).map(entry => entry.key)));
   const nearCounts = world.sites.map(() => new Map());
   const resources = [];
-  RESOURCE_HABITATS.forEach((habitat, typeIndex) => {
+  habitats.forEach((habitat, typeIndex) => {
     const entries = candidates.get(habitat.key), placed = [];
     const available = point => !occupied[point.index] &&
       point.nearSites.every(siteIndex => nearTypes[siteIndex].has(habitat.key) &&
@@ -398,7 +402,8 @@ function generateLegacyResources(world) {
   }
   const resources = [];
   let typeIndex = 0;
-  for (const definition of RESOURCE_TYPES.filter(entry => entry.category === "material")) {
+  const types = [...terrains.keys()].map(key => ({ key }));
+  for (const definition of types) {
     const terrainOrder = terrains.get(definition.key);
     const entries = terrainOrder.flatMap((terrain, rank) => candidates[terrain].map(index => {
       const x = index % size, y = Math.floor(index / size);

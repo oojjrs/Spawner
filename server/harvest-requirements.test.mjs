@@ -8,14 +8,12 @@ import { createGame } from "./game.mjs";
 import { generateWorld } from "./world.mjs";
 
 const requirements = {
-  "honey-mushrooms": [], "tree-fruit": ["harvest", "climbing"],
+  "tree-fruit": ["harvest", "climbing"],
   "berry-bush": ["harvest"], "seed-pods": ["harvest"], "nutrient-moss": ["harvest"],
-  "root-bulbs": ["digging"], clay: ["digging"], twigs: ["harvest"], "dry-leaves": ["harvest"],
-  "leaf-mold": ["harvest"], sand: ["harvest"], pebbles: ["strength"],
-  bark: ["harvest", "strength"], "grass-fiber": ["harvest", "strength"], beeswax: ["harvest", "strength"],
-  "root-fiber": ["digging", "strength"], "spider-silk": ["harvest", "harvest"],
-  water: ["absorption"], "tree-sap": ["absorption"], resin: ["absorption", "strength"],
-  meat: ["harvest", "strength"], carapace: ["harvest", "strength"],
+  "root-bulbs": ["digging"], clay: [],
+  sand: ["harvest"], pebbles: ["strength"],
+  "grass-fiber": ["harvest", "strength"],
+  meat: ["harvest", "strength"],
   "iron-ore": ["digging", "strength", "strength"], "copper-ore": ["digging", "strength", "strength"],
   quartz: ["digging", "strength", "strength"]
 };
@@ -25,7 +23,7 @@ function fixture(resourceType, slots) {
   const terrain = resourceType === "tree-fruit" ? "forest" : "grassland";
   const food = { x: 46, y: 42, amount: 6, initialAmount: 6, resourceType, terrain,
     kind: resourceType === "meat" ? "corpse" : undefined };
-  const environment = { simSeconds: 0, world: { seed: 13, terrain: new Uint8Array(320 * 320).fill(4),
+  const environment = { simSeconds: 120, world: { seed: 13, terrain: new Uint8Array(320 * 320).fill(4),
     hazards: new Uint8Array(320 * 320) }, colonies: [colony], games: new Map(),
     food: new Map([["46,42", food]]), foodSpots: new Map() };
   environment.world.terrain[42 * 320 + 46] = terrain === "forest" ? 5 : 4;
@@ -36,7 +34,7 @@ function fixture(resourceType, slots) {
   saved.state.nestLevel = 4;
   saved.state.evolutionPoints = 50;
   Object.assign(saved.state.agents[0], { x: 46, y: 42, renderFromX: 46, renderFromY: 42,
-    slots, rulesVersion: 2, carrying: 0, carryingType: null, birth: null,
+    slots, rulesVersion: 2, carrying: 0, carryingType: null, birth: null, bornAt: 0,
     mode: "approach", moveStartedAt: 0, moveDuration: 0, moveBudget: 0,
     harvestResult: null, decisionPending: null, nextDecisionAt: 1000,
     personality: { boldness: 0, aggression: 0, curiosity: 0 },
@@ -47,15 +45,19 @@ function fixture(resourceType, slots) {
 }
 
 function advanceTo(fixture, seconds) {
-  const elapsed = seconds - fixture.environment.simSeconds;
-  fixture.environment.simSeconds = seconds;
-  fixture.game.prepare(seconds);
+  const time = seconds + 120;
+  const elapsed = time - fixture.environment.simSeconds;
+  fixture.environment.simSeconds = time;
+  fixture.game.prepare(time);
   fixture.game.tick(elapsed);
 }
 
-test("버섯과 24종 먹이·자원의 필요 속성을 승인된 조합과 개수대로 검사한다", () => {
+test("채집 가능한 먹이·자원의 필요 속성을 승인된 조합과 개수대로 검사한다", () => {
   const world = { hazards: new Uint8Array(320 * 320) };
-  assert.equal(RESOURCE_TYPES.length, Object.keys(requirements).length);
+  assert.equal(RESOURCE_TYPES.filter(entry => !entry.harvestLocked).length, Object.keys(requirements).length);
+  assert.equal(resourceDefinition("tree").harvestLocked, true);
+  assert.equal(resourceHarvestRequirements({ resourceType: "tree" }, world), null);
+  assert.equal(canHarvestResource({ resourceType: "tree" }, world, attributeCounts(ATTRIBUTES.flatMap(item => [item.key, item.key]))), false);
   assert.equal(resourceHarvestRequirements(null, world), null);
   assert.equal(canHarvestResource({ resourceType: "unknown" }, world, attributeCounts(ATTRIBUTES.map(item => item.key))), false);
   for (const [key, slots] of Object.entries(requirements)) {
@@ -111,7 +113,7 @@ test("필요 속성이 하나라도 부족하면 기존 접근 명령을 취소�
 });
 
 test("수확 도중 능력을 잃은 저장을 복원하면 즉시 수확을 취소하고 새 속성 설계는 저장된다", () => {
-  for (const key of ["water", "quartz", "tree-fruit"]) {
+  for (const key of ["root-bulbs", "quartz", "tree-fruit"]) {
     const f = fixture(key, requirements[key]);
     advanceTo(f, 0);
     advanceTo(f, 1);
@@ -127,7 +129,9 @@ test("수확 도중 능력을 잃은 저장을 복원하면 즉시 수확을 취
     f.game.restore(f.game.save());
     assert.deepEqual(f.game.snapshot().templates.at(-1).slots, requirements[key]);
     const agent = f.game.agents.at(-1);
-    assert.deepEqual(agent.attributes, attributeCounts(requirements[key]));
+    assert.deepEqual(agent.slots, requirements[key]);
+    assert.deepEqual(agent.activeSlots, requirements[key].slice(0, 1));
+    assert.deepEqual(agent.attributes, attributeCounts(requirements[key].slice(0, 1)));
     assert.ok(Object.values(agent.stats).every(Number.isFinite));
   }
 });

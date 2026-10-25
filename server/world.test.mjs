@@ -64,7 +64,7 @@ test("이전 월드 생성은 저장된 지형과 먹이 배치를 그대로 재
     "b6efeab31d349aa21d02bd9fd8cd9bfa9e7a31530079d130a2c7e57af364d78a");
   assert.equal(createHash("sha256").update(JSON.stringify(world.food)).digest("hex"),
     "284bf31911165f11a456dbf4d2cf37e3cfcb877454c90b362d0af46bed137bc3");
-  assert.throws(() => generateWorld(731047, 5), /지원하지 않는 월드 생성 버전/);
+  assert.throws(() => generateWorld(731047, 6), /지원하지 않는 월드 생성 버전/);
 });
 
 test("겹치는 시작권의 먹이는 한 번 생성하고 양쪽 총량을 과다 증가시키지 않는다", () => {
@@ -90,7 +90,7 @@ test("방은 생성된 먹이량을 사용하고 저장된 채집 진행과 이�
   room.food.get(x + "," + y).amount = amount - 1;
   const saved = saveRoom(room);
   const restored = restoreRoom(saved);
-  assert.equal(saved.worldGenerationVersion, 4);
+  assert.equal(saved.worldGenerationVersion, 5);
   assert.deepEqual(restored.world.terrain, room.world.terrain);
   assert.equal(restored.food.get(x + "," + y).amount, amount - 1);
   const legacy = structuredClone(saved);

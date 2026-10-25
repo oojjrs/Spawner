@@ -1,4 +1,14 @@
 export const AGENT_BIRTH_DURATION = 3.85;
+export const SPRING_BIRTH_DURATIONS = Object.freeze([130, 120, 100, 100, 80, 260, 80, 90, 90, 100, 100, 130, 410]);
+export const SPRING_BIRTH_DURATION = SPRING_BIRTH_DURATIONS.reduce((sum, duration) => sum + duration, 0) / 1000;
+
+export const PEBBLE_BIRTH_DURATIONS = Object.freeze([200, 100, 100, 100, 100, 80, 80, 70, 60, 60, 60, 70, 70, 70, 70, 70, 70, 100, 80, 120, 140, 750]);
+export const PEBBLE_BIRTH_DURATION = PEBBLE_BIRTH_DURATIONS.reduce((sum, duration) => sum + duration, 0) / 1000;
+
+export function agentBirthDuration(tribe) {
+  if (tribe === "pebble") return PEBBLE_BIRTH_DURATION;
+  return tribe === "spring" ? SPRING_BIRTH_DURATION : AGENT_BIRTH_DURATION;
+}
 
 const bodyKeys = [
   [0, .76, .49, 0, -.03], [.065, .83, 1.15, 16, .025], [.18, .94, 1.06, 53, -.02],

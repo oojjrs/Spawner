@@ -5,12 +5,24 @@ import { createPersonality, personalityLabels, actionScore, riskValue } from "./
 
 function fixture(slots) {
   const colony = { id: 1, ownerId: "test", x: 40, y: 40, occupiedCells: new Set(["2,2"]) };
-  const environment = { simSeconds: 0, world: { seed: 13, terrain: new Uint8Array(320 * 320).fill(4), hazards: new Uint8Array(320 * 320) },
+  const environment = { simSeconds: 120, world: { seed: 13, terrain: new Uint8Array(320 * 320).fill(4), hazards: new Uint8Array(320 * 320) },
     colonies: [colony], games: new Map(), food: new Map(), foodSpots: new Map() };
   const game = createGame(environment, colony);
   environment.games.set("test", game);
-  game.command({ type: "design", name: "동일 설계", templateId: null, slots, birth: true });
-  return { game, environment, agent: game.agents[0] };
+  const saved = JSON.parse(game.save());
+  saved.state.agents = [];
+  saved.state.nestLevel = 2;
+  saved.state.evolutionPoints = 20;
+  game.restore(JSON.stringify(saved));
+  const result = game.command({ type: "design", name: "동일 설계", templateId: null, slots, birth: true });
+  assert.ok(result.agentId, "검사할 설계 개체가 실제로 생성되어야 합니다.");
+  assert.equal(game.agents.length, 1);
+  const agent = game.agents.find(candidate => candidate.id === result.agentId);
+  Object.assign(agent, { x: 43, y: 42, renderFromX: 43, renderFromY: 42, bornAt: 0, birth: null,
+    utility: null, decisionPending: "restore", nextDecisionAt: environment.simSeconds,
+    path: [{ x: 43, y: 42 }], visited: new Set(["43,42"]) });
+  game.restore(game.save());
+  return { game, environment, agent: game.agents.find(candidate => candidate.id === result.agentId) };
 }
 
 function advance(fixture, seconds) {
@@ -82,7 +94,7 @@ test("같은 설계의 성향은 다르고 저장·복원과 설계 수정에도
 test("안개 속 적·먹이는 판단에 쓰지 않고 군락의 새 적 발견은 즉시 재판단한다", () => {
   const f = fixture([]);
   const rival = enemy(f, 65, 42);
-  f.environment.food.set("65,43", { x: 65, y: 43, amount: 999, terrain: "grassland" });
+  f.environment.food.set("65,43", { x: 65, y: 43, amount: 999, terrain: "grassland", kind: "resource", resourceType: "clay" });
   advance(f, 0.1);
   assert.ok(!f.agent.utility.scores.some(score => score.action === "fight" || score.key === "65,43"));
   const count = f.agent.decisionCount;
@@ -107,7 +119,7 @@ test("다른 개체가 가한 피격은 다음 주기를 기다리지 않고 바
 
 test("먹이 목표가 고갈되면 즉시 다른 후보를 선택한다", () => {
   const f = fixture(["strength"]);
-  f.environment.food.set("43,42", { x: 43, y: 42, amount: 10, terrain: "grassland" });
+  f.environment.food.set("43,42", { x: 43, y: 42, amount: 10, terrain: "grassland", kind: "resource", resourceType: "clay" });
   advance(f, 0.1);
   assert.equal(f.agent.utility.action, "collect");
   const count = f.agent.decisionCount;
@@ -120,7 +132,7 @@ test("먹이 목표가 고갈되면 즉시 다른 후보를 선택한다", () =>
 
 test("실제 이동·시간제 채집·하역으로만 포인트를 얻는다", () => {
   const f = fixture(["strength", "antenna"]);
-  f.environment.food.set("43,42", { x: 43, y: 42, amount: 12, terrain: "grassland" });
+  f.environment.food.set("43,42", { x: 43, y: 42, amount: 12, terrain: "grassland", kind: "resource", resourceType: "clay" });
   const before = f.game.snapshot().evolutionPoints;
   advance(f, 1);
   assert.equal(f.game.snapshot().evolutionPoints, before);
@@ -174,10 +186,17 @@ test("적 처치는 6번째 프레임에 소유 군락에 전달하고 복귀 �
 
 test("이동이 끝나기 전에는 도착 칸의 채집을 시작하지 않는다", () => {
   const f = fixture(["strength", "antenna"]);
-  f.environment.food.set("46,42", { x: 46, y: 42, amount: 10, terrain: "grassland" });
-  advance(f, 3.1);
-  assert.equal(f.agent.carrying, 0);
-  for (let step = 0; step < 20 && f.agent.mode !== "harvest"; step++) advance(f, 0.1);
+  f.environment.food.set("46,42", { x: 46, y: 42, amount: 10, terrain: "grassland", kind: "resource", resourceType: "clay" });
+  let moving = false;
+  for (let step = 0; step < 120 && f.agent.mode !== "harvest"; step++) {
+    advance(f, 0.1);
+    if (f.environment.simSeconds + 1e-8 < f.agent.moveStartedAt + f.agent.moveDuration) {
+      moving = true;
+      assert.equal(f.agent.carrying, 0);
+      assert.notEqual(f.agent.mode, "harvest");
+    }
+  }
+  assert.ok(moving, "도착 전 실제 이동 중인 상태를 검사해야 합니다.");
   assert.equal(f.agent.mode, "harvest");
   assert.ok(f.agent.harvestStarted >= f.agent.moveStartedAt + f.agent.moveDuration - 0.000001);
   advance(f, 1.1);
@@ -186,7 +205,7 @@ test("이동이 끝나기 전에는 도착 칸의 채집을 시작하지 않는�
 
 test("상태 요청마다 저장·복원해도 채집과 하역을 이어간다", () => {
   const f = fixture(["strength", "antenna"]);
-  f.environment.food.set("46,42", { x: 46, y: 42, amount: 50, terrain: "grassland" });
+  f.environment.food.set("46,42", { x: 46, y: 42, amount: 50, terrain: "grassland", kind: "resource", resourceType: "clay" });
   const before = f.game.snapshot().evolutionPoints;
   for (let request = 0; request < 80; request++) {
     const saved = f.game.save();
@@ -201,13 +220,13 @@ test("상태 요청마다 저장·복원해도 채집과 하역을 이어간다"
   assert.ok(f.game.snapshot().evolutionPoints > before);
 });
 
-test("식량 비축량과 무관하게 버섯을 모으고 잠긴 재료는 선택하지 않는다", () => {
+test("식량 비축량과 무관하게 부족 먹이를 모으고 잠긴 재료는 선택하지 않는다", () => {
   const f = fixture([]);
   f.game.agents.splice(1);
   Object.assign(f.agent, { actionPriorities: ["collect", "explore"],
     personality: Object.freeze({ boldness: 0, aggression: 0, curiosity: 0 }) });
-  f.environment.food.set("43,42", { x: 43, y: 42, amount: 30, terrain: "grassland", resourceType: "honey-mushrooms" });
-  f.environment.food.set("42,43", { x: 42, y: 43, amount: 30, terrain: "grassland", kind: "resource", resourceType: "twigs" });
+  f.environment.food.set("43,42", { x: 43, y: 42, amount: 30, terrain: "grassland", kind: "resource", resourceType: "clay" });
+  f.environment.food.set("42,43", { x: 42, y: 43, amount: 30, terrain: "grassland", kind: "resource", resourceType: "tree" });
   let saved = JSON.parse(f.game.save());
   saved.state.evolutionPoints = 0;
   saved.state.agents[0].decisionPending = "completed";

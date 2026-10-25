@@ -1,6 +1,8 @@
 import { BEETLE_ANIMATIONS, BEETLE_ANIMATION_ASSET, BEETLE_NEUTRAL_ASSET } from "./beetle-animation.mjs";
+import { unitTerrainSpeedMultiplier } from "./attributes.mjs";
 import { BURROW_TYPES, burrowDistance, burrowApproaches } from "./burrows.mjs";
 import { createBeetleRaids } from "./raids.mjs";
+import { CORPSE_LIFETIME, expireCorpses } from "./lifespan.mjs";
 
 export const CREATURE_ASSETS = [
   "DesignAssets/Units/spiny-back-beetle.png", BEETLE_ANIMATION_ASSET, BEETLE_NEUTRAL_ASSET
@@ -40,7 +42,7 @@ export function createCreatures(environment, saved) {
   function walkable(x, y, raiding) {
     if (x < 0 || y < 0 || x >= size || y >= size) return false;
     const terrain = environment.world.terrain[y * size + x];
-    if (terrain < 2 || terrain > 6) return false;
+    if (terrain < 2 || terrain > 8) return false;
     if (burrowAt(x, y)) return false;
     if (!raiding && environment.world.sites.some(site => Math.hypot(x - site[0], y - site[1]) < 18)) return false;
     return !environment.colonies.some(colony => environment.games.get(colony.ownerId)?.nest?.health !== 0 && colony.occupiedCells.has((x - colony.x) + "," + (y - colony.y)));
@@ -197,6 +199,7 @@ export function createCreatures(environment, saved) {
           const x = agent.x + dx, y = agent.y + dy, key = x + "," + y;
           if (!walkable(x, y, Boolean(agent.raid)) || environment.food.get(key)?.amount > 0) continue;
           environment.food.set(key, { x, y, kind: "corpse", species, amount: 4, attributes: {}, facing: agent.facing,
+            diedAt: agent.deathStartedAt, decaysAt: agent.deathStartedAt + CORPSE_LIFETIME,
             renderX: x === agent.x && y === agent.y ? agent.deathRenderX : x,
             renderY: x === agent.x && y === agent.y ? agent.deathRenderY : y });
           return;
@@ -243,13 +246,14 @@ export function createCreatures(environment, saved) {
     agent.x = destination.x;
     agent.y = destination.y;
     agent.moveStartedAt = environment.simSeconds;
-    agent.moveDuration = 1.28;
+    agent.moveDuration = 1.28 / unitTerrainSpeedMultiplier(agent, environment.world.terrain[agent.y * size + agent.x]);
     agent.animationStartedAt = environment.simSeconds;
     agent.mode = "walk";
     agent.stepCount++;
   }
 
   function tick() {
+    expireCorpses(environment.food, environment.simSeconds);
     removeDead();
     growBurrows();
     raids.dispatch();

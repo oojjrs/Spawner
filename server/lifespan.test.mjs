@@ -19,7 +19,7 @@ test("군락 유닛은 게임 시간 3분까지 살고 수명에 도달하면 �
   const { game, agent, environment } = fixture(0);
   assert.equal(AGENT_LIFESPAN, 180);
   assert.equal(agent.lifespan, 180);
-  Object.assign(agent, { carrying: 3, carryingType: "twigs", shield: 1000, shieldUntil: 1000 });
+  Object.assign(agent, { carrying: 3, carryingType: "pebbles", shield: 1000, shieldUntil: 1000 });
   game.prepare(179.999);
   game.tick(0);
   assert.equal(game.agents.length, 1);
@@ -29,7 +29,7 @@ test("군락 유닛은 게임 시간 3분까지 살고 수명에 도달하면 �
   assert.equal(agent.health, 0);
   assert.equal(game.agents.length, 0);
   assert.equal([...environment.food.values()].filter(cell => cell.kind === "corpse").length, 1);
-  assert.equal([...environment.food.values()].filter(cell => cell.resourceType === "twigs")
+  assert.equal([...environment.food.values()].filter(cell => cell.resourceType === "pebbles")
     .reduce((sum, cell) => sum + cell.amount, 0), 3);
   game.prepare(181);
   game.tick(1);
