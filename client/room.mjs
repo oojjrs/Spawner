@@ -1,8 +1,9 @@
 import { generateWorld } from "../server/world.mjs";
 import { createGame } from "../server/game.mjs";
 import { createCreatures } from "../server/creatures.mjs";
-import { populateResourceNodes, clearResourceHazards } from "../server/resources.mjs";
+import { populateResourceNodes, clearResourceHazards, populateForestResources, populateColonyFood } from "../server/resources.mjs";
 import { isTreeFood } from "../server/food.mjs";
+import { PLAYER_TRIBES } from "../server/player-tribes.mjs";
 
 const mask = ["1,0", "2,0", "3,0", "0,1", "1,1", "2,1", "3,1", "4,1", "0,2", "1,2", "2,2", "3,2", "4,2", "0,3", "1,3", "2,3", "3,3", "4,3", "1,4", "2,4", "3,4"];
 const terrainTypes = ["deep", "shallow", "coast", "land", "grassland", "forest", "lowMountain", "highMountain", "ridge"];
@@ -26,7 +27,9 @@ function prepare(room) {
   for (const game of room.games.values()) game.prepare(room.simSeconds);
 }
 
-export function createRoom(title, seed) {
+export function createRoom(title, seed, tribe) {
+  if (tribe === undefined) tribe = "bean";
+  if (tribe !== null && !PLAYER_TRIBES.some(entry => entry.key === tribe)) throw new Error("시작할 부족을 선택해 주세요.");
   const room = { id: crypto.randomUUID(), title: requireName(title, 24),
     hostId: crypto.randomUUID(), seed, simSeconds: 0, revision: 0, updatedAt: Date.now(),
     world: generateWorld(seed), colonies: [], games: new Map(), food: new Map(), foodSpots: new Map() };
@@ -35,8 +38,11 @@ export function createRoom(title, seed) {
   clearResourceHazards(room);
   indexFood(room);
   const site = room.world.sites[0];
-  const colony = { id: 1, ownerId: room.hostId, name: room.title + "의 둥지", x: site[0] - 2, y: site[1] - 2, occupiedCells: new Set(mask) };
+  const colony = { id: 1, ownerId: room.hostId, tribe, name: room.title + "의 둥지", x: site[0] - 2, y: site[1] - 2, occupiedCells: new Set(mask) };
   room.colonies.push(colony);
+  populateColonyFood(room);
+  indexFood(room);
+  populateForestResources(room);
   room.games.set(room.hostId, createGame(room, colony));
   room.creatureSystem = createCreatures(room, null);
   prepare(room);
@@ -49,6 +55,17 @@ export function saveRoom(room) {
     simSeconds: room.simSeconds, revision: room.revision, updatedAt: Date.now(), resourceVersion: room.resourceVersion,
     colonies: room.colonies.map(colony => ({ ...colony, occupiedCells: [...colony.occupiedCells] })),
     food: [...room.food], creatures: room.creatureSystem.save(), games: [...room.games].map(([owner, game]) => [owner, game.save()]) };
+}
+
+export function chooseRoomTribe(room, tribe) {
+  const colony = room.colonies.find(entry => entry.ownerId === room.hostId);
+  if (!PLAYER_TRIBES.some(entry => entry.key === tribe)) throw new Error("시작할 부족을 선택해 주세요.");
+  if (colony.tribe !== null && colony.tribe !== tribe) throw new Error("이미 선택한 부족은 바꿀 수 없습니다.");
+  colony.tribe = tribe;
+  populateColonyFood(room);
+  indexFood(room);
+  for (const agent of room.games.get(room.hostId).agents) agent.tribe = tribe;
+  room.revision += 1;
 }
 
 export function restoreRoom(saved) {
@@ -71,7 +88,9 @@ export function restoreRoom(saved) {
     requireName(colony.name, 32);
     owners.add(colony.ownerId);
     colonyIds.add(colony.id);
-    room.colonies.push({ ...colony, occupiedCells: new Set(colony.occupiedCells) });
+    const tribe = Object.hasOwn(colony, "tribe") ? colony.tribe : "bean";
+    if (tribe !== null && !PLAYER_TRIBES.some(entry => entry.key === tribe)) throw new Error("저장된 부족 정보가 올바르지 않습니다.");
+    room.colonies.push({ ...colony, tribe, occupiedCells: new Set(colony.occupiedCells) });
   }
   if (!owners.has(room.hostId)) throw new Error("플레이할 둥지를 찾을 수 없습니다.");
   for (const [key, cell] of room.food) {
@@ -80,7 +99,9 @@ export function restoreRoom(saved) {
   }
   populateResourceNodes(room);
   clearResourceHazards(room);
+  populateColonyFood(room);
   indexFood(room);
+  populateForestResources(room);
   for (const [owner, data] of saved.games) {
     if (!owners.has(owner) || room.games.has(owner) || typeof data !== "string") throw new Error("개체 저장 형식이 올바르지 않습니다.");
     const state = JSON.parse(data)?.state;
@@ -96,6 +117,7 @@ export function restoreRoom(saved) {
 }
 
 export function tickRoom(room, elapsed) {
+  if (room.colonies.find(colony => colony.ownerId === room.hostId).tribe === null) return;
   room.simSeconds += elapsed;
   prepare(room);
   for (const game of room.games.values()) game.tick(elapsed);
@@ -110,12 +132,13 @@ export function snapshotRoom(room, includeWorld) {
     revision: room.revision, colonyId: room.colonies.find(colony => colony.ownerId === room.hostId).id,
     colonies: room.colonies.filter(colony => game.colonyKnown(colony)).map(colony => ({ ...colony, occupiedCells: [...colony.occupiedCells], nestLevel: room.games.get(colony.ownerId).nestLevel,
       nestHealth: room.games.get(colony.ownerId).nest.health, nestMaxHealth: room.games.get(colony.ownerId).nest.maxHealth })),
-    world: includeWorld ? { size: 320, seed: room.seed, terrain: room.world.terrain, hazards: room.world.hazards, burrows: room.world.burrows,
-      resourceCells: [...room.food.values()].filter(cell => cell.kind !== "corpse" && !isTreeFood(cell, room.world)).map(cell => [cell.x, cell.y]) } : undefined,
+    world: includeWorld ? { size: 320, seed: room.seed, terrain: room.world.terrain, hazards: room.world.hazards, burrows: room.world.burrows, treeCells: room.world.treeCells,
+      resourceCells: [...room.food.values()].filter(cell => cell.kind !== "corpse" && cell.resourceType !== "tree" && !isTreeFood(cell, room.world)).map(cell => [cell.x, cell.y]) } : undefined,
     state: game.snapshot() };
 }
 
 export function commandRoom(room, action) {
+  if (room.colonies.find(colony => colony.ownerId === room.hostId).tribe === null) throw new Error("시작할 부족을 먼저 선택해 주세요.");
   prepare(room);
   let result;
   if (action.type === "rename-colony") {
@@ -127,19 +150,4 @@ export function commandRoom(room, action) {
   } else result = room.games.get(room.hostId).command(action);
   room.revision += 1;
   return result;
-}
-
-export function importRooms(value) {
-  let entries;
-  if (value?.format === "spawner-local" && value.version === 1 && Array.isArray(value.rooms)) entries = value.rooms;
-  else if (value?.version === 1 && Array.isArray(value.rooms) && Array.isArray(value.sessions)) {
-    entries = value.rooms.map(room => ({ ...room, version: 1 }));
-  } else throw new Error("Spawner 백업 파일을 선택해 주세요.");
-  if (!entries.length || entries.length > 64) throw new Error("백업에는 1~64개의 월드가 필요합니다.");
-  return entries.map(entry => {
-    const room = restoreRoom(entry);
-    room.id = crypto.randomUUID();
-    snapshotRoom(room, false);
-    return saveRoom(room);
-  });
 }

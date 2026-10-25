@@ -1,4 +1,4 @@
-import { createRoom, saveRoom, restoreRoom, tickRoom, snapshotRoom, commandRoom, importRooms } from "./room.mjs";
+import { createRoom, chooseRoomTribe, saveRoom, restoreRoom, tickRoom, snapshotRoom, commandRoom } from "./room.mjs";
 import { openStorage } from "./storage.mjs";
 
 let storage;
@@ -35,7 +35,7 @@ async function persist() {
     room.updatedAt = saved.updatedAt;
     dirty = false;
     if (storageError && resumeAfterStorageError) {
-      running = true;
+      running = visible;
       lastTick = Date.now();
     }
     storageError = false;
@@ -46,7 +46,7 @@ async function persist() {
     storageError = true;
     resumeAfterStorageError ||= running;
     running = false;
-    const failure = new Error("브라우저에 저장하지 못해 진행을 멈췄습니다. 공간을 확보한 뒤 다시 시도하거나 백업을 내보내 주세요.", { cause: error });
+    const failure = new Error("브라우저에 저장하지 못해 진행을 멈췄습니다. 공간을 확보한 뒤 다시 시도해 주세요.", { cause: error });
     postMessage({ type: "error", error: failure.message, storageError: true });
     throw failure;
   }
@@ -57,41 +57,17 @@ function publish(includeWorld) {
     sampledAt: performance.timeOrigin + performance.now() - Math.max(0, Date.now() - lastTick) } });
 }
 
-async function advance() {
-  if (!running || !room) return;
-  const now = Date.now();
-  if (now < lastTick) lastTick = now;
-  const catchingUp = now - lastTick > 250;
-  if (visible && catchingUp) postMessage({ type: "state", packet: { roomId: room.id, catchingUp: true } });
-  let startedAt = performance.now();
-  try {
-    while (lastTick < now) {
-      const milliseconds = Math.min(100, now - lastTick);
-      tickRoom(room, milliseconds / 1000);
-      lastTick += milliseconds;
-      dirty = true;
-      if (performance.now() - startedAt >= 8 && lastTick < now) {
-        if (Date.now() - lastSave >= 5000) await persist();
-        await new Promise(resolve => setTimeout(resolve, 0));
-        startedAt = performance.now();
-      }
-    }
-    if (catchingUp) await persist();
-  } catch (error) {
-    running = false;
-    throw error;
-  }
-}
-
 async function handle(type, data) {
   if (type === "session") return { roomId: await storage.setting("roomId") };
   if (type === "list") {
-    return (await storage.list()).map(saved => ({ id: saved.id, title: saved.title,
-      updatedAt: saved.updatedAt, simSeconds: saved.simSeconds })).sort((a, b) => b.updatedAt - a.updatedAt);
+    return (await storage.list()).map(saved => ({ id: saved.id, title: saved.title, seed: saved.seed,
+      updatedAt: saved.updatedAt, simSeconds: saved.simSeconds,
+      tribe: saved.colonies.find(colony => colony.ownerId === saved.hostId)?.tribe })).sort((a, b) => b.updatedAt - a.updatedAt);
   }
   if (type === "create") {
     await persist();
-    const next = createRoom(data.title, crypto.getRandomValues(new Uint32Array(1))[0]);
+    if (!Number.isInteger(data.seed) || data.seed < 0 || data.seed > 4294967295) throw new Error("시드는 0~4294967295 사이의 정수로 입력해 주세요.");
+    const next = createRoom(data.title, data.seed, null);
     await storage.put(saveRoom(next));
     room = next;
     dirty = false;
@@ -110,7 +86,7 @@ async function handle(type, data) {
     storageError = false;
     lastTick = Date.now();
     lastSave = lastTick;
-    running = data.visible;
+    running = data.visible && room.colonies.find(colony => colony.ownerId === room.hostId).tribe !== null;
     return { ...snapshotRoom(room, true), sampledAt: performance.timeOrigin + performance.now() };
   }
   if (type === "pause") {
@@ -119,20 +95,20 @@ async function handle(type, data) {
     await persist();
     return null;
   }
+  if (type === "choose-tribe") {
+    if (!room || room.id !== data.roomId) throw new Error("방을 다시 열어 주세요.");
+    chooseRoomTribe(room, data.tribe);
+    dirty = true;
+    await persist();
+    return { roomId: room.id };
+  }
   if (type === "resume") {
     await persist();
     storageError = false;
-    if (!running) {
-      lastTick = Date.now();
-      lastSave = lastTick;
-    }
-    running = !!room;
+    lastTick = Date.now();
+    lastSave = lastTick;
+    running = !!room && visible && room.colonies.find(colony => colony.ownerId === room.hostId).tribe !== null;
     publish(false);
-    return null;
-  }
-  if (type === "visibility") {
-    await persist();
-    if (visible) publish(false);
     return null;
   }
   if (type === "command") {
@@ -151,16 +127,6 @@ async function handle(type, data) {
     if (await storage.setting("roomId") === data.roomId) await storage.setSetting("roomId", null);
     return null;
   }
-  if (type === "export") {
-    const saved = room?.id === data.roomId ? saveRoom(room) : await storage.get(data.roomId);
-    if (!saved) throw new Error("내보낼 월드를 찾을 수 없습니다.");
-    return { title: saved.title, text: JSON.stringify({ format: "spawner-local", version: 1, rooms: [saved] }) };
-  }
-  if (type === "import") {
-    const imported = importRooms(JSON.parse(data.text));
-    await storage.putAll(imported);
-    return { count: imported.length };
-  }
   throw new Error("요청을 처리하지 못했습니다.");
 }
 
@@ -171,11 +137,11 @@ function enqueue(action) {
 
 self.onmessage = event => {
   const { id, type, data } = event.data;
-  if (type === "visibility" || type === "resume") visible = data.visible;
+  if (type === "enter" || type === "resume") visible = data.visible;
+  if (type === "pause") visible = false;
   enqueue(async () => {
     try {
       await ready;
-      await advance();
       postMessage({ id, result: await handle(type, data) });
     }
     catch (error) { postMessage({ id, error: error.message }); }
@@ -184,12 +150,16 @@ self.onmessage = event => {
 
 let stepping = false;
 setInterval(() => {
-  if (!running || !room || stepping) return;
+  if (!running || !room || !visible || stepping) return;
   stepping = true;
   enqueue(async () => {
     try {
-      if (!running || !room) return;
-      await advance();
+      if (!running || !room || !visible) return;
+      const now = Date.now();
+      const elapsed = Math.min(0.25, Math.max(0, (now - lastTick) / 1000));
+      lastTick = now;
+      tickRoom(room, elapsed);
+      dirty = true;
       publish(false);
       if (Date.now() - lastSave >= 5000) await persist();
     } catch (error) {

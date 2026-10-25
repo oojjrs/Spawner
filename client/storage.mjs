@@ -27,7 +27,6 @@ export async function openStorage() {
     list() { return transaction("rooms", "readonly", store => store.getAll()); },
     get(id) { return transaction("rooms", "readonly", store => store.get(id)); },
     put(room) { return transaction("rooms", "readwrite", store => store.put(room)); },
-    putAll(rooms) { return transaction("rooms", "readwrite", store => { for (const room of rooms) store.put(room); }); },
     remove(id) { return transaction("rooms", "readwrite", store => store.delete(id)); },
     setting(key) { return transaction("settings", "readonly", store => store.get(key)); },
     setSetting(key, value) { return transaction("settings", "readwrite", store => store.put(value, key)); }

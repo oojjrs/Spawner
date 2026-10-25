@@ -30,8 +30,9 @@ export function syncHarvestPlayback(playback, agents, simSeconds, firstSnapshot)
 }
 
 export function harvestPlaybackPose(playback, cell, agents, now, definition) {
-  const contactFrame = clamp(Math.floor(definition.contactFrame), 1, 20);
-  const settleFrame = clamp(Math.floor(definition.settleFrame), contactFrame, 20);
+  const lastFrame = Number.isInteger(definition.frameCount) ? Math.max(1, definition.frameCount - 1) : 20;
+  const contactFrame = clamp(Math.floor(definition.contactFrame), 1, lastFrame);
+  const settleFrame = clamp(Math.floor(definition.settleFrame), contactFrame, lastFrame);
   const postSeconds = definition.postSeconds > 0 ? definition.postSeconds : POST_SECONDS;
   const harvestSeconds = definition.harvestSeconds > 0 ? definition.harvestSeconds : 1.5;
   const resourceType = cell.resourceType || (cell.kind === "corpse" ? "meat" : definition.key || "honey-mushrooms");
@@ -45,7 +46,18 @@ export function harvestPlaybackPose(playback, cell, agents, now, definition) {
     const age = now - effect.completedAt;
     if (age >= 0 && age + 1e-9 < postSeconds) {
       const progress = clamp(age / postSeconds, 0, 1);
-      return { frame: contactFrame + Math.floor((settleFrame - contactFrame) * progress + 1e-9), progress, phase: "collected",
+      const durations = definition.postFrameDurationsMs;
+      let frame = contactFrame + Math.floor((settleFrame - contactFrame) * progress + 1e-9);
+      if (Array.isArray(durations) && durations.length === settleFrame - contactFrame) {
+        let elapsedMs = age * 1000;
+        frame = contactFrame;
+        for (const duration of durations) {
+          if (elapsedMs + 1e-6 < duration) break;
+          elapsedMs -= duration;
+          frame++;
+        }
+      }
+      return { frame, progress, phase: "collected",
         opacity: remaining > 0 ? 1 : 1 - progress, remaining, visible: true };
     }
   }
@@ -67,5 +79,6 @@ export function harvestPlaybackPose(playback, cell, agents, now, definition) {
     return { frame: 0, progress: 0, phase: "prepare", opacity: 1, remaining, visible: true };
   }
   const progress = clamp((now - (nextHarvest - harvestSeconds)) / harvestSeconds, 0, 1);
-  return { frame: Math.floor((contactFrame - 1) * progress), progress, phase: "harvest", opacity: 1, remaining, visible: true };
+  const preFrames = Number.isInteger(definition.preFrameCount) ? clamp(definition.preFrameCount, 1, contactFrame) : contactFrame - 1;
+  return { frame: Math.min(contactFrame - 1, Math.floor(preFrames * progress)), progress, phase: "harvest", opacity: 1, remaining, visible: true };
 }

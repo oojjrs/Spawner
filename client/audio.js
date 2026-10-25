@@ -6,6 +6,10 @@
   "seed-eject": "DesignAssets/Audio/nest-seed-eject.mp3",
   "seed-crack": "DesignAssets/Audio/seed-shell-crack.mp3",
   "sprout-pop": "DesignAssets/Audio/bean-sprout-pop.mp3",
+  "spring-birth": "DesignAssets/Audio/spring-birth.mp3",
+  "pebble-birth": "DesignAssets/Audio/pebble-birth-roll.mp3",
+  "spring-landing": "DesignAssets/Audio/spring-landing.mp3",
+  "spring-footstep": "DesignAssets/Audio/spring-footstep.mp3",
   "harvest": "DesignAssets/Audio/mushroom-harvest-loop.mp3",
   "landing": "DesignAssets/Audio/bean-landing.mp3",
   "throw": "DesignAssets/Audio/mushroom-throw.mp3",
@@ -31,7 +35,7 @@
     let prepared = false;
     const voices = new Set();
     const lastPlayed = new Map();
-    const levels = { harvest: 0.8, landing: 1.2, footstep: 0.6, throw: 1.5, catch: 2, "seed-eject": 1, "seed-crack": 1, "sprout-pop": 1 };
+    const levels = { harvest: 0.8, landing: 1.2, footstep: 0.6, throw: 1.5, catch: 2, "seed-eject": 1, "seed-crack": 1, "sprout-pop": 1, "spring-birth": 1, "pebble-birth": 1, "spring-landing": 1.2, "spring-footstep": 0.6 };
     const button = document.getElementById("sound-toggle");
 
     function updateButton() {
@@ -164,11 +168,13 @@
         source.start();
         return;
       }
-      const interval = name === "footstep" ? 0.04 : name === "landing" ? 0.075 : 0.1;
+      const footstep = name === "footstep" || name === "spring-footstep";
+      const landing = name === "landing" || name === "spring-landing";
+      const interval = footstep ? 0.04 : landing ? 0.075 : 0.1;
       if (context.currentTime - (lastPlayed.get(name) ?? -Infinity) < interval) return;
       let concurrent = 0;
       for (const voice of voices) if (voice.name === name) concurrent++;
-      if (name === "landing" && concurrent >= 3 || name === "footstep" && concurrent >= 6) return;
+      if (landing && concurrent >= 3 || footstep && concurrent >= 6) return;
       if (start(name, volume, false)) lastPlayed.set(name, context.currentTime);
     }
 

@@ -1,3 +1,61 @@
+import { SPRING_BIRTH_DURATIONS, SPRING_BIRTH_DURATION, PEBBLE_BIRTH_DURATIONS, PEBBLE_BIRTH_DURATION } from "../server/birth.mjs";
+
+export const SPRING_BIRTH_ANIMATION = Object.freeze({
+  image: "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp",
+  frameSize: 512, columns: 4, frameCount: 13, pivotX: 320, pivotY: 448,
+  outletX: 86, outletY: 105, height: 224, detachAt: .53, contactAt: .79,
+  duration: SPRING_BIRTH_DURATION, durationsMs: SPRING_BIRTH_DURATIONS
+});
+
+export function springBirthPlacement(elapsed, outlet, target, height) {
+  if (elapsed < 0 || elapsed >= SPRING_BIRTH_DURATION) return null;
+  const animation = SPRING_BIRTH_ANIMATION;
+  let end = 0, frame = animation.frameCount - 1;
+  for (let index = 0; index < animation.durationsMs.length; index++) {
+    end += animation.durationsMs[index] / 1000;
+    if (elapsed + 1e-9 < end) { frame = index; break; }
+  }
+  const scale = height / animation.height;
+  const startX = outlet.x - animation.outletX * scale;
+  const startY = outlet.y - animation.outletY * scale;
+  const endX = target.x - animation.pivotX * scale;
+  const endY = target.y - animation.pivotY * scale;
+  const progress = Math.max(0, Math.min(1, (elapsed - animation.detachAt) / (animation.contactAt - animation.detachAt)));
+  const x = startX + (endX - startX) * progress;
+  const y = startY + (endY - startY) * progress * progress;
+  return { frame, x, y, scale, rootX: x + animation.pivotX * scale, rootY: y + animation.pivotY * scale };
+}
+
+export const PEBBLE_BIRTH_ANIMATION = Object.freeze({
+  image: "DesignAssets/Tribes/pebble/AnimationStudies/birth-nest-v2/birth-unit.webp",
+  nest: "DesignAssets/Tribes/pebble/AnimationStudies/birth-nest-v2/birth-nest.webp",
+  frameSize: 512, columns: 4, frameCount: 22, pivotX: 255.5, pivotY: 460,
+  outletX: 261, outletY: 244, height: 121, unitHeight: 229, unitPivotY: 460,
+  detachAt: .83, contactAt: 1.43, audioAt: .25,
+  nestOutletX: .4982714277615699, nestOutletY: .855390296309837,
+  duration: PEBBLE_BIRTH_DURATION, durationsMs: PEBBLE_BIRTH_DURATIONS
+});
+
+export function pebbleBirthPlacement(elapsed, outlet, target, height) {
+  const animation = PEBBLE_BIRTH_ANIMATION;
+  if (elapsed < 0 || elapsed >= animation.duration) return null;
+  let end = 0, frame = animation.frameCount - 1;
+  for (let index = 0; index < animation.durationsMs.length; index++) {
+    end += animation.durationsMs[index] / 1000;
+    if (elapsed + 1e-9 < end) { frame = index; break; }
+  }
+  const scale = height / animation.height;
+  const startX = outlet.x - animation.outletX * scale;
+  const startY = outlet.y - animation.outletY * scale;
+  const endX = target.x - animation.pivotX * scale;
+  const endY = target.y - animation.pivotY * scale;
+  const progress = Math.max(0, Math.min(1, (elapsed - animation.detachAt) / (animation.contactAt - animation.detachAt)));
+  const horizontal = progress * progress * (3 - 2 * progress);
+  const x = startX + (endX - startX) * horizontal;
+  const y = startY + (endY - startY) * progress * progress;
+  return { frame, x, y, scale, rootX: x + animation.pivotX * scale, rootY: y + animation.pivotY * scale };
+}
+
 const pieces = [
   { polygon: [[-.06, -1], [-.43, -.58], [-.46, -.32], [0, -.48]], vx: -82, vy: -145, spin: -5 },
   { polygon: [[-.06, -1], [.42, -.62], [.48, -.32], [0, -.48]], vx: 87, vy: -160, spin: 5 },

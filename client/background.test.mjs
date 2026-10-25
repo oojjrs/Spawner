@@ -46,7 +46,6 @@ function worker() {
       cpu += 0.25;
     },
     commandRoom: (room, action) => { room.orders.push({ action, time: room.simSeconds }); return room.simSeconds; },
-    importRooms: value => value.rooms,
     postMessage: message => messages.push(structuredClone(message)),
     setInterval: action => { interval = action; },
     setTimeout: action => { yields++; setImmediate(action); },
@@ -76,96 +75,108 @@ function worker() {
       await call("resume", { visible: true });
       messages.length = 0;
     },
-    async saved() { return JSON.parse((await call("export", { roomId: "room" })).text).rooms[0]; }
+    async saved() { return structuredClone(runInContext("saveRoom(room)", context)); }
   };
 }
 
-test("숨겨진 탭에서도 시간이 진행되고 자동 저장하며 화면 상태는 보내지 않는다", async () => {
+test("숨겨지면 저장 후 진행을 멈추고 복귀해도 숨겨진 한 시간을 반영하지 않는다", async () => {
   const client = worker();
   await client.start();
-  await client.call("visibility", { visible: false });
-  client.messages.length = 0;
-  client.jump(6000);
+  client.jump(100);
   await client.pulse();
-  assert.ok(Math.abs(client.saves.at(-1).simSeconds - 6) < 1e-9);
+  await client.call("pause", null);
+  assert.ok(Math.abs(client.saves.at(-1).simSeconds - 0.1) < 1e-9);
+  client.messages.length = 0;
+  const count = client.steps.length;
+  client.jump(3600000);
+  await client.pulse();
+  assert.equal(client.steps.length, count);
   assert.equal(client.messages.some(message => message.type === "state"), false);
-  await client.call("visibility", { visible: true });
+  await client.call("resume", { visible: true });
   const packet = client.messages.find(message => message.type === "state").packet;
-  assert.ok(Math.abs(packet.state.simSeconds - 6) < 1e-9);
+  assert.ok(Math.abs(packet.state.simSeconds - 0.1) < 1e-9);
+  client.jump(100);
+  await client.pulse();
+  assert.ok(Math.abs((await client.saved()).simSeconds - 0.2) < 1e-9);
 });
 
-test("한 시간 동안 실행이 중단되어도 누락 없이 작은 단계로 따라잡고 처리 사이에 양보한다", async () => {
+test("숨김 통지를 받기 전에 실행이 중단되어도 중단 시간을 따라잡지 않는다", async () => {
   const client = worker();
   await client.start();
   client.jump(3600325);
   await client.pulse();
-  const packets = client.messages.filter(message => message.type === "state").map(message => message.packet);
-  assert.equal(packets[0].catchingUp, true);
-  assert.ok(Math.abs(packets.at(-1).state.simSeconds - 3600.325) < 1e-7);
-  assert.ok(client.steps.every(step => step > 0 && step <= 0.1));
-  assert.ok(client.yields() > 0);
+  assert.ok(Math.abs((await client.saved()).simSeconds - 0.25) < 1e-9);
+  assert.ok(client.steps.every(step => step >= 0 && step <= 0.25));
+  assert.equal(client.yields(), 0);
+  assert.equal(client.messages.some(message => message.packet?.catchingUp), false);
+});
+
+test("중복 복귀와 반복 숨김 전환은 실제 실행한 시간만 더한다", async () => {
+  const client = worker();
+  await client.start();
+  client.jump(100);
   await client.pulse();
-  assert.ok(Math.abs((await client.saved()).simSeconds - 3600.325) < 1e-7);
-});
-
-test("복귀와 조작이 타이머보다 먼저 도착해도 중단 시간을 먼저 반영한다", async () => {
-  const client = worker();
-  await client.start();
-  await client.call("visibility", { visible: false });
-  client.jump(1250);
-  await client.call("visibility", { visible: true });
-  client.jump(3750);
-  const time = await client.call("command", { roomId: "room", action: { type: "harvest" } });
-  assert.ok(Math.abs(time - 5) < 1e-9);
-  const saved = await client.saved();
-  assert.ok(Math.abs(saved.orders[0].time - 5) < 1e-9);
-});
-
-test("숨김 전환과 중복 복귀가 진행 시간을 버리거나 두 번 더하지 않는다", async () => {
-  const client = worker();
-  await client.start();
-  client.jump(125);
-  await client.call("visibility", { visible: false });
+  await client.call("pause", null);
   client.jump(2500);
   await client.call("resume", { visible: true });
-  await client.call("visibility", { visible: true });
-  client.jump(375);
+  await client.call("resume", { visible: true });
+  client.jump(100);
   await client.pulse();
-  assert.ok(Math.abs((await client.saved()).simSeconds - 3) < 1e-9);
+  await client.call("pause", null);
+  client.jump(2500);
+  await client.call("resume", { visible: true });
+  client.jump(100);
+  await client.pulse();
+  assert.ok(Math.abs((await client.saved()).simSeconds - 0.3) < 1e-9);
 });
 
-test("명시적으로 일시정지한 구간과 월드를 처음 여는 동안은 따라잡지 않는다", async () => {
+test("숨겨진 상태의 재개 요청으로는 진행하지 않고 보이게 된 뒤 재개한다", async () => {
+  const client = worker();
+  await client.start();
+  await client.call("resume", { visible: false });
+  client.jump(10000);
+  await client.pulse();
+  assert.equal(client.steps.length, 0);
+  await client.call("resume", { visible: true });
+  client.jump(100);
+  await client.pulse();
+  assert.ok(Math.abs((await client.saved()).simSeconds - 0.1) < 1e-9);
+});
+
+test("월드를 처음 여는 동안과 명시적으로 일시정지한 구간은 진행하지 않는다", async () => {
   const client = worker();
   await client.call("create", { title: "test" });
   client.jump(60000);
   await client.call("enter", { roomId: "room", visible: false });
   client.jump(10000);
+  await client.pulse();
   await client.call("resume", { visible: true });
-  client.jump(1000);
+  client.jump(100);
+  await client.pulse();
   await client.call("pause", null);
   client.jump(60000);
-  await client.call("resume", { visible: true });
-  client.jump(1000);
   await client.pulse();
-  assert.ok(Math.abs((await client.saved()).simSeconds - 2) < 1e-9);
+  await client.call("resume", { visible: true });
+  client.jump(100);
+  await client.pulse();
+  assert.ok(Math.abs((await client.saved()).simSeconds - 0.2) < 1e-9);
 });
 
 test("시스템 시계가 뒤로 바뀌어도 진행이 역행하거나 장시간 멈추지 않는다", async () => {
   const client = worker();
   await client.start();
-  client.jump(1000);
+  client.jump(100);
   await client.pulse();
   client.jump(-60000);
   await client.pulse();
-  client.jump(1000);
+  client.jump(100);
   await client.pulse();
-  assert.ok(Math.abs((await client.saved()).simSeconds - 2) < 1e-9);
+  assert.ok(Math.abs((await client.saved()).simSeconds - 0.2) < 1e-9);
 });
 
-test("백그라운드 저장 실패 시 진행을 멈추고 오류를 알린다", async () => {
+test("저장 실패 시 진행을 멈추고 오류를 알린다", async () => {
   const client = worker();
   await client.start();
-  await client.call("visibility", { visible: false });
   client.failSaving(true);
   client.jump(6000);
   await client.pulse();
@@ -176,21 +187,20 @@ test("백그라운드 저장 실패 시 진행을 멈추고 오류를 알린다"
   assert.equal(client.steps.length, count);
 });
 
-test("저장 실패 뒤 복귀하여 재저장하면 정지한 시간을 건너뛰고 진행을 재개한다", async () => {
+test("저장 실패 뒤 재개하면 정지한 시간을 건너뛰고 진행을 재개한다", async () => {
   const client = worker();
   await client.start();
   client.failSaving(true);
   client.jump(6000);
   await client.pulse();
   const stoppedAt = (await client.saved()).simSeconds;
-  assert.ok(stoppedAt > 0 && stoppedAt <= 6);
   client.jump(10000);
   client.failSaving(false);
-  await client.call("visibility", { visible: true });
+  await client.call("resume", { visible: true });
   assert.ok(Math.abs((await client.saved()).simSeconds - stoppedAt) < 1e-9);
-  client.jump(1000);
+  client.jump(100);
   await client.pulse();
-  assert.ok(Math.abs((await client.saved()).simSeconds - stoppedAt - 1) < 1e-9);
+  assert.ok(Math.abs((await client.saved()).simSeconds - stoppedAt - 0.1) < 1e-9);
 });
 
 test("저장 오류 뒤 명시적으로 일시정지하면 재저장해도 자동으로 재개하지 않는다", async () => {
@@ -203,7 +213,7 @@ test("저장 오류 뒤 명시적으로 일시정지하면 재저장해도 자�
   client.failSaving(false);
   await client.call("pause", null);
   client.jump(1000);
-  await client.call("visibility", { visible: true });
+  await client.call("pause", null);
   await client.pulse();
   assert.ok(Math.abs((await client.saved()).simSeconds - stoppedAt) < 1e-9);
 });
@@ -256,7 +266,7 @@ test("숨겨지면 효과음과 음악을 멈추고 숨김 상태에서는 새 �
   assert.equal(sound.starts.length, 2);
 });
 
-test("복귀 후에도 따라잡기가 끝나기 전에는 음악과 효과음을 재개하지 않는다", async () => {
+test("복귀 후 화면 동기화가 끝나기 전에는 음악과 효과음을 재개하지 않는다", async () => {
   const sound = audio();
   await sound.api.playClick();
   sound.api.setActive(false);
