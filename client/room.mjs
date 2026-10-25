@@ -6,7 +6,7 @@ import { isTreeFood } from "../server/food.mjs";
 import { PLAYER_TRIBES } from "../server/player-tribes.mjs";
 
 const mask = ["1,0", "2,0", "3,0", "0,1", "1,1", "2,1", "3,1", "4,1", "0,2", "1,2", "2,2", "3,2", "4,2", "0,3", "1,3", "2,3", "3,3", "4,3", "1,4", "2,4", "3,4"];
-const terrainTypes = ["deep", "shallow", "coast", "land", "grassland", "forest", "lowMountain", "highMountain", "ridge"];
+const terrainTypes = ["deep", "shallow", "coast", "land", "grassland", "forest", "lowMountain", "highMountain", "ridge", "swamp"];
 
 export function requireName(value, limit) {
   if (typeof value !== "string" || !value.trim() || value.trim().length > limit) throw new Error(`이름은 1~${limit}자로 입력해 주세요.`);
@@ -27,25 +27,44 @@ function prepare(room) {
   for (const game of room.games.values()) game.prepare(room.simSeconds);
 }
 
-export function createRoom(title, seed, tribe) {
+export function roomTribeStarts(room) {
+  return PLAYER_TRIBES.map((tribe, index) => {
+    const camp = room.world.camps?.find(entry => entry.tribe === tribe.key);
+    const site = camp ? [camp.x, camp.y] : room.world.sites[index];
+    return { tribe: tribe.key, id: index + 1, x: site[0] - 2, y: site[1] - 2 };
+  });
+}
+
+function populateColonies(room, tribe) {
+  const starts = roomTribeStarts(room);
+  room.colonies = starts.map(start => ({ id: start.id, ownerId: start.tribe === (tribe || "bean") ? room.hostId : "tribe:" + start.tribe,
+    tribe: start.tribe === (tribe || "bean") ? tribe : start.tribe,
+    name: start.tribe === (tribe || "bean") ? room.title + "의 둥지" : PLAYER_TRIBES.find(entry => entry.key === start.tribe).name + "의 둥지",
+    x: start.x, y: start.y, occupiedCells: new Set(mask) }));
+  populateColonyFood(room);
+  indexFood(room);
+  populateForestResources(room);
+  room.games.clear();
+  for (const colony of room.colonies) room.games.set(colony.ownerId, createGame(room, colony));
+}
+
+export function createRoom(title, seed, tribe, onProgress) {
   if (tribe === undefined) tribe = "bean";
   if (tribe !== null && !PLAYER_TRIBES.some(entry => entry.key === tribe)) throw new Error("시작할 부족을 선택해 주세요.");
   const room = { id: crypto.randomUUID(), title: requireName(title, 24),
     hostId: crypto.randomUUID(), seed, simSeconds: 0, revision: 0, updatedAt: Date.now(),
-    world: generateWorld(seed), colonies: [], games: new Map(), food: new Map(), foodSpots: new Map() };
+    world: generateWorld(seed, undefined, progress => onProgress?.(progress * .8)), colonies: [], games: new Map(), food: new Map(), foodSpots: new Map() };
   for (const [x, y, amount, resourceType] of room.world.food) room.food.set(x + "," + y, { x, y, amount, initialAmount: amount, resourceType, terrain: terrainTypes[room.world.terrain[y * 320 + x]] });
   populateResourceNodes(room);
   clearResourceHazards(room);
   indexFood(room);
-  const site = room.world.sites[0];
-  const colony = { id: 1, ownerId: room.hostId, tribe, name: room.title + "의 둥지", x: site[0] - 2, y: site[1] - 2, occupiedCells: new Set(mask) };
-  room.colonies.push(colony);
-  populateColonyFood(room);
-  indexFood(room);
-  populateForestResources(room);
-  room.games.set(room.hostId, createGame(room, colony));
+  onProgress?.(.85);
+  populateColonies(room, tribe);
+  onProgress?.(.9);
   room.creatureSystem = createCreatures(room, null);
+  onProgress?.(.98);
   prepare(room);
+  onProgress?.(1);
   return room;
 }
 
@@ -61,10 +80,9 @@ export function chooseRoomTribe(room, tribe) {
   const colony = room.colonies.find(entry => entry.ownerId === room.hostId);
   if (!PLAYER_TRIBES.some(entry => entry.key === tribe)) throw new Error("시작할 부족을 선택해 주세요.");
   if (colony.tribe !== null && colony.tribe !== tribe) throw new Error("이미 선택한 부족은 바꿀 수 없습니다.");
-  colony.tribe = tribe;
-  populateColonyFood(room);
-  indexFood(room);
-  for (const agent of room.games.get(room.hostId).agents) agent.tribe = tribe;
+  if (colony.tribe === tribe) return;
+  populateColonies(room, tribe);
+  prepare(room);
   room.revision += 1;
 }
 
@@ -129,7 +147,7 @@ export function snapshotRoom(room, includeWorld) {
   prepare(room);
   const game = room.games.get(room.hostId);
   return { roomId: room.id, title: room.title, hostId: room.hostId, userId: room.hostId,
-    revision: room.revision, colonyId: room.colonies.find(colony => colony.ownerId === room.hostId).id,
+    revision: room.revision, tribeStarts: includeWorld ? roomTribeStarts(room) : undefined, colonyId: room.colonies.find(colony => colony.ownerId === room.hostId).id,
     colonies: room.colonies.filter(colony => game.colonyKnown(colony)).map(colony => ({ ...colony, occupiedCells: [...colony.occupiedCells], nestLevel: room.games.get(colony.ownerId).nestLevel,
       nestHealth: room.games.get(colony.ownerId).nest.health, nestMaxHealth: room.games.get(colony.ownerId).nest.maxHealth })),
     world: includeWorld ? { size: 320, seed: room.seed, terrain: room.world.terrain, hazards: room.world.hazards, burrows: room.world.burrows, treeCells: room.world.treeCells,

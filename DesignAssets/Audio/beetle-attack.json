@@ -1,0 +1,17 @@
+{
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "One palm-sized beetle forcefully snaps its chitin mandibles shut. A quick short air swish leading into one crisp dry hollow chitin clack, slight tiny joint rasp, then a short still tail. Small hard insect mechanism, close foreground, tactile and punchy rather than loud. No target impact, flesh, stone, metal, insect vocalization, voice, music, ambience or reverb.",
+  "duration_seconds": 0.5,
+  "prompt_influence": 0.85,
+  "loop": false,
+  "output_format": "mp3_44100_128",
+  "processing": "none",
+  "asset": "DesignAssets/Audio/beetle-attack.mp3",
+  "selectedCandidate": 1,
+  "installationAuthorization": "User requested creating and attaching these combat sounds to the unit page.",
+  "input": "text prompt only",
+  "generated_at": "2026-10-25T07:42:48.620805+00:00",
+  "request_id": null,
+  "sha256": "df4b50cedd62159fd5a8e6ac606d66292140315d84841fd115d2a61f8b0fa377"
+}

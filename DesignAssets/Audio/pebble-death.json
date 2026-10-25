@@ -1,0 +1,17 @@
+{
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "One palm-sized solid stone fractures and collapses into a few chunky pieces on gritty earth. Start with one dry mineral crack, then several dense small stone clacks as the chunks drop around 0.25 seconds, followed by a short granular grit trickle and two tiny settling ticks. Compact natural heavy stone, close dry miniature game foley. No explosion, glass, metal, avalanche, voice, music or reverb.",
+  "duration_seconds": 0.9,
+  "prompt_influence": 0.85,
+  "loop": false,
+  "output_format": "mp3_44100_128",
+  "processing": "none",
+  "asset": "DesignAssets/Audio/pebble-death.mp3",
+  "selectedCandidate": 1,
+  "installationAuthorization": "User requested creating and attaching these combat sounds to the unit page.",
+  "input": "text prompt only",
+  "generated_at": "2026-10-25T07:42:56.854768+00:00",
+  "request_id": null,
+  "sha256": "1c5008ac3b5eccc953946458e429bf639228e382435ec5684d7211ee317943fe"
+}

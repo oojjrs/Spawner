@@ -1,0 +1,23 @@
+{
+  "provider": "ElevenLabs",
+  "endpoint": "https://api.elevenlabs.io/v1/sound-generation",
+  "request": {
+    "text": "Close-up foley of bare hands firmly grabbing chunky handfuls of dense crumbly earth and packing them together. Deep soft earthy THUFFS, rounded muffled thumps, thick granular crunch and clods breaking in the palms. Compact rhythmic grab-and-pack motion with a strong low body and brief crumbling tail. No shovel, spade, tools, blade scrape, metal, sand hiss, wet squelch, skin slaps, footsteps, voice, music or ambience.",
+    "duration_seconds": 2,
+    "prompt_influence": 0.85,
+    "loop": true,
+    "model_id": "eleven_text_to_sound_v2",
+    "output_format": "mp3_44100_128",
+    "request_options": {
+      "max_retries": 0
+    }
+  },
+  "status": "completed",
+  "generated_at": "2026-10-25T07:35:15.241942+00:00",
+  "input_sources": [],
+  "processing": null,
+  "approved": true,
+  "bytes": 37241,
+  "sha256": "dcc6d696cf68fd3cbc72df61bde960d06368e234d13c07bb99a104121633063e",
+  "asset": "DesignAssets/Audio/clay-harvest-handful.mp3"
+}

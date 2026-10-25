@@ -1,0 +1,17 @@
+{
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "One palm-sized fresh mushroom loses support and its cap slowly folds down onto soft earth. Begin with a soft papery fungal membrane crease and spongy compression, then a low soft moist flump as the cap settles flat around 0.35 seconds, tiny fading skin rub. One subdued organic collapse, close dry miniature foley. No burst, tearing, gore, rubber squeak, voice, moan, music or reverb.",
+  "duration_seconds": 0.9,
+  "prompt_influence": 0.85,
+  "loop": false,
+  "output_format": "mp3_44100_128",
+  "processing": "none",
+  "asset": "DesignAssets/Audio/spore-death.mp3",
+  "selectedCandidate": 1,
+  "installationAuthorization": "User requested creating and attaching these combat sounds to the unit page.",
+  "input": "text prompt only",
+  "generated_at": "2026-10-25T07:42:56.455923+00:00",
+  "request_id": null,
+  "sha256": "3c71af164ec486c4795e0fd26dde69eebefc2be6ceb7733225263ce6a9f7b2e2"
+}

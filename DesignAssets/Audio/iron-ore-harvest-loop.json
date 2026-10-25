@@ -1,0 +1,38 @@
+{
+  "provider": "ElevenLabs",
+  "endpoint": "https://api.elevenlabs.io/v1/sound-generation",
+  "request": {
+    "text": "Pickaxe striking hard rock",
+    "duration_seconds": 4,
+    "prompt_influence": 0.8,
+    "loop": true,
+    "output_format": "mp3_44100_128",
+    "model_id": "eleven_text_to_sound_v2",
+    "request_options": {
+      "max_retries": 0
+    }
+  },
+  "status": "completed",
+  "generated_at": "2026-10-25T07:44:49.976317+00:00",
+  "source_generation_sha256": "5055e2a7b79cc000d319e3b730d50a50f4d468b48036f8e2ae4870f9aa51a887",
+  "processing": {
+    "operation": "trim",
+    "start_sample": 44323,
+    "end_sample": 132523,
+    "start_seconds": 1.0050566893424036,
+    "end_seconds": 3.0050566893424038,
+    "gain_change_db": 0,
+    "playback_speed_ratio": 1,
+    "output_codec": "pcm_s16le"
+  },
+  "approved": true,
+  "approved_at": "2026-10-25T08:23:26.002984+00:00",
+  "asset": "DesignAssets/Audio/iron-ore-harvest-loop.wav",
+  "duration_seconds": 2.0,
+  "loop": true,
+  "sample_rate": 44100,
+  "channels": 2,
+  "bytes": 352878,
+  "sha256": "98bc172422bc4c7aa8fab5740b13580ee99ffe2af61a96815c1aa7d2f43ea8c9",
+  "input_sources": []
+}

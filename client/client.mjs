@@ -12,6 +12,7 @@ export function createClient(onState, onError, onSaved, workerSource) {
     if (message.type === "saved") { onSaved(message); return; }
     const request = requests.get(message.id);
     if (!request) return;
+    if (message.type === "progress") { request.onProgress?.(message.progress); return; }
     requests.delete(message.id);
     if (message.error) request.reject(new Error(message.error));
     else request.resolve(message.result);
@@ -25,11 +26,11 @@ export function createClient(onState, onError, onSaved, workerSource) {
     onError(fatalError.message);
   };
   return {
-    call(type, data) {
+    call(type, data, onProgress) {
       if (fatalError) return Promise.reject(fatalError);
       return new Promise((resolve, reject) => {
         const id = ++nextId;
-        requests.set(id, { resolve, reject });
+        requests.set(id, { resolve, reject, onProgress });
         worker.postMessage({ id, type, data });
       });
     }

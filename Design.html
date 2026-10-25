@@ -17,6 +17,7 @@
 .food-asset-table{width:610px;min-width:554px;max-width:100%;table-layout:fixed}.food-title-column{width:92px}#codex-food{border-top:0}#codex-food .food-table-wrap{width:fit-content;max-width:100%;max-height:calc(100dvh - 128px);overflow:auto;border-color:#526b64}#codex-food .food-asset-table th,#codex-food .food-asset-table td{padding:12px;text-align:center;vertical-align:middle;border-bottom:1px solid #42554f}#codex-food .food-asset-table tr>*+*{border-left:2px solid #6a8c81}#codex-food .food-asset-table thead th{position:sticky;top:0;z-index:1;font-size:1rem;letter-spacing:.06em;border-bottom:2px solid #6a8c81}#codex-food .food-asset-table thead th:first-child{background:#29332e}#codex-food .food-asset-table thead th:nth-child(2){background:#243d33}#codex-food .food-asset-table thead th:nth-child(3){background:#3b3326}#codex-food .food-asset-table thead th:last-child{background:#293c4b;color:#b7d7f2}#codex-food .food-asset-table tbody th{background:#202925;color:var(--ink);font-size:.82rem;font-weight:600}#codex-food .food-asset-table td:nth-child(2){background:#19251f}#codex-food .food-asset-table td:nth-child(3){background:#29261f}#codex-food .food-asset-table td:last-child{background:#1c252e}#codex-food .art-card{width:130px;max-width:none;margin:0 auto}#codex-food .art-card>a{display:grid;place-items:center;width:130px;height:130px;padding:0;cursor:zoom-in}#codex-food .art-card>a:hover{border-color:var(--accent)}#codex-food .art-card>a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}#codex-food .food-asset-table .art-card img{display:block;width:128px;height:128px;max-width:none;padding:0;object-fit:contain}.food-basic-originals{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}.lightbox.is-food-image{justify-items:end;padding:16px}.lightbox.is-food-image .lightbox-panel{width:min(900px,94vw);max-width:94vw;max-height:calc(100dvh - 32px)}.lightbox.is-food-image .lightbox-image{width:100%;height:calc(100dvh - 108px);max-width:100%;max-height:none;object-fit:contain}@media(max-width:540px){#codex-food .food-asset-table th,#codex-food .food-asset-table td{padding:10px 6px}.lightbox.is-food-image{padding:8px}.lightbox.is-food-image .lightbox-panel{width:calc(100vw - 16px);max-width:calc(100vw - 16px)}}#codex-food .art-card>a{position:relative}#codex-food .resource-carried-original{transform:scale(.28);transform-origin:50% 50%}#codex-food .resource-carried-compact{transform:scale(.5);transform-origin:50% 50%}#codex-food .food-world-sprite{position:absolute;left:0;top:0;width:128px;height:128px;background-repeat:no-repeat}
 
 .section-group:has(#codex-nest.is-page-active)>summary,#codex-nest>summary{display:none}#codex-nest{border-top:0}#codex-nest>.details-body{padding-top:18px}.nest-table-wrap{width:fit-content;max-width:100%;overflow:auto}.nest-table{width:360px;min-width:360px;table-layout:fixed}.nest-table th,.nest-table td{width:136px;padding:4px;text-align:center;vertical-align:middle}.nest-table th{font-size:.85rem;white-space:nowrap}.nest-table tr>:first-child{width:88px}.nest-table th[scope="row"]{color:var(--ink);font-weight:500;background:transparent}.nest-table td{height:144px}.nest-table tr:last-child>th,.nest-table tr:last-child>td{border-bottom:0}.nest-image{width:128px;height:128px;margin:0}.nest-image>a{display:grid;place-items:center;width:128px;height:128px;border:1px solid var(--line);border-radius:6px;background:#13201c;overflow:hidden}.nest-image img{display:block;width:128px;height:128px;padding:6px;object-fit:contain}.nest-image>a:hover{border-color:var(--accent)}.nest-image>a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.lightbox.is-nest-image .lightbox-panel{max-width:94vw}.lightbox.is-nest-image .lightbox-image{width:min(84vw,900px);height:min(76vh,900px);object-fit:contain}
+#art-combat-audio{min-width:1040px}#art-combat-audio th{white-space:nowrap}#art-combat-audio audio{width:260px}
 </style>
 <style id="unit-images-style">
 .section-group[data-section-group="codex"]:has(#codex-units.is-page-active)>summary{display:none}
@@ -146,10 +147,7 @@
       </div>
       <div class="map-side-controls"><button id="map-grid" type="button" aria-pressed="false">80칸 선</button></div>
       <table class="map-legend-table" aria-label="맵 범례"><tbody>
-        <tr><td><div class="map-legend-entry"><button class="map-legend-button" type="button" data-layer="camp-1" aria-pressed="false"><span aria-hidden="true"><span style="color:#b3dcca">◆</span></span><span>새싹콩</span></button><button class="map-logic-button" type="button" data-logic="camp-1" aria-expanded="false" aria-controls="map-logic" aria-label="새싹콩 배치 로직">로직</button></div></td></tr>
-        <tr><td><div class="map-legend-entry"><button class="map-legend-button" type="button" data-layer="camp-2" aria-pressed="false"><span aria-hidden="true"><span style="color:#d7a7e2">◆</span></span><span>포자버섯</span></button><button class="map-logic-button" type="button" data-logic="camp-2" aria-expanded="false" aria-controls="map-logic" aria-label="포자버섯 배치 로직">로직</button></div></td></tr>
-        <tr><td><div class="map-legend-entry"><button class="map-legend-button" type="button" data-layer="camp-3" aria-pressed="false"><span aria-hidden="true"><span style="color:#f0c06e">◆</span></span><span>몽돌</span></button><button class="map-logic-button" type="button" data-logic="camp-3" aria-expanded="false" aria-controls="map-logic" aria-label="몽돌 배치 로직">로직</button></div></td></tr>
-        <tr><td><div class="map-legend-entry"><button class="map-legend-button" type="button" data-layer="camp-4" aria-pressed="false"><span aria-hidden="true"><span style="color:#8ac8e5">◆</span></span><span>샘방울</span></button><button class="map-logic-button" type="button" data-logic="camp-4" aria-expanded="false" aria-controls="map-logic" aria-label="샘방울 배치 로직">로직</button></div></td></tr>
+        <tr><td><div class="map-legend-entry"><button class="map-legend-button" type="button" data-layer="camps" aria-pressed="false"><span aria-hidden="true">◆</span><span>종족</span></button><button class="map-logic-button" type="button" data-logic="camps" aria-expanded="false" aria-controls="map-logic" aria-label="종족 배치 로직">로직</button></div><div class="map-resource-submenu"><select id="map-camp-type" aria-label="종족 종류"><option value="">전체 종족</option><option value="camp-1">새싹콩</option><option value="camp-2">포자버섯</option><option value="camp-3">몽돌</option><option value="camp-4">샘방울</option></select></div></td></tr>
         <tr><td><div class="map-legend-entry"><button class="map-legend-button" type="button" data-layer="resources" aria-pressed="false"><span aria-hidden="true"><i class="map-swatch" style="--swatch:#d4bc7d"></i></span><span>자원</span></button><button class="map-logic-button" type="button" data-logic="resources" aria-expanded="false" aria-controls="map-logic" aria-label="자원 배치 로직">로직</button></div><div class="map-resource-submenu"><select id="map-resource-type" aria-label="자원 종류"><option value="">전체 자원</option></select></div></td></tr>
         <tr><td><div class="map-legend-entry"><button class="map-legend-button" type="button" data-layer="water" aria-pressed="false"><span aria-hidden="true"><i class="map-swatch" style="--swatch:#263f50"></i></span><span>물</span></button><button class="map-logic-button" type="button" data-logic="water" aria-expanded="false" aria-controls="map-logic" aria-label="물 배치 로직">로직</button></div></td></tr>
         <tr><td><div class="map-legend-entry"><button class="map-legend-button" type="button" data-layer="swamp" aria-pressed="false"><span aria-hidden="true"><i class="map-swatch" style="--swatch:#547d70"></i></span><span>늪</span></button><button class="map-logic-button" type="button" data-logic="swamp" aria-expanded="false" aria-controls="map-logic" aria-label="늪 배치 로직">로직</button></div></td></tr>
@@ -157,14 +155,12 @@
         <tr><td><div class="map-legend-entry"><button class="map-legend-button" type="button" data-layer="forest" aria-pressed="false"><span aria-hidden="true"><i class="map-swatch" style="--swatch:#2b493d"></i></span><span>숲</span></button><button class="map-logic-button" type="button" data-logic="forest" aria-expanded="false" aria-controls="map-logic" aria-label="숲 배치 로직">로직</button></div></td></tr>
         <tr><td><div class="map-legend-entry"><button class="map-legend-button" type="button" data-layer="thorn-root" aria-pressed="false"><span aria-hidden="true"><i class="map-swatch" style="--swatch:#c68358"></i></span><span>가시 뿌리</span></button><button class="map-logic-button" type="button" data-logic="thorn-root" aria-expanded="false" aria-controls="map-logic" aria-label="가시 뿌리 배치 로직">로직</button></div></td></tr>
         <tr><td><div class="map-legend-entry"><button class="map-legend-button" type="button" data-layer="mountains" aria-pressed="false"><span aria-hidden="true"><i class="map-swatch" style="--swatch:#263029"></i></span><span>산지</span></button><button class="map-logic-button" type="button" data-logic="mountains" aria-expanded="false" aria-controls="map-logic" aria-label="산지 배치 로직">로직</button></div></td></tr>
-        <tr><td><div class="map-legend-entry"><button class="map-legend-button" type="button" data-layer="ranges" aria-pressed="false"><span aria-hidden="true"><i class="map-dash"></i></span><span>둥지 보호</span></button><button class="map-logic-button" type="button" data-logic="ranges" aria-expanded="false" aria-controls="map-logic" aria-label="둥지 보호 배치 로직">로직</button></div></td></tr>
         <tr><td><div class="map-legend-entry"><button class="map-legend-button" type="button" data-layer="units" aria-pressed="false"><span aria-hidden="true">◎</span><span>유닛 등장 <span id="map-unit-count"></span></span></button><button class="map-logic-button" type="button" data-logic="units" aria-expanded="false" aria-controls="map-logic" aria-label="유닛 등장 배치 로직">로직</button></div><div class="map-resource-submenu"><select id="map-unit-type" aria-label="유닛 종류"><option value="">전체 유닛</option><option value="burrow-small">작은 굴</option><option value="burrow-large">큰 굴</option></select></div></td></tr>
       </tbody></table>
     </figcaption>
     <aside class="map-logic" id="map-logic" aria-label="배치 로직 설명" hidden><span class="map-logic-current">현재 미리보기</span><h3 id="map-logic-title"></h3><div id="map-logic-body"></div></aside>
   </figure>
   <details class="map-encounter-rules" id="world-encounter-rules"><summary>중립 유닛 등장·개체 수·재등장 규칙 · 19종</summary>
-    <p class="note">등장·보충은 목표 기획이며, 딱정벌레 굴의 초기 수·증식·상한은 현행 규칙이다.</p>
     <ul class="map-encounter-common">
       <li>지형·물가·둥지 보호 조건을 따르며, 딱정벌레 외 일반종은 첫 결원부터 주기마다 1마리씩 정원까지 보충한다.</li>
       <li>일반종 보충은 플레이어 시야 밖의 유효한 빈자리에서 진행하며, 자리가 없으면 보류한다.</li>
@@ -174,7 +170,6 @@
     </ul>
     <div class="table-wrap"><table class="map-encounter-rule-table"><thead><tr><th scope="col">유닛</th><th scope="col">등장 조건</th><th scope="col">개체 수</th><th scope="col">재등장 규칙</th></tr></thead><tbody id="map-encounter-rule-rows"></tbody></table></div>
   </details>
-  <p class="note">늪·서식 위험·자원 분포는 기획 초안이며 게임에는 아직 적용되지 않았다.</p>
   <template id="map-mountain-textures"><div class="map-mountain-textures">
     <figure><a href="DesignAssets/Terrain/low-mountain-ground.png" style="--terrain-color:#263029"><img src="DesignAssets/Terrain/low-mountain-ground.png" alt="낮은 산 바닥" width="1024" height="1024"></a><figcaption>낮은 산<small>low-mountain-ground.png</small></figcaption></figure>
     <figure><a href="DesignAssets/Terrain/high-mountain-ground.png" style="--terrain-color:#374139"><img src="DesignAssets/Terrain/high-mountain-ground.png" alt="높은 산 바닥" width="1024" height="1024"></a><figcaption>높은 산<small>high-mountain-ground.png</small></figcaption></figure>
@@ -196,84 +191,84 @@
     "population": "서식지당 초기 3마리 · 생존 상한 3마리",
     "respawn": "3분마다 1마리 보충한다.",
     "guaranteedAt": "",
-    "implemented": false
+    "implemented": true
   },
   "dew-rabbit": {
     "spawn": "시작부터 서식하며 접근하면 숨거나 도주한다.",
     "population": "서식지당 초기 3마리 · 생존 상한 3마리",
     "respawn": "4분마다 1마리 보충한다.",
     "guaranteedAt": "",
-    "implemented": false
+    "implemented": true
   },
   "soil-mole": {
     "spawn": "시작부터 땅속에 잠복하고 주변 채집에 반응해 지상으로 나온다.",
     "population": "서식지당 초기 1마리 · 생존 상한 1마리",
     "respawn": "사망 5분 후 땅속에서 재등장한다.",
     "guaranteedAt": "",
-    "implemented": false
+    "implemented": true
   },
   "bundle-snail": {
     "spawn": "시작부터 정해진 노선을 순회한다.",
     "population": "서식지당 초기 1마리 · 생존 상한 1마리",
     "respawn": "사망 8분 후 노선 시작점에서 재등장한다.",
     "guaranteedAt": "",
-    "implemented": false
+    "implemented": true
   },
   "cotton-sheep": {
     "spawn": "시작부터 먹이터에 무리로 배치한다.",
     "population": "서식지당 초기 4마리 · 생존 상한 4마리",
     "respawn": "5분마다 1마리 보충한다.",
     "guaranteedAt": "",
-    "implemented": false
+    "implemented": true
   },
   "rolling-acorn": {
     "spawn": "시작부터 정지 상태로 배치하고 접근하면 구르기 시작한다.",
     "population": "서식지당 초기 3마리 · 생존 상한 3마리",
     "respawn": "3분마다 1마리 보충한다.",
     "guaranteedAt": "",
-    "implemented": false
+    "implemented": true
   },
   "soil-boar": {
     "spawn": "시작부터 영역을 지키며 침범에 반응한다.",
     "population": "서식지당 초기 2마리 · 생존 상한 2마리",
     "respawn": "6분마다 1마리 보충한다.",
     "guaranteedAt": "",
-    "implemented": false
+    "implemented": true
   },
   "bubble-toad": {
     "spawn": "시작부터 물가에 잠복하고 접근하면 육지로 나온다.",
     "population": "서식지당 초기 2마리 · 생존 상한 2마리",
     "respawn": "5분마다 물가에 1마리 보충한다.",
     "guaranteedAt": "",
-    "implemented": false
+    "implemented": true
   },
   "vine-turtle": {
     "spawn": "시작부터 긴 구간을 천천히 순회한다.",
     "population": "서식지당 초기 1마리 · 생존 상한 1마리",
     "respawn": "사망 10분 후 재등장한다.",
     "guaranteedAt": "",
-    "implemented": false
+    "implemented": true
   },
   "shadow-weasel": {
     "spawn": "게임 5분부터 사냥터에서 활동한다.",
     "population": "서식지당 초기 1마리 · 생존 상한 1마리",
     "respawn": "사망 8분 후 재등장한다.",
     "guaranteedAt": "",
-    "implemented": false
+    "implemented": true
   },
   "snare-vine": {
     "spawn": "시작부터 고정 위치에 잠복하고 사거리 안의 대상에 반응한다.",
     "population": "서식지당 초기 1마리 · 생존 상한 1마리",
     "respawn": "사망 6분 후 새 덩굴로 재등장한다.",
     "guaranteedAt": "",
-    "implemented": false
+    "implemented": true
   },
   "talon-owl": {
     "spawn": "시작부터 횃대에서 대기하고 대상이 들어오면 출격한다.",
     "population": "서식지당 초기 1마리 · 생존 상한 1마리",
     "respawn": "사망 10분 후 횃대에서 재등장한다.",
     "guaranteedAt": "",
-    "implemented": false
+    "implemented": true
   },
   "spiny-back-beetle": {
     "spawn": "시작부터 굴에서 생성한다.",
@@ -287,42 +282,42 @@
     "population": "맵 전체 초기 1마리 · 생존 상한 1마리",
     "respawn": "사망하면 재등장하지 않는다.",
     "guaranteedAt": "5분",
-    "implemented": false
+    "implemented": true
   },
   "lantern-keeper": {
     "spawn": "정찰이 등장지 주변에 접근하면 빛으로 30초간 예고한 뒤 등장한다.",
     "population": "맵 전체 초기 1마리 · 생존 상한 1마리",
     "respawn": "숨어도 같은 개체가 복귀하며, 사망하면 재등장하지 않는다.",
     "guaranteedAt": "6분",
-    "implemented": false
+    "implemented": true
   },
   "old-garden-snail": {
     "spawn": "게임 6분부터 순회 노선 방문을 시작한다.",
     "population": "맵 전체 초기 1마리 · 생존 상한 1마리",
     "respawn": "생존 중 계속 순회하며, 사망하면 재등장하지 않는다.",
     "guaranteedAt": "6분",
-    "implemented": false
+    "implemented": true
   },
   "walking-forest": {
     "spawn": "넝쿨거북을 발견했고 게임 시간이 8분 이상이면 등장한다.",
     "population": "맵 전체 초기 1마리 · 생존 상한 1마리",
     "respawn": "이동·정지를 반복하며, 사망하면 재등장하지 않는다.",
     "guaranteedAt": "10분",
-    "implemented": false
+    "implemented": true
   },
   "white-paw": {
     "spawn": "그늘족제비 1마리를 처치했고 게임 시간이 8분 이상이면 등장한다.",
     "population": "맵 전체 초기 1마리 · 생존 상한 1마리",
     "respawn": "퇴각 후에도 같은 개체이며, 사망하면 재등장하지 않는다.",
     "guaranteedAt": "12분",
-    "implemented": false
+    "implemented": true
   },
   "spiny-back-leader": {
     "spawn": "큰 굴의 습격이 한 번 발생했고 게임 시간이 10분 이상이면 등장한다.",
     "population": "맵 전체 초기 1마리 · 생존 상한 1마리",
     "respawn": "사망하면 재등장하지 않는다.",
     "guaranteedAt": "12분",
-    "implemented": false
+    "implemented": true
   }
 };
   const ENCOUNTER_PLANS = [{"key":"flower-tail-bird","kind":"먹이터","radius":10,"routeLength":0,"state":"상주","safeRadius":10,"preferredDistance":30,"behavior":"초원·숲 경계의 먹이터를 오갑니다.","badge":"1","color":"#92d7ab"},{"key":"dew-rabbit","kind":"서식지","radius":8,"routeLength":0,"state":"상주","safeRadius":10,"preferredDistance":35,"behavior":"접근하면 주변 서식 범위 안에서 숨거나 달아납니다.","badge":"2","color":"#a4d6ef"},{"key":"soil-mole","kind":"땅굴","radius":6,"routeLength":0,"state":"잠복","safeRadius":10,"preferredDistance":40,"behavior":"흙더미로 위치를 예고하고 주변 채집에 반응합니다.","badge":"3","color":"#d4ae86"},{"key":"bundle-snail","kind":"순회","radius":3,"routeLength":32,"state":"상주","safeRadius":10,"preferredDistance":50,"behavior":"해안·초원·숲을 잇는 구간을 천천히 순회합니다.","badge":"4","color":"#d9b1ea"},{"key":"cotton-sheep","kind":"무리","radius":12,"routeLength":0,"state":"상주","safeRadius":10,"preferredDistance":36,"behavior":"초원 먹이터 안에서 무리로 움직입니다.","badge":"5","color":"#f2d995"},{"key":"rolling-acorn","kind":"반응","radius":10,"routeLength":0,"state":"잠복","safeRadius":10,"preferredDistance":42,"behavior":"숲 바닥과 평지 경계에서 접근에 반응해 구릅니다.","badge":"6","color":"#dcab77"},{"key":"soil-boar","kind":"영역","radius":14,"routeLength":0,"state":"경계","safeRadius":32,"preferredDistance":60,"behavior":"영역 침범에 경고한 뒤 공격합니다.","badge":"7","color":"#ed9979"},{"key":"bubble-toad","kind":"물가","radius":10,"routeLength":0,"state":"상주","safeRadius":32,"preferredDistance":64,"behavior":"물가에 흔적을 남기고 접근하면 육지로 나옵니다.","badge":"8","color":"#85d9d4"},{"key":"vine-turtle","kind":"순회","radius":4,"routeLength":40,"state":"상주","safeRadius":32,"preferredDistance":70,"behavior":"숲과 초원을 잇는 구간을 느리게 순회합니다.","badge":"9","color":"#90c997"},{"key":"shadow-weasel","kind":"사냥터","radius":18,"routeLength":0,"state":"중반 활동","safeRadius":32,"preferredDistance":90,"behavior":"숲의 이동 통로에 흔적을 먼저 드러냅니다.","badge":"10","color":"#bcace5"},{"key":"snare-vine","kind":"잠복지","radius":4,"routeLength":0,"state":"잠복","safeRadius":32,"preferredDistance":86,"behavior":"숲속 고정 위치에서 가까운 대상에 반응합니다.","badge":"11","color":"#cf94b9"},{"key":"talon-owl","kind":"출격","radius":22,"routeLength":0,"state":"횃대 대기","safeRadius":32,"preferredDistance":100,"behavior":"횃대에서 주변 사냥 구간으로 출격합니다.","badge":"12","color":"#8dbcf0"},{"key":"spiny-back-beetle","kind":"굴","radius":9,"routeLength":0,"state":"상주","safeRadius":32,"preferredDistance":60,"behavior":"굴 주변을 지키며 큰 굴에서 습격합니다.","badge":"13","color":"#e2bf7c"},{"key":"spring-keeper","kind":"특수 먹이터","radius":12,"routeLength":0,"state":"등장 대기","safeRadius":22,"preferredDistance":72,"behavior":"꽃꼬리새의 특별한 먹이터가 활성화되면 등장합니다.","badge":"★1","color":"#c4ed8a"},{"key":"lantern-keeper","kind":"탐색","radius":10,"routeLength":0,"state":"등장 대기","safeRadius":22,"preferredDistance":80,"behavior":"숲 안쪽의 빛 흔적을 따라 발견합니다.","badge":"★2","color":"#e6d996"},{"key":"old-garden-snail","kind":"순회","radius":4,"routeLength":48,"state":"방문 대기","safeRadius":22,"preferredDistance":90,"behavior":"외곽의 긴 순회 구간을 따라 방문합니다.","badge":"★3","color":"#f2c8ac"},{"key":"walking-forest","kind":"순회","radius":5,"routeLength":56,"state":"후반 활동","safeRadius":32,"preferredDistance":100,"behavior":"넓은 숲과 초원 사이를 길게 이동합니다.","badge":"★4","color":"#74ddb1"},{"key":"white-paw","kind":"사냥터","radius":24,"routeLength":0,"state":"후반 활동","safeRadius":32,"preferredDistance":110,"behavior":"깊은 숲에서 흔적을 단계적으로 드러냅니다.","badge":"★5","color":"#efbedb"},{"key":"spiny-back-leader","kind":"우두머리 굴","radius":16,"routeLength":0,"state":"후반 활동","safeRadius":32,"preferredDistance":100,"behavior":"별도 큰 굴에서 후반에 활동을 시작합니다.","badge":"★6","color":"#ff9a89"}].map(plan => ({ ...CREATURES.concat(UNIQUE_CREATURES).find(creature => creature.key === plan.key), ...plan, ...ENCOUNTER_RULES[plan.key] }));
@@ -405,6 +400,85 @@
       }
       return resources.length >= 4 ? { resources, initialFood } : null;
     }
+    function placeSwamps(landscapeSeed) {
+      const candidates = [];
+      for (let y = 4; y < SIZE - 4; y += 4) for (let x = 4; x < SIZE - 4; x += 4) {
+        const index = y * SIZE + x;
+        if (terrain[index] !== 5 || waterDistance[index] < 2 || waterDistance[index] > 12 || heightField[index] >= 0.3) continue;
+        candidates.push({ x, y, index, priority: hash(x, y, landscapeSeed + 349) });
+      }
+      candidates.sort((a, b) => a.priority - b.priority);
+      const basins = [], basinCount = 3 + Math.floor(hash(0, 0, landscapeSeed + 353) * 3);
+      for (const candidate of candidates) {
+        if (basins.some(basin => Math.hypot(basin.x - candidate.x, basin.y - candidate.y) < 64)) continue;
+        basins.push(candidate);
+        if (basins.length === basinCount) break;
+      }
+      if (basins.length < 3) return 0;
+      const scores = new Float32Array(terrain.length);
+      let heapSize = 0;
+      stamp++;
+      function offer(index) {
+        if (visited[index] === stamp || terrain[index] < 2 || terrain[index] > 5 || heightField[index] >= 0.4) return;
+        visited[index] = stamp;
+        const x = index % SIZE, y = Math.floor(index / SIZE);
+        let radius = Infinity;
+        for (const basin of basins) radius = Math.min(radius, Math.hypot(x - basin.x, y - basin.y));
+        scores[index] = radius + noise(x, y, 19, landscapeSeed + 359) * 3 + heightField[index] * 4 - moistureField[index] * 3;
+        let position = heapSize++;
+        while (position > 0) {
+          const parent = (position - 1) >>> 1;
+          if (scores[queue[parent]] <= scores[index]) break;
+          queue[position] = queue[parent]; position = parent;
+        }
+        queue[position] = index;
+      }
+      for (const basin of basins) offer(basin.index);
+      const target = Math.round(terrain.length * (0.07 + hash(0, 0, landscapeSeed + 367) * 0.02));
+      let swampCount = 0;
+      while (heapSize && swampCount < target) {
+        const index = queue[0], last = queue[--heapSize];
+        if (heapSize) {
+          let position = 0;
+          while (position * 2 + 1 < heapSize) {
+            let child = position * 2 + 1;
+            if (child + 1 < heapSize && scores[queue[child + 1]] < scores[queue[child]]) child++;
+            if (scores[last] <= scores[queue[child]]) break;
+            queue[position] = queue[child]; position = child;
+          }
+          queue[position] = last;
+        }
+        terrain[index] = 9; swampCount++;
+        for (const next of adjacent(index)) offer(next);
+      }
+      if (swampCount < target) return 0;
+      const swampDepth = new Uint8Array(terrain.length);
+      for (let index = 0; index < terrain.length; index++) {
+        const x = index % SIZE, y = Math.floor(index / SIZE);
+        swampDepth[index] = terrain[index] === 9 && x > 0 && y > 0 && x < SIZE - 1 && y < SIZE - 1 ? 255 : 0;
+      }
+      for (let y = 1; y < SIZE - 1; y++) for (let x = 1; x < SIZE - 1; x++) {
+        const index = y * SIZE + x;
+        swampDepth[index] = Math.min(swampDepth[index], 1 + Math.min(swampDepth[index - 1], swampDepth[index - SIZE - 1], swampDepth[index - SIZE], swampDepth[index - SIZE + 1]));
+      }
+      for (let y = SIZE - 2; y > 0; y--) for (let x = SIZE - 2; x > 0; x--) {
+        const index = y * SIZE + x;
+        swampDepth[index] = Math.min(swampDepth[index], 1 + Math.min(swampDepth[index + 1], swampDepth[index + SIZE - 1], swampDepth[index + SIZE], swampDepth[index + SIZE + 1]));
+      }
+      const spores = [];
+      for (let index = 0; index < terrain.length; index++) {
+        const x = index % SIZE, y = Math.floor(index / SIZE);
+        hazards[index] = terrain[index] === 5 && moistureField[index] > 0.3 && adjacent(index).filter(next => terrain[next] === 5).length >= 3 &&
+          noise(x, y, 13, landscapeSeed + 373) > 0.25 ? 2 : 0;
+        if (swampDepth[index] >= 5) spores.push({ index,
+          priority: swampDepth[index] + noise(x, y, 17, landscapeSeed + 379) * 2 + moistureField[index] });
+      }
+      const sporeTarget = Math.round(swampCount * 0.27);
+      if (spores.length < sporeTarget) return 0;
+      spores.sort((a, b) => b.priority - a.priority);
+      for (let index = 0; index < sporeTarget; index++) hazards[spores[index].index] = 1;
+      return swampCount;
+    }
     for (let attempt = 0; attempt < 12; attempt++) {
       const landscapeSeed = (seed + Math.imul(attempt + revision * 12, 2654435761)) >>> 0;
       for (let y = 0; y < SIZE; y++) for (let x = 0; x < SIZE; x++) {
@@ -435,19 +509,13 @@
       }
       for (let cursor = 0; cursor < waterEnd; cursor++) {
         const index = queue[cursor];
-        if (waterDistance[index] === 6) continue;
+        if (waterDistance[index] === 26) continue;
         for (const next of adjacent(index)) if (waterDistance[next] > waterDistance[index] + 1) {
           waterDistance[next] = waterDistance[index] + 1; queue[waterEnd++] = next;
         }
       }
-      for (let index = 0; index < terrain.length; index++) {
-        if (terrain[index] >= 2 && terrain[index] <= 5 && waterDistance[index] <= 5 &&
-            moistureField[index] > 0.1 && heightField[index] < 0.18) terrain[index] = 9;
-      }
-      for (let index = 0; index < terrain.length; index++) {
-        hazards[index] = terrain[index] === 9 && waterDistance[index] <= 3 && moistureField[index] > 0.2 ? 1 :
-          terrain[index] === 5 && moistureField[index] > 0.3 && adjacent(index).filter(next => terrain[next] === 5).length >= 3 ? 2 : 0;
-      }
+      const swampCount = placeSwamps(landscapeSeed);
+      if (!swampCount) { camps = []; starts = []; continue; }
       for (let index = 0; index < terrain.length; index++) {
         const x = index % SIZE, y = Math.floor(index / SIZE);
         clearance[index] = safe(index) && x > 0 && y > 0 && x < SIZE - 1 && y < SIZE - 1 ? 255 : 0;
@@ -501,7 +569,16 @@
         const id = camps.length + 1;
         camps.push({ id, tribe: tribe.key, name: tribe.name, x: site.x, y: site.y, playable: true, controller: id === 1 ? 'player' : 'ai' }); starts.push(tribe.resourceRule ? tribe.resourceRule(site, start) : start);
       }
-      if (camps.length === 4) break;
+      if (camps.length === 4) {
+        let spores = 0;
+        for (let index = 0; index < hazards.length; index++) {
+          if (hazards[index] !== 1) continue;
+          const x = index % SIZE, y = Math.floor(index / SIZE);
+          if (camps.every(camp => (x - camp.x) ** 2 + (y - camp.y) ** 2 > NEST_SAFE_RADIUS ** 2)) spores++;
+        }
+        if (spores >= Math.ceil(swampCount * 0.2)) break;
+        camps = []; starts = [];
+      }
     }
     if (camps.length !== 4) throw new Error('시작 먹이·자원을 확보할 네 부족의 자리가 없습니다.');
     for (const camp of camps) for (let dy = -NEST_SAFE_RADIUS; dy <= NEST_SAFE_RADIUS; dy++) for (let dx = -NEST_SAFE_RADIUS; dx <= NEST_SAFE_RADIUS; dx++) {
@@ -783,6 +860,7 @@
   const mountainGrounds = new Map([['low-mountain', 6], ['high-mountain', 7], ['ridge', 8]].map(([name, type]) => {
     const image = new Image(); image.addEventListener('load', scheduleDraw); image.src = 'DesignAssets/Terrain/' + name + '-ground.png'; return [type, image];
   }));
+  const campSelect = root.querySelector('#map-camp-type');
   const resourceSelect = root.querySelector('#map-resource-type');
   const resourceAliases = { 'basic-mushroom': 'honey-mushrooms', wood: 'tree' };
   const resourceNames = new Map();
@@ -937,9 +1015,9 @@
       }
     }
     function camp(camp, emphasis) {
-      const x = px(camp.x), y = py(camp.y), size = emphasis ? 15 : 11, tone = campColors[camp.id - 1];
+      const x = px(camp.x), y = py(camp.y), size = emphasis ? Math.min(15, NEST_SAFE_RADIUS * cell * 0.6) : 11, tone = campColors[camp.id - 1];
       ctx.save(); ctx.fillStyle = paper; ctx.beginPath(); ctx.arc(x, y, size + 4, 0, Math.PI * 2); ctx.fill();
-      if (emphasis) { ctx.strokeStyle = tone; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(x, y, size + 8, 0, Math.PI * 2); ctx.stroke(); }
+      if (emphasis) ranges([camp], true);
       ctx.fillStyle = tone; ctx.beginPath(); ctx.moveTo(x, y - size); ctx.lineTo(x + size, y); ctx.lineTo(x, y + size); ctx.lineTo(x - size, y); ctx.closePath(); ctx.fill();
       ctx.fillStyle = paper; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.font = '700 12px sans-serif'; 
       const right = x < width - gutter - 75;
@@ -947,20 +1025,20 @@
       ctx.strokeText(camp.name, x + (right ? size + 7 : -size - 7), y);
       ctx.fillText(camp.name, x + (right ? size + 7 : -size - 7), y); ctx.restore();
     }
-    function ranges(emphasis) {
+    function ranges(camps, emphasis) {
       ctx.save(); ctx.globalAlpha = emphasis ? 1 : 0.5; ctx.lineWidth = emphasis ? 2 : 1; ctx.setLineDash([4, 5]);
-      for (const camp of world.camps) { ctx.strokeStyle = campColors[camp.id - 1]; ctx.beginPath(); ctx.arc(px(camp.x), py(camp.y), NEST_SAFE_RADIUS * cell, 0, Math.PI * 2); ctx.stroke(); }
+      for (const camp of camps) { ctx.strokeStyle = campColors[camp.id - 1]; ctx.beginPath(); ctx.arc(px(camp.x), py(camp.y), NEST_SAFE_RADIUS * cell, 0, Math.PI * 2); ctx.stroke(); }
       ctx.restore();
     }
-    ranges(false); points(resourceNodes(), false); burrows('', false); encounters(false);
+    ranges(world.camps, false); points(resourceNodes(), false); burrows('', false); encounters(false);
     for (const item of world.camps) camp(item, false);
     if (selectedLayer) {
       ctx.fillStyle = paper; ctx.globalAlpha = 0.76; ctx.fillRect(gutter, gutter, width - gutter * 2, width - gutter * 2); ctx.globalAlpha = 1;
-      if (selectedLayer.startsWith('camp-')) { const item = world.camps.find(camp => selectedLayer === 'camp-' + camp.id); if (item) camp(item, true); }
+      if (selectedLayer === 'camps') for (const item of world.camps) camp(item, true);
+      else if (selectedLayer.startsWith('camp-')) { const item = world.camps.find(camp => selectedLayer === 'camp-' + camp.id); if (item) camp(item, true); }
       else if (selectedLayer === 'resources') points(resourceNodes().filter(point => !selectedResource || point[3] === resourceKey(selectedResource)), true);
       else if (selectedLayer === 'burrow-small') burrows('small', true);
       else if (selectedLayer === 'burrow-large') burrows('large', true);
-      else if (selectedLayer === 'ranges') ranges(true);
       else if (selectedLayer === 'units') encounters(true);
       else for (let y = 0; y < SIZE; y++) for (let x = 0; x < SIZE; x++) {
         const index = y * SIZE + x, terrain = world.terrain[index];
@@ -988,7 +1066,7 @@
     for (const value of [0, 80, 160, 240, 319]) { ctx.save(); ctx.translate(12, py(value)); ctx.rotate(-Math.PI / 2); ctx.fillText(String(value), 0, 0); ctx.restore(); }
     for (const type of ['small', 'large']) unitSelect.querySelector('option[value="burrow-' + type + '"]').textContent = (type === 'small' ? '작은 굴' : '큰 굴') + ' (' + world.burrows.filter(item => item.type === type).length + ')';
     root.querySelector('#map-unit-count').textContent = '(' + new Set(world.encounters.map(item => item.key)).size + '/19)';
-    const selectedName = selectedUnit ? ENCOUNTER_PLANS.find(item => item.key === selectedUnit).name : selectedResource ? resourceNames.get(resourceKey(selectedResource)) : '';
+    const selectedName = selectedUnit ? ENCOUNTER_PLANS.find(item => item.key === selectedUnit).name : selectedResource ? resourceNames.get(resourceKey(selectedResource)) : selectedLayer.startsWith('camp-') ? world.camps.find(item => selectedLayer === 'camp-' + item.id).name : '';
     canvas.setAttribute('aria-label', '시드 ' + world.seed + '의 플레이 진영 네 곳과 자원·굴·19종 등장 위치·활동 범위·지형' + (selectedName ? ' · ' + selectedName + ' 강조' : ''));
     updateResourceMenu();
     root.dataset.seed = String(world.seed); root.dataset.rendered = 'true';
@@ -1041,28 +1119,18 @@
         '인게임은 아래 전용 바닥 텍스처를 지형색 위에 겹칩니다.'
       ] },
       swamp: { title: '늪과 독 포자', lines: [
-        '물에서 5칸 이내의 습한 저지대를 늪으로 분류합니다.',
-        '습도 0.1 초과·높이 0.18 미만이며 통행할 수 있습니다.',
-        '물에서 3칸 이내·습도 0.2 초과인 늪에 독 포자가 자랍니다.',
         '늪의 영양 이끼·비옥토는 독 포자가 자라는 안쪽에 더 풍부합니다.'
       ] },
       'poison-spore': { title: '독 포자 · 늪', lines: [
-        '늪의 물가·습도 조건을 따르며 다른 지형에는 놓지 않습니다.',
         '머무는 동안 지속 피해를 받고 이동 속도가 절반으로 줄어듭니다.',
         '영양 이끼·비옥토의 분포와 수량은 습한 안쪽일수록 늘어납니다.',
         '둥지 반경 10칸과 기본 생존 자원을 확보할 안전 경로를 지킵니다.'
       ] },
       'thorn-root': { title: '가시 뿌리 · 숲', lines: [
-        '습도 0.3 초과·인접 숲 3칸 이상인 울창한 숲에 자랍니다.',
         '이동·채집 중 피해를 받고 이동 속도가 절반으로 줄어듭니다.',
         '뿌리 구근·풀섬유가 더 촘촘히 자라고 자원 더미도 커집니다.',
         '둥지 반경 10칸과 기본 생존 자원을 확보할 안전 경로를 지킵니다.'
       ] },
-      ranges: { title: '둥지 보호', lines: [
-        '둥지 중심 반경 10칸에는 굴과 굴 입구를 놓지 않습니다.',
-        '이 반경을 맵에 점선 원으로 표시합니다.',
-        '먹이와 자원 밀도를 높이는 기능은 없습니다.'
-      ] }
     };
     for (const camp of world.camps) {
       const rule = world.tribeStarts.find(tribe => tribe.key === camp.tribe);
@@ -1076,8 +1144,9 @@
         ]
       };
     }
+    entries.camps = entries[campSelect.value] || { title: '종족 배치', lines: entries['camp-1'].lines.slice(2) };
     const encounter = world.encounters.find(item => item.key === selectedUnit);
-    entries.units = { title: encounter ? encounter.name + (encounter.implemented ? ' · 현행 굴 규칙' : ' · 등장 기획') : '유닛 등장 · 기획', lines: encounter ? [
+    entries.units = { title: encounter ? encounter.name + (encounter.implemented ? ' · 현행 규칙' : ' · 등장 기획') : '유닛 등장', lines: encounter ? [
       encounter.badge + ' · 대표 위치 (' + encounter.x + ', ' + encounter.y + ') · ' + encounter.kind,
       '등장 조건: ' + encounter.spawn + (encounter.guaranteedAt ? ' 늦어도 게임 ' + encounter.guaranteedAt + '에 등장한다.' : ''),
       '개체 수: ' + encounter.population,
@@ -1185,10 +1254,11 @@
   root.querySelector('#map-prev').addEventListener('click', () => regenerate(world.seed - 1));
   root.querySelector('#map-next').addEventListener('click', () => regenerate(world.seed + 1));
   function updateLayerSelection() {
+    campSelect.value = selectedLayer.startsWith('camp-') ? selectedLayer : '';
     resourceSelect.value = selectedResource;
     root.dataset.activeLayer = selectedLayer; root.dataset.activeResource = selectedResource; root.dataset.activeUnit = selectedUnit;
     unitSelect.value = selectedUnit || (selectedLayer.startsWith('burrow-') ? selectedLayer : '');
-    root.querySelectorAll('button[data-layer]').forEach(item => item.setAttribute('aria-pressed', String(item.dataset.layer === selectedLayer)));
+    root.querySelectorAll('button[data-layer]').forEach(item => item.setAttribute('aria-pressed', String(item.dataset.layer === (selectedLayer.startsWith('camp-') ? 'camps' : selectedLayer))));
     scheduleDraw();
   }
   root.querySelectorAll('button[data-layer]').forEach(button => button.addEventListener('click', () => {
@@ -1198,16 +1268,20 @@
   resourceSelect.addEventListener('change', () => {
     selectedResource = resourceSelect.value; selectedUnit = ''; selectedLayer = 'resources'; updateLayerSelection();
   });
-  function showUnitRules() {
-    logicLayer = 'units'; logic.hidden = false; root.classList.add('show-logic');
-    root.querySelectorAll('button[data-logic]').forEach(item => item.setAttribute('aria-expanded', String(item.dataset.logic === 'units')));
+  function showLayerRules(layer) {
+    logicLayer = layer; logic.hidden = false; root.classList.add('show-logic');
+    root.querySelectorAll('button[data-logic]').forEach(item => item.setAttribute('aria-expanded', String(item.dataset.logic === layer)));
     updateLayerSelection(); updateLogic();
   }
+  campSelect.addEventListener('change', () => {
+    selectedResource = ''; selectedUnit = ''; selectedLayer = campSelect.value || 'camps';
+    showLayerRules('camps');
+  });
   unitSelect.addEventListener('change', () => {
     const key = unitSelect.value;
     selectedUnit = key.startsWith('burrow-') ? '' : key;
     selectedResource = ''; selectedLayer = key.startsWith('burrow-') ? key : 'units';
-    showUnitRules();
+    showLayerRules('units');
   });
   addEventListener('resize', scheduleDraw);
   new ResizeObserver(scheduleDraw).observe(canvas);
@@ -1229,58 +1303,58 @@
 <tr id="unit-sprout-bean"><th scope="row">새싹콩</th>
 <td data-action="base"><span class="unit-matrix-cell-label">기본 이미지</span><figure class="unit-matrix-image"><a href="DesignAssets/Units/starter-sprout-bean.png"><span class="unit-matrix-preview"><img src="DesignAssets/UnitPreviews/sprout-bean/base.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
 <td data-action="idle"><span class="unit-matrix-cell-label">대기</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.webp"><span class="unit-matrix-preview" data-columns="4" data-durations="100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100" data-loop="true"><img src="DesignAssets/UnitPreviews/sprout-bean/idle.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="walk"><span class="unit-matrix-cell-label">이동</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/sprout/Previews/walk-game.webp"><span class="unit-matrix-preview" data-columns="4" data-durations="40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40" data-loop="true"><img src="DesignAssets/UnitPreviews/sprout-bean/walk.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="jump"><span class="unit-matrix-cell-label">점프</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/sprout/Previews/jump-game.webp"><span class="unit-matrix-preview" data-columns="4" data-durations="40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40" data-loop="true"><img src="DesignAssets/UnitPreviews/sprout-bean/jump.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="harvest"><span class="unit-matrix-cell-label">채집</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/sprout/Previews/harvest-game.webp"><span class="unit-matrix-preview" data-columns="4" data-durations="40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40" data-loop="true"><img src="DesignAssets/UnitPreviews/sprout-bean/harvest.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="carry"><span class="unit-matrix-cell-label">운반</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/sprout/Previews/carry-game.webp"><span class="unit-matrix-preview" data-columns="4" data-durations="40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40" data-loop="true"><img src="DesignAssets/UnitPreviews/sprout-bean/carry.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="throw"><span class="unit-matrix-cell-label">투척</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/sprout/Previews/throw-game.webp"><span class="unit-matrix-preview" data-columns="4" data-durations="40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40" data-loop="true"><img src="DesignAssets/UnitPreviews/sprout-bean/throw.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="attack-right"><span class="unit-matrix-cell-label">오른쪽 공격</span><figure class="unit-matrix-image"><a href="DesignAssets/Animations/UnitAttack/attack.png"><span class="unit-matrix-preview" data-columns="4" data-durations="60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60" data-loop="false"><img src="DesignAssets/UnitPreviews/sprout-bean/attack-right.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="attack-left"><span class="unit-matrix-cell-label">왼쪽 공격</span><figure class="unit-matrix-image"><a href="DesignAssets/Animations/UnitAttack/attack.png"><span class="unit-matrix-preview is-mirrored" data-mirror="true" data-columns="4" data-durations="60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60" data-loop="false"><img src="DesignAssets/UnitPreviews/sprout-bean/attack-right.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="hurt"><span class="unit-matrix-cell-label">피격</span><figure class="unit-matrix-image"><a href="DesignAssets/Animations/UnitHurt/V3/hurt.png"><span class="unit-matrix-preview" data-columns="4" data-durations="20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20" data-loop="false"><img src="DesignAssets/UnitPreviews/sprout-bean/hurt.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="birth"><span class="unit-matrix-cell-label">탄생</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/sprout/Previews/birth-game.webp"><span class="unit-matrix-preview" data-columns="4" data-durations="40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40" data-loop="true"><img src="DesignAssets/UnitPreviews/sprout-bean/birth.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="death"><span class="unit-matrix-cell-label">사망</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death.png"><span class="unit-matrix-preview" data-columns="4" data-durations="160,80,80,70,70,60,60,60,60,60,80,90,100,110,120,1000" data-loop="false"><img src="DesignAssets/UnitPreviews/sprout-bean/death.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="walk"><span class="unit-matrix-cell-label">이동</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/sprout/Previews/walk-game.webp"><span class="unit-matrix-preview" data-audio-cues='[{"src":"DesignAssets/Audio/bean-footstep.mp3","times":[0,280,560,840]}]' data-columns="4" data-durations="40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40" data-loop="true"><img src="DesignAssets/UnitPreviews/sprout-bean/walk.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="jump"><span class="unit-matrix-cell-label">점프</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/sprout/Previews/jump-game.webp"><span class="unit-matrix-preview" data-audio-cues='[{"src":"DesignAssets/Audio/bean-landing.mp3","times":[840]}]' data-columns="4" data-durations="40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40" data-loop="true"><img src="DesignAssets/UnitPreviews/sprout-bean/jump.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="harvest"><span class="unit-matrix-cell-label">채집</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/sprout/Previews/harvest-game.webp"><span class="unit-matrix-preview" data-audio-cues='[{"src":"DesignAssets/Audio/clay-harvest-handful.mp3","times":[0],"loop":true}]' data-columns="4" data-durations="40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40" data-loop="true"><img src="DesignAssets/UnitPreviews/sprout-bean/harvest.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="carry"><span class="unit-matrix-cell-label">운반</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/sprout/Previews/carry-game.webp"><span class="unit-matrix-preview" data-audio-cues='[{"src":"DesignAssets/Audio/bean-footstep.mp3","times":[0,280,560,840]}]' data-columns="4" data-durations="40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40" data-loop="true"><img src="DesignAssets/UnitPreviews/sprout-bean/carry.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="throw"><span class="unit-matrix-cell-label">투척</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/sprout/Previews/throw-game.webp"><span class="unit-matrix-preview" data-audio-cues='[{"src":"DesignAssets/Audio/mushroom-throw.mp3","times":[346]}]' data-columns="4" data-durations="40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40" data-loop="true"><img src="DesignAssets/UnitPreviews/sprout-bean/throw.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="attack-right"><span class="unit-matrix-cell-label">오른쪽 공격</span><figure class="unit-matrix-image"><a href="DesignAssets/Animations/UnitAttack/attack.png"><span class="unit-matrix-preview" data-combat-material="sprout" data-combat-action="attack" data-columns="4" data-durations="60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60" data-loop="false"><img src="DesignAssets/UnitPreviews/sprout-bean/attack-right.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="attack-left"><span class="unit-matrix-cell-label">왼쪽 공격</span><figure class="unit-matrix-image"><a href="DesignAssets/Animations/UnitAttack/attack.png"><span class="unit-matrix-preview is-mirrored" data-combat-material="sprout" data-combat-action="attack" data-mirror="true" data-columns="4" data-durations="60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60" data-loop="false"><img src="DesignAssets/UnitPreviews/sprout-bean/attack-right.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="hurt"><span class="unit-matrix-cell-label">피격</span><figure class="unit-matrix-image"><a href="DesignAssets/Animations/UnitHurt/V3/hurt.png"><span class="unit-matrix-preview" data-combat-material="sprout" data-combat-action="hurt" data-columns="4" data-durations="20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20" data-loop="false"><img src="DesignAssets/UnitPreviews/sprout-bean/hurt.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="birth"><span class="unit-matrix-cell-label">탄생</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/sprout/Previews/birth-game.webp"><span class="unit-matrix-preview" data-audio-cues='[{"src":"DesignAssets/Audio/nest-seed-eject.mp3","times":[300]},{"src":"DesignAssets/Audio/seed-shell-crack.mp3","times":[2570]},{"src":"DesignAssets/Audio/bean-sprout-pop.mp3","times":[2590]}]' data-columns="4" data-durations="40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40" data-loop="true"><img src="DesignAssets/UnitPreviews/sprout-bean/birth.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="death"><span class="unit-matrix-cell-label">사망</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death.png"><span class="unit-matrix-preview" data-combat-material="sprout" data-combat-action="death" data-columns="4" data-durations="160,80,80,70,70,60,60,60,60,60,80,90,100,110,120,1000" data-loop="false"><img src="DesignAssets/UnitPreviews/sprout-bean/death.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
 </tr>
 <tr id="unit-spore-tribe"><th scope="row">포자버섯</th>
 <td data-action="base"><span class="unit-matrix-cell-label">기본 이미지</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spore/starter.png"><span class="unit-matrix-preview"><img src="DesignAssets/UnitPreviews/spore-tribe/base.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
 <td data-action="idle"><span class="unit-matrix-cell-label">대기</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp"><span class="unit-matrix-preview" data-columns="4" data-durations="100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100" data-loop="true"><img src="DesignAssets/UnitPreviews/spore-tribe/idle.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="walk"><span class="unit-matrix-cell-label">이동</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spore/AnimationStudies/walk-v2/walk-preview.gif"><span class="unit-matrix-preview"><img src="DesignAssets/UnitPreviews/spore-tribe/walk.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="jump"><span class="unit-matrix-cell-label">점프</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spore/Animations/Units/jump/jump-preview.gif"><span class="unit-matrix-preview"><img src="DesignAssets/UnitPreviews/spore-tribe/jump.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="harvest"><span class="unit-matrix-cell-label">채집</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spore/Animations/Units/harvest/harvest-preview.gif"><span class="unit-matrix-preview"><img src="DesignAssets/UnitPreviews/spore-tribe/harvest.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="carry"><span class="unit-matrix-cell-label">운반</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spore/Animations/Units/carry/carry-preview.gif"><span class="unit-matrix-preview"><img src="DesignAssets/UnitPreviews/spore-tribe/carry.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="throw"><span class="unit-matrix-cell-label">투척</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spore/Animations/Units/throw/throw-preview.gif"><span class="unit-matrix-preview"><img src="DesignAssets/UnitPreviews/spore-tribe/throw.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="attack-right"><span class="unit-matrix-cell-label">오른쪽 공격</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/right/attack.webp"><span class="unit-matrix-preview" data-columns="4" data-durations="60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60" data-loop="false"><img src="DesignAssets/UnitPreviews/spore-tribe/attack-right.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="attack-left"><span class="unit-matrix-cell-label">왼쪽 공격</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/right/attack.webp"><span class="unit-matrix-preview is-mirrored" data-mirror="true" data-columns="4" data-durations="60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60" data-loop="false"><img src="DesignAssets/UnitPreviews/spore-tribe/attack-right.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="hurt"><span class="unit-matrix-cell-label">피격</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spore/AnimationStudies/hurt-v2/hurt-v2.webp"><span class="unit-matrix-preview" data-columns="4" data-durations="20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20" data-loop="false"><img src="DesignAssets/UnitPreviews/spore-tribe/hurt.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="birth"><span class="unit-matrix-cell-label">탄생</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/birth.webp" title="균사에서 분리되어 갓을 펼친 뒤 착지 · 2.48초"><span class="unit-matrix-preview" data-columns="4" data-durations="180,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,700" data-loop="false" data-audio="DesignAssets/Audio/spore-birth.mp3" data-audio-start="0"><img src="DesignAssets/UnitPreviews/spore-tribe/birth-v3.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="death"><span class="unit-matrix-cell-label">사망</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png"><span class="unit-matrix-preview" data-columns="4" data-durations="120,100,140,120,140,100,120,600" data-loop="false"><img src="DesignAssets/UnitPreviews/spore-tribe/death.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="walk"><span class="unit-matrix-cell-label">이동</span><figure class="unit-matrix-image"><a data-preview="DesignAssets/Tribes/spore/AnimationStudies/walk-v2/walk-v2.webp" href="DesignAssets/Tribes/spore/AnimationStudies/walk-v2/walk-preview.gif"><span class="unit-matrix-preview" data-audio-cues='[{"src":"DesignAssets/Audio/bean-footstep.mp3","times":[0,280,560,840]}]' data-columns="4" data-durations="70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70" data-loop="true"><img src="DesignAssets/UnitPreviews/spore-tribe/walk.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="jump"><span class="unit-matrix-cell-label">점프</span><figure class="unit-matrix-image"><a data-preview="DesignAssets/Tribes/spore/Animations/Units/jump/jump.webp" href="DesignAssets/Tribes/spore/Animations/Units/jump/jump-preview.gif"><span class="unit-matrix-preview" data-audio-cues='[{"src":"DesignAssets/Audio/bean-landing.mp3","times":[840]}]' data-columns="4" data-durations="70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70" data-loop="false"><img src="DesignAssets/UnitPreviews/spore-tribe/jump.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="harvest"><span class="unit-matrix-cell-label">채집</span><figure class="unit-matrix-image"><a data-preview="DesignAssets/Tribes/spore/Animations/Units/harvest/harvest.webp" href="DesignAssets/Tribes/spore/Animations/Units/harvest/harvest-preview.gif"><span class="unit-matrix-preview" data-audio-cues='[{"src":"DesignAssets/Audio/mushroom-harvest-loop.mp3","times":[0],"loop":true}]' data-columns="4" data-durations="70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70" data-loop="true"><img src="DesignAssets/UnitPreviews/spore-tribe/harvest.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="carry"><span class="unit-matrix-cell-label">운반</span><figure class="unit-matrix-image"><a data-preview="DesignAssets/Tribes/spore/Animations/Units/carry/carry.webp" href="DesignAssets/Tribes/spore/Animations/Units/carry/carry-preview.gif"><span class="unit-matrix-preview" data-audio-cues='[{"src":"DesignAssets/Audio/bean-footstep.mp3","times":[0,280,560,840]}]' data-columns="4" data-durations="70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70" data-loop="true"><img src="DesignAssets/UnitPreviews/spore-tribe/carry.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="throw"><span class="unit-matrix-cell-label">투척</span><figure class="unit-matrix-image"><a data-preview="DesignAssets/Tribes/spore/Animations/Units/throw/throw.webp" href="DesignAssets/Tribes/spore/Animations/Units/throw/throw-preview.gif"><span class="unit-matrix-preview" data-audio-cues='[{"src":"DesignAssets/Audio/mushroom-throw.mp3","times":[350]}]' data-columns="4" data-durations="60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60" data-loop="false"><img src="DesignAssets/UnitPreviews/spore-tribe/throw.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="attack-right"><span class="unit-matrix-cell-label">오른쪽 공격</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/right/attack.webp"><span class="unit-matrix-preview" data-combat-material="spore" data-combat-action="attack" data-columns="4" data-durations="60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60" data-loop="false"><img src="DesignAssets/UnitPreviews/spore-tribe/attack-right.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="attack-left"><span class="unit-matrix-cell-label">왼쪽 공격</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/right/attack.webp"><span class="unit-matrix-preview is-mirrored" data-combat-material="spore" data-combat-action="attack" data-mirror="true" data-columns="4" data-durations="60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60" data-loop="false"><img src="DesignAssets/UnitPreviews/spore-tribe/attack-right.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="hurt"><span class="unit-matrix-cell-label">피격</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spore/AnimationStudies/hurt-v2/hurt-v2.webp"><span class="unit-matrix-preview" data-combat-material="spore" data-combat-action="hurt" data-columns="4" data-durations="20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20" data-loop="false"><img src="DesignAssets/UnitPreviews/spore-tribe/hurt.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="birth"><span class="unit-matrix-cell-label">탄생</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/birth.webp" title="균사에서 분리되어 갓을 펼친 뒤 착지 · 2.48초"><span class="unit-matrix-preview" data-columns="4" data-durations="180,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,700" data-loop="false" data-audio="DesignAssets/Audio/spore-birth.mp3" data-audio-start="0"><img src="DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/birth-preview.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="death"><span class="unit-matrix-cell-label">사망</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png"><span class="unit-matrix-preview" data-combat-material="spore" data-combat-action="death" data-columns="4" data-durations="120,100,140,120,140,100,120,600" data-loop="false"><img src="DesignAssets/UnitPreviews/spore-tribe/death.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
 </tr>
 <tr id="unit-pebble-tribe"><th scope="row">몽돌</th>
 <td data-action="base"><span class="unit-matrix-cell-label">기본 이미지</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/pebble/starter.png"><span class="unit-matrix-preview"><img src="DesignAssets/UnitPreviews/pebble-tribe/base.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
 <td data-action="idle"><span class="unit-matrix-cell-label">대기</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp"><span class="unit-matrix-preview" data-columns="4" data-durations="100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100" data-loop="true"><img src="DesignAssets/UnitPreviews/pebble-tribe/idle.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="walk"><span class="unit-matrix-cell-label">이동</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/pebble/AnimationStudies/roll-v2/roll-preview.gif"><span class="unit-matrix-preview"><img src="DesignAssets/UnitPreviews/pebble-tribe/walk.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="jump"><span class="unit-matrix-cell-label">점프</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/pebble/Animations/Units/jump/jump-preview.gif"><span class="unit-matrix-preview"><img src="DesignAssets/UnitPreviews/pebble-tribe/jump.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="harvest"><span class="unit-matrix-cell-label">채집</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/pebble/Animations/Units/harvest/harvest-preview.gif"><span class="unit-matrix-preview"><img src="DesignAssets/UnitPreviews/pebble-tribe/harvest.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="carry"><span class="unit-matrix-cell-label">운반</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/pebble/Animations/Units/carry/carry-preview.gif"><span class="unit-matrix-preview"><img src="DesignAssets/UnitPreviews/pebble-tribe/carry.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="throw"><span class="unit-matrix-cell-label">투척</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/pebble/Animations/Units/throw/throw-preview.gif"><span class="unit-matrix-preview"><img src="DesignAssets/UnitPreviews/pebble-tribe/throw.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="attack-right"><span class="unit-matrix-cell-label">오른쪽 공격</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp"><span class="unit-matrix-preview" data-columns="4" data-durations="60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60" data-loop="false"><img src="DesignAssets/UnitPreviews/pebble-tribe/attack-right.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="attack-left"><span class="unit-matrix-cell-label">왼쪽 공격</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp"><span class="unit-matrix-preview is-mirrored" data-mirror="true" data-columns="4" data-durations="60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60" data-loop="false"><img src="DesignAssets/UnitPreviews/pebble-tribe/attack-right.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="hurt"><span class="unit-matrix-cell-label">피격</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp"><span class="unit-matrix-preview" data-columns="4" data-durations="20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20" data-loop="false"><img src="DesignAssets/UnitPreviews/pebble-tribe/hurt.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="walk"><span class="unit-matrix-cell-label">이동</span><figure class="unit-matrix-image"><a data-preview="DesignAssets/Tribes/pebble/AnimationStudies/roll-v2/roll-v2.webp" href="DesignAssets/Tribes/pebble/AnimationStudies/roll-v2/roll-preview.gif"><span class="unit-matrix-preview" data-audio-cues='[{"src":"DesignAssets/Audio/pebble-birth-roll.mp3","times":[0],"loop":true}]' data-columns="4" data-durations="80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80" data-loop="true"><img src="DesignAssets/UnitPreviews/pebble-tribe/walk.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="jump"><span class="unit-matrix-cell-label">점프</span><figure class="unit-matrix-image"><a data-preview="DesignAssets/Tribes/pebble/Animations/Units/jump/jump.webp" href="DesignAssets/Tribes/pebble/Animations/Units/jump/jump-preview.gif"><span class="unit-matrix-preview" data-audio-cues='[{"src":"DesignAssets/Audio/bean-landing.mp3","times":[840]}]' data-columns="4" data-durations="70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70" data-loop="false"><img src="DesignAssets/UnitPreviews/pebble-tribe/jump.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="harvest"><span class="unit-matrix-cell-label">채집</span><figure class="unit-matrix-image"><a data-preview="DesignAssets/Tribes/pebble/Animations/Units/harvest/harvest.webp" href="DesignAssets/Tribes/pebble/Animations/Units/harvest/harvest-preview.gif"><span class="unit-matrix-preview" data-audio-cues='[{"src":"DesignAssets/Audio/mushroom-harvest-loop.mp3","times":[0],"loop":true}]' data-columns="4" data-durations="70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70" data-loop="true"><img src="DesignAssets/UnitPreviews/pebble-tribe/harvest.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="carry"><span class="unit-matrix-cell-label">운반</span><figure class="unit-matrix-image"><a data-preview="DesignAssets/Tribes/pebble/Animations/Units/carry/carry.webp" href="DesignAssets/Tribes/pebble/Animations/Units/carry/carry-preview.gif"><span class="unit-matrix-preview" data-audio-cues='[{"src":"DesignAssets/Audio/pebble-birth-roll.mp3","times":[0],"loop":true}]' data-columns="4" data-durations="70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70" data-loop="true"><img src="DesignAssets/UnitPreviews/pebble-tribe/carry.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="throw"><span class="unit-matrix-cell-label">투척</span><figure class="unit-matrix-image"><a data-preview="DesignAssets/Tribes/pebble/Animations/Units/throw/throw.webp" href="DesignAssets/Tribes/pebble/Animations/Units/throw/throw-preview.gif"><span class="unit-matrix-preview" data-audio-cues='[{"src":"DesignAssets/Audio/mushroom-throw.mp3","times":[350]}]' data-columns="4" data-durations="60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60" data-loop="false"><img src="DesignAssets/UnitPreviews/pebble-tribe/throw.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="attack-right"><span class="unit-matrix-cell-label">오른쪽 공격</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp"><span class="unit-matrix-preview" data-combat-material="pebble" data-combat-action="attack" data-columns="4" data-durations="60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60" data-loop="false"><img src="DesignAssets/UnitPreviews/pebble-tribe/attack-right.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="attack-left"><span class="unit-matrix-cell-label">왼쪽 공격</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp"><span class="unit-matrix-preview is-mirrored" data-combat-material="pebble" data-combat-action="attack" data-mirror="true" data-columns="4" data-durations="60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60" data-loop="false"><img src="DesignAssets/UnitPreviews/pebble-tribe/attack-right.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="hurt"><span class="unit-matrix-cell-label">피격</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp"><span class="unit-matrix-preview" data-combat-material="pebble" data-combat-action="hurt" data-columns="4" data-durations="20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20" data-loop="false"><img src="DesignAssets/UnitPreviews/pebble-tribe/hurt.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
 <td data-action="birth"><span class="unit-matrix-cell-label">탄생</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/pebble/AnimationStudies/birth-nest-v2/birth.webp"><span class="unit-matrix-preview" data-columns="4" data-durations="200,100,100,100,100,80,80,70,60,60,60,70,70,70,70,70,70,100,80,120,140,750" data-loop="false" data-audio="DesignAssets/Audio/pebble-birth-roll.mp3" data-audio-start="250"><img src="DesignAssets/UnitPreviews/pebble-tribe/birth-v2.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="death"><span class="unit-matrix-cell-label">사망</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png"><span class="unit-matrix-preview" data-columns="4" data-durations="120,100,140,120,140,100,120,600" data-loop="false"><img src="DesignAssets/UnitPreviews/pebble-tribe/death.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="death"><span class="unit-matrix-cell-label">사망</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png"><span class="unit-matrix-preview" data-combat-material="pebble" data-combat-action="death" data-columns="4" data-durations="120,100,140,120,140,100,120,600" data-loop="false"><img src="DesignAssets/UnitPreviews/pebble-tribe/death.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
 </tr>
 <tr id="unit-spring-tribe"><th scope="row">샘방울</th>
 <td data-action="base"><span class="unit-matrix-cell-label">기본 이미지</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spring/starter.png"><span class="unit-matrix-preview"><img src="DesignAssets/UnitPreviews/spring-tribe/base.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
 <td data-action="idle"><span class="unit-matrix-cell-label">대기</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"><span class="unit-matrix-preview" data-columns="4" data-durations="100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100" data-loop="true"><img src="DesignAssets/UnitPreviews/spring-tribe/idle.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="walk"><span class="unit-matrix-cell-label">이동</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spring/AnimationStudies/flow-v4/flow-preview.gif"><span class="unit-matrix-preview"><img src="DesignAssets/UnitPreviews/spring-tribe/walk.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="jump"><span class="unit-matrix-cell-label">점프</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spring/Animations/Units/jump/jump-preview.gif"><span class="unit-matrix-preview"><img src="DesignAssets/UnitPreviews/spring-tribe/jump.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="harvest"><span class="unit-matrix-cell-label">채집</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spring/Animations/Units/harvest/harvest-preview.gif"><span class="unit-matrix-preview"><img src="DesignAssets/UnitPreviews/spring-tribe/harvest.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="carry"><span class="unit-matrix-cell-label">운반</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spring/Animations/Units/carry/carry-preview.gif"><span class="unit-matrix-preview"><img src="DesignAssets/UnitPreviews/spring-tribe/carry.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="throw"><span class="unit-matrix-cell-label">투척</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spring/Animations/Units/throw/throw-preview.gif"><span class="unit-matrix-preview"><img src="DesignAssets/UnitPreviews/spring-tribe/throw.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="attack-right"><span class="unit-matrix-cell-label">오른쪽 공격</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp"><span class="unit-matrix-preview" data-columns="4" data-durations="60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60" data-loop="false"><img src="DesignAssets/UnitPreviews/spring-tribe/attack-right.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="attack-left"><span class="unit-matrix-cell-label">왼쪽 공격</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp"><span class="unit-matrix-preview is-mirrored" data-mirror="true" data-columns="4" data-durations="60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60" data-loop="false"><img src="DesignAssets/UnitPreviews/spring-tribe/attack-right.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="hurt"><span class="unit-matrix-cell-label">피격</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spring/AnimationStudies/hurt-v2/hurt-v2.webp"><span class="unit-matrix-preview" data-columns="4" data-durations="20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20" data-loop="false"><img src="DesignAssets/UnitPreviews/spring-tribe/hurt.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="birth"><span class="unit-matrix-cell-label">탄생</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-game.webp" title="흘림턱에서 분리되어 둥지 앞 빈 칸에 착지 · 1.79초"><span class="unit-matrix-preview" data-columns="4" data-durations="130,120,100,100,80,260,80,90,90,100,100,130,410" data-loop="false"><img src="DesignAssets/UnitPreviews/spring-tribe/birth.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="death"><span class="unit-matrix-cell-label">사망</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png"><span class="unit-matrix-preview" data-columns="4" data-durations="120,100,140,120,140,100,120,600" data-loop="false"><img src="DesignAssets/UnitPreviews/spring-tribe/death.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="walk"><span class="unit-matrix-cell-label">이동</span><figure class="unit-matrix-image"><a data-preview="DesignAssets/Tribes/spring/AnimationStudies/walk-v2/walk-v2.webp" href="DesignAssets/Tribes/spring/AnimationStudies/flow-v4/flow-preview.gif"><span class="unit-matrix-preview" data-audio-cues='[{"src":"DesignAssets/Audio/spring-footstep.mp3","times":[0,280,560,840]}]' data-columns="4" data-durations="70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70" data-loop="true"><img src="DesignAssets/UnitPreviews/spring-tribe/walk.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="jump"><span class="unit-matrix-cell-label">점프</span><figure class="unit-matrix-image"><a data-preview="DesignAssets/Tribes/spring/Animations/Units/jump/jump.webp" href="DesignAssets/Tribes/spring/Animations/Units/jump/jump-preview.gif"><span class="unit-matrix-preview" data-audio-cues='[{"src":"DesignAssets/Audio/spring-landing.mp3","times":[840]}]' data-columns="4" data-durations="70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70" data-loop="false"><img src="DesignAssets/UnitPreviews/spring-tribe/jump.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="harvest"><span class="unit-matrix-cell-label">채집</span><figure class="unit-matrix-image"><a data-preview="DesignAssets/Tribes/spring/Animations/Units/harvest/harvest.webp" href="DesignAssets/Tribes/spring/Animations/Units/harvest/harvest-preview.gif"><span class="unit-matrix-preview" data-audio-cues='[{"src":"DesignAssets/Audio/mushroom-harvest-loop.mp3","times":[0],"loop":true}]' data-columns="4" data-durations="70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70" data-loop="true"><img src="DesignAssets/UnitPreviews/spring-tribe/harvest.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="carry"><span class="unit-matrix-cell-label">운반</span><figure class="unit-matrix-image"><a data-preview="DesignAssets/Tribes/spring/Animations/Units/carry/carry.webp" href="DesignAssets/Tribes/spring/Animations/Units/carry/carry-preview.gif"><span class="unit-matrix-preview" data-audio-cues='[{"src":"DesignAssets/Audio/spring-footstep.mp3","times":[0,280,560,840]}]' data-columns="4" data-durations="70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70" data-loop="true"><img src="DesignAssets/UnitPreviews/spring-tribe/carry.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="throw"><span class="unit-matrix-cell-label">투척</span><figure class="unit-matrix-image"><a data-preview="DesignAssets/Tribes/spring/Animations/Units/throw/throw.webp" href="DesignAssets/Tribes/spring/Animations/Units/throw/throw-preview.gif"><span class="unit-matrix-preview" data-audio-cues='[{"src":"DesignAssets/Audio/mushroom-throw.mp3","times":[350]}]' data-columns="4" data-durations="60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60" data-loop="false"><img src="DesignAssets/UnitPreviews/spring-tribe/throw.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="attack-right"><span class="unit-matrix-cell-label">오른쪽 공격</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp"><span class="unit-matrix-preview" data-combat-material="spring" data-combat-action="attack" data-columns="4" data-durations="60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60" data-loop="false"><img src="DesignAssets/UnitPreviews/spring-tribe/attack-right.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="attack-left"><span class="unit-matrix-cell-label">왼쪽 공격</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp"><span class="unit-matrix-preview is-mirrored" data-combat-material="spring" data-combat-action="attack" data-mirror="true" data-columns="4" data-durations="60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60" data-loop="false"><img src="DesignAssets/UnitPreviews/spring-tribe/attack-right.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="hurt"><span class="unit-matrix-cell-label">피격</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spring/AnimationStudies/hurt-v2/hurt-v2.webp"><span class="unit-matrix-preview" data-combat-material="spring" data-combat-action="hurt" data-columns="4" data-durations="20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20" data-loop="false"><img src="DesignAssets/UnitPreviews/spring-tribe/hurt.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="birth"><span class="unit-matrix-cell-label">탄생</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-game.webp" title="흘림턱에서 분리되어 둥지 앞 빈 칸에 착지 · 1.79초"><span class="unit-matrix-preview" data-audio-cues='[{"src":"DesignAssets/Audio/spring-birth.mp3","times":[0]}]' data-columns="4" data-durations="130,120,100,100,80,260,80,90,90,100,100,130,410" data-loop="false"><img src="DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-game-preview.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="death"><span class="unit-matrix-cell-label">사망</span><figure class="unit-matrix-image"><a href="DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png"><span class="unit-matrix-preview" data-combat-material="spring" data-combat-action="death" data-columns="4" data-durations="120,100,140,120,140,100,120,600" data-loop="false"><img src="DesignAssets/UnitPreviews/spring-tribe/death.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
 </tr>
 <tr id="unit-spiny-back-beetle"><th scope="row">가시등 딱정벌레</th>
 <td data-action="base"><span class="unit-matrix-cell-label">기본 이미지</span><figure class="unit-matrix-image"><a href="DesignAssets/Units/spiny-back-beetle.png"><span class="unit-matrix-preview"><img src="DesignAssets/UnitPreviews/spiny-back-beetle/base.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
@@ -1290,11 +1364,11 @@
 <td data-action="harvest" data-missing="true"><span class="unit-matrix-cell-label">채집</span><span class="unit-matrix-empty" aria-hidden="true"></span></td>
 <td data-action="carry" data-missing="true"><span class="unit-matrix-cell-label">운반</span><span class="unit-matrix-empty" aria-hidden="true"></span></td>
 <td data-action="throw" data-missing="true"><span class="unit-matrix-cell-label">투척</span><span class="unit-matrix-empty" aria-hidden="true"></span></td>
-<td data-action="attack-right"><span class="unit-matrix-cell-label">오른쪽 공격</span><figure class="unit-matrix-image"><a href="DesignAssets/Animations/BeetleAttackThreePhase/attack-preview.webp"><span class="unit-matrix-preview is-mirrored" data-mirror="true"><img src="DesignAssets/UnitPreviews/spiny-back-beetle/attack-right.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="attack-left"><span class="unit-matrix-cell-label">왼쪽 공격</span><figure class="unit-matrix-image"><a href="DesignAssets/Animations/BeetleAttackThreePhase/attack-preview.webp"><span class="unit-matrix-preview"><img src="DesignAssets/UnitPreviews/spiny-back-beetle/attack-left.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="hurt"><span class="unit-matrix-cell-label">피격</span><figure class="unit-matrix-image"><a href="DesignAssets/Animations/BeetleHurt/hurt-preview.webp"><span class="unit-matrix-preview"><img src="DesignAssets/UnitPreviews/spiny-back-beetle/hurt.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="attack-right"><span class="unit-matrix-cell-label">오른쪽 공격</span><figure class="unit-matrix-image"><a data-preview="DesignAssets/Animations/BeetleAttackThreePhase/attack-runtime.webp" href="DesignAssets/Animations/BeetleAttackThreePhase/attack-preview.webp"><span class="unit-matrix-preview is-mirrored" data-columns="8" data-durations="40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40" data-loop="false" data-combat-material="beetle" data-combat-action="attack" data-mirror="true"><img src="DesignAssets/UnitPreviews/spiny-back-beetle/attack-right.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="attack-left"><span class="unit-matrix-cell-label">왼쪽 공격</span><figure class="unit-matrix-image"><a data-preview="DesignAssets/Animations/BeetleAttackThreePhase/attack-runtime.webp" href="DesignAssets/Animations/BeetleAttackThreePhase/attack-preview.webp"><span class="unit-matrix-preview" data-columns="8" data-durations="40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40" data-loop="false" data-combat-material="beetle" data-combat-action="attack"><img src="DesignAssets/UnitPreviews/spiny-back-beetle/attack-left.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="hurt"><span class="unit-matrix-cell-label">피격</span><figure class="unit-matrix-image"><a data-preview="DesignAssets/Animations/BeetleHurt/hurt-runtime.webp" href="DesignAssets/Animations/BeetleHurt/hurt-preview.webp"><span class="unit-matrix-preview" data-columns="8" data-durations="40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,30" data-loop="false" data-combat-material="beetle" data-combat-action="hurt"><img src="DesignAssets/UnitPreviews/spiny-back-beetle/hurt.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
 <td data-action="birth" data-missing="true"><span class="unit-matrix-cell-label">탄생</span><span class="unit-matrix-empty" aria-hidden="true"></span></td>
-<td data-action="death"><span class="unit-matrix-cell-label">사망</span><figure class="unit-matrix-image"><a href="DesignAssets/Animations/BeetleDeath/death-preview-v2.webp"><span class="unit-matrix-preview"><img src="DesignAssets/UnitPreviews/spiny-back-beetle/death.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="death"><span class="unit-matrix-cell-label">사망</span><figure class="unit-matrix-image"><a data-preview="DesignAssets/Animations/BeetleDeath/death-runtime-v2.webp" href="DesignAssets/Animations/BeetleDeath/death-preview-v2.webp"><span class="unit-matrix-preview" data-columns="8" data-durations="40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40" data-loop="false" data-combat-material="beetle" data-combat-action="death"><img src="DesignAssets/UnitPreviews/spiny-back-beetle/death.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
 </tr>
 </tbody>
 <tbody id="world-creatures-basic">
@@ -1342,7 +1416,7 @@
 </tr>
 <tr id="unit-bundle-snail"><th scope="row">보따리달팽이</th>
 <td data-action="base"><span class="unit-matrix-cell-label">기본 이미지</span><figure class="unit-matrix-image"><a href="DesignAssets/CreatureConcepts/v3/bundle-snail.png"><span class="unit-matrix-preview"><img src="DesignAssets/UnitPreviews/bundle-snail/base.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
-<td data-action="idle"><span class="unit-matrix-cell-label">대기</span><figure class="unit-matrix-image"><a href="DesignAssets/Animations/CreatureIdleV3/bundle-snail/idle.webp"><span class="unit-matrix-preview" data-columns="4" data-durations="1900,170,150,150,260,160,180,200,3830" data-loop="true"><img src="DesignAssets/UnitPreviews/bundle-snail/idle.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
+<td data-action="idle"><span class="unit-matrix-cell-label">대기</span><figure class="unit-matrix-image"><a href="DesignAssets/Animations/CreatureIdleV4/bundle-snail/idle.webp"><span class="unit-matrix-preview" data-columns="4" data-durations="1500,65,60,60,65,70,70,160,100,90,90,200,100,110,110,240,90,90,90,80,80,80,90,3310" data-loop="true"><img src="DesignAssets/UnitPreviews/bundle-snail/idle.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></a></figure></td>
 <td data-action="walk" data-missing="true"><span class="unit-matrix-cell-label">이동</span><span class="unit-matrix-empty" aria-hidden="true"></span></td>
 <td data-action="jump" data-missing="true"><span class="unit-matrix-cell-label">점프</span><span class="unit-matrix-empty" aria-hidden="true"></span></td>
 <td data-action="harvest" data-missing="true"><span class="unit-matrix-cell-label">채집</span><span class="unit-matrix-empty" aria-hidden="true"></span></td>
@@ -1555,13 +1629,31 @@
 </tbody>
 </table></div>
 </div></details>
+<script src="client/combat-audio.js"></script>
 <script id="unit-matrix-playback">
 document.addEventListener('DOMContentLoaded',()=>{
 const lightbox=document.getElementById('image-lightbox'),image=lightbox.querySelector('.lightbox-image');
 let frame=null,panel=null;
-function clearPanel(){if(frame!==null)cancelAnimationFrame(frame);frame=null;if(panel){panel.canvas.width=panel.canvas.height=1;if(panel.audio){panel.audio.pause();panel.audio.currentTime=0}}panel=null}
+function stopSounds(){if(panel)for(const sound of panel.sounds){sound.audio.pause();sound.audio.currentTime=0;sound.cycle=-1;sound.index=-1}}
+function clearPanel(){if(frame!==null)cancelAnimationFrame(frame);frame=null;stopSounds();if(panel)panel.canvas.width=panel.canvas.height=1;panel=null}
 function schedule(){if(frame===null&&panel?.ready&&!document.hidden&&lightbox.classList.contains('is-open'))frame=requestAnimationFrame(paint)}
-function paint(now){frame=null;if(!panel?.ready||!lightbox.classList.contains('is-open'))return;const cycle=Math.floor((now-panel.started)/(panel.duration+panel.rest)),time=(now-panel.started)%(panel.duration+panel.rest);if(panel.audio&&cycle!==panel.audioCycle&&time>=panel.audioStart&&time<panel.duration){panel.audioCycle=cycle;panel.audio.currentTime=0;panel.audio.play().catch(()=>{})}let index=panel.ends.findIndex(end=>time<end);if(index<0)index=panel.ends.length-1;if(index!==panel.index){panel.index=index;const size=image.naturalWidth/panel.columns,context=panel.context;if(panel.canvas.width!==size)panel.canvas.width=panel.canvas.height=size;context.setTransform(1,0,0,1,0,0);context.clearRect(0,0,size,size);if(panel.mirror){context.translate(size,0);context.scale(-1,1)}context.drawImage(image,index%panel.columns*size,Math.floor(index/panel.columns)*size,size,size,0,0,size,size);panel.canvas.dataset.frame=String(index)}schedule()}
+function playSounds(cycle,time){
+for(const sound of panel.sounds){
+if(sound.audio.loop){if(time<panel.duration){if(sound.cycle<0){sound.cycle=cycle;sound.audio.play().catch(()=>{})}}else if(sound.cycle>=0){sound.audio.pause();sound.audio.currentTime=0;sound.cycle=-1}continue}
+if(sound.cycle!==cycle){sound.cycle=cycle;sound.index=-1;sound.audio.pause();sound.audio.currentTime=0}
+if(time>=panel.duration)continue;
+const index=sound.times.findLastIndex(at=>time>=at);
+if(index>sound.index){sound.index=index;sound.audio.currentTime=0;sound.audio.play().catch(()=>{})}
+}
+}
+function paint(now){
+frame=null;if(!panel?.ready||!lightbox.classList.contains('is-open'))return;
+const cycle=Math.floor((now-panel.started)/(panel.duration+panel.rest)),time=(now-panel.started)%(panel.duration+panel.rest);
+playSounds(cycle,time);
+let index=panel.ends.findIndex(end=>time<end);if(index<0)index=panel.ends.length-1;
+if(index!==panel.index){panel.index=index;const size=image.naturalWidth/panel.columns,context=panel.context;if(panel.canvas.width!==size)panel.canvas.width=panel.canvas.height=size;context.setTransform(1,0,0,1,0,0);context.clearRect(0,0,size,size);if(panel.mirror){context.translate(size,0);context.scale(-1,1)}context.drawImage(image,index%panel.columns*size,Math.floor(index/panel.columns)*size,size,size,0,0,size,size);panel.canvas.dataset.frame=String(index)}
+schedule();
+}
 document.addEventListener('click',event=>{
 const link=event.target.closest('figure a');if(!link||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey||event.button!==0)return;
 clearPanel();lightbox.classList.remove('is-unit-animation','is-unit-mirrored');if(!link.closest('#codex-units'))return;
@@ -1570,27 +1662,34 @@ const mirror=element.dataset.mirror==='true';lightbox.classList.toggle('is-unit-
 lightbox.classList.add('is-unit-animation');let canvas=document.getElementById('unit-lightbox-canvas');if(!canvas){canvas=document.createElement('canvas');canvas.id='unit-lightbox-canvas';image.after(canvas)}
 canvas.width=canvas.height=64;canvas.dataset.frame='-1';const context=canvas.getContext('2d'),thumbnail=element.querySelector('img');if(thumbnail.complete&&thumbnail.naturalWidth){if(mirror){context.translate(64,0);context.scale(-1,1)}context.drawImage(thumbnail,0,0,64,64)}
 let duration=0;const ends=element.dataset.durations.split(',').map(value=>duration+=Number(value));
-const current=panel={canvas,context,columns:Number(element.dataset.columns),ends,duration,rest:element.dataset.loop==='true'?0:900,mirror,index:-1,ready:false,started:0,audio:element.dataset.audio?new Audio(element.dataset.audio):null,audioStart:Number(element.dataset.audioStart||0),audioCycle:-1};
-image.decoding='async';image.decode().then(()=>{if(panel!==current||!lightbox.classList.contains('is-open'))return;current.ready=true;current.started=performance.now();schedule()}).catch(()=>{});
+const combat=globalThis.SpawnerCombatAudio,combatCue=element.dataset.combatAction?combat.cue(element.dataset.combatMaterial,element.dataset.combatAction,1):null;
+const cues=combatCue?[{src:combat.sources[combatCue.name],times:[combatCue.at*1000]}]:element.dataset.audioCues?JSON.parse(element.dataset.audioCues):element.dataset.audio?[{src:element.dataset.audio,times:[Number(element.dataset.audioStart||0)]}]:[];
+const sounds=cues.map(cue=>{
+const audio=new Audio();audio.preload='auto';audio.loop=cue.loop===true;
+const ready=new Promise(resolve=>{audio.addEventListener('loadeddata',resolve,{once:true});audio.addEventListener('error',resolve,{once:true})});
+audio.src=cue.src;audio.load();return {audio,ready,times:cue.times,cycle:-1,index:-1};
+});
+const current=panel={canvas,context,columns:Number(element.dataset.columns),ends,duration,rest:element.dataset.loop==='true'?0:900,mirror,index:-1,ready:false,started:0,sounds};
+image.decoding='async';Promise.all([image.decode(),...sounds.map(sound=>sound.ready)]).then(()=>{if(panel!==current||!lightbox.classList.contains('is-open'))return;current.ready=true;current.started=performance.now();schedule()}).catch(()=>{});
 });
 new MutationObserver(()=>{if(!lightbox.classList.contains('is-open'))clearPanel()}).observe(lightbox,{attributes:true,attributeFilter:['class']});
-document.addEventListener('visibilitychange',()=>{if(document.hidden){if(frame!==null){cancelAnimationFrame(frame);frame=null}if(panel?.audio)panel.audio.pause()}else{if(panel?.audio)panel.audioCycle=Math.floor((performance.now()-panel.started)/(panel.duration+panel.rest));schedule()}});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){if(frame!==null){cancelAnimationFrame(frame);frame=null}stopSounds()}else{if(panel){panel.started=performance.now();panel.index=-1}schedule()}});
 });
 </script>
 <details id="codex-food"><summary hidden></summary><div class="details-body art-style">
 <p>먹이는 재생하지 않으며, 둥지 근처에 시작 유닛 2마리의 이동·채집·운반 약 5분치를 둔다.</p>
 <div class="table-wrap food-table-wrap" id="art-food-plan"><table class="food-asset-table" id="art-food" aria-label="자원"><colgroup><col class="food-title-column"><col><col><col></colgroup><thead><tr><th scope="col">자원</th><th scope="col">원화</th><th scope="col">운반물</th><th scope="col">채집애니</th></tr></thead><tbody>
-<tr data-resource="clay" data-primary-food-tribe="sprout-tribe"><th scope="row">비옥토</th><td><figure class="asset-card art-card"><a href="DesignAssets/Resources/clay.png" data-world-pixels="128"><img src="DesignAssets/Resources/clay.png" alt="비옥토" width="128" height="128" loading="lazy"></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/Resources/clay-carry.png" data-world-pixels="128"><img src="DesignAssets/Resources/clay-carry.png" alt="비옥토" width="128" height="128" loading="lazy" class="resource-carried-compact"></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/Animations/Resources/FertileSoil/fertile-soil-harvest.webp"><img src="DesignAssets/Animations/Resources/FertileSoil/fertile-soil-harvest.webp" alt="비옥토 채집" width="128" height="128" loading="lazy"></a><audio class="harvest-audio" controls loop preload="none" aria-label="비옥토 채집 효과음" src="DesignAssets/Audio/clay-harvest-loop.mp3"></audio></figure></td></tr>
+<tr data-resource="clay" data-primary-food-tribe="sprout-tribe"><th scope="row">비옥토</th><td><figure class="asset-card art-card"><a href="DesignAssets/Resources/clay.png" data-world-pixels="128"><img src="DesignAssets/Resources/clay.png" alt="비옥토" width="128" height="128" loading="lazy"></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/Resources/clay-carry.png" data-world-pixels="128"><img src="DesignAssets/Resources/clay-carry.png" alt="비옥토" width="128" height="128" loading="lazy" class="resource-carried-compact"></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/Animations/Resources/FertileSoil/fertile-soil-harvest.webp"><img src="DesignAssets/Animations/Resources/FertileSoil/fertile-soil-harvest.webp" alt="비옥토 채집" width="128" height="128" loading="lazy"></a><audio class="harvest-audio" controls loop preload="none" aria-label="비옥토 채집 효과음" src="DesignAssets/Audio/clay-harvest-handful.mp3"></audio></figure></td></tr>
 <tr data-resource="wood" data-primary-food-tribe="spore-tribe" id="art-resource-plan" data-harvest-tribe="spore-tribe"><th scope="row">목재</th><td><figure class="asset-card art-card"><a href="DesignAssets/Terrain/standing-tree-smooth-atlas.png" data-world-pixels="128"><img src="DesignAssets/Terrain/standing-tree-smooth-atlas.png" alt="나무" width="128" height="128" loading="lazy" style="visibility:hidden"><span class="food-world-sprite" aria-hidden="true" style="left:6.409781546689224px;top:-0.5470093107827836px;width:108.45639510534154px;height:108.45639510534154px;background-image:url('DesignAssets/Terrain/standing-tree-smooth-atlas.png');background-size:325.36918531602464px 108.45639510534154px;background-position:0 0"></span></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/Resources/wood-carry.png" data-world-pixels="128"><img src="DesignAssets/Resources/wood-carry.png" alt="목재" width="128" height="128" loading="lazy"></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/Animations/Resources/HarvestDrawnV2/wood/wood-harvest.webp"><img src="DesignAssets/Animations/Resources/HarvestDrawnV2/wood/wood-harvest.webp" alt="목재 채집" width="128" height="128" loading="lazy"></a><audio class="harvest-audio" controls loop preload="none" aria-label="목재 채집 효과음" src="DesignAssets/Audio/wood-harvest-loop.mp3"></audio></figure></td></tr>
 <tr data-resource="pebbles" data-primary-food-tribe="pebble-tribe"><th scope="row">자갈</th><td><figure class="asset-card art-card"><a href="DesignAssets/Resources/pebbles.png" data-world-pixels="128"><img src="DesignAssets/Resources/pebbles.png" alt="자갈" width="128" height="128" loading="lazy"></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/Resources/pebbles-carry.png" data-world-pixels="128"><img src="DesignAssets/Resources/pebbles-carry.png" alt="자갈" width="128" height="128" loading="lazy"></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/Animations/Resources/HarvestDrawnV2/pebbles/pebbles-harvest.webp"><img src="DesignAssets/Animations/Resources/HarvestDrawnV2/pebbles/pebbles-harvest.webp" alt="자갈 채집" width="128" height="128" loading="lazy"></a><audio class="harvest-audio" controls loop preload="none" aria-label="자갈 채집 효과음" src="DesignAssets/Audio/pebbles-harvest-loop.mp3"></audio></figure></td></tr>
 <tr data-resource="dew" data-primary-food-tribe="spring-tribe"><th scope="row">이슬방울</th><td><figure class="asset-card art-card"><a href="DesignAssets/Resources/dew-grass.png" data-world-pixels="128"><img src="DesignAssets/Resources/dew-grass.png" alt="이슬방울" width="128" height="128" loading="lazy"></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/Resources/dew-carry.png" data-world-pixels="128"><img src="DesignAssets/Resources/dew-carry.png" alt="이슬방울" width="128" height="128" loading="lazy"></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/Animations/Resources/HarvestDrawnV3/dew/dew-harvest.webp"><img src="DesignAssets/Animations/Resources/HarvestDrawnV3/dew/dew-harvest.webp" alt="이슬방울 채집" width="128" height="128" loading="lazy"></a><audio class="harvest-audio" controls loop preload="none" aria-label="이슬방울 채집 효과음" src="DesignAssets/Audio/dew-harvest-loop.mp3"></audio></figure></td></tr>
-<tr data-resource="meat"><th scope="row">고기</th><td><figure class="asset-card art-card"><a href="DesignAssets/Animations/BeetleDeath/dead-v2.png" data-world-pixels="128"><img src="DesignAssets/Animations/BeetleDeath/dead-v2.png" alt="사체" width="128" height="128" loading="lazy"></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/Foods/food-meat.png" data-world-pixels="128"><img src="DesignAssets/Foods/food-meat.png" alt="고기" width="128" height="128" loading="lazy" class="resource-carried-original"></a></figure></td><td></td></tr>
-<tr data-resource="carapace"><th scope="row">갑각</th><td><figure class="asset-card art-card"><a href="DesignAssets/Animations/BeetleDeath/dead-v2.png" data-world-pixels="128"><img src="DesignAssets/Animations/BeetleDeath/dead-v2.png" alt="사체" width="128" height="128" loading="lazy"></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/ResourceConcepts/v1/resource-carapace.png" data-world-pixels="128"><img src="DesignAssets/ResourceConcepts/v1/resource-carapace.png" alt="갑각" width="128" height="128" loading="lazy" class="resource-carried-original"></a></figure></td><td></td></tr>
-<tr data-resource="grass-fiber"><th scope="row">풀섬유</th><td><figure class="asset-card art-card"><a href="DesignAssets/ResourceConcepts/v1/resource-grass-fiber.png" data-world-pixels="128"><img src="DesignAssets/ResourceConcepts/v1/resource-grass-fiber.png" alt="풀섬유" width="128" height="128" loading="lazy" style="visibility:hidden"><span class="food-world-sprite" aria-hidden="true" style="background-image:url('DesignAssets/Animations/Resources/HarvestV1/grass-fiber/sheet.png');background-size:812.898462px 541.932308px;background-position:-3.741538px -0.787692px"></span></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/ResourceConcepts/v1/resource-grass-fiber.png" data-world-pixels="128"><img src="DesignAssets/ResourceConcepts/v1/resource-grass-fiber.png" alt="풀섬유" width="128" height="128" loading="lazy" class="resource-carried-original"></a></figure></td><td></td></tr>
-<tr data-resource="sand"><th scope="row">모래</th><td><figure class="asset-card art-card"><a href="DesignAssets/Resources/sand.png" data-world-pixels="128"><img src="DesignAssets/Resources/sand.png" alt="모래" width="128" height="128" loading="lazy"></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/Resources/sand-carry.png" data-world-pixels="128"><img src="DesignAssets/Resources/sand-carry.png" alt="모래" width="128" height="128" loading="lazy" class="resource-carried-compact"></a></figure></td><td></td></tr>
-<tr data-resource="iron-ore"><th scope="row">철광석</th><td><figure class="asset-card art-card"><a href="DesignAssets/Resources/iron-ore.png" data-world-pixels="128"><img src="DesignAssets/Resources/iron-ore.png" alt="철광석" width="128" height="128" loading="lazy"></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/Resources/iron-ore-carry.png" data-world-pixels="128"><img src="DesignAssets/Resources/iron-ore-carry.png" alt="철광석" width="128" height="128" loading="lazy" class="resource-carried-compact"></a></figure></td><td></td></tr>
-<tr data-resource="copper-ore"><th scope="row">구리광석</th><td><figure class="asset-card art-card"><a href="DesignAssets/Resources/copper-ore.png" data-world-pixels="128"><img src="DesignAssets/Resources/copper-ore.png" alt="구리광석" width="128" height="128" loading="lazy"></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/Resources/copper-ore-carry.png" data-world-pixels="128"><img src="DesignAssets/Resources/copper-ore-carry.png" alt="구리광석" width="128" height="128" loading="lazy" class="resource-carried-compact"></a></figure></td><td></td></tr>
-<tr data-resource="quartz"><th scope="row">수정</th><td><figure class="asset-card art-card"><a href="DesignAssets/ResourceConcepts/v1/resource-quartz.png" data-world-pixels="128"><img src="DesignAssets/ResourceConcepts/v1/resource-quartz.png" alt="수정" width="128" height="128" loading="lazy" style="visibility:hidden"><span class="food-world-sprite" aria-hidden="true" style="background-image:url('DesignAssets/Animations/Resources/HarvestV1/quartz/sheet.png');background-size:812.898462px 541.932308px;background-position:-3.741538px -0.787692px"></span></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/ResourceConcepts/v1/resource-quartz.png" data-world-pixels="128"><img src="DesignAssets/ResourceConcepts/v1/resource-quartz.png" alt="수정" width="128" height="128" loading="lazy" class="resource-carried-original"></a></figure></td><td></td></tr>
+<tr data-resource="meat"><th scope="row">고기</th><td><figure class="asset-card art-card"><a href="DesignAssets/Animations/BeetleDeath/dead-v2.png" data-world-pixels="128"><img src="DesignAssets/Animations/BeetleDeath/dead-v2.png" alt="사체" width="128" height="128" loading="lazy"></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/Foods/food-meat.png" data-world-pixels="128"><img src="DesignAssets/Foods/food-meat.png" alt="고기" width="128" height="128" loading="lazy" class="resource-carried-original"></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/Animations/Resources/HarvestCurrentV1/meat/meat-harvest.webp"><img src="DesignAssets/Animations/Resources/HarvestCurrentV1/meat/meat-harvest.webp" alt="고기 채집" width="128" height="128" loading="lazy"></a><audio class="harvest-audio" controls loop preload="none" aria-label="고기 채집 효과음" src="DesignAssets/Audio/meat-harvest-loop.mp3"></audio></figure></td></tr>
+<tr data-resource="carapace"><th scope="row">갑각</th><td><figure class="asset-card art-card"><a href="DesignAssets/Animations/BeetleDeath/dead-v2.png" data-world-pixels="128"><img src="DesignAssets/Animations/BeetleDeath/dead-v2.png" alt="사체" width="128" height="128" loading="lazy"></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/ResourceConcepts/v1/resource-carapace.png" data-world-pixels="128"><img src="DesignAssets/ResourceConcepts/v1/resource-carapace.png" alt="갑각" width="128" height="128" loading="lazy" class="resource-carried-original"></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/Animations/Resources/HarvestCurrentV1/carapace/carapace-harvest.webp"><img src="DesignAssets/Animations/Resources/HarvestCurrentV1/carapace/carapace-harvest.webp" alt="갑각 채집" width="128" height="128" loading="lazy"></a><audio class="harvest-audio" controls loop preload="none" aria-label="갑각 채집 효과음" src="DesignAssets/Audio/carapace-harvest-loop.mp3"></audio></figure></td></tr>
+<tr data-resource="grass-fiber"><th scope="row">풀섬유</th><td><figure class="asset-card art-card"><a href="DesignAssets/ResourceConcepts/v1/resource-grass-fiber.png" data-world-pixels="128"><img src="DesignAssets/ResourceConcepts/v1/resource-grass-fiber.png" alt="풀섬유" width="128" height="128" loading="lazy" style="visibility:hidden"><span class="food-world-sprite" aria-hidden="true" style="background-image:url('DesignAssets/Animations/Resources/HarvestV1/grass-fiber/sheet.png');background-size:812.898462px 541.932308px;background-position:-3.741538px -0.787692px"></span></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/ResourceConcepts/v1/resource-grass-fiber.png" data-world-pixels="128"><img src="DesignAssets/ResourceConcepts/v1/resource-grass-fiber.png" alt="풀섬유" width="128" height="128" loading="lazy" class="resource-carried-original"></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/Animations/Resources/HarvestCurrentV1/grass-fiber/grass-fiber-harvest.webp"><img src="DesignAssets/Animations/Resources/HarvestCurrentV1/grass-fiber/grass-fiber-harvest.webp" alt="풀섬유 채집" width="128" height="128" loading="lazy"></a><audio class="harvest-audio" controls loop preload="none" aria-label="풀섬유 채집 효과음" src="DesignAssets/Audio/grass-fiber-harvest-loop.mp3"></audio></figure></td></tr>
+<tr data-resource="sand"><th scope="row">모래</th><td><figure class="asset-card art-card"><a href="DesignAssets/Resources/sand.png" data-world-pixels="128"><img src="DesignAssets/Resources/sand.png" alt="모래" width="128" height="128" loading="lazy"></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/Resources/sand-carry.png" data-world-pixels="128"><img src="DesignAssets/Resources/sand-carry.png" alt="모래" width="128" height="128" loading="lazy" class="resource-carried-compact"></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/Animations/Resources/HarvestCurrentV1/sand/sand-harvest.webp"><img src="DesignAssets/Animations/Resources/HarvestCurrentV1/sand/sand-harvest.webp" alt="모래 채집" width="128" height="128" loading="lazy"></a><audio class="harvest-audio" controls loop preload="none" aria-label="모래 채집 효과음" src="DesignAssets/Audio/sand-harvest-loop.mp3"></audio></figure></td></tr>
+<tr data-resource="iron-ore"><th scope="row">철광석</th><td><figure class="asset-card art-card"><a href="DesignAssets/Resources/iron-ore.png" data-world-pixels="128"><img src="DesignAssets/Resources/iron-ore.png" alt="철광석" width="128" height="128" loading="lazy"></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/Resources/iron-ore-carry.png" data-world-pixels="128"><img src="DesignAssets/Resources/iron-ore-carry.png" alt="철광석" width="128" height="128" loading="lazy" class="resource-carried-compact"></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/Animations/Resources/HarvestCurrentV1/iron-ore/iron-ore-harvest.webp"><img src="DesignAssets/Animations/Resources/HarvestCurrentV1/iron-ore/iron-ore-harvest.webp" alt="철광석 채집" width="128" height="128" loading="lazy"></a><audio class="harvest-audio" controls loop preload="none" aria-label="철광석 채집 효과음" src="DesignAssets/Audio/iron-ore-harvest-loop.wav"></audio></figure></td></tr>
+<tr data-resource="copper-ore"><th scope="row">구리광석</th><td><figure class="asset-card art-card"><a href="DesignAssets/Resources/copper-ore.png" data-world-pixels="128"><img src="DesignAssets/Resources/copper-ore.png" alt="구리광석" width="128" height="128" loading="lazy"></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/Resources/copper-ore-carry.png" data-world-pixels="128"><img src="DesignAssets/Resources/copper-ore-carry.png" alt="구리광석" width="128" height="128" loading="lazy" class="resource-carried-compact"></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/Animations/Resources/HarvestCurrentV1/copper-ore/copper-ore-harvest.webp"><img src="DesignAssets/Animations/Resources/HarvestCurrentV1/copper-ore/copper-ore-harvest.webp" alt="구리광석 채집" width="128" height="128" loading="lazy"></a><audio class="harvest-audio" controls loop preload="none" aria-label="구리광석 채집 효과음" src="DesignAssets/Audio/copper-ore-harvest-loop.mp3"></audio></figure></td></tr>
+<tr data-resource="quartz"><th scope="row">수정</th><td><figure class="asset-card art-card"><a href="DesignAssets/ResourceConcepts/v1/resource-quartz.png" data-world-pixels="128"><img src="DesignAssets/ResourceConcepts/v1/resource-quartz.png" alt="수정" width="128" height="128" loading="lazy" style="visibility:hidden"><span class="food-world-sprite" aria-hidden="true" style="background-image:url('DesignAssets/Animations/Resources/HarvestV1/quartz/sheet.png');background-size:812.898462px 541.932308px;background-position:-3.741538px -0.787692px"></span></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/ResourceConcepts/v1/resource-quartz.png" data-world-pixels="128"><img src="DesignAssets/ResourceConcepts/v1/resource-quartz.png" alt="수정" width="128" height="128" loading="lazy" class="resource-carried-original"></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/Animations/Resources/HarvestCurrentV1/quartz/quartz-harvest.webp"><img src="DesignAssets/Animations/Resources/HarvestCurrentV1/quartz/quartz-harvest.webp" alt="수정 채집" width="128" height="128" loading="lazy"></a><audio class="harvest-audio" controls loop preload="none" aria-label="수정 채집 효과음" src="DesignAssets/Audio/quartz-harvest-loop.mp3"></audio></figure></td></tr>
 <tr data-resource="basic-mushroom"><th scope="row">버섯</th><td><figure class="asset-card art-card"><a href="DesignAssets/Foods/food-mushroom-pile.png"><img src="DesignAssets/Foods/food-mushroom-pile.png" alt="버섯" width="128" height="128" loading="lazy"></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/Foods/food-mushroom-single.png" data-world-pixels="128"><img src="DesignAssets/Foods/food-mushroom-single.png" alt="버섯" width="128" height="128" loading="lazy" class="resource-carried-original"></a></figure></td><td><figure class="asset-card art-card"><a href="DesignAssets/Animations/food-mushroom-pile-harvest.webp"><img src="DesignAssets/Animations/food-mushroom-pile-harvest.webp" alt="버섯" width="128" height="128" loading="lazy"></a><audio class="harvest-audio" controls loop preload="none" aria-label="버섯 채집 효과음" src="DesignAssets/Audio/mushroom-harvest-loop.mp3"></audio></figure></td></tr>
 </tbody></table></div>
 </div></details>
@@ -1610,9 +1709,9 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden){if(frame!=
 <div id="additional-tribe-nests" class="table-wrap nest-table-wrap">
 <table class="nest-table" aria-label="둥지"><thead><tr><th scope="col">부족</th><th scope="col">1레벨</th><th scope="col">idle 애니</th></tr></thead><tbody>
 <tr id="nest-sprout-tribe" aria-label="새싹"><th scope="row">새싹콩</th><td><figure class="nest-image"><a href="DesignAssets/Nests/nest-stage-01.png" data-preview="DesignAssets/Previews/Nests/sprout-stage-01.webp"><img src="DesignAssets/Previews/Nests/sprout-stage-01.webp" alt="새싹 1레벨" width="128" height="128" loading="lazy"></a></figure></td><td><figure class="nest-image"><a href="DesignAssets/Animations/Nests/nest-stage-01-idle-sheet.png" data-preview="DesignAssets/Previews/Nests/sprout-stage-01-idle.webp"><img src="DesignAssets/Previews/Nests/sprout-stage-01-idle.webp" alt="새싹콩 1레벨 idle" width="128" height="128" loading="lazy"></a></figure></td></tr>
-<tr id="nest-spore-tribe" aria-label="포자버섯"><th scope="row">포자버섯</th><td><figure class="nest-image"><a href="DesignAssets/Tribes/spore/Nests/nest-stage-01.png" data-preview="DesignAssets/Previews/Nests/spore-stage-01.webp"><img src="DesignAssets/Previews/Nests/spore-stage-01.webp" alt="포자버섯 1레벨" width="128" height="128" loading="lazy"></a></figure></td><td><figure class="nest-image"><a href="DesignAssets/Tribes/spore/Animations/Nests/stage-01-idle-v3/nest-stage-01-idle-sheet.png" data-preview="DesignAssets/Previews/Nests/spore-stage-01-idle-v3.webp"><img src="DesignAssets/Previews/Nests/spore-stage-01-idle-v3.webp" alt="포자버섯 1레벨 idle" width="128" height="128" loading="lazy"></a></figure></td></tr>
-<tr id="nest-pebble-tribe" aria-label="몽돌"><th scope="row">몽돌</th><td><figure class="nest-image"><a href="DesignAssets/Tribes/pebble/Nests/nest-stage-01.png" data-preview="DesignAssets/Previews/Nests/pebble-stage-01.webp"><img src="DesignAssets/Previews/Nests/pebble-stage-01.webp" alt="몽돌 1레벨" width="128" height="128" loading="lazy"></a></figure></td><td><figure class="nest-image"><a href="DesignAssets/Tribes/pebble/Animations/Nests/stage-01-idle-v3/nest-stage-01-idle-sheet.png" data-preview="DesignAssets/Previews/Nests/pebble-stage-01-idle-v3.webp"><img src="DesignAssets/Previews/Nests/pebble-stage-01-idle-v3.webp" alt="몽돌 1레벨 idle" width="128" height="128" loading="lazy"></a></figure></td></tr>
-<tr id="nest-spring-tribe" aria-label="샘방울"><th scope="row">샘방울</th><td><figure class="nest-image"><a href="DesignAssets/Tribes/spring/Nests/nest-stage-01.png" data-preview="DesignAssets/Previews/Nests/spring-stage-01.webp"><img src="DesignAssets/Previews/Nests/spring-stage-01.webp" alt="샘방울 1레벨" width="128" height="128" loading="lazy"></a></figure></td><td><figure class="nest-image"><a href="DesignAssets/Tribes/spring/Animations/Nests/stage-01-idle-v3/nest-stage-01-idle-sheet.png" data-preview="DesignAssets/Previews/Nests/spring-stage-01-idle-v3.webp"><img src="DesignAssets/Previews/Nests/spring-stage-01-idle-v3.webp" alt="샘방울 1레벨 idle" width="128" height="128" loading="lazy"></a></figure></td></tr>
+<tr id="nest-spore-tribe" aria-label="포자버섯"><th scope="row">포자버섯</th><td><figure class="nest-image"><a href="DesignAssets/Tribes/spore/Nests/nest-stage-01.png" data-preview="DesignAssets/Previews/Nests/spore-stage-01.webp"><img src="DesignAssets/Previews/Nests/spore-stage-01.webp" alt="포자버섯 1레벨" width="128" height="128" loading="lazy"></a></figure></td><td><figure class="nest-image"><a href="DesignAssets/Tribes/spore/Animations/Nests/stage-01-idle-spine-v1/nest-stage-01-idle-sheet.png" data-preview="DesignAssets/Previews/Nests/spore-stage-01-idle-spine-v1.webp"><img src="DesignAssets/Previews/Nests/spore-stage-01-idle-spine-v1.webp" alt="포자버섯 1레벨 idle" width="128" height="128" loading="lazy"></a></figure></td></tr>
+<tr id="nest-pebble-tribe" aria-label="몽돌"><th scope="row">몽돌</th><td><figure class="nest-image"><a href="DesignAssets/Tribes/pebble/Nests/nest-stage-01.png" data-preview="DesignAssets/Previews/Nests/pebble-stage-01.webp"><img src="DesignAssets/Previews/Nests/pebble-stage-01.webp" alt="몽돌 1레벨" width="128" height="128" loading="lazy"></a></figure></td><td></td></tr>
+<tr id="nest-spring-tribe" aria-label="샘방울"><th scope="row">샘방울</th><td><figure class="nest-image"><a href="DesignAssets/Tribes/spring/Nests/nest-stage-01.png" data-preview="DesignAssets/Previews/Nests/spring-stage-01.webp"><img src="DesignAssets/Previews/Nests/spring-stage-01.webp" alt="샘방울 1레벨" width="128" height="128" loading="lazy"></a></figure></td><td></td></tr>
 </tbody></table></div></div></details>
 </div></details>
 <details class="section-group" data-section-group="art"><summary>아트</summary><div class="section-group-body">
@@ -1634,6 +1733,13 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden){if(frame!=
 <p>콩 착지 <audio controls preload="none" aria-label="콩 착지" src="DesignAssets/Audio/bean-landing.mp3"></audio> 보행 <audio controls preload="none" aria-label="콩 보행" src="DesignAssets/Audio/bean-footstep.mp3"></audio> 샘방울 착지 <audio controls preload="none" aria-label="샘방울 착지" src="DesignAssets/Audio/spring-landing.mp3"></audio> 보행 <audio controls preload="none" aria-label="샘방울 보행" src="DesignAssets/Audio/spring-footstep.mp3"></audio> 몽돌 탄생·구르기 <audio controls preload="none" aria-label="몽돌 탄생·구르기" src="DesignAssets/Audio/pebble-birth-roll.mp3"></audio></p>
 <p>버섯 투척 <audio controls preload="none" aria-label="버섯 투척" src="DesignAssets/Audio/mushroom-throw.mp3"></audio> 둥지 수령 <audio controls preload="none" aria-label="둥지 수령" src="DesignAssets/Audio/nest-catch.mp3"></audio></p>
 <p>씨앗 발아 · 방출 <audio controls preload="none" aria-label="둥지 씨앗 방출" src="DesignAssets/Audio/nest-seed-eject.mp3"></audio> 파열 <audio controls preload="none" aria-label="씨앗 껍질 파열" src="DesignAssets/Audio/seed-shell-crack.mp3"></audio> 등장 <audio controls preload="none" aria-label="새싹콩 등장" src="DesignAssets/Audio/bean-sprout-pop.mp3"></audio> 샘방울 탄생 <audio controls preload="none" aria-label="샘방울 탄생" src="DesignAssets/Audio/spring-birth.mp3"></audio> 포자버섯 탄생 <audio controls preload="none" aria-label="포자버섯 탄생" src="DesignAssets/Audio/spore-birth.mp3"></audio></p>
+<div class="table-wrap"><table id="art-combat-audio"><thead><tr><th scope="col"></th><th scope="col">공격</th><th scope="col">피격</th><th scope="col">사망</th></tr></thead><tbody>
+<tr><th scope="row">새싹콩</th><td rowspan="4"><audio controls preload="none" aria-label="공격" src="DesignAssets/Audio/unit-attack.mp3"></audio></td><td><audio controls preload="none" aria-label="새싹콩 피격" src="DesignAssets/Audio/sprout-hurt.mp3"></audio></td><td><audio controls preload="none" aria-label="새싹콩 사망" src="DesignAssets/Audio/sprout-death.mp3"></audio></td></tr>
+<tr><th scope="row">포자버섯</th><td><audio controls preload="none" aria-label="포자버섯 피격" src="DesignAssets/Audio/spore-hurt.mp3"></audio></td><td><audio controls preload="none" aria-label="포자버섯 사망" src="DesignAssets/Audio/spore-death.mp3"></audio></td></tr>
+<tr><th scope="row">몽돌</th><td><audio controls preload="none" aria-label="몽돌 피격" src="DesignAssets/Audio/pebble-hurt.mp3"></audio></td><td><audio controls preload="none" aria-label="몽돌 사망" src="DesignAssets/Audio/pebble-death.mp3"></audio></td></tr>
+<tr><th scope="row">샘방울</th><td><audio controls preload="none" aria-label="샘방울 피격" src="DesignAssets/Audio/spring-hurt.mp3"></audio></td><td><audio controls preload="none" aria-label="샘방울 사망" src="DesignAssets/Audio/spring-death.mp3"></audio></td></tr>
+<tr><th scope="row">가시등 딱정벌레</th><td><audio controls preload="none" aria-label="가시등 딱정벌레 공격" src="DesignAssets/Audio/beetle-attack.mp3"></audio></td><td><audio controls preload="none" aria-label="가시등 딱정벌레 피격" src="DesignAssets/Audio/beetle-hurt.mp3"></audio></td><td><audio controls preload="none" aria-label="가시등 딱정벌레 사망" src="DesignAssets/Audio/beetle-death.mp3"></audio></td></tr>
+</tbody></table></div>
 </section>
 <section aria-labelledby="art-prompts"><h3 id="art-prompts">저장된 아트 프롬프트</h3>
 <details class="art-archive"><summary>고해상도 가시등 딱정벌레</summary><div class="art-archive-body"><pre class="art-prompt">Use case: style-transfer. Asset type: one final static 2D game creature sprite, transparent RGBA background. Image 1 is the identity and pose reference (the maroon spiny-back beetle). Image 2 is the accepted game art STYLE reference (smooth cream/sage fantasy flower nest). Redraw ONLY the beetle from image 1 as a polished smooth hand-painted fantasy illustration matching image 2's clean curved fine dark-teal contours, flowing shaded surfaces, soft luminous gradients, and restrained painted highlights. Preserve its compact low oval maroon carapace, three prominent ivory back spikes, two large inward curved ivory mandibles, tiny amber eyes, six short segmented burgundy legs, and facing left in a front three-quarter view. Keep the same recognizable silhouette, approximate proportions and ground orientation as image 1. The creature is an enemy, keep muted burgundy shell and ivory spikes so it remains distinct from the sage plant units. No extra plant leaves or flower parts on the beetle. Entire creature centered with all legs/spikes included and generous transparent margin. No floor, no cast background, no scenery, no text, no frame, no watermark. Render smooth anti-aliased contours and continuous brush shading, not pixel art, not retro, no pixelated edge stairs, no dithering, no coarse block patterns. High resolution production artwork. One static illustration only, no animation frames or sprite sheet.</pre></div></details>

@@ -4,7 +4,7 @@ import { readFileSync } from "node:fs";
 import { createCreatures } from "./creatures.mjs";
 import { BEETLE_ANIMATIONS } from "./beetle-animation.mjs";
 import { createGame } from "./game.mjs";
-import { generateWorld } from "./world.mjs";
+import { generateWorld, WORLD_GENERATION_VERSION } from "./world.mjs";
 import { createRoom, saveRoom, restoreRoom, snapshotRoom } from "../client/room.mjs";
 
 const attack = JSON.parse(readFileSync(new URL("../DesignAssets/Animations/spiny-back-beetle-attack.json", import.meta.url), "utf8"));
@@ -198,18 +198,26 @@ test("밀도 대신 생성된 굴을 개체 생성 기준으로 삼고 월드 �
   const empty = environment();
   empty.world.burrows = [];
   assert.equal(createCreatures(empty, null).agents.length, 0);
-  const room = environment();
-  room.world = generateWorld(7);
-  const system = createCreatures(room, null);
-  assert.ok(system.agents.length > 0);
-  for (const agent of system.agents) {
-    assert.ok(room.world.burrows.some(burrow => burrow.id === agent.burrowId));
-    assert.ok(room.world.sites.every(site => Math.hypot(agent.x - site[0], agent.y - site[1]) >= 26));
+  for (const [version, safeRadius] of [[1, 26], [WORLD_GENERATION_VERSION, 10]]) {
+    const room = environment();
+    room.world = generateWorld(7, version);
+    assert.equal(room.world.generationVersion, version);
+    const system = createCreatures(room, null);
+    const beetles = system.agents.filter(agent => agent.species === "spiny-back-beetle");
+    assert.ok(beetles.length > 0);
+    for (const agent of beetles) {
+      const burrow = room.world.burrows.find(burrow => burrow.id === agent.burrowId);
+      assert.ok(burrow);
+      assert.ok(!burrow.creature?.unique);
+      assert.ok(room.world.sites.every(site => Math.hypot(agent.x - site[0], agent.y - site[1]) >= safeRadius));
+    }
+    for (let y = 0; y < 320; y++) for (let x = 0; x < 320; x++) {
+      if (room.world.sites.some(site => Math.hypot(x - site[0], y - site[1]) < safeRadius)) assert.equal(room.world.creatureDensity[y * 320 + x], 0);
+    }
+    assert.deepEqual(createCreatures(room, null).save(), system.save());
+    const withoutDensity = { ...room, world: { ...room.world, creatureDensity: new Uint8Array(320 * 320) } };
+    assert.deepEqual(createCreatures(withoutDensity, null).save(), system.save());
   }
-  for (let y = 0; y < 320; y++) for (let x = 0; x < 320; x++) {
-    if (room.world.sites.some(site => Math.hypot(x - site[0], y - site[1]) < 26)) assert.equal(room.world.creatureDensity[y * 320 + x], 0);
-  }
-  assert.deepEqual(createCreatures(room, null).save(), system.save());
 });
 
 test("배회와 추격 중 둥지 안전 반경으로 들어가지 않는다", () => {
@@ -375,12 +383,15 @@ test("실제 월드를 저장·복원하고 스냅샷에서 소속 굴을 유지
   room.simSeconds = 90; room.creatureSystem.tick();
   const saved = JSON.parse(JSON.stringify(saveRoom(room))), restored = restoreRoom(saved);
   assert.deepEqual(restored.creatureSystem.save(), room.creatureSystem.save());
+  assert.equal(restored.world.generationVersion, room.world.generationVersion);
+  assert.deepEqual(restored.world.burrows, room.world.burrows);
+  assert.ok(restored.world.burrows.some(burrow => burrow.creature?.unique));
   restored.simSeconds = 120; restored.creatureSystem.tick();
   for (const burrow of restored.world.burrows) {
-    const count = restored.creatureSystem.agents.filter(agent => agent.health > 0 && agent.burrowId === burrow.id).length;
-    assert.equal(count, burrow.type === "small" ? 2 : 5);
+    const count = restored.creatureSystem.agents.filter(agent => agent.species === "spiny-back-beetle" && agent.health > 0 && agent.burrowId === burrow.id).length;
+    assert.equal(count, burrow.creature?.unique ? 0 : burrow.type === "small" ? 2 : 5, burrow.id);
   }
-  const colony = restored.colonies[0], beetle = restored.creatureSystem.agents[0];
+  const colony = restored.colonies[0], beetle = restored.creatureSystem.agents.find(agent => agent.species === "spiny-back-beetle");
   Object.assign(beetle, { x: colony.x + 2, y: colony.y + 3 });
   const packet = snapshotRoom(restored, true);
   assert.equal(packet.state.rivals.find(agent => agent.id === beetle.id).burrowId, beetle.burrowId);

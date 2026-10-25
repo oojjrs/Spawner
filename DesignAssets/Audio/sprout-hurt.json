@@ -1,0 +1,17 @@
+{
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "One blunt strike onto a small fresh pea pod resting on soft earth. One immediate compact soft firm vegetable thup with a delicate crisp green skin crackle and a tiny leaf rustle. The struck pea pod material dominates, resilient and intact, light miniature game scale, close dry foley, fast decay. No swing, wood knock, wet gore, tearing apart, voice, grunt, music or reverb.",
+  "duration_seconds": 0.5,
+  "prompt_influence": 0.85,
+  "loop": false,
+  "output_format": "mp3_44100_128",
+  "processing": "none",
+  "asset": "DesignAssets/Audio/sprout-hurt.mp3",
+  "selectedCandidate": 1,
+  "installationAuthorization": "User requested creating and attaching these combat sounds to the unit page.",
+  "input": "text prompt only",
+  "generated_at": "2026-10-25T07:42:50.620285+00:00",
+  "request_id": null,
+  "sha256": "4c52728d8308bbf1d30685286bfd989a68092ed602b4736832013e9c4d5c7fde"
+}

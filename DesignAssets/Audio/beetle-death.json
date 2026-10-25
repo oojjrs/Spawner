@@ -1,0 +1,17 @@
+{
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "One small hard-shelled beetle loses support as its legs buckle and its body drops forward onto dry earth. Start with two tiny dry chitin joint clicks and a brief leg scrape, then one low hollow shell tuk around 0.2 seconds, ending with a short fine leg rattle settling still. One subdued miniature insect collapse, close dry foley. No shell cracking apart, gore, metal, voice, squeal, music or reverb.",
+  "duration_seconds": 0.7,
+  "prompt_influence": 0.85,
+  "loop": false,
+  "output_format": "mp3_44100_128",
+  "processing": "none",
+  "asset": "DesignAssets/Audio/beetle-death.mp3",
+  "selectedCandidate": 1,
+  "installationAuthorization": "User requested creating and attaching these combat sounds to the unit page.",
+  "input": "text prompt only",
+  "generated_at": "2026-10-25T07:42:58.849322+00:00",
+  "request_id": null,
+  "sha256": "3af9f5246ab6bde06c848914a44c630c683aba2a3ccdb783e1c69ccd54104573"
+}

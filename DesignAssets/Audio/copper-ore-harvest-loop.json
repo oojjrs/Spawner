@@ -1,0 +1,24 @@
+{
+  "provider": "ElevenLabs",
+  "endpoint": "https://api.elevenlabs.io/v1/sound-generation",
+  "request": {
+    "text": "Close-up miniature foley of thin copper flakes repeatedly being scraped and gently pried from a rocky deposit. Short fine metallic scritches, soft copper clicks and tiny papery metal snaps, with brief natural gaps between small gathering motions. Dry intimate recording, restrained game scale. No hammer blows, bright ringing, machinery, coins spilling, footsteps, voices, music or reverb.",
+    "duration_seconds": 4,
+    "prompt_influence": 0.8,
+    "loop": true,
+    "output_format": "mp3_44100_128",
+    "model_id": "eleven_text_to_sound_v2",
+    "request_options": {
+      "max_retries": 0
+    }
+  },
+  "status": "completed",
+  "generated_at": "2026-10-25T07:15:58.284451+00:00",
+  "processing": null,
+  "approved": true,
+  "bytes": 65244,
+  "sha256": "9af98f156616afd499b9cdd34990eca0300b07987b88d66ef0dd5e65c85198e1",
+  "approved_at": "2026-10-25T07:28:36.041701+00:00",
+  "asset": "DesignAssets/Audio/copper-ore-harvest-loop.mp3",
+  "input_sources": []
+}

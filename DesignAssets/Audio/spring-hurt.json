@@ -1,0 +1,17 @@
+{
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "One blunt tap hits a palm-sized suspended globule of fresh water. One immediate rounded watery plup, a small surface-tension slap and a very short fluid wobble, then settles intact. The struck water body dominates, clear liquid rather than rubber or gel, tiny dry close foreground game foley. No full burst, large splash, suction, squeak, whoosh, voice, music or reverb.",
+  "duration_seconds": 0.5,
+  "prompt_influence": 0.85,
+  "loop": false,
+  "output_format": "mp3_44100_128",
+  "processing": "none",
+  "asset": "DesignAssets/Audio/spring-hurt.mp3",
+  "selectedCandidate": 1,
+  "installationAuthorization": "User requested creating and attaching these combat sounds to the unit page.",
+  "input": "text prompt only",
+  "generated_at": "2026-10-25T07:42:52.860300+00:00",
+  "request_id": null,
+  "sha256": "c65bcd72b1adb5634938d3e5df3bed1661eb969555c20470e6067b8d7e2a453d"
+}

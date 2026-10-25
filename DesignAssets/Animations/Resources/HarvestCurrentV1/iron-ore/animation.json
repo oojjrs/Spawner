@@ -51,6 +51,11 @@
       "dx": 0,
       "dy": 0
     },
-    "fixedRegionMask": "changing-region.png"
-  }
+    "fixedRegionMask": "changing-region.png",
+    "singleAdjacentRegistration": null
+  },
+  "adjacentSourceCells": [
+    1,
+    2
+  ]
 }

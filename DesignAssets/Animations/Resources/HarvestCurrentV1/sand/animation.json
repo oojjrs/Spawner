@@ -31,12 +31,13 @@
   "sourceArtwork": [
     "neutral.png",
     "key-contact-source.png",
-    "adjacent-source.png"
+    "adjacent-source.png",
+    "adjacent-single-source.png"
   ],
   "preparation": {
     "method": "Uniform source-cell scale; one translation from each stationary boundary; retain original pixels outside the complete local contact region. No generated motion, warping, interpolation or fades.",
     "phaseRegistration": {
-      "meanAbsoluteError": 7.8844099044799805,
+      "meanAbsoluteError": 7.777481555938721,
       "dx": 0,
       "dy": -1,
       "commonScale": 0.9637084925066117,
@@ -47,10 +48,18 @@
       "scaleReference": "Whole neutral boundary only; identical transform for both adjacent drawings."
     },
     "keyRegistration": {
-      "meanAbsoluteError": 3.557528018951416,
+      "meanAbsoluteError": 3.5365028381347656,
       "dx": 0,
       "dy": 0
     },
-    "fixedRegionMask": "changing-region.png"
-  }
+    "fixedRegionMask": "changing-region.png",
+    "singleAdjacentRegistration": {
+      "meanAbsoluteError": 3.4415347576141357,
+      "dx": 0,
+      "dy": 0
+    }
+  },
+  "adjacentSourceCells": [
+    1
+  ]
 }

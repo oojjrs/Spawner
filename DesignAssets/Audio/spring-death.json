@@ -1,0 +1,17 @@
+{
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "One palm-sized upright globule of fresh water loses surface tension and gently collapses into a small shallow puddle. A brief rounded liquid wobble, one soft clear plop and low spreading water slap around 0.25 seconds, then a tiny circular ripple and two delicate settling droplets. Subdued close dry miniature foley. No explosive splash, drain, pouring stream, suction, rubber, voice, music or reverb.",
+  "duration_seconds": 0.9,
+  "prompt_influence": 0.85,
+  "loop": false,
+  "output_format": "mp3_44100_128",
+  "processing": "none",
+  "asset": "DesignAssets/Audio/spring-death.mp3",
+  "selectedCandidate": 1,
+  "installationAuthorization": "User requested creating and attaching these combat sounds to the unit page.",
+  "input": "text prompt only",
+  "generated_at": "2026-10-25T07:42:58.415725+00:00",
+  "request_id": null,
+  "sha256": "621dfc51daa27d3fddcdb2783b1d1ae86cc626022c0e7dc230cce1ef3293def3"
+}

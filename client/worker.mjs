@@ -57,7 +57,7 @@ function publish(includeWorld) {
     sampledAt: performance.timeOrigin + performance.now() - Math.max(0, Date.now() - lastTick) } });
 }
 
-async function handle(type, data) {
+async function handle(type, data, id) {
   if (type === "session") return { roomId: await storage.setting("roomId") };
   if (type === "list") {
     return (await storage.list()).map(saved => ({ id: saved.id, title: saved.title, seed: saved.seed,
@@ -67,8 +67,9 @@ async function handle(type, data) {
   if (type === "create") {
     await persist();
     if (!Number.isInteger(data.seed) || data.seed < 0 || data.seed > 4294967295) throw new Error("시드는 0~4294967295 사이의 정수로 입력해 주세요.");
-    const next = createRoom(data.title, data.seed, null);
+    const next = createRoom(data.title, data.seed, null, progress => postMessage({ id, type: "progress", progress: progress * .95 }));
     await storage.put(saveRoom(next));
+    postMessage({ id, type: "progress", progress: 1 });
     room = next;
     dirty = false;
     running = false;
@@ -142,7 +143,7 @@ self.onmessage = event => {
   enqueue(async () => {
     try {
       await ready;
-      postMessage({ id, result: await handle(type, data) });
+      postMessage({ id, result: await handle(type, data, id) });
     }
     catch (error) { postMessage({ id, error: error.message }); }
   });

@@ -1,0 +1,68 @@
+[
+  {
+    "kind": "keys",
+    "prompt": "Precise local animation edit of the supplied fixed 2x2 four-cel snail template. Preserve exact square canvas, grid, original character SCALE/POSITION and transparent margins. ONLY redraw the TWO EYESTALKS and their eyes. This time the motion MUST BE LARGE AND OBVIOUS at 64px, not a tiny sway. Top-left: ORIGINAL neutral snail untouched. Top-right: both stalks deliberately EXTEND to roughly TWICE original length, eye centers rising from original ~47% cell height to ~28-30% height. Keep roots attached at original head points. Near eye center about x18%, y28%, far eye x34%, y30%. Bottom-left: same long extended stalks bend together LEFT in a clear curious look, near eye center about x10%, y31%, far eye x27%, y30%. Bottom-right: same long extended stalks bend together RIGHT, near eye x28%, y28%, far eye x43%, y29%. These coordinates are PER CELL. Keep both eyeballs exactly their ORIGINAL diameter, round shape, dark pupils/highlights; never stretch the eyeballs or change their size. Only the soft stalk shafts intentionally grow longer and bend. Both eyes stay distinct, no crossing or merging, no new antennae. Draw complete supple stalks with natural curvature and continuous roots. The head below stalk roots, shell, bundle, leaves, mushrooms, berries, body/tail and contact foot are exactly stationary. No enlargement of the whole snail, no body breathing or rocking. Same original painted linework/colors and genuine alpha background; no text/borders/shadows. Strong extension followed by clear left/right looking poses.",
+    "source": "Source/keys-source.png",
+    "boundaries": [],
+    "reusedFrom": null,
+    "usedCells": [
+      0,
+      1,
+      2
+    ]
+  },
+  {
+    "kind": "extend",
+    "prompt": "Fixed 2x2 animation INBETWEEN worksheet. TOP LEFT A is the exact original short eyestalks, TOP RIGHT B is the exact deliberately LONG EXTENDED eyestalks. Leave both TOP drawings unchanged. Draw ONLY the two eyestalks in BOTTOM LEFT to be 1/3 extended from A to B, BOTTOM RIGHT 2/3 extended. The shafts actually grow upward from their fixed roots on the original head; eye centers rise progressively along the same paths toward B. The intended doubling of stalk length is correct. Keep original round eyeball diameters, pupil shapes/highlights, same shaft thickness and taper, smooth continuous roots. No changing eyeball size, body/head motion, extra eyes or new mouth. Both bottom drawings must be distinct genuine intermediate lengths, not duplicates of the endpoints. Preserve every shell/cargo/body/foot/tail pixel at the exact original position/scale, exact square grid/canvas and transparent margins. Draw the two real anatomical connecting poses using BOTH top references. No zoom, enlargement/recenter, ghosting/blur/crossfade, labels/borders/shadow. Original painted style and true alpha background.",
+    "source": "Source/extend-source.png",
+    "boundaries": [
+      "keys-0",
+      "keys-1"
+    ],
+    "reusedFrom": null,
+    "usedCells": [
+      2,
+      3
+    ]
+  },
+  {
+    "kind": "left",
+    "prompt": "Fixed 2x2 animation INBETWEEN worksheet. TOP LEFT A is long extended eyestalks looking forward/up, TOP RIGHT B the same LONG stalks bent LEFT. Leave both top boundary cells unchanged. Draw ONLY bottom-left stalks 1/3 through A-to-B leftward bend, bottom-right 2/3. They stay long and extended throughout this phase, no retracting or new growth. Both eye centers follow continuous broad LEFT arcs, with the far eye following the near eye. Preserve each original round eyeball diameter, pupil/highlight, same stalk thickness, taper and soft continuous roots at original head points. Same extended shaft length, natural bending without kinks, no merging/crossing eyes. Body/head below roots, shell, cargo and foot/tail remain exact original pixels at the same scale/position. Preserve square canvas/grid and margins. Two real distinct intermediate bend poses using BOTH references, no ghosting/blur/blending, no zoom/recenter, labels/borders/shadow. Original painted style, real transparent alpha.",
+    "source": "Source/left-source.png",
+    "boundaries": [
+      "keys-1",
+      "keys-2"
+    ],
+    "reusedFrom": null,
+    "usedCells": [
+      2,
+      3
+    ]
+  },
+  {
+    "kind": "length",
+    "prompt": "Precise LOCAL edit of this original 2x2 four-identical-snail TEMPLATE, retain exact square canvas/grid, all original body/cargo pixels, identical original SCALE and POSITION in each cell. Do not enlarge the snail or fill transparent margins. ONLY lengthen the TWO EYESTALK SHAFTS in four distinct HEIGHT stages. All stalk roots stay at the exact original scalp points. TOP LEFT: moderately extended, near-eye CENTER at y40% of the cell, far-eye center y42%. TOP RIGHT: medium extension, near center y34%, far y36%. BOTTOM LEFT: long extension, near center y29%, far y31%. BOTTOM RIGHT: very long extension, near center y25%, far y27%. Keep near eye x18% and far eye x34% approximately, so stalks rise almost vertically with their original slight left lean. These percentages are per cell, not whole sheet. Eye BALLS never grow or stretch: original round diameter, original dark pupil/highlight, same shaft thickness/taper. The LENGTH of stalk shafts intentionally changes, but every other body/head-below-root/shell/leaf/fruit/mushroom/tail/foot pixel remains untouched. The body always faces LEFT. Four clear incremental heights, not two duplicated endpoint poses. Original painted linework/colors, no full-head lift, scale change, recenter, flip, new mouth/extra antennae, text/borders/shadow. Genuine transparent alpha.",
+    "source": "Source/length-source.png",
+    "boundaries": [],
+    "reusedFrom": null,
+    "usedCells": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "kind": "look-right",
+    "prompt": "Precise LOCAL edit of this original fixed 2x2 snail template. The complete BODY ALWAYS FACES LEFT, same original scale/position, head/scalp/belly/foot/tail/shell/leaf/cargo pixels untouched in EVERY cell. ONLY TWO LONG EYESTALKS extend upward and bend to the right, without turning the body or head. Keep original stalk roots fixed. All four cells have long shafts roughly twice original length, original round eye diameters/pupil/highlights unchanged. Four successive rightward LOOK positions: TOP LEFT near eye center x18%, y25%, far x33%, y28%; TOP RIGHT near x21%, y26%, far x36%, y29%; BOTTOM LEFT near x24%, y28%, far x39%, y30%; BOTTOM RIGHT near x27%, y30%, far x42%, y32%. Coordinates are per cell. Shafts bend smoothly between fixed roots and those positions, no sharp kinks or new scalp growth. Eyeballs stay separate, same size, never cross or merge; pupils can glance right. The rightmost eye remains in front of the leaf, left of the mushrooms. Do NOT turn/flip/rotate/recenter the snail, change body shape, grow a mouth or move its body. Preserve exact square canvas/grid and margins. Same original smooth painted illustration, true alpha, no text/borders/shadow. Four distinct progressive rightward eye positions while the ORIGINAL LEFT-FACING body is frozen.",
+    "source": "Source/look-right-source.png",
+    "boundaries": [],
+    "reusedFrom": null,
+    "usedCells": [
+      0,
+      1,
+      2,
+      3
+    ]
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "One blunt strike hits a small beetle hard chitin shell. One immediate crisp hollow dry tak with a dense low shell body, a fine gritty chitin scrape and very short joint rattle. The struck intact insect armor dominates, compact miniature close-up game foley. No shell shattering, stone ring, metal clang, flesh, whoosh, insect voice, grunt, music or reverb.",
+  "duration_seconds": 0.5,
+  "prompt_influence": 0.85,
+  "loop": false,
+  "output_format": "mp3_44100_128",
+  "processing": "none",
+  "asset": "DesignAssets/Audio/beetle-hurt.mp3",
+  "selectedCandidate": 1,
+  "installationAuthorization": "User requested creating and attaching these combat sounds to the unit page.",
+  "input": "text prompt only",
+  "generated_at": "2026-10-25T07:42:54.633627+00:00",
+  "request_id": null,
+  "sha256": "1a65c4ca05efa5a007c4e0b6c695b90922bef96563317ed4e98baa0aeba534fb"
+}

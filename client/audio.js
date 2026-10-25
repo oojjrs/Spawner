@@ -1,5 +1,6 @@
 (() => {
   const sources = {
+  ...globalThis.SpawnerCombatAudio.sources,
   "click": "DesignAssets/Audio/ui-click.wav",
   "discovery": "DesignAssets/Audio/new-discovery.mp3",
   "footstep": "DesignAssets/Audio/bean-footstep.mp3",
@@ -11,6 +12,7 @@
   "spring-landing": "DesignAssets/Audio/spring-landing.mp3",
   "spring-footstep": "DesignAssets/Audio/spring-footstep.mp3",
   "harvest": "DesignAssets/Audio/mushroom-harvest-loop.mp3",
+  "harvest-soil": "DesignAssets/Audio/clay-harvest-handful.mp3",
   "landing": "DesignAssets/Audio/bean-landing.mp3",
   "throw": "DesignAssets/Audio/mushroom-throw.mp3",
   "catch": "DesignAssets/Audio/nest-catch.mp3"
@@ -22,6 +24,7 @@
     let active = true;
     let failed = !globalThis.AudioContext;
     let harvest = null;
+    let soilHarvest = null;
     let clickSource = null;
     let clickGain = null;
     let discoverySource = null;
@@ -35,7 +38,7 @@
     let prepared = false;
     const voices = new Set();
     const lastPlayed = new Map();
-    const levels = { harvest: 0.8, landing: 1.2, footstep: 0.6, throw: 1.5, catch: 2, "seed-eject": 1, "seed-crack": 1, "sprout-pop": 1, "spring-birth": 1, "pebble-birth": 1, "spring-landing": 1.2, "spring-footstep": 0.6 };
+    const levels = { harvest: 0.8, "harvest-soil": 0.8, landing: 1.2, footstep: 0.6, throw: 1.5, catch: 2, "seed-eject": 1, "seed-crack": 1, "sprout-pop": 1, "spring-birth": 1, "pebble-birth": 1, "spring-landing": 1.2, "spring-footstep": 0.6 };
     const button = document.getElementById("sound-toggle");
 
     function updateButton() {
@@ -51,6 +54,7 @@
       for (const voice of voices) voice.source.stop();
       voices.clear();
       harvest = null;
+      soilHarvest = null;
       lastPlayed.clear();
     }
 
@@ -76,7 +80,7 @@
             const gain = context.createGain();
             gain.gain.value = 0;
             gain.connect(context.destination);
-            const channel = { gain, sources: new Map(), source: null, name: null };
+            const channel = { gain, sources: new Map(), source: null, name: null, priority: 0 };
             channels.push(channel);
             for (const name of names) channel.sources.set(name, prepareSource(channel, name));
           }
@@ -113,6 +117,7 @@
           voices.delete(channel);
           channel.source = null;
           if (harvest === channel) harvest = null;
+          if (soilHarvest === channel) soilHarvest = null;
         }
         refills.push({ channel, name });
         if (refillTimer === null) refillTimer = setTimeout(refillSources, 0);
@@ -132,15 +137,24 @@
     }
 
     function start(name, volume, loop) {
-      if (!available() || volume <= 0 || voices.size >= 8) return null;
-      const voice = channels.find(channel => channel.source === null && channel.sources.has(name));
+      if (!available() || volume <= 0) return null;
+      const priority = name.endsWith("-death") ? 3 : name.endsWith("-hurt") ? 2 : name.endsWith("-attack") ? 1 : 0;
+      const voice = channels.find(channel => channel.source === null && channel.sources.has(name)) ||
+        channels.filter(channel => channel.sources.has(name) && channel.priority < priority)
+          .sort((first, second) => first.priority - second.priority)[0];
       if (!voice) return null;
+      if (voice.source) {
+        if (harvest === voice) harvest = null;
+        if (soilHarvest === voice) soilHarvest = null;
+        voice.source.stop();
+      }
+      voice.priority = priority;
       const source = voice.sources.get(name);
       voice.sources.delete(name);
       voice.source = source;
       voice.name = name;
       source.loop = loop;
-      voice.gain.gain.value = levels[name] * Math.min(1, volume);
+      voice.gain.gain.value = (levels[name] ?? 1) * Math.min(1, volume);
       voices.add(voice);
       source.start();
       return voice;
@@ -198,14 +212,21 @@
       source.start();
     }
 
-    function setHarvest(volume) {
-      if (!available() || volume <= 0) {
+    function setHarvest(volume, soilVolume) {
+      if (!available() || !(volume > 0)) {
         if (harvest) harvest.source.stop();
         harvest = null;
-        return;
+      } else {
+        if (!harvest) harvest = start("harvest", volume, true);
+        if (harvest) harvest.gain.gain.value = levels.harvest * Math.min(1, volume);
       }
-      if (!harvest) harvest = start("harvest", volume, true);
-      if (harvest) harvest.gain.gain.value = levels.harvest * Math.min(1, volume);
+      if (!available() || !(soilVolume > 0)) {
+        if (soilHarvest) soilHarvest.source.stop();
+        soilHarvest = null;
+      } else {
+        if (!soilHarvest) soilHarvest = start("harvest-soil", soilVolume, true);
+        if (soilHarvest) soilHarvest.gain.gain.value = levels["harvest-soil"] * Math.min(1, soilVolume);
+      }
     }
 
     button.addEventListener("click", () => {

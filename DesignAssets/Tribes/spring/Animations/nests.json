@@ -1,54 +1,5 @@
 {
   "tribe": "spring",
-  "idle": [
-    {
-      "name": "nest-stage-01-idle",
-      "source": "DesignAssets/Tribes/spring/Nests/nest-stage-01.png",
-      "animation": "DesignAssets/Tribes/spring/Animations/Nests/stage-01-idle-v3/nest-stage-01-idle-sheet.png",
-      "preview": "DesignAssets/Previews/Nests/spring-stage-01-idle-v3.webp",
-      "frameSize": [
-        384,
-        384
-      ],
-      "frameCount": 32,
-      "columns": 8,
-      "periodMs": 4000,
-      "durationsMs": [
-        125,
-        125,
-        125,
-        125,
-        125,
-        125,
-        125,
-        125,
-        125,
-        125,
-        125,
-        125,
-        125,
-        125,
-        125,
-        125,
-        125,
-        125,
-        125,
-        125,
-        125,
-        125,
-        125,
-        125,
-        125,
-        125,
-        125,
-        125,
-        125,
-        125,
-        125,
-        125
-      ],
-      "loop": true
-    }
-  ],
+  "idle": [],
   "growth": []
 }

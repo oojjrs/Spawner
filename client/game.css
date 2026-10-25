@@ -499,6 +499,7 @@
     .welcome label { font-size: .8rem; color: #c8d7d5; }
     .welcome input { width: 100%; min-width: 0; box-sizing: border-box; padding: 12px; border: 1px solid #466057; border-radius: 8px; background: #101819; color: var(--ink); font: inherit; }
     .welcome input:focus-visible, .welcome button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .welcome :disabled { opacity: .5; cursor: wait; }
     .room-name-controls { display: flex; flex: 1; gap: 8px; min-width: 0; }
     .room-name-controls .room-name-random { width: 46px; padding: 0; font-size: 1.4rem; }
     .room-create { display: flex; gap: 8px; }

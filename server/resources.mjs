@@ -41,8 +41,8 @@ export const FOOD_HABITATS = Object.freeze([
   ["tree-fruit", ["forest"], []],
   ["berry-bush", ["grassland"], ["forest"]],
   ["seed-pods", ["land", "grassland"], []],
-  ["root-bulbs", ["grassland"], []],
-  ["nutrient-moss", ["forest"], []]
+  ["root-bulbs", ["grassland", "forest"], []],
+  ["nutrient-moss", ["forest", "swamp"], []]
 ].map(([key, terrains, neighbors]) => Object.freeze({
   key, terrains: Object.freeze(terrains), neighbors: Object.freeze(neighbors)
 })));
@@ -51,9 +51,9 @@ export const RESOURCE_PLACEMENT = Object.freeze({ nearRadius: 22, nearTypes: 3, 
 
 export const RESOURCE_HABITATS = Object.freeze([
   ["pebbles", ["coast", "land", "lowMountain"], [], "common", 4, 36, 7],
-  ["clay", ["coast", "grassland"], ["deep", "shallow", "coast"], "uncommon", 24, 20, 8],
+  ["clay", ["coast", "grassland", "swamp"], ["deep", "shallow", "coast", "swamp"], "uncommon", 24, 20, 8],
   ["sand", ["coast"], [], "common", 4, 28, 7],
-  ["grass-fiber", ["grassland"], [], "common", 4, 42, 6],
+  ["grass-fiber", ["grassland", "forest"], [], "common", 4, 42, 6],
   ["iron-ore", ["lowMountain"], [], "rare", 48, 10, 9],
   ["copper-ore", ["lowMountain"], [], "rare", 48, 8, 9],
   ["quartz", ["lowMountain"], [], "rare", 56, 5, 10]
@@ -65,7 +65,7 @@ const definitions = new Map(RESOURCE_TYPES.map(definition => [definition.key, de
 const resourceHabitats = new Map(RESOURCE_HABITATS.map(habitat => [habitat.key, habitat]));
 const legacyResourceHabitats = new Map(LEGACY_RESOURCE_HABITATS.map(habitat => [habitat.key, habitat]));
 const foodHabitats = new Map(FOOD_HABITATS.map(habitat => [habitat.key, habitat]));
-const terrainTypes = ["deep", "shallow", "coast", "land", "grassland", "forest", "lowMountain", "highMountain", "ridge"];
+const terrainTypes = ["deep", "shallow", "coast", "land", "grassland", "forest", "lowMountain", "highMountain", "ridge", "swamp"];
 
 export function resourceDefinition(key) {
   return definitions.get(key);
@@ -136,6 +136,7 @@ export function canHarvestResource(cell, world, attributes) {
 }
 
 export function clearResourceHazards(room) {
+  if (room.world.generationVersion >= 6) return;
   const hazards = room.world.hazards;
   if (!hazards) return;
   for (const cell of room.food.values()) {

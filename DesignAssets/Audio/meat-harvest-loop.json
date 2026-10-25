@@ -1,0 +1,26 @@
+{
+  "provider": "ElevenLabs",
+  "endpoint": "https://api.elevenlabs.io/v1/sound-generation",
+  "request": {
+    "text": "Prominent close-up foley of a damp piece of raw meat being firmly pressed and gently pulled free. Clearly audible rounded wet squishes alternate with tacky elastic peeling and short moist releases in medium-strength compact gathering pulses. Full foreground recording level with distinct attacks, dry intimate game sound. No faint background texture, cutting, blood splatter, bones cracking, chewing, creature cries, voices, music or reverb.",
+    "duration_seconds": 4,
+    "prompt_influence": 0.8,
+    "loop": true,
+    "output_format": "mp3_44100_128",
+    "model_id": "eleven_text_to_sound_v2",
+    "request_options": {
+      "max_retries": 0
+    }
+  },
+  "status": "completed",
+  "generated_at": "2026-10-25T07:28:36.338003+00:00",
+  "processing": null,
+  "approved": true,
+  "revision": 2,
+  "feedback": "Previous candidate was difficult to hear.",
+  "bytes": 65244,
+  "sha256": "cb9a729028db55f0857bd63a7a95435ffce837862ece162c51112f9391f083c8",
+  "approved_at": "2026-10-25T07:32:04.909231+00:00",
+  "asset": "DesignAssets/Audio/meat-harvest-loop.mp3",
+  "input_sources": []
+}

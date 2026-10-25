@@ -1,0 +1,24 @@
+{
+  "provider": "ElevenLabs",
+  "endpoint": "https://api.elevenlabs.io/v1/sound-generation",
+  "request": {
+    "text": "Close-up miniature foley of small hands repeatedly scooping fine dry sand across a shallow sandy patch. Soft granular shh scrapes, fine grains sifting and a little loose sand settling after each gentle irregular gathering motion. Quiet dry intimate recording, light compact texture. No surf, wind, water, coarse gravel, heavy digging, footsteps, voices, music or reverb.",
+    "duration_seconds": 4,
+    "prompt_influence": 0.8,
+    "loop": true,
+    "output_format": "mp3_44100_128",
+    "model_id": "eleven_text_to_sound_v2",
+    "request_options": {
+      "max_retries": 0
+    }
+  },
+  "status": "completed",
+  "generated_at": "2026-10-25T07:16:01.456653+00:00",
+  "processing": null,
+  "approved": true,
+  "bytes": 65244,
+  "sha256": "6e46dbfe4afce7cc337023eab0e6facf72a698c6614087acad88495b71726679",
+  "approved_at": "2026-10-25T07:28:36.042705+00:00",
+  "asset": "DesignAssets/Audio/sand-harvest-loop.mp3",
+  "input_sources": []
+}

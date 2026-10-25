@@ -1,0 +1,24 @@
+{
+  "provider": "ElevenLabs",
+  "endpoint": "https://api.elevenlabs.io/v1/sound-generation",
+  "request": {
+    "text": "Close-up miniature foley of a small hard chitin shell plate repeatedly being gently pried and released against another dry shell segment. Light crisp brittle clicks, short leathery creaks and fine hard-shell scraping in restrained irregular gathering pulses. Dry intimate recording, tiny game scale. No insect buzzing, creature movement, bones breaking, heavy crunches, metal, footsteps, voices, music or reverb.",
+    "duration_seconds": 4,
+    "prompt_influence": 0.8,
+    "loop": true,
+    "output_format": "mp3_44100_128",
+    "model_id": "eleven_text_to_sound_v2",
+    "request_options": {
+      "max_retries": 0
+    }
+  },
+  "status": "completed",
+  "generated_at": "2026-10-25T07:16:04.781716+00:00",
+  "processing": null,
+  "approved": true,
+  "bytes": 65244,
+  "sha256": "509e610df4059a80882d5fa9eaa5ca6ce5ec08540b6690b4836ede180d77c4de",
+  "approved_at": "2026-10-25T07:28:36.044210+00:00",
+  "asset": "DesignAssets/Audio/carapace-harvest-loop.mp3",
+  "input_sources": []
+}

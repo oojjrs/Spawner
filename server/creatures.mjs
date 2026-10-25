@@ -1,3 +1,5 @@
+import { createEncounters } from "./encounters.mjs";
+import { ENCOUNTER_ASSETS } from "./encounter-types.mjs";
 import { BEETLE_ANIMATIONS, BEETLE_ANIMATION_ASSET, BEETLE_NEUTRAL_ASSET } from "./beetle-animation.mjs";
 import { unitTerrainSpeedMultiplier } from "./attributes.mjs";
 import { BURROW_TYPES, burrowDistance, burrowApproaches } from "./burrows.mjs";
@@ -5,11 +7,12 @@ import { createBeetleRaids } from "./raids.mjs";
 import { CORPSE_LIFETIME, expireCorpses } from "./lifespan.mjs";
 
 export const CREATURE_ASSETS = [
-  "DesignAssets/Units/spiny-back-beetle.png", BEETLE_ANIMATION_ASSET, BEETLE_NEUTRAL_ASSET
+  ...ENCOUNTER_ASSETS, "DesignAssets/Units/spiny-back-beetle.png", BEETLE_ANIMATION_ASSET, BEETLE_NEUTRAL_ASSET
 ];
 
 export function createCreatures(environment, saved) {
   const size = 320;
+  let encounters = null;
   const species = "spiny-back-beetle";
   const stats = { health: 20, attack: 3, speed: 1 / 1.28, vision: 4, resistance: 1 };
   const burrows = environment.world.burrows || [];
@@ -42,9 +45,9 @@ export function createCreatures(environment, saved) {
   function walkable(x, y, raiding) {
     if (x < 0 || y < 0 || x >= size || y >= size) return false;
     const terrain = environment.world.terrain[y * size + x];
-    if (terrain < 2 || terrain > 8) return false;
+    if (terrain < 2 || terrain > 9) return false;
     if (burrowAt(x, y)) return false;
-    if (!raiding && environment.world.sites.some(site => Math.hypot(x - site[0], y - site[1]) < 18)) return false;
+    if (!raiding && environment.world.sites.some(site => Math.hypot(x - site[0], y - site[1]) < (environment.world.generationVersion >= 6 ? 10 : 18))) return false;
     return !environment.colonies.some(colony => environment.games.get(colony.ownerId)?.nest?.health !== 0 && colony.occupiedCells.has((x - colony.x) + "," + (y - colony.y)));
   }
 
@@ -53,7 +56,7 @@ export function createCreatures(environment, saved) {
   }
 
   function occupied(x, y, excluded) {
-    return [...state.agents, ...players().map(entry => entry.agent)].some(agent => agent !== excluded && agent.health > 0 &&
+    return [...state.agents, ...(encounters?.agents || []), ...players().map(entry => entry.agent)].some(agent => agent !== excluded && agent.health > 0 &&
       (agent.x === x && agent.y === y || environment.simSeconds - agent.moveStartedAt < agent.moveDuration && agent.renderFromX === x && agent.renderFromY === y));
   }
 
@@ -73,6 +76,7 @@ export function createCreatures(environment, saved) {
 
   function spawnFromBurrow(record) {
     const burrow = burrowSites.get(record.id), entrance = burrow.entrance;
+    if (burrow.creature?.unique) return null;
     const queue = [entrance], visited = new Set([entrance.x + "," + entrance.y]);
     for (let index = 0; index < queue.length; index++) {
       const cell = queue[index];
@@ -185,11 +189,15 @@ export function createCreatures(environment, saved) {
     agent.attackTargetId = null;
   }
 
+  encounters = createEncounters(environment, saved?.encounters, state.agents);
+
   function receiveDamage(agent, amount) {
+    if (!state.agents.includes(agent)) { encounters.receiveDamage(agent, amount); return; }
     if (!state.agents.includes(agent) || agent.health <= 0 || amount <= 0) return;
     agent.health = Math.max(0, agent.health - amount);
+    agent.hurtStartedAt = environment.simSeconds;
+    agent.hurtCount = (agent.hurtCount || 0) + 1;
     if (agent.health <= 0) beginDeath(agent);
-    else agent.hurtStartedAt = environment.simSeconds;
   }
 
   function dropCorpse(agent) {
@@ -199,6 +207,7 @@ export function createCreatures(environment, saved) {
           const x = agent.x + dx, y = agent.y + dy, key = x + "," + y;
           if (!walkable(x, y, Boolean(agent.raid)) || environment.food.get(key)?.amount > 0) continue;
           environment.food.set(key, { x, y, kind: "corpse", species, amount: 4, attributes: {}, facing: agent.facing,
+            agentId: agent.id, hurtStartedAt: agent.hurtStartedAt, hurtCount: agent.hurtCount,
             diedAt: agent.deathStartedAt, decaysAt: agent.deathStartedAt + CORPSE_LIFETIME,
             renderX: x === agent.x && y === agent.y ? agent.deathRenderX : x,
             renderY: x === agent.x && y === agent.y ? agent.deathRenderY : y });
@@ -257,6 +266,7 @@ export function createCreatures(environment, saved) {
     removeDead();
     growBurrows();
     raids.dispatch();
+    encounters.tick();
     const now = environment.simSeconds;
     const opponents = players().concat([...environment.games.values()].filter(game => game.nest?.health > 0).map(game => ({ game, agent: game.nest })));
     for (const agent of state.agents) {
@@ -315,8 +325,9 @@ export function createCreatures(environment, saved) {
     removeDead();
   }
 
-  return { tick, receiveDamage, receiveBurrowDamage, burrowAt, save: () => state,
-    get agents() { return state.agents; },
+  return { tick, receiveDamage, receiveBurrowDamage, burrowAt, save: () => ({ ...state, encounters: encounters.save() }),
+    get agents() { return [...state.agents, ...encounters.agents]; },
+    get signals() { return encounters.signals; },
     get burrows() { return state.burrows.map(record => ({ ...burrowSites.get(record.id), kind: "burrow", health: record.health,
       maxHealth: BURROW_TYPES[burrowSites.get(record.id).type].health })); } };
 }

@@ -12,161 +12,203 @@
   "sheet": "harvest-sheet.png",
   "preview": "fertile-soil-harvest.webp",
   "durationsMs": [
-    550,
-    180,
-    180,
-    70,
-    70,
-    70,
-    70,
-    70,
-    70,
-    70,
-    70,
-    70,
+    667,
+    667,
+    666,
+    20,
+    100,
+    80,
+    40,
+    30,
+    25,
+    15,
+    20,
+    20,
     350
   ],
-  "method": "Original frames 0-6 and 12 preserved byte-identically. Built-in image_gen redrew landing keys and adjacent falling poses. One uniform scale and anchor per new source group matches the retained peak clod. Newly drawn moving regions are extracted and placed behind the unchanged reference soil lip for progressive landing occlusion; no generated motion by transforms, warping, interpolation, or fades.",
+  "method": "Original neutral deposit retained byte-identically at every nontransparent body pixel in all frames. Built-in image_gen redrew consistent rigid clod keys and adjacent ascent/fall drawings. Uniform output scale and one anchor per source group, with horizontal landmark registration corrections of at most 3 pixels; drawn vertical motion is unchanged. Actual drawn poses ordered by their source positions. No deformed terrain patches, rigging, warped poses, interpolation, generated vertical coordinate motion or crossfades. Fall timing uses per-frame durations in the game.",
   "sourceDrawings": {
-    "key": "Use case: precise-object-edit.\nAsset type: actual production 2D sprite animation source drawings for a game resource being harvested, key poses.\nInput image: the attached orange terracotta soil deposit is the exact design, palette, lighting, silhouette, and painting-style authority. This soil is called fertile soil in the game. Do NOT recolor, redesign or add vegetation.\nDraw one square 2048x2048 transparent PNG arranged as exactly 2 columns by 2 rows of 1024x1024 cells, no borders or labels, with four complete same-scale animation key drawings in reading order.\nThe soil body in every cell is fixed at the SAME place, very wide and low, width 880px, bottom baseline y=870, centered x=512, matching the original front/above viewpoint, curved layered terracotta stratum and fine brown outline. Leave ample transparency above. No camera motion or change in object size. Only local upper-center/right soil surface and loose clay clods change. The lower front lip and lower layers remain planted and visually unchanged.\nKey pose 1 / top left: exact neutral reference shape at rest, no flying particles.\nKey pose 2 / top right: harvesting contact. The upper center/right small lump fractures with 2 curved cracks and a small indentation; 3 little irregular orange-brown soil clods detach upward only slightly. The broad body retains original silhouette.\nKey pose 3 / bottom left: peak. The detached 3 clods are airborne in a tight fan above that same indentation (largest clod about 65px, travel no more than 160px); a few tiny soil crumbs. Grounded deposit itself never bounces, scales, rotates, or squashes. Draw newly exposed darker broken soil surfaces.\nKey pose 4 / bottom right: settling. Clods fall down immediately beside the indentation and merge back into the loose soil surface, one tiny falling crumb, the body returns very close to the neutral original. No depletion or vanishing.\nActual DRAWN motion poses, no transformation of a flat picture. Fine anti-aliased hand-painted cartoon lines and broad smooth gradients identical to the reference. True alpha transparency. No shovel, tools, characters, hands, sparkles, text, background plane, external shadows, motion streaks, grids, or checkerboard. Keep all drawings fully inside their cells.",
-    "adjacent": "Use case: precise-object-edit. Actual source artwork for a fertile-soil harvest animation.\nImage 1 is the immutable original orange terracotta soil deposit. Image 2 contains FOUR CHECKED KEY POSES in a 2x2 layout: neutral (top left), fractured harvesting contact (top right), 3-clod airborne peak (bottom left), clods settling down (bottom right).\nDraw exactly EIGHT new adjacent intermediate frames on one transparent PNG, arranged FOUR COLUMNS by TWO ROWS of EQUAL SQUARE cells, no labels or borders. Every cell contains the same complete wide low soil deposit as image 1, at the SAME scale, camera, centered x and baseline, matching image 2's body layout. Preserve the large unchanging lower layered body, colors, fine brown outline, upper-left lighting and broad smooth hand-painted gradients. Do not clip the outline; give each cell 7% transparent side padding.\nIn READING ORDER:\n1: Just before contact: one fine upper-right/center crack begins, soil fragments still attached.\n2: Immediately before the top-right key pose: cracks open very slightly, three little clods start separating, with barely any lift.\n3: Immediately after the top-right contact key, 1/3 toward bottom-left peak: same three clods travel upwards, small dark soil indentation visible.\n4: 2/3 toward that airborne peak: identical three clods approach their highest positions, slight natural rotation; never add clods.\n5: Immediately after bottom-left peak, 1/4 down toward bottom-right settling key: same three clods begin descending; retain their identities, volumes and trajectories.\n6: Halfway down between peak and settling key: clods lower and gently rotate toward rest, a few tiny falling crumbs.\n7: 3/4 down between peak and settling: clods almost touch the upper-right soil surface.\n8: AFTER the bottom-right settling key: loose clods have nearly merged into the surface, only a shallow closing seam remains, almost exactly image 1 neutral.\nThe deposit NEVER bounces, shifts, squashes, tilts, changes shape or changes size. Motion is only local cracking and the three small clods in an arc above the upper-center/right. Lower layers and left side stay planted, unchanged. Draw the intermediate poses faithfully; no rescaled duplicates. No tools, hands, characters, shovel, plants, sparks, speed lines, scenery, shadows outside the sprite, text, grid, or checkerboard. Genuine transparent RGBA background.",
-    "landingV2": {
-      "file": "source-drawings/landing-v2.png",
-      "prompt": "Use case: precise-object-edit. Correct a failed landing source drawing before making in-betweens.\nImage 1 is the FAILED two-cell landing sheet. Image 2 is the exact valid airborne peak frame and is the ONLY authority for the sizes and shapes of the three clods. Image 3 is exact neutral. Redraw the two landing key cells from image 1, maintaining the deposit and changing only the overly-large landing clods.\nCRITICAL size match: in the left cell of image 1 the large clod is about one third TOO LARGE. Correct it so the large clod's COMPLETE projected width is exactly ONE EIGHTH of the deposit width, identical to image 2. This is a rigid angular orange soil clod, not a round ball. Its complete height is also exactly one eighth of deposit width. The left and right small clods are each about ONE SIXTEENTH of the deposit width. Match image 2 shapes and sizes precisely. Do not redesign the large clod, inflate it or turn it into a boulder.\nLEFT output cell: landing/contact, large clod of the corrected reference size is touching the soil depression with its lower quarter hidden behind the near soil lip. Keep the large clod full-sized as it becomes occluded. The little left clod has landed and is mostly occluded; the little right clod is just touching the edge. NO rebound. Tiny crumbs only.\nRIGHT output cell: the same large clod has sunk farther behind that same lip; only its shallow top edge is visible at the SAME width, and the two little clods are occluded. Almost neutral, no floating clods, no new cracks elsewhere.\nTwo equal square cells SIDE BY SIDE, true transparent RGBA. Whole deposit identical in both cells, original orange layered soil design, broad hand-painted gradients, delicate fine brown contours, exact reference camera, same position and scale. Deposit width 81.25% of each square cell, bottom baseline 87.5% cell height. No body movement, no squash, no text, borders, grid, glow, tools, or characters.",
-      "frames": [
-        10,
-        11
-      ]
+    "keyV3": {
+      "file": "source-drawings/keyV3.png",
+      "prompt": "Use case: precise-object-edit. Repair the spatial staging of these FOUR drawn clod key poses while preserving the successful matching clod designs.\nImage 1 is the four-key sheet to revise. Keep the same 2x2 equal-square-cell layout and TRUE TRANSPARENCY. Keep the three clods' projected sizes and outlines IDENTICAL to image 1 in all cells. Their appearance is now correct: do not resize them, inflate them, soften their facets, rotate them, change highlights or redesign them.\nThe problem is insufficient vertical travel. Redraw each complete three-clod cluster at the following vertical placements. Coordinates below use a 627x627 virtual cell, matching the attached sheet's actual cell geometry. Keep the main clod center x=335 for left cells, x=335 for right cells in LOCAL coordinates, and keep the left/right small-clod horizontal arrangement from image 1.\nTOP LEFT emergence: main clod center y=443 (about 65 pixels lower than the input top-left pose). Lower-left and lower-right clods move down coherently; all clods fully inside their cell, with no clipping.\nTOP RIGHT rising: main clod center y=270 (about 20 pixels higher than input top-right). Same clod size, same facets.\nBOTTOM LEFT apex: main clod center y=140 (about 85 pixels HIGHER than input bottom-left). The whole cluster rises together. Leave at least 20 pixels transparent above the highest clod.\nBOTTOM RIGHT landing: main clod center y=443 (about 85 pixels lower than input bottom-right). Put the little clods low beside it while keeping their COMPLETE contours inside the square. This low key is later hidden by the fixed soil foreground, so draw full objects.\nKeep the same three stable orange clod identities, front-facing view, warm upper-left light, fine dark brown contour and painted facets. Only 2-3 tiny crumbs consistently next to them. This is actual revised key artwork, no soil bed, no floor, no shadow, no labels, no grid, no background, no glow."
     },
-    "fallingV2": {
-      "file": "source-drawings/falling-v2.png",
-      "prompt": "Use case: precise-object-edit. Draw actual adjacent source poses for the FALLING phase of an existing fertile-soil game sprite animation.\nImage 1 is the exact retained airborne peak (frame 6), and the absolute authority for the identities, volume, palette, size and positions of the THREE soil clods. Image 2 is the checked landing-key pair: its LEFT cell is the destination contact pose. Image 3 is the neutral deposit and fixed-body authority.\nOutput THREE equal SQUARE cells SIDE BY SIDE in one transparent PNG, reading left to right. These are three immediately consecutive falling frames BETWEEN image 1 peak and image 2 LEFT landing. Do not repeat the peak or landing in this output.\nKeep the deposit layout from image 1 exactly in each cell: bottom baseline 87.5% of square, deposit width 81.25% of square; same original low wide orange layered soil shape, no motion of the main deposit. Fully draw everything with matching fine contour and smooth painted shading. Do not enlarge the pile or clods.\nTrack THREE rigid clods from image 1: one largest angular clod above center-right, one small clod lower-left, one small clod lower-right. Largest width stays about 12.5% of deposit width, small clods about 6%. NEVER shrink or grow them. Retain their shape/volume, same warm orange top highlight and dark lower side. Their downward displacement increases naturally because gravity accelerates. Little crumbs fall too, but no new large pieces.\nCELL 1, immediately after peak: large clod about 3 pixels LOWER than image 1 on a normalized 256x256 canvas, same x (about x=157), same shape and size. Both small clods also only slightly lower. It must connect very gently to the peak, no initial downward jump.\nCELL 2, next falling frame: large clod about 10 pixels LOWER than peak, shifted only 1 pixel right. The left little clod starts touching its soil lip; right little clod still descends. Retain ALL THREE original clods visibly at full size unless their bottom edges start to be occluded by the actual fixed soil surface.\nCELL 3, next falling frame before landing: large clod about 23 pixels LOWER than peak, shifted only 2 pixels right; its lower edge is just a few pixels above the landing indentation, ready to meet image 2 LEFT pose. The little left clod is partially hidden by the original near soil lip; the little right clod touches the right edge. Large clod still full size, no shrink. No bounce.\nA grounded continuous fall, not stones magically dissolving in midair. Keep the cracked receiving indentation in the same location. Do not flatten the biggest clod into a smear or make it puff up. Lower soil layers and left half stationary and identical to reference. No tools, characters, hands, plants, backgrounds, shadows outside the sprite, speed lines, labels, grid or checkerboard. Genuine transparent alpha.",
-      "frames": [
-        7,
-        8,
-        9
-      ]
+    "ascendingV3": {
+      "file": "source-drawings/ascendingV3.png",
+      "prompt": "Use case: precise-object-edit. Draw SEVEN adjacent animation drawings between the checked clod key poses in image 1. Image 1 is the authoritative stable outline, size, projected volume, facets, shading and three-clod identities. Preserve the big angular block (NEVER the earlier sausage shape), narrow left clod and wider right clod. Only three clods and 2-3 tiny crumbs. No soil deposit or floor.\nOutput one transparent sheet with FOUR columns and TWO rows of equal SQUARE cells, reading order; the last eighth cell must be completely EMPTY. Every clod in each occupied cell is independently drawn but visually the same rigid clod as in the keys: same contour, face layout, bright upper-left plane, orange front, dark lower-right. NO squash, growth, wobble, shape morph, lighting change or large rotations. Do not let clods touch the cell boundary.\nUse local virtual coordinates on a 700x700 cell. The big clod stays about 235 pixels wide and 195 high, small left 115x125, small right 130x115, SAME in all seven cells. Big center x=335, small-left x=215, small-right x=495. Keep their source-art offsets and camera consistent with the keys. Do not enlarge to fill the cell.\nCell 1: early rise BETWEEN image 1 top-left low key and top-right rise key, closer to low. Big center y=420, small-left y=515, small-right y=515.\nCell 2: next rise, closer to top-right rise key. Big center y=350, small-left y=455, small-right y=445.\nCell 3: late rise BETWEEN image 1 top-right rise key and bottom-left apex. Big center y=225, small-left y=335, small-right y=325. Slows approaching apex; unchanged shapes.\nCell 4: immediately after bottom-left apex. Big center y=210, small-left y=320, small-right y=310. This is first falling pose, only a small downward move from the apex, NOT another upward step.\nCell 5: accelerating fall. Big center y=290, small-left y=395, small-right y=385.\nCell 6: faster late fall just BEFORE image 1 bottom-right landing key. Big center y=370, small-left y=475, small-right y=465.\nCell 7: final settling AFTER bottom-right landing key. Big center y=520, small-left y=610, small-right y=600. Entire full-sized clods drawn, later occluded by the fixed foreground soil. Keep all complete silhouettes inside the square.\nArt style exactly the supplied keys. Shape and identity consistency is more important than detail. The clods travel down faster at the end, with no rebound. Do not add a changing soil surface, ground, cracks, tools, characters, motion trails, glow, particles other than the same tiny crumbs, labels, borders or a grid. Genuine transparent background."
+    },
+    "fallingV3": {
+      "file": "source-drawings/fallingV3.png",
+      "prompt": "Use case: precise-object-edit. Draw FOUR consecutive FAST FALL poses of the EXACT same three rigid orange clods from the supplied key sheet. Their projected shape, size, orange facets and highlights must remain identical from pose to pose. Match the main clod's angular broad shape; never make a sausage, ball, puff or melting blob.\nOutput FOUR equal SQUARE cells in a 2x2 layout, transparent background. ONLY three clods plus the same 2-3 tiny crumbs. No soil bed, no ground, no shadows, no tools, no labels or grid.\nUse virtual 800x800 cells. Big clod width approximately 235 and height 195 in EVERY cell. Left small clod 115x125, right small clod 130x115. All three remain COMPLETE, including the last low pose. Leave adequate transparent room. Never enlarge or shrink clods between cells.\nHorizontal coordinates constant: big center x=425, left small x=305, right small x=585. No lateral drift.\nReading order:\nTOP LEFT: first downward pose just below the reference apex. Big center y=220, left y=330, right y=320. Near the UPPER THIRD, unchanged shape.\nTOP RIGHT: faster downward pose. Big center y=330, left y=435, right y=425. Middle of upper half.\nBOTTOM LEFT: touchdown approach. Big center y=450, left y=545, right y=535. LOWER than the preceding pose, NEVER higher.\nBOTTOM RIGHT: fully lowered/behind-soil pose. Big center y=630, left y=710, right y=700. The whole big clod is low in the square, little clods lower beside it, all complete and inside canvas. The game will hide this low pose behind a fixed soil foreground.\nThe distances traveled downward INCREASE between frames under gravity. Do not rebound, dissolve, deform, inflate, rotate appreciably, turn into other stones or change lighting. This is actual drawn source animation artwork for a small natural soil harvesting effect, same smooth painted style and fine brown outline as reference."
     }
   },
   "registration": [
     {
       "source": "neutral",
+      "cell": 0
+    },
+    {
+      "source": "keyV3",
       "cell": 0,
-      "scale": 0.17391304347826086,
+      "scale": 0.1282051282051282,
       "translation": [
-        18,
-        43
+        112,
+        76
+      ],
+      "horizontalAnchorCorrection": -1,
+      "clodCenter": [
+        155.65384615384616,
+        138.43589743589743
       ]
     },
     {
-      "source": "adjacent",
+      "source": "ascendingV3",
       "cell": 0,
-      "scale": 0.4792626728110599,
+      "scale": 0.16666666666666666,
       "translation": [
-        19,
-        17
+        119,
+        78
+      ],
+      "horizontalAnchorCorrection": 1,
+      "clodCenter": [
+        156.41666666666666,
+        123.0
       ]
     },
     {
-      "source": "adjacent",
+      "source": "ascendingV3",
       "cell": 1,
-      "scale": 0.4792626728110599,
+      "scale": 0.16666666666666666,
       "translation": [
-        21,
-        17
+        118,
+        78
+      ],
+      "horizontalAnchorCorrection": 0,
+      "clodCenter": [
+        155.83333333333331,
+        114.83333333333333
       ]
     },
     {
-      "source": "key",
+      "source": "keyV3",
       "cell": 1,
-      "scale": 0.3328,
+      "scale": 0.1282051282051282,
       "translation": [
-        24,
-        17
+        116,
+        76
+      ],
+      "horizontalAnchorCorrection": 3,
+      "clodCenter": [
+        155.67948717948718,
+        113.69230769230768
       ]
     },
     {
-      "source": "adjacent",
+      "source": "ascendingV3",
       "cell": 2,
-      "scale": 0.4792626728110599,
+      "scale": 0.16666666666666666,
       "translation": [
-        21,
-        17
+        118,
+        78
+      ],
+      "horizontalAnchorCorrection": 0,
+      "clodCenter": [
+        156.0,
+        104.58333333333333
       ]
     },
     {
-      "source": "adjacent",
+      "source": "keyV3",
+      "cell": 2,
+      "scale": 0.1282051282051282,
+      "translation": [
+        113,
+        76
+      ],
+      "horizontalAnchorCorrection": 0,
+      "clodCenter": [
+        156.39743589743588,
+        99.71794871794872
+      ]
+    },
+    {
+      "source": "fallingV3",
+      "cell": 0,
+      "scale": 0.12631578947368421,
+      "translation": [
+        116,
+        73
+      ],
+      "horizontalAnchorCorrection": 0,
+      "clodCenter": [
+        156.16842105263157,
+        103.0
+      ]
+    },
+    {
+      "source": "fallingV3",
+      "cell": 2,
+      "scale": 0.12631578947368421,
+      "translation": [
+        116,
+        73
+      ],
+      "horizontalAnchorCorrection": 0,
+      "clodCenter": [
+        156.2315789473684,
+        111.02105263157895
+      ]
+    },
+    {
+      "source": "fallingV3",
+      "cell": 1,
+      "scale": 0.12631578947368421,
+      "translation": [
+        116,
+        73
+      ],
+      "horizontalAnchorCorrection": 0,
+      "clodCenter": [
+        155.7263157894737,
+        121.82105263157895
+      ]
+    },
+    {
+      "source": "keyV3",
       "cell": 3,
-      "scale": 0.4792626728110599,
+      "scale": 0.1282051282051282,
       "translation": [
-        23,
-        17
-      ]
-    },
-    {
-      "source": "key",
-      "cell": 2,
-      "scale": 0.3328,
-      "translation": [
-        23,
-        43
-      ]
-    },
-    {
-      "source": "fallingV2",
-      "cell": 0,
-      "scale": 0.26785714285714285,
-      "translation": [
-        44,
-        40
-      ]
-    },
-    {
-      "source": "fallingV2",
-      "cell": 1,
-      "scale": 0.26785714285714285,
-      "translation": [
-        44,
-        40
-      ]
-    },
-    {
-      "source": "fallingV2",
-      "cell": 2,
-      "scale": 0.26785714285714285,
-      "translation": [
-        44,
-        40
-      ]
-    },
-    {
-      "source": "landingV2",
-      "cell": 0,
-      "scale": 0.2564102564102564,
-      "translation": [
-        13,
-        17
-      ]
-    },
-    {
-      "source": "landingV2",
-      "cell": 1,
-      "scale": 0.2564102564102564,
-      "translation": [
-        13,
-        17
+        115,
+        76
+      ],
+      "horizontalAnchorCorrection": 2,
+      "clodCenter": [
+        155.57692307692307,
+        128.30769230769232
       ]
     },
     {
       "source": "neutral",
-      "cell": 0,
-      "scale": 0.17391304347826086,
-      "translation": [
-        18,
-        43
-      ]
+      "cell": 0
+    },
+    {
+      "source": "neutral",
+      "cell": 0
     }
   ],
   "runtimeIntegrated": true,
-  "revision": 2
+  "revision": 3,
+  "postSeconds": 0.35,
+  "preFrameCount": 3,
+  "postFrameDurationsMs": [
+    20,
+    100,
+    80,
+    40,
+    30,
+    25,
+    15,
+    20,
+    20
+  ],
+  "gifPreview": "fertile-soil-harvest-v3.gif"
 }

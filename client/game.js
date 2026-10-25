@@ -231,6 +231,18 @@
     const talonOwlSheet = new Image();
     talonOwlSheet.src = assetSource(Spawner.TALON_OWL_IDLE.image);
     const talonOwlFrames = new Map();
+    const encounterSprites = new Map();
+    await Promise.all(Spawner.ENCOUNTER_TYPES.map(async type => {
+      const image = new Image();
+      image.src = assetSource(type.image);
+      await image.decode();
+      const crop = tribeArt.bounds(image, false);
+      const sprite = document.createElement("canvas");
+      sprite.width = sprite.height = 512;
+      const scale = Math.min(480 / crop.width, 480 / crop.height);
+      sprite.getContext("2d").drawImage(image, crop.x, crop.y, crop.width, crop.height, (512 - crop.width * scale) / 2, 496 - crop.height * scale, crop.width * scale, crop.height * scale);
+      encounterSprites.set(type.key, sprite);
+    }));
     starterObjectSprite.src = assetSource("DesignAssets/Units/starter-sprout-bean.png");
 
     const agentParts = new Map([
@@ -371,6 +383,7 @@
       lowMountain: "#263029",
       highMountain: "#374139",
       ridge: "#4b554c",
+      swamp: "#547d70",
       coast: "#10282d",
       shallow: "#0b1e29",
       deep: "#06131d"
@@ -406,7 +419,7 @@
     const MOVEMENT_DELAY = 0.15;
     const TERRAIN_TYPES = [
       "deep", "shallow", "coast", "land", "grassland",
-      "forest", "lowMountain", "highMountain", "ridge"
+      "forest", "lowMountain", "highMountain", "ridge", "swamp"
     ];
     const terrainRendering = {
       types: new Uint8Array(WORLD_SIZE * WORLD_SIZE),
@@ -604,7 +617,7 @@
 
     function terrainGroundPixels(type) {
       if (terrainRendering.grounds.has(type)) return terrainRendering.grounds.get(type);
-      const ground = type === 4 ? grassGround : terrainGrounds[TERRAIN_TYPES[type]];
+      const ground = type === 4 || type === 9 ? grassGround : terrainGrounds[TERRAIN_TYPES[type]];
       if (!ground?.complete || !ground.naturalWidth) return null;
       const surface = document.createElement("canvas");
       surface.width = surface.height = 384;
@@ -691,7 +704,7 @@
           types[0] = terrain[top + left]; types[1] = terrain[top + right];
           types[2] = terrain[bottom + right]; types[3] = terrain[bottom + left];
           const water = types[0] <= 2 || types[1] <= 2 || types[2] <= 2 || types[3] <= 2;
-          const mountain = types[0] >= 7 || types[1] >= 7 || types[2] >= 7 || types[3] >= 7;
+          const mountain = types.some(type => type >= 7 && type <= 8);
           const spread = water ? 0.085 : mountain ? 0.12 : 0.17;
           let tx = clamp((warpedX - ix - 0.5 + spread) / (spread * 2), 0, 1);
           let ty = clamp((warpedY - iy - 0.5 + spread) / (spread * 2), 0, 1);
@@ -943,6 +956,7 @@
 
     async function prepareWorldRendering(world, colonies) {
       terrainRendering.ready = false;
+      updateRoomCreationProgress(40);
       worldMap.terrain = Uint8Array.from(world.terrain);
       worldMap.hazards = Uint8Array.from(world.hazards || []);
       worldMap.burrows = world.burrows || [];
@@ -956,8 +970,10 @@
       for (const colony of colonies) key = Math.imul(key ^ (colony.y * WORLD_SIZE + colony.x), 16777619) >>> 0;
       if (terrainRendering.key === key && terrainRendering.overview && terrainRendering.forest.size === 400) {
         terrainRendering.ready = true;
+        updateRoomCreationProgress(100);
         return;
       }
+      updateRoomCreationProgress(45);
       setEvolutionText(welcomeStatus, "고정 지형 이미지 준비 중…");
       await Promise.all([grassGround, forest.sprite, ...Object.values(terrainGrounds)].map(image => image.decode()));
       updateTerrainRendering(world.seed);
@@ -967,21 +983,32 @@
       const sprite = await createImageBitmap(forest.bitmap);
       const url = URL.createObjectURL(new Blob([terrainWorkerSource], { type: "text/javascript" }));
       const worker = new Worker(url);
+      updateRoomCreationProgress(50);
       try {
         await new Promise((resolve, reject) => {
           worker.onerror = event => reject(new Error(event.message));
           worker.onmessage = event => {
             const message = event.data;
-            if (message.type === "overview") terrainRendering.overview = message.image;
+            if (message.type === "overview") {
+              terrainRendering.overview = message.image;
+              updateRoomCreationProgress(52);
+            }
             else if (message.type === "atlas") {
               terrainRendering.atlases[Math.floor(message.start / 1024)] = { surface: message.surface, ground: message.ground };
               message.indices.forEach((index, offset) => { terrainRendering.slots[index] = message.start + offset; });
+              updateRoomCreationProgress(52 + message.progress * 28);
               setEvolutionText(welcomeStatus, "고정 지형 이미지 준비 중… " + Math.floor(message.progress * 100) + "%");
-            } else if (message.type === "medium") terrainRendering.medium.set(message.index, {
-              surface: message.surface, ground: message.ground
-            });
-            else if (message.type === "forest") terrainRendering.forest.set(message.index, message.image);
-            else if (message.type === "done") { terrainRendering.cached = message.cached; resolve(); }
+            } else if (message.type === "medium") {
+              terrainRendering.medium.set(message.index, { surface: message.surface, ground: message.ground });
+              updateRoomCreationProgress(80 + terrainRendering.medium.size / 400 * 10);
+            } else if (message.type === "forest") {
+              terrainRendering.forest.set(message.index, message.image);
+              updateRoomCreationProgress(90 + terrainRendering.forest.size / 400 * 9);
+            } else if (message.type === "done") {
+              terrainRendering.cached = message.cached;
+              updateRoomCreationProgress(100);
+              resolve();
+            }
             else if (message.type === "error") reject(new Error(message.message));
           };
           worker.postMessage({ key: "terrain-64-v1:" + world.seed + ":" + key, rendering: { types: terrainRendering.types, edges: terrainRendering.edges,
@@ -2506,12 +2533,14 @@
     }
 
     const audio = globalThis.SpawnerAudio.create();
+    const combatAudio = globalThis.SpawnerCombatAudio.create();
     const agentAudio = new Map();
     const deliveryAudio = new Map();
     let audioTime = null;
 
     function resetAudio() {
       audio.stop();
+      globalThis.SpawnerCombatAudio.reset(combatAudio);
       agentAudio.clear();
       deliveryAudio.clear();
       audioTime = null;
@@ -2534,8 +2563,16 @@
       const time = state.simSeconds;
       if (audioTime != null && (time < audioTime || time - audioTime > 0.5)) resetAudio();
       const firstFrame = audioTime == null;
+      for (const event of globalThis.SpawnerCombatAudio.update(combatAudio,
+        [...state.agents, ...state.rivals].map(displayedAgent), state.corpses, time)) {
+        const unit = event.unit;
+        const position = unit.kind === "corpse" ? { x: unit.renderX ?? unit.x, y: unit.renderY ?? unit.y } :
+          interpolatedAgentPosition(unit);
+        audio.play(event.name, audioVolume(position.x + .5, position.y + .5));
+      }
       const agents = new Set();
       let harvesting = 0;
+      let soilHarvesting = 0;
       for (const source of [...state.agents, ...state.rivals]) {
         const agent = displayedAgent(source);
         if (agent.species === "spiny-back-beetle" || agent.health <= 0) continue;
@@ -2580,7 +2617,11 @@
             fractureAge: birth.fractureAge, unitVisible: birth.unitVisible });
           continue;
         }
-        if (isHarvestingFood(agent)) harvesting = Math.max(harvesting, volume);
+        if (isHarvestingFood(agent)) {
+          const type = Spawner.resourceTypeForCell(foodCellAt(agent.x, agent.y), worldMap);
+          if (type === "clay") soilHarvesting = Math.max(soilHarvesting, volume);
+          else harvesting = Math.max(harvesting, volume);
+        }
         const end = agent.moveStartedAt + agent.moveDuration;
         const step = agent.moveStartedAt + ":" + agent.stepCount;
         let previous = agentAudio.get(agent.id);
@@ -2615,7 +2656,7 @@
         }
       }
       for (const id of agentAudio.keys()) if (!agents.has(id)) agentAudio.delete(id);
-      audio.setHarvest(harvesting);
+      audio.setHarvest(harvesting, soilHarvesting);
       const deliveries = new Set();
       for (const delivery of foodDeliveries.values()) {
         const key = delivery.agentId + ":" + delivery.startedAt;
@@ -3420,6 +3461,16 @@
         drawTalonOwl(agent, renderPosition);
         return;
       }
+      if (encounterSprites.has(agent.species)) {
+        const sprite = encounterSprites.get(agent.species);
+        const width = cell * 1.4;
+        ctx.save();
+        ctx.translate(topLeft.x + cell / 2, topLeft.y + cell);
+        ctx.scale(agent.facing < 0 ? -1 : 1, 1);
+        ctx.drawImage(sprite, -width / 2, -width * .95, width, width);
+        ctx.restore();
+        return;
+      }
       const remaining = agent.bornAt + agent.lifespan - state.simSeconds;
       if (agent.faction === "colony" && remaining > 0 && remaining <= Spawner.AGENT_DEATH_WARNING && cell >= 8) {
         ctx.save();
@@ -3985,6 +4036,16 @@
       drawTerrain();
       drawGrid();
       drawHazards();
+      for (const signal of state.encounterSignals || []) {
+        const point = worldToScreen(signal.x + .5, signal.y + .5);
+        const radius = Math.max(2, state.camera.zoom * .18);
+        ctx.beginPath();
+        if (signal.kind === "light") ctx.arc(point.x, point.y, radius * 3, 0, Math.PI * 2);
+        else if (signal.kind === "mound") ctx.ellipse(point.x, point.y, radius, radius * .45, 0, 0, Math.PI * 2);
+        else for (let index = -1; index <= 1; index++) ctx.ellipse(point.x + radius * index * 1.5, point.y + (index % 2 ? radius : 0), radius * .3, radius * .5, .4, 0, Math.PI * 2);
+        ctx.fillStyle = signal.kind === "light" ? "#f2df91aa" : "#b99c71aa";
+        ctx.fill();
+      }
       drawTravelTraces();
       drawCorpses();
       drawWorldBounds();
@@ -4352,6 +4413,7 @@
       if (key === "tree") crop = { x: 0, y: 0, width: forest.sprite.naturalHeight, height: forest.sprite.naturalHeight };
       if (entry.kind === "creature" && key === "spiny-back-beetle") sprite = beetleSprite;
       if (entry.kind === "creature" && key === "talon-owl") sprite = talonOwlFrames.get(0);
+      if (entry.kind === "creature" && encounterSprites.has(key)) sprite = encounterSprites.get(key);
       if (entry.kind === "burrow") {
         const appearance = burrowAppearances.get(key);
         if (appearance) { sprite = appearance.sprite; crop = appearance.crop; }
@@ -4922,6 +4984,7 @@
     function agentSprite(agent, layer) {
       if (agent?.species === "spiny-back-beetle") return beetleSprite;
       if (agent?.species === "talon-owl") return talonOwlFrames.get(0);
+      if (encounterSprites.has(agent?.species)) return encounterSprites.get(agent.species);
       const attributes = agent?.appearanceAttributes || agent?.attributes || {};
       if (agent?.tribe && agent.tribe !== "bean") {
         const sprite = tribeArt.sprite(agent.tribe, attributes, layer || "full");
@@ -5881,6 +5944,20 @@
     let selectedTribe = null;
     let tribeRoomId = null;
     let lobbyBusy = false;
+    let roomCreationProgress = null;
+
+    function setLobbyBusy(busy) {
+      lobbyBusy = busy;
+      welcome.querySelectorAll("input, button, select, textarea").forEach(control => { control.disabled = busy; });
+    }
+
+    function updateRoomCreationProgress(progress) {
+      if (roomCreationProgress === null || !Number.isFinite(progress)) return;
+      roomCreationProgress = Math.min(100, Math.max(roomCreationProgress, Math.floor(progress)));
+      const button = document.querySelector('#welcome-form button[type="submit"]');
+      const text = "생성 중… " + roomCreationProgress + "%";
+      if (button.textContent !== text) button.textContent = text;
+    }
     let lobbyVersion = 0;
     let roomsSignature = "";
     const client = createClient(packet => {
@@ -5893,7 +5970,7 @@
       selectedTribe = null;
       tribeStart.disabled = true;
       tribeStart.textContent = "이 부족으로 시작";
-      tribeWorldLocation.textContent = "부족을 선택하면 시작 위치가 표시됩니다.";
+      tribeWorldLocation.textContent = "부족을 선택하면 시작 위치를 강조합니다.";
       tribeWorldMap.setAttribute("aria-label", "생성된 전체 월드맵");
       document.getElementById("tribe-seed").textContent = "시드 " + packet.world.seed;
       tribeGrid.querySelectorAll("button").forEach(button => {
@@ -5932,22 +6009,30 @@
         context.drawImage(image, index % 20 * size / 20, Math.floor(index / 20) * size / 20, size / 20, size / 20);
       }
       context.drawImage(hazardCanvas, 0, 0, size, size);
-      if (!selectedTribe) return;
-      const colony = tribePacket.colonies.find(entry => entry.id === tribePacket.colonyId);
-      const x = (colony.x + 2.5) / tribePacket.world.size * size;
-      const y = (colony.y + 2.5) / tribePacket.world.size * size;
-      const color = { bean: "#95c97b", spore: "#e79791", pebble: "#d7b478", spring: "#85cece" }[selectedTribe.key];
-      context.beginPath();
-      context.arc(x, y, 20, 0, Math.PI * 2);
-      context.fillStyle = color + "55";
-      context.fill();
-      context.lineWidth = 4;
-      context.strokeStyle = "#ffffff";
-      context.stroke();
-      context.beginPath();
-      context.arc(x, y, 7, 0, Math.PI * 2);
-      context.fillStyle = color;
-      context.fill();
+      for (const colony of tribePacket.tribeStarts) {
+        const x = (colony.x + 2.5) / tribePacket.world.size * size;
+        const y = (colony.y + 2.5) / tribePacket.world.size * size;
+        const color = { bean: "#95c97b", spore: "#e79791", pebble: "#d7b478", spring: "#85cece" }[colony.tribe];
+        const selected = colony.tribe === selectedTribe?.key;
+        if (selected) {
+          context.beginPath();
+          context.arc(x, y, 20, 0, Math.PI * 2);
+          context.fillStyle = color + "55";
+          context.fill();
+          context.lineWidth = 4;
+          context.strokeStyle = "#ffffff";
+          context.stroke();
+        }
+        context.beginPath();
+        context.arc(x, y, selected ? 7 : 6, 0, Math.PI * 2);
+        context.fillStyle = selected ? color : color + "bb";
+        context.fill();
+        if (!selected) {
+          context.lineWidth = 2;
+          context.strokeStyle = "#101719";
+          context.stroke();
+        }
+      }
     }
 
     function drawTribePreviews(now) {
@@ -6024,7 +6109,7 @@
           choice.setAttribute("aria-pressed", String(choice === button));
           choice.querySelector(".tribe-choice-footer > span").textContent = choice === button ? "선택됨 ✓" : "선택하기 →";
         });
-        const colony = tribePacket.colonies.find(entry => entry.id === tribePacket.colonyId);
+        const colony = tribePacket.tribeStarts.find(entry => entry.tribe === tribe.key);
         tribeWorldLocation.textContent = tribe.name + " · 시작 위치 (" + (colony.x + 2) + ", " + (colony.y + 2) + ")";
         tribeWorldMap.setAttribute("aria-label", "전체 월드맵 · " + tribeWorldLocation.textContent);
         tribeStart.textContent = tribe.name + " 부족으로 시작";
@@ -6038,7 +6123,7 @@
 
     tribeStart.addEventListener("click", async () => {
       if (lobbyBusy || !tribeRoomId || !selectedTribe) return;
-      lobbyBusy = true;
+      setLobbyBusy(true);
       tribeStart.disabled = true;
       tribeGrid.querySelectorAll("button").forEach(choice => { choice.disabled = true; });
       document.getElementById("tribe-selection-back").disabled = true;
@@ -6048,7 +6133,7 @@
         await enterRoom(tribeRoomId);
       } catch (error) { tribeSelectionStatus.textContent = error.message; }
       finally {
-        lobbyBusy = false;
+        setLobbyBusy(false);
         tribeStart.disabled = false;
         tribeGrid.querySelectorAll("button").forEach(choice => { choice.disabled = false; });
         document.getElementById("tribe-selection-back").disabled = false;
@@ -6239,12 +6324,12 @@
       try {
         const packet = await client.call("enter", { roomId, visible: false });
         document.getElementById("game-seed").textContent = "시드 " + packet.world.seed;
-        await prepareWorldRendering(packet.world, packet.colonies);
+        await prepareWorldRendering(packet.world, packet.tribeStarts || packet.colonies);
         if (packet.colonies.find(colony => colony.id === packet.colonyId).tribe === null) {
           showTribeSelection(packet);
           return;
         }
-        await prepareTribeRendering(packet.colonies);
+        await prepareTribeRendering(Spawner.PLAYER_TRIBES.map(tribe => ({ tribe: tribe.key })));
         connection.active = true;
         applySnapshot(packet);
         if (!connection.online) return;
@@ -6323,6 +6408,7 @@
           fragment.append(empty);
         }
         roomList.replaceChildren(fragment);
+        setLobbyBusy(lobbyBusy);
       } catch (error) {
         setEvolutionText(welcomeStatus, error.message);
         if (!roomsSignature) roomList.textContent = "방 목록을 불러오지 못했습니다.";
@@ -6337,7 +6423,7 @@
     async function deleteRoom(room) {
       if (lobbyBusy) return;
       if (!window.confirm(room.title + " 방의 진행 기록을 삭제할까요?\n삭제한 진행 기록은 복구할 수 없습니다.")) return;
-      lobbyBusy = true;
+      setLobbyBusy(true);
       welcomeStatus.textContent = "방 삭제 중…";
       try {
         await client.call("delete", { roomId: room.id, title: room.title });
@@ -6346,7 +6432,7 @@
       } catch (error) { setEvolutionText(welcomeStatus, error.message); }
       finally {
         await refreshRooms();
-        lobbyBusy = false;
+        setLobbyBusy(false);
       }
     }
 
@@ -6357,14 +6443,24 @@
         roomTitle.reportValidity();
         return;
       }
-      lobbyBusy = true;
+      setLobbyBusy(true);
+      const createButton = document.querySelector('#welcome-form button[type="submit"]');
+      const createButtonText = createButton.textContent;
+      if (type === "create") {
+        roomCreationProgress = 0;
+        updateRoomCreationProgress(0);
+      }
       welcomeStatus.textContent = "입장 준비 중…";
       try {
-        const result = type === "create" ? await client.call("create", data) : data;
+        const result = type === "create" ? await client.call("create", data, progress => updateRoomCreationProgress(progress * 40)) : data;
         await enterRoom(result.roomId);
         if (welcome.hidden) welcomeStatus.textContent = "";
       } catch (error) { setEvolutionText(welcomeStatus, error.message); }
-      finally { lobbyBusy = false; }
+      finally {
+        setLobbyBusy(false);
+        roomCreationProgress = null;
+        createButton.textContent = createButtonText;
+      }
     }
 
     function randomRoomName() {

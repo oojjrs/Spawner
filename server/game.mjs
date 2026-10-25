@@ -45,7 +45,7 @@ export function createGame(environment, colony) {
 
     const TERRAIN_TYPES = [
       "deep", "shallow", "coast", "land", "grassland",
-      "forest", "lowMountain", "highMountain", "ridge"
+      "forest", "lowMountain", "highMountain", "ridge", "swamp"
     ];
 
     const foodSpotCache = environment.foodSpots;
@@ -92,7 +92,7 @@ export function createGame(environment, colony) {
       terrainAt: (x, y) => worldMap.terrain[y * WORLD_SIZE + x],
       walkable: (x, y) => state.explored.has(y * WORLD_SIZE + x) && isWalkable(x, y),
       hazardAt: (x, y) => state.explored.has(y * WORLD_SIZE + x) ? hazardAt(x, y) : 0,
-      enemies: () => state.rivals.filter(enemy => visibleCells.has(enemy.y * WORLD_SIZE + enemy.x)), burrows: visibleBurrows, nests: visibleNests, synergy,
+      enemies: () => state.rivals.filter(enemy => !enemy.hidden && enemy.faction !== "neutral" && visibleCells.has(enemy.y * WORLD_SIZE + enemy.x)), burrows: visibleBurrows, nests: visibleNests, synergy,
       resourceType: food => resourceTypeForCell(food, worldMap),
       isFood: type => isTribeFood(type, colony.tribe),
       canHarvest: (food, agent) => canHarvestResource(food, worldMap, agent.attributes) });
@@ -137,7 +137,7 @@ export function createGame(environment, colony) {
 
     function discoverObjects() {
       for (const target of state.rivals) {
-        if (target.health <= 0 || !visibleCells.has(target.y * WORLD_SIZE + target.x)) continue;
+        if (target.health <= 0 || target.hidden || !visibleCells.has(target.y * WORLD_SIZE + target.x)) continue;
         recordDiscovery("creature:" + (target.species || "bean"), "creature",
           target.species ? target.name : "다른 군체의 콩", target, discoveryObserver(target));
       }
@@ -269,6 +269,10 @@ export function createGame(environment, colony) {
         damage -= absorbed;
       }
       agent.health = Math.max(0, agent.health - damage);
+      if (!environmental && damage > 0) {
+        agent.hurtStartedAt = state.simSeconds;
+        agent.hurtCount = (agent.hurtCount || 0) + 1;
+      }
       if (amount > 0 && state.agents.includes(agent)) agent.decisionPending = "damage";
       if (damage > 0 && synergy(agent, ["strength", "shell"]) && state.simSeconds >= agent.shieldReady) {
         agent.shield = 4;
@@ -427,7 +431,7 @@ export function createGame(environment, colony) {
         terrain === "land" ||
         terrain === "grassland" ||
         terrain === "forest" ||
-        terrain === "lowMountain" || terrain === "highMountain" || terrain === "ridge";
+        terrain === "lowMountain" || terrain === "highMountain" || terrain === "ridge" || terrain === "swamp";
     }
 
     function walkableNeighbors(x, y) {
@@ -1050,7 +1054,7 @@ export function createGame(environment, colony) {
     }
 
     function combatTargets() {
-      return state.rivals.filter(enemy => enemy.health > 0 && visibleCells.has(enemy.y * WORLD_SIZE + enemy.x)).concat(visibleBurrows(), visibleNests());
+      return state.rivals.filter(enemy => enemy.health > 0 && !enemy.hidden && enemy.faction !== "neutral" && visibleCells.has(enemy.y * WORLD_SIZE + enemy.x)).concat(visibleBurrows(), visibleNests());
     }
 
     function reconsiderAgent(agent, reason) {
@@ -1313,6 +1317,7 @@ export function createGame(environment, colony) {
       ensureFoodAround(agent.x, agent.y, 4);
       const drops = [{ id: "corpse:" + agent.id, agentId: agent.id, colonyId: colony.id, name: agent.name,
         level: agent.level, tribe: agent.tribe, bornAt: agent.bornAt, diedAt: state.simSeconds, decaysAt: state.simSeconds + CORPSE_LIFETIME,
+        hurtStartedAt: agent.hurtStartedAt, hurtCount: agent.hurtCount,
         amount: Math.max(1, Math.floor(agent.cost / 2)), kind: "corpse", resourceType: "meat",
         attributes: { ...agent.attributes }, appearanceAttributes: { ...agent.appearanceAttributes } }];
       if (agent.carrying > 0) {
@@ -1560,14 +1565,14 @@ export function createGame(environment, colony) {
         return { ...visible, action: utility?.action || "wait", personalityLabels: personality ? personalityLabels(personality) : null };
       };
       return {
-        simSeconds: state.simSeconds, colonyFood: state.colonyFood, burrows: environment.creatureSystem?.burrows || [],
+        simSeconds: state.simSeconds, colonyFood: state.colonyFood, encounterSignals: environment.creatureSystem?.signals || [], burrows: environment.creatureSystem?.burrows || [],
         resourceInventory: { ...state.resourceInventory },
         discoveries: state.discoveries.map(entry => ({ ...entry })), discoveryReadCount: state.discoveryReadCount,
         evolutionPoints: state.evolutionPoints, nestLevel: state.nestLevel, tribe: colony.tribe,
         nestHealth: state.nestHealth, nestMaxHealth: NEST_LEVELS[state.nestLevel - 1].health,
         templates: state.templates.map(template => ({ ...template, tribe: colony.tribe || "bean" })), agents: state.agents.map(agent => ({ ...visibleAgent(agent), movementPlan: agentMovementPlan(agent) })),
-        rivals: state.rivals.filter(agent => (agent.health > 0 || agent.species === "spiny-back-beetle" && agent.mode === "death") &&
-          visibleCells.has(agent.y * WORLD_SIZE + agent.x)).map((agent) => ({ ...visibleAgent(agent), faction: agent.species ? "hostile" : "rival" })),
+        rivals: state.rivals.filter(agent => !agent.hidden && (agent.health > 0 || agent.species === "spiny-back-beetle" && agent.mode === "death") &&
+          visibleCells.has(agent.y * WORLD_SIZE + agent.x)).map((agent) => ({ ...visibleAgent(agent), faction: agent.species ? agent.faction : "rival" })),
         corpses: [...state.knownFood.values()].filter(cell => cell.kind === "corpse" && cell.amount > 0),
         sharedTrails: [...state.sharedTrails], footprints: [...state.footprints.values()],
         footprintLifetime: FOOTPRINT_LIFETIME, food: [...state.knownFood.values()],
@@ -1681,6 +1686,9 @@ export function createGame(environment, colony) {
     return {
       command, snapshot, save, restore,
       get agents() { return state.agents; },
+      get colonyFood() { return state.colonyFood; },
+      get discoveredKinds() { return state.discoveredKinds; },
+      isVisible(x, y) { return visibleCells.has(y * WORLD_SIZE + x); },
       get nestLevel() { return state.nestLevel; },
       get nest() { return { id: "nest:" + colony.id, colonyId: colony.id, kind: "nest", x: colony.x, y: colony.y,
         width: COLONY_SIZE, height: COLONY_SIZE, health: state.nestHealth, maxHealth: NEST_LEVELS[state.nestLevel - 1].health }; },

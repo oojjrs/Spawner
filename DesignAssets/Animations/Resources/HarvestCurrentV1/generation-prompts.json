@@ -69,5 +69,27 @@
         1
       ]
     }
+  ],
+  "singleAdjacent": [
+    {
+      "key": "copper-ore",
+      "prompt": "Use case: precise-object-edit. Draw ONE SINGLE full-canvas production 2D animation inbetween sprite, NOT a sheet or montage. Image 1 is the EXACT neutral reference and canvas authority. Image 2 is the checked final contact peak. Image 3 is a previously drawn preceding pose for motion continuity. Draw the next pose at 2/3 progress between neutral and peak. A tiny front-right copper flake is almost, but not fully, detached, between the boundary poses. Keep the front-right main deposit intact with a continuous attachment under the lifted flake. Preserve the exact camera, object size, silhouette and position from image 1. Preserve the transparent padding from image 1, especially the large empty space ABOVE the low resource. Do not center, reposition or rescale the object to fill the canvas. Keep all unaffected surfaces, lighting and palette unchanged. Output exactly one sprite on genuine transparency, same full square canvas composition. No labels, new objects, dust, effects, blood, text or grid. This is an actual source cel to be used in the final animation.",
+      "source": "adjacent-single-source.png"
+    },
+    {
+      "key": "sand",
+      "prompt": "Use case: precise-object-edit. Draw ONE SINGLE full-canvas production 2D animation inbetween sprite, NOT a sheet or montage. Image 1 is the EXACT neutral reference and canvas authority. Image 2 is the checked final contact peak. Image 3 is a previously drawn preceding pose for motion continuity. Draw the next pose at 2/3 progress between neutral and peak. The shallow front-center scoop has reached about two-thirds of the final indentation depth, between the two boundary poses. No hole through the sand patch: it remains a full solid connected sand surface with a smooth complete ground layer. Preserve the exact camera, object size, silhouette and position from image 1. Preserve the transparent padding from image 1, especially the large empty space ABOVE the low resource. Do not center, reposition or rescale the object to fill the canvas. Keep all unaffected surfaces, lighting and palette unchanged. Output exactly one sprite on genuine transparency, same full square canvas composition. No labels, new objects, dust, effects, blood, text or grid. This is an actual source cel to be used in the final animation.",
+      "source": "adjacent-single-source.png"
+    },
+    {
+      "key": "meat",
+      "prompt": "Use case: precise-object-edit. Draw ONE SINGLE full-canvas production 2D animation inbetween sprite, NOT a sheet or montage. Image 1 is the EXACT neutral reference and canvas authority. Image 2 is the checked final contact peak. Image 3 is a previously drawn preceding pose for motion continuity. Draw the next pose at 2/3 progress between neutral and peak. The small soft red body segment under the center-front plate is about two-thirds compressed, between the two boundary poses. No other movement; the beetle carcass stays dead and still. Preserve the exact camera, object size, silhouette and position from image 1. Preserve the transparent padding from image 1, especially the large empty space ABOVE the low resource. Do not center, reposition or rescale the object to fill the canvas. Keep all unaffected surfaces, lighting and palette unchanged. Output exactly one sprite on genuine transparency, same full square canvas composition. No labels, new objects, dust, effects, blood, text or grid. This is an actual source cel to be used in the final animation.",
+      "source": "adjacent-single-source.png"
+    },
+    {
+      "key": "carapace",
+      "prompt": "Use case: precise-object-edit. Draw ONE SINGLE full-canvas production 2D animation inbetween sprite, NOT a sheet or montage. Image 1 is the EXACT neutral reference and canvas authority. Image 2 is the checked final contact peak. Image 3 is a previously drawn preceding pose for motion continuity. Draw the next pose at 2/3 progress between neutral and peak. The large center-front red shell plate is lifted about two-thirds as far as the peak boundary: a small complete dark underside begins to show at the left edge. No larger lift than the peak and no movement elsewhere. Preserve the exact camera, object size, silhouette and position from image 1. Preserve the transparent padding from image 1, especially the large empty space ABOVE the low resource. Do not center, reposition or rescale the object to fill the canvas. Keep all unaffected surfaces, lighting and palette unchanged. Output exactly one sprite on genuine transparency, same full square canvas composition. No labels, new objects, dust, effects, blood, text or grid. This is an actual source cel to be used in the final animation.",
+      "source": "adjacent-single-source.png"
+    }
   ]
 }

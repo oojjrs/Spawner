@@ -1,0 +1,24 @@
+{
+  "provider": "ElevenLabs",
+  "endpoint": "https://api.elevenlabs.io/v1/sound-generation",
+  "request": {
+    "text": "Close-up miniature foley of fresh grass blades repeatedly being pinched, gently pulled apart and gathered into a small bundle. Light thin leafy rubbing, short fibrous pulls and delicate dry strand tears in soft irregular gathering pulses. Dry intimate recording, restrained game scale. No heavy brush movement, wind, branches snapping, scissors, insects, footsteps, voices, music or reverb.",
+    "duration_seconds": 4,
+    "prompt_influence": 0.8,
+    "loop": true,
+    "output_format": "mp3_44100_128",
+    "model_id": "eleven_text_to_sound_v2",
+    "request_options": {
+      "max_retries": 0
+    }
+  },
+  "status": "completed",
+  "generated_at": "2026-10-25T07:16:01.875033+00:00",
+  "processing": null,
+  "approved": true,
+  "bytes": 65244,
+  "sha256": "4df8f8049a867aedcfb1e32418e6343879de2e4553286c015f21218f0a11304e",
+  "approved_at": "2026-10-25T07:28:36.042705+00:00",
+  "asset": "DesignAssets/Audio/grass-fiber-harvest-loop.mp3",
+  "input_sources": []
+}

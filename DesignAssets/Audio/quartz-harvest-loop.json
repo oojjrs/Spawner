@@ -1,0 +1,24 @@
+{
+  "provider": "ElevenLabs",
+  "endpoint": "https://api.elevenlabs.io/v1/sound-generation",
+  "request": {
+    "text": "Close-up miniature foley of tiny quartz crystal fragments repeatedly being gently loosened and collected from a cluster. Delicate crisp crystalline ticks, fine brittle mineral scrapes and a few very short high glassy tinks, soft and irregular. Dry intimate recording, small game scale. No musical chime, magical sparkle, sustained ringing, glass shattering, heavy impacts, voices, music or reverb.",
+    "duration_seconds": 4,
+    "prompt_influence": 0.8,
+    "loop": true,
+    "output_format": "mp3_44100_128",
+    "model_id": "eleven_text_to_sound_v2",
+    "request_options": {
+      "max_retries": 0
+    }
+  },
+  "status": "completed",
+  "generated_at": "2026-10-25T07:15:58.284451+00:00",
+  "processing": null,
+  "approved": true,
+  "bytes": 65244,
+  "sha256": "c4536bdd643e3c975e3673b28d82dd60c2f25254bd6f692bfa717b3bcc48bcec",
+  "approved_at": "2026-10-25T07:28:36.042705+00:00",
+  "asset": "DesignAssets/Audio/quartz-harvest-loop.mp3",
+  "input_sources": []
+}

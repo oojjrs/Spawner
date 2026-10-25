@@ -1,52 +1,5 @@
 {
   "tribe": "pebble",
-  "idle": [
-    {
-      "name": "nest-stage-01-idle",
-      "source": "DesignAssets/Tribes/pebble/Nests/nest-stage-01.png",
-      "animation": "DesignAssets/Tribes/pebble/Animations/Nests/stage-01-idle-v3/nest-stage-01-idle-sheet.png",
-      "preview": "DesignAssets/Previews/Nests/pebble-stage-01-idle-v3.webp",
-      "frameSize": [
-        384,
-        384
-      ],
-      "frameCount": 30,
-      "columns": 6,
-      "periodMs": 4000,
-      "durationsMs": [
-        133,
-        134,
-        133,
-        133,
-        134,
-        133,
-        133,
-        134,
-        133,
-        133,
-        134,
-        133,
-        133,
-        134,
-        133,
-        133,
-        134,
-        133,
-        133,
-        134,
-        133,
-        133,
-        134,
-        133,
-        133,
-        134,
-        133,
-        133,
-        134,
-        133
-      ],
-      "loop": true
-    }
-  ],
+  "idle": [],
   "growth": []
 }

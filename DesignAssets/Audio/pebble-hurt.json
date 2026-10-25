@@ -1,0 +1,17 @@
+{
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "One small hard pebble strikes the side of a solid palm-sized river stone. One immediate dense dry mineral tok with a short stony click and faint grit vibration, quick natural unpitched decay. Clearly the struck solid stone material, compact and heavy for its miniature size, close foley. The stone remains intact. No breaking, rubble, glass, metal ring, whoosh, voice, music or reverb.",
+  "duration_seconds": 0.5,
+  "prompt_influence": 0.85,
+  "loop": false,
+  "output_format": "mp3_44100_128",
+  "processing": "none",
+  "asset": "DesignAssets/Audio/pebble-hurt.mp3",
+  "selectedCandidate": 1,
+  "installationAuthorization": "User requested creating and attaching these combat sounds to the unit page.",
+  "input": "text prompt only",
+  "generated_at": "2026-10-25T07:42:52.704827+00:00",
+  "request_id": null,
+  "sha256": "ae9ce0e0d03c79810d5dca3f81219e4e6a7c6cd1456f96488c5832afd372f013"
+}

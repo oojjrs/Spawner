@@ -1,3 +1,4 @@
+import { generateMapWorld } from "./map.mjs";
 import { generateBurrows } from "./burrows.mjs";
 import { generateTribes } from "./tribes.mjs";
 import { LEGACY_RESOURCE_HABITATS } from "./resource-legacy.mjs";
@@ -6,10 +7,20 @@ import { FOOD_HABITATS, isFoodHabitat, RESOURCE_HABITATS, RESOURCE_PLACEMENT, is
 export const STARTING_FOOD_RADIUS = 22;
 export const STARTING_FOOD_CAP = 10;
 
-export const WORLD_GENERATION_VERSION = 5;
+export const WORLD_GENERATION_VERSION = 8;
 
-export function generateWorld(seed, version) {
-      if (version !== undefined && ![1, 2, 3, 4, WORLD_GENERATION_VERSION].includes(version)) {
+export function generateWorld(seed, version, onProgress) {
+      if (version === undefined || version === 6 || version === 7 || version === WORLD_GENERATION_VERSION) {
+        const world = generateMapWorld(seed, onProgress, version);
+        world.generationVersion = version ?? WORLD_GENERATION_VERSION;
+        world.camps = world.camps.map(camp => ({ ...camp, tribe: camp.tribe === "sprout" ? "bean" : camp.tribe }));
+        world.sites = world.camps.map(camp => [camp.x, camp.y]);
+        world.origin = { x: world.camps[0].x, y: world.camps[0].y };
+        world.tribes = world.camps.slice(1);
+        world.creatureDensity = new Uint8Array(320 * 320);
+        return world;
+      }
+      if (version !== undefined && ![1, 2, 3, 4, 5, WORLD_GENERATION_VERSION].includes(version)) {
         throw new Error("지원하지 않는 월드 생성 버전입니다.");
       }
       function seededRandom(seed) {

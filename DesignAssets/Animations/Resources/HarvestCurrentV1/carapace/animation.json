@@ -31,7 +31,8 @@
   "sourceArtwork": [
     "neutral.png",
     "key-contact-source.png",
-    "adjacent-source.png"
+    "adjacent-source.png",
+    "adjacent-single-source.png"
   ],
   "preparation": {
     "method": "Uniform source-cell scale; one translation from each stationary boundary; retain original pixels outside the complete local contact region. No generated motion, warping, interpolation or fades.",
@@ -51,6 +52,14 @@
       "dx": 0,
       "dy": 0
     },
-    "fixedRegionMask": "changing-region.png"
-  }
+    "fixedRegionMask": "changing-region.png",
+    "singleAdjacentRegistration": {
+      "meanAbsoluteError": 5.045305252075195,
+      "dx": 0,
+      "dy": 0
+    }
+  },
+  "adjacentSourceCells": [
+    1
+  ]
 }

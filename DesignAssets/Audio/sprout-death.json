@@ -1,0 +1,17 @@
+{
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "One tiny pea plant creature loses strength and slowly folds onto soft earth. Start with a delicate limp leaf rustle, a faint dry vegetable skin creak as the body sags, then one soft rounded pod flump around 0.7 seconds and a final tiny papery leaf settling sound. A small organic collapse, tender and subdued, close dry foley. No snapping stem, breaking apart, gore, voice, moan, music or reverb.",
+  "duration_seconds": 1.1,
+  "prompt_influence": 0.85,
+  "loop": false,
+  "output_format": "mp3_44100_128",
+  "processing": "none",
+  "asset": "DesignAssets/Audio/sprout-death.mp3",
+  "selectedCandidate": 1,
+  "installationAuthorization": "User requested creating and attaching these combat sounds to the unit page.",
+  "input": "text prompt only",
+  "generated_at": "2026-10-25T07:42:54.726826+00:00",
+  "request_id": null,
+  "sha256": "d1b4ea1c709c2c0341fb6250157866e19560f72f855be818fe3ef8e32ec681d0"
+}
