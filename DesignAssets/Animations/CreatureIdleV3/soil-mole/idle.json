@@ -1,0 +1,81 @@
+{
+  "name": "soil-mole",
+  "action": "idle",
+  "revision": 3,
+  "provider": "built-in image_gen",
+  "designReference": "../../../CreatureConcepts/v3/soil-mole.png",
+  "motion": "아주 작은 등 호흡과 짧은 눈 깜빡임으로 편하게 대기",
+  "sourceCanvas": [
+    1024,
+    1024
+  ],
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 4,
+  "frameCount": 15,
+  "drawnPoseCount": 8,
+  "newDrawingCount": 7,
+  "poseOrder": [
+    "keys-0",
+    "breath-2",
+    "breath-3",
+    "keys-1",
+    "breath-3",
+    "breath-2",
+    "keys-0",
+    "blink-2",
+    "keys-2",
+    "blink-3",
+    "keys-3",
+    "blink-3",
+    "keys-2",
+    "blink-2",
+    "keys-0"
+  ],
+  "durationsMs": [
+    1650,
+    180,
+    180,
+    240,
+    200,
+    200,
+    750,
+    25,
+    25,
+    30,
+    45,
+    25,
+    20,
+    25,
+    3405
+  ],
+  "durationMs": 7000,
+  "loop": true,
+  "rootMotion": false,
+  "atlas": "idle.png",
+  "runtimeAtlas": "idle.webp",
+  "preview": "idle-preview.webp",
+  "contact": "idle-contact.png",
+  "preparation": {
+    "method": "Actual generated neighboring drawings between preserved start and end boundary drawings on one fixed 2x2 worksheet; fixed cell extraction; translation-only registration; stationary original pixels retained outside the documented moving regions; shared 0.5 output scale.",
+    "syntheticInbetweens": false,
+    "motionGenerationTransforms": false,
+    "perFrameScaling": false,
+    "stationaryPixelIdentityChecked": true,
+    "stationaryOpaquePixelCount": 238771,
+    "sourceAlphaCleanupThreshold": 8
+  },
+  "drawingSha256": {
+    "keys-0": "43d981d19504b148bb5439b59149f5dd0f26e7f0878b25e20be7f59195440d2e",
+    "keys-1": "2076e04837ee4c0d35a2468a651912dd7ee927397f7dd3f978bebb6881c3aa6d",
+    "keys-2": "72608cb635134138cfc217cf5907e2a695b216af0ea08f10478a040b96bc0421",
+    "keys-3": "402cfee1ca1d435c816dc686a42a2cb129b7b50db995a567119b951edfd9e385",
+    "blink-2": "0f2ca72a2ffcdb2c04c6f44137e43fd67365474a8f41ecf5c609972fc9417a16",
+    "blink-3": "d7865951fc9273945e0ac009ff9909076c4b276ed9d46aa9afea83f260d0a97b",
+    "breath-2": "cf67a7e7e68a23487975fe1cf61db8af67b6e3d2450fc588ac00440ea319df84",
+    "breath-3": "342c3e3a4962d2a45e19f857a2a623897f2bd7aea8afa23f524ade70b56c4f4b"
+  },
+  "reusedDrawingCount": 0
+}

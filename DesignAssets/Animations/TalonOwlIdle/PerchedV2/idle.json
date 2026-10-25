@@ -1,0 +1,107 @@
+{
+  "name": "talon-owl", 
+  "action": "idle", 
+  "revision": 2, 
+  "status": "review-candidate", 
+  "provider": "built-in image_gen", 
+  "designReference": "../../../CreatureConcepts/v3/talon-owl.png", 
+  "poseReference": "Source/00-neutral.png", 
+  "pose": "Upright branch-perching stance with folded wings and gripping talons; implied branch is omitted from the transparent sprite.", 
+  "motion": "Small drawn chest-feather breath followed by a drawn blink.", 
+  "artworkMethod": "Six individually drawn complete source cels; adjacent poses reference the neutral and checked neighboring poses.", 
+  "newDrawnPoseCount": 6, 
+  "frameSize": [
+    512, 
+    512
+  ], 
+  "columns": 4, 
+  "frameCount": 11, 
+  "poseOrder": [
+    0, 
+    1, 
+    2, 
+    3, 
+    2, 
+    1, 
+    0, 
+    4, 
+    5, 
+    4, 
+    0
+  ], 
+  "durationsMs": [
+    1000, 
+    180, 
+    180, 
+    240, 
+    180, 
+    180, 
+    600, 
+    70, 
+    100, 
+    70, 
+    600
+  ], 
+  "durationMs": 3400, 
+  "loop": true, 
+  "rootMotion": false, 
+  "atlas": "idle.png", 
+  "runtimeAtlas": "idle.webp", 
+  "preview": "idle-preview.webp", 
+  "gif": "idle-preview.gif", 
+  "contact": "idle-contact.png", 
+  "comparison": "pose-vs-idle.gif", 
+  "frames": [
+    "Frames/00.png", 
+    "Frames/01.png", 
+    "Frames/02.png", 
+    "Frames/03.png", 
+    "Frames/04.png", 
+    "Frames/05.png"
+  ], 
+  "preparation": {
+    "motionGenerationTransforms": false, 
+    "syntheticInbetweens": false, 
+    "sourceCanvas": [
+      1254, 
+      1254
+    ], 
+    "sharedOutputSize": [
+      384, 
+      384
+    ], 
+    "sharedPaddingPosition": [
+      64, 
+      64
+    ], 
+    "alphaThreshold": 8, 
+    "perFrameScaling": false, 
+    "perFrameRegistration": false
+  }, 
+  "sourceImages": [
+    {
+      "file": "Source/00-neutral.png", 
+      "sha256": "5f900d0dd66b1d4a8d96cb2e7c7f9584df711fdc91509f92c815564ddc7fb97c"
+    }, 
+    {
+      "file": "Source/01-inhale.png", 
+      "sha256": "5e183a255ea70fa772dba9887af30389087b8fc45cd9adce79d456561a05e076"
+    }, 
+    {
+      "file": "Source/02-inhale.png", 
+      "sha256": "fb4b72ab887f79235e9cf2890c75bbd27ecfd05f9f57705020744f1e2e03914a"
+    }, 
+    {
+      "file": "Source/03-inhale-peak.png", 
+      "sha256": "f729bed2ab98649c5c039d17f982cfa4a4ba2394971f176139606f828af94246"
+    }, 
+    {
+      "file": "Source/04-half-closed.png", 
+      "sha256": "2aa90ecc4e28213c51002394ab036c8ffb79d25de57984694a5bcf2f0ae14446"
+    }, 
+    {
+      "file": "Source/05-closed.png", 
+      "sha256": "120020992b93774ff6d3222f50cc8d34abc5b2a7924cfaaecaaaa733c0ee9032"
+    }
+  ]
+}

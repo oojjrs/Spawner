@@ -1,0 +1,43 @@
+[
+  {
+    "kind": "keys",
+    "prompt": "Precise LOCAL edit of this existing 2x2 four-cel dirt-mole template. Preserve exact original square image, cell sizes, generous alpha margins, all character positions and scale. Top-left ORIGINAL NEUTRAL stays untouched. Top-right is a very tiny quiet inhale/sniff: the upper back fur lifts only about ONE pixel at displayed template scale, the pink nose tips barely one pixel up. Same skull, face, paws, claws, belly, mouth and tail, eyes fully open. Bottom-left: ONLY both upper eyelids lower 35% for the start of one quick natural blink. Bottom-right: ONLY eyelids fully closed as a small relaxed curved lid, without eyebrows or lashes. In the bottom two cels all nose/back/body pixels remain identical to original. Every eye socket stays at the original location/size. This character is alert and comfortable, not straining or exhausted. Do not shrink/lift the full head or body, do not redraw fur details, paws or chest. No head bob, exaggerated breathing, squashing, particles or shadow. Same original linework/colors; true transparent alpha. Local edits only, no zoom, enlargement, recentering, labels or borders.",
+    "source": "Source/keys-source.png",
+    "boundaries": [],
+    "reusedFrom": null,
+    "usedCells": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "kind": "blink",
+    "prompt": "Fixed 2x2 animation INBETWEEN worksheet. Preserve TOP LEFT A (open eyes) and TOP RIGHT B (closed eyes) exactly. ONLY draw the EYELIDS in the two lower cells: bottom-left blink 25% closed, bottom-right 70% closed, using exact original eye socket locations, eyeball diameters and the closed lid curve in B. Upper lids move down progressively; no moving eyes, eyebrows, lashes, new wrinkles or smile changes. Both eyes blink together, retaining the same original highlight/pupil when visible. This is a quick comfortable blink of an alert character, not a sleepy half-lidded expression held for a long time. Every other pixel of the original dirt mole stays the same: nose, muzzle, fur, skull, back, mouth, paws, claws, belly, tail. Identical scale and position, square canvas/grid and transparent margins, no zoom or recenter. Draw two actual adjacent eyelid states matched to BOTH references; no ghosting/blur/blending. Original painted style, real alpha background, no text/borders/shadow.",
+    "source": "Source/blink-source.png",
+    "boundaries": [
+      "keys-0",
+      "keys-3"
+    ],
+    "reusedFrom": null,
+    "usedCells": [
+      2,
+      3
+    ]
+  },
+  {
+    "kind": "breath",
+    "prompt": "Fixed 2x2 animation INBETWEEN worksheet. TOP LEFT A is original neutral mole; TOP RIGHT B has a VERY SLIGHT upper-back inhale. Preserve these top boundaries. Edit ONLY the UPPER BACK FUR in the bottom cells: bottom-left 1/3 through A-to-B, bottom-right 2/3. Match corresponding back contour tufts and fur patches, same volume and lighting, tiny continuous expansion. The spine does not jump up; no new spikes/tufts, no alternate fur design. The head, entire face/eyes/nose/mouth, ears, lower torso, paws/claws and tail remain exactly the original fixed input pixels. This is an almost imperceptible comfortable breath, no straining or head movement. Identical original scale, position, square canvas/grid and transparent margins. Draw two real adjacent back-fur states using both references, no scaling the whole animal, no blur/ghost/crossfade. Original painted style, real alpha, no labels/borders/shadow.",
+    "source": "Source/breath-source.png",
+    "boundaries": [
+      "keys-0",
+      "keys-1"
+    ],
+    "reusedFrom": null,
+    "usedCells": [
+      2,
+      3
+    ]
+  }
+]

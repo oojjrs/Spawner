@@ -1,0 +1,171 @@
+{
+  "name": "talon-owl",
+  "action": "idle",
+  "revision": 4,
+  "status": "approved",
+  "provider": "built-in image_gen",
+  "designReference": "../../../CreatureConcepts/v3/talon-owl.png",
+  "poseReference": "Source/00-neutral.png",
+  "pose": "Upright branch-perching stance with folded wings and gripping talons; implied branch is omitted from the transparent sprite.",
+  "motion": "Preserved original breath and blink, followed by drawn feather-brow raise, 450ms deadpan hold, drawn return, and neutral rest.",
+  "artworkMethod": "Preserved the six existing idle cels. Added two directly drawn transition cels and the approved expression key. Repaired the key neck attachment with image_gen. Stationary body pixels are retained unchanged; approved expression artwork is preserved within its saved region. The second transition retains the complete prepared key below its tuft region.",
+  "newDrawnPoseCount": 2,
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 4,
+  "frameCount": 17,
+  "poseOrder": [
+    0,
+    1,
+    2,
+    3,
+    2,
+    1,
+    0,
+    4,
+    5,
+    4,
+    0,
+    6,
+    7,
+    8,
+    7,
+    6,
+    0
+  ],
+  "durationsMs": [
+    1000,
+    180,
+    180,
+    240,
+    180,
+    180,
+    600,
+    70,
+    100,
+    70,
+    600,
+    60,
+    70,
+    450,
+    90,
+    100,
+    1200
+  ],
+  "durationMs": 5370,
+  "loop": true,
+  "rootMotion": false,
+  "atlas": "idle.png",
+  "runtimeAtlas": "idle.webp",
+  "preview": "idle-preview.webp",
+  "gif": "idle-preview.gif",
+  "contact": "idle-contact.png",
+  "comparison": "pose-vs-idle.gif",
+  "frames": [
+    "Frames/00.png",
+    "Frames/01.png",
+    "Frames/02.png",
+    "Frames/03.png",
+    "Frames/04.png",
+    "Frames/05.png",
+    "Frames/06.png",
+    "Frames/07.png",
+    "Frames/08.png"
+  ],
+  "preparation": {
+    "motionGenerationTransforms": false,
+    "syntheticInbetweens": false,
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "sharedOutputSize": [
+      384,
+      384
+    ],
+    "sharedPaddingPosition": [
+      64,
+      64
+    ],
+    "alphaThreshold": 8,
+    "perFrameScaling": false,
+    "perFrameRegistration": false,
+    "stationaryRegionRetention": [
+      {
+        "poses": [
+          4,
+          5
+        ],
+        "neutral": "Source/00-neutral.png",
+        "mask": "eye-motion-mask.png",
+        "inheritedFrom": "../PerchedV3/idle.json"
+      },
+      {
+        "poses": [
+          6,
+          7,
+          8
+        ],
+        "neutral": "Source/00-neutral.png",
+        "mask": "head-motion-mask.png",
+        "selection": "Binary fixed region. No crossfade, warp, per-pose scaling or per-pose translation."
+      }
+    ],
+    "approvedExpressionRegion": "approved-expression-region.png",
+    "redrawnAttachmentRegion": "neck-attachment-region.png",
+    "secondTransitionTuftRegion": "tuft-motion-mask.png"
+  },
+  "sourceImages": [
+    {
+      "file": "Source/00-neutral.png",
+      "sha256": "5f900d0dd66b1d4a8d96cb2e7c7f9584df711fdc91509f92c815564ddc7fb97c"
+    },
+    {
+      "file": "Source/01-inhale.png",
+      "sha256": "5e183a255ea70fa772dba9887af30389087b8fc45cd9adce79d456561a05e076"
+    },
+    {
+      "file": "Source/02-inhale.png",
+      "sha256": "fb4b72ab887f79235e9cf2890c75bbd27ecfd05f9f57705020744f1e2e03914a"
+    },
+    {
+      "file": "Source/03-inhale-peak.png",
+      "sha256": "f729bed2ab98649c5c039d17f982cfa4a4ba2394971f176139606f828af94246"
+    },
+    {
+      "file": "Source/04-half-closed.png",
+      "sha256": "7a047777fb2fe3886c735deb6d419cb9ef29b101b8b69be8fa56a097bd2221dc"
+    },
+    {
+      "file": "Source/05-closed.png",
+      "sha256": "4bc4db4872625380a2ddfd1221f1e3cbc121e664fcaa06114d7d7baaf3cc0fe8"
+    },
+    {
+      "file": "Source/06-raising.png",
+      "sha256": "0ef3d92cb4bec51192de484dfc9e48a7a82f5e6127cee4635c0cd79747263994"
+    },
+    {
+      "file": "Source/07-raising.png",
+      "sha256": "4c1004abfe952c138350cef72ffbd124797fc236fd46a1a5903533be7063b82d"
+    },
+    {
+      "file": "Source/08-raised-key.png",
+      "sha256": "f3c74e27d8df92edeb2145da7daae173f483430ce02c4d94a560d3c771689b0a"
+    }
+  ],
+  "previousVersion": "../PerchedV3/idle.json",
+  "rawDrawings": [
+    "Drawings/06-raising.png",
+    "Drawings/07-raising.png",
+    "Drawings/08-raised-key.png",
+    "Drawings/08-neck-repair.png"
+  ],
+  "promptSet": "Drawings/prompts.json",
+  "approvedExpression": "../BrowRaiseV1/key-pose.png",
+  "attachmentRepairCount": 1,
+  "uniquePoseCount": 9,
+  "expressionHoldMs": 450,
+  "expressionContact": "expression-contact.png"
+}

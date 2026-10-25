@@ -1,0 +1,57 @@
+[
+  {
+    "kind": "keys",
+    "prompt": "Precise local edit of the supplied 2x2 four-cel template for a small calm IDLE WING FLUTTER. Keep the exact existing square canvas, grid cell geometry, generous transparent margins, and identical character scale/position. Top-left is the ORIGINAL NEUTRAL, unchanged. Only redraw the visible NEAR GREEN WING in the other three cells; all face, eyes, beak, crown, chest, belly, feet and pink FLOWER TAIL stay the same. Shoulder attachment is fixed at the original point beside the green back, no sliding or shrinking. Top-right: the wing opens halfway, green primary feathers pointing outward nearly horizontally, modest fan. Bottom-left: peak of the SMALL upstroke, wing tip only about 35 degrees above horizontal, never above the crown. Bottom-right: downstroke, same green wing and same fan span pointing about 20 degrees below horizontal. These are three views of ONE identical wing: maintain coverts, same count of long feathers, same green/ivory color pattern, same anatomical volume, same line thickness. The coral/pink feathers belong ONLY to the stationary tail, never put pink tips onto the wing. Complete the hidden wing underside and its attachment naturally. No far wing redesign, body bob, squash, dramatic fanning, flying, particles or shadow. Single controlled soft flutter with minimal effort. Painted original style, genuine alpha background, no labels/borders. Local wing edits on existing pixels, do not zoom or recompose the birds.",
+    "source": "Source/keys-source.png",
+    "boundaries": [],
+    "reusedFrom": null,
+    "usedCells": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "kind": "rise",
+    "prompt": "This is an animation INBETWEEN worksheet, a fixed 2x2 square image. TOP-LEFT is exact start boundary A (folded neutral green wing), TOP-RIGHT exact end boundary B (small raised green wing). Leave BOTH TOP CELLS absolutely unchanged. Edit ONLY the wing in the BOTTOM TWO cells: bottom-left must be the actual anatomical pose ONE THIRD of the way from A to B; bottom-right TWO THIRDS of the way from A to B. Compare both top boundaries as onion-skin references. The same green wing opens progressively along one smooth arc around its fixed shoulder, the long feather tips trace intermediate positions between A and B; no overshoot, reversal, extra fan spread or different wing designs. Preserve original feather count, green/ivory pattern, length/thickness, lighting and coverts. Coral pink is exclusively the stationary flower tail, not wing tips. All four birds have the identical original body, face, head, feet, scale and position. Preserve exact original canvas, 2x2 cells and transparent margins. Do not enlarge or recenter. Reconstruct only moving wing surfaces and their true occlusion; no transform, blur, ghosting or blended poses. Complete the two newly DRAWN intermediate wings in the original painted style, genuine transparent alpha, no labels/borders.",
+    "source": "Source/rise-source.png",
+    "boundaries": [
+      "keys-0",
+      "keys-2"
+    ],
+    "reusedFrom": null,
+    "usedCells": [
+      2,
+      3
+    ]
+  },
+  {
+    "kind": "fall",
+    "prompt": "Animation INBETWEEN worksheet: square 2x2 fixed cells. TOP-LEFT A is the checked raised wing; TOP-RIGHT B is the checked lowered wing. Preserve both TOP cells unchanged. ONLY edit the wing in BOTTOM LEFT to be 1/3 of this exact A-to-B downstroke and BOTTOM RIGHT to be 2/3. The same wing sweeps gently DOWN around the same fixed shoulder. Each feather tip follows a continuous arc between corresponding tips in A and B, with no new fan opening, length change, pose reversal, extra feathers or overshoot. Preserve wing volume and the original green/ivory feather pattern. Pink belongs ONLY to the stationary flower tail behind the wing; do not recolor the wing. Same eye, beak, crown, chest, body, foot pixels, exact scale and position in every cell. Keep generous transparent margins, original canvas/grid, original painted linework, no labels/borders/ground. Newly draw the anatomical inbetween wing surfaces and natural overlaps using BOTH boundaries, no ghosting/crossfade, no zoom or recenter.",
+    "source": "Source/fall-source.png",
+    "boundaries": [
+      "keys-2",
+      "keys-3"
+    ],
+    "reusedFrom": null,
+    "usedCells": [
+      2,
+      3
+    ]
+  },
+  {
+    "kind": "start",
+    "prompt": "Very subtle START-OF-FLUTTER inbetweens on this 2x2 worksheet. TOP LEFT A is original folded wing, TOP RIGHT B the first checked partly-open wing. Leave both top cells untouched. ONLY edit bottom LEFT wing to be 1/3 between A and B, bottom RIGHT wing 2/3. IMPORTANT: these are ALMOST FOLDED wings, NOT fully raised/fanned wings. Begin by separating the tips just slightly from the flank; shoulder stays at the same original position; only modest fan opening. The main covert outline and proximal wing remain very close to A. Bottom-left must look much closer to neutral A than to B. The same individual green/ivory long feathers follow intermediate positions and stay same length and thickness. Never copy the raised B pose into both lower cells, never add pink feathers to the wing. Exact fixed body/face/feet/tail and original scale, canvas, grid and transparent margins. Use both boundaries, complete two real adjacent wing drawings with subtle anatomy and no ghosting or blur. Same painted style, no text/borders/shadows, genuine alpha.",
+    "source": "Source/start-source.png",
+    "boundaries": [
+      "keys-0",
+      "rise-2"
+    ],
+    "reusedFrom": null,
+    "usedCells": [
+      2,
+      3
+    ]
+  }
+]

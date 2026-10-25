@@ -1,0 +1,15 @@
+{
+  "tool": "built-in image_gen",
+  "edits": [
+    {
+      "file": "04-half-closed.png",
+      "prompt": "Use case: precise-object-edit. Asset type: one hand-drawn 2D sprite animation in-between cel. Edit target: image 1 is the EXACT locked neutral perched owl; image 2 is the checked fully closed eye pose. Draw the single halfway-closed eyelid pose immediately between these references, with upper lids covering about half the amber irises. Match eye corners and the original eye socket contours exactly. Only the eyelid surfaces and their occlusion of the eyes change. Lock every other feature of image 1: brow tufts and brow ridges, cheek feather contours, beak, head proportions, breast, folded wings, tail, feet, silhouette, colors and lighting. No cheek puff, expression squeeze, head bob, translation or scale change. The owl is perched absolutely still during its blink. This must be actual hand-drawn lid artwork, no transform or interpolation. Keep the original 1254 by 1254 transparent canvas and position. No branch, scene, text or labels. Output one full owl cel.",
+      "generatedSource": "D:/.codex/generated_images/01a170cb-93d9-71d3-bd90-84e58368256e/exec-11bd60a7-e48f-4b7b-aed1-b49e04de8974.png"
+    },
+    {
+      "file": "05-closed.png",
+      "prompt": "Use case: precise-object-edit. Asset type: one hand-drawn 2D sprite animation cel, not a sprite sheet. Edit target: image 1 is the EXACT locked neutral perched talon owl. Supporting reference: image 2 is the intended closed-eyelid pose, but it has unwanted full-body redraw drift. Repair only the eyelids of image 1 into the fully closed blink pose of image 2. Upper eyelids are softly cream feathered; closed lid lines stay within the original eye sockets. Keep image 1's brow tufts, brow ridges, eye corners, cheek feather edges, beak, head, chest, wings, tail, talons, silhouette, colors, lighting, and pixel placement unchanged. The head must not move, shrink, tilt or bob; no facial squeeze or cheek puff. Body posture is absolutely still while blinking. Draw real new lid artwork, no transform or interpolation. Preserve the full original 1254 by 1254 transparent canvas and owl placement. No branch, text, labels or new objects.",
+      "generatedSource": "D:/.codex/generated_images/01a170cb-93d9-71d3-bd90-84e58368256e/exec-5e7af291-81d3-4de0-97d4-6f6badb29c8a.png"
+    }
+  ]
+}
