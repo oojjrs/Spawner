@@ -81,29 +81,6 @@
       ]
     },
     {
-      "key": "meat",
-      "prompts": {
-        "tool": "built-in image_gen",
-        "prompt": "Production 2D game animation PARTS atlas, not a mockup or preview. Use the input sprite as the visual identity, palette, shape and hand-painted botanical fantasy game style reference. Produce a 1024x1024 square, genuinely transparent background, divided into an invisible 2x2 grid with 512x512 cells. Every requested component is isolated inside its cell, centered, no touching other cells, generous transparent margin, no labels, lines, shadows on the canvas, text or watermark. Every component must be a COMPLETE coherent object including its normally occluded back/side, with painted contours and continuous texture; no cropped bottoms, holes, pasted strips or smeared pixels. These components will actually be independently animated and composited, so hidden sides must be finished. Cell top-left: the complete large rear raw red meat chunk from the reference, with its pale fat rim and finished hidden lower-right face. Cell top-right: the complete smaller front meat chunk from the reference, including the folded cut edge, pale fat rim and fully finished rear-facing surface. Cells bottom-left and bottom-right: empty and transparent. Exactly two coherent irregular meat chunks. Preserve the simple generic game-food meat appearance and warm hand-painted style. No carcass, animal body, bones, gore, knife or props.",
-        "referenceImages": [
-          "parts/reference-original.png"
-        ],
-        "generatedSource": "source-atlas-rummage.png",
-        "usedSourceCells": [
-          0,
-          1
-        ]
-      },
-      "savedAssets": [
-        "meat/sheet.png",
-        "meat/source-atlas-rummage.png",
-        "meat/parts/fixed-base.png",
-        "meat/parts/front-piece.png",
-        "meat/parts/reference-original.png",
-        "meat/parts/source.png"
-      ]
-    },
-    {
       "key": "twigs",
       "prompts": {
         "key": "twigs",
@@ -405,78 +382,6 @@
         "beeswax/parts/source-a.png",
         "beeswax/parts/source-b.png",
         "beeswax/parts/source-base.png"
-      ]
-    },
-    {
-      "key": "carapace",
-      "prompts": {
-        "generator": "built-in image_gen",
-        "purpose": "실제 사용할 온전한 파츠와 가려진 면 원화",
-        "source": "H:\\Spawner\\DesignAssets\\ResourceConcepts\\v1\\resource-carapace.png",
-        "prompt": "Use case: precise-object-edit. Create an actual production source-parts atlas for a layered 2D game sprite, using image 1 as exact material, palette and hand-painted style reference. This is NOT an animation sheet and NOT a preview. Draw a square transparent canvas divided conceptually into a clean 2 by 2 grid with no drawn grid lines. Each of the three requested source layers is fully contained in its own cell with ample transparent separation: top-left fixed complete base, top-right complete movable piece A, bottom-left complete movable piece B, bottom-right completely empty transparent. Do not add text, labels, frames, background, shadows outside the objects, numbers, watermarks or tools. Preserve the source's smooth warm cream highlights, even dark teal/olive contours, calm botanical fantasy illustration rendering, soft top-left light, and slightly overhead 3/4 perspective. Every individual piece must be a finished WHOLE object including all hidden/back/side edges, not a cropped visible fragment, not a clipped polygon, not an animation sequence, not alternate poses. The base must have a fully painted continuous intact underlying surface behind the removable pieces, no holes, no gaps, no empty silhouettes, no cut walls, no clone stripes or smeared texture. The parts will move only 1 to 4 degrees and return, so intact overlaps and a clean finished neutral appearance matter. Do not repeat the movable pieces on the fixed base. Keep object size and source design close to the reference. All cells genuine transparent alpha.\nSource image 1 is empty teal-green carapace shell pieces. TOP-LEFT: keep a complete fixed pile of the large rear domed empty shell and lower rounded shell fragments, with all underlying shell curvature fully painted; omit two tiny overlapping external rim plates but keep their supporting surface complete. No cropped missing chunks or rectangular holes. TOP-RIGHT: one finished complete small curved teal shell rim plate, shield-like broad rounded triangle with a cream cut underside and dark teal outline, full back side and complete contour. BOTTOM-LEFT: a second finished small curved teal shell rim plate, slightly different rounded wedge, full back side and cream underside. Both external plates should look like coherent overlapping armor panels, not shredded bits. Material and angle must match the fixed main pile. No animal, body, legs, eyes or blood.",
-        "transparent_background": true
-      },
-      "savedAssets": [
-        "carapace/sheet.png",
-        "carapace/parts/contact-a.png",
-        "carapace/parts/contact-b.png",
-        "carapace/parts/fixed-base.png",
-        "carapace/parts/raw-production-parts.png",
-        "carapace/parts/root-occluder.png",
-        "carapace/parts/source-a.png",
-        "carapace/parts/source-b.png",
-        "carapace/parts/source-base.png"
-      ]
-    },
-    {
-      "key": "iron-ore",
-      "prompts": {
-        "generator": null,
-        "source": "before/iron-ore/original-resource.png",
-        "method": "온전한 원석을 재사용하고 원화 접촉면의 미세 광택만 강조한다.",
-        "imagegenUsed": false
-      },
-      "savedAssets": [
-        "iron-ore/sheet.png",
-        "iron-ore/parts/contact-a.png",
-        "iron-ore/parts/fixed-base.png",
-        "iron-ore/parts/root-occluder.png"
-      ]
-    },
-    {
-      "key": "copper-ore",
-      "prompts": {
-        "generator": null,
-        "source": "before/copper-ore/original-resource.png",
-        "method": "온전한 원석을 재사용하고 원화 접촉면의 미세 광택만 강조한다.",
-        "imagegenUsed": false
-      },
-      "savedAssets": [
-        "copper-ore/sheet.png",
-        "copper-ore/parts/contact-a.png",
-        "copper-ore/parts/fixed-base.png",
-        "copper-ore/parts/root-occluder.png"
-      ]
-    },
-    {
-      "key": "quartz",
-      "prompts": {
-        "generator": "built-in image_gen",
-        "purpose": "실제 사용할 온전한 파츠와 가려진 면 원화",
-        "source": "H:\\Spawner\\DesignAssets\\ResourceConcepts\\v1\\resource-quartz.png",
-        "prompt": "Use case: precise-object-edit. Create an actual production source-parts atlas for a layered 2D game sprite, using image 1 as exact material, palette and hand-painted style reference. This is NOT an animation sheet and NOT a preview. Draw a square transparent canvas divided conceptually into a clean 2 by 2 grid with no drawn grid lines. Each of the three requested source layers is fully contained in its own cell with ample transparent separation: top-left fixed complete base, top-right complete movable piece A, bottom-left complete movable piece B, bottom-right completely empty transparent. Do not add text, labels, frames, background, shadows outside the objects, numbers, watermarks or tools. Preserve the source's smooth warm cream highlights, even dark teal/olive contours, calm botanical fantasy illustration rendering, soft top-left light, and slightly overhead 3/4 perspective. Every individual piece must be a finished WHOLE object including all hidden/back/side edges, not a cropped visible fragment, not a clipped polygon, not an animation sequence, not alternate poses. The base must have a fully painted continuous intact underlying surface behind the removable pieces, no holes, no gaps, no empty silhouettes, no cut walls, no clone stripes or smeared texture. The parts will move only 1 to 4 degrees and return, so intact overlaps and a clean finished neutral appearance matter. Do not repeat the movable pieces on the fixed base. Keep object size and source design close to the reference. All cells genuine transparent alpha.\nSource image 1 is a milky white pale aqua quartz crystal cluster. TOP-LEFT: a complete fixed source layer containing ONLY the main tall rear quartz prism and its entire low pale stony crystal foot/base. Paint the main crystal faces and complete base behind two smaller prisms so there are no holes or missing surfaces. Leave out the left leaning prism and the small front prism. TOP-RIGHT: a complete separate smaller quartz crystal prism for the left side, milky-white translucent pale-aqua hexagonal column with a softly pointed tip, full uncut lower root and all hidden sides, naturally slightly leaning left. BOTTOM-LEFT: a second complete separate short front quartz prism, same milky pale-aqua hexagonal material and softly pointed tip, full root and complete hidden sides. The small prisms will pivot only one or two degrees about their roots and return while still attached. No purple gems, no glitter cloud, no glow, no cropped bases.",
-        "transparent_background": true
-      },
-      "savedAssets": [
-        "quartz/sheet.png",
-        "quartz/parts/contact-a.png",
-        "quartz/parts/contact-b.png",
-        "quartz/parts/fixed-base.png",
-        "quartz/parts/raw-production-parts.png",
-        "quartz/parts/root-occluder.png",
-        "quartz/parts/source-a.png",
-        "quartz/parts/source-b.png",
-        "quartz/parts/source-base.png"
       ]
     }
   ]

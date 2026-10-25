@@ -9,8 +9,7 @@ export const PLAYER_TRIBES = Object.freeze([
     starter: `DesignAssets/Tribes/${key}/starter.png`,
     body: `DesignAssets/Tribes/${key}/BaseParts/body.png`,
     manifest: `DesignAssets/Tribes/${key}/manifest.json`,
-    parts: ["shell-1", "shell-2"].map(part =>
-      `DesignAssets/Tribes/${key}/${key === "spring" ? "Units/Parts" : "Parts"}/${part}.png`)
+    parts: []
   }))
 ].map(tribe => Object.freeze(tribe)));
 

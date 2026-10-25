@@ -19,14 +19,14 @@
       "file": "Nests/nest-stage-01.png",
       "kind": "nest",
       "level": 1,
-      "reusedFrom": "DesignAssets/TribeConcepts/Nests/nest-stage-01-pebble-ochre-v1.png",
+      "reusedFrom": "DesignAssets/TribeConcepts/Nests/nest-stage-01-pebble-den-v2.png",
       "path": "DesignAssets/Tribes/pebble/Nests/nest-stage-01.png",
       "width": 1254,
       "height": 1254,
       "channels": "srgba 4.0",
       "alpha": true,
-      "alphaBoundsThreshold10": "1131x552+62+407",
-      "bytes": 823032,
+      "alphaBoundsThreshold10": "1138x607+61+417",
+      "bytes": 853161,
       "byteIdenticalToApproved": true
     },
     {

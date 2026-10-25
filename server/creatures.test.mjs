@@ -28,7 +28,7 @@ function encounter() {
   const room = environment();
   const beetle = loneCreature(room);
   Object.assign(beetle, { x: 140, y: 140, homeX: 140, homeY: 140, renderFromX: 140, renderFromY: 140 });
-  const victim = { id: "1:1", x: 141, y: 140, health: 12, moveStartedAt: 0, moveDuration: 0 };
+  const victim = { id: "1:1", x: 140, y: 140, health: 12, moveStartedAt: 0, moveDuration: 0 };
   const hits = [];
   room.games.set("first", { agents: [victim], receiveDamage(agent, amount) { hits.push({ time: room.simSeconds, amount }); agent.health -= amount; } });
   return { room, beetle, victim, hits };
@@ -87,7 +87,7 @@ test("턱이 닫히는 프레임에서 한 번만 피해를 주고 공격을 마
   assert.equal(beetle.mode, "idle");
 });
 
-test("공격 준비 중 사거리에서 벗어난 개체는 맞지 않는다", () => {
+test("공격 준비 중 전투 셀에서 사라진 개체는 맞지 않는다", () => {
   const { room, victim, hits } = encounter();
   room.creatureSystem.tick();
   victim.x += 2;

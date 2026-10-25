@@ -40,6 +40,23 @@ export function harvestPlaybackPose(playback, cell, agents, now, definition) {
   let effect = playback.effects.get(key);
   if (effect?.resourceType !== resourceType || Number.isFinite(cell.amount) && cell.amount > effect.remaining) effect = null;
   const remaining = Math.max(0, Number.isFinite(cell.amount) ? cell.amount : effect?.remaining || 0);
+  if (definition.loopDurationsMs) {
+    const active = agents.find(agent => agent.mode === "harvest" && agent.x === cell.x && agent.y === cell.y &&
+      agent.health > 0 && (agent.harvestResourceType || agent.carryingType || resourceType) === resourceType);
+    const startedAt = active ? active.harvestStarted + 1 : Infinity;
+    if (remaining > 0 && now >= startedAt) {
+      const durations = definition.loopDurationsMs;
+      const cycleMs = durations.reduce((sum, duration) => sum + duration, 0);
+      let elapsedMs = (now - startedAt) * 1000 % cycleMs, frame = 0;
+      while (frame < durations.length - 1 && elapsedMs >= durations[frame]) elapsedMs -= durations[frame++];
+      return { frame, progress: ((now - startedAt) * 1000 % cycleMs) / cycleMs,
+        phase: "harvest", opacity: 1, remaining, visible: true };
+    }
+    const age = effect ? now - effect.completedAt : Infinity;
+    const fade = remaining <= 0 && age >= 0 && age < postSeconds;
+    return { frame: 0, progress: fade ? age / postSeconds : 0, phase: fade ? "collected" : "idle",
+      opacity: remaining > 0 ? 1 : fade ? 1 - age / postSeconds : 0, remaining, visible: remaining > 0 || fade };
+  }
   const idle = { frame: effect ? settleFrame : 0, progress: effect ? 1 : 0, phase: "idle",
     opacity: remaining > 0 ? 1 : 0, remaining, visible: remaining > 0 };
   if (effect) {

@@ -4,16 +4,16 @@ import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
 import { PEBBLE_BIRTH_ANIMATION, pebbleBirthPlacement } from "./birth.mjs";
 
-test("몽돌은 승인한 22프레임을 재생하고 분리 전 출구와 착지 후 빈 칸에 고정된다", () => {
-  const metadata = JSON.parse(readFileSync(new URL("../DesignAssets/Tribes/pebble/AnimationStudies/birth-nest-v2/birth.json", import.meta.url), "utf8"));
+test("몽돌은 돌굴의 48프레임을 재생하고 구르기 전 출구와 착지 후 빈 칸에 고정된다", () => {
+  const metadata = JSON.parse(readFileSync(new URL("../DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth.json", import.meta.url), "utf8"));
   assert.deepEqual([...PEBBLE_BIRTH_ANIMATION.durationsMs], metadata.durationsMs);
   const outlet = { x: 42.5, y: 43 }, target = { x: 42.5, y: 45.78 }, height = .7 * 229 / 512;
-  for (const elapsed of [0, .2, .68, .829]) {
+  for (const elapsed of [0, .08, .119]) {
     const pose = pebbleBirthPlacement(elapsed, outlet, target, height);
     assert.ok(Math.abs(pose.x + PEBBLE_BIRTH_ANIMATION.outletX * pose.scale - outlet.x) < 1e-9);
     assert.ok(Math.abs(pose.y + PEBBLE_BIRTH_ANIMATION.outletY * pose.scale - outlet.y) < 1e-9);
   }
-  for (const elapsed of [1.43, 1.87, 2.619]) {
+  for (const elapsed of [1.48, 1.87, 2.619]) {
     const pose = pebbleBirthPlacement(elapsed, outlet, target, height);
     assert.ok(Math.abs(pose.rootX - target.x) < 1e-9);
     assert.ok(Math.abs(pose.rootY - target.y) < 1e-9);

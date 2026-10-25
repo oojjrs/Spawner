@@ -5,7 +5,7 @@
     const assetSource = globalThis.SpawnerAssets.source;
     const tribeArt = Spawner.createTribeArt(Spawner.PLAYER_TRIBES, assetSource);
     const tribeColonies = new Map();
-    const { ATTRIBUTES, ATTRIBUTE_COMBINATIONS, attributeCounts, unitStats, unitMovementSpeed, birthCost, hasSynergy, NEST_LEVELS, createClient,
+    const { TERRAIN_CODEX, HAZARD_CODEX, terrainCodexResources, terrainCodexCell, ATTRIBUTES, ATTRIBUTE_COMBINATIONS, attributeCounts, unitStats, unitMovementSpeed, birthCost, hasSynergy, NEST_LEVELS, createClient,
       agentBirthDuration, agentBirthMotion, SPRING_BIRTH_ANIMATION, springBirthPlacement, PEBBLE_BIRTH_ANIMATION, pebbleBirthPlacement, drawBirthSeed, drawBirthFragments, drawBirthImpact,
       AGENT_ATTACK_ASSET, agentAttackFrame, AGENT_DEATH_ANIMATION, agentDeathFrame } = globalThis.Spawner;
     const connection = { active: false, online: false, busy: false, synchronizing: false, roomId: null, colonyId: null, revision: -1, simSeconds: 0, receivedAt: 0 };
@@ -14,18 +14,28 @@
     const ctx = canvas.getContext("2d");
     const zoomLayerButtons = [...document.querySelectorAll("[data-zoom-layer]")];
     const colonyFocus = document.getElementById("colony-focus");
+    const selectionTerrain = document.getElementById("selection-terrain");
     const controlsGuide = document.getElementById("controls-guide");
     const controlsGuideToggle = document.getElementById("controls-guide-toggle");
     const controlsGuideClose = document.getElementById("controls-guide-close");
 
-    controlsGuideClose.addEventListener("click", () => {
+    function collapseControlsGuide() {
+      if (controlsGuide.hidden) return;
       controlsGuide.hidden = true;
       controlsGuideToggle.hidden = false;
       controlsGuideToggle.setAttribute("aria-expanded", "false");
+    }
+
+    controlsGuideClose.addEventListener("click", () => {
+      collapseControlsGuide();
       controlsGuideToggle.focus();
     });
 
     controlsGuideToggle.addEventListener("click", () => {
+      if (!unitPanel.hidden || !colonyMenu.hidden) {
+        closeColonyMenu();
+        closeUnitPanel();
+      }
       controlsGuide.hidden = false;
       controlsGuideToggle.hidden = true;
       controlsGuideToggle.setAttribute("aria-expanded", "true");
@@ -43,31 +53,22 @@
     const nestNameCancel = document.getElementById("nest-name-cancel");
     const nestNameStatus = document.getElementById("nest-name-status");
     let renamedColonyId = null;
-    const agentTab = document.getElementById("agent-tab");
-    const colonyTab = document.getElementById("colony-tab");
-    const notificationTab = document.getElementById("notification-tab");
-    const notificationPanel = document.getElementById("notification-panel");
-    const notificationList = document.getElementById("notification-list");
-    const notificationCount = document.getElementById("notification-count");
-    const notificationEmpty = document.getElementById("notification-empty");
-    const discoveryToast = document.getElementById("discovery-toast");
-    let notificationSignature = "";
-    let discoveryReadRequested = 0;
-    let discoveryToastEntry = null;
-    let discoveryToastTimer = null;
-    const agentTabPanel = document.getElementById("agent-tab-panel");
+    const discoveryToasts = document.getElementById("discovery-toasts");
+    const discoveryToastTimers = new Map();
+    const objectPanel = document.getElementById("object-panel");
     const agentList = document.getElementById("agent-list");
     const agentListCount = document.getElementById("agent-list-count");
+    const unitPanel = document.getElementById("unit-panel");
+    const unitPanelTitle = document.getElementById("unit-panel-title");
+    const terrainDetails = document.getElementById("terrain-details");
     const agentDetails = document.getElementById("agent-details");
+    const agentBirth = document.getElementById("agent-birth");
+    const agentDesign = document.getElementById("agent-design");
+    const unitActionStatus = document.getElementById("unit-action-status");
+    let unitPanelSelectionKey = null;
     const corpseDetails = document.getElementById("corpse-details");
     const corpseValue = document.getElementById("corpse-value");
     const corpseDesign = document.getElementById("corpse-design");
-    const selectedAgentName = document.getElementById("selected-agent-name");
-    const agentNameForm = document.getElementById("agent-name-form");
-    const agentNameInput = document.getElementById("agent-name-input");
-    const agentNameStatus = document.getElementById("agent-name-status");
-    let editedAgentId = null;
-    const colonyPanel = document.getElementById("colony-panel");
     const evolutionPanel = document.getElementById("evolution-panel");
     const evolutionOpenButton = document.getElementById("evolution-open-button");
     const evolutionClose = document.getElementById("evolution-close");
@@ -167,6 +168,12 @@
       sprite.src = definition.key === "honey-mushrooms" ? foodSprite.src : assetSource(definition.image);
       return [definition.key, sprite];
     }));
+    const resourceCarrySprites = new Map(Spawner.RESOURCE_TYPES.map(definition => {
+      const sprite = new Image();
+      sprite.src = assetSource(definition.carryImage);
+      return [definition.key, sprite];
+    }));
+    const resourceCarryBounds = new Map();
     const resourceHarvestSprites = new Map(Spawner.RESOURCE_HARVEST_ANIMATIONS.map(animation => {
       const sprite = new Image();
       sprite.src = assetSource(animation.image);
@@ -207,19 +214,34 @@
     const agentRenderingTasks = new Map();
     let agentRenderingQueue = Promise.resolve();
     const agentImageSources = new WeakMap();
-    const attackSprites = new Map();
+    const combatSheets = new Map(Spawner.PLAYER_COMBAT_ANIMATIONS.map(animation => [animation.tribe,
+      Object.fromEntries(["attack", "hurt"].map(action => {
+        const sheet = new Image(); sheet.src = assetSource(animation[action]); return [action, sheet];
+      }))]));
+    const agentMovementSheets = new Map([
+      ["spore", "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/walk-v2.webp", 424, 300],
+      ["pebble", "DesignAssets/Tribes/pebble/AnimationStudies/roll-v2/roll-v2.webp", 406, 300],
+      ["spring", "DesignAssets/Tribes/spring/AnimationStudies/flow-v4/flow-v4.webp", 230, 300]
+    ].map(([tribe, path, width, height]) => {
+      const sprite = new Image();
+      sprite.src = assetSource(path);
+      return [tribe, { sprite, width, height, scale: 1 }];
+    }));
     const attackSheet = new Image();
     attackSheet.src = assetSource(AGENT_ATTACK_ASSET);
     const agentDeathSheet = new Image();
     agentDeathSheet.src = assetSource(AGENT_DEATH_ANIMATION.image);
+    const agentSpiritSprite = new Image();
+    agentSpiritSprite.src = assetSource("DesignAssets/Effects/Lifespan/spirit-flame.png");
     const springBirthSheet = new Image();
     springBirthSheet.src = assetSource(SPRING_BIRTH_ANIMATION.image);
     const pebbleBirthSheet = new Image();
     pebbleBirthSheet.src = assetSource(PEBBLE_BIRTH_ANIMATION.image);
-    const pebbleBirthNest = new Image();
-    pebbleBirthNest.src = assetSource(PEBBLE_BIRTH_ANIMATION.nest);
+    const pebbleBirthForeground = new Image();
+    pebbleBirthForeground.src = assetSource(PEBBLE_BIRTH_ANIMATION.foreground);
     const agentHeadMotions = new Map();
     const agentDisplayLayout = { time: null, agents: null, rivals: null, positions: [], offsets: new Map() };
+    const agentCombatLayout = { time: null, agents: null, rivals: null, placements: new Map() };
     const agentSpriteSet = new WeakSet([starterObjectSprite]);
     const beetleSprite = new Image();
     agentSpriteSet.add(beetleSprite);
@@ -252,8 +274,7 @@
       ["feet-2", assetSource("DesignAssets/Units/Parts/feet-2.png")],
       ["antenna-1", assetSource("DesignAssets/Units/Parts/antenna-1.png")],
       ["antenna-2", assetSource("DesignAssets/Units/Parts/antenna-2.png")],
-      ["shell-1", assetSource("DesignAssets/Units/Parts/shell-1.png")],
-      ["shell-2", assetSource("DesignAssets/Units/Parts/shell-2.png")]
+      ["lifespan-1", assetSource("DesignAssets/Units/Parts/lifespan-1.png")]
     ].map(([key, source]) => {
       const part = new Image();
       part.src = source;
@@ -269,9 +290,11 @@
       part.src = source;
       return [key, part];
     }));
-    await Promise.all([starterObjectSprite, beetleSprite, beetleSheet, talonOwlSheet, attackSheet, foodSprite, treeFruitSprite, carriedFoodSprite,
-      ...agentParts.values(), ...agentBaseParts.values(),
+    await Promise.all([starterObjectSprite, beetleSprite, beetleSheet, talonOwlSheet, attackSheet, agentSpiritSprite, foodSprite, treeFruitSprite, carriedFoodSprite,
+      ...resourceCarrySprites.values(), ...agentParts.values(), ...agentBaseParts.values(),
       ...[...burrowAppearances.values()].map(appearance => appearance.sprite)].map(part => part.decode()));
+
+    for (const [type, sprite] of resourceCarrySprites) resourceCarryBounds.set(type, tribeArt.bounds(sprite, false));
 
     for (const index of new Set(Object.values(Spawner.BEETLE_ANIMATIONS).flatMap(animation => animation.frames))) {
       const shape = Spawner.BEETLE_SPRITE;
@@ -321,25 +344,14 @@
       { left: 0.055249, top: 0.13674, right: 0.929558, bottom: 0.964088 }
     ] };
     forest.sprite.src = assetSource("DesignAssets/Terrain/standing-tree-smooth-atlas.png");
-    const hazardSprites = ["poison-spore-atlas.png", "thorn-root-atlas.png"].map(name => {
+    const hazardGroundSprites = ["DesignAssets/Terrain/poison-spore-ground.png", "DesignAssets/Terrain/thorn-root-ground.png"].map(source => {
       const sprite = new Image();
-      const source = "DesignAssets/Terrain/" + name;
       sprite.src = assetSource(source);
       return sprite;
     });
     const hazardCells = [];
-    await Promise.all([forest.sprite, ...hazardSprites].map(sprite => sprite.decode()));
-    for (let kind = 0; kind < hazardSprites.length; kind++) {
-      const sprite = hazardSprites[kind], frames = [];
-      for (let index = 0; index < 3; index++) {
-        const frame = document.createElement("canvas");
-        frame.width = frame.height = sprite.naturalHeight;
-        frame.getContext("2d").drawImage(sprite, index * frame.width, 0, frame.width, frame.height,
-          0, 0, frame.width, frame.height);
-        frames.push(frame);
-      }
-      hazardSprites[kind] = frames;
-    }
+    const hazardGroundTiles = new Map();
+    await Promise.all([forest.sprite, ...hazardGroundSprites].map(sprite => sprite.decode()));
 
     const COLONY_SIZE = 5;
     const COLONY_ORIGIN = {
@@ -379,16 +391,16 @@
     const TERRAIN_COLORS = {
       land: "#171d1b",
       grassland: "#2b3a29",
-      forest: "#2b3a29",
+      forest: "#34271e",
       lowMountain: "#263029",
       highMountain: "#374139",
       ridge: "#4b554c",
-      swamp: "#547d70",
+      swamp: "#56562b",
       coast: "#10282d",
       shallow: "#0b1e29",
       deep: "#06131d"
     };
-    const terrainGrounds = Object.fromEntries([["land",assetSource("DesignAssets/Terrain/land-ground.png")],["lowMountain",assetSource("DesignAssets/Terrain/low-mountain-ground.png")],["highMountain",assetSource("DesignAssets/Terrain/high-mountain-ground.png")],["ridge",assetSource("DesignAssets/Terrain/ridge-ground.png")],["coast",assetSource("DesignAssets/Terrain/coast-ground.png")],["shallow",assetSource("DesignAssets/Terrain/shallow-water-ground.png")],["deep",assetSource("DesignAssets/Terrain/deep-water-ground.png")]].map(([terrain, source]) => {
+    const terrainGrounds = Object.fromEntries([["land",assetSource("DesignAssets/Terrain/land-ground.png")],["forest",assetSource("DesignAssets/Terrain/forest-ground.png")],["swamp",assetSource("DesignAssets/Terrain/swamp-ground.png")],["lowMountain",assetSource("DesignAssets/Terrain/low-mountain-ground.png")],["highMountain",assetSource("DesignAssets/Terrain/high-mountain-ground.png")],["ridge",assetSource("DesignAssets/Terrain/ridge-ground.png")],["coast",assetSource("DesignAssets/Terrain/coast-ground.png")],["shallow",assetSource("DesignAssets/Terrain/shallow-water-ground.png")],["deep",assetSource("DesignAssets/Terrain/deep-water-ground.png")]].map(([terrain, source]) => {
       const image = new Image();
       image.src = source;
       return [terrain, image];
@@ -427,11 +439,15 @@
       colors: TERRAIN_TYPES.map(type => TERRAIN_COLORS[type].slice(1).match(/../g).map(value => parseInt(value, 16))),
       grounds: new Map(), atlases: [], slots: new Int32Array(WORLD_SIZE * WORLD_SIZE).fill(-1),
       overview: null, medium: new Map(), forest: new Map(), revealed: new Uint8Array(WORLD_SIZE * WORLD_SIZE),
-      regions: new Set(), regionPath: new Path2D(), phase: 0, resolution: 64, key: null, ready: false
+      regions: new Set(), regionPath: new Path2D(), phase: 0, resolution: 64, key: null, forestKeys: new Map(), ready: false
     };
     forest.revealed = new Map();
     forest.regions = new Set();
     forest.overrides = new Map();
+    forest.cacheWrite = Promise.resolve();
+    forest.cacheKey = null;
+    forest.seed = null;
+    forest.colonies = [];
 
     const state = {
       camera: {
@@ -515,7 +531,9 @@
 
     function foodCellAt(x, y) {
       ensureFoodAround(x, y, 1);
-      return foodCellMap.get(x + "," + y) || null;
+      const spot = foodSpotCache.get(Math.floor(x / FOOD_REGION_SIZE) + "," + Math.floor(y / FOOD_REGION_SIZE));
+      return spot?.cells.findLast(cell => cell.x === x && cell.y === y && cell.key && cell.amount > 0) ||
+        foodCellMap.get(x + "," + y) || null;
     }
 
     function isWalkable(x, y) {
@@ -594,18 +612,17 @@
 
     function updateTerrainRendering(seed) {
       const rendering = terrainRendering;
+      rendering.key = null;
       rendering.phase = (seed >>> 0) % 4096 * 0.013;
       for (const atlas of rendering.atlases) if (atlas) { atlas.surface.close(); atlas.ground.close(); }
       if (rendering.overview) rendering.overview.close();
-      for (const image of rendering.forest.values()) image.close();
       for (const images of rendering.medium.values()) { images.surface.close(); images.ground.close(); }
       rendering.atlases = [];
       rendering.overview = null;
-      rendering.forest.clear();
       rendering.medium.clear();
       rendering.slots.fill(-1);
       rendering.edges.fill(0);
-      rendering.types.set(worldMap.terrain.map(type => type === 5 ? 4 : type));
+      rendering.types.set(worldMap.terrain);
       for (let y = 0; y < WORLD_SIZE; y++) for (let x = 0; x < WORLD_SIZE; x++) {
         const index = y * WORLD_SIZE + x;
         for (let oy = -1; oy <= 1; oy++) for (let ox = -1; ox <= 1; ox++) {
@@ -617,7 +634,7 @@
 
     function terrainGroundPixels(type) {
       if (terrainRendering.grounds.has(type)) return terrainRendering.grounds.get(type);
-      const ground = type === 4 || type === 9 ? grassGround : terrainGrounds[TERRAIN_TYPES[type]];
+      const ground = type === 4 ? grassGround : terrainGrounds[TERRAIN_TYPES[type]];
       if (!ground?.complete || !ground.naturalWidth) return null;
       const surface = document.createElement("canvas");
       surface.width = surface.height = 384;
@@ -653,8 +670,8 @@
         rows[offset + 8] = Math.cos(-value * 6.7);
         columns[offset + 9] = Math.floor(value * 96) % 384 * 4;
         rows[offset + 9] = Math.floor(value * 96) % 384 * 384 * 4;
-        columns[offset + 10] = Math.max(0, Math.floor(value - 0.263));
-        columns[offset + 11] = Math.min(319, Math.floor(value + 0.263));
+        columns[offset + 10] = Math.max(0, Math.floor(value - 0.35));
+        columns[offset + 11] = Math.min(319, Math.floor(value + 0.35));
         rows[offset + 10] = columns[offset + 10] * 320;
         rows[offset + 11] = columns[offset + 11] * 320;
       }
@@ -703,9 +720,7 @@
           const bottom = clamp(iy + 1, 0, WORLD_SIZE - 1) * WORLD_SIZE;
           types[0] = terrain[top + left]; types[1] = terrain[top + right];
           types[2] = terrain[bottom + right]; types[3] = terrain[bottom + left];
-          const water = types[0] <= 2 || types[1] <= 2 || types[2] <= 2 || types[3] <= 2;
-          const mountain = types.some(type => type >= 7 && type <= 8);
-          const spread = water ? 0.085 : mountain ? 0.12 : 0.17;
+          const spread = 0.24;
           let tx = clamp((warpedX - ix - 0.5 + spread) / (spread * 2), 0, 1);
           let ty = clamp((warpedY - iy - 0.5 + spread) / (spread * 2), 0, 1);
           tx = tx * tx * (3 - 2 * tx); ty = ty * ty * (3 - 2 * ty);
@@ -771,7 +786,7 @@
     function buildTerrainImages() {
       self.onmessage = async event => {
         const data = event.data, rendering = data.rendering, records = [];
-        let database = null;
+        let database = null, cached = null, cachedImages = false;
         async function transaction(mode, action) {
           return new Promise((resolve, reject) => {
             const task = database.transaction("maps", mode), result = action(task.objectStore("maps"));
@@ -787,7 +802,8 @@
             message[name] = surface.transferToImageBitmap();
             transfer.push(message[name]);
           }
-          records.push(record);
+          if (data.layer === "forest") records[message.index] = record;
+          else records.push(record);
           postMessage(message, transfer);
         }
         async function emitRegions(type, sources) {
@@ -806,11 +822,13 @@
           }
         }
         try {
-          const spriteSurface = new OffscreenCanvas(data.sprite.width, data.sprite.height);
-          const spriteContext = spriteSurface.getContext("2d");
-          spriteContext.drawImage(data.sprite, 0, 0);
-          const pixels = spriteContext.getImageData(0, 0, spriteSurface.width, spriteSurface.height).data;
-          const chunks = [Uint8Array.from(rendering.colors.flat()), ...rendering.grounds.filter(Boolean), pixels];
+          let chunks;
+          if (data.layer === "forest") {
+            const spriteSurface = new OffscreenCanvas(data.sprite.width, data.sprite.height);
+            const spriteContext = spriteSurface.getContext("2d");
+            spriteContext.drawImage(data.sprite, 0, 0);
+            chunks = [spriteContext.getImageData(0, 0, spriteSurface.width, spriteSurface.height).data];
+          } else chunks = [Uint8Array.from(rendering.colors.flat()), ...rendering.grounds.filter(Boolean)];
           const bytes = new Uint8Array(chunks.reduce((sum, chunk) => sum + chunk.length, 0));
           let offset = 0;
           for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.length; }
@@ -824,8 +842,9 @@
               request.onerror = () => reject(request.error);
               request.onblocked = () => reject(new Error("Cache unavailable"));
             });
-            const cached = await transaction("readonly", store => store.get(data.key));
-            if (cached?.records?.length) {
+            cached = await transaction("readonly", store => store.get(data.key));
+            if (data.layer === "terrain" && cached?.records?.length) {
+              postMessage({ type: "status", cached: true });
               const decoded = [];
               try {
                 for (let start = 0; start < cached.records.length; start += 8) {
@@ -841,7 +860,6 @@
                   if (failed) throw failed.reason;
                 }
                 for (const item of decoded) postMessage(item.message, item.transfer);
-                data.sprite.close();
                 postMessage({ type: "done", cached: true });
                 return;
               } catch {
@@ -850,90 +868,116 @@
             }
           } catch { database?.close(); database = null; }
 
-          const overview = new OffscreenCanvas(1280, 1280);
-          overview.getContext("2d").putImageData(createTerrainPatch(rendering, 0, 0, 320, 320, 4, false).colors, 0, 0);
-          await emit({ type: "overview" }, { image: overview });
-          const edges = [];
-          for (let index = 0; index < rendering.edges.length; index++) if (rendering.edges[index]) edges.push(index);
-          const medium = new OffscreenCanvas(5120, 5120), mediumGround = new OffscreenCanvas(5120, 5120);
-          const mediumContext = medium.getContext("2d"), mediumTexture = mediumGround.getContext("2d");
-          mediumContext.imageSmoothingQuality = mediumTexture.imageSmoothingQuality = "high";
-          const grounds = rendering.grounds.map(pixels => {
-            if (!pixels) return null;
-            const surface = new OffscreenCanvas(384, 384);
-            surface.getContext("2d").putImageData(new ImageData(pixels, 384, 384), 0, 0);
-            return surface;
-          });
-          for (let y = 0; y < 320; y++) for (let x = 0; x < 320; x++) {
-            const type = rendering.types[y * 320 + x], color = rendering.colors[type];
-            mediumContext.fillStyle = mediumTexture.fillStyle = "rgb(" + color.join(",") + ")";
-            mediumContext.fillRect(x * 16, y * 16, 16, 16);
-            mediumTexture.fillRect(x * 16, y * 16, 16, 16);
-            if (grounds[type]) mediumTexture.drawImage(grounds[type], x % 4 * 96, y % 4 * 96, 96, 96, x * 16, y * 16, 16, 16);
-          }
-          const program = createTerrainSamples.toString() + "\n" + createTerrainPatch.toString() +
-            "\n(" + buildTerrainAtlas.toString() + ")();";
-          const url = URL.createObjectURL(new Blob([program], { type: "text/javascript" }));
-          const workers = [];
-          let next = 0, completed = 0;
-          try {
-            await new Promise((resolve, reject) => {
-              if (!edges.length) { resolve(); return; }
-              function dispatch(worker) {
-                if (next >= edges.length) return;
-                const start = next;
-                next += 1024;
-                worker.postMessage({ rendering, start, indices: edges.slice(start, start + 1024) });
-              }
-              const count = Math.min(Math.ceil(edges.length / 1024), 4, Math.max(1, (navigator.hardwareConcurrency || 2) - 1));
-              for (let index = 0; index < count; index++) {
-                const worker = new Worker(url);
-                workers.push(worker);
-                worker.onerror = event => reject(new Error(event.message));
-                worker.onmessage = event => {
-                  const message = event.data;
-                  if (message.error) { reject(new Error(message.error)); return; }
-                  const resolution = rendering.resolution;
-                  for (let offset = 0; offset < message.indices.length; offset++) {
-                    const cell = message.indices[offset], x = cell % 320 * 16, y = Math.floor(cell / 320) * 16;
-                    const sx = offset % 32 * resolution, sy = Math.floor(offset / 32) * resolution;
-                    mediumContext.drawImage(message.surface, sx, sy, resolution, resolution, x, y, 16, 16);
-                    mediumTexture.drawImage(message.ground, sx, sy, resolution, resolution, x, y, 16, 16);
-                  }
-                  completed += message.indices.length;
-                  const record = { type: "atlas", start: message.start, indices: message.indices,
-                    progress: completed / edges.length, surface: message.surfaceBlob, ground: message.groundBlob };
-                  records.push(record);
-                  postMessage({ ...record, surface: message.surface, ground: message.ground }, [message.surface, message.ground]);
-                  if (completed === edges.length) resolve();
-                  else dispatch(worker);
-                };
-                dispatch(worker);
-              }
+          if (data.layer === "terrain") {
+            postMessage({ type: "status", cached: false });
+            const overview = new OffscreenCanvas(1280, 1280);
+            overview.getContext("2d").putImageData(createTerrainPatch(rendering, 0, 0, 320, 320, 4, false).colors, 0, 0);
+            await emit({ type: "overview" }, { image: overview });
+            const edges = [];
+            for (let index = 0; index < rendering.edges.length; index++) if (rendering.edges[index]) edges.push(index);
+            const medium = new OffscreenCanvas(5120, 5120), mediumGround = new OffscreenCanvas(5120, 5120);
+            const mediumContext = medium.getContext("2d"), mediumTexture = mediumGround.getContext("2d");
+            mediumContext.imageSmoothingQuality = mediumTexture.imageSmoothingQuality = "high";
+            const grounds = rendering.grounds.map(pixels => {
+              if (!pixels) return null;
+              const surface = new OffscreenCanvas(384, 384);
+              surface.getContext("2d").putImageData(new ImageData(pixels, 384, 384), 0, 0);
+              return surface;
             });
-          } finally {
-            for (const worker of workers) worker.terminate();
-            URL.revokeObjectURL(url);
+            for (let y = 0; y < 320; y++) for (let x = 0; x < 320; x++) {
+              const type = rendering.types[y * 320 + x], color = rendering.colors[type];
+              mediumContext.fillStyle = mediumTexture.fillStyle = "rgb(" + color.join(",") + ")";
+              mediumContext.fillRect(x * 16, y * 16, 16, 16);
+              mediumTexture.fillRect(x * 16, y * 16, 16, 16);
+              if (grounds[type]) mediumTexture.drawImage(grounds[type], x % 4 * 96, y % 4 * 96, 96, 96, x * 16, y * 16, 16, 16);
+            }
+            const program = createTerrainSamples.toString() + "\n" + createTerrainPatch.toString() +
+              "\n(" + buildTerrainAtlas.toString() + ")();";
+            const url = URL.createObjectURL(new Blob([program], { type: "text/javascript" }));
+            const workers = [];
+            let next = 0, completed = 0;
+            try {
+              await new Promise((resolve, reject) => {
+                if (!edges.length) { resolve(); return; }
+                function dispatch(worker) {
+                  if (next >= edges.length) return;
+                  const start = next;
+                  next += 1024;
+                  worker.postMessage({ rendering, start, indices: edges.slice(start, start + 1024) });
+                }
+                const count = Math.min(Math.ceil(edges.length / 1024), 4, Math.max(1, (navigator.hardwareConcurrency || 2) - 1));
+                for (let index = 0; index < count; index++) {
+                  const worker = new Worker(url);
+                  workers.push(worker);
+                  worker.onerror = event => reject(new Error(event.message));
+                  worker.onmessage = event => {
+                    const message = event.data;
+                    if (message.error) { reject(new Error(message.error)); return; }
+                    const resolution = rendering.resolution;
+                    for (let offset = 0; offset < message.indices.length; offset++) {
+                      const cell = message.indices[offset], x = cell % 320 * 16, y = Math.floor(cell / 320) * 16;
+                      const sx = offset % 32 * resolution, sy = Math.floor(offset / 32) * resolution;
+                      mediumContext.drawImage(message.surface, sx, sy, resolution, resolution, x, y, 16, 16);
+                      mediumTexture.drawImage(message.ground, sx, sy, resolution, resolution, x, y, 16, 16);
+                    }
+                    completed += message.indices.length;
+                    const record = { type: "atlas", start: message.start, indices: message.indices,
+                      progress: completed / edges.length, surface: message.surfaceBlob, ground: message.groundBlob };
+                    records.push(record);
+                    postMessage({ ...record, surface: message.surface, ground: message.ground }, [message.surface, message.ground]);
+                    if (completed === edges.length) resolve();
+                    else dispatch(worker);
+                  };
+                  dispatch(worker);
+                }
+              });
+            } finally {
+              for (const worker of workers) worker.terminate();
+              URL.revokeObjectURL(url);
+            }
+            await emitRegions("medium", { surface: mediumContext, ground: mediumTexture });
+          } else {
+            for (const record of cached?.records || []) if (record) records[record.index] = record;
+            const missing = [];
+            postMessage({ type: "status", cached: true });
+            for (let start = 0; start < data.regions.length; start += 8) {
+              await Promise.all(data.regions.slice(start, start + 8).map(async region => {
+                const record = records[region.index];
+                if (record?.key === region.key && record.image instanceof Blob) {
+                  try {
+                    const image = await createImageBitmap(record.image);
+                    postMessage({ ...record, image }, [image]);
+                    return;
+                  } catch {}
+                }
+                missing.push(region);
+              }));
+            }
+            cachedImages = missing.length === 0;
+            if (missing.length) postMessage({ type: "status", cached: false });
+            for (let start = 0; start < missing.length; start += 8) {
+              await Promise.all(missing.slice(start, start + 8).map(async region => {
+                const surface = new OffscreenCanvas(256, 256);
+                const context = surface.getContext("2d");
+                context.translate(-(region.index % 20) * 256, -Math.floor(region.index / 20) * 256);
+                context.imageSmoothingEnabled = true;
+                context.imageSmoothingQuality = "high";
+                for (const tree of region.trees) drawForestTree(context, tree, data.sprite, 16);
+                await emit({ type: "forest", index: region.index, key: region.key }, { image: surface });
+              }));
+            }
           }
-          await emitRegions("medium", { surface: mediumContext, ground: mediumTexture });
-          const trees = new OffscreenCanvas(5120, 5120);
-          const context = trees.getContext("2d");
-          context.imageSmoothingEnabled = true;
-          context.imageSmoothingQuality = "high";
-          for (const tree of data.trees) drawForestTree(context, tree, data.sprite, 16);
-          await emitRegions("forest", { image: context });
-          data.sprite.close();
           if (database) {
             try {
-              await transaction("readwrite", store => store.put({ key: data.key, savedAt: Date.now(), records }));
-              const maps = await transaction("readonly", store => store.getAll());
+              await transaction("readwrite", store => store.put({ key: data.key, layer: data.layer, savedAt: Date.now(), records: records.filter(Boolean) }));
+              const maps = (await transaction("readonly", store => store.getAll())).filter(map => map.layer === data.layer);
               maps.sort((a, b) => b.savedAt - a.savedAt);
               for (const map of maps.slice(2)) await transaction("readwrite", store => store.delete(map.key));
             } catch {}
           }
-          postMessage({ type: "done", cached: false });
+          postMessage({ type: "done", cached: cachedImages, key: data.key });
         } catch (error) { postMessage({ type: "error", message: error.message }); }
-        finally { database?.close(); }
+        finally { data.sprite?.close(); database?.close(); }
       };
     }
 
@@ -954,10 +998,37 @@
       context.getImageData(0, 0, 1, 1);
     }
 
+    function forestTreeRegions(tree) {
+      const regions = [];
+      const left = Math.max(0, Math.floor((tree.x - tree.height / 2) / 16));
+      const right = Math.min(19, Math.ceil((tree.x + tree.height / 2) / 16) - 1);
+      const top = Math.max(0, Math.floor((tree.y - tree.height * 0.94) / 16));
+      const bottom = Math.min(19, Math.ceil((tree.y + tree.height * 0.06) / 16) - 1);
+      for (let row = top; row <= bottom; row++) for (let column = left; column <= right; column++) regions.push(row * 20 + column);
+      return regions;
+    }
+
+    function forestRegionKey(trees, seed) {
+      let key = seed >>> 0;
+      for (const tree of trees) key = Math.imul(key ^ (tree.row * WORLD_SIZE + tree.column), 16777619) >>> 0;
+      return seed + ":" + trees.length + ":" + key;
+    }
+
+    function forestImageRegions(trees, seed) {
+      const regions = Array.from({ length: 400 }, (value, index) => ({ index, trees: [] }));
+      for (const tree of trees) for (const index of forestTreeRegions(tree)) regions[index].trees.push(tree);
+      for (const region of regions) region.key = forestRegionKey(region.trees, seed);
+      return regions;
+    }
+
     async function prepareWorldRendering(world, colonies) {
       terrainRendering.ready = false;
+      await forest.cacheWrite;
+      forest.seed = world.seed;
+      forest.colonies = colonies;
       updateRoomCreationProgress(40);
       worldMap.terrain = Uint8Array.from(world.terrain);
+      worldMap.generationVersion = world.generationVersion;
       worldMap.hazards = Uint8Array.from(world.hazards || []);
       worldMap.burrows = world.burrows || [];
       worldMap.treeCells = world.treeCells ? Uint8Array.from(world.treeCells) : null;
@@ -965,63 +1036,83 @@
       updateHazards(world.seed);
       let key = world.seed >>> 0;
       for (const type of worldMap.terrain) key = Math.imul(key ^ type, 16777619) >>> 0;
-      for (const hazard of worldMap.hazards) key = Math.imul(key ^ hazard, 16777619) >>> 0;
-      for (const [x, y] of world.resourceCells || []) key = Math.imul(key ^ (y * WORLD_SIZE + x), 16777619) >>> 0;
-      for (const colony of colonies) key = Math.imul(key ^ (colony.y * WORLD_SIZE + colony.x), 16777619) >>> 0;
-      if (terrainRendering.key === key && terrainRendering.overview && terrainRendering.forest.size === 400) {
+      const trees = forest.trees.filter(tree => !colonies.some(colony => {
+        return tree.column >= colony.x && tree.column < colony.x + COLONY_SIZE &&
+          tree.row >= colony.y && tree.row < colony.y + COLONY_SIZE;
+      }));
+      const regions = forestImageRegions(trees, world.seed);
+      const changedRegions = regions.filter(region => terrainRendering.forestKeys.get(region.index) !== region.key ||
+        !terrainRendering.forest.has(region.index));
+      const terrainReady = terrainRendering.key === key && terrainRendering.overview && terrainRendering.medium.size === 400;
+      const forestReady = changedRegions.length === 0;
+      if (terrainReady && forestReady) {
         terrainRendering.ready = true;
         updateRoomCreationProgress(100);
         return;
       }
-      updateRoomCreationProgress(45);
-      setEvolutionText(welcomeStatus, "고정 지형 이미지 준비 중…");
-      await Promise.all([grassGround, forest.sprite, ...Object.values(terrainGrounds)].map(image => image.decode()));
-      updateTerrainRendering(world.seed);
-      const grounds = TERRAIN_TYPES.map((type, index) => terrainGroundPixels(index === 5 ? 4 : index));
-      if (forest.bitmap) forest.bitmap.close();
-      forest.bitmap = await createImageBitmap(forest.sprite);
-      const sprite = await createImageBitmap(forest.bitmap);
+      setEvolutionText(welcomeStatus, (terrainReady ? "숲" : "고정 지형") + " 이미지 불러오는 중…");
+      const images = [...(terrainReady ? [] : [grassGround, ...Object.values(terrainGrounds)]), ...(forestReady ? [] : [forest.sprite])];
+      await Promise.all(images.map(image => image.decode()));
       const url = URL.createObjectURL(new Blob([terrainWorkerSource], { type: "text/javascript" }));
       const worker = new Worker(url);
-      updateRoomCreationProgress(50);
+      terrainRendering.cached = true;
       try {
-        await new Promise((resolve, reject) => {
-          worker.onerror = event => reject(new Error(event.message));
-          worker.onmessage = event => {
-            const message = event.data;
-            if (message.type === "overview") {
-              terrainRendering.overview = message.image;
-              updateRoomCreationProgress(52);
-            }
-            else if (message.type === "atlas") {
-              terrainRendering.atlases[Math.floor(message.start / 1024)] = { surface: message.surface, ground: message.ground };
-              message.indices.forEach((index, offset) => { terrainRendering.slots[index] = message.start + offset; });
-              updateRoomCreationProgress(52 + message.progress * 28);
-              setEvolutionText(welcomeStatus, "고정 지형 이미지 준비 중… " + Math.floor(message.progress * 100) + "%");
-            } else if (message.type === "medium") {
-              terrainRendering.medium.set(message.index, { surface: message.surface, ground: message.ground });
-              updateRoomCreationProgress(80 + terrainRendering.medium.size / 400 * 10);
-            } else if (message.type === "forest") {
-              terrainRendering.forest.set(message.index, message.image);
-              updateRoomCreationProgress(90 + terrainRendering.forest.size / 400 * 9);
-            } else if (message.type === "done") {
-              terrainRendering.cached = message.cached;
-              updateRoomCreationProgress(100);
-              resolve();
-            }
-            else if (message.type === "error") reject(new Error(message.message));
-          };
-          worker.postMessage({ key: "terrain-64-v1:" + world.seed + ":" + key, rendering: { types: terrainRendering.types, edges: terrainRendering.edges,
-            colors: terrainRendering.colors, grounds, phase: terrainRendering.phase, resolution: terrainRendering.resolution },
-            trees: forest.trees.filter(tree => !colonies.some(colony => {
-              const radius = tree.height * 0.4;
-              return tree.x + radius > colony.x - 0.5 && tree.x - radius < colony.x + 5.5 &&
-                tree.y > colony.y - 0.5 && tree.y - tree.height * 0.94 < colony.y + 5.5;
-            })), sprite }, [sprite]);
-        });
+        for (const layer of ["terrain", "forest"]) {
+          if (layer === "terrain" ? terrainReady : forestReady) continue;
+          const label = layer === "terrain" ? "고정 지형" : "숲";
+          let action = "불러오는 중…";
+          setEvolutionText(welcomeStatus, label + " 이미지 " + action);
+          let data;
+          if (layer === "terrain") {
+            updateRoomCreationProgress(45);
+            updateTerrainRendering(world.seed);
+            const grounds = TERRAIN_TYPES.map((type, index) => terrainGroundPixels(index));
+            data = { layer, key: "terrain-64-v4:" + world.seed + ":" + key,
+              rendering: { types: terrainRendering.types, edges: terrainRendering.edges, colors: terrainRendering.colors,
+                grounds, phase: terrainRendering.phase, resolution: terrainRendering.resolution } };
+            updateRoomCreationProgress(50);
+          } else {
+            if (forest.bitmap) forest.bitmap.close();
+            forest.bitmap = await createImageBitmap(forest.sprite);
+            data = { layer, key: "forest-16-v2:" + world.seed, regions: changedRegions, sprite: await createImageBitmap(forest.bitmap) };
+            updateRoomCreationProgress(90);
+          }
+          await new Promise((resolve, reject) => {
+            worker.onerror = event => reject(new Error(event.message));
+            worker.onmessage = event => {
+              const message = event.data;
+              if (message.type === "status") {
+                action = message.cached ? "불러오는 중…" : "생성 중…";
+                setEvolutionText(welcomeStatus, label + " 이미지 " + action);
+              } else if (message.type === "overview") {
+                terrainRendering.overview = message.image;
+                updateRoomCreationProgress(52);
+              } else if (message.type === "atlas") {
+                terrainRendering.atlases[Math.floor(message.start / 1024)] = { surface: message.surface, ground: message.ground };
+                message.indices.forEach((index, offset) => { terrainRendering.slots[index] = message.start + offset; });
+                updateRoomCreationProgress(52 + message.progress * 28);
+                setEvolutionText(welcomeStatus, label + " 이미지 " + action + " " + Math.floor(message.progress * 100) + "%");
+              } else if (message.type === "medium") {
+                terrainRendering.medium.set(message.index, { surface: message.surface, ground: message.ground });
+                updateRoomCreationProgress(80 + terrainRendering.medium.size / 400 * 10);
+              } else if (message.type === "forest") {
+                terrainRendering.forest.get(message.index)?.close?.();
+                terrainRendering.forest.set(message.index, message.image);
+                terrainRendering.forestKeys.set(message.index, message.key);
+                updateRoomCreationProgress(90 + terrainRendering.forest.size / 400 * 9);
+              } else if (message.type === "done") {
+                terrainRendering.cached &&= message.cached;
+                if (layer === "forest") forest.cacheKey = message.key;
+                resolve();
+              } else if (message.type === "error") reject(new Error(message.message));
+            };
+            worker.postMessage(data, data.sprite ? [data.sprite] : []);
+          });
+          if (layer === "terrain") terrainRendering.key = key;
+        }
       } finally { worker.terminate(); URL.revokeObjectURL(url); }
-      terrainRendering.key = key;
       terrainRendering.ready = true;
+      updateRoomCreationProgress(100);
     }
 
     function revealForest(indices) {
@@ -1046,20 +1137,67 @@
       }
     }
 
+    function saveForestRegion(index, key, surface) {
+      const cacheKey = forest.cacheKey;
+      if (!cacheKey) return;
+      const image = new Promise(resolve => {
+        try { surface.toBlob(resolve, "image/png"); }
+        catch { resolve(null); }
+      });
+      forest.cacheWrite = forest.cacheWrite.then(async () => {
+        const blob = await image;
+        if (!blob) return;
+        const database = await new Promise((resolve, reject) => {
+          const request = indexedDB.open("spawner-rendering", 1);
+          request.onupgradeneeded = () => request.result.createObjectStore("maps", { keyPath: "key" });
+          request.onsuccess = () => resolve(request.result);
+          request.onerror = () => reject(request.error);
+          request.onblocked = () => reject(new Error("Cache unavailable"));
+        });
+        try {
+          await new Promise((resolve, reject) => {
+            const task = database.transaction("maps", "readwrite"), store = task.objectStore("maps");
+            const request = store.get(cacheKey);
+            request.onsuccess = () => {
+              const records = new Map((request.result?.records || []).map(record => [record.index, record]));
+              records.set(index, { type: "forest", index, key, image: blob });
+              store.put({ key: cacheKey, layer: "forest", savedAt: Date.now(), records: [...records.values()] });
+            };
+            task.oncomplete = resolve;
+            task.onabort = () => reject(task.error);
+            task.onerror = () => {};
+          });
+        } finally { database.close(); }
+      }).catch(() => {});
+    }
+
     function updateForestRegion(column, row) {
       if (!terrainRendering.forest.size || !forest.bitmap) return;
       const regionX = Math.floor(column / 16) * 16, regionY = Math.floor(row / 16) * 16;
+      const index = Math.floor(row / 16) * 20 + Math.floor(column / 16), trees = [];
       const surface = document.createElement("canvas");
       surface.width = surface.height = 256;
       const context = surface.getContext("2d");
       context.translate(-regionX * 16, -regionY * 16);
+      context.imageSmoothingEnabled = true;
+      context.imageSmoothingQuality = "high";
       for (let y = Math.max(0, regionY - 2); y < Math.min(WORLD_SIZE, regionY + 18); y++) {
         for (let x = Math.max(0, regionX - 2); x < Math.min(WORLD_SIZE, regionX + 18); x++) {
           const tree = forest.cells.get(x + "," + y);
-          if (tree && !treeOverlapsColony(tree)) drawForestTree(context, tree, forest.bitmap, 16);
+          if (!tree || treeOverlapsColony(tree) || forest.colonies.some(colony => {
+            return tree.column >= colony.x && tree.column < colony.x + COLONY_SIZE &&
+              tree.row >= colony.y && tree.row < colony.y + COLONY_SIZE;
+          }) || !forestTreeRegions(tree).includes(index)) continue;
+          trees.push(tree);
+          drawForestTree(context, tree, forest.bitmap, 16);
         }
       }
-      forest.overrides.set(Math.floor(row / 16) * 20 + Math.floor(column / 16), surface);
+      const key = forestRegionKey(trees, forest.seed);
+      terrainRendering.forest.get(index)?.close?.();
+      terrainRendering.forest.set(index, surface);
+      terrainRendering.forestKeys.set(index, key);
+      forest.overrides.delete(index);
+      saveForestRegion(index, key, surface);
     }
 
     function drawForestOverview(topLeft, bottomRight) {
@@ -1183,7 +1321,7 @@
           }
           ctx.fillStyle = TERRAIN_COLORS[terrain];
           ctx.fillRect(left, top, right - left, bottom - top);
-          const ground = terrain === "grassland" || terrain === "forest" ? grassGround : terrainGrounds[terrain];
+          const ground = terrain === "grassland" ? grassGround : terrainGrounds[terrain];
           if (cell > 18 && ground?.complete && ground.naturalWidth) {
             const sourceCell = ground.naturalWidth / 4;
             ctx.save();
@@ -1316,10 +1454,17 @@
     }
 
     function treeOverlapsColony(tree) {
-      const radius = tree.height * 0.4;
-      return colonyEntries.some(colony => tree.x + radius > colony.x - 0.5 &&
-        tree.x - radius < colony.x + 5.5 && tree.y > colony.y - 0.5 &&
-        tree.y - tree.height * 0.94 < colony.y + 5.5);
+      return colonyEntries.some(colony => tree.column >= colony.x && tree.column < colony.x + COLONY_SIZE &&
+        tree.row >= colony.y && tree.row < colony.y + COLONY_SIZE);
+    }
+
+    function drawTreeHarvest(tree) {
+      const food = foodCellMap.get(tree.column + "," + tree.row);
+      if (food?.resourceType !== "tree" || resourceNodePose(food).phase !== "harvest") return false;
+      const bounds = forest.bounds[tree.frame];
+      drawResourceNode(state.lastFrame, food, undefined, { point: worldToScreen(tree.x, tree.y),
+        size: tree.height * state.camera.zoom * (bounds.right - bounds.left) });
+      return true;
     }
 
     function drawTreeFruit(food, height) {
@@ -1333,6 +1478,7 @@
     }
 
     function drawTree(tree) {
+      if (drawTreeHarvest(tree)) return;
       if (!forest.sprite.complete || !forest.sprite.naturalWidth) return;
       const sprite = forest.bitmap || forest.sprite;
       const frameSize = sprite.height || sprite.naturalHeight;
@@ -1346,7 +1492,7 @@
       ctx.translate(point.x, point.y);
       if (tree.mirrored) ctx.scale(-1, 1);
       const sway = treeSway(tree);
-      const outlineColor = objectOutlineColor("tree", tree) || (fruit ? objectOutlineColor("food", food) : null);
+      const outlineColor = objectOutlineColor("tree", tree) || (food?.amount > 0 ? objectOutlineColor("food", food) : null);
       if (outlineColor) drawSelectionOutline(sprite,
         -height / 2, -height * 0.94, height, height,
         { owner: forest, size: frameSize, index: tree.frame, x: tree.frame * frameSize, y: 0 }, outlineColor);
@@ -1369,6 +1515,7 @@
     }
 
     function drawTreeDetail(tree) {
+      if (drawTreeHarvest(tree)) return;
       const sprite = forest.bitmap || forest.sprite, frameSize = sprite.height || sprite.naturalHeight;
       const point = worldToScreen(tree.x, tree.y), height = tree.height * state.camera.zoom;
       const food = foodCellMap.get(tree.column + "," + tree.row);
@@ -1457,7 +1604,7 @@
         objects.push({ kind: "agent", depth: entry ? Math.max(depth, entry.y + 3.31) : depth, target: agent });
       }
       for (const food of resourceNodeCells()) {
-        if (food.kind === "corpse" || Spawner.isTreeFood(food, worldMap) ||
+        if (food.kind === "corpse" || food.resourceType === "tree" || Spawner.isTreeFood(food, worldMap) ||
           food.x < topLeft.x - 1 || food.x > bottomRight.x + 1 ||
           food.y < topLeft.y - 1 || food.y > bottomRight.y + 1 || !resourceNodePose(food).visible) continue;
         objects.push({ kind: "food", depth: food.y + 0.92, target: food });
@@ -1689,10 +1836,11 @@
 
     function selectObject(kind, target) {
       state.selection = target ? { kind, target } : null;
+      if (kind !== "colony" || target?.id !== connection.colonyId) colonyMenu.hidden = true;
+      selectionTerrain.hidden = !selectionTerrainCell() || kind === "terrain" || kind === "hazard";
       state.camera.followAgentId = kind === "agent" && target ? target.id : null;
       if (state.camera.followAgentId !== null) focusAgent(target);
       else if (cameraTransition?.agentId != null) stopCameraTransition();
-      if ((kind === "agent" || kind === "corpse") && target) selectPanelTab(agentTab);
       for (const item of colonyList.children) {
         if (item.dataset.colonyId) {
           item.setAttribute("aria-current", String(kind === "colony" &&
@@ -1703,9 +1851,11 @@
     }
 
     function updateSelection() {
+      selectionTerrain.hidden = !selectionTerrainCell() || state.selection?.kind === "terrain" || state.selection?.kind === "hazard";
       const selection = state.selection;
       if (!selection) return;
-      const exists = selection.kind === "agent" ? state.agents.includes(selection.target) :
+      const exists = selection.kind === "terrain" ? !!selectionTerrainCell() :
+        selection.kind === "agent" ? state.agents.includes(selection.target) :
         selection.kind === "colony" ? colonyEntries.includes(selection.target) :
         selection.kind === "tree" ? forest.cells.get(selection.target.column + "," + selection.target.row) === selection.target :
         selection.kind === "hazard" ? hazardCells[selection.target.row * WORLD_SIZE + selection.target.column] === selection.target :
@@ -2050,6 +2200,12 @@
             size: animation.frameSize, index, owner: animation
           };
           sprite = animation.sheet;
+          if (animation.placement) {
+            x += width * animation.placement.x;
+            y += height * animation.placement.y;
+            width *= animation.placement.width;
+            height *= animation.placement.height;
+          }
         }
       }
       if (outlineColor && animation !== foodIdle) drawSelectionOutline(sprite, x, y, width, height, frame, outlineColor);
@@ -2203,14 +2359,16 @@
           harvestDisplay.cells.get(key).push(agent);
         }
       }
-      const key = cell.x + "," + cell.y;
+      const key = cell.key || cell.x + "," + cell.y;
       if (harvestDisplay.poses.has(key)) return harvestDisplay.poses.get(key);
       const type = Spawner.resourceTypeForCell(cell, worldMap);
       const animation = resourceHarvestSprites.get(type);
-      const pose = Spawner.harvestPlaybackPose(harvestPlayback, { ...cell, resourceType: type },
-        harvestDisplay.cells.get(key) || [], state.simSeconds,
-        { ...animation, harvestSeconds: Spawner.resourceDefinition(type).harvestSeconds });
-      if (idleMotion.matches) {
+      const pose = animation ? Spawner.harvestPlaybackPose(harvestPlayback, { ...cell, resourceType: type },
+        harvestDisplay.cells.get(cell.x + "," + cell.y) || [], state.simSeconds,
+        { ...animation, harvestSeconds: Spawner.resourceHarvestSeconds(type, worldMap) }) :
+        { frame: 0, progress: 0, phase: "idle", opacity: cell.amount > 0 ? 1 : 0,
+          remaining: Math.max(0, cell.amount), visible: cell.amount > 0 };
+      if (animation && idleMotion.matches) {
         const effect = harvestPlayback.effects.get(key);
         pose.frame = cell.amount > 0 && effect?.resourceType === type && cell.amount <= effect.remaining ? animation.settleFrame : 0;
         pose.visible = cell.amount > 0;
@@ -2220,19 +2378,21 @@
       return pose;
     }
 
-    function drawResourceNode(now, cell, harvestStarted) {
+    function drawResourceNode(now, cell, harvestStarted, placement) {
       const type = Spawner.resourceTypeForCell(cell, worldMap);
       const animation = resourceHarvestSprites.get(type);
       const pose = resourceNodePose(cell);
-      const sprite = animation?.frames.get(pose.frame) || animation?.sprite;
+      const sprite = animation?.frames.get(pose.frame) || animation?.sprite || resourceSprites.get(type);
       if (!pose.visible || !sprite || sprite.complete === false || !(sprite.naturalWidth || sprite.width)) return;
-      const point = worldToScreen(cell.x + 0.5, cell.y + 0.92);
-      const size = state.camera.zoom * 0.86;
-      const scale = size / animation.viewSize;
-      const sourceX = sprite === animation.sprite ? pose.frame % animation.columns * animation.frameSize : 0;
-      const sourceY = sprite === animation.sprite ? Math.floor(pose.frame / animation.columns) * animation.frameSize : 0;
-      const width = animation.frameSize * scale;
-      const x = -animation.pivotX * scale, y = -animation.pivotY * scale;
+      const point = placement?.point || worldToScreen(cell.x + 0.5, cell.y + 0.92);
+      const size = placement?.size || state.camera.zoom * 0.86;
+      const scale = size / (animation?.viewSize || sprite.naturalWidth);
+      const sourceX = animation && sprite === animation.sprite ? pose.frame % animation.columns * animation.frameSize : 0;
+      const sourceY = animation && sprite === animation.sprite ? Math.floor(pose.frame / animation.columns) * animation.frameSize : 0;
+      const width = (animation?.frameSize || sprite.naturalWidth) * scale;
+      const height = (animation?.frameSize || sprite.naturalHeight) * scale;
+      const x = animation ? -animation.pivotX * scale : -width / 2;
+      const y = animation ? -animation.pivotY * scale : -height;
       ctx.save();
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = "high";
@@ -2244,9 +2404,10 @@
       }
       ctx.translate(point.x, point.y);
       const outline = objectOutlineColor(cell.kind === "corpse" ? "corpse" : "food", cell);
-      ctx.drawImage(sprite, sourceX, sourceY, animation.frameSize, animation.frameSize, x, y, width, width);
-      if (outline) drawSelectionOutline(sprite, x, y, width, width,
-        { owner: animation, size: animation.frameSize, index: pose.frame, x: sourceX, y: sourceY }, outline);
+      ctx.drawImage(sprite, sourceX, sourceY, animation?.frameSize || sprite.naturalWidth,
+        animation?.frameSize || sprite.naturalHeight, x, y, width, height);
+      if (outline) drawSelectionOutline(sprite, x, y, width, height,
+        animation ? { owner: animation, size: animation.frameSize, index: pose.frame, x: sourceX, y: sourceY } : null, outline);
       ctx.restore();
     }
 
@@ -2256,7 +2417,7 @@
         return;
       }
       const cell = state.camera.zoom;
-      if (foodCell.amount <= 0 || Spawner.isTreeFood(foodCell, worldMap)) return;
+      if (foodCell.amount <= 0 || foodCell.resourceType === "tree" || Spawner.isTreeFood(foodCell, worldMap)) return;
       const screen = worldToScreen(foodCell.x, foodCell.y);
       const remainingRatio = clamp(foodCell.amount / (foodCell.initialAmount || FOOD_PER_CELL), 0, 1);
       const spriteReady = foodMushroomHarvest.sheet.complete && foodMushroomHarvest.sheet.naturalWidth > 0;
@@ -2286,7 +2447,7 @@
 
     function drawFoodStatus() {
       const selectedTree = state.selection?.kind === "tree" ? state.selection.target : null;
-      const food = selectedTree ? { x: selectedTree.column, y: selectedTree.row, resourceType: "tree" } :
+      const food = selectedTree ? foodCellMap.get(selectedTree.column + "," + selectedTree.row) || { x: selectedTree.column, y: selectedTree.row, resourceType: "tree", amount: 0 } :
         state.selection?.kind === "food" ? state.selection.target : null;
       if (!food) return;
       const treeFood = Spawner.isTreeFood(food, worldMap);
@@ -2300,7 +2461,7 @@
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       const definition = Spawner.resourceDefinition(Spawner.resourceTypeForCell(food, worldMap));
-      const required = Spawner.resourceHarvestRequirements(food, worldMap);
+      const required = Spawner.resourceHarvestRequirements(food, worldMap, colonyEntries.find(colony => colony.id === connection.colonyId)?.tribe);
       const requirement = required && ATTRIBUTES.filter(attribute => required[attribute.key] > 0)
         .map(attribute => attribute.name + (required[attribute.key] > 1 ? "×" + required[attribute.key] : "")).join(" + ");
       const label = [definition.name + (definition.harvestLocked ? "" : " · " + Math.ceil(food.amount) + "개"),
@@ -2571,8 +2732,7 @@
         audio.play(event.name, audioVolume(position.x + .5, position.y + .5));
       }
       const agents = new Set();
-      let harvesting = 0;
-      let soilHarvesting = 0;
+      const harvesting = new Map();
       for (const source of [...state.agents, ...state.rivals]) {
         const agent = displayedAgent(source);
         if (agent.species === "spiny-back-beetle" || agent.health <= 0) continue;
@@ -2611,23 +2771,31 @@
               audio.play("seed-eject", mouth ? audioVolume(mouth.x, mouth.y) : volume);
             }
             if (birth.fractureAge >= 0 && previous.fractureAge < 0) audio.play("seed-crack", volume);
-            if (birth.unitVisible && !previous.unitVisible) audio.play("sprout-pop", volume);
+            if (birth.unitVisible && !previous.unitVisible) audio.play(agent.tribe === "spore" ? "spore-birth" : "sprout-pop", volume);
           }
           agentAudio.set(agent.id, { birthStartedAt: agent.birth.startedAt, seedVisible: birth.seedVisible,
             fractureAge: birth.fractureAge, unitVisible: birth.unitVisible });
           continue;
         }
-        if (isHarvestingFood(agent)) {
-          const type = Spawner.resourceTypeForCell(foodCellAt(agent.x, agent.y), worldMap);
-          if (type === "clay") soilHarvesting = Math.max(soilHarvesting, volume);
-          else harvesting = Math.max(harvesting, volume);
+        if (agent.mode === "harvest") {
+          const remembered = foodCellMap.get(agent.rememberedFoodKey);
+          const food = remembered?.x === agent.x && remembered.y === agent.y ? remembered : foodCellAt(agent.x, agent.y);
+          if (food?.amount > 0) {
+            const type = Spawner.resourceTypeForCell(food, worldMap);
+            if (!(agent.carrying > 0) || !agent.carryingType || agent.carryingType === type)
+              harvesting.set(type, Math.max(harvesting.get(type) || 0, volume));
+          }
         }
         const end = agent.moveStartedAt + agent.moveDuration;
         const step = agent.moveStartedAt + ":" + agent.stepCount;
         let previous = agentAudio.get(agent.id);
         const appearance = agent.appearanceAttributes || agent.attributes;
-        const footstepSound = agent.tribe === "spring" ? "spring-footstep" : "footstep";
-        const landingSound = agent.tribe === "spring" ? "spring-landing" : "landing";
+        if (["spore", "pebble", "spring"].includes(agent.tribe)) {
+          agentAudio.delete(agent.id);
+          continue;
+        }
+        const footstepSound = "footstep";
+        const landingSound = "landing";
         if (appearance.feet) {
           const progress = agent.moveDuration ? clamp((time - agent.moveStartedAt) / agent.moveDuration, 0, 1) : 0;
           const contact = Math.min(AGENT_FOOTSTEPS_PER_CELL, Math.floor(progress * AGENT_FOOTSTEPS_PER_CELL + 1e-7));
@@ -2656,7 +2824,7 @@
         }
       }
       for (const id of agentAudio.keys()) if (!agents.has(id)) agentAudio.delete(id);
-      audio.setHarvest(harvesting, soilHarvesting);
+      audio.setHarvest(harvesting);
       const deliveries = new Set();
       for (const delivery of foodDeliveries.values()) {
         const key = delivery.agentId + ":" + delivery.startedAt;
@@ -2691,6 +2859,15 @@
       return food?.amount > 0 && food.kind !== "corpse" && !Spawner.isTreeFood(food, worldMap);
     }
 
+    function agentCombatPlacement(agent) {
+      const layout = agentCombatLayout;
+      if (layout.time !== state.simSeconds || layout.agents !== state.agents || layout.rivals !== state.rivals) {
+        layout.time = state.simSeconds; layout.agents = state.agents; layout.rivals = state.rivals;
+        layout.placements = Spawner.combatLayout([...state.agents, ...state.rivals].map(displayedAgent));
+      }
+      return layout.placements.get(String(agent.id));
+    }
+
     function agentDeliveryOffset(agent) {
       const returning = agent.mode === "unload" || agent.mode === "return" && agent.carrying > 0;
       const delivery = agent.foodDelivery;
@@ -2708,6 +2885,8 @@
     }
 
     function agentDisplayOffset(agent) {
+      const combat = agentCombatPlacement(agent);
+      if (combat) return combat;
       const layout = agentDisplayLayout;
       if (layout.time !== state.simSeconds || layout.agents !== state.agents || layout.rivals !== state.rivals) {
         layout.time = state.simSeconds;
@@ -2831,9 +3010,10 @@
         1
       ) : 1;
       const appearance = agent.appearanceAttributes || agent.attributes;
-      const progress = agent.species === "spiny-back-beetle" || appearance.feet || idleMotion.matches ? rawProgress :
+      const grounded = agent.species === "spiny-back-beetle" || appearance.feet || ["spore", "pebble", "spring"].includes(agent.tribe);
+      const progress = grounded || idleMotion.matches ? rawProgress :
         clamp((rawProgress - AGENT_JUMP_PREPARATION) / (1 - AGENT_JUMP_PREPARATION), 0, 1);
-      const smoothProgress = agent.species === "spiny-back-beetle" || appearance.feet ? progress : progress * progress * (3 - 2 * progress);
+      const smoothProgress = grounded ? progress : progress * progress * (3 - 2 * progress);
       return {
         x: agent.moveDuration ? agent.renderFromX + (agent.x - agent.renderFromX) * smoothProgress : agent.x,
         y: agent.moveDuration ? agent.renderFromY + (agent.y - agent.renderFromY) * smoothProgress : agent.y,
@@ -2919,11 +3099,7 @@
       ctx.fill();
       ctx.restore();
       drawBeetleFrame(index, agent.facing, centerX, topLeft.y + cell * 0.86, cell, outlineColor);
-      if (agent.health <= 0) return;
-      ctx.fillStyle = "#101719";
-      ctx.fillRect(centerX - cell * 0.3, topLeft.y - cell * 0.08, cell * 0.6, Math.max(2, cell * 0.035));
-      ctx.fillStyle = "#e29b91";
-      ctx.fillRect(centerX - cell * 0.3, topLeft.y - cell * 0.08, cell * 0.6 * Math.max(0, agent.health / agent.stats.health), Math.max(2, cell * 0.035));
+
     }
 
     function syncFoodDeliveries(packet, firstSnapshot) {
@@ -2960,12 +3136,13 @@
 
     function foodCarryPlacement(appearance, resourceType) {
       const strength = appearance.strength ?? appearance.arms ?? 0;
-      const width = (strength ? 0.52 : 0.4) * 0.7;
-      const height = width;
-      if (!strength) return { x: AGENT_HEIGHT * 0.4, y: -AGENT_HEIGHT * 0.3, width, height };
+      const crop = resourceCarryBounds.get(resourceType);
+      const scale = Math.min((strength ? 0.32 : 0.24) * AGENT_HEIGHT / crop.width,
+        (strength ? 0.36 : 0.28) * AGENT_HEIGHT / crop.height);
+      const width = crop.width * scale, height = crop.height * scale;
       const lift = appearance.feet ? 24 + appearance.feet * 7 : 0;
-      const tray = (460 - lift - (142 + (strength - 1) * 12) * 0.78 * 0.48) / 512;
-      return { x: 0, y: (tray - 0.94) * AGENT_HEIGHT - height * 0.44, width, height };
+      const tray = (460 - lift - (142 + Math.max(0, strength - 1) * 12) * 0.78 * 0.48) / 512;
+      return { x: 0, y: (tray - 0.94) * AGENT_HEIGHT, width, height, crop, pivotY: 1 };
     }
 
     function colonyBirthOutlet(entry) {
@@ -3062,21 +3239,24 @@
           const agent = state.agents.find(candidate => candidate.id === id) || state.rivals.find(candidate => candidate.id === id);
           const source = agent || { id };
           const type = delivery.resourceType || "honey-mushrooms";
-          const sprite = type === "honey-mushrooms" ? carriedFoodSprite : type === "clay" ? carriedSoilSprite : resourceSprites.get(type);
+          const sprite = resourceCarrySprites.get(type);
           const placement = foodCarryPlacement(source.appearanceAttributes || source.attributes || {}, type);
+          const renderScale = Math.max(cell, 6 / Math.max(placement.width, placement.height));
           const release = agentBodyPose(source, now - sinceRelease * 1000, foodDeliveryPoseAt(0.24));
           const bodyOffset = AGENT_HEIGHT * (release.pivot - 0.94);
           const offset = agentDisplayOffset(source);
           const start = worldToScreen(delivery.x + offset.x + placement.x * release.scaleX,
             delivery.y + offset.y + AGENT_HEIGHT * 0.44 + bodyOffset + (placement.y - bodyOffset) * release.scaleY);
+          start.y -= placement.height * renderScale * (placement.pivotY - 0.5);
           const arc = cell * Math.max(1.1, Math.hypot(target.x - delivery.x, target.y - delivery.y) * 0.45);
           const x = start.x + (end.x - start.x) * flight;
           const y = start.y + (end.y - start.y) * flight - 4 * arc * flight * (1 - flight);
           const scale = 1 + Math.sin(Math.min(1, flight / 0.3) * Math.PI / 2) * 0.65;
-          const width = Math.max(6, cell * placement.width) * scale, height = width * placement.height / placement.width;
+          const width = placement.width * renderScale * scale, height = placement.height * renderScale * scale;
           ctx.translate(x, y);
           ctx.rotate(flight * Math.PI * 0.65 * Math.sign(end.x - start.x || 1));
-          if (sprite?.complete && sprite.naturalWidth > 0) ctx.drawImage(sprite, -width / 2, -height / 2, width, height);
+          if (sprite?.complete && sprite.naturalWidth > 0) ctx.drawImage(sprite,
+            placement.crop.x, placement.crop.y, placement.crop.width, placement.crop.height, -width / 2, -height / 2, width, height);
           else { ctx.fillStyle = "#bacb78"; ctx.fillRect(-width / 2, -height / 2, width, height); }
         } else {
           const age = (now - delivery.receivedAtFrame) / 1100;
@@ -3086,7 +3266,7 @@
           const y = worldToScreen(target.x, target.top).y - Math.max(48, cell * 0.4) - icon * 0.25 - rise * cell * 0.8;
           ctx.globalAlpha = clamp((1 - age) / 0.3, 0, 1);
           const type = delivery.resourceType || "honey-mushrooms";
-          if (!Spawner.isTribeFood(type, entry.tribe)) {
+          if (!Spawner.isTribeFood(type, entry.tribe, worldMap.generationVersion)) {
             const sprite = resourceSprites.get(type);
             if (sprite?.complete && sprite.naturalWidth) ctx.drawImage(sprite, end.x - icon, y - icon / 2, icon, icon);
             ctx.fillStyle = "#e6edce";
@@ -3185,7 +3365,7 @@
       const launch = agent.moveDuration ? clamp(elapsed /
         (agent.moveDuration * AGENT_JUMP_PREPARATION), 0, 1) : 0;
       const landing = clamp((elapsed - (agent.moveDuration || 0) - 0.04) / 0.22, 0, 1);
-      const extension = appearance.feet || idleMotion.matches ? 0 :
+      const extension = appearance.feet || ["spore", "pebble", "spring"].includes(agent.tribe) || idleMotion.matches ? 0 :
         launch * launch * (3 - 2 * launch) * (1 - landing * landing * (3 - 2 * landing));
       const stretch = extension * 0.24;
       const bob = agentWalkPose(agent) ? 0 : agentBobOffset(agent, now) * (1 - extension);
@@ -3333,6 +3513,15 @@
       if (outlineColor) drawSelectionOutline(pebbleBirthSheet, x, y, size, size,
         { owner: animation, size: animation.frameSize, index: birth.frame, x: sourceX, y: sourceY }, outlineColor);
       ctx.drawImage(pebbleBirthSheet, sourceX, sourceY, animation.frameSize, animation.frameSize, x, y, size, size);
+      const entry = colonyEntries.find(value => value.id === agent.birth.colonyId);
+      if (entry && pebbleBirthForeground.complete && pebbleBirthForeground.naturalWidth) {
+        const appearance = colonyAppearance(entry);
+        const origin = worldToScreen(entry.x, entry.y);
+        const center = worldToScreen(entry.x + 2.5, entry.y + 2.5);
+        const nestSize = COLONY_SIZE * cell * appearance.scale;
+        ctx.drawImage(pebbleBirthForeground, origin.x + (COLONY_SIZE * cell - nestSize) / 2,
+          center.y - nestSize * appearance.centerY, nestSize, nestSize);
+      }
       ctx.restore();
     }
 
@@ -3391,28 +3580,51 @@
       ctx.restore();
     }
 
-    function drawAgentAttack(ctx, agent, centerX, footY, height, outlineColor) {
-      if (agent.tribe && agent.tribe !== "bean") return false;
-      const appearance = agent.appearanceAttributes || agent.attributes;
-      if (Object.values(appearance).some(count => count > 0)) return false;
-      const index = agentAttackFrame(agent.attack, state.simSeconds);
-      if (index < 0 || !attackSheet.complete || !attackSheet.naturalWidth) return false;
-      if (!attackSprites.has(index)) {
-        const sprite = document.createElement("canvas");
-        sprite.width = 512;
-        sprite.height = 512;
-        sprite.getContext("2d").drawImage(attackSheet, index % 4 * 512, Math.floor(index / 4) * 512,
-          512, 512, 0, 0, 512, 512);
-        attackSprites.set(index, sprite);
-        agentSpriteSet.add(sprite);
+    async function prepareAgentMovement(tribe) {
+      const unit = await tribeArt.prepareUnit(tribe);
+      const animation = agentMovementSheets.get(tribe.key);
+      if (animation) {
+        await animation.sprite.decode();
+        animation.scale = Math.min(unit.box.width / animation.width, unit.box.height / animation.height);
       }
-      const sprite = attackSprites.get(index);
+      return unit;
+    }
+
+    function drawAgentMovement(ctx, agent, centerX, footY, height, outlineColor) {
+      const animation = agentMovementSheets.get(agent.tribe);
+      const elapsed = state.simSeconds - agent.moveStartedAt;
+      if (!animation || !agent.moveDuration || elapsed < 0 || elapsed >= agent.moveDuration ||
+        !animation.sprite.complete || !animation.sprite.naturalWidth) return false;
+      const progress = elapsed / agent.moveDuration;
+      const index = idleMotion.matches ? 0 : Math.floor((agent.stepCount - 1 + progress) * 16) % 16;
+      const sprite = animation.sprite;
+      const size = height * animation.scale;
+      const frame = { owner: sprite, size: 512, index, x: index % 4 * 512, y: Math.floor(index / 4) * 512 };
+      ctx.save();
+      ctx.translate(centerX, footY);
+      ctx.scale(agent.facing < 0 ? -1 : 1, 1);
+      if (outlineColor) drawSelectionOutline(sprite, -size / 2, -size * 448 / 512, size, size, frame, outlineColor);
+      ctx.drawImage(sprite, frame.x, frame.y, 512, 512, -size / 2, -size * 448 / 512, size, size);
+      ctx.restore();
+      return true;
+    }
+
+    function drawAgentAttack(ctx, agent, centerX, footY, height, outlineColor) {
+      const appearance = agent.appearanceAttributes || agent.attributes || {};
+      if (["strength", "feet", "antenna", "lifespan"].some(key => appearance[key] > 0)) return false;
+      const attackFrame = agentAttackFrame(agent.attack, state.simSeconds);
+      const hurtFrame = Spawner.combatHurtFrame(agent, state.simSeconds);
+      const action = attackFrame >= 0 ? "attack" : "hurt";
+      const index = attackFrame >= 0 ? attackFrame : hurtFrame;
+      const sprite = combatSheets.get(agent.tribe || "bean")?.[action];
+      if (index < 0 || !sprite?.complete || !sprite.naturalWidth) return false;
       const size = height * .94;
+      const frame = { owner: sprite, size: 512, index, x: index % 4 * 512, y: Math.floor(index / 4) * 512 };
       ctx.save();
       ctx.translate(centerX, footY - height * .054);
-      ctx.scale(agent.attack.directionX, 1);
-      if (outlineColor) drawSelectionOutline(sprite, -size / 2, -size * 448 / 512, size, size, null, outlineColor);
-      ctx.drawImage(sprite, -size / 2, -size * 448 / 512, size, size);
+      ctx.scale(agent.combat ? agent.combat.side === 0 ? 1 : -1 : agent.attack?.directionX || agent.facing || 1, 1);
+      if (outlineColor) drawSelectionOutline(sprite, -size / 2, -size * 448 / 512, size, size, frame, outlineColor);
+      ctx.drawImage(sprite, frame.x, frame.y, 512, 512, -size / 2, -size * 448 / 512, size, size);
       ctx.restore();
       return true;
     }
@@ -3421,14 +3633,14 @@
       const cell = state.camera.zoom;
       for (const agent of [...state.agents, ...state.rivals]) {
         const attack = agent.attack;
-        if (!attack || attack.resolved && !attack.hit) continue;
+        if (!attack || !attack.resolved || !attack.hit) continue;
         const age = (state.simSeconds - attack.hitAt) * attack.speed;
         if (age < 0 || age >= .18) continue;
         const target = [...state.agents, ...state.rivals].find(candidate => candidate.id === attack.targetId);
         const position = target ? interpolatedAgentPosition(target) : { x: attack.targetX, y: attack.targetY };
         const point = worldToScreen(position.x + .5, position.y + .5);
         const progress = age / .18;
-        const radius = Math.max(3, cell * (.10 + progress * .10));
+        const radius = Math.max(2, cell * (.10 + progress * .10) * (target ? agentCombatPlacement(target)?.scale || 1 : 1));
         ctx.save();
         ctx.globalAlpha = 1 - progress;
         ctx.strokeStyle = "#ffe6a0";
@@ -3445,6 +3657,25 @@
     }
 
     function drawAgent(now, agent) {
+      const placement = agentCombatPlacement(agent);
+      if (!placement || state.camera.zoom < 8) { drawAgentBody(now, agent); return; }
+      agent = displayedAgent(agent);
+      const position = interpolatedAgentPosition(agent);
+      const center = worldToScreen(position.x + .5, position.y + .5);
+      const attack = agent.attack;
+      const progress = attack ? (state.simSeconds - attack.startedAt) / (attack.endsAt - attack.startedAt) : -1;
+      const lunge = progress >= 0 && progress < 1 ? Math.sin(progress * Math.PI) * .045 * placement.facing : 0;
+      const hurt = Spawner.combatHurtFrame(agent, state.simSeconds) >= 0;
+      const shake = hurt && !idleMotion.matches ? Math.sin((state.simSeconds - agent.hurtStartedAt) * 70) * .009 : 0;
+      ctx.save();
+      ctx.translate(center.x + (lunge + shake) * state.camera.zoom, center.y);
+      ctx.scale(placement.scale, placement.scale);
+      ctx.translate(-center.x, -center.y);
+      drawAgentBody(now, agent);
+      ctx.restore();
+    }
+
+    function drawAgentBody(now, agent) {
       agent = displayedAgent(agent);
       const cell = state.camera.zoom;
       const renderPosition = interpolatedAgentPosition(agent);
@@ -3471,19 +3702,19 @@
         ctx.restore();
         return;
       }
-      const remaining = agent.bornAt + agent.lifespan - state.simSeconds;
-      if (agent.faction === "colony" && remaining > 0 && remaining <= Spawner.AGENT_DEATH_WARNING && cell >= 8) {
-        ctx.save();
-        ctx.strokeStyle = "#d4ad6c";
-        ctx.globalAlpha = idleMotion.matches ? 0.65 : 0.5 + Math.sin(now / 450) * 0.15;
-        ctx.lineWidth = Math.max(1.5, cell * 0.025);
-        ctx.setLineDash([cell * 0.12, cell * 0.08]);
-        ctx.beginPath();
-        ctx.ellipse(topLeft.x + cell * 0.5, topLeft.y + cell * 0.8, cell * 0.38, cell * 0.15, 0, 0, Math.PI * 2);
-        ctx.stroke();
-        ctx.restore();
-      }
       drawAgentAppearance(ctx, now, agent, cell, topLeft, renderPosition, birth, objectOutlineColor("agent", agent));
+      if (!birth) drawAgentLifespanSpirit(agent, cell, topLeft, renderPosition);
+    }
+
+    function drawAgentLifespanSpirit(agent, cell, topLeft, renderPosition) {
+      const pose = Spawner.agentSpiritPose(agent, state.simSeconds);
+      if (!pose) return;
+      const crown = Spawner.AGENT_SPIRIT.anchors[agent.tribe] ?? Spawner.AGENT_SPIRIT.anchors.bean;
+      const appearance = agent.appearanceAttributes || agent.attributes;
+      const jump = appearance.feet || ["spore", "pebble", "spring"].includes(agent.tribe) ? 0 :
+        Math.sin(renderPosition.progress * Math.PI) * cell * AGENT_HEIGHT * .18;
+      Spawner.drawAgentSpirit(ctx, agentSpiritSprite, pose,
+        { x: topLeft.x + cell / 2, y: topLeft.y + cell * (crown - .07) - jump }, cell);
     }
 
     function drawAgentAppearance(ctx, now, agent, cell, topLeft, renderPosition, birth, outlineColor) {
@@ -3499,7 +3730,7 @@
       const appearance = agent.appearanceAttributes || agent.attributes;
       const bodyPose = agentBodyPose(agent, now, foodDeliveryPose(agent));
       const walk = agentWalkPose(agent);
-      const jumpOffset = appearance.feet ? 0 : stride * spriteHeight * 0.18;
+      const jumpOffset = appearance.feet || ["spore", "pebble", "spring"].includes(agent.tribe) ? 0 : stride * spriteHeight * 0.18;
 
       if (cell < 8) {
         if (outlineColor) {
@@ -3543,7 +3774,8 @@
       ctx.fill();
       const sprite = agentSprite(agent, "body");
       const attacking = drawAgentAttack(ctx, agent, centerX, spriteY + spriteHeight * .94, spriteHeight, outlineColor);
-      if (!attacking && sprite && sprite.complete !== false && (sprite.naturalWidth || sprite.width) > 0) {
+      const moving = !attacking && drawAgentMovement(ctx, agent, centerX, spriteY + spriteHeight * .94, spriteHeight, outlineColor);
+      if (!attacking && !moving && sprite && sprite.complete !== false && (sprite.naturalWidth || sprite.width) > 0) {
         const spriteWidth = spriteHeight * (sprite.naturalWidth || sprite.width) / (sprite.naturalHeight || sprite.height);
         const spriteX = topLeft.x + (cell - spriteWidth) / 2;
         const footY = spriteY + spriteHeight * 0.94;
@@ -3573,9 +3805,10 @@
         state.simSeconds >= delivery.startedAt + (delivery.arrivesAt - delivery.startedAt) * 0.24;
       if (agent.carrying - (released ? delivery.amount : 0) > 0) {
         const type = agent.carryingType || "honey-mushrooms";
-        const sprite = type === "honey-mushrooms" ? carriedFoodSprite : type === "clay" ? carriedSoilSprite : resourceSprites.get(type);
+        const sprite = resourceCarrySprites.get(type);
         const placement = foodCarryPlacement(appearance, type);
-        const width = Math.max(6, cell * placement.width), height = width * placement.height / placement.width;
+        const renderScale = Math.max(cell, 6 / Math.max(placement.width, placement.height));
+        const width = placement.width * renderScale, height = placement.height * renderScale;
         ctx.save();
         ctx.imageSmoothingEnabled = true;
         ctx.imageSmoothingQuality = "high";
@@ -3585,8 +3818,10 @@
         ctx.translate(0, bodyOffset * cell - (walk ? walk.bob * spriteHeight : 0));
         ctx.translate(placement.x * cell * bodyPose.scaleX,
           (placement.y - bodyOffset) * cell * bodyPose.scaleY);
-        if (sprite?.complete && sprite.naturalWidth > 0) ctx.drawImage(sprite, -width / 2, -height / 2, width, height);
-        else { ctx.fillStyle = "#bacb78"; ctx.fillRect(-width / 2, -height / 2, width, height); }
+        if (sprite?.complete && sprite.naturalWidth > 0) ctx.drawImage(sprite,
+          placement.crop.x, placement.crop.y, placement.crop.width, placement.crop.height,
+          -width / 2, -height * placement.pivotY, width, height);
+        else { ctx.fillStyle = "#bacb78"; ctx.fillRect(-width / 2, -height * placement.pivotY, width, height); }
         ctx.restore();
       }
     }
@@ -3596,7 +3831,7 @@
       if (cell < 8) return;
       const groups = new Map();
       for (const agent of [...state.agents, ...state.rivals]) {
-        if (agent.health <= 0) continue;
+        if (agent.health <= 0 || agent.combat) continue;
         const base = agentBasePosition(agent);
         const x = Math.floor(base.x + 0.5), y = Math.floor(base.y + 0.5);
         const key = x + "," + y + ":" + (agent.ownerId ?? agent.faction) + ":" + (agent.species || "");
@@ -3644,12 +3879,13 @@
       if (!plan || !state.agents.includes(agent) || agent.health <= 0) return;
       const cell = state.camera.zoom;
       const position = interpolatedAgentPosition(agent);
-      const points = [worldToScreen(position.x + 0.5, position.y + 0.5),
-        ...plan.route.map(point => worldToScreen(point.x + 0.5, point.y + 0.5))];
+      const foot = 0.5 + AGENT_HEIGHT * 0.44;
+      const points = [worldToScreen(position.x + 0.5, position.y + foot),
+        ...plan.route.map(point => worldToScreen(point.x + 0.5, point.y + foot))];
       const length = points.slice(1).reduce((sum, point, index) =>
         sum + Math.hypot(point.x - points[index].x, point.y - points[index].y), 0);
       if (length < Math.max(1, cell * 0.04)) return;
-      const destination = worldToScreen(plan.destination.x + 0.5, plan.destination.y + 0.5);
+      const destination = worldToScreen(plan.destination.x + 0.5, plan.destination.y + foot);
       const width = clamp(cell * 0.025, 1.5, 2.5);
       const arrow = clamp(cell * 0.08, 4, 7);
       const spacing = clamp(cell * 0.65, 38, 64);
@@ -3718,6 +3954,15 @@
     }
 
     function drawFlashes(now) {
+      if (state.selection?.kind === "terrain") {
+        const point = worldToScreen(state.selection.target.x, state.selection.target.y);
+        const size = state.camera.zoom;
+        ctx.save();
+        ctx.strokeStyle = selectionColor;
+        ctx.lineWidth = 2;
+        ctx.strokeRect(point.x + 1, point.y + 1, Math.max(1, size - 2), Math.max(1, size - 2));
+        ctx.restore();
+      }
       state.flashes = state.flashes.filter((flash) => now - flash.startedAt < 680);
 
       for (const flash of state.flashes) {
@@ -3907,14 +4152,53 @@
       revealForest(exploredChanges);
     }
 
+    function hazardGroundTile(hazard) {
+      const key = hazard.kind + ":" + hazard.neighbors + ":" + hazard.tileColumn + ":" + hazard.tileRow;
+      if (hazardGroundTiles.has(key)) return hazardGroundTiles.get(key);
+      const image = hazardGroundSprites[hazard.kind - 1], cell = image.naturalWidth / 4;
+      const surface = document.createElement("canvas");
+      surface.width = surface.height = 64;
+      const context = surface.getContext("2d");
+      context.drawImage(image, hazard.tileColumn * cell, hazard.tileRow * cell, cell, cell, 0, 0, 64, 64);
+      if (hazard.neighbors !== 255) {
+        const pixels = context.getImageData(0, 0, 64, 64), neighbors = hazard.neighbors;
+        const fade = distance => {
+          const weight = clamp(distance / 0.28, 0, 1);
+          return weight * weight * (3 - 2 * weight);
+        };
+        for (let py = 0; py < 64; py++) for (let px = 0; px < 64; px++) {
+          const x = (px + 0.5) / 64, y = (py + 0.5) / 64;
+          let alpha = 1;
+          if (!(neighbors & 8)) alpha *= fade(x);
+          if (!(neighbors & 16)) alpha *= fade(1 - x);
+          if (!(neighbors & 2)) alpha *= fade(y);
+          if (!(neighbors & 64)) alpha *= fade(1 - y);
+          if (!(neighbors & 1) && (neighbors & 2) && (neighbors & 8)) alpha *= fade(Math.hypot(x, y));
+          if (!(neighbors & 4) && (neighbors & 2) && (neighbors & 16)) alpha *= fade(Math.hypot(1 - x, y));
+          if (!(neighbors & 32) && (neighbors & 64) && (neighbors & 8)) alpha *= fade(Math.hypot(x, 1 - y));
+          if (!(neighbors & 128) && (neighbors & 64) && (neighbors & 16)) alpha *= fade(Math.hypot(1 - x, 1 - y));
+          pixels.data[(py * 64 + px) * 4 + 3] *= alpha;
+        }
+        context.putImageData(pixels, 0, 0);
+      }
+      hazardGroundTiles.set(key, surface);
+      return surface;
+    }
+
+    function drawHazardSelection(context, hazard, x, y, size) {
+      const color = objectOutlineColor("hazard", hazard);
+      if (!color) return;
+      context.save();
+      context.globalAlpha = 0.14;
+      context.fillStyle = color;
+      context.fillRect(x - size / 2, y - size / 2, size, size);
+      context.restore();
+    }
+
     function drawHazard(context, hazard, x, y, size) {
-      const sprite = hazardSprites[hazard.kind - 1][hazard.frame];
-      const frameSize = sprite.height;
-      const outlineColor = context === ctx ? objectOutlineColor("hazard", hazard) : null;
-      if (outlineColor) drawSelectionOutline(sprite, x - size / 2, y - size * 0.8, size, size,
-        { owner: sprite, size: frameSize, index: hazard.frame, x: 0, y: 0 }, outlineColor);
-      context.drawImage(sprite, 0, 0, frameSize, frameSize,
-        x - size / 2, y - size * 0.8, size, size);
+      const surface = hazardGroundTile(hazard);
+      context.drawImage(surface, x - size / 2, y - size / 2, size, size);
+      if (context === ctx) drawHazardSelection(context, hazard, x, y, size);
     }
 
     function updateHazards(seed) {
@@ -3922,19 +4206,28 @@
       context.clearRect(0, 0, hazardCanvas.width, hazardCanvas.height);
       context.imageSmoothingEnabled = true;
       context.imageSmoothingQuality = "high";
+      hazardGroundTiles.clear();
       hazardCells.length = 0;
       for (let index = 0; index < WORLD_SIZE * WORLD_SIZE; index++) {
         const kind = worldMap.hazards[index];
         if (!kind) continue;
         const column = index % WORLD_SIZE, row = Math.floor(index / WORLD_SIZE);
+        let neighbors = 0, neighbor = 0;
+        for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+          if (!dx && !dy) continue;
+          const x = column + dx, y = row + dy;
+          if (x >= 0 && y >= 0 && x < WORLD_SIZE && y < WORLD_SIZE && worldMap.hazards[y * WORLD_SIZE + x] === kind)
+            neighbors |= 1 << neighbor;
+          neighbor++;
+        }
         const hazard = {
-          kind, column, row,
-          frame: ((Math.imul(column, 73856093) ^ Math.imul(row, 19349663)) >>> 0) % 3,
-          x: column + 0.5 + (hashNoise(column + seed + 1201, row - seed - 97) - 0.5) * 0.2,
-          y: row + 0.67 + (hashNoise(column - seed - 1709, row + seed + 313) - 0.5) * 0.12
+          kind, column, row, neighbors,
+          tileColumn: (column + (seed & 3)) % 4,
+          tileRow: (row + ((seed >>> 2) & 3)) % 4,
+          x: column + 0.5, y: row + 0.5
         };
         hazardCells[index] = hazard;
-        drawHazard(context, hazard, hazard.x * 8, hazard.y * 8, 0.85 * 8);
+        drawHazard(context, hazard, hazard.x * 8, hazard.y * 8, 8);
       }
     }
 
@@ -3957,7 +4250,7 @@
           if (object?.kind !== "hazard" || object === state.hover && isSelectedObject("hazard", object.target)) continue;
           const hazard = object.target;
           const point = worldToScreen(hazard.x, hazard.y);
-          drawHazard(ctx, hazard, point.x, point.y, zoom * 0.85);
+          drawHazardSelection(ctx, hazard, point.x, point.y, zoom);
         }
       } else {
         const topLeft = screenToWorld(0, 0);
@@ -3967,7 +4260,7 @@
             const hazard = hazardCells[row * WORLD_SIZE + column];
             if (!hazard || !terrainRendering.revealed[row * WORLD_SIZE + column]) continue;
             const point = worldToScreen(hazard.x, hazard.y);
-            drawHazard(ctx, hazard, point.x, point.y, zoom * 0.85);
+            drawHazard(ctx, hazard, point.x, point.y, zoom);
           }
         }
       }
@@ -4052,6 +4345,7 @@
       drawFlashes(now);
       for (const entry of colonyEntries) drawColonyGround(entry,
         worldToScreen(entry.x, entry.y), COLONY_SIZE * state.camera.zoom, colonyAppearance(entry));
+      drawSelectedAgentMovement();
       drawWorldObjects(now);
       drawAttackImpacts();
       drawAgentGroups();
@@ -4059,8 +4353,6 @@
       drawFoodStatus();
       drawBurrowStatus();
       drawFog(now);
-      drawSelectedAgentMovement();
-      positionColonyMenus();
       positionHelpTooltip();
       drawAgentAvatars(now);
 
@@ -4221,7 +4513,7 @@
         const jump = birth ? birth.lift : appearance.feet ? 0 : Math.sin(position.progress * Math.PI) * AGENT_HEIGHT * 0.18;
         const bodyPose = state.camera.zoom < 8 ? { pivot: 0, scaleX: 1, scaleY: 1 } :
           agentBodyPose(candidate, state.lastFrame, foodDeliveryPose(candidate));
-        const height = state.camera.zoom < 8 ? 3 / state.camera.zoom : AGENT_HEIGHT;
+        const height = state.camera.zoom < 8 ? 3 / state.camera.zoom : AGENT_HEIGHT * (agentCombatPlacement(candidate)?.scale || 1);
         const sprite = agentSprite(candidate);
         const width = state.camera.zoom < 8 ? height : height *
           (sprite.naturalWidth || sprite.width || starterObjectSprite.naturalWidth) /
@@ -4248,7 +4540,8 @@
         const hazard = hazardCells[cellY * WORLD_SIZE + cellX];
         if (hazard) return { kind: "hazard", target: hazard };
       }
-      return null;
+      const cell = terrainCodexCell({ ...worldMap, size: WORLD_SIZE }, state.explored, cellX, cellY);
+      return cell ? { kind: "terrain", target: cell } : null;
     }
 
     function updateHover() {
@@ -4302,7 +4595,7 @@
 
     canvas.addEventListener("pointerup", (event) => {
       trackHoverPointer(event);
-      if (!state.didDrag) {
+      if (connection.active && !state.didDrag && event.button === 0) {
         const rect = canvas.getBoundingClientRect();
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
@@ -4347,23 +4640,16 @@
     canvas.addEventListener("pointercancel", cancelPointer);
     window.addEventListener("blur", cancelPointer);
 
-    function selectPanelTab(tab) {
-      for (const [button, panel] of [[agentTab, agentTabPanel], [colonyTab, colonyPanel], [notificationTab, notificationPanel]]) {
-        const selected = button === tab;
-        button.setAttribute("aria-selected", String(selected));
-        button.tabIndex = selected ? 0 : -1;
-        panel.hidden = !selected;
-      }
-      if (tab === notificationTab) {
-        notificationPanel.scrollTop = 0;
-        acknowledgeDiscoveries();
-      }
+    function dismissDiscoveryToast(toast) {
+      clearTimeout(discoveryToastTimers.get(toast));
+      discoveryToastTimers.delete(toast);
+      toast.remove();
     }
 
-    function hideDiscoveryToast() {
-      clearTimeout(discoveryToastTimer);
-      discoveryToast.hidden = true;
-      discoveryToastEntry = null;
+    function clearDiscoveryToasts() {
+      for (const timer of discoveryToastTimers.values()) clearTimeout(timer);
+      discoveryToastTimers.clear();
+      discoveryToasts.replaceChildren();
     }
 
     function focusDiscovery(entry) {
@@ -4433,81 +4719,43 @@
       return image;
     }
 
-    function renderNotifications() {
-      const entries = state.discoveries;
-      const readCount = Math.max(state.discoveryReadCount, discoveryReadRequested);
-      const unread = Math.max(0, entries.length - readCount);
-      notificationCount.textContent = String(unread);
-      notificationCount.hidden = unread === 0;
-      notificationTab.setAttribute("aria-label", unread ? "알림, 미확인 " + unread + "개" : "알림");
-      const signature = connection.roomId + ":" + entries.length + ":" + readCount;
-      if (signature === notificationSignature) return;
-      notificationSignature = signature;
-      notificationEmpty.hidden = entries.length > 0;
-      const kinds = { creature: "생명체", food: "먹이", material: "자원", corpse: "사체", burrow: "굴", colony: "둥지" };
-      const fragment = document.createDocumentFragment();
-      for (let index = entries.length - 1; index >= 0; index--) {
-        const entry = entries[index];
-        const button = document.createElement("button");
-        button.type = "button";
-        const latest = index === entries.length - 1 && index >= readCount;
-        button.className = "notification-item" + (index >= readCount ? " is-unread" : "") + (latest ? " is-latest" : "");
-        const image = createDiscoveryImage(entry);
-        const title = document.createElement("strong");
-        title.textContent = entry.name;
-        const minutes = Math.floor(entry.discoveredAt / 60);
-        const seconds = String(Math.floor(entry.discoveredAt % 60)).padStart(2, "0");
-        button.title = (kinds[entry.kind] || "개체") + " · " + entry.discoveredBy + " · " + minutes + ":" + seconds +
-          " · (" + entry.x + ", " + entry.y + ") · 발견 위치로 이동";
-        button.setAttribute("aria-label", (latest ? "최신 알림 · " : "") + entry.name + " · 발견 위치로 이동");
-        button.append(image, title);
-        button.addEventListener("click", () => focusDiscovery(entry));
-        fragment.append(button);
-      }
-      notificationList.replaceChildren(fragment);
-    }
-
-    function acknowledgeDiscoveries() {
-      const count = state.discoveries.length;
-      if (!connection.active || !connection.online || count <= Math.max(state.discoveryReadCount, discoveryReadRequested)) return;
-      const roomId = connection.roomId;
-      discoveryReadRequested = count;
-      renderNotifications();
-      client.call("command", { roomId, action: { type: "read-discoveries", count } }).catch(() => {
-        if (connection.roomId !== roomId) return;
-        discoveryReadRequested = state.discoveryReadCount;
-        renderNotifications();
+    function showDiscoveryToast(entry) {
+      const toast = document.createElement("div");
+      toast.className = "discovery-toast";
+      const open = document.createElement("button");
+      open.type = "button";
+      open.className = "discovery-toast-open";
+      open.setAttribute("aria-label", entry.name + " · 발견 위치로 이동");
+      const label = document.createElement("small");
+      label.textContent = "새로운 발견";
+      const title = document.createElement("strong");
+      title.textContent = entry.name;
+      const detail = document.createElement("span");
+      detail.textContent = "발견 위치 보기";
+      open.append(createDiscoveryImage(entry), label, title, detail);
+      open.addEventListener("click", () => {
+        dismissDiscoveryToast(toast);
+        focusDiscovery(entry);
       });
+      const close = document.createElement("button");
+      close.type = "button";
+      close.className = "discovery-toast-close";
+      close.setAttribute("aria-label", entry.name + " 발견 알림 닫기");
+      close.textContent = "×";
+      close.addEventListener("click", () => dismissDiscoveryToast(toast));
+      toast.append(open, close);
+      discoveryToasts.append(toast);
+      discoveryToastTimers.set(toast, setTimeout(() => dismissDiscoveryToast(toast), 7000));
     }
 
     function updateNotifications(previousKeys, firstSnapshot) {
-      renderNotifications();
-      if (!notificationPanel.hidden) acknowledgeDiscoveries();
-      if (firstSnapshot) { hideDiscoveryToast(); return; }
+      if (firstSnapshot) { clearDiscoveryToasts(); return; }
       const added = state.discoveries.filter(entry => !previousKeys.has(entry.key));
       if (!added.length) return;
-      notificationPanel.scrollTop = 0;
-      const entry = added.at(-1);
-      discoveryToastEntry = entry;
-      const image = createDiscoveryImage(entry);
-      const previousImage = discoveryToast.querySelector("[data-discovery-image]");
-      if (previousImage) previousImage.replaceWith(image);
-      else document.getElementById("discovery-toast-open").prepend(image);
-      document.getElementById("discovery-toast-title").textContent = entry.name + (added.length > 1 ? " 외 " + (added.length - 1) + "종" : "");
-      document.getElementById("discovery-toast-detail").textContent = "발견 위치 보기";
-      discoveryToast.hidden = false;
-      clearTimeout(discoveryToastTimer);
-      discoveryToastTimer = setTimeout(hideDiscoveryToast, 7000);
+      for (const entry of added) showDiscoveryToast(entry);
+      discoveryToasts.scrollTop = discoveryToasts.scrollHeight;
       audio.play("discovery", 1);
     }
-
-    document.getElementById("discovery-toast-open").addEventListener("click", () => {
-      const entry = discoveryToastEntry;
-      hideDiscoveryToast();
-      selectPanelTab(notificationTab);
-      if (entry) focusDiscovery(entry);
-    });
-    document.getElementById("discovery-toast-close").addEventListener("click", hideDiscoveryToast);
 
     function closeNestNameEditor(restoreFocus) {
       nestNameForm.hidden = true;
@@ -4662,19 +4910,6 @@
       }
     });
     colonyMenuClose.addEventListener("click", closeColonyMenu);
-    const panelTabs = [agentTab, colonyTab, notificationTab];
-    panelTabs.forEach((tab) => {
-      tab.addEventListener("click", () => selectPanelTab(tab));
-      tab.addEventListener("keydown", (event) => {
-        if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
-        event.preventDefault();
-        const index = panelTabs.indexOf(tab);
-        const next = event.key === "Home" ? panelTabs[0] : event.key === "End" ? panelTabs.at(-1) :
-          panelTabs[(index + (event.key === "ArrowRight" ? 1 : panelTabs.length - 1)) % panelTabs.length];
-        selectPanelTab(next);
-        next.focus();
-      });
-    });
     document.addEventListener("keydown", (event) => {
       if (event.key !== "Escape") return;
       if (!helpTooltip.hidden) {
@@ -4692,8 +4927,9 @@
         event.preventDefault();
         return;
       }
-      if (!corpseDetails.hidden) {
-        closeCorpseDetails();
+      if (!unitPanel.hidden || state.selection) {
+        closeColonyMenu();
+        closeUnitPanel();
         event.preventDefault();
         return;
       }
@@ -4702,57 +4938,91 @@
       event.preventDefault();
     });
 
-    function closeCorpseDetails() {
+    function closeUnitPanel() {
       selectObject(null, null);
       canvas.focus();
     }
 
-    document.getElementById("corpse-close").addEventListener("click", closeCorpseDetails);
+    document.getElementById("unit-panel-close").addEventListener("click", closeUnitPanel);
+    document.getElementById("unit-codex").addEventListener("click", () => {
+      const selected = state.selection;
+      if (!selected) return;
+      if (selected.kind === "terrain" || selected.kind === "hazard") {
+        const cell = selectionTerrainCell();
+        if (cell) openTerrainCodex(cell.x, cell.y);
+        return;
+      }
+      const slots = selected.target.activeSlots || selected.target.slots || [];
+      const attribute = slots.find(key => ATTRIBUTES.some(value => value.key === key)) || ATTRIBUTES[0].key;
+      openCodex("attribute:" + attribute);
+    });
+    agentDesign.addEventListener("click", () => {
+      if (state.selection?.kind === "agent") openUnitDesign(selectedAgentTemplate() || null);
+    });
+    agentBirth.addEventListener("click", async () => {
+      const template = selectedAgentTemplate();
+      if (!template || agentBirth.disabled) return;
+      const key = unitPanelSelectionKey;
+      unitActionStatus.textContent = "";
+      nestStatus.textContent = "";
+      const result = await sendCommand({ type: "birth", templateId: template.id });
+      if (unitPanelSelectionKey === key) setEvolutionText(unitActionStatus, result ? "새 생명체가 탄생합니다." : nestStatus.textContent);
+    });
     corpseDesign.addEventListener("click", () => openUnitDesign(null));
 
     function updateCorpseDetails() {
       const corpse = state.selection?.kind === "corpse" ? state.selection.target : null;
       corpseDetails.hidden = !corpse || corpse.kind !== "corpse" || corpse.amount <= 0;
       if (corpseDetails.hidden) return;
-      document.getElementById("corpse-title").textContent = corpse.name ? corpse.name + "의 사체" : "사체";
+      unitPanelTitle.textContent = corpse.name ? corpse.name + "의 사체" : "사체";
       corpseValue.textContent = Math.ceil(corpse.amount) + "점";
       document.getElementById("corpse-decay").textContent = Number.isFinite(corpse.decaysAt) ?
         "부패까지 " + formatLifetime(Math.ceil(Math.max(0, corpse.decaysAt - state.simSeconds))) : "";
       corpseDesign.disabled = connection.busy || !connection.online;
     }
 
-    agentNameInput.addEventListener("input", () => {
-      agentNameInput.setCustomValidity("");
-      agentNameStatus.textContent = "";
-    });
-    agentNameForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const agent = state.selection && state.selection.kind === "agent" ? state.selection.target : null;
-      if (!agent || !state.agents.includes(agent)) return;
-      const name = agentNameInput.value.trim();
-      if (!name) {
-        agentNameInput.setCustomValidity("이름을 입력해 주세요.");
-        agentNameInput.reportValidity();
-        return;
-      }
-      sendCommand({ type: "rename", agentId: agent.id, name }).then((result) => {
-        if (result) agentNameStatus.textContent = "이름을 변경했습니다.";
-      });
-    });
-
     function formatLifetime(seconds) {
       const total = Math.max(0, Math.floor(seconds));
       return Math.floor(total / 60) + "분 " + total % 60 + "초";
     }
 
-    function updateAgentDetails() {
-      const agent = state.selection && state.selection.kind === "agent" ? state.selection.target : null;
-      agentDetails.hidden = !agent;
-      if (!agent) {
-        editedAgentId = null;
-        return;
+    function selectedAgentTemplate() {
+      const agent = state.selection?.kind === "agent" ? state.selection.target : null;
+      return agent && state.agents.includes(agent) ? state.templates.find(template => template.id === agent.templateId) : null;
+    }
+
+    function updateTerrainDetails() {
+      const kind = state.selection?.kind;
+      const cell = kind === "terrain" || kind === "hazard" ? selectionTerrainCell() : null;
+      terrainDetails.hidden = !cell;
+      if (!cell) return;
+      const value = cell.hazard || cell.terrain;
+      unitPanelTitle.textContent = value.name;
+      const image = document.getElementById("terrain-image");
+      if (image.dataset.key !== value.key) {
+        image.dataset.key = value.key;
+        image.replaceChildren(codexTerrainImage(value, cell.hazard ? "hazard" : "terrain"));
       }
-      selectedAgentName.textContent = agent.name + " · Lv." + (agent.level || 1);
+      document.getElementById("terrain-description").textContent = value.description;
+      document.getElementById("terrain-stats").textContent = "좌표 (" + cell.x + ", " + cell.y + ") · " + cell.terrain.name + "\n" +
+        (cell.type < 2 ? "일반 유닛 통행 불가" : "일반 이동 속도 " + Math.round(cell.speed * 100) + "%") +
+        "\n위험 요소 · " + (cell.hazard ? cell.hazard.name + " · " + cell.hazard.effect : "없음");
+    }
+
+    function updateUnitPanel() {
+      const agent = state.selection?.kind === "agent" ? state.selection.target : null;
+      const target = state.selection?.target;
+      const key = target ? state.selection.kind + ":" + (target.id ?? (target.column ?? target.x) + "," + (target.row ?? target.y)) : null;
+      if (key !== unitPanelSelectionKey) unitActionStatus.textContent = "";
+      unitPanelSelectionKey = key;
+      updateCorpseDetails();
+      updateTerrainDetails();
+      agentDetails.hidden = !agent;
+      unitPanel.hidden = !agent && corpseDetails.hidden && terrainDetails.hidden;
+      if (unitPanel.hidden) return;
+      collapseControlsGuide();
+      if (!agent) return;
+      unitPanelTitle.textContent = agent.name + " · Lv." + (agent.level || 1);
       document.getElementById("agent-birth-stats").textContent = agent.templateName + " · 설계 " + agent.templateRevision + "세대\n" +
         templateDescription(agent.activeSlots || agent.slots) + " · 발현 " + (agent.activeSlots || agent.slots).length + "/" + agent.slots.length + " · 체력 " + Math.ceil(Math.max(0, agent.health) * 10) / 10 + "/" + agent.stats.health;
       if (Number.isFinite(agent.bornAt) && Number.isFinite(agent.lifespan)) {
@@ -4760,15 +5030,18 @@
         document.getElementById("agent-birth-stats").textContent += "\n나이 " + formatLifetime(age) +
           " · 남은 수명 " + formatLifetime(Math.ceil(Math.max(0, agent.lifespan - age)));
       }
+      document.getElementById("agent-birth-stats").textContent += " · " + Spawner.COMBAT_DISPOSITIONS[agent.combatDisposition || "passive"];
       const personality = agent.personalityLabels;
       document.getElementById("agent-personality").textContent = personality ?
         "대담함 " + personality.boldness + " · 호전성 " + personality.aggression + " · 호기심 " + personality.curiosity : "";
-      if (editedAgentId !== agent.id) {
-        agentNameInput.value = agent.name;
-        agentNameInput.setCustomValidity("");
-        agentNameStatus.textContent = "";
-        editedAgentId = agent.id;
-      }
+      const template = selectedAgentTemplate();
+      const cost = template ? birthCost(template) : Infinity;
+      document.getElementById("agent-birth-cost").textContent = Number.isFinite(cost) ? cost : "—";
+      agentDesign.textContent = template ? "설계 수정" : "새 유닛 설계";
+      agentDesign.disabled = connection.busy || !connection.online;
+      agentBirth.hidden = !template;
+      agentBirth.disabled = !template || connection.busy || !connection.online || state.nestHealth === 0 || state.evolutionPoints < cost ||
+        template.slots.length > slotCapacity() || template.slots.some(key => !ATTRIBUTES.some(attribute => attribute.key === key));
     }
 
     const AGENT_MODE_LABELS = {
@@ -4807,12 +5080,12 @@
     const agentAvatars = new Map();
 
     function unitListEntries() {
-      return [...state.agents, ...state.corpses.filter(corpse => corpse.colonyId === connection.colonyId && corpse.amount > 0).map(corpse => foodCellMap.get(corpse.x + "," + corpse.y) || corpse)];
+      return [...state.agents, ...state.corpses.filter(corpse => corpse.colonyId === connection.colonyId && corpse.amount > 0).map(corpse => foodCellMap.get(corpse.key || corpse.x + "," + corpse.y) || corpse)];
     }
 
     function drawAgentAvatars(now) {
-      if (agentTabPanel.hidden || document.hidden) return;
-      const panel = agentTabPanel.getBoundingClientRect();
+      if (objectPanel.hidden || document.hidden) return;
+      const panel = objectPanel.getBoundingClientRect();
       const ratio = window.devicePixelRatio || 1;
       for (const agent of unitListEntries()) {
         const avatar = agentAvatars.get(agent.id);
@@ -4847,8 +5120,7 @@
     }
 
     function updateAgentList() {
-      updateAgentDetails();
-      updateCorpseDetails();
+      updateUnitPanel();
       const entries = unitListEntries();
       const corpseCount = entries.length - state.agents.length;
       agentListCount.textContent = state.agents.length + (corpseCount ? " · 사체 " + corpseCount : "");
@@ -4876,7 +5148,6 @@
             const current = unitListEntries().find(candidate => candidate.id === button.dataset.agentId);
             if (current?.kind === "corpse") {
               selectObject("corpse", current);
-              agentTabPanel.scrollTop = 0;
               moveCameraTo(current.x + 0.5, current.y + 0.5, zoomForLayer(0));
             } else if (current) selectAgent(current);
           });
@@ -4923,13 +5194,11 @@
 
     const ATTRIBUTE_SYMBOLS = { antenna: "DesignAssets/Attributes/SilhouettesV2/23-y-branch.png",
       strength: "DesignAssets/Attributes/SilhouettesV2/24-horseshoe.png",
+      butchery: "DesignAssets/Attributes/SilhouettesV2/04-crescent.png",
       lifespan: "DesignAssets/Attributes/SilhouettesV2/40-spiral.png",
       feet: "DesignAssets/Attributes/SilhouettesV2/27-chevron.png" };
     const ATTRIBUTE_IMAGES = Object.fromEntries(ATTRIBUTES.map(attribute =>
-      [attribute.key, (ATTRIBUTE_SYMBOLS[attribute.key] ? assetSource(ATTRIBUTE_SYMBOLS[attribute.key]) : agentParts.get(attribute.key + "-1")?.src) || "data:image/svg+xml," + encodeURIComponent(
-        '<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect x="3" y="3" width="58" height="58" rx="14" fill="#182526" stroke="' +
-        attribute.color + '" stroke-width="3"/><text x="32" y="43" text-anchor="middle" font-size="32" font-family="sans-serif" fill="' + attribute.color + '">' +
-        attribute.name[0] + '</text></svg>')]));
+      [attribute.key, assetSource(ATTRIBUTE_SYMBOLS[attribute.key])]));
     function slotCapacity() {
       return NEST_LEVELS[state.nestLevel - 1].slotCapacity;
     }
@@ -4944,7 +5213,7 @@
 
     function agentAppearanceKey(attributes) {
       return [attributes.strength ?? attributes.arms ?? 0, attributes.feet || 0,
-        attributes.antenna || 0, attributes.shell || 0, attributes.lifespan || 0].join(":");
+        attributes.antenna || 0, attributes.lifespan || 0].join(":");
     }
 
     function agentSpriteLayers(attributes) {
@@ -4955,7 +5224,7 @@
     function prepareAgentTemplate(template) {
       if (template.tribe && template.tribe !== "bean") {
         const tribe = Spawner.PLAYER_TRIBES.find(entry => entry.key === template.tribe);
-        return Promise.all([tribeArt.prepareUnit(tribe), tribe.key === "spring" ? springBirthSheet.decode() : tribe.key === "pebble" ? pebbleBirthSheet.decode() : null]).then(() => {
+        return Promise.all([prepareAgentMovement(tribe), tribe.key === "spring" ? springBirthSheet.decode() : tribe.key === "pebble" ? pebbleBirthSheet.decode() : null]).then(() => {
           for (let count = Math.min(1, template.slots.length); count <= template.slots.length; count++) {
             const attributes = attributeCounts(template.slots.slice(0, count));
             for (const layer of [...agentSpriteLayers(attributes), "full"]) selectionContour(agentSprite({ tribe: tribe.key, attributes }, layer), null);
@@ -4992,7 +5261,7 @@
         return sprite;
       }
       const counts = { strength: attributes.strength ?? attributes.arms ?? 0,
-        feet: attributes.feet || 0, antenna: attributes.antenna || 0, shell: attributes.shell || 0, lifespan: attributes.lifespan || 0 };
+        feet: attributes.feet || 0, antenna: attributes.antenna || 0, lifespan: attributes.lifespan || 0 };
       const key = agentAppearanceKey(counts) + ":" + (layer || "full");
       if (!agentSprites.has(key)) {
         const sprite = composeAgentSprite(counts, layer);
@@ -5050,17 +5319,17 @@
       if (attributes.antenna && layer !== "body") composeAgentAntennae(context, attributes);
       context.drawImage(layer === "body" || attributes.antenna ? agentBaseParts.get("body") : starterObjectSprite,
         136, 110 - lift, 240, 350);
-      if (attributes.shell) {
-        const width = (304 + (attributes.shell - 1) * 16) * 0.97;
-        const height = (254 + (attributes.shell - 1) * 12) * 0.78;
-        context.drawImage(agentParts.get("shell-" + (attributes.shell === 1 ? 1 : 2)),
-          256 - width / 2, 458 - lift - height, width, height);
-      }
       if (attributes.strength) {
         const width = (344 + (attributes.strength - 1) * 24) * 0.78;
         const height = (142 + (attributes.strength - 1) * 12) * 0.78;
         context.drawImage(agentParts.get("strength-" + (attributes.strength === 1 ? 1 : 2)),
           256 - width / 2, 460 - lift - height, width, height);
+      }
+      if (attributes.lifespan) {
+        const part = agentParts.get("lifespan-1");
+        const width = 84;
+        const height = width * part.naturalHeight / part.naturalWidth;
+        context.drawImage(part, 256 - width / 2, 257 - lift, width, height);
       }
       return sprite;
     }
@@ -5097,13 +5366,23 @@
     }
 
     function drawCorpses() {
+      const combatCells = new Set([...(state.agents || []), ...(state.rivals || [])].map(agent => displayedAgent(agent))
+        .filter(agent => agent.health > 0 && agent.combat).map(agent => agent.x + "," + agent.y));
       for (const corpse of resourceNodeCells()) {
         if (corpse.kind !== "corpse") continue;
         const pose = resourceNodePose(corpse);
         if (!pose.visible) continue;
+        ctx.save();
+        if (combatCells.has(corpse.x + "," + corpse.y)) {
+          const anchor = worldToScreen(corpse.x + .5, corpse.y + .92);
+          ctx.translate(anchor.x, anchor.y);
+          ctx.scale(.35, .35);
+          ctx.translate(-anchor.x, -anchor.y);
+        }
         const point = worldToScreen(corpse.x + 0.5, corpse.y + 0.5 + AGENT_HEIGHT * (460 / 512 - 0.5));
         if (!drawAgentCorpse(ctx, corpse, point.x, point.y, state.camera.zoom,
           objectOutlineColor("corpse", corpse), pose.opacity)) drawResourceNode(state.lastFrame, corpse, undefined);
+        ctx.restore();
       }
     }
 
@@ -5132,7 +5411,7 @@
     const codexList = document.getElementById("codex-list");
     const codexBack = document.getElementById("codex-back");
     const codexForward = document.getElementById("codex-forward");
-    const codexState = { entry: "attribute:antenna", history: [], index: -1, category: "all", returnFocus: null };
+    const codexState = { entry: "attribute:antenna", history: [], index: -1, category: "all", cell: null, returnFocus: null };
     let selectedAttribute = null;
     let unitDraft = null;
     let designReturnFocus = null;
@@ -5219,6 +5498,7 @@
       designBackdrop.hidden = false;
       document.querySelector(".app").inert = true;
       colonyMenu.inert = true;
+      unitPanel.inert = true;
       evolutionOpenButton.setAttribute("aria-expanded", "true");
       renderDesignSlots();
       updateUnitDesign();
@@ -5274,7 +5554,7 @@
         name.textContent = attribute.name + (count > 1 ? " ×" + count : "");
         const effect = document.createElement("span");
         effect.textContent = attribute.stacking === false ? attribute.effect : count === 1 ? attribute.effect : attribute.stat + " +" +
-          (attribute.key === "shell" ? Math.round((1 - 0.75 ** count) * 10000) / 100 : attribute.bonus * count) + attribute.unit;
+          attribute.bonus * count + attribute.unit;
         const description = document.createElement("p");
         description.textContent = attribute.description;
         card.append(name, effect, description);
@@ -5303,8 +5583,7 @@
       prepareAgentTemplate(unitDraft).catch(() => {});
       document.getElementById("design-preview-image").src = agentImageSource({ tribe: unitDraft.tribe, attributes: counts, carrying: 0 });
       const statValues = [["시야", stats.vision + "칸"], ["운반", stats.capacity + "개"],
-        ["이동", Number(agentSpeed({ stats }).toFixed(2)) + "칸/초"], ["체력", stats.health], ["수명", formatLifetime(stats.lifespan)],
-        ["환경 피해 감소", ((1 - stats.resistance) * 100).toFixed(2).replace(/\.?0+$/, "") + "%"]];
+        ["이동", Number(agentSpeed({ stats }).toFixed(2)) + "칸/초"], ["체력", stats.health], ["수명", formatLifetime(stats.lifespan)]];
       const statsFragment = document.createDocumentFragment();
       for (const [label, value] of statValues) {
         const term = document.createElement("dt");
@@ -5354,20 +5633,6 @@
       updateColonyPanel();
     }
 
-    function positionColonyMenus() {
-      if (colonyMenu.hidden) return;
-      const rect = canvas.getBoundingClientRect();
-      const anchor = worldToScreen(colonyMenuEntry.x + COLONY_SIZE, colonyMenuEntry.y);
-      const gap = 10;
-      colonyMenu.style.width = Math.min(360, Math.max(1, window.innerWidth - gap * 2)) + "px";
-      const left = clamp(rect.left + anchor.x + gap, gap,
-        Math.max(gap, window.innerWidth - colonyMenu.offsetWidth - gap));
-      const top = clamp(rect.top + anchor.y, gap,
-        Math.max(gap, window.innerHeight - colonyMenu.offsetHeight - gap));
-      colonyMenu.style.left = left + "px";
-      colonyMenu.style.top = top + "px";
-    }
-
     function closeEvolutionPanel() {
       closeCodex(false);
       hideHelpTooltip();
@@ -5375,6 +5640,7 @@
       designBackdrop.hidden = true;
       document.querySelector(".app").inert = false;
       colonyMenu.inert = false;
+      unitPanel.inert = false;
       evolutionOpenButton.setAttribute("aria-expanded", "false");
       unitDraft = null;
       if (designReturnFocus?.isConnected) designReturnFocus.focus();
@@ -5390,9 +5656,9 @@
       colonyMenuEntry = entry;
       closeEvolutionPanel();
       colonyMenu.hidden = false;
+      collapseControlsGuide();
       nestStatus.textContent = "";
       updateColonyPanel();
-      positionColonyMenus();
       if (!state.templates.length) openUnitDesign(null);
       else colonyMenuClose.focus();
     }
@@ -5420,7 +5686,7 @@
         const amount = state.resourceInventory?.[key] || 0;
         total += amount;
         entry.count.textContent = amount;
-        entry.row.hidden = amount === 0 && Spawner.isTribeFood(key, state.tribe);
+        entry.row.hidden = amount === 0 && Spawner.isTribeFood(key, state.tribe, worldMap.generationVersion);
         entry.row.classList.toggle("is-empty", amount === 0);
       }
       document.getElementById("resource-inventory-total").textContent = total + "개";
@@ -5475,7 +5741,9 @@
       const [kind, key] = entry.split(":");
       const value = kind === "attribute" ? ATTRIBUTES.find((attribute) => attribute.key === key) :
         kind === "synergy" ? ATTRIBUTE_COMBINATIONS[Number(key)] :
-        kind === "nest" ? NEST_CODEX.find((entry) => entry.key === key) : null;
+        kind === "nest" ? NEST_CODEX.find((entry) => entry.key === key) :
+        kind === "terrain" ? TERRAIN_CODEX.find(value => value.key === key) :
+        kind === "hazard" ? HAZARD_CODEX.find(value => value.key === key) : null;
       return value ? { kind, key, value } : null;
     }
 
@@ -5518,13 +5786,119 @@
       return icons;
     }
 
+    function selectionTerrainCell() {
+      const selected = state.selection;
+      if (!connection.active || !selected) return null;
+      const target = selected.target;
+      return terrainCodexCell({ ...worldMap, size: WORLD_SIZE }, state.explored,
+        Math.floor(target.column ?? target.x), Math.floor(target.row ?? target.y));
+    }
+
+    function openTerrainCodex(x, y) {
+      if (!connection.active) return;
+      const cell = terrainCodexCell({ ...worldMap, size: WORLD_SIZE }, state.explored, x, y);
+      if (!cell) return;
+      openCodex(cell.hazard ? "hazard:" + cell.hazard.key : "terrain:" + cell.terrain.key, { x, y, roomId: connection.roomId });
+    }
+
+    selectionTerrain.addEventListener("click", () => {
+      const cell = selectionTerrainCell();
+      if (cell) {
+        closeColonyMenu();
+        selectObject("terrain", cell);
+      }
+    });
+
+    function codexTerrainImage(value, kind) {
+      const frame = document.createElement("span");
+      frame.className = "codex-terrain-image" + (kind === "hazard" ? " is-hazard" : "");
+      const image = document.createElement("img");
+      image.src = assetSource(value.image);
+      image.alt = value.name;
+      frame.append(image);
+      return frame;
+    }
+
+    function codexCell() {
+      const cell = codexState.cell;
+      return connection.active && cell?.roomId === connection.roomId ?
+        terrainCodexCell({ ...worldMap, size: WORLD_SIZE }, state.explored, cell.x, cell.y) : null;
+    }
+
+    function updateTerrainCodexCell(entry) {
+      const section = document.getElementById("codex-cell");
+      const cell = codexCell();
+      section.hidden = !cell || !(entry.kind === "terrain" && entry.key === cell.terrain.key ||
+        entry.kind === "hazard" && entry.key === cell.hazard?.key);
+      if (section.hidden) return;
+      const food = foodCellAt(cell.x, cell.y);
+      const definition = food?.amount > 0 ? Spawner.resourceDefinition(Spawner.resourceTypeForCell(food, worldMap)) : null;
+      const rows = [["좌표", "(" + cell.x + ", " + cell.y + ") · " + cell.terrain.name],
+        ["통행", cell.type < 2 ? "일반 유닛 통행 불가" : "통행 가능"],
+        ["일반 이동 속도", cell.type < 2 ? "—" : "평소의 " + Math.round(cell.speed * 100) + "%"],
+        ["위험 요소", cell.hazard?.name || "없음"],
+        ["현재 자원", definition ? definition.name + " · " + Math.ceil(food.amount) + "개" + (definition.harvestLocked ? " · 채집 잠금" : "") : "없음"]];
+      const list = document.getElementById("codex-cell-details");
+      const signature = JSON.stringify(rows);
+      if (list.dataset.signature === signature) return;
+      list.dataset.signature = signature;
+      const fragment = document.createDocumentFragment();
+      for (const [name, value] of rows) {
+        const term = document.createElement("dt"), detail = document.createElement("dd");
+        term.textContent = name; detail.textContent = value;
+        fragment.append(term, detail);
+      }
+      list.replaceChildren(fragment);
+      section.classList.toggle("has-hazard", !!cell.hazard);
+    }
+
+    function renderTerrainCodex(entry, related) {
+      const { kind, value } = entry;
+      const cell = codexCell();
+      const terrain = kind === "terrain" ? value : cell?.hazard?.key === value.key ? cell.terrain :
+        TERRAIN_CODEX.find(terrain => terrain.key === value.terrain);
+      document.getElementById("codex-related-title").textContent = "발견 가능한 자원";
+      const guide = document.createElement("p");
+      guide.className = "codex-terrain-guide";
+      guide.textContent = kind === "hazard" ? "위험 요소가 없는 " + terrain.name + "의 자원 분포입니다." :
+        "지형의 분포 목록이며, 선택한 칸의 자원과 다릅니다.";
+      const list = document.createElement("ul");
+      list.className = "codex-terrain-resources";
+      const resources = terrainCodexResources(terrain.type, worldMap.generationVersion);
+      for (const resource of resources) {
+        const item = document.createElement("li"), image = document.createElement("img"), name = document.createElement("span");
+        image.src = assetSource(resource.carryImage); image.alt = "";
+        name.textContent = resource.name; item.append(image, name); list.append(item);
+      }
+      if (!resources.length) guide.textContent = "이 지형에 자연 배치되는 채집 가능한 자원이 없습니다.";
+      related.append(guide, list);
+      const heading = document.createElement("h4");
+      heading.textContent = "관련 정보";
+      const links = document.createElement("div");
+      links.className = "codex-terrain-links";
+      const entries = kind === "hazard" ? [["terrain:" + terrain.key, terrain.name]] :
+        HAZARD_CODEX.filter(hazard => hazard.terrain === terrain.key).map(hazard => ["hazard:" + hazard.key, hazard.name]);
+      if (terrain.type >= 6 && terrain.type <= 8) for (const mountain of TERRAIN_CODEX.slice(6, 9)) {
+        if (mountain.key !== terrain.key) entries.push(["terrain:" + mountain.key, mountain.name]);
+      }
+      if (terrain.type >= 2) entries.push(["attribute:feet", "이속 증가"]);
+      for (const [key, name] of entries) {
+        const link = document.createElement("button");
+        link.type = "button"; link.className = "codex-text-link"; link.textContent = name;
+        link.addEventListener("click", () => navigateCodex(key, true, codexState.cell));
+        links.append(link);
+      }
+      if (entries.length) related.append(heading, links);
+    }
+
     function renderCodexList() {
       const query = codexSearch.value.trim().toLocaleLowerCase();
       const fragment = document.createDocumentFragment();
-      for (const [kind, title, values] of [["attribute", "속성", ATTRIBUTES], ["synergy", "조합 시너지", ATTRIBUTE_COMBINATIONS], ["nest", "둥지", NEST_CODEX]]) {
+      for (const [kind, title, values] of [["attribute", "속성", ATTRIBUTES], ["synergy", "조합 시너지", ATTRIBUTE_COMBINATIONS], ["nest", "둥지", NEST_CODEX], ["terrain", "지형", TERRAIN_CODEX], ["hazard", "위험 요소", HAZARD_CODEX]]) {
         if (codexState.category !== "all" && codexState.category !== kind) continue;
         const matches = values.map((value, index) => ({ value, key: kind === "synergy" ? String(index) : value.key }))
           .filter(({ value }) => [value.name, value.effect || "", value.description,
+            ...(kind === "terrain" ? terrainCodexResources(value.type, worldMap.generationVersion).map(resource => resource.name) : []),
             ...(value.keys || []).map((key) => ATTRIBUTES.find((attribute) => attribute.key === key).name)].join(" ").toLocaleLowerCase().includes(query));
         if (!matches.length) continue;
         const heading = document.createElement("h3");
@@ -5545,6 +5919,7 @@
             image.alt = "";
             icons.append(image);
           }
+          if (kind === "terrain" || kind === "hazard") icons.append(codexTerrainImage(value, kind));
           if (kind === "nest") {
             const image = document.createElement("img");
             image.className = "evolution-symbol";
@@ -5573,7 +5948,7 @@
       const { kind, key, value } = entry;
       const article = document.getElementById("codex-article");
       article.style.setProperty("--attribute-color", kind === "attribute" ? value.color : "#b4dfcf");
-      document.getElementById("codex-entry-kind").textContent = kind === "attribute" ? "속성" : kind === "nest" ? "둥지" : "조합 시너지";
+      document.getElementById("codex-entry-kind").textContent = kind === "attribute" ? "속성" : kind === "nest" ? "둥지" : kind === "terrain" ? "지형" : kind === "hazard" ? "위험 요소" : "조합 시너지";
       document.getElementById("codex-article-name").textContent = value.name;
       setEvolutionText(document.getElementById("codex-article-effect"), kind !== "synergy" ? value.effect :
         value.keys.map((attributeKey) => ATTRIBUTES.find((attribute) => attribute.key === attributeKey).name).join(" + "));
@@ -5582,7 +5957,10 @@
       hero.replaceChildren();
       const related = document.getElementById("codex-related");
       related.replaceChildren();
-      if (kind === "attribute") {
+      if (kind === "terrain" || kind === "hazard") {
+        hero.append(codexTerrainImage(value, kind));
+        renderTerrainCodex(entry, related);
+      } else if (kind === "attribute") {
         const image = document.createElement("img");
         image.src = value.image;
         image.alt = value.name + " 문양";
@@ -5679,7 +6057,7 @@
         const slots = document.createElement("td");
         slots.textContent = balance.slotCapacity + "칸";
         const attributes = document.createElement("td");
-        attributes.textContent = balance.plannedAttributeCount + "종";
+        attributes.textContent = ATTRIBUTES.length + "종";
         const capacity = document.createElement("td");
         capacity.textContent = balance.pointCapacity.toLocaleString("ko-KR");
         const cost = document.createElement("td");
@@ -5708,6 +6086,7 @@
       if (!entry) return;
       document.getElementById("nest-growth-info").setAttribute("aria-expanded", String(codex.open && entry.kind === "nest"));
       if (entry.kind === "nest") updateNestGrowthCodex();
+      updateTerrainCodexCell(entry);
       const counts = attributeCounts(unitDraft ? unitDraft.slots : []);
       const stack = document.getElementById("codex-stack");
       stack.hidden = entry.kind !== "attribute";
@@ -5727,16 +6106,26 @@
       codexForward.disabled = codexState.index >= codexState.history.length - 1;
     }
 
-    function navigateCodex(entry, recordHistory) {
+    function navigateCodex(entry, recordHistory, cell) {
       const target = codexEntry(entry);
       if (!target) return;
       hideHelpTooltip();
-      if (recordHistory && codexState.history[codexState.index] !== entry) {
+      if (codexState.category !== "all" && codexState.category !== target.kind) {
+        codexState.category = target.kind;
+        for (const filter of document.querySelectorAll("[data-codex-category]")) {
+          filter.setAttribute("aria-pressed", String(filter.dataset.codexCategory === target.kind));
+        }
+      }
+      const previous = codexState.history[codexState.index];
+      const context = cell || null;
+      if (recordHistory && (previous?.entry !== entry || previous?.cell?.x !== context?.x ||
+          previous?.cell?.y !== context?.y || previous?.cell?.roomId !== context?.roomId)) {
         codexState.history = codexState.history.slice(0, codexState.index + 1);
-        codexState.history.push(entry);
+        codexState.history.push({ entry, cell: context });
         codexState.index = codexState.history.length - 1;
       }
       codexState.entry = entry;
+      codexState.cell = context;
       selectedAttribute = target.kind === "attribute" ? target.key : null;
       renderCodexArticle(target);
       renderCodexList();
@@ -5745,14 +6134,19 @@
       document.getElementById("codex-article-name").focus({ preventScroll: true });
     }
 
-    function openCodex(entry) {
+    function openCodex(entry, cell) {
       const opening = !codex.open;
       if (opening) {
         codexState.returnFocus = document.activeElement;
         evolutionPanel.inert = !evolutionPanel.hidden;
         codex.showModal();
       }
-      navigateCodex(entry, true);
+      codexState.category = entry.split(":")[0];
+      codexSearch.value = "";
+      for (const filter of document.querySelectorAll("[data-codex-category]")) {
+        filter.setAttribute("aria-pressed", String(filter.dataset.codexCategory === codexState.category));
+      }
+      navigateCodex(entry, true, cell);
     }
 
     function closeCodex(restoreFocus) {
@@ -5773,11 +6167,13 @@
       const index = codexState.index + direction;
       if (index < 0 || index >= codexState.history.length) return;
       codexState.index = index;
-      navigateCodex(codexState.history[index], false);
+      const previous = codexState.history[index];
+      navigateCodex(previous.entry, false, previous.cell);
     }
 
     function equipDesignAttribute(attributeKey) {
-      if (!unitDraft || evolutionPanel.hidden || !attributeKey || unitDraft.slots.length >= slotCapacity()) return;
+      if (!unitDraft || evolutionPanel.hidden || !ATTRIBUTES.some(attribute => attribute.key === attributeKey) || unitDraft.slots.length >= slotCapacity()) return;
+      if (ATTRIBUTES.find(attribute => attribute.key === attributeKey)?.stacking === false && unitDraft.slots.includes(attributeKey)) return;
       unitDraft.slots.push(attributeKey);
       unitDraft.error = "";
       renderDesignSlots();
@@ -6053,9 +6449,9 @@
     async function prepareTribeRendering(colonies) {
       await Promise.all([...new Set(colonies.map(colony => colony.tribe).filter(key => key && key !== "bean"))].map(async key => {
         const tribe = Spawner.PLAYER_TRIBES.find(entry => entry.key === key);
-        await tribeArt.prepareUnit(tribe);
+        await prepareAgentMovement(tribe);
         if (key === "spring") await springBirthSheet.decode();
-        if (key === "pebble") await Promise.all([pebbleBirthSheet.decode(), pebbleBirthNest.decode()]);
+        if (key === "pebble") await Promise.all([pebbleBirthSheet.decode(), pebbleBirthForeground.decode()]);
         if (tribeColonies.has(key)) return;
         const source = new Image();
         source.src = assetSource(tribe.nest);
@@ -6073,12 +6469,30 @@
         const appearance = { sprite, scale: 1, groundWidth: width / 2048,
           top: (1860 - height) / 2048, centerY: 384.5 / 512,
           animation: { smooth: true, frameCount: 1, frameMs: 1, restMs: 0 } };
-        if (key === "spring") appearance.birthOutlet = {
-          x: ((2048 - width) / 2 + (1616 - bounds.x) * scale) / 2048,
-          y: (1860 - height + (646 - bounds.y) * scale) / 2048
-        };
+        if (key === "spring") {
+          const sheet = new Image();
+          sheet.src = assetSource("DesignAssets/Tribes/spring/Animations/Nests/stage-01-idle-v5/nest-stage-01-idle-sheet.png");
+          await sheet.decode();
+          const sourceScale = 420 / 1492;
+          const frameScale = scale / sourceScale;
+          appearance.animation = {
+            smooth: false, sheet, frameSize: 512, columns: 10, frameCount: 60, frameMs: 4000 / 60, restMs: 0,
+            placement: {
+              x: ((2048 - width) / 2 - bounds.x * scale - (46 - 142 * sourceScale) * frameScale) / 2048,
+              y: (1860 - height - bounds.y * scale - (466 - 774 * sourceScale) * frameScale) / 2048,
+              width: 512 * frameScale / 2048, height: 512 * frameScale / 2048
+            }
+          };
+          appearance.birthOutlet = {
+            x: ((2048 - width) / 2 + (1616 - bounds.x) * scale) / 2048,
+            y: (1860 - height + (646 - bounds.y) * scale) / 2048
+          };
+        }
         if (key === "pebble") {
-          appearance.birthSprite = pebbleBirthNest;
+          const sheet = new Image();
+          sheet.src = assetSource("DesignAssets/Tribes/pebble/Animations/Nests/stage-01-idle-den-v1/nest-stage-01-idle-sheet.webp");
+          await sheet.decode();
+          appearance.animation = { smooth: false, sheet, frameSize: 512, columns: 8, frameCount: 48, frameMs: 50, restMs: 2400 };
           appearance.birthOutlet = { x: PEBBLE_BIRTH_ANIMATION.nestOutletX, y: PEBBLE_BIRTH_ANIMATION.nestOutletY };
         }
         tribeColonies.set(key, appearance);
@@ -6243,25 +6657,30 @@
       foodSpotCache.clear();
       let forestChanged = false;
       for (const cell of food) {
-        foodCellMap.set(cell.x + "," + cell.y, cell);
+        foodCellMap.set(cell.key || cell.x + "," + cell.y, cell);
         const key = Math.floor(cell.x / FOOD_REGION_SIZE) + "," + Math.floor(cell.y / FOOD_REGION_SIZE);
         if (!foodSpotCache.has(key)) foodSpotCache.set(key, { cells: [] });
         foodSpotCache.get(key).cells.push(cell);
-        if (cell.kind !== "corpse" && !Spawner.isTreeFood(cell, worldMap) &&
-            forest.cells.delete(cell.x + "," + cell.y)) {
+        const tree = forest.cells.get(cell.x + "," + cell.y);
+        if ((!cell.key || cell.key === cell.x + "," + cell.y) && cell.kind !== "corpse" &&
+            !Spawner.isTreeFood(cell, worldMap) && !(cell.resourceType === "tree" && cell.amount > 0) &&
+            tree) {
+          forest.cells.delete(cell.x + "," + cell.y);
+          if (worldMap.treeCells) worldMap.treeCells[cell.y * WORLD_SIZE + cell.x] = 0;
           forest.revealed.delete(cell.y * WORLD_SIZE + cell.x);
-          updateForestRegion(cell.x, cell.y);
+          for (const index of forestTreeRegions(tree)) updateForestRegion(index % 20 * 16, Math.floor(index / 20) * 16);
           forestChanged = true;
         }
       }
       if (forestChanged) forest.trees = forest.trees.filter(tree => forest.cells.has(tree.column + "," + tree.row));
       if (selection) {
-        const target = selection.kind === "agent" ? state.agents.find((agent) => agent.id === selection.target.id) :
+        const target = selection.kind === "terrain" ? terrainCodexCell({ ...worldMap, size: WORLD_SIZE }, state.explored, selection.target.x, selection.target.y) :
+          selection.kind === "agent" ? state.agents.find((agent) => agent.id === selection.target.id) :
           selection.kind === "colony" ? colonyEntries.find((colony) => colony.id === selection.target.id) :
           selection.kind === "tree" ? forest.cells.get(selection.target.column + "," + selection.target.row) :
           selection.kind === "hazard" ? hazardCells[selection.target.row * WORLD_SIZE + selection.target.column] :
           selection.kind === "burrow" ? worldMap.burrows.find(burrow => burrow.id === selection.target.id && burrow.health > 0) :
-          foodCellMap.get(selection.target.x + "," + selection.target.y);
+          foodCellMap.get(selection.target.key || selection.target.x + "," + selection.target.y);
         const corpse = selection.kind === "agent" && !target ? state.corpses.find(cell => cell.agentId === selection.target.id) : null;
         state.selection = corpse ? { kind: "corpse", target: corpse } : target && (selection.kind !== "corpse" ||
           target.kind === "corpse" && target.amount > 0) ? { kind: selection.kind, target } : null;
@@ -6314,9 +6733,7 @@
       audio.updateMusic(null);
       connection.roomId = roomId;
       connection.revision = -1;
-      discoveryReadRequested = 0;
-      notificationSignature = "";
-      hideDiscoveryToast();
+      clearDiscoveryToasts();
       foodDeliveries.clear();
       resetAudio();
       connection.active = false;

@@ -1,8 +1,10 @@
 import { ENCOUNTER_TYPES } from "./encounter-types.mjs";
 import { unitTerrainSpeedMultiplier } from "./attributes.mjs";
-import { CORPSE_LIFETIME } from "./lifespan.mjs";
+import { CORPSE_LIFETIME, placeCorpse } from "./lifespan.mjs";
+import { createCombat, canPursueCombat } from "./combat.mjs";
 
 export function createEncounters(environment, saved, residents) {
+  const combat = environment.combatSystem || (environment.combatSystem = createCombat(environment));
   const size = 320;
   const types = new Map(ENCOUNTER_TYPES.map(type => [type.key, type]));
   const plans = new Map((environment.world.encounters || []).filter(plan => types.has(plan.key)).map(plan => [plan.key, plan]));
@@ -78,6 +80,7 @@ export function createEncounters(environment, saved, residents) {
 
   function updateMembership(record) {
     const plan = plans.get(record.key);
+    if (plan.spawnPoints) return;
     if (record.x === plan.x && record.y === plan.y) return;
     const first = record.y * size + record.x, cells = new Set([first]), queue = [{ index: first, distance: 0 }];
     for (let cursor = 0; cursor < queue.length; cursor++) {
@@ -93,17 +96,17 @@ export function createEncounters(environment, saved, residents) {
 
   function spawn(record, initial) {
     const plan = plans.get(record.key), type = types.get(record.key);
-    const candidates = [record.y * size + record.x, ...memberships.get(record.key)].filter(index => spawnHabitat(plan, index % size, Math.floor(index / size)) &&
+    const candidates = (plan.spawnPoints || [record.y * size + record.x, ...memberships.get(record.key)]).filter(index => spawnHabitat(plan, index % size, Math.floor(index / size)) &&
       !(environment.food.get(index % size + "," + Math.floor(index / size))?.amount > 0) &&
       !occupied(index % size, Math.floor(index / size), null) && (initial || !visible(index % size, Math.floor(index / size))));
     if (!candidates.length) return false;
-    candidates.sort((left, right) => Math.hypot(left % size - record.x, Math.floor(left / size) - record.y) -
+    if (!plan.spawnPoints) candidates.sort((left, right) => Math.hypot(left % size - record.x, Math.floor(left / size) - record.y) -
       Math.hypot(right % size - record.x, Math.floor(right / size) - record.y) || left - right);
     const index = candidates[0], x = index % size, y = Math.floor(index / size);
     record.sequence++;
     state.agents.push({ id: "encounter:" + record.key + ":" + record.sequence, species: record.key, name: type.name,
       faction: type.hostile ? "hostile" : "neutral", movementType: type.flying ? "flying" : "ground", encounterKey: record.key,
-      x, y, homeX: record.x, homeY: record.y, health: 12, stats: { health: 12, attack: 1, speed: .5, vision: plan.radius, resistance: 1 },
+      x, y, homeX: plan.spawnPoints ? x : record.x, homeY: plan.spawnPoints ? y : record.y, health: 12, stats: { health: 12, attack: 1, speed: .5, vision: plan.radius, resistance: 1 },
       attributes: {}, carrying: 0, renderFromX: x, renderFromY: y, moveStartedAt: environment.simSeconds, moveDuration: 0,
       mode: "idle", nextActionAt: environment.simSeconds, animationStartedAt: environment.simSeconds, facing: 1, stepCount: 0,
       hidden: ["soil-mole", "bubble-toad"].includes(record.key), hiddenUntil: 0, routeCursor: 0, routeDirection: 1,
@@ -122,7 +125,9 @@ export function createEncounters(environment, saved, residents) {
     if (now >= type.guaranteedAt) return true;
     if (type.key === "spring-keeper") return discovered("flower-tail-bird") && [...environment.games.values()].reduce((sum, game) => sum + game.colonyFood, 0) >= 10;
     if (type.key === "lantern-keeper") {
-      if (record.warningUntil === null && players().some(({ agent }) => agent.attributes.antenna > 0 && Math.hypot(agent.x - record.x, agent.y - record.y) <= plans.get(type.key).radius)) record.warningUntil = now + 30;
+      const plan = plans.get(type.key), points = plan.spawnPoints || [record.y * size + record.x];
+      if (record.warningUntil === null && players().some(({ agent }) => agent.attributes.antenna > 0 && points.some(index =>
+        Math.hypot(agent.x - index % size, agent.y - Math.floor(index / size)) <= plan.radius))) record.warningUntil = now + 30;
       return record.warningUntil !== null && now >= record.warningUntil;
     }
     if (type.key === "old-garden-snail") return now >= 360;
@@ -138,13 +143,14 @@ export function createEncounters(environment, saved, residents) {
       if (record.dead || !eligible(record, type)) continue;
       if (type.unique && !record.spawned) relocate(record, plan);
       const living = state.agents.filter(agent => agent.species === record.key && agent.health > 0).length;
-      if (!record.spawned || record.sequence < type.populationLimit) {
-        for (let count = living; count < type.populationLimit; count++) if (!spawn(record, true)) break;
-      } else if (!type.unique && living < type.populationLimit) {
+      const populationLimit = plan.populationLimit ?? type.populationLimit;
+      if (!record.spawned || record.sequence < populationLimit) {
+        for (let count = living; count < populationLimit; count++) if (!spawn(record, true)) break;
+      } else if (!type.unique && living < populationLimit) {
         if (record.missingSince === null) { record.missingSince = now; record.nextSpawnAt = now + type.respawnSeconds; }
         if (now >= record.nextSpawnAt && spawn(record, false)) {
           record.nextSpawnAt += type.respawnSeconds;
-          if (living + 1 >= type.populationLimit) { record.missingSince = null; record.nextSpawnAt = null; }
+          if (living + 1 >= populationLimit) { record.missingSince = null; record.nextSpawnAt = null; }
         }
       }
     }
@@ -165,7 +171,8 @@ export function createEncounters(environment, saved, residents) {
         while (parent.get(next) !== start) next = parent.get(next);
         return next;
       }
-      for (const next of neighbors(index)) if (!parent.has(next) && membership.has(next) && !occupied(next % size, Math.floor(next / size), agent)) {
+      for (const next of neighbors(index)) if (!parent.has(next) && membership.has(next) && (!occupied(next % size, Math.floor(next / size), agent) ||
+          reach === 0 && next % size === target.x && Math.floor(next / size) === target.y)) {
         parent.set(next, index); queue.push(next);
       }
     }
@@ -185,7 +192,8 @@ export function createEncounters(environment, saved, residents) {
   function tick() {
     populate();
     const now = environment.simSeconds, nearby = players();
-    for (const agent of state.agents) {
+    for (const agent of [...state.agents]) {
+      if (agent.health <= 0 || combat.update(agent, now)) continue;
       if (now < agent.nextActionAt) continue;
       const plan = plans.get(agent.species), type = types.get(agent.species), membership = memberships.get(agent.species);
       const targets = nearby.map(entry => ({ ...entry, distance: Math.hypot(agent.x - entry.agent.x, agent.y - entry.agent.y) }))
@@ -206,19 +214,9 @@ export function createEncounters(environment, saved, residents) {
       agent.hidden = agent.species === "soil-mole" ? !targets.some(entry => ["gather", "harvest", "prepare"].includes(entry.agent.mode)) :
         agent.species === "bubble-toad" ? !target : agent.species === "dew-rabbit" ? !!target && target.distance <= 2 : false;
       if (agent.hidden) { agent.nextActionAt = now + 1; continue; }
-      if (type.hostile && target) {
+      if (type.hostile && target && canPursueCombat(agent, target.agent, now)) {
         if (agent.species === "soil-boar" && agent.warningUntil === null) { agent.warningUntil = now + 1; agent.nextActionAt = agent.warningUntil; continue; }
-        const reach = agent.species === "snare-vine" ? plan.radius : 1;
-        if (Math.abs(agent.x - target.agent.x) + Math.abs(agent.y - target.agent.y) <= reach) {
-          if (now >= agent.attackReadyAt) {
-            target.game.receiveDamage(target.agent, agent.stats.attack);
-            agent.attackReadyAt = now + 2;
-            agent.attackStartedAt = now; agent.mode = "attack";
-          }
-          agent.nextActionAt = Math.max(now + .25, agent.attackReadyAt);
-          continue;
-        }
-        const next = agent.species === "snare-vine" ? null : step(agent, target.agent, reach);
+        const next = agent.species === "snare-vine" ? null : step(agent, target.agent, 0);
         if (next !== null) { move(agent, next); continue; }
       }
       if (["snare-vine", "soil-mole", "bubble-toad"].includes(agent.species) || ["talon-owl", "rolling-acorn"].includes(agent.species) && !target) {
@@ -251,16 +249,13 @@ export function createEncounters(environment, saved, residents) {
     if (agent.health > 0) return;
     const record = state.records.find(entry => entry.key === agent.species), type = types.get(agent.species);
     state.kills[agent.species] = (state.kills[agent.species] || 0) + 1;
-    if (type.unique) record.dead = true;
+    if (type.unique) record.dead = record.sequence >= (plans.get(agent.species).populationLimit ?? type.populationLimit) &&
+      !state.agents.some(entry => entry.species === agent.species && entry.health > 0);
     else if (record.missingSince === null) { record.missingSince = environment.simSeconds; record.nextSpawnAt = environment.simSeconds + type.respawnSeconds; }
     state.agents = state.agents.filter(entry => entry !== agent);
-    const candidates = [agent.y * size + agent.x, ...neighbors(agent.y * size + agent.x)];
-    const index = candidates.find(index => !environment.food.has(index % size + "," + Math.floor(index / size)));
-    if (index !== undefined) {
-      const x = index % size, y = Math.floor(index / size);
-      environment.food.set(x + "," + y, { x, y, kind: "corpse", species: agent.species, amount: 4, attributes: {}, facing: agent.facing,
-        diedAt: environment.simSeconds, decaysAt: environment.simSeconds + CORPSE_LIFETIME, renderX: x, renderY: y });
-    }
+    placeCorpse(environment.food, { x: agent.x, y: agent.y, agentId: agent.id, kind: "corpse", species: agent.species, amount: 4,
+      carapaceAmount: ["spiny-back-beetle", "spiny-back-leader"].includes(agent.species) ? 4 : 0, attributes: {}, facing: agent.facing,
+      diedAt: environment.simSeconds, decaysAt: environment.simSeconds + CORPSE_LIFETIME, renderX: agent.x, renderY: agent.y });
   }
 
   for (const record of state.records) updateMembership(record);

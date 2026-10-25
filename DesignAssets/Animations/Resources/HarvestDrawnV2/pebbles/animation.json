@@ -21,7 +21,7 @@
   "sheet": "harvest-sheet.png",
   "preview": "pebbles-harvest.webp",
   "method": "Existing drawn motion poses retained. Stationary body pixels retained identically at fixed coordinates; wood source phases share a small uniform size correction. No new motion synthesis.",
-  "runtimeIntegrated": false,
+  "runtimeIntegrated": true,
   "sourceDrawings": {
     "key": {
       "file": "source-drawings/key.png",

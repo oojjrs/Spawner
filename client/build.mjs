@@ -4,11 +4,15 @@ import { fileURLToPath } from "node:url";
 import { CREATURE_ASSETS } from "../server/creatures.mjs";
 import { AGENT_ATTACK_ASSET } from "../server/attack.mjs";
 import { AGENT_DEATH_ANIMATION } from "./agent-death.mjs";
+import { AGENT_SPIRIT } from "./agent-spirit.mjs";
 import { TALON_OWL_IDLE } from "./talon-owl-idle.mjs";
 import { SPRING_BIRTH_ANIMATION, PEBBLE_BIRTH_ANIMATION } from "./birth.mjs";
 import { RESOURCE_TYPES } from "../server/resources.mjs";
 import { RESOURCE_HARVEST_ANIMATIONS } from "./harvest-assets.mjs";
 import { PLAYER_TRIBE_ASSETS } from "../server/player-tribes.mjs";
+import { PLAYER_COMBAT_ASSETS } from "./combat.mjs";
+import { TERRAIN_CODEX, HAZARD_CODEX, terrainCodexResources } from "./terrain-codex.mjs";
+import { WORLD_GENERATION_VERSION } from "../server/world.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const imports = /^import\s+\{([^}]+)\}\s+from\s+["']([^"']+)["'];?\r?$/gm;
@@ -40,12 +44,38 @@ function bundle(entries) {
 }
 
 const worker = `(() => {\n${bundle(["client/worker.mjs"])}\n})();`;
-const assets = Object.fromEntries([...PLAYER_TRIBE_ASSETS, ...RESOURCE_TYPES.map(item => item.image), ...RESOURCE_HARVEST_ANIMATIONS.map(item => item.image), ...CREATURE_ASSETS, TALON_OWL_IDLE.image, AGENT_ATTACK_ASSET, AGENT_DEATH_ANIMATION.image, SPRING_BIRTH_ANIMATION.image, PEBBLE_BIRTH_ANIMATION.image, PEBBLE_BIRTH_ANIMATION.nest, "DesignAssets/Foods/food-berry-bush.png", "DesignAssets/Terrain/standing-tree-smooth-atlas.png", "DesignAssets/Terrain/poison-spore-atlas.png", "DesignAssets/Terrain/thorn-root-atlas.png"].map(name => [name, name]));
-const browser = bundle(["server/encounter-types.mjs", "server/player-tribes.mjs", "client/tribe-art.mjs", "server/lifespan.mjs", "server/growth.mjs", "server/resources.mjs", "server/attributes.mjs", "server/nests.mjs", "server/food.mjs", "server/birth.mjs", "server/attack.mjs", "client/agent-death.mjs", "server/beetle-animation.mjs", "client/talon-owl-idle.mjs", "client/birth.mjs", "client/harvest-assets.mjs", "client/harvest.mjs", "client/client.mjs"]);
-const content = `(() => {\n${browser}\nconst workerSource = ${JSON.stringify(worker)};\nglobalThis.Spawner = Object.freeze({ ...modules["server/encounter-types.mjs"], ...modules["server/player-tribes.mjs"], ...modules["client/tribe-art.mjs"], ...modules["server/lifespan.mjs"], ...modules["server/growth.mjs"], ...modules["server/resources.mjs"], ...modules["server/attributes.mjs"], ...modules["server/food.mjs"], ...modules["server/birth.mjs"], ...modules["server/attack.mjs"], ...modules["client/agent-death.mjs"], ...modules["server/beetle-animation.mjs"], ...modules["client/talon-owl-idle.mjs"], ...modules["client/birth.mjs"], ...modules["client/harvest-assets.mjs"], ...modules["client/harvest.mjs"], NEST_LEVELS: modules["server/nests.mjs"].NEST_LEVELS, createClient: (onState, onError, onSaved) => modules["client/client.mjs"].createClient(onState, onError, onSaved, workerSource), assets: ${JSON.stringify(assets)} });\n})();\n`;
+const assets = Object.fromEntries([...PLAYER_TRIBE_ASSETS, ...PLAYER_COMBAT_ASSETS, ...RESOURCE_TYPES.flatMap(item => [item.image, item.carryImage]), ...RESOURCE_HARVEST_ANIMATIONS.map(item => item.image), ...CREATURE_ASSETS, TALON_OWL_IDLE.image, AGENT_ATTACK_ASSET, AGENT_DEATH_ANIMATION.image, AGENT_SPIRIT.image, SPRING_BIRTH_ANIMATION.image, PEBBLE_BIRTH_ANIMATION.image, PEBBLE_BIRTH_ANIMATION.foreground, "DesignAssets/Foods/food-berry-bush.png", "DesignAssets/Terrain/standing-tree-smooth-atlas.png", "DesignAssets/Terrain/poison-spore-ground.png", "DesignAssets/Terrain/thorn-root-ground.png"].map(name => [name, name]));
+const browser = bundle(["client/terrain-codex.mjs", "server/combat.mjs", "client/combat.mjs", "server/encounter-types.mjs", "server/player-tribes.mjs", "client/tribe-art.mjs", "server/lifespan.mjs", "server/growth.mjs", "server/resources.mjs", "server/attributes.mjs", "server/nests.mjs", "server/food.mjs", "server/birth.mjs", "server/attack.mjs", "client/agent-death.mjs", "client/agent-spirit.mjs", "server/beetle-animation.mjs", "client/talon-owl-idle.mjs", "client/birth.mjs", "client/harvest-assets.mjs", "client/harvest.mjs", "client/client.mjs"]);
+const content = `(() => {\n${browser}\nconst workerSource = ${JSON.stringify(worker)};\nglobalThis.Spawner = Object.freeze({ ...modules["client/terrain-codex.mjs"], ...modules["server/combat.mjs"], ...modules["client/combat.mjs"], ...modules["server/encounter-types.mjs"], ...modules["server/player-tribes.mjs"], ...modules["client/tribe-art.mjs"], ...modules["server/lifespan.mjs"], ...modules["server/growth.mjs"], ...modules["server/resources.mjs"], ...modules["server/attributes.mjs"], ...modules["server/food.mjs"], ...modules["server/birth.mjs"], ...modules["server/attack.mjs"], ...modules["client/agent-death.mjs"], ...modules["client/agent-spirit.mjs"], ...modules["server/beetle-animation.mjs"], ...modules["client/talon-owl-idle.mjs"], ...modules["client/birth.mjs"], ...modules["client/harvest-assets.mjs"], ...modules["client/harvest.mjs"], NEST_LEVELS: modules["server/nests.mjs"].NEST_LEVELS, createClient: (onState, onError, onSaved) => modules["client/client.mjs"].createClient(onState, onError, onSaved, workerSource), assets: ${JSON.stringify(assets)} });\n})();\n`;
 writeFileSync(resolve(root, "client/runtime.js"), content.replace(/\r?\n/g, "\r\n"), "utf8");
 const designPath = resolve(root, "Design.html");
-const design = readFileSync(designPath, "utf8");
+let design = readFileSync(designPath, "utf8");
+const terrainTable = design.match(/<table[^>]*aria-label="지형 바닥"[^>]*>[\s\S]*?<\/table>/)?.[0];
+if (terrainTable) {
+  let table = terrainTable.replace(/<thead>[\s\S]*?<\/thead>/, '<thead><tr><th scope="col">지형</th><th scope="col">바닥</th><th scope="col">이동 효과</th><th scope="col">발견 가능한 자원</th></tr></thead>');
+  table = table.replace('<table ', '<table class="terrain-codex-table" ').replace('class="terrain-codex-table" class="terrain-codex-table"', 'class="terrain-codex-table"');
+  table = table.replace(/<tr>[\s\S]*?<\/tr>/g, row => {
+    const name = row.match(/<th scope="row">([^<]+)<\/th>/)?.[1];
+    const terrain = TERRAIN_CODEX.find(terrain => terrain.name === name);
+    if (!terrain && name !== '군락 바닥') return row;
+    const resources = terrain ? terrainCodexResources(terrain.type, WORLD_GENERATION_VERSION).map(resource => resource.name).join(' · ') || '없음' : '—';
+    const effect = terrain ? terrain.effect : '군락 점유 영역';
+    return row.replace(/(<\/figure><\/td>)[\s\S]*?<\/tr>$/, '$1<td>' + effect + '</td><td>' + resources + '</td></tr>');
+  });
+  design = design.replace(terrainTable, table);
+}
+const terrainObjects = design.match(/<table class="terrain-object-table"[^>]*>[\s\S]*?<\/table>/)?.[0];
+if (terrainObjects) design = design.replace(terrainObjects, terrainObjects.replace(/<tr>[\s\S]*?<\/tr>/g, row => {
+  const name = row.match(/<th scope="row">([^<]+)<\/th>/)?.[1];
+  const hazard = HAZARD_CODEX.find(hazard => hazard.name === name);
+  return hazard ? row.slice(0, row.lastIndexOf('<td>')) + '<td>' + hazard.description + '</td></tr>' : row;
+}));
+if (design !== readFileSync(designPath, "utf8")) writeFileSync(designPath, design.replace(/\r?\n/g, "\r\n"), "utf8");
+if (design.includes('<script id="design-world-model">')) {
+  const model = `(() => {\n${bundle(["server/map.mjs"])}\nconst map = modules["server/map.mjs"];\nglobalThis.SpawnerDesignWorld = { ...map, generateWorld: seed => map.generateMapWorld(seed) };\n})();`;
+  const updated = design.replace(/(<script id="design-world-model">)[\s\S]*?(<\/script>)/, (match, start, end) => start + "\n" + model + "\n" + end).replace(/\r?\n/g, "\r\n");
+  if (updated !== design) writeFileSync(designPath, updated, "utf8");
+}
 if (design.includes('<script id="world-model">')) {
   const model = `(() => {\n${bundle(["server/world.mjs"])}\nglobalThis.SpawnerWorld = { ...modules["server/world.mjs"], ...modules["server/burrows.mjs"] };\n})();`;
   const updated = design.replace(/(<script id="world-model">)[\s\S]*?(<\/script>)/, (match, start, end) => start + "\n" + model + "\n" + end).replace(/\r?\n/g, "\r\n");

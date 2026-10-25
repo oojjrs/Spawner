@@ -112,10 +112,6 @@
       "sourceManifest": "DesignAssets/Animations/Resources/HarvestV1/root-bulbs/StyleV2/sources.json"
     },
     {
-      "key": "meat",
-      "sourceManifest": "DesignAssets/Animations/Resources/HarvestV1/meat/StyleV2/sources.json"
-    },
-    {
       "key": "twigs",
       "sourceManifest": "DesignAssets/Animations/Resources/HarvestV1/twigs/StyleV2/sources.json"
     },
@@ -146,18 +142,6 @@
     {
       "key": "beeswax",
       "sourceManifest": "DesignAssets/Animations/Resources/HarvestV1/beeswax/StyleV2/sources.json"
-    },
-    {
-      "key": "carapace",
-      "sourceManifest": "DesignAssets/Animations/Resources/HarvestV1/carapace/StyleV2/sources.json"
-    },
-    {
-      "key": "iron-ore",
-      "sourceManifest": "DesignAssets/Animations/Resources/HarvestV1/iron-ore/StyleV2/sources.json"
-    },
-    {
-      "key": "quartz",
-      "sourceManifest": "DesignAssets/Animations/Resources/HarvestV1/quartz/StyleV2/sources.json"
     }
   ]
 }

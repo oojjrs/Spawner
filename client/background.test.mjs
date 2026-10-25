@@ -243,6 +243,7 @@ function audio() {
     document, AudioContext,
     window: { addEventListener() {} },
     SpawnerMusic: { create: () => ({ update() {}, unlock() { unlocks++; }, suspend() { suspensions++; } }) },
+    SpawnerCombatAudio: { sources: {} },
     SpawnerAssets: { source: value => value },
     fetch: async () => ({ ok: true, arrayBuffer: async () => new ArrayBuffer(0) }),
     setTimeout, performance
@@ -255,7 +256,7 @@ function audio() {
 test("숨겨지면 효과음과 음악을 멈추고 숨김 상태에서는 새 소리를 재생하지 않는다", async () => {
   const sound = audio();
   await sound.api.playClick();
-  sound.api.setHarvest(1);
+  sound.api.setHarvest(new Map([["honey-mushrooms", 1]]));
   assert.equal(sound.starts.length, 2);
   sound.document.hidden = true;
   sound.listeners.get("visibilitychange")();

@@ -4,18 +4,21 @@ import { BEETLE_ANIMATIONS, BEETLE_ANIMATION_ASSET, BEETLE_NEUTRAL_ASSET } from 
 import { unitTerrainSpeedMultiplier } from "./attributes.mjs";
 import { BURROW_TYPES, burrowDistance, burrowApproaches } from "./burrows.mjs";
 import { createBeetleRaids } from "./raids.mjs";
-import { CORPSE_LIFETIME, expireCorpses } from "./lifespan.mjs";
+import { CORPSE_LIFETIME, placeCorpse, expireCorpses } from "./lifespan.mjs";
+import { createCombat, canPursueCombat } from "./combat.mjs";
 
 export const CREATURE_ASSETS = [
   ...ENCOUNTER_ASSETS, "DesignAssets/Units/spiny-back-beetle.png", BEETLE_ANIMATION_ASSET, BEETLE_NEUTRAL_ASSET
 ];
 
 export function createCreatures(environment, saved) {
+  const combat = environment.combatSystem || (environment.combatSystem = createCombat(environment));
   const size = 320;
   let encounters = null;
   const species = "spiny-back-beetle";
   const stats = { health: 20, attack: 3, speed: 1 / 1.28, vision: 4, resistance: 1 };
   const burrows = environment.world.burrows || [];
+  const distribution = environment.world.encounters?.find(plan => plan.key === species && plan.spawnPoints);
   const burrowSites = new Map(burrows.map(burrow => [burrow.id, burrow]));
   const state = { version: 5, agents: [], burrows: burrows.map(burrow => ({ id: burrow.id,
     health: BURROW_TYPES[burrow.type].health, nextSpawnAt: environment.simSeconds + BURROW_TYPES[burrow.type].spawnInterval, spawnCount: 0 })) };
@@ -104,7 +107,8 @@ export function createCreatures(environment, saved) {
       const type = BURROW_TYPES[burrowSites.get(record.id).type];
       const periods = Math.floor((environment.simSeconds + 1e-8 - record.nextSpawnAt) / type.spawnInterval) + 1;
       record.nextSpawnAt += periods * type.spawnInterval;
-      const count = living.get(record.id) || 0, births = Math.min(periods, type.populationLimit - count);
+      const count = living.get(record.id) || 0, births = Math.min(periods, type.populationLimit - count,
+        distribution ? Math.max(0, distribution.populationLimit - state.agents.filter(agent => agent.health > 0).length) : Infinity);
       for (let index = 0; index < births; index++) if (!spawnFromBurrow(record)) break;
     }
   }
@@ -162,6 +166,17 @@ export function createCreatures(environment, saved) {
         if (Number.isSafeInteger(number)) record.spawnCount = Math.max(record.spawnCount, number);
       }
     }
+  } else if (distribution) {
+    for (const index of distribution.spawnPoints) {
+      const x = index % size, y = Math.floor(index / size);
+      const home = burrows.reduce((nearest, burrow) => !nearest ||
+        Math.hypot(x - burrow.entrance.x, y - burrow.entrance.y) < Math.hypot(x - nearest.entrance.x, y - nearest.entrance.y) ? burrow : nearest, null);
+      if (!home) continue;
+      const record = burrowRecords.get(home.id);
+      record.spawnCount++;
+      const agent = spawnAt(x, y, "beetle:" + home.id + ":" + record.spawnCount, home);
+      agent.homeX = x; agent.homeY = y;
+    }
   } else {
     for (const record of state.burrows) {
       const type = BURROW_TYPES[burrowSites.get(record.id).type];
@@ -201,20 +216,10 @@ export function createCreatures(environment, saved) {
   }
 
   function dropCorpse(agent) {
-    for (let radius = 0; radius <= 3; radius++) {
-      for (let dy = -radius; dy <= radius; dy++) {
-        for (let dx = -radius; dx <= radius; dx++) {
-          const x = agent.x + dx, y = agent.y + dy, key = x + "," + y;
-          if (!walkable(x, y, Boolean(agent.raid)) || environment.food.get(key)?.amount > 0) continue;
-          environment.food.set(key, { x, y, kind: "corpse", species, amount: 4, attributes: {}, facing: agent.facing,
-            agentId: agent.id, hurtStartedAt: agent.hurtStartedAt, hurtCount: agent.hurtCount,
-            diedAt: agent.deathStartedAt, decaysAt: agent.deathStartedAt + CORPSE_LIFETIME,
-            renderX: x === agent.x && y === agent.y ? agent.deathRenderX : x,
-            renderY: x === agent.x && y === agent.y ? agent.deathRenderY : y });
-          return;
-        }
-      }
-    }
+    placeCorpse(environment.food, { x: agent.x, y: agent.y, kind: "corpse", species, amount: 4, carapaceAmount: 4, attributes: {}, facing: agent.facing,
+      agentId: agent.id, hurtStartedAt: agent.hurtStartedAt, hurtCount: agent.hurtCount,
+      diedAt: agent.deathStartedAt, decaysAt: agent.deathStartedAt + CORPSE_LIFETIME,
+      renderX: agent.deathRenderX, renderY: agent.deathRenderY });
   }
 
   function removeDead() {
@@ -240,7 +245,8 @@ export function createCreatures(environment, saved) {
       if (current.first && Math.abs(current.x - goal.x) + Math.abs(current.y - goal.y) <= reach) return current.first;
       for (const cell of neighbors(current.x, current.y, Boolean(agent.raid))) {
         const key = cell.x + "," + cell.y;
-        if (visited.has(key) || occupied(cell.x, cell.y, agent) || Math.hypot(cell.x - home.x, cell.y - home.y) > 8) continue;
+        if (visited.has(key) || occupied(cell.x, cell.y, agent) && !(reach === 0 && cell.x === goal.x && cell.y === goal.y) ||
+            Math.hypot(cell.x - home.x, cell.y - home.y) > 8) continue;
         visited.add(key);
         queue.push({ ...cell, first: current.first || cell });
       }
@@ -271,6 +277,7 @@ export function createCreatures(environment, saved) {
     const opponents = players().concat([...environment.games.values()].filter(game => game.nest?.health > 0).map(game => ({ game, agent: game.nest })));
     for (const agent of state.agents) {
       if (agent.health <= 0) continue;
+      if (combat.update(agent, now)) continue;
       if (raids.update(agent)) continue;
       const home = raids.home(agent);
       if (agent.mode === "attack") {
@@ -286,13 +293,14 @@ export function createCreatures(environment, saved) {
         idle(agent, 0.8);
       }
       if (now < agent.moveStartedAt + agent.moveDuration) continue;
-      const target = opponents.filter(entry => entry.agent.health > 0 && raids.targetAllowed(agent, entry.game) && (entry.agent.kind === "nest" || walkable(entry.agent.x, entry.agent.y, Boolean(agent.raid))) &&
+      const target = opponents.filter(entry => entry.agent.health > 0 && raids.targetAllowed(agent, entry.game) &&
+        (entry.agent.kind === "nest" || canPursueCombat(agent, entry.agent, now) && walkable(entry.agent.x, entry.agent.y, Boolean(agent.raid))) &&
         Math.hypot(entry.agent.x - home.x, entry.agent.y - home.y) <= 8)
         .map(entry => ({ ...entry, distance: entry.agent.kind === "nest" ? burrowDistance(agent, entry.agent) : Math.abs(agent.x - entry.agent.x) + Math.abs(agent.y - entry.agent.y) }))
         .filter(entry => entry.distance <= agent.stats.vision)
         .sort((left, right) => left.distance - right.distance)[0];
       if (target) {
-        if (target.distance <= 1) {
+        if (target.agent.kind === "nest" && target.distance <= 1) {
           if (now < agent.attackReadyAt) { idle(agent, agent.attackReadyAt - now); continue; }
           agent.mode = "attack";
           agent.attackStartedAt = now;
@@ -305,7 +313,7 @@ export function createCreatures(environment, saved) {
         }
         const approach = target.agent.kind === "nest" ? burrowApproaches(target.agent).filter(cell => walkable(cell.x, cell.y, Boolean(agent.raid)) && !occupied(cell.x, cell.y, agent))
           .sort((left, right) => Math.abs(agent.x - left.x) + Math.abs(agent.y - left.y) - Math.abs(agent.x - right.x) - Math.abs(agent.y - right.y))[0] : target.agent;
-        const destination = approach && stepToward(agent, approach, target.agent.kind === "nest" ? 0 : 1);
+        const destination = approach && stepToward(agent, approach, 0);
         if (destination) move(agent, destination);
         else idle(agent, 0.5);
         continue;

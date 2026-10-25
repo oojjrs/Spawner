@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "start": "node hosting/serve.mjs",
-    "build": "node client/build.mjs"
+    "build": "node client/build.mjs",
+    "balance": "node server/balance.mjs"
   },
   "engines": { "node": ">=22" }
 }

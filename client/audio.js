@@ -9,22 +9,37 @@
   "sprout-pop": "DesignAssets/Audio/bean-sprout-pop.mp3",
   "spring-birth": "DesignAssets/Audio/spring-birth.mp3",
   "pebble-birth": "DesignAssets/Audio/pebble-birth-roll.mp3",
+  "spore-birth": "DesignAssets/Audio/spore-birth.mp3",
   "spring-landing": "DesignAssets/Audio/spring-landing.mp3",
   "spring-footstep": "DesignAssets/Audio/spring-footstep.mp3",
   "harvest": "DesignAssets/Audio/mushroom-harvest-loop.mp3",
   "harvest-soil": "DesignAssets/Audio/clay-harvest-handful.mp3",
+  "harvest-wood": "DesignAssets/Audio/wood-harvest-loop.mp3",
+  "harvest-pebbles": "DesignAssets/Audio/pebbles-harvest-loop.mp3",
+  "harvest-dew": "DesignAssets/Audio/dew-harvest-loop.mp3",
+  "harvest-meat": "DesignAssets/Audio/meat-harvest-loop.mp3",
+  "harvest-carapace": "DesignAssets/Audio/carapace-harvest-loop.mp3",
+  "harvest-grass-fiber": "DesignAssets/Audio/grass-fiber-harvest-loop.mp3",
+  "harvest-sand": "DesignAssets/Audio/sand-harvest-loop.mp3",
+  "harvest-iron-ore": "DesignAssets/Audio/iron-ore-harvest-loop.wav",
+  "harvest-copper-ore": "DesignAssets/Audio/copper-ore-harvest-loop.mp3",
+  "harvest-quartz": "DesignAssets/Audio/quartz-harvest-loop.mp3",
   "landing": "DesignAssets/Audio/bean-landing.mp3",
   "throw": "DesignAssets/Audio/mushroom-throw.mp3",
   "catch": "DesignAssets/Audio/nest-catch.mp3"
 };
+  const harvestSounds = Object.freeze({
+    "honey-mushrooms": "harvest", clay: "harvest-soil", tree: "harvest-wood", pebbles: "harvest-pebbles",
+    dew: "harvest-dew", meat: "harvest-meat", carapace: "harvest-carapace", "grass-fiber": "harvest-grass-fiber",
+    sand: "harvest-sand", "iron-ore": "harvest-iron-ore", "copper-ore": "harvest-copper-ore", quartz: "harvest-quartz"
+  });
   globalThis.SpawnerAudio = Object.freeze({ create: function () {
     let context = null;
     let loading = null;
     let muted = false;
     let active = true;
     let failed = !globalThis.AudioContext;
-    let harvest = null;
-    let soilHarvest = null;
+    const harvests = new Map();
     let clickSource = null;
     let clickGain = null;
     let discoverySource = null;
@@ -53,8 +68,7 @@
       discoverySource = null;
       for (const voice of voices) voice.source.stop();
       voices.clear();
-      harvest = null;
-      soilHarvest = null;
+      harvests.clear();
       lastPlayed.clear();
     }
 
@@ -116,8 +130,7 @@
         if (channel.source === source) {
           voices.delete(channel);
           channel.source = null;
-          if (harvest === channel) harvest = null;
-          if (soilHarvest === channel) soilHarvest = null;
+          for (const [type, voice] of harvests) if (voice === channel) harvests.delete(type);
         }
         refills.push({ channel, name });
         if (refillTimer === null) refillTimer = setTimeout(refillSources, 0);
@@ -144,8 +157,7 @@
           .sort((first, second) => first.priority - second.priority)[0];
       if (!voice) return null;
       if (voice.source) {
-        if (harvest === voice) harvest = null;
-        if (soilHarvest === voice) soilHarvest = null;
+        for (const [type, channel] of harvests) if (channel === voice) harvests.delete(type);
         voice.source.stop();
       }
       voice.priority = priority;
@@ -154,7 +166,7 @@
       voice.source = source;
       voice.name = name;
       source.loop = loop;
-      voice.gain.gain.value = (levels[name] ?? 1) * Math.min(1, volume);
+      voice.gain.gain.value = (levels[name] ?? (name.startsWith("harvest-") ? .8 : 1)) * Math.min(1, volume);
       voices.add(voice);
       source.start();
       return voice;
@@ -212,20 +224,23 @@
       source.start();
     }
 
-    function setHarvest(volume, soilVolume) {
-      if (!available() || !(volume > 0)) {
-        if (harvest) harvest.source.stop();
-        harvest = null;
-      } else {
-        if (!harvest) harvest = start("harvest", volume, true);
-        if (harvest) harvest.gain.gain.value = levels.harvest * Math.min(1, volume);
+    function setHarvest(volumes) {
+      for (const [type, voice] of harvests) {
+        if (!available() || !(volumes.get(type) > 0)) {
+          voice.source.stop();
+          harvests.delete(type);
+        }
       }
-      if (!available() || !(soilVolume > 0)) {
-        if (soilHarvest) soilHarvest.source.stop();
-        soilHarvest = null;
-      } else {
-        if (!soilHarvest) soilHarvest = start("harvest-soil", soilVolume, true);
-        if (soilHarvest) soilHarvest.gain.gain.value = levels["harvest-soil"] * Math.min(1, soilVolume);
+      if (!available()) return;
+      for (const [type, volume] of volumes) {
+        const name = harvestSounds[type];
+        if (!name || !(volume > 0)) continue;
+        let voice = harvests.get(type);
+        if (!voice) {
+          voice = start(name, volume, true);
+          if (voice) harvests.set(type, voice);
+        }
+        if (voice) voice.gain.gain.value = (levels[name] ?? .8) * Math.min(1, volume);
       }
     }
 

@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { attributeCounts, unitStats, unitMovementSpeed } from "./attributes.mjs";
+import { ATTRIBUTES, ATTRIBUTE_COMBINATIONS, attributeCounts, hasSynergy, unitStats, unitMovementSpeed } from "./attributes.mjs";
 import { createGame } from "./game.mjs";
 
 function fixture(tribe) {
@@ -87,4 +87,43 @@ test("이전 저장의 초반 유닛도 행동 역할에 맞는 실제 속성을
   game.restore(JSON.stringify(saved));
   assert.deepEqual(game.agents.map(agent => agent.slots), [["antenna"], ["strength"]]);
   assert.deepEqual(game.agents.map(agent => agent.stats.capacity), [1, 2]);
+});
+
+test("전용 이미지가 있는 다섯 속성만 제공하며 삭제한 속성의 시너지는 발동하지 않는다", () => {
+  assert.deepEqual(ATTRIBUTES.map(attribute => attribute.key), ["antenna", "strength", "butchery", "lifespan", "feet"]);
+  assert.deepEqual(ATTRIBUTES.map(attribute => attribute.name), ["감지", "채집량 증가", "분해", "수명", "이속 증가"]);
+  const counts = attributeCounts(["antenna", "strength", "strength", "lifespan", "feet", "feet"]);
+  for (const key of ["harvest", "digging", "absorption", "climbing", "shell", "aggression", "peaceful"]) {
+    assert.equal(Object.hasOwn(attributeCounts([key]), key), false);
+    assert.equal(hasSynergy(counts, [key]), false);
+    assert.equal(hasSynergy(counts, ["strength", key]), false);
+    assert.ok(ATTRIBUTE_COMBINATIONS.every(combination => !combination.keys.includes(key)));
+  }
+  assert.equal(unitStats(counts).resistance, 1);
+  assert.ok(Object.values(unitStats({})).every(Number.isFinite));
+});
+
+test("저장한 설계·개체의 폐기 속성은 제거하고 네 속성과 중복 장착을 보존한다", () => {
+  const game = fixture("bean");
+  const saved = JSON.parse(game.save());
+  saved.state.nestLevel = 4;
+  saved.state.templates = [{ id: 99, name: "이전 설계", revision: 1,
+    slots: ["harvest", "arms", "digging", "absorption", "climbing", "shell", "aggression", "peaceful", "antenna", "lifespan", "feet", "feet"] }];
+  Object.assign(saved.state.agents[0], { templateId: 99, slots: [...saved.state.templates[0].slots],
+    shield: 4, shieldUntil: 100, warningUntil: 100 });
+  game.restore(JSON.stringify(saved));
+  const restored = JSON.parse(game.save()).state;
+  assert.deepEqual(restored.templates[0].slots, ["strength", "antenna", "lifespan", "feet", "feet"]);
+  assert.deepEqual(game.agents[0].slots, restored.templates[0].slots);
+  assert.equal(game.agents[0].stats.resistance, 1);
+  assert.equal(game.agents[0].shield, 0);
+  assert.equal(game.agents[0].warningUntil, 0);
+  for (const key of ["aggression", "peaceful"]) {
+    assert.equal(Object.hasOwn(game.agents[0].attributes, key), false);
+    assert.equal(Object.hasOwn(game.agents[0].appearanceAttributes, key), false);
+    assert.ok(!game.agents[0].activeSlots.includes(key));
+  }
+  for (const key of ["harvest", "digging", "absorption", "climbing", "shell", "aggression", "peaceful"]) {
+    assert.throws(() => game.command({ type: "design", templateId: null, name: key, slots: [key], birth: false }), /설계 속성/);
+  }
 });

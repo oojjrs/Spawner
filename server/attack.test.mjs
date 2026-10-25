@@ -11,13 +11,14 @@ function fixture(speed) {
   environment.games.set(colony.ownerId, game);
   game.agents.splice(1);
   const agent = game.agents[0];
-  const target = { id: "rival:1", x: 49, y: 42, health: 12, cost: 3, carrying: 0, attributes: {},
+  const target = { id: "rival:1", x: 48, y: 42, health: 12, cost: 3, carrying: 0, attributes: {},
     stats: { health: 12, attack: 1, speed: 1, vision: 3 }, moveStartedAt: 0, moveDuration: 0 };
   const hits = [];
   environment.games.set("rival", { agents: [target], receiveDamage(victim, damage) { hits.push(damage); victim.health -= damage; } });
   Object.assign(agent, { x: 48, y: 42, moveStartedAt: 0, moveDuration: 0, moveBudget: 0,
     mode: "fight", decisionPending: null, nextDecisionAt: 100, knownEnemyIds: new Set([target.id]),
     utility: { action: "fight", target: { id: target.id, key: target.id, x: target.x, y: target.y }, route: [] } });
+  agent.combatDisposition = "aggressive";
   agent.stats.speed = speed;
   game.prepare(10);
   game.tick(.01);
@@ -35,21 +36,19 @@ test("6번째 프레임에 명중하고 충돌 자세 여섯 프레임을 유지
   assert.equal(agentAttackFrame(attack, 11), -1);
 });
 
-test("공격 시작 때 정한 대상이 이동해도 6번째 프레임에 한 번 피해를 준다", () => {
+test("같은 셀에 고정한 대상에게 6번째 프레임에 한 번 피해를 준다", () => {
   const { game, agent, target, hits } = fixture(1);
   assert.ok(agent.attack);
   assert.equal(target.health, 12);
   game.prepare(10.299);
   game.tick(.299);
   assert.equal(target.health, 12);
-  target.x = 90;
-  target.y = 90;
   game.prepare(10.3);
   game.tick(.001);
   assert.equal(target.health, 11);
   assert.equal(agent.attack.hit, true);
-  assert.equal(agent.attack.targetX, 90);
-  assert.equal(agent.attack.targetY, 90);
+  assert.equal(agent.attack.targetX, 48);
+  assert.equal(agent.attack.targetY, 42);
   assert.deepEqual({ x: agent.x, y: agent.y }, { x: 48, y: 42 });
   game.prepare(10.599);
   game.tick(.299);

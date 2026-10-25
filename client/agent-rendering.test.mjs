@@ -20,7 +20,7 @@ function rendering() {
   const canvas = () => ({ width: 512, height: 512, getContext: () => ({ clearRect() {}, drawImage() {} }) });
   const context = createContext({
     attributeCounts,
-    agentSprites: new Map(), agentSpriteSet: new WeakSet(), selectionOutlines: new WeakMap(),
+    agentSprites: new Map(), encounterSprites: new Map(), agentSpriteSet: new WeakSet(), selectionOutlines: new WeakMap(),
     agentRenderingTasks: new Map(), agentRenderingQueue: Promise.resolve(),
     foodSelectionShape: {}, selectionOutlineWidth: 1.2,
     document: { createElement: canvas },
@@ -41,7 +41,7 @@ function rendering() {
 
 test("첫 탄생과 성장 단계의 첫 표시에서는 이미지 합성과 윤곽 계산을 반복하지 않는다", async () => {
   const render = rendering();
-  const template = { slots: ["shell", "feet", "antenna", "strength", "shell"] };
+  const template = { slots: ["lifespan", "feet", "antenna", "strength", "lifespan"] };
   await render.context.prepareAgentTemplate(template);
   const prepared = { ...render.counts };
   for (const time of AGENT_GROWTH_THRESHOLDS) {

@@ -37,7 +37,7 @@ test("새싹콩의 유일한 먹이는 기본 채집 가능한 비옥토이며 �
   for (const type of ["honey-mushrooms", "berry-bush", "meat", "pebbles"]) assert.equal(isTribeFood(type, "bean"), false);
   assert.equal(isTribeFood("clay", "bean"), true);
   assert.equal(isTribeFood("clay", "spore"), false);
-  assert.equal(isTribeFood("berry-bush", "spore"), true);
+  assert.equal(isTribeFood("berry-bush", "spore"), false);
   assert.equal(canHarvestResource({ resourceType: "honey-mushrooms" }, {}, { harvest: 2, digging: 2, strength: 2 }), false);
 });
 

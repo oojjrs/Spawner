@@ -71,6 +71,7 @@ export function createRoom(title, seed, tribe, onProgress) {
 export function saveRoom(room) {
   return { version: 1, id: room.id, title: room.title, hostId: room.hostId, seed: room.seed,
     worldGenerationVersion: room.world.generationVersion,
+    depletedTrees: [...(room.world.depletedTrees || [])],
     simSeconds: room.simSeconds, revision: room.revision, updatedAt: Date.now(), resourceVersion: room.resourceVersion,
     colonies: room.colonies.map(colony => ({ ...colony, occupiedCells: [...colony.occupiedCells] })),
     food: [...room.food], creatures: room.creatureSystem.save(), games: [...room.games].map(([owner, game]) => [owner, game.save()]) };
@@ -97,6 +98,7 @@ export function restoreRoom(saved) {
     hostId: saved.hostId, seed: saved.seed, simSeconds: saved.simSeconds, revision: 0, updatedAt: saved.updatedAt,
     resourceVersion: Number.isInteger(saved.resourceVersion) ? saved.resourceVersion : 0,
     world: generateWorld(saved.seed, saved.worldGenerationVersion ?? 1), colonies: [], games: new Map(), food: new Map(saved.food), foodSpots: new Map() };
+  room.world.depletedTrees = new Set((saved.depletedTrees || []).filter(index => Number.isInteger(index) && index >= 0 && index < 320 * 320));
   const owners = new Set();
   const colonyIds = new Set();
   for (const colony of saved.colonies) {
@@ -113,7 +115,7 @@ export function restoreRoom(saved) {
   if (!owners.has(room.hostId)) throw new Error("플레이할 둥지를 찾을 수 없습니다.");
   for (const [key, cell] of room.food) {
     if (!cell || !Number.isInteger(cell.x) || !Number.isInteger(cell.y) || cell.x < 0 || cell.y < 0 || cell.x >= 320 || cell.y >= 320 ||
-        key !== cell.x + "," + cell.y || !Number.isFinite(cell.amount) || cell.amount < 0) throw new Error("먹이 저장 형식이 올바르지 않습니다.");
+        key !== cell.x + "," + cell.y && (key !== "corpse:" + cell.agentId || cell.key !== key) || !Number.isFinite(cell.amount) || cell.amount < 0) throw new Error("먹이 저장 형식이 올바르지 않습니다.");
   }
   populateResourceNodes(room);
   clearResourceHazards(room);
@@ -150,7 +152,7 @@ export function snapshotRoom(room, includeWorld) {
     revision: room.revision, tribeStarts: includeWorld ? roomTribeStarts(room) : undefined, colonyId: room.colonies.find(colony => colony.ownerId === room.hostId).id,
     colonies: room.colonies.filter(colony => game.colonyKnown(colony)).map(colony => ({ ...colony, occupiedCells: [...colony.occupiedCells], nestLevel: room.games.get(colony.ownerId).nestLevel,
       nestHealth: room.games.get(colony.ownerId).nest.health, nestMaxHealth: room.games.get(colony.ownerId).nest.maxHealth })),
-    world: includeWorld ? { size: 320, seed: room.seed, terrain: room.world.terrain, hazards: room.world.hazards, burrows: room.world.burrows, treeCells: room.world.treeCells,
+    world: includeWorld ? { size: 320, seed: room.seed, generationVersion: room.world.generationVersion, terrain: room.world.terrain, hazards: room.world.hazards, burrows: room.world.burrows, treeCells: room.world.treeCells,
       resourceCells: [...room.food.values()].filter(cell => cell.kind !== "corpse" && cell.resourceType !== "tree" && !isTreeFood(cell, room.world)).map(cell => [cell.x, cell.y]) } : undefined,
     state: game.snapshot() };
 }

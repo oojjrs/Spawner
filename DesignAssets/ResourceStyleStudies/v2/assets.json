@@ -48,8 +48,7 @@
       "name": "고기",
       "source": "DesignAssets/Foods/food-meat.png",
       "before": "Before/meat.png",
-      "after": "After/meat.png",
-      "harvestSheet": "DesignAssets/Animations/Resources/HarvestV1/meat/sheet.png"
+      "after": "After/meat.png"
     },
     {
       "key": "twigs",
@@ -120,24 +119,21 @@
       "name": "갑각",
       "source": "DesignAssets/ResourceConcepts/v1/resource-carapace.png",
       "before": "Before/carapace.png",
-      "after": "After/carapace.png",
-      "harvestSheet": "DesignAssets/Animations/Resources/HarvestV1/carapace/sheet.png"
+      "after": "After/carapace.png"
     },
     {
       "key": "iron-ore",
       "name": "철광석",
       "source": "DesignAssets/ResourceConcepts/v1/resource-iron-ore.png",
       "before": "Before/iron-ore.png",
-      "after": "After/iron-ore.png",
-      "harvestSheet": "DesignAssets/Animations/Resources/HarvestV1/iron-ore/sheet.png"
+      "after": "After/iron-ore.png"
     },
     {
       "key": "quartz",
       "name": "수정",
       "source": "DesignAssets/ResourceConcepts/v1/resource-quartz.png",
       "before": "Before/quartz.png",
-      "after": "After/quartz.png",
-      "harvestSheet": "DesignAssets/Animations/Resources/HarvestV1/quartz/sheet.png"
+      "after": "After/quartz.png"
     }
   ],
   "previews": {

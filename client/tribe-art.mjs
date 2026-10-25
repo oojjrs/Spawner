@@ -62,7 +62,7 @@ export function createTribeArt(definitions, assetSource) {
   }
 
   function sprite(tribe, attributes, layer) {
-    const key = [tribe, layer, ...["strength", "feet", "antenna", "shell", "lifespan"].map(name => attributes[name] || 0)].join(":");
+    const key = [tribe, layer, ...["strength", "feet", "antenna", "lifespan"].map(name => attributes[name] || 0)].join(":");
     if (sprites.has(key)) return sprites.get(key);
     const unit = units.get(tribe);
     if (!unit || unit instanceof Promise) throw new Error("부족 유닛을 불러오는 중입니다.");
@@ -83,7 +83,6 @@ export function createTribeArt(definitions, assetSource) {
         context.drawImage(unit.body, body.x, body.y, body.width, body.height,
           256 - body.width * scale / 2, box.y, body.width * scale, body.height * scale);
       } else context.drawImage(unit.starter, crop.x, crop.y, crop.width, crop.height, box.x, box.y, box.width, box.height);
-      if (attributes.shell) draw(part("shell"));
       if (attributes.strength) draw(part("strength"));
       if (attributes.lifespan) draw(part("lifespan"));
     }

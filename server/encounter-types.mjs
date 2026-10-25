@@ -215,6 +215,6 @@ export const ENCOUNTER_TYPES = Object.freeze([
     "hostile": true,
     "flying": false
   }
-].map(type => Object.freeze(type)));
+].map(type => Object.freeze({ ...type, combatDisposition: type.hostile ? "aggressive" : type.unique ? "passive" : "peaceful" })));
 
 export const ENCOUNTER_ASSETS = Object.freeze(ENCOUNTER_TYPES.map(type => type.image));

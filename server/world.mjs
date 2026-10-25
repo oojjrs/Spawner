@@ -7,10 +7,10 @@ import { FOOD_HABITATS, isFoodHabitat, RESOURCE_HABITATS, RESOURCE_PLACEMENT, is
 export const STARTING_FOOD_RADIUS = 22;
 export const STARTING_FOOD_CAP = 10;
 
-export const WORLD_GENERATION_VERSION = 8;
+export const WORLD_GENERATION_VERSION = 15;
 
 export function generateWorld(seed, version, onProgress) {
-      if (version === undefined || version === 6 || version === 7 || version === WORLD_GENERATION_VERSION) {
+      if (version === undefined || version === 6 || version === 7 || version === 8 || version === 9 || version === 10 || version === 11 || version === 12 || version === 13 || version === 14 || version === WORLD_GENERATION_VERSION) {
         const world = generateMapWorld(seed, onProgress, version);
         world.generationVersion = version ?? WORLD_GENERATION_VERSION;
         world.camps = world.camps.map(camp => ({ ...camp, tribe: camp.tribe === "sprout" ? "bean" : camp.tribe }));

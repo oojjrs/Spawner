@@ -57,8 +57,7 @@
       "file": "resource-copper-ore.png",
       "originalSource": "DesignAssets/ResourceConcepts/v1/resource-copper-ore.png",
       "archiveBefore": "Before/resource-copper-ore.png",
-      "archiveAfter": "After/resource-copper-ore.png",
-      "runtimeSheet": "DesignAssets/Animations/Resources/HarvestV1/copper-ore/sheet.png"
+      "archiveAfter": "After/resource-copper-ore.png"
     },
     {
       "name": "수지",

@@ -67,18 +67,6 @@
       "drawingSources": "nutrient-moss/StyleV3/sources.json"
     },
     {
-      "key": "meat",
-      "name": "고기",
-      "group": "먹이와 고기",
-      "motion": "큰 고깃덩이는 고정하고 앞 덩이가 부드럽게 눌렸다가 돌아오기",
-      "caption": "앞 고깃덩이 누름",
-      "sheet": "meat/sheet.png",
-      "preview": "meat/preview.gif",
-      "metadata": "meat/animation.json",
-      "runtimePreview": "meat/runtime.gif",
-      "drawingSources": "meat/StyleV2/sources.json"
-    },
-    {
       "key": "twigs",
       "name": "나뭇가지",
       "group": "목재·돌·흙",
@@ -228,53 +216,6 @@
       "metadata": "beeswax/animation.json",
       "runtimePreview": "beeswax/runtime.gif",
       "drawingSources": "beeswax/StyleV2/sources.json"
-    },
-    {
-      "key": "carapace",
-      "name": "갑각",
-      "group": "생물 재료·광물",
-      "motion": "큰 등딱지는 고정하고 숨은 면까지 온전한 외곽 갑각판 두 개가 3~4도 벌어졌다가 닫힌다.",
-      "caption": "갑각판별 벌어짐·복귀",
-      "sheet": "carapace/sheet.png",
-      "preview": "carapace/preview.gif",
-      "metadata": "carapace/animation.json",
-      "runtimePreview": "carapace/runtime.gif",
-      "drawingSources": "carapace/StyleV2/sources.json"
-    },
-    {
-      "key": "iron-ore",
-      "name": "철광석",
-      "group": "생물 재료·광물",
-      "motion": "철광석 원석은 고정하고 작은 철맥 접촉면만 약하게 빛났다 원래 광택으로 돌아온다.",
-      "caption": "철맥 접촉 광택",
-      "sheet": "iron-ore/sheet.png",
-      "preview": "iron-ore/preview.gif",
-      "metadata": "iron-ore/animation.json",
-      "runtimePreview": "iron-ore/runtime.gif",
-      "drawingSources": "iron-ore/StyleV2/sources.json"
-    },
-    {
-      "key": "copper-ore",
-      "name": "구리광석",
-      "group": "생물 재료·광물",
-      "motion": "구리광석 원석은 고정하고 작은 구리맥 접촉면만 청록빛 광택에 반응한 뒤 돌아온다.",
-      "caption": "구리맥 접촉 광택",
-      "sheet": "copper-ore/sheet.png",
-      "preview": "copper-ore/preview.gif",
-      "metadata": "copper-ore/animation.json",
-      "runtimePreview": "copper-ore/runtime.gif"
-    },
-    {
-      "key": "quartz",
-      "name": "수정",
-      "group": "생물 재료·광물",
-      "motion": "밑동과 큰 결정은 고정하고 작은 두 결정 기둥이 1~2도 접촉 반응한 뒤 약한 광택과 함께 돌아온다.",
-      "caption": "결정별 작은 반응",
-      "sheet": "quartz/sheet.png",
-      "preview": "quartz/preview.gif",
-      "metadata": "quartz/animation.json",
-      "runtimePreview": "quartz/runtime.gif",
-      "drawingSources": "quartz/StyleV2/sources.json"
     }
   ],
   "runtimeIntegrated": true

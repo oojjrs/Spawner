@@ -161,8 +161,9 @@ test("체력·생산 비용·먹이가 손실 위험을 높인다", () => {
   assert.ok(riskValue({ ...agent, carrying: 8 }, 3) > base);
 });
 
-test("적 처치는 6번째 프레임에 소유 군락에 전달하고 복귀 후 목표를 갱신한다", () => {
+test("적 처치는 6번째 프레임에 소유 군락에 전달하고 교전 종료 후 목표를 갱신한다", () => {
   const f = fixture([]);
+  f.agent.combatDisposition = "aggressive";
   f.game.agents.splice(1);
   f.agent.personality = Object.freeze({ boldness: 1, aggression: 1, curiosity: 0 });
   const colony = { id: 2, ownerId: "second", x: 70, y: 70, occupiedCells: new Set(["2,2"]) };
@@ -171,7 +172,7 @@ test("적 처치는 6번째 프레임에 소유 군락에 전달하고 복귀 �
   f.environment.games.set("second", other);
   other.agents.splice(1);
   const target = other.agents[0];
-  Object.assign(target, { x: f.agent.x + 1, y: f.agent.y, health: 1, renderFromX: f.agent.x + 1, renderFromY: f.agent.y });
+  Object.assign(target, { x: f.agent.x, y: f.agent.y, health: 1, renderFromX: f.agent.x, renderFromY: f.agent.y });
   other.prepare(0);
   advance(f, 0.1);
   assert.equal(target.health, 1);
@@ -181,7 +182,7 @@ test("적 처치는 6번째 프레임에 소유 군락에 전달하고 복귀 �
   assert.equal(other.agents.length, 0);
   assert.ok([...f.environment.food.values()].some(food => food.kind === "corpse"));
   advance(f, 0.8);
-  assert.equal(f.agent.lastDecisionReason, "targetLost");
+  assert.equal(f.agent.lastDecisionReason, "combatEnded");
 });
 
 test("이동이 끝나기 전에는 도착 칸의 채집을 시작하지 않는다", () => {

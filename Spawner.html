@@ -17,6 +17,7 @@
           <path class="sound-muted" d="m22 12 7 8m0-8-7 8"/>
         </svg>
       </button>
+      <button class="selection-terrain" id="selection-terrain" type="button" aria-controls="unit-panel" hidden>바닥 지형 보기</button>
       <p class="connection-status" id="connection-status" role="status" hidden></p>
       <p class="room-seed-label game-seed" id="game-seed"></p>
       <div class="zoom-layers" id="zoom-layers" role="group" aria-label="맵 배율 단계">
@@ -57,7 +58,7 @@
             <rect x="7" y="3" width="18" height="30" rx="9" fill="none" stroke="#9aa7aa" stroke-width="1.5"/>
             <path d="M7 16h18M16 3v13M3 3l2 2M2 10h3M10 0v2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
-          <span>개체 선택<small>생명체 목록에서 왼쪽 클릭</small></span>
+          <span>개체·지형 확인<small>클릭으로 정보 확인 · Esc로 선택 해제</small></span>
         </li>
         <li>
           <svg viewBox="0 0 32 36" aria-hidden="true">
@@ -76,60 +77,53 @@
       </ul>
     </aside>
     <button class="colony-focus-button controls-guide-toggle" id="controls-guide-toggle" type="button" aria-controls="controls-guide" aria-expanded="true" hidden>조작 안내</button>
-    <aside class="agent-panel" id="agent-panel" aria-label="생명체·둥지·알림">
+    <aside class="agent-panel" id="agent-panel" aria-label="둥지·생명체">
       <div class="agent-panel-resize" id="agent-panel-resize" role="separator" tabindex="0" aria-label="오른쪽 패널 너비" aria-orientation="vertical" aria-controls="agent-panel"></div>
-      <div class="panel-tabs" role="tablist" aria-label="정보 패널">
-        <button id="agent-tab" type="button" role="tab" aria-selected="true" aria-controls="agent-tab-panel">생명체</button>
-        <button id="colony-tab" type="button" role="tab" aria-selected="false" aria-controls="colony-panel" tabindex="-1">둥지</button>
-        <button id="notification-tab" type="button" role="tab" aria-selected="false" aria-controls="notification-panel" tabindex="-1">알림 <span class="notification-count" id="notification-count" hidden>0</span></button>
+      <div class="agent-panel-scroll" id="object-panel" tabindex="0" aria-label="둥지·생명체 목록">
+        <section class="colony-browser" id="colony-browser" aria-labelledby="colony-list-title">
+          <h2 id="colony-list-title">둥지</h2>
+          <input class="colony-search" id="colony-search" type="search" placeholder="둥지 이름·번호 검색" aria-label="둥지 이름 또는 번호 검색">
+          <span class="colony-results" id="colony-results" role="status"></span>
+          <div class="colony-list" id="colony-list"></div>
+          <nav class="colony-pages" aria-label="둥지 목록 페이지">
+            <button class="colony-focus-button" id="colony-previous" type="button">이전</button>
+            <span id="colony-page"></span>
+            <button class="colony-focus-button" id="colony-next" type="button">다음</button>
+          </nav>
+        </section>
+        <section aria-labelledby="agent-list-title">
+          <h2 id="agent-list-title">생명체 <span id="agent-list-count">0</span></h2>
+          <div class="agent-list" id="agent-list"></div>
+        </section>
       </div>
-      <section class="agent-panel-scroll" id="agent-tab-panel" role="tabpanel" aria-labelledby="agent-tab" tabindex="0">
-        <section class="agent-details corpse-details" id="corpse-details" aria-labelledby="corpse-title" hidden>
-          <div class="panel-header"><h2 id="corpse-title">사체 회수</h2><button class="panel-close" id="corpse-close" type="button" aria-label="사체 안내 닫기">×</button></div>
-          <p class="corpse-value"><span>회수 가능한 <img class="evolution-text-icon" data-evolution-symbol alt="진화 포인트"></span><strong id="corpse-value"></strong></p>
-          <p class="corpse-decay" id="corpse-decay"></p>
-          <p class="corpse-guide">사체를 둥지로 운반하면 <img class="evolution-text-icon" data-evolution-symbol alt="진화 포인트">를 얻습니다. 채집·힘 속성을 조합한 유닛을 만들어 회수해 보세요.</p>
-          <button class="primary-action" id="corpse-design" type="button" aria-haspopup="dialog" aria-controls="evolution-panel">회수 유닛 설계</button>
-        </section>
-        <section class="agent-details" id="agent-details" aria-label="선택한 생명체" hidden>
-          <h2 id="selected-agent-name"></h2>
-          <form id="agent-name-form">
-            <label for="agent-name-input">이름</label>
-            <div class="agent-name-controls">
-              <input id="agent-name-input" type="text" maxlength="24" required autocomplete="off">
-              <button type="submit">변경</button>
-            </div>
-            <p class="agent-name-status" id="agent-name-status" role="status"></p>
-          </form>
-          <p class="agent-birth-stats" id="agent-birth-stats"></p>
-          <p class="agent-birth-stats" id="agent-personality"></p>
-        </section>
-        <h2>생명체 <span id="agent-list-count">0</span></h2>
-        <div class="agent-list" id="agent-list"></div>
-      </section>
-      <section class="agent-panel-scroll colony-panel" id="colony-panel" role="tabpanel" aria-labelledby="colony-tab" tabindex="0" hidden>
-      <section class="colony-browser" id="colony-browser" aria-label="둥지 목록">
-        <input class="colony-search" id="colony-search" type="search" placeholder="둥지 이름·번호 검색" aria-label="둥지 이름 또는 번호 검색">
-        <span class="colony-results" id="colony-results" role="status"></span>
-        <div class="colony-list" id="colony-list"></div>
-        <nav class="colony-pages" aria-label="둥지 목록 페이지">
-          <button class="colony-focus-button" id="colony-previous" type="button">이전</button>
-          <span id="colony-page"></span>
-          <button class="colony-focus-button" id="colony-next" type="button">다음</button>
-        </nav>
-      </section>
-      </section>
-      <section class="agent-panel-scroll notification-panel" id="notification-panel" role="tabpanel" aria-labelledby="notification-tab" tabindex="0" hidden>
-        <h2>발견 알림</h2>
-        <p class="notification-empty" id="notification-empty">새로운 종류를 발견하면 여기에 기록됩니다.</p>
-        <div class="notification-list" id="notification-list"></div>
-      </section>
     </aside>
-    <div class="discovery-toast" id="discovery-toast" role="status" aria-live="polite" hidden>
-      <button class="discovery-toast-open" id="discovery-toast-open" type="button"><small>새로운 발견</small><strong id="discovery-toast-title"></strong><span id="discovery-toast-detail"></span></button>
-      <button class="discovery-toast-close" id="discovery-toast-close" type="button" aria-label="발견 알림 닫기">×</button>
-    </div>
+    <div class="discovery-toasts" id="discovery-toasts" role="log" aria-label="발견 알림" aria-live="polite" aria-relevant="additions"></div>
   </div>
+
+  <aside class="unit-panel" id="unit-panel" aria-labelledby="unit-panel-title" hidden>
+    <div class="panel-header"><h2 id="unit-panel-title">생명체</h2><button class="panel-close" id="unit-panel-close" type="button" aria-label="선택 정보 닫기">×</button></div>
+    <section id="terrain-details" aria-label="지형 정보" hidden>
+      <div id="terrain-image"></div>
+      <p class="agent-birth-stats" id="terrain-description"></p>
+      <p class="agent-birth-stats" id="terrain-stats"></p>
+    </section>
+    <section id="agent-details" aria-label="생명체 정보" hidden>
+      <p class="agent-birth-stats" id="agent-birth-stats"></p>
+      <p class="agent-birth-stats" id="agent-personality"></p>
+      <div class="unit-actions">
+        <button class="primary-action" id="agent-birth" type="button"><span>같은 설계로 탄생</span><span class="evolution-cost"><img class="evolution-symbol" data-evolution-symbol alt="진화 포인트"><strong id="agent-birth-cost"></strong></span></button>
+        <button class="secondary-action" id="agent-design" type="button" aria-haspopup="dialog" aria-controls="evolution-panel">설계 수정</button>
+      </div>
+      <p class="unit-action-status" id="unit-action-status" role="status"></p>
+    </section>
+    <section class="corpse-details" id="corpse-details" aria-label="사체 회수" hidden>
+      <p class="corpse-value"><span>회수 가능한 <img class="evolution-text-icon" data-evolution-symbol alt="진화 포인트"></span><strong id="corpse-value"></strong></p>
+      <p class="corpse-decay" id="corpse-decay"></p>
+      <p class="corpse-guide">사체를 둥지로 운반하면 <img class="evolution-text-icon" data-evolution-symbol alt="진화 포인트">를 얻습니다. 분해 속성을 장착한 유닛으로 회수해 보세요.</p>
+      <button class="primary-action" id="corpse-design" type="button" aria-haspopup="dialog" aria-controls="evolution-panel">회수 유닛 설계</button>
+    </section>
+    <button class="secondary-action unit-codex" id="unit-codex" type="button" aria-haspopup="dialog" aria-controls="codex">코덱스 열기</button>
+  </aside>
 
   <aside class="colony-menu" id="colony-menu" aria-label="둥지 메뉴" hidden>
     <div class="panel-header">
@@ -204,6 +198,8 @@
           <button data-codex-category="attribute" type="button" aria-pressed="false">속성</button>
           <button data-codex-category="synergy" type="button" aria-pressed="false">시너지</button>
           <button data-codex-category="nest" type="button" aria-pressed="false">둥지</button>
+          <button data-codex-category="terrain" type="button" aria-pressed="false">지형</button>
+          <button data-codex-category="hazard" type="button" aria-pressed="false">위험 요소</button>
         </div>
         <nav class="codex-list" id="codex-list" aria-label="코덱스 목록"></nav>
       </aside>
@@ -213,6 +209,7 @@
           <div class="codex-article-heading"><p class="codex-entry-kind" id="codex-entry-kind"></p><h3 id="codex-article-name" tabindex="-1"></h3><p id="codex-article-effect"></p></div>
         </header>
         <div class="codex-content" id="codex-content" tabindex="0" role="region" aria-label="항목 설명">
+          <section class="codex-cell" id="codex-cell" aria-labelledby="codex-cell-title" hidden><h4 id="codex-cell-title">선택한 칸</h4><dl id="codex-cell-details"></dl></section>
           <p id="codex-description"></p><p class="attribute-stack" id="codex-stack"></p>
           <h4 id="codex-related-title"></h4><div id="codex-related"></div>
         </div>

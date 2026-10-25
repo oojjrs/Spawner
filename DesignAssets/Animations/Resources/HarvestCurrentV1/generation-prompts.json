@@ -2,68 +2,15 @@
   "provider": "built-in image_gen",
   "keys": [
     {
-      "key": "iron-ore",
-      "prompt": "Use case: precise-object-edit. Asset type: production 2D game resource harvest animation source KEY POSE, a single full sprite. The attached image is the exact locked neutral reference/edit target. Create the contact-peak pose for a very subtle gather reaction. The iron ore spire remains completely stationary. Change only the small frontmost low rock fragment at the very bottom: freshly draw it lifted just a little, as if a tiny mining strike loosened it. Main tall pointed rock, rust-red seams, silhouette, exact light and palette stay locked. No glow, sparkle, smoke, tools or characters. Preserve EXACT original canvas size, transparent padding, composition, scale, object coordinates, camera, painted rendering and all unaffected pixels; no recentering, cropping or redesign. Output one sprite on genuine transparent background, no labels or text. This drawing will be used as the actual production animation key frame.",
-      "source": "key-contact-source.png"
-    },
-    {
-      "key": "copper-ore",
-      "prompt": "Use case: precise-object-edit. Asset type: production 2D game resource harvest animation source KEY POSE, a single full sprite. The attached image is the exact locked neutral reference/edit target. Create the contact-peak pose for a very subtle gather reaction. The low long copper deposit remains stationary. Freshly draw a small copper flake detaching slightly at the front-right edge; draw a small new dark seam beneath the flake. Keep the curved broad deposit, orange copper plates and turquoise patina, exact outline and light unchanged. No glow, sparkle, smoke, tools or characters. Preserve EXACT original canvas size, transparent padding, composition, scale, object coordinates, camera, painted rendering and all unaffected pixels; no recentering, cropping or redesign. Output one sprite on genuine transparent background, no labels or text. This drawing will be used as the actual production animation key frame.",
-      "source": "key-contact-source.png"
-    },
-    {
       "key": "sand",
       "prompt": "Use case: precise-object-edit. Asset type: production 2D game resource harvest animation source KEY POSE, a single full sprite. The attached image is the exact locked neutral reference/edit target. Create the contact-peak pose for a very subtle gather reaction. The flat oval low sand patch stays fixed. Freshly draw a shallow local scooping indentation in the front-center dune and a small sliding crest immediately next to it. Keep the outer oval outline and all side/background dunes absolutely unchanged. Soft small contact reaction, no crater, no dust cloud, no tools or characters. Preserve EXACT original canvas size, transparent padding, composition, scale, object coordinates, camera, painted rendering and all unaffected pixels; no recentering, cropping or redesign. Output one sprite on genuine transparent background, no labels or text. This drawing will be used as the actual production animation key frame.",
-      "source": "key-contact-source.png"
-    },
-    {
-      "key": "meat",
-      "prompt": "Use case: precise-object-edit. Asset type: production 2D game resource harvest animation source KEY POSE, a single full sprite. The attached image is the exact locked neutral reference/edit target. Create the contact-peak pose for a very subtle gather reaction. The dead red armored beetle carcass stays on the ground, motionless and lifeless. For meat gathering contact, freshly draw ONLY the soft red lower front-left body segment compressed inward very slightly beneath the large central plate. Ivory horns, pincers, legs, shell plates and their silhouettes stay locked. Non-graphic, no blood, no dismemberment, no living motion, no tools or characters. Preserve EXACT original canvas size, transparent padding, composition, scale, object coordinates, camera, painted rendering and all unaffected pixels; no recentering, cropping or redesign. Output one sprite on genuine transparent background, no labels or text. This drawing will be used as the actual production animation key frame.",
-      "source": "key-contact-source.png"
-    },
-    {
-      "key": "carapace",
-      "prompt": "Use case: precise-object-edit. Asset type: production 2D game resource harvest animation source KEY POSE, a single full sprite. The attached image is the exact locked neutral reference/edit target. Create the contact-peak pose for a very subtle gather reaction. The dead red armored beetle carcass stays on the ground, motionless and lifeless. For shell gathering contact, freshly draw ONLY the large center-front red shell plate pried upward slightly at its left edge, with a complete dark underside at that small opening. Ivory horns, pincers, legs, rear shell outline and all other parts stay locked. No gore, no living motion, no tools or characters. Preserve EXACT original canvas size, transparent padding, composition, scale, object coordinates, camera, painted rendering and all unaffected pixels; no recentering, cropping or redesign. Output one sprite on genuine transparent background, no labels or text. This drawing will be used as the actual production animation key frame.",
       "source": "key-contact-source.png"
     }
   ],
   "adjacent": [
     {
-      "key": "iron-ore",
-      "prompt": "Use case: precise-object-edit. Production 2D animation DRAWN INBETWEENS. Image 1 is the locked neutral boundary. Image 2 is the checked contact peak boundary. Draw a square 2 by 2 equal-cell source atlas, exactly 2048 by 2048 pixels, each cell 1024 by 1024. Cell top-left copies neutral, cell top-right freshly draws 1/3 progress from neutral to peak, cell bottom-left freshly draws 2/3 progress, cell bottom-right copies peak. The two interior poses must be newly drawn, not fades or crossfades. Only the tiny low frontmost rock chip at the bottom rises gradually; the tall spire, seams and other stones stay stationary. The original and accepted peak designs must remain exact. Every cell uses identical original camera, framing, padding, scale, palette, lighting and ground coordinates. Do not enlarge sprites to fit a cell, preserve the original blank canvas proportions. Genuine transparent background throughout, no grid, no lines, no text. Keep all unchanged regions matching the attached boundaries. These middle two cells will become actual production animation frames; do not redesign the resource.",
-      "source": "adjacent-source.png",
-      "acceptedCells": [
-        1,
-        2
-      ]
-    },
-    {
-      "key": "copper-ore",
-      "prompt": "Use case: precise-object-edit. Production 2D animation DRAWN INBETWEENS. Image 1 is the locked neutral boundary. Image 2 is the checked contact peak boundary. Draw a square 2 by 2 equal-cell source atlas, exactly 2048 by 2048 pixels, each cell 1024 by 1024. Cell top-left copies neutral, cell top-right freshly draws 1/3 progress from neutral to peak, cell bottom-left freshly draws 2/3 progress, cell bottom-right copies peak. The two interior poses must be newly drawn, not fades or crossfades. Only the tiny front-right copper chip is gradually pried loose and a small dark slit appears at its attachment. Keep the broad curved copper deposit stationary. The original and accepted peak designs must remain exact. Every cell uses identical original camera, framing, padding, scale, palette, lighting and ground coordinates. Do not enlarge sprites to fit a cell, preserve the original blank canvas proportions. Genuine transparent background throughout, no grid, no lines, no text. Keep all unchanged regions matching the attached boundaries. These middle two cells will become actual production animation frames; do not redesign the resource.",
-      "source": "adjacent-source.png",
-      "acceptedCells": [
-        1
-      ]
-    },
-    {
       "key": "sand",
       "prompt": "Use case: precise-object-edit. Production 2D animation DRAWN INBETWEENS. Image 1 is the locked neutral boundary. Image 2 is the checked contact peak boundary. Draw a square 2 by 2 equal-cell source atlas, exactly 2048 by 2048 pixels, each cell 1024 by 1024. Cell top-left copies neutral, cell top-right freshly draws 1/3 progress from neutral to peak, cell bottom-left freshly draws 2/3 progress, cell bottom-right copies peak. The two interior poses must be newly drawn, not fades or crossfades. Only the front-center sand dune forms the shallow scoop and sliding small crest. Keep the entire oval edge and other dunes fixed. The original and accepted peak designs must remain exact. Every cell uses identical original camera, framing, padding, scale, palette, lighting and ground coordinates. Do not enlarge sprites to fit a cell, preserve the original blank canvas proportions. Genuine transparent background throughout, no grid, no lines, no text. Keep all unchanged regions matching the attached boundaries. These middle two cells will become actual production animation frames; do not redesign the resource.",
-      "source": "adjacent-source.png",
-      "acceptedCells": [
-        1
-      ]
-    },
-    {
-      "key": "meat",
-      "prompt": "Use case: precise-object-edit. Production 2D animation DRAWN INBETWEENS. Image 1 is the locked neutral boundary. Image 2 is the checked contact peak boundary. Draw a square 2 by 2 equal-cell source atlas, exactly 2048 by 2048 pixels, each cell 1024 by 1024. Cell top-left copies neutral, top-right freshly draws 1/3 progress from neutral to peak, bottom-left freshly draws 2/3 progress, bottom-right copies peak. The middle poses must be newly drawn, no fades/crossfades. Only the soft red lower-front body segment beneath the center plate compresses very slightly with gathering contact. The beetle is dead and lifeless; no walking or breathing. Keep the ivory horns, pincers, legs, rear shell silhouette, palette, original design, light and unchanged parts absolutely fixed. All four sprites use the exact camera, framing, transparent padding, scale and object coordinates of the original boundaries. Do not enlarge sprites to fill cells. Genuine transparent background; no grid, lines, text, blood, tools, gatherer or extra elements. These drawings will be actual production frames.",
-      "source": "adjacent-source.png",
-      "acceptedCells": [
-        1
-      ]
-    },
-    {
-      "key": "carapace",
-      "prompt": "Use case: precise-object-edit. Production 2D animation DRAWN INBETWEENS. Image 1 is the locked neutral boundary. Image 2 is the checked contact peak boundary. Draw a square 2 by 2 equal-cell source atlas, exactly 2048 by 2048 pixels, each cell 1024 by 1024. Cell top-left copies neutral, top-right freshly draws 1/3 progress from neutral to peak, bottom-left freshly draws 2/3 progress, bottom-right copies peak. The middle poses must be newly drawn, no fades/crossfades. Only the large center-front shell plate is gradually pried upward at its left edge. Draw the newly revealed dark underside continuously as the plate lifts. The beetle is dead and lifeless; no walking or breathing. Keep the ivory horns, pincers, legs, rear shell silhouette, palette, original design, light and unchanged parts absolutely fixed. All four sprites use the exact camera, framing, transparent padding, scale and object coordinates of the original boundaries. Do not enlarge sprites to fill cells. Genuine transparent background; no grid, lines, text, blood, tools, gatherer or extra elements. These drawings will be actual production frames.",
       "source": "adjacent-source.png",
       "acceptedCells": [
         1
@@ -72,23 +19,8 @@
   ],
   "singleAdjacent": [
     {
-      "key": "copper-ore",
-      "prompt": "Use case: precise-object-edit. Draw ONE SINGLE full-canvas production 2D animation inbetween sprite, NOT a sheet or montage. Image 1 is the EXACT neutral reference and canvas authority. Image 2 is the checked final contact peak. Image 3 is a previously drawn preceding pose for motion continuity. Draw the next pose at 2/3 progress between neutral and peak. A tiny front-right copper flake is almost, but not fully, detached, between the boundary poses. Keep the front-right main deposit intact with a continuous attachment under the lifted flake. Preserve the exact camera, object size, silhouette and position from image 1. Preserve the transparent padding from image 1, especially the large empty space ABOVE the low resource. Do not center, reposition or rescale the object to fill the canvas. Keep all unaffected surfaces, lighting and palette unchanged. Output exactly one sprite on genuine transparency, same full square canvas composition. No labels, new objects, dust, effects, blood, text or grid. This is an actual source cel to be used in the final animation.",
-      "source": "adjacent-single-source.png"
-    },
-    {
       "key": "sand",
       "prompt": "Use case: precise-object-edit. Draw ONE SINGLE full-canvas production 2D animation inbetween sprite, NOT a sheet or montage. Image 1 is the EXACT neutral reference and canvas authority. Image 2 is the checked final contact peak. Image 3 is a previously drawn preceding pose for motion continuity. Draw the next pose at 2/3 progress between neutral and peak. The shallow front-center scoop has reached about two-thirds of the final indentation depth, between the two boundary poses. No hole through the sand patch: it remains a full solid connected sand surface with a smooth complete ground layer. Preserve the exact camera, object size, silhouette and position from image 1. Preserve the transparent padding from image 1, especially the large empty space ABOVE the low resource. Do not center, reposition or rescale the object to fill the canvas. Keep all unaffected surfaces, lighting and palette unchanged. Output exactly one sprite on genuine transparency, same full square canvas composition. No labels, new objects, dust, effects, blood, text or grid. This is an actual source cel to be used in the final animation.",
-      "source": "adjacent-single-source.png"
-    },
-    {
-      "key": "meat",
-      "prompt": "Use case: precise-object-edit. Draw ONE SINGLE full-canvas production 2D animation inbetween sprite, NOT a sheet or montage. Image 1 is the EXACT neutral reference and canvas authority. Image 2 is the checked final contact peak. Image 3 is a previously drawn preceding pose for motion continuity. Draw the next pose at 2/3 progress between neutral and peak. The small soft red body segment under the center-front plate is about two-thirds compressed, between the two boundary poses. No other movement; the beetle carcass stays dead and still. Preserve the exact camera, object size, silhouette and position from image 1. Preserve the transparent padding from image 1, especially the large empty space ABOVE the low resource. Do not center, reposition or rescale the object to fill the canvas. Keep all unaffected surfaces, lighting and palette unchanged. Output exactly one sprite on genuine transparency, same full square canvas composition. No labels, new objects, dust, effects, blood, text or grid. This is an actual source cel to be used in the final animation.",
-      "source": "adjacent-single-source.png"
-    },
-    {
-      "key": "carapace",
-      "prompt": "Use case: precise-object-edit. Draw ONE SINGLE full-canvas production 2D animation inbetween sprite, NOT a sheet or montage. Image 1 is the EXACT neutral reference and canvas authority. Image 2 is the checked final contact peak. Image 3 is a previously drawn preceding pose for motion continuity. Draw the next pose at 2/3 progress between neutral and peak. The large center-front red shell plate is lifted about two-thirds as far as the peak boundary: a small complete dark underside begins to show at the left edge. No larger lift than the peak and no movement elsewhere. Preserve the exact camera, object size, silhouette and position from image 1. Preserve the transparent padding from image 1, especially the large empty space ABOVE the low resource. Do not center, reposition or rescale the object to fill the canvas. Keep all unaffected surfaces, lighting and palette unchanged. Output exactly one sprite on genuine transparency, same full square canvas composition. No labels, new objects, dust, effects, blood, text or grid. This is an actual source cel to be used in the final animation.",
       "source": "adjacent-single-source.png"
     }
   ]

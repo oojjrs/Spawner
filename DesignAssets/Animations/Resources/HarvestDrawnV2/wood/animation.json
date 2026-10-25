@@ -21,7 +21,7 @@
   "sheet": "harvest-sheet.png",
   "preview": "wood-harvest.webp",
   "method": "Complete original drawn poses. Small uniform scale correction shared by source phase, applied to the entire sprite about its root. No body-part masks, stationary overlays, color extraction, or canopy/trunk compositing.",
-  "runtimeIntegrated": false,
+  "runtimeIntegrated": true,
   "frameRegistration": [
     {
       "scaleFrom887": 0.5,

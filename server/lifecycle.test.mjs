@@ -52,7 +52,7 @@ test("새 개체는 첫 속성부터 발현하고 성장과 저장·복원 후�
   assert.deepEqual(restored.activeSlots, restored.slots);
 });
 
-test("자연사한 개체는 이름과 원래 ID를 가진 사체로 보존되고 1분 뒤 부패한다", () => {
+test("자연사한 개체는 이름과 원래 ID를 가진 사체로 보존되고 5분 뒤 부패한다", () => {
   const { game, environment, agent } = fixture();
   const name = agent.name;
   game.prepare(180);
@@ -62,12 +62,12 @@ test("자연사한 개체는 이름과 원래 ID를 가진 사체로 보존되�
   assert.equal(corpse.name, name);
   assert.equal(corpse.colonyId, 1);
   assert.equal(corpse.diedAt, 180);
-  assert.equal(corpse.decaysAt, 240);
+  assert.equal(corpse.decaysAt, 480);
   const key = corpse.x + "," + corpse.y;
-  game.prepare(239.999);
+  game.prepare(479.999);
   game.tick(0);
   assert.equal(game.snapshot().corpses.length, 1);
-  game.prepare(240);
+  game.prepare(480);
   game.tick(0);
   assert.equal(environment.food.has(key), false);
   assert.equal(game.snapshot().corpses.length, 0);
@@ -82,7 +82,7 @@ test("채집은 부패 시각을 연장하지 않고 완전히 채집한 사체�
   game.prepare(200);
   game.tick(0);
   assert.equal(game.snapshot().corpses[0].amount, 2);
-  assert.equal(game.snapshot().corpses[0].decaysAt, 240);
+  assert.equal(game.snapshot().corpses[0].decaysAt, 480);
   corpse.amount = 0;
   game.prepare(201);
   game.tick(0);
@@ -99,8 +99,8 @@ test("저장한 사체의 부패 시각은 복원 후에도 이어진다", () =>
   restored.game.restore(saved);
   restored.game.prepare(220);
   restored.game.tick(0);
-  assert.equal(restored.game.snapshot().corpses[0].decaysAt, 240);
-  restored.game.prepare(240);
+  assert.equal(restored.game.snapshot().corpses[0].decaysAt, 480);
+  restored.game.prepare(480);
   restored.game.tick(0);
   assert.equal(restored.game.snapshot().corpses.length, 0);
 });
@@ -108,9 +108,25 @@ test("저장한 사체의 부패 시각은 복원 후에도 이어진다", () =>
 test("이전 사체 저장은 최초 적용 시점부터 한 번만 부패 시간을 부여한다", () => {
   const food = new Map([["1,1", { kind: "corpse", x: 1, y: 1, amount: 4 }]]);
   expireCorpses(food, 100);
-  assert.equal(food.get("1,1").decaysAt, 160);
-  expireCorpses(food, 159);
-  assert.equal(food.get("1,1").decaysAt, 160);
-  expireCorpses(food, 160);
+  assert.equal(food.get("1,1").decaysAt, 400);
+  expireCorpses(food, 399);
+  assert.equal(food.get("1,1").decaysAt, 400);
+  expireCorpses(food, 400);
   assert.equal(food.size, 0);
+});
+
+
+test("기존 1분 사체도 사망부터 5분을 보장하고 더 긴 부패 시각은 유지한다", () => {
+  const food = new Map([
+    ["1,1", { kind: "corpse", x: 1, y: 1, amount: 4, diedAt: 10, decaysAt: 70 }],
+    ["2,2", { kind: "corpse", x: 2, y: 2, amount: 4, diedAt: 10, decaysAt: 610 }]
+  ]);
+  expireCorpses(food, 80);
+  assert.equal(food.get("1,1").decaysAt, 310);
+  assert.equal(food.get("2,2").decaysAt, 610);
+  expireCorpses(food, 309.999);
+  assert.equal(food.size, 2);
+  expireCorpses(food, 310);
+  assert.equal(food.has("1,1"), false);
+  assert.equal(food.has("2,2"), true);
 });
