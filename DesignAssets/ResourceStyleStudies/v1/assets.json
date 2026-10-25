@@ -1,5 +1,5 @@
 {
-  "sampleCount": 9,
+  "sampleCount": 8,
   "status": "applied-to-game",
   "appliedToGame": true,
   "unitAssetsChanged": false,
@@ -19,14 +19,6 @@
       "archiveBefore": "Before/food-nutrient-moss.png",
       "archiveAfter": "After/food-nutrient-moss.png",
       "runtimeSheet": "DesignAssets/Animations/Resources/HarvestV1/nutrient-moss/sheet.png"
-    },
-    {
-      "name": "마른 잎",
-      "file": "resource-dry-leaves.png",
-      "originalSource": "DesignAssets/ResourceConcepts/v1/resource-dry-leaves.png",
-      "archiveBefore": "Before/resource-dry-leaves.png",
-      "archiveAfter": "After/resource-dry-leaves.png",
-      "runtimeSheet": "DesignAssets/Animations/Resources/HarvestV1/dry-leaves/sheet.png"
     },
     {
       "name": "나무껍질",
@@ -77,6 +69,6 @@
       "runtimeSheet": "DesignAssets/Animations/Resources/HarvestV1/resin/sheet.png"
     }
   ],
-  "harvestAnimationCount": 9,
+  "harvestAnimationCount": 8,
   "harvestPreview": "applied-harvest-preview.gif"
 }

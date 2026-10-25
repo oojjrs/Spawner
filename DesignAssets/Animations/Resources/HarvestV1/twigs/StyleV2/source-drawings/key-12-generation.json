@@ -1,0 +1,15 @@
+{
+  "key": "twigs",
+  "index": 12,
+  "kind": "key-pose-candidate",
+  "prompt": "Draw ONE COMPLETE animation frame 13 of 24 for the 나뭇가지 (twigs) resource. FIRST reference is the exact approved clean sprite and canvas registration. SECOND reference is the old frame, provided only as a restrained motion/pose guide: do not copy its old texture, extra parts or different proportions. Redraw the whole sprite in the FIRST reference identity and broad clean painterly shading. Pose: gentle contact reaction returning toward rest; reaction strength 1.000 of the small maximum. Motion plan: The two front forked twigs gently rock in opposite directions by at most 3 degrees around their lower contact ends; rear twigs and the grounded footprint stay fixed; no twig is removed. Preserve exact object count, palette, left-top lighting, contour weight, perspective and simplified material detail. Keep base center at 50 percent canvas width, lowest fixed contact at 87.5 percent canvas height, and the same scale and transparent padding as the FIRST reference. No global camera movement, floating, growth, extraction, added texture, tiny glints, labels, grid or extra frame. Truly transparent square background; exactly one whole frame, including all stationary elements.\nOutput contract: exactly one complete square frame on a 1024 by 1024 canvas. Preserve canonical body scale and all fixed rear or base landmarks; do not globally zoom, shrink or relocate. The maximum canonical span is 81.25% of the canvas. Alpha must be exactly zero outside the actual resource silhouette. No fog, halo, soft glow, floor, background shading or cast shadow. Draw the restrained local pose completely, not a scene. THIRD reference is the checked preparation key, supplied for continuity of the same resource without making it the authority over the canonical geometry.",
+  "references": [
+    "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\twigs\\style-reference.png",
+    "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\twigs\\guide-frames\\12.png",
+    "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\twigs\\drawn-frames\\01.png"
+  ],
+  "cachePath": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-bbc0dc4c-3d77-473c-a191-6dfba4b3ff7e.png",
+  "sourcePath": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\twigs\\key-sources\\12.png",
+  "output": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\twigs\\drawn-frames\\12.png",
+  "status": "pending-review"
+}

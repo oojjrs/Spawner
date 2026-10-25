@@ -1,0 +1,333 @@
+[
+  {
+    "name": "adjacent-01",
+    "prompt": "Edit the supplied approved SIMPLE Spawner resource into ONE complete tree-sap animation cel at frame 1. The reference is the newly approved authority. Preserve its exact composition, square canvas margins, object size, camera and every fixed landmark. This is an extremely small LOCAL change, not a new illustration or stronger reaction.\nThe simplified design is essential: the same few huge continuous brown wood surfaces, only two thick dark seams, the same broad green leaves with one broad inner color division each, ONE main hanging golden sap drop attached to the broad upper flow, and ONE lower sap pool. Preserve the exact visible shape count in the reference. Never add bark chips, little sap drops, small grain, wrinkles, scratches, facets, glints, moss, specks, extra leaves or tiny reflection marks. Keep the broad smooth painterly shading and the existing single broad cream highlight on each main sap volume. Thin continuous deep-teal contour, same upper-left lighting.\nONLY DRAW THIS TINY POSE: the bottom round tip of the ONE main hanging sap drop gently lengthens DOWN by 0.286 pixels at the 1024x1024 reference scale, with a subtle naturally drawn extension of its broad highlight. The drop neck/upper attachment remains in the exact original position. The drop stays continuously attached and does not detach. Its upper neck and overall width stay the same; only its bottom few percent gently change curvature. Keep all bark, leaves, upper sap flow and lower pool absolutely stationary. No other change is allowed. This contact-settling peak must be almost indistinguishable from rest at small game size.\nONE complete square 1024x1024 transparent RGBA image, not a sheet, comparison or cropped part. Do not zoom, shift, recenter, change palette, add background, shadow, text, borders or frames. Preserve the exact original empty transparent margins. Actual newly drawn tiny local pose, no warp, transformed cutout, tween or fade.\nREFERENCE 1 is the exact canonical full image. REFERENCE 2 is the already CHECKED 4 key pose, supplied only to show this same tiny local tip change. Keep the canonical stationary art/camera authoritative, and preserve the checked key file unchanged. This NEW adjacent complete pose has strength 0.095190, gentle preparation touch; it must join its nearest checked key smoothly. The tiny changed shape is weaker than that key. Do not copy the other key's full extension or exaggerate a fractional-pixel motion.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\canonical-reference.png",
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\drawn-frames\\04.png"
+    ],
+    "source": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-5320f2c4-c1dd-4c58-9be3-e295299fbd0f.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\adjacent-01.png",
+    "status": "selected-source-and-encoded-playback-reviewed",
+    "generatedAt": "2026-10-24T06:23:43.472Z",
+    "type": "adjacent-single",
+    "index": 1,
+    "strength": 0.09519,
+    "boundaryIndex": 4,
+    "selectedSourceCopy": "adjacent-01.png",
+    "referenceCopies": [
+      "canonical-reference.png",
+      "key-04.png"
+    ]
+  },
+  {
+    "name": "adjacent-02",
+    "prompt": "Edit the supplied approved SIMPLE Spawner resource into ONE complete tree-sap animation cel at frame 2. The reference is the newly approved authority. Preserve its exact composition, square canvas margins, object size, camera and every fixed landmark. This is an extremely small LOCAL change, not a new illustration or stronger reaction.\nThe simplified design is essential: the same few huge continuous brown wood surfaces, only two thick dark seams, the same broad green leaves with one broad inner color division each, ONE main hanging golden sap drop attached to the broad upper flow, and ONE lower sap pool. Preserve the exact visible shape count in the reference. Never add bark chips, little sap drops, small grain, wrinkles, scratches, facets, glints, moss, specks, extra leaves or tiny reflection marks. Keep the broad smooth painterly shading and the existing single broad cream highlight on each main sap volume. Thin continuous deep-teal contour, same upper-left lighting.\nONLY DRAW THIS TINY POSE: the bottom round tip of the ONE main hanging sap drop gently lengthens DOWN by 0.975 pixels at the 1024x1024 reference scale, with a subtle naturally drawn extension of its broad highlight. The drop neck/upper attachment remains in the exact original position. The drop stays continuously attached and does not detach. Its upper neck and overall width stay the same; only its bottom few percent gently change curvature. Keep all bark, leaves, upper sap flow and lower pool absolutely stationary. No other change is allowed. This contact-settling peak must be almost indistinguishable from rest at small game size.\nONE complete square 1024x1024 transparent RGBA image, not a sheet, comparison or cropped part. Do not zoom, shift, recenter, change palette, add background, shadow, text, borders or frames. Preserve the exact original empty transparent margins. Actual newly drawn tiny local pose, no warp, transformed cutout, tween or fade.\nREFERENCE 1 is the exact canonical full image. REFERENCE 2 is the already CHECKED 4 key pose, supplied only to show this same tiny local tip change. Keep the canonical stationary art/camera authoritative, and preserve the checked key file unchanged. This NEW adjacent complete pose has strength 0.325000, gentle preparation touch; it must join its nearest checked key smoothly. The tiny changed shape is weaker than that key. Do not copy the other key's full extension or exaggerate a fractional-pixel motion.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\canonical-reference.png",
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\drawn-frames\\04.png"
+    ],
+    "source": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-ff41f46a-dfad-410c-afcb-43cd808c7158.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\adjacent-02.png",
+    "status": "selected-source-and-encoded-playback-reviewed",
+    "generatedAt": "2026-10-24T06:24:17.355Z",
+    "type": "adjacent-single",
+    "index": 2,
+    "strength": 0.325,
+    "boundaryIndex": 4,
+    "selectedSourceCopy": "adjacent-02.png",
+    "referenceCopies": [
+      "canonical-reference.png",
+      "key-04.png"
+    ]
+  },
+  {
+    "name": "adjacent-03",
+    "prompt": "Edit the supplied approved SIMPLE Spawner resource into ONE complete tree-sap animation cel at frame 3. The reference is the newly approved authority. Preserve its exact composition, square canvas margins, object size, camera and every fixed landmark. This is an extremely small LOCAL change, not a new illustration or stronger reaction.\nThe simplified design is essential: the same few huge continuous brown wood surfaces, only two thick dark seams, the same broad green leaves with one broad inner color division each, ONE main hanging golden sap drop attached to the broad upper flow, and ONE lower sap pool. Preserve the exact visible shape count in the reference. Never add bark chips, little sap drops, small grain, wrinkles, scratches, facets, glints, moss, specks, extra leaves or tiny reflection marks. Keep the broad smooth painterly shading and the existing single broad cream highlight on each main sap volume. Thin continuous deep-teal contour, same upper-left lighting.\nONLY DRAW THIS TINY POSE: the bottom round tip of the ONE main hanging sap drop gently lengthens DOWN by 1.664 pixels at the 1024x1024 reference scale, with a subtle naturally drawn extension of its broad highlight. The drop neck/upper attachment remains in the exact original position. The drop stays continuously attached and does not detach. Its upper neck and overall width stay the same; only its bottom few percent gently change curvature. Keep all bark, leaves, upper sap flow and lower pool absolutely stationary. No other change is allowed. This contact-settling peak must be almost indistinguishable from rest at small game size.\nONE complete square 1024x1024 transparent RGBA image, not a sheet, comparison or cropped part. Do not zoom, shift, recenter, change palette, add background, shadow, text, borders or frames. Preserve the exact original empty transparent margins. Actual newly drawn tiny local pose, no warp, transformed cutout, tween or fade.\nREFERENCE 1 is the exact canonical full image. REFERENCE 2 is the already CHECKED 4 key pose, supplied only to show this same tiny local tip change. Keep the canonical stationary art/camera authoritative, and preserve the checked key file unchanged. This NEW adjacent complete pose has strength 0.554810, gentle preparation touch; it must join its nearest checked key smoothly. The tiny changed shape is weaker than that key. Do not copy the other key's full extension or exaggerate a fractional-pixel motion.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\canonical-reference.png",
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\drawn-frames\\04.png"
+    ],
+    "source": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-d5dc7690-9c73-4339-9873-ca26cdd4576c.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\adjacent-03.png",
+    "status": "selected-source-and-encoded-playback-reviewed",
+    "generatedAt": "2026-10-24T06:25:03.146Z",
+    "type": "adjacent-single",
+    "index": 3,
+    "strength": 0.55481,
+    "boundaryIndex": 4,
+    "selectedSourceCopy": "adjacent-03.png",
+    "referenceCopies": [
+      "canonical-reference.png",
+      "key-04.png"
+    ]
+  },
+  {
+    "name": "key-04",
+    "prompt": "Edit the supplied approved SIMPLE Spawner resource into ONE complete tree-sap animation cel at frame 4. The reference is the newly approved authority. Preserve its exact composition, square canvas margins, object size, camera and every fixed landmark. This is an extremely small LOCAL change, not a new illustration or stronger reaction.\nThe simplified design is essential: the same few huge continuous brown wood surfaces, only two thick dark seams, the same broad green leaves with one broad inner color division each, ONE main hanging golden sap drop attached to the broad upper flow, and ONE lower sap pool. Preserve the exact visible shape count in the reference. Never add bark chips, little sap drops, small grain, wrinkles, scratches, facets, glints, moss, specks, extra leaves or tiny reflection marks. Keep the broad smooth painterly shading and the existing single broad cream highlight on each main sap volume. Thin continuous deep-teal contour, same upper-left lighting.\nONLY DRAW THIS TINY POSE: the bottom round tip of the ONE main hanging sap drop gently lengthens DOWN by 2 pixels at the 1024x1024 reference scale, with a subtle naturally drawn extension of its broad highlight. The drop neck/upper attachment remains in the exact original position. The drop stays continuously attached and does not detach. Its upper neck and overall width stay the same; only its bottom few percent gently change curvature. Keep all bark, leaves, upper sap flow and lower pool absolutely stationary. No other change is allowed. This weak preparation peak must be almost indistinguishable from rest at small game size.\nONE complete square 1024x1024 transparent RGBA image, not a sheet, comparison or cropped part. Do not zoom, shift, recenter, change palette, add background, shadow, text, borders or frames. Preserve the exact original empty transparent margins. Actual newly drawn tiny local pose, no warp, transformed cutout, tween or fade.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\canonical-reference.png"
+    ],
+    "source": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-49a582f3-f881-49dc-8a66-25ac67263615.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\key-04.png",
+    "status": "selected-source-and-encoded-playback-reviewed",
+    "generatedAt": "2026-10-24T06:18:54.159Z",
+    "type": "key",
+    "index": 4,
+    "strength": 0.65,
+    "selectedSourceCopy": "key-04.png",
+    "referenceCopies": [
+      "canonical-reference.png"
+    ]
+  },
+  {
+    "name": "adjacent-05",
+    "prompt": "Edit the supplied approved SIMPLE Spawner resource into ONE complete tree-sap animation cel at frame 5. The reference is the newly approved authority. Preserve its exact composition, square canvas margins, object size, camera and every fixed landmark. This is an extremely small LOCAL change, not a new illustration or stronger reaction.\nThe simplified design is essential: the same few huge continuous brown wood surfaces, only two thick dark seams, the same broad green leaves with one broad inner color division each, ONE main hanging golden sap drop attached to the broad upper flow, and ONE lower sap pool. Preserve the exact visible shape count in the reference. Never add bark chips, little sap drops, small grain, wrinkles, scratches, facets, glints, moss, specks, extra leaves or tiny reflection marks. Keep the broad smooth painterly shading and the existing single broad cream highlight on each main sap volume. Thin continuous deep-teal contour, same upper-left lighting.\nONLY DRAW THIS TINY POSE: the bottom round tip of the ONE main hanging sap drop gently lengthens DOWN by 1.664 pixels at the 1024x1024 reference scale, with a subtle naturally drawn extension of its broad highlight. The drop neck/upper attachment remains in the exact original position. The drop stays continuously attached and does not detach. Its upper neck and overall width stay the same; only its bottom few percent gently change curvature. Keep all bark, leaves, upper sap flow and lower pool absolutely stationary. No other change is allowed. This contact-settling peak must be almost indistinguishable from rest at small game size.\nONE complete square 1024x1024 transparent RGBA image, not a sheet, comparison or cropped part. Do not zoom, shift, recenter, change palette, add background, shadow, text, borders or frames. Preserve the exact original empty transparent margins. Actual newly drawn tiny local pose, no warp, transformed cutout, tween or fade.\nREFERENCE 1 is the exact canonical full image. REFERENCE 2 is the already CHECKED 4 key pose, supplied only to show this same tiny local tip change. Keep the canonical stationary art/camera authoritative, and preserve the checked key file unchanged. This NEW adjacent complete pose has strength 0.554810, gentle preparation touch; it must join its nearest checked key smoothly. The tiny changed shape is weaker than that key. Do not copy the other key's full extension or exaggerate a fractional-pixel motion.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\canonical-reference.png",
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\drawn-frames\\04.png"
+    ],
+    "source": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-9344b072-705b-41db-aca4-6c6eba5307a6.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\adjacent-05.png",
+    "status": "selected-source-and-encoded-playback-reviewed",
+    "generatedAt": "2026-10-24T06:25:38.452Z",
+    "type": "adjacent-single",
+    "index": 5,
+    "strength": 0.55481,
+    "boundaryIndex": 4,
+    "selectedSourceCopy": "adjacent-05.png",
+    "referenceCopies": [
+      "canonical-reference.png",
+      "key-04.png"
+    ]
+  },
+  {
+    "name": "adjacent-06",
+    "prompt": "Edit the supplied approved SIMPLE Spawner resource into ONE complete tree-sap animation cel at frame 6. The reference is the newly approved authority. Preserve its exact composition, square canvas margins, object size, camera and every fixed landmark. This is an extremely small LOCAL change, not a new illustration or stronger reaction.\nThe simplified design is essential: the same few huge continuous brown wood surfaces, only two thick dark seams, the same broad green leaves with one broad inner color division each, ONE main hanging golden sap drop attached to the broad upper flow, and ONE lower sap pool. Preserve the exact visible shape count in the reference. Never add bark chips, little sap drops, small grain, wrinkles, scratches, facets, glints, moss, specks, extra leaves or tiny reflection marks. Keep the broad smooth painterly shading and the existing single broad cream highlight on each main sap volume. Thin continuous deep-teal contour, same upper-left lighting.\nONLY DRAW THIS TINY POSE: the bottom round tip of the ONE main hanging sap drop gently lengthens DOWN by 0.975 pixels at the 1024x1024 reference scale, with a subtle naturally drawn extension of its broad highlight. The drop neck/upper attachment remains in the exact original position. The drop stays continuously attached and does not detach. Its upper neck and overall width stay the same; only its bottom few percent gently change curvature. Keep all bark, leaves, upper sap flow and lower pool absolutely stationary. No other change is allowed. This contact-settling peak must be almost indistinguishable from rest at small game size.\nONE complete square 1024x1024 transparent RGBA image, not a sheet, comparison or cropped part. Do not zoom, shift, recenter, change palette, add background, shadow, text, borders or frames. Preserve the exact original empty transparent margins. Actual newly drawn tiny local pose, no warp, transformed cutout, tween or fade.\nREFERENCE 1 is the exact canonical full image. REFERENCE 2 is the already CHECKED 4 key pose, supplied only to show this same tiny local tip change. Keep the canonical stationary art/camera authoritative, and preserve the checked key file unchanged. This NEW adjacent complete pose has strength 0.325000, gentle preparation touch; it must join its nearest checked key smoothly. The tiny changed shape is weaker than that key. Do not copy the other key's full extension or exaggerate a fractional-pixel motion.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\canonical-reference.png",
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\drawn-frames\\04.png"
+    ],
+    "source": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-05a9b82f-e368-4c82-981d-d967b801c200.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\adjacent-06.png",
+    "status": "selected-source-and-encoded-playback-reviewed",
+    "generatedAt": "2026-10-24T06:26:35.869Z",
+    "type": "adjacent-single",
+    "index": 6,
+    "strength": 0.325,
+    "boundaryIndex": 4,
+    "selectedSourceCopy": "adjacent-06.png",
+    "referenceCopies": [
+      "canonical-reference.png",
+      "key-04.png"
+    ]
+  },
+  {
+    "name": "adjacent-07",
+    "prompt": "Edit the supplied approved SIMPLE Spawner resource into ONE complete tree-sap animation cel at frame 7. The reference is the newly approved authority. Preserve its exact composition, square canvas margins, object size, camera and every fixed landmark. This is an extremely small LOCAL change, not a new illustration or stronger reaction.\nThe simplified design is essential: the same few huge continuous brown wood surfaces, only two thick dark seams, the same broad green leaves with one broad inner color division each, ONE main hanging golden sap drop attached to the broad upper flow, and ONE lower sap pool. Preserve the exact visible shape count in the reference. Never add bark chips, little sap drops, small grain, wrinkles, scratches, facets, glints, moss, specks, extra leaves or tiny reflection marks. Keep the broad smooth painterly shading and the existing single broad cream highlight on each main sap volume. Thin continuous deep-teal contour, same upper-left lighting.\nONLY DRAW THIS TINY POSE: the bottom round tip of the ONE main hanging sap drop gently lengthens DOWN by 0.286 pixels at the 1024x1024 reference scale, with a subtle naturally drawn extension of its broad highlight. The drop neck/upper attachment remains in the exact original position. The drop stays continuously attached and does not detach. Its upper neck and overall width stay the same; only its bottom few percent gently change curvature. Keep all bark, leaves, upper sap flow and lower pool absolutely stationary. No other change is allowed. This contact-settling peak must be almost indistinguishable from rest at small game size.\nONE complete square 1024x1024 transparent RGBA image, not a sheet, comparison or cropped part. Do not zoom, shift, recenter, change palette, add background, shadow, text, borders or frames. Preserve the exact original empty transparent margins. Actual newly drawn tiny local pose, no warp, transformed cutout, tween or fade.\nREFERENCE 1 is the exact canonical full image. REFERENCE 2 is the already CHECKED 4 key pose, supplied only to show this same tiny local tip change. Keep the canonical stationary art/camera authoritative, and preserve the checked key file unchanged. This NEW adjacent complete pose has strength 0.095190, gentle preparation touch; it must join its nearest checked key smoothly. The tiny changed shape is weaker than that key. Do not copy the other key's full extension or exaggerate a fractional-pixel motion.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\canonical-reference.png",
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\drawn-frames\\04.png"
+    ],
+    "source": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-4c82db3f-7c7e-44c4-a820-eb7d1bf98203.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\adjacent-07.png",
+    "status": "selected-source-and-encoded-playback-reviewed",
+    "generatedAt": "2026-10-24T06:27:10.23Z",
+    "type": "adjacent-single",
+    "index": 7,
+    "strength": 0.09519,
+    "boundaryIndex": 4,
+    "selectedSourceCopy": "adjacent-07.png",
+    "referenceCopies": [
+      "canonical-reference.png",
+      "key-04.png"
+    ]
+  },
+  {
+    "name": "adjacent-10",
+    "prompt": "Edit the supplied approved SIMPLE Spawner resource into ONE complete tree-sap animation cel at frame 10. The reference is the newly approved authority. Preserve its exact composition, square canvas margins, object size, camera and every fixed landmark. This is an extremely small LOCAL change, not a new illustration or stronger reaction.\nThe simplified design is essential: the same few huge continuous brown wood surfaces, only two thick dark seams, the same broad green leaves with one broad inner color division each, ONE main hanging golden sap drop attached to the broad upper flow, and ONE lower sap pool. Preserve the exact visible shape count in the reference. Never add bark chips, little sap drops, small grain, wrinkles, scratches, facets, glints, moss, specks, extra leaves or tiny reflection marks. Keep the broad smooth painterly shading and the existing single broad cream highlight on each main sap volume. Thin continuous deep-teal contour, same upper-left lighting.\nONLY DRAW THIS TINY POSE: the bottom round tip of the ONE main hanging sap drop gently lengthens DOWN by 0.286 pixels at the 1024x1024 reference scale, with a subtle naturally drawn extension of its broad highlight. The drop neck/upper attachment remains in the exact original position. The drop stays continuously attached and does not detach. Its upper neck and overall width stay the same; only its bottom few percent gently change curvature. Keep all bark, leaves, upper sap flow and lower pool absolutely stationary. No other change is allowed. This contact-settling peak must be almost indistinguishable from rest at small game size.\nONE complete square 1024x1024 transparent RGBA image, not a sheet, comparison or cropped part. Do not zoom, shift, recenter, change palette, add background, shadow, text, borders or frames. Preserve the exact original empty transparent margins. Actual newly drawn tiny local pose, no warp, transformed cutout, tween or fade.\nREFERENCE 1 is the exact canonical full image. REFERENCE 2 is the already CHECKED 14 key pose, supplied only to show this same tiny local tip change. Keep the canonical stationary art/camera authoritative, and preserve the checked key file unchanged. This NEW adjacent complete pose has strength 0.095492, gentle contact reaction returning toward rest; it must join its nearest checked key smoothly. The tiny changed shape is weaker than that key. Do not copy the other key's full extension or exaggerate a fractional-pixel motion.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\canonical-reference.png",
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\drawn-frames\\14.png"
+    ],
+    "source": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-1ad8827c-9201-410b-9d1e-7df6a38cfc80.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\adjacent-10.png",
+    "status": "selected-source-and-encoded-playback-reviewed",
+    "generatedAt": "2026-10-24T06:28:01.134Z",
+    "type": "adjacent-single",
+    "index": 10,
+    "strength": 0.095492,
+    "boundaryIndex": 14,
+    "selectedSourceCopy": "adjacent-10.png",
+    "referenceCopies": [
+      "canonical-reference.png",
+      "key-14.png"
+    ]
+  },
+  {
+    "name": "adjacent-11",
+    "prompt": "Edit the supplied approved SIMPLE Spawner resource into ONE complete tree-sap animation cel at frame 11. The reference is the newly approved authority. Preserve its exact composition, square canvas margins, object size, camera and every fixed landmark. This is an extremely small LOCAL change, not a new illustration or stronger reaction.\nThe simplified design is essential: the same few huge continuous brown wood surfaces, only two thick dark seams, the same broad green leaves with one broad inner color division each, ONE main hanging golden sap drop attached to the broad upper flow, and ONE lower sap pool. Preserve the exact visible shape count in the reference. Never add bark chips, little sap drops, small grain, wrinkles, scratches, facets, glints, moss, specks, extra leaves or tiny reflection marks. Keep the broad smooth painterly shading and the existing single broad cream highlight on each main sap volume. Thin continuous deep-teal contour, same upper-left lighting.\nONLY DRAW THIS TINY POSE: the bottom round tip of the ONE main hanging sap drop gently lengthens DOWN by 1.036 pixels at the 1024x1024 reference scale, with a subtle naturally drawn extension of its broad highlight. The drop neck/upper attachment remains in the exact original position. The drop stays continuously attached and does not detach. Its upper neck and overall width stay the same; only its bottom few percent gently change curvature. Keep all bark, leaves, upper sap flow and lower pool absolutely stationary. No other change is allowed. This contact-settling peak must be almost indistinguishable from rest at small game size.\nONE complete square 1024x1024 transparent RGBA image, not a sheet, comparison or cropped part. Do not zoom, shift, recenter, change palette, add background, shadow, text, borders or frames. Preserve the exact original empty transparent margins. Actual newly drawn tiny local pose, no warp, transformed cutout, tween or fade.\nREFERENCE 1 is the exact canonical full image. REFERENCE 2 is the already CHECKED 14 key pose, supplied only to show this same tiny local tip change. Keep the canonical stationary art/camera authoritative, and preserve the checked key file unchanged. This NEW adjacent complete pose has strength 0.345492, gentle contact reaction returning toward rest; it must join its nearest checked key smoothly. The tiny changed shape is weaker than that key. Do not copy the other key's full extension or exaggerate a fractional-pixel motion.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\canonical-reference.png",
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\drawn-frames\\14.png"
+    ],
+    "source": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-07670547-287e-4807-afc8-1ac8ed2fc60a.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\adjacent-11.png",
+    "status": "selected-source-and-encoded-playback-reviewed",
+    "generatedAt": "2026-10-24T06:28:34.701Z",
+    "type": "adjacent-single",
+    "index": 11,
+    "strength": 0.345492,
+    "boundaryIndex": 14,
+    "selectedSourceCopy": "adjacent-11.png",
+    "referenceCopies": [
+      "canonical-reference.png",
+      "key-14.png"
+    ]
+  },
+  {
+    "name": "adjacent-12",
+    "prompt": "Edit the supplied approved SIMPLE Spawner resource into ONE complete tree-sap animation cel at frame 12. The reference is the newly approved authority. Preserve its exact composition, square canvas margins, object size, camera and every fixed landmark. This is an extremely small LOCAL change, not a new illustration or stronger reaction.\nThe simplified design is essential: the same few huge continuous brown wood surfaces, only two thick dark seams, the same broad green leaves with one broad inner color division each, ONE main hanging golden sap drop attached to the broad upper flow, and ONE lower sap pool. Preserve the exact visible shape count in the reference. Never add bark chips, little sap drops, small grain, wrinkles, scratches, facets, glints, moss, specks, extra leaves or tiny reflection marks. Keep the broad smooth painterly shading and the existing single broad cream highlight on each main sap volume. Thin continuous deep-teal contour, same upper-left lighting.\nONLY DRAW THIS TINY POSE: the bottom round tip of the ONE main hanging sap drop gently lengthens DOWN by 1.964 pixels at the 1024x1024 reference scale, with a subtle naturally drawn extension of its broad highlight. The drop neck/upper attachment remains in the exact original position. The drop stays continuously attached and does not detach. Its upper neck and overall width stay the same; only its bottom few percent gently change curvature. Keep all bark, leaves, upper sap flow and lower pool absolutely stationary. No other change is allowed. This contact-settling peak must be almost indistinguishable from rest at small game size.\nONE complete square 1024x1024 transparent RGBA image, not a sheet, comparison or cropped part. Do not zoom, shift, recenter, change palette, add background, shadow, text, borders or frames. Preserve the exact original empty transparent margins. Actual newly drawn tiny local pose, no warp, transformed cutout, tween or fade.\nREFERENCE 1 is the exact canonical full image. REFERENCE 2 is the already CHECKED 14 key pose, supplied only to show this same tiny local tip change. Keep the canonical stationary art/camera authoritative, and preserve the checked key file unchanged. This NEW adjacent complete pose has strength 0.654508, gentle contact reaction returning toward rest; it must join its nearest checked key smoothly. The tiny changed shape is weaker than that key. Do not copy the other key's full extension or exaggerate a fractional-pixel motion.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\canonical-reference.png",
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\drawn-frames\\14.png"
+    ],
+    "source": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-ecf6b170-b199-4dee-9f6b-abb2a9b9e0bb.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\adjacent-12.png",
+    "status": "selected-source-and-encoded-playback-reviewed",
+    "generatedAt": "2026-10-24T06:29:24.556Z",
+    "type": "adjacent-single",
+    "index": 12,
+    "strength": 0.654508,
+    "boundaryIndex": 14,
+    "selectedSourceCopy": "adjacent-12.png",
+    "referenceCopies": [
+      "canonical-reference.png",
+      "key-14.png"
+    ]
+  },
+  {
+    "name": "adjacent-13",
+    "prompt": "Edit the supplied approved SIMPLE Spawner resource into ONE complete tree-sap animation cel at frame 13. The reference is the newly approved authority. Preserve its exact composition, square canvas margins, object size, camera and every fixed landmark. This is an extremely small LOCAL change, not a new illustration or stronger reaction.\nThe simplified design is essential: the same few huge continuous brown wood surfaces, only two thick dark seams, the same broad green leaves with one broad inner color division each, ONE main hanging golden sap drop attached to the broad upper flow, and ONE lower sap pool. Preserve the exact visible shape count in the reference. Never add bark chips, little sap drops, small grain, wrinkles, scratches, facets, glints, moss, specks, extra leaves or tiny reflection marks. Keep the broad smooth painterly shading and the existing single broad cream highlight on each main sap volume. Thin continuous deep-teal contour, same upper-left lighting.\nONLY DRAW THIS TINY POSE: the bottom round tip of the ONE main hanging sap drop gently lengthens DOWN by 2.714 pixels at the 1024x1024 reference scale, with a subtle naturally drawn extension of its broad highlight. The drop neck/upper attachment remains in the exact original position. The drop stays continuously attached and does not detach. Its upper neck and overall width stay the same; only its bottom few percent gently change curvature. Keep all bark, leaves, upper sap flow and lower pool absolutely stationary. No other change is allowed. This contact-settling peak must be almost indistinguishable from rest at small game size.\nONE complete square 1024x1024 transparent RGBA image, not a sheet, comparison or cropped part. Do not zoom, shift, recenter, change palette, add background, shadow, text, borders or frames. Preserve the exact original empty transparent margins. Actual newly drawn tiny local pose, no warp, transformed cutout, tween or fade.\nREFERENCE 1 is the exact canonical full image. REFERENCE 2 is the already CHECKED 14 key pose, supplied only to show this same tiny local tip change. Keep the canonical stationary art/camera authoritative, and preserve the checked key file unchanged. This NEW adjacent complete pose has strength 0.904508, gentle contact reaction returning toward rest; it must join its nearest checked key smoothly. The tiny changed shape is weaker than that key. Do not copy the other key's full extension or exaggerate a fractional-pixel motion.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\canonical-reference.png",
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\drawn-frames\\14.png"
+    ],
+    "source": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-a79e6f3c-33f5-4250-a9ad-f3321bb62e1d.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\adjacent-13.png",
+    "status": "selected-source-and-encoded-playback-reviewed",
+    "generatedAt": "2026-10-24T06:30:00.142Z",
+    "type": "adjacent-single",
+    "index": 13,
+    "strength": 0.904508,
+    "boundaryIndex": 14,
+    "selectedSourceCopy": "adjacent-13.png",
+    "referenceCopies": [
+      "canonical-reference.png",
+      "key-14.png"
+    ]
+  },
+  {
+    "name": "key-14",
+    "prompt": "Edit the supplied approved SIMPLE Spawner resource into ONE complete tree-sap animation cel at frame 14. The reference is the newly approved authority. Preserve its exact composition, square canvas margins, object size, camera and every fixed landmark. This is an extremely small LOCAL change, not a new illustration or stronger reaction.\nThe simplified design is essential: the same few huge continuous brown wood surfaces, only two thick dark seams, the same broad green leaves with one broad inner color division each, ONE main hanging golden sap drop attached to the broad upper flow, and ONE lower sap pool. Preserve the exact visible shape count in the reference. Never add bark chips, little sap drops, small grain, wrinkles, scratches, facets, glints, moss, specks, extra leaves or tiny reflection marks. Keep the broad smooth painterly shading and the existing single broad cream highlight on each main sap volume. Thin continuous deep-teal contour, same upper-left lighting.\nONLY DRAW THIS TINY POSE: the bottom round tip of the ONE main hanging sap drop gently lengthens DOWN by 3 pixels at the 1024x1024 reference scale, with a subtle naturally drawn extension of its broad highlight. The drop neck/upper attachment remains in the exact original position. The drop stays continuously attached and does not detach. Its upper neck and overall width stay the same; only its bottom few percent gently change curvature. Keep all bark, leaves, upper sap flow and lower pool absolutely stationary. No other change is allowed. This contact-settling peak must be almost indistinguishable from rest at small game size.\nONE complete square 1024x1024 transparent RGBA image, not a sheet, comparison or cropped part. Do not zoom, shift, recenter, change palette, add background, shadow, text, borders or frames. Preserve the exact original empty transparent margins. Actual newly drawn tiny local pose, no warp, transformed cutout, tween or fade.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\canonical-reference.png"
+    ],
+    "source": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-761ad3db-6813-48b5-bc04-d475252e21b2.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\key-14.png",
+    "status": "selected-source-and-encoded-playback-reviewed",
+    "generatedAt": "2026-10-24T06:19:43.626Z",
+    "type": "key",
+    "index": 14,
+    "strength": 1,
+    "selectedSourceCopy": "key-14.png",
+    "referenceCopies": [
+      "canonical-reference.png"
+    ]
+  },
+  {
+    "name": "adjacent-15",
+    "prompt": "Edit the supplied approved SIMPLE Spawner resource into ONE complete tree-sap animation cel at frame 15. The reference is the newly approved authority. Preserve its exact composition, square canvas margins, object size, camera and every fixed landmark. This is an extremely small LOCAL change, not a new illustration or stronger reaction.\nThe simplified design is essential: the same few huge continuous brown wood surfaces, only two thick dark seams, the same broad green leaves with one broad inner color division each, ONE main hanging golden sap drop attached to the broad upper flow, and ONE lower sap pool. Preserve the exact visible shape count in the reference. Never add bark chips, little sap drops, small grain, wrinkles, scratches, facets, glints, moss, specks, extra leaves or tiny reflection marks. Keep the broad smooth painterly shading and the existing single broad cream highlight on each main sap volume. Thin continuous deep-teal contour, same upper-left lighting.\nONLY DRAW THIS TINY POSE: the bottom round tip of the ONE main hanging sap drop gently lengthens DOWN by 2.714 pixels at the 1024x1024 reference scale, with a subtle naturally drawn extension of its broad highlight. The drop neck/upper attachment remains in the exact original position. The drop stays continuously attached and does not detach. Its upper neck and overall width stay the same; only its bottom few percent gently change curvature. Keep all bark, leaves, upper sap flow and lower pool absolutely stationary. No other change is allowed. This contact-settling peak must be almost indistinguishable from rest at small game size.\nONE complete square 1024x1024 transparent RGBA image, not a sheet, comparison or cropped part. Do not zoom, shift, recenter, change palette, add background, shadow, text, borders or frames. Preserve the exact original empty transparent margins. Actual newly drawn tiny local pose, no warp, transformed cutout, tween or fade.\nREFERENCE 1 is the exact canonical full image. REFERENCE 2 is the already CHECKED 14 key pose, supplied only to show this same tiny local tip change. Keep the canonical stationary art/camera authoritative, and preserve the checked key file unchanged. This NEW adjacent complete pose has strength 0.904508, gentle contact reaction returning toward rest; it must join its nearest checked key smoothly. The tiny changed shape is weaker than that key. Do not copy the other key's full extension or exaggerate a fractional-pixel motion.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\canonical-reference.png",
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\drawn-frames\\14.png"
+    ],
+    "source": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-422f5262-2a97-4c32-a8f2-44336082091c.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\adjacent-15.png",
+    "status": "selected-source-and-encoded-playback-reviewed",
+    "generatedAt": "2026-10-24T06:30:43.675Z",
+    "type": "adjacent-single",
+    "index": 15,
+    "strength": 0.904508,
+    "boundaryIndex": 14,
+    "selectedSourceCopy": "adjacent-15.png",
+    "referenceCopies": [
+      "canonical-reference.png",
+      "key-14.png"
+    ]
+  },
+  {
+    "name": "adjacent-16-repair-1",
+    "prompt": "Edit the supplied approved SIMPLE Spawner resource into ONE complete tree-sap animation cel at frame 16. The reference is the newly approved authority. Preserve its exact composition, square canvas margins, object size, camera and every fixed landmark. This is an extremely small LOCAL change, not a new illustration or stronger reaction.\nThe simplified design is essential: the same few huge continuous brown wood surfaces, only two thick dark seams, the same broad green leaves with one broad inner color division each, ONE main hanging golden sap drop attached to the broad upper flow, and ONE lower sap pool. Preserve the exact visible shape count in the reference. Never add bark chips, little sap drops, small grain, wrinkles, scratches, facets, glints, moss, specks, extra leaves or tiny reflection marks. Keep the broad smooth painterly shading and the existing single broad cream highlight on each main sap volume. Thin continuous deep-teal contour, same upper-left lighting.\nONLY DRAW THIS TINY POSE: the bottom round tip of the ONE main hanging sap drop gently lengthens DOWN by 1.964 pixels at the 1024x1024 reference scale, with a subtle naturally drawn extension of its broad highlight. The drop neck/upper attachment remains in the exact original position. The drop stays continuously attached and does not detach. Its upper neck and overall width stay the same; only its bottom few percent gently change curvature. Keep all bark, leaves, upper sap flow and lower pool absolutely stationary. No other change is allowed. This contact-settling peak must be almost indistinguishable from rest at small game size.\nONE complete square 1024x1024 transparent RGBA image, not a sheet, comparison or cropped part. Do not zoom, shift, recenter, change palette, add background, shadow, text, borders or frames. Preserve the exact original empty transparent margins. Actual newly drawn tiny local pose, no warp, transformed cutout, tween or fade.\nCRITICAL LOCAL REPAIR: the previous candidate enlarged the entire resource and is rejected. Keep exactly the original FULL-CANVAS magnification and all transparent margins of reference1. Do NOT enlarge the object to show the tiny change. Reference2 is the preserved checked14 key; do not change it. This is a weaker adjacent16 return pose at strength0.654508, almost identical to the canonical reference. All fixed bark/leaves/pool positions remain identical, including topmost wood tip and very lowest bottom contour. Exactly one whole cel.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\canonical-reference.png",
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\drawn-frames\\14.png"
+    ],
+    "source": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-5c829443-d936-4512-abba-1ca18f660e8b.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\adjacent-16-repair-1.png",
+    "status": "selected-source-and-encoded-playback-reviewed",
+    "generatedAt": "2026-10-24T06:34:11.762Z",
+    "type": "adjacent-single",
+    "index": 16,
+    "strength": 0.654508,
+    "boundaryIndex": 14,
+    "supersedes": "adjacent-16",
+    "selectedSourceCopy": "adjacent-16.png",
+    "referenceCopies": [
+      "canonical-reference.png",
+      "key-14.png"
+    ]
+  },
+  {
+    "name": "adjacent-17",
+    "prompt": "Edit the supplied approved SIMPLE Spawner resource into ONE complete tree-sap animation cel at frame 17. The reference is the newly approved authority. Preserve its exact composition, square canvas margins, object size, camera and every fixed landmark. This is an extremely small LOCAL change, not a new illustration or stronger reaction.\nThe simplified design is essential: the same few huge continuous brown wood surfaces, only two thick dark seams, the same broad green leaves with one broad inner color division each, ONE main hanging golden sap drop attached to the broad upper flow, and ONE lower sap pool. Preserve the exact visible shape count in the reference. Never add bark chips, little sap drops, small grain, wrinkles, scratches, facets, glints, moss, specks, extra leaves or tiny reflection marks. Keep the broad smooth painterly shading and the existing single broad cream highlight on each main sap volume. Thin continuous deep-teal contour, same upper-left lighting.\nONLY DRAW THIS TINY POSE: the bottom round tip of the ONE main hanging sap drop gently lengthens DOWN by 1.036 pixels at the 1024x1024 reference scale, with a subtle naturally drawn extension of its broad highlight. The drop neck/upper attachment remains in the exact original position. The drop stays continuously attached and does not detach. Its upper neck and overall width stay the same; only its bottom few percent gently change curvature. Keep all bark, leaves, upper sap flow and lower pool absolutely stationary. No other change is allowed. This contact-settling peak must be almost indistinguishable from rest at small game size.\nONE complete square 1024x1024 transparent RGBA image, not a sheet, comparison or cropped part. Do not zoom, shift, recenter, change palette, add background, shadow, text, borders or frames. Preserve the exact original empty transparent margins. Actual newly drawn tiny local pose, no warp, transformed cutout, tween or fade.\nREFERENCE 1 is the exact canonical full image. REFERENCE 2 is the already CHECKED 14 key pose, supplied only to show this same tiny local tip change. Keep the canonical stationary art/camera authoritative, and preserve the checked key file unchanged. This NEW adjacent complete pose has strength 0.345492, gentle contact reaction returning toward rest; it must join its nearest checked key smoothly. The tiny changed shape is weaker than that key. Do not copy the other key's full extension or exaggerate a fractional-pixel motion.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\canonical-reference.png",
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\drawn-frames\\14.png"
+    ],
+    "source": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-21caba25-06e6-45cf-b429-1d89a7fa54ce.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\adjacent-17.png",
+    "status": "selected-source-and-encoded-playback-reviewed",
+    "generatedAt": "2026-10-24T06:32:14.221Z",
+    "type": "adjacent-single",
+    "index": 17,
+    "strength": 0.345492,
+    "boundaryIndex": 14,
+    "selectedSourceCopy": "adjacent-17.png",
+    "referenceCopies": [
+      "canonical-reference.png",
+      "key-14.png"
+    ]
+  },
+  {
+    "name": "adjacent-18",
+    "prompt": "Edit the supplied approved SIMPLE Spawner resource into ONE complete tree-sap animation cel at frame 18. The reference is the newly approved authority. Preserve its exact composition, square canvas margins, object size, camera and every fixed landmark. This is an extremely small LOCAL change, not a new illustration or stronger reaction.\nThe simplified design is essential: the same few huge continuous brown wood surfaces, only two thick dark seams, the same broad green leaves with one broad inner color division each, ONE main hanging golden sap drop attached to the broad upper flow, and ONE lower sap pool. Preserve the exact visible shape count in the reference. Never add bark chips, little sap drops, small grain, wrinkles, scratches, facets, glints, moss, specks, extra leaves or tiny reflection marks. Keep the broad smooth painterly shading and the existing single broad cream highlight on each main sap volume. Thin continuous deep-teal contour, same upper-left lighting.\nONLY DRAW THIS TINY POSE: the bottom round tip of the ONE main hanging sap drop gently lengthens DOWN by 0.286 pixels at the 1024x1024 reference scale, with a subtle naturally drawn extension of its broad highlight. The drop neck/upper attachment remains in the exact original position. The drop stays continuously attached and does not detach. Its upper neck and overall width stay the same; only its bottom few percent gently change curvature. Keep all bark, leaves, upper sap flow and lower pool absolutely stationary. No other change is allowed. This contact-settling peak must be almost indistinguishable from rest at small game size.\nONE complete square 1024x1024 transparent RGBA image, not a sheet, comparison or cropped part. Do not zoom, shift, recenter, change palette, add background, shadow, text, borders or frames. Preserve the exact original empty transparent margins. Actual newly drawn tiny local pose, no warp, transformed cutout, tween or fade.\nREFERENCE 1 is the exact canonical full image. REFERENCE 2 is the already CHECKED 14 key pose, supplied only to show this same tiny local tip change. Keep the canonical stationary art/camera authoritative, and preserve the checked key file unchanged. This NEW adjacent complete pose has strength 0.095492, gentle contact reaction returning toward rest; it must join its nearest checked key smoothly. The tiny changed shape is weaker than that key. Do not copy the other key's full extension or exaggerate a fractional-pixel motion.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\canonical-reference.png",
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\drawn-frames\\14.png"
+    ],
+    "source": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-d06f2150-ecbc-4841-8ecd-7d3ae3a6cb17.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\adjacent-18.png",
+    "status": "selected-source-and-encoded-playback-reviewed",
+    "generatedAt": "2026-10-24T06:32:48.86Z",
+    "type": "adjacent-single",
+    "index": 18,
+    "strength": 0.095492,
+    "boundaryIndex": 14,
+    "selectedSourceCopy": "adjacent-18.png",
+    "referenceCopies": [
+      "canonical-reference.png",
+      "key-14.png"
+    ]
+  }
+]

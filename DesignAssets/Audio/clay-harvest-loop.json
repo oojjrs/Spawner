@@ -1,0 +1,23 @@
+{
+  "provider": "ElevenLabs",
+  "endpoint": "https://api.elevenlabs.io/v1/sound-generation",
+  "request": {
+    "text": "Close-up miniature foley of small hands repeatedly raking loose fertile soil into a little mound. Soft dry granular scrapes, fine crumbly earth sifting and small clods gently breaking apart, irregular light gathering movements. Quiet intimate earthy texture, restrained game scale, dry recording. No shovel clang, heavy digging, wet squelch, footsteps, voice, music, outdoor ambience or reverb.",
+    "duration_seconds": 4,
+    "prompt_influence": 0.7,
+    "loop": true,
+    "output_format": "mp3_44100_128",
+    "model_id": "eleven_text_to_sound_v2",
+    "request_options": {
+      "max_retries": 0
+    }
+  },
+  "status": "completed",
+  "generated_at": "2026-10-25T06:46:12.296485+00:00",
+  "input_sources": [],
+  "processing": null,
+  "approved": true,
+  "asset": "DesignAssets/Audio/clay-harvest-loop.mp3",
+  "bytes": 65244,
+  "sha256": "0ef489d7adc2ea99b0df5919e1b74a93c56e986281cfefd9043bec9f24120269"
+}

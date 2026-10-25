@@ -1,0 +1,204 @@
+{
+  "source": "DesignAssets/Terrain/standing-tree-smooth-atlas.png",
+  "frameWidth": 512,
+  "frameHeight": 512,
+  "frameCount": 9,
+  "columns": 3,
+  "rows": 3,
+  "durationsMs": [
+    500,
+    63,
+    62,
+    63,
+    62,
+    63,
+    62,
+    63,
+    62
+  ],
+  "loop": true,
+  "cycleMs": 1000,
+  "sheet": "harvest-sheet.png",
+  "preview": "wood-harvest.webp",
+  "method": "Complete original drawn poses. Small uniform scale correction shared by source phase, applied to the entire sprite about its root. No body-part masks, stationary overlays, color extraction, or canopy/trunk compositing.",
+  "runtimeIntegrated": false,
+  "frameRegistration": [
+    {
+      "scaleFrom887": 0.5,
+      "translation": [
+        45,
+        -4
+      ],
+      "sourceAnchor": [
+        411.8159645232816,
+        842.0
+      ],
+      "destinationAnchor": [
+        250.5,
+        417.5
+      ]
+    },
+    {
+      "scaleFrom887": 0.5,
+      "translation": [
+        40,
+        -2
+      ],
+      "sourceAnchor": [
+        420.55371900826447,
+        840.0
+      ],
+      "destinationAnchor": [
+        250.5,
+        417.5
+      ]
+    },
+    {
+      "scaleFrom887": 0.5,
+      "translation": [
+        46,
+        -2
+      ],
+      "sourceAnchor": [
+        409.4261954261954,
+        840.0
+      ],
+      "destinationAnchor": [
+        250.5,
+        417.5
+      ]
+    },
+    {
+      "scaleFrom887": 0.5,
+      "translation": [
+        43,
+        -4
+      ],
+      "sourceAnchor": [
+        415.1215932914046,
+        842.0
+      ],
+      "destinationAnchor": [
+        250.5,
+        417.5
+      ]
+    },
+    {
+      "scaleFrom887": 0.5,
+      "translation": [
+        17,
+        -11
+      ],
+      "sourceAnchor": [
+        466.6583011583012,
+        857.0
+      ],
+      "destinationAnchor": [
+        250.5,
+        417.5
+      ]
+    },
+    {
+      "scaleFrom887": 0.5,
+      "translation": [
+        35,
+        -11
+      ],
+      "sourceAnchor": [
+        431.92985971943887,
+        857.0
+      ],
+      "destinationAnchor": [
+        250.5,
+        417.5
+      ]
+    },
+    {
+      "scaleFrom887": 0.5,
+      "translation": [
+        11,
+        -2
+      ],
+      "sourceAnchor": [
+        478.8659340659341,
+        840.0
+      ],
+      "destinationAnchor": [
+        250.5,
+        417.5
+      ]
+    },
+    {
+      "scaleFrom887": 0.5,
+      "translation": [
+        33,
+        2
+      ],
+      "sourceAnchor": [
+        435.6397379912664,
+        831.0
+      ],
+      "destinationAnchor": [
+        250.5,
+        417.5
+      ]
+    },
+    {
+      "scaleFrom887": 0.5,
+      "translation": [
+        49,
+        2
+      ],
+      "sourceAnchor": [
+        403.65658747300216,
+        830.0
+      ],
+      "destinationAnchor": [
+        250.5,
+        417.5
+      ]
+    }
+  ],
+  "sourceDrawings": {
+    "key": {
+      "file": "source-drawings/key.png",
+      "prompt": "Use case: precise-object-edit. Draw animation KEY POSES of the exact referenced tree sprite for a 2D game harvesting reaction. This is source animation artwork, not a concept redesign. Return one transparent PNG laid out in exactly THREE equal square cells horizontally (3 columns, 1 row), ideally 1536x512. No borders, labels, text or checkerboard. Each cell has the same tree at the same size, viewpoint and grounded root position, with generous identical margins. Preserve the reference's trunk, all large rounded leaf masses, proportions, smooth painted green palette, lighting, contour style. LEFT cell: exact neutral reference pose. MIDDLE cell: peak of a small external tug at lower trunk, tree top moves slightly to the viewer's right, low right leaf mass jostles first and higher leaf masses lag; root and bottom trunk remain firmly fixed; trunk bends only subtly, no squash. RIGHT cell: small opposite recoil toward the viewer's left, less than the peak, with the low leaf masses settling before the top. The action is someone unseen rummaging/working at the tree, a short rustle with weight, not continuous wind. Distinct but restrained movement readable at 128px. Keep exact same tree identity and drawing details across all three poses. No harvesting creature, hand, tool, particles, falling leaves, cut trunk or deformation of leaf volumes. Actual newly drawn pose artwork with complete branch attachments and occlusion. True transparent RGBA background.",
+      "method": "built-in image_gen drawn poses"
+    },
+    "approach": {
+      "file": "source-drawings/approach.png",
+      "prompt": "Edit the referenced tree animation drawing. Output exactly TWO separate animation frames side by side on a fully TRANSPARENT background, equal square cells. Use the SAME softly painted tree with the SAME fine contours as the reference. Preserve the original lower trunk, root, leaf shapes, proportions, colors and brush texture. The reference has neutral pose in left cell, rightward tug peak in middle, small recoil in right. Draw ONLY the two missing poses between the neutral and middle peak: output left = one third of the way from neutral to rightward tug; output right = two thirds of the way. Extremely small change in trunk lean and relative leaf mass positions; root is stationary. This is a subtle externally triggered harvesting rustle. Match original art closely, NOT a new cartoon rendition. Two complete trees with equal scale, root at same local x/y coordinate and identical blank margins. No background color, no gradient, no glow, no shadow, no outline thickening, no text, no grid. True alpha transparency outside the tree.",
+      "method": "built-in image_gen drawn poses"
+    },
+    "release": {
+      "file": "source-drawings/release.png",
+      "prompt": "Draw exactly TWO adjacent in-between frames of the SAME referenced tree, in two equal square cells side by side, fully transparent alpha. The reference shows neutral, rightward tug peak, weak opposite recoil. Draw the missing RELEASE phase between middle peak and right recoil: left output has relaxed halfway from rightward peak toward neutral, right output has crossed near neutral with canopy slightly lagging. Keep precise original tree design, size, softly painted green masses, fine dark green contour, brown trunk and lighting. Fixed root at identical local position, grounded lower trunk. Upper canopy has slightly delayed rustle after lower leaves. Extremely close poses with a little local leaf-group movement, no whole-tree translation, no new shapes, no background or glow, no text or borders. Production drawn animation poses matching reference style exactly.",
+      "method": "built-in image_gen drawn poses"
+    },
+    "settle": {
+      "file": "source-drawings/settle.png",
+      "prompt": "Draw TWO very close final settling frames of this tree harvesting reaction. Exact original design/style is image 1; checked motion keys are image 2 (neutral, right tug, weak opposite recoil). Output two equal square cells side by side, TRUE ALPHA transparency, no background. Left output: immediately after image 2 RIGHT recoil, already halfway back to image 1 neutral. Right output: nearly identical to image 1 neutral with only a tiny last movement of top foliage. Root and lower trunk fixed; tree scale, trunk length, leaf mass volumes and original finely painted green contours unchanged. Keep original soft brown trunk, delicate outline, subtle smooth reference shading. Do not redraw as cartoon, no bold black lines, no extra leaves, no glow. Keep full tree visible, both frames same size and root coordinates. These are final adjacent drawn poses to end the half-second rustle; no continuous wind.",
+      "method": "built-in image_gen drawn poses"
+    }
+  },
+  "wholeFramePreparation": {
+    "scales": [
+      1,
+      1.013,
+      1.013,
+      1,
+      0.973,
+      0.973,
+      1,
+      1.027,
+      1.027
+    ],
+    "rootPivot": [
+      250.5,
+      417.5
+    ],
+    "preservesCompleteSilhouette": true,
+    "bodyPartCompositing": false,
+    "remainingLimitation": "Small variations in drawn trunk thickness remain; this repair removes the clipped-body composite."
+  }
+}

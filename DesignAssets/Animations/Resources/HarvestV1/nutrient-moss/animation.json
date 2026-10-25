@@ -1,7 +1,7 @@
 {
   "key": "nutrient-moss",
   "name": "영양 이끼",
-  "motion": "이끼 술의 내부 표면이 서로 다른 시점에 작게 눌렸다 복귀한다.",
+  "motion": "큰 이끼 쿠션이 순서대로 살짝 눌렸다가 복귀하며 영양 방울은 붙어 있다.",
   "source": "DesignAssets/FoodConcepts/v1/food-nutrient-moss.png",
   "frameSize": 256,
   "frameCount": 24,
@@ -10,80 +10,8 @@
   "durationMs": 2400,
   "sheet": "sheet.png",
   "preview": "preview.gif",
-  "parts": [
-    "parts/style-fixed-base.png",
-    "parts/style-contact-01.png",
-    "parts/style-contact-02.png",
-    "parts/style-contact-03.png"
-  ],
-  "fixedAnchors": [
-    [
-      127,
-      221
-    ],
-    [
-      128,
-      221
-    ],
-    [
-      129,
-      221
-    ],
-    [
-      130,
-      221
-    ],
-    [
-      131,
-      221
-    ],
-    [
-      132,
-      221
-    ],
-    [
-      133,
-      221
-    ],
-    [
-      134,
-      221
-    ],
-    [
-      135,
-      221
-    ],
-    [
-      136,
-      221
-    ],
-    [
-      137,
-      221
-    ],
-    [
-      126,
-      222
-    ],
-    [
-      127,
-      222
-    ],
-    [
-      128,
-      222
-    ],
-    [
-      129,
-      222
-    ],
-    [
-      134,
-      222
-    ]
-  ],
   "status": "실제 채집 성공 시점에 연결",
-  "sourceMethod": "승인한 단순화 원화를 고정 베이스와 부드러운 내부 표면 레이어로 분리하고, 외곽과 지면을 고정한 국소 접촉 반응을 합성한다.",
+  "sourceMethod": "확인한 핵심 포즈를 유지하며 인접 포즈를 실제 원화로 제작한다. 출력 준비, 공통 정렬 및 선택적 정지 영역 보완의 세부 내역은 drawingSources에 기록한다.",
   "runtimeIntegrated": true,
   "runtime": {
     "contactFrame": 8,
@@ -93,7 +21,7 @@
     "method": "harvest-sheet"
   },
   "runtimePreview": "runtime.gif",
-  "approvedStyleSource": "DesignAssets/ResourceStyleStudies/v1/food-nutrient-moss.png",
+  "approvedStyleSource": "DesignAssets/ResourceStyleStudies/v3/After/nutrient-moss.png",
   "frameWidth": 256,
   "frameHeight": 256,
   "rows": 4,
@@ -101,29 +29,42 @@
     128,
     224
   ],
-  "fixedParts": [
-    "parts/style-fixed-base.png"
-  ],
-  "movingParts": [
-    "parts/style-contact-01.png",
-    "parts/style-contact-02.png",
-    "parts/style-contact-03.png"
-  ],
-  "fixedPixelMask": "parts/style-fixed-pixel-mask.png",
-  "fixedGroundRegion": [
-    0,
-    212,
-    256,
-    44
-  ],
   "neutralFrames": [
     0,
     7,
     8,
     19,
+    20,
     21,
     22,
     23
   ],
-  "hiddenAreaRestoration": "외곽 알파와 지면을 고정하고 외곽에서 떨어진 내부 면에서만 연속 좌표로 반응하므로 숨은 면을 노출하지 않는다."
+  "mode": "drawn-poses",
+  "frameFiles": [
+    "StyleV3/frames/frame-00.png",
+    "StyleV3/frames/frame-01.png",
+    "StyleV3/frames/frame-02.png",
+    "StyleV3/frames/frame-03.png",
+    "StyleV3/frames/frame-04.png",
+    "StyleV3/frames/frame-05.png",
+    "StyleV3/frames/frame-06.png",
+    "StyleV3/frames/frame-07.png",
+    "StyleV3/frames/frame-08.png",
+    "StyleV3/frames/frame-09.png",
+    "StyleV3/frames/frame-10.png",
+    "StyleV3/frames/frame-11.png",
+    "StyleV3/frames/frame-12.png",
+    "StyleV3/frames/frame-13.png",
+    "StyleV3/frames/frame-14.png",
+    "StyleV3/frames/frame-15.png",
+    "StyleV3/frames/frame-16.png",
+    "StyleV3/frames/frame-17.png",
+    "StyleV3/frames/frame-18.png",
+    "StyleV3/frames/frame-19.png",
+    "StyleV3/frames/frame-20.png",
+    "StyleV3/frames/frame-21.png",
+    "StyleV3/frames/frame-22.png",
+    "StyleV3/frames/frame-23.png"
+  ],
+  "drawingSources": "StyleV3/sources.json"
 }

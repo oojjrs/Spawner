@@ -1,0 +1,14 @@
+{
+  "key": "root-fiber",
+  "index": 13,
+  "kind": "key-pose-candidate",
+  "prompt": "Draw ONE COMPLETE animation frame 14 of 24 for the 뿌리섬유 (root-fiber) resource. FIRST reference is the exact approved clean sprite and canvas registration. SECOND reference is the old frame, provided only as a restrained motion/pose guide: do not copy its old texture, extra parts or different proportions. Redraw the whole sprite in the FIRST reference identity and broad clean painterly shading. Pose: gentle contact reaction returning toward rest; reaction strength 0.985 of the small maximum. Motion plan: The two free front root tips flex gently outward by a few pixels while the main root bundle and grounded footprint stay fixed. No extra roots, no thin hair roots. Preserve exact object count, palette, left-top lighting, contour weight, perspective and simplified material detail. Keep base center at 50 percent canvas width, lowest fixed contact at 87.5 percent canvas height, and the same scale and transparent padding as the FIRST reference. No global camera movement, floating, growth, extraction, added texture, tiny glints, labels, grid or extra frame. Truly transparent square background; exactly one whole frame, including all stationary elements.\nKey pose source drawing only. Preserve the EXACT large shapes, ribbon/root count and attached waist/bundle from the FIRST canonical image, not the old detailed guide. Output one complete square frame on a 1024 by 1024 canvas. Canonical center x=512 and stationary base y=896, maximum span 81.25 percent. No global zoom, shift, growth or different silhouette proportions. Only the approved free tips locally flex. Alpha outside the actual resource silhouette must be zero. No fog, halo, glow, floor, background shading, cast shadow, thin hair roots, extra fine fibers, new tie or extra plant parts.",
+  "references": [
+    "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\root-fiber\\style-reference.png",
+    "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\root-fiber\\guide-frames\\13.png"
+  ],
+  "cachePath": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-bb7db893-aa31-426a-a5be-2bf96f5fd3d3.png",
+  "sourcePath": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\root-fiber\\key-sources\\13.png",
+  "output": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\root-fiber\\drawn-frames\\13.png",
+  "status": "pending-review"
+}

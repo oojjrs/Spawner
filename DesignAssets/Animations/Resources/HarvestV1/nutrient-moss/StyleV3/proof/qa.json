@@ -1,0 +1,83 @@
+{
+  "status": "ready",
+  "framePngCount": 24,
+  "frameCanvas": [
+    256,
+    256
+  ],
+  "sheetCanvas": [
+    1536,
+    1024
+  ],
+  "layout": [
+    6,
+    4
+  ],
+  "transparentPng": true,
+  "fullGif": {
+    "logicalFrames": 24,
+    "delayMs": 100,
+    "durationMs": 2400,
+    "canvas": [
+      256,
+      256
+    ]
+  },
+  "smallGif": {
+    "logicalFrames": 24,
+    "delayMs": 100,
+    "durationMs": 2400,
+    "canvas": [
+      96,
+      96
+    ]
+  },
+  "stablePalette": "preparation/global-palette.png",
+  "neutralHoldFrames": [
+    0,
+    7,
+    8,
+    19,
+    20,
+    21,
+    22,
+    23
+  ],
+  "holdPngHash": "9895A65486C536A772C3AFB5B2300335BB7146CE53A2CD0308410AA9033C7B45",
+  "sourceDrawings": {
+    "movingActualDrawings": 16,
+    "imagegenCalls": 17,
+    "unusedGroupedCall": 1,
+    "pngCount": 18
+  },
+  "visualInspection": {
+    "method": "decoded actual GIF frames, complete96px sequence plus256px junctions",
+    "complete96": "proof/decoded96-sequence.png",
+    "junction256": "proof/decoded256-junctions.png",
+    "junctionIndices": [
+      6,
+      7,
+      8,
+      9,
+      12,
+      13,
+      14,
+      15,
+      18,
+      19,
+      23,
+      0
+    ],
+    "findings": "Three cushions and three globules retained; small left pre-contact and right post-contact yielding. No large global scale/anchor pop, clipping, disconnected globules or return/loop discontinuity observed. Fine source repaint variation remains within the small local motion."
+  },
+  "actualOperations": {
+    "source": "16complete imagegen moving drawings plus approved neutral",
+    "extraction": "whole returned square canvas",
+    "registration": "none beyond same whole-canvas normalization1024 to256",
+    "fixedRegions": "none retained/composited",
+    "motionTransforms": "none",
+    "alpha": "original generated alpha retained; first defective threshold package superseded",
+    "holds": "exact byte copy of final frame00 at0/7/8/19..23"
+  },
+  "gameOriginalsModified": false
+}

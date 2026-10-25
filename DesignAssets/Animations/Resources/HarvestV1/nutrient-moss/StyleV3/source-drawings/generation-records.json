@@ -1,0 +1,312 @@
+{
+  "tool": "built-in image_gen",
+  "approvedStatic": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\static\\nutrient-moss.png",
+  "canonicalPreparation": {
+    "width": 832,
+    "height": 598,
+    "x": 96,
+    "y": 298
+  },
+  "staticOnlyPreparation": "alpha threshold1%, one original trim, uniform max span832, center512, bottom896; not per-frame fit",
+  "selectedGenerations": [
+    {
+      "id": "key-03",
+      "kind": "key",
+      "frames": [
+        3
+      ],
+      "prompt": "Use case: precise-object-edit. Production animation source artwork for the attached Spawner nutrient moss. Input image 1 is the locked canonical neutral, the sole authority for the design, rendering and canvas registration. Draw one complete full-body pose, not isolated parts. Keep exactly three big rounded moss cushions, the same few short simple sprouts, and exactly three attached amber nutrient globules in the same arrangement. Thin continuous deep teal contours, smooth broad painted shading, restrained large highlights, quiet surfaces; never add small fronds, veins, grains or extra shine. 1024x1024 genuinely transparent RGBA canvas. Match the original camera, overall scale, center and ground contact exactly: max width832, center512, lowest point896. Keep the lower cushion footprints, lower sprouts, left/right extremities, back-right cushion and right globule fixed in place. No overall squash, camera motion, color shift, new forms, detached parts, ground, shadows, scenery, grid, words or labels. Requested pose: frame03, a gentle anticipation peak before a harvest touch. Only the upper surface of the large left foreground moss cushion yields downward very slightly, around28 pixels at this canvas size. Its large left amber globule rests 14pixels lower, still nestled and attached, and the tall back-left sprout tilts very slightly inward. The other two moss cushions and the other two globules retain the neutral shape and location. Draw the compressed curved surface and connected overlaps completely. The action is small and local, readable as soft moss yielding rather than the whole colony bouncing.",
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\canonical-neutral.png"
+      ],
+      "status": "checked-source",
+      "cache": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-101c051d-5916-4768-8369-c37e42efa275.png",
+      "raw": "raw/key-03.png",
+      "preparation": "whole canvas uniform resize to1024, no bbox fit"
+    },
+    {
+      "id": "key-13",
+      "kind": "key",
+      "frames": [
+        13
+      ],
+      "prompt": "Use case: precise-object-edit. Production animation source artwork for the attached Spawner nutrient moss. Input image 1 is the locked canonical neutral, the sole authority for the design, rendering and canvas registration. Draw one complete full-body pose, not isolated parts. Keep exactly three big rounded moss cushions, the same few short simple sprouts, and exactly three attached amber nutrient globules in the same arrangement. Thin continuous deep teal contours, smooth broad painted shading, restrained large highlights, quiet surfaces; never add small fronds, veins, grains or extra shine. 1024x1024 genuinely transparent RGBA canvas. Match the original camera, overall scale, center and ground contact exactly: max width832, center512, lowest point896. Keep the lower cushion footprints, lower sprouts, left/right extremities and the large left cushion fixed in place. No overall squash, camera motion, color shift, new forms, detached parts, ground, shadows, scenery, grid, words or labels. Requested pose: frame13, the gentle post-harvest reaction peak. Only the upper surfaces of the right foreground cushion and back-right cushion yield locally downward about24 pixels; the right amber globule sits10pixels lower, and the small front amber globule sits8pixels lower, all still attached and nestled in moss. The rightmost short sprout bends very slightly inward. Keep the large left cushion, large left globule and tall back-left sprouts at the exact neutral pose. This is a small soft local recoil, never a translation or squash of the whole colony. Fully draw continuous overlapping surfaces, preserving exactly three globules and the approved few broad simple shapes.",
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\canonical-neutral.png"
+      ],
+      "status": "checked-source",
+      "cache": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-f6b04b2a-e5cc-4744-b444-860ecac09f5c.png",
+      "raw": "raw/key-13.png",
+      "preparation": "whole canvas uniform resize to1024, no bbox fit"
+    },
+    {
+      "id": "adjacent-02",
+      "kind": "adjacent-individual",
+      "frames": [
+        2
+      ],
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\canonical-neutral.png",
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\drawn-frames\\03.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Draw ONE complete animation cel of the attached simplified Spawner nutrient moss, on a genuinely transparent RGBA square canvas. Image1 is the locked neutral design, rendering, palette and full-canvas registration. Image2 is a checked nearby action pose; use it to preserve the local action and attachments. Match Image1's very thin continuous deep teal contours and smooth broad hand-painted gradients exactly; do not thicken or darken the outlines. Exactly THREE large rounded moss cushions, the original few broad short sprouts, exactly THREE attached amber nutrient globules. No new fronds or internal detail. Preserve the original whole canvas, camera, dimensions, proportions, lower footprint, bottom sprouts, color and lighting. Keep the entire colony in its original coordinates, not tightly cropped, not enlarged or translated. 1024x1024 canvas, width832, center512, lowest point896. Small local yielding only; draw fully connected surfaces and overlaps, never deformed cutouts or disconnected parts. No floor, ground, cast shadow, scenery, particles, text, labels, borders or extra views.\nRequested complete frame02: This is just BEFORE the checked anticipation peak03 in Image2. The top of the large left foreground cushion and its large left globule show about two-thirds of Image2's small local downward yield, not a deeper compression. The right/back cushion and other two globules stay at the exact neutral pose. The lower moss outlines stay steady.",
+      "status": "checked-source",
+      "cache": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-b99e85f6-fa2c-4d03-8fb5-1201721a6caf.png",
+      "raw": "raw/adjacent-02.png",
+      "output": "drawn-frames/02.png",
+      "preparation": "whole returned square canvas uniformly resized to1024; no bbox fit or pose transform"
+    },
+    {
+      "id": "adjacent-01",
+      "kind": "adjacent-individual",
+      "frames": [
+        1
+      ],
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\canonical-neutral.png",
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\drawn-frames\\02.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Draw ONE complete animation cel of the attached simplified Spawner nutrient moss, on a genuinely transparent RGBA square canvas. Image1 is the locked neutral design, rendering, palette and full-canvas registration. Image2 is a checked nearby action pose; use it to preserve the local action and attachments. Match Image1's very thin continuous deep teal contours and smooth broad hand-painted gradients exactly; do not thicken or darken the outlines. Exactly THREE large rounded moss cushions, the original few broad short sprouts, exactly THREE attached amber nutrient globules. No new fronds or internal detail. Preserve the original whole canvas, camera, dimensions, proportions, lower footprint, bottom sprouts, color and lighting. Keep the entire colony in its original coordinates, not tightly cropped, not enlarged or translated. 1024x1024 canvas, width832, center512, lowest point896. Small local yielding only; draw fully connected surfaces and overlaps, never deformed cutouts or disconnected parts. No floor, ground, cast shadow, scenery, particles, text, labels, borders or extra views.\nRequested complete frame01: This is the first small anticipation movement, between neutral Image1 and the nearby checked frame02 Image2. Draw halfway between these poses for only the upper-left cushion and its nestled large left amber globule. Very gentle local compression, weaker than Image2. All right/back shapes and the footprint retain neutral registration. Do not lift the colony.",
+      "status": "checked-source",
+      "cache": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-cb693e94-bd15-41a7-b7a8-d9f6db166be1.png",
+      "raw": "raw/adjacent-01.png",
+      "output": "drawn-frames/01.png",
+      "preparation": "whole returned square canvas uniformly resized to1024; no bbox fit or pose transform"
+    },
+    {
+      "id": "adjacent-04",
+      "kind": "adjacent-individual",
+      "frames": [
+        4
+      ],
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\canonical-neutral.png",
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\drawn-frames\\03.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Draw ONE complete animation cel of the attached simplified Spawner nutrient moss, on a genuinely transparent RGBA square canvas. Image1 is the locked neutral design, rendering, palette and full-canvas registration. Image2 is a checked nearby action pose; use it to preserve the local action and attachments. Match Image1's very thin continuous deep teal contours and smooth broad hand-painted gradients exactly; do not thicken or darken the outlines. Exactly THREE large rounded moss cushions, the original few broad short sprouts, exactly THREE attached amber nutrient globules. No new fronds or internal detail. Preserve the original whole canvas, camera, dimensions, proportions, lower footprint, bottom sprouts, color and lighting. Keep the entire colony in its original coordinates, not tightly cropped, not enlarged or translated. 1024x1024 canvas, width832, center512, lowest point896. Small local yielding only; draw fully connected surfaces and overlaps, never deformed cutouts or disconnected parts. No floor, ground, cast shadow, scenery, particles, text, labels, borders or extra views.\nRequested complete frame04: This is immediately AFTER checked anticipation peak03 Image2, starting its release toward neutral Image1. Keep around three-quarters of Image2's small left cushion compression. The large left globule rises just a little toward its neutral position but stays attached. The other two globules and right/back cushion remain neutral. Draw a smooth adjacent release, not a deeper dip. Fixed lower footprint.",
+      "status": "checked-source",
+      "cache": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-1118d5b8-978b-435f-b02a-a11d2295a922.png",
+      "raw": "raw/adjacent-04.png",
+      "output": "drawn-frames/04.png",
+      "preparation": "whole returned square canvas uniformly resized to1024; no bbox fit or pose transform"
+    },
+    {
+      "id": "adjacent-05",
+      "kind": "adjacent-individual",
+      "frames": [
+        5
+      ],
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\canonical-neutral.png",
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\drawn-frames\\04.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Draw ONE complete animation cel of the attached simplified Spawner nutrient moss, on a genuinely transparent RGBA square canvas. Image1 is the locked neutral design, rendering, palette and full-canvas registration. Image2 is a checked nearby action pose; use it to preserve the local action and attachments. Match Image1's very thin continuous deep teal contours and smooth broad hand-painted gradients exactly; do not thicken or darken the outlines. Exactly THREE large rounded moss cushions, the original few broad short sprouts, exactly THREE attached amber nutrient globules. No new fronds or internal detail. Preserve the original whole canvas, camera, dimensions, proportions, lower footprint, bottom sprouts, color and lighting. Keep the entire colony in its original coordinates, not tightly cropped, not enlarged or translated. 1024x1024 canvas, width832, center512, lowest point896. Small local yielding only; draw fully connected surfaces and overlaps, never deformed cutouts or disconnected parts. No floor, ground, cast shadow, scenery, particles, text, labels, borders or extra views.\nRequested complete frame05: Continue the return immediately after checked frame04 Image2 toward neutral Image1. The upper-left cushion and its nestled large globule are now almost back, with only a very slight residual softness. Keep the left globule's original shape and count. Other surfaces and lower outlines stay steady. Small adjacent drawing, no overshoot or whole-object movement.",
+      "status": "checked-source",
+      "cache": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-68526afa-ddc6-441c-8c8c-3e3d9c97563a.png",
+      "raw": "raw/adjacent-05.png",
+      "output": "drawn-frames/05.png",
+      "preparation": "whole returned square canvas uniformly resized to1024; no bbox fit or pose transform"
+    },
+    {
+      "id": "adjacent-06",
+      "kind": "adjacent-individual",
+      "frames": [
+        6
+      ],
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\canonical-neutral.png",
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\drawn-frames\\05.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Draw ONE complete animation cel of the attached simplified Spawner nutrient moss, on a genuinely transparent RGBA square canvas. Image1 is the locked neutral design, rendering, palette and full-canvas registration. Image2 is a checked nearby action pose; use it to preserve the local action and attachments. Match Image1's very thin continuous deep teal contours and smooth broad hand-painted gradients exactly; do not thicken or darken the outlines. Exactly THREE large rounded moss cushions, the original few broad short sprouts, exactly THREE attached amber nutrient globules. No new fronds or internal detail. Preserve the original whole canvas, camera, dimensions, proportions, lower footprint, bottom sprouts, color and lighting. Keep the entire colony in its original coordinates, not tightly cropped, not enlarged or translated. 1024x1024 canvas, width832, center512, lowest point896. Small local yielding only; draw fully connected surfaces and overlaps, never deformed cutouts or disconnected parts. No floor, ground, cast shadow, scenery, particles, text, labels, borders or extra views.\nRequested complete frame06: This is the last tiny return step after checked05 Image2, immediately before exact neutral07. Draw halfway from Image2's residual small left cushion reaction to the original neutral Image1. It should read almost identical to neutral with only about3pixels of local upper-surface residual at1024 scale. The lower outline and three globule centers retain their original locations. No other movement or new markings.",
+      "status": "checked-source",
+      "cache": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-ba71e8e0-6707-4969-9fd1-27714d5bb79c.png",
+      "raw": "raw/adjacent-06.png",
+      "output": "drawn-frames/06.png",
+      "preparation": "whole returned square canvas uniformly resized to1024; no bbox fit or pose transform"
+    },
+    {
+      "id": "adjacent-12",
+      "kind": "adjacent-individual",
+      "frames": [
+        12
+      ],
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\canonical-neutral.png",
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\drawn-frames\\13.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Draw ONE complete animation cel of the attached simplified Spawner nutrient moss, on a genuinely transparent RGBA square canvas. Image1 is the locked neutral design, rendering, palette and full-canvas registration. Image2 is a checked nearby action pose; use it to preserve the local action and attachments. Match Image1's very thin continuous deep teal contours and smooth broad hand-painted gradients exactly; do not thicken or darken the outlines. Exactly THREE large rounded moss cushions, the original few broad short sprouts, exactly THREE attached amber nutrient globules. No new fronds or internal detail. Preserve the original whole canvas, camera, dimensions, proportions, lower footprint, bottom sprouts, color and lighting. Keep the entire colony in its original coordinates, not tightly cropped, not enlarged or translated. 1024x1024 canvas, width832, center512, lowest point896. Small local yielding only; draw fully connected surfaces and overlaps, never deformed cutouts or disconnected parts. No floor, ground, cast shadow, scenery, particles, text, labels, borders or extra views.\nRequested complete frame12: This is immediately BEFORE checked reaction peak13 Image2. Draw about eighty percent of Image2's gentle local downward yield of the back-right and front-right upper moss surfaces. The right and small front globules are slightly lower than neutral but still attached. Keep the left cushion, large left globule and left sprouts at neutral. All lower footprints remain steady. This is a tiny progressive moss recoil, not a whole-body bounce.",
+      "status": "checked-source",
+      "cache": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-51f12343-55ed-4053-a8cc-2550b9912626.png",
+      "raw": "raw/adjacent-12.png",
+      "output": "drawn-frames/12.png",
+      "preparation": "whole returned square canvas uniformly resized to1024; no bbox fit or pose transform"
+    },
+    {
+      "id": "adjacent-11",
+      "kind": "adjacent-individual",
+      "frames": [
+        11
+      ],
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\canonical-neutral.png",
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\drawn-frames\\12.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Draw ONE complete animation cel of the attached simplified Spawner nutrient moss, on a genuinely transparent RGBA square canvas. Image1 is the locked neutral design, rendering, palette and full-canvas registration. Image2 is a checked nearby action pose; use it to preserve the local action and attachments. Match Image1's very thin continuous deep teal contours and smooth broad hand-painted gradients exactly; do not thicken or darken the outlines. Exactly THREE large rounded moss cushions, the original few broad short sprouts, exactly THREE attached amber nutrient globules. No new fronds or internal detail. Preserve the original whole canvas, camera, dimensions, proportions, lower footprint, bottom sprouts, color and lighting. Keep the entire colony in its original coordinates, not tightly cropped, not enlarged or translated. 1024x1024 canvas, width832, center512, lowest point896. Small local yielding only; draw fully connected surfaces and overlaps, never deformed cutouts or disconnected parts. No floor, ground, cast shadow, scenery, particles, text, labels, borders or extra views.\nRequested complete frame11: This is the adjacent pose immediately before checked12 Image2, midway from neutral08 Image1 toward the right-side reaction peak. Keep about sixty percent of the right/back upper cushion compression seen in Image2. The right globule and small front globule move with their cushions only slightly, attached throughout. The left cushion, left globule, sprouts and lower footprint remain at neutral. Do not deepen the notch compared with Image2.",
+      "status": "checked-source",
+      "cache": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-6abd5f70-1c50-48b4-a837-d3b414892b4f.png",
+      "raw": "raw/adjacent-11.png",
+      "output": "drawn-frames/11.png",
+      "preparation": "whole returned square canvas uniformly resized to1024; no bbox fit or pose transform"
+    },
+    {
+      "id": "adjacent-10",
+      "kind": "adjacent-individual",
+      "frames": [
+        10
+      ],
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\canonical-neutral.png",
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\drawn-frames\\11.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Draw ONE complete animation cel of the attached simplified Spawner nutrient moss, on a genuinely transparent RGBA square canvas. Image1 is the locked neutral design, rendering, palette and full-canvas registration. Image2 is a checked nearby action pose; use it to preserve the local action and attachments. Match Image1's very thin continuous deep teal contours and smooth broad hand-painted gradients exactly; do not thicken or darken the outlines. Exactly THREE large rounded moss cushions, the original few broad short sprouts, exactly THREE attached amber nutrient globules. No new fronds or internal detail. Preserve the original whole canvas, camera, dimensions, proportions, lower footprint, bottom sprouts, color and lighting. Keep the entire colony in its original coordinates, not tightly cropped, not enlarged or translated. 1024x1024 canvas, width832, center512, lowest point896. Small local yielding only; draw fully connected surfaces and overlaps, never deformed cutouts or disconnected parts. No floor, ground, cast shadow, scenery, particles, text, labels, borders or extra views.\nRequested complete frame10: This is the adjacent earlier pose before checked11 Image2, only the early small onset after neutral08. The back-right cushion is nearly its original rounded dome, with at most one-third of the small depression seen in Image2 and a much shallower notch. The right globule and small front globule are almost at neutral. Left cushion, large left globule, lower footprint and sprouts remain neutral. Match this weak intermediate rather than reproducing the peak.",
+      "status": "checked-source",
+      "cache": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-35f2f19c-2708-4318-a818-608b4cbc9867.png",
+      "raw": "raw/adjacent-10.png",
+      "output": "drawn-frames/10.png",
+      "preparation": "whole returned square canvas uniformly resized to1024; no bbox fit or pose transform"
+    },
+    {
+      "id": "adjacent-09",
+      "kind": "adjacent-individual",
+      "frames": [
+        9
+      ],
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\canonical-neutral.png",
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\drawn-frames\\10.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Draw ONE complete animation cel of the attached simplified Spawner nutrient moss, on a genuinely transparent RGBA square canvas. Image1 is the locked neutral design, rendering, palette and full-canvas registration. Image2 is a checked nearby action pose; use it to preserve the local action and attachments. Match Image1's very thin continuous deep teal contours and smooth broad hand-painted gradients exactly; do not thicken or darken the outlines. Exactly THREE large rounded moss cushions, the original few broad short sprouts, exactly THREE attached amber nutrient globules. No new fronds or internal detail. Preserve the original whole canvas, camera, dimensions, proportions, lower footprint, bottom sprouts, color and lighting. Keep the entire colony in its original coordinates, not tightly cropped, not enlarged or translated. 1024x1024 canvas, width832, center512, lowest point896. Small local yielding only; draw fully connected surfaces and overlaps, never deformed cutouts or disconnected parts. No floor, ground, cast shadow, scenery, particles, text, labels, borders or extra views.\nRequested complete frame09: The very first post-contact motion after exact neutral08. Draw a new adjacent pose halfway from neutral Image1 to weak onset10 Image2. The back-right dome stays almost completely rounded, with only the tiniest surface yield and right globule displacement, at most4pixels at1024canvas. All left shapes, lower outline, sprouts and front globule remain neutral. It must ease smoothly out of neutral, not jump directly to the compressed peak.",
+      "status": "checked-source",
+      "cache": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-ef1dca19-bece-4923-bdca-671c5a164c77.png",
+      "raw": "raw/adjacent-09.png",
+      "output": "drawn-frames/09.png",
+      "preparation": "whole returned square canvas uniformly resized to1024; no bbox fit or pose transform"
+    },
+    {
+      "id": "adjacent-14",
+      "kind": "adjacent-individual",
+      "frames": [
+        14
+      ],
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\canonical-neutral.png",
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\drawn-frames\\13.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Draw ONE complete animation cel of the attached simplified Spawner nutrient moss, on a genuinely transparent RGBA square canvas. Image1 is the locked neutral design, rendering, palette and full-canvas registration. Image2 is a checked nearby action pose; use it to preserve the local action and attachments. Match Image1's very thin continuous deep teal contours and smooth broad hand-painted gradients exactly; do not thicken or darken the outlines. Exactly THREE large rounded moss cushions, the original few broad short sprouts, exactly THREE attached amber nutrient globules. No new fronds or internal detail. Preserve the original whole canvas, camera, dimensions, proportions, lower footprint, bottom sprouts, color and lighting. Keep the entire colony in its original coordinates, not tightly cropped, not enlarged or translated. 1024x1024 canvas, width832, center512, lowest point896. Small local yielding only; draw fully connected surfaces and overlaps, never deformed cutouts or disconnected parts. No floor, ground, cast shadow, scenery, particles, text, labels, borders or extra views.\nRequested complete frame14: The first release pose immediately AFTER checked reaction peak13 Image2. Keep about eighty percent of the local right/back upper-cushion depression, starting to regain the rounded neutral dome. Its right amber globule and the small front amber globule rise only a few pixels toward neutral. Keep the left cushion/globule and all lower footprints fixed. Draw an adjacent soft release with all connections intact, no new broad motion.",
+      "status": "checked-source",
+      "cache": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-6dcaa5cc-3306-4511-81f1-a3b9bf657da9.png",
+      "raw": "raw/adjacent-14.png",
+      "output": "drawn-frames/14.png",
+      "preparation": "whole returned square canvas uniformly resized to1024; no bbox fit or pose transform"
+    },
+    {
+      "id": "adjacent-15",
+      "kind": "adjacent-individual",
+      "frames": [
+        15
+      ],
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\canonical-neutral.png",
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\drawn-frames\\14.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Draw ONE complete animation cel of the attached simplified Spawner nutrient moss, on a genuinely transparent RGBA square canvas. Image1 is the locked neutral design, rendering, palette and full-canvas registration. Image2 is a checked nearby action pose; use it to preserve the local action and attachments. Match Image1's very thin continuous deep teal contours and smooth broad hand-painted gradients exactly; do not thicken or darken the outlines. Exactly THREE large rounded moss cushions, the original few broad short sprouts, exactly THREE attached amber nutrient globules. No new fronds or internal detail. Preserve the original whole canvas, camera, dimensions, proportions, lower footprint, bottom sprouts, color and lighting. Keep the entire colony in its original coordinates, not tightly cropped, not enlarged or translated. 1024x1024 canvas, width832, center512, lowest point896. Small local yielding only; draw fully connected surfaces and overlaps, never deformed cutouts or disconnected parts. No floor, ground, cast shadow, scenery, particles, text, labels, borders or extra views.\nRequested complete frame15: The adjacent return after checked14 Image2 toward neutral19 Image1. The broad right/back cushions regain their smooth rounded neutral dome, with only a very subtle residual local yield. Right globule and small front globule are almost at their original height, still attached. Preserve every left shape and the lower footprint. A quiet soft recovery pose, no overshoot, no added forms.",
+      "status": "checked-source",
+      "cache": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-35da13b2-7903-4b6d-9c4b-83d125cc5ec0.png",
+      "raw": "raw/adjacent-15.png",
+      "output": "drawn-frames/15.png",
+      "preparation": "whole returned square canvas uniformly resized to1024; no bbox fit or pose transform"
+    },
+    {
+      "id": "adjacent-16",
+      "kind": "adjacent-individual",
+      "frames": [
+        16
+      ],
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\canonical-neutral.png",
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\drawn-frames\\15.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Draw ONE complete animation cel of the attached simplified Spawner nutrient moss, on a genuinely transparent RGBA square canvas. Image1 is the locked neutral design, rendering, palette and full-canvas registration. Image2 is a checked nearby action pose; use it to preserve the local action and attachments. Match Image1's very thin continuous deep teal contours and smooth broad hand-painted gradients exactly; do not thicken or darken the outlines. Exactly THREE large rounded moss cushions, the original few broad short sprouts, exactly THREE attached amber nutrient globules. No new fronds or internal detail. Preserve the original whole canvas, camera, dimensions, proportions, lower footprint, bottom sprouts, color and lighting. Keep the entire colony in its original coordinates, not tightly cropped, not enlarged or translated. 1024x1024 canvas, width832, center512, lowest point896. Small local yielding only; draw fully connected surfaces and overlaps, never deformed cutouts or disconnected parts. No floor, ground, cast shadow, scenery, particles, text, labels, borders or extra views.\nRequested complete frame16: The next small settling pose after checked15 Image2. Draw halfway closer to neutral Image1, with only a minute residual yield in the right upper moss surface and the small front globule. The back dome is round and smooth again. No new notch or dip. Keep all three globules attached, and all lower cushion footprints and front sprouts in the same coordinates.",
+      "status": "checked-source",
+      "cache": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-843de255-0db7-4b7e-9ed4-c52be15e21f1.png",
+      "raw": "raw/adjacent-16.png",
+      "output": "drawn-frames/16.png",
+      "preparation": "whole returned square canvas uniformly resized to1024; no bbox fit or pose transform"
+    },
+    {
+      "id": "adjacent-17",
+      "kind": "adjacent-individual",
+      "frames": [
+        17
+      ],
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\canonical-neutral.png",
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\drawn-frames\\16.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Draw ONE complete animation cel of the attached simplified Spawner nutrient moss, on a genuinely transparent RGBA square canvas. Image1 is the locked neutral design, rendering, palette and full-canvas registration. Image2 is a checked nearby action pose; use it to preserve the local action and attachments. Match Image1's very thin continuous deep teal contours and smooth broad hand-painted gradients exactly; do not thicken or darken the outlines. Exactly THREE large rounded moss cushions, the original few broad short sprouts, exactly THREE attached amber nutrient globules. No new fronds or internal detail. Preserve the original whole canvas, camera, dimensions, proportions, lower footprint, bottom sprouts, color and lighting. Keep the entire colony in its original coordinates, not tightly cropped, not enlarged or translated. 1024x1024 canvas, width832, center512, lowest point896. Small local yielding only; draw fully connected surfaces and overlaps, never deformed cutouts or disconnected parts. No floor, ground, cast shadow, scenery, particles, text, labels, borders or extra views.\nRequested complete frame17: The penultimate tiny settling step after checked16 Image2. All three main cushions have nearly regained their canonical neutral curves. Draw a barely visible remaining softness in the right foreground upper surface only, weaker than Image2. All three nutrient globules have almost neutral height and remain nestled. Keep every lower anchor and sprout unchanged. No secondary bounce or palette change.",
+      "status": "checked-source",
+      "cache": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-22831c2a-5e60-49ed-8a0e-92440f1d49b9.png",
+      "raw": "raw/adjacent-17.png",
+      "output": "drawn-frames/17.png",
+      "preparation": "whole returned square canvas uniformly resized to1024; no bbox fit or pose transform"
+    },
+    {
+      "id": "adjacent-18",
+      "kind": "adjacent-individual",
+      "frames": [
+        18
+      ],
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\canonical-neutral.png",
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\drawn-frames\\17.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Draw ONE complete animation cel of the attached simplified Spawner nutrient moss, on a genuinely transparent RGBA square canvas. Image1 is the locked neutral design, rendering, palette and full-canvas registration. Image2 is a checked nearby action pose; use it to preserve the local action and attachments. Match Image1's very thin continuous deep teal contours and smooth broad hand-painted gradients exactly; do not thicken or darken the outlines. Exactly THREE large rounded moss cushions, the original few broad short sprouts, exactly THREE attached amber nutrient globules. No new fronds or internal detail. Preserve the original whole canvas, camera, dimensions, proportions, lower footprint, bottom sprouts, color and lighting. Keep the entire colony in its original coordinates, not tightly cropped, not enlarged or translated. 1024x1024 canvas, width832, center512, lowest point896. Small local yielding only; draw fully connected surfaces and overlaps, never deformed cutouts or disconnected parts. No floor, ground, cast shadow, scenery, particles, text, labels, borders or extra views.\nRequested complete frame18: The final drawn adjacent pose immediately before exact neutral19. It should match the original neutral Image1 almost perfectly, closer than checked17 Image2. Draw only the last1-2pixels of right upper-surface settling at1024canvas; all globules, sprouts and lower cushions have regained their original positions and curves. No new texture, no secondary wave, no global shift. This must join the unchanged neutral19 hold naturally.",
+      "status": "checked-source",
+      "cache": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-332666be-86e0-450d-aeb0-eeda680f27ad.png",
+      "raw": "raw/adjacent-18.png",
+      "output": "drawn-frames/18.png",
+      "preparation": "whole returned square canvas uniformly resized to1024; no bbox fit or pose transform"
+    }
+  ],
+  "unusedGenerations": [
+    {
+      "id": "adjacent-00-05",
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "use": [
+        1,
+        2,
+        4,
+        5
+      ],
+      "boundary": 0,
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\canonical-neutral.png",
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\drawn-frames\\03.png",
+        "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\nutrient-moss\\preparation\\canonical-layout-6.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Production hand-drawn 2D sprite animation source, six complete cels in a strict invisible3-column by2-row grid,1536x1024 transparent RGBA canvas, each cell512x512. Image1 is locked canonical neutral identity/rendering. Image2 is the checked anticipation peak03; preserve its local moss compression. Image3 is only a registration layout: every cell must retain its identical camera, scale and lower anchor, maxspan416pixels percell, centerx256, bottom448. Do not copy Image3 as output motion; actually DRAW each requested entire pose. Exactly three large moss cushions and exactly three attached amber nutrient globules, same few short simple sprouts; no extra fronds, noise or small detail. Keep thin deep teal outlines, broad smooth gradients and the same warm green/amber colors and lighting. The lower footprint and main lower sprouts remain steady. Draw continuous attached moss and hidden curved overlaps, no floating pieces.\nRead cells row-major. Cell1 frame00: exact canonical neutral. Cell2 frame01: one-third of the local upper-left-cushion compression shown in03. Cell3 frame02: two-thirds of that same compression. Cell4 frame03: match the checked peak image2 exactly, same scale and lower anchor. Cell5 frame04: release the same compression to about two-thirds. Cell6 frame05: release to about one-third. Only the left upper moss surface and its nestled large left globule react; all other cushions/globules remain steady. No whole colony translation, rotation, scaling, generic bouncing or new design. Each individual whole cel stays in its own512 square with clear margin, no crossing boundaries. No grid lines, labels, text, frames, backgrounds, ground, castshadow or particles.",
+      "kind": "adjacent",
+      "status": "unused-style-and-amplitude-mismatch",
+      "cache": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-5e9d3669-6101-432e-9218-af1bc92a0210.png",
+      "raw": "raw/adjacent-00-05.png",
+      "check": "Contours too thick and left globule compression exceeded checked03. Actual RGBA transparent; colored transparent pixels are not a background defect."
+    }
+  ]
+}

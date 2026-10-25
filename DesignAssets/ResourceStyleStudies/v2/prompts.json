@@ -1,0 +1,163 @@
+{
+  "provider": "built-in image_gen",
+  "staticPrompts": [
+    {
+      "key": "tree-fruit",
+      "name": "나무 열매",
+      "path": "DesignAssets/Foods/food-berry-bush.png",
+      "prompt": "Edit only the FIRST reference, a static resource sprite for this cute hand-painted woodland strategy game. The SECOND reference is the approved detail-density target (simplified pebbles); the THIRD is a unit-style reference only. Preserve the resource identity, main silhouette, arrangement, palette, three-quarter view and upper-left lighting. Broad clean painterly color planes, restrained smooth shading and a subtle dark contour; remove microtexture, fine veins, grain and fragmented highlights. Keep the original material recognizable. No faces, creatures, additional props, particles, ground, labels, grid or sheet. Exactly one complete isolated sprite, centered with transparent margin on a genuinely transparent background. Keep the existing three red berry clusters and large green leaves. It is already close to the target style: only simplify the smaller leaf veins and consolidate each berry highlight; preserve all berry group proportions."
+    },
+    {
+      "key": "berry-bush",
+      "name": "열매 덤불",
+      "path": "DesignAssets/FoodConcepts/v1/food-berry-bush.png",
+      "prompt": "Edit only the FIRST reference, a static resource sprite for this cute hand-painted woodland strategy game. The SECOND reference is the approved detail-density target (simplified pebbles); the THIRD is a unit-style reference only. Preserve the resource identity, main silhouette, arrangement, palette, three-quarter view and upper-left lighting. Broad clean painterly color planes, restrained smooth shading and a subtle dark contour; remove microtexture, fine veins, grain and fragmented highlights. Keep the original material recognizable. No faces, creatures, additional props, particles, ground, labels, grid or sheet. Exactly one complete isolated sprite, centered with transparent margin on a genuinely transparent background. Keep the same upright branching plant with its three red berry clusters. Use fewer broad leaf shapes, one main vein at most per large leaf, one broad highlight per berry; remove minute leaf serrations, dots and granular paint."
+    },
+    {
+      "key": "seed-pods",
+      "name": "씨앗 꼬투리",
+      "path": "DesignAssets/FoodConcepts/v1/food-seed-pods.png",
+      "prompt": "Edit only the FIRST reference, a static resource sprite for this cute hand-painted woodland strategy game. The SECOND reference is the approved detail-density target (simplified pebbles); the THIRD is a unit-style reference only. Preserve the resource identity, main silhouette, arrangement, palette, three-quarter view and upper-left lighting. Broad clean painterly color planes, restrained smooth shading and a subtle dark contour; remove microtexture, fine veins, grain and fragmented highlights. Keep the original material recognizable. No faces, creatures, additional props, particles, ground, labels, grid or sheet. Exactly one complete isolated sprite, centered with transparent margin on a genuinely transparent background. Keep the opened pale-green pod, rear closed pod, golden seeds and loose foreground seeds. Remove the thin pod-vein network; retain just the main ribs, broad inner-pod shading and one broad seed highlight."
+    },
+    {
+      "key": "root-bulbs",
+      "name": "뿌리 구근",
+      "path": "DesignAssets/FoodConcepts/v1/food-root-bulbs.png",
+      "prompt": "Edit only the FIRST reference, a static resource sprite for this cute hand-painted woodland strategy game. The SECOND reference is the approved detail-density target (simplified pebbles); the THIRD is a unit-style reference only. Preserve the resource identity, main silhouette, arrangement, palette, three-quarter view and upper-left lighting. Broad clean painterly color planes, restrained smooth shading and a subtle dark contour; remove microtexture, fine veins, grain and fragmented highlights. Keep the original material recognizable. No faces, creatures, additional props, particles, ground, labels, grid or sheet. Exactly one complete isolated sprite, centered with transparent margin on a genuinely transparent background. Keep three cream-gold root bulbs and green shoots. Reduce each bulb to broad smooth shading, a few large root tips and one major horizontal crease; remove hair roots, fine skin scratches and fine leaf veins."
+    },
+    {
+      "key": "meat",
+      "name": "고기",
+      "path": "DesignAssets/Foods/food-meat.png",
+      "prompt": "Edit only the FIRST reference, a static resource sprite for this cute hand-painted woodland strategy game. The SECOND reference is the approved detail-density target (simplified pebbles); the THIRD is a unit-style reference only. Preserve the resource identity, main silhouette, arrangement, palette, three-quarter view and upper-left lighting. Broad clean painterly color planes, restrained smooth shading and a subtle dark contour; remove microtexture, fine veins, grain and fragmented highlights. Keep the original material recognizable. No faces, creatures, additional props, particles, ground, labels, grid or sheet. Exactly one complete isolated sprite, centered with transparent margin on a genuinely transparent background. Preserve the two red meat chunks and their pale fat edge. Keep red color planes and a single broad soft highlight per chunk, remove thin marbling networks, tiny white streaks and surface mottling."
+    },
+    {
+      "key": "twigs",
+      "name": "나뭇가지",
+      "path": "DesignAssets/ResourceConcepts/v1/resource-twigs.png",
+      "prompt": "Edit only the FIRST reference, a static resource sprite for this cute hand-painted woodland strategy game. The SECOND reference is the approved detail-density target (simplified pebbles); the THIRD is a unit-style reference only. Preserve the resource identity, main silhouette, arrangement, palette, three-quarter view and upper-left lighting. Broad clean painterly color planes, restrained smooth shading and a subtle dark contour; remove microtexture, fine veins, grain and fragmented highlights. Keep the original material recognizable. No faces, creatures, additional props, particles, ground, labels, grid or sheet. Exactly one complete isolated sprite, centered with transparent margin on a genuinely transparent background. Keep the same four overlapping forked brown twigs and pale broken ends. Reduce bark to two or three broad grooves per twig, remove thin fibers and fine wood grain; retain only simple broad end-grain shapes."
+    },
+    {
+      "key": "grass-fiber",
+      "name": "풀섬유",
+      "path": "DesignAssets/ResourceConcepts/v1/resource-grass-fiber.png",
+      "prompt": "Edit only the FIRST reference, a static resource sprite for this cute hand-painted woodland strategy game. The SECOND reference is the approved detail-density target (simplified pebbles); the THIRD is a unit-style reference only. Preserve the resource identity, main silhouette, arrangement, palette, three-quarter view and upper-left lighting. Broad clean painterly color planes, restrained smooth shading and a subtle dark contour; remove microtexture, fine veins, grain and fragmented highlights. Keep the original material recognizable. No faces, creatures, additional props, particles, ground, labels, grid or sheet. Exactly one complete isolated sprite, centered with transparent margin on a genuinely transparent background. Keep the looped green grass-fiber bundle and its tied waist. Consolidate many hair-thin blades into a few clearly separated thick ribbons, remove fine stripe hatching; keep broad curves and simple cut ends."
+    },
+    {
+      "key": "root-fiber",
+      "name": "뿌리섬유",
+      "path": "DesignAssets/ResourceConcepts/v1/resource-root-fiber.png",
+      "prompt": "Edit only the FIRST reference, a static resource sprite for this cute hand-painted woodland strategy game. The SECOND reference is the approved detail-density target (simplified pebbles); the THIRD is a unit-style reference only. Preserve the resource identity, main silhouette, arrangement, palette, three-quarter view and upper-left lighting. Broad clean painterly color planes, restrained smooth shading and a subtle dark contour; remove microtexture, fine veins, grain and fragmented highlights. Keep the original material recognizable. No faces, creatures, additional props, particles, ground, labels, grid or sheet. Exactly one complete isolated sprite, centered with transparent margin on a genuinely transparent background. Keep the intertwined pale root bundle and major curved roots. Remove dense small growth rings and hair-root tangles; retain a few widely spaced broad creases and several large side roots with clean ends."
+    },
+    {
+      "key": "spider-silk",
+      "name": "거미줄",
+      "path": "DesignAssets/ResourceConcepts/v1/resource-spider-silk.png",
+      "prompt": "Edit only the FIRST reference, a static resource sprite for this cute hand-painted woodland strategy game. The SECOND reference is the approved detail-density target (simplified pebbles); the THIRD is a unit-style reference only. Preserve the resource identity, main silhouette, arrangement, palette, three-quarter view and upper-left lighting. Broad clean painterly color planes, restrained smooth shading and a subtle dark contour; remove microtexture, fine veins, grain and fragmented highlights. Keep the original material recognizable. No faces, creatures, additional props, particles, ground, labels, grid or sheet. Exactly one complete isolated sprite, centered with transparent margin on a genuinely transparent background. Keep the pearly white silk coil, loose loop and small attached web corner, with NO spider. Consolidate thin threads into six to eight broad silky ribbons, simplify the web to a few clean strands and reduce tiny glints."
+    },
+    {
+      "key": "water",
+      "name": "물",
+      "path": "DesignAssets/ResourceConcepts/v1/resource-water.png",
+      "prompt": "Edit only the FIRST reference, a static resource sprite for this cute hand-painted woodland strategy game. The SECOND reference is the approved detail-density target (simplified pebbles); the THIRD is a unit-style reference only. Preserve the resource identity, main silhouette, arrangement, palette, three-quarter view and upper-left lighting. Broad clean painterly color planes, restrained smooth shading and a subtle dark contour; remove microtexture, fine veins, grain and fragmented highlights. Keep the original material recognizable. No faces, creatures, additional props, particles, ground, labels, grid or sheet. Exactly one complete isolated sprite, centered with transparent margin on a genuinely transparent background. Keep the green cupped leaf and three clear blue water drops. Remove small leaf-vein branches and multiple tiny glass reflections; use one broad highlight and simple blue shading per drop; keep the leaf's main fold."
+    },
+    {
+      "key": "tree-sap",
+      "name": "수액",
+      "path": "DesignAssets/ResourceConcepts/v1/resource-tree-sap.png",
+      "prompt": "Edit only the FIRST reference, a static resource sprite for this cute hand-painted woodland strategy game. The SECOND reference is the approved detail-density target (simplified pebbles); the THIRD is a unit-style reference only. Preserve the resource identity, main silhouette, arrangement, palette, three-quarter view and upper-left lighting. Broad clean painterly color planes, restrained smooth shading and a subtle dark contour; remove microtexture, fine veins, grain and fragmented highlights. Keep the original material recognizable. No faces, creatures, additional props, particles, ground, labels, grid or sheet. Exactly one complete isolated sprite, centered with transparent margin on a genuinely transparent background. Keep the short broken bark stump with amber sap drips, pooled sap and side leaves. Reduce bark to large grooves, leaves to broad color planes, and sap to a few smooth amber shapes with broad highlights; no little bubbles or bark chips."
+    },
+    {
+      "key": "beeswax",
+      "name": "밀랍",
+      "path": "DesignAssets/ResourceConcepts/v1/resource-beeswax.png",
+      "prompt": "Edit only the FIRST reference, a static resource sprite for this cute hand-painted woodland strategy game. The SECOND reference is the approved detail-density target (simplified pebbles); the THIRD is a unit-style reference only. Preserve the resource identity, main silhouette, arrangement, palette, three-quarter view and upper-left lighting. Broad clean painterly color planes, restrained smooth shading and a subtle dark contour; remove microtexture, fine veins, grain and fragmented highlights. Keep the original material recognizable. No faces, creatures, additional props, particles, ground, labels, grid or sheet. Exactly one complete isolated sprite, centered with transparent margin on a genuinely transparent background. Keep the irregular honeycomb block and small detached wax piece. Retain the count and arrangement of the large hexagonal cells; simplify each cell to a thick clean rim and one shadow plane, remove porous pitting and tiny chips."
+    },
+    {
+      "key": "carapace",
+      "name": "갑각",
+      "path": "DesignAssets/ResourceConcepts/v1/resource-carapace.png",
+      "prompt": "Edit only the FIRST reference, a static resource sprite for this cute hand-painted woodland strategy game. The SECOND reference is the approved detail-density target (simplified pebbles); the THIRD is a unit-style reference only. Preserve the resource identity, main silhouette, arrangement, palette, three-quarter view and upper-left lighting. Broad clean painterly color planes, restrained smooth shading and a subtle dark contour; remove microtexture, fine veins, grain and fragmented highlights. Keep the original material recognizable. No faces, creatures, additional props, particles, ground, labels, grid or sheet. Exactly one complete isolated sprite, centered with transparent margin on a genuinely transparent background. Keep the three detached teal-green shell plates, same segmentation and pale inner rims, no insect or body. Replace speckled iridescence with broad muted teal planes, few large plate seams and one broad highlight."
+    },
+    {
+      "key": "iron-ore",
+      "name": "철광석",
+      "path": "DesignAssets/ResourceConcepts/v1/resource-iron-ore.png",
+      "prompt": "Edit only the FIRST reference, a static resource sprite for this cute hand-painted woodland strategy game. The SECOND reference is the approved detail-density target (simplified pebbles); the THIRD is a unit-style reference only. Preserve the resource identity, main silhouette, arrangement, palette, three-quarter view and upper-left lighting. Broad clean painterly color planes, restrained smooth shading and a subtle dark contour; remove microtexture, fine veins, grain and fragmented highlights. Keep the original material recognizable. No faces, creatures, additional props, particles, ground, labels, grid or sheet. Exactly one complete isolated sprite, centered with transparent margin on a genuinely transparent background. Keep the same three gray rocks with rusty iron veins. Use fewer large rock facets and broad rust bands; remove hairline cracks, grit, speckles and metallic glitter, matching the simplified copper ore."
+    },
+    {
+      "key": "quartz",
+      "name": "수정",
+      "path": "DesignAssets/ResourceConcepts/v1/resource-quartz.png",
+      "prompt": "Edit only the FIRST reference, a static resource sprite for this cute hand-painted woodland strategy game. The SECOND reference is the approved detail-density target (simplified pebbles); the THIRD is a unit-style reference only. Preserve the resource identity, main silhouette, arrangement, palette, three-quarter view and upper-left lighting. Broad clean painterly color planes, restrained smooth shading and a subtle dark contour; remove microtexture, fine veins, grain and fragmented highlights. Keep the original material recognizable. No faces, creatures, additional props, particles, ground, labels, grid or sheet. Exactly one complete isolated sprite, centered with transparent margin on a genuinely transparent background. Keep the tall pale aqua crystal, two smaller pillars and simple rocky base. Reduce the inside to a few clear translucent facets and one broad cool highlight, remove cloudy crack networks and tiny sparkling fragments."
+    },
+    {
+      "key": "clay",
+      "name": "점토",
+      "path": "DesignAssets/ResourceConcepts/v1/resource-clay.png",
+      "prompt": "Edit the FIRST reference only: the terracotta clay resource pile for a cute hand-painted 2D woodland strategy game. Preserve exactly its four-clod arrangement, outline proportions, terracotta palette, three-quarter view and upper-left lighting. Match the restrained detail density of the SECOND reference (approved simplified pebbles); the THIRD is a unit-style reference only. Replace tiny brush scratches and mottled speckle with broad clean color planes. Keep just two or three wide folds per clod and one broad soft highlight, no tiny highlights. Smooth readable shapes, subtle dark green-brown outer contour, warm painted shading, still clearly moist clay. Do not add faces, characters, props, particles or ground. Center the entire isolated pile with transparent margin on a genuinely transparent background. Single complete static sprite, no labels or sheet."
+    }
+  ],
+  "animationSources": [
+    {
+      "key": "berry-bush",
+      "sourceManifest": "DesignAssets/Animations/Resources/HarvestV1/berry-bush/StyleV2/sources.json"
+    },
+    {
+      "key": "seed-pods",
+      "sourceManifest": "DesignAssets/Animations/Resources/HarvestV1/seed-pods/StyleV2/sources.json"
+    },
+    {
+      "key": "root-bulbs",
+      "sourceManifest": "DesignAssets/Animations/Resources/HarvestV1/root-bulbs/StyleV2/sources.json"
+    },
+    {
+      "key": "meat",
+      "sourceManifest": "DesignAssets/Animations/Resources/HarvestV1/meat/StyleV2/sources.json"
+    },
+    {
+      "key": "twigs",
+      "sourceManifest": "DesignAssets/Animations/Resources/HarvestV1/twigs/StyleV2/sources.json"
+    },
+    {
+      "key": "clay",
+      "sourceManifest": "DesignAssets/Animations/Resources/HarvestV1/clay/StyleV2/sources.json"
+    },
+    {
+      "key": "grass-fiber",
+      "sourceManifest": "DesignAssets/Animations/Resources/HarvestV1/grass-fiber/StyleV2/sources.json"
+    },
+    {
+      "key": "root-fiber",
+      "sourceManifest": "DesignAssets/Animations/Resources/HarvestV1/root-fiber/StyleV2/sources.json"
+    },
+    {
+      "key": "spider-silk",
+      "sourceManifest": "DesignAssets/Animations/Resources/HarvestV1/spider-silk/StyleV2/sources.json"
+    },
+    {
+      "key": "water",
+      "sourceManifest": "DesignAssets/Animations/Resources/HarvestV1/water/StyleV2/sources.json"
+    },
+    {
+      "key": "tree-sap",
+      "sourceManifest": "DesignAssets/Animations/Resources/HarvestV1/tree-sap/StyleV2/sources.json"
+    },
+    {
+      "key": "beeswax",
+      "sourceManifest": "DesignAssets/Animations/Resources/HarvestV1/beeswax/StyleV2/sources.json"
+    },
+    {
+      "key": "carapace",
+      "sourceManifest": "DesignAssets/Animations/Resources/HarvestV1/carapace/StyleV2/sources.json"
+    },
+    {
+      "key": "iron-ore",
+      "sourceManifest": "DesignAssets/Animations/Resources/HarvestV1/iron-ore/StyleV2/sources.json"
+    },
+    {
+      "key": "quartz",
+      "sourceManifest": "DesignAssets/Animations/Resources/HarvestV1/quartz/StyleV2/sources.json"
+    }
+  ]
+}

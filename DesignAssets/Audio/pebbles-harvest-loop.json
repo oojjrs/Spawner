@@ -1,0 +1,23 @@
+{
+  "provider": "ElevenLabs",
+  "endpoint": "https://api.elevenlabs.io/v1/sound-generation",
+  "request": {
+    "text": "Close-up miniature foley of small hands repeatedly gathering a few small smooth river pebbles across gritty earth. Distinct light hard-stone ticks and little clacks, fine gravel rattles and soft granular scrapes, irregular unhurried gathering motions. Quiet compact natural stone texture, dry recording. No rolling boulder, glass, metal, wood knocks, footsteps, voice, music, outdoor ambience or reverb.",
+    "duration_seconds": 4,
+    "prompt_influence": 0.7,
+    "loop": true,
+    "output_format": "mp3_44100_128",
+    "model_id": "eleven_text_to_sound_v2",
+    "request_options": {
+      "max_retries": 0
+    }
+  },
+  "status": "completed",
+  "generated_at": "2026-10-25T06:46:34.609443+00:00",
+  "input_sources": [],
+  "processing": null,
+  "approved": true,
+  "asset": "DesignAssets/Audio/pebbles-harvest-loop.mp3",
+  "bytes": 65244,
+  "sha256": "b6fdab6fcb2c42cc408639218aa6058148bb2c9eab1bfd2f1ec7a776d3923855"
+}

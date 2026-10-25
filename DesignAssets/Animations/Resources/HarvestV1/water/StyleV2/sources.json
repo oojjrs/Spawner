@@ -1,0 +1,1095 @@
+{
+  "key": "water",
+  "frames": [
+    {
+      "index": 0,
+      "kind": "held-neutral-rest",
+      "actualSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\style-reference.png",
+      "sourceCopy": "source-drawings/rest-00.png",
+      "sourceImage": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-frames\\00.png",
+      "crop": null,
+      "registration": {
+        "uniformScale": 0.2506834547111898,
+        "offsetX": -0.34992881212917837,
+        "offsetY": -0.6123754212260621,
+        "sourceLandmark": [
+          97,
+          242,
+          927,
+          896
+        ],
+        "targetLandmark": [
+          24,
+          60,
+          232,
+          224
+        ],
+        "landmark": "fixed leaf-cup outer silhouette; changing water bulb stays inside its extents",
+        "widthHeightScaleDisagreement": 0.0006464883925946241
+      },
+      "registrationScope": "one completed direct source drawing, aligned only from its stationary landmark to canonical; no pose transformation",
+      "hold": true,
+      "stationaryRegionRetention": "Canonical leaf cup, small drops and background retained at identical coordinates outside the changing large-blue-bulb footprint. Within the union of canonical/actually drawn bulb footprints, whole actual drawn pixels, including newly exposed leaf and occlusion edges, are preserved in place. No pose warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 1,
+      "kind": "actual-drawn-adjacent-cel",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-adb54d46-b07f-4554-ad09-2f0ba3169118.png",
+      "sourceCopy": "source-drawings/phase-07.png",
+      "extractedCell": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-strips\\pre-before-01-01-cell0.png",
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 627,
+        "height": 627
+      },
+      "phase": 7,
+      "registration": {
+        "uniformScale": 0.3445316304305254,
+        "offsetX": 16.199485925294496,
+        "offsetY": 32.44041348062785,
+        "sourceLandmark": [
+          22,
+          81,
+          627,
+          556
+        ],
+        "targetLandmark": [
+          24,
+          60,
+          232,
+          224
+        ],
+        "landmark": "fixed leaf-cup outer silhouette; changing water bulb stays inside its extents",
+        "widthHeightScaleDisagreement": 0.004233017536786954
+      },
+      "registrationScope": "EXACT SAME uniform scale and anchor translation for every newly drawn cel in this phase; measured once from its checked boundary cel",
+      "boundaryIndex": 2,
+      "boundaryReference": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-frames\\02.png",
+      "boundaryCrop": {
+        "slot": 1,
+        "index": 2,
+        "x": 627,
+        "y": 0,
+        "width": 627,
+        "height": 627,
+        "cellSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-strips\\pre-before-01-01-cell1.png",
+        "output": null,
+        "preservedExistingPose": true
+      },
+      "hold": false,
+      "stationaryRegionRetention": "Canonical leaf cup, small drops and background retained at identical coordinates outside the changing large-blue-bulb footprint. Within the union of canonical/actually drawn bulb footprints, whole actual drawn pixels, including newly exposed leaf and occlusion edges, are preserved in place. No pose warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 2,
+      "kind": "direct-drawn-key-or-adjacent",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-fa677922-7a38-456d-a368-702167de3c7a.png",
+      "sourceCopy": "source-drawings/key-02.png",
+      "sourceImage": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-frames\\02.png",
+      "crop": null,
+      "registration": {
+        "uniformScale": 0.2047614147525963,
+        "offsetX": -0.487787757254182,
+        "offsetY": -0.4185105688455337,
+        "sourceLandmark": [
+          119,
+          296,
+          1136,
+          1096
+        ],
+        "targetLandmark": [
+          24,
+          60,
+          232,
+          224
+        ],
+        "landmark": "fixed leaf-cup outer silhouette; changing water bulb stays inside its extents",
+        "widthHeightScaleDisagreement": 0.002326306448905191
+      },
+      "registrationScope": "one completed direct source drawing, aligned only from its stationary landmark to canonical; no pose transformation",
+      "hold": false,
+      "stationaryRegionRetention": "Canonical leaf cup, small drops and background retained at identical coordinates outside the changing large-blue-bulb footprint. Within the union of canonical/actually drawn bulb footprints, whole actual drawn pixels, including newly exposed leaf and occlusion edges, are preserved in place. No pose warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 3,
+      "kind": "actual-drawn-adjacent-cel",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-c3d3fadc-b626-4e9e-83ea-317994653a86.png",
+      "sourceCopy": "source-drawings/phase-08.png",
+      "extractedCell": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-strips\\pre-after-03-03-cell1.png",
+      "crop": {
+        "x": 627,
+        "y": 0,
+        "width": 627,
+        "height": 627
+      },
+      "phase": 8,
+      "registration": {
+        "uniformScale": 0.349043861454405,
+        "offsetX": 13.688135373682357,
+        "offsetY": 22.25264807935389,
+        "sourceLandmark": [
+          29,
+          109,
+          626,
+          578
+        ],
+        "targetLandmark": [
+          24,
+          60,
+          232,
+          224
+        ],
+        "landmark": "fixed leaf-cup outer silhouette; changing water bulb stays inside its extents",
+        "widthHeightScaleDisagreement": 0.0036360665114189006
+      },
+      "registrationScope": "EXACT SAME uniform scale and anchor translation for every newly drawn cel in this phase; measured once from its checked boundary cel",
+      "boundaryIndex": 2,
+      "boundaryReference": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-frames\\02.png",
+      "boundaryCrop": {
+        "slot": 0,
+        "index": 2,
+        "x": 0,
+        "y": 0,
+        "width": 627,
+        "height": 627,
+        "cellSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-strips\\pre-after-03-03-cell0.png",
+        "output": null,
+        "preservedExistingPose": true
+      },
+      "hold": false,
+      "stationaryRegionRetention": "Canonical leaf cup, small drops and background retained at identical coordinates outside the changing large-blue-bulb footprint. Within the union of canonical/actually drawn bulb footprints, whole actual drawn pixels, including newly exposed leaf and occlusion edges, are preserved in place. No pose warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 4,
+      "kind": "held-neutral-rest",
+      "actualSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\style-reference.png",
+      "sourceCopy": "source-drawings/rest-00.png",
+      "sourceImage": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-frames\\04.png",
+      "crop": null,
+      "registration": {
+        "uniformScale": 0.2506834547111898,
+        "offsetX": -0.34992881212917837,
+        "offsetY": -0.6123754212260621,
+        "sourceLandmark": [
+          97,
+          242,
+          927,
+          896
+        ],
+        "targetLandmark": [
+          24,
+          60,
+          232,
+          224
+        ],
+        "landmark": "fixed leaf-cup outer silhouette; changing water bulb stays inside its extents",
+        "widthHeightScaleDisagreement": 0.0006464883925946241
+      },
+      "registrationScope": "one completed direct source drawing, aligned only from its stationary landmark to canonical; no pose transformation",
+      "hold": true,
+      "stationaryRegionRetention": "Canonical leaf cup, small drops and background retained at identical coordinates outside the changing large-blue-bulb footprint. Within the union of canonical/actually drawn bulb footprints, whole actual drawn pixels, including newly exposed leaf and occlusion edges, are preserved in place. No pose warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 5,
+      "kind": "held-neutral-rest",
+      "actualSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\style-reference.png",
+      "sourceCopy": "source-drawings/rest-00.png",
+      "sourceImage": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-frames\\05.png",
+      "crop": null,
+      "registration": {
+        "uniformScale": 0.2506834547111898,
+        "offsetX": -0.34992881212917837,
+        "offsetY": -0.6123754212260621,
+        "sourceLandmark": [
+          97,
+          242,
+          927,
+          896
+        ],
+        "targetLandmark": [
+          24,
+          60,
+          232,
+          224
+        ],
+        "landmark": "fixed leaf-cup outer silhouette; changing water bulb stays inside its extents",
+        "widthHeightScaleDisagreement": 0.0006464883925946241
+      },
+      "registrationScope": "one completed direct source drawing, aligned only from its stationary landmark to canonical; no pose transformation",
+      "hold": true,
+      "stationaryRegionRetention": "Canonical leaf cup, small drops and background retained at identical coordinates outside the changing large-blue-bulb footprint. Within the union of canonical/actually drawn bulb footprints, whole actual drawn pixels, including newly exposed leaf and occlusion edges, are preserved in place. No pose warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 6,
+      "kind": "actual-drawn-adjacent-cel",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-df55b340-b472-48d7-9d84-2ecbc9505ca6.png",
+      "sourceCopy": "source-drawings/phase-10.png",
+      "extractedCell": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-strips\\post-before-06-08-cell0.png",
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 627,
+        "height": 627
+      },
+      "phase": 10,
+      "registration": {
+        "uniformScale": 0.3488327516578637,
+        "offsetX": 18.29209960360187,
+        "offsetY": 29.00249182325419,
+        "sourceLandmark": [
+          15,
+          91,
+          614,
+          559
+        ],
+        "targetLandmark": [
+          24,
+          60,
+          232,
+          224
+        ],
+        "landmark": "fixed leaf-cup outer silhouette; changing water bulb stays inside its extents",
+        "widthHeightScaleDisagreement": 0.009080174274196717
+      },
+      "registrationScope": "EXACT SAME uniform scale and anchor translation for every newly drawn cel in this phase; measured once from its checked boundary cel",
+      "boundaryIndex": 9,
+      "boundaryReference": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-frames\\09.png",
+      "boundaryCrop": {
+        "slot": 3,
+        "index": 9,
+        "x": 627,
+        "y": 627,
+        "width": 627,
+        "height": 627,
+        "cellSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-strips\\post-before-06-08-cell3.png",
+        "output": null,
+        "preservedExistingPose": true
+      },
+      "hold": false,
+      "stationaryRegionRetention": "Canonical leaf cup, small drops and background retained at identical coordinates outside the changing large-blue-bulb footprint. Within the union of canonical/actually drawn bulb footprints, whole actual drawn pixels, including newly exposed leaf and occlusion edges, are preserved in place. No pose warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 7,
+      "kind": "actual-drawn-adjacent-cel",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-df55b340-b472-48d7-9d84-2ecbc9505ca6.png",
+      "sourceCopy": "source-drawings/phase-10.png",
+      "extractedCell": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-strips\\post-before-06-08-cell1.png",
+      "crop": {
+        "x": 627,
+        "y": 0,
+        "width": 627,
+        "height": 627
+      },
+      "phase": 10,
+      "registration": {
+        "uniformScale": 0.3488327516578637,
+        "offsetX": 18.29209960360187,
+        "offsetY": 29.00249182325419,
+        "sourceLandmark": [
+          15,
+          91,
+          614,
+          559
+        ],
+        "targetLandmark": [
+          24,
+          60,
+          232,
+          224
+        ],
+        "landmark": "fixed leaf-cup outer silhouette; changing water bulb stays inside its extents",
+        "widthHeightScaleDisagreement": 0.009080174274196717
+      },
+      "registrationScope": "EXACT SAME uniform scale and anchor translation for every newly drawn cel in this phase; measured once from its checked boundary cel",
+      "boundaryIndex": 9,
+      "boundaryReference": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-frames\\09.png",
+      "boundaryCrop": {
+        "slot": 3,
+        "index": 9,
+        "x": 627,
+        "y": 627,
+        "width": 627,
+        "height": 627,
+        "cellSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-strips\\post-before-06-08-cell3.png",
+        "output": null,
+        "preservedExistingPose": true
+      },
+      "hold": false,
+      "stationaryRegionRetention": "Canonical leaf cup, small drops and background retained at identical coordinates outside the changing large-blue-bulb footprint. Within the union of canonical/actually drawn bulb footprints, whole actual drawn pixels, including newly exposed leaf and occlusion edges, are preserved in place. No pose warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 8,
+      "kind": "actual-drawn-adjacent-cel",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-df55b340-b472-48d7-9d84-2ecbc9505ca6.png",
+      "sourceCopy": "source-drawings/phase-10.png",
+      "extractedCell": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-strips\\post-before-06-08-cell2.png",
+      "crop": {
+        "x": 0,
+        "y": 627,
+        "width": 627,
+        "height": 627
+      },
+      "phase": 10,
+      "registration": {
+        "uniformScale": 0.3488327516578637,
+        "offsetX": 18.29209960360187,
+        "offsetY": 29.00249182325419,
+        "sourceLandmark": [
+          15,
+          91,
+          614,
+          559
+        ],
+        "targetLandmark": [
+          24,
+          60,
+          232,
+          224
+        ],
+        "landmark": "fixed leaf-cup outer silhouette; changing water bulb stays inside its extents",
+        "widthHeightScaleDisagreement": 0.009080174274196717
+      },
+      "registrationScope": "EXACT SAME uniform scale and anchor translation for every newly drawn cel in this phase; measured once from its checked boundary cel",
+      "boundaryIndex": 9,
+      "boundaryReference": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-frames\\09.png",
+      "boundaryCrop": {
+        "slot": 3,
+        "index": 9,
+        "x": 627,
+        "y": 627,
+        "width": 627,
+        "height": 627,
+        "cellSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-strips\\post-before-06-08-cell3.png",
+        "output": null,
+        "preservedExistingPose": true
+      },
+      "hold": false,
+      "stationaryRegionRetention": "Canonical leaf cup, small drops and background retained at identical coordinates outside the changing large-blue-bulb footprint. Within the union of canonical/actually drawn bulb footprints, whole actual drawn pixels, including newly exposed leaf and occlusion edges, are preserved in place. No pose warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 9,
+      "kind": "actual-drawn-adjacent-cel",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-fcf33c3e-361d-4fb0-879d-c0bbf0ead3de.png",
+      "sourceCopy": "source-drawings/phase-09.png",
+      "extractedCell": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-strips\\post-before-09-11-cell0.png",
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 627,
+        "height": 627
+      },
+      "phase": 9,
+      "registration": {
+        "uniformScale": 0.33887729222484836,
+        "offsetX": 19.728705134160947,
+        "offsetY": 33.55096176963522,
+        "sourceLandmark": [
+          12,
+          79,
+          627,
+          562
+        ],
+        "targetLandmark": [
+          24,
+          60,
+          232,
+          224
+        ],
+        "landmark": "fixed leaf-cup outer silhouette; changing water bulb stays inside its extents",
+        "widthHeightScaleDisagreement": 0.003926234384295069
+      },
+      "registrationScope": "EXACT SAME uniform scale and anchor translation for every newly drawn cel in this phase; measured once from its checked boundary cel",
+      "boundaryIndex": 12,
+      "boundaryReference": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-frames\\12.png",
+      "boundaryCrop": {
+        "slot": 3,
+        "index": 12,
+        "x": 627,
+        "y": 627,
+        "width": 627,
+        "height": 627,
+        "cellSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-strips\\post-before-09-11-cell3.png",
+        "output": null,
+        "preservedExistingPose": true
+      },
+      "hold": false,
+      "stationaryRegionRetention": "Canonical leaf cup, small drops and background retained at identical coordinates outside the changing large-blue-bulb footprint. Within the union of canonical/actually drawn bulb footprints, whole actual drawn pixels, including newly exposed leaf and occlusion edges, are preserved in place. No pose warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 10,
+      "kind": "actual-drawn-adjacent-cel",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-fcf33c3e-361d-4fb0-879d-c0bbf0ead3de.png",
+      "sourceCopy": "source-drawings/phase-09.png",
+      "extractedCell": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-strips\\post-before-09-11-cell1.png",
+      "crop": {
+        "x": 627,
+        "y": 0,
+        "width": 627,
+        "height": 627
+      },
+      "phase": 9,
+      "registration": {
+        "uniformScale": 0.33887729222484836,
+        "offsetX": 19.728705134160947,
+        "offsetY": 33.55096176963522,
+        "sourceLandmark": [
+          12,
+          79,
+          627,
+          562
+        ],
+        "targetLandmark": [
+          24,
+          60,
+          232,
+          224
+        ],
+        "landmark": "fixed leaf-cup outer silhouette; changing water bulb stays inside its extents",
+        "widthHeightScaleDisagreement": 0.003926234384295069
+      },
+      "registrationScope": "EXACT SAME uniform scale and anchor translation for every newly drawn cel in this phase; measured once from its checked boundary cel",
+      "boundaryIndex": 12,
+      "boundaryReference": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-frames\\12.png",
+      "boundaryCrop": {
+        "slot": 3,
+        "index": 12,
+        "x": 627,
+        "y": 627,
+        "width": 627,
+        "height": 627,
+        "cellSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-strips\\post-before-09-11-cell3.png",
+        "output": null,
+        "preservedExistingPose": true
+      },
+      "hold": false,
+      "stationaryRegionRetention": "Canonical leaf cup, small drops and background retained at identical coordinates outside the changing large-blue-bulb footprint. Within the union of canonical/actually drawn bulb footprints, whole actual drawn pixels, including newly exposed leaf and occlusion edges, are preserved in place. No pose warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 11,
+      "kind": "actual-drawn-adjacent-cel",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-fcf33c3e-361d-4fb0-879d-c0bbf0ead3de.png",
+      "sourceCopy": "source-drawings/phase-09.png",
+      "extractedCell": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-strips\\post-before-09-11-cell2.png",
+      "crop": {
+        "x": 0,
+        "y": 627,
+        "width": 627,
+        "height": 627
+      },
+      "phase": 9,
+      "registration": {
+        "uniformScale": 0.33887729222484836,
+        "offsetX": 19.728705134160947,
+        "offsetY": 33.55096176963522,
+        "sourceLandmark": [
+          12,
+          79,
+          627,
+          562
+        ],
+        "targetLandmark": [
+          24,
+          60,
+          232,
+          224
+        ],
+        "landmark": "fixed leaf-cup outer silhouette; changing water bulb stays inside its extents",
+        "widthHeightScaleDisagreement": 0.003926234384295069
+      },
+      "registrationScope": "EXACT SAME uniform scale and anchor translation for every newly drawn cel in this phase; measured once from its checked boundary cel",
+      "boundaryIndex": 12,
+      "boundaryReference": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-frames\\12.png",
+      "boundaryCrop": {
+        "slot": 3,
+        "index": 12,
+        "x": 627,
+        "y": 627,
+        "width": 627,
+        "height": 627,
+        "cellSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-strips\\post-before-09-11-cell3.png",
+        "output": null,
+        "preservedExistingPose": true
+      },
+      "hold": false,
+      "stationaryRegionRetention": "Canonical leaf cup, small drops and background retained at identical coordinates outside the changing large-blue-bulb footprint. Within the union of canonical/actually drawn bulb footprints, whole actual drawn pixels, including newly exposed leaf and occlusion edges, are preserved in place. No pose warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 12,
+      "kind": "direct-drawn-key-or-adjacent",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-50613c40-91d8-4b63-a7dd-78b7dc887061.png",
+      "sourceCopy": "source-drawings/key-12.png",
+      "sourceImage": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-frames\\12.png",
+      "crop": null,
+      "registration": {
+        "uniformScale": 0.20453302638436577,
+        "offsetX": -0.2422075429973347,
+        "offsetY": -0.3727299436492615,
+        "sourceLandmark": [
+          118,
+          296,
+          1136,
+          1097
+        ],
+        "targetLandmark": [
+          24,
+          60,
+          232,
+          224
+        ],
+        "landmark": "fixed leaf-cup outer silhouette; changing water bulb stays inside its extents",
+        "widthHeightScaleDisagreement": 0.002060472471129393
+      },
+      "registrationScope": "one completed direct source drawing, aligned only from its stationary landmark to canonical; no pose transformation",
+      "hold": false,
+      "stationaryRegionRetention": "Canonical leaf cup, small drops and background retained at identical coordinates outside the changing large-blue-bulb footprint. Within the union of canonical/actually drawn bulb footprints, whole actual drawn pixels, including newly exposed leaf and occlusion edges, are preserved in place. No pose warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 13,
+      "kind": "actual-drawn-adjacent-cel",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-983ac174-d897-4cd9-aac0-190a9c9a151b.png",
+      "sourceCopy": "source-drawings/phase-11.png",
+      "extractedCell": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-strips\\post-after-13-15-cell1.png",
+      "crop": {
+        "x": 627,
+        "y": 0,
+        "width": 627,
+        "height": 627
+      },
+      "phase": 11,
+      "registration": {
+        "uniformScale": 0.3528622971279274,
+        "offsetX": 14.907633770499274,
+        "offsetY": 33.807221848047135,
+        "sourceLandmark": [
+          24,
+          77,
+          617,
+          539
+        ],
+        "targetLandmark": [
+          24,
+          60,
+          232,
+          224
+        ],
+        "landmark": "fixed leaf-cup outer silhouette; changing water bulb stays inside its extents",
+        "widthHeightScaleDisagreement": 0.011886645004730023
+      },
+      "registrationScope": "EXACT SAME uniform scale and anchor translation for every newly drawn cel in this phase; measured once from its checked boundary cel",
+      "boundaryIndex": 12,
+      "boundaryReference": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-frames\\12.png",
+      "boundaryCrop": {
+        "slot": 0,
+        "index": 12,
+        "x": 0,
+        "y": 0,
+        "width": 627,
+        "height": 627,
+        "cellSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-strips\\post-after-13-15-cell0.png",
+        "output": null,
+        "preservedExistingPose": true
+      },
+      "hold": false,
+      "stationaryRegionRetention": "Canonical leaf cup, small drops and background retained at identical coordinates outside the changing large-blue-bulb footprint. Within the union of canonical/actually drawn bulb footprints, whole actual drawn pixels, including newly exposed leaf and occlusion edges, are preserved in place. No pose warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 14,
+      "kind": "actual-drawn-adjacent-cel",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-983ac174-d897-4cd9-aac0-190a9c9a151b.png",
+      "sourceCopy": "source-drawings/phase-11.png",
+      "extractedCell": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-strips\\post-after-13-15-cell2.png",
+      "crop": {
+        "x": 0,
+        "y": 627,
+        "width": 627,
+        "height": 627
+      },
+      "phase": 11,
+      "registration": {
+        "uniformScale": 0.3528622971279274,
+        "offsetX": 14.907633770499274,
+        "offsetY": 33.807221848047135,
+        "sourceLandmark": [
+          24,
+          77,
+          617,
+          539
+        ],
+        "targetLandmark": [
+          24,
+          60,
+          232,
+          224
+        ],
+        "landmark": "fixed leaf-cup outer silhouette; changing water bulb stays inside its extents",
+        "widthHeightScaleDisagreement": 0.011886645004730023
+      },
+      "registrationScope": "EXACT SAME uniform scale and anchor translation for every newly drawn cel in this phase; measured once from its checked boundary cel",
+      "boundaryIndex": 12,
+      "boundaryReference": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-frames\\12.png",
+      "boundaryCrop": {
+        "slot": 0,
+        "index": 12,
+        "x": 0,
+        "y": 0,
+        "width": 627,
+        "height": 627,
+        "cellSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-strips\\post-after-13-15-cell0.png",
+        "output": null,
+        "preservedExistingPose": true
+      },
+      "hold": false,
+      "stationaryRegionRetention": "Canonical leaf cup, small drops and background retained at identical coordinates outside the changing large-blue-bulb footprint. Within the union of canonical/actually drawn bulb footprints, whole actual drawn pixels, including newly exposed leaf and occlusion edges, are preserved in place. No pose warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 15,
+      "kind": "actual-drawn-adjacent-cel",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-983ac174-d897-4cd9-aac0-190a9c9a151b.png",
+      "sourceCopy": "source-drawings/phase-11.png",
+      "extractedCell": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-strips\\post-after-13-15-cell3.png",
+      "crop": {
+        "x": 627,
+        "y": 627,
+        "width": 627,
+        "height": 627
+      },
+      "phase": 11,
+      "registration": {
+        "uniformScale": 0.3528622971279274,
+        "offsetX": 14.907633770499274,
+        "offsetY": 33.807221848047135,
+        "sourceLandmark": [
+          24,
+          77,
+          617,
+          539
+        ],
+        "targetLandmark": [
+          24,
+          60,
+          232,
+          224
+        ],
+        "landmark": "fixed leaf-cup outer silhouette; changing water bulb stays inside its extents",
+        "widthHeightScaleDisagreement": 0.011886645004730023
+      },
+      "registrationScope": "EXACT SAME uniform scale and anchor translation for every newly drawn cel in this phase; measured once from its checked boundary cel",
+      "boundaryIndex": 12,
+      "boundaryReference": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-frames\\12.png",
+      "boundaryCrop": {
+        "slot": 0,
+        "index": 12,
+        "x": 0,
+        "y": 0,
+        "width": 627,
+        "height": 627,
+        "cellSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-strips\\post-after-13-15-cell0.png",
+        "output": null,
+        "preservedExistingPose": true
+      },
+      "hold": false,
+      "stationaryRegionRetention": "Canonical leaf cup, small drops and background retained at identical coordinates outside the changing large-blue-bulb footprint. Within the union of canonical/actually drawn bulb footprints, whole actual drawn pixels, including newly exposed leaf and occlusion edges, are preserved in place. No pose warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 16,
+      "kind": "actual-drawn-adjacent-cel",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-bb3fd544-ebe0-4a49-b5c3-70b2fa7faf79.png",
+      "sourceCopy": "source-drawings/phase-12.png",
+      "extractedCell": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-strips\\post-after-16-18-cell1.png",
+      "crop": {
+        "x": 627,
+        "y": 0,
+        "width": 627,
+        "height": 627
+      },
+      "phase": 12,
+      "registration": {
+        "uniformScale": 0.3460967662653981,
+        "offsetX": 12.498663775797695,
+        "offsetY": 23.686552929926904,
+        "sourceLandmark": [
+          14,
+          93,
+          613,
+          573
+        ],
+        "targetLandmark": [
+          16,
+          58,
+          226,
+          222
+        ],
+        "landmark": "fixed leaf-cup outer silhouette; changing water bulb stays inside its extents",
+        "widthHeightScaleDisagreement": 0.026100411254529776
+      },
+      "registrationScope": "EXACT SAME uniform scale and anchor translation for every newly drawn cel in this phase; measured once from its checked boundary cel",
+      "boundaryIndex": 15,
+      "boundaryReference": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-frames\\15.png",
+      "boundaryCrop": {
+        "slot": 0,
+        "index": 15,
+        "x": 0,
+        "y": 0,
+        "width": 627,
+        "height": 627,
+        "cellSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-strips\\post-after-16-18-cell0.png",
+        "output": null,
+        "preservedExistingPose": true
+      },
+      "hold": false,
+      "stationaryRegionRetention": "Canonical leaf cup, small drops and background retained at identical coordinates outside the changing large-blue-bulb footprint. Within the union of canonical/actually drawn bulb footprints, whole actual drawn pixels, including newly exposed leaf and occlusion edges, are preserved in place. No pose warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 17,
+      "kind": "actual-drawn-adjacent-cel",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-bb3fd544-ebe0-4a49-b5c3-70b2fa7faf79.png",
+      "sourceCopy": "source-drawings/phase-12.png",
+      "extractedCell": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-strips\\post-after-16-18-cell2.png",
+      "crop": {
+        "x": 0,
+        "y": 627,
+        "width": 627,
+        "height": 627
+      },
+      "phase": 12,
+      "registration": {
+        "uniformScale": 0.3460967662653981,
+        "offsetX": 12.498663775797695,
+        "offsetY": 23.686552929926904,
+        "sourceLandmark": [
+          14,
+          93,
+          613,
+          573
+        ],
+        "targetLandmark": [
+          16,
+          58,
+          226,
+          222
+        ],
+        "landmark": "fixed leaf-cup outer silhouette; changing water bulb stays inside its extents",
+        "widthHeightScaleDisagreement": 0.026100411254529776
+      },
+      "registrationScope": "EXACT SAME uniform scale and anchor translation for every newly drawn cel in this phase; measured once from its checked boundary cel",
+      "boundaryIndex": 15,
+      "boundaryReference": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-frames\\15.png",
+      "boundaryCrop": {
+        "slot": 0,
+        "index": 15,
+        "x": 0,
+        "y": 0,
+        "width": 627,
+        "height": 627,
+        "cellSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-strips\\post-after-16-18-cell0.png",
+        "output": null,
+        "preservedExistingPose": true
+      },
+      "hold": false,
+      "stationaryRegionRetention": "Canonical leaf cup, small drops and background retained at identical coordinates outside the changing large-blue-bulb footprint. Within the union of canonical/actually drawn bulb footprints, whole actual drawn pixels, including newly exposed leaf and occlusion edges, are preserved in place. No pose warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 18,
+      "kind": "actual-drawn-adjacent-cel",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-bb3fd544-ebe0-4a49-b5c3-70b2fa7faf79.png",
+      "sourceCopy": "source-drawings/phase-12.png",
+      "extractedCell": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-strips\\post-after-16-18-cell3.png",
+      "crop": {
+        "x": 627,
+        "y": 627,
+        "width": 627,
+        "height": 627
+      },
+      "phase": 12,
+      "registration": {
+        "uniformScale": 0.3460967662653981,
+        "offsetX": 12.498663775797695,
+        "offsetY": 23.686552929926904,
+        "sourceLandmark": [
+          14,
+          93,
+          613,
+          573
+        ],
+        "targetLandmark": [
+          16,
+          58,
+          226,
+          222
+        ],
+        "landmark": "fixed leaf-cup outer silhouette; changing water bulb stays inside its extents",
+        "widthHeightScaleDisagreement": 0.026100411254529776
+      },
+      "registrationScope": "EXACT SAME uniform scale and anchor translation for every newly drawn cel in this phase; measured once from its checked boundary cel",
+      "boundaryIndex": 15,
+      "boundaryReference": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-frames\\15.png",
+      "boundaryCrop": {
+        "slot": 0,
+        "index": 15,
+        "x": 0,
+        "y": 0,
+        "width": 627,
+        "height": 627,
+        "cellSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-strips\\post-after-16-18-cell0.png",
+        "output": null,
+        "preservedExistingPose": true
+      },
+      "hold": false,
+      "stationaryRegionRetention": "Canonical leaf cup, small drops and background retained at identical coordinates outside the changing large-blue-bulb footprint. Within the union of canonical/actually drawn bulb footprints, whole actual drawn pixels, including newly exposed leaf and occlusion edges, are preserved in place. No pose warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 19,
+      "kind": "actual-drawn-adjacent-cel",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-3558aa1f-5488-49ac-8a12-fd7ba7d166f9.png",
+      "sourceCopy": "source-drawings/phase-13.png",
+      "extractedCell": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-strips\\post-after-19-19-cell1.png",
+      "crop": {
+        "x": 627,
+        "y": 0,
+        "width": 627,
+        "height": 627
+      },
+      "phase": 13,
+      "registration": {
+        "uniformScale": 0.3454262803959163,
+        "offsetX": 7.999869114494544,
+        "offsetY": 18.942988099870547,
+        "sourceLandmark": [
+          16,
+          73,
+          618,
+          556
+        ],
+        "targetLandmark": [
+          13,
+          45,
+          222,
+          211
+        ],
+        "landmark": "fixed leaf-cup outer silhouette; changing water bulb stays inside its extents",
+        "widthHeightScaleDisagreement": 0.01015690669655367
+      },
+      "registrationScope": "EXACT SAME uniform scale and anchor translation for every newly drawn cel in this phase; measured once from its checked boundary cel",
+      "boundaryIndex": 18,
+      "boundaryReference": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-frames\\18.png",
+      "boundaryCrop": {
+        "slot": 0,
+        "index": 18,
+        "x": 0,
+        "y": 0,
+        "width": 627,
+        "height": 627,
+        "cellSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-strips\\post-after-19-19-cell0.png",
+        "output": null,
+        "preservedExistingPose": true
+      },
+      "hold": false,
+      "stationaryRegionRetention": "Canonical leaf cup, small drops and background retained at identical coordinates outside the changing large-blue-bulb footprint. Within the union of canonical/actually drawn bulb footprints, whole actual drawn pixels, including newly exposed leaf and occlusion edges, are preserved in place. No pose warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 20,
+      "kind": "held-neutral-rest",
+      "actualSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\style-reference.png",
+      "sourceCopy": "source-drawings/rest-00.png",
+      "sourceImage": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-frames\\20.png",
+      "crop": null,
+      "registration": {
+        "uniformScale": 0.2506834547111898,
+        "offsetX": -0.34992881212917837,
+        "offsetY": -0.6123754212260621,
+        "sourceLandmark": [
+          97,
+          242,
+          927,
+          896
+        ],
+        "targetLandmark": [
+          24,
+          60,
+          232,
+          224
+        ],
+        "landmark": "fixed leaf-cup outer silhouette; changing water bulb stays inside its extents",
+        "widthHeightScaleDisagreement": 0.0006464883925946241
+      },
+      "registrationScope": "one completed direct source drawing, aligned only from its stationary landmark to canonical; no pose transformation",
+      "hold": true,
+      "stationaryRegionRetention": "Canonical leaf cup, small drops and background retained at identical coordinates outside the changing large-blue-bulb footprint. Within the union of canonical/actually drawn bulb footprints, whole actual drawn pixels, including newly exposed leaf and occlusion edges, are preserved in place. No pose warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 21,
+      "kind": "held-neutral-rest",
+      "actualSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\style-reference.png",
+      "sourceCopy": "source-drawings/rest-00.png",
+      "sourceImage": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-frames\\21.png",
+      "crop": null,
+      "registration": {
+        "uniformScale": 0.2506834547111898,
+        "offsetX": -0.34992881212917837,
+        "offsetY": -0.6123754212260621,
+        "sourceLandmark": [
+          97,
+          242,
+          927,
+          896
+        ],
+        "targetLandmark": [
+          24,
+          60,
+          232,
+          224
+        ],
+        "landmark": "fixed leaf-cup outer silhouette; changing water bulb stays inside its extents",
+        "widthHeightScaleDisagreement": 0.0006464883925946241
+      },
+      "registrationScope": "one completed direct source drawing, aligned only from its stationary landmark to canonical; no pose transformation",
+      "hold": true,
+      "stationaryRegionRetention": "Canonical leaf cup, small drops and background retained at identical coordinates outside the changing large-blue-bulb footprint. Within the union of canonical/actually drawn bulb footprints, whole actual drawn pixels, including newly exposed leaf and occlusion edges, are preserved in place. No pose warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 22,
+      "kind": "held-neutral-rest",
+      "actualSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\style-reference.png",
+      "sourceCopy": "source-drawings/rest-00.png",
+      "sourceImage": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-frames\\22.png",
+      "crop": null,
+      "registration": {
+        "uniformScale": 0.2506834547111898,
+        "offsetX": -0.34992881212917837,
+        "offsetY": -0.6123754212260621,
+        "sourceLandmark": [
+          97,
+          242,
+          927,
+          896
+        ],
+        "targetLandmark": [
+          24,
+          60,
+          232,
+          224
+        ],
+        "landmark": "fixed leaf-cup outer silhouette; changing water bulb stays inside its extents",
+        "widthHeightScaleDisagreement": 0.0006464883925946241
+      },
+      "registrationScope": "one completed direct source drawing, aligned only from its stationary landmark to canonical; no pose transformation",
+      "hold": true,
+      "stationaryRegionRetention": "Canonical leaf cup, small drops and background retained at identical coordinates outside the changing large-blue-bulb footprint. Within the union of canonical/actually drawn bulb footprints, whole actual drawn pixels, including newly exposed leaf and occlusion edges, are preserved in place. No pose warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 23,
+      "kind": "held-neutral-rest",
+      "actualSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\style-reference.png",
+      "sourceCopy": "source-drawings/rest-00.png",
+      "sourceImage": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\drawn-frames\\23.png",
+      "crop": null,
+      "registration": {
+        "uniformScale": 0.2506834547111898,
+        "offsetX": -0.34992881212917837,
+        "offsetY": -0.6123754212260621,
+        "sourceLandmark": [
+          97,
+          242,
+          927,
+          896
+        ],
+        "targetLandmark": [
+          24,
+          60,
+          232,
+          224
+        ],
+        "landmark": "fixed leaf-cup outer silhouette; changing water bulb stays inside its extents",
+        "widthHeightScaleDisagreement": 0.0006464883925946241
+      },
+      "registrationScope": "one completed direct source drawing, aligned only from its stationary landmark to canonical; no pose transformation",
+      "hold": true,
+      "stationaryRegionRetention": "Canonical leaf cup, small drops and background retained at identical coordinates outside the changing large-blue-bulb footprint. Within the union of canonical/actually drawn bulb footprints, whole actual drawn pixels, including newly exposed leaf and occlusion edges, are preserved in place. No pose warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    }
+  ],
+  "qa": {
+    "key": "water",
+    "encodedFrameCount": 24,
+    "encodedDurationsMs": [
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100
+    ],
+    "totalDurationMs": 2400,
+    "samePaletteUsedForAllFrames": true,
+    "fixedLandmarkWidthSpanPx": 0,
+    "fixedLandmarkHeightSpanPx": 0,
+    "contactFromActualEncodedGif": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\water\\qa\\encoded-playback-strip.png",
+    "sourceAndPlaybackReview": "Reviewed actual 24-frame encoded GIF at 96px and decoded sequence; the fixed leaf cup and small drops remain stable. Actual drawn large-bulb poses and newly exposed pixels retained without pose synthesis. No global anchor/size pop or loop-boundary jump remains.",
+    "registrationRule": "Only each checked boundary determines one common uniform scale/translation for its whole phase; no per-cel fit, deformation, interpolation or fade"
+  }
+}

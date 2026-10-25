@@ -1,0 +1,835 @@
+{
+  "units": 23,
+  "resources": 24,
+  "canvas": [
+    1800,
+    1080
+  ],
+  "artEdited": false,
+  "displayMethod": "Uniform thumbnail fit to 148 by 124 pixels per asset; source proportions retained; not game-world size ratios.",
+  "items": [
+    {
+      "name": "새싹콩",
+      "category": "기본 부족",
+      "image": "DesignAssets/Units/starter-sprout-bean.png",
+      "group": "unit",
+      "sha256": "0bd1b394864222d33ef42583c15e059bcd0ed0fb4173d85f1f4226bf223f36a8",
+      "sourceAlphaBounds": [
+        14,
+        260,
+        1131,
+        1636
+      ],
+      "displaySize": [
+        101,
+        124
+      ]
+    },
+    {
+      "name": "포자버섯",
+      "category": "기본 부족",
+      "image": "DesignAssets/Tribes/spore/starter.png",
+      "group": "unit",
+      "sha256": "e2c2c84bdfa64116e1dbb163e1b4d32dd48c8dcec7ceff4bfc91021a9ba44e58",
+      "sourceAlphaBounds": [
+        16,
+        233,
+        1239,
+        1098
+      ],
+      "displaySize": [
+        148,
+        105
+      ]
+    },
+    {
+      "name": "몽돌",
+      "category": "기본 부족",
+      "image": "DesignAssets/Tribes/pebble/starter.png",
+      "group": "unit",
+      "sha256": "b6c4cbfa62de5db79205779c1a354e9f87d7b074dc60bfcaadd97f6af792f1fe",
+      "sourceAlphaBounds": [
+        58,
+        241,
+        1197,
+        1080
+      ],
+      "displaySize": [
+        148,
+        109
+      ]
+    },
+    {
+      "name": "샘방울",
+      "category": "기본 부족",
+      "image": "DesignAssets/Tribes/spring/starter.png",
+      "group": "unit",
+      "sha256": "88775abc86381ad98fdd686848ea84855b2ee1be390d181f5990dea547186ee7",
+      "sourceAlphaBounds": [
+        233,
+        130,
+        1035,
+        1174
+      ],
+      "displaySize": [
+        95,
+        124
+      ]
+    },
+    {
+      "name": "가시등벌레",
+      "category": "딱정벌레",
+      "image": "DesignAssets/Units/spiny-back-beetle.png",
+      "group": "unit",
+      "sha256": "61beadc28d08f2f3673fab5a1517c3db344797eb56151a5a588c82e0fe6e5dba",
+      "sourceAlphaBounds": [
+        68,
+        248,
+        1980,
+        1916
+      ],
+      "displaySize": [
+        142,
+        124
+      ]
+    },
+    {
+      "name": "꽃꼬리새",
+      "category": "공생",
+      "image": "DesignAssets/CreatureConcepts/v3/flower-tail-bird.png",
+      "group": "unit",
+      "sha256": "b78d4763ff08ea9cb320638616c1fffc22e1b878d90f5d10f64667bf07fab382",
+      "sourceAlphaBounds": [
+        293,
+        328,
+        1402,
+        1346
+      ],
+      "displaySize": [
+        135,
+        124
+      ]
+    },
+    {
+      "name": "이슬토끼",
+      "category": "공생",
+      "image": "DesignAssets/CreatureConcepts/v3/dew-rabbit.png",
+      "group": "unit",
+      "sha256": "67180841af799aca5388128aff0c7e62040fb8e0dc1fb85192401b4c9e29391d",
+      "sourceAlphaBounds": [
+        336,
+        274,
+        1330,
+        1374
+      ],
+      "displaySize": [
+        112,
+        124
+      ]
+    },
+    {
+      "name": "흙두더지",
+      "category": "공생",
+      "image": "DesignAssets/CreatureConcepts/v3/soil-mole.png",
+      "group": "unit",
+      "sha256": "0f109a864c9c141a70a2b8fba9f99ad2007937e06a8ab567c9753516cde5d3fa",
+      "sourceAlphaBounds": [
+        155,
+        341,
+        1397,
+        1211
+      ],
+      "displaySize": [
+        148,
+        104
+      ]
+    },
+    {
+      "name": "보따리달팽이",
+      "category": "생활 중립",
+      "image": "DesignAssets/CreatureConcepts/v3/bundle-snail.png",
+      "group": "unit",
+      "sha256": "121278e7544f7e24df12f1036e5788ef0ca1e00780a80ff8c00be39ce8560012",
+      "sourceAlphaBounds": [
+        255,
+        280,
+        1469,
+        1219
+      ],
+      "displaySize": [
+        148,
+        114
+      ]
+    },
+    {
+      "name": "솜양",
+      "category": "생활 중립",
+      "image": "DesignAssets/CreatureConcepts/v3/cotton-sheep.png",
+      "group": "unit",
+      "sha256": "98a4acc47440964a473a06a80b1234f4b69dc46d83cb948fd6174c99dbe669be",
+      "sourceAlphaBounds": [
+        188,
+        268,
+        1361,
+        1331
+      ],
+      "displaySize": [
+        137,
+        124
+      ]
+    },
+    {
+      "name": "굴림도토리",
+      "category": "생활 중립",
+      "image": "DesignAssets/CreatureConcepts/v3/rolling-acorn.png",
+      "group": "unit",
+      "sha256": "d65f734cc939f7ccdd36f9e012c4b039837440d3a5f51cc01f3a7ac9a345a965",
+      "sourceAlphaBounds": [
+        319,
+        293,
+        1372,
+        1301
+      ],
+      "displaySize": [
+        130,
+        124
+      ]
+    },
+    {
+      "name": "흙멧돼지",
+      "category": "영역",
+      "image": "DesignAssets/CreatureConcepts/v3/soil-boar.png",
+      "group": "unit",
+      "sha256": "fbbec17f5bc902d67da5f564fe6c7472e1001d327fa254a03cd145a6471e9f26",
+      "sourceAlphaBounds": [
+        273,
+        269,
+        1488,
+        1162
+      ],
+      "displaySize": [
+        148,
+        109
+      ]
+    },
+    {
+      "name": "방울두꺼비",
+      "category": "영역",
+      "image": "DesignAssets/CreatureConcepts/v3/bubble-toad.png",
+      "group": "unit",
+      "sha256": "a4f5b0149a15f13e933bcc9a402c5327234491ae3200de62b8ccf18ffc39bd48",
+      "sourceAlphaBounds": [
+        241,
+        266,
+        1490,
+        1143
+      ],
+      "displaySize": [
+        148,
+        104
+      ]
+    },
+    {
+      "name": "넝쿨거북",
+      "category": "영역",
+      "image": "DesignAssets/CreatureConcepts/v3/vine-turtle.png",
+      "group": "unit",
+      "sha256": "137cae60e8e0c09d7f822b96f966e0992b94ba4f54154cd77c55ef35c3d2b7cc",
+      "sourceAlphaBounds": [
+        192,
+        357,
+        1393,
+        1230
+      ],
+      "displaySize": [
+        148,
+        108
+      ]
+    },
+    {
+      "name": "그늘족제비",
+      "category": "상위 포식자",
+      "image": "DesignAssets/CreatureConcepts/v3/shadow-weasel.png",
+      "group": "unit",
+      "sha256": "096138e06787a8eddec15261749bb674830506989e9485d00e7dcf26fba29013",
+      "sourceAlphaBounds": [
+        203,
+        304,
+        1718,
+        936
+      ],
+      "displaySize": [
+        148,
+        62
+      ]
+    },
+    {
+      "name": "올가미덩굴",
+      "category": "상위 포식자",
+      "image": "DesignAssets/CreatureConcepts/v3/snare-vine.png",
+      "group": "unit",
+      "sha256": "722b87dbab348b1d99253ab60bf2bf3d71326ed05737aea6b50c48c7992076c8",
+      "sourceAlphaBounds": [
+        84,
+        84,
+        764,
+        896
+      ],
+      "displaySize": [
+        104,
+        124
+      ]
+    },
+    {
+      "name": "갈퀴부엉이",
+      "category": "상위 포식자",
+      "image": "DesignAssets/CreatureConcepts/v3/talon-owl.png",
+      "group": "unit",
+      "sha256": "7fa0a0e24e9fc0488061855ee9a5fb327cd1b70b3534c60e5a256fa058bc8d3d",
+      "sourceAlphaBounds": [
+        194,
+        167,
+        1546,
+        1229
+      ],
+      "displaySize": [
+        148,
+        116
+      ]
+    },
+    {
+      "name": "봄지기",
+      "category": "유니크 · 꽃꼬리새",
+      "image": "DesignAssets/CreatureConcepts/v3/spring-keeper.png",
+      "group": "unit",
+      "sha256": "40b5d6cbf1e047fda0b29c576d44fbab5d22a6ed283afdec638019d4acf9a882",
+      "sourceAlphaBounds": [
+        312,
+        276,
+        1468,
+        1280
+      ],
+      "displaySize": [
+        143,
+        124
+      ]
+    },
+    {
+      "name": "등불지기",
+      "category": "유니크 · 이슬토끼",
+      "image": "DesignAssets/CreatureConcepts/v3/lantern-keeper.png",
+      "group": "unit",
+      "sha256": "e6c771a909b166c0b29426b8482973564502f6ffe8e05b0717ab343924a91f29",
+      "sourceAlphaBounds": [
+        217,
+        287,
+        1388,
+        1358
+      ],
+      "displaySize": [
+        136,
+        124
+      ]
+    },
+    {
+      "name": "오래된 등짐",
+      "category": "유니크 · 보따리달팽이",
+      "image": "DesignAssets/CreatureConcepts/v3/old-garden-snail.png",
+      "group": "unit",
+      "sha256": "2113bb88d045d5226eef84deb85fdc72895bd491de0c64856bb7b3bec50e618f",
+      "sourceAlphaBounds": [
+        187,
+        201,
+        1393,
+        1353
+      ],
+      "displaySize": [
+        130,
+        124
+      ]
+    },
+    {
+      "name": "걸어가는 숲",
+      "category": "유니크 · 넝쿨거북",
+      "image": "DesignAssets/CreatureConcepts/v3/walking-forest.png",
+      "group": "unit",
+      "sha256": "b78e505eced5f248b5295571487b1e015a5bf86a44c9a67a6f1812d289afbfc2",
+      "sourceAlphaBounds": [
+        169,
+        207,
+        1400,
+        1351
+      ],
+      "displaySize": [
+        133,
+        124
+      ]
+    },
+    {
+      "name": "흰발",
+      "category": "유니크 · 그늘족제비",
+      "image": "DesignAssets/CreatureConcepts/v3/white-paw.png",
+      "group": "unit",
+      "sha256": "44821a2a73993c2f588f41c13178582b1eff27ebe10e58537b4b872124d7831e",
+      "sourceAlphaBounds": [
+        224,
+        124,
+        1734,
+        980
+      ],
+      "displaySize": [
+        148,
+        84
+      ]
+    },
+    {
+      "name": "가시등 우두머리",
+      "category": "유니크 · 딱정벌레",
+      "image": "DesignAssets/CreatureConcepts/v3/spiny-back-leader.png",
+      "group": "unit",
+      "sha256": "a1e8dcf8dcc9d1e0ce7e5a454bc765fbba19e44a9f2c9ab6bcd2ae31bfc9fcf6",
+      "sourceAlphaBounds": [
+        173,
+        235,
+        1391,
+        1293
+      ],
+      "displaySize": [
+        143,
+        124
+      ]
+    },
+    {
+      "name": "꿀버섯 무리",
+      "category": "자원",
+      "key": "honey-mushrooms",
+      "image": "DesignAssets/FoodConcepts/v1/food-honey-mushrooms.png",
+      "group": "resource",
+      "sha256": "f411e604fe1de07e854941bc70703376fd7a4b2c9d2dc13b7c22a04d12c0a6cd",
+      "sourceAlphaBounds": [
+        92,
+        58,
+        1209,
+        1190
+      ],
+      "displaySize": [
+        122,
+        124
+      ]
+    },
+    {
+      "name": "나무 열매",
+      "category": "자원",
+      "key": "tree-fruit",
+      "image": "DesignAssets/Foods/food-berry-bush.png",
+      "group": "resource",
+      "sha256": "0b5f3825b547bcb25876df020ebd7d1850b578b7be621262d45b56d8c261b52b",
+      "sourceAlphaBounds": [
+        53,
+        159,
+        1221,
+        1140
+      ],
+      "displaySize": [
+        148,
+        124
+      ]
+    },
+    {
+      "name": "열매 덤불",
+      "category": "자원",
+      "key": "berry-bush",
+      "image": "DesignAssets/FoodConcepts/v1/food-berry-bush.png",
+      "group": "resource",
+      "sha256": "d7f753bc2dc8ee7b4256c74a09020219f2f43aa08451f6a5f631e01cb2960cd8",
+      "sourceAlphaBounds": [
+        77,
+        27,
+        1223,
+        1214
+      ],
+      "displaySize": [
+        120,
+        124
+      ]
+    },
+    {
+      "name": "씨앗 꼬투리",
+      "category": "자원",
+      "key": "seed-pods",
+      "image": "DesignAssets/FoodConcepts/v1/food-seed-pods.png",
+      "group": "resource",
+      "sha256": "fe8b29ce1e74ef593b2e4cfbc3a68b9b2409d6ac0a96f0b3d54ad3e54aaae36d",
+      "sourceAlphaBounds": [
+        18,
+        68,
+        1247,
+        1185
+      ],
+      "displaySize": [
+        136,
+        124
+      ]
+    },
+    {
+      "name": "뿌리 구근",
+      "category": "자원",
+      "key": "root-bulbs",
+      "image": "DesignAssets/FoodConcepts/v1/food-root-bulbs.png",
+      "group": "resource",
+      "sha256": "6927bcb90dd31df7b52fbf5c0d3b01a348d42bf72ecdada43ba3593e7d3193bd",
+      "sourceAlphaBounds": [
+        74,
+        47,
+        1229,
+        1219
+      ],
+      "displaySize": [
+        122,
+        124
+      ]
+    },
+    {
+      "name": "영양 이끼",
+      "category": "자원",
+      "key": "nutrient-moss",
+      "image": "DesignAssets/FoodConcepts/v1/food-nutrient-moss.png",
+      "group": "resource",
+      "sha256": "8683a97417cc692b251cb95ada7c9452987adc821c5309a2103f7af47ddd7f63",
+      "sourceAlphaBounds": [
+        70,
+        246,
+        1198,
+        1056
+      ],
+      "displaySize": [
+        148,
+        106
+      ]
+    },
+    {
+      "name": "고기",
+      "category": "자원",
+      "key": "meat",
+      "image": "DesignAssets/Foods/food-meat.png",
+      "group": "resource",
+      "sha256": "416d6a89d0c6bfc87a0f33012484bc2ffcd00b5b196306b3203d832adbb03143",
+      "sourceAlphaBounds": [
+        210,
+        275,
+        1064,
+        1039
+      ],
+      "displaySize": [
+        139,
+        124
+      ]
+    },
+    {
+      "name": "나뭇가지",
+      "category": "자원",
+      "key": "twigs",
+      "image": "DesignAssets/ResourceConcepts/v1/resource-twigs.png",
+      "group": "resource",
+      "sha256": "f6385773b9df53dbe908ef238c2be9d15266bea2e8b4014be8af16c32c8a9bf9",
+      "sourceAlphaBounds": [
+        128,
+        162,
+        1215,
+        1149
+      ],
+      "displaySize": [
+        137,
+        124
+      ]
+    },
+    {
+      "name": "나무껍질",
+      "category": "자원",
+      "key": "bark",
+      "image": "DesignAssets/ResourceConcepts/v1/resource-bark.png",
+      "group": "resource",
+      "sha256": "2aaadfcd8af2d24ca2e4e86e91c0f558cb3351bbc6aa797333722f18f3d1b39d",
+      "sourceAlphaBounds": [
+        195,
+        287,
+        1393,
+        1293
+      ],
+      "displaySize": [
+        148,
+        124
+      ]
+    },
+    {
+      "name": "자갈",
+      "category": "자원",
+      "key": "pebbles",
+      "image": "DesignAssets/ResourceConcepts/v1/resource-pebbles.png",
+      "group": "resource",
+      "sha256": "e76ea57f02b3a9aecfa11ab139fd2e6da437e5ced4f146b308c5fa413d347705",
+      "sourceAlphaBounds": [
+        215,
+        336,
+        1367,
+        1229
+      ],
+      "displaySize": [
+        148,
+        115
+      ]
+    },
+    {
+      "name": "점토",
+      "category": "자원",
+      "key": "clay",
+      "image": "DesignAssets/ResourceConcepts/v1/resource-clay.png",
+      "group": "resource",
+      "sha256": "16b41cc601bb46e10eb4ec0bb863e18c95c42de86c7116631108a586d359507f",
+      "sourceAlphaBounds": [
+        67,
+        242,
+        1213,
+        1054
+      ],
+      "displaySize": [
+        148,
+        105
+      ]
+    },
+    {
+      "name": "모래",
+      "category": "자원",
+      "key": "sand",
+      "image": "DesignAssets/ResourceConcepts/v1/resource-sand.png",
+      "group": "resource",
+      "sha256": "d03ad666acb1d10d6da794777c344739ba46a22c4305eb8692a5b35021c95ceb",
+      "sourceAlphaBounds": [
+        206,
+        393,
+        1386,
+        1184
+      ],
+      "displaySize": [
+        148,
+        99
+      ]
+    },
+    {
+      "name": "풀섬유",
+      "category": "자원",
+      "key": "grass-fiber",
+      "image": "DesignAssets/ResourceConcepts/v1/resource-grass-fiber.png",
+      "group": "resource",
+      "sha256": "07356587403d33858e78f6b205c96dbae06996115d195bb4323c787d3d871553",
+      "sourceAlphaBounds": [
+        61,
+        191,
+        1219,
+        1085
+      ],
+      "displaySize": [
+        148,
+        114
+      ]
+    },
+    {
+      "name": "뿌리섬유",
+      "category": "자원",
+      "key": "root-fiber",
+      "image": "DesignAssets/ResourceConcepts/v1/resource-root-fiber.png",
+      "group": "resource",
+      "sha256": "1e1af575fe420c8a782d010538d1068e691ed5bfb8da78c84dfe228caffe2d3f",
+      "sourceAlphaBounds": [
+        34,
+        85,
+        1234,
+        1181
+      ],
+      "displaySize": [
+        136,
+        124
+      ]
+    },
+    {
+      "name": "거미줄",
+      "category": "자원",
+      "key": "spider-silk",
+      "image": "DesignAssets/ResourceConcepts/v1/resource-spider-silk.png",
+      "group": "resource",
+      "sha256": "a3433dd5c94dfa367b43b4b1e34022427e20ef5bb7c2d6531d0cd076bc35b734",
+      "sourceAlphaBounds": [
+        96,
+        182,
+        1230,
+        1137
+      ],
+      "displaySize": [
+        147,
+        124
+      ]
+    },
+    {
+      "name": "물",
+      "category": "자원",
+      "key": "water",
+      "image": "DesignAssets/ResourceConcepts/v1/resource-water.png",
+      "group": "resource",
+      "sha256": "6aa22515eae9c1f94ec823e6f0e6b4a532f44da93e5aea8c26d8f5ad1f8317a9",
+      "sourceAlphaBounds": [
+        47,
+        164,
+        1233,
+        1097
+      ],
+      "displaySize": [
+        148,
+        116
+      ]
+    },
+    {
+      "name": "수액",
+      "category": "자원",
+      "key": "tree-sap",
+      "image": "DesignAssets/ResourceConcepts/v1/resource-tree-sap.png",
+      "group": "resource",
+      "sha256": "6358b6b25ce4798faa6f5aea555f4046a313f50b711a80730bb0be39bb80c410",
+      "sourceAlphaBounds": [
+        156,
+        98,
+        1192,
+        1162
+      ],
+      "displaySize": [
+        121,
+        124
+      ]
+    },
+    {
+      "name": "부엽토",
+      "category": "자원",
+      "key": "leaf-mold",
+      "image": "DesignAssets/ResourceConcepts/v1/resource-leaf-mold.png",
+      "group": "resource",
+      "sha256": "bacf1d0d2c7fdcea458161219f0a192a1bac60f2c45a328bab7e1d20956dc890",
+      "sourceAlphaBounds": [
+        216,
+        346,
+        1389,
+        1194
+      ],
+      "displaySize": [
+        148,
+        107
+      ]
+    },
+    {
+      "name": "수지",
+      "category": "자원",
+      "key": "resin",
+      "image": "DesignAssets/ResourceConcepts/v1/resource-resin.png",
+      "group": "resource",
+      "sha256": "ff60a88f198390c4913893d2ce87e2973173f3b502e26e656d7efbe706e8452d",
+      "sourceAlphaBounds": [
+        323,
+        388,
+        1296,
+        1197
+      ],
+      "displaySize": [
+        148,
+        123
+      ]
+    },
+    {
+      "name": "밀랍",
+      "category": "자원",
+      "key": "beeswax",
+      "image": "DesignAssets/ResourceConcepts/v1/resource-beeswax.png",
+      "group": "resource",
+      "sha256": "2c9b72749fb0551cdd681c0bf3a5071ba03ed1ed2962168fdbe7367acb292ea1",
+      "sourceAlphaBounds": [
+        160,
+        187,
+        1139,
+        1108
+      ],
+      "displaySize": [
+        132,
+        124
+      ]
+    },
+    {
+      "name": "갑각",
+      "category": "자원",
+      "key": "carapace",
+      "image": "DesignAssets/ResourceConcepts/v1/resource-carapace.png",
+      "group": "resource",
+      "sha256": "be43a896402433aeee67eacc07a6f837fe41ce010538f6695dd587887b9f6145",
+      "sourceAlphaBounds": [
+        114,
+        179,
+        1203,
+        1082
+      ],
+      "displaySize": [
+        148,
+        123
+      ]
+    },
+    {
+      "name": "철광석",
+      "category": "자원",
+      "key": "iron-ore",
+      "image": "DesignAssets/ResourceConcepts/v1/resource-iron-ore.png",
+      "group": "resource",
+      "sha256": "72d32c2697ae475bc00da8c590c93d349a21472a31f85ec9f316921d0e0df778",
+      "sourceAlphaBounds": [
+        194,
+        221,
+        1106,
+        1066
+      ],
+      "displaySize": [
+        134,
+        124
+      ]
+    },
+    {
+      "name": "구리광석",
+      "category": "자원",
+      "key": "copper-ore",
+      "image": "DesignAssets/ResourceConcepts/v1/resource-copper-ore.png",
+      "group": "resource",
+      "sha256": "822ca2f5ed6cf8d15fc865b31517f5cf0d916c3bdb64faefd3365a08a725b826",
+      "sourceAlphaBounds": [
+        227,
+        260,
+        1359,
+        1285
+      ],
+      "displaySize": [
+        137,
+        124
+      ]
+    },
+    {
+      "name": "수정",
+      "category": "자원",
+      "key": "quartz",
+      "image": "DesignAssets/ResourceConcepts/v1/resource-quartz.png",
+      "group": "resource",
+      "sha256": "b73857bf9fe41c2babe23ae70be4afefd475b061f1625be880ea8d3af530344d",
+      "sourceAlphaBounds": [
+        245,
+        140,
+        1008,
+        1137
+      ],
+      "displaySize": [
+        95,
+        124
+      ]
+    }
+  ]
+}

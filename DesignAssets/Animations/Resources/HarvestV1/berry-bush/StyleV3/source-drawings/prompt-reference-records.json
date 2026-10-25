@@ -1,0 +1,269 @@
+[
+  {
+    "key": "berry-bush",
+    "index": 14,
+    "type": "key repair",
+    "source": "D:\\.codex\\generated_images\\01a1694e-18c3-7583-829a-f5810ddd3af3\\exec-e1b5eca2-fce1-4a84-b199-2dcb9ea99b06.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\berry-bush\\source-poses\\14.png",
+    "prompt": "Edit the FIRST image directly into ONE complete actually drawn frame14 of this berry bush. Image 1 is the approved RAW source at its native square canvas: preserve its exact whole-object scale, crop padding, base contact and central-trunk position. Image 2 is the checked small preparation pose, for identity and continuity only. Do NOT zoom out or make the plant smaller. Keep the same three red fruit clusters with just the same few broad merged lobes, same sparse broad green leaves, thick main stem, exact lower trunk and root contact. Do not add berry beads, leaf veins, inner contours, textures or highlights. Draw only a restrained post-harvest peak: left fruit cluster leans outward left about 3 degrees, right fruit outward right about 3 degrees; upper fruit leans forward only 1 degree. All three fruit outlines keep their actual size. Leaves and their continuous stems respond by a similarly tiny bend. Lower main stem and two lowest large leaves remain stationary at their original native pixels and proportions. The whole plant must stay at the same canvas placement and fill as Image 1, including its near-edge broad leaf tips. No whole-object scaling, drift, squash, new parts, detachment, particles or artificial collage. Preserve smooth broad gradients, thin deep-teal outlines, quiet surfaces and restrained broad highlights. Draw all overlaps and fruit-stem connections completely. Exactly one complete pose on genuine transparent RGBA background, no text, floor, grid, sheet or alternate view.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\static\\berry-bush.png",
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\berry-bush\\key-pre-03.png"
+    ],
+    "status": "selected full actual source; encoded candidate reviewed",
+    "generatedAt": "2026-10-24T06:25:06.251Z",
+    "candidateSource": "source-drawings/pose-14.png"
+  },
+  {
+    "key": "berry-bush",
+    "index": 2,
+    "type": "individual adjacent complete drawing",
+    "boundary": 3,
+    "source": "D:\\.codex\\generated_images\\01a1694e-18c3-7583-829a-f5810ddd3af3\\exec-acd9a8c9-b992-450c-9e63-4469b1fc3d0c.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\berry-bush\\source-poses\\02.png",
+    "prompt": "Edit Image 1 directly into ONE COMPLETE actually drawn animation cel, frame 02, of this simplified berry bush. Image 1 is the RAW approved neutral artwork and native square canvas authority. Image 2 is the closest checked pose, frame 03, which this new adjacent drawing must join naturally. Preserve the exact whole-object magnification, native near-edge padding, grounded lower-stem tip and placement from Image 1. Do NOT shrink the bush to add margins. This is a tiny local harvesting reaction, approaching the small preparation key. The left fruit leans outward left approximately 0.96 degrees and right fruit outward right 0.96 degrees, while the upper fruit moves less than half that amount. Keep every fruit's actual size, lobe count and continuous stem attachment. The motion is barely visible at 96px, never an advertised exaggerated pose. Draw all connected bending stems and occlusions completely. The lower main trunk, two lowest broad leaves and base contact remain stationary. Keep precisely three red fruits with the SAME FEW LARGE MERGED LOBES, sparse broad green leaves, thick stem, thin deep-teal contours, smooth broad gradients, quiet surfaces and subdued broad highlights. No old tiny berry beads, leaf veins, surface marks, added textures, glints, particles or parts. Do not translate, scale, stretch or rotate the whole bush. No collage, cutouts, seams or artificial motion. One complete individually drawn pose on genuine transparent RGBA square background. No floor, text, labels, grid, sheet or second view. Keep native Image 1 composition, without tight fitting.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\static\\berry-bush.png",
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\berry-bush\\source-poses\\03.png"
+    ],
+    "strength": 0.397319,
+    "status": "selected full actual source; encoded candidate reviewed",
+    "generatedAt": "2026-10-24T06:28:00.169Z",
+    "candidateSource": "source-drawings/pose-02.png"
+  },
+  {
+    "key": "berry-bush",
+    "index": 4,
+    "type": "individual adjacent complete drawing",
+    "boundary": 3,
+    "source": "D:\\.codex\\generated_images\\01a1694e-18c3-7583-829a-f5810ddd3af3\\exec-9848a7c7-3f60-4daf-a33d-13888ba4b28c.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\berry-bush\\source-poses\\04.png",
+    "prompt": "Edit Image 1 directly into ONE COMPLETE actually drawn animation cel, frame 04, of this simplified berry bush. Image 1 is the RAW approved neutral artwork and native square canvas authority. Image 2 is the closest checked pose, frame 03, which this new adjacent drawing must join naturally. Preserve the exact whole-object magnification, native near-edge padding, grounded lower-stem tip and placement from Image 1. Do NOT shrink the bush to add margins. This is a tiny local harvesting reaction, returning gently from the preparation key toward neutral. The left fruit leans outward left approximately 1.50 degrees and right fruit outward right 1.50 degrees, while the upper fruit moves less than half that amount. Keep every fruit's actual size, lobe count and continuous stem attachment. The motion is barely visible at 96px, never an advertised exaggerated pose. Draw all connected bending stems and occlusions completely. The lower main trunk, two lowest broad leaves and base contact remain stationary. Keep precisely three red fruits with the SAME FEW LARGE MERGED LOBES, sparse broad green leaves, thick stem, thin deep-teal contours, smooth broad gradients, quiet surfaces and subdued broad highlights. No old tiny berry beads, leaf veins, surface marks, added textures, glints, particles or parts. Do not translate, scale, stretch or rotate the whole bush. No collage, cutouts, seams or artificial motion. One complete individually drawn pose on genuine transparent RGBA square background. No floor, text, labels, grid, sheet or second view. Keep native Image 1 composition, without tight fitting.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\static\\berry-bush.png",
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\berry-bush\\source-poses\\03.png"
+    ],
+    "strength": 0.617815,
+    "status": "selected full actual source; encoded candidate reviewed",
+    "generatedAt": "2026-10-24T06:28:39.239Z",
+    "candidateSource": "source-drawings/pose-04.png"
+  },
+  {
+    "key": "berry-bush",
+    "index": 13,
+    "type": "individual adjacent complete drawing",
+    "boundary": 14,
+    "source": "D:\\.codex\\generated_images\\01a1694e-18c3-7583-829a-f5810ddd3af3\\exec-02eb712c-acfe-4e57-8ac7-bd3f98883c2a.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\berry-bush\\source-poses\\13.png",
+    "prompt": "Edit Image 1 directly into ONE COMPLETE actually drawn animation cel, frame 13, of this simplified berry bush. Image 1 is the RAW approved neutral artwork and native square canvas authority. Image 2 is the closest checked pose, frame 14, which this new adjacent drawing must join naturally. Preserve the exact whole-object magnification, native near-edge padding, grounded lower-stem tip and placement from Image 1. Do NOT shrink the bush to add margins. This is a tiny local harvesting reaction, approaching the restrained contact peak. The left fruit leans outward left approximately 3.00 degrees and right fruit outward right 3.00 degrees, while the upper fruit moves less than half that amount. Keep every fruit's actual size, lobe count and continuous stem attachment. The motion is barely visible at 96px, never an advertised exaggerated pose. Draw all connected bending stems and occlusions completely. The lower main trunk, two lowest broad leaves and base contact remain stationary. Keep precisely three red fruits with the SAME FEW LARGE MERGED LOBES, sparse broad green leaves, thick stem, thin deep-teal contours, smooth broad gradients, quiet surfaces and subdued broad highlights. No old tiny berry beads, leaf veins, surface marks, added textures, glints, particles or parts. Do not translate, scale, stretch or rotate the whole bush. No collage, cutouts, seams or artificial motion. One complete individually drawn pose on genuine transparent RGBA square background. No floor, text, labels, grid, sheet or second view. Keep native Image 1 composition, without tight fitting.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\static\\berry-bush.png",
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\berry-bush\\source-poses\\14.png"
+    ],
+    "strength": 0.979746,
+    "status": "selected full actual source; encoded candidate reviewed",
+    "generatedAt": "2026-10-24T06:29:16.281Z",
+    "candidateSource": "source-drawings/pose-13.png"
+  },
+  {
+    "key": "berry-bush",
+    "index": 15,
+    "type": "individual adjacent complete drawing",
+    "boundary": 14,
+    "source": "D:\\.codex\\generated_images\\01a1694e-18c3-7583-829a-f5810ddd3af3\\exec-17458fe4-5e74-49de-b116-3801988e6b55.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\berry-bush\\source-poses\\15.png",
+    "prompt": "Edit Image 1 directly into ONE COMPLETE actually drawn animation cel, frame 15, of this simplified berry bush. Image 1 is the RAW approved neutral artwork and native square canvas authority. Image 2 is the closest checked pose, frame 14, which this new adjacent drawing must join naturally. Preserve the exact whole-object magnification, native near-edge padding, grounded lower-stem tip and placement from Image 1. Do NOT shrink the bush to add margins. This is a tiny local harvesting reaction, settling from the contact peak toward neutral frame19. The left fruit leans outward left approximately 2.53 degrees and right fruit outward right 2.53 degrees, while the upper fruit moves less than half that amount. Keep every fruit's actual size, lobe count and continuous stem attachment. The motion is barely visible at 96px, never an advertised exaggerated pose. Draw all connected bending stems and occlusions completely. The lower main trunk, two lowest broad leaves and base contact remain stationary. Keep precisely three red fruits with the SAME FEW LARGE MERGED LOBES, sparse broad green leaves, thick stem, thin deep-teal contours, smooth broad gradients, quiet surfaces and subdued broad highlights. No old tiny berry beads, leaf veins, surface marks, added textures, glints, particles or parts. Do not translate, scale, stretch or rotate the whole bush. No collage, cutouts, seams or artificial motion. One complete individually drawn pose on genuine transparent RGBA square background. No floor, text, labels, grid, sheet or second view. Keep native Image 1 composition, without tight fitting.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\static\\berry-bush.png",
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\berry-bush\\source-poses\\14.png"
+    ],
+    "strength": 0.82743,
+    "status": "selected full actual source; encoded candidate reviewed",
+    "generatedAt": "2026-10-24T06:29:42.883Z",
+    "candidateSource": "source-drawings/pose-15.png"
+  },
+  {
+    "key": "berry-bush",
+    "index": 1,
+    "type": "individual adjacent complete drawing",
+    "boundary": 2,
+    "source": "D:\\.codex\\generated_images\\01a1694e-18c3-7583-829a-f5810ddd3af3\\exec-5f2c3b39-ae65-47d7-985b-239609fd3bbe.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\berry-bush\\source-poses\\01.png",
+    "prompt": "Edit Image 1 directly into ONE COMPLETE actually drawn animation cel, frame 01, of this simplified berry bush. Image 1 is the RAW approved neutral artwork and native square canvas authority. Image 2 is the closest checked pose, frame 02, which this new adjacent drawing must join naturally. Preserve the exact whole-object magnification, native near-edge padding, grounded lower-stem tip and placement from Image 1. Do NOT shrink the bush to add margins. This is a tiny local harvesting reaction, approaching the small preparation key. The left fruit leans outward left approximately 0.30 degrees and right fruit outward right 0.30 degrees, while the upper fruit moves less than half that amount. Keep every fruit's actual size, lobe count and continuous stem attachment. The motion is barely visible at 96px, never an advertised exaggerated pose. Draw all connected bending stems and occlusions completely. The lower main trunk, two lowest broad leaves and base contact remain stationary. Keep precisely three red fruits with the SAME FEW LARGE MERGED LOBES, sparse broad green leaves, thick stem, thin deep-teal contours, smooth broad gradients, quiet surfaces and subdued broad highlights. No old tiny berry beads, leaf veins, surface marks, added textures, glints, particles or parts. Do not translate, scale, stretch or rotate the whole bush. No collage, cutouts, seams or artificial motion. One complete individually drawn pose on genuine transparent RGBA square background. No floor, text, labels, grid, sheet or second view. Keep native Image 1 composition, without tight fitting.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\static\\berry-bush.png",
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\berry-bush\\source-poses\\02.png"
+    ],
+    "strength": 0.122366,
+    "status": "selected full actual source; encoded candidate reviewed",
+    "generatedAt": "2026-10-24T06:30:41.803Z",
+    "candidateSource": "source-drawings/pose-01.png"
+  },
+  {
+    "key": "berry-bush",
+    "index": 5,
+    "type": "individual adjacent complete drawing",
+    "boundary": 4,
+    "source": "D:\\.codex\\generated_images\\01a1694e-18c3-7583-829a-f5810ddd3af3\\exec-99c7e0ea-9847-40c6-ad58-c90f4ef82503.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\berry-bush\\source-poses\\05.png",
+    "prompt": "Edit Image 1 directly into ONE COMPLETE actually drawn animation cel, frame 05, of this simplified berry bush. Image 1 is the RAW approved neutral artwork and native square canvas authority. Image 2 is the closest checked pose, frame 04, which this new adjacent drawing must join naturally. Preserve the exact whole-object magnification, native near-edge padding, grounded lower-stem tip and placement from Image 1. Do NOT shrink the bush to add margins. This is a tiny local harvesting reaction, returning gently from the preparation key toward neutral. The left fruit leans outward left approximately 0.96 degrees and right fruit outward right 0.96 degrees, while the upper fruit moves less than half that amount. Keep every fruit's actual size, lobe count and continuous stem attachment. The motion is barely visible at 96px, never an advertised exaggerated pose. Draw all connected bending stems and occlusions completely. The lower main trunk, two lowest broad leaves and base contact remain stationary. Keep precisely three red fruits with the SAME FEW LARGE MERGED LOBES, sparse broad green leaves, thick stem, thin deep-teal contours, smooth broad gradients, quiet surfaces and subdued broad highlights. No old tiny berry beads, leaf veins, surface marks, added textures, glints, particles or parts. Do not translate, scale, stretch or rotate the whole bush. No collage, cutouts, seams or artificial motion. One complete individually drawn pose on genuine transparent RGBA square background. No floor, text, labels, grid, sheet or second view. Keep native Image 1 composition, without tight fitting.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\static\\berry-bush.png",
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\berry-bush\\source-poses\\04.png"
+    ],
+    "strength": 0.397319,
+    "status": "selected full actual source; encoded candidate reviewed",
+    "generatedAt": "2026-10-24T06:31:08.662Z",
+    "candidateSource": "source-drawings/pose-05.png"
+  },
+  {
+    "key": "berry-bush",
+    "index": 12,
+    "type": "individual adjacent complete drawing",
+    "boundary": 13,
+    "source": "D:\\.codex\\generated_images\\01a1694e-18c3-7583-829a-f5810ddd3af3\\exec-a501333f-b873-4492-a0bf-6dfb1c8dd962.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\berry-bush\\source-poses\\12.png",
+    "prompt": "Edit Image 1 directly into ONE COMPLETE actually drawn animation cel, frame 12, of this simplified berry bush. Image 1 is the RAW approved neutral artwork and native square canvas authority. Image 2 is the closest checked pose, frame 13, which this new adjacent drawing must join naturally. Preserve the exact whole-object magnification, native near-edge padding, grounded lower-stem tip and placement from Image 1. Do NOT shrink the bush to add margins. This is a tiny local harvesting reaction, approaching the restrained contact peak. The left fruit leans outward left approximately 2.53 degrees and right fruit outward right 2.53 degrees, while the upper fruit moves less than half that amount. Keep every fruit's actual size, lobe count and continuous stem attachment. The motion is barely visible at 96px, never an advertised exaggerated pose. Draw all connected bending stems and occlusions completely. The lower main trunk, two lowest broad leaves and base contact remain stationary. Keep precisely three red fruits with the SAME FEW LARGE MERGED LOBES, sparse broad green leaves, thick stem, thin deep-teal contours, smooth broad gradients, quiet surfaces and subdued broad highlights. No old tiny berry beads, leaf veins, surface marks, added textures, glints, particles or parts. Do not translate, scale, stretch or rotate the whole bush. No collage, cutouts, seams or artificial motion. One complete individually drawn pose on genuine transparent RGBA square background. No floor, text, labels, grid, sheet or second view. Keep native Image 1 composition, without tight fitting.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\static\\berry-bush.png",
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\berry-bush\\source-poses\\13.png"
+    ],
+    "strength": 0.82743,
+    "status": "selected full actual source; encoded candidate reviewed",
+    "generatedAt": "2026-10-24T06:31:47.799Z",
+    "candidateSource": "source-drawings/pose-12.png"
+  },
+  {
+    "key": "berry-bush",
+    "index": 16,
+    "type": "individual adjacent complete drawing",
+    "boundary": 15,
+    "source": "D:\\.codex\\generated_images\\01a1694e-18c3-7583-829a-f5810ddd3af3\\exec-c365dc10-edde-481f-8626-ef3f39cc27aa.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\berry-bush\\source-poses\\16.png",
+    "prompt": "Edit Image 1 directly into ONE COMPLETE actually drawn animation cel, frame 16, of this simplified berry bush. Image 1 is the RAW approved neutral artwork and native square canvas authority. Image 2 is the closest checked pose, frame 15, which this new adjacent drawing must join naturally. Preserve the exact whole-object magnification, native near-edge padding, grounded lower-stem tip and placement from Image 1. Do NOT shrink the bush to add margins. This is a tiny local harvesting reaction, settling from the contact peak toward neutral frame19. The left fruit leans outward left approximately 1.75 degrees and right fruit outward right 1.75 degrees, while the upper fruit moves less than half that amount. Keep every fruit's actual size, lobe count and continuous stem attachment. The motion is barely visible at 96px, never an advertised exaggerated pose. Draw all connected bending stems and occlusions completely. The lower main trunk, two lowest broad leaves and base contact remain stationary. Keep precisely three red fruits with the SAME FEW LARGE MERGED LOBES, sparse broad green leaves, thick stem, thin deep-teal contours, smooth broad gradients, quiet surfaces and subdued broad highlights. No old tiny berry beads, leaf veins, surface marks, added textures, glints, particles or parts. Do not translate, scale, stretch or rotate the whole bush. No collage, cutouts, seams or artificial motion. One complete individually drawn pose on genuine transparent RGBA square background. No floor, text, labels, grid, sheet or second view. Keep native Image 1 composition, without tight fitting.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\static\\berry-bush.png",
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\berry-bush\\source-poses\\15.png"
+    ],
+    "strength": 0.571157,
+    "status": "selected full actual source; encoded candidate reviewed",
+    "generatedAt": "2026-10-24T06:32:26.697Z",
+    "candidateSource": "source-drawings/pose-16.png"
+  },
+  {
+    "key": "berry-bush",
+    "index": 6,
+    "type": "individual adjacent complete drawing",
+    "boundary": 5,
+    "source": "D:\\.codex\\generated_images\\01a1694e-18c3-7583-829a-f5810ddd3af3\\exec-bac257c8-1c1f-4cb1-a356-8ef11c665f48.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\berry-bush\\source-poses\\06.png",
+    "prompt": "Edit Image 1 directly into ONE COMPLETE actually drawn animation cel, frame 06, of this simplified berry bush. Image 1 is the RAW approved neutral artwork and native square canvas authority. Image 2 is the closest checked pose, frame 05, which this new adjacent drawing must join naturally. Preserve the exact whole-object magnification, native near-edge padding, grounded lower-stem tip and placement from Image 1. Do NOT shrink the bush to add margins. This is a tiny local harvesting reaction, returning gently from the preparation key toward neutral. The left fruit leans outward left approximately 0.30 degrees and right fruit outward right 0.30 degrees, while the upper fruit moves less than half that amount. Keep every fruit's actual size, lobe count and continuous stem attachment. The motion is barely visible at 96px, never an advertised exaggerated pose. Draw all connected bending stems and occlusions completely. The lower main trunk, two lowest broad leaves and base contact remain stationary. Keep precisely three red fruits with the SAME FEW LARGE MERGED LOBES, sparse broad green leaves, thick stem, thin deep-teal contours, smooth broad gradients, quiet surfaces and subdued broad highlights. No old tiny berry beads, leaf veins, surface marks, added textures, glints, particles or parts. Do not translate, scale, stretch or rotate the whole bush. No collage, cutouts, seams or artificial motion. One complete individually drawn pose on genuine transparent RGBA square background. No floor, text, labels, grid, sheet or second view. Keep native Image 1 composition, without tight fitting.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\static\\berry-bush.png",
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\berry-bush\\source-poses\\05.png"
+    ],
+    "strength": 0.122366,
+    "status": "selected full actual source; encoded candidate reviewed",
+    "generatedAt": "2026-10-24T06:34:16.898Z",
+    "candidateSource": "source-drawings/pose-06.png"
+  },
+  {
+    "key": "berry-bush",
+    "index": 11,
+    "type": "individual adjacent complete drawing",
+    "boundary": 12,
+    "source": "D:\\.codex\\generated_images\\01a1694e-18c3-7583-829a-f5810ddd3af3\\exec-38922586-132b-4bc0-bab0-983e7bfd95e6.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\berry-bush\\source-poses\\11.png",
+    "prompt": "Edit Image 1 directly into ONE COMPLETE actually drawn animation cel, frame 11, of this simplified berry bush. Image 1 is the RAW approved neutral artwork and native square canvas authority. Image 2 is the closest checked pose, frame 12, which this new adjacent drawing must join naturally. Preserve the exact whole-object magnification, native near-edge padding, grounded lower-stem tip and placement from Image 1. Do NOT shrink the bush to add margins. This is a tiny local harvesting reaction, approaching the restrained contact peak. The left fruit leans outward left approximately 1.75 degrees and right fruit outward right 1.75 degrees, while the upper fruit moves less than half that amount. Keep every fruit's actual size, lobe count and continuous stem attachment. The motion is barely visible at 96px, never an advertised exaggerated pose. Draw all connected bending stems and occlusions completely. The lower main trunk, two lowest broad leaves and base contact remain stationary. Keep precisely three red fruits with the SAME FEW LARGE MERGED LOBES, sparse broad green leaves, thick stem, thin deep-teal contours, smooth broad gradients, quiet surfaces and subdued broad highlights. No old tiny berry beads, leaf veins, surface marks, added textures, glints, particles or parts. Do not translate, scale, stretch or rotate the whole bush. No collage, cutouts, seams or artificial motion. One complete individually drawn pose on genuine transparent RGBA square background. No floor, text, labels, grid, sheet or second view. Keep native Image 1 composition, without tight fitting.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\static\\berry-bush.png",
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\berry-bush\\source-poses\\12.png"
+    ],
+    "strength": 0.571157,
+    "status": "selected full actual source; encoded candidate reviewed",
+    "generatedAt": "2026-10-24T06:34:56.542Z",
+    "candidateSource": "source-drawings/pose-11.png"
+  },
+  {
+    "key": "berry-bush",
+    "index": 17,
+    "type": "individual adjacent complete drawing",
+    "boundary": 16,
+    "source": "D:\\.codex\\generated_images\\01a1694e-18c3-7583-829a-f5810ddd3af3\\exec-f19fcd1f-7ceb-475f-ade5-4dadbe8d5c30.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\berry-bush\\source-poses\\17.png",
+    "prompt": "Edit Image 1 directly into ONE COMPLETE actually drawn animation cel, frame 17, of this simplified berry bush. Image 1 is the RAW approved neutral artwork and native square canvas authority. Image 2 is the closest checked pose, frame 16, which this new adjacent drawing must join naturally. Preserve the exact whole-object magnification, native near-edge padding, grounded lower-stem tip and placement from Image 1. Do NOT shrink the bush to add margins. This is a tiny local harvesting reaction, settling from the contact peak toward neutral frame19. The left fruit leans outward left approximately 0.90 degrees and right fruit outward right 0.90 degrees, while the upper fruit moves less than half that amount. Keep every fruit's actual size, lobe count and continuous stem attachment. The motion is barely visible at 96px, never an advertised exaggerated pose. Draw all connected bending stems and occlusions completely. The lower main trunk, two lowest broad leaves and base contact remain stationary. Keep precisely three red fruits with the SAME FEW LARGE MERGED LOBES, sparse broad green leaves, thick stem, thin deep-teal contours, smooth broad gradients, quiet surfaces and subdued broad highlights. No old tiny berry beads, leaf veins, surface marks, added textures, glints, particles or parts. Do not translate, scale, stretch or rotate the whole bush. No collage, cutouts, seams or artificial motion. One complete individually drawn pose on genuine transparent RGBA square background. No floor, text, labels, grid, sheet or second view. Keep native Image 1 composition, without tight fitting.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\static\\berry-bush.png",
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\berry-bush\\source-poses\\16.png"
+    ],
+    "strength": 0.292292,
+    "status": "selected full actual source; encoded candidate reviewed",
+    "generatedAt": "2026-10-24T06:35:36.65Z",
+    "candidateSource": "source-drawings/pose-17.png"
+  },
+  {
+    "key": "berry-bush",
+    "index": 9,
+    "type": "individual adjacent complete drawing",
+    "boundary": 0,
+    "source": "D:\\.codex\\generated_images\\01a1694e-18c3-7583-829a-f5810ddd3af3\\exec-591037d1-6dfc-4882-853e-e5a927e0fbf4.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\berry-bush\\source-poses\\09.png",
+    "prompt": "Edit Image 1 directly into ONE COMPLETE actually drawn animation cel, frame 09, of this simplified berry bush. Image 1 is the RAW approved neutral artwork and native square canvas authority. Image 2 is the closest checked pose, frame 00, which this new adjacent drawing must join naturally. Preserve the exact whole-object magnification, native near-edge padding, grounded lower-stem tip and placement from Image 1. Do NOT shrink the bush to add margins. This is a tiny local harvesting reaction, approaching the restrained contact peak. The left fruit leans outward left approximately 0.24 degrees and right fruit outward right 0.24 degrees, while the upper fruit moves less than half that amount. Keep every fruit's actual size, lobe count and continuous stem attachment. The motion is barely visible at 96px, never an advertised exaggerated pose. Draw all connected bending stems and occlusions completely. The lower main trunk, two lowest broad leaves and base contact remain stationary. Keep precisely three red fruits with the SAME FEW LARGE MERGED LOBES, sparse broad green leaves, thick stem, thin deep-teal contours, smooth broad gradients, quiet surfaces and subdued broad highlights. No old tiny berry beads, leaf veins, surface marks, added textures, glints, particles or parts. Do not translate, scale, stretch or rotate the whole bush. No collage, cutouts, seams or artificial motion. One complete individually drawn pose on genuine transparent RGBA square background. No floor, text, labels, grid, sheet or second view. Keep native Image 1 composition, without tight fitting.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\static\\berry-bush.png",
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\static\\berry-bush.png"
+    ],
+    "strength": 0.079373,
+    "status": "selected full actual source; encoded candidate reviewed",
+    "generatedAt": "2026-10-24T06:36:14.044Z",
+    "candidateSource": "source-drawings/pose-09.png"
+  },
+  {
+    "key": "berry-bush",
+    "index": 18,
+    "type": "individual adjacent complete drawing",
+    "boundary": 19,
+    "source": "D:\\.codex\\generated_images\\01a1694e-18c3-7583-829a-f5810ddd3af3\\exec-c41aa0da-3fb2-4e29-b708-88becba03f95.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\berry-bush\\source-poses\\18.png",
+    "prompt": "Edit Image 1 directly into ONE COMPLETE actually drawn animation cel, frame 18, of this simplified berry bush. Image 1 is the RAW approved neutral artwork and native square canvas authority. Image 2 is the closest checked pose, frame 19, which this new adjacent drawing must join naturally. Preserve the exact whole-object magnification, native near-edge padding, grounded lower-stem tip and placement from Image 1. Do NOT shrink the bush to add margins. This is a tiny local harvesting reaction, settling from the contact peak toward neutral frame19. The left fruit leans outward left approximately 0.24 degrees and right fruit outward right 0.24 degrees, while the upper fruit moves less than half that amount. Keep every fruit's actual size, lobe count and continuous stem attachment. The motion is barely visible at 96px, never an advertised exaggerated pose. Draw all connected bending stems and occlusions completely. The lower main trunk, two lowest broad leaves and base contact remain stationary. Keep precisely three red fruits with the SAME FEW LARGE MERGED LOBES, sparse broad green leaves, thick stem, thin deep-teal contours, smooth broad gradients, quiet surfaces and subdued broad highlights. No old tiny berry beads, leaf veins, surface marks, added textures, glints, particles or parts. Do not translate, scale, stretch or rotate the whole bush. No collage, cutouts, seams or artificial motion. One complete individually drawn pose on genuine transparent RGBA square background. No floor, text, labels, grid, sheet or second view. Keep native Image 1 composition, without tight fitting.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\static\\berry-bush.png",
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\static\\berry-bush.png"
+    ],
+    "strength": 0.079373,
+    "status": "selected full actual source; encoded candidate reviewed",
+    "generatedAt": "2026-10-24T06:36:58.675Z",
+    "candidateSource": "source-drawings/pose-18.png"
+  },
+  {
+    "key": "berry-bush",
+    "index": 10,
+    "type": "individual adjacent complete drawing",
+    "boundary": 11,
+    "source": "D:\\.codex\\generated_images\\01a1694e-18c3-7583-829a-f5810ddd3af3\\exec-10c7003c-6fb2-460b-8a7d-e5541d6d0b05.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\berry-bush\\source-poses\\10.png",
+    "prompt": "Edit Image 1 directly into ONE COMPLETE actually drawn animation cel, frame 10, of this simplified berry bush. Image 1 is the RAW approved neutral artwork and native square canvas authority. Image 2 is the closest checked pose, frame 11, which this new adjacent drawing must join naturally. Preserve the exact whole-object magnification, native near-edge padding, grounded lower-stem tip and placement from Image 1. Do NOT shrink the bush to add margins. This is a tiny local harvesting reaction, approaching the restrained contact peak. The left fruit leans outward left approximately 0.90 degrees and right fruit outward right 0.90 degrees, while the upper fruit moves less than half that amount. Keep every fruit's actual size, lobe count and continuous stem attachment. The motion is barely visible at 96px, never an advertised exaggerated pose. Draw all connected bending stems and occlusions completely. The lower main trunk, two lowest broad leaves and base contact remain stationary. Keep precisely three red fruits with the SAME FEW LARGE MERGED LOBES, sparse broad green leaves, thick stem, thin deep-teal contours, smooth broad gradients, quiet surfaces and subdued broad highlights. No old tiny berry beads, leaf veins, surface marks, added textures, glints, particles or parts. Do not translate, scale, stretch or rotate the whole bush. No collage, cutouts, seams or artificial motion. One complete individually drawn pose on genuine transparent RGBA square background. No floor, text, labels, grid, sheet or second view. Keep native Image 1 composition, without tight fitting.",
+    "references": [
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\static\\berry-bush.png",
+      "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\berry-bush\\source-poses\\11.png"
+    ],
+    "strength": 0.292292,
+    "status": "selected full actual source; encoded candidate reviewed",
+    "generatedAt": "2026-10-24T06:37:55.639Z",
+    "candidateSource": "source-drawings/pose-10.png"
+  },
+  {
+    "key": "berry-bush",
+    "index": 3,
+    "type": "preserved checked preparation key",
+    "source": "D:\\.codex\\generated_images\\01a1693b-eb44-7172-8985-5dd50c2a1f7b\\exec-e158148c-dc0d-4656-8a71-181ccfdb6176.png",
+    "output": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\berry-bush\\source-poses\\03.png",
+    "prompt": "Draw ONE COMPLETE actually drawn animation frame of the simplified berry bush. FIRST image is the locked neutral canvas and exact scale/camera/placement authority. SECOND image is the same new approved simplified static art for style. Preserve precisely the three red fruits, the small number of broad merged lobes in each fruit, the sparse broad leaves, thick main stem, colors, broad soft shading and subdued highlights. No old finely divided berry beads or veins may return. Motion: frame03, the small preparation peak. The three berry clusters lean only about 1.5 degrees outward (left cluster left, right cluster right, upper cluster a little forward), keeping their exact attachment points. Leaves react only subtly along with their attached stems. The lower main trunk and contact base stay fixed. Use the exact same object size, center, grounded bottom contact at 87.5% canvas height and transparent margins as the FIRST. No whole-object movement, camera zoom, stretching, extra parts, glints, vein lines or textures. Preserve complete attachment and occlusion drawing. Draw a single whole pose on a genuinely transparent square canvas, including every stationary element. No text, grid, alternate pose or crop. Requested source canvas1024×1024.",
+    "references": [
+      "H:/Spawner/$Trash/resource-simplify-plants-20261024/animation-work/berry-bush/canonical-reference.png",
+      "H:/Spawner/$Trash/resource-simplify-plants-20261024/static/berry-bush.png"
+    ],
+    "candidateSource": "source-drawings/pose-03.png",
+    "status": "selected full actual source; encoded candidate reviewed"
+  }
+]

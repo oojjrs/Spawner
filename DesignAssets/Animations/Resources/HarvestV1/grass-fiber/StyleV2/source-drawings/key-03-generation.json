@@ -1,0 +1,14 @@
+{
+  "key": "grass-fiber",
+  "index": 3,
+  "kind": "key-pose-candidate",
+  "prompt": "Draw ONE COMPLETE animation frame 4 of 24 for the 풀섬유 (grass-fiber) resource. FIRST reference is the exact approved clean sprite and canvas registration. SECOND reference is the old frame, provided only as a restrained motion/pose guide: do not copy its old texture, extra parts or different proportions. Redraw the whole sprite in the FIRST reference identity and broad clean painterly shading. Pose: gentle preparation touch; reaction strength 0.650 of the small maximum. Motion plan: The broad free grass ribbon ends gently flex outward by a few pixels while the tied waist and bundle footprint stay fixed. Keep all ribbons attached and the same clear count. Preserve exact object count, palette, left-top lighting, contour weight, perspective and simplified material detail. Keep base center at 50 percent canvas width, lowest fixed contact at 87.5 percent canvas height, and the same scale and transparent padding as the FIRST reference. No global camera movement, floating, growth, extraction, added texture, tiny glints, labels, grid or extra frame. Truly transparent square background; exactly one whole frame, including all stationary elements.\nKey pose source drawing only. Preserve the EXACT large shapes, ribbon/root count and attached waist/bundle from the FIRST canonical image, not the old detailed guide. Output one complete square frame on a 1024 by 1024 canvas. Canonical center x=512 and stationary base y=896, maximum span 81.25 percent. No global zoom, shift, growth or different silhouette proportions. Only the approved free tips locally flex. Alpha outside the actual resource silhouette must be zero. No fog, halo, glow, floor, background shading, cast shadow, thin hair roots, extra fine fibers, new tie or extra plant parts.",
+  "references": [
+    "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png",
+    "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\guide-frames\\03.png"
+  ],
+  "cachePath": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-c2c5cf93-f6c7-47d8-b420-1a2157f4de11.png",
+  "sourcePath": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\key-sources\\03.png",
+  "output": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\03.png",
+  "status": "pending-review"
+}

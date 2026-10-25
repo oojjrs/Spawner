@@ -27,7 +27,8 @@
       "sheet": "berry-bush/sheet.png",
       "preview": "berry-bush/preview.gif",
       "metadata": "berry-bush/animation.json",
-      "runtimePreview": "berry-bush/runtime.gif"
+      "runtimePreview": "berry-bush/runtime.gif",
+      "drawingSources": "berry-bush/StyleV3/sources.json"
     },
     {
       "key": "seed-pods",
@@ -38,7 +39,8 @@
       "sheet": "seed-pods/sheet.png",
       "preview": "seed-pods/preview.gif",
       "metadata": "seed-pods/animation.json",
-      "runtimePreview": "seed-pods/runtime.gif"
+      "runtimePreview": "seed-pods/runtime.gif",
+      "drawingSources": "seed-pods/StyleV2/sources.json"
     },
     {
       "key": "root-bulbs",
@@ -49,18 +51,20 @@
       "sheet": "root-bulbs/sheet.png",
       "preview": "root-bulbs/preview.gif",
       "metadata": "root-bulbs/animation.json",
-      "runtimePreview": "root-bulbs/runtime.gif"
+      "runtimePreview": "root-bulbs/runtime.gif",
+      "drawingSources": "root-bulbs/StyleV2/sources.json"
     },
     {
       "key": "nutrient-moss",
       "name": "영양 이끼",
       "group": "먹이와 고기",
-      "motion": "이끼 술이 눌렸다가 각기 조금씩 벌어지며 되돌아오기",
-      "caption": "이끼 술 누름·복귀",
+      "motion": "큰 이끼 쿠션이 순서대로 살짝 눌렸다가 복귀하며 영양 방울은 붙어 있다.",
+      "caption": "이끼 쿠션 눌림·복귀",
       "sheet": "nutrient-moss/sheet.png",
       "preview": "nutrient-moss/preview.gif",
       "metadata": "nutrient-moss/animation.json",
-      "runtimePreview": "nutrient-moss/runtime.gif"
+      "runtimePreview": "nutrient-moss/runtime.gif",
+      "drawingSources": "nutrient-moss/StyleV3/sources.json"
     },
     {
       "key": "meat",
@@ -71,7 +75,8 @@
       "sheet": "meat/sheet.png",
       "preview": "meat/preview.gif",
       "metadata": "meat/animation.json",
-      "runtimePreview": "meat/runtime.gif"
+      "runtimePreview": "meat/runtime.gif",
+      "drawingSources": "meat/StyleV2/sources.json"
     },
     {
       "key": "twigs",
@@ -82,7 +87,8 @@
       "sheet": "twigs/sheet.png",
       "preview": "twigs/preview.gif",
       "metadata": "twigs/animation.json",
-      "runtimePreview": "twigs/runtime.gif"
+      "runtimePreview": "twigs/runtime.gif",
+      "drawingSources": "twigs/StyleV2/sources.json"
     },
     {
       "key": "bark",
@@ -115,7 +121,8 @@
       "sheet": "clay/sheet.png",
       "preview": "clay/preview.gif",
       "metadata": "clay/animation.json",
-      "runtimePreview": "clay/runtime.gif"
+      "runtimePreview": "clay/runtime.gif",
+      "drawingSources": "clay/StyleV2/sources.json"
     },
     {
       "key": "sand",
@@ -129,17 +136,6 @@
       "runtimePreview": "sand/runtime.gif"
     },
     {
-      "key": "dry-leaves",
-      "name": "마른 잎",
-      "group": "목재·돌·흙",
-      "motion": "뒤쪽 낙엽 더미를 고정하고 앞잎 두 장만 줄기 부근을 축으로 약 5도씩 엇갈려 밀렸다 돌아온다.",
-      "caption": "낙엽별 들썩임",
-      "sheet": "dry-leaves/sheet.png",
-      "preview": "dry-leaves/preview.gif",
-      "metadata": "dry-leaves/animation.json",
-      "runtimePreview": "dry-leaves/runtime.gif"
-    },
-    {
       "key": "grass-fiber",
       "name": "풀섬유",
       "group": "섬유·생장",
@@ -148,7 +144,8 @@
       "sheet": "grass-fiber/sheet.png",
       "preview": "grass-fiber/preview.gif",
       "metadata": "grass-fiber/animation.json",
-      "runtimePreview": "grass-fiber/runtime.gif"
+      "runtimePreview": "grass-fiber/runtime.gif",
+      "drawingSources": "grass-fiber/StyleV2/sources.json"
     },
     {
       "key": "root-fiber",
@@ -159,7 +156,8 @@
       "sheet": "root-fiber/sheet.png",
       "preview": "root-fiber/preview.gif",
       "metadata": "root-fiber/animation.json",
-      "runtimePreview": "root-fiber/runtime.gif"
+      "runtimePreview": "root-fiber/runtime.gif",
+      "drawingSources": "root-fiber/StyleV2/sources.json"
     },
     {
       "key": "spider-silk",
@@ -170,7 +168,8 @@
       "sheet": "spider-silk/sheet.png",
       "preview": "spider-silk/preview.gif",
       "metadata": "spider-silk/animation.json",
-      "runtimePreview": "spider-silk/runtime.gif"
+      "runtimePreview": "spider-silk/runtime.gif",
+      "drawingSources": "spider-silk/StyleV2/sources.json"
     },
     {
       "key": "water",
@@ -181,7 +180,8 @@
       "sheet": "water/sheet.png",
       "preview": "water/preview.gif",
       "metadata": "water/animation.json",
-      "runtimePreview": "water/runtime.gif"
+      "runtimePreview": "water/runtime.gif",
+      "drawingSources": "water/StyleV2/sources.json"
     },
     {
       "key": "tree-sap",
@@ -192,7 +192,8 @@
       "sheet": "tree-sap/sheet.png",
       "preview": "tree-sap/preview.gif",
       "metadata": "tree-sap/animation.json",
-      "runtimePreview": "tree-sap/runtime.gif"
+      "runtimePreview": "tree-sap/runtime.gif",
+      "drawingSources": "tree-sap/StyleV3/sources.json"
     },
     {
       "key": "leaf-mold",
@@ -225,7 +226,8 @@
       "sheet": "beeswax/sheet.png",
       "preview": "beeswax/preview.gif",
       "metadata": "beeswax/animation.json",
-      "runtimePreview": "beeswax/runtime.gif"
+      "runtimePreview": "beeswax/runtime.gif",
+      "drawingSources": "beeswax/StyleV2/sources.json"
     },
     {
       "key": "carapace",
@@ -236,7 +238,8 @@
       "sheet": "carapace/sheet.png",
       "preview": "carapace/preview.gif",
       "metadata": "carapace/animation.json",
-      "runtimePreview": "carapace/runtime.gif"
+      "runtimePreview": "carapace/runtime.gif",
+      "drawingSources": "carapace/StyleV2/sources.json"
     },
     {
       "key": "iron-ore",
@@ -247,7 +250,8 @@
       "sheet": "iron-ore/sheet.png",
       "preview": "iron-ore/preview.gif",
       "metadata": "iron-ore/animation.json",
-      "runtimePreview": "iron-ore/runtime.gif"
+      "runtimePreview": "iron-ore/runtime.gif",
+      "drawingSources": "iron-ore/StyleV2/sources.json"
     },
     {
       "key": "copper-ore",
@@ -269,7 +273,8 @@
       "sheet": "quartz/sheet.png",
       "preview": "quartz/preview.gif",
       "metadata": "quartz/animation.json",
-      "runtimePreview": "quartz/runtime.gif"
+      "runtimePreview": "quartz/runtime.gif",
+      "drawingSources": "quartz/StyleV2/sources.json"
     }
   ],
   "runtimeIntegrated": true

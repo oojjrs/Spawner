@@ -1,0 +1,202 @@
+{
+  "source": "DesignAssets/Resources/pebbles.png",
+  "frameWidth": 512,
+  "frameHeight": 512,
+  "frameCount": 9,
+  "columns": 3,
+  "rows": 3,
+  "durationsMs": [
+    500,
+    63,
+    62,
+    63,
+    62,
+    63,
+    62,
+    63,
+    62
+  ],
+  "loop": true,
+  "cycleMs": 1000,
+  "sheet": "harvest-sheet.png",
+  "preview": "pebbles-harvest.webp",
+  "method": "Existing drawn motion poses retained. Stationary body pixels retained identically at fixed coordinates; wood source phases share a small uniform size correction. No new motion synthesis.",
+  "runtimeIntegrated": false,
+  "sourceDrawings": {
+    "key": {
+      "file": "source-drawings/key.png",
+      "prompt": "Use case: precise-object-edit. Draw two key poses of the EXACT reference pebble resource pile for a 2D game harvesting animation. Output ONE transparent PNG with exactly TWO equal square cells side by side (2 columns, 1 row). Preserve the reference layout within each square: the pebble pile occupies the lower part of the square, same object sizes, same camera, same smooth painted cream and blue-gray stones, warm upper-left light, fine dark contours. Preserve the exact count and identities of all ELEVEN stones. Each stone is a rigid hard object, no squashing or morphing. LEFT cell: peak rummaging contact. The small pale stone at front left tips slightly clockwise and slides a short distance toward center; the long gray front-center stone shifts a little right; the little cream stone at front right tilts slightly as if touched in sequence. Keep the central large blue-gray rock and the broad cream rock at lower center-left absolutely stationary; keep the back row stationary. RIGHT cell: small recoil/settling, the same three small foreground stones are closer to their original arrangement, slightly tipped oppositely. Motion only about 4% of the width of each small stone, restrained and grounded but readable. No stone lifted into air. All untouched stones must match the original exactly in placement and outline in both cells. These are actual newly drawn key poses, no hands, no tools, no creatures, no dust, no particles, no text, no grid, no borders, no checkerboard, true transparent RGBA.",
+      "method": "built-in image_gen drawn poses"
+    },
+    "approach": {
+      "file": "source-drawings/approach.png",
+      "prompt": "Draw exactly TWO adjacent approach frames before the LEFT key pose of this referenced eleven-stone pebble pile, side by side in equal square cells, fully transparent background. Preserve precise stone identities, colors, shapes, arrangement and smooth painted lighting. Match reference canvas placement and scale; pile remains in lower third. These are mild externally caused rummaging movements. Frame 1: front-left small cream stone just begins to tip and slide, front-center elongated gray stone still at rest. Frame 2: front-left stone is close to left reference peak, front-center gray stone begins its small side shift, little cream front-right stone starts to tilt last. The large central blue-gray rock, broad cream rock and back row are stationary and identical to reference. Rigid hard stones, very short grounded displacement, no deformation, no bouncing or lift. Complete ELEVEN stones in every cell. No creature, hand, tools, dirt, particles, background glow, text, labels or grid. Match reference delicate contour and textures exactly.",
+      "method": "built-in image_gen drawn poses"
+    },
+    "release": {
+      "file": "source-drawings/release.png",
+      "prompt": "Draw TWO immediately neighboring release frames BETWEEN the two checked pebble key poses in the reference. Two equal square cells side by side, true transparent alpha. Keep exactly the same eleven stones, delicate contour and smooth cream/blue-gray painted material, same scale and same placement in lower third of each square. The front-left small cream stone, front-center elongated gray stone and little front-right cream stone are gently settling from a tiny unseen rummaging touch. Left output: 1/3 from left key pose toward right key pose; right output: 2/3 of that same very short motion. Keep large central blue-gray and large front cream stones and back row absolutely stationary; do not change their shapes or sizes. All small stone motion stays rigid and on ground, no bouncing, no squashing, no particles. Do not redesign, add or remove stones. No backgrounds, glows, grids or text.",
+      "method": "built-in image_gen drawn poses"
+    },
+    "settle": {
+      "file": "source-drawings/settle.png",
+      "prompt": "Draw TWO very close final settling frames of this eleven-stone pebble pile harvesting animation. Image 1 is exact original neutral and art authority; image 2 is checked contact/recoil pair. Two equal square cells side by side on true alpha. Left output: front-left small cream stone, front-center long gray stone, little front-right cream stone nearly settled after image 2 RIGHT pose. Right output: all three almost precisely back in image 1 original arrangement. Large central blue-gray stone, broad cream stone and entire rear row remain stationary. Preserve exact original ELEVEN stones and their individual rigid forms, cream and blue-gray colors, broad painted facets, fine dark contour, same size and original lower-square placement. Tiny grounded motion only, no stretching or bouncing. No added stones, particles, background, glow, text or grid. Smooth minimal motion into a neutral hold.",
+      "method": "built-in image_gen drawn poses"
+    }
+  },
+  "sourceFrameRegistration": [
+    {
+      "scaleFrom887": 0.56,
+      "translation": [
+        8,
+        28
+      ],
+      "sourceAnchor": [
+        485.65168539325845,
+        491.0
+      ],
+      "destinationAnchor": [
+        279.5,
+        303.0
+      ]
+    },
+    {
+      "scaleFrom887": 0.56,
+      "translation": [
+        -13,
+        27
+      ],
+      "sourceAnchor": [
+        523.0496350364964,
+        492.0
+      ],
+      "destinationAnchor": [
+        279.5,
+        303.0
+      ]
+    },
+    {
+      "scaleFrom887": 0.56,
+      "translation": [
+        9,
+        27
+      ],
+      "sourceAnchor": [
+        483.51594202898553,
+        492.0
+      ],
+      "destinationAnchor": [
+        279.5,
+        303.0
+      ]
+    },
+    {
+      "scaleFrom887": 0.56,
+      "translation": [
+        -14,
+        27
+      ],
+      "sourceAnchor": [
+        523.7046548956662,
+        492.0
+      ],
+      "destinationAnchor": [
+        279.5,
+        303.0
+      ]
+    },
+    {
+      "scaleFrom887": 0.56,
+      "translation": [
+        -13,
+        27
+      ],
+      "sourceAnchor": [
+        522.6594516594516,
+        492.0
+      ],
+      "destinationAnchor": [
+        279.5,
+        303.0
+      ]
+    },
+    {
+      "scaleFrom887": 0.56,
+      "translation": [
+        9,
+        27
+      ],
+      "sourceAnchor": [
+        483.6264367816092,
+        492.0
+      ],
+      "destinationAnchor": [
+        279.5,
+        303.0
+      ]
+    },
+    {
+      "scaleFrom887": 0.56,
+      "translation": [
+        8,
+        27
+      ],
+      "sourceAnchor": [
+        484.4392971246006,
+        492.0
+      ],
+      "destinationAnchor": [
+        279.5,
+        303.0
+      ]
+    },
+    {
+      "scaleFrom887": 0.56,
+      "translation": [
+        -8,
+        28
+      ],
+      "sourceAnchor": [
+        514.1057851239669,
+        491.0
+      ],
+      "destinationAnchor": [
+        279.5,
+        303.0
+      ]
+    },
+    {
+      "scaleFrom887": 0.56,
+      "translation": [
+        8,
+        28
+      ],
+      "sourceAnchor": [
+        485.65168539325845,
+        491.0
+      ],
+      "destinationAnchor": [
+        279.5,
+        303.0
+      ]
+    }
+  ],
+  "stationaryBody": "fixed-body.png",
+  "stationaryRegionMask": "fixed-region-mask.png",
+  "stabilityCorrection": {
+    "stationaryRegionMaxChannelDifference": 0,
+    "preservedFrameCount": 9,
+    "preservedCycleMs": 1000,
+    "sourcePhaseScales": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  }
+}

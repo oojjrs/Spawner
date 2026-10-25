@@ -1,0 +1,862 @@
+{
+  "key": "nutrient-moss",
+  "status": "READY-frozen",
+  "design": "new simplified authority:3major moss cushions,3amber globules,few short sprouts",
+  "tool": "built-in image_gen",
+  "imagegenCalls": 17,
+  "selectedMovingDrawings": 16,
+  "neutralHolds": [
+    0,
+    7,
+    8,
+    19,
+    20,
+    21,
+    22,
+    23
+  ],
+  "unusedSource": {
+    "path": "../raw/adjacent-00-05.png",
+    "reason": "thicker contours and overcompressed left globule; not used",
+    "log": "../generation-records.json"
+  },
+  "contract": {
+    "frameSize": 256,
+    "frameCount": 24,
+    "columns": 6,
+    "rows": 4,
+    "pivot": [
+      128,
+      224
+    ],
+    "contactFrame": 8,
+    "settleFrame": 19,
+    "previewFrameMs": 100,
+    "postSeconds": 0.6,
+    "neutralHolds": [
+      0,
+      7,
+      8,
+      19,
+      20,
+      21,
+      22,
+      23
+    ]
+  },
+  "artwork": {
+    "referenceLock": "source-drawings/approved-static.png",
+    "canonical": "source-drawings/canonical-neutral.png",
+    "checkedKeys": [
+      3,
+      13
+    ],
+    "adjacentFrames": [
+      1,
+      2,
+      4,
+      5,
+      6,
+      9,
+      10,
+      11,
+      12,
+      14,
+      15,
+      16,
+      17,
+      18
+    ],
+    "allChangingPosesActuallyDrawn": true,
+    "motion": "left upper cushion yields and recovers before contact; right/back cushions yield and recover after contact"
+  },
+  "preparation": {
+    "sourceExtraction": "whole returned square canvases, no tight-fit extraction",
+    "registration": "no per-frame registration used; all returned squares normalized uniformly to1024 then256",
+    "fixedRegionRetention": "none; whole poses drawn, no composited moving parts",
+    "generatedMotionTransforms": false,
+    "interpolation": false,
+    "gifBackground": "#173c35",
+    "gifPalette": "preparation/global-palette.png",
+    "gifTiming": "24logicalframes at100ms each,2400ms",
+    "runtimeTiming": "harvest1.5s frames0..7;post0.6s frames8..18;settled19;nonloop"
+  },
+  "sourceRecords": "source-drawings/generation-records.json",
+  "frames": [
+    {
+      "index": 0,
+      "output": "frames/frame-00.png",
+      "actualSource": "source-drawings/canonical-neutral.png",
+      "sourceMethod": "unchanged approved neutral drawing hold",
+      "sourceId": "approved-static canonical",
+      "crop": [
+        0,
+        0,
+        1024,
+        1024
+      ],
+      "preparation": {
+        "sourceCanvas": [
+          1024,
+          1024
+        ],
+        "commonCanvas": 1024,
+        "finalCanvas": 256,
+        "uniformScaleToCommon": 1,
+        "uniformScaleToFinal": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "alphaCleanup": "none; original alpha and antialias retained",
+        "perFrameBboxFit": false,
+        "poseDeformation": false
+      },
+      "holdOf": 0,
+      "retainedFixedRegion": null
+    },
+    {
+      "index": 1,
+      "output": "frames/frame-01.png",
+      "actualSource": "source-drawings/adjacent-01.png",
+      "sourceMethod": "complete pose drawn by built-in image_gen",
+      "sourceId": "adjacent-01",
+      "crop": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "preparation": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "commonCanvas": 1024,
+        "finalCanvas": 256,
+        "uniformScaleToCommon": 0.8165869218500797,
+        "uniformScaleToFinal": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "alphaCleanup": "none; original alpha and antialias retained",
+        "perFrameBboxFit": false,
+        "poseDeformation": false
+      },
+      "holdOf": null,
+      "retainedFixedRegion": null
+    },
+    {
+      "index": 2,
+      "output": "frames/frame-02.png",
+      "actualSource": "source-drawings/adjacent-02.png",
+      "sourceMethod": "complete pose drawn by built-in image_gen",
+      "sourceId": "adjacent-02",
+      "crop": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "preparation": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "commonCanvas": 1024,
+        "finalCanvas": 256,
+        "uniformScaleToCommon": 0.8165869218500797,
+        "uniformScaleToFinal": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "alphaCleanup": "none; original alpha and antialias retained",
+        "perFrameBboxFit": false,
+        "poseDeformation": false
+      },
+      "holdOf": null,
+      "retainedFixedRegion": null
+    },
+    {
+      "index": 3,
+      "output": "frames/frame-03.png",
+      "actualSource": "source-drawings/key-03.png",
+      "sourceMethod": "complete pose drawn by built-in image_gen",
+      "sourceId": "key-03",
+      "crop": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "preparation": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "commonCanvas": 1024,
+        "finalCanvas": 256,
+        "uniformScaleToCommon": 0.8165869218500797,
+        "uniformScaleToFinal": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "alphaCleanup": "none; original alpha and antialias retained",
+        "perFrameBboxFit": false,
+        "poseDeformation": false
+      },
+      "holdOf": null,
+      "retainedFixedRegion": null
+    },
+    {
+      "index": 4,
+      "output": "frames/frame-04.png",
+      "actualSource": "source-drawings/adjacent-04.png",
+      "sourceMethod": "complete pose drawn by built-in image_gen",
+      "sourceId": "adjacent-04",
+      "crop": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "preparation": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "commonCanvas": 1024,
+        "finalCanvas": 256,
+        "uniformScaleToCommon": 0.8165869218500797,
+        "uniformScaleToFinal": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "alphaCleanup": "none; original alpha and antialias retained",
+        "perFrameBboxFit": false,
+        "poseDeformation": false
+      },
+      "holdOf": null,
+      "retainedFixedRegion": null
+    },
+    {
+      "index": 5,
+      "output": "frames/frame-05.png",
+      "actualSource": "source-drawings/adjacent-05.png",
+      "sourceMethod": "complete pose drawn by built-in image_gen",
+      "sourceId": "adjacent-05",
+      "crop": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "preparation": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "commonCanvas": 1024,
+        "finalCanvas": 256,
+        "uniformScaleToCommon": 0.8165869218500797,
+        "uniformScaleToFinal": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "alphaCleanup": "none; original alpha and antialias retained",
+        "perFrameBboxFit": false,
+        "poseDeformation": false
+      },
+      "holdOf": null,
+      "retainedFixedRegion": null
+    },
+    {
+      "index": 6,
+      "output": "frames/frame-06.png",
+      "actualSource": "source-drawings/adjacent-06.png",
+      "sourceMethod": "complete pose drawn by built-in image_gen",
+      "sourceId": "adjacent-06",
+      "crop": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "preparation": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "commonCanvas": 1024,
+        "finalCanvas": 256,
+        "uniformScaleToCommon": 0.8165869218500797,
+        "uniformScaleToFinal": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "alphaCleanup": "none; original alpha and antialias retained",
+        "perFrameBboxFit": false,
+        "poseDeformation": false
+      },
+      "holdOf": null,
+      "retainedFixedRegion": null
+    },
+    {
+      "index": 7,
+      "output": "frames/frame-07.png",
+      "actualSource": "source-drawings/canonical-neutral.png",
+      "sourceMethod": "unchanged approved neutral drawing hold",
+      "sourceId": "approved-static canonical",
+      "crop": [
+        0,
+        0,
+        1024,
+        1024
+      ],
+      "preparation": {
+        "sourceCanvas": [
+          1024,
+          1024
+        ],
+        "commonCanvas": 1024,
+        "finalCanvas": 256,
+        "uniformScaleToCommon": 1,
+        "uniformScaleToFinal": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "alphaCleanup": "none; original alpha and antialias retained",
+        "perFrameBboxFit": false,
+        "poseDeformation": false
+      },
+      "holdOf": 0,
+      "retainedFixedRegion": null
+    },
+    {
+      "index": 8,
+      "output": "frames/frame-08.png",
+      "actualSource": "source-drawings/canonical-neutral.png",
+      "sourceMethod": "unchanged approved neutral drawing hold",
+      "sourceId": "approved-static canonical",
+      "crop": [
+        0,
+        0,
+        1024,
+        1024
+      ],
+      "preparation": {
+        "sourceCanvas": [
+          1024,
+          1024
+        ],
+        "commonCanvas": 1024,
+        "finalCanvas": 256,
+        "uniformScaleToCommon": 1,
+        "uniformScaleToFinal": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "alphaCleanup": "none; original alpha and antialias retained",
+        "perFrameBboxFit": false,
+        "poseDeformation": false
+      },
+      "holdOf": 0,
+      "retainedFixedRegion": null
+    },
+    {
+      "index": 9,
+      "output": "frames/frame-09.png",
+      "actualSource": "source-drawings/adjacent-09.png",
+      "sourceMethod": "complete pose drawn by built-in image_gen",
+      "sourceId": "adjacent-09",
+      "crop": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "preparation": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "commonCanvas": 1024,
+        "finalCanvas": 256,
+        "uniformScaleToCommon": 0.8165869218500797,
+        "uniformScaleToFinal": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "alphaCleanup": "none; original alpha and antialias retained",
+        "perFrameBboxFit": false,
+        "poseDeformation": false
+      },
+      "holdOf": null,
+      "retainedFixedRegion": null
+    },
+    {
+      "index": 10,
+      "output": "frames/frame-10.png",
+      "actualSource": "source-drawings/adjacent-10.png",
+      "sourceMethod": "complete pose drawn by built-in image_gen",
+      "sourceId": "adjacent-10",
+      "crop": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "preparation": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "commonCanvas": 1024,
+        "finalCanvas": 256,
+        "uniformScaleToCommon": 0.8165869218500797,
+        "uniformScaleToFinal": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "alphaCleanup": "none; original alpha and antialias retained",
+        "perFrameBboxFit": false,
+        "poseDeformation": false
+      },
+      "holdOf": null,
+      "retainedFixedRegion": null
+    },
+    {
+      "index": 11,
+      "output": "frames/frame-11.png",
+      "actualSource": "source-drawings/adjacent-11.png",
+      "sourceMethod": "complete pose drawn by built-in image_gen",
+      "sourceId": "adjacent-11",
+      "crop": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "preparation": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "commonCanvas": 1024,
+        "finalCanvas": 256,
+        "uniformScaleToCommon": 0.8165869218500797,
+        "uniformScaleToFinal": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "alphaCleanup": "none; original alpha and antialias retained",
+        "perFrameBboxFit": false,
+        "poseDeformation": false
+      },
+      "holdOf": null,
+      "retainedFixedRegion": null
+    },
+    {
+      "index": 12,
+      "output": "frames/frame-12.png",
+      "actualSource": "source-drawings/adjacent-12.png",
+      "sourceMethod": "complete pose drawn by built-in image_gen",
+      "sourceId": "adjacent-12",
+      "crop": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "preparation": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "commonCanvas": 1024,
+        "finalCanvas": 256,
+        "uniformScaleToCommon": 0.8165869218500797,
+        "uniformScaleToFinal": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "alphaCleanup": "none; original alpha and antialias retained",
+        "perFrameBboxFit": false,
+        "poseDeformation": false
+      },
+      "holdOf": null,
+      "retainedFixedRegion": null
+    },
+    {
+      "index": 13,
+      "output": "frames/frame-13.png",
+      "actualSource": "source-drawings/key-13.png",
+      "sourceMethod": "complete pose drawn by built-in image_gen",
+      "sourceId": "key-13",
+      "crop": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "preparation": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "commonCanvas": 1024,
+        "finalCanvas": 256,
+        "uniformScaleToCommon": 0.8165869218500797,
+        "uniformScaleToFinal": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "alphaCleanup": "none; original alpha and antialias retained",
+        "perFrameBboxFit": false,
+        "poseDeformation": false
+      },
+      "holdOf": null,
+      "retainedFixedRegion": null
+    },
+    {
+      "index": 14,
+      "output": "frames/frame-14.png",
+      "actualSource": "source-drawings/adjacent-14.png",
+      "sourceMethod": "complete pose drawn by built-in image_gen",
+      "sourceId": "adjacent-14",
+      "crop": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "preparation": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "commonCanvas": 1024,
+        "finalCanvas": 256,
+        "uniformScaleToCommon": 0.8165869218500797,
+        "uniformScaleToFinal": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "alphaCleanup": "none; original alpha and antialias retained",
+        "perFrameBboxFit": false,
+        "poseDeformation": false
+      },
+      "holdOf": null,
+      "retainedFixedRegion": null
+    },
+    {
+      "index": 15,
+      "output": "frames/frame-15.png",
+      "actualSource": "source-drawings/adjacent-15.png",
+      "sourceMethod": "complete pose drawn by built-in image_gen",
+      "sourceId": "adjacent-15",
+      "crop": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "preparation": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "commonCanvas": 1024,
+        "finalCanvas": 256,
+        "uniformScaleToCommon": 0.8165869218500797,
+        "uniformScaleToFinal": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "alphaCleanup": "none; original alpha and antialias retained",
+        "perFrameBboxFit": false,
+        "poseDeformation": false
+      },
+      "holdOf": null,
+      "retainedFixedRegion": null
+    },
+    {
+      "index": 16,
+      "output": "frames/frame-16.png",
+      "actualSource": "source-drawings/adjacent-16.png",
+      "sourceMethod": "complete pose drawn by built-in image_gen",
+      "sourceId": "adjacent-16",
+      "crop": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "preparation": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "commonCanvas": 1024,
+        "finalCanvas": 256,
+        "uniformScaleToCommon": 0.8165869218500797,
+        "uniformScaleToFinal": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "alphaCleanup": "none; original alpha and antialias retained",
+        "perFrameBboxFit": false,
+        "poseDeformation": false
+      },
+      "holdOf": null,
+      "retainedFixedRegion": null
+    },
+    {
+      "index": 17,
+      "output": "frames/frame-17.png",
+      "actualSource": "source-drawings/adjacent-17.png",
+      "sourceMethod": "complete pose drawn by built-in image_gen",
+      "sourceId": "adjacent-17",
+      "crop": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "preparation": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "commonCanvas": 1024,
+        "finalCanvas": 256,
+        "uniformScaleToCommon": 0.8165869218500797,
+        "uniformScaleToFinal": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "alphaCleanup": "none; original alpha and antialias retained",
+        "perFrameBboxFit": false,
+        "poseDeformation": false
+      },
+      "holdOf": null,
+      "retainedFixedRegion": null
+    },
+    {
+      "index": 18,
+      "output": "frames/frame-18.png",
+      "actualSource": "source-drawings/adjacent-18.png",
+      "sourceMethod": "complete pose drawn by built-in image_gen",
+      "sourceId": "adjacent-18",
+      "crop": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "preparation": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "commonCanvas": 1024,
+        "finalCanvas": 256,
+        "uniformScaleToCommon": 0.8165869218500797,
+        "uniformScaleToFinal": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "alphaCleanup": "none; original alpha and antialias retained",
+        "perFrameBboxFit": false,
+        "poseDeformation": false
+      },
+      "holdOf": null,
+      "retainedFixedRegion": null
+    },
+    {
+      "index": 19,
+      "output": "frames/frame-19.png",
+      "actualSource": "source-drawings/canonical-neutral.png",
+      "sourceMethod": "unchanged approved neutral drawing hold",
+      "sourceId": "approved-static canonical",
+      "crop": [
+        0,
+        0,
+        1024,
+        1024
+      ],
+      "preparation": {
+        "sourceCanvas": [
+          1024,
+          1024
+        ],
+        "commonCanvas": 1024,
+        "finalCanvas": 256,
+        "uniformScaleToCommon": 1,
+        "uniformScaleToFinal": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "alphaCleanup": "none; original alpha and antialias retained",
+        "perFrameBboxFit": false,
+        "poseDeformation": false
+      },
+      "holdOf": 0,
+      "retainedFixedRegion": null
+    },
+    {
+      "index": 20,
+      "output": "frames/frame-20.png",
+      "actualSource": "source-drawings/canonical-neutral.png",
+      "sourceMethod": "unchanged approved neutral drawing hold",
+      "sourceId": "approved-static canonical",
+      "crop": [
+        0,
+        0,
+        1024,
+        1024
+      ],
+      "preparation": {
+        "sourceCanvas": [
+          1024,
+          1024
+        ],
+        "commonCanvas": 1024,
+        "finalCanvas": 256,
+        "uniformScaleToCommon": 1,
+        "uniformScaleToFinal": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "alphaCleanup": "none; original alpha and antialias retained",
+        "perFrameBboxFit": false,
+        "poseDeformation": false
+      },
+      "holdOf": 0,
+      "retainedFixedRegion": null
+    },
+    {
+      "index": 21,
+      "output": "frames/frame-21.png",
+      "actualSource": "source-drawings/canonical-neutral.png",
+      "sourceMethod": "unchanged approved neutral drawing hold",
+      "sourceId": "approved-static canonical",
+      "crop": [
+        0,
+        0,
+        1024,
+        1024
+      ],
+      "preparation": {
+        "sourceCanvas": [
+          1024,
+          1024
+        ],
+        "commonCanvas": 1024,
+        "finalCanvas": 256,
+        "uniformScaleToCommon": 1,
+        "uniformScaleToFinal": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "alphaCleanup": "none; original alpha and antialias retained",
+        "perFrameBboxFit": false,
+        "poseDeformation": false
+      },
+      "holdOf": 0,
+      "retainedFixedRegion": null
+    },
+    {
+      "index": 22,
+      "output": "frames/frame-22.png",
+      "actualSource": "source-drawings/canonical-neutral.png",
+      "sourceMethod": "unchanged approved neutral drawing hold",
+      "sourceId": "approved-static canonical",
+      "crop": [
+        0,
+        0,
+        1024,
+        1024
+      ],
+      "preparation": {
+        "sourceCanvas": [
+          1024,
+          1024
+        ],
+        "commonCanvas": 1024,
+        "finalCanvas": 256,
+        "uniformScaleToCommon": 1,
+        "uniformScaleToFinal": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "alphaCleanup": "none; original alpha and antialias retained",
+        "perFrameBboxFit": false,
+        "poseDeformation": false
+      },
+      "holdOf": 0,
+      "retainedFixedRegion": null
+    },
+    {
+      "index": 23,
+      "output": "frames/frame-23.png",
+      "actualSource": "source-drawings/canonical-neutral.png",
+      "sourceMethod": "unchanged approved neutral drawing hold",
+      "sourceId": "approved-static canonical",
+      "crop": [
+        0,
+        0,
+        1024,
+        1024
+      ],
+      "preparation": {
+        "sourceCanvas": [
+          1024,
+          1024
+        ],
+        "commonCanvas": 1024,
+        "finalCanvas": 256,
+        "uniformScaleToCommon": 1,
+        "uniformScaleToFinal": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "alphaCleanup": "none; original alpha and antialias retained",
+        "perFrameBboxFit": false,
+        "poseDeformation": false
+      },
+      "holdOf": 0,
+      "retainedFixedRegion": null
+    }
+  ],
+  "proof": {
+    "decoded96": "proof/decoded96-sequence.png",
+    "decoded256Junctions": "proof/decoded256-junctions.png",
+    "smallGif": "small-preview.gif",
+    "fullGif": "preview.gif"
+  },
+  "preparationCorrection": "A first package incorrectly cleared alpha during threshold cleanup. Source drawings were normal. That preparation operation was removed; original generated alpha is retained in final. Failed package preserved at ../candidate-before-alpha-fix/."
+}

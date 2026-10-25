@@ -1,0 +1,17 @@
+{
+  "key": "grass-fiber",
+  "kind": "adjacent-phase-candidate",
+  "phaseStart": 16,
+  "phaseEnd": 19,
+  "prompt": "Draw FOUR complete source animation cels for a narrow grass-fiber return-pose repair. This is actual fully drawn animation artwork, not a preview.\nOutput a square 1024x1024 PNG containing TWO columns by TWO rows of equal 512x512 cels, read row-major. Each cel contains one whole resource, complete attachments and stationary parts. No labels, gutters, borders or grid.\nImage 1 is the locked original clean grass-fiber design, material, exact ribbon count and proportions.\nImage 2 is checked frame 16, the immediate boundary. Copy that exact pose into first cell as the common camera/scale registration anchor. Its approved file will stay unchanged.\nImage 3 is the locked neutral return frame 20; the three newly drawn frames must approach THIS exact rest pose.\nImage 4 is a canonical layout reference, repeated at the same position and size in all four cels.\nRepair ONLY the settling of the free ribbon ends in frames17,18,19. Keep the U/C-SHAPED UPPER-RIGHT CURL intact and naturally attached in EVERY cel. Do NOT flatten, straighten, shorten, remove or turn that curl into a horizontal cut end. Preserve its loop shape from Image1. The free ends only relax by at most five pixels on a 1024px canvas, becoming nearly identical to neutral by frame19. Keep tied waist, body mass, all broad grass loops and bundle footprint fixed. No new movement, global camera shift, shrink or growth.\nCell1 upper-left global16: exact checked Image2 boundary pose.\nCell2 upper-right global17: subtle local relaxation toward neutral, approximately 44% of the tiny reaction.\nCell3 lower-left global18: closer to the original neutral curled tip, approximately22%.\nCell4 lower-right global19: almost exact original neutral pose, approximately6%; its upper-right curled hook MUST remain curved just like Image3 so transition to neutral20 is seamless.\nOriginal thin dark-teal contours, broad quiet smooth painterly shading and restrained highlights. Fixed center x=256 and grounded contact y=448 inside each 512px cell, canonical maximum span416px. Maintain one common scale and anchor across all cells. Truly transparent RGBA alpha outside resource contours. No backdrop, fog, glow, floor, cast shadow, speckle texture, tiny glints, characters, face, extra parts, text or frame. Draw every in-between fully; no blur or transformed cutouts.",
+  "references": [
+    "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png",
+    "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\16.png",
+    "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\20.png",
+    "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-guides\\return-layout-2x2.png"
+  ],
+  "cachePath": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-259702d6-7c1e-47d2-b869-4ead8874de60.png",
+  "sourcePath": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-sources\\repair-16-19.png",
+  "status": "pending-source-review",
+  "boundary": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\16.png"
+}

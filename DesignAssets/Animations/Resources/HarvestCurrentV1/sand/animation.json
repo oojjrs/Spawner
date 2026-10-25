@@ -1,0 +1,56 @@
+{
+  "source": "DesignAssets/Resources/sand.png",
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "frameCount": 7,
+  "columns": 4,
+  "rows": 2,
+  "durationsMs": [
+    650,
+    80,
+    80,
+    100,
+    100,
+    100,
+    390
+  ],
+  "poseOrder": [
+    0,
+    1,
+    2,
+    3,
+    2,
+    1,
+    0
+  ],
+  "cycleMs": 1500,
+  "loop": true,
+  "preview": "sand-harvest.webp",
+  "sheet": "harvest-sheet.png",
+  "runtimeIntegrated": false,
+  "sourceArtwork": [
+    "neutral.png",
+    "key-contact-source.png",
+    "adjacent-source.png"
+  ],
+  "preparation": {
+    "method": "Uniform source-cell scale; one translation from each stationary boundary; retain original pixels outside the complete local contact region. No generated motion, warping, interpolation or fades.",
+    "phaseRegistration": {
+      "meanAbsoluteError": 7.8844099044799805,
+      "dx": 0,
+      "dy": -1,
+      "commonScale": 0.9637084925066117,
+      "initialTranslation": [
+        4,
+        13
+      ],
+      "scaleReference": "Whole neutral boundary only; identical transform for both adjacent drawings."
+    },
+    "keyRegistration": {
+      "meanAbsoluteError": 3.557528018951416,
+      "dx": 0,
+      "dy": 0
+    },
+    "fixedRegionMask": "changing-region.png"
+  }
+}

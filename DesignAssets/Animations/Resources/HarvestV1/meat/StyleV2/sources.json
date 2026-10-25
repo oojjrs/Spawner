@@ -1,0 +1,402 @@
+{
+  "key": "meat",
+  "logicalFrameCount": 24,
+  "frameSize": 256,
+  "sheetColumns": 6,
+  "sheetRows": 4,
+  "frameMs": 100,
+  "durationMs": 2400,
+  "sourceMethod": "Actually drawn key poses and adjacent poses, with unchanged held rest poses. Supplementary operations only: full-canvas file sizing, alpha cleanup, shared group registration, and packing.",
+  "lockedOriginal": "source-drawings/original-art.png",
+  "frames": [
+    {
+      "index": 0,
+      "role": "held-neutral",
+      "source": "source-drawings/checked-00.png",
+      "motionOrigin": "approved static drawing held unchanged"
+    },
+    {
+      "index": 1,
+      "role": "drawn-adjacent-pose",
+      "source": "source-drawings/adjacent-source-00-03.png",
+      "sourceCell": 1,
+      "sourceRect": [
+        627,
+        0,
+        1254,
+        627
+      ],
+      "registrationPhase": 0
+    },
+    {
+      "index": 2,
+      "role": "drawn-adjacent-pose",
+      "source": "source-drawings/adjacent-source-00-03.png",
+      "sourceCell": 2,
+      "sourceRect": [
+        0,
+        627,
+        627,
+        1254
+      ],
+      "registrationPhase": 0
+    },
+    {
+      "index": 3,
+      "role": "checked-key",
+      "source": "source-drawings/checked-03.png"
+    },
+    {
+      "index": 4,
+      "role": "drawn-adjacent-pose",
+      "source": "source-drawings/adjacent-source-03-06.png",
+      "sourceCell": 1,
+      "sourceRect": [
+        627,
+        0,
+        1254,
+        627
+      ],
+      "registrationPhase": 1
+    },
+    {
+      "index": 5,
+      "role": "drawn-adjacent-pose",
+      "source": "source-drawings/adjacent-source-03-06.png",
+      "sourceCell": 2,
+      "sourceRect": [
+        0,
+        627,
+        627,
+        1254
+      ],
+      "registrationPhase": 1
+    },
+    {
+      "index": 6,
+      "role": "drawn-adjacent-pose",
+      "source": "source-drawings/adjacent-source-03-06.png",
+      "sourceCell": 3,
+      "sourceRect": [
+        627,
+        627,
+        1254,
+        1254
+      ],
+      "registrationPhase": 1
+    },
+    {
+      "index": 7,
+      "role": "held-neutral",
+      "source": "source-drawings/checked-00.png",
+      "motionOrigin": "approved static drawing held unchanged"
+    },
+    {
+      "index": 8,
+      "role": "held-neutral",
+      "source": "source-drawings/checked-00.png",
+      "motionOrigin": "approved static drawing held unchanged"
+    },
+    {
+      "index": 9,
+      "role": "drawn-adjacent-pose",
+      "source": "source-drawings/adjacent-source-08-13.png",
+      "sourceCell": 1,
+      "sourceRect": [
+        512,
+        0,
+        1024,
+        512
+      ],
+      "registrationPhase": 2
+    },
+    {
+      "index": 10,
+      "role": "drawn-adjacent-pose",
+      "source": "source-drawings/adjacent-source-08-13.png",
+      "sourceCell": 2,
+      "sourceRect": [
+        1024,
+        0,
+        1536,
+        512
+      ],
+      "registrationPhase": 2
+    },
+    {
+      "index": 11,
+      "role": "drawn-adjacent-pose",
+      "source": "source-drawings/adjacent-source-08-13.png",
+      "sourceCell": 3,
+      "sourceRect": [
+        0,
+        512,
+        512,
+        1024
+      ],
+      "registrationPhase": 2
+    },
+    {
+      "index": 12,
+      "role": "drawn-adjacent-pose",
+      "source": "source-drawings/adjacent-source-08-13.png",
+      "sourceCell": 4,
+      "sourceRect": [
+        512,
+        512,
+        1024,
+        1024
+      ],
+      "registrationPhase": 2
+    },
+    {
+      "index": 13,
+      "role": "drawn-adjacent-pose",
+      "source": "source-drawings/adjacent-source-08-13.png",
+      "sourceCell": 5,
+      "sourceRect": [
+        1024,
+        512,
+        1536,
+        1024
+      ],
+      "registrationPhase": 2
+    },
+    {
+      "index": 14,
+      "role": "checked-key",
+      "source": "source-drawings/checked-14.png"
+    },
+    {
+      "index": 15,
+      "role": "drawn-adjacent-pose",
+      "source": "source-drawings/adjacent-source-14-19.png",
+      "sourceCell": 1,
+      "sourceRect": [
+        512,
+        0,
+        1024,
+        512
+      ],
+      "registrationPhase": 3
+    },
+    {
+      "index": 16,
+      "role": "drawn-adjacent-pose",
+      "source": "source-drawings/adjacent-source-14-19.png",
+      "sourceCell": 2,
+      "sourceRect": [
+        1024,
+        0,
+        1536,
+        512
+      ],
+      "registrationPhase": 3
+    },
+    {
+      "index": 17,
+      "role": "drawn-adjacent-pose",
+      "source": "source-drawings/adjacent-source-14-19.png",
+      "sourceCell": 3,
+      "sourceRect": [
+        0,
+        512,
+        512,
+        1024
+      ],
+      "registrationPhase": 3
+    },
+    {
+      "index": 18,
+      "role": "drawn-adjacent-pose",
+      "source": "source-drawings/adjacent-source-14-19.png",
+      "sourceCell": 4,
+      "sourceRect": [
+        512,
+        512,
+        1024,
+        1024
+      ],
+      "registrationPhase": 3
+    },
+    {
+      "index": 19,
+      "role": "held-neutral",
+      "source": "source-drawings/checked-00.png",
+      "motionOrigin": "approved static drawing held unchanged"
+    },
+    {
+      "index": 20,
+      "role": "held-neutral",
+      "source": "source-drawings/checked-00.png",
+      "motionOrigin": "approved static drawing held unchanged"
+    },
+    {
+      "index": 21,
+      "role": "held-neutral",
+      "source": "source-drawings/checked-00.png",
+      "motionOrigin": "approved static drawing held unchanged"
+    },
+    {
+      "index": 22,
+      "role": "held-neutral",
+      "source": "source-drawings/checked-00.png",
+      "motionOrigin": "approved static drawing held unchanged"
+    },
+    {
+      "index": 23,
+      "role": "held-neutral",
+      "source": "source-drawings/checked-00.png",
+      "motionOrigin": "approved static drawing held unchanged"
+    }
+  ],
+  "phases": [
+    {
+      "source": "source-drawings/adjacent-source-00-03.png",
+      "indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "selected": [
+        1,
+        2
+      ],
+      "columns": 2,
+      "rows": 2,
+      "checkedBoundaryIndex": 0,
+      "commonUniformScale": 0.9002541398626663,
+      "commonOffset": [
+        11.867215957716041,
+        6.138498153234735
+      ],
+      "boundaryScaleRatios": [
+        0.8888888888888888,
+        0.9117647058823529
+      ],
+      "prompt": "Draw a LIMITED GROUP of 4 actual complete adjacent animation cels for the meat resource, exactly 2 columns by 2 rows, read left to right then next row. FIRST is the locked original identity. SECOND is the exact transparent cell-layout and registration guide only. THIRD is the checked starting key pose; FOURTH is the checked destination key pose. Preserve those key drawings and connect them naturally with actually drawn closely spaced poses; do not redesign, zoom or interpolate cutouts. Every cel is a whole resource with the SAME shared scale, camera, broad clean painted colors, upper-left light and outlines as those key references. Keep all fixed base landmarks and major stationary forms in the same cell coordinates; the layout guide fixes sprite size and ground at y87.5 percent within each square cell. Motion plan: Only the small front meat chunk gently presses inward by up to 2 percent; the large rear chunk and bottom contact remain fixed. Keep the fat rim and two-chunk identity. Exact order and small reaction intensity: cell1=frame00, reaction 0.000 held rest; cell2=frame01, reaction 0.122; cell3=frame02, reaction 0.397; cell4=frame03, reaction 0.618. Any displayed accepted boundary pose must match its supplied key; only the new adjacent poses will be used, the original approved keys will remain intact. The whole stack must never shrink, grow, bounce or slide. No extra pieces, hairs, fragmented highlights, backgrounds, ground glow, particles, trails, text, grids or visible cell dividers. Pure transparent background and generous consistent margins. Draw all complete silhouettes and overlaps rather than pasting or fading parts.",
+      "referencePaths": [
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\meat\\style-reference.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\meat\\adjacent-layout-00-03.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\meat\\locked-keys\\00.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\meat\\locked-keys\\03.png"
+      ],
+      "generationCache": "D:\\.codex\\generated_images\\01a1693b-eb44-7172-8985-5dd50c2a1f7b\\exec-902b4e14-1ef2-4536-8af9-3bbd25f4ed80.png",
+      "operations": "One fixed registration derived from the same checked boundary is shared by every cel in this source group; no per-frame bounds fitting or motion synthesis."
+    },
+    {
+      "source": "source-drawings/adjacent-source-03-06.png",
+      "indices": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "selected": [
+        4,
+        5,
+        6
+      ],
+      "columns": 2,
+      "rows": 2,
+      "checkedBoundaryIndex": 3,
+      "commonUniformScale": 0.9724278257781791,
+      "commonOffset": [
+        3.0430243875039906,
+        5.203739199909705
+      ],
+      "boundaryScaleRatios": [
+        0.9506726457399103,
+        0.9946808510638298
+      ],
+      "prompt": "Draw a LIMITED GROUP of 4 actual complete adjacent animation cels for the meat resource, exactly 2 columns by 2 rows, read left to right then next row. FIRST is the locked original identity. SECOND is the exact transparent cell-layout and registration guide only. THIRD is the checked starting key pose; FOURTH is the checked destination key pose. Preserve those key drawings and connect them naturally with actually drawn closely spaced poses; do not redesign, zoom or interpolate cutouts. Every cel is a whole resource with the SAME shared scale, camera, broad clean painted colors, upper-left light and outlines as those key references. Keep all fixed base landmarks and major stationary forms in the same cell coordinates; the layout guide fixes sprite size and ground at y87.5 percent within each square cell. Motion plan: Only the small front meat chunk gently presses inward by up to 2 percent; the large rear chunk and bottom contact remain fixed. Keep the fat rim and two-chunk identity. Exact order and small reaction intensity: cell1=frame03, reaction 0.618; cell2=frame04, reaction 0.618; cell3=frame05, reaction 0.397; cell4=frame06, reaction 0.122. Any displayed accepted boundary pose must match its supplied key; only the new adjacent poses will be used, the original approved keys will remain intact. The whole stack must never shrink, grow, bounce or slide. No extra pieces, hairs, fragmented highlights, backgrounds, ground glow, particles, trails, text, grids or visible cell dividers. Pure transparent background and generous consistent margins. Draw all complete silhouettes and overlaps rather than pasting or fading parts.",
+      "referencePaths": [
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\meat\\style-reference.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\meat\\adjacent-layout-03-06.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\meat\\locked-keys\\03.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\meat\\locked-keys\\19.png"
+      ],
+      "generationCache": "D:\\.codex\\generated_images\\01a1693b-eb44-7172-8985-5dd50c2a1f7b\\exec-278ec433-f0f7-406b-849d-7364ea289a50.png",
+      "operations": "One fixed registration derived from the same checked boundary is shared by every cel in this source group; no per-frame bounds fitting or motion synthesis."
+    },
+    {
+      "source": "source-drawings/adjacent-source-08-13.png",
+      "indices": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "selected": [
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "columns": 3,
+      "rows": 2,
+      "checkedBoundaryIndex": 8,
+      "commonUniformScale": 0.9905211130872972,
+      "commonOffset": [
+        1.2132975248259612,
+        2.1232706684454286
+      ],
+      "boundaryScaleRatios": [
+        0.9811320754716981,
+        1
+      ],
+      "prompt": "Draw a LIMITED GROUP of 6 actual complete adjacent animation cels for the meat resource, exactly 3 columns by 2 rows, read left to right then next row. FIRST is the locked original identity. SECOND is the exact transparent cell-layout and registration guide only. THIRD is the checked starting key pose; FOURTH is the checked destination key pose. Preserve those key drawings and connect them naturally with actually drawn closely spaced poses; do not redesign, zoom or interpolate cutouts. Every cel is a whole resource with the SAME shared scale, camera, broad clean painted colors, upper-left light and outlines as those key references. Keep all fixed base landmarks and major stationary forms in the same cell coordinates; the layout guide fixes sprite size and ground at y87.5 percent within each square cell. Motion plan: Only the small front meat chunk gently presses inward by up to 2 percent; the large rear chunk and bottom contact remain fixed. Keep the fat rim and two-chunk identity. Exact order and small reaction intensity: cell1=frame08, reaction 0.000 held rest; cell2=frame09, reaction 0.079; cell3=frame10, reaction 0.292; cell4=frame11, reaction 0.571; cell5=frame12, reaction 0.827; cell6=frame13, reaction 0.980. Any displayed accepted boundary pose must match its supplied key; only the new adjacent poses will be used, the original approved keys will remain intact. The whole stack must never shrink, grow, bounce or slide. No extra pieces, hairs, fragmented highlights, backgrounds, ground glow, particles, trails, text, grids or visible cell dividers. Pure transparent background and generous consistent margins. Draw all complete silhouettes and overlaps rather than pasting or fading parts.",
+      "referencePaths": [
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\meat\\style-reference.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\meat\\adjacent-layout-08-13.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\meat\\locked-keys\\00.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\meat\\locked-keys\\14.png"
+      ],
+      "generationCache": "D:\\.codex\\generated_images\\01a1693b-eb44-7172-8985-5dd50c2a1f7b\\exec-3dcd0284-5527-4b4b-a3fd-b459fe1f746a.png",
+      "operations": "One fixed registration derived from the same checked boundary is shared by every cel in this source group; no per-frame bounds fitting or motion synthesis."
+    },
+    {
+      "source": "source-drawings/adjacent-source-14-19.png",
+      "indices": [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "selected": [
+        15,
+        16,
+        17,
+        18
+      ],
+      "columns": 3,
+      "rows": 2,
+      "checkedBoundaryIndex": 14,
+      "commonUniformScale": 0.968393199133417,
+      "commonOffset": [
+        2.5930807122224877,
+        2.2379573984474916
+      ],
+      "boundaryScaleRatios": [
+        0.9680365296803652,
+        0.96875
+      ],
+      "prompt": "Draw a LIMITED GROUP of 6 actual complete adjacent animation cels for the meat resource, exactly 3 columns by 2 rows, read left to right then next row. FIRST is the locked original identity. SECOND is the exact transparent cell-layout and registration guide only. THIRD is the checked starting key pose; FOURTH is the checked destination key pose. Preserve those key drawings and connect them naturally with actually drawn closely spaced poses; do not redesign, zoom or interpolate cutouts. Every cel is a whole resource with the SAME shared scale, camera, broad clean painted colors, upper-left light and outlines as those key references. Keep all fixed base landmarks and major stationary forms in the same cell coordinates; the layout guide fixes sprite size and ground at y87.5 percent within each square cell. Motion plan: Only the small front meat chunk gently presses inward by up to 2 percent; the large rear chunk and bottom contact remain fixed. Keep the fat rim and two-chunk identity. Exact order and small reaction intensity: cell1=frame14, reaction 0.980; cell2=frame15, reaction 0.827; cell3=frame16, reaction 0.571; cell4=frame17, reaction 0.292; cell5=frame18, reaction 0.079; cell6=frame19, reaction 0.000 held rest. Any displayed accepted boundary pose must match its supplied key; only the new adjacent poses will be used, the original approved keys will remain intact. The whole stack must never shrink, grow, bounce or slide. No extra pieces, hairs, fragmented highlights, backgrounds, ground glow, particles, trails, text, grids or visible cell dividers. Pure transparent background and generous consistent margins. Draw all complete silhouettes and overlaps rather than pasting or fading parts.",
+      "referencePaths": [
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\meat\\style-reference.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\meat\\adjacent-layout-14-19.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\meat\\locked-keys\\14.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\meat\\locked-keys\\19.png"
+      ],
+      "generationCache": "D:\\.codex\\generated_images\\01a1693b-eb44-7172-8985-5dd50c2a1f7b\\exec-a897c44e-64c6-41fc-b79a-4c658d9865e6.png",
+      "operations": "One fixed registration derived from the same checked boundary is shared by every cel in this source group; no per-frame bounds fitting or motion synthesis."
+    }
+  ],
+  "stationaryRetention": null
+}

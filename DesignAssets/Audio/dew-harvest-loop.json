@@ -1,0 +1,23 @@
+{
+  "provider": "ElevenLabs",
+  "endpoint": "https://api.elevenlabs.io/v1/sound-generation",
+  "request": {
+    "text": "Close-up foley of a small tuft of fine grass blades gently swaying back and forth. Thin delicate leafy shh-shh swishes as soft blades brush and slide against each other, light flexible rustling in small irregular pulses. Quiet intimate miniature game scale, dry recording. No water drops, liquid, splashes, crunchy dry litter, branches cracking, strong wind, birds, insects, footsteps, voices, music or reverb.",
+    "duration_seconds": 4,
+    "prompt_influence": 0.8,
+    "loop": true,
+    "output_format": "mp3_44100_128",
+    "model_id": "eleven_text_to_sound_v2",
+    "request_options": {
+      "max_retries": 0
+    }
+  },
+  "status": "completed",
+  "generated_at": "2026-10-25T06:54:27.949420+00:00",
+  "input_sources": [],
+  "processing": null,
+  "approved": true,
+  "asset": "DesignAssets/Audio/dew-harvest-loop.mp3",
+  "bytes": 65244,
+  "sha256": "c12ad4748a5d48b5d0ab2002f91d821557ba2ccaa9ade4fe2746007cae9599de"
+}

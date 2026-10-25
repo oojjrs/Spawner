@@ -1,0 +1,53 @@
+{
+  "status": "applied-to-game",
+  "resourceCount": 4,
+  "totalAlignedResources": 24,
+  "updatedHarvestSheets": 3,
+  "logicalAnimationFrames": 72,
+  "unitArtChanged": false,
+  "sharedHarvestAliases": {
+    "tree-fruit": "berry-bush"
+  },
+  "staticMethod": "built-in image_gen",
+  "animationMethod": "actually drawn key and adjacent poses; supplementary common registration and fixed-region retention only",
+  "items": [
+    {
+      "key": "tree-fruit",
+      "name": "나무 열매",
+      "source": "DesignAssets/Foods/food-berry-bush.png",
+      "before": "Before/tree-fruit.png",
+      "after": "After/tree-fruit.png",
+      "harvestSheet": "DesignAssets/Animations/Resources/HarvestV1/berry-bush/sheet.png"
+    },
+    {
+      "key": "berry-bush",
+      "name": "열매 덤불",
+      "source": "DesignAssets/FoodConcepts/v1/food-berry-bush.png",
+      "before": "Before/berry-bush.png",
+      "after": "After/berry-bush.png",
+      "harvestSheet": "DesignAssets/Animations/Resources/HarvestV1/berry-bush/sheet.png"
+    },
+    {
+      "key": "nutrient-moss",
+      "name": "영양 이끼",
+      "source": "DesignAssets/FoodConcepts/v1/food-nutrient-moss.png",
+      "before": "Before/nutrient-moss.png",
+      "after": "After/nutrient-moss.png",
+      "harvestSheet": "DesignAssets/Animations/Resources/HarvestV1/nutrient-moss/sheet.png"
+    },
+    {
+      "key": "tree-sap",
+      "name": "수액",
+      "source": "DesignAssets/ResourceConcepts/v1/resource-tree-sap.png",
+      "before": "Before/tree-sap.png",
+      "after": "After/tree-sap.png",
+      "harvestSheet": "DesignAssets/Animations/Resources/HarvestV1/tree-sap/sheet.png"
+    }
+  ],
+  "previews": {
+    "comparison": "comparison-sheet.png",
+    "unitContext": "unit-resource-context.png",
+    "harvest": "../../Animations/Resources/resource-harvest-overview.webp",
+    "delivery": "../../Animations/Resources/resource-carry-delivery-overview.webp"
+  }
+}

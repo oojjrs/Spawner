@@ -1,0 +1,107 @@
+{
+  "provider": "built-in image_gen",
+  "staticPrompts": [
+    {
+      "key": "tree-fruit",
+      "name": "나무 열매",
+      "image": "DesignAssets/Foods/food-berry-bush.png",
+      "animation": {
+        "resourceType": "tree-fruit",
+        "image": "DesignAssets/Animations/Resources/HarvestV1/berry-bush/sheet.png",
+        "frameSize": 256,
+        "columns": 6,
+        "contactFrame": 8,
+        "settleFrame": 19,
+        "postSeconds": 0.6,
+        "pivotX": 128,
+        "pivotY": 224,
+        "viewSize": 208
+      },
+      "prompt": "Use case: precise-object-edit. Edit ONLY the FIRST reference, an existing resource sprite for a cute painted woodland strategy game. The SECOND reference is the approved basic sprout unit and is a STRICT detail-density and shading reference, never a subject to insert. The resource must now be nearly as simple as this basic unit: few broad shapes, rounded clean contour, broad soft light/shadow, subdued highlights, no microtexture. Keep the wide low triangular arrangement of THREE red raspberry fruits in a leafy patch. Rebuild EACH fruit as ONE simple softly scalloped rounded volume with just 5 or 6 broad merged lobes and ONE broad matte highlight for the entire fruit, not dozens of separately shaded beads. Keep only about FIVE large simple leaves around the three fruits. Remove tiny leaves, serration teeth, leaf veins, fine creases and small glints. The three fruits remain red and recognizable as berries; they are not apples or smooth grapes. Preserve the resource identity, three-quarter view, upper-left lighting, general footprint, dark muted green-brown contour weight and hand-painted game palette. No faces, eyes, characters, text, grid, particles, new props or ground. A single complete STATIC source sprite, centered with clear transparent margin. Truly transparent background. Draw the simplified source artwork itself; not a comparison or mockup.",
+      "references": [
+        "H:/Spawner/DesignAssets/Foods/food-berry-bush.png",
+        "H:/Spawner/DesignAssets/Units/starter-sprout-bean.png"
+      ]
+    },
+    {
+      "key": "berry-bush",
+      "name": "열매 덤불",
+      "image": "DesignAssets/FoodConcepts/v1/food-berry-bush.png",
+      "animation": {
+        "resourceType": "berry-bush",
+        "image": "DesignAssets/Animations/Resources/HarvestV1/berry-bush/sheet.png",
+        "frameSize": 256,
+        "columns": 6,
+        "contactFrame": 8,
+        "settleFrame": 19,
+        "postSeconds": 0.6,
+        "pivotX": 128,
+        "pivotY": 224,
+        "viewSize": 208
+      },
+      "prompt": "Use case: precise-object-edit. Edit ONLY the FIRST reference, an existing resource sprite for a cute painted woodland strategy game. The SECOND reference is the approved basic sprout unit and is a STRICT detail-density and shading reference, never a subject to insert. The resource must now be nearly as simple as this basic unit: few broad shapes, rounded clean contour, broad soft light/shadow, subdued highlights, no microtexture. Keep the upright branching silhouette and THREE staggered red raspberry fruits attached to the visible main stem. Rebuild EACH fruit as ONE simple softly scalloped rounded volume with just 5 or 6 broad merged lobes and ONE broad matte highlight for the whole fruit, not dozens of separate glossy beads. Use only FOUR or FIVE broad simple leaves. Remove tiny leaves, sawtooth serrations, leaf veins and detailed stem ridges. Preserve the readable upright bush composition and main attachment points. Preserve the resource identity, three-quarter view, upper-left lighting, general footprint, dark muted green-brown contour weight and hand-painted game palette. No faces, eyes, characters, text, grid, particles, new props or ground. A single complete STATIC source sprite, centered with clear transparent margin. Truly transparent background. Draw the simplified source artwork itself; not a comparison or mockup.",
+      "references": [
+        "H:/Spawner/DesignAssets/FoodConcepts/v1/food-berry-bush.png",
+        "H:/Spawner/DesignAssets/Units/starter-sprout-bean.png"
+      ]
+    },
+    {
+      "key": "nutrient-moss",
+      "name": "영양 이끼",
+      "image": "DesignAssets/FoodConcepts/v1/food-nutrient-moss.png",
+      "animation": {
+        "resourceType": "nutrient-moss",
+        "image": "DesignAssets/Animations/Resources/HarvestV1/nutrient-moss/sheet.png",
+        "frameSize": 256,
+        "columns": 6,
+        "contactFrame": 8,
+        "settleFrame": 19,
+        "postSeconds": 0.6,
+        "pivotX": 128,
+        "pivotY": 224,
+        "viewSize": 208
+      },
+      "prompt": "Use case: precise-object-edit. Edit ONLY the FIRST reference, an existing resource sprite for a cute painted woodland strategy game. The SECOND reference is the approved basic sprout unit and is a STRICT detail-density and shading reference, never a subject to insert. The resource must now be nearly as simple as this basic unit: few broad shapes, rounded clean contour, broad soft light/shadow, subdued highlights, no microtexture. Keep the low broad rounded green nutrient-moss cushion. Greatly reduce its internal shape count: only THREE broad soft moss mounds, about FOUR simple rounded short moss shoots, and THREE amber nutrient beads nested among them. Green mounds are smooth pillows with just one light plane and one shadow plane each. Nutrient beads have a soft gentle highlight, no tiny white glare. Remove the dense carpet of individual leaflets, repeated fine lobes, veins, fiber texture, speckles and tiny shoots. It must still read as a low moss patch with amber nutrients, not a flowering plant or stone pile. Preserve the resource identity, three-quarter view, upper-left lighting, general footprint, dark muted green-brown contour weight and hand-painted game palette. No faces, eyes, characters, text, grid, particles, new props or ground. A single complete STATIC source sprite, centered with clear transparent margin. Truly transparent background. Draw the simplified source artwork itself; not a comparison or mockup.",
+      "references": [
+        "H:/Spawner/DesignAssets/FoodConcepts/v1/food-nutrient-moss.png",
+        "H:/Spawner/DesignAssets/Units/starter-sprout-bean.png"
+      ]
+    },
+    {
+      "key": "tree-sap",
+      "name": "수액",
+      "image": "DesignAssets/ResourceConcepts/v1/resource-tree-sap.png",
+      "animation": {
+        "resourceType": "tree-sap",
+        "image": "DesignAssets/Animations/Resources/HarvestV1/tree-sap/sheet.png",
+        "frameSize": 256,
+        "columns": 6,
+        "contactFrame": 9,
+        "settleFrame": 19,
+        "postSeconds": 0.6,
+        "pivotX": 128,
+        "pivotY": 224,
+        "viewSize": 208
+      },
+      "prompt": "Use case: precise-object-edit. Edit ONLY the FIRST reference, an existing resource sprite for a cute painted woodland strategy game. The SECOND reference is the approved basic sprout unit and is a STRICT detail-density and shading reference, never a subject to insert. The resource must now be nearly as simple as this basic unit: few broad shapes, rounded clean contour, broad soft light/shadow, subdued highlights, no microtexture. Keep the leaning upright brown bark/log shape with golden sap attached to it. Simplify the log into THREE large soft shaded wood planes and just TWO broad structural splits; remove all small bark chips, small facets, scratches, grain strokes, moss flecks and small surrounding stones. Keep only TWO simple broad green leaves at the base. Use ONE large attached hanging amber sap drop and ONE simple rounded amber pool at the bottom. Remove the extra little hanging drops. Give each sap form only ONE broad soft highlight; no multi-point glints, glassy reflections or marbled ripples. Preserve the original leaning direction, warm wood/amber palette and small grounded footprint. Preserve the resource identity, three-quarter view, upper-left lighting, general footprint, dark muted green-brown contour weight and hand-painted game palette. No faces, eyes, characters, text, grid, particles, new props or ground. A single complete STATIC source sprite, centered with clear transparent margin. Truly transparent background. Draw the simplified source artwork itself; not a comparison or mockup.",
+      "references": [
+        "H:/Spawner/DesignAssets/ResourceConcepts/v1/resource-tree-sap.png",
+        "H:/Spawner/DesignAssets/Units/starter-sprout-bean.png"
+      ]
+    }
+  ],
+  "animationSources": [
+    {
+      "key": "berry-bush",
+      "sourceManifest": "DesignAssets/Animations/Resources/HarvestV1/berry-bush/StyleV3/sources.json"
+    },
+    {
+      "key": "nutrient-moss",
+      "sourceManifest": "DesignAssets/Animations/Resources/HarvestV1/nutrient-moss/StyleV3/sources.json"
+    },
+    {
+      "key": "tree-sap",
+      "sourceManifest": "DesignAssets/Animations/Resources/HarvestV1/tree-sap/StyleV3/sources.json"
+    }
+  ]
+}

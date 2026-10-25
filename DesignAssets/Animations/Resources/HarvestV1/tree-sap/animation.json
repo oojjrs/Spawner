@@ -17,13 +17,6 @@
     128,
     224
   ],
-  "parts": [
-    "parts/base.png",
-    "parts/attached-drop.png"
-  ],
-  "fixedParts": [
-    "parts/base.png"
-  ],
   "runtimeIntegrated": true,
   "runtime": {
     "contactFrame": 9,
@@ -32,20 +25,7 @@
     "loop": false,
     "method": "harvest-sheet"
   },
-  "sourceMethod": "생산용 숨은 면을 imagegen으로 완전히 복원하고 독립 원화 파츠만 국소 반응",
-  "movingParts": [
-    "parts/attached-drop.png"
-  ],
-  "fixedAnchors": [
-    {
-      "part": "parts/base.png",
-      "role": "고정된 원화와 지면",
-      "position": [
-        128,
-        224
-      ]
-    }
-  ],
+  "sourceMethod": "확인한 핵심 포즈를 유지하며 인접 포즈를 실제 원화로 제작한다. 출력 준비, 공통 정렬 및 선택적 정지 영역 보완의 세부 내역은 drawingSources에 기록한다.",
   "neutralFrames": [
     0,
     8,
@@ -56,5 +36,40 @@
     22,
     23
   ],
-  "runtimePreview": "runtime.gif"
+  "runtimePreview": "runtime.gif",
+  "mode": "drawn-poses",
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "pivot": [
+    128,
+    224
+  ],
+  "frameFiles": [
+    "StyleV3/frames/frame-00.png",
+    "StyleV3/frames/frame-01.png",
+    "StyleV3/frames/frame-02.png",
+    "StyleV3/frames/frame-03.png",
+    "StyleV3/frames/frame-04.png",
+    "StyleV3/frames/frame-05.png",
+    "StyleV3/frames/frame-06.png",
+    "StyleV3/frames/frame-07.png",
+    "StyleV3/frames/frame-08.png",
+    "StyleV3/frames/frame-09.png",
+    "StyleV3/frames/frame-10.png",
+    "StyleV3/frames/frame-11.png",
+    "StyleV3/frames/frame-12.png",
+    "StyleV3/frames/frame-13.png",
+    "StyleV3/frames/frame-14.png",
+    "StyleV3/frames/frame-15.png",
+    "StyleV3/frames/frame-16.png",
+    "StyleV3/frames/frame-17.png",
+    "StyleV3/frames/frame-18.png",
+    "StyleV3/frames/frame-19.png",
+    "StyleV3/frames/frame-20.png",
+    "StyleV3/frames/frame-21.png",
+    "StyleV3/frames/frame-22.png",
+    "StyleV3/frames/frame-23.png"
+  ],
+  "drawingSources": "StyleV3/sources.json",
+  "approvedStyleSource": "DesignAssets/ResourceStyleStudies/v3/After/tree-sap.png"
 }

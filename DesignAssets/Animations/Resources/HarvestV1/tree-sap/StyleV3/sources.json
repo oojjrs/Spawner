@@ -1,0 +1,705 @@
+{
+  "key": "tree-sap",
+  "approvedOriginal": "source-drawings/root-approved-original.png",
+  "canonical": "source-drawings/canonical-reference.png",
+  "sourceCreation": "16 complete individually imagegen-drawn motion cels;8 exact neutral hold slots. Limited grouped trials rejected and retained only in task scratch.",
+  "runtimeTransforms": false,
+  "frames": [
+    {
+      "index": 0,
+      "kind": "held-canonical-neutral",
+      "hold": true,
+      "actualSource": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\canonical-reference.png",
+      "sourceCopy": "source-drawings/canonical-reference.png",
+      "crop": null,
+      "registration": {
+        "sharedCanvasScale": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "perFrameBboxFit": false
+      },
+      "retention": "Whole canonical neutral is retained unchanged at this contract hold slot."
+    },
+    {
+      "index": 1,
+      "kind": "complete-individually-drawn-adjacent",
+      "hold": false,
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-5320f2c4-c1dd-4c58-9be3-e295299fbd0f.png",
+      "taskOwnedRaw": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\adjacent-01.png",
+      "sourceCopy": "source-drawings/adjacent-01.png",
+      "generationRecord": "source-drawings/generation-records.json",
+      "crop": null,
+      "registration": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "sharedCanvasScale": 0.20414673046251994,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "fixedLandmark": "Center between stationary left/right exterior bounds plus lowest fixed wood/pool contact. Drop motion stays inside these exterior extents.",
+        "perFrameBboxFit": false,
+        "perFrameScaleFit": false,
+        "widthExtentBeforeRegistration": 196,
+        "heightExtentBeforeRegistration": 200,
+        "supplement": "Only small whole-drawing translation; every source uses the same whole-canvas 1254-to256 scale. No per-pose scale/warp/shape interpolation."
+      },
+      "retentionMask": "preparation/drop-footprint-01.png",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retention": "Canonical wood, leaves, upper sap flow/attachment and lower pool stay byte-identical at fixed coordinates outside the union of actual/canonical lower hanging-drop footprints. Whole actually drawn drop body, broad highlight, outline and newly exposed bark/occlusion pixels within that footprint are retained in place. The fixed neck above y106 remains canonical. No moving part translation, deformation, interpolation or fade."
+    },
+    {
+      "index": 2,
+      "kind": "complete-individually-drawn-adjacent",
+      "hold": false,
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-ff41f46a-dfad-410c-afcb-43cd808c7158.png",
+      "taskOwnedRaw": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\adjacent-02.png",
+      "sourceCopy": "source-drawings/adjacent-02.png",
+      "generationRecord": "source-drawings/generation-records.json",
+      "crop": null,
+      "registration": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "sharedCanvasScale": 0.20414673046251994,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "fixedLandmark": "Center between stationary left/right exterior bounds plus lowest fixed wood/pool contact. Drop motion stays inside these exterior extents.",
+        "perFrameBboxFit": false,
+        "perFrameScaleFit": false,
+        "widthExtentBeforeRegistration": 196,
+        "heightExtentBeforeRegistration": 200,
+        "supplement": "Only small whole-drawing translation; every source uses the same whole-canvas 1254-to256 scale. No per-pose scale/warp/shape interpolation."
+      },
+      "retentionMask": "preparation/drop-footprint-02.png",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retention": "Canonical wood, leaves, upper sap flow/attachment and lower pool stay byte-identical at fixed coordinates outside the union of actual/canonical lower hanging-drop footprints. Whole actually drawn drop body, broad highlight, outline and newly exposed bark/occlusion pixels within that footprint are retained in place. The fixed neck above y106 remains canonical. No moving part translation, deformation, interpolation or fade."
+    },
+    {
+      "index": 3,
+      "kind": "complete-individually-drawn-adjacent",
+      "hold": false,
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-d5dc7690-9c73-4339-9873-ca26cdd4576c.png",
+      "taskOwnedRaw": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\adjacent-03.png",
+      "sourceCopy": "source-drawings/adjacent-03.png",
+      "generationRecord": "source-drawings/generation-records.json",
+      "crop": null,
+      "registration": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "sharedCanvasScale": 0.20414673046251994,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "fixedLandmark": "Center between stationary left/right exterior bounds plus lowest fixed wood/pool contact. Drop motion stays inside these exterior extents.",
+        "perFrameBboxFit": false,
+        "perFrameScaleFit": false,
+        "widthExtentBeforeRegistration": 196,
+        "heightExtentBeforeRegistration": 200,
+        "supplement": "Only small whole-drawing translation; every source uses the same whole-canvas 1254-to256 scale. No per-pose scale/warp/shape interpolation."
+      },
+      "retentionMask": "preparation/drop-footprint-03.png",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retention": "Canonical wood, leaves, upper sap flow/attachment and lower pool stay byte-identical at fixed coordinates outside the union of actual/canonical lower hanging-drop footprints. Whole actually drawn drop body, broad highlight, outline and newly exposed bark/occlusion pixels within that footprint are retained in place. The fixed neck above y106 remains canonical. No moving part translation, deformation, interpolation or fade."
+    },
+    {
+      "index": 4,
+      "kind": "complete-individually-drawn-key",
+      "hold": false,
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-49a582f3-f881-49dc-8a66-25ac67263615.png",
+      "taskOwnedRaw": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\key-04.png",
+      "sourceCopy": "source-drawings/key-04.png",
+      "generationRecord": "source-drawings/generation-records.json",
+      "crop": null,
+      "registration": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "sharedCanvasScale": 0.20414673046251994,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "fixedLandmark": "Center between stationary left/right exterior bounds plus lowest fixed wood/pool contact. Drop motion stays inside these exterior extents.",
+        "perFrameBboxFit": false,
+        "perFrameScaleFit": false,
+        "widthExtentBeforeRegistration": 196,
+        "heightExtentBeforeRegistration": 200,
+        "supplement": "Only small whole-drawing translation; every source uses the same whole-canvas 1254-to256 scale. No per-pose scale/warp/shape interpolation."
+      },
+      "retentionMask": "preparation/drop-footprint-04.png",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retention": "Canonical wood, leaves, upper sap flow/attachment and lower pool stay byte-identical at fixed coordinates outside the union of actual/canonical lower hanging-drop footprints. Whole actually drawn drop body, broad highlight, outline and newly exposed bark/occlusion pixels within that footprint are retained in place. The fixed neck above y106 remains canonical. No moving part translation, deformation, interpolation or fade."
+    },
+    {
+      "index": 5,
+      "kind": "complete-individually-drawn-adjacent",
+      "hold": false,
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-9344b072-705b-41db-aca4-6c6eba5307a6.png",
+      "taskOwnedRaw": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\adjacent-05.png",
+      "sourceCopy": "source-drawings/adjacent-05.png",
+      "generationRecord": "source-drawings/generation-records.json",
+      "crop": null,
+      "registration": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "sharedCanvasScale": 0.20414673046251994,
+        "anchorOffset": [
+          1,
+          -2
+        ],
+        "fixedLandmark": "Center between stationary left/right exterior bounds plus lowest fixed wood/pool contact. Drop motion stays inside these exterior extents.",
+        "perFrameBboxFit": false,
+        "perFrameScaleFit": false,
+        "widthExtentBeforeRegistration": 196,
+        "heightExtentBeforeRegistration": 199,
+        "supplement": "Only small whole-drawing translation; every source uses the same whole-canvas 1254-to256 scale. No per-pose scale/warp/shape interpolation."
+      },
+      "retentionMask": "preparation/drop-footprint-05.png",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retention": "Canonical wood, leaves, upper sap flow/attachment and lower pool stay byte-identical at fixed coordinates outside the union of actual/canonical lower hanging-drop footprints. Whole actually drawn drop body, broad highlight, outline and newly exposed bark/occlusion pixels within that footprint are retained in place. The fixed neck above y106 remains canonical. No moving part translation, deformation, interpolation or fade."
+    },
+    {
+      "index": 6,
+      "kind": "complete-individually-drawn-adjacent",
+      "hold": false,
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-05a9b82f-e368-4c82-981d-d967b801c200.png",
+      "taskOwnedRaw": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\adjacent-06.png",
+      "sourceCopy": "source-drawings/adjacent-06.png",
+      "generationRecord": "source-drawings/generation-records.json",
+      "crop": null,
+      "registration": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "sharedCanvasScale": 0.20414673046251994,
+        "anchorOffset": [
+          -1.5,
+          -1
+        ],
+        "fixedLandmark": "Center between stationary left/right exterior bounds plus lowest fixed wood/pool contact. Drop motion stays inside these exterior extents.",
+        "perFrameBboxFit": false,
+        "perFrameScaleFit": false,
+        "widthExtentBeforeRegistration": 199,
+        "heightExtentBeforeRegistration": 200,
+        "supplement": "Only small whole-drawing translation; every source uses the same whole-canvas 1254-to256 scale. No per-pose scale/warp/shape interpolation."
+      },
+      "retentionMask": "preparation/drop-footprint-06.png",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retention": "Canonical wood, leaves, upper sap flow/attachment and lower pool stay byte-identical at fixed coordinates outside the union of actual/canonical lower hanging-drop footprints. Whole actually drawn drop body, broad highlight, outline and newly exposed bark/occlusion pixels within that footprint are retained in place. The fixed neck above y106 remains canonical. No moving part translation, deformation, interpolation or fade."
+    },
+    {
+      "index": 7,
+      "kind": "complete-individually-drawn-adjacent",
+      "hold": false,
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-4c82db3f-7c7e-44c4-a820-eb7d1bf98203.png",
+      "taskOwnedRaw": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\adjacent-07.png",
+      "sourceCopy": "source-drawings/adjacent-07.png",
+      "generationRecord": "source-drawings/generation-records.json",
+      "crop": null,
+      "registration": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "sharedCanvasScale": 0.20414673046251994,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "fixedLandmark": "Center between stationary left/right exterior bounds plus lowest fixed wood/pool contact. Drop motion stays inside these exterior extents.",
+        "perFrameBboxFit": false,
+        "perFrameScaleFit": false,
+        "widthExtentBeforeRegistration": 196,
+        "heightExtentBeforeRegistration": 200,
+        "supplement": "Only small whole-drawing translation; every source uses the same whole-canvas 1254-to256 scale. No per-pose scale/warp/shape interpolation."
+      },
+      "retentionMask": "preparation/drop-footprint-07.png",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retention": "Canonical wood, leaves, upper sap flow/attachment and lower pool stay byte-identical at fixed coordinates outside the union of actual/canonical lower hanging-drop footprints. Whole actually drawn drop body, broad highlight, outline and newly exposed bark/occlusion pixels within that footprint are retained in place. The fixed neck above y106 remains canonical. No moving part translation, deformation, interpolation or fade."
+    },
+    {
+      "index": 8,
+      "kind": "held-canonical-neutral",
+      "hold": true,
+      "actualSource": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\canonical-reference.png",
+      "sourceCopy": "source-drawings/canonical-reference.png",
+      "crop": null,
+      "registration": {
+        "sharedCanvasScale": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "perFrameBboxFit": false
+      },
+      "retention": "Whole canonical neutral is retained unchanged at this contract hold slot."
+    },
+    {
+      "index": 9,
+      "kind": "held-canonical-neutral",
+      "hold": true,
+      "actualSource": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\canonical-reference.png",
+      "sourceCopy": "source-drawings/canonical-reference.png",
+      "crop": null,
+      "registration": {
+        "sharedCanvasScale": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "perFrameBboxFit": false
+      },
+      "retention": "Whole canonical neutral is retained unchanged at this contract hold slot."
+    },
+    {
+      "index": 10,
+      "kind": "complete-individually-drawn-adjacent",
+      "hold": false,
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-1ad8827c-9201-410b-9d1e-7df6a38cfc80.png",
+      "taskOwnedRaw": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\adjacent-10.png",
+      "sourceCopy": "source-drawings/adjacent-10.png",
+      "generationRecord": "source-drawings/generation-records.json",
+      "crop": null,
+      "registration": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "sharedCanvasScale": 0.20414673046251994,
+        "anchorOffset": [
+          -0.5,
+          0
+        ],
+        "fixedLandmark": "Center between stationary left/right exterior bounds plus lowest fixed wood/pool contact. Drop motion stays inside these exterior extents.",
+        "perFrameBboxFit": false,
+        "perFrameScaleFit": false,
+        "widthExtentBeforeRegistration": 197,
+        "heightExtentBeforeRegistration": 200,
+        "supplement": "Only small whole-drawing translation; every source uses the same whole-canvas 1254-to256 scale. No per-pose scale/warp/shape interpolation."
+      },
+      "retentionMask": "preparation/drop-footprint-10.png",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retention": "Canonical wood, leaves, upper sap flow/attachment and lower pool stay byte-identical at fixed coordinates outside the union of actual/canonical lower hanging-drop footprints. Whole actually drawn drop body, broad highlight, outline and newly exposed bark/occlusion pixels within that footprint are retained in place. The fixed neck above y106 remains canonical. No moving part translation, deformation, interpolation or fade."
+    },
+    {
+      "index": 11,
+      "kind": "complete-individually-drawn-adjacent",
+      "hold": false,
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-07670547-287e-4807-afc8-1ac8ed2fc60a.png",
+      "taskOwnedRaw": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\adjacent-11.png",
+      "sourceCopy": "source-drawings/adjacent-11.png",
+      "generationRecord": "source-drawings/generation-records.json",
+      "crop": null,
+      "registration": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "sharedCanvasScale": 0.20414673046251994,
+        "anchorOffset": [
+          1,
+          0
+        ],
+        "fixedLandmark": "Center between stationary left/right exterior bounds plus lowest fixed wood/pool contact. Drop motion stays inside these exterior extents.",
+        "perFrameBboxFit": false,
+        "perFrameScaleFit": false,
+        "widthExtentBeforeRegistration": 196,
+        "heightExtentBeforeRegistration": 200,
+        "supplement": "Only small whole-drawing translation; every source uses the same whole-canvas 1254-to256 scale. No per-pose scale/warp/shape interpolation."
+      },
+      "retentionMask": "preparation/drop-footprint-11.png",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retention": "Canonical wood, leaves, upper sap flow/attachment and lower pool stay byte-identical at fixed coordinates outside the union of actual/canonical lower hanging-drop footprints. Whole actually drawn drop body, broad highlight, outline and newly exposed bark/occlusion pixels within that footprint are retained in place. The fixed neck above y106 remains canonical. No moving part translation, deformation, interpolation or fade."
+    },
+    {
+      "index": 12,
+      "kind": "complete-individually-drawn-adjacent",
+      "hold": false,
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-ecf6b170-b199-4dee-9f6b-abb2a9b9e0bb.png",
+      "taskOwnedRaw": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\adjacent-12.png",
+      "sourceCopy": "source-drawings/adjacent-12.png",
+      "generationRecord": "source-drawings/generation-records.json",
+      "crop": null,
+      "registration": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "sharedCanvasScale": 0.20414673046251994,
+        "anchorOffset": [
+          -1,
+          -3
+        ],
+        "fixedLandmark": "Center between stationary left/right exterior bounds plus lowest fixed wood/pool contact. Drop motion stays inside these exterior extents.",
+        "perFrameBboxFit": false,
+        "perFrameScaleFit": false,
+        "widthExtentBeforeRegistration": 198,
+        "heightExtentBeforeRegistration": 201,
+        "supplement": "Only small whole-drawing translation; every source uses the same whole-canvas 1254-to256 scale. No per-pose scale/warp/shape interpolation."
+      },
+      "retentionMask": "preparation/drop-footprint-12.png",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retention": "Canonical wood, leaves, upper sap flow/attachment and lower pool stay byte-identical at fixed coordinates outside the union of actual/canonical lower hanging-drop footprints. Whole actually drawn drop body, broad highlight, outline and newly exposed bark/occlusion pixels within that footprint are retained in place. The fixed neck above y106 remains canonical. No moving part translation, deformation, interpolation or fade."
+    },
+    {
+      "index": 13,
+      "kind": "complete-individually-drawn-adjacent",
+      "hold": false,
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-a79e6f3c-33f5-4250-a9ad-f3321bb62e1d.png",
+      "taskOwnedRaw": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\adjacent-13.png",
+      "sourceCopy": "source-drawings/adjacent-13.png",
+      "generationRecord": "source-drawings/generation-records.json",
+      "crop": null,
+      "registration": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "sharedCanvasScale": 0.20414673046251994,
+        "anchorOffset": [
+          -0.5,
+          0
+        ],
+        "fixedLandmark": "Center between stationary left/right exterior bounds plus lowest fixed wood/pool contact. Drop motion stays inside these exterior extents.",
+        "perFrameBboxFit": false,
+        "perFrameScaleFit": false,
+        "widthExtentBeforeRegistration": 197,
+        "heightExtentBeforeRegistration": 200,
+        "supplement": "Only small whole-drawing translation; every source uses the same whole-canvas 1254-to256 scale. No per-pose scale/warp/shape interpolation."
+      },
+      "retentionMask": "preparation/drop-footprint-13.png",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retention": "Canonical wood, leaves, upper sap flow/attachment and lower pool stay byte-identical at fixed coordinates outside the union of actual/canonical lower hanging-drop footprints. Whole actually drawn drop body, broad highlight, outline and newly exposed bark/occlusion pixels within that footprint are retained in place. The fixed neck above y106 remains canonical. No moving part translation, deformation, interpolation or fade."
+    },
+    {
+      "index": 14,
+      "kind": "complete-individually-drawn-key",
+      "hold": false,
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-761ad3db-6813-48b5-bc04-d475252e21b2.png",
+      "taskOwnedRaw": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\key-14.png",
+      "sourceCopy": "source-drawings/key-14.png",
+      "generationRecord": "source-drawings/generation-records.json",
+      "crop": null,
+      "registration": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "sharedCanvasScale": 0.20414673046251994,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "fixedLandmark": "Center between stationary left/right exterior bounds plus lowest fixed wood/pool contact. Drop motion stays inside these exterior extents.",
+        "perFrameBboxFit": false,
+        "perFrameScaleFit": false,
+        "widthExtentBeforeRegistration": 196,
+        "heightExtentBeforeRegistration": 200,
+        "supplement": "Only small whole-drawing translation; every source uses the same whole-canvas 1254-to256 scale. No per-pose scale/warp/shape interpolation."
+      },
+      "retentionMask": "preparation/drop-footprint-14.png",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retention": "Canonical wood, leaves, upper sap flow/attachment and lower pool stay byte-identical at fixed coordinates outside the union of actual/canonical lower hanging-drop footprints. Whole actually drawn drop body, broad highlight, outline and newly exposed bark/occlusion pixels within that footprint are retained in place. The fixed neck above y106 remains canonical. No moving part translation, deformation, interpolation or fade."
+    },
+    {
+      "index": 15,
+      "kind": "complete-individually-drawn-adjacent",
+      "hold": false,
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-422f5262-2a97-4c32-a8f2-44336082091c.png",
+      "taskOwnedRaw": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\adjacent-15.png",
+      "sourceCopy": "source-drawings/adjacent-15.png",
+      "generationRecord": "source-drawings/generation-records.json",
+      "crop": null,
+      "registration": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "sharedCanvasScale": 0.20414673046251994,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "fixedLandmark": "Center between stationary left/right exterior bounds plus lowest fixed wood/pool contact. Drop motion stays inside these exterior extents.",
+        "perFrameBboxFit": false,
+        "perFrameScaleFit": false,
+        "widthExtentBeforeRegistration": 196,
+        "heightExtentBeforeRegistration": 200,
+        "supplement": "Only small whole-drawing translation; every source uses the same whole-canvas 1254-to256 scale. No per-pose scale/warp/shape interpolation."
+      },
+      "retentionMask": "preparation/drop-footprint-15.png",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retention": "Canonical wood, leaves, upper sap flow/attachment and lower pool stay byte-identical at fixed coordinates outside the union of actual/canonical lower hanging-drop footprints. Whole actually drawn drop body, broad highlight, outline and newly exposed bark/occlusion pixels within that footprint are retained in place. The fixed neck above y106 remains canonical. No moving part translation, deformation, interpolation or fade."
+    },
+    {
+      "index": 16,
+      "kind": "complete-individually-drawn-adjacent",
+      "hold": false,
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-5c829443-d936-4512-abba-1ca18f660e8b.png",
+      "taskOwnedRaw": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\adjacent-16-repair-1.png",
+      "sourceCopy": "source-drawings/adjacent-16.png",
+      "generationRecord": "source-drawings/generation-records.json",
+      "crop": null,
+      "registration": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "sharedCanvasScale": 0.20414673046251994,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "fixedLandmark": "Center between stationary left/right exterior bounds plus lowest fixed wood/pool contact. Drop motion stays inside these exterior extents.",
+        "perFrameBboxFit": false,
+        "perFrameScaleFit": false,
+        "widthExtentBeforeRegistration": 196,
+        "heightExtentBeforeRegistration": 200,
+        "supplement": "Only small whole-drawing translation; every source uses the same whole-canvas 1254-to256 scale. No per-pose scale/warp/shape interpolation."
+      },
+      "retentionMask": "preparation/drop-footprint-16.png",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retention": "Canonical wood, leaves, upper sap flow/attachment and lower pool stay byte-identical at fixed coordinates outside the union of actual/canonical lower hanging-drop footprints. Whole actually drawn drop body, broad highlight, outline and newly exposed bark/occlusion pixels within that footprint are retained in place. The fixed neck above y106 remains canonical. No moving part translation, deformation, interpolation or fade."
+    },
+    {
+      "index": 17,
+      "kind": "complete-individually-drawn-adjacent",
+      "hold": false,
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-21caba25-06e6-45cf-b429-1d89a7fa54ce.png",
+      "taskOwnedRaw": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\adjacent-17.png",
+      "sourceCopy": "source-drawings/adjacent-17.png",
+      "generationRecord": "source-drawings/generation-records.json",
+      "crop": null,
+      "registration": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "sharedCanvasScale": 0.20414673046251994,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "fixedLandmark": "Center between stationary left/right exterior bounds plus lowest fixed wood/pool contact. Drop motion stays inside these exterior extents.",
+        "perFrameBboxFit": false,
+        "perFrameScaleFit": false,
+        "widthExtentBeforeRegistration": 196,
+        "heightExtentBeforeRegistration": 200,
+        "supplement": "Only small whole-drawing translation; every source uses the same whole-canvas 1254-to256 scale. No per-pose scale/warp/shape interpolation."
+      },
+      "retentionMask": "preparation/drop-footprint-17.png",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retention": "Canonical wood, leaves, upper sap flow/attachment and lower pool stay byte-identical at fixed coordinates outside the union of actual/canonical lower hanging-drop footprints. Whole actually drawn drop body, broad highlight, outline and newly exposed bark/occlusion pixels within that footprint are retained in place. The fixed neck above y106 remains canonical. No moving part translation, deformation, interpolation or fade."
+    },
+    {
+      "index": 18,
+      "kind": "complete-individually-drawn-adjacent",
+      "hold": false,
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-d06f2150-ecbc-4841-8ecd-7d3ae3a6cb17.png",
+      "taskOwnedRaw": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\raw\\adjacent-18.png",
+      "sourceCopy": "source-drawings/adjacent-18.png",
+      "generationRecord": "source-drawings/generation-records.json",
+      "crop": null,
+      "registration": {
+        "sourceCanvas": [
+          1254,
+          1254
+        ],
+        "sharedCanvasScale": 0.20414673046251994,
+        "anchorOffset": [
+          -0.5,
+          0
+        ],
+        "fixedLandmark": "Center between stationary left/right exterior bounds plus lowest fixed wood/pool contact. Drop motion stays inside these exterior extents.",
+        "perFrameBboxFit": false,
+        "perFrameScaleFit": false,
+        "widthExtentBeforeRegistration": 197,
+        "heightExtentBeforeRegistration": 200,
+        "supplement": "Only small whole-drawing translation; every source uses the same whole-canvas 1254-to256 scale. No per-pose scale/warp/shape interpolation."
+      },
+      "retentionMask": "preparation/drop-footprint-18.png",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retention": "Canonical wood, leaves, upper sap flow/attachment and lower pool stay byte-identical at fixed coordinates outside the union of actual/canonical lower hanging-drop footprints. Whole actually drawn drop body, broad highlight, outline and newly exposed bark/occlusion pixels within that footprint are retained in place. The fixed neck above y106 remains canonical. No moving part translation, deformation, interpolation or fade."
+    },
+    {
+      "index": 19,
+      "kind": "held-canonical-neutral",
+      "hold": true,
+      "actualSource": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\canonical-reference.png",
+      "sourceCopy": "source-drawings/canonical-reference.png",
+      "crop": null,
+      "registration": {
+        "sharedCanvasScale": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "perFrameBboxFit": false
+      },
+      "retention": "Whole canonical neutral is retained unchanged at this contract hold slot."
+    },
+    {
+      "index": 20,
+      "kind": "held-canonical-neutral",
+      "hold": true,
+      "actualSource": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\canonical-reference.png",
+      "sourceCopy": "source-drawings/canonical-reference.png",
+      "crop": null,
+      "registration": {
+        "sharedCanvasScale": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "perFrameBboxFit": false
+      },
+      "retention": "Whole canonical neutral is retained unchanged at this contract hold slot."
+    },
+    {
+      "index": 21,
+      "kind": "held-canonical-neutral",
+      "hold": true,
+      "actualSource": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\canonical-reference.png",
+      "sourceCopy": "source-drawings/canonical-reference.png",
+      "crop": null,
+      "registration": {
+        "sharedCanvasScale": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "perFrameBboxFit": false
+      },
+      "retention": "Whole canonical neutral is retained unchanged at this contract hold slot."
+    },
+    {
+      "index": 22,
+      "kind": "held-canonical-neutral",
+      "hold": true,
+      "actualSource": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\canonical-reference.png",
+      "sourceCopy": "source-drawings/canonical-reference.png",
+      "crop": null,
+      "registration": {
+        "sharedCanvasScale": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "perFrameBboxFit": false
+      },
+      "retention": "Whole canonical neutral is retained unchanged at this contract hold slot."
+    },
+    {
+      "index": 23,
+      "kind": "held-canonical-neutral",
+      "hold": true,
+      "actualSource": "H:\\Spawner\\$Trash\\resource-simplify-plants-20261024\\animation-work\\tree-sap\\canonical-reference.png",
+      "sourceCopy": "source-drawings/canonical-reference.png",
+      "crop": null,
+      "registration": {
+        "sharedCanvasScale": 0.25,
+        "anchorOffset": [
+          0,
+          0
+        ],
+        "perFrameBboxFit": false
+      },
+      "retention": "Whole canonical neutral is retained unchanged at this contract hold slot."
+    }
+  ],
+  "qa": {
+    "status": "ready-frozen",
+    "logicalFrames": 24,
+    "pngSize": [
+      256,
+      256
+    ],
+    "sheetSize": [
+      1536,
+      1024
+    ],
+    "sheetGrid": [
+      6,
+      4
+    ],
+    "encodedFrameCount": 24,
+    "encodedFrameMs": [
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100
+    ],
+    "totalDurationMs": 2400,
+    "smallPreviewSize": [
+      96,
+      96
+    ],
+    "stableSharedPalette": true,
+    "contactFrame": 9,
+    "settleFrame": 19,
+    "postSeconds": 0.6,
+    "pivot": [
+      128,
+      224
+    ],
+    "neutralFrames": [
+      0,
+      8,
+      9,
+      19,
+      20,
+      21,
+      22,
+      23
+    ],
+    "individuallyDrawnMotionPoses": 16,
+    "heldNeutralSlots": 8,
+    "imagegenCalls": 19,
+    "selectedImagegenCalls": 16,
+    "unusedImagegenCalls": 3,
+    "stationaryPixelsDifferentOutsideRecordedFootprints": 0,
+    "fixedExteriorWidthSpanPx": 0,
+    "fixedExteriorHeightSpanPx": 0,
+    "decoded96Proof": "preparation/decoded-96-full-sequence.png",
+    "decoded256ContactLoopProof": "preparation/decoded-256-contact-loop.png",
+    "sourceReview": "All selected complete drawings directly inspected. Simplified wood planes, broad leaves, one large hanging sap and one lower pool preserved. Two grouped candidates and one enlarged16 source not selected; all unused raw retained.",
+    "playbackReview": "Reviewed the actual encoded256 and96 GIFs and every decoded96 frame in order, plus256 contact/return/loop frames7,8,9,10,18,19,23,0 and neutral/key04/key14. Simplified major surfaces and large highlights remain stable. No global scale/anchor pop, disconnected neck, detached drop, clipping or loop jump is visible. Fixed source pixels outside the recorded changing-drop footprint remain byte-identical. Tiny locally drawn silhouette/highlight variation is preserved; it was not interpolated or synthesized."
+  },
+  "frozenAtUtc": "2026-10-24T06:38:11.4316124Z",
+  "sourceRequest": "Keep the newly approved simplified static design throughout24 harvest slots: broad wood planes, broad leaves, one large attached sap drop and one lower pool; preserve contact9,settle19,pivot128/224 and post0.6s."
+}

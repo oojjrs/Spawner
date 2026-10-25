@@ -1,0 +1,1076 @@
+{
+  "key": "tree-sap",
+  "frames": [
+    {
+      "index": 0,
+      "kind": "held-neutral-rest",
+      "actualSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\style-reference.png",
+      "sourceCopy": "source-drawings/rest-00.png",
+      "sourceImage": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-frames\\00.png",
+      "crop": null,
+      "registration": {
+        "uniformScale": 0.25016041066777245,
+        "offsetX": -0.08213026189949346,
+        "offsetY": 0.10643245234365395,
+        "sourceLandmark": [
+          96,
+          116,
+          928,
+          895
+        ],
+        "targetLandmark": [
+          24,
+          29,
+          232,
+          224
+        ],
+        "landmark": "fixed bark/leaves/lower-pool outer silhouette; changing upper sap tip stays inside its extents",
+        "widthHeightScaleDisagreement": 0.0012820512820512775
+      },
+      "registrationScope": "one completed direct source drawing, aligned only from its stationary landmark to canonical; no pose transformation",
+      "hold": true,
+      "stationaryRegionRetention": "Canonical bark, leaves, small lower hanging drop, lower sap pool and background retained at identical coordinates. Only the union of actual/canonical large upper hanging-drop footprints (including its drawn outline and newly exposed bark pixels) is retained from the actual registered drawing. Upper sap attachment stays at the same fixed neck. No shape synthesis, warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 1,
+      "kind": "actual-drawn-adjacent-cel",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-15d7a21f-817e-4259-9ba9-1b8ea73fe378.png",
+      "sourceCopy": "source-drawings/phase-14.png",
+      "extractedCell": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-strips\\pre-before-01-03-cell0.png",
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 627,
+        "height": 627
+      },
+      "phase": 14,
+      "registration": {
+        "uniformScale": 0.3504437789935822,
+        "offsetX": 20.76420362796385,
+        "offsetY": 14.084176382844248,
+        "sourceLandmark": [
+          9,
+          43,
+          603,
+          599
+        ],
+        "targetLandmark": [
+          24,
+          29,
+          232,
+          224
+        ],
+        "landmark": "fixed bark/leaves/lower-pool outer silhouette; changing upper sap tip stays inside its extents",
+        "widthHeightScaleDisagreement": 0.001571268237934853
+      },
+      "registrationScope": "EXACT SAME uniform scale and anchor translation for every newly drawn cel in this phase; measured once from its checked boundary cel",
+      "boundaryIndex": 4,
+      "boundaryReference": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-frames\\04.png",
+      "boundaryCrop": {
+        "slot": 3,
+        "index": 4,
+        "x": 627,
+        "y": 627,
+        "width": 627,
+        "height": 627,
+        "cellSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-strips\\pre-before-01-03-cell3.png",
+        "output": null,
+        "preservedExistingPose": true
+      },
+      "hold": false,
+      "stationaryRegionRetention": "Canonical bark, leaves, small lower hanging drop, lower sap pool and background retained at identical coordinates. Only the union of actual/canonical large upper hanging-drop footprints (including its drawn outline and newly exposed bark pixels) is retained from the actual registered drawing. Upper sap attachment stays at the same fixed neck. No shape synthesis, warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 2,
+      "kind": "actual-drawn-adjacent-cel",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-15d7a21f-817e-4259-9ba9-1b8ea73fe378.png",
+      "sourceCopy": "source-drawings/phase-14.png",
+      "extractedCell": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-strips\\pre-before-01-03-cell1.png",
+      "crop": {
+        "x": 627,
+        "y": 0,
+        "width": 627,
+        "height": 627
+      },
+      "phase": 14,
+      "registration": {
+        "uniformScale": 0.3504437789935822,
+        "offsetX": 20.76420362796385,
+        "offsetY": 14.084176382844248,
+        "sourceLandmark": [
+          9,
+          43,
+          603,
+          599
+        ],
+        "targetLandmark": [
+          24,
+          29,
+          232,
+          224
+        ],
+        "landmark": "fixed bark/leaves/lower-pool outer silhouette; changing upper sap tip stays inside its extents",
+        "widthHeightScaleDisagreement": 0.001571268237934853
+      },
+      "registrationScope": "EXACT SAME uniform scale and anchor translation for every newly drawn cel in this phase; measured once from its checked boundary cel",
+      "boundaryIndex": 4,
+      "boundaryReference": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-frames\\04.png",
+      "boundaryCrop": {
+        "slot": 3,
+        "index": 4,
+        "x": 627,
+        "y": 627,
+        "width": 627,
+        "height": 627,
+        "cellSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-strips\\pre-before-01-03-cell3.png",
+        "output": null,
+        "preservedExistingPose": true
+      },
+      "hold": false,
+      "stationaryRegionRetention": "Canonical bark, leaves, small lower hanging drop, lower sap pool and background retained at identical coordinates. Only the union of actual/canonical large upper hanging-drop footprints (including its drawn outline and newly exposed bark pixels) is retained from the actual registered drawing. Upper sap attachment stays at the same fixed neck. No shape synthesis, warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 3,
+      "kind": "actual-drawn-adjacent-cel",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-15d7a21f-817e-4259-9ba9-1b8ea73fe378.png",
+      "sourceCopy": "source-drawings/phase-14.png",
+      "extractedCell": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-strips\\pre-before-01-03-cell2.png",
+      "crop": {
+        "x": 0,
+        "y": 627,
+        "width": 627,
+        "height": 627
+      },
+      "phase": 14,
+      "registration": {
+        "uniformScale": 0.3504437789935822,
+        "offsetX": 20.76420362796385,
+        "offsetY": 14.084176382844248,
+        "sourceLandmark": [
+          9,
+          43,
+          603,
+          599
+        ],
+        "targetLandmark": [
+          24,
+          29,
+          232,
+          224
+        ],
+        "landmark": "fixed bark/leaves/lower-pool outer silhouette; changing upper sap tip stays inside its extents",
+        "widthHeightScaleDisagreement": 0.001571268237934853
+      },
+      "registrationScope": "EXACT SAME uniform scale and anchor translation for every newly drawn cel in this phase; measured once from its checked boundary cel",
+      "boundaryIndex": 4,
+      "boundaryReference": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-frames\\04.png",
+      "boundaryCrop": {
+        "slot": 3,
+        "index": 4,
+        "x": 627,
+        "y": 627,
+        "width": 627,
+        "height": 627,
+        "cellSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-strips\\pre-before-01-03-cell3.png",
+        "output": null,
+        "preservedExistingPose": true
+      },
+      "hold": false,
+      "stationaryRegionRetention": "Canonical bark, leaves, small lower hanging drop, lower sap pool and background retained at identical coordinates. Only the union of actual/canonical large upper hanging-drop footprints (including its drawn outline and newly exposed bark pixels) is retained from the actual registered drawing. Upper sap attachment stays at the same fixed neck. No shape synthesis, warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 4,
+      "kind": "direct-drawn-key-or-adjacent",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-821572d1-45cd-48ac-a308-ac1bc159b23b.png",
+      "sourceCopy": "source-drawings/key-04.png",
+      "sourceImage": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-frames\\04.png",
+      "crop": null,
+      "registration": {
+        "uniformScale": 0.2041484740391959,
+        "offsetX": -0.001093222575832442,
+        "offsetY": 0.04912397900210408,
+        "sourceLandmark": [
+          118,
+          141,
+          1136,
+          1097
+        ],
+        "targetLandmark": [
+          24,
+          29,
+          232,
+          224
+        ],
+        "landmark": "fixed bark/leaves/lower-pool outer silhouette; changing upper sap tip stays inside its extents",
+        "widthHeightScaleDisagreement": 0.0017026850032744179
+      },
+      "registrationScope": "one completed direct source drawing, aligned only from its stationary landmark to canonical; no pose transformation",
+      "hold": false,
+      "stationaryRegionRetention": "Canonical bark, leaves, small lower hanging drop, lower sap pool and background retained at identical coordinates. Only the union of actual/canonical large upper hanging-drop footprints (including its drawn outline and newly exposed bark pixels) is retained from the actual registered drawing. Upper sap attachment stays at the same fixed neck. No shape synthesis, warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 5,
+      "kind": "actual-drawn-adjacent-cel",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-43cf3b39-7afe-40c9-a276-e55b7a34e212.png",
+      "sourceCopy": "source-drawings/phase-15.png",
+      "extractedCell": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-strips\\pre-after-05-07-cell1.png",
+      "crop": {
+        "x": 627,
+        "y": 0,
+        "width": 627,
+        "height": 627
+      },
+      "phase": 15,
+      "registration": {
+        "uniformScale": 0.35107577910842175,
+        "offsetX": 20.921887371931362,
+        "offsetY": 16.514214546922744,
+        "sourceLandmark": [
+          8,
+          37,
+          602,
+          591
+        ],
+        "targetLandmark": [
+          24,
+          29,
+          232,
+          224
+        ],
+        "landmark": "fixed bark/leaves/lower-pool outer silhouette; changing upper sap tip stays inside its extents",
+        "widthHeightScaleDisagreement": 0.00516273849607185
+      },
+      "registrationScope": "EXACT SAME uniform scale and anchor translation for every newly drawn cel in this phase; measured once from its checked boundary cel",
+      "boundaryIndex": 4,
+      "boundaryReference": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-frames\\04.png",
+      "boundaryCrop": {
+        "slot": 0,
+        "index": 4,
+        "x": 0,
+        "y": 0,
+        "width": 627,
+        "height": 627,
+        "cellSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-strips\\pre-after-05-07-cell0.png",
+        "output": null,
+        "preservedExistingPose": true
+      },
+      "hold": false,
+      "stationaryRegionRetention": "Canonical bark, leaves, small lower hanging drop, lower sap pool and background retained at identical coordinates. Only the union of actual/canonical large upper hanging-drop footprints (including its drawn outline and newly exposed bark pixels) is retained from the actual registered drawing. Upper sap attachment stays at the same fixed neck. No shape synthesis, warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 6,
+      "kind": "actual-drawn-adjacent-cel",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-43cf3b39-7afe-40c9-a276-e55b7a34e212.png",
+      "sourceCopy": "source-drawings/phase-15.png",
+      "extractedCell": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-strips\\pre-after-05-07-cell2.png",
+      "crop": {
+        "x": 0,
+        "y": 627,
+        "width": 627,
+        "height": 627
+      },
+      "phase": 15,
+      "registration": {
+        "uniformScale": 0.35107577910842175,
+        "offsetX": 20.921887371931362,
+        "offsetY": 16.514214546922744,
+        "sourceLandmark": [
+          8,
+          37,
+          602,
+          591
+        ],
+        "targetLandmark": [
+          24,
+          29,
+          232,
+          224
+        ],
+        "landmark": "fixed bark/leaves/lower-pool outer silhouette; changing upper sap tip stays inside its extents",
+        "widthHeightScaleDisagreement": 0.00516273849607185
+      },
+      "registrationScope": "EXACT SAME uniform scale and anchor translation for every newly drawn cel in this phase; measured once from its checked boundary cel",
+      "boundaryIndex": 4,
+      "boundaryReference": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-frames\\04.png",
+      "boundaryCrop": {
+        "slot": 0,
+        "index": 4,
+        "x": 0,
+        "y": 0,
+        "width": 627,
+        "height": 627,
+        "cellSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-strips\\pre-after-05-07-cell0.png",
+        "output": null,
+        "preservedExistingPose": true
+      },
+      "hold": false,
+      "stationaryRegionRetention": "Canonical bark, leaves, small lower hanging drop, lower sap pool and background retained at identical coordinates. Only the union of actual/canonical large upper hanging-drop footprints (including its drawn outline and newly exposed bark pixels) is retained from the actual registered drawing. Upper sap attachment stays at the same fixed neck. No shape synthesis, warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 7,
+      "kind": "actual-drawn-adjacent-cel",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-43cf3b39-7afe-40c9-a276-e55b7a34e212.png",
+      "sourceCopy": "source-drawings/phase-15.png",
+      "extractedCell": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-strips\\pre-after-05-07-cell3.png",
+      "crop": {
+        "x": 627,
+        "y": 627,
+        "width": 627,
+        "height": 627
+      },
+      "phase": 15,
+      "registration": {
+        "uniformScale": 0.35107577910842175,
+        "offsetX": 20.921887371931362,
+        "offsetY": 16.514214546922744,
+        "sourceLandmark": [
+          8,
+          37,
+          602,
+          591
+        ],
+        "targetLandmark": [
+          24,
+          29,
+          232,
+          224
+        ],
+        "landmark": "fixed bark/leaves/lower-pool outer silhouette; changing upper sap tip stays inside its extents",
+        "widthHeightScaleDisagreement": 0.00516273849607185
+      },
+      "registrationScope": "EXACT SAME uniform scale and anchor translation for every newly drawn cel in this phase; measured once from its checked boundary cel",
+      "boundaryIndex": 4,
+      "boundaryReference": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-frames\\04.png",
+      "boundaryCrop": {
+        "slot": 0,
+        "index": 4,
+        "x": 0,
+        "y": 0,
+        "width": 627,
+        "height": 627,
+        "cellSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-strips\\pre-after-05-07-cell0.png",
+        "output": null,
+        "preservedExistingPose": true
+      },
+      "hold": false,
+      "stationaryRegionRetention": "Canonical bark, leaves, small lower hanging drop, lower sap pool and background retained at identical coordinates. Only the union of actual/canonical large upper hanging-drop footprints (including its drawn outline and newly exposed bark pixels) is retained from the actual registered drawing. Upper sap attachment stays at the same fixed neck. No shape synthesis, warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 8,
+      "kind": "held-neutral-rest",
+      "actualSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\style-reference.png",
+      "sourceCopy": "source-drawings/rest-00.png",
+      "sourceImage": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-frames\\08.png",
+      "crop": null,
+      "registration": {
+        "uniformScale": 0.25016041066777245,
+        "offsetX": -0.08213026189949346,
+        "offsetY": 0.10643245234365395,
+        "sourceLandmark": [
+          96,
+          116,
+          928,
+          895
+        ],
+        "targetLandmark": [
+          24,
+          29,
+          232,
+          224
+        ],
+        "landmark": "fixed bark/leaves/lower-pool outer silhouette; changing upper sap tip stays inside its extents",
+        "widthHeightScaleDisagreement": 0.0012820512820512775
+      },
+      "registrationScope": "one completed direct source drawing, aligned only from its stationary landmark to canonical; no pose transformation",
+      "hold": true,
+      "stationaryRegionRetention": "Canonical bark, leaves, small lower hanging drop, lower sap pool and background retained at identical coordinates. Only the union of actual/canonical large upper hanging-drop footprints (including its drawn outline and newly exposed bark pixels) is retained from the actual registered drawing. Upper sap attachment stays at the same fixed neck. No shape synthesis, warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 9,
+      "kind": "held-neutral-rest",
+      "actualSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\style-reference.png",
+      "sourceCopy": "source-drawings/rest-00.png",
+      "sourceImage": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-frames\\09.png",
+      "crop": null,
+      "registration": {
+        "uniformScale": 0.25016041066777245,
+        "offsetX": -0.08213026189949346,
+        "offsetY": 0.10643245234365395,
+        "sourceLandmark": [
+          96,
+          116,
+          928,
+          895
+        ],
+        "targetLandmark": [
+          24,
+          29,
+          232,
+          224
+        ],
+        "landmark": "fixed bark/leaves/lower-pool outer silhouette; changing upper sap tip stays inside its extents",
+        "widthHeightScaleDisagreement": 0.0012820512820512775
+      },
+      "registrationScope": "one completed direct source drawing, aligned only from its stationary landmark to canonical; no pose transformation",
+      "hold": true,
+      "stationaryRegionRetention": "Canonical bark, leaves, small lower hanging drop, lower sap pool and background retained at identical coordinates. Only the union of actual/canonical large upper hanging-drop footprints (including its drawn outline and newly exposed bark pixels) is retained from the actual registered drawing. Upper sap attachment stays at the same fixed neck. No shape synthesis, warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 10,
+      "kind": "actual-drawn-adjacent-cel",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-94a182b9-3840-449b-8ccc-d73811138ab7.png",
+      "sourceCopy": "source-drawings/phase-17.png",
+      "extractedCell": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-strips\\post-before-10-10-cell0.png",
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 627,
+        "height": 627
+      },
+      "phase": 17,
+      "registration": {
+        "uniformScale": 0.3440327750617351,
+        "offsetX": 22.02185611839299,
+        "offsetY": 17.580334962958943,
+        "sourceLandmark": [
+          5,
+          40,
+          614,
+          600
+        ],
+        "targetLandmark": [
+          25,
+          29,
+          232,
+          224
+        ],
+        "landmark": "fixed bark/leaves/lower-pool outer silhouette; changing upper sap tip stays inside its extents",
+        "widthHeightScaleDisagreement": 0.023872679045092826
+      },
+      "registrationScope": "EXACT SAME uniform scale and anchor translation for every newly drawn cel in this phase; measured once from its checked boundary cel",
+      "boundaryIndex": 11,
+      "boundaryReference": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-frames\\11.png",
+      "boundaryCrop": {
+        "slot": 1,
+        "index": 11,
+        "x": 627,
+        "y": 0,
+        "width": 627,
+        "height": 627,
+        "cellSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-strips\\post-before-10-10-cell1.png",
+        "output": null,
+        "preservedExistingPose": true
+      },
+      "hold": false,
+      "stationaryRegionRetention": "Canonical bark, leaves, small lower hanging drop, lower sap pool and background retained at identical coordinates. Only the union of actual/canonical large upper hanging-drop footprints (including its drawn outline and newly exposed bark pixels) is retained from the actual registered drawing. Upper sap attachment stays at the same fixed neck. No shape synthesis, warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 11,
+      "kind": "actual-drawn-adjacent-cel",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-cc1ee063-a002-4a1e-b11e-1f2acd76aa05.png",
+      "sourceCopy": "source-drawings/phase-16.png",
+      "extractedCell": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-strips\\post-before-11-13-cell0.png",
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 627,
+        "height": 627
+      },
+      "phase": 16,
+      "registration": {
+        "uniformScale": 0.3556586298262772,
+        "offsetX": 22.902874886335084,
+        "offsetY": 18.0736533305855,
+        "sourceLandmark": [
+          4,
+          29,
+          587,
+          579
+        ],
+        "targetLandmark": [
+          24,
+          29,
+          232,
+          224
+        ],
+        "landmark": "fixed bark/leaves/lower-pool outer silhouette; changing upper sap tip stays inside its extents",
+        "widthHeightScaleDisagreement": 0.0062893081761006275
+      },
+      "registrationScope": "EXACT SAME uniform scale and anchor translation for every newly drawn cel in this phase; measured once from its checked boundary cel",
+      "boundaryIndex": 14,
+      "boundaryReference": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-frames\\14.png",
+      "boundaryCrop": {
+        "slot": 3,
+        "index": 14,
+        "x": 627,
+        "y": 627,
+        "width": 627,
+        "height": 627,
+        "cellSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-strips\\post-before-11-13-cell3.png",
+        "output": null,
+        "preservedExistingPose": true
+      },
+      "hold": false,
+      "stationaryRegionRetention": "Canonical bark, leaves, small lower hanging drop, lower sap pool and background retained at identical coordinates. Only the union of actual/canonical large upper hanging-drop footprints (including its drawn outline and newly exposed bark pixels) is retained from the actual registered drawing. Upper sap attachment stays at the same fixed neck. No shape synthesis, warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 12,
+      "kind": "actual-drawn-adjacent-cel",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-cc1ee063-a002-4a1e-b11e-1f2acd76aa05.png",
+      "sourceCopy": "source-drawings/phase-16.png",
+      "extractedCell": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-strips\\post-before-11-13-cell1.png",
+      "crop": {
+        "x": 627,
+        "y": 0,
+        "width": 627,
+        "height": 627
+      },
+      "phase": 16,
+      "registration": {
+        "uniformScale": 0.3556586298262772,
+        "offsetX": 22.902874886335084,
+        "offsetY": 18.0736533305855,
+        "sourceLandmark": [
+          4,
+          29,
+          587,
+          579
+        ],
+        "targetLandmark": [
+          24,
+          29,
+          232,
+          224
+        ],
+        "landmark": "fixed bark/leaves/lower-pool outer silhouette; changing upper sap tip stays inside its extents",
+        "widthHeightScaleDisagreement": 0.0062893081761006275
+      },
+      "registrationScope": "EXACT SAME uniform scale and anchor translation for every newly drawn cel in this phase; measured once from its checked boundary cel",
+      "boundaryIndex": 14,
+      "boundaryReference": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-frames\\14.png",
+      "boundaryCrop": {
+        "slot": 3,
+        "index": 14,
+        "x": 627,
+        "y": 627,
+        "width": 627,
+        "height": 627,
+        "cellSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-strips\\post-before-11-13-cell3.png",
+        "output": null,
+        "preservedExistingPose": true
+      },
+      "hold": false,
+      "stationaryRegionRetention": "Canonical bark, leaves, small lower hanging drop, lower sap pool and background retained at identical coordinates. Only the union of actual/canonical large upper hanging-drop footprints (including its drawn outline and newly exposed bark pixels) is retained from the actual registered drawing. Upper sap attachment stays at the same fixed neck. No shape synthesis, warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 13,
+      "kind": "actual-drawn-adjacent-cel",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-cc1ee063-a002-4a1e-b11e-1f2acd76aa05.png",
+      "sourceCopy": "source-drawings/phase-16.png",
+      "extractedCell": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-strips\\post-before-11-13-cell2.png",
+      "crop": {
+        "x": 0,
+        "y": 627,
+        "width": 627,
+        "height": 627
+      },
+      "phase": 16,
+      "registration": {
+        "uniformScale": 0.3556586298262772,
+        "offsetX": 22.902874886335084,
+        "offsetY": 18.0736533305855,
+        "sourceLandmark": [
+          4,
+          29,
+          587,
+          579
+        ],
+        "targetLandmark": [
+          24,
+          29,
+          232,
+          224
+        ],
+        "landmark": "fixed bark/leaves/lower-pool outer silhouette; changing upper sap tip stays inside its extents",
+        "widthHeightScaleDisagreement": 0.0062893081761006275
+      },
+      "registrationScope": "EXACT SAME uniform scale and anchor translation for every newly drawn cel in this phase; measured once from its checked boundary cel",
+      "boundaryIndex": 14,
+      "boundaryReference": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-frames\\14.png",
+      "boundaryCrop": {
+        "slot": 3,
+        "index": 14,
+        "x": 627,
+        "y": 627,
+        "width": 627,
+        "height": 627,
+        "cellSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-strips\\post-before-11-13-cell3.png",
+        "output": null,
+        "preservedExistingPose": true
+      },
+      "hold": false,
+      "stationaryRegionRetention": "Canonical bark, leaves, small lower hanging drop, lower sap pool and background retained at identical coordinates. Only the union of actual/canonical large upper hanging-drop footprints (including its drawn outline and newly exposed bark pixels) is retained from the actual registered drawing. Upper sap attachment stays at the same fixed neck. No shape synthesis, warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 14,
+      "kind": "direct-drawn-key-or-adjacent",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-5301ae02-0646-47bf-bc66-832979603f23.png",
+      "sourceCopy": "source-drawings/key-14.png",
+      "sourceImage": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-frames\\14.png",
+      "crop": null,
+      "registration": {
+        "uniformScale": 0.20415508207074043,
+        "offsetX": -0.10731399938961772,
+        "offsetY": 0.2460300504684767,
+        "sourceLandmark": [
+          118,
+          141,
+          1137,
+          1096
+        ],
+        "targetLandmark": [
+          24,
+          29,
+          232,
+          224
+        ],
+        "landmark": "fixed bark/leaves/lower-pool outer silhouette; changing upper sap tip stays inside its extents",
+        "widthHeightScaleDisagreement": 0.0003271180896303738
+      },
+      "registrationScope": "one completed direct source drawing, aligned only from its stationary landmark to canonical; no pose transformation",
+      "hold": false,
+      "stationaryRegionRetention": "Canonical bark, leaves, small lower hanging drop, lower sap pool and background retained at identical coordinates. Only the union of actual/canonical large upper hanging-drop footprints (including its drawn outline and newly exposed bark pixels) is retained from the actual registered drawing. Upper sap attachment stays at the same fixed neck. No shape synthesis, warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 15,
+      "kind": "actual-drawn-adjacent-cel",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-8c833f6f-4b2e-4bcd-b1c5-557a62b4690c.png",
+      "sourceCopy": "source-drawings/phase-18.png",
+      "extractedCell": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-strips\\post-after-15-17-cell1.png",
+      "crop": {
+        "x": 627,
+        "y": 0,
+        "width": 627,
+        "height": 627
+      },
+      "phase": 18,
+      "registration": {
+        "uniformScale": 0.3358097050546256,
+        "offsetX": 22.891562317902185,
+        "offsetY": 14.790553750968257,
+        "sourceLandmark": [
+          4,
+          41,
+          622,
+          623
+        ],
+        "targetLandmark": [
+          24,
+          29,
+          232,
+          224
+        ],
+        "landmark": "fixed bark/leaves/lower-pool outer silhouette; changing upper sap tip stays inside its extents",
+        "widthHeightScaleDisagreement": 0.0045307443365696365
+      },
+      "registrationScope": "EXACT SAME uniform scale and anchor translation for every newly drawn cel in this phase; measured once from its checked boundary cel",
+      "boundaryIndex": 14,
+      "boundaryReference": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-frames\\14.png",
+      "boundaryCrop": {
+        "slot": 0,
+        "index": 14,
+        "x": 0,
+        "y": 0,
+        "width": 627,
+        "height": 627,
+        "cellSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-strips\\post-after-15-17-cell0.png",
+        "output": null,
+        "preservedExistingPose": true
+      },
+      "hold": false,
+      "stationaryRegionRetention": "Canonical bark, leaves, small lower hanging drop, lower sap pool and background retained at identical coordinates. Only the union of actual/canonical large upper hanging-drop footprints (including its drawn outline and newly exposed bark pixels) is retained from the actual registered drawing. Upper sap attachment stays at the same fixed neck. No shape synthesis, warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 16,
+      "kind": "actual-drawn-adjacent-cel",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-8c833f6f-4b2e-4bcd-b1c5-557a62b4690c.png",
+      "sourceCopy": "source-drawings/phase-18.png",
+      "extractedCell": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-strips\\post-after-15-17-cell2.png",
+      "crop": {
+        "x": 0,
+        "y": 627,
+        "width": 627,
+        "height": 627
+      },
+      "phase": 18,
+      "registration": {
+        "uniformScale": 0.3358097050546256,
+        "offsetX": 22.891562317902185,
+        "offsetY": 14.790553750968257,
+        "sourceLandmark": [
+          4,
+          41,
+          622,
+          623
+        ],
+        "targetLandmark": [
+          24,
+          29,
+          232,
+          224
+        ],
+        "landmark": "fixed bark/leaves/lower-pool outer silhouette; changing upper sap tip stays inside its extents",
+        "widthHeightScaleDisagreement": 0.0045307443365696365
+      },
+      "registrationScope": "EXACT SAME uniform scale and anchor translation for every newly drawn cel in this phase; measured once from its checked boundary cel",
+      "boundaryIndex": 14,
+      "boundaryReference": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-frames\\14.png",
+      "boundaryCrop": {
+        "slot": 0,
+        "index": 14,
+        "x": 0,
+        "y": 0,
+        "width": 627,
+        "height": 627,
+        "cellSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-strips\\post-after-15-17-cell0.png",
+        "output": null,
+        "preservedExistingPose": true
+      },
+      "hold": false,
+      "stationaryRegionRetention": "Canonical bark, leaves, small lower hanging drop, lower sap pool and background retained at identical coordinates. Only the union of actual/canonical large upper hanging-drop footprints (including its drawn outline and newly exposed bark pixels) is retained from the actual registered drawing. Upper sap attachment stays at the same fixed neck. No shape synthesis, warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 17,
+      "kind": "actual-drawn-adjacent-cel",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-8c833f6f-4b2e-4bcd-b1c5-557a62b4690c.png",
+      "sourceCopy": "source-drawings/phase-18.png",
+      "extractedCell": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-strips\\post-after-15-17-cell3.png",
+      "crop": {
+        "x": 627,
+        "y": 627,
+        "width": 627,
+        "height": 627
+      },
+      "phase": 18,
+      "registration": {
+        "uniformScale": 0.3358097050546256,
+        "offsetX": 22.891562317902185,
+        "offsetY": 14.790553750968257,
+        "sourceLandmark": [
+          4,
+          41,
+          622,
+          623
+        ],
+        "targetLandmark": [
+          24,
+          29,
+          232,
+          224
+        ],
+        "landmark": "fixed bark/leaves/lower-pool outer silhouette; changing upper sap tip stays inside its extents",
+        "widthHeightScaleDisagreement": 0.0045307443365696365
+      },
+      "registrationScope": "EXACT SAME uniform scale and anchor translation for every newly drawn cel in this phase; measured once from its checked boundary cel",
+      "boundaryIndex": 14,
+      "boundaryReference": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-frames\\14.png",
+      "boundaryCrop": {
+        "slot": 0,
+        "index": 14,
+        "x": 0,
+        "y": 0,
+        "width": 627,
+        "height": 627,
+        "cellSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-strips\\post-after-15-17-cell0.png",
+        "output": null,
+        "preservedExistingPose": true
+      },
+      "hold": false,
+      "stationaryRegionRetention": "Canonical bark, leaves, small lower hanging drop, lower sap pool and background retained at identical coordinates. Only the union of actual/canonical large upper hanging-drop footprints (including its drawn outline and newly exposed bark pixels) is retained from the actual registered drawing. Upper sap attachment stays at the same fixed neck. No shape synthesis, warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 18,
+      "kind": "actual-drawn-adjacent-cel",
+      "actualSource": "D:\\.codex\\generated_images\\01a1694d-8fb2-7f23-9093-b4bc7091ec1d\\exec-04f68e15-2854-45b5-8f2c-c81cd10273cf.png",
+      "sourceCopy": "source-drawings/phase-19.png",
+      "extractedCell": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-strips\\post-after-18-18-cell1.png",
+      "crop": {
+        "x": 627,
+        "y": 0,
+        "width": 627,
+        "height": 627
+      },
+      "phase": 19,
+      "registration": {
+        "uniformScale": 0.3403348356920307,
+        "offsetX": 22.326033517624467,
+        "offsetY": 15.034410885093138,
+        "sourceLandmark": [
+          6,
+          39,
+          615,
+          614
+        ],
+        "targetLandmark": [
+          24,
+          29,
+          232,
+          224
+        ],
+        "landmark": "fixed bark/leaves/lower-pool outer silhouette; changing upper sap tip stays inside its extents",
+        "widthHeightScaleDisagreement": 0.007115489874110592
+      },
+      "registrationScope": "EXACT SAME uniform scale and anchor translation for every newly drawn cel in this phase; measured once from its checked boundary cel",
+      "boundaryIndex": 17,
+      "boundaryReference": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-frames\\17.png",
+      "boundaryCrop": {
+        "slot": 0,
+        "index": 17,
+        "x": 0,
+        "y": 0,
+        "width": 627,
+        "height": 627,
+        "cellSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-strips\\post-after-18-18-cell0.png",
+        "output": null,
+        "preservedExistingPose": true
+      },
+      "hold": false,
+      "stationaryRegionRetention": "Canonical bark, leaves, small lower hanging drop, lower sap pool and background retained at identical coordinates. Only the union of actual/canonical large upper hanging-drop footprints (including its drawn outline and newly exposed bark pixels) is retained from the actual registered drawing. Upper sap attachment stays at the same fixed neck. No shape synthesis, warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 19,
+      "kind": "held-neutral-rest",
+      "actualSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\style-reference.png",
+      "sourceCopy": "source-drawings/rest-00.png",
+      "sourceImage": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-frames\\19.png",
+      "crop": null,
+      "registration": {
+        "uniformScale": 0.25016041066777245,
+        "offsetX": -0.08213026189949346,
+        "offsetY": 0.10643245234365395,
+        "sourceLandmark": [
+          96,
+          116,
+          928,
+          895
+        ],
+        "targetLandmark": [
+          24,
+          29,
+          232,
+          224
+        ],
+        "landmark": "fixed bark/leaves/lower-pool outer silhouette; changing upper sap tip stays inside its extents",
+        "widthHeightScaleDisagreement": 0.0012820512820512775
+      },
+      "registrationScope": "one completed direct source drawing, aligned only from its stationary landmark to canonical; no pose transformation",
+      "hold": true,
+      "stationaryRegionRetention": "Canonical bark, leaves, small lower hanging drop, lower sap pool and background retained at identical coordinates. Only the union of actual/canonical large upper hanging-drop footprints (including its drawn outline and newly exposed bark pixels) is retained from the actual registered drawing. Upper sap attachment stays at the same fixed neck. No shape synthesis, warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 20,
+      "kind": "held-neutral-rest",
+      "actualSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\style-reference.png",
+      "sourceCopy": "source-drawings/rest-00.png",
+      "sourceImage": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-frames\\20.png",
+      "crop": null,
+      "registration": {
+        "uniformScale": 0.25016041066777245,
+        "offsetX": -0.08213026189949346,
+        "offsetY": 0.10643245234365395,
+        "sourceLandmark": [
+          96,
+          116,
+          928,
+          895
+        ],
+        "targetLandmark": [
+          24,
+          29,
+          232,
+          224
+        ],
+        "landmark": "fixed bark/leaves/lower-pool outer silhouette; changing upper sap tip stays inside its extents",
+        "widthHeightScaleDisagreement": 0.0012820512820512775
+      },
+      "registrationScope": "one completed direct source drawing, aligned only from its stationary landmark to canonical; no pose transformation",
+      "hold": true,
+      "stationaryRegionRetention": "Canonical bark, leaves, small lower hanging drop, lower sap pool and background retained at identical coordinates. Only the union of actual/canonical large upper hanging-drop footprints (including its drawn outline and newly exposed bark pixels) is retained from the actual registered drawing. Upper sap attachment stays at the same fixed neck. No shape synthesis, warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 21,
+      "kind": "held-neutral-rest",
+      "actualSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\style-reference.png",
+      "sourceCopy": "source-drawings/rest-00.png",
+      "sourceImage": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-frames\\21.png",
+      "crop": null,
+      "registration": {
+        "uniformScale": 0.25016041066777245,
+        "offsetX": -0.08213026189949346,
+        "offsetY": 0.10643245234365395,
+        "sourceLandmark": [
+          96,
+          116,
+          928,
+          895
+        ],
+        "targetLandmark": [
+          24,
+          29,
+          232,
+          224
+        ],
+        "landmark": "fixed bark/leaves/lower-pool outer silhouette; changing upper sap tip stays inside its extents",
+        "widthHeightScaleDisagreement": 0.0012820512820512775
+      },
+      "registrationScope": "one completed direct source drawing, aligned only from its stationary landmark to canonical; no pose transformation",
+      "hold": true,
+      "stationaryRegionRetention": "Canonical bark, leaves, small lower hanging drop, lower sap pool and background retained at identical coordinates. Only the union of actual/canonical large upper hanging-drop footprints (including its drawn outline and newly exposed bark pixels) is retained from the actual registered drawing. Upper sap attachment stays at the same fixed neck. No shape synthesis, warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 22,
+      "kind": "held-neutral-rest",
+      "actualSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\style-reference.png",
+      "sourceCopy": "source-drawings/rest-00.png",
+      "sourceImage": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-frames\\22.png",
+      "crop": null,
+      "registration": {
+        "uniformScale": 0.25016041066777245,
+        "offsetX": -0.08213026189949346,
+        "offsetY": 0.10643245234365395,
+        "sourceLandmark": [
+          96,
+          116,
+          928,
+          895
+        ],
+        "targetLandmark": [
+          24,
+          29,
+          232,
+          224
+        ],
+        "landmark": "fixed bark/leaves/lower-pool outer silhouette; changing upper sap tip stays inside its extents",
+        "widthHeightScaleDisagreement": 0.0012820512820512775
+      },
+      "registrationScope": "one completed direct source drawing, aligned only from its stationary landmark to canonical; no pose transformation",
+      "hold": true,
+      "stationaryRegionRetention": "Canonical bark, leaves, small lower hanging drop, lower sap pool and background retained at identical coordinates. Only the union of actual/canonical large upper hanging-drop footprints (including its drawn outline and newly exposed bark pixels) is retained from the actual registered drawing. Upper sap attachment stays at the same fixed neck. No shape synthesis, warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    },
+    {
+      "index": 23,
+      "kind": "held-neutral-rest",
+      "actualSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\style-reference.png",
+      "sourceCopy": "source-drawings/rest-00.png",
+      "sourceImage": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\drawn-frames\\23.png",
+      "crop": null,
+      "registration": {
+        "uniformScale": 0.25016041066777245,
+        "offsetX": -0.08213026189949346,
+        "offsetY": 0.10643245234365395,
+        "sourceLandmark": [
+          96,
+          116,
+          928,
+          895
+        ],
+        "targetLandmark": [
+          24,
+          29,
+          232,
+          224
+        ],
+        "landmark": "fixed bark/leaves/lower-pool outer silhouette; changing upper sap tip stays inside its extents",
+        "widthHeightScaleDisagreement": 0.0012820512820512775
+      },
+      "registrationScope": "one completed direct source drawing, aligned only from its stationary landmark to canonical; no pose transformation",
+      "hold": true,
+      "stationaryRegionRetention": "Canonical bark, leaves, small lower hanging drop, lower sap pool and background retained at identical coordinates. Only the union of actual/canonical large upper hanging-drop footprints (including its drawn outline and newly exposed bark pixels) is retained from the actual registered drawing. Upper sap attachment stays at the same fixed neck. No shape synthesis, warp, tween, fade or per-frame fit.",
+      "retainedStationarySource": "source-drawings/canonical-reference.png",
+      "retentionMasks": "preparation/retention-masks"
+    }
+  ],
+  "qa": {
+    "key": "tree-sap",
+    "encodedFrameCount": 24,
+    "encodedDurationsMs": [
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100
+    ],
+    "totalDurationMs": 2400,
+    "samePaletteUsedForAllFrames": true,
+    "fixedLandmarkWidthSpanPx": 0,
+    "fixedLandmarkHeightSpanPx": 0,
+    "contactFromActualEncodedGif": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\tree-sap\\qa\\encoded-playback-strip.png",
+    "sourceAndPlaybackReview": "Reviewed actual encoded 24-frame GIF at 96px and its decoded sequence, plus peak frame at 256px. Bark, leaves, small hanging drop and lower pool remain byte-identical outside the recorded upper-drop footprint. Actual drawn upper hanging-drop poses and newly exposed bark pixels remain. No global anchor/scale pop, clipped tip or broken neck seam is visible.",
+    "registrationRule": "Only each checked boundary determines one common uniform scale/translation for its whole phase; no per-cel fit, deformation, interpolation or fade"
+  }
+}

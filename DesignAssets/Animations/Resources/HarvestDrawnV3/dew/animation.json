@@ -1,0 +1,163 @@
+{
+  "resource": "dew",
+  "frameSize": [
+    512,
+    512
+  ],
+  "frameCount": 9,
+  "sheetGrid": [
+    3,
+    3
+  ],
+  "durationsMs": [
+    500,
+    63,
+    62,
+    63,
+    62,
+    63,
+    62,
+    63,
+    62
+  ],
+  "loop": true,
+  "originalReference": "DesignAssets/Resources/dew-grass.png",
+  "drawingMethod": "Complete continuous plant poses drawn with built-in image_gen. No separated leaf or stationary-body composites.",
+  "outputPreparation": {
+    "sourceCellSize": [
+      887,
+      887
+    ],
+    "commonCellOutputSize": [
+      262,
+      262
+    ],
+    "rootTarget": [
+      253.5,
+      374
+    ],
+    "registration": "Whole-cell translation only, using the opaque root bottom.",
+    "perFrameScaling": false,
+    "bodyMasks": false,
+    "runtimeTransforms": false
+  },
+  "frames": [
+    {
+      "frame": 0,
+      "source": "source-drawings/key.png",
+      "cell": 0,
+      "sourceRoot": [
+        480.0,
+        777
+      ],
+      "wholeCellPlacement": [
+        112,
+        144
+      ]
+    },
+    {
+      "frame": 1,
+      "source": "source-drawings/key.png",
+      "cell": 1,
+      "sourceRoot": [
+        382.0,
+        777
+      ],
+      "wholeCellPlacement": [
+        141,
+        144
+      ]
+    },
+    {
+      "frame": 2,
+      "source": "source-drawings/micro.png",
+      "cell": 0,
+      "sourceRoot": [
+        479.0,
+        776
+      ],
+      "wholeCellPlacement": [
+        112,
+        145
+      ]
+    },
+    {
+      "frame": 3,
+      "source": "source-drawings/approach.png",
+      "cell": 1,
+      "sourceRoot": [
+        418.0,
+        781
+      ],
+      "wholeCellPlacement": [
+        130,
+        143
+      ]
+    },
+    {
+      "frame": 4,
+      "source": "source-drawings/release.png",
+      "cell": 0,
+      "sourceRoot": [
+        499.0,
+        788
+      ],
+      "wholeCellPlacement": [
+        106,
+        141
+      ]
+    },
+    {
+      "frame": 5,
+      "source": "source-drawings/release.png",
+      "cell": 1,
+      "sourceRoot": [
+        430.0,
+        788
+      ],
+      "wholeCellPlacement": [
+        126,
+        141
+      ]
+    },
+    {
+      "frame": 6,
+      "source": "source-drawings/recoil.png",
+      "cell": 0,
+      "sourceRoot": [
+        497.0,
+        792
+      ],
+      "wholeCellPlacement": [
+        107,
+        140
+      ]
+    },
+    {
+      "frame": 7,
+      "source": "source-drawings/recoil.png",
+      "cell": 1,
+      "sourceRoot": [
+        413.0,
+        793
+      ],
+      "wholeCellPlacement": [
+        132,
+        140
+      ]
+    },
+    {
+      "frame": 8,
+      "source": "source-drawings/micro.png",
+      "cell": 1,
+      "sourceRoot": [
+        382.0,
+        776
+      ],
+      "wholeCellPlacement": [
+        141,
+        145
+      ]
+    }
+  ]
+}

@@ -1,0 +1,172 @@
+{
+  "source": "DesignAssets/Resources/clay.png",
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "frameCount": 13,
+  "columns": 4,
+  "rows": 4,
+  "contactFrame": 3,
+  "settleFrame": 12,
+  "pivotX": 128,
+  "pivotY": 224,
+  "sheet": "harvest-sheet.png",
+  "preview": "fertile-soil-harvest.webp",
+  "durationsMs": [
+    550,
+    180,
+    180,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    350
+  ],
+  "method": "Original frames 0-6 and 12 preserved byte-identically. Built-in image_gen redrew landing keys and adjacent falling poses. One uniform scale and anchor per new source group matches the retained peak clod. Newly drawn moving regions are extracted and placed behind the unchanged reference soil lip for progressive landing occlusion; no generated motion by transforms, warping, interpolation, or fades.",
+  "sourceDrawings": {
+    "key": "Use case: precise-object-edit.\nAsset type: actual production 2D sprite animation source drawings for a game resource being harvested, key poses.\nInput image: the attached orange terracotta soil deposit is the exact design, palette, lighting, silhouette, and painting-style authority. This soil is called fertile soil in the game. Do NOT recolor, redesign or add vegetation.\nDraw one square 2048x2048 transparent PNG arranged as exactly 2 columns by 2 rows of 1024x1024 cells, no borders or labels, with four complete same-scale animation key drawings in reading order.\nThe soil body in every cell is fixed at the SAME place, very wide and low, width 880px, bottom baseline y=870, centered x=512, matching the original front/above viewpoint, curved layered terracotta stratum and fine brown outline. Leave ample transparency above. No camera motion or change in object size. Only local upper-center/right soil surface and loose clay clods change. The lower front lip and lower layers remain planted and visually unchanged.\nKey pose 1 / top left: exact neutral reference shape at rest, no flying particles.\nKey pose 2 / top right: harvesting contact. The upper center/right small lump fractures with 2 curved cracks and a small indentation; 3 little irregular orange-brown soil clods detach upward only slightly. The broad body retains original silhouette.\nKey pose 3 / bottom left: peak. The detached 3 clods are airborne in a tight fan above that same indentation (largest clod about 65px, travel no more than 160px); a few tiny soil crumbs. Grounded deposit itself never bounces, scales, rotates, or squashes. Draw newly exposed darker broken soil surfaces.\nKey pose 4 / bottom right: settling. Clods fall down immediately beside the indentation and merge back into the loose soil surface, one tiny falling crumb, the body returns very close to the neutral original. No depletion or vanishing.\nActual DRAWN motion poses, no transformation of a flat picture. Fine anti-aliased hand-painted cartoon lines and broad smooth gradients identical to the reference. True alpha transparency. No shovel, tools, characters, hands, sparkles, text, background plane, external shadows, motion streaks, grids, or checkerboard. Keep all drawings fully inside their cells.",
+    "adjacent": "Use case: precise-object-edit. Actual source artwork for a fertile-soil harvest animation.\nImage 1 is the immutable original orange terracotta soil deposit. Image 2 contains FOUR CHECKED KEY POSES in a 2x2 layout: neutral (top left), fractured harvesting contact (top right), 3-clod airborne peak (bottom left), clods settling down (bottom right).\nDraw exactly EIGHT new adjacent intermediate frames on one transparent PNG, arranged FOUR COLUMNS by TWO ROWS of EQUAL SQUARE cells, no labels or borders. Every cell contains the same complete wide low soil deposit as image 1, at the SAME scale, camera, centered x and baseline, matching image 2's body layout. Preserve the large unchanging lower layered body, colors, fine brown outline, upper-left lighting and broad smooth hand-painted gradients. Do not clip the outline; give each cell 7% transparent side padding.\nIn READING ORDER:\n1: Just before contact: one fine upper-right/center crack begins, soil fragments still attached.\n2: Immediately before the top-right key pose: cracks open very slightly, three little clods start separating, with barely any lift.\n3: Immediately after the top-right contact key, 1/3 toward bottom-left peak: same three clods travel upwards, small dark soil indentation visible.\n4: 2/3 toward that airborne peak: identical three clods approach their highest positions, slight natural rotation; never add clods.\n5: Immediately after bottom-left peak, 1/4 down toward bottom-right settling key: same three clods begin descending; retain their identities, volumes and trajectories.\n6: Halfway down between peak and settling key: clods lower and gently rotate toward rest, a few tiny falling crumbs.\n7: 3/4 down between peak and settling: clods almost touch the upper-right soil surface.\n8: AFTER the bottom-right settling key: loose clods have nearly merged into the surface, only a shallow closing seam remains, almost exactly image 1 neutral.\nThe deposit NEVER bounces, shifts, squashes, tilts, changes shape or changes size. Motion is only local cracking and the three small clods in an arc above the upper-center/right. Lower layers and left side stay planted, unchanged. Draw the intermediate poses faithfully; no rescaled duplicates. No tools, hands, characters, shovel, plants, sparks, speed lines, scenery, shadows outside the sprite, text, grid, or checkerboard. Genuine transparent RGBA background.",
+    "landingV2": {
+      "file": "source-drawings/landing-v2.png",
+      "prompt": "Use case: precise-object-edit. Correct a failed landing source drawing before making in-betweens.\nImage 1 is the FAILED two-cell landing sheet. Image 2 is the exact valid airborne peak frame and is the ONLY authority for the sizes and shapes of the three clods. Image 3 is exact neutral. Redraw the two landing key cells from image 1, maintaining the deposit and changing only the overly-large landing clods.\nCRITICAL size match: in the left cell of image 1 the large clod is about one third TOO LARGE. Correct it so the large clod's COMPLETE projected width is exactly ONE EIGHTH of the deposit width, identical to image 2. This is a rigid angular orange soil clod, not a round ball. Its complete height is also exactly one eighth of deposit width. The left and right small clods are each about ONE SIXTEENTH of the deposit width. Match image 2 shapes and sizes precisely. Do not redesign the large clod, inflate it or turn it into a boulder.\nLEFT output cell: landing/contact, large clod of the corrected reference size is touching the soil depression with its lower quarter hidden behind the near soil lip. Keep the large clod full-sized as it becomes occluded. The little left clod has landed and is mostly occluded; the little right clod is just touching the edge. NO rebound. Tiny crumbs only.\nRIGHT output cell: the same large clod has sunk farther behind that same lip; only its shallow top edge is visible at the SAME width, and the two little clods are occluded. Almost neutral, no floating clods, no new cracks elsewhere.\nTwo equal square cells SIDE BY SIDE, true transparent RGBA. Whole deposit identical in both cells, original orange layered soil design, broad hand-painted gradients, delicate fine brown contours, exact reference camera, same position and scale. Deposit width 81.25% of each square cell, bottom baseline 87.5% cell height. No body movement, no squash, no text, borders, grid, glow, tools, or characters.",
+      "frames": [
+        10,
+        11
+      ]
+    },
+    "fallingV2": {
+      "file": "source-drawings/falling-v2.png",
+      "prompt": "Use case: precise-object-edit. Draw actual adjacent source poses for the FALLING phase of an existing fertile-soil game sprite animation.\nImage 1 is the exact retained airborne peak (frame 6), and the absolute authority for the identities, volume, palette, size and positions of the THREE soil clods. Image 2 is the checked landing-key pair: its LEFT cell is the destination contact pose. Image 3 is the neutral deposit and fixed-body authority.\nOutput THREE equal SQUARE cells SIDE BY SIDE in one transparent PNG, reading left to right. These are three immediately consecutive falling frames BETWEEN image 1 peak and image 2 LEFT landing. Do not repeat the peak or landing in this output.\nKeep the deposit layout from image 1 exactly in each cell: bottom baseline 87.5% of square, deposit width 81.25% of square; same original low wide orange layered soil shape, no motion of the main deposit. Fully draw everything with matching fine contour and smooth painted shading. Do not enlarge the pile or clods.\nTrack THREE rigid clods from image 1: one largest angular clod above center-right, one small clod lower-left, one small clod lower-right. Largest width stays about 12.5% of deposit width, small clods about 6%. NEVER shrink or grow them. Retain their shape/volume, same warm orange top highlight and dark lower side. Their downward displacement increases naturally because gravity accelerates. Little crumbs fall too, but no new large pieces.\nCELL 1, immediately after peak: large clod about 3 pixels LOWER than image 1 on a normalized 256x256 canvas, same x (about x=157), same shape and size. Both small clods also only slightly lower. It must connect very gently to the peak, no initial downward jump.\nCELL 2, next falling frame: large clod about 10 pixels LOWER than peak, shifted only 1 pixel right. The left little clod starts touching its soil lip; right little clod still descends. Retain ALL THREE original clods visibly at full size unless their bottom edges start to be occluded by the actual fixed soil surface.\nCELL 3, next falling frame before landing: large clod about 23 pixels LOWER than peak, shifted only 2 pixels right; its lower edge is just a few pixels above the landing indentation, ready to meet image 2 LEFT pose. The little left clod is partially hidden by the original near soil lip; the little right clod touches the right edge. Large clod still full size, no shrink. No bounce.\nA grounded continuous fall, not stones magically dissolving in midair. Keep the cracked receiving indentation in the same location. Do not flatten the biggest clod into a smear or make it puff up. Lower soil layers and left half stationary and identical to reference. No tools, characters, hands, plants, backgrounds, shadows outside the sprite, speed lines, labels, grid or checkerboard. Genuine transparent alpha.",
+      "frames": [
+        7,
+        8,
+        9
+      ]
+    }
+  },
+  "registration": [
+    {
+      "source": "neutral",
+      "cell": 0,
+      "scale": 0.17391304347826086,
+      "translation": [
+        18,
+        43
+      ]
+    },
+    {
+      "source": "adjacent",
+      "cell": 0,
+      "scale": 0.4792626728110599,
+      "translation": [
+        19,
+        17
+      ]
+    },
+    {
+      "source": "adjacent",
+      "cell": 1,
+      "scale": 0.4792626728110599,
+      "translation": [
+        21,
+        17
+      ]
+    },
+    {
+      "source": "key",
+      "cell": 1,
+      "scale": 0.3328,
+      "translation": [
+        24,
+        17
+      ]
+    },
+    {
+      "source": "adjacent",
+      "cell": 2,
+      "scale": 0.4792626728110599,
+      "translation": [
+        21,
+        17
+      ]
+    },
+    {
+      "source": "adjacent",
+      "cell": 3,
+      "scale": 0.4792626728110599,
+      "translation": [
+        23,
+        17
+      ]
+    },
+    {
+      "source": "key",
+      "cell": 2,
+      "scale": 0.3328,
+      "translation": [
+        23,
+        43
+      ]
+    },
+    {
+      "source": "fallingV2",
+      "cell": 0,
+      "scale": 0.26785714285714285,
+      "translation": [
+        44,
+        40
+      ]
+    },
+    {
+      "source": "fallingV2",
+      "cell": 1,
+      "scale": 0.26785714285714285,
+      "translation": [
+        44,
+        40
+      ]
+    },
+    {
+      "source": "fallingV2",
+      "cell": 2,
+      "scale": 0.26785714285714285,
+      "translation": [
+        44,
+        40
+      ]
+    },
+    {
+      "source": "landingV2",
+      "cell": 0,
+      "scale": 0.2564102564102564,
+      "translation": [
+        13,
+        17
+      ]
+    },
+    {
+      "source": "landingV2",
+      "cell": 1,
+      "scale": 0.2564102564102564,
+      "translation": [
+        13,
+        17
+      ]
+    },
+    {
+      "source": "neutral",
+      "cell": 0,
+      "scale": 0.17391304347826086,
+      "translation": [
+        18,
+        43
+      ]
+    }
+  ],
+  "runtimeIntegrated": true,
+  "revision": 2
+}

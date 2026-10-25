@@ -1,0 +1,23 @@
+{
+  "provider": "ElevenLabs",
+  "endpoint": "https://api.elevenlabs.io/v1/sound-generation",
+  "request": {
+    "text": "Close-up foley of a small leafy tree canopy gently shaking back and forth as its branches are nudged. Broad overlapping swishes of many fresh leaves rubbing together, soft papery flutter and a little light twig movement, with small irregular pulses. Gentle miniature forest game scale, dry intimate recording. No chopping, bark tearing, wood knocks, wind roar, birds, insects, voices, music or reverb.",
+    "duration_seconds": 4,
+    "prompt_influence": 0.8,
+    "loop": true,
+    "output_format": "mp3_44100_128",
+    "model_id": "eleven_text_to_sound_v2",
+    "request_options": {
+      "max_retries": 0
+    }
+  },
+  "status": "completed",
+  "generated_at": "2026-10-25T06:54:20.029655+00:00",
+  "input_sources": [],
+  "processing": null,
+  "approved": true,
+  "asset": "DesignAssets/Audio/wood-harvest-loop.mp3",
+  "bytes": 65244,
+  "sha256": "a9fbe245fc972fb5b155ed097a2035dbed6d1c8ce86ea62828e60203d9dffdfe"
+}

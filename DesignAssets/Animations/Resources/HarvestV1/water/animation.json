@@ -17,13 +17,6 @@
     128,
     224
   ],
-  "parts": [
-    "parts/base.png",
-    "parts/large-drop.png"
-  ],
-  "fixedParts": [
-    "parts/base.png"
-  ],
   "runtimeIntegrated": true,
   "runtime": {
     "contactFrame": 5,
@@ -32,20 +25,7 @@
     "loop": false,
     "method": "harvest-sheet"
   },
-  "sourceMethod": "생산용 숨은 면을 imagegen으로 완전히 복원하고 독립 원화 파츠만 국소 반응",
-  "movingParts": [
-    "parts/large-drop.png"
-  ],
-  "fixedAnchors": [
-    {
-      "part": "parts/base.png",
-      "role": "고정된 원화와 지면",
-      "position": [
-        128,
-        224
-      ]
-    }
-  ],
+  "sourceMethod": "원본과 확인한 핵심 포즈를 유지하며 실제로 그린 인접 포즈를 사용한다. 공통 배율·기준점 정렬, 알파 정리와 정지 영역 유지만 보완 작업으로 적용한다.",
   "neutralFrames": [
     0,
     4,
@@ -55,5 +35,39 @@
     22,
     23
   ],
-  "runtimePreview": "runtime.gif"
+  "runtimePreview": "runtime.gif",
+  "mode": "drawn-poses",
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "pivot": [
+    128,
+    224
+  ],
+  "frameFiles": [
+    "StyleV2/frames/frame-00.png",
+    "StyleV2/frames/frame-01.png",
+    "StyleV2/frames/frame-02.png",
+    "StyleV2/frames/frame-03.png",
+    "StyleV2/frames/frame-04.png",
+    "StyleV2/frames/frame-05.png",
+    "StyleV2/frames/frame-06.png",
+    "StyleV2/frames/frame-07.png",
+    "StyleV2/frames/frame-08.png",
+    "StyleV2/frames/frame-09.png",
+    "StyleV2/frames/frame-10.png",
+    "StyleV2/frames/frame-11.png",
+    "StyleV2/frames/frame-12.png",
+    "StyleV2/frames/frame-13.png",
+    "StyleV2/frames/frame-14.png",
+    "StyleV2/frames/frame-15.png",
+    "StyleV2/frames/frame-16.png",
+    "StyleV2/frames/frame-17.png",
+    "StyleV2/frames/frame-18.png",
+    "StyleV2/frames/frame-19.png",
+    "StyleV2/frames/frame-20.png",
+    "StyleV2/frames/frame-21.png",
+    "StyleV2/frames/frame-22.png",
+    "StyleV2/frames/frame-23.png"
+  ],
+  "drawingSources": "StyleV2/sources.json"
 }

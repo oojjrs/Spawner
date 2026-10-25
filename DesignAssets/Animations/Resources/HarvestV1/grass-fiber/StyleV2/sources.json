@@ -1,0 +1,1309 @@
+{
+  "key": "grass-fiber",
+  "frameCount": 24,
+  "frameSize": [
+    256,
+    256
+  ],
+  "sheetSize": [
+    1536,
+    1024
+  ],
+  "sheetGrid": [
+    6,
+    4
+  ],
+  "frameDelayMilliseconds": 100,
+  "encodedDurationMilliseconds": 2400,
+  "smallPreviewSize": [
+    96,
+    96
+  ],
+  "previewBackground": "#173c35",
+  "previewPalette": "One shared 192-color palette remapped identically across all actual frames; no per-frame automatic palette.",
+  "sourceMethod": "Actual drawn keys and adjacent source cels; unchanged drawn holds retained. No missing moving pose was synthesized by transforms or interpolation.",
+  "stationaryRetention": "Neutral/identical peak holds retain the entire approved drawn canvas; no partial moving-region composite used.",
+  "sourceDrawings": [
+    "source-drawings/phase-repair-16-19.png",
+    "source-drawings/phase-adjacent-14-19.png",
+    "source-drawings/canonical-style-reference.png",
+    "source-drawings/key-03.png",
+    "source-drawings/phase-adjacent-00-05.png",
+    "source-drawings/phase-adjacent-07-12.png",
+    "source-drawings/key-13.png"
+  ],
+  "frames": [
+    {
+      "key": "grass-fiber",
+      "index": 0,
+      "kind": "retained-approved-neutral-hold",
+      "status": "retained",
+      "sourcePath": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png",
+      "output": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\00.png",
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png"
+      ],
+      "prompt": "Retain the locked approved actually drawn neutral resource at unchanged pixels and canvas coordinates for this stationary rest hold. No moving pose is synthesized.",
+      "cachePath": null,
+      "preparation": "byte-identical file copy; no resize, transform or interpolation",
+      "candidateFrame": "frames/frame-00.png",
+      "packagedSource": "source-drawings/canonical-style-reference.png",
+      "finalPreparation": "Shared whole-canvas resize from 1024x1024 to 256x256, no individual fit, no pose synthesis."
+    },
+    {
+      "key": "grass-fiber",
+      "index": 1,
+      "kind": "drawn-adjacent-cel",
+      "status": "checked-source",
+      "prompt": "Draw SIX COMPLETE adjacent animation cels for the Spawner grass-fiber resource, global frames 0 through 5. Every changing pose and in-between must be newly drawn as full source artwork, including stationary elements. Preserve the checked keys; do not redesign the resource.\nOutput exactly 1536x1024 pixels: THREE columns by TWO rows of equal 512x512 square cels, read left-to-right then top-to-bottom. No gutters, grid, labels or borders. Every cell is its own complete transparent animation canvas.\nImage 1: LOCKED ORIGINAL canonical, the authority for exact object count, anatomy, large shapes, quiet clean hand-painted material, palette, lighting and proportions.\nImage 2: CHECKED IMMEDIATELY PRECEDING BOUNDARY, global frame 0; copy this exact pose, camera, scale and anchor into FIRST CELL as a registration anchor. Do not change its design. The final pipeline will retain the already checked boundary artwork instead of replacing it.\nImage 3: CHECKED REACTION PEAK, frame 13. Preserve its pose when that index occurs and smoothly DRAW the intervening nearby poses.\nImage 4: CHECKED PREPARATION KEY, frame 3, for identity and gentle action continuity.\nImage 5: CANONICAL LAYOUT ONLY, same canonical sprite repeated at the correct registration in all six cells; follow its shared cell position and scale but do NOT repeat the same moving pose.\nFixed landmarks: center at x=256 in every cel, fixed contact y=448, canonical maximum span 416 pixels. Keep fixed body/waist/rear contacts matching the supplied boundary. No zoom, camera shift, size drift, global floating or growth between cells. Main motion is local drawn changes only, never a moved copy.\nMotion: The broad free grass ribbon ends gently flex outward by a few pixels while the tied waist and bundle footprint stay fixed. Keep all ribbons attached and the same clear count.\nCell-specific phases:\nCell 1, row 1, col 1: global 00; neutral rest pose, matching the approved reference exactly; strength 0.00000 of the restrained maximum.\nCell 2, row 1, col 2: global 01; gentle preparation touch; strength 0.16250 of the restrained maximum.\nCell 3, row 1, col 3: global 02; gentle preparation touch; strength 0.48750 of the restrained maximum.\nCell 4, row 2, col 1: global 03; gentle preparation touch; strength 0.65000 of the restrained maximum.\nCell 5, row 2, col 2: global 04; gentle preparation touch; strength 0.48750 of the restrained maximum.\nCell 6, row 2, col 3: global 05; gentle preparation touch; strength 0.16250 of the restrained maximum.\nThin continuous dark contour, clearly separated rounded large volumes, smooth broad gradients, one restrained broad highlight per volume, clean quiet surfaces, no added fine texture. Keep attachments, overlaps and newly exposed areas complete.\nTRANSPARENCY IS ESSENTIAL: alpha exactly zero everywhere outside the actual resource contours in EVERY CELL. No brown fog, colored bloom, halo, vignette, ambient background shading, floor, cast shadow, particles or background color. No face, text, extra piece, extra views or scenery. Exactly six separate full drawn cels and no other content.",
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\00.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\13.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\03.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-guides\\canonical-layout.png"
+      ],
+      "cachePath": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-c44fc9bb-534a-41f8-9b56-8e34d12a79b6.png",
+      "sourcePath": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-sources\\adjacent-00-05.png",
+      "output": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\01.png",
+      "cellRect": {
+        "x": 512,
+        "y": 0,
+        "width": 512,
+        "height": 512
+      },
+      "commonCanvas": {
+        "width": 1024,
+        "height": 1024
+      },
+      "phaseRegistration": {
+        "scale": 0.8915145005370569,
+        "tx": 28.35338345864659,
+        "ty": 60.54242749731475,
+        "derivedFromSameApprovedBoundary": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\00.png",
+        "sourceBoundaryGeometry": "931x714+77+222",
+        "approvedBoundaryGeometry": "830x642+97+253",
+        "registrationLandmarkAlphaThreshold": 0.5
+      },
+      "preparation": "Grid extraction, common canvas upsample, one uniform boundary-derived registration identically on all phase cels. No independent bbox fit, per-part transform or interpolation.",
+      "candidateFrame": "frames/frame-01.png",
+      "packagedSource": "source-drawings/phase-adjacent-00-05.png",
+      "finalPreparation": "Shared whole-canvas resize from 1024x1024 to 256x256, no individual fit, no pose synthesis."
+    },
+    {
+      "key": "grass-fiber",
+      "index": 2,
+      "kind": "drawn-adjacent-cel",
+      "status": "checked-source",
+      "prompt": "Draw SIX COMPLETE adjacent animation cels for the Spawner grass-fiber resource, global frames 0 through 5. Every changing pose and in-between must be newly drawn as full source artwork, including stationary elements. Preserve the checked keys; do not redesign the resource.\nOutput exactly 1536x1024 pixels: THREE columns by TWO rows of equal 512x512 square cels, read left-to-right then top-to-bottom. No gutters, grid, labels or borders. Every cell is its own complete transparent animation canvas.\nImage 1: LOCKED ORIGINAL canonical, the authority for exact object count, anatomy, large shapes, quiet clean hand-painted material, palette, lighting and proportions.\nImage 2: CHECKED IMMEDIATELY PRECEDING BOUNDARY, global frame 0; copy this exact pose, camera, scale and anchor into FIRST CELL as a registration anchor. Do not change its design. The final pipeline will retain the already checked boundary artwork instead of replacing it.\nImage 3: CHECKED REACTION PEAK, frame 13. Preserve its pose when that index occurs and smoothly DRAW the intervening nearby poses.\nImage 4: CHECKED PREPARATION KEY, frame 3, for identity and gentle action continuity.\nImage 5: CANONICAL LAYOUT ONLY, same canonical sprite repeated at the correct registration in all six cells; follow its shared cell position and scale but do NOT repeat the same moving pose.\nFixed landmarks: center at x=256 in every cel, fixed contact y=448, canonical maximum span 416 pixels. Keep fixed body/waist/rear contacts matching the supplied boundary. No zoom, camera shift, size drift, global floating or growth between cells. Main motion is local drawn changes only, never a moved copy.\nMotion: The broad free grass ribbon ends gently flex outward by a few pixels while the tied waist and bundle footprint stay fixed. Keep all ribbons attached and the same clear count.\nCell-specific phases:\nCell 1, row 1, col 1: global 00; neutral rest pose, matching the approved reference exactly; strength 0.00000 of the restrained maximum.\nCell 2, row 1, col 2: global 01; gentle preparation touch; strength 0.16250 of the restrained maximum.\nCell 3, row 1, col 3: global 02; gentle preparation touch; strength 0.48750 of the restrained maximum.\nCell 4, row 2, col 1: global 03; gentle preparation touch; strength 0.65000 of the restrained maximum.\nCell 5, row 2, col 2: global 04; gentle preparation touch; strength 0.48750 of the restrained maximum.\nCell 6, row 2, col 3: global 05; gentle preparation touch; strength 0.16250 of the restrained maximum.\nThin continuous dark contour, clearly separated rounded large volumes, smooth broad gradients, one restrained broad highlight per volume, clean quiet surfaces, no added fine texture. Keep attachments, overlaps and newly exposed areas complete.\nTRANSPARENCY IS ESSENTIAL: alpha exactly zero everywhere outside the actual resource contours in EVERY CELL. No brown fog, colored bloom, halo, vignette, ambient background shading, floor, cast shadow, particles or background color. No face, text, extra piece, extra views or scenery. Exactly six separate full drawn cels and no other content.",
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\00.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\13.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\03.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-guides\\canonical-layout.png"
+      ],
+      "cachePath": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-c44fc9bb-534a-41f8-9b56-8e34d12a79b6.png",
+      "sourcePath": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-sources\\adjacent-00-05.png",
+      "output": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\02.png",
+      "cellRect": {
+        "x": 1024,
+        "y": 0,
+        "width": 512,
+        "height": 512
+      },
+      "commonCanvas": {
+        "width": 1024,
+        "height": 1024
+      },
+      "phaseRegistration": {
+        "scale": 0.8915145005370569,
+        "tx": 28.35338345864659,
+        "ty": 60.54242749731475,
+        "derivedFromSameApprovedBoundary": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\00.png",
+        "sourceBoundaryGeometry": "931x714+77+222",
+        "approvedBoundaryGeometry": "830x642+97+253",
+        "registrationLandmarkAlphaThreshold": 0.5
+      },
+      "preparation": "Grid extraction, common canvas upsample, one uniform boundary-derived registration identically on all phase cels. No independent bbox fit, per-part transform or interpolation.",
+      "candidateFrame": "frames/frame-02.png",
+      "packagedSource": "source-drawings/phase-adjacent-00-05.png",
+      "finalPreparation": "Shared whole-canvas resize from 1024x1024 to 256x256, no individual fit, no pose synthesis."
+    },
+    {
+      "key": "grass-fiber",
+      "index": 3,
+      "kind": "key-pose-candidate",
+      "prompt": "Draw ONE COMPLETE animation frame 4 of 24 for the 풀섬유 (grass-fiber) resource. FIRST reference is the exact approved clean sprite and canvas registration. SECOND reference is the old frame, provided only as a restrained motion/pose guide: do not copy its old texture, extra parts or different proportions. Redraw the whole sprite in the FIRST reference identity and broad clean painterly shading. Pose: gentle preparation touch; reaction strength 0.650 of the small maximum. Motion plan: The broad free grass ribbon ends gently flex outward by a few pixels while the tied waist and bundle footprint stay fixed. Keep all ribbons attached and the same clear count. Preserve exact object count, palette, left-top lighting, contour weight, perspective and simplified material detail. Keep base center at 50 percent canvas width, lowest fixed contact at 87.5 percent canvas height, and the same scale and transparent padding as the FIRST reference. No global camera movement, floating, growth, extraction, added texture, tiny glints, labels, grid or extra frame. Truly transparent square background; exactly one whole frame, including all stationary elements.\nKey pose source drawing only. Preserve the EXACT large shapes, ribbon/root count and attached waist/bundle from the FIRST canonical image, not the old detailed guide. Output one complete square frame on a 1024 by 1024 canvas. Canonical center x=512 and stationary base y=896, maximum span 81.25 percent. No global zoom, shift, growth or different silhouette proportions. Only the approved free tips locally flex. Alpha outside the actual resource silhouette must be zero. No fog, halo, glow, floor, background shading, cast shadow, thin hair roots, extra fine fibers, new tie or extra plant parts.",
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\guide-frames\\03.png"
+      ],
+      "cachePath": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-c2c5cf93-f6c7-47d8-b420-1a2157f4de11.png",
+      "sourcePath": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\key-sources\\03.png",
+      "output": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\03.png",
+      "status": "checked-key",
+      "normalizedSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\key-sources\\03-common-canvas.png",
+      "preparation": "Remove only alpha below 1%; whole source canvas normalized to common 1024x1024. No bbox fit, no per-part transform, no anchor shift.",
+      "sourceCheck": "Canonical attached bundle, waist/root core, proportions and broad material kept. Local free-tip changes checked against neutral and other key; no new texture or anatomy.",
+      "candidateFrame": "frames/frame-03.png",
+      "packagedSource": "source-drawings/key-03.png",
+      "finalPreparation": "Shared whole-canvas resize from 1024x1024 to 256x256, no individual fit, no pose synthesis."
+    },
+    {
+      "key": "grass-fiber",
+      "index": 4,
+      "kind": "drawn-adjacent-cel",
+      "status": "checked-source",
+      "prompt": "Draw SIX COMPLETE adjacent animation cels for the Spawner grass-fiber resource, global frames 0 through 5. Every changing pose and in-between must be newly drawn as full source artwork, including stationary elements. Preserve the checked keys; do not redesign the resource.\nOutput exactly 1536x1024 pixels: THREE columns by TWO rows of equal 512x512 square cels, read left-to-right then top-to-bottom. No gutters, grid, labels or borders. Every cell is its own complete transparent animation canvas.\nImage 1: LOCKED ORIGINAL canonical, the authority for exact object count, anatomy, large shapes, quiet clean hand-painted material, palette, lighting and proportions.\nImage 2: CHECKED IMMEDIATELY PRECEDING BOUNDARY, global frame 0; copy this exact pose, camera, scale and anchor into FIRST CELL as a registration anchor. Do not change its design. The final pipeline will retain the already checked boundary artwork instead of replacing it.\nImage 3: CHECKED REACTION PEAK, frame 13. Preserve its pose when that index occurs and smoothly DRAW the intervening nearby poses.\nImage 4: CHECKED PREPARATION KEY, frame 3, for identity and gentle action continuity.\nImage 5: CANONICAL LAYOUT ONLY, same canonical sprite repeated at the correct registration in all six cells; follow its shared cell position and scale but do NOT repeat the same moving pose.\nFixed landmarks: center at x=256 in every cel, fixed contact y=448, canonical maximum span 416 pixels. Keep fixed body/waist/rear contacts matching the supplied boundary. No zoom, camera shift, size drift, global floating or growth between cells. Main motion is local drawn changes only, never a moved copy.\nMotion: The broad free grass ribbon ends gently flex outward by a few pixels while the tied waist and bundle footprint stay fixed. Keep all ribbons attached and the same clear count.\nCell-specific phases:\nCell 1, row 1, col 1: global 00; neutral rest pose, matching the approved reference exactly; strength 0.00000 of the restrained maximum.\nCell 2, row 1, col 2: global 01; gentle preparation touch; strength 0.16250 of the restrained maximum.\nCell 3, row 1, col 3: global 02; gentle preparation touch; strength 0.48750 of the restrained maximum.\nCell 4, row 2, col 1: global 03; gentle preparation touch; strength 0.65000 of the restrained maximum.\nCell 5, row 2, col 2: global 04; gentle preparation touch; strength 0.48750 of the restrained maximum.\nCell 6, row 2, col 3: global 05; gentle preparation touch; strength 0.16250 of the restrained maximum.\nThin continuous dark contour, clearly separated rounded large volumes, smooth broad gradients, one restrained broad highlight per volume, clean quiet surfaces, no added fine texture. Keep attachments, overlaps and newly exposed areas complete.\nTRANSPARENCY IS ESSENTIAL: alpha exactly zero everywhere outside the actual resource contours in EVERY CELL. No brown fog, colored bloom, halo, vignette, ambient background shading, floor, cast shadow, particles or background color. No face, text, extra piece, extra views or scenery. Exactly six separate full drawn cels and no other content.",
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\00.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\13.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\03.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-guides\\canonical-layout.png"
+      ],
+      "cachePath": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-c44fc9bb-534a-41f8-9b56-8e34d12a79b6.png",
+      "sourcePath": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-sources\\adjacent-00-05.png",
+      "output": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\04.png",
+      "cellRect": {
+        "x": 512,
+        "y": 512,
+        "width": 512,
+        "height": 512
+      },
+      "commonCanvas": {
+        "width": 1024,
+        "height": 1024
+      },
+      "phaseRegistration": {
+        "scale": 0.8915145005370569,
+        "tx": 28.35338345864659,
+        "ty": 60.54242749731475,
+        "derivedFromSameApprovedBoundary": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\00.png",
+        "sourceBoundaryGeometry": "931x714+77+222",
+        "approvedBoundaryGeometry": "830x642+97+253",
+        "registrationLandmarkAlphaThreshold": 0.5
+      },
+      "preparation": "Grid extraction, common canvas upsample, one uniform boundary-derived registration identically on all phase cels. No independent bbox fit, per-part transform or interpolation.",
+      "alphaCleanup": {
+        "method": "Remove only detached neighboring-cell residue by connected foreground alpha mask. Main connected drawing RGB/alpha retained; no pose deformation or fitting.",
+        "keepComponent": 1,
+        "threshold": 0.01,
+        "removedComponents": [
+          {
+            "id": 51,
+            "geometry": "40x71+28+578",
+            "area": 1959
+          },
+          {
+            "id": 70,
+            "geometry": "20x79+28+694",
+            "area": 1079
+          },
+          {
+            "id": 60,
+            "geometry": "35x33+28+658",
+            "area": 825
+          },
+          {
+            "id": 18,
+            "geometry": "24x1+700+437",
+            "area": 24
+          },
+          {
+            "id": 22,
+            "geometry": "2x11+872+446",
+            "area": 15
+          },
+          {
+            "id": 82,
+            "geometry": "1x13+49+729",
+            "area": 13
+          },
+          {
+            "id": 8,
+            "geometry": "1x8+178+324",
+            "area": 8
+          },
+          {
+            "id": 54,
+            "geometry": "1x8+132+588",
+            "area": 8
+          },
+          {
+            "id": 42,
+            "geometry": "1x6+94+529",
+            "area": 6
+          },
+          {
+            "id": 93,
+            "geometry": "6x1+345+760",
+            "area": 6
+          },
+          {
+            "id": 49,
+            "geometry": "5x1+866+567",
+            "area": 5
+          },
+          {
+            "id": 113,
+            "geometry": "1x4+685+834",
+            "area": 4
+          },
+          {
+            "id": 77,
+            "geometry": "1x4+47+719",
+            "area": 4
+          },
+          {
+            "id": 25,
+            "geometry": "1x4+806+463",
+            "area": 4
+          },
+          {
+            "id": 21,
+            "geometry": "4x1+648+446",
+            "area": 4
+          },
+          {
+            "id": 66,
+            "geometry": "4x1+252+682",
+            "area": 4
+          },
+          {
+            "id": 71,
+            "geometry": "1x4+287+705",
+            "area": 4
+          },
+          {
+            "id": 78,
+            "geometry": "2x2+498+719",
+            "area": 4
+          },
+          {
+            "id": 43,
+            "geometry": "3x1+843+531",
+            "area": 3
+          },
+          {
+            "id": 44,
+            "geometry": "3x1+835+533",
+            "area": 3
+          },
+          {
+            "id": 40,
+            "geometry": "2x2+850+528",
+            "area": 3
+          },
+          {
+            "id": 112,
+            "geometry": "2x2+878+833",
+            "area": 3
+          },
+          {
+            "id": 19,
+            "geometry": "3x1+686+439",
+            "area": 3
+          },
+          {
+            "id": 91,
+            "geometry": "3x1+338+758",
+            "area": 3
+          },
+          {
+            "id": 88,
+            "geometry": "1x3+47+747",
+            "area": 3
+          },
+          {
+            "id": 119,
+            "geometry": "2x2+744+858",
+            "area": 3
+          },
+          {
+            "id": 38,
+            "geometry": "2x1+94+526",
+            "area": 2
+          },
+          {
+            "id": 20,
+            "geometry": "1x2+872+441",
+            "area": 2
+          },
+          {
+            "id": 13,
+            "geometry": "1x2+178+338",
+            "area": 2
+          },
+          {
+            "id": 58,
+            "geometry": "2x1+938+655",
+            "area": 2
+          },
+          {
+            "id": 56,
+            "geometry": "2x1+184+646",
+            "area": 2
+          },
+          {
+            "id": 67,
+            "geometry": "2x1+359+682",
+            "area": 2
+          },
+          {
+            "id": 41,
+            "geometry": "2x1+853+528",
+            "area": 2
+          },
+          {
+            "id": 109,
+            "geometry": "1x2+640+823",
+            "area": 2
+          },
+          {
+            "id": 50,
+            "geometry": "2x1+873+569",
+            "area": 2
+          },
+          {
+            "id": 46,
+            "geometry": "1x2+887+537",
+            "area": 2
+          },
+          {
+            "id": 55,
+            "geometry": "2x1+30+646",
+            "area": 2
+          },
+          {
+            "id": 108,
+            "geometry": "1x1+579+814",
+            "area": 1
+          },
+          {
+            "id": 107,
+            "geometry": "1x1+642+804",
+            "area": 1
+          },
+          {
+            "id": 14,
+            "geometry": "1x1+149+353",
+            "area": 1
+          },
+          {
+            "id": 94,
+            "geometry": "1x1+355+760",
+            "area": 1
+          },
+          {
+            "id": 17,
+            "geometry": "1x1+804+433",
+            "area": 1
+          },
+          {
+            "id": 90,
+            "geometry": "1x1+377+757",
+            "area": 1
+          },
+          {
+            "id": 68,
+            "geometry": "1x1+266+685",
+            "area": 1
+          },
+          {
+            "id": 24,
+            "geometry": "1x1+808+455",
+            "area": 1
+          },
+          {
+            "id": 85,
+            "geometry": "1x1+503+733",
+            "area": 1
+          },
+          {
+            "id": 69,
+            "geometry": "1x1+269+685",
+            "area": 1
+          },
+          {
+            "id": 36,
+            "geometry": "1x1+94+522",
+            "area": 1
+          },
+          {
+            "id": 73,
+            "geometry": "1x1+374+709",
+            "area": 1
+          },
+          {
+            "id": 48,
+            "geometry": "1x1+105+563",
+            "area": 1
+          },
+          {
+            "id": 23,
+            "geometry": "1x1+808+448",
+            "area": 1
+          },
+          {
+            "id": 10,
+            "geometry": "1x1+557+324",
+            "area": 1
+          }
+        ],
+        "beforePath": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-sources\\component-cleanup\\04-before.png"
+      },
+      "candidateFrame": "frames/frame-04.png",
+      "packagedSource": "source-drawings/phase-adjacent-00-05.png",
+      "finalPreparation": "Shared whole-canvas resize from 1024x1024 to 256x256, no individual fit, no pose synthesis."
+    },
+    {
+      "key": "grass-fiber",
+      "index": 5,
+      "kind": "drawn-adjacent-cel",
+      "status": "checked-source",
+      "prompt": "Draw SIX COMPLETE adjacent animation cels for the Spawner grass-fiber resource, global frames 0 through 5. Every changing pose and in-between must be newly drawn as full source artwork, including stationary elements. Preserve the checked keys; do not redesign the resource.\nOutput exactly 1536x1024 pixels: THREE columns by TWO rows of equal 512x512 square cels, read left-to-right then top-to-bottom. No gutters, grid, labels or borders. Every cell is its own complete transparent animation canvas.\nImage 1: LOCKED ORIGINAL canonical, the authority for exact object count, anatomy, large shapes, quiet clean hand-painted material, palette, lighting and proportions.\nImage 2: CHECKED IMMEDIATELY PRECEDING BOUNDARY, global frame 0; copy this exact pose, camera, scale and anchor into FIRST CELL as a registration anchor. Do not change its design. The final pipeline will retain the already checked boundary artwork instead of replacing it.\nImage 3: CHECKED REACTION PEAK, frame 13. Preserve its pose when that index occurs and smoothly DRAW the intervening nearby poses.\nImage 4: CHECKED PREPARATION KEY, frame 3, for identity and gentle action continuity.\nImage 5: CANONICAL LAYOUT ONLY, same canonical sprite repeated at the correct registration in all six cells; follow its shared cell position and scale but do NOT repeat the same moving pose.\nFixed landmarks: center at x=256 in every cel, fixed contact y=448, canonical maximum span 416 pixels. Keep fixed body/waist/rear contacts matching the supplied boundary. No zoom, camera shift, size drift, global floating or growth between cells. Main motion is local drawn changes only, never a moved copy.\nMotion: The broad free grass ribbon ends gently flex outward by a few pixels while the tied waist and bundle footprint stay fixed. Keep all ribbons attached and the same clear count.\nCell-specific phases:\nCell 1, row 1, col 1: global 00; neutral rest pose, matching the approved reference exactly; strength 0.00000 of the restrained maximum.\nCell 2, row 1, col 2: global 01; gentle preparation touch; strength 0.16250 of the restrained maximum.\nCell 3, row 1, col 3: global 02; gentle preparation touch; strength 0.48750 of the restrained maximum.\nCell 4, row 2, col 1: global 03; gentle preparation touch; strength 0.65000 of the restrained maximum.\nCell 5, row 2, col 2: global 04; gentle preparation touch; strength 0.48750 of the restrained maximum.\nCell 6, row 2, col 3: global 05; gentle preparation touch; strength 0.16250 of the restrained maximum.\nThin continuous dark contour, clearly separated rounded large volumes, smooth broad gradients, one restrained broad highlight per volume, clean quiet surfaces, no added fine texture. Keep attachments, overlaps and newly exposed areas complete.\nTRANSPARENCY IS ESSENTIAL: alpha exactly zero everywhere outside the actual resource contours in EVERY CELL. No brown fog, colored bloom, halo, vignette, ambient background shading, floor, cast shadow, particles or background color. No face, text, extra piece, extra views or scenery. Exactly six separate full drawn cels and no other content.",
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\00.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\13.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\03.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-guides\\canonical-layout.png"
+      ],
+      "cachePath": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-c44fc9bb-534a-41f8-9b56-8e34d12a79b6.png",
+      "sourcePath": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-sources\\adjacent-00-05.png",
+      "output": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\05.png",
+      "cellRect": {
+        "x": 1024,
+        "y": 512,
+        "width": 512,
+        "height": 512
+      },
+      "commonCanvas": {
+        "width": 1024,
+        "height": 1024
+      },
+      "phaseRegistration": {
+        "scale": 0.8915145005370569,
+        "tx": 28.35338345864659,
+        "ty": 60.54242749731475,
+        "derivedFromSameApprovedBoundary": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\00.png",
+        "sourceBoundaryGeometry": "931x714+77+222",
+        "approvedBoundaryGeometry": "830x642+97+253",
+        "registrationLandmarkAlphaThreshold": 0.5
+      },
+      "preparation": "Grid extraction, common canvas upsample, one uniform boundary-derived registration identically on all phase cels. No independent bbox fit, per-part transform or interpolation.",
+      "alphaCleanup": {
+        "method": "Remove only detached neighboring-cell residue by connected foreground alpha mask. Main connected drawing RGB/alpha retained; no pose deformation or fitting.",
+        "keepComponent": 3,
+        "threshold": 0.01,
+        "removedComponents": [
+          {
+            "id": 60,
+            "geometry": "32x35+28+676",
+            "area": 718
+          },
+          {
+            "id": 46,
+            "geometry": "24x54+28+596",
+            "area": 700
+          },
+          {
+            "id": 74,
+            "geometry": "5x34+28+730",
+            "area": 128
+          },
+          {
+            "id": 14,
+            "geometry": "16x2+718+389",
+            "area": 25
+          },
+          {
+            "id": 2,
+            "geometry": "8x1+356+241",
+            "area": 8
+          },
+          {
+            "id": 114,
+            "geometry": "8x1+775+876",
+            "area": 8
+          },
+          {
+            "id": 109,
+            "geometry": "6x1+596+845",
+            "area": 6
+          },
+          {
+            "id": 55,
+            "geometry": "6x1+179+653",
+            "area": 6
+          },
+          {
+            "id": 116,
+            "geometry": "5x1+622+878",
+            "area": 5
+          },
+          {
+            "id": 115,
+            "geometry": "4x1+607+878",
+            "area": 4
+          },
+          {
+            "id": 21,
+            "geometry": "1x4+837+450",
+            "area": 4
+          },
+          {
+            "id": 16,
+            "geometry": "1x4+87+434",
+            "area": 4
+          },
+          {
+            "id": 42,
+            "geometry": "4x1+790+526",
+            "area": 4
+          },
+          {
+            "id": 104,
+            "geometry": "1x4+671+826",
+            "area": 4
+          },
+          {
+            "id": 44,
+            "geometry": "2x2+836+559",
+            "area": 3
+          },
+          {
+            "id": 112,
+            "geometry": "2x2+808+853",
+            "area": 3
+          },
+          {
+            "id": 29,
+            "geometry": "2x2+696+486",
+            "area": 3
+          },
+          {
+            "id": 102,
+            "geometry": "1x3+629+816",
+            "area": 3
+          },
+          {
+            "id": 52,
+            "geometry": "2x2+172+651",
+            "area": 3
+          },
+          {
+            "id": 17,
+            "geometry": "3x1+665+439",
+            "area": 3
+          },
+          {
+            "id": 110,
+            "geometry": "1x3+730+848",
+            "area": 3
+          },
+          {
+            "id": 113,
+            "geometry": "3x1+814+855",
+            "area": 3
+          },
+          {
+            "id": 59,
+            "geometry": "1x3+933+675",
+            "area": 3
+          },
+          {
+            "id": 12,
+            "geometry": "3x1+768+360",
+            "area": 3
+          },
+          {
+            "id": 11,
+            "geometry": "1x3+525+352",
+            "area": 3
+          },
+          {
+            "id": 19,
+            "geometry": "1x3+777+443",
+            "area": 3
+          },
+          {
+            "id": 66,
+            "geometry": "1x2+418+694",
+            "area": 2
+          },
+          {
+            "id": 77,
+            "geometry": "2x1+411+739",
+            "area": 2
+          },
+          {
+            "id": 62,
+            "geometry": "2x1+354+680",
+            "area": 2
+          },
+          {
+            "id": 5,
+            "geometry": "2x1+211+269",
+            "area": 2
+          },
+          {
+            "id": 75,
+            "geometry": "1x2+419+734",
+            "area": 2
+          },
+          {
+            "id": 87,
+            "geometry": "2x1+344+757",
+            "area": 2
+          },
+          {
+            "id": 103,
+            "geometry": "1x2+685+821",
+            "area": 2
+          },
+          {
+            "id": 51,
+            "geometry": "1x2+38+637",
+            "area": 2
+          },
+          {
+            "id": 18,
+            "geometry": "2x1+646+442",
+            "area": 2
+          },
+          {
+            "id": 8,
+            "geometry": "1x2+164+322",
+            "area": 2
+          },
+          {
+            "id": 20,
+            "geometry": "1x1+91+447",
+            "area": 1
+          },
+          {
+            "id": 4,
+            "geometry": "1x1+440+268",
+            "area": 1
+          },
+          {
+            "id": 35,
+            "geometry": "1x1+87+497",
+            "area": 1
+          },
+          {
+            "id": 108,
+            "geometry": "1x1+609+842",
+            "area": 1
+          },
+          {
+            "id": 106,
+            "geometry": "1x1+695+832",
+            "area": 1
+          },
+          {
+            "id": 40,
+            "geometry": "1x1+788+519",
+            "area": 1
+          },
+          {
+            "id": 41,
+            "geometry": "1x1+783+523",
+            "area": 1
+          },
+          {
+            "id": 50,
+            "geometry": "1x1+43+624",
+            "area": 1
+          },
+          {
+            "id": 7,
+            "geometry": "1x1+204+273",
+            "area": 1
+          },
+          {
+            "id": 15,
+            "geometry": "1x1+575+427",
+            "area": 1
+          },
+          {
+            "id": 81,
+            "geometry": "1x1+503+751",
+            "area": 1
+          },
+          {
+            "id": 63,
+            "geometry": "1x1+37+681",
+            "area": 1
+          },
+          {
+            "id": 65,
+            "geometry": "1x1+349+682",
+            "area": 1
+          },
+          {
+            "id": 1,
+            "geometry": "1x1+352+241",
+            "area": 1
+          },
+          {
+            "id": 49,
+            "geometry": "1x1+123+611",
+            "area": 1
+          },
+          {
+            "id": 22,
+            "geometry": "1x1+93+451",
+            "area": 1
+          }
+        ],
+        "beforePath": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-sources\\component-cleanup\\05-before.png"
+      },
+      "candidateFrame": "frames/frame-05.png",
+      "packagedSource": "source-drawings/phase-adjacent-00-05.png",
+      "finalPreparation": "Shared whole-canvas resize from 1024x1024 to 256x256, no individual fit, no pose synthesis."
+    },
+    {
+      "key": "grass-fiber",
+      "index": 6,
+      "kind": "retained-approved-neutral-hold",
+      "status": "retained",
+      "sourcePath": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png",
+      "output": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\06.png",
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png"
+      ],
+      "prompt": "Retain the locked approved actually drawn neutral resource at unchanged pixels and canvas coordinates for this stationary rest hold. No moving pose is synthesized.",
+      "cachePath": null,
+      "preparation": "byte-identical file copy; no resize, transform or interpolation",
+      "candidateFrame": "frames/frame-06.png",
+      "packagedSource": "source-drawings/canonical-style-reference.png",
+      "finalPreparation": "Shared whole-canvas resize from 1024x1024 to 256x256, no individual fit, no pose synthesis."
+    },
+    {
+      "key": "grass-fiber",
+      "index": 7,
+      "kind": "retained-approved-neutral-hold",
+      "status": "retained",
+      "sourcePath": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png",
+      "output": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\07.png",
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png"
+      ],
+      "prompt": "Retain the locked approved actually drawn neutral resource at unchanged pixels and canvas coordinates for this stationary rest hold. No moving pose is synthesized.",
+      "cachePath": null,
+      "preparation": "byte-identical file copy; no resize, transform or interpolation",
+      "candidateFrame": "frames/frame-07.png",
+      "packagedSource": "source-drawings/canonical-style-reference.png",
+      "finalPreparation": "Shared whole-canvas resize from 1024x1024 to 256x256, no individual fit, no pose synthesis."
+    },
+    {
+      "key": "grass-fiber",
+      "index": 8,
+      "kind": "drawn-adjacent-cel",
+      "status": "checked-source",
+      "prompt": "Draw SIX COMPLETE adjacent animation cels for the Spawner grass-fiber resource, global frames 7 through 12. Every changing pose and in-between must be newly drawn as full source artwork, including stationary elements. Preserve the checked keys; do not redesign the resource.\nOutput exactly 1536x1024 pixels: THREE columns by TWO rows of equal 512x512 square cels, read left-to-right then top-to-bottom. No gutters, grid, labels or borders. Every cell is its own complete transparent animation canvas.\nImage 1: LOCKED ORIGINAL canonical, the authority for exact object count, anatomy, large shapes, quiet clean hand-painted material, palette, lighting and proportions.\nImage 2: CHECKED IMMEDIATELY PRECEDING BOUNDARY, global frame 7; copy this exact pose, camera, scale and anchor into FIRST CELL as a registration anchor. Do not change its design. The final pipeline will retain the already checked boundary artwork instead of replacing it.\nImage 3: CHECKED REACTION PEAK, frame 13. Preserve its pose when that index occurs and smoothly DRAW the intervening nearby poses.\nImage 4: CHECKED PREPARATION KEY, frame 3, for identity and gentle action continuity.\nImage 5: CANONICAL LAYOUT ONLY, same canonical sprite repeated at the correct registration in all six cells; follow its shared cell position and scale but do NOT repeat the same moving pose.\nFixed landmarks: center at x=256 in every cel, fixed contact y=448, canonical maximum span 416 pixels. Keep fixed body/waist/rear contacts matching the supplied boundary. No zoom, camera shift, size drift, global floating or growth between cells. Main motion is local drawn changes only, never a moved copy.\nMotion: The broad free grass ribbon ends gently flex outward by a few pixels while the tied waist and bundle footprint stay fixed. Keep all ribbons attached and the same clear count.\nCell-specific phases:\nCell 1, row 1, col 1: global 07; neutral rest pose, matching the approved reference exactly; strength 0.00000 of the restrained maximum.\nCell 2, row 1, col 2: global 08; gentle contact reaction returning toward rest; strength 0.05727 of the restrained maximum.\nCell 3, row 1, col 3: global 09; gentle contact reaction returning toward rest; strength 0.21597 of the restrained maximum.\nCell 4, row 2, col 1: global 10; gentle contact reaction returning toward rest; strength 0.43973 of the restrained maximum.\nCell 5, row 2, col 2: global 11; gentle contact reaction returning toward rest; strength 0.67730 of the restrained maximum.\nCell 6, row 2, col 3: global 12; gentle contact reaction returning toward rest; strength 0.87426 of the restrained maximum.\nThin continuous dark contour, clearly separated rounded large volumes, smooth broad gradients, one restrained broad highlight per volume, clean quiet surfaces, no added fine texture. Keep attachments, overlaps and newly exposed areas complete.\nTRANSPARENCY IS ESSENTIAL: alpha exactly zero everywhere outside the actual resource contours in EVERY CELL. No brown fog, colored bloom, halo, vignette, ambient background shading, floor, cast shadow, particles or background color. No face, text, extra piece, extra views or scenery. Exactly six separate full drawn cels and no other content.",
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\07.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\13.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\03.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-guides\\canonical-layout.png"
+      ],
+      "cachePath": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-108fd4ac-8c22-4671-aa7d-6324c807b999.png",
+      "sourcePath": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-sources\\adjacent-07-12.png",
+      "output": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\08.png",
+      "cellRect": {
+        "x": 512,
+        "y": 0,
+        "width": 512,
+        "height": 512
+      },
+      "commonCanvas": {
+        "width": 1024,
+        "height": 1024
+      },
+      "phaseRegistration": {
+        "scale": 0.9718969555035128,
+        "tx": 9.529274004683884,
+        "ty": 21.264637002341942,
+        "derivedFromSameApprovedBoundary": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\07.png",
+        "sourceBoundaryGeometry": "854x657+90+242",
+        "approvedBoundaryGeometry": "830x642+97+253",
+        "registrationLandmarkAlphaThreshold": 0.5
+      },
+      "preparation": "Grid extraction, common canvas upsample, one uniform boundary-derived registration identically on all phase cels. No independent bbox fit, per-part transform or interpolation.",
+      "candidateFrame": "frames/frame-08.png",
+      "packagedSource": "source-drawings/phase-adjacent-07-12.png",
+      "finalPreparation": "Shared whole-canvas resize from 1024x1024 to 256x256, no individual fit, no pose synthesis."
+    },
+    {
+      "key": "grass-fiber",
+      "index": 9,
+      "kind": "drawn-adjacent-cel",
+      "status": "checked-source",
+      "prompt": "Draw SIX COMPLETE adjacent animation cels for the Spawner grass-fiber resource, global frames 7 through 12. Every changing pose and in-between must be newly drawn as full source artwork, including stationary elements. Preserve the checked keys; do not redesign the resource.\nOutput exactly 1536x1024 pixels: THREE columns by TWO rows of equal 512x512 square cels, read left-to-right then top-to-bottom. No gutters, grid, labels or borders. Every cell is its own complete transparent animation canvas.\nImage 1: LOCKED ORIGINAL canonical, the authority for exact object count, anatomy, large shapes, quiet clean hand-painted material, palette, lighting and proportions.\nImage 2: CHECKED IMMEDIATELY PRECEDING BOUNDARY, global frame 7; copy this exact pose, camera, scale and anchor into FIRST CELL as a registration anchor. Do not change its design. The final pipeline will retain the already checked boundary artwork instead of replacing it.\nImage 3: CHECKED REACTION PEAK, frame 13. Preserve its pose when that index occurs and smoothly DRAW the intervening nearby poses.\nImage 4: CHECKED PREPARATION KEY, frame 3, for identity and gentle action continuity.\nImage 5: CANONICAL LAYOUT ONLY, same canonical sprite repeated at the correct registration in all six cells; follow its shared cell position and scale but do NOT repeat the same moving pose.\nFixed landmarks: center at x=256 in every cel, fixed contact y=448, canonical maximum span 416 pixels. Keep fixed body/waist/rear contacts matching the supplied boundary. No zoom, camera shift, size drift, global floating or growth between cells. Main motion is local drawn changes only, never a moved copy.\nMotion: The broad free grass ribbon ends gently flex outward by a few pixels while the tied waist and bundle footprint stay fixed. Keep all ribbons attached and the same clear count.\nCell-specific phases:\nCell 1, row 1, col 1: global 07; neutral rest pose, matching the approved reference exactly; strength 0.00000 of the restrained maximum.\nCell 2, row 1, col 2: global 08; gentle contact reaction returning toward rest; strength 0.05727 of the restrained maximum.\nCell 3, row 1, col 3: global 09; gentle contact reaction returning toward rest; strength 0.21597 of the restrained maximum.\nCell 4, row 2, col 1: global 10; gentle contact reaction returning toward rest; strength 0.43973 of the restrained maximum.\nCell 5, row 2, col 2: global 11; gentle contact reaction returning toward rest; strength 0.67730 of the restrained maximum.\nCell 6, row 2, col 3: global 12; gentle contact reaction returning toward rest; strength 0.87426 of the restrained maximum.\nThin continuous dark contour, clearly separated rounded large volumes, smooth broad gradients, one restrained broad highlight per volume, clean quiet surfaces, no added fine texture. Keep attachments, overlaps and newly exposed areas complete.\nTRANSPARENCY IS ESSENTIAL: alpha exactly zero everywhere outside the actual resource contours in EVERY CELL. No brown fog, colored bloom, halo, vignette, ambient background shading, floor, cast shadow, particles or background color. No face, text, extra piece, extra views or scenery. Exactly six separate full drawn cels and no other content.",
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\07.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\13.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\03.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-guides\\canonical-layout.png"
+      ],
+      "cachePath": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-108fd4ac-8c22-4671-aa7d-6324c807b999.png",
+      "sourcePath": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-sources\\adjacent-07-12.png",
+      "output": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\09.png",
+      "cellRect": {
+        "x": 1024,
+        "y": 0,
+        "width": 512,
+        "height": 512
+      },
+      "commonCanvas": {
+        "width": 1024,
+        "height": 1024
+      },
+      "phaseRegistration": {
+        "scale": 0.9718969555035128,
+        "tx": 9.529274004683884,
+        "ty": 21.264637002341942,
+        "derivedFromSameApprovedBoundary": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\07.png",
+        "sourceBoundaryGeometry": "854x657+90+242",
+        "approvedBoundaryGeometry": "830x642+97+253",
+        "registrationLandmarkAlphaThreshold": 0.5
+      },
+      "preparation": "Grid extraction, common canvas upsample, one uniform boundary-derived registration identically on all phase cels. No independent bbox fit, per-part transform or interpolation.",
+      "candidateFrame": "frames/frame-09.png",
+      "packagedSource": "source-drawings/phase-adjacent-07-12.png",
+      "finalPreparation": "Shared whole-canvas resize from 1024x1024 to 256x256, no individual fit, no pose synthesis."
+    },
+    {
+      "key": "grass-fiber",
+      "index": 10,
+      "kind": "drawn-adjacent-cel",
+      "status": "checked-source",
+      "prompt": "Draw SIX COMPLETE adjacent animation cels for the Spawner grass-fiber resource, global frames 7 through 12. Every changing pose and in-between must be newly drawn as full source artwork, including stationary elements. Preserve the checked keys; do not redesign the resource.\nOutput exactly 1536x1024 pixels: THREE columns by TWO rows of equal 512x512 square cels, read left-to-right then top-to-bottom. No gutters, grid, labels or borders. Every cell is its own complete transparent animation canvas.\nImage 1: LOCKED ORIGINAL canonical, the authority for exact object count, anatomy, large shapes, quiet clean hand-painted material, palette, lighting and proportions.\nImage 2: CHECKED IMMEDIATELY PRECEDING BOUNDARY, global frame 7; copy this exact pose, camera, scale and anchor into FIRST CELL as a registration anchor. Do not change its design. The final pipeline will retain the already checked boundary artwork instead of replacing it.\nImage 3: CHECKED REACTION PEAK, frame 13. Preserve its pose when that index occurs and smoothly DRAW the intervening nearby poses.\nImage 4: CHECKED PREPARATION KEY, frame 3, for identity and gentle action continuity.\nImage 5: CANONICAL LAYOUT ONLY, same canonical sprite repeated at the correct registration in all six cells; follow its shared cell position and scale but do NOT repeat the same moving pose.\nFixed landmarks: center at x=256 in every cel, fixed contact y=448, canonical maximum span 416 pixels. Keep fixed body/waist/rear contacts matching the supplied boundary. No zoom, camera shift, size drift, global floating or growth between cells. Main motion is local drawn changes only, never a moved copy.\nMotion: The broad free grass ribbon ends gently flex outward by a few pixels while the tied waist and bundle footprint stay fixed. Keep all ribbons attached and the same clear count.\nCell-specific phases:\nCell 1, row 1, col 1: global 07; neutral rest pose, matching the approved reference exactly; strength 0.00000 of the restrained maximum.\nCell 2, row 1, col 2: global 08; gentle contact reaction returning toward rest; strength 0.05727 of the restrained maximum.\nCell 3, row 1, col 3: global 09; gentle contact reaction returning toward rest; strength 0.21597 of the restrained maximum.\nCell 4, row 2, col 1: global 10; gentle contact reaction returning toward rest; strength 0.43973 of the restrained maximum.\nCell 5, row 2, col 2: global 11; gentle contact reaction returning toward rest; strength 0.67730 of the restrained maximum.\nCell 6, row 2, col 3: global 12; gentle contact reaction returning toward rest; strength 0.87426 of the restrained maximum.\nThin continuous dark contour, clearly separated rounded large volumes, smooth broad gradients, one restrained broad highlight per volume, clean quiet surfaces, no added fine texture. Keep attachments, overlaps and newly exposed areas complete.\nTRANSPARENCY IS ESSENTIAL: alpha exactly zero everywhere outside the actual resource contours in EVERY CELL. No brown fog, colored bloom, halo, vignette, ambient background shading, floor, cast shadow, particles or background color. No face, text, extra piece, extra views or scenery. Exactly six separate full drawn cels and no other content.",
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\07.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\13.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\03.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-guides\\canonical-layout.png"
+      ],
+      "cachePath": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-108fd4ac-8c22-4671-aa7d-6324c807b999.png",
+      "sourcePath": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-sources\\adjacent-07-12.png",
+      "output": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\10.png",
+      "cellRect": {
+        "x": 0,
+        "y": 512,
+        "width": 512,
+        "height": 512
+      },
+      "commonCanvas": {
+        "width": 1024,
+        "height": 1024
+      },
+      "phaseRegistration": {
+        "scale": 0.9718969555035128,
+        "tx": 9.529274004683884,
+        "ty": 21.264637002341942,
+        "derivedFromSameApprovedBoundary": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\07.png",
+        "sourceBoundaryGeometry": "854x657+90+242",
+        "approvedBoundaryGeometry": "830x642+97+253",
+        "registrationLandmarkAlphaThreshold": 0.5
+      },
+      "preparation": "Grid extraction, common canvas upsample, one uniform boundary-derived registration identically on all phase cels. No independent bbox fit, per-part transform or interpolation.",
+      "candidateFrame": "frames/frame-10.png",
+      "packagedSource": "source-drawings/phase-adjacent-07-12.png",
+      "finalPreparation": "Shared whole-canvas resize from 1024x1024 to 256x256, no individual fit, no pose synthesis."
+    },
+    {
+      "key": "grass-fiber",
+      "index": 11,
+      "kind": "drawn-adjacent-cel",
+      "status": "checked-source",
+      "prompt": "Draw SIX COMPLETE adjacent animation cels for the Spawner grass-fiber resource, global frames 7 through 12. Every changing pose and in-between must be newly drawn as full source artwork, including stationary elements. Preserve the checked keys; do not redesign the resource.\nOutput exactly 1536x1024 pixels: THREE columns by TWO rows of equal 512x512 square cels, read left-to-right then top-to-bottom. No gutters, grid, labels or borders. Every cell is its own complete transparent animation canvas.\nImage 1: LOCKED ORIGINAL canonical, the authority for exact object count, anatomy, large shapes, quiet clean hand-painted material, palette, lighting and proportions.\nImage 2: CHECKED IMMEDIATELY PRECEDING BOUNDARY, global frame 7; copy this exact pose, camera, scale and anchor into FIRST CELL as a registration anchor. Do not change its design. The final pipeline will retain the already checked boundary artwork instead of replacing it.\nImage 3: CHECKED REACTION PEAK, frame 13. Preserve its pose when that index occurs and smoothly DRAW the intervening nearby poses.\nImage 4: CHECKED PREPARATION KEY, frame 3, for identity and gentle action continuity.\nImage 5: CANONICAL LAYOUT ONLY, same canonical sprite repeated at the correct registration in all six cells; follow its shared cell position and scale but do NOT repeat the same moving pose.\nFixed landmarks: center at x=256 in every cel, fixed contact y=448, canonical maximum span 416 pixels. Keep fixed body/waist/rear contacts matching the supplied boundary. No zoom, camera shift, size drift, global floating or growth between cells. Main motion is local drawn changes only, never a moved copy.\nMotion: The broad free grass ribbon ends gently flex outward by a few pixels while the tied waist and bundle footprint stay fixed. Keep all ribbons attached and the same clear count.\nCell-specific phases:\nCell 1, row 1, col 1: global 07; neutral rest pose, matching the approved reference exactly; strength 0.00000 of the restrained maximum.\nCell 2, row 1, col 2: global 08; gentle contact reaction returning toward rest; strength 0.05727 of the restrained maximum.\nCell 3, row 1, col 3: global 09; gentle contact reaction returning toward rest; strength 0.21597 of the restrained maximum.\nCell 4, row 2, col 1: global 10; gentle contact reaction returning toward rest; strength 0.43973 of the restrained maximum.\nCell 5, row 2, col 2: global 11; gentle contact reaction returning toward rest; strength 0.67730 of the restrained maximum.\nCell 6, row 2, col 3: global 12; gentle contact reaction returning toward rest; strength 0.87426 of the restrained maximum.\nThin continuous dark contour, clearly separated rounded large volumes, smooth broad gradients, one restrained broad highlight per volume, clean quiet surfaces, no added fine texture. Keep attachments, overlaps and newly exposed areas complete.\nTRANSPARENCY IS ESSENTIAL: alpha exactly zero everywhere outside the actual resource contours in EVERY CELL. No brown fog, colored bloom, halo, vignette, ambient background shading, floor, cast shadow, particles or background color. No face, text, extra piece, extra views or scenery. Exactly six separate full drawn cels and no other content.",
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\07.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\13.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\03.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-guides\\canonical-layout.png"
+      ],
+      "cachePath": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-108fd4ac-8c22-4671-aa7d-6324c807b999.png",
+      "sourcePath": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-sources\\adjacent-07-12.png",
+      "output": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\11.png",
+      "cellRect": {
+        "x": 512,
+        "y": 512,
+        "width": 512,
+        "height": 512
+      },
+      "commonCanvas": {
+        "width": 1024,
+        "height": 1024
+      },
+      "phaseRegistration": {
+        "scale": 0.9718969555035128,
+        "tx": 9.529274004683884,
+        "ty": 21.264637002341942,
+        "derivedFromSameApprovedBoundary": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\07.png",
+        "sourceBoundaryGeometry": "854x657+90+242",
+        "approvedBoundaryGeometry": "830x642+97+253",
+        "registrationLandmarkAlphaThreshold": 0.5
+      },
+      "preparation": "Grid extraction, common canvas upsample, one uniform boundary-derived registration identically on all phase cels. No independent bbox fit, per-part transform or interpolation.",
+      "candidateFrame": "frames/frame-11.png",
+      "packagedSource": "source-drawings/phase-adjacent-07-12.png",
+      "finalPreparation": "Shared whole-canvas resize from 1024x1024 to 256x256, no individual fit, no pose synthesis."
+    },
+    {
+      "key": "grass-fiber",
+      "index": 12,
+      "kind": "drawn-adjacent-cel",
+      "status": "checked-source",
+      "prompt": "Draw SIX COMPLETE adjacent animation cels for the Spawner grass-fiber resource, global frames 7 through 12. Every changing pose and in-between must be newly drawn as full source artwork, including stationary elements. Preserve the checked keys; do not redesign the resource.\nOutput exactly 1536x1024 pixels: THREE columns by TWO rows of equal 512x512 square cels, read left-to-right then top-to-bottom. No gutters, grid, labels or borders. Every cell is its own complete transparent animation canvas.\nImage 1: LOCKED ORIGINAL canonical, the authority for exact object count, anatomy, large shapes, quiet clean hand-painted material, palette, lighting and proportions.\nImage 2: CHECKED IMMEDIATELY PRECEDING BOUNDARY, global frame 7; copy this exact pose, camera, scale and anchor into FIRST CELL as a registration anchor. Do not change its design. The final pipeline will retain the already checked boundary artwork instead of replacing it.\nImage 3: CHECKED REACTION PEAK, frame 13. Preserve its pose when that index occurs and smoothly DRAW the intervening nearby poses.\nImage 4: CHECKED PREPARATION KEY, frame 3, for identity and gentle action continuity.\nImage 5: CANONICAL LAYOUT ONLY, same canonical sprite repeated at the correct registration in all six cells; follow its shared cell position and scale but do NOT repeat the same moving pose.\nFixed landmarks: center at x=256 in every cel, fixed contact y=448, canonical maximum span 416 pixels. Keep fixed body/waist/rear contacts matching the supplied boundary. No zoom, camera shift, size drift, global floating or growth between cells. Main motion is local drawn changes only, never a moved copy.\nMotion: The broad free grass ribbon ends gently flex outward by a few pixels while the tied waist and bundle footprint stay fixed. Keep all ribbons attached and the same clear count.\nCell-specific phases:\nCell 1, row 1, col 1: global 07; neutral rest pose, matching the approved reference exactly; strength 0.00000 of the restrained maximum.\nCell 2, row 1, col 2: global 08; gentle contact reaction returning toward rest; strength 0.05727 of the restrained maximum.\nCell 3, row 1, col 3: global 09; gentle contact reaction returning toward rest; strength 0.21597 of the restrained maximum.\nCell 4, row 2, col 1: global 10; gentle contact reaction returning toward rest; strength 0.43973 of the restrained maximum.\nCell 5, row 2, col 2: global 11; gentle contact reaction returning toward rest; strength 0.67730 of the restrained maximum.\nCell 6, row 2, col 3: global 12; gentle contact reaction returning toward rest; strength 0.87426 of the restrained maximum.\nThin continuous dark contour, clearly separated rounded large volumes, smooth broad gradients, one restrained broad highlight per volume, clean quiet surfaces, no added fine texture. Keep attachments, overlaps and newly exposed areas complete.\nTRANSPARENCY IS ESSENTIAL: alpha exactly zero everywhere outside the actual resource contours in EVERY CELL. No brown fog, colored bloom, halo, vignette, ambient background shading, floor, cast shadow, particles or background color. No face, text, extra piece, extra views or scenery. Exactly six separate full drawn cels and no other content.",
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\07.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\13.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\03.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-guides\\canonical-layout.png"
+      ],
+      "cachePath": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-108fd4ac-8c22-4671-aa7d-6324c807b999.png",
+      "sourcePath": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-sources\\adjacent-07-12.png",
+      "output": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\12.png",
+      "cellRect": {
+        "x": 1024,
+        "y": 512,
+        "width": 512,
+        "height": 512
+      },
+      "commonCanvas": {
+        "width": 1024,
+        "height": 1024
+      },
+      "phaseRegistration": {
+        "scale": 0.9718969555035128,
+        "tx": 9.529274004683884,
+        "ty": 21.264637002341942,
+        "derivedFromSameApprovedBoundary": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\07.png",
+        "sourceBoundaryGeometry": "854x657+90+242",
+        "approvedBoundaryGeometry": "830x642+97+253",
+        "registrationLandmarkAlphaThreshold": 0.5
+      },
+      "preparation": "Grid extraction, common canvas upsample, one uniform boundary-derived registration identically on all phase cels. No independent bbox fit, per-part transform or interpolation.",
+      "candidateFrame": "frames/frame-12.png",
+      "packagedSource": "source-drawings/phase-adjacent-07-12.png",
+      "finalPreparation": "Shared whole-canvas resize from 1024x1024 to 256x256, no individual fit, no pose synthesis."
+    },
+    {
+      "key": "grass-fiber",
+      "index": 13,
+      "kind": "key-pose-candidate",
+      "prompt": "Draw ONE COMPLETE animation frame 14 of 24 for the 풀섬유 (grass-fiber) resource. FIRST reference is the exact approved clean sprite and canvas registration. SECOND reference is the old frame, provided only as a restrained motion/pose guide: do not copy its old texture, extra parts or different proportions. Redraw the whole sprite in the FIRST reference identity and broad clean painterly shading. Pose: gentle contact reaction returning toward rest; reaction strength 0.985 of the small maximum. Motion plan: The broad free grass ribbon ends gently flex outward by a few pixels while the tied waist and bundle footprint stay fixed. Keep all ribbons attached and the same clear count. Preserve exact object count, palette, left-top lighting, contour weight, perspective and simplified material detail. Keep base center at 50 percent canvas width, lowest fixed contact at 87.5 percent canvas height, and the same scale and transparent padding as the FIRST reference. No global camera movement, floating, growth, extraction, added texture, tiny glints, labels, grid or extra frame. Truly transparent square background; exactly one whole frame, including all stationary elements.\nKey pose source drawing only. Preserve the EXACT large shapes, ribbon/root count and attached waist/bundle from the FIRST canonical image, not the old detailed guide. Output one complete square frame on a 1024 by 1024 canvas. Canonical center x=512 and stationary base y=896, maximum span 81.25 percent. No global zoom, shift, growth or different silhouette proportions. Only the approved free tips locally flex. Alpha outside the actual resource silhouette must be zero. No fog, halo, glow, floor, background shading, cast shadow, thin hair roots, extra fine fibers, new tie or extra plant parts.",
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\guide-frames\\13.png"
+      ],
+      "cachePath": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-ecee8164-8bd4-445b-bed2-0d5562be6599.png",
+      "sourcePath": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\key-sources\\13.png",
+      "output": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\13.png",
+      "status": "checked-key",
+      "normalizedSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\key-sources\\13-common-canvas.png",
+      "preparation": "Remove only alpha below 1%; whole source canvas normalized to common 1024x1024. No bbox fit, no per-part transform, no anchor shift.",
+      "sourceCheck": "Canonical attached bundle, waist/root core, proportions and broad material kept. Local free-tip changes checked against neutral and other key; no new texture or anatomy.",
+      "candidateFrame": "frames/frame-13.png",
+      "packagedSource": "source-drawings/key-13.png",
+      "finalPreparation": "Shared whole-canvas resize from 1024x1024 to 256x256, no individual fit, no pose synthesis."
+    },
+    {
+      "key": "grass-fiber",
+      "index": 14,
+      "kind": "retained-checked-peak-hold",
+      "prompt": "Draw ONE COMPLETE animation frame 14 of 24 for the 풀섬유 (grass-fiber) resource. FIRST reference is the exact approved clean sprite and canvas registration. SECOND reference is the old frame, provided only as a restrained motion/pose guide: do not copy its old texture, extra parts or different proportions. Redraw the whole sprite in the FIRST reference identity and broad clean painterly shading. Pose: gentle contact reaction returning toward rest; reaction strength 0.985 of the small maximum. Motion plan: The broad free grass ribbon ends gently flex outward by a few pixels while the tied waist and bundle footprint stay fixed. Keep all ribbons attached and the same clear count. Preserve exact object count, palette, left-top lighting, contour weight, perspective and simplified material detail. Keep base center at 50 percent canvas width, lowest fixed contact at 87.5 percent canvas height, and the same scale and transparent padding as the FIRST reference. No global camera movement, floating, growth, extraction, added texture, tiny glints, labels, grid or extra frame. Truly transparent square background; exactly one whole frame, including all stationary elements.\nKey pose source drawing only. Preserve the EXACT large shapes, ribbon/root count and attached waist/bundle from the FIRST canonical image, not the old detailed guide. Output one complete square frame on a 1024 by 1024 canvas. Canonical center x=512 and stationary base y=896, maximum span 81.25 percent. No global zoom, shift, growth or different silhouette proportions. Only the approved free tips locally flex. Alpha outside the actual resource silhouette must be zero. No fog, halo, glow, floor, background shading, cast shadow, thin hair roots, extra fine fibers, new tie or extra plant parts.",
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\guide-frames\\13.png"
+      ],
+      "cachePath": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-ecee8164-8bd4-445b-bed2-0d5562be6599.png",
+      "sourcePath": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\key-sources\\13.png",
+      "output": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\14.png",
+      "status": "checked-key",
+      "normalizedSource": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\key-sources\\13-common-canvas.png",
+      "preparation": "Remove only alpha below 1%; whole source canvas normalized to common 1024x1024. No bbox fit, no per-part transform, no anchor shift.",
+      "sourceCheck": "Canonical attached bundle, waist/root core, proportions and broad material kept. Local free-tip changes checked against neutral and other key; no new texture or anatomy.",
+      "candidateFrame": "frames/frame-14.png",
+      "packagedSource": "source-drawings/key-13.png",
+      "finalPreparation": "Shared whole-canvas resize from 1024x1024 to 256x256, no individual fit, no pose synthesis."
+    },
+    {
+      "key": "grass-fiber",
+      "index": 15,
+      "kind": "drawn-adjacent-cel",
+      "status": "checked-source",
+      "prompt": "Draw SIX COMPLETE adjacent animation cels for the Spawner grass-fiber resource, global frames 14 through 19. Every changing pose and in-between must be newly drawn as full source artwork, including stationary elements. Preserve the checked keys; do not redesign the resource.\nOutput exactly 1536x1024 pixels: THREE columns by TWO rows of equal 512x512 square cels, read left-to-right then top-to-bottom. No gutters, grid, labels or borders. Every cell is its own complete transparent animation canvas.\nImage 1: LOCKED ORIGINAL canonical, the authority for exact object count, anatomy, large shapes, quiet clean hand-painted material, palette, lighting and proportions.\nImage 2: CHECKED IMMEDIATELY PRECEDING BOUNDARY, global frame 14; copy this exact pose, camera, scale and anchor into FIRST CELL as a registration anchor. Do not change its design. The final pipeline will retain the already checked boundary artwork instead of replacing it.\nImage 3: CHECKED REACTION PEAK, frame 13. Preserve its pose when that index occurs and smoothly DRAW the intervening nearby poses.\nImage 4: CHECKED PREPARATION KEY, frame 3, for identity and gentle action continuity.\nImage 5: CANONICAL LAYOUT ONLY, same canonical sprite repeated at the correct registration in all six cells; follow its shared cell position and scale but do NOT repeat the same moving pose.\nFixed landmarks: center at x=256 in every cel, fixed contact y=448, canonical maximum span 416 pixels. Keep fixed body/waist/rear contacts matching the supplied boundary. No zoom, camera shift, size drift, global floating or growth between cells. Main motion is local drawn changes only, never a moved copy.\nMotion: The broad free grass ribbon ends gently flex outward by a few pixels while the tied waist and bundle footprint stay fixed. Keep all ribbons attached and the same clear count.\nCell-specific phases:\nCell 1, row 1, col 1: global 14; gentle contact reaction returning toward rest; strength 0.98547 of the restrained maximum.\nCell 2, row 1, col 2: global 15; gentle contact reaction returning toward rest; strength 0.87426 of the restrained maximum.\nCell 3, row 1, col 3: global 16; gentle contact reaction returning toward rest; strength 0.67730 of the restrained maximum.\nCell 4, row 2, col 1: global 17; gentle contact reaction returning toward rest; strength 0.43973 of the restrained maximum.\nCell 5, row 2, col 2: global 18; gentle contact reaction returning toward rest; strength 0.21597 of the restrained maximum.\nCell 6, row 2, col 3: global 19; gentle contact reaction returning toward rest; strength 0.05727 of the restrained maximum.\nThin continuous dark contour, clearly separated rounded large volumes, smooth broad gradients, one restrained broad highlight per volume, clean quiet surfaces, no added fine texture. Keep attachments, overlaps and newly exposed areas complete.\nTRANSPARENCY IS ESSENTIAL: alpha exactly zero everywhere outside the actual resource contours in EVERY CELL. No brown fog, colored bloom, halo, vignette, ambient background shading, floor, cast shadow, particles or background color. No face, text, extra piece, extra views or scenery. Exactly six separate full drawn cels and no other content.",
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\14.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\13.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\03.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-guides\\canonical-layout.png"
+      ],
+      "cachePath": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-e49825a3-b33c-41f4-90fe-e047d60bae67.png",
+      "sourcePath": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-sources\\adjacent-14-19.png",
+      "output": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\15.png",
+      "cellRect": {
+        "x": 512,
+        "y": 0,
+        "width": 512,
+        "height": 512
+      },
+      "commonCanvas": {
+        "width": 1024,
+        "height": 1024
+      },
+      "phaseRegistration": {
+        "scale": 0.9322974472807991,
+        "tx": 27.280799112097668,
+        "ty": 14.166481687014425,
+        "derivedFromSameApprovedBoundary": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\14.png",
+        "sourceBoundaryGeometry": "901x695+78+238",
+        "approvedBoundaryGeometry": "840x638+100+246",
+        "registrationLandmarkAlphaThreshold": 0.5
+      },
+      "preparation": "Grid extraction, common canvas upsample, one uniform boundary-derived registration identically on all phase cels. No independent bbox fit, per-part transform or interpolation.",
+      "candidateFrame": "frames/frame-15.png",
+      "packagedSource": "source-drawings/phase-adjacent-14-19.png",
+      "finalPreparation": "Shared whole-canvas resize from 1024x1024 to 256x256, no individual fit, no pose synthesis."
+    },
+    {
+      "key": "grass-fiber",
+      "index": 16,
+      "kind": "drawn-adjacent-cel",
+      "status": "checked-source",
+      "prompt": "Draw SIX COMPLETE adjacent animation cels for the Spawner grass-fiber resource, global frames 14 through 19. Every changing pose and in-between must be newly drawn as full source artwork, including stationary elements. Preserve the checked keys; do not redesign the resource.\nOutput exactly 1536x1024 pixels: THREE columns by TWO rows of equal 512x512 square cels, read left-to-right then top-to-bottom. No gutters, grid, labels or borders. Every cell is its own complete transparent animation canvas.\nImage 1: LOCKED ORIGINAL canonical, the authority for exact object count, anatomy, large shapes, quiet clean hand-painted material, palette, lighting and proportions.\nImage 2: CHECKED IMMEDIATELY PRECEDING BOUNDARY, global frame 14; copy this exact pose, camera, scale and anchor into FIRST CELL as a registration anchor. Do not change its design. The final pipeline will retain the already checked boundary artwork instead of replacing it.\nImage 3: CHECKED REACTION PEAK, frame 13. Preserve its pose when that index occurs and smoothly DRAW the intervening nearby poses.\nImage 4: CHECKED PREPARATION KEY, frame 3, for identity and gentle action continuity.\nImage 5: CANONICAL LAYOUT ONLY, same canonical sprite repeated at the correct registration in all six cells; follow its shared cell position and scale but do NOT repeat the same moving pose.\nFixed landmarks: center at x=256 in every cel, fixed contact y=448, canonical maximum span 416 pixels. Keep fixed body/waist/rear contacts matching the supplied boundary. No zoom, camera shift, size drift, global floating or growth between cells. Main motion is local drawn changes only, never a moved copy.\nMotion: The broad free grass ribbon ends gently flex outward by a few pixels while the tied waist and bundle footprint stay fixed. Keep all ribbons attached and the same clear count.\nCell-specific phases:\nCell 1, row 1, col 1: global 14; gentle contact reaction returning toward rest; strength 0.98547 of the restrained maximum.\nCell 2, row 1, col 2: global 15; gentle contact reaction returning toward rest; strength 0.87426 of the restrained maximum.\nCell 3, row 1, col 3: global 16; gentle contact reaction returning toward rest; strength 0.67730 of the restrained maximum.\nCell 4, row 2, col 1: global 17; gentle contact reaction returning toward rest; strength 0.43973 of the restrained maximum.\nCell 5, row 2, col 2: global 18; gentle contact reaction returning toward rest; strength 0.21597 of the restrained maximum.\nCell 6, row 2, col 3: global 19; gentle contact reaction returning toward rest; strength 0.05727 of the restrained maximum.\nThin continuous dark contour, clearly separated rounded large volumes, smooth broad gradients, one restrained broad highlight per volume, clean quiet surfaces, no added fine texture. Keep attachments, overlaps and newly exposed areas complete.\nTRANSPARENCY IS ESSENTIAL: alpha exactly zero everywhere outside the actual resource contours in EVERY CELL. No brown fog, colored bloom, halo, vignette, ambient background shading, floor, cast shadow, particles or background color. No face, text, extra piece, extra views or scenery. Exactly six separate full drawn cels and no other content.",
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\14.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\13.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\03.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-guides\\canonical-layout.png"
+      ],
+      "cachePath": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-e49825a3-b33c-41f4-90fe-e047d60bae67.png",
+      "sourcePath": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-sources\\adjacent-14-19.png",
+      "output": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\16.png",
+      "cellRect": {
+        "x": 1024,
+        "y": 0,
+        "width": 512,
+        "height": 512
+      },
+      "commonCanvas": {
+        "width": 1024,
+        "height": 1024
+      },
+      "phaseRegistration": {
+        "scale": 0.9322974472807991,
+        "tx": 27.280799112097668,
+        "ty": 14.166481687014425,
+        "derivedFromSameApprovedBoundary": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\14.png",
+        "sourceBoundaryGeometry": "901x695+78+238",
+        "approvedBoundaryGeometry": "840x638+100+246",
+        "registrationLandmarkAlphaThreshold": 0.5
+      },
+      "preparation": "Grid extraction, common canvas upsample, one uniform boundary-derived registration identically on all phase cels. No independent bbox fit, per-part transform or interpolation.",
+      "candidateFrame": "frames/frame-16.png",
+      "packagedSource": "source-drawings/phase-adjacent-14-19.png",
+      "finalPreparation": "Shared whole-canvas resize from 1024x1024 to 256x256, no individual fit, no pose synthesis."
+    },
+    {
+      "key": "grass-fiber",
+      "index": 17,
+      "kind": "drawn-adjacent-repair",
+      "status": "checked-source",
+      "prompt": "Draw FOUR complete source animation cels for a narrow grass-fiber return-pose repair. This is actual fully drawn animation artwork, not a preview.\nOutput a square 1024x1024 PNG containing TWO columns by TWO rows of equal 512x512 cels, read row-major. Each cel contains one whole resource, complete attachments and stationary parts. No labels, gutters, borders or grid.\nImage 1 is the locked original clean grass-fiber design, material, exact ribbon count and proportions.\nImage 2 is checked frame 16, the immediate boundary. Copy that exact pose into first cell as the common camera/scale registration anchor. Its approved file will stay unchanged.\nImage 3 is the locked neutral return frame 20; the three newly drawn frames must approach THIS exact rest pose.\nImage 4 is a canonical layout reference, repeated at the same position and size in all four cels.\nRepair ONLY the settling of the free ribbon ends in frames17,18,19. Keep the U/C-SHAPED UPPER-RIGHT CURL intact and naturally attached in EVERY cel. Do NOT flatten, straighten, shorten, remove or turn that curl into a horizontal cut end. Preserve its loop shape from Image1. The free ends only relax by at most five pixels on a 1024px canvas, becoming nearly identical to neutral by frame19. Keep tied waist, body mass, all broad grass loops and bundle footprint fixed. No new movement, global camera shift, shrink or growth.\nCell1 upper-left global16: exact checked Image2 boundary pose.\nCell2 upper-right global17: subtle local relaxation toward neutral, approximately 44% of the tiny reaction.\nCell3 lower-left global18: closer to the original neutral curled tip, approximately22%.\nCell4 lower-right global19: almost exact original neutral pose, approximately6%; its upper-right curled hook MUST remain curved just like Image3 so transition to neutral20 is seamless.\nOriginal thin dark-teal contours, broad quiet smooth painterly shading and restrained highlights. Fixed center x=256 and grounded contact y=448 inside each 512px cell, canonical maximum span416px. Maintain one common scale and anchor across all cells. Truly transparent RGBA alpha outside resource contours. No backdrop, fog, glow, floor, cast shadow, speckle texture, tiny glints, characters, face, extra parts, text or frame. Draw every in-between fully; no blur or transformed cutouts.",
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\16.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\20.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-guides\\return-layout-2x2.png"
+      ],
+      "cachePath": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-259702d6-7c1e-47d2-b869-4ead8874de60.png",
+      "sourcePath": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-sources\\repair-16-19.png",
+      "output": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\17.png",
+      "cellRect": {
+        "x": 627,
+        "y": 0,
+        "width": 627,
+        "height": 627
+      },
+      "commonCanvas": {
+        "width": 1024,
+        "height": 1024
+      },
+      "phaseRegistration": {
+        "scale": 0.9847417840375586,
+        "tx": 14.403755868544636,
+        "ty": -3.252347417840383,
+        "derivedFromSameApprovedBoundary": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\16.png",
+        "sourceBoundaryGeometry": "852x653+92+248",
+        "approvedBoundaryGeometry": "839x644+105+240",
+        "registrationLandmarkAlphaThreshold": 0.5
+      },
+      "preparation": "Actual redrawn return poses preserve the original curled tip; 2x2 grid extraction, uniform whole-canvas normalization, one same-boundary registration for the repair phase. No generated pose transforms or interpolation.",
+      "candidateFrame": "frames/frame-17.png",
+      "packagedSource": "source-drawings/phase-repair-16-19.png",
+      "finalPreparation": "Shared whole-canvas resize from 1024x1024 to 256x256, no individual fit, no pose synthesis."
+    },
+    {
+      "key": "grass-fiber",
+      "index": 18,
+      "kind": "drawn-adjacent-repair",
+      "status": "checked-source",
+      "prompt": "Draw FOUR complete source animation cels for a narrow grass-fiber return-pose repair. This is actual fully drawn animation artwork, not a preview.\nOutput a square 1024x1024 PNG containing TWO columns by TWO rows of equal 512x512 cels, read row-major. Each cel contains one whole resource, complete attachments and stationary parts. No labels, gutters, borders or grid.\nImage 1 is the locked original clean grass-fiber design, material, exact ribbon count and proportions.\nImage 2 is checked frame 16, the immediate boundary. Copy that exact pose into first cell as the common camera/scale registration anchor. Its approved file will stay unchanged.\nImage 3 is the locked neutral return frame 20; the three newly drawn frames must approach THIS exact rest pose.\nImage 4 is a canonical layout reference, repeated at the same position and size in all four cels.\nRepair ONLY the settling of the free ribbon ends in frames17,18,19. Keep the U/C-SHAPED UPPER-RIGHT CURL intact and naturally attached in EVERY cel. Do NOT flatten, straighten, shorten, remove or turn that curl into a horizontal cut end. Preserve its loop shape from Image1. The free ends only relax by at most five pixels on a 1024px canvas, becoming nearly identical to neutral by frame19. Keep tied waist, body mass, all broad grass loops and bundle footprint fixed. No new movement, global camera shift, shrink or growth.\nCell1 upper-left global16: exact checked Image2 boundary pose.\nCell2 upper-right global17: subtle local relaxation toward neutral, approximately 44% of the tiny reaction.\nCell3 lower-left global18: closer to the original neutral curled tip, approximately22%.\nCell4 lower-right global19: almost exact original neutral pose, approximately6%; its upper-right curled hook MUST remain curved just like Image3 so transition to neutral20 is seamless.\nOriginal thin dark-teal contours, broad quiet smooth painterly shading and restrained highlights. Fixed center x=256 and grounded contact y=448 inside each 512px cell, canonical maximum span416px. Maintain one common scale and anchor across all cells. Truly transparent RGBA alpha outside resource contours. No backdrop, fog, glow, floor, cast shadow, speckle texture, tiny glints, characters, face, extra parts, text or frame. Draw every in-between fully; no blur or transformed cutouts.",
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\16.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\20.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-guides\\return-layout-2x2.png"
+      ],
+      "cachePath": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-259702d6-7c1e-47d2-b869-4ead8874de60.png",
+      "sourcePath": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-sources\\repair-16-19.png",
+      "output": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\18.png",
+      "cellRect": {
+        "x": 0,
+        "y": 627,
+        "width": 627,
+        "height": 627
+      },
+      "commonCanvas": {
+        "width": 1024,
+        "height": 1024
+      },
+      "phaseRegistration": {
+        "scale": 0.9847417840375586,
+        "tx": 14.403755868544636,
+        "ty": -3.252347417840383,
+        "derivedFromSameApprovedBoundary": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\16.png",
+        "sourceBoundaryGeometry": "852x653+92+248",
+        "approvedBoundaryGeometry": "839x644+105+240",
+        "registrationLandmarkAlphaThreshold": 0.5
+      },
+      "preparation": "Actual redrawn return poses preserve the original curled tip; 2x2 grid extraction, uniform whole-canvas normalization, one same-boundary registration for the repair phase. No generated pose transforms or interpolation.",
+      "candidateFrame": "frames/frame-18.png",
+      "packagedSource": "source-drawings/phase-repair-16-19.png",
+      "finalPreparation": "Shared whole-canvas resize from 1024x1024 to 256x256, no individual fit, no pose synthesis."
+    },
+    {
+      "key": "grass-fiber",
+      "index": 19,
+      "kind": "drawn-adjacent-repair",
+      "status": "checked-source",
+      "prompt": "Draw FOUR complete source animation cels for a narrow grass-fiber return-pose repair. This is actual fully drawn animation artwork, not a preview.\nOutput a square 1024x1024 PNG containing TWO columns by TWO rows of equal 512x512 cels, read row-major. Each cel contains one whole resource, complete attachments and stationary parts. No labels, gutters, borders or grid.\nImage 1 is the locked original clean grass-fiber design, material, exact ribbon count and proportions.\nImage 2 is checked frame 16, the immediate boundary. Copy that exact pose into first cell as the common camera/scale registration anchor. Its approved file will stay unchanged.\nImage 3 is the locked neutral return frame 20; the three newly drawn frames must approach THIS exact rest pose.\nImage 4 is a canonical layout reference, repeated at the same position and size in all four cels.\nRepair ONLY the settling of the free ribbon ends in frames17,18,19. Keep the U/C-SHAPED UPPER-RIGHT CURL intact and naturally attached in EVERY cel. Do NOT flatten, straighten, shorten, remove or turn that curl into a horizontal cut end. Preserve its loop shape from Image1. The free ends only relax by at most five pixels on a 1024px canvas, becoming nearly identical to neutral by frame19. Keep tied waist, body mass, all broad grass loops and bundle footprint fixed. No new movement, global camera shift, shrink or growth.\nCell1 upper-left global16: exact checked Image2 boundary pose.\nCell2 upper-right global17: subtle local relaxation toward neutral, approximately 44% of the tiny reaction.\nCell3 lower-left global18: closer to the original neutral curled tip, approximately22%.\nCell4 lower-right global19: almost exact original neutral pose, approximately6%; its upper-right curled hook MUST remain curved just like Image3 so transition to neutral20 is seamless.\nOriginal thin dark-teal contours, broad quiet smooth painterly shading and restrained highlights. Fixed center x=256 and grounded contact y=448 inside each 512px cell, canonical maximum span416px. Maintain one common scale and anchor across all cells. Truly transparent RGBA alpha outside resource contours. No backdrop, fog, glow, floor, cast shadow, speckle texture, tiny glints, characters, face, extra parts, text or frame. Draw every in-between fully; no blur or transformed cutouts.",
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\16.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\20.png",
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-guides\\return-layout-2x2.png"
+      ],
+      "cachePath": "D:\\.codex\\generated_images\\01a1694d-25d4-74e0-9180-48714aa12f11\\exec-259702d6-7c1e-47d2-b869-4ead8874de60.png",
+      "sourcePath": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\phase-sources\\repair-16-19.png",
+      "output": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\19.png",
+      "cellRect": {
+        "x": 627,
+        "y": 627,
+        "width": 627,
+        "height": 627
+      },
+      "commonCanvas": {
+        "width": 1024,
+        "height": 1024
+      },
+      "phaseRegistration": {
+        "scale": 0.9847417840375586,
+        "tx": 14.403755868544636,
+        "ty": -3.252347417840383,
+        "derivedFromSameApprovedBoundary": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\16.png",
+        "sourceBoundaryGeometry": "852x653+92+248",
+        "approvedBoundaryGeometry": "839x644+105+240",
+        "registrationLandmarkAlphaThreshold": 0.5
+      },
+      "preparation": "Actual redrawn return poses preserve the original curled tip; 2x2 grid extraction, uniform whole-canvas normalization, one same-boundary registration for the repair phase. No generated pose transforms or interpolation.",
+      "candidateFrame": "frames/frame-19.png",
+      "packagedSource": "source-drawings/phase-repair-16-19.png",
+      "finalPreparation": "Shared whole-canvas resize from 1024x1024 to 256x256, no individual fit, no pose synthesis."
+    },
+    {
+      "key": "grass-fiber",
+      "index": 20,
+      "kind": "retained-approved-neutral-hold",
+      "status": "retained",
+      "sourcePath": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png",
+      "output": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\20.png",
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png"
+      ],
+      "prompt": "Retain the locked approved actually drawn neutral resource at unchanged pixels and canvas coordinates for this stationary rest hold. No moving pose is synthesized.",
+      "cachePath": null,
+      "preparation": "byte-identical file copy; no resize, transform or interpolation",
+      "candidateFrame": "frames/frame-20.png",
+      "packagedSource": "source-drawings/canonical-style-reference.png",
+      "finalPreparation": "Shared whole-canvas resize from 1024x1024 to 256x256, no individual fit, no pose synthesis."
+    },
+    {
+      "key": "grass-fiber",
+      "index": 21,
+      "kind": "retained-approved-neutral-hold",
+      "status": "retained",
+      "sourcePath": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png",
+      "output": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\21.png",
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png"
+      ],
+      "prompt": "Retain the locked approved actually drawn neutral resource at unchanged pixels and canvas coordinates for this stationary rest hold. No moving pose is synthesized.",
+      "cachePath": null,
+      "preparation": "byte-identical file copy; no resize, transform or interpolation",
+      "candidateFrame": "frames/frame-21.png",
+      "packagedSource": "source-drawings/canonical-style-reference.png",
+      "finalPreparation": "Shared whole-canvas resize from 1024x1024 to 256x256, no individual fit, no pose synthesis."
+    },
+    {
+      "key": "grass-fiber",
+      "index": 22,
+      "kind": "retained-approved-neutral-hold",
+      "status": "retained",
+      "sourcePath": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png",
+      "output": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\22.png",
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png"
+      ],
+      "prompt": "Retain the locked approved actually drawn neutral resource at unchanged pixels and canvas coordinates for this stationary rest hold. No moving pose is synthesized.",
+      "cachePath": null,
+      "preparation": "byte-identical file copy; no resize, transform or interpolation",
+      "candidateFrame": "frames/frame-22.png",
+      "packagedSource": "source-drawings/canonical-style-reference.png",
+      "finalPreparation": "Shared whole-canvas resize from 1024x1024 to 256x256, no individual fit, no pose synthesis."
+    },
+    {
+      "key": "grass-fiber",
+      "index": 23,
+      "kind": "retained-approved-neutral-hold",
+      "status": "retained",
+      "sourcePath": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png",
+      "output": "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\drawn-frames\\23.png",
+      "references": [
+        "H:\\Spawner\\$Trash\\resource-full-style-20261024\\animation-work\\grass-fiber\\style-reference.png"
+      ],
+      "prompt": "Retain the locked approved actually drawn neutral resource at unchanged pixels and canvas coordinates for this stationary rest hold. No moving pose is synthesized.",
+      "cachePath": null,
+      "preparation": "byte-identical file copy; no resize, transform or interpolation",
+      "candidateFrame": "frames/frame-23.png",
+      "packagedSource": "source-drawings/canonical-style-reference.png",
+      "finalPreparation": "Shared whole-canvas resize from 1024x1024 to 256x256, no individual fit, no pose synthesis."
+    }
+  ]
+}
