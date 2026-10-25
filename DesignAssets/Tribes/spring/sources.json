@@ -8,24 +8,6 @@
       "revision": 2
     },
     {
-      "key": "nest-stage-02",
-      "sourcePath": "D:/.codex/generated_images/01a1682a-4d49-7db2-96cc-0f1ccff0d568/exec-310262fa-4a3b-430c-abe2-04d2e76a915e.png",
-      "postprocess": "copy",
-      "revision": 2
-    },
-    {
-      "key": "nest-stage-03",
-      "sourcePath": "D:/.codex/generated_images/01a1682a-4d49-7db2-96cc-0f1ccff0d568/exec-c3679d4a-51dc-48e9-9999-0b1526a9eb2b.png",
-      "postprocess": "copy",
-      "revision": 2
-    },
-    {
-      "key": "nest-stage-04",
-      "sourcePath": "D:/.codex/generated_images/01a1682a-4d49-7db2-96cc-0f1ccff0d568/exec-39e97394-3dc6-4dcf-83dc-e3245c8a775d.png",
-      "postprocess": "copy",
-      "revision": 2
-    },
-    {
       "key": "nest-ground",
       "sourcePath": "D:\\.codex\\generated_images\\01a16860-018a-7493-a9c0-c2647f7ee270\\exec-722cada3-5bc6-4244-acb8-d8897dff0d62.png",
       "postprocess": "copy"

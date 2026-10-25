@@ -1,0 +1,166 @@
+{
+  "tribe": "spring",
+  "action": "birth",
+  "status": "implemented",
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 4,
+  "frameCount": 13,
+  "durationsMs": [
+    130,
+    120,
+    100,
+    100,
+    80,
+    260,
+    80,
+    90,
+    90,
+    100,
+    100,
+    130,
+    410
+  ],
+  "loop": false,
+  "atlas": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-game.png",
+  "runtimeAtlas": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp",
+  "preview": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-game-preview.webp",
+  "contact": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-game-contact.jpg",
+  "nest": {
+    "source": "DesignAssets/Tribes/spring/Nests/nest-stage-01.png",
+    "stationary": true
+  },
+  "construction": {
+    "sourceArtwork": "built-in image_gen",
+    "movingPoses": "newly drawn",
+    "preparation": "uniform source scaling, full-pose anchor registration, unchanged nest compositing and atlas packing",
+    "frames": [
+      {
+        "frame": 0,
+        "source": "initial.png",
+        "translation": [
+          11,
+          1
+        ]
+      },
+      {
+        "frame": 1,
+        "source": "key-0.png",
+        "translation": [
+          0,
+          0
+        ]
+      },
+      {
+        "frame": 2,
+        "source": "attached-middle.png",
+        "translation": [
+          15,
+          3
+        ]
+      },
+      {
+        "frame": 3,
+        "source": "prebreak-frame.png",
+        "translation": [
+          9,
+          6
+        ]
+      },
+      {
+        "frame": 4,
+        "source": "pinch.png",
+        "translation": [
+          17,
+          10
+        ]
+      },
+      {
+        "frame": 5,
+        "source": "detached-frame.png",
+        "translation": [
+          17,
+          0
+        ]
+      },
+      {
+        "frame": 6,
+        "source": "contact.png",
+        "translation": [
+          54,
+          -3
+        ]
+      },
+      {
+        "frame": 7,
+        "source": "rise-0.png",
+        "translation": [
+          0,
+          0
+        ]
+      },
+      {
+        "frame": 8,
+        "source": "rise-middle.png",
+        "translation": [
+          54,
+          -1
+        ]
+      },
+      {
+        "frame": 9,
+        "source": "rise-1.png",
+        "translation": [
+          0,
+          0
+        ]
+      },
+      {
+        "frame": 10,
+        "source": "rise-2.png",
+        "translation": [
+          0,
+          0
+        ]
+      },
+      {
+        "frame": 11,
+        "source": "rise-3.png",
+        "translation": [
+          0,
+          0
+        ]
+      },
+      {
+        "frame": 12,
+        "source": "canonical-neutral",
+        "translation": [
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  "referenceAtlas": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth.webp",
+  "game": {
+    "outletSourcePixels": [
+      1616,
+      646
+    ],
+    "layerOutlet": [
+      86,
+      105
+    ],
+    "layerPivot": [
+      320,
+      448
+    ],
+    "detachAtMs": 530,
+    "contactAtMs": 790,
+    "landing": "front unoccupied boundary cell",
+    "sfx": "DesignAssets/Audio/spring-birth.mp3",
+    "sfxAtMs": 0
+  }
+}

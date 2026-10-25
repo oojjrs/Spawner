@@ -1,0 +1,63 @@
+{
+  "id": "pebble",
+  "prefix": "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/",
+  "frames": [
+    "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/Frames/00.png",
+    "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/Frames/01.png",
+    "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/Frames/02.png",
+    "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/Frames/03.png",
+    "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/Frames/04.png",
+    "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/Frames/05.png",
+    "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/Frames/06.png",
+    "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/Frames/07.png"
+  ],
+  "oldSequence": "DesignAssets/Tribes/pebble/AnimationStudies/death-inbetweens-v5/sequence.json",
+  "oldFrames": [
+    "DesignAssets/Tribes/pebble/AnimationStudies/death-inbetweens-v5/Frames/00-neutral.png",
+    "DesignAssets/Tribes/pebble/AnimationStudies/death-inbetweens-v5/Frames/01-early-softening.png",
+    "DesignAssets/Tribes/pebble/AnimationStudies/death-inbetweens-v5/Frames/02-weakening.png",
+    "DesignAssets/Tribes/pebble/AnimationStudies/death-inbetweens-v5/Frames/03-collapse-transition.png",
+    "DesignAssets/Tribes/pebble/AnimationStudies/death-inbetweens-v5/Frames/04-approved-key.png",
+    "DesignAssets/Tribes/pebble/AnimationStudies/death-inbetweens-v5/Frames/05-settle-transition.png",
+    "DesignAssets/Tribes/pebble/AnimationStudies/death-inbetweens-v5/Frames/06-remains.png"
+  ],
+  "neutralBounds": [
+    53,
+    148,
+    458,
+    447
+  ],
+  "anchor": "DesignAssets/Tribes/pebble/AnimationStudies/death-keyposes-v3/keypose.png",
+  "anchorSha256": "38e66e80edba526eebe43aac718845ecfd4838a255c9cd3a34a961a06829b0f3",
+  "stationaryMask": "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/Source/stationary-mask.png",
+  "sourceChanges": [
+    {
+      "key": "eyes-2",
+      "index": 2,
+      "sourceArtwork": "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/Source/eyes-2-drawn.png",
+      "generation": "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/Source/eyes-2-generation.json",
+      "editMask": "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/Source/eyes-2-edit-mask.png",
+      "changedPixels": 1607,
+      "stationaryChanges": 0
+    },
+    {
+      "key": "pebble-small-jostle",
+      "index": 5,
+      "sourceArtwork": "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/Source/pebble-small-jostle-drawn.png",
+      "generation": "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/Source/pebble-small-jostle-generation.json",
+      "editMask": "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/Source/pebble-small-jostle-edit-mask.png",
+      "changedPixels": 21877,
+      "stationaryChanges": 0
+    },
+    {
+      "key": "eyes-3",
+      "index": 3,
+      "sourceArtwork": "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/Source/eyes-3-drawn.png",
+      "generation": "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/Source/eyes-3-generation.json",
+      "editMask": "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/Source/eyes-3-edit-mask.png",
+      "changedPixels": 1646,
+      "stationaryChanges": 0
+    }
+  ],
+  "heldTail": "one small drawn upper-left-fragment rock, then return to the confirmed key"
+}

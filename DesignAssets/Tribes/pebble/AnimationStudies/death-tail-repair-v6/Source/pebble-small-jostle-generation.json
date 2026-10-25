@@ -1,0 +1,11 @@
+{
+  "provider": "built-in image_gen",
+  "prompt": "Use case precise-object-edit. Image 1 is the exact edit target, a four-piece ochre stone character already settled into a pile. Image 2 is identity reference only. Draw one complete square transparent animation frame, same logical 512x512 canvas, position, scale, camera, ground y448. Only the UPPER LEFT large fragment makes ONE TINY supported rock, at most 1 degree and 2 to 3 pixels. Its high point stays about (228,205), extremely close to (228,202) in image 1. Keep its pale top facet, irregular right break and dark bottom plane recognizable and almost identical. Repaint that fragment in the minutely changed pose; do not flatten it, lower it substantially, widen it or rearrange the pile. The upper RIGHT fragment, both LOWER foreground blocks, both small FEET, every fixed outline and all their colors remain exactly as image 1. No new chips, eyes, face, motion lines, blur, scene, text or sheet. This is a subtle post-contact adjustment followed by stillness, not a second collapse. Keep all fixed surrounding surfaces unchanged.",
+  "references": [
+    "DesignAssets/Tribes/pebble/AnimationStudies/death-keyposes-v3/keypose.png",
+    "DesignAssets/Tribes/pebble/AnimationStudies/death-keyposes-v3/Source/neutral-reference.png"
+  ],
+  "sourceArtwork": "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/Source/pebble-small-jostle-drawn.png",
+  "sourceSha256": "0ad7d49a891843070494e6c4eb96daa5684682dab30ff78a78426370a3011cd9",
+  "method": "drawn changed region with byte-identical stationary artwork retained at fixed coordinates"
+}

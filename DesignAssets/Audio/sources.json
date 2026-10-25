@@ -117,6 +117,7 @@
       "duration_seconds": 1.2,
       "generated_at": "2026-10-24T03:21:52.0076881+00:00",
       "prompt_influence": 0.8
-    }
+    },
+    {"text": "Close-up foley: one palm-sized solid river pebble rolls down a short rough sandstone ramp onto compact gritty earth. Clearly audible irregular HARD STONE CLACKS, dry granular scraping between contacts, accelerating rattly knocks, then one low dense final TOK and two tiny settling clicks. Natural unpitched stone sound, dry and intimate. No wood, liquid, squeaks, whoosh, boing, music or voices.", "model_id": "eleven_text_to_sound_v2", "duration_seconds": 2, "prompt_influence": 0.9, "loop": false, "file": "pebble-birth-roll.mp3", "generated_at": "2026-10-25T05:06:22.627606+00:00", "sha256": "15a80d7599f8c3f0b29965e4f06a2566d3d5bc9b48345a7bd7f32247f08e6d2b", "bytes": 33061, "input_sources": [], "processing": null}
   ]
 }

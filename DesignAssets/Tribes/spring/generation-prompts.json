@@ -9,41 +9,7 @@
       "prompt": "Use case: precise-object-edit.\nAsset type: ONE production static 2D game nest sprite, level 1; an actual source asset, not a comparison board.\nImage 1 is the current teal Spring tribe nest to redesign. Image 2 is the four-faction context, only for matching the painterly cartoon rendering and game camera, not a target to reproduce.\nPrimary request: replace the entire architecture of Image 1 with a distinct small natural SPRING. Keep the same opaque teal water material, mint highlights, dark teal contours, hand-painted shading, and elevated near-front 3/4 game view.\nDesign: a low WIDE oval spring pool with a deep flat open water surface in the middle, two broad elliptical ripple strokes on that surface. Its single continuous thick soft water rim winds around the pool as a flowing ribbon, smoothly raised on the rear left and dipping to a small broad spillway on the front right. Only one small low rounded sideways wave curl on the rear left edge. Quiet compact level-1 starter nest, 3-4 main readable masses, width roughly twice height. The center is a visible HORIZONTAL POOL, completely empty of sculpture. Relate to the creature through water material and curled edge language only.\nAvoid: central droplet, water bead, egg, seed, unit silhouette, face, large pointed ornament, inward paired waves, petal/leaf/lotus, symmetrical cradle around a central object, heart-shaped gap, stone/metal/manmade fountain, high tower, particles, foam, bubbles.\nComposition: one whole centered isolated sprite, generous transparent margins, clean genuine alpha background, no cast shadow/glow/ground, no text/labels.",
       "sourcePath": "D:/.codex/generated_images/01a1682a-4d49-7db2-96cc-0f1ccff0d568/exec-8d5029b3-ab40-46ad-96e7-7d7aa326be34.png",
       "referenceImages": [
-        "DesignAssets/Tribes/spring/Nests/nest-stage-01.png",
-        "DesignAssets/Tribes/Previews/nest-growth-all-tribes.png"
-      ],
-      "postprocess": "copy",
-      "transparentBackground": true,
-      "revision": 2
-    },
-    {
-      "key": "nest-stage-02",
-      "prompt": "Use case: stylized-concept. Asset type: ONE isolated production 2D game nest sprite, not an animation or sheet or review board. The reference is the newly revised LEVEL 1 Spring tribe nest. Strictly preserve its family: low wide asymmetric OPEN SPRING POOLS, continuous flowing water rims, broad flat inner water surfaces and elliptical ripples, short wide spillways, one-sided sideways low wave crest. Opaque sculpted teal water, soft mint highlights, dark teal painted outlines, same hand-painted cartoon rendering, same near-front elevated 3/4 camera. This is a nest architecture made from water, not a creature. Growth is expressed by offset pools and water terraces, not pointed petals. Empty horizontal water surfaces must remain the focal point. Absolutely no central droplet/bead/egg/seed/unit shape/pointed ornament; no paired inward curls, symmetrical cradle, lotus/flower/leaf forms, heart opening, face, character, rock, metal, manmade fountain, foam, bubbles, particles, glow, text, ground tile or cast shadow. Clean actual alpha around the entire sprite, ample margins, no clipping.\nMake LEVEL 2: retain the recognizable main low oval pool and front-right broad spillway. Add ONE smaller crescent-shaped raised pool behind its left half, whose open flat surface is visible, and a short broad sheet of water connecting down into the main pool. Keep the back-right area lower and open. One gentle lateral wave curl at the raised pool's left edge. Simple intermediate upgrade, just two connected pool levels; still wide and low, width about 2.2 times height.",
-      "sourcePath": "D:/.codex/generated_images/01a1682a-4d49-7db2-96cc-0f1ccff0d568/exec-310262fa-4a3b-430c-abe2-04d2e76a915e.png",
-      "referenceImages": [
-        "D:/.codex/generated_images/01a1682a-4d49-7db2-96cc-0f1ccff0d568/exec-8d5029b3-ab40-46ad-96e7-7d7aa326be34.png"
-      ],
-      "postprocess": "copy",
-      "transparentBackground": true,
-      "revision": 2
-    },
-    {
-      "key": "nest-stage-03",
-      "prompt": "Use case: stylized-concept. Asset type: ONE isolated production 2D game nest sprite, not an animation or sheet or review board. The reference is the newly revised LEVEL 1 Spring tribe nest. Strictly preserve its family: low wide asymmetric OPEN SPRING POOLS, continuous flowing water rims, broad flat inner water surfaces and elliptical ripples, short wide spillways, one-sided sideways low wave crest. Opaque sculpted teal water, soft mint highlights, dark teal painted outlines, same hand-painted cartoon rendering, same near-front elevated 3/4 camera. This is a nest architecture made from water, not a creature. Growth is expressed by offset pools and water terraces, not pointed petals. Empty horizontal water surfaces must remain the focal point. Absolutely no central droplet/bead/egg/seed/unit shape/pointed ornament; no paired inward curls, symmetrical cradle, lotus/flower/leaf forms, heart opening, face, character, rock, metal, manmade fountain, foam, bubbles, particles, glow, text, ground tile or cast shadow. Clean actual alpha around the entire sprite, ample margins, no clipping.\nMake LEVEL 3: retain the main broad oval foreground spring pool, and grow a gently ascending sequence of THREE offset open crescent terraces along the back-left to back-middle, linked by two short WIDE cascade ribbons. Two small lower side spill pockets extend the base. Keep the center of the foreground pool EMPTY and flat with calm elliptical ripple strokes. Rounded substantial rims, no tall thin forms. Asymmetrical layered landscape silhouette, broader and moderately taller than level 2, width about 2 times height.",
-      "sourcePath": "D:/.codex/generated_images/01a1682a-4d49-7db2-96cc-0f1ccff0d568/exec-c3679d4a-51dc-48e9-9999-0b1526a9eb2b.png",
-      "referenceImages": [
-        "D:/.codex/generated_images/01a1682a-4d49-7db2-96cc-0f1ccff0d568/exec-8d5029b3-ab40-46ad-96e7-7d7aa326be34.png"
-      ],
-      "postprocess": "copy",
-      "transparentBackground": true,
-      "revision": 2
-    },
-    {
-      "key": "nest-stage-04",
-      "prompt": "Use case: stylized-concept. Asset type: ONE isolated production 2D game nest sprite, not an animation or sheet or review board. The reference is the newly revised LEVEL 1 Spring tribe nest. Strictly preserve its family: low wide asymmetric OPEN SPRING POOLS, continuous flowing water rims, broad flat inner water surfaces and elliptical ripples, short wide spillways, one-sided sideways low wave crest. Opaque sculpted teal water, soft mint highlights, dark teal painted outlines, same hand-painted cartoon rendering, same near-front elevated 3/4 camera. This is a nest architecture made from water, not a creature. Growth is expressed by offset pools and water terraces, not pointed petals. Empty horizontal water surfaces must remain the focal point. Absolutely no central droplet/bead/egg/seed/unit shape/pointed ornament; no paired inward curls, symmetrical cradle, lotus/flower/leaf forms, heart opening, face, character, rock, metal, manmade fountain, foam, bubbles, particles, glow, text, ground tile or cast shadow. Clean actual alpha around the entire sprite, ample margins, no clipping.\nMake LEVEL 4: final mature natural spring nest, a broad low sanctuary of FOUR open water terraces ascending diagonally from the large foreground oval pool toward the back-left, with short broad cascading water sheets and a pair of low side pools. The tallest terrace is at rear LEFT; the right side stays lower and open. Every pool is a horizontal hollow water surface, with no central pedestal or unit-shaped object. Integrate just two gentle low sideways crest curls at outer terrace edges; no vertical arch or paired petals. More architectural mass and stepped depth than level 3 but compact and readable, 7-8 large simple masses, width about 1.9 times height.",
-      "sourcePath": "D:/.codex/generated_images/01a1682a-4d49-7db2-96cc-0f1ccff0d568/exec-39e97394-3dc6-4dcf-83dc-e3245c8a775d.png",
-      "referenceImages": [
-        "D:/.codex/generated_images/01a1682a-4d49-7db2-96cc-0f1ccff0d568/exec-8d5029b3-ab40-46ad-96e7-7d7aa326be34.png"
+        "DesignAssets/Tribes/spring/Nests/nest-stage-01.png"
       ],
       "postprocess": "copy",
       "transparentBackground": true,

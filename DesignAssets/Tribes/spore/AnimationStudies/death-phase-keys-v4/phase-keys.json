@@ -1,0 +1,91 @@
+{
+  "tribe": "spore",
+  "kind": "death-key-pose-sequence",
+  "status": "key-sequence-review-candidate",
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 4,
+  "frameCount": 4,
+  "phases": [
+    "neutral",
+    "weakening",
+    "accepted-key",
+    "remains"
+  ],
+  "previewHoldDurationsMs": [
+    600,
+    800,
+    800,
+    1500
+  ],
+  "previewDurationMs": 3700,
+  "pivot": [
+    256,
+    448
+  ],
+  "loopAtRuntime": false,
+  "sourceMethod": "new complete drawings for weakening and remains; approved neutral and middle key copied unchanged",
+  "interpolatedFrames": false,
+  "motionTransforms": false,
+  "artworkPreparation": "one fixed full-canvas resolution conversion; alpha cleanup and ground-anchor canvas padding only; no per-frame silhouette fitting",
+  "sourceDrawings": [
+    {
+      "index": 1,
+      "phase": "weakening",
+      "sourceArtwork": "DesignAssets/Tribes/spore/AnimationStudies/death-phase-keys-v4/Source/weakening-drawn.png",
+      "sourceCanvas": [
+        1254,
+        1254
+      ],
+      "generation": "DesignAssets/Tribes/spore/AnimationStudies/death-phase-keys-v4/Source/weakening-generation.json",
+      "verticalCanvasPaddingPixels": -6,
+      "lowAlphaPixelsCleared": 4818,
+      "drawingBounds": [
+        37,
+        225,
+        493,
+        448
+      ]
+    },
+    {
+      "index": 3,
+      "phase": "remains",
+      "sourceArtwork": "DesignAssets/Tribes/spore/AnimationStudies/death-phase-keys-v4/Source/remains-drawn.png",
+      "sourceCanvas": [
+        1254,
+        1254
+      ],
+      "generation": "DesignAssets/Tribes/spore/AnimationStudies/death-phase-keys-v4/Source/remains-generation.json",
+      "verticalCanvasPaddingPixels": -4,
+      "lowAlphaPixelsCleared": 3632,
+      "drawingBounds": [
+        60,
+        304,
+        468,
+        448
+      ]
+    }
+  ],
+  "frames": [
+    "DesignAssets/Tribes/spore/AnimationStudies/death-phase-keys-v4/Frames/00-neutral.png",
+    "DesignAssets/Tribes/spore/AnimationStudies/death-phase-keys-v4/Frames/01-weakening.png",
+    "DesignAssets/Tribes/spore/AnimationStudies/death-phase-keys-v4/Frames/02-accepted-key.png",
+    "DesignAssets/Tribes/spore/AnimationStudies/death-phase-keys-v4/Frames/03-remains.png"
+  ],
+  "atlas": "DesignAssets/Tribes/spore/AnimationStudies/death-phase-keys-v4/death-phase-keys.png",
+  "contact": "DesignAssets/Tribes/spore/AnimationStudies/death-phase-keys-v4/phase-contact.png",
+  "approvedMiddleKey": "DesignAssets/Tribes/spore/AnimationStudies/death-keyposes-v3/keypose.png",
+  "approvedMiddleKeySha256": "7670a2701f57c5ff2213f3b18701e4e21d8b0fd28071ed8b182a25cf9a936b8b",
+  "neutralReference": "DesignAssets/Tribes/spore/AnimationStudies/death-keyposes-v3/Source/neutral-reference.png",
+  "neutralReferenceSha256": "78fea37376041a107aa2307be0b6a36076f9843d8eba01544e8c0ad3bc7d17cb",
+  "neutralBounds": [
+    44,
+    148,
+    467,
+    447
+  ],
+  "preview": "DesignAssets/Tribes/Previews/death-phase-keys-lineup-v4.webp",
+  "scope": "four key poses for review before in-between drawing; existing runtime animation unchanged"
+}

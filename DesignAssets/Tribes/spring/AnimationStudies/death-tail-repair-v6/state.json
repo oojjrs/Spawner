@@ -1,0 +1,54 @@
+{
+  "id": "spring",
+  "prefix": "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/",
+  "frames": [
+    "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/Frames/00.png",
+    "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/Frames/01.png",
+    "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/Frames/02.png",
+    "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/Frames/03.png",
+    "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/Frames/04.png",
+    "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/Frames/05.png",
+    "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/Frames/06.png",
+    "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/Frames/07.png"
+  ],
+  "oldSequence": "DesignAssets/Tribes/spring/AnimationStudies/death-inbetweens-v5/sequence.json",
+  "oldFrames": [
+    "DesignAssets/Tribes/spring/AnimationStudies/death-inbetweens-v5/Frames/00-neutral.png",
+    "DesignAssets/Tribes/spring/AnimationStudies/death-inbetweens-v5/Frames/01-early-softening.png",
+    "DesignAssets/Tribes/spring/AnimationStudies/death-inbetweens-v5/Frames/02-weakening.png",
+    "DesignAssets/Tribes/spring/AnimationStudies/death-inbetweens-v5/Frames/03-collapse-transition.png",
+    "DesignAssets/Tribes/spring/AnimationStudies/death-inbetweens-v5/Frames/04-approved-key.png",
+    "DesignAssets/Tribes/spring/AnimationStudies/death-inbetweens-v5/Frames/05-settle-transition.png",
+    "DesignAssets/Tribes/spring/AnimationStudies/death-inbetweens-v5/Frames/06-remains.png"
+  ],
+  "neutralBounds": [
+    141,
+    161,
+    370,
+    447
+  ],
+  "anchor": "DesignAssets/Tribes/spring/AnimationStudies/death-keyposes-v3/keypose.png",
+  "anchorSha256": "453457277b1b358954ec53275428238c0b97eb196a23678640e670690f0305b8",
+  "stationaryMask": "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/Source/stationary-mask.png",
+  "sourceChanges": [
+    {
+      "key": "spring-tail-1",
+      "index": 5,
+      "sourceArtwork": "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/Source/spring-tail-1-drawn.png",
+      "generation": "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/Source/spring-tail-1-generation.json",
+      "editMask": "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/Source/spring-tail-1-edit-mask.png",
+      "changedPixels": 20089,
+      "stationaryChanges": 0
+    },
+    {
+      "key": "spring-tail-2",
+      "index": 6,
+      "sourceArtwork": "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/Source/spring-tail-2-drawn.png",
+      "generation": "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/Source/spring-tail-2-generation.json",
+      "editMask": "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/Source/spring-tail-2-edit-mask.png",
+      "changedPixels": 20089,
+      "stationaryChanges": 0
+    }
+  ],
+  "heldTail": "drawn inner ripples then existing drawn quiet interior; fixed contour retained"
+}

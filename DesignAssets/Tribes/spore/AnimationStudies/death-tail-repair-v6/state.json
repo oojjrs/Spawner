@@ -1,0 +1,35 @@
+{
+  "id": "spore",
+  "prefix": "DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/",
+  "frames": [
+    "DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/Frames/00.png",
+    "DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/Frames/01.png",
+    "DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/Frames/02.png",
+    "DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/Frames/03.png",
+    "DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/Frames/04.png",
+    "DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/Frames/05.png",
+    "DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/Frames/06.png",
+    "DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/Frames/07.png"
+  ],
+  "oldSequence": "DesignAssets/Tribes/spore/AnimationStudies/death-inbetweens-v5/sequence.json",
+  "oldFrames": [
+    "DesignAssets/Tribes/spore/AnimationStudies/death-inbetweens-v5/Frames/00-neutral.png",
+    "DesignAssets/Tribes/spore/AnimationStudies/death-inbetweens-v5/Frames/01-early-softening.png",
+    "DesignAssets/Tribes/spore/AnimationStudies/death-inbetweens-v5/Frames/02-weakening.png",
+    "DesignAssets/Tribes/spore/AnimationStudies/death-inbetweens-v5/Frames/03-collapse-transition.png",
+    "DesignAssets/Tribes/spore/AnimationStudies/death-inbetweens-v5/Frames/04-approved-key.png",
+    "DesignAssets/Tribes/spore/AnimationStudies/death-inbetweens-v5/Frames/05-settle-transition.png",
+    "DesignAssets/Tribes/spore/AnimationStudies/death-inbetweens-v5/Frames/06-remains.png"
+  ],
+  "neutralBounds": [
+    44,
+    148,
+    467,
+    447
+  ],
+  "anchor": "DesignAssets/Tribes/spore/AnimationStudies/death-keyposes-v3/keypose.png",
+  "anchorSha256": "7670a2701f57c5ff2213f3b18701e4e21d8b0fd28071ed8b182a25cf9a936b8b",
+  "stationaryMask": "DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/Source/stationary-mask.png",
+  "sourceChanges": [],
+  "heldTail": "landed key held unchanged"
+}

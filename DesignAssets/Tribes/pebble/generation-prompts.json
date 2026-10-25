@@ -6,36 +6,6 @@
   },
   "generations": [
     {
-      "file": "DesignAssets/Tribes/pebble/Nests/nest-stage-02.png",
-      "referenceFiles": [
-        "DesignAssets/TribeConcepts/Nests/nest-stage-01-pebble-ochre-v1.png",
-        "DesignAssets/TribeConcepts/base-river-pebble-ochre-v2.png"
-      ],
-      "sourceCache": "D:\\.codex\\generated_images\\01a1685f-879e-7e60-a777-e4988de5ff1f\\exec-4ecaff05-c868-46f3-a397-73c64311121f.png",
-      "prompt": "Use case: game-asset. Create the LEVEL 2 nest source sprite for the warm ochre pebble tribe shown by reference 1 (approved level 1 nest); reference 2 shows the tribe's approved unit and must guide material/color. Evolve that exact low cradle of three rounded faceted sandstone stones and one pale stone egg into a slightly taller, broader two-course stone cradle: five or six large smooth ochre stones, simple wide planes, pale honey highlights, dark deep-teal outer contour, soft painterly 2D casual game finish. Protect the one central pale stone egg in a front-open alcove; the egg remains visible. Rounded sloping stones on each side lean inward, with one low rear stone slab forming a protective back. This is a modest level 2 growth, not a castle. Fixed front view with a slight view of the top, grounded horizontal base. One isolated static nest sprite centered with comfortable transparent margins. No plants, leaves, wood, metal, gems, runes, spikes, fire, lights, scenery, text, characters or faces. Match the source's warm sandstone material and illustration style exactly. Actual transparent background.",
-      "transparentBackground": true
-    },
-    {
-      "file": "DesignAssets/Tribes/pebble/Nests/nest-stage-03.png",
-      "referenceFiles": [
-        "DesignAssets/TribeConcepts/Nests/nest-stage-01-pebble-ochre-v1.png",
-        "DesignAssets/TribeConcepts/base-river-pebble-ochre-v2.png"
-      ],
-      "sourceCache": "D:\\.codex\\generated_images\\01a1685f-879e-7e60-a777-e4988de5ff1f\\exec-3c50806d-0e3d-4646-9194-3cdd45f7f205.png",
-      "prompt": "Use case: game-asset. Create the LEVEL 3 nest source sprite in the exact lineage of reference 1, the approved ochre pebble nest, and the sandstone material in reference 2, the approved unit. A substantial rounded sandstone sanctuary cradle: broad stepped base of large smoothly faceted ochre stones, two rising side walls of overlapping rounded boulders, a tall curved rear slab with a shallow rounded stone arch, and one protected pale central stone egg visible inside the front-open alcove. More developed than level 2, clear tiered height, around ten large readable stone pieces rather than tiny clutter. Warm ochre/caramel rock, wide cream-lit planes, deep teal contour and creases, softly painted 2D cute strategy game art. Keep the silhouette squat and welcoming, not threatening. Front view with slight top visibility and horizontal grounded base. One centered isolated static sprite, true alpha transparent background, generous edge margin. No plants, leaves, wood, metal, gemstones, crystals, runes, ornaments, spikes, fortress towers, fire, magical glows, text, characters or faces.",
-      "transparentBackground": true
-    },
-    {
-      "file": "DesignAssets/Tribes/pebble/Nests/nest-stage-04.png",
-      "referenceFiles": [
-        "DesignAssets/TribeConcepts/Nests/nest-stage-01-pebble-ochre-v1.png",
-        "DesignAssets/TribeConcepts/base-river-pebble-ochre-v2.png"
-      ],
-      "sourceCache": "D:\\.codex\\generated_images\\01a1685f-879e-7e60-a777-e4988de5ff1f\\exec-11e50637-a9b3-4cb1-a066-6a342720fc91.png",
-      "prompt": "Use case: game-asset. Create the final LEVEL 4 nest source sprite belonging to the approved warm ochre pebble tribe in references. Reference 1 is the exact level 1 design ancestry, reference 2 defines the tribe's rock material, palette and contour. Evolve it into a mature broad sandstone nursery sanctuary: three tiers of large smooth faceted rounded ochre boulders, a tall protective stone arch at the rear, and two compact lower side cradles flanking the central cradle, each with a smaller pale stone egg; one main large pale egg is visible at the center. Strong broad stepped base, heavier and taller than prior levels, all forms still very simple and organic, around fifteen broad readable stones, no tiny detail. Soft painterly cute 2D game sprite, honey-cream lit rock planes, caramel shadows, dark deep-teal outline, frontal slight-top-view camera same as source, horizontal ground. Single centered isolated sprite with transparent background and comfortable margin all around. No faces, plants, leaves, wood, metal, gems, crystal, rune, spikes, crenellations, buildings, light beams, magical glow, text or scenery. True alpha transparency.",
-      "transparentBackground": true
-    },
-    {
       "file": "DesignAssets/Tribes/pebble/Terrain/nest-soil-ground.png",
       "referenceFiles": [
         "DesignAssets/TribeConcepts/Nests/nest-stage-01-pebble-ochre-v1.png",

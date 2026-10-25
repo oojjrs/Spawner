@@ -1,0 +1,9 @@
+{
+  "id": "coil-quarter-a1",
+  "refs": [
+    "H:/Spawner/$Trash/sprout-seed-root-split-20261024/References/level-01.png",
+    "H:/Spawner/$Trash/sprout-seed-root-split-20261024/Prepared/coil-half-turn-key.png"
+  ],
+  "prompt": "ONE complete transparent square painted sprite CEL only. Preserve the ORIGINAL ivory/mint/gold palette, fine dark-teal outline, camera, original four ground leaves/root at(256,465), and same SMALL bud body size. Actual continuously attached petal surfaces and undersides, no ghosting, opacity tricks, motion blur, whole-body rotation, zoom or new roots. Draw the close inbetween between original image1 and the half-turn curled pose image2. The tips of the SAME TWO ivory petals curl inward a little farther than original, about one-quarter turn, left tip beginning first. Gold seed and original sprout remain visible at their existing size/location. No new spike or taller sprout. All other anatomy stays in place; use image2 only as the next pose boundary.",
+  "source": "D:\\.codex\\generated_images\\01a163ce-56da-7d30-98e5-53addf14f35d\\exec-e0964718-001a-471e-88db-412c6ff6e35b.png"
+}

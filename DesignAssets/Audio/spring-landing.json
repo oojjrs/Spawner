@@ -1,0 +1,21 @@
+{
+  "provider": "ElevenLabs",
+  "request": {
+    "text": "One small living water blob lands on soft damp earth after a short hop. Immediate rounded low-mid liquid plop, a tiny wet splat and a quick soft wobble settling within 0.25 seconds. Friendly, close and dry game SFX, compact and restrained. A single impact only. No repeated bouncing, big splash, dripping sequence, mud suction, voice, music, ambience, chime or reverb.",
+    "duration_seconds": 0.5,
+    "prompt_influence": 0.8,
+    "loop": false,
+    "output_format": "mp3_44100_128",
+    "model_id": "eleven_text_to_sound_v2",
+    "request_options": {
+      "max_retries": 0
+    }
+  },
+  "status": "completed",
+  "processing": "none",
+  "bytes": 8820,
+  "asset": "DesignAssets/Audio/spring-landing.mp3",
+  "input": "text prompt only",
+  "sha256": "707254af112ea7c2ab7d55507813a942abdebec2c004609e514a2fb29fce640d",
+  "approved": true
+}

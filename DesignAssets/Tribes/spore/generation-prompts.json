@@ -7,33 +7,6 @@
   },
   "assets": [
     {
-      "file": "Nests/nest-stage-02.png",
-      "source": "D:\\.codex\\generated_images\\01a1685f-30d3-7320-af5c-79d5468759c9\\exec-b5d251fe-47ae-4d74-a531-a7081a2381dc.png",
-      "prompt": "Use case: stylized-concept. Asset type: production-ready static 2D sprite for a cute PVE game. Match the provided approved coral mushroom tribe art: warm coral mushroom caps, creamy ivory mycelium, dark deep-teal clean contour, softly hand-painted broad shading, upper-left light, sparse detail and round readable forms. Native transparent background with real alpha; isolated single asset; no ground plane, no cast shadow outside the object, no text, no border, no watermark. Front-facing camera with just enough top surface visible to match reference. Never green leaves, metal, cloth, faces or a character body unless specifically requested. grow this approved level 1 mushroom nursery into LEVEL 2. Preserve its unmistakable broad coral umbrella, ivory curled mycelium cradle and two smooth coral spore eggs. Slightly widen and thicken the ivory braided base, raise the canopy on a stronger cream stalk, add one small coral shelf cap on each side. One compact nest, modest upgrade, simple silhouette. No character eyes or mouth. Keep frontal nursery opening visible. Use image 1 as actual parent design; image 2 only shows the overall game's equivalent upgrade complexity.",
-      "references": [
-        "H:\\Spawner\\DesignAssets\\TribeConcepts\\Nests\\nest-stage-01-spore-coral-v1.png",
-        "H:\\Spawner\\DesignAssets\\Nests\\nest-stage-02.png"
-      ]
-    },
-    {
-      "file": "Nests/nest-stage-03.png",
-      "source": "D:\\.codex\\generated_images\\01a1685f-30d3-7320-af5c-79d5468759c9\\exec-8ea775e5-f0b6-45a8-9e28-f10a8c62ac65.png",
-      "prompt": "Use case: stylized-concept. Asset type: production-ready static 2D sprite for a cute PVE game. Match the provided approved coral mushroom tribe art: warm coral mushroom caps, creamy ivory mycelium, dark deep-teal clean contour, softly hand-painted broad shading, upper-left light, sparse detail and round readable forms. Native transparent background with real alpha; isolated single asset; no ground plane, no cast shadow outside the object, no text, no border, no watermark. Front-facing camera with just enough top surface visible to match reference. Never green leaves, metal, cloth, faces or a character body unless specifically requested. grow this approved level 1 mushroom nursery into LEVEL 3. Preserve broad coral mushroom umbrella and ivory curled mycelium cradle, two smooth coral spore eggs, but make a substantial mid-stage colony nest: a large central coral canopy with two lower flanking shelf caps, stout creamy mycelium arches weaving around the open cradle, thicker braided base, restrained fine gill hints. No stairs, doors, windows, green leaves, faces, or humanoids. One nest only; tiered silhouette clearly stronger than level 2. Use image 1 as parent design, image 2 only for equivalent game's growth complexity.",
-      "references": [
-        "H:\\Spawner\\DesignAssets\\TribeConcepts\\Nests\\nest-stage-01-spore-coral-v1.png",
-        "H:\\Spawner\\DesignAssets\\Nests\\nest-stage-03.png"
-      ]
-    },
-    {
-      "file": "Nests/nest-stage-04.png",
-      "source": "D:\\.codex\\generated_images\\01a1685f-30d3-7320-af5c-79d5468759c9\\exec-2be1e4a0-0357-4d17-bdbb-6b3d753c0ea4.png",
-      "prompt": "Use case: stylized-concept. Asset type: production-ready static 2D sprite for a cute PVE game. Match the provided approved coral mushroom tribe art: warm coral mushroom caps, creamy ivory mycelium, dark deep-teal clean contour, softly hand-painted broad shading, upper-left light, sparse detail and round readable forms. Native transparent background with real alpha; isolated single asset; no ground plane, no cast shadow outside the object, no text, no border, no watermark. Front-facing camera with just enough top surface visible to match reference. Never green leaves, metal, cloth, faces or a character body unless specifically requested. grow this approved level 1 mushroom nursery into LEVEL 4 final evolution. Keep its broad coral umbrella mushroom, ivory mycelium cradle and two smooth coral spore eggs as the unmistakable center. Build a mature protected colony with central largest coral canopy high above, a stepped fan of three substantial shelf caps at each side, layered ivory braided buttress-roots, two small closed spore pods low left and right. Strong broad symmetrical crown silhouette, readable at game size, no excessive tiny detail. One compact organic nest, no architecture, no green leaves, no faces. Use image 1 as parent design and image 2 only for overall complexity at final upgrade.",
-      "references": [
-        "H:\\Spawner\\DesignAssets\\TribeConcepts\\Nests\\nest-stage-01-spore-coral-v1.png",
-        "H:\\Spawner\\DesignAssets\\Nests\\nest-stage-04.png"
-      ]
-    },
-    {
       "file": "Terrain/nest-ground.png",
       "source": "D:\\.codex\\generated_images\\01a1685f-30d3-7320-af5c-79d5468759c9\\exec-c4c7733d-0ece-432f-b175-0475ea06bf8d.png",
       "prompt": "Use case: stylized-concept. Asset type: production-ready static 2D sprite for a cute PVE game. Match the provided approved coral mushroom tribe art: warm coral mushroom caps, creamy ivory mycelium, dark deep-teal clean contour, softly hand-painted broad shading, upper-left light, sparse detail and round readable forms. Native transparent background with real alpha; isolated single asset; no ground plane, no cast shadow outside the object, no text, no border, no watermark. Front-facing camera with just enough top surface visible to match reference. Never green leaves, metal, cloth, faces or a character body unless specifically requested. a single FLAT ground patch for this mushroom tribe nest, top-down game terrain overlay. Low shallow earthy mauve-brown organic patch, irregular rounded perimeter, ivory thin mycelium threads subtly embedded around outer edge with a few very small coral button mushrooms only at edges. Center is broad empty subdued soil for placing the nest. Do not draw a nest, characters, large mushrooms, leaves, elevations or thick rock platform. Match reference image 1 material/color family, image 2 ground footprint and role. True transparent alpha everywhere beyond patch.",

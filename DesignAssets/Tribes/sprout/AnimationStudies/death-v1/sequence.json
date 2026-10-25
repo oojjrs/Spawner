@@ -1,0 +1,62 @@
+{
+  "tribe": "sprout",
+  "action": "death",
+  "status": "approved",
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 4,
+  "frameCount": 16,
+  "pivot": [
+    256,
+    420
+  ],
+  "durationsMs": [
+    160,
+    80,
+    80,
+    70,
+    70,
+    60,
+    60,
+    60,
+    60,
+    60,
+    80,
+    90,
+    100,
+    110,
+    120,
+    1000
+  ],
+  "durationMs": 2260,
+  "loop": false,
+  "atlas": "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death.png",
+  "preview": "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-preview.gif",
+  "smallPreview": "DesignAssets/UnitPreviews/sprout-bean/death.webp",
+  "approvedFinalPose": "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/Approved/final-pose.png",
+  "frames": [
+    "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/Frames/000.png",
+    "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/Frames/001.png",
+    "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/Frames/002.png",
+    "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/Frames/003.png",
+    "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/Frames/004.png",
+    "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/Frames/005.png",
+    "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/Frames/006.png",
+    "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/Frames/007.png",
+    "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/Frames/008.png",
+    "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/Frames/009.png",
+    "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/Frames/010.png",
+    "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/Frames/011.png",
+    "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/Frames/012.png",
+    "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/Frames/013.png",
+    "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/Frames/014.png",
+    "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/Frames/015.png"
+  ],
+  "runtimeAtlas": "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp",
+  "runtimeFrameSize": [
+    256,
+    256
+  ]
+}

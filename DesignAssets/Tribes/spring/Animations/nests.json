@@ -2,365 +2,53 @@
   "tribe": "spring",
   "idle": [
     {
-      "tribe": "spring",
-      "action": "nest-stage-01-idle",
+      "name": "nest-stage-01-idle",
       "source": "DesignAssets/Tribes/spring/Nests/nest-stage-01.png",
-      "drawnCels": 4,
-      "order": [
-        0,
-        1,
-        2,
-        3,
-        2,
-        1,
-        0
-      ],
-      "durationsMs": [
-        650,
-        650,
-        650,
-        650,
-        650,
-        650,
-        650
-      ],
-      "frameMs": 650,
-      "restMs": 7800,
-      "loop": true,
-      "fixedFromY": 436,
-      "visibleBounds": [
-        190,
-        75,
-        161,
-        373
-      ],
+      "animation": "DesignAssets/Tribes/spring/Animations/Nests/stage-01-idle-v3/nest-stage-01-idle-sheet.png",
+      "preview": "DesignAssets/Previews/Nests/spring-stage-01-idle-v3.webp",
       "frameSize": [
-        512,
-        512
+        384,
+        384
       ],
-      "columns": 4,
-      "frameCount": 4,
-      "pivot": [
-        256,
-        448
-      ],
-      "rootMotion": false,
-      "atlas": "DesignAssets/Tribes/spring/Animations/Nests/stage-01-idle/nest-stage-01-idle.png",
-      "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Nests/stage-01-idle/nest-stage-01-idle.webp",
-      "preview": "DesignAssets/Tribes/spring/Animations/Nests/stage-01-idle/nest-stage-01-idle-preview.gif",
-      "contact": "DesignAssets/Tribes/spring/Animations/Nests/stage-01-idle/nest-stage-01-idle-contact.png",
-      "runtime": {
-        "format": "SCG1",
-        "frameSize": 2048,
-        "frameCount": 7,
-        "frameMs": 650,
-        "restMs": 7800,
-        "groupSize": 1,
-        "data": "DesignAssets/Tribes/spring/Animations/Nests/stage-01-idle/nest-stage-01-idle.frames",
-        "neutral": "DesignAssets/Tribes/spring/Animations/Nests/stage-01-idle/nest-stage-01-idle-cel-00.webp"
-      }
-    },
-    {
-      "tribe": "spring",
-      "action": "nest-stage-02-idle",
-      "source": "DesignAssets/Tribes/spring/Nests/nest-stage-02.png",
-      "drawnCels": 4,
-      "order": [
-        0,
-        1,
-        2,
-        3,
-        2,
-        1,
-        0
-      ],
+      "frameCount": 32,
+      "columns": 8,
+      "periodMs": 4000,
       "durationsMs": [
-        650,
-        650,
-        650,
-        650,
-        650,
-        650,
-        650
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125
       ],
-      "frameMs": 650,
-      "restMs": 7800,
-      "loop": true,
-      "fixedFromY": 434,
-      "visibleBounds": [
-        250,
-        102,
-        131,
-        346
-      ],
-      "frameSize": [
-        512,
-        512
-      ],
-      "columns": 4,
-      "frameCount": 4,
-      "pivot": [
-        256,
-        448
-      ],
-      "rootMotion": false,
-      "atlas": "DesignAssets/Tribes/spring/Animations/Nests/stage-02-idle/nest-stage-02-idle.png",
-      "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Nests/stage-02-idle/nest-stage-02-idle.webp",
-      "preview": "DesignAssets/Tribes/spring/Animations/Nests/stage-02-idle/nest-stage-02-idle-preview.gif",
-      "contact": "DesignAssets/Tribes/spring/Animations/Nests/stage-02-idle/nest-stage-02-idle-contact.png",
-      "runtime": {
-        "format": "SCG1",
-        "frameSize": 2048,
-        "frameCount": 7,
-        "frameMs": 650,
-        "restMs": 7800,
-        "groupSize": 1,
-        "data": "DesignAssets/Tribes/spring/Animations/Nests/stage-02-idle/nest-stage-02-idle.frames",
-        "neutral": "DesignAssets/Tribes/spring/Animations/Nests/stage-02-idle/nest-stage-02-idle-cel-00.webp"
-      }
-    },
-    {
-      "tribe": "spring",
-      "action": "nest-stage-03-idle",
-      "source": "DesignAssets/Tribes/spring/Nests/nest-stage-03.png",
-      "drawnCels": 4,
-      "order": [
-        0,
-        1,
-        2,
-        3,
-        2,
-        1,
-        0
-      ],
-      "durationsMs": [
-        650,
-        650,
-        650,
-        650,
-        650,
-        650,
-        650
-      ],
-      "frameMs": 650,
-      "restMs": 7800,
-      "loop": true,
-      "fixedFromY": 429,
-      "visibleBounds": [
-        310,
-        124,
-        101,
-        324
-      ],
-      "frameSize": [
-        512,
-        512
-      ],
-      "columns": 4,
-      "frameCount": 4,
-      "pivot": [
-        256,
-        448
-      ],
-      "rootMotion": false,
-      "atlas": "DesignAssets/Tribes/spring/Animations/Nests/stage-03-idle/nest-stage-03-idle.png",
-      "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Nests/stage-03-idle/nest-stage-03-idle.webp",
-      "preview": "DesignAssets/Tribes/spring/Animations/Nests/stage-03-idle/nest-stage-03-idle-preview.gif",
-      "contact": "DesignAssets/Tribes/spring/Animations/Nests/stage-03-idle/nest-stage-03-idle-contact.png",
-      "runtime": {
-        "format": "SCG1",
-        "frameSize": 2048,
-        "frameCount": 7,
-        "frameMs": 650,
-        "restMs": 7800,
-        "groupSize": 1,
-        "data": "DesignAssets/Tribes/spring/Animations/Nests/stage-03-idle/nest-stage-03-idle.frames",
-        "neutral": "DesignAssets/Tribes/spring/Animations/Nests/stage-03-idle/nest-stage-03-idle-cel-00.webp"
-      }
-    },
-    {
-      "tribe": "spring",
-      "action": "nest-stage-04-idle",
-      "source": "DesignAssets/Tribes/spring/Nests/nest-stage-04.png",
-      "drawnCels": 4,
-      "order": [
-        0,
-        1,
-        2,
-        3,
-        2,
-        1,
-        0
-      ],
-      "durationsMs": [
-        650,
-        650,
-        650,
-        650,
-        650,
-        650,
-        650
-      ],
-      "frameMs": 650,
-      "restMs": 7800,
-      "loop": true,
-      "fixedFromY": 419,
-      "visibleBounds": [
-        370,
-        169,
-        71,
-        279
-      ],
-      "frameSize": [
-        512,
-        512
-      ],
-      "columns": 4,
-      "frameCount": 4,
-      "pivot": [
-        256,
-        448
-      ],
-      "rootMotion": false,
-      "atlas": "DesignAssets/Tribes/spring/Animations/Nests/stage-04-idle/nest-stage-04-idle.png",
-      "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Nests/stage-04-idle/nest-stage-04-idle.webp",
-      "preview": "DesignAssets/Tribes/spring/Animations/Nests/stage-04-idle/nest-stage-04-idle-preview.gif",
-      "contact": "DesignAssets/Tribes/spring/Animations/Nests/stage-04-idle/nest-stage-04-idle-contact.png",
-      "runtime": {
-        "format": "SCG1",
-        "frameSize": 2048,
-        "frameCount": 7,
-        "frameMs": 650,
-        "restMs": 7800,
-        "groupSize": 1,
-        "data": "DesignAssets/Tribes/spring/Animations/Nests/stage-04-idle/nest-stage-04-idle.frames",
-        "neutral": "DesignAssets/Tribes/spring/Animations/Nests/stage-04-idle/nest-stage-04-idle-cel-00.webp"
-      }
+      "loop": true
     }
   ],
-  "growth": [
-    {
-      "tribe": "spring",
-      "action": "nest-stage-01-to-02",
-      "durationsMs": [
-        90,
-        90,
-        90,
-        90,
-        90,
-        90,
-        90,
-        90,
-        90,
-        90,
-        90,
-        90,
-        90,
-        90,
-        90,
-        90
-      ],
-      "loop": false,
-      "transition": "anchored crossfade between approved growth artwork",
-      "fromLevel": 1,
-      "toLevel": 2,
-      "frameSize": [
-        512,
-        512
-      ],
-      "columns": 4,
-      "frameCount": 16,
-      "pivot": [
-        256,
-        448
-      ],
-      "rootMotion": false,
-      "atlas": "DesignAssets/Tribes/spring/Animations/Nests/nest-stage-01-to-02/nest-stage-01-to-02.png",
-      "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Nests/nest-stage-01-to-02/nest-stage-01-to-02.webp",
-      "preview": "DesignAssets/Tribes/spring/Animations/Nests/nest-stage-01-to-02/nest-stage-01-to-02-preview.gif",
-      "contact": "DesignAssets/Tribes/spring/Animations/Nests/nest-stage-01-to-02/nest-stage-01-to-02-contact.png"
-    },
-    {
-      "tribe": "spring",
-      "action": "nest-stage-02-to-03",
-      "durationsMs": [
-        90,
-        90,
-        90,
-        90,
-        90,
-        90,
-        90,
-        90,
-        90,
-        90,
-        90,
-        90,
-        90,
-        90,
-        90,
-        90
-      ],
-      "loop": false,
-      "transition": "anchored crossfade between approved growth artwork",
-      "fromLevel": 2,
-      "toLevel": 3,
-      "frameSize": [
-        512,
-        512
-      ],
-      "columns": 4,
-      "frameCount": 16,
-      "pivot": [
-        256,
-        448
-      ],
-      "rootMotion": false,
-      "atlas": "DesignAssets/Tribes/spring/Animations/Nests/nest-stage-02-to-03/nest-stage-02-to-03.png",
-      "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Nests/nest-stage-02-to-03/nest-stage-02-to-03.webp",
-      "preview": "DesignAssets/Tribes/spring/Animations/Nests/nest-stage-02-to-03/nest-stage-02-to-03-preview.gif",
-      "contact": "DesignAssets/Tribes/spring/Animations/Nests/nest-stage-02-to-03/nest-stage-02-to-03-contact.png"
-    },
-    {
-      "tribe": "spring",
-      "action": "nest-stage-03-to-04",
-      "durationsMs": [
-        90,
-        90,
-        90,
-        90,
-        90,
-        90,
-        90,
-        90,
-        90,
-        90,
-        90,
-        90,
-        90,
-        90,
-        90,
-        90
-      ],
-      "loop": false,
-      "transition": "anchored crossfade between approved growth artwork",
-      "fromLevel": 3,
-      "toLevel": 4,
-      "frameSize": [
-        512,
-        512
-      ],
-      "columns": 4,
-      "frameCount": 16,
-      "pivot": [
-        256,
-        448
-      ],
-      "rootMotion": false,
-      "atlas": "DesignAssets/Tribes/spring/Animations/Nests/nest-stage-03-to-04/nest-stage-03-to-04.png",
-      "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Nests/nest-stage-03-to-04/nest-stage-03-to-04.webp",
-      "preview": "DesignAssets/Tribes/spring/Animations/Nests/nest-stage-03-to-04/nest-stage-03-to-04-preview.gif",
-      "contact": "DesignAssets/Tribes/spring/Animations/Nests/nest-stage-03-to-04/nest-stage-03-to-04-contact.png"
-    }
-  ]
+  "growth": []
 }

@@ -1,0 +1,13 @@
+{
+  "provider": "built-in image_gen",
+  "selectedSourceCall": "pebble-gap-1-repair",
+  "completeFramesInCall": 1,
+  "prompt": "Use case: precise-object-edit. Draw ONE complete new 2D sprite frame on a genuinely transparent square canvas, logical 512x512. Image 1 locks the canonical ochre stone character scale, palette, grain and light. Image 2 is the cracked but still largely intact body: START FROM THIS POSE, only a short time later. Image 3 supplies the identities and fracture surfaces of the four eventual pieces ONLY; do NOT copy its already-collapsed pile pose. Show just the BEGINNING of separation: the four pieces remain very close together and their outer edges still largely outline the ORIGINAL STANDING OVAL. Only 4-8 logical pixel dark gaps open along image 2's existing crack map. The upper two pieces have sagged DOWN just 10-20 pixels and tilted only slightly, exposing thin newly painted lighter cut faces, not large flying boulders. The overall top MUST remain around y165-175, clearly HIGHER than image 3's y202, at the same original drawing scale. The lower two blocks remain in their original grounded arrangement and have not spread into the low pile. Keep exactly the same four volumes and small foot stones, no merging or extra debris. Closed eye marks may remain partly visible on the front stone surfaces at this early instant. Rigid heavy stone, never upward launch or swelling. Root (256,448), floor y448, outer width about 400 pixels, same upper-left light and fine dark teal outline. Draw all newly visible fracture edges and overlaps coherently as a complete frame, without turning image 3 into another pile variant. No sheet, text, backdrop, shadow, dust, cutout transforms, fades or interpolated image. This is an EARLY, nearly intact separation pose.",
+  "references": [
+    "DesignAssets/Tribes/pebble/AnimationStudies/death-keyposes-v3/Source/neutral-reference.png",
+    "DesignAssets/Tribes/pebble/AnimationStudies/death-phase-keys-v4/Frames/01-weakening.png",
+    "DesignAssets/Tribes/pebble/AnimationStudies/death-keyposes-v3/keypose.png"
+  ],
+  "sourceArtwork": "DesignAssets/Tribes/pebble/AnimationStudies/death-inbetweens-v5/Source/gap-1-drawn.png",
+  "sourceArtworkSha256": "fa61ebdee81a9d6614ce175b06f0b48f9a3626755da510be38891eb20621797a"
+}

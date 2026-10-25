@@ -11,20 +11,11 @@
   },
   "starter": "DesignAssets/Tribes/spore/starter.png",
   "parts": {
-    "strength-1": "DesignAssets/Tribes/spore/Parts/strength-1.png",
-    "strength-2": "DesignAssets/Tribes/spore/Parts/strength-2.png",
-    "feet-1": "DesignAssets/Tribes/spore/Parts/feet-1.png",
-    "feet-2": "DesignAssets/Tribes/spore/Parts/feet-2.png",
-    "antenna-1": "DesignAssets/Tribes/spore/Parts/antenna-1.png",
-    "antenna-2": "DesignAssets/Tribes/spore/Parts/antenna-2.png",
     "shell-1": "DesignAssets/Tribes/spore/Parts/shell-1.png",
     "shell-2": "DesignAssets/Tribes/spore/Parts/shell-2.png"
   },
   "nests": [
-    "DesignAssets/Tribes/spore/Nests/nest-stage-01.png",
-    "DesignAssets/Tribes/spore/Nests/nest-stage-02.png",
-    "DesignAssets/Tribes/spore/Nests/nest-stage-03.png",
-    "DesignAssets/Tribes/spore/Nests/nest-stage-04.png"
+    "DesignAssets/Tribes/spore/Nests/nest-stage-01.png"
   ],
   "ground": "DesignAssets/Tribes/spore/Terrain/nest-ground.png",
   "assets": [
@@ -36,104 +27,6 @@
       "hasTransparency": true,
       "alphaBoundsThreshold10": "1220x863+17+235",
       "bytes": 881085
-    },
-    {
-      "path": "DesignAssets/Tribes/spore/Parts/strength-1.png",
-      "width": 1774,
-      "height": 887,
-      "channels": "srgba 4.0",
-      "hasTransparency": true,
-      "alphaBoundsThreshold10": "1693x589+41+215",
-      "bytes": 658428,
-      "mount": {
-        "x": 252,
-        "y": 690,
-        "width": 750,
-        "layer": "front",
-        "height": 261
-      }
-    },
-    {
-      "path": "DesignAssets/Tribes/spore/Parts/strength-2.png",
-      "width": 1983,
-      "height": 793,
-      "channels": "srgba 4.0",
-      "hasTransparency": true,
-      "alphaBoundsThreshold10": "1971x773+6+8",
-      "bytes": 1117894,
-      "mount": {
-        "x": 152,
-        "y": 760,
-        "width": 950,
-        "layer": "front",
-        "height": 373
-      }
-    },
-    {
-      "path": "DesignAssets/Tribes/spore/Parts/feet-1.png",
-      "width": 1959,
-      "height": 803,
-      "channels": "srgba 4.0",
-      "hasTransparency": true,
-      "alphaBoundsThreshold10": "1629x754+165+17",
-      "bytes": 905305,
-      "mount": {
-        "x": 367,
-        "y": 955,
-        "width": 520,
-        "layer": "behind-body",
-        "replaceBaseFeet": true,
-        "height": 241
-      }
-    },
-    {
-      "path": "DesignAssets/Tribes/spore/Parts/feet-2.png",
-      "width": 1849,
-      "height": 851,
-      "channels": "srgba 4.0",
-      "hasTransparency": true,
-      "alphaBoundsThreshold10": "1759x850+45+1",
-      "bytes": 1015492,
-      "mount": {
-        "x": 337,
-        "y": 945,
-        "width": 580,
-        "layer": "behind-body",
-        "replaceBaseFeet": true,
-        "height": 280
-      }
-    },
-    {
-      "path": "DesignAssets/Tribes/spore/Parts/antenna-1.png",
-      "width": 1481,
-      "height": 1062,
-      "channels": "srgba 4.0",
-      "hasTransparency": true,
-      "alphaBoundsThreshold10": "1400x953+41+68",
-      "bytes": 1147766,
-      "mount": {
-        "x": 447,
-        "y": 15,
-        "width": 360,
-        "layer": "behind-body",
-        "height": 245
-      }
-    },
-    {
-      "path": "DesignAssets/Tribes/spore/Parts/antenna-2.png",
-      "width": 1536,
-      "height": 1024,
-      "channels": "srgba 4.0",
-      "hasTransparency": true,
-      "alphaBoundsThreshold10": "1489x839+23+107",
-      "bytes": 1407166,
-      "mount": {
-        "x": 392,
-        "y": -5,
-        "width": 470,
-        "layer": "behind-body",
-        "height": 265
-      }
     },
     {
       "path": "DesignAssets/Tribes/spore/Parts/shell-1.png",
@@ -177,33 +70,6 @@
       "bytes": 924139
     },
     {
-      "path": "DesignAssets/Tribes/spore/Nests/nest-stage-02.png",
-      "width": 1254,
-      "height": 1254,
-      "channels": "srgba 4.0",
-      "hasTransparency": true,
-      "alphaBoundsThreshold10": "1130x949+62+155",
-      "bytes": 1151925
-    },
-    {
-      "path": "DesignAssets/Tribes/spore/Nests/nest-stage-03.png",
-      "width": 1254,
-      "height": 1254,
-      "channels": "srgba 4.0",
-      "hasTransparency": true,
-      "alphaBoundsThreshold10": "1232x1026+11+122",
-      "bytes": 1397226
-    },
-    {
-      "path": "DesignAssets/Tribes/spore/Nests/nest-stage-04.png",
-      "width": 1254,
-      "height": 1254,
-      "channels": "srgba 4.0",
-      "hasTransparency": true,
-      "alphaBoundsThreshold10": "1218x1045+18+100",
-      "bytes": 1580306
-    },
-    {
       "path": "DesignAssets/Tribes/spore/Terrain/nest-ground.png",
       "width": 1254,
       "height": 1254,
@@ -227,7 +93,6 @@
   ],
   "previews": [
     "DesignAssets/Tribes/spore/Previews/parts-equipped.png",
-    "DesignAssets/Tribes/spore/Previews/nest-growth.png",
     "DesignAssets/Tribes/spore/Previews/parts-isolated.png"
   ]
 }

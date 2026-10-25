@@ -1,0 +1,21 @@
+{
+  "provider": "ElevenLabs",
+  "request": {
+    "text": "One tiny webbed foot made of soft water gently taps damp earth. An immediate very light muted wet pat with a delicate liquid plip, ending within 0.12 seconds. Close dry game SFX for frequent footsteps, quieter and lighter than a water blob landing. Exactly one soft foot contact. No walking sequence, repeated steps, squelching mud, squeak, large splash, voice, music, ambience or reverb.",
+    "duration_seconds": 0.5,
+    "prompt_influence": 0.8,
+    "loop": false,
+    "output_format": "mp3_44100_128",
+    "model_id": "eleven_text_to_sound_v2",
+    "request_options": {
+      "max_retries": 0
+    }
+  },
+  "status": "completed",
+  "processing": "none",
+  "bytes": 8820,
+  "asset": "DesignAssets/Audio/spring-footstep.mp3",
+  "input": "text prompt only",
+  "sha256": "031d9e2bd532a693caf7da8d508bd62df74e7debe0cc90b7f03c7dfcf4e6f33a",
+  "approved": true
+}

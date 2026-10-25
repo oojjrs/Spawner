@@ -1,0 +1,43 @@
+{
+  "tribe": "spring",
+  "action": "death",
+  "status": "approved-key-pose",
+  "proposedFrame": 9,
+  "pose": "물웅덩이 · 바깥으로 잔물결",
+  "frameSize": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "image": "DesignAssets/Tribes/spring/AnimationStudies/death-keyposes-v3/keypose.png",
+  "sourceArtwork": "DesignAssets/Tribes/spring/AnimationStudies/death-keyposes-v3/Source/keypose-drawn.png",
+  "sourceCanvas": [
+    1254,
+    1254
+  ],
+  "sourceSha256": "bd2ca9fd18c8ceb6bd69fb23c424af79c3200ef195b09f94a8a9cba18bd3043e",
+  "artMethod": "one complete newly illustrated frame in one generation call",
+  "motionTransforms": false,
+  "interpolated": false,
+  "preparation": "full-canvas resolution conversion, near-transparent alpha cleanup and transparent padding to the ground anchor; no silhouette centering",
+  "verticalCanvasPaddingPixels": 1,
+  "nearTransparentPixelsCleared": 5004,
+  "drawingBounds": [
+    89,
+    322,
+    422,
+    448
+  ],
+  "neutralReference": "DesignAssets/Tribes/spring/AnimationStudies/death-keyposes-v3/Source/neutral-reference.png",
+  "neutralBounds": [
+    141,
+    161,
+    370,
+    447
+  ],
+  "generation": "DesignAssets/Tribes/spring/AnimationStudies/death-keyposes-v3/Source/generation.json",
+  "preview": "DesignAssets/Tribes/Previews/death-keyposes-lineup-v3.png"
+}

@@ -1,0 +1,371 @@
+{
+  "tribe": "spore",
+  "action": "birth",
+  "frameSize": [
+    576,
+    576
+  ],
+  "columns": 4,
+  "frameCount": 22,
+  "durationsMs": [
+    180,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    700
+  ],
+  "loop": false,
+  "atlas": "birth.webp",
+  "preview": "birth-preview.gif",
+  "stationaryNest": "nest-stationary.png",
+  "stationaryNestFromFrame": 9,
+  "nestScale": 0.9888641425389755,
+  "nestOffset": [
+    0,
+    2
+  ],
+  "unitScale": 1.0178571428571428,
+  "batchWorldScales": {
+    "group1": 1.0,
+    "group2": 0.9,
+    "group3": 0.9
+  },
+  "frames": [
+    {
+      "index": 0,
+      "source": "../birth-drawn-v2/Frames/000.png",
+      "preserved": true
+    },
+    {
+      "index": 1,
+      "source": "../birth-drawn-v2/Frames/001.png",
+      "preserved": true
+    },
+    {
+      "index": 2,
+      "source": "../birth-drawn-v2/Frames/002.png",
+      "preserved": true
+    },
+    {
+      "index": 3,
+      "source": "../birth-drawn-v2/Frames/003.png",
+      "preserved": true
+    },
+    {
+      "index": 4,
+      "source": "../birth-drawn-v2/Frames/004.png",
+      "preserved": true
+    },
+    {
+      "index": 5,
+      "source": "../birth-drawn-v2/Frames/005.png",
+      "preserved": true
+    },
+    {
+      "index": 6,
+      "source": "../birth-drawn-v2/Frames/006.png",
+      "preserved": true
+    },
+    {
+      "index": 7,
+      "source": "../birth-drawn-v2/Frames/007.png",
+      "preserved": true
+    },
+    {
+      "index": 8,
+      "source": "../birth-drawn-v2/Frames/008.png",
+      "preserved": true
+    },
+    {
+      "index": 9,
+      "source": "Source/unit-layer-1.png",
+      "sourceCell": 1,
+      "batchWorldScale": 1.0,
+      "registration": [
+        -42,
+        9
+      ]
+    },
+    {
+      "index": 10,
+      "source": "Source/unit-layer-1.png",
+      "sourceCell": 2,
+      "batchWorldScale": 1.0,
+      "registration": [
+        -48,
+        24
+      ]
+    },
+    {
+      "index": 11,
+      "source": "Source/unit-layer-1.png",
+      "sourceCell": 3,
+      "batchWorldScale": 1.0,
+      "registration": [
+        -45,
+        8
+      ]
+    },
+    {
+      "index": 12,
+      "source": "Source/unit-layer-2.png",
+      "sourceCell": 0,
+      "batchWorldScale": 0.9,
+      "registration": [
+        -20,
+        0
+      ]
+    },
+    {
+      "index": 13,
+      "source": "Source/unit-layer-2.png",
+      "sourceCell": 1,
+      "batchWorldScale": 0.9,
+      "registration": [
+        14,
+        -6
+      ]
+    },
+    {
+      "index": 14,
+      "source": "Source/unit-layer-2.png",
+      "sourceCell": 2,
+      "batchWorldScale": 0.9,
+      "registration": [
+        -17,
+        36
+      ]
+    },
+    {
+      "index": 15,
+      "source": "Source/unit-layer-2.png",
+      "sourceCell": 3,
+      "batchWorldScale": 0.9,
+      "registration": [
+        3,
+        42
+      ]
+    },
+    {
+      "index": 16,
+      "source": "Source/unit-layer-3.png",
+      "sourceCell": 0,
+      "batchWorldScale": 0.9,
+      "registration": [
+        14,
+        34
+      ]
+    },
+    {
+      "index": 17,
+      "source": "Source/retained-units.png",
+      "sourceCell": 0,
+      "batchWorldScale": 1.0,
+      "registration": [
+        -10,
+        -9
+      ]
+    },
+    {
+      "index": 18,
+      "source": "Source/landing-corrected.png",
+      "batchWorldScale": 1.0,
+      "registration": [
+        -9,
+        -7
+      ]
+    },
+    {
+      "index": 19,
+      "source": "Source/unit-layer-3.png",
+      "sourceCell": 2,
+      "batchWorldScale": 0.9,
+      "registration": [
+        16,
+        72
+      ]
+    },
+    {
+      "index": 20,
+      "source": "Source/unit-layer-3.png",
+      "sourceCell": 3,
+      "batchWorldScale": 0.9,
+      "registration": [
+        22,
+        71
+      ]
+    },
+    {
+      "index": 21,
+      "source": "Source/retained-units.png",
+      "sourceCell": 1,
+      "batchWorldScale": 1.0,
+      "registration": [
+        -12,
+        -17
+      ]
+    }
+  ],
+  "geometry": [
+    {
+      "index": 9,
+      "capWidth": 155,
+      "capHeight": 108,
+      "bodyWidth": 100,
+      "bodyHeight": 90,
+      "registration": [
+        -42,
+        9
+      ]
+    },
+    {
+      "index": 10,
+      "capWidth": 187,
+      "capHeight": 112,
+      "bodyWidth": 108,
+      "bodyHeight": 93,
+      "registration": [
+        -48,
+        24
+      ]
+    },
+    {
+      "index": 11,
+      "capWidth": 218,
+      "capHeight": 116,
+      "bodyWidth": 114,
+      "bodyHeight": 96,
+      "registration": [
+        -45,
+        8
+      ]
+    },
+    {
+      "index": 12,
+      "capWidth": 219,
+      "capHeight": 114,
+      "bodyWidth": 108,
+      "bodyHeight": 100,
+      "registration": [
+        -20,
+        0
+      ]
+    },
+    {
+      "index": 13,
+      "capWidth": 240,
+      "capHeight": 113,
+      "bodyWidth": 115,
+      "bodyHeight": 100,
+      "registration": [
+        14,
+        -6
+      ]
+    },
+    {
+      "index": 14,
+      "capWidth": 230,
+      "capHeight": 128,
+      "bodyWidth": 117,
+      "bodyHeight": 103,
+      "registration": [
+        -17,
+        36
+      ]
+    },
+    {
+      "index": 15,
+      "capWidth": 222,
+      "capHeight": 120,
+      "bodyWidth": 109,
+      "bodyHeight": 100,
+      "registration": [
+        3,
+        42
+      ]
+    },
+    {
+      "index": 16,
+      "capWidth": 230,
+      "capHeight": 113,
+      "bodyWidth": 109,
+      "bodyHeight": 96,
+      "registration": [
+        14,
+        34
+      ]
+    },
+    {
+      "index": 17,
+      "capWidth": 235,
+      "capHeight": 126,
+      "bodyWidth": 113,
+      "bodyHeight": 90,
+      "registration": [
+        -10,
+        -9
+      ]
+    },
+    {
+      "index": 18,
+      "capWidth": 238,
+      "capHeight": 100,
+      "bodyWidth": 117,
+      "bodyHeight": 83,
+      "registration": [
+        -9,
+        -7
+      ]
+    },
+    {
+      "index": 19,
+      "capWidth": 219,
+      "capHeight": 105,
+      "bodyWidth": 106,
+      "bodyHeight": 83,
+      "registration": [
+        16,
+        72
+      ]
+    },
+    {
+      "index": 20,
+      "capWidth": 221,
+      "capHeight": 106,
+      "bodyWidth": 106,
+      "bodyHeight": 85,
+      "registration": [
+        22,
+        71
+      ]
+    },
+    {
+      "index": 21,
+      "capWidth": 229,
+      "capHeight": 110,
+      "bodyWidth": 108,
+      "bodyHeight": 90,
+      "registration": [
+        -12,
+        -17
+      ]
+    }
+  ]
+}

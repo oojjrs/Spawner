@@ -1,0 +1,15 @@
+{
+  "provider": "built-in image_gen",
+  "completeFramesInCall": 1,
+  "prompt": "Use case: stylized-concept. Draw exactly ONE complete newly illustrated 2D game sprite animation FRAME on a genuinely transparent square canvas. Not a strip, sheet, board or multiple poses. Logical canvas 512x512; if rendered larger, preserve these proportions. Reference image 1 is the APPROVED canonical character identity, palette, painterly material, outline and upper-left light. Reference image 2 is the APPROVED neighboring death key pose; keep its design and material coherent, do not redesign the action. Same fixed camera and drawing scale as the references, logical root (256,448), floor contact y448 / 87.5% of canvas height. Do not crop tightly or enlarge a collapsed body to fill the canvas. Draw the entire specified pose, the newly exposed material and the overlapping forms anew. No transformed cutouts, no opacity dissolve, no synthetic interpolation. No text, labels, grids, cast shadow, scene, extra objects, particles or magical effects. Preserve generous transparent padding. CHARACTER AND POSE: the coral mushroom has completely settled after the approved landed key pose in image 2. This is the very next low resting endpoint, not a new collapse. Repaint a complete frame with the SAME low cap outline, coral markings, broad mauve underside and collapsed stalk relationship. The right rim keeps the exact ground contact and the one visible cream foot stays at the exact same position and size. Only the free upper cap rim has relaxed downward about 3-5 logical pixels; there is no extra flap, raised arch, new crease or bounce. The cap remains roughly 400 pixels wide and 155 pixels high at this drawing scale. The stalk is hidden in the same place under the cap, with no face reappearing. Maintain the same lighting, pigmentation, painterly texture and outline weight as image 2 while retaining image 1's character identity. Lifeless, grounded, asymmetrical and completely at rest.",
+  "references": [
+    "DesignAssets/Tribes/spore/AnimationStudies/death-keyposes-v3/Source/neutral-reference.png",
+    "DesignAssets/Tribes/spore/AnimationStudies/death-keyposes-v3/keypose.png"
+  ],
+  "roles": [
+    "approved canonical identity",
+    "approved neighboring key pose"
+  ],
+  "sourceArtwork": "DesignAssets/Tribes/spore/AnimationStudies/death-phase-keys-v4/Source/remains-drawn.png",
+  "sourceSha256": "18bae888404ca1678cf66de9e8dd28d9371ec0663303a5460fb0691436d8a32f"
+}

@@ -1,0 +1,13 @@
+{
+  "provider": "built-in image_gen",
+  "selectedSourceCall": "spring-gap-2",
+  "completeFramesInCall": 1,
+  "prompt": "Use case: stylized-concept. Draw exactly ONE complete 2D sprite animation frame, genuinely transparent square canvas, not a strip, sheet or comparison board. Image 1 is the locked canonical character identity and painting style. Image 2 is the immediately earlier boundary pose. Image 3 is the immediately later boundary pose. Draw the specified distinct moment BETWEEN images 2 and 3. Preserve the fixed camera, palette, thin dark teal outline, material grain, upper-left light and CHARACTER SCALE of the references. Logical canvas 512x512, root (256,448), floor y448 at 87.5% of the canvas height. If rendered larger keep these exact proportions; do not tightly crop or enlarge a slumping form to fill the canvas. Draw the entire pose and exposed surfaces anew, with continuous anatomical attachments and believable overlap. Do not rotate, scale or warp cutouts to fake the new pose. No crossfade, transparent ghost, motion blur, text, labels, scenery, cast shadow, dust, sparks, extra limbs or mouth. SUBJECT: turquoise water spirit with pale mint internal light, deep teal contour, a distinctive upper curl, small dark blue eyes and no limbs or feet. ONE ACTION MOMENT: Draw the single travelling surface ripple a little later than image 2 and a little earlier than the still pool in image 3. Keep EXACTLY the same pool silhouette and placement, approximately x89..422 and y322..448, with the same depth, edge thickness, turquoise amount and main upper-left highlight. The one elliptical wave ring has moved farther OUTWARD and become LOWER, softer and less bright through a newly painted calm water surface. Do not add a second new ring or restart a bright inner bullseye. Do not change the outer rim, make the pool breathe, alter its width or height, shift its center, reveal a face or fade the body. Only the small local surface ripple reflections change toward image 3's quiet interior.",
+  "references": [
+    "DesignAssets/Tribes/spring/AnimationStudies/death-keyposes-v3/Source/neutral-reference.png",
+    "DesignAssets/Tribes/spring/AnimationStudies/death-keyposes-v3/keypose.png",
+    "DesignAssets/Tribes/spring/AnimationStudies/death-phase-keys-v4/Frames/03-remains.png"
+  ],
+  "sourceArtwork": "DesignAssets/Tribes/spring/AnimationStudies/death-inbetweens-v5/Source/gap-2-drawn.png",
+  "sourceArtworkSha256": "952b359cf01676cfc63a412a7a6eb0a1c0fe3ac8686dd5692442776147843a5d"
+}

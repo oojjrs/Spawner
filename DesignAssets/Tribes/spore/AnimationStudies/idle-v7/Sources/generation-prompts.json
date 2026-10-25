@@ -1,0 +1,48 @@
+{
+  "tool": "built-in image_gen",
+  "selectedGenerations": [
+    {
+      "file": "closed-rest.png",
+      "prompt": "Edit the first mushroom game sprite into the adjacent fully tucked resting pose. Lower the raised left side of the coral cap until the cap is level and the cream face and eye are covered; only the same two small feet remain visible. Keep the cap's width EXACTLY the same as image1, keep both feet at their exact existing positions and size, and preserve the square canvas and transparent margins. The shallow cap becomes level rather than taller or wider. Draw one continuous smoothly shaded underside, without a rectangular pasted panel. Image2 is a palette and line-weight reference only. Keep the same coral colors and fine dark outline as image2. This is one frame of the SAME character, same camera, same scale. No text or additional objects. Transparent background.",
+      "references": [
+        "idle-v6/Frames/029.png",
+        "idle-v6/Frames/000.png"
+      ],
+      "preparation": "Resize whole canvas to512x512; translate down11px to foot baseline448."
+    },
+    {
+      "file": "lift-early-sheet.png",
+      "prompt": "Edit the four mushroom sprites in image1 into four consecutive in-between drawings leading from the current level resting cap toward the slightly lifted left cap shown in image2. Keep image1's exact 2x2 grid, same cell margins, cap WIDTH, scale, color and foot positions. Reading order: first pose20% of the small lift, second40%, third60%, fourth80%; image2 is the100% endpoint and must not be included. The left rim rises gradually a few pixels per pose while the right rim stays low. The centered cream stem and small left eye are progressively revealed under the rim. First pose has no eye yet; next a sliver; then half; then almost all. Do not move the face sideways. All four caps must be equally wide, with the same smooth painted coral bands, fine outline and lighting. Do not change either foot's position or size. Return the same1024x1024 square sheet with512x512 cells and transparent background. No labels or extra objects.",
+      "references": [
+        "four-cell closed-rest layout",
+        "idle-v6/Frames/029.png"
+      ],
+      "preparation": "Resize whole sheet to1024x1024; use cell0 at512x512. Other cells unused."
+    },
+    {
+      "file": "lift-adjacent-sheet.png",
+      "prompt": "Repair the timing of this 2x2 mushroom animation sheet. Top-left is the closed cap endpoint; bottom-right is the slightly lifted left cap endpoint. Preserve these two endpoint designs. Redraw TOP-RIGHT at one-third of the lift and BOTTOM-LEFT at two-thirds of the lift. The left end of the cap gradually rises, its right end stays at the same height, and the centered body and one eye are gradually revealed. In the one-third drawing the eye is still fully hidden, in the two-thirds drawing only half the eye shows. Keep identical width and identical feet in all cells. The four crowns must rise smoothly in reading order. Same cell framing, transparent background, coral palette, clean fine outlines. No added labels.",
+      "references": [
+        "four-cell adjacent-pose layout"
+      ],
+      "preparation": "Resize whole sheet to1024x1024; use cell1 at512x512. Other cells unused."
+    },
+    {
+      "file": "lift-half-eye.png",
+      "prompt": "Edit only the mushroom's cap and its overlap with the face. Lower the entire cap a tiny amount, about 7 pixels in the 512x512 source, while keeping the two feet and the bottom of the cream body fixed. The brim now conceals the upper half of its small eye. Preserve the cap's current slight diagonal angle and exact width. Same artwork, colors, outline, canvas and transparent margins. One adjacent animation frame.",
+      "references": [
+        "lift-near-peak.png"
+      ],
+      "preparation": "Resize whole canvas to512x512; no registration shift."
+    },
+    {
+      "file": "lift-near-peak.png",
+      "prompt": "Draw the single in-between pose halfway between these two frames of a friendly cartoon mushroom. Match the first reference's exact cap width, feet, style, scale and placement. The left side of the cap is only half as lifted as in the first frame, gently revealing part of one eye. Transparent background.",
+      "references": [
+        "idle-v6/Frames/029.png",
+        "closed-rest.png"
+      ],
+      "preparation": "Resize whole canvas to512x512; translate down3px to foot baseline448."
+    }
+  ]
+}

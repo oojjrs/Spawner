@@ -1,0 +1,135 @@
+{
+  "kind": "three-tribe-local-eye-and-tail-repair",
+  "status": "rework-review-candidate",
+  "canvas": [
+    1260,
+    500
+  ],
+  "layout": [
+    "spore",
+    "pebble",
+    "spring"
+  ],
+  "frameSlotsPerTribe": 8,
+  "selectedNewDrawings": 5,
+  "encodedFrameCount": 9,
+  "durationsMs": [
+    500,
+    120,
+    100,
+    140,
+    120,
+    140,
+    100,
+    120,
+    1500
+  ],
+  "durationMs": 2840,
+  "actionDurationMs": 1440,
+  "loop": true,
+  "preview": "DesignAssets/Tribes/Previews/death-tail-repair-lineup-v6.webp",
+  "contact": "DesignAssets/Tribes/Previews/death-tail-repair-lineup-v6-contact.png",
+  "still": "DesignAssets/Tribes/Previews/death-tail-repair-lineup-v6.png",
+  "normalizations": {
+    "spore": {
+      "neutralBounds": [
+        44,
+        148,
+        467,
+        447
+      ],
+      "neutralVisibleHeightPx": 220,
+      "scale": 0.7333333333333333,
+      "centerX": 256,
+      "floorY": 448,
+      "previewFloorY": 400
+    },
+    "pebble": {
+      "neutralBounds": [
+        53,
+        148,
+        458,
+        447
+      ],
+      "neutralVisibleHeightPx": 220,
+      "scale": 0.7333333333333333,
+      "centerX": 256,
+      "floorY": 448,
+      "previewFloorY": 400
+    },
+    "spring": {
+      "neutralBounds": [
+        141,
+        161,
+        370,
+        447
+      ],
+      "neutralVisibleHeightPx": 220,
+      "scale": 0.7665505226480837,
+      "centerX": 256,
+      "floorY": 448,
+      "previewFloorY": 400
+    }
+  },
+  "timeline": [
+    {
+      "sourceFrame": 0,
+      "durationMs": 500,
+      "label": "대기"
+    },
+    {
+      "sourceFrame": 0,
+      "durationMs": 120,
+      "label": "시작"
+    },
+    {
+      "sourceFrame": 1,
+      "durationMs": 100,
+      "label": "힘이 풀리기 시작"
+    },
+    {
+      "sourceFrame": 2,
+      "durationMs": 140,
+      "label": "힘이 풀림"
+    },
+    {
+      "sourceFrame": 3,
+      "durationMs": 120,
+      "label": "무너지는 중"
+    },
+    {
+      "sourceFrame": 4,
+      "durationMs": 140,
+      "label": "착지 포즈"
+    },
+    {
+      "sourceFrame": 5,
+      "durationMs": 100,
+      "label": "작은 잔동작"
+    },
+    {
+      "sourceFrame": 6,
+      "durationMs": 120,
+      "label": "멈추기 직전"
+    },
+    {
+      "sourceFrame": 7,
+      "durationMs": 600,
+      "label": "정지"
+    },
+    {
+      "sourceFrame": 7,
+      "durationMs": 900,
+      "label": "정지"
+    }
+  ],
+  "sourceMethod": "newly drawn local eye and tail artwork; stationary pixels retained; spore holds the confirmed landing pose",
+  "sourcePoseInterpolation": "none",
+  "studies": [
+    "DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/sequence.json",
+    "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/sequence.json",
+    "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/sequence.json"
+  ],
+  "approvalScope": "revised candidate, not final animation acceptance",
+  "runtimeIntegration": "none"
+}

@@ -1,0 +1,16 @@
+{
+  "provider": "built-in image_gen",
+  "completeFramesInCall": 1,
+  "prompt": "Use case: precise-object-edit. Draw exactly ONE complete newly illustrated 2D animation frame, genuinely transparent square canvas. Image 1 is the canonical mushroom character, drawing scale, painterly palette and lighting. Image 2 is the current intermediate buckling pose TO REPAIR. Image 3 is the approved later landed pose. Preserve image 2's good action: cream stalk bends down and left, eyes closed, feet at ground, cap beginning to tip down to its right rim. Repair ONLY the apparent width/mass of the cap: its left side has become too short and narrow. At logical canvas 512x512, the broad cap should span approximately x44 to x467, about 420 pixels like image 1, rather than shrinking to about 365 pixels. Newly draw a broader left cap lobe and coherent mauve underside continuously attached to the same neck, while retaining the small emerging right-hand curl and the same intermediate cap height. Do not enlarge the whole character, move the cream body or feet, raise the body, jump, create a new fold or make it already fully landed. Keep the entire pose at exactly the same fixed camera and character scale. Root and ground are logical (256,448), 87.5% of canvas height. Preserve coral markings, fine dark teal contour and upper-left light. This is an intermediate death drawing between standing and the approved landed key, not a rotated/rescaled cutout. Repaint the complete corrected frame with full surfaces and clean overlap. No sheet, comparison, text, backdrop, cast shadow or extra effects.",
+  "references": [
+    "DesignAssets/Tribes/spore/AnimationStudies/death-keyposes-v3/Source/neutral-reference.png",
+    "D:/.codex/generated_images/01a1682a-4d49-7db2-96cc-0f1ccff0d568/exec-97b4d315-b392-44c9-bc0d-fb5add455f9f.png",
+    "DesignAssets/Tribes/spore/AnimationStudies/death-keyposes-v3/keypose.png"
+  ],
+  "roles": [
+    "approved canonical identity",
+    "approved neighboring key pose"
+  ],
+  "sourceArtwork": "DesignAssets/Tribes/spore/AnimationStudies/death-phase-keys-v4/Source/weakening-drawn.png",
+  "sourceSha256": "7a1a1fa8bc324556a09eb075b0c76712904ad0a14c9162a4c3fe588c09b8ef73"
+}

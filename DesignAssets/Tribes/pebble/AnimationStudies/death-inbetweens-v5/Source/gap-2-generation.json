@@ -1,0 +1,13 @@
+{
+  "provider": "built-in image_gen",
+  "selectedSourceCall": "pebble-gap-2",
+  "completeFramesInCall": 1,
+  "prompt": "Use case: stylized-concept. Draw exactly ONE complete 2D sprite animation frame, genuinely transparent square canvas, not a strip, sheet or comparison board. Image 1 is the locked canonical character identity and painting style. Image 2 is the immediately earlier boundary pose. Image 3 is the immediately later boundary pose. Draw the specified distinct moment BETWEEN images 2 and 3. Preserve the fixed camera, palette, thin dark teal outline, material grain, upper-left light and CHARACTER SCALE of the references. Logical canvas 512x512, root (256,448), floor y448 at 87.5% of the canvas height. If rendered larger keep these exact proportions; do not tightly crop or enlarge a slumping form to fill the canvas. Draw the entire pose and exposed surfaces anew, with continuous anatomical attachments and believable overlap. Do not rotate, scale or warp cutouts to fake the new pose. No crossfade, transparent ghost, motion blur, text, labels, scenery, cast shadow, dust, sparks, extra limbs or mouth. SUBJECT: warm ochre faceted round pebble creature with two small matching foot stones, dark teal thin outline and small forest-green eyes. ONE ACTION MOMENT: Draw a halfway settling pose between image 2's four-piece pile and image 3's lower still pile. The same long upper-left fragment rolls farther DOWN into a flatter orientation against the lower-left block. The same tall upper-right fragment slips DOWN and inward against the lower-right block. Approximate top y230-240, between y202 and y266. Keep all four recognizable pieces, their distinctive light top facets and darker fracture faces, and the same lower pieces and foot-stone contact positions. No new boulders, merging, extra chips, upward bounce or elastic squash. Newly draw the rotated visible planes coherently; do not use flat puzzle cutouts. One heavy, small final shift toward the exact resting arrangement.",
+  "references": [
+    "DesignAssets/Tribes/pebble/AnimationStudies/death-keyposes-v3/Source/neutral-reference.png",
+    "DesignAssets/Tribes/pebble/AnimationStudies/death-keyposes-v3/keypose.png",
+    "DesignAssets/Tribes/pebble/AnimationStudies/death-phase-keys-v4/Frames/03-remains.png"
+  ],
+  "sourceArtwork": "DesignAssets/Tribes/pebble/AnimationStudies/death-inbetweens-v5/Source/gap-2-drawn.png",
+  "sourceArtworkSha256": "ac63fbdbc0ffe4f632c8c95418b3d30724421706ae5da0cf0d43e69353ff4a0f"
+}

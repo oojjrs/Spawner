@@ -1,0 +1,14 @@
+{
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "A small blob of water detaching from a shallow pool, close dry game SFX. Soft liquid stretch from onset, a delicate wet surface-tension plop at 0.5s, then a small rounded watery landing splat at 0.8s. A gentle rising liquid wobble settles by 1.5s. Friendly light tactile water, muted low-mid body, little crisp detail. One coherent event. No repeated splashes, harsh highs, whistle, music, voice, ambience or reverb.",
+  "duration_seconds": 1.8,
+  "prompt_influence": 0.7,
+  "loop": false,
+  "output_format": "mp3_44100_128",
+  "processing": "none",
+  "asset": "DesignAssets/Audio/spring-birth.mp3",
+  "approved": true,
+  "input": "text prompt only",
+  "sha256": "3fdfc02c64519be21420441199523f390dff854c54811b530ab46ea560432fdf"
+}

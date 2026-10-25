@@ -30,42 +30,6 @@
       "byteIdenticalToApproved": true
     },
     {
-      "file": "Nests/nest-stage-02.png",
-      "kind": "nest",
-      "level": 2,
-      "path": "DesignAssets/Tribes/pebble/Nests/nest-stage-02.png",
-      "width": 1254,
-      "height": 1254,
-      "channels": "srgba 4.0",
-      "alpha": true,
-      "alphaBoundsThreshold10": "1169x664+43+300",
-      "bytes": 969848
-    },
-    {
-      "file": "Nests/nest-stage-03.png",
-      "kind": "nest",
-      "level": 3,
-      "path": "DesignAssets/Tribes/pebble/Nests/nest-stage-03.png",
-      "width": 1254,
-      "height": 1254,
-      "channels": "srgba 4.0",
-      "alpha": true,
-      "alphaBoundsThreshold10": "1214x922+19+166",
-      "bytes": 1360796
-    },
-    {
-      "file": "Nests/nest-stage-04.png",
-      "kind": "nest",
-      "level": 4,
-      "path": "DesignAssets/Tribes/pebble/Nests/nest-stage-04.png",
-      "width": 1536,
-      "height": 1024,
-      "channels": "srgba 4.0",
-      "alpha": true,
-      "alphaBoundsThreshold10": "1475x944+31+36",
-      "bytes": 1770378
-    },
-    {
       "file": "Terrain/nest-soil-ground.png",
       "kind": "ground",
       "path": "DesignAssets/Tribes/pebble/Terrain/nest-soil-ground.png",
@@ -75,156 +39,6 @@
       "alpha": true,
       "alphaBoundsThreshold10": "1412x523+65+266",
       "bytes": 1301601
-    },
-    {
-      "file": "Parts/strength-1.png",
-      "kind": "part",
-      "type": "strength",
-      "level": 1,
-      "path": "DesignAssets/Tribes/pebble/Parts/strength-1.png",
-      "width": 1254,
-      "height": 1254,
-      "channels": "srgba 4.0",
-      "alpha": true,
-      "alphaBoundsThreshold10": "1213x535+21+478",
-      "bytes": 606161,
-      "mount": {
-        "center": [
-          0.5,
-          0.72
-        ],
-        "widthRatio": 1.25,
-        "partPivot": [
-          0.5,
-          0.5
-        ],
-        "layer": "front"
-      }
-    },
-    {
-      "file": "Parts/strength-2.png",
-      "kind": "part",
-      "type": "strength",
-      "level": 2,
-      "path": "DesignAssets/Tribes/pebble/Parts/strength-2.png",
-      "width": 1254,
-      "height": 1254,
-      "channels": "srgba 4.0",
-      "alpha": true,
-      "alphaBoundsThreshold10": "1238x615+9+365",
-      "bytes": 719601,
-      "mount": {
-        "center": [
-          0.5,
-          0.72
-        ],
-        "widthRatio": 1.29,
-        "partPivot": [
-          0.5,
-          0.5
-        ],
-        "layer": "front"
-      }
-    },
-    {
-      "file": "Parts/feet-1.png",
-      "kind": "part",
-      "type": "feet",
-      "level": 1,
-      "path": "DesignAssets/Tribes/pebble/Parts/feet-1.png",
-      "width": 1774,
-      "height": 887,
-      "channels": "srgba 4.0",
-      "alpha": true,
-      "alphaBoundsThreshold10": "1580x445+97+314",
-      "bytes": 547707,
-      "mount": {
-        "center": [
-          0.5,
-          0.98
-        ],
-        "widthRatio": 0.94,
-        "partPivot": [
-          0.5,
-          0.5
-        ],
-        "layer": "behind"
-      }
-    },
-    {
-      "file": "Parts/feet-2.png",
-      "kind": "part",
-      "type": "feet",
-      "level": 2,
-      "path": "DesignAssets/Tribes/pebble/Parts/feet-2.png",
-      "width": 1536,
-      "height": 1024,
-      "channels": "srgba 4.0",
-      "alpha": true,
-      "alphaBoundsThreshold10": "1414x651+60+206",
-      "bytes": 1322180,
-      "mount": {
-        "center": [
-          0.5,
-          0.98
-        ],
-        "widthRatio": 0.94,
-        "partPivot": [
-          0.5,
-          0.5
-        ],
-        "layer": "behind"
-      }
-    },
-    {
-      "file": "Parts/antenna-1.png",
-      "kind": "part",
-      "type": "antenna",
-      "level": 1,
-      "path": "DesignAssets/Tribes/pebble/Parts/antenna-1.png",
-      "width": 1536,
-      "height": 1024,
-      "channels": "srgba 4.0",
-      "alpha": true,
-      "alphaBoundsThreshold10": "1270x623+129+212",
-      "bytes": 1201292,
-      "mount": {
-        "center": [
-          0.5,
-          -0.1
-        ],
-        "widthRatio": 0.66,
-        "partPivot": [
-          0.5,
-          0.5
-        ],
-        "layer": "front"
-      }
-    },
-    {
-      "file": "Parts/antenna-2.png",
-      "kind": "part",
-      "type": "antenna",
-      "level": 2,
-      "path": "DesignAssets/Tribes/pebble/Parts/antenna-2.png",
-      "width": 1536,
-      "height": 1024,
-      "channels": "srgba 4.0",
-      "alpha": true,
-      "alphaBoundsThreshold10": "1403x726+66+149",
-      "bytes": 1370524,
-      "mount": {
-        "center": [
-          0.5,
-          -0.1
-        ],
-        "widthRatio": 0.77,
-        "partPivot": [
-          0.5,
-          0.5
-        ],
-        "layer": "front"
-      }
     },
     {
       "file": "Parts/shell-1.png",
@@ -286,7 +100,6 @@
     "partPivot": "normalized within alpha-trimmed part"
   },
   "previews": [
-    "DesignAssets/Tribes/pebble/Previews/nests-contact.png",
     "DesignAssets/Tribes/pebble/Previews/parts-contact.png"
   ]
 }

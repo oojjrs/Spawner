@@ -1,0 +1,12 @@
+{
+  "provider": "built-in image_gen",
+  "prompt": "Use case precise-object-edit, one newly drawn sprite frame. Image 1 is the immediately preceding water-pool frame and exact edit target. Image 2 is the locked original pose; image 3 is the quiet endpoint for this surface wave. Output one complete transparent square, same logical 512x512 canvas. Keep the entire outer turquoise pool silhouette, edge thickness, position, main upper-left highlight, bottom rim, blue depth and registration EXACTLY as image 1: bounds about x89..422,y322..448, center (256,389), floor y448. Only repaint the INNER ellipse of water. Draw the existing single ring farther outward by a small amount and much lower in relief, now a very faint broad trace approaching the quiet surface in image 3. Do not add another nested ring or moving highlight patch. The original strong inner ring is gone; there is just one low-contrast dying ripple in the same perspective, still faintly legible. Surface depth and hue remain consistent; avoid a global illumination change. No face, drops, spray, curl, motion blur, text, comparison sheet or backdrop. This is a real newly painted intermediate surface before the quiet endpoint, not a transparent fade.",
+  "references": [
+    "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/Frames/05.png",
+    "DesignAssets/Tribes/spring/AnimationStudies/death-keyposes-v3/keypose.png",
+    "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/Frames/07.png"
+  ],
+  "sourceArtwork": "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/Source/spring-tail-2-drawn.png",
+  "sourceSha256": "65b546b6e788ac89d01360e83869bfe8dbdb3654fbcc8c141b79268222d8e3ff",
+  "method": "drawn changed region with byte-identical stationary artwork retained at fixed coordinates"
+}

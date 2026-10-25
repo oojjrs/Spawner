@@ -1,0 +1,17 @@
+{
+  "provider": "built-in image_gen",
+  "completeFramesInThisCall": 1,
+  "prompt": "Use case: stylized-concept. Draw exactly ONE complete newly illustrated 2D game animation FRAME, not a sheet and not a comparison board. Genuinely transparent background. Requested canvas 512x512 square, using logical coordinates 0..511; if rendered at higher resolution preserve these proportions exactly. Image 1 is the approved character identity, painterly material, palette, proportions, thin dark teal outline and upper-left lighting reference. Image 2 and image 3 are earlier draft continuity references, not extra objects to include. Newly draw the complete pose, exposed surfaces and overlapping forms. Keep the fixed camera and the SAME ARTWORK SCALE as reference 1: neutral standing height approximately 300/512 of the canvas. Do not enlarge a collapsed pose to fill the canvas. Keep the registered root at (256,448) and the ground contact at y448, 87.5% of the canvas height, with generous transparent padding. Do not center the visible silhouette vertically. Use no text, numbers, grid, border, ground scene, cast shadow, extra effects, ghosting or secondary images. No transformed cutouts, no copied rotated/warped pieces, no tweened image; draw the contour and material anew for this one moment. CHARACTER: the turquoise water spirit from image 1, pale mint inner light, deep teal edge and no feet or limbs. Image 2 shows the pool forming and image 3 is the chosen still-pool outline and resting placement. TARGET: corrected frame 10, one low travelling ripple on the already formed pool. Newly draw one shallow translucent turquoise pool using exactly the outline, center, depth, ground contact and apparent liquid amount of image 3. Do not inflate it, reshape its perimeter, shift its center or recenter it in the square. Draw ONE low elliptical ring travelling outward across its surface from the small wave in image 2; its radius has increased and its height has decreased. Keep the ring centered on the same pool surface and in the same ellipse perspective. Preserve a quiet fixed upper-left main highlight, with only the tiny local ripple reflections changing. No new ring appears, no bright bullseye, no broad highlight jump, no standing curl or face reappears. The result is a broad calm low pool, roughly 340 logical pixels wide and 120 pixels high at the very bottom of the fixed character canvas, with a clean coherent outline and no detached droplets.",
+  "referenceRoles": [
+    "approved identity and painting style",
+    "earlier draft pose continuity",
+    "later draft pose continuity or endpoint"
+  ],
+  "references": [
+    "DesignAssets/Tribes/spring/AnimationStudies/death-keyposes-v3/Source/neutral-reference.png",
+    "DesignAssets/Tribes/spring/AnimationStudies/death-drawn-v2/Frames/death-08.png",
+    "DesignAssets/Tribes/spring/AnimationStudies/death-drawn-v2/Frames/death-15.png"
+  ],
+  "sourceArtwork": "DesignAssets/Tribes/spring/AnimationStudies/death-keyposes-v3/Source/keypose-drawn.png",
+  "sourceArtworkSha256": "bd2ca9fd18c8ceb6bd69fb23c424af79c3200ef195b09f94a8a9cba18bd3043e"
+}

@@ -1,0 +1,15 @@
+{
+  "provider": "built-in image_gen",
+  "completeFramesInCall": 1,
+  "prompt": "Use case: stylized-concept. Draw exactly ONE complete newly illustrated 2D game sprite animation FRAME on a genuinely transparent square canvas. Not a strip, sheet, board or multiple poses. Logical canvas 512x512; if rendered larger, preserve these proportions. Reference image 1 is the APPROVED canonical character identity, palette, painterly material, outline and upper-left light. Reference image 2 is the APPROVED neighboring death key pose; keep its design and material coherent, do not redesign the action. Same fixed camera and drawing scale as the references, logical root (256,448), floor contact y448 / 87.5% of canvas height. Do not crop tightly or enlarge a collapsed body to fill the canvas. Draw the entire specified pose, the newly exposed material and the overlapping forms anew. No transformed cutouts, no opacity dissolve, no synthetic interpolation. No text, labels, grids, cast shadow, scene, extra objects, particles or magical effects. Preserve generous transparent padding. CHARACTER AND POSE: the FOUR stone pieces from image 2 have finished falling and settled into a lower heavy pile. Keep those exact four identities, apparent volumes, grain and fracture surfaces: the long upper-left chunk, tall upper-right chunk, lower-left block and lower-right block. The lower two chunks and both small foot stones stay grounded at their established locations. The upper-left piece has rolled DOWN into a flatter resting orientation against the lower-left piece; the upper-right piece has slipped DOWN and inward against the lower-right piece. Show newly drawn rotated planes and cut faces that belong to those same distinctive pieces. The pile's top is now around y260-275, lower than image 2's top around y202, with approximately the same total width and stone mass. Keep all four large pieces recognizable and separated by believable contact seams; do not merge them into three new boulders, add small fragments or redesign the crack pattern. No eyes on rubble, no upward launch, no rubbery deformation, no dust or explosion. Warm ochre palette, fine dark teal contour and upper-left light unchanged. Completely settled, weighty and still.",
+  "references": [
+    "DesignAssets/Tribes/pebble/AnimationStudies/death-keyposes-v3/Source/neutral-reference.png",
+    "DesignAssets/Tribes/pebble/AnimationStudies/death-keyposes-v3/keypose.png"
+  ],
+  "roles": [
+    "approved canonical identity",
+    "approved neighboring key pose"
+  ],
+  "sourceArtwork": "DesignAssets/Tribes/pebble/AnimationStudies/death-phase-keys-v4/Source/remains-drawn.png",
+  "sourceSha256": "2b2bbdd0bdf7c86c176f09323c4bb9b9c29452e8e0a71fac21e29bf843615705"
+}

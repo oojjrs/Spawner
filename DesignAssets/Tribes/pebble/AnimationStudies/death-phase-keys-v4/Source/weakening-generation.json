@@ -1,0 +1,15 @@
+{
+  "provider": "built-in image_gen",
+  "completeFramesInCall": 1,
+  "prompt": "Use case: stylized-concept. Draw exactly ONE complete newly illustrated 2D game sprite animation FRAME on a genuinely transparent square canvas. Not a strip, sheet, board or multiple poses. Logical canvas 512x512; if rendered larger, preserve these proportions. Reference image 1 is the APPROVED canonical character identity, palette, painterly material, outline and upper-left light. Reference image 2 is the APPROVED neighboring death key pose; keep its design and material coherent, do not redesign the action. Same fixed camera and drawing scale as the references, logical root (256,448), floor contact y448 / 87.5% of canvas height. Do not crop tightly or enlarge a collapsed body to fill the canvas. Draw the entire specified pose, the newly exposed material and the overlapping forms anew. No transformed cutouts, no opacity dissolve, no synthetic interpolation. No text, labels, grids, cast shadow, scene, extra objects, particles or magical effects. Preserve generous transparent padding. CHARACTER: the same warm ochre faceted pebble and two small matching stone feet. POSE: a brief rigid brace as branching cracks grow, BEFORE the four pieces begin to collapse into the approved arrangement in image 2. Keep the original standing silhouette and apparent mass from image 1, without stretching or swelling it. Draw a coherent branching crack map that will divide this SAME body into the FOUR identifiable volumes of image 2: long upper-left fragment, tall upper-right fragment, lower-left block and lower-right block. Cracks start from the top, join the center and split toward the lower edges. Only hairline-to-small gaps are open now; no chunks fly upward or float apart. Paint tiny newly exposed lighter ochre fracture edges within the dark cracks. The two foot stones stay at their exact canonical ground positions. Eyes close into simple gentle dark arcs on the still-intact front and remain small and in the same facial locations. No mouth, extra rubble, dust, sparks or explosive burst. Keep the outer stone facets, grain, fine dark teal line and upper-left lighting consistent with the approved references.",
+  "references": [
+    "DesignAssets/Tribes/pebble/AnimationStudies/death-keyposes-v3/Source/neutral-reference.png",
+    "DesignAssets/Tribes/pebble/AnimationStudies/death-keyposes-v3/keypose.png"
+  ],
+  "roles": [
+    "approved canonical identity",
+    "approved neighboring key pose"
+  ],
+  "sourceArtwork": "DesignAssets/Tribes/pebble/AnimationStudies/death-phase-keys-v4/Source/weakening-drawn.png",
+  "sourceSha256": "82ba7ad2141e22d51497046dd36542924d641484d34b8a5da8dd5b9f7448c18e"
+}

@@ -1,0 +1,13 @@
+{
+  "provider": "built-in image_gen",
+  "selectedSourceCall": "spring-gap-0-repair",
+  "completeFramesInCall": 1,
+  "prompt": "Use case: precise-object-edit. Draw ONE complete new 2D animation frame on a genuinely transparent square canvas, logical 512x512, no strip or sheet. Image 1, the original STANDING water spirit, is the MAIN POSE AND SCALE REFERENCE. Image 2 is a much LATER low slump and image 3 is the still later pool; they are endpoints only and must NOT be copied as this pose. Draw an EARLY onset of weakening, still much closer to image 1 than image 2. The body is STILL TALL, about 235-245 logical pixels high with top around y205-215 and floor y448. Keep the distinctive upper wave curl clearly visible; only its small tip begins relaxing down into the shoulder. The MAIN BODY HAS NOT COLLAPSED INTO A MOUND. The footless base only broadens a little from the original, total width about 265-280 pixels. Do NOT draw a big surrounding elliptical puddle or ring halo yet; those appear later in image 2. Both original dark blue eyes are still visible and only partly closed with small reflections retained, in the same face locations as the standing original. Do not already make two fully closed eye arcs. Preserve the same turquoise volume, mint interior and upper-left light, thin deep-teal contour and original facial proportions. Draw the complete connected liquid body and slightly softening curl anew; no separate flap, fin or cap. Root stays (256,448), character scale unchanged, no enlargement or tight crop. This early frame must visibly bridge the tall standing form and the much lower later slump, without skipping straight to the slump. No labels, backdrop, shadow, droplets, vapor, blur, transparency fade, cutout transformations or synthetic in-between.",
+  "references": [
+    "DesignAssets/Tribes/spring/AnimationStudies/death-keyposes-v3/Source/neutral-reference.png",
+    "DesignAssets/Tribes/spring/AnimationStudies/death-phase-keys-v4/Frames/01-weakening.png",
+    "DesignAssets/Tribes/spring/AnimationStudies/death-keyposes-v3/keypose.png"
+  ],
+  "sourceArtwork": "DesignAssets/Tribes/spring/AnimationStudies/death-inbetweens-v5/Source/gap-0-drawn.png",
+  "sourceArtworkSha256": "3cacb93802d1c3cd9e92aad5643fefcf0f8486971579462d7ec8525a38b020c7"
+}

@@ -1,0 +1,16 @@
+{
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "Playful cartoon bubble-pop SFX: two rounded springy air bubbles popping through a stretchy mushroom membrane. A bright rising pitch-bent ploop at 0.85s, then a slightly lower bouncy pop at 1.5s, with a short elastic wobble tail. Clear close foreground, full audible level, light rubbery air-puff body and bright midrange. One cute spore-emergence cue. No stone, wood, knocks, thuds, metal, voice, music or reverb.",
+  "duration_seconds": 2.5,
+  "duration_actual_seconds": 2.48,
+  "prompt_influence": 0.85,
+  "loop": false,
+  "output_format": "mp3_44100_128",
+  "processing": "none",
+  "asset": "DesignAssets/Audio/spore-birth.mp3",
+  "selectedCandidate": 3,
+  "approved": true,
+  "input": "text prompt only",
+  "sha256": "089f3caaef2e094b380901fe5aedecf53a99e8b8a61c6ca9309aa8844a207ea7"
+}
