@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 import { mkdirSync, readFileSync, writeFileSync, existsSync, readdirSync, unlinkSync, rmdirSync } from "node:fs";
 import { dirname, resolve, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { productionRuntime } from "../client/production.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -45,6 +46,8 @@ export function prepareSite(destination, readSource, revision) {
       let catalog = source;
       for (const [assetName, assetPath] of assetPaths) catalog = catalog.replaceAll(assetName, assetPath);
       write(name, catalog);
+    } else if (name === "client/runtime.js") {
+      write(name, productionRuntime(source));
     } else write(name, source);
   }
   for (const [name, bytes] of assets) write(assetPaths.get(name), bytes);
