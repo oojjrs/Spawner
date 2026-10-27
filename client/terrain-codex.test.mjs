@@ -136,6 +136,7 @@ test("Esc는 유닛·지형·둥지 선택과 정보 패널을 함께 닫는다"
   const context = createContext({ state, unitPanel,
     canvas: { focus() { focused++; } }, helpTooltip: { hidden: true }, codex: { open: false },
     evolutionPanel: { hidden: true }, colonyMenu: { hidden: true },
+    endingReport: { open: false }, templateDeleteDialog: { open: false },
     closeColonyMenu() { context.colonyMenu.hidden = true; },
     selectObject(kind, target) { state.selection = target ? { kind, target } : null; unitPanel.hidden = !target; },
     document: { addEventListener(name, handler) { keydown = handler; } } });

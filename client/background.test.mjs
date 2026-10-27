@@ -35,7 +35,8 @@ function worker() {
     crypto: { getRandomValues: values => values.fill(1) },
     navigator: { locks: { request: (name, options, action) => action({}) } },
     openStorage: async () => storage,
-    createRoom: title => ({ id: "room", title, simSeconds: 0, revision: 0, orders: [] }),
+    createRoom: title => ({ id: "room", title, hostId: "host", simSeconds: 0, revision: 0, orders: [],
+      colonies: [{ ownerId: "host", tribe: "bean" }], games: new Map([["host", { ending: null }]]) }),
     saveRoom: room => structuredClone(room),
     restoreRoom: room => structuredClone(room),
     snapshotRoom: room => ({ roomId: room.id, revision: room.revision, state: { simSeconds: room.simSeconds } }),
@@ -70,7 +71,7 @@ function worker() {
     yields: () => yields,
     async pulse() { interval(); await runInContext("queue", context); },
     async start() {
-      await call("create", { title: "test" });
+      await call("create", { title: "test", seed: 13 });
       await call("enter", { roomId: "room", visible: false });
       await call("resume", { visible: true });
       messages.length = 0;
@@ -145,7 +146,7 @@ test("숨겨진 상태의 재개 요청으로는 진행하지 않고 보이게 �
 
 test("월드를 처음 여는 동안과 명시적으로 일시정지한 구간은 진행하지 않는다", async () => {
   const client = worker();
-  await client.call("create", { title: "test" });
+  await client.call("create", { title: "test", seed: 13 });
   client.jump(60000);
   await client.call("enter", { roomId: "room", visible: false });
   client.jump(10000);

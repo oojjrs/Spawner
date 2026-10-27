@@ -38,7 +38,7 @@ test("기획서의 자원 원화·운반물과 실행 참조가 일치하고 삭
 test("살아 있는 목재 나무는 스냅샷마다 유지하고 소진한 나무만 지도와 축소 캐시에서 제거한다", () => {
   const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
   const sync = source.match(/      foodCellMap.clear\(\);[^]*?      if \(forestChanged\) [^\r\n]+/)[0];
-  const trees = [10, 11, 12].map(column => ({ column, row: 20 }));
+  const trees = [10, 11, 12].map(column => ({ column, row: 20, x: column + .5, y: 20.5, height: 1 }));
   const forest = { trees, cells: new Map(trees.map(tree => [tree.column + ",20", tree])),
     revealed: new Map(trees.map(tree => [20 * 320 + tree.column, tree])) };
   const worldMap = { treeCells: new Uint8Array(320 * 320).fill(1) }, changed = [];
@@ -48,6 +48,7 @@ test("살아 있는 목재 나무는 스냅샷마다 유지하고 소진한 나�
     food: [{ x: 10, y: 20, resourceType: "tree", amount: 2 },
       { x: 11, y: 20, resourceType: "clay", amount: 12 },
       { x: 12, y: 20, kind: "corpse", resourceType: "meat", amount: 4 }] });
+  runInContext(source.match(/^    function forestTreeRegions\([^]*?^    }/m)[0], context);
   runInContext("{" + sync + "}", context);
   assert.equal(forest.cells.has("10,20"), true);
   assert.equal(forest.cells.has("11,20"), false);
@@ -59,7 +60,7 @@ test("살아 있는 목재 나무는 스냅샷마다 유지하고 소진한 나�
   assert.equal(forest.revealed.has(20 * 320 + 10), false);
   assert.equal(forest.cells.has("12,20"), true);
   assert.equal(worldMap.treeCells[20 * 320 + 10], 0);
-  assert.deepEqual(changed, [[11, 20], [10, 20]]);
+  assert.deepEqual(changed, [[0, 16], [0, 16]]);
 });
 
 test("목재·자갈·이슬은 승인된 루프를 재생하고 정지하면 원화를 유지한다", () => {
@@ -94,7 +95,7 @@ function fixture(resourceType, amount, carapaceAmount) {
   environment.games.set(colony.ownerId, game);
   const saved = JSON.parse(game.save());
   saved.state.agents.splice(1);
-  Object.assign(saved.state.agents[0], { x: 46, y: 42, renderFromX: 46, renderFromY: 42, slots: ["strength"],
+  Object.assign(saved.state.agents[0], { x: 46, y: 42, renderFromX: 46, renderFromY: 42, slots: resourceType === "meat" ? ["butchery"] : ["strength"],
     carrying: 0, carryingType: null, birth: null, bornAt: 120, mode: "approach", moveStartedAt: 0,
     moveDuration: 0, moveBudget: 0, harvestResult: null, decisionPending: null, nextDecisionAt: 1000,
     utility: { action: "collect", target: { x: 46, y: 42, key }, route: [{ x: 46, y: 42 }], plannedCargo: 2 } });

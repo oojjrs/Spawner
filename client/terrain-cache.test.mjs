@@ -42,7 +42,7 @@ function storage() {
               objectStore: () => ({
                 get: key => request(maps.get(key)),
                 getAll: () => request([...maps.values()]),
-                put: value => request(maps.set(value.key, value)),
+                put: value => request(maps.set(value.key, structuredClone(value))),
                 delete: key => request(maps.delete(key))
               })
             };
@@ -57,14 +57,15 @@ function storage() {
 }
 
 function session(database, assets) {
-  const stats = { terrain: 0, trees: [], requests: [], statuses: [], regions: [] };
+  const stats = { terrain: 0, trees: [], requests: [], statuses: [], regions: [], placements: 0, hazards: 0, grounds: 0 };
   const rendering = {
     types: new Uint8Array(320 * 320), edges: new Uint8Array(320 * 320), slots: new Int32Array(320 * 320),
     colors: Array.from({ length: 10 }, () => [0, 0, 0]), grounds: new Map(), atlases: [],
-    overview: null, medium: new Map(), forest: new Map(), key: null, forestKeys: new Map(), resolution: 64
+    overview: null, medium: new Map(), forest: new Map(), key: null, forestKeys: new Map(), resolution: 64,
+    revealed: new Uint8Array(320 * 320), regions: new Set()
   };
   const forest = {
-    trees: [], cells: new Map(), revealed: new Map(), overrides: new Map(), cacheWrite: Promise.resolve(), cacheKey: null,
+    trees: [], cells: new Map(), revealed: new Map(), regions: new Set(), steps: new Map(), shakes: new Map(), overrides: new Map(), cacheWrite: Promise.resolve(), cacheKey: null,
     sprite: { ...bitmap(assets.tree), decode: async () => {} }
   };
   const worldMap = {};
@@ -78,7 +79,7 @@ function session(database, assets) {
       this.context = {
         drawImage: image => { pixel = image.pixel; },
         getImageData: () => ({ data: Uint8Array.of(pixel) }),
-        putImageData() {}, fillRect() {}, translate() {}
+        putImageData() {}, fillRect() {}, translate() {}, clearRect() {}
       };
     }
     getContext() { return this.context; }
@@ -118,12 +119,15 @@ function session(database, assets) {
     worldMap, terrainRendering: rendering, forest,
     clamp: (value, min, max) => Math.min(max, Math.max(min, value)),
     grassGround: { decode: async () => {} }, terrainGrounds: {},
-    terrainGroundPixels: () => Uint8Array.of(assets.ground),
+    terrainGroundPixels: () => { stats.grounds++; return Uint8Array.of(assets.ground); },
     terrainWorkerSource: "worker", Blob, Worker, URL, createImageBitmap: decode,
     indexedDB: database, Date: { now: database.now }, document: { createElement: () => new Canvas() },
     drawForestTree() {}, treeOverlapsColony: () => false,
-    foodCellMap: new Map(), foodSpotCache: new Map(), FOOD_REGION_SIZE: 16, Spawner: { isTreeFood: () => false },
+    hazardCells: [], hazardGroundTiles: new Map(), hazardCanvas: new Canvas(), connectionStatus: {}, Path2D: class {},
+    foodCellMap: new Map(), foodSpotCache: new Map(), FOOD_REGION_SIZE: 16,
+    Spawner: { isTreeFood: () => false, renderingAssets: assets.manifest ? { terrain: "ground:" + assets.ground, forest: "tree:" + assets.tree, hazards: "hazards" } : null },
     updateForest() {
+      stats.placements++;
       forest.trees = [];
       forest.cells.clear();
       forest.overrides.clear();
@@ -136,17 +140,19 @@ function session(database, assets) {
         }
       }
     },
-    updateHazards() {}, updateRoomCreationProgress() {}, welcomeStatus: {},
+    updateHazards() { stats.hazards++; }, updateRoomCreationProgress() {}, welcomeStatus: {},
     setEvolutionText: (element, text) => stats.statuses.push(text)
   });
   for (const name of ["updateTerrainRendering", "forestTreeRegions", "forestRegionKey", "forestImageRegions",
+    "openRenderingStorage", "worldRenderingKey", "worldRenderingMatches", "readWorldRendering", "restoreWorldRendering",
+    "worldRenderingRecord", "saveWorldRendering", "reportRenderingCacheError", "resetForestRendering",
     "prepareWorldRendering", "saveForestRegion", "updateForestRegion"]) runInContext(declaration(name), context);
   const snapshotStart = source.indexOf("      let forestChanged = false;");
   const snapshotEnd = source.indexOf("      if (selection) {", snapshotStart);
   assert.ok(snapshotStart >= 0 && snapshotEnd > snapshotStart);
   const snapshot = source.slice(snapshotStart, snapshotEnd);
   return {
-    stats, rendering, prepare: (world, colonies) => context.prepareWorldRendering(world, colonies),
+    stats, rendering, forest, prepare: (world, colonies) => context.prepareWorldRendering(world, colonies),
     flush: () => forest.cacheWrite,
     cut(map, index) {
       map.treeCells[index] = 0;
@@ -228,7 +234,7 @@ test("숲 이미지 변경과 캐시 정리가 바닥 캐시에 영향을 주지
     assert.deepEqual(changed.stats.trees, [10, 20]);
   }
   assert.equal([...database.maps.values()].filter(map => map.layer === "terrain").length, 1);
-  assert.equal([...database.maps.values()].filter(map => map.layer === "forest").length, 2);
+  assert.equal([...database.maps.values()].filter(map => map.layer === "forest").length, 4);
   const changed = session(database, { ground: 2, tree: 4 });
   await changed.prepare(map, []);
   assert.equal(changed.stats.terrain, 1);
@@ -348,4 +354,85 @@ test("플레이 중 경계의 나무를 베면 인접 네 구역을 저장하여
   await resumed.prepare(map, []);
   assert.equal(resumed.stats.regions.filter(region => region.cached).length, 400);
   assert.equal(resumed.stats.regions.filter(region => !region.cached).length, 0);
+});
+
+test("새 페이지에서는 저장된 배치와 경계를 읽고 지형·숲 생성 및 원본 픽셀 읽기를 건너뛴다", async () => {
+  const database = storage(), map = world(), assets = { ground: 1, tree: 1, manifest: true };
+  map.roomId = "first";
+  const first = session(database, assets);
+  await first.prepare(map, []);
+  first.cut(map, 10);
+  await first.flush();
+  const resumed = session(database, assets);
+  await resumed.prepare(map, []);
+  assert.equal(resumed.stats.terrain, 0);
+  assert.equal(resumed.stats.trees.length, 0);
+  assert.equal(resumed.stats.placements, 0);
+  assert.equal(resumed.stats.hazards, 0);
+  assert.equal(resumed.stats.grounds, 0);
+  assert.equal(resumed.stats.statuses.some(text => text.includes("생성 중")), false);
+  assert.equal(resumed.stats.regions.filter(region => region.cached).length, 400);
+  assert.equal(resumed.forest.trees.length, 1);
+  await resumed.prepare(map, []);
+  await resumed.prepare(map, []);
+  assert.equal(resumed.forest.trees.length, 1);
+  assert.equal(resumed.forest.cells.has("20,0"), true);
+});
+
+test("세 개 이상의 방과 자산 캐시를 보관해도 먼저 만든 방을 다시 생성하지 않는다", async () => {
+  const database = storage(), assets = { ground: 1, tree: 1, manifest: true };
+  for (let index = 0; index < 4; index++) {
+    const map = world();
+    map.seed = index;
+    map.roomId = "room:" + index;
+    await session(database, assets).prepare(map, []);
+  }
+  for (const layer of ["terrain", "forest", "world"]) {
+    assert.equal([...database.maps.values()].filter(map => map.layer === layer).length, 4);
+  }
+  const map = world();
+  map.seed = 0;
+  map.roomId = "room:0";
+  const resumed = session(database, assets);
+  await resumed.prepare(map, []);
+  assert.equal(resumed.stats.terrain + resumed.stats.placements + resumed.stats.hazards + resumed.stats.grounds, 0);
+  assert.equal(resumed.stats.statuses.some(text => text.includes("생성 중")), false);
+});
+
+test("이미지 저장보다 최신인 월드 변경은 감지하고 변경된 숲 구역만 복구한다", async () => {
+  const database = storage(), map = world(), assets = { ground: 1, tree: 1, manifest: true };
+  await session(database, assets).prepare(map, []);
+  map.treeCells[10] = 0;
+  const resumed = session(database, assets);
+  await resumed.prepare(map, []);
+  assert.equal(resumed.stats.terrain, 0);
+  assert.deepEqual(resumed.stats.regions.filter(region => !region.cached), [{ index: 0, cached: false }]);
+  const next = session(database, assets);
+  await next.prepare(map, []);
+  assert.equal(next.stats.placements + next.stats.hazards + next.stats.grounds, 0);
+  assert.equal(next.stats.statuses.some(text => text.includes("생성 중")), false);
+});
+
+test("경계 벌목의 이미지가 일부만 저장돼도 이전 나무 이미지가 되살아나지 않는다", async () => {
+  const database = storage(), map = world(), assets = { ground: 1, tree: 1, manifest: true };
+  map.treeCells.fill(0);
+  const index = 15 * 320 + 15;
+  map.treeCells[index] = 1;
+  assets.positions = { [index]: { x: 16, y: 16, height: 1 } };
+  const client = session(database, assets);
+  await client.prepare(map, []);
+  const encodes = [];
+  assets.encode = action => encodes.push(action);
+  client.cut(map, index);
+  assert.equal(encodes.length, 4);
+  encodes[0](new Blob(["first region"]));
+  await new Promise(resolve => setImmediate(resolve));
+  const interrupted = storage();
+  for (const [key, record] of database.maps) interrupted.maps.set(key, structuredClone(record));
+  for (const encode of encodes.slice(1)) encode(new Blob(["remaining region"]));
+  await client.flush();
+  const resumed = session(interrupted, { ...assets, encode: null });
+  await resumed.prepare(map, []);
+  assert.equal(resumed.stats.placements, 0);
+  assert.deepEqual(resumed.stats.regions.filter(region => !region.cached).map(region => region.index).sort((a, b) => a - b), [1, 20, 21]);
 });

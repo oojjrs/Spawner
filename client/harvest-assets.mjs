@@ -1,3 +1,5 @@
+import { imageAnimation } from "./image-geometry.mjs";
+
 const drawnDurations = Object.freeze([500, 63, 62, 63, 62, 63, 62, 63, 62]);
 const drawnAnimations = Object.freeze(Object.fromEntries([
   ["tree", "HarvestDrawnV2/wood", 256, 419, 400],
@@ -17,7 +19,7 @@ export const RESOURCE_HARVEST_ANIMATIONS = Object.freeze([
   ["clay", 4],
   ["sand", 30],
   ["grass-fiber", 7]
-].map(([resourceType, contactFrame]) => Object.freeze({
+].map(([resourceType, contactFrame]) => Object.freeze(imageAnimation({
   resourceType,
   image: resourceType === "clay" ? "DesignAssets/Animations/Resources/FertileSoil/harvest-sheet.png" :
     "DesignAssets/Animations/Resources/HarvestV1/" + (resourceType === "tree-fruit" ? "berry-bush" : resourceType) + "/sheet.png",
@@ -40,5 +42,5 @@ export const RESOURCE_HARVEST_ANIMATIONS = Object.freeze([
     viewSize: 238
   } : {}),
   ...(drawnAnimations[resourceType] || {})
-})));
+}))));
 

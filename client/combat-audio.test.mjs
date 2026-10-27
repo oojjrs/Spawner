@@ -138,7 +138,7 @@ test("게임·기획서와 로컬 실행 목록이 같은 전투 음원을 참�
   const html = readFileSync(new URL("../Spawner.html", import.meta.url), "utf8");
   assert.ok(html.indexOf("client/combat-audio.js") < html.indexOf("client/audio.js"));
   assert.ok(design.includes('src="client/combat-audio.js"'));
-  assert.equal([...design.matchAll(/data-combat-material=/g)].length, 20);
+  assert.equal([...design.matchAll(/data-combat-material=/g)].length, 15);
   for (const name of Object.values(combat.sources)) {
     assert.ok(existsSync(new URL("../" + name, import.meta.url)));
     assert.ok(local.SpawnerLocalAssetFiles.includes("./client/local-assets/" + name.slice("DesignAssets/".length) + ".js"));

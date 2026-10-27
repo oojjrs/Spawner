@@ -1,3 +1,5 @@
+import { imageFrameSize, imageScale } from "./image-geometry.mjs";
+
 export function createTribeArt(definitions, assetSource) {
   const previews = new Map(), units = new Map(), sprites = new Map();
 
@@ -10,8 +12,9 @@ export function createTribeArt(definitions, assetSource) {
 
   function bounds(sprite, frame) {
     const surface = document.createElement("canvas");
-    surface.width = frame ? 512 : sprite.naturalWidth;
-    surface.height = frame ? 512 : sprite.naturalHeight;
+    const size = typeof frame === "number" ? frame : 512;
+    surface.width = frame ? size : sprite.naturalWidth || sprite.width;
+    surface.height = frame ? size : sprite.naturalHeight || sprite.height;
     const context = surface.getContext("2d", { willReadFrequently: true });
     context.drawImage(sprite, 0, 0);
     const pixels = context.getImageData(0, 0, surface.width, surface.height).data;
@@ -46,11 +49,12 @@ export function createTribeArt(definitions, assetSource) {
       const mounted = new Map(tribe.parts.map((path, index) => {
         const entry = entries.find(asset => asset.path === path), mount = entry.mount;
         const crop = bounds(parts[index], false);
+        const sourceScale = imageScale(tribe.starter);
         const width = mount.widthRatio ? box.width * mount.widthRatio :
-          mount.center ? box.width * mount.width : mount.width * scale;
+          mount.center ? box.width * mount.width : mount.width * sourceScale * scale;
         const height = width * crop.height / crop.width;
-        const x = mount.center ? box.x + box.width * mount.center[0] - width / 2 : box.x + (mount.x - starterBounds.x) * scale;
-        const y = mount.center ? box.y + box.height * mount.center[1] - height / 2 : box.y + (mount.y - starterBounds.y) * scale;
+        const x = mount.center ? box.x + box.width * mount.center[0] - width / 2 : box.x + (mount.x * sourceScale - starterBounds.x) * scale;
+        const y = mount.center ? box.y + box.height * mount.center[1] - height / 2 : box.y + (mount.y * sourceScale - starterBounds.y) * scale;
         return [path.split("/").at(-1).replace(".png", ""), { sprite: parts[index], crop, x, y, width, height }];
       }));
       const result = { starter, starterBounds, body, bodyBounds: bounds(body, false), box, mounted };
@@ -110,7 +114,8 @@ export function createTribeArt(definitions, assetSource) {
       (width - nestWidth) / 2, height * .76 - nestHeight, nestWidth, nestHeight);
     const frame = reducedMotion ? 0 : Math.floor(time / tribe.frameMs) % tribe.frames;
     const size = Math.min(height * .85, width * .50);
-    context.drawImage(art.idle, frame % 4 * 512, Math.floor(frame / 4) * 512, 512, 512,
+    const frameSize = imageFrameSize(tribe.idle, 512);
+    context.drawImage(art.idle, frame % 4 * frameSize, Math.floor(frame / 4) * frameSize, frameSize, frameSize,
       width * .62 - size / 2, height * .97 - size * .875, size, size);
   }
 

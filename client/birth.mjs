@@ -1,11 +1,51 @@
-import { SPRING_BIRTH_DURATIONS, SPRING_BIRTH_DURATION, PEBBLE_BIRTH_DURATIONS, PEBBLE_BIRTH_DURATION } from "../server/birth.mjs";
+import { imageAnimation, imageScale } from "./image-geometry.mjs";
+import { SPORE_BIRTH_DURATIONS, SPORE_BIRTH_DURATION, SPRING_BIRTH_DURATIONS, SPRING_BIRTH_DURATION, PEBBLE_BIRTH_DURATIONS, PEBBLE_BIRTH_DURATION } from "../server/birth.mjs";
 
-export const SPRING_BIRTH_ANIMATION = Object.freeze({
+export const SPORE_BIRTH_ANIMATION = Object.freeze(imageAnimation({
+  image: "DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/birth.webp",
+  nest: "DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/nest-stationary.png",
+  frameSize: 576, columns: 4, frameCount: 22, pivotX: 400, pivotY: 500,
+  unitHeight: 179, detachAt: .82, contactAt: 1.46, firstUnitFrame: 9,
+  nestBounds: Object.freeze({ x: 37, y: 77, width: 459, height: 344 }),
+  duration: SPORE_BIRTH_DURATION, durationsMs: SPORE_BIRTH_DURATIONS
+}));
+
+export function sporeBirthPlacement(elapsed, outlet, target, height) {
+  const animation = SPORE_BIRTH_ANIMATION;
+  if (elapsed < 0 || elapsed >= animation.duration) return null;
+  let end = 0, frame = animation.frameCount - 1;
+  for (let index = 0; index < animation.frameCount; index++) {
+    end += animation.durationsMs[index] / 1000;
+    if (elapsed + 1e-9 < end) { frame = index; break; }
+  }
+  const age = Math.max(0, Math.min(1, (elapsed - animation.detachAt) / (animation.contactAt - animation.detachAt)));
+  const progress = age * age * (3 - 2 * age);
+  const rootX = outlet.x + (target.x - outlet.x) * progress;
+  const rootY = outlet.y + (target.y - outlet.y) * progress;
+  return { frame, rootX, rootY, scale: height / (animation.unitHeight * imageScale(animation.image)), unitVisible: elapsed >= animation.detachAt };
+}
+
+export function sporeBirthPixels(scene, nest) {
+  const pixels = new Uint8ClampedArray(scene.length);
+  for (let index = 0; index < scene.length; index += 4) {
+    if (scene[index] === nest[index] && scene[index + 1] === nest[index + 1] &&
+        scene[index + 2] === nest[index + 2] && scene[index + 3] === nest[index + 3]) continue;
+    const alpha = nest[index + 3] === 255 ? 255 :
+      Math.max(0, Math.min(255, (scene[index + 3] - nest[index + 3]) * 255 / (255 - nest[index + 3])));
+    if (alpha <= 0) continue;
+    pixels[index + 3] = alpha;
+    for (let channel = 0; channel < 3; channel++) pixels[index + channel] =
+      (scene[index + channel] * scene[index + 3] - nest[index + channel] * nest[index + 3] * (1 - alpha / 255)) / alpha;
+  }
+  return pixels;
+}
+
+export const SPRING_BIRTH_ANIMATION = Object.freeze(imageAnimation({
   image: "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp",
   frameSize: 512, columns: 4, frameCount: 13, pivotX: 320, pivotY: 448,
   outletX: 86, outletY: 105, height: 224, detachAt: .53, contactAt: .79,
   duration: SPRING_BIRTH_DURATION, durationsMs: SPRING_BIRTH_DURATIONS
-});
+}));
 
 export function springBirthPlacement(elapsed, outlet, target, height) {
   if (elapsed < 0 || elapsed >= SPRING_BIRTH_DURATION) return null;
@@ -26,7 +66,7 @@ export function springBirthPlacement(elapsed, outlet, target, height) {
   return { frame, x, y, scale, rootX: x + animation.pivotX * scale, rootY: y + animation.pivotY * scale };
 }
 
-export const PEBBLE_BIRTH_ANIMATION = Object.freeze({
+export const PEBBLE_BIRTH_ANIMATION = Object.freeze(imageAnimation({
   image: "DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth-unit.webp",
   foreground: "DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth-foreground.png",
   frameSize: 512, columns: 8, frameCount: 48, pivotX: 256, pivotY: 460,
@@ -34,7 +74,7 @@ export const PEBBLE_BIRTH_ANIMATION = Object.freeze({
   detachAt: .12, contactAt: 1.48, audioAt: .25,
   nestOutletX: .5, nestOutletY: .82,
   duration: PEBBLE_BIRTH_DURATION, durationsMs: PEBBLE_BIRTH_DURATIONS
-});
+}));
 
 export function pebbleBirthPlacement(elapsed, outlet, target, height) {
   const animation = PEBBLE_BIRTH_ANIMATION;

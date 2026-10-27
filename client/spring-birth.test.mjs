@@ -32,6 +32,7 @@ test("샘방울 탄생음은 시작에 한 번만 나고 씨앗 방출·파열·
   const state = { simSeconds: 1, camera: { layer: 0 }, agents: [agent], rivals: [] };
   const context = createContext({ state, connection: { active: true, online: true }, audioTime: .9,
     audio: { available: () => true, play: name => calls.push(name), setHarvest() {} },
+    SpawnerCombatAudio: { update: () => [] }, combatAudio: {},
     displayedAgent: value => value, interpolatedAgentPosition: () => ({ x: 44, y: 45 }), audioVolume: () => 1,
     agentBirthPose: value => ({ kind: "spring", elapsed: state.simSeconds - value.birth.startedAt }),
     agentAudio: new Map(), deliveryAudio: new Map(), foodDeliveries: new Map(),

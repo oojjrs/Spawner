@@ -23,6 +23,7 @@ function movement() {
     displayedAgent: agent => agent, agentBirthPose: () => null,
     tribeArt: { prepareUnit: async () => ({ box: { width: 310, height: 350 } }) },
     agentWalkPose: () => null, agentBobOffset: () => 0, foodDeliveryPose: () => ({ scaleX: 1, scaleY: 1 }),
+    prepareUnitAnimationSheets: async () => {}, drawAgentAnimation: () => false,
     drawAgentAttack: () => false, agentSprite: () => ({ width: 512, height: 512 }),
     drawSelectionOutline() {}, foodSelectionShape: {},
     ctx: { save() {}, restore() {}, beginPath() {}, rect() {}, clip() {}, ellipse() {}, fill() {},
@@ -30,9 +31,9 @@ function movement() {
       drawImage: (...args) => draws.push(args) }
   });
   const start = source.indexOf("    const agentMovementSheets = new Map(");
-  const end = source.indexOf("    const attackSheet = new Image();", start);
+  const end = source.indexOf("    const unitAnimationSheets = new Map(", start);
   runInContext(source.slice(start, end), context);
-  for (const name of ["agentBasePosition", "agentBodyPose", "prepareAgentMovement", "drawAgentMovement", "drawAgentAppearance"])
+  for (const name of ["agentBodyLift", "agentBasePosition", "agentBodyPose", "prepareAgentMovement", "drawAgentMovement", "drawAgentAppearance"])
     runInContext(declaration(name), context);
   return { context, draws, translations };
 }
@@ -105,8 +106,8 @@ test("지면 이동 부족에는 콩 착지음이 붙지 않고 새싹콩 점프
 test("포자버섯 등장에는 포자버섯 탄생음을 한 번 재생한다", () => {
   const sound = gameAudio();
   sound.state.agents = [{ id: "spore", tribe: "spore", health: 1, x: 1, y: 1, birth: { startedAt: 0 } }];
-  sound.context.agentBirthPose = () => ({ seedVisible: false, fractureAge: -1, unitVisible: sound.state.simSeconds >= .4 });
-  for (const time of [.2, .4, .5]) {
+  sound.context.agentBirthPose = () => ({ kind: "spore", elapsed: sound.state.simSeconds });
+  for (const time of [.1, .2, .4, .5]) {
     sound.state.simSeconds = time;
     sound.context.updateAudio();
   }

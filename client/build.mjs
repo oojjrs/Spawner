@@ -1,18 +1,22 @@
+import { auditImages } from "./image-audit.mjs";
+import { productionRuntime } from "./production.mjs";
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname, resolve, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 import { CREATURE_ASSETS } from "../server/creatures.mjs";
 import { AGENT_ATTACK_ASSET } from "../server/attack.mjs";
+import { UNIT_ANIMATION_ASSETS } from "./unit-animation.mjs";
 import { AGENT_DEATH_ANIMATION } from "./agent-death.mjs";
 import { AGENT_SPIRIT } from "./agent-spirit.mjs";
 import { TALON_OWL_IDLE } from "./talon-owl-idle.mjs";
-import { SPRING_BIRTH_ANIMATION, PEBBLE_BIRTH_ANIMATION } from "./birth.mjs";
+import { SPORE_BIRTH_ANIMATION, SPRING_BIRTH_ANIMATION, PEBBLE_BIRTH_ANIMATION } from "./birth.mjs";
 import { RESOURCE_TYPES } from "../server/resources.mjs";
 import { RESOURCE_HARVEST_ANIMATIONS } from "./harvest-assets.mjs";
 import { PLAYER_TRIBE_ASSETS } from "../server/player-tribes.mjs";
 import { PLAYER_COMBAT_ASSETS } from "./combat.mjs";
 import { TERRAIN_CODEX, HAZARD_CODEX, terrainCodexResources } from "./terrain-codex.mjs";
 import { WORLD_GENERATION_VERSION } from "../server/world.mjs";
+import { createHash } from "node:crypto";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const imports = /^import\s+\{([^}]+)\}\s+from\s+["']([^"']+)["'];?\r?$/gm;
@@ -43,11 +47,38 @@ function bundle(entries) {
   return chunks.join("\n");
 }
 
-const worker = `(() => {\n${bundle(["client/worker.mjs"])}\n})();`;
-const assets = Object.fromEntries([...PLAYER_TRIBE_ASSETS, ...PLAYER_COMBAT_ASSETS, ...RESOURCE_TYPES.flatMap(item => [item.image, item.carryImage]), ...RESOURCE_HARVEST_ANIMATIONS.map(item => item.image), ...CREATURE_ASSETS, TALON_OWL_IDLE.image, AGENT_ATTACK_ASSET, AGENT_DEATH_ANIMATION.image, AGENT_SPIRIT.image, SPRING_BIRTH_ANIMATION.image, PEBBLE_BIRTH_ANIMATION.image, PEBBLE_BIRTH_ANIMATION.foreground, "DesignAssets/Foods/food-berry-bush.png", "DesignAssets/Terrain/standing-tree-smooth-atlas.png", "DesignAssets/Terrain/poison-spore-ground.png", "DesignAssets/Terrain/thorn-root-ground.png"].map(name => [name, name]));
-const browser = bundle(["client/terrain-codex.mjs", "server/combat.mjs", "client/combat.mjs", "server/encounter-types.mjs", "server/player-tribes.mjs", "client/tribe-art.mjs", "server/lifespan.mjs", "server/growth.mjs", "server/resources.mjs", "server/attributes.mjs", "server/nests.mjs", "server/food.mjs", "server/birth.mjs", "server/attack.mjs", "client/agent-death.mjs", "client/agent-spirit.mjs", "server/beetle-animation.mjs", "client/talon-owl-idle.mjs", "client/birth.mjs", "client/harvest-assets.mjs", "client/harvest.mjs", "client/client.mjs"]);
-const content = `(() => {\n${browser}\nconst workerSource = ${JSON.stringify(worker)};\nglobalThis.Spawner = Object.freeze({ ...modules["client/terrain-codex.mjs"], ...modules["server/combat.mjs"], ...modules["client/combat.mjs"], ...modules["server/encounter-types.mjs"], ...modules["server/player-tribes.mjs"], ...modules["client/tribe-art.mjs"], ...modules["server/lifespan.mjs"], ...modules["server/growth.mjs"], ...modules["server/resources.mjs"], ...modules["server/attributes.mjs"], ...modules["server/food.mjs"], ...modules["server/birth.mjs"], ...modules["server/attack.mjs"], ...modules["client/agent-death.mjs"], ...modules["client/agent-spirit.mjs"], ...modules["server/beetle-animation.mjs"], ...modules["client/talon-owl-idle.mjs"], ...modules["client/birth.mjs"], ...modules["client/harvest-assets.mjs"], ...modules["client/harvest.mjs"], NEST_LEVELS: modules["server/nests.mjs"].NEST_LEVELS, createClient: (onState, onError, onSaved) => modules["client/client.mjs"].createClient(onState, onError, onSaved, workerSource), assets: ${JSON.stringify(assets)} });\n})();\n`;
+let worker = `(() => {\n${bundle(["client/worker.mjs"])}\n})();`;
+if (process.argv.includes("--production")) worker = productionRuntime(worker);
+const assets = Object.fromEntries([...PLAYER_TRIBE_ASSETS, ...PLAYER_COMBAT_ASSETS, ...UNIT_ANIMATION_ASSETS, ...RESOURCE_TYPES.flatMap(item => [item.image, item.carryImage]), ...RESOURCE_HARVEST_ANIMATIONS.map(item => item.image), ...CREATURE_ASSETS, TALON_OWL_IDLE.image, AGENT_ATTACK_ASSET, AGENT_DEATH_ANIMATION.image, AGENT_SPIRIT.image, SPORE_BIRTH_ANIMATION.image, SPORE_BIRTH_ANIMATION.nest, SPRING_BIRTH_ANIMATION.image, PEBBLE_BIRTH_ANIMATION.image, PEBBLE_BIRTH_ANIMATION.foreground, "DesignAssets/Foods/food-berry-bush.png", "DesignAssets/Terrain/standing-tree-smooth-atlas.png", "DesignAssets/Terrain/poison-spore-ground.png", "DesignAssets/Terrain/thorn-root-ground.png"].map(name => [name, name]));
+let browser = bundle(["client/cheats.mjs", "client/unit-animation.mjs", "client/terrain-codex.mjs", "server/combat.mjs", "client/combat.mjs", "server/encounter-types.mjs", "server/player-tribes.mjs", "client/tribe-art.mjs", "server/lifespan.mjs", "server/growth.mjs", "server/resources.mjs", "server/attributes.mjs", "server/nests.mjs", "server/food.mjs", "server/birth.mjs", "server/attack.mjs", "client/agent-death.mjs", "client/agent-spirit.mjs", "server/beetle-animation.mjs", "client/talon-owl-idle.mjs", "client/birth.mjs", "client/harvest-assets.mjs", "client/harvest.mjs", "client/client.mjs"]);
+if (process.argv.includes("--production")) browser = productionRuntime(browser);
+const gameSource = readFileSync(resolve(root, "client/game.js"), "utf8");
+const gameImages = new Set(Object.keys(assets));
+for (const file of ["client/game.js", "client/game.css", "Spawner.html"]) {
+  for (const match of readFileSync(resolve(root, file), "utf8").matchAll(/["'](DesignAssets\/[^"'?\r\n]+\.(?:png|webp|gif|jpe?g))["']/g)) gameImages.add(match[1]);
+}
+auditImages(root, gameImages);
+function renderingDigest(files, functions, constants) {
+  const hash = createHash("sha256");
+  for (const file of files) hash.update(readFileSync(resolve(root, "DesignAssets/Terrain", file)));
+  for (const name of functions) {
+    const declaration = gameSource.match(new RegExp("^    (?:async )?function " + name + "\\([^]*?^    }", "m"));
+    if (!declaration) throw new Error("RENDERING FUNCTION MISSING : " + name);
+    hash.update(declaration[0]);
+  }
+  hash.update(constants);
+  return hash.digest("hex");
+}
+const renderingAssets = {
+  terrain: renderingDigest(["land-ground.png", "grassland-ground.png", "forest-ground.png", "swamp-ground.png", "low-mountain-ground.png", "high-mountain-ground.png", "ridge-ground.png", "coast-ground.png", "shallow-water-ground.png", "deep-water-ground.png"],
+    ["updateTerrainRendering", "createTerrainSamples", "createTerrainPatch", "buildTerrainAtlas"], gameSource.match(/const TERRAIN_COLORS = \{[^]*?\n    };/)[0]),
+  forest: renderingDigest(["standing-tree-smooth-atlas.png"], ["drawForestTree", "updateForest", "forestTreeRegions", "forestRegionKey"],
+    gameSource.slice(gameSource.indexOf("const forest ="), gameSource.indexOf("const hazardCells ="))),
+  hazards: renderingDigest(["poison-spore-ground.png", "thorn-root-ground.png"], ["updateHazards", "hazardGroundTile"], "")
+};
+const content = `(() => {\n${browser}\nconst workerSource = ${JSON.stringify(worker)};\nglobalThis.Spawner = Object.freeze({ ...modules["client/image-geometry.mjs"], ...modules["client/cheats.mjs"], ...modules["client/unit-animation.mjs"], ...modules["client/terrain-codex.mjs"], ...modules["server/combat.mjs"], ...modules["client/combat.mjs"], ...modules["server/encounter-types.mjs"], ...modules["server/player-tribes.mjs"], ...modules["client/tribe-art.mjs"], ...modules["server/lifespan.mjs"], ...modules["server/growth.mjs"], ...modules["server/resources.mjs"], ...modules["server/attributes.mjs"], ...modules["server/food.mjs"], ...modules["server/birth.mjs"], ...modules["server/attack.mjs"], ...modules["client/agent-death.mjs"], ...modules["client/agent-spirit.mjs"], ...modules["server/beetle-animation.mjs"], ...modules["client/talon-owl-idle.mjs"], ...modules["client/birth.mjs"], ...modules["client/harvest-assets.mjs"], ...modules["client/harvest.mjs"], NEST_LEVELS: modules["server/nests.mjs"].NEST_LEVELS, createClient: (onState, onError, onSaved) => modules["client/client.mjs"].createClient(onState, onError, onSaved, workerSource), renderingAssets: ${JSON.stringify(renderingAssets)}, assets: ${JSON.stringify(assets)} });\n})();\n`;
 writeFileSync(resolve(root, "client/runtime.js"), content.replace(/\r?\n/g, "\r\n"), "utf8");
+if (process.argv.includes("--runtime-only")) process.exit(0);
 const designPath = resolve(root, "Design.html");
 let design = readFileSync(designPath, "utf8");
 const terrainTable = design.match(/<table[^>]*aria-label="지형 바닥"[^>]*>[\s\S]*?<\/table>/)?.[0];

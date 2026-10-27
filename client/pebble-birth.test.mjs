@@ -5,7 +5,7 @@ import { createContext, runInContext } from "node:vm";
 import { PEBBLE_BIRTH_ANIMATION, pebbleBirthPlacement } from "./birth.mjs";
 
 test("몽돌은 돌굴의 48프레임을 재생하고 구르기 전 출구와 착지 후 빈 칸에 고정된다", () => {
-  const metadata = JSON.parse(readFileSync(new URL("../DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth.json", import.meta.url), "utf8"));
+  const metadata = JSON.parse(readFileSync(new URL("../DesignAssets/Planning/Tribes/pebble/AnimationStudies/birth-den-v1/birth.json", import.meta.url), "utf8"));
   assert.deepEqual([...PEBBLE_BIRTH_ANIMATION.durationsMs], metadata.durationsMs);
   const outlet = { x: 42.5, y: 43 }, target = { x: 42.5, y: 45.78 }, height = .7 * 229 / 512;
   for (const elapsed of [0, .08, .119]) {
@@ -29,6 +29,7 @@ test("몽돌 탄생음은 0.25초에 한 번만 재생하고 새싹콩 효과음
   const state = { simSeconds: 1.1, camera: { layer: 0 }, agents: [agent], rivals: [] };
   const context = createContext({ state, connection: { active: true, online: true }, audioTime: 1,
     PEBBLE_BIRTH_ANIMATION, audio: { available: () => true, play: name => calls.push(name), setHarvest() {} },
+    SpawnerCombatAudio: { update: () => [] }, combatAudio: {},
     displayedAgent: value => value, interpolatedAgentPosition: () => ({ x: 42, y: 45 }), audioVolume: () => 1,
     agentBirthPose: value => ({ kind: "pebble", elapsed: state.simSeconds - value.birth.startedAt }),
     agentAudio: new Map(), deliveryAudio: new Map(), foodDeliveries: new Map(), colonyEntries: [{ id: 1 }],

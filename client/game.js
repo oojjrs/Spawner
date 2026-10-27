@@ -7,14 +7,14 @@
     const tribeColonies = new Map();
     const { TERRAIN_CODEX, HAZARD_CODEX, terrainCodexResources, terrainCodexCell, ATTRIBUTES, ATTRIBUTE_COMBINATIONS, attributeCounts, unitStats, unitMovementSpeed, birthCost, hasSynergy, NEST_LEVELS, createClient,
       agentBirthDuration, agentBirthMotion, SPRING_BIRTH_ANIMATION, springBirthPlacement, PEBBLE_BIRTH_ANIMATION, pebbleBirthPlacement, drawBirthSeed, drawBirthFragments, drawBirthImpact,
-      AGENT_ATTACK_ASSET, agentAttackFrame, AGENT_DEATH_ANIMATION, agentDeathFrame } = globalThis.Spawner;
+      AGENT_ATTACK_ASSET, agentAttackFrame, agentDeathFrame } = globalThis.Spawner;
     const connection = { active: false, online: false, busy: false, synchronizing: false, roomId: null, colonyId: null, revision: -1, simSeconds: 0, receivedAt: 0 };
     const connectionStatus = document.getElementById("connection-status");
+    const cheats = Spawner.createCheats(document, sendCommand);
     const canvas = document.getElementById("world");
     const ctx = canvas.getContext("2d");
     const zoomLayerButtons = [...document.querySelectorAll("[data-zoom-layer]")];
     const colonyFocus = document.getElementById("colony-focus");
-    const selectionTerrain = document.getElementById("selection-terrain");
     const controlsGuide = document.getElementById("controls-guide");
     const controlsGuideToggle = document.getElementById("controls-guide-toggle");
     const controlsGuideClose = document.getElementById("controls-guide-close");
@@ -61,6 +61,8 @@
     const unitPanel = document.getElementById("unit-panel");
     const unitPanelTitle = document.getElementById("unit-panel-title");
     const terrainDetails = document.getElementById("terrain-details");
+    const resourceDetails = document.getElementById("resource-details");
+    const resourceLocation = document.getElementById("resource-location");
     const agentDetails = document.getElementById("agent-details");
     const agentBirth = document.getElementById("agent-birth");
     const agentDesign = document.getElementById("agent-design");
@@ -84,16 +86,25 @@
     function positionHelpTooltip() {
       if (!helpTooltipTarget) return;
       const rect = helpTooltipTarget.getBoundingClientRect();
-      const panel = helpTooltipTarget.closest(".colony-menu, .evolution-panel, .codex");
+      const panel = helpTooltipTarget.closest(".colony-menu, .evolution-panel, .codex, .unit-panel");
       const panelRect = panel.getBoundingClientRect();
       if (!helpTooltipTarget.getClientRects().length || rect.bottom <= panelRect.top || rect.top >= panelRect.bottom) {
         hideHelpTooltip();
         return;
       }
+      const right = window.innerWidth - 10;
+      helpTooltip.style.maxWidth = Math.max(0, right - 10) + "px";
       const width = helpTooltip.offsetWidth;
-      const left = rect.right + 8 + width <= window.innerWidth - 10 ? rect.right + 8 : rect.left - width - 8;
-      helpTooltip.style.left = clamp(left, 10, Math.max(10, window.innerWidth - width - 10)) + "px";
-      helpTooltip.style.top = clamp(rect.top, 10, Math.max(10, window.innerHeight - helpTooltip.offsetHeight - 10)) + "px";
+      const left = rect.right + 8 + width <= right ? rect.right + 8 : rect.left - width - 8;
+      const x = clamp(left, 10, Math.max(10, right - width));
+      let top = clamp(rect.top, 10, Math.max(10, window.innerHeight - helpTooltip.offsetHeight - 10));
+      const notifications = discoveryToasts.childElementCount ? discoveryToasts.getBoundingClientRect() : null;
+      if (notifications && x + width > notifications.left && x < notifications.right &&
+          top + helpTooltip.offsetHeight > notifications.top && top < notifications.bottom) {
+        top = Math.max(10, notifications.top - helpTooltip.offsetHeight - 12);
+      }
+      helpTooltip.style.left = x + "px";
+      helpTooltip.style.top = top + "px";
     }
 
     function setEvolutionText(element, text) {
@@ -134,12 +145,11 @@
       });
       button.addEventListener("focus", () => showHelpTooltip(button));
       button.addEventListener("blur", hideHelpTooltip);
-      button.addEventListener("click", () => showHelpTooltip(button));
+      button.addEventListener("click", hideHelpTooltip);
     });
     document.addEventListener("pointerdown", (event) => {
       if (!event.target.closest("[data-help]")) hideHelpTooltip();
     });
-    const birthCostOutput = document.getElementById("birth-cost");
     const foodProgressFill = document.getElementById("food-progress-fill");
     const evolutionPointsOutput = document.getElementById("evolution-points");
     const grassGround = new Image();
@@ -187,7 +197,7 @@
     ].map(([type, source, crop]) => {
       const sprite = new Image();
       sprite.src = assetSource(source);
-      return [type, { sprite, crop }];
+      return [type, { sprite, crop: Spawner.imageRegion(source, crop) }];
     }));
     const foodIdle = { smooth: true, frameSize: 1024, frameCount: 1, frameMs: 50,
       restMs: 11800, breathMs: 6200, ready: Promise.resolve(), decodeError: null };
@@ -227,12 +237,34 @@
       sprite.src = assetSource(path);
       return [tribe, { sprite, width, height, scale: 1 }];
     }));
+    const unitAnimationSheets = new Map(Object.entries(Spawner.UNIT_ANIMATIONS).map(([tribe, animations]) => [tribe,
+      new Map(Object.entries({ ...animations, death: Spawner.AGENT_DEATH_ANIMATIONS[tribe] }).map(([action, animation]) => {
+        const sprite = combatSheets.get(tribe)?.[action] || (action === "walk" ? agentMovementSheets.get(tribe)?.sprite : null) || new Image();
+        sprite.src = assetSource(animation.image);
+        return [action, { animation, sprite, scale: 1 }];
+      }))]));
+    const unitAnimationReady = new Map();
+    const sproutCombatMounts = new Map();
+    const sproutDecompositionSheets = new Map(Object.entries(Spawner.SPROUT_DECOMPOSITION_ANIMATIONS).map(([name, animation]) => {
+      const sprite = new Image();
+      sprite.src = assetSource(animation.image);
+      return [name, { animation, sprite, scale: 1 }];
+    }));
+    const creatureIdleSheets = new Map(Object.entries(Spawner.CREATURE_IDLE_ANIMATIONS).map(([species, animation]) => {
+      const sprite = new Image();
+      sprite.src = assetSource(animation.image);
+      return [species, { animation, sprite, scale: 1 }];
+    }));
     const attackSheet = new Image();
     attackSheet.src = assetSource(AGENT_ATTACK_ASSET);
-    const agentDeathSheet = new Image();
-    agentDeathSheet.src = assetSource(AGENT_DEATH_ANIMATION.image);
     const agentSpiritSprite = new Image();
     agentSpiritSprite.src = assetSource("DesignAssets/Effects/Lifespan/spirit-flame.png");
+    const sporeBirthSheet = new Image();
+    sporeBirthSheet.src = assetSource(Spawner.SPORE_BIRTH_ANIMATION.image);
+    const sporeBirthNest = new Image();
+    sporeBirthNest.src = assetSource(Spawner.SPORE_BIRTH_ANIMATION.nest);
+    const sporeBirthFrames = new Map();
+    let sporeBirthReady = null;
     const springBirthSheet = new Image();
     springBirthSheet.src = assetSource(SPRING_BIRTH_ANIMATION.image);
     const pebbleBirthSheet = new Image();
@@ -274,7 +306,8 @@
       ["feet-2", assetSource("DesignAssets/Units/Parts/feet-2.png")],
       ["antenna-1", assetSource("DesignAssets/Units/Parts/antenna-1.png")],
       ["antenna-2", assetSource("DesignAssets/Units/Parts/antenna-2.png")],
-      ["lifespan-1", assetSource("DesignAssets/Units/Parts/lifespan-1.png")]
+      ["lifespan-1", assetSource("DesignAssets/Units/Parts/lifespan-1.png")],
+      ["butchery", assetSource(Spawner.SPROUT_DECOMPOSITION_PART)]
     ].map(([key, source]) => {
       const part = new Image();
       part.src = source;
@@ -294,6 +327,12 @@
       ...resourceCarrySprites.values(), ...agentParts.values(), ...agentBaseParts.values(),
       ...[...burrowAppearances.values()].map(appearance => appearance.sprite)].map(part => part.decode()));
 
+    await Promise.all([...Spawner.PLAYER_TRIBES.map(prepareUnitAnimationSheets),
+      ...[...sproutDecompositionSheets.values()].map(entry => entry.sprite.decode()), ...[...creatureIdleSheets.values()].map(async entry => {
+      await entry.sprite.decode();
+      const bounds = tribeArt.bounds(entry.sprite, entry.animation.frameSize);
+      entry.scale = entry.animation.frameSize / 512 * 480 / Math.max(bounds.width, bounds.height);
+    })]);
     for (const [type, sprite] of resourceCarrySprites) resourceCarryBounds.set(type, tribeArt.bounds(sprite, false));
 
     for (const index of new Set(Object.values(Spawner.BEETLE_ANIMATIONS).flatMap(animation => animation.frames))) {
@@ -319,20 +358,11 @@
       agentSpriteSet.add(frame);
     }
 
-    for (const animation of resourceHarvestSprites.values()) {
+    await Promise.all([...resourceHarvestSprites.values()].map(async animation => {
       animation.frames = new Map();
-      animation.sprite.decode().then(() => {
-        for (const index of [0, animation.settleFrame]) {
-          const frame = document.createElement("canvas");
-          frame.width = animation.frameSize;
-          frame.height = animation.frameSize;
-          frame.getContext("2d").drawImage(animation.sprite, index % animation.columns * animation.frameSize,
-            Math.floor(index / animation.columns) * animation.frameSize, animation.frameSize, animation.frameSize,
-            0, 0, animation.frameSize, animation.frameSize);
-          animation.frames.set(index, frame);
-        }
-      }).catch(() => {});
-    }
+      await prepareAnimationFrames(animation.sprite, animation.frameSize, animation.columns,
+        animation.frameCount, animation.frameSize).then(frames => { animation.frames = frames; }).catch(() => {});
+    }));
 
     await Promise.all(colonyAppearances.map(initializeColonyLight));
 
@@ -383,10 +413,12 @@
       ) || null;
     }
 
-    const ZOOM_LAYERS = [144, 36, 8, null];
+    const ZOOM_LAYERS = [288, 144, 36, 8, null];
+    const ZOOM_STEPS_PER_LAYER = 4;
+    const INITIAL_ZOOM_LAYER = 1;
     const MIN_ZOOM = 0.1;
-    const INITIAL_ZOOM = ZOOM_LAYERS[0];
-    const MAX_ZOOM = INITIAL_ZOOM;
+    const INITIAL_ZOOM = ZOOM_LAYERS[INITIAL_ZOOM_LAYER];
+    const MAX_ZOOM = ZOOM_LAYERS[0];
     const viewport = { width: 0, height: 0, pixelRatio: 0 };
     const TERRAIN_COLORS = {
       land: "#171d1b",
@@ -454,13 +486,14 @@
         x: COLONY_CENTER.x,
         y: COLONY_CENTER.y,
         zoom: INITIAL_ZOOM,
-        layer: 0,
+        layer: INITIAL_ZOOM_LAYER,
         followAgentId: null
       },
       simSeconds: 0,
       lastFrame: performance.now(),
       flashes: [],
       colonyFood: 0,
+      ending: null,
       evolutionPoints: 0,
       resourceInventory: {},
       explored: new Set(), visible: new Set(), markers: [],
@@ -610,7 +643,7 @@
       ctx.stroke();
     }
 
-    function updateTerrainRendering(seed) {
+    function updateTerrainRendering(seed, prepared) {
       const rendering = terrainRendering;
       rendering.key = null;
       rendering.phase = (seed >>> 0) % 4096 * 0.013;
@@ -623,6 +656,11 @@
       rendering.slots.fill(-1);
       rendering.edges.fill(0);
       rendering.types.set(worldMap.terrain);
+      if (prepared) {
+        rendering.phase = prepared.phase;
+        rendering.edges.set(prepared.edges);
+        return;
+      }
       for (let y = 0; y < WORLD_SIZE; y++) for (let x = 0; x < WORLD_SIZE; x++) {
         const index = y * WORLD_SIZE + x;
         for (let oy = -1; oy <= 1; oy++) for (let ox = -1; ox <= 1; ox++) {
@@ -784,7 +822,9 @@
     }
 
     function buildTerrainImages() {
+      let loadGrounds;
       self.onmessage = async event => {
+        if (event.data.type === "grounds") { loadGrounds(event.data.grounds); return; }
         const data = event.data, rendering = data.rendering, records = [];
         let database = null, cached = null, cachedImages = false;
         async function transaction(mode, action) {
@@ -822,18 +862,21 @@
           }
         }
         try {
-          let chunks;
-          if (data.layer === "forest") {
-            const spriteSurface = new OffscreenCanvas(data.sprite.width, data.sprite.height);
-            const spriteContext = spriteSurface.getContext("2d");
-            spriteContext.drawImage(data.sprite, 0, 0);
-            chunks = [spriteContext.getImageData(0, 0, spriteSurface.width, spriteSurface.height).data];
-          } else chunks = [Uint8Array.from(rendering.colors.flat()), ...rendering.grounds.filter(Boolean)];
-          const bytes = new Uint8Array(chunks.reduce((sum, chunk) => sum + chunk.length, 0));
-          let offset = 0;
-          for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.length; }
-          const digest = new Uint8Array(await crypto.subtle.digest("SHA-256", bytes));
-          data.key += ":" + [...digest].map(value => value.toString(16).padStart(2, "0")).join("");
+          if (data.assetKey) data.key += ":" + data.assetKey;
+          else {
+            let chunks;
+            if (data.layer === "forest") {
+              const spriteSurface = new OffscreenCanvas(data.sprite.width, data.sprite.height);
+              const spriteContext = spriteSurface.getContext("2d");
+              spriteContext.drawImage(data.sprite, 0, 0);
+              chunks = [spriteContext.getImageData(0, 0, spriteSurface.width, spriteSurface.height).data];
+            } else chunks = [Uint8Array.from(rendering.colors.flat()), ...rendering.grounds.filter(Boolean)];
+            const bytes = new Uint8Array(chunks.reduce((sum, chunk) => sum + chunk.length, 0));
+            let offset = 0;
+            for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.length; }
+            const digest = new Uint8Array(await crypto.subtle.digest("SHA-256", bytes));
+            data.key += ":" + [...digest].map(value => value.toString(16).padStart(2, "0")).join("");
+          }
           try {
             database = await new Promise((resolve, reject) => {
               const request = indexedDB.open("spawner-rendering", 1);
@@ -860,16 +903,20 @@
                   if (failed) throw failed.reason;
                 }
                 for (const item of decoded) postMessage(item.message, item.transfer);
-                postMessage({ type: "done", cached: true });
+                postMessage({ type: "done", cached: true, key: data.key });
                 return;
               } catch {
                 for (const item of decoded) for (const image of item.transfer) image.close();
               }
             }
-          } catch { database?.close(); database = null; }
+          } catch (error) { database?.close(); database = null; data.cacheError = error.message; }
 
           if (data.layer === "terrain") {
             postMessage({ type: "status", cached: false });
+            if (data.assetKey) rendering.grounds = await new Promise(resolve => {
+              loadGrounds = resolve;
+              postMessage({ type: "grounds" });
+            });
             const overview = new OffscreenCanvas(1280, 1280);
             overview.getContext("2d").putImageData(createTerrainPatch(rendering, 0, 0, 320, 320, 4, false).colors, 0, 0);
             await emit({ type: "overview" }, { image: overview });
@@ -970,12 +1017,9 @@
           if (database) {
             try {
               await transaction("readwrite", store => store.put({ key: data.key, layer: data.layer, savedAt: Date.now(), records: records.filter(Boolean) }));
-              const maps = (await transaction("readonly", store => store.getAll())).filter(map => map.layer === data.layer);
-              maps.sort((a, b) => b.savedAt - a.savedAt);
-              for (const map of maps.slice(2)) await transaction("readwrite", store => store.delete(map.key));
-            } catch {}
+            } catch (error) { data.cacheError = error.message; }
           }
-          postMessage({ type: "done", cached: cachedImages, key: data.key });
+          postMessage({ type: "done", cached: cachedImages, key: data.key, cacheError: data.cacheError });
         } catch (error) { postMessage({ type: "error", message: error.message }); }
         finally { data.sprite?.close(); database?.close(); }
       };
@@ -984,13 +1028,41 @@
     const terrainWorkerSource = createTerrainSamples.toString() + "\n" + createTerrainPatch.toString() + "\n" + drawForestTree.toString() +
       "\n" + buildTerrainAtlas.toString() + "\n(" + buildTerrainImages.toString() + ")();";
 
-    function prepareAgentRendering() {
+    async function prepareAnimationFrames(sprite, frameSize, columns, frameCount, resolution) {
+      await sprite.decode();
+      const source = await createImageBitmap(sprite);
+      const frames = new Map();
+      try {
+        for (let index = 0; index < frameCount; index++) {
+          const frame = await createImageBitmap(source, index % columns * frameSize,
+            Math.floor(index / columns) * frameSize, frameSize, frameSize,
+            { resizeWidth: resolution, resizeHeight: resolution, resizeQuality: "high" });
+          frames.set(index, frame);
+        }
+      } finally { source.close(); }
+      return frames;
+    }
+
+    async function prepareAgentRendering() {
+      const tribes = new Set([...state.agents, ...state.rivals].filter(agent => !agent.species).map(agent => agent.tribe || "bean"));
+      await Promise.all([...tribes].map(async tribe => {
+        for (const entry of unitAnimationSheets.get(tribe).values()) {
+          if (entry.frames) continue;
+          const animation = entry.animation;
+          entry.frames = await prepareAnimationFrames(entry.sprite, animation.frameSize,
+            animation.columns, animation.frameCount, animation.frameSize);
+        }
+      }));
       for (const agent of [...state.agents, ...state.rivals]) {
         if (agent.species) continue;
         const attributes = agent.appearanceAttributes || agent.attributes;
         for (const layer of agentSpriteLayers(attributes)) selectionContour(agentSprite(agent, layer), null);
       }
-      for (let frame = 0; frame < 3; frame++) treeParts(frame);
+      const sprite = forest.bitmap || forest.sprite, frameSize = sprite.height || sprite.naturalHeight;
+      for (let frame = 0; frame < 3; frame++) {
+        treeParts(frame);
+        selectionContour(sprite, { owner: forest, size: frameSize, index: frame, x: frame * frameSize, y: 0 });
+      }
       const surface = document.createElement("canvas");
       surface.width = surface.height = 64;
       const context = surface.getContext("2d");
@@ -1021,8 +1093,98 @@
       return regions;
     }
 
+    function openRenderingStorage() {
+      return new Promise((resolve, reject) => {
+        const request = indexedDB.open("spawner-rendering", 1);
+        request.onupgradeneeded = () => request.result.createObjectStore("maps", { keyPath: "key" });
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+        request.onblocked = () => reject(new Error("지형 캐시를 열지 못했습니다."));
+      });
+    }
+
+    function worldRenderingKey(world, colonies) {
+      const assets = Spawner.renderingAssets;
+      if (!assets) return null;
+      return "world-v1:" + (world.roomId || world.seed) + ":" + world.seed + ":" + world.generationVersion + ":" +
+        [assets.terrain, assets.forest, assets.hazards].join(":") + ":" + colonies.map(colony => colony.x + "," + colony.y).join(";");
+    }
+
+    function worldRenderingMatches(layout, world) {
+      if (!layout || layout.regions?.length !== 400 || !Array.isArray(layout.trees) ||
+          layout.rendering?.edges?.length !== WORLD_SIZE * WORLD_SIZE || !(layout.hazardImage instanceof Blob)) return false;
+      for (const name of ["terrain", "hazards", "treeCells"]) {
+        const cells = world[name] || [];
+        if (!layout[name] || layout[name].length !== cells.length || !layout[name].every((value, index) => value === cells[index])) return false;
+      }
+      return JSON.stringify(layout.resourceCells) === JSON.stringify(world.resourceCells || []);
+    }
+
+    async function readWorldRendering(key, world) {
+      if (forest.layout?.key === key && worldRenderingMatches(forest.layout, world)) return forest.layout;
+      let database;
+      try {
+        database = await openRenderingStorage();
+        const layout = await new Promise((resolve, reject) => {
+          const task = database.transaction("maps", "readonly"), request = task.objectStore("maps").get(key);
+          task.oncomplete = () => resolve(request.result);
+          task.onabort = () => reject(task.error);
+          task.onerror = () => {};
+        });
+        return worldRenderingMatches(layout, world) ? layout : null;
+      } catch { return null; }
+      finally { database?.close(); }
+    }
+
+    async function restoreWorldRendering(layout) {
+      const image = await createImageBitmap(layout.hazardImage);
+      resetForestRendering();
+      forest.trees = layout.trees;
+      for (const tree of forest.trees) forest.cells.set(tree.column + "," + tree.row, tree);
+      hazardCells.length = layout.hazardCells.length;
+      for (let index = 0; index < hazardCells.length; index++) hazardCells[index] = layout.hazardCells[index];
+      hazardGroundTiles.clear();
+      const context = hazardCanvas.getContext("2d");
+      context.clearRect(0, 0, hazardCanvas.width, hazardCanvas.height);
+      context.drawImage(image, 0, 0);
+      image.close();
+      forest.hazardImage = layout.hazardImage;
+    }
+
+    function worldRenderingRecord() {
+      return { key: forest.layoutKey, layer: "world", terrain: worldMap.terrain, hazards: worldMap.hazards,
+        treeCells: worldMap.treeCells ? worldMap.treeCells.slice() : new Uint8Array(), resourceCells: forest.resourceCells,
+        rendering: { key: terrainRendering.key, phase: terrainRendering.phase, edges: terrainRendering.edges },
+        trees: [...forest.cells.values()], regions: [...forest.imageRegions.values()],
+        hazardCells, hazardImage: forest.hazardImage };
+    }
+
+    function reportRenderingCacheError(error) {
+      terrainRendering.cacheError = "지형 캐시를 저장하지 못했습니다. 다음 접속에서 다시 준비할 수 있습니다. " + error.message;
+      setEvolutionText(connectionStatus, terrainRendering.cacheError);
+      connectionStatus.hidden = false;
+    }
+
+    async function saveWorldRendering() {
+      if (!forest.layoutKey) return;
+      if (!forest.hazardImage) forest.hazardImage = await new Promise(resolve => hazardCanvas.toBlob(resolve, "image/png"));
+      if (!forest.hazardImage) throw new Error("위험 지형 이미지를 저장하지 못했습니다.");
+      const layout = worldRenderingRecord(), database = await openRenderingStorage();
+      try {
+        await new Promise((resolve, reject) => {
+          const task = database.transaction("maps", "readwrite");
+          task.objectStore("maps").put(layout);
+          task.oncomplete = resolve;
+          task.onabort = () => reject(task.error);
+          task.onerror = () => {};
+        });
+        forest.layout = layout;
+      } finally { database.close(); }
+    }
+
     async function prepareWorldRendering(world, colonies) {
       terrainRendering.ready = false;
+      terrainRendering.cacheError = null;
       await forest.cacheWrite;
       forest.seed = world.seed;
       forest.colonies = colonies;
@@ -1032,20 +1194,32 @@
       worldMap.hazards = Uint8Array.from(world.hazards || []);
       worldMap.burrows = world.burrows || [];
       worldMap.treeCells = world.treeCells ? Uint8Array.from(world.treeCells) : null;
-      updateForest(world.seed, world.resourceCells);
-      updateHazards(world.seed);
-      let key = world.seed >>> 0;
-      for (const type of worldMap.terrain) key = Math.imul(key ^ type, 16777619) >>> 0;
+      forest.layoutKey = worldRenderingKey(world, colonies);
+      forest.resourceCells = world.resourceCells || [];
+      let layout = forest.layoutKey ? await readWorldRendering(forest.layoutKey, world) : null;
+      if (layout) {
+        try { await restoreWorldRendering(layout); }
+        catch { layout = null; }
+      }
+      if (!layout) {
+        updateForest(world.seed, world.resourceCells);
+        updateHazards(world.seed);
+        forest.hazardImage = null;
+      }
+      let key = layout ? layout.rendering.key : world.seed >>> 0;
+      if (!layout) for (const type of worldMap.terrain) key = Math.imul(key ^ type, 16777619) >>> 0;
       const trees = forest.trees.filter(tree => !colonies.some(colony => {
         return tree.column >= colony.x && tree.column < colony.x + COLONY_SIZE &&
           tree.row >= colony.y && tree.row < colony.y + COLONY_SIZE;
       }));
-      const regions = forestImageRegions(trees, world.seed);
+      const regions = layout ? layout.regions : forestImageRegions(trees, world.seed);
+      forest.imageRegions = new Map(regions.map(region => [region.index, region]));
       const changedRegions = regions.filter(region => terrainRendering.forestKeys.get(region.index) !== region.key ||
         !terrainRendering.forest.has(region.index));
       const terrainReady = terrainRendering.key === key && terrainRendering.overview && terrainRendering.medium.size === 400;
       const forestReady = changedRegions.length === 0;
       if (terrainReady && forestReady) {
+        if (!layout) await saveWorldRendering().catch(reportRenderingCacheError);
         terrainRendering.ready = true;
         updateRoomCreationProgress(100);
         return;
@@ -1065,16 +1239,17 @@
           let data;
           if (layer === "terrain") {
             updateRoomCreationProgress(45);
-            updateTerrainRendering(world.seed);
-            const grounds = TERRAIN_TYPES.map((type, index) => terrainGroundPixels(index));
-            data = { layer, key: "terrain-64-v4:" + world.seed + ":" + key,
+            updateTerrainRendering(world.seed, layout?.rendering);
+            const grounds = Spawner.renderingAssets ? null : TERRAIN_TYPES.map((type, index) => terrainGroundPixels(index));
+            data = { layer, key: "terrain-64-v4:" + world.seed + ":" + key, assetKey: Spawner.renderingAssets?.terrain,
               rendering: { types: terrainRendering.types, edges: terrainRendering.edges, colors: terrainRendering.colors,
                 grounds, phase: terrainRendering.phase, resolution: terrainRendering.resolution } };
             updateRoomCreationProgress(50);
           } else {
             if (forest.bitmap) forest.bitmap.close();
             forest.bitmap = await createImageBitmap(forest.sprite);
-            data = { layer, key: "forest-16-v2:" + world.seed, regions: changedRegions, sprite: await createImageBitmap(forest.bitmap) };
+            data = { layer, key: "forest-16-v2:" + world.seed + (world.roomId ? ":" + world.roomId : ""), assetKey: Spawner.renderingAssets?.forest,
+              regions: changedRegions, sprite: await createImageBitmap(forest.bitmap) };
             updateRoomCreationProgress(90);
           }
           await new Promise((resolve, reject) => {
@@ -1084,6 +1259,8 @@
               if (message.type === "status") {
                 action = message.cached ? "불러오는 중…" : "생성 중…";
                 setEvolutionText(welcomeStatus, label + " 이미지 " + action);
+              } else if (message.type === "grounds") {
+                worker.postMessage({ type: "grounds", grounds: TERRAIN_TYPES.map((type, index) => terrainGroundPixels(index)) });
               } else if (message.type === "overview") {
                 terrainRendering.overview = message.image;
                 updateRoomCreationProgress(52);
@@ -1102,6 +1279,7 @@
                 updateRoomCreationProgress(90 + terrainRendering.forest.size / 400 * 9);
               } else if (message.type === "done") {
                 terrainRendering.cached &&= message.cached;
+                if (message.cacheError) reportRenderingCacheError(new Error(message.cacheError));
                 if (layer === "forest") forest.cacheKey = message.key;
                 resolve();
               } else if (message.type === "error") reject(new Error(message.message));
@@ -1111,6 +1289,7 @@
           if (layer === "terrain") terrainRendering.key = key;
         }
       } finally { worker.terminate(); URL.revokeObjectURL(url); }
+      if (!layout) await saveWorldRendering().catch(reportRenderingCacheError);
       terrainRendering.ready = true;
       updateRoomCreationProgress(100);
     }
@@ -1140,13 +1319,15 @@
     function saveForestRegion(index, key, surface) {
       const cacheKey = forest.cacheKey;
       if (!cacheKey) return;
+      const preparation = Promise.resolve().then(() => forest.layoutKey ? worldRenderingRecord() : null);
       const image = new Promise(resolve => {
         try { surface.toBlob(resolve, "image/png"); }
         catch { resolve(null); }
       });
       forest.cacheWrite = forest.cacheWrite.then(async () => {
         const blob = await image;
-        if (!blob) return;
+        if (!blob) throw new Error("변경된 숲 이미지를 저장하지 못했습니다.");
+        const layout = await preparation;
         const database = await new Promise((resolve, reject) => {
           const request = indexedDB.open("spawner-rendering", 1);
           request.onupgradeneeded = () => request.result.createObjectStore("maps", { keyPath: "key" });
@@ -1162,13 +1343,15 @@
               const records = new Map((request.result?.records || []).map(record => [record.index, record]));
               records.set(index, { type: "forest", index, key, image: blob });
               store.put({ key: cacheKey, layer: "forest", savedAt: Date.now(), records: [...records.values()] });
+              if (layout) store.put(layout);
             };
             task.oncomplete = resolve;
             task.onabort = () => reject(task.error);
             task.onerror = () => {};
           });
+          if (layout) forest.layout = layout;
         } finally { database.close(); }
-      }).catch(() => {});
+      }).catch(reportRenderingCacheError);
     }
 
     function updateForestRegion(column, row) {
@@ -1193,6 +1376,7 @@
         }
       }
       const key = forestRegionKey(trees, forest.seed);
+      forest.imageRegions.set(index, { index, trees, key });
       terrainRendering.forest.get(index)?.close?.();
       terrainRendering.forest.set(index, surface);
       terrainRendering.forestKeys.set(index, key);
@@ -1335,8 +1519,8 @@
       }
     }
 
-    function updateForest(seed, resourceCells) {
-      forest.trees.length = 0;
+    function resetForestRendering() {
+      forest.trees = [];
       forest.cells.clear();
       forest.revealed.clear();
       forest.regions.clear();
@@ -1347,6 +1531,10 @@
       forest.steps.clear();
       forest.shakes.clear();
       forest.time = null;
+    }
+
+    function updateForest(seed, resourceCells) {
+      resetForestRendering();
       const clearings = new Set((resourceCells || []).map(([x, y]) => x + "," + y));
       for (let row = 0; row < WORLD_SIZE; row++) {
         for (let column = 0; column < WORLD_SIZE; column++) {
@@ -1553,6 +1741,8 @@
       const bottomRight = screenToWorld(viewport.width, viewport.height);
       const objects = [];
       const harvesters = foodHarvestStarts();
+      const movementAgents = selectedMovementAgents();
+      const movementVisible = state.selection?.kind === "agent" || movementAgents.length > 0;
       for (const entry of colonyEntries) objects.push({ kind: "colony", depth: entry.y + 3.3, target: entry });
       const left = Math.max(0, Math.floor(topLeft.x - 1));
       const top = Math.max(0, Math.floor(topLeft.y - 1));
@@ -1614,33 +1804,43 @@
         if (object.kind === "tree") drawTree(object.target);
         else if (object.kind === "treeDetail") drawTreeDetail(object.target);
         else if (object.kind === "colony") drawColony(now, object.target);
-        else if (object.kind === "agent") drawAgent(now, object.target);
+        else if (object.kind === "agent") {
+          if (!movementVisible) drawAgent(now, object.target);
+        }
         else if (object.kind === "burrow") drawBurrow(object.target);
         else drawFoodSpot(now, object.target, harvesters.get(object.target.x + "," + object.target.y));
+      }
+      if (movementVisible) {
+        for (const agent of movementAgents) drawSelectedAgentMovement(agent);
+        for (const object of objects) if (object.kind === "agent") drawAgent(now, object.target);
       }
     }
 
     const travelTraceStyles = {
       bean: {
-        width: 1, distantAlpha: 0.18, color: "#8e7b58", grainAlpha: 1,
-        grains: ["#273323", "#a18b5d"],
-        layers: [{ width: 1.7, alpha: 0.025, color: "#6e6344" }, { width: 1, alpha: 0.075, color: "#6e6344" }]
+        width: 1.3, distantAlpha: 0.6, color: "#725437", edgeColor: "#d2ba85", edgeAlpha: 0.32, grainAlpha: 1.6,
+        grains: ["#352b1d", "#b29a69"],
+        layers: [
+          { width: 1.8, alpha: 0.05, color: "#b59a69" },
+          { width: 1.3, alpha: 0.4, color: "#30281b" },
+          { width: 0.8, alpha: 0.16, color: "#80613e" }
+        ]
       },
       pebble: {
-        width: 1.05, distantAlpha: 0.58, color: "#252419", furrow: true
+        width: 1.15, distantAlpha: 0.68, color: "#252419", edgeColor: "#c7b28a", edgeAlpha: 0.38, furrow: true
       },
       spore: {
-        width: 1.05, spores: true,
-        layers: [{ width: 1.5, alpha: 0.012, color: "#7aab6d" }, { width: 0.8, alpha: 0.015, color: "#a6c981" }]
+        width: 1.15, distantAlpha: 0.5, color: "#c8efad", edgeColor: "#203d30", edgeAlpha: 0.4, spores: true,
+        layers: [{ width: 1.6, alpha: 0.025, color: "#294b35" }, { width: 0.8, alpha: 0.04, color: "#b7d99b" }]
       },
       spring: {
-        width: 2.2, distantAlpha: 0.48, color: "#14342b", grainAlpha: 1.4, wet: true,
-        grains: ["#b8e2d6", "#5b9a86"],
+        width: 2.2, distantAlpha: 0.64, color: "#14342b", edgeColor: "#9dcbb9", edgeAlpha: 0.32, grainAlpha: 1.6, wet: true,
+        grains: ["#cbeee0", "#68af98"],
         layers: [
-          { width: 2.8, alpha: 0.14, color: "#122d24" },
-          { width: 2, alpha: 0.21, color: "#183a31" },
-          { width: 1.35, alpha: 0.29, color: "#23483e" },
-          { width: 0.65, alpha: 0.05, color: "#83afa2", offsetY: -0.015 }
+          { width: 2.8, alpha: 0.045, color: "#a0c6b3" },
+          { width: 2, alpha: 0.3, color: "#183a31" },
+          { width: 1.35, alpha: 0.38, color: "#23483e" },
+          { width: 0.65, alpha: 0.07, color: "#a9d9c7", offsetY: -0.015 }
         ]
       }
     };
@@ -1650,7 +1850,7 @@
       const length = Math.hypot(to.x - from.x, to.y - from.y);
       const dx = (to.x - from.x) / length, dy = (to.y - from.y) / length;
       for (const [layerIndex, layer] of [
-        { width: 1.5, alpha: 0.13, color: "#705a38" },
+        { width: 1.7, alpha: 0.12, color: "#c7b28a" },
         { width: 1, alpha: 0.48, color: "#2b2519" },
         { width: 0.58, alpha: 0.74, color: "#0d110b" }
       ].entries()) {
@@ -1748,18 +1948,26 @@
       for (const footprint of state.footprints.values()) {
         if (footprint.x < topLeft.x - 1 || footprint.x > bottomRight.x + 1 ||
           footprint.y < topLeft.y - 1 || footprint.y > bottomRight.y + 1) continue;
+        const traffic = clamp(Math.log2(Math.max(1, footprint.visits || 1)) / 5, 0, 1);
         const to = groundPoint(footprint.x, footprint.y);
         for (const mark of footprint.marks) {
           const age = state.simSeconds - mark.at;
           if (age < 0 || age >= state.footprintLifetime) continue;
-          const style = travelTraceStyles[mark.tribe] || travelTraceStyles.bean;
-          const fade = clamp(age / 0.1, 0, 1) * (1 - age / state.footprintLifetime);
+          const style = travelTraceStyles[mark.tribe || state.tribe] || travelTraceStyles.bean;
+          const fade = clamp(age / 0.1, 0, 1) * (1 - age / state.footprintLifetime) * (0.65 + traffic * 0.35);
           const from = groundPoint(footprint.x - mark.dx, footprint.y - mark.dy);
           const curl = (hashNoise(mark.seed, 1) - 0.5) * cell * 0.12;
-          const width = cell * (0.12 + hashNoise(mark.seed, 2) * 0.06) * style.width;
+          const width = cell * (0.12 + hashNoise(mark.seed, 2) * 0.06) * style.width * (1 + traffic * 0.5);
           const controlX = (from.x + to.x) / 2 - mark.dy * curl;
           const controlY = (from.y + to.y) / 2 + mark.dx * curl;
-          if (cell < 8 && !style.spores) {
+          if (cell < 8) {
+            ctx.globalAlpha = fade * style.edgeAlpha;
+            ctx.strokeStyle = style.edgeColor;
+            ctx.lineWidth = Math.max(1.2, width * 1.8);
+            ctx.beginPath();
+            ctx.moveTo(from.x, from.y);
+            ctx.quadraticCurveTo(controlX, controlY, to.x, to.y);
+            ctx.stroke();
             ctx.globalAlpha = fade * style.distantAlpha;
             ctx.strokeStyle = style.color;
             ctx.lineWidth = Math.max(0.65, width);
@@ -1767,6 +1975,7 @@
             ctx.moveTo(from.x, from.y);
             ctx.quadraticCurveTo(controlX, controlY, to.x, to.y);
             ctx.stroke();
+            if (style.spores) drawTravelSpores(mark, from, to, width, curl, age, fade);
             continue;
           }
           if (style.furrow) {
@@ -1837,7 +2046,6 @@
     function selectObject(kind, target) {
       state.selection = target ? { kind, target } : null;
       if (kind !== "colony" || target?.id !== connection.colonyId) colonyMenu.hidden = true;
-      selectionTerrain.hidden = !selectionTerrainCell() || kind === "terrain" || kind === "hazard";
       state.camera.followAgentId = kind === "agent" && target ? target.id : null;
       if (state.camera.followAgentId !== null) focusAgent(target);
       else if (cameraTransition?.agentId != null) stopCameraTransition();
@@ -1851,7 +2059,6 @@
     }
 
     function updateSelection() {
-      selectionTerrain.hidden = !selectionTerrainCell() || state.selection?.kind === "terrain" || state.selection?.kind === "hazard";
       const selection = state.selection;
       if (!selection) return;
       const exists = selection.kind === "terrain" ? !!selectionTerrainCell() :
@@ -1870,10 +2077,14 @@
     function createColonyAppearance(spriteSource) {
       const sprite = new Image();
       sprite.src = spriteSource;
-      const animation = { sheet: sprite, frameSize: 2048, columns: 4, frameCount: 16, periodMs: 3960,
+      const animation = { sheet: sprite, frameSize: 512, columns: 4, frameCount: 16, periodMs: 3960,
         order: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0],
         durationsMs: [231,175,124,105,96,89,86,84,84,86,89,96,105,124,175,462,175,124,105,96,89,86,84,84,86,89,96,105,124,175,231] };
       return { sprite, animation, scale: 1 };
+    }
+
+    function colonyInactive(entry) {
+      return entry.nestHealth === 0 || !!state.ending && entry.id === connection.colonyId;
     }
 
     function colonyAppearance(entry) {
@@ -2006,10 +2217,9 @@
 
     function selectionContour(sprite, frame) {
       const key = frame ? frame.owner : sprite;
-      const isAgent = agentSpriteSet.has(sprite);
       const sourceWidth = frame ? frame.size : sprite.naturalWidth || sprite.width;
       const sourceHeight = frame ? frame.size : sprite.naturalHeight || sprite.height;
-      const scale = isAgent ? Math.min(1, 512 / Math.max(sourceWidth, sourceHeight)) : 1;
+      const scale = Math.min(1, 512 / Math.max(sourceWidth, sourceHeight));
       const sizeX = Math.max(1, Math.ceil(sourceWidth * scale));
       const sizeY = Math.max(1, Math.ceil(sourceHeight * scale));
       const index = frame ? frame.index : -1;
@@ -2018,17 +2228,18 @@
         const outline = document.createElement("canvas");
         outline.width = sizeX;
         outline.height = sizeY;
-        entry = { canvas: outline, context: outline.getContext("2d"), index: null };
+        entry = { canvas: outline, context: outline.getContext("2d", { willReadFrequently: true }), index: null, contours: new Map() };
         selectionOutlines.set(key, entry);
       }
-      if (entry.index !== index) {
+      if (!entry.contours.has(index)) {
         const context = entry.context;
         context.clearRect(0, 0, sizeX, sizeY);
         if (frame) context.drawImage(sprite, frame.x, frame.y, frame.size, frame.size, 0, 0, sizeX, sizeY);
         else context.drawImage(sprite, 0, 0, sizeX, sizeY);
-        entry.contour = createSelectionContour(entry.canvas);
-        entry.index = index;
+        entry.contours.set(index, createSelectionContour(entry.canvas));
       }
+      entry.contour = entry.contours.get(index);
+      entry.index = index;
       return entry;
     }
 
@@ -2251,11 +2462,16 @@
       ctx.restore();
     }
 
-    const foodMushroomHarvest = {"resolution":1024,"bounds":[0,0,1024,1024],"frameWidth":1024,"frameHeight":1024,"columns":8,"frameCount":8,"frameMs":62.5,"restMs":500,"cacheLimit":8};
+    const mushroomFrameSize = Spawner.imageFrameSize("DesignAssets/Animations/food-mushroom-pile-harvest.png", 1024);
+    const foodMushroomHarvest = { resolution: mushroomFrameSize, bounds: [0, 0, mushroomFrameSize, mushroomFrameSize],
+      frameWidth: mushroomFrameSize, frameHeight: mushroomFrameSize, columns: 8, frameCount: 8, frameMs: 62.5, restMs: 500, cacheLimit: 8 };
     foodMushroomHarvest.sheet = new Image();
     foodMushroomHarvest.sheet.src = assetSource("DesignAssets/Animations/food-mushroom-pile-harvest.png");
     foodMushroomHarvest.frames = new Map();
     await foodMushroomHarvest.sheet.decode();
+    foodMushroomHarvest.cacheLimit = foodMushroomHarvest.columns * Math.floor(foodMushroomHarvest.sheet.naturalHeight / foodMushroomHarvest.frameHeight);
+    foodMushroomHarvest.frames = await prepareAnimationFrames(foodMushroomHarvest.sheet, foodMushroomHarvest.frameWidth,
+      foodMushroomHarvest.columns, foodMushroomHarvest.cacheLimit, Math.min(512, mushroomFrameSize));
     function drawFoodMushroom(count, frameIndex, screen, cell, outlineColor) {
       const animation = foodMushroomHarvest;
       const pose = Math.max(0, frameIndex);
@@ -2621,7 +2837,8 @@
       const cell = state.camera.zoom;
       const size = COLONY_SIZE * cell;
       const appearance = colonyAppearance(entry);
-      const destroyed = entry.nestHealth === 0;
+      const destroyed = colonyInactive(entry);
+      if (!destroyed && entry.tribe === "spore" && drawSporeBirthNest(now, entry)) return;
       const pebbleBirth = !destroyed && entry.tribe === "pebble" && [...state.agents, ...state.rivals].some(agent =>
         agent.health > 0 && agent.birth?.colonyId === entry.id && state.simSeconds >= agent.birth.startedAt &&
         state.simSeconds < agent.birth.startedAt + PEBBLE_BIRTH_ANIMATION.duration);
@@ -2655,7 +2872,7 @@
         for (const agent of [...state.agents, ...state.rivals]) {
           if (agent.birth?.colonyId !== entry.id) continue;
           const age = state.simSeconds - agent.birth.startedAt;
-          if (agent.tribe === "pebble") { receive = 0; continue; }
+          if (agent.tribe === "pebble" || agent.tribe === "spore") { receive = 0; continue; }
           if (agent.tribe === "spring") {
             if (age >= 0 && age < SPRING_BIRTH_ANIMATION.detachAt) receive = 0;
             continue;
@@ -2717,7 +2934,7 @@
     }
 
     function updateAudio() {
-      if (!connection.active || !connection.online || state.camera.layer > 0 || !audio.available()) {
+      if (state.ending || !connection.active || !connection.online || state.camera.layer > 1 || !audio.available()) {
         if (audioTime != null) resetAudio();
         return;
       }
@@ -2753,6 +2970,11 @@
               audio.play("pebble-birth", outlet ? audioVolume(outlet.x, outlet.y) : volume);
             }
             agentAudio.set(agent.id, { birthStartedAt: agent.birth.startedAt, elapsed: birth.elapsed, birthSoundPlayed: played || due });
+            continue;
+          }
+          if (birth.kind === "spore") {
+            if (!firstFrame && birth.elapsed < .2 && previous?.birthStartedAt !== agent.birth.startedAt) audio.play("spore-birth", volume);
+            agentAudio.set(agent.id, { birthStartedAt: agent.birth.startedAt });
             continue;
           }
           if (birth.kind === "spring") {
@@ -2930,6 +3152,19 @@
       const elapsed = Math.max(0, state.simSeconds - birth.startedAt);
       if (elapsed >= agentBirthDuration(agent.tribe)) return null;
       const entry = colonyEntries.find(candidate => candidate.id === birth.colonyId);
+      if (agent.tribe === "spore") {
+        const shape = Spawner.SPORE_BIRTH_ANIMATION;
+        const offset = spread ? agentDisplayOffset(agent) : { x: 0, y: 0 };
+        const targetX = agent.x + offset.x, targetY = agent.y + offset.y;
+        const outlet = entry ? colonyBirthOutlet(entry) : { x: birth.fromX + .5, y: birth.fromY + .5 };
+        const height = AGENT_HEIGHT * (unitAnimationSheets.get("spore")?.get("idle")?.referenceHeight || 219) / 512;
+        const placement = Spawner.sporeBirthPlacement(idleMotion.matches ? shape.duration - .001 : elapsed,
+          outlet, { x: targetX + .5, y: targetY + .5 + AGENT_HEIGHT * .44 }, height);
+        return { kind: "spore", elapsed, frame: placement.frame, scale: placement.scale, seedVisible: false, seedLift: 0,
+          unitVisible: idleMotion.matches || placement.unitVisible, lift: 0, targetX, targetY,
+          x: placement.rootX - .5, y: placement.rootY - .5 - AGENT_HEIGHT * .44,
+          head: { leftRotation: 0, rightRotation: 0, leftScaleX: 1, rightScaleX: 1, leftScaleY: 1, rightScaleY: 1 } };
+      }
       if (agent.tribe === "pebble") {
         const animation = PEBBLE_BIRTH_ANIMATION;
         const outlet = entry ? colonyBirthOutlet(entry) : { x: birth.fromX + .5, y: birth.fromY + .5 };
@@ -3140,7 +3375,7 @@
       const scale = Math.min((strength ? 0.32 : 0.24) * AGENT_HEIGHT / crop.width,
         (strength ? 0.36 : 0.28) * AGENT_HEIGHT / crop.height);
       const width = crop.width * scale, height = crop.height * scale;
-      const lift = appearance.feet ? 24 + appearance.feet * 7 : 0;
+      const lift = agentBodyLift(appearance);
       const tray = (460 - lift - (142 + Math.max(0, strength - 1) * 12) * 0.78 * 0.48) / 512;
       return { x: 0, y: (tray - 0.94) * AGENT_HEIGHT, width, height, crop, pivotY: 1 };
     }
@@ -3342,8 +3577,8 @@
         const phase = walk ? walk.phase + (sign > 0 ? Math.PI : 0) : 0;
         const lift = walk ? Math.max(0, Math.sin(phase)) ** 1.3 * 0.18 * walk.stride : 0;
         const pivotX = (256 + sign * partWidth * 0.25) / 512;
-        const pivotY = (500 - partHeight + partHeight * 0.12) / 512;
-        const bodyPivot = ((460 - 24 - appearance.feet * 7) / 512 - 0.94) * height;
+        const pivotY = 0.94 - partHeight * 0.88 / 512;
+        const bodyPivot = ((460 - agentBodyLift(appearance)) / 512 - 0.94) * height;
         const hipX = x + width * pivotX;
         const hipY = y + height * pivotY - bodyPivot;
         const rotation = walk ? walk.rotation : 0;
@@ -3360,7 +3595,7 @@
 
     function agentBodyPose(agent, now, deliveryPose) {
       const appearance = agent.appearanceAttributes || agent.attributes || {};
-      const lift = appearance.feet ? 24 + appearance.feet * 7 : 0;
+      const lift = agentBodyLift(appearance);
       const elapsed = agent.moveDuration ? state.simSeconds - agent.moveStartedAt : -1;
       const launch = agent.moveDuration ? clamp(elapsed /
         (agent.moveDuration * AGENT_JUMP_PREPARATION), 0, 1) : 0;
@@ -3421,13 +3656,33 @@
       return { leftRotation: flap, rightRotation: -flap, leftScaleY: fold, rightScaleY: fold };
     }
 
+    function drawAgentTail(ctx, agent, x, y, width, height, outlineColor) {
+      const appearance = agent.appearanceAttributes || agent.attributes || {};
+      if ((agent.tribe || "bean") !== "bean" || !appearance.butchery) return;
+      const entry = sproutDecompositionSheets.get("tail");
+      const sprite = entry?.sprite.complete && entry.sprite.naturalWidth ? entry.sprite : agentSprite(agent, "tail");
+      const animation = entry?.animation;
+      const index = sprite === entry?.sprite && !idleMotion.matches ? Spawner.unitAnimationFrame(animation,
+        (state.simSeconds - (agent.animationStartedAt ?? agent.bornAt ?? 0)) * 1000) : 0;
+      const frame = sprite === entry?.sprite ? { owner: sprite, size: animation.frameSize, index,
+        x: index % animation.columns * animation.frameSize, y: Math.floor(index / animation.columns) * animation.frameSize } : null;
+      const lift = agentBodyLift(appearance);
+      ctx.save();
+      ctx.translate(x + width / 2, y - height * lift / 512);
+      ctx.scale(agent.facing < 0 ? -1 : 1, 1);
+      if (outlineColor) drawSelectionOutline(sprite, -width / 2, 0, width, height, frame, outlineColor);
+      else if (frame) ctx.drawImage(sprite, frame.x, frame.y, frame.size, frame.size, -width / 2, 0, width, height);
+      else ctx.drawImage(sprite, -width / 2, 0, width, height);
+      ctx.restore();
+    }
+
     function drawAgentHead(ctx, agent, x, y, width, height, now, outlineColor) {
       const appearance = agent.appearanceAttributes || agent.attributes || {};
       const antenna = appearance.antenna || 0;
       if (antenna) {
         const sprite = agentSprite(agent, "antenna");
         if (!sprite || sprite.complete === false || !(sprite.naturalWidth || sprite.width)) return;
-        const lift = appearance.feet ? 24 + appearance.feet * 7 : 0;
+        const lift = agentBodyLift(appearance);
         const root = (260 - lift) / 512;
         const pose = agentBirthPose(agent, true)?.head || agentHeadPose(agent, now);
         ctx.save();
@@ -3443,7 +3698,7 @@
       const right = agentSprite(agent, "sprout-right");
       const stem = agentSprite(agent, "sprout-stem");
       if (![left, right, ...(stem ? [stem] : [])].every(sprite => sprite && sprite.complete !== false && (sprite.naturalWidth || sprite.width))) return;
-      const lift = appearance.feet ? 24 + appearance.feet * 7 : 0;
+      const lift = agentBodyLift(appearance);
       const root = (110 - lift + 350 * 148.15 / 417) / 512;
       const pivots = [136 + 240 * 133.75 / 286, 136 + 240 * 151.95 / 286];
       const pose = agentBirthPose(agent, true)?.head || agentHeadPose(agent, now);
@@ -3526,6 +3781,10 @@
     }
 
     function drawAgentBirth(ctx, now, agent, birth, topLeft, cell, outlineColor) {
+      if (birth.kind === "spore") {
+        drawSporeBirth(ctx, agent, birth, topLeft, cell, outlineColor);
+        return;
+      }
       if (birth.kind === "pebble") {
         drawPebbleBirth(ctx, now, agent, birth, topLeft, cell, outlineColor);
         return;
@@ -3570,13 +3829,83 @@
           ctx.scale(birth.scaleX, birth.scaleY);
           drawAgentFeet(ctx, agent, -width / 2, -height * .94, width, height, null, outlineColor);
           if (outlineColor) {
+            drawAgentTail(ctx, agent, -width / 2, -height * .94, width, height, outlineColor);
             drawAgentHead(ctx, agent, -width / 2, -height * .94, width, height, now, outlineColor);
             drawSelectionOutline(sprite, -width / 2, -height * .94, width, height, null, outlineColor);
           }
+          drawAgentTail(ctx, agent, -width / 2, -height * .94, width, height, null);
           drawAgentHead(ctx, agent, -width / 2, -height * .94, width, height, now, null);
           ctx.drawImage(sprite, -width / 2, -height * .94, width, height);
         }
       }
+      ctx.restore();
+    }
+
+    function prepareSporeBirth() {
+      if (!sporeBirthReady) sporeBirthReady = Promise.all([sporeBirthSheet.decode(), sporeBirthNest.decode()]).then(() => {
+        const shape = Spawner.SPORE_BIRTH_ANIMATION;
+        const nest = document.createElement("canvas");
+        nest.width = nest.height = shape.frameSize;
+        const context = nest.getContext("2d", { willReadFrequently: true });
+        context.drawImage(sporeBirthNest, 0, 0);
+        const pixels = context.getImageData(0, 0, shape.frameSize, shape.frameSize).data;
+        for (let frame = shape.firstUnitFrame; frame < shape.frameCount; frame++) {
+          const canvas = document.createElement("canvas");
+          canvas.width = canvas.height = shape.frameSize;
+          const target = canvas.getContext("2d", { willReadFrequently: true });
+          target.drawImage(sporeBirthSheet, frame % shape.columns * shape.frameSize, Math.floor(frame / shape.columns) * shape.frameSize,
+            shape.frameSize, shape.frameSize, 0, 0, shape.frameSize, shape.frameSize);
+          const image = target.getImageData(0, 0, shape.frameSize, shape.frameSize);
+          image.data.set(Spawner.sporeBirthPixels(image.data, pixels));
+          target.putImageData(image, 0, 0);
+          sporeBirthFrames.set(frame, canvas);
+        }
+      }).catch(error => { sporeBirthReady = null; throw error; });
+      return sporeBirthReady;
+    }
+
+    function drawSporeBirthNest(now, entry) {
+      if (idleMotion.matches) return false;
+      let birth = null;
+      const shape = Spawner.SPORE_BIRTH_ANIMATION;
+      for (const agent of [...state.agents, ...state.rivals]) {
+        if (agent.health <= 0 || agent.birth?.colonyId !== entry.id || agent.tribe !== "spore") continue;
+        const age = state.simSeconds - agent.birth.startedAt;
+        if (age >= 0 && age < shape.duration && (!birth || agent.birth.startedAt > birth.startedAt)) birth = agent.birth;
+      }
+      const placement = colonyAppearance(entry).birthScene;
+      if (!birth || !placement || !sporeBirthSheet.complete || !sporeBirthSheet.naturalWidth) return false;
+      const pose = Spawner.sporeBirthPlacement(state.simSeconds - birth.startedAt, { x: 0, y: 0 }, { x: 0, y: 0 }, 1);
+      const appearance = colonyAppearance(entry), size = COLONY_SIZE * state.camera.zoom * appearance.scale;
+      const origin = worldToScreen(entry.x + 2.5, entry.y + 2.5);
+      const x = origin.x - size / 2 + placement.x * size;
+      const y = origin.y - size * appearance.centerY + placement.y * size;
+      const width = placement.size * size;
+      ctx.save();
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
+      if (pose.frame < shape.firstUnitFrame) ctx.drawImage(sporeBirthSheet,
+        pose.frame % shape.columns * shape.frameSize, Math.floor(pose.frame / shape.columns) * shape.frameSize,
+        shape.frameSize, shape.frameSize, x, y, width, width);
+      else ctx.drawImage(sporeBirthNest, x, y, width, width);
+      ctx.restore();
+      return true;
+    }
+
+    function drawSporeBirth(ctx, agent, birth, topLeft, cell, outlineColor) {
+      if (!birth.unitVisible) return;
+      const shape = Spawner.SPORE_BIRTH_ANIMATION;
+      const frame = idleMotion.matches ? shape.frameCount - 1 : birth.frame;
+      const sprite = sporeBirthFrames.get(frame);
+      if (!sprite) return;
+      const size = shape.frameSize * birth.scale * cell;
+      const x = topLeft.x + cell / 2 - shape.pivotX * birth.scale * cell;
+      const y = topLeft.y + cell / 2 + cell * AGENT_HEIGHT * .44 - shape.pivotY * birth.scale * cell;
+      ctx.save();
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
+      if (outlineColor) drawSelectionOutline(sprite, x, y, size, size, null, outlineColor);
+      ctx.drawImage(sprite, x, y, size, size);
       ctx.restore();
     }
 
@@ -3587,7 +3916,192 @@
         await animation.sprite.decode();
         animation.scale = Math.min(unit.box.width / animation.width, unit.box.height / animation.height);
       }
+      await prepareUnitAnimationSheets(tribe);
       return unit;
+    }
+
+    async function prepareUnitAnimationSheets(tribe) {
+      if (!unitAnimationReady.has(tribe.key)) unitAnimationReady.set(tribe.key, (async () => {
+        const body = tribe.key === "bean" ? tribeArt.bounds(starterObjectSprite, false) : null;
+        const reference = body ? { width: body.width * 240 / starterObjectSprite.naturalWidth,
+          height: body.height * 350 / starterObjectSprite.naturalHeight } : (await tribeArt.prepareUnit(tribe)).box;
+        const sheets = unitAnimationSheets.get(tribe.key), idle = sheets.get("idle");
+        await idle.sprite.decode();
+        const idleBounds = tribeArt.bounds(idle.sprite, idle.animation.frameSize);
+        await Promise.all([...sheets.entries()].map(async ([action, entry]) => {
+          await entry.sprite.decode();
+          const bounds = action === "walk" ? idleBounds : tribeArt.bounds(entry.sprite, entry.animation.frameSize);
+          const frameSize = action === "walk" ? idle.animation.frameSize : entry.animation.frameSize;
+          entry.scale = frameSize / 512 * Math.min(reference.width / bounds.width, reference.height / bounds.height);
+          entry.referenceHeight = reference.height;
+          if (tribe.key === "bean" && ["attack", "hurt"].includes(action)) prepareSproutCombatFrames(entry);
+          if (action === "walk") agentMovementSheets.get(tribe.key).scale = entry.scale;
+        }));
+      })().catch(error => { unitAnimationReady.delete(tribe.key); throw error; }));
+      return unitAnimationReady.get(tribe.key);
+    }
+
+    function prepareSproutCombatFrames(entry) {
+      const animation = entry.animation, size = animation.frameSize;
+      entry.bodyBounds = [];
+      entry.bodyFrames = [];
+      entry.attributeFrames = new Map();
+      const surface = document.createElement("canvas");
+      surface.width = surface.height = size;
+      const context = surface.getContext("2d", { willReadFrequently: true });
+      for (let index = 0; index < animation.frameCount; index++) {
+        context.clearRect(0, 0, size, size);
+        context.drawImage(entry.sprite, index % animation.columns * size, Math.floor(index / animation.columns) * size,
+          size, size, 0, 0, size, size);
+        const data = context.getImageData(0, 0, size, size), pixels = data.data, mask = new Uint8Array(size * size);
+        for (let pixel = 0; pixel < mask.length; pixel++) {
+          const offset = pixel * 4;
+          mask[pixel] = pixels[offset + 3] > 100 && pixels[offset] > 130 &&
+            pixels[offset + 2] > pixels[offset] * .78 && pixels[offset + 1] - pixels[offset] < 35 ? 1 : 0;
+        }
+        let largest = 0, silhouette = [], bounds = { x: size * .25, y: size * .43, width: size * .5, height: size * .4 };
+        for (let pixel = 0; pixel < mask.length; pixel++) {
+          if (!mask[pixel]) continue;
+          const queue = [pixel]; mask[pixel] = 0;
+          let left = size, top = size, right = 0, bottom = 0;
+          for (let cursor = 0; cursor < queue.length; cursor++) {
+            const current = queue[cursor], x = current % size, y = Math.floor(current / size);
+            left = Math.min(left, x); top = Math.min(top, y); right = Math.max(right, x + 1); bottom = Math.max(bottom, y + 1);
+            for (const next of [x > 0 ? current - 1 : -1, x + 1 < size ? current + 1 : -1, current - size, current + size]) {
+              if (next < 0 || next >= mask.length || !mask[next]) continue;
+              mask[next] = 0; queue.push(next);
+            }
+          }
+          if (queue.length > largest) { largest = queue.length; silhouette = queue; bounds = { x: left, y: top, width: right - left, height: bottom - top }; }
+        }
+        entry.bodyBounds.push(bounds);
+        const rows = Array.from({ length: size }, () => ({ left: size, right: 0 }));
+        for (const pixel of silhouette) {
+          const x = pixel % size, row = rows[Math.floor(pixel / size)];
+          row.left = Math.min(row.left, x); row.right = Math.max(row.right, x + 1);
+        }
+        const margin = Math.max(1, Math.round(size * .008));
+        for (let y = 0; y < bounds.y + bounds.height * .7; y++) {
+          let left = size, right = 0;
+          for (let row = Math.max(0, y - margin); row <= Math.min(size - 1, y + margin); row++) {
+            left = Math.min(left, rows[row].left); right = Math.max(right, rows[row].right);
+          }
+          for (let x = 0; x < size; x++) if (x < left - margin || x >= right + margin) pixels[(y * size + x) * 4 + 3] = 0;
+        }
+        const body = document.createElement("canvas"); body.width = body.height = size;
+        body.getContext("2d").putImageData(data, 0, 0);
+        entry.bodyFrames.push(body);
+      }
+    }
+
+    function sproutCombatFrame(agent, entry, index) {
+      if (!entry?.bodyBounds) return null;
+      const attributes = agent.appearanceAttributes || agent.attributes || {}, key = agentAppearanceKey(attributes);
+      if (!entry.attributeFrames.has(key)) entry.attributeFrames.set(key, new Map());
+      const frames = entry.attributeFrames.get(key);
+      if (frames.has(index)) return frames.get(index);
+      const feet = attributes.feet || 0;
+      if (!sproutCombatMounts.has(feet)) {
+        const body = agentSprite({ attributes: { feet } }, "body"), bounds = tribeArt.bounds(body, false);
+        const scale = 512 / (body.naturalWidth || body.width);
+        sproutCombatMounts.set(feet, { x: bounds.x * scale, y: bounds.y * scale, width: bounds.width * scale, height: bounds.height * scale });
+      }
+      const animation = entry.animation, size = animation.frameSize, mount = sproutCombatMounts.get(feet), body = entry.bodyBounds[index];
+      const surface = document.createElement("canvas"); surface.width = surface.height = size;
+      const context = surface.getContext("2d"), scaleX = body.width / mount.width, scaleY = body.height / mount.height;
+      const left = body.x - mount.x * scaleX, top = body.y - mount.y * scaleY;
+      if (attributes.butchery) {
+        const tail = agentSprite(agent, "tail");
+        context.drawImage(tail, left, top, 512 * scaleX, 512 * scaleY);
+      }
+      context.save();
+      if (attributes.feet) {
+        context.beginPath(); context.rect(0, 0, size, body.y + body.height - size * .04); context.clip();
+      }
+      if (attributes.antenna) context.drawImage(entry.bodyFrames[index], 0, 0);
+      else context.drawImage(entry.sprite, index % animation.columns * size, Math.floor(index / animation.columns) * size,
+        size, size, 0, 0, size, size);
+      context.restore();
+      context.drawImage(agentSprite(agent, "attributes"), left, top, 512 * scaleX, 512 * scaleY);
+      frames.set(index, surface);
+      return surface;
+    }
+
+    function drawAgentAnimation(ctx, agent, centerX, floor, height, outlineColor) {
+      const attributes = agent.appearanceAttributes || agent.attributes || {};
+      const pose = Spawner.unitAnimationPose(agent, state.simSeconds);
+      if (!pose) return false;
+      const customized = (agent.tribe || "bean") === "bean" && ["strength", "arms", "feet", "antenna", "lifespan", "butchery"].some(key => attributes[key] > 0);
+      const combat = ["attack", "hurt"].includes(pose.action);
+      if (customized && !combat && !pose.decomposition) return false;
+      const entry = pose.decomposition ? sproutDecompositionSheets.get(pose.decomposition) : unitAnimationSheets.get(agent.tribe || "bean")?.get(pose.action);
+      if (!entry?.sprite.complete || !entry.sprite.naturalWidth) return false;
+      const animation = pose.animation;
+      const index = idleMotion.matches ? 0 : pose.frame;
+      const sprite = customized && combat ? sproutCombatFrame(agent, entry, index) : entry.frames?.get(index) || entry.sprite;
+      if (!sprite) return false;
+      const size = height * entry.scale;
+      const left = -size * animation.pivotX / animation.frameSize;
+      const top = pose.decomposition ? -size * .94 : -size * animation.pivotY / animation.frameSize;
+      const frame = { owner: sprite, size: animation.frameSize, index: sprite === entry.sprite ? index : 0,
+        x: sprite === entry.sprite ? index % animation.columns * animation.frameSize : 0,
+        y: sprite === entry.sprite ? Math.floor(index / animation.columns) * animation.frameSize : 0 };
+      const facing = agent.combat ? agent.combat.side === 0 ? -1 : 1 :
+        pose.action === "attack" ? agent.attack?.directionX || agent.facing || 1 : agent.facing || 1;
+      ctx.save();
+      ctx.translate(centerX, floor);
+      ctx.scale(facing < 0 ? -1 : 1, 1);
+      if (outlineColor) drawSelectionOutline(sprite, left, top, size, size, frame, outlineColor);
+      ctx.drawImage(sprite, frame.x, frame.y, animation.frameSize, animation.frameSize, left, top, size, size);
+      ctx.restore();
+      return pose;
+    }
+
+    function drawCreatureIdle(agent, renderPosition) {
+      const entry = creatureIdleSheets.get(agent.species);
+      if (!entry || agent.mode !== "idle" || !entry.sprite.complete || !entry.sprite.naturalWidth) return false;
+      const animation = entry.animation;
+      const frame = idleMotion.matches ? 0 : Spawner.unitAnimationFrame(animation,
+        (state.simSeconds - (agent.animationStartedAt ?? agent.moveStartedAt ?? 0)) * 1000);
+      const point = worldToScreen(renderPosition.x + .5, renderPosition.y + 1);
+      const size = state.camera.zoom * 1.4 * entry.scale;
+      const left = -size * animation.pivotX / animation.frameSize;
+      const top = -size * animation.pivotY / animation.frameSize;
+      const source = { owner: entry.sprite, size: animation.frameSize, index: frame,
+        x: frame % animation.columns * animation.frameSize, y: Math.floor(frame / animation.columns) * animation.frameSize };
+      ctx.save();
+      ctx.translate(point.x, point.y);
+      ctx.scale(agent.facing < 0 ? -1 : 1, 1);
+      const outline = objectOutlineColor("agent", agent);
+      if (outline) drawSelectionOutline(entry.sprite, left, top, size, size, source, outline);
+      ctx.drawImage(entry.sprite, source.x, source.y, animation.frameSize, animation.frameSize, left, top, size, size);
+      ctx.restore();
+      return true;
+    }
+
+    function drawCreatureCorpse(context, corpse, x, floor, cell, outlineColor, opacity) {
+      const sprite = corpse.species === "talon-owl" ? talonOwlFrames.get(0) :
+        corpse.species === "spiny-back-beetle" ? resourceSprites.get("meat") : encounterSprites.get(corpse.species);
+      if (!sprite || sprite.complete === false || !(sprite.naturalWidth || sprite.width)) return false;
+      const decay = Number.isFinite(corpse.decaysAt) ?
+        clamp((state.simSeconds - corpse.diedAt) / (corpse.decaysAt - corpse.diedAt), 0, 1) : 0;
+      const size = cell * (corpse.species === "talon-owl" ? Spawner.TALON_OWL_IDLE.scale : corpse.species === "spiny-back-beetle" ? 1.6 : 1.4);
+      context.save();
+      context.imageSmoothingEnabled = true;
+      context.imageSmoothingQuality = "high";
+      context.globalAlpha *= opacity * (1 - decay * .4);
+      context.filter = "saturate(" + (1 - decay * .8) + ")";
+      context.translate(x, floor);
+      if (corpse.species !== "spiny-back-beetle") {
+        context.rotate(Math.PI / 2);
+        context.scale(corpse.facing < 0 ? -1 : 1, 1);
+      }
+      const left = -size * (corpse.species === "talon-owl" ? Spawner.TALON_OWL_IDLE.pivotX / Spawner.TALON_OWL_IDLE.frameSize : .5);
+      const top = -size * (corpse.species === "talon-owl" ? Spawner.TALON_OWL_IDLE.pivotY / Spawner.TALON_OWL_IDLE.frameSize : .88);
+      context.drawImage(sprite, left, top, size, size);
+      if (outlineColor) drawSelectionOutline(sprite, left, top, size, size, null, outlineColor);
+      context.restore();
+      return true;
     }
 
     function drawAgentMovement(ctx, agent, centerX, footY, height, outlineColor) {
@@ -3599,32 +4113,36 @@
       const index = idleMotion.matches ? 0 : Math.floor((agent.stepCount - 1 + progress) * 16) % 16;
       const sprite = animation.sprite;
       const size = height * animation.scale;
-      const frame = { owner: sprite, size: 512, index, x: index % 4 * 512, y: Math.floor(index / 4) * 512 };
+      const frameSize = sprite.naturalWidth / 4;
+      const frame = { owner: sprite, size: frameSize, index, x: index % 4 * frameSize, y: Math.floor(index / 4) * frameSize };
       ctx.save();
       ctx.translate(centerX, footY);
       ctx.scale(agent.facing < 0 ? -1 : 1, 1);
       if (outlineColor) drawSelectionOutline(sprite, -size / 2, -size * 448 / 512, size, size, frame, outlineColor);
-      ctx.drawImage(sprite, frame.x, frame.y, 512, 512, -size / 2, -size * 448 / 512, size, size);
+      ctx.drawImage(sprite, frame.x, frame.y, frameSize, frameSize, -size / 2, -size * 448 / 512, size, size);
       ctx.restore();
       return true;
     }
 
     function drawAgentAttack(ctx, agent, centerX, footY, height, outlineColor) {
       const appearance = agent.appearanceAttributes || agent.attributes || {};
-      if (["strength", "feet", "antenna", "lifespan"].some(key => appearance[key] > 0)) return false;
       const attackFrame = agentAttackFrame(agent.attack, state.simSeconds);
       const hurtFrame = Spawner.combatHurtFrame(agent, state.simSeconds);
       const action = attackFrame >= 0 ? "attack" : "hurt";
       const index = attackFrame >= 0 ? attackFrame : hurtFrame;
-      const sprite = combatSheets.get(agent.tribe || "bean")?.[action];
-      if (index < 0 || !sprite?.complete || !sprite.naturalWidth) return false;
+      if (index < 0) return false;
+      const customized = (agent.tribe || "bean") === "bean" && ["strength", "arms", "feet", "antenna", "lifespan", "butchery"].some(key => appearance[key] > 0);
+      const sprite = customized ? sproutCombatFrame(agent, unitAnimationSheets.get("bean")?.get(action), index) : combatSheets.get(agent.tribe || "bean")?.[action];
+      if (!sprite || sprite.complete === false || !(sprite.naturalWidth || sprite.width)) return false;
       const size = height * .94;
-      const frame = { owner: sprite, size: 512, index, x: index % 4 * 512, y: Math.floor(index / 4) * 512 };
+      const frameSize = customized ? sprite.width : sprite.naturalWidth / 4;
+      const frame = { owner: sprite, size: frameSize, index: customized ? 0 : index,
+        x: customized ? 0 : index % 4 * frameSize, y: customized ? 0 : Math.floor(index / 4) * frameSize };
       ctx.save();
       ctx.translate(centerX, footY - height * .054);
-      ctx.scale(agent.combat ? agent.combat.side === 0 ? 1 : -1 : agent.attack?.directionX || agent.facing || 1, 1);
+      ctx.scale(agent.combat ? agent.combat.side === 0 ? -1 : 1 : agent.attack?.directionX || agent.facing || 1, 1);
       if (outlineColor) drawSelectionOutline(sprite, -size / 2, -size * 448 / 512, size, size, frame, outlineColor);
-      ctx.drawImage(sprite, frame.x, frame.y, 512, 512, -size / 2, -size * 448 / 512, size, size);
+      ctx.drawImage(sprite, frame.x, frame.y, frameSize, frameSize, -size / 2, -size * 448 / 512, size, size);
       ctx.restore();
       return true;
     }
@@ -3664,11 +4182,9 @@
       const center = worldToScreen(position.x + .5, position.y + .5);
       const attack = agent.attack;
       const progress = attack ? (state.simSeconds - attack.startedAt) / (attack.endsAt - attack.startedAt) : -1;
-      const lunge = progress >= 0 && progress < 1 ? Math.sin(progress * Math.PI) * .045 * placement.facing : 0;
-      const hurt = Spawner.combatHurtFrame(agent, state.simSeconds) >= 0;
-      const shake = hurt && !idleMotion.matches ? Math.sin((state.simSeconds - agent.hurtStartedAt) * 70) * .009 : 0;
+      const lunge = !idleMotion.matches && progress >= 0 && progress < 1 ? Math.sin(progress * Math.PI) * .045 * placement.facing : 0;
       ctx.save();
-      ctx.translate(center.x + (lunge + shake) * state.camera.zoom, center.y);
+      ctx.translate(center.x + lunge * state.camera.zoom, center.y);
       ctx.scale(placement.scale, placement.scale);
       ctx.translate(-center.x, -center.y);
       drawAgentBody(now, agent);
@@ -3693,6 +4209,7 @@
         return;
       }
       if (encounterSprites.has(agent.species)) {
+        if (drawCreatureIdle(agent, renderPosition)) return;
         const sprite = encounterSprites.get(agent.species);
         const width = cell * 1.4;
         ctx.save();
@@ -3773,9 +4290,10 @@
       );
       ctx.fill();
       const sprite = agentSprite(agent, "body");
-      const attacking = drawAgentAttack(ctx, agent, centerX, spriteY + spriteHeight * .94, spriteHeight, outlineColor);
-      const moving = !attacking && drawAgentMovement(ctx, agent, centerX, spriteY + spriteHeight * .94, spriteHeight, outlineColor);
-      if (!attacking && !moving && sprite && sprite.complete !== false && (sprite.naturalWidth || sprite.width) > 0) {
+      const animated = drawAgentAnimation(ctx, agent, centerX, spriteY + spriteHeight * .94, spriteHeight, outlineColor);
+      const attacking = !animated && drawAgentAttack(ctx, agent, centerX, spriteY + spriteHeight * .94, spriteHeight, outlineColor);
+      const moving = !animated && !attacking && drawAgentMovement(ctx, agent, centerX, spriteY + spriteHeight * .94, spriteHeight, outlineColor);
+      if (!animated && !attacking && !moving && sprite && sprite.complete !== false && (sprite.naturalWidth || sprite.width) > 0) {
         const spriteWidth = spriteHeight * (sprite.naturalWidth || sprite.width) / (sprite.naturalHeight || sprite.height);
         const spriteX = topLeft.x + (cell - spriteWidth) / 2;
         const footY = spriteY + spriteHeight * 0.94;
@@ -3787,6 +4305,8 @@
         if (outlineColor) {
           ctx.save();
           ctx.scale(bodyPose.scaleX, bodyPose.scaleY);
+          drawAgentTail(ctx, agent, spriteX - centerX, -spriteHeight * bodyPose.pivot,
+            spriteWidth, spriteHeight, outlineColor);
           drawAgentHead(ctx, agent, spriteX - centerX, -spriteHeight * bodyPose.pivot,
             spriteWidth, spriteHeight, now, outlineColor);
           drawSelectionOutline(sprite, spriteX - centerX, -spriteHeight * bodyPose.pivot,
@@ -3794,6 +4314,8 @@
           ctx.restore();
         }
         ctx.scale(bodyPose.scaleX, bodyPose.scaleY);
+        drawAgentTail(ctx, agent, spriteX - centerX, -spriteHeight * bodyPose.pivot,
+          spriteWidth, spriteHeight, null);
         drawAgentHead(ctx, agent, spriteX - centerX, -spriteHeight * bodyPose.pivot,
           spriteWidth, spriteHeight, now, null);
         ctx.drawImage(sprite, spriteX - centerX, -spriteHeight * bodyPose.pivot,
@@ -3873,10 +4395,17 @@
       ctx.restore();
     }
 
-    function drawSelectedAgentMovement() {
-      const agent = state.selection?.kind === "agent" ? state.selection.target : null;
+    function selectedMovementAgents() {
+      const selection = state.selection;
+      const agents = selection?.kind === "agent" ? [selection.target] :
+        selection?.kind === "corpse" ? corpseCollectors(selection.target) : [];
+      return agents.filter(agent => displayedAgent(agent).movementPlan && state.agents.includes(agent) && agent.health > 0);
+    }
+
+    function drawSelectedAgentMovement(selectedAgent) {
+      const agent = selectedAgent ? displayedAgent(selectedAgent) : null;
       const plan = agent?.movementPlan;
-      if (!plan || !state.agents.includes(agent) || agent.health <= 0) return;
+      if (!plan || !state.agents.includes(selectedAgent) || agent.health <= 0) return;
       const cell = state.camera.zoom;
       const position = interpolatedAgentPosition(agent);
       const foot = 0.5 + AGENT_HEIGHT * 0.44;
@@ -4001,7 +4530,7 @@
     }
 
     function canUseMapShortcuts(target) {
-      return connection.active && welcome.hidden && !codex.open && evolutionPanel.hidden &&
+      return connection.active && welcome.hidden && !codex.open && !endingReport.open && !templateDeleteDialog.open && evolutionPanel.hidden &&
         !target?.closest("input, textarea, select, [contenteditable]:not([contenteditable=false]), [role=tab], [role=separator]");
     }
 
@@ -4308,9 +4837,11 @@
       if (viewport.pixelRatio !== (window.devicePixelRatio || 1)) resizeCanvas();
       updateZoom(now);
       moveMap(Math.min(0.05, Math.max(0, (now - state.lastFrame) / 1000)));
+      const elapsedMs = Math.max(0, now - state.lastFrame);
       state.lastFrame = now;
       if (!connection.active || !terrainRendering.ready) { updateAudio(); scheduleRender(); return; }
-      state.simSeconds = Math.max(state.simSeconds, connection.simSeconds +
+      updateEndingPresentation(elapsedMs);
+      state.simSeconds = state.ending ? state.ending.endedAt : Math.max(state.simSeconds, connection.simSeconds +
         Math.min(0.3, (now - connection.receivedAt) / 1000) - MOVEMENT_DELAY);
       for (const delivery of foodDeliveries.values()) {
         if (delivery.receivedAtFrame == null && state.simSeconds >= delivery.arrivesAt) delivery.receivedAtFrame = now;
@@ -4345,7 +4876,6 @@
       drawFlashes(now);
       for (const entry of colonyEntries) drawColonyGround(entry,
         worldToScreen(entry.x, entry.y), COLONY_SIZE * state.camera.zoom, colonyAppearance(entry));
-      drawSelectedAgentMovement();
       drawWorldObjects(now);
       drawAttackImpacts();
       drawAgentGroups();
@@ -4354,14 +4884,21 @@
       drawBurrowStatus();
       drawFog(now);
       positionHelpTooltip();
+      drawColonyImages(now);
       drawAgentAvatars(now);
 
       scheduleRender();
     }
 
     function zoomForLayer(layer) {
-      return ZOOM_LAYERS[layer] ?? Math.max(MIN_ZOOM,
+      const selected = clamp(layer, 0, ZOOM_LAYERS.length - 1);
+      const nearLayer = Math.floor(selected);
+      const farLayer = Math.min(nearLayer + 1, ZOOM_LAYERS.length - 1);
+      const continentZoom = Math.max(MIN_ZOOM,
         Math.min(4, Math.min(viewport.width || 1200, viewport.height || 760) * 0.9 / WORLD_SIZE));
+      const nearZoom = ZOOM_LAYERS[nearLayer] ?? continentZoom;
+      const farZoom = ZOOM_LAYERS[farLayer] ?? continentZoom;
+      return nearZoom * Math.pow(farZoom / nearZoom, selected - nearLayer);
     }
 
     function updateZoomLayerButtons() {
@@ -4373,7 +4910,7 @@
       if (selected === state.camera.layer) return;
       stopCameraTransition();
       state.camera.layer = selected;
-      if (selected > 0) resetAudio();
+      if (selected > INITIAL_ZOOM_LAYER) resetAudio();
       const continent = selected === ZOOM_LAYERS.length - 1;
       if (continent) state.camera.followAgentId = null;
       zoomTransition = {
@@ -4388,13 +4925,13 @@
 
     function updateZoom(now) {
       if (!zoomTransition) return;
-      const progress = clamp((now - zoomTransition.startedAt) / 120, 0, 1);
+      const progress = clamp((now - zoomTransition.startedAt) / 240, 0, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
       if (zoomTransition.center) {
         state.camera.x = zoomTransition.center.x + (WORLD_SIZE / 2 - zoomTransition.center.x) * eased;
         state.camera.y = zoomTransition.center.y + (WORLD_SIZE / 2 - zoomTransition.center.y) * eased;
       }
-      setZoom(zoomTransition.from + (zoomTransition.to - zoomTransition.from) * eased,
+      setZoom(zoomTransition.from * Math.pow(zoomTransition.to / zoomTransition.from, eased),
         zoomTransition.anchorX, zoomTransition.anchorY);
       if (progress === 1) zoomTransition = null;
     }
@@ -4462,13 +4999,13 @@
       state.camera.x = COLONY_CENTER.x;
       state.camera.y = COLONY_CENTER.y;
       state.camera.zoom = INITIAL_ZOOM;
-      state.camera.layer = 0;
+      state.camera.layer = INITIAL_ZOOM_LAYER;
       updateZoomLayerButtons();
       clampCamera();
     }
 
     function moveToColony() {
-      state.camera.layer = 0;
+      state.camera.layer = INITIAL_ZOOM_LAYER;
       focusedColonyId = connection.colonyId;
       moveCameraTo(COLONY_CENTER.x, COLONY_CENTER.y, INITIAL_ZOOM);
       updateZoomLayerButtons();
@@ -4490,7 +5027,7 @@
       const anchorX = event.clientX - rect.left;
       const anchorY = event.clientY - rect.top;
       if (event.deltaY === 0) return;
-      selectZoomLayer(state.camera.layer + Math.sign(event.deltaY), anchorX, anchorY);
+      selectZoomLayer(state.camera.layer + Math.sign(event.deltaY) / ZOOM_STEPS_PER_LAYER, anchorX, anchorY);
     }, { passive: false });
 
     zoomLayerButtons.forEach((button, index) => button.addEventListener("click", () => {
@@ -4626,6 +5163,21 @@
       updateHover();
     });
 
+    for (const surface of [canvas, unitPanel, colonyMenu]) {
+      surface.addEventListener("contextmenu", (event) => {
+        if (connection.active && !event.target.closest("input, textarea, [contenteditable]")) event.preventDefault();
+      });
+      surface.addEventListener("pointerup", (event) => {
+        if (event.button !== 2 || !connection.active || surface === canvas && state.didDrag ||
+            !state.selection && unitPanel.hidden && colonyMenu.hidden || !evolutionPanel.hidden ||
+            codex.open || endingReport.open || templateDeleteDialog.open ||
+            event.target.closest("input, textarea, [contenteditable]")) return;
+        event.preventDefault();
+        closeColonyMenu();
+        closeUnitPanel();
+      });
+    }
+
     canvas.addEventListener("pointerleave", () => {
       state.hoverPointer = null;
       updateHover();
@@ -4653,9 +5205,9 @@
     }
 
     function focusDiscovery(entry) {
-      state.camera.layer = 0;
+      state.camera.layer = INITIAL_ZOOM_LAYER;
       updateZoomLayerButtons();
-      moveCameraTo(entry.x + 0.5, entry.y + 0.5, zoomForLayer(0));
+      moveCameraTo(entry.x + 0.5, entry.y + 0.5, zoomForLayer(INITIAL_ZOOM_LAYER));
       scheduleRender();
     }
 
@@ -4683,13 +5235,50 @@
     }
 
     function createColonyImage(entry) {
-      const appearance = colonyAppearance(entry);
-      const sprite = appearance.sprite;
-      const sourceWidth = appearance.animation?.sheet ? appearance.animation.frameSize : sprite.naturalWidth;
-      const sourceHeight = appearance.animation?.sheet ? appearance.animation.frameSize : sprite.naturalHeight;
-      const width = appearance.groundWidth * sourceWidth;
-      return createObjectImage(sprite, { x: (sourceWidth - width) / 2,
-        y: appearance.top * sourceHeight, width, height: (1 - appearance.top) * sourceHeight });
+      const image = document.createElement("canvas");
+      image.className = "object-image";
+      image.setAttribute("aria-hidden", "true");
+      drawColonyImage(image, entry, performance.now());
+      return image;
+    }
+
+    function drawColonyImage(image, entry, now) {
+      const appearance = colonyAppearance(entry), animation = appearance.animation;
+      const sprite = animation?.sheet || appearance.sprite;
+      if (!sprite.complete || !sprite.naturalWidth) return;
+      const size = Math.round(96 * (window.devicePixelRatio || 1));
+      if (image.width !== size || image.height !== size) image.width = image.height = size;
+      const context = image.getContext("2d");
+      context.clearRect(0, 0, size, size);
+      context.imageSmoothingEnabled = true;
+      context.imageSmoothingQuality = "high";
+      const width = appearance.groundWidth, height = 1 - appearance.top;
+      const scale = Math.min(size / width, size / height) * .94;
+      const x = (size - width * scale) / 2 - (1 - width) / 2 * scale;
+      const y = (size - height * scale) / 2 - appearance.top * scale;
+      const placement = animation?.placement || { x: 0, y: 0, width: 1, height: 1 };
+      const index = animation?.sheet && !idleMotion.matches && !colonyInactive(entry) ? idleFrameIndex(animation, now, 0) : 0;
+      const frameWidth = animation?.sheet ? animation.frameSize : sprite.naturalWidth;
+      const frameHeight = animation?.sheet ? animation.frameSize : sprite.naturalHeight;
+      context.save();
+      if (colonyInactive(entry)) context.filter = "grayscale(1) brightness(0.45)";
+      context.drawImage(sprite, index % (animation?.columns || 1) * frameWidth,
+        Math.floor(index / (animation?.columns || 1)) * frameHeight, frameWidth, frameHeight,
+        x + placement.x * scale, y + placement.y * scale, placement.width * scale, placement.height * scale);
+      context.restore();
+    }
+
+    function drawColonyImages(now) {
+      if (objectPanel.hidden || document.hidden) return;
+      const panel = objectPanel.getBoundingClientRect();
+      for (const button of colonyList.children) {
+        const image = button.querySelector("canvas");
+        if (!image) continue;
+        const bounds = image.getBoundingClientRect();
+        if (!bounds.width || bounds.bottom <= panel.top || bounds.top >= panel.bottom) continue;
+        const entry = colonyEntries.find(entry => String(entry.id) === button.dataset.colonyId);
+        if (entry) drawColonyImage(image, entry, now);
+      }
     }
 
     function createDiscoveryImage(entry) {
@@ -4719,6 +5308,16 @@
       return image;
     }
 
+    function positionDiscoveryToasts(sidebarWidth) {
+      const style = getComputedStyle(unitPanel);
+      const availableWidth = window.innerWidth - 2 * (parseFloat(style.right) + parseFloat(style.width) + 12);
+      const infoAbove = availableWidth < 280;
+      const width = window.innerWidth <= 640 ? window.innerWidth - 24 :
+        infoAbove ? Math.max(144, window.innerWidth - sidebarWidth * 2 - 24) : availableWidth;
+      document.documentElement.toggleAttribute("data-discovery-info-above", infoAbove);
+      document.documentElement.style.setProperty("--discovery-toasts-area-width", width + "px");
+    }
+
     function showDiscoveryToast(entry) {
       const toast = document.createElement("div");
       toast.className = "discovery-toast";
@@ -4727,12 +5326,8 @@
       open.className = "discovery-toast-open";
       open.setAttribute("aria-label", entry.name + " · 발견 위치로 이동");
       const label = document.createElement("small");
-      label.textContent = "새로운 발견";
-      const title = document.createElement("strong");
-      title.textContent = entry.name;
-      const detail = document.createElement("span");
-      detail.textContent = "발견 위치 보기";
-      open.append(createDiscoveryImage(entry), label, title, detail);
+      label.textContent = "발견";
+      open.append(createDiscoveryImage(entry), label);
       open.addEventListener("click", () => {
         dismissDiscoveryToast(toast);
         focusDiscovery(entry);
@@ -4745,7 +5340,7 @@
       close.addEventListener("click", () => dismissDiscoveryToast(toast));
       toast.append(open, close);
       discoveryToasts.append(toast);
-      discoveryToastTimers.set(toast, setTimeout(() => dismissDiscoveryToast(toast), 7000));
+      discoveryToastTimers.set(toast, setTimeout(() => dismissDiscoveryToast(toast), 120000));
     }
 
     function updateNotifications(previousKeys, firstSnapshot) {
@@ -4911,7 +5506,7 @@
     });
     colonyMenuClose.addEventListener("click", closeColonyMenu);
     document.addEventListener("keydown", (event) => {
-      if (event.key !== "Escape") return;
+      if (event.key !== "Escape" || endingReport.open || templateDeleteDialog.open) return;
       if (!helpTooltip.hidden) {
         hideHelpTooltip();
         event.preventDefault();
@@ -4944,12 +5539,24 @@
     }
 
     document.getElementById("unit-panel-close").addEventListener("click", closeUnitPanel);
+    resourceLocation.addEventListener("click", () => {
+      const cell = selectionTerrainCell();
+      if (!cell || resourceDetails.hidden) return;
+      hideHelpTooltip();
+      focusDiscovery(cell);
+      canvas.focus();
+    });
+    unitPanel.addEventListener("scroll", hideHelpTooltip);
     document.getElementById("unit-codex").addEventListener("click", () => {
       const selected = state.selection;
       if (!selected) return;
-      if (selected.kind === "terrain" || selected.kind === "hazard") {
+      if (["terrain", "hazard", "food", "tree"].includes(selected.kind)) {
         const cell = selectionTerrainCell();
         if (cell) openTerrainCodex(cell.x, cell.y);
+        return;
+      }
+      if (selected.kind === "corpse") {
+        openCodex("attribute:butchery");
         return;
       }
       const slots = selected.target.activeSlots || selected.target.slots || [];
@@ -4957,7 +5564,8 @@
       openCodex("attribute:" + attribute);
     });
     agentDesign.addEventListener("click", () => {
-      if (state.selection?.kind === "agent") openUnitDesign(selectedAgentTemplate() || null);
+      const agent = state.selection?.kind === "agent" ? state.selection.target : null;
+      if (agent) openUnitDesign({ name: agent.templateName || agent.name, tribe: agent.tribe, slots: [...agent.slots] }, true);
     });
     agentBirth.addEventListener("click", async () => {
       const template = selectedAgentTemplate();
@@ -4965,20 +5573,83 @@
       const key = unitPanelSelectionKey;
       unitActionStatus.textContent = "";
       nestStatus.textContent = "";
-      const result = await sendCommand({ type: "birth", templateId: template.id });
+      const result = await sendCommand({ type: "birth", agentId: state.selection.target.id });
       if (unitPanelSelectionKey === key) setEvolutionText(unitActionStatus, result ? "새 생명체가 탄생합니다." : nestStatus.textContent);
     });
-    corpseDesign.addEventListener("click", () => openUnitDesign(null));
+    corpseDesign.addEventListener("click", async () => {
+      const corpse = state.selection?.kind === "corpse" ? state.selection.target : null;
+      if (!corpse || corpseDesign.disabled) return;
+      hideHelpTooltip();
+      const recovery = corpseRecovery(corpse);
+      if (recovery.agent) {
+        selectAgent(recovery.agent);
+        canvas.focus();
+      } else if (recovery.template) {
+        const key = unitPanelSelectionKey;
+        unitActionStatus.textContent = "";
+        nestStatus.textContent = "";
+        const result = await sendCommand({ type: "birth", templateId: recovery.template.id });
+        if (unitPanelSelectionKey === key) setEvolutionText(unitActionStatus, result ? "회수 유닛이 탄생합니다." : nestStatus.textContent);
+      } else {
+        openUnitDesign({ name: randomTemplateName(), tribe: state.tribe, slots: ["butchery"] }, false);
+        document.getElementById("design-title").textContent = "회수 유닛 설계";
+      }
+    });
+
+    function corpseCollectors(corpse) {
+      const key = corpse.key || corpse.x + "," + corpse.y;
+      return state.agents.filter(agent => agent.health > 0 && agent.action === "collect" &&
+        ["approach", "harvest"].includes(agent.mode) && agent.targetFoodKey === key &&
+        Spawner.canHarvestResource(corpse, worldMap, agent.attributes, state.tribe));
+    }
+
+    function corpseRecovery(corpse) {
+      const collectors = corpseCollectors(corpse);
+      const agents = collectors.length ? collectors : state.agents.filter(agent => agent.health > 0 &&
+        Spawner.canHarvestResource(corpse, worldMap, agent.attributes, state.tribe));
+      const agent = agents.reduce((nearest, candidate) => !nearest ||
+        Math.hypot(candidate.x - corpse.x, candidate.y - corpse.y) < Math.hypot(nearest.x - corpse.x, nearest.y - corpse.y) ? candidate : nearest, null);
+      const template = agent ? null : state.templates.find(template =>
+        Spawner.canHarvestResource(corpse, worldMap, attributeCounts(template.slots), template.tribe || state.tribe));
+      return { agent, template };
+    }
 
     function updateCorpseDetails() {
       const corpse = state.selection?.kind === "corpse" ? state.selection.target : null;
       corpseDetails.hidden = !corpse || corpse.kind !== "corpse" || corpse.amount <= 0;
       if (corpseDetails.hidden) return;
+      const previousHelp = helpTooltipTarget?.dataset.help + (helpTooltipTarget?.dataset.helpHint || "");
       unitPanelTitle.textContent = corpse.name ? corpse.name + "의 사체" : "사체";
-      corpseValue.textContent = Math.ceil(corpse.amount) + "점";
-      document.getElementById("corpse-decay").textContent = Number.isFinite(corpse.decaysAt) ?
-        "부패까지 " + formatLifetime(Math.ceil(Math.max(0, corpse.decaysAt - state.simSeconds))) : "";
-      corpseDesign.disabled = connection.busy || !connection.online;
+      corpseValue.textContent = Math.ceil(corpse.amount);
+      const decay = document.getElementById("corpse-decay");
+      const remaining = Math.ceil(Math.max(0, corpse.decaysAt - state.simSeconds));
+      decay.hidden = !Number.isFinite(corpse.decaysAt);
+      document.getElementById("corpse-decay-value").textContent = Math.floor(remaining / 60) + ":" + String(remaining % 60).padStart(2, "0");
+      decay.dataset.help = "부패까지 " + formatLifetime(remaining) + "\n부패하면 남은 사체가 사라집니다.";
+      decay.setAttribute("aria-label", decay.dataset.help);
+      const recovery = corpseRecovery(corpse);
+      const cost = recovery.template ? birthCost(recovery.template) : 0;
+      corpseDesign.textContent = recovery.agent ? "회수 유닛으로 이동" : recovery.template ? "회수 유닛 탄생" : "회수 유닛 설계";
+      corpseDesign.disabled = !recovery.agent && (!!state.ending || connection.busy || !connection.online || state.nestHealth === 0 ||
+        recovery.template && (state.evolutionPoints < cost || recovery.template.slots.length > slotCapacity() ||
+          recovery.template.slots.some(key => !ATTRIBUTES.some(attribute => attribute.key === key))));
+      corpseDesign.dataset.help = recovery.agent ? recovery.agent.name + " 선택 · 위치로 이동" :
+        recovery.template ? recovery.template.name + "\n진화 포인트 " + cost + "점" : "분해 속성을 갖춘 회수 유닛 설계";
+      corpseDesign.dataset.helpHint = recovery.agent ? "" : state.ending ? "종료된 군락입니다." :
+        connection.busy ? "처리 중입니다." : !connection.online ? "연결을 확인해 주세요." :
+        state.nestHealth === 0 ? "둥지가 파괴되었습니다." : state.evolutionPoints < cost ? "진화 포인트가 부족합니다." :
+        corpseDesign.disabled ? "둥지에서 설계를 확인해 주세요." : "";
+      if (recovery.agent || recovery.template) {
+        corpseDesign.removeAttribute("aria-haspopup");
+        corpseDesign.removeAttribute("aria-controls");
+      } else {
+        corpseDesign.setAttribute("aria-haspopup", "dialog");
+        corpseDesign.setAttribute("aria-controls", "evolution-panel");
+      }
+      if (helpTooltipTarget && corpseDetails.contains(helpTooltipTarget)) {
+        const help = helpTooltipTarget.dataset.help + (helpTooltipTarget.dataset.helpHint || "");
+        if (previousHelp !== help) showHelpTooltip(helpTooltipTarget);
+      }
     }
 
     function formatLifetime(seconds) {
@@ -4988,7 +5659,9 @@
 
     function selectedAgentTemplate() {
       const agent = state.selection?.kind === "agent" ? state.selection.target : null;
-      return agent && state.agents.includes(agent) ? state.templates.find(template => template.id === agent.templateId) : null;
+      return agent && state.agents.includes(agent) ? {
+        id: agent.templateId, name: agent.templateName, tribe: agent.tribe, slots: [...agent.slots], revision: agent.templateRevision
+      } : null;
     }
 
     function updateTerrainDetails() {
@@ -5009,39 +5682,146 @@
         "\n위험 요소 · " + (cell.hazard ? cell.hazard.name + " · " + cell.hazard.effect : "없음");
     }
 
+    const resourceImageCache = new Map();
+
+    function createResourceImage(definition) {
+      const ratio = window.devicePixelRatio || 1;
+      const key = definition.key + ":" + ratio;
+      if (resourceImageCache.has(key)) return resourceImageCache.get(key);
+      const image = document.createElement("canvas");
+      image.className = "object-image";
+      image.setAttribute("aria-hidden", "true");
+      image.width = Math.round(128 * ratio);
+      image.height = Math.round(96 * ratio);
+      const sprite = resourceSprites.get(definition.key);
+      function draw() {
+        const width = definition.key === "tree" ? sprite.naturalHeight : sprite.naturalWidth;
+        const height = sprite.naturalHeight;
+        if (!width || !height) return;
+        const surface = document.createElement("canvas");
+        surface.width = width; surface.height = height;
+        const context = surface.getContext("2d");
+        context.drawImage(sprite, 0, 0, width, height, 0, 0, width, height);
+        const pixels = context.getImageData(0, 0, width, height).data;
+        let left = width, top = height, right = 0, bottom = 0;
+        for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+          if (pixels[(y * width + x) * 4 + 3] < 16) continue;
+          left = Math.min(left, x); top = Math.min(top, y);
+          right = Math.max(right, x + 1); bottom = Math.max(bottom, y + 1);
+        }
+        if (right <= left || bottom <= top) return;
+        const scale = Math.min(128 / width, 128 / height, 128 / (right - left), 96 / (bottom - top)) * ratio;
+        const target = image.getContext("2d");
+        target.clearRect(0, 0, image.width, image.height);
+        target.imageSmoothingEnabled = true;
+        target.imageSmoothingQuality = "high";
+        target.drawImage(sprite, 0, 0, width, height,
+          image.width / 2 - (left + right) / 2 * scale,
+          image.height / 2 - (top + bottom) / 2 * scale, width * scale, height * scale);
+      }
+      if (sprite.complete) draw();
+      else sprite.addEventListener("load", draw, { once: true });
+      resourceImageCache.set(key, image);
+      return image;
+    }
+
+    function updateResourceDetails() {
+      const selected = state.selection;
+      const tree = selected?.kind === "tree" ? selected.target : null;
+      const cell = tree ? foodCellMap.get(tree.column + "," + tree.row) :
+        selected?.kind === "food" ? selected.target : null;
+      const definition = cell ? Spawner.resourceDefinition(Spawner.resourceTypeForCell(cell, worldMap)) :
+        tree ? Spawner.resourceDefinition("tree") : null;
+      resourceDetails.hidden = !definition;
+      if (!definition) return;
+      const previousHelp = helpTooltipTarget?.dataset.help;
+      unitPanelTitle.textContent = definition.name;
+      const image = document.getElementById("resource-image");
+      if (image.dataset.key !== definition.key) {
+        image.dataset.key = definition.key;
+        image.replaceChildren(createResourceImage(definition));
+      }
+      const required = cell ? Spawner.resourceHarvestRequirements(cell, worldMap, state.tribe) : null;
+      const tribe = Spawner.PLAYER_TRIBES.find(tribe => Spawner.isTribeFood(definition.key, tribe.key, worldMap.generationVersion));
+      const requirements = required && ATTRIBUTES.filter(attribute => required[attribute.key] > 0)
+        .map(attribute => attribute.name + (required[attribute.key] > 1 ? " × " + required[attribute.key] : "")).join(" + ");
+      const amount = Math.ceil(Math.max(0, cell?.amount || 0));
+      const capacity = Math.max(amount, Math.ceil(cell?.initialAmount ?? amount));
+      const seconds = definition.harvestLocked || !cell ? null : Spawner.resourceHarvestSeconds(definition.key, worldMap);
+      const food = Spawner.isTribeFood(definition.key, state.tribe, worldMap.generationVersion);
+      const condition = definition.harvestLocked ? "채집 잠금" : !cell ? "채집 가능한 자원 없음" :
+        required === null ? tribe ? tribe.name + " 부족 전용" : "채집 불가" : requirements || "기본 채집";
+      const yieldHelp = required === null ? "운반 불가" : food ? "1개당 진화 포인트 1점" : "자원 창고에 보관";
+      const amountElement = document.getElementById("resource-amount");
+      document.getElementById("resource-amount-value").textContent = amount;
+      document.getElementById("resource-capacity").textContent = "/" + capacity;
+      amountElement.dataset.wide = String(String(amount).length + String(capacity).length > 4);
+      amountElement.dataset.help = "남은 " + definition.name + " " + amount + "개 / 처음 자원 " + capacity + "개";
+      amountElement.setAttribute("aria-label", amountElement.dataset.help);
+      image.dataset.help = definition.name + "\n채집 시간 · " + (seconds === null ? "—" : "1개당 " + seconds + "초") +
+        "\n채집 조건 · " + condition + "\n운반 결과 · " + yieldHelp;
+      image.setAttribute("aria-label", image.dataset.help);
+      resourceLocation.dataset.help = "자원 위치로 이동\n(" + (tree?.column ?? cell.x) + ", " + (tree?.row ?? cell.y) + ")";
+      if (helpTooltipTarget && resourceDetails.contains(helpTooltipTarget) && helpTooltipTarget.dataset.help !== previousHelp) showHelpTooltip(helpTooltipTarget);
+    }
+
     function updateUnitPanel() {
       const agent = state.selection?.kind === "agent" ? state.selection.target : null;
       const target = state.selection?.target;
       const key = target ? state.selection.kind + ":" + (target.id ?? (target.column ?? target.x) + "," + (target.row ?? target.y)) : null;
-      if (key !== unitPanelSelectionKey) unitActionStatus.textContent = "";
+      if (key !== unitPanelSelectionKey) {
+        unitActionStatus.textContent = "";
+        if (helpTooltipTarget && unitPanel.contains(helpTooltipTarget)) hideHelpTooltip();
+      }
       unitPanelSelectionKey = key;
       updateCorpseDetails();
       updateTerrainDetails();
+      updateResourceDetails();
+      resourceLocation.hidden = resourceDetails.hidden;
       agentDetails.hidden = !agent;
-      unitPanel.hidden = !agent && corpseDetails.hidden && terrainDetails.hidden;
+      agentBirth.hidden = !agent;
+      agentDesign.hidden = !agent;
+      unitPanel.hidden = !agent && corpseDetails.hidden && terrainDetails.hidden && resourceDetails.hidden;
       if (unitPanel.hidden) return;
       collapseControlsGuide();
       if (!agent) return;
       unitPanelTitle.textContent = agent.name + " · Lv." + (agent.level || 1);
-      document.getElementById("agent-birth-stats").textContent = agent.templateName + " · 설계 " + agent.templateRevision + "세대\n" +
-        templateDescription(agent.activeSlots || agent.slots) + " · 발현 " + (agent.activeSlots || agent.slots).length + "/" + agent.slots.length + " · 체력 " + Math.ceil(Math.max(0, agent.health) * 10) / 10 + "/" + agent.stats.health;
-      if (Number.isFinite(agent.bornAt) && Number.isFinite(agent.lifespan)) {
-        const age = Math.max(0, state.simSeconds - agent.bornAt);
-        document.getElementById("agent-birth-stats").textContent += "\n나이 " + formatLifetime(age) +
-          " · 남은 수명 " + formatLifetime(Math.ceil(Math.max(0, agent.lifespan - age)));
+      const attributes = document.getElementById("agent-attributes");
+      const slots = agent.activeSlots || agent.slots;
+      const signature = slots.join(",");
+      if (attributes.dataset.signature !== signature) {
+        attributes.dataset.signature = signature;
+        const fragment = document.createDocumentFragment();
+        for (const slot of slots) {
+          const attribute = ATTRIBUTES.find(candidate => candidate.key === slot);
+          if (!attribute) continue;
+          const icon = document.createElement("span");
+          icon.className = "unit-attribute";
+          icon.tabIndex = 0;
+          icon.setAttribute("role", "img");
+          icon.setAttribute("aria-label", attribute.name);
+          const image = document.createElement("img");
+          image.src = attribute.image;
+          image.alt = "";
+          icon.append(image);
+          attachAttributeHelp(icon, attribute);
+          fragment.append(icon);
+        }
+        if (helpTooltipTarget && attributes.contains(helpTooltipTarget)) hideHelpTooltip();
+        attributes.replaceChildren(fragment);
       }
-      document.getElementById("agent-birth-stats").textContent += " · " + Spawner.COMBAT_DISPOSITIONS[agent.combatDisposition || "passive"];
-      const personality = agent.personalityLabels;
-      document.getElementById("agent-personality").textContent = personality ?
-        "대담함 " + personality.boldness + " · 호전성 " + personality.aggression + " · 호기심 " + personality.curiosity : "";
       const template = selectedAgentTemplate();
       const cost = template ? birthCost(template) : Infinity;
-      document.getElementById("agent-birth-cost").textContent = Number.isFinite(cost) ? cost : "—";
-      agentDesign.textContent = template ? "설계 수정" : "새 유닛 설계";
-      agentDesign.disabled = connection.busy || !connection.online;
-      agentBirth.hidden = !template;
-      agentBirth.disabled = !template || connection.busy || !connection.online || state.nestHealth === 0 || state.evolutionPoints < cost ||
+      agentBirth.disabled = !!state.ending || !template || connection.busy || !connection.online || state.nestHealth === 0 || state.evolutionPoints < cost ||
         template.slots.length > slotCapacity() || template.slots.some(key => !ATTRIBUTES.some(attribute => attribute.key === key));
+      const help = "같은 설계로 탄생" + (Number.isFinite(cost) ? "\n진화 포인트 " + cost + "점" : "");
+      const hint = unitActionStatus.textContent || (connection.busy ? "처리 중입니다." : !connection.online ? "연결을 확인해 주세요." :
+        state.nestHealth === 0 ? "둥지가 파괴되었습니다." : state.evolutionPoints < cost ? "진화 포인트가 부족합니다." :
+        agentBirth.disabled ? "둥지에서 설계를 확인해 주세요." : "");
+      const helpChanged = agentBirth.dataset.help !== help || agentBirth.dataset.helpHint !== hint;
+      agentBirth.dataset.help = help;
+      agentBirth.dataset.helpHint = hint;
+      if (helpChanged && helpTooltipTarget === agentBirth) showHelpTooltip(agentBirth);
     }
 
     const AGENT_MODE_LABELS = {
@@ -5078,6 +5858,7 @@
 
     let renderedAgentListSignature = "";
     const agentAvatars = new Map();
+    let agentAvatarIndex = 0;
 
     function unitListEntries() {
       return [...state.agents, ...state.corpses.filter(corpse => corpse.colonyId === connection.colonyId && corpse.amount > 0).map(corpse => foodCellMap.get(corpse.key || corpse.x + "," + corpse.y) || corpse)];
@@ -5087,11 +5868,18 @@
       if (objectPanel.hidden || document.hidden) return;
       const panel = objectPanel.getBoundingClientRect();
       const ratio = window.devicePixelRatio || 1;
-      for (const agent of unitListEntries()) {
+      const entries = unitListEntries();
+      const start = agentAvatarIndex % entries.length;
+      let rendered = 0;
+      for (let index = 0; index < entries.length && rendered < 2; index++) {
+        const agent = entries[(start + index) % entries.length];
         const avatar = agentAvatars.get(agent.id);
-        if (!avatar) continue;
+        if (!avatar || avatar.updatedAt != null && now - avatar.updatedAt < 50) continue;
         const bounds = avatar.canvas.getBoundingClientRect();
         if (!bounds.width || bounds.bottom <= panel.top || bounds.top >= panel.bottom) continue;
+        avatar.updatedAt = now;
+        agentAvatarIndex = (start + index + 1) % entries.length;
+        rendered++;
         const size = Math.min(bounds.width, bounds.height);
         const width = Math.round(bounds.width * ratio);
         const height = Math.round(bounds.height * ratio);
@@ -5103,7 +5891,7 @@
         context.setTransform(ratio, 0, 0, ratio, 0, 0);
         context.clearRect(0, 0, bounds.width, bounds.height);
         if (agent.kind === "corpse") {
-          if (drawAgentCorpse(context, agent, bounds.width / 2, bounds.height * 0.8, size * 1.4, null, 1)) continue;
+          if (drawAgentCorpse(context, agent, bounds.width / 2, bounds.height * .93, size * 1.65, null, 1)) continue;
           context.save();
           context.filter = "grayscale(0.8)";
           context.globalAlpha = 0.6;
@@ -5113,7 +5901,8 @@
           continue;
         }
         const birth = agentBirthPose(agent, true);
-        const cell = size * (birth?.seedVisible ? .38 : 1.65);
+        const attributes = agent.appearanceAttributes || agent.attributes || {};
+        const cell = size * (birth?.seedVisible ? .38 : (agent.tribe || "bean") === "bean" && attributes.butchery ? 1.45 : 1.65);
         const topLeft = { x: (bounds.width - cell) / 2, y: bounds.height * .93 - cell * (.5 + AGENT_HEIGHT * .44) };
         drawAgentAppearance(context, now, agent, cell, topLeft, interpolatedAgentPosition(agent), birth, null);
       }
@@ -5148,7 +5937,7 @@
             const current = unitListEntries().find(candidate => candidate.id === button.dataset.agentId);
             if (current?.kind === "corpse") {
               selectObject("corpse", current);
-              moveCameraTo(current.x + 0.5, current.y + 0.5, zoomForLayer(0));
+              moveCameraTo(current.x + 0.5, current.y + 0.5, zoomForLayer(INITIAL_ZOOM_LAYER));
             } else if (current) selectAgent(current);
           });
           fragment.appendChild(button);
@@ -5213,18 +6002,18 @@
 
     function agentAppearanceKey(attributes) {
       return [attributes.strength ?? attributes.arms ?? 0, attributes.feet || 0,
-        attributes.antenna || 0, attributes.lifespan || 0].join(":");
+        attributes.antenna || 0, attributes.lifespan || 0, attributes.butchery || 0].join(":");
     }
 
     function agentSpriteLayers(attributes) {
-      return ["body", ...(attributes.feet ? ["feet-left", "feet-right"] : []),
+      return ["body", ...(attributes.butchery ? ["tail"] : []), ...(attributes.feet ? ["feet-left", "feet-right"] : []),
         ...(attributes.antenna ? ["antenna"] : ["sprout-left", "sprout-right", "sprout-stem"])];
     }
 
     function prepareAgentTemplate(template) {
       if (template.tribe && template.tribe !== "bean") {
         const tribe = Spawner.PLAYER_TRIBES.find(entry => entry.key === template.tribe);
-        return Promise.all([prepareAgentMovement(tribe), tribe.key === "spring" ? springBirthSheet.decode() : tribe.key === "pebble" ? pebbleBirthSheet.decode() : null]).then(() => {
+        return Promise.all([prepareAgentMovement(tribe), tribe.key === "spore" ? prepareSporeBirth() : tribe.key === "spring" ? springBirthSheet.decode() : tribe.key === "pebble" ? pebbleBirthSheet.decode() : null]).then(() => {
           for (let count = Math.min(1, template.slots.length); count <= template.slots.length; count++) {
             const attributes = attributeCounts(template.slots.slice(0, count));
             for (const layer of [...agentSpriteLayers(attributes), "full"]) selectionContour(agentSprite({ tribe: tribe.key, attributes }, layer), null);
@@ -5261,7 +6050,7 @@
         return sprite;
       }
       const counts = { strength: attributes.strength ?? attributes.arms ?? 0,
-        feet: attributes.feet || 0, antenna: attributes.antenna || 0, lifespan: attributes.lifespan || 0 };
+        feet: attributes.feet || 0, antenna: attributes.antenna || 0, lifespan: attributes.lifespan || 0, butchery: attributes.butchery || 0 };
       const key = agentAppearanceKey(counts) + ":" + (layer || "full");
       if (!agentSprites.has(key)) {
         const sprite = composeAgentSprite(counts, layer);
@@ -5277,10 +6066,16 @@
       return agentImageSources.get(sprite);
     }
 
+    function agentBodyLift(attributes) {
+      if (!attributes.feet) return 0;
+      const height = 92 + attributes.feet * 8;
+      return 460 - 512 * 0.94 + height * 0.88;
+    }
+
     function composeAgentAntennae(context, attributes) {
       const count = attributes.antenna;
       if (!count) return;
-      const lift = attributes.feet ? 24 + attributes.feet * 7 : 0;
+      const lift = agentBodyLift(attributes);
       const part = agentParts.get("antenna-" + (count === 1 ? 1 : 2));
       const width = count === 1 ? 196 : 344 + (count - 2) * 16;
       const height = width * part.naturalHeight / part.naturalWidth;
@@ -5296,7 +6091,11 @@
       context.scale(resolution / 512, resolution / 512);
       context.imageSmoothingEnabled = true;
       context.imageSmoothingQuality = "high";
-      const lift = attributes.feet ? 24 + attributes.feet * 7 : 0;
+      const lift = agentBodyLift(attributes);
+      if (attributes.butchery && (!layer || layer === "full" || layer === "tail")) {
+        context.drawImage(agentParts.get("butchery"), 0, -lift, 512, 512);
+      }
+      if (layer === "tail") return sprite;
       if (layer === "sprout-left" || layer === "sprout-right" || layer === "sprout-stem") {
         if (!attributes.antenna) context.drawImage(agentBaseParts.get(layer), 136, 110 - lift, 240, 350);
         return sprite;
@@ -5312,12 +6111,12 @@
         if (layer === "feet-left" || layer === "feet-right") {
           const right = layer === "feet-right" ? 1 : 0;
           context.drawImage(part, right * part.naturalWidth / 2, 0, part.naturalWidth / 2, part.naturalHeight,
-            256 - width / 2 + right * width / 2, 500 - height, width / 2, height);
-        } else context.drawImage(part, 256 - width / 2, 500 - height, width, height);
+            256 - width / 2 + right * width / 2, 512 * 0.94 - height, width / 2, height);
+        } else context.drawImage(part, 256 - width / 2, 512 * 0.94 - height, width, height);
       }
       if (["feet", "feet-left", "feet-right"].includes(layer)) return sprite;
       if (attributes.antenna && layer !== "body") composeAgentAntennae(context, attributes);
-      context.drawImage(layer === "body" || attributes.antenna ? agentBaseParts.get("body") : starterObjectSprite,
+      if (layer !== "attributes") context.drawImage(layer === "body" || attributes.antenna ? agentBaseParts.get("body") : starterObjectSprite,
         136, 110 - lift, 240, 350);
       if (attributes.strength) {
         const width = (344 + (attributes.strength - 1) * 24) * 0.78;
@@ -5339,12 +6138,15 @@
     }
 
     function drawAgentCorpse(context, corpse, x, floor, cell, outlineColor, opacity) {
-      const index = agentDeathFrame(corpse, state.simSeconds);
+      if (corpse.species) return drawCreatureCorpse(context, corpse, x, floor, cell, outlineColor, opacity);
+      const index = agentDeathFrame(corpse, corpsePlaybackTime());
       if (index < 0) return false;
-      if (!agentDeathSheet.complete || !agentDeathSheet.naturalWidth) return true;
-      const animation = AGENT_DEATH_ANIMATION;
+      const animation = Spawner.agentDeathAnimation(corpse);
+      const entry = unitAnimationSheets.get(corpse.tribe || "bean")?.get("death");
+      if (!entry?.sprite.complete || !entry.sprite.naturalWidth) return true;
+      const sheet = entry.sprite;
       const frame = idleMotion.matches ? animation.frameCount - 1 : index;
-      const size = cell * AGENT_HEIGHT * animation.scale;
+      const size = cell * AGENT_HEIGHT * entry.scale;
       const left = -size * animation.pivotX / animation.frameSize;
       const top = -size * animation.pivotY / animation.frameSize;
       const sourceX = frame % animation.columns * animation.frameSize;
@@ -5357,10 +6159,10 @@
       context.globalAlpha *= opacity * (1 - decay * 0.4);
       context.filter = "saturate(" + (1 - decay * 0.8) + ")";
       context.translate(x, floor);
-      context.drawImage(agentDeathSheet, sourceX, sourceY, animation.frameSize, animation.frameSize,
+      context.drawImage(sheet, sourceX, sourceY, animation.frameSize, animation.frameSize,
         left, top, size, size);
-      if (outlineColor) drawSelectionOutline(agentDeathSheet, left, top, size, size,
-        { owner: agentDeathSheet, size: animation.frameSize, index: frame, x: sourceX, y: sourceY }, outlineColor);
+      if (outlineColor) drawSelectionOutline(sheet, left, top, size, size,
+        { owner: sheet, size: animation.frameSize, index: frame, x: sourceX, y: sourceY }, outlineColor);
       context.restore();
       return true;
     }
@@ -5379,7 +6181,7 @@
           ctx.scale(.35, .35);
           ctx.translate(-anchor.x, -anchor.y);
         }
-        const point = worldToScreen(corpse.x + 0.5, corpse.y + 0.5 + AGENT_HEIGHT * (460 / 512 - 0.5));
+        const point = worldToScreen(corpse.x + 0.5, corpse.y + 0.5 + AGENT_HEIGHT * .44);
         if (!drawAgentCorpse(ctx, corpse, point.x, point.y, state.camera.zoom,
           objectOutlineColor("corpse", corpse), pose.opacity)) drawResourceNode(state.lastFrame, corpse, undefined);
         ctx.restore();
@@ -5395,6 +6197,8 @@
     for (const image of document.querySelectorAll("[data-evolution-symbol]")) image.src = EVOLUTION_SYMBOL;
 
     const templateList = document.getElementById("template-list");
+    const templateDeleteDialog = document.getElementById("template-delete-dialog");
+    const templateDeleteCancel = document.getElementById("template-delete-cancel");
     const nestUpgrade = document.getElementById("nest-upgrade");
     const nestStatus = document.getElementById("nest-status");
     const firstDesign = document.getElementById("first-design");
@@ -5404,7 +6208,6 @@
     const designSlots = document.getElementById("design-slots");
     const designPalette = document.getElementById("attribute-palette");
     const designSave = document.getElementById("design-save");
-    const designBirth = document.getElementById("design-birth");
     const designStatus = document.getElementById("design-status");
     const codex = document.getElementById("codex");
     const codexSearch = document.getElementById("codex-search");
@@ -5437,6 +6240,18 @@
       return cost;
     }
 
+    function confirmTemplateDelete(template) {
+      if (templateDeleteDialog.open) return Promise.resolve(false);
+      return new Promise(resolve => {
+        templateDeleteDialog.returnValue = "cancel";
+        document.getElementById("template-delete-message").textContent = "“" + template.name + "” 설계를 삭제할까요?";
+        templateDeleteDialog.addEventListener("close", () => resolve(templateDeleteDialog.returnValue === "delete"), { once: true });
+        hideHelpTooltip();
+        templateDeleteDialog.showModal();
+        templateDeleteCancel.focus();
+      });
+    }
+
     function renderUnitTemplates() {
       const signature = JSON.stringify(state.templates);
       if (signature === templateListSignature) return;
@@ -5465,13 +6280,46 @@
         const edit = document.createElement("button");
         edit.type = "button";
         edit.className = "template-edit";
-        edit.textContent = "설계 수정";
-        edit.setAttribute("aria-label", template.name + " 설계 수정");
+        const editIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        editIcon.setAttribute("viewBox", "0 0 24 24");
+        editIcon.setAttribute("aria-hidden", "true");
+        editIcon.setAttribute("focusable", "false");
+        const editPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        editPath.setAttribute("d", "M14 5l5 5M4 20l4.5-1L20 7.5a2.12 2.12 0 0 0-3-3L5.5 16 4 20Z");
+        editIcon.append(editPath);
+        edit.append(editIcon);
+        edit.title = "설계 변경";
+        edit.setAttribute("aria-label", template.name + " 설계 변경");
         edit.addEventListener("click", () => openUnitDesign(state.templates.find((candidate) => candidate.id === template.id)));
-        const footer = document.createElement("div");
-        footer.className = "template-card-footer";
-        footer.append(createEvolutionCost(birthCost(template)), edit);
-        card.append(button, footer);
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.className = "template-delete";
+        remove.title = "설계 삭제";
+        remove.setAttribute("aria-label", template.name + " 설계 삭제");
+        remove.setAttribute("aria-haspopup", "dialog");
+        remove.setAttribute("aria-controls", "template-delete-dialog");
+        const removeIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        removeIcon.setAttribute("viewBox", "0 0 24 24");
+        removeIcon.setAttribute("aria-hidden", "true");
+        removeIcon.setAttribute("focusable", "false");
+        const removePath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        removePath.setAttribute("d", "M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 10v7M14 10v7");
+        removeIcon.append(removePath);
+        remove.append(removeIcon);
+        remove.addEventListener("click", async () => {
+          if (connection.busy || !connection.online || state.ending) return;
+          if (!await confirmTemplateDelete(template)) return;
+          nestStatus.textContent = "";
+          const result = await sendCommand({ type: "delete-design", templateId: template.id });
+          if (result) evolutionOpenButton.focus();
+        });
+        const actions = document.createElement("div");
+        actions.className = "template-card-actions";
+        actions.append(edit, remove);
+        const header = document.createElement("div");
+        header.className = "template-card-header";
+        header.append(createEvolutionCost(birthCost(template)), actions);
+        card.append(header, button);
         fragment.append(card);
       }
       fragment.append(evolutionOpenButton);
@@ -5484,16 +6332,18 @@
         "칸 · 진화 포인트 보관량 " + pointCapacity().toLocaleString("ko-KR") + " → " + NEST_LEVELS[state.nestLevel].pointCapacity.toLocaleString("ko-KR");
     }
 
-    function openUnitDesign(template) {
+    function openUnitDesign(template, readOnly) {
+      readOnly = readOnly || !!state.ending;
       designReturnFocus = document.activeElement;
-      unitDraft = { id: template ? template.id : null, tribe: state.tribe || "bean", slots: template ? template.slots.map(key => key === "arms" ? "strength" : key) : [], error: "" };
+      unitDraft = { id: template ? template.id : null, tribe: template?.tribe || state.tribe || "bean", slots: template ? template.slots.map(key => key === "arms" ? "strength" : key) : [], error: "", readOnly: !!readOnly };
       designName.value = template ? template.name : randomTemplateName();
+      designName.readOnly = !!readOnly;
+      designPalette.hidden = !!readOnly;
+      designSave.closest(".design-footer").hidden = !!readOnly;
       closeCodex(false);
       designName.setCustomValidity("");
-      document.getElementById("design-title").textContent = template ? "유닛 설계 수정" :
+      document.getElementById("design-title").textContent = readOnly ? "유닛 설계도" : template ? "유닛 설계 수정" :
         state.templates.length ? "새 유닛 설계" : "첫 생명체 설계";
-      designSave.hidden = !template;
-      document.getElementById("design-birth-label").textContent = template ? "수정 후 탄생" : "탄생";
       evolutionPanel.hidden = false;
       designBackdrop.hidden = false;
       document.querySelector(".app").inert = true;
@@ -5502,34 +6352,35 @@
       evolutionOpenButton.setAttribute("aria-expanded", "true");
       renderDesignSlots();
       updateUnitDesign();
-      designName.focus();
+      if (readOnly) evolutionClose.focus();
+      else designName.focus();
     }
 
     function renderDesignSlots() {
       if (!unitDraft) return;
       hideHelpTooltip();
       const fragment = document.createDocumentFragment();
-      for (let index = 0; index < Math.max(slotCapacity(), unitDraft.slots.length); index += 1) {
+      for (let index = 0; index < (unitDraft.readOnly ? unitDraft.slots.length : Math.max(slotCapacity(), unitDraft.slots.length)); index += 1) {
         const key = unitDraft.slots[index];
         const attribute = ATTRIBUTES.find((candidate) => candidate.key === key);
         const button = document.createElement("button");
         button.type = "button";
         button.className = "design-slot" + (attribute ? " has-attribute" : "");
         button.dataset.slotIndex = index;
-        button.setAttribute("aria-label", "슬롯 " + (index + 1) + (attribute ? " " + attribute.name + " 빼기" : " 비어 있음"));
+        button.setAttribute("aria-label", "슬롯 " + (index + 1) + (attribute ? " " + attribute.name + (unitDraft.readOnly ? "" : " 빼기") : " 비어 있음"));
         if (attribute) {
           button.style.setProperty("--attribute-color", attribute.color);
           const image = document.createElement("img");
           image.src = attribute.image;
           image.alt = "";
           attachAttributeHelp(button, attribute);
-          button.dataset.helpHint = "클릭해서 속성 빼기";
+          if (!unitDraft.readOnly) button.dataset.helpHint = "클릭해서 속성 빼기";
           button.append(image);
         } else {
           button.textContent = "+";
         }
         button.addEventListener("click", () => {
-          if (!attribute) return;
+          if (!attribute || unitDraft?.readOnly) return;
           unitDraft.slots.splice(index, 1);
           unitDraft.error = "";
           renderDesignSlots();
@@ -5579,7 +6430,7 @@
     function updateUnitDesign() {
       if (!unitDraft || evolutionPanel.hidden) return;
       const counts = attributeCounts(unitDraft.slots);
-      const stats = unitStats(counts);
+      const stats = unitStats(counts, unitDraft.tribe);
       prepareAgentTemplate(unitDraft).catch(() => {});
       document.getElementById("design-preview-image").src = agentImageSource({ tribe: unitDraft.tribe, attributes: counts, carrying: 0 });
       const statValues = [["시야", stats.vision + "칸"], ["운반", stats.capacity + "개"],
@@ -5605,19 +6456,13 @@
       for (const button of designPalette.querySelectorAll(".attribute-info")) {
         button.setAttribute("aria-expanded", String(button.dataset.attributeInfo === selectedAttribute));
       }
-      const cost = birthCost(unitDraft);
-      birthCostOutput.textContent = Number.isFinite(cost) ? cost : "설계 수정";
-      document.getElementById("design-points").textContent = state.evolutionPoints;
-      document.getElementById("design-budget").dataset.insufficient = String(state.evolutionPoints < cost);
       updateCodex();
-      designBirth.disabled = connection.busy || !connection.online || state.nestHealth === 0 || unitDraft.slots.length > slotCapacity();
-      designSave.disabled = connection.busy || !connection.online || unitDraft.slots.length > slotCapacity();
-      setEvolutionText(designStatus, unitDraft.error || (state.nestHealth === 0 ? "둥지가 파괴되어 설계만 저장할 수 있습니다." : state.evolutionPoints < cost ?
-        "탄생에 " + (cost - state.evolutionPoints) + "점이 더 필요해 템플릿만 저장합니다." : "속성은 1·3·6·9·12레벨에 순서대로 발현합니다."));
+      designSave.disabled = !!state.ending || connection.busy || !connection.online || unitDraft.slots.length > slotCapacity();
+      setEvolutionText(designStatus, unitDraft.error);
     }
 
-    async function saveUnitDesign(shouldBirth) {
-      if (!unitDraft) return;
+    async function saveUnitDesign() {
+      if (!unitDraft || unitDraft.readOnly) return;
       const name = designName.value.trim();
       if (!name) {
         designName.setCustomValidity("템플릿 이름을 지어 주세요.");
@@ -5625,11 +6470,10 @@
         return;
       }
       const result = await sendCommand({ type: "design", templateId: unitDraft.id,
-        name, slots: [...unitDraft.slots], birth: shouldBirth });
+        name, slots: [...unitDraft.slots], birth: false });
       if (!result || !unitDraft) return;
       state.selectedTemplateId = result.templateId;
-      unitDraft.id = result.templateId;
-      if (!shouldBirth || state.evolutionPoints < birthCost(unitDraft)) closeEvolutionPanel();
+      closeEvolutionPanel();
       updateColonyPanel();
     }
 
@@ -5643,7 +6487,10 @@
       unitPanel.inert = false;
       evolutionOpenButton.setAttribute("aria-expanded", "false");
       unitDraft = null;
-      if (designReturnFocus?.isConnected) designReturnFocus.focus();
+      if (designReturnFocus?.isConnected) {
+        designReturnFocus.focus();
+        hideHelpTooltip();
+      }
     }
 
     function openColonyPanel(entry) {
@@ -5659,7 +6506,7 @@
       collapseControlsGuide();
       nestStatus.textContent = "";
       updateColonyPanel();
-      if (!state.templates.length) openUnitDesign(null);
+      if (!state.ending && !state.templates.length) openUnitDesign(null);
       else colonyMenuClose.focus();
     }
 
@@ -5694,6 +6541,8 @@
 
     function updateColonyPanel() {
       if (document.hidden) return;
+      cheats?.update(connection.active && connection.cheats && document.body.dataset.screen === "game",
+        connection.busy || !connection.online || !!state.ending);
       updateResourceInventory();
       const capacity = pointCapacity();
       foodProgressFill.style.width = (state.evolutionPoints / capacity * 100) + "%";
@@ -5704,7 +6553,7 @@
       document.getElementById("point-capacity").textContent = capacity;
       const own = colonyEntries.find((entry) => entry.id === connection.colonyId);
       document.getElementById("nest-name").textContent = own ? own.name : "둥지";
-      nestRenameOpen.disabled = connection.busy || !connection.online || !own;
+      nestRenameOpen.disabled = !!state.ending || connection.busy || !connection.online || !own;
       nestNameSave.disabled = connection.busy || !connection.online;
       nestNameInput.disabled = connection.busy;
       nestNameCancel.disabled = connection.busy;
@@ -5713,13 +6562,15 @@
       document.getElementById("nest-upgrade-points").textContent = state.nestLevel >= NEST_LEVELS.length ? "—" : upgradeCost();
       document.getElementById("nest-upgrade-help").dataset.help = nestGrowthBenefits();
       nestUpgrade.setAttribute("aria-label", state.nestLevel >= NEST_LEVELS.length ? "최고 둥지 레벨" : "둥지 성장, 진화 포인트 " + upgradeCost() + "점");
-      nestUpgrade.disabled = connection.busy || !connection.online || state.nestHealth === 0 || state.nestLevel >= NEST_LEVELS.length || state.evolutionPoints < upgradeCost();
-      firstDesign.hidden = state.templates.length > 0 || !evolutionPanel.hidden;
+      nestUpgrade.disabled = !!state.ending || connection.busy || !connection.online || state.nestHealth === 0 || state.nestLevel >= NEST_LEVELS.length || state.evolutionPoints < upgradeCost();
+      firstDesign.hidden = !!state.ending || state.templates.length > 0 || !evolutionPanel.hidden;
+      if (!firstDesign.hidden) firstDesign.querySelector("img").src = agentImageSource({ tribe: state.tribe, attributes: attributeCounts([]), carrying: 0 });
       renderUnitTemplates();
       for (const card of templateList.querySelectorAll("[data-template-id]")) {
         const template = state.templates.find((candidate) => candidate.id === Number(card.dataset.templateId));
-        card.querySelector(".template-spawn").disabled = connection.busy || !connection.online || state.nestHealth === 0 || state.evolutionPoints < birthCost(template) || template.slots.length > slotCapacity() || template.slots.some(key => !ATTRIBUTES.some(attribute => attribute.key === key));
+        card.querySelector(".template-spawn").disabled = !!state.ending || connection.busy || !connection.online || state.nestHealth === 0 || state.evolutionPoints < birthCost(template) || template.slots.length > slotCapacity() || template.slots.some(key => !ATTRIBUTES.some(attribute => attribute.key === key));
         card.querySelector(".template-edit").disabled = connection.busy || !connection.online;
+        card.querySelector(".template-delete").disabled = !!state.ending || connection.busy || !connection.online;
       }
       updateUnitDesign();
       updateCodex();
@@ -5800,14 +6651,6 @@
       if (!cell) return;
       openCodex(cell.hazard ? "hazard:" + cell.hazard.key : "terrain:" + cell.terrain.key, { x, y, roomId: connection.roomId });
     }
-
-    selectionTerrain.addEventListener("click", () => {
-      const cell = selectionTerrainCell();
-      if (cell) {
-        closeColonyMenu();
-        selectObject("terrain", cell);
-      }
-    });
 
     function codexTerrainImage(value, kind) {
       const frame = document.createElement("span");
@@ -6172,7 +7015,7 @@
     }
 
     function equipDesignAttribute(attributeKey) {
-      if (!unitDraft || evolutionPanel.hidden || !ATTRIBUTES.some(attribute => attribute.key === attributeKey) || unitDraft.slots.length >= slotCapacity()) return;
+      if (!unitDraft || unitDraft.readOnly || evolutionPanel.hidden || !ATTRIBUTES.some(attribute => attribute.key === attributeKey) || unitDraft.slots.length >= slotCapacity()) return;
       if (ATTRIBUTES.find(attribute => attribute.key === attributeKey)?.stacking === false && unitDraft.slots.includes(attributeKey)) return;
       unitDraft.slots.push(attributeKey);
       unitDraft.error = "";
@@ -6254,9 +7097,8 @@
     });
     designForm.addEventListener("submit", (event) => {
       event.preventDefault();
-      saveUnitDesign(true);
+      saveUnitDesign();
     });
-    designSave.addEventListener("click", () => saveUnitDesign(false));
     designBackdrop.addEventListener("click", closeEvolutionPanel);
     evolutionPanel.addEventListener("keydown", (event) => {
       if (event.key !== "Tab") return;
@@ -6294,6 +7136,7 @@
       agentPanelResize.setAttribute("aria-valuemin", Math.round(minimum));
       agentPanelResize.setAttribute("aria-valuemax", Math.round(maximum));
       agentPanelResize.setAttribute("aria-valuenow", Math.round(value));
+      positionDiscoveryToasts(value);
       resizeCanvas();
     }
 
@@ -6329,6 +7172,8 @@
     const roomTitle = document.getElementById("room-title");
     const roomSeed = document.getElementById("room-seed");
     const roomList = document.getElementById("room-list");
+    const roomsDeleteAll = document.getElementById("rooms-delete-all");
+    const roomsDeleteEnded = document.getElementById("rooms-delete-ended");
     const tribeSelection = document.getElementById("tribe-selection");
     const tribeSelectionStatus = document.getElementById("tribe-selection-status");
     const tribeGrid = document.getElementById("tribe-grid");
@@ -6340,11 +7185,18 @@
     let selectedTribe = null;
     let tribeRoomId = null;
     let lobbyBusy = false;
+    let roomCount = 0;
+    let endedRoomIds = [];
     let roomCreationProgress = null;
 
     function setLobbyBusy(busy) {
       lobbyBusy = busy;
       welcome.querySelectorAll("input, button, select, textarea").forEach(control => { control.disabled = busy; });
+      roomsDeleteAll.disabled = busy || roomCount === 0;
+      roomsDeleteAll.hidden = roomCount === 0;
+      document.getElementById("rooms-refresh").hidden = roomCount === 0;
+      roomsDeleteEnded.disabled = busy || endedRoomIds.length === 0;
+      roomsDeleteEnded.hidden = endedRoomIds.length === 0;
     }
 
     function updateRoomCreationProgress(progress) {
@@ -6450,6 +7302,7 @@
       await Promise.all([...new Set(colonies.map(colony => colony.tribe).filter(key => key && key !== "bean"))].map(async key => {
         const tribe = Spawner.PLAYER_TRIBES.find(entry => entry.key === key);
         await prepareAgentMovement(tribe);
+        if (key === "spore") await prepareSporeBirth();
         if (key === "spring") await springBirthSheet.decode();
         if (key === "pebble") await Promise.all([pebbleBirthSheet.decode(), pebbleBirthForeground.decode()]);
         if (tribeColonies.has(key)) return;
@@ -6469,12 +7322,32 @@
         const appearance = { sprite, scale: 1, groundWidth: width / 2048,
           top: (1860 - height) / 2048, centerY: 384.5 / 512,
           animation: { smooth: true, frameCount: 1, frameMs: 1, restMs: 0 } };
+        if (key === "spore") {
+          const sheet = new Image();
+          sheet.src = assetSource("DesignAssets/Tribes/spore/Animations/Nests/stage-01-idle-spine-v1/nest-stage-01-idle-sheet.png");
+          await sheet.decode();
+          const frameBounds = tribeArt.bounds(sheet, true);
+          const frameScale = Math.min(width / frameBounds.width, height / frameBounds.height);
+          appearance.animation = { smooth: false, sheet, frameSize: 512, columns: 12, frameCount: 96,
+            frameMs: 4000 / 96, restMs: 0, placement: {
+              x: ((2048 - width) / 2 - frameBounds.x * frameScale) / 2048,
+              y: (1860 - height - frameBounds.y * frameScale) / 2048,
+              width: 512 * frameScale / 2048, height: 512 * frameScale / 2048
+            } };
+          const bounds = Spawner.SPORE_BIRTH_ANIMATION.nestBounds;
+          const sceneScale = Math.min(width / bounds.width, height / bounds.height);
+          appearance.birthScene = { x: ((2048 - width) / 2 - bounds.x * sceneScale) / 2048,
+            y: (1860 - height - bounds.y * sceneScale) / 2048, size: Spawner.SPORE_BIRTH_ANIMATION.frameSize * sceneScale / 2048 };
+          appearance.birthOutlet = { x: appearance.birthScene.x + Spawner.SPORE_BIRTH_ANIMATION.pivotX * sceneScale / 2048,
+            y: appearance.birthScene.y + Spawner.SPORE_BIRTH_ANIMATION.pivotY * sceneScale / 2048 };
+        }
         if (key === "spring") {
           const sheet = new Image();
           sheet.src = assetSource("DesignAssets/Tribes/spring/Animations/Nests/stage-01-idle-v5/nest-stage-01-idle-sheet.png");
           await sheet.decode();
           const sourceScale = 420 / 1492;
-          const frameScale = scale / sourceScale;
+          const nestScale = Spawner.imageScale(tribe.nest);
+          const frameScale = scale * nestScale / sourceScale;
           appearance.animation = {
             smooth: false, sheet, frameSize: 512, columns: 10, frameCount: 60, frameMs: 4000 / 60, restMs: 0,
             placement: {
@@ -6484,8 +7357,8 @@
             }
           };
           appearance.birthOutlet = {
-            x: ((2048 - width) / 2 + (1616 - bounds.x) * scale) / 2048,
-            y: (1860 - height + (646 - bounds.y) * scale) / 2048
+            x: ((2048 - width) / 2 + (1616 * nestScale - bounds.x) * scale) / 2048,
+            y: (1860 - height + (646 * nestScale - bounds.y) * scale) / 2048
           };
         }
         if (key === "pebble") {
@@ -6567,6 +7440,132 @@
       document.getElementById("welcome-title").focus();
     });
 
+    const endingReport = document.getElementById("ending-report");
+    const endingToolbar = document.getElementById("ending-toolbar");
+    let endingRoomId = null;
+    const endingPlayback = { elapsedMs: 0, pending: false };
+
+    function resetEnding() {
+      endingPlayback.elapsedMs = 0;
+      endingPlayback.pending = false;
+      endingRoomId = null;
+      canvas.style.removeProperty("--ending-fade");
+      endingReport.close();
+      endingToolbar.hidden = true;
+      delete document.body.dataset.ending;
+    }
+
+    function openEndingReport() {
+      if (!state.ending || !connection.active || document.body.dataset.screen !== "game" ||
+          endingPlayback.elapsedMs < 4000 || endingReport.open) return;
+      closeCodex(false);
+      closeEvolutionPanel();
+      closeColonyMenu();
+      closeUnitPanel();
+      hideHelpTooltip();
+      stopMapMovement();
+      state.dragging = false;
+      endingReport.showModal();
+      document.getElementById("ending-browse").focus();
+    }
+
+    function corpsePlaybackTime() {
+      return state.simSeconds + (state.ending && endingRoomId === connection.roomId ? endingPlayback.elapsedMs / 1000 : 0);
+    }
+
+    function updateEndingPresentation(elapsedMs) {
+      if (!state.ending || endingRoomId !== connection.roomId || document.body.dataset.screen !== "game") return;
+      endingPlayback.elapsedMs = Math.min(4000, endingPlayback.elapsedMs + elapsedMs);
+      const progress = clamp((endingPlayback.elapsedMs - 2000) / 2000, 0, 1);
+      const fade = idleMotion.matches ? Number(progress > 0) : progress * progress * (3 - 2 * progress);
+      canvas.style.setProperty("--ending-fade", String(fade));
+      endingToolbar.hidden = endingPlayback.elapsedMs < 4000;
+      if (endingPlayback.elapsedMs >= 4000 && endingPlayback.pending) {
+        endingPlayback.pending = false;
+        openEndingReport();
+      }
+    }
+
+    function updateEnding(live) {
+      if (!state.ending) {
+        endingToolbar.hidden = true;
+        delete document.body.dataset.ending;
+        return;
+      }
+      if (document.body.dataset.screen !== "game" || endingRoomId === connection.roomId) return;
+      endingRoomId = connection.roomId;
+      endingPlayback.elapsedMs = live ? 0 : 4000;
+      endingPlayback.pending = true;
+      state.lastFrame = performance.now();
+      canvas.style.setProperty("--ending-fade", live ? "0" : "1");
+      document.body.dataset.ending = "true";
+      clearDiscoveryToasts();
+      const report = state.ending;
+      document.getElementById("ending-colony").textContent = colonyEntries.find(entry => entry.id === connection.colonyId)?.name || "군락의 기록";
+      document.getElementById("ending-reason").textContent = report.reason === "nest-destroyed" ?
+        "둥지가 무너지고 마지막 생명도 떠났습니다." : "유닛이 모두 떠났고, 새 생명을 탄생시킬 진화 포인트가 부족합니다.";
+      const seconds = Math.floor(report.endedAt);
+      const values = [["생존 시간", Math.floor(seconds / 60) + "분 " + seconds % 60 + "초"],
+        ["탄생한 생명", report.bornCount.toLocaleString("ko-KR") + "개체"],
+        ["탐사한 땅", report.exploredCells.toLocaleString("ko-KR") + "칸"],
+        ["발견한 대상", report.discoveryCount.toLocaleString("ko-KR") + "종"],
+        ["둥지 성장", "Lv." + report.nestLevel], ["모은 진화 포인트", report.colonyFood.toLocaleString("ko-KR")]];
+      const fragment = document.createDocumentFragment();
+      for (const [label, value] of values) {
+        const entry = document.createElement("div");
+        const term = document.createElement("dt");
+        const description = document.createElement("dd");
+        term.textContent = label;
+        description.textContent = value;
+        entry.append(term, description);
+        fragment.append(entry);
+      }
+      document.getElementById("ending-stats").replaceChildren(fragment);
+      document.getElementById("ending-status").textContent = "";
+      updateEndingPresentation(0);
+    }
+
+    async function leaveEndedRoom() {
+      if (connection.busy || !state.ending) return;
+      connection.busy = true;
+      const buttons = [...endingReport.querySelectorAll("button"), ...endingToolbar.querySelectorAll("button")];
+      buttons.forEach(button => { button.disabled = true; });
+      try {
+        await client.call("pause", { visible: false });
+        connection.active = false;
+        connection.online = false;
+        audio.setActive(false);
+        resetEnding();
+        closeCodex(false);
+        closeEvolutionPanel();
+        closeColonyMenu();
+        closeUnitPanel();
+        document.querySelector(".app").hidden = true;
+        document.querySelector(".app").inert = true;
+        welcome.hidden = false;
+        document.body.dataset.screen = "welcome";
+        await refreshRooms();
+        document.getElementById("welcome-title").focus();
+      } catch (error) {
+        document.getElementById("ending-status").textContent = error.message;
+        openEndingReport();
+      } finally {
+        connection.busy = false;
+        buttons.forEach(button => { button.disabled = false; });
+      }
+    }
+
+    document.getElementById("ending-report-open").addEventListener("click", openEndingReport);
+    document.getElementById("ending-browse").addEventListener("click", () => {
+      endingReport.close();
+      canvas.focus();
+    });
+    endingReport.addEventListener("close", () => {
+      if (connection.active && document.body.dataset.screen === "game") canvas.focus();
+    });
+    document.getElementById("ending-leave").addEventListener("click", leaveEndedRoom);
+    document.getElementById("ending-rooms").addEventListener("click", leaveEndedRoom);
+
     function showConnectionError(message, storageError) {
       connection.online = false;
       audio.updateMusic(null);
@@ -6610,11 +7609,13 @@
       const selection = state.selection;
       const previousDiscoveryKeys = new Set(state.discoveries.map(entry => entry.key));
       const firstSnapshot = connection.revision < 0 || connection.synchronizing;
+      const endingStarted = !firstSnapshot && !state.ending && !!packet.state.ending;
       const knownColonies = new Set(colonyEntries.map(colony => colony.id));
       const renderedAt = state.simSeconds;
       syncFoodDeliveries(packet, firstSnapshot);
       connection.revision = packet.revision;
       connection.colonyId = packet.colonyId;
+      connection.cheats = packet.cheats === true;
       connection.simSeconds = packet.state.simSeconds;
       connection.receivedAt = performance.now();
       if (Number.isFinite(packet.sampledAt)) connection.receivedAt -= Math.max(0,
@@ -6637,7 +7638,7 @@
       Object.assign(COLONY_CENTER, { x: own.x + 2.5, y: own.y + 2.5 });
       const { food, sharedTrails, footprints, explored, visible, ...view } = packet.state;
       Object.assign(state, view);
-      if (!firstSnapshot) state.simSeconds = renderedAt;
+      if (!firstSnapshot && !state.ending) state.simSeconds = renderedAt;
       syncAgentMovements([...state.agents, ...state.rivals], packet.state.simSeconds, firstSnapshot);
       Spawner.syncHarvestPlayback(harvestPlayback, [...state.agents, ...state.rivals], packet.state.simSeconds, firstSnapshot);
       harvestDisplay.time = null;
@@ -6699,17 +7700,19 @@
       updateNotifications(previousDiscoveryKeys, firstSnapshot);
       renderColonyList();
       updateColonyPanel();
+      updateEnding(endingStarted);
       scheduleRender();
     }
 
     async function sendCommand(action) {
-      if (connection.busy || !connection.active || !connection.online) return null;
+      if (connection.busy || !connection.active || !connection.online || state.ending && action.type !== "read-discoveries") return null;
       const roomId = connection.roomId;
       connection.busy = true;
       updateColonyPanel();
       try {
         if (action.type === "birth" || action.type === "design" && action.birth) {
-          const template = action.type === "birth" ? state.templates.find(candidate => candidate.id === action.templateId) : action;
+          const template = action.type === "birth" ? action.agentId !== undefined ?
+            state.agents.find(candidate => candidate.id === action.agentId) : state.templates.find(candidate => candidate.id === action.templateId) : action;
           if (template) await prepareAgentTemplate(template);
           if (connection.roomId !== roomId || !connection.active || !connection.online) return null;
         }
@@ -6730,6 +7733,7 @@
     }
 
     async function enterRoom(roomId) {
+      resetEnding();
       audio.updateMusic(null);
       connection.roomId = roomId;
       connection.revision = -1;
@@ -6750,7 +7754,11 @@
         connection.active = true;
         applySnapshot(packet);
         if (!connection.online) return;
-        prepareAgentRendering();
+        if (terrainRendering.cacheError) {
+          setEvolutionText(connectionStatus, terrainRendering.cacheError);
+          connectionStatus.hidden = false;
+        }
+        await prepareAgentRendering();
         closeEvolutionPanel();
         closeColonyMenu();
         selectObject(null, null);
@@ -6764,6 +7772,7 @@
         resizeCanvas();
         focusColony();
         canvas.focus();
+        updateEnding(false);
         await client.call("resume", { visible: !document.hidden });
       } catch (error) {
         connection.active = false;
@@ -6780,14 +7789,23 @@
         const signature = JSON.stringify([connection.roomId, rooms]);
         if (signature === roomsSignature) return;
         roomsSignature = signature;
-        document.getElementById("room-count").textContent = String(rooms.length);
+        roomCount = rooms.length;
+        endedRoomIds = rooms.filter(room => room.ending).map(room => room.id);
+        document.getElementById("room-count").textContent = String(roomCount);
         const fragment = document.createDocumentFragment();
-        for (const room of rooms.toSorted((a, b) => Number(b.id === connection.roomId) - Number(a.id === connection.roomId))) {
+        for (const room of rooms.toSorted((a, b) => Number(!!a.ending) - Number(!!b.ending) ||
+          Number(b.id === connection.roomId) - Number(a.id === connection.roomId))) {
           const row = document.createElement("div");
-          row.className = "room-item" + (room.id === connection.roomId ? " is-host" : "");
+          row.className = "room-item" + (room.id === connection.roomId ? " is-host" : "") + (room.ending ? " is-ended" : "");
           const text = document.createElement("div");
           const title = document.createElement("strong");
           title.textContent = room.title;
+          if (room.ending) {
+            const badge = document.createElement("span");
+            badge.className = "room-ending-badge";
+            badge.textContent = "멸망";
+            title.append(badge);
+          }
           if (room.id === connection.roomId) {
             const badge = document.createElement("span");
             badge.className = "room-owner-badge";
@@ -6795,15 +7813,15 @@
             title.append(badge);
           }
           const detail = document.createElement("small");
-          detail.textContent = (room.tribe === null ? "부족 선택 전" : Math.floor(room.simSeconds / 60) + "분 진행") + " · " + new Date(room.updatedAt).toLocaleString("ko-KR");
+          detail.textContent = (room.ending ? "멸망 · " + Math.floor(room.ending.endedAt / 60) + "분의 기록" : room.tribe === null ? "부족 선택 전" : Math.floor(room.simSeconds / 60) + "분 진행") + " · " + new Date(room.updatedAt).toLocaleString("ko-KR");
           const seed = document.createElement("small");
           seed.className = "room-seed-label";
           seed.textContent = "시드 " + room.seed;
           text.append(title, detail, seed);
           const join = document.createElement("button");
           join.type = "button";
-          join.className = "primary-action";
-          join.textContent = room.tribe === null ? "부족 선택" : "이어하기";
+          join.className = room.ending ? "secondary-action" : "primary-action";
+          join.textContent = room.ending ? "둘러보기" : room.tribe === null ? "부족 선택" : "이어하기";
           join.addEventListener("click", () => lobbyAction("enter", { roomId: room.id }));
           const remove = document.createElement("button");
           remove.type = "button";
@@ -6833,6 +7851,7 @@
         if (version === lobbyVersion) {
           roomList.setAttribute("aria-busy", "false");
           document.getElementById("room-create-panel").hidden = false;
+          welcome.setAttribute("aria-busy", "false");
         }
       }
     }
@@ -6846,6 +7865,39 @@
         await client.call("delete", { roomId: room.id, title: room.title });
         if (connection.roomId === room.id) connection.roomId = null;
         welcomeStatus.textContent = "방을 삭제했습니다.";
+      } catch (error) { setEvolutionText(welcomeStatus, error.message); }
+      finally {
+        await refreshRooms();
+        setLobbyBusy(false);
+      }
+    }
+
+    async function deleteEndedRooms() {
+      if (lobbyBusy || endedRoomIds.length === 0) return;
+      const roomIds = [...endedRoomIds];
+      if (!window.confirm("멸망한 방 " + roomIds.length + "개와 진행 기록을 삭제할까요?\n삭제한 진행 기록은 복구할 수 없습니다.")) return;
+      setLobbyBusy(true);
+      welcomeStatus.textContent = "멸망한 방 삭제 중…";
+      try {
+        const result = await client.call("delete-ended", { roomIds });
+        if (result.roomIds.includes(connection.roomId)) connection.roomId = null;
+        welcomeStatus.textContent = result.roomIds.length ? "멸망한 방 " + result.roomIds.length + "개를 삭제했습니다." : "삭제할 멸망한 방이 없습니다.";
+      } catch (error) { setEvolutionText(welcomeStatus, error.message); }
+      finally {
+        await refreshRooms();
+        setLobbyBusy(false);
+      }
+    }
+
+    async function deleteAllRooms() {
+      if (lobbyBusy || roomCount === 0) return;
+      if (!window.confirm("내 방 목록의 모든 방(" + roomCount + "개)과 진행 기록을 삭제할까요?\n삭제한 진행 기록은 복구할 수 없습니다.")) return;
+      setLobbyBusy(true);
+      welcomeStatus.textContent = "모든 방 삭제 중…";
+      try {
+        await client.call("delete-all", null);
+        connection.roomId = null;
+        welcomeStatus.textContent = "모든 방을 삭제했습니다.";
       } catch (error) { setEvolutionText(welcomeStatus, error.message); }
       finally {
         await refreshRooms();
@@ -6900,9 +7952,11 @@
     document.getElementById("room-name-random").addEventListener("click", randomRoomName);
     document.getElementById("welcome-form").addEventListener("submit", (event) => {
       event.preventDefault();
-      lobbyAction("create", { title: roomTitle.value.trim(), seed: roomSeed.value === "" ? null : Number(roomSeed.value) });
+      lobbyAction("create", { title: roomTitle.value.trim(), seed: roomSeed.value === "" ? null : Number(roomSeed.value), cheats: cheats?.enabled === true });
     });
     document.getElementById("rooms-refresh").addEventListener("click", refreshRooms);
+    roomsDeleteAll.addEventListener("click", deleteAllRooms);
+    roomsDeleteEnded.addEventListener("click", deleteEndedRooms);
     randomRoomName();
     randomRoomSeed();
     {
@@ -6914,6 +7968,7 @@
         roomList.textContent = "방 목록을 불러오지 못했습니다.";
         roomList.setAttribute("aria-busy", "false");
         document.getElementById("room-create-panel").hidden = false;
+        welcome.setAttribute("aria-busy", "false");
       });
       function updateVisibility(visible) {
         if (renderFrame !== null) cancelAnimationFrame(renderFrame);
@@ -6952,5 +8007,6 @@
     })().catch(error => {
       console.error(error);
       document.getElementById("welcome-status").textContent = "게임을 초기화하지 못했습니다. 페이지를 새로고침해 주세요.";
+      document.getElementById("welcome").setAttribute("aria-busy", "false");
       document.querySelector('#welcome-form button[type="submit"]').disabled = true;
     });

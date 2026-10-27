@@ -152,6 +152,7 @@
         setMode(null);
         return;
       }
+      if (snapshot.ending && mode) return;
       const time = snapshot.simSeconds;
       if (time < lastTime) combatUntil = -Infinity;
       lastTime = time;

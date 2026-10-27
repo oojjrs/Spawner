@@ -35,7 +35,7 @@ async function persist() {
     room.updatedAt = saved.updatedAt;
     dirty = false;
     if (storageError && resumeAfterStorageError) {
-      running = visible;
+      running = visible && !room.games.get(room.hostId).ending;
       lastTick = Date.now();
     }
     storageError = false;
@@ -61,13 +61,13 @@ async function handle(type, data, id) {
   if (type === "session") return { roomId: await storage.setting("roomId") };
   if (type === "list") {
     return (await storage.list()).map(saved => ({ id: saved.id, title: saved.title, seed: saved.seed,
-      updatedAt: saved.updatedAt, simSeconds: saved.simSeconds,
+      updatedAt: saved.updatedAt, simSeconds: saved.simSeconds, ending: saved.ending || null,
       tribe: saved.colonies.find(colony => colony.ownerId === saved.hostId)?.tribe })).sort((a, b) => b.updatedAt - a.updatedAt);
   }
   if (type === "create") {
     await persist();
     if (!Number.isInteger(data.seed) || data.seed < 0 || data.seed > 4294967295) throw new Error("시드는 0~4294967295 사이의 정수로 입력해 주세요.");
-    const next = createRoom(data.title, data.seed, null, progress => postMessage({ id, type: "progress", progress: progress * .95 }));
+    const next = createRoom(data.title, data.seed, null, progress => postMessage({ id, type: "progress", progress: progress * .95 }), data.cheats);
     await storage.put(saveRoom(next));
     postMessage({ id, type: "progress", progress: 1 });
     room = next;
@@ -87,8 +87,11 @@ async function handle(type, data, id) {
     storageError = false;
     lastTick = Date.now();
     lastSave = lastTick;
-    running = data.visible && room.colonies.find(colony => colony.ownerId === room.hostId).tribe !== null;
-    return { ...snapshotRoom(room, true), sampledAt: performance.timeOrigin + performance.now() };
+    const packet = snapshotRoom(room, true);
+    running = data.visible && room.colonies.find(colony => colony.ownerId === room.hostId).tribe !== null && !packet.state.ending;
+    dirty = true;
+    await persist();
+    return { ...packet, sampledAt: performance.timeOrigin + performance.now() };
   }
   if (type === "pause") {
     running = false;
@@ -108,17 +111,40 @@ async function handle(type, data, id) {
     storageError = false;
     lastTick = Date.now();
     lastSave = lastTick;
-    running = !!room && visible && room.colonies.find(colony => colony.ownerId === room.hostId).tribe !== null;
+    running = !!room && visible && room.colonies.find(colony => colony.ownerId === room.hostId).tribe !== null && !room.games.get(room.hostId).ending;
     publish(false);
     return null;
   }
   if (type === "command") {
     if (!room || room.id !== data.roomId || storageError) throw new Error("월드를 다시 열어 주세요.");
     const result = commandRoom(room, data.action);
+    if (room.games.get(room.hostId).ending) running = false;
     dirty = true;
     await persist();
     publish(false);
     return result;
+  }
+  if (type === "delete-ended") {
+    if (!Array.isArray(data?.roomIds) || data.roomIds.some(id => typeof id !== "string")) throw new Error("삭제할 방 목록을 다시 확인해 주세요.");
+    await persist();
+    const roomIds = await storage.removeEnded([...new Set(data.roomIds)]);
+    if (roomIds.includes(room?.id)) {
+      running = false;
+      room = null;
+      dirty = false;
+      storageError = false;
+      resumeAfterStorageError = false;
+    }
+    return { roomIds };
+  }
+  if (type === "delete-all") {
+    await storage.removeAll();
+    running = false;
+    room = null;
+    dirty = false;
+    storageError = false;
+    resumeAfterStorageError = false;
+    return null;
   }
   if (type === "delete") {
     const saved = await storage.get(data.roomId);
@@ -161,6 +187,10 @@ setInterval(() => {
       lastTick = now;
       tickRoom(room, elapsed);
       dirty = true;
+      if (room.games.get(room.hostId).ending) {
+        running = false;
+        await persist();
+      }
       publish(false);
       if (Date.now() - lastSave >= 5000) await persist();
     } catch (error) {

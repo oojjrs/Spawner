@@ -1,4 +1,5 @@
-export const TALON_OWL_IDLE = Object.freeze({
+import { imageAnimation } from "./image-geometry.mjs";
+export const TALON_OWL_IDLE = Object.freeze(imageAnimation({
   image: "DesignAssets/Animations/TalonOwlIdle/PerchedV4/idle.webp",
   frameSize: 512,
   columns: 4,
@@ -8,7 +9,7 @@ export const TALON_OWL_IDLE = Object.freeze({
   pivotX: 234,
   pivotY: 400,
   scale: 2
-});
+}));
 
 export function talonOwlIdleFrame(elapsedMs) {
   let elapsed = Number.isFinite(elapsedMs) ? Math.max(0, elapsedMs) % TALON_OWL_IDLE.durationMs : 0;
