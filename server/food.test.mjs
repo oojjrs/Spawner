@@ -50,24 +50,25 @@ test("새싹콩과 기존 속성은 열매를 채집 대상으로 선택하거�
   }
 });
 
-test("빈 땅의 기존 버섯은 계속 수확한다", () => {
+test("새싹콩은 비옥토를 수확하고 둥지 식량으로 운반한다", () => {
   for (const [terrain, kind] of [["grassland", undefined]]) {
     const f = fixture(terrain, kind, ["strength", "antenna"]);
+    f.food.resourceType = "clay";
     advance(f, 20);
     assert.ok(f.food.amount < 20);
     assert.ok(f.game.snapshot().colonyFood > 0);
   }
 });
 
-test("무속성 개체는 버섯만 채집하고 다른 먹이·재료·사체는 선택하지 않는다", () => {
+test("무속성 새싹콩은 비옥토만 자동 채집하고 다른 먹이·재료·사체는 선택하지 않는다", () => {
   const world = { hazards: new Uint8Array(320 * 320) };
   assert.equal(canHarvestResource(null, world), false);
   assert.equal(canHarvestResource({ x: 43, y: 42, terrain: "grassland", resourceType: "unknown" }, world), false);
-  assert.equal(canHarvestResource({ x: 43, y: 42, terrain: "forest", resourceType: "honey-mushrooms" }, world), true);
+  assert.equal(canHarvestResource({ x: 43, y: 42, terrain: "forest", resourceType: "honey-mushrooms" }, world), false);
   for (const definition of RESOURCE_TYPES) {
     assert.equal(canHarvestResource({ x: 43, y: 42, terrain: "grassland", resourceType: definition.key }, world),
-      definition.key === "honey-mushrooms");
-    if (definition.key === "honey-mushrooms") continue;
+      ["clay", "sand"].includes(definition.key));
+    if (definition.key === "clay") continue;
     const f = fixture("grassland", undefined, []);
     f.food.resourceType = definition.key;
     f.food.kind = definition.key === "meat" ? "corpse" : "resource";
@@ -82,9 +83,11 @@ test("무속성 개체는 버섯만 채집하고 다른 먹이·재료·사체�
 
 test("기존 저장의 열매 채집 명령은 복원 후 수확 전에 취소한다", () => {
   const f = fixture("grassland", undefined, ["strength", "antenna"]);
+  f.food.resourceType = "clay";
   for (let step = 0; step < 300 && !f.game.agents.some(agent => agent.mode === "harvest"); step++) advance(f, 0.1);
   assert.ok(f.game.agents.some(agent => agent.mode === "harvest"));
   f.food.terrain = "forest";
+  f.food.resourceType = "tree-fruit";
   f.environment.world.terrain[42 * 320 + 43] = 5;
   const amount = f.food.amount;
   const saved = f.game.save();

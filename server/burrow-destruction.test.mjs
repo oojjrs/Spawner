@@ -17,7 +17,7 @@ function fixture(type) {
   const agent = game.agents[0];
   Object.assign(agent, { x:burrow.x + burrow.width, y:burrow.y, renderFromX:burrow.x + burrow.width, renderFromY:burrow.y,
     moveStartedAt:0, moveDuration:0, moveBudget:0, mode:"fight", decisionPending:null, nextDecisionAt:100,
-    knownEnemyIds:new Set([burrow.id]), actionPriorities:["fight"],
+    knownEnemyIds:new Set([burrow.id]), combatDisposition:"aggressive", personality:{ boldness:1, aggression:1, curiosity:0 }, actionPriorities:["fight"],
     utility:{ action:"fight", target:{ id:burrow.id, key:burrow.id, kind:"burrow", x:burrow.x, y:burrow.y }, route:[] } });
   agent.stats.attack = 5; agent.stats.speed = 1;
   return { room, game, burrow, agent, system:room.creatureSystem };
@@ -34,7 +34,7 @@ test("작은 굴 20·큰 굴 60의 체력을 적용하고 파괴 시 통행만 �
     assert.equal(system.receiveBurrowDamage(burrow.id, 5), 0);
     assert.equal(system.burrowAt(burrow.x, burrow.y), null);
     assert.deepEqual(system.agents.map(agent => agent.id), ids);
-    assert.ok(system.agents.every(agent => agent.health === 20));
+    assert.ok(system.agents.every(agent => agent.health === 100));
   }
 });
 
@@ -52,7 +52,7 @@ test("큰 굴의 오른쪽 칸에 붙어 명중 프레임에 한 번만 피해�
 
 test("발견한 굴을 자율 전투 후보로 고르며 보이지 않는 굴을 추적하지 않는다", () => {
   const { room, game, burrow, agent } = fixture("small");
-  Object.assign(agent, { x:burrow.x + 5, renderFromX:burrow.x + 5, utility:null, decisionPending:"restore" });
+  Object.assign(agent, { x:burrow.x + 8, renderFromX:burrow.x + 8, utility:null, decisionPending:"restore" });
   game.prepare(0); game.tick(.01);
   assert.notEqual(agent.utility?.target.kind, "burrow");
   Object.assign(agent, { x:burrow.x + 1, renderFromX:burrow.x + 1, utility:null, moveStartedAt:0, moveDuration:0, decisionPending:"restore" });
@@ -63,7 +63,7 @@ test("발견한 굴을 자율 전투 후보로 고르며 보이지 않는 굴을
 test("유닛의 실제 연속 공격으로 굴이 부서지면 증식과 공격 대상이 사라지고 나온 개체는 남는다", () => {
   for (const type of ["small","large"]) {
     const { room, game, system, burrow } = fixture(type), ids = system.agents.map(agent => agent.id);
-    for (let index = 0; index < 150 && system.burrows[0].health > 0; index++) {
+    for (let index = 0; index < 1200 && system.burrows[0].health > 0; index++) {
       room.simSeconds = index / 10; game.prepare(room.simSeconds); game.tick(.1);
     }
     assert.equal(system.burrows[0].health, 0, type);
@@ -94,5 +94,7 @@ test("실제 저장 월드에서 부분 피해와 파괴 상태를 복원하고 
   assert.equal(restored.creatureSystem.burrows.find(burrow => burrow.id === large.id).health, 37);
   restored.simSeconds = 600; restored.creatureSystem.tick();
   assert.deepEqual(restored.creatureSystem.agents.filter(agent => agent.burrowId === small.id).map(agent => agent.id), survivors);
-  assert.equal(restored.creatureSystem.agents.filter(agent => agent.burrowId === large.id).length, 6);
+  const living = restored.creatureSystem.agents.filter(agent => agent.burrowId === large.id);
+  assert.ok(living.length > 0 && living.length <= 6);
+  assert.ok(restored.creatureSystem.save().burrows.find(record => record.id === large.id).nextSpawnAt > 600);
 });

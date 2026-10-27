@@ -2,6 +2,7 @@ import { ENCOUNTER_TYPES } from "./encounter-types.mjs";
 import { unitTerrainSpeedMultiplier } from "./attributes.mjs";
 import { CORPSE_LIFETIME, placeCorpse } from "./lifespan.mjs";
 import { createCombat, canPursueCombat } from "./combat.mjs";
+import { unitCombatStats, migrateCombatStats } from "./combat-stats.mjs";
 
 export function createEncounters(environment, saved, residents) {
   const combat = environment.combatSystem || (environment.combatSystem = createCombat(environment));
@@ -38,6 +39,8 @@ export function createEncounters(environment, saved, residents) {
   for (const agent of state.agents) if (!plans.has(agent.species) || !Number.isInteger(agent.x) || !Number.isInteger(agent.y) ||
       agent.x < 0 || agent.y < 0 || agent.x >= size || agent.y >= size || !Number.isFinite(agent.health) || agent.health <= 0 ||
       !Number.isFinite(agent.moveStartedAt) || !Number.isFinite(agent.nextActionAt)) throw new Error("중립 유닛 상태가 올바르지 않습니다.");
+
+  for (const agent of state.agents) migrateCombatStats(agent);
 
   function players() {
     return [...environment.games.values()].flatMap(game => game.agents.filter(agent => agent.health > 0).map(agent => ({ game, agent })));
@@ -95,7 +98,7 @@ export function createEncounters(environment, saved, residents) {
   }
 
   function spawn(record, initial) {
-    const plan = plans.get(record.key), type = types.get(record.key);
+    const plan = plans.get(record.key), type = types.get(record.key), combatStats = unitCombatStats(record.key);
     const candidates = (plan.spawnPoints || [record.y * size + record.x, ...memberships.get(record.key)]).filter(index => spawnHabitat(plan, index % size, Math.floor(index / size)) &&
       !(environment.food.get(index % size + "," + Math.floor(index / size))?.amount > 0) &&
       !occupied(index % size, Math.floor(index / size), null) && (initial || !visible(index % size, Math.floor(index / size))));
@@ -106,7 +109,7 @@ export function createEncounters(environment, saved, residents) {
     record.sequence++;
     state.agents.push({ id: "encounter:" + record.key + ":" + record.sequence, species: record.key, name: type.name,
       faction: type.hostile ? "hostile" : "neutral", movementType: type.flying ? "flying" : "ground", encounterKey: record.key,
-      x, y, homeX: plan.spawnPoints ? x : record.x, homeY: plan.spawnPoints ? y : record.y, health: 12, stats: { health: 12, attack: 1, speed: .5, vision: plan.radius, resistance: 1 },
+      x, y, homeX: plan.spawnPoints ? x : record.x, homeY: plan.spawnPoints ? y : record.y, health: combatStats.health, stats: { ...combatStats, attack: 1, speed: .5, vision: plan.radius, resistance: 1 },
       attributes: {}, carrying: 0, renderFromX: x, renderFromY: y, moveStartedAt: environment.simSeconds, moveDuration: 0,
       mode: "idle", nextActionAt: environment.simSeconds, animationStartedAt: environment.simSeconds, facing: 1, stepCount: 0,
       hidden: ["soil-mole", "bubble-toad"].includes(record.key), hiddenUntil: 0, routeCursor: 0, routeDirection: 1,

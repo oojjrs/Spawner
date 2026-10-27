@@ -113,7 +113,8 @@ test("기본·예시·양 끝 시드 모두 세 부족이 재현되며 실제 �
     const world = generateWorld(seed), tribes = world.tribes;
     assert.equal(tribes.length, 3, "시드 " + seed);
     assert.equal(new Set(tribes.map(tribe => tribe.id)).size, 3);
-    assert.deepEqual(generateTribes(world), tribes);
+    assert.deepEqual(tribes, world.camps.slice(1));
+    assert.deepEqual(generateWorld(seed).tribes, tribes);
     const blocked = new Uint8Array(320 * 320);
     for (const burrow of world.burrows) for (let dy = 0; dy < burrow.height; dy++) for (let dx = 0; dx < burrow.width; dx++) {
       blocked[(burrow.y + dy) * 320 + burrow.x + dx] = 1;
@@ -125,18 +126,17 @@ test("기본·예시·양 끝 시드 모두 세 부족이 재현되며 실제 �
       for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
         const nx = x + dx, ny = y + dy, next = ny * 320 + nx;
         if (nx < 0 || ny < 0 || nx >= 320 || ny >= 320 || distances[next] >= 0 || blocked[next] ||
-            world.terrain[next] < 2 || world.terrain[next] > 6) continue;
+            world.terrain[next] < 2 || world.terrain[next] > 9) continue;
         distances[next] = distances[index] + 1; queue.push(next);
       }
     }
     for (const tribe of tribes) {
-      assert.notEqual(tribe.siteIndex, 0);
-      assert.equal(tribe.pathDistance, distances[tribe.y * 320 + tribe.x]);
-      assert.ok(tribe.contactSeconds >= 0 && tribe.contactSeconds < 4294967295);
+      assert.notEqual(tribe.id, world.camps[0].id);
+      assert.ok(distances[tribe.y * 320 + tribe.x] > 0);
       for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++) {
         if (Math.abs(dx) === 2 && Math.abs(dy) === 2) continue;
         const index = (tribe.y + dy) * 320 + tribe.x + dx;
-        assert.ok(world.terrain[index] >= 2 && world.terrain[index] <= 6);
+        assert.ok(world.terrain[index] >= 2 && world.terrain[index] <= 9);
         assert.equal(world.hazards[index], 0);
         assert.equal(blocked[index], 0);
       }

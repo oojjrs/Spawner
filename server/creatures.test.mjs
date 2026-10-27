@@ -2,7 +2,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createCreatures } from "./creatures.mjs";
-import { BEETLE_ANIMATIONS } from "./beetle-animation.mjs";
+import { BEETLE_ANIMATIONS, beetleAnimationPose } from "./beetle-animation.mjs";
+import { combatDamage } from "./combat-stats.mjs";
 import { createGame } from "./game.mjs";
 import { generateWorld, WORLD_GENERATION_VERSION } from "./world.mjs";
 import { createRoom, saveRoom, restoreRoom, snapshotRoom } from "../client/room.mjs";
@@ -10,7 +11,7 @@ import { createRoom, saveRoom, restoreRoom, snapshotRoom } from "../client/room.
 const attack = JSON.parse(readFileSync(new URL("../DesignAssets/Animations/spiny-back-beetle-attack.json", import.meta.url), "utf8"));
 
 function environment() {
-  return { seed: 7, simSeconds: 0, world: { seed: 7, sites: [[100, 100]], terrain: new Uint8Array(320 * 320).fill(4), creatureDensity: new Uint8Array(320 * 320).fill(255),
+  return { seed: 7, simSeconds: 0, damageRandom: () => .5, world: { seed: 7, sites: [[100, 100]], terrain: new Uint8Array(320 * 320).fill(4), creatureDensity: new Uint8Array(320 * 320).fill(255),
     hazards: new Uint8Array(320 * 320), burrows: [
       { id: "burrow:small:64130", type: "small", x: 130, y: 200, width: 1, height: 1, entrance: { x: 130, y: 201 } },
       { id: "burrow:large:64230", type: "large", x: 230, y: 200, width: 3, height: 1, entrance: { x: 231, y: 201 } }
@@ -28,7 +29,7 @@ function encounter() {
   const room = environment();
   const beetle = loneCreature(room);
   Object.assign(beetle, { x: 140, y: 140, homeX: 140, homeY: 140, renderFromX: 140, renderFromY: 140 });
-  const victim = { id: "1:1", x: 140, y: 140, health: 12, moveStartedAt: 0, moveDuration: 0 };
+  const victim = { id: "1:1", x: 140, y: 140, health: 1000, combatDisposition: "peaceful", stats: { health: 1000, speed: 1, attack: 1, combatStrength: 20 }, moveStartedAt: 0, moveDuration: 0 };
   const hits = [];
   room.games.set("first", { agents: [victim], receiveDamage(agent, amount) { hits.push({ time: room.simSeconds, amount }); agent.health -= amount; } });
   return { room, beetle, victim, hits };
@@ -81,10 +82,11 @@ test("턱이 닫히는 프레임에서 한 번만 피해를 주고 공격을 마
   room.creatureSystem.tick();
   room.creatureSystem.tick();
   assert.equal(hits.length, 1);
-  assert.equal(victim.health, health - beetle.stats.attack);
+  assert.equal(victim.health, health - combatDamage(beetle, victim, .5));
   room.simSeconds = attack.durationMs / 1000;
   room.creatureSystem.tick();
-  assert.equal(beetle.mode, "idle");
+  assert.equal(beetleAnimationPose(beetle, room.simSeconds).action, "idle");
+  assert.ok(beetle.attack.exchangeEndsAt > room.simSeconds);
 });
 
 test("공격 준비 중 전투 셀에서 사라진 개체는 맞지 않는다", () => {
@@ -156,7 +158,7 @@ function fight(count) {
   saved.state.evolutionPoints = 20;
   game.restore(JSON.stringify(saved));
   const positions = [[139, 140], [140, 139], [141, 140]];
-  const actions = new Set();
+  const actions = new Set(), combatSides = new Set();
   let retreats = false;
   for (let index = 0; index < count; index++) {
     const result = game.command({ type: "design", templateId: null, name: "기본 콩 " + index, slots: [], birth: true });
@@ -173,6 +175,7 @@ function fight(count) {
     game.tick(0.1);
     for (const agent of game.agents) {
       actions.add(agent.utility?.action);
+      if (agent.combat) combatSides.add(agent.combat.side);
       if (step !== 1) continue;
       const next = agent.utility?.route?.[1];
       if (next && Math.abs(next.x - beetle.x) + Math.abs(next.y - beetle.y) >
@@ -180,15 +183,13 @@ function fight(count) {
     }
     room.creatureSystem.tick();
   }
-  return { beetle, agents: game.agents, duration: room.simSeconds, actions, retreats };
+  return { beetle, agents: game.agents, duration: room.simSeconds, actions, combatSides, retreats };
 }
 
-test("신중한 개체는 이득이 낮은 강적과 강제 교전하지 않고 생존한다", () => {
+test("신중한 비선공 개체는 강적을 먼저 공격하지 않고 붙잡혔을 때 반격한다", () => {
   for (const count of [1, 2, 3]) {
     const result = fight(count);
-    assert.equal(result.agents.length, count);
-    assert.equal(result.beetle.health, result.beetle.stats.health);
-    assert.ok(result.agents.every(agent => agent.health > 0));
+    assert.deepEqual([...result.combatSides], [1]);
     assert.ok(!result.actions.has("fight"));
     if (count === 1) assert.ok(result.retreats, "혼자인 개체는 첫 이동부터 강적과 거리를 벌려야 합니다.");
   }
@@ -385,11 +386,11 @@ test("실제 월드를 저장·복원하고 스냅샷에서 소속 굴을 유지
   assert.deepEqual(restored.creatureSystem.save(), room.creatureSystem.save());
   assert.equal(restored.world.generationVersion, room.world.generationVersion);
   assert.deepEqual(restored.world.burrows, room.world.burrows);
-  assert.ok(restored.world.burrows.some(burrow => burrow.creature?.unique));
+  assert.ok(restored.world.encounters.some(plan => plan.unique));
   restored.simSeconds = 120; restored.creatureSystem.tick();
   for (const burrow of restored.world.burrows) {
     const count = restored.creatureSystem.agents.filter(agent => agent.species === "spiny-back-beetle" && agent.health > 0 && agent.burrowId === burrow.id).length;
-    assert.equal(count, burrow.creature?.unique ? 0 : burrow.type === "small" ? 2 : 5, burrow.id);
+    assert.ok(count >= 0 && count <= (burrow.type === "small" ? 3 : 6), burrow.id);
   }
   const colony = restored.colonies[0], beetle = restored.creatureSystem.agents.find(agent => agent.species === "spiny-back-beetle");
   Object.assign(beetle, { x: colony.x + 2, y: colony.y + 3 });

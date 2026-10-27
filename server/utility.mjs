@@ -3,6 +3,7 @@ import { unitMovementSpeed, unitTerrainSpeedMultiplier } from "./attributes.mjs"
 import { resourceDefinition, resourceTypeForCell } from "./resources.mjs";
 import { burrowApproaches } from "./burrows.mjs";
 import { combatDisposition, canPursueCombat } from "./combat.mjs";
+import { combatDamage } from "./combat-stats.mjs";
 
 export function createPersonality(random) {
   return Object.freeze({ boldness: random(), aggression: random(), curiosity: random() });
@@ -148,11 +149,11 @@ export function createUtilityAI(context) {
       const supporters = state.agents.filter(ally => ally !== agent && ally.health > 0)
         .reduce((sum, ally) => sum + participation(ally, enemy), 0);
       const supportDamage = state.agents.filter(ally => ally !== agent && ally.health > 0)
-        .reduce((sum, ally) => sum + participation(ally, enemy) * ally.stats.attack * ally.stats.speed, 0);
+        .reduce((sum, ally) => sum + participation(ally, enemy) * combatDamage(ally, enemy), 0);
       let exposure = reach;
       if (fighting && distance(cell, enemy) <= 1) exposure = Math.min(exposure,
-        enemy.health / Math.max(0.1, agent.stats.attack * agent.stats.speed + supportDamage));
-      damage += enemy.stats.attack * (enemy.species ? 1 / 2.08 : enemy.stats.speed) * exposure / (1 + supporters);
+        enemy.health / Math.max(0.1, combatDamage(agent, enemy) + supportDamage));
+      damage += combatDamage(enemy, agent) * exposure / (1 + supporters);
     }
     return damage;
   }
@@ -297,7 +298,8 @@ export function createUtilityAI(context) {
         { recoverHealth: Math.min(agent.stats.health, agent.health + amount) });
     }
     if (agent.carrying < capacity) {
-      const foods = [...state.knownFood.values()].filter(food => food.amount > 0 && isFood(resourceType(food)) && canHarvest(food, agent) &&
+      const foods = [...state.knownFood.values()].filter(food => food.amount > 0 &&
+        (isFood(resourceType(food)) || resourceType(food) === "meat") && canHarvest(food, agent) &&
         (!agent.carrying || carryingType === resourceType(food)) &&
         (!isFood(resourceType(food)) || storage > 0))
         .sort((first, second) => distance(agent, first) - distance(agent, second));
@@ -399,14 +401,14 @@ export function createUtilityAI(context) {
       if (!canPursueCombat(agent, enemy, state.simSeconds)) continue;
       const cells = path(enemy);
       if (!cells) continue;
-      const supportDamage = allies.reduce((sum, ally) => sum + participation(ally, enemy) * ally.stats.attack * ally.stats.speed, 0);
-      const time = travelTime(agent, cells, agent.carrying) + enemy.health / Math.max(0.1, agent.stats.attack * agent.stats.speed + supportDamage);
-      const power = unit => Math.sqrt(Math.max(0, unit.health + (unit.shieldUntil > state.simSeconds ? unit.shield : 0)) *
-        Math.max(0.01, unit.stats.attack * (unit.species ? 1 / 2.08 : unit.stats.speed)));
-      const support = allies.reduce((sum, ally) => sum + power(ally) * participation(ally, enemy), 0);
+      const supportDamage = allies.reduce((sum, ally) => sum + participation(ally, enemy) * combatDamage(ally, enemy), 0);
+      const time = travelTime(agent, cells, agent.carrying) + enemy.health / Math.max(0.1, combatDamage(agent, enemy) + supportDamage);
+      const power = (unit, target) => Math.sqrt(Math.max(0, unit.health + (unit.shieldUntil > state.simSeconds ? unit.shield : 0)) *
+        Math.max(0.01, combatDamage(unit, target)));
+      const support = allies.reduce((sum, ally) => sum + power(ally, enemy) * participation(ally, enemy), 0);
       const opponents = visible.filter(other => other === enemy || distance(other, enemy) <= 5)
-        .reduce((sum, other) => sum + power(other) * limit(1 - Math.max(0, distance(other, enemy) - 1) / (other.species ? other.stats.speed : unitMovementSpeed(other.stats)) / 10), 0);
-      const own = power(agent), withMe = (support + own) / (support + own + opponents);
+        .reduce((sum, other) => sum + power(other, agent) * limit(1 - Math.max(0, distance(other, enemy) - 1) / (other.species ? other.stats.speed : unitMovementSpeed(other.stats)) / 10), 0);
+      const own = power(agent, enemy), withMe = (support + own) / (support + own + opponents);
       const withoutMe = support / Math.max(0.01, support + opponents);
       const homeThreat = homeCells().some(cell => distance(cell, enemy) <= 3);
       const foodThreat = [...state.knownFood.values()].some(food => food.amount > 0 && canHarvest(food, agent) && distance(food, enemy) <= 4);
@@ -417,7 +419,7 @@ export function createUtilityAI(context) {
     for (const building of combatDisposition(agent) === "aggressive" ? [...(context.burrows ? context.burrows() : []), ...(context.nests ? context.nests() : [])] : []) {
       const cells = burrowApproaches(building).map(cell => path(cell)).filter(Boolean).sort((first, second) => first.length - second.length)[0];
       if (!cells) continue;
-      const time = travelTime(agent, cells, agent.carrying) + building.health / Math.max(0.1, agent.stats.attack * agent.stats.speed);
+      const time = travelTime(agent, cells, agent.carrying) + building.health / Math.max(0.1, agent.stats.attack);
       add("fight", { id: building.id, kind: building.kind || "burrow", x: building.x, y: building.y, key: building.id }, cells,
         { combatGain: 40 * 10 / (10 + time) }, {});
     }

@@ -7,11 +7,12 @@ import { canHarvestResource, resourceHarvestRequirements } from "./resources.mjs
 
 const foods = [["bean", "clay"], ["spore", "tree"], ["pebble", "pebbles"], ["spring", "dew"]];
 
-function fixture(tribe, ownFood, create) {
+function fixture(tribe, ownFood, create, slots) {
   const colony = { id: 1, ownerId: "tribe-harvest", tribe, x: 40, y: 40, occupiedCells: new Set(["2,2"]) };
   const types = foods.map(([, type]) => type).filter(type => type !== ownFood).concat("sand", "meat");
   const cells = types.map((resourceType, index) => ({ x: 43 + index % 3, y: 42 + Math.floor(index / 3),
-    amount: 12, initialAmount: 12, kind: "resource", terrain: "grassland", resourceType }));
+    amount: 12, initialAmount: 12, kind: resourceType === "meat" ? "corpse" : "resource",
+    terrain: "grassland", resourceType, diedAt: 120, decaysAt: 420 }));
   if (ownFood) cells.push({ x: 47, y: 42, amount: 12, initialAmount: 12, kind: "resource", terrain: "grassland", resourceType: ownFood });
   const environment = { simSeconds: 120, world: { seed: 13, generationVersion: 15,
     terrain: new Uint8Array(320 * 320).fill(4), hazards: new Uint8Array(320 * 320) },
@@ -23,7 +24,7 @@ function fixture(tribe, ownFood, create) {
   saved.state.nestLevel = 4;
   saved.state.evolutionPoints = 20;
   Object.assign(saved.state.agents[0], { x: 43, y: 42, renderFromX: 43, renderFromY: 42, bornAt: 120, birth: null,
-    slots: ["antenna", "strength", "strength", "butchery"], rulesVersion: 2,
+    slots: slots || ["antenna", "strength", "strength"], rulesVersion: 2,
     carrying: 0, carryingType: null, utility: null, mode: "search", decisionPending: "restore",
     nextDecisionAt: 120, actionPriorities: ["collect", "explore"], personality: { boldness: 0, aggression: 0, curiosity: 0 } });
   game.restore(JSON.stringify(saved));
@@ -51,6 +52,20 @@ test("네 종족의 기본 먹이만 채집 가능하며 다른 종족 먹이는
 });
 
 for (const [tribe, ownFood] of foods) {
+  test(tribe + "은 분해를 넣으면 고기를 자동 채집하고 운반·납품한다", () => {
+    const f = fixture(tribe, null, createGame, ["antenna", "strength", "butchery"]);
+    for (const [key, cell] of f.environment.food) if (cell.resourceType === ownFood) f.environment.food.delete(key);
+    const meat = [...f.environment.food.values()].find(cell => cell.resourceType === "meat");
+    advance(f, .25);
+    const candidates = f.game.agents[0].utility.scores.filter(candidate => candidate.action === "collect");
+    assert.ok(candidates.length > 0);
+    assert.ok(candidates.every(candidate => candidate.key === meat.x + "," + meat.y));
+    advance(f, 80);
+    assert.ok(meat.amount < 12);
+    assert.ok(f.game.snapshot().resourceInventory.meat > 0);
+    assert.equal(f.game.snapshot().evolutionPoints, 20);
+  });
+
   test(tribe + "은 더 가까운 다른 먹이·재료 대신 자기 먹이만 자동 채집한다", () => {
     const f = fixture(tribe, ownFood, createGame);
     advance(f, .25);
@@ -98,7 +113,7 @@ test("브라우저 번들과 내장 워커에도 동일한 종족별 채집 규�
     assert.equal(browser.Spawner.canHarvestResource({ resourceType }, { generationVersion: 15 }, { strength: 2 }, tribe), resourceType === ownFood);
   }
   const worker = JSON.parse(runtime.match(/const workerSource = ("[^\r\n]+");/)[1]);
-  const context = { Map, Set, Uint8Array };
+  const context = { Map, Set, Uint8Array, setTimeout, clearTimeout, performance };
   runInNewContext(worker.slice(0, worker.indexOf('modules["client/worker.mjs"]')) +
     'globalThis.createGame = modules["server/game.mjs"].createGame; })();', context);
   for (const [tribe, ownFood] of foods) {
@@ -107,6 +122,10 @@ test("브라우저 번들과 내장 워커에도 동일한 종족별 채집 규�
     const candidates = f.game.agents[0].utility.scores.filter(candidate => candidate.action === "collect");
     assert.ok(candidates.length > 0);
     assert.ok(candidates.every(candidate => candidate.key === "47,42"));
+    const butcher = fixture(tribe, null, context.createGame, ["antenna", "strength", "butchery"]);
+    for (const [key, cell] of butcher.environment.food) if (cell.resourceType === ownFood) butcher.environment.food.delete(key);
+    advance(butcher, 80);
+    assert.ok(butcher.game.snapshot().resourceInventory.meat > 0, tribe);
   }
 });
 

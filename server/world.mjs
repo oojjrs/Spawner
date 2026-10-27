@@ -1,16 +1,16 @@
 import { generateMapWorld } from "./map.mjs";
 import { generateBurrows } from "./burrows.mjs";
 import { generateTribes } from "./tribes.mjs";
-import { LEGACY_RESOURCE_HABITATS } from "./resource-legacy.mjs";
-import { FOOD_HABITATS, isFoodHabitat, RESOURCE_HABITATS, RESOURCE_PLACEMENT, isResourceHabitat } from "./resources.mjs";
+import { LEGACY_FOOD_HABITATS, LEGACY_RESOURCE_HABITATS } from "./resource-legacy.mjs";
+import { isFoodHabitat, RESOURCE_HABITATS, RESOURCE_PLACEMENT, isResourceHabitat } from "./resources.mjs";
 
 export const STARTING_FOOD_RADIUS = 22;
 export const STARTING_FOOD_CAP = 10;
 
-export const WORLD_GENERATION_VERSION = 15;
+export const WORLD_GENERATION_VERSION = 16;
 
 export function generateWorld(seed, version, onProgress) {
-      if (version === undefined || version === 6 || version === 7 || version === 8 || version === 9 || version === 10 || version === 11 || version === 12 || version === 13 || version === 14 || version === WORLD_GENERATION_VERSION) {
+      if (version === undefined || version === 6 || version === 7 || version === 8 || version === 9 || version === 10 || version === 11 || version === 12 || version === 13 || version === 14 || version === 15 || version === WORLD_GENERATION_VERSION) {
         const world = generateMapWorld(seed, onProgress, version);
         world.generationVersion = version ?? WORLD_GENERATION_VERSION;
         world.camps = world.camps.map(camp => ({ ...camp, tribe: camp.tribe === "sprout" ? "bean" : camp.tribe }));
@@ -268,8 +268,15 @@ export function generateStartingFood(world, cap) {
 
 function foodType(world, x, y) {
   if (world.generationVersion !== 1) {
-    const choices = FOOD_HABITATS.filter(habitat => (world.generationVersion >= 4 || habitat.key !== "tree-fruit") &&
-      isFoodHabitat(habitat.key, world, x, y));
+    const terrainTypes = ["deep", "shallow", "coast", "land", "grassland", "forest", "lowMountain"];
+    const choices = LEGACY_FOOD_HABITATS.filter(habitat => (world.generationVersion >= 4 || habitat.key !== "tree-fruit") &&
+      !(habitat.key === "tree-fruit" && world.hazards?.[y * 320 + x]) &&
+      habitat.terrains.includes(terrainTypes[world.terrain[y * 320 + x]]) &&
+      (!habitat.neighbors.length || [[1, 0], [-1, 0], [0, 1], [0, -1]].some(([dx, dy]) => {
+        const nx = x + dx, ny = y + dy;
+        return nx >= 0 && ny >= 0 && nx < 320 && ny < 320 &&
+          habitat.neighbors.includes(terrainTypes[world.terrain[ny * 320 + nx]]);
+      })));
     if (!choices.length) return null;
     return choices[Math.floor(foodHash(x, y, world.seed + 10531) * choices.length)].key;
   }

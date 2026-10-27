@@ -1,4 +1,5 @@
 import { AGENT_LIFESPAN } from "./lifespan.mjs";
+import { unitCombatStats } from "./combat-stats.mjs";
 
 export const ATTRIBUTES = [
   { key: "antenna", name: "감지", color: "#b2bffa", effect: "시야 반경 +2칸", description: "군락과 공유하는 실제 시야를 넓힙니다.", bonus: 2, stat: "시야 반경", unit: "칸" },
@@ -37,13 +38,15 @@ export function hasSynergy(counts, keys) {
   return ATTRIBUTES.every(attribute => (counts[attribute.key] || 0) >= required[attribute.key]);
 }
 
-export function unitStats(attributes) {
+export function unitStats(attributes, tribe) {
+  const combat = unitCombatStats(tribe);
   return {
     speed: 1 + (attributes.feet || 0) * 0.5,
     capacity: 1 + (attributes.strength || 0),
     vision: 3 + (attributes.antenna || 0) * 2,
     attack: 1,
-    health: 12,
+    health: combat.health,
+    combatStrength: combat.combatStrength,
     lifespan: AGENT_LIFESPAN + (attributes.lifespan || 0) * 2 * 60,
     resistance: 1
   };

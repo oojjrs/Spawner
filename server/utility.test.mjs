@@ -181,7 +181,8 @@ test("적 처치는 6번째 프레임에 소유 군락에 전달하고 교전 �
   advance(f, 0.1);
   assert.equal(other.agents.length, 0);
   assert.ok([...f.environment.food.values()].some(food => food.kind === "corpse"));
-  advance(f, 0.8);
+  const finishedAt = f.agent.attack.exchangeEndsAt;
+  advance(f, finishedAt - f.environment.simSeconds);
   assert.equal(f.agent.lastDecisionReason, "combatEnded");
 });
 

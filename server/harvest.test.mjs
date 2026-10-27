@@ -39,8 +39,8 @@ function advanceTo(fixture, seconds) {
   fixture.game.tick(elapsed);
 }
 
-test("준비 1초와 버섯 채집 주기를 지킨 성공 틱에 수량·적재물·결과가 함께 바뀐다", () => {
-  for (const resourceType of ["honey-mushrooms"]) {
+test("준비 1초와 비옥토 채집 주기를 지킨 성공 틱에 수량·적재물·결과가 함께 바뀐다", () => {
+  for (const resourceType of ["clay"]) {
     const f = fixture(resourceType, 5, []);
     advanceTo(f, 0.999);
     assert.equal(f.agent.harvestResult, null);
@@ -67,24 +67,24 @@ test("준비 1초와 버섯 채집 주기를 지킨 성공 틱에 수량·적재
 });
 
 test("마지막 수량이 0이 되어 노드가 시야 목록에서 사라져도 성공 결과는 남는다", () => {
-  const f = fixture("honey-mushrooms", 1, []);
+  const f = fixture("clay", 1, []);
   advanceTo(f, 1);
-  advanceTo(f, 2.5);
+  advanceTo(f, 3);
   assert.equal(f.food.amount, 0);
   assert.equal(f.agent.carrying, 1);
   const result = f.agent.harvestResult;
   assert.equal(result.remaining, 0);
   assert.equal(result.amount, 1);
-  assert.equal(result.completedAt, 2.5);
+  assert.equal(result.completedAt, 3);
   assert.ok(!f.game.snapshot().food.some(food => food.x === 46 && food.y === 42));
-  advanceTo(f, 2.6);
+  advanceTo(f, 3.1);
   assert.deepEqual(f.game.snapshot().agents[0].harvestResult, result);
 });
 
 test("수확을 중단하면 이전 결과를 유지하고 다음 예정 시각에도 새 성공을 만들지 않는다", () => {
-  const f = fixture("honey-mushrooms", 6, []);
+  const f = fixture("clay", 6, []);
   advanceTo(f, 1);
-  advanceTo(f, 2.5);
+  advanceTo(f, 3);
   const result = f.agent.harvestResult;
   const amount = f.food.amount;
   const carrying = f.agent.carrying;
@@ -97,9 +97,9 @@ test("수확을 중단하면 이전 결과를 유지하고 다음 예정 시각�
 });
 
 test("저장 복원은 최근 성공과 sequence를 보존하고 다음 성공에서 한 번만 증가한다", () => {
-  const f = fixture("honey-mushrooms", 6, []);
+  const f = fixture("clay", 6, ["strength"]);
   advanceTo(f, 1);
-  advanceTo(f, 2.5);
+  advanceTo(f, 3);
   const first = structuredClone(f.agent.harvestResult);
   const saved = f.game.save();
   f.game = createGame(f.environment, f.environment.colonies[0]);
@@ -107,18 +107,18 @@ test("저장 복원은 최근 성공과 sequence를 보존하고 다음 성공�
   f.environment.games.set("harvest-test", f.game);
   f.agent = f.game.agents[0];
   assert.deepEqual(f.agent.harvestResult, first);
-  advanceTo(f, 3.999);
+  advanceTo(f, 4.999);
   assert.deepEqual(f.agent.harvestResult, first);
-  advanceTo(f, 4);
+  advanceTo(f, 5);
   assert.equal(f.agent.harvestResult.sequence, 2);
-  assert.equal(f.agent.harvestResult.completedAt, 4);
+  assert.equal(f.agent.harvestResult.completedAt, 5);
   assert.equal(f.agent.carrying, 2);
   assert.equal(f.food.amount, 4);
   assert.equal(f.agent.harvestResult.remaining, 4);
 });
 
 test("정밀 수확의 즉시 2개 채집은 늦은 틱에서도 준비 완료 예정 시각의 단일 결과다", () => {
-  const f = fixture("honey-mushrooms", 6, ["strength", "antenna"]);
+  const f = fixture("clay", 6, ["strength", "antenna"]);
   advanceTo(f, 0.999);
   assert.equal(f.agent.harvestResult, null);
   advanceTo(f, 1.2);
@@ -128,26 +128,26 @@ test("정밀 수확의 즉시 2개 채집은 늦은 틱에서도 준비 완료 �
   assert.equal(f.agent.harvestResult.amount, 2);
   assert.equal(f.agent.harvestResult.remaining, 4);
   assert.equal(f.agent.harvestResult.completedAt, 1);
-  assert.equal(f.agent.harvestReady, 2.5);
+  assert.equal(f.agent.harvestReady, 3);
 });
 
 test("밀린 수확 여러 건은 실제 예정 시각마다 sequence를 증가시키고 마지막 결과를 남긴다", () => {
-  const f = fixture("honey-mushrooms", 20, ["strength"]);
+  const f = fixture("clay", 20, ["strength", "strength"]);
   advanceTo(f, 1);
-  advanceTo(f, 6.1);
+  advanceTo(f, 7.1);
   assert.equal(f.food.amount, 17);
   assert.equal(f.agent.carrying, 3);
   assert.equal(f.agent.harvestResult.sequence, 3);
-  assert.equal(f.agent.harvestResult.completedAt, 5.5);
+  assert.equal(f.agent.harvestResult.completedAt, 7);
   assert.equal(f.agent.harvestResult.amount, 1);
   assert.equal(f.agent.harvestResult.remaining, 17);
-  assert.equal(f.agent.harvestReady, 7);
+  assert.equal(f.agent.harvestReady, 9);
 });
 
 test("잠긴 먹이와 자원의 기존 접근·수확 명령은 복원 후 수확하지 않는다", () => {
   for (const resourceType of ["berry-bush", "root-bulbs", "nutrient-moss", "seed-pods", "quartz", "meat"]) {
     for (const mode of ["approach", "harvest"]) {
-      const f = fixture("honey-mushrooms", 6, ["strength", "antenna"]);
+      const f = fixture("clay", 6, ["strength", "antenna"]);
       f.food.resourceType = resourceType;
       f.agent.mode = mode;
       f.agent.harvestPrepared = true;
@@ -163,12 +163,12 @@ test("잠긴 먹이와 자원의 기존 접근·수확 명령은 복원 후 수�
 });
 
 test("한 개만 남은 같은 노드를 두 일꾼이 수확하면 실제로 받은 개체만 성공한다", () => {
-  const f = fixture("honey-mushrooms", 1, []);
+  const f = fixture("clay", 1, []);
   const second = structuredClone(f.agent);
   second.id = "harvest-test:second";
   f.game.agents.push(second);
   advanceTo(f, 1);
-  advanceTo(f, 2.5);
+  advanceTo(f, 3);
   assert.equal(f.food.amount, 0);
   assert.equal(f.agent.carrying + second.carrying, 1);
   const results = f.game.agents.map(agent => agent.harvestResult).filter(Boolean);

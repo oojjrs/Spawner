@@ -17,6 +17,36 @@ function fixture() {
   return { game, environment, colony };
 }
 
+test("저장된 설계가 없는 시작 유닛도 같은 설계로 탄생한다", () => {
+  const { game } = fixture();
+  const source = game.agents[0];
+  const before = JSON.parse(game.save()).state;
+  assert.equal(source.templateId, null);
+  assert.equal(before.templates.length, 0);
+  const result = game.command({ type: "birth", agentId: source.id });
+  const copy = game.agents.find(agent => agent.id === result.agentId);
+  const after = JSON.parse(game.save()).state;
+  assert.deepEqual(copy.slots, source.slots);
+  assert.equal(copy.templateName, source.templateName);
+  assert.equal(copy.mode, "birth");
+  assert.ok(copy.birth);
+  assert.equal(after.templates.length, 0);
+  assert.equal(after.evolutionPoints, before.evolutionPoints - copy.cost);
+  assert.throws(() => game.command({ type: "birth", agentId: "other-colony" }), /복제할 생명체/);
+});
+
+test("유닛 복제는 나중에 수정한 템플릿 대신 탄생 당시 설계를 따른다", () => {
+  const { game } = fixture();
+  const result = game.command({ type: "design", templateId: null, name: "원본", slots: ["antenna"], birth: true });
+  const source = game.agents.find(agent => agent.id === result.agentId);
+  game.command({ type: "design", templateId: result.templateId, name: "수정본", slots: ["strength", "feet"], birth: false });
+  const copied = game.command({ type: "birth", agentId: source.id });
+  const copy = game.agents.find(agent => agent.id === copied.agentId);
+  assert.deepEqual(copy.slots, ["antenna"]);
+  assert.equal(copy.templateName, "원본");
+  assert.equal(copy.templateRevision, 1);
+});
+
 test("씨앗은 두 번 굴러 튄 뒤 점프하고 착지해야 새싹콩이 나온다", () => {
   for (let direction = 0; direction < 8; direction++) {
     const angle = direction * Math.PI / 4;
@@ -91,7 +121,7 @@ test("랜덤 방향의 빈 착지 칸을 고르고 공간이 없으면 비용을
 
 test("발아 중 저장한 월드는 남은 연출과 대기 상태를 복원한다", () => {
   const { game } = fixture();
-  const result = game.command({ type: "design", templateId: null, name: "복원 시험", slots: ["shell"], birth: true });
+  const result = game.command({ type: "design", templateId: null, name: "복원 시험", slots: ["lifespan"], birth: true });
   game.prepare(1.2);
   game.tick(.1);
   const original = game.agents.find(agent => agent.id === result.agentId);
@@ -100,7 +130,7 @@ test("발아 중 저장한 월드는 남은 연출과 대기 상태를 복원한
   restored.restore(saved);
   const agent = restored.agents.find(candidate => candidate.id === result.agentId);
   assert.deepEqual(agent.birth, original.birth);
-  assert.deepEqual(agent.slots, ["shell"]);
+  assert.deepEqual(agent.slots, ["lifespan"]);
   restored.prepare(2);
   restored.tick(.1);
   assert.equal(agent.stepCount, 0);

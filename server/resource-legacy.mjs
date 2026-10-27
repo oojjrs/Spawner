@@ -1,3 +1,14 @@
+export const LEGACY_FOOD_HABITATS = Object.freeze([
+  ["honey-mushrooms", ["forest"], []],
+  ["tree-fruit", ["forest"], []],
+  ["berry-bush", ["grassland"], ["forest"]],
+  ["seed-pods", ["land", "grassland"], []],
+  ["root-bulbs", ["grassland"], []],
+  ["nutrient-moss", ["forest"], []]
+].map(([key, terrains, neighbors]) => Object.freeze({
+  key, terrains: Object.freeze(terrains), neighbors: Object.freeze(neighbors)
+})));
+
 export const LEGACY_RESOURCE_HABITATS = Object.freeze([
   {"key":"twigs","terrains":["forest"],"neighbors":[],"rarity":"common","minDistance":4,"nodes":48,"separation":6},
   {"key":"bark","terrains":["forest"],"neighbors":[],"rarity":"uncommon","minDistance":24,"nodes":20,"separation":8},

@@ -154,7 +154,7 @@ test("딱정벌레와 중립 생물도 기존 자원을 밀지 않고 같은 칸
   assert.equal(environment.food.get(position), resource);
   const index = 150 * 320 + 150;
   environment.world.encounters = [{ key: "dew-rabbit", x: 150, y: 150, cells: [index], terrains: [4], nearWater: false }];
-  const rabbit = { id: "rabbit-test", species: "dew-rabbit", x: 150, y: 150, health: 1, moveStartedAt: 0, nextActionAt: 0 };
+  const rabbit = { id: "rabbit-test", species: "dew-rabbit", x: 150, y: 150, health: 1, stats: { health: 14, combatStrength: 10, speed: .5, attack: 1, vision: 4 }, moveStartedAt: 0, nextActionAt: 0 };
   const encounters = createEncounters(environment, { version: 1, agents: [rabbit], kills: {}, records: [
     { key: "dew-rabbit", x: 150, y: 150, sequence: 1, spawned: true, dead: false, missingSince: null, nextSpawnAt: null, warningUntil: null }
   ] }, []);

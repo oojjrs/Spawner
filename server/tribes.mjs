@@ -161,7 +161,7 @@ export function generateTribes(world) {
         contactSeconds: contactSeconds([x, y]), activityRadius: TRIBE_PLACEMENT.activityRadius });
     }
   }
-  if (selected.length < TRIBE_PLACEMENT.target) {
+  if (selected.length < TRIBE_PLACEMENT.target && !(world.generationVersion >= 1 && world.generationVersion <= 5)) {
     fill(world.sites.slice(1).map(([x, y]) => y * SIZE + x));
     if (selected.length < TRIBE_PLACEMENT.target) fill(home.cells);
   }

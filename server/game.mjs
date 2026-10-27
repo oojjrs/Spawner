@@ -9,6 +9,8 @@ import { createRoadOptimizer } from "./roads.mjs";
 import { createCombat, combatDisposition, canPursueCombat } from "./combat.mjs";
 import { resourceDefinition, resourceTypeForCell, canHarvestResource, migrateResourceType, isTribeFood, populateColonyFood, resourceHarvestSeconds } from "./resources.mjs";
 import { burrowDistance, burrowApproaches } from "./burrows.mjs";
+import { commandCheat } from "./cheats.mjs";
+import { combatDamage, migrateCombatStats } from "./combat-stats.mjs";
 
 export function createGame(environment, colony) {
     populateColonyFood(environment);
@@ -56,6 +58,7 @@ export function createGame(environment, colony) {
     const state = {
       simSeconds: environment.simSeconds || 0,
       colonyFood: 0,
+      ending: null,
       resourceInventory: {},
       evolutionPoints: 0,
       explored: new Set(),
@@ -126,6 +129,7 @@ export function createGame(environment, colony) {
     function discoverResource(food, observer) {
       if (food.kind === "corpse") return;
       const definition = resourceDefinition(resourceTypeForCell(food, worldMap));
+      if (!definition) return;
       recordDiscovery(definition.category + ":" + definition.key, definition.category, definition.name, food, observer);
     }
 
@@ -229,7 +233,7 @@ export function createGame(environment, colony) {
     function initializeAgent(agent) {
       agent.slots = migrateAttributeSlots(agent.slots);
       agent.tribe = colony.tribe || "bean";
-      if (agent.tribe === "pebble" && agent.birth) agent.birth.readyAt = agent.birth.startedAt + agentBirthDuration(agent.tribe);
+      if (["pebble", "spore"].includes(agent.tribe) && agent.birth) agent.birth.readyAt = agent.birth.startedAt + agentBirthDuration(agent.tribe);
       agent.bornAt = Number.isFinite(agent.bornAt) && agent.bornAt >= 0 && agent.bornAt <= state.simSeconds ? agent.bornAt : state.simSeconds;
       agent.lifespan = Number.isFinite(agent.lifespan) && agent.lifespan > 0 ? agent.lifespan : AGENT_LIFESPAN;
       const carryingType = migrateResourceType(agent.carryingType);
@@ -253,6 +257,7 @@ export function createGame(environment, colony) {
       if (agent.decisionPending === undefined) agent.decisionPending = "birth";
       agent.nextDecisionAt = Number.isFinite(agent.nextDecisionAt) ? agent.nextDecisionAt : state.simSeconds;
       agent.growthActivity = Number.isFinite(agent.growthActivity) && agent.growthActivity >= 0 ? agent.growthActivity : 0;
+      migrateCombatStats(agent);
       agent.level = 0;
       applyAgentGrowth(agent, state.simSeconds);
       agent.appearanceAttributes = agentAppearanceAttributes(agent);
@@ -489,9 +494,7 @@ export function createGame(environment, colony) {
       agent.moveStartedAt = state.simSeconds;
       agent.x = destination.x;
       agent.y = destination.y;
-      const speedModifier = agentSpeed(agent) / unitMovementSpeed(agent.stats);
-      const appearance = agent.appearanceAttributes || agent.attributes;
-      agent.moveDuration = appearance.feet ? 1 / agentSpeed(agent) : 1 / (agent.stats.speed * speedModifier);
+      agent.moveDuration = 1 / agentSpeed(agent);
       agent.stepCount += 1;
       const footprintKey = agent.x + "," + agent.y;
       let footprint = state.footprints.get(footprintKey);
@@ -1144,7 +1147,8 @@ export function createGame(environment, colony) {
       if (discovered) return "enemyDiscovered";
       const plan = agent.utility;
       if (plan?.action === "collect" && (!(state.knownFood.get(plan.target.key)?.amount > 0) ||
-        !isTribeFood(resourceTypeForCell(state.knownFood.get(plan.target.key), worldMap), colony.tribe, worldMap.generationVersion) ||
+        !isTribeFood(resourceTypeForCell(state.knownFood.get(plan.target.key), worldMap), colony.tribe, worldMap.generationVersion) &&
+          !["meat", "carapace"].includes(resourceTypeForCell(state.knownFood.get(plan.target.key), worldMap)) ||
         !canHarvestResource(state.knownFood.get(plan.target.key), worldMap, agent.attributes, colony.tribe))) return "targetLost";
       if (plan?.action === "collect" && agent.carrying > 0 && (agent.carryingType || "honey-mushrooms") !==
         resourceTypeForCell(state.knownFood.get(plan.target.key), worldMap)) return "targetLost";
@@ -1203,9 +1207,9 @@ export function createGame(environment, colony) {
         }
         if (building && burrowDistance(agent, target) <= 1) {
           if (state.simSeconds >= agent.attackReady) {
-            agent.attack = { startedAt: state.simSeconds, speed: agent.stats.speed,
-              hitAt: state.simSeconds + AGENT_ATTACK_HIT_TIME / agent.stats.speed,
-              endsAt: state.simSeconds + AGENT_ATTACK_DURATION / agent.stats.speed,
+            agent.attack = { startedAt: state.simSeconds, speed: 1,
+              hitAt: state.simSeconds + AGENT_ATTACK_HIT_TIME,
+              endsAt: state.simSeconds + AGENT_ATTACK_DURATION,
               targetId: target.id, targetKind: ["burrow", "nest"].includes(target.kind) ? target.kind : "agent", targetX: target.x, targetY: target.y,
               directionX: Math.sign(target.x - agent.x) || 1, damage: agent.stats.attack,
               resolved: false, hit: false };
@@ -1289,11 +1293,11 @@ export function createGame(environment, colony) {
       return speed * unitTerrainSpeedMultiplier(agent, worldMap.terrain[agent.y * WORLD_SIZE + agent.x]);
     }
 
-    function spawnAgent(template, faction) {
-      const position = chooseSpawnPosition(template.id !== null);
+    function spawnAgent(template, faction, newborn) {
+      const position = chooseSpawnPosition(template.id !== null || newborn);
       if (!position) return null;
       const attributes = attributeCounts(template.slots);
-      const stats = unitStats(attributes);
+      const stats = unitStats(attributes, colony.tribe);
       const agent = {
         id: colony.id + ":" + state.nextAgentId,
         ownerId: colony.ownerId,
@@ -1338,7 +1342,7 @@ export function createGame(environment, colony) {
         moveDuration: 0
       };
       initializeAgent(agent);
-      if (template.id !== null) {
+      if (template.id !== null || newborn) {
         agent.mode = "birth";
         agent.birth = { colonyId: colony.id, startedAt: state.simSeconds,
           readyAt: state.simSeconds + agentBirthDuration(agent.tribe),
@@ -1432,8 +1436,13 @@ export function createGame(environment, colony) {
           const remaining = attack.targetKind === "burrow" ? environment.creatureSystem.receiveBurrowDamage(target.id, attack.damage) :
             attack.targetKind === "nest" ? owner.receiveNestDamage(attack.damage) : null;
           if (!["burrow", "nest"].includes(attack.targetKind)) {
+            const random = environment.damageRandom || Math.random;
+            attack.damage = combatDamage(agent, target, random());
+            const counterDamage = combatDamage(target, agent, random());
             if (owner) owner.receiveDamage(target, attack.damage);
             else environment.creatureSystem.receiveDamage(target, attack.damage);
+            damageAgent(agent, counterDamage, false);
+            removeDeadAgents();
           }
           if ((remaining ?? target.health) <= 0) agent.decisionPending = "targetLost";
         }
@@ -1529,7 +1538,7 @@ export function createGame(environment, colony) {
         if (!required) return null;
         throw new Error("진화 포인트가 부족합니다.");
       }
-      const agent = spawnAgent(template, "colony");
+      const agent = spawnAgent(template, "colony", true);
       if (!agent) {
         if (!required) return null;
         throw new Error(colony.tribe === "spring" || colony.tribe === "pebble" ? "둥지 앞쪽의 탄생 공간이 가득 찼습니다." : "둥지 주변이 가득 찼습니다.");
@@ -1538,12 +1547,32 @@ export function createGame(environment, colony) {
       return agent.id;
     }
 
+    function checkEnding() {
+      if (state.ending || colony.tribe === null || state.agents.some(agent => agent.health > 0) ||
+          state.nestHealth > 0 && state.evolutionPoints >= birthCost({ slots: [] })) return state.ending;
+      state.ending = { endedAt: state.simSeconds,
+        reason: state.nestHealth <= 0 ? "nest-destroyed" : "extinction",
+        bornCount: state.nextAgentId - 1, exploredCells: state.explored.size,
+        discoveryCount: state.discoveries.length, colonyFood: state.colonyFood,
+        evolutionPoints: state.evolutionPoints, nestLevel: state.nestLevel };
+      return state.ending;
+    }
+
     function command(action) {
+      if (state.ending && action.type !== "read-discoveries") throw new Error("끝난 군락은 둘러보기만 할 수 있습니다.");
+      const cheat = commandCheat(action, environment, state, removeDeadAgents, checkEnding);
+      if (cheat !== null) return cheat;
       if (action.type === "read-discoveries") {
         if (!Number.isInteger(action.count) || action.count < 0 || action.count > state.discoveries.length) {
           throw new Error("확인할 알림 수가 올바르지 않습니다.");
         }
         state.discoveryReadCount = Math.max(state.discoveryReadCount, action.count);
+        return {};
+      }
+      if (action.type === "delete-design") {
+        const index = state.templates.findIndex(template => template.id === action.templateId);
+        if (index < 0) throw new Error("설계를 찾을 수 없습니다.");
+        state.templates.splice(index, 1);
         return {};
       }
       if (action.type === "design") {
@@ -1570,6 +1599,12 @@ export function createGame(environment, colony) {
         return { templateId: template.id, agentId };
       }
       if (action.type === "birth") {
+        if (action.agentId !== undefined) {
+          const agent = state.agents.find(candidate => candidate.id === action.agentId && candidate.health > 0);
+          if (!agent) throw new Error("복제할 생명체를 찾을 수 없습니다.");
+          return { agentId: birth({ id: agent.templateId, name: agent.templateName,
+            slots: [...agent.slots], revision: agent.templateRevision }, true) };
+        }
         const template = state.templates.find((candidate) => candidate.id === action.templateId);
         if (!template) throw new Error("설계를 찾을 수 없습니다.");
         return { agentId: birth(template, true) };
@@ -1617,6 +1652,7 @@ export function createGame(environment, colony) {
         resourceInventory: { ...state.resourceInventory },
         discoveries: state.discoveries.map(entry => ({ ...entry })), discoveryReadCount: state.discoveryReadCount,
         evolutionPoints: state.evolutionPoints, nestLevel: state.nestLevel, tribe: colony.tribe,
+        ending: state.ending ? { ...state.ending } : null,
         nestHealth: state.nestHealth, nestMaxHealth: NEST_LEVELS[state.nestLevel - 1].health,
         templates: state.templates.map(template => ({ ...template, tribe: colony.tribe || "bean" })), agents: state.agents.map(agent => ({ ...visibleAgent(agent), movementPlan: agentMovementPlan(agent) })),
         rivals: state.rivals.filter(agent => !agent.hidden && (agent.health > 0 || agent.species === "spiny-back-beetle" && agent.mode === "death") &&
@@ -1640,6 +1676,7 @@ export function createGame(environment, colony) {
         value?.collection === "Map" ? new Map(value.entries) :
         value?.collection === "Set" ? new Set(value.entries) : value);
       Object.assign(state, data.state);
+      state.ending = data.state.ending ? { ...data.state.ending } : null;
       for (const template of state.templates) template.slots = migrateAttributeSlots(template.slots);
       const nestMaxHealth = NEST_LEVELS[state.nestLevel - 1].health;
       state.nestHealth = Number.isFinite(data.state.nestHealth) ? Math.max(0, Math.min(nestMaxHealth, data.state.nestHealth)) : nestMaxHealth;
@@ -1701,7 +1738,7 @@ export function createGame(environment, colony) {
         initializeAgent(agent);
         if (!agent.utility) {
           agent.utility = null;
-          agent.mode = "search";
+          agent.mode = agent.birth && state.simSeconds < agent.birth.readyAt ? "birth" : "search";
           agent.decisionPending = "restore";
         }
         for (const key of agent.visited) {
@@ -1734,7 +1771,8 @@ export function createGame(environment, colony) {
     for (const agent of state.agents) reconsiderAgent(agent, "birth");
 
     return {
-      command, snapshot, save, restore,
+      command, snapshot, save, restore, checkEnding,
+      get ending() { return state.ending; },
       get agents() { return state.agents; },
       get colonyFood() { return state.colonyFood; },
       get discoveredKinds() { return state.discoveredKinds; },
@@ -1765,10 +1803,11 @@ export function createGame(environment, colony) {
       },
       colonyKnown(entry) { return entry.id === colony.id || state.explored.has((entry.y + 2) * WORLD_SIZE + entry.x + 2); },
       prepare(simSeconds) {
-        state.simSeconds = simSeconds;
+        state.simSeconds = state.ending ? state.ending.endedAt : simSeconds;
         state.rivals = [...environment.games.values()].filter((game) => game !== this).flatMap((game) => game.agents).concat(environment.creatureSystem?.agents || []);
       },
       tick(elapsed) {
+        if (state.ending) return;
         updateAgents(elapsed);
       }
     };

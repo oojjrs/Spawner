@@ -8,7 +8,7 @@ function fixture() {
   const colony = { id: 1, ownerId: "nest-test", x: 40, y: 40,
     occupiedCells: new Set(["1,0", "2,0", "3,0", "0,1", "1,1", "2,1", "3,1", "4,1",
       "0,2", "1,2", "2,2", "3,2", "4,2", "0,3", "1,3", "2,3", "3,3", "4,3", "1,4", "2,4", "3,4"]) };
-  const room = { simSeconds: 0, world: { seed: 13, sites: [[42, 42]], terrain: new Uint8Array(320 * 320).fill(4),
+  const room = { damageRandom: () => .5, simSeconds: 0, world: { seed: 13, sites: [[42, 42]], terrain: new Uint8Array(320 * 320).fill(4),
     hazards: new Uint8Array(320 * 320), burrows: [
       { id: "large:1", type: "large", x: 80, y: 40, width: 3, height: 1, entrance: { x: 81, y: 41 } }
     ] }, colonies: [colony], games: new Map(), food: new Map(), foodSpots: new Map() };
@@ -127,13 +127,14 @@ test("대상 종류가 없는 이전 공격 저장도 기존 유닛에게 피해
   const { game, room } = fixture();
   game.agents.splice(1);
   const agent = game.agents[0];
-  const target = { id: "old-rival:1", x: 48, y: 42, health: 12, cost: 3, carrying: 0, attributes: {},
-    stats: { health: 12, attack: 1, speed: 1, vision: 3 }, moveStartedAt: 0, moveDuration: 0 };
+  const target = { id: "old-rival:1", x: 48, y: 42, health: 100, cost: 3, carrying: 0, attributes: {},
+    stats: { health: 100, attack: 1, speed: 1, vision: 3 }, moveStartedAt: 0, moveDuration: 0 };
   room.games.set("old-rival", { agents: [target], receiveDamage(victim, amount) { victim.health -= amount; } });
   agent.attack = { startedAt: 10, speed: 1, hitAt: 10.3, endsAt: 11,
     targetId: target.id, targetX: target.x, targetY: target.y, damage: 1, resolved: false, hit: false };
   game.prepare(10.3);
   game.tick(0);
-  assert.equal(target.health, 11);
+  assert.equal(target.health, 70);
+  assert.equal(agent.health, 70);
   assert.equal(agent.attack.hit, true);
 });

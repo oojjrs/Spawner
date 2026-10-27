@@ -33,7 +33,7 @@ test("시작 접근성은 산지 이동 비용·물·둥지 점유 칸을 반영
 });
 
 test("시작 자원 보정은 전역 자원 점유율과 생물의 빈 등장 칸을 유지한다", () => {
-  const previous = generateWorld(1401181143, 11), corrected = generateWorld(1401181143);
+  const previous = generateWorld(1401181143, 11), corrected = generateWorld(1401181143, 15);
   assert.deepEqual(corrected.camps, previous.camps);
   assert.deepEqual(corrected.terrain, previous.terrain);
   for (const current of corrected.economy.resources) {
@@ -71,4 +71,29 @@ test("전체 맵의 실제 자원 칸·매장량을 집계하고 비옥토·자�
     }
   }
   for (const plan of world.encounters) for (const index of plan.spawnPoints) assert.equal(occupied.has(index), false);
+});
+
+test("다른 종족 시작권의 이슬은 일부 남기고 줄이며 샘방울 먹이와 기존 배치를 보존한다", () => {
+  const previous = generateWorld(13, 15), current = generateWorld(13);
+  assert.equal(previous.generationVersion, 15);
+  assert.equal(current.generationVersion, 16);
+  assert.deepEqual(current.terrain, previous.terrain);
+  assert.deepEqual(current.camps, previous.camps);
+  assert.deepEqual(current.food, previous.food);
+  assert.deepEqual(current.resources.filter(point => point[3] !== "dew"), previous.resources.filter(point => point[3] !== "dew"));
+  assert.deepEqual(current.economy.starts, previous.economy.starts);
+  const dew = world => world.resources.filter(point => point[3] === "dew");
+  const near = (points, camp, radius) => points.filter(([x, y]) => Math.hypot(x - camp.x, y - camp.y) <= radius);
+  for (const camp of current.camps) {
+    const before = near(dew(previous), camp, 22), after = near(dew(current), camp, 22);
+    if (camp.tribe === "spring") {
+      assert.deepEqual(near(dew(current), camp, 32), near(dew(previous), camp, 32));
+    } else if (before.length) {
+      assert.ok(after.length > 0, camp.tribe + " 이슬 잔존");
+      if (before.length >= 20) assert.ok(after.length < before.length * .4, camp.tribe + " 이슬 감소");
+    }
+  }
+  const outside = point => current.camps.every(camp => camp.tribe === "spring" || Math.hypot(point[0] - camp.x, point[1] - camp.y) >= 32);
+  assert.deepEqual(dew(current).filter(outside), dew(previous).filter(outside));
+  assert.ok(dew(current).length < dew(previous).length);
 });

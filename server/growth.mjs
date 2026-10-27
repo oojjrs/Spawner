@@ -9,7 +9,7 @@ export function agentGrowth(agent, simSeconds) {
   const experience = age + Math.min(age * 0.4, activity);
   let level = 1;
   while (experience >= growthThreshold(level + 1)) level++;
-  return { level, experience, activeSlots: agent.slots.slice(0, Math.min(5, 1 + Math.floor(level / 3))) };
+  return { level, experience, activeSlots: [...agent.slots] };
 }
 
 export function growthThreshold(level) {
@@ -26,9 +26,8 @@ export function applyAgentGrowth(agent, simSeconds) {
   agent.level = growth.level;
   agent.activeSlots = growth.activeSlots;
   agent.attributes = attributeCounts(agent.activeSlots);
-  agent.stats = unitStats(agent.attributes);
+  agent.stats = unitStats(agent.attributes, agent.tribe);
   agent.lifespan = (Number.isFinite(agent.lifespan) ? agent.lifespan : previousLifespan) + agent.stats.lifespan - previousLifespan;
-  agent.stats.health = Math.round(agent.stats.health * (1 + (agent.level - 1) * 0.02) * 10) / 10;
   agent.health = Math.min(agent.stats.health, agent.health + Math.max(0, agent.stats.health - previousHealth));
   return true;
 }

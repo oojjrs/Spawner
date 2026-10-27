@@ -64,6 +64,7 @@ export function populateWorldEconomy(world, fields) {
     }
   }
   const starts = fields.correctStarts ? correctStartingEconomy(world, RESOURCE_ECONOMY, added, available, isEconomyHabitat, fields.minimumSites, fields.minimumTravel) : null;
+  if (fields.sparseDew) thinStartingDew(world, added);
   world.resources.push(...added.values());
   world.foraging = [];
   world.economy = { seconds: 300, workers: 2, resources: RESOURCE_ECONOMY.map(policy => {
@@ -72,6 +73,22 @@ export function populateWorldEconomy(world, fields) {
       cells: points.length, coverage: points.length / (size * size),
       amount: points.reduce((sum, point) => sum + point[2], 0), sectors: new Set(points.map(([x, y]) => Math.floor(y / 32) * 10 + Math.floor(x / 32))).size };
   }), starts: starts || measureStartingEconomy(world, RESOURCE_ECONOMY) };
+}
+
+function thinStartingDew(world, points) {
+  for (const camp of world.camps) {
+    if (camp.tribe === "spring") continue;
+    const local = [...points.entries()].filter(([, point]) => point[3] === "dew" && Math.hypot(point[0] - camp.x, point[1] - camp.y) < 32);
+    const priority = point => economyHash(point[0], point[1], world.seed + 733);
+    local.sort((left, right) => priority(left[1]) - priority(right[1]) || left[0] - right[0]);
+    let retained = false;
+    for (const [index, point] of local) {
+      const distance = Math.hypot(point[0] - camp.x, point[1] - camp.y);
+      if (distance <= 22 && !retained) { retained = true; continue; }
+      const density = .2 + .8 * Math.max(0, (distance - 22) / 10);
+      if (priority(point) >= density) points.delete(index);
+    }
+  }
 }
 
 function economyHash(x, y, seed) {

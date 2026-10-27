@@ -50,13 +50,13 @@ test("비옥토 납품은 먹이와 진화 포인트가 되고 한도를 넘는 
   assert.equal(game.snapshot().resourceInventory.clay, undefined);
 });
 
-test("다른 식량은 포인트가 가득 차도 재료로 납품하고 저장 후에도 유지한다", () => {
-  const game = deliver("berry-bush", 100, "bean");
+test("다른 종족의 기본 먹이는 포인트가 가득 차도 재료로 납품하고 저장 후에도 유지한다", () => {
+  const game = deliver("dew", 100, "bean");
   assert.equal(game.snapshot().evolutionPoints, 100);
   assert.equal(game.snapshot().colonyFood, 0);
-  assert.equal(game.snapshot().resourceInventory["berry-bush"], 2);
+  assert.equal(game.snapshot().resourceInventory.dew, 2);
   game.restore(game.save());
-  assert.equal(game.snapshot().resourceInventory["berry-bush"], 2);
+  assert.equal(game.snapshot().resourceInventory.dew, 2);
   const other = deliver("clay", 0, "spore");
   assert.equal(other.snapshot().evolutionPoints, 0);
   assert.equal(other.snapshot().resourceInventory.clay, 2);

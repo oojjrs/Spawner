@@ -6,6 +6,7 @@ import { BURROW_TYPES, burrowDistance, burrowApproaches } from "./burrows.mjs";
 import { createBeetleRaids } from "./raids.mjs";
 import { CORPSE_LIFETIME, placeCorpse, expireCorpses } from "./lifespan.mjs";
 import { createCombat, canPursueCombat } from "./combat.mjs";
+import { unitCombatStats, migrateCombatStats, combatDamage } from "./combat-stats.mjs";
 
 export const CREATURE_ASSETS = [
   ...ENCOUNTER_ASSETS, "DesignAssets/Units/spiny-back-beetle.png", BEETLE_ANIMATION_ASSET, BEETLE_NEUTRAL_ASSET
@@ -16,7 +17,7 @@ export function createCreatures(environment, saved) {
   const size = 320;
   let encounters = null;
   const species = "spiny-back-beetle";
-  const stats = { health: 20, attack: 3, speed: 1 / 1.28, vision: 4, resistance: 1 };
+  const stats = { ...unitCombatStats(species), attack: 3, speed: 1 / 1.28, vision: 4, resistance: 1 };
   const burrows = environment.world.burrows || [];
   const distribution = environment.world.encounters?.find(plan => plan.key === species && plan.spawnPoints);
   const burrowSites = new Map(burrows.map(burrow => [burrow.id, burrow]));
@@ -184,7 +185,9 @@ export function createCreatures(environment, saved) {
     }
   }
 
-  const raids = createBeetleRaids(environment, state, { walkable, occupied, noise, move, idle }, saved?.version === 5);
+  for (const agent of state.agents) migrateCombatStats(agent);
+
+  const raids = createBeetleRaids(environment, state, { walkable, occupied, noise, move, idle, release: combat.release }, saved?.version === 5);
 
   function idle(agent, duration) {
     if (agent.mode !== "idle") agent.animationStartedAt = environment.simSeconds;
@@ -277,8 +280,8 @@ export function createCreatures(environment, saved) {
     const opponents = players().concat([...environment.games.values()].filter(game => game.nest?.health > 0).map(game => ({ game, agent: game.nest })));
     for (const agent of state.agents) {
       if (agent.health <= 0) continue;
-      if (combat.update(agent, now)) continue;
       if (raids.update(agent)) continue;
+      if (combat.update(agent, now)) continue;
       const home = raids.home(agent);
       if (agent.mode === "attack") {
         if (!agent.attackHit && now + 1e-8 >= agent.attackStartedAt + BEETLE_ANIMATIONS.attack.hitTimeMs / 1000) {
@@ -286,7 +289,14 @@ export function createCreatures(environment, saved) {
           const target = opponents.find(entry => entry.agent.id === agent.attackTargetId);
           if (target && target.agent.health > 0 && (target.agent.kind === "nest" ? burrowDistance(agent, target.agent) : Math.abs(agent.x - target.agent.x) + Math.abs(agent.y - target.agent.y)) <= 1) {
             if (target.agent.kind === "nest") target.agent.health = target.game.receiveNestDamage(agent.stats.attack);
-            else target.game.receiveDamage(target.agent, agent.stats.attack);
+            else {
+              const random = environment.damageRandom || Math.random;
+              const damage = combatDamage(agent, target.agent, random());
+              const counterDamage = combatDamage(target.agent, agent, random());
+              target.game.receiveDamage(target.agent, damage);
+              receiveDamage(agent, counterDamage);
+              if (agent.health <= 0) continue;
+            }
           }
         }
         if (now < agent.attackStartedAt + BEETLE_ANIMATIONS.attack.durationMs / 1000) continue;

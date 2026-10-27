@@ -1,6 +1,8 @@
+import { imageAnimation } from "../client/image-geometry.mjs";
+
 export const BEETLE_ANIMATION_ASSET = "DesignAssets/Animations/Beetle/atlas.webp";
 export const BEETLE_NEUTRAL_ASSET = "DesignAssets/Animations/Beetle/neutral.webp";
-export const BEETLE_SPRITE = Object.freeze({ frameSize: 512, columns: 5, pivotX: 265, pivotY: 450, scale: 1.6 });
+export const BEETLE_SPRITE = Object.freeze(imageAnimation({ image: BEETLE_ANIMATION_ASSET, frameSize: 512, columns: 5, pivotX: 265, pivotY: 450, scale: 1.6 }));
 export const BEETLE_ANIMATIONS = {
   "idle": {
     "frames": [
@@ -82,9 +84,9 @@ export const BEETLE_ANIMATIONS = {
     ],
     "durations": [
       40,
-      470,
+      480,
       80,
-      80
+      70
     ],
     "durationMs": 670,
     "loop": false

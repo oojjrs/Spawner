@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { RESOURCE_TYPES, REMOVED_RESOURCE_TYPES, clearResourceHazards, resourceTypeForCell } from "./resources.mjs";
+import { RESOURCE_ECONOMY } from "./economy.mjs";
 import { isTreeFood } from "./food.mjs";
 import { createGame } from "./game.mjs";
 import { createRoom, saveRoom, restoreRoom, snapshotRoom } from "../client/room.mjs";
@@ -32,14 +33,15 @@ test("나무·나무 열매·사체를 제외한 먹이·재료를 공터로 전
   }));
   const room = {
     id: "test", title: "자원 공터", hostId: "test", seed: 13, simSeconds: 0, revision: 0,
-    world: { terrain: new Uint8Array(320 * 320).fill(5), hazards: new Uint8Array(320 * 320), burrows: [] },
+    world: { terrain: new Uint8Array(320 * 320).fill(5), hazards: new Uint8Array(320 * 320), burrows: [],
+      camps: [{ tribe: "bean", x: 42, y: 42 }, { tribe: "spore", x: 102, y: 102 }, { tribe: "pebble", x: 162, y: 162 }, { tribe: "spring", x: 222, y: 222 }] },
     colonies: [{ id: 1, ownerId: "test", occupiedCells: new Set() }],
     games: new Map([["test", { prepare() {}, snapshot() { return {}; }, colonyKnown() { return true; }, nestLevel: 1,
       nest: { health: 1, maxHealth: 1 } }]]),
     food: new Map(cells.map(cell => [cell.x + "," + cell.y, cell]))
   };
   const clearings = new Set(snapshotRoom(room, true).world.resourceCells.map(([x, y]) => x + "," + y));
-  assert.equal(clearings.size, 12);
+  assert.equal(clearings.size, cells.filter(cell => !["tree", "meat"].includes(cell.resourceType)).length);
   for (const cell of cells) assert.equal(clearings.has(cell.x + "," + cell.y),
     !["tree", "tree-fruit", "meat"].includes(cell.resourceType), cell.resourceType);
 });
@@ -54,8 +56,9 @@ test("새 방과 저장 복원 모두 자원 위치·채집량을 유지하고 �
   const restored = restoreRoom(saveRoom(room));
   assert.deepEqual([...restored.food], before);
   assert.deepEqual(snapshotRoom(restored, true).world.resourceCells, clearings);
+  assert.deepEqual(restored.world.hazards, room.world.hazards);
   for (const current of [room, restored]) {
-    for (const cell of current.food.values()) if (cell.kind !== "corpse") {
+    for (const cell of current.food.values()) if (cell.kind !== "corpse" && RESOURCE_ECONOMY.some(policy => policy.key === cell.resourceType)) {
       assert.equal(current.world.hazards[cell.y * 320 + cell.x], 0, cell.resourceType);
     }
   }

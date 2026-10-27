@@ -6,13 +6,14 @@ import { createRoom, saveRoom, restoreRoom } from "../client/room.mjs";
 
 function fixture(extra) {
   const colony = { id:1, ownerId:"owner", x:98, y:98, occupiedCells:new Set(["1,0","2,0","3,0","0,1","1,1","2,1","3,1","4,1","0,2","1,2","2,2","3,2","4,2","0,3","1,3","2,3","3,3","4,3","1,4","2,4","3,4"]) };
-  const victim = { id:"unit:1", x:103, y:100, health:10000, moveStartedAt:0, moveDuration:0 }, hits = [];
+  const victim = { id:"unit:1", x:103, y:100, health:10000, combatDisposition:"peaceful", stats:{ health:10000, speed:1, attack:1, combatStrength:20 }, moveStartedAt:0, moveDuration:0 }, hits = [];
   const room = { seed:7, simSeconds:0, world:{ seed:7, sites:[[100,100]], terrain:new Uint8Array(102400).fill(4), hazards:new Uint8Array(102400), burrows:[
     { id:"large:1", type:"large", x:148, y:100, width:3, height:1, entrance:{x:149,y:101} },
     { id:"small:1", type:"small", x:140, y:140, width:1, height:1, entrance:{x:140,y:141} }
   ] }, colonies:[colony], food:new Map(), games:new Map([["owner", { agents:[victim], receiveDamage(agent, amount) { hits.push({time:room.simSeconds,amount}); agent.health -= amount; } }]]) };
   if (extra) room.world.burrows.push({ id:"large:2", type:"large", x:148, y:140, width:3, height:1, entrance:{x:149,y:141} });
-  return { room, system:createCreatures(room, null), victim, hits };
+  const system = createCreatures(room, null); room.creatureSystem = system;
+  return { room, system, victim, hits };
 }
 function advance(room, system, until) {
   while (room.simSeconds + .25 < until) { room.simSeconds += .25; system.tick(); }
@@ -80,9 +81,11 @@ test("이동 경로가 없으면 출발하지 않고 통로가 열리면 실제 
 });
 
 test("도착 후 30초 안에서만 교전하고 귀환해도 생존 개체와 소속을 유지한다", () => {
-  const setup = fixture(false), { room, system, hits } = setup, agent = start(setup), id = agent.id;
+  const setup = fixture(false), { room, system, hits, victim } = setup, agent = start(setup), id = agent.id;
   until(room, system, () => agent.raid?.phase === "active", 400);
-  const end = agent.raid.activeUntil; advance(room, system, end);
+  const end = agent.raid.activeUntil;
+  Object.assign(victim, { x:agent.x, y:agent.y });
+  advance(room, system, end);
   assert.equal(agent.raid.phase, "returning"); assert.ok(hits.length > 0); assert.ok(hits.every(hit => hit.time < end));
   const count = hits.length;
   until(room, system, () => !agent.raid, end + 200);
@@ -97,7 +100,7 @@ test("출정·교전·복귀 중 저장을 복원해도 대상과 30초 종료 �
     if (phase === "active") until(room, system, () => agent.raid?.phase === "active", 400);
     if (phase === "returning") advance(room, system, agent.raid.activeUntil);
     const saved = JSON.parse(JSON.stringify(system.save())), expected = JSON.parse(JSON.stringify(agent.raid));
-    system = createCreatures(room, saved); agent = system.agents.find(other => other.id === agent.id);
+    system = createCreatures(room, saved); room.creatureSystem = system; agent = system.agents.find(other => other.id === agent.id);
     assert.deepEqual(system.save(), saved); assert.deepEqual(agent.raid, expected);
   }
   until(room, system, () => !agent.raid, 600);

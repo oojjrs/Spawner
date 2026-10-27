@@ -14,12 +14,12 @@ function fixture() {
   return { game, environment, agent: game.agents[0] };
 }
 
-test("기본 성장과 발현 순서는 1·3·6·9·12레벨 기준을 따른다", () => {
-  const agent = { bornAt: 0, slots: ["harvest", "strength", "feet", "shell", "antenna"], growthActivity: 0 };
-  for (const [seconds, level, slots] of [[0,1,1], [35,3,2], [120,6,3], [180,7,3], [240,9,4], [405,12,5]]) {
+test("성장 레벨과 관계없이 생성할 때 넣은 모든 속성을 유지한다", () => {
+  const agent = { bornAt: 0, slots: ["butchery", "strength", "feet", "lifespan", "antenna"], growthActivity: 0 };
+  for (const [seconds, level] of [[0,1], [35,3], [120,6], [180,7], [240,9], [405,12]]) {
     const growth = agentGrowth(agent, seconds);
     assert.equal(growth.level, level);
-    assert.deepEqual(growth.activeSlots, agent.slots.slice(0, slots));
+    assert.deepEqual(growth.activeSlots, agent.slots);
   }
   agent.growthActivity = 100000;
   assert.equal(agentGrowth(agent, 0).level, 1);
@@ -27,25 +27,25 @@ test("기본 성장과 발현 순서는 1·3·6·9·12레벨 기준을 따른다
   assert.equal(agentGrowth(agent, 180).experience, 252);
 });
 
-test("새 개체는 첫 속성부터 발현하고 성장과 저장·복원 후에도 설계 순서를 보존한다", () => {
+test("새 개체는 모든 속성을 즉시 적용하고 성장과 저장·복원 후에도 설계 순서를 보존한다", () => {
   const { game } = fixture();
   const saved = JSON.parse(game.save());
   saved.state.nestLevel = 2;
   saved.state.evolutionPoints = 100;
   game.restore(JSON.stringify(saved));
-  const result = game.command({ type: "design", templateId: null, name: "성장 시험", slots: ["harvest", "strength", "feet"], birth: true });
+  const result = game.command({ type: "design", templateId: null, name: "성장 시험", slots: ["butchery", "strength", "feet"], birth: true });
   const agent = game.agents.find(candidate => candidate.id === result.agentId);
-  assert.deepEqual(agent.activeSlots, ["harvest"]);
-  assert.equal(agent.attributes.strength, 0);
+  assert.deepEqual(agent.activeSlots, ["butchery", "strength", "feet"]);
+  assert.equal(agent.attributes.strength, 1);
   game.prepare(35);
   game.tick(0);
   assert.equal(agent.level, 3);
-  assert.deepEqual(agent.activeSlots, ["harvest", "strength"]);
+  assert.deepEqual(agent.activeSlots, ["butchery", "strength", "feet"]);
   assert.equal(agent.attributes.strength, 1);
   game.restore(game.save());
   const restored = game.agents.find(candidate => candidate.id === result.agentId);
-  assert.deepEqual(restored.slots, ["harvest", "strength", "feet"]);
-  assert.deepEqual(restored.activeSlots, ["harvest", "strength"]);
+  assert.deepEqual(restored.slots, ["butchery", "strength", "feet"]);
+  assert.deepEqual(restored.activeSlots, ["butchery", "strength", "feet"]);
   game.prepare(120);
   game.tick(0);
   assert.equal(restored.level, 6);

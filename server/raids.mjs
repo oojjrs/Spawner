@@ -105,6 +105,7 @@ export function createBeetleRaids(environment, state, actions, restoring) {
     const now = environment.simSeconds, colony = colonyFor(agent);
     if (agent.raid.phase !== "returning" && (!colony || agent.raid.phase === "active" && now >= agent.raid.activeUntil)) returning(agent);
     if (agent.raid.phase === "active") return false;
+    if (agent.combat) actions.release(agent, now);
     if (now < agent.moveStartedAt + agent.moveDuration) return true;
     const site = sites.get(agent.burrowId), entrance = site?.entrance || { x:agent.homeX, y:agent.homeY };
     const goals = agent.raid.phase === "outbound" ? boundary(colony) : [entrance,

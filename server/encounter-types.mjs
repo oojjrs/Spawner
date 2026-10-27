@@ -181,7 +181,7 @@ export const ENCOUNTER_TYPES = Object.freeze([
   },
   {
     "key": "walking-forest",
-    "name": "걸어가는 숲",
+    "name": "걸어가는 산",
     "image": "DesignAssets/CreatureConcepts/v3/walking-forest.png",
     "populationLimit": 1,
     "respawnSeconds": 0,
