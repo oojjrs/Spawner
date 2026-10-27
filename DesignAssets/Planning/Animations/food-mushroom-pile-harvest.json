@@ -1,0 +1,46 @@
+{
+  "resolution": 216,
+  "bounds": [
+    0,
+    0,
+    216,
+    216
+  ],
+  "frameWidth": 216,
+  "frameHeight": 216,
+  "columns": 8,
+  "rows": 6,
+  "frameCount": 8,
+  "frameMs": 62.5,
+  "restMs": 500,
+  "cacheLimit": 8,
+  "source": "DesignAssets/Foods/food-mushroom-pile.png",
+  "sheet": "DesignAssets/Animations/food-mushroom-pile-harvest.png",
+  "preview": "DesignAssets/Planning/Animations/food-mushroom-pile-harvest.webp",
+  "sourceMethod": "Existing approved artwork and harvest poses assembled using the world renderer placement; no new motion poses or deformation.",
+  "sourceFiles": [
+    "DesignAssets/Foods/food-mushroom-cluster.png",
+    "DesignAssets/Foods/food-mushroom-single.png",
+    "DesignAssets/Animations/food-mushroom-harvest.png",
+    "DesignAssets/Animations/food-mushroom-single-harvest.png"
+  ],
+  "sourceHashes": {
+    "DesignAssets/Foods/food-mushroom-cluster.png": "3cf212495af0c33232b4f4a24f14154c57cf89321ab4410657429f1286ce7b20",
+    "DesignAssets/Foods/food-mushroom-single.png": "e556cf5073fd5b97436d9fd3f50f396da78529f0dee2f7192247a625d3f1265f",
+    "DesignAssets/Animations/food-mushroom-harvest.png": "19a71cd436521d532415f986a77498d820f3f78bc0309dccf745f11a723ea118",
+    "DesignAssets/Animations/food-mushroom-single-harvest.png": "73cadbcbe10fa31e873bcf44f907f3e2cf01399b9999f5e01679cbf8c8aad898"
+  },
+  "countRows": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "representativeCount": 6,
+  "referenceCell": {
+    "x": 1,
+    "y": 160
+  }
+}

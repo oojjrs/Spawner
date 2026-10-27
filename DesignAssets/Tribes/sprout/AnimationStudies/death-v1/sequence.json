@@ -32,9 +32,9 @@
   ],
   "durationMs": 2260,
   "loop": false,
-  "atlas": "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death.png",
+  "atlas": "DesignAssets/Planning/Tribes/sprout/AnimationStudies/death-v1/death.png",
   "preview": "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-preview.gif",
-  "smallPreview": "DesignAssets/UnitPreviews/sprout-bean/death.webp",
+  "smallPreview": "DesignAssets/Planning/UnitPreviews/sprout-bean/death.webp",
   "approvedFinalPose": "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/Approved/final-pose.png",
   "frames": [
     "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/Frames/000.png",
@@ -56,7 +56,7 @@
   ],
   "runtimeAtlas": "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp",
   "runtimeFrameSize": [
-    256,
-    256
+    117,
+    117
   ]
 }

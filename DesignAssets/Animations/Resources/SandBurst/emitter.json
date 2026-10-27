@@ -1,19 +1,46 @@
 {
   "source": "DesignAssets/Resources/sand.png",
   "grain": "parts/grain.png",
-  "frameSize": 256,
+  "frameSize": 199,
   "columns": 6,
   "frameMs": 50,
   "frameCount": 43,
   "contactFrame": 30,
   "settleFrame": 42,
-  "pivot": [128, 224],
-  "viewSize": 238,
+  "pivot": [
+    99.5,
+    174.125
+  ],
+  "viewSize": 185.007813,
   "gravity": 1850,
   "seed": 25,
   "bursts": [
-    { "time": 0.1, "origin": [116, 183], "count": 120, "direction": -1 },
-    { "time": 0.78, "origin": [137, 180], "count": 120, "direction": 1 },
-    { "time": 1.5, "origin": [126, 183], "count": 150, "direction": -1 }
+    {
+      "time": 0.1,
+      "origin": [
+        116,
+        183
+      ],
+      "count": 120,
+      "direction": -1
+    },
+    {
+      "time": 0.78,
+      "origin": [
+        137,
+        180
+      ],
+      "count": 120,
+      "direction": 1
+    },
+    {
+      "time": 1.5,
+      "origin": [
+        126,
+        183
+      ],
+      "count": 150,
+      "direction": -1
+    }
   ]
 }

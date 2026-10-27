@@ -1,9 +1,0 @@
-{
-  "id": "coil-half-turn-key-a1",
-  "refs": [
-    "H:/Spawner/$Trash/sprout-seed-root-split-20261024/References/level-01.png",
-    "H:/Spawner/$Trash/sprout-seed-root-split-20261024/Prepared/coil-closed-key.png"
-  ],
-  "prompt": "Draw ONE complete next cel of image1 ORIGINAL small nest, progressing toward image2. The TWO original broad ivory petals begin actually rolling inward from their tips, each making a HALF-TURN(180degrees) curled loop. Left tip leads slightly, right follows. This is still a loose open coil: gold seed and original green sprout partly visible at their original size/location, not moved upward. Keep the same small petal bases, ground leaves/root at(256,465), camera, palette, dark-teal outline, painted style and square transparent canvas. Image2 is the later tightly coiled endpoint only; do not jump to its nested double spirals yet. No new roots, adult growth, extra leaf ring, body rotation, motion blur, fade or detached cutouts. Fully draw all connected petal curves. One cel only.",
-  "source": "D:\\.codex\\generated_images\\01a163ce-56da-7d30-98e5-53addf14f35d\\exec-7a20e6d1-a595-4bad-a8cc-bfd624fd29e2.png"
-}

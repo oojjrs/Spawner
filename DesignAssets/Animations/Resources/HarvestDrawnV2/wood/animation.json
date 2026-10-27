@@ -1,7 +1,7 @@
 {
   "source": "DesignAssets/Terrain/standing-tree-smooth-atlas.png",
-  "frameWidth": 512,
-  "frameHeight": 512,
+  "frameWidth": 237,
+  "frameHeight": 237,
   "frameCount": 9,
   "columns": 3,
   "rows": 3,
@@ -31,7 +31,7 @@
       ],
       "sourceAnchor": [
         411.8159645232816,
-        842.0
+        842
       ],
       "destinationAnchor": [
         250.5,
@@ -46,7 +46,7 @@
       ],
       "sourceAnchor": [
         420.55371900826447,
-        840.0
+        840
       ],
       "destinationAnchor": [
         250.5,
@@ -61,7 +61,7 @@
       ],
       "sourceAnchor": [
         409.4261954261954,
-        840.0
+        840
       ],
       "destinationAnchor": [
         250.5,
@@ -76,7 +76,7 @@
       ],
       "sourceAnchor": [
         415.1215932914046,
-        842.0
+        842
       ],
       "destinationAnchor": [
         250.5,
@@ -91,7 +91,7 @@
       ],
       "sourceAnchor": [
         466.6583011583012,
-        857.0
+        857
       ],
       "destinationAnchor": [
         250.5,
@@ -106,7 +106,7 @@
       ],
       "sourceAnchor": [
         431.92985971943887,
-        857.0
+        857
       ],
       "destinationAnchor": [
         250.5,
@@ -121,7 +121,7 @@
       ],
       "sourceAnchor": [
         478.8659340659341,
-        840.0
+        840
       ],
       "destinationAnchor": [
         250.5,
@@ -136,7 +136,7 @@
       ],
       "sourceAnchor": [
         435.6397379912664,
-        831.0
+        831
       ],
       "destinationAnchor": [
         250.5,
@@ -151,7 +151,7 @@
       ],
       "sourceAnchor": [
         403.65658747300216,
-        830.0
+        830
       ],
       "destinationAnchor": [
         250.5,

@@ -4,8 +4,8 @@
   "direction": "right",
   "status": "review-candidate",
   "frameSize": [
-    512,
-    512
+    176,
+    176
   ],
   "columns": 4,
   "frameCount": 16,
@@ -34,8 +34,8 @@
   "hitAtMs": 300,
   "impactHoldMs": 300,
   "pivot": [
-    256,
-    448
+    88,
+    154
   ],
   "rootMotion": false,
   "atlas": "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.png",

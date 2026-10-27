@@ -3,7 +3,7 @@
   "name": "꿀버섯 무리",
   "motion": "버섯 갓의 내부 면이 작게 눌렸다가 복귀하며 외곽과 밑동은 고정한다.",
   "source": "DesignAssets/FoodConcepts/v1/food-honey-mushrooms.png",
-  "frameSize": 256,
+  "frameSize": 228,
   "frameCount": 24,
   "frameMs": 100,
   "columns": 6,
@@ -93,12 +93,12 @@
   },
   "approvedStyleSource": "DesignAssets/ResourceStyleStudies/v1/food-honey-mushrooms.png",
   "sourceMethod": "승인한 단순화 원화를 고정 베이스와 부드러운 내부 표면 레이어로 분리하고, 외곽과 지면을 고정한 국소 접촉 반응을 합성한다.",
-  "frameWidth": 256,
-  "frameHeight": 256,
+  "frameWidth": 228,
+  "frameHeight": 228,
   "rows": 4,
   "pivot": [
-    128,
-    224
+    114,
+    199.5
   ],
   "fixedParts": [
     "parts/style-fixed-base.png"

@@ -5,7 +5,7 @@
       "name": "nest-stage-01-idle",
       "source": "DesignAssets/Tribes/spore/Nests/nest-stage-01.png",
       "animation": "DesignAssets/Tribes/spore/Animations/Nests/stage-01-idle-spine-v1/nest-stage-01-idle-sheet.png",
-      "preview": "DesignAssets/Previews/Nests/spore-stage-01-idle-spine-v1.webp",
+      "preview": "DesignAssets/Planning/Previews/Nests/spore-stage-01-idle-spine-v1.webp",
       "frameSize": [
         512,
         512

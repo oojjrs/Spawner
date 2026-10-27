@@ -1,13 +1,13 @@
 {
   "species": "spiny-back-beetle",
-  "frameSize": 512,
+  "frameSize": 345,
   "columns": 5,
   "frameCount": 19,
   "sheet": "atlas.webp",
   "neutral": "neutral.webp",
   "pivot": [
-    265,
-    450
+    178.564453,
+    303.222656
   ],
   "renderSize": 1.6,
   "animations": {

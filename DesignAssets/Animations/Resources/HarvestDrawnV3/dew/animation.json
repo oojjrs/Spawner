@@ -1,8 +1,8 @@
 {
   "resource": "dew",
   "frameSize": [
-    512,
-    512
+    495,
+    495
   ],
   "frameCount": 9,
   "sheetGrid": [
@@ -47,7 +47,7 @@
       "source": "source-drawings/key.png",
       "cell": 0,
       "sourceRoot": [
-        480.0,
+        480,
         777
       ],
       "wholeCellPlacement": [
@@ -60,7 +60,7 @@
       "source": "source-drawings/key.png",
       "cell": 1,
       "sourceRoot": [
-        382.0,
+        382,
         777
       ],
       "wholeCellPlacement": [
@@ -73,7 +73,7 @@
       "source": "source-drawings/micro.png",
       "cell": 0,
       "sourceRoot": [
-        479.0,
+        479,
         776
       ],
       "wholeCellPlacement": [
@@ -86,7 +86,7 @@
       "source": "source-drawings/approach.png",
       "cell": 1,
       "sourceRoot": [
-        418.0,
+        418,
         781
       ],
       "wholeCellPlacement": [
@@ -99,7 +99,7 @@
       "source": "source-drawings/release.png",
       "cell": 0,
       "sourceRoot": [
-        499.0,
+        499,
         788
       ],
       "wholeCellPlacement": [
@@ -112,7 +112,7 @@
       "source": "source-drawings/release.png",
       "cell": 1,
       "sourceRoot": [
-        430.0,
+        430,
         788
       ],
       "wholeCellPlacement": [
@@ -125,7 +125,7 @@
       "source": "source-drawings/recoil.png",
       "cell": 0,
       "sourceRoot": [
-        497.0,
+        497,
         792
       ],
       "wholeCellPlacement": [
@@ -138,7 +138,7 @@
       "source": "source-drawings/recoil.png",
       "cell": 1,
       "sourceRoot": [
-        413.0,
+        413,
         793
       ],
       "wholeCellPlacement": [
@@ -151,7 +151,7 @@
       "source": "source-drawings/micro.png",
       "cell": 1,
       "sourceRoot": [
-        382.0,
+        382,
         776
       ],
       "wholeCellPlacement": [

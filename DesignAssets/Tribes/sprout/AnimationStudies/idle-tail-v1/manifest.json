@@ -1,0 +1,52 @@
+{
+  "name": "sprout-layered-tail-idle-v1",
+  "frameSize": [
+    512,
+    512
+  ],
+  "frameCount": 128,
+  "columns": 8,
+  "durationMs": 6400,
+  "frameDurationMs": 50,
+  "pivot": [
+    256,
+    448
+  ],
+  "loop": true,
+  "rootMotion": false,
+  "rig": "rig.json",
+  "render": "render.py",
+  "export": "export.py",
+  "preview": "preview.html",
+  "tailPart": "Parts/tail.png",
+  "tailCutout": "Parts/tail-cutout.png",
+  "comparison": "idle-comparison.webp",
+  "variants": {
+    "basic": {
+      "name": "기본잎 + 효소 꼬리",
+      "atlas": "basic-idle.webp",
+      "preview": "basic-idle-preview.webp"
+    },
+    "antenna": {
+      "name": "안테나 + 효소 꼬리",
+      "atlas": "antenna-idle.webp",
+      "preview": "antenna-idle-preview.webp"
+    }
+  },
+  "tailAnimation": "tail-idle.webp",
+  "runtimeExport": "export-runtime.py",
+  "runtime": {
+    "frameSize": [
+      256,
+      256
+    ],
+    "columns": 8,
+    "frames": 128,
+    "frameDurationMs": 50,
+    "images": [
+      "DesignAssets/Tribes/sprout/Animations/Attributes/decomposition-idle-v1/basic.webp",
+      "DesignAssets/Tribes/sprout/Animations/Attributes/decomposition-idle-v1/antenna.webp",
+      "DesignAssets/Tribes/sprout/Animations/Attributes/decomposition-idle-v1/tail.webp"
+    ]
+  }
+}

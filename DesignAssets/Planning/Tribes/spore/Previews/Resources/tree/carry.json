@@ -1,0 +1,33 @@
+{
+  "tribe": "spore",
+  "resourceType": "tree",
+  "action": "carry",
+  "durationsMs": [
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70
+  ],
+  "loop": true,
+  "frameCount": 16,
+  "rendering": "runtime-composite",
+  "columns": 4,
+  "frameSize": 512,
+  "sheet": "DesignAssets/Planning/Tribes/spore/Previews/Resources/tree/carry-sheet.webp",
+  "preview": "DesignAssets/Planning/Tribes/spore/Previews/Resources/tree/carry.webp",
+  "thumbnail": "DesignAssets/Planning/UnitPreviews/spore-tribe/carry.webp",
+  "resourceImage": "DesignAssets/Resources/wood-carry.png",
+  "renderer": "client/game.js"
+}

@@ -5,8 +5,8 @@
   "approvedDesignSource": "DesignAssets/Tribes/spore/BaseParts/neutral.png",
   "sourceSha256": "9fc49e637333075efd88ff4b9ae0df5a2bf05f3bf3f792cd1f3594b4ad1f36c9",
   "frameSize": [
-    512,
-    512
+    108,
+    108
   ],
   "columns": 4,
   "frameCount": 16,
@@ -31,13 +31,13 @@
   "loop": true,
   "rootMotion": false,
   "pivot": [
-    256,
-    448
+    54,
+    94.5
   ],
   "stridePxPerCycle": 48,
   "atlas": "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/walk-v2.png",
   "runtimeAtlas": "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/walk-v2.webp",
-  "preview": "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/walk-preview.gif",
+  "preview": "DesignAssets/Planning/Tribes/spore/AnimationStudies/walk-v2/walk-preview.gif",
   "comparison": "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/walk-comparison-preview.gif",
   "parts": [
     "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/Parts/stem.png",

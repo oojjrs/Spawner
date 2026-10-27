@@ -8,8 +8,8 @@
     0
   ],
   "frameSize": [
-    512,
-    512
+    115,
+    115
   ],
   "columns": 4,
   "frameCount": 16,
@@ -37,8 +37,8 @@
   "loop": false,
   "rootMotion": false,
   "pivot": [
-    256,
-    448
+    57.5,
+    100.625
   ],
   "atlas": "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.png",
   "runtimeAtlas": "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp",

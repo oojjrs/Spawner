@@ -4,8 +4,8 @@
   "kind": "local-eye-and-tail-repair",
   "status": "rework-review-candidate",
   "frameSize": [
-    512,
-    512
+    115,
+    115
   ],
   "columns": 4,
   "frameCount": 8,
@@ -32,8 +32,8 @@
   "durationMs": 1440,
   "loop": false,
   "pivot": [
-    256,
-    448
+    57.5,
+    100.625
   ],
   "frames": [
     "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/Frames/00.png",

@@ -1,0 +1,270 @@
+{
+  "name": "lantern-keeper",
+  "action": "idle",
+  "revision": 2,
+  "method": "Actual generated pose drawings and drawn in-betweens, translation-only registration, stationary original pixels retained outside the motion mask; no motion transforms, no mesh deformation, no image interpolation or crossfades.",
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 8,
+  "frameCount": 49,
+  "drawnPoseCount": 24,
+  "durationsMs": [
+    800,
+    70,
+    70,
+    80,
+    90,
+    100,
+    120,
+    120,
+    120,
+    130,
+    220,
+    170,
+    140,
+    100,
+    100,
+    100,
+    100,
+    100,
+    120,
+    230,
+    130,
+    140,
+    150,
+    180,
+    950,
+    70,
+    70,
+    80,
+    90,
+    100,
+    120,
+    120,
+    120,
+    130,
+    220,
+    170,
+    140,
+    100,
+    100,
+    100,
+    100,
+    100,
+    120,
+    230,
+    130,
+    140,
+    150,
+    180,
+    2200
+  ],
+  "durationMs": 9710,
+  "loop": true,
+  "rootMotion": false,
+  "atlas": "idle.png",
+  "runtimeAtlas": "idle.webp",
+  "preview": "idle-preview.webp",
+  "frames": [
+    {
+      "drawing": "neutral",
+      "durationMs": 800
+    },
+    {
+      "drawing": "load-1",
+      "durationMs": 70
+    },
+    {
+      "drawing": "load-2",
+      "durationMs": 70
+    },
+    {
+      "drawing": "load-3",
+      "durationMs": 80
+    },
+    {
+      "drawing": "load-4",
+      "durationMs": 90
+    },
+    {
+      "drawing": "keys-0",
+      "durationMs": 100
+    },
+    {
+      "drawing": "rise-1",
+      "durationMs": 120
+    },
+    {
+      "drawing": "rise-2",
+      "durationMs": 120
+    },
+    {
+      "drawing": "rise-3",
+      "durationMs": 120
+    },
+    {
+      "drawing": "rise-4",
+      "durationMs": 130
+    },
+    {
+      "drawing": "keys-1",
+      "durationMs": 220
+    },
+    {
+      "drawing": "down-1",
+      "durationMs": 170
+    },
+    {
+      "drawing": "down-2",
+      "durationMs": 140
+    },
+    {
+      "drawing": "down-gap-1",
+      "durationMs": 100
+    },
+    {
+      "drawing": "down-gap-2",
+      "durationMs": 100
+    },
+    {
+      "drawing": "down-gap-3",
+      "durationMs": 100
+    },
+    {
+      "drawing": "down-gap-4",
+      "durationMs": 100
+    },
+    {
+      "drawing": "down-3",
+      "durationMs": 100
+    },
+    {
+      "drawing": "down-4",
+      "durationMs": 120
+    },
+    {
+      "drawing": "keys-3",
+      "durationMs": 230
+    },
+    {
+      "drawing": "recover-1",
+      "durationMs": 130
+    },
+    {
+      "drawing": "recover-2",
+      "durationMs": 140
+    },
+    {
+      "drawing": "recover-3",
+      "durationMs": 150
+    },
+    {
+      "drawing": "recover-4",
+      "durationMs": 180
+    },
+    {
+      "drawing": "neutral",
+      "durationMs": 950
+    },
+    {
+      "drawing": "load-1",
+      "durationMs": 70
+    },
+    {
+      "drawing": "load-2",
+      "durationMs": 70
+    },
+    {
+      "drawing": "load-3",
+      "durationMs": 80
+    },
+    {
+      "drawing": "load-4",
+      "durationMs": 90
+    },
+    {
+      "drawing": "keys-0",
+      "durationMs": 100
+    },
+    {
+      "drawing": "rise-1",
+      "durationMs": 120
+    },
+    {
+      "drawing": "rise-2",
+      "durationMs": 120
+    },
+    {
+      "drawing": "rise-3",
+      "durationMs": 120
+    },
+    {
+      "drawing": "rise-4",
+      "durationMs": 130
+    },
+    {
+      "drawing": "keys-1",
+      "durationMs": 220
+    },
+    {
+      "drawing": "down-1",
+      "durationMs": 170
+    },
+    {
+      "drawing": "down-2",
+      "durationMs": 140
+    },
+    {
+      "drawing": "down-gap-1",
+      "durationMs": 100
+    },
+    {
+      "drawing": "down-gap-2",
+      "durationMs": 100
+    },
+    {
+      "drawing": "down-gap-3",
+      "durationMs": 100
+    },
+    {
+      "drawing": "down-gap-4",
+      "durationMs": 100
+    },
+    {
+      "drawing": "down-3",
+      "durationMs": 100
+    },
+    {
+      "drawing": "down-4",
+      "durationMs": 120
+    },
+    {
+      "drawing": "keys-3",
+      "durationMs": 230
+    },
+    {
+      "drawing": "recover-1",
+      "durationMs": 130
+    },
+    {
+      "drawing": "recover-2",
+      "durationMs": 140
+    },
+    {
+      "drawing": "recover-3",
+      "durationMs": 150
+    },
+    {
+      "drawing": "recover-4",
+      "durationMs": 180
+    },
+    {
+      "drawing": "neutral",
+      "durationMs": 2200
+    }
+  ],
+  "designReference": "../../../CreatureConcepts/v3/lantern-keeper.png",
+  "contact": "idle-contact.png"
+}

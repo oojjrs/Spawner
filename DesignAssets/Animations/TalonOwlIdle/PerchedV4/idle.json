@@ -11,8 +11,8 @@
   "artworkMethod": "Preserved the six existing idle cels. Added two directly drawn transition cels and the approved expression key. Repaired the key neck attachment with image_gen. Stationary body pixels are retained unchanged; approved expression artwork is preserved within its saved region. The second transition retains the complete prepared key below its tuft region.",
   "newDrawnPoseCount": 2,
   "frameSize": [
-    512,
-    512
+    432,
+    432
   ],
   "columns": 4,
   "frameCount": 17,

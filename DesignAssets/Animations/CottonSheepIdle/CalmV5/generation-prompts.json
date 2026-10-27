@@ -1,0 +1,18 @@
+{
+  "provider": "built-in image_gen",
+  "revision": 5,
+  "originalReference": "Source/reference.png",
+  "motionMethod": "One continuous original-art mesh; local breathing bones, rigid face, two-bone near-ear chain and eye-only texture replacements.",
+  "blinkDrawings": [
+    {
+      "name": "half",
+      "prompt": "Use case: precise-object-edit. Production EYELID REPLACEMENT DRAWING for animation. Edit the attached exact mouthless sheep sprite. Change ONLY the two eyes: BOTH upper eyelids are halfway down during one relaxed blink. Each eye is approximately half open, with the original dark green iris still visible in the lower opening. The eyelid follows the original perspective and exact original eye placement. Keep the rest of the image exactly as the attached source: original sheep face shape, brown triangular nose, round muzzle with NO mouth, original cream forehead wool, floppy ears, all body wool clumps, all four legs, pose, view, outline, ivory/sage palette, lighting, exact framing and scale. Do not redesign, enlarge, shift or refit the sheep. Keep the same 512x512 character canvas and transparent margins. Clean soft game illustration matching the reference, not a different character. No tears, smile, squinting cheek folds, extra fur, eye accessories, text, labels, grid, particles or shadow. One complete sprite on real transparent background.",
+      "texture": "Source/blink-half.png"
+    },
+    {
+      "name": "closed",
+      "prompt": "Use case: precise-object-edit. Production EYELID REPLACEMENT DRAWING for animation. Edit the attached exact mouthless sheep sprite. Change ONLY the two eyes: BOTH eyes are completely CLOSED for one relaxed blink. Replace each entire open eyeball with the original warm beige facial surface and one short, smooth dark-teal curved eyelid stroke at the original eye center. The far eye stroke is shorter than the near eye stroke. No visible iris, pupil, glint, white eyeball, lashes or eyebrow. Keep the rest of the image exactly as the attached source: original sheep face shape, brown triangular nose, round muzzle with NO mouth, original cream forehead wool, floppy ears, all body wool clumps, all four legs, pose, view, outline, ivory/sage palette, lighting, exact framing and scale. Do not redesign, enlarge, shift or refit the sheep. Keep the same 512x512 character canvas and transparent margins. Clean soft game illustration matching the reference, not a different character. No tears, smile, squinting cheek folds, extra fur, eye accessories, text, labels, grid, particles or shadow. One complete sprite on real transparent background.",
+      "texture": "Source/blink-closed.png"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "tribe": "pebble",
+  "resourceType": "pebbles",
+  "action": "carry",
+  "durationsMs": [
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80
+  ],
+  "loop": true,
+  "frameCount": 16,
+  "rendering": "runtime-composite",
+  "columns": 4,
+  "frameSize": 512,
+  "sheet": "DesignAssets/Planning/Tribes/pebble/Previews/Resources/pebbles/carry-sheet.webp",
+  "preview": "DesignAssets/Planning/Tribes/pebble/Previews/Resources/pebbles/carry.webp",
+  "thumbnail": "DesignAssets/Planning/UnitPreviews/pebble-tribe/carry.webp",
+  "resourceImage": "DesignAssets/Resources/pebbles-carry.png",
+  "renderer": "client/game.js"
+}

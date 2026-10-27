@@ -22,18 +22,18 @@
   "loop": false,
   "layers": "DesignAssets/Tribes/pebble/BaseParts/layers.json",
   "frameSize": [
-    512,
-    512
+    111,
+    111
   ],
   "columns": 4,
   "frameCount": 16,
   "pivot": [
-    256,
-    448
+    55.5,
+    97.125
   ],
   "rootMotion": false,
   "atlas": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.png",
   "runtimeAtlas": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.webp",
-  "preview": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump-preview.gif",
+  "preview": "DesignAssets/Planning/Tribes/pebble/Animations/Units/jump/jump-preview.gif",
   "contact": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump-contact.png"
 }

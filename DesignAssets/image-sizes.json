@@ -1,0 +1,1611 @@
+{
+  "preferredScale": 1,
+  "maximumScale": 1.5,
+  "baseZoom": 144,
+  "viewport": [
+    1920,
+    1080
+  ],
+  "images": {
+    "DesignAssets/Animations/CottonSheepIdle/CalmV5/idle-runtime.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        15
+      ]
+    },
+    "DesignAssets/Animations/Beetle/atlas.webp": {
+      "display": [
+        230.4,
+        230.4
+      ],
+      "grid": [
+        5,
+        4
+      ]
+    },
+    "DesignAssets/Animations/Beetle/neutral.webp": {
+      "display": [
+        230.4,
+        230.4
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Animations/BeetleDeath/dead-v2.png": {
+      "display": [
+        123.83999999999999,
+        123.83999999999999
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Animations/BubbleToadIdle/BreathV1/idle.webp": {
+      "display": [
+        257.46792452830186,
+        257.46792452830186
+      ],
+      "grid": [
+        4,
+        18
+      ]
+    },
+    "DesignAssets/Animations/CreatureIdleStudies/V1/snare-vine/idle.webp": {
+      "display": [
+        283.16607773851587,
+        283.16607773851587
+      ],
+      "grid": [
+        8,
+        11
+      ]
+    },
+    "DesignAssets/Animations/CreatureIdleStudies/V2/shadow-weasel/idle.webp": {
+      "display": [
+        228.375,
+        228.375
+      ],
+      "grid": [
+        8,
+        16
+      ]
+    },
+    "DesignAssets/Animations/CreatureIdleStudies/V2/vine-turtle/idle.webp": {
+      "display": [
+        231.07420494699645,
+        231.07420494699645
+      ],
+      "grid": [
+        8,
+        18
+      ]
+    },
+    "DesignAssets/Animations/CreatureIdleV3/dew-rabbit/idle.webp": {
+      "display": [
+        278.4911660777385,
+        278.4911660777385
+      ],
+      "grid": [
+        4,
+        6
+      ]
+    },
+    "DesignAssets/Animations/CreatureIdleV3/flower-tail-bird/idle.webp": {
+      "display": [
+        276.7245283018868,
+        276.7245283018868
+      ],
+      "grid": [
+        4,
+        6
+      ]
+    },
+    "DesignAssets/Animations/CreatureIdleV3/soil-mole/idle.webp": {
+      "display": [
+        237.08480565371025,
+        237.08480565371025
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Animations/CreatureIdleV4/bundle-snail/idle.webp": {
+      "display": [
+        265.80212014134275,
+        265.80212014134275
+      ],
+      "grid": [
+        4,
+        6
+      ]
+    },
+    "DesignAssets/Animations/MountainPawLeaderIdle/spiny-back-leader/idle-runtime.webp": {
+      "display": [
+        439.8545454545454,
+        439.8545454545454
+      ],
+      "grid": [
+        8,
+        8
+      ]
+    },
+    "DesignAssets/Animations/MountainPawLeaderIdle/walking-forest/idle-runtime.webp": {
+      "display": [
+        439.8545454545454,
+        439.8545454545454
+      ],
+      "grid": [
+        8,
+        13
+      ]
+    },
+    "DesignAssets/Animations/MountainPawLeaderIdle/white-paw/idle-runtime.webp": {
+      "display": [
+        247.4181818181818,
+        247.4181818181818
+      ],
+      "grid": [
+        8,
+        8
+      ]
+    },
+    "DesignAssets/Animations/Nests/nest-stage-01-idle-sheet.png": {
+      "display": [
+        720,
+        720
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Animations/Resources/FertileSoil/harvest-sheet.png": {
+      "display": [
+        152.41846153846154,
+        152.41846153846154
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Animations/Resources/HarvestDrawnV2/pebbles/harvest-sheet.png": {
+      "display": [
+        137.24259740259743,
+        137.24259740259743
+      ],
+      "grid": [
+        3,
+        3
+      ]
+    },
+    "DesignAssets/Animations/Resources/HarvestDrawnV2/wood/harvest-sheet.png": {
+      "display": [
+        158.51520000000002,
+        158.51520000000002
+      ],
+      "grid": [
+        3,
+        3
+      ]
+    },
+    "DesignAssets/Animations/Resources/HarvestDrawnV3/dew/harvest-sheet.png": {
+      "display": [
+        330.24,
+        330.24
+      ],
+      "grid": [
+        3,
+        3
+      ]
+    },
+    "DesignAssets/Animations/Resources/HarvestV1/grass-fiber/sheet.png": {
+      "display": [
+        152.41846153846154,
+        152.41846153846154
+      ],
+      "grid": [
+        6,
+        4
+      ]
+    },
+    "DesignAssets/Animations/Resources/HarvestV1/honey-mushrooms/sheet.png": {
+      "display": [
+        152.41846153846154,
+        152.41846153846154
+      ],
+      "grid": [
+        6,
+        4
+      ]
+    },
+    "DesignAssets/Animations/Resources/SandBurst/harvest-sheet.png": {
+      "display": [
+        133.20605042016808,
+        133.20605042016808
+      ],
+      "grid": [
+        6,
+        8
+      ]
+    },
+    "DesignAssets/Animations/RollingAcornIdle/v1/idle.webp": {
+      "display": [
+        280.4946996466431,
+        280.4946996466431
+      ],
+      "grid": [
+        4,
+        14
+      ]
+    },
+    "DesignAssets/Animations/SoilBoarIdle/V1/idle.webp": {
+      "display": [
+        263.1735849056604,
+        263.1735849056604
+      ],
+      "grid": [
+        8,
+        10
+      ]
+    },
+    "DesignAssets/Animations/TalonOwlIdle/PerchedV4/idle.webp": {
+      "display": [
+        288,
+        288
+      ],
+      "grid": [
+        4,
+        5
+      ]
+    },
+    "DesignAssets/Animations/UnitAttack/attack.png": {
+      "display": [
+        80.22115384615384,
+        80.22115384615384
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Animations/UnitHurt/V3/hurt.png": {
+      "display": [
+        80.22115384615384,
+        80.22115384615384
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Animations/food-mushroom-pile-harvest.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        8,
+        6
+      ]
+    },
+    "DesignAssets/Attributes/SilhouettesV2/04-crescent.png": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Attributes/SilhouettesV2/23-y-branch.png": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Attributes/SilhouettesV2/24-horseshoe.png": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Attributes/SilhouettesV2/27-chevron.png": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Attributes/SilhouettesV2/40-spiral.png": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Burrows/beetle-burrow-large.png": {
+      "display": [
+        452.4014167650531,
+        226.20070838252656
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Burrows/beetle-burrow-small.png": {
+      "display": [
+        172.30534351145042,
+        172.3053435114504
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreatureConcepts/v3/bubble-toad.png": {
+      "display": [
+        259.2,
+        212.4
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreatureConcepts/v3/bundle-snail.png": {
+      "display": [
+        265.0909090909091,
+        229.5
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreatureConcepts/v3/cotton-sheep.png": {
+      "display": [
+        251.04905660377358,
+        251.04905660377358
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreatureConcepts/v3/dew-rabbit.png": {
+      "display": [
+        277.7142857142857,
+        277.07142857142856
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreatureConcepts/v3/flower-tail-bird.png": {
+      "display": [
+        274.21016949152545,
+        276.7728813559322
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreatureConcepts/v3/lantern-keeper.png": {
+      "display": [
+        256.452296819788,
+        259.791519434629
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreatureConcepts/v3/old-garden-snail.png": {
+      "display": [
+        244.125,
+        244.125
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreatureConcepts/v3/rolling-acorn.png": {
+      "display": [
+        279.61643835616434,
+        279.61643835616434
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreatureConcepts/v3/shadow-weasel.png": {
+      "display": [
+        240.14117647058822,
+        158.9823529411765
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreatureConcepts/v3/snare-vine.png": {
+      "display": [
+        196.37047353760445,
+        227.43175487465183
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreatureConcepts/v3/soil-boar.png": {
+      "display": [
+        265.0909090909091,
+        220.29545454545456
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreatureConcepts/v3/soil-mole.png": {
+      "display": [
+        237.34883720930233,
+        237.34883720930233
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreatureConcepts/v3/spiny-back-leader.png": {
+      "display": [
+        238.9245283018868,
+        233.9320754716981
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreatureConcepts/v3/spring-keeper.png": {
+      "display": [
+        272.7613636363636,
+        253.43181818181816
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreatureConcepts/v3/talon-owl.png": {
+      "display": [
+        96,
+        78
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreatureConcepts/v3/vine-turtle.png": {
+      "display": [
+        245.1891891891892,
+        245.1891891891892
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreatureConcepts/v3/walking-forest.png": {
+      "display": [
+        201.17045454545453,
+        201.17045454545453
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreatureConcepts/v3/white-paw.png": {
+      "display": [
+        241.09187279151945,
+        150.26501766784455
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Effects/Lifespan/spirit-flame.png": {
+      "display": [
+        25.132075471698112,
+        36
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Foods/food-berry-bush.png": {
+      "display": [
+        36,
+        36
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Foods/food-meat.png": {
+      "display": [
+        35.188363636363626,
+        35.18836363636364
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Foods/food-mushroom-pile.png": {
+      "display": [
+        123.84,
+        123.84
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Foods/food-mushroom-single.png": {
+      "display": [
+        34.944,
+        34.943999999999996
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Nests/nest-stage-01.png": {
+      "display": [
+        478.40662251655624,
+        479.205298013245
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/ResourceConcepts/v1/resource-carapace.png": {
+      "display": [
+        27.12436363636363,
+        27.124363636363633
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/ResourceConcepts/v1/resource-grass-fiber.png": {
+      "display": [
+        123.84,
+        123.84
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/ResourceConcepts/v1/resource-quartz.png": {
+      "display": [
+        123.83999999999999,
+        123.83999999999999
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Resources/clay-carry.png": {
+      "display": [
+        58.15039999999998,
+        58.15039999999999
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Resources/clay.png": {
+      "display": [
+        123.84,
+        123.84
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Resources/copper-ore-carry.png": {
+      "display": [
+        35.616,
+        35.616
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Resources/copper-ore.png": {
+      "display": [
+        123.83999999999999,
+        123.83999999999999
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Resources/dew-carry.png": {
+      "display": [
+        117.23815384615385,
+        117.23815384615385
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Resources/dew-grass.png": {
+      "display": [
+        123.84,
+        123.84
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Resources/iron-ore-carry.png": {
+      "display": [
+        47.2752,
+        47.2752
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Resources/iron-ore.png": {
+      "display": [
+        123.83999999999999,
+        123.83999999999999
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Resources/pebbles-carry.png": {
+      "display": [
+        90.36423529411763,
+        90.36423529411765
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Resources/pebbles.png": {
+      "display": [
+        123.84,
+        123.84
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Resources/sand-carry.png": {
+      "display": [
+        59.05694117647057,
+        59.05694117647057
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Resources/sand.png": {
+      "display": [
+        123.84,
+        123.84
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Resources/wood-carry.png": {
+      "display": [
+        63.32611764705881,
+        63.32611764705881
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Terrain/coast-ground.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Terrain/deep-water-ground.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Terrain/forest-ground.png": {
+      "display": [
+        576,
+        576
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Terrain/grassland-ground.png": {
+      "display": [
+        576,
+        576
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Terrain/high-mountain-ground.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Terrain/land-ground.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Terrain/low-mountain-ground.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Terrain/nest-soil-ground.png": {
+      "display": [
+        720,
+        720
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Terrain/poison-spore-ground.png": {
+      "display": [
+        512,
+        512
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Terrain/ridge-ground.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Terrain/shallow-water-ground.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Terrain/standing-tree-smooth-atlas.png": {
+      "display": [
+        132.47970598027104,
+        132.47970598027104
+      ],
+      "grid": [
+        3,
+        1
+      ]
+    },
+    "DesignAssets/Terrain/swamp-ground.png": {
+      "display": [
+        576,
+        576
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Terrain/thorn-root-ground.png": {
+      "display": [
+        512,
+        512
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp": {
+      "display": [
+        75.5625,
+        75.5625
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth-foreground.png": {
+      "display": [
+        720,
+        720
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth-unit.webp": {
+      "display": [
+        100.80000000000001,
+        100.80000000000001
+      ],
+      "grid": [
+        8,
+        6
+      ]
+    },
+    "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png": {
+      "display": [
+        75.39154411764706,
+        75.39154411764706
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
+    "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp": {
+      "display": [
+        75.39154411764706,
+        75.39154411764706
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp": {
+      "display": [
+        149.75,
+        150
+      ],
+      "grid": [
+        4,
+        16
+      ]
+    },
+    "DesignAssets/Tribes/pebble/AnimationStudies/roll-v2/roll-v2.webp": {
+      "display": [
+        76.80337078651685,
+        76.80337078651685
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Tribes/pebble/Animations/Nests/stage-01-idle-den-v1/nest-stage-01-idle-sheet.webp": {
+      "display": [
+        720,
+        720
+      ],
+      "grid": [
+        8,
+        6
+      ]
+    },
+    "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.webp": {
+      "display": [
+        73.3828125,
+        73.3828125
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Tribes/pebble/BaseParts/body.png": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Tribes/pebble/Nests/nest-stage-01.png": {
+      "display": [
+        436.5801538785835,
+        436.5801538785835
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Tribes/pebble/starter.png": {
+      "display": [
+        66.84375,
+        67.42574570327997
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/right/attack.webp": {
+      "display": [
+        72.3859011627907,
+        72.3859011627907
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/birth.webp": {
+      "display": [
+        445.8849194667563,
+        445.8849194667563
+      ],
+      "grid": [
+        4,
+        6
+      ]
+    },
+    "DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/nest-stationary.png": {
+      "display": [
+        444.51536403837804,
+        444.51536403837804
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png": {
+      "display": [
+        72.3859011627907,
+        72.3859011627907
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
+    "DesignAssets/Tribes/spore/AnimationStudies/hurt-v2/hurt-v2.webp": {
+      "display": [
+        72.3859011627907,
+        72.3859011627907
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp": {
+      "display": [
+        149.75,
+        150
+      ],
+      "grid": [
+        4,
+        16
+      ]
+    },
+    "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/walk-v2.webp": {
+      "display": [
+        73.21606672519754,
+        73.21606672519754
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Tribes/spore/Animations/Nests/stage-01-idle-spine-v1/nest-stage-01-idle-sheet.png": {
+      "display": [
+        684.7297297297296,
+        684.7297297297297
+      ],
+      "grid": [
+        12,
+        8
+      ]
+    },
+    "DesignAssets/Tribes/spore/Animations/Units/jump/jump.webp": {
+      "display": [
+        69.547238372093,
+        69.54723837209302
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Tribes/spore/BaseParts/body.png": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Tribes/spore/Nests/nest-stage-01.png": {
+      "display": [
+        421.6296055605786,
+        421.6296055605786
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Tribes/spore/starter.png": {
+      "display": [
+        62.46727941176471,
+        63.011170025520464
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp": {
+      "display": [
+        114.2470360824742,
+        114.24703608247422
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp": {
+      "display": [
+        157.5,
+        157.5
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png": {
+      "display": [
+        114.2470360824742,
+        114.24703608247422
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
+    "DesignAssets/Tribes/spring/AnimationStudies/flow-v4/flow-v4.webp": {
+      "display": [
+        115.44269254093389,
+        115.44269254093389
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Tribes/spring/AnimationStudies/hurt-v2/hurt-v2.webp": {
+      "display": [
+        114.2470360824742,
+        114.24703608247422
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp": {
+      "display": [
+        149.75,
+        150
+      ],
+      "grid": [
+        4,
+        16
+      ]
+    },
+    "DesignAssets/Tribes/spring/Animations/Nests/stage-01-idle-v5/nest-stage-01-idle-sheet.png": {
+      "display": [
+        481.3183482925972,
+        481.3183482925972
+      ],
+      "grid": [
+        10,
+        6
+      ]
+    },
+    "DesignAssets/Tribes/spring/Animations/Units/jump/jump.webp": {
+      "display": [
+        110.04162371134022,
+        110.04162371134022
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Tribes/spring/BaseParts/body.png": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Tribes/spring/Nests/nest-stage-01.png": {
+      "display": [
+        469.4577786552347,
+        234.37161552346572
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Tribes/spring/starter.png": {
+      "display": [
+        81.6929768041237,
+        82.40426187547519
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp": {
+      "display": [
+        82.61744281045752,
+        82.61744281045752
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Tribes/sprout/AnimationStudies/idle-tail-v1/Parts/tail.png": {
+      "display": [
+        95.95210814290311,
+        86.36894320632636
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.webp": {
+      "display": [
+        149.75,
+        150
+      ],
+      "grid": [
+        4,
+        16
+      ]
+    },
+    "DesignAssets/Tribes/sprout/Animations/Attributes/decomposition-idle-v1/antenna.webp": {
+      "display": [
+        100.80000000000001,
+        100.80000000000001
+      ],
+      "grid": [
+        8,
+        16
+      ]
+    },
+    "DesignAssets/Tribes/sprout/Animations/Attributes/decomposition-idle-v1/basic.webp": {
+      "display": [
+        100.80000000000001,
+        100.80000000000001
+      ],
+      "grid": [
+        8,
+        16
+      ]
+    },
+    "DesignAssets/Tribes/sprout/Animations/Attributes/decomposition-idle-v1/tail.webp": {
+      "display": [
+        92.33280086517335,
+        124.99200096130372
+      ],
+      "grid": [
+        8,
+        16
+      ]
+    },
+    "DesignAssets/UI/Lifespan/leaf-alive.png": {
+      "display": [
+        40,
+        40
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/UI/Lifespan/leaf-dead.png": {
+      "display": [
+        40,
+        40
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Units/BaseParts/body.png": {
+      "display": [
+        70.31249999999999,
+        102.5390625
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Units/BaseParts/sprout-left.png": {
+      "display": [
+        51.974999999999994,
+        72.45211044419555
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Units/BaseParts/sprout-right.png": {
+      "display": [
+        51.974999999999994,
+        72.45211044419555
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Units/BaseParts/sprout-stem.png": {
+      "display": [
+        51.974999999999994,
+        72.45211044419555
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Units/Parts/antenna-1.png": {
+      "display": [
+        57.42187499999999,
+        41.208639705882355
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Units/Parts/antenna-2.png": {
+      "display": [
+        67.74640595113787,
+        28.93564027642716
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Units/Parts/feet-1.png": {
+      "display": [
+        86.71875,
+        29.296875
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Units/Parts/feet-2.png": {
+      "display": [
+        61.425,
+        22.27302161604166
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Units/Parts/lifespan-1.png": {
+      "display": [
+        24.609375,
+        22.55859375
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Units/Parts/strength-1.png": {
+      "display": [
+        78.609375,
+        32.44921875000001
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Units/Parts/strength-2.png": {
+      "display": [
+        56.511,
+        24.304801407068968
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Units/spiny-back-beetle.png": {
+      "display": [
+        230.4,
+        230.4
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Units/starter-sprout-bean.png": {
+      "display": [
+        70.3125,
+        102.5390625
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/evolution-point-symbol.png": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Planning/Animations/UniqueIdleV3/spring-keeper/idle.webp": {
+      "display": [
+        512,
+        512
+      ],
+      "grid": [
+        8,
+        4
+      ]
+    },
+    "DesignAssets/Planning/Animations/UniqueIdleV3/spring-keeper/idle-preview.gif": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Planning/UnitPreviews/spring-keeper/idle.webp": {
+      "display": [
+        64,
+        64
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Planning/Animations/UniqueIdleV3/lantern-keeper/idle.webp": {
+      "display": [
+        512,
+        512
+      ],
+      "grid": [
+        8,
+        2
+      ]
+    },
+    "DesignAssets/Planning/Animations/UniqueIdleV3/lantern-keeper/idle-preview.gif": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Planning/UnitPreviews/lantern-keeper/idle.webp": {
+      "display": [
+        64,
+        64
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Animations/UniqueIdleV3/old-garden-snail/idle.webp": {
+      "display": [
+        239,
+        239
+      ],
+      "grid": [
+        8,
+        2
+      ]
+    },
+    "DesignAssets/Planning/Animations/UniqueIdleV3/old-garden-snail/idle-preview.gif": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Planning/UnitPreviews/old-garden-snail/idle.webp": {
+      "display": [
+        64,
+        64
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Animations/UniqueIdleV4/spring-keeper/idle.webp": {
+      "display": [
+        274,
+        274
+      ],
+      "grid": [
+        8,
+        5
+      ]
+    },
+    "DesignAssets/Planning/Animations/UniqueIdleV4/spring-keeper/idle-preview.gif": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Animations/UniqueIdleV4/lantern-keeper/idle.webp": {
+      "display": [
+        259,
+        259
+      ],
+      "grid": [
+        8,
+        6
+      ]
+    },
+    "DesignAssets/Planning/Animations/UniqueIdleV4/lantern-keeper/idle-preview.gif": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    }
+  }
+}

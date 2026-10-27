@@ -7,8 +7,8 @@
   "approvedDesignSource": "DesignAssets/Tribes/pebble/BaseParts/neutral.png",
   "sourceSha256": "7b79c12b21fbfc993eba75ce3f980c2815925b99c263045f0af76fc6682802f4",
   "frameSize": [
-    512,
-    512
+    115,
+    115
   ],
   "columns": 4,
   "frameCount": 16,
@@ -33,15 +33,15 @@
   "loop": true,
   "rootMotion": false,
   "pivot": [
-    256,
-    448
+    57.5,
+    100.625
   ],
   "revolutionsPerCycle": 1,
   "rollDirection": "clockwise-right",
   "travelPxPerCycle": 1093.4104047625865,
   "atlas": "DesignAssets/Tribes/pebble/AnimationStudies/roll-v2/roll-v2.png",
   "runtimeAtlas": "DesignAssets/Tribes/pebble/AnimationStudies/roll-v2/roll-v2.webp",
-  "preview": "DesignAssets/Tribes/pebble/AnimationStudies/roll-v2/roll-preview.gif",
+  "preview": "DesignAssets/Planning/Tribes/pebble/AnimationStudies/roll-v2/roll-preview.gif",
   "comparison": "DesignAssets/Tribes/pebble/AnimationStudies/roll-v2/roll-comparison-preview.gif",
   "contact": "DesignAssets/Tribes/pebble/AnimationStudies/roll-v2/roll-contact.png",
   "parts": [

@@ -1,6 +1,0 @@
-{
-  "mode": "reuse existing source art",
-  "imagegen": false,
-  "source": "DesignAssets/ResourceConcepts/v1/resource-sand.png",
-  "method": "부드러운 국소 표면 레이어의 연속 좌표 변형만 사용하며 숨은 면이나 새로운 그림을 만들지 않는다."
-}

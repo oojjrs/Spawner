@@ -1,0 +1,180 @@
+{
+  "name": "spring-keeper",
+  "action": "idle",
+  "revision": 2,
+  "method": "Actual generated pose drawings and drawn in-betweens, translation-only registration, stationary original pixels retained outside the motion mask; no motion transforms, no mesh deformation, no image interpolation or crossfades.",
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 8,
+  "frameCount": 31,
+  "drawnPoseCount": 14,
+  "durationsMs": [
+    800,
+    110,
+    100,
+    90,
+    90,
+    110,
+    90,
+    90,
+    110,
+    150,
+    1000,
+    90,
+    80,
+    80,
+    90,
+    100,
+    100,
+    110,
+    120,
+    140,
+    350,
+    300,
+    400,
+    350,
+    250,
+    600,
+    300,
+    400,
+    350,
+    250,
+    600
+  ],
+  "durationMs": 7800,
+  "loop": true,
+  "rootMotion": false,
+  "atlas": "idle.png",
+  "runtimeAtlas": "idle.webp",
+  "preview": "idle-preview.webp",
+  "frames": [
+    {
+      "drawing": "neutral",
+      "durationMs": 800
+    },
+    {
+      "drawing": "enter-1",
+      "durationMs": 110
+    },
+    {
+      "drawing": "enter-2",
+      "durationMs": 100
+    },
+    {
+      "drawing": "enter-3",
+      "durationMs": 90
+    },
+    {
+      "drawing": "enter-4",
+      "durationMs": 90
+    },
+    {
+      "drawing": "keys-1",
+      "durationMs": 110
+    },
+    {
+      "drawing": "drop-1",
+      "durationMs": 90
+    },
+    {
+      "drawing": "drop-2",
+      "durationMs": 90
+    },
+    {
+      "drawing": "drop-3",
+      "durationMs": 110
+    },
+    {
+      "drawing": "drop-4",
+      "durationMs": 150
+    },
+    {
+      "drawing": "keys-2",
+      "durationMs": 1000
+    },
+    {
+      "drawing": "drop-4",
+      "durationMs": 90
+    },
+    {
+      "drawing": "drop-3",
+      "durationMs": 80
+    },
+    {
+      "drawing": "drop-2",
+      "durationMs": 80
+    },
+    {
+      "drawing": "drop-1",
+      "durationMs": 90
+    },
+    {
+      "drawing": "keys-1",
+      "durationMs": 100
+    },
+    {
+      "drawing": "enter-4",
+      "durationMs": 100
+    },
+    {
+      "drawing": "enter-3",
+      "durationMs": 110
+    },
+    {
+      "drawing": "enter-2",
+      "durationMs": 120
+    },
+    {
+      "drawing": "enter-1",
+      "durationMs": 140
+    },
+    {
+      "drawing": "neutral",
+      "durationMs": 350
+    },
+    {
+      "drawing": "breath-1",
+      "durationMs": 300
+    },
+    {
+      "drawing": "breath-2",
+      "durationMs": 400
+    },
+    {
+      "drawing": "breath-3",
+      "durationMs": 350
+    },
+    {
+      "drawing": "breath-1",
+      "durationMs": 250
+    },
+    {
+      "drawing": "neutral",
+      "durationMs": 600
+    },
+    {
+      "drawing": "breath-1",
+      "durationMs": 300
+    },
+    {
+      "drawing": "breath-2",
+      "durationMs": 400
+    },
+    {
+      "drawing": "breath-3",
+      "durationMs": 350
+    },
+    {
+      "drawing": "breath-1",
+      "durationMs": 250
+    },
+    {
+      "drawing": "neutral",
+      "durationMs": 600
+    }
+  ],
+  "designReference": "../../../CreatureConcepts/v3/spring-keeper.png",
+  "contact": "idle-contact.png"
+}

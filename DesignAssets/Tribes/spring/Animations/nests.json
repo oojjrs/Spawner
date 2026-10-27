@@ -5,7 +5,7 @@
       "name": "nest-stage-01-idle",
       "source": "DesignAssets/Tribes/spring/Nests/nest-stage-01.png",
       "animation": "DesignAssets/Tribes/spring/Animations/Nests/stage-01-idle-v5/nest-stage-01-idle-sheet.png",
-      "preview": "DesignAssets/Previews/Nests/spring-stage-01-idle-v5.webp",
+      "preview": "DesignAssets/Planning/Previews/Nests/spring-stage-01-idle-v5.webp",
       "frameSize": [
         512,
         512

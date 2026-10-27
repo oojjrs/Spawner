@@ -1,0 +1,33 @@
+{
+  "tribe": "spring",
+  "resourceType": "dew",
+  "action": "carry",
+  "durationsMs": [
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70
+  ],
+  "loop": true,
+  "frameCount": 16,
+  "rendering": "runtime-composite",
+  "columns": 4,
+  "frameSize": 512,
+  "sheet": "DesignAssets/Planning/Tribes/spring/Previews/Resources/dew/carry-sheet.webp",
+  "preview": "DesignAssets/Planning/Tribes/spring/Previews/Resources/dew/carry.webp",
+  "thumbnail": "DesignAssets/Planning/UnitPreviews/spring-tribe/carry.webp",
+  "resourceImage": "DesignAssets/Resources/dew-carry.png",
+  "renderer": "client/game.js"
+}

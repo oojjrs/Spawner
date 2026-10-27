@@ -1,0 +1,93 @@
+{
+  "name": "old-garden-snail",
+  "action": "idle",
+  "revision": 3,
+  "method": "Drawn pose sequence with inconsistent intermediate poses removed and one coherent cycle replayed.",
+  "frameSize": [
+    352,
+    352
+  ],
+  "columns": 8,
+  "frameCount": 13,
+  "drawnPoseCount": 7,
+  "durationsMs": [
+    800,
+    160,
+    150,
+    180,
+    180,
+    210,
+    700,
+    150,
+    130,
+    130,
+    140,
+    180,
+    2600
+  ],
+  "durationMs": 5710,
+  "loop": true,
+  "rootMotion": false,
+  "runtimeAtlas": "DesignAssets/Animations/UniqueIdleV3/old-garden-snail/idle.webp",
+  "preview": "idle-preview.gif",
+  "frames": [
+    {
+      "drawing": "neutral",
+      "durationMs": 800
+    },
+    {
+      "drawing": "enter-1",
+      "durationMs": 160
+    },
+    {
+      "drawing": "enter-2",
+      "durationMs": 150
+    },
+    {
+      "drawing": "open-1",
+      "durationMs": 180
+    },
+    {
+      "drawing": "open-2",
+      "durationMs": 180
+    },
+    {
+      "drawing": "open-3",
+      "durationMs": 210
+    },
+    {
+      "drawing": "open-4",
+      "durationMs": 700
+    },
+    {
+      "drawing": "open-3",
+      "durationMs": 150
+    },
+    {
+      "drawing": "open-2",
+      "durationMs": 130
+    },
+    {
+      "drawing": "open-1",
+      "durationMs": 130
+    },
+    {
+      "drawing": "enter-2",
+      "durationMs": 140
+    },
+    {
+      "drawing": "enter-1",
+      "durationMs": 180
+    },
+    {
+      "drawing": "neutral",
+      "durationMs": 2600
+    }
+  ],
+  "designReference": "../../../../CreatureConcepts/v3/old-garden-snail.png",
+  "sourceFrameSize": [
+    512,
+    512
+  ],
+  "sourceArchive": "../source-drawings.zip"
+}

@@ -1,14 +1,14 @@
 {
   "source": "DesignAssets/Resources/clay.png",
-  "frameWidth": 256,
-  "frameHeight": 256,
+  "frameWidth": 228,
+  "frameHeight": 228,
   "frameCount": 13,
   "columns": 4,
   "rows": 4,
   "contactFrame": 3,
   "settleFrame": 12,
-  "pivotX": 128,
-  "pivotY": 224,
+  "pivotX": 114,
+  "pivotY": 199.5,
   "sheet": "harvest-sheet.png",
   "preview": "fertile-soil-harvest.webp",
   "durationsMs": [
@@ -71,7 +71,7 @@
       "horizontalAnchorCorrection": 1,
       "clodCenter": [
         156.41666666666666,
-        123.0
+        123
       ]
     },
     {
@@ -112,7 +112,7 @@
       ],
       "horizontalAnchorCorrection": 0,
       "clodCenter": [
-        156.0,
+        156,
         104.58333333333333
       ]
     },
@@ -141,7 +141,7 @@
       "horizontalAnchorCorrection": 0,
       "clodCenter": [
         156.16842105263157,
-        103.0
+        103
       ]
     },
     {

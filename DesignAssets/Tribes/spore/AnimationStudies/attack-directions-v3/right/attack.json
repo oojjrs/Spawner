@@ -4,8 +4,8 @@
   "direction": "right",
   "status": "review-candidate",
   "frameSize": [
-    512,
-    512
+    110,
+    110
   ],
   "columns": 4,
   "frameCount": 16,
@@ -34,8 +34,8 @@
   "hitAtMs": 300,
   "impactHoldMs": 300,
   "pivot": [
-    256,
-    448
+    55,
+    96.25
   ],
   "rootMotion": false,
   "atlas": "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/right/attack.png",

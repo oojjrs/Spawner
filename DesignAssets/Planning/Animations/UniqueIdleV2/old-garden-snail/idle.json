@@ -1,0 +1,130 @@
+{
+  "name": "old-garden-snail",
+  "action": "idle",
+  "revision": 2,
+  "method": "Actual generated pose drawings and drawn in-betweens, translation-only registration, stationary original pixels retained outside the motion mask; no motion transforms, no mesh deformation, no image interpolation or crossfades.",
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 8,
+  "frameCount": 21,
+  "drawnPoseCount": 11,
+  "durationsMs": [
+    800,
+    120,
+    110,
+    100,
+    100,
+    110,
+    110,
+    120,
+    140,
+    170,
+    700,
+    100,
+    90,
+    90,
+    100,
+    100,
+    110,
+    120,
+    130,
+    140,
+    2600
+  ],
+  "durationMs": 6160,
+  "loop": true,
+  "rootMotion": false,
+  "atlas": "idle.png",
+  "runtimeAtlas": "idle.webp",
+  "preview": "idle-preview.webp",
+  "frames": [
+    {
+      "drawing": "neutral",
+      "durationMs": 800
+    },
+    {
+      "drawing": "enter-1",
+      "durationMs": 120
+    },
+    {
+      "drawing": "enter-2",
+      "durationMs": 110
+    },
+    {
+      "drawing": "enter-3",
+      "durationMs": 100
+    },
+    {
+      "drawing": "enter-4",
+      "durationMs": 100
+    },
+    {
+      "drawing": "keys-1",
+      "durationMs": 110
+    },
+    {
+      "drawing": "open-1",
+      "durationMs": 110
+    },
+    {
+      "drawing": "open-2",
+      "durationMs": 120
+    },
+    {
+      "drawing": "open-3",
+      "durationMs": 140
+    },
+    {
+      "drawing": "open-4",
+      "durationMs": 170
+    },
+    {
+      "drawing": "keys-2",
+      "durationMs": 700
+    },
+    {
+      "drawing": "open-4",
+      "durationMs": 100
+    },
+    {
+      "drawing": "open-3",
+      "durationMs": 90
+    },
+    {
+      "drawing": "open-2",
+      "durationMs": 90
+    },
+    {
+      "drawing": "open-1",
+      "durationMs": 100
+    },
+    {
+      "drawing": "keys-1",
+      "durationMs": 100
+    },
+    {
+      "drawing": "enter-4",
+      "durationMs": 110
+    },
+    {
+      "drawing": "enter-3",
+      "durationMs": 120
+    },
+    {
+      "drawing": "enter-2",
+      "durationMs": 130
+    },
+    {
+      "drawing": "enter-1",
+      "durationMs": 140
+    },
+    {
+      "drawing": "neutral",
+      "durationMs": 2600
+    }
+  ],
+  "designReference": "../../../CreatureConcepts/v3/old-garden-snail.png",
+  "contact": "idle-contact.png"
+}

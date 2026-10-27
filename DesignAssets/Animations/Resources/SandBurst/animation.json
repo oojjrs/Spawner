@@ -1,7 +1,7 @@
 {
   "source": "DesignAssets/Resources/sand.png",
-  "frameWidth": 256,
-  "frameHeight": 256,
+  "frameWidth": 199,
+  "frameHeight": 199,
   "frameCount": 43,
   "columns": 6,
   "rows": 8,
@@ -64,8 +64,8 @@
     "postSeconds": 0.6
   },
   "pivot": [
-    128,
-    224
+    99.5,
+    174.125
   ],
-  "viewSize": 238
+  "viewSize": 185.007813
 }

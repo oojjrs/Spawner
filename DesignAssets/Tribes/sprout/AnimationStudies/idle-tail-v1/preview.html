@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>새싹콩 효소 꼬리 idle 비교</title>
+<style>
+:root{color-scheme:dark;font-family:Malgun Gothic,Arial,sans-serif;color:#e2edde;background:#18231e}body{margin:0;padding:24px}main{max-width:920px;margin:auto}h1{font-size:20px;margin:0 0 18px}.controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}button,select,input{font:inherit}button,select{color:inherit;background:#304438;border:1px solid #657d6a;border-radius:6px;padding:7px 12px}button{cursor:pointer}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{background:#26332b;border:1px solid #415749;border-radius:8px;overflow:hidden;text-align:center}.card h2{font-size:16px;margin:14px 0 0}.card canvas{display:block;margin:0 auto;max-width:100%;height:auto}.card .small{margin:0 auto 14px;width:101px;height:101px}.timeline{display:flex;align-items:center;gap:12px;margin:18px 0}.timeline input{flex:1;min-width:80px}.timeline output{font-variant-numeric:tabular-nums;min-width:100px}details{margin-top:22px}summary{cursor:pointer}.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:12px;padding-top:12px}.parts figure{margin:0;background:#26332b;border-radius:6px;padding:8px}.parts img{display:block;width:100%;height:auto}.parts figcaption{font-size:12px;overflow-wrap:anywhere}a{color:#b8db9d}@media(max-width:640px){body{padding:12px}.cards{grid-template-columns:1fr}.card canvas{width:384px}.controls{gap:8px}}
+</style>
+</head>
+<body>
+<main>
+<h1>새싹콩 효소 꼬리 idle 비교</h1>
+<div class="controls"><button id="toggle" type="button">일시정지</button><button id="restart" type="button">처음부터</button><label>속도 <select id="speed"><option value="0.5">0.5배</option><option value="1" selected>1배</option></select></label><span id="status">이미지 불러오는 중</span></div>
+<div class="cards">
+<section class="card"><h2>기본잎 + 효소 꼬리</h2><canvas width="384" height="384" data-skin="basic" aria-label="기본잎 idle"></canvas><canvas class="small" width="101" height="101" data-skin="basic" aria-label="기본잎 게임 크기"></canvas></section>
+<section class="card"><h2>안테나 + 효소 꼬리</h2><canvas width="384" height="384" data-skin="antenna" aria-label="안테나 idle"></canvas><canvas class="small" width="101" height="101" data-skin="antenna" aria-label="안테나 게임 크기"></canvas></section>
+</div>
+<div class="timeline"><label for="frame">프레임</label><input id="frame" type="range" min="0" max="127" value="0"><output id="time">0 / 127</output></div>
+<details><summary>분리 파츠</summary><div class="parts">
+<figure><a href="Parts/body-face.png"><img src="Parts/body-face.png" alt="기존 얼굴과 몸, 기본 발"></a><figcaption>body-face.png</figcaption></figure>
+<figure><a href="Parts/stem.png"><img src="Parts/stem.png" alt="줄기"></a><figcaption>stem.png</figcaption></figure>
+<figure><a href="Parts/leaf-basic-left.png"><img src="Parts/leaf-basic-left.png" alt="기본 왼쪽 잎"></a><figcaption>leaf-basic-left.png</figcaption></figure>
+<figure><a href="Parts/leaf-basic-right.png"><img src="Parts/leaf-basic-right.png" alt="기본 오른쪽 잎"></a><figcaption>leaf-basic-right.png</figcaption></figure>
+<figure><a href="Parts/antenna.png"><img src="Parts/antenna.png" alt="안테나"></a><figcaption>antenna.png</figcaption></figure>
+<figure><a href="Parts/tail.png"><img src="Parts/tail-cutout.png" alt="몸 뒤에 붙는 효소 꼬리 단독 파츠"></a><figcaption>tail.png · 줄기와 열매 메시</figcaption></figure>
+</div></details>
+</main>
+<script>
+const atlases=new Map();
+const canvases=[...document.querySelectorAll('canvas[data-skin]')];
+const slider=document.getElementById('frame');
+const time=document.getElementById('time');
+const toggle=document.getElementById('toggle');
+const speed=document.getElementById('speed');
+let playing=true,elapsed=0,previous=null,shown=-1,ready=false;
+function draw(index){
+  if(!ready||index===shown)return;
+  shown=index;
+  for(const canvas of canvases){
+    const context=canvas.getContext('2d');
+    context.clearRect(0,0,canvas.width,canvas.height);
+    context.imageSmoothingEnabled=true;
+    context.imageSmoothingQuality='high';
+    context.drawImage(atlases.get(canvas.dataset.skin),index%8*512,Math.floor(index/8)*512,512,512,0,0,canvas.width,canvas.height);
+    canvas.dataset.frame=index;
+  }
+  slider.value=index;
+  time.textContent=index+' / 127 · '+(index*0.05).toFixed(2)+'초';
+}
+function step(now){
+  if(previous!==null&&playing&&ready)elapsed+=(now-previous)*Number(speed.value);
+  previous=now;
+  draw(Math.floor(elapsed/50)%128);
+  requestAnimationFrame(step);
+}
+toggle.addEventListener('click',()=>{playing=!playing;toggle.textContent=playing?'일시정지':'재생'});
+document.getElementById('restart').addEventListener('click',()=>{elapsed=0;draw(0)});
+slider.addEventListener('input',()=>{playing=false;toggle.textContent='재생';elapsed=Number(slider.value)*50;draw(Number(slider.value))});
+Promise.all(['basic','antenna'].map(async name=>{
+  const image=new Image();image.src=name+'-idle.webp';await image.decode();atlases.set(name,image);
+})).then(()=>{ready=true;document.getElementById('status').textContent='6.4초 반복 · 20fps';draw(0)}).catch(()=>{document.getElementById('status').textContent='이미지를 불러오지 못했습니다'});
+requestAnimationFrame(step);
+</script>
+</body>
+</html>

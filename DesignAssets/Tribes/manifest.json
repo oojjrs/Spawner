@@ -129,19 +129,19 @@
           "loop": false,
           "layers": "DesignAssets/Tribes/spore/BaseParts/layers.json",
           "frameSize": [
-            512,
-            512
+            106,
+            106
           ],
           "columns": 4,
           "frameCount": 16,
           "pivot": [
-            256,
-            448
+            53,
+            92.75
           ],
           "rootMotion": false,
           "atlas": "DesignAssets/Tribes/spore/Animations/Units/jump/jump.png",
           "runtimeAtlas": "DesignAssets/Tribes/spore/Animations/Units/jump/jump.webp",
-          "preview": "DesignAssets/Tribes/spore/Animations/Units/jump/jump-preview.gif",
+          "preview": "DesignAssets/Planning/Tribes/spore/Animations/Units/jump/jump-preview.gif",
           "contact": "DesignAssets/Tribes/spore/Animations/Units/jump/jump-contact.png"
         },
         {
@@ -639,19 +639,19 @@
           "loop": false,
           "layers": "DesignAssets/Tribes/pebble/BaseParts/layers.json",
           "frameSize": [
-            512,
-            512
+            111,
+            111
           ],
           "columns": 4,
           "frameCount": 16,
           "pivot": [
-            256,
-            448
+            55.5,
+            97.125
           ],
           "rootMotion": false,
           "atlas": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.png",
           "runtimeAtlas": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.webp",
-          "preview": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump-preview.gif",
+          "preview": "DesignAssets/Planning/Tribes/pebble/Animations/Units/jump/jump-preview.gif",
           "contact": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump-contact.png"
         },
         {
@@ -1063,9 +1063,9 @@
         {
           "name": "nest-stage-01-idle",
           "source": "DesignAssets/Tribes/pebble/Nests/nest-stage-01.png",
-          "animation": "DesignAssets/Tribes/pebble/Animations/Nests/stage-01-idle-den-v1/nest-stage-01-idle-sheet.png",
+          "animation": "DesignAssets/Planning/Tribes/pebble/Animations/Nests/stage-01-idle-den-v1/nest-stage-01-idle-sheet.png",
           "runtimeAnimation": "DesignAssets/Tribes/pebble/Animations/Nests/stage-01-idle-den-v1/nest-stage-01-idle-sheet.webp",
-          "preview": "DesignAssets/Previews/Nests/pebble-stage-01-idle-den-v1.webp",
+          "preview": "DesignAssets/Planning/Previews/Nests/pebble-stage-01-idle-den-v1.webp",
           "frameSize": [
             512,
             512
@@ -1263,19 +1263,19 @@
           "loop": false,
           "layers": "DesignAssets/Tribes/spring/BaseParts/layers.json",
           "frameSize": [
-            512,
-            512
+            170,
+            170
           ],
           "columns": 4,
           "frameCount": 16,
           "pivot": [
-            256,
-            448
+            85,
+            148.75
           ],
           "rootMotion": false,
           "atlas": "DesignAssets/Tribes/spring/Animations/Units/jump/jump.png",
           "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Units/jump/jump.webp",
-          "preview": "DesignAssets/Tribes/spring/Animations/Units/jump/jump-preview.gif",
+          "preview": "DesignAssets/Planning/Tribes/spring/Animations/Units/jump/jump-preview.gif",
           "contact": "DesignAssets/Tribes/spring/Animations/Units/jump/jump-contact.png"
         },
         {

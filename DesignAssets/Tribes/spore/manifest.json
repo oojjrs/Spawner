@@ -21,8 +21,8 @@
   "assets": [
     {
       "path": "DesignAssets/Tribes/spore/starter.png",
-      "width": 1254,
-      "height": 1254,
+      "width": 87,
+      "height": 87,
       "channels": "srgba 4.0",
       "hasTransparency": true,
       "alphaBoundsThreshold10": "1220x863+17+235",
@@ -30,8 +30,8 @@
     },
     {
       "path": "DesignAssets/Tribes/spore/Parts/shell-1.png",
-      "width": 1550,
-      "height": 1014,
+      "width": 144,
+      "height": 94,
       "channels": "srgba 4.0",
       "hasTransparency": true,
       "alphaBoundsThreshold10": "1550x1010+0+3",
@@ -46,8 +46,8 @@
     },
     {
       "path": "DesignAssets/Tribes/spore/Parts/shell-2.png",
-      "width": 1444,
-      "height": 1089,
+      "width": 144,
+      "height": 108,
       "channels": "srgba 4.0",
       "hasTransparency": true,
       "alphaBoundsThreshold10": "1441x1089+2+0",
@@ -62,8 +62,8 @@
     },
     {
       "path": "DesignAssets/Tribes/spore/Nests/nest-stage-01.png",
-      "width": 1254,
-      "height": 1254,
+      "width": 589,
+      "height": 589,
       "channels": "srgba 4.0",
       "hasTransparency": true,
       "alphaBoundsThreshold10": "1177x790+38+231",
@@ -71,8 +71,8 @@
     },
     {
       "path": "DesignAssets/Tribes/spore/Terrain/nest-ground.png",
-      "width": 1254,
-      "height": 1254,
+      "width": 768,
+      "height": 768,
       "channels": "srgba 4.0",
       "hasTransparency": true,
       "alphaBoundsThreshold10": "1231x1026+16+115",

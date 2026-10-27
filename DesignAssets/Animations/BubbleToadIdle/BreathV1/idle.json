@@ -1,0 +1,671 @@
+{
+  "name": "bubble-toad",
+  "action": "idle",
+  "revision": 1,
+  "status": "review",
+  "designReference": "../../../CreatureConcepts/v3/bubble-toad.png",
+  "motion": "Slow vocal-sac inflation, short peak hold, relaxed deflation with a drawn blink, then rest.",
+  "artworkMethod": "Original continuous texture, weighted local mesh and two image_gen eyelid attachments. Feet and hindquarters retained from the original.",
+  "rig": "rig.json",
+  "renderer": "render.py",
+  "frameSize": [
+    388,
+    388
+  ],
+  "columns": 4,
+  "frameCount": 71,
+  "durationsMs": [
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    500
+  ],
+  "durationMs": 4000,
+  "loop": true,
+  "rootMotion": false,
+  "atlas": "idle.png",
+  "runtimeAtlas": "idle.webp",
+  "preview": "idle-preview.webp",
+  "thumbnail": "idle-thumbnail.webp",
+  "gif": "idle-preview.gif",
+  "contact": "idle-contact.png",
+  "frames": [
+    "Frames/000.png",
+    "Frames/001.png",
+    "Frames/002.png",
+    "Frames/003.png",
+    "Frames/004.png",
+    "Frames/005.png",
+    "Frames/006.png",
+    "Frames/007.png",
+    "Frames/008.png",
+    "Frames/009.png",
+    "Frames/010.png",
+    "Frames/011.png",
+    "Frames/012.png",
+    "Frames/013.png",
+    "Frames/014.png",
+    "Frames/015.png",
+    "Frames/016.png",
+    "Frames/017.png",
+    "Frames/018.png",
+    "Frames/019.png",
+    "Frames/020.png",
+    "Frames/021.png",
+    "Frames/022.png",
+    "Frames/023.png",
+    "Frames/024.png",
+    "Frames/025.png",
+    "Frames/026.png",
+    "Frames/027.png",
+    "Frames/028.png",
+    "Frames/029.png",
+    "Frames/030.png",
+    "Frames/031.png",
+    "Frames/032.png",
+    "Frames/033.png",
+    "Frames/034.png",
+    "Frames/035.png",
+    "Frames/036.png",
+    "Frames/037.png",
+    "Frames/038.png",
+    "Frames/039.png",
+    "Frames/040.png",
+    "Frames/041.png",
+    "Frames/042.png",
+    "Frames/043.png",
+    "Frames/044.png",
+    "Frames/045.png",
+    "Frames/046.png",
+    "Frames/047.png",
+    "Frames/048.png",
+    "Frames/049.png",
+    "Frames/050.png",
+    "Frames/051.png",
+    "Frames/052.png",
+    "Frames/053.png",
+    "Frames/054.png",
+    "Frames/055.png",
+    "Frames/056.png",
+    "Frames/057.png",
+    "Frames/058.png",
+    "Frames/059.png",
+    "Frames/060.png",
+    "Frames/061.png",
+    "Frames/062.png",
+    "Frames/063.png",
+    "Frames/064.png",
+    "Frames/065.png",
+    "Frames/066.png",
+    "Frames/067.png",
+    "Frames/068.png",
+    "Frames/069.png",
+    "Frames/070.png"
+  ],
+  "frameStates": [
+    {
+      "frame": 0,
+      "timeMs": 0,
+      "breath": 0,
+      "back": 0,
+      "eyes": "open"
+    },
+    {
+      "frame": 1,
+      "timeMs": 50,
+      "breath": 0.00326,
+      "back": 0.0027,
+      "eyes": "open"
+    },
+    {
+      "frame": 2,
+      "timeMs": 100,
+      "breath": 0.01274,
+      "back": 0.01057,
+      "eyes": "open"
+    },
+    {
+      "frame": 3,
+      "timeMs": 150,
+      "breath": 0.028,
+      "back": 0.02329,
+      "eyes": "open"
+    },
+    {
+      "frame": 4,
+      "timeMs": 200,
+      "breath": 0.04859,
+      "back": 0.04052,
+      "eyes": "open"
+    },
+    {
+      "frame": 5,
+      "timeMs": 250,
+      "breath": 0.07407,
+      "back": 0.06191,
+      "eyes": "open"
+    },
+    {
+      "frame": 6,
+      "timeMs": 300,
+      "breath": 0.104,
+      "back": 0.08715,
+      "eyes": "open"
+    },
+    {
+      "frame": 7,
+      "timeMs": 350,
+      "breath": 0.13793,
+      "back": 0.1159,
+      "eyes": "open"
+    },
+    {
+      "frame": 8,
+      "timeMs": 400,
+      "breath": 0.17541,
+      "back": 0.14781,
+      "eyes": "open"
+    },
+    {
+      "frame": 9,
+      "timeMs": 450,
+      "breath": 0.216,
+      "back": 0.18257,
+      "eyes": "open"
+    },
+    {
+      "frame": 10,
+      "timeMs": 500,
+      "breath": 0.25926,
+      "back": 0.21983,
+      "eyes": "open"
+    },
+    {
+      "frame": 11,
+      "timeMs": 550,
+      "breath": 0.30474,
+      "back": 0.25926,
+      "eyes": "open"
+    },
+    {
+      "frame": 12,
+      "timeMs": 600,
+      "breath": 0.352,
+      "back": 0.30053,
+      "eyes": "open"
+    },
+    {
+      "frame": 13,
+      "timeMs": 650,
+      "breath": 0.40059,
+      "back": 0.3433,
+      "eyes": "open"
+    },
+    {
+      "frame": 14,
+      "timeMs": 700,
+      "breath": 0.45007,
+      "back": 0.38723,
+      "eyes": "open"
+    },
+    {
+      "frame": 15,
+      "timeMs": 750,
+      "breath": 0.5,
+      "back": 0.43201,
+      "eyes": "open"
+    },
+    {
+      "frame": 16,
+      "timeMs": 800,
+      "breath": 0.54993,
+      "back": 0.47728,
+      "eyes": "open"
+    },
+    {
+      "frame": 17,
+      "timeMs": 850,
+      "breath": 0.59941,
+      "back": 0.52272,
+      "eyes": "open"
+    },
+    {
+      "frame": 18,
+      "timeMs": 900,
+      "breath": 0.648,
+      "back": 0.56799,
+      "eyes": "open"
+    },
+    {
+      "frame": 19,
+      "timeMs": 950,
+      "breath": 0.69526,
+      "back": 0.61277,
+      "eyes": "open"
+    },
+    {
+      "frame": 20,
+      "timeMs": 1000,
+      "breath": 0.74074,
+      "back": 0.6567,
+      "eyes": "open"
+    },
+    {
+      "frame": 21,
+      "timeMs": 1050,
+      "breath": 0.784,
+      "back": 0.69947,
+      "eyes": "open"
+    },
+    {
+      "frame": 22,
+      "timeMs": 1100,
+      "breath": 0.82459,
+      "back": 0.74074,
+      "eyes": "open"
+    },
+    {
+      "frame": 23,
+      "timeMs": 1150,
+      "breath": 0.86207,
+      "back": 0.78017,
+      "eyes": "open"
+    },
+    {
+      "frame": 24,
+      "timeMs": 1200,
+      "breath": 0.896,
+      "back": 0.81743,
+      "eyes": "open"
+    },
+    {
+      "frame": 25,
+      "timeMs": 1250,
+      "breath": 0.92593,
+      "back": 0.85219,
+      "eyes": "open"
+    },
+    {
+      "frame": 26,
+      "timeMs": 1300,
+      "breath": 0.95141,
+      "back": 0.8841,
+      "eyes": "open"
+    },
+    {
+      "frame": 27,
+      "timeMs": 1350,
+      "breath": 0.972,
+      "back": 0.91285,
+      "eyes": "open"
+    },
+    {
+      "frame": 28,
+      "timeMs": 1400,
+      "breath": 0.98726,
+      "back": 0.93809,
+      "eyes": "open"
+    },
+    {
+      "frame": 29,
+      "timeMs": 1450,
+      "breath": 0.99674,
+      "back": 0.95948,
+      "eyes": "open"
+    },
+    {
+      "frame": 30,
+      "timeMs": 1500,
+      "breath": 1,
+      "back": 0.97671,
+      "eyes": "open"
+    },
+    {
+      "frame": 31,
+      "timeMs": 1550,
+      "breath": 1,
+      "back": 0.98943,
+      "eyes": "open"
+    },
+    {
+      "frame": 32,
+      "timeMs": 1600,
+      "breath": 1,
+      "back": 0.9973,
+      "eyes": "open"
+    },
+    {
+      "frame": 33,
+      "timeMs": 1650,
+      "breath": 1,
+      "back": 1,
+      "eyes": "open"
+    },
+    {
+      "frame": 34,
+      "timeMs": 1700,
+      "breath": 1,
+      "back": 1,
+      "eyes": "open"
+    },
+    {
+      "frame": 35,
+      "timeMs": 1750,
+      "breath": 1,
+      "back": 1,
+      "eyes": "open"
+    },
+    {
+      "frame": 36,
+      "timeMs": 1800,
+      "breath": 1,
+      "back": 1,
+      "eyes": "open"
+    },
+    {
+      "frame": 37,
+      "timeMs": 1850,
+      "breath": 1,
+      "back": 1,
+      "eyes": "open"
+    },
+    {
+      "frame": 38,
+      "timeMs": 1900,
+      "breath": 1,
+      "back": 1,
+      "eyes": "open"
+    },
+    {
+      "frame": 39,
+      "timeMs": 1950,
+      "breath": 1,
+      "back": 1,
+      "eyes": "open"
+    },
+    {
+      "frame": 40,
+      "timeMs": 2000,
+      "breath": 1,
+      "back": 1,
+      "eyes": "open"
+    },
+    {
+      "frame": 41,
+      "timeMs": 2050,
+      "breath": 0.99674,
+      "back": 1,
+      "eyes": "open"
+    },
+    {
+      "frame": 42,
+      "timeMs": 2100,
+      "breath": 0.98726,
+      "back": 0.99651,
+      "eyes": "open"
+    },
+    {
+      "frame": 43,
+      "timeMs": 2150,
+      "breath": 0.972,
+      "back": 0.98639,
+      "eyes": "open"
+    },
+    {
+      "frame": 44,
+      "timeMs": 2200,
+      "breath": 0.95141,
+      "back": 0.97011,
+      "eyes": "open"
+    },
+    {
+      "frame": 45,
+      "timeMs": 2250,
+      "breath": 0.92593,
+      "back": 0.94817,
+      "eyes": "open"
+    },
+    {
+      "frame": 46,
+      "timeMs": 2300,
+      "breath": 0.896,
+      "back": 0.92107,
+      "eyes": "open"
+    },
+    {
+      "frame": 47,
+      "timeMs": 2350,
+      "breath": 0.86207,
+      "back": 0.88929,
+      "eyes": "open"
+    },
+    {
+      "frame": 48,
+      "timeMs": 2400,
+      "breath": 0.82459,
+      "back": 0.85334,
+      "eyes": "open"
+    },
+    {
+      "frame": 49,
+      "timeMs": 2450,
+      "breath": 0.784,
+      "back": 0.81369,
+      "eyes": "half"
+    },
+    {
+      "frame": 50,
+      "timeMs": 2500,
+      "breath": 0.74074,
+      "back": 0.77084,
+      "eyes": "closed"
+    },
+    {
+      "frame": 51,
+      "timeMs": 2550,
+      "breath": 0.69526,
+      "back": 0.72529,
+      "eyes": "closed"
+    },
+    {
+      "frame": 52,
+      "timeMs": 2600,
+      "breath": 0.648,
+      "back": 0.67752,
+      "eyes": "closed"
+    },
+    {
+      "frame": 53,
+      "timeMs": 2650,
+      "breath": 0.59941,
+      "back": 0.62803,
+      "eyes": "half"
+    },
+    {
+      "frame": 54,
+      "timeMs": 2700,
+      "breath": 0.54993,
+      "back": 0.57731,
+      "eyes": "open"
+    },
+    {
+      "frame": 55,
+      "timeMs": 2750,
+      "breath": 0.5,
+      "back": 0.52585,
+      "eyes": "open"
+    },
+    {
+      "frame": 56,
+      "timeMs": 2800,
+      "breath": 0.45007,
+      "back": 0.47415,
+      "eyes": "open"
+    },
+    {
+      "frame": 57,
+      "timeMs": 2850,
+      "breath": 0.40059,
+      "back": 0.42269,
+      "eyes": "open"
+    },
+    {
+      "frame": 58,
+      "timeMs": 2900,
+      "breath": 0.352,
+      "back": 0.37197,
+      "eyes": "open"
+    },
+    {
+      "frame": 59,
+      "timeMs": 2950,
+      "breath": 0.30474,
+      "back": 0.32248,
+      "eyes": "open"
+    },
+    {
+      "frame": 60,
+      "timeMs": 3000,
+      "breath": 0.25926,
+      "back": 0.27471,
+      "eyes": "open"
+    },
+    {
+      "frame": 61,
+      "timeMs": 3050,
+      "breath": 0.216,
+      "back": 0.22916,
+      "eyes": "open"
+    },
+    {
+      "frame": 62,
+      "timeMs": 3100,
+      "breath": 0.17541,
+      "back": 0.18631,
+      "eyes": "open"
+    },
+    {
+      "frame": 63,
+      "timeMs": 3150,
+      "breath": 0.13793,
+      "back": 0.14666,
+      "eyes": "open"
+    },
+    {
+      "frame": 64,
+      "timeMs": 3200,
+      "breath": 0.104,
+      "back": 0.11071,
+      "eyes": "open"
+    },
+    {
+      "frame": 65,
+      "timeMs": 3250,
+      "breath": 0.07407,
+      "back": 0.07893,
+      "eyes": "open"
+    },
+    {
+      "frame": 66,
+      "timeMs": 3300,
+      "breath": 0.04859,
+      "back": 0.05183,
+      "eyes": "open"
+    },
+    {
+      "frame": 67,
+      "timeMs": 3350,
+      "breath": 0.028,
+      "back": 0.02989,
+      "eyes": "open"
+    },
+    {
+      "frame": 68,
+      "timeMs": 3400,
+      "breath": 0.01274,
+      "back": 0.01361,
+      "eyes": "open"
+    },
+    {
+      "frame": 69,
+      "timeMs": 3450,
+      "breath": 0.00326,
+      "back": 0.00349,
+      "eyes": "open"
+    },
+    {
+      "frame": 70,
+      "timeMs": 3500,
+      "breath": 0,
+      "back": 0,
+      "eyes": "open"
+    }
+  ]
+}

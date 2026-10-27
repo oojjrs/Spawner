@@ -3,8 +3,8 @@
   "action": "idle",
   "status": "review-candidate",
   "frameSize": [
-    512,
-    512
+    224,
+    224
   ],
   "columns": 4,
   "frameCount": 64,
@@ -77,8 +77,8 @@
   "loop": true,
   "rootMotion": false,
   "pivot": [
-    256,
-    448
+    112,
+    196
   ],
   "atlas": "DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.png",
   "runtimeAtlas": "DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp",

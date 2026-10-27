@@ -4,8 +4,8 @@
   "kind": "local-eye-and-tail-repair",
   "status": "rework-review-candidate",
   "frameSize": [
-    512,
-    512
+    176,
+    176
   ],
   "columns": 4,
   "frameCount": 8,
@@ -32,8 +32,8 @@
   "durationMs": 1440,
   "loop": false,
   "pivot": [
-    256,
-    448
+    88,
+    154
   ],
   "frames": [
     "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/Frames/00.png",

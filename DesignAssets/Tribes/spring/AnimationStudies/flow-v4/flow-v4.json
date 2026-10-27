@@ -7,8 +7,8 @@
   "approvedDesignSource": "DesignAssets/Tribes/spring/BaseParts/neutral.png",
   "sourceSha256": "b2ca83c2b7607f4b8c94d3a49a9b04c17f6d7d4dc375f84ef679882d338d372e",
   "frameSize": [
-    512,
-    512
+    176,
+    176
   ],
   "columns": 4,
   "frameCount": 16,
@@ -33,13 +33,13 @@
   "loop": true,
   "rootMotion": false,
   "pivot": [
-    256,
-    448
+    88,
+    154
   ],
   "airborneFrames": 0,
   "atlas": "DesignAssets/Tribes/spring/AnimationStudies/flow-v4/flow-v4.png",
   "runtimeAtlas": "DesignAssets/Tribes/spring/AnimationStudies/flow-v4/flow-v4.webp",
-  "preview": "DesignAssets/Tribes/spring/AnimationStudies/flow-v4/flow-preview.gif",
+  "preview": "DesignAssets/Planning/Tribes/spring/AnimationStudies/flow-v4/flow-preview.gif",
   "comparison": "DesignAssets/Tribes/spring/AnimationStudies/flow-v4/flow-comparison-preview.gif",
   "parts": [
     "DesignAssets/Tribes/spring/AnimationStudies/flow-v4/Parts/flow-body.png",

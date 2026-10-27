@@ -2,7 +2,7 @@
   "name": "spiny-back-beetle",
   "action": "dead",
   "status": "installed in runtime",
-  "frameSize": 512,
+  "frameSize": 185,
   "frameCount": 1,
   "loop": false,
   "rootMotion": false,

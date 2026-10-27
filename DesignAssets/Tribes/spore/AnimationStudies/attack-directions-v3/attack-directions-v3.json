@@ -13,16 +13,6 @@
         0
       ]
     },
-    "left": {
-      "atlas": "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/left/attack.png",
-      "metadata": "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/left/attack.json",
-      "runtimeAtlas": "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/left/attack.webp",
-      "contact": "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/left/contact.png",
-      "screenDirection": [
-        -1,
-        0
-      ]
-    },
     "front": {
       "atlas": "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/front/attack.png",
       "metadata": "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/front/attack.json",

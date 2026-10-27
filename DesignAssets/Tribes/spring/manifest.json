@@ -27,11 +27,11 @@
       "source": "DesignAssets/TribeConcepts/base-water-droplet-teal-v2.png",
       "reusedApproved": true,
       "path": "DesignAssets/Tribes/spring/starter.png",
-      "width": 1254,
-      "height": 1254,
+      "width": 115,
+      "height": 115,
       "channels": "srgba 4.0",
       "meanAlpha": 0.362141,
-      "alphaBounds10Percent": "798x1042+235+130"
+      "alphaBounds10Percent": "79x103+23+13"
     },
     {
       "id": "nest-stage-01",
@@ -40,22 +40,22 @@
       "source": "DesignAssets/TribeConcepts/Nests/nest-stage-01-spring-teal-v2.png",
       "reusedApproved": false,
       "path": "DesignAssets/Tribes/spring/Nests/nest-stage-01.png",
-      "width": 1774,
-      "height": 887,
+      "width": 657,
+      "height": 328,
       "channels": "srgba 4.0",
       "meanAlpha": 0.379672,
-      "alphaBounds10Percent": "1492x589+142+185",
+      "alphaBounds10Percent": "594x234+57+74",
       "revision": 2
     },
     {
       "id": "nest-ground",
       "kind": "terrain",
       "path": "DesignAssets/Tribes/spring/Terrain/nest-ground.png",
-      "width": 1254,
-      "height": 1254,
+      "width": 768,
+      "height": 768,
       "channels": "srgba 4.0",
       "meanAlpha": 0.608926,
-      "alphaBounds10Percent": "1192x1136+31+58"
+      "alphaBounds10Percent": "730x696+19+36"
     },
     {
       "id": "shell-1",
@@ -70,11 +70,11 @@
         "layer": "front"
       },
       "path": "DesignAssets/Tribes/spring/Units/Parts/shell-1.png",
-      "width": 1550,
-      "height": 1015,
+      "width": 766,
+      "height": 502,
       "channels": "srgba 4.0",
       "meanAlpha": 0.328032,
-      "alphaBounds10Percent": "1527x836+12+151"
+      "alphaBounds10Percent": "755x413+6+75"
     },
     {
       "id": "shell-2",
@@ -89,11 +89,11 @@
         "layer": "front"
       },
       "path": "DesignAssets/Tribes/spring/Units/Parts/shell-2.png",
-      "width": 1444,
-      "height": 1089,
+      "width": 767,
+      "height": 579,
       "channels": "srgba 4.0",
       "meanAlpha": 0.449425,
-      "alphaBounds10Percent": "1427x975+9+73"
+      "alphaBounds10Percent": "758x518+5+39"
     }
   ],
   "previews": {

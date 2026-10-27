@@ -4,8 +4,8 @@
     "source": "DesignAssets/Nests/nest-stage-01.png",
     "animation": "DesignAssets/Animations/Nests/nest-stage-01-idle-sheet.png",
     "frameSize": [
-      2048,
-      2048
+      512,
+      512
     ],
     "frameCount": 16,
     "columns": 4,
@@ -76,7 +76,7 @@
       175,
       231
     ],
-    "preview": "DesignAssets/Previews/Nests/sprout-stage-01-idle.webp",
+    "preview": "DesignAssets/Planning/Previews/Nests/sprout-stage-01-idle.webp",
     "loop": true
   }
 ]

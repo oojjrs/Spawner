@@ -58,163 +58,163 @@
   "assets": {
     "starter": {
       "path": "DesignAssets/Units/starter-sprout-bean.png",
-      "width": 1144,
-      "height": 1668,
+      "width": 104,
+      "height": 153,
       "alphaBounds": [
-        15,
-        260,
-        1116,
-        1376
+        1.363636,
+        23.848921,
+        101.454545,
+        126.215827
       ],
       "sourceWidth": 1230,
       "sourceHeight": 1278
     },
     "strength-1": {
       "path": "DesignAssets/Units/Parts/strength-1.png",
-      "width": 1692,
-      "height": 636,
+      "width": 117,
+      "height": 43,
       "alphaBounds": [
         0,
         0,
-        1692,
-        636
+        117,
+        43
       ],
       "sourceWidth": 2045,
       "sourceHeight": 769
     },
     "strength-2": {
       "path": "DesignAssets/Units/Parts/strength-2.png",
-      "width": 1792,
-      "height": 716,
+      "width": 84,
+      "height": 33,
       "alphaBounds": [
         0,
         0,
-        1792,
-        716
+        84,
+        33
       ],
       "sourceWidth": 1983,
       "sourceHeight": 793
     },
     "feet-1": {
       "path": "DesignAssets/Units/Parts/feet-1.png",
-      "width": 1512,
-      "height": 620,
+      "width": 104,
+      "height": 43,
       "alphaBounds": [
         0,
         0,
-        1512,
-        620
+        104,
+        43
       ],
       "sourceWidth": 1959,
       "sourceHeight": 803
     },
     "feet-2": {
       "path": "DesignAssets/Units/Parts/feet-2.png",
-      "width": 1748,
-      "height": 804,
+      "width": 71,
+      "height": 33,
       "alphaBounds": [
-        1,
+        0.040618,
         0,
-        1747,
-        804
+        70.959382,
+        33
       ],
       "sourceWidth": 1849,
       "sourceHeight": 851
     },
     "antenna-1": {
       "path": "DesignAssets/Units/Parts/antenna-1.png",
-      "width": 1185,
-      "height": 850,
+      "width": 85,
+      "height": 61,
       "alphaBounds": [
-        16,
-        16,
-        1153,
-        818
+        1.147679,
+        1.148235,
+        82.704641,
+        58.703529
       ],
       "sourceWidth": 1536,
       "sourceHeight": 1024
     },
     "antenna-2": {
       "path": "DesignAssets/Units/Parts/antenna-2.png",
-      "width": 1688,
-      "height": 706,
+      "width": 101,
+      "height": 42,
       "alphaBounds": [
-        16,
-        16,
-        1656,
-        674
+        0.957346,
+        0.951841,
+        99.085308,
+        40.096317
       ],
       "sourceWidth": 1733,
       "sourceHeight": 907
     },
     "shell-1": {
       "path": "DesignAssets/Units/Parts/shell-1.png",
-      "width": 1728,
-      "height": 1132,
+      "width": 143,
+      "height": 94,
       "alphaBounds": [
         0,
         0,
-        1728,
-        1132
+        143,
+        94
       ],
       "sourceWidth": 1536,
       "sourceHeight": 1024
     },
     "shell-2": {
       "path": "DesignAssets/Units/Parts/shell-2.png",
-      "width": 1896,
-      "height": 1432,
+      "width": 142,
+      "height": 108,
       "alphaBounds": [
         0,
         0,
-        1896,
-        1432
+        142,
+        108
       ],
       "sourceWidth": 1443,
       "sourceHeight": 1090
     },
     "body": {
       "path": "DesignAssets/Units/BaseParts/body.png",
-      "width": 1144,
-      "height": 1668,
+      "width": 104,
+      "height": 153,
       "alphaBounds": [
-        15,
-        628,
-        1116,
-        1008
+        1.363636,
+        57.604317,
+        101.454545,
+        92.460432
       ]
     },
     "sprout-left": {
       "path": "DesignAssets/Units/BaseParts/sprout-left.png",
-      "width": 1144,
-      "height": 1668,
+      "width": 70,
+      "height": 102,
       "alphaBounds": [
-        34,
-        260,
-        538,
-        345
+        2.08042,
+        15.899281,
+        32.91958,
+        21.097122
       ]
     },
     "sprout-right": {
       "path": "DesignAssets/Units/BaseParts/sprout-right.png",
-      "width": 1144,
-      "height": 1668,
+      "width": 70,
+      "height": 102,
       "alphaBounds": [
-        571,
-        260,
-        541,
-        345
+        34.938811,
+        15.899281,
+        33.103147,
+        21.097122
       ]
     },
     "sprout-stem": {
       "path": "DesignAssets/Units/BaseParts/sprout-stem.png",
-      "width": 1144,
-      "height": 1668,
+      "width": 64,
+      "height": 93,
       "alphaBounds": [
-        507,
-        569,
-        129,
-        115
+        28.363636,
+        31.72482,
+        7.216783,
+        6.411871
       ]
     }
   },

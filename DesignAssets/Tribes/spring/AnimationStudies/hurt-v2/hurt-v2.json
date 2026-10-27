@@ -8,8 +8,8 @@
     0
   ],
   "frameSize": [
-    512,
-    512
+    176,
+    176
   ],
   "columns": 4,
   "frameCount": 16,
@@ -37,8 +37,8 @@
   "loop": false,
   "rootMotion": false,
   "pivot": [
-    256,
-    448
+    88,
+    154
   ],
   "atlas": "DesignAssets/Tribes/spring/AnimationStudies/hurt-v2/hurt-v2.png",
   "runtimeAtlas": "DesignAssets/Tribes/spring/AnimationStudies/hurt-v2/hurt-v2.webp",

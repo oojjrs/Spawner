@@ -103,19 +103,19 @@
       "loop": false,
       "layers": "DesignAssets/Tribes/spring/BaseParts/layers.json",
       "frameSize": [
-        512,
-        512
+        170,
+        170
       ],
       "columns": 4,
       "frameCount": 16,
       "pivot": [
-        256,
-        448
+        85,
+        148.75
       ],
       "rootMotion": false,
       "atlas": "DesignAssets/Tribes/spring/Animations/Units/jump/jump.png",
       "runtimeAtlas": "DesignAssets/Tribes/spring/Animations/Units/jump/jump.webp",
-      "preview": "DesignAssets/Tribes/spring/Animations/Units/jump/jump-preview.gif",
+      "preview": "DesignAssets/Planning/Tribes/spring/Animations/Units/jump/jump-preview.gif",
       "contact": "DesignAssets/Tribes/spring/Animations/Units/jump/jump-contact.png"
     },
     {

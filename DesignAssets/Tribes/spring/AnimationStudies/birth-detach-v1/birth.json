@@ -26,7 +26,7 @@
   "loop": false,
   "atlas": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-game.png",
   "runtimeAtlas": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp",
-  "preview": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-game-preview.webp",
+  "preview": "DesignAssets/Planning/Tribes/spring/AnimationStudies/birth-detach-v1/birth-game-preview.webp",
   "contact": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-game-contact.jpg",
   "nest": {
     "source": "DesignAssets/Tribes/spring/Nests/nest-stage-01.png",

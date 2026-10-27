@@ -3,7 +3,7 @@
   "name": "풀섬유",
   "motion": "묶인 중심·바닥과 전역 배율을 고정한다. 왼쪽 위·아래 풀잎과 오른쪽 풀 끝·말린 끝이 서로 다른 지연으로 휘고 펼쳐졌다 돌아오며 추출이나 크기 감소는 없다.",
   "source": "DesignAssets/ResourceConcepts/v1/resource-grass-fiber.png",
-  "frameSize": 256,
+  "frameSize": 228,
   "frameCount": 24,
   "frameMs": 100,
   "durationMs": 2400,
@@ -14,8 +14,8 @@
   "previewBackground": "#173a34",
   "loop": true,
   "anchor": [
-    128,
-    224
+    114,
+    199.5
   ],
   "runtimeIntegrated": true,
   "runtime": {
@@ -37,11 +37,11 @@
   ],
   "runtimePreview": "runtime.gif",
   "mode": "rendered-mesh-rig",
-  "frameWidth": 256,
-  "frameHeight": 256,
+  "frameWidth": 228,
+  "frameHeight": 228,
   "pivot": [
-    128,
-    224
+    114,
+    199.5
   ],
   "frameFiles": [
     "RigV3/frames/frame-00.png",

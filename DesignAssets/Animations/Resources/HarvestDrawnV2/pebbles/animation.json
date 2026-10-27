@@ -1,7 +1,7 @@
 {
   "source": "DesignAssets/Resources/pebbles.png",
-  "frameWidth": 512,
-  "frameHeight": 512,
+  "frameWidth": 205,
+  "frameHeight": 205,
   "frameCount": 9,
   "columns": 3,
   "rows": 3,
@@ -53,11 +53,11 @@
       ],
       "sourceAnchor": [
         485.65168539325845,
-        491.0
+        491
       ],
       "destinationAnchor": [
         279.5,
-        303.0
+        303
       ]
     },
     {
@@ -68,11 +68,11 @@
       ],
       "sourceAnchor": [
         523.0496350364964,
-        492.0
+        492
       ],
       "destinationAnchor": [
         279.5,
-        303.0
+        303
       ]
     },
     {
@@ -83,11 +83,11 @@
       ],
       "sourceAnchor": [
         483.51594202898553,
-        492.0
+        492
       ],
       "destinationAnchor": [
         279.5,
-        303.0
+        303
       ]
     },
     {
@@ -98,11 +98,11 @@
       ],
       "sourceAnchor": [
         523.7046548956662,
-        492.0
+        492
       ],
       "destinationAnchor": [
         279.5,
-        303.0
+        303
       ]
     },
     {
@@ -113,11 +113,11 @@
       ],
       "sourceAnchor": [
         522.6594516594516,
-        492.0
+        492
       ],
       "destinationAnchor": [
         279.5,
-        303.0
+        303
       ]
     },
     {
@@ -128,11 +128,11 @@
       ],
       "sourceAnchor": [
         483.6264367816092,
-        492.0
+        492
       ],
       "destinationAnchor": [
         279.5,
-        303.0
+        303
       ]
     },
     {
@@ -143,11 +143,11 @@
       ],
       "sourceAnchor": [
         484.4392971246006,
-        492.0
+        492
       ],
       "destinationAnchor": [
         279.5,
-        303.0
+        303
       ]
     },
     {
@@ -158,11 +158,11 @@
       ],
       "sourceAnchor": [
         514.1057851239669,
-        491.0
+        491
       ],
       "destinationAnchor": [
         279.5,
-        303.0
+        303
       ]
     },
     {
@@ -173,11 +173,11 @@
       ],
       "sourceAnchor": [
         485.65168539325845,
-        491.0
+        491
       ],
       "destinationAnchor": [
         279.5,
-        303.0
+        303
       ]
     }
   ],

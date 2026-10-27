@@ -1,0 +1,103 @@
+{
+  "name": "lantern-keeper",
+  "action": "idle",
+  "revision": 3,
+  "method": "Drawn pose sequence with inconsistent intermediate poses removed and one coherent cycle replayed.",
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 8,
+  "frameCount": 15,
+  "drawnPoseCount": 12,
+  "durationsMs": [
+    750,
+    140,
+    170,
+    200,
+    240,
+    300,
+    210,
+    190,
+    200,
+    230,
+    330,
+    220,
+    190,
+    200,
+    1800
+  ],
+  "durationMs": 5370,
+  "loop": true,
+  "rootMotion": false,
+  "runtimeAtlas": "DesignAssets/Planning/Animations/UniqueIdleV3/lantern-keeper/idle.webp",
+  "preview": "idle-preview.gif",
+  "frames": [
+    {
+      "drawing": "neutral",
+      "durationMs": 750
+    },
+    {
+      "drawing": "recover-3",
+      "durationMs": 140
+    },
+    {
+      "drawing": "load-3",
+      "durationMs": 170
+    },
+    {
+      "drawing": "rise-2",
+      "durationMs": 200
+    },
+    {
+      "drawing": "rise-4",
+      "durationMs": 240
+    },
+    {
+      "drawing": "keys-1",
+      "durationMs": 300
+    },
+    {
+      "drawing": "down-2",
+      "durationMs": 210
+    },
+    {
+      "drawing": "down-gap-1",
+      "durationMs": 190
+    },
+    {
+      "drawing": "down-gap-3",
+      "durationMs": 200
+    },
+    {
+      "drawing": "down-4",
+      "durationMs": 230
+    },
+    {
+      "drawing": "keys-3",
+      "durationMs": 330
+    },
+    {
+      "drawing": "recover-2",
+      "durationMs": 220
+    },
+    {
+      "drawing": "down-gap-1",
+      "durationMs": 190
+    },
+    {
+      "drawing": "recover-3",
+      "durationMs": 200
+    },
+    {
+      "drawing": "neutral",
+      "durationMs": 1800
+    }
+  ],
+  "designReference": "../../../../CreatureConcepts/v3/lantern-keeper.png",
+  "sourceFrameSize": [
+    512,
+    512
+  ],
+  "sourceArchive": "../source-drawings.zip"
+}

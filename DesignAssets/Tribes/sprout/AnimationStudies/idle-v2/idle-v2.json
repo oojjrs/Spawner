@@ -3,8 +3,8 @@
   "action": "idle",
   "status": "review-candidate",
   "frameSize": [
-    512,
-    512
+    224,
+    224
   ],
   "columns": 4,
   "frameCount": 64,
@@ -77,8 +77,8 @@
   "loop": true,
   "rootMotion": false,
   "pivot": [
-    256,
-    448
+    112,
+    196
   ],
   "blinkCenterFrame": 51,
   "atlas": "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.png",
