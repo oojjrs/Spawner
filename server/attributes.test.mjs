@@ -94,8 +94,8 @@ test("네 부족 모두 다섯 속성과 복수·중복 슬롯을 생성 즉시 
     [["antenna", "strength"], 5, 2, .5, 180],
     [["antenna", "strength", "butchery"], 5, 2, .5, 180],
     [["antenna", "strength", "butchery", "feet"], 5, 2, .8, 180],
-    [["antenna", "strength", "butchery", "feet", "lifespan"], 5, 2, .8, 300],
-    [["strength", "strength", "feet", "feet", "lifespan"], 3, 3, 1.1, 300]
+    [["antenna", "butchery", "feet", "lifespan"], 5, 1, .8, 300],
+    [["strength", "strength", "feet", "lifespan"], 3, 3, .8, 300]
   ];
   for (const tribe of ["bean", "spore", "pebble", "spring"]) {
     for (const [slots, vision, capacity, speed, lifespan] of designs) {

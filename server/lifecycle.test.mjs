@@ -30,7 +30,7 @@ test("성장 레벨과 관계없이 생성할 때 넣은 모든 속성을 유지
 test("새 개체는 모든 속성을 즉시 적용하고 성장과 저장·복원 후에도 설계 순서를 보존한다", () => {
   const { game } = fixture();
   const saved = JSON.parse(game.save());
-  saved.state.nestLevel = 2;
+  saved.state.nestLevel = 3;
   saved.state.evolutionPoints = 100;
   game.restore(JSON.stringify(saved));
   const result = game.command({ type: "design", templateId: null, name: "성장 시험", slots: ["butchery", "strength", "feet"], birth: true });
