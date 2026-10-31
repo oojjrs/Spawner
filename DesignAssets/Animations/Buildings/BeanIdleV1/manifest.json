@@ -1,0 +1,54 @@
+{
+  "bean:storage": {
+    "image": "DesignAssets/Animations/Buildings/BeanIdleV1/bean/storage/idle.webp",
+    "frameSize": [
+      432,
+      432
+    ],
+    "grid": [
+      8,
+      6
+    ],
+    "frames": 48,
+    "duration": 100
+  },
+  "bean:evolution-lab": {
+    "image": "DesignAssets/Animations/Buildings/BeanIdleV1/bean/evolution-lab/idle.webp",
+    "frameSize": [
+      432,
+      432
+    ],
+    "grid": [
+      8,
+      6
+    ],
+    "frames": 48,
+    "duration": 100
+  },
+  "bean:outpost": {
+    "image": "DesignAssets/Animations/Buildings/BeanIdleV1/bean/outpost/idle.webp",
+    "frameSize": [
+      432,
+      432
+    ],
+    "grid": [
+      8,
+      6
+    ],
+    "frames": 48,
+    "duration": 100
+  },
+  "bean:watchpost": {
+    "image": "DesignAssets/Animations/Buildings/BeanIdleV1/bean/watchpost/idle.webp",
+    "frameSize": [
+      432,
+      432
+    ],
+    "grid": [
+      8,
+      6
+    ],
+    "frames": 48,
+    "duration": 100
+  }
+}

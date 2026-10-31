@@ -1,0 +1,471 @@
+{
+  "version": 4,
+  "sequences": {
+    "spring:storage": {
+      "image": "DesignAssets/Animations/Buildings/IdleV4/spring/storage/idle.webp",
+      "preview": "DesignAssets/Animations/Buildings/IdleV4/spring/storage/preview.webp",
+      "frameWidth": 432,
+      "frameHeight": 432,
+      "columns": 8,
+      "frameCount": 48,
+      "frameDuration": 100,
+      "duration": 4800,
+      "pivot": [
+        216,
+        216
+      ],
+      "reference": "DesignAssets/Animations/Construction/v5/spring/storage-complete.png",
+      "flowPaths": [
+        [
+          [
+            [
+              214,
+              94
+            ],
+            [
+              174,
+              134
+            ],
+            [
+              111,
+              160
+            ],
+            [
+              76,
+              190
+            ],
+            [
+              80,
+              243
+            ],
+            [
+              111,
+              285
+            ],
+            [
+              85,
+              331
+            ],
+            [
+              61,
+              352
+            ]
+          ],
+          23
+        ],
+        [
+          [
+            [
+              214,
+              94
+            ],
+            [
+              255,
+              135
+            ],
+            [
+              316,
+              163
+            ],
+            [
+              353,
+              192
+            ],
+            [
+              345,
+              241
+            ],
+            [
+              314,
+              281
+            ],
+            [
+              338,
+              328
+            ],
+            [
+              370,
+              354
+            ]
+          ],
+          23
+        ],
+        [
+          [
+            [
+              213,
+              193
+            ],
+            [
+              204,
+              229
+            ],
+            [
+              227,
+              262
+            ],
+            [
+              211,
+              304
+            ],
+            [
+              211,
+              324
+            ]
+          ],
+          46
+        ]
+      ],
+      "pool": [
+        210.932482749653,
+        327.26006517503646,
+        198,
+        33
+      ],
+      "bedGround": [
+        -0.03519109201629873,
+        0.7726393414933088
+      ]
+    },
+    "spring:evolution-lab": {
+      "image": "DesignAssets/Animations/Buildings/IdleV4/spring/evolution-lab/idle.webp",
+      "preview": "DesignAssets/Animations/Buildings/IdleV4/spring/evolution-lab/preview.webp",
+      "frameWidth": 432,
+      "frameHeight": 432,
+      "columns": 8,
+      "frameCount": 48,
+      "frameDuration": 100,
+      "duration": 4800,
+      "pivot": [
+        216,
+        216
+      ],
+      "reference": "DesignAssets/Animations/Construction/v5/spring/evolution-lab-complete.png",
+      "flowPaths": [
+        [
+          [
+            [
+              215,
+              64
+            ],
+            [
+              187,
+              130
+            ],
+            [
+              141,
+              168
+            ],
+            [
+              76,
+              211
+            ],
+            [
+              77,
+              245
+            ],
+            [
+              110,
+              268
+            ],
+            [
+              85,
+              307
+            ],
+            [
+              65,
+              348
+            ]
+          ],
+          21
+        ],
+        [
+          [
+            [
+              215,
+              64
+            ],
+            [
+              243,
+              130
+            ],
+            [
+              289,
+              168
+            ],
+            [
+              354,
+              211
+            ],
+            [
+              354,
+              245
+            ],
+            [
+              321,
+              268
+            ],
+            [
+              344,
+              307
+            ],
+            [
+              365,
+              348
+            ]
+          ],
+          21
+        ]
+      ],
+      "pool": [
+        215.0591840551285,
+        371.9701886792453,
+        193,
+        42
+      ],
+      "bedGround": [
+        -0.006533444061607607,
+        1.0831263102725368
+      ]
+    },
+    "spring:outpost": {
+      "image": "DesignAssets/Animations/Buildings/IdleV4/spring/outpost/idle.webp",
+      "preview": "DesignAssets/Animations/Buildings/IdleV4/spring/outpost/preview.webp",
+      "frameWidth": 432,
+      "frameHeight": 432,
+      "columns": 8,
+      "frameCount": 48,
+      "frameDuration": 100,
+      "duration": 4800,
+      "pivot": [
+        216,
+        216
+      ],
+      "reference": "DesignAssets/Animations/Construction/v5/spring/outpost-complete.png",
+      "flowPaths": [
+        [
+          [
+            [
+              220,
+              100
+            ],
+            [
+              177,
+              122
+            ],
+            [
+              133,
+              144
+            ],
+            [
+              79,
+              166
+            ],
+            [
+              56,
+              190
+            ],
+            [
+              63,
+              233
+            ],
+            [
+              68,
+              275
+            ],
+            [
+              83,
+              311
+            ]
+          ],
+          22
+        ],
+        [
+          [
+            [
+              220,
+              100
+            ],
+            [
+              266,
+              144
+            ],
+            [
+              322,
+              159
+            ],
+            [
+              371,
+              183
+            ],
+            [
+              375,
+              231
+            ],
+            [
+              371,
+              274
+            ],
+            [
+              351,
+              310
+            ]
+          ],
+          24
+        ],
+        [
+          [
+            [
+              92,
+              324
+            ],
+            [
+              141,
+              333
+            ],
+            [
+              209,
+              333
+            ],
+            [
+              279,
+              329
+            ],
+            [
+              343,
+              322
+            ]
+          ],
+          16
+        ]
+      ],
+      "pool": [
+        216.0210469576034,
+        321.441929116687,
+        198,
+        37
+      ],
+      "bedGround": [
+        0.00014615942780142052,
+        0.7322356188658818
+      ]
+    },
+    "spring:watchpost": {
+      "image": "DesignAssets/Animations/Buildings/IdleV4/spring/watchpost/idle.webp",
+      "preview": "DesignAssets/Animations/Buildings/IdleV4/spring/watchpost/preview.webp",
+      "frameWidth": 432,
+      "frameHeight": 432,
+      "columns": 8,
+      "frameCount": 48,
+      "frameDuration": 100,
+      "duration": 4800,
+      "pivot": [
+        216,
+        216
+      ],
+      "reference": "DesignAssets/Animations/Construction/v5/spring/watchpost-complete.png",
+      "flowPaths": [
+        [
+          [
+            [
+              226,
+              37
+            ],
+            [
+              252,
+              48
+            ],
+            [
+              267,
+              76
+            ],
+            [
+              265,
+              113
+            ],
+            [
+              247,
+              144
+            ],
+            [
+              215,
+              159
+            ],
+            [
+              211,
+              183
+            ],
+            [
+              224,
+              206
+            ],
+            [
+              209,
+              239
+            ],
+            [
+              218,
+              265
+            ],
+            [
+              226,
+              287
+            ],
+            [
+              213,
+              315
+            ],
+            [
+              205,
+              341
+            ],
+            [
+              213,
+              368
+            ],
+            [
+              218,
+              388
+            ]
+          ],
+          11
+        ],
+        [
+          [
+            [
+              207,
+              67
+            ],
+            [
+              177,
+              90
+            ],
+            [
+              166,
+              118
+            ],
+            [
+              180,
+              145
+            ],
+            [
+              207,
+              162
+            ]
+          ],
+          14
+        ]
+      ],
+      "pool": [
+        216,
+        385,
+        70,
+        18
+      ],
+      "bedGround": [
+        0,
+        1.1736111111111112
+      ]
+    }
+  }
+}

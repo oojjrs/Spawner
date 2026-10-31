@@ -1,0 +1,13 @@
+{
+  "source": "DesignAssets/Animations/Construction/v9/manifest.json",
+  "renderer": "client/construction-organic.mjs",
+  "period": 4.8,
+  "root": [
+    216,
+    216
+  ],
+  "ground": [
+    216,
+    260.352
+  ]
+}

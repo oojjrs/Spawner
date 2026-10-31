@@ -1,0 +1,309 @@
+{
+  "version": 1,
+  "sequences": {
+    "bean:storage": {
+      "image": "DesignAssets/Animations/Buildings/IdleV1/bean/storage/idle.webp",
+      "preview": "DesignAssets/Animations/Buildings/IdleV1/bean/storage/preview.webp",
+      "frameWidth": 432,
+      "frameHeight": 432,
+      "columns": 8,
+      "frameCount": 48,
+      "frameDuration": 100,
+      "duration": 4800,
+      "pivot": [
+        216,
+        216
+      ],
+      "sourceCanvas": [
+        432,
+        432
+      ],
+      "reference": "DesignAssets/Animations/Construction/v5/bean/storage-complete.png"
+    },
+    "bean:evolution-lab": {
+      "image": "DesignAssets/Animations/Buildings/IdleV1/bean/evolution-lab/idle.webp",
+      "preview": "DesignAssets/Animations/Buildings/IdleV1/bean/evolution-lab/preview.webp",
+      "frameWidth": 432,
+      "frameHeight": 432,
+      "columns": 8,
+      "frameCount": 48,
+      "frameDuration": 100,
+      "duration": 4800,
+      "pivot": [
+        216,
+        216
+      ],
+      "sourceCanvas": [
+        432,
+        432
+      ],
+      "reference": "DesignAssets/Animations/Construction/v5/bean/evolution-lab-complete.png"
+    },
+    "bean:outpost": {
+      "image": "DesignAssets/Animations/Buildings/IdleV1/bean/outpost/idle.webp",
+      "preview": "DesignAssets/Animations/Buildings/IdleV1/bean/outpost/preview.webp",
+      "frameWidth": 432,
+      "frameHeight": 432,
+      "columns": 8,
+      "frameCount": 48,
+      "frameDuration": 100,
+      "duration": 4800,
+      "pivot": [
+        216,
+        216
+      ],
+      "sourceCanvas": [
+        432,
+        432
+      ],
+      "reference": "DesignAssets/Animations/Construction/v5/bean/outpost-complete.png"
+    },
+    "bean:watchpost": {
+      "image": "DesignAssets/Animations/Buildings/IdleV1/bean/watchpost/idle.webp",
+      "preview": "DesignAssets/Animations/Buildings/IdleV1/bean/watchpost/preview.webp",
+      "frameWidth": 432,
+      "frameHeight": 432,
+      "columns": 8,
+      "frameCount": 48,
+      "frameDuration": 100,
+      "duration": 4800,
+      "pivot": [
+        216,
+        216
+      ],
+      "sourceCanvas": [
+        432,
+        432
+      ],
+      "reference": "DesignAssets/Animations/Construction/v5/bean/watchpost-complete.png"
+    },
+    "spore:storage": {
+      "image": "DesignAssets/Animations/Buildings/IdleV1/spore/storage/idle.webp",
+      "preview": "DesignAssets/Animations/Buildings/IdleV1/spore/storage/preview.webp",
+      "frameWidth": 432,
+      "frameHeight": 432,
+      "columns": 8,
+      "frameCount": 48,
+      "frameDuration": 100,
+      "duration": 4800,
+      "pivot": [
+        216,
+        216
+      ],
+      "sourceCanvas": [
+        432,
+        432
+      ],
+      "reference": "DesignAssets/Animations/Construction/v5/spore/storage-complete.png"
+    },
+    "spore:evolution-lab": {
+      "image": "DesignAssets/Animations/Buildings/IdleV1/spore/evolution-lab/idle.webp",
+      "preview": "DesignAssets/Animations/Buildings/IdleV1/spore/evolution-lab/preview.webp",
+      "frameWidth": 432,
+      "frameHeight": 432,
+      "columns": 8,
+      "frameCount": 48,
+      "frameDuration": 100,
+      "duration": 4800,
+      "pivot": [
+        216,
+        216
+      ],
+      "sourceCanvas": [
+        432,
+        432
+      ],
+      "reference": "DesignAssets/Animations/Construction/v5/spore/evolution-lab-complete.png"
+    },
+    "spore:outpost": {
+      "image": "DesignAssets/Animations/Buildings/IdleV1/spore/outpost/idle.webp",
+      "preview": "DesignAssets/Animations/Buildings/IdleV1/spore/outpost/preview.webp",
+      "frameWidth": 432,
+      "frameHeight": 432,
+      "columns": 8,
+      "frameCount": 48,
+      "frameDuration": 100,
+      "duration": 4800,
+      "pivot": [
+        216,
+        216
+      ],
+      "sourceCanvas": [
+        432,
+        432
+      ],
+      "reference": "DesignAssets/Animations/Construction/v5/spore/outpost-complete.png"
+    },
+    "spore:watchpost": {
+      "image": "DesignAssets/Animations/Buildings/IdleV1/spore/watchpost/idle.webp",
+      "preview": "DesignAssets/Animations/Buildings/IdleV1/spore/watchpost/preview.webp",
+      "frameWidth": 432,
+      "frameHeight": 432,
+      "columns": 8,
+      "frameCount": 48,
+      "frameDuration": 100,
+      "duration": 4800,
+      "pivot": [
+        216,
+        216
+      ],
+      "sourceCanvas": [
+        432,
+        432
+      ],
+      "reference": "DesignAssets/Animations/Construction/v5/spore/watchpost-complete.png"
+    },
+    "pebble:storage": {
+      "image": "DesignAssets/Animations/Buildings/IdleV1/pebble/storage/idle.webp",
+      "preview": "DesignAssets/Animations/Buildings/IdleV1/pebble/storage/preview.webp",
+      "frameWidth": 432,
+      "frameHeight": 432,
+      "columns": 8,
+      "frameCount": 48,
+      "frameDuration": 100,
+      "duration": 4800,
+      "pivot": [
+        216,
+        216
+      ],
+      "sourceCanvas": [
+        432,
+        432
+      ],
+      "reference": "DesignAssets/Animations/Construction/v5/pebble/storage-complete.png"
+    },
+    "pebble:evolution-lab": {
+      "image": "DesignAssets/Animations/Buildings/IdleV1/pebble/evolution-lab/idle.webp",
+      "preview": "DesignAssets/Animations/Buildings/IdleV1/pebble/evolution-lab/preview.webp",
+      "frameWidth": 432,
+      "frameHeight": 432,
+      "columns": 8,
+      "frameCount": 48,
+      "frameDuration": 100,
+      "duration": 4800,
+      "pivot": [
+        216,
+        216
+      ],
+      "sourceCanvas": [
+        432,
+        432
+      ],
+      "reference": "DesignAssets/Animations/Construction/v5/pebble/evolution-lab-complete.png"
+    },
+    "pebble:outpost": {
+      "image": "DesignAssets/Animations/Buildings/IdleV1/pebble/outpost/idle.webp",
+      "preview": "DesignAssets/Animations/Buildings/IdleV1/pebble/outpost/preview.webp",
+      "frameWidth": 432,
+      "frameHeight": 432,
+      "columns": 8,
+      "frameCount": 48,
+      "frameDuration": 100,
+      "duration": 4800,
+      "pivot": [
+        216,
+        216
+      ],
+      "sourceCanvas": [
+        432,
+        432
+      ],
+      "reference": "DesignAssets/Animations/Construction/v5/pebble/outpost-complete.png"
+    },
+    "pebble:watchpost": {
+      "image": "DesignAssets/Animations/Buildings/IdleV1/pebble/watchpost/idle.webp",
+      "preview": "DesignAssets/Animations/Buildings/IdleV1/pebble/watchpost/preview.webp",
+      "frameWidth": 432,
+      "frameHeight": 432,
+      "columns": 8,
+      "frameCount": 48,
+      "frameDuration": 100,
+      "duration": 4800,
+      "pivot": [
+        216,
+        216
+      ],
+      "sourceCanvas": [
+        432,
+        432
+      ],
+      "reference": "DesignAssets/Animations/Construction/v5/pebble/watchpost-complete.png"
+    },
+    "spring:storage": {
+      "image": "DesignAssets/Animations/Buildings/IdleV1/spring/storage/idle.webp",
+      "preview": "DesignAssets/Animations/Buildings/IdleV1/spring/storage/preview.webp",
+      "frameWidth": 432,
+      "frameHeight": 432,
+      "columns": 8,
+      "frameCount": 48,
+      "frameDuration": 100,
+      "duration": 4800,
+      "pivot": [
+        216,
+        216
+      ],
+      "sourceCanvas": [
+        432,
+        432
+      ],
+      "reference": "DesignAssets/Animations/Construction/v5/spring/storage-complete.png"
+    },
+    "spring:evolution-lab": {
+      "image": "DesignAssets/Animations/Buildings/IdleV1/spring/evolution-lab/idle.webp",
+      "preview": "DesignAssets/Animations/Buildings/IdleV1/spring/evolution-lab/preview.webp",
+      "frameWidth": 432,
+      "frameHeight": 432,
+      "columns": 8,
+      "frameCount": 48,
+      "frameDuration": 100,
+      "duration": 4800,
+      "pivot": [
+        216,
+        216
+      ],
+      "sourceCanvas": [
+        432,
+        432
+      ],
+      "reference": "DesignAssets/Animations/Construction/v5/spring/evolution-lab-complete.png"
+    },
+    "spring:outpost": {
+      "image": "DesignAssets/Animations/Buildings/IdleV1/spring/outpost/idle.webp",
+      "preview": "DesignAssets/Animations/Buildings/IdleV1/spring/outpost/preview.webp",
+      "frameWidth": 432,
+      "frameHeight": 432,
+      "columns": 8,
+      "frameCount": 48,
+      "frameDuration": 100,
+      "duration": 4800,
+      "pivot": [
+        216,
+        216
+      ],
+      "sourceCanvas": [
+        432,
+        432
+      ],
+      "reference": "DesignAssets/Animations/Construction/v5/spring/outpost-complete.png"
+    },
+    "spring:watchpost": {
+      "image": "DesignAssets/Animations/Buildings/IdleV1/spring/watchpost/idle.webp",
+      "preview": "DesignAssets/Animations/Buildings/IdleV1/spring/watchpost/preview.webp",
+      "frameWidth": 432,
+      "frameHeight": 432,
+      "columns": 8,
+      "frameCount": 48,
+      "frameDuration": 100,
+      "duration": 4800,
+      "pivot": [
+        216,
+        216
+      ],
+      "sourceCanvas": [
+        432,
+        432
+      ],
+      "reference": "DesignAssets/Animations/Construction/v5/spring/watchpost-complete.png"
+    }
+  }
+}

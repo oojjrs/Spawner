@@ -1,0 +1,65 @@
+{
+  "version": 2,
+  "sequences": {
+    "bean:storage": {
+      "image": "DesignAssets/Animations/Buildings/IdleV2/bean/storage/idle.webp",
+      "preview": "DesignAssets/Animations/Buildings/IdleV2/bean/storage/preview.webp",
+      "frameWidth": 432,
+      "frameHeight": 432,
+      "columns": 8,
+      "frameCount": 48,
+      "frameDuration": 100,
+      "duration": 4800,
+      "pivot": [
+        216,
+        216
+      ],
+      "reference": "DesignAssets/Animations/Construction/v6/bean/storage-complete.png"
+    },
+    "bean:evolution-lab": {
+      "image": "DesignAssets/Animations/Buildings/IdleV2/bean/evolution-lab/idle.webp",
+      "preview": "DesignAssets/Animations/Buildings/IdleV2/bean/evolution-lab/preview.webp",
+      "frameWidth": 432,
+      "frameHeight": 432,
+      "columns": 8,
+      "frameCount": 48,
+      "frameDuration": 100,
+      "duration": 4800,
+      "pivot": [
+        216,
+        216
+      ],
+      "reference": "DesignAssets/Animations/Construction/v6/bean/evolution-lab-complete.png"
+    },
+    "bean:outpost": {
+      "image": "DesignAssets/Animations/Buildings/IdleV2/bean/outpost/idle.webp",
+      "preview": "DesignAssets/Animations/Buildings/IdleV2/bean/outpost/preview.webp",
+      "frameWidth": 432,
+      "frameHeight": 432,
+      "columns": 8,
+      "frameCount": 48,
+      "frameDuration": 100,
+      "duration": 4800,
+      "pivot": [
+        216,
+        216
+      ],
+      "reference": "DesignAssets/Animations/Construction/v6/bean/outpost-complete.png"
+    },
+    "bean:watchpost": {
+      "image": "DesignAssets/Animations/Buildings/IdleV2/bean/watchpost/idle.webp",
+      "preview": "DesignAssets/Animations/Buildings/IdleV2/bean/watchpost/preview.webp",
+      "frameWidth": 432,
+      "frameHeight": 432,
+      "columns": 8,
+      "frameCount": 48,
+      "frameDuration": 100,
+      "duration": 4800,
+      "pivot": [
+        216,
+        216
+      ],
+      "reference": "DesignAssets/Animations/Construction/v6/bean/watchpost-complete.png"
+    }
+  }
+}
