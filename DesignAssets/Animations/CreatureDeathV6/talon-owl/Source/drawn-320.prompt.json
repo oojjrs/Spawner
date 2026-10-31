@@ -1,0 +1,11 @@
+{
+  "tool": "image_gen",
+  "prompt": "Use case: stylized-concept. Draw ONE complete missing320ms animation pose, transparent background, identical fixed square canvas/camera/scale. Input1 is the ONLY original design authority. Input2 is first talon contact at240ms; input3 is the following low chest/wing impact pose at400ms. Draw the intermediate collapse BETWEEN them, not a copy of either. The short knees and ankles yield under the body weight, torso drops and tips forward; cream chest approaches the ground but has not finished landing, original large skull bows down, eyes nearly shut. Talons fold/drag naturally while the wings continue dropping with inertia; elbows flex, far wing stays behind left, near wing spreads beside right flank, original long primary feathers approach the ground but remain about40-60 canvas units above it. Show actual correct feather/shoulder overlap and continuous complete surfaces through this changing view. Keep the SAME original head size (cream facial disk about108, outer skull/tufts125 in512 canvas), torso volume, short beak, two short feet, feather lengths, tail and markings. No changing camera, perpose zoom, fit-to-bounds, stretched/shrunken wings, extra limbs, holes, seams, doubled outlines, detached pixels or neon alpha garbage. No floor, cast shadow, text, morphing or superposed poses. Painterly game sprite.",
+  "output": "Source/drawn-320.png",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "Source/reference.png",
+    "Source/drawn-240.png",
+    "Source/drawn-400.png"
+  ]
+}

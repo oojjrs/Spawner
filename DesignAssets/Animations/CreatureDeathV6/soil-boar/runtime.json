@@ -1,0 +1,21 @@
+{
+  "image": "DesignAssets/Animations/CreatureDeathV6/soil-boar/runtime.webp",
+  "frameSize": 256,
+  "viewSize": 256,
+  "columns": 4,
+  "pivotX": 128.0,
+  "pivotY": 224.0,
+  "durationsMs": [
+    80,
+    40,
+    40,
+    80,
+    80,
+    160,
+    160,
+    800
+  ],
+  "loop": false,
+  "sourceAtlas": "DesignAssets/Animations/CreatureDeathV6/soil-boar/death.webp",
+  "sourceAtlasSha256": "1d04f2c58093d634c15b27b7119290a34507675f974351299d72fa5abe03ea1d"
+}

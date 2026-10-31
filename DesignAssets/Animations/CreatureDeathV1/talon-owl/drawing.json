@@ -1,0 +1,28 @@
+{
+  "name": "talon-owl",
+  "sourceSheet": "Source/death-drawn-sheet.png",
+  "sourceImage": "DesignAssets/CreatureConcepts/v3/talon-owl.png",
+  "sourceAnimation": "DesignAssets/Animations/TalonOwlIdle/PerchedV4/idle.webp",
+  "sourceNeutral": "Source/neutral.png",
+  "frameSize": 512,
+  "columns": 4,
+  "durationsMs": [
+    110,
+    90,
+    80,
+    75,
+    70,
+    65,
+    60,
+    70,
+    80,
+    90,
+    100,
+    110,
+    120,
+    140,
+    160,
+    1000
+  ],
+  "method": "Directly drawn anatomical death cels from the accepted reference. Shared uniform scale, fixed horizontal registration and registered ground contact; all body, limb, leaf and tendril silhouettes are redrawn through collapse. The earlier continuous rig is preserved as editable reference but is not used by this drawn sequence."
+}

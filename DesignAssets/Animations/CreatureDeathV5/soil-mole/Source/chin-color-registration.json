@@ -1,0 +1,26 @@
+{
+  "matrix": [
+    [
+      0.3891835891679659, 
+      0.001577563505811275, 
+      4.47536195687171
+    ], 
+    [
+      -0.001577563505811275, 
+      0.3891835891679659, 
+      -1.6896149676604786
+    ]
+  ], 
+  "matches": 184, 
+  "inliers": 114, 
+  "region": [
+    155, 
+    300, 
+    210, 
+    345
+  ], 
+  "adoptedRGBPixels": 348, 
+  "originalVisiblePixelsChanged": 0, 
+  "alphaChanged": false, 
+  "bodyAndNeckChanged": false
+}

@@ -1,0 +1,6 @@
+{
+  "provider": "built-in image_gen",
+  "purpose": "closed eyelid source artwork for a non-looping death action",
+  "prompt": "Use case: precise-object-edit. Production 2D game sprite local eyelid attachment for snare-vine death animation. Image 1 is the EDIT TARGET and exact design authority. Edit ONLY the eyes so both eyes are fully closed, relaxed and lifeless: natural gently curved thin dark eyelid contours with matching existing fur/skin filling their former visible iris surfaces. Preserve the exact existing neutral pose, head shape, eyebrows except slight relaxation, body, colors, lighting, highlights, outline, proportions, camera, position, transparent margins, and the whole rest of the image unchanged. Do not alter any legs, ears, shell, leaves, tendrils, tail or silhouette. Same full 512x512 square framing and transparent alpha, no text, no labels, no new objects, no effects. The output is a production source attachment, not a preview or concept.",
+  "integration": "Only eye-region pixels are selected from the generated drawing; the rest is retained from the exact original source."
+}

@@ -1,0 +1,23 @@
+{
+  "provider": "builtin imagegen", 
+  "appearanceAuthority": "approved-reference.png", 
+  "prompts": [
+    {
+      "role": "final motion reference", 
+      "prompt": "Use case: identity-preserve. Draw one complete final death/collapse key of EXACTLY the attached approved wool sheep. Same original face, big green eyes now closed, beige muzzle, huge floppy pink-inner ears, original cotton-wool puff arrangement and proportions, little wool tail, four short beige legs with dark hooves. Match original pale creamy wool with subtle green shaded lobes, painterly rendering and thin shaded edges; do not restyle or add bold black ink. This is a full coherent new anatomical pose. Both front knees/elbows have folded, the small hooves lie loosely forward/sideways, chest and wool belly have landed and support its weight, hind hocks follow and fold beside/under the rump. The body remains a full-sized ROUND cotton mass, never a pancake or shrunken ball. The same round face has followed LAST and its chin/muzzle now rests on the hoof ground, with ears softly draped while still attached. No standing vertical leg struts under a sleeping head. Preserve all four limbs and hoof sizes; natural occlusion only. Keep exact original camera toward lower left, character scale, framing and front hoof ground of the reference, with blank margins unchanged. Do not zoom/tightfit. Transparent background, no scene, shadow, ground line, sheet, text, blood or effects.", 
+      "references": [
+        "approved-reference.png"
+      ], 
+      "output": "Raw/final-drawing.png"
+    }, 
+    {
+      "role": "actual six complete timeline drawings", 
+      "prompt": "Use case: identity-preserve. Draw SIX chronological complete hand-painted game sprite frames in a3columns by2rows grid with equal square world canvases. Image1 is the exact approved original neutral and ONLY character/style authority. Image2 is the target full collapse pose. All six frames keep the same original camera, absolute character/part scale, palette, original fur pattern, thin soft shaded edges and same paw ground. No bold black ink outlines. Never zoom or tightly fit individual frames; keep original margins and position. Frame1 is very close to neutral, only beginning to lose support. Frame2 front elbows/knees buckle visibly and chest/pelvis start falling while head lags. Frame3 chest and belly land between the folded limbs, head still a small gap above ground. Frame4 hind hocks finish folding and the head follows downward. Frame5 chin/muzzle contacts ground last. Frame6 limp final rest with small appendage follow-through ended, fully closed eyes. Body mass must visibly sink with elbow flexion, not merely close eyes and nod on standing legs. Preserve skull, torso, limb and paw intrinsic volumes/proportions; no flattening, stretching or shrinking. Paint each whole connected anatomical pose, no cutout seams, gaps, morphs, alpha blends or ghosting. Transparent backgrounds and spacing. No scene, cast shadow, ground line, labels, grid lines, effects or blood. Subject is the EXACT cotton sheep: cream-green shaded rounded wool puffs and original puff arrangement, beige round face/muzzle, big original ears with pink interior, four short beige legs and original dark cloven hooves, little cotton tail. Fore knees fold out/down so hooves lie forward rather than upright struts; large ROUND wool torso settles onto its chest/belly without becoming a pancake. Original head size retained as chin comes down after the body. Ears sag naturally but stay attached, wool and face do not grow/shrink between frames. Same original painterly material throughout, no extra wool masses or different sheep.", 
+      "references": [
+        "Guides/0.png", 
+        "Guides/1.png"
+      ], 
+      "output": "Raw/sequence-drawing.png"
+    }
+  ]
+}

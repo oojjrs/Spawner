@@ -1,0 +1,8 @@
+{
+  "prompt": "Complete only the hidden surfaces of this boar TORSO cutout. The first reference is the exact visible torso after the approved head, ears, tail and all four entire legs including shoulder and haunch have been removed. Keep every visible torso feature and original silhouette at the same proportion, perspective, warm brown painterly fur, moss tufts and dark side marks. Fill the gaps under those removed parts into a single complete short, stocky limbless torso. At the FRONT make a compact ROUND furry neck/chest stump behind the head, not a giant forward forelock, not a face, not a head-like mass. The front boundary belongs near the original shoulder/neck junction, never out at the nose. Complete the underside behind the legs with a softly curved belly and natural fur edge. No fixed thighs, haunch circles, knees, hoof tips, ears or tail should remain on this body. The second reference is the approved full creature for exact proportions and design only. Transparent background, one torso, no text, no cast shadow. Do not add new moss or rearrange the existing back ornamentation.",
+  "referencedImagePaths": [
+    "H:/Spawner/DesignAssets/Animations/CreatureDeathV5/soil-boar/Source/Inputs/body-visibility-guide.png",
+    "H:/Spawner/DesignAssets/Animations/CreatureDeathV5/soil-boar/Source/approved-original.png"
+  ],
+  "transparentBackground": true
+}

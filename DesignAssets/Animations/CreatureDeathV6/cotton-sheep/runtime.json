@@ -1,0 +1,21 @@
+{
+  "image": "DesignAssets/Animations/CreatureDeathV6/cotton-sheep/runtime.webp",
+  "frameSize": 256,
+  "viewSize": 256,
+  "columns": 4,
+  "pivotX": 128.0,
+  "pivotY": 224.0,
+  "durationsMs": [
+    120,
+    90,
+    90,
+    100,
+    100,
+    100,
+    160,
+    1000
+  ],
+  "loop": false,
+  "sourceAtlas": "DesignAssets/Animations/CreatureDeathV6/cotton-sheep/death.webp",
+  "sourceAtlasSha256": "198c4d38e2a96dfc77b53a0be59bd054ac14d7b9b54add429e4b018efd668466"
+}

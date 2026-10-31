@@ -1,0 +1,10 @@
+{
+  "prompt": "Production boar death animation source frame at320ms: FIRST SIDE CONTACT. Reference1 is the only approved design and locked camera/size; reference2 is the previous240ms source; reference3 is the technical pose/volume guide for the continuing physical fall. Draw the same individual at the same magnification, do not grow/shrink barrel, skull, snout, tusks, hooves, mane or tail. The heavy short barrel has now rolled35degrees TOWARD CAMERA onto near flank; shoulder/flank reaches its ground plane, loose forelegs/hindlegs swing OUT/UP toward screenRIGHT with joint inertia. Body faces partly belly toward viewer with original brown fur, NOT a kneeling/belly-down sleeping animal and NOT an upside-down full back pose. Cheek comes down just after shoulder, snout near the lower-left arc; mouth closed and eyes closed. Match guide's scale and connected bones/limbs but render the TRUE three-dimensional side rotation and natural painted body contours, not circles/rectangles. Four original SHORT stout legs and charcoal cloven hooves, no extra limbs; far legs partly occluded, knee/hock bending correct. Keep same compact original skull/snout/two nostrils, two ivory tusks, original pointed ears, swept spiky mane/moss/leaf/stones moving with the back, small curled tail, warm original brown-and-cream painterly style and lighting. Maintain barrel volume and original ratio to head across view change. Fully within same square512canvas, large empty upper area, supported cheek/front side at abouty448 and rearward flank contact higher in the original isometric ground plane. No fit-to-subject zoom, no upward jump, no bone shortening, no giant tail/mane. Complete source art on GENUINE transparent surroundings. No ground line, floor/shadow/background/haze, symbols, words, motion blur, duplicate outlines or effects.",
+  "referenced_image_paths": [
+    "Source/reference.png",
+    "Source/drawn-240.png",
+    "Source/Inputs/anatomical-320.png"
+  ],
+  "transparent_background": true,
+  "output": "Source/drawn-320.png"
+}

@@ -1,0 +1,211 @@
+{
+  "name": "cotton-sheep",
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ],
+  "approvedImage": "DesignAssets/CreatureConcepts/v3/cotton-sheep.png",
+  "bodyMass": 1,
+  "headMass": 0.4,
+  "gravity": 1050,
+  "neckPivot": [
+    268,
+    271
+  ],
+  "bodyAngleLimit": -24,
+  "headAngleLimit": [
+    -85,
+    25
+  ],
+  "neutralHoldMs": 100,
+  "foreFailureMs": [
+    100,
+    200
+  ],
+  "hindFailureMs": [
+    180,
+    310
+  ],
+  "headFailureMs": [
+    160,
+    280
+  ],
+  "groundY": 435,
+  "legs": {
+    "fore-near": [
+      [
+        261,
+        344
+      ],
+      [
+        264,
+        382
+      ],
+      [
+        263,
+        407.9230769230769
+      ]
+    ],
+    "fore-far": [
+      [
+        219,
+        344
+      ],
+      [
+        219,
+        377
+      ],
+      [
+        219,
+        396.64666666666665
+      ]
+    ],
+    "hind-near": [
+      [
+        398,
+        322
+      ],
+      [
+        400,
+        357
+      ],
+      [
+        404,
+        387.51973684210526
+      ]
+    ],
+    "hind-far": [
+      [
+        328,
+        329
+      ],
+      [
+        327,
+        365
+      ],
+      [
+        329,
+        387.38
+      ]
+    ]
+  },
+  "accessories": {
+    "near-ear": [
+      251,
+      220
+    ],
+    "far-ear": [
+      119,
+      192
+    ]
+  },
+  "extraParts": {
+    "tail": {
+      "pivot": [
+        407,
+        216
+      ],
+      "parent": "body",
+      "mass": 0.08
+    }
+  },
+  "durationActiveMs": 2400,
+  "sampleMs": 40,
+  "finalHoldMs": 1000,
+  "spineCompatibilityVerified": false,
+  "bodyMassCenter": [
+    335,
+    290
+  ],
+  "headMassCenter": [
+    190,
+    258
+  ],
+  "legBends": {
+    "fore-near": 1,
+    "fore-far": 1
+  },
+  "softChains": {
+    "near-ear": {
+      "joints": [
+        [
+          251.0,
+          220.0
+        ],
+        [
+          258.54392266866313,
+          222.6625609418811
+        ],
+        [
+          285.0,
+          232.0
+        ],
+        [
+          323.0,
+          262.0
+        ]
+      ],
+      "radii": [
+        0.0,
+        38.47193970570102,
+        38.87802916845076,
+        38.87802916845076
+      ],
+      "locked": 1,
+      "bendElasticity": 0.0006
+    },
+    "far-ear": {
+      "joints": [
+        [
+          119.0,
+          192.0
+        ],
+        [
+          111.0,
+          192.0
+        ],
+        [
+          96.0,
+          192.0
+        ],
+        [
+          70.0,
+          205.0
+        ]
+      ],
+      "radii": [
+        0.0,
+        42.0,
+        42.14365078599613,
+        42.14365078599613
+      ],
+      "locked": 1,
+      "bendElasticity": 0.0006
+    }
+  },
+  "groundSlope": -0.14,
+  "groundX": 263,
+  "jointParts": {
+    "fore-near": [
+      "fore-near-upper",
+      "fore-near-lower",
+      "fore-near-foot"
+    ],
+    "fore-far": [
+      "fore-far-upper",
+      "fore-far-lower",
+      "fore-far-foot"
+    ],
+    "hind-near": [
+      "hind-near-upper",
+      "hind-near-lower",
+      "hind-near-foot"
+    ],
+    "hind-far": [
+      "hind-far-upper",
+      "hind-far-lower",
+      "hind-far-foot"
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "prompt": "Precise 2D game cutout-part correction, not a new character. References: image 1 is the existing complete soil-boar head, image 2 marks one baked-in ear in red, image 3 is the approved full character for identity. Produce TWO complete standalone heads side by side on a truly transparent background, with generous clear padding around every fur tip, tusk and chin. Left: same angry open-eyed head. Right: the exact same skull, nose, muzzle, tusks, cheek volume and mane with both eyelids gently fully closed. Critical local correction on BOTH heads: remove the cream triangular ear inside the red marked area and paint continuous natural brown head fur underneath it. NO ears at all anywhere on either head: they are separate articulated attachments in our rig. Preserve the existing face direction, viewpoint, lighting, painterly fur stroke style, outline weight, pink snout width and nostril spacing, ivory tusk thickness/length, eyes' positions, brows, rounded cheeks, and all skull proportions. Do not lengthen the nose, enlarge the skull or mane, change the camera, or redesign the face. Remove the clipped unrelated brown fragment at the extreme left of image 1. Complete the entire head behind the removed ears and at the back/underside so no missing wedge or straight cut remains. The two heads must have identical anatomical dimensions and orientation; the only expression difference is the eyelids. No body, legs, extra head, detached eye patch, labels, grid, background glow or shadows. Transparent outside the actual artwork.",
+  "referenced_image_paths": [
+    "H:/Spawner/DesignAssets/Animations/CreatureDeathV4/soil-boar/Source/head-source-input.png",
+    "H:/Spawner/DesignAssets/Animations/CreatureDeathV4/soil-boar/Source/head-ear-removal-guide.png",
+    "H:/Spawner/DesignAssets/Animations/CreatureDeathV4/soil-boar/Source/neutral.png"
+  ],
+  "transparent_background": true,
+  "preservedOutputSource": "Source/head-complete-drawing.png"
+}

@@ -1,0 +1,133 @@
+{
+  "stage": "approved",
+  "approval": {
+    "userMessage": "연결해",
+    "date": "2026-10-31",
+    "motion": "slump-eyes-closed"
+  },
+  "motion": "slump-eyes-closed",
+  "userDirection": "그냥, 뭐 집어넣지 말고, 걍 그대로 주저앉는 형태로 눈감고 끝내자",
+  "supersedesMotion": "../CreatureDeathV11/production.json",
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ],
+  "groundY": 448,
+  "contact": "keyframes-contact.png",
+  "characters": [
+    {
+      "name": "vine-turtle",
+      "registration": {
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "padding": 0,
+        "resize": [
+          512,
+          512
+        ],
+        "offset": [
+          0,
+          -10
+        ]
+      },
+      "generations": [
+        {
+          "tool": "builtin-imagegen",
+          "prompt": "Use case: precise-object-edit.\nAsset: ONE actual final key drawing for a revised death animation of the original vine-turtle.\nThe input is the ORIGINAL APPROVED neutral character on a logical512x512 transparent canvas. It is the ONLY appearance, anatomy, palette, lighting, camera, proportions and registration authority.\n\nChange its pose to a SIMPLE WEAK COLLAPSE IN PLACE: the turtle gently loses strength, bends its front elbows and hind knees OUTWARD, lowers its torso/carapace about35-40 logical pixels toward the ground, and remains slumped with EYES CLOSED. Keep its feet planted at the original footprint and the near-foot ground y448. The legs relax sideways underneath the low body; the lower belly rests low between them. Head stays fully OUTSIDE, pointing forward/left in the original three-quarter camera with only a small natural downward droop. Both eyes gently closed, full original round skull and cream jaw retained. Neck stays visibly attached normally. The original tail remains visible outside in its original rear direction.\n\nAll head, neck, forefeet, hindfeet, three claws per visible foot and tail remain present and recognizably OUTSIDE. Absolutely NO withdrawal, no retraction, no disappearing limbs, no pulling head into shell, no empty neck/leg holes, no new pipe-like sockets, no floating parts. Do not roll it onto its back or side. Do not make a sleeping curled-up ball. This is the same turtle simply sitting/slumping low and becoming still.\n\nKeep the entire orange/gray stone shell, specific vines, large green leaves, leaf count, leaf shapes, stone layout, material shading, original outline weight, width/height and mass exactly as in the reference. The hard shell settles downward as one unchanged rigid assembly, never flattened, squashed, shrunk, enlarged or rearranged. Soft joints bend organically with normal overlapping anatomy; the full thick legs still connect to their original shoulder/hip roots.\nPreserve original512 framing, x registration, perspective and size. Scale coordinates proportionally if output resolution differs. Entire figure including tail and toes contained with clear transparent margins. Only one complete full-body final pose, no strip, no labels/text, no ground line/shadow, no scenery, no dust, no extra effects. True transparent exterior background and clean alpha edges. This drawing will be the actual final animation source key.",
+          "inputs": [
+            "DesignAssets/Animations/CreatureDeathV6/vine-turtle/Source/registered-reference.png"
+          ],
+          "output": "Source/slump-input.png"
+        },
+        {
+          "tool": "builtin-imagegen",
+          "prompt": "Use case: precise-object-edit.\nImage1 is the EDIT TARGET: the new eyes-closed vine-turtle final pose. Image2 is the original neutral design reference only.\nMake ONE small pose correction: image1 is still propped up too much on the legs. Make the turtle visibly give way and sit/slump LOW.\n\nKeep feet/toes planted at their existing ground line and keep the same camera/canvas, but lower the ENTIRE torso, rigid leaf-and-stone carapace, and the attached visible head about20 logical512 pixels toward those feet. Let the belly come down almost to the sole line. Deeply bend the foreleg elbows and rear knees outward/sideways so the limbs lie relaxed and low; do not leave the near foreleg as a tall round pillar supporting the body. Preserve the full original thick limb volume and three visible claws per foot, all feet still outside and connected. Preserve the current full-size round skull, normal visible neck, and gently CLOSED eyes. The head stays OUTSIDE, slightly drooped forward, and the original tail remains outside and visible.\n\nThe entire original orange/gray stone shell, vines and big leaves must retain EXACTLY the same width, height, leaf/stone arrangements and rigid volume as image1. Translate that hard assembly DOWN only as legs bend. No squashing, flattening, shrinking, widening, scaling the whole turtle, leaf rearrangement, or changing the shell silhouette. No neck or leg retraction, disappearing parts, new holes, collars or empty sockets. No rolling it over. Keep the original line weight, palette and shading.\n\nOne complete full-body final source key on true transparent background. Preserve intentional canvas margins, fully contain every toe and the tail with extra clear space, no crop/zoom/reframe. No text, labels, strip, ground line/shadow, scenery, dust or effects.",
+          "inputs": [
+            "Source/slump-input.png",
+            "DesignAssets/Animations/CreatureDeathV6/vine-turtle/Source/registered-reference.png"
+          ],
+          "output": "Source/slump-raw.png"
+        }
+      ],
+      "appearanceAuthority": "DesignAssets/CreatureConcepts/v3/vine-turtle.png",
+      "keys": [
+        "Source/Keyframes/key-00-neutral.png",
+        "Source/Keyframes/key-01-slump.png"
+      ],
+      "preview": {
+        "file": "keyframes-review.gif",
+        "kind": "keyframe-sequence",
+        "frameCount": 2,
+        "durationsMs": [
+          700,
+          1200
+        ],
+        "loop": true
+      }
+    },
+    {
+      "name": "walking-forest",
+      "registration": {
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "padding": 16,
+        "resize": [
+          512,
+          512
+        ],
+        "offset": [
+          -4,
+          -9
+        ]
+      },
+      "generations": [
+        {
+          "tool": "builtin-imagegen",
+          "prompt": "Use case: precise-object-edit.\nAsset: ONE actual final key drawing for a SIMPLE SLUMP death animation of walking-forest, the original mineral mountain turtle.\nThe input is the original approved neutral512x512 character. Use it as the ONLY authority for appearance, anatomy, camera, palette, original line weight, proportions and framing.\n\nMake this same turtle simply LOSE STRENGTH AND SLUMP DOWN IN PLACE, then remain still with both EYES CLOSED. All original head, neck, three visible thick legs, feet/claws and tail stay visibly OUTSIDE. Front elbows and hind knees bend outward/sideways; feet stay on the existing footprint, with the near-foot ground at logical y448. Lower the entire torso and rigid carapace about35-40 logical pixels until the belly rests low between the relaxed splayed legs. The head remains normally attached, facing forward/left in the same camera, with a slight natural droop. Keep the round skull full original size, original cream lower jaw, original spot pattern, and gently closed curved eyelids. Neck does NOT pull back. Tail stays visible in its original rear direction.\n\nNothing is tucked in, withdrawn, hidden or made to vanish. NO retracting head, no missing legs, no empty head/leg holes, no pipe collars, no new sockets, no floating or detached joints. Do not flip it upside down, roll it over, curl it up or make it bounce. No dramatic expression, X eyes, tongue or extra effects.\n\nThe mountain assembly MUST remain exactly the reference: same asymmetric gray/tan boulders, original amber seams, original pale turquoise crystals, facets, peak shapes/count, mass and width/height ratio. The highest original summit is right of center around x285; after the slump it should be around y75-80 in the logical512canvas (original was around y40). The entire hard mountain translates downward unchanged; no rock rearrangement, flattening, squashing, shrinking, scaling the creature, crumbling or individual crystal motion. Fold the thick soft limbs organically at their actual original roots with normal overlapping skin and intact volume.\n\nPreserve original512x512 registration and scale, multiplying coordinates proportionally with output resolution. Keep all right-side rocks, tail and all toes fully inside the canvas with transparent margins; no auto fit or zoom. One complete full-body final pose on true transparent background. No labels, strip, ground line/shadow, dust, scenery or decorations. This drawing is the actual final animation source key.",
+          "inputs": [
+            "DesignAssets/Animations/CreatureDeathV6/walking-forest/Source/registered-reference.png"
+          ],
+          "output": "Source/slump-input.png"
+        },
+        {
+          "tool": "builtin-imagegen",
+          "prompt": "Use case: precise-object-edit.\nImage1 is the original approved walking-forest neutral, the only mineral-shell design/shape authority. Image2 is the new SIMPLE SLUMP final key to edit. The soft pose of image2 is correct: head, neck, relaxed legs/feet and tail all OUTSIDE, EYES CLOSED, no withdrawal.\n\nCorrect ONLY the mineral carapace and plastron proportions in image2: the new mountain was slightly flattened vertically. Restore the EXACT tall rigid silhouette, asymmetric ridgeline, boulder/crystal geometry and original HEIGHT-TO-WIDTH RATIO from image1. Do NOT make a wider or squashed pyramid. Keep original boulder counts and positions, turquoise crystal shapes, original right-of-center tall summit, and amber seams. Transfer the original hard assembly as a SINGLE rigid object, translated downward into the slumped stance, never compressed.\n\nUse logical512x512 framing: preserve original x registration, highest summit near x285, y75-80; complete lower plastron resting around y440-448. This means the mountain must be about20 logical pixels taller than image2 while the low belly and feet remain where they are. Restore that height by faithfully drawing image1's original rigid geometry, not by stretching the entire character. Keep all soft anatomy, full round skull, gently closed eyes, visible normal neck, three visible folded-outward legs with toes, original tail, and the same low relaxed pose from image2. Legs stay attached at their original roots. Nothing tucks inside or vanishes.\n\nPreserve original head size and illustrated material style. No empty openings or collars. Keep feet/toes/tail and right-side crystals fully contained within the square with transparent margins, no zoom, auto fit or cropping. True transparent background, one complete full-body final source key, no labels, strip, ground shadow, scenery, dust or extra effects.",
+          "inputs": [
+            "DesignAssets/Animations/CreatureDeathV6/walking-forest/Source/registered-reference.png",
+            "Source/slump-input.png"
+          ],
+          "output": "Source/geometry-input.png"
+        },
+        {
+          "tool": "builtin-imagegen",
+          "prompt": "Use case: precise-object-edit.\nImage1 is the EDIT TARGET: the eyes-closed walking-forest turtle whose mineral-shell proportions are already correct. Image2 is the original neutral design reference only. Keep image1's exact hard mountain assembly and all material/color details.\n\nMake ONE targeted pose correction to image1: it still looks as if the legs are supporting a standing body. Make it visibly GIVE WAY AND SIT DOWN LOW.\nKeep the FEET on their current ground line and the same canvas landmarks, but move the COMPLETE RIGID TORSO/CARAPACE and the connected visible head about20 logical512 pixels DOWN relative to those feet. Deeply bend the elbows and knees outward so the legs are folded low to the sides and the lower belly rests almost on the same ground as the toes. The front leg must stop being a tall supporting column: show a bent relaxed elbow and a low flattened-on-ground foot, with the full original limb volume and its three claws still visible. Rear knee also buckles low, not withdrawn.\nKeep both eyes CLOSED. Head remains fully OUTSIDE, connected by a normal visible neck and gently drooped forward/left, with original full round skull size. Tail stays outside and visible. No part enters the shell or vanishes.\n\nThe shell and mountain are ONE intact rigid assembly translated DOWN only: do NOT squash, compress, shorten, widen or rearrange the boulders/crystals, do not change its now-correct height/width or summit shape. Do not stretch the whole image. Preserve the target's exact original camera, scale, palette, outlines and transparent framing; only the soft joint pose and resulting body height change. Keep feet and tail completely inside the square. No dust, shadows, ground graphics, extra effects, openings, text or decorations. True transparent background. ONE actual full-body final source key.",
+          "inputs": [
+            "Source/geometry-input.png",
+            "DesignAssets/Animations/CreatureDeathV6/walking-forest/Source/registered-reference.png"
+          ],
+          "output": "Source/slump-raw.png"
+        }
+      ],
+      "appearanceAuthority": "DesignAssets/CreatureConcepts/v3/walking-forest.png",
+      "keys": [
+        "Source/Keyframes/key-00-neutral.png",
+        "Source/Keyframes/key-01-slump.png"
+      ],
+      "preview": {
+        "file": "keyframes-review.gif",
+        "kind": "keyframe-sequence",
+        "frameCount": 2,
+        "durationsMs": [
+          700,
+          1200
+        ],
+        "loop": true
+      }
+    }
+  ]
+}

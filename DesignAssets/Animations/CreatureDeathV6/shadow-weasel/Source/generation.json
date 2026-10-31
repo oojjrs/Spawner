@@ -1,0 +1,23 @@
+{
+  "provider": "builtin imagegen", 
+  "appearanceAuthority": "approved-reference.png", 
+  "prompts": [
+    {
+      "role": "final motion reference", 
+      "prompt": "Use case: identity-preserve. Draw one complete final death/collapse key of EXACTLY the attached approved lean brown weasel. Preserve its original long slim torso, short predator skull, narrow pointed muzzle/dark nose, whiskers, small cream-rimmed ears, warm brown back, cream throat/belly stripe, all four dark clawed paws, and the SAME long thick brown tail and fur design. Original amber eyes now gently closed, no smile or new facial features. Same original soft painterly game-sprite rendering, subtly shaded edge, palette/light and three-quarter left camera. Body loses its front support: both fore elbows folded out/back with forearms lying along the floor to the unchanged small paws, chest/belly landed first. Pelvis lowers and hind hocks fold naturally alongside the body. Head rests last with cheek/chin on the paw floor, without stretching the neck. Long tail relaxes in a soft curve on the ground beside the rump at its full original length and thickness. This must read as limp weighted collapse, not the original prowling stance with only closed eyes. Keep torso/skull volumes and limb lengths, never flatten or squash the whole character or make a cute mole. Single coherent full painted anatomy, no cutout seams. Fixed original framing, scale and paw ground, no independent zoom or tightfit. Transparent background. No added ivory shovel claws, pink nose, sheet, ground, scene, shadow, text, blood or effects.", 
+      "references": [
+        "approved-reference.png"
+      ], 
+      "output": "Raw/final-drawing.png"
+    }, 
+    {
+      "role": "actual six complete timeline drawings", 
+      "prompt": "Use case: identity-preserve. Draw SIX chronological complete hand-painted game sprite frames in a3columns by2rows grid with equal square world canvases. Image1 is the exact approved original neutral and ONLY character/style authority. Image2 is the target full collapse pose. All six frames keep the same original camera, absolute character/part scale, palette, original fur pattern, thin soft shaded edges and same paw ground. No bold black ink outlines. Never zoom or tightly fit individual frames; keep original margins and position. Frame1 is very close to neutral, only beginning to lose support. Frame2 front elbows/knees buckle visibly and chest/pelvis start falling while head lags. Frame3 chest and belly land between the folded limbs, head still a small gap above ground. Frame4 hind hocks finish folding and the head follows downward. Frame5 chin/muzzle contacts ground last. Frame6 limp final rest with small appendage follow-through ended, fully closed eyes. Body mass must visibly sink with elbow flexion, not merely close eyes and nod on standing legs. Preserve skull, torso, limb and paw intrinsic volumes/proportions; no flattening, stretching or shrinking. Paint each whole connected anatomical pose, no cutout seams, gaps, morphs, alpha blends or ghosting. Transparent backgrounds and spacing. No scene, cast shadow, ground line, labels, grid lines, effects or blood. Subject is the EXACT lean brown weasel: long torso and thick brown tail at original length, cream throat/belly stripe, small cream-rimmed ears, short narrow predator skull, dark nose and whiskers, four small dark clawed feet, amber eyes becoming fully closed. Elbows fold to lie beside chest, pelvis lowers with hind hocks; lean torso remains its full rounded volume. Head/cheek rests last. Tail follows the rump and relaxes in a continuous soft low curve on the floor, never a shrinking stump or stiff rod. No added pink nose, giant claws, fluffy cat mane or different animal.", 
+      "references": [
+        "Guides/0.png", 
+        "Guides/1.png"
+      ], 
+      "output": "Raw/sequence-drawing.png"
+    }
+  ]
+}

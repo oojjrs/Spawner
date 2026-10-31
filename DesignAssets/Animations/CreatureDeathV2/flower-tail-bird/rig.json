@@ -1,0 +1,236 @@
+{
+  "name": "flower-tail-bird", 
+  "method": "Separate complete immutable body/head attachments with scale=1, local limb and ear meshes, anatomical FK/IK and explicit foreground occluders.", 
+  "canvas": [
+    512, 
+    512
+  ], 
+  "configuration": {
+    "bodyPivot": [
+      256, 
+      330
+    ], 
+    "bodyDegrees": -8, 
+    "bodyDrop": 34, 
+    "headPivot": [
+      242, 
+      254
+    ], 
+    "headDegrees": -75, 
+    "legs": {
+      "near-leg": [
+        [
+          247, 
+          345
+        ], 
+        [
+          251, 
+          377
+        ], 
+        [
+          247, 
+          403
+        ], 
+        -1
+      ], 
+      "far-leg": [
+        [
+          190, 
+          344
+        ], 
+        [
+          190, 
+          370
+        ], 
+        [
+          180, 
+          389
+        ], 
+        1
+      ]
+    }, 
+    "tailPivot": [
+      345, 
+      309
+    ], 
+    "tailDegrees": 22, 
+    "wingPivot": [
+      254, 
+      270
+    ], 
+    "wingDegrees": 14
+  }, 
+  "sources": {
+    "body-front.png": "b262bd68d44f93637b9949caf7ff7ce0b6b6ed839c3a2468681952b215ec4d95", 
+    "body.png": "6441b5f5198d1f62c8ded780f99ba20eb8243e102b6e68f69a40a108171df684", 
+    "far-leg-front.png": "adba4476a03794e1ef26fa67db23f478086821c748bae82141d39c5f0e185d7c", 
+    "far-leg.png": "855c5810e4d0a525ee24f36f3f990c853aed9fcb9282a622e5c89281a96292e7", 
+    "head-closed-front.png": "9e141adc03129a2d0e15adc70cd417b97451b0827c47dc8c93d1b08e533234b3", 
+    "head-closed.png": "a33d36268f50a9976d4e9c374009b1978ea3fa4a8a7549d8a6b13a471ba44040", 
+    "head-front.png": "9ee24f25339013f641378f1b17306925a39615137d5ffd5ec920188358ecdb55", 
+    "head.png": "9ee24f25339013f641378f1b17306925a39615137d5ffd5ec920188358ecdb55", 
+    "near-leg-front.png": "2e160282b42615affd1cb1acfe7d6f5777c0bb34bc083b9a0a448c6a59764f74", 
+    "near-leg.png": "7655edf499b43b8b37a59f28b6f6f1660d75ce3dad182727a1186f25342b5fd1", 
+    "tail-front.png": "34b934a146b26e2cb870a3df666f6ccb2f8cd49d3584d28acd15ffab458a3a31", 
+    "tail.png": "98baf02ddedacfa82456daa1328f79d461888da65e477854390132f7b36a386f", 
+    "wing-front.png": "33d707d45d931167560110d32af8e8d08e732c687f8386796f84093c85af5b36", 
+    "wing.png": "3f0cd2259fe01400601d840c1ef0b3ecb6b9d6ba4c2952bb97dbec790c1f76e1"
+  }, 
+  "activeParts": [
+    "body", 
+    "head", 
+    "head-closed", 
+    "near-leg", 
+    "far-leg", 
+    "wing", 
+    "tail"
+  ], 
+  "rigidParts": [
+    "body", 
+    "head", 
+    "wing", 
+    "tail"
+  ], 
+  "drawOrder": [
+    "near-leg", 
+    "far-leg", 
+    "tail", 
+    "body", 
+    "head", 
+    "wing"
+  ], 
+  "bones": [
+    {
+      "name": "root", 
+      "parent": null, 
+      "scale": [
+        1, 
+        1
+      ]
+    }, 
+    {
+      "name": "body", 
+      "parent": "root", 
+      "pivot": [
+        256, 
+        330
+      ], 
+      "scale": [
+        1, 
+        1
+      ]
+    }, 
+    {
+      "name": "head", 
+      "parent": "body", 
+      "pivot": [
+        242, 
+        254
+      ], 
+      "scale": [
+        1, 
+        1
+      ]
+    }, 
+    {
+      "name": "near-leg-upper", 
+      "parent": "body", 
+      "pivot": [
+        247, 
+        345
+      ], 
+      "end": [
+        251, 
+        377
+      ], 
+      "scale": [
+        1, 
+        1
+      ]
+    }, 
+    {
+      "name": "near-leg-lower", 
+      "parent": "near-leg-upper", 
+      "pivot": [
+        251, 
+        377
+      ], 
+      "end": [
+        247, 
+        403
+      ], 
+      "scale": [
+        1, 
+        1
+      ]
+    }, 
+    {
+      "name": "near-leg-target", 
+      "parent": "root", 
+      "pivot": [
+        247, 
+        403
+      ], 
+      "scale": [
+        1, 
+        1
+      ]
+    }, 
+    {
+      "name": "far-leg-upper", 
+      "parent": "body", 
+      "pivot": [
+        190, 
+        344
+      ], 
+      "end": [
+        190, 
+        370
+      ], 
+      "scale": [
+        1, 
+        1
+      ]
+    }, 
+    {
+      "name": "far-leg-lower", 
+      "parent": "far-leg-upper", 
+      "pivot": [
+        190, 
+        370
+      ], 
+      "end": [
+        180, 
+        389
+      ], 
+      "scale": [
+        1, 
+        1
+      ]
+    }, 
+    {
+      "name": "far-leg-target", 
+      "parent": "root", 
+      "pivot": [
+        180, 
+        389
+      ], 
+      "scale": [
+        1, 
+        1
+      ]
+    }
+  ], 
+  "timeline": "landmarks.json", 
+  "meshParts": [
+    "near-leg", 
+    "far-leg"
+  ], 
+  "renderer": "render.py", 
+  "dependencies": [
+    "Python 3", 
+    "numpy", 
+    "Pillow 12.3"
+  ], 
+  "spineCompatibilityVerified": false
+}

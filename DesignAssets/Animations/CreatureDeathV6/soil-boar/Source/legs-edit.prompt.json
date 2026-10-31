@@ -1,0 +1,10 @@
+{
+  "prompt": "Precise object edit, one actual SOURCE FRAME. Image1 is the exact edit target: KEEP its entire HEAD/SKULL/SNOUT/TUSKS/BARREL/MANE/MARKINGS/TAIL and canvas camera/placement completely UNCHANGED. Image2 is sole approved character-design authority. Image3 shows magenta edit regions covering ONLY the four legs and their hidden connections. Restore these regions with the SAME four original short stout boar limbs, but the FRONT KNEES now bend backward slightly more and front hooves turn/tuck UP about15px under chest. This is ONLY a small leg-joint edit. DO NOT lower, rotate, move, resize, flatten, fatten or re-pose the body or head at all. Hind legs soften very slightly, keep their hoof tips at the same relative height. Maintain original bone lengths, broad cloven charcoal hooves, correct two-joint anatomy, same original cream/brown coat/lighting and natural hidden fur behind the changed legs. Fully paint rounded connected attachment surfaces, no straight mask edges or missing skin. No extra legs/feet, no previous-leg ghost, no pasted angular joints. Match every unedited pixel/shape of image1. Complete one square full character with genuinely transparent outside the actual new silhouette, including empty portions of magenta regions. No magenta, floor/shadow/backdrop/diagram/labels/blur/effects. Do not create a new collapsed body pose; edit the LEGS ONLY.",
+  "referenced_image_paths": [
+    "Source/drawn-080.png",
+    "Source/reference.png",
+    "Source/Inputs/front-edit-guide.png"
+  ],
+  "transparent_background": true,
+  "output": "Source/legs-edit-source.png"
+}

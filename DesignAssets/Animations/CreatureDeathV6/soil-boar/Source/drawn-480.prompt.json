@@ -1,0 +1,9 @@
+{
+  "prompt": "Precise edit of reference1, ONE source frame160ms LATER after side impact, at480ms. Ref1 is the exact accepted320ms boar contact view, layout and anatomical size to preserve. Ref2 is ONLY original design authority, do not revert to its standing pose. Keep ref1's chest/flank resting on ground, exact SAME torso/head/skull/muzzle/tusk/mane silhouette, volume, markings, camera, size and location. DO NOT squash, press, shrink, fatten, roll or reposition the whole body/head. Only the loose jointed LEGS and small ears/tail continue moving with weight/inertia: the raised outstretched near rear hoof that is around(450,340) in512 coordinates swings DOWN toward(442,373), about25degrees around the real hip, knee/hock folds slightly; other raised rear foot follows with a short lag. Near forehoof relaxes a little lower under gravity, short joint lengths and broad original cloven hooves stay constant. Body bears weight on its flank/cheek now; no limb is actively propping it upright. Keep exactly four anatomical limbs with natural occlusion, fully painted attachment/hidden surfaces when a leg moves away. Ears slacken a few degrees and small tail lags downward, no change to their length. Eyes stay fully closed, same snout/two nostrils/two tusks, original short brown/cream boar with pale green leaf/moss/stones, source painterly light and palette. No long legs, no extra feet, no old limb ghost/outline, no neck opening. Preserve all stationary fur detail and the entire large empty upper canvas. One complete square source image, genuine transparent empty surroundings, no floor/shadow/effects/background/labels/diagram.",
+  "referenced_image_paths": [
+    "Source/drawn-320.png",
+    "Source/reference.png"
+  ],
+  "transparent_background": true,
+  "output": "Source/drawn-480.png"
+}

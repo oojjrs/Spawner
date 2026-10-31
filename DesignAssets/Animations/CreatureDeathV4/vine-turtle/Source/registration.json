@@ -1,0 +1,132 @@
+{
+  "appearanceAuthority": "Source/approved-concept.png",
+  "reference": "Source/reference.png",
+  "canvas": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "registrations": {
+    "head": {
+      "sourceBounds": [
+        79,
+        96,
+        633,
+        418
+      ],
+      "scale": 0.26895306859205775,
+      "translation": [
+        64.75270758122744,
+        276.87906137184115
+      ],
+      "targetBounds": [
+        86,
+        295,
+        235,
+        397
+      ]
+    },
+    "fore-near": {
+      "sourceBounds": [
+        719,
+        77,
+        1171,
+        466
+      ],
+      "scale": 0.22566371681415928,
+      "translation": [
+        53.74778761061947,
+        337.23230088495575
+      ],
+      "targetBounds": [
+        216,
+        348,
+        318,
+        449
+      ]
+    },
+    "fore-far": {
+      "sourceBounds": [
+        190,
+        493,
+        553,
+        809
+      ],
+      "scale": 0.23734177215189872,
+      "translation": [
+        9.827531645569621,
+        239.99050632911394
+      ],
+      "targetBounds": [
+        53,
+        357,
+        143,
+        432
+      ]
+    },
+    "hind-near": {
+      "sourceBounds": [
+        785,
+        495,
+        1108,
+        855
+      ],
+      "scale": 0.21944444444444444,
+      "translation": [
+        222.29583333333335,
+        243.375
+      ],
+      "targetBounds": [
+        390,
+        352,
+        470,
+        431
+      ]
+    },
+    "hind-far": {
+      "sourceBounds": [
+        175,
+        855,
+        494,
+        1185
+      ],
+      "scale": 0.2,
+      "translation": [
+        284.1,
+        179.0
+      ],
+      "targetBounds": [
+        315,
+        350,
+        387,
+        416
+      ]
+    },
+    "tail": {
+      "sourceBounds": [
+        785,
+        928,
+        1124,
+        1131
+      ],
+      "scale": 0.10914454277286136,
+      "translation": [
+        350.32153392330383,
+        230.13569321533924
+      ],
+      "targetBounds": [
+        436,
+        320,
+        473,
+        365
+      ]
+    }
+  },
+  "shellSource": "Source/EditableParts/shell.png",
+  "shellMotion": "rigid translation and physical ground contact",
+  "foreground": "Source/foreground-mask.png",
+  "partSource": "Source/soft-parts-drawing.png"
+}

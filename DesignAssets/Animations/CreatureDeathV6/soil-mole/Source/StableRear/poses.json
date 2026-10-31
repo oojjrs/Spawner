@@ -1,0 +1,57 @@
+{
+  "pivot": [
+    430,
+    334
+  ],
+  "frames": [
+    {
+      "degrees": 0,
+      "translation": [
+        0,
+        0
+      ]
+    },
+    {
+      "degrees": -0.5,
+      "translation": [
+        0,
+        0
+      ]
+    },
+    {
+      "degrees": -1.5,
+      "translation": [
+        0,
+        1
+      ]
+    },
+    {
+      "degrees": -3.1,
+      "translation": [
+        0,
+        2
+      ]
+    },
+    {
+      "degrees": -4.8,
+      "translation": [
+        0,
+        3
+      ]
+    },
+    {
+      "degrees": -5.8,
+      "translation": [
+        0,
+        4
+      ]
+    },
+    {
+      "degrees": -6,
+      "translation": [
+        0,
+        4
+      ]
+    }
+  ]
+}

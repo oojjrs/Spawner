@@ -1,0 +1,183 @@
+{
+  "canvas": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "groundY": 448,
+  "gravity": 900,
+  "dt": 0.004166666666666667,
+  "sourceHeadRoot": [
+    215.0,
+    350.0
+  ],
+  "sourceHeadMassCenter": [
+    140,
+    342
+  ],
+  "sourceNeck": [
+    [
+      310.0,
+      330.0
+    ],
+    [
+      265.0,
+      350.0
+    ],
+    [
+      215.0,
+      350.0
+    ]
+  ],
+  "sourceTail": [
+    [
+      438,
+      338
+    ],
+    [
+      456,
+      338
+    ],
+    [
+      470,
+      324
+    ]
+  ],
+  "sourceLegs": {
+    "fore-near": [
+      [
+        310,
+        310
+      ],
+      [
+        280,
+        328
+      ],
+      [
+        258,
+        354
+      ]
+    ],
+    "fore-far": [
+      [
+        225,
+        310
+      ],
+      [
+        160,
+        330
+      ],
+      [
+        105,
+        357
+      ]
+    ],
+    "hind-near": [
+      [
+        355,
+        310
+      ],
+      [
+        402,
+        330
+      ],
+      [
+        433,
+        354
+      ]
+    ],
+    "hind-far": [
+      [
+        330,
+        300
+      ],
+      [
+        342,
+        330
+      ],
+      [
+        342,
+        350
+      ]
+    ]
+  },
+  "sourceToes": {
+    "fore-near": [
+      255,
+      439
+    ],
+    "fore-far": [
+      74,
+      405
+    ],
+    "hind-near": [
+      439,
+      413
+    ],
+    "hind-far": [
+      332,
+      398
+    ]
+  },
+  "startsMs": {
+    "fore-far": 160,
+    "fore-near": 320,
+    "hind-far": 520,
+    "hind-near": 720
+  },
+  "shellDrop": 37.0,
+  "format": "spawner-component-retraction-v5",
+  "motion": "motion.py",
+  "renderer": "render.py",
+  "parts": {
+    "fore-far": "Parts/fore-far.png",
+    "fore-near": "Parts/fore-near.png",
+    "foreground": "Parts/foreground.png",
+    "head": "Parts/head.png",
+    "hind-far": "Parts/hind-far.png",
+    "hind-near": "Parts/hind-near.png",
+    "neck": "Parts/neck.png",
+    "shell": "Parts/shell.png",
+    "tail": "Parts/tail.png"
+  },
+  "retractorAnchors": {
+    "fore-far": [
+      230,
+      285
+    ],
+    "fore-near": [
+      325,
+      280
+    ],
+    "hind-far": [
+      335,
+      290
+    ],
+    "hind-near": [
+      355,
+      280
+    ]
+  },
+  "appearanceAuthority": "Source/concept.png",
+  "pawRetractorAnchors": {
+    "fore-near": [
+      365,
+      250
+    ],
+    "fore-far": [
+      260,
+      270
+    ],
+    "hind-near": [
+      300,
+      250
+    ],
+    "hind-far": [
+      300,
+      260
+    ]
+  }
+}

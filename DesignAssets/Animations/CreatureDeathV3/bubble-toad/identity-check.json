@@ -1,0 +1,35 @@
+{
+  "headImage": "Parts/head-closed.png",
+  "headSha256": "d7cddeccdc37229c47eccd6d2bf3e2d503f730228001cc35a790ddb5a80b4e48",
+  "headSize": [
+    172,
+    98
+  ],
+  "headScaleByBodyCel": [
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      1
+    ]
+  ],
+  "bodyCelSources": [
+    "Source/Bodies/00.png",
+    "Source/Bodies/01.png",
+    "Source/Bodies/02.png",
+    "Source/Bodies/03.png"
+  ],
+  "sourceArtworkScale": 0.6,
+  "worldContactY": 448,
+  "runtimePerFrameFit": false
+}

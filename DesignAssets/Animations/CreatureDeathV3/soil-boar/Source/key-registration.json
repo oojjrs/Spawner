@@ -1,0 +1,94 @@
+[
+  {
+    "key": 0,
+    "sourceCell": [
+      0,
+      0,
+      627,
+      627
+    ],
+    "worldRegistration": {
+      "scale": 0.6,
+      "translation": [
+        64,
+        90
+      ],
+      "contactY": 448
+    },
+    "visibleBounds": [
+      82,
+      196,
+      431,
+      450
+    ]
+  },
+  {
+    "key": 1,
+    "sourceCell": [
+      627,
+      0,
+      1254,
+      627
+    ],
+    "worldRegistration": {
+      "scale": 0.6,
+      "translation": [
+        70,
+        87
+      ],
+      "contactY": 448
+    },
+    "visibleBounds": [
+      83,
+      237,
+      430,
+      451
+    ]
+  },
+  {
+    "key": 2,
+    "sourceCell": [
+      0,
+      627,
+      627,
+      1254
+    ],
+    "worldRegistration": {
+      "scale": 0.6,
+      "translation": [
+        65,
+        153
+      ],
+      "contactY": 448
+    },
+    "visibleBounds": [
+      68,
+      249,
+      441,
+      451
+    ]
+  },
+  {
+    "key": 3,
+    "sourceCell": [
+      627,
+      627,
+      1254,
+      1254
+    ],
+    "worldRegistration": {
+      "scale": 0.6,
+      "translation": [
+        68,
+        147
+      ],
+      "contactY": 448
+    },
+    "visibleBounds": [
+      68,
+      278,
+      444,
+      451
+    ]
+  }
+]

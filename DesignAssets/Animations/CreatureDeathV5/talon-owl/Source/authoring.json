@@ -1,0 +1,22 @@
+{
+  "authority": "DesignAssets/CreatureConcepts/v3/talon-owl.png",
+  "sha256": "5b08666342850b28ac3895cd77be08a376ce921410f7fb6700f379d45e1badd9",
+  "original": "Source/original.png",
+  "registeredReference": "Source/reference.png",
+  "nativeVisibleParts": [
+    "Source/Visible/body.png",
+    "Source/Visible/head.png",
+    "Source/Visible/wing-far.png",
+    "Source/Visible/wing-near.png",
+    "Source/Visible/tail.png",
+    "Source/Visible/foot-far.png",
+    "Source/Visible/foot-near.png"
+  ],
+  "hiddenDrawing": "Source/generation/parts-atlas.png",
+  "actualPrompt": "Source/generation/parts.prompt.json",
+  "registration": "Source/authoring-registration.json",
+  "rig": "rig.json",
+  "prepare": "prepare.py",
+  "renderer": "render.py",
+  "runtimeExternalPathsRequired": false
+}

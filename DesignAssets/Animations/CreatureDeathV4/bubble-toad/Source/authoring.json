@@ -1,0 +1,54 @@
+{
+  "canvas": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "editablePartSources": {
+    "Parts/torso.png": "Source/EditableParts/torso.png",
+    "Parts/head-open.png": "Source/EditableParts/head-open.png",
+    "Parts/head-closed.png": "Source/EditableParts/head-closed.png",
+    "Parts/head-open-foreground.png": "Source/EditableParts/head-open-foreground.png",
+    "Parts/pouch-inflated.png": "Source/EditableParts/pouch-inflated.png",
+    "Parts/pouch-slack.png": "Source/EditableParts/pouch-slack.png",
+    "Parts/pouch-empty.png": "Source/EditableParts/pouch-empty.png",
+    "Parts/hind-far.png": "Source/EditableParts/hind-far.png",
+    "Parts/fore-upper.png": "Source/EditableParts/fore-upper.png",
+    "Parts/fore-lower.png": "Source/EditableParts/fore-lower.png",
+    "Parts/fore-paw.png": "Source/EditableParts/fore-paw.png",
+    "Parts/fore-far-upper.png": "Source/EditableParts/fore-far-upper.png",
+    "Parts/fore-far-lower.png": "Source/EditableParts/fore-far-lower.png",
+    "Parts/fore-far-paw.png": "Source/EditableParts/fore-far-paw.png",
+    "Parts/hind-thigh.png": "Source/EditableParts/hind-thigh.png",
+    "Parts/hind-shin.png": "Source/EditableParts/hind-shin.png",
+    "Parts/hind-paw.png": "Source/EditableParts/hind-paw.png"
+  },
+  "sourceDrawings": [
+    "Source/complete-parts-drawing.png",
+    "Source/complete-pouches-drawing.png",
+    "Source/separated-joints-drawing.png",
+    "Source/compact-empty-pouch-drawing.png"
+  ],
+  "prompts": [
+    "Source/generation-prompts.json",
+    "Source/pouch-generation.json",
+    "Source/joints-generation.json",
+    "Source/compact-sac-generation.json"
+  ],
+  "registration": [
+    "Source/reference-registration.json",
+    "Source/parts-registration.json",
+    "Source/joint-registration.json",
+    "Source/compact-sac-registration.json",
+    "Source/far-fore-registration.json",
+    "Source/paw-cleanup.json"
+  ],
+  "externalSourcePathsRequired": false,
+  "editing": "Registered full-canvas editable PNG parts are the canonical production sources. Preparation copies these exact part sources and rebuilds the three sac contour/UV surfaces. Original generated drawings and one-time anatomical registrations are retained for re-authoring.",
+  "rig": "rig.json",
+  "renderer": "render.py",
+  "prepare": "Source/prepare.py"
+}

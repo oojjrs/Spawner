@@ -1,0 +1,256 @@
+{
+  "name": "shadow-weasel",
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ],
+  "approvedImage": "DesignAssets/CreatureConcepts/v3/shadow-weasel.png",
+  "bodyMass": 1,
+  "headMass": 0.4,
+  "gravity": 1050,
+  "neckPivot": [
+    190,
+    356
+  ],
+  "bodyAngleLimit": -20,
+  "headAngleLimit": [
+    -85,
+    25
+  ],
+  "neutralHoldMs": 100,
+  "foreFailureMs": [
+    100,
+    200
+  ],
+  "hindFailureMs": [
+    180,
+    310
+  ],
+  "headFailureMs": [
+    160,
+    280
+  ],
+  "groundY": 434,
+  "legs": {
+    "fore-near": [
+      [
+        198,
+        350
+      ],
+      [
+        213,
+        383
+      ],
+      [
+        204,
+        413.76949152542375
+      ]
+    ],
+    "fore-far": [
+      [
+        185,
+        349
+      ],
+      [
+        185,
+        379
+      ],
+      [
+        168,
+        399.29824561403507
+      ]
+    ],
+    "hind-near": [
+      [
+        344,
+        334
+      ],
+      [
+        368,
+        380
+      ],
+      [
+        370,
+        405.2191011235955
+      ]
+    ],
+    "hind-far": [
+      [
+        300,
+        350
+      ],
+      [
+        311,
+        381
+      ],
+      [
+        302,
+        400.15
+      ]
+    ]
+  },
+  "accessories": {
+    "near-ear": [
+      153,
+      322
+    ],
+    "far-ear": [
+      83,
+      331
+    ]
+  },
+  "extraParts": {
+    "tail": {
+      "pivot": [
+        361,
+        342
+      ],
+      "parent": "body",
+      "mass": 0.15
+    }
+  },
+  "durationActiveMs": 2400,
+  "sampleMs": 40,
+  "finalHoldMs": 1000,
+  "spineCompatibilityVerified": false,
+  "bodyMassCenter": [
+    280,
+    325
+  ],
+  "headMassCenter": [
+    140,
+    359
+  ],
+  "legBends": {
+    "fore-near": 1,
+    "fore-far": 1
+  },
+  "softChains": {
+    "tail": {
+      "joints": [
+        [
+          361.0,
+          332.0
+        ],
+        [
+          368.6626102817692,
+          334.2987830845308
+        ],
+        [
+          401.0,
+          344.0
+        ],
+        [
+          439.0,
+          366.0
+        ],
+        [
+          449.0,
+          391.0
+        ],
+        [
+          432.0,
+          413.0
+        ],
+        [
+          376,
+          425
+        ]
+      ],
+      "radii": [
+        0.0,
+        24.37191918568131,
+        26.74939266193489,
+        29.687144318281838,
+        29.687144318281838,
+        28.148193154700525,
+        28.148193154700525
+      ],
+      "locked": 0,
+      "bendElasticity": 0.0004
+    },
+    "near-ear": {
+      "joints": [
+        [
+          153.0,
+          322.0
+        ],
+        [
+          155.10493924633687,
+          314.28188943009815
+        ],
+        [
+          156.0,
+          311.0
+        ],
+        [
+          164.0,
+          300.0
+        ]
+      ],
+      "radii": [
+        0.0,
+        15.364271960444276,
+        15.379695186221737,
+        15.379695186221737
+      ],
+      "locked": 1,
+      "bendElasticity": 0.0006
+    },
+    "far-ear": {
+      "joints": [
+        [
+          83.0,
+          331.0
+        ],
+        [
+          81.68480810155714,
+          323.10884860934283
+        ],
+        [
+          81.0,
+          319.0
+        ],
+        [
+          79.0,
+          308.0
+        ]
+      ],
+      "radii": [
+        0.0,
+        12.36215190675016,
+        13.131115991531859,
+        13.131115991531859
+      ],
+      "locked": 1,
+      "bendElasticity": 0.0006
+    }
+  },
+  "groundSlope": -0.06,
+  "groundX": 204,
+  "jointParts": {
+    "fore-near": [
+      "fore-near-upper",
+      "fore-near-lower",
+      "fore-near-foot"
+    ],
+    "fore-far": [
+      "fore-far-upper",
+      "fore-far-lower",
+      "fore-far-foot"
+    ],
+    "hind-near": [
+      "hind-near-upper",
+      "hind-near-lower",
+      "hind-near-foot"
+    ],
+    "hind-far": [
+      "hind-far-upper",
+      "hind-far-lower",
+      "hind-far-foot"
+    ]
+  },
+  "viewScale": 0.88,
+  "limbSurfaceContact": true
+}

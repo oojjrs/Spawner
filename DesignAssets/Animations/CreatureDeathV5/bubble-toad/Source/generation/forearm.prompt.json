@@ -1,0 +1,8 @@
+{
+  "prompt": "Edit the isolated nearer front leg in the second reference into a complete 2D animation attachment for the exact approved toad in the first reference. Preserve its original short rounded mint-green forearm, the three little pale toe pads, foot pose, camera, painterly highlights and dark thin outline. Complete only the proximal upper arm and shoulder tissue that was hidden by the throat pouch/body: replace the sharp triangular cut at the top with a fully painted smooth rounded shoulder extending a little upward and to the right into the toad's chest. Do not include the throat sac, head, body, other legs, stray body stripes, a socket hole or any triangular clipping. Keep the known visible lower arm and toes faithful to the reference, with the same size and position in the square canvas (the visible leg is around x226..325, y335..449 on the 512px reference). Draw the complete foreleg only on a truly transparent background. No shadow, backdrop, text, labels, grid or other objects.",
+  "referenced_image_paths": [
+    "H:\\Spawner\\DesignAssets\\Animations\\CreatureDeathV5\\bubble-toad\\Source\\reference.png",
+    "H:\\Spawner\\DesignAssets\\Animations\\CreatureDeathV5\\bubble-toad\\Source\\generation\\forearm-input.png"
+  ],
+  "transparent_background": true
+}

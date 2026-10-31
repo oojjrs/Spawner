@@ -1,0 +1,278 @@
+[
+  {
+    "drawing": 0, 
+    "beforeFloor": [
+      443, 
+      443
+    ], 
+    "afterFloor": [
+      443, 
+      443
+    ], 
+    "tipFloors": [
+      430, 
+      398
+    ], 
+    "contact": [
+      false, 
+      false
+    ], 
+    "sourceTipOffsets": [
+      0, 
+      0
+    ]
+  }, 
+  {
+    "drawing": 1, 
+    "beforeFloor": [
+      443, 
+      443
+    ], 
+    "afterFloor": [
+      443, 
+      443
+    ], 
+    "tipFloors": [
+      430, 
+      398
+    ], 
+    "contact": [
+      false, 
+      false
+    ], 
+    "sourceTipOffsets": [
+      0, 
+      0
+    ]
+  }, 
+  {
+    "drawing": 2, 
+    "beforeFloor": [
+      443, 
+      443
+    ], 
+    "afterFloor": [
+      443, 
+      443
+    ], 
+    "tipFloors": [
+      430, 
+      398
+    ], 
+    "contact": [
+      false, 
+      false
+    ], 
+    "sourceTipOffsets": [
+      0, 
+      0
+    ]
+  }, 
+  {
+    "drawing": 3, 
+    "beforeFloor": [
+      443, 
+      443
+    ], 
+    "afterFloor": [
+      443, 
+      443
+    ], 
+    "tipFloors": [
+      430, 
+      398
+    ], 
+    "contact": [
+      false, 
+      false
+    ], 
+    "sourceTipOffsets": [
+      0, 
+      0
+    ]
+  }, 
+  {
+    "drawing": 4, 
+    "beforeFloor": [
+      443, 
+      443
+    ], 
+    "afterFloor": [
+      443, 
+      443
+    ], 
+    "tipFloors": [
+      430, 
+      398
+    ], 
+    "contact": [
+      false, 
+      false
+    ], 
+    "sourceTipOffsets": [
+      0, 
+      0
+    ]
+  }, 
+  {
+    "drawing": 5, 
+    "beforeFloor": [
+      443, 
+      443
+    ], 
+    "afterFloor": [
+      443, 
+      443
+    ], 
+    "tipFloors": [
+      430, 
+      399
+    ], 
+    "contact": [
+      false, 
+      false
+    ], 
+    "sourceTipOffsets": [
+      0, 
+      0
+    ]
+  }, 
+  {
+    "drawing": 6, 
+    "beforeFloor": [
+      443, 
+      443
+    ], 
+    "afterFloor": [
+      443, 
+      443
+    ], 
+    "tipFloors": [
+      430, 
+      416
+    ], 
+    "contact": [
+      false, 
+      false
+    ], 
+    "sourceTipOffsets": [
+      0, 
+      0
+    ]
+  }, 
+  {
+    "drawing": 7, 
+    "beforeFloor": [
+      443, 
+      443
+    ], 
+    "afterFloor": [
+      443, 
+      443
+    ], 
+    "tipFloors": [
+      430, 
+      428
+    ], 
+    "contact": [
+      false, 
+      false
+    ], 
+    "sourceTipOffsets": [
+      0, 
+      0
+    ]
+  }, 
+  {
+    "drawing": 8, 
+    "beforeFloor": [
+      443, 
+      443
+    ], 
+    "afterFloor": [
+      443, 
+      443
+    ], 
+    "tipFloors": [
+      434, 
+      442
+    ], 
+    "contact": [
+      false, 
+      false
+    ], 
+    "sourceTipOffsets": [
+      0, 
+      0
+    ]
+  }, 
+  {
+    "drawing": 9, 
+    "beforeFloor": [
+      443, 
+      449
+    ], 
+    "afterFloor": [
+      443, 
+      447
+    ], 
+    "tipFloors": [
+      437, 
+      447
+    ], 
+    "contact": [
+      false, 
+      true
+    ], 
+    "sourceTipOffsets": [
+      0.0, 
+      2.0526082155867833
+    ]
+  }, 
+  {
+    "drawing": 10, 
+    "beforeFloor": [
+      449, 
+      457
+    ], 
+    "afterFloor": [
+      447, 
+      447
+    ], 
+    "tipFloors": [
+      447, 
+      447
+    ], 
+    "contact": [
+      true, 
+      true
+    ], 
+    "sourceTipOffsets": [
+      2.0526082155867833, 
+      10.263041077933917
+    ]
+  }, 
+  {
+    "drawing": 11, 
+    "beforeFloor": [
+      463, 
+      457
+    ], 
+    "afterFloor": [
+      447, 
+      447
+    ], 
+    "tipFloors": [
+      447, 
+      447
+    ], 
+    "contact": [
+      true, 
+      true
+    ], 
+    "sourceTipOffsets": [
+      16.420865724694266, 
+      10.263041077933917
+    ]
+  }
+]

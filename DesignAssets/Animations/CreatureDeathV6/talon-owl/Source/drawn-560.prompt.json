@@ -1,0 +1,11 @@
+{
+  "tool": "image_gen",
+  "prompt": "Use case: stylized-concept. Draw ONE complete missing560ms animation pose on true transparent background, identical fixed square canvas and scale. Input1 is the sole approved original small owl. Input2 is the preceding splayed-wing chest/wing impact frame400ms; input3 is the eventual completely collapsed folded-wing corpse. Draw a genuine halfway follow-through between inputs2/3. The compact chest has settled low after impact; the same large head bows/rolls left with its weight, cheek resting lower on the far wing feathers, eyes fully closed. The short taloned feet relax and fold beneath/beside the breast. Because the feather ends/wrists have struck the ground, the near wing folds at shoulder/elbow/wrist and stacks its original long feathers over the right flank, in the same changing3D view/overlap as input3; it is only partway folded, not already final. Far wing folds back beneath the head/body instead of shrinking: show its original long feathers foreshortened and overlapping, with plausible elbow/wrist attachment. Keep intrinsic skull/cream facial disk/beak/feather lengths/body volume and two short feet the same as original, at common camera scale; cream disk108 and outer skull125 canvas units. Keep whole actor inside512 and lowest feather/talon contacts at448 in512 coordinates, natural curved individual feather ends, no horizontal cut. Preserve original colors/white brows/speckled brown crown/short ear tufts. No zoom/fit/recenter, new animal, tall body, extra limbs, holes, clipped joints, doubled outline, detached pixels, neon alpha trash, floor/shadow/text. Clean continuous painterly sprite artwork.",
+  "output": "Source/drawn-560.png",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "Source/reference.png",
+    "Source/drawn-400.png",
+    "Source/landing-key.png"
+  ]
+}

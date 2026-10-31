@@ -1,0 +1,13 @@
+{
+  "prompt": "Edit the attached transparent partial-shell cutout (second image) into ONE complete rigid empty turtle shell, using the first image as the exact character/shape/style authority. Preserve the exact orange/gray-green stone scutes, four big leaf shapes, vines, hard front lip, and all already visible cream segmented plastron pieces at exactly their original scale and placements. Only paint the hidden hard surfaces where the head/legs/tail used to occlude them. No turtle flesh, eyes, toes or tail. Do NOT add a second outline/plastron over the existing cream pieces. The existing isolated cream arc near lower left is a visible part of the same solid lower plastron and must join smoothly into the completed underside at that precise height/curve. Preserve compact original body volume: shell underside stays near original cream arc y400\u2013417 in the 512 input, not an extra tall base. Make the natural small head entrance behind its original gray lip at the left, and small dark leg sockets behind their original overhanging scutes, surrounded by solid cream/tan plastron. No huge belly arch or hollow plate. Output just this single completed shell and its leaf/vine decorations on transparent background, identical camera, fixed position/scale/layout as the supplied cutout. No shadow, background, labels, anatomy, extra props.",
+  "inputs": [
+    "../registered-reference.png",
+    "../rigid-visible.png"
+  ],
+  "output": "shell-corrected.png",
+  "transparentBackground": true,
+  "inputSnapshots": [
+    "../registered-reference.png",
+    "shell-corrected.input-rigid.png"
+  ]
+}

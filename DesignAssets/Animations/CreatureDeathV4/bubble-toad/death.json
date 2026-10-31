@@ -1,0 +1,107 @@
+{
+  "name": "bubble-toad",
+  "action": "death",
+  "sourceImage": "DesignAssets/CreatureConcepts/v3/bubble-toad.png",
+  "image": "DesignAssets/Animations/CreatureDeathV4/bubble-toad/death.webp",
+  "frameSize": 512,
+  "columns": 8,
+  "frameCount": 46,
+  "pivotX": 256,
+  "pivotY": 448,
+  "durationsMs": [
+    33,
+    34,
+    33,
+    33,
+    34,
+    33,
+    33,
+    34,
+    33,
+    33,
+    34,
+    33,
+    33,
+    34,
+    33,
+    33,
+    34,
+    33,
+    33,
+    34,
+    33,
+    33,
+    34,
+    33,
+    33,
+    34,
+    33,
+    33,
+    34,
+    33,
+    33,
+    34,
+    33,
+    33,
+    34,
+    33,
+    33,
+    34,
+    33,
+    33,
+    34,
+    33,
+    33,
+    34,
+    33,
+    900
+  ],
+  "durationMs": 2400,
+  "loop": false,
+  "preview": "DesignAssets/Animations/CreatureDeathV4/bubble-toad/preview.webp",
+  "thumbnail": "DesignAssets/Animations/CreatureDeathV4/bubble-toad/thumbnail.webp",
+  "previewLoop": 0,
+  "rig": "DesignAssets/Animations/CreatureDeathV4/bubble-toad/rig.json",
+  "renderer": "DesignAssets/Animations/CreatureDeathV4/bubble-toad/render.py",
+  "sourceAuthoring": "DesignAssets/Animations/CreatureDeathV4/bubble-toad/Source/authoring.json",
+  "prepare": "DesignAssets/Animations/CreatureDeathV4/bubble-toad/Source/prepare.py",
+  "contact": "DesignAssets/Animations/CreatureDeathV4/bubble-toad/contact.png",
+  "sourcePlacement": {
+    "canvas": [
+      512,
+      512
+    ],
+    "groundY": 448,
+    "runtimeScale": [
+      1,
+      1
+    ],
+    "referenceNormalization": {
+      "source": "Source/approved-concept.png",
+      "bounds": [
+        51,
+        56,
+        315,
+        242
+      ],
+      "scale": 1.6666666666666667,
+      "size": [
+        440,
+        310
+      ],
+      "translation": [
+        36,
+        138
+      ],
+      "canvas": [
+        512,
+        512
+      ],
+      "pivot": [
+        256,
+        448
+      ]
+    }
+  },
+  "construction": "Registered complete rigid parts, one far hind skin mesh, a continuously folded throat-sac surface, integrated support loss and surface contact constraints."
+}

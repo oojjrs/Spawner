@@ -1,0 +1,24 @@
+{
+  "source": "generation/forearm-root-complete.png",
+  "approvedArm": "generation/forearm-root-input.png",
+  "matrix": [
+    [
+      0.4095185765384845,
+      0.005423998281778774,
+      -6.932962320561939
+    ],
+    [
+      -0.005423998281778774,
+      0.4095185765384845,
+      2.090586958191064
+    ]
+  ],
+  "featureMatches": 9,
+  "preservedAlpha": true,
+  "preservedBelowY": 383,
+  "rootBlendY": [
+    378,
+    383
+  ],
+  "generatedColorGutter": true
+}

@@ -1,0 +1,128 @@
+[
+  {
+    "name": "body", 
+    "image": "Parts/body.png", 
+    "foreground": "Parts/body-front.png", 
+    "source": "Source/body-completed-source.png", 
+    "sourceBounds": [
+      112, 
+      222, 
+      376, 
+      383
+    ], 
+    "kind": "rigid", 
+    "completedHiddenSurfaces": true, 
+    "active": true, 
+    "registeredAlphaBounds": [
+      112, 
+      222, 
+      376, 
+      383
+    ]
+  }, 
+  {
+    "name": "head", 
+    "image": "Parts/head.png", 
+    "foreground": "Parts/head-front.png", 
+    "source": "Source/head-completed-source.png", 
+    "sourceBounds": [
+      72, 
+      69, 
+      293, 
+      284
+    ], 
+    "kind": "rigid", 
+    "completedHiddenSurfaces": true, 
+    "active": true, 
+    "registeredAlphaBounds": [
+      82, 
+      88, 
+      297, 
+      279
+    ]
+  }, 
+  {
+    "name": "wing", 
+    "image": "Parts/wing.png", 
+    "foreground": "Parts/wing-front.png", 
+    "source": "Source/wing-completed-source.png", 
+    "sourceBounds": [
+      208, 
+      229, 
+      390, 
+      372
+    ], 
+    "kind": "rigid", 
+    "completedHiddenSurfaces": true, 
+    "active": true, 
+    "registeredAlphaBounds": [
+      208, 
+      229, 
+      389, 
+      371
+    ]
+  }, 
+  {
+    "name": "tail", 
+    "image": "Parts/tail.png", 
+    "foreground": "Parts/tail-front.png", 
+    "source": "Source/tail-completed-source.png", 
+    "sourceBounds": [
+      319, 
+      141, 
+      463, 
+      356
+    ], 
+    "kind": "rigid", 
+    "completedHiddenSurfaces": true, 
+    "active": true, 
+    "registeredAlphaBounds": [
+      319, 
+      165, 
+      448, 
+      353
+    ]
+  }, 
+  {
+    "name": "near-leg", 
+    "image": "Parts/near-leg.png", 
+    "foreground": "Parts/near-leg-front.png", 
+    "source": "Source/near-leg-completed-source.png", 
+    "sourceBounds": [
+      220, 
+      344, 
+      304, 
+      432
+    ], 
+    "kind": "articulated", 
+    "completedHiddenSurfaces": true, 
+    "active": true, 
+    "registeredAlphaBounds": [
+      213, 
+      329, 
+      290, 
+      422
+    ]
+  }, 
+  {
+    "name": "far-leg", 
+    "image": "Parts/far-leg.png", 
+    "foreground": "Parts/far-leg-front.png", 
+    "source": "Source/far-leg-completed-source.png", 
+    "sourceBounds": [
+      142, 
+      340, 
+      220, 
+      419
+    ], 
+    "kind": "articulated", 
+    "completedHiddenSurfaces": true, 
+    "active": true, 
+    "registeredAlphaBounds": [
+      145, 
+      329, 
+      222, 
+      407
+    ]
+  }
+]

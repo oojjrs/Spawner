@@ -1,0 +1,8 @@
+{
+  "prompt": "Create a precise semantic extraction of ONLY THE ALREADY VISIBLE SOFT TURTLE SKIN from this exact six-panel sprite sheet. Keep exact same 1536x1024 canvas, six panel placements (3 columns x2 rows), same pose coordinates, same body/foot/head sizes, same existing visible contours and all the cream toenails. Each panel retains only its original actually visible head/neck, soft foot/leg skin and cream rounded toenails, and tail where actually visible. EVERYTHING ELSE MUST BE FULLY TRANSPARENT: all orange/gray/green scutes, leaves, vines, cream segmented belly PLASTRON, gray hard NECK RIM/collar surrounding the head, and background. The cream segmented broad plate below the head and between the legs is rigid shell and must be REMOVED; the three rounded toe tips on an actual foot must be KEPT. Do not paint or restore any hidden anatomy. In later panels where a hind foot or forefoot has disappeared behind the shell, leave it absent; don't invent full feet. Do not draw a new shell or change any pose. The small olive visible head cap in the last panels is soft skin: keep only that skin; remove its gray hard collar. Black outlines belonging to visible skin remain. Black lines belonging to shell/rim are removed. This is exact visible-area cutout extraction for compositing back over the same original shell. No new limbs, no enlarging, no room for shell color on the resulting skin cutouts. Transparent background.",
+  "inputs": [
+    "corrected-keys.png"
+  ],
+  "output": "visible-soft.png",
+  "transparentBackground": true
+}

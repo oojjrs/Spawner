@@ -1,0 +1,12 @@
+{
+  "tool": "image_gen",
+  "prompt": "Use case: stylized-concept. Draw ONE complete animation key of the EXACT original tiny owl on true transparency, same fixed square canvas/camera. Input1 fixes character identity/proportions. Input2 is its preceding first-talon-contact frame. Input3 is the later fully collapsed folded-wing pose and fixes the eventual overlap/view, but DO NOT draw that final pose yet. Input4 is ONLY a geometric400ms impact guide. In THIS frame the legs have yielded at knees/ankles and the cream sternum/belly reaches ground448 for the first time; the torso tips forward into a low horizontal fall, not a standing/crouching/perched owl. The large original skull is still the same size (outer skull/tufts125, cream disk108 canvas units), center about224,365, beak pointing down and eyelids closed; its weight continues after body contact. Body about282,404, belly bottom448, two short taloned feet folding naturally beside/under its chest without length change. Wings lose support and spread beside the body, their wrists/primary feather ends slap down near448 while elbow joints begin to fold: far wing behind/left with tip about60,425, near wing beside right flank, tipabout470,444. Preserve the exact original individual feather lengths/material, allow correct3D foreshortening/overlap, draw complete continuous shoulder/chest surfaces. The wings are still more splayed than input3; do not skip the impact. Match the original broad cream face/short charcoal beak/short ear tufts/white brows/brown speckled crown/gray-brown feathers and cream tips. Fixed proportions and single scale; no camera zoom, recentering or fit-to-bounds, no character redesign, extra limbs, holes, cuts, double outlines, colored alpha trash. Painterly game sprite, no floor, cast shadow, guide or text.",
+  "output": "Source/drawn-400.png",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "Source/reference.png",
+    "Source/drawn-240.png",
+    "Source/landing-key.png",
+    "Source/Inputs/impact-400-guide.png"
+  ]
+}

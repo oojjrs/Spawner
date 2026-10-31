@@ -1,0 +1,24 @@
+{
+  "activeParts": [
+    "body.png", 
+    "head.png", 
+    "head-closed.png", 
+    "far-leg.png", 
+    "near-leg.png", 
+    "wing.png", 
+    "tail.png"
+  ], 
+  "canvas": [
+    512, 
+    512
+  ], 
+  "pivot": [
+    256, 
+    448
+  ], 
+  "source": "Bound", 
+  "target": "../Parts", 
+  "reference": "DesignAssets/CreatureConcepts/v3/flower-tail-bird.png", 
+  "renderer": "../render.py", 
+  "prepare": "../prepare.py"
+}

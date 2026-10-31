@@ -1,0 +1,17 @@
+{
+  "neckTransitionX": [190, 290],
+  "verticalFadeY": [295, 349],
+  "meshStep": 16,
+  "inverseIterations": 8,
+  "runtime": {"frameSize": 256, "reference": "DesignAssets/Animations/CreatureIdleStudies/V2/shadow-weasel/idle.webp", "referenceFrameSize": 319, "referencePivot": [160.123046875, 263.897734375], "sourceToReferenceScale": 0.6546997661864947, "sourceToReferenceTranslation": [-7.93968300190473, 39.35105665387698], "calibrationMatches": 62, "calibrationInliers": 54},
+  "frames": [
+    {"file": "000.png", "noseSource": [77, 296], "noseTarget": [77, 296], "hipSource": [285, 216], "hipTarget": [285, 216]},
+    {"file": "001.png", "noseSource": [76, 288], "noseTarget": [76, 299], "hipSource": [284, 209], "hipTarget": [284, 221]},
+    {"file": "002.png", "noseSource": [66, 297], "noseTarget": [73, 306], "hipSource": [276, 227], "hipTarget": [282, 235]},
+    {"file": "003.png", "noseSource": [60, 316], "noseTarget": [69, 317], "hipSource": [275, 252], "hipTarget": [280, 246]},
+    {"file": "004.png", "noseSource": [87, 324], "noseTarget": [67, 323], "hipSource": [291, 249], "hipTarget": [279, 251]},
+    {"file": "005.png", "noseSource": [78, 324], "noseTarget": [66, 325], "hipSource": [281, 255], "hipTarget": [279, 253]},
+    {"file": "006.png", "noseSource": [66, 325], "noseTarget": [66, 325], "hipSource": [279, 253], "hipTarget": [279, 253]},
+    {"file": "007.png", "noseSource": [66, 325], "noseTarget": [66, 325], "hipSource": [279, 253], "hipTarget": [279, 253]}
+  ]
+}

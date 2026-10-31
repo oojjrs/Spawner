@@ -1,0 +1,37 @@
+{
+  "approval": {
+    "userMessage": "만들자",
+    "date": "2026-10-31",
+    "keyframes": "keyframes-v2.json"
+  },
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ],
+  "fps": 30,
+  "construction": "local-weighted-bone-mesh",
+  "authoring": {
+    "prepare": "Authoring/prepare.py",
+    "render": "Authoring/render.py",
+    "export": "Authoring/export.py"
+  },
+  "characters": [
+    {
+      "name": "vine-turtle",
+      "metadata": "vine-turtle/death.json",
+      "rig": "vine-turtle/rig.json",
+      "gif": "vine-turtle/death.gif",
+      "sheet": "vine-turtle/death.webp",
+      "preview": "vine-turtle/preview.webp"
+    },
+    {
+      "name": "walking-forest",
+      "metadata": "walking-forest/death.json",
+      "rig": "walking-forest/rig.json",
+      "gif": "walking-forest/death.gif",
+      "sheet": "walking-forest/death.webp",
+      "preview": "walking-forest/preview.webp"
+    }
+  ]
+}

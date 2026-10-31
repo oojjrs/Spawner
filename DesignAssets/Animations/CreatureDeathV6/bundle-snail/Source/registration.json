@@ -1,0 +1,22 @@
+{
+  "authority": "DesignAssets/CreatureConcepts/v3/bundle-snail.png",
+  "canvas": [
+    512,
+    512
+  ],
+  "scale": 1.3800539083557952,
+  "translation": [
+    0,
+    84
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "sourceOpaqueBounds": [
+    56,
+    61,
+    319,
+    264
+  ]
+}

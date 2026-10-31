@@ -1,0 +1,88 @@
+{
+  "name": "dew-rabbit",
+  "version": 9,
+  "configuration": {
+    "bodyPivot": [
+      350,
+      420
+    ],
+    "headPivot": [
+      273.154639,
+      316.14433
+    ],
+    "ears": {
+      "far-ear": [
+        [
+          228.28865979381442,
+          209.2577319587629
+        ],
+        [
+          199.2577319587629,
+          182.86597938144328
+        ],
+        [
+          164.94845360824743,
+          157.79381443298968
+        ],
+        [
+          137.23711340206185,
+          135.36082474226805
+        ]
+      ],
+      "near-ear": [
+        [
+          271.83505154639175,
+          225.09278350515464
+        ],
+        [
+          292.9484536082474,
+          184.18556701030928
+        ],
+        [
+          315.3814432989691,
+          144.5979381443299
+        ],
+        [
+          339.1340206185567,
+          112.9278350515464
+        ]
+      ]
+    },
+    "rootOffset": [
+      0,
+      4
+    ],
+    "neckDisplacement": [
+      -8,
+      32
+    ]
+  },
+  "source": "Parts",
+  "canvas": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "spineCompatibilityVerified": false,
+  "reference": "DesignAssets/CreatureConcepts/v3/dew-rabbit.png",
+  "hierarchy": {
+    "body": "root",
+    "neck-surface": "body",
+    "head": "root",
+    "far-ear-0": "head",
+    "far-ear-1": "far-ear-0",
+    "far-ear-2": "far-ear-1",
+    "near-ear-0": "head",
+    "near-ear-1": "near-ear-0",
+    "near-ear-2": "near-ear-1"
+  },
+  "layers": [
+    "far-ear",
+    "continuous-body",
+    "head",
+    "near-ear"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "canvas": [
+    512,
+    512
+  ],
+  "completeShellSource": "Parts/shell-hidden-complete.png",
+  "originalCompletedDrawing": "Source/shell-hidden-drawing.png",
+  "foregroundSource": "Parts/shell-fixed.png",
+  "foregroundMask": "Source/shell-foreground-occlusion-mask.png",
+  "foregroundBuilder": "Source/build-shell-foreground.py",
+  "rig": "rig.json",
+  "renderer": "render.py",
+  "sourceRegistration": {
+    "scale": [
+      1,
+      1
+    ],
+    "translation": [
+      0,
+      0
+    ]
+  },
+  "rootSettle": {
+    "translationY": 37,
+    "groundY": 449,
+    "fromMs": 850,
+    "toMs": 1350
+  },
+  "originalPixelIdentityRequired": false,
+  "runtimeSourceIdentity": "One complete painted shell and matching foreground mask reused through all frames; unit scale, no deformation."
+}

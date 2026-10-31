@@ -1,0 +1,8 @@
+{
+  "prompt": "Exact masked correction. Image 1 is the unmarked two-bulb source and image 2 marks ALL SIX wrongly attached root feet in red, with blue guides for the continuous lower body curve. REMOVE ALL THREE FEET from EACH bulb completely. Replace only their attachment areas with the natural smooth CLOSED rounded olive belly, then genuine transparent background below the belly. Do not leave root nubs, toe lobes, broken remnants, cut-outs, wedges or flat horizontal/polygonal clipping. The blue guide is only a general curve: paint a smooth organic continuous underside, not the literal straight guide segments. Preserve everything else exactly: same two bulb positions, widths, upper dome, olive facets, highlights, outlines, face spacing, open eyes on the left and closed eyelids on the right. Do not redesign or resize the body. These are truly FOOTLESS rigid body source parts because all root feet are separate articulated parts. No feet of any kind, no leaves, new parts, shadows, glow or background; transparent outside both complete bodies.",
+  "referenced_image_paths": [
+    "H:/Spawner/DesignAssets/Animations/CreatureDeathV4/snare-vine/Source/bulb-drawing-with-attached-feet.png",
+    "H:/Spawner/DesignAssets/Animations/CreatureDeathV4/snare-vine/Source/bulb-foot-removal-guide.png"
+  ],
+  "transparent_background": true
+}

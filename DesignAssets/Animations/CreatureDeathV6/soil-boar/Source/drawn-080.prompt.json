@@ -1,0 +1,9 @@
+{
+  "prompt": "Actual animation SOURCE FRAME at80ms, precise edit of reference1. Keep the SAME ORIGINAL BOAR from reference1 with its EXACT skull/snout/tusks/hooves, compact barrel proportions, original mane tuft lengths, small tail, leaf/moss spots, camera magnification and placement. Reference2 is a technical volume-and-bone blocking guide ONLY: match its 512-canvas positions and fixed anatomical lengths, never its crude circle/rectangle style. This is only the first tiny support failure, NOT a big dramatic new pose. Body center remains(335,311), just3px lower; rigid head moves3px down and1degree. Front knee begins buckling at the guide's real joint while hoof/pivot still at original floor position; rear hooves remain supporting. Eyes just closing, slight ear relaxation. Preserve the original body's short broad volume; DO NOT enlarge/fatten/stretch the barrel, grow mane, enlarge skull, lengthen snout or tail, shrink tusks/hooves, or turn it into another boar. Keep mane top about183px and ground448px in the512square canvas, same large EMPTY TOP THIRD as both references. No crop-to-subject/zoom. Original painterly warm fur lighting and exact original character design, fully connected natural joints and original near/far overlap. One complete full character source on the same square canvas, GENUINE TRANSPARENT surroundings, no vignette, floor line, shadow, labels, anatomical symbols, effects, ghosting, borders or extra objects.",
+  "referenced_image_paths": [
+    "Source/reference.png",
+    "Source/Inputs/anatomical-80.png"
+  ],
+  "transparent_background": true,
+  "output": "Source/drawn-080.png"
+}

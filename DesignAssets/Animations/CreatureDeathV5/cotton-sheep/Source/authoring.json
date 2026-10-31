@@ -1,0 +1,420 @@
+{
+  "authority": "DesignAssets/CreatureConcepts/v3/cotton-sheep.png",
+  "registration": "registration.json",
+  "visibleOwnershipPolygons": {
+    "near-ear": [
+      [
+        245,
+        220
+      ],
+      [
+        264,
+        226
+      ],
+      [
+        281,
+        233
+      ],
+      [
+        299,
+        244
+      ],
+      [
+        314,
+        255
+      ],
+      [
+        322,
+        269
+      ],
+      [
+        317,
+        282
+      ],
+      [
+        303,
+        292
+      ],
+      [
+        282,
+        295
+      ],
+      [
+        264,
+        292
+      ],
+      [
+        249,
+        287
+      ],
+      [
+        239,
+        271
+      ],
+      [
+        236,
+        248
+      ]
+    ],
+    "far-ear": [
+      [
+        70,
+        184
+      ],
+      [
+        154,
+        184
+      ],
+      [
+        154,
+        207
+      ],
+      [
+        145,
+        219
+      ],
+      [
+        138,
+        232
+      ],
+      [
+        130,
+        241
+      ],
+      [
+        117,
+        248
+      ],
+      [
+        90,
+        248
+      ],
+      [
+        70,
+        237
+      ]
+    ],
+    "tail": [
+      [
+        391,
+        195
+      ],
+      [
+        413,
+        190
+      ],
+      [
+        431,
+        206
+      ],
+      [
+        430,
+        238
+      ],
+      [
+        419,
+        262
+      ],
+      [
+        401,
+        273
+      ],
+      [
+        388,
+        251
+      ]
+    ],
+    "fore-near": [
+      [
+        239,
+        375
+      ],
+      [
+        249,
+        374
+      ],
+      [
+        258,
+        378
+      ],
+      [
+        269,
+        381
+      ],
+      [
+        279,
+        380
+      ],
+      [
+        294,
+        388
+      ],
+      [
+        294,
+        512
+      ],
+      [
+        226,
+        512
+      ],
+      [
+        226,
+        390
+      ]
+    ],
+    "fore-far": [
+      [
+        175,
+        361
+      ],
+      [
+        188,
+        365
+      ],
+      [
+        198,
+        363
+      ],
+      [
+        207,
+        368
+      ],
+      [
+        221,
+        368
+      ],
+      [
+        230,
+        389
+      ],
+      [
+        230,
+        512
+      ],
+      [
+        156,
+        512
+      ],
+      [
+        156,
+        365
+      ]
+    ],
+    "hind-near": [
+      [
+        352,
+        358
+      ],
+      [
+        365,
+        353
+      ],
+      [
+        379,
+        343
+      ],
+      [
+        389,
+        337
+      ],
+      [
+        425,
+        329
+      ],
+      [
+        512,
+        512
+      ],
+      [
+        339,
+        512
+      ],
+      [
+        339,
+        372
+      ]
+    ],
+    "hind-far": [
+      [
+        304,
+        361
+      ],
+      [
+        318,
+        365
+      ],
+      [
+        331,
+        363
+      ],
+      [
+        341,
+        355
+      ],
+      [
+        350,
+        377
+      ],
+      [
+        350,
+        512
+      ],
+      [
+        294,
+        512
+      ],
+      [
+        294,
+        373
+      ]
+    ],
+    "head": [
+      [
+        -10,
+        -10
+      ],
+      [
+        340,
+        -10
+      ],
+      [
+        340,
+        185
+      ],
+      [
+        320,
+        205
+      ],
+      [
+        300,
+        222
+      ],
+      [
+        294,
+        238
+      ],
+      [
+        319,
+        254
+      ],
+      [
+        325,
+        278
+      ],
+      [
+        305,
+        295
+      ],
+      [
+        279,
+        295
+      ],
+      [
+        252,
+        280
+      ],
+      [
+        246,
+        289
+      ],
+      [
+        229,
+        304
+      ],
+      [
+        206,
+        311
+      ],
+      [
+        180,
+        307
+      ],
+      [
+        156,
+        302
+      ],
+      [
+        143,
+        291
+      ],
+      [
+        127,
+        288
+      ],
+      [
+        116,
+        276
+      ],
+      [
+        100,
+        260
+      ],
+      [
+        -10,
+        260
+      ]
+    ]
+  },
+  "closedEyeRegistration": [
+    [
+      0.6554328851228107,
+      -0.004276025591039133,
+      85.8340761684188
+    ],
+    [
+      0.004276025591039133,
+      0.6554328851228107,
+      125.4657594287237
+    ]
+  ],
+  "hiddenHeadRegistration": [
+    [
+      0.5940562858606006,
+      0.0007526932542807859,
+      87.75514489360596
+    ],
+    [
+      -0.0007526932542807859,
+      0.5940562858606006,
+      125.35997307883814
+    ]
+  ],
+  "editableParts": {
+    "body": "Drawings/body.png",
+    "head": "Drawings/head.png",
+    "head-cap": "Drawings/head-cap.png",
+    "fore-near": "Drawings/fore-near.png",
+    "fore-far": "Drawings/fore-far.png",
+    "hind-near": "Drawings/hind-near.png",
+    "hind-far": "Drawings/hind-far.png",
+    "tail": "Drawings/tail.png",
+    "near-ear": "Drawings/near-ear.png",
+    "far-ear": "Drawings/far-ear.png",
+    "head-closed": "Drawings/head-closed.png",
+    "skin": "Drawings/skin.png",
+    "skin-closed": "Drawings/skin-closed.png",
+    "head-field": "Drawings/head-field.png"
+  },
+  "drawOrder": [
+    "fore-far",
+    "hind-far",
+    "fore-near",
+    "hind-near",
+    "skin"
+  ],
+  "continuousSurface": {
+    "attachment": "skin",
+    "expression": "skin-closed",
+    "headWeightField": "Drawings/head-field.png",
+    "weights": "../skin-meshes.json",
+    "regions": [
+      "face",
+      "ears",
+      "head fleece",
+      "neck fleece",
+      "torso fleece",
+      "tail tuft"
+    ],
+    "occlusion": "triangles sort from torso to head; four short legs render behind fleece"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "tool": "image_gen",
+  "prompt": "Use case: stylized-concept. Produce ONE complete animation drawing on genuine transparency in the SAME fixed square canvas and camera. Input1 is the only approved original owl design, input2 is its newly corrected 200ms falling key (continuity reference, not a different design), input3 is ONLY a 512-coordinate geometric pose guide. Keep this exact small compact owl: large skull/cream facial disk broader than its cream chest, outer skull plus short ear tufts about125 canvas units, disk108, short charcoal beak, original white brows/speckled brown crown/gray-brown wings with cream feather tips/two short taloned feet/short tail. Intrinsic head, body, beak, individual feather lengths and feet must stay the same size as the original at the same wing scale. No zoom, recenter, fit-to-bounds, long legs, tall body, new creature, holes, doubled outlines, cut pieces, detached pixels, colored alpha artifacts, text, floor, or cast shadow. Draw continuous natural anatomy and overlapping feathers, matching the painterly game sprite. This key is BEFORE input2, 120ms after lift is lost, between original flight pose and input2. Body falls only14 canvas pixels and moves right4 from input1. Head bows very slightly; eyes begin to droop. Wings have only started losing lift, still raised but not as high as original: their longest tips are about(75,164) and(435,188). Shoulders are around(188,303) and(282,312). Both short feet still hang freely well ABOVE ground448, their tips around414. It is not landing yet. Use input3 to keep this much earlier, higher pose; do not copy input2's already lower/drop pose. Keep broad original skull size; do not shrink the head to make space.",
+  "output": "Source/drawn-120.png",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "Source/reference.png",
+    "Source/drawn-200-head-corrected.png",
+    "Source/Inputs/fall-120-guide.png"
+  ]
+}

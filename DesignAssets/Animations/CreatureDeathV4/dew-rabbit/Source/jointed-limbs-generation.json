@@ -1,0 +1,10 @@
+{
+  "prompt": "Production cutout animation parts for the exact dewy ivory rabbit in reference image 1, with the original approved style, cream fur, pale mint reflected light, dark delicate furry contour, three-quarter view facing left. Reference image 2 is the current complete hind leg, reference image 3 the current foreleg; they show the precise style and anatomy to preserve. Create a transparent 3-column by 2-row parts atlas, six isolated COMPLETE individual pieces, generous transparent spacing, no labels and no body/head/ears or shadows/background fog. Top row left: a complete foreleg upper arm, a rounded cream furry short capsule from full closed shoulder to full closed elbow, NO hand or toes. Top middle: a complete forearm, a shorter lightly tapered cream furry capsule from full closed elbow end to full closed wrist, NO palm or toes. Top right: a complete front paw only, rounded compact mitten with three subtle rounded toes, full hidden back/wrist surface closed, planted flat in the same left-facing three-quarter camera. Bottom left: a COMPLETE uncut round bulbous hind thigh/haunch, same softly shaded oval fur volume as reference 2, closed at ALL sides, full circular lower knee end, NO shin or paw, do not slice the oval at the knee. Bottom middle: a complete short bent furry shin/hock between knee and ankle, both ends finished round and with broad overlap surface, NO foot, no toes. Bottom right: a COMPLETE long flat hind paw with three toes, exactly the side-facing long rounded rabbit foot from reference 2, closed heel and hidden top ankle surface. Make the thigh notably bulkier than forearm pieces. Keep the same rabbit anatomy/material and original subdued palette with no added markings. These are independent layered bone attachments, NOT action frames, NOT cropped fragments. All hidden ends must be fully drawn and rounded. Do not include any other limbs behind or touching them.",
+  "referencedImages": [
+    "DesignAssets/CreatureConcepts/v3/dew-rabbit.png",
+    "Parts/hindleg.png",
+    "Parts/foreleg.png"
+  ],
+  "generatedImage": "Source/jointed-limbs-atlas.png",
+  "transparentBackground": true
+}

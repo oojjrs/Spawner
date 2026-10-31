@@ -1,0 +1,81 @@
+{
+  "name": "bundle-snail", 
+  "method": "Complete continuous soft-body attachment with a local withdrawal mesh and separate complete eye stalks; immutable rigid shell and pack lowered to the original ground.", 
+  "canvas": [
+    512, 
+    512
+  ], 
+  "configuration": {
+    "shellPivot": [
+      310, 
+      340
+    ], 
+    "shellDegrees": 0, 
+    "bodyDrop": 0
+  }, 
+  "sources": {
+    "far-eye-front.png": "858ad4d3eeaed0c3210e2a3a80f1cd016db63cb530fd51a0a590b16e36fd80ab", 
+    "far-eye.png": "b09595d92ef817328631c7aef6ca921ff55d84789e9954df55d12f90af02beab", 
+    "head-closed-front.png": "06577f6f7e0c4bdd423e2affc9dea594d59b31b022f3e25e735bf62831eca005", 
+    "head-closed.png": "06577f6f7e0c4bdd423e2affc9dea594d59b31b022f3e25e735bf62831eca005", 
+    "head-front.png": "06577f6f7e0c4bdd423e2affc9dea594d59b31b022f3e25e735bf62831eca005", 
+    "head.png": "06577f6f7e0c4bdd423e2affc9dea594d59b31b022f3e25e735bf62831eca005", 
+    "lip-front.png": "b262bd68d44f93637b9949caf7ff7ce0b6b6ed839c3a2468681952b215ec4d95", 
+    "lip.png": "23e6ea80209165fe870cb8589faed520aaedbd804bcb84113c4ed10ec37f64e2", 
+    "mantle-front.png": "b262bd68d44f93637b9949caf7ff7ce0b6b6ed839c3a2468681952b215ec4d95", 
+    "mantle.png": "8e397c00fc464b8fbbeba6a1fbf1606c3ae5d14c198d482a3ba35d3803e0dafb", 
+    "near-eye-front.png": "7d206fec1689e5b48580c524e75752b67c050155e6688f64cb41c48bc59217dc", 
+    "near-eye.png": "075eae7c520f233eaffebab093e832dd032dcd99fd6ce7c37bbd138785a6a8d5", 
+    "shell-front.png": "fe1f576c719bf0e0d730ff780498e2e88140bf28536b179435b498eaa7e89505", 
+    "shell.png": "fe1f576c719bf0e0d730ff780498e2e88140bf28536b179435b498eaa7e89505"
+  }, 
+  "activeParts": [
+    "shell", 
+    "shell-front", 
+    "mantle", 
+    "near-eye", 
+    "far-eye"
+  ], 
+  "rigidParts": [
+    "shell"
+  ], 
+  "drawOrder": [
+    "far-eye", 
+    "near-eye", 
+    "mantle", 
+    "shell-front"
+  ], 
+  "bones": [
+    {
+      "name": "root", 
+      "parent": null, 
+      "scale": [
+        1, 
+        1
+      ]
+    }, 
+    {
+      "name": "shell", 
+      "parent": "root", 
+      "pivot": [
+        310, 
+        340
+      ], 
+      "scale": [
+        1, 
+        1
+      ]
+    }
+  ], 
+  "timeline": "landmarks.json", 
+  "meshParts": [
+    "mantle"
+  ], 
+  "renderer": "render.py", 
+  "dependencies": [
+    "Python 3", 
+    "numpy", 
+    "Pillow 12.3"
+  ], 
+  "spineCompatibilityVerified": false
+}

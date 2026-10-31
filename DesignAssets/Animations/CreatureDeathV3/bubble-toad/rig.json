@@ -1,0 +1,94 @@
+{
+  "name": "bubble-toad",
+  "format": "drawn-body-cels-with-fixed-head-v1",
+  "canvas": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "sourceImage": "DesignAssets/CreatureConcepts/v3/bubble-toad.png",
+  "headImage": "Parts/head-closed.png",
+  "headBindBBox": [
+    121,
+    191,
+    293,
+    289
+  ],
+  "headPivot": [
+    207,
+    240
+  ],
+  "keys": [
+    {
+      "image": "Source/Bodies/00.png",
+      "headPose": [
+        10,
+        -4,
+        0
+      ],
+      "sourceComponent": 1,
+      "sourceCanvasScale": 0.6,
+      "sourceTranslation": [
+        54,
+        75
+      ],
+      "groundY": 448
+    },
+    {
+      "image": "Source/Bodies/01.png",
+      "headPose": [
+        -13,
+        56,
+        -7
+      ],
+      "sourceComponent": 2,
+      "sourceCanvasScale": 0.6,
+      "sourceTranslation": [
+        -322,
+        69
+      ],
+      "groundY": 448
+    },
+    {
+      "image": "Source/Bodies/02.png",
+      "headPose": [
+        -5,
+        95,
+        -10
+      ],
+      "sourceComponent": 3,
+      "sourceCanvasScale": 0.6,
+      "sourceTranslation": [
+        54,
+        -243
+      ],
+      "groundY": 448
+    },
+    {
+      "image": "Source/Bodies/03.png",
+      "headPose": [
+        -8,
+        118,
+        -12
+      ],
+      "sourceComponent": 4,
+      "sourceCanvasScale": 0.6,
+      "sourceTranslation": [
+        -322,
+        -246
+      ],
+      "groundY": 448
+    }
+  ],
+  "durationsMs": [
+    80,
+    110,
+    90,
+    90,
+    900
+  ],
+  "method": "Four newly drawn body-only collapse cels retain the shrinking folded throat sac and loose forearm anatomy. One immutable approved-proportion complete skull/eyes source is translated and rotated at unit scale over every body cel; no skull, nose or eye scale interpolation."
+}

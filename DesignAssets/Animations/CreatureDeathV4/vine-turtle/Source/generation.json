@@ -1,0 +1,22 @@
+{
+  "newSource": {
+    "id": "vine-turtle", 
+    "asset": "Source/soft-parts-drawing.png", 
+    "prompt": "Use case: precise-object-edit. ACTUAL production isolated layered animation attachments, not a finished action sheet. Sole original image is character anatomy/palette/outline/camera authority. Complete ALL hidden roots/undersides and round them naturally with sufficient overlap. No body or shell fragments mixed into soft attachments. Exact original individual, lengths/widths/proportions and original painterly shading/fine outlines. Genuine transparent RGBA, no shadows, glow, text, labels or grid. Do not redesign, enlarge far limbs to fill cells, make thick elephant upper arms, or omit toe tips. SIX complete separate SOFT attachments in padded 2 columns x 3 rows, row order. 1: the original sage olive head with both big dark-green eyes, cream cheek/lower face, COMPLETE neck to rounded padded hidden root. 2: near foreleg from complete shoulder root through real elbow to broad spotted green foot and all three cream toes. 3: far foreleg counterpart in correct far-side scale. 4: near hindleg full hip/knee/hock/foot, short stocky turtle anatomy. 5: far hindleg counterpart. 6: original short pointed green tail with full padded root. Same original camera, pale sage/olive skin, subtle round spots and exact claw/eye proportions. All limbs short and naturally articulated, no giant round mammal thigh or elbow hole. NO shell, orange stones, vine, leaves, body plate, head socket ring or separate objects. Keep all attachment roots fully painted and contour-complete.", 
+    "inputs": [
+      "H:\\Spawner\\DesignAssets\\CreatureConcepts\\v3\\vine-turtle.png"
+    ], 
+    "generatedFile": "D:\\.codex\\generated_images\\01a1838c-2114-7c61-81d7-4e2dfbb2299f\\exec-298f8d0a-90ec-4ce4-bba7-c36f382e9ef2.png", 
+    "provider": "built-in image_gen"
+  }, 
+  "approvedIdleShellReuse": {
+    "sourcePath": "H:\\Spawner\\$Trash\\unused-images-20261027\\DesignAssets\\Animations\\CreatureIdleStudies\\V1\\vine-turtle\\Source\\retracted-shell.png", 
+    "sourceSha256": "18591a2477df223851dc1abb240344e415f67c075ac29ff33665d0f80db76950", 
+    "copy": "Source/approved-idle-retracted-shell.png", 
+    "usedDrawing": "Source/complete-shell-drawing.png", 
+    "usedDrawingSha256": "18591a2477df223851dc1abb240344e415f67c075ac29ff33665d0f80db76950", 
+    "authority": "approved idle complete retracted shell", 
+    "originalPromptRecovered": false, 
+    "newGeneration": false
+  }
+}

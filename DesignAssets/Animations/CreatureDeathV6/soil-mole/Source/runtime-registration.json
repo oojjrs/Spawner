@@ -1,0 +1,16 @@
+{
+  "sourceToIdleScale": 0.6931677690264846,
+  "sourceToIdleTranslation": [
+    0.0204315185546875,
+    -10.395820617675781
+  ],
+  "idleFrameSize": 355,
+  "idlePivot": [
+    177.5,
+    310.625
+  ],
+  "frameSize": 256,
+  "displaySize": 237.0192885977203,
+  "inliers": 64,
+  "medianErrorPx": 0.23340828716754913
+}

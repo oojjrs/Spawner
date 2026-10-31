@@ -1,0 +1,29 @@
+{
+  "provider": "built-in image_gen",
+  "actualCalls": [
+    {
+      "asset": "Source/final-key-drawing.png",
+      "prompt": "Use case: precise-object-edit. Production FINAL CONTACT KEY DRAWING for a death animation of this exact approved moss-backed soil-boar. Reference1 is the approved design in its locked 512x512 layout. Preserve the character's original proportions: short broad forehead WITHOUT a new tall head crest, small short muzzle, original cheek size and original torso oval dimensions and moss/tusk markings. Redraw the boar immediately after its strength has failed and its body has fallen to the floor. The same three-quarter camera and facing left. Foreknees have buckled; the near foreleg is loose and lies obliquely FORWARD along the floor with a connected elbow and hoof, the far foreleg folded beneath the chest; hindlegs collapse naturally outward beside the belly. The heavy ribcage and flank keep their solid original size while losing support. Chest and belly touch the ground, the head hangs lower and turns just enough for the LOWER CHEEK and side of snout to meet the floor. Fully closed eyes, slack asymmetrical ears, short tail limp and dropping instead of curled upright. A convincing weight-bearing failure and dead limp asymmetry, not an alert crouch or an orderly sleeping pose. Exactly one complete creature, all parts attached, no gore. Keep original art style, fur texture, highlights, outline and moss placement, no redesign. Whole character visible inside same fixed512 square canvas; contact plane remains y448 with transparent area below it. No floor drawing, no cast shadow, no particles, text, labels or animation grid. Genuine transparent alpha. This drawing is actual key-pose source for a hybrid animation, not a preview.",
+      "preservedInputs": [
+        "Source/neutral.png"
+      ]
+    },
+    {
+      "asset": "Source/collapse-key-drawings.png",
+      "prompt": "Use case: precise-object-edit. Production FOUR KEY DRAWINGS for an anatomically natural soil-boar death. Image1 approved standing design is the appearance authority; image2 supplies the final limp cheek-to-floor contact pose. Draw exactly four whole-boar key poses in a clean2x2 equal-cell arrangement, temporal order left-to-right top row then bottom. Each cell is the SAME512 square coordinate system and SAME world scale; common floor/contact line y448 in each cell; generous identical transparent margins. Preserve the exact head/torso proportions, solid torso volume, fur and moss placement across all4; do not shrink, widen or squash any body. Keep original short forehead, not a new head crest. Pose1: first loss of strength, eyes almost closed, ears sag, FORE KNEES BEGIN TO FOLD and chest starts tipping down, hindquarters still high. Pose2: FORE KNEES TOUCH THE FLOOR and one forehoof slips forward limp; chest is halfway down, heavy hips lag behind, head hangs but cheek not yet on floor. Pose3: chest and belly land on floor, hindlegs give out sideways, head still completing its downward arc and one ear has not settled. Pose4: the final cheek-and-side-of-muzzle contact as image2, all four legs relaxed asymmetrically, limp ears and tail, fully closed eyes. The animal's mass must fall with gravity, clearly different silhouette per phase; no upright weight-bearing legs or orderly sleep. Preserve solid part sizes and limb lengths, no disconnected joints or outline cuts. This is actual corrective key-pose source for a hybrid local-interval animation; no full animation-sheet in-betweens are requested. Same painterly finish and camera as image1. Genuine transparent background, NO text, labels, grid lines, cast shadows, gore or extra objects.",
+      "preservedInputs": [
+        "Source/neutral.png",
+        "Source/final-key-drawing.png"
+      ],
+      "originalSecondInput": "D:/.codex/generated_images/01a1838b-79ae-7d90-bd5b-9b977fc8f938/exec-3013695f-b08b-49eb-a7ce-1b698838fedb.png"
+    },
+    {
+      "asset": "Source/corrective-200-drawing.png",
+      "prompt": "Use case: precise-object-edit. EDIT TARGET is one actual 512x512 intermediate animation frame. Repair ONLY the visibly broken anatomy at the front legs and their shoulder/chest joints: the near forearm has a triangular hole and sawtooth cut at its root, and the far foreleg root has ragged cuts. Redraw BOTH COMPLETE FORELEGS with clean natural shoulder, elbow, wrist, fur and connected black hooves, in exactly the SAME mid-buckling pose and the SAME hoof positions as the target. Paint the revealed complete chest/neck surface behind them so there are NO missing triangles, seams, fragments or doubled outlines. The near foreleg bends forward as the chest falls, hoof sole toward floor, far foreleg is weak and slack. KEEP EVERY OTHER PART'S EXACT design, scale, pose and placement: head, muzzle, tusks, eyes, ears, torso oval, upper-back mane, moss positions, hindquarters, rear feet and tail remain unchanged. Keep original creature proportions and same fixed512 square canvas and transparent margins, no recentering or enlarging. Preserve exact target art style, colors, fur shading and outline. Genuine transparent alpha. One actual production corrective frame, no grid, labels, text, cast shadow or new objects.",
+      "preservedInputs": [
+        "Source/corrective-200-input.png"
+      ],
+      "originalInput": "H:/Spawner/$Trash/death-v3-wild/boar-corrective-200-input.png"
+    }
+  ]
+}

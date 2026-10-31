@@ -1,0 +1,281 @@
+{
+  "name": "vine-turtle",
+  "sourceImage": "DesignAssets/CreatureConcepts/v3/vine-turtle.png",
+  "sourceAnimation": "DesignAssets/Animations/CreatureIdleStudies/V2/vine-turtle/idle.webp",
+  "canvas": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "parts": {
+    "head": {
+      "image": "Parts/head.png",
+      "closedImage": "Parts/head-closed.png",
+      "vector": [
+        154,
+        -19
+      ],
+      "startMs": 100,
+      "endMs": 430
+    },
+    "fore-far": {
+      "image": "Parts/fore-far.png",
+      "vector": [
+        70,
+        -75
+      ],
+      "startMs": 150,
+      "endMs": 410
+    },
+    "fore-near": {
+      "image": "Parts/fore-near.png",
+      "vector": [
+        -3,
+        -95
+      ],
+      "startMs": 170,
+      "endMs": 460
+    },
+    "hind": {
+      "image": "Parts/hind.png",
+      "vector": [
+        -55,
+        -80
+      ],
+      "startMs": 250,
+      "endMs": 530
+    },
+    "tail": {
+      "image": "Parts/tail.png",
+      "vector": [
+        -66,
+        8
+      ],
+      "startMs": 330,
+      "endMs": 630
+    }
+  },
+  "shell": "Parts/shell.png",
+  "foreground": "Parts/shell-foreground.png",
+  "gates": {
+    "head": [
+      [
+        0,
+        0
+      ],
+      [
+        194,
+        0
+      ],
+      [
+        194,
+        297
+      ],
+      [
+        212,
+        305
+      ],
+      [
+        224,
+        326
+      ],
+      [
+        224,
+        343
+      ],
+      [
+        210,
+        361
+      ],
+      [
+        191,
+        370
+      ],
+      [
+        0,
+        370
+      ]
+    ],
+    "fore-far": [
+      [
+        0,
+        378
+      ],
+      [
+        120,
+        378
+      ],
+      [
+        144,
+        403
+      ],
+      [
+        143,
+        512
+      ],
+      [
+        0,
+        512
+      ]
+    ],
+    "fore-near": [
+      [
+        214,
+        512
+      ],
+      [
+        214,
+        411
+      ],
+      [
+        224,
+        378
+      ],
+      [
+        249,
+        363
+      ],
+      [
+        270,
+        363
+      ],
+      [
+        286,
+        381
+      ],
+      [
+        300,
+        412
+      ],
+      [
+        316,
+        512
+      ]
+    ],
+    "hind": [
+      [
+        384,
+        512
+      ],
+      [
+        384,
+        398
+      ],
+      [
+        399,
+        373
+      ],
+      [
+        426,
+        363
+      ],
+      [
+        445,
+        373
+      ],
+      [
+        470,
+        411
+      ],
+      [
+        512,
+        512
+      ]
+    ],
+    "tail": [
+      [
+        440,
+        303
+      ],
+      [
+        512,
+        281
+      ],
+      [
+        512,
+        368
+      ],
+      [
+        440,
+        368
+      ]
+    ]
+  },
+  "rootKeys": [
+    [
+      0,
+      0
+    ],
+    [
+      350,
+      0
+    ],
+    [
+      420,
+      10
+    ],
+    [
+      490,
+      34
+    ],
+    [
+      510,
+      37
+    ],
+    [
+      550,
+      35
+    ],
+    [
+      620,
+      37
+    ],
+    [
+      900,
+      37
+    ]
+  ],
+  "timesMs": [
+    0,
+    25,
+    50,
+    75,
+    100,
+    125,
+    150,
+    175,
+    200,
+    225,
+    250,
+    275,
+    300,
+    325,
+    350,
+    375,
+    400,
+    425,
+    450,
+    475,
+    500,
+    525,
+    550,
+    575,
+    600,
+    625,
+    650,
+    675,
+    700,
+    725,
+    750,
+    775,
+    800,
+    825,
+    850,
+    875,
+    900
+  ],
+  "method": "Complete approved idle-source shell, head, legs and tail form a new retract-collapse-contact-settle action. Head and forefeet retract first, hind support disappears next, rigid shell mass falls to ground, and tail retracts last. A brief rigid rebound follows contact; the final shell and cargo alone remain."
+}

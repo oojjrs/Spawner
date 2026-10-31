@@ -1,0 +1,44 @@
+[
+  {
+    "key": 1, 
+    "sourceSize": [
+      1254, 
+      1254
+    ], 
+    "scale": 0.4082934609250399, 
+    "translation": [
+      -12, 
+      -6
+    ], 
+    "foreClawWorldY": 407, 
+    "hindToeWorldX": 427.4856459330144
+  }, 
+  {
+    "key": 2, 
+    "sourceSize": [
+      1254, 
+      1254
+    ], 
+    "scale": 0.4082934609250399, 
+    "translation": [
+      -20, 
+      13
+    ], 
+    "foreClawWorldY": 407, 
+    "hindToeWorldX": 427.4856459330144
+  }, 
+  {
+    "key": 3, 
+    "sourceSize": [
+      1254, 
+      1254
+    ], 
+    "scale": 0.4082934609250399, 
+    "translation": [
+      -19, 
+      14
+    ], 
+    "foreClawWorldY": 407, 
+    "hindToeWorldX": 427.4856459330144
+  }
+]

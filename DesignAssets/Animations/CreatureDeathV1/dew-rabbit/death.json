@@ -1,0 +1,260 @@
+{
+  "name": "dew-rabbit", 
+  "action": "death", 
+  "sourceImage": "DesignAssets/CreatureConcepts/v3/dew-rabbit.png", 
+  "image": "DesignAssets/Animations/CreatureDeathV1/dew-rabbit/death.webp", 
+  "frameSize": 512, 
+  "columns": 4, 
+  "pivotX": 256, 
+  "pivotY": 448, 
+  "frameCount": 12, 
+  "durationsMs": [
+    130, 
+    80, 
+    65, 
+    65, 
+    60, 
+    55, 
+    60, 
+    70, 
+    100, 
+    140, 
+    180, 
+    1000
+  ], 
+  "durationMs": 2005, 
+  "loop": false, 
+  "preview": "DesignAssets/Animations/CreatureDeathV1/dew-rabbit/preview.webp", 
+  "thumbnail": "DesignAssets/Animations/CreatureDeathV1/dew-rabbit/thumbnail.webp", 
+  "contact": "DesignAssets/Animations/CreatureDeathV1/dew-rabbit/contact.jpg", 
+  "method": "Newly drawn collapsing poses generated from the locked original; fixed source cells, one common output scale, translation-only ground registration; no synthetic inbetweens.", 
+  "sourceSheet": "DesignAssets/Animations/CreatureDeathV1/dew-rabbit/Source/drawn-sheet.png", 
+  "frameSources": "DesignAssets/Animations/CreatureDeathV1/dew-rabbit/Frames/", 
+  "commonScale": 1.1623616236162362, 
+  "groundY": 436, 
+  "sourceSheetCanvas": [
+    1254, 
+    1254
+  ], 
+  "registrations": [
+    {
+      "sourceCell": [
+        0, 
+        0, 
+        32, 
+        62
+      ], 
+      "sourceBounds": [
+        0, 
+        0, 
+        271, 
+        294
+      ], 
+      "translation": [
+        106, 
+        94
+      ]
+    }, 
+    {
+      "sourceCell": [
+        1, 
+        0, 
+        352, 
+        66
+      ], 
+      "sourceBounds": [
+        0, 
+        0, 
+        277, 
+        291
+      ], 
+      "translation": [
+        114, 
+        98
+      ]
+    }, 
+    {
+      "sourceCell": [
+        2, 
+        0, 
+        667, 
+        97
+      ], 
+      "sourceBounds": [
+        0, 
+        0, 
+        260, 
+        259
+      ], 
+      "translation": [
+        115, 
+        135
+      ]
+    }, 
+    {
+      "sourceCell": [
+        3, 
+        0, 
+        971, 
+        118
+      ], 
+      "sourceBounds": [
+        0, 
+        0, 
+        277, 
+        240
+      ], 
+      "translation": [
+        104, 
+        157
+      ]
+    }, 
+    {
+      "sourceCell": [
+        0, 
+        1, 
+        14, 
+        478
+      ], 
+      "sourceBounds": [
+        0, 
+        0, 
+        298, 
+        210
+      ], 
+      "translation": [
+        85, 
+        192
+      ]
+    }, 
+    {
+      "sourceCell": [
+        1, 
+        1, 
+        333, 
+        506
+      ], 
+      "sourceBounds": [
+        0, 
+        0, 
+        295, 
+        179
+      ], 
+      "translation": [
+        91, 
+        228
+      ]
+    }, 
+    {
+      "sourceCell": [
+        2, 
+        1, 
+        643, 
+        527
+      ], 
+      "sourceBounds": [
+        0, 
+        0, 
+        291, 
+        158
+      ], 
+      "translation": [
+        87, 
+        252
+      ]
+    }, 
+    {
+      "sourceCell": [
+        3, 
+        1, 
+        947, 
+        542
+      ], 
+      "sourceBounds": [
+        0, 
+        0, 
+        296, 
+        146
+      ], 
+      "translation": [
+        76, 
+        266
+      ]
+    }, 
+    {
+      "sourceCell": [
+        0, 
+        2, 
+        8, 
+        839
+      ], 
+      "sourceBounds": [
+        0, 
+        0, 
+        303, 
+        145
+      ], 
+      "translation": [
+        78, 
+        267
+      ]
+    }, 
+    {
+      "sourceCell": [
+        1, 
+        2, 
+        316, 
+        844
+      ], 
+      "sourceBounds": [
+        0, 
+        0, 
+        310, 
+        141
+      ], 
+      "translation": [
+        72, 
+        272
+      ]
+    }, 
+    {
+      "sourceCell": [
+        2, 
+        2, 
+        635, 
+        846
+      ], 
+      "sourceBounds": [
+        0, 
+        0, 
+        302, 
+        143
+      ], 
+      "translation": [
+        78, 
+        270
+      ]
+    }, 
+    {
+      "sourceCell": [
+        3, 
+        2, 
+        944, 
+        849
+      ], 
+      "sourceBounds": [
+        0, 
+        0, 
+        301, 
+        142
+      ], 
+      "translation": [
+        73, 
+        271
+      ]
+    }
+  ], 
+  "referenceSha256": "03d8fc100270544e00fde2177be5973f633304181a20024489b4bbf93f8e5629", 
+  "rootMotion": false, 
+  "finalPose": "Collapsed with head/body resting low, eyes closed, limbs or eyestalks relaxed; no recovery."
+}

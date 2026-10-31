@@ -1,0 +1,44 @@
+{
+  "authority": "DesignAssets/CreatureConcepts/v3/soil-boar.png",
+  "original": "Source/original.png",
+  "reference": "Source/reference.png",
+  "placement": "Source/placement.json",
+  "drawings": [
+    {
+      "image": "Source/drawn-080.png",
+      "actualPrompt": "Source/drawn-080.prompt.json"
+    },
+    {
+      "image": "Source/drawn-160.png",
+      "actualPrompt": "Source/drawn-160.prompt.json"
+    },
+    {
+      "image": "Source/drawn-240.png",
+      "actualPrompt": "Source/drawn-240.prompt.json"
+    },
+    {
+      "image": "Source/drawn-320.png",
+      "actualPrompt": "Source/drawn-320.prompt.json"
+    },
+    {
+      "image": "Source/drawn-480.png",
+      "actualPrompt": "Source/drawn-480.prompt.json"
+    },
+    {
+      "image": "Source/drawn-640.png",
+      "actualPrompt": "Source/drawn-640.prompt.json"
+    },
+    {
+      "image": "Source/legs-edit-source.png",
+      "actualPrompt": "Source/legs-edit.prompt.json"
+    }
+  ],
+  "legEditRegistration": "Source/legs-edit-registration.json",
+  "followthroughRegistration": "Source/followthrough-registration.json",
+  "timeline": "timeline.json",
+  "prepare": "prepare.py",
+  "renderer": "render.py",
+  "sampler": "sampling.py",
+  "rigidBodyPreservedAfterMs": 320,
+  "runtimeExternalPathsRequired": false
+}

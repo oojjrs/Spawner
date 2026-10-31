@@ -1,0 +1,37 @@
+{
+  "name": "cotton-sheep", 
+  "action": "death", 
+  "sourceImage": "DesignAssets/CreatureConcepts/v3/cotton-sheep.png", 
+  "image": "DesignAssets/Animations/CreatureDeathV6/cotton-sheep/death.webp", 
+  "frameSize": 512, 
+  "columns": 4, 
+  "frameCount": 8, 
+  "durationsMs": [
+    120, 
+    90, 
+    90, 
+    100, 
+    100, 
+    100, 
+    160, 
+    1000
+  ], 
+  "durationMs": 1760, 
+  "pivotX": 256, 
+  "pivotY": 448, 
+  "loop": false, 
+  "preview": "DesignAssets/Animations/CreatureDeathV6/cotton-sheep/preview.webp", 
+  "thumbnail": "DesignAssets/Animations/CreatureDeathV6/cotton-sheep/thumbnail.webp", 
+  "renderer": "DesignAssets/Animations/CreatureDeathV6/cotton-sheep/Source/pack.py", 
+  "sourceAuthoring": "DesignAssets/Animations/CreatureDeathV6/cotton-sheep/Source/pack.py", 
+  "sourceFrames": [
+    "Source/Frames/000.png", 
+    "Source/Frames/001.png", 
+    "Source/Frames/002.png", 
+    "Source/Frames/003.png", 
+    "Source/Frames/004.png", 
+    "Source/Frames/005.png", 
+    "Source/Frames/006.png", 
+    "Source/Frames/007.png"
+  ]
+}

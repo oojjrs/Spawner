@@ -1,0 +1,44 @@
+{
+  "name": "bundle-snail", 
+  "method": "Continuous contour-aligned mantle invagination with rigid eye globes, soft stalk contraction and rigid shell descent driven by remaining foot contact area", 
+  "parts": [
+    "cavity", 
+    "shell-front", 
+    "mantle", 
+    "near-eye-stalk", 
+    "near-eye-globe", 
+    "far-eye-stalk", 
+    "far-eye-globe"
+  ], 
+  "rigidParts": [
+    "shell-front", 
+    "cavity", 
+    "near-eye-globe", 
+    "far-eye-globe"
+  ], 
+  "softHeadCompression": [
+    1, 
+    0.68
+  ], 
+  "sourceAxis": [
+    [
+      135, 
+      340
+    ], 
+    [
+      230, 
+      380
+    ], 
+    [
+      330, 
+      397
+    ], 
+    [
+      419, 
+      386
+    ]
+  ], 
+  "controls": "motion.json", 
+  "renderer": "render.py", 
+  "spineCompatibilityVerified": false
+}

@@ -1,0 +1,20 @@
+{
+  "activeParts": [
+    "body.png", 
+    "body-closed.png", 
+    "leaf.png"
+  ], 
+  "canvas": [
+    512, 
+    512
+  ], 
+  "pivot": [
+    256, 
+    448
+  ], 
+  "source": "Bound", 
+  "target": "../Parts", 
+  "reference": "DesignAssets/CreatureConcepts/v3/rolling-acorn.png", 
+  "renderer": "../render.py", 
+  "prepare": "../prepare.py"
+}

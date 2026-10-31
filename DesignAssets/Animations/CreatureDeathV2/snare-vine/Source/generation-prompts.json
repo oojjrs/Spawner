@@ -1,0 +1,11 @@
+{
+  "provider": "built-in image_gen",
+  "prompts": {
+    "completeParts": "Use case: precise-object-edit. Production independent parts for a stable layered animation of this exact snare-vine creature. Reference1 is approved design. Create a clean separated 3 columns by 2 rows source atlas, exactly SIX non-touching parts on genuine transparent background. Top left: the COMPLETE olive bulb torso with its two small dark oval eyes, smooth intact top dome and complete rounded bottom, NO feet, NO leaves, NO neck socket or stem hole. Preserve exact bulb shape, original palette, outlines and highlight. Top middle: complete broad upper-left leaf, same original upward-left curved silhouette, painted veining, small natural tapered green stem at root. Top right: complete upright-right leaf, same original shape. Bottom left: complete lower-left leaf, same original shape. Bottom middle: complete lower-right leaf, same original shape. Bottom right: one small natural olive root foot. Give every part a complete hidden rounded contour for overlapping, no ball joints or golden root spheres, no stump cross sections, no sockets, no circles. NO vine loops in this atlas, NO full creature assembly, NO text, NO grid lines, NO colored markers. Parts maintain the exact reference painted style and fixed proportions; this will be real source texture, not preview artwork."
+  },
+  "retainedOriginalSources": [
+    "Source/neutral.png",
+    "Source/main-tendril-unwrapped.png"
+  ],
+  "localClosedEyelidSource": "Source/closed-eyes-reference.png"
+}

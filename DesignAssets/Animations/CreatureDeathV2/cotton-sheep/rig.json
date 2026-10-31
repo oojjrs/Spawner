@@ -1,0 +1,84 @@
+{
+  "canvas": [
+    512, 
+    512
+  ], 
+  "source": "Source/reference.png", 
+  "parts": {
+    "far-hindleg": "Parts/far-hindleg.png", 
+    "far-foreleg": "Parts/far-foreleg.png", 
+    "near-hindleg": "Parts/near-hindleg.png", 
+    "near-foreleg": "Parts/near-foreleg.png", 
+    "body": "Parts/body.png", 
+    "collar": "Parts/collar.png", 
+    "far-ear": "Parts/far-ear.png", 
+    "head": "Parts/head.png", 
+    "near-ear": "Parts/near-ear.png", 
+    "ear-root": "Parts/ear-root.png", 
+    "head-closed": "Parts/head-closed.png"
+  }, 
+  "drawOrder": [
+    "far-hindleg", 
+    "far-foreleg", 
+    "near-hindleg", 
+    "near-foreleg", 
+    "body", 
+    "collar", 
+    "far-ear", 
+    "head", 
+    "near-ear", 
+    "ear-root"
+  ], 
+  "pivots": {
+    "body": [
+      308, 
+      280
+    ], 
+    "head": [
+      240, 
+      290
+    ], 
+    "near-ear": [
+      245, 
+      227
+    ], 
+    "far-ear": [
+      135, 
+      190
+    ], 
+    "near-foreleg": [
+      250, 
+      345
+    ], 
+    "far-foreleg": [
+      201, 
+      343
+    ], 
+    "near-hindleg": [
+      401, 
+      321
+    ], 
+    "far-hindleg": [
+      337, 
+      321
+    ]
+  }, 
+  "scale": [
+    1, 
+    1
+  ], 
+  "groundY": 436, 
+  "parent": {
+    "head": "body", 
+    "near-ear": "head", 
+    "far-ear": "head", 
+    "collar": "body", 
+    "ear-root": "head", 
+    "near-foreleg": "body", 
+    "far-foreleg": "body", 
+    "near-hindleg": "body", 
+    "far-hindleg": "body"
+  }, 
+  "timeline": "poses.json", 
+  "spineCompatibilityVerified": false
+}

@@ -1,0 +1,32 @@
+{
+  "activeParts": [
+    "body.png", 
+    "head.png", 
+    "head-closed.png", 
+    "far-hind-upper.png", 
+    "far-hind-lower.png", 
+    "far-hind-paw.png", 
+    "far-paw-upper.png", 
+    "far-paw-lower.png", 
+    "far-paw-paw.png", 
+    "near-hind-upper.png", 
+    "near-hind-lower.png", 
+    "near-hind-paw.png", 
+    "near-paw-upper.png", 
+    "near-paw-lower.png", 
+    "near-paw-paw.png"
+  ], 
+  "canvas": [
+    512, 
+    512
+  ], 
+  "pivot": [
+    256, 
+    448
+  ], 
+  "source": "Bound", 
+  "target": "../Parts", 
+  "reference": "DesignAssets/CreatureConcepts/v3/soil-mole.png", 
+  "renderer": "../render.py", 
+  "prepare": "../prepare.py"
+}

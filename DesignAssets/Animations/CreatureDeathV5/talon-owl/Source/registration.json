@@ -1,0 +1,27 @@
+{
+  "authority": "DesignAssets/CreatureConcepts/v3/talon-owl.png",
+  "sourceSize": [
+    128,
+    103
+  ],
+  "sourceAlphaBounds": [
+    12,
+    10,
+    117,
+    93
+  ],
+  "scale": 3.5,
+  "resizedSize": [
+    448,
+    360
+  ],
+  "offset": [
+    32,
+    122
+  ],
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ]
+}

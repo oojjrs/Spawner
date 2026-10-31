@@ -1,0 +1,367 @@
+{
+  "canvas": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "parts": {
+    "torso": {
+      "source": "Source/CompleteParts/torso.png",
+      "atlasRectangle": [
+        65,
+        22,
+        509,
+        306
+      ],
+      "matrix": [
+        [
+          0.65,
+          0.0,
+          146.75
+        ],
+        [
+          0.0,
+          0.65,
+          207.4
+        ]
+      ],
+      "scale": 0.65,
+      "bindJoints": []
+    },
+    "head-open": {
+      "source": "Source/CompleteParts/head-open.png",
+      "atlasRectangle": [
+        549,
+        68,
+        923,
+        312
+      ],
+      "matrix": [
+        [
+          0.52,
+          0.0,
+          101.92000000000002
+        ],
+        [
+          0.0,
+          0.52,
+          137.92000000000002
+        ]
+      ],
+      "scale": 0.52,
+      "bindJoints": []
+    },
+    "head-closed": {
+      "source": "Source/CompleteParts/head-closed.png",
+      "atlasRectangle": [
+        1032,
+        71,
+        1405,
+        313
+      ],
+      "matrix": [
+        [
+          0.52,
+          0.0,
+          101.39999999999998
+        ],
+        [
+          0.0,
+          0.52,
+          137.39999999999998
+        ]
+      ],
+      "scale": 0.52,
+      "bindJoints": []
+    },
+    "pouch-inflated": {
+      "source": "Source/CompleteParts/pouch-inflated.png",
+      "atlasRectangle": [
+        52,
+        304,
+        438,
+        604
+      ],
+      "matrix": [
+        [
+          0.7,
+          0.0,
+          32.5
+        ],
+        [
+          0.0,
+          0.7,
+          207.2
+        ]
+      ],
+      "scale": 0.7,
+      "bindJoints": []
+    },
+    "pouch-slack": {
+      "source": "Source/CompleteParts/pouch-slack.png",
+      "atlasRectangle": [
+        542,
+        352,
+        914,
+        596
+      ],
+      "matrix": [
+        [
+          0.7,
+          0.0,
+          37.5
+        ],
+        [
+          0.0,
+          0.7,
+          247.2
+        ]
+      ],
+      "scale": 0.7,
+      "bindJoints": []
+    },
+    "pouch-empty": {
+      "source": "Source/CompleteParts/pouch-empty.png",
+      "atlasRectangle": [
+        1029,
+        398,
+        1391,
+        582
+      ],
+      "matrix": [
+        [
+          0.7,
+          0.0,
+          41.200000000000045
+        ],
+        [
+          0.0,
+          0.7,
+          287.2
+        ]
+      ],
+      "scale": 0.7,
+      "bindJoints": []
+    },
+    "fore-near": {
+      "source": "Source/CompleteParts/fore-near.png",
+      "atlasRectangle": [
+        134,
+        608,
+        342,
+        837
+      ],
+      "matrix": [
+        [
+          0.5,
+          0.0,
+          250.0
+        ],
+        [
+          0.0,
+          0.5,
+          335.0
+        ]
+      ],
+      "scale": 0.5,
+      "bindJoints": [
+        [
+          312.0,
+          361.0
+        ],
+        [
+          328.0,
+          388.0
+        ],
+        [
+          306.0,
+          422.0
+        ],
+        [
+          280.5,
+          443.5
+        ]
+      ]
+    },
+    "fore-far": {
+      "source": "Source/CompleteParts/fore-far.png",
+      "atlasRectangle": [
+        653,
+        599,
+        849,
+        836
+      ],
+      "matrix": [
+        [
+          0.47,
+          0.0,
+          66.88
+        ],
+        [
+          0.0,
+          0.47,
+          321.33
+        ]
+      ],
+      "scale": 0.47,
+      "bindJoints": [
+        [
+          112.0,
+          350.0
+        ],
+        [
+          88.97000000000003,
+          380.55
+        ],
+        [
+          108.70999999999998,
+          409.69
+        ],
+        [
+          116.69999999999999,
+          427.08
+        ]
+      ]
+    },
+    "hind-near": {
+      "source": "Source/CompleteParts/hind-near.png",
+      "atlasRectangle": [
+        1048,
+        589,
+        1336,
+        841
+      ],
+      "matrix": [
+        [
+          0.65,
+          0.0,
+          291.95000000000005
+        ],
+        [
+          0.0,
+          0.65,
+          275.85
+        ]
+      ],
+      "scale": 0.65,
+      "bindJoints": [
+        [
+          342.0,
+          296.0
+        ],
+        [
+          449.9,
+          380.5
+        ],
+        [
+          420.0,
+          415.6
+        ],
+        [
+          368.0,
+          426.0
+        ]
+      ]
+    },
+    "hind-far": {
+      "source": "Source/CompleteParts/hind-far.png",
+      "atlasRectangle": [
+        70,
+        829,
+        345,
+        1064
+      ],
+      "matrix": [
+        [
+          0.4,
+          0.0,
+          330.2
+        ],
+        [
+          0.0,
+          0.4,
+          336.8
+        ]
+      ],
+      "scale": 0.4,
+      "bindJoints": [
+        [
+          413.0,
+          350.0
+        ],
+        [
+          346.6,
+          382.8
+        ],
+        [
+          396.2,
+          413.2
+        ],
+        [
+          382.2,
+          423.2
+        ]
+      ]
+    },
+    "fore-near-passive": {
+      "source": "Source/CompleteParts/fore-near-passive.png",
+      "atlasRectangle": [
+        604,
+        830,
+        873,
+        1055
+      ],
+      "matrix": [
+        [
+          0.5,
+          0.0,
+          278.5
+        ],
+        [
+          0.0,
+          0.5,
+          332.5
+        ]
+      ],
+      "scale": 0.5,
+      "bindJoints": []
+    },
+    "fore-far-passive": {
+      "source": "Source/CompleteParts/fore-far-passive.png",
+      "atlasRectangle": [
+        1032,
+        847,
+        1257,
+        1063
+      ],
+      "matrix": [
+        [
+          0.47,
+          0.0,
+          39.620000000000005
+        ],
+        [
+          0.0,
+          0.47,
+          322.27
+        ]
+      ],
+      "scale": 0.47,
+      "bindJoints": []
+    }
+  },
+  "drawOrder": [
+    "hind-far",
+    "fore-far",
+    "hind-near",
+    "torso",
+    "head-open",
+    "pouch-inflated",
+    "head-open-foreground",
+    "hind-near-foreground",
+    "fore-near"
+  ]
+}

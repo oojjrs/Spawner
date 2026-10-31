@@ -1,0 +1,19 @@
+{
+  "provider": "built-in image_gen",
+  "prompts": {
+    "v3-vine-parts-prompt": "Use case: precise-object-edit. Production COMPLETE SEPARATED PARTS of this exact approved snare-vine design for a death animation. Draw SIX non-touching parts in3columns2rows on genuine transparent background. Top-left: complete original OLIVE BULB torso, same slightly pear-shaped body, same two small dark oval eyes, same subtle painted highlight and low-contrast olive shading; paint its complete hidden top dome and bottom; NO feet, leaves, tendrils or sockets attached. Top-middle: complete upper-left leaf, exact original muted pale-green veining and curved shape. Top-right: complete upright leaf. Bottom-left: complete lower-left leaf. Bottom-middle: complete lower-right leaf. Bottom-right: one complete small olive root foot, natural continuous rounded shape, no sphere at its root. All leaf roots are natural tapered green stems with overlap padding, NOT gold balls, circles, cut planes or hollow sockets. Preserve original proportions, original leaf silhouettes, exact palette, original soft dark outlines, subtle painterly style and camera. Do not brighten into neon greens, make the bulb perfectly spherical, redesign eyes, add smiles, draw vine loops or draw a complete assembled creature. Only these6 complete independent source parts, no labels, grid, symbols, background, floor shadow or extra objects. This is actual source artwork; not a preview or full animation sheet.",
+    "v3-vine-clean-prompt": "Use case: precise-object-edit. Exact edit target is a six-part production sprite atlas. Fix ONLY TWO source-art defects. FIRST remove EVERY glow, haze, gradient, black background, drop shadow and colored halo surrounding the six outlined parts; all exterior pixels must be genuinely transparent. Keep only the solid painted parts and their clean antialiased dark outlines. SECOND replace the bulb's top cut-off neck/stump rim with a smooth complete CLOSED olive dome of continuous natural skin, matching the original pear-shaped bulb contour; no open hole, cut plane or socket. Preserve the six parts' layout, exact size, original leaf contours, colors, veins, eyes, highlights and internal painting. No other redesign, no new parts or labels. Output genuine RGBA transparency and no background material.",
+    "v3-vine-eyes-prompt": "Use case: precise-object-edit. Change ONLY the two small dark oval eyes of this isolated olive bulb torso part into relaxed closed eyelids, as two simple short dark curved lines. Preserve the bulb's EXACT silhouette, original proportions, placement, shape, painterly color, texture, highlight,512square transparent canvas and margins. No smile, no mouth, no eyelashes, no new stem, leaf, root, shadow, background or other object. Actual production expression attachment with genuine transparent alpha."
+  },
+  "preservedInputCopies": {
+    "v3-vine-parts-prompt": [
+      "Source/approved-concept.png"
+    ],
+    "v3-vine-clean-prompt": [
+      "Source/initial-parts-drawing.png"
+    ],
+    "v3-vine-eyes-prompt": [
+      "Source/EditableParts/bulb.png"
+    ]
+  }
+}

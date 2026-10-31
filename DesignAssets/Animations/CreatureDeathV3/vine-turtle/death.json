@@ -1,0 +1,90 @@
+{
+  "name": "vine-turtle",
+  "action": "death",
+  "sourceImage": "DesignAssets/CreatureConcepts/v3/vine-turtle.png",
+  "sourceAnimation": "DesignAssets/Animations/CreatureIdleStudies/V2/vine-turtle/idle.webp",
+  "image": "DesignAssets/Animations/CreatureDeathV3/vine-turtle/death.webp",
+  "frameSize": 512,
+  "columns": 6,
+  "frameCount": 37,
+  "pivotX": 256,
+  "pivotY": 448,
+  "durationsMs": [
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    25,
+    900
+  ],
+  "durationMs": 1800,
+  "loop": false,
+  "preview": "DesignAssets/Animations/CreatureDeathV3/vine-turtle/preview.webp",
+  "thumbnail": "DesignAssets/Animations/CreatureDeathV3/vine-turtle/thumbnail.webp",
+  "previewLoop": 0,
+  "rig": "DesignAssets/Animations/CreatureDeathV3/vine-turtle/rig.json",
+  "renderer": "DesignAssets/Animations/CreatureDeathV3/vine-turtle/render.py",
+  "contact": "DesignAssets/Animations/CreatureDeathV3/vine-turtle/contact.png",
+  "sourceOverlay": "DesignAssets/Animations/CreatureDeathV3/vine-turtle/source-overlay.png",
+  "identityCheck": "DesignAssets/Animations/CreatureDeathV3/vine-turtle/identity-check.json",
+  "sourcePlacement": {
+    "canvas": [
+      512,
+      512
+    ],
+    "source": "approved idle first cell",
+    "translation": [
+      0,
+      -1
+    ],
+    "scale": [
+      1,
+      1
+    ],
+    "groundY": 448,
+    "referenceNormalization": {
+      "source": "approved idle first cell",
+      "nativeCellSize": 346,
+      "normalizedSize": 512,
+      "scale": 1.4797687861271676,
+      "translation": [
+        0,
+        -1
+      ]
+    }
+  },
+  "method": "Complete approved idle-source shell, head, legs and tail form a new retract-collapse-contact-settle action. Head and forefeet retract first, hind support disappears next, rigid shell mass falls to ground, and tail retracts last. A brief rigid rebound follows contact; the final shell and cargo alone remain.",
+  "sourceAuthoring": "DesignAssets/Animations/CreatureDeathV3/vine-turtle/Source/authoring.json",
+  "prepare": "DesignAssets/Animations/CreatureDeathV3/vine-turtle/Source/prepare.py"
+}

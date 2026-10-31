@@ -1,0 +1,95 @@
+{
+  "name": "rolling-acorn-death-v2", 
+  "method": "Rigid immutable original body attachment and separate complete leaf attachment with three local FK bones and a leaf-only mesh. No character-wide mesh.", 
+  "canvas": [
+    512, 
+    512
+  ], 
+  "sourceImage": "DesignAssets/CreatureConcepts/v3/rolling-acorn.png", 
+  "drawOrder": [
+    "body", 
+    "leaf"
+  ], 
+  "bones": [
+    {
+      "name": "body", 
+      "parent": null, 
+      "pivot": [
+        245, 
+        286
+      ], 
+      "scale": [
+        1, 
+        1
+      ]
+    }, 
+    {
+      "name": "leaf-base", 
+      "parent": "body", 
+      "pivot": [
+        330, 
+        145
+      ], 
+      "scale": [
+        1, 
+        1
+      ]
+    }, 
+    {
+      "name": "leaf-mid", 
+      "parent": "leaf-base", 
+      "pivot": [
+        368, 
+        148
+      ], 
+      "scale": [
+        1, 
+        1
+      ]
+    }, 
+    {
+      "name": "leaf-tip", 
+      "parent": "leaf-mid", 
+      "pivot": [
+        407, 
+        167
+      ], 
+      "scale": [
+        1, 
+        1
+      ]
+    }
+  ], 
+  "parts": {
+    "body-open": "Parts/body-open.png", 
+    "body-closed": "Parts/body-closed.png", 
+    "leaf": "Parts/leaf.png"
+  }, 
+  "mesh": "leaf-mesh.json", 
+  "timeline": "landmarks.json", 
+  "closedEyeDrawingSource": {
+    "image": "DesignAssets/Animations/RollingAcornIdle/v1/idle.webp", 
+    "frame": 45
+  }, 
+  "neutralReassemblyIdentical": true, 
+  "spineCompatibilityVerified": false, 
+  "activeParts": [
+    "body-open", 
+    "body-closed", 
+    "leaf"
+  ], 
+  "rigidParts": [
+    "body"
+  ], 
+  "renderer": "render.py", 
+  "dependencies": [
+    "Python 3", 
+    "numpy", 
+    "Pillow 12.3"
+  ], 
+  "sources": {
+    "body-open": "fb2e34e1c2dedb2397617020932562a2c6f2f5d1fad7e9f0d0bacbf2a3b709b0", 
+    "body-closed": "75e41805ef0dad9efcd0728bd0bbbcf14ff1fe70eff4b577245fb9c0aeff0dcc", 
+    "leaf": "bf06e9b38643540052561691ad87bf89c81541e59d447d3a59ef99cc15a7091d"
+  }
+}

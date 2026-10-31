@@ -1,0 +1,83 @@
+{
+  "authority": "DesignAssets/CreatureConcepts/v3/soil-boar.png",
+  "approvedCopy": "Source/approved-original.png",
+  "approvedSha256": "f5bb69874e259e88d3fc3870a8082d1641a482997d67a174098bedccf828f3b1",
+  "referenceRegistration": "Source/reference-registration.json",
+  "separationLabels": "Source/part-labels.png",
+  "maneRegion": "Source/mane-region-mask.png",
+  "separate": "Source/separate.py",
+  "prepare": "prepare.py",
+  "rig": "rig.json",
+  "physics": "physics.py",
+  "meshRenderer": "mesh.py",
+  "renderer": "render.py",
+  "visibleLayers": "Source/Visible",
+  "registeredDrawings": "Source/Registered",
+  "runtimeExternalPathsRequired": false,
+  "drawings": [
+    {
+      "image": "Source/core-drawing.png",
+      "sha256": "9df80d1800fa2eec358d8b88e9fb73be3e472d5eaba149251bdf814094b956b9",
+      "actualPrompt": "Source/core-generation.json",
+      "inputs": [
+        "Source/approved-original.png"
+      ]
+    },
+    {
+      "image": "Source/body-complete-drawing.png",
+      "sha256": "dc50fb48f06eff397d191b3ca3143dc5c92d78eb288203e8e9bd44dbb844fc10",
+      "actualPrompt": "Source/body-completion-generation.json",
+      "inputs": [
+        "Source/Inputs/body-visibility-guide.png",
+        "Source/approved-original.png"
+      ]
+    },
+    {
+      "image": "Source/full-leg-drawing.png",
+      "sha256": "c7325ed516d2bf62b49a1d70ccf4732f2dbea27b07d528ee1ed25c92aeba8980",
+      "actualPrompt": "Source/full-leg-generation.json",
+      "inputs": [
+        "Source/Inputs/full-leg-completion-atlas.png",
+        "Source/approved-original.png"
+      ]
+    },
+    {
+      "image": "Source/mane-complete-drawing.png",
+      "sha256": "60f40f0dbe81e358fb1e6fd7b3ed95553d8291091811192f16fc9fc021e4e94b",
+      "actualPrompt": "Source/mane-completion-generation.json",
+      "inputs": [
+        "Source/approved-original.png",
+        "Source/Inputs/mane-completion-guide.png"
+      ]
+    }
+  ],
+  "generatedRegistration": "Source/generated-registration.json",
+  "bodyHiddenSurfacePostTransform": [
+    [
+      1.185,
+      0,
+      -28.12
+    ],
+    [
+      0,
+      1.15,
+      -9.45
+    ],
+    [
+      0,
+      0,
+      1
+    ]
+  ],
+  "bodyHiddenSurfaceRegion": [
+    159,
+    115,
+    322,
+    205
+  ],
+  "originalPaintRgbOnly": true,
+  "originalPaintAlphaThreshold": 204,
+  "sampler": "sampling.py",
+  "affineSampling": "float-premultiplied-bilinear",
+  "maneCorrectiveMask": "Source/mane-corrective-mask.png"
+}

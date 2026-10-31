@@ -1,0 +1,186 @@
+[
+  {
+    "part": "fore-near",
+    "source": "Source/registered-fore-near.png",
+    "crop": [
+      267,
+      355,
+      302,
+      390
+    ],
+    "mask": "rounded 35 pixel cap",
+    "root": [
+      270,
+      335
+    ],
+    "placements": [
+      [
+        253,
+        318
+      ],
+      [
+        255,
+        324
+      ],
+      [
+        258,
+        330
+      ],
+      [
+        260,
+        336
+      ],
+      [
+        262,
+        343
+      ],
+      [
+        265,
+        349
+      ],
+      [
+        267,
+        355
+      ]
+    ],
+    "rootAlpha": 255
+  },
+  {
+    "part": "fore-far",
+    "source": "Source/registered-fore-far.png",
+    "crop": [
+      69,
+      358,
+      104,
+      393
+    ],
+    "mask": "rounded 35 pixel cap",
+    "root": [
+      135,
+      345
+    ],
+    "placements": [
+      [
+        118,
+        328
+      ],
+      [
+        112,
+        332
+      ],
+      [
+        106,
+        335
+      ],
+      [
+        100,
+        339
+      ],
+      [
+        93,
+        343
+      ],
+      [
+        87,
+        347
+      ],
+      [
+        81,
+        350
+      ],
+      [
+        75,
+        354
+      ],
+      [
+        69,
+        358
+      ]
+    ],
+    "rootAlpha": 255
+  },
+  {
+    "part": "hind-near",
+    "source": "Source/registered-hind-near.png",
+    "crop": [
+      415,
+      352,
+      450,
+      387
+    ],
+    "mask": "rounded 35 pixel cap",
+    "root": [
+      425,
+      335
+    ],
+    "placements": [
+      [
+        408,
+        318
+      ],
+      [
+        409,
+        325
+      ],
+      [
+        411,
+        332
+      ],
+      [
+        412,
+        338
+      ],
+      [
+        413,
+        345
+      ],
+      [
+        415,
+        352
+      ]
+    ],
+    "rootAlpha": 255
+  },
+  {
+    "part": "hind-far",
+    "source": "Source/registered-hind-far.png",
+    "crop": [
+      339,
+      350,
+      374,
+      385
+    ],
+    "mask": "rounded 35 pixel cap",
+    "root": [
+      351,
+      333
+    ],
+    "placements": [
+      [
+        334,
+        316
+      ],
+      [
+        335,
+        323
+      ],
+      [
+        336,
+        330
+      ],
+      [
+        337,
+        336
+      ],
+      [
+        338,
+        343
+      ],
+      [
+        339,
+        350
+      ]
+    ],
+    "rootAlpha": 255
+  }
+]

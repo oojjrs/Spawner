@@ -1,0 +1,117 @@
+{
+  "commonScale": 0.8361333496859696, 
+  "calibrationMatrix": [
+    [
+      0.8359823551653857, 
+      0.01588962898292387, 
+      29.403395954663253
+    ], 
+    [
+      -0.01588962898292387, 
+      0.8359823551653857, 
+      26.381600490036938
+    ]
+  ], 
+  "calibrationMatches": 150, 
+  "calibrationInliers": 64, 
+  "frames": [
+    {
+      "sourceRect": [
+        -64, 
+        -64, 
+        640, 
+        640
+      ], 
+      "sourceObjectLabel": 1, 
+      "commonScale": 0.8361333496859696, 
+      "translation": [
+        -25, 
+        -34
+      ], 
+      "rowRootOffsetX": 0, 
+      "foreFootWorldY": 447
+    }, 
+    {
+      "sourceRect": [
+        448, 
+        -64, 
+        640, 
+        640
+      ], 
+      "sourceObjectLabel": 2, 
+      "commonScale": 0.8361333496859696, 
+      "translation": [
+        -25, 
+        -30
+      ], 
+      "rowRootOffsetX": 0, 
+      "foreFootWorldY": 447
+    }, 
+    {
+      "sourceRect": [
+        960, 
+        -64, 
+        640, 
+        640
+      ], 
+      "sourceObjectLabel": 3, 
+      "commonScale": 0.8361333496859696, 
+      "translation": [
+        -25, 
+        -27
+      ], 
+      "rowRootOffsetX": 0, 
+      "foreFootWorldY": 447
+    }, 
+    {
+      "sourceRect": [
+        -64, 
+        448, 
+        640, 
+        640
+      ], 
+      "sourceObjectLabel": 4, 
+      "commonScale": 0.8361333496859696, 
+      "translation": [
+        -25, 
+        26
+      ], 
+      "rowRootOffsetX": 0, 
+      "foreFootWorldY": 447
+    }, 
+    {
+      "sourceRect": [
+        448, 
+        448, 
+        640, 
+        640
+      ], 
+      "sourceObjectLabel": 6, 
+      "commonScale": 0.8361333496859696, 
+      "translation": [
+        -25, 
+        20
+      ], 
+      "rowRootOffsetX": 0, 
+      "foreFootWorldY": 447
+    }, 
+    {
+      "sourceRect": [
+        960, 
+        448, 
+        640, 
+        640
+      ], 
+      "sourceObjectLabel": 5, 
+      "commonScale": 0.8361333496859696, 
+      "translation": [
+        -25, 
+        18
+      ], 
+      "rowRootOffsetX": 0, 
+      "foreFootWorldY": 447
+    }
+  ], 
+  "crossfade": false, 
+  "morphing": false
+}

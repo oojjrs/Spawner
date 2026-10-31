@@ -1,0 +1,25 @@
+{
+  "activeParts": [
+    "body.png", 
+    "far-ear.png", 
+    "foreleg-far.png", 
+    "foreleg.png", 
+    "head-closed.png", 
+    "head.png", 
+    "hindleg-haunch.png", 
+    "hindleg-lower.png", 
+    "hindleg-paw.png", 
+    "hindleg.png", 
+    "near-ear.png", 
+    "ruff.png", 
+    "tail.png"
+  ], 
+  "source": "EditableParts", 
+  "target": "../Parts", 
+  "renderer": "../render.py", 
+  "canvas": [
+    512, 
+    512
+  ], 
+  "originalAuthority": "approved-reference.png"
+}

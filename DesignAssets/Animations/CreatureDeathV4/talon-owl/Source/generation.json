@@ -1,0 +1,40 @@
+{
+  "provider": "built-in image_gen",
+  "entries": [
+    {
+      "file": "parts-atlas.png",
+      "prompt": "Use case: precise-object-edit. Actual production layered anatomical source kit for a hybrid 2D death animation. Image1 is the APPROVED ORIGINAL design authority; image2 is the new final-collapse key for joint/overlap guidance. Nine separate parts in a 3 by 3 atlas: row1 complete chest/torso without head,wings,legs,tail; complete spotted head with ivory facial disks, closed eyes and dark beak, but WITHOUT horn tufts or a chest/neck feather collar; full near wing from shoulder through elbow/wrist to intact primaries in a slightly relaxed partly open pose. Row2 full far wing slightly open; complete near feathered leg from hidden hip through knee/ankle to three relaxed dark talons; complete far feathered leg/talons. Row3 full tail fan; original left horn tuft; original right horn tuft. Preserve exactly the approved original head shape, all spotted crown and wing feather markings, chest feather proportions and original foot scale. Wing roots are natural feather surfaces, not circular sockets. Every attachment is individually complete, continuous, independently separated by generous transparent space, hidden contours fully painted with natural rounded fur/feather/wool, no stump cross sections, flat sliced planes, holes or outlined socket circles. Preserve exact design/texture motifs, palette, line weight, original anatomical proportions and three-quarter view. Parts are in neutral orientation for one-time anatomical registration; no animation frames. All parts should be large enough for clean extraction and full detail. True transparent RGBA alpha. No gray/white backgrounds, checkerboards, shadows, labels, text, borders, frames, grid lines, arrows, extra parts or assembled characters.",
+      "references": [
+        "reference.png",
+        "final-key-drawing.png"
+      ]
+    },
+    {
+      "file": "eye-variant-drawing.png",
+      "prompt": "Use case: precise-object-edit. Exact production expression attachment edit. Edit ONLY the eyes of this isolated talon-owl head to open alert golden eyes with the exact original iris shapes. Preserve every other pixel and silhouette: identical skull size and shape, same wool clumps/feather spots/fur markings, same nose, beak, forehead, cheek volume and colors. Keep the head in exactly the same position and orientation on the same square transparent canvas with the same margins. No ears, horns, torso, neck, added collars or other objects. Do not recenter, zoom, resize, rotate or redraw the head design. True transparent alpha background. This actual alternate eye artwork will be precisely registered and composited into the locked head attachment, keeping the original geometry.",
+      "references": [
+        "head-eye-edit.png"
+      ]
+    }
+  ],
+  "generations": [
+    {
+      "output": "joints-atlas.png",
+      "generatedImage": "D:\\.codex\\generated_images\\01a18389-9751-73b3-bbe4-a6f4a5854d96\\exec-afdeac61-c103-4e6b-879e-e7484a806719.png",
+      "prompt": "Production animation source atlas for this exact perched CARTOON OWL game character, same brown cream feathers and little black curved talons. Image1 is the approved perched appearance; image2 shows its two current leg references (near leg above, far leg below). Draw SIX fully separate parts in two rows and three columns. Row1 near leg, row2 far leg. Each row: left a complete short feathered upper leg with rounded hidden hip and knee overlaps; middle a complete short tan scaly lower leg with solid rounded knee and ankle overlaps, no toes; right the whole original owl foot with every original black curved talon and a rounded ankle connection. Maintain the reference relative lengths, tiny foot size and same camera orientation. Joint ends have fully painted opaque rounded surfaces, no hollow sockets, circles, pipes or flat cuts. Enough overlap to rotate without gaps. Same fine outlines and softly painted feather/scaly texture. Genuine transparent background, generous empty gaps, all six parts fully visible. No words, grids, full bird, body, wings, effects or shadows. These are actual separately rotating game rig source layers.",
+      "references": [
+        "limb-reference.png",
+        "reference.png"
+      ]
+    },
+    {
+      "output": "paws-atlas.png",
+      "generatedImage": "D:\\.codex\\generated_images\\01a18389-9751-73b3-bbe4-a6f4a5854d96\\exec-ea1ccbc3-bb10-4f33-ac88-7463b7b4bb83.png",
+      "prompt": "Actual game animation source: TWO COMPACT OWL FEET ONLY, side by side, matching the exact perched owl reference and its existing talons. Left is near foot, right far foot. Each foot contains all three visible original curved black talons, tiny tan scaly toes and a very short rounded ankle nub immediately above the instep. The entire foot is a low compact shape, broader than it is tall. Do not draw any long upright shin, leg shaft or upper-leg feather mass. Keep the precise original toe directions, scale-like skin, delicate outline, palette and three-quarter view. Solid fully painted rounded ankle connection, no hole or socket. True transparent background, generous gaps, no full bird, body, wing, writing, border, shadow or effects. Separately rotating ankle source layers.",
+      "references": [
+        "reference.png",
+        "limb-reference.png"
+      ]
+    }
+  ]
+}

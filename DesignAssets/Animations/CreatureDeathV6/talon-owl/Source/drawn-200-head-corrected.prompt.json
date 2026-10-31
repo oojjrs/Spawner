@@ -1,0 +1,10 @@
+{
+  "tool": "image_gen",
+  "prompt": "Use case: precise-object-edit. Input1 is the edit target, a falling owl animation key. Input2 is the only approved original owl character. Redraw ONLY the head/neck of input1 to recover the original large compact owl head proportions. The edit target made the skull/facial disk too small relative to both the cream chest and the wing feathers; in the approved original the head is broader than the cream chest. Increase the target's head/skull/face disk by about22 percent, preserving its bowed angle and its center, to be the SAME intrinsic head dimensions as input2 at the same wing scale. In the 512-unit canvas the outer skull with ear tufts spans about125 units, the cream facial disk about108 units. Retain the exact original short charcoal beak, two short pointed ear tufts, broad cream facial disk and white brows, brown speckled crown, amber eyes with drooping eyelids. Integrate the larger head naturally into its original short neck; no seams or extra outlines. Keep the wings, individual feather sizes, torso, tail, both short feet, camera, placements, square canvas and all other art from input1 UNCHANGED. Do not enlarge the whole bird or fit to bounds. Draw one complete clean owl on true transparency, same painterly game-sprite style. No text, guide, ground, shadow, new limbs or colored alpha garbage.",
+  "output": "Source/drawn-200-head-corrected.png",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "Source/drawn-200.png",
+    "Source/reference.png"
+  ]
+}

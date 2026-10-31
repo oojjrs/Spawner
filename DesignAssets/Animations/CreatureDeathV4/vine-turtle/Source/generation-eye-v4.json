@@ -1,0 +1,9 @@
+{
+  "provider": "builtin image_gen", 
+  "prompt": "Use case: precise-object-edit. Exact edit target is the isolated vine-turtle HEAD AND NECK attachment in image 1, on its fixed 512 square transparent canvas. Change ONLY the TWO OPEN DARK GREEN EYES into naturally CLOSED relaxed short eyelid curves, matching the original painted turtle style. Preserve the head silhouette, position, proportions, cream cheek, sage/olive skin, every round spot, nose, neck rings, light, color, outline, source pixels outside the eye interiors and transparent margins. Keep the same camera and complete attachment; no scale or pose change. No lashes, eyebrows, tears, added objects, text, glow, matte or background. Production death-animation eyelid attachment with genuine transparency.", 
+  "inputs": [
+    "H:/Spawner/DesignAssets/Animations/CreatureDeathV4/vine-turtle/Source/head-eye-input-v4.png"
+  ], 
+  "transparent_background": true, 
+  "savedImage": "closed-eye-drawing-v4.png"
+}

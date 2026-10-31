@@ -1,0 +1,130 @@
+{
+  "name": "dew-rabbit", 
+  "configuration": {
+    "bodyPivot": [
+      355, 
+      350
+    ], 
+    "headPivot": [
+      244, 
+      310
+    ], 
+    "legs": {
+      "foreleg-far": [
+        [
+          179, 
+          332
+        ], 
+        [
+          183, 
+          362
+        ], 
+        [
+          180, 
+          387
+        ]
+      ], 
+      "hindleg": [
+        [
+          337, 
+          352
+        ], 
+        [
+          356, 
+          373
+        ], 
+        [
+          363, 
+          397
+        ]
+      ], 
+      "foreleg": [
+        [
+          231, 
+          340
+        ], 
+        [
+          235, 
+          370
+        ], 
+        [
+          232, 
+          395
+        ]
+      ]
+    }, 
+    "ears": {
+      "far-ear": [
+        [
+          221, 
+          198
+        ], 
+        [
+          185, 
+          167
+        ], 
+        [
+          143, 
+          145
+        ]
+      ], 
+      "near-ear": [
+        [
+          275, 
+          214
+        ], 
+        [
+          300, 
+          158
+        ], 
+        [
+          338, 
+          103
+        ]
+      ]
+    }, 
+    "backLayers": [
+      "foreleg-far", 
+      "foreleg", 
+      "hindleg"
+    ], 
+    "frontLayers": [], 
+    "hindHipPlacement": {
+      "image": "Parts/hindleg-upper.png", 
+      "pivot": [
+        337, 
+        352
+      ], 
+      "attachment": "body", 
+      "sourceMassOverlap": true
+    }, 
+    "pawForeground": [
+      "hindleg"
+    ]
+  }, 
+  "method": "Head-inherited ear root with dynamic distal pendulum; complete independently grounded articulated limbs and continuous support loss, contact and settling", 
+  "controls": "motion.json", 
+  "timeline": "landmarks.json", 
+  "renderer": "render.py", 
+  "canvas": [
+    512, 
+    512
+  ], 
+  "spineCompatibilityVerified": false, 
+  "activeParts": [
+    "body", 
+    "head", 
+    "head-closed", 
+    "foreleg-far", 
+    "hindleg", 
+    "foreleg", 
+    "far-ear", 
+    "near-ear"
+  ], 
+  "authoringRuntime": [
+    "Python 3", 
+    "numpy", 
+    "Pillow 12.3"
+  ], 
+  "version": 4
+}

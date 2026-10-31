@@ -1,0 +1,9 @@
+{
+  "tool": "builtin-imagegen",
+  "prompt": "Use case: precise-object-edit/background-extraction. Image 1 is an EDIT TARGET: a six-cel 3x2 turtle animation sheet. Image 2 identifies the original animal/materials. Output the SAME six cells with EXACT same relative skin/limb placement, sizes, poses, colors and cell layout, but REMOVE all RIGID shell material to real transparency. Keep ONLY the currently visible soft spotted olive/tan head, neck, legs, feet, tail, cream jaw, eyes and small toenails. Every hard rock/stone/crystal/amber surface, orange armor plate, leaf/vine cargo and the pale segmented hard plastron must be transparent. In the forest character, crystals/stones are shell, not skin. In the vine character, gray-green angular stones are shell, while smooth spotted olive skin is animal. The olive oval cap still visible INSIDE the head rim in the later cels is soft neck tissue and belongs in this extraction. Do not make a new head or add a hidden torso; retain only visible skin and its own contours. Do not move the pieces together, recenter them, resize them, extend a foot, reinterpret the pose, or fill holes between them. The disconnected visible head/feet are separated because the removed shell was occluding them. Preserve skin pixels/drawing fidelity as closely as possible and keep clean alpha at each skin contour, no shell outlines left on skin. Fully transparent empty background, no checkerboard, no scenery/shadow/text/markers. Six original corresponding positions in a 3-column by 2-row sheet.",
+  "inputs": [
+    "H:/Spawner/DesignAssets/Animations/CreatureDeathV6/vine-turtle/Source/generation/corrected-keys.png",
+    "H:/Spawner/DesignAssets/Animations/CreatureDeathV6/vine-turtle/Source/registered-reference.png"
+  ],
+  "output": "body-extract.png"
+}

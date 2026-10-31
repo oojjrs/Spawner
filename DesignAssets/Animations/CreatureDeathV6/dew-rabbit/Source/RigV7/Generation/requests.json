@@ -1,0 +1,22 @@
+{
+  "tool": "image_gen",
+  "transparentBackground": true,
+  "requests": [
+    {
+      "output": "head.png",
+      "references": [
+        "DesignAssets/Animations/CreatureDeathV5/dew-rabbit/Parts/head-closed.png",
+        "DesignAssets/Animations/CreatureDeathV5/dew-rabbit/reference.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Production cutout animation artwork, NOT a preview. Image 1 is the edit target: a 512x512 transparent full-canvas head cutout of the dew rabbit with sleepy eyes; Image 2 is the complete character design reference for its correct fur, round skull, cheek anatomy and lighting. Complete and clean the HEAD ONLY as a usable independently animated layer. Keep its exact left-facing 3/4 angle, cream fur brushwork, rounded cheeks, small pink nose, mouth, overall scale and head position. Close BOTH eyes completely with simple soft dark-green curved eyelid lines; no remaining iris. Reconstruct the COMPLETE rounded top of the skull where the ear cuts have left a flat/chopped top, and the complete rear cheek/underside where the old extraction was clipped. The scalp must be a coherent fur surface that will be revealed when the ears move away. No attached ears, no ear stubs, no dew drops, no body or neck ruff, no feet, no extra shadow, no other parts. Maintain the full source world-space canvas with the muzzle near (135,292), near eyelid near (228,284), skull top near (224,195), chin near (220,344). Do NOT center or enlarge the cutout to fill the image: keep the same large transparent margins and same proportions as image 1. Genuine transparent background, antialiased clean alpha edges, no text or marks. Only this complete head layer, with fully closed eyes. The layer will actually be used in the animation."
+    },
+    {
+      "output": "body.png",
+      "references": [
+        "DesignAssets/Animations/CreatureDeathV5/dew-rabbit/Parts/body.png",
+        "DesignAssets/Animations/CreatureDeathV5/dew-rabbit/reference.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Production independently rigged 2D sprite TORSO layer. Image 1 is the edit target: a torso cutout in a fixed 512x512 transparent world-space canvas. Image 2 is the complete original dew rabbit reference. Repair the torso layer for independent animation: REMOVE the huge separate shaggy chest ruff/collar from the top and front of image 1. It is animated on a different layer and must not be baked into this torso. Draw a clean, COMPLETE, softly rounded cream-furred ribcage/torso beneath it. Preserve the existing original rump/rounded back at right, same soft painted fur detail, color and lighting. The torso should have one simple coherent oval silhouette running from chest at approximately (205,325) through upper ribcage (280,288) to rump (374,344), underbelly around y400; it must not extend above y280, must not have a neck, a head-shaped bulge, a shaggy collar, tufts projecting from the neck, or any limbs/tail/ears/dew drops. Exact original left-facing 3/4 perspective. Large transparent canvas margins unchanged, same scale and position as the original torso layer. The complete naked torso ONLY, no complete character. The missing front contour must be clean rounded fur that can be revealed beneath a moving chest ruff and head. Genuine transparent background. No text, no marks, no shadow."
+    }
+  ]
+}

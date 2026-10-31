@@ -1,0 +1,8 @@
+{
+  "prompt": "Repair a 2D game animation torso attachment. Image 1 is the sole approved sheep design. Image 2 is the current incomplete torso layer: it has obvious straight cut edges, missing upper shoulder wool, triangular notches and leftover bits near the tail. Create ONE complete smooth rounded wool torso for this EXACT sheep, without the head, ears, forelock, legs, hooves or separate tail tuft. Preserve the original trunk's large rounded cream wool puff shapes, exact back/rump silhouette, warm cream and pale green shadows, painterly texture and three-quarter camera. Complete the currently hidden front shoulder and neck socket as coherent rounded wool puffs, and smoothly close the underside and rear root surfaces. Every outside contour must be a natural rounded wool contour, with no polygon cuts, spikes, open holes, detached scraps or pasted seams. Keep the torso's original size and placement within the supplied square canvas as closely as possible; do not recenter, enlarge, change perspective, or redesign its visible rear wool pattern. Transparent background, no text, ground or shadow. This is a source attachment used behind the original face and limbs; fidelity to the approved design is essential.",
+  "referenced_image_paths": [
+    "H:\\Spawner\\DesignAssets\\Animations\\CreatureDeathV5\\cotton-sheep\\Source\\reference.png",
+    "H:\\Spawner\\DesignAssets\\Animations\\CreatureDeathV5\\cotton-sheep\\Parts\\body.png"
+  ],
+  "transparent_background": true
+}

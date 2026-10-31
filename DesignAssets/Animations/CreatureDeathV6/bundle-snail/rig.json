@@ -1,0 +1,68 @@
+{
+  "authority": "DesignAssets/CreatureConcepts/v3/bundle-snail.png",
+  "canvas": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "groundY": 448,
+  "gravity": 1100,
+  "restitution": 0.035,
+  "shell": {
+    "source": "Parts/shell.png",
+    "type": "rigid",
+    "scale": 1,
+    "rotation": 0
+  },
+  "bodyCels": [
+    {
+      "image": "body-neutral.png",
+      "durationMs": 160
+    },
+    {
+      "image": "body-01.png",
+      "durationMs": 80
+    },
+    {
+      "image": "body-02.png",
+      "durationMs": 80
+    },
+    {
+      "image": "body-03.png",
+      "durationMs": 80
+    },
+    {
+      "image": "body-04.png",
+      "durationMs": 100
+    },
+    {
+      "image": "body-05.png",
+      "durationMs": 100
+    },
+    {
+      "image": "body-07.png",
+      "durationMs": 100
+    },
+    {
+      "image": "body-08.png",
+      "durationMs": 100
+    },
+    {
+      "image": "body-09.png",
+      "durationMs": 100,
+      "rearMask": "body-09-rear-mask.png"
+    },
+    {
+      "image": "body-10.png",
+      "durationMs": 100
+    },
+    {
+      "image": "body-11.png",
+      "durationMs": 640
+    }
+  ],
+  "construction": "drawn soft-body cels and one rigid original shell with painted hidden surface"
+}

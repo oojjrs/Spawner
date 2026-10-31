@@ -1,0 +1,478 @@
+[
+  {
+    "timeMs": 0,
+    "headRetraction": 0,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      0
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 7489128
+  },
+  {
+    "timeMs": 50,
+    "headRetraction": 0,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      0
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 7489128
+  },
+  {
+    "timeMs": 100,
+    "headRetraction": 0,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      0
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 7489128
+  },
+  {
+    "timeMs": 150,
+    "headRetraction": 0.00997353958884592,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      0
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 6500740
+  },
+  {
+    "timeMs": 200,
+    "headRetraction": 0.038265825361286386,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      0
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 6453120
+  },
+  {
+    "timeMs": 250,
+    "headRetraction": 0.08243435782617546,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      0
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 6290189
+  },
+  {
+    "timeMs": 300,
+    "headRetraction": 0.1400366374923672,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      0
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 5669946
+  },
+  {
+    "timeMs": 350,
+    "headRetraction": 0.20863016486871566,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      0
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 5403503
+  },
+  {
+    "timeMs": 400,
+    "headRetraction": 0.2857724404640749,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      0
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 4876721
+  },
+  {
+    "timeMs": 450,
+    "headRetraction": 0.369020964787299,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      0
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 4390435
+  },
+  {
+    "timeMs": 500,
+    "headRetraction": 0.455933238347242,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      0
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 3771703
+  },
+  {
+    "timeMs": 550,
+    "headRetraction": 0.544066761652758,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      0
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 3137266
+  },
+  {
+    "timeMs": 600,
+    "headRetraction": 0.630979035212701,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      0
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 2485788
+  },
+  {
+    "timeMs": 650,
+    "headRetraction": 0.7142275595359251,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      0
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 1852540
+  },
+  {
+    "timeMs": 700,
+    "headRetraction": 0.7913698351312844,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      0
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 1288190
+  },
+  {
+    "timeMs": 750,
+    "headRetraction": 0.8599633625076328,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      0
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 830499
+  },
+  {
+    "timeMs": 800,
+    "headRetraction": 0.9175656421738245,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      0
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 499521
+  },
+  {
+    "timeMs": 850,
+    "headRetraction": 0.9617341746387136,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      0
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 252621
+  },
+  {
+    "timeMs": 900,
+    "headRetraction": 0.9900264604111542,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      1
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 88366
+  },
+  {
+    "timeMs": 950,
+    "headRetraction": 1,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      4
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 7469
+  },
+  {
+    "timeMs": 1000,
+    "headRetraction": 1,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      8
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 35
+  },
+  {
+    "timeMs": 1050,
+    "headRetraction": 1,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      13
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 0
+  },
+  {
+    "timeMs": 1100,
+    "headRetraction": 1,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      18
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 0
+  },
+  {
+    "timeMs": 1150,
+    "headRetraction": 1,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      24
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 0
+  },
+  {
+    "timeMs": 1200,
+    "headRetraction": 1,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      29
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 0
+  },
+  {
+    "timeMs": 1250,
+    "headRetraction": 1,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      33
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 0
+  },
+  {
+    "timeMs": 1300,
+    "headRetraction": 1,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      36
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 0
+  },
+  {
+    "timeMs": 1350,
+    "headRetraction": 1,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      37
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 0
+  },
+  {
+    "timeMs": 1400,
+    "headRetraction": 1,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      37
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 0
+  },
+  {
+    "timeMs": 1450,
+    "headRetraction": 1,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      37
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 0
+  },
+  {
+    "timeMs": 1500,
+    "headRetraction": 1,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      37
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 0
+  },
+  {
+    "timeMs": 1550,
+    "headRetraction": 1,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      37
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 0
+  },
+  {
+    "timeMs": 1700,
+    "headRetraction": 1,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      37
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 0
+  },
+  {
+    "timeMs": 1900,
+    "headRetraction": 1,
+    "allRigidPartsScale": [
+      1,
+      1
+    ],
+    "shellTranslation": [
+      0,
+      37
+    ],
+    "shellRotation": 0,
+    "movingAlphaSum": 0
+  }
+]

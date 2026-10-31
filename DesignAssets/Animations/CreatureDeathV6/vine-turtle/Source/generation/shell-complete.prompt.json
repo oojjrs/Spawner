@@ -1,0 +1,8 @@
+{
+  "tool": "builtin-imagegen",
+  "prompt": "Use case: precise-object-edit. This is the sole original turtle design and 512x512 placement. Produce one transparent complete RIGID SHELL attachment after removing ALL soft head, neck, green spotted legs/feet, claws and tail. Keep the orange and gray-green stone carapace, original vines and curls, every leaf, complete pale segmented hard plastron and their exact camera/size/shape/placement. Complete only surfaces that were hidden by the animal. The original small neck and individual leg recesses may have dark shadows inside them, but do NOT leave olive-green oval head plugs, foot balls, toe shapes or any soft skin anywhere. Do not invent big black bottom arches, huge extra holes or a thin detached armor plate; retain a substantial rounded closed underside with only small natural rim recesses. The shell remains at its original neutral height, not moved down to the foot ground yet; vertical settling is animated later. No text/markers/shadow/background, no design change.",
+  "inputs": [
+    "H:/Spawner/DesignAssets/Animations/CreatureDeathV6/vine-turtle/Source/registered-reference.png"
+  ],
+  "output": "shell-complete.png"
+}

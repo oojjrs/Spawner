@@ -1,0 +1,8 @@
+{
+  "prompt": "Precise object edit for the approved snare-vine plant. Image 1 is the exact approved bulb crop with foreground leaf fragments and three attached root feet; image 2 shows the full approved creature. Produce TWO complete isolated OLIVE BULB TORSO drawings side by side on a true transparent background. Both must keep the original bulb's exact softly rounded pear volume, width-to-height ratio, asymmetric dome, low-contrast olive facets, highlight shape, camera and outline. Remove every leaf fragment, stem and root foot from the bulb and paint the complete hidden olive upper dome and the smooth closed lower body underneath them. Do not flatten it into a shallow oval, enlarge it, change the face spacing, invent a neck, add sockets, appendages, mouth or rim. LEFT: the same two small dark green oval eyes in their original positions and original spacing. RIGHT: exactly the same complete bulb, same anatomy and lighting, with only those two eyes gently closed as short curved dark eyelid lines. The two torso silhouettes and body proportions must be identical. Preserve existing visible olive skin painting as closely as possible; the new surfaces are only the hidden top/bottom and removed-foot areas. Generous transparent padding around each complete object. No background, glow, shadows, labels or extra parts. These are reusable actual rigid torso/expression source parts, not final animation frames.",
+  "referenced_image_paths": [
+    "H:/Spawner/DesignAssets/Animations/CreatureDeathV4/snare-vine/Source/bulb-reference-crop.png",
+    "H:/Spawner/DesignAssets/Animations/CreatureDeathV4/snare-vine/Source/neutral.png"
+  ],
+  "transparent_background": true
+}

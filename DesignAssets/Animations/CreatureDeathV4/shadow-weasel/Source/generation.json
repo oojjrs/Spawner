@@ -1,0 +1,49 @@
+{
+  "provider": "built-in image_gen",
+  "entries": [
+    {
+      "file": "parts-atlas.png",
+      "prompt": "Use case: precise-object-edit. Actual production layered anatomical source kit for a hybrid 2D death animation. Image1 is the APPROVED ORIGINAL design authority; image2 is the new final-collapse key for joint/overlap guidance. Nine separate parts in a 3 by 3 atlas: row1 complete long torso excluding head,tail,legs but including original cream belly and coherent chest/hip contours; complete original head including cream cheek/muzzle and brown nose, eyes open, WITHOUT ears or a thick neck/collar; complete thick original long curved tail with hidden root. Row2 complete near foreleg shoulder/elbow/wrist/paw; complete far foreleg; complete near hindleg hip/knee/hock/paw. Row3 complete far hindleg; complete near rounded ear; complete far rounded ear. Draw the legs as complete continuous full limbs with natural softly bent neutral anatomy and clear joint positions, not amputated pieces. All paws have the original small digits, not enormous bear feet. Keep original long torso length, head width, limb lengths and original warm-brown markings. Every attachment is individually complete, continuous, independently separated by generous transparent space, hidden contours fully painted with natural rounded fur/feather/wool, no stump cross sections, flat sliced planes, holes or outlined socket circles. Preserve exact design/texture motifs, palette, line weight, original anatomical proportions and three-quarter view. Parts are in neutral orientation for one-time anatomical registration; no animation frames. All parts should be large enough for clean extraction and full detail. True transparent RGBA alpha. No gray/white backgrounds, checkerboards, shadows, labels, text, borders, frames, grid lines, arrows, extra parts or assembled characters.",
+      "references": [
+        "reference.png",
+        "final-key-drawing.png"
+      ]
+    },
+    {
+      "file": "eye-variant-drawing.png",
+      "prompt": "Use case: precise-object-edit. Exact production expression attachment edit. Edit ONLY the eyes of this isolated shadow-weasel head to fully closed relaxed eyelids. Preserve every other pixel and silhouette: identical skull size and shape, same wool clumps/feather spots/fur markings, same nose, beak, forehead, cheek volume and colors. Keep the head in exactly the same position and orientation on the same square transparent canvas with the same margins. No ears, horns, torso, neck, added collars or other objects. Do not recenter, zoom, resize, rotate or redraw the head design. True transparent alpha background. This actual alternate eye artwork will be precisely registered and composited into the locked head attachment, keeping the original geometry.",
+      "references": [
+        "head-eye-edit.png"
+      ]
+    },
+    {
+      "file": "clean-torso.png",
+      "prompt": "Use case: precise-object-edit. ACTUAL PRODUCTION CLEAN TORSO UNDER THE LEGS for the exact approved brown/cream weasel. Image1 is edit target, image2 is approved full design and proportion authority. The target still wrongly includes big downward shoulder/upper-foreleg and rear-thigh shaped stumps. REMOVE BOTH entire leg-shaped protrusions from the torso, including the big downward brown front-arm bulge at the lower-left/middle and the rear thigh bulge at lower-right. Draw the COMPLETE previously hidden cream belly and brown rounded ribcage/rump surfaces in their places. Smooth continuous shallow belly contour connecting the actual trunk, no chopped notches or leg-shaped downward lobes. Keep original arched spine, exact brown/cream markings, fine dark contour and painterly shading, overall trunk length and true ribcage volume. NO head, neck sticking out, tail, shoulders as detached appendages, legs, feet or extra objects. One isolated continuous closed trunk, all hidden surfaces finished, transparent RGBA outside. Do not merely erase a rectangle or shrink/stretch the entire animal. This layer will deform with continuous spine bones above separately attached full limbs, so it must contain ZERO painted-in limbs.",
+      "references": [
+        "Source/old-body-input.png",
+        "DesignAssets/CreatureConcepts/v3/shadow-weasel.png"
+      ],
+      "providerOutput": "exec-9effc150-921b-4880-be8c-ad7dd75a8442.png"
+    }
+  ],
+  "generations": [
+    {
+      "output": "joints-atlas.png",
+      "generatedImage": "D:\\.codex\\generated_images\\01a18389-9751-73b3-bbe4-a6f4a5854d96\\exec-46b2f052-f898-4dd1-832c-8aa269b221b0.png",
+      "prompt": "Production GAME ANIMATION attachment atlas for the exact small brown cartoon WEASEL in the references. Image1 gives approved character style; image2 shows its four complete legs, top to bottom: near front, far front, near rear, far rear. Draw TWELVE complete separate painted pieces arranged four rows and three columns. Each row corresponds to that same leg: left the complete upper limb with round hidden shoulder/hip and rounded knee end; middle the lower limb with round hidden knee and ankle ends; right the whole tiny animal paw, all original toes and rounded hidden ankle overlap. Match the brown fur, cream marking on the upper inner leg, small toe count, reference proportions and three-quarter orientation exactly. These are solid opaque rounded fur surfaces, no hollow sockets, tubes, rings, amputated or flat-cut ends, no bare bones. Paint enough smooth overlap for rotating each joint without gaps. Maintain thin dark outline and fine soft fur shading. Fully transparent background, generous spacing, every part inside its own cell. No whole character, body, extra limbs, words, grid, shadows or effects. Actual sources to rig the existing animal.",
+      "references": [
+        "limb-reference.png",
+        "../../../../CreatureConcepts/v3/shadow-weasel.png"
+      ]
+    },
+    {
+      "output": "paws-atlas.png",
+      "generatedImage": "D:\\.codex\\generated_images\\01a18389-9751-73b3-bbe4-a6f4a5854d96\\exec-8d0b202d-8fba-4020-83ac-fb6f3f2c3a80.png",
+      "prompt": "Production game sprite parts: FOUR SMALL COMPACT WEASEL PAWS ONLY, in one row, matching the exact brown cartoon weasel and paw references. Near front paw, far front paw, near rear paw, far rear paw in that order. Keep each as a low little foot with the original rounded toes, soft brown fur, and just a tiny solid rounded ankle nub immediately above the instep. NO long leg or shin rising above any paw: the complete paw silhouette must be broader than it is tall, like the animal's original little foot resting on the ground. Match original toe count, proportions, three-quarter direction and fine painterly outline. Complete solid rounded hidden ankle overlap, no sockets or cut planes. Generous transparent gaps, no body, full legs, labels, shadows or scenery. Transparent RGBA. Actual sources to rotate independently at the ankle.",
+      "references": [
+        "../../../../CreatureConcepts/v3/shadow-weasel.png",
+        "limb-reference.png"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,309 @@
+{
+  "name": "vine-turtle",
+  "sourceImage": "DesignAssets/CreatureConcepts/v3/vine-turtle.png",
+  "sourceAnimation": "DesignAssets/Animations/CreatureIdleStudies/V2/vine-turtle/idle.webp",
+  "frameSize": 512,
+  "columns": 6,
+  "pivotX": 256,
+  "pivotY": 454,
+  "timesMs": [
+    0,
+    50,
+    100,
+    150,
+    200,
+    250,
+    300,
+    350,
+    400,
+    450,
+    500,
+    550,
+    600,
+    650,
+    700,
+    750,
+    800,
+    850,
+    900,
+    950,
+    1000,
+    1050,
+    1100,
+    1150,
+    1200,
+    1250,
+    1300,
+    1350,
+    1400,
+    1450,
+    1500,
+    1550,
+    1700,
+    1900
+  ],
+  "durationsMs": [
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    150,
+    200,
+    900
+  ],
+  "fixedLayers": [
+    "Parts/shell-hidden-complete.png",
+    "Parts/shell-fixed.png"
+  ],
+  "parts": {
+    "head": {
+      "image": "Parts/head.png",
+      "parent": "shell",
+      "rigid": true,
+      "sourceIdentity": "Retained source pixels, no scaling or mesh deformation."
+    },
+    "fore-near": {
+      "image": "Parts/fore-near.png",
+      "parent": "shell",
+      "rigid": true,
+      "sourceIdentity": "Retained source pixels, no scaling or mesh deformation."
+    },
+    "fore-far": {
+      "image": "Parts/fore-far.png",
+      "parent": "shell",
+      "rigid": true,
+      "sourceIdentity": "Retained source pixels, no scaling or mesh deformation."
+    },
+    "hind": {
+      "image": "Parts/hind.png",
+      "parent": "shell",
+      "rigid": true,
+      "sourceIdentity": "Retained source pixels, no scaling or mesh deformation."
+    },
+    "tail": {
+      "image": "Parts/tail.png",
+      "parent": "shell",
+      "rigid": true,
+      "sourceIdentity": "Retained source pixels, no scaling or mesh deformation."
+    }
+  },
+  "retraction": {
+    "head": [
+      154,
+      -19
+    ],
+    "fore-far": [
+      70,
+      -75
+    ],
+    "fore-near": [
+      -3,
+      -95
+    ],
+    "hind": [
+      -55,
+      -80
+    ],
+    "tail": [
+      -66,
+      8
+    ],
+    "hind-far-occluded": [
+      70,
+      -75
+    ]
+  },
+  "delaysMs": {
+    "head": 100,
+    "fore-far": 220,
+    "fore-near": 290,
+    "hind": 370,
+    "tail": 450,
+    "hind-far-occluded": 340
+  },
+  "gates": {
+    "head": [
+      [
+        0,
+        0
+      ],
+      [
+        194,
+        0
+      ],
+      [
+        194,
+        298
+      ],
+      [
+        212,
+        306
+      ],
+      [
+        224,
+        327
+      ],
+      [
+        224,
+        344
+      ],
+      [
+        210,
+        362
+      ],
+      [
+        191,
+        371
+      ],
+      [
+        0,
+        371
+      ]
+    ],
+    "fore-far": [
+      [
+        0,
+        379
+      ],
+      [
+        120,
+        379
+      ],
+      [
+        144,
+        404
+      ],
+      [
+        143,
+        512
+      ],
+      [
+        0,
+        512
+      ]
+    ],
+    "fore-near": [
+      [
+        214,
+        512
+      ],
+      [
+        214,
+        412
+      ],
+      [
+        224,
+        379
+      ],
+      [
+        249,
+        364
+      ],
+      [
+        270,
+        364
+      ],
+      [
+        286,
+        382
+      ],
+      [
+        300,
+        413
+      ],
+      [
+        316,
+        512
+      ]
+    ],
+    "hind": [
+      [
+        384,
+        512
+      ],
+      [
+        384,
+        399
+      ],
+      [
+        399,
+        374
+      ],
+      [
+        426,
+        364
+      ],
+      [
+        445,
+        374
+      ],
+      [
+        470,
+        412
+      ],
+      [
+        512,
+        512
+      ]
+    ],
+    "tail": [
+      [
+        440,
+        304
+      ],
+      [
+        512,
+        282
+      ],
+      [
+        512,
+        369
+      ],
+      [
+        440,
+        369
+      ]
+    ]
+  },
+  "method": "Complete painted rigid shell and decorations with a continuous curved underside. Independent head, three visible legs and tail retract through registered apertures; the fourth leg remains fully occluded. Foreground aperture masks use the same complete shell source, replacing the rejected original-foot-removal fragments. The shell lowers rigidly to the original ground after retraction.",
+  "rootMotion": {
+    "verticalDropPx": 37,
+    "startedAtMs": 850,
+    "endedAtMs": 1350,
+    "groundY": 449
+  },
+  "sourceCleanup": {
+    "completeShellSource": "Parts/shell-hidden-complete.png",
+    "foregroundSource": "Parts/shell-fixed.png",
+    "foregroundMask": "Source/shell-foreground-occlusion-mask.png",
+    "supersededFragment": "Original fixed overlay contained the disconnected cream underside wedge and residual tail outline.",
+    "shape": "One complete painted shell surface, rigidly reused at unit scale in every frame."
+  }
+}

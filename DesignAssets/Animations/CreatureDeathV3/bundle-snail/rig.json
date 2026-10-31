@@ -1,0 +1,80 @@
+{
+  "name": "bundle-snail", 
+  "method": "Unchanged rigid shell/pack, sequential eye-stalk inversion and full-sized soft-head withdrawal, foot gathers and tail follows under shell, then shell falls to original ground.", 
+  "activeParts": [
+    "shell", 
+    "shell-front", 
+    "mantle", 
+    "near-eye", 
+    "far-eye"
+  ], 
+  "poseDesign": "Source/curled-soft-body-complete.png", 
+  "rigidParts": [
+    "shell"
+  ], 
+  "meshParts": [
+    "mantle"
+  ], 
+  "controls": "motion.json", 
+  "timeline": "landmarks.json", 
+  "renderer": "render.py", 
+  "canvas": [
+    512, 
+    512
+  ], 
+  "spineCompatibilityVerified": false, 
+  "bones": [
+    {
+      "name": "shell", 
+      "parent": "root", 
+      "pivot": [
+        310, 
+        340
+      ]
+    }, 
+    {
+      "name": "head-withdrawal", 
+      "parent": "shell", 
+      "pivot": [
+        170, 
+        330
+      ]
+    }, 
+    {
+      "name": "foot-gathering", 
+      "parent": "shell", 
+      "pivot": [
+        270, 
+        380
+      ]
+    }, 
+    {
+      "name": "tail-withdrawal", 
+      "parent": "shell", 
+      "pivot": [
+        380, 
+        400
+      ]
+    }
+  ], 
+  "sourceHashes": {
+    "shell": "45fa824fdac8ede82c68fb86b2d04f1771f6a61f0160cf0c4cea7efb35bbd6a8", 
+    "shell-front": "1ae26332e9365c06ba2b5f6cc5051dd16b7a0bed6d5e938557f31f81d5573424", 
+    "mantle": "53a896f20a850cb4c71af422a163320201562f3fd7425be09fe36ee081d091f5", 
+    "near-eye": "453a79a8ceb2a406be8916c630ee492ceaeec195dec9e717be129ff37334fc92", 
+    "far-eye": "acd908bdf18d7f370d546e870f5cbed25f212c6c475d3a2faeef67788f688658"
+  }, 
+  "authoringRuntime": [
+    "Python 3", 
+    "numpy", 
+    "Pillow 12.3"
+  ], 
+  "authoringControls": {
+    "parts": "Parts", 
+    "motion": "motion.json", 
+    "pivots": "render.py", 
+    "meshes": [
+      "mantle-mesh.json"
+    ]
+  }
+}

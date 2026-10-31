@@ -1,0 +1,16 @@
+{
+  "tool": "image_gen",
+  "mode": "built-in",
+  "edits": [
+    {
+      "timeMs": 280,
+      "source": "Raw/wing-280.png",
+      "prompt": "Target image 1 is the 240ms pose of this owl death animation. Image 2 is the following 320ms pose. Create a missing in-between of ONLY the SCREEN-RIGHT WING at 280ms, with all other pixels and the 512x512 square canvas registration of image 1 kept unchanged. The extended wing in image 1 points upward to the right; the wing in image 2 has bent down and folded. Draw a genuinely halfway position: same shoulder attachment around (304,340) in the 512x512 coordinate system, long outer flight feather tip around (476,348), well below its old tip near (474,290) but above the lowered next pose. The wing's upper arm remains attached behind the neck, elbow gently folding, outer feather fan still mostly open and extended right with only a shallow downward slope. Do not jump straight to the folded paddle of image 2. Match feather count, lengths, pattern, palette, black outline and painterly sprite finish. Keep head, body, beak, closed eyes, screen-left raised wing, legs, claws and tail exactly as image 1, with no shifts or new motion. One single edited transparent square sprite pose; no layout sheet, no text, no ground, no shadow plane, no blending or ghosts."
+    },
+    {
+      "timeMs": 360,
+      "source": "Raw/wing-360.png",
+      "prompt": "Target image 1 is the 320ms pose of this owl death animation. Image 2 is the following 400ms grounded pose. Draw a missing 360ms in-between ONLY for the SCREEN-RIGHT WING. Everything else, including the head, body, screen-left raised wing, feet and tail, must remain at exactly image 1's positions on the same 512x512 square canvas. The wing is gradually lowering, partly closing and approaching the ground: bridge image 1's partly folded wing and image 2's low relaxed wing. Shoulder stays attached naturally near (294,337), flight feather tips lower gently toward (465,431) in the 512x512 coordinate system, while the elbow folds slightly inward. The outside feather fan contracts gradually, not a new shape or an abruptly raised shoulder hump. Maintain identity of the feather rows, brown markings, cream flight feathers, feather lengths and dark fine outlines. No recoloring, outline doubling, new feathers, blur, crossfade or motion lines. One edited sprite, fixed registration and size, true transparent background, no text, ground or shadow."
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "format": "spawner-complete-drawn-cels-v3",
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ],
+  "approvedDesign": "DesignAssets/CreatureConcepts/v3/soil-boar.png",
+  "columns": 6,
+  "keyPhysicalScale": 0.6,
+  "perFrameAutoFit": false,
+  "phases": [
+    {
+      "source": "Source/DrawnCels/cel-0.png",
+      "durationMs": 80
+    },
+    {
+      "source": "Source/DrawnCels/cel-1.png",
+      "durationMs": 90
+    },
+    {
+      "source": "Source/DrawnCels/cel-2.png",
+      "durationMs": 60
+    },
+    {
+      "source": "Source/DrawnCels/cel-3.png",
+      "durationMs": 90
+    },
+    {
+      "source": "Source/DrawnCels/cel-4.png",
+      "durationMs": 100
+    },
+    {
+      "source": "Source/DrawnCels/cel-5.png",
+      "durationMs": 900
+    }
+  ],
+  "sourceCels": [
+    "Source/neutral.png",
+    "Source/Keys/00.png",
+    "Source/Keys/corrective-200.png",
+    "Source/Keys/01.png",
+    "Source/Keys/02.png",
+    "Source/Keys/03.png"
+  ],
+  "keyRegistration": "Source/key-registration.json",
+  "method": "Complete drawn poses: foreleg support loss, elbows/chest contact, delayed hip and cheek contact. Shared key physical scale; actual selected cels preserve their world placement.",
+  "spineCompatibilityVerified": false
+}

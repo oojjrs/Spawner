@@ -1,0 +1,279 @@
+{
+  "authority": "DesignAssets/CreatureConcepts/v3/shadow-weasel.png",
+  "registration": "registration.json",
+  "visibleOwnershipPolygons": {
+    "fore-near": [
+      [
+        206,
+        332
+      ],
+      [
+        224,
+        332
+      ],
+      [
+        242,
+        344
+      ],
+      [
+        254,
+        364
+      ],
+      [
+        253,
+        389
+      ],
+      [
+        246,
+        406
+      ],
+      [
+        241,
+        512
+      ],
+      [
+        192,
+        512
+      ],
+      [
+        192,
+        400
+      ],
+      [
+        205,
+        382
+      ],
+      [
+        211,
+        361
+      ]
+    ],
+    "fore-far": [
+      [
+        142,
+        379
+      ],
+      [
+        159,
+        375
+      ],
+      [
+        176,
+        377
+      ],
+      [
+        190,
+        388
+      ],
+      [
+        190,
+        512
+      ],
+      [
+        115,
+        512
+      ],
+      [
+        115,
+        388
+      ]
+    ],
+    "hind-near": [
+      [
+        329,
+        321
+      ],
+      [
+        350,
+        322
+      ],
+      [
+        370,
+        343
+      ],
+      [
+        379,
+        365
+      ],
+      [
+        375,
+        378
+      ],
+      [
+        367,
+        386
+      ],
+      [
+        347,
+        388
+      ],
+      [
+        336,
+        383
+      ],
+      [
+        342,
+        374
+      ],
+      [
+        344,
+        360
+      ]
+    ],
+    "hind-far": [
+      [
+        281,
+        357
+      ],
+      [
+        306,
+        353
+      ],
+      [
+        321,
+        364
+      ],
+      [
+        326,
+        389
+      ],
+      [
+        325,
+        512
+      ],
+      [
+        270,
+        512
+      ],
+      [
+        270,
+        376
+      ]
+    ],
+    "tail": [
+      [
+        342,
+        300
+      ],
+      [
+        512,
+        300
+      ],
+      [
+        512,
+        512
+      ],
+      [
+        342,
+        512
+      ]
+    ],
+    "head": [
+      [
+        -10,
+        -10
+      ],
+      [
+        215,
+        -10
+      ],
+      [
+        215,
+        313
+      ],
+      [
+        236,
+        342
+      ],
+      [
+        240,
+        356
+      ],
+      [
+        227,
+        375
+      ],
+      [
+        207,
+        381
+      ],
+      [
+        188,
+        385
+      ],
+      [
+        -10,
+        385
+      ]
+    ]
+  },
+  "headRegistration": [
+    [
+      0.43048987823846485,
+      0.016215598868850482,
+      75.20386854849335
+    ],
+    [
+      -0.016215598868850482,
+      0.43048987823846485,
+      303.33525775281703
+    ]
+  ],
+  "eyeRegistration": [
+    [
+      0.5060200152480296,
+      0.016527732979949167,
+      77.5457668241855
+    ],
+    [
+      -0.016527732979949167,
+      0.5060200152480296,
+      265.6855180746409
+    ]
+  ],
+  "editableParts": {
+    "body": "Drawings/body.png",
+    "head": "Drawings/head.png",
+    "head-cap": "Drawings/head-cap.png",
+    "fore-near": "Drawings/fore-near.png",
+    "fore-near-visible": "Drawings/fore-near-visible.png",
+    "fore-near-cap": "Drawings/fore-near-cap.png",
+    "fore-far": "Drawings/fore-far.png",
+    "fore-far-visible": "Drawings/fore-far-visible.png",
+    "fore-far-cap": "Drawings/fore-far-cap.png",
+    "hind-near": "Drawings/hind-near.png",
+    "hind-near-visible": "Drawings/hind-near-visible.png",
+    "hind-near-cap": "Drawings/hind-near-cap.png",
+    "hind-far": "Drawings/hind-far.png",
+    "hind-far-visible": "Drawings/hind-far-visible.png",
+    "hind-far-cap": "Drawings/hind-far-cap.png",
+    "tail-cap": "Drawings/tail-cap.png",
+    "tail-visible": "Drawings/tail-visible.png",
+    "tail": "Drawings/tail.png",
+    "head-closed": "Drawings/head-closed.png",
+    "skin": "Drawings/skin.png",
+    "skin-closed": "Drawings/skin-closed.png"
+  },
+  "drawOrder": [
+    "tail-cap",
+    "fore-far",
+    "hind-far",
+    "fore-near-cap",
+    "hind-near-cap",
+    "skin",
+    "tail-visible",
+    "fore-near-visible",
+    "hind-near-visible"
+  ],
+  "continuousSurface": {
+    "attachment": "skin",
+    "expression": "skin-closed",
+    "weights": "../skin-meshes.json",
+    "regions": [
+      "head",
+      "neck",
+      "torso"
+    ],
+    "tail": "complete original C-shaped surface, source-conforming grid, passive chain joints"
+  }
+}

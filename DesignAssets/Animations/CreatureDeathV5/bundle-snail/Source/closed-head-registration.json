@@ -1,0 +1,30 @@
+{
+  "drawing": "Drawings/closed-sensor-head.png", 
+  "matrix": [
+    [
+      0.3850270411738407, 
+      -0.0012704257064068366, 
+      0.9874751580454232
+    ], 
+    [
+      0.0012704257064068366, 
+      0.3850270411738407, 
+      57.877897343805195
+    ]
+  ], 
+  "matches": 191, 
+  "inliers": 123, 
+  "fixedColorOffset": [
+    -2.0, 
+    -1.0, 
+    -2.0
+  ], 
+  "headRegion": [
+    60, 
+    165, 
+    185, 
+    225
+  ], 
+  "shellPixelsAdopted": false, 
+  "lowerMantleRetained": true
+}

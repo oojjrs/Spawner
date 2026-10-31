@@ -1,0 +1,88 @@
+{
+  "neutralVisibleMaxChannelDifference": 255,
+  "neutralVisibleChangedPixels": 77512,
+  "maxRigidOrthogonalityError": 1.268275600097013e-07,
+  "maxIKSegmentLengthError": 6.394884621840902e-14,
+  "sourcePartDimensions": {
+    "body": [
+      200,
+      175,
+      435,
+      360
+    ],
+    "sac": [
+      62,
+      176,
+      289,
+      367
+    ],
+    "fore-upper": [
+      281,
+      290,
+      326,
+      340
+    ],
+    "fore-lower": [
+      249,
+      327,
+      323,
+      391
+    ],
+    "hind-upper": [
+      346,
+      268,
+      426,
+      363
+    ],
+    "hind-lower": [
+      370,
+      339,
+      440,
+      374
+    ],
+    "fore-far": [
+      93,
+      323,
+      166,
+      381
+    ],
+    "hind-far": [
+      320,
+      347,
+      377,
+      376
+    ],
+    "head": [
+      123,
+      109,
+      292,
+      223
+    ]
+  },
+  "construction": "Complete immutable body/head/limb sources with unit-scale rigid articulation; local eyelid change and declared flexible vocal sac are explicit exceptions. Initial complete-part assembly differs from original reference pixels and is preserved in source-overlay.png.",
+  "rigidSourceHashes": {
+    "body": "6b837a8e5c4b2c6e2347d37ae9666ff5d6beca920b2a314c79aef9354ef020aa",
+    "fore-upper": "6442e103a1b7ec6bfdd8a6a560ebb3de00839d32351ebef100c433a76c37c189",
+    "fore-lower": "154c93d808a85fa43884be2c139cfd974dd39d5b253d7fdaacb6cdeb54d28400",
+    "hind-upper": "c943c32e250fdc09e730c7239c546850f68017312e56987964c03d47c90aba5f",
+    "hind-lower": "e6ff4b9161f1d0e7649619bd95b2a35d0c8d81186a4141bbfb14e86e7cb4cf1a",
+    "fore-far": "35e217df185dd56191539e4359bda113693bde2623db449e22433683d919f13e",
+    "hind-far": "b9b8edbec524f913a7f6e6eca8471f120f025d2730e41cab8b7c8567286ce1b0",
+    "head": "9dec42c9d298c65fd5c4082edb28e7f234df02aac0ee051f8591b6e5061bcfaa"
+  },
+  "sourceCanvas": [
+    512,
+    512
+  ],
+  "sourcePlacement": {
+    "scale": [
+      1,
+      1
+    ],
+    "translation": [
+      0,
+      0
+    ],
+    "groundY": 387
+  }
+}

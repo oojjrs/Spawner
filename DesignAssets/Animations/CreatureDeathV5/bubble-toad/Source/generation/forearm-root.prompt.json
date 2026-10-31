@@ -1,0 +1,10 @@
+{
+  "prompt": "Edit only the hidden upper attachment root of this exact isolated frog forearm. The second image shows the approved frog for skin colors and attachment context. Keep the isolated forearm's exact pose, silhouette, thickness, rounded teal lower forearm, highlights and EXACT three rounded fingers unchanged. Change ONLY the uppermost cream/green shoulder root, approximately the top one third of the isolated part. That root will insert into the body behind the pale throat pouch. Remove the dark closed oval/perimeter line and cap-like ring from this upper root; finish it as continuous softly shaded cream-to-mint living skin that merges into the frog's adjacent throat/green shoulder. The top root must not look like a separate round bulb, a hollow socket, a cut cuff or a floating ellipse. Use the same soft painterly texture and original green/cream colors. Retain the outer outline and every pixel-like detail of the entire lower forearm and all three fingers; do not redesign, elongate, slenderize, add toes or change their arrangement. Do not add any torso, body, throat pouch, background, ground, shadow, labels or text. Only one complete isolated forearm on transparent background, in the same composition as image1.",
+  "referenced_image_paths": [
+    "H:\\Spawner\\DesignAssets\\Animations\\CreatureDeathV5\\bubble-toad\\Parts\\fore-near.png",
+    "H:\\Spawner\\DesignAssets\\Animations\\CreatureDeathV5\\bubble-toad\\Source\\reference.png"
+  ],
+  "transparent_background": true,
+  "output": "forearm-root-complete.png",
+  "preserved_input": "forearm-root-input.png"
+}

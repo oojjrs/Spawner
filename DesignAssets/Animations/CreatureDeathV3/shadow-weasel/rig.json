@@ -1,0 +1,86 @@
+{
+  "bodyScale": 0.8,
+  "bodyX": 80,
+  "groundY": 432,
+  "headPivot": [
+    145,
+    357
+  ],
+  "headDrop": [
+    -14,
+    28
+  ],
+  "headAngle": -4,
+  "headStartMs": 150,
+  "headContactMs": 620,
+  "contactSettlePx": 1,
+  "accessories": {
+    "near-ear": {
+      "pivot": [
+        153,
+        322
+      ],
+      "angle": 12,
+      "overshoot": 2
+    },
+    "far-ear": {
+      "pivot": [
+        83,
+        331
+      ],
+      "angle": -10,
+      "overshoot": -2
+    }
+  },
+  "bodyIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "name": "shadow-weasel",
+  "eyesCloseMs": 180,
+  "bodyTimesMs": [
+    0,
+    180,
+    280,
+    380,
+    480,
+    600
+  ],
+  "approvedImage": "DesignAssets/CreatureConcepts/v3/shadow-weasel.png",
+  "expressionPatchBoxes": [
+    [
+      100,
+      336,
+      143,
+      380
+    ],
+    [
+      51,
+      340,
+      79,
+      372
+    ]
+  ],
+  "reference": "Source/reference.png",
+  "parts": {
+    "near-ear": "Parts/near-ear.png",
+    "far-ear": "Parts/far-ear.png",
+    "head-alternate": "Parts/head-alternate.png",
+    "head": "Parts/head.png"
+  },
+  "boneParents": {
+    "root": null,
+    "head": "root",
+    "near-ear": "head",
+    "far-ear": "head"
+  },
+  "headScale": [
+    1,
+    1
+  ],
+  "timeline": "poses.json"
+}

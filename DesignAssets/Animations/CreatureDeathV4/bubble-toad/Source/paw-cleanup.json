@@ -1,0 +1,22 @@
+{
+  "source": "Source/EditableParts/fore-paw.png",
+  "removed": "Neighboring foot crescent inherited by the original toe cutout, underneath the third finger.",
+  "curvedAlphaBoundary": {
+    "center": [
+      307,
+      431.5
+    ],
+    "radii": [
+      14,
+      12.5
+    ],
+    "gate": [
+      296,
+      437,
+      512,
+      512
+    ]
+  },
+  "propagatedTo": "Source/EditableParts/fore-far-paw.png",
+  "registration": "Source/far-fore-registration.json"
+}

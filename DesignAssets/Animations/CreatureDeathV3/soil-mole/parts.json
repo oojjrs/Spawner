@@ -1,0 +1,79 @@
+[
+  {
+    "name": "body", 
+    "image": "Parts/body.png", 
+    "source": "Source/body-complete.png", 
+    "registration": [
+      188, 
+      112, 
+      454, 
+      345
+    ]
+  }, 
+  {
+    "name": "head", 
+    "image": "Parts/head.png", 
+    "source": "Source/head-complete.png", 
+    "registration": [
+      [
+        0.580538643309051, 
+        -0.053178721102318124, 
+        107.98980344584223
+      ], 
+      [
+        0.053178721102318124, 
+        0.580538643309051, 
+        120.04113139876668
+      ], 
+      [
+        0.0, 
+        0.0, 
+        1.0
+      ]
+    ]
+  }, 
+  {
+    "name": "near-paw", 
+    "image": "Parts/near-paw.png", 
+    "source": "Source/near-paw-complete.png", 
+    "registration": [
+      216, 
+      261, 
+      357, 
+      398
+    ]
+  }, 
+  {
+    "name": "far-paw", 
+    "image": "Parts/far-paw.png", 
+    "source": "Source/far-paw-complete.png", 
+    "registration": [
+      58, 
+      279, 
+      190, 
+      374
+    ]
+  }, 
+  {
+    "name": "near-hind", 
+    "image": "Parts/near-hind.png", 
+    "source": "Source/near-hind-complete.png", 
+    "registration": [
+      403, 
+      287, 
+      462, 
+      347
+    ]
+  }, 
+  {
+    "name": "far-hind", 
+    "image": "Parts/far-hind.png", 
+    "source": "Source/far-hind-complete.png", 
+    "registration": [
+      405, 
+      239, 
+      459, 
+      288
+    ]
+  }
+]

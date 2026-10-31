@@ -1,0 +1,26 @@
+{
+  "drawing": "Drawings/rounded-hidden-jaw.png", 
+  "reference": "Drawings/jaw-previous-source.png", 
+  "matrix": [
+    [
+      0.3075681162401511, 
+      -0.01148772745082972, 
+      42.468255165981354
+    ], 
+    [
+      0.01148772745082972, 
+      0.3075681162401511, 
+      31.870111767711922
+    ]
+  ], 
+  "matches": 117, 
+  "inliers": 27, 
+  "adoptedRegion": [
+    70, 
+    300, 
+    260, 
+    370
+  ], 
+  "originalVisibleChinPreserved": true, 
+  "neckSurfaceModified": false
+}

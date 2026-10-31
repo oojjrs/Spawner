@@ -1,0 +1,52 @@
+{
+  "rig": "../rig.json",
+  "renderer": "../render.py",
+  "timeline": "../poses.json",
+  "canvas": [
+    512,
+    512
+  ],
+  "sourceRectangles": {
+    "bulb": [
+      152,
+      331,
+      332,
+      460
+    ],
+    "leaf-upper-left": [
+      111,
+      230,
+      239,
+      332
+    ],
+    "leaf-upper-right": [
+      221,
+      224,
+      301,
+      334
+    ],
+    "leaf-lower-left": [
+      125,
+      286,
+      237,
+      360
+    ],
+    "leaf-lower-right": [
+      239,
+      319,
+      307,
+      382
+    ],
+    "foot": [
+      180,
+      436,
+      210,
+      468
+    ]
+  },
+  "runtimeScale": [
+    1,
+    1
+  ],
+  "groundY": 474
+}

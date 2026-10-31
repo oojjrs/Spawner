@@ -1,0 +1,18 @@
+{
+  "activeParts": [
+    "cavity.png", 
+    "far-eye-globe.png", 
+    "far-eye-stalk.png", 
+    "mantle-closed.png", 
+    "mantle-visible-closed.png", 
+    "mantle-visible.png", 
+    "mantle.png", 
+    "near-eye-globe.png", 
+    "near-eye-stalk.png", 
+    "shell-front.png"
+  ], 
+  "source": "EditableParts", 
+  "target": "../Parts", 
+  "renderer": "../render.py", 
+  "reference": "approved-reference.png"
+}

@@ -1,0 +1,32 @@
+{
+  "torso-candidate": {
+    "source": "Source/core-drawing.png",
+    "crop": [
+      71,
+      122,
+      824,
+      658
+    ],
+    "area": 286474
+  },
+  "head-open": {
+    "source": "Source/core-drawing.png",
+    "crop": [
+      884,
+      209,
+      1441,
+      574
+    ],
+    "area": 130872
+  },
+  "head-closed": {
+    "source": "Source/core-drawing.png",
+    "crop": [
+      1571,
+      209,
+      2127,
+      574
+    ],
+    "area": 131564
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "name": "soil-boar", 
+  "action": "death", 
+  "sourceImage": "DesignAssets/CreatureConcepts/v3/soil-boar.png", 
+  "image": "DesignAssets/Animations/CreatureDeathV4/soil-boar/death.webp", 
+  "frameSize": 512, 
+  "columns": 8, 
+  "frameCount": 55, 
+  "pivotX": 256, 
+  "pivotY": 448, 
+  "durationsMs": [
+    33, 
+    34, 
+    33, 
+    33, 
+    34, 
+    33, 
+    33, 
+    34, 
+    33, 
+    33, 
+    34, 
+    33, 
+    33, 
+    34, 
+    33, 
+    33, 
+    34, 
+    33, 
+    33, 
+    34, 
+    33, 
+    33, 
+    34, 
+    33, 
+    33, 
+    34, 
+    33, 
+    33, 
+    34, 
+    33, 
+    33, 
+    34, 
+    33, 
+    33, 
+    34, 
+    33, 
+    33, 
+    34, 
+    33, 
+    33, 
+    34, 
+    33, 
+    33, 
+    34, 
+    33, 
+    33, 
+    34, 
+    33, 
+    33, 
+    34, 
+    33, 
+    33, 
+    34, 
+    33, 
+    900
+  ], 
+  "durationMs": 2700, 
+  "loop": false, 
+  "preview": "DesignAssets/Animations/CreatureDeathV4/soil-boar/preview.webp", 
+  "thumbnail": "DesignAssets/Animations/CreatureDeathV4/soil-boar/thumbnail.webp", 
+  "previewLoop": 0, 
+  "rig": "DesignAssets/Animations/CreatureDeathV4/soil-boar/rig.json", 
+  "renderer": "DesignAssets/Animations/CreatureDeathV4/soil-boar/render.py", 
+  "prepare": "DesignAssets/Animations/CreatureDeathV4/soil-boar/Source/prepare.py", 
+  "sourceAuthoring": "DesignAssets/Animations/CreatureDeathV4/soil-boar/Source/authoring.json", 
+  "contact": "DesignAssets/Animations/CreatureDeathV4/soil-boar/contact.png", 
+  "sourcePlacement": {
+    "canvas": [
+      512, 
+      512
+    ], 
+    "groundY": 448, 
+    "runtimeScale": [
+      1, 
+      1
+    ], 
+    "referenceNormalization": {
+      "source": "Source/approved-concept.png", 
+      "sourceBoundsAlpha64": [
+        59, 
+        58, 
+        324, 
+        253
+      ], 
+      "scale": 1.6603773584905661, 
+      "translation": [
+        36, 
+        124
+      ], 
+      "canvas": [
+        512, 
+        512
+      ], 
+      "pivot": [
+        256, 
+        448
+      ]
+    }, 
+    "partRegistration": "Source/registration.json"
+  }, 
+  "construction": "Complete independent rigid torso, skull, upper and lower limbs, hooves, ears and tail. Coupled rigid-body joint and contact dynamics release the muscle support. Ears and tail have delayed angular inertia. The skull alpha stays fixed while local eyelids close."
+}

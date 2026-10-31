@@ -1,0 +1,167 @@
+{
+  "stage": "approved",
+  "approval": {
+    "userMessage": "만들자",
+    "date": "2026-10-31",
+    "contact": "keyframes-contact-v2.png"
+  },
+  "replacesReview": "keyframes.json",
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ],
+  "groundY": 448,
+  "contact": "keyframes-contact-v2.png",
+  "characters": [
+    {
+      "name": "vine-turtle",
+      "appearanceAuthority": "DesignAssets/CreatureConcepts/v3/vine-turtle.png",
+      "neutralAuthority": "DesignAssets/Animations/CreatureDeathV6/vine-turtle/Source/registered-reference.png",
+      "keys": [
+        "vine-turtle/Source/Keyframes/key-00-neutral.png",
+        "vine-turtle/Source/KeyframesV2/key-01-fold.png",
+        "vine-turtle/Source/KeyframesV2/key-02-withdraw.png",
+        "vine-turtle/Source/KeyframesV2/key-03-rest.png"
+      ],
+      "generations": [
+        {
+          "tool": "builtin-imagegen",
+          "prompt": "Use case: precise-object-edit.\nAsset: actual final death-animation keyframe of vine-turtle.\nImage 1 is the original neutral 512x512 design and anatomy authority. Image 2 is the 512x512 final withdrawn-shell keyframe to EDIT. Image 2 has a serious anatomy error: all the real head and leg exits were sealed with solid cream plates. CORRECT THAT ERROR.\n\nEdit image 2 to restore actual EMPTY ANATOMICAL OPENINGS where the original head and legs in image1 pass into the shell. All soft head, neck, feet, claws, legs and tail are fully INSIDE and invisible, BUT THEIR ENTRANCES MUST REMAIN CLEARLY VISIBLE.\nDraw the large front NECK opening under the original front upper shell lip, facing diagonally left/down in this same camera. This must be a real hollow opening large enough for the original neck, with a rounded natural shell rim, convincing shaded inner wall, and a deep dark olive-brown interior. It is NOT a shallow surface line or an intact cream panel.\nAlso show the separate near FORELEG opening at the original near-front shoulder/root below the orange side stone, and the separate near HINDLEG opening at the original rear hip/root near the lower-right shell edge. Make these appropriately smaller than the neck opening, at their own anatomical locations. The far-front leg entrance may appear only as the naturally occluded small slit behind the front-left rim; the far-rear entrance is hidden by this viewpoint. Never force four front-facing leg holes into this view. A tiny rear tail recess may be visible at its original rightmost rim.\nThe neck hole and each visible leg hole are DISTINCT openings separated by real shell/plastron rim material. Keep a continuous thick lower plastron edge beneath and between them. These are organic recessed shell exits at the perimeter between the carapace and plastron, not holes drilled through upper rocks and not detached cylindrical collars. No gigantic merged black arch.\n\nKeep every other feature of image2 unchanged: exact orange and gray stone arrangement, green vines and leaves, intact hard silhouette, camera, palette, material shading, width, height, root position and resting pose. Do NOT redesign or reshape the carapace. No visible face or limbs, no added rocks, no effects, no ground shadow, no labels.\nMaintain image2's intentional transparent margins and framing: logical canvas512 square, artwork approximately x82..409, y195..448; scale coordinates with output resolution. Do not enlarge to fill the frame, do not crop. True transparent background outside the shell, while recessed interiors have opaque shaded depth. The corrected PNG is the actual keyframe source, not a concept preview.",
+          "inputs": [
+            "DesignAssets/Animations/CreatureDeathV6/vine-turtle/Source/registered-reference.png",
+            "vine-turtle/Source/Keyframes/key-03-rest.png"
+          ],
+          "output": "vine-turtle/Source/OpeningsV2/rest-raw.png"
+        },
+        {
+          "tool": "builtin-imagegen",
+          "prompt": "Use case: precise-object-edit.\nAsset: two actual production death-animation key cels of vine-turtle.\nImage1 is the original neutral anatomy/design. Image2 is the EDIT TARGET, a transparent 1024x512 strip of two registered 512x512 keyframes (fold, then withdrawal). Image3 is the newly corrected final withdrawn key showing actual open neck and leg entrances; use its anatomy of entrance rims as continuity guidance, not its withdrawn pose.\n\nCorrect ONLY the anatomy/occlusion of the head and leg ENTRANCES in BOTH cels of image2. The old target mistakenly fills the empty neck exit with solid gray/cream bulges. Those plugs must be removed. Every limb retracts through its own permanent original shell opening; the openings do not vanish or become sealed panels when the skin goes inside.\nLEFT CEL: keep the original eyes-closed full-volume head halfway retracting, forelegs folding, rear feet still supporting. Show the rounded neck entrance rim and a dark crescent of inner wall BEHIND the retracting neck, with correct overlap. At near-front shoulder, keep its own organic limb-opening rim around/behind the folding foreleg. The visible rear foot occupies its own hindleg opening. Most cavity interiors are naturally occluded by the still-visible soft parts in this pose.\nRIGHT CEL: the head is COMPLETELY inside, so the neck entrance is a clearly EMPTY dark recessed hollow with shaded sidewall under the original front upper rim, like image3. NO faceless gray ball or cream plug fills it. The far-front leg can be almost hidden through its separate occluded slit; the near-front foot may still show only its last curled toes through ITS OWN near-side entrance below the orange stone, NOT through the neck opening. Retain a small last hindfoot/tail as appropriate at the original rear entry. Near-side foreleg and hindleg entrances have separate rounded natural rims and shaded depth, never drilled through the upper rocks.\n\nPreserve image2's hard shell, every leaf/vine/stone, original camera, root trajectories, source cell registration, character size and all motion unrelated to these aperture corrections. Keep substantial lower plastron beneath and between the distinct organic rim openings. No new pipe collars, massive merged arch, detached pieces, shrinking limbs or visible face in right cel.\nExact same two-cell transparent layout and intentional clear margins as image2, logical1024x512, no zoom/reframing/crop. Whole turtles safely fit their OWN equal square cells. Original illustrated shading, no labels/text/grid/ground shadow/effects. These are actual source keys, not an animation strip with extra in-between frames.",
+          "inputs": [
+            "DesignAssets/Animations/CreatureDeathV6/vine-turtle/Source/registered-reference.png",
+            "vine-turtle/Source/OpeningsV2/transition-input.png",
+            "vine-turtle/Source/OpeningsV2/rest-raw.png"
+          ],
+          "output": "vine-turtle/Source/OpeningsV2/transition-raw.png"
+        }
+      ],
+      "registration": [
+        {
+          "key": 1,
+          "source": "OpeningsV2/transition-raw.png",
+          "crop": [
+            0,
+            0,
+            887,
+            887
+          ],
+          "scale": 0.525,
+          "offset": [
+            14,
+            66
+          ]
+        },
+        {
+          "key": 2,
+          "source": "OpeningsV2/transition-raw.png",
+          "crop": [
+            887,
+            0,
+            887,
+            887
+          ],
+          "scale": 0.525,
+          "offset": [
+            14,
+            61
+          ]
+        },
+        {
+          "key": 3,
+          "source": "OpeningsV2/rest-raw.png",
+          "resize": [
+            512,
+            512
+          ],
+          "offset": [
+            0,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "name": "walking-forest",
+      "appearanceAuthority": "DesignAssets/CreatureConcepts/v3/walking-forest.png",
+      "neutralAuthority": "DesignAssets/Animations/CreatureDeathV6/walking-forest/Source/registered-reference.png",
+      "keys": [
+        "walking-forest/Source/Keyframes/key-00-neutral.png",
+        "walking-forest/Source/KeyframesV2/key-01-fold.png",
+        "walking-forest/Source/KeyframesV2/key-02-withdraw.png",
+        "walking-forest/Source/KeyframesV2/key-03-rest.png"
+      ],
+      "generations": [
+        {
+          "tool": "builtin-imagegen",
+          "prompt": "Use case: precise-object-edit.\nAsset: actual final death-animation keyframe of walking-forest, the mineral mountain turtle.\nImage 1 is the original neutral 512x512 design and anatomy authority. Image 2 is the 512x512 final withdrawn-shell keyframe to EDIT. Image 2 incorrectly sealed the real head and leg entrances with solid cream plates. Correct ONLY that anatomical error.\n\nAll head, neck, legs, feet, claws and tail remain fully INSIDE and invisible, but their original shell exits MUST remain visibly open.\nRestore the large front NECK entrance underneath the same front upper shell lip where the original neck in image1 meets the shell, facing diagonally left/down. Draw an unmistakable actual hollow: organic rounded shell rim, visible inner sidewall, dark olive-brown shaded depth. The opening must admit the original neck; it cannot be just a faint crease or a solid cream plate.\nRestore a separate near FORELEG entrance below the original near-front shoulder/side stones, and a separate near HINDLEG entrance below the original rear hip stones at the lower-right shell edge. These leg openings are smaller than the neck entrance and follow the perspective of their own limb roots. The far-front entrance is only a partly occluded narrow slit behind the front-left rim; the far-rear entrance is hidden from this camera. Do not show four front-facing holes just because the creature has four legs. The tail can leave a tiny distinct recess at the original right rear edge.\nKeep the neck opening and each visible leg opening distinct, with substantial natural shell/plastron rim separating them and a thick continuous cream lower edge supporting the shell. Openings sit organically at the perimeter BETWEEN the carapace and plastron, not drilled through upper boulders and not added pipe collars. Do not merge them into one giant arch.\n\nKeep ALL other features of image2 exactly: original rigid mineral mountain outline, highest turquoise crystal summit near x285 in logical512canvas, original boulder and crystal arrangement/facets, amber seams, cream plastron volume, material shading, scale, camera, resting height and position. Never alter the hard assembly to create the openings. No visible face, limbs or tail, no new rocks or crystals, no effects, labels, ground shadow or scenery.\nPreserve the existing logical512 square framing and transparent margins, approximately artwork x61..495 and y70..448, scaled proportionally to output resolution. Do NOT zoom, center the object anew or crop any rightmost rock/crystal. True transparent exterior background; the recessed interiors have opaque shaded depth. This is an actual usable final key cel, not a concept image.",
+          "inputs": [
+            "DesignAssets/Animations/CreatureDeathV6/walking-forest/Source/registered-reference.png",
+            "walking-forest/Source/Keyframes/key-03-rest.png"
+          ],
+          "output": "walking-forest/Source/OpeningsV2/rest-raw.png"
+        },
+        {
+          "tool": "builtin-imagegen",
+          "prompt": "Use case: precise-object-edit.\nAsset: two actual production death-animation key cels of walking-forest, the mineral mountain turtle.\nImage1 is the original neutral anatomy/design authority. Image2 is the EDIT TARGET, a transparent 1024x512 strip of two registered512x512 keyframes (fold, then withdrawal). Image3 is the newly corrected final withdrawn shell with actual open neck and leg entrances; use its entrance rims and hollow interior anatomy as continuity guidance only.\n\nCorrect ONLY the head and leg ENTRANCE anatomy and soft-part occlusion in BOTH cels of image2. The old target wrongly fills the empty neck exit with a gray/cream plug. Remove that error. A withdrawn turtle retains the original permanent openings; shell plates never grow across them.\nLEFT CEL: retain the original full-volume eyes-closed head halfway retracting, forelegs folding and rear foot supporting. Show its real rounded neck-opening rim and visible dark crescent of inner cavity BEHIND the neck, correct upper-rim occlusion. The near front elbow/foot folds into ITS OWN separate natural shoulder entrance, framed by a distinct rim beneath the original near-side rocks. The rear foot occupies its own original hindleg entrance.\nRIGHT CEL: head entirely hidden inside, so the front neck opening must be an EMPTY deep shaded hollow with its own inner sidewall under the original front rim, consistent with image3. NO gray faceless head ball or cream plastron plug remains in this opening. Only the last curled near-forefoot/toes may peek from their OWN near-side foreleg entrance under the side rocks, separate from the neck. Keep the rear leg's late curl and tail withdrawal at their own original exits. Visible near foreleg/hindleg entrances retain rounded organic rims and dark depth; far-side entrances are naturally occluded, no four front-facing leg holes.\n\nKeep the solid lower cream plastron thick and continuous below/between the separate anatomical entrances. These are organic gaps at shell perimeter, not tubes added to the body, not holes drilled through upper boulders and not one huge merged arch.\nPreserve the ENTIRE rigid mineral assembly of image2 exactly: every boulder and crystal, highest summit right of center around x285 in each logical512cell, original asymmetric mountain ridge, original height/width, palette, amber seams, facets, camera, common scale, horizontal registration and root trajectory. No boulder reshaping, crystal relocation, squash, zoom, leaf additions or visual effects. Soft limb positions should change only as needed to restore their correct anatomical insertion.\nKeep image2's exact two-cell transparent layout and intentional margins, logical1024x512, whole figures safely contained, no crop/reframe. Original illustrated shading and line weight, no labels/grid/ground shadow/scenery. These are two actual source key drawings, no extra animation/in-between cels.",
+          "inputs": [
+            "DesignAssets/Animations/CreatureDeathV6/walking-forest/Source/registered-reference.png",
+            "walking-forest/Source/OpeningsV2/transition-input.png",
+            "walking-forest/Source/OpeningsV2/rest-raw.png"
+          ],
+          "output": "walking-forest/Source/OpeningsV2/transition-raw.png"
+        }
+      ],
+      "registration": [
+        {
+          "key": 1,
+          "source": "OpeningsV2/transition-raw.png",
+          "crop": [
+            0,
+            0,
+            930,
+            887
+          ],
+          "scale": 0.55,
+          "offset": [
+            18,
+            20
+          ]
+        },
+        {
+          "key": 2,
+          "source": "OpeningsV2/transition-raw.png",
+          "crop": [
+            930,
+            0,
+            844,
+            887
+          ],
+          "scale": 0.55,
+          "offset": [
+            42,
+            20
+          ]
+        },
+        {
+          "key": 3,
+          "source": "OpeningsV2/rest-raw.png",
+          "scale": 0.3876,
+          "offset": [
+            16,
+            22
+          ]
+        }
+      ]
+    }
+  ]
+}

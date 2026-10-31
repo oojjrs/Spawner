@@ -1,0 +1,28 @@
+{
+  "activeParts": [
+    "shell.png", 
+    "foreground.png", 
+    "head.png", 
+    "head-closed.png", 
+    "neck.png", 
+    "fore-near.png", 
+    "fore-far.png", 
+    "hind-near.png", 
+    "hind-far.png", 
+    "tail.png"
+  ], 
+  "canvas": [
+    512, 
+    512
+  ], 
+  "pivot": [
+    256, 
+    448
+  ], 
+  "source": "EditableParts", 
+  "target": "../Parts", 
+  "reference": "DesignAssets/CreatureConcepts/v3/vine-turtle.png", 
+  "prepare": "../prepare.py", 
+  "simulator": "../simulate.py", 
+  "renderer": "../render.py"
+}

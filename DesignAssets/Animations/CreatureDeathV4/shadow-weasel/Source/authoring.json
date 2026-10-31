@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "canvas": [
+    512,
+    512
+  ],
+  "referenceAuthority": "DesignAssets/CreatureConcepts/v3/shadow-weasel.png",
+  "boundLayers": {
+    "body": "Source/Bound/body.png",
+    "far-ear": "Source/Bound/far-ear.png",
+    "fore-far-foot": "Source/Bound/fore-far-foot.png",
+    "fore-far-lower": "Source/Bound/fore-far-lower.png",
+    "fore-far-upper": "Source/Bound/fore-far-upper.png",
+    "fore-near-foot": "Source/Bound/fore-near-foot.png",
+    "fore-near-lower": "Source/Bound/fore-near-lower.png",
+    "fore-near-upper": "Source/Bound/fore-near-upper.png",
+    "head": "Source/Bound/head.png",
+    "head-alternate": "Source/Bound/head-alternate.png",
+    "hind-far-foot": "Source/Bound/hind-far-foot.png",
+    "hind-far-lower": "Source/Bound/hind-far-lower.png",
+    "hind-far-upper": "Source/Bound/hind-far-upper.png",
+    "hind-near-foot": "Source/Bound/hind-near-foot.png",
+    "hind-near-lower": "Source/Bound/hind-near-lower.png",
+    "hind-near-upper": "Source/Bound/hind-near-upper.png",
+    "near-ear": "Source/Bound/near-ear.png",
+    "tail": "Source/Bound/tail.png"
+  },
+  "rawGenerations": "Source/generation.json",
+  "registeredBindings": "rig.json",
+  "registrations": [
+    "Source/body-registration.json",
+    "Source/joint-registration.json"
+  ],
+  "legacyPoseInputsAreProvenanceOnly": true,
+  "prepare": "prepare.py",
+  "renderer": "render.py"
+}

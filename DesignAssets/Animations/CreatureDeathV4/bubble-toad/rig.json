@@ -1,0 +1,215 @@
+{
+  "canvas": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "groundY": 448,
+  "columns": 8,
+  "durationMs": 1500,
+  "holdMs": 900,
+  "simulationHz": 240,
+  "sampleEverySteps": 8,
+  "bodyPivot": [
+    300,
+    315
+  ],
+  "headPivot": [
+    286,
+    235
+  ],
+  "parts": {
+    "torso": "Parts/torso.png",
+    "head-open": "Parts/head-open.png",
+    "head-closed": "Parts/head-closed.png",
+    "head-open-foreground": "Parts/head-open-foreground.png",
+    "pouch-inflated": "Parts/pouch-inflated.png",
+    "pouch-slack": "Parts/pouch-slack.png",
+    "pouch-empty": "Parts/pouch-empty.png",
+    "hind-far": "Parts/hind-far.png",
+    "fore-upper": "Parts/fore-upper.png",
+    "fore-lower": "Parts/fore-lower.png",
+    "fore-paw": "Parts/fore-paw.png",
+    "fore-far-upper": "Parts/fore-far-upper.png",
+    "fore-far-lower": "Parts/fore-far-lower.png",
+    "fore-far-paw": "Parts/fore-far-paw.png",
+    "hind-thigh": "Parts/hind-thigh.png",
+    "hind-shin": "Parts/hind-shin.png",
+    "hind-paw": "Parts/hind-paw.png"
+  },
+  "rigidLimbBinds": {
+    "fore": [
+      [
+        312,
+        361
+      ],
+      [
+        328,
+        388
+      ],
+      [
+        306,
+        422
+      ],
+      [
+        280.5,
+        443.5
+      ]
+    ],
+    "fore-far": [
+      [
+        154,
+        358
+      ],
+      [
+        138,
+        392
+      ],
+      [
+        103,
+        410
+      ],
+      [
+        85,
+        426
+      ]
+    ],
+    "hind": [
+      [
+        377,
+        344
+      ],
+      [
+        453,
+        381
+      ],
+      [
+        420,
+        405
+      ],
+      [
+        368,
+        426
+      ]
+    ]
+  },
+  "skinnedLimbs": {
+    "hind-far": {
+      "joints": [
+        [
+          413.0,
+          350.0
+        ],
+        [
+          346.6,
+          382.8
+        ],
+        [
+          396.2,
+          413.2
+        ],
+        [
+          382.2,
+          423.2
+        ]
+      ],
+      "gridSpacing": 9,
+      "blendRadius": 6
+    }
+  },
+  "renderOrder": [
+    "hind-far",
+    "fore-far-upper",
+    "fore-far-paw",
+    "fore-far-lower",
+    "hind-shin",
+    "hind-paw",
+    "fore-upper",
+    "torso",
+    "head",
+    "pouch",
+    "head-foreground",
+    "hind-thigh",
+    "fore-paw",
+    "fore-lower"
+  ],
+  "physics": {
+    "gravity": 900,
+    "supportLossMs": [
+      80,
+      200
+    ],
+    "bodyLeanRadians": -0.075,
+    "bodyLeanSpring": [
+      140,
+      22
+    ],
+    "bodyAdvancePx": 7,
+    "contactSpring": [
+      800,
+      60
+    ],
+    "contactRestitution": 0.08,
+    "airReleaseDelayMs": 100,
+    "airReleaseDurationMs": 450,
+    "airSupportReductionPx": 55,
+    "headRestRadians": -0.48,
+    "headSpring": [
+      100,
+      14
+    ],
+    "headSleep": {
+      "afterMs": 1300,
+      "velocity": 0.018,
+      "errorRadians": 0.002
+    },
+    "bodySleep": {
+      "afterMs": 1100,
+      "velocity": 3,
+      "contactTolerancePx": 0.1
+    },
+    "blinkMs": [
+      30,
+      110
+    ],
+    "method": "Gravity and pressure support loss with actual torso/thigh/arm surface contacts. Damped rigid neck pitch, fixed-length limbs, planted paw rigid transforms and contact-triggered minimum slip. Sleep values come from the solved rest state."
+  },
+  "pouch": {
+    "fields": "Source/pouch-fields.npz",
+    "sourcePartNames": [
+      "pouch-inflated",
+      "pouch-slack",
+      "pouch-empty"
+    ],
+    "gridX": [
+      24,
+      325,
+      12
+    ],
+    "gridY": [
+      186,
+      439,
+      12
+    ],
+    "attachmentRestY": 195,
+    "bottomRestY": 415,
+    "neutralCenterX": 170,
+    "restCurve": [
+      0.0018,
+      0.0005
+    ],
+    "floorCurve": [
+      0.0012,
+      0.00035
+    ],
+    "method": "Corresponding drawn surface contours and UVs on one chin-to-ground pressure mesh. No global actor morph and no alpha floor cut.",
+    "textureSize": 256,
+    "contourSamples": 257,
+    "uvGrid": 33
+  },
+  "sourceAuthority": "DesignAssets/CreatureConcepts/v3/bubble-toad.png",
+  "authoring": "Source/authoring.json"
+}

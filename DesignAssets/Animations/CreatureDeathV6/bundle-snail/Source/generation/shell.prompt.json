@@ -1,0 +1,8 @@
+{
+  "tool": "builtin-imagegen",
+  "prompt": "Use case: precise-object-edit. Image 1 is the sole design AND framing authority. Draw the SAME complete hard shell and SAME leaf-strapped mushrooms/berries bundle after removing only the entire mint-white snail animal: no eye stalks, no head, no soft foot or tail. This is an animation SOURCE attachment, not a new character. Preserve the visible golden shell's exact size, width, height, bulging rounded volume, spiral center and diameter, band positions, perspective, outline style and all cargo placement/ratios. Do not make the gold part smaller while removing the body. Complete the small hidden lower contour behind the existing white foot; the original visible right-lower golden spiral edge must remain where it was, and the newly revealed underside may extend only a little below it. At the original front-left shoulder where the neck enters, reveal one natural fully bounded oval shell entrance with a thick curved golden lip and dark inner shadow, proportionate to this snail's head; do not cut a giant horizontal bottom hole or arch and do not turn the shell into a flat plate. Keep the original shell/cargo placement in the 512x512 framing, do not drop it to the old foot ground yet: vertical landing is animated later. Whole object on transparent background, clean complete rounded lower contour and no leftover soft white pixels, no ground shadow, no text. Preserve the reference artwork appearance.",
+  "inputs": [
+    "H:/Spawner/DesignAssets/Animations/CreatureDeathV6/bundle-snail/Source/registered-reference.png"
+  ],
+  "output": "shell-complete.png"
+}

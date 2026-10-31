@@ -1,0 +1,8 @@
+{
+  "provider": "built-in image_gen",
+  "asset": "Source/complete-pouches-drawing.png",
+  "inputs": [
+    "Source/neutral.png"
+  ],
+  "prompt": "Use case: precise-object-edit. Actual production isolated throat-sac drawing sources, THREE padded cells left to right on transparent RGBA. Reference is the exact approved frog, sac contour, cream palette and painterly highlight authority. Draw ONLY the throat sac in each cell, NO head, body, limbs or green skin. CRITICAL: this is a broad seamless oval balloon of skin, NOT a bottle/pot/jar: NO hole, opening, neck, collar, ring, lip, circular rim, top tube or dark ellipse anywhere. Paint the entire upper hidden surface as a fully closed rounded cream skin dome; it will be occluded by the separate frog muzzle in production.\nCell1: same huge inflated cream sac as reference, original oval outline/proportions and pale green underside, complete hidden upper dome and fine dark continuous outer contour.\nCell2: same sac with partial air loss and gravity load, the upper dome maintains the same source width, lower side softens and spreads slightly, real curved folds begin in the slack cream skin. Keep exact palette/highlight side and anatomical attachment width.\nCell3: same sac now emptied into a substantial folded wrinkled skin bag with wide low closed curved bottom, no hole or neck; original skin area and width remain recognizable through overlapping folds, not a tiny sack.\nSame world scale in all three cells, no zoom-to-fit small cells. Each layer is complete independent editable anatomy with generous transparent margin and correct original palette, no cast shadow/floor/effect/glow/text/grid. Draw production contour and skin folds only; alpha0 everywhere outside each sac."
+}

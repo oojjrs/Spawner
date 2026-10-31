@@ -1,0 +1,22 @@
+{
+  "source": "Drawings/closed-torso.png", 
+  "matrix": [
+    [
+      0.307, 
+      0.0, 
+      74.0
+    ], 
+    [
+      0.0, 
+      0.307, 
+      110.0
+    ]
+  ], 
+  "anatomicalShoulderMask": [
+    159, 
+    239, 
+    408, 
+    442
+  ], 
+  "originalVisibleSurface": "VisibleParts/body.png"
+}

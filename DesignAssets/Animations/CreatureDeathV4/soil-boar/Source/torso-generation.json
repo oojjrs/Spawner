@@ -1,0 +1,11 @@
+{
+  "provider": "built-in image_gen",
+  "asset": "Source/torso-complete-drawing.png",
+  "inputs": [
+    "Source/torso-correction-input.png",
+    "Source/torso-correction-guide.png",
+    "Source/neutral.png"
+  ],
+  "prompt": "Use case: precise-object-edit. ONE actual production LIMBLESS HEADLESS boar TORSO source, not a whole character and not an animation.\nImage1 is edit target: its mane/back, moss tuft and stone markings, brown fur palette and camera are correct, but attached shoulder and rear-leg lobes are WRONG. Image2 is correction guide: RED marks the falsely baked leg/haunch muscles that must be removed and repainted as plain continuous trunk; BLUE indicates the approximate desired single continuous curved belly contour. Image3 is original approved boar design/material reference.\nRedraw the whole complete torso so it is ONE solid horizontal BARREL/RIBCAGE/ABDOMEN/RUMP with a SINGLE flowing fur-covered belly underside. Eliminate EVERY distinct hanging shoulder lobe, upper-arm outline, rear-thigh oval/haunch lump, leg stump and the internal curved seams that currently outline those legs. Do not merely shorten their ends or erase holes. No legs are attached to this torso at all; all four actual legs are separate future layers. The torso has a heavy ribcage and natural rounded rump but NO separate side limb-muscle protrusions or fixed thigh/knee shape.\nKeep original upper mane shape, back bulk, moss placement, freckles, fine hair and fur direction, side shading, camera, color/material and intended original torso volume. Fully restore fur along the hidden neck opening and underbelly. The new belly follows one gently rounded arc from furry chest to lower abdomen to rounded rump, approximately along the blue curve, with no hard cut, flat stump, notch, socket or dangling bulge below it. Do not preserve the old lower leg silhouette.\nNo head, muzzle, tusk, ear, tail, paws, hoof, thigh or leg pixels. Remove all red/blue guide strokes. Complete closed natural furry source layer, generous margin, genuinely alpha0 outside. Ignore/remove the input's backdrop completely: no brown glow, smoke, floor, cast shadow, black matte, grid, text or other object.",
+  "preservedOutputSource": "Source/torso-complete-drawing.png"
+}

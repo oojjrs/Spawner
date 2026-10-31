@@ -1,0 +1,64 @@
+{
+  "canvas": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "designAuthority": [
+    "Source/approved-concept.png",
+    "Source/approved-idle-cell.png"
+  ],
+  "referencePlacement": {
+    "source": "Source/approved-idle-cell.png",
+    "nativeCellSize": 424,
+    "normalizedSize": 512,
+    "scale": 1.2075471698113207,
+    "translation": [
+      0,
+      -28
+    ]
+  },
+  "editablePartSources": {
+    "Parts/bulb.png": "Source/EditableParts/bulb.png",
+    "Parts/bulb-closed.png": "Source/EditableParts/bulb-closed.png",
+    "Parts/foot-left.png": "Source/EditableParts/foot-left.png",
+    "Parts/foot-front.png": "Source/EditableParts/foot-front.png",
+    "Parts/foot-right.png": "Source/EditableParts/foot-right.png",
+    "Parts/leaf-upper-left.png": "Source/EditableParts/leaf-upper-left.png",
+    "Parts/leaf-upper-right.png": "Source/EditableParts/leaf-upper-right.png",
+    "Parts/leaf-lower-left.png": "Source/EditableParts/leaf-lower-left.png",
+    "Parts/leaf-lower-right.png": "Source/EditableParts/leaf-lower-right.png",
+    "Parts/crown.png": "Source/EditableParts/crown.png"
+  },
+  "editableTextureSources": {
+    "Parts/vine-surface.png": "Source/EditableTextures/vine-surface.png"
+  },
+  "meshSource": "Source/leaf-meshes.json",
+  "meshBuilder": "Source/build-leaf-meshes.py",
+  "registration": "Source/registration.json",
+  "registrationProgram": "Source/register.py",
+  "sourceDrawings": [
+    "Source/initial-parts-drawing.png",
+    "Source/complete-parts-drawing.png",
+    "Source/crown-leaf-drawing.png",
+    "Source/crown-leaf-complete-drawing.png",
+    "Source/bulb-drawing-with-attached-feet.png",
+    "Source/bulb-complete-drawing.png"
+  ],
+  "prompts": [
+    "Source/reused-generation-prompts.json",
+    "Source/crown-leaf-generation.json",
+    "Source/endcap-correction-generation.json",
+    "Source/bulb-generation.json",
+    "Source/bulb-foot-removal-generation.json"
+  ],
+  "physics": "physics.py",
+  "renderer": "render.py",
+  "prepare": "Source/prepare.py",
+  "externalPathsRequired": false,
+  "sourcePolicy": "Only the approved concept and freshly extracted approved idle cell establish appearance. Earlier complete leaf and root drawings are reused as art inputs and registered again to that authority. No old death pose, final key angle or target contact curve is used.",
+  "editing": "Registered complete PNG sources, the tube material, leaf mesh vertices/weights and rig controls are canonical editable production sources. Preparation copies the local images. Explicit register.py and build-leaf-meshes.py runs regenerate their respective authoring stages."
+}

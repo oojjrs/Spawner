@@ -1,0 +1,27 @@
+{
+  "name": "soil-boar",
+  "action": "death",
+  "sourceImage": "DesignAssets/CreatureConcepts/v3/soil-boar.png",
+  "image": "DesignAssets/Animations/CreatureDeathV3/soil-boar/death.webp",
+  "frameSize": 512,
+  "columns": 6,
+  "pivotX": 256,
+  "pivotY": 448,
+  "frameCount": 6,
+  "durationsMs": [
+    80,
+    90,
+    60,
+    90,
+    100,
+    900
+  ],
+  "durationMs": 1320,
+  "loop": false,
+  "preview": "DesignAssets/Animations/CreatureDeathV3/soil-boar/preview.webp",
+  "thumbnail": "DesignAssets/Animations/CreatureDeathV3/soil-boar/thumbnail.webp",
+  "rig": "DesignAssets/Animations/CreatureDeathV3/soil-boar/rig.json",
+  "renderer": "DesignAssets/Animations/CreatureDeathV3/soil-boar/render.py",
+  "method": "Complete drawn poses: foreleg support loss, elbows/chest contact, delayed hip and cheek contact. Shared key physical scale; actual selected cels preserve their world placement.",
+  "spineCompatibilityVerified": false
+}

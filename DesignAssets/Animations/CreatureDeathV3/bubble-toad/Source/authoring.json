@@ -1,0 +1,74 @@
+{
+  "canvas": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "rig": "rig.json",
+  "renderer": "render.py",
+  "prepare": "Source/prepare.py",
+  "editablePartSources": {
+    "Parts/head-closed.png": "Source/EditableParts/head-closed.png"
+  },
+  "editableTextureSources": {},
+  "sourceDrawings": [
+    "body-cel-drawings.png",
+    "collapse-key-drawings.png",
+    "complete-closed-head-drawing.png"
+  ],
+  "externalPathsRequired": false,
+  "sourceEditing": "Registered complete part images are canonical editable sources. Body cels preserve their own complete drawn anatomy; rigid head sources retain fixed scale.",
+  "bodyCelPreparation": {
+    "drawing": "Source/body-cel-drawings.png",
+    "resizedCanvas": [
+      752,
+      752
+    ],
+    "scale": 0.6,
+    "cels": [
+      {
+        "mask": "Source/BodyMasks/00.png",
+        "translation": [
+          54,
+          75
+        ],
+        "output": "Source/Bodies/00.png"
+      },
+      {
+        "mask": "Source/BodyMasks/01.png",
+        "translation": [
+          -322,
+          69
+        ],
+        "output": "Source/Bodies/01.png"
+      },
+      {
+        "mask": "Source/BodyMasks/02.png",
+        "translation": [
+          54,
+          -243
+        ],
+        "output": "Source/Bodies/02.png"
+      },
+      {
+        "mask": "Source/BodyMasks/03.png",
+        "translation": [
+          -322,
+          -246
+        ],
+        "output": "Source/Bodies/03.png"
+      }
+    ]
+  },
+  "referencePlacement": {
+    "source": "approved concept",
+    "scale": 1.38,
+    "translation": [
+      4,
+      115
+    ]
+  }
+}

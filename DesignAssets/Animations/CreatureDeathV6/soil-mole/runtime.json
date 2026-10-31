@@ -1,0 +1,1 @@
+{"name": "soil-mole", "action": "death", "image": "DesignAssets/Animations/CreatureDeathV6/soil-mole/runtime.webp", "frameSize": 256, "viewSize": 256.0707637189895, "pivotX": 128.02064407200112, "pivotY": 231.56069494440834, "columns": 4, "frameCount": 8, "durationsMs": [120, 90, 90, 90, 90, 90, 140, 1000], "durationMs": 1710, "loop": false}

@@ -1,0 +1,75 @@
+{
+  "name": "flower-tail-bird", 
+  "configuration": {
+    "bodyPivot": [
+      245, 
+      315
+    ], 
+    "headPivot": [
+      222, 
+      270
+    ], 
+    "legs": {
+      "far-leg": [
+        [
+          190, 
+          344
+        ], 
+        [
+          190, 
+          364
+        ], 
+        [
+          180, 
+          382
+        ]
+      ], 
+      "near-leg": [
+        [
+          247, 
+          345
+        ], 
+        [
+          251, 
+          372
+        ], 
+        [
+          247, 
+          394
+        ]
+      ]
+    }, 
+    "appendages": {
+      "wing": [
+        [
+          244, 
+          267
+        ], 
+        [
+          288, 
+          304
+        ], 
+        [
+          355, 
+          345
+        ]
+      ], 
+      "tail": [
+        [
+          338, 
+          289
+        ], 
+        [
+          374, 
+          265
+        ], 
+        [
+          417, 
+          254
+        ]
+      ]
+    }
+  }, 
+  "method": "Coupled torso/head dynamics, separate rigid golden limb segments, independent soft feather chains with material contact", 
+  "spineCompatibilityVerified": false
+}

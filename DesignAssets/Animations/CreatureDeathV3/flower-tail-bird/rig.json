@@ -1,0 +1,88 @@
+{
+  "name": "flower-tail-bird", 
+  "method": "Complete separately drawn body/head/wing/tail and leg-root attachments with approved original eye/foot detail, action key designs, anatomical leg IK and separate contact/settling phases.", 
+  "canvas": [
+    512, 
+    512
+  ], 
+  "parts": [
+    "body", 
+    "far-leg", 
+    "head-closed", 
+    "head", 
+    "near-leg", 
+    "tail", 
+    "wing"
+  ], 
+  "sourcePoseDesign": "Source/key-design.png", 
+  "controls": "motion.json", 
+  "timeline": "landmarks.json", 
+  "renderer": "render.py", 
+  "spineCompatibilityVerified": false, 
+  "bones": [
+    {
+      "name": "body", 
+      "parent": "root", 
+      "pivot": [
+        256, 
+        330
+      ]
+    }, 
+    {
+      "name": "head", 
+      "parent": "body", 
+      "pivot": [
+        242, 
+        254
+      ]
+    }, 
+    {
+      "name": "wing", 
+      "parent": "body", 
+      "pivot": [
+        254, 
+        270
+      ]
+    }, 
+    {
+      "name": "tail", 
+      "parent": "body", 
+      "pivot": [
+        334, 
+        288
+      ]
+    }
+  ], 
+  "activeParts": [
+    "body", 
+    "head", 
+    "head-closed", 
+    "wing", 
+    "tail", 
+    "far-leg", 
+    "near-leg"
+  ], 
+  "sourceHashes": {
+    "body": "14f4df2abecc43ec179213f52b5c5f6b2fcf6d3c8a87a854da9009c3fd8efe08", 
+    "head": "5cecab9dbfdcd42974dd7e2f8c958f9e5a0a43e00109d19c55a4cdfea40475c8", 
+    "head-closed": "2ef955041eaebd47c5efcb4698478e946d3b088e4d60bf58f11797faa356d408", 
+    "wing": "b3e410dabca6ccd92a0d325e27651c3c2382437957f0b1840e2afe7d60623fa6", 
+    "tail": "be876329b9b07c079e68b36b2b421a494e03ba3b0f585611312a6bf0234efa93", 
+    "far-leg": "69d9a21027dd63ccc02fd9e92e24fbbaaef11cd8c22510e1f2ab5619b69d9889", 
+    "near-leg": "a9e5720c26aef7467a76ac3dd71f62659096951f20b67a6aafeeae96e1c8d096"
+  }, 
+  "authoringRuntime": [
+    "Python 3", 
+    "numpy", 
+    "Pillow 12.3"
+  ], 
+  "authoringControls": {
+    "parts": "Parts", 
+    "motion": "motion.json", 
+    "pivots": "render.py", 
+    "meshes": [
+      "far-leg-mesh.json", 
+      "near-leg-mesh.json"
+    ]
+  }
+}

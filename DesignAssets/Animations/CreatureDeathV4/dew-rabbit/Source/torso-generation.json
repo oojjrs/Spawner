@@ -1,0 +1,9 @@
+{
+  "prompt": "Create a production animation torso-only attachment for the exact ivory dewy rabbit in reference 1. Reference 2 is the current torso drawing which has a serious rigging error: the round right hind THIGH/HAUNCH is baked into its lower right side. Completely remove that circular hind thigh/haunch and every leg/hand/foot, while faithfully preserving the white cream soft fur, leafy chest ruff and its pale aqua dewdrops, upper back arc, small fluffy round tail, delicate original outline and upper-left lighting. Restore the FULL hidden torso and belly surface behind where that thigh used to be: a simple continuous rounded horizontal rabbit ribcage/barrel, closed on all sides with softly shaded fur and uninterrupted belly contour. NO circular haunch/shoulder/leg protrusions or muscle divisions on the torso, NO limbs, NO head, NO ears, NO new markings. The tail remains an independent-looking tuft at the same back location, body+tail are a single torso attachment here. Maintain the rabbit's approved proportions and 3/4 camera facing left. Draw the complete unseen lower right belly with enough overlap for independently attached thigh bones. Transparent background, no background color, no ground shadow, no fog, no labels, one clean complete torso attachment only. Match the current visible collar details and scale relationships; do not redesign the character.",
+  "referencedImages": [
+    "DesignAssets/CreatureConcepts/v3/dew-rabbit.png",
+    "Source/body-before-leg-removal.png"
+  ],
+  "generatedImage": "Source/legless-torso-drawing.png",
+  "transparentBackground": true
+}

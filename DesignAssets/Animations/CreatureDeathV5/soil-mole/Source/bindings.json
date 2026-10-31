@@ -1,0 +1,16 @@
+{
+  "activeParts": [
+    "body.png", 
+    "foreleg-far.png", 
+    "foreleg.png", 
+    "head-closed.png", 
+    "head.png", 
+    "hindleg.png", 
+    "neck-surface.png", 
+    "tail.png"
+  ], 
+  "source": "EditableParts", 
+  "target": "../Parts", 
+  "renderer": "../render.py", 
+  "reference": "approved-reference.png"
+}

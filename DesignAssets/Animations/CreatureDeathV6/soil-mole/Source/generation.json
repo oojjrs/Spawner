@@ -1,0 +1,57 @@
+{
+  "provider": "builtin imagegen", 
+  "appearanceAuthority": "approved-reference.png", 
+  "prompts": [
+    {
+      "key": "support-break", 
+      "prompt": "Use case: identity-preserve. Draw one complete animation cel of the exact approved mole in the attached original. It must keep the SAME skull size, round torso volume, muddy broad hands, exactly THREE ivory claws on EACH front paw, original little hind feet, tiny pink ears, short tail, beige muzzle and golden-brown fur design. Same three-quarter view toward lower left. Match the original soft painterly game-sprite rendering and subtly shaded brown edges EXACTLY: no thick black cartoon outline, no graphic ink line, no brighter yellow restyling. This is a coherent whole-body anatomical drawing, never separated cutouts or a flattened/squashed whole image. Keep the fixed original framing and world scale; paws/claws retain their absolute size, front-paw ground stays around source y255 on the original332canvas. Do not zoom/tightfit. Transparent background. No ground, shadow, text, effects or blood. Draw the critical moment just after the FRONT ELBOWS BUCKLE. Both broad front hands stay planted and spread slightly outward. The elbows move outward/down and bend sharply so the furry forearms lie much more horizontally; they visibly cease to be upright supporting struts. The chest and pelvis sink down/forward under the body weight by a noticeable 20-25px of the original332canvas, hind hocks starting to fold. The big round rump keeps its volume. IMPORTANT: the HEAD has not yet fallen to the floor: it lags almost at original snout height, eyes drooping but not asleep, briefly carried by the neck while the torso clearly descends first. Show the folded elbow contour and shoulder moving lower relative to the stationary hands; not just eyes closing or the head nodding. Natural continuous fur anatomy and overlapping folds.", 
+      "role": "motion key drawing", 
+      "references": [
+        "approved-reference.png"
+      ], 
+      "output": "Raw/key1-drawing.png"
+    }, 
+    {
+      "key": "body-rest-head-contact", 
+      "prompt": "Use case: identity-preserve. Draw one complete animation cel of the exact approved mole in the attached original. It must keep the SAME skull size, round torso volume, muddy broad hands, exactly THREE ivory claws on EACH front paw, original little hind feet, tiny pink ears, short tail, beige muzzle and golden-brown fur design. Same three-quarter view toward lower left. Match the original soft painterly game-sprite rendering and subtly shaded brown edges EXACTLY: no thick black cartoon outline, no graphic ink line, no brighter yellow restyling. This is a coherent whole-body anatomical drawing, never separated cutouts or a flattened/squashed whole image. Keep the fixed original framing and world scale; paws/claws retain their absolute size, front-paw ground stays around source y255 on the original332canvas. Do not zoom/tightfit. Transparent background. No ground, shadow, text, effects or blood. Draw the TRUE final heavy collapse. Both front elbows are folded sharply OUTWARD beside/under the chest, upper arms curled back against the body and forearms lying almost HORIZONTALLY on the ground to the hands. No sloping upright arm struts still propping the chest up. The chest and belly have landed BETWEEN the paws, pelvis and rump have sunk forward/down with folded hind hocks; the small rear feet tuck beside the rump and stay anatomically complete. Keep a round full-sized torso, not a compressed pancake. The ROUND head has now followed last and rests with its chin/muzzle on the paw ground, eyes closed, neck/shoulder coat gently folded around it. Body weight is visibly carried by chest/belly rather than legs. Preserve the original same face, big head, small nose and paws at original size. This must read as limp collapsed weight, not a normal digging stance with a sleeping head.", 
+      "role": "motion key drawing", 
+      "references": [
+        "approved-reference.png"
+      ], 
+      "output": "Raw/key3-drawing.png"
+    }, 
+    {
+      "key": "body-contact-raised", 
+      "prompt": "Use case: precise-object-edit. Image1 is the edit target final collapsed mole cel. Image2 is the only approved identity/style reference. Produce one local pose correction to image1: keep the BODY, round rump contour, whole torso volume, limbs, elbows, paws, claw size, hind foot, tail and their exact pixel placement unchanged. Do NOT lower/flatten/resize the torso, do not redraw it into a different silhouette. ONLY lift the whole round HEAD gently by about 60pixels on image1's1280canvas so its chin is visibly above the floor while the chest/belly remain already landed. Keep its skull same size, eyes closed, muzzle/nose original same size. Bend/repaint the little neck/shoulder connection naturally and fill the fur revealed below the lifted head. This is the brief inertia-lag cel immediately before the head settles down: body is at rest first, head still a small gap up. Preserve head shape, original painterly colors/textures, thin shaded edges, camera, framing, transparent background. Absolutely no thick black outlines, no new body flattening, no extra paws, no detached patches, no ghosting. The body silhouette to the right of the near ear should match image1, not a new design. One whole coherent sprite, no sheet, text, ground or shadow.", 
+      "role": "edit input for retained midpoint key", 
+      "references": [
+        "Raw/key3-drawing.png", 
+        "approved-reference.png"
+      ], 
+      "output": "Raw/body-contact-raised.png"
+    }, 
+    {
+      "key": "body-contact-midpoint", 
+      "prompt": "Use case: precise-object-edit. Image1 is the head-lag mole cel to edit, Image2 is its final head-on-floor cel, Image3 the approved original identity. Keep the body/rump/limbs/paws/tail of Image1 exactly unchanged in their current lowered resting position. Only adjust its head pose: lower the round head HALFWAY from its current high position toward Image2, with a slight natural forward nod. The pink nose centre should be around y730 on the1280canvas, midway between Image1's roughly y670 and Image2's roughly y790, not all the way to the ground. This is the small remaining delayed head drop after the chest has landed. Keep skull size, original muzzle/nose size and closed eyes; paint the short neck connection coherently. No new silhouette, volume or placement changes in the body to the right of the ear. Same original soft painterly sprite style and thin shaded edge; no thick ink stroke, no ghosting, no surface seams, no flattened body. Fixed canvas, transparent background, no scene or shadow, one complete cel.", 
+      "role": "motion reference key", 
+      "references": [
+        "Raw/body-contact-raised.png", 
+        "Raw/key3-drawing.png", 
+        "approved-reference.png"
+      ], 
+      "output": "Raw/key2-drawing.png"
+    }, 
+    {
+      "key": "bridge-six", 
+      "prompt": "Use case: identity-preserve. Production hand-painted game sprite animation frames, NOT inked cartoon cels. Image1 is the approved original mole at exact512world registration and is the ONLY identity/rendering style authority. Images2,3,4 are three chronological motion key drawings: support buckles; chest/pelvis already landed while head lags; head finally contacts ground. Draw SIX EXTRA complete in-between frames in a3columns by2rows grid, one512world canvas per equal cell, read left-to-right then top-to-bottom. Frames1,2 occur one-third and two-thirds BETWEEN images1 and2. Frames3,4 occur one-third and two-thirds BETWEEN images2 and3. Frames5,6 occur one-third and two-thirds BETWEEN images3 and4. Do NOT repeat the input keys. The chest/pelvis must clearly sink first as elbows fold outward and the forearms lose their upright support; hind hocks fold with the rump. Only after the torso has landed does the round head complete its delayed downward nod. Head and body trajectories move smoothly downward without bouncing back upward. Preserve all anatomical volumes, same skull/nose/paw/claw sizes and original huge round head, original three large ivory claws on each muddy front hand, small hind toes, tiny pink ears and short tail. Same camera, source coordinate system and physical scale in all cells. Preserve the input planted foreclaw baseline and consistent rear toe position; do not recenter/zoom/tightfit separate frames. Painterly soft shaded brown edges and fur exactly as image1, no added bold black outlines or graphic ink; no color/style changes in the last frame. Paint each whole connected pose naturally, not cutout pieces, image morphs, flattened bodies or ghosting. Transparent backgrounds and spacing. No labels, grid lines, scene, ground, shadow, blood or extra limbs.", 
+      "role": "actual six timeline paintings", 
+      "references": [
+        "Guides/0.png", 
+        "Guides/1.png", 
+        "Guides/2.png", 
+        "Guides/3.png"
+      ], 
+      "output": "Raw/bridge-drawing.png"
+    }
+  ]
+}

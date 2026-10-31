@@ -1,0 +1,326 @@
+{
+  "source": "Generation/ContactSources", 
+  "targetsWorldX": [
+    119.70979020979021, 
+    368.7173913043478
+  ], 
+  "headMatrix": [
+    [
+      0.9743700647852354, 
+      0.22495105434386498, 
+      -73.01529344703854
+    ], 
+    [
+      -0.224951054343865, 
+      0.9743700647852352, 
+      148.19828689894604
+    ], 
+    [
+      0.0, 
+      0.0, 
+      1.0
+    ]
+  ], 
+  "keys": [
+    {
+      "drawing": 1, 
+      "beforeContactX": [
+        null, 
+        null
+      ], 
+      "afterContactX": [
+        null, 
+        null
+      ], 
+      "contact": [
+        false, 
+        false
+      ], 
+      "sourceDisplacement": [
+        [
+          0.0, 
+          0.0
+        ], 
+        [
+          0.0, 
+          0.0
+        ]
+      ]
+    }, 
+    {
+      "drawing": 2, 
+      "beforeContactX": [
+        null, 
+        null
+      ], 
+      "afterContactX": [
+        null, 
+        null
+      ], 
+      "contact": [
+        false, 
+        false
+      ], 
+      "sourceDisplacement": [
+        [
+          0.0, 
+          0.0
+        ], 
+        [
+          0.0, 
+          0.0
+        ]
+      ]
+    }, 
+    {
+      "drawing": 3, 
+      "beforeContactX": [
+        null, 
+        null
+      ], 
+      "afterContactX": [
+        null, 
+        null
+      ], 
+      "contact": [
+        false, 
+        false
+      ], 
+      "sourceDisplacement": [
+        [
+          0.0, 
+          0.0
+        ], 
+        [
+          0.0, 
+          0.0
+        ]
+      ]
+    }, 
+    {
+      "drawing": 4, 
+      "beforeContactX": [
+        null, 
+        null
+      ], 
+      "afterContactX": [
+        null, 
+        null
+      ], 
+      "contact": [
+        false, 
+        false
+      ], 
+      "sourceDisplacement": [
+        [
+          0.0, 
+          0.0
+        ], 
+        [
+          0.0, 
+          0.0
+        ]
+      ]
+    }, 
+    {
+      "drawing": 5, 
+      "beforeContactX": [
+        null, 
+        null
+      ], 
+      "afterContactX": [
+        null, 
+        null
+      ], 
+      "contact": [
+        false, 
+        false
+      ], 
+      "sourceDisplacement": [
+        [
+          0.0, 
+          0.0
+        ], 
+        [
+          0.0, 
+          0.0
+        ]
+      ]
+    }, 
+    {
+      "drawing": 6, 
+      "beforeContactX": [
+        null, 
+        null
+      ], 
+      "afterContactX": [
+        null, 
+        null
+      ], 
+      "contact": [
+        false, 
+        false
+      ], 
+      "sourceDisplacement": [
+        [
+          0.0, 
+          0.0
+        ], 
+        [
+          0.0, 
+          0.0
+        ]
+      ]
+    }, 
+    {
+      "drawing": 7, 
+      "beforeContactX": [
+        null, 
+        null
+      ], 
+      "afterContactX": [
+        null, 
+        null
+      ], 
+      "contact": [
+        false, 
+        false
+      ], 
+      "sourceDisplacement": [
+        [
+          0.0, 
+          0.0
+        ], 
+        [
+          0.0, 
+          0.0
+        ]
+      ]
+    }, 
+    {
+      "drawing": 8, 
+      "beforeContactX": [
+        111.75373134328358, 
+        363.9559748427673
+      ], 
+      "afterContactX": [
+        111.75373134328358, 
+        363.9559748427673
+      ], 
+      "contact": [
+        false, 
+        false
+      ], 
+      "sourceDisplacement": [
+        [
+          0.0, 
+          0.0
+        ], 
+        [
+          0.0, 
+          0.0
+        ]
+      ]
+    }, 
+    {
+      "drawing": 9, 
+      "beforeContactX": [
+        114.9581589958159, 
+        368.7173913043478
+      ], 
+      "afterContactX": [
+        114.9581589958159, 
+        368.7173913043478
+      ], 
+      "contact": [
+        false, 
+        false
+      ], 
+      "sourceDisplacement": [
+        [
+          0.0, 
+          0.0
+        ], 
+        [
+          0.0, 
+          0.0
+        ]
+      ]
+    }, 
+    {
+      "drawing": 10, 
+      "beforeContactX": [
+        111.80677966101695, 
+        354.92962962962963
+      ], 
+      "afterContactX": [
+        111.80677966101695, 
+        368.72592592592594
+      ], 
+      "contact": [
+        false, 
+        true
+      ], 
+      "sourceDisplacement": [
+        [
+          0.0, 
+          0.0
+        ], 
+        [
+          13.434382236238537, 
+          3.1015715257697885
+        ]
+      ]
+    }, 
+    {
+      "drawing": 11, 
+      "beforeContactX": [
+        119.70979020979021, 
+        367.0659340659341
+      ], 
+      "afterContactX": [
+        119.70979020979021, 
+        368.98566308243727
+      ], 
+      "contact": [
+        true, 
+        true
+      ], 
+      "sourceDisplacement": [
+        [
+          0.0, 
+          0.0
+        ], 
+        [
+          1.6091304963832422, 
+          0.37149704698497854
+        ]
+      ]
+    }, 
+    {
+      "drawing": 12, 
+      "beforeContactX": [
+        123.62676056338029, 
+        362.74460431654677
+      ], 
+      "afterContactX": [
+        119.96463022508038, 
+        368.7741935483871
+      ], 
+      "contact": [
+        true, 
+        true
+      ], 
+      "sourceDisplacement": [
+        [
+          -4.564099268862481, 
+          -1.0537053423197862
+        ], 
+        [
+          5.746173190294703, 
+          1.326608610337544
+        ]
+      ]
+    }
+  ]
+}

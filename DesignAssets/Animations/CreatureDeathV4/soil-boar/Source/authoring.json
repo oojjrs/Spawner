@@ -1,0 +1,52 @@
+{
+  "canvas": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "designAuthority": "Source/approved-concept.png",
+  "editablePartSources": {
+    "Parts/body.png": "Source/EditableParts/body.png",
+    "Parts/head-open.png": "Source/EditableParts/head-open.png",
+    "Parts/head-closed.png": "Source/EditableParts/head-closed.png",
+    "Parts/ear-near.png": "Source/EditableParts/ear-near.png",
+    "Parts/ear-far.png": "Source/EditableParts/ear-far.png",
+    "Parts/tail.png": "Source/EditableParts/tail.png",
+    "Parts/fore-near-upper.png": "Source/EditableParts/fore-near-upper.png",
+    "Parts/fore-near-lower.png": "Source/EditableParts/fore-near-lower.png",
+    "Parts/fore-far-upper.png": "Source/EditableParts/fore-far-upper.png",
+    "Parts/fore-far-lower.png": "Source/EditableParts/fore-far-lower.png",
+    "Parts/hind-near-upper.png": "Source/EditableParts/hind-near-upper.png",
+    "Parts/hind-near-lower.png": "Source/EditableParts/hind-near-lower.png",
+    "Parts/hind-far-upper.png": "Source/EditableParts/hind-far-upper.png",
+    "Parts/hind-far-lower.png": "Source/EditableParts/hind-far-lower.png",
+    "Parts/fore-near-hoof.png": "Source/EditableParts/fore-near-hoof.png",
+    "Parts/fore-far-hoof.png": "Source/EditableParts/fore-far-hoof.png",
+    "Parts/hind-near-hoof.png": "Source/EditableParts/hind-near-hoof.png",
+    "Parts/hind-far-hoof.png": "Source/EditableParts/hind-far-hoof.png"
+  },
+  "sourceDrawings": [
+    "Source/core-parts-drawing.png",
+    "Source/torso-complete-drawing.png",
+    "Source/jointed-limbs-drawing.png",
+    "Source/head-complete-drawing.png",
+    "Source/convex-limbs-drawing.png"
+  ],
+  "prompts": [
+    "Source/core-generation.json",
+    "Source/torso-generation.json",
+    "Source/limbs-generation.json",
+    "Source/head-generation.json",
+    "Source/convex-limbs-generation.json"
+  ],
+  "registration": "Source/registration.json",
+  "registrationProgram": "Source/register.py",
+  "physics": "physics.py",
+  "renderer": "render.py",
+  "prepare": "Source/prepare.py",
+  "externalPathsRequired": false,
+  "editing": "Edit registered complete PNG sources to retain the anatomical placement. Preparation copies those local sources; register.py can intentionally rebuild them from the preserved raw drawings and one-time landmark registration. Runtime transforms are rigid and do not fit each frame to its bounds."
+}

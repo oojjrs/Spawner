@@ -1,0 +1,211 @@
+{
+  "canvas": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "reference": "Source/neutral.png",
+  "parts": {
+    "body": "Parts/body.png",
+    "head-open": "Parts/head-open.png",
+    "head-closed": "Parts/head-closed.png",
+    "ear-near": "Parts/ear-near.png",
+    "ear-far": "Parts/ear-far.png",
+    "tail": "Parts/tail.png",
+    "fore-near-upper": "Parts/fore-near-upper.png",
+    "fore-near-lower": "Parts/fore-near-lower.png",
+    "fore-far-upper": "Parts/fore-far-upper.png",
+    "fore-far-lower": "Parts/fore-far-lower.png",
+    "hind-near-upper": "Parts/hind-near-upper.png",
+    "hind-near-lower": "Parts/hind-near-lower.png",
+    "hind-far-upper": "Parts/hind-far-upper.png",
+    "hind-far-lower": "Parts/hind-far-lower.png",
+    "fore-near-hoof": "Parts/fore-near-hoof.png",
+    "fore-far-hoof": "Parts/fore-far-hoof.png",
+    "hind-near-hoof": "Parts/hind-near-hoof.png",
+    "hind-far-hoof": "Parts/hind-far-hoof.png"
+  },
+  "legs": {
+    "fore-near": [
+      [
+        306,
+        331
+      ],
+      [
+        281,
+        385
+      ],
+      [
+        255.3,
+        400
+      ]
+    ],
+    "fore-far": [
+      [
+        184,
+        327
+      ],
+      [
+        139,
+        362
+      ],
+      [
+        102.04,
+        385.64
+      ]
+    ],
+    "hind-near": [
+      [
+        405,
+        292
+      ],
+      [
+        427,
+        355
+      ],
+      [
+        441.4,
+        379.7
+      ]
+    ],
+    "hind-far": [
+      [
+        379,
+        312
+      ],
+      [
+        353,
+        345
+      ],
+      [
+        341.5,
+        369.24
+      ]
+    ]
+  },
+  "neck": [
+    259,
+    263
+  ],
+  "coreCenters": {
+    "body": [
+      334,
+      277
+    ],
+    "head": [
+      163,
+      293
+    ]
+  },
+  "groundY": 448,
+  "drawOrder": [
+    "tail",
+    "hind-far-upper",
+    "hind-far-lower",
+    "hind-far-hoof",
+    "fore-far-upper",
+    "fore-far-lower",
+    "fore-far-hoof",
+    "body",
+    "hind-near-upper",
+    "hind-near-lower",
+    "hind-near-hoof",
+    "fore-near-upper",
+    "head",
+    "fore-near-lower",
+    "fore-near-hoof",
+    "ear-far",
+    "ear-near",
+    "head-foreground"
+  ],
+  "headForeground": [
+    [
+      82,
+      217,
+      138,
+      250
+    ],
+    [
+      167,
+      232,
+      223,
+      266
+    ]
+  ],
+  "eyeClosure": {
+    "ellipses": [
+      [
+        122,
+        259,
+        185,
+        312
+      ],
+      [
+        59,
+        264,
+        94,
+        306
+      ]
+    ],
+    "feather": 1.3,
+    "top": 259,
+    "height": 57,
+    "startMs": 70,
+    "durationMs": 180,
+    "edge": 2
+  },
+  "appendages": {
+    "ear-near": {
+      "parent": "head-open",
+      "root": [
+        195,
+        245
+      ],
+      "range": [
+        0,
+        1.3
+      ],
+      "release": [
+        110,
+        320
+      ],
+      "stiffness": 230
+    },
+    "ear-far": {
+      "parent": "head-open",
+      "root": [
+        108,
+        224
+      ],
+      "range": [
+        -1.3,
+        0
+      ],
+      "release": [
+        130,
+        350
+      ],
+      "stiffness": 230
+    },
+    "tail": {
+      "parent": "body",
+      "root": [
+        436,
+        258
+      ],
+      "range": [
+        0,
+        1.4
+      ],
+      "release": [
+        170,
+        420
+      ],
+      "stiffness": 180
+    }
+  },
+  "physicsSource": "physics.py"
+}

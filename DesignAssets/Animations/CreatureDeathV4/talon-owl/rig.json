@@ -1,0 +1,130 @@
+{
+  "name": "talon-owl",
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ],
+  "approvedImage": "DesignAssets/CreatureConcepts/v3/talon-owl.png",
+  "bodyMass": 1,
+  "headMass": 0.4,
+  "gravity": 1050,
+  "neckPivot": [
+    256,
+    248
+  ],
+  "bodyAngleLimit": -72,
+  "headAngleLimit": [
+    -85,
+    25
+  ],
+  "neutralHoldMs": 100,
+  "foreFailureMs": [
+    100,
+    200
+  ],
+  "hindFailureMs": [
+    180,
+    310
+  ],
+  "headFailureMs": [
+    160,
+    280
+  ],
+  "groundY": 413,
+  "legs": {
+    "leg-near": [
+      [
+        259,
+        346
+      ],
+      [
+        271,
+        373
+      ],
+      [
+        255,
+        384.4117647058824
+      ]
+    ],
+    "leg-far": [
+      [
+        208,
+        348
+      ],
+      [
+        215,
+        373
+      ],
+      [
+        196,
+        381.7526041666667
+      ]
+    ]
+  },
+  "accessories": {
+    "horn-far": [
+      170,
+      159
+    ],
+    "horn-near": [
+      258,
+      162
+    ]
+  },
+  "extraParts": {
+    "wing-near": {
+      "pivot": [
+        270,
+        240
+      ],
+      "parent": "body",
+      "mass": 0.12
+    },
+    "wing-far": {
+      "pivot": [
+        176,
+        243
+      ],
+      "parent": "body",
+      "mass": 0.1
+    },
+    "tail": {
+      "pivot": [
+        301,
+        344
+      ],
+      "parent": "body",
+      "mass": 0.08
+    }
+  },
+  "durationActiveMs": 2400,
+  "sampleMs": 40,
+  "finalHoldMs": 1000,
+  "spineCompatibilityVerified": false,
+  "bodyMassCenter": [
+    244,
+    302
+  ],
+  "headMassCenter": [
+    220,
+    215
+  ],
+  "openHead": "head-alternate",
+  "closedHead": "head",
+  "softChains": {},
+  "groundSlope": 0.065,
+  "groundX": 255,
+  "jointParts": {
+    "leg-near": [
+      "leg-near-upper",
+      "leg-near-lower",
+      "leg-near-foot"
+    ],
+    "leg-far": [
+      "leg-far-upper",
+      "leg-far-lower",
+      "leg-far-foot"
+    ]
+  }
+}

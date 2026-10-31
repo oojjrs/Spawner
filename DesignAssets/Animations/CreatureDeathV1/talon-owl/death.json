@@ -1,0 +1,72 @@
+{
+  "name": "talon-owl",
+  "action": "death",
+  "sourceImage": "DesignAssets/CreatureConcepts/v3/talon-owl.png",
+  "sourceAnimation": "DesignAssets/Animations/TalonOwlIdle/PerchedV4/idle.webp",
+  "image": "DesignAssets/Animations/CreatureDeathV1/talon-owl/death.webp",
+  "frameSize": 512,
+  "columns": 4,
+  "frameCount": 16,
+  "pivotX": 256,
+  "pivotY": 422,
+  "durationsMs": [
+    110,
+    90,
+    80,
+    75,
+    70,
+    65,
+    60,
+    70,
+    80,
+    90,
+    100,
+    110,
+    120,
+    140,
+    160,
+    1000
+  ],
+  "durationMs": 2420,
+  "loop": false,
+  "preview": "DesignAssets/Animations/CreatureDeathV1/talon-owl/preview.webp",
+  "thumbnail": "DesignAssets/Animations/CreatureDeathV1/talon-owl/thumbnail.webp",
+  "renderer": "DesignAssets/Animations/CreatureDeathV1/talon-owl/pack_drawn.py",
+  "rig": "DesignAssets/Animations/CreatureDeathV1/talon-owl/rig.json",
+  "rigUsed": false,
+  "drawing": "DesignAssets/Animations/CreatureDeathV1/talon-owl/drawing.json",
+  "sourceSheet": "DesignAssets/Animations/CreatureDeathV1/talon-owl/Source/death-drawn-sheet.png",
+  "contact": "DesignAssets/Animations/CreatureDeathV1/talon-owl/contact.png",
+  "canvasPlacement": {
+    "canvas": [
+      512,
+      512
+    ],
+    "scale": 1.0408163265306123,
+    "horizontalTranslation": 79.7142857142857,
+    "groundContactY": 422,
+    "sourceRows": [
+      [
+        0,
+        399
+      ],
+      [
+        399,
+        753
+      ],
+      [
+        753,
+        1012
+      ],
+      [
+        1012,
+        1254
+      ]
+    ],
+    "registration": "All cels use one common scale and horizontal anchor. Per-cel vertical translation registers the drawn foot/belly ground contact; there is no per-cel fitting or scaling."
+  },
+  "method": "Directly drawn anatomical death cels from the accepted reference. Shared uniform scale, fixed horizontal registration and registered ground contact; all body, limb, leaf and tendril silhouettes are redrawn through collapse. The earlier continuous rig is preserved as editable reference but is not used by this drawn sequence.",
+  "rootMotion": "Drawn body collapse; settled belly/head retains the common ground contact.",
+  "provider": "built-in image_gen",
+  "previewLoop": "The preview repeats for inspection; runtime death is non-looping and holds the settled pose."
+}

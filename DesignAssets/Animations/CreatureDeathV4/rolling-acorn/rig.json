@@ -1,0 +1,17 @@
+{
+  "name": "rolling-acorn", 
+  "method": "Rigid seed support and gravity with contact impulses and rolling friction; independently anchored flexible leaf with particle and material floor constraints", 
+  "parts": [
+    "body", 
+    "body-closed", 
+    "leaf"
+  ], 
+  "leafRoot": [
+    324.13793103448273, 
+    146.6551724137931
+  ], 
+  "controls": "motion.json", 
+  "timeline": "landmarks.json", 
+  "renderer": "render.py", 
+  "spineCompatibilityVerified": false
+}

@@ -1,0 +1,15 @@
+{
+  "provider": "built-in image_gen",
+  "asset": "Source/compact-empty-pouch-drawing.png",
+  "actualReferencedImagePaths": [
+    "H:\\Spawner\\DesignAssets\\Animations\\CreatureDeathV4\\bubble-toad\\Parts\\pouch-empty.png",
+    "H:\\Spawner\\DesignAssets\\Animations\\CreatureDeathV4\\bubble-toad\\Source\\neutral.png",
+    "H:\\Spawner\\DesignAssets\\Animations\\CreatureDeathV4\\bubble-toad\\Source\\final-body-without-pouch.png"
+  ],
+  "preservedInputCopies": [
+    "Source/compact-sac-input-old.png",
+    "Source/neutral.png",
+    "Source/compact-sac-body-input.png"
+  ],
+  "prompt": "Use case: precise-object-edit. Actual production corrective drawing for the SAME frog's completely deflated throat sac.\nImage1 is the current sac material/style reference but its broad flat silhouette is WRONG and must be replaced. Image2 is approved character/anatomy/material authority. Image3 is the final fallen body/head/forearms context ONLY; do not draw those body parts.\nDraw ONLY ONE COMPLETE isolated empty throat-skin pouch, genuinely transparent alpha0 all around. It hangs/gathers directly UNDER THE CHIN and BETWEEN THE TWO FOREARMS, with both outer sides tucked inward into deep overlapping SOFT VERTICAL/DIAGONAL SKIN FOLDS. Compact rounded hanging bag, approximately as tall as wide (width at most1.3x height), substantial folded skin thickness, no disappearance. The skin that was a huge balloon is gathered and overlaps itself in multiple folds instead of becoming a horizontally stretched cloth sheet.\nThe left/front edge is blunt, softly rounded, tucked BACK underneath the mouth; absolutely NO long projecting left tip, beak, muzzle, snout, nose, bill, triangular tongue, long horizontal plate, shelf or cape. Keep original creamy pale-yellow/green underside palette, wet painterly shading, light from upper-left, fine original outline, natural crease shadows and highlighted folds. The hidden upper attachment is a closed rounded cream skin surface behind the chin, NO hole/circular rim/neck/collar/tube.\nComplete original material and hidden upper contour suitable for one editable source layer. No skull/eyes/body/arms/feet pixels, no shadow/floor/glow/grid/text. Generous transparent margin, source should be compact and rounded by DRAWN overlapping fold structure, NOT globally squashed/scaled into a plate."
+}

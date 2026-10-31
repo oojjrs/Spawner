@@ -1,0 +1,32 @@
+{
+  "body": {
+    "canvas": [
+      512,
+      512
+    ],
+    "translationPx": [
+      0,
+      -9
+    ]
+  },
+  "near-ear": {
+    "canvas": [
+      512,
+      512
+    ],
+    "translationPx": [
+      0,
+      0
+    ]
+  },
+  "far-ear": {
+    "canvas": [
+      512,
+      512
+    ],
+    "translationPx": [
+      0,
+      0
+    ]
+  }
+}

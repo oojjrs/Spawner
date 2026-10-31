@@ -1,0 +1,24 @@
+{
+  "activeParts": [
+    "cavity.png", 
+    "shell-front.png", 
+    "mantle.png", 
+    "near-eye-stalk.png", 
+    "near-eye-globe.png", 
+    "far-eye-stalk.png", 
+    "far-eye-globe.png"
+  ], 
+  "canvas": [
+    512, 
+    512
+  ], 
+  "pivot": [
+    256, 
+    448
+  ], 
+  "source": "Bound", 
+  "target": "../Parts", 
+  "reference": "DesignAssets/CreatureConcepts/v3/bundle-snail.png", 
+  "renderer": "../render.py", 
+  "prepare": "../prepare.py"
+}

@@ -1,0 +1,40 @@
+{
+  "source": "Parts/head.png",
+  "crop": [
+    189,
+    322,
+    215,
+    378
+  ],
+  "placements": [
+    [
+      182,
+      322
+    ],
+    [
+      199,
+      322
+    ],
+    [
+      216,
+      323
+    ],
+    [
+      233,
+      323
+    ],
+    [
+      250,
+      322
+    ],
+    [
+      267,
+      316
+    ],
+    [
+      284,
+      307
+    ]
+  ],
+  "role": "complete hidden cervical connector beneath rigid carapace"
+}

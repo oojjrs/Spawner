@@ -1,0 +1,11 @@
+{
+  "tool": "image_gen",
+  "prompt": "Use case: stylized-concept. Draw ONE complete missing animation frame, true transparency, fixed identical square canvas/camera. Input1 is the ONLY approved original owl design. Input2 is its120ms falling frame and input3 its200ms falling frame. Draw160ms, halfway in time between inputs2/3, preserving their same skull, broad cream facial disk, body, short feet, tail and intrinsic feather lengths. Body/limbs fall along the accelerating gravity arc: slightly above the spatial midpoint because it accelerates downward. Wings droop naturally at shoulder/elbow, between the two poses, with continuous feathers and correct overlap. Keep the large head broader than the cream chest, short dark beak, original white brows/speckled crown/short ear tufts/gray-brown wings with cream tips. Two short feet still above the ground, talons around429 in the512 coordinate canvas. Keep the same exact bird, scale, palette, camera and frame registration; no zoom, fit, new features, giant head, tiny head, tall legs, holes, seams or detached pixels. Draw anatomy, not a crossfade or superposed images. One clean painterly game sprite, no floor/shadow/text.",
+  "output": "Source/drawn-160.png",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "Source/reference.png",
+    "Source/drawn-120.png",
+    "Source/drawn-200-head-corrected.png"
+  ]
+}

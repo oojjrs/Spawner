@@ -1,0 +1,160 @@
+{
+  "rawCanvas": [
+    1254,
+    1254
+  ],
+  "commonScale": 0.4082934609250399,
+  "canvas": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "poses": [
+    {
+      "timeMs": 120,
+      "source": "Source/drawn-120.png",
+      "contactXRange": null,
+      "contactY": null,
+      "beakBridge": {
+        "source": [
+          210,
+          308
+        ],
+        "target": [
+          186.32,
+          307
+        ]
+      }
+    },
+    {
+      "timeMs": 160,
+      "source": "Source/drawn-160.png",
+      "contactXRange": null,
+      "contactY": null,
+      "beakBridge": {
+        "source": [
+          207,
+          327
+        ],
+        "target": [
+          189,
+          325
+        ]
+      }
+    },
+    {
+      "timeMs": 200,
+      "source": "Source/drawn-200-head-corrected.png",
+      "contactXRange": null,
+      "contactY": null,
+      "beakBridge": {
+        "source": [
+          206,
+          337
+        ],
+        "target": [
+          192,
+          343
+        ]
+      }
+    },
+    {
+      "timeMs": 240,
+      "source": "Source/drawn-240.png",
+      "contactXRange": [
+        220,
+        300
+      ],
+      "contactY": 449,
+      "beakBridge": {
+        "source": [
+          204.5,
+          369
+        ],
+        "target": [
+          195,
+          360
+        ]
+      }
+    },
+    {
+      "timeMs": 320,
+      "source": "Source/drawn-320.png",
+      "contactXRange": [
+        220,
+        310
+      ],
+      "contactY": 447,
+      "beakBridge": {
+        "source": [
+          206,
+          382
+        ],
+        "target": [
+          198,
+          380
+        ]
+      }
+    },
+    {
+      "timeMs": 400,
+      "source": "Source/drawn-400.png",
+      "contactXRange": [
+        350,
+        510
+      ],
+      "contactY": 448,
+      "beakBridge": {
+        "source": [
+          228,
+          410
+        ],
+        "target": [
+          200,
+          399
+        ]
+      }
+    },
+    {
+      "timeMs": 560,
+      "source": "Source/landing-key.png",
+      "contactXRange": [
+        350,
+        510
+      ],
+      "contactY": 454,
+      "beakBridge": {
+        "source": [
+          197,
+          398
+        ],
+        "target": [
+          200,
+          400
+        ]
+      }
+    },
+    {
+      "timeMs": 800,
+      "source": "Source/landing-key.png",
+      "contactXRange": [
+        350,
+        510
+      ],
+      "contactY": 454,
+      "beakBridge": {
+        "source": [
+          197,
+          398
+        ],
+        "target": [
+          200,
+          400
+        ]
+      }
+    }
+  ]
+}

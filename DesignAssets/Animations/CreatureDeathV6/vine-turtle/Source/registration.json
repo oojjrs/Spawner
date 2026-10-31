@@ -1,0 +1,16 @@
+{
+  "authority": "DesignAssets/CreatureConcepts/v3/vine-turtle.png",
+  "canvas": [
+    512,
+    512
+  ],
+  "scale": 1.4927113702623906,
+  "translation": [
+    0,
+    45
+  ],
+  "pivot": [
+    256,
+    448
+  ]
+}

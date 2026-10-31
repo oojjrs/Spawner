@@ -1,0 +1,31 @@
+{
+  "activeParts": [
+    "body.png", 
+    "head.png", 
+    "head-closed.png", 
+    "far-ear.png", 
+    "near-ear.png", 
+    "foreleg-far-upper.png", 
+    "foreleg-far-lower.png", 
+    "foreleg-far-paw.png", 
+    "foreleg-upper.png", 
+    "foreleg-lower.png", 
+    "foreleg-paw.png", 
+    "hindleg-upper.png", 
+    "hindleg-lower.png", 
+    "hindleg-paw.png"
+  ], 
+  "canvas": [
+    512, 
+    512
+  ], 
+  "pivot": [
+    256, 
+    448
+  ], 
+  "source": "Bound", 
+  "target": "../Parts", 
+  "reference": "DesignAssets/CreatureConcepts/v3/dew-rabbit.png", 
+  "renderer": "../render.py", 
+  "prepare": "../prepare.py"
+}

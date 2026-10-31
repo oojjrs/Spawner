@@ -1,0 +1,34 @@
+{
+  "bodyPivot": [
+    350, 
+    420
+  ], 
+  "headPivot": [
+    273.154639, 
+    316.14433
+  ], 
+  "rootOffset": [
+    0, 
+    4
+  ], 
+  "neckDisplacement": [
+    -8, 
+    32
+  ], 
+  "earStartMs": 330, 
+  "earEndMs": 858, 
+  "earKeyTimesMs": [
+    0, 
+    429, 
+    495, 
+    561, 
+    594, 
+    660, 
+    693, 
+    726, 
+    759, 
+    792, 
+    825, 
+    858
+  ]
+}

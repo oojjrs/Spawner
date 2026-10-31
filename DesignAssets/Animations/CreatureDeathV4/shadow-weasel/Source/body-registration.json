@@ -1,0 +1,17 @@
+{
+  "source": "Source/clean-torso.png",
+  "mask": "Source/body-mask.png",
+  "matrix": [
+    [
+      0.37664473684210525,
+      0,
+      22.92763157894737
+    ],
+    [
+      0,
+      0.37664473684210525,
+      19.36348684210526
+    ]
+  ],
+  "output": "Parts/body.png"
+}

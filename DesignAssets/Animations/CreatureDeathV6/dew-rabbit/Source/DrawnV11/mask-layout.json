@@ -1,0 +1,21 @@
+{
+  "method": "premultiplied spatial replacement with a fixed anatomical face region",
+  "featherPx": 3,
+  "facePolygon": [
+    [195, 244],
+    [265, 244],
+    [285, 252],
+    [300, 272],
+    [310, 296],
+    [317, 320],
+    [308, 345],
+    [282, 367],
+    [182, 367],
+    [150, 344],
+    [130, 322],
+    [128, 300],
+    [146, 279],
+    [157, 260],
+    [178, 249]
+  ]
+}

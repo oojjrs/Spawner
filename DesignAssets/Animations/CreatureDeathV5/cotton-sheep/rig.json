@@ -1,0 +1,141 @@
+{
+  "name": "cotton-sheep",
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ],
+  "approvedImage": "DesignAssets/CreatureConcepts/v3/cotton-sheep.png",
+  "bodyMass": 1,
+  "headMass": 0.3,
+  "gravity": 1050,
+  "neckPivot": [
+    249,
+    270
+  ],
+  "bodyAngleLimit": -17,
+  "headAngleLimit": [
+    -22,
+    20
+  ],
+  "neutralHoldMs": 100,
+  "foreFailureMs": [
+    120,
+    260
+  ],
+  "hindFailureMs": [
+    240,
+    390
+  ],
+  "headFailureMs": [
+    170,
+    310
+  ],
+  "groundY": 429,
+  "groundSlope": -0.2,
+  "groundX": 253,
+  "bodyMassCenter": [
+    308,
+    291
+  ],
+  "headMassCenter": [
+    192,
+    230
+  ],
+  "legs": {
+    "fore-near": [
+      [
+        261,
+        371
+      ],
+      [
+        258,
+        394
+      ],
+      [
+        253,
+        424
+      ]
+    ],
+    "fore-far": [
+      [
+        204,
+        358
+      ],
+      [
+        202,
+        383
+      ],
+      [
+        194,
+        408
+      ]
+    ],
+    "hind-near": [
+      [
+        371,
+        343
+      ],
+      [
+        376,
+        371
+      ],
+      [
+        377,
+        399
+      ]
+    ],
+    "hind-far": [
+      [
+        324,
+        345
+      ],
+      [
+        325,
+        365
+      ],
+      [
+        322,
+        389
+      ]
+    ]
+  },
+  "accessories": {
+    "near-ear": [
+      248,
+      240
+    ],
+    "far-ear": [
+      143,
+      217
+    ]
+  },
+  "extraParts": {
+    "tail": {
+      "pivot": [
+        397,
+        249
+      ],
+      "parent": "body",
+      "mass": 0.04,
+      "rigidToParent": true
+    }
+  },
+  "durationActiveMs": 2400,
+  "sampleMs": 40,
+  "finalHoldMs": 1000,
+  "softChains": {},
+  "jointParts": {},
+  "limbSurfaceContact": false,
+  "legBends": {
+    "fore-near": 1,
+    "fore-far": 1,
+    "hind-near": -1,
+    "hind-far": -1
+  },
+  "rigidAccessories": [
+    "near-ear",
+    "far-ear"
+  ],
+  "limbRendering": "short-stub"
+}

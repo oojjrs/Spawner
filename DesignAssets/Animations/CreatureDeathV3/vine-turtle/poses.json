@@ -1,0 +1,705 @@
+[
+  {
+    "timeMs": 0,
+    "partRetractions": {
+      "tail": 0,
+      "hind": 0,
+      "fore-far": 0,
+      "head": 0,
+      "fore-near": 0
+    },
+    "rootTranslation": [
+      0,
+      0
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 5706715
+  },
+  {
+    "timeMs": 25,
+    "partRetractions": {
+      "tail": 0,
+      "hind": 0,
+      "fore-far": 0,
+      "head": 0,
+      "fore-near": 0
+    },
+    "rootTranslation": [
+      0,
+      0
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 5706715
+  },
+  {
+    "timeMs": 50,
+    "partRetractions": {
+      "tail": 0,
+      "hind": 0,
+      "fore-far": 0,
+      "head": 0,
+      "fore-near": 0
+    },
+    "rootTranslation": [
+      0,
+      0
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 5706715
+  },
+  {
+    "timeMs": 75,
+    "partRetractions": {
+      "tail": 0,
+      "hind": 0,
+      "fore-far": 0,
+      "head": 0,
+      "fore-near": 0
+    },
+    "rootTranslation": [
+      0,
+      0
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 5711104
+  },
+  {
+    "timeMs": 100,
+    "partRetractions": {
+      "tail": 0,
+      "hind": 0,
+      "fore-far": 0,
+      "head": 0,
+      "fore-near": 0
+    },
+    "rootTranslation": [
+      0,
+      0
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 5711104
+  },
+  {
+    "timeMs": 125,
+    "partRetractions": {
+      "tail": 0,
+      "hind": 0,
+      "fore-far": 0,
+      "head": 0.016348053538136186,
+      "fore-near": 0
+    },
+    "rootTranslation": [
+      0,
+      0
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 5696548
+  },
+  {
+    "timeMs": 150,
+    "partRetractions": {
+      "tail": 0,
+      "hind": 0,
+      "fore-far": 0,
+      "head": 0.0619139048891115,
+      "fore-near": 0
+    },
+    "rootTranslation": [
+      0,
+      0
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 5628905
+  },
+  {
+    "timeMs": 175,
+    "partRetractions": {
+      "tail": 0,
+      "hind": 0,
+      "fore-far": 0.025958693673190713,
+      "head": 0.1314800901577761,
+      "fore-near": 0.0008815449587928984
+    },
+    "rootTranslation": [
+      0,
+      0
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 5434811
+  },
+  {
+    "timeMs": 200,
+    "partRetractions": {
+      "tail": 0,
+      "hind": 0,
+      "fore-far": 0.09672280382339554,
+      "head": 0.2198291454489802,
+      "fore-near": 0.029890524416745255
+    },
+    "rootTranslation": [
+      0,
+      0
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 5034458
+  },
+  {
+    "timeMs": 225,
+    "partRetractions": {
+      "tail": 0,
+      "hind": 0,
+      "fore-far": 0.20162437414656348,
+      "head": 0.32174360686757375,
+      "fore-near": 0.09426380745418014
+    },
+    "rootTranslation": [
+      0,
+      0
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 4416404
+  },
+  {
+    "timeMs": 250,
+    "partRetractions": {
+      "tail": 0,
+      "hind": 0,
+      "fore-far": 0.32999544833864364,
+      "head": 0.43200601051840715,
+      "fore-near": 0.1863135019886014
+    },
+    "rootTranslation": [
+      0,
+      0
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 3674334
+  },
+  {
+    "timeMs": 275,
+    "partRetractions": {
+      "tail": 0,
+      "hind": 0.022492255830903793,
+      "fore-far": 0.47116807009558487,
+      "head": 0.5453988925063304,
+      "fore-near": 0.29835171593751286
+    },
+    "rootTranslation": [
+      0,
+      0
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 2888206
+  },
+  {
+    "timeMs": 300,
+    "partRetractions": {
+      "tail": 0,
+      "hind": 0.08427478134110787,
+      "fore-far": 0.6144742831133363,
+      "head": 0.6567047889361939,
+      "fore-near": 0.4226905572184182
+    },
+    "rootTranslation": [
+      0,
+      0
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 2154963
+  },
+  {
+    "timeMs": 325,
+    "partRetractions": {
+      "tail": 0,
+      "hind": 0.1768062135568513,
+      "fore-far": 0.7492461310878471,
+      "head": 0.7607062359128475,
+      "fore-near": 0.5516421337488211
+    },
+    "rootTranslation": [
+      0,
+      0
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 1528889
+  },
+  {
+    "timeMs": 350,
+    "partRetractions": {
+      "tail": 0.012740740740740742,
+      "hind": 0.2915451895043732,
+      "fore-far": 0.864815657715066,
+      "head": 0.8521857695411413,
+      "fore-near": 0.6775185534462258
+    },
+    "rootTranslation": [
+      0,
+      0
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 979097
+  },
+  {
+    "timeMs": 375,
+    "partRetractions": {
+      "tail": 0.06075,
+      "hind": 0.41995034620991256,
+      "fore-far": 0.9505149066909422,
+      "head": 0.925925925925926,
+      "fore-near": 0.7926319242281356
+    },
+    "rootTranslation": [
+      0,
+      3
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 572803
+  },
+  {
+    "timeMs": 400,
+    "partRetractions": {
+      "tail": 0.13792592592592592,
+      "hind": 0.5534803206997084,
+      "fore-far": 0.9956759217114246,
+      "head": 0.976709241172051,
+      "fore-near": 0.8892943540120547
+    },
+    "rootTranslation": [
+      0,
+      8
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 285076
+  },
+  {
+    "timeMs": 425,
+    "partRetractions": {
+      "tail": 0.23732407407407405,
+      "hind": 0.68359375,
+      "fore-far": 1,
+      "head": 0.999318251384367,
+      "fore-near": 0.9598179507154866
+    },
+    "rootTranslation": [
+      0,
+      10
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 115728
+  },
+  {
+    "timeMs": 450,
+    "partRetractions": {
+      "tail": 0.3520000000000001,
+      "hind": 0.8017492711370262,
+      "fore-far": 1,
+      "head": 1,
+      "fore-near": 0.9965148222559351
+    },
+    "rootTranslation": [
+      0,
+      19
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 39558
+  },
+  {
+    "timeMs": 475,
+    "partRetractions": {
+      "tail": 0.47500925925925924,
+      "hind": 0.8994055211370263,
+      "fore-far": 1,
+      "head": 1,
+      "fore-near": 1
+    },
+    "rootTranslation": [
+      0,
+      31
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 1234
+  },
+  {
+    "timeMs": 500,
+    "partRetractions": {
+      "tail": 0.5994074074074074,
+      "hind": 0.968021137026239,
+      "fore-far": 1,
+      "head": 1,
+      "fore-near": 1
+    },
+    "rootTranslation": [
+      0,
+      36
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 0
+  },
+  {
+    "timeMs": 525,
+    "partRetractions": {
+      "tail": 0.71825,
+      "hind": 0.9990547558309039,
+      "fore-far": 1,
+      "head": 1,
+      "fore-near": 1
+    },
+    "rootTranslation": [
+      0,
+      36
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 0
+  },
+  {
+    "timeMs": 550,
+    "partRetractions": {
+      "tail": 0.8245925925925925,
+      "hind": 1,
+      "fore-far": 1,
+      "head": 1,
+      "fore-near": 1
+    },
+    "rootTranslation": [
+      0,
+      35
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 0
+  },
+  {
+    "timeMs": 575,
+    "partRetractions": {
+      "tail": 0.9114907407407408,
+      "hind": 1,
+      "fore-far": 1,
+      "head": 1,
+      "fore-near": 1
+    },
+    "rootTranslation": [
+      0,
+      36
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 0
+  },
+  {
+    "timeMs": 600,
+    "partRetractions": {
+      "tail": 0.972,
+      "hind": 1,
+      "fore-far": 1,
+      "head": 1,
+      "fore-near": 1
+    },
+    "rootTranslation": [
+      0,
+      37
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 0
+  },
+  {
+    "timeMs": 625,
+    "partRetractions": {
+      "tail": 0.999175925925926,
+      "hind": 1,
+      "fore-far": 1,
+      "head": 1,
+      "fore-near": 1
+    },
+    "rootTranslation": [
+      0,
+      37
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 0
+  },
+  {
+    "timeMs": 650,
+    "partRetractions": {
+      "tail": 1,
+      "hind": 1,
+      "fore-far": 1,
+      "head": 1,
+      "fore-near": 1
+    },
+    "rootTranslation": [
+      0,
+      37
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 0
+  },
+  {
+    "timeMs": 675,
+    "partRetractions": {
+      "tail": 1,
+      "hind": 1,
+      "fore-far": 1,
+      "head": 1,
+      "fore-near": 1
+    },
+    "rootTranslation": [
+      0,
+      37
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 0
+  },
+  {
+    "timeMs": 700,
+    "partRetractions": {
+      "tail": 1,
+      "hind": 1,
+      "fore-far": 1,
+      "head": 1,
+      "fore-near": 1
+    },
+    "rootTranslation": [
+      0,
+      37
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 0
+  },
+  {
+    "timeMs": 725,
+    "partRetractions": {
+      "tail": 1,
+      "hind": 1,
+      "fore-far": 1,
+      "head": 1,
+      "fore-near": 1
+    },
+    "rootTranslation": [
+      0,
+      37
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 0
+  },
+  {
+    "timeMs": 750,
+    "partRetractions": {
+      "tail": 1,
+      "hind": 1,
+      "fore-far": 1,
+      "head": 1,
+      "fore-near": 1
+    },
+    "rootTranslation": [
+      0,
+      37
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 0
+  },
+  {
+    "timeMs": 775,
+    "partRetractions": {
+      "tail": 1,
+      "hind": 1,
+      "fore-far": 1,
+      "head": 1,
+      "fore-near": 1
+    },
+    "rootTranslation": [
+      0,
+      37
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 0
+  },
+  {
+    "timeMs": 800,
+    "partRetractions": {
+      "tail": 1,
+      "hind": 1,
+      "fore-far": 1,
+      "head": 1,
+      "fore-near": 1
+    },
+    "rootTranslation": [
+      0,
+      37
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 0
+  },
+  {
+    "timeMs": 825,
+    "partRetractions": {
+      "tail": 1,
+      "hind": 1,
+      "fore-far": 1,
+      "head": 1,
+      "fore-near": 1
+    },
+    "rootTranslation": [
+      0,
+      37
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 0
+  },
+  {
+    "timeMs": 850,
+    "partRetractions": {
+      "tail": 1,
+      "hind": 1,
+      "fore-far": 1,
+      "head": 1,
+      "fore-near": 1
+    },
+    "rootTranslation": [
+      0,
+      37
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 0
+  },
+  {
+    "timeMs": 875,
+    "partRetractions": {
+      "tail": 1,
+      "hind": 1,
+      "fore-far": 1,
+      "head": 1,
+      "fore-near": 1
+    },
+    "rootTranslation": [
+      0,
+      37
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 0
+  },
+  {
+    "timeMs": 900,
+    "partRetractions": {
+      "tail": 1,
+      "hind": 1,
+      "fore-far": 1,
+      "head": 1,
+      "fore-near": 1
+    },
+    "rootTranslation": [
+      0,
+      37
+    ],
+    "rigidScale": [
+      1,
+      1
+    ],
+    "visibleMovingAlpha": 0
+  }
+]

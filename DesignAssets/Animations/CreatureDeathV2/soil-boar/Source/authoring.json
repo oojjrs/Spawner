@@ -1,0 +1,394 @@
+{
+  "body": "Source/CleanAttachments/body.png",
+  "parts": [
+    {
+      "name": "fore-upper",
+      "image": "Source/CleanAttachments/fore-upper.png",
+      "pivot": [
+        279,
+        300
+      ],
+      "parent": "ik",
+      "jointLandmarks": [
+        [
+          279,
+          300
+        ],
+        [
+          263,
+          344
+        ]
+      ],
+      "completionRegistration": {
+        "atlasProximal": [
+          70.8,
+          58.949999999999996
+        ],
+        "atlasDistal": [
+          146.32,
+          361.56
+        ],
+        "bindProximal": [
+          279.0,
+          300.0
+        ],
+        "bindDistal": [
+          263.0,
+          344.0
+        ],
+        "bindLength": 46.8187996428785,
+        "width": 68.60491991465591,
+        "fixedSourceTransform": [
+          [
+            0.2440730220872857,
+            -0.11462616001295295,
+            268.3692324143537
+          ],
+          [
+            0.12794897916512515,
+            0.11391486836987048,
+            284.2217205514667
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "method": "One constant anatomical source registration before animation. Runtime part scale remains [1,1]."
+      }
+    },
+    {
+      "name": "fore-lower",
+      "image": "Source/CleanAttachments/fore-lower.png",
+      "pivot": [
+        263,
+        344
+      ],
+      "parent": "ik",
+      "jointLandmarks": [
+        [
+          263,
+          344
+        ],
+        [
+          245,
+          388
+        ]
+      ],
+      "completionRegistration": {
+        "atlasProximal": [
+          129.25,
+          41.879999999999995
+        ],
+        "atlasDistal": [
+          84.6,
+          324.57
+        ],
+        "bindProximal": [
+          263.0,
+          344.0
+        ],
+        "bindDistal": [
+          245.0,
+          388.0
+        ],
+        "bindLength": 47.53945729601885,
+        "width": 54.354848518987865,
+        "fixedSourceTransform": [
+          [
+            0.25103452743524085,
+            -0.022272813925536275,
+            230.10855561297382
+          ],
+          [
+            0.07372814775535826,
+            0.16730880168610907,
+            327.0381624191489
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "method": "One constant anatomical source registration before animation. Runtime part scale remains [1,1]."
+      }
+    },
+    {
+      "name": "hind-upper",
+      "image": "Source/CleanAttachments/hind-upper.png",
+      "pivot": [
+        397,
+        283
+      ],
+      "parent": "ik",
+      "jointLandmarks": [
+        [
+          397,
+          283
+        ],
+        [
+          418,
+          329
+        ]
+      ],
+      "completionRegistration": {
+        "atlasProximal": [
+          88.48,
+          59.25
+        ],
+        "atlasDistal": [
+          252.8,
+          347.6
+        ],
+        "bindProximal": [
+          397.0,
+          283.0
+        ],
+        "bindDistal": [
+          418.0,
+          329.0
+        ],
+        "bindLength": 50.566787519082126,
+        "width": 70.0,
+        "fixedSourceTransform": [
+          [
+            0.24249190726724837,
+            -0.06596330572955021,
+            379.37484967957545
+          ],
+          [
+            -0.027325546156824324,
+            0.17559398869512177,
+            275.047810744998
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "method": "One constant anatomical source registration before animation. Runtime part scale remains [1,1]."
+      }
+    },
+    {
+      "name": "hind-lower",
+      "image": "Source/CleanAttachments/hind-lower.png",
+      "pivot": [
+        418,
+        329
+      ],
+      "parent": "ik",
+      "jointLandmarks": [
+        [
+          418,
+          329
+        ],
+        [
+          423,
+          371
+        ]
+      ],
+      "completionRegistration": {
+        "atlasProximal": [
+          111.0,
+          52.65
+        ],
+        "atlasDistal": [
+          99.9,
+          333.45
+        ],
+        "bindProximal": [
+          418.0,
+          329.0
+        ],
+        "bindDistal": [
+          423.0,
+          371.0
+        ],
+        "bindLength": 42.2965719651132,
+        "width": 52.7229488441601,
+        "fixedSourceTransform": [
+          [
+            0.24291247994282913,
+            0.027732111262067843,
+            389.3461860385232
+          ],
+          [
+            -0.035063384580796504,
+            0.1494514730341059,
+            325.1257321806689
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "method": "One constant anatomical source registration before animation. Runtime part scale remains [1,1]."
+      }
+    },
+    {
+      "name": "fore-far",
+      "image": "Source/CleanAttachments/fore-far.png",
+      "pivot": [
+        171,
+        317
+      ],
+      "parent": "body",
+      "jointLandmarks": [
+        [
+          171,
+          317
+        ],
+        [
+          130,
+          367
+        ]
+      ],
+      "completionRegistration": {
+        "atlasProximal": [
+          129.25,
+          41.879999999999995
+        ],
+        "atlasDistal": [
+          84.6,
+          324.57
+        ],
+        "bindProximal": [
+          171.0,
+          317.0
+        ],
+        "bindDistal": [
+          130.0,
+          367.0
+        ],
+        "bindLength": 64.66065264130884,
+        "width": 41.41622285898711,
+        "fixedSourceTransform": [
+          [
+            0.17646802259743316,
+            -0.11564519770049199,
+            152.07803225841656
+          ],
+          [
+            0.09754420780374798,
+            0.1923833611049893,
+            295.7758168320354
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "method": "One constant anatomical source registration before animation. Runtime part scale remains [1,1]."
+      }
+    },
+    {
+      "name": "hind-far",
+      "image": "Source/CleanAttachments/hind-far.png",
+      "pivot": [
+        349,
+        316
+      ],
+      "parent": "body",
+      "jointLandmarks": [
+        [
+          349,
+          316
+        ],
+        [
+          330,
+          369
+        ]
+      ],
+      "completionRegistration": {
+        "atlasProximal": [
+          111.0,
+          52.65
+        ],
+        "atlasDistal": [
+          99.9,
+          333.45
+        ],
+        "bindProximal": [
+          349.0,
+          316.0
+        ],
+        "bindDistal": [
+          330.0,
+          369.0
+        ],
+        "bindLength": 56.302753041036986,
+        "width": 51.64933938275567,
+        "fixedSourceTransform": [
+          [
+            0.22899957989433845,
+            -0.05903449965942316,
+            326.433647934056
+          ],
+          [
+            0.07346518561223252,
+            0.19332905919129673,
+            297.68012232164426
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "method": "One constant anatomical source registration before animation. Runtime part scale remains [1,1]."
+      }
+    },
+    {
+      "name": "tail",
+      "image": "Source/CleanAttachments/tail.png",
+      "pivot": [
+        413,
+        231
+      ],
+      "parent": "body"
+    },
+    {
+      "name": "head",
+      "image": "Source/CleanAttachments/head.png",
+      "pivot": [
+        267,
+        274
+      ],
+      "parent": "body"
+    },
+    {
+      "name": "ear-near",
+      "image": "Source/CleanAttachments/ear-near.png",
+      "pivot": [
+        226,
+        223
+      ],
+      "parent": "head"
+    },
+    {
+      "name": "ear-far",
+      "image": "Source/CleanAttachments/ear-far.png",
+      "pivot": [
+        133,
+        210
+      ],
+      "parent": "head"
+    }
+  ],
+  "bodyPivot": [
+    315,
+    280
+  ],
+  "rig": "../rig.json",
+  "timeline": "../poses.json",
+  "sourceCanvas": [
+    512,
+    512
+  ],
+  "registration": "One fixed source registration before motion. No per-frame fit or rigid scale changes."
+}

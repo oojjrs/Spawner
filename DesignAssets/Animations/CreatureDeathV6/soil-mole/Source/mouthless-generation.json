@@ -1,0 +1,7 @@
+{
+  "provider": "builtin imagegen",
+  "editTarget": "DesignAssets/Animations/CreatureDeathV6/soil-mole/death.webp",
+  "output": "Raw/mouthless-sheet.png",
+  "transparentBackground": true,
+  "prompt": "Edit target: the provided 2048x1024 transparent sprite sheet. It has exactly 8 animation cels in a fixed 4-column by 2-row grid, each cell 512x512. This is a surgical mouth removal edit, NOT an artistic redraw. Preserve the exact sheet grid, canvas, each mole's position, size, pose, eyes, eyelids, pink nose, fur colors and texture, alpha silhouette, ears, body, paws and claws. In ALL EIGHT cels remove the dark curved smiling mouth line below the pink nose completely. Replace that short black smile stroke and any small mouth corner stroke with the immediately surrounding naturally shaded beige muzzle/fur, with no visible mouth of any kind. The result has a pink nose and eyes but NO mouth line, no lips, no smile, no expression mark. The muzzle outside the removed line is unchanged. Keep all frames exactly where they are with the original transparent background; do not pack, crop, rearrange, add labels, or draw a new sheet. Output exact 2048x1024 RGBA PNG."
+}

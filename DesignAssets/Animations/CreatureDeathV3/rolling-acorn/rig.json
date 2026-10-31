@@ -1,0 +1,76 @@
+{
+  "name": "rolling-acorn", 
+  "method": "Original rigid acorn body rolls onto its side with physical lower support projection, local leaf-only FK mesh lags then droops, approved idle eye expression.", 
+  "controls": "motion.json", 
+  "timeline": "landmarks.json", 
+  "renderer": "render.py", 
+  "canvas": [
+    512, 
+    512
+  ], 
+  "rigidParts": [
+    "body"
+  ], 
+  "meshParts": [
+    "leaf"
+  ], 
+  "sourceEyeDrawing": "Source/approved-idle-closed.png", 
+  "spineCompatibilityVerified": false, 
+  "bones": [
+    {
+      "name": "body", 
+      "parent": "root", 
+      "pivot": [
+        245, 
+        286
+      ]
+    }, 
+    {
+      "name": "leaf-base", 
+      "parent": "body", 
+      "pivot": [
+        330, 
+        145
+      ]
+    }, 
+    {
+      "name": "leaf-mid", 
+      "parent": "leaf-base", 
+      "pivot": [
+        368, 
+        148
+      ]
+    }, 
+    {
+      "name": "leaf-tip", 
+      "parent": "leaf-mid", 
+      "pivot": [
+        407, 
+        167
+      ]
+    }
+  ], 
+  "activeParts": [
+    "body", 
+    "body-closed", 
+    "leaf"
+  ], 
+  "sourceHashes": {
+    "body": "8c79c3748f9dac046d9f088e325b5827c2740c226ebd56f99f422526b334f0c7", 
+    "body-closed": "235045f4fe41c47fb9c7334067b1b972609837d691665ef2cd0c4533512059f9", 
+    "leaf": "e76f815fc8088d3c285ec60f37fe7895021b14f9a81884d235e4a690ae3efafc"
+  }, 
+  "authoringRuntime": [
+    "Python 3", 
+    "numpy", 
+    "Pillow 12.3"
+  ], 
+  "authoringControls": {
+    "parts": "Parts", 
+    "motion": "motion.json", 
+    "pivots": "render.py", 
+    "meshes": [
+      "leaf-mesh.json"
+    ]
+  }
+}

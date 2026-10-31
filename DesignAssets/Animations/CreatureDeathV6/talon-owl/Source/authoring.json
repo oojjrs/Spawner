@@ -1,0 +1,64 @@
+{
+  "authority": "DesignAssets/CreatureConcepts/v3/talon-owl.png",
+  "original": "Source/original.png",
+  "reference": "Source/reference.png",
+  "placement": "Source/placement.json",
+  "construction": "Complete new drawings after the initial rigid free fall; no layered feather rig is used in the delivered sequence.",
+  "drawings": [
+    {
+      "image": "Source/drawn-120.png",
+      "actualPrompt": "Source/drawn-120.prompt.json"
+    },
+    {
+      "image": "Source/drawn-160.png",
+      "actualPrompt": "Source/drawn-160.prompt.json"
+    },
+    {
+      "image": "Source/drawn-200-head-corrected.png",
+      "actualPrompt": "Source/drawn-200-head-corrected.prompt.json"
+    },
+    {
+      "image": "Source/drawn-240.png",
+      "actualPrompt": "Source/drawn-240.prompt.json"
+    },
+    {
+      "image": "Source/drawn-320.png",
+      "actualPrompt": "Source/drawn-320.prompt.json"
+    },
+    {
+      "image": "Source/drawn-400.png",
+      "actualPrompt": "Source/drawn-400.prompt.json"
+    },
+    {
+      "image": "Source/landing-key.png",
+      "actualPrompt": "Source/landing-key.prompt.json"
+    }
+  ],
+  "upstreamDrawingInput": {
+    "image": "Source/drawn-200.png",
+    "actualPrompt": "Source/drawn-200.prompt.json"
+  },
+  "poseSpecification": "Source/pose-spec.json",
+  "poseRegistration": "Source/pose-registration.json",
+  "prepare": "prepare.py",
+  "renderer": "render.py",
+  "sampler": "sampling.py",
+  "timeline": "timeline.json",
+  "frameSourceCanvas": [
+    1254,
+    1254
+  ],
+  "frameSourceCommonScale": 0.4082934609250399,
+  "contactRegistration": {
+    "landmark": "beakBridge",
+    "specification": "Source/pose-spec.json",
+    "settledPoseTimeMs": 560,
+    "settledSource": "Source/landing-key.png"
+  },
+  "alphaCleanup": "Remove only neon red/cyan contamination within the source alpha exterior band.",
+  "crossfade": false,
+  "shapeMorph": false,
+  "runtimeExternalPathsRequired": false,
+  "wingTransitions": "Source/wing-transitions.json",
+  "wingTransitionPrompts": "Source/wing-prompts.json"
+}

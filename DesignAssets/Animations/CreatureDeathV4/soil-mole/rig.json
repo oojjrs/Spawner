@@ -1,0 +1,102 @@
+{
+  "name": "soil-mole", 
+  "configuration": {
+    "bodyPivot": [
+      410, 
+      325
+    ], 
+    "headPivot": [
+      262, 
+      276
+    ], 
+    "legs": {
+      "far-hind": [
+        [
+          365, 
+          254
+        ], 
+        [
+          378, 
+          269
+        ], 
+        [
+          367.0639100824639, 
+          283.7319920668045
+        ]
+      ], 
+      "far-paw": [
+        [
+          207, 
+          275
+        ], 
+        [
+          176, 
+          290
+        ], 
+        [
+          137.21273810276278, 
+          299.88942513683605
+        ]
+      ], 
+      "near-hind": [
+        [
+          380, 
+          276
+        ], 
+        [
+          395, 
+          291
+        ], 
+        [
+          389.0639100824639, 
+          305.73199206680454
+        ]
+      ], 
+      "near-paw": [
+        [
+          318, 
+          286
+        ], 
+        [
+          320, 
+          300
+        ], 
+        [
+          308.66396382324456, 
+          314.2045858371812
+        ]
+      ]
+    }, 
+    "backLayers": [
+      "far-hind", 
+      "far-paw", 
+      "near-paw", 
+      "near-hind"
+    ], 
+    "frontLayers": []
+  }, 
+  "method": "Head-inherited ear root with dynamic distal pendulum; complete independently grounded articulated limbs and continuous support loss, contact and settling", 
+  "controls": "motion.json", 
+  "timeline": "landmarks.json", 
+  "renderer": "render.py", 
+  "canvas": [
+    512, 
+    512
+  ], 
+  "spineCompatibilityVerified": false, 
+  "activeParts": [
+    "body", 
+    "head", 
+    "head-closed", 
+    "far-hind", 
+    "far-paw", 
+    "near-hind", 
+    "near-paw"
+  ], 
+  "authoringRuntime": [
+    "Python 3", 
+    "numpy", 
+    "Pillow 12.3"
+  ], 
+  "version": 4
+}

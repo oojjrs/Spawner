@@ -1,0 +1,26 @@
+{
+  "source": "legs-edit-source.png",
+  "target": "drawn-080.png",
+  "mask": "Inputs/front-composite-mask.png",
+  "maskEdgeBlurPx": 1,
+  "matrix": [
+    [
+      0.7964689275111834,
+      -0.0006282556397441196,
+      137.69469590650098
+    ],
+    [
+      0.0006282556397441196,
+      0.7964689275111834,
+      150.4241333115607
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "matches": 298,
+  "inliers": 182,
+  "staticBodyFeaturesOnly": true
+}

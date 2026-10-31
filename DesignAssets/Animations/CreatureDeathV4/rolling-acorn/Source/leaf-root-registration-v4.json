@@ -1,0 +1,12 @@
+{
+  "beforeSource": "Source/registered-complete-leaf.png", 
+  "staticTranslation": [
+    -3, 
+    0
+  ], 
+  "root": [
+    324.13793103448273, 
+    146.6551724137931
+  ], 
+  "opaqueOverlapPixels": 29
+}

@@ -1,0 +1,340 @@
+{
+  "commonScale": 0.4082934609250399,
+  "poses": [
+    {
+      "timeMs": 120,
+      "source": "Source/drawn-120.png",
+      "part": "Parts/pose-120.png",
+      "matrix": [
+        [
+          0.4082934609250399,
+          0.0,
+          -23.680000000000007
+        ],
+        [
+          0.0,
+          0.4082934609250399,
+          -1.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sourceContact512": null,
+      "targetContactY": null,
+      "beakBridge": {
+        "source": [
+          210,
+          308
+        ],
+        "target": [
+          186.32,
+          307
+        ]
+      }
+    },
+    {
+      "timeMs": 160,
+      "source": "Source/drawn-160.png",
+      "part": "Parts/pose-160.png",
+      "matrix": [
+        [
+          0.4082934609250399,
+          0.0,
+          -18.0
+        ],
+        [
+          0.0,
+          0.4082934609250399,
+          -2.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sourceContact512": null,
+      "targetContactY": null,
+      "beakBridge": {
+        "source": [
+          207,
+          327
+        ],
+        "target": [
+          189,
+          325
+        ]
+      }
+    },
+    {
+      "timeMs": 200,
+      "source": "Source/drawn-200-head-corrected.png",
+      "part": "Parts/pose-200.png",
+      "matrix": [
+        [
+          0.4082934609250399,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.4082934609250399,
+          6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sourceContact512": null,
+      "targetContactY": null,
+      "beakBridge": {
+        "source": [
+          206,
+          337
+        ],
+        "target": [
+          192,
+          343
+        ]
+      }
+    },
+    {
+      "timeMs": 240,
+      "source": "Source/drawn-240.png",
+      "part": "Parts/pose-240.png",
+      "matrix": [
+        [
+          0.4082934609250399,
+          0.0,
+          -9.5
+        ],
+        [
+          0.0,
+          0.4082934609250399,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sourceContact512": [
+        275,
+        458
+      ],
+      "targetContactY": 449,
+      "beakBridge": {
+        "source": [
+          204.5,
+          369
+        ],
+        "target": [
+          195,
+          360
+        ]
+      }
+    },
+    {
+      "timeMs": 280,
+      "source": "Source/Raw/wing-280.png",
+      "part": "Parts/pose-280.png",
+      "basePart": "Parts/pose-240.png",
+      "mask": "Source/wing-mask-280.png",
+      "matrix": [
+        [
+          0.3993712691991296,
+          0.0848889838107598,
+          -61.906317739582526
+        ],
+        [
+          -0.0848889838107598,
+          0.3993712691991296,
+          86.51509546092973
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "timeMs": 320,
+      "source": "Source/drawn-320.png",
+      "part": "Parts/pose-320.png",
+      "matrix": [
+        [
+          0.4082934609250399,
+          0.0,
+          -8.0
+        ],
+        [
+          0.0,
+          0.4082934609250399,
+          -2.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sourceContact512": [
+        278,
+        449
+      ],
+      "targetContactY": 447,
+      "beakBridge": {
+        "source": [
+          206,
+          382
+        ],
+        "target": [
+          198,
+          380
+        ]
+      }
+    },
+    {
+      "timeMs": 360,
+      "source": "Source/Raw/wing-360.png",
+      "part": "Parts/pose-360.png",
+      "basePart": "Parts/pose-320.png",
+      "mask": "Source/wing-mask-360.png",
+      "matrix": [
+        [
+          0.4082934609250399,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.4082934609250399,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "timeMs": 400,
+      "source": "Source/drawn-400.png",
+      "part": "Parts/pose-400.png",
+      "matrix": [
+        [
+          0.4082934609250399,
+          0.0,
+          -28.0
+        ],
+        [
+          0.0,
+          0.4082934609250399,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sourceContact512": [
+        450,
+        459
+      ],
+      "targetContactY": 448,
+      "beakBridge": {
+        "source": [
+          228,
+          410
+        ],
+        "target": [
+          200,
+          399
+        ]
+      }
+    },
+    {
+      "timeMs": 560,
+      "source": "Source/landing-key.png",
+      "part": "Parts/pose-560.png",
+      "matrix": [
+        [
+          0.4082934609250399,
+          0.0,
+          3.0
+        ],
+        [
+          0.0,
+          0.4082934609250399,
+          2.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sourceContact512": [
+        397,
+        452
+      ],
+      "targetContactY": 454,
+      "beakBridge": {
+        "source": [
+          197,
+          398
+        ],
+        "target": [
+          200,
+          400
+        ]
+      }
+    },
+    {
+      "timeMs": 800,
+      "source": "Source/landing-key.png",
+      "part": "Parts/pose-800.png",
+      "matrix": [
+        [
+          0.4082934609250399,
+          0.0,
+          3.0
+        ],
+        [
+          0.0,
+          0.4082934609250399,
+          2.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sourceContact512": [
+        397,
+        452
+      ],
+      "targetContactY": 454,
+      "beakBridge": {
+        "source": [
+          197,
+          398
+        ],
+        "target": [
+          200,
+          400
+        ]
+      }
+    }
+  ]
+}

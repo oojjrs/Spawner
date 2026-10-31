@@ -1,0 +1,67 @@
+{
+  "name": "vine-turtle",
+  "action": "death",
+  "sourceImage": "DesignAssets/CreatureConcepts/v3/vine-turtle.png",
+  "image": "DesignAssets/Animations/CreatureDeathV1/vine-turtle/death.webp",
+  "frameSize": 512,
+  "columns": 6,
+  "frameCount": 24,
+  "pivotX": 256,
+  "pivotY": 448,
+  "durationsMs": [
+    80,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    80,
+    80,
+    100,
+    120,
+    160,
+    900
+  ],
+  "durationMs": 2540,
+  "loop": false,
+  "preview": "DesignAssets/Animations/CreatureDeathV1/vine-turtle/preview.webp",
+  "thumbnail": "DesignAssets/Animations/CreatureDeathV1/vine-turtle/thumbnail.webp",
+  "rig": "DesignAssets/Animations/CreatureDeathV1/vine-turtle/rig.json",
+  "renderer": "DesignAssets/Animations/CreatureDeathV1/vine-turtle/render.py",
+  "contact": "DesignAssets/Animations/CreatureDeathV1/vine-turtle/contact.png",
+  "canvasPlacement": {
+    "canvas": [
+      512,
+      512
+    ],
+    "sourceAnimation": "DesignAssets/Animations/CreatureIdleStudies/V2/vine-turtle/idle.webp",
+    "sourceCell": [
+      0,
+      0,
+      346,
+      346
+    ],
+    "scale": 1.4797687861271676,
+    "translation": [
+      0,
+      0
+    ],
+    "registration": "Uniform whole-canvas resize of accepted idle first cell retains all original transparent margins; every frame shares this registration."
+  },
+  "method": "Rendered original continuous weighted mesh with hierarchical local bone articulation and drawn closed-eyelid attachment swaps. The original body surfaces retain their design and palette. In-plane collapse exposes no hidden contours. No global fade or whole-image squash.",
+  "rootMotion": "Intentional body descent during collapse; toe contacts remain near their original locations.",
+  "previewLoop": "The preview repeats for inspection; runtime death is non-looping and holds the settled pose.",
+  "sourceAnimation": "DesignAssets/Animations/CreatureIdleStudies/V2/vine-turtle/idle.webp"
+}

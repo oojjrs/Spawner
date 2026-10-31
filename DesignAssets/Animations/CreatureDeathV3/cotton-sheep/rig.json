@@ -1,0 +1,86 @@
+{
+  "bodyScale": 0.725,
+  "bodyX": 100,
+  "groundY": 432,
+  "headPivot": [
+    205,
+    220
+  ],
+  "headDrop": [
+    -8,
+    119
+  ],
+  "headAngle": -3,
+  "headStartMs": 130,
+  "headContactMs": 640,
+  "contactSettlePx": 2,
+  "accessories": {
+    "near-ear": {
+      "pivot": [
+        251,
+        220
+      ],
+      "angle": 12,
+      "overshoot": 2
+    },
+    "far-ear": {
+      "pivot": [
+        119,
+        192
+      ],
+      "angle": -12,
+      "overshoot": -2
+    }
+  },
+  "bodyIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    4
+  ],
+  "name": "cotton-sheep",
+  "eyesCloseMs": 180,
+  "bodyTimesMs": [
+    0,
+    180,
+    280,
+    380,
+    480,
+    600
+  ],
+  "approvedImage": "DesignAssets/CreatureConcepts/v3/cotton-sheep.png",
+  "expressionPatchBoxes": [
+    [
+      105,
+      211,
+      135,
+      256
+    ],
+    [
+      179,
+      231,
+      219,
+      283
+    ]
+  ],
+  "reference": "Source/reference.png",
+  "parts": {
+    "near-ear": "Parts/near-ear.png",
+    "far-ear": "Parts/far-ear.png",
+    "head-alternate": "Parts/head-alternate.png",
+    "head": "Parts/head.png"
+  },
+  "boneParents": {
+    "root": null,
+    "head": "root",
+    "near-ear": "head",
+    "far-ear": "head"
+  },
+  "headScale": [
+    1,
+    1
+  ],
+  "timeline": "poses.json"
+}

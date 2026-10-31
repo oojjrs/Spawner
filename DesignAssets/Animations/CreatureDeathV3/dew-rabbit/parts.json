@@ -1,0 +1,97 @@
+[
+  {
+    "name": "body", 
+    "image": "Parts/body.png", 
+    "source": "Source/body-complete.png", 
+    "registration": "Source/body-contour-registration.json", 
+    "registeredImage": "Source/body-registered.png"
+  }, 
+  {
+    "name": "head", 
+    "image": "Parts/head.png", 
+    "source": "Source/head-complete.png", 
+    "registration": [
+      [
+        0.42785502800550024, 
+        0.07074554584675023, 
+        117.79293082508639
+      ], 
+      [
+        -0.07074554584675023, 
+        0.42785502800550024, 
+        200.7165808092235
+      ], 
+      [
+        0.0, 
+        0.0, 
+        1.0
+      ]
+    ]
+  }, 
+  {
+    "name": "near-ear", 
+    "image": "Parts/near-ear.png", 
+    "source": "Source/near-ear-complete.png", 
+    "registration": [
+      [
+        0.2986345290652833, 
+        0.030400726447223057, 
+        237.5654016173869
+      ], 
+      [
+        -0.030400726447223057, 
+        0.2986345290652833, 
+        95.31190946652481
+      ], 
+      [
+        0.0, 
+        0.0, 
+        1.0
+      ]
+    ]
+  }, 
+  {
+    "name": "far-ear", 
+    "image": "Parts/far-ear.png", 
+    "source": "Source/far-ear-complete.png", 
+    "registration": [
+      [
+        0.22603857596934632, 
+        0.0702824710803111, 
+        111.60698793484165
+      ], 
+      [
+        -0.0702824710803111, 
+        0.22603857596934632, 
+        141.86486500397154
+      ], 
+      [
+        0.0, 
+        0.0, 
+        1.0
+      ]
+    ]
+  }, 
+  {
+    "name": "foreleg", 
+    "image": "Parts/foreleg.png", 
+    "source": "Source/foreleg-complete.png", 
+    "registration": [
+      194, 
+      322, 
+      276, 
+      439
+    ]
+  }, 
+  {
+    "name": "hindleg", 
+    "image": "Parts/hindleg.png", 
+    "source": "Source/hindleg-complete.png", 
+    "registration": [
+      276, 
+      309, 
+      394, 
+      442
+    ]
+  }
+]

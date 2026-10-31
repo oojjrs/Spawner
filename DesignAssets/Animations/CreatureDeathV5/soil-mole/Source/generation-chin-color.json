@@ -1,0 +1,15 @@
+{
+  "provider": "builtin imagegen",
+  "prompt": "Use case: precise-object-edit. This is a production correction to a 2D game sprite head part, NOT a new character. Image 1 is the edit target: the isolated head part on its 512 by 512 transparent registration canvas. Image 2 is the ONLY approved character appearance reference. Keep the entire head placement, size, silhouette, pink nose, mouth line, glossy green eyes, ears, crown fur, cheek, highlights, colors and transparent background unchanged. Make just one local painting correction: in image 1, immediately below the mouth and at the underside of the chin, around original-canvas x155 to205, y305 to340, there is a little isolated dark brown rectangular patch. It is an erroneous hidden-surface color island, not a body marking or an appendage. Repaint that small underside continuously with the same soft light warm beige chin fur as the approved reference and its adjacent muzzle; let it turn gently into a modest warm shadow at the existing rounded outer rim. No brown rectangle, detached slab, seam, sharp boundary, new outline, new limb or larger jaw. Keep the existing contour and all artwork outside that tiny chin area unchanged. Return only the corrected single isolated head on the same transparent registration canvas. No full creature, no sheet, no labels, no decorative background.",
+  "references": [
+    {
+      "path": "Drawings/chin-color-reference.png",
+      "role": "isolated edit input"
+    },
+    {
+      "path": "approved-reference.png",
+      "role": "only approved appearance"
+    }
+  ],
+  "drawing": "Drawings/continuous-chin-color.png"
+}

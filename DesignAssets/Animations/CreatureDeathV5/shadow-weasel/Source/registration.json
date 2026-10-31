@@ -1,0 +1,27 @@
+{
+  "authority": "DesignAssets/CreatureConcepts/v3/shadow-weasel.png",
+  "sourceSize": [
+    336,
+    222
+  ],
+  "sourceAlphaBounds": [
+    33,
+    22,
+    303,
+    193
+  ],
+  "scale": 1.3333333333333333,
+  "resizedSize": [
+    448,
+    296
+  ],
+  "offset": [
+    32,
+    191
+  ],
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "prompt": "Precise edit of reference1 at640ms, continuing its loose limbs falling after side impact. Preserve reference1's EXACT stationary head, snout, tusks, torso/barrel/mane outline, proportions, placement, camera, fur/leaf/stone markings, lighting and on-NEAR-SIDE body contact. Do not press, squash, shrink, re-roll or reposition the body/head and do not return it onto belly/four feet. Only finish the gravity-driven appendage follow-through: the raised near hind hoof currently around(442,373) swings down and inward along its short hip/knee/hock arc toward roughly(420,410) in512canvas, relaxing into a bent non-weight-bearing leg. Far hind foot follows down with short delay, partially behind it; near forehoof relaxes a few pixels and stays loosely folded on the camera side, far front leg naturally occluded. Keep FOUR original SHORT stout legs/charcoal cloven hooves and their bone lengths, no extra feet, stretching, ghost of previous positions or disconnected roots. Ears slacken slightly more and the tiny tail completes its delayed downward relaxation, same original length. This is the final limp stable corpse with flank/cheek bearing weight, not propped on legs. Eyes stay fully closed. Ref2 is the sole original DESIGN reference, never its standing pose. Full coherent source artwork on the identical square transparent canvas, complete exposed surfaces, large same upper empty margin. No scene/floor/shadow/vignette, labels, blur or effects.",
+  "referenced_image_paths": [
+    "Source/drawn-480.png",
+    "Source/reference.png"
+  ],
+  "transparent_background": true,
+  "output": "Source/drawn-640.png"
+}

@@ -1,0 +1,27 @@
+{
+  "authority": "DesignAssets/CreatureConcepts/v3/cotton-sheep.png",
+  "sourceSize": [
+    352,
+    352
+  ],
+  "sourceAlphaBounds": [
+    40,
+    34,
+    310,
+    314
+  ],
+  "scale": 1.2727272727272727,
+  "resizedSize": [
+    448,
+    448
+  ],
+  "offset": [
+    32,
+    48
+  ],
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "image": "DesignAssets/Animations/CreatureDeathV6/talon-owl/runtime.webp",
+  "frameSize": 256,
+  "viewSize": 256,
+  "columns": 4,
+  "pivotX": 128.0,
+  "pivotY": 224.0,
+  "durationsMs": [
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    160,
+    240,
+    900
+  ],
+  "loop": false,
+  "sourceAtlas": "DesignAssets/Animations/CreatureDeathV6/talon-owl/death.webp",
+  "sourceAtlasSha256": "c2192d3352d2e96bc1f83729729e04f1d3926f57776f32b1f3d16b9e38a99fbf"
+}

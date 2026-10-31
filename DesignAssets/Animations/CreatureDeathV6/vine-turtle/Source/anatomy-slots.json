@@ -1,0 +1,37 @@
+{
+  "head": {
+    "point": [
+      212,
+      350
+    ],
+    "color": "#ff3030"
+  },
+  "fore-near": {
+    "point": [
+      284,
+      380
+    ],
+    "color": "#3060ff"
+  },
+  "fore-far": {
+    "point": [
+      128,
+      381
+    ],
+    "color": "#10e0e0"
+  },
+  "hind-near": {
+    "point": [
+      409,
+      383
+    ],
+    "color": "#20e040"
+  },
+  "tail": {
+    "point": [
+      432,
+      342
+    ],
+    "color": "#ffe030"
+  }
+}

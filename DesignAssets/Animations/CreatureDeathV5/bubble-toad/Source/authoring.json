@@ -1,0 +1,51 @@
+{
+  "authority": "DesignAssets/CreatureConcepts/v3/bubble-toad.png",
+  "registration": "reference-registration.json",
+  "eyeRegistration": [
+    [
+      0.3015373224166894,
+      -0.01794673955610029,
+      129.74841693103963
+    ],
+    [
+      0.01794673955610029,
+      0.3015373224166894,
+      180.84089379606505
+    ]
+  ],
+  "editableParts": {
+    "body": "Drawings/body.png",
+    "head": "Drawings/head.png",
+    "pouch": "Drawings/pouch.png",
+    "body-closed": "Drawings/body-closed.png",
+    "head-closed": "Drawings/head-closed.png",
+    "skin": "Drawings/skin.png",
+    "skin-closed": "Drawings/skin-closed.png",
+    "pouch-mask": "Drawings/pouch-mask.png",
+    "fore-near": "Drawings/fore-near.png",
+    "fore-near-cap": "Drawings/fore-near-cap.png",
+    "fore-near-visible": "Drawings/fore-near-visible.png",
+    "fore-far": "Drawings/fore-far.png",
+    "fore-far-cap": "Drawings/fore-far-cap.png",
+    "fore-far-visible": "Drawings/fore-far-visible.png",
+    "hind-near": "Drawings/hind-near.png",
+    "hind-near-cap": "Drawings/hind-near-cap.png",
+    "hind-near-visible": "Drawings/hind-near-visible.png",
+    "hind-far": "Drawings/hind-far.png",
+    "hind-far-cap": "Drawings/hind-far-cap.png",
+    "hind-far-visible": "Drawings/hind-far-visible.png"
+  },
+  "bodyIncludesHead": true,
+  "renderLayers": [
+    "skin",
+    "fore-near",
+    "fore-far",
+    "hind-near",
+    "hind-far"
+  ],
+  "compositing": "premultiplied per-pixel depth",
+  "pouchDriver": "pouch-mesh.json",
+  "hiddenShoulderSurface": "shoulder-tissue-compositing.json",
+  "nearForearmRoot": "forearm-root-registration.json",
+  "newNearForearmRootGeneration": "generation/forearm-root.prompt.json"
+}

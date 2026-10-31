@@ -1,0 +1,26 @@
+{
+  "sourceAtlas": {
+    "provider": "built-in image_gen", 
+    "prompt": "Use case: precise-object-edit. Actual production SOURCE PARTS ATLAS for layered 2D cutout rigging, NOT animation frames. Image 1 is a rough 3-column 2-row cutout GUIDE with exact per-part canvas placement and source visible pixels. Image 2 is the approved COMPLETE creature and absolute design/style authority. Reconstruct each rough fragment into ONE complete independent part, filling all missing hidden contours, behind-joint surfaces, neck/shoulder/hip/root shapes and contact overlaps. Never repeat the guide's clipped edges or missing wedges/holes. Keep original part's scale, position, silhouette landmarks, lighting, smooth cream/mint or brown/gold painterly palette and thin dark-teal contour. Do not shrink parts to their cells, and do not recenter them; retain guide placement inside each same square cell. Return exactly 3 columns by 2 rows of six 512x512 square cells (1536x1024 canvas), with one COMPLETE isolated part per cell in this exact order: Top row: complete oval cream chest/green back BODY ONLY (no head, wing, tail or legs), complete HEAD with crest/beak/neck base, complete near WING including full round shoulder/root. Bottom row: complete fan-shaped FLOWER TAIL including its full narrow base, complete NEAR BROWN LEG from hip through knee/ankle to all toes, complete FAR BROWN LEG from hip through knee/ankle to toes. Full finished closed contours on every independent part, generous transparent surrounding area. Source joints must have 10-20 pixels hidden overlap; complete the body surfaces behind removed parts. No duplicate assembled creatures, no animation sequence, no text, no labels, no grid, no floor, no cast shadow. True transparent alpha. Preserve identity and source size; these parts will be transformed rigidly without scale changes.", 
+    "outputPath": "D:\\.codex\\generated_images\\01a1838b-0d79-7b90-a939-d0be54c3199b\\exec-78462874-749a-45c6-a7b3-a597f19f3914.png"
+  }, 
+  "actualRegisteredAttachments": {
+    "body": "Parts/body.png", 
+    "head": "Parts/head.png", 
+    "head-closed": "Parts/head-closed.png", 
+    "near-leg": "Parts/near-leg.png", 
+    "far-leg": "Parts/far-leg.png", 
+    "wing": "Parts/wing.png", 
+    "tail": "Parts/tail.png"
+  }, 
+  "repairDrawings": [
+    "Source/body-completed-source.png", 
+    "Source/far-leg-completed-source.png", 
+    "Source/head-completed-source.png", 
+    "Source/near-leg-completed-source.png", 
+    "Source/tail-completed-source.png", 
+    "Source/wing-completed-source.png"
+  ], 
+  "reference": "reference.png", 
+  "closedEyeDrawing": "Source/head-eyes-closed.png"
+}

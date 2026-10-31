@@ -1,0 +1,10 @@
+{
+  "prompt": "Draw the approved boar's actual animation SOURCE FRAME at240ms. Reference1 is the sole design/camera authority. Reference2 is the immediately previous160ms frame; continue its anatomy and physical fall. Reference3 is a technical pose/volume guide locking this frame's camera, body/head positions, four jointed limbs with original bone lengths. Match its placement/size and gesture, not crude diagram artwork. Now the rear support gives way: heavy compact barrel center about(335,329), head about(180,355), nose around(130,394). Body is actually ROLLING25degrees onto the NEAR SIDE toward camera; exposed brown furry belly turns partly toward viewer, near shoulder drops fastest, hind hips follow. All four short legs fold naturally and swing toward screenRIGHT with inertia as feet unload; near forehoof about(326,410), near hindhoof(449,383), far feet partly hidden. This is NOT a belly crouch, not four upright supporting feet, not hovering rigid whole-picture rotation. Side shoulder approaches first ground contact, cheek still above final ground. Original body/head volume, snout/tusk/hoof dimensions and short bone lengths remain constant; do not lengthen/fatten barrel or enlarge mane/tail to fill canvas. Preserve same original skull, pink-brown two-nostril snout, two ivory tusks, small ears, swept original spiky mane with same little moss/leaf/stones moving with back, brown/cream painterly fur/shading. Eyes closed. Proper complete 3D side-roll anatomy and fore/back overlaps, no cut joints/extra limbs. Same square canvas and camera magnification as references, large empty top region, y448front contact plane, no crop/zoom. Genuine transparent surroundings only; do not copy guide's line/colors/symbols. No floor, shadow, vignette, background, labels, blur, ghosts or effects.",
+  "referenced_image_paths": [
+    "Source/reference.png",
+    "Source/drawn-160.png",
+    "Source/Inputs/anatomical-240.png"
+  ],
+  "transparent_background": true,
+  "output": "Source/drawn-240.png"
+}

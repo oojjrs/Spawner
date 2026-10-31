@@ -1,0 +1,11 @@
+{
+  "shellSourceSha256": "967d469500e8a44ba52eb1d40d054b5cc8c420f7a08c4ac9577ed682f2f744cc",
+  "shellScale": [
+    1,
+    1
+  ],
+  "shellGeometry": "One immutable complete painted source plus its matching foreground occlusion layer, translated rigidly without deformation.",
+  "finalMovingAlpha": 0,
+  "finalGroundY": 448,
+  "finalDropY": 37
+}

@@ -1,0 +1,217 @@
+{
+  "canvas": [
+    512, 
+    512
+  ], 
+  "pivot": [
+    256, 
+    448
+  ], 
+  "groundY": 448, 
+  "gravity": 900, 
+  "dt": 0.004166666666666667, 
+  "sourceHeadRoot": [
+    235.0, 
+    356.0
+  ], 
+  "sourceHeadMassCenter": [
+    157, 
+    340
+  ], 
+  "sourceNeck": [
+    [
+      325.0, 
+      345.0
+    ], 
+    [
+      282.0, 
+      356.0
+    ], 
+    [
+      235.0, 
+      356.0
+    ]
+  ], 
+  "sourceTail": [
+    [
+      434.0, 
+      327.0
+    ], 
+    [
+      457.0, 
+      345.0
+    ], 
+    [
+      470.0, 
+      337.0
+    ]
+  ], 
+  "sourceLegs": {
+    "fore-near": [
+      [
+        270, 
+        335
+      ], 
+      [
+        290, 
+        355
+      ], 
+      [
+        280, 
+        389
+      ]
+    ], 
+    "fore-far": [
+      [
+        135, 
+        345
+      ], 
+      [
+        113, 
+        365
+      ], 
+      [
+        100, 
+        391
+      ]
+    ], 
+    "hind-near": [
+      [
+        425, 
+        335
+      ], 
+      [
+        446, 
+        356
+      ], 
+      [
+        440, 
+        386
+      ]
+    ], 
+    "hind-far": [
+      [
+        351, 
+        333
+      ], 
+      [
+        360, 
+        351
+      ], 
+      [
+        349, 
+        381
+      ]
+    ]
+  }, 
+  "sourceToes": {
+    "fore-near": [
+      259, 
+      434
+    ], 
+    "fore-far": [
+      82, 
+      424
+    ], 
+    "hind-near": [
+      432, 
+      425
+    ], 
+    "hind-far": [
+      337, 
+      410
+    ]
+  }, 
+  "startsMs": {
+    "fore-far": 160, 
+    "fore-near": 320, 
+    "hind-far": 520, 
+    "hind-near": 720
+  }, 
+  "name": "vine-turtle", 
+  "durationMs": 2400, 
+  "eyeCloseMs": 160, 
+  "method": "Sequential support loss, rigid carapace gravity settlement, articulated soft retraction and rigid head/paw contact with inner carapace floor", 
+  "retractorGoals": {
+    "fore-far": [
+      230, 
+      285
+    ], 
+    "fore-near": [
+      325, 
+      280
+    ], 
+    "hind-far": [
+      335, 
+      290
+    ], 
+    "hind-near": [
+      355, 
+      280
+    ]
+  }, 
+  "spineCompatibilityVerified": false, 
+  "renderer": "render.py", 
+  "simulator": "simulate.py", 
+  "prepare": "prepare.py", 
+  "headPortal": {
+    "frontWindow": [
+      70, 
+      286, 
+      238, 
+      402
+    ], 
+    "insideWindow": [
+      131, 
+      347, 
+      206, 
+      383
+    ], 
+    "depthDistance": 80, 
+    "method": "curved source-registered head occlusion driven by physical cervical retraction; carapace pixels restored once"
+  }, 
+  "parts": [
+    "Parts/shell.png", 
+    "Parts/foreground.png", 
+    "Parts/head.png", 
+    "Parts/head-closed.png", 
+    "Parts/neck.png", 
+    "Parts/fore-near.png", 
+    "Parts/fore-far.png", 
+    "Parts/hind-near.png", 
+    "Parts/hind-far.png", 
+    "Parts/tail.png"
+  ], 
+  "rigidParts": [
+    "shell", 
+    "head", 
+    "head-closed"
+  ], 
+  "rigidPawParts": [
+    "fore-near", 
+    "fore-far", 
+    "hind-near", 
+    "hind-far"
+  ], 
+  "rigidPawRule": "full paw material after ankle arc, including ivory claws", 
+  "coordinateSystem": "source pixels right and down", 
+  "drawOrder": [
+    "hind-far", 
+    "fore-far", 
+    "tail", 
+    "neck", 
+    "shell", 
+    "head", 
+    "head-portal-occlusion", 
+    "hind-near", 
+    "fore-near", 
+    "same-surface-foreground"
+  ], 
+  "sources": [
+    "Source/registration.json", 
+    "Source/root-compositing.json", 
+    "Source/hidden-connector-compositing-v4.json", 
+    "Source/neck-compositing.json", 
+    "Source/head-expression-registration-v4.json"
+  ]
+}

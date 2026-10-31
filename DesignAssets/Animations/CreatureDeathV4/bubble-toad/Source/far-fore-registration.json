@@ -1,0 +1,74 @@
+{
+  "fore-far-upper": {
+    "source": "Source/EditableParts/fore-upper.png",
+    "matrix": [
+      [
+        0.3472596606449933,
+        -0.7983760951970331,
+        333.8687562448911
+      ],
+      [
+        0.8380057405722632,
+        0.7626632648460664,
+        -178.7792296679761
+      ]
+    ],
+    "bindRoot": [
+      154.0,
+      358.0
+    ],
+    "bindTip": [
+      138.0,
+      392.0
+    ],
+    "purpose": "Far forelimb attachment restored for compact throat-sac reveal. Registered once, rigid at runtime."
+  },
+  "fore-far-lower": {
+    "source": "Source/EditableParts/fore-lower.png",
+    "matrix": [
+      [
+        0.7690132745287558,
+        -0.5318149400108052,
+        92.10784267876052
+      ],
+      [
+        0.34089979532352926,
+        0.7499939852093425,
+        -10.812799127342487
+      ]
+    ],
+    "bindRoot": [
+      138.0,
+      392.0
+    ],
+    "bindTip": [
+      103.0,
+      410.0
+    ],
+    "purpose": "Far forelimb attachment restored for compact throat-sac reveal. Registered once, rigid at runtime."
+  },
+  "fore-far-paw": {
+    "source": "Source/EditableParts/fore-paw.png",
+    "matrix": [
+      [
+        0.7466170117144981,
+        0.04831319994045114,
+        -145.8529759595068
+      ],
+      [
+        0.009045261774315822,
+        0.7549141476858166,
+        88.65837957364477
+      ]
+    ],
+    "bindRoot": [
+      103.0,
+      410.0
+    ],
+    "bindTip": [
+      85.0,
+      426.0
+    ],
+    "purpose": "Far forelimb attachment restored for compact throat-sac reveal. Registered once, rigid at runtime."
+  }
+}

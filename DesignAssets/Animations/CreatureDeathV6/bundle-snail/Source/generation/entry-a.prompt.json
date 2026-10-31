@@ -1,0 +1,14 @@
+{
+  "tool": "builtin-imagegen",
+  "prompt": "Use case: illustration-story. Asset: actual hand-drawn animation cels. Image 1 is the ONLY design/scale/camera/ground authority. Image 2 is only an example of a head folding into the shell entrance, not a size or shell-shape reference. Create six sequential fully drawn 512x512 animation cels in an exact 3-column by 2-row sheet (1536x1024 equivalent), transparent background, no lines/text. Each cell uses Image 1's exact camera, golden shell diameter/placement/spiral/cargo and scale. The shell stays rigid at its initial position in all six. The snail's muscular foot stays in contact with Image 1's ground y448 throughout these six: it must retain thick rounded muscle and NOT float upward, flatten, or scale smaller. Animate the FIRST HALF of a natural withdrawal through the existing small LEFT/front neck entrance. Order left-to-right then next row: (1) exact live neutral, both long eye stalks; (2) far eye stalk is partly invaginated and near stalk begins to retract, tips move DOWN into their own stems, head/foot retain original volume; (3) both stalks half retracted with a small timing offset and the head gently bows toward the entrance on the right; (4) eye tips have sunk almost fully into the head, the thick head folds back toward the shell mouth, front foot still presses ground; (5) eye stalks gone, head is gathering into a rounded backward/upward muscular fold at the mouth, rear foot and tail are taut but still extended; (6) head is half entering the shell as a thick U-shaped fold like Image 2, no eyes remain, and the broad front foot still rests at y448 with its original rounded thickness. The motion is invagination and a muscular fold travelling into the aperture, not whole-body squeezing. Do not show a face through other openings or make a new large arch under the shell. Same warm golden shell and original mint/cream body palette, green outlines, mushroom/berry bundle and leaf design. Include all of each character without clipping at cell edges; leave enough transparent margins between cels.",
+  "inputs": [
+    "H:/Spawner/DesignAssets/Animations/CreatureDeathV6/bundle-snail/Source/registered-reference.png",
+    "H:/Spawner/DesignAssets/Animations/CreatureDeathV6/bundle-snail/Source/generation/key-1.png"
+  ],
+  "output": "entry-a.png",
+  "inputSnapshots": [
+    "../registered-reference.png",
+    "entry-a-fold-reference.png"
+  ],
+  "inputPathAtCall": "key-1.png"
+}

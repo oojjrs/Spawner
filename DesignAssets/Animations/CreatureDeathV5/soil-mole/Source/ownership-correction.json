@@ -1,0 +1,15 @@
+{
+  "restoredOriginalPixels": 2283, 
+  "crownOriginalPixels": 307, 
+  "handWristsNative": {
+    "foreleg": [
+      199, 
+      210
+    ], 
+    "foreleg-far": [
+      110, 
+      200
+    ]
+  }, 
+  "mudAndClawsRigid": true
+}

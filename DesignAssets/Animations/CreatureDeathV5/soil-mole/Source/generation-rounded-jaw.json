@@ -1,0 +1,8 @@
+{
+  "prompt": "Production corrective HEAD SOURCE artwork, not a preview. Image 1 is the current isolated head layer to edit in its existing layout; image 2 is the ONLY approved character design for anatomy, face and fur. In image 1 remove the artificial long FLAT TAN TRIANGULAR LIP/PLATE protruding left below the mouth, and remove the extra light hanging slab under the chin. Complete a SHORT ROUNDED closed underjaw with soft SHADOWED BROWN fur that hugs the approved mole's plush muzzle; no beard, flap, neck stump, dangling skin, straight cut, disconnected tuft or extra volume. Keep every real original short chin fur tip, the pink nose, mouth, green eyes, ears, forehead, dark brown coat and broad rounded skull faithful to image 2. Preserve the upper head and same facing/camera/placement of image 1. The newly completed hidden underjaw is subtly darker brown than the illuminated muzzle, with a continuous smooth curved lower contour immediately beneath the real chin, not a pale shelf. One complete isolated head only, no body/arms/claws/tail, genuinely transparent background, no text, guide, shadow or stray pixels. Do not create an animation sheet. This exact head artwork will provide only the hidden lower-jaw surface while the original approved visible face/fur is retained.",
+  "referenceImages": [
+    "Drawings/jaw-previous-source.png",
+    "approved-reference.png"
+  ],
+  "output": "Drawings/rounded-hidden-jaw.png"
+}

@@ -1,0 +1,167 @@
+{
+  "stage": "keyframe-review",
+  "approval": null,
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ],
+  "groundY": 448,
+  "contact": "keyframes-contact.png",
+  "characters": [
+    {
+      "name": "vine-turtle",
+      "appearanceAuthority": "DesignAssets/CreatureConcepts/v3/vine-turtle.png",
+      "neutralAuthority": "DesignAssets/Animations/CreatureDeathV6/vine-turtle/Source/registered-reference.png",
+      "keys": [
+        "vine-turtle/Source/Keyframes/key-00-neutral.png",
+        "vine-turtle/Source/Keyframes/key-01-fold.png",
+        "vine-turtle/Source/Keyframes/key-02-withdraw.png",
+        "vine-turtle/Source/Keyframes/key-03-rest.png"
+      ],
+      "generation": {
+        "tool": "builtin-imagegen",
+        "prompt": "Use case: illustration-story.\nAsset type: production 2D sprite death animation key drawings, to become the actual animation sources after approval, NOT a concept poster.\nReference image 1 is the ONLY character design, camera, rendering, palette and 512x512 registration authority: the vine turtle. Re-create exactly this olive spotted turtle with cream jaw and plastron, three pale claws per foot, a rounded orange-and-gray stone carapace, its specific trailing vines and large green leaves.\n\nCreate a transparent PNG sprite strip, exactly THREE 512x512 square cells horizontally (1536x512 total), left to right. NO labels, text, grid, scenery, drop shadow or ground graphics. Each cell uses identical scale, camera, horizontal registration and the common foot-ground line y448 within the cell. All art stays inside each cell. These are three NEW distinct complete key poses following the existing neutral reference; do NOT include a standing neutral.\n\nMotion: the turtle loses support and withdraws anatomically into its own shell. Left key: head eyes closed, skull still full original size, neck bends BACK toward the actual front neck recess, face about halfway tucked under its original shell rim; near-front elbow folds and foot turns inward, far-front leg begins to buckle, hind feet still support. Middle key: head has gone completely behind that same rim, forelegs folded inward and mostly hidden; near hind knee bends and its foot curls inward last while the tail begins retracting; rigid shell has settled partway downward as support collapses. Right key: ALL head, neck, legs, claws and tail completely tucked away, only the same intact original carapace and rounded cream plastron remain, resting on ground y448. Quiet permanent final pose.\n\nCritical invariants: the carapace keeps precisely the same width, depth, volume, stone layout, colors, vines, leaf count and leaf shapes in all three cells and matches the original. Only its vertical position changes as supporting legs fold; no per-cell rescaling. Keep the camera and rigid shell perspective unchanged. Soft parts fold at real joints and are occluded by their OWN original small shell rim: no shrinking heads, no cut-off limbs, no detached parts. Model the actual organic neck opening naturally under the original upper rim and above the lower plastron. After retraction show only a subtle shaded shallow recess underneath that rim, NEVER a big black tunnel, an added protruding tube, a circular collar, a donut socket or multiple round holes in the plastron. The low cream underside remains complete and rounded; do not turn it into a thin plate. No new rocks, leaves, effects, gore or cracks. High-quality clean alpha, original illustrated brush shading and crisp dark outlines.",
+        "inputs": [
+          "DesignAssets/Animations/CreatureDeathV6/vine-turtle/Source/registered-reference.png"
+        ],
+        "output": "vine-turtle/Source/key-drawings-raw.png"
+      },
+      "registration": [
+        {
+          "key": 1,
+          "source": "vine-turtle/Source/key-drawings-raw.png",
+          "crop": [
+            0,
+            0,
+            790,
+            724
+          ],
+          "scale": 0.56,
+          "offset": [
+            31,
+            90
+          ]
+        },
+        {
+          "key": 2,
+          "source": "vine-turtle/Source/key-drawings-raw.png",
+          "crop": [
+            790,
+            0,
+            700,
+            724
+          ],
+          "scale": 0.56,
+          "offset": [
+            68,
+            90
+          ]
+        },
+        {
+          "key": 3,
+          "source": "vine-turtle/Source/key-drawings-raw.png",
+          "crop": [
+            1490,
+            0,
+            682,
+            724
+          ],
+          "scale": 0.56,
+          "offset": [
+            55,
+            95
+          ]
+        }
+      ]
+    },
+    {
+      "name": "walking-forest",
+      "appearanceAuthority": "DesignAssets/CreatureConcepts/v3/walking-forest.png",
+      "neutralAuthority": "DesignAssets/Animations/CreatureDeathV6/walking-forest/Source/registered-reference.png",
+      "keys": [
+        "walking-forest/Source/Keyframes/key-00-neutral.png",
+        "walking-forest/Source/Keyframes/key-01-fold.png",
+        "walking-forest/Source/Keyframes/key-02-withdraw.png",
+        "walking-forest/Source/Keyframes/key-03-rest.png"
+      ],
+      "generations": [
+        {
+          "tool": "builtin-imagegen",
+          "prompt": "Use case: illustration-story.\nAsset type: production 2D sprite death animation key drawings; these drawings will become actual animation source cels after approval, NOT a concept poster.\nReference image 1 is the ONLY design, rendering, camera, palette, proportions and 512x512 registration authority. This is walking-forest, a spotted olive/tan turtle carrying a very tall rigid mountain-shaped carapace with the reference arrangement of gray/tan boulders, warm amber mineral seams, and angular pale turquoise crystals, especially the central tall crystal.\n\nCreate a transparent PNG sprite strip of exactly THREE 512x512 square cells horizontally (1536x512 total), left to right. NO text, labels, grid, scenery, ground lines, drop shadows or effects. Identical camera, horizontal registration and scale in all three cells, common foot-ground line y448. Entire crystal mountain must fit fully in each cell with clear margins. These are three NEW distinct sequential key poses after the existing neutral; do not include the standing neutral.\n\nDeath withdrawal: heavy limbs lose support and fold naturally, head and feet retract through their own original shell edges, the intact rigid mountain settles vertically under its weight.\nLeft cell: eyes closed, skull keeps full original volume while neck bends BACK toward the original front recess, face halfway behind its real upper rim; front-near elbow bends, toes curl inward, far front leg begins to buckle, rear feet still planted.\nMiddle cell: head fully hidden behind its actual front rim, forelegs mostly inside their own limb recesses; rear-near knee bends and toes turn inward last as tail begins to tuck, shell partway down. Show actual joint folding, not a shortened leg.\nRight cell: ALL soft head, neck, limbs, claws, tail are fully inside, ONLY the same intact rigid mountain carapace and original rounded cream stone plastron remain resting on foot-ground y448. Solid stable quiet final pose.\n\nCritical: match exactly the reference mountain silhouette, original stone and crystal arrangement, facets, scale, width, height, mass and camera. The complete mineral assembly translates downward only as feet give way, it must not squash, stretch, shear, rotate crystals separately, move boulders independently or crumble. No redesigned crystals, no added plants. Keep original soft anatomy, original subtle shell-edge occlusion and continuous rounded cream underside. Where the head disappeared show only a small shaded organic shallow recess under the original upper rim, NEVER a huge black arch, circular collar, donut socket, protruding neck tube or several exposed round holes cut in the plastron. Do not invent anatomical entrances, do not let face appear at a leg position, do not detach limbs or let them intersect rocks. Do not shrink the turtle or fit each cell independently. No gore, no extra cracks, no glow effects, no floating stones. Match the original charming illustrated brush shading, dark clean outlines, natural volume and clean transparency.",
+          "inputs": [
+            "DesignAssets/Animations/CreatureDeathV6/walking-forest/Source/registered-reference.png"
+          ],
+          "output": "walking-forest/Source/withdrawal-input.png",
+          "selectedKeys": []
+        },
+        {
+          "tool": "builtin-imagegen",
+          "prompt": "Use case: precise-object-edit.\nAsset type: actual production death-animation key drawings, transparent 3-pose sprite strip.\nINPUT ROLES: Image 1 is the ONLY approved character appearance authority, a 512x512 original neutral walking-forest turtle. Image 2 is the edit target, an unapproved 3-pose death-withdrawal strip. Image 2 supplies ONLY the folded soft-limb poses and withdrawal sequence.\n\nCorrect the mineral shell in ALL THREE poses of image 2 to match image 1 faithfully. The target has the tall main crystal summit too far LEFT and the upper mountain silhouette and boulder pattern have drifted. In the 512x512 reference, the tallest original summit is near x285 (about 56 percent from the left), above the right half of the creature, NOT near x237 or the middle. Restore this original right-of-center summit, the original steep asymmetric ridgeline, original crystal shapes and counts, gray/tan boulder placements and amber seams. The mountain must read like exactly the original mountain, with its original height/width ratio. Do not design a different pyramid.\n\nKeep three complete distinct sequential poses: 1 closed eyes, full-sized head halfway retracting and front elbows folding while rear feet support; 2 head hidden, front feet mostly tucked, last rear leg and tail folding inward; 3 ALL head/neck/legs/claws/tail hidden, only the same intact shell and rounded cream plastron resting on ground. Preserve organic folding and no oversized circular holes: subtle recesses underneath original rims, complete rounded underside.\n\nOutput one transparent horizontal strip of THREE equal square cells with generous clear separation, no text/grid/shadows/background. Same size, same scale, same left/right registration and same camera across all cells. Treat original carapace as ONE rigid assembly: repeat its exact outline, height, width, stones and crystals across all three, allowing ONLY downward translation as feet retract, never flattening, tilting, moving crystals or changing the mountain geometry. All crystal tips stay fully inside the cells. No leaves, no crumbling stones, no extra effects. Keep original illustrated shading and line thickness from image1, not the heavier black outlines of image2. The purpose of this edit is faithful original-shell identity in the three actual usable key cels.",
+          "inputs": [
+            "DesignAssets/Animations/CreatureDeathV6/walking-forest/Source/registered-reference.png",
+            "walking-forest/Source/withdrawal-input.png"
+          ],
+          "output": "walking-forest/Source/key-drawings-corrected-raw.png",
+          "selectedKeys": [
+            1,
+            2
+          ]
+        },
+        {
+          "tool": "builtin-imagegen",
+          "prompt": "Use case: precise-object-edit.\nAsset type: ONE complete production death-animation final key cel on a transparent square canvas, no text or effects.\nImage1 is the 512x512 approved walking-forest original, the only authority for its camera, rigid silhouette, proportions, material shading, stone/crystal layout and original outline weight. Image2 supplies the withdrawal endpoint concept ONLY; its rightmost cel is cropped at the far right and must not be copied with that crop.\n\nDraw a SINGLE final death pose of the original image1 turtle with ALL head, neck, legs, feet, claws and tail fully withdrawn naturally behind its own original shell rims. Only its EXACT intact mineral mountain shell and complete rounded cream plastron remain, resting at the original foot-ground y448 in a logical 512x512 canvas. Keep the original carapace size and horizontal position, lower the rigid whole assembly about 32 pixels to settle onto that ground. The original tallest crystal summit is at x285 (56 percent from left) in the 512 canvas, retain that right-of-center summit and the exact asymmetric original ridge. Scale these coordinates proportionally if output is 1024x1024.\n\nKeep ALL original stones, amber seams, pale turquoise crystals, facets, width/height proportions and camera identical to image1, only move the whole rigid mass down as described. No flattening, stone replacement, separately moving crystals, or redesigned pyramid. Complete the subtle underside where feet are now inside; retain the rounded cream plastron, no giant black tunnels, ring holes or protruding collars. No visible skin, toes, tail or face. IMPORTANT: the full right and bottom carapace outlines must be COMPLETELY CONTAINED within the square with clear transparent margins, absolutely no cropped rocks. Clean real transparency, original illustrated shading and original line thickness. No ground shadow, scenery, labels, grid, floating stones, plants or glow effects. This actual final key cel will be registered with the existing neutral at the same size.",
+          "inputs": [
+            "DesignAssets/Animations/CreatureDeathV6/walking-forest/Source/registered-reference.png",
+            "walking-forest/Source/key-drawings-corrected-raw.png"
+          ],
+          "output": "walking-forest/Source/rest-drawing-raw.png",
+          "selectedKeys": [
+            3
+          ]
+        }
+      ],
+      "registration": [
+        {
+          "key": 1,
+          "source": "walking-forest/Source/key-drawings-corrected-raw.png",
+          "crop": [
+            0,
+            0,
+            790,
+            724
+          ],
+          "scale": 0.645,
+          "offset": [
+            18,
+            25
+          ]
+        },
+        {
+          "key": 2,
+          "source": "walking-forest/Source/key-drawings-corrected-raw.png",
+          "crop": [
+            790,
+            0,
+            700,
+            724
+          ],
+          "scale": 0.645,
+          "offset": [
+            61,
+            32
+          ]
+        },
+        {
+          "key": 3,
+          "source": "walking-forest/Source/rest-drawing-raw.png",
+          "scale": 0.388,
+          "offset": [
+            16,
+            22
+          ]
+        }
+      ]
+    }
+  ]
+}

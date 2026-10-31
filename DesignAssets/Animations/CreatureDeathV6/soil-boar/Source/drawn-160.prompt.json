@@ -1,0 +1,10 @@
+{
+  "prompt": "Production complete boar animation source at160ms, continuing reference2's tiny support failure. Reference1 is the ONLY approved design and camera; reference2 is the immediately previous80ms source; reference3 is the exact technical anatomical POSING/SIZE GUIDE for this frame, not its art style. Match guide's 512-canvas positions and original lengths: original compact barrel center(335,317), original head center(180,335), head only5degrees tilted. Near front knee is now deeply folded BACK toward chest at its real joint; its broad cloven hoof has lifted about17px from the floor, while original short rear hocks compress and rear hooves still hold their old ground positions. Far front knee folds too. Heavy shoulder/head start falling, there is no upward body jump. Camera-side torso begins rolling toward viewer15degrees, still before flank contact. Keep original skull/snout/tusk/hoof size and original short broad barrel dimensions exactly as reference1/2; no increasing body width, mane length, tail curl size or changing species. Original brown/cream warm painterly fur, small original moss/leaf clusters/stones fixed on the same back, tiny pink-brown snout/two nostrils, two short ivory tusks, four SHORT stout jointed legs, pointed ears and short curled tail. Draw coherent natural full anatomy and proper overlaps; no cutout straight joints or stretched bones. Same camera magnification, large empty top third, guide's actor scale/placement and margins, not a crop-to-fill. Do not copy crude diagram shapes, colors, ground line or symbols. One square complete source frame, genuine TRANSPARENT surroundings, no background/vignette/floor/shadow/effects/text/blur/doubles.",
+  "referenced_image_paths": [
+    "Source/reference.png",
+    "Source/drawn-080.png",
+    "Source/Inputs/anatomical-160.png"
+  ],
+  "transparent_background": true,
+  "output": "Source/drawn-160.png"
+}

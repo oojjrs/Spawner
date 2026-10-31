@@ -1,0 +1,28 @@
+{
+  "sourceAtlas": {
+    "provider": "built-in image_gen", 
+    "prompt": "Use case: precise-object-edit. Actual production SOURCE PARTS ATLAS for layered 2D cutout rigging, NOT animation frames. Image 1 is a rough 3-column 2-row cutout GUIDE with exact per-part canvas placement and source visible pixels. Image 2 is the approved COMPLETE creature and absolute design/style authority. Reconstruct each rough fragment into ONE complete independent part, filling all missing hidden contours, behind-joint surfaces, neck/shoulder/hip/root shapes and contact overlaps. Never repeat the guide's clipped edges or missing wedges/holes. Keep original part's scale, position, silhouette landmarks, lighting, smooth cream/mint or brown/gold painterly palette and thin dark-teal contour. Do not shrink parts to their cells, and do not recenter them; retain guide placement inside each same square cell. Return exactly 3 columns by 2 rows of six 512x512 square cells (1536x1024 canvas), with one COMPLETE isolated part per cell in this exact order: Top row: complete RIGID GOLD SPIRAL SHELL AND ALL PACK ITEMS including unchanged two honey mushrooms, red berries, leaves and straps, with a completed gold lower/front shell contour and dark small body-entry aperture underneath front lower left edge, absolutely NO soft body attached; complete soft MANTLE/FOOT without head, eyes or shell, full hidden upper back contour; complete soft HEAD/NECK without eyestalks, full hidden neck root. Bottom row: complete NEAR EYESTALK with eye globe, full flexible stalk/root; complete FAR EYESTALK with eye globe/full stalk/root; separate front lower SHELL LIP/OCCLUDER around the dark body-entry aperture, golden rim and dark inner opening, no soft tissue. The shell shape is the same approved original and its underside is completed where the body hid it. Full finished closed contours on every independent part, generous transparent surrounding area. Source joints must have 10-20 pixels hidden overlap; complete the body surfaces behind removed parts. No duplicate assembled creatures, no animation sequence, no text, no labels, no grid, no floor, no cast shadow. True transparent alpha. Preserve identity and source size; these parts will be transformed rigidly without scale changes.", 
+    "outputPath": "D:\\.codex\\generated_images\\01a1838b-0d79-7b90-a939-d0be54c3199b\\exec-da6df958-c7c1-4b15-8c50-4bfb0d69da0b.png"
+  }, 
+  "actualRegisteredAttachments": {
+    "shell": "Parts/shell.png", 
+    "shell-front": "Parts/shell-front.png", 
+    "mantle": "Parts/mantle.png", 
+    "near-eye": "Parts/near-eye.png", 
+    "far-eye": "Parts/far-eye.png"
+  }, 
+  "repairDrawings": [
+    "Source/far-eye-completed-source.png", 
+    "Source/head-completed-source.png", 
+    "Source/lip-completed-source.png", 
+    "Source/mantle-completed-source.png", 
+    "Source/near-eye-completed-source.png", 
+    "Source/shell-completed-source.png"
+  ], 
+  "reference": "reference.png", 
+  "continuousSoftBody": {
+    "provider": "built-in image_gen", 
+    "prompt": "Use case: precise-object-edit. Asset type: actual production complete continuous SOFT BODY part for the exact illustrated snail in reference. Input image is the design authority. Draw the entire soft cream pale-sage slug tissue as ONE CONTINUOUS COMPLETE PART, same three-quarter-left view, same broad low foot and raised rounded left head transitioning smoothly into foot, long tapered right tail. Remove the ENTIRE golden shell, leaf pack, mushrooms and berries; restore the complete hidden back surface underneath them. Remove both eyes and both eye stalks completely; the head is smoothly rounded closed cream skin with no holes or cavities. Important: head merges into body with NO seam, NO interior outline, NO joint line and NO hollow neck rim. The soft body silhouette starts with a raised rounded bulbous head on left, slopes into low broad belly in center and curves gently up into slim pointed tail on right. Keep the original warm ivory upper-left highlights and pale sage shadows, fine dark green outside contour, painterly soft surfaces, proportions and camera. No hard shell, no eyes, no limbs, no mouth, no vase opening, no background, floor, shadow, text or labels. Transparent alpha around ONE complete source part, generous margins. This is a source attachment for later retraction animation, not a finished snail or animation sheet.", 
+    "outputPath": "Source/continuous-soft-body-raw.png"
+  }
+}

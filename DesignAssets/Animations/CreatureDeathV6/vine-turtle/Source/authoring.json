@@ -1,0 +1,226 @@
+{
+  "appearanceAuthority": "DesignAssets/CreatureConcepts/v3/vine-turtle.png",
+  "originalSha256": "16f3ac446ce4edcfbbb1d57b31e61934d1bd69ecce0ed4f7fd6b9e8c7abbed41",
+  "registeredReference": "registered-reference.png",
+  "registration": "registration.json",
+  "partInputs": {
+    "shell.png": "rigid-shell.png",
+    "foreground.png": "rigid-visible.png",
+    "fore-far.png": "fore-far-bound.png",
+    "hind-near.png": "hind-near-bound.png",
+    "tail.png": "tail-bound.png",
+    "head.png": "head-bound.png",
+    "fore-near.png": "fore-near-bound.png",
+    "head-entry-0.png": "BodyCels/head-entry-0.png",
+    "head-entry-1.png": "BodyCels/head-entry-1.png",
+    "head-entry-2.png": "BodyCels/head-entry-2.png",
+    "head-entry-3.png": "BodyCels/head-entry-3.png",
+    "head-entry-4.png": "BodyCels/head-entry-4.png",
+    "head-entry-5.png": "BodyCels/head-entry-5.png",
+    "body-hidden.png": "BodyCels/body-hidden.png"
+  },
+  "rig": {
+    "authority": "DesignAssets/CreatureConcepts/v3/vine-turtle.png",
+    "canvas": [
+      512,
+      512
+    ],
+    "pivot": [
+      256,
+      448
+    ],
+    "groundY": 448,
+    "gravity": 1100,
+    "restitution": 0.035,
+    "shell": "shell.png",
+    "foreground": "foreground.png",
+    "method": "Independent complete soft attachments, local fold articulation, inward projection through each original anatomical entry; original visible armor foreground; completed fixed armor back.",
+    "parts": [
+      {
+        "name": "fore-far",
+        "image": "fore-far.png",
+        "pivot": [
+          133,
+          375
+        ],
+        "withdrawalMs": [
+          80,
+          320
+        ],
+        "inward": [
+          60,
+          -55
+        ],
+        "foldDegrees": -10,
+        "ownerWindow": [
+          0,
+          0,
+          512,
+          512
+        ],
+        "depthBehindShellAfterMs": 320
+      },
+      {
+        "name": "hind-near",
+        "image": "hind-near.png",
+        "pivot": [
+          416,
+          378
+        ],
+        "withdrawalMs": [
+          460,
+          1160
+        ],
+        "inward": [
+          -18,
+          -70
+        ],
+        "foldDegrees": -25,
+        "ownerWindow": [
+          368,
+          359,
+          512,
+          512
+        ]
+      },
+      {
+        "name": "tail",
+        "image": "tail.png",
+        "pivot": [
+          430,
+          345
+        ],
+        "withdrawalMs": [
+          600,
+          1280
+        ],
+        "inward": [
+          -40,
+          5
+        ],
+        "foldDegrees": -20,
+        "ownerWindow": [
+          415,
+          0,
+          512,
+          370
+        ]
+      },
+      {
+        "name": "head",
+        "image": "head.png",
+        "pivot": [
+          217,
+          354
+        ],
+        "withdrawalMs": [
+          180,
+          900
+        ],
+        "inward": [
+          130,
+          -3
+        ],
+        "foldDegrees": -12,
+        "ownerWindow": [
+          0,
+          0,
+          512,
+          512
+        ],
+        "method": "drawn head entry sequence"
+      },
+      {
+        "name": "fore-near",
+        "image": "fore-near.png",
+        "pivot": [
+          263,
+          377
+        ],
+        "withdrawalMs": [
+          260,
+          850
+        ],
+        "inward": [
+          8,
+          -80
+        ],
+        "foldDegrees": 20,
+        "ownerWindow": [
+          223,
+          352,
+          325,
+          512
+        ]
+      }
+    ],
+    "settleHoldMs": 520,
+    "headCels": [
+      {
+        "image": "head.png",
+        "untilMs": 160
+      },
+      {
+        "image": "head-entry-0.png",
+        "untilMs": 240
+      },
+      {
+        "image": "head-entry-1.png",
+        "untilMs": 340
+      },
+      {
+        "image": "head-entry-2.png",
+        "untilMs": 440
+      },
+      {
+        "image": "head-entry-3.png",
+        "untilMs": 540
+      },
+      {
+        "image": "head-entry-4.png",
+        "untilMs": 640
+      },
+      {
+        "image": "head-entry-5.png",
+        "untilMs": 740
+      },
+      {
+        "image": "body-hidden.png",
+        "untilMs": 1800
+      }
+    ]
+  },
+  "usedDrawings": [
+    "generation/shell-corrected.png",
+    "generation/complete-soft.png",
+    "generation/head-entry.png"
+  ],
+  "registrationInputs": [
+    "drawn-registration.json",
+    "complete-soft-registration.json",
+    "head-entry-registration.json"
+  ],
+  "originalSelectionMasks": {
+    "role": "selection only; visible RGB from the current appearance authority",
+    "sourcePaths": [
+      "DesignAssets/Animations/CreatureDeathV5/vine-turtle/Source/head-visible.png",
+      "DesignAssets/Animations/CreatureDeathV5/vine-turtle/Source/fore-near-visible.png",
+      "DesignAssets/Animations/CreatureDeathV5/vine-turtle/Source/fore-far-visible.png",
+      "DesignAssets/Animations/CreatureDeathV5/vine-turtle/Source/hind-near-visible.png",
+      "DesignAssets/Animations/CreatureDeathV5/vine-turtle/Source/tail-visible.png",
+      "DesignAssets/Animations/CreatureDeathV5/vine-turtle/Source/hard-visible-mask.png"
+    ],
+    "matrix": [
+      [
+        0.8956268221574344,
+        0,
+        30.451311953352768
+      ],
+      [
+        0,
+        0.8956268221574344,
+        48.28396501457728
+      ]
+    ]
+  }
+}

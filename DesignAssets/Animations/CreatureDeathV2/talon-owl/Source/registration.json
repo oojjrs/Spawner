@@ -1,0 +1,227 @@
+[
+  {
+    "part": "body", 
+    "atlasRect": [
+      59, 
+      82, 
+      416, 
+      430
+    ], 
+    "sourceBounds": [
+      2, 
+      2, 
+      355, 
+      346
+    ], 
+    "bindRect": [
+      163, 
+      216, 
+      329, 
+      377
+    ], 
+    "runtimeScale": [
+      1, 
+      1
+    ]
+  }, 
+  {
+    "part": "head", 
+    "atlasRect": [
+      453, 
+      14, 
+      797, 
+      426
+    ], 
+    "sourceBounds": [
+      2, 
+      2, 
+      342, 
+      410
+    ], 
+    "bindRect": [
+      138, 
+      98, 
+      323, 
+      265
+    ], 
+    "runtimeScale": [
+      1, 
+      1
+    ]
+  }, 
+  {
+    "part": "wing-near", 
+    "atlasRect": [
+      848, 
+      88, 
+      1240, 
+      455
+    ], 
+    "sourceBounds": [
+      2, 
+      2, 
+      390, 
+      365
+    ], 
+    "bindRect": [
+      251, 
+      220, 
+      392, 
+      390
+    ], 
+    "runtimeScale": [
+      1, 
+      1
+    ]
+  }, 
+  {
+    "part": "wing-far", 
+    "atlasRect": [
+      20, 
+      480, 
+      407, 
+      854
+    ], 
+    "sourceBounds": [
+      2, 
+      2, 
+      385, 
+      372
+    ], 
+    "bindRect": [
+      147, 
+      229, 
+      208, 
+      343
+    ], 
+    "runtimeScale": [
+      1, 
+      1
+    ]
+  }, 
+  {
+    "part": "leg-near-upper", 
+    "atlasRect": [
+      530, 
+      485, 
+      759, 
+      814
+    ], 
+    "sourceBounds": [
+      2, 
+      2, 
+      227, 
+      327
+    ], 
+    "bindRect": [
+      235, 
+      335, 
+      282, 
+      381
+    ], 
+    "runtimeScale": [
+      1, 
+      1
+    ]
+  }, 
+  {
+    "part": "leg-near-lower", 
+    "atlasRect": [
+      904, 
+      485, 
+      1126, 
+      830
+    ], 
+    "sourceBounds": [
+      2, 
+      2, 
+      220, 
+      343
+    ], 
+    "bindRect": [
+      217, 
+      362, 
+      299, 
+      407
+    ], 
+    "runtimeScale": [
+      1, 
+      1
+    ]
+  }, 
+  {
+    "part": "leg-far-upper", 
+    "atlasRect": [
+      131, 
+      864, 
+      356, 
+      1196
+    ], 
+    "sourceBounds": [
+      2, 
+      2, 
+      223, 
+      330
+    ], 
+    "bindRect": [
+      184, 
+      335, 
+      230, 
+      379
+    ], 
+    "runtimeScale": [
+      1, 
+      1
+    ]
+  }, 
+  {
+    "part": "leg-far-lower", 
+    "atlasRect": [
+      530, 
+      868, 
+      762, 
+      1210
+    ], 
+    "sourceBounds": [
+      2, 
+      2, 
+      230, 
+      340
+    ], 
+    "bindRect": [
+      166, 
+      358, 
+      231, 
+      401
+    ], 
+    "runtimeScale": [
+      1, 
+      1
+    ]
+  }, 
+  {
+    "part": "tail", 
+    "atlasRect": [
+      849, 
+      878, 
+      1231, 
+      1211
+    ], 
+    "sourceBounds": [
+      2, 
+      2, 
+      380, 
+      331
+    ], 
+    "bindRect": [
+      283, 
+      335, 
+      381, 
+      423
+    ], 
+    "runtimeScale": [
+      1, 
+      1
+    ]
+  }
+]

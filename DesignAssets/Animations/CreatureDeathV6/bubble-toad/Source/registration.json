@@ -1,0 +1,284 @@
+{
+  "source": "sheet-raw.png",
+  "scale": 1.0424599942770354,
+  "referenceScale": 1.4143646408839778,
+  "rearLandmarkX": 436,
+  "frames": [
+    {
+      "source": "Cels/000.png",
+      "rect": [
+        0,
+        0,
+        349,
+        259
+      ],
+      "origin": [
+        165.33150337837836,
+        254
+      ],
+      "rearLandmark": [
+        364,
+        257
+      ]
+    },
+    {
+      "source": "Cels/001.png",
+      "rect": [
+        0,
+        0,
+        345,
+        253
+      ],
+      "origin": [
+        163.33150337837833,
+        248
+      ],
+      "rearLandmark": [
+        716,
+        257
+      ]
+    },
+    {
+      "source": "Cels/002.png",
+      "rect": [
+        0,
+        0,
+        330,
+        240
+      ],
+      "origin": [
+        147.33150337837833,
+        235
+      ],
+      "rearLandmark": [
+        1051,
+        258
+      ]
+    },
+    {
+      "source": "Cels/003.png",
+      "rect": [
+        0,
+        0,
+        322,
+        221
+      ],
+      "origin": [
+        140.33150337837833,
+        216
+      ],
+      "rearLandmark": [
+        1380,
+        258
+      ]
+    },
+    {
+      "source": "Cels/004.png",
+      "rect": [
+        0,
+        0,
+        346,
+        218
+      ],
+      "origin": [
+        162.33150337837836,
+        213
+      ],
+      "rearLandmark": [
+        364,
+        540
+      ]
+    },
+    {
+      "source": "Cels/005.png",
+      "rect": [
+        0,
+        0,
+        328,
+        193
+      ],
+      "origin": [
+        148.33150337837833,
+        188
+      ],
+      "rearLandmark": [
+        709,
+        533
+      ]
+    },
+    {
+      "source": "Cels/006.png",
+      "rect": [
+        0,
+        0,
+        322,
+        179
+      ],
+      "origin": [
+        142.33150337837833,
+        174
+      ],
+      "rearLandmark": [
+        1046,
+        538
+      ]
+    },
+    {
+      "source": "Cels/007.png",
+      "rect": [
+        0,
+        0,
+        311,
+        178
+      ],
+      "origin": [
+        129.33150337837833,
+        173
+      ],
+      "rearLandmark": [
+        1374,
+        543
+      ]
+    },
+    {
+      "source": "Cels/008.png",
+      "rect": [
+        0,
+        0,
+        330,
+        174
+      ],
+      "origin": [
+        150.33150337837836,
+        169
+      ],
+      "rearLandmark": [
+        355,
+        789
+      ]
+    },
+    {
+      "source": "Cels/009.png",
+      "rect": [
+        0,
+        0,
+        330,
+        168
+      ],
+      "origin": [
+        151.33150337837833,
+        163
+      ],
+      "rearLandmark": [
+        710,
+        789
+      ]
+    },
+    {
+      "source": "Cels/010.png",
+      "rect": [
+        0,
+        0,
+        322,
+        165
+      ],
+      "origin": [
+        144.33150337837833,
+        160
+      ],
+      "rearLandmark": [
+        1049,
+        790
+      ]
+    },
+    {
+      "source": "Cels/011.png",
+      "rect": [
+        0,
+        0,
+        312,
+        167
+      ],
+      "origin": [
+        133.33150337837833,
+        162
+      ],
+      "rearLandmark": [
+        1380,
+        792
+      ]
+    },
+    {
+      "source": "Cels/012.png",
+      "rect": [
+        0,
+        0,
+        335,
+        165
+      ],
+      "origin": [
+        156.33150337837836,
+        160
+      ],
+      "rearLandmark": [
+        362,
+        1026
+      ]
+    }
+  ],
+  "durationsMs": [
+    90,
+    80,
+    80,
+    70,
+    70,
+    70,
+    80,
+    90,
+    100,
+    110,
+    110,
+    120,
+    1000
+  ],
+  "stabilization": {
+    "translationsXPx": [
+      0,
+      -3,
+      -6,
+      -5,
+      0,
+      -8,
+      -8,
+      -4,
+      0,
+      0,
+      0,
+      0,
+      -5
+    ],
+    "interpolations": [
+      {
+        "first": 3,
+        "last": 5,
+        "frames": [
+          4
+        ],
+        "method": "backward-flow",
+        "easing": "linear"
+      },
+      {
+        "first": 7,
+        "last": 12,
+        "frames": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "method": "bidirectional-flow",
+        "easing": "ease-out-quadratic"
+      }
+    ]
+  }
+}

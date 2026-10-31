@@ -1,0 +1,63 @@
+{
+  "neutralVisibleMaxChannelDifference": 255,
+  "neutralVisibleChangedPixels": 57322,
+  "maxRigidOrthogonalityError": 1.376433000910282e-07,
+  "maxIKSegmentLengthError": 7.460698725481052e-14,
+  "sourcePartDimensions": {
+    "body": [
+      158,
+      253,
+      383,
+      391
+    ],
+    "fore-upper": [
+      167,
+      342,
+      211,
+      396
+    ],
+    "fore-lower": [
+      126,
+      379,
+      215,
+      439
+    ],
+    "hind-upper": [
+      314,
+      317,
+      381,
+      396
+    ],
+    "hind-lower": [
+      334,
+      375,
+      373,
+      426
+    ],
+    "fore-far": [
+      89,
+      351,
+      154,
+      425
+    ],
+    "hind-far": [
+      261,
+      343,
+      321,
+      415
+    ],
+    "tail": [
+      348,
+      285,
+      475,
+      444
+    ],
+    "head": [
+      31,
+      285,
+      212,
+      398
+    ]
+  },
+  "construction": "No frame-dependent registration, dimensions or source drawings. Unit-scale rigid transforms per attachment; only declared sac may contract."
+}

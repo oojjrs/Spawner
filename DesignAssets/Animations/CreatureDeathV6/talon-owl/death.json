@@ -1,0 +1,65 @@
+{
+  "sourceImage": "DesignAssets/CreatureConcepts/v3/talon-owl.png",
+  "image": "DesignAssets/Animations/CreatureDeathV6/talon-owl/death.webp",
+  "frameSize": 512,
+  "columns": 4,
+  "frameCount": 13,
+  "pivotX": 256,
+  "pivotY": 448,
+  "durationsMs": [
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    160,
+    240,
+    900
+  ],
+  "durationMs": 1700,
+  "loop": false,
+  "preview": "DesignAssets/Animations/CreatureDeathV6/talon-owl/preview.webp",
+  "thumbnail": "DesignAssets/Animations/CreatureDeathV6/talon-owl/thumbnail.webp",
+  "previewLoop": 0,
+  "sourceCanvasPlacement": {
+    "canvas": [
+      512,
+      512
+    ],
+    "pivot": [
+      256,
+      448
+    ],
+    "initialContactY": 400,
+    "scale": 3.5,
+    "matrix": [
+      [
+        3.5,
+        0.0,
+        32.0
+      ],
+      [
+        0.0,
+        3.5,
+        88.5
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ]
+  },
+  "poseRegistration": "DesignAssets/Animations/CreatureDeathV6/talon-owl/Source/pose-registration.json",
+  "prepare": "DesignAssets/Animations/CreatureDeathV6/talon-owl/prepare.py",
+  "renderer": "DesignAssets/Animations/CreatureDeathV6/talon-owl/render.py",
+  "construction": "New complete drawings for lift loss, yielding feet, chest and wing contact, overlapping folded wings; rigid free fall of the unchanged original during the first80ms.",
+  "sourceAuthoring": "DesignAssets/Animations/CreatureDeathV6/talon-owl/Source/authoring.json",
+  "timeline": "DesignAssets/Animations/CreatureDeathV6/talon-owl/timeline.json",
+  "wingTransitions": "DesignAssets/Animations/CreatureDeathV6/talon-owl/Source/wing-transitions.json"
+}

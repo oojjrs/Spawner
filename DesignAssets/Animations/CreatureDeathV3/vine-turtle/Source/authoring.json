@@ -1,0 +1,45 @@
+{
+  "canvas": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "rig": "rig.json",
+  "renderer": "render.py",
+  "prepare": "Source/prepare.py",
+  "editablePartSources": {
+    "Parts/fore-far.png": "Source/EditableParts/fore-far.png",
+    "Parts/fore-near.png": "Source/EditableParts/fore-near.png",
+    "Parts/head-closed.png": "Source/EditableParts/head-closed.png",
+    "Parts/head.png": "Source/EditableParts/head.png",
+    "Parts/hind.png": "Source/EditableParts/hind.png",
+    "Parts/shell-foreground.png": "Source/EditableParts/shell-foreground.png",
+    "Parts/shell.png": "Source/EditableParts/shell.png",
+    "Parts/tail.png": "Source/EditableParts/tail.png"
+  },
+  "editableTextureSources": {},
+  "sourceDrawings": [
+    "closed-eyelids-drawing.png",
+    "complete-shell-drawing.png"
+  ],
+  "externalPathsRequired": false,
+  "sourceEditing": "Registered complete part images are canonical editable sources. Body cels preserve their own complete drawn anatomy; rigid head sources retain fixed scale.",
+  "shellForeground": {
+    "shell": "Parts/shell.png",
+    "mask": "Source/foreground-mask.png",
+    "output": "Parts/shell-foreground.png"
+  },
+  "referencePlacement": {
+    "source": "approved idle first cell",
+    "nativeCellSize": 346,
+    "normalizedSize": 512,
+    "scale": 1.4797687861271676,
+    "translation": [
+      0,
+      -1
+    ]
+  }
+}

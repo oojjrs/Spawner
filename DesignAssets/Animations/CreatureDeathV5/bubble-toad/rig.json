@@ -1,0 +1,143 @@
+{
+  "name": "bubble-toad",
+  "approvedImage": "DesignAssets/CreatureConcepts/v3/bubble-toad.png",
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ],
+  "bodyMass": 1,
+  "headMass": 0,
+  "gravity": 950,
+  "neckPivot": [
+    215,
+    266
+  ],
+  "bodyAngleLimit": -16,
+  "headAngleLimit": [
+    0,
+    0
+  ],
+  "foreFailureMs": [
+    120,
+    270
+  ],
+  "hindFailureMs": [
+    230,
+    380
+  ],
+  "headFailureMs": [
+    160,
+    300
+  ],
+  "groundY": 448,
+  "groundSlope": -0.11,
+  "groundX": 262,
+  "bodyMassCenter": [
+    287,
+    326
+  ],
+  "headMassCenter": [
+    215,
+    238
+  ],
+  "legs": {
+    "fore-near": [
+      [
+        307,
+        349
+      ],
+      [
+        302.67403314917124,
+        387.1823204419889
+      ],
+      [
+        261.6574585635359,
+        435.27071823204415
+      ]
+    ],
+    "fore-far": [
+      [
+        117.39226519337016,
+        381.524861878453
+      ],
+      [
+        130.12154696132598,
+        399.9116022099447
+      ],
+      [
+        111.73480662983425,
+        425.37016574585635
+      ]
+    ],
+    "hind-near": [
+      [
+        374.8066298342541,
+        333.43646408839777
+      ],
+      [
+        397.43646408839777,
+        387.1823204419889
+      ],
+      [
+        355.0055248618784,
+        425.37016574585635
+      ]
+    ],
+    "hind-far": [
+      [
+        408.7513812154696,
+        332.0220994475138
+      ],
+      [
+        429.96685082872926,
+        377.28176795580106
+      ],
+      [
+        401.6795580110497,
+        425.37016574585635
+      ]
+    ]
+  },
+  "accessories": {},
+  "extraParts": {},
+  "softChains": {},
+  "jointParts": {},
+  "limbSurfaceContact": false,
+  "foregroundLimbs": [
+    "fore-near",
+    "hind-near"
+  ],
+  "durationActiveMs": 2400,
+  "sampleMs": 40,
+  "finalHoldMs": 1000,
+  "pouchPressureRelease": [
+    150,
+    480
+  ],
+  "pouchGravity": 240,
+  "pouchDepth": 70,
+  "nearShoulder": {
+    "anchorRadius": [
+      12,
+      34
+    ],
+    "depthY": [
+      340,
+      396
+    ],
+    "depthZ": [
+      80,
+      110
+    ],
+    "alphaY": [
+      320,
+      336
+    ],
+    "edgeFeatherY": [
+      375,
+      383
+    ],
+    "edgeFeatherPixels": 3
+  }
+}

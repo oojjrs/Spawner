@@ -1,0 +1,58 @@
+{
+  "sourceImage": "DesignAssets/CreatureConcepts/v3/soil-boar.png",
+  "image": "DesignAssets/Animations/CreatureDeathV6/soil-boar/death.webp",
+  "frameSize": 512,
+  "columns": 4,
+  "frameCount": 8,
+  "pivotX": 256,
+  "pivotY": 448,
+  "durationsMs": [
+    80,
+    40,
+    40,
+    80,
+    80,
+    160,
+    160,
+    800
+  ],
+  "durationMs": 1440,
+  "loop": false,
+  "preview": "DesignAssets/Animations/CreatureDeathV6/soil-boar/preview.webp",
+  "thumbnail": "DesignAssets/Animations/CreatureDeathV6/soil-boar/thumbnail.webp",
+  "previewLoop": 0,
+  "sourceCanvasPlacement": {
+    "canvas": [
+      512,
+      512
+    ],
+    "pivot": [
+      256,
+      448
+    ],
+    "source": "original.png",
+    "scale": 1.3800539083557952,
+    "matrix": [
+      [
+        1.3800539083557952,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.3800539083557952,
+        100.22641509433959
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ]
+  },
+  "timeline": "DesignAssets/Animations/CreatureDeathV6/soil-boar/timeline.json",
+  "prepare": "DesignAssets/Animations/CreatureDeathV6/soil-boar/prepare.py",
+  "renderer": "DesignAssets/Animations/CreatureDeathV6/soil-boar/render.py",
+  "sourceAuthoring": "DesignAssets/Animations/CreatureDeathV6/soil-boar/Source/authoring.json",
+  "construction": "Drawn collapse poses with localized joint, ear and tail drawings; rigid root motion; fixed landed body."
+}

@@ -1,0 +1,1 @@
+{"name": "shadow-weasel", "action": "death", "image": "DesignAssets/Animations/CreatureDeathV6/shadow-weasel/runtime.webp", "frameSize": 256, "viewSize": 243.62312045574424, "pivotX": 128.35099274270337, "pivotY": 171.4882831172111, "columns": 4, "frameCount": 8, "durationsMs": [120, 90, 90, 100, 100, 100, 160, 1000], "durationMs": 1760, "loop": false}

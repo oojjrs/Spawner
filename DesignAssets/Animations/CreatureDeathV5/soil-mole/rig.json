@@ -1,0 +1,98 @@
+{
+  "name": "soil-mole", 
+  "version": 5, 
+  "configuration": {
+    "headPivot": [
+      263.710843373494, 
+      289.50602409638554
+    ], 
+    "bodyPivot": [
+      356.2409638554217, 
+      271.0
+    ], 
+    "legs": {
+      "foreleg-far": [
+        [
+          232.8674698795181, 
+          271.0
+        ], 
+        [
+          186.60240963855424, 
+          309.5542168674699
+        ], 
+        [
+          169.63855421686748, 
+          323.43373493975906
+        ]
+      ], 
+      "foreleg": [
+        [
+          336.1927710843374, 
+          281.7951807228916
+        ], 
+        [
+          326.9397590361446, 
+          317.26506024096386
+        ], 
+        [
+          306.89156626506025, 
+          338.855421686747
+        ]
+      ], 
+      "hindleg": [
+        [
+          405.5903614457832, 
+          292.5903614457832
+        ], 
+        [
+          430.26506024096386, 
+          315.72289156626505
+        ], 
+        [
+          430.26506024096386, 
+          338.855421686747
+        ]
+      ]
+    }, 
+    "layerOrder": [
+      "tail", 
+      "body", 
+      "hindleg", 
+      "foreleg-far", 
+      "head", 
+      "foreleg"
+    ], 
+    "rigidClawMasks": {
+      "foreleg-far": "Source/foreleg-far-rigid-claws.png", 
+      "foreleg": "Source/foreleg-rigid-claws.png"
+    }, 
+    "palmFrontMask": "Source/foreleg-rigid-claws.png", 
+    "palmRigidSourceY": {
+      "foreleg": 326.51807228915663, 
+      "foreleg-far": 315.72289156626505
+    }, 
+    "neckSurface": {
+      "source": "Parts/neck-surface.png", 
+      "parents": [
+        "body", 
+        "head"
+      ], 
+      "weightAxis": [
+        205, 
+        295
+      ], 
+      "mesh": "neck-surface-mesh.json"
+    }
+  }, 
+  "reference": "DesignAssets/CreatureConcepts/v3/soil-mole.png", 
+  "canvas": [
+    512, 
+    512
+  ], 
+  "pivot": [
+    256, 
+    448
+  ], 
+  "source": "Source/EditableParts", 
+  "spineCompatibilityVerified": false
+}

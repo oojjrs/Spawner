@@ -1,0 +1,103 @@
+{
+  "neutralVisibleMaxChannelDifference": 255,
+  "neutralVisibleChangedPixels": 74442,
+  "maxRigidOrthogonalityError": 1.2087693002094113e-07,
+  "maxIKSegmentLengthError": 4.263256414560601e-14,
+  "sourcePartDimensions": {
+    "body": [
+      182,
+      145,
+      432,
+      351
+    ],
+    "fore-upper": [
+      235,
+      294,
+      312,
+      346
+    ],
+    "fore-lower": [
+      223,
+      338,
+      290,
+      394
+    ],
+    "hind-upper": [
+      371,
+      271,
+      442,
+      337
+    ],
+    "hind-lower": [
+      398,
+      320,
+      448,
+      375
+    ],
+    "fore-far": [
+      114,
+      310,
+      189,
+      375
+    ],
+    "hind-far": [
+      307,
+      305,
+      372,
+      373
+    ],
+    "tail": [
+      407,
+      180,
+      455,
+      242
+    ],
+    "head": [
+      75,
+      112,
+      286,
+      335
+    ],
+    "ear-near": [
+      199,
+      168,
+      253,
+      232
+    ],
+    "ear-far": [
+      108,
+      168,
+      153,
+      224
+    ]
+  },
+  "construction": "Complete immutable body/head/limb sources with unit-scale rigid articulation; local eyelid change and declared flexible vocal sac are explicit exceptions. Initial complete-part assembly differs from original reference pixels and is preserved in source-overlay.png.",
+  "rigidSourceHashes": {
+    "body": "805781186cbd7a434113166fd2d76a32f6f66975b27011e9afd9233f0bd618a5",
+    "fore-upper": "f6494d53e5383c4377c10c3724b117c4aa044976af6a59270910b0082bb257c3",
+    "fore-lower": "706bdfb61999d2517a084229f8a05c76b05a0c52a5aa8342f18f3abb821f70a8",
+    "hind-upper": "63a422fb075c37a01aff6ddcd707760bab97611bfc60e5e796406a2e7815eef5",
+    "hind-lower": "3d79a588b9da007a355cfc8577cfaa99dc35aea8074778b37f48b9eebf695250",
+    "fore-far": "3c25f58aef253c4e7651ae23ca1506717fbec38a28a6dbf361a28c7bf98a9714",
+    "hind-far": "bd342c51429b3f3995e52a42240ee1a9bdcc0c903813eec383b5287ed65b10d9",
+    "tail": "0bd2293100039abf55ee21406f236c5231948c37c4689ef83f571482673f9503",
+    "head": "9bf2878d1abb4b08b1afd56ad72c404b93feb97b23793f761360cb85a8433ad9",
+    "ear-near": "29f0daca883396d3d5ffe56757e47af078165338b3bf5db1e076551b4bfc3006",
+    "ear-far": "9d4fdcc65293db59b94c0d79724586c102b59700b872b6977c503a93a9a7a0c2"
+  },
+  "sourceCanvas": [
+    512,
+    512
+  ],
+  "sourcePlacement": {
+    "scale": [
+      1,
+      1
+    ],
+    "translation": [
+      0,
+      0
+    ],
+    "groundY": 392
+  }
+}

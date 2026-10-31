@@ -1,0 +1,266 @@
+[
+  {
+    "part": "fore-near-upper",
+    "source": "Source/joints-atlas.png",
+    "mask": "Source/Masks/fore-near-upper.png",
+    "matrix": [
+      [
+        0.16010857466460976,
+        -0.004979593430842227,
+        171.34423636470152
+      ],
+      [
+        0.004979593430842227,
+        0.16010857466460976,
+        331.0612001796559
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ]
+  },
+  {
+    "part": "fore-near-lower",
+    "source": "Source/joints-atlas.png",
+    "mask": "Source/Masks/fore-near-lower.png",
+    "matrix": [
+      [
+        0.1390176581342558,
+        -0.0950389051376856,
+        153.226137293654
+      ],
+      [
+        0.0950389051376856,
+        0.1390176581342558,
+        313.7811203220535
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ]
+  },
+  {
+    "part": "fore-near-foot",
+    "source": "Source/paws-atlas.png",
+    "mask": "Source/Masks/fore-near-foot.png",
+    "matrix": [
+      [
+        0.10508474576271186,
+        0,
+        169.5322033898305
+      ],
+      [
+        0,
+        0.10508474576271186,
+        379.61694915254236
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ]
+  },
+  {
+    "part": "fore-far-upper",
+    "source": "Source/joints-atlas.png",
+    "mask": "Source/Masks/fore-far-upper.png",
+    "matrix": [
+      [
+        0.12293577981651377,
+        -0.05688073394495413,
+        186.73394495412842
+      ],
+      [
+        0.05688073394495413,
+        0.12293577981651377,
+        286.2201834862385
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ]
+  },
+  {
+    "part": "fore-far-lower",
+    "source": "Source/joints-atlas.png",
+    "mask": "Source/Masks/fore-far-lower.png",
+    "matrix": [
+      [
+        0.10526894985896557,
+        -0.10982722570705404,
+        175.29756795422037
+      ],
+      [
+        0.10982722570705404,
+        0.10526894985896557,
+        268.18530231157297
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ]
+  },
+  {
+    "part": "fore-far-foot",
+    "source": "Source/paws-atlas.png",
+    "mask": "Source/Masks/fore-far-foot.png",
+    "matrix": [
+      [
+        0.08771929824561403,
+        0,
+        90.89473684210527
+      ],
+      [
+        0,
+        0.08771929824561403,
+        371.57894736842104
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ]
+  },
+  {
+    "part": "hind-near-upper",
+    "source": "Source/joints-atlas.png",
+    "mask": "Source/Masks/hind-near-upper.png",
+    "matrix": [
+      [
+        0.17901226879242696,
+        -0.038537709410226086,
+        338.04810363081526
+      ],
+      [
+        0.038537709410226086,
+        0.17901226879242696,
+        191.11333374852092
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ]
+  },
+  {
+    "part": "hind-near-lower",
+    "source": "Source/joints-atlas.png",
+    "mask": "Source/Masks/hind-near-lower.png",
+    "matrix": [
+      [
+        0.1137250023015237,
+        -0.02483016896632689,
+        324.56650035432756
+      ],
+      [
+        0.02483016896632689,
+        0.1137250023015237,
+        277.7019699377006
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ]
+  },
+  {
+    "part": "hind-near-foot",
+    "source": "Source/paws-atlas.png",
+    "mask": "Source/Masks/hind-near-foot.png",
+    "matrix": [
+      [
+        0.08426966292134831,
+        0,
+        252.4438202247191
+      ],
+      [
+        0,
+        0.08426966292134831,
+        379.85393258426967
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ]
+  },
+  {
+    "part": "hind-far-upper",
+    "source": "Source/joints-atlas.png",
+    "mask": "Source/Masks/hind-far-upper.png",
+    "matrix": [
+      [
+        0.10912009556874605,
+        -0.039459439280247866,
+        323.87288610146715
+      ],
+      [
+        0.039459439280247866,
+        0.10912009556874605,
+        222.90465524321496
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ]
+  },
+  {
+    "part": "hind-far-lower",
+    "source": "Source/joints-atlas.png",
+    "mask": "Source/Masks/hind-far-lower.png",
+    "matrix": [
+      [
+        0.09215864022662879,
+        -0.040662889518413584,
+        298.92162039660064
+      ],
+      [
+        0.040662889518413584,
+        0.09215864022662879,
+        251.9180566572239
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ]
+  },
+  {
+    "part": "hind-far-foot",
+    "source": "Source/paws-atlas.png",
+    "mask": "Source/Masks/hind-far-foot.png",
+    "matrix": [
+      [
+        0.07941176470588235,
+        0,
+        143.6529411764706
+      ],
+      [
+        0,
+        0.07941176470588235,
+        375.84999999999997
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ]
+  }
+]

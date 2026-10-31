@@ -1,0 +1,173 @@
+{
+  "name": "shadow-weasel",
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ],
+  "approvedImage": "DesignAssets/CreatureConcepts/v3/shadow-weasel.png",
+  "bodyMass": 1,
+  "headMass": 0.28,
+  "gravity": 1050,
+  "neckPivot": [
+    211,
+    347
+  ],
+  "bodyAngleLimit": -13,
+  "headAngleLimit": [
+    -35,
+    18
+  ],
+  "neutralHoldMs": 100,
+  "foreFailureMs": [
+    120,
+    250
+  ],
+  "hindFailureMs": [
+    240,
+    370
+  ],
+  "headFailureMs": [
+    170,
+    300
+  ],
+  "groundY": 409,
+  "groundSlope": -0.07,
+  "groundX": 221,
+  "bodyMassCenter": [
+    278,
+    326
+  ],
+  "headMassCenter": [
+    148,
+    345
+  ],
+  "legs": {
+    "fore-near": [
+      [
+        221,
+        343
+      ],
+      [
+        235,
+        372
+      ],
+      [
+        217,
+        404
+      ]
+    ],
+    "fore-far": [
+      [
+        170,
+        364
+      ],
+      [
+        162,
+        381
+      ],
+      [
+        146,
+        398
+      ]
+    ],
+    "hind-near": [
+      [
+        347,
+        330
+      ],
+      [
+        361,
+        359
+      ],
+      [
+        355,
+        386
+      ]
+    ],
+    "hind-far": [
+      [
+        302,
+        353
+      ],
+      [
+        303,
+        366
+      ],
+      [
+        286,
+        379
+      ]
+    ]
+  },
+  "accessories": {},
+  "extraParts": {
+    "tail": {
+      "pivot": [
+        356,
+        324
+      ],
+      "parent": "body",
+      "mass": 0.1,
+      "groundOffset": 4.6200000000000045
+    }
+  },
+  "durationActiveMs": 2400,
+  "sampleMs": 40,
+  "finalHoldMs": 1000,
+  "softChains": {
+    "tail": {
+      "joints": [
+        [
+          356,
+          324
+        ],
+        [
+          378,
+          331
+        ],
+        [
+          402,
+          346
+        ],
+        [
+          415,
+          366
+        ],
+        [
+          406,
+          387
+        ],
+        [
+          384,
+          399
+        ],
+        [
+          363,
+          402
+        ]
+      ],
+      "radii": [
+        0,
+        13,
+        18,
+        17,
+        10,
+        4,
+        0
+      ],
+      "locked": 1,
+      "bendElasticity": 0.0006,
+      "groundOffset": 4.6200000000000045
+    }
+  },
+  "jointParts": {},
+  "limbSurfaceContact": false,
+  "foregroundLimbs": [
+    "fore-near",
+    "hind-near"
+  ],
+  "foregroundExtraParts": [
+    "tail"
+  ]
+}

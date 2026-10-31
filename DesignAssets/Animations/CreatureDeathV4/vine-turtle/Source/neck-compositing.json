@@ -1,0 +1,40 @@
+{
+  "source": "Source/head-eye-input-v4.png", 
+  "crop": [
+    209, 
+    328, 
+    235, 
+    384
+  ], 
+  "placements": [
+    [
+      202, 
+      328
+    ], 
+    [
+      219, 
+      328
+    ], 
+    [
+      236, 
+      328
+    ], 
+    [
+      253, 
+      329
+    ], 
+    [
+      270, 
+      328
+    ], 
+    [
+      287, 
+      324
+    ], 
+    [
+      304, 
+      319
+    ]
+  ], 
+  "role": "complete hidden cervical connector beneath rigid carapace"
+}

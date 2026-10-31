@@ -1,0 +1,128 @@
+[
+  {
+    "name": "shell", 
+    "image": "Parts/shell.png", 
+    "foreground": "Parts/shell-front.png", 
+    "source": "Source/shell-completed-source.png", 
+    "sourceBounds": [
+      191, 
+      94, 
+      433, 
+      408
+    ], 
+    "kind": "rigid", 
+    "completedHiddenSurfaces": true, 
+    "active": true, 
+    "registeredAlphaBounds": [
+      191, 
+      94, 
+      433, 
+      408
+    ]
+  }, 
+  {
+    "name": "mantle", 
+    "image": "Parts/mantle.png", 
+    "foreground": "Parts/mantle-front.png", 
+    "source": "Source/continuous-soft-body.png", 
+    "sourceBounds": [
+      106, 
+      310, 
+      441, 
+      427
+    ], 
+    "kind": "continuous soft mesh", 
+    "completedHiddenSurfaces": true, 
+    "active": true, 
+    "registeredAlphaBounds": [
+      87, 
+      277, 
+      454, 
+      450
+    ]
+  }, 
+  {
+    "name": "head", 
+    "image": "Parts/head.png", 
+    "foreground": "Parts/head-front.png", 
+    "source": "Source/head-completed-source.png", 
+    "sourceBounds": [
+      87, 
+      277, 
+      237, 
+      405
+    ], 
+    "kind": "rigid", 
+    "completedHiddenSurfaces": true, 
+    "active": false, 
+    "registeredAlphaBounds": [
+      87, 
+      277, 
+      237, 
+      405
+    ]
+  }, 
+  {
+    "name": "near-eye", 
+    "image": "Parts/near-eye.png", 
+    "foreground": "Parts/near-eye-front.png", 
+    "source": "Source/near-eye-completed-source.png", 
+    "sourceBounds": [
+      135, 
+      223, 
+      203, 
+      338
+    ], 
+    "kind": "articulated", 
+    "completedHiddenSurfaces": true, 
+    "active": true, 
+    "registeredAlphaBounds": [
+      135, 
+      217, 
+      203, 
+      341
+    ]
+  }, 
+  {
+    "name": "far-eye", 
+    "image": "Parts/far-eye.png", 
+    "foreground": "Parts/far-eye-front.png", 
+    "source": "Source/far-eye-completed-source.png", 
+    "sourceBounds": [
+      67, 
+      217, 
+      146, 
+      327
+    ], 
+    "kind": "articulated", 
+    "completedHiddenSurfaces": true, 
+    "active": true, 
+    "registeredAlphaBounds": [
+      67, 
+      211, 
+      146, 
+      333
+    ]
+  }, 
+  {
+    "name": "lip", 
+    "image": "Parts/lip.png", 
+    "foreground": "Parts/lip-front.png", 
+    "source": "Source/lip-completed-source.png", 
+    "sourceBounds": [
+      197, 
+      303, 
+      274, 
+      407
+    ], 
+    "kind": "rigid", 
+    "completedHiddenSurfaces": true, 
+    "active": false, 
+    "registeredAlphaBounds": [
+      197, 
+      303, 
+      274, 
+      407
+    ]
+  }
+]

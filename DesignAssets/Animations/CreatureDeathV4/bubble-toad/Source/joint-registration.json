@@ -1,0 +1,146 @@
+{
+  "fore-upper": {
+    "source": "Source/CompleteParts/fore-upper.png",
+    "matrix": [
+      [
+        0.1977871358263847,
+        -0.004163322735899295,
+        264.524695888208
+      ],
+      [
+        0.062078909587110244,
+        0.21847450504269855,
+        294.2306839610811
+      ]
+    ],
+    "bindRoot": [
+      312,
+      361
+    ],
+    "bindTip": [
+      328,
+      388
+    ],
+    "registration": "One-time anatomical source registration. All frame transforms after registration are rigid, scale1."
+  },
+  "fore-lower": {
+    "source": "Source/CompleteParts/fore-lower.png",
+    "matrix": [
+      [
+        0.18060759509956884,
+        -0.05319465759968608,
+        299.125373030339
+      ],
+      [
+        0.08288758478672868,
+        0.14919573419281987,
+        346.970952478296
+      ]
+    ],
+    "bindRoot": [
+      328,
+      388
+    ],
+    "bindTip": [
+      306,
+      422
+    ],
+    "registration": "One-time anatomical source registration. All frame transforms after registration are rigid, scale1."
+  },
+  "fore-paw-drawing": {
+    "source": "Source/CompleteParts/fore-paw-drawing.png",
+    "matrix": [
+      [
+        0.1571327572436047,
+        0.02177611938142448,
+        235.21349569377264
+      ],
+      [
+        0.05717628094555948,
+        0.1618174668982815,
+        362.38611928524307
+      ]
+    ],
+    "bindRoot": [
+      306,
+      422
+    ],
+    "bindTip": [
+      280.5,
+      443.5
+    ],
+    "registration": "One-time anatomical source registration. All frame transforms after registration are rigid, scale1."
+  },
+  "hind-thigh": {
+    "source": "Source/CompleteParts/hind-thigh.png",
+    "matrix": [
+      [
+        0.2752128716166205,
+        -0.048814435617576854,
+        328.9378899699894
+      ],
+      [
+        0.031074929361959144,
+        0.2936320599678524,
+        295.7956295522053
+      ]
+    ],
+    "bindRoot": [
+      377,
+      344
+    ],
+    "bindTip": [
+      453,
+      381
+    ],
+    "registration": "One-time anatomical source registration. All frame transforms after registration are rigid, scale1."
+  },
+  "hind-shin": {
+    "source": "Source/CompleteParts/hind-shin.png",
+    "matrix": [
+      [
+        0.05463530020105973,
+        -0.1707696517325873,
+        468.99936021566737
+      ],
+      [
+        0.14186310106787955,
+        0.0864728823868656,
+        347.2995224398153
+      ]
+    ],
+    "bindRoot": [
+      453,
+      381
+    ],
+    "bindTip": [
+      420,
+      405
+    ],
+    "registration": "One-time anatomical source registration. All frame transforms after registration are rigid, scale1."
+  },
+  "hind-paw-drawing": {
+    "source": "Source/CompleteParts/hind-paw-drawing.png",
+    "matrix": [
+      [
+        0.15984455882801227,
+        -0.08010732842827722,
+        369.52020764474565
+      ],
+      [
+        0.03877986056867125,
+        0.16010990372598727,
+        362.58959194656563
+      ]
+    ],
+    "bindRoot": [
+      420,
+      405
+    ],
+    "bindTip": [
+      380,
+      433
+    ],
+    "registration": "One-time anatomical source registration. All frame transforms after registration are rigid, scale1."
+  }
+}

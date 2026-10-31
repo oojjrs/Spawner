@@ -1,0 +1,128 @@
+[
+  {
+    "name": "body", 
+    "image": "Parts/body.png", 
+    "foreground": "Parts/body-front.png", 
+    "source": "Source/body-completed-source.png", 
+    "sourceBounds": [
+      188, 
+      112, 
+      454, 
+      345
+    ], 
+    "kind": "rigid", 
+    "completedHiddenSurfaces": true, 
+    "active": true, 
+    "registeredAlphaBounds": [
+      188, 
+      112, 
+      454, 
+      345
+    ]
+  }, 
+  {
+    "name": "head", 
+    "image": "Parts/head.png", 
+    "foreground": "Parts/head-front.png", 
+    "source": "Source/head-completed-source.png", 
+    "sourceBounds": [
+      88, 
+      124, 
+      310, 
+      335
+    ], 
+    "kind": "rigid", 
+    "completedHiddenSurfaces": true, 
+    "active": true, 
+    "registeredAlphaBounds": [
+      87, 
+      119, 
+      342, 
+      351
+    ]
+  }, 
+  {
+    "name": "near-paw", 
+    "image": "Parts/near-paw.png", 
+    "foreground": "Parts/near-paw-front.png", 
+    "source": "Source/near-paw-completed-source.png", 
+    "sourceBounds": [
+      216, 
+      261, 
+      357, 
+      398
+    ], 
+    "kind": "articulated", 
+    "completedHiddenSurfaces": true, 
+    "active": true, 
+    "registeredAlphaBounds": [
+      216, 
+      261, 
+      357, 
+      398
+    ]
+  }, 
+  {
+    "name": "far-paw", 
+    "image": "Parts/far-paw.png", 
+    "foreground": "Parts/far-paw-front.png", 
+    "source": "Source/far-paw-completed-source.png", 
+    "sourceBounds": [
+      58, 
+      279, 
+      190, 
+      374
+    ], 
+    "kind": "articulated", 
+    "completedHiddenSurfaces": true, 
+    "active": true, 
+    "registeredAlphaBounds": [
+      58, 
+      279, 
+      190, 
+      374
+    ]
+  }, 
+  {
+    "name": "near-hind", 
+    "image": "Parts/near-hind.png", 
+    "foreground": "Parts/near-hind-front.png", 
+    "source": "Source/near-hind-completed-source.png", 
+    "sourceBounds": [
+      393, 
+      270, 
+      476, 
+      370
+    ], 
+    "kind": "articulated", 
+    "completedHiddenSurfaces": true, 
+    "active": true, 
+    "registeredAlphaBounds": [
+      403, 
+      287, 
+      462, 
+      347
+    ]
+  }, 
+  {
+    "name": "far-hind", 
+    "image": "Parts/far-hind.png", 
+    "foreground": "Parts/far-hind-front.png", 
+    "source": "Source/far-hind-completed-source.png", 
+    "sourceBounds": [
+      393, 
+      218, 
+      476, 
+      306
+    ], 
+    "kind": "articulated", 
+    "completedHiddenSurfaces": true, 
+    "active": true, 
+    "registeredAlphaBounds": [
+      405, 
+      239, 
+      459, 
+      288
+    ]
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "source": "torso-complete-drawing.png",
+  "sourceAlphaCrop": true,
+  "placement": [
+    112,
+    238,
+    420,
+    428
+  ],
+  "mask": "shoulder-tissue-mask.png",
+  "boundaryReference": "reference.png",
+  "method": "local-gradient-domain",
+  "alphaPreserved": true,
+  "center": [
+    297,
+    372
+  ],
+  "maskUpperRootExtendedThroughOriginalForearmContour": true
+}

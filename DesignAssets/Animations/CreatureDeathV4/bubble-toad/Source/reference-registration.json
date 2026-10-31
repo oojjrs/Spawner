@@ -1,0 +1,26 @@
+{
+  "source": "Source/approved-concept.png",
+  "bounds": [
+    51,
+    56,
+    315,
+    242
+  ],
+  "scale": 1.6666666666666667,
+  "size": [
+    440,
+    310
+  ],
+  "translation": [
+    36,
+    138
+  ],
+  "canvas": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ]
+}

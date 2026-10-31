@@ -1,0 +1,1122 @@
+{
+  "bodyPivot": [
+    291,
+    332
+  ],
+  "bodyAngle": 2,
+  "bodyDrop": 32,
+  "bodyCore": [
+    [
+      151,
+      316
+    ],
+    [
+      254,
+      255
+    ],
+    [
+      321,
+      260
+    ],
+    [
+      371,
+      300
+    ],
+    [
+      373,
+      363
+    ],
+    [
+      327,
+      388
+    ],
+    [
+      220,
+      383
+    ],
+    [
+      158,
+      361
+    ]
+  ],
+  "bodyAtlas": 0,
+  "bodyBox": [
+    158,
+    253,
+    383,
+    391
+  ],
+  "parts": [
+    {
+      "name": "fore-upper",
+      "atlas": 2,
+      "polygon": [
+        [
+          170,
+          342
+        ],
+        [
+          204,
+          332
+        ],
+        [
+          225,
+          359
+        ],
+        [
+          215,
+          387
+        ],
+        [
+          179,
+          390
+        ],
+        [
+          162,
+          369
+        ]
+      ],
+      "pivot": [
+        195,
+        350
+      ],
+      "parent": "ik",
+      "angle": 0,
+      "translation": [
+        0,
+        0
+      ],
+      "delayMs": 200,
+      "rootRadius": 18,
+      "rigid": true,
+      "scale": [
+        1,
+        1
+      ],
+      "image": "Parts/fore-upper.png",
+      "completionDrawing": "Source/AtlasParts/2.png",
+      "visibleSource": "Source/CleanAttachments/fore-upper.png",
+      "bindVisibleBbox": [
+        195,
+        333,
+        244,
+        395
+      ],
+      "bodyOcclusion": "Parts/body-foreground.png",
+      "attachmentType": "region",
+      "hiddenImage": "Parts/fore-upper-hidden.png",
+      "atlasJointLandmarks": [
+        [
+          0.62,
+          0.15
+        ],
+        [
+          0.37,
+          0.9
+        ]
+      ],
+      "jointLandmarks": [
+        [
+          195,
+          350
+        ],
+        [
+          183,
+          388
+        ]
+      ],
+      "completionRegistration": {
+        "part": "fore-upper",
+        "sourceJointPixels": [
+          [
+            189.5,
+            348.36
+          ],
+          [
+            189.5,
+            388.64
+          ]
+        ],
+        "bindJointPixels": [
+          [
+            195.0,
+            350.0
+          ],
+          [
+            183.0,
+            388.0
+          ]
+        ],
+        "sourceToBind": [
+          [
+            0.9433962264150949,
+            -0.29791459781529317,
+            120.00794438927505
+          ],
+          [
+            0.29791459781529317,
+            0.9433962264150949,
+            -35.09632571996053
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "runtimeScale": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "fore-lower",
+      "atlas": 3,
+      "polygon": [
+        [
+          161,
+          380
+        ],
+        [
+          201,
+          374
+        ],
+        [
+          215,
+          398
+        ],
+        [
+          196,
+          430
+        ],
+        [
+          143,
+          433
+        ],
+        [
+          137,
+          413
+        ]
+      ],
+      "pivot": [
+        184,
+        388
+      ],
+      "parent": "ik",
+      "angle": 0,
+      "translation": [
+        0,
+        0
+      ],
+      "delayMs": 200,
+      "rootRadius": 17,
+      "rigid": true,
+      "scale": [
+        1,
+        1
+      ],
+      "image": "Parts/fore-lower.png",
+      "completionDrawing": "Source/AtlasParts/3.png",
+      "visibleSource": "Source/CleanAttachments/fore-lower.png",
+      "bindVisibleBbox": [
+        128,
+        374,
+        240,
+        437
+      ],
+      "bodyOcclusion": "Parts/body-foreground.png",
+      "attachmentType": "region",
+      "hiddenImage": "Parts/fore-lower-hidden.png",
+      "atlasJointLandmarks": [
+        [
+          0.55,
+          0.1
+        ],
+        [
+          0.3,
+          0.91
+        ]
+      ],
+      "jointLandmarks": [
+        [
+          183,
+          388
+        ],
+        [
+          165,
+          426
+        ]
+      ],
+      "completionRegistration": {
+        "part": "fore-lower",
+        "sourceJointPixels": [
+          [
+            191.7,
+            390.14
+          ],
+          [
+            174.54,
+            423.8
+          ]
+        ],
+        "bindJointPixels": [
+          [
+            183.0,
+            388.0
+          ],
+          [
+            165.0,
+            426.0
+          ]
+        ],
+        "sourceToBind": [
+          [
+            1.1124365411823447,
+            0.03236515290222915,
+            -42.881025697931136
+          ],
+          [
+            -0.03236515290222915,
+            1.1124365411823447,
+            -39.801592365522595
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "runtimeScale": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "hind-upper",
+      "atlas": 4,
+      "polygon": [
+        [
+          305,
+          318
+        ],
+        [
+          352,
+          321
+        ],
+        [
+          375,
+          351
+        ],
+        [
+          360,
+          387
+        ],
+        [
+          326,
+          392
+        ],
+        [
+          307,
+          367
+        ]
+      ],
+      "pivot": [
+        340,
+        330
+      ],
+      "parent": "ik",
+      "angle": 0,
+      "translation": [
+        0,
+        0
+      ],
+      "delayMs": 280,
+      "rootRadius": 23,
+      "rigid": true,
+      "scale": [
+        1,
+        1
+      ],
+      "image": "Parts/hind-upper.png",
+      "completionDrawing": "Source/AtlasParts/4.png",
+      "visibleSource": "Source/CleanAttachments/hind-upper.png",
+      "bindVisibleBbox": [
+        254,
+        251,
+        380,
+        379
+      ],
+      "bodyOcclusion": "Parts/body-foreground.png",
+      "attachmentType": "region",
+      "hiddenImage": "Parts/hind-upper-hidden.png",
+      "atlasJointLandmarks": [
+        [
+          0.18,
+          0.35
+        ],
+        [
+          0.8,
+          0.82
+        ]
+      ],
+      "jointLandmarks": [
+        [
+          340,
+          330
+        ],
+        [
+          356,
+          386
+        ]
+      ],
+      "completionRegistration": {
+        "part": "hind-upper",
+        "sourceJointPixels": [
+          [
+            349.4,
+            328.75
+          ],
+          [
+            364.31,
+            390.8
+          ]
+        ],
+        "bindJointPixels": [
+          [
+            340.0,
+            330.0
+          ],
+          [
+            356.0,
+            386.0
+          ]
+        ],
+        "sourceToBind": [
+          [
+            0.9118110091598041,
+            0.03875741907215624,
+            8.671731879593096
+          ],
+          [
+            -0.03875741907215624,
+            0.9118110091598041,
+            43.78397296252581
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "runtimeScale": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "hind-lower",
+      "atlas": 5,
+      "polygon": [
+        [
+          331,
+          376
+        ],
+        [
+          370,
+          366
+        ],
+        [
+          392,
+          393
+        ],
+        [
+          374,
+          422
+        ],
+        [
+          330,
+          422
+        ]
+      ],
+      "pivot": [
+        356,
+        386
+      ],
+      "parent": "ik",
+      "angle": 0,
+      "translation": [
+        0,
+        0
+      ],
+      "delayMs": 280,
+      "rootRadius": 17,
+      "rigid": true,
+      "scale": [
+        1,
+        1
+      ],
+      "image": "Parts/hind-lower.png",
+      "completionDrawing": "Source/AtlasParts/5.png",
+      "visibleSource": "Source/CleanAttachments/hind-lower.png",
+      "bindVisibleBbox": [
+        331,
+        364,
+        403,
+        420
+      ],
+      "bodyOcclusion": "Parts/body-foreground.png",
+      "attachmentType": "region",
+      "hiddenImage": "Parts/hind-lower-hidden.png",
+      "atlasJointLandmarks": [
+        [
+          0.28,
+          0.17
+        ],
+        [
+          0.55,
+          0.92
+        ]
+      ],
+      "jointLandmarks": [
+        [
+          356,
+          386
+        ],
+        [
+          354,
+          414
+        ]
+      ],
+      "completionRegistration": {
+        "part": "hind-lower",
+        "sourceJointPixels": [
+          [
+            350.01,
+            386.7
+          ],
+          [
+            373.95,
+            412.54
+          ]
+        ],
+        "bindJointPixels": [
+          [
+            356.0,
+            386.0
+          ],
+          [
+            354.0,
+            414.0
+          ]
+        ],
+        "sourceToBind": [
+          [
+            0.5445068507414236,
+            -0.5818689631095071,
+            390.42588520644074
+          ],
+          [
+            0.5818689631095071,
+            0.5445068507414236,
+            -28.220754959667033
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "runtimeScale": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "fore-far",
+      "atlas": 7,
+      "polygon": [
+        [
+          98,
+          389
+        ],
+        [
+          142,
+          378
+        ],
+        [
+          160,
+          395
+        ],
+        [
+          141,
+          418
+        ],
+        [
+          99,
+          420
+        ],
+        [
+          85,
+          408
+        ]
+      ],
+      "pivot": [
+        143,
+        365
+      ],
+      "parent": "body",
+      "angle": 64,
+      "translation": [
+        0,
+        0
+      ],
+      "delayMs": 250,
+      "rootRadius": 18,
+      "rigid": true,
+      "scale": [
+        1,
+        1
+      ],
+      "image": "Parts/fore-far.png",
+      "completionDrawing": "Source/AtlasParts/7.png",
+      "visibleSource": "Source/CleanAttachments/fore-far.png",
+      "bindVisibleBbox": [
+        76,
+        391,
+        161,
+        434
+      ],
+      "bodyOcclusion": "Parts/body-foreground.png",
+      "attachmentType": "region",
+      "hiddenImage": "Parts/fore-far-hidden.png",
+      "atlasJointLandmarks": [
+        [
+          0.58,
+          0.12
+        ],
+        [
+          0.3,
+          0.92
+        ]
+      ],
+      "jointLandmarks": [
+        [
+          143,
+          365
+        ],
+        [
+          116,
+          411
+        ]
+      ],
+      "completionRegistration": {
+        "part": "fore-far",
+        "sourceJointPixels": [
+          [
+            136.22,
+            357.0
+          ],
+          [
+            128.55,
+            408.1
+          ]
+        ],
+        "bindJointPixels": [
+          [
+            143.0,
+            365.0
+          ],
+          [
+            116.0,
+            411.0
+          ]
+        ],
+        "sourceToBind": [
+          [
+            0.9579223733407025,
+            -0.3845936476805638,
+            149.81174652549078
+          ],
+          [
+            0.3845936476805638,
+            0.9579223733407025,
+            -29.367633969677172
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "runtimeScale": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "hind-far",
+      "atlas": 8,
+      "polygon": [
+        [
+          267,
+          351
+        ],
+        [
+          311,
+          349
+        ],
+        [
+          324,
+          377
+        ],
+        [
+          307,
+          408
+        ],
+        [
+          264,
+          410
+        ]
+      ],
+      "pivot": [
+        301,
+        356
+      ],
+      "parent": "body",
+      "angle": 67,
+      "translation": [
+        0,
+        0
+      ],
+      "delayMs": 350,
+      "rootRadius": 18,
+      "rigid": true,
+      "scale": [
+        1,
+        1
+      ],
+      "image": "Parts/hind-far.png",
+      "completionDrawing": "Source/AtlasParts/8.png",
+      "visibleSource": "Source/CleanAttachments/hind-far.png",
+      "bindVisibleBbox": [
+        237,
+        349,
+        325,
+        430
+      ],
+      "bodyOcclusion": "Parts/body-foreground.png",
+      "attachmentType": "region",
+      "hiddenImage": "Parts/hind-far-hidden.png",
+      "atlasJointLandmarks": [
+        [
+          0.25,
+          0.18
+        ],
+        [
+          0.65,
+          0.93
+        ]
+      ],
+      "jointLandmarks": [
+        [
+          301,
+          356
+        ],
+        [
+          284,
+          400
+        ]
+      ],
+      "completionRegistration": {
+        "part": "hind-far",
+        "sourceJointPixels": [
+          [
+            289.36,
+            354.2
+          ],
+          [
+            313.45,
+            402.48
+          ]
+        ],
+        "bindJointPixels": [
+          [
+            301.0,
+            356.0
+          ],
+          [
+            284.0,
+            400.0
+          ]
+        ],
+        "sourceToBind": [
+          [
+            0.5890145129996655,
+            -0.6460099340961456,
+            359.37947917527157
+          ],
+          [
+            0.6460099340961456,
+            0.5890145129996655,
+            -39.55837503454222
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "runtimeScale": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "tail",
+      "atlas": 6,
+      "polygon": [
+        [
+          348,
+          285
+        ],
+        [
+          402,
+          306
+        ],
+        [
+          442,
+          340
+        ],
+        [
+          475,
+          377
+        ],
+        [
+          473,
+          416
+        ],
+        [
+          443,
+          444
+        ],
+        [
+          394,
+          444
+        ],
+        [
+          375,
+          421
+        ],
+        [
+          418,
+          390
+        ],
+        [
+          406,
+          362
+        ],
+        [
+          366,
+          351
+        ]
+      ],
+      "pivot": [
+        369,
+        331
+      ],
+      "parent": "body",
+      "angle": -35,
+      "translation": [
+        0,
+        -12
+      ],
+      "delayMs": 550,
+      "rootRadius": 25,
+      "rigid": true,
+      "scale": [
+        1,
+        1
+      ],
+      "image": "Parts/tail.png",
+      "completionDrawing": "Source/AtlasParts/6.png",
+      "visibleSource": "Source/CleanAttachments/tail.png",
+      "bindVisibleBbox": [
+        285,
+        251,
+        473,
+        431
+      ],
+      "bodyOcclusion": "Parts/body-foreground.png",
+      "attachmentType": "region",
+      "hiddenImage": "Parts/tail-hidden.png"
+    },
+    {
+      "name": "head",
+      "atlas": 1,
+      "polygon": [
+        [
+          28,
+          307
+        ],
+        [
+          67,
+          282
+        ],
+        [
+          149,
+          281
+        ],
+        [
+          198,
+          314
+        ],
+        [
+          211,
+          356
+        ],
+        [
+          179,
+          389
+        ],
+        [
+          82,
+          393
+        ],
+        [
+          31,
+          368
+        ]
+      ],
+      "pivot": [
+        191,
+        345
+      ],
+      "parent": "body",
+      "angle": -9,
+      "translation": [
+        0,
+        -2
+      ],
+      "delayMs": 100,
+      "rootRadius": 29,
+      "rigid": true,
+      "scale": [
+        1,
+        1
+      ],
+      "image": "Parts/head.png",
+      "completionDrawing": "Source/AtlasParts/1.png",
+      "visibleSource": "Source/CleanAttachments/head.png",
+      "bindVisibleBbox": [
+        42,
+        258,
+        255,
+        403
+      ],
+      "bodyOcclusion": "Parts/body-foreground.png",
+      "attachmentType": "region",
+      "closedImage": "Parts/head-closed.png",
+      "hiddenImage": "Parts/head-hidden.png",
+      "closedVisibleSource": "Source/CleanAttachments/head-closed.png"
+    }
+  ],
+  "ik": [
+    {
+      "upper": "fore-upper",
+      "lower": "fore-lower",
+      "shoulder": [
+        195,
+        350
+      ],
+      "knee": [
+        183,
+        388
+      ],
+      "foot": [
+        165,
+        426
+      ],
+      "slide": [
+        -5,
+        0
+      ]
+    },
+    {
+      "upper": "hind-upper",
+      "lower": "hind-lower",
+      "shoulder": [
+        340,
+        330
+      ],
+      "knee": [
+        356,
+        386
+      ],
+      "foot": [
+        354,
+        414
+      ],
+      "slide": [
+        8,
+        0
+      ]
+    }
+  ],
+  "order": [
+    "tail",
+    "fore-far",
+    "hind-far",
+    "fore-lower",
+    "fore-upper",
+    "hind-lower",
+    "hind-upper",
+    "body",
+    "head"
+  ],
+  "name": "shadow-weasel",
+  "frameSize": 512,
+  "columns": 6,
+  "pivotX": 256,
+  "pivotY": 448,
+  "sourceImage": "DesignAssets/CreatureConcepts/v3/shadow-weasel.png",
+  "sourceAnimation": "DesignAssets/Animations/CreatureIdleStudies/V2/shadow-weasel/idle.webp",
+  "timesMs": [
+    0,
+    50,
+    100,
+    150,
+    200,
+    250,
+    300,
+    350,
+    400,
+    450,
+    500,
+    550,
+    600,
+    650,
+    700,
+    750,
+    800,
+    850,
+    900,
+    950,
+    1000,
+    1050,
+    1100,
+    1150,
+    1200,
+    1250,
+    1300,
+    1350,
+    1400,
+    1450,
+    1500,
+    1550,
+    1600,
+    1650,
+    1700,
+    1750,
+    1800,
+    2000
+  ],
+  "durationsMs": [
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    200,
+    900
+  ],
+  "method": "Complete torso/head/tail and anatomical leg attachments. Source landmarks are registered once to shoulder/knee/ankle bind joints; constant rigid segment lengths, foot-contact IK, muzzle drop and tail follow-through.",
+  "bodyImage": "Source/CleanAttachments/body.png",
+  "bodyForeground": "Source/CleanAttachments/body.png",
+  "sourcePartition": "Source/owner-labels.png",
+  "sourcePixelCount": 48928,
+  "partsPrepared": true,
+  "bodyAllowed": [
+    [
+      149,
+      315
+    ],
+    [
+      232,
+      271
+    ],
+    [
+      278,
+      250
+    ],
+    [
+      326,
+      261
+    ],
+    [
+      365,
+      290
+    ],
+    [
+      377,
+      346
+    ],
+    [
+      351,
+      376
+    ],
+    [
+      289,
+      381
+    ],
+    [
+      225,
+      371
+    ],
+    [
+      174,
+      350
+    ]
+  ],
+  "rootOccluders": [],
+  "continuousLimbs": [],
+  "cleanCompleteSources": true,
+  "completeNaturalRootSource": "Source/complete-parts-natural-roots.png",
+  "groundY": 432
+}

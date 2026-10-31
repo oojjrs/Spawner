@@ -1,0 +1,13 @@
+{
+  "originalInteriorChinPixelsReassignedToBelly": 947, 
+  "sourceRange": [
+    150, 
+    315, 
+    240, 
+    355
+  ], 
+  "frontExteriorOriginalFurPreserved": true, 
+  "completeJawDrawing": "Drawings/rounded-hidden-jaw.png", 
+  "neckUpperSurfaceUnchanged": true, 
+  "lowerHeadPaintFrontOfBelly": true
+}

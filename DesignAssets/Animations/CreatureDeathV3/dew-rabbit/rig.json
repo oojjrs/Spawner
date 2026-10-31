@@ -1,0 +1,311 @@
+{
+  "name": "dew-rabbit", 
+  "configuration": {
+    "bodyPivot": [
+      355, 
+      350
+    ], 
+    "headPivot": [
+      284, 
+      304
+    ], 
+    "legs": {
+      "foreleg-far": [
+        [
+          179, 
+          332
+        ], 
+        [
+          183, 
+          372
+        ], 
+        [
+          180, 
+          410
+        ]
+      ], 
+      "hindleg": [
+        [
+          337, 
+          332
+        ], 
+        [
+          356, 
+          378
+        ], 
+        [
+          328, 
+          418
+        ]
+      ], 
+      "foreleg": [
+        [
+          231, 
+          340
+        ], 
+        [
+          235, 
+          380
+        ], 
+        [
+          232, 
+          418
+        ]
+      ]
+    }, 
+    "ears": {
+      "far-ear": [
+        [
+          218, 
+          207
+        ], 
+        [
+          189, 
+          165
+        ], 
+        [
+          153, 
+          140
+        ]
+      ], 
+      "near-ear": [
+        [
+          287, 
+          224
+        ], 
+        [
+          308, 
+          163
+        ], 
+        [
+          337, 
+          108
+        ]
+      ]
+    }
+  }, 
+  "method": "Complete separate source parts, rear-supported body collapse, anatomical limb IK and delayed head/ear contact phases.", 
+  "controls": "motion.json", 
+  "timeline": "landmarks.json", 
+  "renderer": "render.py", 
+  "canvas": [
+    512, 
+    512
+  ], 
+  "spineCompatibilityVerified": false, 
+  "bones": [
+    {
+      "name": "body", 
+      "parent": "root", 
+      "pivot": [
+        355, 
+        350
+      ]
+    }, 
+    {
+      "name": "head", 
+      "parent": "body", 
+      "pivot": [
+        284, 
+        304
+      ]
+    }, 
+    {
+      "name": "foreleg-far-upper", 
+      "parent": "body", 
+      "pivot": [
+        179, 
+        332
+      ], 
+      "end": [
+        183, 
+        372
+      ]
+    }, 
+    {
+      "name": "foreleg-far-lower", 
+      "parent": "foreleg-far-upper", 
+      "pivot": [
+        183, 
+        372
+      ], 
+      "end": [
+        180, 
+        410
+      ]
+    }, 
+    {
+      "name": "foreleg-far-target", 
+      "parent": "root", 
+      "pivot": [
+        180, 
+        410
+      ]
+    }, 
+    {
+      "name": "hindleg-upper", 
+      "parent": "body", 
+      "pivot": [
+        337, 
+        332
+      ], 
+      "end": [
+        356, 
+        378
+      ]
+    }, 
+    {
+      "name": "hindleg-lower", 
+      "parent": "hindleg-upper", 
+      "pivot": [
+        356, 
+        378
+      ], 
+      "end": [
+        328, 
+        418
+      ]
+    }, 
+    {
+      "name": "hindleg-target", 
+      "parent": "root", 
+      "pivot": [
+        328, 
+        418
+      ]
+    }, 
+    {
+      "name": "foreleg-upper", 
+      "parent": "body", 
+      "pivot": [
+        231, 
+        340
+      ], 
+      "end": [
+        235, 
+        380
+      ]
+    }, 
+    {
+      "name": "foreleg-lower", 
+      "parent": "foreleg-upper", 
+      "pivot": [
+        235, 
+        380
+      ], 
+      "end": [
+        232, 
+        418
+      ]
+    }, 
+    {
+      "name": "foreleg-target", 
+      "parent": "root", 
+      "pivot": [
+        232, 
+        418
+      ]
+    }, 
+    {
+      "name": "far-ear-base", 
+      "parent": "head", 
+      "pivot": [
+        218, 
+        207
+      ], 
+      "end": [
+        189, 
+        165
+      ]
+    }, 
+    {
+      "name": "far-ear-mid", 
+      "parent": "far-ear-base", 
+      "pivot": [
+        189, 
+        165
+      ], 
+      "end": [
+        153, 
+        140
+      ]
+    }, 
+    {
+      "name": "far-ear-tip", 
+      "parent": "far-ear-mid", 
+      "pivot": [
+        153, 
+        140
+      ]
+    }, 
+    {
+      "name": "near-ear-base", 
+      "parent": "head", 
+      "pivot": [
+        287, 
+        224
+      ], 
+      "end": [
+        308, 
+        163
+      ]
+    }, 
+    {
+      "name": "near-ear-mid", 
+      "parent": "near-ear-base", 
+      "pivot": [
+        308, 
+        163
+      ], 
+      "end": [
+        337, 
+        108
+      ]
+    }, 
+    {
+      "name": "near-ear-tip", 
+      "parent": "near-ear-mid", 
+      "pivot": [
+        337, 
+        108
+      ]
+    }
+  ], 
+  "activeParts": [
+    "body", 
+    "head", 
+    "head-closed", 
+    "foreleg-far", 
+    "hindleg", 
+    "foreleg", 
+    "far-ear", 
+    "near-ear"
+  ], 
+  "sourceHashes": {
+    "body": "296b94aaaa6a07a145528e74651c049861d55069aeff9e3a033cffee443458d1", 
+    "head": "64a7d4ed46a12ed74051023a9067e6568ef5c295c48a23194cb9cc3931fef966", 
+    "head-closed": "a97fc8acda38af2522d3e51d14d11fdbb3cef6621c9752d0aec558cda46e6777", 
+    "foreleg-far": "4cfcad0947ebc91aafb24fd87b26eb9c6e072042d7191b01da52e179ea58aa84", 
+    "hindleg": "de808f343af38a80fa2ba1561e0b9a6f6895bd6c6a7c3d1bc5ee2a41a685417b", 
+    "foreleg": "628fcd11791d57ba072e8f50bd2dd350ef4881354ec81fc7c88cd56748914f0c", 
+    "far-ear": "d57d54f18d0fa157473dd4b7c85bdcc43200d48f8a9a1f3131b2da37c55360cb", 
+    "near-ear": "670f569cedd6927f2bf7b442e09124f26c0ed3682a84912cae61737e264f40e2"
+  }, 
+  "authoringRuntime": [
+    "Python 3", 
+    "numpy", 
+    "Pillow 12.3"
+  ], 
+  "authoringControls": {
+    "parts": "Parts", 
+    "motion": "motion.json", 
+    "pivots": "configuration", 
+    "meshes": [
+      "far-ear-mesh.json", 
+      "foreleg-far-mesh.json", 
+      "foreleg-mesh.json", 
+      "hindleg-mesh.json", 
+      "near-ear-mesh.json"
+    ]
+  }
+}

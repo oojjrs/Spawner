@@ -1,0 +1,134 @@
+[
+  {
+    "part": "leg-near-upper",
+    "source": "Source/joints-atlas.png",
+    "mask": "Source/Masks/leg-near-upper.png",
+    "matrix": [
+      [
+        0.14201183431952663,
+        0.003328402366863879,
+        219.45747041420117
+      ],
+      [
+        -0.003328402366863879,
+        0.14201183431952663,
+        326.0395710059172
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ]
+  },
+  {
+    "part": "leg-near-lower",
+    "source": "Source/joints-atlas.png",
+    "mask": "Source/Masks/leg-near-lower.png",
+    "matrix": [
+      [
+        0.042728922321794954,
+        -0.09790943915682336,
+        257.7394689822506
+      ],
+      [
+        0.09790943915682336,
+        0.042728922321794954,
+        291.6025153472333
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ]
+  },
+  {
+    "part": "leg-near-foot",
+    "source": "Source/paws-atlas.png",
+    "mask": "Source/Masks/leg-near-foot.png",
+    "matrix": [
+      [
+        0.10294117647058823,
+        0,
+        193.13235294117646
+      ],
+      [
+        0,
+        0.10294117647058823,
+        343.75
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ]
+  },
+  {
+    "part": "leg-far-upper",
+    "source": "Source/joints-atlas.png",
+    "mask": "Source/Masks/leg-far-upper.png",
+    "matrix": [
+      [
+        0.1092893476221048,
+        0.06854659489357501,
+        120.46812188256209
+      ],
+      [
+        -0.06854659489357501,
+        0.1092893476221048,
+        304.8306583041138
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ]
+  },
+  {
+    "part": "leg-far-lower",
+    "source": "Source/joints-atlas.png",
+    "mask": "Source/Masks/leg-far-lower.png",
+    "matrix": [
+      [
+        0.0738856589147288,
+        -0.09199370155038757,
+        217.33890503875958
+      ],
+      [
+        0.09199370155038757,
+        0.0738856589147288,
+        247.78288517441857
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ]
+  },
+  {
+    "part": "leg-far-foot",
+    "source": "Source/paws-atlas.png",
+    "mask": "Source/Masks/leg-far-foot.png",
+    "matrix": [
+      [
+        0.09114583333333333,
+        0,
+        76.41666666666667
+      ],
+      [
+        0,
+        0.09114583333333333,
+        343.7447916666667
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ]
+  }
+]

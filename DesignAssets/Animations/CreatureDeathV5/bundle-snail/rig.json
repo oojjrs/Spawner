@@ -1,0 +1,48 @@
+{
+  "name": "bundle-snail", 
+  "method": "Source mantle and locally drawn sensor-withdrawn skin, interval contour handoff, continuous mantle invagination, rigid eye globes and contact-driven shell descent", 
+  "parts": [
+    "cavity", 
+    "shell-front", 
+    "mantle", 
+    "mantle-visible", 
+    "mantle-closed", 
+    "mantle-visible-closed", 
+    "near-eye-stalk", 
+    "near-eye-globe", 
+    "far-eye-stalk", 
+    "far-eye-globe"
+  ], 
+  "rigidParts": [
+    "shell-front", 
+    "cavity", 
+    "near-eye-globe", 
+    "far-eye-globe"
+  ], 
+  "softHeadCompression": [
+    1, 
+    0.68
+  ], 
+  "sourceAxis": [
+    [
+      146.2857142857143, 
+      347.4312668463612
+    ], 
+    [
+      218.04851752021565, 
+      386.07277628032347
+    ], 
+    [
+      317.4123989218329, 
+      395.73315363881403
+    ], 
+    [
+      422.29649595687334, 
+      370.89218328840974
+    ]
+  ], 
+  "controls": "motion.json", 
+  "renderer": "render.py", 
+  "version": 5, 
+  "spineCompatibilityVerified": false
+}

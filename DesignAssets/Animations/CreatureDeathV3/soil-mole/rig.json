@@ -1,0 +1,260 @@
+{
+  "name": "soil-mole", 
+  "configuration": {
+    "bodyPivot": [
+      410, 
+      325
+    ], 
+    "headPivot": [
+      262, 
+      276
+    ], 
+    "legs": {
+      "far-hind": [
+        [
+          427, 
+          254
+        ], 
+        [
+          442, 
+          269
+        ], 
+        [
+          450, 
+          282
+        ]
+      ], 
+      "far-paw": [
+        [
+          151, 
+          298
+        ], 
+        [
+          133, 
+          320
+        ], 
+        [
+          118, 
+          347
+        ]
+      ], 
+      "near-hind": [
+        [
+          427, 
+          310
+        ], 
+        [
+          443, 
+          327
+        ], 
+        [
+          451, 
+          342
+        ]
+      ], 
+      "near-paw": [
+        [
+          312, 
+          289
+        ], 
+        [
+          292, 
+          326
+        ], 
+        [
+          276, 
+          362
+        ]
+      ]
+    }
+  }, 
+  "method": "Complete separate source parts, rear-supported body collapse, anatomical limb IK and delayed head/ear contact phases.", 
+  "controls": "motion.json", 
+  "timeline": "landmarks.json", 
+  "renderer": "render.py", 
+  "canvas": [
+    512, 
+    512
+  ], 
+  "spineCompatibilityVerified": false, 
+  "bones": [
+    {
+      "name": "body", 
+      "parent": "root", 
+      "pivot": [
+        410, 
+        325
+      ]
+    }, 
+    {
+      "name": "head", 
+      "parent": "body", 
+      "pivot": [
+        262, 
+        276
+      ]
+    }, 
+    {
+      "name": "far-hind-upper", 
+      "parent": "body", 
+      "pivot": [
+        427, 
+        254
+      ], 
+      "end": [
+        442, 
+        269
+      ]
+    }, 
+    {
+      "name": "far-hind-lower", 
+      "parent": "far-hind-upper", 
+      "pivot": [
+        442, 
+        269
+      ], 
+      "end": [
+        450, 
+        282
+      ]
+    }, 
+    {
+      "name": "far-hind-target", 
+      "parent": "root", 
+      "pivot": [
+        450, 
+        282
+      ]
+    }, 
+    {
+      "name": "far-paw-upper", 
+      "parent": "body", 
+      "pivot": [
+        151, 
+        298
+      ], 
+      "end": [
+        133, 
+        320
+      ]
+    }, 
+    {
+      "name": "far-paw-lower", 
+      "parent": "far-paw-upper", 
+      "pivot": [
+        133, 
+        320
+      ], 
+      "end": [
+        118, 
+        347
+      ]
+    }, 
+    {
+      "name": "far-paw-target", 
+      "parent": "root", 
+      "pivot": [
+        118, 
+        347
+      ]
+    }, 
+    {
+      "name": "near-hind-upper", 
+      "parent": "body", 
+      "pivot": [
+        427, 
+        310
+      ], 
+      "end": [
+        443, 
+        327
+      ]
+    }, 
+    {
+      "name": "near-hind-lower", 
+      "parent": "near-hind-upper", 
+      "pivot": [
+        443, 
+        327
+      ], 
+      "end": [
+        451, 
+        342
+      ]
+    }, 
+    {
+      "name": "near-hind-target", 
+      "parent": "root", 
+      "pivot": [
+        451, 
+        342
+      ]
+    }, 
+    {
+      "name": "near-paw-upper", 
+      "parent": "body", 
+      "pivot": [
+        312, 
+        289
+      ], 
+      "end": [
+        292, 
+        326
+      ]
+    }, 
+    {
+      "name": "near-paw-lower", 
+      "parent": "near-paw-upper", 
+      "pivot": [
+        292, 
+        326
+      ], 
+      "end": [
+        276, 
+        362
+      ]
+    }, 
+    {
+      "name": "near-paw-target", 
+      "parent": "root", 
+      "pivot": [
+        276, 
+        362
+      ]
+    }
+  ], 
+  "activeParts": [
+    "body", 
+    "head", 
+    "head-closed", 
+    "far-hind", 
+    "far-paw", 
+    "near-hind", 
+    "near-paw"
+  ], 
+  "sourceHashes": {
+    "body": "a212dbdddfc50cf5d015d8cfc07e3ed71d82f0c32fc3fc3db29deded9afd1faf", 
+    "head": "90be9961e92e2e795aa20200c989dcd712c5f7aa691c85fe02ff90efa382f23c", 
+    "head-closed": "5e3b417e49b0f1ad3c7a33232e89fd5e33d3c53716b319dea2811e1d7b8111cf", 
+    "far-hind": "4bf1fec80cd57e41fe101050a66b10d4ed5f374de6665136a859480edea48331", 
+    "far-paw": "adbcd8a23c6e1834c6550a2cddb024ab71824d1157aadf4e5202cff7abe75558", 
+    "near-hind": "241339a18ccf68428a12f09e458e945d41a2f8e68bff844a05f7daad1405834a", 
+    "near-paw": "cdae8d6e5dd50d6cc53b541ef8dc393325a32eb9b195ed6391256e226c2edda1"
+  }, 
+  "authoringRuntime": [
+    "Python 3", 
+    "numpy", 
+    "Pillow 12.3"
+  ], 
+  "authoringControls": {
+    "parts": "Parts", 
+    "motion": "motion.json", 
+    "pivots": "configuration", 
+    "meshes": [
+      "far-hind-mesh.json", 
+      "far-paw-mesh.json", 
+      "near-hind-mesh.json", 
+      "near-paw-mesh.json"
+    ]
+  }
+}

@@ -1,0 +1,1021 @@
+{
+  "bodyPivot": [
+    355,
+    281
+  ],
+  "bodyAngle": 0,
+  "bodyDrop": 28,
+  "bodyAtlas": 0,
+  "bodyBox": [
+    132,
+    175,
+    448,
+    360
+  ],
+  "parts": [
+    {
+      "name": "sac",
+      "atlas": 2,
+      "polygon": [
+        [
+          60,
+          185
+        ],
+        [
+          153,
+          169
+        ],
+        [
+          247,
+          185
+        ],
+        [
+          288,
+          236
+        ],
+        [
+          289,
+          327
+        ],
+        [
+          261,
+          367
+        ],
+        [
+          166,
+          379
+        ],
+        [
+          82,
+          350
+        ],
+        [
+          53,
+          278
+        ]
+      ],
+      "pivot": [
+        215,
+        195
+      ],
+      "parent": "body",
+      "angle": 0,
+      "translation": [
+        0,
+        76
+      ],
+      "delayMs": 180,
+      "rootRadius": 26,
+      "rigid": false,
+      "scale": [
+        0.85,
+        0.52
+      ],
+      "image": "Source/CleanAttachments/sac.png",
+      "completionDrawing": "Source/AtlasParts/2.png",
+      "visibleSource": "Source/CleanAttachments/sac.png",
+      "bindVisibleBbox": [
+        68,
+        179,
+        290,
+        424
+      ],
+      "attachmentType": "local-sac-surface"
+    },
+    {
+      "name": "fore-upper",
+      "atlas": 3,
+      "polygon": [
+        [
+          286,
+          286
+        ],
+        [
+          310,
+          285
+        ],
+        [
+          325,
+          305
+        ],
+        [
+          315,
+          333
+        ],
+        [
+          291,
+          340
+        ],
+        [
+          280,
+          316
+        ]
+      ],
+      "pivot": [
+        306,
+        298
+      ],
+      "parent": "ik",
+      "angle": 0,
+      "translation": [
+        0,
+        0
+      ],
+      "delayMs": 220,
+      "rootRadius": 20,
+      "rigid": true,
+      "scale": [
+        1,
+        1
+      ],
+      "image": "Source/CleanAttachments/fore-upper.png",
+      "completionDrawing": "Source/AtlasParts/3.png",
+      "visibleSource": "Source/CleanAttachments/fore-upper.png",
+      "bindVisibleBbox": [
+        280,
+        285,
+        326,
+        328
+      ],
+      "attachmentType": "region",
+      "atlasJointLandmarks": [
+        [
+          0.33,
+          0.15
+        ],
+        [
+          0.7,
+          0.88
+        ]
+      ],
+      "jointLandmarks": [
+        [
+          306,
+          298
+        ],
+        [
+          298,
+          336
+        ]
+      ],
+      "completionRegistration": {
+        "atlasProximal": [
+          70.29,
+          44.85
+        ],
+        "atlasDistal": [
+          149.1,
+          263.12
+        ],
+        "bindProximal": [
+          306.0,
+          298.0
+        ],
+        "bindDistal": [
+          298.0,
+          336.0
+        ],
+        "bindLength": 38.8329756778952,
+        "width": 42.64416957731726,
+        "fixedSourceTransform": [
+          [
+            0.20519358775098304,
+            -0.11194325012039547,
+            296.69999021164824
+          ],
+          [
+            0.10274080302048547,
+            0.14033867691480797,
+            284.71217750027455
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "method": "One constant anatomical source registration before animation. Runtime part scale remains [1,1]."
+      }
+    },
+    {
+      "name": "fore-lower",
+      "atlas": 4,
+      "polygon": [
+        [
+          289,
+          325
+        ],
+        [
+          317,
+          319
+        ],
+        [
+          326,
+          344
+        ],
+        [
+          307,
+          375
+        ],
+        [
+          269,
+          385
+        ],
+        [
+          233,
+          372
+        ],
+        [
+          244,
+          359
+        ]
+      ],
+      "pivot": [
+        298,
+        336
+      ],
+      "parent": "ik",
+      "angle": 0,
+      "translation": [
+        0,
+        0
+      ],
+      "delayMs": 220,
+      "rootRadius": 20,
+      "rigid": true,
+      "scale": [
+        1,
+        1
+      ],
+      "image": "Source/CleanAttachments/fore-lower.png",
+      "completionDrawing": "Source/AtlasParts/4.png",
+      "visibleSource": "Source/CleanAttachments/fore-lower.png",
+      "bindVisibleBbox": [
+        231,
+        319,
+        336,
+        418
+      ],
+      "attachmentType": "region",
+      "atlasJointLandmarks": [
+        [
+          0.78,
+          0.1
+        ],
+        [
+          0.3,
+          0.86
+        ]
+      ],
+      "jointLandmarks": [
+        [
+          298,
+          336
+        ],
+        [
+          274,
+          373
+        ]
+      ],
+      "completionRegistration": {
+        "atlasProximal": [
+          213.72,
+          29.400000000000002
+        ],
+        "atlasDistal": [
+          82.2,
+          252.84
+        ],
+        "bindProximal": [
+          298.0,
+          336.0
+        ],
+        "bindDistal": [
+          274.0,
+          373.0
+        ],
+        "bindLength": 44.10215414239989,
+        "width": 70.0,
+        "fixedSourceTransform": [
+          [
+            0.29014940348848806,
+            0.06383708720238342,
+            234.37069420101247
+          ],
+          [
+            0.0828982474508748,
+            0.2179156180384385,
+            312.04988582649986
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "method": "One constant anatomical source registration before animation. Runtime part scale remains [1,1]."
+      }
+    },
+    {
+      "name": "hind-upper",
+      "atlas": 5,
+      "polygon": [
+        [
+          350,
+          272
+        ],
+        [
+          400,
+          259
+        ],
+        [
+          435,
+          276
+        ],
+        [
+          446,
+          310
+        ],
+        [
+          435,
+          340
+        ],
+        [
+          399,
+          357
+        ],
+        [
+          367,
+          350
+        ],
+        [
+          343,
+          325
+        ]
+      ],
+      "pivot": [
+        374,
+        283
+      ],
+      "parent": "ik",
+      "angle": 0,
+      "translation": [
+        0,
+        0
+      ],
+      "delayMs": 300,
+      "rootRadius": 27,
+      "rigid": true,
+      "scale": [
+        1,
+        1
+      ],
+      "image": "Source/CleanAttachments/hind-upper.png",
+      "completionDrawing": "Source/AtlasParts/5.png",
+      "visibleSource": "Source/CleanAttachments/hind-upper.png",
+      "bindVisibleBbox": [
+        343,
+        179,
+        453,
+        347
+      ],
+      "attachmentType": "region",
+      "atlasJointLandmarks": [
+        [
+          0.24,
+          0.22
+        ],
+        [
+          0.72,
+          0.75
+        ]
+      ],
+      "jointLandmarks": [
+        [
+          374,
+          283
+        ],
+        [
+          400,
+          340
+        ]
+      ],
+      "completionRegistration": {
+        "atlasProximal": [
+          78.24,
+          66.88
+        ],
+        "atlasDistal": [
+          234.72,
+          228.0
+        ],
+        "bindProximal": [
+          374.0,
+          283.0
+        ],
+        "bindDistal": [
+          400.0,
+          340.0
+        ],
+        "bindLength": 62.64982043070834,
+        "width": 70.0,
+        "fixedSourceTransform": [
+          [
+            0.2705405147109988,
+            -0.10732741678321749,
+            359.58005827595804
+          ],
+          [
+            0.09753471295048652,
+            0.2669575030859913,
+            258.03184776582765
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "method": "One constant anatomical source registration before animation. Runtime part scale remains [1,1]."
+      }
+    },
+    {
+      "name": "hind-lower",
+      "atlas": 6,
+      "polygon": [
+        [
+          354,
+          348
+        ],
+        [
+          402,
+          337
+        ],
+        [
+          434,
+          334
+        ],
+        [
+          439,
+          350
+        ],
+        [
+          411,
+          373
+        ],
+        [
+          363,
+          375
+        ],
+        [
+          345,
+          361
+        ]
+      ],
+      "pivot": [
+        400,
+        340
+      ],
+      "parent": "ik",
+      "angle": 0,
+      "translation": [
+        0,
+        0
+      ],
+      "delayMs": 300,
+      "rootRadius": 24,
+      "rigid": true,
+      "scale": [
+        1,
+        1
+      ],
+      "image": "Source/CleanAttachments/hind-lower.png",
+      "completionDrawing": "Source/AtlasParts/6.png",
+      "visibleSource": "Source/CleanAttachments/hind-lower.png",
+      "bindVisibleBbox": [
+        347,
+        334,
+        461,
+        421
+      ],
+      "attachmentType": "region",
+      "atlasJointLandmarks": [
+        [
+          0.24,
+          0.2
+        ],
+        [
+          0.38,
+          0.94
+        ]
+      ],
+      "jointLandmarks": [
+        [
+          400,
+          340
+        ],
+        [
+          391,
+          363
+        ]
+      ],
+      "completionRegistration": {
+        "atlasProximal": [
+          70.32,
+          67.60000000000001
+        ],
+        "atlasDistal": [
+          111.34,
+          317.71999999999997
+        ],
+        "bindProximal": [
+          400.0,
+          340.0
+        ],
+        "bindDistal": [
+          391.0,
+          363.0
+        ],
+        "bindLength": 24.698178070456937,
+        "width": 70.0,
+        "fixedSourceTransform": [
+          [
+            0.20179532925186391,
+            -0.06937497208742036,
+            390.52018145030405
+          ],
+          [
+            0.0960394183376117,
+            0.0767129527765381,
+            328.1144471363168
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "method": "One constant anatomical source registration before animation. Runtime part scale remains [1,1]."
+      }
+    },
+    {
+      "name": "fore-far",
+      "atlas": 7,
+      "polygon": [
+        [
+          72,
+          348
+        ],
+        [
+          125,
+          337
+        ],
+        [
+          147,
+          348
+        ],
+        [
+          143,
+          378
+        ],
+        [
+          87,
+          382
+        ],
+        [
+          64,
+          367
+        ]
+      ],
+      "pivot": [
+        151,
+        330
+      ],
+      "parent": "body",
+      "angle": 25,
+      "translation": [
+        -10,
+        -7
+      ],
+      "delayMs": 260,
+      "rootRadius": 18,
+      "rigid": true,
+      "scale": [
+        1,
+        1
+      ],
+      "image": "Source/CleanAttachments/fore-far.png",
+      "completionDrawing": "Source/AtlasParts/7.png",
+      "visibleSource": "Source/CleanAttachments/fore-far.png",
+      "bindVisibleBbox": [
+        59,
+        337,
+        148,
+        420
+      ],
+      "attachmentType": "region",
+      "atlasJointLandmarks": [
+        [
+          0.67,
+          0.12
+        ],
+        [
+          0.38,
+          0.9
+        ]
+      ],
+      "jointLandmarks": [
+        [
+          151,
+          330
+        ],
+        [
+          110,
+          363
+        ]
+      ],
+      "completionRegistration": {
+        "atlasProximal": [
+          172.19,
+          38.64
+        ],
+        "atlasDistal": [
+          97.66,
+          289.8
+        ],
+        "bindProximal": [
+          151.0,
+          330.0
+        ],
+        "bindDistal": [
+          110.0,
+          363.0
+        ],
+        "bindLength": 52.630789467763066,
+        "width": 51.64277464742963,
+        "fixedSourceTransform": [
+          [
+            0.1945195737497499,
+            -0.10718456753389606,
+            121.58297554501996
+          ],
+          [
+            0.14787175566144145,
+            0.1780347890861734,
+            297.76551901581837
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "method": "One constant anatomical source registration before animation. Runtime part scale remains [1,1]."
+      }
+    },
+    {
+      "name": "hind-far",
+      "atlas": 8,
+      "polygon": [
+        [
+          334,
+          354
+        ],
+        [
+          371,
+          347
+        ],
+        [
+          389,
+          357
+        ],
+        [
+          375,
+          378
+        ],
+        [
+          336,
+          380
+        ]
+      ],
+      "pivot": [
+        352,
+        350
+      ],
+      "parent": "body",
+      "angle": 35,
+      "translation": [
+        0,
+        -13
+      ],
+      "delayMs": 380,
+      "rootRadius": 19,
+      "rigid": true,
+      "scale": [
+        1,
+        1
+      ],
+      "image": "Source/CleanAttachments/hind-far.png",
+      "completionDrawing": "Source/AtlasParts/8.png",
+      "visibleSource": "Source/CleanAttachments/hind-far.png",
+      "bindVisibleBbox": [
+        326,
+        342,
+        394,
+        421
+      ],
+      "attachmentType": "region",
+      "atlasJointLandmarks": [
+        [
+          0.75,
+          0.15
+        ],
+        [
+          0.4,
+          0.93
+        ]
+      ],
+      "jointLandmarks": [
+        [
+          352,
+          350
+        ],
+        [
+          355,
+          371
+        ]
+      ],
+      "completionRegistration": {
+        "atlasProximal": [
+          189.75,
+          50.55
+        ],
+        "atlasDistal": [
+          101.2,
+          313.41
+        ],
+        "bindProximal": [
+          352.0,
+          350.0
+        ],
+        "bindDistal": [
+          355.0,
+          371.0
+        ],
+        "bindLength": 21.213203435596427,
+        "width": 57.55849198858493,
+        "fixedSourceTransform": [
+          [
+            0.2248547616636756,
+            0.08711916200677726,
+            305.1116442804237
+          ],
+          [
+            -0.05683924589231615,
+            0.06099961276059873,
+            357.66823699051355
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "method": "One constant anatomical source registration before animation. Runtime part scale remains [1,1]."
+      }
+    },
+    {
+      "name": "head",
+      "atlas": 1,
+      "polygon": [
+        [
+          124,
+          119
+        ],
+        [
+          156,
+          103
+        ],
+        [
+          200,
+          117
+        ],
+        [
+          249,
+          124
+        ],
+        [
+          279,
+          154
+        ],
+        [
+          292,
+          199
+        ],
+        [
+          260,
+          223
+        ],
+        [
+          186,
+          210
+        ],
+        [
+          123,
+          178
+        ]
+      ],
+      "pivot": [
+        260,
+        204
+      ],
+      "parent": "body",
+      "angle": -7,
+      "translation": [
+        0,
+        64
+      ],
+      "delayMs": 150,
+      "rootRadius": 26,
+      "rigid": true,
+      "scale": [
+        1,
+        1
+      ],
+      "image": "Source/CleanAttachments/head.png",
+      "completionDrawing": "Source/AtlasParts/1.png",
+      "visibleSource": "Source/CleanAttachments/head.png",
+      "bindVisibleBbox": [
+        95,
+        88,
+        370,
+        224
+      ],
+      "attachmentType": "region",
+      "closedImage": "Source/CleanAttachments/head-closed.png",
+      "closedVisibleSource": "Source/CleanAttachments/head-closed.png"
+    }
+  ],
+  "ik": [
+    {
+      "upper": "fore-upper",
+      "lower": "fore-lower",
+      "shoulder": [
+        306,
+        298
+      ],
+      "knee": [
+        298,
+        336
+      ],
+      "foot": [
+        274,
+        373
+      ],
+      "slide": [
+        -34,
+        0
+      ],
+      "bend": 1
+    },
+    {
+      "upper": "hind-upper",
+      "lower": "hind-lower",
+      "shoulder": [
+        374,
+        283
+      ],
+      "knee": [
+        400,
+        340
+      ],
+      "foot": [
+        391,
+        363
+      ],
+      "slide": [
+        14,
+        0
+      ]
+    }
+  ],
+  "order": [
+    "fore-far",
+    "hind-far",
+    "hind-lower",
+    "hind-upper",
+    "body",
+    "sac",
+    "fore-lower",
+    "fore-upper",
+    "head"
+  ],
+  "name": "bubble-toad",
+  "frameSize": 512,
+  "columns": 6,
+  "pivotX": 256,
+  "pivotY": 448,
+  "sourceImage": "DesignAssets/CreatureConcepts/v3/bubble-toad.png",
+  "sourceAnimation": "DesignAssets/Animations/BubbleToadIdle/BreathV1/idle.webp",
+  "timesMs": [
+    0,
+    50,
+    100,
+    150,
+    200,
+    250,
+    300,
+    350,
+    400,
+    450,
+    500,
+    550,
+    600,
+    650,
+    700,
+    750,
+    800,
+    850,
+    900,
+    950,
+    1000,
+    1050,
+    1100,
+    1150,
+    1200,
+    1250,
+    1300,
+    1350,
+    1400,
+    1450,
+    1500,
+    1550,
+    1600,
+    1650,
+    1700,
+    1750,
+    1800,
+    2000
+  ],
+  "durationsMs": [
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    200,
+    900
+  ],
+  "method": "Complete independently painted body, head and limb attachments are registered once to the reference anatomy and reused through the full action. Body/head remain rigid; skeletal limb segment lengths remain constant. Original-pixel cutout fragments are superseded by complete consistent part sources. The vocal sac alone contracts and gains a complete painted folded-skin corrective surface as air is lost.",
+  "bodyImage": "Source/CleanAttachments/body.png",
+  "sourcePixelCount": 69719,
+  "partsPrepared": true,
+  "continuousLimbs": [],
+  "cleanCompleteSources": true,
+  "completeNaturalRootSource": "Source/complete-parts-natural-roots.png",
+  "groundY": 387,
+  "correctiveSacSurfaces": {
+    "folder": "Source/SacSurfaces",
+    "sourceA": "Source/CleanAttachments/sac.png",
+    "sourceB": "Source/CleanAttachments/sac-folded.png",
+    "outlineInterpolation": "signed-distance interpolation in one fixed bind rectangle; premultiplied-color interior",
+    "changesShape": true,
+    "rigidPartScaling": false
+  },
+  "renderSourceFields": [
+    "bodyImage",
+    "parts.visibleSource",
+    "parts.closedImage"
+  ]
+}

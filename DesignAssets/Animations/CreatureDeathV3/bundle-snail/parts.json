@@ -1,0 +1,68 @@
+[
+  {
+    "name": "shell", 
+    "image": "Parts/shell.png", 
+    "source": "Source/shell-complete.png", 
+    "registration": [
+      191, 
+      94, 
+      433, 
+      410
+    ]
+  }, 
+  {
+    "name": "mantle", 
+    "image": "Parts/mantle.png", 
+    "source": "Source/mantle-complete.png", 
+    "registration": [
+      87, 
+      277, 
+      454, 
+      450
+    ]
+  }, 
+  {
+    "name": "near-eye", 
+    "image": "Parts/near-eye.png", 
+    "source": "Source/near-eye-complete.png", 
+    "registration": [
+      135, 
+      217, 
+      203, 
+      341
+    ]
+  }, 
+  {
+    "name": "far-eye", 
+    "image": "Parts/far-eye.png", 
+    "source": "Source/far-eye-complete.png", 
+    "registration": [
+      67, 
+      211, 
+      146, 
+      333
+    ]
+  }, 
+  {
+    "name": "curled-soft-body", 
+    "image": "Parts/curled-soft-body.png", 
+    "source": "Source/curled-soft-body-complete.png", 
+    "registration": [
+      175, 
+      300, 
+      400, 
+      420
+    ]
+  }, 
+  {
+    "name": "aperture", 
+    "image": "Parts/aperture.png", 
+    "source": "Source/aperture-complete.png", 
+    "registration": [
+      195, 
+      294, 
+      285, 
+      408
+    ]
+  }
+]

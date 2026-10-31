@@ -1,0 +1,11 @@
+{
+  "provider": "built-in image_gen",
+  "prompts": {
+    "v3-turtle-eyes-prompt": "Use case: precise-object-edit. Exact edit target is a complete isolated turtle head part in a fixed512 square transparent canvas. Change ONLY the TWO OPEN EYES to naturally CLOSED EYELIDS: relaxed curved short eyelid lines matching this soft painted turtle design. Preserve every other contour, neck, markings, colors, lighting, head proportions, image position and transparent margins exactly. Do not add lashes, eyebrows, head motion, perspective change, ears or new features. One production eyelid attachment, no text, no grid, no other objects, genuine transparent alpha."
+  },
+  "preservedInputCopies": {
+    "v3-turtle-eyes-prompt": [
+      "Source/EditableParts/head.png"
+    ]
+  }
+}

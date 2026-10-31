@@ -1,0 +1,114 @@
+{
+  "sourceSize": [
+    1536, 
+    1024
+  ], 
+  "commonScale": 0.9220645937373557, 
+  "calibration": "first near-neutral bridge to approved original SIFT static scale; all six frames use this one scale", 
+  "calibrationMatrix": [
+    [
+      0.9220641176093224, 
+      -0.0009370386206800594, 
+      42.877366699244845
+    ], 
+    [
+      0.0009370386206800594, 
+      0.9220641176093224, 
+      -19.544417125224655
+    ]
+  ], 
+  "frames": [
+    {
+      "sourceRect": [
+        0, 
+        0, 
+        512, 
+        512
+      ], 
+      "commonSourceScale": 0.9220645937373557, 
+      "translation": [
+        17, 
+        -20
+      ], 
+      "foreClawWorldY": 407, 
+      "hindToeWorldX": 427.4856459330144
+    }, 
+    {
+      "sourceRect": [
+        512, 
+        0, 
+        512, 
+        512
+      ], 
+      "commonSourceScale": 0.9220645937373557, 
+      "translation": [
+        5, 
+        -24
+      ], 
+      "foreClawWorldY": 407, 
+      "hindToeWorldX": 427.4856459330144
+    }, 
+    {
+      "sourceRect": [
+        1024, 
+        0, 
+        512, 
+        512
+      ], 
+      "commonSourceScale": 0.9220645937373557, 
+      "translation": [
+        1, 
+        -30
+      ], 
+      "foreClawWorldY": 407, 
+      "hindToeWorldX": 427.4856459330144
+    }, 
+    {
+      "sourceRect": [
+        0, 
+        512, 
+        512, 
+        512
+      ], 
+      "commonSourceScale": 0.9220645937373557, 
+      "translation": [
+        -8, 
+        5
+      ], 
+      "foreClawWorldY": 407, 
+      "hindToeWorldX": 427.4856459330144
+    }, 
+    {
+      "sourceRect": [
+        512, 
+        512, 
+        512, 
+        512
+      ], 
+      "commonSourceScale": 0.9220645937373557, 
+      "translation": [
+        -16, 
+        -3
+      ], 
+      "foreClawWorldY": 407, 
+      "hindToeWorldX": 427.4856459330144
+    }, 
+    {
+      "sourceRect": [
+        1024, 
+        512, 
+        512, 
+        512
+      ], 
+      "commonSourceScale": 0.9220645937373557, 
+      "translation": [
+        -8, 
+        -13
+      ], 
+      "foreClawWorldY": 407, 
+      "hindToeWorldX": 427.4856459330144
+    }
+  ], 
+  "crossfade": false, 
+  "morphing": false
+}

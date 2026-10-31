@@ -1,0 +1,42 @@
+{
+  "canvas": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "rig": "rig.json",
+  "renderer": "render.py",
+  "prepare": "Source/prepare.py",
+  "editablePartSources": {
+    "Parts/bulb-closed.png": "Source/EditableParts/bulb-closed.png",
+    "Parts/bulb.png": "Source/EditableParts/bulb.png",
+    "Parts/crown-knot.png": "Source/EditableParts/crown-knot.png",
+    "Parts/foot.png": "Source/EditableParts/foot.png",
+    "Parts/leaf-lower-left.png": "Source/EditableParts/leaf-lower-left.png",
+    "Parts/leaf-lower-right.png": "Source/EditableParts/leaf-lower-right.png",
+    "Parts/leaf-upper-left.png": "Source/EditableParts/leaf-upper-left.png",
+    "Parts/leaf-upper-right.png": "Source/EditableParts/leaf-upper-right.png"
+  },
+  "editableTextureSources": {
+    "Source/main-tendril-clean.png": "Source/EditableTextures/main-tendril-clean.png"
+  },
+  "sourceDrawings": [
+    "closed-eyelids-drawing.png",
+    "complete-parts-drawing.png"
+  ],
+  "externalPathsRequired": false,
+  "sourceEditing": "Registered complete part images are canonical editable sources. Body cels preserve their own complete drawn anatomy; rigid head sources retain fixed scale.",
+  "referencePlacement": {
+    "source": "approved idle first cell",
+    "nativeCellSize": 424,
+    "normalizedSize": 512,
+    "scale": 1.2075471698113207,
+    "translation": [
+      0,
+      -28
+    ]
+  }
+}

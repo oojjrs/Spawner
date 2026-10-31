@@ -1,0 +1,10 @@
+{
+  "tool": "image_gen",
+  "prompt": "Use case: precise-object-edit / hidden-surface completion for a 2D sprite rig. Image 1 is the sole approved character/design reference and edit target. Image 2 is a guide showing ONE magenta missing area over the nearer ear and its cast-shadow footprint. Fill ONLY that magenta area with the continuous brown neck/mane fur that would exist underneath the ear. REMOVE the nearer ear, its complete dark outer rim, and its cast shadow from this area. Draw a complete coherent fur surface whose long directional swept locks follow the adjacent mane, with matched brown value, warm highlight and strand texture on every boundary. This must look like the original neck/mane before the ear was attached, not a leaf-shaped patch, not a second ear, not a hole or dark closed loop. Preserve the long spiky mane outer silhouette and all its existing moss. Preserve the original boar's exact body/head/nose/tusks/eyes/far ear/short legs/hoof/tail shapes, positions, sizes, markings, painterly linework and lighting everywhere else. Same standing three-quarter-left pose, same full-character placement and transparent canvas. No redesign, no new pose, no anatomy or proportions changes. Output one edited complete boar image on transparent background, no magenta, no labels, no panels. This is only a hidden neck-fur corrective source, not an animation frame or a final pose.",
+  "referenced_image_paths": [
+    "Source/approved-original.png",
+    "Source/Inputs/mane-completion-guide.png"
+  ],
+  "transparent_background": true,
+  "output": "Source/mane-complete-drawing.png"
+}

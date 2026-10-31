@@ -1,0 +1,19 @@
+{
+  "prompt": "Prepare hidden-surface completion parts for the exact tiny turtle in image 1. This is NOT a redesign or animation frame sheet. Return four isolated complete SOFT anatomy parts in a regular 2x2 atlas on transparency, with ample margins. Top left: its exact rounded spotted olive head and short neck, same cream jaw and facial proportions as reference, eyelids now closed, head still facing front-left. No gray rigid shell collar on this head. Top right: its exact NEAR FRONT soft leg (reference shows TWO large forward cream toenails), including hidden rounded olive shoulder/root and elbow; no cream segmented plastron spike on its left side. Bottom left: its FAR FRONT soft leg, with the three original small cream toe tips and a completed skin root. Bottom right: its HIND leg with the three original toe tips and completed rounded skin root. Use images 2\u20135 as exact part shape/color/spot/toe authorities; they are original visible pixel cutouts, clipped where the shell hid them. Complete only the clipped root area with continuous spotted olive skin. No gray armor/rim, gold/orange scute, vine, leaves or broad cream plastron surface anywhere in these parts. They must stay squat/thick and same apparent scale, not narrow generic limbs. Each foot remains a continuous leg/paw shape in its original neutral pose, with original rounded nails; no extra toes, no new claws, no line through the skin. Four independent parts only; no complete turtle/shell, labels or background. High quality original soft painted cartoon style. Transparent background.",
+  "inputs": [
+    "../registered-reference.png",
+    "../head-original.png",
+    "../fore-near-original.png",
+    "../fore-far-original.png",
+    "../hind-near-original.png"
+  ],
+  "output": "complete-soft.png",
+  "transparentBackground": true,
+  "inputSnapshots": [
+    "../registered-reference.png",
+    "../head-original.png",
+    "complete-soft.fore-near.input.png",
+    "../fore-far-original.png",
+    "../hind-near-original.png"
+  ]
+}

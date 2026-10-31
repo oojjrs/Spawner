@@ -1,0 +1,8 @@
+{
+  "prompt": "Make exactly four separate complete boar leg production cutouts in the same two by two arrangement as the first reference. The approved full animal in the second reference is the sole design authority. These leg references now include the entire visible muscular shoulder and round furry hind thigh, not just the shin. Keep their exact short stout anatomy, warm brown fur, perspective, dark cloven hoof width and painterly lighting. Complete only the cut hidden shoulder/hip root and hidden knee surfaces. Upper left = near front leg with its full shoulder, upper right = FAR FRONT leg whose magenta area is a structural guide for the missing upper thigh and forearm hidden behind the head: replace that magenta with proper matching furry anatomy, preserving the original hoof/shin at its lower end. The far front leg has a long diagonally projected hidden upper section; do not shorten it back into a stump. Lower left = near hind leg including the whole thick thigh, lower right = far hind leg. Preserve unequal projected sizes between near and far legs. Rounded complete upper roots must overlap under the body. No torso pieces, face, tusks, beard fragments, moss ornaments, extra joints, extra toes, text, grid, cast shadows or magenta remaining. Transparent background and generous separation between four whole attachments.",
+  "referencedImagePaths": [
+    "H:/Spawner/DesignAssets/Animations/CreatureDeathV5/soil-boar/Source/Inputs/full-leg-completion-atlas.png",
+    "H:/Spawner/DesignAssets/Animations/CreatureDeathV5/soil-boar/Source/approved-original.png"
+  ],
+  "transparentBackground": true
+}

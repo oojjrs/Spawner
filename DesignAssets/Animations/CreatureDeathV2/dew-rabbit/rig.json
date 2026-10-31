@@ -1,0 +1,411 @@
+{
+  "name": "dew-rabbit", 
+  "method": "Separate complete immutable body/head attachments with scale=1, local limb and ear meshes, anatomical FK/IK and explicit foreground occluders.", 
+  "canvas": [
+    512, 
+    512
+  ], 
+  "configuration": {
+    "bodyPivot": [
+      300, 
+      350
+    ], 
+    "bodyDegrees": -8, 
+    "bodyDrop": 31, 
+    "headPivot": [
+      284, 
+      304
+    ], 
+    "headDegrees": -40, 
+    "legs": {
+      "foreleg": [
+        [
+          231, 
+          340
+        ], 
+        [
+          235, 
+          380
+        ], 
+        [
+          232, 
+          418
+        ], 
+        -1
+      ], 
+      "foreleg-far": [
+        [
+          179, 
+          332
+        ], 
+        [
+          183, 
+          372
+        ], 
+        [
+          180, 
+          410
+        ], 
+        1
+      ], 
+      "hindleg": [
+        [
+          337, 
+          332
+        ], 
+        [
+          356, 
+          378
+        ], 
+        [
+          328, 
+          418
+        ], 
+        1
+      ]
+    }, 
+    "ears": {
+      "near-ear": [
+        [
+          287, 
+          224
+        ], 
+        [
+          308, 
+          163
+        ], 
+        [
+          337, 
+          108
+        ], 
+        -115, 
+        -20
+      ], 
+      "far-ear": [
+        [
+          218, 
+          207
+        ], 
+        [
+          189, 
+          165
+        ], 
+        [
+          153, 
+          140
+        ], 
+        -30, 
+        -12
+      ]
+    }
+  }, 
+  "sources": {
+    "body-front.png": "b262bd68d44f93637b9949caf7ff7ce0b6b6ed839c3a2468681952b215ec4d95", 
+    "body.png": "60eef30e1c33129d796d0a9cd157d170ee1a9205e8c850e3833e5e03b08e37f1", 
+    "far-ear-front.png": "b262bd68d44f93637b9949caf7ff7ce0b6b6ed839c3a2468681952b215ec4d95", 
+    "far-ear.png": "fd9440dd29804179e58fab209644313066165eca8e5a2842ea4199c9872c941c", 
+    "foreleg-far.png": "ced66b268f7ad053eb7a7482116c951928565c0f812c99c0560e467e1ff45bb6", 
+    "foreleg-front.png": "94f4b57d283d3e65df738588e2d135b5ae1b99937d595f25706471a7882f6410", 
+    "foreleg.png": "6d83667e4f0b1b8b5535e2257eee36ebc257c0803156f5c5d7217cb777b186ed", 
+    "head-closed-front.png": "c2d861ccb32e697d65f6b4a03c96352c1e1e89cbf209b8dabb311935c3436469", 
+    "head-closed.png": "d6ae68b76128578688fe80eb8f32cb4ce3dda58f5619e920a4cfdb5ea00021ac", 
+    "head-front.png": "0addd4a37833e56e5cb67d2fef4400df6e9beba22d02f420674ff6fb71eb1db9", 
+    "head.png": "0addd4a37833e56e5cb67d2fef4400df6e9beba22d02f420674ff6fb71eb1db9", 
+    "hindleg-front.png": "ca10ac48b1550fd192776ec1fd91099b69942e54e75ada5c20085b35fe9e27ef", 
+    "hindleg.png": "c9c6020e14e0eeb679d6d329ac9f626c36d46625b8ae281644b241dcfefc5c31", 
+    "near-ear-front.png": "b262bd68d44f93637b9949caf7ff7ce0b6b6ed839c3a2468681952b215ec4d95", 
+    "near-ear.png": "02c2600b712a7ef0fbd546d8d6068ba4c671a31bd8dd74176b6392e349699c7d"
+  }, 
+  "activeParts": [
+    "body", 
+    "head", 
+    "head-closed", 
+    "foreleg", 
+    "foreleg-far", 
+    "hindleg", 
+    "near-ear", 
+    "far-ear"
+  ], 
+  "rigidParts": [
+    "body", 
+    "head"
+  ], 
+  "drawOrder": [
+    "foreleg", 
+    "foreleg-far", 
+    "hindleg", 
+    "body", 
+    "near-ear", 
+    "far-ear", 
+    "head"
+  ], 
+  "bones": [
+    {
+      "name": "root", 
+      "parent": null, 
+      "scale": [
+        1, 
+        1
+      ]
+    }, 
+    {
+      "name": "body", 
+      "parent": "root", 
+      "pivot": [
+        300, 
+        350
+      ], 
+      "scale": [
+        1, 
+        1
+      ]
+    }, 
+    {
+      "name": "head", 
+      "parent": "body", 
+      "pivot": [
+        284, 
+        304
+      ], 
+      "scale": [
+        1, 
+        1
+      ]
+    }, 
+    {
+      "name": "foreleg-upper", 
+      "parent": "body", 
+      "pivot": [
+        231, 
+        340
+      ], 
+      "end": [
+        235, 
+        380
+      ], 
+      "scale": [
+        1, 
+        1
+      ]
+    }, 
+    {
+      "name": "foreleg-lower", 
+      "parent": "foreleg-upper", 
+      "pivot": [
+        235, 
+        380
+      ], 
+      "end": [
+        232, 
+        418
+      ], 
+      "scale": [
+        1, 
+        1
+      ]
+    }, 
+    {
+      "name": "foreleg-target", 
+      "parent": "root", 
+      "pivot": [
+        232, 
+        418
+      ], 
+      "scale": [
+        1, 
+        1
+      ]
+    }, 
+    {
+      "name": "foreleg-far-upper", 
+      "parent": "body", 
+      "pivot": [
+        179, 
+        332
+      ], 
+      "end": [
+        183, 
+        372
+      ], 
+      "scale": [
+        1, 
+        1
+      ]
+    }, 
+    {
+      "name": "foreleg-far-lower", 
+      "parent": "foreleg-far-upper", 
+      "pivot": [
+        183, 
+        372
+      ], 
+      "end": [
+        180, 
+        410
+      ], 
+      "scale": [
+        1, 
+        1
+      ]
+    }, 
+    {
+      "name": "foreleg-far-target", 
+      "parent": "root", 
+      "pivot": [
+        180, 
+        410
+      ], 
+      "scale": [
+        1, 
+        1
+      ]
+    }, 
+    {
+      "name": "hindleg-upper", 
+      "parent": "body", 
+      "pivot": [
+        337, 
+        332
+      ], 
+      "end": [
+        356, 
+        378
+      ], 
+      "scale": [
+        1, 
+        1
+      ]
+    }, 
+    {
+      "name": "hindleg-lower", 
+      "parent": "hindleg-upper", 
+      "pivot": [
+        356, 
+        378
+      ], 
+      "end": [
+        328, 
+        418
+      ], 
+      "scale": [
+        1, 
+        1
+      ]
+    }, 
+    {
+      "name": "hindleg-target", 
+      "parent": "root", 
+      "pivot": [
+        328, 
+        418
+      ], 
+      "scale": [
+        1, 
+        1
+      ]
+    }, 
+    {
+      "name": "near-ear-base", 
+      "parent": "head", 
+      "pivot": [
+        287, 
+        224
+      ], 
+      "end": [
+        308, 
+        163
+      ], 
+      "scale": [
+        1, 
+        1
+      ]
+    }, 
+    {
+      "name": "near-ear-mid", 
+      "parent": "near-ear-base", 
+      "pivot": [
+        308, 
+        163
+      ], 
+      "end": [
+        337, 
+        108
+      ], 
+      "scale": [
+        1, 
+        1
+      ]
+    }, 
+    {
+      "name": "near-ear-tip", 
+      "parent": "near-ear-mid", 
+      "pivot": [
+        337, 
+        108
+      ], 
+      "scale": [
+        1, 
+        1
+      ]
+    }, 
+    {
+      "name": "far-ear-base", 
+      "parent": "head", 
+      "pivot": [
+        218, 
+        207
+      ], 
+      "end": [
+        189, 
+        165
+      ], 
+      "scale": [
+        1, 
+        1
+      ]
+    }, 
+    {
+      "name": "far-ear-mid", 
+      "parent": "far-ear-base", 
+      "pivot": [
+        189, 
+        165
+      ], 
+      "end": [
+        153, 
+        140
+      ], 
+      "scale": [
+        1, 
+        1
+      ]
+    }, 
+    {
+      "name": "far-ear-tip", 
+      "parent": "far-ear-mid", 
+      "pivot": [
+        153, 
+        140
+      ], 
+      "scale": [
+        1, 
+        1
+      ]
+    }
+  ], 
+  "timeline": "landmarks.json", 
+  "meshParts": [
+    "foreleg", 
+    "foreleg-far", 
+    "hindleg", 
+    "near-ear", 
+    "far-ear"
+  ], 
+  "renderer": "render.py", 
+  "dependencies": [
+    "Python 3", 
+    "numpy", 
+    "Pillow 12.3"
+  ], 
+  "spineCompatibilityVerified": false
+}

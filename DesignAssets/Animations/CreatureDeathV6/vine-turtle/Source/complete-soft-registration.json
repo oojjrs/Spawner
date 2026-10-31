@@ -1,0 +1,94 @@
+[
+  {
+    "part": "head",
+    "sourceRect": [
+      0,
+      0,
+      627,
+      627
+    ],
+    "matrix": [
+      [
+        0.305,
+        0.0,
+        44.0
+      ],
+      [
+        0.0,
+        0.305,
+        231.0
+      ]
+    ],
+    "knownSource": "head-original.png",
+    "output": "head-bound.png"
+  },
+  {
+    "part": "fore-near",
+    "sourceRect": [
+      627,
+      0,
+      1254,
+      627
+    ],
+    "matrix": [
+      [
+        0.30296893,
+        -0.0092559,
+        177.50737
+      ],
+      [
+        0.0092559,
+        0.30296893,
+        267.8279
+      ]
+    ],
+    "knownSource": "fore-near-original.png",
+    "output": "fore-near-bound.png"
+  },
+  {
+    "part": "fore-far",
+    "sourceRect": [
+      0,
+      627,
+      627,
+      1254
+    ],
+    "matrix": [
+      [
+        0.28,
+        0.0,
+        10.0
+      ],
+      [
+        0.0,
+        0.28,
+        315.0
+      ]
+    ],
+    "knownSource": "fore-far-original.png",
+    "output": "fore-far-bound.png"
+  },
+  {
+    "part": "hind-near",
+    "sourceRect": [
+      627,
+      627,
+      1254,
+      1254
+    ],
+    "matrix": [
+      [
+        0.28,
+        0.0,
+        332.0
+      ],
+      [
+        0.0,
+        0.28,
+        309.0
+      ]
+    ],
+    "knownSource": "hind-near-original.png",
+    "output": "hind-near-bound.png"
+  }
+]

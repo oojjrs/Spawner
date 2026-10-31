@@ -1,0 +1,84 @@
+{
+  "canvas": [
+    512, 
+    512
+  ], 
+  "source": "Source/reference.png", 
+  "parts": {
+    "wing-far": "Parts/wing-far.png", 
+    "tail": "Parts/tail.png", 
+    "leg-far-lower": "Parts/leg-far-lower.png", 
+    "leg-far-upper": "Parts/leg-far-upper.png", 
+    "leg-near-lower": "Parts/leg-near-lower.png", 
+    "leg-near-upper": "Parts/leg-near-upper.png", 
+    "body": "Parts/body.png", 
+    "head": "Parts/head.png", 
+    "wing-near": "Parts/wing-near.png"
+  }, 
+  "drawOrder": [
+    "wing-far", 
+    "tail", 
+    "leg-far-lower", 
+    "leg-far-upper", 
+    "leg-near-lower", 
+    "leg-near-upper", 
+    "body", 
+    "head", 
+    "wing-near"
+  ], 
+  "pivots": {
+    "body": [
+      256, 
+      290
+    ], 
+    "head": [
+      228, 
+      242
+    ], 
+    "wing-near": [
+      282, 
+      255
+    ], 
+    "wing-far": [
+      177, 
+      249
+    ], 
+    "tail": [
+      304, 
+      354
+    ], 
+    "leg-near-upper": [
+      258, 
+      349
+    ], 
+    "leg-near-lower": [
+      255, 
+      378
+    ], 
+    "leg-far-upper": [
+      209, 
+      351
+    ], 
+    "leg-far-lower": [
+      202, 
+      376
+    ]
+  }, 
+  "scale": [
+    1, 
+    1
+  ], 
+  "groundY": 419, 
+  "parent": {
+    "head": "body", 
+    "wing-near": "body", 
+    "wing-far": "body", 
+    "tail": "body", 
+    "leg-near-upper": "body", 
+    "leg-near-lower": "leg-near-upper", 
+    "leg-far-upper": "body", 
+    "leg-far-lower": "leg-far-upper"
+  }, 
+  "timeline": "poses.json", 
+  "spineCompatibilityVerified": false
+}

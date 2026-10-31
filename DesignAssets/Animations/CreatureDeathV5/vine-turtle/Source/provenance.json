@@ -1,0 +1,17 @@
+{
+  "appearanceAuthority": {
+    "path": "DesignAssets/CreatureConcepts/v3/vine-turtle.png",
+    "sha256": "16f3ac446ce4edcfbbb1d57b31e61934d1bd69ecce0ed4f7fd6b9e8c7abbed41"
+  },
+  "visibleSurface": "Source/reference.png",
+  "newArtwork": [
+    "Source/shell-hidden-drawing.png",
+    "Source/soft-hidden-drawing.png"
+  ],
+  "generationInput": "Source/cavity-input.png",
+  "outputHashes": {
+    "death.webp": "3df887c282c88528c9bd1340baa87cb507356cd2180213a9df878b6a0708cd59",
+    "preview.webp": "c70e0a920b782ab924300e5a1389e4fcc84606dc9aa982bf5627202d4027c397",
+    "thumbnail.webp": "5a2afcd2fecceede5009348fcd2b2b956b2bbd65d34d6ae33611de6c93e7da97"
+  }
+}

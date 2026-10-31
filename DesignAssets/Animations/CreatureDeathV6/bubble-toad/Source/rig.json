@@ -1,0 +1,401 @@
+{
+  "bodyPivot": [
+    370,
+    365
+  ],
+  "headPivot": [
+    215,
+    240
+  ],
+  "parts": {
+    "fore-far-hand": "MaskParts/fore-far-hand.png",
+    "fore-far-lower": "MaskParts/fore-far-lower.png",
+    "fore-far-upper": "MaskParts/fore-far-upper.png",
+    "fore-near-hand": "MaskParts/fore-near-hand.png",
+    "fore-near-lower": "MaskParts/fore-near-lower.png",
+    "fore-near-upper": "MaskParts/fore-near-upper.png",
+    "head-closed": "MaskParts/head-closed.png",
+    "head": "MaskParts/head.png",
+    "hind-far": "MaskParts/hind-far.png",
+    "hind-near": "MaskParts/hind-near.png",
+    "pouch": "MaskParts/pouch.png",
+    "torso": "MaskParts/torso.png"
+  },
+  "forelegs": {
+    "fore-near": [
+      [
+        311,
+        350
+      ],
+      [
+        313.15,
+        383.97
+      ],
+      [
+        262,
+        404
+      ]
+    ],
+    "fore-far": [
+      [
+        141,
+        360
+      ],
+      [
+        138.96,
+        384.48
+      ],
+      [
+        108.36,
+        407
+      ]
+    ]
+  },
+  "bones": {
+    "root": {
+      "parent": null,
+      "scale": [
+        1,
+        1
+      ]
+    },
+    "torso": {
+      "parent": "root",
+      "pivot": [
+        370,
+        365
+      ],
+      "scale": [
+        1,
+        1
+      ]
+    },
+    "head": {
+      "parent": "root",
+      "pivot": [
+        215,
+        240
+      ],
+      "scale": [
+        1,
+        1
+      ]
+    },
+    "fore-near-upper": {
+      "parent": "torso",
+      "joints": [
+        [
+          311,
+          350
+        ],
+        [
+          313.15,
+          383.97
+        ]
+      ]
+    },
+    "fore-near-lower": {
+      "parent": "fore-near-upper",
+      "joints": [
+        [
+          313.15,
+          383.97
+        ],
+        [
+          262,
+          404
+        ]
+      ]
+    },
+    "fore-far-upper": {
+      "parent": "root",
+      "joints": [
+        [
+          141,
+          360
+        ],
+        [
+          138.96,
+          384.48
+        ]
+      ]
+    },
+    "fore-far-lower": {
+      "parent": "fore-far-upper",
+      "joints": [
+        [
+          138.96,
+          384.48
+        ],
+        [
+          108.36,
+          407
+        ]
+      ]
+    },
+    "hind-near": {
+      "parent": "root",
+      "scale": [
+        1,
+        1
+      ]
+    },
+    "hind-far": {
+      "parent": "root",
+      "scale": [
+        1,
+        1
+      ]
+    },
+    "fore-near-hand": {
+      "parent": "root",
+      "wrist": [
+        262,
+        404
+      ],
+      "scale": [
+        1,
+        1
+      ]
+    },
+    "fore-far-hand": {
+      "parent": "root",
+      "wrist": [
+        108.36,
+        407
+      ],
+      "scale": [
+        1,
+        1
+      ]
+    }
+  },
+  "drawOrder": [
+    "hind-far",
+    "fore-far-upper",
+    "fore-far-lower",
+    "fore-far-hand",
+    "fore-near-upper",
+    "torso",
+    "pouch",
+    "head",
+    "hind-near",
+    "fore-near-lower",
+    "fore-near-hand"
+  ],
+  "motion": {
+    "torsoTranslationPx": [
+      0,
+      22
+    ],
+    "headTranslationPx": [
+      -9,
+      120
+    ],
+    "rotationDegrees": 0,
+    "scale": [
+      1,
+      1
+    ],
+    "activeDurationMs": 1070,
+    "finalHoldMs": 1000,
+    "forelegConstruction": "rigid attachments with fixed hand targets"
+  },
+  "sourceGeneration": [
+    "RigidParts/Raw/parts-atlas.png",
+    "RigidParts/Raw/torso-complete.png",
+    "MaskParts/Raw/mask-repair-atlas.png"
+  ],
+  "registrations": {
+    "fore-near-upper": {
+      "sourcePart": 4,
+      "matrix": [
+        [
+          0.13512474750232042,
+          0.11561664027952176,
+          281.8996789867336
+        ],
+        [
+          -0.11561664027952176,
+          0.13512474750232042,
+          364.1327903040891
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bindJoints": [
+        [
+          311,
+          350
+        ],
+        [
+          313.15,
+          383.97
+        ]
+      ]
+    },
+    "fore-near-lower": {
+      "sourcePart": 4,
+      "matrix": [
+        [
+          0.2442223071463666,
+          -0.15074793907299233,
+          277.1012791395971
+        ],
+        [
+          0.15074793907299233,
+          0.2442223071463666,
+          346.2041365944205
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bindJoints": [
+        [
+          313.15,
+          383.97
+        ],
+        [
+          262,
+          404
+        ]
+      ]
+    },
+    "fore-far-upper": {
+      "sourcePart": 7,
+      "matrix": [
+        [
+          0.12875409836065577,
+          0.09029508196721325,
+          117.79081967213114
+        ],
+        [
+          -0.09029508196721325,
+          0.12875409836065577,
+          367.4409836065574
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bindJoints": [
+        [
+          141,
+          360
+        ],
+        [
+          138.96,
+          384.48
+        ]
+      ]
+    },
+    "fore-far-lower": {
+      "sourcePart": 7,
+      "matrix": [
+        [
+          0.2361639344262295,
+          -0.05819672131147555,
+          106.68478688524593
+        ],
+        [
+          0.05819672131147555,
+          0.2361639344262295,
+          365.00334426229506
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bindJoints": [
+        [
+          138.96,
+          384.48
+        ],
+        [
+          108.36,
+          407
+        ]
+      ]
+    },
+    "fore-near-hand": {
+      "sourcePart": 5,
+      "matrix": [
+        [
+          0.28,
+          0.0,
+          220.84
+        ],
+        [
+          0.0,
+          0.28,
+          390.84
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "wrist": [
+        262,
+        404
+      ]
+    },
+    "fore-far-hand": {
+      "sourcePart": 8,
+      "matrix": [
+        [
+          0.25,
+          0.0,
+          65.86
+        ],
+        [
+          0.0,
+          0.25,
+          394.25
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "wrist": [
+        108.36,
+        407
+      ]
+    }
+  },
+  "headRegistration": [
+    [
+      0.4646162753486965,
+      0.032745319004709936,
+      115.68244868365916
+    ],
+    [
+      -0.032745319004709936,
+      0.4646162753486965,
+      189.95722847653403
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "maskRepair": {
+    "headSurface": "painted-mouth contour and complete neck overlap",
+    "pouchSurface": "single complete source; no secondary RGB stencil",
+    "forelegAttachments": "separate rigid upper, lower and hand; no blended mesh"
+  }
+}

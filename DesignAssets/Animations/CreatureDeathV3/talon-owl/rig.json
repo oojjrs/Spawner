@@ -1,0 +1,86 @@
+{
+  "bodyScale": 0.64,
+  "bodyX": 120,
+  "groundY": 416,
+  "headPivot": [
+    225,
+    202
+  ],
+  "headDrop": [
+    -22,
+    142
+  ],
+  "headAngle": -16,
+  "headStartMs": 210,
+  "headContactMs": 700,
+  "contactSettlePx": 1.5,
+  "accessories": {
+    "horn-far": {
+      "pivot": [
+        170,
+        159
+      ],
+      "angle": 8,
+      "overshoot": 2
+    },
+    "horn-near": {
+      "pivot": [
+        258,
+        162
+      ],
+      "angle": -7,
+      "overshoot": -2
+    }
+  },
+  "bodyIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "name": "talon-owl",
+  "eyesCloseMs": 180,
+  "bodyTimesMs": [
+    0,
+    180,
+    280,
+    380,
+    480,
+    600
+  ],
+  "approvedImage": "DesignAssets/CreatureConcepts/v3/talon-owl.png",
+  "expressionPatchBoxes": [
+    [
+      151,
+      175,
+      183,
+      216
+    ],
+    [
+      202,
+      178,
+      260,
+      225
+    ]
+  ],
+  "reference": "Source/reference.png",
+  "parts": {
+    "horn-far": "Parts/horn-far.png",
+    "horn-near": "Parts/horn-near.png",
+    "head-alternate": "Parts/head-alternate.png",
+    "head": "Parts/head.png"
+  },
+  "boneParents": {
+    "root": null,
+    "head": "root",
+    "horn-far": "head",
+    "horn-near": "head"
+  },
+  "headScale": [
+    1,
+    1
+  ],
+  "timeline": "poses.json"
+}

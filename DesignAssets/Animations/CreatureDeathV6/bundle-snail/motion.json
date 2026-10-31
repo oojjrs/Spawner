@@ -1,0 +1,254 @@
+[
+  {
+    "timeMs": 0,
+    "bodyCel": "body-neutral.png",
+    "shellY": 0.9679999999999999,
+    "contactLimitY": 2
+  },
+  {
+    "timeMs": 40,
+    "bodyCel": "body-neutral.png",
+    "shellY": 2,
+    "contactLimitY": 2
+  },
+  {
+    "timeMs": 80,
+    "bodyCel": "body-neutral.png",
+    "shellY": 2,
+    "contactLimitY": 2
+  },
+  {
+    "timeMs": 120,
+    "bodyCel": "body-neutral.png",
+    "shellY": 2,
+    "contactLimitY": 2
+  },
+  {
+    "timeMs": 160,
+    "bodyCel": "body-01.png",
+    "shellY": 2.968,
+    "contactLimitY": 10
+  },
+  {
+    "timeMs": 200,
+    "bodyCel": "body-01.png",
+    "shellY": 5.696,
+    "contactLimitY": 10
+  },
+  {
+    "timeMs": 240,
+    "bodyCel": "body-02.png",
+    "shellY": 10.184000000000003,
+    "contactLimitY": 13
+  },
+  {
+    "timeMs": 280,
+    "bodyCel": "body-02.png",
+    "shellY": 13,
+    "contactLimitY": 13
+  },
+  {
+    "timeMs": 320,
+    "bodyCel": "body-03.png",
+    "shellY": 13.968,
+    "contactLimitY": 21
+  },
+  {
+    "timeMs": 360,
+    "bodyCel": "body-03.png",
+    "shellY": 16.695999999999998,
+    "contactLimitY": 21
+  },
+  {
+    "timeMs": 400,
+    "bodyCel": "body-04.png",
+    "shellY": 19,
+    "contactLimitY": 19
+  },
+  {
+    "timeMs": 440,
+    "bodyCel": "body-04.png",
+    "shellY": 19,
+    "contactLimitY": 19
+  },
+  {
+    "timeMs": 480,
+    "bodyCel": "body-04.png",
+    "shellY": 19,
+    "contactLimitY": 19
+  },
+  {
+    "timeMs": 520,
+    "bodyCel": "body-05.png",
+    "shellY": 19.968,
+    "contactLimitY": 24
+  },
+  {
+    "timeMs": 560,
+    "bodyCel": "body-05.png",
+    "shellY": 22.696,
+    "contactLimitY": 24
+  },
+  {
+    "timeMs": 600,
+    "bodyCel": "body-07.png",
+    "shellY": 27.184,
+    "contactLimitY": 35
+  },
+  {
+    "timeMs": 640,
+    "bodyCel": "body-07.png",
+    "shellY": 33.432,
+    "contactLimitY": 35
+  },
+  {
+    "timeMs": 680,
+    "bodyCel": "body-07.png",
+    "shellY": 35,
+    "contactLimitY": 35
+  },
+  {
+    "timeMs": 720,
+    "bodyCel": "body-08.png",
+    "shellY": 35.968,
+    "contactLimitY": 38
+  },
+  {
+    "timeMs": 760,
+    "bodyCel": "body-08.png",
+    "shellY": 38,
+    "contactLimitY": 38
+  },
+  {
+    "timeMs": 800,
+    "bodyCel": "body-09.png",
+    "shellY": 38.968,
+    "contactLimitY": 39
+  },
+  {
+    "timeMs": 840,
+    "bodyCel": "body-09.png",
+    "shellY": 39,
+    "contactLimitY": 39
+  },
+  {
+    "timeMs": 880,
+    "bodyCel": "body-09.png",
+    "shellY": 39,
+    "contactLimitY": 39
+  },
+  {
+    "timeMs": 920,
+    "bodyCel": "body-10.png",
+    "shellY": 39,
+    "contactLimitY": 39
+  },
+  {
+    "timeMs": 960,
+    "bodyCel": "body-10.png",
+    "shellY": 39,
+    "contactLimitY": 39
+  },
+  {
+    "timeMs": 1000,
+    "bodyCel": "body-11.png",
+    "shellY": 39,
+    "contactLimitY": 39
+  },
+  {
+    "timeMs": 1040,
+    "bodyCel": "body-11.png",
+    "shellY": 39,
+    "contactLimitY": 39
+  },
+  {
+    "timeMs": 1080,
+    "bodyCel": "body-11.png",
+    "shellY": 39,
+    "contactLimitY": 39
+  },
+  {
+    "timeMs": 1120,
+    "bodyCel": "body-11.png",
+    "shellY": 39,
+    "contactLimitY": 39
+  },
+  {
+    "timeMs": 1160,
+    "bodyCel": "body-11.png",
+    "shellY": 39,
+    "contactLimitY": 39
+  },
+  {
+    "timeMs": 1200,
+    "bodyCel": "body-11.png",
+    "shellY": 39,
+    "contactLimitY": 39
+  },
+  {
+    "timeMs": 1240,
+    "bodyCel": "body-11.png",
+    "shellY": 39,
+    "contactLimitY": 39
+  },
+  {
+    "timeMs": 1280,
+    "bodyCel": "body-11.png",
+    "shellY": 39,
+    "contactLimitY": 39
+  },
+  {
+    "timeMs": 1320,
+    "bodyCel": "body-11.png",
+    "shellY": 39,
+    "contactLimitY": 39
+  },
+  {
+    "timeMs": 1360,
+    "bodyCel": "body-11.png",
+    "shellY": 39,
+    "contactLimitY": 39
+  },
+  {
+    "timeMs": 1400,
+    "bodyCel": "body-11.png",
+    "shellY": 39,
+    "contactLimitY": 39
+  },
+  {
+    "timeMs": 1440,
+    "bodyCel": "body-11.png",
+    "shellY": 39,
+    "contactLimitY": 39
+  },
+  {
+    "timeMs": 1480,
+    "bodyCel": "body-11.png",
+    "shellY": 39,
+    "contactLimitY": 39
+  },
+  {
+    "timeMs": 1520,
+    "bodyCel": "body-11.png",
+    "shellY": 39,
+    "contactLimitY": 39
+  },
+  {
+    "timeMs": 1560,
+    "bodyCel": "body-11.png",
+    "shellY": 39,
+    "contactLimitY": 39
+  },
+  {
+    "timeMs": 1600,
+    "bodyCel": "body-11.png",
+    "shellY": 39,
+    "contactLimitY": 39
+  },
+  {
+    "timeMs": 1640,
+    "bodyCel": "body-11.png",
+    "shellY": 39,
+    "contactLimitY": 39
+  }
+]

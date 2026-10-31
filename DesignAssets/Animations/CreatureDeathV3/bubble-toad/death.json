@@ -1,0 +1,47 @@
+{
+  "name": "bubble-toad",
+  "action": "death",
+  "sourceImage": "DesignAssets/CreatureConcepts/v3/bubble-toad.png",
+  "image": "DesignAssets/Animations/CreatureDeathV3/bubble-toad/death.webp",
+  "frameSize": 512,
+  "columns": 6,
+  "frameCount": 5,
+  "pivotX": 256,
+  "pivotY": 448,
+  "durationsMs": [
+    80,
+    110,
+    90,
+    90,
+    900
+  ],
+  "durationMs": 1270,
+  "loop": false,
+  "preview": "DesignAssets/Animations/CreatureDeathV3/bubble-toad/preview.webp",
+  "thumbnail": "DesignAssets/Animations/CreatureDeathV3/bubble-toad/thumbnail.webp",
+  "previewLoop": 0,
+  "rig": "DesignAssets/Animations/CreatureDeathV3/bubble-toad/rig.json",
+  "renderer": "DesignAssets/Animations/CreatureDeathV3/bubble-toad/render.py",
+  "contact": "DesignAssets/Animations/CreatureDeathV3/bubble-toad/contact.png",
+  "identityCheck": "DesignAssets/Animations/CreatureDeathV3/bubble-toad/identity-check.json",
+  "sourcePlacement": {
+    "canvas": [
+      512,
+      512
+    ],
+    "bodySourceScale": 0.6,
+    "groundY": 448,
+    "referenceNormalization": {
+      "source": "approved concept",
+      "scale": 1.38,
+      "translation": [
+        4,
+        115
+      ]
+    }
+  },
+  "method": "Four newly drawn body-only collapse cels retain the shrinking folded throat sac and loose forearm anatomy. One immutable approved-proportion complete skull/eyes source is translated and rotated at unit scale over every body cel; no skull, nose or eye scale interpolation.",
+  "sourceAuthoring": "DesignAssets/Animations/CreatureDeathV3/bubble-toad/Source/authoring.json",
+  "prepare": "DesignAssets/Animations/CreatureDeathV3/bubble-toad/Source/prepare.py",
+  "sourceOverlay": "DesignAssets/Animations/CreatureDeathV3/bubble-toad/source-overlay.png"
+}

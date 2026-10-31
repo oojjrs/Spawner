@@ -1,0 +1,38 @@
+{
+  "source": "closed-eye-drawing-v4.png", 
+  "matrix": [
+    [
+      0.4083916345843584, 
+      -0.0053483307481095735, 
+      4.474186974251188
+    ], 
+    [
+      0.0053483307481095735, 
+      0.4083916345843584, 
+      -2.4138662067999928
+    ], 
+    [
+      0.0, 
+      0.0, 
+      1.0
+    ]
+  ], 
+  "rectangles": [
+    [
+      87, 
+      322, 
+      112, 
+      354
+    ], 
+    [
+      135, 
+      322, 
+      177, 
+      363
+    ]
+  ], 
+  "inliers": 9, 
+  "alphaSource": "Parts/head.png", 
+  "mask": "Source/eye-mask-v4.png", 
+  "retainedPixels": "all pixels outside eye mask, including forehead spots and alpha"
+}

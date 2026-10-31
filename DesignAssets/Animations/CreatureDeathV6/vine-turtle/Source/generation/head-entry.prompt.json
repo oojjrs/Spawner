@@ -1,0 +1,9 @@
+{
+  "prompt": "Draw six consecutive HEAD-ONLY animation cutouts of this exact spotted olive turtle. This is a precise 3x2 grid of 512x512 transparent cells (total1536x1024), original camera remains fixed. The original head in image 2 is the appearance authority: wide cream jaw, rounded olive forehead with original spots, original eye placement. Image1 shows its neck entrance under the gray front shell lip near coordinate(210,350) on the 512 actor canvas. In every cell, use the same original actor scale and keep that entrance fixed. Only paint the visible head/short neck, no shell/rim/plates, feet/toenails/leaves or body. Frame1: original head near x95..225,y310..396, eyes beginning to close, original neutral proportions. Frame2: chin tucks slightly, head turns toward its own neck hole and starts drawing backward, face now about x110..225,y320..400, eyes closed. Frame3: farther back, genuine 3D turn/foreshortening into entrance, head side/back plane replaces the frontal face, visible head about x140..220,y335..395, no shoe/toes. Frame4: skull is halfway inside its own neck entrance, only rounded spotted rear cheek/back plane about x172..222,y342..391 visible. Frame5: three quarters inside, visible skin crescent about x193..222,y349..385. Frame6: last small sliver of olive skin about x213..222,y356..377 entering the neck; this is OCCLUSION by the entrance, not a tiny resized head. The head is one consistent volume turning and passing behind the same opening. Do not draw the aperture/armor itself; portions of the head behind the fixed entry are transparent/unpainted. No broad cream belly/plastron. Preserve original painterly soft cartoon look, not realistic, no new markings. Transparent background. Six heads only, no labels or guides. Head ends in its own neck, never in the front-leg slot.",
+  "inputs": [
+    "../registered-reference.png",
+    "../head-original.png"
+  ],
+  "output": "head-entry.png",
+  "transparentBackground": true
+}

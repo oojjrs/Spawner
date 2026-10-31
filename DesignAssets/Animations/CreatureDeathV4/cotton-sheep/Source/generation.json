@@ -1,0 +1,39 @@
+{
+  "provider": "built-in image_gen",
+  "entries": [
+    {
+      "file": "parts-atlas.png",
+      "prompt": "Use case: precise-object-edit. Actual production layered anatomical source kit for a hybrid 2D death animation. Image1 is the APPROVED ORIGINAL design authority; image2 is the new final-collapse key for joint/overlap guidance. Nine separate parts in a 3 by 3 atlas: row1 complete fluffy torso WITHOUT head, ears, legs or tail; complete original head INCLUDING the exact original oversized wool forehead clusters and cream face, eyes open, WITHOUT ears or chest/neck wool collar; full near floppy ear. Row2 full far floppy ear; complete near foreleg from soft wool shoulder root through cream elbow/shin to brown hoof; complete far foreleg, same anatomy. Row3 complete near hindleg from soft wool hip root through bent knee/hock to brown hoof; complete far hindleg; short fluffy tail. The four legs must be continuous complete limbs, softly bent standing reference anatomy with hidden upper roots drawn, clear knee and ankle positions, solid coherent skin and hoof, no limb chopped into pieces. Keep the sheep's short original leg lengths and original round torso volume. Every attachment is individually complete, continuous, independently separated by generous transparent space, hidden contours fully painted with natural rounded fur/feather/wool, no stump cross sections, flat sliced planes, holes or outlined socket circles. Preserve exact design/texture motifs, palette, line weight, original anatomical proportions and three-quarter view. Parts are in neutral orientation for one-time anatomical registration; no animation frames. All parts should be large enough for clean extraction and full detail. True transparent RGBA alpha. No gray/white backgrounds, checkerboards, shadows, labels, text, borders, frames, grid lines, arrows, extra parts or assembled characters.",
+      "references": [
+        "reference.png",
+        "final-key-drawing.png"
+      ]
+    },
+    {
+      "file": "eye-variant-drawing.png",
+      "prompt": "Use case: precise-object-edit. Exact production expression attachment edit. Edit ONLY the eyes of this isolated cotton-sheep head to fully closed relaxed eyelids. Preserve every other pixel and silhouette: identical skull size and shape, same wool clumps/feather spots/fur markings, same nose, beak, forehead, cheek volume and colors. Keep the head in exactly the same position and orientation on the same square transparent canvas with the same margins. No ears, horns, torso, neck, added collars or other objects. Do not recenter, zoom, resize, rotate or redraw the head design. True transparent alpha background. This actual alternate eye artwork will be precisely registered and composited into the locked head attachment, keeping the original geometry.",
+      "references": [
+        "head-eye-edit.png"
+      ]
+    }
+  ],
+  "generations": [
+    {
+      "output": "joints-atlas.png",
+      "generatedImage": "D:\\.codex\\generated_images\\01a18389-9751-73b3-bbe4-a6f4a5854d96\\exec-77376605-f4e3-49e5-9ea1-9801b2b4fc66.png",
+      "prompt": "Edit this exact cartoon sheep animation-part atlas. Preserve all twelve components, their exact positions, sizes, outlines, colors and soft fur style. Correct only the open cup-like sockets on the part ends: every oval opening or dark cavity must become a CLOSED solid smoothly rounded cream-fur overlap cap. The connecting ends are opaque and fully painted, with no holes, socket rings or hollow tube appearance. Keep the little brown cloven hooves exactly as drawn; their cream ankle collars also have a solid rounded top. Transparent background, no other changes.",
+      "references": [
+        "joints-before-caps.png"
+      ]
+    },
+    {
+      "output": "joints-before-caps.png",
+      "generatedImage": "D:\\.codex\\generated_images\\01a18389-9751-73b3-bbe4-a6f4a5854d96\\exec-a8ee2e00-494e-4323-b406-80231a2f96d8.png",
+      "prompt": "Technical game-art sprite atlas for the CUTE CARTOON SHEEP shown in image1. These are small non-human animal animation attachments. Image2 shows its four sheep legs. Draw a neat 4-row, 3-column collection of twelve separate illustrated components: row1 near front leg, row2 far front leg, row3 near rear leg, row4 far rear leg. Each row has (left) the fluffy wool upper-leg piece, (middle) the short cream-furred lower-leg piece, and (right) the little brown split sheep hoof. Each component needs a complete softly rounded overlap at its connection, suitable for rotating the pieces as an animation joint. Match the original sheep's proportions, gentle colors, thin outline, wool texture, and tiny brown hooves. Keep roomy transparent spacing and every component fully visible. Transparent RGBA background. No writing, borders, labels, scenery or shadows. Actual production source artwork for this sheep game character.",
+      "references": [
+        "../../../../CreatureConcepts/v3/cotton-sheep.png",
+        "limb-reference.png"
+      ]
+    }
+  ]
+}

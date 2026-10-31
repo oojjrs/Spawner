@@ -1,0 +1,128 @@
+[
+  {
+    "name": "body", 
+    "image": "Parts/body.png", 
+    "foreground": "Parts/body-front.png", 
+    "source": "Source/body-completed-source.png", 
+    "sourceBounds": [
+      167, 
+      271, 
+      433, 
+      396
+    ], 
+    "kind": "rigid", 
+    "completedHiddenSurfaces": true, 
+    "active": true, 
+    "registeredAlphaBounds": [
+      167, 
+      271, 
+      433, 
+      396
+    ]
+  }, 
+  {
+    "name": "head", 
+    "image": "Parts/head.png", 
+    "foreground": "Parts/head-front.png", 
+    "source": "Source/head-completed-source.png", 
+    "sourceBounds": [
+      119, 
+      185, 
+      333, 
+      338
+    ], 
+    "kind": "rigid", 
+    "completedHiddenSurfaces": true, 
+    "active": true, 
+    "registeredAlphaBounds": [
+      132, 
+      196, 
+      305, 
+      331
+    ]
+  }, 
+  {
+    "name": "near-ear", 
+    "image": "Parts/near-ear.png", 
+    "foreground": "Parts/near-ear-front.png", 
+    "source": "Source/near-ear-completed-source.png", 
+    "sourceBounds": [
+      244, 
+      67, 
+      378, 
+      241
+    ], 
+    "kind": "articulated", 
+    "completedHiddenSurfaces": true, 
+    "active": true, 
+    "registeredAlphaBounds": [
+      251, 
+      86, 
+      366, 
+      227
+    ]
+  }, 
+  {
+    "name": "far-ear", 
+    "image": "Parts/far-ear.png", 
+    "foreground": "Parts/far-ear-front.png", 
+    "source": "Source/far-ear-completed-source.png", 
+    "sourceBounds": [
+      108, 
+      98, 
+      246, 
+      233
+    ], 
+    "kind": "articulated", 
+    "completedHiddenSurfaces": true, 
+    "active": true, 
+    "registeredAlphaBounds": [
+      123, 
+      128, 
+      237, 
+      210
+    ]
+  }, 
+  {
+    "name": "foreleg", 
+    "image": "Parts/foreleg.png", 
+    "foreground": "Parts/foreleg-front.png", 
+    "source": "Source/foreleg-completed-source.png", 
+    "sourceBounds": [
+      194, 
+      322, 
+      276, 
+      439
+    ], 
+    "kind": "articulated", 
+    "completedHiddenSurfaces": true, 
+    "active": true, 
+    "registeredAlphaBounds": [
+      194, 
+      322, 
+      276, 
+      439
+    ]
+  }, 
+  {
+    "name": "hindleg", 
+    "image": "Parts/hindleg.png", 
+    "foreground": "Parts/hindleg-front.png", 
+    "source": "Source/hindleg-completed-source.png", 
+    "sourceBounds": [
+      276, 
+      309, 
+      394, 
+      442
+    ], 
+    "kind": "articulated", 
+    "completedHiddenSurfaces": true, 
+    "active": true, 
+    "registeredAlphaBounds": [
+      276, 
+      309, 
+      394, 
+      442
+    ]
+  }
+]

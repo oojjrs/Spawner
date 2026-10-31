@@ -1,0 +1,336 @@
+{
+  "name": "bundle-snail", 
+  "action": "death", 
+  "sourceImage": "DesignAssets/CreatureConcepts/v3/bundle-snail.png", 
+  "image": "DesignAssets/Animations/CreatureDeathV1/bundle-snail/death.webp", 
+  "frameSize": 512, 
+  "columns": 4, 
+  "pivotX": 256, 
+  "pivotY": 448, 
+  "frameCount": 16, 
+  "durationsMs": [
+    130, 
+    80, 
+    65, 
+    65, 
+    60, 
+    55, 
+    50, 
+    50, 
+    60, 
+    70, 
+    90, 
+    110, 
+    120, 
+    140, 
+    180, 
+    1000
+  ], 
+  "durationMs": 2325, 
+  "loop": false, 
+  "preview": "DesignAssets/Animations/CreatureDeathV1/bundle-snail/preview.webp", 
+  "thumbnail": "DesignAssets/Animations/CreatureDeathV1/bundle-snail/thumbnail.webp", 
+  "contact": "DesignAssets/Animations/CreatureDeathV1/bundle-snail/contact.jpg", 
+  "method": "Newly drawn collapsing poses generated from the locked original; fixed source cells, one common output scale, translation-only ground registration; no synthetic inbetweens.", 
+  "sourceSheet": "DesignAssets/Animations/CreatureDeathV1/bundle-snail/Source/drawn-sheet.png", 
+  "frameSources": "DesignAssets/Animations/CreatureDeathV1/bundle-snail/Frames/", 
+  "commonScale": 1.2717770034843205, 
+  "groundY": 423, 
+  "sourceSheetCanvas": [
+    1254, 
+    1254
+  ], 
+  "registrations": [
+    {
+      "sourceCell": [
+        0, 
+        0, 
+        9, 
+        101
+      ], 
+      "sourceBounds": [
+        0, 
+        0, 
+        287, 
+        227
+      ], 
+      "translation": [
+        76, 
+        134
+      ]
+    }, 
+    {
+      "sourceCell": [
+        1, 
+        0, 
+        357, 
+        93
+      ], 
+      "sourceBounds": [
+        0, 
+        0, 
+        257, 
+        238
+      ], 
+      "translation": [
+        120, 
+        120
+      ]
+    }, 
+    {
+      "sourceCell": [
+        2, 
+        0, 
+        656, 
+        116
+      ], 
+      "sourceBounds": [
+        0, 
+        0, 
+        274, 
+        220
+      ], 
+      "translation": [
+        101, 
+        143
+      ]
+    }, 
+    {
+      "sourceCell": [
+        3, 
+        0, 
+        958, 
+        132
+      ], 
+      "sourceBounds": [
+        0, 
+        0, 
+        288, 
+        205
+      ], 
+      "translation": [
+        87, 
+        162
+      ]
+    }, 
+    {
+      "sourceCell": [
+        0, 
+        1, 
+        16, 
+        429
+      ], 
+      "sourceBounds": [
+        0, 
+        0, 
+        287, 
+        215
+      ], 
+      "translation": [
+        85, 
+        150
+      ]
+    }, 
+    {
+      "sourceCell": [
+        1, 
+        1, 
+        322, 
+        432
+      ], 
+      "sourceBounds": [
+        0, 
+        0, 
+        303, 
+        207
+      ], 
+      "translation": [
+        75, 
+        160
+      ]
+    }, 
+    {
+      "sourceCell": [
+        2, 
+        1, 
+        637, 
+        437
+      ], 
+      "sourceBounds": [
+        0, 
+        0, 
+        304, 
+        204
+      ], 
+      "translation": [
+        77, 
+        164
+      ]
+    }, 
+    {
+      "sourceCell": [
+        3, 
+        1, 
+        958, 
+        462
+      ], 
+      "sourceBounds": [
+        0, 
+        0, 
+        294, 
+        179
+      ], 
+      "translation": [
+        87, 
+        195
+      ]
+    }, 
+    {
+      "sourceCell": [
+        0, 
+        2, 
+        13, 
+        765
+      ], 
+      "sourceBounds": [
+        0, 
+        0, 
+        295, 
+        169
+      ], 
+      "translation": [
+        81, 
+        208
+      ]
+    }, 
+    {
+      "sourceCell": [
+        1, 
+        2, 
+        336, 
+        768
+      ], 
+      "sourceBounds": [
+        0, 
+        0, 
+        290, 
+        171
+      ], 
+      "translation": [
+        93, 
+        206
+      ]
+    }, 
+    {
+      "sourceCell": [
+        2, 
+        2, 
+        645, 
+        775
+      ], 
+      "sourceBounds": [
+        0, 
+        0, 
+        292, 
+        166
+      ], 
+      "translation": [
+        87, 
+        212
+      ]
+    }, 
+    {
+      "sourceCell": [
+        3, 
+        2, 
+        958, 
+        782
+      ], 
+      "sourceBounds": [
+        0, 
+        0, 
+        285, 
+        156
+      ], 
+      "translation": [
+        87, 
+        225
+      ]
+    }, 
+    {
+      "sourceCell": [
+        0, 
+        3, 
+        14, 
+        1061
+      ], 
+      "sourceBounds": [
+        0, 
+        0, 
+        298, 
+        156
+      ], 
+      "translation": [
+        82, 
+        225
+      ]
+    }, 
+    {
+      "sourceCell": [
+        1, 
+        3, 
+        327, 
+        1061
+      ], 
+      "sourceBounds": [
+        0, 
+        0, 
+        298, 
+        156
+      ], 
+      "translation": [
+        82, 
+        225
+      ]
+    }, 
+    {
+      "sourceCell": [
+        2, 
+        3, 
+        641, 
+        1061
+      ], 
+      "sourceBounds": [
+        0, 
+        0, 
+        298, 
+        156
+      ], 
+      "translation": [
+        82, 
+        225
+      ]
+    }, 
+    {
+      "sourceCell": [
+        3, 
+        3, 
+        954, 
+        1061
+      ], 
+      "sourceBounds": [
+        0, 
+        0, 
+        298, 
+        156
+      ], 
+      "translation": [
+        82, 
+        225
+      ]
+    }
+  ], 
+  "referenceSha256": "a7f27ecae3fe0efd86b7cb74738047c99de46d2aff3d1ee9e3f79360a85d1700", 
+  "rootMotion": false, 
+  "finalPose": "Collapsed with head/body resting low, eyes closed, limbs or eyestalks relaxed; no recovery."
+}

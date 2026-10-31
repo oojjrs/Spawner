@@ -1,0 +1,10 @@
+{
+  "tool": "image_gen",
+  "prompt": "Use case: stylized-concept. Draw ONE complete animation key frame of this exact tiny owl, on genuinely transparent background in the SAME fixed square canvas as image 1. Input1 is the sole approved original character and fixes skull size, compact body, feather lengths, colors, face disk, short beak, ear tufts, two short taloned feet and short tail. Input2 is ONLY a geometric motion guide in the same 512-unit canvas; do not copy its block shapes, line, or gray colors. This is 200 milliseconds into loss of flight lift, BEFORE first foot contact: the small body has freely dropped about40 canvas pixels, and shifted right12, the short legs hang loosely with talon tips still slightly above ground448. Wings lose lift at their shoulders and droop outward toward a shallow raised V, with the longest tips about(45,235) and(460,235), and shoulders around(190,335) and(290,330). Draw the full wings with natural continuous feather overlap and actual anatomy, not cut pieces. Head center about(214,310), its original skull/facial disk width100 canvas units and original short ear tufts; body about(247,365) remains compact100 wide, not a tall owl. Head bows slightly and eyelids droop, beak points down. Maintain the exact same individual as image1, fixed camera, fixed body/wing scale, original brown-gray feathers/cream tips/white brows/cream chest/gold eyes. No growth or camera zoom. Do not fit or center to the new pose's bounding box. Keep the designated coordinates and empty space above it. New hidden shoulder/chest surfaces must be continuous feathered artwork with no seams, black inner circles, doubled outlines, holes, or detached fragments. Match the painterly game sprite style, not photo. No perch, floor, cast shadow, guide marks or text.",
+  "output": "Source/drawn-200.png",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "Source/reference.png",
+    "Source/Inputs/fall-200-guide.png"
+  ]
+}
