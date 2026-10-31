@@ -1,13 +1,16 @@
+import { createStateDecoder } from "./state-delta.mjs";
+
 export function createClient(onState, onError, onSaved, workerSource) {
   let workerUrl = URL.createObjectURL(new Blob([workerSource], { type: "text/javascript" }));
   const worker = new Worker(workerUrl);
   const requests = new Map();
   let nextId = 0;
+  const stateDecoder = createStateDecoder();
   let fatalError = null;
   worker.onmessage = event => {
     if (workerUrl) { URL.revokeObjectURL(workerUrl); workerUrl = null; }
     const message = event.data;
-    if (message.type === "state") { onState(message.packet); return; }
+    if (message.type === "state") { onState(stateDecoder.decode(message.packet)); return; }
     if (message.type === "error") { onError(message.error, message.storageError === true); return; }
     if (message.type === "saved") { onSaved(message); return; }
     const request = requests.get(message.id);
@@ -15,7 +18,7 @@ export function createClient(onState, onError, onSaved, workerSource) {
     if (message.type === "progress") { request.onProgress?.(message.progress); return; }
     requests.delete(message.id);
     if (message.error) request.reject(new Error(message.error));
-    else request.resolve(message.result);
+    else request.resolve(message.result?.state ? stateDecoder.decode(message.result) : message.result);
   };
   worker.onerror = event => {
     if (workerUrl) { URL.revokeObjectURL(workerUrl); workerUrl = null; }

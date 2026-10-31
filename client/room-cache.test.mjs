@@ -65,3 +65,18 @@ test("JSON 왕복 저장도 복원하고 손상된 새 지형을 시드로 덮�
   assert.throws(() => client.context.restoreRoom(saved), /지형 저장 형식/);
   assert.equal(client.generations(), 0);
 });
+
+test("새 방은 초보자 도움말을 기본으로 켜고 직접 끈 설정도 저장과 복원에서 유지한다", () => {
+  const client = fixture();
+  client.context.crypto = crypto;
+  client.room.world.food = [];
+  const enabled = client.context.createRoom("도움말 방", 7, "bean", null, false);
+  assert.equal(enabled.beginnerHelpEnabled, true);
+  assert.equal(client.context.restoreRoom(client.context.saveRoom(enabled)).beginnerHelpEnabled, true);
+  const disabled = client.context.createRoom("도움말 없는 방", 7, "bean", null, false, false);
+  assert.equal(disabled.beginnerHelpEnabled, false);
+  assert.equal(client.context.restoreRoom(client.context.saveRoom(disabled)).beginnerHelpEnabled, false);
+  const legacy = client.context.saveRoom(disabled);
+  delete legacy.beginnerHelpEnabled;
+  assert.equal(client.context.restoreRoom(legacy).beginnerHelpEnabled, false);
+});

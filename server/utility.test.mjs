@@ -2,6 +2,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { createGame } from "./game.mjs";
 import { createPersonality, personalityLabels, actionScore, riskValue } from "./utility.mjs";
+import { beginRetreat } from "./survival.mjs";
+import { canPursueCombat } from "./combat.mjs";
 
 function fixture(slots) {
   const colony = { id: 1, ownerId: "test", x: 40, y: 40, occupiedCells: new Set(["2,2"]) };
@@ -41,7 +43,21 @@ function enemy(fixture, x, y) {
   return agent;
 }
 
-test("논의한 같은 상황에서 성향별로 귀환·채집·전투·탐색을 고른다", () => {
+test("이동 중인 경로는 시작·도착 시각과 함께 전달되고 저장 후에도 유지된다", () => {
+  const f = fixture([]);
+  for (let index = 0; index < 30 && !f.agent.moveDuration; index++) advance(f, .1);
+  assert.ok(f.agent.moveDuration > 0);
+  const mark = f.game.snapshot().footprints.find(cell => cell.x === f.agent.x && cell.y === f.agent.y).marks.at(-1);
+  assert.equal(mark.startedAt, f.agent.moveStartedAt);
+  assert.equal(mark.at, f.agent.moveStartedAt + f.agent.moveDuration);
+  assert.ok(mark.at > f.environment.simSeconds);
+  assert.equal(typeof mark.grounded, "boolean");
+  f.game.restore(f.game.save());
+  const restored = f.game.snapshot().footprints.find(cell => cell.x === f.agent.x && cell.y === f.agent.y).marks.at(-1);
+  assert.deepEqual(restored, mark);
+});
+
+test("제한된 성향 보정은 비슷한 행동 가치 사이에서 귀환과 탐색 선호를 바꾼다", () => {
   const plans = [
     { action: "collect", foodGain: 40, riskReduction: -20 },
     { action: "return", foodGain: 20, riskReduction: 5 },
@@ -50,8 +66,8 @@ test("논의한 같은 상황에서 성향별로 귀환·채집·전투·탐색�
     { action: "recover", healingGain: 7, riskReduction: 8 },
     { action: "flee", riskReduction: 15 }
   ].map(plan => ({ foodGain: 0, combatGain: 0, informationGain: 0, healingGain: 0, ...plan }));
-  for (const [boldness, aggression, curiosity, expected] of [[0.5, 0.5, 0.5, "return"], [0.8, 0.2, 0.2, "collect"],
-    [0.8, 0.8, 0.2, "fight"], [0.5, 0.5, 0.8, "explore"], [0.2, 0.8, 0.2, "return"]]) {
+  for (const [boldness, aggression, curiosity, expected] of [[0.5, 0.5, 0.5, "return"], [0.8, 0.2, 0.2, "return"],
+    [0.8, 0.8, 0.2, "return"], [0.5, 0.5, 0.8, "explore"], [0.2, 0.8, 0.2, "return"]]) {
     const personality = { boldness, aggression, curiosity };
     const ranked = plans.toSorted((a, b) => actionScore(personality, { food: 1, defense: 1, information: 1 }, b) -
       actionScore(personality, { food: 1, defense: 1, information: 1 }, a));
@@ -163,6 +179,7 @@ test("체력·생산 비용·먹이가 손실 위험을 높인다", () => {
 
 test("적 처치는 6번째 프레임에 소유 군락에 전달하고 교전 종료 후 목표를 갱신한다", () => {
   const f = fixture([]);
+  f.environment.damageRandom = () => .5;
   f.agent.combatDisposition = "aggressive";
   f.game.agents.splice(1);
   f.agent.personality = Object.freeze({ boldness: 1, aggression: 1, curiosity: 0 });
@@ -183,6 +200,14 @@ test("적 처치는 6번째 프레임에 소유 군락에 전달하고 교전 �
   assert.ok([...f.environment.food.values()].some(food => food.kind === "corpse"));
   const finishedAt = f.agent.attack.exchangeEndsAt;
   advance(f, finishedAt - f.environment.simSeconds);
+  const pending = f.agent.combat.pendingCounter;
+  assert.equal(pending.exchange.targetHealth, 1);
+  assert.equal(pending.exchange.targetStrength, 10);
+  assert.equal(pending.exchange.counterDamage, 10);
+  assert.equal(f.agent.health, 100);
+  advance(f, pending.hitAt - f.environment.simSeconds);
+  assert.equal(f.agent.health, 90);
+  advance(f, pending.endsAt - f.environment.simSeconds + .1);
   assert.equal(f.agent.lastDecisionReason, "combatEnded");
 });
 
@@ -246,4 +271,96 @@ test("식량 비축량과 무관하게 부족 먹이를 모으고 잠긴 재료�
   assert.equal(f.agent.utility.action, "collect");
   assert.equal(f.agent.utility.target.key, "43,42");
   assert.ok(!f.agent.utility.scores.some(score => score.action === "collect" && score.key === "42,43"));
+});
+
+test("시작 유닛과 설계 유닛은 같은 상태에서 같은 후보와 점수를 갖는다", () => {
+  const f = fixture(["antenna"]);
+  const saved = JSON.parse(f.game.save());
+  const initial = saved.state.agents[0];
+  initial.templateId = null;
+  initial.actionPriorities = ["collect", "explore"];
+  const initialSaved = JSON.stringify(saved);
+  f.game.restore(initialSaved);
+  assert.equal(f.game.agents[0].actionPriorities, undefined);
+  advance(f, .1);
+  const first = structuredClone(f.game.agents[0].utility);
+  initial.templateId = 1;
+  initial.decisionPending = "restore";
+  f.environment.simSeconds = saved.state.simSeconds;
+  f.game.restore(JSON.stringify(saved));
+  advance(f, .1);
+  const second = f.game.agents[0].utility;
+  assert.equal(second.action, first.action);
+  assert.deepEqual(second.target, first.target);
+  assert.deepEqual(second.scores, first.scores);
+  f.game.restore(initialSaved);
+  assert.equal(f.game.agents[0].actionPriorities, undefined);
+});
+
+test("탈출 의사는 저장 후에도 유지되고 회복과 안전 대기 뒤에만 재교전을 허용한다", () => {
+  const f = fixture([]);
+  f.agent.health = 69;
+  f.agent.combatDisposition = "aggressive";
+  const opponent = enemy(f, 48, 42);
+  opponent.ownerId = "rival";
+  opponent.health = opponent.stats.health = 100;
+  beginRetreat(f.agent, f.environment.simSeconds);
+  f.agent.decisionPending = "damage";
+  f.game.restore(f.game.save());
+  f.agent = f.game.agents[0];
+  assert.equal(f.agent.retreat.recoverHealth, 70);
+  advance(f, .1);
+  assert.equal(f.agent.utility.action, "recover");
+  assert.equal(canPursueCombat(f.agent, opponent, f.environment.simSeconds), false);
+  advance(f, 4.2);
+  assert.ok(f.agent.health >= 70);
+  assert.ok(f.agent.retreat);
+  assert.equal(canPursueCombat(f.agent, opponent, f.environment.simSeconds), false);
+  advance(f, 5.2);
+  assert.equal(f.agent.retreat, null);
+  assert.equal(canPursueCombat(f.agent, opponent, f.environment.simSeconds), true);
+});
+
+test("위급한 유닛은 채집 유지 보너스와 성향보다 생존을 우선한다", () => {
+  const f = fixture(["strength"]);
+  f.agent.health = 20;
+  f.agent.personality = Object.freeze({ boldness: 1, aggression: 1, curiosity: 1 });
+  const rival = enemy(f, 45, 42);
+  rival.ownerId = "rival";
+  rival.combatDisposition = "aggressive";
+  rival.health = rival.stats.health = 100;
+  f.environment.food.set("43,42", { x: 43, y: 42, amount: 30, kind: "resource", resourceType: "clay" });
+  advance(f, .1);
+  assert.ok(f.agent.retreat);
+  assert.ok(["flee", "recover", "return"].includes(f.agent.utility.action));
+});
+
+test("변태 장소로 이동 중 위급해지면 이동 명령을 중단하고 생존 행동으로 전환한다", () => {
+  const f = fixture(["construction"]);
+  f.agent.health = 20;
+  f.agent.construction = { buildingKey: "storage", x: 44, y: 42, state: "moving", routeIndex: 0,
+    route: [{ x: 43, y: 42 }, { x: 44, y: 42 }] };
+  const rival = enemy(f, 45, 42);
+  rival.ownerId = "rival";
+  rival.combatDisposition = "aggressive";
+  rival.health = rival.stats.health = 100;
+  advance(f, .1);
+  assert.equal(f.agent.construction, null);
+  assert.ok(f.agent.retreat);
+  assert.ok(["flee", "recover", "return"].includes(f.agent.utility.action));
+});
+
+test("진행 중인 변태는 피격 후에도 중단되지 않는다", () => {
+  const f = fixture(["construction"]);
+  f.agent.construction = { buildingKey: "storage", x: 43, y: 42, state: "transforming", routeIndex: 0,
+    route: [{ x: 43, y: 42 }], startedAt: f.environment.simSeconds, readyAt: f.environment.simSeconds + 100 };
+  const rival = enemy(f, 43, 42);
+  rival.ownerId = "rival";
+  rival.combatDisposition = "aggressive";
+  rival.health = rival.stats.health = 100;
+  advance(f, 3);
+  assert.ok(f.agent.health < 100);
+  assert.equal(f.agent.construction.state, "transforming");
+  assert.equal(f.agent.mode, "transform");
+  assert.equal(f.agent.attack, null);
 });

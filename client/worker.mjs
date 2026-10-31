@@ -1,5 +1,8 @@
 import { createRoom, chooseRoomTribe, saveRoom, restoreRoom, tickRoom, snapshotRoom, commandRoom } from "./room.mjs";
 import { openStorage } from "./storage.mjs";
+import { createStateEncoder } from "./state-delta.mjs";
+
+const stateEncoder = createStateEncoder();
 
 let storage;
 let room = null;
@@ -53,8 +56,8 @@ async function persist() {
 }
 
 function publish(includeWorld) {
-  if (room && visible) postMessage({ type: "state", packet: { ...snapshotRoom(room, includeWorld),
-    sampledAt: performance.timeOrigin + performance.now() - Math.max(0, Date.now() - lastTick) } });
+  if (room && visible) postMessage({ type: "state", packet: stateEncoder.encode({ ...snapshotRoom(room, includeWorld),
+    sampledAt: performance.timeOrigin + performance.now() - Math.max(0, Date.now() - lastTick) }, includeWorld) });
 }
 
 async function handle(type, data, id) {
@@ -67,7 +70,7 @@ async function handle(type, data, id) {
   if (type === "create") {
     await persist();
     if (!Number.isInteger(data.seed) || data.seed < 0 || data.seed > 4294967295) throw new Error("시드는 0~4294967295 사이의 정수로 입력해 주세요.");
-    const next = createRoom(data.title, data.seed, null, progress => postMessage({ id, type: "progress", progress: progress * .95 }), data.cheats);
+    const next = createRoom(data.title, data.seed, null, progress => postMessage({ id, type: "progress", progress: progress * .95 }), data.cheats, data.beginnerHelpEnabled);
     await storage.put(saveRoom(next));
     postMessage({ id, type: "progress", progress: 1 });
     room = next;
@@ -91,7 +94,7 @@ async function handle(type, data, id) {
     running = data.visible && room.colonies.find(colony => colony.ownerId === room.hostId).tribe !== null && !packet.state.ending;
     dirty = true;
     await persist();
-    return { ...packet, sampledAt: performance.timeOrigin + performance.now() };
+    return stateEncoder.encode({ ...packet, sampledAt: performance.timeOrigin + performance.now() }, true);
   }
   if (type === "pause") {
     running = false;
@@ -117,8 +120,12 @@ async function handle(type, data, id) {
   }
   if (type === "command") {
     if (!room || room.id !== data.roomId || storageError) throw new Error("월드를 다시 열어 주세요.");
+    const previousOwner = room.hostId;
     const result = commandRoom(room, data.action);
-    if (room.games.get(room.hostId).ending) running = false;
+    if (room.hostId !== previousOwner) {
+      lastTick = Date.now();
+      running = visible && !room.games.get(room.hostId).ending;
+    } else if (room.games.get(room.hostId).ending) running = false;
     dirty = true;
     await persist();
     publish(false);

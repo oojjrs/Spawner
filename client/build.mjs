@@ -1,3 +1,5 @@
+import { COMBAT_ATTRIBUTE_ASSETS } from "./combat-attribute-assets.mjs";
+import { SPROUT_LIFESPAN_ASSETS } from "./sprout-lifespan.mjs";
 import { auditImages } from "./image-audit.mjs";
 import { productionRuntime } from "./production.mjs";
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
@@ -6,13 +8,19 @@ import { fileURLToPath } from "node:url";
 import { CREATURE_ASSETS } from "../server/creatures.mjs";
 import { AGENT_ATTACK_ASSET } from "../server/attack.mjs";
 import { UNIT_ANIMATION_ASSETS } from "./unit-animation.mjs";
+import { TRIBE_ATTRIBUTE_ASSETS } from "./attribute-animation.mjs";
 import { AGENT_DEATH_ANIMATION } from "./agent-death.mjs";
 import { AGENT_SPIRIT } from "./agent-spirit.mjs";
+import { AGENT_LEVEL_UP } from "./agent-level-up.mjs";
+import { NEST_GROWTH_ASSETS } from "./nest-growth.mjs";
+import { CONSTRUCTION_ANIMATION_ASSETS } from "./construction-animation.mjs";
+import { BUILDING_IDLE_ASSETS } from "./building-idle.mjs";
 import { TALON_OWL_IDLE } from "./talon-owl-idle.mjs";
 import { SPORE_BIRTH_ANIMATION, SPRING_BIRTH_ANIMATION, PEBBLE_BIRTH_ANIMATION } from "./birth.mjs";
+import { BUILDING_TYPES, buildingImage } from "../server/buildings.mjs";
 import { RESOURCE_TYPES } from "../server/resources.mjs";
 import { RESOURCE_HARVEST_ANIMATIONS } from "./harvest-assets.mjs";
-import { PLAYER_TRIBE_ASSETS } from "../server/player-tribes.mjs";
+import { PLAYER_TRIBES, PLAYER_TRIBE_ASSETS } from "../server/player-tribes.mjs";
 import { PLAYER_COMBAT_ASSETS } from "./combat.mjs";
 import { TERRAIN_CODEX, HAZARD_CODEX, terrainCodexResources } from "./terrain-codex.mjs";
 import { WORLD_GENERATION_VERSION } from "../server/world.mjs";
@@ -49,8 +57,8 @@ function bundle(entries) {
 
 let worker = `(() => {\n${bundle(["client/worker.mjs"])}\n})();`;
 if (process.argv.includes("--production")) worker = productionRuntime(worker);
-const assets = Object.fromEntries([...PLAYER_TRIBE_ASSETS, ...PLAYER_COMBAT_ASSETS, ...UNIT_ANIMATION_ASSETS, ...RESOURCE_TYPES.flatMap(item => [item.image, item.carryImage]), ...RESOURCE_HARVEST_ANIMATIONS.map(item => item.image), ...CREATURE_ASSETS, TALON_OWL_IDLE.image, AGENT_ATTACK_ASSET, AGENT_DEATH_ANIMATION.image, AGENT_SPIRIT.image, SPORE_BIRTH_ANIMATION.image, SPORE_BIRTH_ANIMATION.nest, SPRING_BIRTH_ANIMATION.image, PEBBLE_BIRTH_ANIMATION.image, PEBBLE_BIRTH_ANIMATION.foreground, "DesignAssets/Foods/food-berry-bush.png", "DesignAssets/Terrain/standing-tree-smooth-atlas.png", "DesignAssets/Terrain/poison-spore-ground.png", "DesignAssets/Terrain/thorn-root-ground.png"].map(name => [name, name]));
-let browser = bundle(["client/cheats.mjs", "client/unit-animation.mjs", "client/terrain-codex.mjs", "server/combat.mjs", "client/combat.mjs", "server/encounter-types.mjs", "server/player-tribes.mjs", "client/tribe-art.mjs", "server/lifespan.mjs", "server/growth.mjs", "server/resources.mjs", "server/attributes.mjs", "server/nests.mjs", "server/food.mjs", "server/birth.mjs", "server/attack.mjs", "client/agent-death.mjs", "client/agent-spirit.mjs", "server/beetle-animation.mjs", "client/talon-owl-idle.mjs", "client/birth.mjs", "client/harvest-assets.mjs", "client/harvest.mjs", "client/client.mjs"]);
+const assets = Object.fromEntries([...PLAYER_TRIBES.flatMap(tribe => BUILDING_TYPES.map(type => buildingImage(type.key, tribe.key))), ...PLAYER_TRIBE_ASSETS, ...PLAYER_COMBAT_ASSETS, ...COMBAT_ATTRIBUTE_ASSETS, ...UNIT_ANIMATION_ASSETS, ...TRIBE_ATTRIBUTE_ASSETS, ...SPROUT_LIFESPAN_ASSETS, ...CONSTRUCTION_ANIMATION_ASSETS, ...BUILDING_IDLE_ASSETS, ...NEST_GROWTH_ASSETS, ...RESOURCE_TYPES.flatMap(item => [item.image, item.carryImage]), ...RESOURCE_HARVEST_ANIMATIONS.map(item => item.image), ...CREATURE_ASSETS, TALON_OWL_IDLE.image, AGENT_ATTACK_ASSET, AGENT_DEATH_ANIMATION.image, AGENT_SPIRIT.image, AGENT_LEVEL_UP.ring, AGENT_LEVEL_UP.sparkle, SPORE_BIRTH_ANIMATION.image, SPORE_BIRTH_ANIMATION.nest, SPRING_BIRTH_ANIMATION.image, PEBBLE_BIRTH_ANIMATION.image, PEBBLE_BIRTH_ANIMATION.foreground, "DesignAssets/UI/hp-heart.png", "DesignAssets/Foods/food-berry-bush.png", "DesignAssets/Terrain/standing-tree-smooth-atlas.png", "DesignAssets/Terrain/poison-spore-ground.png"].map(name => [name, name]));
+let browser = bundle(["client/beginner-help.mjs", "client/combat-attributes.mjs", "client/sprout-lifespan.mjs", "client/sprout-roots.mjs", "client/burrow-codex.mjs", "client/progression-ui.mjs", "client/cheats.mjs", "client/unit-animation.mjs", "client/terrain-codex.mjs", "server/combat.mjs", "client/combat.mjs", "server/encounter-types.mjs", "server/player-tribes.mjs", "client/tribe-art.mjs", "server/lifespan.mjs", "server/growth.mjs", "server/resources.mjs", "server/attributes.mjs", "server/nests.mjs", "server/food.mjs", "server/birth.mjs", "server/attack.mjs", "client/agent-death.mjs", "client/agent-spirit.mjs", "client/agent-level-up.mjs", "client/nest-growth.mjs", "client/construction-animation.mjs", "client/building-idle.mjs", "server/beetle-animation.mjs", "client/talon-owl-idle.mjs", "client/birth.mjs", "client/creature-spawn.mjs", "client/harvest-assets.mjs", "client/harvest.mjs", "client/client.mjs"]);
 if (process.argv.includes("--production")) browser = productionRuntime(browser);
 const gameSource = readFileSync(resolve(root, "client/game.js"), "utf8");
 const gameImages = new Set(Object.keys(assets));
@@ -70,15 +78,16 @@ function renderingDigest(files, functions, constants) {
   return hash.digest("hex");
 }
 const renderingAssets = {
-  terrain: renderingDigest(["land-ground.png", "grassland-ground.png", "forest-ground.png", "swamp-ground.png", "low-mountain-ground.png", "high-mountain-ground.png", "ridge-ground.png", "coast-ground.png", "shallow-water-ground.png", "deep-water-ground.png"],
-    ["updateTerrainRendering", "createTerrainSamples", "createTerrainPatch", "buildTerrainAtlas"], gameSource.match(/const TERRAIN_COLORS = \{[^]*?\n    };/)[0]),
+  terrain: renderingDigest(["land-ground.png", "grassland-ground.png", "forest-ground.png", "swamp-ground.png", "low-mountain-ground.png", "high-mountain-ground.png", "ridge-ground.png", "coast-ground.png", "shallow-water-ground.png", "deep-water-ground.png", "ford-ground.png"],
+    ["updateTerrainRendering", "terrainGroundPixels", "createTerrainSamples", "createTerrainPatch", "buildTerrainAtlas"], gameSource.match(/const TERRAIN_COLORS = \{[^]*?\n    };/)[0]),
   forest: renderingDigest(["standing-tree-smooth-atlas.png"], ["drawForestTree", "updateForest", "forestTreeRegions", "forestRegionKey"],
     gameSource.slice(gameSource.indexOf("const forest ="), gameSource.indexOf("const hazardCells ="))),
-  hazards: renderingDigest(["poison-spore-ground.png", "thorn-root-ground.png"], ["updateHazards", "hazardGroundTile"], "")
+  hazards: renderingDigest(["poison-spore-ground.png"], ["updateHazards", "hazardGroundTile"], "")
 };
-const content = `(() => {\n${browser}\nconst workerSource = ${JSON.stringify(worker)};\nglobalThis.Spawner = Object.freeze({ ...modules["client/image-geometry.mjs"], ...modules["client/cheats.mjs"], ...modules["client/unit-animation.mjs"], ...modules["client/terrain-codex.mjs"], ...modules["server/combat.mjs"], ...modules["client/combat.mjs"], ...modules["server/encounter-types.mjs"], ...modules["server/player-tribes.mjs"], ...modules["client/tribe-art.mjs"], ...modules["server/lifespan.mjs"], ...modules["server/growth.mjs"], ...modules["server/resources.mjs"], ...modules["server/attributes.mjs"], ...modules["server/food.mjs"], ...modules["server/birth.mjs"], ...modules["server/attack.mjs"], ...modules["client/agent-death.mjs"], ...modules["client/agent-spirit.mjs"], ...modules["server/beetle-animation.mjs"], ...modules["client/talon-owl-idle.mjs"], ...modules["client/birth.mjs"], ...modules["client/harvest-assets.mjs"], ...modules["client/harvest.mjs"], NEST_LEVELS: modules["server/nests.mjs"].NEST_LEVELS, createClient: (onState, onError, onSaved) => modules["client/client.mjs"].createClient(onState, onError, onSaved, workerSource), renderingAssets: ${JSON.stringify(renderingAssets)}, assets: ${JSON.stringify(assets)} });\n})();\n`;
+const content = `(() => {\n${browser}\nconst workerSource = ${JSON.stringify(worker)};\nglobalThis.Spawner = Object.freeze({ ...modules["client/beginner-help.mjs"], ...modules["client/combat-attributes.mjs"], ...modules["client/sprout-lifespan.mjs"], ...modules["client/sprout-roots.mjs"], ...modules["client/image-geometry.mjs"], ...modules["client/cheats.mjs"], ...modules["client/unit-animation.mjs"], ...modules["client/terrain-codex.mjs"], ...modules["client/burrow-codex.mjs"], ...modules["server/combat.mjs"], ...modules["client/combat.mjs"], ...modules["server/encounter-types.mjs"], ...modules["server/player-tribes.mjs"], ...modules["client/tribe-art.mjs"], ...modules["server/lifespan.mjs"], ...modules["server/growth.mjs"], ...modules["server/resources.mjs"], ...modules["server/attributes.mjs"], ...modules["server/buildings.mjs"], ...modules["client/progression-ui.mjs"], ...modules["server/food.mjs"], ...modules["server/birth.mjs"], ...modules["server/attack.mjs"], ...modules["client/agent-death.mjs"], ...modules["client/agent-spirit.mjs"], ...modules["client/agent-level-up.mjs"], ...modules["client/nest-growth.mjs"], ...modules["client/construction-animation.mjs"], ...modules["client/building-idle.mjs"], ...modules["server/beetle-animation.mjs"], ...modules["client/talon-owl-idle.mjs"], ...modules["client/birth.mjs"], ...modules["client/creature-spawn.mjs"], ...modules["client/harvest-assets.mjs"], ...modules["client/harvest.mjs"], NEST_LEVELS: modules["server/nests.mjs"].NEST_LEVELS, nestUpgradeCost: modules["server/nests.mjs"].nestUpgradeCost, createClient: (onState, onError, onSaved) => modules["client/client.mjs"].createClient(onState, onError, onSaved, workerSource), renderingAssets: ${JSON.stringify(renderingAssets)}, assets: ${JSON.stringify(assets)} });\n})();\n`;
 writeFileSync(resolve(root, "client/runtime.js"), content.replace(/\r?\n/g, "\r\n"), "utf8");
 if (process.argv.includes("--runtime-only")) process.exit(0);
+if (!process.argv.includes("--preserve-design")) {
 const designPath = resolve(root, "Design.html");
 let design = readFileSync(designPath, "utf8");
 const terrainTable = design.match(/<table[^>]*aria-label="지형 바닥"[^>]*>[\s\S]*?<\/table>/)?.[0];
@@ -102,9 +111,9 @@ if (terrainObjects) design = design.replace(terrainObjects, terrainObjects.repla
   return hazard ? row.slice(0, row.lastIndexOf('<td>')) + '<td>' + hazard.description + '</td></tr>' : row;
 }));
 if (design !== readFileSync(designPath, "utf8")) writeFileSync(designPath, design.replace(/\r?\n/g, "\r\n"), "utf8");
-if (design.includes('<script id="design-world-model">')) {
-  const model = `(() => {\n${bundle(["server/map.mjs"])}\nconst map = modules["server/map.mjs"];\nglobalThis.SpawnerDesignWorld = { ...map, generateWorld: seed => map.generateMapWorld(seed) };\n})();`;
-  const updated = design.replace(/(<script id="design-world-model">)[\s\S]*?(<\/script>)/, (match, start, end) => start + "\n" + model + "\n" + end).replace(/\r?\n/g, "\r\n");
+if (design.includes('<script id="design-world-model"')) {
+  const model = `(() => {\n${bundle(["server/map.mjs"])}\nconst map = modules["server/map.mjs"];\nglobalThis.SpawnerDesignWorld = { ...map, generateWorld: (seed, onProgress) => map.generateMapWorld(seed, onProgress, undefined, true) };\n})();`;
+  const updated = design.replace(/(<script id="design-world-model"[^>]*>)[\s\S]*?(<\/script>)/, (match, start, end) => start + "\n" + model + "\n" + end).replace(/\r?\n/g, "\r\n");
   if (updated !== design) writeFileSync(designPath, updated, "utf8");
 }
 if (design.includes('<script id="world-model">')) {
@@ -112,8 +121,9 @@ if (design.includes('<script id="world-model">')) {
   const updated = design.replace(/(<script id="world-model">)[\s\S]*?(<\/script>)/, (match, start, end) => start + "\n" + model + "\n" + end).replace(/\r?\n/g, "\r\n");
   if (updated !== design) writeFileSync(designPath, updated, "utf8");
 }
+}
 const localAssets = new Set(Object.values(assets));
-for (const name of ["client/game.js", "client/audio.js", "client/combat-audio.js"]) {
+for (const name of ["client/game.js", "client/audio.js", "client/combat-audio.js", "client/movement-audio.js"]) {
   const source = readFileSync(resolve(root, name), "utf8");
   for (const match of source.matchAll(/["'](DesignAssets\/[^"'?\r\n]+)["']/g)) {
     if (/\.[a-z0-9]+$/i.test(match[1])) localAssets.add(match[1]);

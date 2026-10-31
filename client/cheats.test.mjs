@@ -6,20 +6,25 @@ import { fileURLToPath } from "node:url";
 import { createRoom, chooseRoomTribe, saveRoom, restoreRoom, snapshotRoom, commandRoom, tickRoom } from "./room.mjs";
 import { prepareSite } from "../hosting/prepare-site.mjs";
 
-test("치트는 방 생성 시 명시적으로 켜고 저장·복원하며 이전 방에서는 기본으로 꺼진다", () => {
-  const normal = createRoom("일반 방", 13, "bean", null);
-  const before = normal.games.get(normal.hostId).save();
-  assert.equal(snapshotRoom(normal, false).cheats, false);
-  assert.throws(() => commandRoom(normal, { type: "cheat-extinction" }), /치트를 사용할 수 없습니다/);
-  assert.equal(normal.games.get(normal.hostId).save(), before);
-  const room = createRoom("치트 방", 13, null, null, true);
-  assert.throws(() => commandRoom(room, { type: "cheat-extinction" }), /부족을 먼저 선택/);
+test("개발판 치트는 새 방과 기존 저장의 치트 설정에 관계없이 사용할 수 있다", () => {
+  const normal = createRoom("개발 방", 13, "bean", null);
+  const points = snapshotRoom(normal, false).state.evolutionPoints;
+  commandRoom(normal, { type: "cheat-evolution-points" });
+  assert.equal(snapshotRoom(normal, false).state.evolutionPoints, points + 10000);
+  const saved = saveRoom(normal);
+  for (const enabled of [false, undefined]) {
+    if (enabled === undefined) delete saved.cheats;
+    else saved.cheats = enabled;
+    const restored = restoreRoom(saved);
+    commandRoom(restored, { type: "cheat-evolution-points" });
+    assert.equal(snapshotRoom(restored, false).state.evolutionPoints, points + 20000);
+  }
+  const room = createRoom("부족 선택 전", 13, null, null);
+  assert.throws(() => commandRoom(room, { type: "cheat-evolution-points" }), /부족을 먼저 선택/);
   chooseRoomTribe(room, "spring");
-  const saved = saveRoom(room);
-  assert.equal(saved.cheats, true);
-  assert.equal(snapshotRoom(restoreRoom(saved), false).cheats, true);
-  delete saved.cheats;
-  assert.equal(snapshotRoom(restoreRoom(saved), false).cheats, false);
+  const initial = snapshotRoom(room, false).state.evolutionPoints;
+  commandRoom(room, { type: "cheat-evolution-points" });
+  assert.equal(snapshotRoom(room, false).state.evolutionPoints, initial + 10000);
 });
 
 test("멸망 치트는 탄생 중인 유닛까지 같은 시점에 사망시키고 다른 종족과 야생 생물을 보존한다", () => {
@@ -60,11 +65,12 @@ test("개발·배포 구분은 빌드에서만 처리하고 배포판은 치트 
   const runtime = readFileSync(new URL("./runtime.js", import.meta.url), "utf8");
   assert.equal(runtime.includes("DEVELOPMENT"), false);
   assert.ok(runtime.includes("cheat-extinction"));
+  assert.equal(runtime.includes("room-cheats"), false);
   prepareSite(fileURLToPath(destination), name => Buffer.from(name === "Spawner.html" ?
     '<script src="./client/runtime.js"></script>' : runtime), "cheats-test");
   const production = readFileSync(new URL("dist/client/runtime.js", destination), "utf8");
   assert.equal(production.includes("DEVELOPMENT"), false);
-  for (const ui of ["치트 활성화", 'checkbox.id = "room-cheats"', 'panel.id = "cheat-panel"', "cheat-extinction"]) {
+  for (const ui of ["치트 활성화", 'checkbox.id = "room-cheats"', 'panel.id = "cheat-panel"', "cheat-evolution-points", "cheat-resources", "cheat-upgrade", "cheat-heal", "cheat-extinction"]) {
     assert.equal(production.includes(ui), false);
   }
   const browser = createContext({});

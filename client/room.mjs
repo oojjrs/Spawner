@@ -4,9 +4,11 @@ import { createCreatures } from "../server/creatures.mjs";
 import { populateResourceNodes, clearResourceHazards, populateForestResources, populateColonyFood } from "../server/resources.mjs";
 import { isTreeFood } from "../server/food.mjs";
 import { PLAYER_TRIBES } from "../server/player-tribes.mjs";
+import { commandRoomCheat } from "../server/cheats.mjs";
+import { createUnitIndex } from "../server/unit-index.mjs";
 
 const mask = ["1,0", "2,0", "3,0", "0,1", "1,1", "2,1", "3,1", "4,1", "0,2", "1,2", "2,2", "3,2", "4,2", "0,3", "1,3", "2,3", "3,3", "4,3", "1,4", "2,4", "3,4"];
-const terrainTypes = ["deep", "shallow", "coast", "land", "grassland", "forest", "lowMountain", "highMountain", "ridge", "swamp"];
+const terrainTypes = ["deep", "shallow", "coast", "land", "grassland", "forest", "lowMountain", "highMountain", "ridge", "swamp", "ford"];
 
 export function requireName(value, limit) {
   if (typeof value !== "string" || !value.trim() || value.trim().length > limit) throw new Error(`이름은 1~${limit}자로 입력해 주세요.`);
@@ -48,11 +50,11 @@ function populateColonies(room, tribe) {
   for (const colony of room.colonies) room.games.set(colony.ownerId, createGame(room, colony));
 }
 
-export function createRoom(title, seed, tribe, onProgress, cheats) {
+export function createRoom(title, seed, tribe, onProgress, cheats, beginnerHelpEnabled) {
   if (tribe === undefined) tribe = "bean";
   if (tribe !== null && !PLAYER_TRIBES.some(entry => entry.key === tribe)) throw new Error("시작할 부족을 선택해 주세요.");
   const room = { id: crypto.randomUUID(), title: requireName(title, 24),
-    hostId: crypto.randomUUID(), seed, cheats: cheats === true, simSeconds: 0, revision: 0, updatedAt: Date.now(),
+    hostId: crypto.randomUUID(), seed, cheats: cheats === true, beginnerHelpEnabled: beginnerHelpEnabled !== false, simSeconds: 0, revision: 0, updatedAt: Date.now(),
     world: generateWorld(seed, undefined, progress => onProgress?.(progress * .8)), colonies: [], games: new Map(), food: new Map(), foodSpots: new Map() };
   for (const [x, y, amount, resourceType] of room.world.food) room.food.set(x + "," + y, { x, y, amount, initialAmount: amount, resourceType, terrain: terrainTypes[room.world.terrain[y * 320 + x]] });
   populateResourceNodes(room);
@@ -70,7 +72,7 @@ export function createRoom(title, seed, tribe, onProgress, cheats) {
 
 export function saveRoom(room) {
   return { version: 2, id: room.id, title: room.title, hostId: room.hostId, seed: room.seed, world: room.world,
-    cheats: room.cheats === true,
+    cheats: room.cheats === true, beginnerHelpEnabled: room.beginnerHelpEnabled === true,
     worldGenerationVersion: room.world.generationVersion,
     ending: room.games.get(room.hostId).ending,
     depletedTrees: [...(room.world.depletedTrees || [])],
@@ -108,7 +110,7 @@ export function restoreRoom(saved) {
         world.generationVersion !== saved.worldGenerationVersion) throw new Error("지형 저장 형식이 올바르지 않습니다.");
   } else world = generateWorld(saved.seed, saved.worldGenerationVersion ?? 1);
   const room = { id: saved.id, title: requireName(saved.title, 24),
-    hostId: saved.hostId, seed: saved.seed, cheats: saved.cheats === true, simSeconds: saved.simSeconds, revision: 0, updatedAt: saved.updatedAt,
+    hostId: saved.hostId, seed: saved.seed, cheats: saved.cheats === true, beginnerHelpEnabled: saved.beginnerHelpEnabled === true, simSeconds: saved.simSeconds, revision: 0, updatedAt: saved.updatedAt,
     resourceVersion: Number.isInteger(saved.resourceVersion) ? saved.resourceVersion : 0,
     world, colonies: [], games: new Map(), food: new Map(saved.food), foodSpots: new Map() };
   room.world.depletedTrees = new Set((saved.depletedTrees || []).filter(index => Number.isInteger(index) && index >= 0 && index < 320 * 320));
@@ -141,8 +143,7 @@ export function restoreRoom(saved) {
     const state = JSON.parse(data)?.state;
     if (!state || !Array.isArray(state.agents) || !Array.isArray(state.templates) || !Number.isFinite(state.evolutionPoints) ||
         state.evolutionPoints < 0 || !Number.isInteger(state.nestLevel) || state.nestLevel < 1) throw new Error("개체 저장 형식이 올바르지 않습니다.");
-    const game = createGame(room, room.colonies.find(colony => colony.ownerId === owner));
-    game.restore(data);
+    const game = createGame(room, room.colonies.find(colony => colony.ownerId === owner), data);
     room.games.set(owner, game);
   }
   room.creatureSystem = createCreatures(room, saved.creatures);
@@ -155,9 +156,12 @@ export function tickRoom(room, elapsed) {
   if (room.colonies.find(colony => colony.ownerId === room.hostId).tribe === null || room.games.get(room.hostId).ending) return;
   room.simSeconds += elapsed;
   prepare(room);
-  for (const game of room.games.values()) game.tick(elapsed);
-  room.creatureSystem.tick();
-  room.games.get(room.hostId).checkEnding();
+  room.unitIndex = createUnitIndex(room);
+  try {
+    for (const game of room.games.values()) game.tick(elapsed);
+    room.creatureSystem.tick();
+    room.games.get(room.hostId).checkEnding();
+  } finally { room.unitIndex = null; }
   room.revision += 1;
 }
 
@@ -165,11 +169,12 @@ export function snapshotRoom(room, includeWorld) {
   prepare(room);
   const game = room.games.get(room.hostId);
   return { roomId: room.id, title: room.title, hostId: room.hostId, userId: room.hostId,
-    cheats: room.cheats === true,
+    cheats: room.cheats === true, beginnerHelpEnabled: room.beginnerHelpEnabled === true,
     revision: room.revision, tribeStarts: includeWorld ? roomTribeStarts(room) : undefined, colonyId: room.colonies.find(colony => colony.ownerId === room.hostId).id,
     colonies: room.colonies.filter(colony => game.colonyKnown(colony)).map(colony => ({ ...colony, occupiedCells: [...colony.occupiedCells], nestLevel: room.games.get(colony.ownerId).nestLevel,
       nestHealth: room.games.get(colony.ownerId).nest.health, nestMaxHealth: room.games.get(colony.ownerId).nest.maxHealth })),
     world: includeWorld ? { roomId: room.id, size: 320, seed: room.seed, generationVersion: room.world.generationVersion, terrain: room.world.terrain, hazards: room.world.hazards, burrows: room.world.burrows, treeCells: room.world.treeCells,
+      creatureHabitats: (room.world.encounters || []).map(plan => ({ key: plan.key, terrains: plan.terrains })),
       resourceCells: [...room.food.values()].filter(cell => cell.kind !== "corpse" && cell.resourceType !== "tree" && !isTreeFood(cell, room.world)).map(cell => [cell.x, cell.y]) } : undefined,
     state: game.snapshot() };
 }
@@ -177,6 +182,11 @@ export function snapshotRoom(room, includeWorld) {
 export function commandRoom(room, action) {
   if (room.colonies.find(colony => colony.ownerId === room.hostId).tribe === null) throw new Error("시작할 부족을 먼저 선택해 주세요.");
   prepare(room);
+  const cheat = commandRoomCheat(action, room);
+  if (cheat !== null) {
+    room.revision += 1;
+    return cheat;
+  }
   if (room.games.get(room.hostId).ending && action.type !== "read-discoveries") throw new Error("끝난 군락은 둘러보기만 할 수 있습니다.");
   let result;
   if (action.type === "rename-colony") {

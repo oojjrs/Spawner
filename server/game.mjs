@@ -1,21 +1,33 @@
-import { ATTRIBUTES, attributeCounts, migrateAttributeSlots, unitStats, unitMovementSpeed, unitTerrainSpeedMultiplier, birthCost, hasSynergy } from "./attributes.mjs";
+import { ATTRIBUTES, attributeCounts, migrateAttributeSlots, migrateAttributeLevels, attributeUpgradeCost, attributeUpgradeIssue, unitStats, unitCarryCapacity, unitTravelSpeed, unitTerrainSpeedMultiplier, birthCost, hasSynergy } from "./attributes.mjs";
+import { buildingDefinition, buildingCost, materialCapacity, buildingAt, buildingContains, constructionApproachCell, constructionSeconds } from "./buildings.mjs";
+import { tribeConstructionGoals, tribeConstructionStock } from "./tribe-construction.mjs";
 import { createPersonality, personalityLabels, createUtilityAI } from "./utility.mjs";
-import { NEST_LEVELS } from "./nests.mjs";
+import { NEST_LEVELS, nestUpgradeCost } from "./nests.mjs";
+import { TRIBE_STARTING_UNITS } from "./tribe-start.mjs";
+import { colonySupply, recordColonyIncome, restoreColonyIncome } from "./colony-supply.mjs";
 import { agentBirthDuration } from "./birth.mjs";
-import { AGENT_LIFESPAN, CORPSE_LIFETIME, placeCorpse, expireCorpses } from "./lifespan.mjs";
+import { AGENT_LIFESPAN, CORPSE_LIFETIME, corpseRecoveryAmount, placeCorpse, expireCorpses } from "./lifespan.mjs";
 import { applyAgentGrowth } from "./growth.mjs";
+import { AGENT_EXPERIENCE, addAgentExperience, recordCombatExperience } from "./experience.mjs";
 import { AGENT_ATTACK_DURATION, AGENT_ATTACK_HIT_TIME } from "./attack.mjs";
 import { createRoadOptimizer } from "./roads.mjs";
 import { createCombat, combatDisposition, canPursueCombat } from "./combat.mjs";
-import { resourceDefinition, resourceTypeForCell, canHarvestResource, migrateResourceType, isTribeFood, populateColonyFood, resourceHarvestSeconds } from "./resources.mjs";
+import { resourceDefinition, resourceTypeForCell, canHarvestResource, migrateResourceType, isTribeFood, isColonyFood, isResourceHabitat, populateColonyFood, resourceHarvestSeconds, resourceHarvestMultiplier } from "./resources.mjs";
 import { burrowDistance, burrowApproaches } from "./burrows.mjs";
 import { commandCheat } from "./cheats.mjs";
-import { combatDamage, migrateCombatStats } from "./combat-stats.mjs";
+import { migrateCombatStats } from "./combat-stats.mjs";
+import { resourceHabitatSuitability } from "./resource-habitats.mjs";
+import { tribeHazardKind, tribeTerrainWalkable } from "./tribe-environment.mjs";
+import { createResourceStorage } from "./resource-storage.mjs";
+import { createConstructionSupply } from "./construction-supply.mjs";
+import { constructionHelp, constructionHelpTemplate } from "./beginner-help.mjs";
+import { constructionHarvestNeeds } from "./construction-harvest.mjs";
 
-export function createGame(environment, colony) {
+export function createGame(environment, colony, savedGame) {
     populateColonyFood(environment);
     const combat = environment.combatSystem || (environment.combatSystem = createCombat(environment));
     const worldMap = environment.world;
+    if (worldMap.hazards) for (let index = 0; index < worldMap.hazards.length; index++) if (worldMap.hazards[index] === 1 || worldMap.hazards[index] === 2) worldMap.hazards[index] = 0;
     const WORLD_SIZE = 320;
 
     const COLONY_SIZE = 5;
@@ -49,7 +61,7 @@ export function createGame(environment, colony) {
 
     const TERRAIN_TYPES = [
       "deep", "shallow", "coast", "land", "grassland",
-      "forest", "lowMountain", "highMountain", "ridge", "swamp"
+      "forest", "lowMountain", "highMountain", "ridge", "swamp", "ford"
     ];
 
     const foodSpotCache = environment.foodSpots;
@@ -58,8 +70,15 @@ export function createGame(environment, colony) {
     const state = {
       simSeconds: environment.simSeconds || 0,
       colonyFood: 0,
+      foodIncome: [],
+      foodIncomeStartedAt: environment.simSeconds || 0,
+      lastFoodAt: environment.simSeconds || 0,
       ending: null,
+      constructionHelpResult: null,
+      constructionHelpBuildings: [],
       resourceInventory: {},
+      buildings: [],
+      nextBuildingId: 1,
       evolutionPoints: 0,
       explored: new Set(),
       knownFood: new Map(),
@@ -89,18 +108,54 @@ export function createGame(environment, colony) {
     };
 
     let visibleCells = new Set();
+    const decisionSchedule = new WeakMap();
+    let decisionTargets = null;
+    let decisionTargetRevision = -1;
     let discoveryBaselinePending = false;
     let updatingAgents = false;
     let footprintCleanupAt = 0;
-    const utilityAI = createUtilityAI({ state, size: WORLD_SIZE, homeCells: colonyBoundaryCells,
-      deliveryCells: colonyDeliveryCells,
+    const resourceStorage = createResourceStorage(state, colony);
+    let constructionHelpPreview = null;
+    let constructionRouteMemo = null;
+    const constructionSupplyContext = { state, colony, storage: resourceStorage, route: (agent, target) => constructionRoute(agent, target, constructionFootprints()),
+      walkable: (x, y) => x >= 0 && y >= 0 && x < WORLD_SIZE && y < WORLD_SIZE &&
+        state.explored.has(y * WORLD_SIZE + x) && isWalkable(x, y) && !hazardAt(x, y),
+      isFood: type => isColonyFood(type, colony.tribe, worldMap.generationVersion), deliveryCells: colonyDeliveryCells,
+      canHarvest: (food, agent) => canHarvestResource(food, worldMap, agent.attributes, colony.tribe),
+      resourceType: food => resourceTypeForCell(food, worldMap),
+      harvestSeconds: (type, agent) => resourceHarvestSeconds(type, worldMap) * resourceHarvestMultiplier(type, agent.attributes) / (agent.stats.harvestSpeedMultiplier ?? 1),
+      terrainAt: (x, y) => worldMap.terrain[y * WORLD_SIZE + x], deliveryCapacity,
+      forecastRoute: (agent,target,plan) => {
+        const excluded = constructionFootprints(),definition = buildingDefinition(plan.buildingKey);
+        for (let y=plan.y;y<plan.y+definition.height;y++) for (let x=plan.x;x<plan.x+definition.width;x++) excluded.add(y * WORLD_SIZE + x);
+        return constructionRoute(agent,target,excluded);
+      } };
+    const constructionSupply = createConstructionSupply(constructionSupplyContext);
+    const utilityAI = createUtilityAI({ state, tribe: colony.tribe, size: WORLD_SIZE, homeCells: colonyBoundaryCells,
+      deliveryCells: colonyDeliveryCells, permanentVisionSources,
       terrainAt: (x, y) => worldMap.terrain[y * WORLD_SIZE + x],
       walkable: (x, y) => state.explored.has(y * WORLD_SIZE + x) && isWalkable(x, y),
       hazardAt: (x, y) => state.explored.has(y * WORLD_SIZE + x) ? hazardAt(x, y) : 0,
       enemies: () => state.rivals.filter(enemy => !enemy.hidden && visibleCells.has(enemy.y * WORLD_SIZE + enemy.x)), burrows: visibleBurrows, nests: visibleNests, synergy,
       resourceType: food => resourceTypeForCell(food, worldMap),
-      harvestSeconds: type => resourceHarvestSeconds(type, worldMap),
-      isFood: type => isTribeFood(type, colony.tribe, worldMap.generationVersion),
+      harvestSeconds: (type, agent) => resourceHarvestSeconds(type, worldMap) * resourceHarvestMultiplier(type, agent?.attributes) / (agent?.stats?.harvestSpeedMultiplier ?? 1),
+      materialSpace: () => resourceSpace(), deliveryCapacity,
+      constructionPlans,
+      constructionTransport: constructionSupply.plans,
+      constructionForagers: constructionSupply.foragers,
+      constructionAllocation: constructionSupply.allocation,
+      constructionMaterials: () => {
+        const targets = constructionMaterialTargets(true);
+        const needs = Object.fromEntries(Object.entries(targets).map(([type,amount]) =>
+          [type,Math.max(0,amount - (state.resourceInventory[type] || 0))]));
+        for (const [type, amount] of Object.entries(constructionSupply.shortages())) needs[type] = Math.max(needs[type] || 0, amount);
+        state.constructionMaterialNeeds = needs;
+        return needs;
+      },
+      isFood: type => isColonyFood(type, colony.tribe, worldMap.generationVersion),
+      foodType: Object.keys(buildingCost("storage", colony.tribe).materials)[0],
+      resourceHabitat: (type,x,y) => worldMap.hydrology?.resourceHabitats ?
+        resourceHabitatSuitability(type, y * WORLD_SIZE + x, worldMap.terrain, worldMap.hydrology) : Number(isResourceHabitat(type, worldMap, x, y)),
       canHarvest: (food, agent) => canHarvestResource(food, worldMap, agent.attributes, colony.tribe) });
     const roadOptimizer = createRoadOptimizer({ size: WORLD_SIZE, boundary: colonyDeliveryCells,
       neighbors: walkableNeighbors, explored: index => state.explored.has(index),
@@ -116,12 +171,13 @@ export function createGame(environment, colony) {
     }
 
     function hazardAt(x, y) {
-      return worldMap.hazards?.[y * WORLD_SIZE + x] || 0;
+      return tribeHazardKind(colony.tribe || "bean", worldMap.hazards?.[y * WORLD_SIZE + x] || 0);
     }
 
     function recordDiscovery(key, kind, name, target, observer) {
       if (state.discoveredKinds.has(key)) return;
       state.discoveredKinds.add(key);
+      if (observer?.perceptionExperienceReady) addAgentExperience(observer, AGENT_EXPERIENCE.discovery);
       state.discoveries.push({ key, kind, name, x: target.x, y: target.y,
         discoveredAt: state.simSeconds, discoveredBy: observer?.name || "둥지" });
     }
@@ -165,8 +221,9 @@ export function createGame(environment, colony) {
           const cx = x + dx, cy = y + dy;
           if (cx < 0 || cy < 0 || cx >= WORLD_SIZE || cy >= WORLD_SIZE || dx * dx + dy * dy > radius * radius) continue;
           const index = cy * WORLD_SIZE + cx;
+          if (visibleCells.has(index)) continue;
           visibleCells.add(index);
-          if (!state.explored.has(index) && observer) observer.growthActivity = (observer.growthActivity || 0) + 0.5;
+          if (!state.explored.has(index) && observer?.perceptionExperienceReady) addAgentExperience(observer, AGENT_EXPERIENCE.exploration);
           state.explored.add(index);
           const key = cx + "," + cy;
           if (worldMap.treeCells?.[index]) discoverResource({ x: cx, y: cy, resourceType: "tree", kind: "tree" }, observer);
@@ -175,18 +232,30 @@ export function createGame(environment, colony) {
             state.knownFood.set(key, { ...food });
             discoverResource(food, observer);
           }
-          else if (food?.resourceType === "tree") state.knownFood.set(key, { ...food });
+          else if (food?.resourceType === "tree" || food?.kind === "corpse") state.knownFood.set(key, { ...food });
           else state.knownFood.delete(key);
         }
       }
     }
 
+    function permanentVisionSources() {
+      const sources = [];
+      if (state.nestHealth > 0) sources.push({ x: COLONY_ORIGIN.x + 2, y: COLONY_ORIGIN.y + 2, radius: 6 });
+      for (const building of state.buildings) {
+        if (building.health <= 0) continue;
+        sources.push({ x: building.x + Math.floor(building.width / 2), y: building.y + Math.floor(building.height / 2),
+          radius: buildingDefinition(building.key)?.visionRadius || 1 });
+      }
+      return sources;
+    }
+
     function updatePerception() {
+      decisionTargets = null;
       visibleCells = new Set();
-      revealAround(COLONY_ORIGIN.x + 2, COLONY_ORIGIN.y + 2, 6, null);
+      for (const source of permanentVisionSources()) revealAround(source.x, source.y, source.radius, null);
       for (const [key, known] of state.knownFood) {
         if (key !== known.x + "," + known.y && visibleCells.has(known.y * WORLD_SIZE + known.x) &&
-          !(foodCellMap.get(key)?.amount > 0)) state.knownFood.delete(key);
+          !(foodCellMap.get(key)?.amount > 0 || foodCellMap.get(key)?.kind === "corpse")) state.knownFood.delete(key);
       }
       for (const corpse of foodCellMap.values()) {
         if (corpse.kind !== "corpse" || corpse.colonyId !== colony.id || corpse.amount <= 0 ||
@@ -217,13 +286,16 @@ export function createGame(environment, colony) {
       }
       for (const [key, food] of foodCellMap) {
         if (key === food.x + "," + food.y || !visibleCells.has(food.y * WORLD_SIZE + food.x)) continue;
-        if (food.amount > 0) {
+        if (food.amount > 0 || food.kind === "corpse") {
           state.knownFood.set(key, { ...food });
           discoverResource(food, discoveryObserver(food));
         } else state.knownFood.delete(key);
       }
       state.markers = [...markers.values()];
       discoverObjects();
+      for (const agent of state.agents) {
+        if (agent.health > 0 && !(agent.birth && state.simSeconds < agent.birth.readyAt)) agent.perceptionExperienceReady = true;
+      }
     }
 
     function agentAppearanceAttributes(agent) {
@@ -231,6 +303,7 @@ export function createGame(environment, colony) {
     }
 
     function initializeAgent(agent) {
+      agent.attributeLevels = migrateAttributeLevels(agent.slots, agent.attributeLevels, state.nestLevel);
       agent.slots = migrateAttributeSlots(agent.slots);
       agent.tribe = colony.tribe || "bean";
       if (["pebble", "spore"].includes(agent.tribe) && agent.birth) agent.birth.readyAt = agent.birth.startedAt + agentBirthDuration(agent.tribe);
@@ -257,6 +330,7 @@ export function createGame(environment, colony) {
       if (agent.decisionPending === undefined) agent.decisionPending = "birth";
       agent.nextDecisionAt = Number.isFinite(agent.nextDecisionAt) ? agent.nextDecisionAt : state.simSeconds;
       agent.growthActivity = Number.isFinite(agent.growthActivity) && agent.growthActivity >= 0 ? agent.growthActivity : 0;
+      agent.perceptionExperienceReady = false;
       migrateCombatStats(agent);
       agent.level = 0;
       applyAgentGrowth(agent, state.simSeconds);
@@ -280,6 +354,22 @@ export function createGame(environment, colony) {
       agent.unloadReady = agent.unloadReady || 0;
       agent.attackReady = agent.attackReady || 0;
       agent.attack = agent.attack || null;
+      if (agent.construction && (!agent.attributes.construction || !buildingDefinition(agent.construction.buildingKey) ||
+        !Number.isInteger(agent.construction.x) || !Number.isInteger(agent.construction.y) ||
+        !Array.isArray(agent.construction.route) || !Number.isInteger(agent.construction.routeIndex) ||
+        agent.construction.routeIndex < 0 || agent.construction.routeIndex >= agent.construction.route.length ||
+        agent.construction.route.some(cell => !Number.isInteger(cell.x) || !Number.isInteger(cell.y)) ||
+        !["moving", "transforming"].includes(agent.construction.state))) {
+        cancelConstruction(agent, "저장된 건설 경로를 다시 지정해 주세요.");
+      }
+      if (agent.construction?.state === "transforming") {
+        const plan = agent.construction, duration = plan.readyAt - plan.startedAt;
+        if (!Number.isFinite(duration) || duration < 10) {
+          const progress = Number.isFinite(duration) && duration > 0 ? Math.max(0, Math.min(1, (state.simSeconds - plan.startedAt) / duration)) : 0;
+          const seconds = constructionSeconds(plan.buildingKey, agent.attributes.construction);
+          plan.startedAt = state.simSeconds - progress * seconds; plan.readyAt = plan.startedAt + seconds;
+        }
+      }
     }
 
     function damageAgent(agent, amount, environmental) {
@@ -309,8 +399,7 @@ export function createGame(environment, colony) {
 
     function updateEnvironment(agent, elapsed) {
       const kind = hazardAt(agent.x, agent.y);
-      const moving = state.simSeconds - agent.moveStartedAt < agent.moveDuration;
-      const active = kind === 1 || kind === 2 && (moving || agent.mode === "harvest");
+      const active = kind === 1;
       if (active) {
         if (agent.lastHazardKind !== kind || state.simSeconds - agent.lastHazardAt >= 5) agent.hazardExposure = 0;
         if (agent.hazardKind !== kind && synergy(agent, ["antenna", "shell"]) && state.simSeconds >= agent.warningReady) {
@@ -319,8 +408,7 @@ export function createGame(environment, colony) {
         }
         agent.hazardKind = kind;
         agent.lastHazardKind = kind;
-        const rate = kind === 2 && agent.mode === "harvest" ? 4 : 0.3;
-        damageAgent(agent, rate * elapsed, true);
+        damageAgent(agent, 0.3 * elapsed, true);
         agent.hazardExposure += elapsed;
         agent.lastHazardAt = state.simSeconds;
       } else {
@@ -335,18 +423,28 @@ export function createGame(environment, colony) {
       ) || null;
     }
 
+    function activeNestSites() {
+      return (state.nestHealth > 0 ? colonyEntries : []).concat(state.buildings.filter(building => building.key === "outpost" && building.health > 0)
+        .map(building => ({ ...building, occupiedCells: new Set(Array.from({ length: building.width * building.height }, (_, index) =>
+          index % building.width + "," + Math.floor(index / building.width))) })));
+    }
+
+    function hasActiveNest() {
+      return state.nestHealth > 0 || state.buildings.some(building => building.key === "outpost" && building.health > 0);
+    }
+
     function isColonyBoundaryCell(x, y) {
-      if (state.nestHealth <= 0 || !isWalkable(x, y)) {
+      if (!hasActiveNest() || !isWalkable(x, y)) {
         return false;
       }
-      return [[x - 1, y], [x + 1, y], [x, y - 1], [x, y + 1]].some(([cx, cy]) => colony.occupiedCells.has((cx - colony.x) + "," + (cy - colony.y)));
+      return activeNestSites().some(site => [[x - 1, y], [x + 1, y], [x, y - 1], [x, y + 1]].some(([cx, cy]) => site.occupiedCells.has((cx - site.x) + "," + (cy - site.y))));
     }
 
     function colonyBoundaryCells() {
-      if (state.nestHealth <= 0) return [];
+      if (!hasActiveNest()) return [];
       const cells = [];
       const seen = new Set();
-      for (const entry of colonyEntries) {
+      for (const entry of activeNestSites()) {
         for (const key of entry.occupiedCells) {
           const [localX, localY] = key.split(",").map(Number);
           const x = entry.x + localX;
@@ -363,16 +461,34 @@ export function createGame(environment, colony) {
       return cells;
     }
 
-    function colonyDeliveryCells() {
-      if (state.nestHealth <= 0) return [];
-      const edge = COLONY_SIZE - 1;
-      return [[0, 0], [edge, 0], [0, edge], [edge, edge]]
-        .map(([x, y]) => ({ x: colony.x + x, y: colony.y + y }))
-        .filter(cell => isWalkable(cell.x, cell.y));
+    function colonyDeliveryCells(agent) {
+      const stores = resourceStorage.refresh().filter(store => store.kind !== "remains");
+      const material = agent && agent.carrying > 0 && (agent.transportCargo ||
+        (state.constructionMaterialNeeds?.[agent.carryingType] || 0) > 0 ||
+        !isColonyFood(agent.carryingType, colony.tribe, worldMap.generationVersion));
+      const cells = stores.filter(store => !agent || resourceStorage.space(store) > 1e-8 ||
+        !material && state.evolutionPoints < pointCapacity()).flatMap(store => resourceStorage.cells(store));
+      if (!material) for (const building of state.buildings.filter(building => building.key === "outpost" && building.health > 0)) {
+        for (const [dx, dy] of [[0, -1], [building.width - 1, -1], [0, building.height], [building.width - 1, building.height]]) {
+          cells.push({ x: building.x + dx, y: building.y + dy });
+        }
+      }
+      return [...new Map(cells.filter(cell => isWalkable(cell.x, cell.y)).map(cell => [cell.x + "," + cell.y, cell])).values()];
     }
 
     function isColonyDeliveryCell(x, y) {
       return colonyDeliveryCells().some(cell => cell.x === x && cell.y === y);
+    }
+
+    function deliveryDestination(agent) {
+      const store = resourceStorage.at(agent.x, agent.y);
+      if (store) return { buildingId: store.kind === "nest" ? null : store.id,
+        targetX: store.x + store.width / 2, targetY: store.y + store.height / 2 };
+      const site = state.buildings.find(building => building.key === "outpost" && building.health > 0 &&
+        (agent.y === building.y - 1 || agent.y === building.y + building.height) &&
+        (agent.x === building.x || agent.x === building.x + building.width - 1));
+      return { buildingId: site?.id || null, targetX: site ? site.x + site.width / 2 : COLONY_CENTER.x,
+        targetY: site ? site.y + site.height / 2 : COLONY_CENTER.y };
     }
 
     function nearestColonyBoundaryCell(x, y) {
@@ -388,20 +504,31 @@ export function createGame(environment, colony) {
       return nearest;
     }
 
-    function chooseSpawnPosition(randomized) {
-      const cells = colonyBoundaryCells();
+    function spawnBoundaryCells(birthBuilding) {
+      let cells = colonyBoundaryCells();
+      if (birthBuilding) cells = cells.filter(cell => cell.x >= birthBuilding.x - 1 && cell.x <= birthBuilding.x + birthBuilding.width &&
+        cell.y >= birthBuilding.y - 1 && cell.y <= birthBuilding.y + birthBuilding.height);
+      else if (state.nestHealth > 0) cells = cells.filter(cell => cell.x >= colony.x - 1 && cell.x <= colony.x + COLONY_SIZE &&
+        cell.y >= colony.y - 1 && cell.y <= colony.y + COLONY_SIZE);
+      return cells;
+    }
+
+    function availableSpawnCells(birthBuilding) {
+      const available = spawnBoundaryCells(birthBuilding).filter(cell => !isAgentCellOccupied(cell.x, cell.y, null));
+      if (colony.tribe === "spring" || colony.tribe === "pebble") return available.filter(cell =>
+        cell.y >= (birthBuilding?.y ?? (state.nestHealth > 0 ? colony.y :
+          state.buildings.find(building => building.key === "outpost" && building.health > 0 && cell.x >= building.x - 1 && cell.x <= building.x + building.width)?.y ?? cell.y - 1)) + 1);
+      return available;
+    }
+
+    function chooseSpawnPosition(randomized, birthBuilding) {
       if (randomized) {
-        const available = cells.filter(cell => !isAgentCellOccupied(cell.x, cell.y, null));
-        if (colony.tribe === "spring" || colony.tribe === "pebble") {
-          const front = available.filter(cell => cell.y >= colony.y + COLONY_SIZE - 1);
-          const outletX = colony.x + (colony.tribe === "pebble" ? 2 : 4);
-          front.sort((a, b) => (a.x - outletX) ** 2 + (a.y - colony.y - 5) ** 2 -
-            (b.x - outletX) ** 2 - (b.y - colony.y - 5) ** 2);
-          return front.length ? { ...front[0] } : null;
-        }
+        const available = availableSpawnCells(birthBuilding);
         return available.length ? { ...available[Math.floor(Math.random() * available.length)] } : null;
       }
-      const startIndex = (state.nextAgentId - 1) % cells.length;
+      const cells = spawnBoundaryCells(birthBuilding);
+      const startingUnits = TRIBE_STARTING_UNITS[colony.tribe] || TRIBE_STARTING_UNITS.bean;
+      const startIndex = Math.floor((state.nextAgentId - 1) * cells.length / startingUnits.length) % cells.length;
       for (let offset = 0; offset < cells.length; offset += 1) {
         const cell = cells[(startIndex + offset) % cells.length];
         if (!isAgentCellOccupied(cell.x, cell.y, null)) {
@@ -450,15 +577,10 @@ export function createGame(environment, colony) {
     }
 
     function isWalkable(x, y) {
-      if (x < 0 || y < 0 || x >= WORLD_SIZE || y >= WORLD_SIZE || colonyAt(x, y) || environment.creatureSystem?.burrowAt?.(x, y)) {
+      if (x < 0 || y < 0 || x >= WORLD_SIZE || y >= WORLD_SIZE || colonyAt(x, y) || buildingAt(environment, x, y) || environment.creatureSystem?.burrowAt?.(x, y)) {
         return false;
       }
-      const terrain = terrainAt(x, y);
-      return terrain === "coast" ||
-        terrain === "land" ||
-        terrain === "grassland" ||
-        terrain === "forest" ||
-        terrain === "lowMountain" || terrain === "highMountain" || terrain === "ridge" || terrain === "swamp";
+      return tribeTerrainWalkable(colony.tribe, worldMap.terrain[y * WORLD_SIZE + x]);
     }
 
     function walkableNeighbors(x, y) {
@@ -470,7 +592,7 @@ export function createGame(environment, colony) {
       ].filter((cell) => isWalkable(cell.x, cell.y));
     }
 
-    function moveAgent(agent, destination, rememberPath) {
+    function moveAgent(agent, destination, rememberPath, startedAt) {
       if (state.simSeconds - agent.moveStartedAt < agent.moveDuration) {
         return false;
       }
@@ -491,7 +613,7 @@ export function createGame(environment, colony) {
       const rendered = interpolatedAgentPosition(agent);
       agent.renderFromX = rendered.x;
       agent.renderFromY = rendered.y;
-      agent.moveStartedAt = state.simSeconds;
+      agent.moveStartedAt = startedAt;
       agent.x = destination.x;
       agent.y = destination.y;
       agent.moveDuration = 1 / agentSpeed(agent);
@@ -507,7 +629,9 @@ export function createGame(environment, colony) {
       footprint.marks.push({ ...nextDirection,
         tribe: agent.tribe || colony.tribe || "bean",
         seed: hashNoise(footprintSeed, agent.stepCount) * 100000,
-        at: state.simSeconds + agent.moveDuration });
+        startedAt: agent.moveStartedAt,
+        grounded: Boolean((agent.appearanceAttributes || agent.attributes).feet || ["spore", "pebble", "spring"].includes(agent.tribe || colony.tribe)),
+        at: agent.moveStartedAt + agent.moveDuration });
       if (footprint.marks.length > 6) footprint.marks.shift();
       if (synergy(agent, ["feet", "antenna"]) && agent.stepCount % 8 === 0) agent.waveUntil = state.simSeconds + 1;
       agent.visited.add(agent.x + "," + agent.y);
@@ -516,6 +640,7 @@ export function createGame(environment, colony) {
       } else {
         agent.returnPath.push({ x: agent.x, y: agent.y });
       }
+      environment.unitIndex?.update(agent);
       return true;
     }
 
@@ -818,7 +943,7 @@ export function createGame(environment, colony) {
       const destination = neighbors.find(
         (cell) => preferred && cell.x === preferred.x && cell.y === preferred.y
       ) || chooseStepToward(agent, goal, neighbors);
-      if (!destination || !moveAgent(agent, destination, direction > 0)) {
+      if (!destination || !moveAgent(agent, destination, direction > 0, state.simSeconds)) {
         return;
       }
       for (let index = agent.routeIndex; index >= 0 && index < route.length; index += direction) {
@@ -965,14 +1090,14 @@ export function createGame(environment, colony) {
       if (!canHarvestResource(food, worldMap, agent.attributes, colony.tribe) || agent.carrying > 0 && (agent.carryingType || "honey-mushrooms") !== resourceType) {
         agent.decisionPending = "targetLost"; return;
       }
-      const harvestSeconds = resourceHarvestSeconds(resourceType, worldMap);
-      const capacity = Math.min(agent.utility?.plannedCargo ?? Infinity, agent.stats.capacity + (synergy(agent, ["strength", "strength"]) ? 4 : 0));
+      const harvestSeconds = resourceHarvestSeconds(resourceType, worldMap) * resourceHarvestMultiplier(resourceType, agent.attributes) / (agent.stats.harvestSpeedMultiplier ?? 1);
+      const capacity = Math.min(agent.utility?.plannedCargo ?? Infinity, unitCarryCapacity(agent, resourceType) + (synergy(agent, ["strength", "strength"]) ? 4 : 0));
       const take = (amount, completedAt) => {
         const collected = Math.min(amount, Math.max(0, capacity - agent.carrying), Math.max(0, food?.amount || 0));
         if (collected > 0) {
-          food.amount -= collected;
-          agent.growthActivity += collected * 2;
-          agent.carrying += collected;
+          food.amount = Math.round((food.amount - collected) * 10) / 10;
+          addAgentExperience(agent, collected * AGENT_EXPERIENCE.harvest);
+          agent.carrying = Math.round((agent.carrying + collected) * 10) / 10;
           agent.carryingType = resourceType;
           agent.harvestResult = {
             sequence: (agent.harvestResult?.sequence || 0) + 1, resourceType, x: food.x, y: food.y,
@@ -987,9 +1112,12 @@ export function createGame(environment, colony) {
           }
           if (resourceType === "meat" && food.amount <= 0 && food.carapaceAmount > 0) {
             food.resourceType = "carapace";
-            food.kind = "resource";
             food.amount = food.initialAmount = food.carapaceAmount;
             food.carapaceAmount = 0;
+          }
+          if (food.kind === "corpse" && food.amount <= 0) {
+            foodCellMap.delete(food.key || key);
+            state.knownFood.delete(food.key || key);
           }
         }
       };
@@ -1044,7 +1172,7 @@ export function createGame(environment, colony) {
     }
 
     function depositFood(agent) {
-      if (state.nestHealth <= 0) return;
+      if (!hasActiveNest()) return;
       if (agent.returnPath.length > 0) {
         agent.rememberedRoute = agent.returnPath
           .map((cell) => ({ ...cell }))
@@ -1053,21 +1181,37 @@ export function createGame(environment, colony) {
       }
 
       const resourceType = agent.carryingType || "honey-mushrooms";
-      const material = !isTribeFood(resourceType, colony.tribe, worldMap.generationVersion);
-      const deposited = material ? agent.carrying : Math.min(agent.carrying, Math.max(0, pointCapacity() - state.evolutionPoints));
+      const material = !isColonyFood(resourceType, colony.tribe, worldMap.generationVersion);
+      const availablePoints = Math.max(0, pointCapacity() - state.evolutionPoints);
+      const store = resourceStorage.at(agent.x, agent.y);
+      const availableMaterials = resourceStorage.space(store);
+      if (agent.transportCargo) {
+        agent.carrying -= resourceStorage.deposit(store, resourceType, agent.carrying);
+        if (agent.carrying <= 1e-8) { agent.carrying = 0; agent.carryingType = null; agent.transportCargo = null; }
+        agent.mode = "search"; agent.utility = null; agent.decisionPending = "completed";
+        return;
+      }
+      const target = material ? Infinity : constructionMaterialTargets()[resourceType] || 0;
+      const needed = material ? Infinity : Math.max(0,target - (state.resourceInventory[resourceType] || 0));
+      const deposited = Math.min(agent.carrying, material ? availableMaterials : Math.max(availablePoints, Math.min(availableMaterials,needed)));
       agent.carryingBeforeDeposit = deposited;
       agent.foodDelivery = deposited > 0 ? {
-        ...agent.foodDelivery, colonyId: colony.id, x: agent.x + 0.5, y: agent.y + 0.5,
+        ...agent.foodDelivery, ...deliveryDestination(agent), colonyId: colony.id, x: agent.x + 0.5, y: agent.y + 0.5,
         startedAt: agent.foodDelivery?.startedAt ?? agent.unloadReady - 1,
         arrivesAt: agent.unloadReady, receivedAt: state.simSeconds, amount: deposited, resourceType
       } : null;
-      if (material) state.resourceInventory[resourceType] = (state.resourceInventory[resourceType] || 0) + deposited;
-      else {
-        state.colonyFood += deposited;
-        state.evolutionPoints += deposited;
+      const reservedSpace = material ? 0 : Object.entries(state.constructionMaterialNeeds || {}).reduce((sum,[type,amount]) =>
+        sum + (!isColonyFood(type,colony.tribe,worldMap.generationVersion) ? Math.max(0,amount) : 0),0);
+      const stored = Math.min(deposited,availableMaterials,needed,material ? Infinity : Math.max(0,resourceSpace() - reservedSpace));
+      if (stored > 0) resourceStorage.deposit(store, resourceType, stored);
+      if (!material) {
+        state.colonyFood = Math.round((state.colonyFood + deposited) * 10) / 10;
+        if (deposited > 0) state.lastFoodAt = state.simSeconds;
+        recordColonyIncome(state, Math.min(deposited, availablePoints));
+        state.evolutionPoints = Math.round((state.evolutionPoints + Math.min(deposited, availablePoints)) * 10) / 10;
       }
-      agent.growthActivity += deposited * 3;
-      agent.carrying -= deposited;
+      addAgentExperience(agent, deposited * AGENT_EXPERIENCE.delivery);
+      agent.carrying = Math.round((agent.carrying - deposited) * 10) / 10;
       if (agent.carrying <= 0) agent.carryingType = null;
       if (deposited > 0) registerRoadJourney(agent);
       agent.mode = "search";
@@ -1092,18 +1236,36 @@ export function createGame(environment, colony) {
     }
 
     function combatTargets() {
-      return state.rivals.filter(enemy => enemy.health > 0 && !enemy.hidden && visibleCells.has(enemy.y * WORLD_SIZE + enemy.x)).concat(visibleBurrows(), visibleNests());
+      if (!decisionTargets || decisionTargetRevision !== (environment.targetRevision || 0)) {
+        decisionTargets = state.rivals.filter(enemy => !enemy.hidden && visibleCells.has(enemy.y * WORLD_SIZE + enemy.x)).concat(visibleBurrows(), visibleNests());
+        decisionTargetRevision = environment.targetRevision || 0;
+      }
+      return decisionTargets.filter(enemy => enemy.health > 0);
+    }
+
+    function scheduledDecisionEvent(agent) {
+      const targets = combatTargets();
+      if (agent.decisionPending || agent.retreat || hazardAt(agent.x, agent.y) || targets.some(target => !target.kind || target.kind === "agent") ||
+          state.simSeconds >= agent.nextDecisionAt) return decisionEvent(agent);
+      const plan = agent.utility, food = plan?.action === "collect" ? state.knownFood.get(plan.target.key) : null;
+      const signature = [agent.x, agent.y, agent.health, agent.stats.health, agent.level, agent.mode, agent.carrying, agent.carryingType,
+        state.evolutionPoints, state.nestLevel, colonySupply(state, colony.tribe).urgency,
+        agent.carrying > 0 ? deliveryCapacity(agent.carryingType || "honey-mushrooms") : 0,
+        food?.amount, food?.resourceType, plan?.action, plan?.plannedCargo, plan?.recoverHealth,
+        plan?.target.key, plan?.target.id, plan?.target.x, plan?.target.y,
+        plan?.target && state.explored.has(plan.target.y * WORLD_SIZE + plan.target.x), ...targets.map(target => target.id)].join(":");
+      const previous = decisionSchedule.get(agent);
+      if (previous?.signature === signature && previous.plan === plan && previous.attributes === agent.attributes) return null;
+      const reason = decisionEvent(agent);
+      if (!reason) decisionSchedule.set(agent, { signature, plan, attributes: agent.attributes });
+      return reason;
     }
 
     function reconsiderAgent(agent, reason) {
-      if (agent.health <= 0 || agent.combat || agent.birth && state.simSeconds < agent.birth.readyAt ||
+      if (agent.health <= 0 || agent.construction || agent.combat || agent.birth && state.simSeconds < agent.birth.readyAt ||
         agent.attack && state.simSeconds < agent.attack.endsAt) return;
       const candidates = utilityAI.evaluate(agent, !["completed", "targetLost", "restore"].includes(reason));
-      let best = candidates[0];
-      if (agent.actionPriorities?.includes(best?.action)) {
-        best = agent.actionPriorities.map(action => candidates.find(candidate =>
-          candidate.action === action && candidate.score > 0)).find(Boolean) || best;
-      }
+      const best = candidates[0];
       agent.decisionCount = (agent.decisionCount || 0) + 1;
       agent.lastDecisionAt = state.simSeconds;
       agent.lastDecisionReason = reason;
@@ -1111,14 +1273,22 @@ export function createGame(environment, colony) {
       agent.decisionPending = null;
       agent.knownEnemyIds = new Set(combatTargets().map(enemy => enemy.id));
       if (!best) {
+        if (agent.transport) constructionSupply.release(agent);
         agent.utility = null;
         agent.mode = "wait";
         return;
       }
+      if (best.action === "build") {
+        beginConstruction({ agentId: agent.id, buildingKey: best.target.buildingKey, x: best.target.x, y: best.target.y });
+        return;
+      }
       const previous = agent.utility;
+      if (best.action === "supply") {
+        if (previous?.action !== "supply" || previous.target.key !== best.target.key) constructionSupply.assign(agent, best.transport);
+      } else if (agent.transport) constructionSupply.release(agent);
       const same = previous?.action === best.action && previous.target?.key === best.target.key;
       agent.utility = { action: best.action, target: best.target, route: best.route,
-        plannedCargo: best.plannedCargo, recoverHealth: same && best.action === "recover" && reason !== "completed" ? previous.recoverHealth : best.recoverHealth,
+        plannedCargo: best.plannedCargo, recoverHealth: same && best.action === "recover" && reason !== "completed" && !agent.retreat ? previous.recoverHealth : best.recoverHealth,
         score: best.score, scores: candidates.map(candidate => ({ action: candidate.action, score: candidate.score, key: candidate.target.key })) };
       if (same) return;
       if (agent.foodDelivery?.receivedAt === null) agent.foodDelivery = null;
@@ -1130,7 +1300,8 @@ export function createGame(environment, colony) {
         agent.mode = "approach";
       } else if (best.action === "return") {
         returnToColony(agent);
-      } else if (best.action === "recover") agent.mode = "recover";
+      } else if (best.action === "supply") agent.mode = "return";
+      else if (best.action === "recover") agent.mode = "recover";
       else if (best.action === "fight") agent.mode = "fight";
       else if (best.action === "flee") agent.mode = "flee";
       else agent.mode = "search";
@@ -1139,6 +1310,10 @@ export function createGame(environment, colony) {
     function decisionEvent(agent) {
       if (agent.combat || agent.birth && state.simSeconds < agent.birth.readyAt ||
         agent.attack && state.simSeconds < agent.attack.endsAt) return null;
+      const previousSafety = agent.survivalState;
+      const previousRetreat = !!agent.retreat;
+      utilityAI.safety(agent);
+      if (previousSafety !== agent.survivalState || previousRetreat !== !!agent.retreat) return "survival";
       if (agent.decisionPending) return agent.decisionPending;
       const visible = combatTargets();
       const ids = new Set(visible.map(enemy => enemy.id));
@@ -1154,8 +1329,7 @@ export function createGame(environment, colony) {
         resourceTypeForCell(state.knownFood.get(plan.target.key), worldMap)) return "targetLost";
       if (plan?.action === "collect" && agent.carrying >= plan.plannedCargo) return "completed";
       if (plan?.action === "fight" && !ids.has(plan.target.id)) return "targetLost";
-      if (plan?.action === "return" && (agent.carrying <= 0 ||
-        isTribeFood(agent.carryingType || "honey-mushrooms", colony.tribe, worldMap.generationVersion) && state.evolutionPoints >= pointCapacity())) return "completed";
+      if (plan?.action === "return" && (agent.carrying <= 0 || deliveryCapacity(agent.carryingType || "honey-mushrooms") <= 0)) return "completed";
       if (plan?.action === "recover" && agent.health >= plan.recoverHealth) return "completed";
       if (plan?.action === "explore" && state.explored.has(plan.target.y * WORLD_SIZE + plan.target.x) &&
         agent.x === plan.target.x && agent.y === plan.target.y) return "completed";
@@ -1172,6 +1346,11 @@ export function createGame(environment, colony) {
         if (agent.moveDuration - movingFor > 1e-8) return false;
         agent.moveDuration = movingFor;
       }
+      if (plan.action === "supply" && agent.x === plan.target.x && agent.y === plan.target.y) {
+        const delivered = constructionSupply.interact(agent);
+        if (delivered > 0) addAgentExperience(agent, delivered * AGENT_EXPERIENCE.delivery);
+        return false;
+      }
       const home = isColonyBoundaryCell(agent.x, agent.y);
       if (plan.action === "collect" && agent.x === plan.target.x && agent.y === plan.target.y) {
         if (agent.mode !== "harvest") harvestAtCurrentCell(agent);
@@ -1182,10 +1361,9 @@ export function createGame(environment, colony) {
           agent.mode = "unload";
           agent.unloadReady = state.simSeconds + 1;
           agent.foodDelivery = {
-            colonyId: colony.id, x: agent.x + 0.5, y: agent.y + 0.5,
+            ...deliveryDestination(agent), colonyId: colony.id, x: agent.x + 0.5, y: agent.y + 0.5,
             startedAt: state.simSeconds, arrivesAt: agent.unloadReady, receivedAt: null,
-            amount: !isTribeFood(agent.carryingType || "honey-mushrooms", colony.tribe, worldMap.generationVersion) ? agent.carrying :
-              Math.min(agent.carrying, Math.max(0, pointCapacity() - state.evolutionPoints)),
+            amount: Math.min(agent.carrying, deliveryCapacity(agent.carryingType || "honey-mushrooms")),
             resourceType: agent.carryingType || "honey-mushrooms"
           };
         }
@@ -1228,6 +1406,10 @@ export function createGame(environment, colony) {
         { x: agent.x, y: agent.y + 1 }, { x: agent.x, y: agent.y - 1 }
       ].filter(cell => cell.x >= 0 && cell.y >= 0 && cell.x < WORLD_SIZE && cell.y < WORLD_SIZE &&
         state.explored.has(cell.y * WORLD_SIZE + cell.x) && isWalkable(cell.x, cell.y)) : walkableNeighbors(agent.x, agent.y);
+      if (plan.action === "supply") {
+        const blocked = constructionFootprints();
+        for (let index = candidates.length - 1; index >= 0; index--) if (blocked.has(candidates[index].y * WORLD_SIZE + candidates[index].x)) candidates.splice(index, 1);
+      }
       let destination = plan.route.find((cell, index) => index > 0 && plan.route[index - 1].x === agent.x && plan.route[index - 1].y === agent.y);
       if (plan.action === "fight" || !destination || !candidates.some(cell => cell.x === destination.x && cell.y === destination.y)) {
         destination = utilityAI.nextStep(agent, target);
@@ -1241,10 +1423,9 @@ export function createGame(environment, colony) {
       }
       const previousEnd = agent.moveStartedAt + agent.moveDuration;
       const continuing = agent.moveDuration > 0 && previousEnd >= state.simSeconds - elapsed - 1e-8;
-      const moved = moveAgent(agent, destination, !["return", "recover", "flee"].includes(plan.action));
+      const moved = moveAgent(agent, destination, !["return", "recover", "flee"].includes(plan.action), continuing ? Math.min(state.simSeconds, previousEnd) : state.simSeconds);
       if (moved) {
         if (continuing) {
-          agent.moveStartedAt = Math.min(state.simSeconds, previousEnd);
           agent.moveBudget = (state.simSeconds - agent.moveStartedAt) * agentSpeed(agent);
         } else agent.moveBudget = Math.max(0, agent.moveBudget - 1);
       }
@@ -1273,18 +1454,330 @@ export function createGame(environment, colony) {
       return NEST_LEVELS[state.nestLevel - 1].slotCapacity;
     }
 
+    function canSpendResources(cost) {
+      const available = constructionSupply.available();
+      return cost && state.evolutionPoints >= cost.evolutionPoints && Object.entries(cost.materials).every(([key, amount]) =>
+        (available[key] || 0) + 1e-8 >= amount);
+    }
+
+    function spendResources(cost) {
+      state.evolutionPoints = Math.round((state.evolutionPoints - cost.evolutionPoints) * 10) / 10;
+      resourceStorage.spend(cost.materials);
+    }
+
+    function constructionFootprints() {
+      const cells = new Set();
+      for (const agent of state.agents) {
+        const plan = agent.construction, definition = plan && buildingDefinition(plan.buildingKey);
+        if (!definition || agent.health <= 0) continue;
+        for (let y = plan.y; y < plan.y + definition.height; y++) for (let x = plan.x; x < plan.x + definition.width; x++) cells.add(y * WORLD_SIZE + x);
+      }
+      return cells;
+    }
+
+    function constructionRoute(agent, target, excluded) {
+      const key = constructionRouteMemo ? JSON.stringify([agent.x,agent.y,target.x,target.y,
+        excluded ? [...excluded].sort((a,b) => a-b) : []]) : null;
+      if (constructionRouteMemo?.has(key)) return constructionRouteMemo.get(key)?.map(cell => ({...cell})) || null;
+      const start = agent.y * WORLD_SIZE + agent.x, goal = target.y * WORLD_SIZE + target.x;
+      const parents = new Map([[start, null]]), queue = [start];
+      for (let cursor = 0; cursor < queue.length && cursor < 12000; cursor++) {
+        const index = queue[cursor], x = index % WORLD_SIZE, y = Math.floor(index / WORLD_SIZE);
+        if (index === goal) {
+          const route = [];
+          for (let next = index; next !== null; next = parents.get(next)) route.push({ x: next % WORLD_SIZE, y: Math.floor(next / WORLD_SIZE) });
+          route.reverse();
+          if (constructionRouteMemo) constructionRouteMemo.set(key,route.map(cell => ({...cell})));
+          return route;
+        }
+        for (const cell of walkableNeighbors(x, y)) {
+          const next = cell.y * WORLD_SIZE + cell.x;
+          if (parents.has(next) || !state.explored.has(next) || excluded?.has(next) || hazardAt(cell.x, cell.y)) continue;
+          parents.set(next, index); queue.push(next);
+        }
+      }
+      if (constructionRouteMemo) constructionRouteMemo.set(key,null);
+      return null;
+    }
+
+    function constructionSiteOccupied(plan, agent) {
+      const definition = buildingDefinition(plan.buildingKey);
+      const contains = (x,y) => x >= plan.x && y >= plan.y && x < plan.x + definition.width && y < plan.y + definition.height;
+      return [...environment.games.values()].flatMap(game => game.agents).concat(environment.creatureSystem?.agents || []).some(candidate =>
+        candidate !== agent && candidate.health > 0 && (contains(candidate.x,candidate.y) ||
+          state.simSeconds < candidate.moveStartedAt + candidate.moveDuration && contains(candidate.renderFromX,candidate.renderFromY)));
+    }
+
+    function constructionSiteIssue(buildingKey, x, y, agent) {
+      const definition = buildingDefinition(buildingKey);
+      if (!definition || !Number.isInteger(x) || !Number.isInteger(y)) return "건물과 위치를 다시 확인해 주세요.";
+      const site = { x, y, width: definition.width, height: definition.height, health: 1 };
+      const boundary = colonyBoundaryCells();
+      for (let dy = 0; dy < site.height; dy++) for (let dx = 0; dx < site.width; dx++) {
+        const cx = x + dx, cy = y + dy, index = cy * WORLD_SIZE + cx;
+        if (!isWalkable(cx, cy) || worldMap.terrain[index] === 9 || worldMap.terrain[index] === 10 || !state.explored.has(index) || hazardAt(cx, cy)) return "탐색한 안전한 빈 땅에 건설해 주세요.";
+        if (boundary.some(cell => cell.x === cx && cell.y === cy)) return "둥지 출입구에서 한 칸 띄워 건설해 주세요.";
+        if (foodCellMap.get(cx + "," + cy)?.amount > 0 || worldMap.treeCells?.[index]) return "자원이 있는 칸에는 건설할 수 없습니다.";
+
+      }
+      if (constructionSiteOccupied({buildingKey,x,y},agent)) return "다른 개체가 있는 칸에는 건설할 수 없습니다.";
+      if (state.agents.some(candidate => candidate !== agent && candidate.construction &&
+        buildingDefinition(candidate.construction.buildingKey) &&
+        candidate.construction.x < x + site.width && candidate.construction.y < y + site.height &&
+        candidate.construction.x + buildingDefinition(candidate.construction.buildingKey).width > x &&
+        candidate.construction.y + buildingDefinition(candidate.construction.buildingKey).height > y)) return "이미 건설이 진행 중인 자리입니다.";
+      const delivery = colonyDeliveryCells();
+      const queue = (delivery.length || buildingKey !== "outpost" ? delivery : burrowApproaches(site)
+        .filter(cell => state.explored.has(cell.y * WORLD_SIZE + cell.x) && isWalkable(cell.x, cell.y)))
+        .filter(cell => !buildingContains(site, cell.x, cell.y));
+      const reachable = new Set(queue.map(cell => cell.y * WORLD_SIZE + cell.x));
+      for (let cursor = 0; cursor < queue.length; cursor++) {
+        for (const cell of walkableNeighbors(queue[cursor].x, queue[cursor].y)) {
+          const index = cell.y * WORLD_SIZE + cell.x;
+          if (reachable.has(index) || !state.explored.has(index) || buildingContains(site, cell.x, cell.y)) continue;
+          reachable.add(index); queue.push(cell);
+        }
+      }
+      if (state.agents.some(candidate => candidate !== agent && candidate.health > 0 && !reachable.has(candidate.y * WORLD_SIZE + candidate.x))) {
+        return "개체가 둥지로 돌아오는 통로를 남겨 주세요.";
+      }
+      return null;
+    }
+
+    function reconsiderConstruction() {
+      for (const agent of state.agents) if (agent.health > 0 && agent.attributes?.construction && !agent.construction) {
+        agent.decisionPending = "targetLost";
+        agent.nextDecisionAt = state.simSeconds;
+      }
+    }
+
+    function constructionSites(agent, planningState, needs) {
+      let best = null;
+      const threats = combatTargets().filter(enemy => combatDisposition(enemy) === "aggressive" || enemy.combat);
+      for (const need of needs) {
+        const definition = buildingDefinition(need.buildingKey);
+        let anchor = need.anchor;
+        if (need.buildingKey === "outpost") {
+          const route = constructionRoute(agent, anchor);
+          if (!route) continue;
+          const budget = Math.max(0, (agent.bornAt + agent.lifespan - state.simSeconds - definition.buildSeconds - 15) * .8);
+          let seconds = 0;
+          for (const cell of route.slice(1)) {
+            seconds += 1 / (unitTravelSpeed(agent, 0) * unitTerrainSpeedMultiplier(agent, worldMap.terrain[cell.y * WORLD_SIZE + cell.x]));
+            if (seconds > budget) break;
+            anchor = cell;
+          }
+          if (Math.hypot(anchor.x - agent.x, anchor.y - agent.y) < 12 && route.length > 18) continue;
+        }
+        const anchors = [anchor], logistics = need.buildingKey === "storage" && !need.benefits.storage;
+        const homeDistance = cell => Math.min(...activeNestSites().map(home => Math.hypot(cell.x - home.x - (home.width || 5) / 2,
+          cell.y - home.y - (home.height || 5) / 2)));
+        if (logistics) {
+          const route = constructionRoute(agent,anchor);
+          if (route?.length > 18) for (let index = 6; index < route.length; index += 6) anchors.push(route[index]);
+          for (const home of activeNestSites()) {
+            const center = {x:home.x + Math.floor((home.width || COLONY_SIZE) / 2),y:home.y + Math.floor((home.height || COLONY_SIZE) / 2)};
+            for (const offset of [[8,0],[-8,0],[0,8],[0,-8]]) anchors.push({x:center.x + offset[0],y:center.y + offset[1]});
+          }
+        }
+        const candidates = new Map(), plans = [];
+        for (const center of anchors) for (let dy = -6; dy <= 6; dy++) for (let dx = -6; dx <= 6; dx++) {
+          const x = center.x + dx, y = center.y + dy;
+          if (!planningState.explored.has(y * WORLD_SIZE + x) || !isWalkable(x,y) || hazardAt(x,y) || logistics && homeDistance({x,y}) < 8) continue;
+          const distance = logistics ? Math.hypot(agent.x - x,agent.y - y) + .25 * Math.hypot(anchor.x - x,anchor.y - y) :
+            dx * dx + dy * dy + .1 * (Math.abs(agent.x - x) + Math.abs(agent.y - y));
+          const previous = candidates.get(x + "," + y);
+          if (!previous || previous.distance > distance) candidates.set(x + "," + y,{x,y,distance});
+        }
+        const sites = [...candidates.values()];
+        for (const site of sites.sort((a,b) => a.distance - b.distance)) {
+          if (threats.some(enemy => Math.hypot(enemy.x - site.x - definition.width / 2, enemy.y - site.y - definition.height / 2) < 6)) continue;
+          if (constructionSiteIssue(need.buildingKey, site.x, site.y, agent)) continue;
+          const route = constructionRoute(agent, constructionApproachCell({...site, buildingKey:need.buildingKey}));
+          const approach = constructionRoute(agent, site);
+          if (!route || !approach) continue;
+          const travelSeconds = Math.max(...[route, approach].map(cells => cells.slice(1).reduce((sum, cell) => sum +
+            1 / (unitTravelSpeed(agent, 0) * unitTerrainSpeedMultiplier(agent, worldMap.terrain[cell.y * WORLD_SIZE + cell.x])), 0)));
+          plans.push({buildingKey:need.buildingKey, x:site.x, y:site.y, gains:need.gains, travelSeconds,
+            buildSeconds:constructionSeconds(need.buildingKey, agent.attributes.construction)});
+          if (plans.length >= (needs.length > 1 ? 1 : 12)) break;
+        }
+        if (plans.length) {
+          const travel = Math.min(...plans.map(plan => plan.travelSeconds));
+          const score = need.score / (1 + travel / (definition.buildSeconds * 2));
+          if (!best || score > best.score) best = {need,plans,score};
+        }
+      }
+      return best;
+    }
+
+    function constructionPreview(template, position) {
+      const attributes = attributeCounts(template.slots, template.attributeLevels), stats = unitStats(attributes, colony.tribe);
+      return {...position, id:colony.id + ":preview", tribe:colony.tribe, slots:template.slots, attributes, stats,
+        health:stats.health, bornAt:state.simSeconds, lifespan:stats.lifespan, carrying:0, birth:null};
+    }
+
+    function constructionMaterialTargets(refresh) {
+      const active = state.agents.some(agent => agent.health > 0 && agent.construction);
+      const idle = state.agents.some(agent => agent.health >= agent.stats.health * .6 && agent.attributes?.construction &&
+        !agent.construction && agent.bornAt + agent.lifespan - state.simSeconds > 60);
+      const objective = !active || idle ? refresh ? constructionObjective(false) : constructionHelpPreview?.objective : null;
+      return tribeConstructionStock(state,colony.tribe,objective?.need);
+    }
+
+    function constructionObjective(refresh) {
+      if (colony.tribe === null || !hasActiveNest()) return null;
+      const builder = state.agents.find(agent => agent.health >= agent.stats.health * .6 && agent.attributes?.construction && !agent.construction &&
+        agent.bornAt + agent.lifespan - state.simSeconds > 60);
+      const position = availableSpawnCells(null)[0] || colonyBoundaryCells()[0];
+      if (!position && !builder) return null;
+      const template = constructionHelpTemplate({...state, tribe:colony.tribe});
+      const proxy = builder ? {...builder, carrying:0, birth:null} : constructionPreview(template, position);
+      const signature = JSON.stringify([Math.floor(state.simSeconds / 2), state.nestLevel, state.nestHealth, state.evolutionPoints,
+        state.explored.size, state.knownFood.size, environment.targetRevision, state.resourceInventory,
+        state.templates.map(value => [value.id,value.revision,value.slots,value.attributeLevels]),
+        state.buildings.map(value => [value.id,value.health]),
+        state.agents.map(value => [value.id,value.health,value.carrying,value.construction?.buildingKey,value.construction?.id])]);
+      if (!refresh && constructionHelpPreview?.signature === signature) return constructionHelpPreview.objective;
+      const planningState = state.nestLevel < 2 ? {...state,nestLevel:2} : state;
+      const needs = tribeConstructionGoals(planningState, colony.tribe, activeNestSites().map(site => ({...site,
+        width:site.width || COLONY_SIZE, height:site.height || COLONY_SIZE})),
+        combatTargets().filter(enemy => combatDisposition(enemy) === "aggressive" || enemy.combat), worldMap.frontierSites, worldMap, colonyBoundaryCells());
+      let objective = constructionSites(proxy,state,needs);
+      if (objective && objective.need.buildingKey !== "storage") {
+        const capacity = (state.resourceStores || []).filter(store => store.kind !== "remains").reduce((sum,store) => sum + store.capacity,0);
+        const stored = Object.values(state.resourceInventory).reduce((sum,amount) => sum + amount,0);
+        const missing = Object.entries(objective.need.cost.materials).reduce((sum,[type,amount]) => sum + Math.max(0,amount - (state.resourceInventory[type] || 0)),0);
+        if (stored + missing > capacity + 1e-8) {
+          const home = activeNestSites()[0],score = objective.need.score + 1;
+          const prerequisite = {...needs.find(need => need.buildingKey === "storage"),buildingKey:"storage",
+            anchor:{x:home.x + Math.floor((home.width || COLONY_SIZE) / 2),y:home.y + Math.floor((home.height || COLONY_SIZE) / 2)},
+            benefits:{storage:1},score,urgent:true,prerequisiteFor:objective.need.buildingKey,cost:buildingCost("storage",colony.tribe),gains:{materialGain:score}};
+          objective = constructionSites(proxy,state,[prerequisite]) || objective;
+        }
+      }
+      constructionHelpPreview = {signature, objective};
+      return objective;
+    }
+
+    function constructionPlansFor(agent, planningState, supply, candidateSites) {
+      if (!agent.attributes.construction || agent.carrying || agent.birth || agent.combat || agent.construction ||
+          state.simSeconds < (agent.constructionRetryAt || 0)) return [];
+      const objective = constructionObjective(false);
+      if (!objective || buildingDefinition(objective.need.buildingKey).minNestLevel > planningState.nestLevel) return [];
+      const candidates = candidateSites === undefined ? constructionSites(agent, planningState, [objective.need]) : candidateSites;
+      if (!candidates) return [];
+      const plans = candidates.plans.flatMap(plan => {
+        const forecast = supply.forecast(agent, plan);
+        const buildSeconds = forecast ? constructionSeconds(plan.buildingKey,agent.attributes.construction) +
+          Math.max(0,forecast.deliverySeconds - plan.travelSeconds) : Infinity;
+        return forecast && plan.travelSeconds + buildSeconds + 5 < agent.bornAt + agent.lifespan - state.simSeconds ?
+          [{...plan,buildSeconds,deliverySeconds:forecast.deliverySeconds}] : [];
+      }).sort((a,b) => a.buildSeconds + a.travelSeconds - b.buildSeconds - b.travelSeconds);
+      return plans.slice(0,1);
+    }
+
+    function constructionPlans(agent) {
+      return constructionPlansFor(agent, state, constructionSupply);
+    }
+
+    function beginConstruction(action) {
+      const agent = state.agents.find(candidate => candidate.id === action.agentId && candidate.health > 0);
+      const definition = buildingDefinition(action.buildingKey);
+      if (!agent || !agent.attributes.construction) throw new Error("건설 속성이 있는 개체를 선택해 주세요.");
+      if (agent.birth || agent.combat || agent.attack && state.simSeconds < agent.attack.endsAt || agent.construction) throw new Error("개체가 현재 행동을 마친 뒤 건설해 주세요.");
+      if (agent.carrying > 0) throw new Error("운반 중인 자원을 먼저 내려놓아 주세요.");
+      if (!definition || definition.minNestLevel > state.nestLevel) throw new Error("둥지를 성장시킨 뒤 건설해 주세요.");
+      if (state.buildings.filter(building => building.health > 0).length + state.agents.filter(candidate => candidate.construction).length >= 64) throw new Error("건물은 최대 64개까지 세울 수 있습니다.");
+      const issue = constructionSiteIssue(action.buildingKey, action.x, action.y, agent);
+      if (issue) throw new Error(issue);
+      if (!canSpendResources(buildingCost(action.buildingKey, colony.tribe))) throw new Error("건설에 필요한 자원 재료가 부족합니다.");
+      const route = constructionRoute(agent, constructionApproachCell(action));
+      if (!route) throw new Error("건설 장소까지 이동할 수 있는 탐색 경로가 없습니다.");
+      agent.construction = { buildingKey: action.buildingKey, x: action.x, y: action.y, route, routeIndex: 0,
+        state: "moving", startedAt: null, readyAt: null, orderedAt: state.simSeconds };
+      constructionSupply.prepare(agent);
+      agent.constructionError = null;
+      agent.utility = null; agent.decisionPending = null; agent.attack = null; agent.foodDelivery = null;
+      agent.mode = "build"; agent.moveBudget = 0;
+      return { agentId: agent.id, buildingKey: definition.key };
+    }
+
+    function cancelConstruction(agent, message) {
+      constructionSupply.stop(agent);
+      agent.construction = null; agent.constructionError = message;
+      agent.utility = null; agent.mode = "search"; agent.moveBudget = 0;
+      agent.decisionPending = "completed";
+      agent.constructionRetryAt = state.simSeconds + 5;
+    }
+
+    function updateConstruction(agent, elapsed) {
+      const plan = agent.construction, definition = buildingDefinition(plan.buildingKey);
+      if (!definition || !agent.attributes.construction || agent.combat && plan.state !== "transforming") { cancelConstruction(agent, "건설 행동이 중단되었습니다."); return; }
+      const destination = constructionApproachCell(plan);
+      if (plan.state === "moving" && (plan.route.at(-1).x !== destination.x || plan.route.at(-1).y !== destination.y)) {
+        const route = constructionRoute(agent, destination);
+        if (!route) { cancelConstruction(agent, "건설 경로가 막혀 명령을 취소했습니다."); return; }
+        plan.route = route; plan.routeIndex = 0;
+      }
+      if (plan.state === "transforming") agent.mode = "transform";
+      agent.moveBudget = Math.min(1, agent.moveBudget + elapsed * agentSpeed(agent));
+      if (state.simSeconds < agent.moveStartedAt + agent.moveDuration) return;
+      if (plan.state !== "transforming" && (agent.x !== destination.x || agent.y !== destination.y)) {
+        if (agent.moveBudget < 1) return;
+        const next = plan.route[plan.routeIndex + 1];
+        if (!next || !isWalkable(next.x, next.y) || !moveAgent(agent, next, false, state.simSeconds)) {
+          cancelConstruction(agent, "건설 경로가 막혀 명령을 취소했습니다."); return;
+        }
+        plan.routeIndex += 1; agent.moveBudget = 0;
+        return;
+      }
+      if (constructionSiteOccupied(plan,agent)) return;
+      if (plan.state !== "transforming") {
+        const issue = constructionSiteIssue(plan.buildingKey, plan.x, plan.y, agent);
+        if (issue) { cancelConstruction(agent, issue); return; }
+        plan.state = "transforming"; plan.startedAt = state.simSeconds;
+        plan.readyAt = state.simSeconds + constructionSeconds(plan.buildingKey, agent.attributes.construction);
+        agent.mode = "transform"; agent.moveBudget = 0;
+      }
+      if (!constructionSupply.advance(agent, elapsed)) return;
+      const issue = constructionSiteIssue(plan.buildingKey, plan.x, plan.y, agent);
+      if (issue) { cancelConstruction(agent, issue); return; }
+
+      state.buildings.push({ id: "building:" + colony.id + ":" + state.nextBuildingId++, key: definition.key, kind: "building",
+        colonyId: colony.id, ownerId: colony.ownerId, name: definition.name, x: plan.x, y: plan.y,
+        width: definition.width, height: definition.height, health: definition.health, maxHealth: definition.health,
+        completedAt: state.simSeconds });
+      if (!state.constructionHelpBuildings.includes(definition.key)) state.constructionHelpBuildings.push(definition.key);
+      state.agents = state.agents.filter(candidate => candidate !== agent);
+      environment.unitIndex?.remove(agent);
+      reconsiderConstruction();
+    }
+
     function pointCapacity() {
       return NEST_LEVELS[state.nestLevel - 1].pointCapacity;
     }
 
+    function resourceSpace() {
+      return resourceStorage.refresh().reduce((sum, store) => sum + resourceStorage.space(store), 0);
+    }
+
+    function deliveryCapacity(resourceType) {
+      const materials = resourceSpace();
+      const native = isColonyFood(resourceType,colony.tribe,worldMap.generationVersion);
+      const needed = native ? Math.max(0,(constructionMaterialTargets()[resourceType] || 0) - (state.resourceInventory[resourceType] || 0)) : materials;
+      return native ? Math.max(Math.max(0,pointCapacity() - state.evolutionPoints),Math.min(materials,needed)) : materials;
+    }
+
     function upgradeCost() {
-      return NEST_LEVELS[state.nestLevel - 1].upgradeCost;
+      return nestUpgradeCost(state.nestLevel, colony.tribe);
     }
 
     function agentSpeed(agent) {
-      let speed = unitMovementSpeed(agent.stats);
-      if (agent.carrying > agent.stats.capacity) speed *= 0.8;
-      if (synergy(agent, ["strength", "feet"])) speed *= 1 + 0.5 * Math.min(1, agent.carrying / agent.stats.capacity);
+      let speed = unitTravelSpeed(agent, agent.carrying);
+      const capacity = unitCarryCapacity(agent, agent.carryingType);
+      if (agent.carrying > capacity) speed *= 0.8;
+      if (synergy(agent, ["strength", "feet"])) speed *= 1 + 0.5 * Math.min(1, agent.carrying / capacity);
       if (synergy(agent, ["feet", "feet"]) && agent.straightSteps > 4) speed *= 1.75;
       if (hazardAt(agent.x, agent.y)) {
         speed *= 0.5;
@@ -1293,12 +1786,14 @@ export function createGame(environment, colony) {
       return speed * unitTerrainSpeedMultiplier(agent, worldMap.terrain[agent.y * WORLD_SIZE + agent.x]);
     }
 
-    function spawnAgent(template, faction, newborn) {
-      const position = chooseSpawnPosition(template.id !== null || newborn);
+    function spawnAgent(template, faction, newborn, birthBuilding, birthCell) {
+      const position = birthCell ? availableSpawnCells(birthBuilding).find(cell => cell.x === birthCell.x && cell.y === birthCell.y) :
+        chooseSpawnPosition(template.id !== null || newborn, birthBuilding);
       if (!position) return null;
-      const attributes = attributeCounts(template.slots);
+      const attributes = attributeCounts(template.slots, template.attributeLevels);
       const stats = unitStats(attributes, colony.tribe);
       const agent = {
+        tribe: colony.tribe || "bean",
         id: colony.id + ":" + state.nextAgentId,
         ownerId: colony.ownerId,
         name: template.name + " " + state.nextAgentId,
@@ -1306,13 +1801,14 @@ export function createGame(environment, colony) {
         templateName: template.name,
         templateRevision: template.revision,
         slots: [...template.slots],
+        attributeLevels: migrateAttributeLevels(template.slots, template.attributeLevels, state.nestLevel),
         attributes,
         stats,
         rulesVersion: 2,
         health: stats.health,
         personality: createPersonality(Math.random),
         faction,
-        cost: birthCost(template),
+        cost: birthCost(template, colony.tribe),
         x: position.x,
         y: position.y,
         profile: { ...state.draftProfile },
@@ -1343,17 +1839,24 @@ export function createGame(environment, colony) {
       };
       initializeAgent(agent);
       if (template.id !== null || newborn) {
+        const source = birthBuilding || (state.nestHealth <= 0 ? state.buildings.find(building => building.key === "outpost" && building.health > 0 &&
+          position.x >= building.x - 1 && position.x <= building.x + building.width && position.y >= building.y - 1 && position.y <= building.y + building.height) : null);
         agent.mode = "birth";
         agent.birth = { colonyId: colony.id, startedAt: state.simSeconds,
           readyAt: state.simSeconds + agentBirthDuration(agent.tribe),
-          fromX: COLONY_CENTER.x - .5, fromY: COLONY_CENTER.y - .5 };
+          buildingId: source?.id || null, sourceX: source?.x ?? colony.x, sourceY: source?.y ?? colony.y,
+          sourceWidth: source?.width || COLONY_SIZE, sourceHeight: source?.height || COLONY_SIZE,
+          fromX: source ? source.x + (source.width - 1) / 2 : COLONY_CENTER.x - .5,
+          fromY: source ? source.y + (source.height - 1) / 2 : COLONY_CENTER.y - .5 };
       }
       state.nextAgentId += 1;
       state.agents.push(agent);
+      environment.unitIndex?.update(agent, environment.games.get(colony.ownerId));
       return agent;
     }
 
     function isAgentCellOccupied(x, y, excludedAgent) {
+      if (environment.unitIndex) return environment.unitIndex.occupied(x, y, excludedAgent, true);
       const occupied = (other) => other !== excludedAgent && other.health > 0 && (
         (other.x === x && other.y === y) ||
         (state.simSeconds - other.moveStartedAt < other.moveDuration &&
@@ -1367,7 +1870,7 @@ export function createGame(environment, colony) {
       const drops = [{ id: "corpse:" + agent.id, agentId: agent.id, colonyId: colony.id, name: agent.name,
         level: agent.level, tribe: agent.tribe, bornAt: agent.bornAt, diedAt: state.simSeconds, decaysAt: state.simSeconds + CORPSE_LIFETIME,
         hurtStartedAt: agent.hurtStartedAt, hurtCount: agent.hurtCount,
-        amount: Math.max(1, Math.floor(agent.cost / 2)), kind: "corpse", resourceType: "meat",
+        cost: agent.cost, amount: corpseRecoveryAmount(agent.cost, agent.tribe), kind: "corpse", resourceType: "meat",
         attributes: { ...agent.attributes }, appearanceAttributes: { ...agent.appearanceAttributes } }];
       if (agent.carrying > 0) {
         const resourceType = agent.carryingType || "honey-mushrooms";
@@ -1388,7 +1891,7 @@ export function createGame(environment, colony) {
               const x = agent.x + offsetX;
               const y = agent.y + offsetY;
               const key = x + "," + y;
-              if (!isWalkable(x, y) || foodCellMap.get(key)?.amount > 0 || hazardAt(x, y)) continue;
+              if (!isWalkable(x, y) || foodCellMap.get(key)?.amount > 0 || foodCellMap.get(key)?.kind === "corpse" || hazardAt(x, y)) continue;
               const cell = { x, y, ...drop };
               foodCellMap.set(key, cell);
               placed = true;
@@ -1403,7 +1906,9 @@ export function createGame(environment, colony) {
       for (const agent of state.agents) {
         if (state.simSeconds - agent.bornAt >= agent.lifespan) agent.health = 0;
         if (agent.health > 0) continue;
+        constructionSupply.lose(agent);
         dropCorpse(agent);
+        environment.unitIndex?.remove(agent);
         agent.health = 0;
       }
       state.agents = state.agents.filter((agent) => agent.health > 0);
@@ -1422,7 +1927,7 @@ export function createGame(environment, colony) {
     function updateAttack(agent) {
       const attack = agent.attack;
       if (!attack) return false;
-      if (attack.targetKind === "agent" && !attack.combatId) { agent.attack = null; return false; }
+      if (!["burrow", "nest"].includes(attack.targetKind)) { agent.attack = null; return false; }
       if (!attack.resolved && state.simSeconds + 1e-8 >= attack.hitAt) {
         attack.resolved = true;
         const owner = [...environment.games.values()].find(game => attack.targetKind === "nest" ? game.nest?.id === attack.targetId : game.agents.some(target => target.id === attack.targetId));
@@ -1435,16 +1940,11 @@ export function createGame(environment, colony) {
           attack.hit = true;
           const remaining = attack.targetKind === "burrow" ? environment.creatureSystem.receiveBurrowDamage(target.id, attack.damage) :
             attack.targetKind === "nest" ? owner.receiveNestDamage(attack.damage) : null;
-          if (!["burrow", "nest"].includes(attack.targetKind)) {
-            const random = environment.damageRandom || Math.random;
-            attack.damage = combatDamage(agent, target, random());
-            const counterDamage = combatDamage(target, agent, random());
-            if (owner) owner.receiveDamage(target, attack.damage);
-            else environment.creatureSystem.receiveDamage(target, attack.damage);
-            damageAgent(agent, counterDamage, false);
-            removeDeadAgents();
-          }
-          if ((remaining ?? target.health) <= 0) agent.decisionPending = "targetLost";
+          const previousHealth = target.health;
+          target.health = remaining ?? target.health;
+          recordCombatExperience(agent, target, Math.max(0, previousHealth - target.health),
+            target.health <= 0 ? [...environment.games.values()].flatMap(game => game.agents) : []);
+          if (target.health <= 0) agent.decisionPending = "targetLost";
         }
       }
       if (state.simSeconds + 1e-8 >= attack.endsAt) return false;
@@ -1453,16 +1953,24 @@ export function createGame(environment, colony) {
     }
 
     function updateAgents(elapsed) {
+      let backgroundDecisions = 0;
+      const background = agent => environment.hostId && colony.ownerId !== environment.hostId &&
+        !environment.games.get(environment.hostId)?.isVisible(agent.x, agent.y);
+      const reconsider = (agent, reason) => {
+        if (!reason || reason === "periodic" && background(agent) && backgroundDecisions++ >= 4) return;
+        reconsiderAgent(agent, reason);
+      };
       expireCorpses(foodCellMap, state.simSeconds);
       for (const [key, known] of state.knownFood) {
         if (known.kind !== "corpse") continue;
         const current = foodCellMap.get(key);
         if (known.colonyId === colony.id) {
-          if (current?.id === known.id && current.amount > 0) state.knownFood.set(key, { ...current });
+          if (current?.id === known.id) state.knownFood.set(key, { ...current });
           else state.knownFood.delete(key);
         } else if (state.simSeconds >= known.decaysAt) state.knownFood.delete(key);
       }
       if (state.simSeconds >= footprintCleanupAt) expireFootprints();
+      constructionSupply.refresh();
       updatingAgents = true;
       removeDeadAgents();
       updatePerception();
@@ -1478,19 +1986,37 @@ export function createGame(environment, colony) {
           agent.appearanceAttributes = agentAppearanceAttributes(agent);
           agent.decisionPending = "growth";
         }
+        if (!agent.combat && agent.stats.regeneration > 0) {
+          agent.health = Math.min(agent.stats.health, agent.health + agent.stats.regeneration * elapsed);
+        }
         updateEnvironment(agent, elapsed);
         if (agent.health <= 0) continue;
+        if (agent.construction?.state === "transforming") {
+          combat.update(agent, state.simSeconds);
+          if (agent.health > 0) updateConstruction(agent, elapsed);
+          continue;
+        }
+        if (agent.construction?.state === "moving") {
+          const safety = utilityAI.safety(agent);
+          if (agent.combat || agent.retreat || safety.state !== "stable") cancelConstruction(agent, "위험을 피해 변태 이동을 중단했습니다.");
+        }
         if (combat.update(agent, state.simSeconds)) continue;
         if (updateAttack(agent)) continue;
-        const reason = decisionEvent(agent);
-        if (reason) reconsiderAgent(agent, reason);
+        if (agent.construction) { updateConstruction(agent, elapsed); continue; }
+        const reason = scheduledDecisionEvent(agent);
+        reconsider(agent, reason);
+        if (agent.construction) { updateConstruction(agent, elapsed); continue; }
         agent.moveBudget = Math.min(1, agent.moveBudget + elapsed * agentSpeed(agent));
+        if (!["rest", "unload", "harvest"].includes(agent.mode) && state.simSeconds + 1e-8 < agent.moveStartedAt + agent.moveDuration) continue;
         if (agent.mode === "rest") {
           agent.straightSteps = 0;
           if (isColonyBoundaryCell(agent.x, agent.y)) {
             agent.health = Math.min(agent.stats.health, agent.utility.recoverHealth, agent.health + elapsed * 0.25);
             if (agent.health >= agent.utility.recoverHealth) agent.decisionPending = "completed";
           } else agent.mode = "recover";
+        } else if (agent.mode === "unload" && agent.utility?.action === "supply") {
+          const delivered = constructionSupply.interact(agent);
+          if (delivered > 0) addAgentExperience(agent, delivered * AGENT_EXPERIENCE.delivery);
         } else if (agent.mode === "unload") {
           if (!isColonyDeliveryCell(agent.x, agent.y)) {
             agent.mode = "return";
@@ -1506,11 +2032,11 @@ export function createGame(environment, colony) {
         if (agent.decisionPending) reconsiderAgent(agent, agent.decisionPending);
       }
       removeDeadAgents();
-      state.corpses = [...foodCellMap.values()].filter(cell => cell.kind === "corpse" && cell.amount > 0);
+      state.corpses = [...foodCellMap.values()].filter(cell => cell.kind === "corpse");
       updatePerception();
       for (const agent of state.agents) {
-        const reason = decisionEvent(agent);
-        if (reason) reconsiderAgent(agent, reason);
+        const reason = scheduledDecisionEvent(agent);
+        reconsider(agent, reason);
       }
       updatingAgents = false;
     }
@@ -1522,36 +2048,149 @@ export function createGame(environment, colony) {
       return value.trim();
     }
 
-    function birth(template, required) {
-      if (state.nestHealth <= 0) {
+    function birth(template, required, buildingId, birthCell) {
+      const birthBuilding = buildingId === undefined || buildingId === null ? null :
+        state.buildings.find(building => building.id === buildingId && building.key === "outpost" && building.health > 0);
+      if (buildingId !== undefined && buildingId !== null && !birthBuilding) throw new Error("탄생할 전초둥지를 찾을 수 없습니다.");
+      if (!hasActiveNest()) {
         if (!required) return null;
         throw new Error("파괴된 둥지에서는 개체를 생산할 수 없습니다.");
       }
-      if (template.slots.length > slotCapacity() || template.slots.some(key => !ATTRIBUTES.some(attribute => attribute.key === key))) {
+      if (template.slots.length > slotCapacity() || new Set(template.slots).size !== template.slots.length || template.slots.some(key => !ATTRIBUTES.some(attribute => attribute.key === key))) {
         throw new Error("현재 둥지의 슬롯 수와 사용 가능한 속성에 맞춰 설계를 수정해 주세요.");
       }
       if (state.agents.length >= 200) {
         if (!required) return null;
         throw new Error("생명체는 최대 200개까지 유지할 수 있습니다.");
       }
-      if (state.evolutionPoints < birthCost(template)) {
+      if (state.evolutionPoints < birthCost(template, colony.tribe)) {
         if (!required) return null;
         throw new Error("진화 포인트가 부족합니다.");
       }
-      const agent = spawnAgent(template, "colony", true);
+      const agent = spawnAgent(template, "colony", true, birthBuilding, birthCell);
       if (!agent) {
         if (!required) return null;
-        throw new Error(colony.tribe === "spring" || colony.tribe === "pebble" ? "둥지 앞쪽의 탄생 공간이 가득 찼습니다." : "둥지 주변이 가득 찼습니다.");
+        throw new Error(colony.tribe === "spring" || colony.tribe === "pebble" ? "둥지 앞쪽과 양옆의 탄생 공간이 가득 찼습니다." : "둥지 주변이 가득 찼습니다.");
       }
-      state.evolutionPoints -= birthCost(template);
+      state.evolutionPoints = Math.round((state.evolutionPoints - birthCost(template, colony.tribe)) * 10) / 10;
       return agent.id;
+    }
+
+    function constructionHelpOffer(refresh) {
+      const previous = constructionRouteMemo;
+      constructionRouteMemo = new Map();
+      try { return constructionHelpReadiness(refresh); }
+      finally { constructionRouteMemo = previous; }
+    }
+
+    function constructionHelpReadiness(refresh) {
+      const enabled = environment.beginnerHelpEnabled === true && colony.ownerId === environment.hostId;
+      if (!enabled || state.ending) return null;
+      const active = state.agents.find(agent => agent.health > 0 && agent.construction);
+      const objective = active ? {need:{buildingKey:active.construction.buildingKey,
+        cost:{materials:constructionSupply.shortages()}}} : constructionObjective(refresh);
+      if (!objective) return null;
+      const stock = active ? {} : constructionSupply.available();
+      const foragers = constructionSupply.foragers();
+      const harvestNeeds = constructionHarvestNeeds(constructionSupplyContext,objective.need,stock,foragers);
+      let offer = constructionHelp(state, colony.tribe, enabled, objective.need, stock, worldMap,false,foragers,harvestNeeds);
+      const positions = availableSpawnCells(null);
+      if (!positions.length) return null;
+      const locked = buildingDefinition(objective.need.buildingKey).minNestLevel > state.nestLevel;
+      if (locked) {
+        if (offer?.kind === "construction" || colony.tribe === "pebble" && offer?.kind === "harvest") offer = null;
+        const pending = state.agents.some(agent => agent.health > 0 && agent.birth);
+        const allocation = constructionSupply.allocation();
+        const workers = state.agents.filter(agent => agent.health > 0 && !agent.attributes?.construction);
+        const horizon = Math.max(30,Math.min(120,...workers.map(agent => agent.bornAt + agent.lifespan - state.simSeconds)));
+        const replacement = workers.filter(agent => agent.bornAt + agent.lifespan - state.simSeconds <= horizon)
+          .reduce((sum,agent) => sum + birthCost(agent,colony.tribe),0);
+        if (!pending && state.evolutionPoints + allocation.incomingFood + allocation.productionRate * horizon <
+            nestUpgradeCost(state.nestLevel,colony.tribe) + replacement) {
+          const support = constructionHelp(state,colony.tribe,enabled,objective.need,stock,worldMap,true,foragers);
+          const template = constructionHelpTemplate({...state,tribe:colony.tribe},support.slots,[],"transport");
+          const worker = constructionPreview(template,positions[0]);worker.id += ":growth";
+          const projected = {...state,evolutionPoints:Math.max(0,state.evolutionPoints - support.cost),agents:state.agents.concat(worker)};
+          const forecast = createConstructionSupply({...constructionSupplyContext,state:projected}).allocation();
+          if ((forecast.productionRate - allocation.productionRate) * worker.lifespan > support.cost) offer = support;
+        }
+      }
+      if (active && !offer) {
+        const plan = active.construction;
+        const elapsed = state.simSeconds - plan.orderedAt;
+        const delivered = Object.values(plan.delivered || {}).reduce((sum,amount) => sum + amount,0);
+        const incoming = state.agents.reduce((sum,agent) => sum + (agent.health > 0 && agent.transportCargo?.siteId === plan.id ? agent.carrying || 0 :
+          agent.health > 0 && agent.transport?.siteId === plan.id && agent.transport.phase === "pickup" ? agent.transport.amount || 0 : 0),0);
+        const remaining = Math.max(0,Object.values(plan.required || {}).reduce((sum,amount) => sum + amount,0) - delivered - incoming);
+        const estimated = delivered + incoming > 0 ? remaining * elapsed / (delivered + incoming) + 30 : Infinity;
+        const pendingWorker = state.agents.some(agent => agent.health > 0 && agent.birth && !agent.attributes?.construction);
+        if (remaining > 0 && elapsed > 25 && estimated > Math.max(30,(active.bornAt + active.lifespan - state.simSeconds) / 2) && !pendingWorker) {
+          offer = constructionHelp(state,colony.tribe,enabled,objective.need,stock,worldMap,true,foragers);
+        }
+      }
+      if (!active && !state.agents.some(agent => agent.health >= agent.stats.health * .6 && !agent.attributes?.construction &&
+          agent.bornAt + agent.lifespan - state.simSeconds > 30)) {
+        offer = constructionHelp(state,colony.tribe,enabled,objective.need,stock,worldMap,true,foragers);
+      }
+      if (!offer && !active) {
+        const workers = state.agents.filter(agent => agent.health > 0 && !agent.attributes?.construction &&
+          agent.bornAt + agent.lifespan - state.simSeconds > 60);
+        const builder = state.agents.find(agent => agent.health >= agent.stats.health * .6 && agent.attributes?.construction && !agent.construction &&
+        agent.bornAt + agent.lifespan - state.simSeconds > 60);
+        const ready = Object.entries(objective.need.cost.materials).every(([type,amount]) => (stock[type] || 0) >= amount);
+        if (!workers.length || builder && !constructionPlansFor({...builder,carrying:0,birth:null},state,constructionSupply).length &&
+            (ready || constructionSupply.allocation().forecastBalance < 0)) {
+          offer = constructionHelp(state,colony.tribe,enabled,objective.need,stock,worldMap,true,foragers);
+        }
+      }
+      if (!offer) return null;
+      const pending = state.agents.some(agent => agent.health > 0 && agent.birth && agent.slots.includes("strength"));
+      const allocation = constructionSupply.allocation();
+      const foodSpecialists = offer.kind === "harvest" && state.agents.some(agent => agent.health >= agent.stats.health * .6 &&
+        !agent.construction && foragers.has(agent.id) && offer.resources.some(type =>
+          resourceDefinition(type).requirements.every(key => agent.attributes?.[key] > 0)));
+      if (foodSpecialists && !pending) offer = constructionHelp(state,colony.tribe,enabled,objective.need,stock,worldMap,true,foragers);
+      if (offer.kind === "harvest" && !pending && allocation.forecastBalance < 0 && allocation.productionRate < allocation.requiredRate) {
+        offer = constructionHelp(state, colony.tribe, enabled, objective.need, stock, worldMap,true,foragers);
+      }
+      if (offer.kind === "construction") {
+        if (active) return null;
+        const template = constructionHelpTemplate({...state, tribe:colony.tribe}, offer.slots, offer.resources, offer.kind);
+        const preview = constructionPreview(template, positions[0]);
+        const projected = {...state, evolutionPoints:Math.max(0,state.evolutionPoints - offer.cost), agents:state.agents.concat(preview)};
+        const supply = createConstructionSupply({...constructionSupplyContext,state:projected});
+        const candidateSites = constructionSites(preview,projected,[objective.need]);
+        if (!constructionPlansFor(preview,projected,supply,candidateSites).length) {
+          if (pending) return null;
+          const supportOffer = constructionHelp(state,colony.tribe,enabled,objective.need,stock,worldMap,true,foragers);
+          const supportTemplate = constructionHelpTemplate({...state,tribe:colony.tribe},supportOffer.slots,[],"transport");
+          const worker = constructionPreview(supportTemplate,positions[0]);worker.id += ":courier";
+          const supported = {...projected,evolutionPoints:Math.max(0,projected.evolutionPoints - supportOffer.cost),
+            agents:projected.agents.concat(worker)};
+          const forecast = createConstructionSupply({...constructionSupplyContext,state:supported});
+          const base = supply.allocation(),provision = forecast.allocation();
+          const useful = provision.forecastBalance > base.forecastBalance + 1e-8 ||
+            (provision.foodYields.get(worker.id) || 0) + 1e-8 >= supportOffer.cost || candidateSites?.plans.some(plan => {
+            const before = supply.forecast(preview,plan,true),after = forecast.forecast(preview,plan,true);
+            return after && (after.deliveredUnits > (before?.deliveredUnits || 0) + 1e-8 ||
+              after.deliveredUnits === before?.deliveredUnits && after.deliverySeconds + 1e-8 < before.deliverySeconds);
+          });
+          if (!useful) return null;
+          offer = constructionHelp(state, colony.tribe, enabled, objective.need, stock, worldMap,true,foragers);
+        }
+      }
+      if (offer.kind === "transport" && pending) return null;
+      return offer;
     }
 
     function checkEnding() {
       if (state.ending || colony.tribe === null || state.agents.some(agent => agent.health > 0) ||
-          state.nestHealth > 0 && state.evolutionPoints >= birthCost({ slots: [] })) return state.ending;
+          hasActiveNest() && state.evolutionPoints >= birthCost({ slots: [] }, colony.tribe)) return state.ending;
+      const combatants = [...environment.games.values()].flatMap(game => game.agents).concat(environment.creatureSystem?.agents || []);
+      if (combatants.some(agent => agent.combat?.teams.includes("colony:" + colony.ownerId) &&
+          (agent.attack?.exchange || agent.combat.pendingCounter?.exchange)?.counterApplied === false)) return state.ending;
       state.ending = { endedAt: state.simSeconds,
-        reason: state.nestHealth <= 0 ? "nest-destroyed" : "extinction",
+        reason: !hasActiveNest() ? "nest-destroyed" : "extinction",
         bornCount: state.nextAgentId - 1, exploredCells: state.explored.size,
         discoveryCount: state.discoveries.length, colonyFood: state.colonyFood,
         evolutionPoints: state.evolutionPoints, nestLevel: state.nestLevel };
@@ -1560,7 +2199,7 @@ export function createGame(environment, colony) {
 
     function command(action) {
       if (state.ending && action.type !== "read-discoveries") throw new Error("끝난 군락은 둘러보기만 할 수 있습니다.");
-      const cheat = commandCheat(action, environment, state, removeDeadAgents, checkEnding);
+      const cheat = commandCheat(action, state, removeDeadAgents, checkEnding, resourceStorage.restore);
       if (cheat !== null) return cheat;
       if (action.type === "read-discoveries") {
         if (!Number.isInteger(action.count) || action.count < 0 || action.count > state.discoveries.length) {
@@ -1575,9 +2214,52 @@ export function createGame(environment, colony) {
         state.templates.splice(index, 1);
         return {};
       }
+      if (action.type === "upgrade-attribute") {
+        const template = state.templates.find(candidate => candidate.id === action.templateId);
+        if (!template) throw new Error("강화할 설계를 찾을 수 없습니다.");
+        if (!state.buildings.some(building => building.key === "evolution-lab" && building.health > 0)) throw new Error("진화실을 먼저 세워 주세요.");
+        const issue = attributeUpgradeIssue(template, action.attributeKey, state.nestLevel, state.evolutionPoints, constructionSupply.available());
+        if (issue) throw new Error(issue);
+        const level = attributeCounts(template.slots, template.attributeLevels)[action.attributeKey] + 1;
+        const cost = attributeUpgradeCost(action.attributeKey, level);
+        spendResources(cost);
+        template.attributeLevels = { ...template.attributeLevels, [action.attributeKey]: level };
+        template.unlockedAttributeLevels = { ...template.unlockedAttributeLevels, [action.attributeKey]: level };
+        template.revision += 1;
+        return { templateId: template.id, attributeKey: action.attributeKey, level };
+      }
+      if (action.type === "discard-resource") {
+        if (!resourceDefinition(action.resourceType) || !Number.isSafeInteger(action.amount * 10) || action.amount <= 0 ||
+          (constructionSupply.available()[action.resourceType] || 0) < action.amount) throw new Error("버릴 자원의 종류와 개수를 다시 확인해 주세요.");
+        resourceStorage.remove(action.resourceType, action.amount);
+        return { resourceType: action.resourceType, discarded: action.amount };
+      }
+      if (action.type === "cancel-build") {
+        const agent = state.agents.find(candidate => candidate.id === action.agentId && candidate.health > 0);
+        if (!agent?.construction) throw new Error("취소할 건설 명령을 찾을 수 없습니다.");
+        cancelConstruction(agent, null);
+        return { cancelled: true };
+      }
+      if (action.type === "beginner-construction") {
+        if (environment.beginnerHelpEnabled !== true || colony.ownerId !== environment.hostId) throw new Error("지원하지 않는 요청입니다.");
+        const previousResult = state.constructionHelpResult;
+        if (action.expectedStep && previousResult?.step === action.expectedStep &&
+            state.agents.some(agent => agent.id === previousResult.agentId && agent.health > 0)) return {...previousResult};
+        const offer = constructionHelpOffer(true);
+        if (!offer || action.expectedBuildingKey !== undefined && action.expectedBuildingKey !== offer.buildingKey ||
+            action.expectedStep !== undefined && action.expectedStep !== offer.step) return {};
+        if (!offer.canProduce) throw new Error(offer.issue);
+        const template = constructionHelpTemplate({...state,tribe:colony.tribe}, offer.slots, offer.resources, offer.kind);
+        const previous = state.templates.includes(template);
+        const agentId = birth(template, true, null, availableSpawnCells(null)[0]);
+        if (!previous) { state.templates.push(template); state.nextTemplateId += 1; }
+        state.constructionHelpResult = {templateId:template.id, agentId, step:offer.step, kind:offer.kind, producedAt:state.simSeconds};
+        constructionHelpPreview = null;
+        return {...state.constructionHelpResult};
+      }
       if (action.type === "design") {
         const name = requireName(action.name);
-        if (!Array.isArray(action.slots) || action.slots.length > slotCapacity() ||
+        if (!Array.isArray(action.slots) || action.slots.length > slotCapacity() || new Set(action.slots).size !== action.slots.length ||
           action.slots.some((key) => !ATTRIBUTES.some((attribute) => attribute.key === key))) {
           throw new Error("설계 속성을 다시 확인해 주세요.");
         }
@@ -1588,8 +2270,13 @@ export function createGame(environment, colony) {
         if (state.templates.some((template) => template.id !== action.templateId && template.name === name)) {
           throw new Error("같은 이름의 설계가 있습니다.");
         }
+        const purchased = { ...previous?.unlockedAttributeLevels, ...previous?.attributeLevels };
+        const unlockedAttributeLevels = { ...migrateAttributeLevels(Object.keys(purchased), purchased, state.nestLevel) };
+        for (const key of action.slots) if (!unlockedAttributeLevels[key]) unlockedAttributeLevels[key] = 1;
         const template = { id: previous ? previous.id : state.nextTemplateId, name,
-          slots: [...action.slots], revision: previous ? previous.revision + 1 : 1 };
+          slots: [...action.slots], attributeLevels: Object.fromEntries(action.slots.map(key => [key, unlockedAttributeLevels[key]])),
+          unlockedAttributeLevels,
+          revision: previous ? previous.revision + 1 : 1 };
         const agentId = action.birth ? birth(template, false) : null;
         if (previous) state.templates[state.templates.indexOf(previous)] = template;
         else {
@@ -1603,20 +2290,20 @@ export function createGame(environment, colony) {
           const agent = state.agents.find(candidate => candidate.id === action.agentId && candidate.health > 0);
           if (!agent) throw new Error("복제할 생명체를 찾을 수 없습니다.");
           return { agentId: birth({ id: agent.templateId, name: agent.templateName,
-            slots: [...agent.slots], revision: agent.templateRevision }, true) };
+            slots: [...agent.slots], attributeLevels: { ...agent.attributeLevels }, revision: agent.templateRevision }, true, action.buildingId) };
         }
         const template = state.templates.find((candidate) => candidate.id === action.templateId);
         if (!template) throw new Error("설계를 찾을 수 없습니다.");
-        return { agentId: birth(template, true) };
+        return { agentId: birth(template, true, action.buildingId) };
       }
       if (action.type === "upgrade") {
-        if (state.nestHealth <= 0) throw new Error("파괴된 둥지는 성장할 수 없습니다.");
+        if (!hasActiveNest()) throw new Error("파괴된 둥지는 성장할 수 없습니다.");
         if (state.nestLevel >= NEST_LEVELS.length) throw new Error("최고 둥지 레벨입니다.");
         if (state.evolutionPoints < upgradeCost()) throw new Error("진화 포인트가 부족합니다.");
-        state.evolutionPoints -= upgradeCost();
+        state.evolutionPoints = Math.round((state.evolutionPoints - upgradeCost()) * 10) / 10;
         const previousHealth = NEST_LEVELS[state.nestLevel - 1].health;
         state.nestLevel += 1;
-        state.nestHealth += NEST_LEVELS[state.nestLevel - 1].health - previousHealth;
+        if (state.nestHealth > 0) state.nestHealth += NEST_LEVELS[state.nestLevel - 1].health - previousHealth;
         return {};
       }
       if (action.type === "rename") {
@@ -1629,6 +2316,10 @@ export function createGame(environment, colony) {
     }
 
     function agentMovementPlan(agent) {
+      if (agent.construction) {
+        const route = agent.construction.route.slice(agent.construction.routeIndex).map(cell => ({ ...cell }));
+        return { destination: { x: agent.construction.x, y: agent.construction.y }, route };
+      }
       const plan = agent.utility;
       if (!plan || agent.health <= 0 || !["search", "approach", "return", "recover", "flee"].includes(agent.mode)) return null;
       const index = plan.route.findIndex(cell => cell.x === agent.x && cell.y === agent.y);
@@ -1638,6 +2329,7 @@ export function createGame(environment, colony) {
     }
 
     function snapshot() {
+      constructionSupply.refresh();
       updatePerception();
       if (discoveryBaselinePending) {
         state.discoveryReadCount = state.discoveries.length;
@@ -1645,19 +2337,24 @@ export function createGame(environment, colony) {
       }
       const visibleAgent = (agent) => {
         const { visited, movementVisits, path, returnPath, rememberedRoute, profile, personality, utility, knownEnemyIds, ...visible } = agent;
-        return { ...visible, combatDisposition: combatDisposition(agent), action: agent.combat ? "fight" : utility?.action || "wait", personalityLabels: personality ? personalityLabels(personality) : null };
+        return { ...visible, combatDisposition: combatDisposition(agent), action: agent.combat ? "fight" : agent.construction ? "build" : utility?.action === "supply" ? "return" : utility?.action || "wait", personalityLabels: personality ? personalityLabels(personality) : null };
       };
       return {
         simSeconds: state.simSeconds, colonyFood: state.colonyFood, encounterSignals: environment.creatureSystem?.signals || [], burrows: environment.creatureSystem?.burrows || [],
         resourceInventory: { ...state.resourceInventory },
+        resourceStores: resourceStorage.refresh().map(store => ({ ...store, inventory: { ...store.inventory } })),
+        resourceReserved: constructionSupply.reserved(),
+        resourceCapacity: resourceStorage.refresh().filter(store => store.kind !== "remains").reduce((sum, store) => sum + store.capacity, 0),
+        buildings: state.buildings.map(building => ({ ...building })),
         discoveries: state.discoveries.map(entry => ({ ...entry })), discoveryReadCount: state.discoveryReadCount,
         evolutionPoints: state.evolutionPoints, nestLevel: state.nestLevel, tribe: colony.tribe,
+        constructionHelp: constructionHelpOffer(),
         ending: state.ending ? { ...state.ending } : null,
         nestHealth: state.nestHealth, nestMaxHealth: NEST_LEVELS[state.nestLevel - 1].health,
         templates: state.templates.map(template => ({ ...template, tribe: colony.tribe || "bean" })), agents: state.agents.map(agent => ({ ...visibleAgent(agent), movementPlan: agentMovementPlan(agent) })),
         rivals: state.rivals.filter(agent => !agent.hidden && (agent.health > 0 || agent.species === "spiny-back-beetle" && agent.mode === "death") &&
           visibleCells.has(agent.y * WORLD_SIZE + agent.x)).map((agent) => ({ ...visibleAgent(agent), faction: agent.species ? agent.faction : "rival" })),
-        corpses: [...state.knownFood.values()].filter(cell => cell.kind === "corpse" && cell.amount > 0),
+        corpses: [...state.knownFood.values()].filter(cell => cell.kind === "corpse"),
         sharedTrails: [...state.sharedTrails], footprints: [...state.footprints.values()],
         footprintLifetime: FOOTPRINT_LIFETIME, food: [...state.knownFood.values()],
         explored: [...state.explored], visible: [...visibleCells], markers: state.markers
@@ -1665,6 +2362,7 @@ export function createGame(environment, colony) {
     }
 
     function save() {
+      constructionSupply.refresh();
       return JSON.stringify({ state: { ...state, rivals: [], corpses: [] } }, (key, value) =>
         value instanceof Map ? { collection: "Map", entries: [...value] } :
         value instanceof Set ? { collection: "Set", entries: [...value] } : value);
@@ -1672,12 +2370,32 @@ export function createGame(environment, colony) {
 
     function restore(saved) {
       roadOptimizer.clear();
+      constructionHelpPreview = null;
       const data = JSON.parse(saved, (key, value) =>
         value?.collection === "Map" ? new Map(value.entries) :
         value?.collection === "Set" ? new Set(value.entries) : value);
       Object.assign(state, data.state);
+      state.constructionHelpResult = data.state.constructionHelpResult ? { ...data.state.constructionHelpResult } : null;
+      state.resourceStores = Array.isArray(data.state.resourceStores) ? data.state.resourceStores : undefined;
+      restoreColonyIncome(state, data.state);
+      state.lastFoodAt = Number.isFinite(data.state.lastFoodAt) && data.state.lastFoodAt >= 0 ?
+        Math.min(state.simSeconds, data.state.lastFoodAt) : state.simSeconds;
       state.ending = data.state.ending ? { ...data.state.ending } : null;
-      for (const template of state.templates) template.slots = migrateAttributeSlots(template.slots);
+      state.buildings = (Array.isArray(data.state.buildings) ? data.state.buildings : []).filter(building => buildingDefinition(building.key) &&
+        Number.isInteger(building.x) && Number.isInteger(building.y) && building.x >= 0 && building.y >= 0 &&
+        building.x + buildingDefinition(building.key).width <= WORLD_SIZE && building.y + buildingDefinition(building.key).height <= WORLD_SIZE &&
+        Number.isFinite(building.health) && building.health > 0).map(building => ({ ...building,
+          width: buildingDefinition(building.key).width, height: buildingDefinition(building.key).height,
+          maxHealth: buildingDefinition(building.key).health, health: Math.min(building.health, buildingDefinition(building.key).health) }));
+      state.constructionHelpBuildings = [...new Set([...(Array.isArray(data.state.constructionHelpBuildings) ?
+        data.state.constructionHelpBuildings.filter(key => buildingDefinition(key)) : []), ...state.buildings.map(building => building.key)])];
+      state.nextBuildingId = Math.max(Number.isSafeInteger(data.state.nextBuildingId) ? data.state.nextBuildingId : 1, state.buildings.length + 1);
+      for (const template of state.templates) {
+        template.attributeLevels = migrateAttributeLevels(template.slots, template.attributeLevels, state.nestLevel);
+        template.slots = migrateAttributeSlots(template.slots);
+        const purchased = { ...template.unlockedAttributeLevels, ...template.attributeLevels };
+        template.unlockedAttributeLevels = migrateAttributeLevels(Object.keys(purchased), purchased, state.nestLevel);
+      }
       const nestMaxHealth = NEST_LEVELS[state.nestLevel - 1].health;
       state.nestHealth = Number.isFinite(data.state.nestHealth) ? Math.max(0, Math.min(nestMaxHealth, data.state.nestHealth)) : nestMaxHealth;
       discoveryBaselinePending = !Array.isArray(data.state.discoveries);
@@ -1706,6 +2424,8 @@ export function createGame(environment, colony) {
           state.resourceInventory[type] = (state.resourceInventory[type] || 0) + amount;
         }
       }
+      resourceStorage.restore();
+      constructionSupply.restore();
       state.explored = state.explored instanceof Set ? state.explored : new Set();
       state.knownFood = state.knownFood instanceof Map ? state.knownFood : new Map();
       for (const [key, cell] of state.knownFood) {
@@ -1735,6 +2455,7 @@ export function createGame(environment, colony) {
         if (agent.templateId === null && !agent.slots.length && agent.actionPriorities?.length) {
           agent.slots = [agent.actionPriorities[0] === "explore" ? "antenna" : "strength"];
         }
+        delete agent.actionPriorities;
         initializeAgent(agent);
         if (!agent.utility) {
           agent.utility = null;
@@ -1761,29 +2482,44 @@ export function createGame(environment, colony) {
 
     }
 
-    for (const priorities of [["explore", "collect"], ["collect", "explore"]]) {
-      const agent = spawnAgent({ id: null, name: "개체", slots: [priorities[0] === "explore" ? "antenna" : "strength"], revision: 1 }, "colony");
-      if (!agent) throw new Error("둥지 주변에 초기 개체를 배치할 공간이 없습니다.");
-      agent.actionPriorities = priorities;
-      agent.appearanceAttributes = agentAppearanceAttributes(agent);
+    if (savedGame !== undefined) restore(savedGame);
+    else {
+      for (const slots of TRIBE_STARTING_UNITS[colony.tribe] || TRIBE_STARTING_UNITS.bean) {
+        const agent = spawnAgent({ id: null, name: "개체", slots: [...slots], revision: 1 }, "colony");
+        if (!agent) throw new Error("둥지 주변에 초기 개체를 배치할 공간이 없습니다.");
+        agent.appearanceAttributes = agentAppearanceAttributes(agent);
+      }
+      updatePerception();
+      for (const agent of state.agents) reconsiderAgent(agent, "birth");
     }
-    updatePerception();
-    for (const agent of state.agents) reconsiderAgent(agent, "birth");
 
     return {
       command, snapshot, save, restore, checkEnding,
       get ending() { return state.ending; },
       get agents() { return state.agents; },
+      get buildings() { return state.buildings; },
+      receiveBuildingDamage(id, amount) {
+        const building = state.buildings.find(candidate => candidate.id === id);
+        if (!building || !Number.isFinite(amount) || amount <= 0) return building?.health;
+        const alive = building.health > 0;
+        building.health = Math.max(0, building.health - amount);
+        if (alive && building.health <= 0) reconsiderConstruction();
+        environment.targetRevision = (environment.targetRevision || 0) + 1;
+        return building.health;
+      },
       get colonyFood() { return state.colonyFood; },
       get discoveredKinds() { return state.discoveredKinds; },
       isVisible(x, y) { return visibleCells.has(y * WORLD_SIZE + x); },
       get nestLevel() { return state.nestLevel; },
       get nest() { return { id: "nest:" + colony.id, colonyId: colony.id, kind: "nest", x: colony.x, y: colony.y,
-        width: COLONY_SIZE, height: COLONY_SIZE, health: state.nestHealth, maxHealth: NEST_LEVELS[state.nestLevel - 1].health }; },
+        width: COLONY_SIZE, height: COLONY_SIZE, health: state.nestHealth, maxHealth: NEST_LEVELS[state.nestLevel - 1].health,
+        experienceContributions: (state.nestExperienceContributions ||= []) }; },
       receiveNestDamage(amount) {
         if (state.nestHealth <= 0 || !Number.isFinite(amount) || amount <= 0) return state.nestHealth;
         state.nestHealth = Math.max(0, state.nestHealth - amount);
+        environment.targetRevision = (environment.targetRevision || 0) + 1;
         if (state.nestHealth === 0) {
+          reconsiderConstruction();
           roadOptimizer.clear();
           for (const agent of state.agents) {
             if (!["return", "recover"].includes(agent.utility?.action) && !["unload", "rest"].includes(agent.mode)) continue;

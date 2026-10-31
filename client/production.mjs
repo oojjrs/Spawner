@@ -1,6 +1,6 @@
 export function productionRuntime(source) {
   let stripped = false;
-  for (const [name, entry] of [["client/cheats.mjs", "createCheats"], ["server/cheats.mjs", "commandCheat"]]) {
+  for (const [name, entries] of [["client/cheats.mjs", ["createCheats"]], ["server/cheats.mjs", ["commandCheat", "commandRoomCheat"]]]) {
     const module = 'modules["' + name + '"] = (() => {';
     if (!source.includes(module)) continue;
     if (source.split(module).length !== 2) throw new Error("치트 모듈을 확인해 주세요.");
@@ -8,7 +8,8 @@ export function productionRuntime(source) {
     const closing = "\n})();";
     const end = source.indexOf(closing, start);
     if (end < 0) throw new Error("치트 모듈을 확인해 주세요.");
-    const stub = module + "\r\nfunction " + entry + "() { return null; }\r\nreturn { " + entry + " };\r\n})();";
+    const stub = module + "\r\n" + entries.map(entry => "function " + entry + "() { return null; }").join("\r\n") +
+      "\r\nreturn { " + entries.join(", ") + " };\r\n})();";
     source = source.slice(0, start) + stub + source.slice(end + closing.length);
     stripped = true;
   }
