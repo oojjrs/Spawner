@@ -1,0 +1,11 @@
+{
+  "python": "3.11+",
+  "testedModules": {
+    "PIL": "12.3.0",
+    "numpy": "2.3.5",
+    "cv2": "5.0.0"
+  },
+  "prepareEntryPoint": "bloom_complete.py",
+  "renderEntryPoint": "bloom_export.py",
+  "rebuildOutputDirectory": "Output"
+}

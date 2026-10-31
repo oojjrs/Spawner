@@ -1,0 +1,17 @@
+{
+  "approvedKeys": "keyframe-approval.json",
+  "runtimeFormat": "PNG sequence and sheet; lossless RGBA WebP",
+  "method": "drawn contact cels plus local three-part seed rig",
+  "rigFormat": "custom-affine-rig-v1",
+  "rigConstructed": true,
+  "temporalPoseAlphaBlending": false,
+  "constructionStates": "exclusive attachments at 1.35, 2.05, 2.70 seconds",
+  "contactDrawOrder": [
+    "architecture-back",
+    "complete-flower-and-seed-cel",
+    "architecture-front"
+  ],
+  "landingHiddenSurfaceCutoffY": 320,
+  "unityImported": false,
+  "spineCompatibilityVerified": false
+}

@@ -1,0 +1,133 @@
+{
+  "provider": "built-in-image_gen",
+  "generations": [
+    {
+      "id": "empty-K0",
+      "references": [
+        "References/K0.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Edit target: this exact approved game animation key drawing K0. Make a PRODUCTION EMPTY BACKPLATE.\nRemove ONLY the central golden three-lobed bean and its attached upright green stem and TWO little sprout leaves. Leave every other plant leaf, both pointed ivory rear petals, both large ivory front curling petals, the mint leaf rosette on the ground, all bronze/wood hardware and side crank exactly where they are.\nDraw the complete clean mint-green bowl/leaf-lining seat behind and underneath the removed seed, including the small previously hidden central cradle surface. There must be no leftover yellow/gold bean fragment, green sprout fragment, dark bean outline, cutout hole or removal haze inside the cradle. At the open air ABOVE the flower, where the seed leaves used to be, restore true transparent air. Preserve rear-petal silhouettes and the real empty V-shaped gap between the pointed petals.\nKeep the painting quality, camera, proportions, contours, colors, exact 512-square composition, baseline y=448 and all remaining architecture unchanged. This is hidden-surface preparation for a moving seed, not a redesign. Do not replace the removed bean with another object. No effects, no glow, no motes, no text. Actual transparent background outside the sprite, clean RGBA edges.",
+      "generated": "D:\\.codex\\generated_images\\01a18fdc-24cc-7b70-ae64-1ccd5be7aeef\\exec-214054cb-ca86-40b6-b1d1-8509c0a2c685.png",
+      "selected": true,
+      "source": "Sources/empty-K0.png",
+      "usage": "generation-reference"
+    },
+    {
+      "id": "empty-K2",
+      "references": [
+        "References/K2.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Edit target: approved game key pose K2. Produce a clean hidden-surface backplate by removing ONLY the single central floating golden bean, its short green stem and its TWO little sprout leaves.\nPreserve every remaining ivory petal, pointed rear petal, foreground flower curl, mint rosette leaf, stone tier, bronze crank/hinge, vial, gold trim, and greenhouse structure in its exact original position and shape. There is no greenhouse dome in this low-foundation stage; do not add one.\nBehind the removed floating seed restore genuinely transparent open air wherever the original background is open air. Keep all real rear-petal surfaces intact. Fully paint the empty mint-green cradle bowl and its small soft highlight below the removed seed; do not erase the seat or make a hole through the flower. No residual gold lobes, green seed leaves, seed outlines, fuzzy fragments or painted removal haze.\nLock the 512-square camera, proportions, source framing, baseline y=448, crisp contours and high-quality painted game-art materials. No new objects, no effects, no exterior glow, no shadow or text. RGBA background fully transparent outside the actual sprite.",
+      "generated": "D:\\.codex\\generated_images\\01a18fdc-24cc-7b70-ae64-1ccd5be7aeef\\exec-ee6d7795-56e4-43d1-a1cd-bbeae12a5fb0.png",
+      "selected": true,
+      "source": "Sources/empty-K2.png",
+      "usage": "render-source"
+    },
+    {
+      "id": "empty-K3",
+      "references": [
+        "References/K3.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Edit target: approved game key pose K3. Produce a clean hidden-surface backplate by removing ONLY the single central floating golden bean, its short green stem and its TWO little sprout leaves.\nPreserve every remaining ivory petal, pointed rear petal, foreground flower curl, mint rosette leaf, stone tier, bronze crank/hinge, vial, gold trim, and greenhouse structure in its exact original position and shape. The two open greenhouse half-arches must remain open at the crown, with their original glass panels; never complete or duplicate the arch.\nBehind the removed floating seed restore genuinely transparent open air wherever the original background is open air. Keep all real rear-petal surfaces intact. Fully paint the empty mint-green cradle bowl and its small soft highlight below the removed seed; do not erase the seat or make a hole through the flower. No residual gold lobes, green seed leaves, seed outlines, fuzzy fragments or painted removal haze.\nLock the 512-square camera, proportions, source framing, baseline y=448, crisp contours and high-quality painted game-art materials. No new objects, no effects, no exterior glow, no shadow or text. RGBA background fully transparent outside the actual sprite.",
+      "generated": "D:\\.codex\\generated_images\\01a18fdc-24cc-7b70-ae64-1ccd5be7aeef\\exec-c81c11a9-8127-4495-9419-4aba654c7db9.png",
+      "selected": true,
+      "source": "Sources/empty-K3.png",
+      "usage": "render-source"
+    },
+    {
+      "id": "takeoff-cels",
+      "references": [
+        "References/K0.png",
+        "References/K1.png",
+        "Sources/empty-K0.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Production hand-drawn IN-BETWEEN animation sprite sheet.\nImage 1 is the exact approved starting drawing, seed resting in its ivory flower nest.\nImage 2 is the exact approved ending drawing, the SAME seed levitating above the nest.\nImage 3 is the empty-nest hidden-surface reference. Preserve its complete mint seat behind the seed.\nDraw SIX closely spaced, beautifully painted consecutive frames connecting image 1 to image 2. Exact 3 columns by 2 rows of equal 512-square cells, 1536x1024 sheet. Order left-to-right top then left-to-right bottom. All six subjects remain fully inside their cells with clear gutters. Same camera, fixed nest center and exact ground at local y=448.\nOnly the golden bean with its attached stem and two green sprout leaves rises. Keep ALL nest structure, pointed rear petals, big curling front petals, ground leaves, bronze hinges, wood rods and left crank EXACTLY stationary and identical across all six cells, matching the references. No body warping, no wavy structure, no animated outline textures or changes of rendering style.\nBean positions by frame: 1 resting behind the front petals, exactly image 1; 2 risen 16 pixels; 3 risen 32 pixels; 4 risen 48 pixels; 5 risen 64 pixels; 6 hovering 80 pixels higher, exactly image 2. The small depth/proportion change of the seed between the approved endpoints should progress gently. Always one intact three-lobed golden bean, two upper lobes and one lower lobe, and exactly two small green leaves. Preserve volume, smooth rounded contours and clean leaf/stem joints.\nIn the first four frames the front ivory petals NATURALLY occlude the lower part of the seed: paint the actual continuous contours, no masks cutting green strips or jagged notches into the bean. As the seed clears the flower, reveal its complete smooth lower lobe and the already painted mint bowl beneath. Do not duplicate any seed or old seed remnants. No fade, blur, ghost silhouettes, dissolve, stretching, graphic diagram, text, arrows, motion lines or effects.\nPolished clean fantasy game sprite artwork with ivory petals, sage shadows, lime sprout, golden seed and warm bronze. Actual transparent empty background around every sprite. No glow, halos, haze, floor shadow, gradient background or checkerboard. Every cell must be an actual usable finished frame, not a storyboard sketch.",
+      "generated": "D:\\.codex\\generated_images\\01a18fdc-24cc-7b70-ae64-1ccd5be7aeef\\exec-5d7c5ec0-970d-4cd5-9246-da6031a0d000.png",
+      "selected": true,
+      "source": "Sources/takeoff-cels.png",
+      "usage": "generation-reference"
+    },
+    {
+      "id": "landing-cels",
+      "references": [
+        "References/K4.png",
+        "References/K5.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Production hand-drawn IN-BETWEEN animation sprite sheet.\nImage 1 is the approved start: fully completed glass greenhouse nest, its golden seed hovering above the mint seat.\nImage 2 is the approved end: the SAME golden seed has landed inside the flower.\nDraw SIX closely spaced consecutive finished frames connecting these exact poses. One 1536x1024 sheet, 3 columns by 2 rows of equal 512-square cells. Read top left to right, then bottom left to right. Same fixed camera and scale, centerline x=256 in every cell, entire stone base on ground y=448, every subject fully within its cell with transparent gutters.\nKeep ALL completed greenhouse architecture EXACTLY stationary and identical in all six frames: gold dome, narrow central vertical mullion, crown, aquamarine glass, left vial, tiered stone base, bronze hinges and leaf rosette. No morphing, wobbling, repeated outlines, changed carved patterns or shifting perspective. The front ivory petals retain the approved graceful shape, with only the very small relaxed pose difference shown between the two references.\nThe SINGLE rounded golden three-lobed bean with its attached stem and exactly TWO lime-green sprout leaves descends gently about 42 pixels in total. Cell 1 is exactly Image 1, fully hovering; cell 2 lowered 8px; cell 3 lowered 17px; cell 4 lowered 25px; cell 5 lowered 34px; cell 6 exactly Image 2, landed. Follow the endpoint proportions naturally. Do not duplicate any seed or sprout.\nIn later frames the original ivory front petals progressively hide the lower golden lobe. Paint this overlap correctly as ONE coherent illustration per frame: smooth round seed, continuous ivory contour, natural intact stem/leaf joints, no green stripes or jagged cuts through the gold surface. Keep the empty mint seat painted wherever visible. Never leave a white cutout or black hole around the seed.\nThe greenhouse interior behind the seed MUST be a continuous painted pale-aquamarine glass surface with subtle broad reflections and gold mullion, as in the references. Actual transparent RGBA background ONLY OUTSIDE the sprite. No exterior colored halo, glow, haze, fog, stage background, floor shadow, checkerboard, motes, effects, text, arrows or diagrams. Each cell is a usable pristine game-animation frame in the exact polished hand-painted style of the two approved references.",
+      "generated": "D:\\.codex\\generated_images\\01a18fdc-24cc-7b70-ae64-1ccd5be7aeef\\exec-15f9cbe1-c7d9-454b-81b4-591defd8d2de.png",
+      "selected": true,
+      "source": "Sources/landing-cels.png",
+      "usage": "generation-reference"
+    },
+    {
+      "id": "bare-frame-0",
+      "references": [
+        "References/K0.png"
+      ],
+      "prompt": "Use case: precise-object-edit. PRODUCTION LAYER EXTRACTION / HIDDEN-SURFACE PAINT.\nThe reference is an approved nest animation drawing. Remove the ENTIRE CENTRAL FLOWER ASSEMBLY: all four large ivory petals (two pointed rear petals and two curling front petals), the central mint-green bowl/cushion, and the gold seed with its stem and two little sprout leaves. There must be NO white-petal or seed fragments left inside the frame.\nKeep the complete rigid architecture and the LOW GROUND LEAF ROSETTE: bronze hinges, curved vine side handles, cradle's wooden/gold rails, bottom central copper lip, wood braces, left crank and mint leaves on the floor. The open space where the flower used to be is transparent air. Keep the full wooden cradle rail below it; paint its previously hidden back connection cleanly.\nThis is an EMPTY ARCHITECTURE BACKPLATE, not a new design. The remaining part positions, complete outlines, materials, colors, camera and proportions MUST match the reference exactly. Complete any tiny hidden rigid surfaces under the removed petals. Keep the side hinge arms fully drawn and connected, and keep every foreground ground-rosette leaf.\nSame square framing, 512x512 coordinate layout, fixed baseline y=448, whole asset visible with the original margins. Crisp clean painted game sprite. Genuine transparency only outside the real architecture and in the large central open-air void. No atmosphere, glow, mist, floor shadow, motes, text or diagram.",
+      "generated": "D:\\.codex\\generated_images\\01a18fdc-24cc-7b70-ae64-1ccd5be7aeef\\exec-ae391e37-c41b-4671-8d30-e8eae3f6f58e.png",
+      "selected": true,
+      "source": "Sources/bare-frame-0.png",
+      "usage": "render-source"
+    },
+    {
+      "id": "bare-frame-4",
+      "references": [
+        "References/K4.png"
+      ],
+      "prompt": "Use case: precise-object-edit. PRODUCTION LAYER EXTRACTION / HIDDEN-SURFACE PAINT.\nThe reference is an approved nest animation drawing. Remove the ENTIRE CENTRAL FLOWER ASSEMBLY: all four large ivory petals (two pointed rear petals and two curling front petals), the central mint-green bowl/cushion, and the gold seed with its stem and two little sprout leaves. There must be NO white-petal or seed fragments left inside the frame.\nKeep the complete rigid architecture and the LOW GROUND LEAF ROSETTE: bronze hinges, curved vine side handles, cradle's wooden/gold rails, bottom central copper lip, tiered cream-stone plinth, green-and-gold inlays, left aquamarine vial, completed gold-rib greenhouse and crown. Fully paint the glass panes and continuous central gold mullion previously hidden by the flower, and the complete stone deck behind the removed flower. No cutout hole in the glass or floor.\nThis is an EMPTY ARCHITECTURE BACKPLATE, not a new design. The remaining part positions, complete outlines, materials, colors, camera and proportions MUST match the reference exactly. Complete any tiny hidden rigid surfaces under the removed petals. Keep the side hinge arms fully drawn and connected, and keep every foreground ground-rosette leaf.\nSame square framing, 512x512 coordinate layout, fixed baseline y=448, whole asset visible with the original margins. Crisp clean painted game sprite. Genuine transparency only outside the real architecture. No atmosphere, glow, mist, floor shadow, motes, text or diagram.",
+      "generated": "D:\\.codex\\generated_images\\01a18fdc-24cc-7b70-ae64-1ccd5be7aeef\\exec-5fed1ffa-0581-4032-aa59-ee56141161ec.png",
+      "selected": true,
+      "source": "Sources/bare-frame-4.png",
+      "usage": "generation-reference"
+    },
+    {
+      "id": "flower-takeoff",
+      "references": [
+        "Sources/takeoff-cels.png",
+        "References/K0.png",
+        "References/K1.png"
+      ],
+      "prompt": "Use case: background-extraction. Create the FLOWER-AND-SEED FOREGROUND CEL LAYER from the six-frame takeoff sheet in image 1. Images 2 and 3 lock the starting and ending flower/seed appearance.\nKeep exactly the six consecutive seed-rise poses and the beautiful intact overlap between seed and front petals. Keep the FOUR large ivory petals (two rear pointed petals and two front curling petals), the small mint bowl/leaf cushion INSIDE the flower, and the ONE golden bean with its stem and TWO little green sprout leaves. Keep these as ONE coherent painted flower assembly per cell, with all its correct internal occlusion.\nRemove EVERYTHING ELSE: all bronze or wooden rods, hinges, cranks, lips, frames, stone, floor leaves/ground rosette, vines, and background atmosphere. No gold hardware at the petal root. Fully paint the small complete lower joining point of the ivory front petals that had been hidden by the copper lip, so the flower is a complete isolated assembly, not a clipped rectangular piece. Do not remove the mint inner seat.\nExact 1536x1024 layout, 3x2 equal 512-square cells, same pose order, same flower camera and exact placement/size as image 1. DO NOT enlarge or recenter the isolated parts to fill their cells. Preserve the large empty margins where the architecture was removed. The flower base point stays around local x=256,y=365. Seed moves upward through the six frames exactly as image 1, ending like image 3.\nPolished native hand-painted sprite artwork, unbroken smooth contours, gold seed keeps its three rounded lobes, exactly two leaves and intact stem joints. No jagged cutouts, gray dust, leftover hardware, floating white shards, white matte, text or diagrams. All space outside each complete flower+seed assembly is genuinely TRANSPARENT, including between the floating seed and the open flower. No glow, fog, ground shadow or colored haze.",
+      "generated": "D:\\.codex\\generated_images\\01a18fdc-24cc-7b70-ae64-1ccd5be7aeef\\exec-b57d7e4e-23ea-4ec5-8431-23f8ef9768a1.png",
+      "selected": true,
+      "source": "Sources/flower-takeoff.png",
+      "usage": "render-source"
+    },
+    {
+      "id": "flower-landing",
+      "references": [
+        "Sources/landing-cels.png",
+        "References/K5.png"
+      ],
+      "prompt": "Use case: background-extraction. Create ONLY the complete FLOWER-AND-SEED CEL ASSEMBLIES from the six-frame landing sheet in image 1. The additional image locks the final resting flower/seed design.\nSix complete isolated assemblies, same 3x2 1536x1024 sheet with equal 512-square cells and the same fixed camera/placement. Keep the four ivory petals, mint inner bowl, one gold three-lobed bean, its attached stem and two green sprout leaves. Preserve their beautiful internal overlap as the bean descends gradually into the flower over all six frames.\nRemove the ENTIRE greenhouse, glass, gold mullion, crown, vial, all bronze hinges/rods/copper lip, ALL stone plinth and floor/ground leaf rosette. Leave no hardware, background or glow at all. Fully draw the lower joining point of the ivory front petals previously hidden by the copper lip, cleanly finished as one coherent flower base. All parts outside the flower-and-seed group are transparent.\nKeep the flower's original SIZE and POSITION within every square; do not zoom or recenter to fill the now empty cells. The flower lower root is around x=256,y=325. The first seed is fully hovering; successive seed positions descend as in the reference, with the last two frames gently relaxing the ivory curls into the final resting pose of image 2. The final seed has landed and its lower lobe is naturally hidden by the front petals. One seed only, two green leaves only.\nNo gold body distortions, chopped outlines, green clipping stripes, disconnected stems or added parts. Pristine consistent hand-painted ivory/sage/lime/gold sprite rendering and thin dark teal outlines. Actual transparent background, no painted checkerboard, haze, mist, external glow, sparkles, floor shadow, text, diagram or annotation.",
+      "generated": "D:\\.codex\\generated_images\\01a18fdc-24cc-7b70-ae64-1ccd5be7aeef\\exec-a6235272-2925-4548-a922-01fb0299d658.png",
+      "selected": true,
+      "source": "Sources/flower-landing.png",
+      "usage": "render-source"
+    },
+    {
+      "id": "architecture-back4",
+      "references": [
+        "Sources/bare-frame-4.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Make ONE standalone BACK LAYER of this exact empty greenhouse game sprite.\nKEEP the entire cream-stone plinth including its front facade and front steps, all green/gold inlays, the left aquamarine vial, the complete glass-and-gold dome with crown, the painted continuous glass and central mullion, the rear diagonal braces, and the complete cream deck.\nREMOVE ONLY foreground assembly: both curved bronze S-shaped front levers with their round upper/lower pin heads, both curled bright-green side handles, the small central copper bowl lip, and ALL pale mint ground-rosette leaves below the absent flower. Paint the floor, stone facade and rear support connections completely where these front pieces were removed. No residual front arm, pin, green handle, copper lip or mint leaf fragment. This empty BACK layer will receive separately drawn foreground machinery and a flower on top.\nKeep the exact existing camera, geometry, scale, square framing, stone footprint at y=448 in the original 512 coordinate canvas, margins and clean polished hand-painted style. Do not enlarge/recenter. There is no seed, flower or central mint cushion. No extra hardware. Fully paint the glass and floor; no transparent hole inside the real dome. True clean transparency OUTSIDE the architecture only. No glow, haze, mist, shadows outside the sprite, labels, text or sheet layout. ONE complete standalone back-layer sprite.",
+      "generated": "D:\\.codex\\generated_images\\01a18fdc-24cc-7b70-ae64-1ccd5be7aeef\\exec-8e04d3db-f85d-44a6-9d2e-890fd12058a3.png",
+      "selected": true,
+      "source": "Sources/architecture-back4.png",
+      "usage": "render-source"
+    },
+    {
+      "provider": "built-in-image_gen",
+      "id": "architecture-front4",
+      "source": "Sources/architecture-front4.png",
+      "references": [
+        "Sources/bare-frame-4.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Production transparent 2D sprite occlusion layer, not a concept preview. Input image 1 is the approved level 4 nest framing and exact geometry. Keep the same square canvas and exact object positions. Remove the entire glass dome, crown, rear wooden rods, vial, stone platform, and every rear surface. Retain ONLY the complete foreground assembly as a single continuous painted layer: the pair of bronze curved S-shaped levers with their circular gold pins, the pair of lime-green curling grips behind them, their small vertical gold mounting feet, the shallow curved copper front cup rim linking them, and the pale mint ground-petal rosette under that rim. Paint the hidden contours of these retained foreground pieces completely and cleanly. No flower, no seed, no background. The upper half and space around and between the two levers must be truly transparent. Retain original lower-middle placement and original scale, not enlarged to fill the canvas. The levers must remain at x roughly 27% and 74%, the front rim center around 65% canvas height, the rosette center around 70% canvas height. Crisp smooth black outlines, ivory/mint gradient petals, golden bronze polished highlights, identical illustrated style to input. Absolutely no stubs of the rear rods, no leftover glass or stone fragments, no glows, no text, no grid.",
+      "generated": "D:\\.codex\\generated_images\\01a18fdc-24cc-7b70-ae64-1ccd5be7aeef\\exec-f13ab206-5029-4554-8afc-c72149873737.png",
+      "selected": true,
+      "usage": "render-source"
+    }
+  ]
+}

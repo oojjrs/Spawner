@@ -1,0 +1,233 @@
+{
+  "name": "SproutNestGrowth03To04BloomKeysV1",
+  "approval": "approved",
+  "frameSize": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "source": "Sources/drawn-key-sheet.png",
+  "durationSeconds": 4.2,
+  "phases": [
+    {
+      "id": "K0",
+      "seconds": 0,
+      "title": "시작 · 3레벨",
+      "file": "KeyPoses/K0.png",
+      "sourceComponents": [
+        6
+      ],
+      "sourceGround": [
+        273.0,
+        458
+      ],
+      "sourceToCanvas": [
+        [
+          0.875,
+          0.0,
+          17.125
+        ],
+        [
+          0.0,
+          0.875,
+          47.25
+        ]
+      ],
+      "solidBounds": [
+        45,
+        158,
+        462,
+        448
+      ],
+      "geometryOperation": "common-uniform-scale-and-translation-only"
+    },
+    {
+      "id": "K1",
+      "seconds": 0.65,
+      "title": "콩이 떠오름",
+      "file": "KeyPoses/K1.png",
+      "sourceComponents": [
+        2,
+        7
+      ],
+      "sourceGround": [
+        775.0,
+        459
+      ],
+      "sourceToCanvas": [
+        [
+          0.875,
+          0.0,
+          -422.125
+        ],
+        [
+          0.0,
+          0.875,
+          47.375
+        ]
+      ],
+      "solidBounds": [
+        44,
+        121,
+        457,
+        448
+      ],
+      "geometryOperation": "common-uniform-scale-and-translation-only"
+    },
+    {
+      "id": "K2",
+      "seconds": 1.35,
+      "title": "기단 형성",
+      "file": "KeyPoses/K2.png",
+      "sourceComponents": [
+        1,
+        3
+      ],
+      "sourceGround": [
+        1264.5,
+        471
+      ],
+      "sourceToCanvas": [
+        [
+          0.875,
+          0.0,
+          -850.4375
+        ],
+        [
+          0.0,
+          0.875,
+          35.875
+        ]
+      ],
+      "solidBounds": [
+        52,
+        103,
+        457,
+        448
+      ],
+      "geometryOperation": "common-uniform-scale-and-translation-only"
+    },
+    {
+      "id": "K3",
+      "seconds": 2.05,
+      "title": "온실 골격 전개",
+      "file": "KeyPoses/K3.png",
+      "sourceComponents": [
+        12,
+        14
+      ],
+      "sourceGround": [
+        293.0,
+        985
+      ],
+      "sourceToCanvas": [
+        [
+          0.875,
+          0.0,
+          -0.375
+        ],
+        [
+          0.0,
+          0.875,
+          -413.875
+        ]
+      ],
+      "solidBounds": [
+        38,
+        51,
+        452,
+        448
+      ],
+      "geometryOperation": "common-uniform-scale-and-translation-only"
+    },
+    {
+      "id": "K4",
+      "seconds": 2.7,
+      "title": "돔 결합",
+      "file": "KeyPoses/K4.png",
+      "sourceComponents": [
+        9
+      ],
+      "sourceGround": [
+        779.0,
+        984
+      ],
+      "sourceToCanvas": [
+        [
+          0.9968157641162511,
+          0.0001406870113686599,
+          -0.15308855797705903
+        ],
+        [
+          -0.0001406870113686599,
+          0.9968157641162511,
+          1.1354564135744405
+        ]
+      ],
+      "solidBounds": [
+        41,
+        37,
+        461,
+        448
+      ],
+      "geometryOperation": "whole-key-uniform-similarity-registration-only",
+      "sourceOverride": "Sources/glass-fixed-key.png",
+      "sourceResize": [
+        512,
+        512
+      ],
+      "registrationInliers": 411,
+      "registrationMedianPixels": 0.45745558515185647
+    },
+    {
+      "id": "K5",
+      "seconds": 3.5,
+      "title": "착지 · 4레벨",
+      "file": "KeyPoses/K5.png",
+      "sourceComponents": [
+        11
+      ],
+      "sourceGround": [
+        1265.0,
+        985
+      ],
+      "sourceToCanvas": [
+        [
+          0.875,
+          0.0,
+          -850.875
+        ],
+        [
+          0.0,
+          0.875,
+          -413.875
+        ]
+      ],
+      "solidBounds": [
+        48,
+        39,
+        467,
+        448
+      ],
+      "geometryOperation": "common-uniform-scale-and-translation-only"
+    }
+  ],
+  "method": "new-drawn-key-poses; construction-state-snaps; rigid-seed-lift-and-landing",
+  "rigConstructed": false,
+  "inbetweensConstructed": false,
+  "temporalAlphaBlending": false,
+  "approvalUserText": "계속해",
+  "approvalDate": "2026-10-31",
+  "approvedSourceDirectory": "H:\\Spawner\\AnimationCandidates\\SproutNestGrowth03To04BloomKeysV1",
+  "referenceSha256": {
+    "K0.png": "9a396cdd65509a0382d0dc15c2188e36ef16f6edb207e1da1db7a5f66712e2b7",
+    "K1.png": "5470f587cd9592f6fb220b64d9b5eba43546d84e039bfcdeb0b3c944eec2cc30",
+    "K2.png": "01d7e96be6a1d37b80bdfa50a6386a73b9bf99a7d2d47c0a760c8ab67828b844",
+    "K3.png": "8dd74dc5d8a013e3cce3ee2e79c80ebe6f2b7af0eef1e67d8293bf022922e1de",
+    "K4.png": "847068c832b7969f5ed4fcdd969e5d1dd64ab4ee1dd4e55314fd86426b2b92b4",
+    "K5.png": "ccd16a3472fb6a30f9f29e4c024258a0b4264315fe5a109e842e4c1ba3fa7af0"
+  }
+}

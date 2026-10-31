@@ -1,0 +1,40 @@
+{
+  "pngFrames": 84,
+  "frameSize": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "sheet": [
+    4096,
+    5632
+  ],
+  "sheetMatchesPngFrames": true,
+  "losslessWebPMatchesPng": true,
+  "referenceHashesMatchApproval": true,
+  "sourceSyntaxAndReferences": "pass",
+  "temporalPoseAlphaBlending": false,
+  "media": {
+    "growth.webp": {
+      "encodedFrames": 58,
+      "durationMs": 4200,
+      "loop": 1
+    },
+    "preview.webp": {
+      "encodedFrames": 58,
+      "durationMs": 4200,
+      "loop": 0
+    },
+    "preview.gif": {
+      "encodedFrames": 58,
+      "durationMs": 4200,
+      "loop": 0
+    }
+  },
+  "visualInspectionSurface": "headless rendered sequence and contact closeups",
+  "desktopPlaybackObserved": false,
+  "elapsedSeconds": 1.47
+}
