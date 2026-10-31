@@ -1,0 +1,99 @@
+{
+  "canvas": [
+    512, 
+    512
+  ], 
+  "hierarchy": {
+    "root": [
+      "underground-body", 
+      "bracing-shoulders", 
+      "head"
+    ], 
+    "underground-body": [
+      "body", 
+      "tail", 
+      "far-hind", 
+      "near-hind"
+    ], 
+    "bracing-shoulders": [
+      "far-paw-upper", 
+      "near-paw-upper"
+    ], 
+    "far-paw-upper": [
+      "far-paw-lower"
+    ], 
+    "near-paw-upper": [
+      "near-paw-lower"
+    ], 
+    "far-paw-lower": [
+      "far-paw-palm"
+    ], 
+    "near-paw-lower": [
+      "near-paw-palm"
+    ]
+  }, 
+  "forelegJoints": {
+    "far-paw": [
+      [
+        149, 
+        284
+      ], 
+      [
+        140, 
+        306
+      ], 
+      [
+        116, 
+        326
+      ]
+    ], 
+    "near-paw": [
+      [
+        329, 
+        279
+      ], 
+      [
+        319, 
+        309
+      ], 
+      [
+        289, 
+        345
+      ]
+    ]
+  }, 
+  "headPivot": [
+    267, 
+    266
+  ], 
+  "groundY": 398, 
+  "drawOrder": [
+    "far-hind", 
+    "tail", 
+    "body", 
+    "far-paw", 
+    "head", 
+    "near-hind", 
+    "near-paw"
+  ], 
+  "phaseIntervalsSeconds": [
+    [
+      0, 
+      0.24
+    ], 
+    [
+      0.24, 
+      0.85
+    ], 
+    [
+      0.85, 
+      1.6
+    ], 
+    [
+      1.6, 
+      2.16
+    ]
+  ], 
+  "scale": 1, 
+  "runtimeSize": 355
+}

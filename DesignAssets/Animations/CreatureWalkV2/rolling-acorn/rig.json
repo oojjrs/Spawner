@@ -1,0 +1,91 @@
+{
+  "format": "spawner-layered-rigid-roll-and-leaf-fk-v2", 
+  "canvas": [
+    420, 
+    420
+  ], 
+  "pivot": [
+    210, 
+    349.453125
+  ], 
+  "periodMs": 5000, 
+  "cyclesPerCell": 0.4, 
+  "bodyTexture": "Parts/body-complete.png", 
+  "bodyTextureScale": 0.3089005235602094, 
+  "bodyNeutralPlacement": [
+    86, 
+    127
+  ], 
+  "bodyBindCenter": [
+    204.0, 
+    237.5
+  ], 
+  "capBindPoint": [
+    252, 
+    158
+  ], 
+  "leafTexture": "Parts/stem-leaf-complete.png", 
+  "leafMesh": "leaf-mesh.json", 
+  "groundY": 349, 
+  "bones": [
+    {
+      "name": "root", 
+      "parent": null, 
+      "pivot": [
+        210, 
+        349.453125
+      ]
+    }, 
+    {
+      "name": "body-roll", 
+      "parent": "root", 
+      "pivot": [
+        204.0, 
+        237.5
+      ]
+    }, 
+    {
+      "name": "stem-base", 
+      "parent": "body-roll", 
+      "pivot": [
+        252, 
+        158
+      ]
+    }, 
+    {
+      "name": "leaf-tip", 
+      "parent": "stem-base", 
+      "pivot": [
+        37.800000000000004, 
+        40.42
+      ]
+    }
+  ], 
+  "drawOrder": {
+    "0-120": "leaf then body", 
+    "120-300": "body then leaf", 
+    "300-360": "leaf then body"
+  }, 
+  "timeline": [
+    {
+      "timeMs": 0, 
+      "bodyDegrees": 0
+    }, 
+    {
+      "timeMs": 5000, 
+      "bodyDegrees": 360
+    }
+  ], 
+  "leafCounterBend": {
+    "startDegrees": 90, 
+    "endDegrees": 360, 
+    "peakDegrees": 140, 
+    "shapePower": 1.5, 
+    "baseWeight": 0.7, 
+    "tipWeight": 0.3, 
+    "groundClearancePx": 1
+  }, 
+  "method": "Complete body and separate complete curved stem/leaf were redrawn with built-in image_gen from the locked reference after the whole-strip pose study. The body remains rigid and rolls on its alpha silhouette. A two-bone weighted FK mesh bends the independent flexible leaf during ground contact; restored cap artwork remains underneath.", 
+  "rootMotion": false, 
+  "spineCompatibilityVerified": false
+}

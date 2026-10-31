@@ -1,0 +1,103 @@
+{
+  "durationMs": 1600,
+  "frames": [
+    {
+      "phase": 0.0,
+      "durationMs": 67
+    },
+    {
+      "phase": 0.041666666666666664,
+      "durationMs": 66
+    },
+    {
+      "phase": 0.08333333333333333,
+      "durationMs": 67
+    },
+    {
+      "phase": 0.125,
+      "durationMs": 67
+    },
+    {
+      "phase": 0.16666666666666666,
+      "durationMs": 66
+    },
+    {
+      "phase": 0.20833333333333334,
+      "durationMs": 67
+    },
+    {
+      "phase": 0.25,
+      "durationMs": 67
+    },
+    {
+      "phase": 0.2916666666666667,
+      "durationMs": 66
+    },
+    {
+      "phase": 0.3333333333333333,
+      "durationMs": 67
+    },
+    {
+      "phase": 0.375,
+      "durationMs": 67
+    },
+    {
+      "phase": 0.4166666666666667,
+      "durationMs": 66
+    },
+    {
+      "phase": 0.4583333333333333,
+      "durationMs": 67
+    },
+    {
+      "phase": 0.5,
+      "durationMs": 67
+    },
+    {
+      "phase": 0.5416666666666666,
+      "durationMs": 66
+    },
+    {
+      "phase": 0.5833333333333334,
+      "durationMs": 67
+    },
+    {
+      "phase": 0.625,
+      "durationMs": 67
+    },
+    {
+      "phase": 0.6666666666666666,
+      "durationMs": 66
+    },
+    {
+      "phase": 0.7083333333333334,
+      "durationMs": 67
+    },
+    {
+      "phase": 0.75,
+      "durationMs": 67
+    },
+    {
+      "phase": 0.7916666666666666,
+      "durationMs": 66
+    },
+    {
+      "phase": 0.8333333333333334,
+      "durationMs": 67
+    },
+    {
+      "phase": 0.875,
+      "durationMs": 67
+    },
+    {
+      "phase": 0.9166666666666666,
+      "durationMs": 66
+    },
+    {
+      "phase": 0.9583333333333334,
+      "durationMs": 67
+    }
+  ],
+  "contactFraction": 0.58,
+  "rootTravel": "Stationary in cell; game applies path translation; rabbit has an intentional vertical hop."
+}

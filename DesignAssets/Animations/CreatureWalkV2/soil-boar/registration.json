@@ -1,0 +1,181 @@
+{
+  "source": "walk-raw-strip.png",
+  "method": "One image_gen edit request produced the entire eight-frame drawn gait, using official sprite-pipeline approved-seed edit canvas. No warped-image interpolation.",
+  "normalization": "One shared scale 0.69 and fixed ground root y460. Snout-root offsets register horizontal strip-placement error; vertical pose/foot offsets are preserved.",
+  "sharedScale": 0.69,
+  "canvas": [
+    256,
+    256
+  ],
+  "pivot": [
+    128,
+    197
+  ],
+  "frames": [
+    {
+      "drawing": "Drawings/01.png",
+      "sourceRoot": [
+        137.0,
+        460
+      ],
+      "rawBounds": [
+        8,
+        0,
+        278,
+        724
+      ],
+      "rawComponentBounds": [
+        11,
+        258,
+        264,
+        202
+      ]
+    },
+    {
+      "drawing": "Drawings/02.png",
+      "sourceRoot": [
+        137.0,
+        460
+      ],
+      "rawBounds": [
+        277,
+        0,
+        545,
+        724
+      ],
+      "rawComponentBounds": [
+        280,
+        257,
+        262,
+        203
+      ]
+    },
+    {
+      "drawing": "Drawings/03.png",
+      "sourceRoot": [
+        137.0,
+        460
+      ],
+      "rawBounds": [
+        542,
+        0,
+        811,
+        724
+      ],
+      "rawComponentBounds": [
+        545,
+        255,
+        263,
+        205
+      ]
+    },
+    {
+      "drawing": "Drawings/04.png",
+      "sourceRoot": [
+        137.0,
+        460
+      ],
+      "rawBounds": [
+        811,
+        0,
+        1087,
+        724
+      ],
+      "rawComponentBounds": [
+        814,
+        255,
+        270,
+        205
+      ]
+    },
+    {
+      "drawing": "Drawings/05.png",
+      "sourceRoot": [
+        137.0,
+        460
+      ],
+      "rawBounds": [
+        1082,
+        0,
+        1350,
+        724
+      ],
+      "rawComponentBounds": [
+        1085,
+        256,
+        262,
+        205
+      ]
+    },
+    {
+      "drawing": "Drawings/06.png",
+      "sourceRoot": [
+        137.0,
+        460
+      ],
+      "rawBounds": [
+        1349,
+        0,
+        1619,
+        724
+      ],
+      "rawComponentBounds": [
+        1352,
+        255,
+        264,
+        205
+      ]
+    },
+    {
+      "drawing": "Drawings/07.png",
+      "sourceRoot": [
+        137.0,
+        460
+      ],
+      "rawBounds": [
+        1616,
+        0,
+        1888,
+        724
+      ],
+      "rawComponentBounds": [
+        1619,
+        254,
+        266,
+        210
+      ]
+    },
+    {
+      "drawing": "Drawings/08.png",
+      "sourceRoot": [
+        137.0,
+        460
+      ],
+      "rawBounds": [
+        1885,
+        0,
+        2156,
+        724
+      ],
+      "rawComponentBounds": [
+        1888,
+        256,
+        265,
+        205
+      ]
+    }
+  ],
+  "durationMs": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+  ],
+  "columns": 8,
+  "sourcePoseCount": 8,
+  "rigMethod": "Drawn animation; independent editable full drawings, no procedural rig used. Preliminary complete-part atlas retained but not used in final sequence."
+}

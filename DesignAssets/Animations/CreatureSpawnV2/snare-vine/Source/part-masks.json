@@ -1,0 +1,57 @@
+{
+  "body": {
+    "visibleReference": "reference.png", 
+    "partImage": "../Parts/body.png", 
+    "hiddenSurface": "bulb.png"
+  }, 
+  "foot-left": {
+    "visibleReference": "reference.png", 
+    "partImage": "../Parts/foot-left.png", 
+    "hiddenSurface": null
+  }, 
+  "foot-front": {
+    "visibleReference": "reference.png", 
+    "partImage": "../Parts/foot-front.png", 
+    "hiddenSurface": null
+  }, 
+  "foot-right": {
+    "visibleReference": "reference.png", 
+    "partImage": "../Parts/foot-right.png", 
+    "hiddenSurface": null
+  }, 
+  "main": {
+    "visibleReference": "reference.png", 
+    "partImage": "../Parts/main.png", 
+    "hiddenSurface": "main-complete-bind.png"
+  }, 
+  "side": {
+    "visibleReference": "reference.png", 
+    "partImage": "../Parts/side.png", 
+    "hiddenSurface": "side-complete-bind.png"
+  }, 
+  "crown": {
+    "visibleReference": "reference.png", 
+    "partImage": "../Parts/crown.png", 
+    "hiddenSurface": "crown.png"
+  }, 
+  "leaf-upper-left": {
+    "visibleReference": "reference.png", 
+    "partImage": "../Parts/leaf-upper-left.png", 
+    "hiddenSurface": "leaf-upper-left.png"
+  }, 
+  "leaf-upper-right": {
+    "visibleReference": "reference.png", 
+    "partImage": "../Parts/leaf-upper-right.png", 
+    "hiddenSurface": "leaf-upper-right.png"
+  }, 
+  "leaf-lower-left": {
+    "visibleReference": "reference.png", 
+    "partImage": "../Parts/leaf-lower-left.png", 
+    "hiddenSurface": "leaf-lower-left.png"
+  }, 
+  "leaf-lower-right": {
+    "visibleReference": "reference.png", 
+    "partImage": "../Parts/leaf-lower-right.png", 
+    "hiddenSurface": "leaf-lower-right.png"
+  }
+}

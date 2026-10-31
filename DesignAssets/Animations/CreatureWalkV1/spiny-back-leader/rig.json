@@ -1,0 +1,133 @@
+{
+  "size": 256,
+  "pivot": [
+    128,
+    224
+  ],
+  "duration": 1000,
+  "source": "MountainPawLeaderIdle/spiny-back-leader/idle-runtime.webp",
+  "gait": "beetle-walk",
+  "legs": [
+    [
+      [
+        35,
+        161
+      ],
+      [
+        25,
+        179
+      ],
+      17,
+      0
+    ],
+    [
+      [
+        137,
+        176
+      ],
+      [
+        126,
+        215
+      ],
+      22,
+      0.5
+    ],
+    [
+      [
+        177,
+        181
+      ],
+      [
+        187,
+        208
+      ],
+      22,
+      0
+    ],
+    [
+      [
+        223,
+        168
+      ],
+      [
+        233,
+        189
+      ],
+      22,
+      0.5
+    ]
+  ],
+  "method": "Original idle neutral artwork on a locally weighted mesh: alternating leg groups with grounded sweep, knee lift, and recovered contacts. The horn, carapace, eyes, and mandibles stay rigid.",
+  "format": "spawner-local-continuous-mesh-v1",
+  "sourceReference": "DesignAssets/Animations/MountainPawLeaderIdle/spiny-back-leader/idle-runtime.webp",
+  "rootMotion": false,
+  "mesh": {
+    "spacing": 8,
+    "topology": "Regular square grid with two triangles per cell; inverse sampling uses the continuous limb weight field."
+  },
+  "bones": [
+    {
+      "name": "root",
+      "pivot": [
+        128,
+        224
+      ]
+    },
+    {
+      "name": "leg-0",
+      "parent": "root",
+      "joint": [
+        35.0,
+        161.0
+      ],
+      "toe": [
+        25.0,
+        179.0
+      ],
+      "phase": 0,
+      "weight": "Source/leg-0-weight.png"
+    },
+    {
+      "name": "leg-1",
+      "parent": "root",
+      "joint": [
+        137.0,
+        176.0
+      ],
+      "toe": [
+        126.0,
+        215.0
+      ],
+      "phase": 0.5,
+      "weight": "Source/leg-1-weight.png"
+    },
+    {
+      "name": "leg-2",
+      "parent": "root",
+      "joint": [
+        177.0,
+        181.0
+      ],
+      "toe": [
+        187.0,
+        208.0
+      ],
+      "phase": 0,
+      "weight": "Source/leg-2-weight.png"
+    },
+    {
+      "name": "leg-3",
+      "parent": "root",
+      "joint": [
+        223.0,
+        168.0
+      ],
+      "toe": [
+        233.0,
+        189.0
+      ],
+      "phase": 0.5,
+      "weight": "Source/leg-3-weight.png"
+    }
+  ]
+}

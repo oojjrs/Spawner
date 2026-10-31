@@ -1,0 +1,141 @@
+{
+  "canvas": [
+    512, 
+    512
+  ], 
+  "hierarchy": {
+    "root": [
+      "body", 
+      "feet", 
+      "leaf-roots", 
+      "main-base", 
+      "side-base"
+    ], 
+    "main-base": [
+      "main-segment-chain"
+    ], 
+    "side-base": [
+      "side-segment-chain"
+    ], 
+    "leaf-roots": [
+      "four-leaf-mid-bones"
+    ]
+  }, 
+  "leafControls": {
+    "leaf-upper-left": {
+      "root": [
+        230, 
+        299
+      ], 
+      "base": [
+        222, 
+        283
+      ], 
+      "tip": [
+        112, 
+        238
+      ], 
+      "range": [
+        -2.2, 
+        0.2
+      ], 
+      "pressureInterval": [
+        180, 
+        460
+      ], 
+      "layer": "back"
+    }, 
+    "leaf-upper-right": {
+      "root": [
+        240, 
+        299
+      ], 
+      "base": [
+        238, 
+        281
+      ], 
+      "tip": [
+        298, 
+        200
+      ], 
+      "range": [
+        -0.2, 
+        2.8
+      ], 
+      "pressureInterval": [
+        230, 
+        530
+      ], 
+      "layer": "back"
+    }, 
+    "leaf-lower-left": {
+      "root": [
+        229, 
+        304
+      ], 
+      "base": [
+        218, 
+        293
+      ], 
+      "tip": [
+        131, 
+        329
+      ], 
+      "range": [
+        -1.8, 
+        0.2
+      ], 
+      "pressureInterval": [
+        290, 
+        590
+      ], 
+      "layer": "front"
+    }, 
+    "leaf-lower-right": {
+      "root": [
+        245, 
+        305
+      ], 
+      "base": [
+        260, 
+        311
+      ], 
+      "tip": [
+        302, 
+        351
+      ], 
+      "range": [
+        -0.2, 
+        1.4
+      ], 
+      "pressureInterval": [
+        340, 
+        650
+      ], 
+      "layer": "front"
+    }
+  }, 
+  "closedLeafAnglesDegrees": {
+    "leaf-upper-left": 32, 
+    "leaf-upper-right": -18, 
+    "leaf-lower-left": 58, 
+    "leaf-lower-right": -62
+  }, 
+  "drawOrder": [
+    "body", 
+    "foot-left", 
+    "foot-front", 
+    "foot-right", 
+    "main", 
+    "side", 
+    "crown", 
+    "leaf-upper-left", 
+    "leaf-upper-right", 
+    "leaf-lower-left", 
+    "leaf-lower-right"
+  ], 
+  "groundY": 448, 
+  "outputOffsetY": 28, 
+  "scale": 1, 
+  "runtimeSize": 424
+}

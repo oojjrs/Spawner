@@ -1,0 +1,130 @@
+{
+  "workflow": "Official Game Studio sprite-pipeline full-strip generation, 2D alpha-component extraction to prevent neighboring-pose cuts, one shared body scale and fixed source pitch/anchor. No per-frame tight fit or deformation.", 
+  "sourceObjects": [
+    {
+      "id": 1, 
+      "bbox": [
+        21, 
+        179, 
+        273, 
+        481
+      ], 
+      "area": 49774
+    }, 
+    {
+      "id": 4, 
+      "bbox": [
+        292, 
+        238, 
+        536, 
+        484
+      ], 
+      "area": 37730
+    }, 
+    {
+      "id": 6, 
+      "bbox": [
+        546, 
+        273, 
+        836, 
+        487
+      ], 
+      "area": 33346
+    }, 
+    {
+      "id": 7, 
+      "bbox": [
+        822, 
+        273, 
+        1090, 
+        518
+      ], 
+      "area": 36266
+    }, 
+    {
+      "id": 8, 
+      "bbox": [
+        1092, 
+        274, 
+        1359, 
+        518
+      ], 
+      "area": 36052
+    }, 
+    {
+      "id": 5, 
+      "bbox": [
+        1367, 
+        256, 
+        1617, 
+        485
+      ], 
+      "area": 36996
+    }, 
+    {
+      "id": 3, 
+      "bbox": [
+        1634, 
+        184, 
+        1878, 
+        489
+      ], 
+      "area": 48189
+    }, 
+    {
+      "id": 2, 
+      "bbox": [
+        1901, 
+        179, 
+        2148, 
+        484
+      ], 
+      "area": 49244
+    }
+  ], 
+  "sourceRootX": [
+    78.5, 
+    347.5, 
+    637.5, 
+    910.0, 
+    1184.0, 
+    1423.0, 
+    1691.5, 
+    1957.5
+  ], 
+  "horizontalRegistrationOffsets": [
+    0.0, 
+    -0.6009852216748598, 
+    -23.288177339901445, 
+    -27.570197044334925, 
+    -33.429802955664954, 
+    -2.479064039408662, 
+    -2.5541871921181243, 
+    0.0
+  ], 
+  "rootRegistration": "Horizontal translation only: bird fixed head/body root, mole upper torso silhouette, snail rigid shell/load. Rabbit lean and every vertical trajectory are preserved.", 
+  "sharedScale": 1.0517241379310345, 
+  "sourcePitch": 268.42857142857144, 
+  "sourceAnchor": [
+    78.5, 
+    342.5
+  ], 
+  "destinationAnchor": [
+    135.0, 
+    157.5
+  ], 
+  "commonRegistrationShift": [
+    0, 
+    17.508620689655174
+  ], 
+  "unionBeforeShift": [
+    37.189655172413794, 
+    -15.508620689655174, 
+    343.76724137931035, 
+    343.12931034482756
+  ], 
+  "pivotShiftedBySameTranslation": true, 
+  "perFrameScale": false, 
+  "perFrameTightRecenter": false, 
+  "drawnAirborneYRetained": false
+}

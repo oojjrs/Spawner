@@ -1,0 +1,29 @@
+{
+  "image": "DesignAssets/Animations/CreatureWalkV2/bubble-toad/walk.webp",
+  "frameSize": 288,
+  "columns": 8,
+  "durationsMs": [
+    110,
+    120,
+    80,
+    110,
+    130,
+    90,
+    90,
+    150
+  ],
+  "loop": true,
+  "pivotX": 145.5,
+  "pivotY": 222.26,
+  "cyclesPerCell": 2,
+  "method": "Eight full-strip image_gen drawings of crouch, hind-foot push, tuck, airborne apex, forefoot landing and recovery. Shared physical scale; padded logical canvas retains original body size.",
+  "frameCount": 8,
+  "durationMs": 880,
+  "source": "walk-raw-strip.png",
+  "editableDrawings": "Drawings/",
+  "normalization": "registration.json",
+  "renderer": "render.py",
+  "preview": "preview.webp",
+  "thumbnail": "thumb.webp",
+  "viewSize": 256
+}

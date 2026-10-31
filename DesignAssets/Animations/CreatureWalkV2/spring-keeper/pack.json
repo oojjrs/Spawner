@@ -1,0 +1,23 @@
+{
+  "pivot": [
+    157.5,
+    307.5
+  ],
+  "durationsMs": [
+    110,
+    90,
+    100,
+    110,
+    90,
+    100
+  ],
+  "cyclesPerCell": 2.5,
+  "phases": [
+    "near-contact",
+    "other-foot-lift",
+    "other-reach",
+    "opposite-contact",
+    "near-foot-lift",
+    "near-reach"
+  ]
+}

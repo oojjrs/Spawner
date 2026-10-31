@@ -1,0 +1,139 @@
+{
+  "durationMs": 620,
+  "phases": [
+    "tripod-a-support",
+    "tripod-b-lift",
+    "tripod-b-reach",
+    "tripod-b-support",
+    "tripod-a-lift",
+    "tripod-a-reach"
+  ],
+  "durationsMs": [
+    110,
+    100,
+    100,
+    110,
+    100,
+    100
+  ],
+  "sourceFrameCount": 6,
+  "registrations": [
+    {
+      "frame": 1,
+      "sourceBoundary": [
+        0,
+        362
+      ],
+      "sourceNominalRootX": 173.5,
+      "sharedScale": 0.6945454545454546,
+      "rootX": 128.0,
+      "groundY": 224
+    },
+    {
+      "frame": 2,
+      "sourceBoundary": [
+        362,
+        722
+      ],
+      "sourceNominalRootX": 535.8,
+      "sharedScale": 0.6945454545454546,
+      "rootX": 128.0,
+      "groundY": 224
+    },
+    {
+      "frame": 3,
+      "sourceBoundary": [
+        722,
+        1086
+      ],
+      "sourceNominalRootX": 898.1,
+      "sharedScale": 0.6945454545454546,
+      "rootX": 128.0,
+      "groundY": 224
+    },
+    {
+      "frame": 4,
+      "sourceBoundary": [
+        1086,
+        1448
+      ],
+      "sourceNominalRootX": 1260.4,
+      "sharedScale": 0.6945454545454546,
+      "rootX": 128.0,
+      "groundY": 224
+    },
+    {
+      "frame": 5,
+      "sourceBoundary": [
+        1448,
+        1810
+      ],
+      "sourceNominalRootX": 1622.7,
+      "sharedScale": 0.6945454545454546,
+      "rootX": 128.0,
+      "groundY": 224
+    },
+    {
+      "frame": 6,
+      "sourceBoundary": [
+        1810,
+        2172
+      ],
+      "sourceNominalRootX": 1985.0,
+      "sharedScale": 0.6945454545454546,
+      "rootX": 128.0,
+      "groundY": 224
+    }
+  ],
+  "normalizationNote": "The same scale and ground map is used for every source slot. Bounds only separate neighboring sprites and prevent clipping; pose-dependent vertical flight remains intact.",
+  "attachmentRepair": {
+    "frame": 5,
+    "sourceFrame": 1,
+    "polygon": [
+      [
+        18,
+        151
+      ],
+      [
+        39,
+        144
+      ],
+      [
+        78,
+        149
+      ],
+      [
+        111,
+        161
+      ],
+      [
+        111,
+        186
+      ],
+      [
+        99,
+        204
+      ],
+      [
+        83,
+        218
+      ],
+      [
+        62,
+        222
+      ],
+      [
+        48,
+        215
+      ],
+      [
+        21,
+        198
+      ],
+      [
+        16,
+        175
+      ]
+    ]
+  }
+}

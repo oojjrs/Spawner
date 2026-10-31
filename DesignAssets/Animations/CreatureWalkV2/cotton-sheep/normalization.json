@@ -1,0 +1,52 @@
+{
+  "officialWorkflow": "Game Studio sprite-pipeline; build_sprite_edit_canvas.py and official threshold_bbox; fixed shared anchor adaptation instead of per-frame bottom-fit", 
+  "sharedScale": 0.7950819672131147, 
+  "sourceAnchor": [
+    144, 
+    461
+  ], 
+  "destinationAnchor": [
+    128, 
+    219
+  ], 
+  "sourcePitch": 266.5, 
+  "sourceObjectBoundsX": [
+    [
+      22, 
+      266
+    ], 
+    [
+      277, 
+      536
+    ], 
+    [
+      547, 
+      802
+    ], 
+    [
+      811, 
+      1067
+    ], 
+    [
+      1078, 
+      1328
+    ], 
+    [
+      1343, 
+      1610
+    ], 
+    [
+      1615, 
+      1865
+    ], 
+    [
+      1887, 
+      2134
+    ]
+  ], 
+  "perFrameScale": false, 
+  "perFrameTightRecenter": false, 
+  "facing": "left", 
+  "frameSize": 256, 
+  "baseline": 219
+}

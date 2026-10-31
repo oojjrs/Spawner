@@ -1,0 +1,96 @@
+{
+  "phases": [
+    "near-front-contact",
+    "near-front-support-far-front-swing",
+    "opposite-front-reach",
+    "opposite-contact",
+    "opposite-support-near-front-swing",
+    "near-front-reach"
+  ],
+  "durationsMs": [
+    110,
+    85,
+    125,
+    110,
+    85,
+    125
+  ],
+  "sourceFrameCount": 6,
+  "registrations": [
+    {
+      "slot": 0,
+      "sourceSlotX": 0,
+      "sharedScale": 1.0528846153846154,
+      "rootX": 136.5,
+      "groundY": 256,
+      "sourceNominalRootX": 114.5,
+      "cropBoundary": [
+        0,
+        217
+      ]
+    },
+    {
+      "slot": 1,
+      "sourceSlotX": 217,
+      "sharedScale": 1.0528846153846154,
+      "rootX": 136.5,
+      "groundY": 256,
+      "sourceNominalRootX": 321.0,
+      "cropBoundary": [
+        217,
+        429
+      ]
+    },
+    {
+      "slot": 2,
+      "sourceSlotX": 429,
+      "sharedScale": 1.0528846153846154,
+      "rootX": 136.5,
+      "groundY": 256,
+      "sourceNominalRootX": 527.5,
+      "cropBoundary": [
+        429,
+        630
+      ]
+    },
+    {
+      "slot": 3,
+      "sourceSlotX": 630,
+      "sharedScale": 1.0528846153846154,
+      "rootX": 136.5,
+      "groundY": 256,
+      "sourceNominalRootX": 734.0,
+      "cropBoundary": [
+        630,
+        835
+      ]
+    },
+    {
+      "slot": 4,
+      "sourceSlotX": 835,
+      "sharedScale": 1.0528846153846154,
+      "rootX": 136.5,
+      "groundY": 256,
+      "sourceNominalRootX": 940.5,
+      "cropBoundary": [
+        835,
+        1044
+      ]
+    },
+    {
+      "slot": 5,
+      "sourceSlotX": 1044,
+      "sharedScale": 1.0528846153846154,
+      "rootX": 136.5,
+      "groundY": 256,
+      "sourceNominalRootX": 1147.0,
+      "cropBoundary": [
+        1044,
+        1254
+      ]
+    }
+  ],
+  "officialScriptOutputs": "Source/official-normalized",
+  "sourceScaleLocked": true,
+  "registration": "The same affine map is applied to all slots; never crop, scale or center each frame independently."
+}

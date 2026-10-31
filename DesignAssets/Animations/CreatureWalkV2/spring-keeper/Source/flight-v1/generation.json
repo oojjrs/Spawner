@@ -1,0 +1,7 @@
+{
+  "provider": "built-in image_gen",
+  "reference": "seed.png",
+  "raw": "flight-raw.png",
+  "sourceGeneration": "exec-12ab2389-f271-4bb2-b6e8-8a80b3b3b442.png",
+  "promptSummary": "Use case: identity-preserve. Production 2D browser game animation sprites. Preserve the exact cream Spring Keeper bird, black eye, coral and yellow crest and enormous layered flame-petal tail, sage green articulated feather wings, gold feet and left-facing view. Draw sixteen complete poses together on a transparent 4-by-4 grid: eight seamless wing-flap flight poses with tucked toes, four grounded-to-air takeoff poses, and four airborne-to-ground landing poses. Keep the head and torso size and anchor uniform. Draw newly exposed wing undersides and shoulder/elbow articulation. No walking, scenery, text, shadows or frame overlap. Exact standing neutral at both transition endpoints."
+}

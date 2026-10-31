@@ -1,0 +1,23 @@
+{
+  "image": "DesignAssets/Animations/CreatureWalkV2/lantern-keeper/walk.webp",
+  "frameSize": 384,
+  "columns": 6,
+  "durationsMs": [
+    140,
+    100,
+    140,
+    100,
+    120,
+    140
+  ],
+  "loop": true,
+  "pivotX": 203.25,
+  "pivotY": 324.75,
+  "cyclesPerCell": 2,
+  "method": "Six complete drawn movement phases from one built-in imagegen edit of the shipped seed, following official Game Studio sprite-pipeline. A single shared affine scale and nominal slot root register the entire strip; no per-frame rescale or tight-box recenter, no warped or interpolated filler.",
+  "rootMotion": false,
+  "airborneTrajectory": true,
+  "source": "Source/walk-raw.png",
+  "frames": "Frames",
+  "normalization": "pack.py"
+}

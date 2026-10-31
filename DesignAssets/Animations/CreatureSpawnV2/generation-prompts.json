@@ -1,0 +1,6 @@
+{
+  "provider": "built-in image_gen", 
+  "asset": "earth-foreground-source.png", 
+  "reference": "earth-source.png", 
+  "prompt": "Production game sprite part, transparent PNG. Draw ONE separate foreground rim of a little animal's burrow in this exact warm-brown painterly soil-and-clod art style. It is the FRONT HALF of a shallow oval earth hole, viewed in the same slightly overhead 3/4 game view as the reference. The part is a continuous wide LOW CURVED SOIL STRIP, about five times wider than it is tall, made of overlapping rounded irregular clods and a few small pebbles. Its upper silhouette is naturally jagged and organic; the top edge makes a shallow U-shaped arc, higher at left/right ends and lower in the middle. Its lower edge is also organic. The central lower band of soil is solid opaque, without a gap. Empty area ABOVE the rim is genuinely transparent so an emerging character can be rendered behind it. No painted black hole, no interior background, no hard rectangular crop, no straight horizontal cut edge. Keep generous transparent margins. This single soil foreground attachment will hide the underground part of the character; it must look like real broken earth rather than a cropped rectangle. Match the reference palette, texture, contour and lighting. Only this one low earth-rim sprite, no animal, plant, grass, text, labels, grid or scene."
+}

@@ -1,0 +1,453 @@
+{
+  "samples": [
+    {
+      "angle": 0.0, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 174.10000000000002, 
+      "leafExtraDegrees": -0.0, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 5.625, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 167.63168242755575, 
+      "leafExtraDegrees": -0.0, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 11.25, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 160.8362349472417, 
+      "leafExtraDegrees": -0.0, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 16.875, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 154.7502097930958, 
+      "leafExtraDegrees": -0.0, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 22.5, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 151.3000101326814, 
+      "leafExtraDegrees": -0.0, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 28.125, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 150.94726433902744, 
+      "leafExtraDegrees": -0.0, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 33.75, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 151.35102433108204, 
+      "leafExtraDegrees": -0.0, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 39.375, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 153.50740167940393, 
+      "leafExtraDegrees": -0.0, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 45.0, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 153.40525983798867, 
+      "leafExtraDegrees": -0.0, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 50.625, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 155.0263213952943, 
+      "leafExtraDegrees": -0.0, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 56.25, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 158.34534409570597, 
+      "leafExtraDegrees": -0.0, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 61.875, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 162.33036393625625, 
+      "leafExtraDegrees": -0.0, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 67.5, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 166.94300299744737, 
+      "leafExtraDegrees": -0.0, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 73.125, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 173.13883904359506, 
+      "leafExtraDegrees": -0.0, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 78.75, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 179.86783333324178, 
+      "leafExtraDegrees": -0.0, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 84.375, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 187.0748125195917, 
+      "leafExtraDegrees": -0.0, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 90.0, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 195.7, 
+      "leafExtraDegrees": -0.0, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 95.625, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 209.99906073684156, 
+      "leafExtraDegrees": -2.3416707292176175, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 101.25, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 223.20243134669295, 
+      "leafExtraDegrees": -6.6019850837319, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 106.875, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 236.79849321997423, 
+      "leafExtraDegrees": -12.063730428065549, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 112.5, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 246.93924644705427, 
+      "leafExtraDegrees": -18.434118779940967, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 118.125, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 255.69548378752444, 
+      "leafExtraDegrees": -25.51389895084645, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 123.75, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 263.10158248027165, 
+      "leafExtraDegrees": -33.14267259080828, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 129.375, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 272.1728654938837, 
+      "leafExtraDegrees": -41.180042159321424, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 135.0, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 280.9144411966855, 
+      "leafExtraDegrees": -49.49747468305832, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 140.625, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 289.3263022512931, 
+      "leafExtraDegrees": -57.97443015168258, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 146.25, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 296.40636936774615, 
+      "leafExtraDegrees": -66.49649086322442, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 151.875, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 304.15223901699267, 
+      "leafExtraDegrees": -74.95453543107675, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 157.5, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 311.562054282267, 
+      "leafExtraDegrees": -83.24449805019049, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 163.125, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 319.63476037245005, 
+      "leafExtraDegrees": -91.2674697148163, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 168.75, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 328.36990519006054, 
+      "leafExtraDegrees": -98.93000193921063, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 174.375, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 335.7670597325162, 
+      "leafExtraDegrees": -106.14452752246999, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 180.0, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 341.82485356970057, 
+      "leafExtraDegrees": -112.82984284147189, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 185.625, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 347.39588026852016, 
+      "leafExtraDegrees": -121.91161372384762, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 191.25, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 347.9972630190754, 
+      "leafExtraDegrees": -135.32287780816876, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 196.875, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 347.47671018308995, 
+      "leafExtraDegrees": -149.00452335237745, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 202.5, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 347.54082006723434, 
+      "leafExtraDegrees": -160.90572927554098, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 208.125, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 347.4686560818649, 
+      "leafExtraDegrees": -168.98435469645014, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 213.75, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 347.90637205275453, 
+      "leafExtraDegrees": -176.20726888083823, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 219.375, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 347.3179841075085, 
+      "leafExtraDegrees": -182.55061463706744, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 225.0, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 347.99649312714956, 
+      "leafExtraDegrees": -186.0, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 230.625, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 347.41018444882695, 
+      "leafExtraDegrees": -188.55061463706744, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 236.25, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 347.5215723630394, 
+      "leafExtraDegrees": -190.20726888083826, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 241.875, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 347.9414351469275, 
+      "leafExtraDegrees": -189.98435469645014, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 247.5, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 347.44110072258417, 
+      "leafExtraDegrees": -187.90572927554098, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 253.125, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 347.7439661907911, 
+      "leafExtraDegrees": -182.00452335237748, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 258.75, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 347.5609450167941, 
+      "leafExtraDegrees": -175.32287780816876, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 264.375, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 347.7459682030252, 
+      "leafExtraDegrees": -167.9116137238476, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 270.0, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 347.98454591514854, 
+      "leafExtraDegrees": -145.82984284147193, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 275.625, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 347.68562982433303, 
+      "leafExtraDegrees": -133.14452752247, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 281.25, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 347.96198185263836, 
+      "leafExtraDegrees": -126.93000193921063, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 286.875, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 347.78316770595274, 
+      "leafExtraDegrees": -112.26746971481634, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 292.5, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 347.3847654370193, 
+      "leafExtraDegrees": -106.24449805019049, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 298.125, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 347.81596462225485, 
+      "leafExtraDegrees": -105.95453543107676, 
+      "drawOrder": "front"
+    }, 
+    {
+      "angle": 303.75, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 347.3773825958077, 
+      "leafExtraDegrees": -106.49649086322445, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 309.375, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 347.605139093667, 
+      "leafExtraDegrees": -101.97443015168258, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 315.0, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 345.0013566311621, 
+      "leafExtraDegrees": -49.49747468305832, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 320.625, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 332.4841298430487, 
+      "leafExtraDegrees": -41.180042159321424, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 326.25, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 318.2887149291402, 
+      "leafExtraDegrees": -33.142672590808296, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 331.875, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 300.167941541045, 
+      "leafExtraDegrees": -25.513898950846468, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 337.5, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 276.7788845918334, 
+      "leafExtraDegrees": -18.434118779940995, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 343.125, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 250.4195117253543, 
+      "leafExtraDegrees": -12.063730428065583, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 348.75, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 222.90893081261675, 
+      "leafExtraDegrees": -6.6019850837319, 
+      "drawOrder": "behind"
+    }, 
+    {
+      "angle": 354.375, 
+      "bodySupportY": 349, 
+      "leafMaximumY": 197.23824766366772, 
+      "leafExtraDegrees": -2.3416707292176207, 
+      "drawOrder": "behind"
+    }
+  ], 
+  "minimumTriangleArea2": 9.419441474401971
+}

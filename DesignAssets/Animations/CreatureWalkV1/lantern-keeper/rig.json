@@ -1,0 +1,133 @@
+{
+  "size": 384,
+  "pivot": [
+    203.25,
+    324.75
+  ],
+  "duration": 1200,
+  "source": "UniqueIdleV4/lantern-keeper/idle.webp",
+  "gait": "rabbit-hop",
+  "legs": [
+    [
+      [
+        109,
+        184
+      ],
+      [
+        96,
+        209
+      ],
+      24,
+      0
+    ],
+    [
+      [
+        132,
+        184
+      ],
+      [
+        119,
+        213
+      ],
+      23,
+      0
+    ],
+    [
+      [
+        165,
+        193
+      ],
+      [
+        166,
+        213
+      ],
+      26,
+      0.15
+    ]
+  ],
+  "ears": [
+    [
+      [
+        106,
+        141
+      ],
+      [
+        65,
+        104
+      ],
+      36,
+      0.045
+    ],
+    [
+      [
+        130,
+        143
+      ],
+      [
+        184,
+        82
+      ],
+      44,
+      -0.055
+    ]
+  ],
+  "method": "Original idle neutral artwork on a locally weighted mesh: a complete in-place hop with airborne root trajectory, planted landing, tucking forepaws, hind-leg push, and delayed ear-bone rotation. No image scaling.",
+  "format": "spawner-local-continuous-mesh-v1",
+  "sourceReference": "DesignAssets/Animations/UniqueIdleV4/lantern-keeper/idle.webp",
+  "rootMotion": false,
+  "mesh": {
+    "spacing": 8,
+    "topology": "Regular square grid with two triangles per cell; inverse sampling uses the continuous limb weight field."
+  },
+  "bones": [
+    {
+      "name": "root",
+      "pivot": [
+        203.25,
+        324.75
+      ]
+    },
+    {
+      "name": "leg-0",
+      "parent": "root",
+      "joint": [
+        163.5,
+        276.0
+      ],
+      "toe": [
+        144.0,
+        313.5
+      ],
+      "phase": 0,
+      "weight": "Source/leg-0-weight.png"
+    },
+    {
+      "name": "leg-1",
+      "parent": "root",
+      "joint": [
+        198.0,
+        276.0
+      ],
+      "toe": [
+        178.5,
+        319.5
+      ],
+      "phase": 0,
+      "weight": "Source/leg-1-weight.png"
+    },
+    {
+      "name": "leg-2",
+      "parent": "root",
+      "joint": [
+        247.5,
+        289.5
+      ],
+      "toe": [
+        249.0,
+        319.5
+      ],
+      "phase": 0.15,
+      "weight": "Source/leg-2-weight.png"
+    }
+  ]
+}

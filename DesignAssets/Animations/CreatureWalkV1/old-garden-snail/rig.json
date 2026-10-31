@@ -1,0 +1,27 @@
+{
+  "size": 352,
+  "pivot": [
+    180.8125,
+    304.5625
+  ],
+  "duration": 1800,
+  "source": "UniqueIdleV3/old-garden-snail/idle.webp",
+  "gait": "snail-crawl",
+  "method": "Original idle neutral artwork on a continuous local mesh: a travelling contraction along the exposed sole, forward head reach, and two independently weighted eyestalks. The shell and tree remain rigid.",
+  "format": "spawner-local-continuous-mesh-v1",
+  "sourceReference": "DesignAssets/Animations/UniqueIdleV3/old-garden-snail/idle.webp",
+  "rootMotion": false,
+  "mesh": {
+    "spacing": 8,
+    "topology": "Regular square grid with two triangles per cell; inverse sampling uses the continuous limb weight field."
+  },
+  "bones": [
+    {
+      "name": "root",
+      "pivot": [
+        180.8125,
+        304.5625
+      ]
+    }
+  ]
+}

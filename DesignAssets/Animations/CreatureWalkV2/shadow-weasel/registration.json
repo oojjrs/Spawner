@@ -1,0 +1,183 @@
+{
+  "source": "walk-raw-strip.png",
+  "method": "Eight full-strip image_gen drawings of low quadruped prowling, paw recovery, support transfer and curved tail follow-through.",
+  "normalization": "One shared scale across the cycle, explicit body/ground landmarks, fixed output root. Crop bounds only save source pixels; they never determine pose scale or placement. Airborne and wing excursions remain in authored root trajectories.",
+  "sharedScale": 0.8,
+  "canvas": [
+    256,
+    256
+  ],
+  "viewSize": 256,
+  "pivot": [
+    128.5,
+    211.78
+  ],
+  "frames": [
+    {
+      "drawing": "Drawings/01.png",
+      "sourceRoot": [
+        125.0,
+        120
+      ],
+      "rawBounds": [
+        10,
+        296,
+        291,
+        420
+      ],
+      "rawComponentBounds": [
+        14,
+        300,
+        273,
+        116
+      ]
+    },
+    {
+      "drawing": "Drawings/02.png",
+      "sourceRoot": [
+        125.0,
+        120
+      ],
+      "rawBounds": [
+        293,
+        296,
+        553,
+        414
+      ],
+      "rawComponentBounds": [
+        297,
+        300,
+        252,
+        110
+      ]
+    },
+    {
+      "drawing": "Drawings/03.png",
+      "sourceRoot": [
+        125.0,
+        119
+      ],
+      "rawBounds": [
+        558,
+        297,
+        820,
+        415
+      ],
+      "rawComponentBounds": [
+        562,
+        301,
+        254,
+        110
+      ]
+    },
+    {
+      "drawing": "Drawings/04.png",
+      "sourceRoot": [
+        125.0,
+        125
+      ],
+      "rawBounds": [
+        823,
+        291,
+        1081,
+        420
+      ],
+      "rawComponentBounds": [
+        827,
+        295,
+        250,
+        121
+      ]
+    },
+    {
+      "drawing": "Drawings/05.png",
+      "sourceRoot": [
+        125.0,
+        119
+      ],
+      "rawBounds": [
+        1086,
+        297,
+        1362,
+        419
+      ],
+      "rawComponentBounds": [
+        1090,
+        301,
+        268,
+        114
+      ]
+    },
+    {
+      "drawing": "Drawings/06.png",
+      "sourceRoot": [
+        125.0,
+        118
+      ],
+      "rawBounds": [
+        1364,
+        298,
+        1628,
+        416
+      ],
+      "rawComponentBounds": [
+        1368,
+        302,
+        256,
+        110
+      ]
+    },
+    {
+      "drawing": "Drawings/07.png",
+      "sourceRoot": [
+        125.0,
+        123
+      ],
+      "rawBounds": [
+        1629,
+        293,
+        1886,
+        419
+      ],
+      "rawComponentBounds": [
+        1633,
+        297,
+        249,
+        118
+      ]
+    },
+    {
+      "drawing": "Drawings/08.png",
+      "sourceRoot": [
+        125.0,
+        120
+      ],
+      "rawBounds": [
+        1891,
+        296,
+        2164,
+        419
+      ],
+      "rawComponentBounds": [
+        1895,
+        300,
+        265,
+        115
+      ]
+    }
+  ],
+  "durationMs": [
+    85,
+    80,
+    85,
+    100,
+    85,
+    80,
+    85,
+    100
+  ],
+  "columns": 8,
+  "cyclesPerCell": 2.5,
+  "sourcePoseCount": 8,
+  "rigMethod": "Full drawn animation; no procedural warp interpolation. All editable complete source drawings preserved."
+}

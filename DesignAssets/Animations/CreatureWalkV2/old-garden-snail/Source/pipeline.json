@@ -1,0 +1,13 @@
+{
+  "workflow": "Official OpenAI Game Studio sprite-pipeline",
+  "skill": "D:/.codex/plugins/cache/openai-curated/game-studio/1dc19589/skills/sprite-pipeline/SKILL.md",
+  "reference": "D:/.codex/plugins/cache/openai-curated/game-studio/1dc19589/references/sprite-pipeline.md",
+  "scriptsUsed": [
+    "build_sprite_edit_canvas.py",
+    "normalize_sprite_strip.py",
+    "render_sprite_preview_sheet.py"
+  ],
+  "scriptRoot": "D:/.codex/plugins/cache/openai-curated/game-studio/1dc19589/scripts",
+  "drawnFrames": 6,
+  "method": "One edit request draws the entire strip. Official normalization output is preserved in Source/official-normalized; pack.py applies a shared affine scale and nominal common root to fixed source slots to preserve original runtime size and intentional flight."
+}

@@ -1,0 +1,28 @@
+{
+  "image": "DesignAssets/Animations/CreatureWalkV2/cotton-sheep/walk.webp", 
+  "frameSize": 256, 
+  "columns": 4, 
+  "durationsMs": [
+    125, 
+    125, 
+    125, 
+    125, 
+    125, 
+    125, 
+    125, 
+    125
+  ], 
+  "loop": true, 
+  "pivotX": 128, 
+  "pivotY": 224, 
+  "cyclesPerCell": 2, 
+  "frameCount": 8, 
+  "durationMs": 1000, 
+  "method": "Eight distinct full-body walk drawings generated together from the locked approved seed through the official Game Studio sprite-pipeline. Shared scale and shared fixed anchor preserve original proportions and footfall trajectories. No warped or blended in-betweens.", 
+  "source": "Source/walk-strip-raw.png", 
+  "frames": "Frames", 
+  "normalization": "normalization.json", 
+  "preview": "preview.webp", 
+  "thumbnail": "thumb.webp", 
+  "rootMotion": false
+}

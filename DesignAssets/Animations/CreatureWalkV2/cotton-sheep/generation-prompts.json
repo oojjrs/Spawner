@@ -1,0 +1,9 @@
+{
+  "provider": "built-in image_gen",
+  "workflow": "official Game Studio sprite-pipeline",
+  "lockedReference": "Source/locked-neutral.png",
+  "referenceCanvas": "Source/walk-edit-canvas.png",
+  "partsArtwork": "Source/completed-parts.png",
+  "stripArtwork": "Source/walk-strip-raw.png",
+  "prompt": "Production WALK CYCLE spritesheet for the exact approved cotton sheep. Edit the transparent reference canvas into one complete horizontal strip of exactly eight equally spaced sheep frames, one row. Keep the same left-facing three-quarter view, ivory face and legs, cream/mint rounded fleece, short legs, brown cloven hooves, tail, ears, face proportions, painterly shading and outline. Same body scale and head silhouette throughout. Genuine transparent alpha, no floor, shadows, labels, numbering or scenery. Draw all eight phases together: neutral support; near front hoof reaches forward while opposite hind extends backward; front hoof plants and accepts weight while far front passes underneath; far front recovery with bent knee and near front push-off; opposite forehoof reaches and plants; opposite support and passing; near front lifts behind for recovery; near front swings forward into the loop. Complete hidden limb contours and belly surfaces. Make feet clearly reach, plant, push, lift and return at 64px. No static sheep with tiny ankle changes, whole-body rocking, rubber stretching, extra legs or detached feet."
+}

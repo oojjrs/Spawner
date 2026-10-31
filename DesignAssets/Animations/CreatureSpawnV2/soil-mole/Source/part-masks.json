@@ -1,0 +1,37 @@
+{
+  "far-hind": {
+    "hiddenSurface": "far-hind.png", 
+    "visibleReference": "reference.png", 
+    "partImage": "../Parts/far-hind.png"
+  }, 
+  "tail": {
+    "hiddenSurface": null, 
+    "visibleReference": "reference.png", 
+    "partImage": "../Parts/tail.png"
+  }, 
+  "body": {
+    "hiddenSurface": "body.png", 
+    "visibleReference": "reference.png", 
+    "partImage": "../Parts/body.png"
+  }, 
+  "far-paw": {
+    "hiddenSurface": "far-paw.png", 
+    "visibleReference": "reference.png", 
+    "partImage": "../Parts/far-paw.png"
+  }, 
+  "head": {
+    "hiddenSurface": "head.png", 
+    "visibleReference": "reference.png", 
+    "partImage": "../Parts/head.png"
+  }, 
+  "near-hind": {
+    "hiddenSurface": "near-hind.png", 
+    "visibleReference": "reference.png", 
+    "partImage": "../Parts/near-hind.png"
+  }, 
+  "near-paw": {
+    "hiddenSurface": "near-paw.png", 
+    "visibleReference": "reference.png", 
+    "partImage": "../Parts/near-paw.png"
+  }
+}

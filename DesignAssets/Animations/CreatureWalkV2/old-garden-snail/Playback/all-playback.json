@@ -1,0 +1,100 @@
+{
+  "surface": "isolated headless Edge; each actual native256px and64px animated WebP with shipped seed",
+  "keys": [
+    "spring-keeper",
+    "lantern-keeper",
+    "old-garden-snail",
+    "walking-forest",
+    "white-paw",
+    "spiny-back-leader"
+  ],
+  "errors": [],
+  "visible": [
+    {
+      "key": "spring-keeper",
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 390,
+      "fullyVisible": true
+    },
+    {
+      "key": "lantern-keeper",
+      "x": 320,
+      "y": 0,
+      "width": 320,
+      "height": 390,
+      "fullyVisible": true
+    },
+    {
+      "key": "old-garden-snail",
+      "x": 640,
+      "y": 0,
+      "width": 320,
+      "height": 390,
+      "fullyVisible": true
+    },
+    {
+      "key": "walking-forest",
+      "x": 0,
+      "y": 400,
+      "width": 320,
+      "height": 390,
+      "fullyVisible": true
+    },
+    {
+      "key": "white-paw",
+      "x": 320,
+      "y": 400,
+      "width": 320,
+      "height": 390,
+      "fullyVisible": true
+    },
+    {
+      "key": "spiny-back-leader",
+      "x": 640,
+      "y": 400,
+      "width": 320,
+      "height": 390,
+      "fullyVisible": true
+    }
+  ],
+  "snapshots": [
+    {
+      "at": 0,
+      "file": "H:/Spawner/DesignAssets/Animations/CreatureWalkV2/white-paw/Playback/all-actual-0.png"
+    },
+    {
+      "at": 150,
+      "file": "H:/Spawner/DesignAssets/Animations/CreatureWalkV2/white-paw/Playback/all-actual-150.png"
+    },
+    {
+      "at": 300,
+      "file": "H:/Spawner/DesignAssets/Animations/CreatureWalkV2/white-paw/Playback/all-actual-300.png"
+    },
+    {
+      "at": 450,
+      "file": "H:/Spawner/DesignAssets/Animations/CreatureWalkV2/white-paw/Playback/all-actual-450.png"
+    },
+    {
+      "at": 640,
+      "file": "H:/Spawner/DesignAssets/Animations/CreatureWalkV2/white-paw/Playback/all-actual-640.png"
+    },
+    {
+      "at": 800,
+      "file": "H:/Spawner/DesignAssets/Animations/CreatureWalkV2/white-paw/Playback/all-actual-800.png"
+    },
+    {
+      "at": 1100,
+      "file": "H:/Spawner/DesignAssets/Animations/CreatureWalkV2/white-paw/Playback/all-actual-1100.png"
+    },
+    {
+      "at": 1500,
+      "file": "H:/Spawner/DesignAssets/Animations/CreatureWalkV2/white-paw/Playback/all-actual-1500.png"
+    },
+    {
+      "at": 1900,
+      "file": "H:/Spawner/DesignAssets/Animations/CreatureWalkV2/white-paw/Playback/all-actual-1900.png"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "image": "DesignAssets/Animations/CreatureWalkV2/vine-turtle/walk.webp",
+  "frameSize": 256,
+  "columns": 8,
+  "durationsMs": [
+    170,
+    130,
+    120,
+    140,
+    170,
+    130,
+    120,
+    140
+  ],
+  "loop": true,
+  "pivotX": 131.25,
+  "pivotY": 220.81,
+  "cyclesPerCell": 1.5,
+  "method": "Eight full-strip image_gen drawings of slow articulated quadruped walking under a rigid decorated shell.",
+  "frameCount": 8,
+  "durationMs": 1120,
+  "source": "walk-raw-strip.png",
+  "editableDrawings": "Drawings/",
+  "normalization": "registration.json",
+  "renderer": "render.py",
+  "preview": "preview.webp",
+  "thumbnail": "thumb.webp",
+  "viewSize": 256
+}

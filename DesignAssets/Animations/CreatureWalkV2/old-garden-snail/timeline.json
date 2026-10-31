@@ -1,0 +1,89 @@
+{
+  "durationMs": 1400,
+  "phases": [
+    "extended-sole",
+    "front-reach",
+    "rear-foot-contract",
+    "shell-draw-forward",
+    "rear-lengthen",
+    "extended-support"
+  ],
+  "durationsMs": [
+    220,
+    220,
+    260,
+    220,
+    220,
+    260
+  ],
+  "sourceFrameCount": 6,
+  "registrations": [
+    {
+      "frame": 1,
+      "sourceBoundary": [
+        0,
+        361
+      ],
+      "sourceNominalRootX": 170.0,
+      "sharedScale": 0.8522012578616353,
+      "rootX": 178.5,
+      "groundY": 305
+    },
+    {
+      "frame": 2,
+      "sourceBoundary": [
+        361,
+        724
+      ],
+      "sourceNominalRootX": 533.5,
+      "sharedScale": 0.8522012578616353,
+      "rootX": 178.5,
+      "groundY": 305
+    },
+    {
+      "frame": 3,
+      "sourceBoundary": [
+        724,
+        1086
+      ],
+      "sourceNominalRootX": 897.0,
+      "sharedScale": 0.8522012578616353,
+      "rootX": 178.5,
+      "groundY": 305
+    },
+    {
+      "frame": 4,
+      "sourceBoundary": [
+        1086,
+        1421
+      ],
+      "sourceNominalRootX": 1260.5,
+      "sharedScale": 0.8522012578616353,
+      "rootX": 178.5,
+      "groundY": 305
+    },
+    {
+      "frame": 5,
+      "sourceBoundary": [
+        1421,
+        1810
+      ],
+      "sourceNominalRootX": 1624.0,
+      "sharedScale": 0.8522012578616353,
+      "rootX": 178.5,
+      "groundY": 305
+    },
+    {
+      "frame": 6,
+      "sourceBoundary": [
+        1810,
+        2172
+      ],
+      "sourceNominalRootX": 1987.5,
+      "sharedScale": 0.8522012578616353,
+      "rootX": 178.5,
+      "groundY": 305
+    }
+  ],
+  "normalizationNote": "The same scale and ground map is used for every source slot. Bounds only separate neighboring sprites and prevent clipping; pose-dependent vertical flight remains intact."
+}

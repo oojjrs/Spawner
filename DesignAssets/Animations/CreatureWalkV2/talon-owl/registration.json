@@ -1,0 +1,184 @@
+{
+  "source": "walk-raw-grid.png",
+  "method": "Eight full-cycle image_gen drawings of complete extended-wing flight. Roomy raw grid separated as whole drawings, shared physical scale, face landmark registration and expanded canvas retain body size and full wingspan.",
+  "normalization": "One shared scale across the cycle, explicit body/ground landmarks, fixed output root. Crop bounds only save source pixels; they never determine pose scale or placement. Airborne and wing excursions remain in authored root trajectories.",
+  "sharedScale": 0.69,
+  "canvas": [
+    432,
+    432
+  ],
+  "viewSize": 256,
+  "pivot": [
+    205,
+    288
+  ],
+  "frames": [
+    {
+      "drawing": "Drawings/01.png",
+      "sourceRoot": [
+        132.93,
+        317.1848
+      ],
+      "rawBounds": [
+        31,
+        68,
+        429,
+        433
+      ],
+      "rawComponentBounds": [
+        35,
+        72,
+        390,
+        357
+      ]
+    },
+    {
+      "drawing": "Drawings/02.png",
+      "sourceRoot": [
+        122.54,
+        364.2926
+      ],
+      "rawBounds": [
+        477,
+        18,
+        836,
+        432
+      ],
+      "rawComponentBounds": [
+        481,
+        22,
+        351,
+        406
+      ]
+    },
+    {
+      "drawing": "Drawings/03.png",
+      "sourceRoot": [
+        242.13,
+        215.4548
+      ],
+      "rawBounds": [
+        828,
+        167,
+        1399,
+        433
+      ],
+      "rawComponentBounds": [
+        832,
+        171,
+        563,
+        258
+      ]
+    },
+    {
+      "drawing": "Drawings/04.png",
+      "sourceRoot": [
+        190.35,
+        194.777
+      ],
+      "rawBounds": [
+        1353,
+        171,
+        1760,
+        483
+      ],
+      "rawComponentBounds": [
+        1357,
+        175,
+        399,
+        304
+      ]
+    },
+    {
+      "drawing": "Drawings/05.png",
+      "sourceRoot": [
+        149.18,
+        195.2377
+      ],
+      "rawBounds": [
+        21,
+        584,
+        434,
+        874
+      ],
+      "rawComponentBounds": [
+        25,
+        588,
+        405,
+        282
+      ]
+    },
+    {
+      "drawing": "Drawings/06.png",
+      "sourceRoot": [
+        102.45,
+        217.087
+      ],
+      "rawBounds": [
+        474,
+        546,
+        864,
+        823
+      ],
+      "rawComponentBounds": [
+        478,
+        550,
+        382,
+        269
+      ]
+    },
+    {
+      "drawing": "Drawings/07.png",
+      "sourceRoot": [
+        134.2,
+        321.2148
+      ],
+      "rawBounds": [
+        891,
+        465,
+        1274,
+        846
+      ],
+      "rawComponentBounds": [
+        895,
+        469,
+        375,
+        373
+      ]
+    },
+    {
+      "drawing": "Drawings/08.png",
+      "sourceRoot": [
+        157.71,
+        329.6133
+      ],
+      "rawBounds": [
+        1362,
+        458,
+        1754,
+        846
+      ],
+      "rawComponentBounds": [
+        1366,
+        462,
+        384,
+        380
+      ]
+    }
+  ],
+  "durationMs": [
+    70,
+    80,
+    80,
+    85,
+    80,
+    70,
+    70,
+    65
+  ],
+  "columns": 8,
+  "cyclesPerCell": 3,
+  "sourcePoseCount": 8,
+  "rigMethod": "Full drawn animation; no procedural warp interpolation. All editable complete source drawings preserved.",
+  "scale": 2
+}

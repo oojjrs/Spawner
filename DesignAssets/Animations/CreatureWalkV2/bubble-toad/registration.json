@@ -1,0 +1,183 @@
+{
+  "source": "walk-raw-strip.png",
+  "method": "Eight full-strip image_gen drawings of crouch, hind-foot push, tuck, airborne apex, forefoot landing and recovery. Shared physical scale; padded logical canvas retains original body size.",
+  "normalization": "One shared scale across the cycle, explicit body/ground landmarks, fixed output root. Crop bounds only save source pixels; they never determine pose scale or placement. Airborne and wing excursions remain in authored root trajectories.",
+  "sharedScale": 0.69,
+  "canvas": [
+    288,
+    288
+  ],
+  "viewSize": 256,
+  "pivot": [
+    145.5,
+    222.26
+  ],
+  "frames": [
+    {
+      "drawing": "Drawings/01.png",
+      "sourceRoot": [
+        132.3997,
+        191.0
+      ],
+      "rawBounds": [
+        23,
+        359,
+        286,
+        555
+      ],
+      "rawComponentBounds": [
+        27,
+        363,
+        255,
+        188
+      ]
+    },
+    {
+      "drawing": "Drawings/02.png",
+      "sourceRoot": [
+        127.4297,
+        178.0
+      ],
+      "rawBounds": [
+        289,
+        372,
+        541,
+        556
+      ],
+      "rawComponentBounds": [
+        293,
+        376,
+        244,
+        176
+      ]
+    },
+    {
+      "drawing": "Drawings/03.png",
+      "sourceRoot": [
+        133.1297,
+        300.0
+      ],
+      "rawBounds": [
+        534,
+        250,
+        847,
+        549
+      ],
+      "rawComponentBounds": [
+        538,
+        254,
+        305,
+        291
+      ]
+    },
+    {
+      "drawing": "Drawings/04.png",
+      "sourceRoot": [
+        130.2497,
+        305.7897
+      ],
+      "rawBounds": [
+        821,
+        212,
+        1071,
+        440
+      ],
+      "rawComponentBounds": [
+        825,
+        216,
+        242,
+        220
+      ]
+    },
+    {
+      "drawing": "Drawings/05.png",
+      "sourceRoot": [
+        132.0297,
+        311.1954
+      ],
+      "rawBounds": [
+        1074,
+        179,
+        1331,
+        401
+      ],
+      "rawComponentBounds": [
+        1078,
+        183,
+        249,
+        214
+      ]
+    },
+    {
+      "drawing": "Drawings/06.png",
+      "sourceRoot": [
+        142.1797,
+        269.2871
+      ],
+      "rawBounds": [
+        1326,
+        275,
+        1596,
+        503
+      ],
+      "rawComponentBounds": [
+        1330,
+        279,
+        262,
+        220
+      ]
+    },
+    {
+      "drawing": "Drawings/07.png",
+      "sourceRoot": [
+        129.8897,
+        176.0
+      ],
+      "rawBounds": [
+        1608,
+        374,
+        1877,
+        559
+      ],
+      "rawComponentBounds": [
+        1612,
+        378,
+        261,
+        177
+      ]
+    },
+    {
+      "drawing": "Drawings/08.png",
+      "sourceRoot": [
+        129.0997,
+        182.0
+      ],
+      "rawBounds": [
+        1893,
+        368,
+        2154,
+        556
+      ],
+      "rawComponentBounds": [
+        1897,
+        372,
+        253,
+        180
+      ]
+    }
+  ],
+  "durationMs": [
+    110,
+    120,
+    80,
+    110,
+    130,
+    90,
+    90,
+    150
+  ],
+  "columns": 8,
+  "cyclesPerCell": 2,
+  "sourcePoseCount": 8,
+  "rigMethod": "Full drawn animation; no procedural warp interpolation. All editable complete source drawings preserved."
+}

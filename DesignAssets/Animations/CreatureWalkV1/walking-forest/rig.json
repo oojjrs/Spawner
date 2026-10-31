@@ -1,0 +1,107 @@
+{
+  "size": 256,
+  "pivot": [
+    128,
+    224
+  ],
+  "duration": 1600,
+  "source": "MountainPawLeaderIdle/walking-forest/idle-runtime.webp",
+  "gait": "heavy-walk",
+  "legs": [
+    [
+      [
+        38,
+        184
+      ],
+      [
+        36,
+        203
+      ],
+      25,
+      0
+    ],
+    [
+      [
+        122,
+        187
+      ],
+      [
+        121,
+        216
+      ],
+      32,
+      0.5
+    ],
+    [
+      [
+        218,
+        186
+      ],
+      [
+        219,
+        206
+      ],
+      25,
+      0
+    ]
+  ],
+  "method": "Original idle neutral artwork on a locally weighted mesh: three visible feet alternate a planted backward sweep and lifted forward recovery. The mineral carapace, head, and crystal silhouette remain rigid.",
+  "format": "spawner-local-continuous-mesh-v1",
+  "sourceReference": "DesignAssets/Animations/MountainPawLeaderIdle/walking-forest/idle-runtime.webp",
+  "rootMotion": false,
+  "mesh": {
+    "spacing": 8,
+    "topology": "Regular square grid with two triangles per cell; inverse sampling uses the continuous limb weight field."
+  },
+  "bones": [
+    {
+      "name": "root",
+      "pivot": [
+        128,
+        224
+      ]
+    },
+    {
+      "name": "leg-0",
+      "parent": "root",
+      "joint": [
+        38.0,
+        184.0
+      ],
+      "toe": [
+        36.0,
+        203.0
+      ],
+      "phase": 0,
+      "weight": "Source/leg-0-weight.png"
+    },
+    {
+      "name": "leg-1",
+      "parent": "root",
+      "joint": [
+        122.0,
+        187.0
+      ],
+      "toe": [
+        121.0,
+        216.0
+      ],
+      "phase": 0.5,
+      "weight": "Source/leg-1-weight.png"
+    },
+    {
+      "name": "leg-2",
+      "parent": "root",
+      "joint": [
+        218.0,
+        186.0
+      ],
+      "toe": [
+        219.0,
+        206.0
+      ],
+      "phase": 0,
+      "weight": "Source/leg-2-weight.png"
+    }
+  ]
+}

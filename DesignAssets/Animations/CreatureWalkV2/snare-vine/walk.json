@@ -1,0 +1,27 @@
+{
+  "image": "DesignAssets/Animations/CreatureWalkV2/snare-vine/walk.webp",
+  "frameSize": 256,
+  "columns": 6,
+  "durationsMs": [
+    180,
+    140,
+    140,
+    160,
+    140,
+    180
+  ],
+  "loop": true,
+  "pivotX": 127.75,
+  "pivotY": 235.08,
+  "cyclesPerCell": 1.5,
+  "method": "Six full-cycle image_gen drawings of leaf-root reach, planting, body pull and recovery.",
+  "frameCount": 6,
+  "durationMs": 940,
+  "source": "walk-raw-strip.png",
+  "editableDrawings": "Drawings/",
+  "normalization": "registration.json",
+  "renderer": "render.py",
+  "preview": "preview.webp",
+  "thumbnail": "thumb.webp",
+  "viewSize": 256
+}

@@ -1,0 +1,143 @@
+{
+  "source": "walk-raw-grid.png",
+  "method": "Six full-cycle image_gen drawings of leaf-root reach, planting, body pull and recovery.",
+  "normalization": "One shared scale across the cycle, explicit body/ground landmarks, fixed output root. Crop bounds only save source pixels; they never determine pose scale or placement. Airborne and wing excursions remain in authored root trajectories.",
+  "sharedScale": 0.4,
+  "canvas": [
+    256,
+    256
+  ],
+  "viewSize": 256,
+  "pivot": [
+    127.75,
+    235.08
+  ],
+  "frames": [
+    {
+      "drawing": "Drawings/01.png",
+      "sourceRoot": [
+        180,
+        456
+      ],
+      "rawBounds": [
+        75,
+        42,
+        490,
+        502
+      ],
+      "rawComponentBounds": [
+        79,
+        46,
+        407,
+        452
+      ]
+    },
+    {
+      "drawing": "Drawings/02.png",
+      "sourceRoot": [
+        172,
+        449
+      ],
+      "rawBounds": [
+        595,
+        49,
+        1001,
+        502
+      ],
+      "rawComponentBounds": [
+        599,
+        53,
+        398,
+        445
+      ]
+    },
+    {
+      "drawing": "Drawings/03.png",
+      "sourceRoot": [
+        195,
+        451
+      ],
+      "rawBounds": [
+        1084,
+        47,
+        1498,
+        499
+      ],
+      "rawComponentBounds": [
+        1088,
+        51,
+        406,
+        444
+      ]
+    },
+    {
+      "drawing": "Drawings/04.png",
+      "sourceRoot": [
+        186,
+        436
+      ],
+      "rawBounds": [
+        69,
+        536,
+        482,
+        967
+      ],
+      "rawComponentBounds": [
+        73,
+        540,
+        405,
+        423
+      ]
+    },
+    {
+      "drawing": "Drawings/05.png",
+      "sourceRoot": [
+        188,
+        446
+      ],
+      "rawBounds": [
+        579,
+        526,
+        995,
+        976
+      ],
+      "rawComponentBounds": [
+        583,
+        530,
+        408,
+        442
+      ]
+    },
+    {
+      "drawing": "Drawings/06.png",
+      "sourceRoot": [
+        189,
+        451
+      ],
+      "rawBounds": [
+        1090,
+        521,
+        1508,
+        976
+      ],
+      "rawComponentBounds": [
+        1094,
+        525,
+        410,
+        447
+      ]
+    }
+  ],
+  "durationMs": [
+    180,
+    140,
+    140,
+    160,
+    140,
+    180
+  ],
+  "columns": 6,
+  "cyclesPerCell": 1.5,
+  "sourcePoseCount": 6,
+  "rigMethod": "Full drawn animation; no procedural warp interpolation. All editable complete source drawings preserved."
+}

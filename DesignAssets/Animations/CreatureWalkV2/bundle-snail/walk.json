@@ -1,0 +1,28 @@
+{
+  "image": "DesignAssets/Animations/CreatureWalkV2/bundle-snail/walk.webp", 
+  "frameSize": 398, 
+  "columns": 4, 
+  "durationsMs": [
+    200, 
+    250, 
+    250, 
+    250, 
+    300, 
+    250, 
+    250, 
+    250
+  ], 
+  "loop": true, 
+  "pivotX": 199, 
+  "pivotY": 348.25, 
+  "cyclesPerCell": 1, 
+  "frameCount": 8, 
+  "durationMs": 2000, 
+  "method": "Eight full-body drawings generated together from the locked original through the official Game Studio sprite-pipeline. Drawn soft-foot extension, anterior grip, compression, rear release and recovery under a rigid shell and load. Uniform shared-scale registration; no warped, crossfaded or synthetic drawing in-betweens.", 
+  "source": "Source/walk-strip-raw.png", 
+  "frames": "Frames", 
+  "normalization": "normalization.json", 
+  "preview": "preview.webp", 
+  "thumbnail": "thumb.webp", 
+  "rootMotion": false
+}

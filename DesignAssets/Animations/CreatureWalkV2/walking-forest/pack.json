@@ -1,0 +1,23 @@
+{
+  "pivot": [
+    128,
+    224
+  ],
+  "durationsMs": [
+    200,
+    180,
+    180,
+    200,
+    180,
+    180
+  ],
+  "cyclesPerCell": 1.4,
+  "phases": [
+    "near-front-support",
+    "far-front-lift",
+    "far-front-reach",
+    "opposite-support",
+    "near-front-lift",
+    "near-front-reach"
+  ]
+}

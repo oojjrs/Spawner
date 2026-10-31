@@ -1,0 +1,56 @@
+{
+  "surface": "isolated headless Edge; original and actual exported animated WebP at256px and64px",
+  "errors": [],
+  "visible": [
+    {
+      "label": "Shipped original",
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 390,
+      "fullyVisible": true
+    },
+    {
+      "label": "V1 mesh displacement",
+      "x": 320,
+      "y": 0,
+      "width": 320,
+      "height": 390,
+      "fullyVisible": true
+    },
+    {
+      "label": "V2 six drawn gait phases",
+      "x": 640,
+      "y": 0,
+      "width": 320,
+      "height": 390,
+      "fullyVisible": true
+    }
+  ],
+  "snapshots": [
+    {
+      "at": 0,
+      "file": "H:/Spawner/DesignAssets/Animations/CreatureWalkV2/white-paw/Playback/actual-0.png"
+    },
+    {
+      "at": 160,
+      "file": "H:/Spawner/DesignAssets/Animations/CreatureWalkV2/white-paw/Playback/actual-160.png"
+    },
+    {
+      "at": 340,
+      "file": "H:/Spawner/DesignAssets/Animations/CreatureWalkV2/white-paw/Playback/actual-340.png"
+    },
+    {
+      "at": 510,
+      "file": "H:/Spawner/DesignAssets/Animations/CreatureWalkV2/white-paw/Playback/actual-510.png"
+    },
+    {
+      "at": 700,
+      "file": "H:/Spawner/DesignAssets/Animations/CreatureWalkV2/white-paw/Playback/actual-700.png"
+    },
+    {
+      "at": 930,
+      "file": "H:/Spawner/DesignAssets/Animations/CreatureWalkV2/white-paw/Playback/actual-930.png"
+    }
+  ]
+}

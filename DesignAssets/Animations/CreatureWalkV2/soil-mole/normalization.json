@@ -1,0 +1,130 @@
+{
+  "workflow": "Official Game Studio sprite-pipeline full-strip generation, 2D alpha-component extraction to prevent neighboring-pose cuts, one shared body scale and fixed source pitch/anchor. No per-frame tight fit or deformation.", 
+  "sourceObjects": [
+    {
+      "id": 8, 
+      "bbox": [
+        15, 
+        285, 
+        264, 
+        440
+      ], 
+      "area": 23866
+    }, 
+    {
+      "id": 2, 
+      "bbox": [
+        306, 
+        282, 
+        527, 
+        445
+      ], 
+      "area": 23734
+    }, 
+    {
+      "id": 3, 
+      "bbox": [
+        549, 
+        282, 
+        797, 
+        434
+      ], 
+      "area": 24624
+    }, 
+    {
+      "id": 4, 
+      "bbox": [
+        820, 
+        282, 
+        1069, 
+        438
+      ], 
+      "area": 25675
+    }, 
+    {
+      "id": 5, 
+      "bbox": [
+        1108, 
+        282, 
+        1341, 
+        439
+      ], 
+      "area": 25016
+    }, 
+    {
+      "id": 1, 
+      "bbox": [
+        1380, 
+        280, 
+        1611, 
+        439
+      ], 
+      "area": 23942
+    }, 
+    {
+      "id": 7, 
+      "bbox": [
+        1631, 
+        283, 
+        1884, 
+        445
+      ], 
+      "area": 25416
+    }, 
+    {
+      "id": 6, 
+      "bbox": [
+        1908, 
+        282, 
+        2156, 
+        447
+      ], 
+      "area": 25637
+    }
+  ], 
+  "sourceRootX": [
+    151.87754237288135, 
+    411.26429540608643, 
+    677.0466716054609, 
+    947.2609856262834, 
+    1220.883038585209, 
+    1495.7381453634084, 
+    1766.8793399465853, 
+    2037.4057517084282
+  ], 
+  "horizontalRegistrationOffsets": [
+    0.0, 
+    11.621610645868168, 
+    15.568473492333123, 
+    14.197010953060271, 
+    8.736261688063859, 
+    1.7958478399387785, 
+    -0.6878713741591127, 
+    -2.4338512026561148
+  ], 
+  "rootRegistration": "Horizontal translation only: bird fixed head/body root, mole upper torso silhouette, snail rigid shell/load. Rabbit lean and every vertical trajectory are preserved.", 
+  "sharedScale": 1.2, 
+  "sourcePitch": 269.07142857142856, 
+  "sourceAnchor": [
+    117.5, 
+    361.0
+  ], 
+  "destinationAnchor": [
+    149.5, 
+    172.5
+  ], 
+  "commonRegistrationShift": [
+    0, 
+    0
+  ], 
+  "unionBeforeShift": [
+    25.30000000000001, 
+    74.10000000000001, 
+    338.0398680959175, 
+    276.9
+  ], 
+  "pivotShiftedBySameTranslation": true, 
+  "perFrameScale": false, 
+  "perFrameTightRecenter": false, 
+  "drawnAirborneYRetained": false
+}

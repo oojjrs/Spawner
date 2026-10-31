@@ -1,0 +1,30 @@
+{
+  "image": "DesignAssets/Animations/CreatureWalkV2/talon-owl/walk.webp",
+  "frameSize": 432,
+  "columns": 8,
+  "durationsMs": [
+    70,
+    80,
+    80,
+    85,
+    80,
+    70,
+    70,
+    65
+  ],
+  "loop": true,
+  "pivotX": 205,
+  "pivotY": 288,
+  "cyclesPerCell": 3,
+  "method": "Eight full-cycle image_gen drawings of complete extended-wing flight. Roomy raw grid separated as whole drawings, shared physical scale, face landmark registration and expanded canvas retain body size and full wingspan.",
+  "frameCount": 8,
+  "durationMs": 600,
+  "source": "walk-raw-strip.png",
+  "editableDrawings": "Drawings/",
+  "normalization": "registration.json",
+  "renderer": "render.py",
+  "preview": "preview.webp",
+  "thumbnail": "thumb.webp",
+  "viewSize": 256,
+  "scale": 2
+}

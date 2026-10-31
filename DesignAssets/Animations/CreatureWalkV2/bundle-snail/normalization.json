@@ -1,0 +1,130 @@
+{
+  "workflow": "Official Game Studio sprite-pipeline full-strip generation, 2D alpha-component extraction to prevent neighboring-pose cuts, one shared body scale and fixed source pitch/anchor. No per-frame tight fit or deformation.", 
+  "sourceObjects": [
+    {
+      "id": 1, 
+      "bbox": [
+        20, 
+        269, 
+        274, 
+        456
+      ], 
+      "area": 29420
+    }, 
+    {
+      "id": 2, 
+      "bbox": [
+        293, 
+        269, 
+        564, 
+        452
+      ], 
+      "area": 30587
+    }, 
+    {
+      "id": 3, 
+      "bbox": [
+        581, 
+        269, 
+        849, 
+        458
+      ], 
+      "area": 30998
+    }, 
+    {
+      "id": 4, 
+      "bbox": [
+        862, 
+        269, 
+        1073, 
+        456
+      ], 
+      "area": 27430
+    }, 
+    {
+      "id": 5, 
+      "bbox": [
+        1095, 
+        269, 
+        1336, 
+        457
+      ], 
+      "area": 30506
+    }, 
+    {
+      "id": 6, 
+      "bbox": [
+        1355, 
+        269, 
+        1570, 
+        457
+      ], 
+      "area": 26167
+    }, 
+    {
+      "id": 7, 
+      "bbox": [
+        1593, 
+        269, 
+        1872, 
+        457
+      ], 
+      "area": 30608
+    }, 
+    {
+      "id": 8, 
+      "bbox": [
+        1893, 
+        269, 
+        2151, 
+        456
+      ], 
+      "area": 29706
+    }
+  ], 
+  "sourceRootX": [
+    173.2248952851466, 
+    462.6146503423947, 
+    745.169778594021, 
+    993.3480510900682, 
+    1252.6869977333608, 
+    1487.5678240016682, 
+    1759.087077781221, 
+    2048.0293525484794
+  ], 
+  "horizontalRegistrationOffsets": [
+    0.0, 
+    -23.90628598594367, 
+    -40.22452173887412, 
+    -18.376327086004178, 
+    -8.919117116296393, 
+    27.692383978395007, 
+    23.62657578894747, 
+    0.2170986288980009
+  ], 
+  "rootRegistration": "Horizontal translation only: bird fixed head/body root, mole upper torso silhouette, snail rigid shell/load. Rabbit lean and every vertical trajectory are preserved.", 
+  "sharedScale": 1.110236220472441, 
+  "sourcePitch": 267.85714285714283, 
+  "sourceAnchor": [
+    147.0, 
+    456
+  ], 
+  "destinationAnchor": [
+    201.0, 
+    310
+  ], 
+  "commonRegistrationShift": [
+    0, 
+    0
+  ], 
+  "unionBeforeShift": [
+    40.693264070299335, 
+    101.2755905511811, 
+    356.58608085081505, 
+    312.2204724409449
+  ], 
+  "pivotShiftedBySameTranslation": true, 
+  "perFrameScale": false, 
+  "perFrameTightRecenter": false, 
+  "drawnAirborneYRetained": false
+}

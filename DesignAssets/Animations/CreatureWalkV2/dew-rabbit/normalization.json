@@ -1,0 +1,114 @@
+{
+  "workflow": "Official Game Studio sprite-pipeline full-strip generation, 2D alpha-component extraction to prevent neighboring-pose cuts, one shared body scale and fixed source pitch/anchor. No per-frame tight fit or deformation.", 
+  "sourceObjects": [
+    {
+      "id": 6, 
+      "bbox": [
+        27, 
+        310, 
+        284, 
+        581
+      ], 
+      "area": 42637
+    }, 
+    {
+      "id": 4, 
+      "bbox": [
+        285, 
+        279, 
+        555, 
+        580
+      ], 
+      "area": 49475
+    }, 
+    {
+      "id": 2, 
+      "bbox": [
+        546, 
+        182, 
+        784, 
+        531
+      ], 
+      "area": 49009
+    }, 
+    {
+      "id": 1, 
+      "bbox": [
+        798, 
+        167, 
+        1067, 
+        439
+      ], 
+      "area": 44369
+    }, 
+    {
+      "id": 3, 
+      "bbox": [
+        1060, 
+        239, 
+        1323, 
+        532
+      ], 
+      "area": 48771
+    }, 
+    {
+      "id": 8, 
+      "bbox": [
+        1344, 
+        319, 
+        1597, 
+        589
+      ], 
+      "area": 46167
+    }, 
+    {
+      "id": 5, 
+      "bbox": [
+        1611, 
+        308, 
+        1886, 
+        585
+      ], 
+      "area": 46200
+    }, 
+    {
+      "id": 7, 
+      "bbox": [
+        1908, 
+        310, 
+        2156, 
+        584
+      ], 
+      "area": 40403
+    }
+  ], 
+  "sourceRootX": [], 
+  "horizontalRegistrationOffsets": [], 
+  "rootRegistration": "Horizontal translation only: bird fixed head/body root, mole upper torso silhouette, snail rigid shell/load. Rabbit lean and every vertical trajectory are preserved.", 
+  "sharedScale": 0.9824561403508771, 
+  "sourcePitch": 268.92857142857144, 
+  "sourceAnchor": [
+    123.0, 
+    458.5
+  ], 
+  "destinationAnchor": [
+    185.5, 
+    217.5
+  ], 
+  "commonRegistrationShift": [
+    8, 
+    78.08771929824562
+  ], 
+  "outputPadding": 8, 
+  "logicalFrameSize": 417, 
+  "unionBeforeShift": [
+    48.236842105263094, 
+    -69.86842105263156, 
+    346.6929824561403, 
+    346.6929824561403
+  ], 
+  "pivotShiftedBySameTranslation": true, 
+  "perFrameScale": false, 
+  "perFrameTightRecenter": false, 
+  "drawnAirborneYRetained": true
+}

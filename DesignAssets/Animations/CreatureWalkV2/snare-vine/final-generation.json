@@ -1,0 +1,10 @@
+{
+  "provider": "built-in image_gen",
+  "workflow": "OpenAI Game Studio sprite-pipeline",
+  "seed": "seed.png",
+  "editCanvas": "edit-canvas.png",
+  "prompt": "Edit this approved cute garden character into one six-frame walking-cycle sprite sheet. Keep the same round green body, two black eyes, leafy crown and curved green stem. The little leaf feet reach forward, plant, pull the body ahead, recover, then repeat. Same camera, same character size, transparent background, no scenery or text. Draw every frame together in a roomy 3 by 2 grid.",
+  "result": "walk-raw-grid.png",
+  "outcome": "succeeded",
+  "transparency": "RGBA source alpha0..254; six foreground components extracted at alpha128 with narrow edge padding; source preserved."
+}

@@ -1,0 +1,23 @@
+{
+  "pivot": [
+    180.8125,
+    304.5625
+  ],
+  "durationsMs": [
+    220,
+    220,
+    260,
+    220,
+    220,
+    260
+  ],
+  "cyclesPerCell": 1,
+  "phases": [
+    "extended-sole",
+    "front-reach",
+    "rear-foot-contract",
+    "shell-draw-forward",
+    "rear-lengthen",
+    "extended-support"
+  ]
+}

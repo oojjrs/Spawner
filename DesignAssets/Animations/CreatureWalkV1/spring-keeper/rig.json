@@ -1,0 +1,88 @@
+{
+  "size": 384,
+  "pivot": [
+    157.5,
+    307.5
+  ],
+  "duration": 1000,
+  "source": "UniqueIdleV4/spring-keeper/idle.webp",
+  "gait": "bird-step",
+  "legs": [
+    [
+      [
+        79,
+        178
+      ],
+      [
+        79,
+        195
+      ],
+      22,
+      0
+    ],
+    [
+      [
+        110,
+        180
+      ],
+      [
+        109,
+        202
+      ],
+      23,
+      0.5
+    ]
+  ],
+  "tail": [
+    [
+      151,
+      157
+    ],
+    0.028
+  ],
+  "method": "Original idle neutral artwork on a locally weighted mesh: alternating planted toe sweep and raised return, with a feather-chain follow-through. The head and torso retain their registered proportions.",
+  "format": "spawner-local-continuous-mesh-v1",
+  "sourceReference": "DesignAssets/Animations/UniqueIdleV4/spring-keeper/idle.webp",
+  "rootMotion": false,
+  "mesh": {
+    "spacing": 8,
+    "topology": "Regular square grid with two triangles per cell; inverse sampling uses the continuous limb weight field."
+  },
+  "bones": [
+    {
+      "name": "root",
+      "pivot": [
+        157.5,
+        307.5
+      ]
+    },
+    {
+      "name": "leg-0",
+      "parent": "root",
+      "joint": [
+        118.5,
+        267.0
+      ],
+      "toe": [
+        118.5,
+        292.5
+      ],
+      "phase": 0,
+      "weight": "Source/leg-0-weight.png"
+    },
+    {
+      "name": "leg-1",
+      "parent": "root",
+      "joint": [
+        165.0,
+        270.0
+      ],
+      "toe": [
+        163.5,
+        303.0
+      ],
+      "phase": 0.5,
+      "weight": "Source/leg-1-weight.png"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "pivot": [
+    128,
+    224
+  ],
+  "durationsMs": [
+    110,
+    100,
+    100,
+    110,
+    100,
+    100
+  ],
+  "cyclesPerCell": 2.5,
+  "phases": [
+    "tripod-a-support",
+    "tripod-b-lift",
+    "tripod-b-reach",
+    "tripod-b-support",
+    "tripod-a-lift",
+    "tripod-a-reach"
+  ],
+  "stableJawFrame": 5,
+  "stableJawPolygon": [
+    [
+      18,
+      151
+    ],
+    [
+      39,
+      144
+    ],
+    [
+      78,
+      149
+    ],
+    [
+      111,
+      161
+    ],
+    [
+      111,
+      186
+    ],
+    [
+      99,
+      204
+    ],
+    [
+      83,
+      218
+    ],
+    [
+      62,
+      222
+    ],
+    [
+      48,
+      215
+    ],
+    [
+      21,
+      198
+    ],
+    [
+      16,
+      175
+    ]
+  ]
+}

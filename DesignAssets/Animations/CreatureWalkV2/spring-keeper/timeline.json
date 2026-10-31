@@ -1,0 +1,88 @@
+{
+  "durationMs": 1280,
+  "phases": [
+    "grounded",
+    "open-wings",
+    "push-off",
+    "rise",
+    "wings-up",
+    "downstroke-start",
+    "power-stroke",
+    "wings-down",
+    "recovery-back",
+    "recovery-up",
+    "wings-high",
+    "loop-bridge",
+    "brake",
+    "extend-feet",
+    "touchdown",
+    "fold-wings"
+  ],
+  "durationsMs": [
+    60,
+    60,
+    80,
+    120,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80
+  ],
+  "liftPixels": [
+    0,
+    8,
+    28,
+    45,
+    45,
+    47,
+    49,
+    48,
+    45,
+    43,
+    42,
+    44,
+    45,
+    28,
+    8,
+    0
+  ],
+  "sourceFrameOrder": [
+    8,
+    9,
+    10,
+    11,
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    12,
+    13,
+    14,
+    15
+  ],
+  "takeoff": [
+    0,
+    4
+  ],
+  "flight": [
+    4,
+    12
+  ],
+  "landing": [
+    12,
+    16
+  ],
+  "normalization": "Source/flight-v2/normalization.json"
+}
