@@ -1,0 +1,81 @@
+{
+  "character": "spiny-back-leader",
+  "action": "death",
+  "status": "user-approved-keyposes",
+  "provider": "built-in image_gen",
+  "designReference": "DesignAssets/CreatureConcepts/v3/spiny-back-leader.png",
+  "registeredNeutralReference": "DesignAssets/Animations/CreatureDeathV6/spiny-back-leader/Source/reference.png",
+  "motionReference": "DesignAssets/Planning/Animations/BeetleDeath/death-runtime-v2.webp",
+  "prompt": "Use case: identity-preserve. Production artwork for a 2D game sprite death animation, not a concept sheet or decorative preview.\nInput image 1 is the authoritative SPINY-BACK LEADER character design in its exact neutral stance. Input image 2 is a different smaller beetle, supplied ONLY as motion reference: legs buckle, then forward-collapse flat to ground, eyes closed, no roll.\nCreate TWO NEW complete hand-painted sprite key cels of the LEADER from image 1, in one horizontal row of two equal square cells, transparent RGBA background. These are actual source cels to use in animation after approval.\nKeep the exact identity of image 1: broad red/crimson scarab shell, thick clean dark ink outline, glossy warm hand-painted highlights, exactly three ivory dorsal horns, a huge curved central horn whose tip curves to image-right, two short side horns, the jagged pale ochre diagonal scar across the near shell plate, same two large ivory mandibles with brown wear at the lower tip of the near mandible, same dark purple segmented leg tips and red upper legs. Same front-left three-quarter camera with head at lower-left. Same anatomy, rigid shell volume, horn lengths, colors, texture and lighting. Do not make the central horn upright like the other beetle.\nEach square cel uses the same scale and registration as image 1: shell mass/body location unchanged in x; invisible ground line near 88% cell height, about 10% margin at left/right of character, feet/mandibles touch that same ground line. Body changes height only through physical leg folding and a small forward pitch. Do not independently fit/scale each pose, no shrinking, flattening of the hard shell, rubber deformation, floating or jumping.\nLEFT CEL: leg support failing, a transition from standing to collapse. All legs bend deeper at the real joints and spread outward, shell lowers about 7% of cell height, head droops toward the ground, amber eyes nearly close under heavy lids. Pincers relax downward without snapping or attacking. Hind legs still partly support the body. Heavy, anatomically connected pose.\nRIGHT CEL: settled final dead pose. Continue the same failure: legs fold and splay fully to the sides with dark tips lying slack on the ground, no legs planted vertically or lifting shell. Shell lowered further, still solid and full size, slight forward pitch. Head and ivory pincers rest on the invisible ground. Both eyes completely closed with no bright pupils. A clear low heavy lifeless silhouette, matching the final pose's motion direction in image 2, with the LEADER's big curved ivory horn and tan scar fully preserved. Keep shell upright, do not roll onto flank, do not flip onto back. No recovery.\nBoth entire creatures fit inside their own cells with transparent gutters; all horns, feet and mandibles fully visible. No text, labels, numbers, borders, arrows, ground, cast shadow, particles, dust, action lines, damage overlay, blood, gore, extra creatures, redesigned parts, faded character or semitransparent body. Genuine alpha transparency. Crisp polished source sprite artwork matching image 1. Landscape output, two equal square cells left to right.",
+  "generatedSource": "Source/death-keyposes-generated.png",
+  "sourceSize": [
+    1774,
+    887
+  ],
+  "keyCanvas": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "sharedGeneratedScale": 0.55,
+  "keys": [
+    {
+      "file": "Keys/key-00-neutral.png",
+      "source": "registeredNeutralReference",
+      "registration": "unchanged"
+    },
+    {
+      "file": "Keys/key-01-buckle.png",
+      "sourceCell": [
+        0,
+        0,
+        887,
+        887
+      ],
+      "translation": [
+        19,
+        43
+      ],
+      "phase": "legs buckle; shell lowers; eyelids droop"
+    },
+    {
+      "file": "Keys/key-02-collapse.png",
+      "sourceCell": [
+        887,
+        0,
+        887,
+        887
+      ],
+      "translation": [
+        19,
+        38
+      ],
+      "phase": "forward collapse; legs slack; eyes closed; final dead hold"
+    }
+  ],
+  "productionState": {
+    "partExtraction": false,
+    "rigging": false,
+    "inbetweening": false,
+    "runtimeReplacement": false
+  },
+  "plannedMotion": {
+    "direction": "forward and downward with no side roll",
+    "rootMotion": false,
+    "characterOpacity": 1
+  },
+  "reviewImage": "keyposes-review.png",
+  "transparentSheet": "keyposes.png",
+  "approval": {
+    "date": "2026-10-31",
+    "userMessage": "흠, 좋아. 해봐",
+    "keys": [
+      0,
+      1,
+      2
+    ]
+  }
+}
