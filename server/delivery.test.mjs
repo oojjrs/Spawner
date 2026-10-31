@@ -172,7 +172,7 @@ test("사망한 운반자의 재료는 같은 종류로 떨어지고 고기량�
   assert.equal(nodes.filter(node => node.resourceType === "iron-ore").reduce((sum, node) => sum + node.amount, 0), 3);
   const corpse = nodes.find(node => node.kind === "corpse");
   assert.equal(corpse.resourceType, "meat");
-  assert.equal(corpse.amount, Math.max(1, Math.floor(f.agent.cost / 2)));
+  assert.equal(corpse.amount, 1);
   assert.equal(f.game.snapshot().evolutionPoints, points);
   assert.equal(f.game.snapshot().colonyFood, 0);
 });

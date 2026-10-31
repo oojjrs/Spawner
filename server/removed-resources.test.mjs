@@ -1,12 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { attributeCounts } from "./attributes.mjs";
+import { ATTRIBUTES, attributeCounts } from "./attributes.mjs";
 import { REMOVED_RESOURCE_TYPES, RESOURCE_TYPES, FOOD_HABITATS, resourceDefinition, populateResourceNodes, canHarvestResource } from "./resources.mjs";
 import { RESOURCE_HARVEST_ANIMATIONS } from "../client/harvest-assets.mjs";
 import { generateWorld } from "./world.mjs";
 import { createRoom, saveRoom, restoreRoom } from "../client/room.mjs";
 
-const retired = ["tree-fruit", "berry-bush", "seed-pods", "root-bulbs", "nutrient-moss"];
+const retired = ["honey-mushrooms", "tree-fruit", "berry-bush", "seed-pods", "root-bulbs", "nutrient-moss"];
 
 test("기획서에서 삭제한 식물 자원은 목록·채집·애니메이션에서 제외한다", () => {
   for (const key of retired) {
@@ -17,7 +17,7 @@ test("기획서에서 삭제한 식물 자원은 목록·채집·애니메이션
     assert.equal(canHarvestResource({ resourceType: key }, {}, attributeCounts(["strength", "strength"])), false);
   }
   for (const definition of RESOURCE_TYPES) {
-    assert.ok(definition.requirements.every(key => ["antenna", "strength", "butchery", "lifespan", "feet"].includes(key)));
+    assert.ok(definition.requirements.every(key => ATTRIBUTES.some(attribute => attribute.key === key)));
   }
 });
 

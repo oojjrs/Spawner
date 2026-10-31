@@ -18,12 +18,13 @@ function fixture(points) {
 test("생존 유닛이 없고 기본 탄생 비용도 없으면 잔여 포인트와 사체에 관계없이 엔딩이다", () => {
   for (const points of [0, 2]) {
     const game = fixture(points);
+    const bornCount = game.agents.length;
     for (const agent of [...game.agents]) game.receiveDamage(agent, 1000);
     game.prepare(90);
     const ending = game.checkEnding();
     assert.equal(ending.reason, "extinction");
     assert.equal(ending.endedAt, 90);
-    assert.equal(ending.bornCount, 2);
+    assert.equal(ending.bornCount, bornCount);
     assert.equal(ending.evolutionPoints, points);
   }
 });

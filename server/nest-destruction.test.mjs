@@ -57,7 +57,7 @@ test("둥지 성장은 받은 피해를 유지하고 파괴된 둥지는 생산�
   assert.equal(game.snapshot().evolutionPoints, points);
   assert.equal(agent.carrying, 2);
   assert.equal(agent.health, 1);
-  assert.equal(game.agents.length, 2);
+  assert.equal(game.agents.length, 4);
 });
 
 test("파괴 상태를 저장하고 복원하며 이전 저장의 둥지는 해당 레벨의 최대 체력으로 복원한다", () => {
@@ -123,7 +123,7 @@ test("군락 유닛도 다른 군락의 둥지에 접근해 정해진 공격 프
   assert.equal(enemy.nest.health, 95);
 });
 
-test("대상 종류가 없는 이전 공격 저장도 기존 유닛에게 피해를 전달한다", () => {
+test("대상 종류가 없는 이전 유닛 공격은 취소하고 공통 근접전으로 다시 판단한다", () => {
   const { game, room } = fixture();
   game.agents.splice(1);
   const agent = game.agents[0];
@@ -134,7 +134,7 @@ test("대상 종류가 없는 이전 공격 저장도 기존 유닛에게 피해
     targetId: target.id, targetX: target.x, targetY: target.y, damage: 1, resolved: false, hit: false };
   game.prepare(10.3);
   game.tick(0);
-  assert.equal(target.health, 70);
-  assert.equal(agent.health, 70);
-  assert.equal(agent.attack.hit, true);
+  assert.equal(target.health, 100);
+  assert.equal(agent.health, 100);
+  assert.notEqual(agent.attack?.hit, true);
 });

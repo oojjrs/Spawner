@@ -16,15 +16,17 @@ function fixture() {
 
 test("성장 레벨과 관계없이 생성할 때 넣은 모든 속성을 유지한다", () => {
   const agent = { bornAt: 0, slots: ["butchery", "strength", "feet", "lifespan", "antenna"], growthActivity: 0 };
-  for (const [seconds, level] of [[0,1], [35,3], [120,6], [180,7], [240,9], [405,12]]) {
-    const growth = agentGrowth(agent, seconds);
+  for (const [experience, level] of [[0,1], [15,2], [33,3], [105,6], [135,7], [204,9], [285,11]]) {
+    agent.growthActivity = experience;
+    const growth = agentGrowth(agent, 0);
     assert.equal(growth.level, level);
     assert.deepEqual(growth.activeSlots, agent.slots);
   }
+  agent.growthActivity = 0;
+  assert.equal(agentGrowth(agent, 405).level, 1);
   agent.growthActivity = 100000;
-  assert.equal(agentGrowth(agent, 0).level, 1);
-  assert.equal(agentGrowth(agent, 180).level, 9);
-  assert.equal(agentGrowth(agent, 180).experience, 252);
+  assert.deepEqual(agentGrowth(agent, 0), agentGrowth(agent, 180));
+  assert.equal(agentGrowth(agent, 180).experience, 100000);
 });
 
 test("새 개체는 모든 속성을 즉시 적용하고 성장과 저장·복원 후에도 설계 순서를 보존한다", () => {
@@ -37,6 +39,7 @@ test("새 개체는 모든 속성을 즉시 적용하고 성장과 저장·복�
   const agent = game.agents.find(candidate => candidate.id === result.agentId);
   assert.deepEqual(agent.activeSlots, ["butchery", "strength", "feet"]);
   assert.equal(agent.attributes.strength, 1);
+  agent.growthActivity = 33;
   game.prepare(35);
   game.tick(0);
   assert.equal(agent.level, 3);
@@ -46,6 +49,7 @@ test("새 개체는 모든 속성을 즉시 적용하고 성장과 저장·복�
   const restored = game.agents.find(candidate => candidate.id === result.agentId);
   assert.deepEqual(restored.slots, ["butchery", "strength", "feet"]);
   assert.deepEqual(restored.activeSlots, ["butchery", "strength", "feet"]);
+  restored.growthActivity = 105;
   game.prepare(120);
   game.tick(0);
   assert.equal(restored.level, 6);
@@ -73,7 +77,7 @@ test("자연사한 개체는 이름과 원래 ID를 가진 사체로 보존되�
   assert.equal(game.snapshot().corpses.length, 0);
 });
 
-test("채집은 부패 시각을 연장하지 않고 완전히 채집한 사체는 목록에서도 사라진다", () => {
+test("일부 양분은 사체와 함께 남고 모두 회수하면 사체도 사라진다", () => {
   const { game, environment } = fixture();
   game.prepare(180);
   game.tick(0);
@@ -87,19 +91,21 @@ test("채집은 부패 시각을 연장하지 않고 완전히 채집한 사체�
   game.prepare(201);
   game.tick(0);
   assert.equal(game.snapshot().corpses.length, 0);
+  assert.ok(![...environment.food.values()].some(cell => cell.id === corpse.id));
 });
 
-test("저장한 사체의 부패 시각은 복원 후에도 이어진다", () => {
+test("회수 완료한 사체는 저장과 복원 후에도 다시 나타나지 않는다", () => {
   const original = fixture();
   original.game.prepare(180);
   original.game.tick(0);
+  [...original.environment.food.values()].find(cell => cell.kind === "corpse").amount = 0;
   const saved = original.game.save();
   const restored = fixture();
   for (const [key, value] of original.environment.food) restored.environment.food.set(key, structuredClone(value));
   restored.game.restore(saved);
   restored.game.prepare(220);
   restored.game.tick(0);
-  assert.equal(restored.game.snapshot().corpses[0].decaysAt, 480);
+  assert.equal(restored.game.snapshot().corpses.length, 0);
   restored.game.prepare(480);
   restored.game.tick(0);
   assert.equal(restored.game.snapshot().corpses.length, 0);

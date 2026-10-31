@@ -62,9 +62,10 @@ test("비행 이동 방식과 비행 종은 산지 감속을 받지 않는다", 
 
 test("지상 개체는 빠른 평지 우회로를 고르고 비행 개체는 산지를 가로지른다", () => {
   const size = 7;
-  const agent = { x: 0, y: 1, carrying: 0, health: 12, stats: { speed: 1, capacity: 2, resistance: 1 },
+  const agent = { x: 0, y: 1, carrying: 0, health: 12, slots: [], stats: { speed: 1, capacity: 2, resistance: 1 },
     personality: { boldness: 0.5 } };
-  const state = { explored: new Set(Array.from({ length: size * size }, (_, index) => index)) };
+  const state = { simSeconds: 0, evolutionPoints: 20, colonyFood: 0, nestLevel: 1, agents: [agent],
+    explored: new Set(Array.from({ length: size * size }, (_, index) => index)) };
   const ai = createUtilityAI({ state, size, homeCells: () => [], deliveryCells: () => [],
     walkable: (x, y) => y >= 0 && y <= 2, hazardAt: () => 0, enemies: () => [], synergy: () => false,
     terrainAt: (x, y) => y === 1 && x > 0 && x < 6 ? 6 : 4, canHarvest: () => true });

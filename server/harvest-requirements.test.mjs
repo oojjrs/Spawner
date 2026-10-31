@@ -7,10 +7,9 @@ import { createGame } from "./game.mjs";
 import { generateWorld } from "./world.mjs";
 
 const requirements = {
-  clay: [], tree: [], dew: [], pebbles: [], sand: [], carapace: ["strength"],
-  "grass-fiber": ["strength"], meat: ["butchery"],
-  "iron-ore": ["strength", "strength"], "copper-ore": ["strength", "strength"],
-  quartz: ["strength", "strength"]
+  clay: [], tree: [], dew: [], pebbles: [], sand: ["excavation"], carapace: ["piercing"],
+  "grass-fiber": ["blade"], meat: ["butchery"],
+  "iron-ore": ["piercing"], "copper-ore": ["piercing"], quartz: ["piercing"]
 };
 const tribes = { clay: "bean", tree: "spore", dew: "spring", pebbles: "pebble" };
 
@@ -48,7 +47,7 @@ function advanceTo(fixture, seconds) {
   fixture.game.tick(elapsed);
 }
 
-test("채집 가능한 먹이·자원의 필요 속성을 승인된 조합과 개수대로 검사한다", () => {
+test("채집 가능한 먹이·자원의 필요 속성을 자원 묶음대로 검사한다", () => {
   const world = { hazards: new Uint8Array(320 * 320) };
   assert.equal(RESOURCE_TYPES.filter(entry => !entry.harvestLocked).length, Object.keys(requirements).length);
   assert.equal(resourceDefinition("honey-mushrooms").harvestLocked, true);

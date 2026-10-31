@@ -41,29 +41,50 @@ function advance(fixture, seconds) {
 
 test("네 종족의 기본 먹이만 채집 가능하며 다른 종족 먹이는 기존 속성으로 해금하지 않는다", () => {
   for (const generationVersion of [undefined, 10, 11, 15]) for (const [tribe, ownFood] of foods) {
-    for (const [, resourceType] of foods) for (const attributes of [{}, { antenna: 2, strength: 2, butchery: 1, feet: 2 }]) {
+    for (const [, resourceType] of foods) for (const attributes of [{}, { antenna: 2, strength: 2, feet: 2 }]) {
       const world = { generationVersion };
       assert.equal(canHarvestResource({ resourceType }, world, attributes, tribe), resourceType === ownFood, tribe + ":" + resourceType);
-      assert.deepEqual(resourceHarvestRequirements({ resourceType }, world, tribe), resourceType === ownFood ? {} : null);
+      const attribute = resourceType === "tree" ? "blade" : resourceType === "dew" ? "butchery" : resourceType === "pebbles" ? "piercing" : "excavation";
+      const requirements = resourceHarvestRequirements({ resourceType }, world, tribe);
+      if (resourceType === ownFood) assert.deepEqual(requirements, {});
+      else {
+        assert.equal(requirements[attribute], 1);
+        assert.equal(canHarvestResource({ resourceType }, world, { [attribute]: 1 }, tribe), true);
+      }
     }
   }
   assert.equal(canHarvestResource({ resourceType: "meat" }, { generationVersion: 15 }, {}, "bean"), false);
   assert.equal(canHarvestResource({ resourceType: "meat" }, { generationVersion: 15 }, { butchery: 1 }, "bean"), true);
 });
 
+
+function assertMeatDelivery(f, ownFood) {
+  for (const [key, cell] of f.environment.food) if ([ownFood, "dew"].includes(cell.resourceType)) f.environment.food.delete(key);
+  const meat = [...f.environment.food.values()].find(cell => cell.resourceType === "meat");
+  const others = [...f.environment.food.values()].filter(cell => cell !== meat).map(cell => [cell, cell.amount]);
+  const before = f.game.snapshot();
+  advance(f, .25);
+  const candidates = f.game.agents[0].utility.scores.filter(candidate => candidate.action === "collect");
+  assert.ok(candidates.length > 0);
+  assert.ok(candidates.every(candidate => candidate.key === meat.x + "," + meat.y));
+  advance(f, 80);
+  const delivered = f.game.snapshot();
+  assert.ok(meat.amount < 12);
+  assert.ok(delivered.resourceInventory.meat > 0);
+  assert.equal(delivered.evolutionPoints - before.evolutionPoints, delivered.resourceInventory.meat);
+  assert.equal(delivered.colonyFood - before.colonyFood, delivered.resourceInventory.meat);
+  for (const [cell, amount] of others) assert.equal(cell.amount, amount, cell.resourceType);
+  f.game.restore(f.game.save());
+  const restored = f.game.snapshot();
+  assert.equal(restored.resourceInventory.meat, delivered.resourceInventory.meat);
+  assert.equal(restored.evolutionPoints, delivered.evolutionPoints);
+  assert.equal(restored.colonyFood, delivered.colonyFood);
+}
+
 for (const [tribe, ownFood] of foods) {
-  test(tribe + "은 분해를 넣으면 고기를 자동 채집하고 운반·납품한다", () => {
+  test(tribe + "은 흡수 속성으로 양분을 채집해 저장하고 진화 포인트를 얻는다", () => {
     const f = fixture(tribe, null, createGame, ["antenna", "strength", "butchery"]);
-    for (const [key, cell] of f.environment.food) if (cell.resourceType === ownFood) f.environment.food.delete(key);
-    const meat = [...f.environment.food.values()].find(cell => cell.resourceType === "meat");
-    advance(f, .25);
-    const candidates = f.game.agents[0].utility.scores.filter(candidate => candidate.action === "collect");
-    assert.ok(candidates.length > 0);
-    assert.ok(candidates.every(candidate => candidate.key === meat.x + "," + meat.y));
-    advance(f, 80);
-    assert.ok(meat.amount < 12);
-    assert.ok(f.game.snapshot().resourceInventory.meat > 0);
-    assert.equal(f.game.snapshot().evolutionPoints, 20);
+    assertMeatDelivery(f, ownFood);
   });
 
   test(tribe + "은 더 가까운 다른 먹이·재료 대신 자기 먹이만 자동 채집한다", () => {
@@ -123,9 +144,7 @@ test("브라우저 번들과 내장 워커에도 동일한 종족별 채집 규�
     assert.ok(candidates.length > 0);
     assert.ok(candidates.every(candidate => candidate.key === "47,42"));
     const butcher = fixture(tribe, null, context.createGame, ["antenna", "strength", "butchery"]);
-    for (const [key, cell] of butcher.environment.food) if (cell.resourceType === ownFood) butcher.environment.food.delete(key);
-    advance(butcher, 80);
-    assert.ok(butcher.game.snapshot().resourceInventory.meat > 0, tribe);
+    assertMeatDelivery(butcher, ownFood);
   }
 });
 

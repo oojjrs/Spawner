@@ -14,10 +14,12 @@ function fixture(terrain, kind, slots) {
   const game = createGame(environment, colony);
   environment.games.set("test", game);
   const saved = JSON.parse(game.save());
+  saved.state.agents = [];
   saved.state.nestLevel = 4;
   saved.state.evolutionPoints = 20;
   game.restore(JSON.stringify(saved));
-  game.command({ type: "design", name: "채집 확인", templateId: null, slots, birth: true });
+  const designed = game.command({ type: "design", name: "채집 확인", templateId: null, slots, birth: true });
+  assert.ok(designed.agentId);
   return { game, environment, food };
 }
 
@@ -67,7 +69,7 @@ test("무속성 새싹콩은 비옥토만 자동 채집하고 다른 먹이·재
   assert.equal(canHarvestResource({ x: 43, y: 42, terrain: "forest", resourceType: "honey-mushrooms" }, world), false);
   for (const definition of RESOURCE_TYPES) {
     assert.equal(canHarvestResource({ x: 43, y: 42, terrain: "grassland", resourceType: definition.key }, world),
-      ["clay", "sand"].includes(definition.key));
+      definition.key === "clay");
     if (definition.key === "clay") continue;
     const f = fixture("grassland", undefined, []);
     f.food.resourceType = definition.key;

@@ -1,5 +1,5 @@
 export const AGENT_BIRTH_DURATION = 3.85;
-export const SPORE_BIRTH_DURATIONS = Object.freeze([180,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,700]);
+export const SPORE_BIRTH_DURATIONS = Object.freeze([180,80,80,80,80,80,80,80,80,160,160,160,160,160,160,160,160,80,80,80,80,700]);
 export const SPORE_BIRTH_DURATION = SPORE_BIRTH_DURATIONS.reduce((sum, duration) => sum + duration, 0) / 1000;
 export const SPRING_BIRTH_DURATIONS = Object.freeze([130, 120, 100, 100, 80, 260, 80, 90, 90, 100, 100, 130, 410]);
 export const SPRING_BIRTH_DURATION = SPRING_BIRTH_DURATIONS.reduce((sum, duration) => sum + duration, 0) / 1000;

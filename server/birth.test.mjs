@@ -72,7 +72,7 @@ test("씨앗은 두 번 굴러 튄 뒤 점프하고 착지해야 새싹콩이 �
 
 test("템플릿 생성만 씨앗 연출을 거치고 완전히 착지하기 전에는 이동하지 않는다", () => {
   const { game } = fixture();
-  assert.equal(game.agents.length, 2);
+  assert.equal(game.agents.length, 4);
   assert.ok(game.agents.every(agent => !agent.birth));
   const result = game.command({ type: "design", templateId: null, name: "발아 시험", slots: [], birth: true });
   const agent = game.agents.find(agent => agent.id === result.agentId);

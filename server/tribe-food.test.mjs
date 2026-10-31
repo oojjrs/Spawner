@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createGame } from "./game.mjs";
+import { createUnitIndex } from "./unit-index.mjs";
 import { isTribeFood, resourceDefinition, canHarvestResource, populateColonyFood } from "./resources.mjs";
 import { createRoom, chooseRoomTribe, saveRoom, restoreRoom } from "../client/room.mjs";
 import { RESOURCE_HARVEST_ANIMATIONS } from "../client/harvest-assets.mjs";
@@ -15,11 +16,12 @@ function fixture(tribe) {
   return { game, environment };
 }
 
-function deliver(resourceType, points, tribe) {
+function deliver(resourceType, points, tribe, inventory, indexed) {
   const result = fixture(tribe);
   const saved = JSON.parse(result.game.save());
   saved.state.agents.splice(1);
   saved.state.evolutionPoints = points;
+  if (inventory) saved.state.resourceInventory = inventory;
   Object.assign(saved.state.agents[0], { x: 40, y: 40, renderFromX: 40, renderFromY: 40,
     carrying: 2, carryingType: resourceType, mode: "unload", unloadReady: 120, birth: null, bornAt: 0,
     moveDuration: 0, moveStartedAt: 0, decisionPending: null, nextDecisionAt: 1000,
@@ -27,9 +29,66 @@ function deliver(resourceType, points, tribe) {
   result.game.restore(JSON.stringify(saved));
   result.environment.simSeconds = 120.1;
   result.game.prepare(120.1);
-  result.game.tick(0.1);
+  if (indexed) result.environment.unitIndex = createUnitIndex(result.environment);
+  try { result.game.tick(0.1); }
+  finally { result.environment.unitIndex = null; }
   return result.game;
 }
+
+function queuedDelivery(count) {
+  const result = fixture("bean"), saved = JSON.parse(result.game.save());
+  saved.state.agents.splice(count);
+  saved.state.evolutionPoints = 100;
+  saved.state.resourceInventory = { tree: 198 };
+  for (const [index, agent] of saved.state.agents.entries()) Object.assign(agent, {
+    x: 40, y: 40, renderFromX: 40, renderFromY: 40, carrying: 2, carryingType: index ? "dew" : "clay",
+    mode: index ? "unload" : "return", unloadReady: 120.3, birth: null, bornAt: 0, survivalState: "stable",
+    moveDuration: 0, moveStartedAt: 0, decisionPending: null, nextDecisionAt: 1000, returnPath: [],
+    utility: { action: "return", target: { x: 40, y: 40, key: "home" }, route: [{ x: 40, y: 40 }] }
+  });
+  result.game.restore(JSON.stringify(saved));
+  return result;
+}
+
+function deliveryTick(context, time, indexed) {
+  const elapsed = time - context.environment.simSeconds;
+  context.environment.simSeconds = time;
+  context.game.prepare(time);
+  if (indexed) context.environment.unitIndex = createUnitIndex(context.environment);
+  try { context.game.tick(elapsed); }
+  finally { context.environment.unitIndex = null; }
+}
+
+test("원재료 납품 대기는 포인트 한도 때문에 재판단하지 않고 실제 운반 수량을 표시한다", () => {
+  for (const indexed of [false, true]) {
+    const context = queuedDelivery(1), agent = context.game.agents[0], decisions = agent.decisionCount;
+    deliveryTick(context, 120.1, indexed);
+    assert.equal(agent.foodDelivery.amount, 2);
+    const arrival = agent.unloadReady;
+    deliveryTick(context, 120.2, indexed);
+    assert.equal(agent.decisionCount, decisions);
+    assert.equal(agent.unloadReady, arrival);
+    deliveryTick(context, arrival, indexed);
+    assert.equal(context.game.snapshot().resourceInventory.clay, 2);
+    assert.equal(agent.carrying, 0);
+  }
+});
+
+test("다른 개체가 창고를 채우면 캐시된 납품 대기도 다음 틱에 다시 판단한다", () => {
+  for (const indexed of [false, true]) {
+    const context = queuedDelivery(2), agent = context.game.agents[0];
+    deliveryTick(context, 120.1, indexed);
+    deliveryTick(context, 120.2, indexed);
+    const decisions = agent.decisionCount;
+    deliveryTick(context, 120.3, indexed);
+    assert.equal(context.game.snapshot().resourceInventory.dew, 2);
+    deliveryTick(context, 120.4, indexed);
+    assert.ok(agent.decisionCount > decisions);
+    assert.equal(agent.lastDecisionReason, "completed");
+    assert.equal(agent.carrying, 2);
+    assert.notEqual(agent.mode, "unload");
+  }
+});
 
 test("새싹콩의 유일한 먹이는 기본 채집 가능한 비옥토이며 버섯은 누구도 채집하지 못한다", () => {
   assert.equal(resourceDefinition("clay").name, "비옥토");
@@ -41,13 +100,39 @@ test("새싹콩의 유일한 먹이는 기본 채집 가능한 비옥토이며 �
   assert.equal(canHarvestResource({ resourceType: "honey-mushrooms" }, {}, { harvest: 2, digging: 2, strength: 2 }), false);
 });
 
-test("비옥토 납품은 먹이와 진화 포인트가 되고 한도를 넘는 적재물은 남는다", () => {
-  const game = deliver("clay", 99, "bean");
-  assert.equal(game.snapshot().evolutionPoints, 100);
-  assert.equal(game.snapshot().colonyFood, 1);
-  assert.equal(game.agents[0].carrying, 1);
-  assert.equal(game.agents[0].carryingType, "clay");
-  assert.equal(game.snapshot().resourceInventory.clay, undefined);
+test("비옥토는 원재료로 보관하고 진화 포인트의 한도만 별도로 적용한다", () => {
+  for (const indexed of [false, true]) {
+    const game = deliver("clay", 99, "bean", null, indexed), state = game.snapshot();
+    assert.equal(state.evolutionPoints, 100);
+    assert.equal(state.colonyFood, 2);
+    assert.equal(game.agents[0].carrying, 0);
+    assert.equal(game.agents[0].carryingType, null);
+    assert.equal(state.resourceInventory.clay, 2);
+  }
+});
+
+test("진화 포인트가 가득 차도 원재료 창고가 비어 있으면 예약한 시각에 납품한다", () => {
+  for (const indexed of [false, true]) {
+    const game = deliver("clay", 100, "bean", null, indexed), state = game.snapshot();
+    assert.equal(state.evolutionPoints, 100);
+    assert.equal(state.resourceInventory.clay, 2);
+    assert.equal(state.colonyFood, 2);
+    assert.equal(game.agents[0].carrying, 0);
+    assert.equal(game.agents[0].foodDelivery.arrivesAt, 120);
+    assert.equal(game.agents[0].foodDelivery.receivedAt, 120.1);
+  }
+});
+
+test("원재료 창고도 가득 차면 남은 포인트 한도만 납품하고 나머지 적재물을 보존한다", () => {
+  for (const indexed of [false, true]) {
+    const game = deliver("clay", 99, "bean", { tree: 200 }, indexed), state = game.snapshot();
+    assert.equal(state.evolutionPoints, 100);
+    assert.equal(state.colonyFood, 1);
+    assert.equal(state.resourceInventory.tree, 200);
+    assert.equal(state.resourceInventory.clay, undefined);
+    assert.equal(game.agents[0].carrying, 1);
+    assert.equal(game.agents[0].carryingType, "clay");
+  }
 });
 
 test("다른 종족의 기본 먹이는 포인트가 가득 차도 재료로 납품하고 저장 후에도 유지한다", () => {
