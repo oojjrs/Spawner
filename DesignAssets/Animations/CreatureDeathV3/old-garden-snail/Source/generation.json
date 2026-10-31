@@ -1,0 +1,24 @@
+{
+  "entries": [
+    {
+      "file": "D:\\.codex\\generated_images\\01a1838c-2114-7c61-81d7-4e2dfbb2299f\\exec-fac419c5-3401-4191-8a23-04ff83ad3c61.png",
+      "asset": "Source/key-drawings.png",
+      "prompt": "Use case: precise-object-edit. Asset type: actual production action-defining key drawings for a 2D game death animation, four complete poses in equal padded 2x2 cells, read left-right then top-bottom. Transparent RGBA, no text/grid/effects/floor/shadows. Approved reference is sole design, anatomy, pattern, palette, camera and original proportions authority. Keep same character world scale in every cell with generous margin and a common ground line, no zoom-to-fit and no body shrinking, melting or global squash. The four phases are NORMAL ALIVE NEUTRAL (fully open eyes), SUPPORT FAILING (joint articulation and center of mass losing balance), FIRST WEIGHT CONTACT (whole body reaches ground), then PASSIVE FOLLOW-THROUGH SETTLED CORPSE. Draw actual body/limb poses and overlaps; no mere head tilt or erased limbs. Preserve skull size, torso volume, appendage lengths and marking placement. Key3 and Key4 body position should be identical once contacted, only designated soft appendages finish settling. Original fine outlines and painterly shading, no gore. Exact snail: pale mint/blue-green continuous slug body, two big eye stalks, golden spiral shell with gnarled leafy tree and golden fruit/moss growing on top. Shell, spiral, every fruit, trunk and canopy are a single rigid load of unchanged shape/size/pattern. Neutral exact alive posture with eye stalks raised/open. Failing: stalks droop separately from their roots, head and forefoot visibly lose extension, soft neck folds toward shell aperture; garden/shell begins small weight settling, not elastic deformation. Contact: both eye stalks and face retract fully inside shell, most trailing foot contracts into it, whole rigid shell lowers as soft support disappears. Settled: NO exposed head, eyes, stalks, foot or flesh remains, ONLY the complete abandoned rigid golden garden shell/tree/fruit/moss rests on the original ground, no floating. Draw physiological contraction/folding into aperture, not fading, erased bits or shrinking the entire creature.",
+      "inputs": [
+        "H:\\Spawner\\DesignAssets\\CreatureConcepts\\v3\\old-garden-snail.png"
+      ],
+      "provider": "built-in image_gen"
+    },
+    {
+      "file": "D:\\.codex\\generated_images\\01a1838c-2114-7c61-81d7-4e2dfbb2299f\\exec-b8f60f56-1a90-4290-915b-5a74c51de082.png",
+      "asset": "Source/collapse-drawings.png",
+      "prompt": "Use case: precise-object-edit. Actual production four COMPLETE in-between cels, 2x2 equal padded cells, true transparent RGBA no scenery/shadow/glow/text/grid. Image1 pose A, image2 pose B, image3 APPROVED design authority. Draw 20%,40%,60%,80% progress A to B, excluding endpoints. Same exact character world scale/camera/ground within each 512-square cel, no per-cel zoom, skull growth, body melting, marking drift or limb deletion. True joint articulation and changing overlap under gravity. Physiological snail withdrawal: two eye stalks droop at staggered times, eyes gradually close, head/neck folds and curves into original front shell aperture, long muscular foot pulls inward rather than scaling smaller. Last cel has face/stalks fully tucked and most flesh inside, as B. Rigid golden spiral/tree/fruit/moss load keeps exact shape/size/pattern; only slight lowering due loss of soft support. All tissues remain connected with consistent eyeball size/stalk length until naturally hidden by coils/shell, no fade or erased slug. Keep original blue-green soft palette, not a brown snail.",
+      "inputs": [
+        "H:\\Spawner\\DesignAssets\\Animations\\CreatureDeathV3\\old-garden-snail\\Source\\Keys\\key-0.png",
+        "H:\\Spawner\\DesignAssets\\Animations\\CreatureDeathV3\\old-garden-snail\\Source\\Keys\\key-2.png",
+        "H:\\Spawner\\DesignAssets\\CreatureConcepts\\v3\\old-garden-snail.png"
+      ],
+      "provider": "built-in image_gen"
+    }
+  ]
+}

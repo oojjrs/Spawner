@@ -1,0 +1,21 @@
+{
+  "appearanceAuthority": "Source/concept.png",
+  "registeredReference": "Source/reference.png",
+  "canonicalParts": "Source/EditableParts",
+  "generation": "Source/generation.json",
+  "compositing": "Source/compositing.json",
+  "staticHiddenShellRegistration": "Source/hidden-shell-registration.json",
+  "rebuild": [
+    "Source/prepare.py",
+    "motion.py",
+    "render.py"
+  ],
+  "canvas": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ]
+}

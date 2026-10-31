@@ -1,0 +1,80 @@
+{
+  "approvedImage": "DesignAssets/CreatureConcepts/v3/lantern-keeper.png",
+  "approvedBounds": [
+    52,
+    70,
+    335,
+    329
+  ],
+  "approvedScale": 1.528957528957529,
+  "approvedTargetSize": [
+    433,
+    396
+  ],
+  "keyRegistration": [
+    {
+      "key": 0,
+      "sourceBounds": [
+        48,
+        71,
+        582,
+        529
+      ],
+      "uniformScale": 0.7439862542955327,
+      "translation": [
+        3.7886597938144178,
+        1.6082474226803924
+      ],
+      "worldBoundsWidth": 433.0,
+      "referenceGroundY": 448
+    },
+    {
+      "key": 1,
+      "sourceBounds": [
+        723,
+        123,
+        586,
+        492
+      ],
+      "uniformScale": 0.7439862542955327,
+      "translation": [
+        -499.89003436426117,
+        -9.551546391752595
+      ],
+      "worldBoundsWidth": 435.97594501718214,
+      "referenceGroundY": 448
+    },
+    {
+      "key": 2,
+      "sourceBounds": [
+        45,
+        712,
+        632,
+        355
+      ],
+      "uniformScale": 0.7439862542955327,
+      "translation": [
+        -12.579037800687274,
+        -345.83333333333337
+      ],
+      "worldBoundsWidth": 470.1993127147766,
+      "referenceGroundY": 448
+    },
+    {
+      "key": 3,
+      "sourceBounds": [
+        698,
+        866,
+        631,
+        200
+      ],
+      "uniformScale": 0.7439862542955327,
+      "translation": [
+        -498.03006872852234,
+        -345.0893470790378
+      ],
+      "worldBoundsWidth": 469.4553264604811,
+      "referenceGroundY": 448
+    }
+  ]
+}

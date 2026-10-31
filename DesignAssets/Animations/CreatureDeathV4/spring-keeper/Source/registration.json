@@ -1,0 +1,165 @@
+{
+  "entries": [
+    {
+      "part": "body",
+      "source": "Source/torso-complete.png",
+      "mask": "Source/Masks/body.png",
+      "matrix": [
+        [
+          0.17189952904238617,
+          0,
+          62.99843014128729
+        ],
+        [
+          0,
+          0.17189952904238617,
+          236.66954474097332
+        ]
+      ]
+    },
+    {
+      "part": "head",
+      "source": "Source/parts-atlas.png",
+      "mask": "Source/Masks/head.png",
+      "matrix": [
+        [
+          0.53,
+          -0.0,
+          -235.90000000000003
+        ],
+        [
+          0.0,
+          0.53,
+          109.16
+        ]
+      ]
+    },
+    {
+      "part": "head-closed-draft",
+      "source": "Source/parts-atlas.png",
+      "mask": "Source/Masks/head-closed-draft.png",
+      "matrix": [
+        [
+          0.53,
+          -0.0,
+          -454.26000000000005
+        ],
+        [
+          0.0,
+          0.53,
+          110.22
+        ]
+      ]
+    },
+    {
+      "part": "crest",
+      "source": "Source/parts-atlas.png",
+      "mask": "Source/Masks/crest.png",
+      "matrix": [
+        [
+          0.5,
+          -0.0,
+          47.5
+        ],
+        [
+          0.0,
+          0.5,
+          -141.0
+        ]
+      ]
+    },
+    {
+      "part": "wing-near",
+      "source": "Source/parts-atlas.png",
+      "mask": "Source/Masks/wing-near.png",
+      "matrix": [
+        [
+          0.43,
+          -0.0,
+          -42.870000000000005
+        ],
+        [
+          0.0,
+          0.43,
+          74.78999999999999
+        ]
+      ]
+    },
+    {
+      "part": "wing-far",
+      "source": "Source/parts-atlas.png",
+      "mask": "Source/Masks/wing-far.png",
+      "matrix": [
+        [
+          0.3,
+          -0.0,
+          -204.0
+        ],
+        [
+          0.0,
+          0.3,
+          147.6
+        ]
+      ]
+    },
+    {
+      "part": "tail",
+      "source": "Source/fan-complete.png",
+      "mask": "Source/Masks/tail.png",
+      "matrix": [
+        [
+          0.2998776009791922,
+          0,
+          133.34149326805385
+        ],
+        [
+          0,
+          0.2998776009791922,
+          56.51040391676867
+        ]
+      ]
+    },
+    {
+      "part": "leg-near",
+      "source": "Source/parts-atlas.png",
+      "mask": "Source/Masks/leg-near.png",
+      "matrix": [
+        [
+          0.3,
+          -0.0,
+          -1.299999999999983
+        ],
+        [
+          0.0,
+          0.3,
+          107.10000000000002
+        ]
+      ]
+    },
+    {
+      "part": "leg-far",
+      "source": "Source/parts-atlas.png",
+      "mask": "Source/Masks/leg-far.png",
+      "matrix": [
+        [
+          0.27,
+          -0.0,
+          -147.92000000000002
+        ],
+        [
+          0.0,
+          0.27,
+          130.1
+        ]
+      ]
+    }
+  ],
+  "eyePatchBoxes": [
+    [
+      91,
+      216,
+      146,
+      272
+    ]
+  ]
+}

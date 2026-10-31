@@ -1,0 +1,19 @@
+{
+  "scale": 0.4077421469703831, 
+  "translation": [
+    0, 
+    0
+  ], 
+  "sourceSize": [
+    1254, 
+    1254
+  ], 
+  "worldBoundsX": [
+    28.949692434897198, 
+    493.7757399811339
+  ], 
+  "insertedAfterBaseCel": 3, 
+  "rootMiddle": "Raw/root-middle.png", 
+  "nearRest": "Raw/tail-fit-hook.png", 
+  "bodyCalibration": "fixed body landmarks, tail excluded"
+}

@@ -1,0 +1,56 @@
+{
+  "appearanceAuthority": "concept.png",
+  "neutralRegistration": "registration.json",
+  "matteTransfer": {
+    "matrix": [
+      [
+        0.9997055103749286,
+        2.3859065946176003e-05,
+        0.5681288540818319
+      ],
+      [
+        -2.3859065946176003e-05,
+        0.9997055103749286,
+        0.06469836853964407
+      ]
+    ],
+    "matches": 705,
+    "role": "technical matte only, verified against current concept"
+  },
+  "shellHiddenRegistration": {
+    "matrix": [
+      [
+        0.4077793487417341,
+        -0.0001446757790415989,
+        0.1555046692373384
+      ],
+      [
+        0.0001446757790415989,
+        0.4077793487417341,
+        0.012303403912213275
+      ]
+    ],
+    "matches": 389
+  },
+  "bodyHiddenRegistration": {
+    "matrix": [
+      [
+        0.30423280423280424,
+        0.0,
+        52.007936507936506
+      ],
+      [
+        0.0,
+        0.30423280423280424,
+        147.41798941798942
+      ]
+    ]
+  },
+  "visiblePixelsSource": "reference.png",
+  "drawOrder": [
+    "body",
+    "stalk-far",
+    "stalk-near",
+    "shell"
+  ]
+}

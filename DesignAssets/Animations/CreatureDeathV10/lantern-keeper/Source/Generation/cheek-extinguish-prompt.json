@@ -1,0 +1,6 @@
+{
+  "tool": "built-in image_gen",
+  "editTarget": "cheek-lit.png",
+  "generatedTexture": "cheek-unlit.png",
+  "prompt": "Precise local material edit of this cropped 2D sprite CHEEK ornament. This is the last still-glowing amber teardrop beside the creature's cheek. Turn its self-illumination completely OFF, matching the muted dark honey/amber-brown unlit ornaments in image 2. Remove its luminous yellow/white interior core, bloom and warm light spill; retain subdued amber glass volume, a non-emissive rim, and only a small ordinary reflected highlight. Preserve the cheek ornament's exact outline, tilted teardrop shape, position, scale, connection and framing in image 1. Keep all surrounding cream and teal fur, texture, edge and alpha unchanged. Do not darken the entire crop, do not erase or gray out the gem. No text, no added elements. Return the same cropped patch with only the cheek gem extinguished."
+}

@@ -1,0 +1,189 @@
+{
+  "name": "spiny-back-leader",
+  "approvedImage": "DesignAssets/CreatureConcepts/v3/spiny-back-leader.png",
+  "canvas": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "bodyMassCenter": [
+    270,
+    280
+  ],
+  "gravity": 1050,
+  "groundY": 436,
+  "groundX": 234,
+  "groundSlope": -0.2,
+  "durationActiveMs": 2000,
+  "sampleMs": 40,
+  "finalHoldMs": 1000,
+  "supportFailureMs": {
+    "fore": [
+      100,
+      210
+    ],
+    "mid": [
+      140,
+      250
+    ],
+    "hind": [
+      190,
+      310
+    ]
+  },
+  "jawFailureMs": [
+    140,
+    260
+  ],
+  "jawLimitsDegrees": [
+    -45,
+    45
+  ],
+  "legs": [
+    {
+      "id": "fore-near",
+      "joints": [
+        [
+          236,
+          340
+        ],
+        [
+          255,
+          371
+        ],
+        [
+          234,
+          436
+        ]
+      ],
+      "parts": [
+        "fore-near-upper",
+        "fore-near-lower"
+      ]
+    },
+    {
+      "id": "fore-far",
+      "joints": [
+        [
+          122,
+          301
+        ],
+        [
+          82,
+          345
+        ],
+        [
+          63,
+          374
+        ]
+      ],
+      "parts": [
+        "fore-far-upper",
+        "fore-far-lower"
+      ]
+    },
+    {
+      "id": "mid-near",
+      "joints": [
+        [
+          307,
+          348
+        ],
+        [
+          328,
+          382
+        ],
+        [
+          345,
+          422
+        ]
+      ],
+      "parts": [
+        "mid-near-upper",
+        "mid-near-lower"
+      ]
+    },
+    {
+      "id": "mid-far",
+      "joints": [
+        [
+          109,
+          292
+        ],
+        [
+          79,
+          311
+        ],
+        [
+          59,
+          347
+        ]
+      ],
+      "parts": [
+        "mid-far-upper",
+        "mid-far-lower"
+      ]
+    },
+    {
+      "id": "hind-near",
+      "joints": [
+        [
+          379,
+          319
+        ],
+        [
+          407,
+          348
+        ],
+        [
+          414,
+          400
+        ]
+      ],
+      "parts": [
+        "hind-near-upper",
+        "hind-near-lower"
+      ]
+    },
+    {
+      "id": "hind-far",
+      "joints": [
+        [
+          135,
+          271
+        ],
+        [
+          111,
+          289
+        ],
+        [
+          85,
+          324
+        ]
+      ],
+      "parts": [
+        "hind-far-upper",
+        "hind-far-lower"
+      ]
+    }
+  ],
+  "jaws": [
+    {
+      "id": "jaw-far",
+      "pivot": [
+        114,
+        331
+      ]
+    },
+    {
+      "id": "jaw-near",
+      "pivot": [
+        187,
+        340
+      ]
+    }
+  ]
+}

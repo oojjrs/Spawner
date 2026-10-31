@@ -1,0 +1,20 @@
+{
+  "appearanceAuthority": {
+    "path": "DesignAssets/CreatureConcepts/v3/old-garden-snail.png",
+    "sha256": "937d5d784079d7dfb95c50ee41f461e73f655c6b0d728067051f92c02b001f6c"
+  },
+  "visibleSurface": "Source/reference.png",
+  "newArtwork": [
+    "Source/shell-hidden-drawing.png",
+    "Source/body-hidden-drawing.png"
+  ],
+  "matteTransferOnly": {
+    "path": "DesignAssets/Animations/CreatureDeathV4/old-garden-snail/Source/rigid-mask.png",
+    "appearanceAuthority": false
+  },
+  "outputHashes": {
+    "death.webp": "bdd759a2e81c4d145e2c4463cbdb300b5c6484e83261a7181cf9e341cc761b10",
+    "preview.webp": "b7a12a5114411d0255f9f27596a91b0e3e321427c242825f74cc0ae9a2a771ce",
+    "thumbnail.webp": "70559f227ac5e3e833d9db06c8cb0bf0875c85b5954be5b4820af344bdfc826a"
+  }
+}

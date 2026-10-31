@@ -1,0 +1,9 @@
+{
+  "tool": "image_gen",
+  "prompt": "Extract ONLY THE ALREADY VISIBLE SOFT ANIMAL PIXELS from this exact six-frame atlas. This is a precise layer-extraction edit, NOT new character drawing. Keep the atlas dimensions, 3 columns by2 rows, and EVERY visible head/neck/leg/toe/tail at its EXACT existing XY position, scale, contour, pose, color and shading. Replace the mineral mountain shell, all stones/crystals, all hard cream/tan PLASTRON PLATES, all bony socket rims/collars and every armor seam with genuine TRANSPARENCY. Retain only the visible olive/spotted soft head/neck, the visible four-limb tissue, the cream soft MUZZLE and all the cream TOE CLAWS exactly as currently drawn. The segmented cream armor belt under the head is HARD and must be completely removed; the cream muzzle and toes are SOFT and must stay. Do not reconstruct hidden skin, connect separate limb islands, draw a new torso, enlarge a hind foot, restore a foot already tucked away, add a limb, complete a silhouette, or invent anything under the shell. Leave missing/occluded areas transparent exactly as the original occlusion provides. Each visible skin fragment may be a separate alpha island; that is required. Zero stone, bone plate, socket rim or stray outline may remain around the tissue. Do not crop, rearrange or rescale the panels. No text, borders, shadows, scenery or new pixels other than edge antialiasing. Preserve the original already-drawn visible soft tissue and remove the hard surfaces only. This transparent extraction is the actual production layer used for direct cel compositing.",
+  "inputs": [
+    "keyposes.png"
+  ],
+  "output": "visible-only.png",
+  "rawGeneratedImage": "D:/.codex/generated_images/01a18389-9751-73b3-bbe4-a6f4a5854d96/exec-0f4bf2a6-672c-49d7-9ac5-4635e4b72d6f.png"
+}

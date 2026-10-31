@@ -1,0 +1,1631 @@
+{
+  "format": "spawner-layered-cel-timeline-v3",
+  "approvedDesign": "DesignAssets/CreatureConcepts/v3/walking-forest.png",
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ],
+  "columns": 8,
+  "method": "drawn soft tissue cels, rigid source shell, occlusion and parent landing",
+  "bones": [
+    {
+      "id": "root",
+      "parent": null,
+      "pivot": [
+        256,
+        448
+      ]
+    },
+    {
+      "id": "front",
+      "parent": "root",
+      "pivot": [
+        190,
+        350
+      ]
+    },
+    {
+      "id": "rear",
+      "parent": "root",
+      "pivot": [
+        420,
+        360
+      ]
+    }
+  ],
+  "attachments": {
+    "under": "Parts/hard-underpaint.png",
+    "hard": "Parts/hard-original.png",
+    "front-0": "Parts/front-0.png",
+    "rear-0": "Parts/rear-0.png",
+    "front-1": "Parts/front-1.png",
+    "rear-1": "Parts/rear-1.png",
+    "front-2": "Parts/front-2.png",
+    "rear-2": "Parts/rear-2.png",
+    "front-3": "Parts/front-3.png",
+    "rear-3": "Parts/rear-3.png",
+    "front-4": "Parts/front-4.png",
+    "rear-4": "Parts/rear-4.png"
+  },
+  "frames": [
+    {
+      "timeMs": 0,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-0",
+          "front"
+        ],
+        [
+          "rear-0",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 40,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-0",
+          "front"
+        ],
+        [
+          "rear-0",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 80,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-0",
+          "front"
+        ],
+        [
+          "rear-0",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 120,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-0",
+          "front"
+        ],
+        [
+          "rear-0",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 160,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-0",
+          "front"
+        ],
+        [
+          "rear-0",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 200,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-1",
+          "front"
+        ],
+        [
+          "rear-1",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 240,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-1",
+          "front"
+        ],
+        [
+          "rear-1",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 280,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-1",
+          "front"
+        ],
+        [
+          "rear-1",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 320,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-2",
+          "front"
+        ],
+        [
+          "rear-2",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 360,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-2",
+          "front"
+        ],
+        [
+          "rear-2",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 400,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-2",
+          "front"
+        ],
+        [
+          "rear-2",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 440,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-3",
+          "front"
+        ],
+        [
+          "rear-3",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 480,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-3",
+          "front"
+        ],
+        [
+          "rear-3",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 520,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-3",
+          "front"
+        ],
+        [
+          "rear-3",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 560,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-4",
+          "front"
+        ],
+        [
+          "rear-4",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 600,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-4",
+          "front"
+        ],
+        [
+          "rear-4",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 640,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            1,
+            -1
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-4",
+          "front"
+        ],
+        [
+          "rear-4",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 680,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            1
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            10,
+            -9
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            -2,
+            -3
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-4",
+          "front"
+        ],
+        [
+          "rear-4",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 720,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            2
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            26,
+            -23
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            -12,
+            -13
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-4",
+          "front"
+        ],
+        [
+          "rear-4",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 760,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            5
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            45,
+            -41
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            -26,
+            -30
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-4",
+          "front"
+        ],
+        [
+          "rear-4",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 800,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            8
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            65,
+            -59
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            -43,
+            -50
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-4",
+          "front"
+        ],
+        [
+          "rear-4",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 840,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            11
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            84,
+            -77
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            -61,
+            -70
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-4",
+          "front"
+        ],
+        [
+          "rear-4",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 880,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            16
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            100,
+            -91
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            -78,
+            -90
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-4",
+          "front"
+        ],
+        [
+          "rear-4",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 920,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            21
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            109,
+            -99
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            -91,
+            -105
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-4",
+          "front"
+        ],
+        [
+          "rear-4",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 960,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            27
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            110,
+            -100
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            -99,
+            -114
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-4",
+          "front"
+        ],
+        [
+          "rear-4",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 1000,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            34
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            110,
+            -100
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            -100,
+            -115
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-4",
+          "front"
+        ],
+        [
+          "rear-4",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 1040,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            32
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            110,
+            -100
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            -100,
+            -115
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-4",
+          "front"
+        ],
+        [
+          "rear-4",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 1080,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            32
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            110,
+            -100
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            -100,
+            -115
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-4",
+          "front"
+        ],
+        [
+          "rear-4",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 1120,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            34
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            110,
+            -100
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            -100,
+            -115
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-4",
+          "front"
+        ],
+        [
+          "rear-4",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 1160,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            34
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            110,
+            -100
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            -100,
+            -115
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-4",
+          "front"
+        ],
+        [
+          "rear-4",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 1200,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            34
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            110,
+            -100
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            -100,
+            -115
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-4",
+          "front"
+        ],
+        [
+          "rear-4",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 1240,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            34
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            110,
+            -100
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            -100,
+            -115
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-4",
+          "front"
+        ],
+        [
+          "rear-4",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 1280,
+      "durationMs": 1000,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            34
+          ],
+          "rotation": 0
+        },
+        "front": {
+          "translation": [
+            110,
+            -100
+          ],
+          "rotation": 0
+        },
+        "rear": {
+          "translation": [
+            -100,
+            -115
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "front-4",
+          "front"
+        ],
+        [
+          "rear-4",
+          "rear"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    }
+  ],
+  "registration": [
+    {
+      "matrix": [
+        [
+          0.9796127689626555,
+          -0.03342085411819046,
+          39.11220061621986
+        ],
+        [
+          0.03342085411819046,
+          0.9796127689626555,
+          -67.53091604018073
+        ]
+      ],
+      "matches": 221
+    },
+    {
+      "matrix": [
+        [
+          0.7207591524318967,
+          -0.03337927978368915,
+          -72.36111397596231
+        ],
+        [
+          0.03337927978368915,
+          0.7207591524318967,
+          67.4682885588231
+        ]
+      ],
+      "matches": 168
+    },
+    {
+      "matrix": [
+        [
+          0.7174952684009754,
+          -0.08346455287700262,
+          -666.7759245274705
+        ],
+        [
+          0.08346455287700262,
+          0.7174952684009754,
+          -29.716947101075526
+        ]
+      ],
+      "matches": 174
+    },
+    {
+      "matrix": [
+        [
+          0.6600874476546706,
+          -0.07219366002057796,
+          12.97049731214424
+        ],
+        [
+          0.07219366002057796,
+          0.6600874476546706,
+          -242.94496470396527
+        ]
+      ],
+      "matches": 139
+    },
+    {
+      "matrix": [
+        [
+          0.6351952791335526,
+          -0.06664281196698664,
+          -535.4840729897761
+        ],
+        [
+          0.06664281196698664,
+          0.6351952791335526,
+          -290.07660717635656
+        ]
+      ],
+      "matches": 139
+    }
+  ],
+  "initialGroundY": 446,
+  "rootDropY": 34,
+  "sourceHardPixels": "Source/reference.png",
+  "spineCompatibilityVerified": false,
+  "retractionEndpoints": {
+    "front": [
+      110,
+      -100
+    ],
+    "rear": [
+      -100,
+      -115
+    ]
+  },
+  "finalSoftOutsideForegroundPixels": 0,
+  "hardAlphaOpaqueThreshold": 240
+}

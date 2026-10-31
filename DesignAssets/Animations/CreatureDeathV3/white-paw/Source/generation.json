@@ -1,0 +1,39 @@
+{
+  "entries": [
+    {
+      "asset": "Source/key-drawings.png",
+      "provider": "built-in image_gen",
+      "input": "Source/approved-reference.png",
+      "prompt": "Use case: precise-object-edit. Asset type: actual production key drawings for a 2D game death animation. This is a set of FOUR action-defining COMPLETE KEY POSES, not a finished full animation sheet. Use the approved reference image as the only design/anatomy/style authority. Four equal padded cells in a 2x2 layout, transparent RGBA, no text or grid. Exactly the same individual ivory-and-dark-teal fantasy weasel, same skull width, torso length and fur volume, same ivory neck mane, saddle pattern, white paws, amber eyes and large curled ivory tail. Same three-quarter left-facing camera, same world scale and common ground, generous margin, no pose-specific zoom. Top-left: normal alive neutral matching reference, amber eye fully open, all four paws supporting weight, head level, tail curled up. Top-right: legs LOSE SUPPORT, near fore elbow bends and chest sinks while white paws stay planted; far foreleg follows a little late; pelvis still higher, head and neck sag together, eye half open, tail still trails high. Bottom-left: whole animal FALLS through its shoulders and haunches onto its near side/belly, chest/cheek visibly CONTACT the ground, forelegs bend naturally out in front rather than vanish, hind knee folds at its real joint, head remains connected by the mane; eyes closing, tail is still moving down behind after body contact. Bottom-right: settled lifeless near-side/belly corpse, cheek and chest resting on ground, closed eye, four anatomically continuous slack legs/paws visible or naturally occluded, hindquarters settled, curled fluffy tail resting lower along the ground to the right. Retain original body mass, silhouette character and coat pattern across poses; perspective and overlap may change naturally, no shrinking, squashing the whole animal, stretched neck, detached paw, melted body, duplicate limb, body part disappearing or simple head-only tilt. No gore, blood, effects, shadows, floor, scenery or extra objects. Crisp fine teal outlines and original painterly cream highlights."
+    },
+    {
+      "asset": "Source/Intervals/interval-0.png",
+      "provider": "built-in image_gen",
+      "inputs": [
+        "Source/Keys/key-0.png",
+        "Source/Keys/key-1.png",
+        "Source/approved-reference.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: ONE actual production atlas of four fully drawn in-between animation cels, exactly 2 columns by 2 rows. Inputs: image1 exact preceding key pose A, image2 exact following key pose B, image3 approved character design. Each cel must be a full reconstruction at 20%,40%,60%,80% progress FROM A TO B, read left-right then top-bottom, excluding endpoints. This is actual game animation art, not a preview. Each equal square cell uses the exact same 512-square source-camera registration, world-scale, proportions and ground at y448/512 as the two input endpoint canvases. Preserve the same individual ivory/dark-teal weasel, constant skull size, torso length and volume, exact cream/dark saddle pattern and fur flow. No camera changes, no zoom or tight-fit per frame, no shrinking/melting/squashing, no face redesign, no added/lost leg or paw, no stretched neck, no disconnected appendage. Draw true intermediate skeletal joint poses and changing occlusion, not a crossfade of endpoints. Crisp original fine teal outline, painterly shading, transparent RGBA background and all subjects fully inside padded cells. No words, grid, labels, scenery, floor, cast shadow or effects. The amber eye is still alive and open at first, gradually losing focus. Near fore-elbow buckles while its white paw remains planted; chest lowers down and slightly forward, far fore-elbow responds a little later; hindquarters remain elevated as in B. The tail remains high with a tiny delayed follow. Show actual weight-bearing joints failing, not only the head tipping."
+    },
+    {
+      "asset": "Source/Intervals/interval-2.png",
+      "provider": "built-in image_gen",
+      "inputs": [
+        "Source/Keys/key-2.png",
+        "Source/Keys/key-3.png",
+        "Source/approved-reference.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: ONE actual production atlas of four fully drawn in-between animation cels, exactly 2 columns by 2 rows. Inputs: image1 exact preceding key pose A, image2 exact following key pose B, image3 approved character design. Each cel must be a full reconstruction at 20%,40%,60%,80% progress FROM A TO B, read left-right then top-bottom, excluding endpoints. This is actual game animation art, not a preview. Each equal square cell uses the exact same 512-square source-camera registration, world-scale, proportions and ground at y448/512 as the two input endpoint canvases. Preserve the same individual ivory/dark-teal weasel, constant skull size, torso length and volume, exact cream/dark saddle pattern and fur flow. No camera changes, no zoom or tight-fit per frame, no shrinking/melting/squashing, no face redesign, no added/lost leg or paw, no stretched neck, no disconnected appendage. Draw true intermediate skeletal joint poses and changing occlusion, not a crossfade of endpoints. Crisp original fine teal outline, painterly shading, transparent RGBA background and all subjects fully inside padded cells. No words, grid, labels, scenery, floor, cast shadow or effects. The body has made ground contact already. Cheek/chest and forepaws retain exactly their contact positions and full skull/torso volume. Hind haunch finishes settling very slightly, and the big flexible fluffy tail now drops in delayed follow-through from A toward its final supported low curl in B, not shortening or vanishing. No breathing cycle or revival. This is passive gravity-driven settling after death."
+    },
+    {
+      "asset": "Source/complete-contact-body.png",
+      "provider": "built-in image_gen",
+      "inputs": [
+        "Source/Keys/key-2.png",
+        "Source/approved-reference.png"
+      ],
+      "prompt": "Use case: precise-object-edit. ONE complete actual production BODY attachment for the post-contact phase of a 2D death animation. Image1 is the exact final contacted body pose and exact 512-square registration to preserve. Image2 is approved design identity reference only. Change ONLY removing the ENTIRE curled fluffy tail from image1. Keep the closed-eye head, mane, complete torso, all four slack folded legs and white paws, coat markings, anatomy and ALL retained visible pixels in exactly the same locations and world scale. Complete the small hidden furred haunch contour where the tail root covered it, forming one fully closed natural body contour; no flat cut or gap. The animal is already resting its cheek/chest on ground, final lifeless pose; do not lift, re-pose or reshape it. Result is ONLY the same complete tail-less contacted corpse body, with generous transparent space where the tail was. True transparent RGBA, no background, shadows, glow, labels, text or extra parts. Single actual production source, not multiple poses, not a preview."
+    }
+  ]
+}

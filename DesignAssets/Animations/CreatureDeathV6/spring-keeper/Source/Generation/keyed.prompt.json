@@ -1,0 +1,10 @@
+{
+  "tool": "image_gen",
+  "prompt": "Draw an ACTUAL EIGHT-CEL animation strip connecting the THREE supplied poses of the SAME bird. Image1 is START, image2 is HALFWAY, image3 is FINAL. Preserve their exact bird, head/body volumes, original cream/coral/sage painted design, small gold beak/toes, layered green wing and CORRECTLY ATTACHED FOUR crest plumes; use one fixed character scale and ground line in every cel. 4 columns x 2 rows equal square cells, genuine transparency, entire sprite with margins, no text, effects or shadows. Body/chest/head are already on the ground and settle only a little; all the action is the soft crest and tail losing support. FIRST ROW must have four NEW intermediate curvature poses between image1 and image2: crest tilts forwards a little, tilts more, curls forwards with tips coming down toward the eye, then reaches image2's halfway overhang. Do NOT hold the upright crest unchanged until a sudden swap. SECOND ROW must continue four NEW intermediate poses from image2 to image3: plume tips descend further across the closed eye, then most of the eye is covered, then all the eye is hidden, then the exact relaxed final forelock. Keep each plume's original length and breadth: no extra-long hair, extra plumes or new ornament design. Roots always fixed on scalp, shafts bend smoothly from root with delayed tips, sensible overlap among the four plumes. Tail fan gradually lowers behind the body, not all at once, and reaches image3's relaxed ground pose by the final cel. The skull remains ROUND beneath the falling plumes, not flattened. A full coherent drawing per cel, no cutout seams, detached parts, shape morphing or ghosts. These are final inbetween source cels to be sliced and played directly, so each intermediate must actually differ in its crest curve and tail angle while retaining the same animal mass and camera.",
+  "references": [
+    "bridge-start.png",
+    "crest-mid-raw.png",
+    "final-raw.png"
+  ],
+  "raw": "D:/.codex/generated_images/01a18389-9751-73b3-bbe4-a6f4a5854d96/exec-5e9d3be7-af01-4f40-aabb-e69032410604.png"
+}

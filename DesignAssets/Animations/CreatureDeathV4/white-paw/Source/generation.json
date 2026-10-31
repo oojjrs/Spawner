@@ -1,0 +1,100 @@
+{
+  "entries": [
+    {
+      "id": "white-core-parts",
+      "asset": "Source/core-drawings.png",
+      "prompt": "Use case: precise-object-edit. Actual production layered animation source, NOT animation keys. Image 1 is the sole approved character/style/anatomy authority. Draw FOUR ISOLATED COMPLETE ATTACHMENTS in equal padded 2x2 cells, read left-right then top-bottom, true transparent RGBA background. Same individual white-paw fantasy mustelid, original ivory/dark-teal coat and distinctive saddle/lightning stripes, amber eyes, stocky fluffy chest and long furry curled tail, same three-quarter left-facing camera. Cell 1: complete torso only, from neck socket through furry rump, all original cream mane/shoulder crest and flank zigzag coat pattern; REMOVE entire head, four limbs and tail, complete the natural chest belly and rump surfaces behind them with clean furry contours and a softly rounded hidden neck socket. Cell 2: complete open-eyed head and short neck-ruff attachment, including both small ears, amber eye, whiskers, muzzle/nose/chin and padded hidden neck root; NO torso, feet or tail. Cell 3: whole large curled tail ONLY, including complete padded furry root hidden behind rump, exact original hook curl, cream outer fur and dark-teal inner stripe; NO rump/body fragments. Cell 4: same head/short-neck source as cell 2 in exactly the SAME contour, orientation, skull size and painted fur placement, only eye gently fully closed. These are actual source layers for jointed articulation, so hidden surfaces and roots must be complete. Original part lengths/volumes/palette and fine dark-teal outlines/painterly shading are essential, no redesign or baby proportions. Do not invent joints by flat cuts. Do not generate a posed whole animal in any cell. No shadows, ground, labels, text, effects, grid lines or gray/checkerboard backdrop. Generous alpha margin, no clipping.",
+      "inputs": [
+        {
+          "asset": "Source/GenerationInputs/white-paw.png",
+          "sha256": "abd7965a896cf0cf5f44f5210befb851d0f6e30c8b866b1366b6d2ac5b54ae2f"
+        }
+      ],
+      "generatedFilename": "exec-b5c3f3dc-5c75-4102-84b5-060bcab685c9.png",
+      "provider": "built-in image_gen",
+      "transparentBackground": true
+    },
+    {
+      "id": "white-leg-parts",
+      "asset": "Source/leg-drawings.png",
+      "prompt": "Use case: precise-object-edit. Actual production layered animation sources. Image 1 is exact approved anatomy/style. Draw FOUR COMPLETE SEPARATE LIMB ATTACHMENTS in equal padded 2x2 cells on genuine transparent RGBA. The exact white-paw ivory/dark-teal fantasy mustelid, three-quarter left-facing camera, original lengths and limb thickness, fine dark-teal outline and painterly fur. Cell1 NEAR FORELEG: complete dark-teal upper forelimb from rounded furry shoulder root through visible elbow and lower forearm to full ivory paw with original toes. Cell2 FAR FORELEG: same anatomy on far side with its original appropriate foreshortening. Cell3 NEAR HINDLEG: complete muscular hip/thigh with original ivory/flank fur marking, knee, dark-teal lower hock and ivory paw/toes. Cell4 FAR HINDLEG: its far-side counterpart. Each should remain in the approved animal's neutral bent leg pose, but COMPLETE the hidden upper limb/thigh and rounded root so each limb independently attaches to body and can bend at the true elbow/knee and wrist/hock. Draw a single continuous natural limb per cell with actual consistent joint topology; no body, tail, face, extra paws or floating fur pieces. Keep all four at the same anatomical world scale, do not enlarge little far paws to fill cells. Generous transparent padding, complete toes and rounded hidden roots. No action sequence, no dead pose, no labels/text/grid/floor/shadow/glow.",
+      "inputs": [
+        {
+          "asset": "Source/GenerationInputs/white-paw.png",
+          "sha256": "abd7965a896cf0cf5f44f5210befb851d0f6e30c8b866b1366b6d2ac5b54ae2f"
+        }
+      ],
+      "generatedFilename": "exec-cc53db48-e365-45e2-ba22-605df0969487.png",
+      "provider": "built-in image_gen",
+      "transparentBackground": true
+    },
+    {
+      "id": "white-closed-eye",
+      "asset": "Source/closed-eye-drawing.png",
+      "prompt": "Use case: precise-object-edit. Actual production closed-eye expression attachment. Keep this exact cropped head/short-ruff layer in precisely its original canvas coordinates, source size, skull/ear/muzzle/whisker/fur contour, colours, anatomy and alpha. Change ONLY the visible amber eye to a naturally fully closed eyelid, relaxed lifeless expression. Preserve the same dark eye-mask shape and surrounding fur, no head repositioning, no larger eye, no new nose or mane, no body. All other painted pixels and the transparent outside should remain unchanged. One static source layer, genuine transparent RGBA, no glow, floor, text or extra object.",
+      "inputs": [
+        {
+          "asset": "Source/GenerationInputs/head.png",
+          "sha256": "516280a771e5bc68763703135f2b806385b250ab62be68e411c574eb229da180"
+        }
+      ],
+      "generatedFilename": "exec-9615f71b-da1b-4404-9513-d85a1457f7ac.png",
+      "provider": "built-in image_gen",
+      "transparentBackground": true
+    },
+    {
+      "id": "white-torso-finished",
+      "asset": "Source/torso-drawing.png",
+      "prompt": "Use case: precise-object-edit. This is an ACTUAL TORSO SOURCE repair for layered animation. Image1 is the decisive anatomical silhouette guide: its LOWER-RIGHT THIGH BULB HAS ALREADY BEEN REMOVED, so keep that much thinner undercut trunk silhouette. The straight trimmed lower edge is temporary and needs finished natural fur contour/hidden belly painting. Image2 is approved design/style only. Finish this one complete torso layer with original ivory/dark-teal fur, same upper spine/crest, flank markings and original world scale/canvas placement. Respect image1's thinner tapered underside and pelvis: DO NOT restore a round hanging haunch, thigh, upper arm or leg-like mass. No limb mass belongs to this layer. Clean the front round socket/stump into continuous natural neck/chest fur with no hole or exposed cut. Complete rounded hidden body surfaces behind the four absent limbs, restore fine outline and small fur tufts along the trimmed underside, but maintain its trimmed contour. No head, legs, paws, tail, labels, background, shadows or glow. True transparent RGBA. This source will carry a moving head and four independently jointed complete legs; only the true trunk stays on this layer.",
+      "inputs": [
+        {
+          "asset": "Source/GenerationInputs/torso-contour-guide.png",
+          "sha256": "735f7f1d4d628378ec304a5109607593619ff14acb2e94a9d7fb5c646807bd80"
+        },
+        {
+          "asset": "Source/GenerationInputs/white-paw.png",
+          "sha256": "abd7965a896cf0cf5f44f5210befb851d0f6e30c8b866b1366b6d2ac5b54ae2f"
+        }
+      ],
+      "generatedFilename": "exec-26524794-cc67-4ccd-88cc-f54e2a1e4193.png",
+      "provider": "built-in image_gen",
+      "transparentBackground": true
+    },
+    {
+      "id": "white-tail-stem-guided",
+      "asset": "Source/tail-root-drawing.png",
+      "prompt": "Use case: sketch-to-render. Actual complete production TAIL attachment. Image1 has an explicit guide added to the unchanged approved visible C-tail; image2 whole-character identity only. Replace the RED band and BLUE dot in image1 with a real continuous narrow dark-teal/ivory furry root stem. The blue dot is the root attachment endpoint; the red guide physically joins it down-right to the existing tail base. EVERY red/blue guide pixel must become connected tail fur, not remain empty, not stay coloured marker. This added root must be fully visible when this isolated source layer is viewed alone; body will occlude it later. Preserve the existing main C curl and all existing proportions/registration, do not shrink/repose it. Draw one single connected root/whole tail, rounded padded root tip, natural hidden fur surface and fine outline, no extra curl, detached island, ball, body, paw, scenery or shadows. Original canvas coordinates, true transparent RGBA. No red or blue remains in final output.",
+      "inputs": [
+        {
+          "asset": "Source/GenerationInputs/tail-stem-guide.png",
+          "sha256": "deeae66ec35aec109cde2ef1836545b62679d1ba29ee218b775fecacee80c8b4"
+        },
+        {
+          "asset": "Source/GenerationInputs/white-paw.png",
+          "sha256": "abd7965a896cf0cf5f44f5210befb851d0f6e30c8b866b1366b6d2ac5b54ae2f"
+        }
+      ],
+      "generatedFilename": "exec-7b729a45-09cf-4502-9ff3-b98c74cbb3cd.png",
+      "provider": "built-in image_gen",
+      "transparentBackground": true
+    },
+    {
+      "id": "white-root-connector",
+      "asset": "Source/root-connector-drawing.png",
+      "prompt": "Use case: sketch-to-render. ONE actual animation attachment: only a short flexible furred TAIL ROOT CONNECTOR, not the main tail. Image1 red silhouette is the exact narrow curved shape/position/scale guide. Replace that red shape with one complete softly tapered furred tube, rounded padded ends, no cut stump or hole. Image2 is material/palette/style reference only: use its dark-teal inner tail fur and a narrow ivory outer edge, same painterly fur and fine dark outlines. Keep the connector LONG and NARROW like image1, length roughly three times its width. Do not draw any of image2's large C curl, no second tail, no ball, torso, leg, paw, background, glow, labels or scene. Only the single small curved root tube on true transparent RGBA, matching image1 canvas registration. All red must be replaced with actual fur. This is a production piece that joins the tail curl to a rump, with complete hidden roots.",
+      "inputs": [
+        {
+          "asset": "Source/GenerationInputs/root-connector-guide.png",
+          "sha256": "f20f3ebbb6c19a9bd67ff64fb665dd51f9ea59fdc4ebaaf51943ea3cb7705aff"
+        },
+        {
+          "asset": "Source/GenerationInputs/tail-visible-reference.png",
+          "sha256": "5d90bb6cdea5e5da943a8b3ffac729cc84c7d9da36707877fe8ceb02730bd37b"
+        }
+      ],
+      "generatedFilename": "exec-86052f94-194c-4c4f-bbef-b9cec96827dc.png",
+      "provider": "built-in image_gen",
+      "transparentBackground": true
+    }
+  ]
+}

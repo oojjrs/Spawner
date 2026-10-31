@@ -1,0 +1,21 @@
+{
+  "provider": "built-in image_gen",
+  "transparent_background": true,
+  "prompts": [
+    {
+      "output": "Raw/torso-imagegen-original.png",
+      "reference": "Keys/settled-revision2.png",
+      "prompt": "Use case: precise-object-edit. Asset type: hidden torso texture for this exact 2D toad death-animation drawing. This is a production source surface, not a new character pose or a preview. Preserve the exact canvas registration and scale of the supplied reference (512 square conceptual coordinates, character at bottom). Paint ONE COMPLETE CLOSED TORSO ONLY, with its hidden front skin restored behind the head and ivory throat pouch. Remove the entire head, eyes, mouth, throat pouch, all four legs and fingers. Preserve the reference's visible rounded mint-green back with olive spots at x240..377 y280..400. Its apex remains approximately (290,282), posterior flank approximately (386,374), bottom approximately y428. Extend the hidden anterior torso leftwards under the removed face and pouch into a smooth rounded bean at x140..300, y310..425. This is a completely filled, continuous rounded body surface, with no cut edge, no neck opening, no hole where the head was, and no black-filled deleted region. Match the original soft illustrated mint skin, sparse olive patches, ivory underside, subtle directional light and clean dark outside outline. A transparent background and one torso only. Do not move or enlarge the torso, do not crop or zoom the canvas, do not add a head or any limbs. The reference character's final pose will remain untouched in the finished animation; this texture is only for hidden surfaces exposed during movement."
+    },
+    {
+      "output": "Raw/torso-imagegen-cleaned.png",
+      "reference": "Raw/torso-imagegen-original.png",
+      "prompt": "Precise local source-art edit. REMOVE the large round attached rear THIGH on the RIGHT SIDE of this torso texture. This circular limb with a bright ivory rim is the only defect. Replace that entire circular right-hand bulge with uninterrupted ordinary mint-green flank skin, seamlessly continuing the existing olive-spotted back and smooth ivory lower belly. The finished sprite must be ONE smooth closed bean-shaped TORSO ONLY with a single continuous outer contour, no round leg attachment, no concentric circular limb rim, no detached surface and no joint socket. Keep the same exact canvas placement and scale; do not move, enlarge, zoom or reframe the sprite. Preserve all other torso artwork, lighting, back apex, left side, belly and spots. Transparent background. Do not add a face, eyes, neck opening, feet or limbs."
+    },
+    {
+      "output": "Raw/front-imagegen-original.png",
+      "reference": "Keys/settled-revision2.png",
+      "prompt": "Production sprite PART SOURCE, precise extraction and hidden-surface painting. Keep EXACT reference canvas registration (512-square conceptual coordinates) and final death pose. Extract ONE COMPLETE CONTINUOUS FRONT SKIN PART containing the ENTIRE SKULL with closed eyes, the ATTACHED GREEN NECK, and the IVORY DEFLATED THROAT POUCH / FRONT CHEST. These must remain visibly joined as ONE unbroken piece of skin, not separate cutouts. REMOVE the spotted back torso, both rear thighs, BOTH front arms, ALL HANDS AND FINGERS. Paint the missing skin previously hidden behind those removed limbs and back: complete the smooth natural top contour of the skull behind the eyes and finish a clean closed ivory pouch underside. No holes, no punched-out finger or arm shapes, no remaining limb rim, no torn neck. Preserve the visible face and mouth, eye size, face silhouette, ivory folds, soft skin shading, and dark outside line from the reference as precisely as possible. Native part extent approximately x105..293 y300..432, in its exact existing lower-left position; leave the large upper transparent margin unchanged. The face-to-neck-to-pouch skin must be continuous along its whole width. Do not include any spotted back hill above or behind the head, do not include stray olive back pixels on the forehead. Do not enlarge, recenter, zoom or change the pose. One assembled FRONT SKIN PART only on actual transparency, not a contact sheet or exploded view. This is a hidden-surface source for the already-approved endpoint, not a redesigned key pose."
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "format": "spawner-drawn-support-collapse-and-tail-joint-v3",
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ],
+  "approvedDesign": "DesignAssets/CreatureConcepts/v3/spring-keeper.png",
+  "bodyPhysicalScale": 0.6541010747516842,
+  "tailPhysicalScale": 0.54,
+  "tailRoot": [
+    300,
+    365
+  ],
+  "contactTailRoot": [
+    380,
+    380
+  ],
+  "bones": {
+    "root": null,
+    "body": "root",
+    "tail": "body"
+  },
+  "drawOrder": [
+    "tail",
+    "body"
+  ],
+  "bodyRegistration": "Source/collapse-registration.json",
+  "tailRegistration": "tail-registration.json",
+  "bodyPreparation": "prepare.py",
+  "tailPreparation": "Source/tail-prepare.py",
+  "phases": [
+    {
+      "source": "Source/Keys/key-0.png",
+      "durationMs": 140
+    },
+    {
+      "body": "Parts/collapse-0.png",
+      "tail": "Parts/tail-0.png",
+      "tailTransform": [
+        -10,
+        -15,
+        2
+      ],
+      "durationMs": 80
+    },
+    {
+      "body": "Parts/collapse-1.png",
+      "tail": "Parts/tail-0.png",
+      "tailTransform": [
+        25,
+        0,
+        -5
+      ],
+      "durationMs": 90
+    },
+    {
+      "body": "Parts/collapse-2.png",
+      "tail": "Parts/tail-0.png",
+      "tailTransform": [
+        65,
+        10,
+        -15
+      ],
+      "durationMs": 80
+    },
+    {
+      "body": "Parts/contact-body.png",
+      "tail": "Parts/tail-0.png",
+      "tailTransform": [
+        80,
+        15,
+        -18
+      ],
+      "durationMs": 80
+    },
+    {
+      "body": "Parts/contact-body.png",
+      "tail": "Parts/tail-1.png",
+      "tailTransform": [
+        80,
+        15,
+        -12
+      ],
+      "durationMs": 100
+    },
+    {
+      "body": "Parts/contact-body.png",
+      "tail": "Parts/tail-2.png",
+      "tailTransform": [
+        80,
+        15,
+        -6
+      ],
+      "durationMs": 120
+    },
+    {
+      "body": "Parts/contact-body.png",
+      "tail": "Parts/tail-3.png",
+      "tailTransform": [
+        80,
+        15,
+        0
+      ],
+      "durationMs": 160
+    }
+  ],
+  "contactBodyMovementAfterContact": [
+    0,
+    0
+  ],
+  "finalHoldMs": 1000,
+  "spineCompatibilityVerified": false
+}

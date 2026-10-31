@@ -1,0 +1,13 @@
+{
+  "prompt": "Complete the actual head-and-flower-neck-frill attachment of this exact spring bird, not a new character. Image 1 is the sole approved original. Image 2 is its real cutout that needs hidden rear edges finished. Keep the original round cream face, tiny gold beak, dark green eye position/size, green feathers behind the head, and the EXACT original pink-and-cream pointed petal collar pattern and compact proportions. Deliver ONLY one complete head plus its full petal neck frill attached below it, in the original image-left three-quarter neutral pose. Remove the cream/gold belly/torso underneath the lowest petal tips, remove every green WING feather, and cleanly finish the natural complete rear petal edges that were hidden behind the wing. The rounded skull/crown under the crest must be complete softly feathered skin, not a hollow socket. Do not include any crest plume, tail, feet, torso, wing, hollow ring, label or background. Keep the original face and flower frill appearance, do not enlarge the collar or redesign any petal. The lower perimeter must end in the original individual pointed flower petals rather than a straight cut across a belly. Preserve original shading and outline thickness. Transparent background.",
+  "referenced_image_paths": [
+    "H:\\Spawner\\$Trash\\death-v5-unique-20261030\\spring-keeper\\Source\\registered-reference.png",
+    "H:\\Spawner\\$Trash\\death-v5-unique-20261030\\spring-keeper\\Parts\\head-collar.png"
+  ],
+  "transparent_background": true,
+  "output": "head-collar-complete.png",
+  "preserved_inputs": [
+    "registered-reference.png",
+    "head-collar-input.png"
+  ]
+}

@@ -1,0 +1,420 @@
+{
+  "referenceAuthority": "Source/approved-original.png",
+  "approvedImage": "DesignAssets/CreatureConcepts/v3/spiny-back-leader.png",
+  "registration": "Source/reference-registration.json",
+  "generatedRegistration": "Source/generated-registration.json",
+  "appendages": {
+    "fore-near-upper": {
+      "visible": "Source/Visible/fore-near.png",
+      "generated": "fore-near-upper",
+      "joint": [
+        180,
+        232
+      ],
+      "axis": [
+        -15,
+        45
+      ],
+      "split": "upper",
+      "hiddenCaps": [
+        [
+          180,
+          232,
+          9
+        ],
+        [
+          164,
+          204,
+          10
+        ]
+      ]
+    },
+    "fore-near-lower": {
+      "visible": "Source/Visible/fore-near.png",
+      "generated": "fore-near-lower",
+      "joint": [
+        180,
+        232
+      ],
+      "axis": [
+        -15,
+        45
+      ],
+      "split": "lower",
+      "hiddenCaps": [
+        [
+          180,
+          232,
+          9
+        ]
+      ]
+    },
+    "mid-near-upper": {
+      "visible": "Source/Visible/mid-near.png",
+      "generated": "mid-near-upper",
+      "joint": [
+        233,
+        239
+      ],
+      "axis": [
+        6,
+        30
+      ],
+      "split": "upper",
+      "hiddenCaps": [
+        [
+          233,
+          239,
+          9
+        ],
+        [
+          217,
+          223,
+          10
+        ]
+      ]
+    },
+    "mid-near-lower": {
+      "visible": "Source/Visible/mid-near.png",
+      "generated": "mid-near-lower",
+      "joint": [
+        233,
+        239
+      ],
+      "axis": [
+        6,
+        30
+      ],
+      "split": "lower",
+      "hiddenCaps": [
+        [
+          233,
+          239,
+          9
+        ]
+      ]
+    },
+    "hind-near-upper": {
+      "visible": "Source/Visible/hind-near.png",
+      "generated": "hind-near-upper",
+      "joint": [
+        286,
+        222
+      ],
+      "axis": [
+        8,
+        25
+      ],
+      "split": "upper",
+      "hiddenCaps": [
+        [
+          286,
+          222,
+          9
+        ],
+        [
+          273,
+          205,
+          10
+        ]
+      ]
+    },
+    "hind-near-lower": {
+      "visible": "Source/Visible/hind-near.png",
+      "generated": "hind-near-lower",
+      "joint": [
+        286,
+        222
+      ],
+      "axis": [
+        8,
+        25
+      ],
+      "split": "lower",
+      "hiddenCaps": [
+        [
+          286,
+          222,
+          9
+        ]
+      ]
+    },
+    "fore-far-upper": {
+      "visible": "Source/Visible/fore-far.png",
+      "generated": "fore-far-upper",
+      "joint": [
+        52,
+        197
+      ],
+      "axis": [
+        -11,
+        28
+      ],
+      "split": "upper",
+      "hiddenCaps": [
+        [
+          52,
+          197,
+          9
+        ],
+        [
+          63,
+          181,
+          5
+        ]
+      ]
+    },
+    "fore-far-lower": {
+      "visible": "Source/Visible/fore-far.png",
+      "generated": "fore-far-lower",
+      "joint": [
+        52,
+        197
+      ],
+      "axis": [
+        -11,
+        28
+      ],
+      "split": "lower",
+      "hiddenCaps": [
+        [
+          52,
+          197,
+          9
+        ]
+      ]
+    },
+    "jaw-far": {
+      "visible": "Source/Visible/jaw-far.png",
+      "generated": "jaw-far",
+      "joint": [
+        82,
+        194
+      ],
+      "axis": null,
+      "split": null,
+      "hiddenCaps": [
+        [
+          82,
+          194,
+          10
+        ]
+      ]
+    },
+    "jaw-near": {
+      "visible": "Source/Visible/jaw-near.png",
+      "generated": "jaw-near",
+      "joint": [
+        134,
+        202
+      ],
+      "axis": null,
+      "split": null,
+      "hiddenCaps": [
+        [
+          134,
+          202,
+          10
+        ]
+      ]
+    },
+    "mid-far-upper": {
+      "visible": "Source/Visible/fore-far.png",
+      "generated": "hidden-far-upper",
+      "joint": [
+        52,
+        197
+      ],
+      "axis": [
+        -11,
+        28
+      ],
+      "split": "upper",
+      "hiddenCaps": [
+        [
+          52,
+          197,
+          9
+        ],
+        [
+          63,
+          181,
+          10
+        ]
+      ],
+      "placementNative": [
+        [
+          0.955336489125606,
+          -0.29552020666133955,
+          151.30295859078927
+        ],
+        [
+          0.29552020666133955,
+          0.955336489125606,
+          -3.53367755139908
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "mid-far-lower": {
+      "visible": "Source/Visible/fore-far.png",
+      "generated": "hidden-far-lower",
+      "joint": [
+        52,
+        197
+      ],
+      "axis": [
+        -11,
+        28
+      ],
+      "split": "lower",
+      "hiddenCaps": [
+        [
+          52,
+          197,
+          9
+        ]
+      ],
+      "placementNative": [
+        [
+          0.955336489125606,
+          -0.29552020666133955,
+          151.30295859078927
+        ],
+        [
+          0.29552020666133955,
+          0.955336489125606,
+          -3.53367755139908
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "hind-far-upper": {
+      "visible": "Source/Visible/fore-far.png",
+      "generated": "hidden-far-upper",
+      "joint": [
+        52,
+        197
+      ],
+      "axis": [
+        -11,
+        28
+      ],
+      "split": "upper",
+      "hiddenCaps": [
+        [
+          52,
+          197,
+          9
+        ],
+        [
+          63,
+          181,
+          10
+        ]
+      ],
+      "placementNative": [
+        [
+          0.8253356149096783,
+          0.5646424733950354,
+          65.80356857618887
+        ],
+        [
+          -0.5646424733950354,
+          0.8253356149096783,
+          73.18672952523545
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "hind-far-lower": {
+      "visible": "Source/Visible/fore-far.png",
+      "generated": "hidden-far-lower",
+      "joint": [
+        52,
+        197
+      ],
+      "axis": [
+        -11,
+        28
+      ],
+      "split": "lower",
+      "hiddenCaps": [
+        [
+          52,
+          197,
+          9
+        ]
+      ],
+      "placementNative": [
+        [
+          0.8253356149096783,
+          0.5646424733950354,
+          65.80356857618887
+        ],
+        [
+          -0.5646424733950354,
+          0.8253356149096783,
+          73.18672952523545
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  },
+  "drawings": [
+    "Source/complete-core-drawing.png",
+    "Source/complete-parts-drawing.png"
+  ],
+  "generationPrompts": [
+    "Source/body-generation.json",
+    "Source/parts-generation.json"
+  ],
+  "visibleSource": "Source/Visible",
+  "hiddenSource": "Source/Registered",
+  "prepare": "prepare.py",
+  "renderer": "render.py",
+  "sourcePolicy": "The visible carapace, head, scratch, original pincer contours and original stout foot surfaces are cut directly from the approved original. Generated artwork completes only hidden body/attachment surfaces and closed eye expression. All runtime hard-part transforms retain the common reference scale.",
+  "approvedImageSha256": "805ee49ebeef0162d331f3756d12ce10db57eedf3fcd23f4fb2c188333359e16",
+  "visibleLabelSource": "Source/part-labels.png",
+  "eyeSources": {
+    "near": "Source/complete-core-drawing.png, closed head/core cell",
+    "far": "The same generated closed eyelid registered inside the original far eye socket."
+  },
+  "alphaPolicy": {
+    "generatedCoverageBelowDiscarded": 16,
+    "originalVisibleAlphaPreserved": true,
+    "hiddenCapsClippedToOriginalActor": false,
+    "completeUndersideContour": true
+  },
+  "drawOrder": [
+    "far legs",
+    "hidden body surfaces",
+    "near leg chains",
+    "mandibles",
+    "approved visible rigid core and eyelids"
+  ],
+  "jointCapsClipToOriginalActor": false,
+  "hiddenBodySoftAlphaBound": false,
+  "sampler": "sampling.py",
+  "bodyHiddenConstruction": "Complete rounded underside drawn in complete-core-drawing.png; spatial underbody occlusion behind original carapace; internal extraction stubs clipped to the complete contour.",
+  "physics": "physics.py",
+  "motion": "motion.json",
+  "reference": "Source/reference.png",
+  "supersededMotionReused": false
+}

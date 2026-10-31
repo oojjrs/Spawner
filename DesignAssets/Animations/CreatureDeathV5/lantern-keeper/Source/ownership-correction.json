@@ -1,0 +1,19 @@
+{
+  "authority": "approved-reference.png",
+  "foreheadPhotoOwner": "head",
+  "foreheadPhotoMask": "forehead-transferred-pixels.png",
+  "headScalpBoundary": "forehead-head-owner.png",
+  "backgroundOwner": "body",
+  "backgroundPhotoMask": "head-body-background-transfer.png",
+  "earLeafPhotoOwner": "near-ear",
+  "earLeafPhotoMask": "ear-leaf-from-head.png",
+  "frontHeadCoverage": "complete head and head-closed multiplied by face-front-mask.png",
+  "nearEarCoverage": "original visible ear leaf multiplied by near-ear-front-mask.png",
+  "earRootUnderpaint": {
+    "far-ear": "Drawings/far-ear-complete-root.png",
+    "near-ear": "Drawings/near-ear-complete-root.png",
+    "registration": "ear-root-registration.json"
+  },
+  "preservedOrnaments": "ornament-binding.json",
+  "newGeneration": false
+}

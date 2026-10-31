@@ -1,0 +1,16 @@
+{
+  "authority": "DesignAssets/CreatureConcepts/v3/walking-forest.png",
+  "canvas": [
+    512,
+    512
+  ],
+  "scale": 1.8220640569395017,
+  "translation": [
+    0,
+    -9
+  ],
+  "pivot": [
+    256,
+    448
+  ]
+}

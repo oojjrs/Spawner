@@ -1,0 +1,9 @@
+{
+  "tool": "builtin image_gen", 
+  "prompt": "Use case: stylized-concept. Production source atlas for the exact cream-and-deep-teal lantern-keeper creature in the reference. Three separate isolated rigging parts in ONE horizontal row on a genuinely transparent background, no fog, no ground shadow, no text. LEFT: a complete SHORT hind CALF only, a curved teal-and-cream furry connector with two fully rounded closed joint ends, knee at upper right and ankle at lower left. The calf has NO toes, no hand, no paw, no foot shape anywhere. CENTER: a complete FLAT compact cream FRONT PAW only, three rounded toes pointing left, short rounded wrist cuff at upper right. Paw height is less than its width. No forearm rising above the paw; the cuff is only one tenth of the paw height. RIGHT: complete flat elongated cream HIND FOOT only, three toes pointing left, short rounded ankle cuff at rear upper right. Foot height is less than half its width. No leg rising above it. Generous transparent gaps. Match the approved reference's exact fur palette, subtle fur rendering, dark teal outline, warm lighting, left-facing three-quarter anatomy. All hidden joint surfaces are fully painted, no cut edges or black joint rings. Do not draw entire legs or any torso, face, ears, spiral or extra object. These are three anatomical pieces, not three creatures or animation frames.", 
+  "referenced_image_paths": [
+    "H:/Spawner/DesignAssets/CreatureConcepts/v3/lantern-keeper.png"
+  ], 
+  "transparent_background": true, 
+  "savedImage": "calf-paws-atlas-v4.png"
+}

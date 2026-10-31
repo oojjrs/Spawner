@@ -1,0 +1,18 @@
+{
+  "appearanceAuthority": {
+    "path": "DesignAssets/CreatureConcepts/v3/spring-keeper.png",
+    "sha256": "c0ac4f04842256dfdc9cb4341ecb1ce40388490abfbff18cce7d29aa4b3da8e8"
+  },
+  "visibleSurface": "Source/registered-reference.png",
+  "generationPrompts": [
+    "generation/parts.prompt.json",
+    "generation/alpha-cleanup.prompt.json",
+    "generation/complete-roots.prompt.json",
+    "generation/head-collar-complete.prompt.json"
+  ],
+  "outputHashes": {
+    "death.webp": "b32893b9e3e8afe283807e8f5f52f5091813486770fa373266cc95136d24a985",
+    "preview.webp": "23544de1423b051183b95030c81e756adce16c5ebbb477d165a4cc8664f620ec",
+    "thumbnail.webp": "d64eeea3ce2d0ebaaff84ed583873710693ab9bf01c68f348d22797ef6676b0b"
+  }
+}

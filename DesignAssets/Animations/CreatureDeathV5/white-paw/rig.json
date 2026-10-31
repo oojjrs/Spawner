@@ -1,0 +1,202 @@
+{
+  "format": "spawner-cor-articulation-v5",
+  "appearanceAuthority": "Source/concept.png",
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ],
+  "columns": 8,
+  "body": {
+    "image": "Parts/torso.png",
+    "pivot": [
+      285,
+      330
+    ],
+    "neckSocket": [
+      180,
+      345
+    ],
+    "massCenter": [
+      285,
+      330
+    ]
+  },
+  "head": {
+    "image": "Parts/head-skull.png",
+    "closedImage": "Parts/head-closed-skull.png",
+    "pivot": [
+      180,
+      345
+    ],
+    "massCenter": [
+      115,
+      350
+    ]
+  },
+  "tail": {
+    "image": "Parts/tail.png",
+    "bind": [
+      [
+        364,
+        343
+      ],
+      [
+        386,
+        355
+      ],
+      [
+        410,
+        360
+      ],
+      [
+        436,
+        350
+      ],
+      [
+        448,
+        323
+      ],
+      [
+        446,
+        293
+      ],
+      [
+        432,
+        266
+      ],
+      [
+        410,
+        245
+      ],
+      [
+        382,
+        238
+      ],
+      [
+        354,
+        240
+      ],
+      [
+        326,
+        243
+      ],
+      [
+        302,
+        243
+      ]
+    ],
+    "radii": [
+      12,
+      18,
+      28,
+      32,
+      34,
+      38,
+      42,
+      42,
+      40,
+      33,
+      26,
+      12
+    ],
+    "bodyMassCenter": [
+      285,
+      330
+    ]
+  },
+  "limbs": [
+    {
+      "id": "fore-near",
+      "image": "Parts/fore-near.png",
+      "bind": [
+        [
+          220,
+          335
+        ],
+        [
+          235,
+          380
+        ],
+        [
+          210,
+          408
+        ],
+        [
+          190,
+          440
+        ]
+      ],
+      "groundY": 448
+    },
+    {
+      "id": "fore-far",
+      "image": "Parts/fore-far.png",
+      "bind": [
+        [
+          175,
+          355
+        ],
+        [
+          143,
+          391
+        ],
+        [
+          125,
+          410
+        ],
+        [
+          95,
+          430
+        ]
+      ],
+      "groundY": 448
+    },
+    {
+      "id": "hind-near",
+      "image": "Parts/hind-near.png",
+      "bind": [
+        [
+          338,
+          325
+        ],
+        [
+          367,
+          365
+        ],
+        [
+          371,
+          398
+        ],
+        [
+          371,
+          416
+        ]
+      ],
+      "groundY": 448
+    },
+    {
+      "id": "hind-far",
+      "image": "Parts/hind-far.png",
+      "bind": [
+        [
+          315,
+          337
+        ],
+        [
+          293,
+          376
+        ],
+        [
+          294,
+          385
+        ],
+        [
+          266,
+          402
+        ]
+      ],
+      "groundY": 448
+    }
+  ]
+}

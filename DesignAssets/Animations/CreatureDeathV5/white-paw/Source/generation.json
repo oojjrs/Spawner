@@ -1,0 +1,64 @@
+{
+  "tool": "image_gen.imagegen",
+  "appearanceAuthority": "DesignAssets/CreatureConcepts/v3/white-paw.png",
+  "entries": [
+    {
+      "id": "v5-white-torso",
+      "output": "torso-initial-drawing.png",
+      "inputs": [
+        "reference.png"
+      ],
+      "usage": "input-to-torso-repair",
+      "prompt": "Use case: precise-object-edit. Production layered 2D death animation source. The provided original concept is the ONLY appearance authority. Draw a single complete TORSO attachment ONLY from the supplied character. Remove skull/head, long front neck-ruff, all four legs/paws including the protruding upper shoulder/thigh silhouettes, and the entire tail. Preserve the EXACT supplied low long torso, back crest contour, broad dark charcoal back saddle, cream zigzag side stripe and cream hip patch, fur length/direction, outline/shading and camera. Complete only the small hidden chest/belly/hip surfaces behind the removed parts, with the original correct body proportions. Do not add a huge bib, broaden/round the torso, raise the back, invent new spots/stripes, or leave any leg-shaped stumps attached to the body. The original visible back and flank must remain unchanged. Transparent PNG, fully opaque fur painting, no floor, shadow, text."
+    },
+    {
+      "id": "v5-white-torso-repair",
+      "output": "torso-drawing.png",
+      "inputs": [
+        "torso-initial-drawing.png",
+        "reference.png"
+      ],
+      "usage": "torso",
+      "prompt": "Use case: precise-object-edit. Input 1 is the torso-only edit target; Input 2 is the sole character appearance reference. Correct ONLY the hidden underside of this torso for a proper layered quadruped rig. Keep all existing back crest/silhouette, charcoal saddle, ivory zigzag side marking, fur texture, upper hip color boundary, size, camera, and registration exactly fixed. The lower right currently has a large rounded thigh/leg-shaped lobe permanently attached to the torso; remove that protruding thigh-shaped mass from the torso and finish a slimmer continuous furry belly/upper-rump contour underneath it. Raise that lower right contour by approximately one sixth of torso height, ending in a small natural rump socket, not a hanging leg. Also remove the oversized low chest bib bulge; the chest underside should be a modest continuation of the long belly, with its long neck ruff supplied as another attachment. Do not leave any arm/leg-shaped stumps, paws, head, neck ruff or tail. Paint the newly hidden belly with the same fur colors and shading. This must be the original long low-bodied character, not a bigger stocky torso. Complete isolated torso, transparent background, no text, no shadow."
+    },
+    {
+      "id": "v5-white-head",
+      "output": "head-drawing.png",
+      "inputs": [
+        "reference.png"
+      ],
+      "usage": "input-to-skull-completion",
+      "prompt": "Use case: precise-object-edit. Production layered 2D death animation source. The provided original concept is the ONLY appearance authority. Draw the supplied exact character's complete HEAD and LONG NECK-RUFF as ONE isolated attachment, with the original low forward-facing head pose. Remove the torso, legs and tail. Preserve the original skull size/proportions, broad cream forehead, charcoal eye-mask, amber eyes shape/position, small rounded ears, nose, muzzle, whiskers, cheek tufts and long cream throat/neck ruff with dark accent. Complete only the small hidden rear-neck surface behind the body. Do not lift or rotate the head, make the skull smaller or rounder, shorten the muzzle, change markings, change expression or remove long neck fur. Exact same camera and painterly outline style. Transparent PNG, fully opaque painting, no text, ground or shadow."
+    },
+    {
+      "id": "v5-white-skull",
+      "output": "closed-skull-drawing.png",
+      "inputs": [
+        "skull-completion-input.png",
+        "reference.png"
+      ],
+      "usage": "hidden-skull-and-closed-eyelids",
+      "prompt": "Use case: precise-object-edit. Input 1 is a temporary skull cutout from Input 2, which is the ONLY character design authority. Finish a COMPLETE SKULL-only attachment for this exact ivory/charcoal mustelid. Preserve the original head length and size, low forward-facing camera, muzzle/nose/whiskers, small rounded ears, cream forehead and dark eye-mask. Replace the artificial straight/triangular cut at the rear of the skull with a natural rounded short-fur cranial contour and a modest complete hidden neck joint behind the ears. Remove the long neck mane/cowl and throat beard; these belong to another animated layer. Do not include the tall triangular crest at the rear/top, shoulder fur, long hanging neck tufts, body or legs. Close BOTH amber eyes gently as simple natural eyelids in their exact original eye positions, for a death expression; do not change brow, face shape, markings, ear size, head angle or registration. Keep the exact painted fur style. Fully opaque painted skull on a transparent background, no text, floor or shadow."
+    },
+    {
+      "id": "v5-white-complete-parts",
+      "output": "complete-parts-drawing.png",
+      "inputs": [
+        "visible-parts-edit-input.png",
+        "reference.png"
+      ],
+      "usage": "four-limbs-only",
+      "prompt": "Use case: precise-object-edit. Input 1 is a six-part sheet extracted directly from the exact character in Input 2. The missing/straight-cut regions are OCCLUDED SURFACES, not intended part contours. Finish each into ONE COMPLETE clean attachment, preserving every existing visible paw, marking boundary, fur direction, proportions and pose. Keep all six parts in their existing grid slots (3 rows, 2 columns) and at one common scale. Reading order: complete long slender TORSO without limbs/head/neck-ruff/tail; complete LONG NECK-RUFF with tall cowl and lower throat fur; complete near/front leg; complete far/front leg; complete near/rear leg; complete far/rear leg. Draw the missing rounded roots, rear/inner surfaces, and continuous hidden contours. Replace artificial straight cuts, holes, and disjoint scraps with believable completed fur. In particular the torso must have a smooth furry belly/rump with no permanent thigh or leg-shaped protrusions; feet must retain their exact original ivory toe shapes, thickness and bend, with only the hidden upper leg/root completed. The source character is long and low, with the same charcoal/ivory stripe pattern; do not enlarge body volume, make generic bear paws, lengthen limbs, change camera or alter exposed outlines. Do NOT use the whole character silhouette as alpha masks on these parts; each part needs its own intact contour including surfaces behind other parts. Transparent background around all parts, fully opaque painting, no labels, grid lines, text, ground or shadow."
+    },
+    {
+      "id": "v5-white-ruff-final",
+      "output": "ruff-complete-drawing.png",
+      "inputs": [
+        "ruff-completion-input.png",
+        "reference.png"
+      ],
+      "usage": "neck-ruff",
+      "prompt": "Use case: precise-object-edit. Input 1 is the original character's NECK-RUFF visible cutout; Input 2 is the sole original character reference. Complete this ONE neck-ruff attachment by drawing ONLY missing hidden inner/rear surfaces and a smooth natural fur contour where the head/torso used to occlude it. Keep its original cowl crest, cream/charcoal fur pattern, long throat fringe, proportions, viewpoint and exact scale. This is neck/throat fur ONLY. Do not add any arm, paw, shoulder joint, black leg-shaped lump at lower right, torso, skull or ears. The lower edge must stay the original narrow flowing cream throat fringe, not a broad bib or blob. Preserve visible original art and finish the artificially straight cut edges so this is one clean complete part, without holes or disjoint scraps. Transparent background, opaque painted fur, no labels, text, floor or shadow."
+    }
+  ]
+}

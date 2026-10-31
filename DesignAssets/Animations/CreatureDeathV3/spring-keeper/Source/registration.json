@@ -1,0 +1,110 @@
+{
+  "approvedImage": "DesignAssets/CreatureConcepts/v3/spring-keeper.png",
+  "approvedBounds": [
+    69,
+    63,
+    333,
+    293
+  ],
+  "approvedScale": 1.6666666666666667,
+  "approvedTargetSize": [
+    440,
+    383
+  ],
+  "keyRegistration": [
+    {
+      "key": 0,
+      "sourceBounds": [
+        85,
+        64,
+        562,
+        486
+      ],
+      "uniformScale": 0.7829181494661922,
+      "translation": [
+        -30.54804270462637,
+        17.395017793594263
+      ],
+      "worldBoundsWidth": 440.0,
+      "referenceGroundY": 448
+    },
+    {
+      "key": 1,
+      "sourceBounds": [
+        785,
+        80,
+        641,
+        496
+      ],
+      "uniformScale": 0.7829181494661922,
+      "translation": [
+        -609.5160142348755,
+        -2.960854092526688
+      ],
+      "worldBoundsWidth": 501.8505338078292,
+      "referenceGroundY": 448
+    },
+    {
+      "key": 2,
+      "sourceBounds": [
+        22,
+        616,
+        683,
+        401
+      ],
+      "uniformScale": 0.7829181494661922,
+      "translation": [
+        -28.59074733096088,
+        -348.2277580071175
+      ],
+      "worldBoundsWidth": 534.7330960854093,
+      "referenceGroundY": 448
+    },
+    {
+      "key": 3,
+      "sourceBounds": [
+        727,
+        781,
+        709,
+        235
+      ],
+      "uniformScale": 0.7829181494661922,
+      "translation": [
+        -590.7259786476868,
+        -347.44483985765123
+      ],
+      "worldBoundsWidth": 555.0889679715302,
+      "referenceGroundY": 448
+    }
+  ],
+  "contactRegistration": [
+    {
+      "key": 2,
+      "sourceBounds": [
+        68,
+        145,
+        828,
+        603
+      ],
+      "uniformScale": 0.5314009661835749,
+      "translation": [
+        -0.13526570048310305,
+        50.51207729468598
+      ]
+    },
+    {
+      "key": 3,
+      "sourceBounds": [
+        946,
+        323,
+        786,
+        425
+      ],
+      "uniformScale": 0.5314009661835749,
+      "translation": [
+        -455.5458937198068,
+        50.51207729468598
+      ]
+    }
+  ]
+}

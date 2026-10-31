@@ -1,0 +1,30 @@
+{
+  "name": "spring-keeper",
+  "action": "death",
+  "sourceImage": "DesignAssets/CreatureConcepts/v3/spring-keeper.png",
+  "image": "DesignAssets/Animations/CreatureDeathV3/spring-keeper/death.webp",
+  "frameSize": 512,
+  "columns": 5,
+  "pivotX": 256,
+  "pivotY": 448,
+  "frameCount": 9,
+  "durationsMs": [
+    140,
+    80,
+    90,
+    80,
+    80,
+    100,
+    120,
+    160,
+    1000
+  ],
+  "durationMs": 1850,
+  "loop": false,
+  "preview": "DesignAssets/Animations/CreatureDeathV3/spring-keeper/preview.webp",
+  "thumbnail": "DesignAssets/Animations/CreatureDeathV3/spring-keeper/thumbnail.webp",
+  "rig": "DesignAssets/Animations/CreatureDeathV3/spring-keeper/rig.json",
+  "renderer": "DesignAssets/Animations/CreatureDeathV3/spring-keeper/render.py",
+  "method": "Four new complete tail-less support-collapse cels at one physical scale; fixed contacted body and four constant-scale drawn fan-tail poses folding about the rump with body occlusion.",
+  "spineCompatibilityVerified": false
+}

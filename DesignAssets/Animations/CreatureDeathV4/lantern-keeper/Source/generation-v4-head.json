@@ -1,0 +1,10 @@
+{
+  "tool": "builtin image_gen", 
+  "prompt": "Use case: precise-object-edit. Image 1 is the exact transparent head-part edit target; image 2 is the approved complete lantern-keeper identity. Preserve image 1's face, two open dark-green eyes, amber forehead gems, nose, expression, head size, position, upper silhouette, palette, light and fur rendering. Remove ONLY the projecting neck stump/collar underneath the jaw. The complete separated head must end in a natural closed furry jaw/chin contour immediately under the muzzle, around y=300 on the given 512px canvas, instead of extending down to y=327. Restore the hidden underside of the jaw with matching cream fur and a clean dark teal outline, no horizontal amputation, no empty socket. No neck, chest, shoulder, mane, collar, ring or other body mass may remain. Keep the back cheek tufts. Keep the head in precisely the same place and scale on the 512x512 transparent canvas. This is a complete anatomical skull attachment, not a full character. No text, shadow, haze or matte.", 
+  "referenced_image_paths": [
+    "H:/Spawner/DesignAssets/Animations/CreatureDeathV4/lantern-keeper/Source/head-neck-input.png", 
+    "H:/Spawner/DesignAssets/CreatureConcepts/v3/lantern-keeper.png"
+  ], 
+  "transparent_background": true, 
+  "savedImage": "head-jaw-drawing-v4.png"
+}

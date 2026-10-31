@@ -1,0 +1,16 @@
+{
+  "entries": [
+    {
+      "asset": "Source/completed-body-drawing.png",
+      "provider": "built-in image_gen",
+      "input": "Source/reference.png",
+      "prompt": "Use case: precise-object-edit. ONE actual production source layer for a 2D cutout/bone animation rig, a SINGLE static illustration, not a pose sequence and not a sheet. Reference is exact approved anatomy, palette, paint style, fine teal outlines, camera and world-scale authority. Maintain original canvas registration and preserve all retained visible pixels/markings as exactly as possible. Complete the previously hidden contour and surface naturally at removed attachments; no flat cut edges or fragments. Genuine transparent background, generous padding. No text, labels, scenery, floor, extra shadows or added props. Draw ONLY the rabbit's complete compact TORSO and hindquarters with cream fur and exact sage green coat swirls from reference. Remove the entire head and neck ruff, BOTH huge leaf ears and all glowing ornaments attached to them, all four feet/legs, and fluffy tail. Complete the furred shoulder/neck joint behind removed head, complete the torso underside behind legs and rear contour behind tail. Keep torso at exact original dimensions and same position; no enlargement to fill the empty canvas, no face or detached parts."
+    },
+    {
+      "asset": "Source/completed-head-drawing.png",
+      "provider": "built-in image_gen",
+      "input": "Source/reference.png",
+      "prompt": "Use case: precise-object-edit. One SINGLE production complete source art part for a 2D cutout bone rig, not an animation frame sheet. Reference is the approved exact anatomy, palette, painterly style, camera and world scale. Genuine transparent RGBA background. No text, labels, extra objects, effects, scenery, floor or cast shadow. Draw ONLY the complete HEAD with its full ivory NECK/CHEST RUFF of this exact rabbit, as one complete closed-contour rig attachment. BOTH visible eyes fully closed relaxed fine dark teal eyelids, retain original muzzle, skull proportions, ivory fur and tiny golden cheek ornaments. Remove BOTH giant leaf EARS and their stems/ear droplets, complete the head's furred top contour behind the removed ears. Remove all torso/hindquarters/feet and tail; complete a short rounded furred neck root behind the head/ruff. Exact original head/ruff proportions and world scale, same canvas placement, do not enlarge/center to fill."
+    }
+  ]
+}

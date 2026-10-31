@@ -1,0 +1,16 @@
+{
+  "authority": "DesignAssets/CreatureConcepts/v3/old-garden-snail.png",
+  "canvas": [
+    512,
+    512
+  ],
+  "scale": 1.501466275659824,
+  "translation": [
+    0,
+    5
+  ],
+  "pivot": [
+    256,
+    448
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "tool": "builtin-imagegen",
+  "prompt": "Use case: illustration-story. Draw six actual missing transition cels for the snail in Image 1 (only design authority), using Image 2 as the existing SIX key poses. Same original golden patterned shell/tree/fruit/moss/vine shapes and camera throughout, hard shell never deforming. Transparent 3-column by 2-row equal-cell sheet, no text/grid/scenery. These are IN-BETWEEN poses, not repeats: cell1 is halfway between Image2 neutral and its half-eye-withdrawn pose (one black eye tip sinks into its tube while the other follows, keep the rounded head and original ground); cell2 halfway between that and its no-eyes folded head (stalks nearly gone, head beginning to bend back); cell3 halfway between the thick head-at-mouth and the mostly retracted rolling foot (a rounded U muscle fold feeding up/back through the small front-left entrance); cell4 halfway between the rolling foot and last small fold, with a muscular S curl still visible and tail drawing under rear rim; cell5 halfway between the last small fold and no body, with a small mint tongue feeding INSIDE the natural front entrance; cell6 even closer to no-body: only the final tiny mint fold just inside that lip, rear tail fully gone. Foot muscle keeps volume while visibly moving into the aperture, never a flat scaled strip. No face in other holes, no new large cutout/arches, complete solid rounded golden shell. Support releases late and shell settles only vertically. Keep the old tree trunk, leaves, fruits, pale shell bands and motifs at original proportions. Whole animal safely inside each cell.",
+  "inputs": [
+    "H:/Spawner/DesignAssets/Animations/CreatureDeathV6/old-garden-snail/Source/registered-reference.png",
+    "H:/Spawner/DesignAssets/Animations/CreatureDeathV6/old-garden-snail/Source/generation/keyposes.png"
+  ],
+  "output": "bridges.png"
+}

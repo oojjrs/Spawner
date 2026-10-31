@@ -1,0 +1,5 @@
+{
+  "prompt": "Edit this exact isolated closed-eye head source. Remove ALL THREE amber/gold hanging jewel droplets: the two on top of the forehead and the one at the right cheek. Reconstruct continuous complete ivory fur skin and the softly rounded scalp/cheek under every removed jewel, including the full hidden forehead between the future ear sockets. Preserve this head's exact outer fur silhouette except the jewel projections, closed eyelids, pink nose, mouth, plush shallow face proportions, camera, lighting, creamy fur tufts, original painted fur brush size and same canvas composition. No ears, no antlers, no new ornaments, no neck stump, no ruff or body. This will be the actual hidden head surface behind the approved character's original face pixels and independently attached original jewels; do not redesign the face. A single complete head only with genuinely transparent background, no gray haze, cast shadow, labels, guides or stray scraps.",
+  "referenceImage": "Drawings/head-jewel-reference.png",
+  "output": "Drawings/complete-head-skin.png"
+}

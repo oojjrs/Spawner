@@ -1,0 +1,100 @@
+{
+  "reference": "original.png",
+  "registeredReference": "registered-reference.png",
+  "parts": [
+    {
+      "source": "Authoring/apertures.png",
+      "output": "Parts/apertures.png"
+    },
+    {
+      "source": "Authoring/body-00.png",
+      "output": "Parts/body-00.png"
+    },
+    {
+      "source": "Authoring/body-01.png",
+      "output": "Parts/body-01.png"
+    },
+    {
+      "source": "Authoring/body-02.png",
+      "output": "Parts/body-02.png"
+    },
+    {
+      "source": "Authoring/body-03.png",
+      "output": "Parts/body-03.png"
+    },
+    {
+      "source": "Authoring/body-04.png",
+      "output": "Parts/body-04.png"
+    },
+    {
+      "source": "Authoring/body-05.png",
+      "output": "Parts/body-05.png"
+    },
+    {
+      "source": "Authoring/fore-entry-01.png",
+      "output": "Parts/fore-entry-01.png"
+    },
+    {
+      "source": "Authoring/fore-entry-02.png",
+      "output": "Parts/fore-entry-02.png"
+    },
+    {
+      "source": "Authoring/fore-entry-03.png",
+      "output": "Parts/fore-entry-03.png"
+    },
+    {
+      "source": "Authoring/fore-folded.png",
+      "output": "Parts/fore-folded.png"
+    },
+    {
+      "source": "Authoring/hard-front.png",
+      "output": "Parts/hard-front.png"
+    },
+    {
+      "source": "Authoring/head-0.png",
+      "output": "Parts/head-0.png"
+    },
+    {
+      "source": "Authoring/head-1.png",
+      "output": "Parts/head-1.png"
+    },
+    {
+      "source": "Authoring/head-2.png",
+      "output": "Parts/head-2.png"
+    },
+    {
+      "source": "Authoring/head-3.png",
+      "output": "Parts/head-3.png"
+    },
+    {
+      "source": "Authoring/head-4.png",
+      "output": "Parts/head-4.png"
+    },
+    {
+      "source": "Authoring/head-5.png",
+      "output": "Parts/head-5.png"
+    },
+    {
+      "source": "Authoring/neutral.png",
+      "output": "Parts/neutral.png"
+    },
+    {
+      "source": "Authoring/rear-folded.png",
+      "output": "Parts/rear-folded.png"
+    },
+    {
+      "source": "Authoring/shell-back.png",
+      "output": "Parts/shell-back.png"
+    },
+    {
+      "source": "Authoring/shell-front.png",
+      "output": "Parts/shell-front.png"
+    },
+    {
+      "source": "Authoring/tail-folded.png",
+      "output": "Parts/tail-folded.png"
+    }
+  ],
+  "rig": "../rig.json",
+  "renderer": "../render.py"
+}

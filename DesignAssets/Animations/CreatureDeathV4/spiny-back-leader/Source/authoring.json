@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "canvas": [
+    512,
+    512
+  ],
+  "referenceAuthority": "DesignAssets/CreatureConcepts/v3/spiny-back-leader.png",
+  "boundLayers": {
+    "body": "Source/Bound/body.png",
+    "body-closed": "Source/Bound/body-closed.png",
+    "fore-far-lower": "Source/Bound/fore-far-lower.png",
+    "fore-far-upper": "Source/Bound/fore-far-upper.png",
+    "fore-near-lower": "Source/Bound/fore-near-lower.png",
+    "fore-near-upper": "Source/Bound/fore-near-upper.png",
+    "hind-far-lower": "Source/Bound/hind-far-lower.png",
+    "hind-far-upper": "Source/Bound/hind-far-upper.png",
+    "hind-near-lower": "Source/Bound/hind-near-lower.png",
+    "hind-near-upper": "Source/Bound/hind-near-upper.png",
+    "jaw-far": "Source/Bound/jaw-far.png",
+    "jaw-near": "Source/Bound/jaw-near.png",
+    "mid-far-lower": "Source/Bound/mid-far-lower.png",
+    "mid-far-upper": "Source/Bound/mid-far-upper.png",
+    "mid-near-lower": "Source/Bound/mid-near-lower.png",
+    "mid-near-upper": "Source/Bound/mid-near-upper.png"
+  },
+  "rawGenerations": "Source/generation.json",
+  "registeredBindings": "rig.json",
+  "registrations": [
+    "Source/registration.json",
+    "Source/eye-registration.json"
+  ],
+  "prepare": "prepare.py",
+  "renderer": "render.py"
+}

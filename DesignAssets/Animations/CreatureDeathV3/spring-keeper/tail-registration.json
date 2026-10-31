@@ -1,0 +1,212 @@
+{
+  "source": "Source/tail-drawings.png",
+  "canvas": [
+    512,
+    512
+  ],
+  "uniformSourceScale": 0.54,
+  "root": [
+    300,
+    365
+  ],
+  "construction": "Four complete drawn fan poses with one common authoring scale and separate rigid root registrations; no mirror, body rescale, per-frame fit, or whole-actor warp.",
+  "scaleEvidence": {
+    "authority": "Source/Keys/key-0.png and approved creature design",
+    "rejectedAuthority": "Compact body keys 2 and 3",
+    "method": "One-time manual comparison of the longest exposed plume and its cream cap, followed by full-size overlap inspection. SIFT had only five neutral inliers and was not used as a definitive scale oracle.",
+    "approvedPlumeMidribApproximate": [
+      [
+        274,
+        305
+      ],
+      [
+        339,
+        241
+      ],
+      [
+        369,
+        172
+      ],
+      [
+        367,
+        122
+      ],
+      [
+        343,
+        95
+      ],
+      [
+        313,
+        99
+      ]
+    ],
+    "sourcePlumeMidribApproximate": [
+      [
+        238,
+        456
+      ],
+      [
+        341,
+        350
+      ],
+      [
+        401,
+        220
+      ],
+      [
+        384,
+        126
+      ],
+      [
+        337,
+        92
+      ],
+      [
+        270,
+        114
+      ]
+    ],
+    "independentIntrinsicLengthClaim": false
+  },
+  "parentMotion": "Translate all tail pixels by the body root offset during collapse; post-contact root remains [300,365].",
+  "drawOrder": [
+    "tail",
+    "Parts/contact-body.png"
+  ],
+  "occlusion": {
+    "method": "Complete tail first; complete opaque body drawn afterward. Plumes and green coverts that pass behind the wing, collar, or skull are hidden by actual body alpha.",
+    "floorMask": false,
+    "canvasCrop": false
+  },
+  "prepare": "Source/tail-prepare.py",
+  "stages": [
+    {
+      "stage": 0,
+      "sourceRectangle": [
+        0,
+        0,
+        650,
+        700
+      ],
+      "sourceRootInRectangle": [
+        154,
+        561
+      ],
+      "rotationDegrees": -42,
+      "scale": [
+        0.54,
+        0.54
+      ],
+      "matrix": [
+        [
+          0.4012982057577929,
+          0.36133052743378347,
+          35.49365042294738
+        ],
+        [
+          -0.36133052743378347,
+          0.4012982057577929,
+          195.51660779468082
+        ]
+      ],
+      "sourceAlpha": "Source/TailMasks/tail-0.png",
+      "output": "Parts/tail-0.png"
+    },
+    {
+      "stage": 1,
+      "sourceRectangle": [
+        650,
+        0,
+        1254,
+        700
+      ],
+      "sourceRootInRectangle": [
+        70,
+        576
+      ],
+      "rotationDegrees": -70,
+      "scale": [
+        0.54,
+        0.54
+      ],
+      "matrix": [
+        [
+          0.18469087739586118,
+          0.5074340152243906,
+          -5.2103541869592505
+        ],
+        [
+          -0.5074340152243906,
+          0.18469087739586118,
+          294.1384356856913
+        ]
+      ],
+      "sourceAlpha": "Source/TailMasks/tail-1.png",
+      "output": "Parts/tail-1.png"
+    },
+    {
+      "stage": 2,
+      "sourceRectangle": [
+        0,
+        700,
+        650,
+        1254
+      ],
+      "sourceRootInRectangle": [
+        154,
+        396
+      ],
+      "rotationDegrees": -100,
+      "scale": [
+        0.54,
+        0.54
+      ],
+      "matrix": [
+        [
+          -0.09377001594014236,
+          0.5317961866265923,
+          103.84929255065134
+        ],
+        [
+          -0.5317961866265923,
+          -0.09377001594014236,
+          484.0295390527916
+        ]
+      ],
+      "sourceAlpha": "Source/TailMasks/tail-2.png",
+      "output": "Parts/tail-2.png"
+    },
+    {
+      "stage": 3,
+      "sourceRectangle": [
+        650,
+        700,
+        1254,
+        1254
+      ],
+      "sourceRootInRectangle": [
+        56,
+        380
+      ],
+      "rotationDegrees": -143,
+      "scale": [
+        0.54,
+        0.54
+      ],
+      "matrix": [
+        [
+          -0.4312631754255382,
+          0.324980112502106,
+          200.65829507302988
+        ],
+        [
+          -0.324980112502106,
+          -0.4312631754255382,
+          547.0788929618225
+        ]
+      ],
+      "sourceAlpha": "Source/TailMasks/tail-3.png",
+      "output": "Parts/tail-3.png"
+    }
+  ]
+}

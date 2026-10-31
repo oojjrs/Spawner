@@ -1,0 +1,9 @@
+{
+  "prompt": "Edit this existing transparent animation attachment atlas, using the second image as the sole approved character design. Preserve the same exact 2-column by 4-row layout, each attachment's scale, outline, colors, feather markings, painterly style and position. Make ONLY these technical hidden-surface repairs: upper-left torso must be a complete SHORT PLUMP cream/gold torso with NO green wings attached; remove the green wing on its right side and finish the same compact round cream/gold body underneath, also remove any little green wing remnants on its left. Keep the torso compact, not elongated or enlarged. Replace the hollow brown neck opening on that torso with continuous softly feathered cream/gold skin. On the separate head in row 2 left, replace its hollow neck cap on top with continuous rounded cream feather surface without a ring or seam. On the two separate green wings in row 2 right, close their hollow mounting cuffs with complete solid green feather roots, no holes or pale mechanical-looking rings. On the two feet at lower right, close the hollow ankle cuffs with the same warm gold living skin, preserving every toe and foot shape. Do not modify the upper-right whole bird, any crest plume, tail feather, or pink petal collar. Do not add decorations, shoulders, sockets, circles, text, labels, panel lines, ground or shadow. All attachments remain clearly separated with transparent background. These are complete living tissue drawings for animation, not detached hollow toy parts.",
+  "referenced_image_paths": [
+    "H:\\Spawner\\DesignAssets\\Animations\\CreatureDeathV5\\spring-keeper\\Source\\generation\\parts-atlas.png",
+    "H:\\Spawner\\DesignAssets\\Animations\\CreatureDeathV5\\spring-keeper\\Source\\reference.png"
+  ],
+  "transparent_background": true,
+  "output": "complete-roots.png"
+}

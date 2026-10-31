@@ -1,0 +1,188 @@
+{
+  "entries": [
+    {
+      "part": "body",
+      "source": "Source/plain-core.png",
+      "mask": "Source/Masks/body.png",
+      "matrix": [
+        [
+          0.18571428571428572,
+          0,
+          167.78571428571428
+        ],
+        [
+          0,
+          0.18571428571428572,
+          231.74285714285713
+        ]
+      ]
+    },
+    {
+      "part": "mane",
+      "source": "Source/core-and-mane.png",
+      "mask": "Source/Masks/mane.png",
+      "matrix": [
+        [
+          0.201765447667087,
+          0,
+          113.437578814628
+        ],
+        [
+          0,
+          0.201765447667087,
+          203.37452711223204
+        ]
+      ]
+    },
+    {
+      "part": "head",
+      "source": "Source/parts-atlas.png",
+      "mask": "Source/Masks/head.png",
+      "matrix": [
+        [
+          0.56,
+          -0.0,
+          -226.60000000000002
+        ],
+        [
+          0.0,
+          0.56,
+          124.28
+        ]
+      ]
+    },
+    {
+      "part": "near-ear",
+      "source": "Source/parts-atlas.png",
+      "mask": "Source/Masks/near-ear.png",
+      "matrix": [
+        [
+          0.58,
+          -0.0,
+          -392.65999999999997
+        ],
+        [
+          0.0,
+          0.58,
+          25.920000000000016
+        ]
+      ]
+    },
+    {
+      "part": "far-ear",
+      "source": "Source/parts-atlas.png",
+      "mask": "Source/Masks/far-ear.png",
+      "matrix": [
+        [
+          0.5,
+          -0.0,
+          -20.5
+        ],
+        [
+          0.0,
+          0.5,
+          -95.5
+        ]
+      ]
+    },
+    {
+      "part": "fore-near",
+      "source": "Source/parts-atlas.png",
+      "mask": "Source/Masks/fore-near.png",
+      "matrix": [
+        [
+          0.4385018196684484,
+          -0.1952335886763841,
+          -22.21381164707553
+        ],
+        [
+          0.1952335886763841,
+          0.4385018196684484,
+          -16.026153329924966
+        ]
+      ]
+    },
+    {
+      "part": "fore-far",
+      "source": "Source/parts-atlas.png",
+      "mask": "Source/Masks/fore-far.png",
+      "matrix": [
+        [
+          0.46935588133464967,
+          -0.0245978994341836,
+          -381.3862666928416
+        ],
+        [
+          0.0245978994341836,
+          0.46935588133464967,
+          101.35057238336972
+        ]
+      ]
+    },
+    {
+      "part": "hind-near",
+      "source": "Source/parts-atlas.png",
+      "mask": "Source/Masks/hind-near.png",
+      "matrix": [
+        [
+          0.42,
+          -0.0,
+          234.76
+        ],
+        [
+          0.0,
+          0.42,
+          21.30000000000001
+        ]
+      ]
+    },
+    {
+      "part": "hind-far",
+      "source": "Source/parts-atlas.png",
+      "mask": "Source/Masks/hind-far.png",
+      "matrix": [
+        [
+          0.34,
+          -0.0,
+          46.799999999999955
+        ],
+        [
+          0.0,
+          0.34,
+          95.03999999999999
+        ]
+      ]
+    },
+    {
+      "part": "tail",
+      "source": "Source/parts-atlas.png",
+      "mask": "Source/Masks/tail.png",
+      "matrix": [
+        [
+          0.4,
+          -0.0,
+          -88.20000000000005
+        ],
+        [
+          0.0,
+          0.4,
+          -32.0
+        ]
+      ]
+    }
+  ],
+  "eyePatchBoxes": [
+    [
+      139,
+      216,
+      176,
+      270
+    ],
+    [
+      191,
+      223,
+      245,
+      285
+    ]
+  ]
+}

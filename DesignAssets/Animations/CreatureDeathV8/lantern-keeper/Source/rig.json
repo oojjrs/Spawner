@@ -1,0 +1,743 @@
+{
+  "parts": {
+    "pelvis": {
+      "image": "Parts/pelvis.png",
+      "atlasRect": [
+        18,
+        49,
+        293,
+        335
+      ],
+      "size": [
+        275,
+        286
+      ],
+      "bindMatrix": [
+        0.3890909090909091,
+        0,
+        286,
+        0,
+        0.42657342657342656,
+        326
+      ]
+    },
+    "torso": {
+      "image": "Parts/torso.png",
+      "atlasRect": [
+        317,
+        29,
+        621,
+        331
+      ],
+      "size": [
+        304,
+        302
+      ],
+      "bindMatrix": [
+        0.48026315789473684,
+        0,
+        226,
+        0,
+        0.48013245033112584,
+        282
+      ]
+    },
+    "head-open": {
+      "image": "Parts/head-open.png",
+      "atlasRect": [
+        638,
+        76,
+        940,
+        321
+      ],
+      "size": [
+        302,
+        245
+      ],
+      "bindMatrix": [
+        0.543046357615894,
+        0,
+        151,
+        0,
+        0.5224489795918368,
+        225
+      ]
+    },
+    "head-closed": {
+      "image": "Parts/head-closed.png",
+      "atlasRect": [
+        958,
+        76,
+        1259,
+        322
+      ],
+      "size": [
+        301,
+        246
+      ],
+      "bindMatrix": [
+        0.5448504983388704,
+        0,
+        151,
+        0,
+        0.5203252032520326,
+        225
+      ]
+    },
+    "ruff": {
+      "image": "Parts/ruff.png",
+      "atlasRect": [
+        31,
+        359,
+        352,
+        642
+      ],
+      "size": [
+        321,
+        283
+      ],
+      "bindMatrix": [
+        0.45794392523364486,
+        0,
+        145,
+        0,
+        0.3957597173144876,
+        306
+      ]
+    },
+    "tail": {
+      "image": "Parts/tail.png",
+      "atlasRect": [
+        385,
+        409,
+        597,
+        628
+      ],
+      "size": [
+        212,
+        219
+      ],
+      "bindMatrix": [
+        0.24528301886792453,
+        0,
+        370,
+        0,
+        0.3242009132420091,
+        314
+      ]
+    },
+    "fore-far-upper": {
+      "image": "Parts/fore-far-upper.png",
+      "atlasRect": [
+        198,
+        47,
+        604,
+        499
+      ],
+      "size": [
+        406,
+        452
+      ],
+      "sourceAxis": [
+        [
+          203.0,
+          81.36
+        ],
+        [
+          203.0,
+          375.15999999999997
+        ]
+      ],
+      "widthScale": 0.12
+    },
+    "fore-far-lower": {
+      "image": "Parts/fore-far-lower.png",
+      "atlasRect": [
+        692,
+        54,
+        954,
+        499
+      ],
+      "size": [
+        262,
+        445
+      ],
+      "sourceAxis": [
+        [
+          131.0,
+          80.1
+        ],
+        [
+          131.0,
+          369.34999999999997
+        ]
+      ],
+      "widthScale": 0.14
+    },
+    "fore-near-upper": {
+      "image": "Parts/fore-near-upper.png",
+      "atlasRect": [
+        174,
+        495,
+        569,
+        963
+      ],
+      "size": [
+        395,
+        468
+      ],
+      "sourceAxis": [
+        [
+          197.5,
+          84.24
+        ],
+        [
+          197.5,
+          388.44
+        ]
+      ],
+      "widthScale": 0.12
+    },
+    "fore-near-lower": {
+      "image": "Parts/fore-near-lower.png",
+      "atlasRect": [
+        674,
+        521,
+        940,
+        971
+      ],
+      "size": [
+        266,
+        450
+      ],
+      "sourceAxis": [
+        [
+          133.0,
+          81.0
+        ],
+        [
+          133.0,
+          373.5
+        ]
+      ],
+      "widthScale": 0.16
+    },
+    "hind-far": {
+      "image": "Parts/hind-far.png",
+      "atlasRect": [
+        665,
+        668,
+        899,
+        912
+      ],
+      "size": [
+        234,
+        244
+      ],
+      "bindMatrix": [
+        0.23931623931623933,
+        0,
+        273,
+        0,
+        0.3155737704918033,
+        369
+      ]
+    },
+    "ear-near": {
+      "image": "Parts/ear-near.png",
+      "atlasRect": [
+        942,
+        651,
+        1252,
+        934
+      ],
+      "size": [
+        310,
+        283
+      ],
+      "bindMatrix": [
+        0.5626862315174005,
+        -0.14043964693315325,
+        274.15213358070497,
+        0.13169730702198235,
+        0.6287176027435768,
+        77.03710575139146
+      ],
+      "root": [
+        251,
+        239
+      ],
+      "tip": [
+        432,
+        155
+      ]
+    },
+    "ear-far": {
+      "image": "Parts/ear-far.png",
+      "atlasRect": [
+        20,
+        928,
+        357,
+        1210
+      ],
+      "size": [
+        337,
+        282
+      ],
+      "bindMatrix": [
+        0.41104436229205177,
+        0.03627541589648802,
+        76.86321626617375,
+        -0.18969500924214414,
+        0.5150184842883548,
+        160.80961182994454
+      ],
+      "root": [
+        215,
+        230
+      ],
+      "tip": [
+        85,
+        198
+      ]
+    },
+    "drop-far": {
+      "image": "Parts/drop-far.png",
+      "atlasRect": [
+        463,
+        1021,
+        551,
+        1153
+      ],
+      "size": [
+        88,
+        132
+      ],
+      "bindMatrix": [
+        0.2,
+        0,
+        76.2,
+        0,
+        0.2,
+        197
+      ],
+      "bindTip": [
+        85,
+        198
+      ]
+    },
+    "drop-near": {
+      "image": "Parts/drop-near.png",
+      "atlasRect": [
+        731,
+        1021,
+        820,
+        1153
+      ],
+      "size": [
+        89,
+        132
+      ],
+      "bindMatrix": [
+        0.2,
+        0,
+        423.1,
+        0,
+        0.2,
+        154
+      ],
+      "bindTip": [
+        432,
+        155
+      ]
+    },
+    "head-half": {
+      "image": "Parts/head-half.png",
+      "atlasRect": [
+        922,
+        967,
+        1233,
+        1215
+      ],
+      "size": [
+        311,
+        248
+      ],
+      "bindMatrix": [
+        0.5273311897106109,
+        0,
+        151,
+        0,
+        0.5161290322580645,
+        225
+      ]
+    },
+    "paw-far": {
+      "image": "Parts/paw-far.png",
+      "atlasRect": [
+        1044,
+        230,
+        1333,
+        499
+      ],
+      "size": [
+        289,
+        269
+      ],
+      "bindMatrix": [
+        0.1903114186851211,
+        0,
+        164,
+        0,
+        0.13011152416356878,
+        410
+      ]
+    },
+    "paw-near": {
+      "image": "Parts/paw-near.png",
+      "atlasRect": [
+        1089,
+        686,
+        1378,
+        964
+      ],
+      "size": [
+        289,
+        278
+      ],
+      "bindMatrix": [
+        0.20069204152249134,
+        0,
+        207,
+        0,
+        0.13309352517985612,
+        411
+      ]
+    }
+  },
+  "headBindPivot": [
+    247,
+    330
+  ],
+  "poses": [
+    {
+      "head": [
+        247,
+        330
+      ],
+      "headAngle": 0,
+      "shoulder-near": [
+        247,
+        373
+      ],
+      "shoulder-far": [
+        209,
+        375
+      ]
+    },
+    {
+      "head": [
+        238,
+        387
+      ],
+      "headAngle": -6,
+      "shoulder-near": [
+        240,
+        399
+      ],
+      "shoulder-far": [
+        201,
+        399
+      ]
+    },
+    {
+      "head": [
+        235,
+        421
+      ],
+      "headAngle": -12,
+      "shoulder-near": [
+        234,
+        416
+      ],
+      "shoulder-far": [
+        194,
+        415
+      ]
+    }
+  ],
+  "segments": [
+    {
+      "id": "A",
+      "startMs": 200,
+      "endMs": 600,
+      "fromPose": 0,
+      "toPose": 1
+    },
+    {
+      "id": "B",
+      "startMs": 600,
+      "endMs": 950,
+      "fromPose": 1,
+      "toPose": 2
+    }
+  ],
+  "chestDrop": 60,
+  "earRelaxDegrees": {
+    "far": -3,
+    "near": 3
+  },
+  "limbs": {
+    "far": {
+      "paw": [
+        193,
+        425
+      ],
+      "lengths": [
+        33,
+        29
+      ]
+    },
+    "near": {
+      "paw": [
+        237,
+        426
+      ],
+      "lengths": [
+        35,
+        31
+      ]
+    }
+  },
+  "drawOrder": [
+    "hind-far",
+    "tail",
+    "torso",
+    "fore-far-upper",
+    "fore-far-lower",
+    "pelvis",
+    "fore-near-upper",
+    "fore-near-lower",
+    "ear-far",
+    "ear-near",
+    "drop-far",
+    "drop-near",
+    "ruff",
+    "paw-far",
+    "paw-near",
+    "head"
+  ],
+  "sampleTimesMs": [
+    0,
+    33,
+    67,
+    100,
+    133,
+    167,
+    200,
+    233,
+    267,
+    300,
+    333,
+    367,
+    400,
+    433,
+    467,
+    500,
+    533,
+    567,
+    600,
+    633,
+    667,
+    700,
+    733,
+    767,
+    800,
+    833,
+    867,
+    900,
+    933,
+    950,
+    967,
+    1000,
+    1033,
+    1067,
+    1100,
+    1133,
+    1167,
+    1200,
+    1233,
+    1267,
+    1300
+  ],
+  "durationsMs": [
+    33,
+    34,
+    33,
+    33,
+    34,
+    33,
+    33,
+    34,
+    33,
+    33,
+    34,
+    33,
+    33,
+    34,
+    33,
+    33,
+    34,
+    33,
+    33,
+    34,
+    33,
+    33,
+    34,
+    33,
+    33,
+    34,
+    33,
+    33,
+    17,
+    17,
+    33,
+    33,
+    34,
+    33,
+    33,
+    34,
+    33,
+    33,
+    34,
+    33,
+    770
+  ],
+  "canvas": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "opacityAnimation": false,
+  "boneHierarchy": {
+    "root": null,
+    "pelvis": "root",
+    "chest": "pelvis",
+    "head": "chest",
+    "ruff-top": "root",
+    "ruff-bottom": "root",
+    "shoulder-far": "chest",
+    "elbow-far": "shoulder-far",
+    "wrist-far": "elbow-far",
+    "paw-far": "root",
+    "shoulder-near": "chest",
+    "elbow-near": "shoulder-near",
+    "wrist-near": "elbow-near",
+    "paw-near": "root",
+    "ear-far": "head",
+    "ear-near": "head",
+    "drop-far": "ear-far",
+    "drop-near": "ear-near",
+    "tail": "pelvis",
+    "hind-far": "root"
+  },
+  "meshWeights": {
+    "torso": {
+      "bones": [
+        "pelvis",
+        "chest"
+      ],
+      "frontWeight": "(1-smooth((x-235)/105))*smooth((438-y)/100)"
+    },
+    "ruff": {
+      "bones": [
+        "ruff-bottom",
+        "ruff-top"
+      ],
+      "topWeight": "1-smooth((y-315)/100)"
+    },
+    "ear-near": {
+      "rootBone": "head",
+      "arcStart": "ear-near root",
+      "axis": "root to tip",
+      "curvatureWeight": "longitudinal distance / root-tip length",
+      "transverseWidthScale": 1
+    },
+    "ear-far": {
+      "rootBone": "head",
+      "arcStart": "ear-far root",
+      "axis": "root to tip",
+      "curvatureWeight": "longitudinal distance / root-tip length",
+      "transverseWidthScale": 1
+    }
+  },
+  "expressionSwitchesMs": [
+    {
+      "at": 0,
+      "attachment": "head-open"
+    },
+    {
+      "at": 75,
+      "attachment": "head-half"
+    },
+    {
+      "at": 155,
+      "attachment": "head-closed"
+    }
+  ],
+  "settle": {
+    "startMs": 950,
+    "endMs": 1100,
+    "headDropPixels": 0.7
+  },
+  "interpolation": "Cubic Hermite with shared midpose velocity; no pose opacity interpolation",
+  "keyPoseSources": [
+    "KeyPoses/neutral.png",
+    "KeyPoses/midway.png",
+    "KeyPoses/contact.png"
+  ],
+  "eyePatchMask": "Expressions/eyes-mask.png",
+  "generation": {
+    "keyDrawings": "Generation/keys.png",
+    "parts": "Generation/parts.png",
+    "forelimbs": "Generation/forelimbs.png",
+    "prompts": "Generation/prompts.json"
+  },
+  "earSettle": {
+    "startMs": 750,
+    "endMs": 1300,
+    "rootEndMs": 1200,
+    "bendStartMs": 850,
+    "rootDegrees": {
+      "near": 48,
+      "far": -25
+    },
+    "bendDegrees": {
+      "near": 25,
+      "far": -20
+    },
+    "emissionStartMs": 650,
+    "emissionEndMs": 1240,
+    "unlitTextures": {
+      "near": "Parts/ear-near-unlit.png",
+      "far": "Parts/ear-far-unlit.png"
+    },
+    "approvedKey": "KeyPoses/ears-down-unlit.png",
+    "meshStepPixels": 8,
+    "surface": "constant-curvature ear mesh, fixed root, invariant transverse width",
+    "poseOpacityAnimation": false,
+    "emissionIntensityAnimation": true
+  },
+  "keyframeApproval": {
+    "key": "KeyPoses/ears-down-unlit.png",
+    "userInstruction": "흠, 계속해봐",
+    "properties": [
+      "ears lowered to ground",
+      "leaf-vein emission off"
+    ],
+    "bodySource": "CreatureDeathV7 lantern-keeper unchanged"
+  }
+}

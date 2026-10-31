@@ -1,0 +1,20 @@
+{
+  "source": "Source/contact-body-drawing.png",
+  "target": "Source/pose-body-contact-reference.png",
+  "matrix": [
+    [
+      0.4080065692485731,
+      0.0006604489710091996,
+      -0.720596059986334
+    ],
+    [
+      -0.0006604489710091996,
+      0.4080065692485731,
+      0.6774671228100785
+    ]
+  ],
+  "featureMatches": 127,
+  "registrationInliers": 89,
+  "output": "Parts/contact-body.png",
+  "headOrBodyScaleAfterRegistration": 1
+}

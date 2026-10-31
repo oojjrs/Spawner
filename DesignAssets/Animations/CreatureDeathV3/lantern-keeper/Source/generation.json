@@ -1,0 +1,46 @@
+{
+  "provider": "built-in image_gen",
+  "actualCalls": [
+    {
+      "asset": "Source/key-drawings.png",
+      "prompt": "Use case: precise-object-edit. Asset type: actual production action-defining key drawings for a 2D game death animation, four complete poses in equal padded 2x2 cells, read left-right then top-bottom. Transparent RGBA, no text/grid/effects/floor/shadows. Approved reference is sole design, anatomy, pattern, palette, camera and original proportions authority. Keep same character world scale in every cell with generous margin and a common ground line, no zoom-to-fit and no body shrinking, melting or global squash. The four phases are NORMAL ALIVE NEUTRAL (fully open eyes), SUPPORT FAILING (joint articulation and center of mass losing balance), FIRST WEIGHT CONTACT (whole body reaches ground), then PASSIVE FOLLOW-THROUGH SETTLED CORPSE. Draw actual body/limb poses and overlaps; no mere head tilt or erased limbs. Preserve skull size, torso volume, appendage lengths and marking placement. Key3 and Key4 body position should be identical once contacted, only designated soft appendages finish settling. Original fine outlines and painterly shading, no gore. Exact cream rabbit: enormous ivory/green leaf ears with gold veins and attached golden dew drops, huge soft cream chest mane, sage/dark-green flank swirl, four paws and tiny tuft tail. Neutral sits alive normally, eye fully open, ears raised. Failing: front elbows give way and chest sinks forward, knees visibly bend while paws remain supporting, head/mane and shoulders descend together; haunch weight follows, leaf ears still lag high. Contact: whole rabbit rolls onto its near flank/belly, cheek and chest rest on ground, eyes close, forepaws slack forward and long hindfeet folded/splayed naturally, no missing limbs. Both giant leaf ears still in mid-fall above/behind. Settled: exact same contacted body/head/paws, both ears flop down beside head and across back/ground, gold droplets remain attached and follow their leaf tips, tiny tuft tail relaxes. Clearly a fallen lifeless body rather than upright sleepy sitting.",
+      "inputs": [
+        "DesignAssets/CreatureConcepts/v3/lantern-keeper.png"
+      ],
+      "provider": "built-in image_gen",
+      "providerOutput": "exec-3d40236f-f849-47aa-a5ed-e4b83a37c735.png"
+    },
+    {
+      "asset": "Source/contact-body-drawing.png",
+      "prompt": "Use case: precise-object-edit. ONE complete actual production post-contact BODY source. Image1 exact contacted pose/512-square registration, image2 design identity only. Remove ONLY BOTH enormous leaf ears, their tip dew drops and their leaf roots. Keep the entire closed-eye head, skull volume, soft cream mane, torso sage swirl, all four slack folded paws, tiny tuft tail and existing forehead golden beads in precisely the same pose, proportions, shading and location. Complete small hidden ivory furry skull surfaces where ears were removed, giving a closed natural head contour, no flat cuts or missing regions. Corpse remains lying with cheek/chest on ground, do not lift/repose. Same world size/canvas, blank genuinely transparent background above. This is actual source body used as fixed foreground during ear follow-through. No extra objects, detached ears, words, effects, shadows or scenery.",
+      "inputs": [
+        "DesignAssets/Animations/CreatureDeathV3/lantern-keeper/Source/Keys/key-2.png",
+        "DesignAssets/CreatureConcepts/v3/lantern-keeper.png"
+      ],
+      "provider": "built-in image_gen",
+      "providerOutput": "exec-13256f19-c763-4b36-a235-9e76f30b71db.png"
+    },
+    {
+      "asset": "Source/ear-drawings.png",
+      "prompt": "Use case: precise-object-edit. Actual production isolated EAR-PAIR attachment drawings, four equal padded cells 2x2 on true transparent RGBA. Image1 is exact first-contact ear pose and canvas registration, image2 final relaxed ear pose and same registration, image3 approved design. Draw ONLY the exact TWO giant ivory/green leaf ears, golden veins, attached golden dew-drop tips and the three tiny golden forehead beads at their joined base. Remove all head/face/mane/body/paws/tail. Complete each ear's hidden lower root with rounded furred overlap, no flat crop or body fragments. Four successive stages from image1 ear posture (still partly aloft) to image2 (flopped against grounded head/back): 0%,35%,70%,100%. Roots and bead cluster stay in the same absolute canvas coordinates, leaf tips follow gravity with far ear and near ear slightly delayed from one another, then settle. Keep each ear's length/width/veins/palette and dew size stable; bend actual continuous leaf surface, no melting, stretching, disappearing drop or suddenly shortened ears. Preserve original fixed 512-square world registration in each cell, generous blank alpha, no per-cel zoom, no floor/shadow/effects/labels/text.",
+      "inputs": [
+        "DesignAssets/Animations/CreatureDeathV3/lantern-keeper/Source/Keys/key-2.png",
+        "DesignAssets/Animations/CreatureDeathV3/lantern-keeper/Source/Keys/key-3.png",
+        "DesignAssets/CreatureConcepts/v3/lantern-keeper.png"
+      ],
+      "provider": "built-in image_gen",
+      "providerOutput": "exec-dca6aa4c-e958-4273-91f1-89b50073d5f1.png"
+    },
+    {
+      "asset": "Source/collapse-drawings.png",
+      "prompt": "Use case: precise-object-edit. Actual production four COMPLETE in-between cels, 2x2 equal padded cells, true transparent RGBA no scenery/shadow/glow/text/grid. Image1 pose A, image2 pose B, image3 APPROVED design authority. Draw 20%,40%,60%,80% progress A to B, excluding endpoints. Same exact character world scale/camera/ground within each 512-square cel, no per-cel zoom, skull growth, body melting, marking drift or limb deletion. True joint articulation and changing overlap under gravity. Rabbit actual support collapses: front elbows/knees bend, forepaws retain real ground contacts, chest and shoulders drop before heavy hindquarters roll onto near side; cheek approaches ground. Eye starts open and closes late, giant leaf ears LAG rather than lead. Preserve exact body mass, skull size, cream ruff, green flank swirls and ear veins/gold drops. Both forelegs and hindfeet remain continuous and visibly fold, not vanish. Acceleration through the middle into contact, no slow head-only sleep nod. Do not change original skull/torso lengths when foreshortening.",
+      "inputs": [
+        "DesignAssets/Animations/CreatureDeathV3/lantern-keeper/Source/Keys/key-0.png",
+        "DesignAssets/Animations/CreatureDeathV3/lantern-keeper/Source/Keys/key-2.png",
+        "DesignAssets/CreatureConcepts/v3/lantern-keeper.png"
+      ],
+      "provider": "built-in image_gen",
+      "providerOutput": "exec-ba3c930a-fc1c-49d6-b56d-2b8671e6e123.png"
+    }
+  ]
+}

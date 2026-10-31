@@ -1,0 +1,36 @@
+{
+  "provider": "built-in image_gen",
+  "entries": [
+    {
+      "file": "parts-atlas.png",
+      "prompt": "Use case: precise-object-edit. Actual production layered-rig artwork of the exact approved ivory-and-forest-green leaf-eared rabbit. Exactly NINE independently separated full parts on true transparent RGBA, equal generously padded 3x3 cells, NO labels or lines. Top row A complete torso INCLUDING huge cream chest mane, sage/dark-green flank spiral and round rump, with head, ears, all legs and tail removed and every hidden torso surface completed; B complete head/skull/cheeks with OPEN original eyes, tiny pink nose and three original forehead gold dew beads, a short complete rounded hidden neck, but NO leaf ears, chest mane, body or legs; C exact near/right enormous ivory/green leaf EAR including all gold veins, golden tip drop and complete soft hidden root. Middle row D exact far/left giant leaf EAR with gold veins and attached tip drop and complete root; E complete near foreleg from furry hidden shoulder through elbow/wrist to entire cream paw; F complete far foreleg same anatomy. Bottom row G complete near hindleg including furry hip, knee/hock, ankle and whole broad original hindfoot; H complete far hindleg; I tiny original fluffy cream tuft TAIL with full rounded root. Keep the approved exact proportions, skull/muzzle size, original cream mane, flank green spiral, leaf shapes and vein markings, dew attachment, palette, fine dark teal outlines and upper-left painted highlights. Original three-quarter camera and neutral anatomical alignment. All parts have finished natural closed contours, overlap at attachment roots and no flat cuts or wedges. Legs must show actual articulated continuous anatomy, not detached feet or chopped slivers. Whole parts visible with blank alpha around each cell, nothing touching neighbors. No extra accessory, neck gold collar, words, shadow, floor, glow, effects, background or complete rabbit duplicates. Real production attachments for continuous support-collapse and ear inertia, not a preview.",
+      "references": [
+        "Source/approved.png"
+      ],
+      "providerOutput": "exec-0f3037d8-146f-4683-a17f-68c32d54c859.png"
+    },
+    {
+      "file": "closed-head-drawing.png",
+      "prompt": "Use case: precise-object-edit. Actual production eye-closure attachment for this exact isolated rabbit head. Change ONLY the two open green eyes into natural fully CLOSED short relaxed eyelid curves in the original thin dark teal style. Keep ALL other pixels' intended pose, skull silhouette, cream fur, shading, forehead gold beads, pink nose, mouth, green back-neck fur, tiny neck, world scale, image position and transparent margins unchanged. No new eyebrows/lashes, reposing, enlarged head, background, floor, halo or new object. Genuine transparent RGBA outside the same complete head. This is a source attachment for blinking/death, not a preview.",
+      "references": [
+        "Source/head-eye-input.png"
+      ],
+      "providerOutput": "exec-0bef5e81-041b-48eb-8cb6-9f3d8e747ce3.png"
+    },
+    {
+      "file": "core-and-mane.png",
+      "prompt": "Use case: precise-object-edit. TWO actual independent production parts, side by side with wide blank alpha separation, from the exact approved leaf-eared ivory/forest-green rabbit reference. LEFT: complete underlying TORSO ONLY with small rounded green back, cream lower belly, rounded hidden neck/shoulder and rump. Remove HEAD, EARS, all FOUR ENTIRE LEGS including round spiral haunches, tiny tail, and ENTIRE long cream chest MANE. Restore the hidden short furred trunk surfaces under both the mane and haunch; no duplicate green leg spiral, big downward thigh lump, mane leaf fan, exposed hole or flat cut. This is a compact rounded actual ribcage/abdomen, not the whole standing rabbit. RIGHT: ONLY the entire original enormous hanging CREAM CHEST MANE as one continuous soft tuft mass, from the natural rounded upper neck attachment through every long overlapping ivory/cream fur tuft, completing its hidden upper/back root, no head, face, gold beads, green body, limbs or other object. Reference's exact thin teal outline, cream/green palette, original tuft shapes, upper-left painterly highlights, proportions and camera. Both sources are complete closed contours with overlap at their original attachment. They will be layered so the mane may bend and contact ground independently of the falling torso. Transparent RGBA everywhere outside the two parts. No words, grid, backgrounds, shadow, fog, scenery, extra motifs or duplicate complete rabbit.",
+      "references": [
+        "Source/approved.png"
+      ]
+    },
+    {
+      "file": "plain-core.png",
+      "prompt": "Use case: precise-object-edit. Exact production edit target is this ONE isolated rounded rabbit trunk. Remove ONLY the large curled C-shaped/spiral ivory marking on its right-hand green flank, and the concentric curled fur there. Replace that entire right-side swirl region with PLAIN smooth dark forest-green short fur continuous with the upper-middle green back, with ordinary original soft painted shading and NO circular/spiral stripe. Keep the exact outer torso silhouette, cream front/underside patch, green/cream colors elsewhere, original part size/pose/location, fine outline and transparent margins unchanged. The separate hind-leg layer already contains the approved spiral, so this hidden trunk must have NONE. Do not add a leg, haunch circle, head, mane, ears, tail, new decoration, text, shadow or background. Actual editable source part on genuinely transparent RGBA.",
+      "references": [
+        "Source/plain-torso-input.png"
+      ],
+      "providerOutput": "exec-c67d1ebe-e933-46bf-8b2c-65a21ae30b62.png"
+    }
+  ]
+}

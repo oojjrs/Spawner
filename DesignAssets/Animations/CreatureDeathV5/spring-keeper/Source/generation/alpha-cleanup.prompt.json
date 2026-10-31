@@ -1,0 +1,7 @@
+{
+  "prompt": "Remove the entire blurred colored background and every glow or cast shadow from this animation attachment atlas. Return a genuine transparent RGBA image: empty space between and around every attachment must have alpha zero. Keep every attachment exactly in its present place, with exactly the same contour, texture, colors and scale. Preserve the separated body, closed-eye full character, head, two wings, four crest plumes, individual tail feathers, neck collar and two feet. Do not redraw, rearrange, enhance, add parts, or replace the background with a flat color or checkerboard. Clean alpha edges with no colored background halos. Only background removal.",
+  "referenced_image_paths": [
+    "H:\\Spawner\\DesignAssets\\Animations\\CreatureDeathV5\\spring-keeper\\Source\\generation\\parts-atlas-opaque.png"
+  ],
+  "transparent_background": true
+}

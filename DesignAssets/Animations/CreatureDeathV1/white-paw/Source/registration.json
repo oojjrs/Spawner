@@ -1,0 +1,282 @@
+{
+  "sourceImage": "DesignAssets/CreatureConcepts/v3/white-paw.png",
+  "generatedSheet": "exec-4f179b14-3e09-42a3-b784-9a7e73dfc9f4.png",
+  "originalNeutralBounds": [
+    36,
+    198,
+    476,
+    448
+  ],
+  "commonScale": 1.4193548387096775,
+  "pivot": [
+    256.0,
+    448
+  ],
+  "poseRegistrations": [
+    {
+      "drawing": "000.png",
+      "sourceComponent": 1,
+      "sourceBounds": [
+        5,
+        120,
+        321,
+        383
+      ],
+      "scale": 1.4193548387096775,
+      "origin": [
+        32,
+        79
+      ],
+      "groundContactY": 448
+    },
+    {
+      "drawing": "001.png",
+      "sourceComponent": 2,
+      "sourceBounds": [
+        318,
+        137,
+        639,
+        381
+      ],
+      "scale": 1.4193548387096775,
+      "origin": [
+        28,
+        106
+      ],
+      "groundContactY": 448
+    },
+    {
+      "drawing": "002.png",
+      "sourceComponent": 3,
+      "sourceBounds": [
+        636,
+        161,
+        947,
+        381
+      ],
+      "scale": 1.4193548387096775,
+      "origin": [
+        35,
+        140
+      ],
+      "groundContactY": 448
+    },
+    {
+      "drawing": "003.png",
+      "sourceComponent": 4,
+      "sourceBounds": [
+        948,
+        172,
+        1252,
+        381
+      ],
+      "scale": 1.4193548387096775,
+      "origin": [
+        40,
+        156
+      ],
+      "groundContactY": 448
+    },
+    {
+      "drawing": "004.png",
+      "sourceComponent": 6,
+      "sourceBounds": [
+        6,
+        491,
+        313,
+        712
+      ],
+      "scale": 1.4193548387096775,
+      "origin": [
+        38,
+        139
+      ],
+      "groundContactY": 448
+    },
+    {
+      "drawing": "005.png",
+      "sourceComponent": 7,
+      "sourceBounds": [
+        314,
+        522,
+        629,
+        710
+      ],
+      "scale": 1.4193548387096775,
+      "origin": [
+        32,
+        185
+      ],
+      "groundContactY": 448
+    },
+    {
+      "drawing": "006.png",
+      "sourceComponent": 8,
+      "sourceBounds": [
+        624,
+        528,
+        943,
+        713
+      ],
+      "scale": 1.4193548387096775,
+      "origin": [
+        30,
+        190
+      ],
+      "groundContactY": 448
+    },
+    {
+      "drawing": "007.png",
+      "sourceComponent": 9,
+      "sourceBounds": [
+        936,
+        545,
+        1249,
+        715
+      ],
+      "scale": 1.4193548387096775,
+      "origin": [
+        34,
+        211
+      ],
+      "groundContactY": 448
+    },
+    {
+      "drawing": "008.png",
+      "sourceComponent": 11,
+      "sourceBounds": [
+        5,
+        870,
+        317,
+        975
+      ],
+      "scale": 1.4193548387096775,
+      "origin": [
+        35,
+        303
+      ],
+      "groundContactY": 448
+    },
+    {
+      "drawing": "009.png",
+      "sourceComponent": 12,
+      "sourceBounds": [
+        310,
+        869,
+        628,
+        976
+      ],
+      "scale": 1.4193548387096775,
+      "origin": [
+        30,
+        300
+      ],
+      "groundContactY": 448
+    },
+    {
+      "drawing": "010.png",
+      "sourceComponent": 13,
+      "sourceBounds": [
+        623,
+        870,
+        939,
+        975
+      ],
+      "scale": 1.4193548387096775,
+      "origin": [
+        32,
+        303
+      ],
+      "groundContactY": 448
+    },
+    {
+      "drawing": "011.png",
+      "sourceComponent": 14,
+      "sourceBounds": [
+        934,
+        872,
+        1244,
+        978
+      ],
+      "scale": 1.4193548387096775,
+      "origin": [
+        36,
+        302
+      ],
+      "groundContactY": 448
+    },
+    {
+      "drawing": "012.png",
+      "sourceComponent": 17,
+      "sourceBounds": [
+        7,
+        1108,
+        316,
+        1210
+      ],
+      "scale": 1.4193548387096775,
+      "origin": [
+        37,
+        307
+      ],
+      "groundContactY": 448
+    },
+    {
+      "drawing": "013.png",
+      "sourceComponent": 15,
+      "sourceBounds": [
+        312,
+        1106,
+        626,
+        1210
+      ],
+      "scale": 1.4193548387096775,
+      "origin": [
+        33,
+        305
+      ],
+      "groundContactY": 448
+    },
+    {
+      "drawing": "014.png",
+      "sourceComponent": 16,
+      "sourceBounds": [
+        624,
+        1106,
+        941,
+        1211
+      ],
+      "scale": 1.4193548387096775,
+      "origin": [
+        31,
+        303
+      ],
+      "groundContactY": 448
+    },
+    {
+      "drawing": "015.png",
+      "sourceComponent": 18,
+      "sourceBounds": [
+        935,
+        1108,
+        1247,
+        1211
+      ],
+      "scale": 1.4193548387096775,
+      "origin": [
+        35,
+        306
+      ],
+      "groundContactY": 448
+    }
+  ],
+  "componentAlphaThreshold": 64,
+  "discardedAlphaBelow": 12,
+  "emptyCellsExcluded": 0,
+  "tailNormalization": {
+    "method": "Continuous local flexible-tail mesh; torso, face, paws and world scale unaffected.",
+    "field": "dy=110*smooth((x-190)/60)*(1-smooth((y-90)/240))",
+    "meshStep": 8,
+    "appliedConsistentlyToAllDrawings": true
+  }
+}

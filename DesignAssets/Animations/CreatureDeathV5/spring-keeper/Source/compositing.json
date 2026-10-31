@@ -1,0 +1,63 @@
+{
+  "visibleAuthority": "registered-reference.png",
+  "ownership": {
+    "crest": "crest-visible.png",
+    "near-wing": "near-wing-visible.png",
+    "tail": "tail-visible.png",
+    "far-foot": "far-foot-visible.png",
+    "near-foot": "near-foot-visible.png",
+    "head-collar": "head-collar-visible.png",
+    "body": "body-visible.png"
+  },
+  "hiddenArtwork": "generation/complete-roots.png",
+  "scalpCap": "scalp-cap",
+  "closedEye": {
+    "matrix": [
+      [
+        0.65,
+        0.0,
+        -231.05
+      ],
+      [
+        0.0,
+        0.65,
+        133.2
+      ]
+    ],
+    "sourceComponent": 1,
+    "ellipse": [
+      153,
+      281,
+      188,
+      315
+    ]
+  },
+  "referenceTranslation": [
+    0,
+    18
+  ],
+  "singleSkinSurface": {
+    "completeArtwork": "generation/head-collar-complete.png",
+    "canonicalBase": "EditableParts/head-collar.png",
+    "closedBase": "EditableParts/head-collar-closed.png",
+    "originalColors": [
+      "head-collar-visible.png",
+      "EditableParts/scalp-cap.png"
+    ],
+    "upperDepthY": [
+      270,
+      276
+    ],
+    "leftDepthX": [
+      140,
+      145
+    ],
+    "rightDepthX": [
+      230,
+      235
+    ],
+    "sourceAlpha": "maximum of complete skin and original visible coverage",
+    "composition": "one complete skin per depth scene; interpolate complete scenes with visibility masks",
+    "scalpCapRole": "source colors and visibility selector"
+  }
+}

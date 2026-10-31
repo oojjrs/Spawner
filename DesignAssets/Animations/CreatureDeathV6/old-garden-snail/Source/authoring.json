@@ -1,0 +1,118 @@
+{
+  "appearanceAuthority": "DesignAssets/CreatureConcepts/v3/old-garden-snail.png",
+  "originalSha256": "937d5d784079d7dfb95c50ee41f461e73f655c6b0d728067051f92c02b001f6c",
+  "registeredReference": "registered-reference.png",
+  "registration": "registration.json",
+  "partInputs": {
+    "shell.png": "rigid-shell.png",
+    "early-0.png": "BodyCels/early-0.png",
+    "early-1.png": "BodyCels/early-1.png",
+    "early-2.png": "BodyCels/early-2.png",
+    "keyposes-2.png": "BodyCels/keyposes-2.png",
+    "bridges-2.png": "BodyCels/bridges-2.png",
+    "keyposes-3.png": "BodyCels/keyposes-3.png",
+    "bridges-3.png": "BodyCels/bridges-3.png",
+    "keyposes-4.png": "BodyCels/keyposes-4.png",
+    "bridges-4.png": "BodyCels/bridges-4.png",
+    "bridges-5.png": "BodyCels/bridges-5.png",
+    "body-hidden.png": "BodyCels/body-hidden.png",
+    "eye-far.png": "BodyCels/eye-far.png",
+    "eye-near.png": "BodyCels/eye-near.png"
+  },
+  "rig": {
+    "authority": "DesignAssets/CreatureConcepts/v3/old-garden-snail.png",
+    "canvas": [
+      512,
+      512
+    ],
+    "pivot": [
+      256,
+      448
+    ],
+    "groundY": 448,
+    "gravity": 1100,
+    "restitution": 0.035,
+    "shell": {
+      "source": "Parts/shell.png",
+      "type": "rigid",
+      "scale": 1,
+      "rotation": 0
+    },
+    "bodyCels": [
+      {
+        "image": "early-0.png",
+        "durationMs": 360
+      },
+      {
+        "image": "early-1.png",
+        "durationMs": 100
+      },
+      {
+        "image": "early-2.png",
+        "durationMs": 100
+      },
+      {
+        "image": "keyposes-2.png",
+        "durationMs": 100
+      },
+      {
+        "image": "bridges-2.png",
+        "durationMs": 100
+      },
+      {
+        "image": "keyposes-3.png",
+        "durationMs": 100
+      },
+      {
+        "image": "bridges-3.png",
+        "durationMs": 100
+      },
+      {
+        "image": "keyposes-4.png",
+        "durationMs": 100
+      },
+      {
+        "image": "bridges-4.png",
+        "durationMs": 100
+      },
+      {
+        "image": "bridges-5.png",
+        "durationMs": 100
+      },
+      {
+        "image": "body-hidden.png",
+        "durationMs": 640
+      }
+    ],
+    "construction": "drawn muscular retraction cels with original rigid shell/tree and painted hidden underside",
+    "eyeInvagination": [
+      {
+        "image": "eye-far.png",
+        "shift": [
+          35,
+          82
+        ],
+        "releaseMs": [
+          60,
+          260
+        ]
+      },
+      {
+        "image": "eye-near.png",
+        "shift": [
+          29,
+          79
+        ],
+        "releaseMs": [
+          110,
+          330
+        ]
+      }
+    ]
+  },
+  "construction": {
+    "hardSurface": "Original visible shell and decorations remain one rigid actor; new painted hidden shell surfaces complete the body-occluded regions.",
+    "softAnatomy": "Drawn body cels with aperture occlusion; source crops and registration are preserved.",
+    "generation": "generation/"
+  }
+}

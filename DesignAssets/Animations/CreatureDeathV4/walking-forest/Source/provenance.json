@@ -1,0 +1,29 @@
+{
+  "appearanceAuthority": {
+    "asset": "Source/approved-concept.png",
+    "origin": "DesignAssets/CreatureConcepts/v3/walking-forest.png",
+    "sha256": "b0ce030470f01124f93f7b50b2d1027a650ffd5d4f833f12c78402a7435e7610"
+  },
+  "registeredReference": {
+    "asset": "Source/reference.png",
+    "sha256": "e5427cba54e448d0e0349ed4b3b654beec28e5378fd4cd3b3a5b7d7d105535c2"
+  },
+  "reusedRigidSource": {
+    "asset": "Source/reused-shell-input.png",
+    "origin": "DesignAssets/Animations/CreatureDeathV3/walking-forest/Parts/hard-complete.png",
+    "sha256": "2bf0f254cd3b56ebe370572cffc42e8b6328881454f5a445d621bda850d540ba",
+    "role": "rigid source texture assembled from approved-reference shell pixels and preserved hidden underside drawings"
+  },
+  "currentEditableRigidSource": {
+    "asset": "Source/EditableParts/shell.png",
+    "sha256": "d772e11c88152dbc42758f078eed6416f18cdb5381e30f1b3cb42877ee26b999",
+    "changes": [
+      "opaque-alpha normalization",
+      "33 isolated alpha-noise pixels removed"
+    ]
+  },
+  "newSourceGeneration": "Source/generation.json",
+  "rig": "rig.json",
+  "motion": "motion.py",
+  "renderer": "render.py"
+}

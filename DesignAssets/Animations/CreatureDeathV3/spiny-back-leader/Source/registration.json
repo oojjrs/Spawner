@@ -1,0 +1,80 @@
+{
+  "approvedImage": "DesignAssets/CreatureConcepts/v3/spiny-back-leader.png",
+  "approvedBounds": [
+    37,
+    49,
+    302,
+    279
+  ],
+  "approvedScale": 1.6603773584905661,
+  "approvedTargetSize": [
+    440,
+    382
+  ],
+  "keyRegistration": [
+    {
+      "key": 0,
+      "sourceBounds": [
+        93,
+        64,
+        577,
+        458
+      ],
+      "uniformScale": 0.7625649913344887,
+      "translation": [
+        -34.918544194107426,
+        49.94107452339688
+      ],
+      "worldBoundsWidth": 440.0,
+      "referenceGroundY": 448
+    },
+    {
+      "key": 1,
+      "sourceBounds": [
+        844,
+        140,
+        624,
+        384
+      ],
+      "uniformScale": 0.7625649913344887,
+      "translation": [
+        -625.525129982669,
+        48.41594454072788
+      ],
+      "worldBoundsWidth": 475.840554592721,
+      "referenceGroundY": 448
+    },
+    {
+      "key": 2,
+      "sourceBounds": [
+        79,
+        618,
+        653,
+        348
+      ],
+      "uniformScale": 0.7625649913344887,
+      "translation": [
+        -53.2201039861352,
+        -288.63778162911615
+      ],
+      "worldBoundsWidth": 497.95493934142115,
+      "referenceGroundY": 448
+    },
+    {
+      "key": 3,
+      "sourceBounds": [
+        826,
+        618,
+        647,
+        348
+      ],
+      "uniformScale": 0.7625649913344887,
+      "translation": [
+        -620.5684575389948,
+        -288.63778162911615
+      ],
+      "worldBoundsWidth": 493.3795493934142,
+      "referenceGroundY": 448
+    }
+  ]
+}

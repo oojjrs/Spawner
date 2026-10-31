@@ -1,0 +1,6 @@
+{
+  "tool": "built-in image_gen",
+  "editTarget": "gems-lit-atlas.png",
+  "generatedTextures": "gems-unlit.png",
+  "prompt": "Precise production MATERIAL edit of this transparent sprite texture atlas. Keep the THREE REGIONS exactly as arranged: two complete hanging teardrop ear-tip ornaments on the left and center, and the cropped forehead patch with TWO small amber gems on the right. Turn OFF the magical self-illumination of ALL these amber gems. The final dead creature must have no luminous bright yellow/white cores, no internal golden glow, no bloom or halos. Make the gems clearly UNLIT muted amber-brown glass under ordinary ambient light, with dark honey/ochre midtones and subdued non-emissive metal rims. Retain their exact teardrop shapes and material volume; a tiny restrained dim reflected highlight is fine, but remove the large bright white/yellow illuminated areas so they read unlit even when small. Do not turn them gray or black, do not erase them, do not change their silhouettes, positions, scale, stems or outlines. In the forehead patch preserve the cream fur unchanged and edit only the two amber gems. Keep the same composition, all complete shapes within their regions, transparent background and clear transparent gaps. No new objects, no labels or text."
+}

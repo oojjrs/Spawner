@@ -1,0 +1,16 @@
+{
+  "entries": [
+    {
+      "asset": "Source/completed-body-drawing.png",
+      "provider": "built-in image_gen",
+      "input": "Source/reference.png",
+      "prompt": "Use case: precise-object-edit. ONE actual production source layer for a 2D cutout/bone animation rig, a SINGLE static illustration, not a pose sequence and not a sheet. Reference is exact approved anatomy, palette, paint style, fine teal outlines, camera and world-scale authority. Maintain original canvas registration and preserve all retained visible pixels/markings as exactly as possible. Complete the previously hidden contour and surface naturally at removed attachments; no flat cut edges or fragments. Genuine transparent background, generous padding. No text, labels, scenery, floor, extra shadows or added props. Draw ONLY the bird's complete compact round TORSO with its sage green overlapping folded wing and cream belly plumage. Remove the entire head, neck ruff, crest, huge flower-feather tail and both legs/feet. Complete a smooth rounded feathered back/shoulder surface behind the removed head/tail and wing, and a complete round belly underside behind removed legs. Keep the torso in its exact original location and exact original dimensions, approximately its current small torso footprint, DO NOT enlarge it to fill canvas. No face or detached fragments."
+    },
+    {
+      "asset": "Source/completed-head-drawing.png",
+      "provider": "built-in image_gen",
+      "input": "Source/reference.png",
+      "prompt": "Use case: precise-object-edit. One SINGLE production complete source art part for a 2D cutout bone rig, not an animation frame sheet. Reference is the approved exact anatomy, palette, painterly style, camera and world scale. Genuine transparent RGBA background. No text, labels, extra objects, effects, scenery, floor or cast shadow. Draw ONLY the complete HEAD, entire attached flame-feather CREST and red/ivory petal NECK RUFF of this exact bird, as one complete closed-contour rig attachment. Both skull and crest must match original size/shape/color, visible eye fully closed as a fine relaxed dark teal eyelid. Remove the entire torso, green wing, giant tail fan and feet. Complete the ruff's previously hidden neck base naturally as a short rounded feathered root that can overlap a torso. Preserve original head and ruff proportions precisely. Same position on original canvas; do not center/enlarge the head to fill space."
+    }
+  ]
+}

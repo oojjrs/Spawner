@@ -1,0 +1,23 @@
+{
+  "provider": "builtin imagegen", 
+  "appearanceAuthority": "approved-reference.png", 
+  "prompts": [
+    {
+      "role": "final motion reference", 
+      "prompt": "Use case: identity-preserve. Draw one complete final death/collapse key of EXACTLY the attached approved white-paw predator. Keep its lean dark slate body, original cream-white spiky ruff/cheek mane and back markings, narrow masked face and dark nose, whiskers, cream ears, four original white paws with small dark claws, and the huge cream-white curled plume tail at its full original length and thickness. Original gold eyes now closed. Same original soft painterly rendering, thin shaded edge, colors/light and three-quarter left camera. Both fore elbows have buckled and folded out/back beside the chest, forearms down on the floor to the white hands, chest/belly now carry the weight. Pelvis and hind hocks fold down, all four limbs anatomically intact. The head has lagged behind then rests LAST with chin/cheek on the paw ground, ruff softly draped but keeping original mane volume and pointed fur tufts. The huge flexible tail relaxes from its high curl into a broad soft curved plume resting around/beside the rump, same full length/volume, not a shrinking stump or rigid stick. Body/skull retain their original lean proportions, not a squashed flat silhouette or a different animal. No upright supporting front legs under a merely sleeping head. One continuous painted full-body pose with natural overlap, no cutout joints. Fixed original framing/camera/scale and paw ground; no zoom/tightfit. Transparent background, no ground line, scene, shadow, sheet, text, blood or effects.", 
+      "references": [
+        "approved-reference.png"
+      ], 
+      "output": "Raw/final-drawing.png"
+    }, 
+    {
+      "role": "actual six complete timeline drawings", 
+      "prompt": "Use case: identity-preserve. Draw SIX chronological complete hand-painted game sprite frames in a3columns by2rows grid with equal square world canvases. Image1 is the exact approved original neutral and ONLY character/style authority. Image2 is the target full collapse pose. All six frames keep the same original camera, absolute character/part scale, palette, original fur pattern, thin soft shaded edges and same paw ground. No bold black ink outlines. Never zoom or tightly fit individual frames; keep original margins and position. Frame1 is very close to neutral, only beginning to lose support. Frame2 front elbows/knees buckle visibly and chest/pelvis start falling while head lags. Frame3 chest and belly land between the folded limbs, head still a small gap above ground. Frame4 hind hocks finish folding and the head follows downward. Frame5 chin/muzzle contacts ground last. Frame6 limp final rest with small appendage follow-through ended, fully closed eyes. Body mass must visibly sink with elbow flexion, not merely close eyes and nod on standing legs. Preserve skull, torso, limb and paw intrinsic volumes/proportions; no flattening, stretching or shrinking. Paint each whole connected anatomical pose, no cutout seams, gaps, morphs, alpha blends or ghosting. Transparent backgrounds and spacing. No scene, cast shadow, ground line, labels, grid lines, effects or blood. Subject is the EXACT white-paw predator: lean dark slate torso, original cream-white spiky mane/ruff and back/hip markings, narrow masked predator face, gold eyes becoming fully closed, whiskers, cream ears, four white hands/feet with small dark claws. Both elbows visibly fold and chest/pelvis descend as supports fail. Huge cream-white plume tail retains its original length/thickness and lowers with gravity from its high curl into a broad soft relaxed curve beside the rump; do not teleport, shrink or turn it into a rigid stick. Keep the original mane volume and pointed tuft design. No new body bulk, thicker skull, oversized paws or a different fox/cat. Neck/head stay anatomically joined and chin reaches ground last.", 
+      "references": [
+        "Guides/0.png", 
+        "Guides/1.png"
+      ], 
+      "output": "Raw/sequence-drawing.png"
+    }
+  ]
+}

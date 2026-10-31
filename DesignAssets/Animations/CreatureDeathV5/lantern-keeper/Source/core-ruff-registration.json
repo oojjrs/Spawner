@@ -1,0 +1,117 @@
+{
+  "drawing": "Drawings/complete-core-and-ruff.png", 
+  "core": {
+    "crop": [
+      100, 
+      100, 
+      1040, 
+      800
+    ], 
+    "matrix": [
+      [
+        0.235, 
+        0, 
+        205
+      ], 
+      [
+        0, 
+        0.235, 
+        243
+      ]
+    ]
+  }, 
+  "ruff": {
+    "crop": [
+      1060, 
+      200, 
+      1680, 
+      790
+    ], 
+    "matrix": [
+      [
+        0.3, 
+        0, 
+        140
+      ], 
+      [
+        0, 
+        0.3, 
+        268
+      ]
+    ], 
+    "hiddenRootRegion": [
+      145, 
+      216, 
+      233, 
+      249
+    ]
+  }, 
+  "visibleSource": "approved-reference.png", 
+  "pawBoundary": [
+    [
+      205, 
+      314
+    ], 
+    [
+      215, 
+      308
+    ], 
+    [
+      228, 
+      306
+    ], 
+    [
+      240, 
+      305
+    ], 
+    [
+      253, 
+      305
+    ], 
+    [
+      266, 
+      309
+    ], 
+    [
+      278, 
+      311
+    ], 
+    [
+      290, 
+      312
+    ], 
+    [
+      302, 
+      316
+    ], 
+    [
+      310, 
+      338
+    ], 
+    [
+      205, 
+      338
+    ]
+  ], 
+  "calf": {
+    "materialSource": "Drawings/complete-core-and-ruff.png", 
+    "materialCrop": [
+      750, 
+      450, 
+      920, 
+      650
+    ], 
+    "joints": [
+      [
+        277, 
+        285
+      ], 
+      [
+        252, 
+        316
+      ]
+    ], 
+    "radius": 8, 
+    "originalHaunchPatternUsed": false
+  }
+}

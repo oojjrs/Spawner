@@ -1,0 +1,94 @@
+{
+  "appearanceAuthority": "Source/approved-concept.png",
+  "reference": "Source/reference.png",
+  "canvas": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "registrations": {
+    "anterior": {
+      "sourceBounds": [
+        47,
+        264,
+        776,
+        610
+      ],
+      "scale": 0.35665294924554186,
+      "translation": [
+        56.23731138545952,
+        227.1426611796982
+      ],
+      "targetBounds": [
+        73,
+        318,
+        333,
+        448
+      ]
+    },
+    "stalk-near": {
+      "sourceBounds": [
+        870,
+        196,
+        1150,
+        581
+      ],
+      "scale": 0.13214285714285715,
+      "translation": [
+        -16.964285714285722,
+        266.1625
+      ],
+      "targetBounds": [
+        98,
+        275,
+        135,
+        360
+      ]
+    },
+    "stalk-far": {
+      "sourceBounds": [
+        166,
+        737,
+        445,
+        1124
+      ],
+      "scale": 0.13261648745519714,
+      "translation": [
+        128.98566308243727,
+        191.60035842293905
+      ],
+      "targetBounds": [
+        151,
+        273,
+        188,
+        357
+      ]
+    },
+    "posterior": {
+      "sourceBounds": [
+        602,
+        886,
+        1232,
+        1142
+      ],
+      "scale": 0.23828125,
+      "translation": [
+        128.99609375,
+        155.8828125
+      ],
+      "targetBounds": [
+        258,
+        367,
+        437,
+        428
+      ]
+    }
+  },
+  "shellSource": "Source/EditableParts/shell.png",
+  "shellMotion": "rigid translation and physical ground contact",
+  "foreground": "Source/foreground-mask.png",
+  "partSource": "Source/soft-parts-drawing.png"
+}

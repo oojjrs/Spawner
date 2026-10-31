@@ -1,0 +1,15 @@
+{
+  "tool": "image_gen.imagegen",
+  "transparentBackground": true,
+  "generations": [
+    {
+      "output": "ears.png",
+      "references": [
+        "DesignAssets/Animations/CreatureDeathV6/lantern-keeper/Source/Frames/009.png",
+        "DesignAssets/Animations/CreatureDeathV6/lantern-keeper/Source/Frames/012.png"
+      ],
+      "use": "Complete cel artwork; original silhouettes retained through full-frame registration, without ear cutout masks.",
+      "prompt": "PRODUCTION DRAWN ANIMATION SPRITESHEET edit. Deliver exactly EIGHT consecutive complete character cels in a precise 4 columns x 2 rows uniform square-cell grid on real transparent alpha. Each cel uses the SAME registration, scale and camera, no auto-cropping or re-centering. This is the same lantern-keeper rabbit in the two input references. Input 1 is the authority for the ENTIRE BODY in EVERY cel: its already collapsed body, head, nose, closed eyes, cheek resting on forepaws, folded hindleg, rump and tail stay absolutely fixed, copied identically from input 1, with the same feet baseline. The body is already dead and fully still. ONLY the two huge broad leaf-shaped EARS move. Start cel 1 with the exact ear pose from input 1. End cel 8 with the broad soft ears fully draped down in the relaxed leaf silhouettes seen in input 2, but KEEP the body/head pose and ear ROOT attachment positions of input 1, do not lower or shift the skull. Create six progressive intermediate ear drawings with complete coherent broad leaf VOLUME, consistent cream furry borders, mint green interiors and original branching GOLD VEINS; exactly one round hanging gold jewel at each tip. Ear roots remain fixed to the scalp. Do not make the ears narrower, ribbon-like, crumpled, triangular, stretched or rubbery. Let the far/image-left ear lose support first, bending down from its root; its tip hangs with a short delay. Let the nearer/image-right ear start two cels later, gradually falling beside/across the cheek with delayed tip and jewel follow-through. The last two cels decelerate gently into rest. Avoid huge pose jumps, collisions with the ground, ear jewels passing through paws, jitter, ghosting and doubled contours. Preserve the original identity, exact palette, painted shading, outline weight, markings, all original small scalp/cheek jewels and anatomical volume. No new markings, ornaments or eyes. All 8 cels must have the identical immobile body/head/tail, with only deliberate ear deformation. No text, numbering, labels, borders, shadows, scene or effects. These are actual usable full animation drawings, not a presentation diagram."
+    }
+  ]
+}

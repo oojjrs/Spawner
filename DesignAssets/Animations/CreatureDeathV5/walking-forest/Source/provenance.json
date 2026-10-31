@@ -1,0 +1,17 @@
+{
+  "appearanceAuthority": {
+    "path": "DesignAssets/CreatureConcepts/v3/walking-forest.png",
+    "sha256": "b0ce030470f01124f93f7b50b2d1027a650ffd5d4f833f12c78402a7435e7610"
+  },
+  "visibleSurface": "Source/reference.png",
+  "newArtwork": [
+    "Source/shell-hidden-drawing.png",
+    "Source/soft-hidden-drawing.png"
+  ],
+  "generationInput": "Source/cavity-input.png",
+  "outputHashes": {
+    "death.webp": "8605ba12b3f6014f19ff7b19e7c2c5f2362d42a65334869020bdf630d3829fb4",
+    "preview.webp": "800b7139dc7edf8e3630b7ff84c0ef4cd57d443a312ad6cffad140572fbaacd8",
+    "thumbnail.webp": "e2b9f144313c7f3aea97e4273e78276495b44838ff1392fc237b38733eab524b"
+  }
+}

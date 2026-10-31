@@ -1,0 +1,20 @@
+{
+  "tool": "builtin-imagegen",
+  "keyRevision": 9,
+  "keyApproval": "그걸로 둘 다 만들어봐",
+  "construction": "articulated layered cutout; horizontal soft-body transform and rigid shell; no pose alpha blending",
+  "assets": [
+    {
+      "name": "bundle-snail",
+      "approvedKeys": "AnimationCandidates/SnailDeathsV9HorizontalRetraction-20261031/bundle-snail-keyposes.png",
+      "bodyPrompt": "Use case: precise-object-edit. Asset type: actual isolated soft-body source layer for an approved 2D snail death animation. Image 1 is the approved NEUTRAL pose, not an animation to redesign. Extract and complete JUST its mint-ivory SOFT BODY as one continuous clean transparent PNG in the same square canvas and exact same framing, size and position. Remove the entire golden shell, every cargo item, every leaf/tree/mushroom/fruit, and BOTH complete eyestalks including the eyeballs. The only output subject is the snail's long low muscular body, with a smooth rounded head at the left and tapered small tail at the right, lying on the same horizontal baseline. Preserve the existing visible body's exact silhouette, palette, lighting, smooth pale cool-green shading, outline thickness and proportions. Fill the body surfaces previously hidden BEHIND the shell: a natural smooth low descending back from head toward the rear foot, so the body is a COMPLETE contiguous soft foot with no shell-shaped cutout or hole. After removing eyestalks, draw a smooth rounded head cap at their former base y-level, not two tall stubs. Do not lower or flatten the head itself. Do not draw any eyes, mouth, antennae, folds, wrinkles, curls, coils or bent-back neck. This is the original NEUTRAL full-length body, not a contracted pose. It will be compressed horizontally as a separate part beneath a rigid open-bottom shell. The reference body extends approximately x70..625, y390..589 within its 627x627 canvas. Everything outside this one complete mint-white body is genuinely transparent. No shell, cargo, shadow, ground, scenery, labels or other parts.",
+      "bodySource": "bundle-snail/Source/body-underpaint-generated.png"
+    },
+    {
+      "name": "old-garden-snail",
+      "approvedKeys": "AnimationCandidates/SnailDeathsV9HorizontalRetraction-20261031/old-garden-snail-keyposes.png",
+      "bodyPrompt": "Use case: precise-object-edit. Asset type: actual isolated soft-body source layer for an approved 2D snail death animation. Image 1 is the approved NEUTRAL pose, not an animation to redesign. Extract and complete JUST its mint-ivory SOFT BODY as one continuous clean transparent PNG in the same square canvas and exact same framing, size and position. Remove the entire golden shell, every cargo item, every leaf/tree/mushroom/fruit, and BOTH complete eyestalks including the eyeballs. The only output subject is the snail's long low muscular body, with a smooth rounded head at the left and tapered small tail at the right, lying on the same horizontal baseline. Preserve the existing visible body's exact silhouette, palette, lighting, smooth pale cool-green shading, outline thickness and proportions. Fill the body surfaces previously hidden BEHIND the shell: a natural smooth low descending back from head toward the rear foot, so the body is a COMPLETE contiguous soft foot with no shell-shaped cutout or hole. After removing eyestalks, draw a smooth rounded head cap at their former base y-level, not two tall stubs. Do not lower or flatten the head itself. Do not draw any eyes, mouth, antennae, folds, wrinkles, curls, coils or bent-back neck. This is the original NEUTRAL full-length body, not a contracted pose. It will be compressed horizontally as a separate part beneath a rigid open-bottom shell. The reference body extends approximately x35..570, y435..604 within its 627x627 canvas. Everything outside this one complete mint-white body is genuinely transparent. No shell, cargo, shadow, ground, scenery, labels or other parts.",
+      "bodySource": "old-garden-snail/Source/body-underpaint-generated.png"
+    }
+  ]
+}

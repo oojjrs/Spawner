@@ -1,0 +1,24 @@
+{
+  "appearanceAuthority": "Source/original.png",
+  "registeredReference": "Source/registered-reference.png",
+  "imagegenReference": "Source/reference.png",
+  "canonicalParts": "Source/EditableParts",
+  "generation": "Source/generation",
+  "compositing": "Source/compositing.json",
+  "physics": "Source/physics-config.json",
+  "crestRig": "Source/crest-rig.json",
+  "rebuild": [
+    "Source/prepare.py",
+    "motion.py",
+    "crest-motion.py",
+    "render.py"
+  ],
+  "canvas": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ]
+}

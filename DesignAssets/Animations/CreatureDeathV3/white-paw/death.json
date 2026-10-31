@@ -1,0 +1,30 @@
+{
+  "name": "white-paw",
+  "action": "death",
+  "sourceImage": "DesignAssets/CreatureConcepts/v3/white-paw.png",
+  "image": "DesignAssets/Animations/CreatureDeathV3/white-paw/death.webp",
+  "frameSize": 512,
+  "columns": 6,
+  "pivotX": 256,
+  "pivotY": 448,
+  "frameCount": 12,
+  "durationsMs": [
+    180,
+    70,
+    70,
+    70,
+    70,
+    70,
+    60,
+    65,
+    85,
+    100,
+    120,
+    1000
+  ],
+  "durationMs": 1960,
+  "loop": false,
+  "preview": "DesignAssets/Animations/CreatureDeathV3/white-paw/preview.webp",
+  "thumbnail": "DesignAssets/Animations/CreatureDeathV3/white-paw/thumbnail.webp",
+  "rig": "DesignAssets/Animations/CreatureDeathV3/white-paw/rig.json"
+}

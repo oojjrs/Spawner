@@ -1,0 +1,16 @@
+{
+  "entries": [
+    {
+      "asset": "Source/completed-body-drawing.png",
+      "provider": "built-in image_gen",
+      "input": "Source/reference.png",
+      "prompt": "Use case: precise-object-edit. ONE actual production source layer for a 2D cutout/bone animation rig, a SINGLE static illustration, not a pose sequence and not a sheet. Reference is exact approved anatomy, palette, paint style, fine teal outlines, camera and world-scale authority. Maintain original canvas registration and preserve all retained visible pixels/markings as exactly as possible. Complete the previously hidden contour and surface naturally at removed attachments; no flat cut edges or fragments. Genuine transparent background, generous padding. No text, labels, scenery, floor, extra shadows or added props. Draw ONLY the beetle's complete rigid CARAPACE/HEAD armor from reference, retain the huge curved ivory dorsal horn, both small ivory side spikes, maroon/burgundy shell plates and exact worn cream patch on near armor. Remove BOTH ivory mandibles and all SIX segmented purple legs. Complete the maroon face/mouth surface behind mandibles and lower body contour behind legs. Keep exact armor dimensions, horn shapes, plate pattern and original location. No limbs, no detached fragments, no enlargement to fill canvas."
+    },
+    {
+      "asset": "Source/completed-attachment-atlas.png",
+      "provider": "built-in image_gen",
+      "input": "Source/reference.png",
+      "prompt": "Use case: precise-object-edit. Asset type: ONE actual production separated attachment atlas for a 2D bone rig, NOT an animation sheet. Reference image is exact approved beetle design, ivory wear/chips, crimson sockets, plum legs, fine dark teal outlines, painterly shading, camera, limb proportions. Make six COMPLETE isolated closed-contour parts on true transparent background, arranged two columns by three rows with generous empty spacing. Row1: left smaller far ivory crescent mandible; right larger near ivory crescent mandible with the exact beige chipped patch. Row2: left far-front slim curved leg; right near-front larger claw leg. Row3: left near-middle claw leg; right far-rear claw leg. Each leg consists of its exact visible segmented plum curved limb/claw with small crimson upper joint, in the SAME orientation and curvature as the approved reference. Complete hidden upper joint into a smoothly rounded closed socket/root with matching paint and overlap; no flat cuts, no jagged clipped fragment, no torso pixels on a part. Complete each ivory jaw root into a smooth rounded top behind its attach point; preserve pointed tips, inner notches, wear marks and thickness. Only these six disconnected production parts; remove all carapace, horns, eyes, head, belly, other legs, shadows, scenery. No text, labels, boxes or decorative marks. Render each part large enough to preserve original line quality, internally consistent proportions, all parts fully within their padded cells. Do not redesign, thin, elongate, melt or simplify the existing parts. This artwork will actually be consumed as local rigid-bone attachments."
+    }
+  ]
+}

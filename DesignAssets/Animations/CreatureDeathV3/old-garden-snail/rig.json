@@ -1,0 +1,1356 @@
+{
+  "format": "spawner-layered-cel-timeline-v3",
+  "approvedDesign": "DesignAssets/CreatureConcepts/v3/old-garden-snail.png",
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ],
+  "columns": 8,
+  "method": "drawn soft tissue cels, rigid source shell, occlusion and parent landing",
+  "bones": [
+    {
+      "id": "root",
+      "parent": null,
+      "pivot": [
+        256,
+        448
+      ]
+    },
+    {
+      "id": "soft",
+      "parent": "root",
+      "pivot": [
+        210,
+        370
+      ]
+    }
+  ],
+  "attachments": {
+    "under": "Parts/hard-underpaint.png",
+    "hard": "Parts/hard-original.png",
+    "rim": "Parts/hard-rim.png",
+    "soft-0": "Parts/soft-0.png",
+    "soft-1": "Parts/soft-1.png",
+    "soft-2": "Parts/soft-2.png",
+    "soft-3": "Parts/soft-3.png",
+    "soft-4": "Parts/soft-4.png"
+  },
+  "frames": [
+    {
+      "timeMs": 0,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-0",
+          "soft"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 40,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-0",
+          "soft"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 80,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-0",
+          "soft"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 120,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-0",
+          "soft"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 160,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-0",
+          "soft"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 200,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-1",
+          "soft"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 240,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-1",
+          "soft"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 280,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-1",
+          "soft"
+        ],
+        [
+          "rim",
+          "root"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 320,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-2",
+          "soft"
+        ],
+        [
+          "rim",
+          "root"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 360,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-2",
+          "soft"
+        ],
+        [
+          "rim",
+          "root"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 400,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-2",
+          "soft"
+        ],
+        [
+          "rim",
+          "root"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 440,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-3",
+          "soft"
+        ],
+        [
+          "rim",
+          "root"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 480,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-3",
+          "soft"
+        ],
+        [
+          "rim",
+          "root"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 520,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-3",
+          "soft"
+        ],
+        [
+          "rim",
+          "root"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 560,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-4",
+          "soft"
+        ],
+        [
+          "rim",
+          "root"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 600,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-4",
+          "soft"
+        ],
+        [
+          "rim",
+          "root"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 640,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            1,
+            0
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-4",
+          "soft"
+        ],
+        [
+          "rim",
+          "root"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 680,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            1
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            10,
+            -3
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-4",
+          "soft"
+        ],
+        [
+          "rim",
+          "root"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 720,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            3
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            24,
+            -8
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-4",
+          "soft"
+        ],
+        [
+          "rim",
+          "root"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 760,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            6
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            43,
+            -14
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-4",
+          "soft"
+        ],
+        [
+          "rim",
+          "root"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 800,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            9
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            62,
+            -21
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-4",
+          "soft"
+        ],
+        [
+          "rim",
+          "root"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 840,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            14
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            81,
+            -27
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-4",
+          "soft"
+        ],
+        [
+          "rim",
+          "root"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 880,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            19
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            95,
+            -32
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-4",
+          "soft"
+        ],
+        [
+          "rim",
+          "root"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 920,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            26
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            104,
+            -35
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-4",
+          "soft"
+        ],
+        [
+          "rim",
+          "root"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 960,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            33
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            105,
+            -35
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-4",
+          "soft"
+        ],
+        [
+          "rim",
+          "root"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 1000,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            41
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            105,
+            -35
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-4",
+          "soft"
+        ],
+        [
+          "rim",
+          "root"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 1040,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            39
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            105,
+            -35
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-4",
+          "soft"
+        ],
+        [
+          "rim",
+          "root"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 1080,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            39
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            105,
+            -35
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-4",
+          "soft"
+        ],
+        [
+          "rim",
+          "root"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 1120,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            41
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            105,
+            -35
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-4",
+          "soft"
+        ],
+        [
+          "rim",
+          "root"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 1160,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            41
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            105,
+            -35
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-4",
+          "soft"
+        ],
+        [
+          "rim",
+          "root"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 1200,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            41
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            105,
+            -35
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-4",
+          "soft"
+        ],
+        [
+          "rim",
+          "root"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 1240,
+      "durationMs": 40,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            41
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            105,
+            -35
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-4",
+          "soft"
+        ],
+        [
+          "rim",
+          "root"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    },
+    {
+      "timeMs": 1280,
+      "durationMs": 1000,
+      "controls": {
+        "root": {
+          "translation": [
+            0,
+            41
+          ],
+          "rotation": 0
+        },
+        "soft": {
+          "translation": [
+            105,
+            -35
+          ],
+          "rotation": 0
+        }
+      },
+      "layers": [
+        [
+          "under",
+          "root"
+        ],
+        [
+          "soft-4",
+          "soft"
+        ],
+        [
+          "rim",
+          "root"
+        ],
+        [
+          "hard",
+          "root"
+        ]
+      ]
+    }
+  ],
+  "registration": [
+    {
+      "matrix": [
+        [
+          0.9623890333993951,
+          -0.07509488535976026,
+          94.88864186506004
+        ],
+        [
+          0.07509488535976026,
+          0.9623890333993951,
+          -63.69018731650258
+        ]
+      ],
+      "matches": 233
+    },
+    {
+      "matrix": [
+        [
+          0.8522421497562109,
+          0.012491257128141477,
+          -185.4136159920324
+        ],
+        [
+          -0.012491257128141477,
+          0.8522421497562109,
+          52.56850322548576
+        ]
+      ],
+      "matches": 213
+    },
+    {
+      "matrix": [
+        [
+          0.8583347388516864,
+          0.0004082054608828851,
+          -851.8087876387165
+        ],
+        [
+          -0.0004082054608828851,
+          0.8583347388516864,
+          43.011767551524066
+        ]
+      ],
+      "matches": 214
+    },
+    {
+      "matrix": [
+        [
+          0.8581809392649331,
+          -0.012387774323532556,
+          -175.59881616549876
+        ],
+        [
+          0.012387774323532556,
+          0.8581809392649331,
+          -344.9332933658628
+        ]
+      ],
+      "matches": 196
+    },
+    {
+      "matrix": [
+        [
+          0.8606089284213192,
+          -0.0015422845088596737,
+          -853.7278502731684
+        ],
+        [
+          0.0015422845088596737,
+          0.8606089284213192,
+          -340.25311121401546
+        ]
+      ],
+      "matches": 188
+    }
+  ],
+  "initialGroundY": 447,
+  "rootDropY": 41,
+  "sourceHardPixels": "Source/reference.png",
+  "spineCompatibilityVerified": false,
+  "retractionEndpoints": {
+    "soft": [
+      105,
+      -35
+    ]
+  },
+  "finalSoftOutsideForegroundPixels": 0,
+  "hardAlphaOpaqueThreshold": 240
+}

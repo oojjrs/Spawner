@@ -1,0 +1,128 @@
+{
+  "bodyMassCenter": [
+    210,
+    375
+  ],
+  "headMassCenter": [
+    169,
+    297
+  ],
+  "neckPivot": [
+    195,
+    336
+  ],
+  "headMass": 0.45,
+  "gravity": 950,
+  "groundY": 448,
+  "bodyAngleLimit": -60,
+  "headAngleLimit": [
+    -120,
+    20
+  ],
+  "foreFailureMs": [
+    140,
+    320
+  ],
+  "hindFailureMs": [
+    260,
+    460
+  ],
+  "headFailureMs": [
+    200,
+    460
+  ],
+  "durationActiveMs": 2000,
+  "sampleMs": 40,
+  "kneeRadii": {
+    "far-foot": 5,
+    "near-foot": 5
+  },
+  "legs": {
+    "far-foot": [
+      [
+        183,
+        409
+      ],
+      [
+        184,
+        417
+      ],
+      [
+        182,
+        423
+      ]
+    ],
+    "near-foot": [
+      [
+        231,
+        414
+      ],
+      [
+        230,
+        421
+      ],
+      [
+        229,
+        430
+      ]
+    ]
+  },
+  "accessories": {},
+  "extraParts": {
+    "tail": {
+      "pivot": [
+        278,
+        368
+      ],
+      "parent": "body"
+    },
+    "near-wing": {
+      "pivot": [
+        225,
+        339
+      ],
+      "parent": "body"
+    },
+    "far-wing": {
+      "pivot": [
+        195,
+        353
+      ],
+      "parent": "body"
+    }
+  },
+  "partFailureMs": {
+    "tail": [
+      320,
+      740
+    ],
+    "near-wing": [
+      180,
+      460
+    ],
+    "far-wing": [
+      320,
+      580
+    ]
+  },
+  "skinColliders": {},
+  "softChains": {},
+  "partAngleLimits": {
+    "tail": [
+      -130,
+      150
+    ],
+    "near-wing": [
+      -120,
+      120
+    ],
+    "far-wing": [
+      -120,
+      120
+    ]
+  },
+  "pawFloors": {
+    "far-foot": 433,
+    "near-foot": 431
+  }
+}

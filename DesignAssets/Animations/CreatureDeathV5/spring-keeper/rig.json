@@ -1,0 +1,34 @@
+{
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ],
+  "appearanceAuthority": "Source/original.png",
+  "parts": {
+    "body": "Parts/body.png",
+    "crest-0": "Parts/crest-0.png",
+    "crest-1": "Parts/crest-1.png",
+    "crest-2": "Parts/crest-2.png",
+    "crest-3": "Parts/crest-3.png",
+    "far-foot-visible": "Parts/far-foot-visible.png",
+    "far-foot": "Parts/far-foot.png",
+    "far-wing": "Parts/far-wing.png",
+    "head-collar-closed": "Parts/head-collar-closed.png",
+    "head-collar-front-closed": "Parts/head-collar-front-closed.png",
+    "head-collar-front": "Parts/head-collar-front.png",
+    "head-collar": "Parts/head-collar.png",
+    "head-collider": "Parts/head-collider.png",
+    "near-foot-visible": "Parts/near-foot-visible.png",
+    "near-foot": "Parts/near-foot.png",
+    "near-wing": "Parts/near-wing.png",
+    "scalp-cap": "Parts/scalp-cap.png",
+    "tail": "Parts/tail.png"
+  },
+  "bodyAndHead": "Source/physics-config.json",
+  "crest": "Source/crest-rig.json",
+  "registration": "Source/registration.json",
+  "partRegistration": "Source/part-registration.json",
+  "crestPartRegistration": "Source/crest-part-registration.json",
+  "crestRootOcclusion": "Source/crest-root-occlusion.png"
+}

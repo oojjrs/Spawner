@@ -1,0 +1,276 @@
+{
+  "sourceImage": "DesignAssets/CreatureConcepts/v3/walking-forest.png",
+  "generatedSheet": "exec-b1b48c7d-ce30-4b17-828a-1a310128f3b2.png",
+  "originalNeutralBounds": [
+    36,
+    74,
+    476,
+    448
+  ],
+  "commonScale": 1.272108843537415,
+  "pivot": [
+    256.0,
+    448
+  ],
+  "poseRegistrations": [
+    {
+      "drawing": "000.png",
+      "sourceComponent": 1,
+      "sourceBounds": [
+        20,
+        33,
+        325,
+        333
+      ],
+      "scale": 1.272108843537415,
+      "origin": [
+        62,
+        70
+      ],
+      "groundContactY": 448
+    },
+    {
+      "drawing": "001.png",
+      "sourceComponent": 2,
+      "sourceBounds": [
+        334,
+        55,
+        644,
+        332
+      ],
+      "scale": 1.272108843537415,
+      "origin": [
+        59,
+        99
+      ],
+      "groundContactY": 448
+    },
+    {
+      "drawing": "002.png",
+      "sourceComponent": 3,
+      "sourceBounds": [
+        648,
+        63,
+        952,
+        334
+      ],
+      "scale": 1.272108843537415,
+      "origin": [
+        63,
+        107
+      ],
+      "groundContactY": 448
+    },
+    {
+      "drawing": "003.png",
+      "sourceComponent": 4,
+      "sourceBounds": [
+        956,
+        78,
+        1254,
+        335
+      ],
+      "scale": 1.272108843537415,
+      "origin": [
+        65,
+        125
+      ],
+      "groundContactY": 448
+    },
+    {
+      "drawing": "004.png",
+      "sourceComponent": 5,
+      "sourceBounds": [
+        18,
+        389,
+        335,
+        665
+      ],
+      "scale": 1.272108843537415,
+      "origin": [
+        54,
+        101
+      ],
+      "groundContactY": 448
+    },
+    {
+      "drawing": "005.png",
+      "sourceComponent": 6,
+      "sourceBounds": [
+        332,
+        399,
+        652,
+        665
+      ],
+      "scale": 1.272108843537415,
+      "origin": [
+        52,
+        113
+      ],
+      "groundContactY": 448
+    },
+    {
+      "drawing": "006.png",
+      "sourceComponent": 7,
+      "sourceBounds": [
+        641,
+        410,
+        961,
+        668
+      ],
+      "scale": 1.272108843537415,
+      "origin": [
+        52,
+        124
+      ],
+      "groundContactY": 448
+    },
+    {
+      "drawing": "007.png",
+      "sourceComponent": 8,
+      "sourceBounds": [
+        953,
+        423,
+        1254,
+        668
+      ],
+      "scale": 1.272108843537415,
+      "origin": [
+        63,
+        140
+      ],
+      "groundContactY": 448
+    },
+    {
+      "drawing": "008.png",
+      "sourceComponent": 9,
+      "sourceBounds": [
+        14,
+        724,
+        332,
+        961
+      ],
+      "scale": 1.272108843537415,
+      "origin": [
+        54,
+        150
+      ],
+      "groundContactY": 448
+    },
+    {
+      "drawing": "009.png",
+      "sourceComponent": 10,
+      "sourceBounds": [
+        331,
+        730,
+        644,
+        963
+      ],
+      "scale": 1.272108843537415,
+      "origin": [
+        57,
+        155
+      ],
+      "groundContactY": 448
+    },
+    {
+      "drawing": "010.png",
+      "sourceComponent": 11,
+      "sourceBounds": [
+        643,
+        736,
+        958,
+        961
+      ],
+      "scale": 1.272108843537415,
+      "origin": [
+        56,
+        166
+      ],
+      "groundContactY": 448
+    },
+    {
+      "drawing": "011.png",
+      "sourceComponent": 12,
+      "sourceBounds": [
+        961,
+        744,
+        1253,
+        961
+      ],
+      "scale": 1.272108843537415,
+      "origin": [
+        70,
+        176
+      ],
+      "groundContactY": 448
+    },
+    {
+      "drawing": "012.png",
+      "sourceComponent": 13,
+      "sourceBounds": [
+        18,
+        1004,
+        334,
+        1229
+      ],
+      "scale": 1.272108843537415,
+      "origin": [
+        55,
+        166
+      ],
+      "groundContactY": 448
+    },
+    {
+      "drawing": "013.png",
+      "sourceComponent": 14,
+      "sourceBounds": [
+        332,
+        1006,
+        639,
+        1227
+      ],
+      "scale": 1.272108843537415,
+      "origin": [
+        61,
+        171
+      ],
+      "groundContactY": 448
+    },
+    {
+      "drawing": "014.png",
+      "sourceComponent": 15,
+      "sourceBounds": [
+        640,
+        1006,
+        952,
+        1226
+      ],
+      "scale": 1.272108843537415,
+      "origin": [
+        58,
+        172
+      ],
+      "groundContactY": 448
+    },
+    {
+      "drawing": "015.png",
+      "sourceComponent": 16,
+      "sourceBounds": [
+        954,
+        1011,
+        1254,
+        1227
+      ],
+      "scale": 1.272108843537415,
+      "origin": [
+        65,
+        177
+      ],
+      "groundContactY": 448
+    }
+  ],
+  "componentAlphaThreshold": 64,
+  "discardedAlphaBelow": 12,
+  "emptyCellsExcluded": 0
+}

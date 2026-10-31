@@ -1,0 +1,24 @@
+{
+  "sourceHashes": {
+    "jaw-far": "8af06ef04a530f83fe98bc1b3368fbe5928f4601792175ffa31919e657e7f774", 
+    "jaw-near": "17d5ab55162ff4742037544490f2f9ae384d8c578e57c56e3d91e7c602fd5583", 
+    "core-open": "764818a9fd6ba1c45d1d2db58682222dce252ad4ceb4b1eea029dd72cde25e6a", 
+    "core-closed": "2eb139a6c7fb9a55528f0d3099ad624eb851f3f1fc21fbc19c1ec81d3d116558"
+  }, 
+  "rigidBodyScale": 1, 
+  "maximumJointLengthErrorPx": 1.2789769243681803e-13, 
+  "finalHoldIdentical": true, 
+  "noOpaqueCanvasClipping": true, 
+  "previewNativeSize": [
+    512, 
+    512
+  ], 
+  "thumbnailNativeSize": [
+    64, 
+    64
+  ], 
+  "nativePreviewLoop": 0, 
+  "timelineLoop": false, 
+  "rootGroundY": 447, 
+  "landingDropPx": 73
+}

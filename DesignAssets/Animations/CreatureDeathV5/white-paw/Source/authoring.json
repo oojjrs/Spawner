@@ -1,0 +1,28 @@
+{
+  "appearanceAuthority": "Source/concept.png",
+  "registeredReference": "Source/reference.png",
+  "canonicalParts": "Source/EditableParts",
+  "generation": "Source/generation.json",
+  "compositing": "Source/compositing.json",
+  "completePartsRegistration": "Source/complete-parts-registration.json",
+  "physics": "Source/physics-config.json",
+  "anatomicalSkullCollider": "Source/anatomical-skull-mask.png",
+  "rigidPawSkinMinimumSourceY": {
+    "fore-near": 408,
+    "fore-far": 399
+  },
+  "rebuild": [
+    "Source/prepare.py",
+    "motion.py",
+    "tail-simulate.py",
+    "render.py"
+  ],
+  "canvas": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ]
+}

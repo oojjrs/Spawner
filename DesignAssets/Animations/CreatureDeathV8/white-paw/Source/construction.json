@@ -1,0 +1,18 @@
+{
+  "appearanceAuthority": "Source/approved-reference.png",
+  "registeredReference": "Source/reference.png",
+  "sourcePoseCount": 1,
+  "motion": "rigged body and head; rigid limb attachments with fixed foot targets; five tail bones",
+  "rig": "rig.json",
+  "meshes": "meshes.npz",
+  "meshLayout": "mesh-layout.json",
+  "rebuild": [
+    "Source/prepare-core.py",
+    "Source/prepare-root.py",
+    "render.py"
+  ],
+  "drawingProvider": "builtin imagegen",
+  "rootDrawing": "Source/tail-root-drawing.png",
+  "rootPrompt": "Complete the hidden lower-left attachment root of this isolated fluffy tail for a 2D cutout rig. Image 1 is the exact tail part to preserve; image 2 is only the approved character anatomy and fur reference. Keep the entire visible C-shaped cream plume, charcoal underside, free tip, original brush texture, orientation and scale from image 1 unchanged. Extend ONLY its cut base leftwards underneath the missing rump, with a broad continuous fur-covered root centred near (348,337) on the original 512 canvas, reaching x325..380 and y310..365. Draw enough hidden overlap to stay behind the hip during a small bend. One complete connected tail with natural fur contours and no flat cut or missing underside. No torso, leg, paw, second tail, shadow or text. Transparent background, preserve the original full-canvas registration.",
+  "partSource": "registered parts from the approved neutral reference, with completed hidden joint surfaces and closed-eye expression"
+}

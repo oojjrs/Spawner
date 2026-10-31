@@ -1,0 +1,251 @@
+{
+  "format": "spawner-drawn-collapse-and-registered-ear-attachments-v3",
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ],
+  "approvedDesign": "DesignAssets/CreatureConcepts/v3/lantern-keeper.png",
+  "collapsePhysicalScale": 0.7439862542955327,
+  "earPhysicalScale": 0.544072368587488,
+  "registrations": [
+    {
+      "source": "Source/collapse-drawings.png",
+      "crop": [
+        25,
+        115,
+        584,
+        624
+      ],
+      "matrix": [
+        [
+          0.7439862542955327,
+          0,
+          29.456185567010294
+        ],
+        [
+          0,
+          0.7439862542955327,
+          -14.7594501718213
+        ]
+      ],
+      "output": "Parts/collapse-0.png"
+    },
+    {
+      "source": "Source/collapse-drawings.png",
+      "crop": [
+        631,
+        191,
+        1239,
+        626
+      ],
+      "matrix": [
+        [
+          0.7439862542955327,
+          0,
+          -439.627147766323
+        ],
+        [
+          0,
+          0.7439862542955327,
+          -16.2474226804124
+        ]
+      ],
+      "output": "Parts/collapse-1.png"
+    },
+    {
+      "source": "Source/collapse-drawings.png",
+      "crop": [
+        22,
+        780,
+        612,
+        1137
+      ],
+      "matrix": [
+        [
+          0.7439862542955327,
+          0,
+          20.156357388316138
+        ],
+        [
+          0,
+          0.7439862542955327,
+          -396.4243986254296
+        ]
+      ],
+      "output": "Parts/collapse-2.png"
+    },
+    {
+      "source": "Source/contact-body-drawing.png",
+      "crop": null,
+      "matrix": [
+        [
+          0.40867008571675445,
+          0.000516818552071868,
+          -1.0339272892316862
+        ],
+        [
+          -0.000516818552071868,
+          0.40867008571675445,
+          -0.11191976467924228
+        ]
+      ],
+      "output": "Parts/contact-body.png",
+      "restoreBody": "Source/Keys/key-2.png"
+    },
+    {
+      "source": "Source/ear-drawings.png",
+      "crop": [
+        6,
+        155,
+        621,
+        520
+      ],
+      "matrix": [
+        [
+          0.5440415457283381,
+          0.005791267729954683,
+          4.414402358159146
+        ],
+        [
+          -0.005791267729954683,
+          0.5440415457283381,
+          95.59950937174833
+        ]
+      ],
+      "splitX": 306.60925266903917,
+      "output": "Parts/ear-0"
+    },
+    {
+      "source": "Source/ear-drawings.png",
+      "crop": [
+        639,
+        215,
+        1254,
+        530
+      ],
+      "matrix": [
+        [
+          0.5440415457283381,
+          0.005791267729954683,
+          -338.01771543811213
+        ],
+        [
+          -0.005791267729954683,
+          0.5440415457283381,
+          87.0406786957752
+        ]
+      ],
+      "splitX": 935.793227665706,
+      "output": "Parts/ear-1"
+    },
+    {
+      "source": "Source/ear-drawings.png",
+      "crop": [
+        21,
+        877,
+        620,
+        1123
+      ],
+      "matrix": [
+        [
+          0.5440415457283381,
+          0.005791267729954683,
+          -0.9120405203641386
+        ],
+        [
+          -0.005791267729954683,
+          0.5440415457283381,
+          -232.7979036600177
+        ]
+      ],
+      "splitX": 309.9738448125545,
+      "output": "Parts/ear-2"
+    },
+    {
+      "source": "Source/ear-drawings.png",
+      "crop": [
+        642,
+        941,
+        1242,
+        1140
+      ],
+      "matrix": [
+        [
+          0.5440415457283381,
+          0.005791267729954683,
+          -343.97368323577905
+        ],
+        [
+          -0.005791267729954683,
+          0.5440415457283381,
+          -234.43672217443174
+        ]
+      ],
+      "splitX": 940.4501992031873,
+      "output": "Parts/ear-3"
+    }
+  ],
+  "phases": [
+    {
+      "source": "Source/Keys/key-0.png",
+      "durationMs": 140
+    },
+    {
+      "source": "Parts/collapse-0.png",
+      "durationMs": 60
+    },
+    {
+      "source": "Source/Keys/key-1.png",
+      "durationMs": 60
+    },
+    {
+      "source": "Parts/collapse-1.png",
+      "durationMs": 60
+    },
+    {
+      "source": "Parts/collapse-2.png",
+      "durationMs": 60
+    },
+    {
+      "body": "Parts/contact-body.png",
+      "farEar": "Parts/ear-0-far.png",
+      "nearEar": "Parts/ear-0-near.png",
+      "durationMs": 90
+    },
+    {
+      "body": "Parts/contact-body.png",
+      "farEar": "Parts/ear-1-far.png",
+      "nearEar": "Parts/ear-1-near.png",
+      "durationMs": 100
+    },
+    {
+      "body": "Parts/contact-body.png",
+      "farEar": "Parts/ear-2-far.png",
+      "nearEar": "Parts/ear-2-near.png",
+      "durationMs": 100
+    },
+    {
+      "body": "Parts/contact-body.png",
+      "farEar": "Parts/ear-3-far.png",
+      "nearEar": "Parts/ear-3-near.png",
+      "durationMs": 120
+    }
+  ],
+  "earRootWorld": [
+    181.89769979872534,
+    329.95362774944346
+  ],
+  "bones": {
+    "root": null,
+    "contact-body": "root",
+    "far-ear": "contact-body",
+    "near-ear": "contact-body"
+  },
+  "contactBodyMovementAfterContact": [
+    0,
+    0
+  ],
+  "finalHoldMs": 1000,
+  "spineCompatibilityVerified": false
+}

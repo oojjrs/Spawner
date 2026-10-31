@@ -1,0 +1,43 @@
+{
+  "entries": [
+    {
+      "asset": "Source/key-drawings.png",
+      "provider": "built-in image_gen",
+      "inputs": [
+        "H:\\Spawner\\DesignAssets\\CreatureConcepts\\v3\\spiny-back-leader.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: actual production action-defining key drawings for a 2D game death animation, four complete poses in equal padded 2x2 cells, read left-right then top-bottom. Transparent RGBA, no text/grid/effects/floor/shadows. Approved reference is sole design, anatomy, pattern, palette, camera and original proportions authority. Keep same character world scale in every cell with generous margin and a common ground line, no zoom-to-fit and no body shrinking, melting or global squash. The four phases are NORMAL ALIVE NEUTRAL (fully open eyes), SUPPORT FAILING (joint articulation and center of mass losing balance), FIRST WEIGHT CONTACT (whole body reaches ground), then PASSIVE FOLLOW-THROUGH SETTLED CORPSE. Draw actual body/limb poses and overlaps; no mere head tilt or erased limbs. Preserve skull size, torso volume, appendage lengths and marking placement. Key3 and Key4 body position should be identical once contacted, only designated soft appendages finish settling. Original fine outlines and painterly shading, no gore. Exact stocky maroon beetle leader: one huge curved ivory dorsal horn, two smaller ivory side spikes, worn cream patch on near shell, two ivory crescent mandibles with notches and wear, tiny amber eyes and segmented plum-purple legs with crimson sockets. Entire carapace/horns/wear pattern are rigid and unchanged. Neutral alive all visible legs supporting, tiny eyes open, jaws held. Failing: front leg joints bend at the real knees, side/rear pairs buckle a little later, carapace center of mass loses support; jaws begin slackening, no stretched or shortened leg segments. Contact: heavy carapace drops as one rigid volume onto folded legs/belly, near legs splay/tuck naturally with all joints continuous; eye lids close, mandibles sag open a little. Settled: same grounded rigid carapace/head, last leg tips/mandibles finish a small passive flop/recoil, then completely still. No upside-down flip, shell warping, detached claws, body fragments, erased legs or stuck alert posture.",
+      "generatedFile": "D:\\.codex\\generated_images\\01a1838c-2114-7c61-81d7-4e2dfbb2299f\\exec-38c40b2d-3ae3-43af-8e41-6d7db2485f27.png"
+    },
+    {
+      "asset": "Source/collapse-drawings.png",
+      "provider": "built-in image_gen",
+      "inputs": [
+        "H:\\Spawner\\DesignAssets\\Animations\\CreatureDeathV3\\spiny-back-leader\\Source\\Keys\\key-0.png",
+        "H:\\Spawner\\DesignAssets\\Animations\\CreatureDeathV3\\spiny-back-leader\\Source\\Keys\\key-2.png",
+        "H:\\Spawner\\DesignAssets\\CreatureConcepts\\v3\\spiny-back-leader.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Actual production four COMPLETE in-between cels, 2x2 equal padded cells, true transparent RGBA no scenery/shadow/glow/text/grid. Image1 pose A, image2 pose B, image3 APPROVED design authority. Draw 20%,40%,60%,80% progress A to B, excluding endpoints. Same exact character world scale/camera/ground within each 512-square cel, no per-cel zoom, skull growth, body melting, marking drift or limb deletion. True joint articulation and changing overlap under gravity. Beetle front jointed legs buckle first, rear pairs lag, heavy carapace's support fails and whole rigid body drops toward B. Draw knee/ankle flexion with constant segment lengths and proper root overlap, not rotating one straight claw. Ivory jaws sag outward/down, tiny amber eyes go from normal open to closed late. Preserve exactly the rigid carapace, curved dorsal horn and 2 side horns, cream worn patch. No shell/head reshaping or detached lower-leg fragments. Genuine alpha0 exterior, no soft cloud/aura/background.",
+      "generatedFile": "D:\\.codex\\generated_images\\01a1838c-2114-7c61-81d7-4e2dfbb2299f\\exec-4fc7c671-509a-4c0e-ad3c-22f156474fe9.png"
+    },
+    {
+      "asset": "Source/complete-core-drawing.png",
+      "provider": "built-in image_gen",
+      "inputs": [
+        "H:\\Spawner\\DesignAssets\\CreatureConcepts\\v3\\spiny-back-leader.png"
+      ],
+      "prompt": "Use case: precise-object-edit. ONE complete static production rigid carapace/core layer from the exact approved beetle. Remove ALL six legs and all joint sockets, remove BOTH entire ivory mandibles. Keep exact huge dorsal horn, two side spikes, maroon carapace, cream worn patch, head plate and face in original location/scale/shape/palette/camera. Close tiny eyes with matching brown relaxed lids but keep skull form unchanged. Restore the complete hidden smooth lower shell/underside and face behind removed legs/jaws, making a closed opaque rigid core contour without holes or leftover claw outlines. Retain exact visible original markings/pixels as faithfully as possible. Canvas same registration, generous empty transparent alpha0 margins. No appendage fragment, shadow, glow, labels, grid, scenery or extra object. Actual source layer, not a preview.",
+      "generatedFile": "D:\\.codex\\generated_images\\01a1838c-2114-7c61-81d7-4e2dfbb2299f\\exec-2023ab12-2d08-4366-b036-9d3f41ec40cb.png"
+    },
+    {
+      "asset": "Source/limb-drawings.png",
+      "provider": "built-in image_gen",
+      "inputs": [
+        "H:\\Spawner\\DesignAssets\\CreatureConcepts\\v3\\spiny-back-leader.png",
+        "H:\\Spawner\\DesignAssets\\Animations\\CreatureDeathV3\\spiny-back-leader\\Source\\key-drawings.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Four actual production APPENDAGE-SET drawings on a transparent RGBA 2x2 atlas. Image1 exact approved beetle anatomy, colors, scale; image2 motion phases. In each equal square cel, draw ONLY the six complete segmented plum-purple legs with crimson joint sockets and BOTH full ivory crescent mandibles with original chips/notches, all in their original in-situ world coordinates. Remove entire carapace, horns, hard head plate, eyes, wear patch and belly; blank alpha between independent complete parts. Each proximal joint/root is smoothly round and complete with overlap, no flat cut or foreign body fragments. Cel1 exact neutral supporting legs/jaws as reference; cel2 front knees/ankles bend distinctly, rear pairs lag, mandibles loosen a little; cel3 whole leg chains naturally fold/splay low under the original carapace, constant segment lengths, jaws sag outward/down; cel4 same folded joints with only tiny passive claw/jaw settling. Keep roots anchored consistently in same canvas coordinate spaces because a separate rigid carapace will be composited over them. Do not replace articulation with rotating one whole straight claw, do not shorten/melt/delete limbs or add extra sockets. No floor/shadows, glow, text, labels or scenery, generous transparent padding and no per-cel zoom.",
+      "generatedFile": "D:\\.codex\\generated_images\\01a1838c-2114-7c61-81d7-4e2dfbb2299f\\exec-21ee356a-02b8-4102-b98e-34906d0e88af.png"
+    }
+  ]
+}

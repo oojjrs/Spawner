@@ -1,0 +1,23 @@
+{
+  "tool": "built-in image_gen",
+  "rear": {
+    "prompt": "Use case: precise-object-edit. Asset: one independent complete rear folded soft paw master for the exact stone-and-crystal forest creature. Image 1 is the EDIT TARGET, a magnified crop of the current rear-folded part. Image 2 is the authoritative approved complete character and establishes anatomy, color, material, spots and line style. Repair only this soft paw as a finished isolated cutout. Preserve the current lower foot's width, length, diagonal folded direction, warm upper-left light, cool right shadow, olive spots, and exactly THREE original ivory rounded claws in the same proportions and row. Complete the missing hidden UPPER skin and joint contour above the foot as a short rounded continuous sage/olive green fleshy cap, so the entire paw has a closed natural outline when removed from its shell. This is only a short hidden continuation, roughly one claw width of extra height, not an enlarged thigh or a long neck. The narrow pale tail-like/collar-shaped piece above the current crop is NOT part of this paw: remove it completely. Keep the original three claw tips fully present with rounded complete undersides; no horizontal technical clipping. Match the approved creature's soft painted shading, restrained dark olive outlines, and desaturated sage palette. Show only ONE complete paw, comfortably centered at a useful large drawing size with generous transparent margin. Genuine transparent background. No body, shell, grey rocks, cream belly/plastron, bone collar, tail, extra toes, duplicate limbs, labels, diagram, or shadow on a floor. Do not redesign the visible foot; draw only its missing hidden completion and remove contaminating non-paw material.",
+    "referenced_image_paths": [
+      "H:/Spawner/$Trash/death-v6-small-20261030/forest-paw-support/rear-edit-target-detail.png",
+      "H:/Spawner/$Trash/death-v6-small-20261030/forest-paw-support/registered-reference.png"
+    ],
+    "transparent_background": true,
+    "raw": "rear-master-raw.png",
+    "providerRaw": "D:/.codex/generated_images/01a1838b-0d79-7b90-a939-d0be54c3199b/exec-ec2763f7-3b94-4fed-b538-44794035a66f.png"
+  },
+  "fore": {
+    "prompt": "Use case: precise-object-edit. Asset: one independent complete fore folded soft paw master for the exact stone-and-crystal forest creature. Image 1 is the EDIT TARGET, a magnified crop of the current fore-folded part. Image 2 is the authoritative approved complete character and establishes anatomy, color, material, spots and line style. Repair only the green folded paw as a finished isolated cutout. Its claws are ALREADY folded inward and concealed: retain the rounded diagonal GREEN OVAL visible surface, with NO exposed claws. Preserve its width/length, softly rounded tip at lower right, olive circular spots, warm upper-left highlight and cool right/bottom shadow. Complete the hidden upper-left joint surface with a SHORT rounded continuous sage/olive green fleshy cap that smoothly joins the existing oval, so this is one whole paw with a natural closed outline when detached from the body. The pale cream triangular belly/plastron wedge and dark green cut strip on the LEFT of the current target are NOT part of the paw: remove them entirely; do not make a cream collar. Keep the existing visible oval's proportions rather than inflating or replacing it with a generic foot. Match the approved creature's soft painted shading, restrained dark olive outlines, desaturated sage palette. Show only ONE complete folded green paw, comfortably centered at a useful large drawing size with generous transparent margin. Genuine transparent background. No body, shell, grey rocks, cream belly, bone collar, exposed nails, long arm, enlarged thigh, duplicate limbs, labels, diagram, or floor shadow.",
+    "referenced_image_paths": [
+      "H:/Spawner/$Trash/death-v6-small-20261030/forest-paw-support/fore-edit-target-detail.png",
+      "H:/Spawner/$Trash/death-v6-small-20261030/forest-paw-support/registered-reference.png"
+    ],
+    "transparent_background": true,
+    "raw": "fore-master-raw.png",
+    "providerRaw": "D:/.codex/generated_images/01a1838b-0d79-7b90-a939-d0be54c3199b/exec-dc4fe5ab-d184-4da7-9cad-4ac484bc2e8d.png"
+  }
+}

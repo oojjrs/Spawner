@@ -1,0 +1,58 @@
+{
+  "name": "spiny-back-leader",
+  "action": "death",
+  "sourceImage": "DesignAssets/CreatureConcepts/v3/spiny-back-leader.png",
+  "image": "DesignAssets/Animations/CreatureDeathV10/spiny-back-leader/death.webp",
+  "frameSize": 512,
+  "columns": 3,
+  "frameCount": 3,
+  "durationsMs": [
+    80,
+    120,
+    520
+  ],
+  "durationMs": 720,
+  "pivotX": 256,
+  "pivotY": 448,
+  "loop": false,
+  "stopOnLastFrame": true,
+  "rootMotion": false,
+  "preview": "DesignAssets/Animations/CreatureDeathV10/spiny-back-leader/preview.webp",
+  "previewDurationsMs": [
+    480,
+    120,
+    1920
+  ],
+  "previewLoop": true,
+  "playback": "DesignAssets/Animations/CreatureDeathV10/spiny-back-leader/playback.webp",
+  "thumbnail": "DesignAssets/Animations/CreatureDeathV10/spiny-back-leader/thumbnail.webp",
+  "runtime": {
+    "image": "DesignAssets/Animations/CreatureDeathV10/spiny-back-leader/runtime.webp",
+    "frameSize": 256,
+    "viewSize": 256,
+    "pivotX": 128,
+    "pivotY": 224,
+    "columns": 3,
+    "durationsMs": [
+      80,
+      120,
+      520
+    ],
+    "loop": false
+  },
+  "terminalPose": "DesignAssets/Animations/CreatureDeathV10/spiny-back-leader/dead.webp",
+  "construction": "Three approved drawn cels, neutral to buckling to forward collapse; no rig, warp, pose blend or opacity transition",
+  "sourceFrames": [
+    "Source/Keys/key-00-neutral.png",
+    "Source/Keys/key-01-buckle.png",
+    "Source/Keys/key-02-collapse.png"
+  ],
+  "sourceArtwork": "Source/death-keyposes-generated.png",
+  "sourceAuthoring": "Source/generation.json",
+  "renderer": "Source/pack.mjs",
+  "approvedKeyFrames": [
+    0,
+    1,
+    2
+  ]
+}

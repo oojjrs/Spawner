@@ -1,0 +1,35 @@
+{
+  "provider": "builtin imagegen",
+  "prompts": [
+    {
+      "key": "low-hook-input",
+      "role": "ancestor for full-volume corrective drawing",
+      "prompt": "Use case: precise-object-edit. Edit ONLY the tail pose in Image1, the low resting white-paw sprite. Keep ALL of its torso/head/mane/paws/hips/markings/placement unchanged. Image2 is only the original identity/color/material reference, not the pose. The tail is currently curled on the floor. Lift only its free curled end and adjacent middle a SMALL amount into a LOW HORIZONTAL HOOK: pointed free tip around x320,y305 on the512canvas, upper cream edge around y245-255, with the main fluffy mass still beside the rump and below/near the back ridge. Keep root at the SAME rump point, same tail length, thickness and fluffy volume. This is a partly fallen tail just BEFORE it fully rests, not the tall upright C curl from the original. The tail should sweep diagonally/sideways at low height, its lower arc can already brush the floor, free tip still hanging above it. Do not put the plume above the head or make the tall C shape. Natural gravity-bowed soft curve, no rigid stick, no stump, no new body mass or paw motion. Preserve the exact original painterly rendering and subtle edge. One whole connected sprite on transparent background at fixed camera, framing and scale, no text, sheet, scene, ground or shadow.",
+      "references": [
+        "Guides/tail-low.png",
+        "approved-reference.png"
+      ],
+      "output": "Raw/tail-low-hook.png"
+    },
+    {
+      "key": "full-hook",
+      "role": "full-volume motion reference",
+      "prompt": "Use case: precise-object-edit. Image1 is a useful low-hook tail intermediate, but its WHITE PLUME IS TOO THIN/SMALL. Image2 shows the original full-volume low tail, Image3 the approved character. Keep the entire body/head/paws/mane and their placement from Image1 EXACTLY unchanged. Repaint ONLY the tail with the SAME LOW HOOK/S pose but restore the HUGE original fluffy volume and full length: increase the tail's plush thickness/fullness by about40percent, make the hook broad and deep enough to carry the full long tail rather than a short skinny tip. Match the large plume volume of Image2; keep the free pointed end raised around y300 of the512world canvas and the lower arc brushing ground, so it is still an intermediate just before the full floor curl. Do not lift it back into the tall upright C, do not shrink its arc length, and do not simply draw a short fat stump. Keep the root in the same rump. Dense cream-white fur and full original thickness taper only at the final tip, original painterly materials/edge. No new body mass/leg motion or framing/scale change. One complete connected whole sprite on transparent background, no scene/shadow/labels.",
+      "references": [
+        "Raw/tail-low-hook.png",
+        "Guides/tail-low.png",
+        "approved-reference.png"
+      ],
+      "output": "Raw/tail-full-hook.png"
+    },
+    {
+      "key": "fit-hook",
+      "role": "actual timeline near-rest whole drawing",
+      "prompt": "Use case: precise-object-edit. This attached512x512 whole white-paw sprite has the right full low-hook tail volume, but the far RIGHT edge of the plume is clipped by the canvas. Fix ONLY that tail contour by curling the broad hook a little closer back toward the rump so its rightmost fur is safely INSIDE x490, with a visible transparent margin. Preserve the tail's full long bone length and thick fluffy volume: re-curve the hook inward, do NOT shrink/thin the plume or scale the whole animal. Keep the tail in this LOW half-fallen hook pose with free point still raised, not an upright C and not yet the final floor curl. Keep the rest of the animal's body/head/feet/markings/size/placement EXACTLY unchanged, and root attached at the same rump point. Restore any clipped fur naturally. Same original soft painterly rendering, subtle shaded edge and transparent background. Same fixed512world framing and body scale, no zoom, crop, extra objects, text, ground or shadows. One whole complete anatomical cel.",
+      "references": [
+        "Guides/clipped-hook.png"
+      ],
+      "output": "Raw/tail-fit-hook.png"
+    }
+  ]
+}

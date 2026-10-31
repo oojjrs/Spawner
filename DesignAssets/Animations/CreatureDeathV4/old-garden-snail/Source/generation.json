@@ -1,0 +1,35 @@
+{
+  "entries": [
+    {
+      "asset": "Source/soft-parts-drawing.png",
+      "prompt": "Use case: precise-object-edit. ACTUAL production isolated layered animation attachments, not a finished action sheet. Sole original image is character anatomy/palette/outline/camera authority. Complete ALL hidden roots/undersides and round them naturally with sufficient overlap. No body or shell fragments mixed into soft attachments. Exact original individual, lengths/widths/proportions and original painterly shading/fine outlines. Genuine transparent RGBA, no shadows, glow, text, labels or grid. Do not redesign, enlarge far limbs to fill cells, make thick elephant upper arms, or omit toe tips. FOUR isolated complete soft-body attachments in padded equal 2x2 cells, row order. 1: complete pale mint anterior slug HEAD, flexible NECK and FRONT MANTLE/FOOT together as one continuous fleshy part, no eyestalks at all; remove both stalks and restore smooth skin beneath their roots. This is the original shell-less front half only, with rounded padded hidden rear root going under the shell. Preserve the original bulbous mint front and broad soft foot outline, no mouth or extra face features. 2: original LEFT/near eye-stalk only, complete mint flexible stalk tube from rounded root to full dark-green eyeball/sphere and its original highlight; no forehead or surrounding skin piece. 3: original RIGHT/far eye-stalk counterpart, same original separate sphere/stalk proportions. 4: complete posterior MANTLE/REAR FOOT only, the pale mint/blue-green soft trailing foot that extends behind the shell; complete rounded hidden front root so it can independently fold/retract beneath shell. No shell, tree, moss, fruit or golden pixels in any part. Each stalk and anterior/posterior body parts retain original consistent scale and shading; no holes, straight cut roots, duplicate body or disconnected flesh islands.",
+      "inputs": [
+        "Source/approved-concept.png"
+      ],
+      "generatedFilename": "exec-12b308ea-4345-4698-85b8-fea926ef7812.png",
+      "provider": "built-in image_gen",
+      "usedFor": "posterior mantle and source input for anterior root repair"
+    },
+    {
+      "asset": "Source/underside-drawing.png",
+      "prompt": "Use case: precise-object-edit. Asset type: actual production action-defining key drawings for a 2D game death animation, four complete poses in equal padded 2x2 cells, read left-right then top-bottom. Transparent RGBA, no text/grid/effects/floor/shadows. Approved reference is sole design, anatomy, pattern, palette, camera and original proportions authority. Keep same character world scale in every cell with generous margin and a common ground line, no zoom-to-fit and no body shrinking, melting or global squash. The four phases are NORMAL ALIVE NEUTRAL (fully open eyes), SUPPORT FAILING (joint articulation and center of mass losing balance), FIRST WEIGHT CONTACT (whole body reaches ground), then PASSIVE FOLLOW-THROUGH SETTLED CORPSE. Draw actual body/limb poses and overlaps; no mere head tilt or erased limbs. Preserve skull size, torso volume, appendage lengths and marking placement. Key3 and Key4 body position should be identical once contacted, only designated soft appendages finish settling. Original fine outlines and painterly shading, no gore. Exact snail: pale mint/blue-green continuous slug body, two big eye stalks, golden spiral shell with gnarled leafy tree and golden fruit/moss growing on top. Shell, spiral, every fruit, trunk and canopy are a single rigid load of unchanged shape/size/pattern. Neutral exact alive posture with eye stalks raised/open. Failing: stalks droop separately from their roots, head and forefoot visibly lose extension, soft neck folds toward shell aperture; garden/shell begins small weight settling, not elastic deformation. Contact: both eye stalks and face retract fully inside shell, most trailing foot contracts into it, whole rigid shell lowers as soft support disappears. Settled: NO exposed head, eyes, stalks, foot or flesh remains, ONLY the complete abandoned rigid golden garden shell/tree/fruit/moss rests on the original ground, no floating. Draw physiological contraction/folding into aperture, not fading, erased bits or shrinking the entire creature.",
+      "inputs": [
+        "Source/approved-concept.png"
+      ],
+      "generatedFilename": "exec-fac419c5-3401-4191-8a23-04ff83ad3c61.png",
+      "provider": "built-in image_gen",
+      "usedFor": "hidden rigid-shell underside beneath unchanged approved-reference shell pixels"
+    },
+    {
+      "asset": "Source/anterior-root-drawing.png",
+      "prompt": "Use case: precise-object-edit. Actual production complete anterior soft-body attachment for a layered 2D animation. Image1 is the exact current 512-square RGBA part and all of its FRONT BULB, silhouette, material, palette and position must stay unchanged. Image2 is the approved whole creature for anatomy/style only. Fix ONLY the hidden REAR ATTACHMENT ROOT at image1 x270..345: the current little rounded trailing tip at about (320,405) creates a visible construction outline under the shell. Instead extend this rear soft neck/mantle UPWARD into a fully painted rounded hidden dorsal root centered about (325,365), ending near y348. Preserve the front large eyeless mint bulb at x75..190 y322..440 and the lower foot contour through x270 y439 exactly; do not shrink, stretch, rotate, reframe or redesign the front mass. The rear root should be a continuous thick mint neck rising smoothly from the existing long foot/mantle near x270, not a separate lollipop, tail, second body or shell. Complete the whole hidden rear surface with original soft pale mint/cream painterly shading and natural rounded contour, no hole or straight alpha cut. One eyeless soft attachment only, NO eyes/stalks, NO shell/tree/fruit/body extras, NO ground/glow/shadow/text/labels/grid. Genuine transparent background, same padded 512 canvas and world scale. This is a local complete-root repair, not a new pose or action sheet.",
+      "inputs": [
+        "Source/GenerationInputs/anterior-before-root.png",
+        "Source/approved-concept.png"
+      ],
+      "generatedFilename": "exec-e4cc474f-be58-44f3-a083-f50c41d390ba.png",
+      "provider": "built-in image_gen",
+      "usedFor": "complete anterior mantle with hidden dorsal root"
+    }
+  ]
+}

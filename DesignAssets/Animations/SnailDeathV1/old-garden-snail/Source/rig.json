@@ -1,0 +1,158 @@
+{
+  "name": "old-garden-snail",
+  "canvas": [
+    627,
+    627
+  ],
+  "outputCanvas": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "groundY": 604,
+  "registration": {
+    "scale": 0.6528925619834711,
+    "translation": [
+      53.51239669421486,
+      53.652892561983435
+    ]
+  },
+  "shellSourceTranslation": [
+    3.3606717123945486,
+    -12.0
+  ],
+  "shellDropY": 27,
+  "cavityPolygon": [
+    [
+      161,
+      466
+    ],
+    [
+      180,
+      467
+    ],
+    [
+      201,
+      478
+    ],
+    [
+      220,
+      497
+    ],
+    [
+      239,
+      525
+    ],
+    [
+      258,
+      556
+    ],
+    [
+      277,
+      583
+    ],
+    [
+      277,
+      627
+    ],
+    [
+      171,
+      627
+    ],
+    [
+      171,
+      560
+    ],
+    [
+      155,
+      548
+    ],
+    [
+      144,
+      530
+    ],
+    [
+      138,
+      509
+    ],
+    [
+      139,
+      490
+    ],
+    [
+      147,
+      474
+    ]
+  ],
+  "body": {
+    "image": "body-complete.png",
+    "anchor": [
+      370,
+      604
+    ],
+    "scaleY": 1
+  },
+  "shell": {
+    "back": "shell-interior.png",
+    "front": "shell-rim-and-cargo.png",
+    "scale": [
+      1,
+      1
+    ],
+    "rotation": 0
+  },
+  "eyes": [
+    {
+      "bulb": "eye-0-bulb.png",
+      "stalk": "eye-0-stalk.png",
+      "tip": [
+        53,
+        399
+      ],
+      "root": [
+        107,
+        510
+      ]
+    },
+    {
+      "bulb": "eye-1-bulb.png",
+      "stalk": "eye-1-stalk.png",
+      "tip": [
+        132,
+        401
+      ],
+      "root": [
+        167,
+        490
+      ]
+    }
+  ],
+  "timeline": {
+    "motionMs": 1920,
+    "eyeEndMs": 360,
+    "bodyStartMs": 260,
+    "bodyEndMs": 1700,
+    "settleStartMs": 960,
+    "settleEndMs": 1880
+  },
+  "bones": [
+    "root",
+    "body",
+    "shell",
+    "eye-0-stalk",
+    "eye-0-bulb",
+    "eye-1-stalk",
+    "eye-1-bulb"
+  ],
+  "drawOrder": [
+    "shell-interior",
+    "eye-stalks",
+    "eye-bulbs",
+    "body",
+    "shell-rim-and-cargo"
+  ],
+  "poseOpacityAnimation": false
+}

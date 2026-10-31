@@ -1,0 +1,81 @@
+{
+  "authority": "DesignAssets/CreatureConcepts/v3/old-garden-snail.png",
+  "selectionMaskOrigin": "DesignAssets/Animations/CreatureDeathV5/old-garden-snail/Source/shell-visible-mask.png",
+  "selectionMaskSha256": "1d949ce13bd084731c436832b168e4941f50f7e09f16a69482a4bd6f8455a467",
+  "selectionMatrix": [
+    [
+      0.9554785390562517,
+      0,
+      15.151159690749111
+    ],
+    [
+      0,
+      0.9554785390562517,
+      21.37963209810714
+    ]
+  ],
+  "visibleRgbSource": "registered-reference.png",
+  "registeredMask": "rigid-visible-mask.png",
+  "eyePolygons": {
+    "eye-far.png": [
+      [
+        50,
+        265
+      ],
+      [
+        112,
+        265
+      ],
+      [
+        124,
+        348
+      ],
+      [
+        96,
+        350
+      ],
+      [
+        88,
+        325
+      ],
+      [
+        50,
+        320
+      ]
+    ],
+    "eye-near.png": [
+      [
+        108,
+        268
+      ],
+      [
+        169,
+        268
+      ],
+      [
+        168,
+        317
+      ],
+      [
+        164,
+        334
+      ],
+      [
+        165,
+        350
+      ],
+      [
+        142,
+        351
+      ],
+      [
+        135,
+        327
+      ],
+      [
+        114,
+        317
+      ]
+    ]
+  }
+}

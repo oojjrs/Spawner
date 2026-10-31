@@ -1,0 +1,20 @@
+{
+  "drawing": "Drawings/complete-head-skin.png", 
+  "referenceDrawing": "Drawings/head-jewel-reference.png", 
+  "matrix": [
+    [
+      0.14933322640644106, 
+      2.415274423120926e-05, 
+      134.44480986472416
+    ], 
+    [
+      -2.415274423120926e-05, 
+      0.14933322640644106, 
+      179.43144760816736
+    ]
+  ], 
+  "matches": 145, 
+  "inliers": 85, 
+  "ornamentsBakedIntoHiddenSkin": false, 
+  "continuousUpperSkinToY": 281
+}

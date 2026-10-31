@@ -1,0 +1,109 @@
+{
+  "roots": {
+    "far-ear": {
+      "before": [
+        226.38560411311053, 
+        211.53984575835474
+      ], 
+      "after": [
+        235.0, 
+        231.0
+      ], 
+      "parentAlpha": 253, 
+      "partAlpha": 253
+    }, 
+    "near-ear": {
+      "before": [
+        273.76863753213365, 
+        218.12082262210797
+      ], 
+      "after": [
+        261.0, 
+        238.0
+      ], 
+      "parentAlpha": 253, 
+      "partAlpha": 253
+    }
+  }, 
+  "ornaments": [
+    {
+      "part": "near-ear", 
+      "sourceCenter": [
+        254.4198473282443, 
+        214.82156488549617
+      ], 
+      "pixels": 1048
+    }, 
+    {
+      "part": "near-ear", 
+      "sourceCenter": [
+        272.625, 
+        193.875
+      ], 
+      "pixels": 8
+    }, 
+    {
+      "part": "near-ear", 
+      "sourceCenter": [
+        290.32067510548524, 
+        207.42194092827003
+      ], 
+      "pixels": 237
+    }, 
+    {
+      "part": "far-ear", 
+      "sourceCenter": [
+        211.5, 
+        196.0
+      ], 
+      "pixels": 4
+    }, 
+    {
+      "part": "far-ear", 
+      "sourceCenter": [
+        212.04, 
+        204.84
+      ], 
+      "pixels": 25
+    }, 
+    {
+      "part": "far-ear", 
+      "sourceCenter": [
+        228.78571428571428, 
+        244.0
+      ], 
+      "pixels": 14
+    }
+  ], 
+  "originalFlankPixelsParentedToBody": 1237, 
+  "farLeafOutline": [
+    [
+      0, 
+      35
+    ], 
+    [
+      182, 
+      35
+    ], 
+    [
+      188, 
+      155
+    ], 
+    [
+      181, 
+      178
+    ], 
+    [
+      121, 
+      183
+    ], 
+    [
+      50, 
+      175
+    ], 
+    [
+      0, 
+      175
+    ]
+  ]
+}

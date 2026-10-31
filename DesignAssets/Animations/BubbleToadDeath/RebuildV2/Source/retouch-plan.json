@@ -1,0 +1,65 @@
+[
+  {
+    "timeMs": 825,
+    "frame": "022.png",
+    "image": "Corrections/825.png",
+    "raw": "Drawn/retouch-825.png",
+    "calibration": [
+      [
+        0.9988821383449701,
+        -0.0016624438321764033,
+        0.7105057965753172
+      ],
+      [
+        0.0016624438321764033,
+        0.9988821383449701,
+        -0.03402525727385199
+      ]
+    ],
+    "matches": 24,
+    "minJacobian": 0.997768290024115,
+    "prompt": "Precise local repair of IMAGE 1, the actual animation frame. IMAGE 2 is the approved settled pose, used ONLY to show the naturally rounded neck-to-back connection. Keep IMAGE1's existing intermediate pose, skull size, eyes, exact face position, shoulder position, torso size, ivory pouch volume, hands, feet, colors and canvas registration unchanged. Do NOT turn it into image2's lower final pose. Fix ONLY the obvious unnatural pointed kink on the mint/olive upper back just behind the near eye: at 512 coordinates, around x280..322,y265..302, the outline rises into a sharp triangular peak at x302. Remove that spike and paint one smooth rounded organic back contour that connects the short broad neck to the rear torso, without a cut or corner. Keep the original back height and volume away from that small pointed kink; just shave the point into a gentle smooth arc and make the nearby green/olive skin coherent. No tall mint neck slab, no disconnected neck, no vertical cut edge, no new bump. Preserve absolutely everything else in image1 as closely as possible, especially the head and eye-bulb dimensions and position. ONE full-body transparent sprite, same square canvas and blank upper margin, no labels or background. This is a local outline cleanup on an already posed complete painting, not a new pose or a cutout-part replacement."
+  },
+  {
+    "timeMs": 860,
+    "frame": "023.png",
+    "image": "Corrections/860.png",
+    "raw": "Drawn/retouch-860.png",
+    "calibration": [
+      [
+        0.9996319866068345,
+        0.0003873279704414856,
+        -0.13784947212705845
+      ],
+      [
+        -0.0003873279704414856,
+        0.9996319866068345,
+        0.300093439619251
+      ]
+    ],
+    "matches": 22,
+    "minJacobian": 0.9992642586704832,
+    "prompt": "Precise local repair of IMAGE 1, the actual animation frame. IMAGE 2 is the approved settled pose, used ONLY to show the naturally rounded neck-to-back connection. Keep IMAGE1's existing intermediate pose, skull size, eyes, exact face position, shoulder position, torso size, ivory pouch volume, hands, feet, colors and canvas registration unchanged. Do NOT turn it into image2's lower final pose. Fix ONLY the obvious unnatural pointed kink on the mint/olive upper back just behind the near eye: at 512 coordinates, around x280..322,y265..302, the outline rises into a sharp triangular peak at x302. Remove that spike and paint one smooth rounded organic back contour that connects the short broad neck to the rear torso, without a cut or corner. Keep the original back height and volume away from that small pointed kink; just shave the point into a gentle smooth arc and make the nearby green/olive skin coherent. No tall mint neck slab, no disconnected neck, no vertical cut edge, no new bump. Preserve absolutely everything else in image1 as closely as possible, especially the head and eye-bulb dimensions and position. ONE full-body transparent sprite, same square canvas and blank upper margin, no labels or background. This is a local outline cleanup on an already posed complete painting, not a new pose or a cutout-part replacement."
+  },
+  {
+    "timeMs": 895,
+    "frame": "024.png",
+    "image": "Corrections/895.png",
+    "raw": "Drawn/retouch-895.png",
+    "calibration": [
+      [
+        1.0016475376175313,
+        -0.0004048727132096169,
+        -0.2786529358897744
+      ],
+      [
+        0.0004048727132096169,
+        1.0016475376175313,
+        -0.5804307053629575
+      ]
+    ],
+    "matches": 27,
+    "minJacobian": 1.0032979535371778,
+    "prompt": "Precise local repair of IMAGE 1, the actual animation frame. IMAGE 2 is the approved settled pose, used ONLY to show the naturally rounded neck-to-back connection. Keep IMAGE1's existing intermediate pose, skull size, eyes, exact face position, shoulder position, torso size, ivory pouch volume, hands, feet, colors and canvas registration unchanged. Do NOT turn it into image2's lower final pose. Fix ONLY the obvious unnatural pointed kink on the mint/olive upper back just behind the near eye: at 512 coordinates, around x280..322,y265..302, the outline rises into a sharp triangular peak at x302. Remove that spike and paint one smooth rounded organic back contour that connects the short broad neck to the rear torso, without a cut or corner. Keep the original back height and volume away from that small pointed kink; just shave the point into a gentle smooth arc and make the nearby green/olive skin coherent. No tall mint neck slab, no disconnected neck, no vertical cut edge, no new bump. Preserve absolutely everything else in image1 as closely as possible, especially the head and eye-bulb dimensions and position. ONE full-body transparent sprite, same square canvas and blank upper margin, no labels or background. This is a local outline cleanup on an already posed complete painting, not a new pose or a cutout-part replacement."
+  }
+]

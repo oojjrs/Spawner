@@ -1,0 +1,23 @@
+{
+  "source": "DesignAssets/CreatureConcepts/v3/spiny-back-leader.png",
+  "sourceSize": [
+    335,
+    328
+  ],
+  "sourceBounds": [
+    35,
+    47,
+    304,
+    287
+  ],
+  "uniformScale": 1.6356877323420074,
+  "origin": [
+    36,
+    55
+  ],
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ]
+}

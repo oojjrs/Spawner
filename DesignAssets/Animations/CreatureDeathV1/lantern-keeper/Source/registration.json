@@ -1,0 +1,212 @@
+{
+  "sourceImage": "DesignAssets/CreatureConcepts/v3/lantern-keeper.png",
+  "generatedSheet": "exec-b093d625-d9cb-4d83-ad2f-faf378b00896.png",
+  "originalNeutralBounds": [
+    71,
+    92,
+    445,
+    433
+  ],
+  "commonScale": 1.103559870550162,
+  "pivot": [
+    258.0,
+    433
+  ],
+  "poseRegistrations": [
+    {
+      "drawing": "000.png",
+      "sourceComponent": 1,
+      "sourceBounds": [
+        10,
+        111,
+        324,
+        426
+      ],
+      "scale": 1.103559870550162,
+      "origin": [
+        85,
+        89
+      ],
+      "groundContactY": 433
+    },
+    {
+      "drawing": "001.png",
+      "sourceComponent": 2,
+      "sourceBounds": [
+        350,
+        155,
+        642,
+        426
+      ],
+      "scale": 1.103559870550162,
+      "origin": [
+        97,
+        137
+      ],
+      "groundContactY": 433
+    },
+    {
+      "drawing": "002.png",
+      "sourceComponent": 3,
+      "sourceBounds": [
+        649,
+        189,
+        931,
+        427
+      ],
+      "scale": 1.103559870550162,
+      "origin": [
+        102,
+        174
+      ],
+      "groundContactY": 433
+    },
+    {
+      "drawing": "003.png",
+      "sourceComponent": 4,
+      "sourceBounds": [
+        951,
+        205,
+        1232,
+        429
+      ],
+      "scale": 1.103559870550162,
+      "origin": [
+        103,
+        189
+      ],
+      "groundContactY": 433
+    },
+    {
+      "drawing": "004.png",
+      "sourceComponent": 5,
+      "sourceBounds": [
+        26,
+        522,
+        309,
+        740
+      ],
+      "scale": 1.103559870550162,
+      "origin": [
+        102,
+        196
+      ],
+      "groundContactY": 433
+    },
+    {
+      "drawing": "005.png",
+      "sourceComponent": 6,
+      "sourceBounds": [
+        344,
+        540,
+        642,
+        737
+      ],
+      "scale": 1.103559870550162,
+      "origin": [
+        94,
+        219
+      ],
+      "groundContactY": 433
+    },
+    {
+      "drawing": "006.png",
+      "sourceComponent": 7,
+      "sourceBounds": [
+        649,
+        581,
+        954,
+        736
+      ],
+      "scale": 1.103559870550162,
+      "origin": [
+        90,
+        265
+      ],
+      "groundContactY": 433
+    },
+    {
+      "drawing": "007.png",
+      "sourceComponent": 8,
+      "sourceBounds": [
+        954,
+        603,
+        1241,
+        739
+      ],
+      "scale": 1.103559870550162,
+      "origin": [
+        100,
+        286
+      ],
+      "groundContactY": 433
+    },
+    {
+      "drawing": "008.png",
+      "sourceComponent": 10,
+      "sourceBounds": [
+        10,
+        1032,
+        320,
+        1163
+      ],
+      "scale": 1.103559870550162,
+      "origin": [
+        87,
+        292
+      ],
+      "groundContactY": 433
+    },
+    {
+      "drawing": "009.png",
+      "sourceComponent": 12,
+      "sourceBounds": [
+        334,
+        1034,
+        629,
+        1163
+      ],
+      "scale": 1.103559870550162,
+      "origin": [
+        95,
+        294
+      ],
+      "groundContactY": 433
+    },
+    {
+      "drawing": "010.png",
+      "sourceComponent": 9,
+      "sourceBounds": [
+        650,
+        1030,
+        939,
+        1163
+      ],
+      "scale": 1.103559870550162,
+      "origin": [
+        99,
+        290
+      ],
+      "groundContactY": 433
+    },
+    {
+      "drawing": "011.png",
+      "sourceComponent": 11,
+      "sourceBounds": [
+        957,
+        1032,
+        1245,
+        1163
+      ],
+      "scale": 1.103559870550162,
+      "origin": [
+        99,
+        292
+      ],
+      "groundContactY": 433
+    }
+  ],
+  "componentAlphaThreshold": 64,
+  "discardedAlphaBelow": 12,
+  "emptyCellsExcluded": 4
+}

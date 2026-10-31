@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "canvas": [
+    512,
+    512
+  ],
+  "referenceAuthority": "DesignAssets/CreatureConcepts/v3/spring-keeper.png",
+  "boundLayers": {
+    "body": "Source/Bound/body.png",
+    "crest-1": "Source/Bound/crest-1.png",
+    "crest-2": "Source/Bound/crest-2.png",
+    "crest-3": "Source/Bound/crest-3.png",
+    "crest-4": "Source/Bound/crest-4.png",
+    "head": "Source/Bound/head.png",
+    "head-alternate": "Source/Bound/head-alternate.png",
+    "leg-far-foot": "Source/Bound/leg-far-foot.png",
+    "leg-far-lower": "Source/Bound/leg-far-lower.png",
+    "leg-far-upper": "Source/Bound/leg-far-upper.png",
+    "leg-near-foot": "Source/Bound/leg-near-foot.png",
+    "leg-near-lower": "Source/Bound/leg-near-lower.png",
+    "leg-near-upper": "Source/Bound/leg-near-upper.png",
+    "tail-1": "Source/Bound/tail-1.png",
+    "tail-2": "Source/Bound/tail-2.png",
+    "tail-3": "Source/Bound/tail-3.png",
+    "tail-4": "Source/Bound/tail-4.png",
+    "tail-5": "Source/Bound/tail-5.png",
+    "tail-coverts": "Source/Bound/tail-coverts.png",
+    "wing-far": "Source/Bound/wing-far.png",
+    "wing-near": "Source/Bound/wing-near.png"
+  },
+  "rawGenerations": "Source/generation.json",
+  "registeredBindings": "rig.json",
+  "registrations": [
+    "Source/joint-registration.json",
+    "Source/plume-registration.json",
+    "Source/registration.json"
+  ],
+  "legacyPoseInputsAreProvenanceOnly": true,
+  "prepare": "prepare.py",
+  "renderer": "render.py"
+}

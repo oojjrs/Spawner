@@ -1,0 +1,138 @@
+{
+  "torso": {
+    "matrix": [
+      [
+        0.2303590008809859,
+        -0.0005719583344668404,
+        109.61438795434006
+      ],
+      [
+        0.0005719583344668404,
+        0.2303590008809859,
+        164.68070887206358
+      ]
+    ],
+    "completeBounds": [
+      126,
+      256,
+      387,
+      389
+    ],
+    "source": "torso-drawing.png",
+    "registrationMethod": "preserved-torso-registration"
+  },
+  "neck-ruff": {
+    "matrix": [
+      [
+        0.21574916832771807,
+        -0.002963412953811266,
+        68.30465528328186
+      ],
+      [
+        0.002963412953811266,
+        0.21574916832771807,
+        172.10546154284685
+      ]
+    ],
+    "completeBounds": [
+      107,
+      255,
+      261,
+      418
+    ],
+    "source": "ruff-complete-drawing.png",
+    "registrationMethod": "SIFT-similarity"
+  },
+  "fore-near": {
+    "matrix": [
+      [
+        0.33548387096774196,
+        0.0,
+        100.18709677419353
+      ],
+      [
+        0.0,
+        0.33548387096774196,
+        167.89677419354837
+      ]
+    ],
+    "completeBounds": [
+      172,
+      330,
+      265,
+      449
+    ],
+    "source": "complete-parts-drawing.png",
+    "registrationMethod": "paw-lightmark-bounds",
+    "componentIndex": 2
+  },
+  "fore-far": {
+    "matrix": [
+      [
+        0.2261904761904762,
+        0.0,
+        -103.01190476190476
+      ],
+      [
+        0.0,
+        0.2261904761904762,
+        253.3095238095238
+      ]
+    ],
+    "completeBounds": [
+      72,
+      382,
+      164,
+      437
+    ],
+    "source": "complete-parts-drawing.png",
+    "registrationMethod": "paw-lightmark-bounds",
+    "componentIndex": 3
+  },
+  "hind-near": {
+    "matrix": [
+      [
+        0.3333333333333333,
+        0.0,
+        232.0
+      ],
+      [
+        0.0,
+        0.3333333333333333,
+        21.33333333333337
+      ]
+    ],
+    "completeBounds": [
+      290,
+      300,
+      388,
+      421
+    ],
+    "source": "complete-parts-drawing.png",
+    "registrationMethod": "paw-lightmark-bounds",
+    "componentIndex": 4
+  },
+  "hind-far": {
+    "matrix": [
+      [
+        0.25203252032520324,
+        0.0,
+        40.73983739837399
+      ],
+      [
+        0.0,
+        0.25203252032520324,
+        121.70731707317077
+      ]
+    ],
+    "completeBounds": [
+      253,
+      360,
+      328,
+      410
+    ],
+    "source": "complete-parts-drawing.png",
+    "registrationMethod": "paw-lightmark-bounds",
+    "componentIndex": 5
+  }
+}

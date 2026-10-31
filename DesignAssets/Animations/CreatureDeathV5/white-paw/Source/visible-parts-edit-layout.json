@@ -1,0 +1,86 @@
+[
+  {
+    "id": "torso",
+    "sourceBounds": [
+      227,
+      268,
+      350,
+      408
+    ],
+    "scale": 2.5,
+    "placement": [
+      246,
+      75
+    ]
+  },
+  {
+    "id": "neck-ruff",
+    "sourceBounds": [
+      107,
+      258,
+      247,
+      418
+    ],
+    "scale": 2.5,
+    "placement": [
+      1025,
+      50
+    ]
+  },
+  {
+    "id": "fore-near",
+    "sourceBounds": [
+      173,
+      330,
+      259,
+      447
+    ],
+    "scale": 2.5,
+    "placement": [
+      292,
+      604
+    ]
+  },
+  {
+    "id": "fore-far",
+    "sourceBounds": [
+      73,
+      389,
+      173,
+      436
+    ],
+    "scale": 2.5,
+    "placement": [
+      1075,
+      691
+    ]
+  },
+  {
+    "id": "hind-near",
+    "sourceBounds": [
+      297,
+      300,
+      388,
+      419
+    ],
+    "scale": 2.5,
+    "placement": [
+      286,
+      1101
+    ]
+  },
+  {
+    "id": "hind-far",
+    "sourceBounds": [
+      250,
+      358,
+      346,
+      409
+    ],
+    "scale": 2.5,
+    "placement": [
+      1080,
+      1186
+    ]
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "tool": "image_gen",
+  "prompt": "Image1 is the exact ORIGINAL creature design, already in a 512x512 registered view. Image2 is the edit TARGET: the empty rigid mountain shell. Image3 is a technical ANATOMICAL GUIDE on the original: CYAN ellipse marks the actual neck entrance immediately behind the original head; pink ellipse marks the small far-front leg route below it. Edit image2's LOWER FRONT HIDDEN SURFACES so the empty shell has its real NECK SOCKET at the cyan position, centered approximately (163,331) in this 512x512 view. The current leftmost hole around (95,333) is too far forward for the head: repair that area with proper continuous stone/cream shell surface and put the neck socket BEHIND the original skull as the guide shows. Make a natural small recessed dark opening with a complete rounded rim, matching the original gray collar boundary that was hidden by the head. The other leg sockets stay separate and small; the far-front leg route may sit lower as the pink guide shows. No broad arch, no merged head-and-leg gap, no thin cutout plate. Keep all the original visible upper gray boulders, amber mineral veins, turquoise crystal positions, mountain silhouette, camera, scale, palette and the entire rest of image2 EXACTLY unchanged. The visible gray stone over the original head remains in place; draw the newly exposed socket only where the original head/neck concealed it. The near-front and rear leg sockets are unchanged. Output ONE complete rigid EMPTY shell-only production sprite on genuine transparency with the same 512x512 framing as image2, no skin, head, limb cap, tail, guides, text, grid, shadows or effects. This is actual hidden-surface/frame source artwork for the death animation, not a redesign or demonstration.",
+  "inputs": [
+    "registered-reference.png",
+    "master-aligned.png",
+    "socket-guide.png"
+  ],
+  "output": "head-socket.png",
+  "rawGeneratedImage": "D:/.codex/generated_images/01a18389-9751-73b3-bbe4-a6f4a5854d96/exec-be8cf77a-a188-49bf-a94b-37189f2c54a7.png"
+}

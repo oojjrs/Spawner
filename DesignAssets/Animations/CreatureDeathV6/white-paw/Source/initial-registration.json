@@ -1,0 +1,26 @@
+[
+  {
+    "source": "approved-reference", 
+    "sourceSize": [
+      361, 
+      225
+    ], 
+    "scale": 1.4182825484764543, 
+    "translation": [
+      0, 
+      111
+    ]
+  }, 
+  {
+    "source": "final-drawing", 
+    "sourceSize": [
+      1589, 
+      990
+    ], 
+    "scale": 0.3222152297042165, 
+    "translation": [
+      0, 
+      111
+    ]
+  }
+]

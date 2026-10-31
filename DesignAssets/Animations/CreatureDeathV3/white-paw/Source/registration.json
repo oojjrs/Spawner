@@ -1,0 +1,70 @@
+{
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ],
+  "approvedDesign": "DesignAssets/CreatureConcepts/v3/white-paw.png",
+  "keyRegistration": [
+    {
+      "key": 0,
+      "sourceComponentBounds": [
+        57,
+        112,
+        726,
+        432
+      ],
+      "uniformScale": 0.5866666666666667,
+      "translation": [
+        20.0,
+        128.85333333333335
+      ],
+      "referenceGroundY": 448
+    },
+    {
+      "key": 1,
+      "sourceComponentBounds": [
+        818,
+        117,
+        738,
+        428
+      ],
+      "uniformScale": 0.5866666666666667,
+      "translation": [
+        -439.94666666666666,
+        128.85333333333335
+      ],
+      "referenceGroundY": 448
+    },
+    {
+      "key": 2,
+      "sourceComponentBounds": [
+        39,
+        582,
+        746,
+        325
+      ],
+      "uniformScale": 0.5866666666666667,
+      "translation": [
+        20.0,
+        -84.10666666666668
+      ],
+      "referenceGroundY": 448
+    },
+    {
+      "key": 3,
+      "sourceComponentBounds": [
+        781,
+        696,
+        784,
+        211
+      ],
+      "uniformScale": 0.5866666666666667,
+      "translation": [
+        -439.94666666666666,
+        -84.10666666666668
+      ],
+      "referenceGroundY": 448
+    }
+  ]
+}

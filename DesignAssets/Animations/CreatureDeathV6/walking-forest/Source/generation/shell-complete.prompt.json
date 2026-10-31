@@ -1,0 +1,8 @@
+{
+  "tool": "builtin-imagegen",
+  "prompt": "Use case: precise-object-edit. Image is the sole original design and 512x512 neutral framing. Draw one transparent complete rigid mineral turtle SHELL attachment, remove EVERY soft head/neck, spotted olive leg/foot, claws and tail. Preserve the exact entire mountain silhouette, volume, original boulders/facets, amber cracks, turquoise crystal shapes and positions, original material palette and pale segmented hard underside. Complete only what the body hid. No olive rounded plugs or body-colored caps left in openings: the head/feet are gone INSIDE. Retain small natural recessed neck/limb rims with dark inner shadows only. Do not cut giant bottom arches, a wide new black tunnel or a plate shell; the underside remains substantial and rounded. All stones and crystals rigid with unchanged sizes. Keep shell at its original neutral placement; do not drop it to ground yet. Whole attachment, clean transparent background, no shadow/text/markers.",
+  "inputs": [
+    "H:/Spawner/DesignAssets/Animations/CreatureDeathV6/walking-forest/Source/registered-reference.png"
+  ],
+  "output": "shell-complete.png"
+}

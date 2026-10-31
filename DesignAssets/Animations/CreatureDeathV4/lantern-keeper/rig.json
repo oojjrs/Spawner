@@ -1,0 +1,227 @@
+{
+  "name": "lantern-keeper", 
+  "method": "Complete separated jointed parts, coupled rigid body and head, flexible anchored leaf ears and front mane", 
+  "configuration": {
+    "bodyPivot": [
+      303, 
+      333
+    ], 
+    "headPivot": [
+      279, 
+      278
+    ], 
+    "legs": {
+      "fore-near": [
+        [
+          252, 
+          334
+        ], 
+        [
+          258, 
+          373
+        ], 
+        [
+          249.0, 
+          409.7116182572614
+        ]
+      ], 
+      "fore-far": [
+        [
+          220, 
+          333
+        ], 
+        [
+          215, 
+          371
+        ], 
+        [
+          202.0, 
+          399.5404564315353
+        ]
+      ], 
+      "hind-near": [
+        [
+          366, 
+          331
+        ], 
+        [
+          379, 
+          377
+        ], 
+        [
+          361.0, 
+          401.6767080745342
+        ]
+      ], 
+      "hind-far": [
+        [
+          323, 
+          336
+        ], 
+        [
+          334, 
+          373
+        ], 
+        [
+          327.0, 
+          396.1276397515528
+        ]
+      ]
+    }, 
+    "backLayers": [
+      "fore-far", 
+      "hind-far"
+    ], 
+    "frontLayers": [
+      "hind-near", 
+      "fore-near"
+    ], 
+    "ears": {
+      "far-ear": [
+        [
+          217, 
+          211
+        ], 
+        [
+          193, 
+          180
+        ], 
+        [
+          132, 
+          147
+        ], 
+        [
+          59.83, 
+          175.66
+        ]
+      ], 
+      "near-ear": [
+        [
+          269, 
+          211
+        ], 
+        [
+          303, 
+          183
+        ], 
+        [
+          375, 
+          137
+        ], 
+        [
+          454.18, 
+          124.52
+        ]
+      ]
+    }, 
+    "mane": [
+      [
+        230, 
+        304
+      ], 
+      [
+        228, 
+        336
+      ], 
+      [
+        227, 
+        370
+      ], 
+      [
+        223, 
+        404
+      ]
+    ], 
+    "tailPivot": [
+      407, 
+      316
+    ]
+  }, 
+  "spineCompatibilityVerified": false, 
+  "frameSize": 512, 
+  "pivot": [
+    256, 
+    448
+  ], 
+  "coordinateSystem": "source pixels right and down", 
+  "renderer": "render.py", 
+  "prepare": "prepare.py", 
+  "parts": [
+    "Parts/body.png", 
+    "Parts/head.png", 
+    "Parts/head-closed.png", 
+    "Parts/near-ear.png", 
+    "Parts/far-ear.png", 
+    "Parts/mane.png", 
+    "Parts/tail.png", 
+    "Parts/fore-far-upper.png", 
+    "Parts/fore-far-lower.png", 
+    "Parts/fore-far-paw.png", 
+    "Parts/fore-near-upper.png", 
+    "Parts/fore-near-lower.png", 
+    "Parts/fore-near-paw.png", 
+    "Parts/hind-far-upper.png", 
+    "Parts/hind-far-lower.png", 
+    "Parts/hind-far-paw.png", 
+    "Parts/hind-near-upper.png", 
+    "Parts/hind-near-lower.png", 
+    "Parts/hind-near-paw.png", 
+    "Parts/cheek-jewel.png"
+  ], 
+  "rigidParts": [
+    "body", 
+    "head", 
+    "head-closed", 
+    "tail", 
+    "fore-far-upper", 
+    "fore-far-lower", 
+    "fore-far-paw", 
+    "fore-near-upper", 
+    "fore-near-lower", 
+    "fore-near-paw", 
+    "hind-far-upper", 
+    "hind-far-lower", 
+    "hind-far-paw", 
+    "hind-near-upper", 
+    "hind-near-lower", 
+    "hind-near-paw", 
+    "cheek-jewel"
+  ], 
+  "flexibleParents": {
+    "near-ear": "head", 
+    "far-ear": "head", 
+    "mane": "body"
+  }, 
+  "headConstraint": {
+    "type": "coincident neck joint with angular support loss and body reaction", 
+    "point": [
+      279, 
+      278
+    ]
+  }, 
+  "drawOrder": [
+    "fore-far", 
+    "hind-far", 
+    "tail", 
+    "far-ear", 
+    "near-ear", 
+    "body", 
+    "hind-near", 
+    "fore-near", 
+    "mane", 
+    "head", 
+    "cheek-jewel"
+  ], 
+  "limbSegmentOrder": [
+    "lower", 
+    "upper", 
+    "paw"
+  ], 
+  "sourceRegistrations": [
+    "Source/registration-v4.json", 
+    "Source/head-jaw-registration-v4.json", 
+    "Source/cheek-jewel-registration.json"
+  ], 
+  "runtimeSurface": "custom Python raster renderer", 
+  "cheekJewelParent": "head"
+}

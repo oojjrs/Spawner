@@ -1,0 +1,350 @@
+{
+  "timesMs": [
+    0, 
+    40, 
+    80, 
+    120, 
+    160, 
+    200, 
+    240, 
+    280, 
+    320, 
+    360, 
+    400, 
+    440, 
+    480, 
+    520, 
+    560, 
+    600, 
+    640, 
+    680, 
+    720, 
+    760, 
+    800, 
+    840, 
+    880, 
+    920, 
+    960, 
+    1000, 
+    1040, 
+    1080, 
+    1120, 
+    1160, 
+    1200, 
+    1240, 
+    1280, 
+    1320, 
+    1360, 
+    1400, 
+    1440, 
+    1480, 
+    1520, 
+    1560, 
+    1600, 
+    1640, 
+    1680, 
+    1720, 
+    1760, 
+    1800, 
+    1840, 
+    1880, 
+    1920, 
+    1960, 
+    2000, 
+    2040, 
+    2080, 
+    2120, 
+    2160, 
+    2200, 
+    2240, 
+    2280, 
+    2320, 
+    2360, 
+    2400, 
+    2440, 
+    2480, 
+    2520, 
+    2560, 
+    2600
+  ], 
+  "durationsMs": [
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40, 
+    40
+  ], 
+  "eyeCloseMs": 180, 
+  "channels": {
+    "foreleg-far-targetX": [
+      [
+        0, 
+        0, 
+        "smooth"
+      ], 
+      [
+        180, 
+        0, 
+        "smooth"
+      ], 
+      [
+        620, 
+        -8, 
+        "smooth"
+      ]
+    ], 
+    "foreleg-far-targetY": [
+      [
+        0, 
+        0, 
+        "smooth"
+      ], 
+      [
+        180, 
+        0, 
+        "smooth"
+      ], 
+      [
+        620, 
+        0, 
+        "smooth"
+      ]
+    ], 
+    "foreleg-targetX": [
+      [
+        0, 
+        0, 
+        "smooth"
+      ], 
+      [
+        240, 
+        0, 
+        "smooth"
+      ], 
+      [
+        700, 
+        -10, 
+        "smooth"
+      ]
+    ], 
+    "foreleg-targetY": [
+      [
+        0, 
+        0, 
+        "smooth"
+      ], 
+      [
+        240, 
+        0, 
+        "smooth"
+      ], 
+      [
+        700, 
+        0, 
+        "smooth"
+      ]
+    ], 
+    "hindleg-targetX": [
+      [
+        0, 
+        0, 
+        "smooth"
+      ], 
+      [
+        550, 
+        0, 
+        "smooth"
+      ], 
+      [
+        1000, 
+        6, 
+        "smooth"
+      ]
+    ], 
+    "hindleg-targetY": [
+      [
+        0, 
+        0, 
+        "smooth"
+      ], 
+      [
+        550, 
+        0, 
+        "smooth"
+      ], 
+      [
+        1000, 
+        0, 
+        "smooth"
+      ]
+    ]
+  }, 
+  "appendages": {
+    "far-ear": {
+      "release": [
+        150, 
+        700
+      ], 
+      "damping": 7, 
+      "gravity": 750, 
+      "stiffness": 80, 
+      "slack": 0.8, 
+      "rootLimit": 95, 
+      "bendLimit": 15, 
+      "collisionRadii": [
+        4, 
+        4, 
+        3
+      ], 
+      "ground": 428, 
+      "friction": 14, 
+      "contactVelocityRetention": 0
+    }, 
+    "near-ear": {
+      "release": [
+        150, 
+        700
+      ], 
+      "damping": 7, 
+      "gravity": 750, 
+      "stiffness": 80, 
+      "slack": 0.8, 
+      "rootLimit": 95, 
+      "bendLimit": 15, 
+      "collisionRadii": [
+        4, 
+        4, 
+        3
+      ], 
+      "ground": 428, 
+      "friction": 14, 
+      "contactVelocityRetention": 0
+    }, 
+    "ruff": {
+      "release": [
+        250, 
+        800
+      ], 
+      "damping": 9, 
+      "gravity": 700, 
+      "stiffness": 85, 
+      "slack": 0.8, 
+      "rootLimit": 70, 
+      "bendLimit": 18, 
+      "collisionRadii": [
+        2, 
+        2, 
+        2
+      ], 
+      "ground": 428, 
+      "friction": 14, 
+      "contactVelocityRetention": 0
+    }
+  }, 
+  "physics": {
+    "masses": [
+      3, 
+      1.7
+    ], 
+    "gravity": 700, 
+    "durationMs": 2600, 
+    "releaseMs": 100, 
+    "supportStiffness": 85, 
+    "supportDamping": 12, 
+    "airDamping": 1.8, 
+    "neckStiffness": 55, 
+    "neckDamping": 7, 
+    "neckInterval": [
+      160, 
+      650
+    ], 
+    "neckLimits": [
+      -65, 
+      15
+    ], 
+    "friction": 16, 
+    "groundPlanes": [
+      428, 
+      428
+    ], 
+    "supportIntervals": {
+      "foreleg-far": [
+        120, 
+        450
+      ], 
+      "foreleg": [
+        180, 
+        540
+      ], 
+      "hindleg": [
+        440, 
+        980
+      ]
+    }, 
+    "limbColliders": [
+      "hindleg"
+    ], 
+    "limbGround": 428
+  }
+}

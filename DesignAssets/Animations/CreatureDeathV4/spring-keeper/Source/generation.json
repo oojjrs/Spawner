@@ -1,0 +1,75 @@
+{
+  "provider": "built-in image_gen",
+  "entries": [
+    {
+      "file": "parts-atlas.png",
+      "prompt": "Use case: precise-object-edit. Actual production separated layer kit for a continuous jointed 2D death animation of the exact approved flower-fan bird reference. Draw exactly NINE independent complete parts in 3x3 spacious equal cells, chronological cell identification by this list only, no labels: top row A complete HEADLESS TORSO with coral/cream flower collar and green feathered belly/back but NO head/crest/wings/fan/legs; B exact complete round ivory HEAD, OPEN original eye, tiny gold beak, smooth completed hidden skull/neck, NO crest or collar/body; C EXACT SAME head drawing and outline as B with ONLY eye changed to a relaxed CLOSED eyelid. Middle row D complete coral/cream/ivory THREE-PLUME FOREHEAD CREST cluster with a full soft rounded root suitable to bend forward over the eye, no head/body; E complete NEAR green leaf-feather WING from shoulder through every tip; F complete FAR green WING, same camera. Bottom row G the entire enormous original orange/coral/cream FAN TAIL, every long curved plume, natural small green feathered rump root and completed hidden base, NO wing/body/head; H complete NEAR gold bird LEG including hidden hip, bent knee/hock, ankle and three original slender toes; I complete FAR gold leg with same anatomical chain. Original design is sole appearance authority: same exact skull and beak size, torso volume, small bird feet, feather count/bands, palette, fine teal outlines, soft painterly shading and upper-left lighting. All parts are complete rounded closed contours including hidden surfaces and overlap for articulation; no rectangular cuts, joint wedges, body fragments, floating duplicates or extra motifs. Preserve reference neutral pose perspective within each part. Generous blank alpha around every full part, prevent touching/cropping neighboring cells. Genuine transparent RGBA outside the nine parts. No grid lines, text, scenery, ground, shadows, glow, motion blur or sheet of whole creatures. These are actual editable source layers, not a preview.",
+      "references": [
+        "Source/approved.png"
+      ],
+      "providerOutput": "exec-761a1abf-8ab9-4650-8a66-25aeb8d5b9e6.png"
+    },
+    {
+      "file": "torso-complete.png",
+      "prompt": "Use case: precise-object-edit. One ACTUAL PRODUCTION wingless torso layer. Image1 is the EDIT TARGET headless bird torso source; image2 is approved appearance. Remove the entire large pointed green WING that still covers the right half of image1, including every long overlapping wing flight feather and all wing-shaped outline points. In its place draw the complete hidden short rounded green BACK and rounded cream BELLY/RUMP of the actual torso, preserving the exact existing coral/cream flower collar/chest and its scale, palette and painterly shading. This is the compact oval flesh torso UNDERNEATH the removed wing: short small soft green back feathers, continuous rounded body silhouette, no wing silhouette or long feather fan. Complete the rounded hidden shoulder and rump, do not cut a hole or notch. No head, crest, wings, legs, tail, labels, new motifs, floor or shadow. Keep the torso's original chest/belly volume, exact subtle thin outline style from approved image2. Genuinely transparent RGBA around this one closed complete source part. It will be used beneath separately moving wing layers, so NO retained wing drawing at all.",
+      "references": [
+        "Source/torso-wing-removal-input.png",
+        "Source/approved.png"
+      ]
+    },
+    {
+      "file": "fan-complete.png",
+      "prompt": "Use case: precise-object-edit. Background-extraction and hidden-root completion for ONE exact production FAN TAIL. Keep ONLY the original enormous UPRIGHT coral/orange/cream fan tail at the RIGHT SIDE of the approved bird, including every curved plume, exact plume count, cream tip shapes, inner coral bands, and little green rump root. REMOVE head, crest, flower collar, torso, both wings and legs completely. Preserve the original tall compact upright fan silhouette and original proportions exactly; do NOT open/spread it into a broad horizontal peacock fan, shorten plumes, change camera or redesign feather shapes. Complete just the hidden lower root where the body/wing used to cover the fan so it becomes one full closed isolated attachment with overlap. Every originally visible tail surface should retain the reference's fine outlines, colors, painterly shading and pattern placement. Whole tall tail fully visible with blank alpha margin. Genuine transparent RGBA background, no shadow/halo, floor, labels, grid, text or other parts. This is a real source layer for a continuous flexible tail rig, not an illustration or preview.",
+      "references": [
+        "Source/approved.png"
+      ],
+      "providerOutput": "exec-af503dbf-7443-4cb5-b2ea-07ec00c4dac4.png"
+    }
+  ],
+  "generations": [
+    {
+      "output": "joints-atlas.png",
+      "generatedImage": "D:\\.codex\\generated_images\\01a18389-9751-73b3-bbe4-a6f4a5854d96\\exec-dac06c6e-b54d-42ea-9455-6ebec3172eec.png",
+      "prompt": "Production game animation attachment atlas for the exact small SPRING KEEPER BIRD in the references. Image1 defines character colors and style; image2 shows its two actual complete legs (near above, far below). Draw exactly SIX separate pieces in two rows by three columns. Row1 near leg, row2 far leg. Left column: complete short ivory-feathered upper leg with fully rounded hidden hip and knee connection. Middle: the short golden scaly lower leg with solid rounded knee and ankle connection, no toes. Right: the complete original golden bird foot with all toes and the rounded ankle overlap. Preserve the exact small leg proportions and foot shape from the references, same three-quarter view, thin outline and painted shading. Fully painted solid joint end caps with smooth overlap, no holes, hollow sockets, rings or flat clipped edges. Transparent RGBA background, ample empty spacing, all six components fully inside the canvas. No whole bird, body, wings, crest, tail, letters, labels, grid, shadow or effect. Actual separate source attachments to reconstruct and animate these two legs.",
+      "references": [
+        "limb-reference.png",
+        "../../../../CreatureConcepts/v3/spring-keeper.png"
+      ]
+    },
+    {
+      "output": "paws-atlas.png",
+      "generatedImage": "D:\\.codex\\generated_images\\01a18389-9751-73b3-bbe4-a6f4a5854d96\\exec-154eac77-31c0-43f4-a978-f54eb06d8016.png",
+      "prompt": "Actual game animation source: TWO COMPACT GOLDEN BIRD FEET ONLY, side by side, matching the exact Spring Keeper bird and feet references. Left near foot, right far foot. Each is a low small foot with three slender forward toes and one original rear toe, little brown claw tips, golden scaly texture, and a TINY solid rounded ankle nub right above the instep. The entire foot is broader than it is tall. Do not include a long upright leg/shin, feathered upper leg or any large vertical shaft. Keep the original toe directions and length ratios, thin outline and softly painted original colors. Complete rounded hidden ankle overlap, no hole or socket. Transparent RGBA, generous gaps, no full bird/body/feathers, labels, lines, shadows or effects. Real separately rotating ankle source parts.",
+      "references": [
+        "../../../../CreatureConcepts/v3/spring-keeper.png",
+        "limb-reference.png"
+      ]
+    },
+    {
+      "output": "plumes-before-separation.png",
+      "generatedImage": "D:\\.codex\\generated_images\\01a18389-9751-73b3-bbe4-a6f4a5854d96\\exec-cd608f7b-3ea7-41ea-aff6-70eeaf1cfe41.png",
+      "prompt": "Precise production source artwork for the exact SPRING KEEPER BIRD reference, preserving its unique cream-yellow-coral flame-shaped feather designs. Make TEN complete separate game animation attachments in TWO ROWS OF FIVE on a genuine transparent background. TOP ROW: the bird's FOUR distinct head-crest plumes, each complete from rounded hidden base through its curved cream tip (first the tall front/left plume, then the two sweeping middle plumes, then the short lower rear coral plume); fifth cell a small complete cluster of the short coral/cream tail-base coverts. BOTTOM ROW: the FIVE original long tail plumes separately and completely, in order upper-left inward-curled plume, tallest top-center plume, upper-right outward plume, middle-right curled plume, lowest downward-curled plume. Each long plume includes its whole hidden narrow base and full curved shaft, original coral/red inner band, yellow middle and cream border/tip. Match the exact reference proportions, distinctive asymmetric curl directions, palette, line and painted texture. All feather ends/bases solid and fully painted with rounded overlap, no chopped sections or hollow sockets. Generous spacing, every complete piece inside its own cell. NO attached head or body, whole bird, skeletal lines, labels, words, grid, shadows or effects. Actual individually bending source feather layers, not frames or a preview.",
+      "references": [
+        "../../../../CreatureConcepts/v3/spring-keeper.png"
+      ]
+    },
+    {
+      "output": "plumes-wide.png",
+      "generatedImage": "D:\\.codex\\generated_images\\01a18389-9751-73b3-bbe4-a6f4a5854d96\\exec-a27e55fe-e6d7-47af-ac46-f9b7e1b24926.png",
+      "prompt": "Edit image2, this exact 2-row 5-column sprite-source atlas. Image1 is the character design. The TOP first FOUR cells must each contain ONE SINGLE unforked crest feather only: ONE rounded base, ONE slender curved shaft, ONE pointed cream tip. The BOTTOM FIVE cells must each contain ONE SINGLE unforked long tail feather only: ONE base, ONE curved shaft, ONE cream tip. Remove every secondary plume, branching lobe, extra point and little companion feather from these nine cells. They must look like nine individual narrow curved flame-colored leaves, not nine mini fans or crest bundles. Keep the distinct curve directions and original coral inner/yellow middle/cream outer colors. Preserve the top-right small tail-coverts cluster as it is. Every feather completely drawn with hidden solid rounded base and transparent space around it. No text, no borders, no shadows. Transparent RGBA. Actual single-feather animation layers.",
+      "references": [
+        "../../../../CreatureConcepts/v3/spring-keeper.png",
+        "plumes-before-separation.png"
+      ]
+    },
+    {
+      "output": "plumes-atlas.png",
+      "generatedImage": "D:/.codex/generated_images/01a18389-9751-73b3-bbe4-a6f4a5854d96/exec-0a8cf282-90e3-45e4-8811-364fafe8bf7e.png",
+      "prompt": "Edit only the FIRST THREE feathers in the BOTTOM row of image2. Image1 is the exact bird design authority. Those three long upper tail feathers need the slender original flame-plume proportions: overall length about THREE TIMES their maximum width, gently rising shafts with cream tips that curl once. Make them narrow single upright flame feathers, not wide crescent-moon or semicircular leaf shapes. Keep each complete rounded hidden coral base. Keep original cream outer edge, yellow middle, coral inner band, fine painted line. Preserve the top row and the two short curved bottom-right feathers unchanged. Same two-row five-column arrangement, transparent background, complete separate sources with generous spacing. No new pieces, labels or effects.",
+      "references": [
+        "../../../../CreatureConcepts/v3/spring-keeper.png",
+        "plumes-wide.png"
+      ]
+    }
+  ]
+}

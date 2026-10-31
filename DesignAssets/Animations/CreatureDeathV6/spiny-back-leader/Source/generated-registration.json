@@ -1,0 +1,528 @@
+{
+  "body": {
+    "source": "Source/complete-core-drawing.png",
+    "crop": [
+      0,
+      0,
+      912,
+      877
+    ],
+    "matrixNative": [
+      [
+        0.2893111763200934,
+        -0.0008461450049534353,
+        38.498894127689624
+      ],
+      [
+        0.0008461450049534353,
+        0.2893111763200934,
+        14.307905024317801
+      ]
+    ],
+    "matches": 174,
+    "inliers": 122
+  },
+  "body-closed": {
+    "source": "Source/complete-core-drawing.png",
+    "crop": [
+      896,
+      0,
+      1792,
+      877
+    ],
+    "matrixNative": [
+      [
+        0.2892127308580495,
+        -0.0009289613903630922,
+        50.27377194703301
+      ],
+      [
+        0.0009289613903630922,
+        0.2892127308580495,
+        14.299636538584688
+      ]
+    ],
+    "matches": 173,
+    "inliers": 118
+  },
+  "fore-near-upper": {
+    "source": "Source/complete-parts-drawing.png",
+    "crop": [
+      0,
+      0,
+      362,
+      362
+    ],
+    "matrixNative": [
+      [
+        0.18706785726694694,
+        -0.03377228032382476,
+        145.10823112470032
+      ],
+      [
+        0.03377228032382476,
+        0.18706785726694694,
+        174.89843994301796
+      ]
+    ],
+    "registrationMethod": "Two anatomical attachment/end landmarks; one fixed similarity registration.",
+    "landmarks": [
+      [
+        125,
+        133
+      ],
+      [
+        234,
+        263
+      ],
+      [
+        164,
+        204
+      ],
+      [
+        180,
+        232
+      ]
+    ]
+  },
+  "fore-near-lower": {
+    "source": "Source/complete-parts-drawing.png",
+    "crop": [
+      362,
+      0,
+      724,
+      362
+    ],
+    "matrixNative": [
+      [
+        0.21918321468714874,
+        0.039340576995129196,
+        126.78343949044587
+      ],
+      [
+        -0.039340576995129196,
+        0.21918321468714874,
+        212.81865867366054
+      ]
+    ],
+    "registrationMethod": "Two anatomical attachment/end landmarks; one fixed similarity registration.",
+    "landmarks": [
+      [
+        220,
+        127
+      ],
+      [
+        118,
+        314
+      ],
+      [
+        180,
+        232
+      ],
+      [
+        165,
+        277
+      ]
+    ]
+  },
+  "mid-near-upper": {
+    "source": "Source/complete-parts-drawing.png",
+    "crop": [
+      724,
+      0,
+      1086,
+      362
+    ],
+    "matrixNative": [
+      [
+        0.1599360255897641,
+        -0.0031987205117952784,
+        196.8576569372251
+      ],
+      [
+        0.0031987205117952784,
+        0.1599360255897641,
+        198.1171531387445
+      ]
+    ],
+    "registrationMethod": "Two anatomical attachment/end landmarks; one fixed similarity registration.",
+    "landmarks": [
+      [
+        129,
+        153
+      ],
+      [
+        231,
+        251
+      ],
+      [
+        217,
+        223
+      ],
+      [
+        233,
+        239
+      ]
+    ]
+  },
+  "mid-near-lower": {
+    "source": "Source/complete-parts-drawing.png",
+    "crop": [
+      1086,
+      0,
+      1448,
+      362
+    ],
+    "matrixNative": [
+      [
+        0.176387105494357,
+        -0.02270730553490574,
+        203.13867675880246
+      ],
+      [
+        0.02270730553490574,
+        0.176387105494357,
+        213.2799216057309
+      ]
+    ],
+    "registrationMethod": "Two anatomical attachment/end landmarks; one fixed similarity registration.",
+    "landmarks": [
+      [
+        185,
+        122
+      ],
+      [
+        240,
+        285
+      ],
+      [
+        233,
+        239
+      ],
+      [
+        239,
+        269
+      ]
+    ]
+  },
+  "hind-near-upper": {
+    "source": "Source/complete-parts-drawing.png",
+    "crop": [
+      0,
+      362,
+      362,
+      724
+    ],
+    "matrixNative": [
+      [
+        0.14440232966626604,
+        -0.017842285291670507,
+        257.84348710363315
+      ],
+      [
+        0.017842285291670507,
+        0.14440232966626604,
+        181.7226587778497
+      ]
+    ],
+    "registrationMethod": "Two anatomical attachment/end landmarks; one fixed similarity registration.",
+    "landmarks": [
+      [
+        123,
+        146
+      ],
+      [
+        226,
+        251
+      ],
+      [
+        273,
+        205
+      ],
+      [
+        286,
+        222
+      ]
+    ]
+  },
+  "hind-near-lower": {
+    "source": "Source/complete-parts-drawing.png",
+    "crop": [
+      362,
+      362,
+      724,
+      724
+    ],
+    "matrixNative": [
+      [
+        0.18506787330316743,
+        -0.019758672699849152,
+        254.852036199095
+      ],
+      [
+        0.019758672699849152,
+        0.18506787330316743,
+        191.15942684766213
+      ]
+    ],
+    "registrationMethod": "Two anatomical attachment/end landmarks; one fixed similarity registration.",
+    "landmarks": [
+      [
+        184,
+        147
+      ],
+      [
+        241,
+        276
+      ],
+      [
+        286,
+        222
+      ],
+      [
+        294,
+        247
+      ]
+    ]
+  },
+  "fore-far-upper": {
+    "source": "Source/complete-parts-drawing.png",
+    "crop": [
+      724,
+      362,
+      1086,
+      724
+    ],
+    "matrixNative": [
+      [
+        0.15289821999087175,
+        0.03468735737106347,
+        21.121862163395704
+      ],
+      [
+        -0.03468735737106347,
+        0.15289821999087175,
+        167.1894112277499
+      ]
+    ],
+    "registrationMethod": "Two anatomical attachment/end landmarks; one fixed similarity registration.",
+    "landmarks": [
+      [
+        241,
+        145
+      ],
+      [
+        150,
+        229
+      ],
+      [
+        63,
+        181
+      ],
+      [
+        52,
+        197
+      ]
+    ]
+  },
+  "fore-far-lower": {
+    "source": "Source/complete-parts-drawing.png",
+    "crop": [
+      1086,
+      362,
+      1448,
+      724
+    ],
+    "matrixNative": [
+      [
+        0.19968819599109128,
+        0.020890868596881964,
+        5.239109131403126
+      ],
+      [
+        -0.020890868596881964,
+        0.19968819599109128,
+        172.6203118040089
+      ]
+    ],
+    "registrationMethod": "Two anatomical attachment/end landmarks; one fixed similarity registration.",
+    "landmarks": [
+      [
+        219,
+        145
+      ],
+      [
+        150,
+        278
+      ],
+      [
+        52,
+        197
+      ],
+      [
+        41,
+        225
+      ]
+    ]
+  },
+  "jaw-far": {
+    "source": "Source/complete-parts-drawing.png",
+    "crop": [
+      0,
+      724,
+      362,
+      1086
+    ],
+    "matrixNative": [
+      [
+        0.26878436163714114,
+        0.06414172266340866,
+        6.239462431276721
+      ],
+      [
+        -0.06414172266340866,
+        0.26878436163714114,
+        183.6701282834453
+      ]
+    ],
+    "registrationMethod": "Two anatomical attachment/end landmarks; one fixed similarity registration.",
+    "landmarks": [
+      [
+        258,
+        100
+      ],
+      [
+        190,
+        307
+      ],
+      [
+        82,
+        194
+      ],
+      [
+        77,
+        254
+      ]
+    ]
+  },
+  "jaw-near": {
+    "source": "Source/complete-parts-drawing.png",
+    "crop": [
+      362,
+      724,
+      724,
+      1086
+    ],
+    "matrixNative": [
+      [
+        0.2514795852882874,
+        0.005861296901070946,
+        75.10577430441666
+      ],
+      [
+        -0.005861296901070946,
+        0.2514795852882874,
+        179.72073986394943
+      ]
+    ],
+    "registrationMethod": "Two anatomical attachment/end landmarks; one fixed similarity registration.",
+    "landmarks": [
+      [
+        232,
+        94
+      ],
+      [
+        72,
+        305
+      ],
+      [
+        134,
+        202
+      ],
+      [
+        95,
+        256
+      ]
+    ]
+  },
+  "hidden-far-upper": {
+    "source": "Source/complete-parts-drawing.png",
+    "crop": [
+      724,
+      724,
+      1086,
+      1086
+    ],
+    "matrixNative": [
+      [
+        0.16265060240963858,
+        0.03012048192771083,
+        18.98795180722891
+      ],
+      [
+        -0.03012048192771083,
+        0.16265060240963858,
+        164.08433734939757
+      ]
+    ],
+    "registrationMethod": "Two anatomical attachment/end landmarks; one fixed similarity registration.",
+    "landmarks": [
+      [
+        243,
+        149
+      ],
+      [
+        160,
+        232
+      ],
+      [
+        63,
+        181
+      ],
+      [
+        52,
+        197
+      ]
+    ]
+  },
+  "hidden-far-lower": {
+    "source": "Source/complete-parts-drawing.png",
+    "crop": [
+      1086,
+      724,
+      1448,
+      1086
+    ],
+    "matrixNative": [
+      [
+        0.20325912324994264,
+        0.015102134496212952,
+        5.266238237319257
+      ],
+      [
+        -0.015102134496212952,
+        0.20325912324994264,
+        170.42827633692906
+      ]
+    ],
+    "registrationMethod": "Two anatomical attachment/end landmarks; one fixed similarity registration.",
+    "landmarks": [
+      [
+        219,
+        147
+      ],
+      [
+        155,
+        280
+      ],
+      [
+        52,
+        197
+      ],
+      [
+        41,
+        225
+      ]
+    ]
+  }
+}

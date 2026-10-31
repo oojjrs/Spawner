@@ -1,0 +1,35 @@
+{
+  "preview.webp": {
+    "size": [
+      512, 
+      512
+    ], 
+    "decodedFrames": 25, 
+    "durationMs": 2280, 
+    "loop": 0
+  }, 
+  "thumbnail.webp": {
+    "size": [
+      64, 
+      64
+    ], 
+    "decodedFrames": 25, 
+    "durationMs": 2280, 
+    "loop": 0
+  }, 
+  "sheet": {
+    "size": [
+      4096, 
+      2560
+    ], 
+    "cellSize": 512, 
+    "columns": 8, 
+    "sourceFrames": 33, 
+    "timelineLoop": false, 
+    "pivot": [
+      256, 
+      448
+    ]
+  }, 
+  "playbackEvidence": "H:/Spawner/$Trash/death-v3-beetle-fix-20261030/native-playback-record.json"
+}

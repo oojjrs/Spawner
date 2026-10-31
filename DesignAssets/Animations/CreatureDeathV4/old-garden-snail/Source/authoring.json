@@ -1,0 +1,28 @@
+{
+  "canvas": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "appearanceAuthority": "Source/approved-concept.png",
+  "reference": "Source/reference.png",
+  "editableParts": "Source/EditableParts",
+  "generation": "Source/generation.json",
+  "prepare": "Source/prepare.py",
+  "rig": "rig.json",
+  "motion": "motion.py",
+  "render": "render.py",
+  "externalPathsRequired": false,
+  "previewSize": 512,
+  "thumbnailSize": 64,
+  "shellTransform": "rigid vertical gravity/contact transform",
+  "finalState": "rigid shell and load only",
+  "rebuild": [
+    "Source/prepare.py",
+    "motion.py",
+    "render.py"
+  ]
+}

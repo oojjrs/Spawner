@@ -1,0 +1,98 @@
+{
+  "commonPhysicalScale": 0.6541010747516842,
+  "calibration": "SIFT against neutral skull/crest/beak and torso; scale shared by every cel, translation follows body support and floor contact.",
+  "referenceMatches": 76,
+  "referenceInliers": 27,
+  "entries": [
+    {
+      "source": "Source/collapse-body-drawings.png",
+      "crop": [
+        114,
+        77,
+        569,
+        656
+      ],
+      "matrix": [
+        [
+          0.6541010747516842,
+          0,
+          -30.875309384204968
+        ],
+        [
+          0,
+          0.6541010747516842,
+          20.217897112398532
+        ]
+      ],
+      "output": "Parts/collapse-0.png"
+    },
+    {
+      "source": "Source/collapse-body-drawings.png",
+      "crop": [
+        649,
+        172,
+        1150,
+        643
+      ],
+      "matrix": [
+        [
+          0.6541010747516842,
+          0,
+          -390.90803381493345
+        ],
+        [
+          0,
+          0.6541010747516842,
+          28.72121108417042
+        ]
+      ],
+      "output": "Parts/collapse-1.png"
+    },
+    {
+      "source": "Source/collapse-body-drawings.png",
+      "crop": [
+        27,
+        805,
+        619,
+        1150
+      ],
+      "matrix": [
+        [
+          0.6541010747516842,
+          0,
+          6.419636878210838
+        ],
+        [
+          0,
+          0.6541010747516842,
+          -302.90803381493345
+        ]
+      ],
+      "output": "Parts/collapse-2.png"
+    },
+    {
+      "source": "Source/collapse-body-drawings.png",
+      "crop": [
+        626,
+        844,
+        1230,
+        1159
+      ],
+      "matrix": [
+        [
+          0.6541010747516842,
+          0,
+          -378.23611979506825
+        ],
+        [
+          0,
+          0.6541010747516842,
+          -308.7949434876987
+        ]
+      ],
+      "output": "Parts/collapse-3.png"
+    }
+  ],
+  "selectedContactCel": 3,
+  "contactBody": "Parts/contact-body.png"
+}

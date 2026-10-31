@@ -1,0 +1,182 @@
+[
+  {
+    "part": "fore-near",
+    "source": "Source/registered-fore-near.png",
+    "crop": [
+      248,
+      349,
+      283,
+      384
+    ],
+    "mask": "rounded 35 pixel cap",
+    "root": [
+      245,
+      330
+    ],
+    "placements": [
+      [
+        228,
+        313
+      ],
+      [
+        231,
+        319
+      ],
+      [
+        235,
+        325
+      ],
+      [
+        238,
+        331
+      ],
+      [
+        241,
+        337
+      ],
+      [
+        245,
+        343
+      ],
+      [
+        248,
+        349
+      ]
+    ],
+    "rootAlpha": 255
+  },
+  {
+    "part": "fore-far",
+    "source": "Source/registered-fore-far.png",
+    "crop": [
+      82,
+      344,
+      117,
+      379
+    ],
+    "mask": "rounded 35 pixel cap",
+    "root": [
+      130,
+      337
+    ],
+    "placements": [
+      [
+        113,
+        320
+      ],
+      [
+        108,
+        324
+      ],
+      [
+        103,
+        328
+      ],
+      [
+        97,
+        332
+      ],
+      [
+        92,
+        336
+      ],
+      [
+        87,
+        340
+      ],
+      [
+        82,
+        344
+      ]
+    ],
+    "rootAlpha": 255
+  },
+  {
+    "part": "hind-near",
+    "source": "Source/registered-hind-near.png",
+    "crop": [
+      429,
+      352,
+      464,
+      387
+    ],
+    "mask": "rounded 35 pixel cap",
+    "root": [
+      432,
+      337
+    ],
+    "placements": [
+      [
+        415,
+        320
+      ],
+      [
+        418,
+        326
+      ],
+      [
+        420,
+        333
+      ],
+      [
+        423,
+        339
+      ],
+      [
+        426,
+        345
+      ],
+      [
+        429,
+        352
+      ]
+    ],
+    "rootAlpha": 255
+  },
+  {
+    "part": "hind-far",
+    "source": "Source/registered-hind-far.png",
+    "crop": [
+      328,
+      353,
+      363,
+      388
+    ],
+    "mask": "rounded 35 pixel cap",
+    "root": [
+      344,
+      330
+    ],
+    "placements": [
+      [
+        327,
+        313
+      ],
+      [
+        327,
+        320
+      ],
+      [
+        327,
+        326
+      ],
+      [
+        328,
+        333
+      ],
+      [
+        328,
+        339
+      ],
+      [
+        328,
+        346
+      ],
+      [
+        328,
+        353
+      ]
+    ],
+    "rootAlpha": 255
+  }
+]

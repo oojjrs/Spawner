@@ -1,0 +1,164 @@
+{
+  "groundY": 448,
+  "gravity": 900,
+  "restitution": 0.1,
+  "times": {
+    "neutral": 120,
+    "lowered": 260,
+    "halfWithdrawn": 420,
+    "withdrawn": 980,
+    "end": 1240
+  },
+  "bones": [
+    {
+      "id": "rear-folded",
+      "pivot": [
+        462,
+        371
+      ],
+      "endTranslation": [
+        0,
+        -45
+      ],
+      "endAngle": 110,
+      "start": 500,
+      "end": 940,
+      "portal": [
+        448,
+        344,
+        480,
+        390
+      ]
+    },
+    {
+      "id": "tail-folded",
+      "pivot": [
+        478,
+        330
+      ],
+      "endTranslation": [
+        -62,
+        -12
+      ],
+      "endAngle": -8,
+      "start": 570,
+      "end": 970,
+      "portal": [
+        480,
+        302,
+        505,
+        348
+      ]
+    }
+  ],
+  "headCels": [
+    {
+      "image": "head-0.png",
+      "start": 120,
+      "end": 180,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "image": "head-1.png",
+      "start": 180,
+      "end": 240,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "image": "head-2.png",
+      "start": 240,
+      "end": 320,
+      "offset": [
+        18,
+        -25
+      ]
+    },
+    {
+      "image": "head-3.png",
+      "start": 320,
+      "end": 400,
+      "offset": [
+        -5,
+        -23
+      ]
+    },
+    {
+      "image": "head-4.png",
+      "start": 400,
+      "end": 480,
+      "offset": [
+        -12,
+        -22
+      ]
+    },
+    {
+      "image": "head-5.png",
+      "start": 480,
+      "end": 560,
+      "offset": [
+        -8,
+        -24
+      ]
+    }
+  ],
+  "headPortal": [
+    130,
+    293,
+    210,
+    371
+  ],
+  "forePortal": [
+    218,
+    345,
+    286,
+    401
+  ],
+  "foreCels": [
+    {
+      "image": "fore-folded.png",
+      "start": 420,
+      "end": 500,
+      "foreground": true,
+      "endOffset": [
+        0,
+        0
+      ]
+    },
+    {
+      "image": "fore-entry-01.png",
+      "start": 500,
+      "end": 580,
+      "foreground": true,
+      "endOffset": [
+        0,
+        0
+      ]
+    },
+    {
+      "image": "fore-entry-02.png",
+      "start": 580,
+      "end": 660,
+      "foreground": false,
+      "endOffset": [
+        0,
+        0
+      ]
+    },
+    {
+      "image": "fore-entry-03.png",
+      "start": 660,
+      "end": 840,
+      "foreground": false,
+      "endOffset": [
+        -45,
+        -8
+      ]
+    }
+  ]
+}

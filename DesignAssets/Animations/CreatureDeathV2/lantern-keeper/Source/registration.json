@@ -1,0 +1,23 @@
+{
+  "source": "DesignAssets/CreatureConcepts/v3/lantern-keeper.png",
+  "sourceSize": [
+    384,
+    389
+  ],
+  "sourceBounds": [
+    49,
+    46,
+    337,
+    343
+  ],
+  "uniformScale": 1.3333333333333333,
+  "origin": [
+    64,
+    52
+  ],
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ]
+}

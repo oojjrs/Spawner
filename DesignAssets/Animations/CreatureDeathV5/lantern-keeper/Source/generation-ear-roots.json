@@ -1,0 +1,22 @@
+{
+  "generations": [
+    {
+      "part": "far-ear",
+      "prompt": "Production source-part correction. Image 1 is the exact leaf-ear layer to edit, image 2 is the ONLY approved complete character design. Complete the hidden FUR ROOT at the lower-right base of this left-pointing far leaf-ear. Paint a continuous CLOSED softly rounded ivory fur attachment cap with generous hidden overlap into the head, matching the existing original leaf-root fur. No cut stumps, flat crop, hole, black void, detached narrow strip, extra pointing prong or disconnected fleck may remain at the base. The root is a flexible skin joint, not another leaf or hanging beard. Retain the exact original main leaf silhouette, broad cream fur rim, dark forest-green inset, golden branching veins, lighting, tip's amber hanging drop, three-quarter view, facing and character scale. Do NOT add any amber jewel at the ROOT: the real forehead/cheek ornaments are separate head parts. Keep the original upper leaf artwork and outer fur tips. Only complete the missing root surface and closure. Exactly ONE complete isolated ear part, genuinely transparent background, no body, head, face, labels, guides, cast shadow, haze, duplicated leaf or sheet. This is an actual layer for the final animation, not a concept preview.",
+      "referenceImages": [
+        "Drawings/far-ear-root-reference.png",
+        "approved-reference.png"
+      ],
+      "output": "Drawings/far-ear-complete-root.png"
+    },
+    {
+      "part": "near-ear",
+      "prompt": "Production source-part correction. Image 1 is the exact leaf-ear layer to edit, image 2 is the ONLY approved complete character design. Complete the hidden FUR ROOT at the lower-left base of this right-pointing near leaf-ear. Fill the punched-out oval holes where the separately attached forehead ornaments were removed. Paint a continuous CLOSED softly rounded ivory fur attachment cap with generous hidden overlap into the head, matching the existing original leaf-root fur. No cut stumps, flat crop, hole, black void, detached narrow strip, extra pointing prong or disconnected fleck may remain at the base. The root is a flexible skin joint, not another leaf or hanging beard. Retain the exact original main leaf silhouette, broad cream fur rim, dark forest-green inset, golden branching veins, lighting, tip's amber hanging drop, three-quarter view, facing and character scale. Do NOT add any amber jewel at the ROOT: the real forehead/cheek ornaments are separate head parts. Keep the original upper leaf artwork and outer fur tips. Only complete the missing root surface and closure. Exactly ONE complete isolated ear part, genuinely transparent background, no body, head, face, labels, guides, cast shadow, haze, duplicated leaf or sheet. This is an actual layer for the final animation, not a concept preview.",
+      "referenceImages": [
+        "Drawings/near-ear-root-reference.png",
+        "approved-reference.png"
+      ],
+      "output": "Drawings/near-ear-complete-root.png"
+    }
+  ]
+}

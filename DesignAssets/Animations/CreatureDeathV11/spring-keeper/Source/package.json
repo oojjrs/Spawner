@@ -1,0 +1,1 @@
+{"private": true, "scripts": {"render": "node render.cjs", "pack": "node pack.cjs"}, "dependencies": {"playwright": "1.62.1", "sharp": "0.35.5"}}

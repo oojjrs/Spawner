@@ -1,0 +1,28 @@
+{
+  "appearanceAuthority": {
+    "asset": "Source/approved-concept.png",
+    "origin": "DesignAssets/CreatureConcepts/v3/old-garden-snail.png",
+    "sha256": "937d5d784079d7dfb95c50ee41f461e73f655c6b0d728067051f92c02b001f6c"
+  },
+  "registeredReference": {
+    "asset": "Source/reference.png",
+    "sha256": "908824ca5753b81cf3bc39189118b8649302c4f6604cb96b642e2f56d19725f9"
+  },
+  "reusedRigidSource": {
+    "asset": "Source/reused-shell-input.png",
+    "origin": "DesignAssets/Animations/CreatureDeathV3/old-garden-snail/Parts/hard-complete.png",
+    "sha256": "6fc12a7569bf46f8ccc9e7935125ba8430d8994eb0781d1b5c19bafde42a27ba",
+    "role": "rigid source texture assembled from approved-reference shell pixels and preserved hidden underside drawings"
+  },
+  "currentEditableRigidSource": {
+    "asset": "Source/EditableParts/shell.png",
+    "sha256": "74cb9d4e76fbba1433e0eff3cc18b302c4e89524501c314eef8cdb9d5ffcfaae",
+    "changes": [
+      "opaque-alpha normalization"
+    ]
+  },
+  "newSourceGeneration": "Source/generation.json",
+  "rig": "rig.json",
+  "motion": "motion.py",
+  "renderer": "render.py"
+}

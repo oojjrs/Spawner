@@ -1,0 +1,47 @@
+{
+  "parent": "head", 
+  "source": "approved-reference.png", 
+  "regions": [
+    [
+      180, 
+      144, 
+      209, 
+      180
+    ], 
+    [
+      200, 
+      164, 
+      221, 
+      191
+    ], 
+    [
+      208, 
+      215, 
+      229, 
+      241
+    ]
+  ], 
+  "rootChanges": {
+    "far-ear": {
+      "before": [
+        235.0, 
+        231.0
+      ], 
+      "after": [
+        237.0, 
+        229.0
+      ]
+    }, 
+    "near-ear": {
+      "before": [
+        261.0, 
+        238.0
+      ], 
+      "after": [
+        262.0, 
+        236.0
+      ]
+    }
+  }, 
+  "bakedHiddenJewels": false
+}

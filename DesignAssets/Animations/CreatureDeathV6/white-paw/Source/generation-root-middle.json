@@ -1,0 +1,11 @@
+{
+  "tool": "image_gen", 
+  "prompt": "Create ONE actual inbetween full-character drawing between image1 (high C tail) and image2 (tail on ground). Image3 is the original character design authority. Image4 is a TECHNICAL GUIDE only: pink dot is the fixed tail ROOT at the rump, cyan line approximates the BONE CENTERLINE of the needed intermediate tail curve. REMOVE ALL guide marks and redraw the tail as a broad plush furry plume around a smooth version of that centerline. The tail is HALF-FALLEN, still partly raised but now angled diagonally backward/right: its broad stem extends behind the rump, the big C loop relaxes outward to the right and lower, the tip curls leftward at about head-back height. Retain the original BIG C tail's FULL BONE LENGTH, heavy fur thickness and plush volume; do not make a little thin hook, small rabbit tail, shortened tail or a pointed wedge. The very broad cream plume has the same dark inner stripe as both endpoints; fur on the outer and inner curves follows the bend smoothly. The guide is ONLY the skeleton, not the outer contour: preserve the generous fur on both sides, and keep the entire tail safely inside the 512x512 frame. Keep image1's body, face, closed eyes, nose, ears, cream neck ruff, black-and-cream coat bands, four folded short white paws, proportions, brushwork and floor positions EXACTLY unchanged. This animal is already collapsed, so the only meaningful motion is the heavy long tail losing support; maintain the rump attachment with no gap. Same left-facing 3/4 camera, soft painted game-sprite rendering, genuine transparent background, no extra limbs, text, shadows, effects, blur or ghosts. Output one complete actual cel at the same framing/scale, not a diagram or a tail-only part.", 
+  "referenceImages": [
+    "Guides/tail-high.png", 
+    "Guides/tail-low.png", 
+    "approved-reference.png", 
+    "Guides/root-guide.png"
+  ], 
+  "rawGeneratedImage": "Raw/root-middle.png"
+}

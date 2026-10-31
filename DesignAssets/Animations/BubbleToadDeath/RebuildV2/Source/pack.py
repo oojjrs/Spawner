@@ -1,0 +1,27 @@
+import json
+from pathlib import Path
+from PIL import Image,_webp
+
+folder=Path(__file__).resolve().parent.parent
+meta=json.loads((folder/'death.json').read_text('utf-8'))
+frames=[Image.open(folder/path).convert('RGBA') for path in meta['sourceFrames']]
+columns=meta['columns']
+sheet=Image.new('RGBA',(columns*512,((len(frames)+columns-1)//columns)*512))
+for i,frame in enumerate(frames):
+    sheet.paste(frame,((i%columns)*512,(i//columns)*512))
+(folder/'death.webp').write_bytes(_webp.WebPEncode(sheet.getim(),True,100.0,100.0,'',4,1,b'', ''))
+
+
+def encode(path,images,size):
+    writer=_webp.WebPAnimEncoder(size,0,0,False,9,17,False,False)
+    time=0
+    for frame,duration in zip(images,meta['durationsMs']):
+        writer.add(frame.getim(),time,True,100.0,100.0,4)
+        time+=duration
+    writer.add(None,time,True,100.0,100.0,0)
+    path.write_bytes(writer.assemble('','',''))
+
+
+encode(folder/'preview.webp',frames,(512,512))
+encode(folder/'thumbnail.webp',[frame.resize((64,64),Image.Resampling.LANCZOS) for frame in frames],(64,64))
+print('Packed',len(frames),'frames;',sum(meta['durationsMs']),'ms')

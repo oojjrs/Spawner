@@ -1,0 +1,266 @@
+{
+  "fore-near-upper": {
+    "cell": 0,
+    "sourceVisible": "Source/Visible/fore-near-upper.png",
+    "crop": [
+      141,
+      185,
+      206,
+      251
+    ],
+    "cellPlacement": [
+      126,
+      124
+    ],
+    "referenceScale": 4,
+    "knee": [
+      180,
+      232
+    ],
+    "tip": [
+      164,
+      272
+    ]
+  },
+  "fore-near-lower": {
+    "cell": 1,
+    "sourceVisible": "Source/Visible/fore-near-lower.png",
+    "crop": [
+      143,
+      211,
+      204,
+      291
+    ],
+    "cellPlacement": [
+      134,
+      96
+    ],
+    "referenceScale": 4,
+    "knee": [
+      180,
+      232
+    ],
+    "tip": [
+      164,
+      272
+    ]
+  },
+  "mid-near-upper": {
+    "cell": 2,
+    "sourceVisible": "Source/Visible/mid-near-upper.png",
+    "crop": [
+      195,
+      205,
+      256,
+      258
+    ],
+    "cellPlacement": [
+      134,
+      150
+    ],
+    "referenceScale": 4,
+    "knee": [
+      233,
+      239
+    ],
+    "tip": [
+      239,
+      269
+    ]
+  },
+  "mid-near-lower": {
+    "cell": 3,
+    "sourceVisible": "Source/Visible/mid-near-lower.png",
+    "crop": [
+      205,
+      224,
+      261,
+      284
+    ],
+    "cellPlacement": [
+      144,
+      136
+    ],
+    "referenceScale": 4,
+    "knee": [
+      233,
+      239
+    ],
+    "tip": [
+      239,
+      269
+    ]
+  },
+  "hind-near-upper": {
+    "cell": 4,
+    "sourceVisible": "Source/Visible/hind-near-upper.png",
+    "crop": [
+      251,
+      182,
+      309,
+      242
+    ],
+    "cellPlacement": [
+      140,
+      136
+    ],
+    "referenceScale": 4,
+    "knee": [
+      286,
+      222
+    ],
+    "tip": [
+      294,
+      244
+    ]
+  },
+  "hind-near-lower": {
+    "cell": 5,
+    "sourceVisible": "Source/Visible/hind-near-lower.png",
+    "crop": [
+      260,
+      205,
+      314,
+      263
+    ],
+    "cellPlacement": [
+      148,
+      140
+    ],
+    "referenceScale": 4,
+    "knee": [
+      286,
+      222
+    ],
+    "tip": [
+      294,
+      244
+    ]
+  },
+  "fore-far-upper": {
+    "cell": 6,
+    "sourceVisible": "Source/Visible/fore-far-upper.png",
+    "crop": [
+      30,
+      162,
+      89,
+      214
+    ],
+    "cellPlacement": [
+      138,
+      152
+    ],
+    "referenceScale": 4,
+    "knee": [
+      52,
+      197
+    ],
+    "tip": [
+      41,
+      223
+    ]
+  },
+  "fore-far-lower": {
+    "cell": 7,
+    "sourceVisible": "Source/Visible/fore-far-lower.png",
+    "crop": [
+      23,
+      181,
+      72,
+      240
+    ],
+    "cellPlacement": [
+      158,
+      138
+    ],
+    "referenceScale": 4,
+    "knee": [
+      52,
+      197
+    ],
+    "tip": [
+      41,
+      223
+    ]
+  },
+  "jaw-far": {
+    "cell": 8,
+    "sourceVisible": "Source/Visible/jaw-far.png",
+    "crop": [
+      37,
+      176,
+      106,
+      267
+    ],
+    "cellPlacement": [
+      118,
+      74
+    ],
+    "referenceScale": 4,
+    "knee": null,
+    "tip": null
+  },
+  "jaw-near": {
+    "cell": 9,
+    "sourceVisible": "Source/Visible/jaw-near.png",
+    "crop": [
+      78,
+      184,
+      166,
+      271
+    ],
+    "cellPlacement": [
+      80,
+      82
+    ],
+    "referenceScale": 4,
+    "knee": null,
+    "tip": null
+  },
+  "hidden-far-upper": {
+    "cell": 10,
+    "sourceVisible": "Source/Visible/hidden-far-upper.png",
+    "crop": [
+      30,
+      162,
+      89,
+      214
+    ],
+    "cellPlacement": [
+      138,
+      152
+    ],
+    "referenceScale": 4,
+    "knee": [
+      52,
+      197
+    ],
+    "tip": [
+      41,
+      223
+    ]
+  },
+  "hidden-far-lower": {
+    "cell": 11,
+    "sourceVisible": "Source/Visible/hidden-far-lower.png",
+    "crop": [
+      23,
+      181,
+      72,
+      240
+    ],
+    "cellPlacement": [
+      158,
+      138
+    ],
+    "referenceScale": 4,
+    "knee": [
+      52,
+      197
+    ],
+    "tip": [
+      41,
+      223
+    ]
+  }
+}

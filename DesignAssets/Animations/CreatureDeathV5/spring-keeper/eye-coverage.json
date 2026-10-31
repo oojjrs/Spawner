@@ -1,0 +1,626 @@
+[
+  {
+    "timeMs": 0,
+    "eye": [
+      170.0,
+      297.0
+    ],
+    "crestAlphaAtEye": 0,
+    "eyeLineCoverage": 0.0,
+    "eyeLineSamples": 118,
+    "bodyContact": false,
+    "headContact": false
+  },
+  {
+    "timeMs": 40,
+    "eye": [
+      170.0,
+      297.0
+    ],
+    "crestAlphaAtEye": 0,
+    "eyeLineCoverage": 0.0,
+    "eyeLineSamples": 118,
+    "bodyContact": false,
+    "headContact": false
+  },
+  {
+    "timeMs": 80,
+    "eye": [
+      170.0,
+      297.0
+    ],
+    "crestAlphaAtEye": 0,
+    "eyeLineCoverage": 0.0,
+    "eyeLineSamples": 118,
+    "bodyContact": false,
+    "headContact": false
+  },
+  {
+    "timeMs": 120,
+    "eye": [
+      170.0,
+      297.0
+    ],
+    "crestAlphaAtEye": 0,
+    "eyeLineCoverage": 0.0,
+    "eyeLineSamples": 118,
+    "bodyContact": false,
+    "headContact": false
+  },
+  {
+    "timeMs": 160,
+    "eye": [
+      169.99928544915207,
+      297.0026688421457
+    ],
+    "crestAlphaAtEye": 0,
+    "eyeLineCoverage": 0.0,
+    "eyeLineSamples": 118,
+    "bodyContact": false,
+    "headContact": false
+  },
+  {
+    "timeMs": 200,
+    "eye": [
+      169.97779661249265,
+      297.0833211921743
+    ],
+    "crestAlphaAtEye": 0,
+    "eyeLineCoverage": 0.0,
+    "eyeLineSamples": 118,
+    "bodyContact": false,
+    "headContact": false
+  },
+  {
+    "timeMs": 240,
+    "eye": [
+      169.84931726786166,
+      297.5551724777278
+    ],
+    "crestAlphaAtEye": 0,
+    "eyeLineCoverage": 0.0,
+    "eyeLineSamples": 118,
+    "bodyContact": false,
+    "headContact": false
+  },
+  {
+    "timeMs": 280,
+    "eye": [
+      169.46429996521337,
+      298.8711180349822
+    ],
+    "crestAlphaAtEye": 0,
+    "eyeLineCoverage": 0.0,
+    "eyeLineSamples": 118,
+    "bodyContact": false,
+    "headContact": false
+  },
+  {
+    "timeMs": 320,
+    "eye": [
+      168.76153310840948,
+      301.13199385439026
+    ],
+    "crestAlphaAtEye": 0,
+    "eyeLineCoverage": 0.0,
+    "eyeLineSamples": 118,
+    "bodyContact": false,
+    "headContact": false
+  },
+  {
+    "timeMs": 360,
+    "eye": [
+      167.49050495609615,
+      305.1036558196611
+    ],
+    "crestAlphaAtEye": 0,
+    "eyeLineCoverage": 0.0,
+    "eyeLineSamples": 118,
+    "bodyContact": false,
+    "headContact": false
+  },
+  {
+    "timeMs": 400,
+    "eye": [
+      165.87193489905536,
+      310.16491765651614
+    ],
+    "crestAlphaAtEye": 0,
+    "eyeLineCoverage": 0.0,
+    "eyeLineSamples": 118,
+    "bodyContact": false,
+    "headContact": false
+  },
+  {
+    "timeMs": 440,
+    "eye": [
+      163.54359499240888,
+      317.6414693824422
+    ],
+    "crestAlphaAtEye": 0,
+    "eyeLineCoverage": 0.0,
+    "eyeLineSamples": 118,
+    "bodyContact": false,
+    "headContact": false
+  },
+  {
+    "timeMs": 480,
+    "eye": [
+      160.7009447952711,
+      327.2356703116921
+    ],
+    "crestAlphaAtEye": 0,
+    "eyeLineCoverage": 0.0,
+    "eyeLineSamples": 118,
+    "bodyContact": false,
+    "headContact": false
+  },
+  {
+    "timeMs": 520,
+    "eye": [
+      158.28510665431594,
+      333.75614211441405
+    ],
+    "crestAlphaAtEye": 0,
+    "eyeLineCoverage": 0.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": false
+  },
+  {
+    "timeMs": 560,
+    "eye": [
+      156.42686206657456,
+      335.9726966054093
+    ],
+    "crestAlphaAtEye": 0,
+    "eyeLineCoverage": 0.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": false
+  },
+  {
+    "timeMs": 600,
+    "eye": [
+      154.5001834637512,
+      338.28888593357914
+    ],
+    "crestAlphaAtEye": 0,
+    "eyeLineCoverage": 0.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": false
+  },
+  {
+    "timeMs": 640,
+    "eye": [
+      152.219235467124,
+      341.2988328217551
+    ],
+    "crestAlphaAtEye": 0,
+    "eyeLineCoverage": 0.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": false
+  },
+  {
+    "timeMs": 680,
+    "eye": [
+      149.9429041304956,
+      344.8159619162807
+    ],
+    "crestAlphaAtEye": 0,
+    "eyeLineCoverage": 0.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": false
+  },
+  {
+    "timeMs": 720,
+    "eye": [
+      148.00509950495535,
+      348.4458034206117
+    ],
+    "crestAlphaAtEye": 0,
+    "eyeLineCoverage": 0.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": false
+  },
+  {
+    "timeMs": 760,
+    "eye": [
+      146.1042158626607,
+      353.00322730960187
+    ],
+    "crestAlphaAtEye": 0,
+    "eyeLineCoverage": 0.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": false
+  },
+  {
+    "timeMs": 800,
+    "eye": [
+      144.72920598498206,
+      357.56410694783165
+    ],
+    "crestAlphaAtEye": 0,
+    "eyeLineCoverage": 0.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": false
+  },
+  {
+    "timeMs": 840,
+    "eye": [
+      143.7245909192256,
+      363.1027157045245
+    ],
+    "crestAlphaAtEye": 0,
+    "eyeLineCoverage": 0.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": false
+  },
+  {
+    "timeMs": 880,
+    "eye": [
+      143.41921937106855,
+      369.0411222593236
+    ],
+    "crestAlphaAtEye": 0,
+    "eyeLineCoverage": 0.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": false
+  },
+  {
+    "timeMs": 920,
+    "eye": [
+      143.83958516269922,
+      374.61488291699334
+    ],
+    "crestAlphaAtEye": 0,
+    "eyeLineCoverage": 0.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": false
+  },
+  {
+    "timeMs": 960,
+    "eye": [
+      145.20398283537878,
+      380.9140403822921
+    ],
+    "crestAlphaAtEye": 0,
+    "eyeLineCoverage": 0.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": false
+  },
+  {
+    "timeMs": 1000,
+    "eye": [
+      147.27999355887243,
+      386.49362551581214
+    ],
+    "crestAlphaAtEye": 0,
+    "eyeLineCoverage": 0.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": false
+  },
+  {
+    "timeMs": 1040,
+    "eye": [
+      150.4641297153529,
+      392.3884788711646
+    ],
+    "crestAlphaAtEye": 0,
+    "eyeLineCoverage": 0.00847457627118644,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": false
+  },
+  {
+    "timeMs": 1080,
+    "eye": [
+      154.4743129154701,
+      397.7638758141302
+    ],
+    "crestAlphaAtEye": 0,
+    "eyeLineCoverage": 0.2457627118644068,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": false
+  },
+  {
+    "timeMs": 1120,
+    "eye": [
+      155.3710197042936,
+      398.73986340382913
+    ],
+    "crestAlphaAtEye": 255,
+    "eyeLineCoverage": 0.6779661016949152,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": true
+  },
+  {
+    "timeMs": 1160,
+    "eye": [
+      155.40815120337749,
+      398.7355083648466
+    ],
+    "crestAlphaAtEye": 255,
+    "eyeLineCoverage": 0.9830508474576272,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": true
+  },
+  {
+    "timeMs": 1200,
+    "eye": [
+      155.44335047225366,
+      398.7312931867487
+    ],
+    "crestAlphaAtEye": 255,
+    "eyeLineCoverage": 1.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": true
+  },
+  {
+    "timeMs": 1240,
+    "eye": [
+      155.48318312684594,
+      398.7264054929338
+    ],
+    "crestAlphaAtEye": 255,
+    "eyeLineCoverage": 1.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": true
+  },
+  {
+    "timeMs": 1280,
+    "eye": [
+      155.52305864048284,
+      398.72138908931214
+    ],
+    "crestAlphaAtEye": 255,
+    "eyeLineCoverage": 1.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": true
+  },
+  {
+    "timeMs": 1320,
+    "eye": [
+      155.55886085694033,
+      398.7167798106986
+    ],
+    "crestAlphaAtEye": 255,
+    "eyeLineCoverage": 1.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": true
+  },
+  {
+    "timeMs": 1360,
+    "eye": [
+      155.59852279930448,
+      398.71155674619797
+    ],
+    "crestAlphaAtEye": 255,
+    "eyeLineCoverage": 1.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": true
+  },
+  {
+    "timeMs": 1400,
+    "eye": [
+      155.63410863206616,
+      398.7067653668311
+    ],
+    "crestAlphaAtEye": 255,
+    "eyeLineCoverage": 1.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": true
+  },
+  {
+    "timeMs": 1440,
+    "eye": [
+      155.67243490201952,
+      398.7014827672781
+    ],
+    "crestAlphaAtEye": 255,
+    "eyeLineCoverage": 1.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": true
+  },
+  {
+    "timeMs": 1480,
+    "eye": [
+      155.7090275168023,
+      398.6963393412982
+    ],
+    "crestAlphaAtEye": 255,
+    "eyeLineCoverage": 1.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": true
+  },
+  {
+    "timeMs": 1520,
+    "eye": [
+      155.74181061011285,
+      398.69164180894427
+    ],
+    "crestAlphaAtEye": 255,
+    "eyeLineCoverage": 1.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": true
+  },
+  {
+    "timeMs": 1560,
+    "eye": [
+      155.77814897939277,
+      398.68633439988093
+    ],
+    "crestAlphaAtEye": 255,
+    "eyeLineCoverage": 1.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": true
+  },
+  {
+    "timeMs": 1600,
+    "eye": [
+      155.81077736644534,
+      398.6814784716936
+    ],
+    "crestAlphaAtEye": 255,
+    "eyeLineCoverage": 1.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": true
+  },
+  {
+    "timeMs": 1640,
+    "eye": [
+      155.84694651113782,
+      398.6759952401669
+    ],
+    "crestAlphaAtEye": 255,
+    "eyeLineCoverage": 1.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": true
+  },
+  {
+    "timeMs": 1680,
+    "eye": [
+      155.88302510467744,
+      398.67041848410815
+    ],
+    "crestAlphaAtEye": 255,
+    "eyeLineCoverage": 1.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": true
+  },
+  {
+    "timeMs": 1720,
+    "eye": [
+      155.9141047461398,
+      398.6655245866293
+    ],
+    "crestAlphaAtEye": 255,
+    "eyeLineCoverage": 1.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": true
+  },
+  {
+    "timeMs": 1760,
+    "eye": [
+      155.9480665039227,
+      398.66009363868704
+    ],
+    "crestAlphaAtEye": 255,
+    "eyeLineCoverage": 1.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": true
+  },
+  {
+    "timeMs": 1800,
+    "eye": [
+      155.97855512431107,
+      398.65513803109815
+    ],
+    "crestAlphaAtEye": 255,
+    "eyeLineCoverage": 1.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": true
+  },
+  {
+    "timeMs": 1840,
+    "eye": [
+      156.01236856031767,
+      398.649552842748
+    ],
+    "crestAlphaAtEye": 255,
+    "eyeLineCoverage": 1.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": true
+  },
+  {
+    "timeMs": 1880,
+    "eye": [
+      156.0461166666512,
+      398.6438846633097
+    ],
+    "crestAlphaAtEye": 255,
+    "eyeLineCoverage": 1.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": true
+  },
+  {
+    "timeMs": 1920,
+    "eye": [
+      156.07643401964094,
+      398.63871259680036
+    ],
+    "crestAlphaAtEye": 255,
+    "eyeLineCoverage": 1.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": true
+  },
+  {
+    "timeMs": 1960,
+    "eye": [
+      156.10901972229124,
+      398.63306209874736
+    ],
+    "crestAlphaAtEye": 255,
+    "eyeLineCoverage": 1.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": true
+  },
+  {
+    "timeMs": 2000,
+    "eye": [
+      156.1378336662273,
+      398.6279980217853
+    ],
+    "crestAlphaAtEye": 255,
+    "eyeLineCoverage": 1.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": true
+  },
+  {
+    "timeMs": 2040,
+    "eye": [
+      156.1378336662273,
+      398.6279980217853
+    ],
+    "crestAlphaAtEye": 255,
+    "eyeLineCoverage": 1.0,
+    "eyeLineSamples": 118,
+    "bodyContact": true,
+    "headContact": true
+  }
+]

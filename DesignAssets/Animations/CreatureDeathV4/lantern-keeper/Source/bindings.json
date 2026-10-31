@@ -1,0 +1,37 @@
+{
+  "activeParts": [
+    "body.png", 
+    "head.png", 
+    "head-closed.png", 
+    "near-ear.png", 
+    "far-ear.png", 
+    "mane.png", 
+    "tail.png", 
+    "fore-far-upper.png", 
+    "fore-far-lower.png", 
+    "fore-far-paw.png", 
+    "fore-near-upper.png", 
+    "fore-near-lower.png", 
+    "fore-near-paw.png", 
+    "hind-far-upper.png", 
+    "hind-far-lower.png", 
+    "hind-far-paw.png", 
+    "hind-near-upper.png", 
+    "hind-near-lower.png", 
+    "hind-near-paw.png", 
+    "cheek-jewel.png"
+  ], 
+  "canvas": [
+    512, 
+    512
+  ], 
+  "pivot": [
+    256, 
+    448
+  ], 
+  "source": "Bound", 
+  "target": "../Parts", 
+  "reference": "DesignAssets/CreatureConcepts/v3/lantern-keeper.png", 
+  "renderer": "../render.py", 
+  "prepare": "../prepare.py"
+}

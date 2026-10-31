@@ -1,0 +1,164 @@
+{
+  "approvedImage": "DesignAssets/CreatureConcepts/v3/old-garden-snail.png",
+  "approvedBounds": [
+    41,
+    44,
+    305,
+    296
+  ],
+  "approvedScale": 1.5714285714285714,
+  "approvedTargetSize": [
+    415,
+    396
+  ],
+  "keyRegistration": [
+    {
+      "key": 0,
+      "sourceBounds": [
+        58,
+        83,
+        569,
+        541
+      ],
+      "uniformScale": 0.7293497363796133,
+      "translation": [
+        6.197715289982455,
+        -7.114235500878692
+      ],
+      "worldBoundsWidth": 415.0,
+      "referenceGroundY": 448
+    },
+    {
+      "key": 1,
+      "sourceBounds": [
+        650,
+        127,
+        569,
+        497
+      ],
+      "uniformScale": 0.7293497363796133,
+      "translation": [
+        -425.5773286467486,
+        -7.114235500878692
+      ],
+      "worldBoundsWidth": 415.0,
+      "referenceGroundY": 448
+    },
+    {
+      "key": 2,
+      "sourceBounds": [
+        182,
+        741,
+        418,
+        477
+      ],
+      "uniformScale": 0.7293497363796133,
+      "translation": [
+        -29.17574692442878,
+        -440.34797891036897
+      ],
+      "worldBoundsWidth": 304.86818980667834,
+      "referenceGroundY": 448
+    },
+    {
+      "key": 3,
+      "sourceBounds": [
+        789,
+        745,
+        413,
+        473
+      ],
+      "uniformScale": 0.7293497363796133,
+      "translation": [
+        -470.06766256590504,
+        -440.34797891036897
+      ],
+      "worldBoundsWidth": 301.2214411247803,
+      "referenceGroundY": 448
+    }
+  ],
+  "partRegistration": [
+    {
+      "matrix": [
+        [
+          0.9623890333993951,
+          -0.07509488535976026,
+          94.88864186506004
+        ],
+        [
+          0.07509488535976026,
+          0.9623890333993951,
+          -63.69018731650258
+        ]
+      ],
+      "matches": 233
+    },
+    {
+      "matrix": [
+        [
+          0.8522421497562109,
+          0.012491257128141477,
+          -185.4136159920324
+        ],
+        [
+          -0.012491257128141477,
+          0.8522421497562109,
+          52.56850322548576
+        ]
+      ],
+      "matches": 213
+    },
+    {
+      "matrix": [
+        [
+          0.8583347388516864,
+          0.0004082054608828851,
+          -851.8087876387165
+        ],
+        [
+          -0.0004082054608828851,
+          0.8583347388516864,
+          43.011767551524066
+        ]
+      ],
+      "matches": 214
+    },
+    {
+      "matrix": [
+        [
+          0.8581809392649331,
+          -0.012387774323532556,
+          -175.59881616549876
+        ],
+        [
+          0.012387774323532556,
+          0.8581809392649331,
+          -344.9332933658628
+        ]
+      ],
+      "matches": 196
+    },
+    {
+      "matrix": [
+        [
+          0.8606089284213192,
+          -0.0015422845088596737,
+          -853.7278502731684
+        ],
+        [
+          0.0015422845088596737,
+          0.8606089284213192,
+          -340.25311121401546
+        ]
+      ],
+      "matches": 188
+    }
+  ],
+  "segmentationProvenance": {
+    "source": "DesignAssets/Animations/CreatureDeathV2/old-garden-snail/Source/rigid-mask.png",
+    "storedMatte": "Source/rigid-mask.png",
+    "role": "matte-only",
+    "appearanceAuthority": false
+  },
+  "appearanceSource": "Source/approved-reference.png"
+}

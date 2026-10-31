@@ -1,0 +1,38 @@
+{
+  "provider": "built-in image_gen",
+  "entries": [
+    {
+      "file": "core-atlas.png",
+      "prompt": "Precise production layered-source kit for the exact burgundy ARMORED BEETLE game character in the reference. Four separate complete parts in a 2-by-2 atlas. TOP LEFT: the whole rigid burgundy dorsal carapace with its exact THREE ivory horns (one large central curved horn, two smaller flank horns), original layered front brow plates, and exact gold scratch scar on viewer-right armor; no legs, pincers, eyes or soft face attached. Paint its complete hidden underside edge and empty dark eye apertures, no holes through the shell. TOP RIGHT: the small complete original dark-red central face plate including both original amber eyes open, without the surrounding dorsal shell, horns, legs or ivory mandibles. BOTTOM LEFT: complete viewer-left ivory mandible, all curved base and inward pointed tip, including its short rounded dark-red joint connection. BOTTOM RIGHT: complete viewer-right ivory mandible with original opposite curve and rounded joint base. Preserve the approved design, palette, armored textures, scar, exact horn count, asymmetric shapes and three-quarter frontal camera. All parts are independently complete with generous solid rounded hidden overlaps, no flat cut planes or hollow sockets. Generous transparent gaps, every part entirely inside its cell. Genuine transparent RGBA. No assembled beetles, extra ornaments, text, grids, shadows or effects. These are actual production source attachments, not animation frames.",
+      "references": [
+        "../../../../CreatureConcepts/v3/spiny-back-leader.png"
+      ],
+      "generatedImage": "D:\\.codex\\generated_images\\01a18389-9751-73b3-bbe4-a6f4a5854d96\\exec-25c52187-2389-4510-a085-e917e49b1d53.png"
+    },
+    {
+      "file": "legs-atlas.png",
+      "prompt": "Production animation parts for the exact armored beetle in image1, matching the burgundy/purple hard-shell finish of image2. TWELVE separate fully complete leg pieces in SIX ROWS and TWO COLUMNS. Row order: near front leg, far front leg, near middle leg, far middle leg, near rear leg, far rear leg. LEFT in each row: the short upper leg, with the original rounded burgundy-red body joint and dark purple femur, including a complete rounded knee overlap. RIGHT: the matching curved dark-purple lower leg continuing all the way to its original tapered near-black pointed tarsus/foot, with a complete rounded hidden knee cap. No separate tiny toes or human/animal paws. Preserve the original short stout insect-leg proportions, segmented armored shape, original directions for near/far legs, highlights and thin dark outline. All connecting surfaces are solid rounded exoskeleton, not hollow sockets or cut planes. Every piece fully visible and independent, ample transparent spacing. Genuine transparent RGBA background. No body, horns, jaws, whole insects, hair, text, grid, shadows or effects. Actual complete sources to articulate the SIX beetle legs at their natural joints.",
+      "references": [
+        "../../../../CreatureConcepts/v3/spiny-back-leader.png",
+        "core-atlas.png"
+      ],
+      "generatedImage": "D:\\.codex\\generated_images\\01a18389-9751-73b3-bbe4-a6f4a5854d96\\exec-abb94846-7052-485c-8927-041a09c0fa73.png"
+    },
+    {
+      "file": "body-open-drawing.png",
+      "prompt": "Precise production source edit of this exact approved armored beetle. Keep the entire central armored body, face, BOTH ORIGINAL AMBER EYES, brows, gold scratch scar and all THREE ivory horns in EXACTLY the original three-quarter perspective and original relative proportions. Remove ONLY the six purple legs and the two large ivory mandibles/pincers. Complete the hidden lower carapace edge behind those removed appendages as a clean coherent rounded dark-burgundy armored underside. No attached red leg-joint balls, purple thigh/foot fragments, pincers, or extra horns. Do not enlarge the eyes, symmetrize the face, change the camera, redesign the armor or alter the large horn/scar. One complete rigid body-and-face sprite only, same pose. Transparent RGBA background. No ground, shadow, text or effects. This is the actual complete welded carapace/face source for a six-leg collapse animation.",
+      "references": [
+        "../../../../CreatureConcepts/v3/spiny-back-leader.png"
+      ],
+      "generatedImage": "D:\\.codex\\generated_images\\01a18389-9751-73b3-bbe4-a6f4a5854d96\\exec-2962279b-f378-4a1a-a701-bfbedb50688d.png"
+    },
+    {
+      "file": "body-closed-drawing.png",
+      "prompt": "Edit ONLY the TWO amber eyes of this exact armored beetle body source to fully closed relaxed eyelids, appropriate for its final collapsed animation. Keep the tiny far eye at left and larger near eye at right in exactly the original positions and perspective. Use softly closed bronze/amber lids with a thin dark curved eyelid line and no visible pupils. Preserve every other pixel, entire silhouette, THREE horns, exact gold scar, shell plates, face, colors, canvas size, camera and position. No legs or mandibles. Do not resize, recenter, rotate or redraw the design. Genuine transparent RGBA. Actual expression-source correction, not a new pose.",
+      "references": [
+        "body-open-drawing.png"
+      ],
+      "generatedImage": "D:\\.codex\\generated_images\\01a18389-9751-73b3-bbe4-a6f4a5854d96\\exec-1ae282b6-36a6-4251-9ab9-42c6f19e3378.png"
+    }
+  ]
+}

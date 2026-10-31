@@ -1,0 +1,10 @@
+{
+  "entries": [
+    {
+      "asset": "Source/completed-body-drawing.png",
+      "provider": "built-in image_gen",
+      "input": "Source/reference.png",
+      "prompt": "Use case: precise-object-edit. ONE actual production source layer for a 2D cutout/bone animation rig, a SINGLE static illustration, not a pose sequence and not a sheet. Reference is exact approved anatomy, palette, paint style, fine teal outlines, camera and world-scale authority. Maintain original canvas registration and preserve all retained visible pixels/markings as exactly as possible. Complete the previously hidden contour and surface naturally at removed attachments; no flat cut edges or fragments. Genuine transparent background, generous padding. No text, labels, scenery, floor, extra shadows or added props. Draw ONLY the entire rigid mineral MOUNTAIN TORTOISE SHELL from reference, retaining every brown-gray rock, golden seam and turquoise crystal peak as one coherent immutable mass. Remove all green tortoise flesh: head, all legs, belly and tail. Complete a closed rocky lower/underside silhouette where soft parts covered it. The reference's exact crystal shape, rock pattern, camera and shell proportions must not change. It is one empty mineral shell alone at same position and scale."
+    }
+  ]
+}

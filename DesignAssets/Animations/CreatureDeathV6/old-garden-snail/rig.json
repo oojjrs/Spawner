@@ -1,0 +1,91 @@
+{
+  "authority": "DesignAssets/CreatureConcepts/v3/old-garden-snail.png",
+  "canvas": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "groundY": 448,
+  "gravity": 1100,
+  "restitution": 0.035,
+  "shell": {
+    "source": "Parts/shell.png",
+    "type": "rigid",
+    "scale": 1,
+    "rotation": 0
+  },
+  "bodyCels": [
+    {
+      "image": "early-0.png",
+      "durationMs": 360
+    },
+    {
+      "image": "early-1.png",
+      "durationMs": 100
+    },
+    {
+      "image": "early-2.png",
+      "durationMs": 100
+    },
+    {
+      "image": "keyposes-2.png",
+      "durationMs": 100
+    },
+    {
+      "image": "bridges-2.png",
+      "durationMs": 100
+    },
+    {
+      "image": "keyposes-3.png",
+      "durationMs": 100
+    },
+    {
+      "image": "bridges-3.png",
+      "durationMs": 100
+    },
+    {
+      "image": "keyposes-4.png",
+      "durationMs": 100
+    },
+    {
+      "image": "bridges-4.png",
+      "durationMs": 100
+    },
+    {
+      "image": "bridges-5.png",
+      "durationMs": 100
+    },
+    {
+      "image": "body-hidden.png",
+      "durationMs": 640
+    }
+  ],
+  "construction": "drawn muscular retraction cels with original rigid shell/tree and painted hidden underside",
+  "eyeInvagination": [
+    {
+      "image": "eye-far.png",
+      "shift": [
+        35,
+        82
+      ],
+      "releaseMs": [
+        60,
+        260
+      ]
+    },
+    {
+      "image": "eye-near.png",
+      "shift": [
+        29,
+        79
+      ],
+      "releaseMs": [
+        110,
+        330
+      ]
+    }
+  ]
+}

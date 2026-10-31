@@ -1,0 +1,13 @@
+{
+  "sourceSize": [
+    1254, 
+    1254
+  ], 
+  "scale": 0.4076749833863562, 
+  "translation": [
+    0, 
+    1
+  ], 
+  "inliers": 203, 
+  "calibration": "unchanged body landmarks; tail excluded"
+}

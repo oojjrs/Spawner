@@ -1,0 +1,178 @@
+{
+  "canvas": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "groundY": 448,
+  "gravity": 900,
+  "dt": 0.004166666666666667,
+  "shellDrop": 43.0,
+  "sourceAnterior": [
+    [
+      321,
+      392.5
+    ],
+    [
+      270,
+      420
+    ],
+    [
+      210,
+      410.5
+    ],
+    [
+      190,
+      410
+    ]
+  ],
+  "sourcePosterior": [
+    [
+      280,
+      417
+    ],
+    [
+      345,
+      416
+    ],
+    [
+      399,
+      398
+    ]
+  ],
+  "sourceHeadPosition": [
+    137,
+    380
+  ],
+  "sourceHeadAttachment": [
+    190,
+    410
+  ],
+  "sourceStalks": {
+    "near": [
+      [
+        101,
+        330
+      ],
+      [
+        87,
+        310
+      ],
+      [
+        70,
+        287
+      ]
+    ],
+    "far": [
+      [
+        163,
+        333
+      ],
+      [
+        149,
+        312
+      ],
+      [
+        132,
+        291
+      ]
+    ]
+  },
+  "stalkRegistrations": {
+    "near": {
+      "source": "Source/reference.png",
+      "root": [
+        101,
+        330
+      ],
+      "ball": [
+        70.0,
+        287.0
+      ],
+      "radius": 24,
+      "sphereSource": "approved neutral pixels",
+      "tubeMaskWidth": 16,
+      "rootMaskRadius": 9
+    },
+    "far": {
+      "source": "Source/reference.png",
+      "root": [
+        163,
+        333
+      ],
+      "ball": [
+        132.0,
+        291.0
+      ],
+      "radius": 22,
+      "sphereSource": "approved neutral pixels",
+      "tubeMaskWidth": 16,
+      "rootMaskRadius": 9
+    }
+  },
+  "format": "spawner-component-retraction-v5",
+  "motion": "motion.py",
+  "renderer": "render.py",
+  "parts": {
+    "body": "Parts/body.png",
+    "eye-far": "Parts/eye-far.png",
+    "eye-near": "Parts/eye-near.png",
+    "foreground": "Parts/foreground.png",
+    "front-mantle": "Parts/front-mantle.png",
+    "head-blob": "Parts/head-blob.png",
+    "shell": "Parts/shell.png",
+    "stalk-far-registered": "Parts/stalk-far-registered.png",
+    "stalk-far": "Parts/stalk-far.png",
+    "stalk-near-registered": "Parts/stalk-near-registered.png",
+    "stalk-near": "Parts/stalk-near.png",
+    "tube-far": "Parts/tube-far.png",
+    "tube-near": "Parts/tube-near.png"
+  },
+  "stalkStartMs": {
+    "near": 180,
+    "far": 300
+  },
+  "frontRetractionAnchors": [
+    [
+      315,
+      325
+    ],
+    [
+      310,
+      320
+    ],
+    [
+      310,
+      320
+    ]
+  ],
+  "headRetractionAnchor": [
+    275,
+    300
+  ],
+  "rearRetractionAnchors": [
+    [
+      335,
+      340
+    ],
+    [
+      310,
+      330
+    ],
+    [
+      320,
+      320
+    ]
+  ],
+  "mantleGridStep": 7,
+  "internalDepthFoldMaximum": 0.45,
+  "internalDepthFoldRate": 5,
+  "retractionStiffness": {
+    "headAttachment": 120,
+    "mantle": 100
+  },
+  "appearanceAuthority": "Source/concept.png"
+}

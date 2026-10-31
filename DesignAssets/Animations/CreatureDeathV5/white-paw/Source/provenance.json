@@ -1,0 +1,19 @@
+{
+  "appearanceAuthority": {
+    "path": "DesignAssets/CreatureConcepts/v3/white-paw.png",
+    "sha256": "abd7965a896cf0cf5f44f5210befb851d0f6e30c8b866b1366b6d2ac5b54ae2f"
+  },
+  "visibleSurface": "Source/reference.png",
+  "newArtwork": [
+    "Source/torso-drawing.png",
+    "Source/closed-skull-drawing.png",
+    "Source/complete-parts-drawing.png",
+    "Source/ruff-complete-drawing.png"
+  ],
+  "generation": "Source/generation.json",
+  "outputHashes": {
+    "death.webp": "a2d33a1258055b01890c782d6d6b9cbc7c7f19afeca939cd8a4ed9531dbe3d2a",
+    "preview.webp": "3dc529cc6d7fec4e3372ff37cea2b72aa2371592debbd75988def8b613e08a7e",
+    "thumbnail.webp": "ebe90632358d698ad8a936669ff79fb5d390e1cd4a458530115305bdae8bc396"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "sourceSize": [
+    1723, 
+    913
+  ], 
+  "registeredSize": [
+    536, 
+    284
+  ], 
+  "scale": 0.3108648953138064, 
+  "translation": [
+    4, 
+    114
+  ], 
+  "inliers": 144, 
+  "calibration": "unchanged body landmarks; tail excluded"
+}

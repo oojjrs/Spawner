@@ -1,0 +1,24 @@
+{
+  "entries": [
+    {
+      "asset": "Source/soft-parts-drawing.png",
+      "prompt": "Use case: precise-object-edit. ACTUAL production isolated layered animation attachments, not a finished action sheet. Sole original image is character anatomy/palette/outline/camera authority. Complete ALL hidden roots/undersides and round them naturally with sufficient overlap. No body or shell fragments mixed into soft attachments. Exact original individual, lengths/widths/proportions and original painterly shading/fine outlines. Genuine transparent RGBA, no shadows, glow, text, labels or grid. Do not redesign, enlarge far limbs to fill cells, make thick elephant upper arms, or omit toe tips. SIX complete separate SOFT attachments in padded 2 columns x 3 rows, row order. 1: whole original pale sage-green head and complete neck to rounded padded root, both big dark-green eyes open, cream lower face; no rocks/carapace/neck collar from shell. 2: near foreleg complete shoulder root, elbow and broad foot with exact three cream toe claws. 3: far foreleg counterpart, correctly smaller/foreshortened. 4: near hindleg from hip root through knee to entire foot/toes. 5: far hindleg counterpart. 6: small original pointed sage/cream tail with full hidden root. The original creature is a stocky mineral turtle, so legs are SHORT naturally jointed stumps, not mammalian thighs or stretched tubes. Green spot patterns, claw size and head/foot ratio exactly match original. All parts use the same anatomical world scale, generous alpha padding. Draw ONLY the specified head/limbs/tail; absolutely no crystal, stone, brown shell plate or background.",
+      "inputs": [
+        "Source/approved-concept.png"
+      ],
+      "generatedFilename": "exec-04fd69a0-86b0-4b51-9a63-b0141844a0a6.png",
+      "provider": "built-in image_gen",
+      "usedFor": "complete soft attachments"
+    },
+    {
+      "asset": "Source/underside-drawing.png",
+      "prompt": "Use case: precise-object-edit. Asset type: actual production action-defining key drawings for a 2D game death animation, four complete poses in equal padded 2x2 cells, read left-right then top-bottom. Transparent RGBA, no text/grid/effects/floor/shadows. Approved reference is sole design, anatomy, pattern, palette, camera and original proportions authority. Keep same character world scale in every cell with generous margin and a common ground line, no zoom-to-fit and no body shrinking, melting or global squash. The four phases are NORMAL ALIVE NEUTRAL (fully open eyes), SUPPORT FAILING (joint articulation and center of mass losing balance), FIRST WEIGHT CONTACT (whole body reaches ground), then PASSIVE FOLLOW-THROUGH SETTLED CORPSE. Draw actual body/limb poses and overlaps; no mere head tilt or erased limbs. Preserve skull size, torso volume, appendage lengths and marking placement. Key3 and Key4 body position should be identical once contacted, only designated soft appendages finish settling. Original fine outlines and painterly shading, no gore. Exact tortoise: moss-gray green big round head/neck and four chunky short legs with pale toes, a large rigid mountain shell of brown/gray rocks, golden mineral seams and tall pale turquoise crystals. Mineral shell/stone/crystal outlines and mass stay unchanged. Neutral exact alive head/legs extended, eyes open. Failing: front knees bend distinctly, head/neck droops and begins withdrawing; rear legs respond late under the huge weight, rigid whole mountain tips slightly as support fails. Contact: head and limbs fold/retract into the shell in correct order, rock mass lowers rigidly onto original ground. Settled: no head, limbs or tail exposed, ONLY the mineral/crystal shell rests on ground, with the same exact crystal count, shape and rock pattern. No crushed/melted stones, floating shell, or legs simply erased. The weight of the load should be evident.",
+      "inputs": [
+        "Source/approved-concept.png"
+      ],
+      "generatedFilename": "exec-320ea9a9-6528-46c6-a0b6-baf47882dbb8.png",
+      "provider": "built-in image_gen",
+      "usedFor": "hidden rigid-shell underside beneath unchanged approved-reference shell pixels"
+    }
+  ]
+}

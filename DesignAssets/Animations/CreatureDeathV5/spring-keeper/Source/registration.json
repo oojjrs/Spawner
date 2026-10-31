@@ -1,0 +1,30 @@
+{
+  "authority": "DesignAssets/CreatureConcepts/v3/spring-keeper.png",
+  "sourceSize": [
+    381,
+    354
+  ],
+  "sourceAlphaBounds": [
+    69,
+    63,
+    333,
+    292
+  ],
+  "scale": 1.1758530183727034,
+  "resizedSize": [
+    448,
+    416
+  ],
+  "offset": [
+    32,
+    106
+  ],
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ],
+  "referenceImage": "Source/registered-reference.png",
+  "imagegenReference": "Source/reference.png",
+  "alpha64GroundY": 448
+}

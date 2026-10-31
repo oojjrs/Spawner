@@ -1,0 +1,20 @@
+{
+  "entries": [
+    {
+      "asset": "Source/completed-shell-drawing.png",
+      "provider": "built-in image_gen",
+      "input": "Source/reference.png",
+      "prompt": "Use case: precise-object-edit. Production ONE static complete isolated layer for a 2D skeletal game rig. The reference is exact design and exact canvas registration. Remove ONLY the pale blue-green soft snail body, trailing foot, head, and both eye stalks. Keep the ENTIRE golden spiral shell, moss, tree trunk, all foliage and all golden fruits in their original location and exact proportions, shading, fine teal outlines and colors. Draw the complete previously hidden lower rim/underside of the golden shell where the soft body covered it, forming a closed complete shell contour down to the existing ground line. The result is ONLY the empty abandoned golden shell with its intact whole garden tree growing from it. No living snail flesh at all. No eye stalks, no head, no blue-green slug base. Do not reshape or resize the spiral shell or garden. Same camera, same 512-square composition registration with generous transparent padding. A single complete production source art part, not multiple frames, not a preview, no labels, no text, no glow, no scenery, no shadow. Genuine transparent background.",
+      "originalGeneratedFile": "exec-08d16e04-101a-4dc6-9013-1d7c273ba423.png",
+      "originCallId": "call_fff6da9b1eac41af94369a02cca2c4ab"
+    },
+    {
+      "asset": "Source/completed-body-drawing.png",
+      "provider": "built-in image_gen",
+      "input": "Source/reference.png",
+      "prompt": "Use case: precise-object-edit. Production ONE static complete isolated soft BODY layer for a 2D skeletal snail rig. Reference is exact style, palette, camera and silhouette authority. Draw ONLY the continuous pale blue-green soft snail head-and-foot body from the reference, from the round head on the left to the tapered trailing foot on the right. Remove the entire golden shell, all tree/garden/moss/fruits, and remove BOTH eye stalks and eyeballs completely. Complete the previously hidden soft upper back surface under the removed shell as a smooth broad low rounded pale mint body with original soft creamy highlights, blue-green lower shading and fine dark teal outline, no missing rectangular regions. Head left is rounded smooth and faceless, no eyes or mouth. Keep the lower ground-contact body contour and original soft body proportions exactly as the reference; this is one continuous complete slug body with no shell, no stalks. Side/front three-quarter view facing left. Place the body in the same canvas coordinates as the reference, same world scale, blank transparent space where shell/tree were above. Do not enlarge the body to fill canvas. Single actual production part, not a sheet or preview. No labels, text, effects, shadows or backdrop. Genuine transparent background.",
+      "originalGeneratedFile": "exec-206c4ee2-b526-458b-973c-0dd208277e1a.png",
+      "originCallId": "call_fff6da9b1eac41af94369a02cca2c4ab"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "tool": "builtin image_gen", 
+  "jointedLimbs": {
+    "prompt": "Use case: stylized-concept. Create ONE production source-parts atlas for the exact lantern-keeper creature in reference image 1. Image 1 is the approved identity, cream fur, deep teal fur, warm amber accents and three-quarter left-facing view. Image 2 is a style/part reference, not an animation target. This is a rigging texture atlas, not animation frames. Genuinely transparent background, no haze, no shadow, no text or dividers. Six completely isolated full parts with generous clear gaps, arranged 3 columns by 2 rows. Top row: complete cream fore upper arm (shoulder to elbow), complete cream fore lower arm (elbow to wrist), complete large cream fore paw with three rounded toes pointing left and a wrist attachment above the entire palm. Bottom row: complete teal-and-cream hind thigh including the original single teal spiral/whorl on its outer face (hip to knee), complete matching hind calf (knee to ankle), complete elongated cream hind paw with three toes pointing left and ankle attachment above the whole paw. Each joint end is a fully painted rounded fur volume, with all hidden contours and undersides closed. NO limbs joined together. No torso, head, ears, mane, bones, holes, cut marks, empty cuffs or straight amputated edges. Keep compact soft anatomy and exact illustration lighting, dense subtle fur and dark teal outline of the approved reference. Do not enlarge paws or invent patterns. No black circular outline around hidden joint caps.", 
+    "referenced_image_paths": [
+      "H:/Spawner/DesignAssets/CreatureConcepts/v3/lantern-keeper.png", 
+      "H:/Spawner/DesignAssets/Animations/CreatureDeathV4/lantern-keeper/Source/parts-atlas.png"
+    ], 
+    "transparent_background": true, 
+    "savedImage": "jointed-limbs-atlas-v4.png"
+  }, 
+  "leglessTorso": {
+    "prompt": "Use case: precise-object-edit. Image 1 is the edit target: the complete separated legless torso for lantern-keeper. Image 2 is the approved creature identity reference only. Preserve image 1's horizontal ovoid silhouette, proportions, cream-to-teal color boundary, cream chest, overall shading, dark teal outline, empty transparent surrounding canvas and view exactly. Change only the lower-right teal fur: remove the circular spiral/whorl and any radial thigh-looking fur swirl there; repaint that area as smooth flowing torso fur following the neighbouring back fur in one continuous direction. This is a legless torso, so no haunch, limb, paw, foot, tail, mane or spiral may be included. Retain the complete closed hidden belly contour. Do not add new objects or alter the cream region. Genuinely transparent background, no haze or matte, no text. This source part will be animated independently from the separately drawn spiral hind thigh.", 
+    "referenced_image_paths": [
+      "H:/Spawner/DesignAssets/Animations/CreatureDeathV4/lantern-keeper/Source/plain-core.png", 
+      "H:/Spawner/DesignAssets/CreatureConcepts/v3/lantern-keeper.png"
+    ], 
+    "transparent_background": true, 
+    "savedImage": "legless-torso-v4.png"
+  }
+}

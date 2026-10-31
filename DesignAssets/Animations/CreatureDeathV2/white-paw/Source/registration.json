@@ -1,0 +1,23 @@
+{
+  "source": "DesignAssets/CreatureConcepts/v3/white-paw.png",
+  "sourceSize": [
+    361,
+    225
+  ],
+  "sourceBounds": [
+    35,
+    21,
+    327,
+    200
+  ],
+  "uniformScale": 1.5068493150684932,
+  "origin": [
+    36,
+    178
+  ],
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ]
+}

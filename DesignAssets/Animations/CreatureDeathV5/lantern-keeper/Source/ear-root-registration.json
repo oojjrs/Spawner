@@ -1,0 +1,50 @@
+{
+  "far-ear": {
+    "drawing": "Drawings/far-ear-complete-root.png", 
+    "matrix": [
+      [
+        0.16485177392956543, 
+        -0.006540580346985425, 
+        61.39981190229029
+      ], 
+      [
+        0.006540580346985425, 
+        0.16485177392956543, 
+        76.70411546902652
+      ]
+    ], 
+    "matches": 58, 
+    "inliers": 9, 
+    "adoptedRootRegion": [
+      195, 
+      180, 
+      280, 
+      275
+    ], 
+    "visibleOriginalLeafRetained": true
+  }, 
+  "near-ear": {
+    "drawing": "Drawings/near-ear-complete-root.png", 
+    "matrix": [
+      [
+        0.2256791863078298, 
+        -0.005093578953547257, 
+        173.92196986807994
+      ], 
+      [
+        0.005093578953547257, 
+        0.2256791863078298, 
+        32.96643333105224
+      ]
+    ], 
+    "matches": 87, 
+    "inliers": 12, 
+    "adoptedRootRegion": [
+      225, 
+      175, 
+      320, 
+      275
+    ], 
+    "visibleOriginalLeafRetained": true
+  }
+}

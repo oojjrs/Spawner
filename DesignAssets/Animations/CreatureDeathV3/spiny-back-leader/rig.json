@@ -1,0 +1,356 @@
+{
+  "format": "spawner-segmented-bone-mesh-v3", 
+  "approvedDesign": "DesignAssets/CreatureConcepts/v3/spiny-back-leader.png", 
+  "frameSize": 512, 
+  "pivot": [
+    256, 
+    448
+  ], 
+  "columns": 8, 
+  "method": "complete hidden body with original rigid carapace and mandibles, four independently weighted jointed limbs", 
+  "bones": [
+    {
+      "id": "body", 
+      "parent": null, 
+      "pivot": [
+        260, 
+        350
+      ]
+    }, 
+    {
+      "id": "jaw-far", 
+      "parent": "body", 
+      "pivot": [
+        117, 
+        310
+      ]
+    }, 
+    {
+      "id": "jaw-near", 
+      "parent": "body", 
+      "pivot": [
+        191, 
+        317
+      ]
+    }, 
+    {
+      "id": "far-leg-upper", 
+      "parent": "body", 
+      "pivot": [
+        90, 
+        286
+      ]
+    }, 
+    {
+      "id": "far-leg-lower", 
+      "parent": "far-leg-upper", 
+      "pivot": [
+        65, 
+        315
+      ]
+    }, 
+    {
+      "id": "far-leg-claw", 
+      "parent": "far-leg-lower", 
+      "pivot": [
+        49, 
+        342
+      ]
+    }, 
+    {
+      "id": "front-leg-upper", 
+      "parent": "body", 
+      "pivot": [
+        247, 
+        328
+      ]
+    }, 
+    {
+      "id": "front-leg-lower", 
+      "parent": "front-leg-upper", 
+      "pivot": [
+        267, 
+        375
+      ]
+    }, 
+    {
+      "id": "front-leg-claw", 
+      "parent": "front-leg-lower", 
+      "pivot": [
+        247, 
+        414
+      ]
+    }, 
+    {
+      "id": "middle-leg-upper", 
+      "parent": "body", 
+      "pivot": [
+        323, 
+        340
+      ]
+    }, 
+    {
+      "id": "middle-leg-lower", 
+      "parent": "middle-leg-upper", 
+      "pivot": [
+        348, 
+        376
+      ]
+    }, 
+    {
+      "id": "middle-leg-claw", 
+      "parent": "middle-leg-lower", 
+      "pivot": [
+        367, 
+        407
+      ]
+    }, 
+    {
+      "id": "rear-leg-upper", 
+      "parent": "body", 
+      "pivot": [
+        419, 
+        320
+      ]
+    }, 
+    {
+      "id": "rear-leg-lower", 
+      "parent": "rear-leg-upper", 
+      "pivot": [
+        447, 
+        352
+      ]
+    }, 
+    {
+      "id": "rear-leg-claw", 
+      "parent": "rear-leg-lower", 
+      "pivot": [
+        461, 
+        381
+      ]
+    }
+  ], 
+  "meshes": "meshes.json", 
+  "rootGroundY": 447, 
+  "originalLegMasks": {
+    "far-leg": [
+      [
+        91, 
+        276
+      ], 
+      [
+        108, 
+        292
+      ], 
+      [
+        88, 
+        317
+      ], 
+      [
+        74, 
+        340
+      ], 
+      [
+        58, 
+        364
+      ], 
+      [
+        38, 
+        375
+      ], 
+      [
+        31, 
+        356
+      ], 
+      [
+        40, 
+        329
+      ], 
+      [
+        47, 
+        315
+      ], 
+      [
+        58, 
+        303
+      ], 
+      [
+        64, 
+        289
+      ]
+    ], 
+    "front-leg": [
+      [
+        234, 
+        314
+      ], 
+      [
+        253, 
+        315
+      ], 
+      [
+        279, 
+        333
+      ], 
+      [
+        292, 
+        355
+      ], 
+      [
+        294, 
+        374
+      ], 
+      [
+        280, 
+        398
+      ], 
+      [
+        266, 
+        426
+      ], 
+      [
+        240, 
+        450
+      ], 
+      [
+        229, 
+        442
+      ], 
+      [
+        232, 
+        415
+      ], 
+      [
+        240, 
+        400
+      ], 
+      [
+        239, 
+        379
+      ], 
+      [
+        241, 
+        368
+      ], 
+      [
+        233, 
+        355
+      ], 
+      [
+        228, 
+        338
+      ]
+    ], 
+    "middle-leg": [
+      [
+        310, 
+        331
+      ], 
+      [
+        332, 
+        334
+      ], 
+      [
+        354, 
+        342
+      ], 
+      [
+        371, 
+        356
+      ], 
+      [
+        379, 
+        379
+      ], 
+      [
+        386, 
+        400
+      ], 
+      [
+        390, 
+        419
+      ], 
+      [
+        377, 
+        434
+      ], 
+      [
+        362, 
+        424
+      ], 
+      [
+        348, 
+        401
+      ], 
+      [
+        339, 
+        381
+      ], 
+      [
+        327, 
+        374
+      ], 
+      [
+        314, 
+        365
+      ], 
+      [
+        307, 
+        349
+      ]
+    ], 
+    "rear-leg": [
+      [
+        405, 
+        314
+      ], 
+      [
+        428, 
+        312
+      ], 
+      [
+        449, 
+        323
+      ], 
+      [
+        462, 
+        342
+      ], 
+      [
+        474, 
+        363
+      ], 
+      [
+        478, 
+        386
+      ], 
+      [
+        465, 
+        408
+      ], 
+      [
+        452, 
+        399
+      ], 
+      [
+        442, 
+        379
+      ], 
+      [
+        431, 
+        365
+      ], 
+      [
+        416, 
+        356
+      ], 
+      [
+        405, 
+        339
+      ]
+    ]
+  }, 
+  "hiddenLimbSources": "Source/Registered/limb-registration.json", 
+  "sourceRegistration": "Source/Registered/registration.json", 
+  "runtime": "local Python Pillow/numpy renderer; no Spine compatibility claim"
+}

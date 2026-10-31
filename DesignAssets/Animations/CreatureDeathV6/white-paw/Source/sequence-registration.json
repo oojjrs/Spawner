@@ -1,0 +1,117 @@
+{
+  "commonScale": 0.8366539863942769, 
+  "calibrationMatrix": [
+    [
+      0.8366539664493867, 
+      -0.00018268536711118594, 
+      40.126649415761506
+    ], 
+    [
+      0.00018268536711118594, 
+      0.8366539664493867, 
+      -15.655252770596611
+    ]
+  ], 
+  "calibrationMatches": 200, 
+  "calibrationInliers": 119, 
+  "frames": [
+    {
+      "sourceRect": [
+        -64, 
+        -64, 
+        640, 
+        640
+      ], 
+      "sourceObjectLabel": 1, 
+      "commonScale": 0.8366539863942769, 
+      "translation": [
+        -14, 
+        -76
+      ], 
+      "rowRootOffsetX": 0, 
+      "foreFootWorldY": 368
+    }, 
+    {
+      "sourceRect": [
+        448, 
+        -64, 
+        640, 
+        640
+      ], 
+      "sourceObjectLabel": 2, 
+      "commonScale": 0.8366539863942769, 
+      "translation": [
+        -14, 
+        -81
+      ], 
+      "rowRootOffsetX": 0, 
+      "foreFootWorldY": 368
+    }, 
+    {
+      "sourceRect": [
+        960, 
+        -64, 
+        640, 
+        640
+      ], 
+      "sourceObjectLabel": 3, 
+      "commonScale": 0.8366539863942769, 
+      "translation": [
+        -14, 
+        -76
+      ], 
+      "rowRootOffsetX": 0, 
+      "foreFootWorldY": 368
+    }, 
+    {
+      "sourceRect": [
+        -64, 
+        448, 
+        640, 
+        640
+      ], 
+      "sourceObjectLabel": 5, 
+      "commonScale": 0.8366539863942769, 
+      "translation": [
+        -38, 
+        3
+      ], 
+      "rowRootOffsetX": -24, 
+      "foreFootWorldY": 368
+    }, 
+    {
+      "sourceRect": [
+        448, 
+        448, 
+        640, 
+        640
+      ], 
+      "sourceObjectLabel": 6, 
+      "commonScale": 0.8366539863942769, 
+      "translation": [
+        -38, 
+        0
+      ], 
+      "rowRootOffsetX": -24, 
+      "foreFootWorldY": 368
+    }, 
+    {
+      "sourceRect": [
+        960, 
+        448, 
+        640, 
+        640
+      ], 
+      "sourceObjectLabel": 7, 
+      "commonScale": 0.8366539863942769, 
+      "translation": [
+        -38, 
+        -8
+      ], 
+      "rowRootOffsetX": -24, 
+      "foreFootWorldY": 368
+    }
+  ], 
+  "crossfade": false, 
+  "morphing": false
+}

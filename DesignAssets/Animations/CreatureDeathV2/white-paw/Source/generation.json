@@ -1,0 +1,22 @@
+{
+  "entries": [
+    {
+      "asset": "Source/completed-body-drawing.png",
+      "provider": "built-in image_gen",
+      "input": "Source/reference.png",
+      "prompt": "Use case: precise-object-edit. ONE actual production source layer for a 2D cutout/bone animation rig, a SINGLE static illustration, not a pose sequence and not a sheet. Reference is exact approved anatomy, palette, paint style, fine teal outlines, camera and world-scale authority. Maintain original canvas registration and preserve all retained visible pixels/markings as exactly as possible. Complete the previously hidden contour and surface naturally at removed attachments; no flat cut edges or fragments. Genuine transparent background, generous padding. No text, labels, scenery, floor, extra shadows or added props. Draw ONLY the weasel's complete long low TORSO from reference, ivory neck/shoulder fur and exact dark teal/cream saddle markings. Remove head, all four legs and paws, and entire large curly tail. Complete the hidden furred neck joint, belly underside and rump behind those attachments, giving one closed complete elongated body silhouette. Preserve body's exact horizontal length, volume, coat pattern, shading and original location. DO NOT enlarge small torso to fill canvas. No face, appendages or detached fragments."
+    },
+    {
+      "asset": "Source/completed-head-drawing.png",
+      "provider": "built-in image_gen",
+      "input": "Source/reference.png",
+      "prompt": "Use case: precise-object-edit. One SINGLE production complete source art part for a 2D cutout bone rig, not an animation frame sheet. Reference is the approved exact anatomy, palette, painterly style, camera and world scale. Genuine transparent RGBA background. No text, labels, extra objects, effects, scenery, floor or cast shadow. Draw ONLY the complete HEAD and the attached shaggy ivory NECK MANE of this exact weasel, as one complete closed-contour rig attachment. Visible amber eye is fully closed as a fine relaxed dark teal lid; retain exact skull shape, small round ears, muzzle, whiskers, dark facial marking and fur direction. Remove torso, all limbs/paws and tail. Complete the hidden rear neck/maned root with natural rounded feathered fur contour and 12 percent overlap for attachment to a torso. Same original head size, same canvas placement; do not enlarge/center to fill."
+    },
+    {
+      "asset": "Source/completed-tail-drawing.png",
+      "provider": "built-in image_gen",
+      "input": "Source/reference.png",
+      "prompt": "Use case: precise-object-edit. One SINGLE complete production 2D cutout rig TAIL source, not an animation sequence, not a preview. Extract/redraw ONLY the entire large curled WHITE FLUFFY WEASEL TAIL from the exact reference, with its dark charcoal underside/root, fine teal outline, original curl, exact fur direction and original camera. Remove every part of body, rump, legs, head and background. Complete its hidden lower-left root with a natural short rounded furred attachment extending 12 percent behind the body, no flat diagonal cut or rectangular boundary. Make one clean fully closed-contour tail part. The approved original tail's shape, width-to-height ratio, fur volume, ivory highlights and dark curved underside must stay the same. Keep it in the same original canvas position and world scale on the right of the original image, large empty transparent space to the left; do not center or enlarge it to fill canvas. True transparent RGBA background. No other body fragments, words, labels, numbers, floor, extra shadow, effects or new objects."
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "source": "DesignAssets/CreatureConcepts/v3/walking-forest.png",
+  "sourceSize": [
+    281,
+    281
+  ],
+  "sourceBounds": [
+    12,
+    24,
+    281,
+    254
+  ],
+  "uniformScale": 1.6356877323420074,
+  "origin": [
+    36,
+    72
+  ],
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ]
+}

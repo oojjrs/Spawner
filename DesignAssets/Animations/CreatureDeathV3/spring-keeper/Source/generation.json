@@ -1,0 +1,55 @@
+{
+  "entries": [
+    {
+      "asset": "Source/key-drawings.png",
+      "provider": "built-in image_gen",
+      "inputs": [
+        "H:\\Spawner\\DesignAssets\\CreatureConcepts\\v3\\spring-keeper.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: actual production action-defining key drawings for a 2D game death animation, four complete poses in equal padded 2x2 cells, read left-right then top-bottom. Transparent RGBA, no text/grid/effects/floor/shadows. Approved reference is sole design, anatomy, pattern, palette, camera and original proportions authority. Keep same character world scale in every cell with generous margin and a common ground line, no zoom-to-fit and no body shrinking, melting or global squash. The four phases are NORMAL ALIVE NEUTRAL (fully open eyes), SUPPORT FAILING (joint articulation and center of mass losing balance), FIRST WEIGHT CONTACT (whole body reaches ground), then PASSIVE FOLLOW-THROUGH SETTLED CORPSE. Draw actual body/limb poses and overlaps; no mere head tilt or erased limbs. Preserve skull size, torso volume, appendage lengths and marking placement. Key3 and Key4 body position should be identical once contacted, only designated soft appendages finish settling. Original fine outlines and painterly shading, no gore. Exact bird: ivory round skull, tiny gold beak, green leaf wings, layered coral/cream flower collar, orange/coral/cream enormous fan of leaf-tail feathers and crest, two golden bird feet. Neutral stands normally with eye open and tail fan upright. Failing pose: both knees buckle in staggered timing, bird's actual torso tips forward/off balance and drops, wings loosen away from flanks, crest and tail lag above. Contact: breast and belly fall onto the near side on ground; cheek lowered to ground, eye closed, two anatomically bent legs/feet relaxed visibly to side, tiny wing feathers splay; whole torso is lying, not standing with rotated neck. Tail still lifted diagonally behind at contact. Settled: same grounded torso/head and feet, fan tail and soft crest finish flopping onto ground/back in natural gravity-driven arcs without changing plume count, shape or color. Keep the same true body volume while perspective/overlap changes naturally.",
+      "generatedFile": "D:\\.codex\\generated_images\\01a1838c-2114-7c61-81d7-4e2dfbb2299f\\exec-72eadda4-63fb-4df1-809d-349c8523172b.png"
+    },
+    {
+      "asset": "Source/contact-drawings.png",
+      "provider": "built-in image_gen",
+      "inputs": [
+        "H:\\Spawner\\DesignAssets\\Animations\\CreatureDeathV3\\spring-keeper\\Source\\Keys\\key-0.png",
+        "H:\\Spawner\\DesignAssets\\CreatureConcepts\\v3\\spring-keeper.png"
+      ],
+      "prompt": "Use case: precise-object-edit. TWO complete production contact key drawings, side by side on transparent RGBA, not a finished sequence. Image1 is exact neutral/world-scale/camera/anatomy registration authority, image2 approved design. Both poses: the exact flower-tail bird has fallen onto near breast/belly and cheek, eyes closed, round skull and torso ORIGINAL volumes, same green wings/flower collar, both legs naturally folded visibly beside body. Keep original head size, body/wing anatomy, every crest/tail plume and painted marking. Left pose is first contact with fan tail still raised diagonally BEHIND AND OVERLAPPING the back; right pose same contacted body/head/feet exactly, tail finishes bending down to rest diagonally against back and ground. CRITICAL: fan tail FOLDS/TUCKS more over its own back instead of stretching straight horizontally away, so each whole corpse fits completely in the same 512-square world-scale canvas as image1 with at least 20px margin. Do not shrink the actor or shorten/remove feathers to achieve this. Use natural overlap, curved feather articulation and foreshortening; outer tail tips may rest against back/other feathers and a few tips touch ground. No single feather extending outside cell, no cropped beak/crest/foot/tail. No upright body with merely tilted head, no floor/effects/text/shadow/background. True transparent alpha outside bird.",
+      "generatedFile": "D:\\.codex\\generated_images\\01a1838c-2114-7c61-81d7-4e2dfbb2299f\\exec-0b17d3e8-a2df-40ca-85e5-272eae5b69ee.png"
+    },
+    {
+      "asset": "Source/contact-body-drawing.png",
+      "provider": "built-in image_gen",
+      "inputs": [
+        "H:\\Spawner\\DesignAssets\\Animations\\CreatureDeathV3\\spring-keeper\\Source\\pose-body-contact-reference.png",
+        "H:\\Spawner\\DesignAssets\\CreatureConcepts\\v3\\spring-keeper.png"
+      ],
+      "prompt": "Use case: precise-object-edit. ONE complete actual production post-contact bird BODY source. Image1 exact contacted BODY/head/crest/wing/feet pose and 512 registration; image2 approved design. Remove ENTIRE fan tail, including its clipped portions at the image right; tail geometry is not needed. Keep every retained body pixel, skull and torso volume, fallen crest, closed eye, gold beak, flower collar, green wings and both folded feet in exactly the same shape, location, colors and proportions as image1. Complete hidden furred/feathered rump behind removed fan as a closed natural body contour. Do NOT downscale the body or head, do not re-pose or lift from ground. Tail-less bird corpse remains on breast/belly and cheek. Single static production layer, all outside pixels genuinely transparent alpha0, no floor/shadow/effect/text/extra object.",
+      "generatedFile": "D:\\.codex\\generated_images\\01a1838c-2114-7c61-81d7-4e2dfbb2299f\\exec-01790f67-d6f1-4974-be6e-c6b21dfc616b.png"
+    },
+    {
+      "asset": "Source/tail-drawings.png",
+      "provider": "built-in image_gen",
+      "inputs": [
+        "Source/Keys/key-2.png",
+        "Source/Keys/key-3.png",
+        "Source/approved-reference.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Actual production isolated FAN TAIL replacement-cel atlas, four equal padded square cells 2x2, true transparent RGBA alpha0 exterior. Image1 exact bird contact tail pose/camera/proportions, image2 settled tail pose, image3 approved design. Draw ONLY the entire orange/coral/cream leaf-feather fan tail and its small complete green feathered base; remove every head/crest/flower/body/wing/leg. Complete hidden lower root into a smooth closed green overlap, no flat cut or foreign body fragment. Four stages 0%,35%,70%,100% from image1 fan still lifted to image2 fan naturally bent/tucked diagonally over its own back and ground. Keep tail root at exactly the same in-cel coordinates in all four cels, same camera/world scale, exactly the same feather count, individual plume widths/lengths, color bands, highlights and fine original outline. Bend leaf/plume joints and use natural overlap/foreshortening to settle, never globally flatten, shorten or melt the fan. Some outer tips can rest on the back/other feathers, tips finish slightly later. All plumes stay fully inside their padded cells, no straight horizontal extension outside canvas, no per-cel zoom. No body pose or breathing, no shadow, glow, floor, labels, text, grid or scenery. This is real production tail source for a fixed post-contact bird body.",
+      "generatedFile": "D:\\.codex\\generated_images\\01a1838c-2114-7c61-81d7-4e2dfbb2299f\\exec-96047d54-ae6c-4d47-a5e7-4f16416ebf09.png"
+    },
+    {
+      "asset": "Source/collapse-body-drawings.png",
+      "provider": "built-in image_gen",
+      "inputs": [
+        "Source/Keys/key-0.png",
+        "Source/contact-body-registered.png",
+        "DesignAssets/CreatureConcepts/v3/spring-keeper.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Actual production BODY-ONLY in-between animation drawings for this exact flower-tail bird's loss-of-support death. Four complete independent cels in a clean padded equal 2x2 grid, chronological left-right then bottom. Image1 is the exact standing neutral pose and original head/body world scale, image2 is the exact ground-contact BODY pose at the SAME world scale, image3 is approved appearance. Draw 15%,40%,65%,85% progress from image1 to image2, excluding endpoints. Remove only the enormous rear fan tail from ALL four cels; complete its hidden rump surface with natural green feathers, keep the COMPLETE round ivory head, original small gold beak, full coral/cream crest and flower collar, both green leaf wings, torso and both complete gold bird legs/feet. Cel1: knees/ankles weaken, slight chest pitch with original feet supporting, eye still open. Cel2: real knees bend under the weight; pelvis and whole torso descend and pitch forward, wing drops loose, head and crest lag naturally; half-closed eye. Cel3: chest/belly approaches floor as bent legs slip beside the torso, shoulders and head genuinely falling together, closed eye. Cel4: breast/belly has just contacted ground and head/cheek drops the last short distance, two slack anatomically folded feet visible beside body, very close to image2's exact pose. Use fresh real body/limb drawings and changing overlaps, not rigid whole-character tilts or disappearing legs. Absolutely preserve original skull/beak dimensions, torso volume, crest plume lengths and wing feather count/color in every cel; no frame-by-frame growing, squashing, melting, redesign or zoom-to-fit. Every cell represents the same fixed 512-square world, common floor y448, same camera with generous transparent margins. Original approved painterly shading, fine dark teal outline, upper-left light. No tail, detached parts, words, grid lines, floor drawing, cast shadow, glow, effects or extra objects. Genuinely transparent alpha exterior. These are actual production collapse cels, not a preview.",
+      "generatedFile": "D:\\.codex\\generated_images\\01a18389-9751-73b3-bbe4-a6f4a5854d96\\exec-092120a5-ebab-465c-a308-0724939cc58a.png"
+    }
+  ]
+}
