@@ -77,7 +77,8 @@ test("월드 사체 렌더러와 목록 아이콘이 같은 애셋을 사용하�
     clamp: (value, min, max) => Math.max(min, Math.min(max, value)), ctx: context,
     resourceNodeCells: () => [corpse], resourceNodePose: () => ({ visible: true, opacity: 1 }),
     worldToScreen: (x, y) => ({ x: x * 100, y: y * 100 }), objectOutlineColor: () => null,
-    drawResourceNode: (...args) => fallback.push(args), objectPanel: { hidden: false, getBoundingClientRect: () => ({ top: 0, bottom: 200 }) },
+    drawResourceNode: (...args) => fallback.push(args), drawCorpseResources() {},
+    objectPanel: { hidden: false, getBoundingClientRect: () => ({ top: 0, bottom: 200 }) },
     document: { hidden: false }, window: { devicePixelRatio: 1 }, unitListEntries: () => [corpse], agentAvatarIndex: 0,
     agentAvatars: new Map([[corpse.id, { context, canvas: { width: 80, height: 80, getBoundingClientRect: () => ({ width: 80, height: 80, top: 20, bottom: 100 }) } }]]),
     agentSprite() { throw new Error("사체에 서 있는 유닛 그림을 사용했습니다."); } });
@@ -89,6 +90,8 @@ test("월드 사체 렌더러와 목록 아이콘이 같은 애셋을 사용하�
   scope.state.simSeconds = 10; scope.idleMotion.matches = true; scope.drawCorpses(); assert.deepEqual(draws.at(-1).slice(1, 5), [3 * AGENT_DEATH_ANIMATION.frameSize, 3 * AGENT_DEATH_ANIMATION.frameSize, AGENT_DEATH_ANIMATION.frameSize, AGENT_DEATH_ANIMATION.frameSize]);
   corpse.tribe = "spore"; scope.drawCorpses(); assert.equal(fallback.length, 0);
   assert.deepEqual(draws.at(-1).slice(1, 5), [3 * AGENT_DEATH_ANIMATIONS.spore.frameSize, AGENT_DEATH_ANIMATIONS.spore.frameSize, AGENT_DEATH_ANIMATIONS.spore.frameSize, AGENT_DEATH_ANIMATIONS.spore.frameSize]);
+  const count = draws.length;
+  corpse.amount = 0; scope.drawCorpses(); assert.equal(draws.length, count);
 });
 
 test("로컬 실행 목록과 생성된 번들에도 같은 사망 애셋과 프레임 계산이 포함된다", () => {

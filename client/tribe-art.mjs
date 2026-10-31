@@ -1,7 +1,13 @@
 import { imageFrameSize, imageScale } from "./image-geometry.mjs";
+import { createTribeAttributeAnimation, hasTribeAttributes } from "./attribute-animation.mjs";
 
 export function createTribeArt(definitions, assetSource) {
   const previews = new Map(), units = new Map(), sprites = new Map();
+  const attributes = createTribeAttributeAnimation(assetSource, (width, height) => {
+    const surface = document.createElement("canvas");
+    surface.width = width; surface.height = height;
+    return surface;
+  }, image);
 
   async function image(path) {
     const sprite = new Image();
@@ -40,7 +46,7 @@ export function createTribeArt(definitions, assetSource) {
         fetch(assetSource(tribe.manifest)).then(response => {
           if (!response.ok) throw new Error("부족 정보를 불러오지 못했습니다.");
           return response.json();
-        }), Promise.all(tribe.parts.map(image))]);
+        }), Promise.all(tribe.parts.map(image)), attributes.prepare(tribe.key)]);
       const starterBounds = bounds(starter, false);
       const scale = Math.min(310 / starterBounds.width, 350 / starterBounds.height);
       const box = { x: 256 - starterBounds.width * scale / 2, y: 460 - starterBounds.height * scale,
@@ -66,10 +72,15 @@ export function createTribeArt(definitions, assetSource) {
   }
 
   function sprite(tribe, attributes, layer) {
-    const key = [tribe, layer, ...["strength", "feet", "antenna", "lifespan"].map(name => attributes[name] || 0)].join(":");
+    const key = [tribe, layer, attributes.strength ?? attributes.arms ?? 0,
+      ...["feet", "antenna", "lifespan", "butchery"].map(name => attributes[name] || 0)].join(":");
     if (sprites.has(key)) return sprites.get(key);
     const unit = units.get(tribe);
     if (!unit || unit instanceof Promise) throw new Error("부족 유닛을 불러오는 중입니다.");
+    if (hasTribeAttributes(attributes)) {
+      const portrait = attributePortrait(tribe, attributes, unit.box, layer);
+      if (portrait) { sprites.set(key, portrait); return portrait; }
+    }
     const surface = document.createElement("canvas");
     surface.width = surface.height = 512;
     const context = surface.getContext("2d");
@@ -105,19 +116,42 @@ export function createTribeArt(definitions, assetSource) {
     return surface;
   }
 
-  function drawPreview(context, art, tribe, time, width, height, reducedMotion) {
+  function drawPreview(context, art, tribe, time, width, height, reducedMotion, scale) {
     context.clearRect(0, 0, width, height);
     const crop = art.nestBounds;
-    const scale = Math.min(width * .72 / crop.width, height * .73 / crop.height);
-    const nestWidth = crop.width * scale, nestHeight = crop.height * scale;
+    const nestWidth = art.nestWidth * scale, nestHeight = art.nestHeight * scale;
     context.drawImage(art.nest, crop.x, crop.y, crop.width, crop.height,
       (width - nestWidth) / 2, height * .76 - nestHeight, nestWidth, nestHeight);
     const frame = reducedMotion ? 0 : Math.floor(time / tribe.frameMs) % tribe.frames;
-    const size = Math.min(height * .85, width * .50);
+    const size = art.unitSize * scale;
     const frameSize = imageFrameSize(tribe.idle, 512);
     context.drawImage(art.idle, frame % 4 * frameSize, Math.floor(frame / 4) * frameSize, frameSize, frameSize,
       width * .62 - size / 2, height * .97 - size * .875, size, size);
   }
 
-  return { preparePreview, prepareUnit, sprite, bounds, drawPreview };
+  function attributePortrait(tribe, appearance, box, layer) {
+    return attributes.portrait(tribe, appearance, 512, 512, box, layer);
+  }
+
+  function animationFrame(agent, source, animation, index, action, time, pose) {
+    return attributes.frame(agent.tribe, agent.appearanceAttributes || agent.attributes || {}, source, animation, index, action, time, pose);
+  }
+
+  function animationPose(agent, pose, time) {
+    return attributes.pose(agent, pose, time);
+  }
+
+  function constructionFrame(agent, base, time) {
+    const animation = { frameSize: 512, columns: 1, pivotX: 256, pivotY: 460 };
+    const sprite = attributes.frame(agent.tribe, agent.appearanceAttributes || agent.attributes, base.sprite, animation, 0,
+      base.action, time, { sourceAction: "idle", sampleTime: time, motionPhase: base.phase, motionBlend: 1 },
+      { sprite: base.sprite, track: base.track, reference: base.track, key: base.artKey ?? base.frame, absorption: base.absorption || 0 });
+    if (!sprite) return base.sprite;
+    const surface = document.createElement("canvas"); surface.width = surface.height = 512;
+    const padding = Math.ceil(512 / 6);
+    surface.getContext("2d").drawImage(sprite, padding, padding, 512, 512, 0, 0, 512, 512);
+    return surface;
+  }
+
+  return { preparePreview, prepareUnit, sprite, bounds, drawPreview, animationFrame, animationPose, constructionFrame };
 }

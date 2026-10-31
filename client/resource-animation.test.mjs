@@ -13,7 +13,8 @@ function rendering() {
   const sprite = name => ({ name, complete: true, naturalWidth: 512, naturalHeight: 512 });
   const context = createContext({
     state: { simSeconds: .1 }, AGENT_HEIGHT: .7, idleMotion: { matches: false },
-    displayedAgent: value => value, foodDeliveryPose: () => ({}),
+    displayedAgent: value => value, foodDeliveryPose: () => ({}), constructionUnitFrame: () => null,
+    tribeArt: { animationPose: (agent, pose) => pose },
     agentBodyPose: () => ({ pivot: .94, scaleX: 1, scaleY: 1 }), agentWalkPose: () => null,
     agentSprite: () => sprite("body"), drawAgentHead() {}, drawAgentFeet() {}, drawAgentTail() {},
     drawAgentAttack: () => false, drawAgentMovement: () => false, drawSelectionOutline() {},

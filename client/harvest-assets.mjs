@@ -12,7 +12,6 @@ const drawnAnimations = Object.freeze(Object.fromEntries([
 }])));
 
 export const RESOURCE_HARVEST_ANIMATIONS = Object.freeze([
-  ["honey-mushrooms", 8],
   ["tree", 4],
   ["dew", 4],
   ["pebbles", 4],

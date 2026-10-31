@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
+import { createStateEncoder } from "./state-delta.mjs";
 
 const workerSource = readFileSync(new URL("./worker.mjs", import.meta.url), "utf8").replace(/^import .*;\r?\n/gm, "");
 const audioSource = readFileSync(new URL("./audio.js", import.meta.url), "utf8");
@@ -29,7 +30,7 @@ function worker() {
     async setting(key) { return settings.get(key); },
     async setSetting(key, value) { settings.set(key, value); }
   };
-  const context = createContext({
+  const context = createContext({ createStateEncoder,
     Date: { now: () => now },
     performance: { now: () => cpu, timeOrigin: 1000000 },
     crypto: { getRandomValues: values => values.fill(1) },

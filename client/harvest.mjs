@@ -1,5 +1,24 @@
 const POST_SECONDS = 0.6;
 
+export function corpseResourceDrops(corpse) {
+  const amount = Math.max(0, corpse.amount || 0);
+  const initialAmount = Math.max(amount, corpse.initialAmount || amount);
+  const size = 0.18 * (0.75 + 0.25 * amount / (initialAmount || 1));
+  return [[-0.14, 0.02], [0.08, 0.05], [-0.02, -0.08], [0.19, -0.04], [-0.17, -0.11]]
+    .slice(0, Math.min(5, Math.ceil(amount)))
+    .map(([x, y]) => ({ x: corpse.x + 0.98 + x, y: corpse.y + 0.94 + y, size }));
+}
+
+export function corpseHarvestOffset(agent, cell, time) {
+  const collecting = agent.mode === "harvest" && cell?.kind === "corpse";
+  const age = collecting ? time - agent.harvestStarted :
+    agent.harvestResult?.kind === "corpse" ? time - agent.harvestResult.completedAt : Infinity;
+  const progress = Math.max(0, Math.min(1, age / 0.25));
+  const eased = progress * progress * (3 - 2 * progress);
+  const amount = collecting ? eased : 1 - eased;
+  return { x: 0.48 * amount, y: 0.22 * amount };
+}
+
 function clamp(value, minimum, maximum) {
   return Math.max(minimum, Math.min(maximum, value));
 }

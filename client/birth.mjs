@@ -2,10 +2,11 @@ import { imageAnimation, imageScale } from "./image-geometry.mjs";
 import { SPORE_BIRTH_DURATIONS, SPORE_BIRTH_DURATION, SPRING_BIRTH_DURATIONS, SPRING_BIRTH_DURATION, PEBBLE_BIRTH_DURATIONS, PEBBLE_BIRTH_DURATION } from "../server/birth.mjs";
 
 export const SPORE_BIRTH_ANIMATION = Object.freeze(imageAnimation({
-  image: "DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/birth.webp",
+  image: "DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/birth-unit.webp",
   nest: "DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/nest-stationary.png",
-  frameSize: 576, columns: 4, frameCount: 22, pivotX: 400, pivotY: 500,
-  unitHeight: 179, detachAt: .82, contactAt: 1.46, firstUnitFrame: 9,
+  frameSize: 576, columns: 4, frameCount: 22, pivotX: 400, pivotY: 486,
+  outletX: 450, outletY: 400,
+  unitHeight: 179, detachAt: .82, contactAt: 2.10, audioAt: .45, firstUnitFrame: 2,
   nestBounds: Object.freeze({ x: 37, y: 77, width: 459, height: 344 }),
   duration: SPORE_BIRTH_DURATION, durationsMs: SPORE_BIRTH_DURATIONS
 }));
@@ -21,8 +22,115 @@ export function sporeBirthPlacement(elapsed, outlet, target, height) {
   const age = Math.max(0, Math.min(1, (elapsed - animation.detachAt) / (animation.contactAt - animation.detachAt)));
   const progress = age * age * (3 - 2 * age);
   const rootX = outlet.x + (target.x - outlet.x) * progress;
-  const rootY = outlet.y + (target.y - outlet.y) * progress;
-  return { frame, rootX, rootY, scale: height / (animation.unitHeight * imageScale(animation.image)), unitVisible: elapsed >= animation.detachAt };
+  const apexY = Math.min(outlet.y, target.y) - 1;
+  const rise = Math.min(1, age / .25), fall = Math.max(0, (age - .25) / .75);
+  const rootY = age < .25 ? outlet.y + (apexY - outlet.y) * (1 - (1 - rise) ** 2) :
+    apexY + (target.y - apexY) * fall * fall;
+  return { frame, rootX, rootY, scale: height / (animation.unitHeight * imageScale(animation.image)), unitVisible: frame >= animation.firstUnitFrame };
+}
+
+function birthLandingPulse(elapsed, contactAt) {
+  const age = elapsed - contactAt;
+  const keys = [[-.035, 0], [.02, 1], [.14, -.42], [.30, .16], [.52, 0]];
+  if (age <= keys[0][0] || age >= keys.at(-1)[0]) return 0;
+  for (let index = 1; index < keys.length; index++) {
+    const previous = keys[index - 1], next = keys[index];
+    if (age > next[0]) continue;
+    const progress = (age - previous[0]) / (next[0] - previous[0]);
+    return previous[1] + (next[1] - previous[1]) * progress * progress * (3 - 2 * progress);
+  }
+  return 0;
+}
+
+export function sporeBirthMotion(elapsed) {
+  const animation = SPORE_BIRTH_ANIMATION;
+  const flight = Math.max(0, Math.min(1, (elapsed - animation.detachAt) / (animation.contactAt - animation.detachAt)));
+  const turn = Math.max(0, Math.min(1, (elapsed - animation.detachAt) / (animation.contactAt - .28 - animation.detachAt)));
+  const landing = Math.max(0, elapsed - animation.contactAt);
+  const settle = Math.max(0, 1 - landing / .28);
+  const impact = birthLandingPulse(elapsed, animation.contactAt);
+  return { rotation: flight < 1 ? Math.PI * 4 * turn * turn * (3 - 2 * turn) :
+    Math.sin(landing * 24) * .12 * settle * settle,
+    scaleX: 1 + impact * .10, scaleY: 1 - impact * .08 };
+}
+
+export function springBirthMotion(elapsed) {
+  const animation = SPRING_BIRTH_ANIMATION;
+  if (elapsed < animation.detachAt) {
+    const age = Math.max(0, elapsed / animation.detachAt);
+    const pulse = Math.sin(age * Math.PI) * Math.sin(age * Math.PI * 3);
+    return { scaleX: 1 + pulse * .055, scaleY: 1 - pulse * .035,
+      bulge: Math.sin(age * Math.PI) * .10, sway: pulse * .025,
+      anchorX: animation.outletX, anchorY: animation.outletY };
+  }
+  if (elapsed < animation.contactAt) {
+    const age = (elapsed - animation.detachAt) / (animation.contactAt - animation.detachAt);
+    const stretch = Math.sin(age * Math.PI);
+    const impact = birthLandingPulse(elapsed, animation.contactAt);
+    return { scaleX: 1 - stretch * .12 + impact * .27, scaleY: 1 + stretch * .22 - impact * .22,
+      bulge: stretch * .08 + impact * .12, sway: (Math.sin(age * Math.PI * 2) + impact) * .035,
+      anchorX: animation.pivotX, anchorY: animation.pivotY };
+  }
+  const bounce = birthLandingPulse(elapsed, animation.contactAt);
+  return { scaleX: 1 + bounce * .27, scaleY: 1 - bounce * .22,
+    bulge: bounce * .12, sway: bounce * .035,
+    anchorX: animation.pivotX, anchorY: animation.pivotY };
+}
+
+export function drawSpringBirthSurface(ctx, sprite, source, target, motion) {
+  const animation = SPRING_BIRTH_ANIMATION;
+  const scale = target.size / source.size;
+  const padding = (source.size - animation.frameSize) / 2;
+  const anchorX = motion.anchorX + padding, anchorY = motion.anchorY + padding;
+  const centerX = animation.pivotX + padding;
+  ctx.save();
+  ctx.translate(target.x + anchorX * scale, target.y + anchorY * scale);
+  ctx.scale(motion.scaleX, motion.scaleY);
+  const step = Math.max(1, Math.round(animation.frameSize / 120));
+  for (let row = 0; row < source.size; row += step) {
+    const height = Math.min(step, source.size - row);
+    const depth = Math.max(0, Math.min(1, (row - padding - animation.pivotY + animation.height) / animation.height));
+    const width = 1 + motion.bulge * Math.sin(depth * Math.PI);
+    const shift = motion.sway * animation.height * Math.sin(depth * Math.PI * 2);
+    ctx.drawImage(sprite, source.x, source.y + row, source.size, height,
+      ((-centerX) * width + centerX - anchorX + shift) * scale, (row - anchorY) * scale,
+      source.size * scale * width, height * scale);
+  }
+  ctx.restore();
+}
+
+export function drawSpringBirthWater(ctx, x, floor, cell, elapsed) {
+  const age = elapsed - SPRING_BIRTH_ANIMATION.contactAt;
+  if (age < 0 || age >= .52) return;
+  const progress = age / .52;
+  const fade = (1 - progress) ** 2;
+  ctx.save();
+  ctx.globalAlpha *= fade;
+  ctx.strokeStyle = "#a4eced";
+  ctx.lineWidth = Math.max(.5, cell * .006);
+  for (const delay of [0, .14]) {
+    const ripple = (age - delay) / .38;
+    if (ripple < 0 || ripple > 1) continue;
+    ctx.beginPath();
+    ctx.ellipse(x, floor + cell * .008, cell * (.10 + ripple * .23), cell * (.025 + ripple * .045), 0, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+  for (let index = 0; index < 6; index++) {
+    const side = index % 2 ? -1 : 1;
+    const travel = cell * (.07 + progress * (.16 + index * .018));
+    const lift = Math.sin(Math.min(1, progress * 1.35) * Math.PI) * cell * (.06 + index % 3 * .025);
+    const radius = cell * (.016 + index % 3 * .004) * (1 - progress * .6);
+    const px = x + side * travel, py = floor - lift;
+    const fill = ctx.createRadialGradient(px - radius * .3, py - radius * .4, 0, px, py, radius);
+    fill.addColorStop(0, "#ecffff");
+    fill.addColorStop(.45, "#a1eeed");
+    fill.addColorStop(1, "#259dbb");
+    ctx.fillStyle = fill;
+    ctx.beginPath();
+    ctx.ellipse(px, py, radius * (1 + progress * .3), radius * (1 - progress * .2), 0, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.restore();
 }
 
 export function sporeBirthPixels(scene, nest) {
@@ -43,7 +151,7 @@ export function sporeBirthPixels(scene, nest) {
 export const SPRING_BIRTH_ANIMATION = Object.freeze(imageAnimation({
   image: "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp",
   frameSize: 512, columns: 4, frameCount: 13, pivotX: 320, pivotY: 448,
-  outletX: 86, outletY: 105, height: 224, detachAt: .53, contactAt: .79,
+  outletX: 86, outletY: 105, height: 224, detachAt: .53, contactAt: .79, audioAt: .70,
   duration: SPRING_BIRTH_DURATION, durationsMs: SPRING_BIRTH_DURATIONS
 }));
 

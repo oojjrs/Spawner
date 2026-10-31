@@ -13,13 +13,16 @@ import { createHarvestPlayback, harvestPlaybackPose } from "./harvest.mjs";
 
 test("기획서의 자원 원화·운반물과 실행 참조가 일치하고 삭제한 애니메이션은 등록하지 않는다", () => {
   const design = readFileSync(new URL("../Design.html", import.meta.url), "utf8");
+  const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
+  const corpseImage = source.match(/beetleCorpseSprite\.src = assetSource\("([^"]+)"\)/)[1];
   for (const definition of RESOURCE_TYPES) {
     const key = definition.key;
     const aliases = [key, key === "tree" ? "wood" : key === "honey-mushrooms" ? "basic-mushroom" : key];
     const row = aliases.map(alias => design.match(new RegExp('<tr data-resource="' + alias + '"[^>]*>[^]*?</tr>'))).find(Boolean);
     assert.ok(row, key);
     const sources = [...row[0].matchAll(/<img[^>]+src="([^"]+)"/g)].map(match => match[1]);
-    assert.equal(definition.image, sources[0], key + " original");
+    assert.equal(["meat", "carapace"].includes(key) ? corpseImage : definition.image, sources[0], key + " original");
+    assert.ok(existsSync(sources[0]));
     assert.equal(definition.carryImage, sources[1], key + " carry");
     assert.ok(existsSync(definition.image));
     assert.ok(existsSync(definition.carryImage));
@@ -95,7 +98,7 @@ function fixture(resourceType, amount, carapaceAmount) {
   environment.games.set(colony.ownerId, game);
   const saved = JSON.parse(game.save());
   saved.state.agents.splice(1);
-  Object.assign(saved.state.agents[0], { x: 46, y: 42, renderFromX: 46, renderFromY: 42, slots: resourceType === "meat" ? ["butchery"] : ["strength"],
+  Object.assign(saved.state.agents[0], { x: 46, y: 42, renderFromX: 46, renderFromY: 42, slots: resourceType === "meat" ? ["butchery"] : resourceType === "carapace" ? ["piercing"] : ["strength"],
     carrying: 0, carryingType: null, birth: null, bornAt: 120, mode: "approach", moveStartedAt: 0,
     moveDuration: 0, moveBudget: 0, harvestResult: null, decisionPending: null, nextDecisionAt: 1000,
     utility: { action: "collect", target: { x: 46, y: 42, key }, route: [{ x: 46, y: 42 }], plannedCargo: 2 } });
@@ -127,13 +130,13 @@ test("목재·이슬을 실제 수확하고 소진한 나무는 시야 정보와
   }
 });
 
-test("딱정벌레 사체의 고기를 회수한 뒤 갑각을 별도 재료로 회수한다", () => {
+test("딱정벌레의 양분과 갑각을 따로 회수하며 사체 모습을 유지한다", () => {
   const f = fixture("meat", 1, 4);
   advance(f, 0); advance(f, 1); advance(f, 2.501);
   assert.equal(f.agent.carryingType, "meat");
   assert.equal(f.agent.carrying, 1);
   assert.equal(f.cell.resourceType, "carapace");
-  assert.equal(f.cell.kind, "resource");
+  assert.equal(f.cell.kind, "corpse");
   assert.equal(f.cell.amount, 4);
   const shell = fixture("carapace", 1, 0);
   advance(shell, 0); advance(shell, 1); advance(shell, 3.001);
@@ -179,7 +182,7 @@ test("소진 나무 위치를 저장·복원하고 같은 칸이 사체로 바�
 test("기획서 미리보기와 실행 맵이 같은 최신 생성 로직을 사용한다", () => {
   const html = readFileSync(new URL("../Design.html", import.meta.url), "utf8");
   const context = {};
-  runInNewContext(html.match(/<script id="design-world-model">([^]*?)<\/script>/)[1], context);
+  runInNewContext(html.match(/<script id="design-world-model"[^>]*>([^]*?)<\/script>/)[1], context);
   const preview = context.SpawnerDesignWorld.generateWorld(1669442258);
   const runtime = generateMapWorld(1669442258);
   const hash = world => createHash("sha256").update(JSON.stringify([

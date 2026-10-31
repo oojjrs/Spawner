@@ -2,6 +2,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
+import { UNIT_ANIMATIONS } from "./unit-animation.mjs";
+import { SPORE_BIRTH_ANIMATION } from "./birth.mjs";
 
 const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
 
@@ -17,7 +19,7 @@ function movement() {
     constructor() { this.complete = true; this.naturalWidth = 2048; }
     async decode() {}
   }
-  const context = createContext({ Image, assetSource: path => path,
+  const context = createContext({ Image, Spawner: { UNIT_ANIMATIONS }, assetSource: path => path,
     state: { simSeconds: .5 }, idleMotion: { matches: false }, AGENT_JUMP_PREPARATION: .2, AGENT_HEIGHT: .7,
     clamp: (value, low, high) => Math.max(low, Math.min(high, value)),
     displayedAgent: agent => agent, agentBirthPose: () => null,
@@ -38,11 +40,12 @@ function movement() {
   return { context, draws, translations };
 }
 
-test("몽돌·포자버섯·샘방울은 승인된 이동 원본으로 지면을 따라 이동한다", async () => {
+test("몽돌·포자버섯·샘방울은 현재 이동 원본으로 지면을 따라 이동한다", async () => {
   const render = movement();
-  for (const [tribe, file] of [["pebble", "roll-v2/roll-v2"], ["spore", "walk-v2/walk-v2"], ["spring", "flow-v4/flow-v4"]]) {
+  for (const [tribe, file] of [["pebble", "walk-in-place-v1/walk"], ["spore", "walk-v2/walk-v2"], ["spring", "flow-v4/flow-v4"]]) {
     const metadata = JSON.parse(readFileSync(new URL("../DesignAssets/Tribes/" + tribe + "/AnimationStudies/" + file + ".json", import.meta.url), "utf8"));
-    assert.equal(metadata.status, "approved");
+    assert.equal(metadata.runtimeAtlas, UNIT_ANIMATIONS[tribe].walk.image);
+    assert.equal(metadata.rootMotion, false);
     await render.context.prepareAgentMovement({ key: tribe });
     const agent = { id: tribe, tribe, attributes: {}, x: 1, y: 2, renderFromX: 0, renderFromY: 0,
       moveStartedAt: 0, moveDuration: 1, stepCount: 1, facing: 1, carrying: 0 };
@@ -82,7 +85,7 @@ function gameAudio() {
   const context = createContext({ state, connection: { active: true, online: true }, audioTime: 0,
     audio: { available: () => true, play: name => played.push(name), setHarvest: volumes => harvests.push(new Map(volumes)) },
     SpawnerCombatAudio: { update: () => [] }, combatAudio: {},
-    Spawner: { resourceTypeForCell: food => food.resourceType || (food.kind === "corpse" ? "meat" : "honey-mushrooms") },
+    Spawner: { SPORE_BIRTH_ANIMATION, resourceTypeForCell: food => food.resourceType || (food.kind === "corpse" ? "meat" : "honey-mushrooms") },
     worldMap: {}, foodCellMap: new Map(), foodCellAt: () => null,
     displayedAgent: unit => unit, interpolatedAgentPosition: unit => unit, audioVolume: () => 1,
     agentBirthPose: () => null, agentAudio: new Map(), deliveryAudio: new Map(), foodDeliveries: new Map(),

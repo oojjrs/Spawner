@@ -21,7 +21,7 @@ function rendering(action) {
     state: { simSeconds: .1 }, AGENT_HEIGHT: .7, idleMotion: { matches: false },
     displayedAgent: value => value, foodDeliveryPose: () => ({}),
     agentBodyPose: () => ({ pivot: 460 / 512, scaleX: 1, scaleY: 1 }), agentWalkPose: () => null,
-    agentBirthPose: () => null,
+    agentBirthPose: () => null, constructionUnitFrame: () => null,
     agentHeadPose: () => ({ leftRotation: 0, rightRotation: 0, leftScaleY: 1, rightScaleY: 1 }),
     agentSprite: (agent, layer) => sprite(layer), drawAgentMovement: () => false,
     sproutCombatFrame: () => sheet, agentAttackFrame: () => -1,

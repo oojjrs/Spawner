@@ -1,4 +1,8 @@
 export const IMAGE_SCALES = Object.freeze({
+  "DesignAssets/Animations/Beetle/attack-right.webp": [
+    0.673828125,
+    0.673828125
+  ],
   "DesignAssets/Animations/Beetle/atlas.webp": [
     0.673828125,
     0.673828125
@@ -42,10 +46,6 @@ export const IMAGE_SCALES = Object.freeze({
   "DesignAssets/Animations/CreatureIdleV4/bundle-snail/idle.webp": [
     0.77734375,
     0.77734375
-  ],
-  "DesignAssets/Animations/food-mushroom-pile-harvest.png": [
-    0.2109375,
-    0.2109375
   ],
   "DesignAssets/Animations/Resources/FertileSoil/harvest-sheet.png": [
     0.890625,
@@ -207,14 +207,6 @@ export const IMAGE_SCALES = Object.freeze({
     0.03827751196172249,
     0.03827751196172249
   ],
-  "DesignAssets/Foods/food-mushroom-pile.png": [
-    0.1689453125,
-    0.1689453125
-  ],
-  "DesignAssets/Foods/food-mushroom-single.png": [
-    0.05078125,
-    0.05078125
-  ],
   "DesignAssets/Nests/nest-stage-01.png": [
     0.3271484375,
     0.3271484375
@@ -291,6 +283,10 @@ export const IMAGE_SCALES = Object.freeze({
     0.2109375,
     0.2109375
   ],
+  "DesignAssets/Terrain/ford-ground.png": [
+    0.2109375,
+    0.2109375
+  ],
   "DesignAssets/Terrain/forest-ground.png": [
     0.2109375,
     0.2109375
@@ -354,6 +350,10 @@ export const IMAGE_SCALES = Object.freeze({
   "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp": [
     0.4375,
     0.4375
+  ],
+  "DesignAssets/Tribes/pebble/AnimationStudies/walk-in-place-v1/walk.webp": [
+    0.20703125,
+    0.20703125
   ],
   "DesignAssets/Tribes/pebble/AnimationStudies/roll-v2/roll-v2.webp": [
     0.20703125,
@@ -508,8 +508,8 @@ export const IMAGE_SCALES = Object.freeze({
     0.041044776119402986
   ],
   "DesignAssets/Units/Parts/lifespan-1.png": [
-    0.09863013698630137,
-    0.09792284866468842
+    0.43333333333333335,
+    0.43209876543209874
   ],
   "DesignAssets/Units/Parts/strength-1.png": [
     0.06914893617021277,
@@ -526,5 +526,6 @@ export const IMAGE_SCALES = Object.freeze({
   "DesignAssets/Units/starter-sprout-bean.png": [
     0.09090909090909091,
     0.09172661870503597
-  ]
+  ],
+  "DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/birth-unit.webp": [0.3333333333333333, 0.3333333333333333]
 });

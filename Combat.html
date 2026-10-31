@@ -1,0 +1,2239 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Spawner · 전투 실험실</title><style>:root{color-scheme:light;font-family:"Segoe UI","Malgun Gothic",sans-serif;color:#25392f;background:#eef1e9;font-synthesis:none}*{box-sizing:border-box}body{margin:0}button,select,input{font:inherit}button,select,input{border:1px solid #c9d2c2;border-radius:10px;background:#fff;color:inherit;min-height:42px;padding:9px 12px}button{cursor:pointer;font-weight:650}button:hover{border-color:#6e8d5f;background:#f4f7ef}button:disabled{opacity:.42;cursor:default}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #a2bd79;outline-offset:2px}main{width:min(1060px,100%);padding:32px 24px;margin:auto}header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}h1{font-size:28px;letter-spacing:-1.4px;margin:2px 0 8px}.eyebrow{font-size:11px;font-weight:800;letter-spacing:2.4px;color:#71825a}p{margin:0;color:#6d796e;font-size:13px}.status{padding:12px 18px;border-radius:24px;background:#dee8cf;color:#45602e;font-weight:750;white-space:nowrap}.status[data-state=right]{background:#f0dece;color:#895e3c}.status[data-state=draw]{background:#e0e2e0;color:#5f6462}.presets{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}.presets button{min-height:32px;font-size:12px;padding:6px 11px;background:transparent}.arena{display:grid;grid-template-columns:1fr 56px 1fr;align-items:stretch}.versus{display:grid;place-items:center;text-align:center;color:#89937e;font-size:13px;font-weight:850;letter-spacing:1px}.fighter{background:#fff;border:1px solid #d6ddcf;border-radius:20px;padding:22px;box-shadow:0 6px 20px #24351a04}.fighter select{width:100%;font-size:18px;font-weight:750;background:#f8faf5;border-color:transparent}.fighter canvas{display:block;width:260px;max-width:100%;height:auto;margin:0 auto}.fighter.fallen canvas{filter:grayscale(1)}.hp{display:flex;align-items:baseline;justify-content:space-between;font-size:12px;color:#70806c}.hp strong{font-size:22px;color:#334f2b;font-variant-numeric:tabular-nums}.bar{height:8px;border-radius:6px;background:#e7eddf;overflow:hidden;margin:7px 0 20px}.bar>i{display:block;height:100%;background:#83a662;transition:width .15s}.right .bar>i{background:#bf9675}.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}.stats label{display:grid;gap:6px;font-size:12px;color:#687962}.stats input{width:100%;font-weight:750;font-size:18px}.effective{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-top:16px;padding:12px 0;border-bottom:1px solid #e7eddf;font-size:12px;color:#58704b}.effective strong{font-size:24px;margin-left:5px;color:#35562c;font-variant-numeric:tabular-nums}.effective small{white-space:nowrap;color:#94734f}.estimate{display:flex;justify-content:space-between;margin-top:16px;font-size:12px;color:#73816d}.estimate b{white-space:nowrap;color:#3d5830;font-size:15px}.estimate small{font-size:11px;color:#8a9484}.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin:20px 0 14px}.controls label{display:grid;gap:5px;font-size:11px;color:#77836f}.controls input{width:84px}.actions{display:flex;flex-wrap:wrap;gap:9px;padding-top:16px;border-top:1px solid #d4ddcc}.primary{background:#36582f;color:white;border-color:#36582f}.primary:hover{background:#456a3c;color:white}#repeat{margin-left:auto}.summary{min-height:34px;display:flex;align-items:center;justify-content:space-between;font-size:12px;gap:16px;color:#75836b;margin:12px 0}.summary strong{color:#384e30}.ledger{border:1px solid #d3ddcb;border-radius:14px;background:#fff;overflow:hidden}.ledger-head{display:flex;justify-content:space-between;padding:15px 18px;background:#f6f8f1;border-bottom:1px solid #e2e8dc;align-items:center;font-size:13px}.ledger-head span{font-size:11px;color:#7d8975}.scroll{max-height:244px;overflow:auto}table{border-collapse:collapse;width:100%;font-size:12px;font-variant-numeric:tabular-nums;white-space:nowrap}th,td{padding:11px 15px;border-bottom:1px solid #eef1e8;text-align:left}th{font-weight:600;color:#819073;background:#fafbf8;position:sticky;top:0}tbody tr:last-child td{border-bottom:0}.empty{text-align:center;padding:28px;color:#94a087}footer{display:flex;justify-content:space-between;margin-top:16px;font-size:11px;color:#8b9583}#batch{color:#466634;font-weight:600}@media(max-width:650px){main{padding:20px 14px}header{align-items:start}h1{font-size:24px}.status{font-size:12px;padding:9px 12px}.arena{grid-template-columns:1fr 24px 1fr}.fighter{padding:12px;border-radius:14px}.fighter select{font-size:14px;padding:8px 4px}.stats{gap:8px}.stats input{padding:8px;font-size:16px}.effective{flex-wrap:wrap;gap:4px}.estimate{display:block;line-height:1.9}.estimate small{display:block}.controls{gap:8px}.controls select{padding:7px 9px;font-size:12px}.actions button{font-size:12px;padding:8px 10px}#repeat{margin-left:0}.summary{align-items:start;flex-direction:column;gap:5px}.presets{gap:5px}.presets button{font-size:11px}.hp strong{font-size:18px}th,td{padding:10px}footer{gap:8px;line-height:1.6}p{font-size:11px}}
+</style></head>
+<body><main><header><div><div class="eyebrow">SPAWNER / COMBAT LAB</div><h1>전투 실험실</h1><p>교전 시작 체력으로 피해 확정 · 각 명중 시 체력 차감</p></div><output id="status" class="status" aria-live="polite">대결 준비</output></header>
+<nav class="presets" aria-label="빠른 대결"><button data-pair="bean,talon-owl">새싹콩 ↔ 갈퀴부엉이</button><button data-pair="bean,bean">새싹콩 ↔ 새싹콩</button><button data-pair="shadow-weasel,vine-turtle">그림자족제비 ↔ 넝쿨거북</button><button data-pair="white-paw,walking-forest">흰발 ↔ 걸어가는 산</button></nav>
+<div class="arena"><section class="fighter left" id="leftCard" aria-label="왼쪽">
+  <select id="leftUnit" aria-label="왼쪽 유닛"></select><canvas id="leftArt" width="260" height="200" aria-label="왼쪽 유닛 모습"></canvas>
+  <div class="hp"><span>현재 체력</span><strong id="leftHp">100 / 100</strong></div><div class="bar"><i id="leftBar"></i></div>
+  <div class="stats"><label>기본 전투력<input id="leftStrength" type="number" min="0" max="100" step="1"></label><label>시작 체력<input id="leftHealth" type="number" min="1" max="100" step="1"></label></div>
+  <div class="effective"><span>현재 전투력 <strong id="leftEffective"></strong></span><small>부상 −<b id="leftPenalty"></b></small></div>
+  <div class="estimate"><span><span id="leftDamageLabel">현재 체력 기준 피해</span> <b id="leftDamage"></b></span><small>평균 <b id="leftExpected"></b></small></div>
+</section><div class="versus">VS</div><section class="fighter right" id="rightCard" aria-label="오른쪽">
+  <select id="rightUnit" aria-label="오른쪽 유닛"></select><canvas id="rightArt" width="260" height="200" aria-label="오른쪽 유닛 모습"></canvas>
+  <div class="hp"><span>현재 체력</span><strong id="rightHp">100 / 100</strong></div><div class="bar"><i id="rightBar"></i></div>
+  <div class="stats"><label>기본 전투력<input id="rightStrength" type="number" min="0" max="100" step="1"></label><label>시작 체력<input id="rightHealth" type="number" min="1" max="100" step="1"></label></div>
+  <div class="effective"><span>현재 전투력 <strong id="rightEffective"></strong></span><small>부상 −<b id="rightPenalty"></b></small></div>
+  <div class="estimate"><span><span id="rightDamageLabel">현재 체력 기준 피해</span> <b id="rightDamage"></b></span><small>평균 <b id="rightExpected"></b></small></div>
+</section></div>
+<div class="controls"><label>첫 공격<select id="first"><option value="left">왼쪽부터</option><option value="right">오른쪽부터</option></select></label><label>피해 계산<select id="damage"><option value="mean">평균 피해 고정</option><option value="random">난수 80–120%</option></select></label><label>난수 시드<input id="seed" type="number" value="1" min="0" max="4294967295"></label><label>재생 배속<select id="playback"><option value="1" selected>1배</option><option value="4">4배</option><option value=".5">0.5배</option></select></label></div>
+<div class="actions"><button class="primary" id="step">1회 타격</button><button id="run">자동 전투</button><button id="finish">끝까지</button><button id="reset">초기화</button><button id="repeat">100판 비교</button></div>
+<div class="summary"><span><strong id="hits">0</strong>회 타격 · <span id="clock">0.00초</span> · <span id="phase">대결 준비</span></span><output id="batch" aria-live="polite"></output></div>
+<section class="ledger" aria-label="타격 기록"><div class="ledger-head"><strong>타격 기록</strong><span>받은 피해 → 남은 체력</span></div><div class="scroll"><table><thead><tr><th>타격</th><th>구분</th><th>공격자</th><th>교전 시작 전투력</th><th>왼쪽</th><th>오른쪽</th><th>시각</th></tr></thead><tbody id="history"></tbody></table></div></section>
+<footer><span>게임 전투 모듈 직접 사용 · 전체 23종</span><span>조절한 수치는 이 대결에만 적용</span></footer></main><script>(() => {
+const modules = Object.create(null);
+modules["server/encounter-types.mjs"] = (() => {
+const ENCOUNTER_TYPES = Object.freeze([
+  {
+    "key": "flower-tail-bird",
+    "name": "꽃꼬리새",
+    "image": "DesignAssets/CreatureConcepts/v3/flower-tail-bird.png",
+    "populationLimit": 3,
+    "respawnSeconds": 180,
+    "firstSpawnAt": 0,
+    "guaranteedAt": 0,
+    "unique": false,
+    "hostile": false,
+    "flying": true
+  },
+  {
+    "key": "dew-rabbit",
+    "name": "이슬토끼",
+    "image": "DesignAssets/CreatureConcepts/v3/dew-rabbit.png",
+    "populationLimit": 3,
+    "respawnSeconds": 240,
+    "firstSpawnAt": 0,
+    "guaranteedAt": 0,
+    "unique": false,
+    "hostile": false,
+    "flying": false
+  },
+  {
+    "key": "soil-mole",
+    "name": "흙두더지",
+    "image": "DesignAssets/CreatureConcepts/v3/soil-mole.png",
+    "populationLimit": 1,
+    "respawnSeconds": 300,
+    "firstSpawnAt": 0,
+    "guaranteedAt": 0,
+    "unique": false,
+    "hostile": false,
+    "flying": false
+  },
+  {
+    "key": "bundle-snail",
+    "name": "보따리달팽이",
+    "image": "DesignAssets/CreatureConcepts/v3/bundle-snail.png",
+    "populationLimit": 1,
+    "respawnSeconds": 480,
+    "firstSpawnAt": 0,
+    "guaranteedAt": 0,
+    "unique": false,
+    "hostile": false,
+    "flying": false
+  },
+  {
+    "key": "cotton-sheep",
+    "name": "솜양",
+    "image": "DesignAssets/CreatureConcepts/v3/cotton-sheep.png",
+    "populationLimit": 4,
+    "respawnSeconds": 300,
+    "firstSpawnAt": 0,
+    "guaranteedAt": 0,
+    "unique": false,
+    "hostile": false,
+    "flying": false
+  },
+  {
+    "key": "rolling-acorn",
+    "name": "굴림도토리",
+    "image": "DesignAssets/CreatureConcepts/v3/rolling-acorn.png",
+    "populationLimit": 3,
+    "respawnSeconds": 180,
+    "firstSpawnAt": 0,
+    "guaranteedAt": 0,
+    "unique": false,
+    "hostile": false,
+    "flying": false
+  },
+  {
+    "key": "soil-boar",
+    "name": "흙멧돼지",
+    "image": "DesignAssets/CreatureConcepts/v3/soil-boar.png",
+    "populationLimit": 2,
+    "respawnSeconds": 360,
+    "firstSpawnAt": 0,
+    "guaranteedAt": 0,
+    "unique": false,
+    "hostile": true,
+    "flying": false
+  },
+  {
+    "key": "bubble-toad",
+    "name": "방울두꺼비",
+    "image": "DesignAssets/CreatureConcepts/v3/bubble-toad.png",
+    "populationLimit": 2,
+    "respawnSeconds": 300,
+    "firstSpawnAt": 0,
+    "guaranteedAt": 0,
+    "unique": false,
+    "hostile": true,
+    "flying": false
+  },
+  {
+    "key": "vine-turtle",
+    "name": "넝쿨거북",
+    "image": "DesignAssets/CreatureConcepts/v3/vine-turtle.png",
+    "populationLimit": 1,
+    "respawnSeconds": 600,
+    "firstSpawnAt": 0,
+    "guaranteedAt": 0,
+    "unique": false,
+    "hostile": true,
+    "flying": false
+  },
+  {
+    "key": "shadow-weasel",
+    "name": "그늘족제비",
+    "image": "DesignAssets/CreatureConcepts/v3/shadow-weasel.png",
+    "populationLimit": 1,
+    "respawnSeconds": 480,
+    "firstSpawnAt": 300,
+    "guaranteedAt": 0,
+    "unique": false,
+    "hostile": true,
+    "flying": false
+  },
+  {
+    "key": "snare-vine",
+    "name": "올가미덩굴",
+    "image": "DesignAssets/CreatureConcepts/v3/snare-vine.png",
+    "populationLimit": 1,
+    "respawnSeconds": 360,
+    "firstSpawnAt": 0,
+    "guaranteedAt": 0,
+    "unique": false,
+    "hostile": true,
+    "flying": false
+  },
+  {
+    "key": "talon-owl",
+    "name": "갈퀴부엉이",
+    "image": "DesignAssets/CreatureConcepts/v3/talon-owl.png",
+    "populationLimit": 1,
+    "respawnSeconds": 600,
+    "firstSpawnAt": 0,
+    "guaranteedAt": 0,
+    "unique": false,
+    "hostile": true,
+    "flying": true
+  },
+  {
+    "key": "spring-keeper",
+    "name": "봄지기",
+    "image": "DesignAssets/CreatureConcepts/v3/spring-keeper.png",
+    "populationLimit": 1,
+    "respawnSeconds": 0,
+    "firstSpawnAt": 0,
+    "guaranteedAt": 300,
+    "unique": true,
+    "hostile": false,
+    "flying": false
+  },
+  {
+    "key": "lantern-keeper",
+    "name": "등불지기",
+    "image": "DesignAssets/CreatureConcepts/v3/lantern-keeper.png",
+    "populationLimit": 1,
+    "respawnSeconds": 0,
+    "firstSpawnAt": 0,
+    "guaranteedAt": 360,
+    "unique": true,
+    "hostile": false,
+    "flying": false
+  },
+  {
+    "key": "old-garden-snail",
+    "name": "오래된 등짐",
+    "image": "DesignAssets/CreatureConcepts/v3/old-garden-snail.png",
+    "populationLimit": 1,
+    "respawnSeconds": 0,
+    "firstSpawnAt": 0,
+    "guaranteedAt": 360,
+    "unique": true,
+    "hostile": false,
+    "flying": false
+  },
+  {
+    "key": "walking-forest",
+    "name": "걸어가는 산",
+    "image": "DesignAssets/CreatureConcepts/v3/walking-forest.png",
+    "populationLimit": 1,
+    "respawnSeconds": 0,
+    "firstSpawnAt": 0,
+    "guaranteedAt": 600,
+    "unique": true,
+    "hostile": false,
+    "flying": false
+  },
+  {
+    "key": "white-paw",
+    "name": "흰발",
+    "image": "DesignAssets/CreatureConcepts/v3/white-paw.png",
+    "populationLimit": 1,
+    "respawnSeconds": 0,
+    "firstSpawnAt": 0,
+    "guaranteedAt": 720,
+    "unique": true,
+    "hostile": true,
+    "flying": false
+  },
+  {
+    "key": "spiny-back-leader",
+    "name": "가시등 우두머리",
+    "image": "DesignAssets/CreatureConcepts/v3/spiny-back-leader.png",
+    "populationLimit": 1,
+    "respawnSeconds": 0,
+    "firstSpawnAt": 0,
+    "guaranteedAt": 720,
+    "unique": true,
+    "hostile": true,
+    "flying": false
+  }
+].map(type => Object.freeze({ ...type, combatDisposition: type.hostile ? "aggressive" : type.unique ? "passive" : "peaceful" })));
+
+const ENCOUNTER_ASSETS = Object.freeze(ENCOUNTER_TYPES.map(type => type.image));
+
+return { ENCOUNTER_TYPES, ENCOUNTER_ASSETS };
+})();
+modules["server/attack.mjs"] = (() => {
+const AGENT_ATTACK_FRAME_DURATIONS = Object.freeze([
+  .06, .07, .06, .08, .03, .05, .05, .05, .05, .05, .05, .07, .08, .09, .10, .06
+]);
+
+const AGENT_HURT_FRAME_DURATIONS = Object.freeze([
+  .02, .03, .03, .03, .4, .03, .03, .03, .02, .02, .02, .02, .02, .02, .02, .02
+]);
+const AGENT_HURT_DURATION = AGENT_HURT_FRAME_DURATIONS.reduce((sum, duration) => sum + Math.round(duration * 1000), 0) / 1000;
+
+const AGENT_ATTACK_HIT_FRAME = 5;
+const AGENT_ATTACK_HIT_TIME = AGENT_ATTACK_FRAME_DURATIONS.slice(0, AGENT_ATTACK_HIT_FRAME).reduce((sum, duration) => sum + Math.round(duration * 1000), 0) / 1000;
+const AGENT_ATTACK_DURATION = AGENT_ATTACK_FRAME_DURATIONS.reduce((sum, duration) => sum + Math.round(duration * 1000), 0) / 1000;
+const AGENT_ATTACK_ASSET = "DesignAssets/Animations/UnitAttack/attack.png";
+
+function agentAttackFrame(attack, time) {
+  if (!attack) return -1;
+  const elapsed = (time - attack.startedAt) * attack.speed;
+  if (elapsed < 0 || elapsed + 1e-8 >= AGENT_ATTACK_DURATION) return -1;
+  let end = 0;
+  for (let index = 0; index < AGENT_ATTACK_FRAME_DURATIONS.length; index++) {
+    end += AGENT_ATTACK_FRAME_DURATIONS[index];
+    if (elapsed + 1e-8 < end) return index;
+  }
+  return -1;
+}
+
+return { AGENT_ATTACK_FRAME_DURATIONS, AGENT_HURT_FRAME_DURATIONS, AGENT_HURT_DURATION, AGENT_ATTACK_HIT_FRAME, AGENT_ATTACK_HIT_TIME, AGENT_ATTACK_DURATION, AGENT_ATTACK_ASSET, agentAttackFrame };
+})();
+modules["client/image-scales.mjs"] = (() => {
+const IMAGE_SCALES = Object.freeze({
+  "DesignAssets/Animations/Beetle/attack-right.webp": [
+    0.673828125,
+    0.673828125
+  ],
+  "DesignAssets/Animations/Beetle/atlas.webp": [
+    0.673828125,
+    0.673828125
+  ],
+  "DesignAssets/Animations/Beetle/neutral.webp": [
+    0.673828125,
+    0.673828125
+  ],
+  "DesignAssets/Animations/BeetleDeath/dead-v2.png": [
+    0.361328125,
+    0.361328125
+  ],
+  "DesignAssets/Animations/BubbleToadIdle/BreathV1/idle.webp": [
+    0.705078125,
+    0.705078125
+  ],
+  "DesignAssets/Animations/CreatureIdleStudies/V1/snare-vine/idle.webp": [
+    0.828125,
+    0.828125
+  ],
+  "DesignAssets/Animations/CreatureIdleStudies/V2/shadow-weasel/idle.webp": [
+    0.623046875,
+    0.623046875
+  ],
+  "DesignAssets/Animations/CreatureIdleStudies/V2/vine-turtle/idle.webp": [
+    0.67578125,
+    0.67578125
+  ],
+  "DesignAssets/Animations/CreatureIdleV3/dew-rabbit/idle.webp": [
+    0.814453125,
+    0.814453125
+  ],
+  "DesignAssets/Animations/CreatureIdleV3/flower-tail-bird/idle.webp": [
+    0.7578125,
+    0.7578125
+  ],
+  "DesignAssets/Animations/CreatureIdleV3/soil-mole/idle.webp": [
+    0.693359375,
+    0.693359375
+  ],
+  "DesignAssets/Animations/CreatureIdleV4/bundle-snail/idle.webp": [
+    0.77734375,
+    0.77734375
+  ],
+  "DesignAssets/Animations/food-mushroom-pile-harvest.png": [
+    0.2109375,
+    0.2109375
+  ],
+  "DesignAssets/Animations/Resources/FertileSoil/harvest-sheet.png": [
+    0.890625,
+    0.890625
+  ],
+  "DesignAssets/Animations/Resources/HarvestDrawnV2/pebbles/harvest-sheet.png": [
+    0.400390625,
+    0.400390625
+  ],
+  "DesignAssets/Animations/Resources/HarvestDrawnV2/wood/harvest-sheet.png": [
+    0.462890625,
+    0.462890625
+  ],
+  "DesignAssets/Animations/Resources/HarvestDrawnV3/dew/harvest-sheet.png": [
+    0.966796875,
+    0.966796875
+  ],
+  "DesignAssets/Animations/Resources/HarvestV1/grass-fiber/sheet.png": [
+    0.890625,
+    0.890625
+  ],
+  "DesignAssets/Animations/Resources/HarvestV1/honey-mushrooms/sheet.png": [
+    0.890625,
+    0.890625
+  ],
+  "DesignAssets/Animations/Resources/SandBurst/harvest-sheet.png": [
+    0.77734375,
+    0.77734375
+  ],
+  "DesignAssets/Animations/RollingAcornIdle/v1/idle.webp": [
+    0.8203125,
+    0.8203125
+  ],
+  "DesignAssets/Animations/SoilBoarIdle/V1/idle.webp": [
+    0.720703125,
+    0.720703125
+  ],
+  "DesignAssets/Animations/TalonOwlIdle/PerchedV4/idle.webp": [
+    0.84375,
+    0.84375
+  ],
+  "DesignAssets/Animations/UnitAttack/attack.png": [
+    0.234375,
+    0.234375
+  ],
+  "DesignAssets/Animations/UnitHurt/V3/hurt.png": [
+    0.234375,
+    0.234375
+  ],
+  "DesignAssets/Attributes/SilhouettesV2/04-crescent.png": [
+    0.140625,
+    0.140625
+  ],
+  "DesignAssets/Attributes/SilhouettesV2/23-y-branch.png": [
+    0.140625,
+    0.140625
+  ],
+  "DesignAssets/Attributes/SilhouettesV2/24-horseshoe.png": [
+    0.140625,
+    0.140625
+  ],
+  "DesignAssets/Attributes/SilhouettesV2/27-chevron.png": [
+    0.140625,
+    0.140625
+  ],
+  "DesignAssets/Attributes/SilhouettesV2/40-spiral.png": [
+    0.140625,
+    0.140625
+  ],
+  "DesignAssets/Burrows/beetle-burrow-large.png": [
+    0.38218714768883877,
+    0.38218714768883877
+  ],
+  "DesignAssets/Burrows/beetle-burrow-small.png": [
+    0.20574162679425836,
+    0.20574162679425836
+  ],
+  "DesignAssets/CreatureConcepts/v3/bubble-toad.png": [
+    0.21169590643274855,
+    0.21168923734853884
+  ],
+  "DesignAssets/CreatureConcepts/v3/bundle-snail.png": [
+    0.21721311475409835,
+    0.2168918918918919
+  ],
+  "DesignAssets/CreatureConcepts/v3/cotton-sheep.png": [
+    0.22564102564102564,
+    0.22564102564102564
+  ],
+  "DesignAssets/CreatureConcepts/v3/dew-rabbit.png": [
+    0.23980222496909764,
+    0.23948019801980197
+  ],
+  "DesignAssets/CreatureConcepts/v3/flower-tail-bird.png": [
+    0.2372986369268897,
+    0.23800738007380073
+  ],
+  "DesignAssets/CreatureConcepts/v3/lantern-keeper.png": [
+    0.24166142227816237,
+    0.24221668742216687
+  ],
+  "DesignAssets/CreatureConcepts/v3/old-garden-snail.png": [
+    0.2185897435897436,
+    0.2185897435897436
+  ],
+  "DesignAssets/CreatureConcepts/v3/rolling-acorn.png": [
+    0.25064102564102564,
+    0.25064102564102564
+  ],
+  "DesignAssets/CreatureConcepts/v3/shadow-weasel.png": [
+    0.1750911933298593,
+    0.17466561762391816
+  ],
+  "DesignAssets/CreatureConcepts/v3/snare-vine.png": [
+    0.3234946871310508,
+    0.32482124616956076
+  ],
+  "DesignAssets/CreatureConcepts/v3/soil-boar.png": [
+    0.2178508514386377,
+    0.2175141242937853
+  ],
+  "DesignAssets/CreatureConcepts/v3/soil-mole.png": [
+    0.2128205128205128,
+    0.2128205128205128
+  ],
+  "DesignAssets/CreatureConcepts/v3/spiny-back-leader.png": [
+    0.21640826873385013,
+    0.21564760026298488
+  ],
+  "DesignAssets/CreatureConcepts/v3/spring-keeper.png": [
+    0.2270560190703218,
+    0.22809278350515463
+  ],
+  "DesignAssets/CreatureConcepts/v3/talon-owl.png": [
+    0.24971098265895952,
+    0.24910522548317823
+  ],
+  "DesignAssets/CreatureConcepts/v3/vine-turtle.png": [
+    0.21987179487179487,
+    0.21987179487179487
+  ],
+  "DesignAssets/CreatureConcepts/v3/walking-forest.png": [
+    0.2240829346092504,
+    0.2240829346092504
+  ],
+  "DesignAssets/CreatureConcepts/v3/white-paw.png": [
+    0.18733783082511676,
+    0.18781302170283806
+  ],
+  "DesignAssets/Effects/Lifespan/spirit-flame.png": [
+    0.2890625,
+    0.2849462365591398
+  ],
+  "DesignAssets/Foods/food-berry-bush.png": [
+    0.1722488038277512,
+    0.1722488038277512
+  ],
+  "DesignAssets/Foods/food-meat.png": [
+    0.03827751196172249,
+    0.03827751196172249
+  ],
+  "DesignAssets/Foods/food-mushroom-pile.png": [
+    0.1689453125,
+    0.1689453125
+  ],
+  "DesignAssets/Foods/food-mushroom-single.png": [
+    0.05078125,
+    0.05078125
+  ],
+  "DesignAssets/Nests/nest-stage-01.png": [
+    0.3271484375,
+    0.3271484375
+  ],
+  "DesignAssets/ResourceConcepts/v1/resource-carapace.png": [
+    0.029505582137161084,
+    0.029505582137161084
+  ],
+  "DesignAssets/ResourceConcepts/v1/resource-grass-fiber.png": [
+    0.03110047846889952,
+    0.03110047846889952
+  ],
+  "DesignAssets/ResourceConcepts/v1/resource-quartz.png": [
+    0.14752791068580542,
+    0.14752791068580542
+  ],
+  "DesignAssets/Resources/clay-carry.png": [
+    0.04704944178628389,
+    0.04704944178628389
+  ],
+  "DesignAssets/Resources/clay.png": [
+    0.1379585326953748,
+    0.1379585326953748
+  ],
+  "DesignAssets/Resources/copper-ore-carry.png": [
+    0.04226475279106858,
+    0.04226475279106858
+  ],
+  "DesignAssets/Resources/copper-ore.png": [
+    0.14752791068580542,
+    0.14752791068580542
+  ],
+  "DesignAssets/Resources/dew-carry.png": [
+    0.1291866028708134,
+    0.1291866028708134
+  ],
+  "DesignAssets/Resources/dew-grass.png": [
+    0.1379585326953748,
+    0.1379585326953748
+  ],
+  "DesignAssets/Resources/iron-ore-carry.png": [
+    0.05342902711323764,
+    0.05342902711323764
+  ],
+  "DesignAssets/Resources/iron-ore.png": [
+    0.14752791068580542,
+    0.14752791068580542
+  ],
+  "DesignAssets/Resources/pebbles-carry.png": [
+    0.10127591706539076,
+    0.10127591706539076
+  ],
+  "DesignAssets/Resources/pebbles.png": [
+    0.1379585326953748,
+    0.1379585326953748
+  ],
+  "DesignAssets/Resources/sand-carry.png": [
+    0.06618819776714513,
+    0.06618819776714513
+  ],
+  "DesignAssets/Resources/sand.png": [
+    0.1379585326953748,
+    0.1379585326953748
+  ],
+  "DesignAssets/Resources/wood-carry.png": [
+    0.07097288676236045,
+    0.07097288676236045
+  ],
+  "DesignAssets/Terrain/coast-ground.png": [
+    0.2109375,
+    0.2109375
+  ],
+  "DesignAssets/Terrain/deep-water-ground.png": [
+    0.2109375,
+    0.2109375
+  ],
+  "DesignAssets/Terrain/forest-ground.png": [
+    0.2109375,
+    0.2109375
+  ],
+  "DesignAssets/Terrain/grassland-ground.png": [
+    0.2109375,
+    0.2109375
+  ],
+  "DesignAssets/Terrain/high-mountain-ground.png": [
+    0.2109375,
+    0.2109375
+  ],
+  "DesignAssets/Terrain/land-ground.png": [
+    0.2109375,
+    0.2109375
+  ],
+  "DesignAssets/Terrain/low-mountain-ground.png": [
+    0.2109375,
+    0.2109375
+  ],
+  "DesignAssets/Terrain/nest-soil-ground.png": [
+    0.2109375,
+    0.2109375
+  ],
+  "DesignAssets/Terrain/ridge-ground.png": [
+    0.2109375,
+    0.2109375
+  ],
+  "DesignAssets/Terrain/shallow-water-ground.png": [
+    0.2109375,
+    0.2109375
+  ],
+  "DesignAssets/Terrain/standing-tree-smooth-atlas.png": [
+    0.27348066298342544,
+    0.27348066298342544
+  ],
+  "DesignAssets/Terrain/swamp-ground.png": [
+    0.2109375,
+    0.2109375
+  ],
+  "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.webp": [
+    0.197265625,
+    0.197265625
+  ],
+  "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp": [
+    0.203125,
+    0.203125
+  ],
+  "DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth-unit.webp": [
+    0.294921875,
+    0.294921875
+  ],
+  "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png": [
+    0.205078125,
+    0.205078125
+  ],
+  "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp": [
+    0.205078125,
+    0.205078125
+  ],
+  "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp": [
+    0.4375,
+    0.4375
+  ],
+  "DesignAssets/Tribes/pebble/AnimationStudies/walk-in-place-v1/walk.webp": [
+    0.20703125,
+    0.20703125
+  ],
+  "DesignAssets/Tribes/pebble/AnimationStudies/roll-v2/roll-v2.webp": [
+    0.20703125,
+    0.20703125
+  ],
+  "DesignAssets/Tribes/pebble/BaseParts/body.png": [
+    0.439453125,
+    0.439453125
+  ],
+  "DesignAssets/Tribes/pebble/Nests/nest-stage-01.png": [
+    0.5215311004784688,
+    0.5215311004784688
+  ],
+  "DesignAssets/Tribes/pebble/starter.png": [
+    0.0733652312599681,
+    0.0733652312599681
+  ],
+  "DesignAssets/Tribes/spore/Animations/Units/jump/jump.webp": [
+    0.19140625,
+    0.19140625
+  ],
+  "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/right/attack.webp": [
+    0.19921875,
+    0.19921875
+  ],
+  "DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png": [
+    0.19921875,
+    0.19921875
+  ],
+  "DesignAssets/Tribes/spore/AnimationStudies/hurt-v2/hurt-v2.webp": [
+    0.19921875,
+    0.19921875
+  ],
+  "DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp": [
+    0.4375,
+    0.4375
+  ],
+  "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/walk-v2.webp": [
+    0.2109375,
+    0.2109375
+  ],
+  "DesignAssets/Tribes/spore/BaseParts/body.png": [
+    0.439453125,
+    0.439453125
+  ],
+  "DesignAssets/Tribes/spore/Nests/nest-stage-01.png": [
+    0.4696969696969697,
+    0.4696969696969697
+  ],
+  "DesignAssets/Tribes/spore/starter.png": [
+    0.06937799043062201,
+    0.06937799043062201
+  ],
+  "DesignAssets/Tribes/spring/Animations/Units/jump/jump.webp": [
+    0.306640625,
+    0.306640625
+  ],
+  "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp": [
+    0.318359375,
+    0.318359375
+  ],
+  "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp": [
+    0.4609375,
+    0.4609375
+  ],
+  "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png": [
+    0.318359375,
+    0.318359375
+  ],
+  "DesignAssets/Tribes/spring/AnimationStudies/flow-v4/flow-v4.webp": [
+    0.31640625,
+    0.31640625
+  ],
+  "DesignAssets/Tribes/spring/AnimationStudies/hurt-v2/hurt-v2.webp": [
+    0.318359375,
+    0.318359375
+  ],
+  "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp": [
+    0.4375,
+    0.4375
+  ],
+  "DesignAssets/Tribes/spring/BaseParts/body.png": [
+    0.439453125,
+    0.439453125
+  ],
+  "DesignAssets/Tribes/spring/Nests/nest-stage-01.png": [
+    0.37034949267192785,
+    0.3697857948139797
+  ],
+  "DesignAssets/Tribes/spring/starter.png": [
+    0.09170653907496013,
+    0.09170653907496013
+  ],
+  "DesignAssets/Tribes/sprout/Animations/Attributes/decomposition-idle-v1/antenna.webp": [
+    0.55078125,
+    0.55078125
+  ],
+  "DesignAssets/Tribes/sprout/Animations/Attributes/decomposition-idle-v1/basic.webp": [
+    0.55078125,
+    0.55078125
+  ],
+  "DesignAssets/Tribes/sprout/Animations/Attributes/decomposition-idle-v1/tail.webp": [
+    0.50390625,
+    0.50390625
+  ],
+  "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp": [
+    0.45703125,
+    0.45703125
+  ],
+  "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.webp": [
+    0.4375,
+    0.4375
+  ],
+  "DesignAssets/UI/Lifespan/leaf-alive.png": [
+    0.625,
+    0.625
+  ],
+  "DesignAssets/UI/Lifespan/leaf-dead.png": [
+    0.625,
+    0.625
+  ],
+  "DesignAssets/Units/BaseParts/body.png": [
+    0.09090909090909091,
+    0.09172661870503597
+  ],
+  "DesignAssets/Units/BaseParts/sprout-left.png": [
+    0.06118881118881119,
+    0.06115107913669065
+  ],
+  "DesignAssets/Units/BaseParts/sprout-right.png": [
+    0.06118881118881119,
+    0.06115107913669065
+  ],
+  "DesignAssets/Units/BaseParts/sprout-stem.png": [
+    0.055944055944055944,
+    0.05575539568345324
+  ],
+  "DesignAssets/Units/Parts/antenna-1.png": [
+    0.07172995780590717,
+    0.07176470588235294
+  ],
+  "DesignAssets/Units/Parts/antenna-2.png": [
+    0.059834123222748815,
+    0.059490084985835696
+  ],
+  "DesignAssets/Units/Parts/feet-1.png": [
+    0.06878306878306878,
+    0.06935483870967742
+  ],
+  "DesignAssets/Units/Parts/feet-2.png": [
+    0.04061784897025172,
+    0.041044776119402986
+  ],
+  "DesignAssets/Units/Parts/lifespan-1.png": [
+    0.09863013698630137,
+    0.09792284866468842
+  ],
+  "DesignAssets/Units/Parts/strength-1.png": [
+    0.06914893617021277,
+    0.06761006289308176
+  ],
+  "DesignAssets/Units/Parts/strength-2.png": [
+    0.046875,
+    0.046089385474860335
+  ],
+  "DesignAssets/Units/spiny-back-beetle.png": [
+    0.16845703125,
+    0.16845703125
+  ],
+  "DesignAssets/Units/starter-sprout-bean.png": [
+    0.09090909090909091,
+    0.09172661870503597
+  ],
+  "DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/birth-unit.webp": [0.3333333333333333, 0.3333333333333333]
+});
+
+return { IMAGE_SCALES };
+})();
+modules["client/image-geometry.mjs"] = (() => {
+const { IMAGE_SCALES } = modules["client/image-scales.mjs"];
+
+function imageScale(source) {
+  return IMAGE_SCALES[source]?.[0] || 1;
+}
+
+function imageFrameSize(source, size) {
+  return Math.round(size * imageScale(source));
+}
+
+function imageRegion(source, region) {
+  const scale = IMAGE_SCALES[source] || [1, 1];
+  return { x: region.x * scale[0], y: region.y * scale[1],
+    width: region.width * scale[0], height: region.height * scale[1] };
+}
+
+function imageAnimation(animation) {
+  const scale = imageScale(animation.image);
+  const result = { ...animation };
+  for (const key of ["frameSize", "pivotX", "pivotY", "outletX", "outletY", "height", "viewSize"])
+    if (Number.isFinite(result[key])) result[key] *= scale;
+  if (Number.isFinite(result.frameSize)) result.frameSize = Math.round(result.frameSize);
+  if (result.nestBounds) result.nestBounds = Object.freeze(imageRegion(animation.image, result.nestBounds));
+  return result;
+}
+
+return { imageScale, imageFrameSize, imageRegion, imageAnimation };
+})();
+modules["server/beetle-animation.mjs"] = (() => {
+const { imageAnimation } = modules["client/image-geometry.mjs"];
+
+const BEETLE_ANIMATION_ASSET = "DesignAssets/Animations/Beetle/atlas.webp";
+const BEETLE_ATTACK_ASSET = "DesignAssets/Animations/Beetle/attack-right.webp";
+const BEETLE_ATTACK_SPRITE = Object.freeze(imageAnimation({ image: BEETLE_ATTACK_ASSET, frameSize: 512, columns: 5, pivotX: 247, pivotY: 450, scale: 1.6, facing: "right" }));
+const BEETLE_NEUTRAL_ASSET = "DesignAssets/Animations/Beetle/neutral.webp";
+const BEETLE_SPRITE = Object.freeze(imageAnimation({ image: BEETLE_ANIMATION_ASSET, frameSize: 512, columns: 5, pivotX: 265, pivotY: 450, scale: 1.6 }));
+const BEETLE_ANIMATIONS = {
+  "idle": {
+    "frames": [
+      0,
+      1,
+      2,
+      3,
+      0
+    ],
+    "durations": [
+      600,
+      320,
+      400,
+      320,
+      360
+    ],
+    "durationMs": 2000,
+    "loop": true
+  },
+  "walk": {
+    "frames": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "durations": [
+      120,
+      80,
+      120,
+      120,
+      80,
+      120,
+      120,
+      80,
+      120,
+      120,
+      80,
+      120
+    ],
+    "durationMs": 1280,
+    "loop": true
+  },
+  "attack": {
+    "frames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      0
+    ],
+    "durations": [
+      80,
+      160,
+      280,
+      440,
+      160,
+      160
+    ],
+    "durationMs": 1280,
+    "loop": false,
+    "hitTimeMs": 520
+  },
+  "hurt": {
+    "frames": [
+      10,
+      15,
+      16,
+      10
+    ],
+    "durations": [
+      40,
+      480,
+      80,
+      70
+    ],
+    "durationMs": 670,
+    "loop": false
+  },
+  "death": {
+    "frames": [
+      0,
+      17,
+      18
+    ],
+    "durations": [
+      80,
+      120,
+      520
+    ],
+    "durationMs": 720,
+    "loop": false
+  },
+  "dead": {
+    "frames": [
+      18
+    ],
+    "durations": [
+      0
+    ],
+    "durationMs": 0,
+    "loop": false
+  }
+};
+
+function beetleAnimationFrame(action, elapsedMs) {
+  const animation = BEETLE_ANIMATIONS[action];
+  if (animation.durationMs === 0) return animation.frames[0];
+  let elapsed = Math.max(0, elapsedMs);
+  if (animation.loop) elapsed %= animation.durationMs;
+  else if (elapsed >= animation.durationMs) return animation.frames.at(-1);
+  let end = 0;
+  for (let index = 0; index < animation.frames.length; index++) {
+    end += animation.durations[index];
+    if (elapsed + 1e-6 < end) return animation.frames[index];
+  }
+  return animation.frames.at(-1);
+}
+
+function beetleAnimationPose(agent, time) {
+  let action = "idle", startedAt = agent.animationStartedAt || 0;
+  if (agent.health <= 0 || agent.mode === "death") {
+    startedAt = agent.deathStartedAt ?? startedAt;
+    action = (time - startedAt) * 1000 + 1e-6 < BEETLE_ANIMATIONS.death.durationMs ? "death" : "dead";
+  } else if (Number.isFinite(agent.hurtStartedAt) && time >= agent.hurtStartedAt &&
+      (time - agent.hurtStartedAt) * 1000 + 1e-6 < BEETLE_ANIMATIONS.hurt.durationMs) {
+    action = "hurt";
+    startedAt = agent.hurtStartedAt;
+  } else if (agent.mode === "attack" && (time - agent.attackStartedAt) * 1000 + 1e-6 < BEETLE_ANIMATIONS.attack.durationMs) {
+    action = "attack";
+    startedAt = agent.attackStartedAt;
+  } else if (agent.mode === "walk" && time < agent.moveStartedAt + agent.moveDuration) {
+    action = "walk";
+    startedAt = agent.moveStartedAt;
+  } else if (agent.mode === "walk") startedAt = agent.moveStartedAt + agent.moveDuration;
+  return { action, frame: beetleAnimationFrame(action, (time - startedAt) * 1000) };
+}
+
+return { BEETLE_ANIMATION_ASSET, BEETLE_ATTACK_ASSET, BEETLE_ATTACK_SPRITE, BEETLE_NEUTRAL_ASSET, BEETLE_SPRITE, BEETLE_ANIMATIONS, beetleAnimationFrame, beetleAnimationPose };
+})();
+modules["server/creature-attack.mjs"] = (() => {
+const CREATURE_ATTACK_TIMINGS = Object.freeze({
+  "flower-tail-bird": Object.freeze({ durationMs: 970, hitTimeMs: 360 }),
+  "dew-rabbit": Object.freeze({ durationMs: 970, hitTimeMs: 360 }),
+  "soil-mole": Object.freeze({ durationMs: 1000, hitTimeMs: 370 }),
+  "bundle-snail": Object.freeze({ durationMs: 1065, hitTimeMs: 395 }),
+  "cotton-sheep": Object.freeze({ durationMs: 1030, hitTimeMs: 370 }),
+  "rolling-acorn": Object.freeze({ durationMs: 1020, hitTimeMs: 380 }),
+  "soil-boar": Object.freeze({ durationMs: 1020, hitTimeMs: 330 }),
+  "bubble-toad": Object.freeze({ durationMs: 1020, hitTimeMs: 330 }),
+  "vine-turtle": Object.freeze({ durationMs: 1020, hitTimeMs: 330 }),
+  "shadow-weasel": Object.freeze({ durationMs: 1020, hitTimeMs: 330 }),
+  "snare-vine": Object.freeze({ durationMs: 1020, hitTimeMs: 330 }),
+  "talon-owl": Object.freeze({ durationMs: 1020, hitTimeMs: 330 }),
+  "spring-keeper": Object.freeze({ durationMs: 905, hitTimeMs: 295 }),
+  "lantern-keeper": Object.freeze({ durationMs: 1000, hitTimeMs: 330 }),
+  "old-garden-snail": Object.freeze({ durationMs: 1570, hitTimeMs: 590 }),
+  "walking-forest": Object.freeze({ durationMs: 1460, hitTimeMs: 560 }),
+  "white-paw": Object.freeze({ durationMs: 920, hitTimeMs: 300 }),
+  "spiny-back-leader": Object.freeze({ durationMs: 1440, hitTimeMs: 530 })
+});
+
+return { CREATURE_ATTACK_TIMINGS };
+})();
+modules["server/lifespan.mjs"] = (() => {
+const AGENT_LIFESPAN = 3 * 60;
+const AGENT_DEATH_WARNING = 60;
+const CORPSE_LIFETIME = 5 * 60;
+
+function placeCorpse(food, corpse) {
+  const position = corpse.x + "," + corpse.y;
+  corpse.id = "corpse:" + corpse.agentId;
+  if (!Number.isFinite(corpse.initialAmount)) corpse.initialAmount = Math.max(0, corpse.amount);
+  corpse.key = food.has(position) ? corpse.id : position;
+  food.set(corpse.key, corpse);
+  return corpse;
+}
+
+function expireCorpses(food, simSeconds) {
+  for (const [key, cell] of food) {
+    if (cell.kind !== "corpse") continue;
+    if (!Number.isFinite(cell.diedAt)) cell.diedAt = simSeconds;
+    if (!Number.isFinite(cell.decaysAt) || cell.decaysAt < cell.diedAt + CORPSE_LIFETIME) cell.decaysAt = cell.diedAt + CORPSE_LIFETIME;
+    if (!Number.isFinite(cell.initialAmount)) cell.initialAmount = Math.max(0, cell.amount);
+    if (cell.amount <= 0 || simSeconds >= cell.decaysAt) food.delete(key);
+  }
+}
+
+return { AGENT_LIFESPAN, AGENT_DEATH_WARNING, CORPSE_LIFETIME, placeCorpse, expireCorpses };
+})();
+modules["server/combat-stats.mjs"] = (() => {
+const COMBAT_BASE_DAMAGE = 15;
+const COMBAT_STRENGTH_SCALE = 25;
+const COMBAT_MAX_INJURY_PENALTY = 10;
+const UNIT_MAX_HEALTH = 100;
+
+const UNIT_COMBAT_STATS = Object.freeze(Object.fromEntries([
+  ["bean", 20],
+  ["spore", 18],
+  ["pebble", 22],
+  ["spring", 19],
+  ["flower-tail-bird", 8],
+  ["dew-rabbit", 10],
+  ["soil-mole", 14],
+  ["bundle-snail", 16],
+  ["cotton-sheep", 12],
+  ["rolling-acorn", 16],
+  ["bubble-toad", 28],
+  ["snare-vine", 34],
+  ["spiny-back-beetle", 32],
+  ["soil-boar", 36],
+  ["vine-turtle", 28],
+  ["shadow-weasel", 40],
+  ["talon-owl", 44],
+  ["spring-keeper", 36],
+  ["lantern-keeper", 38],
+  ["old-garden-snail", 42],
+  ["walking-forest", 48],
+  ["white-paw", 64],
+  ["spiny-back-leader", 54]
+].map(([key, combatStrength]) => [key, Object.freeze({ health: UNIT_MAX_HEALTH, combatStrength })])));
+
+function unitCombatStats(key) {
+  return UNIT_COMBAT_STATS[key] || UNIT_COMBAT_STATS.bean;
+}
+
+function combatInjuryPenalty(agent) {
+  const maximum = Number.isFinite(agent.stats?.health) && agent.stats.health > 0 ? agent.stats.health : UNIT_MAX_HEALTH;
+  const health = Number.isFinite(agent.health) ? Math.max(0, Math.min(maximum, agent.health)) : maximum;
+  return Math.round(COMBAT_MAX_INJURY_PENALTY * (maximum - health) / maximum);
+}
+
+function combatStrength(agent) {
+  const base = Number.isFinite(agent.stats?.combatStrength) ? agent.stats.combatStrength :
+    unitCombatStats(agent.species || agent.tribe).combatStrength;
+  return base - combatInjuryPenalty(agent);
+}
+
+function combatDamage(attacker, target, variation) {
+  const multiplier = Number.isFinite(variation) ? .8 + .4 * Math.max(0, Math.min(1, variation)) : 1;
+  return Math.max(1, Math.round(COMBAT_BASE_DAMAGE * multiplier *
+    Math.exp((combatStrength(attacker) - combatStrength(target)) / COMBAT_STRENGTH_SCALE)));
+}
+
+function migrateCombatStats(agent) {
+  const profile = unitCombatStats(agent.species || agent.tribe);
+  if (agent.stats.combatStrength === profile.combatStrength && agent.stats.health === UNIT_MAX_HEALTH) return;
+  const health = UNIT_MAX_HEALTH;
+  const ratio = Math.max(0, Math.min(1, agent.health / agent.stats.health));
+  agent.stats = { ...agent.stats, health, combatStrength: profile.combatStrength };
+  agent.health = health * ratio;
+}
+
+return { COMBAT_BASE_DAMAGE, COMBAT_STRENGTH_SCALE, COMBAT_MAX_INJURY_PENALTY, UNIT_MAX_HEALTH, UNIT_COMBAT_STATS, unitCombatStats, combatInjuryPenalty, combatStrength, combatDamage, migrateCombatStats };
+})();
+modules["server/attributes.mjs"] = (() => {
+const { AGENT_LIFESPAN } = modules["server/lifespan.mjs"];
+const { unitCombatStats } = modules["server/combat-stats.mjs"];
+
+const ATTRIBUTES = [
+  { key: "antenna", name: "감지", color: "#b2bffa", effect: "시야 반경 +2칸", description: "군락과 공유하는 실제 시야를 넓힙니다.", bonus: 2, stat: "시야 반경", unit: "칸" },
+  { key: "strength", name: "채집량 증가", color: "#e6a79c", effect: "채집량 +1개", description: "한 번에 채집해 운반하는 자원의 양이 기본 1개에서 2개로 늘어납니다.", bonus: 1, stat: "채집량", unit: "개" },
+  { key: "butchery", name: "양분 회수", color: "#b2dce6", effect: "양분·갑각 채집 허용", description: "생물이 남긴 양분과 갑각을 모아 운반합니다. 강화할 때마다 채집 시간이 15%씩 줄어듭니다.", kind: "harvest", harvests: ["meat", "carapace"] },
+  { key: "lifespan", name: "수명", color: "#d8cd88", effect: "수명 +2분", description: "기본 수명 3분에 2분을 더해 5분 동안 살아갑니다.", bonus: 2, stat: "수명", unit: "분" },
+  { key: "feet", name: "이속 증가", color: "#8cd2bb", effect: "이동 속도 +0.3칸/초", description: "탐색과 왕복 이동을 빠르게 합니다.", bonus: 0.3, stat: "이동 속도", unit: "칸/초" },
+  { key: "botany", name: "식물 채집", color: "#9cce8a", effect: "목재·풀섬유 채집 허용", description: "목재와 풀섬유를 채집합니다. 강화할 때마다 채집 시간이 15%씩 줄어듭니다.", kind: "harvest", harvests: ["tree", "grass-fiber"] },
+  { key: "excavation", name: "토사 채집", color: "#d4b48a", effect: "비옥토·모래·자갈 채집 허용", description: "흙과 모래, 자갈을 채집합니다. 강화할 때마다 채집 시간이 15%씩 줄어듭니다.", kind: "harvest", harvests: ["clay", "sand", "pebbles"] },
+  { key: "condensation", name: "이슬 채집", color: "#9ad6df", effect: "이슬방울 채집 허용", description: "풀에 맺힌 이슬방울을 채집합니다. 강화할 때마다 채집 시간이 15%씩 줄어듭니다.", kind: "harvest", harvests: ["dew"] },
+  { key: "mining", name: "광물 채집", color: "#b6bdcf", effect: "철광석·구리광석·수정 채집 허용", description: "철광석과 구리광석, 수정을 채집합니다. 강화할 때마다 채집 시간이 15%씩 줄어듭니다.", kind: "harvest", harvests: ["iron-ore", "copper-ore", "quartz"] },
+  { key: "construction", name: "건설", color: "#d7bd80", effect: "개체의 건물 변신 허용", description: "지정한 장소로 이동해 몸을 건물로 바꿉니다. 강화할 때마다 변신 시간이 15%씩 줄어듭니다.", kind: "construction" }
+];
+
+const ATTRIBUTE_COMBINATIONS = [
+  { keys: ["strength", "strength"], attributeLevels: { strength: 2 }, kind: "upgrade", requirement: "채집량 증가 Lv.2", name: "과적", description: "기본 운반량을 넘겨 자원 4개를 추가로 적재합니다. 초과 적재 중 이동 속도는 20% 감소합니다." },
+  { keys: ["strength", "feet"], name: "적재 가속", description: "적재율에 비례해 이동 속도가 최대 50% 증가합니다." },
+  { keys: ["strength", "antenna"], name: "맥 짚기", description: "현장 준비 후 먹이 2개를 즉시 담습니다. 같은 먹이 더미에 개체별 30초 간격으로 발동합니다." },
+  { keys: ["feet", "feet"], attributeLevels: { feet: 2 }, kind: "upgrade", requirement: "이속 증가 Lv.2", name: "질주", description: "직선으로 4칸 이동하면 이동 속도가 75% 증가합니다. 정지하거나 방향을 바꾸면 해제됩니다." },
+  { keys: ["feet", "antenna"], name: "탐색 파동", description: "8칸 이동할 때마다 1초간 시야 반경이 4칸 넓어집니다." },
+  { keys: ["antenna", "antenna"], attributeLevels: { antenna: 2 }, kind: "upgrade", requirement: "감지 Lv.2", name: "미지 감지", description: "반경 18칸 안개 속 미확인 대상에 느낌표를 표시합니다. 정체와 수량은 실제 시야로 확인합니다." }
+];
+
+function migrateAttributeSlots(slots) {
+  return [...new Set((Array.isArray(slots) ? slots : []).map(key => key === "arms" ? "strength" : key)
+    .filter(key => ATTRIBUTES.some(attribute => attribute.key === key)))];
+}
+
+function attributeLevelLimit(nestLevel) {
+  return Number.isInteger(nestLevel) ? Math.max(1, Math.min(4, nestLevel)) : 1;
+}
+
+function migrateAttributeLevels(slots, levels, nestLevel) {
+  const limit = nestLevel === undefined ? 4 : attributeLevelLimit(nestLevel);
+  const existing = levels && typeof levels === "object" && !Array.isArray(levels) ? levels : null;
+  const legacy = Object.create(null);
+  for (const slot of Array.isArray(slots) ? slots : []) {
+    const key = slot === "arms" ? "strength" : slot;
+    legacy[key] = (legacy[key] || 0) + 1;
+  }
+  return Object.fromEntries(migrateAttributeSlots(slots).map(key => {
+    const value = existing && Object.hasOwn(existing, key) ? existing[key] : legacy[key];
+    return [key, Math.max(1, Math.min(limit, Number.isInteger(value) ? value : 1))];
+  }));
+}
+
+function attributeCounts(slots, levels) {
+  const counts = Object.fromEntries(ATTRIBUTES.map(attribute => [attribute.key, 0]));
+  for (const key of migrateAttributeSlots(slots)) {
+    const value = levels?.[key];
+    counts[key] = Number.isInteger(value) ? Math.max(1, Math.min(4, value)) : 1;
+  }
+  return counts;
+}
+
+function hasSynergy(counts, keys) {
+  if (keys.some(key => !ATTRIBUTES.some(attribute => attribute.key === key))) return false;
+  const required = {};
+  for (const key of keys) required[key] = (required[key] || 0) + 1;
+  return Object.entries(required).every(([key, level]) => (counts[key] || 0) >= level);
+}
+
+const attributeUpgradeMaterials = {
+  antenna: { dew: 6, "grass-fiber": 4 },
+  strength: { tree: 6, pebbles: 4 },
+  butchery: { clay: 6, dew: 4 },
+  lifespan: { dew: 6, "grass-fiber": 4 },
+  feet: { tree: 4, "grass-fiber": 6 },
+  botany: { pebbles: 4, "grass-fiber": 4 },
+  excavation: { tree: 4, pebbles: 6 },
+  condensation: { clay: 4, "grass-fiber": 4 },
+  mining: { tree: 6, pebbles: 6 },
+  construction: { tree: 8, clay: 6 }
+};
+
+function attributeUpgradeCost(attributeKey, targetLevel) {
+  const base = Object.hasOwn(attributeUpgradeMaterials, attributeKey) ? attributeUpgradeMaterials[attributeKey] : null;
+  if (!base || !Number.isInteger(targetLevel) || targetLevel < 2 || targetLevel > 4) return null;
+  const materials = Object.fromEntries(Object.entries(base).map(([key, amount]) => [key, amount * (targetLevel - 1)]));
+  if (targetLevel >= 3) {
+    materials["iron-ore"] = 4 * (targetLevel - 2);
+    materials["copper-ore"] = 4 * (targetLevel - 2);
+  }
+  if (targetLevel === 4) {
+    materials.quartz = 6;
+    materials.carapace = 4;
+  }
+  return { evolutionPoints: [0, 0, 20, 60, 160][targetLevel], materials };
+}
+
+function attributeUpgradeIssue(template, attributeKey, nestLevel, evolutionPoints, inventory) {
+  if (!template?.slots?.includes(attributeKey)) return "장착한 속성만 강화할 수 있습니다.";
+  const targetLevel = attributeCounts(template.slots, template.attributeLevels)[attributeKey] + 1;
+  const cost = attributeUpgradeCost(attributeKey, targetLevel);
+  if (!cost) return "최대 단계에 도달한 속성입니다.";
+  if (targetLevel > attributeLevelLimit(nestLevel)) return "둥지를 성장시킨 뒤 속성을 강화해 주세요.";
+  if (!Number.isFinite(evolutionPoints) || evolutionPoints < cost.evolutionPoints) return "강화에 필요한 진화 포인트가 부족합니다.";
+  if (Object.entries(cost.materials).some(([key, amount]) => !Number.isFinite(inventory?.[key]) || inventory[key] < amount)) {
+    return "강화에 필요한 자원 재료가 부족합니다.";
+  }
+  return null;
+}
+
+function unitStats(attributes, tribe) {
+  const combat = unitCombatStats(tribe);
+  return {
+    speed: 1 + (attributes.feet || 0) * 0.5,
+    capacity: 1 + (attributes.strength || 0),
+    vision: 3 + (attributes.antenna || 0) * 2,
+    attack: 1,
+    health: combat.health,
+    combatStrength: combat.combatStrength,
+    lifespan: AGENT_LIFESPAN + (attributes.lifespan || 0) * 2 * 60,
+    resistance: 1
+  };
+}
+
+function unitMovementSpeed(stats) {
+  return 0.5 + (stats.speed - 1) * 0.6;
+}
+
+function unitTerrainSpeedMultiplier(agent, terrain) {
+  if (agent.movementType === "flying" || agent.species === "flower-tail-bird" || agent.species === "talon-owl") return 1;
+  return terrain >= 6 && terrain <= 8 ? 0.6 : 1;
+}
+
+function birthCost(template) {
+  return [3, 5, 8, 12, 17, 23][template.slots.length] ?? Infinity;
+}
+
+return { ATTRIBUTES, ATTRIBUTE_COMBINATIONS, migrateAttributeSlots, attributeLevelLimit, migrateAttributeLevels, attributeCounts, hasSynergy, attributeUpgradeCost, attributeUpgradeIssue, unitStats, unitMovementSpeed, unitTerrainSpeedMultiplier, birthCost };
+})();
+modules["server/buildings.mjs"] = (() => {
+const BUILDING_TYPES = Object.freeze([
+  { key: "storage", name: "창고", minNestLevel: 1, width: 2, height: 2, health: 120, storageCapacity: 300, visionRadius: 2, description: "군락의 자원 보관량을 300개 늘립니다." },
+  { key: "evolution-lab", name: "진화실", minNestLevel: 2, width: 2, height: 2, health: 100, storageCapacity: 0, visionRadius: 2, description: "자원 재료로 설계의 속성을 둥지 레벨까지 강화합니다." },
+  { key: "outpost", name: "전초둥지", minNestLevel: 2, width: 3, height: 3, health: 200, storageCapacity: 0, visionRadius: 6, description: "개체를 탄생시키고 자원을 납품하는 새 둥지입니다. 본둥지가 파괴되어도 군락을 유지합니다." },
+  { key: "watchpost", name: "감시봉", minNestLevel: 2, width: 1, height: 1, health: 80, storageCapacity: 0, visionRadius: 10, description: "주변 10칸의 시야를 군락과 공유합니다." }
+].map(type => Object.freeze({ ...type, buildSeconds: 3, image: "DesignAssets/Buildings/" + type.key + ".png" })));
+
+const nativeMaterials = { bean: "clay", spore: "tree", pebble: "pebbles", spring: "dew" };
+const constructionMaterials = {
+  storage: { native: 10 },
+  "evolution-lab": { native: 16, tree: 4, pebbles: 4 },
+  outpost: { native: 24, tree: 12, pebbles: 12 },
+  watchpost: { native: 8, tree: 6, "grass-fiber": 4 }
+};
+
+function buildingDefinition(key) {
+  return BUILDING_TYPES.find(type => type.key === key);
+}
+
+function buildingImage(key, tribe) {
+  const definition = buildingDefinition(key);
+  if (!definition) return null;
+  return ["spore", "pebble", "spring"].includes(tribe) ?
+    "DesignAssets/Buildings/" + tribe + "/" + key + ".png" : definition.image;
+}
+
+function buildingCost(key, tribe) {
+  if (!constructionMaterials[key]) return null;
+  const materials = {};
+  for (const [resource, amount] of Object.entries(constructionMaterials[key])) {
+    const type = resource === "native" ? nativeMaterials[tribe || "bean"] || "clay" : resource;
+    materials[type] = (materials[type] || 0) + amount;
+  }
+  return { evolutionPoints: 0, materials };
+}
+
+function materialCapacity(nestLevel, buildings) {
+  return 200 + Math.max(0, Math.min(3, (nestLevel || 1) - 1)) * 100 +
+    (buildings || []).filter(building => building.health > 0).reduce((sum, building) => sum + (buildingDefinition(building.key)?.storageCapacity || 0), 0);
+}
+
+function buildingContains(building, x, y) {
+  return building.health > 0 && x >= building.x && y >= building.y && x < building.x + building.width && y < building.y + building.height;
+}
+
+function buildingAt(environment, x, y) {
+  for (const game of environment.games.values()) {
+    const building = game.buildings?.find(entry => buildingContains(entry, x, y));
+    if (building) return building;
+  }
+  return null;
+}
+
+return { BUILDING_TYPES, buildingDefinition, buildingImage, buildingCost, materialCapacity, buildingContains, buildingAt };
+})();
+modules["server/combat.mjs"] = (() => {
+const { ENCOUNTER_TYPES } = modules["server/encounter-types.mjs"];
+const { AGENT_ATTACK_DURATION, AGENT_ATTACK_HIT_TIME, AGENT_HURT_DURATION } = modules["server/attack.mjs"];
+const { BEETLE_ANIMATIONS } = modules["server/beetle-animation.mjs"];
+const { CREATURE_ATTACK_TIMINGS } = modules["server/creature-attack.mjs"];
+const { unitMovementSpeed, unitTerrainSpeedMultiplier } = modules["server/attributes.mjs"];
+const { combatDamage, combatStrength } = modules["server/combat-stats.mjs"];
+const { buildingAt } = modules["server/buildings.mjs"];
+
+const COMBAT_DISPOSITIONS = Object.freeze({ peaceful: "평화형", passive: "비선공", aggressive: "선공" });
+const PEACEFUL_ESCAPE_CHANCE = .8;
+const PEACEFUL_ESCAPE_INTERVAL = 1.5;
+const COMBAT_ESCAPE_GRACE = 2;
+const COMBAT_EXCHANGE_PAUSE = .2;
+const COMBAT_TURN_ORDER_VERSION = 1;
+const COMBAT_EXCHANGE_DAMAGE_VERSION = 4;
+
+const species = new Map(ENCOUNTER_TYPES.map(type => [type.key, type]));
+
+function combatDisposition(agent) {
+  const type = species.get(agent.species);
+  let disposition = agent.combatDisposition || type?.combatDisposition;
+  if (!disposition) disposition = agent.species === "spiny-back-beetle" ? "aggressive" : "passive";
+  if (!Object.hasOwn(COMBAT_DISPOSITIONS, disposition)) disposition = "passive";
+  return type?.unique && disposition === "peaceful" ? "passive" : disposition;
+}
+
+function combatTeam(agent) {
+  return agent.ownerId ? "colony:" + agent.ownerId : agent.species ? "species:" + agent.species : "agent:" + agent.id;
+}
+
+function canPursueCombat(agent, target, time) {
+  if (agent === target || combatTeam(agent) === combatTeam(target) || target.health <= 0 || target.hidden ||
+      time < (agent.escapeUntil || 0) || time < (target.escapeUntil || 0) || combatDisposition(agent) === "peaceful") return false;
+  if (agent.species && target.species) return false;
+  if (target.combat) return target.combat.teams[1 - target.combat.side] === combatTeam(agent);
+  return combatDisposition(agent) === "aggressive";
+}
+
+function peacefulEscapeChance(suppression) {
+  return PEACEFUL_ESCAPE_CHANCE * (1 - Math.max(0, Math.min(1, suppression || 0)));
+}
+
+function createCombat(environment) {
+  function entries() {
+    return [...environment.games.values()].flatMap(game => game.agents.map(agent => ({ agent, game })))
+      .concat((environment.creatureSystem?.agents || []).map(agent => ({ agent, game: null })));
+  }
+
+  function settled(agent, time) {
+    return agent.health > 0 && !agent.hidden && !(agent.birth && time < agent.birth.readyAt) &&
+      time + 1e-8 >= (agent.moveStartedAt || 0) + (agent.moveDuration || 0) && time >= (agent.escapeUntil || 0);
+  }
+
+  function members(combat) {
+    return entries().filter(entry => entry.agent.health > 0 && entry.agent.combat?.id === combat.id &&
+      entry.agent.x === combat.x && entry.agent.y === combat.y);
+  }
+
+  function attach(agent, combat, side, time) {
+    agent.combat = { id: combat.id, x: combat.x, y: combat.y, teams: [...combat.teams], side, joinedAt: time,
+      turnOrderVersion: COMBAT_TURN_ORDER_VERSION,
+      turn: combat.turn || 0, nextAttackTurn: (combat.turn || 0) + 1,
+      nextEscapeAt: time + PEACEFUL_ESCAPE_INTERVAL };
+    agent.renderFromX = agent.x; agent.renderFromY = agent.y;
+    agent.moveDuration = 0; agent.moveBudget = 0;
+    agent.attack = null; agent.attackTargetId = null;
+    agent.attackReady = time;
+    agent.utility = null; agent.decisionPending = null;
+    if (agent.foodDelivery?.receivedAt === null) agent.foodDelivery = null;
+    agent.mode = "fight";
+    agent.facing = side === 0 ? -1 : 1;
+  }
+
+  function release(agent, time) {
+    agent.combat = null;
+    agent.attack = null; agent.attackTargetId = null; agent.attackHit = true;
+    if (agent.health <= 0) return;
+    agent.utility = null; agent.decisionPending = "combatEnded";
+    agent.mode = agent.species ? "idle" : "search";
+    agent.nextActionAt = time; agent.nextDecisionAt = time;
+    agent.animationStartedAt = time;
+  }
+
+  function finish(combat, time) {
+    for (const { agent } of entries()) if (agent.combat?.id === combat.id) release(agent, time);
+  }
+
+  function engage(agent, target, time) {
+    if (!settled(agent, time) || !settled(target, time) || agent.x !== target.x || agent.y !== target.y ||
+        agent.combat || !canPursueCombat(agent, target, time)) return false;
+    let combat = target.combat;
+    if (combat) {
+      const side = combat.teams.indexOf(combatTeam(agent));
+      if (side < 0 || side === combat.side) return false;
+      attach(agent, combat, side, time);
+    } else {
+      combat = { id: "combat:" + agent.id + ":" + time, x: agent.x, y: agent.y,
+        teams: [combatTeam(agent), combatTeam(target)] };
+      attach(agent, combat, 0, time);
+      attach(target, combat, 1, time);
+    }
+    for (const { agent: ally } of entries()) {
+      if (ally.combat || ally.x !== combat.x || ally.y !== combat.y || !settled(ally, time) || combatDisposition(ally) === "peaceful") continue;
+      const side = combat.teams.indexOf(combatTeam(ally));
+      if (side >= 0) attach(ally, combat, side, time);
+    }
+    return true;
+  }
+
+  function contact(agent, time) {
+    if (!settled(agent, time)) return;
+    const nearby = entries().map(entry => entry.agent).filter(other => other !== agent && other.x === agent.x && other.y === agent.y);
+    for (const other of nearby) {
+      if (other.combat && !agent.combat && combatDisposition(agent) !== "peaceful") {
+        const side = other.combat.teams.indexOf(combatTeam(agent));
+        if (side >= 0) { attach(agent, other.combat, side, time); return; }
+      }
+      if (engage(agent, other, time) || engage(other, agent, time)) return;
+    }
+  }
+
+  function escape(agent, opponents, time) {
+    const combat = agent.combat;
+    combat.nextEscapeAt = time + PEACEFUL_ESCAPE_INTERVAL;
+    const suppression = Math.max(0, ...opponents.map(entry => entry.agent.stats.escapeSuppression || 0));
+    if ((environment.combatRandom || Math.random)() >= peacefulEscapeChance(suppression)) return false;
+    const occupied = entries().filter(entry => entry.agent.health > 0 && entry.agent !== agent);
+    const cells = [[-1, 0], [1, 0], [0, -1], [0, 1]].map(([dx, dy]) => ({ x: agent.x + dx, y: agent.y + dy }))
+      .filter(cell => cell.x >= 0 && cell.y >= 0 && cell.x < 320 && cell.y < 320 &&
+        environment.world.terrain[cell.y * 320 + cell.x] >= 2 && environment.world.terrain[cell.y * 320 + cell.x] <= 9 &&
+        !environment.creatureSystem?.burrowAt?.(cell.x, cell.y) &&
+        !buildingAt(environment, cell.x, cell.y) &&
+        !environment.colonies.some(colony => environment.games.get(colony.ownerId)?.nest?.health !== 0 &&
+          colony.occupiedCells.has((cell.x - colony.x) + "," + (cell.y - colony.y))) &&
+        !occupied.some(entry => entry.agent.x === cell.x && entry.agent.y === cell.y ||
+          time < entry.agent.moveStartedAt + entry.agent.moveDuration && entry.agent.renderFromX === cell.x && entry.agent.renderFromY === cell.y))
+      .sort((a, b) => (environment.world.hazards?.[a.y * 320 + a.x] || 0) - (environment.world.hazards?.[b.y * 320 + b.x] || 0));
+    if (!cells.length) return false;
+    const destination = cells[0], from = { x: agent.x, y: agent.y };
+    release(agent, time);
+    agent.renderFromX = from.x; agent.renderFromY = from.y;
+    agent.x = destination.x; agent.y = destination.y;
+    agent.moveStartedAt = time;
+    const speed = agent.species ? agent.stats.speed : unitMovementSpeed(agent.stats);
+    agent.moveDuration = 1 / Math.max(.1, speed * unitTerrainSpeedMultiplier(agent, environment.world.terrain[agent.y * 320 + agent.x]));
+    agent.escapeUntil = time + agent.moveDuration + COMBAT_ESCAPE_GRACE;
+    agent.nextActionAt = time + agent.moveDuration;
+    agent.nextDecisionAt = time + agent.moveDuration;
+    agent.decisionPending = null;
+    agent.mode = agent.species ? "walk" : "flee";
+    agent.animationStartedAt = time;
+    agent.stepCount = (agent.stepCount || 0) + 1;
+    agent.lastDirection = { dx: destination.x - from.x, dy: destination.y - from.y };
+    if (destination.x !== from.x) agent.facing = Math.sign(destination.x - from.x);
+    if (!members(combat).some(entry => entry.agent.combat.side === combat.side)) finish(combat, time);
+    return true;
+  }
+
+  function hurtDuration(agent) {
+    return agent.species === "spiny-back-beetle" ? BEETLE_ANIMATIONS.hurt.durationMs / 1000 : AGENT_HURT_DURATION;
+  }
+
+  function attackTiming(agent) {
+    return CREATURE_ATTACK_TIMINGS[agent.species] || (agent.species === "spiny-back-beetle" ? BEETLE_ANIMATIONS.attack :
+      { durationMs: AGENT_ATTACK_DURATION * 1000, hitTimeMs: AGENT_ATTACK_HIT_TIME * 1000 });
+  }
+
+  function createExchange(attacker, target, previous) {
+    const old = previous?.exchange, random = environment.damageRandom || Math.random;
+    const attackApplied = !!old?.attackApplied || !!previous?.counter || !!previous?.resolved;
+    const counterApplied = !!old?.counterApplied || !!previous?.counterResolved || !!previous?.counter && !!previous?.resolved;
+    const attackDamage = old?.attackDamage ?? previous?.damage;
+    const counterDamage = old?.counterDamage ?? (previous?.counter ? previous.damage : 0);
+    const beforeAttacker = { ...attacker, health: Math.min(attacker.stats.health,
+      attacker.health + (counterApplied && Number.isFinite(counterDamage) ? counterDamage : 0)) };
+    const beforeTarget = { ...target, health: Math.min(target.stats.health,
+      target.health + (attackApplied && Number.isFinite(attackDamage) ? attackDamage : 0)) };
+    const timing = attackTiming(target);
+    return { damageVersion: COMBAT_EXCHANGE_DAMAGE_VERSION, attackerId: attacker.id, targetId: target.id,
+      targetSpecies: target.species || null,
+      attackerHealth: beforeAttacker.health, targetHealth: beforeTarget.health,
+      attackerStrength: combatStrength(beforeAttacker), targetStrength: combatStrength(beforeTarget),
+      attackDamage: attackApplied || old?.damageVersion === 2 ? attackDamage : combatDamage(beforeAttacker, beforeTarget, random()),
+      counterDamage: counterApplied || old?.damageVersion === 2 ? counterDamage : combatDamage(beforeTarget, beforeAttacker, random()),
+      counterHitTime: timing.hitTimeMs / 1000,
+      counterDuration: timing.durationMs / 1000,
+      attackApplied, counterApplied, resolved: counterApplied };
+  }
+
+  function receiveDamage(entry, damage) {
+    if (entry.game) entry.game.receiveDamage(entry.agent, damage);
+    else environment.creatureSystem.receiveDamage(entry.agent, damage);
+  }
+
+  function resolveHit(attack, target) {
+    const exchange = attack.exchange, applied = attack.counter ? "counterApplied" : "attackApplied";
+    if (exchange[applied]) return;
+    attack.damage = exchange[attack.counter ? "counterDamage" : "attackDamage"];
+    exchange[applied] = true;
+    receiveDamage(target, attack.damage);
+    exchange.resolved = exchange.attackApplied && exchange.counterApplied;
+  }
+
+  function beginAttack(attacker, target, time, exchange, counter) {
+    const beetle = attacker.species === "spiny-back-beetle";
+    const timing = attackTiming(attacker), duration = timing.durationMs / 1000, hitTime = timing.hitTimeMs / 1000;
+    attacker.attack = { combatId: attacker.combat.id, startedAt: time, speed: 1, hitAt: time + hitTime,
+      endsAt: time + duration, exchangeEndsAt: time + Math.max(duration, hitTime + hurtDuration(target)) + COMBAT_EXCHANGE_PAUSE,
+      targetId: target.id, targetKind: "agent", targetX: attacker.combat.x, targetY: attacker.combat.y,
+      directionX: attacker.combat.side === 0 ? -1 : 1,
+      damage: counter ? exchange.counterDamage : exchange.attackDamage, exchange, counter, resolved: false, hit: false };
+    attacker.attackReady = attacker.attack.exchangeEndsAt;
+    attacker.attackStartedAt = time; attacker.animationStartedAt = time;
+    attacker.attackTargetId = target.id; attacker.attackHit = false;
+    attacker.mode = beetle ? "attack" : "fight";
+  }
+
+  function update(agent, time) {
+    if (!agent.combat) contact(agent, time);
+    const combat = agent.combat;
+    if (!combat || agent.health <= 0) return false;
+    if (agent.x !== combat.x || agent.y !== combat.y) { release(agent, time); return false; }
+    const pendingOwner = entries().find(entry => entry.agent.combat?.id === combat.id && entry.agent.combat.pendingCounter);
+    if (pendingOwner) {
+      const pending = pendingOwner.agent.combat.pendingCounter;
+      const team = pendingOwner.agent.combat.teams[1 - pendingOwner.agent.combat.side];
+      const targetSpecies = pending.exchange.targetSpecies || (team.startsWith("species:") ? team.slice(8) : null);
+      const timing = CREATURE_ATTACK_TIMINGS[targetSpecies];
+      if (timing) {
+        pending.startedAt ??= pending.hitAt - pending.exchange.counterHitTime;
+        pending.exchange.targetSpecies = targetSpecies;
+        pending.exchange.counterHitTime = timing.hitTimeMs / 1000;
+        pending.exchange.counterDuration = timing.durationMs / 1000;
+        pending.hitAt = pending.startedAt + pending.exchange.counterHitTime;
+        pending.endsAt = pending.startedAt + Math.max(pending.exchange.counterDuration,
+          pending.exchange.counterHitTime + hurtDuration(pendingOwner.agent)) + COMBAT_EXCHANGE_PAUSE;
+      }
+      if (!pending.resolved && time + 1e-8 >= pending.hitAt) {
+        pending.resolved = true;
+        if (!pending.exchange.counterApplied) {
+          pending.exchange.counterApplied = true;
+          pending.exchange.resolved = true;
+          receiveDamage(pendingOwner, pending.exchange.counterDamage);
+        }
+      }
+      if (time + 1e-8 < pending.endsAt) return true;
+      if (pendingOwner.agent.combat) delete pendingOwner.agent.combat.pendingCounter;
+      if (agent.health <= 0) return true;
+    }
+    let participants = members(combat);
+    let opponents = participants.filter(entry => entry.agent.combat.side !== combat.side);
+    agent.moveBudget = 0;
+    agent.facing = combat.side === 0 ? -1 : 1;
+    agent.mode = agent.species === "spiny-back-beetle" ? agent.attack ? "attack" : "idle" : "fight";
+    const attacks = participants.filter(entry => entry.agent.attack?.combatId === combat.id)
+      .sort((a, b) => a.agent.attack.startedAt - b.agent.attack.startedAt ||
+        a.agent.combat.side - b.agent.combat.side || String(a.agent.id).localeCompare(String(b.agent.id)));
+    for (const { agent: member } of attacks.slice(1)) {
+      if (member.attack.resolved && member.attack.targetId === attacks[0].agent.id &&
+          attacks[0].agent.attack.targetId === member.id) attacks[0].agent.attack.counterResolved = true;
+      member.attack = null;
+      member.attackTargetId = null;
+      member.mode = member.species === "spiny-back-beetle" ? "idle" : "fight";
+    }
+    if (participants.some(entry => entry.agent.combat.turnOrderVersion !== COMBAT_TURN_ORDER_VERSION ||
+        !Number.isFinite(entry.agent.combat.nextAttackTurn))) {
+      const turn = Math.max(0, ...participants.map(entry => Number.isFinite(entry.agent.combat.turn) ? entry.agent.combat.turn : 0));
+      for (const { agent: member } of participants) {
+        member.combat.turnOrderVersion = COMBAT_TURN_ORDER_VERSION;
+        member.combat.turn = turn;
+        member.combat.nextAttackTurn = turn + (member === attacks[0]?.agent ? 2 : 1);
+      }
+    }
+    if (attacks.length) {
+      const attacker = attacks[0], attack = attacker.agent.attack;
+      const target = participants.find(entry => entry.agent.id === attack.targetId &&
+        entry.agent.combat.side !== attacker.agent.combat.side);
+      if (target && attack.exchange?.damageVersion !== COMBAT_EXCHANGE_DAMAGE_VERSION) {
+        attack.exchange = attack.counter ? createExchange(target.agent, attacker.agent, attack) :
+          createExchange(attacker.agent, target.agent, attack);
+        attack.damage = attack.counter ? attack.exchange.counterDamage : attack.exchange.attackDamage;
+      }
+      const timing = CREATURE_ATTACK_TIMINGS[attacker.agent.species];
+      if (timing) {
+        const hitAt = attack.startedAt + timing.hitTimeMs / 1000, endsAt = attack.startedAt + timing.durationMs / 1000;
+        if (attack.hitAt !== hitAt || attack.endsAt !== endsAt) {
+          attack.hitAt = hitAt;
+          attack.endsAt = endsAt;
+          attack.exchangeEndsAt = Math.max(endsAt, hitAt + hurtDuration(target?.agent || {}),
+            attack.resolved && Number.isFinite(target?.agent.hurtStartedAt) ?
+              target.agent.hurtStartedAt + hurtDuration(target.agent) : -Infinity) + COMBAT_EXCHANGE_PAUSE;
+          attacker.agent.attackReady = attack.exchangeEndsAt;
+        }
+      }
+      if (attack.exchange) {
+        const team = attacker.agent.combat.teams[1 - attacker.agent.combat.side];
+        attack.exchange.targetSpecies ??= attack.counter ? attacker.agent.species || null :
+          target?.agent.species || (team.startsWith("species:") ? team.slice(8) : null);
+        const counterTiming = CREATURE_ATTACK_TIMINGS[attack.exchange.targetSpecies];
+        if (counterTiming) {
+          attack.exchange.counterHitTime = counterTiming.hitTimeMs / 1000;
+          attack.exchange.counterDuration = counterTiming.durationMs / 1000;
+        }
+      }
+      attack.exchangeEndsAt ??= Math.max(attack.endsAt, attack.hitAt + hurtDuration(target?.agent || {})) + COMBAT_EXCHANGE_PAUSE;
+      if (!attack.resolved && time + 1e-8 >= attack.hitAt) {
+        attack.resolved = true;
+        attacker.agent.attackHit = true;
+        if (target) {
+          attack.hit = true;
+          resolveHit(attack, target);
+          attack.exchangeEndsAt = Math.max(attack.exchangeEndsAt, time + hurtDuration(target.agent) + COMBAT_EXCHANGE_PAUSE);
+        }
+      }
+      if (time + 1e-8 < attack.exchangeEndsAt) return true;
+      attacker.agent.attack = null;
+      attacker.agent.attackTargetId = null;
+      attacker.agent.mode = attacker.agent.species === "spiny-back-beetle" ? "idle" : "fight";
+      attacker.agent.animationStartedAt = attack.endsAt;
+      participants = members(combat);
+      const counter = participants.find(entry => entry.agent.id === attack.exchange?.targetId);
+      const original = participants.find(entry => entry.agent.id === attack.exchange?.attackerId);
+      if (!attack.counter && attack.hit && counter && original) {
+        beginAttack(counter.agent, original.agent, time, attack.exchange, true);
+        return true;
+      }
+      if (!attack.counter && attack.hit && original && !attack.exchange.counterApplied &&
+          Number.isFinite(attack.exchange.counterDamage)) {
+        original.agent.combat.pendingCounter = { exchange: attack.exchange,
+          startedAt: time,
+          hitAt: time + attack.exchange.counterHitTime,
+          endsAt: time + Math.max(attack.exchange.counterDuration,
+            attack.exchange.counterHitTime + hurtDuration(original.agent)) + COMBAT_EXCHANGE_PAUSE,
+          resolved: false };
+        return true;
+      }
+    }
+    participants = members(combat);
+    for (const entry of participants) {
+      if (!entry.agent.combat || combatDisposition(entry.agent) !== "peaceful" || time + 1e-8 < entry.agent.combat.nextEscapeAt) continue;
+      const enemies = members(combat).filter(other => other.agent.combat.side !== entry.agent.combat.side);
+      if (enemies.length) escape(entry.agent, enemies, time);
+    }
+    if (!agent.combat) return true;
+    participants = members(combat);
+    opponents = participants.filter(entry => entry.agent.combat.side !== combat.side);
+    if (!opponents.length) { finish(combat, time); return true; }
+    const hurtEndsAt = Math.max(...participants.map(entry =>
+      Number.isFinite(entry.agent.hurtStartedAt) ? entry.agent.hurtStartedAt + hurtDuration(entry.agent) : -Infinity));
+    if (time + 1e-8 < hurtEndsAt + COMBAT_EXCHANGE_PAUSE) return true;
+    const contenders = participants.filter(entry => combatDisposition(entry.agent) !== "peaceful").sort((a, b) => {
+      const difference = a.agent.combat.nextAttackTurn - b.agent.combat.nextAttackTurn;
+      return Math.abs(difference) > 1e-8 ? difference : a.agent.combat.side - b.agent.combat.side ||
+        a.agent.combat.joinedAt - b.agent.combat.joinedAt || String(a.agent.id).localeCompare(String(b.agent.id));
+    });
+    if (!contenders.length) return true;
+    const attacker = contenders[0].agent;
+    const target = opponents.length && participants.filter(entry => entry.agent.combat.side !== attacker.combat.side)
+      .sort((a, b) => a.agent.combat.joinedAt - b.agent.combat.joinedAt || String(a.agent.id).localeCompare(String(b.agent.id)))[0].agent;
+    const turn = attacker.combat.nextAttackTurn;
+    for (const { agent: member } of participants) member.combat.turn = turn;
+    attacker.combat.nextAttackTurn += 1;
+    beginAttack(attacker, target, time, createExchange(attacker, target, null), false);
+    return true;
+  }
+
+  return { update, engage, release };
+}
+
+return { COMBAT_DISPOSITIONS, PEACEFUL_ESCAPE_CHANCE, PEACEFUL_ESCAPE_INTERVAL, COMBAT_ESCAPE_GRACE, COMBAT_EXCHANGE_PAUSE, COMBAT_TURN_ORDER_VERSION, COMBAT_EXCHANGE_DAMAGE_VERSION, combatDisposition, combatTeam, canPursueCombat, peacefulEscapeChance, createCombat };
+})();
+modules["server/player-tribes.mjs"] = (() => {
+const PLAYER_TRIBES = Object.freeze([
+  { key: "bean", name: "새싹콩", nest: "DesignAssets/Nests/nest-stage-01.png",
+    idle: "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.webp", frames: 64, frameMs: 100 },
+  ...[["spore", "포자버섯"], ["pebble", "몽돌"], ["spring", "샘방울"]].map(([key, name]) => ({
+    key, name, nest: `DesignAssets/Tribes/${key}/Nests/nest-stage-01.png`,
+    idle: `DesignAssets/Tribes/${key}/AnimationStudies/idle-${key === "spore" ? "v8" : key === "pebble" ? "v3" : "v4"}/idle-${key === "spore" ? "v8" : key === "pebble" ? "v3" : "v4"}.webp`,
+    frames: 64, frameMs: 100,
+    starter: `DesignAssets/Tribes/${key}/starter.png`,
+    body: `DesignAssets/Tribes/${key}/BaseParts/body.png`,
+    manifest: `DesignAssets/Tribes/${key}/manifest.json`,
+    parts: []
+  }))
+].map(tribe => Object.freeze(tribe)));
+
+const PLAYER_TRIBE_ASSETS = Object.freeze(PLAYER_TRIBES.flatMap(tribe =>
+  [tribe.nest, tribe.idle, tribe.starter, tribe.body, tribe.manifest, ...(tribe.parts || [])].filter(Boolean)));
+
+return { PLAYER_TRIBES, PLAYER_TRIBE_ASSETS };
+})();
+modules["client/combat-lab.mjs"] = (() => {
+const { createCombat, COMBAT_TURN_ORDER_VERSION } = modules["server/combat.mjs"];
+const { UNIT_COMBAT_STATS } = modules["server/combat-stats.mjs"];
+const { ENCOUNTER_TYPES } = modules["server/encounter-types.mjs"];
+const { PLAYER_TRIBES } = modules["server/player-tribes.mjs"];
+
+const COMBAT_LAB_UNITS = Object.freeze(Object.entries(UNIT_COMBAT_STATS).map(([key, stats]) => {
+  const tribe = PLAYER_TRIBES.find(entry => entry.key === key);
+  const creature = ENCOUNTER_TYPES.find(entry => entry.key === key);
+  return Object.freeze({ key, ...stats, name: tribe?.name || creature?.name || "가시등 딱정벌레",
+    group: tribe ? "4종족" : creature?.unique ? "유니크" : "일반 생물", image: creature?.image });
+}));
+
+function createCombatTrial(settings) {
+  let seed = Number(settings.seed) >>> 0;
+  function random() {
+    seed = (seed + 0x6D2B79F5) >>> 0;
+    let value = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    value ^= value + Math.imul(value ^ value >>> 7, 61 | value);
+    return ((value ^ value >>> 14) >>> 0) / 4294967296;
+  }
+  const agents = [settings.left, settings.right].map((selection, side) => {
+    const profile = COMBAT_LAB_UNITS.find(entry => entry.key === selection.key);
+    if (!profile) throw new Error("유닛을 선택해 주세요.");
+    const strength = Number(selection.combatStrength), health = Number(selection.health);
+    if (!Number.isFinite(strength) || strength < 0 || strength > 100 ||
+        !Number.isFinite(health) || health < 1 || health > profile.health) throw new Error("수치를 확인해 주세요.");
+    const first = settings.first === "right" ? 1 : 0;
+    return { id: side === 0 ? "left" : "right", ownerId: side === 0 ? "left" : "right",
+      tribe: PLAYER_TRIBES.some(entry => entry.key === profile.key) ? profile.key : undefined,
+      species: PLAYER_TRIBES.some(entry => entry.key === profile.key) ? undefined : profile.key,
+      name: profile.name, key: profile.key, x: 100, y: 100, renderFromX: 100, renderFromY: 100,
+      moveStartedAt: 0, moveDuration: 0, health, attributes: {}, stats: { health: profile.health, combatStrength: strength, speed: 1 },
+      combatDisposition: "aggressive", mode: "fight", animationStartedAt: 0,
+      combat: { id: "arena", x: 100, y: 100, teams: first ? ["colony:right", "colony:left"] : ["colony:left", "colony:right"],
+        side: side === first ? 0 : 1, joinedAt: 0, turnOrderVersion: COMBAT_TURN_ORDER_VERSION,
+        turn: 0, nextAttackTurn: 1, nextEscapeAt: Infinity } };
+  });
+  const pending = [], history = [];
+  const environment = { games: new Map(), colonies: [], simSeconds: 0,
+    world: { terrain: new Uint8Array(320 * 320).fill(4) },
+    damageRandom: settings.random ? random : () => .5 };
+  for (const agent of agents) environment.games.set(agent.ownerId, {
+    agents: [agent], receiveDamage(target, damage) {
+      target.health = Math.max(0, target.health - damage);
+      target.hurtStartedAt = environment.simSeconds;
+      target.hurtCount = (target.hurtCount || 0) + 1;
+      const active = agents.find(agent => agent.attack)?.attack;
+      const retaliation = agents.find(agent => agent.combat?.pendingCounter)?.combat.pendingCounter;
+      const exchange = active?.exchange || retaliation?.exchange;
+      pending.push({ targetId: target.id, damage, counter: !!active?.counter || !!retaliation,
+        leftStrength: exchange.attackerId === "left" ? exchange.attackerStrength : exchange.targetStrength,
+        rightStrength: exchange.attackerId === "right" ? exchange.attackerStrength : exchange.targetStrength });
+    }
+  });
+  const combat = createCombat(environment);
+  function result() {
+    if (agents.some(agent => agent.combat?.pendingCounter && !agent.combat.pendingCounter.exchange.counterApplied ||
+        agent.attack?.exchange.attackApplied && !agent.attack.exchange.counterApplied)) return null;
+    if (agents.every(agent => agent.health > 0)) return null;
+    if (agents.every(agent => agent.health <= 0)) return "draw";
+    return agents.find(agent => agent.health > 0).id;
+  }
+  function tick(time) {
+    if (result()) return;
+    environment.simSeconds = time;
+    for (const agent of agents) if (agent.health > 0) combat.update(agent, time);
+    if (pending.length) {
+      history.push({ index: history.length + 1, time, leftStrength: pending[0].leftStrength, rightStrength: pending[0].rightStrength,
+        attackerId: pending[0].targetId === "left" ? "right" : "left", counter: pending[0].counter,
+        leftDamage: pending.find(hit => hit.targetId === "left")?.damage || 0,
+        rightDamage: pending.find(hit => hit.targetId === "right")?.damage || 0,
+        leftHealth: agents[0].health, rightHealth: agents[1].health });
+      pending.length = 0;
+    }
+  }
+  function advance(seconds) {
+    const end = environment.simSeconds + seconds;
+    while (!result() && environment.simSeconds < end) tick(Math.min(end, environment.simSeconds + 1 / 60));
+  }
+  function step() {
+    const count = history.length;
+    for (let attempt = 0; attempt < 20 && !result() && history.length === count; attempt++) {
+      const attack = agents.find(agent => agent.attack)?.attack;
+      const retaliation = agents.find(agent => agent.combat?.pendingCounter)?.combat.pendingCounter;
+      const next = retaliation ? retaliation.resolved ? retaliation.endsAt : retaliation.hitAt :
+        attack ? attack.resolved ? attack.exchangeEndsAt : attack.hitAt : environment.simSeconds;
+      tick(Math.max(environment.simSeconds + .000001, next));
+    }
+    return history.at(-1);
+  }
+  function finish() {
+    for (let attempt = 0; attempt < 200 && !result(); attempt++) step();
+    return result();
+  }
+  tick(0);
+  return { agents, history, advance, step, finish, result, get time() { return environment.simSeconds; } };
+}
+
+return { COMBAT_LAB_UNITS, createCombatTrial };
+})();
+modules["client/unit-animation.mjs"] = (() => {
+const { imageAnimation } = modules["client/image-geometry.mjs"];
+
+const UNIT_ANIMATIONS = Object.freeze({
+  "bean": {
+    "idle": {"image": "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.webp", "frameSize": 512, "columns": 4, "loop": true, "pivotX": 256, "pivotY": 448, durationsMs: Array(64).fill(100) },
+    "attack": {"image": "DesignAssets/Animations/UnitAttack/attack.png", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: [60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60] },
+    "hurt": {"image": "DesignAssets/Animations/UnitHurt/V3/hurt.png", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: [20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20] },
+  },
+  "spore": {
+    "idle": {"image": "DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp", "frameSize": 512, "columns": 4, "loop": true, "pivotX": 256, "pivotY": 448, durationsMs: Array(64).fill(100) },
+    "walk": {"image": "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/walk-v2.webp", "frameSize": 512, "columns": 4, "loop": true, "pivotX": 256, "pivotY": 448, durationsMs: Array(16).fill(70) },
+    "jump": {"image": "DesignAssets/Tribes/spore/Animations/Units/jump/jump.webp", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: Array(16).fill(70) },
+    "attack": {"image": "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/right/attack.webp", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: [60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60] },
+    "hurt": {"image": "DesignAssets/Tribes/spore/AnimationStudies/hurt-v2/hurt-v2.webp", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: [20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20] },
+    "death": {"image": "DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: [120,100,140,120,140,100,120,600] },
+  },
+  "pebble": {
+    "idle": {"image": "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp", "frameSize": 512, "columns": 4, "loop": true, "pivotX": 256, "pivotY": 448, durationsMs: Array(64).fill(100) },
+    "walk": {"image": "DesignAssets/Tribes/pebble/AnimationStudies/walk-in-place-v1/walk.webp", "frameSize": 512, "columns": 5, "loop": true, cyclesPerCell: 2.5, "pivotX": 256, "pivotY": 448, durationsMs: Array(20).fill(40) },
+    "jump": {"image": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.webp", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: Array(16).fill(70) },
+    "attack": {"image": "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: [60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60] },
+    "hurt": {"image": "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: [20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20] },
+    "death": {"image": "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: [120,100,140,120,140,100,120,600] },
+  },
+  "spring": {
+    "idle": {"image": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp", "frameSize": 512, "columns": 4, "loop": true, "pivotX": 256, "pivotY": 448, durationsMs: Array(64).fill(100) },
+    "walk": {"image": "DesignAssets/Tribes/spring/AnimationStudies/flow-v4/flow-v4.webp", "frameSize": 512, "columns": 4, "loop": true, "pivotX": 256, "pivotY": 448, durationsMs: Array(16).fill(70) },
+    "jump": {"image": "DesignAssets/Tribes/spring/Animations/Units/jump/jump.webp", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: Array(16).fill(70) },
+    "attack": {"image": "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: [60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60] },
+    "hurt": {"image": "DesignAssets/Tribes/spring/AnimationStudies/hurt-v2/hurt-v2.webp", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: [20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20] },
+    "death": {"image": "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: [120,100,140,120,140,100,120,600] },
+  },
+});
+
+const SPROUT_DECOMPOSITION_PART = "DesignAssets/Tribes/sprout/AnimationStudies/idle-tail-v1/Parts/tail.png";
+
+const SPROUT_DECOMPOSITION_ANIMATIONS = Object.freeze(Object.fromEntries(["basic", "antenna", "tail"].map(name => [name, {
+  image: "DesignAssets/Tribes/sprout/Animations/Attributes/decomposition-idle-v1/" + name + ".webp",
+  frameSize: 256, columns: 8, loop: true, pivotX: 128, pivotY: 224, durationsMs: Array(128).fill(50)
+}])));
+
+const CREATURE_IDLE_ANIMATIONS = Object.freeze({
+  "spring-keeper": {"image":"DesignAssets/Animations/UniqueIdleV4/spring-keeper/idle.webp","frameSize":384,"columns":8,"durationsMs":[1450,50,50,50,50,50,50,50,50,50,50,50,100,200,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,1350,150,1700],"loop":true,"pivotX":157.5,"pivotY":307.5},
+  "lantern-keeper": {"image":"DesignAssets/Animations/UniqueIdleV4/lantern-keeper/idle.webp","frameSize":384,"columns":8,"durationsMs":[1650,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,400,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,2700],"loop":true,"pivotX":203.25,"pivotY":324.75},
+  "white-paw": {"image":"DesignAssets/Animations/MountainPawLeaderIdle/white-paw/idle-runtime.webp","frameSize":288,"columns":8,"durationsMs":[1400,150,100,150,100,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,300,150,150,150,150,2700],"loop":true,"pivotX":192.5,"pivotY":242},
+  "old-garden-snail": {"image":"DesignAssets/Animations/UniqueIdleV3/old-garden-snail/idle.webp","frameSize":352,"columns":8,"durationsMs":[800,160,150,180,180,210,700,150,130,130,140,180,2600],"loop":true,"pivotX":180.8125,"pivotY":304.5625},
+  "cotton-sheep": {"image":"DesignAssets/Animations/CottonSheepIdle/CalmV5/idle-runtime.webp","frameSize":256,"columns":8,"durationsMs":[50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,100],"loop":true,"pivotX":128,"pivotY":224},
+  "walking-forest": {"image":"DesignAssets/Animations/MountainPawLeaderIdle/walking-forest/idle-runtime.webp","frameSize":256,"columns":8,"durationsMs":[1450,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,1600],"loop":true,"pivotX":128,"pivotY":224},
+  "spiny-back-leader": {"image":"DesignAssets/Animations/MountainPawLeaderIdle/spiny-back-leader/idle-runtime.webp","frameSize":256,"columns":8,"durationsMs":[1250,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,600,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,2550],"loop":true,"pivotX":128,"pivotY":224},
+  "vine-turtle": {"image":"DesignAssets/Animations/CreatureIdleStudies/V2/vine-turtle/idle.webp","frameSize":512,"columns":8,"durationsMs":[50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50],"loop":true,"pivotX":262.5,"pivotY":441.62},
+  "shadow-weasel": {"image":"DesignAssets/Animations/CreatureIdleStudies/V2/shadow-weasel/idle.webp","frameSize":512,"columns":8,"durationsMs":[50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50],"loop":true,"pivotX":257.0,"pivotY":423.56},
+  "snare-vine": {"image":"DesignAssets/Animations/CreatureIdleStudies/V1/snare-vine/idle.webp","frameSize":512,"columns":8,"durationsMs":[650,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,3350],"loop":true,"pivotX":255.5,"pivotY":470.15999999999997},
+  "rolling-acorn": {"image":"DesignAssets/Animations/RollingAcornIdle/v1/idle.webp","frameSize":512,"columns":4,"durationsMs":[500,500,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,40,80,40,50,90,100,150,150,200,500],"loop":true,"pivotX":256,"pivotY":426},
+  "bubble-toad": {"image":"DesignAssets/Animations/BubbleToadIdle/BreathV1/idle.webp","frameSize":512,"columns":4,"durationsMs":[50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,500],"loop":true,"pivotX":259,"pivotY":380.52},
+  "soil-boar": {"image": "DesignAssets/Animations/SoilBoarIdle/V1/idle.webp", "frameSize": 512, "columns": 8, "loop": true, "pivotX": 256, "pivotY": 394, durationsMs: Array(80).fill(50) },
+  "flower-tail-bird": {"image": "DesignAssets/Animations/CreatureIdleV3/flower-tail-bird/idle.webp", "frameSize": 512, "columns": 4, "durationsMs": [2000, 65, 50, 40, 40, 55, 40, 35, 40, 45, 50, 80, 55, 45, 40, 40, 55, 40, 35, 40, 50, 70, 3990], "loop": true, "pivotX": 256, "pivotY": 448},
+  "dew-rabbit": {"image": "DesignAssets/Animations/CreatureIdleV3/dew-rabbit/idle.webp", "frameSize": 512, "columns": 4, "durationsMs": [2200, 65, 60, 50, 45, 40, 65, 50, 55, 60, 180, 35, 35, 35, 35, 40, 35, 35, 35, 35, 60, 3750], "loop": true, "pivotX": 256, "pivotY": 448},
+  "soil-mole": {"image": "DesignAssets/Animations/CreatureIdleV3/soil-mole/idle.webp", "frameSize": 512, "columns": 4, "durationsMs": [1650, 180, 180, 240, 200, 200, 750, 25, 25, 30, 45, 25, 20, 25, 3405], "loop": true, "pivotX": 256, "pivotY": 448},
+  "bundle-snail": {"image": "DesignAssets/Animations/CreatureIdleV4/bundle-snail/idle.webp", "frameSize": 512, "columns": 4, "durationsMs": [1500, 65, 60, 60, 65, 70, 70, 160, 100, 90, 90, 200, 100, 110, 110, 240, 90, 90, 90, 80, 80, 80, 90, 3310], "loop": true, "pivotX": 256, "pivotY": 448},
+});
+
+const CREATURE_WALK_ANIMATIONS = Object.freeze({
+  "flower-tail-bird": {"image":"DesignAssets/Animations/CreatureWalkV2/flower-tail-bird/walk.webp","frameSize":388,"columns":4,"durationsMs":[80,80,80,90,90,80,80,87],"loop":true,"pivotX":194,"pivotY":357.0086206896552,"cyclesPerCell":3},
+  "dew-rabbit": {"image":"DesignAssets/Animations/CreatureWalkV2/dew-rabbit/walk.webp","frameSize":433,"viewSize":417,"columns":4,"durationsMs":[100,80,100,180,100,100,150,190],"loop":true,"pivotX":216.5,"pivotY":442.9627192982456,"cyclesPerCell":2},
+  "soil-mole": {"image":"DesignAssets/Animations/CreatureWalkV2/soil-mole/walk.webp","frameSize":355,"columns":4,"durationsMs":[80,80,90,80,80,90,80,87],"loop":true,"pivotX":177.5,"pivotY":310.625,"cyclesPerCell":3},
+  "bundle-snail": {"image":"DesignAssets/Animations/CreatureWalkV2/bundle-snail/walk.webp","frameSize":398,"columns":4,"durationsMs":[200,250,250,250,300,250,250,250],"loop":true,"pivotX":199,"pivotY":348.25,"cyclesPerCell":1},
+  "cotton-sheep": {"image":"DesignAssets/Animations/CreatureWalkV2/cotton-sheep/walk.webp","frameSize":256,"columns":4,"durationsMs":[125,125,125,125,125,125,125,125],"loop":true,"pivotX":128,"pivotY":224,"cyclesPerCell":2},
+  "rolling-acorn": {"image":"DesignAssets/Animations/CreatureWalkV2/rolling-acorn/walk.webp","frameSize":420,"columns":8,"durationsMs":[78,78,78,78,79,78,78,78,78,78,78,79,78,78,78,78,78,78,78,78,79,78,78,78,78,78,78,79,78,78,78,78,78,78,78,78,79,78,78,78,78,78,78,79,78,78,78,78,78,78,78,78,79,78,78,78,78,78,78,79,78,78,78,78],"loop":true,"pivotX":210,"pivotY":349.453125,"cyclesPerCell":0.4},
+  "soil-boar": {"image":"DesignAssets/Animations/CreatureWalkV2/soil-boar/walk.webp","frameSize":256,"columns":8,"durationsMs":[100,100,100,100,100,100,100,100],"loop":true,"pivotX":128,"pivotY":197,"cyclesPerCell":2},
+  "bubble-toad": {"image":"DesignAssets/Animations/CreatureWalkV2/bubble-toad/walk.webp","frameSize":288,"viewSize":256,"columns":8,"durationsMs":[110,120,80,110,130,90,90,150],"loop":true,"pivotX":145.5,"pivotY":222.26,"cyclesPerCell":2},
+  "vine-turtle": {"image":"DesignAssets/Animations/CreatureWalkV2/vine-turtle/walk.webp","frameSize":256,"viewSize":256,"columns":8,"durationsMs":[170,130,120,140,170,130,120,140],"loop":true,"pivotX":131.25,"pivotY":220.81,"cyclesPerCell":1.5},
+  "shadow-weasel": {"image":"DesignAssets/Animations/CreatureWalkV2/shadow-weasel/walk.webp","frameSize":256,"viewSize":256,"columns":8,"durationsMs":[85,80,85,100,85,80,85,100],"loop":true,"pivotX":128.5,"pivotY":211.78,"cyclesPerCell":2.5},
+  "snare-vine": {"image":"DesignAssets/Animations/CreatureWalkV2/snare-vine/walk.webp","frameSize":256,"viewSize":256,"columns":6,"durationsMs":[180,140,140,160,140,180],"loop":true,"pivotX":127.75,"pivotY":235.08,"cyclesPerCell":1.5},
+  "talon-owl": {"image":"DesignAssets/Animations/CreatureWalkV2/talon-owl/walk.webp","frameSize":432,"viewSize":256,"columns":8,"durationsMs":[70,80,80,85,80,70,70,65],"loop":true,"pivotX":205,"pivotY":288,"cyclesPerCell":3},
+  "spring-keeper": {"image":"DesignAssets/Animations/CreatureWalkV2/spring-keeper/walk.webp","frameSize":384,"columns":6,"durationsMs":[110,90,100,110,90,100],"loop":true,"pivotX":157.5,"pivotY":307.5,"cyclesPerCell":2.5},
+  "lantern-keeper": {"image":"DesignAssets/Animations/CreatureWalkV2/lantern-keeper/walk.webp","frameSize":384,"columns":6,"durationsMs":[140,100,140,100,120,140],"loop":true,"pivotX":203.25,"pivotY":324.75,"cyclesPerCell":2},
+  "old-garden-snail": {"image":"DesignAssets/Animations/CreatureWalkV2/old-garden-snail/walk.webp","frameSize":352,"columns":6,"durationsMs":[220,220,260,220,220,260],"loop":true,"pivotX":180.8125,"pivotY":304.5625,"cyclesPerCell":1},
+  "walking-forest": {"image":"DesignAssets/Animations/CreatureWalkV2/walking-forest/walk.webp","frameSize":256,"columns":6,"durationsMs":[200,180,180,200,180,180],"loop":true,"pivotX":128,"pivotY":224,"cyclesPerCell":1.4},
+  "white-paw": {"image":"DesignAssets/Animations/CreatureWalkV2/white-paw/walk.webp","frameSize":288,"columns":6,"durationsMs":[110,85,125,110,85,125],"loop":true,"pivotX":192.5,"pivotY":242,"cyclesPerCell":2.5},
+  "spiny-back-leader": {"image":"DesignAssets/Animations/CreatureWalkV2/spiny-back-leader/walk.webp","frameSize":256,"columns":6,"durationsMs":[110,100,100,110,100,100],"loop":true,"pivotX":128,"pivotY":224,"cyclesPerCell":2.5}
+});
+
+const CREATURE_ATTACK_ANIMATIONS = Object.freeze({
+  "spring-keeper": {"image":"DesignAssets/Animations/CreatureAttackV2/spring-keeper/runtime.webp","frameSize":269,"viewSize":274.07547169811323,"columns":4,"pivotX":101.66804245283019,"pivotY":235.25604363207546,"durationsMs":[70,90,100,35,240,100,140,130],"loop":false,"facing":"left","impactFrame":4},
+  "lantern-keeper": {"image":"DesignAssets/Animations/CreatureAttackV2/lantern-keeper/runtime.webp","frameSize":270,"viewSize":259.43060498220643,"columns":4,"pivotX":141.5871052046263,"pivotY":235.53874277135233,"durationsMs":[70,100,120,40,260,110,160,140],"loop":false,"facing":"left","impactFrame":4},
+  "white-paw": {"image":"DesignAssets/Animations/CreatureAttackV2/white-paw/runtime.webp","frameSize":269,"viewSize":247.60227272727272,"columns":4,"pivotX":183.07475142045453,"pivotY":223.09996448863635,"durationsMs":[70,100,90,40,260,110,130,120],"loop":false,"facing":"left","impactFrame":4},
+  "old-garden-snail": {"image":"DesignAssets/Animations/CreatureAttackV2/old-garden-snail/runtime.webp","frameSize":264,"viewSize":239.34065934065933,"columns":4,"pivotX":133.57237293956044,"pivotY":230.11323832417582,"durationsMs":[110,180,220,80,300,220,260,200],"loop":false,"facing":"left","impactFrame":4},
+  "cotton-sheep": {"image":"DesignAssets/Animations/CreatureAttackV2/cotton-sheep/runtime.webp","frameSize":290,"viewSize":256.7708333333333,"columns":4,"pivotX":145.43660481770834,"pivotY":249.0771484375,"durationsMs":[100,110,120,40,240,90,140,190],"loop":false,"facing":"left","impactFrame":4},
+  "walking-forest": {"image":"DesignAssets/Animations/CreatureAttackV2/walking-forest/runtime.webp","frameSize":512,"viewSize":418.9090909090909,"columns":4,"pivotX":255.99999999999997,"pivotY":447,"durationsMs":[100,180,220,60,320,180,220,180],"loop":false,"facing":"left","impactFrame":4},
+  "spiny-back-leader": {"image":"DesignAssets/Animations/CreatureAttackV2/spiny-back-leader/runtime.webp","frameSize":512,"viewSize":418.9090909090909,"columns":4,"pivotX":255.99999999999997,"pivotY":449.5454545454545,"durationsMs":[90,170,220,50,340,180,220,170],"loop":false,"facing":"left","impactFrame":4},
+  "vine-turtle": {"image":"DesignAssets/Animations/CreatureAttackV2/vine-turtle/runtime.webp","frameSize":231,"viewSize":231.67596068904592,"columns":6,"pivotX":118.58627518832472,"pivotY":199.84869689941402,"durationsMs":[70,210,50,300,170,220],"loop":false,"facing":"left","impactFrame":3},
+  "shadow-weasel": {"image":"DesignAssets/Animations/CreatureAttackV2/shadow-weasel/runtime.webp","frameSize":229,"viewSize":228.608642578125,"columns":6,"pivotX":115.25907893614335,"pivotY":189.22680542512376,"durationsMs":[70,210,50,300,170,220],"loop":false,"facing":"left","impactFrame":3},
+  "snare-vine": {"image":"DesignAssets/Animations/CreatureAttackV2/snare-vine/runtime.webp","frameSize":283,"viewSize":283.21875,"columns":6,"pivotX":141.23318481445312,"pivotY":259.8811083984375,"durationsMs":[70,210,50,300,170,220],"loop":false,"facing":"left","impactFrame":3},
+  "rolling-acorn": {"image":"DesignAssets/Animations/CreatureAttackV2/rolling-acorn/runtime.webp","frameSize":312,"viewSize":281.2599381625442,"columns":4,"pivotX":157.38239840989397,"pivotY":270.69152788896866,"durationsMs":[100,110,130,40,220,90,140,190],"loop":false,"facing":"left","impactFrame":4},
+  "bubble-toad": {"image":"DesignAssets/Animations/CreatureAttackV2/bubble-toad/runtime.webp","frameSize":258,"viewSize":258.10648584905664,"columns":6,"pivotX":130.59410861033314,"pivotY":191.8959035874853,"durationsMs":[70,210,50,300,170,220],"loop":false,"facing":"left","impactFrame":3},
+  "soil-boar": {"image":"DesignAssets/Animations/CreatureAttackV2/soil-boar/runtime.webp","frameSize":264,"viewSize":263.4999410377358,"columns":6,"pivotX":132.09826061320754,"pivotY":202.63912768094045,"durationsMs":[70,210,50,300,170,220],"loop":false,"facing":"left","impactFrame":3},
+  "flower-tail-bird": {"image":"DesignAssets/Animations/CreatureAttackV2/flower-tail-bird/runtime.webp","frameSize":283,"viewSize":276.77600235849053,"columns":4,"pivotX":138.03967423349056,"pivotY":259.49940300707544,"durationsMs":[100,110,110,40,220,80,130,180],"loop":false,"facing":"left","impactFrame":4},
+  "dew-rabbit": {"image":"DesignAssets/Animations/CreatureAttackV2/dew-rabbit/runtime.webp","frameSize":278,"viewSize":279.2221593418728,"columns":4,"pivotX":146.09600679107774,"pivotY":248.90296661053443,"durationsMs":[100,110,110,40,200,90,130,190],"loop":false,"facing":"left","impactFrame":4},
+  "soil-mole": {"image":"DesignAssets/Animations/CreatureAttackV2/soil-mole/runtime.webp","frameSize":273,"viewSize":237.44496052340986,"columns":4,"pivotX":136.9022574812279,"pivotY":246.37352221593417,"durationsMs":[100,110,120,40,220,90,130,190],"loop":false,"facing":"left","impactFrame":4},
+  "bundle-snail": {"image":"DesignAssets/Animations/CreatureAttackV2/bundle-snail/runtime.webp","frameSize":293,"viewSize":266.3926816475265,"columns":4,"pivotX":146.9266715437279,"pivotY":270.04213884441253,"durationsMs":[100,130,120,45,220,100,140,210],"loop":false,"facing":"left","impactFrame":4},
+  "talon-owl": {"image":"DesignAssets/Animations/CreatureAttackV2/talon-owl/runtime.webp","frameSize":288,"viewSize":288.1672862453532,"columns":6,"pivotX":131.6345405436803,"pivotY":225.24361059479554,"durationsMs":[70,210,50,300,170,220],"loop":false,"facing":"left","impactFrame":3},
+});
+
+const CREATURE_HURT_ANIMATIONS = Object.freeze({
+  "flower-tail-bird": {"image":"DesignAssets/Animations/CreatureHurtV6/flower-tail-bird/hurt.webp","frameSize":388,"columns":4,"pivotX":194,"pivotY":339.5,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "dew-rabbit": {"image":"DesignAssets/Animations/CreatureHurtV5/dew-rabbit/hurt.webp","frameSize":417,"columns":4,"pivotX":208.5,"pivotY":364.875,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "soil-mole": {"image":"DesignAssets/Animations/CreatureHurtV5/soil-mole/hurt.webp","frameSize":355,"columns":4,"pivotX":177.5,"pivotY":310.625,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "bundle-snail": {"image":"DesignAssets/Animations/CreatureHurtV7/bundle-snail/hurt.webp","frameSize":398,"columns":4,"pivotX":199,"pivotY":348.25,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "cotton-sheep": {"image":"DesignAssets/Animations/CreatureHurtV5/cotton-sheep/hurt.webp","frameSize":256,"columns":4,"pivotX":128,"pivotY":224,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "rolling-acorn": {"image":"DesignAssets/Animations/CreatureHurtV4/rolling-acorn/hurt.webp","frameSize":420,"columns":4,"pivotX":210,"pivotY":349.453125,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "soil-boar": {"image":"DesignAssets/Animations/CreatureHurtV7/soil-boar/hurt.webp","frameSize":369,"columns":4,"pivotX":184.5,"pivotY":283.957031,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "bubble-toad": {"image":"DesignAssets/Animations/CreatureHurtV7/bubble-toad/hurt.webp","frameSize":361,"columns":4,"pivotX":182.615234,"pivotY":268.296328,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "vine-turtle": {"image":"DesignAssets/Animations/CreatureHurtV7/vine-turtle/hurt.webp","frameSize":346,"columns":4,"pivotX":177.392578,"pivotY":298.438516,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "shadow-weasel": {"image":"DesignAssets/Animations/CreatureHurtV6/shadow-weasel/hurt.webp","frameSize":319,"columns":4,"pivotX":160.123047,"pivotY":263.897734,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "snare-vine": {"image":"DesignAssets/Animations/CreatureHurtV7/snare-vine/hurt.webp","frameSize":424,"columns":4,"pivotX":211.585938,"pivotY":389.35125,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "talon-owl": {"image":"DesignAssets/Animations/CreatureHurtV6/talon-owl/hurt.webp","frameSize":432,"columns":4,"pivotX":197.4375,"pivotY":337.5,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "spring-keeper": {"image":"DesignAssets/Animations/CreatureHurtV6/spring-keeper/hurt.webp","frameSize":384,"columns":4,"pivotX":157.5,"pivotY":307.5,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "lantern-keeper": {"image":"DesignAssets/Animations/CreatureHurtV5/lantern-keeper/hurt.webp","frameSize":384,"columns":4,"pivotX":203.25,"pivotY":324.75,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "old-garden-snail": {"image":"DesignAssets/Animations/CreatureHurtV7/old-garden-snail/hurt.webp","frameSize":352,"columns":4,"pivotX":180.8125,"pivotY":304.5625,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "walking-forest": {"image":"DesignAssets/Animations/CreatureHurtV8/walking-forest/hurt.webp","frameSize":256,"columns":4,"pivotX":128,"pivotY":224,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "white-paw": {"image":"DesignAssets/Animations/CreatureHurtV6/white-paw/hurt.webp","frameSize":288,"columns":4,"pivotX":192.5,"pivotY":242,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "spiny-back-leader": {"image":"DesignAssets/Animations/CreatureHurtV8/spiny-back-leader/hurt.webp","frameSize":256,"columns":4,"pivotX":128,"pivotY":224,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+});
+
+for (const animations of [...Object.values(UNIT_ANIMATIONS), SPROUT_DECOMPOSITION_ANIMATIONS]) for (const animation of Object.values(animations)) {
+  Object.assign(animation, imageAnimation(animation));
+  animation.frameCount = animation.durationsMs.length;
+  animation.durationMs = animation.durationsMs.reduce((sum, duration) => sum + duration, 0);
+  Object.freeze(animation.durationsMs);
+  Object.freeze(animation);
+}
+for (const animation of [...Object.values(CREATURE_IDLE_ANIMATIONS), ...Object.values(CREATURE_WALK_ANIMATIONS), ...Object.values(CREATURE_ATTACK_ANIMATIONS), ...Object.values(CREATURE_HURT_ANIMATIONS)]) {
+  Object.assign(animation, imageAnimation(animation));
+  animation.frameCount = animation.durationsMs.length;
+  animation.durationMs = animation.durationsMs.reduce((sum, duration) => sum + duration, 0);
+  Object.freeze(animation.durationsMs);
+  Object.freeze(animation);
+}
+
+const UNIT_ANIMATION_ASSETS = Object.freeze([...new Set([
+  ...Object.values(UNIT_ANIMATIONS).flatMap(animations => Object.values(animations).map(animation => animation.image)),
+  SPROUT_DECOMPOSITION_PART, ...Object.values(SPROUT_DECOMPOSITION_ANIMATIONS).map(animation => animation.image),
+  ...[...Object.values(CREATURE_IDLE_ANIMATIONS), ...Object.values(CREATURE_ATTACK_ANIMATIONS), ...Object.values(CREATURE_HURT_ANIMATIONS)].map(animation => animation.image),
+  ...Object.values(CREATURE_WALK_ANIMATIONS).map(animation => animation.image)
+])]);
+
+function unitAnimationFrame(animation, elapsedMs) {
+  let elapsed = Number.isFinite(elapsedMs) ? Math.max(0, elapsedMs) : animation.durationMs;
+  if (animation.loop) elapsed %= animation.durationMs;
+  for (let frame = 0; frame < animation.frameCount; frame++) {
+    if (elapsed + 1e-6 < animation.durationsMs[frame]) return frame;
+    elapsed -= animation.durationsMs[frame];
+  }
+  return animation.frameCount - 1;
+}
+
+function creatureAttackPose(agent, time) {
+  const animation = CREATURE_ATTACK_ANIMATIONS[agent.species], attack = agent.attack;
+  if (!animation || !attack || agent.health <= 0 || !Number.isFinite(attack.startedAt)) return null;
+  const elapsed = (time - attack.startedAt) * (attack.speed || 1) * 1000;
+  if (!Number.isFinite(elapsed) || elapsed < 0 || elapsed + 1e-6 >= animation.durationMs) return null;
+  const direction = attack.directionX || agent.facing || -1;
+  return { action: "attack", animation, frame: unitAnimationFrame(animation, elapsed), mirrorX: direction > 0 };
+}
+
+function creatureHurtPose(agent, time) {
+  const animation = CREATURE_HURT_ANIMATIONS[agent.species];
+  if (!animation || agent.health <= 0 || !Number.isFinite(agent.hurtStartedAt)) return null;
+  const elapsed = (time - agent.hurtStartedAt) * 1000;
+  if (!Number.isFinite(elapsed) || elapsed < 0 || elapsed + 1e-6 >= animation.durationMs) return null;
+  return { action: "hurt", animation, frame: unitAnimationFrame(animation, elapsed) };
+}
+
+function unitAnimationPose(agent, time) {
+  if (agent.species || agent.birth || agent.health <= 0) return null;
+  const animations = UNIT_ANIMATIONS[agent.tribe || "bean"];
+  if (!animations) return null;
+  let action = "idle", elapsed = (time - (agent.animationStartedAt ?? agent.bornAt ?? 0)) * 1000;
+  const hurt = (time - agent.hurtStartedAt) * 1000;
+  const attack = agent.attack ? (time - agent.attack.startedAt) * (agent.attack.speed || 1) * 1000 : -1;
+  const moving = agent.moveDuration > 0 && time >= agent.moveStartedAt && time < agent.moveStartedAt + agent.moveDuration;
+  if (hurt >= 0 && hurt < animations.hurt.durationMs) { action = "hurt"; elapsed = hurt; }
+  else if (attack >= 0 && attack < animations.attack.durationMs) { action = "attack"; elapsed = attack; }
+  else if (agent.mode === "unload" && agent.foodDelivery) { action = "throw"; elapsed = (time - agent.foodDelivery.startedAt) * 1000; }
+  else if (agent.mode === "harvest") { action = "harvest"; elapsed = (time - agent.harvestStarted) * 1000; }
+  else if (agent.mode === "jump") { action = "jump"; elapsed = (time - (agent.jumpStartedAt ?? agent.moveStartedAt)) * 1000; }
+  else if (moving) {
+    action = "walk";
+    elapsed = (Math.max(0, (agent.stepCount || 1) - 1) + (time - agent.moveStartedAt) / agent.moveDuration) * (animations[action]?.cyclesPerCell || 1) * (animations[action]?.durationMs || 0);
+  }
+  const attributes = agent.appearanceAttributes || agent.attributes || {};
+  const decomposition = action === "idle" && (agent.tribe || "bean") === "bean" && attributes.butchery > 0 &&
+    !["strength", "arms", "feet", "lifespan"].some(key => attributes[key] > 0) && (attributes.antenna || 0) <= 1 ?
+    attributes.antenna ? "antenna" : "basic" : null;
+  const animation = decomposition ? SPROUT_DECOMPOSITION_ANIMATIONS[decomposition] :
+    animations[action] || ((agent.tribe || "bean") !== "bean" && ["harvest", "throw"].includes(action) &&
+      ["antenna", "strength", "arms", "butchery", "lifespan", "feet"].some(key => attributes[key] > 0) ? animations.idle : null);
+  return animation ? { action, animation, frame: unitAnimationFrame(animation, elapsed), ...(decomposition ? { decomposition } : {}) } : null;
+}
+
+function creatureWalkPose(agent, time) {
+  const animation = CREATURE_WALK_ANIMATIONS[agent.species];
+  const elapsed = time - agent.moveStartedAt;
+  if (!animation || agent.health <= 0 || agent.mode !== "walk" ||
+    !(agent.moveDuration > 0) || !Number.isFinite(elapsed) || elapsed < 0 || elapsed >= agent.moveDuration) return null;
+  const progress = Math.max(0, (agent.stepCount || 1) - 1) + elapsed / agent.moveDuration;
+  return { animation, frame: unitAnimationFrame(animation, progress * (animation.cyclesPerCell || 1) * animation.durationMs) };
+}
+
+return { UNIT_ANIMATIONS, SPROUT_DECOMPOSITION_PART, SPROUT_DECOMPOSITION_ANIMATIONS, CREATURE_IDLE_ANIMATIONS, CREATURE_WALK_ANIMATIONS, CREATURE_ATTACK_ANIMATIONS, CREATURE_HURT_ANIMATIONS, UNIT_ANIMATION_ASSETS, unitAnimationFrame, creatureAttackPose, creatureHurtPose, unitAnimationPose, creatureWalkPose };
+})();
+modules["client/talon-owl-idle.mjs"] = (() => {
+const { imageAnimation } = modules["client/image-geometry.mjs"];
+const TALON_OWL_IDLE = Object.freeze(imageAnimation({
+  image: "DesignAssets/Animations/TalonOwlIdle/PerchedV4/idle.webp",
+  frameSize: 512,
+  columns: 4,
+  frameCount: 17,
+  durationsMs: Object.freeze([1000, 180, 180, 240, 180, 180, 600, 70, 100, 70, 600, 60, 70, 450, 90, 100, 1200]),
+  durationMs: 5370,
+  pivotX: 234,
+  pivotY: 400,
+  scale: 2
+}));
+
+function talonOwlIdleFrame(elapsedMs) {
+  let elapsed = Number.isFinite(elapsedMs) ? Math.max(0, elapsedMs) % TALON_OWL_IDLE.durationMs : 0;
+  for (let index = 0; index < TALON_OWL_IDLE.frameCount; index++) {
+    if (elapsed + 1e-6 < TALON_OWL_IDLE.durationsMs[index]) return index;
+    elapsed -= TALON_OWL_IDLE.durationsMs[index];
+  }
+  return 0;
+}
+
+return { TALON_OWL_IDLE, talonOwlIdleFrame };
+})();
+modules["client/combat-lab.js"] = (() => {
+const { COMBAT_LAB_UNITS, createCombatTrial } = modules["client/combat-lab.mjs"];
+const { combatDamage, combatStrength, combatInjuryPenalty } = modules["server/combat-stats.mjs"];
+const { UNIT_ANIMATIONS, CREATURE_IDLE_ANIMATIONS, CREATURE_ATTACK_ANIMATIONS, unitAnimationPose, unitAnimationFrame, creatureHurtPose, creatureAttackPose } = modules["client/unit-animation.mjs"];
+const { TALON_OWL_IDLE, talonOwlIdleFrame } = modules["client/talon-owl-idle.mjs"];
+const { BEETLE_SPRITE, BEETLE_ATTACK_SPRITE, BEETLE_ANIMATIONS, BEETLE_NEUTRAL_ASSET } = modules["server/beetle-animation.mjs"];
+
+const elements = Object.fromEntries([...document.querySelectorAll("[id]")].map(element => [element.id, element]));
+const sides = ["left", "right"], images = new Map();
+let trial, playing = false, lastFrame = 0, renderedRows = -1;
+
+for (const side of sides) {
+  const select = elements[side + "Unit"];
+  for (const group of ["4종족", "일반 생물", "유니크"]) {
+    const options = document.createElement("optgroup");
+    options.label = group;
+    for (const unit of COMBAT_LAB_UNITS.filter(unit => unit.group === group)) options.append(new Option(unit.name + " · " + unit.combatStrength, unit.key));
+    select.append(options);
+  }
+  select.addEventListener("change", () => { setProfile(side); reset(); });
+  for (const stat of ["Strength", "Health"]) elements[side + stat].addEventListener("change", reset);
+}
+
+function profile(side) { return COMBAT_LAB_UNITS.find(unit => unit.key === elements[side + "Unit"].value); }
+function setProfile(side) {
+  elements[side + "Strength"].value = profile(side).combatStrength;
+  elements[side + "Health"].value = profile(side).health;
+}
+function settings(seed) {
+  const selection = side => ({ key: profile(side).key, combatStrength: Number(elements[side + "Strength"].value), health: Number(elements[side + "Health"].value) });
+  return { left: selection("left"), right: selection("right"), first: elements.first.value,
+    random: elements.damage.value === "random", seed };
+}
+function reset() {
+  playing = false;
+  renderedRows = -1;
+  elements.batch.textContent = "";
+  try {
+    trial = createCombatTrial(settings(Number(elements.seed.value)));
+    elements.status.textContent = "대결 준비";
+    elements.status.dataset.state = "ready";
+    elements.run.disabled = elements.step.disabled = elements.finish.disabled = elements.repeat.disabled = false;
+  } catch (error) {
+    trial = null;
+    elements.status.textContent = error.message;
+    elements.run.disabled = elements.step.disabled = elements.finish.disabled = elements.repeat.disabled = true;
+  }
+  render();
+}
+function render() {
+  elements.run.textContent = playing ? "일시정지" : "자동 전투";
+  if (!trial) return;
+  const active = trial.agents.find(agent => agent.attack)?.attack;
+  const retaliation = trial.agents.find(agent => agent.combat?.pendingCounter)?.combat.pendingCounter;
+  const exchange = active?.exchange || retaliation?.exchange;
+  const fixed = exchange && (!exchange.attackApplied || !exchange.counterApplied);
+  for (let index = 0; index < sides.length; index++) {
+    const side = sides[index], agent = trial.agents[index], opponent = trial.agents[1 - index];
+    elements[side + "Hp"].textContent = agent.health + " / " + agent.stats.health;
+    elements[side + "Bar"].style.width = agent.health + "%";
+    elements[side + "Effective"].textContent = agent.health > 0 ? combatStrength(agent) : "—";
+    elements[side + "Penalty"].textContent = combatInjuryPenalty(agent);
+    elements[side + "DamageLabel"].textContent = fixed ? "이번 교전 확정 피해" : "현재 체력 기준 피해";
+    elements[side + "Damage"].textContent = fixed ?
+      exchange[exchange.attackerId === agent.id ? "attackDamage" : "counterDamage"] : agent.health > 0 && opponent.health > 0 ?
+      combatDamage(agent, opponent, 0) + "–" + combatDamage(agent, opponent, 1) : "—";
+    elements[side + "Expected"].parentElement.style.display = fixed ? "none" : "";
+    elements[side + "Expected"].textContent = agent.health > 0 && opponent.health > 0 ? combatDamage(agent, opponent) : "—";
+    elements[side + "Card"].classList.toggle("fallen", agent.health <= 0);
+  }
+  elements.hits.textContent = trial.history.length;
+  elements.clock.textContent = trial.time.toFixed(2) + "초";
+  const result = trial.result();
+  if (result) {
+    playing = false;
+    elements.run.textContent = "자동 전투";
+    elements.status.textContent = result === "draw" ? "양쪽 사망" : trial.agents.find(agent => agent.id === result).name + " 승리";
+    elements.status.dataset.state = result;
+  } else {
+    elements.status.textContent = playing ? "전투 중" : trial.history.length ? "일시정지" : "대결 준비";
+    elements.status.dataset.state = "ready";
+    const attackerId = retaliation ? retaliation.exchange.targetId : active ? active.counter ? active.exchange.targetId : active.exchange.attackerId : null;
+    elements.phase.textContent = attackerId ? trial.agents.find(agent => agent.id === attackerId).name +
+      (retaliation || active.counter ? " · 반격" : " · 공격") : "교전 대기";
+  }
+  if (result) elements.phase.textContent = "전투 종료";
+  elements.run.disabled = elements.step.disabled = elements.finish.disabled = !!result;
+  if (renderedRows !== trial.history.length) {
+    renderedRows = trial.history.length;
+    elements.history.replaceChildren();
+    if (!trial.history.length) {
+      const row = elements.history.insertRow();
+      const cell = row.insertCell();
+      cell.colSpan = 7; cell.className = "empty"; cell.textContent = "1회 타격으로 명중 시점의 피해 확인";
+    }
+    for (const hit of trial.history) {
+      const row = elements.history.insertRow();
+      const attacker = trial.agents.find(agent => agent.id === hit.attackerId);
+      for (const value of [hit.index, hit.counter ? "반격" : "공격", attacker.name, hit.leftStrength + " : " + hit.rightStrength,
+        hit.leftDamage ? "−" + hit.leftDamage + " → " + hit.leftHealth : "— · " + hit.leftHealth,
+        hit.rightDamage ? "−" + hit.rightDamage + " → " + hit.rightHealth : "— · " + hit.rightHealth,
+        hit.time.toFixed(2) + "초"]) row.insertCell().textContent = value;
+    }
+    elements.history.lastElementChild?.scrollIntoView({ block: "nearest" });
+  }
+}
+function image(source) {
+  if (!images.has(source)) {
+    const asset = new Image();
+    asset.src = source;
+    images.set(source, asset);
+  }
+  return images.get(source);
+}
+for (const animation of Object.values(CREATURE_ATTACK_ANIMATIONS)) image(animation.image);
+
+function draw(side, index) {
+  const canvas = elements[side + "Art"], context = canvas.getContext("2d");
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  if (!trial) return;
+  const agent = trial.agents[index];
+  let pose = creatureHurtPose(agent, trial.time) || creatureAttackPose(agent, trial.time) || unitAnimationPose(agent, trial.time);
+  if (!pose && agent.tribe) pose = { animation: UNIT_ANIMATIONS[agent.tribe].idle, frame: 0 };
+  if (!pose && CREATURE_IDLE_ANIMATIONS[agent.species]) {
+    const animation = CREATURE_IDLE_ANIMATIONS[agent.species];
+    pose = { animation, frame: unitAnimationFrame(animation, trial.time * 1000) };
+  }
+  if (!pose && agent.species === "talon-owl") pose = { animation: TALON_OWL_IDLE, frame: talonOwlIdleFrame(trial.time * 1000) };
+  if (!pose && agent.species === "spiny-back-beetle") {
+    const animation = BEETLE_ANIMATIONS[agent.attack ? "attack" : "idle"];
+    let elapsed = (trial.time - (agent.attack?.startedAt || 0)) * 1000;
+    if (animation.loop) elapsed %= animation.durationMs;
+    let frame = 0;
+    while (frame < animation.durations.length - 1 && elapsed >= animation.durations[frame]) elapsed -= animation.durations[frame++];
+    pose = { animation: agent.attack ? BEETLE_ATTACK_SPRITE : BEETLE_SPRITE, frame: animation.frames[frame] };
+  }
+  const source = pose?.animation.image || profile(side).image || BEETLE_NEUTRAL_ASSET;
+  const asset = image(source);
+  if (!asset.complete || !asset.naturalWidth) return;
+  const attack = agent.attack, progress = attack ? Math.max(0, Math.min(1, (trial.time - attack.startedAt) / (attack.endsAt - attack.startedAt))) : 0;
+  const offset = CREATURE_ATTACK_ANIMATIONS[agent.species] ? 0 : Math.sin(progress * Math.PI) * (index === 0 ? 18 : -18);
+  context.save();
+  context.globalAlpha = agent.health > 0 ? 1 : .28;
+  context.translate(canvas.width / 2 + offset, canvas.height - 12);
+  const mirror = agent.species === "spiny-back-beetle" ? agent.attack ? index === 1 : index === 0 :
+    agent.species && CREATURE_ATTACK_ANIMATIONS[agent.species] ? index === 0 : index === 1;
+  context.scale(mirror ? -1 : 1, 1);
+  if (pose) {
+    const { frameSize, columns, pivotX, pivotY } = pose.animation;
+    const size = pose.action === "attack" && agent.species ? 196 * frameSize / pose.animation.viewSize : 196;
+    const scale = size / frameSize;
+    context.drawImage(asset, pose.frame % columns * frameSize, Math.floor(pose.frame / columns) * frameSize,
+      frameSize, frameSize, -pivotX * scale, -pivotY * scale, size, size);
+  } else {
+    const scale = Math.min(212 / asset.naturalWidth, 182 / asset.naturalHeight);
+    const width = asset.naturalWidth * scale, height = asset.naturalHeight * scale;
+    context.drawImage(asset, -width / 2, -height, width, height);
+  }
+  context.restore();
+}
+
+elements.step.addEventListener("click", () => { playing = false; trial.step(); render(); });
+elements.finish.addEventListener("click", () => { playing = false; trial.finish(); render(); });
+elements.run.addEventListener("click", () => { playing = !playing; render(); });
+elements.reset.addEventListener("click", reset);
+for (const name of ["first", "damage", "seed"]) elements[name].addEventListener("change", reset);
+elements.repeat.addEventListener("click", () => {
+  playing = false;
+  const wins = { left: 0, right: 0, draw: 0 }, seed = Number(elements.seed.value);
+  for (let index = 0; index < 100; index++) {
+    const battle = createCombatTrial(settings(seed + index));
+    wins[battle.finish()]++;
+  }
+  elements.batch.textContent = "100판 · 왼쪽 " + wins.left + "승 / 오른쪽 " + wins.right + "승 / 양쪽 사망 " + wins.draw;
+  render();
+});
+for (const button of document.querySelectorAll("[data-pair]")) button.addEventListener("click", () => {
+  const pair = button.dataset.pair.split(",");
+  sides.forEach((side, index) => { elements[side + "Unit"].value = pair[index]; setProfile(side); });
+  reset();
+});
+elements.leftUnit.value = "bean";
+elements.rightUnit.value = "talon-owl";
+sides.forEach(setProfile);
+reset();
+function frame(now) {
+  const elapsed = Math.min(.1, (now - lastFrame) / 1000);
+  lastFrame = now;
+  if (playing && trial) { trial.advance(elapsed * Number(elements.playback.value)); render(); }
+  sides.forEach(draw);
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+return {  };
+})();
+})();</script></body></html>

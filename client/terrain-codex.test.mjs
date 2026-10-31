@@ -12,18 +12,23 @@ function declaration(name) {
   return match[0];
 }
 
-test("미탐색 칸과 맵 밖에는 지형 정보를 노출하지 않고 물과 위험 요소를 구별한다", () => {
+test("미탐색 칸과 맵 밖에는 지형 정보를 노출하지 않고 제거된 위험 요소는 무시한다", () => {
   const world = { size: 4, terrain: new Uint8Array(16).fill(4), hazards: new Uint8Array(16) };
   const explored = new Set([0, 1, 2, 3]);
   world.terrain[0] = 0; world.terrain[1] = 9; world.terrain[2] = 5; world.terrain[3] = 6;
   world.hazards[1] = 1; world.hazards[2] = 2;
   for (const [x, y] of [[-1, 0], [4, 0], [0, 4], [0, 1], [0.5, 0]]) assert.equal(terrainCodexCell(world, explored, x, y), null);
   assert.equal(terrainCodexCell(world, explored, 0, 0).speed, 0);
-  assert.equal(terrainCodexCell(world, explored, 1, 0).hazard.name, "독 포자");
-  assert.equal(terrainCodexCell(world, explored, 2, 0).speed, 0.5);
+  assert.equal(terrainCodexCell(world, explored, 1, 0).hazard, null);
+  assert.equal(terrainCodexCell(world, explored, 2, 0).hazard, null);
+  assert.equal(terrainCodexCell(world, explored, 2, 0).speed, 1);
+  assert.equal(HAZARD_CODEX.length, 0);
   assert.equal(terrainCodexCell(world, explored, 3, 0).speed, 0.6);
   world.hazards[1] = 0;
-  assert.equal(terrainCodexCell(world, explored, 1, 0).speed, 1);
+  assert.equal(terrainCodexCell(world, explored, 1, 0).speed, 0.2);
+  world.terrain[0] = 10;
+  assert.equal(terrainCodexCell(world, explored, 0, 0).terrain.key, "ford");
+  assert.equal(terrainCodexCell(world, explored, 0, 0).speed, .5);
 });
 
 test("현재 자연 자원 분포를 안내하고 삭제된 먹이와 사체 자원을 섞지 않는다", () => {
@@ -35,11 +40,11 @@ test("현재 자연 자원 분포를 안내하고 삭제된 먹이와 사체 자
   }
 });
 
-test("실제 지도 클릭 처리에서 빈 땅·위험 요소를 열고 개체 선택·드래그·오른쪽 클릭을 보존한다", () => {
+test("실제 지도 클릭 처리에서 빈 땅·위험 요소를 열고 개체 선택·드래그·오른쪽 클릭을 보존한다", async () => {
   let click;
   const opened = [], selected = [];
   const worldMap = { terrain: new Uint8Array(16).fill(4), hazards: new Uint8Array(16), burrows: [] };
-  const state = { agents: [], explored: new Set([0, 1, 2]), camera: { zoom: 1 }, flashes: [], dragging: false, didDrag: false };
+  const state = { agents: [], rivals: [], buildings: [], corpses: [], explored: new Set([0, 1, 2]), camera: { zoom: 1 }, flashes: [], dragging: false, didDrag: false };
   const food = { x: 2, y: 0, amount: 4, kind: "resource" };
   const context = createContext({ WORLD_SIZE: 4, worldMap, state, terrainCodexCell,
     connection: { active: true, roomId: "test" }, colonyAt: () => null,
@@ -52,21 +57,21 @@ test("실제 지도 클릭 처리에서 빈 땅·위험 요소를 열고 개체 
   for (const name of ["selectableObjectAt", "openTerrainCodex"]) runInContext(declaration(name), context);
   runInContext(source.match(/^    canvas.addEventListener\("pointerup"[^]*?^    \}\);/m)[0], context);
   const event = { clientX: 0.2, clientY: 0.2, button: 0 };
-  click(event);
+  await click(event);
   assert.equal(selected.at(-1)[0], "terrain");
   assert.equal(selected.at(-1)[1].terrain.key, "grassland");
   assert.equal(selected.at(-1)[1].x, 0);
   assert.equal(opened.length, 0);
   worldMap.terrain[1] = 9; worldMap.hazards[1] = 1;
-  click({ ...event, clientX: 1.2 });
-  assert.equal(selected.at(-1)[1].hazard.key, "poison-spore");
+  await click({ ...event, clientX: 1.2 });
+  assert.equal(selected.at(-1)[1].hazard, null);
   assert.equal(opened.length, 0);
-  click({ ...event, clientX: 2.2 });
+  await click({ ...event, clientX: 2.2 });
   assert.equal(selected.at(-1)[0], "food");
   assert.equal(opened.length, 0);
-  for (const input of [{ ...event, clientX: 3.2 }, { ...event, clientX: -1 }, { ...event, button: 2 }]) click(input);
-  state.didDrag = true; click(event);
-  state.didDrag = false; context.connection.active = false; click(event);
+  for (const input of [{ ...event, clientX: 3.2 }, { ...event, clientX: -1 }, { ...event, button: 2 }]) await click(input);
+  state.didDrag = true; await click(event);
+  state.didDrag = false; context.connection.active = false; await click(event);
   assert.equal(opened.length, 0);
 });
 
@@ -139,7 +144,8 @@ test("Esc는 유닛·지형·둥지 선택과 정보 패널을 함께 닫는다"
     endingReport: { open: false }, templateDeleteDialog: { open: false },
     closeColonyMenu() { context.colonyMenu.hidden = true; },
     selectObject(kind, target) { state.selection = target ? { kind, target } : null; unitPanel.hidden = !target; },
-    document: { addEventListener(name, handler) { keydown = handler; } } });
+    document: { addEventListener(name, handler) { keydown = handler; },
+      getElementById: () => ({ matches: () => false }) } });
   runInContext(declaration("closeUnitPanel"), context);
   const handler = [...source.matchAll(/^    document.addEventListener\("keydown"[^]*?^    \}\);/gm)]
     .find(match => match[0].includes('event.key !== "Escape"'));

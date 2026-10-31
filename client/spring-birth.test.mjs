@@ -24,7 +24,7 @@ test("샘방울 물목은 분리 전 흘림턱에 붙어 있고 착지 후에는
   assert.equal(springBirthPlacement(1.79, outlet, target, height), null);
 });
 
-test("샘방울 탄생음은 시작에 한 번만 나고 씨앗 방출·파열·등장음은 섞이지 않는다", () => {
+test("샘방울 탄생음은 착지 강세에 맞춰 한 번만 나고 씨앗 방출·파열·등장음은 섞이지 않는다", () => {
   const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
   const declaration = source.match(/^    function updateAudio\([^]*?^    }/m)[0];
   const calls = [];
@@ -32,7 +32,7 @@ test("샘방울 탄생음은 시작에 한 번만 나고 씨앗 방출·파열·
   const state = { simSeconds: 1, camera: { layer: 0 }, agents: [agent], rivals: [] };
   const context = createContext({ state, connection: { active: true, online: true }, audioTime: .9,
     audio: { available: () => true, play: name => calls.push(name), setHarvest() {} },
-    SpawnerCombatAudio: { update: () => [] }, combatAudio: {},
+    SPRING_BIRTH_ANIMATION, SpawnerCombatAudio: { update: () => [] }, combatAudio: {},
     displayedAgent: value => value, interpolatedAgentPosition: () => ({ x: 44, y: 45 }), audioVolume: () => 1,
     agentBirthPose: value => ({ kind: "spring", elapsed: state.simSeconds - value.birth.startedAt }),
     agentAudio: new Map(), deliveryAudio: new Map(), foodDeliveries: new Map(),
@@ -40,7 +40,12 @@ test("샘방울 탄생음은 시작에 한 번만 나고 씨앗 방출·파열·
     resetAudio() { throw new Error("Unexpected audio reset"); }
   });
   runInContext(declaration, context);
-  for (const time of [1, 1.1, 1.4, 1.53, 1.79, 2.1, 2.5]) {
+  for (const time of [1, 1.1, 1.4, 1.53, 1.699]) {
+    state.simSeconds = time;
+    context.updateAudio();
+  }
+  assert.deepEqual(calls, []);
+  for (const time of [1.701, 1.79, 2.1, 2.5]) {
     state.simSeconds = time;
     context.updateAudio();
   }

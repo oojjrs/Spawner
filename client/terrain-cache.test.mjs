@@ -147,10 +147,8 @@ function session(database, assets) {
     "openRenderingStorage", "worldRenderingKey", "worldRenderingMatches", "readWorldRendering", "restoreWorldRendering",
     "worldRenderingRecord", "saveWorldRendering", "reportRenderingCacheError", "resetForestRendering",
     "prepareWorldRendering", "saveForestRegion", "updateForestRegion"]) runInContext(declaration(name), context);
-  const snapshotStart = source.indexOf("      let forestChanged = false;");
-  const snapshotEnd = source.indexOf("      if (selection) {", snapshotStart);
-  assert.ok(snapshotStart >= 0 && snapshotEnd > snapshotStart);
-  const snapshot = source.slice(snapshotStart, snapshotEnd);
+  const snapshot = source.match(/^ +foodCellMap.clear\(\);[^]*?^ +if \(forestChanged\) [^\r\n]+/m)?.[0];
+  assert.ok(snapshot);
   return {
     stats, rendering, forest, prepare: (world, colonies) => context.prepareWorldRendering(world, colonies),
     flush: () => forest.cacheWrite,

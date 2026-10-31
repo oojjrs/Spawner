@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
+import { createStateEncoder } from "./state-delta.mjs";
 
 const source = readFileSync(new URL("./worker.mjs", import.meta.url), "utf8").replace(/^import .*;\r?\n/gm, "");
 
@@ -16,7 +17,7 @@ function worker() {
   const saves = [];
   const room = { id: "ending-room", hostId: "host", simSeconds: 0, revision: 0,
     colonies: [{ ownerId: "host", tribe: "bean" }], games: new Map([["host", { ending: null }]]) };
-  const context = createContext({
+  const context = createContext({ createStateEncoder,
     Date: { now: () => now }, performance: { timeOrigin: 0, now: () => now },
     navigator: { locks: { request: (name, options, action) => action({}) } },
     openStorage: async () => ({
