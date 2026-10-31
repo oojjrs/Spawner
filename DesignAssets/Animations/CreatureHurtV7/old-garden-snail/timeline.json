@@ -1,0 +1,216 @@
+{
+  "durationsMs": [
+    20,
+    30,
+    30,
+    30,
+    400,
+    30,
+    30,
+    30,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+  ],
+  "durationMs": 760,
+  "closedEyeHold": {
+    "fromMs": 110,
+    "toMs": 510,
+    "durationMs": 400
+  },
+  "poses": [
+    {
+      "durationMs": 20,
+      "expression": "seed",
+      "clockwiseDegrees": 0,
+      "liftPixels": 0,
+      "localDegrees": {
+        "eye-stalk-far": 0,
+        "eye-stalk-near": 0
+      },
+      "neckRetraction": 0
+    },
+    {
+      "durationMs": 30,
+      "expression": "half",
+      "clockwiseDegrees": 0,
+      "liftPixels": 0,
+      "localDegrees": {
+        "eye-stalk-far": 2.16,
+        "eye-stalk-near": -1.8
+      },
+      "neckRetraction": 0.18
+    },
+    {
+      "durationMs": 30,
+      "expression": "pain",
+      "clockwiseDegrees": 0,
+      "liftPixels": 0,
+      "localDegrees": {
+        "eye-stalk-far": 7.2,
+        "eye-stalk-near": -6.0
+      },
+      "neckRetraction": 0.6
+    },
+    {
+      "durationMs": 30,
+      "expression": "pain",
+      "clockwiseDegrees": 0,
+      "liftPixels": 0,
+      "localDegrees": {
+        "eye-stalk-far": 10.8,
+        "eye-stalk-near": -9.0
+      },
+      "neckRetraction": 0.9
+    },
+    {
+      "durationMs": 400,
+      "expression": "pain",
+      "clockwiseDegrees": 0,
+      "liftPixels": 0,
+      "localDegrees": {
+        "eye-stalk-far": 12,
+        "eye-stalk-near": -10
+      },
+      "neckRetraction": 1
+    },
+    {
+      "durationMs": 30,
+      "expression": "pain",
+      "clockwiseDegrees": 0,
+      "liftPixels": 0,
+      "localDegrees": {
+        "eye-stalk-far": 10.32,
+        "eye-stalk-near": -8.6
+      },
+      "neckRetraction": 0.86
+    },
+    {
+      "durationMs": 30,
+      "expression": "pain",
+      "clockwiseDegrees": 0,
+      "liftPixels": 0,
+      "localDegrees": {
+        "eye-stalk-far": 6.96,
+        "eye-stalk-near": -5.8
+      },
+      "neckRetraction": 0.58
+    },
+    {
+      "durationMs": 30,
+      "expression": "pain",
+      "clockwiseDegrees": 0,
+      "liftPixels": 0,
+      "localDegrees": {
+        "eye-stalk-far": 2.16,
+        "eye-stalk-near": -1.8
+      },
+      "neckRetraction": 0.18
+    },
+    {
+      "durationMs": 20,
+      "expression": "half",
+      "clockwiseDegrees": 0,
+      "liftPixels": 0,
+      "localDegrees": {
+        "eye-stalk-far": -1.92,
+        "eye-stalk-near": 1.6
+      },
+      "neckRetraction": 0
+    },
+    {
+      "durationMs": 20,
+      "expression": "half",
+      "clockwiseDegrees": 0,
+      "liftPixels": 0,
+      "localDegrees": {
+        "eye-stalk-far": -2.88,
+        "eye-stalk-near": 2.4
+      },
+      "neckRetraction": 0
+    },
+    {
+      "durationMs": 20,
+      "expression": "seed",
+      "clockwiseDegrees": 0,
+      "liftPixels": 0,
+      "localDegrees": {
+        "eye-stalk-far": -1.92,
+        "eye-stalk-near": 1.6
+      },
+      "neckRetraction": 0
+    },
+    {
+      "durationMs": 20,
+      "expression": "seed",
+      "clockwiseDegrees": 0,
+      "liftPixels": 0,
+      "localDegrees": {
+        "eye-stalk-far": -0.6,
+        "eye-stalk-near": 0.5
+      },
+      "neckRetraction": 0
+    },
+    {
+      "durationMs": 20,
+      "expression": "seed",
+      "clockwiseDegrees": 0,
+      "liftPixels": 0,
+      "localDegrees": {
+        "eye-stalk-far": 0.42,
+        "eye-stalk-near": -0.35
+      },
+      "neckRetraction": 0.035
+    },
+    {
+      "durationMs": 20,
+      "expression": "seed",
+      "clockwiseDegrees": 0,
+      "liftPixels": 0,
+      "localDegrees": {
+        "eye-stalk-far": 0.6,
+        "eye-stalk-near": -0.5
+      },
+      "neckRetraction": 0.05
+    },
+    {
+      "durationMs": 20,
+      "expression": "seed",
+      "clockwiseDegrees": 0,
+      "liftPixels": 0,
+      "localDegrees": {
+        "eye-stalk-far": 0.24,
+        "eye-stalk-near": -0.2
+      },
+      "neckRetraction": 0.02
+    },
+    {
+      "durationMs": 20,
+      "expression": "seed",
+      "clockwiseDegrees": 0,
+      "liftPixels": 0,
+      "localDegrees": {
+        "eye-stalk-far": 0,
+        "eye-stalk-near": 0
+      },
+      "neckRetraction": 0
+    }
+  ],
+  "method": "soft-neck-retraction",
+  "support": [
+    174.19417475728156,
+    304
+  ],
+  "supportSemanticROI": [
+    125,
+    225,
+    278,
+    307
+  ],
+  "supportMetric": "Center of the bottom three visible-alpha rows inside the visually identified sole region."
+}

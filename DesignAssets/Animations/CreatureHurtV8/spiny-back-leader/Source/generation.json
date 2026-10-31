@@ -1,0 +1,24 @@
+{
+  "provider": "OpenAI built-in image_gen",
+  "revision": "V8 articulated chitin crouch",
+  "originalSource": "Source/seed.png",
+  "calls": [
+    {
+      "reference": "Source/seed.png",
+      "prompt": "Use case: precise-object-edit. Edit target: the supplied original red Spiny Back Leader game sprite. Create a production hidden-surface donor for a layered 2D cutout rig. Keep the same square composition, same camera, same animal body position and size, same deep red hard crab/beetle carapace and the exact three ivory horns, ivory scars on its near carapace, outline, painterly highlights and palette. Remove ONLY the walking legs and BOTH large ivory mouth mandibles. The character now consists of its unaltered main hard shell with a complete continuous red underside and its small original red face/eye region beneath the front shell. Paint the previously hidden red socket/underside surfaces where legs and mandibles were attached; round continuous chitin, soft dark joints beneath it, enough overlapping surface for cutout animation. No dangling pieces, no holes, no new limbs, no replacement horns, no flattening of the shell. Keep original eyes and face. The main tall horn remains precisely the same height and shape. Actual transparent background, no shadow or floor, no labels, no diagrams, no sheet, no text. This image will be used only as donor pixels for newly exposed hidden surfaces; the original visible shell design remains authoritative.",
+      "output": "Source/hidden-generated.png",
+      "registered": "Source/hidden-registered.png",
+      "usage": "Hidden red undersides and proximal joint padding; original visible carapace retained."
+    },
+    {
+      "references": [
+        "Source/hidden-generated.png",
+        "Source/seed.png"
+      ],
+      "prompt": "Edit target: the supplied hidden-surface red Spiny Back Leader cutout (first image); second image is original identity reference. Keep the first image's framing, scale, exact shell silhouette, three ivory horns, scars and painted chitin lighting unchanged. This is a hidden torso donor for a layered animation. REMOVE both eyes and the small entire face/nose/cheek region from beneath the forward shell hood. Replace ONLY that face region with a continuous recessed dark burgundy chitin socket/inner torso surface, with no eyeballs, no nose, no mouth, no holes. It must look like the covered body attachment behind a separately moving head. Continue to have NO walking legs and NO ivory mouth mandibles. The overall carapace and underside stay continuous, round and opaque; do not add parts, spikes, diagrams, labels, shadows, or a floor. Actual transparent background.",
+      "output": "Source/socket-generated.png",
+      "registered": "Source/socket-registered.png",
+      "usage": "Featureless recessed red head socket beneath the independently retracting original head."
+    }
+  ]
+}

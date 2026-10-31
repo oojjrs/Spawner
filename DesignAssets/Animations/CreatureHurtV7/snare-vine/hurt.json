@@ -1,0 +1,43 @@
+{
+  "image": "DesignAssets/Animations/CreatureHurtV7/snare-vine/hurt.webp",
+  "frameSize": 424,
+  "columns": 4,
+  "pivotX": 211.585938,
+  "pivotY": 389.35125,
+  "frameCount": 16,
+  "durationsMs": [
+    20,
+    30,
+    30,
+    30,
+    400,
+    30,
+    30,
+    30,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+  ],
+  "durationMs": 760,
+  "loop": false,
+  "closedEyeHold": {
+    "fromMs": 110,
+    "toMs": 510,
+    "durationMs": 400
+  },
+  "source": "Source/seed.png",
+  "method": "Replace the whole-bulb tilt/lift with real local flesh compression and width redistribution above fixed roots; retain the independently bending leaves and completed vine attachments.",
+  "rig": "rig.json",
+  "timeline": "timeline.json",
+  "renderer": "render.py",
+  "preview": "hurt-preview.webp",
+  "thumbnail": "hurt-thumbnail.webp",
+  "matrix": "hurt-matrix.webp",
+  "artworkScale": 1,
+  "previewPauseMs": 900
+}

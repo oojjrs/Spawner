@@ -1,0 +1,30 @@
+{
+  "frameSize": 288, 
+  "displaySize": 287.8328108672936, 
+  "scale": 0.5625, 
+  "idleReference": "DesignAssets/Animations/TalonOwlIdle/PerchedV4/idle.webp", 
+  "viewSize": 288.1672862453532, 
+  "pivotX": 131.6345405436803, 
+  "pivotY": 225.24361059479554, 
+  "sourcePivot": [
+    234, 
+    400
+  ], 
+  "sourceFrameSize": 512, 
+  "columns": 6, 
+  "frameCount": 6, 
+  "image": "DesignAssets/Animations/CreatureAttackV2/talon-owl/runtime.webp", 
+  "durationsMs": [
+    70, 
+    210, 
+    50, 
+    300, 
+    170, 
+    220
+  ], 
+  "loop": false, 
+  "facing": "left", 
+  "source": "attack.webp", 
+  "exporter": "../export-runtime.py", 
+  "processing": "One common whole-cel scale for every frame. Original artwork, timing and source registration remain unchanged; runtime pivot aligns the exact seed to its accepted idle appearance."
+}

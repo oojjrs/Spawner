@@ -1,0 +1,43 @@
+{
+  "image": "DesignAssets/Animations/CreatureHurtV4/white-paw/hurt.webp",
+  "frameSize": 288,
+  "columns": 4,
+  "pivotX": 192.5,
+  "pivotY": 242,
+  "durationsMs": [
+    20,
+    30,
+    30,
+    30,
+    400,
+    30,
+    30,
+    30,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+  ],
+  "frameCount": 16,
+  "durationMs": 760,
+  "loop": false,
+  "closedEyeHold": {
+    "fromMs": 110,
+    "toMs": 510,
+    "durationMs": 400
+  },
+  "method": "Original registered expressions with separately layered rigid tail attachments. Covered root overlaps, delayed local recoil and gentle settling, plus the existing impact root arc.",
+  "source": "Source/seed.png",
+  "timeline": "timeline.json",
+  "renderer": "render.py",
+  "preview": "hurt-preview.webp",
+  "thumbnail": "hurt-thumbnail.webp",
+  "matrix": "hurt-matrix.webp",
+  "sourceSeedSha256": "467f1478eafd55de5d7fab083c6c1f7b00c12f0f0cae2f3c4ec837a6618a91f0",
+  "rig": "rig.json",
+  "sourceVersion": "CreatureHurtV3"
+}

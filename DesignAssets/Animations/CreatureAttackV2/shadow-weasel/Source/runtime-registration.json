@@ -1,0 +1,27 @@
+{
+  "frameSize": 229,
+  "displaySize": 228.7659574468085,
+  "scale": 0.447265625,
+  "idleReference": "DesignAssets/Animations/CreatureIdleStudies/V2/shadow-weasel/idle.webp",
+  "viewSize": 228.608642578125,
+  "pivotX": 115.25907893614335,
+  "pivotY": 189.22680542512376,
+  "sourcePivot": [
+    257,
+    423.56
+  ],
+  "sourceFrameSize": 512,
+  "columns": 6,
+  "frameCount": 6,
+  "image": "DesignAssets/Animations/CreatureAttackV2/shadow-weasel/runtime.webp",
+  "durationsMs": [
+    70,
+    210,
+    50,
+    300,
+    170,
+    220
+  ],
+  "loop": false,
+  "facing": "left"
+}

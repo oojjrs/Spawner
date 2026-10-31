@@ -1,0 +1,16 @@
+{
+  "provider": "OpenAI built-in image_gen",
+  "reference": "Source/neutral.png",
+  "generated": "scalp-underpaint-generated.png",
+  "registered": "scalp-underpaint-registered.png",
+  "use": "Hidden scalp and fur beneath both extracted ear roots only. Approved face and body retained.",
+  "inverseAffine": [
+    3,
+    0,
+    0,
+    0,
+    3,
+    -21
+  ],
+  "prompt": "Use case: precise-object-edit. Production 2D sprite rig underpainting. The attached image is the approved dew-rabbit neutral sprite, edit target. Make exactly the same rabbit at the same facing, position, proportions, fur palette and lighting on a transparent square canvas. Remove ONLY both long ears and their dangling dew drops, reconstructing the small covered fluffy scalp surfaces at the two ear roots. Keep the entire face, round eyes, muzzle, neck ruff, body, paws and tail unchanged. Do NOT create a new pose or a new character. This will supply only hidden fur surfaces beneath an animated ear rig; the original ears and original main body will be reused. No scenery, no text, no labels, no shadow beyond the sprite. Preserve transparent background."
+}

@@ -1,0 +1,35 @@
+{
+  "frame": 1, 
+  "generatedSize": [
+    1280, 
+    1280
+  ], 
+  "outputSize": [
+    512, 
+    512
+  ], 
+  "sharedDrawingScale": 0.4, 
+  "translation": [
+    0, 
+    4
+  ], 
+  "maskEllipses": [
+    [
+      164, 
+      376, 
+      185, 
+      407
+    ], 
+    [
+      210, 
+      395, 
+      245, 
+      429
+    ]
+  ], 
+  "maskFeatherPx": 1.3, 
+  "source": "eye-open-generated.png", 
+  "registered": "eye-open-registered.png", 
+  "mask": "eye-open-mask.png", 
+  "scope": "Both closed eyes replaced by open dark-green oval eyes; all pixels outside the mask remain unchanged."
+}

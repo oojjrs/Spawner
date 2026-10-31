@@ -1,0 +1,189 @@
+{
+  "species": "spiny-back-leader",
+  "method": "Corrective compositing of registered V2 closed-eye artwork onto the unchanged approved seed, followed by one coherent rigid ground-pivot recoil and recovery. No mesh, part rig, body rescaling or full-body drawing swaps.",
+  "canvas": [
+    256,
+    256
+  ],
+  "pivot": [
+    128,
+    224
+  ],
+  "groundPivot": [
+    128,
+    224
+  ],
+  "durationMs": 760,
+  "closedEyeHold": {
+    "fromMs": 110,
+    "toMs": 510,
+    "durationMs": 400
+  },
+  "previewPauseMs": 900,
+  "sourceSeed": "DesignAssets/Animations/CreatureHurtV2/spiny-back-leader/Source/seed.png",
+  "sourceSeedSha256": "fa34bb7a09158c588ece1dcf1e4428a6db603a88e8396e91adb6998480d8e8c9",
+  "donorSource": "DesignAssets/Animations/CreatureHurtV2/spiny-back-leader/Source/Cels/02.png",
+  "donorSourceSha256": "e5e1908543a43b0058d384d3f2118efc99367e22aeb512489c285b33a0489b10",
+  "expressionPatches": [
+    {
+      "name": "near-eye",
+      "targetToDonorAffine": [
+        1,
+        0,
+        -1,
+        0,
+        1,
+        -1
+      ],
+      "colorMatching": "median-boundary-offset",
+      "medianBoundaryColorDelta": [
+        5.0,
+        5.5,
+        12.5
+      ],
+      "painMask": "Source/Masks/near-eye-pain.png",
+      "halfMask": "Source/Masks/near-eye-half.png",
+      "halfLidBoundaryY": 151
+    },
+    {
+      "name": "far-eye",
+      "targetToDonorAffine": [
+        1,
+        0,
+        -2,
+        0,
+        1,
+        -1
+      ],
+      "colorMatching": "median-boundary-offset",
+      "medianBoundaryColorDelta": [
+        20.0,
+        11.0,
+        9.5
+      ],
+      "painMask": "Source/Masks/far-eye-pain.png",
+      "halfMask": "Source/Masks/far-eye-half.png",
+      "halfLidBoundaryY": 145
+    }
+  ],
+  "sources": {
+    "seed": "Source/seed.png",
+    "half": "Source/half.png",
+    "pain": "Source/pain.png"
+  },
+  "poses": [
+    {
+      "durationMs": 20,
+      "rotationDegrees": 0.0,
+      "liftPixels": 0.0,
+      "expression": "seed"
+    },
+    {
+      "durationMs": 30,
+      "rotationDegrees": 1.2,
+      "liftPixels": 0.6,
+      "expression": "half"
+    },
+    {
+      "durationMs": 30,
+      "rotationDegrees": 2.8,
+      "liftPixels": 1.4,
+      "expression": "pain"
+    },
+    {
+      "durationMs": 30,
+      "rotationDegrees": 3.68,
+      "liftPixels": 1.83333,
+      "expression": "pain"
+    },
+    {
+      "durationMs": 400,
+      "rotationDegrees": 4.0,
+      "liftPixels": 2.0,
+      "expression": "pain"
+    },
+    {
+      "durationMs": 30,
+      "rotationDegrees": 3.76,
+      "liftPixels": 1.86667,
+      "expression": "pain"
+    },
+    {
+      "durationMs": 30,
+      "rotationDegrees": 2.8,
+      "liftPixels": 1.4,
+      "expression": "pain"
+    },
+    {
+      "durationMs": 30,
+      "rotationDegrees": 1.76,
+      "liftPixels": 0.86667,
+      "expression": "pain"
+    },
+    {
+      "durationMs": 20,
+      "rotationDegrees": 0.88,
+      "liftPixels": 0.43333,
+      "expression": "half"
+    },
+    {
+      "durationMs": 20,
+      "rotationDegrees": 0.24,
+      "liftPixels": 0.13333,
+      "expression": "half"
+    },
+    {
+      "durationMs": 20,
+      "rotationDegrees": 0.0,
+      "liftPixels": 0.0,
+      "expression": "seed"
+    },
+    {
+      "durationMs": 20,
+      "rotationDegrees": 0.0,
+      "liftPixels": 0.0,
+      "expression": "seed"
+    },
+    {
+      "durationMs": 20,
+      "rotationDegrees": 0.0,
+      "liftPixels": 0.0,
+      "expression": "seed"
+    },
+    {
+      "durationMs": 20,
+      "rotationDegrees": 0.0,
+      "liftPixels": 0.0,
+      "expression": "seed"
+    },
+    {
+      "durationMs": 20,
+      "rotationDegrees": 0.0,
+      "liftPixels": 0.0,
+      "expression": "seed"
+    },
+    {
+      "durationMs": 20,
+      "rotationDegrees": 0.0,
+      "liftPixels": 0.0,
+      "expression": "seed"
+    }
+  ],
+  "supersample": 4,
+  "rootMotion": "One intentional impact arc around the registered ground pivot, then exact recovery. No unrelated wobble or scale change.",
+  "compositor": "Source/compose.py",
+  "expressionLayers": [
+    {
+      "name": "near-eye",
+      "texture": "Source/near-eye-color-matched.png",
+      "painMask": "Source/Masks/near-eye-pain.png",
+      "halfMask": "Source/Masks/near-eye-half.png"
+    },
+    {
+      "name": "far-eye",
+      "texture": "Source/far-eye-color-matched.png",
+      "painMask": "Source/Masks/far-eye-pain.png",
+      "halfMask": "Source/Masks/far-eye-half.png"
+    }
+  ]
+}

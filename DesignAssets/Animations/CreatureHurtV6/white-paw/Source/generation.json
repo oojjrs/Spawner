@@ -1,0 +1,20 @@
+{
+  "provider": "OpenAI built-in image_gen",
+  "approvedDesign": "Source/seed.png",
+  "drawnCrouchKey": "Source/crouch-key-generated.png",
+  "jointlyDrawnPoses": "Source/bridge-drawings-generated.png",
+  "poseOrder": [
+    "neutral",
+    "15 percent flinch",
+    "40 percent curl",
+    "75 percent curl",
+    "full anatomical crouch",
+    "65 percent release",
+    "25 percent release",
+    "neutral"
+  ],
+  "prompt": "Draw the exact original creature through a full anatomical painful crouch, preserving face size, fur markings, palette, limb lengths and volume. Round the spine, fold chest and pelvis, tuck the head, bend the elbows and knees, keep the supporting hind paw planted, and draw complete natural overlaps in every cel. Shared drawing scale, transparent 4 by 2 cells, no whole-image transform or crossfade.",
+  "method": "All runtime body bends, neck folds and limb poses are complete newly drawn cels. Failed cutout experiments are excluded.",
+  "registrationRenderer": "../register.py",
+  "runtimeRenderer": "../render.py"
+}

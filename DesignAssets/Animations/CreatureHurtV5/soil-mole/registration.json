@@ -1,0 +1,165 @@
+{
+  "species": "soil-mole",
+  "commonArtworkScale": 1.3753581661891117,
+  "commonInitialTranslation": [
+    36.02578796561605,
+    -458.41547277936957
+  ],
+  "neutralCalibrationOnly": true,
+  "poseBoundingBoxesDoNotSetScale": true,
+  "rootAnchor": [
+    294.17543859649123,
+    238.0
+  ],
+  "anchorRegion": [
+    266,
+    324,
+    210,
+    355
+  ],
+  "anchorMeaning": "Planted hind foot; front paws are allowed to bend and gather.",
+  "paletteShiftSharedByAllCels": [
+    -3.0,
+    -2.0,
+    -1.0
+  ],
+  "cels": [
+    {
+      "cel": 0,
+      "translationPixels": [
+        4,
+        0
+      ],
+      "plantedRearFoot": [
+        290.44303797468353,
+        238.0
+      ],
+      "sourceBox": [
+        34,
+        388,
+        239,
+        535
+      ]
+    },
+    {
+      "cel": 1,
+      "translationPixels": [
+        -1,
+        -3
+      ],
+      "plantedRearFoot": [
+        295.2181818181818,
+        241.0
+      ],
+      "sourceBox": [
+        304,
+        387,
+        514,
+        536
+      ]
+    },
+    {
+      "cel": 2,
+      "translationPixels": [
+        7,
+        -8
+      ],
+      "plantedRearFoot": [
+        286.95384615384614,
+        246.0
+      ],
+      "sourceBox": [
+        580,
+        385,
+        788,
+        534
+      ]
+    },
+    {
+      "cel": 3,
+      "translationPixels": [
+        7,
+        -12
+      ],
+      "plantedRearFoot": [
+        287.2567567567568,
+        250.0
+      ],
+      "sourceBox": [
+        846,
+        381,
+        1059,
+        538
+      ]
+    },
+    {
+      "cel": 4,
+      "translationPixels": [
+        5,
+        -28
+      ],
+      "plantedRearFoot": [
+        289.0344827586207,
+        266.0
+      ],
+      "sourceBox": [
+        1114,
+        383,
+        1333,
+        540
+      ]
+    },
+    {
+      "cel": 5,
+      "translationPixels": [
+        1,
+        -14
+      ],
+      "plantedRearFoot": [
+        292.95714285714286,
+        252.0
+      ],
+      "sourceBox": [
+        1379,
+        381,
+        1593,
+        538
+      ]
+    },
+    {
+      "cel": 6,
+      "translationPixels": [
+        -1,
+        -2
+      ],
+      "plantedRearFoot": [
+        294.73333333333335,
+        240.0
+      ],
+      "sourceBox": [
+        1646,
+        385,
+        1859,
+        535
+      ]
+    },
+    {
+      "cel": 7,
+      "translationPixels": [
+        6,
+        -1
+      ],
+      "plantedRearFoot": [
+        288.5903614457831,
+        239.0
+      ],
+      "sourceBox": [
+        1923,
+        389,
+        2129,
+        536
+      ]
+    }
+  ],
+  "method": "Eight complete drawings generated jointly from approved neutral and authored crouch target, isolated by connected alpha components. One common neutral-to-original scale and rear foot translation only."
+}

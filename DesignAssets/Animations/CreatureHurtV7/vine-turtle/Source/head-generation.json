@@ -1,0 +1,8 @@
+{
+  "tool": "Built-in image_gen.imagegen",
+  "prompt": "Use case: precise-object-edit. Production hidden-surface source for a layered game turtle hurt animation. From this exact plant turtle remove ONLY the head and exposed cream neck which stick out in front of the shell on the left. Complete the small previously hidden front-shell edge and far front-leg shoulder behind the head so the original head can retract inward as a separate layer. Keep the rocky shell, leaves and thin vines, all four legs and toe contacts, scale, camera, palette, outline, lighting and original canvas registration EXACTLY unchanged. Where the old head extended beyond the shell/leg silhouette there must be genuine transparent air, not a colored patch or dark hole. No replacement head, no extra legs, no new pose, no scenery or text. This is an underpainting source used only underneath an original articulated head/neck.",
+  "reference": "Source/seed.png",
+  "output": "Source/head-hidden-generated.png",
+  "transparency": true,
+  "use": "Hidden front-shell/shoulder surface underneath the retracting head and weighted neck parts."
+}

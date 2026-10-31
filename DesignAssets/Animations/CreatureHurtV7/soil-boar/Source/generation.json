@@ -1,0 +1,9 @@
+{
+  "newImageGenerationCalls": 0,
+  "sourceGeneration": "Source/v5-generation.json",
+  "sourceDrawings": "Source/DrawnPoses/01.png through 06.png",
+  "construction": "Retain the accepted complete V5 anatomical poses. Correct only a separately extracted near hind leg with a fixed proximal joint and a rigidly planted hoof/webbed foot. Existing forefeet and other limbs are not translated.",
+  "correction": "leg-rig.json",
+  "renderer": "render.py",
+  "sourceArtworkScale": 1
+}

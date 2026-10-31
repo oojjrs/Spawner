@@ -1,0 +1,35 @@
+{
+  "revisionDate": "2026-10-30", 
+  "provider": "built-in image_gen", 
+  "generatedSource": "Source/eyes-open-generated.png", 
+  "editReference": "Source/eyes-edit-reference.png", 
+  "prompt": "Source/eyes-prompt.txt", 
+  "patches": [
+    {
+      "frameIndex": 4, 
+      "generatedEyeOffset": [
+        0, 
+        0
+      ], 
+      "maskBounds": [
+        117, 
+        247, 
+        181, 
+        308
+      ]
+    }
+  ], 
+  "generatedRegistration": "One common canvas rescale from generated 1774x887 to original2048x1024; integer local eye-patch offsets only. Original drawn frame registration, scale, silhouette and duration remain unchanged.", 
+  "mask": "Source/eyes-open-mask.png", 
+  "maskMethod": "Rounded rectangles with10px corners and2px Gaussian edge feather; only corrected eye/eyelid area is composited.", 
+  "untouchedFrames": [
+    0, 
+    1, 
+    2, 
+    3, 
+    5, 
+    6, 
+    7
+  ], 
+  "firstAndLastExactSeed": true
+}

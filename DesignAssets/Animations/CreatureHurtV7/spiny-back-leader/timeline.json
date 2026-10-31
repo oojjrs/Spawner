@@ -1,0 +1,200 @@
+{
+  "durationsMs": [
+    20,
+    30,
+    30,
+    30,
+    400,
+    30,
+    30,
+    30,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+  ],
+  "durationMs": 760,
+  "closedEyeHold": {
+    "fromMs": 110,
+    "toMs": 510,
+    "durationMs": 400
+  },
+  "poses": [
+    {
+      "durationMs": 20,
+      "expression": "seed",
+      "clockwiseDegrees": -0.0,
+      "liftPixels": 0.0,
+      "localDegrees": {
+        "mandible-far": 0,
+        "mandible-near": 0
+      }
+    },
+    {
+      "durationMs": 30,
+      "expression": "half",
+      "clockwiseDegrees": -1.2,
+      "liftPixels": 0.6,
+      "localDegrees": {
+        "mandible-far": -1.44,
+        "mandible-near": 1.62
+      }
+    },
+    {
+      "durationMs": 30,
+      "expression": "pain",
+      "clockwiseDegrees": -2.8,
+      "liftPixels": 1.4,
+      "localDegrees": {
+        "mandible-far": -4.8,
+        "mandible-near": 5.4
+      }
+    },
+    {
+      "durationMs": 30,
+      "expression": "pain",
+      "clockwiseDegrees": -3.68,
+      "liftPixels": 1.83333,
+      "localDegrees": {
+        "mandible-far": -7.2,
+        "mandible-near": 8.1
+      }
+    },
+    {
+      "durationMs": 400,
+      "expression": "pain",
+      "clockwiseDegrees": -4.0,
+      "liftPixels": 2.0,
+      "localDegrees": {
+        "mandible-far": -8,
+        "mandible-near": 9
+      }
+    },
+    {
+      "durationMs": 30,
+      "expression": "pain",
+      "clockwiseDegrees": -3.76,
+      "liftPixels": 1.86667,
+      "localDegrees": {
+        "mandible-far": -6.88,
+        "mandible-near": 7.74
+      }
+    },
+    {
+      "durationMs": 30,
+      "expression": "pain",
+      "clockwiseDegrees": -2.8,
+      "liftPixels": 1.4,
+      "localDegrees": {
+        "mandible-far": -4.64,
+        "mandible-near": 5.22
+      }
+    },
+    {
+      "durationMs": 30,
+      "expression": "pain",
+      "clockwiseDegrees": -1.76,
+      "liftPixels": 0.86667,
+      "localDegrees": {
+        "mandible-far": -1.44,
+        "mandible-near": 1.62
+      }
+    },
+    {
+      "durationMs": 20,
+      "expression": "half",
+      "clockwiseDegrees": -0.88,
+      "liftPixels": 0.43333,
+      "localDegrees": {
+        "mandible-far": 1.28,
+        "mandible-near": -1.44
+      }
+    },
+    {
+      "durationMs": 20,
+      "expression": "half",
+      "clockwiseDegrees": -0.24,
+      "liftPixels": 0.13333,
+      "localDegrees": {
+        "mandible-far": 1.92,
+        "mandible-near": -2.16
+      }
+    },
+    {
+      "durationMs": 20,
+      "expression": "seed",
+      "clockwiseDegrees": -0.0,
+      "liftPixels": 0.0,
+      "localDegrees": {
+        "mandible-far": 1.28,
+        "mandible-near": -1.44
+      }
+    },
+    {
+      "durationMs": 20,
+      "expression": "seed",
+      "clockwiseDegrees": -0.0,
+      "liftPixels": 0.0,
+      "localDegrees": {
+        "mandible-far": 0.4,
+        "mandible-near": -0.45
+      }
+    },
+    {
+      "durationMs": 20,
+      "expression": "seed",
+      "clockwiseDegrees": -0.0,
+      "liftPixels": 0.0,
+      "localDegrees": {
+        "mandible-far": -0.28,
+        "mandible-near": 0.315
+      }
+    },
+    {
+      "durationMs": 20,
+      "expression": "seed",
+      "clockwiseDegrees": -0.0,
+      "liftPixels": 0.0,
+      "localDegrees": {
+        "mandible-far": -0.4,
+        "mandible-near": 0.45
+      }
+    },
+    {
+      "durationMs": 20,
+      "expression": "seed",
+      "clockwiseDegrees": -0.0,
+      "liftPixels": 0.0,
+      "localDegrees": {
+        "mandible-far": -0.16,
+        "mandible-near": 0.18
+      }
+    },
+    {
+      "durationMs": 20,
+      "expression": "seed",
+      "clockwiseDegrees": -0.0,
+      "liftPixels": 0.0,
+      "localDegrees": {
+        "mandible-far": 0,
+        "mandible-near": 0
+      }
+    }
+  ],
+  "method": "hard-rock-around-planted-foot",
+  "support": [
+    121.83333333333333,
+    223
+  ],
+  "supportSemanticROI": [
+    112,
+    143,
+    198,
+    226
+  ],
+  "supportMetric": "Center of the bottom three visible-alpha rows inside the visually identified sole region."
+}

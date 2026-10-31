@@ -1,0 +1,120 @@
+{
+  "durationsMs": [
+    20,
+    30,
+    30,
+    30,
+    400,
+    30,
+    30,
+    30,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+  ],
+  "durationMs": 760,
+  "closedEyeHold": {
+    "fromMs": 110,
+    "toMs": 510,
+    "durationMs": 400
+  },
+  "poses": [
+    {
+      "expression": "seed",
+      "clockwiseDegrees": -0.0,
+      "localDegrees": {}
+    },
+    {
+      "expression": "half",
+      "clockwiseDegrees": -1.05,
+      "localDegrees": {}
+    },
+    {
+      "expression": "pain",
+      "clockwiseDegrees": -2.45,
+      "localDegrees": {}
+    },
+    {
+      "expression": "pain",
+      "clockwiseDegrees": -3.22,
+      "localDegrees": {}
+    },
+    {
+      "expression": "pain",
+      "clockwiseDegrees": -3.5,
+      "localDegrees": {}
+    },
+    {
+      "expression": "pain",
+      "clockwiseDegrees": -3.29,
+      "localDegrees": {}
+    },
+    {
+      "expression": "pain",
+      "clockwiseDegrees": -2.45,
+      "localDegrees": {}
+    },
+    {
+      "expression": "pain",
+      "clockwiseDegrees": -1.54,
+      "localDegrees": {}
+    },
+    {
+      "expression": "half",
+      "clockwiseDegrees": -0.77,
+      "localDegrees": {}
+    },
+    {
+      "expression": "half",
+      "clockwiseDegrees": -0.21,
+      "localDegrees": {}
+    },
+    {
+      "expression": "seed",
+      "clockwiseDegrees": -0.0,
+      "localDegrees": {}
+    },
+    {
+      "expression": "seed",
+      "clockwiseDegrees": -0.0,
+      "localDegrees": {}
+    },
+    {
+      "expression": "seed",
+      "clockwiseDegrees": -0.0,
+      "localDegrees": {}
+    },
+    {
+      "expression": "seed",
+      "clockwiseDegrees": -0.0,
+      "localDegrees": {}
+    },
+    {
+      "expression": "seed",
+      "clockwiseDegrees": -0.0,
+      "localDegrees": {}
+    },
+    {
+      "expression": "seed",
+      "clockwiseDegrees": -0.0,
+      "localDegrees": {}
+    }
+  ],
+  "method": "hard-rock-around-planted-foot",
+  "support": [
+    120.80882352941177,
+    223
+  ],
+  "supportSemanticROI": [
+    102,
+    145,
+    196,
+    227
+  ],
+  "supportMetric": "Center of the bottom three visible-alpha rows inside the visually identified sole region."
+}

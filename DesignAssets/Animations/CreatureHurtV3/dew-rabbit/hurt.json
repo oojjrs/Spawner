@@ -1,0 +1,78 @@
+{
+  "frameSize": 417, 
+  "columns": 4, 
+  "pivotX": 208.5, 
+  "pivotY": 364.875, 
+  "closedEyeHold": {
+    "fromMs": 110, 
+    "toMs": 510, 
+    "durationMs": 400
+  }, 
+  "image": "DesignAssets/Animations/CreatureHurtV3/dew-rabbit/hurt.webp", 
+  "durationsMs": [
+    20, 
+    30, 
+    30, 
+    30, 
+    400, 
+    30, 
+    30, 
+    30, 
+    20, 
+    20, 
+    20, 
+    20, 
+    20, 
+    20, 
+    20, 
+    20
+  ], 
+  "frameCount": 16, 
+  "durationMs": 760, 
+  "loop": false, 
+  "method": "Approved neutral body preserved; local face-surface repair and reuse of the V2 drawn eyelid; compressed original eye for the half-close; coherent rigid ground-pivot tilt/lift with no per-frame scaling or whole-body drawing swap. No mesh or part rig is used.", 
+  "source": "Source/neutral.png", 
+  "sourceSha256": "4faeada499adb2b02fa5083e1f095f6673ee9e157a55d9b13e4ba36f75e9823e", 
+  "expressionDonor": "DesignAssets/Animations/CreatureHurtV2/dew-rabbit/Source/Cels/03.png", 
+  "expressionMasks": [
+    "Source/face-repair-mask.png", 
+    "Source/pain-eye.png", 
+    "Source/half-eye.png"
+  ], 
+  "expressionParameters": {
+    "eyes": [
+      [
+        184.5, 
+        216.5, 
+        19, 
+        21
+      ], 
+      [
+        126, 
+        207, 
+        11, 
+        17
+      ]
+    ], 
+    "donorEyes": [
+      [
+        178, 
+        205, 
+        19, 
+        11
+      ], 
+      [
+        124, 
+        186, 
+        6.5, 
+        6.5
+      ]
+    ], 
+    "donorCel": "03.png"
+  }, 
+  "renderer": "render.py", 
+  "timeline": "timeline.json", 
+  "preview": "hurt-preview.webp", 
+  "thumbnail": "hurt-thumbnail.webp", 
+  "matrix": "hurt-matrix.webp"
+}

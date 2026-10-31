@@ -1,0 +1,304 @@
+{
+  "name": "vine-turtle", 
+  "action": "attack", 
+  "image": "DesignAssets/Animations/CreatureAttackV2/vine-turtle/attack.webp", 
+  "frameSize": 512, 
+  "columns": 6, 
+  "frameCount": 6, 
+  "durationsMs": [
+    70, 
+    210, 
+    50, 
+    300, 
+    170, 
+    220
+  ], 
+  "durationMs": 1020, 
+  "loop": false, 
+  "rootMotion": false, 
+  "rootMotionNote": "Head retracts under rigid shell, freshly drawn neck and open jaw reach forward, low closed-beak bite held 300ms, neck retracts and leaves settle.", 
+  "pivotX": 262.5, 
+  "pivotY": 441.62, 
+  "impactFrame": 3, 
+  "hitAtMs": 330, 
+  "impactHoldMs": 300, 
+  "previewPauseMs": 800, 
+  "facing": "left", 
+  "provider": "built-in image_gen", 
+  "artworkMethod": "Newly drawn full-strip cels from one seed-anchored six-pose generation, followed by a targeted anatomy edit of the full strip. Source cels2-5 are new full drawings; first and last are locked exactly to shipped neutral. No mesh warp, crossfade, synthetic motion interpolation, or per-frame scaling.", 
+  "motion": "Head retracts under rigid shell, freshly drawn neck and open jaw reach forward, low closed-beak bite held 300ms, neck retracts and leaves settle.", 
+  "source": "Source/raw-drawn-strip.png", 
+  "initialSource": "Source/raw-initial.png", 
+  "seed": "Source/seed.png", 
+  "editCanvas": "Source/edit-canvas.png", 
+  "prompt": "Source/prompt.txt", 
+  "initialPrompt": "Source/prompt-initial.txt", 
+  "renderer": "export.py", 
+  "preview": "attack-preview.webp", 
+  "contact": "contact.png", 
+  "thumbnail": "DesignAssets/Planning/UnitPreviews/vine-turtle/attack-v2.webp", 
+  "normalization": "Official edit-canvas and strip normalizer used; anatomical-anchor registration with one global scale preserves rigid body features and explicit local trajectories. Per-pose translation only registers the declared anatomical anchor; it does not fit each frame to its own extents.", 
+  "normalizationScale": 1.2444550898203592, 
+  "generatedOffset": [
+    -6, 
+    0
+  ], 
+  "anchorMethod": "rigid-orange-carapace", 
+  "rootTrajectory": [
+    [
+      0, 
+      0
+    ], 
+    [
+      0, 
+      0
+    ], 
+    [
+      0, 
+      0
+    ], 
+    [
+      0, 
+      0
+    ], 
+    [
+      0, 
+      0
+    ], 
+    [
+      0, 
+      0
+    ]
+  ], 
+  "firstAndLastFrameIdentical": true, 
+  "frames": [
+    {
+      "index": 0, 
+      "file": "Source/Frames/pose-01.png", 
+      "durationMs": 70, 
+      "exactSeed": true, 
+      "anchorMethod": "rigid-orange-carapace", 
+      "sourceAnchor": [
+        202.80785653287788, 
+        408.7712781098776
+      ], 
+      "targetAnchor": [
+        293.6702214930271, 
+        309.9219647251846
+      ], 
+      "sharedScale": 1.2444550898203592, 
+      "translation": [
+        41.28495217513003, 
+        -198.77553289102616
+      ], 
+      "sourceBounds": [
+        20, 
+        262, 
+        354, 
+        515
+      ], 
+      "projectedBounds": [
+        66.17405397153722, 
+        127.27170064190796, 
+        481.82205397153723, 
+        442.1188383664588
+      ], 
+      "bounds": [
+        49, 
+        140, 
+        476, 
+        454
+      ]
+    }, 
+    {
+      "index": 1, 
+      "file": "Source/Frames/pose-02.png", 
+      "durationMs": 210, 
+      "exactSeed": false, 
+      "anchorMethod": "rigid-orange-carapace", 
+      "sourceAnchor": [
+        540.5432685776389, 
+        406.13150387175654
+      ], 
+      "targetAnchor": [
+        287.6702214930271, 
+        309.9219647251846
+      ], 
+      "sharedScale": 1.2444550898203592, 
+      "translation": [
+        -385.0116003565491, 
+        -195.49045240441978
+      ], 
+      "sourceBounds": [
+        368, 
+        274, 
+        696, 
+        516
+      ], 
+      "projectedBounds": [
+        72.94787269734314, 
+        145.49024220635863, 
+        481.12914215842096, 
+        446.64837394288554
+      ], 
+      "bounds": [
+        63, 
+        0, 
+        508, 
+        475
+      ]
+    }, 
+    {
+      "index": 2, 
+      "file": "Source/Frames/pose-03.png", 
+      "durationMs": 50, 
+      "exactSeed": false, 
+      "anchorMethod": "rigid-orange-carapace", 
+      "sourceAnchor": [
+        913.1348493462194, 
+        424.171461057419
+      ], 
+      "targetAnchor": [
+        287.6702214930271, 
+        309.9219647251846
+      ], 
+      "sharedScale": 1.2444550898203592, 
+      "translation": [
+        -848.6850894682225, 
+        -217.9403689442588
+      ], 
+      "sourceBounds": [
+        720, 
+        260, 
+        1088, 
+        522
+      ], 
+      "projectedBounds": [
+        47.322575202436155, 
+        105.61795440903461, 
+        505.2820482563284, 
+        431.6651879419687
+      ], 
+      "bounds": [
+        40, 
+        1, 
+        512, 
+        439
+      ]
+    }, 
+    {
+      "index": 3, 
+      "file": "Source/Frames/pose-04.png", 
+      "durationMs": 300, 
+      "exactSeed": false, 
+      "anchorMethod": "rigid-orange-carapace", 
+      "sourceAnchor": [
+        1297.7207915424235, 
+        424.72824613716455
+      ], 
+      "targetAnchor": [
+        287.6702214930271, 
+        309.9219647251846
+      ], 
+      "sharedScale": 1.2444550898203592, 
+      "translation": [
+        -1327.2850227076472, 
+        -218.6332629706842
+      ], 
+      "sourceBounds": [
+        1088, 
+        275, 
+        1455, 
+        524
+      ], 
+      "projectedBounds": [
+        26.68211501690371, 
+        123.59188672991456, 
+        483.3971329809756, 
+        433.46120409518403
+      ], 
+      "bounds": [
+        23, 
+        0, 
+        492, 
+        482
+      ]
+    }, 
+    {
+      "index": 4, 
+      "file": "Source/Frames/pose-05.png", 
+      "durationMs": 170, 
+      "exactSeed": false, 
+      "anchorMethod": "rigid-orange-carapace", 
+      "sourceAnchor": [
+        1643.4276112380696, 
+        416.8369404489851
+      ], 
+      "targetAnchor": [
+        287.6702214930271, 
+        309.9219647251846
+      ], 
+      "sharedScale": 1.2444550898203592, 
+      "translation": [
+        -1757.5016340635032, 
+        -208.81288744170092
+      ], 
+      "sourceBounds": [
+        1470, 
+        261, 
+        1806, 
+        522
+      ], 
+      "projectedBounds": [
+        71.84734797242481, 
+        115.98989100141284, 
+        489.9842581520654, 
+        440.7926694445266
+      ], 
+      "bounds": [
+        28, 
+        0, 
+        505, 
+        447
+      ]
+    }, 
+    {
+      "index": 5, 
+      "file": "Source/Frames/pose-06.png", 
+      "durationMs": 220, 
+      "exactSeed": true, 
+      "anchorMethod": "rigid-orange-carapace", 
+      "sourceAnchor": [
+        1999.847874720358, 
+        410.2202181208054
+      ], 
+      "targetAnchor": [
+        293.6702214930271, 
+        309.9219647251846
+      ], 
+      "sharedScale": 1.2444550898203592, 
+      "translation": [
+        -2195.050645069151, 
+        -200.57867366246967
+      ], 
+      "sourceBounds": [
+        1819, 
+        263, 
+        2152, 
+        515
+      ], 
+      "projectedBounds": [
+        68.61316331408261, 
+        126.7130149602848, 
+        483.01670822426195, 
+        440.3156975950153
+      ], 
+      "bounds": [
+        49, 
+        140, 
+        476, 
+        454
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "raw": "hidden-surfaces-generated.png",
+  "purpose": "Underpainting behind original head and near-wing cutouts; original front chest feathers are a stationary occluder.",
+  "prompt": "Remove the near wing and head from the exact owl source; reconstruct only hidden cream/brown torso feathers. Preserve body, talons, tail, camera, proportions, palette and original source registration. Transparent outside. No text, no new head or wing.",
+  "tool": "Built-in image_gen.imagegen",
+  "reference": "DesignAssets/Animations/CreatureHurtV3/talon-owl/Source/seed.png",
+  "alpha": true,
+  "scalePolicy": "One fixed source canvas and artwork scale; no per-frame fit."
+}

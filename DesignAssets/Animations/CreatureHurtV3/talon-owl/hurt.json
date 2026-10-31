@@ -1,0 +1,52 @@
+{
+  "image": "DesignAssets/Animations/CreatureHurtV3/talon-owl/hurt.webp",
+  "frameSize": 432,
+  "columns": 4,
+  "pivotX": 197.4375,
+  "pivotY": 337.5,
+  "frameCount": 16,
+  "durationsMs": [
+    20,
+    30,
+    30,
+    30,
+    400,
+    30,
+    30,
+    30,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+  ],
+  "durationMs": 760,
+  "loop": false,
+  "closedEyeHold": {
+    "fromMs": 110,
+    "toMs": 510,
+    "durationMs": 400
+  },
+  "method": "Approved neutral body reused at fixed scale; V2 painted eyelids locally registered and color-corrected; coherent ground-pivot rotation/lift. Corrective compositing, not a part rig.",
+  "seed": "Source/seed.png",
+  "seedSha256": "cac53e0f444f29e9a28e0e366dd887b0ccb52f1fc32d846ee89488ef5a12c509",
+  "expressionRegistration": "expression-registration.json",
+  "expressionConfig": "expression-config.json",
+  "masks": "Masks/expression.png",
+  "timeline": "timeline.json",
+  "renderer": "render.py",
+  "preview": "hurt-preview.webp",
+  "thumbnail": "hurt-thumbnail.webp",
+  "matrix": "hurt-matrix.webp",
+  "previewPauseMs": 900,
+  "artworkScale": 1,
+  "rotationPivot": [
+    197.4375,
+    337.5
+  ],
+  "peakRotationDegrees": 5.8,
+  "peakLiftPixels": 4.4
+}

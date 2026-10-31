@@ -1,0 +1,27 @@
+{
+  "frameSize": 264,
+  "displaySize": 263.6730245231608,
+  "scale": 0.515625,
+  "idleReference": "DesignAssets/Animations/SoilBoarIdle/V1/idle.webp",
+  "viewSize": 263.4999410377358,
+  "pivotX": 132.09826061320754,
+  "pivotY": 202.63912768094045,
+  "sourcePivot": [
+    256,
+    394
+  ],
+  "sourceFrameSize": 512,
+  "columns": 6,
+  "frameCount": 6,
+  "image": "DesignAssets/Animations/CreatureAttackV2/soil-boar/runtime.webp",
+  "durationsMs": [
+    70,
+    210,
+    50,
+    300,
+    170,
+    220
+  ],
+  "loop": false,
+  "facing": "left"
+}

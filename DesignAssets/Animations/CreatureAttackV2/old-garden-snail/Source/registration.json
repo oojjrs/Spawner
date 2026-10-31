@@ -1,0 +1,68 @@
+{
+  "commonScale": 1.3,
+  "landmark": "golden shell spiral center",
+  "localLandmarkX": [
+    170,
+    179,
+    159,
+    219,
+    294,
+    160,
+    167,
+    170
+  ],
+  "targetLandmarkX": [
+    324,
+    324,
+    324,
+    324,
+    324,
+    324,
+    324,
+    324
+  ],
+  "groundY": [
+    507,
+    507,
+    507,
+    507,
+    507,
+    507,
+    507,
+    507
+  ],
+  "verticalMotion": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "durationsMs": [
+    110,
+    180,
+    220,
+    80,
+    300,
+    220,
+    260,
+    200
+  ],
+  "description": "Retract and compress the neck in two heavy preparations, extend it rapidly into a long low bash, hold the narrowed-eye contact, fold back with eyestalk overshoot and slowly restore the shell load.",
+  "rootMotionDescription": "The golden shell spiral stays at x324 through preparation, contact and recovery. The head extends left while the soft neck shortens to keep the full contact pose inside the existing canvas.",
+  "contactCorrection": {
+    "frame": 4,
+    "rigidShellShiftX": -66,
+    "softNeckSourceInterval": [
+      130,
+      240
+    ],
+    "softNeckOutputInterval": [
+      130,
+      174
+    ]
+  }
+}

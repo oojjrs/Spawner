@@ -1,0 +1,191 @@
+{
+  "pipeline": "OpenAI game-studio sprite-pipeline; one full strip edit from locked seed; official split_strip with HD uniform-scale common-anchor wrapper", 
+  "officialNormalizeScript": "D:\\.codex\\plugins\\cache\\openai-curated\\game-studio\\1dc19589\\scripts\\normalize_sprite_strip.py", 
+  "rawSpriteCount": 8, 
+  "sharedScale": 1.8090452261306533, 
+  "sharedOffsetX": 18.110552763819094, 
+  "sharedGroundAnchorY": 448, 
+  "intentionalRootTrajectory": "Horizontal pose origins follow the original nominal strip pitch. No per-frame centering or per-frame scale. All poses are grounded; their support-foot contact is aligned to the common baseline.", 
+  "alphaCleanup": "Eight main alpha components above 180 with two-pixel edge padding; original antialias alpha retained inside padded components; only detached noise removed.", 
+  "poses": [
+    {
+      "rawComponent": 2, 
+      "coreBounds": [
+        32, 
+        400, 
+        199, 
+        185
+      ], 
+      "extractionBounds": [
+        30, 
+        398, 
+        233, 
+        587
+      ], 
+      "nominalSlotOrigin": 0.0, 
+      "uniformScale": 1.8090452261306533, 
+      "placement": [
+        72, 
+        110
+      ], 
+      "groundAnchorY": 448
+    }, 
+    {
+      "rawComponent": 5, 
+      "coreBounds": [
+        252, 
+        415, 
+        182, 
+        166
+      ], 
+      "extractionBounds": [
+        250, 
+        413, 
+        436, 
+        583
+      ], 
+      "nominalSlotOrigin": 221.75, 
+      "uniformScale": 1.8090452261306533, 
+      "placement": [
+        69, 
+        144
+      ], 
+      "groundAnchorY": 448
+    }, 
+    {
+      "rawComponent": 1, 
+      "coreBounds": [
+        443, 
+        373, 
+        225, 
+        206
+      ], 
+      "extractionBounds": [
+        441, 
+        371, 
+        669, 
+        581
+      ], 
+      "nominalSlotOrigin": 443.5, 
+      "uniformScale": 1.8090452261306533, 
+      "placement": [
+        14, 
+        72
+      ], 
+      "groundAnchorY": 448
+    }, 
+    {
+      "rawComponent": 7, 
+      "coreBounds": [
+        659, 
+        430, 
+        220, 
+        147
+      ], 
+      "extractionBounds": [
+        657, 
+        428, 
+        881, 
+        579
+      ], 
+      "nominalSlotOrigin": 665.25, 
+      "uniformScale": 1.8090452261306533, 
+      "placement": [
+        3, 
+        178
+      ], 
+      "groundAnchorY": 448
+    }, 
+    {
+      "rawComponent": 8, 
+      "coreBounds": [
+        880, 
+        436, 
+        274, 
+        143
+      ], 
+      "extractionBounds": [
+        878, 
+        434, 
+        1156, 
+        581
+      ], 
+      "nominalSlotOrigin": 887.0, 
+      "uniformScale": 1.8090452261306533, 
+      "placement": [
+        2, 
+        186
+      ], 
+      "groundAnchorY": 448
+    }, 
+    {
+      "rawComponent": 6, 
+      "coreBounds": [
+        1163, 
+        417, 
+        177, 
+        166
+      ], 
+      "extractionBounds": [
+        1161, 
+        415, 
+        1342, 
+        585
+      ], 
+      "nominalSlotOrigin": 1108.75, 
+      "uniformScale": 1.8090452261306533, 
+      "placement": [
+        113, 
+        144
+      ], 
+      "groundAnchorY": 448
+    }, 
+    {
+      "rawComponent": 4, 
+      "coreBounds": [
+        1347, 
+        407, 
+        199, 
+        178
+      ], 
+      "extractionBounds": [
+        1345, 
+        405, 
+        1548, 
+        587
+      ], 
+      "nominalSlotOrigin": 1330.5, 
+      "uniformScale": 1.8090452261306533, 
+      "placement": [
+        44, 
+        122
+      ], 
+      "groundAnchorY": 448
+    }, 
+    {
+      "rawComponent": 3, 
+      "coreBounds": [
+        1557, 
+        400, 
+        198, 
+        185
+      ], 
+      "extractionBounds": [
+        1555, 
+        398, 
+        1757, 
+        587
+      ], 
+      "nominalSlotOrigin": 1552.25, 
+      "uniformScale": 1.8090452261306533, 
+      "placement": [
+        23, 
+        110
+      ], 
+      "groundAnchorY": 448
+    }
+  ], 
+  "frame1And8": "exact Source/seed.png reused by export.py", 
+  "sourceSha256": "edd3da59a8a245dd2931653a54426904b87154a3e0baac9c554bada8f9a4fa85", 
+  "rawStripSha256": "c3f35bca94b87398b96bc946832f555ee75b26f37bb33f49eae6ce791121900d"
+}

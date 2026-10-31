@@ -1,0 +1,29 @@
+{
+  "frameSize": 264,
+  "displaySize": 263.6242424242424,
+  "scale": 0.515625,
+  "idleReference": "DesignAssets/Animations/UniqueIdleV3/old-garden-snail/idle.webp",
+  "viewSize": 239.34065934065933,
+  "pivotX": 133.57237293956044,
+  "pivotY": 230.11323832417582,
+  "sourcePivot": [
+    256,
+    448
+  ],
+  "sourceFrameSize": 512,
+  "columns": 4,
+  "frameCount": 8,
+  "image": "DesignAssets/Animations/CreatureAttackV2/old-garden-snail/runtime.webp",
+  "durationsMs": [
+    110,
+    180,
+    220,
+    80,
+    300,
+    220,
+    260,
+    200
+  ],
+  "loop": false,
+  "facing": "left"
+}

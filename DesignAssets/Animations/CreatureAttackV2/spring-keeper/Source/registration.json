@@ -1,0 +1,56 @@
+{
+  "commonScale": 1.34, 
+  "landmark": "visible eye center", 
+  "localLandmarkX": [
+    50, 
+    85, 
+    83, 
+    48, 
+    50, 
+    82, 
+    52, 
+    51
+  ], 
+  "targetLandmarkX": [
+    145, 
+    153, 
+    158, 
+    125, 
+    119, 
+    149, 
+    145, 
+    145
+  ], 
+  "groundY": [
+    513, 
+    513, 
+    513, 
+    513, 
+    513, 
+    513, 
+    513, 
+    513
+  ], 
+  "verticalMotion": [
+    0, 
+    0, 
+    0, 
+    -12, 
+    0, 
+    0, 
+    0, 
+    0
+  ], 
+  "durationsMs": [
+    70, 
+    90, 
+    100, 
+    35, 
+    240, 
+    100, 
+    140, 
+    130
+  ], 
+  "description": "Crouch and raise chest/wings, draw neck back, launch a short hop, drive a low-left peck and hold contact, recoil with delayed crest and fan-tail motion.", 
+  "rootMotionDescription": "Deliberate short forward hop, deep whole-body pitch into the peck, and foot replant; eye registration preserves the beak strike while the rotated body moves the feet behind it."
+}

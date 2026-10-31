@@ -1,0 +1,18 @@
+Use case: identity-preserve.
+Create one production-quality newly drawn 2D browser-game attack spritesheet of Walking Forest, the exact squat gray-green turtle whose back is a massive mountain of faceted dark gray mineral rocks with amber seams and several turquoise crystals; it has a friendly rounded turtle head and four stubby clawed feet. Image 1 is the approved character seed; image 2 is the official transparent edit canvas reserving eight slots. Preserve exactly the seed character identity, left-facing three-quarter side camera, anatomy, proportions, palette, outline weight, textures and painterly polished game-art style. This is not pixel art. Anatomy lock: one turtle head and four stubby legs, the same rigid mineral pile and crystal family; never replace the rocks with a tree, add a second shell, create detached flying rocks or giant fangs.
+
+EXACTLY EIGHT separate complete full-body poses in ONE horizontal row, left to right, eight equal-width cells. Wide 3:1 landscape PNG with one centered row and generous empty transparent margins above/below. Same body scale and shared ground baseline in every cell. Each pose wholly fits inside its cell with a clear gap. No text, labels, numbers, guides, scenery, floor, cast shadows, enemies, weapons, motion ghosts, slash/impact effects, or painted checkerboard. Genuinely transparent background.
+
+Draw a strong anatomical whole-body attack with clear weight preparation, fast commitment, a distinct readable contact silhouette and expression, follow-through and recovery. Actually draw newly exposed undersides, joint bends, overlapping limbs and changed expressions. Do not produce tiny local edits, a rigid sprite rotated or slid around, body-wide scaling, or repetitive idle motion. Intentional lunge, short hop and foot replant are allowed where described. Keep underlying body size, limb lengths, costume and identity stable.
+
+Eight exact poses:
+1. Exact seed-like neutral squat turtle pose, head out and four broad feet on the ground, mineral mountain unchanged.
+2. Heavy preparation: weight rocks onto hind feet, shoulders and front shell lift, front toes start unweighting, head draws back; the entire mineral mass tilts together as one load.
+3. Maximum wind-up: front body rears noticeably with both front feet raised, underside and bent front legs newly drawn, head tucked and eyes focused; hind feet visibly carry the load and crystals remain part of the same rock shell.
+4. Fast downward-forward drive toward LEFT: front legs extend toward a stomp, heavy shell pitches forward, neck and head thrust outward from under the front rocks.
+5. Strong ram/stomp CONTACT: two front feet planted wide and low with toes spread, heavy front body dropped forward, head extended low-left with a determined strained expression and small open turtle mouth; mineral mountain leans over shoulders. Much lower and more committed silhouette than the raised preparation.
+6. Recoil: head retracts slightly and chest rebounds from the planted front feet, heavy mineral shell rocks back after the soft body stops.
+7. Four feet settle back into the seed stance, head relaxes and mineral mass returns upright.
+8. Exact initial neutral seed-like turtle pose, same scale, location, rock pile and crystal arrangement as pose one.
+
+Keep each phase visually distinct, especially raised/retracted anticipation versus low extended contact, while preserving exact character identity. Contact pose must read clearly at 64 px display size. Pose 1 and 8 closely match the seed. This entire strip is the actual final source for the animation; draw all eight at once.

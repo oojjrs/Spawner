@@ -1,0 +1,54 @@
+{
+  "image": "DesignAssets/Animations/CreatureHurtV7/walking-forest/hurt.webp",
+  "frameSize": 256,
+  "columns": 4,
+  "pivotX": 128,
+  "pivotY": 224,
+  "durationsMs": [
+    20,
+    30,
+    30,
+    30,
+    400,
+    30,
+    30,
+    30,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+  ],
+  "frameCount": 16,
+  "durationMs": 760,
+  "loop": false,
+  "closedEyeHold": {
+    "fromMs": 110,
+    "toMs": 510,
+    "durationMs": 400
+  },
+  "method": "hard-rock-around-planted-foot",
+  "source": "Source/seed.png",
+  "timeline": "timeline.json",
+  "renderer": "render.py",
+  "preview": "hurt-preview.webp",
+  "thumbnail": "hurt-thumbnail.webp",
+  "matrix": "hurt-matrix.webp",
+  "sourceSeedSha256": "34fec55e6f6079b289cfe567dbf03841ceca33463f364cce7ebf4828aed785f8",
+  "rig": "rig.json",
+  "previousVersion": "CreatureHurtV3",
+  "supportPixels": [
+    120.80882352941177,
+    223
+  ],
+  "supportSemanticROI": [
+    102,
+    145,
+    196,
+    227
+  ],
+  "supportMetric": "Center of the bottom three visible-alpha rows inside the visually identified sole region."
+}

@@ -1,0 +1,80 @@
+{
+  "format": "project-native layered rigid attachments; baked sprite output; no Spine compatibility claim",
+  "canvas": [
+    384,
+    384
+  ],
+  "root": [
+    203.25,
+    324.75
+  ],
+  "bones": [
+    {
+      "name": "body",
+      "parent": "root",
+      "pivot": [
+        203.25,
+        324.75
+      ]
+    },
+    {
+      "name": "ear-far",
+      "parent": "body",
+      "pivot": [
+        166,
+        165
+      ]
+    },
+    {
+      "name": "ear-near",
+      "parent": "body",
+      "pivot": [
+        198,
+        174
+      ]
+    }
+  ],
+  "drawOrder": [
+    "ear-far",
+    "ear-near",
+    "base-foreground"
+  ],
+  "attachments": [
+    {
+      "name": "ear-far",
+      "bone": "ear-far",
+      "parent": "body",
+      "pivot": [
+        166,
+        165
+      ],
+      "sourceMask": "Masks/ear-far.png",
+      "underlapMask": "Masks/ear-far-overlap.png",
+      "binding": {
+        "type": "rigid-region",
+        "weight": 1
+      },
+      "scale": 1,
+      "occlusion": "Below base foreground at the root. Existing source overlap completes the covered root; no newly exposed viewing angle."
+    },
+    {
+      "name": "ear-near",
+      "bone": "ear-near",
+      "parent": "body",
+      "pivot": [
+        198,
+        174
+      ],
+      "sourceMask": "Masks/ear-near.png",
+      "underlapMask": "Masks/ear-near-overlap.png",
+      "binding": {
+        "type": "rigid-region",
+        "weight": 1
+      },
+      "scale": 1,
+      "occlusion": "Below base foreground at the root. Existing source overlap completes the covered root; no newly exposed viewing angle."
+    }
+  ],
+  "newArtwork": false,
+  "hiddenSurfaces": "All articulation is in the original image plane. Root underlap uses original source pixels; fixed foreground covers every root cut."
+}

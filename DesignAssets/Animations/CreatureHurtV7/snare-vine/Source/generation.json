@@ -1,0 +1,13 @@
+{
+  "raw": "hidden-surfaces-generated.png",
+  "purpose": "Bulb behind independently moving original leaf crown; plus newly completed vine stalks beneath crown occlusion.",
+  "prompt": "Remove the four crown leaf blades and two thin vines from this exact olive bulb sprite. Restore the rounded hidden olive top of bulb. Preserve eyes, roots, body, proportions, palette and source canvas registration. Transparent outside. No extra foliage.",
+  "additionalSource": "Source/complete-vines-generated.png",
+  "additionalPrompt": "Remove bulb and broad leaves. Preserve only both original thin green vines in exactly the original locations, curves, width and color; paint complete smooth lower stalk continuations down to their shared crown insertion near x47%, y63%. No chopped ends at former leaf boundaries. Transparent outside; no leaves, bulb, labels or new vines.",
+  "tool": "Built-in image_gen.imagegen",
+  "reference": "DesignAssets/Animations/CreatureHurtV3/snare-vine/Source/seed.png",
+  "alpha": true,
+  "scalePolicy": "One fixed source canvas and artwork scale; no per-frame fit.",
+  "v7Revision": "Replace the whole-bulb tilt/lift with real local flesh compression and width redistribution above fixed roots; retain the independently bending leaves and completed vine attachments.",
+  "newV7GenerationCalls": 0
+}

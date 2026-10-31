@@ -1,0 +1,10 @@
+{
+  "newImageGenerationCalls": 0,
+  "sourceDrawings": "Source/V5Drawings/01.png through 06.png",
+  "sourceGeneration": "Source/v5-generation.json",
+  "originalDesign": "Source/seed.png",
+  "revision": "Reuse the accepted V5 complete anatomical drawings without changing their shape, size, palette or joint poses. V6 changes only their integer translation registration from the forefoot to the hand-identified near hind paw sole.",
+  "registration": "registration.json",
+  "sourceScale": 1,
+  "newDrawing": false
+}

@@ -1,0 +1,669 @@
+{
+  "species": "spiny-back-leader",
+  "method": "four independently articulated rigid leg chains with fixed world toe IK, rigid lowering carapace, retracting head and closing mandibles",
+  "canvas": [
+    256,
+    256
+  ],
+  "worldPivot": [
+    128,
+    224
+  ],
+  "coordinateSystem": "image x right/y down; bind points in original 256 canvas",
+  "bodyTranslationAtPeak": [
+    2,
+    7
+  ],
+  "bodyRotationDegrees": 0,
+  "bodyScale": [
+    1,
+    1
+  ],
+  "headPivot": [
+    78,
+    154
+  ],
+  "headRetractionAtPeak": [
+    3,
+    -1.2
+  ],
+  "headPeakDegrees": -2,
+  "legs": [
+    {
+      "name": "far-left",
+      "hip": [
+        38,
+        146
+      ],
+      "knee": [
+        27,
+        162
+      ],
+      "toe": [
+        23.5,
+        184.5
+      ],
+      "depth": "behind",
+      "upper": [
+        [
+          27,
+          143
+        ],
+        [
+          36,
+          138
+        ],
+        [
+          45,
+          140
+        ],
+        [
+          48,
+          147
+        ],
+        [
+          43,
+          155
+        ],
+        [
+          34,
+          165
+        ],
+        [
+          27,
+          170
+        ],
+        [
+          21,
+          165
+        ],
+        [
+          20,
+          157
+        ]
+      ],
+      "lower": [
+        [
+          22,
+          157
+        ],
+        [
+          30,
+          156
+        ],
+        [
+          33,
+          162
+        ],
+        [
+          29,
+          170
+        ],
+        [
+          28,
+          178
+        ],
+        [
+          24,
+          185
+        ],
+        [
+          20,
+          184
+        ],
+        [
+          17,
+          176
+        ],
+        [
+          17,
+          168
+        ]
+      ],
+      "bendSign": 1,
+      "lengths": [
+        19.4164878389476,
+        22.7705950734714
+      ]
+    },
+    {
+      "name": "near-front",
+      "hip": [
+        131,
+        170
+      ],
+      "knee": [
+        138,
+        188
+      ],
+      "toe": [
+        122.5,
+        223.5
+      ],
+      "depth": "front",
+      "upper": [
+        [
+          119,
+          161
+        ],
+        [
+          130,
+          160
+        ],
+        [
+          142,
+          164
+        ],
+        [
+          148,
+          173
+        ],
+        [
+          150,
+          182
+        ],
+        [
+          146,
+          190
+        ],
+        [
+          140,
+          192
+        ],
+        [
+          132,
+          187
+        ],
+        [
+          124,
+          188
+        ],
+        [
+          120,
+          179
+        ]
+      ],
+      "lower": [
+        [
+          131,
+          184
+        ],
+        [
+          142,
+          183
+        ],
+        [
+          148,
+          188
+        ],
+        [
+          148,
+          198
+        ],
+        [
+          140,
+          208
+        ],
+        [
+          125,
+          224
+        ],
+        [
+          119,
+          224
+        ],
+        [
+          116,
+          216
+        ],
+        [
+          119,
+          205
+        ],
+        [
+          124,
+          195
+        ],
+        [
+          127,
+          189
+        ]
+      ],
+      "bendSign": -1,
+      "lengths": [
+        19.313207915827967,
+        38.73628789649313
+      ]
+    },
+    {
+      "name": "middle",
+      "hip": [
+        167,
+        174
+      ],
+      "knee": [
+        179,
+        190
+      ],
+      "toe": [
+        186.5,
+        215.5
+      ],
+      "depth": "front",
+      "upper": [
+        [
+          160,
+          168
+        ],
+        [
+          169,
+          167
+        ],
+        [
+          179,
+          169
+        ],
+        [
+          186,
+          176
+        ],
+        [
+          190,
+          187
+        ],
+        [
+          187,
+          194
+        ],
+        [
+          178,
+          198
+        ],
+        [
+          170,
+          192
+        ],
+        [
+          162,
+          190
+        ],
+        [
+          157,
+          179
+        ]
+      ],
+      "lower": [
+        [
+          173,
+          187
+        ],
+        [
+          181,
+          186
+        ],
+        [
+          188,
+          191
+        ],
+        [
+          193,
+          201
+        ],
+        [
+          194,
+          207
+        ],
+        [
+          189,
+          216
+        ],
+        [
+          184,
+          217
+        ],
+        [
+          179,
+          211
+        ],
+        [
+          172,
+          207
+        ],
+        [
+          168,
+          199
+        ],
+        [
+          169,
+          191
+        ]
+      ],
+      "bendSign": -1,
+      "lengths": [
+        20.0,
+        26.580067720004024
+      ]
+    },
+    {
+      "name": "rear",
+      "hip": [
+        212,
+        163
+      ],
+      "knee": [
+        224,
+        177
+      ],
+      "toe": [
+        228,
+        200.5
+      ],
+      "depth": "front",
+      "upper": [
+        [
+          204,
+          156
+        ],
+        [
+          214,
+          154
+        ],
+        [
+          222,
+          158
+        ],
+        [
+          229,
+          163
+        ],
+        [
+          232,
+          174
+        ],
+        [
+          228,
+          181
+        ],
+        [
+          220,
+          183
+        ],
+        [
+          212,
+          177
+        ],
+        [
+          205,
+          170
+        ]
+      ],
+      "lower": [
+        [
+          220,
+          173
+        ],
+        [
+          228,
+          172
+        ],
+        [
+          234,
+          178
+        ],
+        [
+          239,
+          186
+        ],
+        [
+          241,
+          194
+        ],
+        [
+          234,
+          201
+        ],
+        [
+          226,
+          202
+        ],
+        [
+          224,
+          193
+        ],
+        [
+          219,
+          188
+        ],
+        [
+          216,
+          181
+        ]
+      ],
+      "bendSign": -1,
+      "lengths": [
+        18.439088914585774,
+        23.837994882120434
+      ]
+    }
+  ],
+  "mandibles": [
+    {
+      "name": "mandible-far",
+      "pivot": [
+        52,
+        156
+      ],
+      "peakDegrees": -10
+    },
+    {
+      "name": "mandible-near",
+      "pivot": [
+        88,
+        164
+      ],
+      "peakDegrees": 9
+    }
+  ],
+  "attachments": [
+    {
+      "name": "far-left-upper",
+      "bone": "far-left-upper",
+      "sourcePattern": "Parts/far-left-upper-{expression}.png",
+      "mask": "Masks/far-left-upper.png",
+      "binding": {
+        "type": "rigid-region",
+        "weights": [
+          [
+            "far-left-upper",
+            1
+          ]
+        ]
+      },
+      "slot": "behind",
+      "scale": 1
+    },
+    {
+      "name": "far-left-lower",
+      "bone": "far-left-lower",
+      "sourcePattern": "Parts/far-left-lower-{expression}.png",
+      "mask": "Masks/far-left-lower.png",
+      "binding": {
+        "type": "rigid-region",
+        "weights": [
+          [
+            "far-left-lower",
+            1
+          ]
+        ]
+      },
+      "slot": "behind",
+      "scale": 1
+    },
+    {
+      "name": "near-front-upper",
+      "bone": "near-front-upper",
+      "sourcePattern": "Parts/near-front-upper-{expression}.png",
+      "mask": "Masks/near-front-upper.png",
+      "binding": {
+        "type": "rigid-region",
+        "weights": [
+          [
+            "near-front-upper",
+            1
+          ]
+        ]
+      },
+      "slot": "front",
+      "scale": 1
+    },
+    {
+      "name": "near-front-lower",
+      "bone": "near-front-lower",
+      "sourcePattern": "Parts/near-front-lower-{expression}.png",
+      "mask": "Masks/near-front-lower.png",
+      "binding": {
+        "type": "rigid-region",
+        "weights": [
+          [
+            "near-front-lower",
+            1
+          ]
+        ]
+      },
+      "slot": "front",
+      "scale": 1
+    },
+    {
+      "name": "middle-upper",
+      "bone": "middle-upper",
+      "sourcePattern": "Parts/middle-upper-{expression}.png",
+      "mask": "Masks/middle-upper.png",
+      "binding": {
+        "type": "rigid-region",
+        "weights": [
+          [
+            "middle-upper",
+            1
+          ]
+        ]
+      },
+      "slot": "front",
+      "scale": 1
+    },
+    {
+      "name": "middle-lower",
+      "bone": "middle-lower",
+      "sourcePattern": "Parts/middle-lower-{expression}.png",
+      "mask": "Masks/middle-lower.png",
+      "binding": {
+        "type": "rigid-region",
+        "weights": [
+          [
+            "middle-lower",
+            1
+          ]
+        ]
+      },
+      "slot": "front",
+      "scale": 1
+    },
+    {
+      "name": "rear-upper",
+      "bone": "rear-upper",
+      "sourcePattern": "Parts/rear-upper-{expression}.png",
+      "mask": "Masks/rear-upper.png",
+      "binding": {
+        "type": "rigid-region",
+        "weights": [
+          [
+            "rear-upper",
+            1
+          ]
+        ]
+      },
+      "slot": "front",
+      "scale": 1
+    },
+    {
+      "name": "rear-lower",
+      "bone": "rear-lower",
+      "sourcePattern": "Parts/rear-lower-{expression}.png",
+      "mask": "Masks/rear-lower.png",
+      "binding": {
+        "type": "rigid-region",
+        "weights": [
+          [
+            "rear-lower",
+            1
+          ]
+        ]
+      },
+      "slot": "front",
+      "scale": 1
+    },
+    {
+      "name": "mandible-far",
+      "bone": "mandible-far",
+      "sourcePattern": "Parts/mandible-far-{expression}.png",
+      "pivot": [
+        52,
+        156
+      ],
+      "binding": {
+        "type": "rigid-region",
+        "weights": [
+          [
+            "mandible-far",
+            1
+          ]
+        ]
+      },
+      "scale": 1
+    },
+    {
+      "name": "mandible-near",
+      "bone": "mandible-near",
+      "sourcePattern": "Parts/mandible-near-{expression}.png",
+      "pivot": [
+        88,
+        164
+      ],
+      "binding": {
+        "type": "rigid-region",
+        "weights": [
+          [
+            "mandible-near",
+            1
+          ]
+        ]
+      },
+      "scale": 1
+    }
+  ],
+  "sources": {
+    "seed": "Source/seed.png",
+    "half": "Source/half.png",
+    "pain": "Source/pain.png"
+  },
+  "drawOrder": [
+    "far-left leg",
+    "completed body underside",
+    "three near leg chains",
+    "mandibles",
+    "head foreground",
+    "original rigid shell foreground"
+  ],
+  "hiddenSurfaces": {
+    "legs": "Source/hidden-registered.png",
+    "headSocket": "Source/socket-registered.png",
+    "socketRegistration": {
+      "uniformScale": 0.83,
+      "translation": [
+        25,
+        11
+      ]
+    },
+    "method": "native-generated complete missing underside/socket pixels masked only into articulated part vacancies; original visible shell and horn pixels stay in foreground"
+  },
+  "compatibility": "Project-local rigid attachment renderer; no Spine compatibility claim"
+}

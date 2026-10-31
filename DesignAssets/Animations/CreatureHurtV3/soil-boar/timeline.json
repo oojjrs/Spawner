@@ -1,0 +1,143 @@
+{
+  "durationMs": 760,
+  "durationsMs": [
+    20,
+    30,
+    30,
+    30,
+    400,
+    30,
+    30,
+    30,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+  ],
+  "pivot": [
+    184.5,
+    283.957031
+  ],
+  "scale": 1,
+  "rotationConvention": "Positive is clockwise in image coordinates, recoiling the left-facing head toward rear/right.",
+  "rootTravel": false,
+  "intentionalLiftPx": 4.32,
+  "frames": [
+    {
+      "frame": 0,
+      "expression": "open",
+      "clockwiseDegrees": 0,
+      "liftPx": 0,
+      "scale": 1
+    },
+    {
+      "frame": 1,
+      "expression": "half",
+      "clockwiseDegrees": 2.1,
+      "liftPx": 1.3,
+      "scale": 1
+    },
+    {
+      "frame": 2,
+      "expression": "closed",
+      "clockwiseDegrees": 4.9,
+      "liftPx": 3.0,
+      "scale": 1
+    },
+    {
+      "frame": 3,
+      "expression": "closed",
+      "clockwiseDegrees": 6.45,
+      "liftPx": 3.97,
+      "scale": 1
+    },
+    {
+      "frame": 4,
+      "expression": "closed",
+      "clockwiseDegrees": 7,
+      "liftPx": 4.32,
+      "scale": 1
+    },
+    {
+      "frame": 5,
+      "expression": "closed",
+      "clockwiseDegrees": 6.58,
+      "liftPx": 4.06,
+      "scale": 1
+    },
+    {
+      "frame": 6,
+      "expression": "closed",
+      "clockwiseDegrees": 4.9,
+      "liftPx": 3.0,
+      "scale": 1
+    },
+    {
+      "frame": 7,
+      "expression": "closed",
+      "clockwiseDegrees": 3.08,
+      "liftPx": 1.9,
+      "scale": 1
+    },
+    {
+      "frame": 8,
+      "expression": "half",
+      "clockwiseDegrees": 1.54,
+      "liftPx": 0.95,
+      "scale": 1
+    },
+    {
+      "frame": 9,
+      "expression": "half",
+      "clockwiseDegrees": 0.42,
+      "liftPx": 0.26,
+      "scale": 1
+    },
+    {
+      "frame": 10,
+      "expression": "half",
+      "clockwiseDegrees": 0,
+      "liftPx": 0,
+      "scale": 1
+    },
+    {
+      "frame": 11,
+      "expression": "open",
+      "clockwiseDegrees": 0,
+      "liftPx": 0,
+      "scale": 1
+    },
+    {
+      "frame": 12,
+      "expression": "open",
+      "clockwiseDegrees": 0,
+      "liftPx": 0,
+      "scale": 1
+    },
+    {
+      "frame": 13,
+      "expression": "open",
+      "clockwiseDegrees": 0,
+      "liftPx": 0,
+      "scale": 1
+    },
+    {
+      "frame": 14,
+      "expression": "open",
+      "clockwiseDegrees": 0,
+      "liftPx": 0,
+      "scale": 1
+    },
+    {
+      "frame": 15,
+      "expression": "open",
+      "clockwiseDegrees": 0,
+      "liftPx": 0,
+      "scale": 1
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "species": "spring-keeper",
+  "pivot": [
+    157.5,
+    307.5
+  ],
+  "scale": 1,
+  "durationMs": 760,
+  "closedEyeHold": {
+    "fromMs": 110,
+    "toMs": 510,
+    "durationMs": 400
+  },
+  "sources": {
+    "seed": "Source/seed.png",
+    "half": "Source/half.png",
+    "pain": "Source/pain.png"
+  },
+  "localFollowThrough": "Attachments lag the impact and reverse gently on recovery; source scale is constant.",
+  "poses": [
+    {
+      "durationMs": 20,
+      "expression": "seed",
+      "clockwiseDegrees": -0.0,
+      "liftPixels": 0.0,
+      "localDegrees": {
+        "tail-fan": 0,
+        "crest": 0
+      }
+    },
+    {
+      "durationMs": 30,
+      "expression": "half",
+      "clockwiseDegrees": -1.5,
+      "liftPixels": 1.35,
+      "localDegrees": {
+        "tail-fan": -1.44,
+        "crest": 1.98
+      }
+    },
+    {
+      "durationMs": 30,
+      "expression": "pain",
+      "clockwiseDegrees": -3.5,
+      "liftPixels": 3.15,
+      "localDegrees": {
+        "tail-fan": -4.8,
+        "crest": 6.6
+      }
+    },
+    {
+      "durationMs": 30,
+      "expression": "pain",
+      "clockwiseDegrees": -4.6,
+      "liftPixels": 4.125,
+      "localDegrees": {
+        "tail-fan": -7.2,
+        "crest": 9.9
+      }
+    },
+    {
+      "durationMs": 400,
+      "expression": "pain",
+      "clockwiseDegrees": -5.0,
+      "liftPixels": 4.5,
+      "localDegrees": {
+        "tail-fan": -8,
+        "crest": 11
+      }
+    },
+    {
+      "durationMs": 30,
+      "expression": "pain",
+      "clockwiseDegrees": -4.7,
+      "liftPixels": 4.2,
+      "localDegrees": {
+        "tail-fan": -6.88,
+        "crest": 9.46
+      }
+    },
+    {
+      "durationMs": 30,
+      "expression": "pain",
+      "clockwiseDegrees": -3.5,
+      "liftPixels": 3.15,
+      "localDegrees": {
+        "tail-fan": -4.64,
+        "crest": 6.38
+      }
+    },
+    {
+      "durationMs": 30,
+      "expression": "pain",
+      "clockwiseDegrees": -2.2,
+      "liftPixels": 1.95,
+      "localDegrees": {
+        "tail-fan": -1.44,
+        "crest": 1.98
+      }
+    },
+    {
+      "durationMs": 20,
+      "expression": "half",
+      "clockwiseDegrees": -1.1,
+      "liftPixels": 0.975,
+      "localDegrees": {
+        "tail-fan": 1.28,
+        "crest": -1.76
+      }
+    },
+    {
+      "durationMs": 20,
+      "expression": "half",
+      "clockwiseDegrees": -0.3,
+      "liftPixels": 0.3,
+      "localDegrees": {
+        "tail-fan": 1.92,
+        "crest": -2.64
+      }
+    },
+    {
+      "durationMs": 20,
+      "expression": "seed",
+      "clockwiseDegrees": -0.0,
+      "liftPixels": 0.0,
+      "localDegrees": {
+        "tail-fan": 1.28,
+        "crest": -1.76
+      }
+    },
+    {
+      "durationMs": 20,
+      "expression": "seed",
+      "clockwiseDegrees": -0.0,
+      "liftPixels": 0.0,
+      "localDegrees": {
+        "tail-fan": 0.4,
+        "crest": -0.55
+      }
+    },
+    {
+      "durationMs": 20,
+      "expression": "seed",
+      "clockwiseDegrees": -0.0,
+      "liftPixels": 0.0,
+      "localDegrees": {
+        "tail-fan": -0.28,
+        "crest": 0.385
+      }
+    },
+    {
+      "durationMs": 20,
+      "expression": "seed",
+      "clockwiseDegrees": -0.0,
+      "liftPixels": 0.0,
+      "localDegrees": {
+        "tail-fan": -0.4,
+        "crest": 0.55
+      }
+    },
+    {
+      "durationMs": 20,
+      "expression": "seed",
+      "clockwiseDegrees": -0.0,
+      "liftPixels": 0.0,
+      "localDegrees": {
+        "tail-fan": -0.16,
+        "crest": 0.22
+      }
+    },
+    {
+      "durationMs": 20,
+      "expression": "seed",
+      "clockwiseDegrees": -0.0,
+      "liftPixels": 0.0,
+      "localDegrees": {
+        "tail-fan": 0,
+        "crest": 0
+      }
+    }
+  ]
+}

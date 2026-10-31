@@ -1,0 +1,266 @@
+{
+  "rawSize": [
+    2172, 
+    724
+  ], 
+  "sharedScale": 1.2162162162162162, 
+  "anchor": "muzzle", 
+  "rootTrajectory": [
+    [
+      0, 
+      0
+    ], 
+    [
+      8, 
+      -8
+    ], 
+    [
+      -30, 
+      -8
+    ], 
+    [
+      -10, 
+      3
+    ], 
+    [
+      2, 
+      -4
+    ], 
+    [
+      0, 
+      0
+    ]
+  ], 
+  "perFrameScale": false, 
+  "edgeCleanup": "Only isolated exterior neon matte fringe, and detached components smaller than64px farther than8px from substantive artwork. Seed remains byte-identical.", 
+  "frames": [
+    {
+      "index": 0, 
+      "file": "Source/Frames/pose-01.png", 
+      "durationMs": 70, 
+      "exactSeed": true, 
+      "anchorMethod": "muzzle", 
+      "sourceAnchor": [
+        72.83646112600536, 
+        461.33512064343165
+      ], 
+      "targetAnchor": [
+        104.12886597938144, 
+        367.7525773195876
+      ], 
+      "sharedScale": 1.2162162162162162, 
+      "translation": [
+        15.543980826131687, 
+        -193.3306775170185
+      ], 
+      "sourceBounds": [
+        29, 
+        352, 
+        362, 
+        507
+      ], 
+      "projectedBounds": [
+        50.81425109640196, 
+        234.77743059108963, 
+        455.81425109640196, 
+        423.29094410460317
+      ], 
+      "bounds": [
+        42, 
+        251, 
+        473, 
+        437
+      ]
+    }, 
+    {
+      "index": 1, 
+      "file": "Source/Frames/pose-02.png", 
+      "durationMs": 210, 
+      "exactSeed": false, 
+      "anchorMethod": "muzzle", 
+      "sourceAnchor": [
+        426.68992248062017, 
+        457.4282945736434
+      ], 
+      "targetAnchor": [
+        112.12886597938144, 
+        359.7525773195876
+      ], 
+      "sharedScale": 1.2162162162162162, 
+      "translation": [
+        -406.818337037589, 
+        -196.57913229700574
+      ], 
+      "sourceBounds": [
+        381, 
+        268, 
+        648, 
+        505
+      ], 
+      "projectedBounds": [
+        56.56004134078938, 
+        129.3668136489402, 
+        381.2897710705191, 
+        417.6100568921834
+      ], 
+      "bounds": [
+        13, 
+        28, 
+        469, 
+        447
+      ]
+    }, 
+    {
+      "index": 2, 
+      "file": "Source/Frames/pose-03.png", 
+      "durationMs": 50, 
+      "exactSeed": false, 
+      "anchorMethod": "muzzle", 
+      "sourceAnchor": [
+        665.9212121212121, 
+        467.8878787878788
+      ], 
+      "targetAnchor": [
+        74.12886597938144, 
+        359.7525773195876
+      ], 
+      "sharedScale": 1.2162162162162162, 
+      "translation": [
+        -735.7753109247955, 
+        -209.30024823323794
+      ], 
+      "sourceBounds": [
+        627, 
+        291, 
+        1022, 
+        510
+      ], 
+      "projectedBounds": [
+        26.792256642772145, 
+        144.61867068568097, 
+        507.19766204817745, 
+        410.9700220370324
+      ], 
+      "bounds": [
+        8, 
+        53, 
+        512, 
+        512
+      ]
+    }, 
+    {
+      "index": 3, 
+      "file": "Source/Frames/pose-04.png", 
+      "durationMs": 300, 
+      "exactSeed": false, 
+      "anchorMethod": "muzzle", 
+      "sourceAnchor": [
+        1105.8056994818653, 
+        476.6554404145078
+      ], 
+      "targetAnchor": [
+        94.12886597938144, 
+        370.7525773195876
+      ], 
+      "sharedScale": 1.2162162162162162, 
+      "translation": [
+        -1250.769957714779, 
+        -208.9634988602192
+      ], 
+      "sourceBounds": [
+        1067, 
+        299, 
+        1423, 
+        525
+      ], 
+      "projectedBounds": [
+        46.9327449879238, 
+        154.68514978842944, 
+        479.9057179608967, 
+        429.55001465329434
+      ], 
+      "bounds": [
+        32, 
+        26, 
+        510, 
+        443
+      ]
+    }, 
+    {
+      "index": 4, 
+      "file": "Source/Frames/pose-05.png", 
+      "durationMs": 170, 
+      "exactSeed": false, 
+      "anchorMethod": "muzzle", 
+      "sourceAnchor": [
+        1537.0, 
+        447.872
+      ], 
+      "targetAnchor": [
+        106.12886597938144, 
+        363.7525773195876
+      ], 
+      "sharedScale": 1.2162162162162162, 
+      "translation": [
+        -1763.1954583449428, 
+        -180.95661186960166
+      ], 
+      "sourceBounds": [
+        1492, 
+        333, 
+        1803, 
+        507
+      ], 
+      "projectedBounds": [
+        51.39913624965175, 
+        224.04338813039834, 
+        429.6423794928951, 
+        435.66500975202
+      ], 
+      "bounds": [
+        16, 
+        47, 
+        497, 
+        489
+      ]
+    }, 
+    {
+      "index": 5, 
+      "file": "Source/Frames/pose-06.png", 
+      "durationMs": 220, 
+      "exactSeed": true, 
+      "anchorMethod": "muzzle", 
+      "sourceAnchor": [
+        1852.858851674641, 
+        460.5334928229665
+      ], 
+      "targetAnchor": [
+        104.12886597938144, 
+        367.7525773195876
+      ], 
+      "sharedScale": 1.2162162162162162, 
+      "translation": [
+        -2149.348115787074, 
+        -192.35572476239867
+      ], 
+      "sourceBounds": [
+        1814, 
+        353, 
+        2135, 
+        507
+      ], 
+      "projectedBounds": [
+        56.86810042914203, 
+        236.96859956192566, 
+        447.27350583454745, 
+        424.265896859223
+      ], 
+      "bounds": [
+        42, 
+        251, 
+        473, 
+        437
+      ]
+    }
+  ]
+}

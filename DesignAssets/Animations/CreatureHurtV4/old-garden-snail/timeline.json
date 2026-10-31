@@ -1,0 +1,182 @@
+{
+  "species": "old-garden-snail",
+  "pivot": [
+    180.8125,
+    304.5625
+  ],
+  "scale": 1,
+  "durationMs": 760,
+  "closedEyeHold": {
+    "fromMs": 110,
+    "toMs": 510,
+    "durationMs": 400
+  },
+  "sources": {
+    "seed": "Source/seed.png",
+    "half": "Source/half.png",
+    "pain": "Source/pain.png"
+  },
+  "localFollowThrough": "Attachments lag the impact and reverse gently on recovery; source scale is constant.",
+  "poses": [
+    {
+      "durationMs": 20,
+      "expression": "seed",
+      "clockwiseDegrees": -0.0,
+      "liftPixels": 0.0,
+      "localDegrees": {
+        "eye-stalk-far": 0,
+        "eye-stalk-near": 0
+      }
+    },
+    {
+      "durationMs": 30,
+      "expression": "half",
+      "clockwiseDegrees": -0.96,
+      "liftPixels": 0.61875,
+      "localDegrees": {
+        "eye-stalk-far": 2.16,
+        "eye-stalk-near": -1.8
+      }
+    },
+    {
+      "durationMs": 30,
+      "expression": "pain",
+      "clockwiseDegrees": -2.24,
+      "liftPixels": 1.44375,
+      "localDegrees": {
+        "eye-stalk-far": 7.2,
+        "eye-stalk-near": -6.0
+      }
+    },
+    {
+      "durationMs": 30,
+      "expression": "pain",
+      "clockwiseDegrees": -2.944,
+      "liftPixels": 1.89062,
+      "localDegrees": {
+        "eye-stalk-far": 10.8,
+        "eye-stalk-near": -9.0
+      }
+    },
+    {
+      "durationMs": 400,
+      "expression": "pain",
+      "clockwiseDegrees": -3.2,
+      "liftPixels": 2.0625,
+      "localDegrees": {
+        "eye-stalk-far": 12,
+        "eye-stalk-near": -10
+      }
+    },
+    {
+      "durationMs": 30,
+      "expression": "pain",
+      "clockwiseDegrees": -3.008,
+      "liftPixels": 1.925,
+      "localDegrees": {
+        "eye-stalk-far": 10.32,
+        "eye-stalk-near": -8.6
+      }
+    },
+    {
+      "durationMs": 30,
+      "expression": "pain",
+      "clockwiseDegrees": -2.24,
+      "liftPixels": 1.44375,
+      "localDegrees": {
+        "eye-stalk-far": 6.96,
+        "eye-stalk-near": -5.8
+      }
+    },
+    {
+      "durationMs": 30,
+      "expression": "pain",
+      "clockwiseDegrees": -1.408,
+      "liftPixels": 0.89375,
+      "localDegrees": {
+        "eye-stalk-far": 2.16,
+        "eye-stalk-near": -1.8
+      }
+    },
+    {
+      "durationMs": 20,
+      "expression": "half",
+      "clockwiseDegrees": -0.704,
+      "liftPixels": 0.44688,
+      "localDegrees": {
+        "eye-stalk-far": -1.92,
+        "eye-stalk-near": 1.6
+      }
+    },
+    {
+      "durationMs": 20,
+      "expression": "half",
+      "clockwiseDegrees": -0.192,
+      "liftPixels": 0.1375,
+      "localDegrees": {
+        "eye-stalk-far": -2.88,
+        "eye-stalk-near": 2.4
+      }
+    },
+    {
+      "durationMs": 20,
+      "expression": "seed",
+      "clockwiseDegrees": -0.0,
+      "liftPixels": 0.0,
+      "localDegrees": {
+        "eye-stalk-far": -1.92,
+        "eye-stalk-near": 1.6
+      }
+    },
+    {
+      "durationMs": 20,
+      "expression": "seed",
+      "clockwiseDegrees": -0.0,
+      "liftPixels": 0.0,
+      "localDegrees": {
+        "eye-stalk-far": -0.6,
+        "eye-stalk-near": 0.5
+      }
+    },
+    {
+      "durationMs": 20,
+      "expression": "seed",
+      "clockwiseDegrees": -0.0,
+      "liftPixels": 0.0,
+      "localDegrees": {
+        "eye-stalk-far": 0.42,
+        "eye-stalk-near": -0.35
+      }
+    },
+    {
+      "durationMs": 20,
+      "expression": "seed",
+      "clockwiseDegrees": -0.0,
+      "liftPixels": 0.0,
+      "localDegrees": {
+        "eye-stalk-far": 0.6,
+        "eye-stalk-near": -0.5
+      }
+    },
+    {
+      "durationMs": 20,
+      "expression": "seed",
+      "clockwiseDegrees": -0.0,
+      "liftPixels": 0.0,
+      "localDegrees": {
+        "eye-stalk-far": 0.24,
+        "eye-stalk-near": -0.2
+      }
+    },
+    {
+      "durationMs": 20,
+      "expression": "seed",
+      "clockwiseDegrees": -0.0,
+      "liftPixels": 0.0,
+      "localDegrees": {
+        "eye-stalk-far": 0,
+        "eye-stalk-near": 0
+      }
+    }
+  ]
+}

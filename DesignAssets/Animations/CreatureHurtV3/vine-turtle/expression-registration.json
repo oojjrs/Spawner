@@ -1,0 +1,53 @@
+{
+  "eyes": [
+    {
+      "name": "near-eye",
+      "source": "Source/donor-closed.png",
+      "matrix": [
+        [
+          1.0,
+          -0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "medianRgbCorrection": [
+        -42.0256462097168,
+        -35.81304931640625,
+        -33.7609748840332
+      ],
+      "colorMethod": "neutral skin fill + isolated painted eyelid ink",
+      "mask": "Masks/near-eye.png"
+    },
+    {
+      "name": "far-eye",
+      "source": "Source/donor-closed.png",
+      "matrix": [
+        [
+          0.5180212430077077,
+          0.04532098622878225,
+          -4.559612007742789
+        ],
+        [
+          -0.04532098622878225,
+          0.5180212430077077,
+          114.59432726775825
+        ]
+      ],
+      "medianRgbCorrection": [
+        -43.903709411621094,
+        -37.864601135253906,
+        -27.305694580078125
+      ],
+      "colorMethod": "neutral skin fill + isolated painted eyelid ink",
+      "mask": "Masks/far-eye.png"
+    }
+  ],
+  "halfSource": "Source/eyes-closed.png",
+  "halfMask": "Masks/half-occlusion.png",
+  "outsideExpressionMask": "Exact approved neutral pixels; no temporal crossfade."
+}

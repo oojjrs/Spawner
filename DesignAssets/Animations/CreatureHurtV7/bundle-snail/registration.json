@@ -1,0 +1,101 @@
+{
+  "species": "bundle-snail",
+  "commonArtworkScale": 0.7324675324675325,
+  "commonInitialTranslation": [
+    -82.09870129870131,
+    -194.20519480519482
+  ],
+  "neutralOnlyScaleCalibration": true,
+  "fixedCanvas": [
+    398,
+    398
+  ],
+  "supportRegion": [
+    175,
+    252,
+    292,
+    322
+  ],
+  "supportReference": [
+    212.21311475409837,
+    309
+  ],
+  "supportMeaning": "Wide middle muscular sole underside, excluding raised tail and shell; each drawing contact corrected by actual opaque sole pixels in this anatomical ROI.",
+  "shellLayer": "Layers/shell.png",
+  "shellMeaning": "Exact original hard shell/leaf/berry/mushroom layer at unchanged native coordinates.",
+  "hiddenBack": "Layers/hidden-back.png",
+  "cels": [
+    {
+      "cel": 1,
+      "sourceBox": [
+        62,
+        480,
+        455,
+        692
+      ],
+      "sourceSlotOrigin": 0.0,
+      "supportBeforeCorrection": [
+        212.9090909090909,
+        309
+      ],
+      "supportCorrectionPixels": [
+        -1,
+        0
+      ]
+    },
+    {
+      "cel": 2,
+      "sourceBox": [
+        518,
+        496,
+        903,
+        692
+      ],
+      "sourceSlotOrigin": 443.5,
+      "supportBeforeCorrection": [
+        217.87878787878788,
+        309
+      ],
+      "supportCorrectionPixels": [
+        -6,
+        0
+      ]
+    },
+    {
+      "cel": 3,
+      "sourceBox": [
+        954,
+        516,
+        1338,
+        692
+      ],
+      "sourceSlotOrigin": 887.0,
+      "supportBeforeCorrection": [
+        210.3578947368421,
+        309
+      ],
+      "supportCorrectionPixels": [
+        2,
+        0
+      ]
+    },
+    {
+      "cel": 4,
+      "sourceBox": [
+        1393,
+        533,
+        1774,
+        692
+      ],
+      "sourceSlotOrigin": 1330.5,
+      "supportBeforeCorrection": [
+        203.57575757575756,
+        309
+      ],
+      "supportCorrectionPixels": [
+        9,
+        0
+      ]
+    }
+  ]
+}

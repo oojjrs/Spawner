@@ -1,0 +1,27 @@
+{
+  "frameSize": 231,
+  "displaySize": 230.4,
+  "scale": 0.451171875,
+  "idleReference": "DesignAssets/Animations/CreatureIdleStudies/V2/vine-turtle/idle.webp",
+  "viewSize": 231.67596068904592,
+  "pivotX": 118.58627518832472,
+  "pivotY": 199.84869689941402,
+  "sourcePivot": [
+    262.5,
+    441.62
+  ],
+  "sourceFrameSize": 512,
+  "columns": 6,
+  "frameCount": 6,
+  "image": "DesignAssets/Animations/CreatureAttackV2/vine-turtle/runtime.webp",
+  "durationsMs": [
+    70,
+    210,
+    50,
+    300,
+    170,
+    220
+  ],
+  "loop": false,
+  "facing": "left"
+}

@@ -1,0 +1,18 @@
+Use case: identity-preserve.
+Create one production-quality newly drawn 2D browser-game attack spritesheet of Old Garden Snail, the exact pale mint gastropod carrying a large golden spiral shell wrapped in greenery and a small leafy fruit tree with hanging orange fruit. Image 1 is the approved character seed; image 2 is the official transparent edit canvas reserving eight slots. Preserve exactly the seed character identity, left-facing three-quarter side camera, anatomy, proportions, palette, outline weight, textures and painterly polished game-art style. This is not pixel art. Anatomy lock: one broad continuous slug foot, two long eyestalks with dark green eyes, one golden spiral shell and its attached tree; no legs, arms, teeth or mammal anatomy.
+
+EXACTLY EIGHT separate complete full-body poses in ONE horizontal row, left to right, eight equal-width cells. Wide 3:1 landscape PNG with one centered row and generous empty transparent margins above/below. Same body scale and shared ground baseline in every cell. Each pose wholly fits inside its cell with a clear gap. No text, labels, numbers, guides, scenery, floor, cast shadows, enemies, weapons, motion ghosts, slash/impact effects, or painted checkerboard. Genuinely transparent background.
+
+Draw a strong anatomical whole-body attack with clear weight preparation, fast commitment, a distinct readable contact silhouette and expression, follow-through and recovery. Actually draw newly exposed undersides, joint bends, overlapping limbs and changed expressions. Do not produce tiny local edits, a rigid sprite rotated or slid around, body-wide scaling, or repetitive idle motion. Intentional lunge, short hop and foot replant are allowed where described. Keep underlying body size, limb lengths, costume and identity stable.
+
+Eight exact poses:
+1. Exact seed-like neutral snail with rounded pale head and two tall eye stalks, shell and tree upright.
+2. Clear preparation: front neck and broad foot retract toward the shell, head lowers and eyestalks lean back; shell and attached tree counter-tilt slightly under the body load.
+3. Maximum wind-up: pale neck is visibly compressed/coiled under the front shell, head pulled back, eyestalks shortened by bending with narrowed upper eyelids. Entire rear foot grips the ground; tree and fruit remain attached.
+4. Fast launch toward LEFT: thick pale neck and rounded head extend strongly out from under the shell, front foot stretches forward, eyestalks lean into the motion while the heavy shell follows.
+5. Strong body-bash CONTACT: a long thick outstretched neck and broad rounded head drive low-left, pale underside newly exposed and drawn, eyes leaning forward with a determined narrowed expression; rear foot remains attached under the shell. Much wider lower silhouette than neutral, shell and tree visibly lagging as heavy load.
+6. Recoil: head and neck fold back in a thick curved compression, eyestalks whip upward, shell rocks back and tree foliage/fruit follow a little later.
+7. Restore the rounded neck and foot proportions; head lifts and eyestalks straighten as the heavy shell settles.
+8. Exact initial neutral seed-like pose with the same shell/tree silhouette, scale and location as pose one.
+
+Keep each phase visually distinct, especially raised/retracted anticipation versus low extended contact, while preserving exact character identity. Contact pose must read clearly at 64 px display size. Pose 1 and 8 closely match the seed. This entire strip is the actual final source for the animation; draw all eight at once.

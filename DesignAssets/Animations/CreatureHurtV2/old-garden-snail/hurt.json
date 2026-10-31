@@ -1,0 +1,113 @@
+{
+  "image": "DesignAssets/Animations/CreatureHurtV2/old-garden-snail/hurt.webp",
+  "frameSize": 352,
+  "columns": 4,
+  "pivotX": 180.8125,
+  "pivotY": 304.5625,
+  "durationsMs": [
+    20,
+    30,
+    30,
+    30,
+    400,
+    30,
+    30,
+    30,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+  ],
+  "frameCount": 16,
+  "durationMs": 760,
+  "loop": false,
+  "authoredCelCount": 8,
+  "runtimeCelMap": [
+    0,
+    1,
+    2,
+    3,
+    3,
+    3,
+    4,
+    4,
+    5,
+    5,
+    6,
+    6,
+    7,
+    7,
+    0,
+    0
+  ],
+  "hurtReference": "DesignAssets/Animations/UnitHurt/V3/hurt.png",
+  "closedEyeHold": {
+    "fromMs": 110,
+    "toMs": 510,
+    "durationMs": 400
+  },
+  "method": "OpenAI Game Studio sprite-pipeline; built-in imagegen whole-strip drawings, shared-scale registration and original neutral lockback.",
+  "source": "Source/generated-strip.png",
+  "seed": "Source/seed.png",
+  "seedSha256": "f8c2cb09431f407cfd519aeb95f68a26069b6dbe0df742c0b704cf3d8fc5656a",
+  "sharedRegistrationScale": 0.7414772727272727,
+  "sourceCelBoundaries": [
+    [
+      10,
+      223,
+      282,
+      513
+    ],
+    [
+      303,
+      223,
+      569,
+      513
+    ],
+    [
+      577,
+      229,
+      841,
+      511
+    ],
+    [
+      852,
+      226,
+      1121,
+      511
+    ],
+    [
+      1127,
+      227,
+      1383,
+      513
+    ],
+    [
+      1395,
+      223,
+      1652,
+      513
+    ],
+    [
+      1659,
+      223,
+      1915,
+      513
+    ],
+    [
+      1912,
+      223,
+      2172,
+      513
+    ]
+  ],
+  "preview": "hurt-preview.webp",
+  "thumbnail": "hurt-thumbnail.webp",
+  "matrix": "hurt-matrix.webp",
+  "prompt": "prompts.json",
+  "renderer": "pack.py"
+}

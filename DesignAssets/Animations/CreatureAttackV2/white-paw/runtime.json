@@ -1,0 +1,32 @@
+{
+  "frameSize": 269, 
+  "displaySize": 268.8, 
+  "scale": 0.525390625, 
+  "idleReference": "DesignAssets/Animations/MountainPawLeaderIdle/white-paw/idle-runtime.webp", 
+  "viewSize": 247.60227272727272, 
+  "pivotX": 183.07475142045453, 
+  "pivotY": 223.09996448863635, 
+  "sourcePivot": [
+    256, 
+    448
+  ], 
+  "sourceFrameSize": 512, 
+  "columns": 4, 
+  "frameCount": 8, 
+  "image": "DesignAssets/Animations/CreatureAttackV2/white-paw/runtime.webp", 
+  "durationsMs": [
+    70, 
+    100, 
+    90, 
+    40, 
+    260, 
+    110, 
+    130, 
+    120
+  ], 
+  "loop": false, 
+  "facing": "left", 
+  "source": "attack.webp", 
+  "exporter": "../export-runtime.py", 
+  "processing": "One common whole-cel scale for every frame. Original artwork, timing and source registration remain unchanged; runtime pivot aligns the exact seed to its accepted idle appearance."
+}

@@ -1,0 +1,215 @@
+{
+  "species": "walking-forest", 
+  "action": "attack", 
+  "revision": 2, 
+  "image": "DesignAssets/Animations/CreatureAttackV2/walking-forest/attack.webp", 
+  "frameSize": 512, 
+  "columns": 4, 
+  "frameCount": 8, 
+  "durationsMs": [
+    100, 
+    180, 
+    220, 
+    60, 
+    320, 
+    180, 
+    220, 
+    180
+  ], 
+  "durationMs": 1460, 
+  "loop": false, 
+  "pivotX": 256, 
+  "pivotY": 448, 
+  "impactFrame": 4, 
+  "impactMs": 560, 
+  "impactHoldMs": 320, 
+  "previewPauseMs": 800, 
+  "facing": "left", 
+  "rootMotion": true, 
+  "rootMotionDescription": "Rear feet carry the raised shell, then front feet deliberately replant into the stomp; the rear contact anchors preserve the rearing height instead of shrinking taller poses.", 
+  "description": "Transfer rock-shell weight onto hind feet, lift the forebody and expose the belly, drive both front feet and head downward-forward, hold the low stomp/ram and recover the heavy mineral mass.", 
+  "artworkMethod": "full-strip newly drawn cels with image_gen; no mesh warp, in-between crossfade or reused V1 artwork", 
+  "actualSource": "Source/raw-drawn-strip.png", 
+  "seed": "Source/seed.png", 
+  "editCanvas": "Source/edit-canvas.png", 
+  "prompt": "Source/prompt.txt", 
+  "frames": "Frames", 
+  "exporter": "export.py", 
+  "preview": "attack-preview.webp", 
+  "thumbnail": "attack-thumbnail.webp", 
+  "sourceBounds": [
+    76, 
+    141, 
+    436, 
+    447
+  ], 
+  "normalization": {
+    "pipeline": "OpenAI game-studio sprite-pipeline", 
+    "officialNormalizer": "normalize_sprite_strip.py", 
+    "wrapperPurpose": "Official slot extraction and frame-1 lockback are retained; explicit anatomical landmarks, ground contacts and one shared scale preserve the intended attack trajectory instead of fitting each pose to its own bounds.", 
+    "commonScale": 1.3, 
+    "registrations": [
+      {
+        "cell": 0, 
+        "rawCrop": [
+          1, 
+          150, 
+          281, 
+          550
+        ], 
+        "sharedScale": 1.3, 
+        "landmark": "near visible eye center", 
+        "rawLandmarkLocalX": 65, 
+        "targetLandmarkX": 160, 
+        "rawGroundContactY": 516, 
+        "targetGroundY": 448, 
+        "declaredVerticalMotion": 0, 
+        "translation": [
+          73, 
+          -28
+        ]
+      }, 
+      {
+        "cell": 1, 
+        "rawCrop": [
+          286, 
+          150, 
+          544, 
+          550
+        ], 
+        "sharedScale": 1.3, 
+        "landmark": "near visible eye center", 
+        "rawLandmarkLocalX": 63, 
+        "targetLandmarkX": 173, 
+        "rawGroundContactY": 506, 
+        "targetGroundY": 448, 
+        "declaredVerticalMotion": 0, 
+        "translation": [
+          88, 
+          -15
+        ]
+      }, 
+      {
+        "cell": 2, 
+        "rawCrop": [
+          538, 
+          150, 
+          801, 
+          550
+        ], 
+        "sharedScale": 1.3, 
+        "landmark": "near visible eye center", 
+        "rawLandmarkLocalX": 85, 
+        "targetLandmarkX": 180, 
+        "rawGroundContactY": 507, 
+        "targetGroundY": 448, 
+        "declaredVerticalMotion": 0, 
+        "translation": [
+          67, 
+          -16
+        ]
+      }, 
+      {
+        "cell": 3, 
+        "rawCrop": [
+          790, 
+          150, 
+          1082, 
+          550
+        ], 
+        "sharedScale": 1.3, 
+        "landmark": "near visible eye center", 
+        "rawLandmarkLocalX": 70, 
+        "targetLandmarkX": 145, 
+        "rawGroundContactY": 512, 
+        "targetGroundY": 448, 
+        "declaredVerticalMotion": 0, 
+        "translation": [
+          51, 
+          -23
+        ]
+      }, 
+      {
+        "cell": 4, 
+        "rawCrop": [
+          1072, 
+          150, 
+          1376, 
+          550
+        ], 
+        "sharedScale": 1.3, 
+        "landmark": "near visible eye center", 
+        "rawLandmarkLocalX": 74, 
+        "targetLandmarkX": 139, 
+        "rawGroundContactY": 517, 
+        "targetGroundY": 448, 
+        "declaredVerticalMotion": 0, 
+        "translation": [
+          40, 
+          -29
+        ]
+      }, 
+      {
+        "cell": 5, 
+        "rawCrop": [
+          1379, 
+          150, 
+          1632, 
+          550
+        ], 
+        "sharedScale": 1.3, 
+        "landmark": "near visible eye center", 
+        "rawLandmarkLocalX": 63, 
+        "targetLandmarkX": 154, 
+        "rawGroundContactY": 507, 
+        "targetGroundY": 448, 
+        "declaredVerticalMotion": 0, 
+        "translation": [
+          70, 
+          -16
+        ]
+      }, 
+      {
+        "cell": 6, 
+        "rawCrop": [
+          1633, 
+          150, 
+          1900, 
+          550
+        ], 
+        "sharedScale": 1.3, 
+        "landmark": "near visible eye center", 
+        "rawLandmarkLocalX": 65, 
+        "targetLandmarkX": 160, 
+        "rawGroundContactY": 515, 
+        "targetGroundY": 448, 
+        "declaredVerticalMotion": 0, 
+        "translation": [
+          73, 
+          -26
+        ]
+      }, 
+      {
+        "cell": 7, 
+        "rawCrop": [
+          1901, 
+          150, 
+          2169, 
+          550
+        ], 
+        "sharedScale": 1.3, 
+        "landmark": "near visible eye center", 
+        "rawLandmarkLocalX": 65, 
+        "targetLandmarkX": 160, 
+        "rawGroundContactY": 516, 
+        "targetGroundY": 448, 
+        "declaredVerticalMotion": 0, 
+        "translation": [
+          73, 
+          -28
+        ]
+      }
+    ], 
+    "firstAndLast": "exact seed pixels"
+  }
+}

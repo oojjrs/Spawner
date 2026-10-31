@@ -1,0 +1,156 @@
+{
+  "columns": [
+    300,
+    309,
+    318,
+    318,
+    306,
+    305,
+    308
+  ],
+  "ranges": [
+    [
+      264,
+      273
+    ],
+    [
+      265,
+      273
+    ],
+    [
+      265,
+      273
+    ],
+    [
+      272,
+      280
+    ],
+    [
+      273,
+      281
+    ],
+    [
+      272,
+      279
+    ],
+    [
+      272,
+      280
+    ]
+  ],
+  "halfWidth": 30,
+  "jointRise": 45,
+  "rigidRise": 19,
+  "species": "soil-boar",
+  "contacts": [
+    {
+      "cel": 0,
+      "source": "Source/seed.png",
+      "contact": [
+        300,
+        269.5
+      ],
+      "soleRgba": [
+        0,
+        31,
+        30,
+        136
+      ],
+      "belowAlpha": 13
+    },
+    {
+      "cel": 1,
+      "source": "Source/DrawnPoses/01.png",
+      "contact": [
+        309,
+        270.5
+      ],
+      "soleRgba": [
+        12,
+        17,
+        18,
+        252
+      ],
+      "belowAlpha": 94
+    },
+    {
+      "cel": 2,
+      "source": "Source/DrawnPoses/02.png",
+      "contact": [
+        318,
+        271.5
+      ],
+      "soleRgba": [
+        14,
+        18,
+        19,
+        224
+      ],
+      "belowAlpha": 51
+    },
+    {
+      "cel": 3,
+      "source": "Source/DrawnPoses/03.png",
+      "contact": [
+        318,
+        277.5
+      ],
+      "soleRgba": [
+        12,
+        18,
+        17,
+        210
+      ],
+      "belowAlpha": 43
+    },
+    {
+      "cel": 4,
+      "source": "Source/DrawnPoses/04.png",
+      "contact": [
+        306,
+        280.5
+      ],
+      "soleRgba": [
+        17,
+        24,
+        21,
+        157
+      ],
+      "belowAlpha": 0
+    },
+    {
+      "cel": 5,
+      "source": "Source/DrawnPoses/05.png",
+      "contact": [
+        305,
+        278.5
+      ],
+      "soleRgba": [
+        20,
+        22,
+        20,
+        162
+      ],
+      "belowAlpha": 0
+    },
+    {
+      "cel": 6,
+      "source": "Source/DrawnPoses/06.png",
+      "contact": [
+        308,
+        278.5
+      ],
+      "soleRgba": [
+        13,
+        18,
+        18,
+        247
+      ],
+      "belowAlpha": 85
+    }
+  ],
+  "anchor": [
+    300,
+    269.5
+  ]
+}

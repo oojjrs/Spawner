@@ -1,0 +1,29 @@
+{
+  "frameSize": 512,
+  "displaySize": 537.6,
+  "scale": 1,
+  "idleReference": "DesignAssets/Animations/MountainPawLeaderIdle/walking-forest/idle-runtime.webp",
+  "viewSize": 418.9090909090909,
+  "pivotX": 255.99999999999997,
+  "pivotY": 447,
+  "sourcePivot": [
+    256,
+    448
+  ],
+  "sourceFrameSize": 512,
+  "columns": 4,
+  "frameCount": 8,
+  "image": "DesignAssets/Animations/CreatureAttackV2/walking-forest/runtime.webp",
+  "durationsMs": [
+    100,
+    180,
+    220,
+    60,
+    320,
+    180,
+    220,
+    180
+  ],
+  "loop": false,
+  "facing": "left"
+}

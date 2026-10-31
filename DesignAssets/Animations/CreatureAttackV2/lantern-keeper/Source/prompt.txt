@@ -1,0 +1,18 @@
+Use case: identity-preserve.
+Create one production-quality newly drawn 2D browser-game attack spritesheet of Lantern Keeper, the exact compact fluffy rabbit with two enormous leaf-shaped cream-and-dark-green ears, fine golden ear veins, tiny golden dew drops at ear tips, a pale fluffy face and chest, emerald/charcoal back, four short rabbit paws and a round puff tail. Image 1 is the approved character seed; image 2 is the official transparent edit canvas reserving eight slots. Preserve exactly the seed character identity, left-facing three-quarter side camera, anatomy, proportions, palette, outline weight, textures and painterly polished game-art style. This is not pixel art. Anatomy lock: two leaf ears and four short rabbit limbs; preserve dark emerald eyes and the tiny golden ear-tip dew drops, never add horns, antlers, weapons or fangs.
+
+EXACTLY EIGHT separate complete full-body poses in ONE horizontal row, left to right, eight equal-width cells. Wide 3:1 landscape PNG with one centered row and generous empty transparent margins above/below. Same body scale and shared ground baseline in every cell. Each pose wholly fits inside its cell with a clear gap. No text, labels, numbers, guides, scenery, floor, cast shadows, enemies, weapons, motion ghosts, slash/impact effects, or painted checkerboard. Genuinely transparent background.
+
+Draw a strong anatomical whole-body attack with clear weight preparation, fast commitment, a distinct readable contact silhouette and expression, follow-through and recovery. Actually draw newly exposed undersides, joint bends, overlapping limbs and changed expressions. Do not produce tiny local edits, a rigid sprite rotated or slid around, body-wide scaling, or repetitive idle motion. Intentional lunge, short hop and foot replant are allowed where described. Keep underlying body size, limb lengths, costume and identity stable.
+
+Eight exact poses:
+1. Exact seed-like quiet neutral rabbit stance, both leaf ears upright and all paws grounded.
+2. Clear anticipation: weight shifts back over compressed haunches, chest draws up and forepaws lighten, ears sweep backward with their dew drops.
+3. Maximum wind-up: crouch deeper, forehead pulls back, near forepaw tucked up, rear thighs loaded to spring, eyes narrow with effort, two leaf ears visibly folded behind the head.
+4. Fast body launch toward LEFT: rear legs push and partly extend, compact body and forehead drive low forward, front paws reach to brace, leaf ears stream backward and expose their painted undersides.
+5. Strong forehead/shoulder CONTACT: forehead dips sharply into a close-left target, shoulders fully committed, compact body stretched from hind-leg push, forepaws braced, focused closed/narrowed eyes; leaf ears whip forward and outward after the body. Clearly distinct attack silhouette, not idle ear flapping.
+6. Recoil: body draws back, forepaws replant, head rises, ears overshoot with the golden dew tips following late.
+7. Haunches settle, eyes relax, forepaws and leaf ears return toward their seed contacts.
+8. Exact initial neutral seed-like pose, same scale, location and ear arrangement as pose one.
+
+Keep each phase visually distinct, especially raised/retracted anticipation versus low extended contact, while preserving exact character identity. Contact pose must read clearly at 64 px display size. Pose 1 and 8 closely match the seed. This entire strip is the actual final source for the animation; draw all eight at once.

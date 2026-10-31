@@ -1,0 +1,81 @@
+{
+  "frameSize": 420,
+  "columns": 4,
+  "pivotX": 210.0,
+  "pivotY": 349.453125,
+  "closedEyeHold": {
+    "fromMs": 110,
+    "toMs": 510,
+    "durationMs": 400
+  },
+  "image": "DesignAssets/Animations/CreatureHurtV4/rolling-acorn/hurt.webp",
+  "durationsMs": [
+    20,
+    30,
+    30,
+    30,
+    400,
+    30,
+    30,
+    30,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+  ],
+  "frameCount": 16,
+  "durationMs": 760,
+  "loop": false,
+  "method": "V3 registered expression artwork and ground recoil, augmented with separately extracted articulated attachments, two-bone FK and LBS mesh deformation, fixed-scale body, foreground occluders and delayed follow-through.",
+  "source": "Source/neutral.png",
+  "sourceSha256": "0426c9b6538284e48905aa8a7639fb192fc8f446d6a388dc9e39fa7be9ffb043",
+  "expressionDonor": "DesignAssets/Animations/CreatureHurtV2/rolling-acorn/Source/Cels/03.png",
+  "expressionMasks": [
+    "Source/face-repair-mask.png",
+    "Source/pain-eye.png",
+    "Source/half-eye.png"
+  ],
+  "expressionParameters": {
+    "eyes": [
+      [
+        121,
+        246,
+        16,
+        18
+      ],
+      [
+        204.5,
+        275.5,
+        19,
+        21
+      ]
+    ],
+    "donorEyes": [
+      [
+        123,
+        237,
+        19,
+        15
+      ],
+      [
+        205.5,
+        267,
+        21,
+        17
+      ]
+    ],
+    "donorCel": "03.png"
+  },
+  "renderer": "render.py",
+  "timeline": "timeline.json",
+  "preview": "hurt-preview.webp",
+  "thumbnail": "hurt-thumbnail.webp",
+  "matrix": "hurt-matrix.webp",
+  "rig": "rig.json",
+  "layers": "Layers",
+  "previousVersion": "DesignAssets/Animations/CreatureHurtV3/rolling-acorn/hurt.webp"
+}

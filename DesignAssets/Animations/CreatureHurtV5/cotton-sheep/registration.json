@@ -1,0 +1,165 @@
+{
+  "species": "cotton-sheep",
+  "commonArtworkScale": 0.8776978417266187,
+  "commonInitialTranslation": [
+    30.014388489208642,
+    -299.9496402877698
+  ],
+  "neutralCalibrationOnly": true,
+  "poseBoundingBoxesDoNotSetScale": true,
+  "rootAnchor": [
+    191.91666666666666,
+    203.0
+  ],
+  "anchorRegion": [
+    170,
+    220,
+    166,
+    256
+  ],
+  "anchorMeaning": "Planted hind foot; front paws are allowed to bend and gather.",
+  "paletteShiftSharedByAllCels": [
+    1.0,
+    4.0,
+    1.0
+  ],
+  "cels": [
+    {
+      "cel": 0,
+      "translationPixels": [
+        0,
+        -1
+      ],
+      "plantedRearFoot": [
+        191.93333333333334,
+        204.0
+      ],
+      "sourceBox": [
+        27,
+        391,
+        249,
+        590
+      ]
+    },
+    {
+      "cel": 1,
+      "translationPixels": [
+        -4,
+        -1
+      ],
+      "plantedRearFoot": [
+        195.87209302325581,
+        204.0
+      ],
+      "sourceBox": [
+        298,
+        393,
+        523,
+        588
+      ]
+    },
+    {
+      "cel": 2,
+      "translationPixels": [
+        1,
+        -2
+      ],
+      "plantedRearFoot": [
+        191.05797101449275,
+        205.0
+      ],
+      "sourceBox": [
+        572,
+        417,
+        790,
+        588
+      ]
+    },
+    {
+      "cel": 3,
+      "translationPixels": [
+        1,
+        -1
+      ],
+      "plantedRearFoot": [
+        191.14772727272728,
+        204.0
+      ],
+      "sourceBox": [
+        835,
+        428,
+        1051,
+        589
+      ]
+    },
+    {
+      "cel": 4,
+      "translationPixels": [
+        3,
+        -2
+      ],
+      "plantedRearFoot": [
+        189.41176470588235,
+        205.0
+      ],
+      "sourceBox": [
+        1107,
+        436,
+        1320,
+        590
+      ]
+    },
+    {
+      "cel": 5,
+      "translationPixels": [
+        -1,
+        -2
+      ],
+      "plantedRearFoot": [
+        192.71875,
+        205.0
+      ],
+      "sourceBox": [
+        1377,
+        422,
+        1593,
+        588
+      ]
+    },
+    {
+      "cel": 6,
+      "translationPixels": [
+        -2,
+        -2
+      ],
+      "plantedRearFoot": [
+        193.83333333333334,
+        205.0
+      ],
+      "sourceBox": [
+        1646,
+        392,
+        1870,
+        590
+      ]
+    },
+    {
+      "cel": 7,
+      "translationPixels": [
+        1,
+        -2
+      ],
+      "plantedRearFoot": [
+        191.36507936507937,
+        205.0
+      ],
+      "sourceBox": [
+        1923,
+        392,
+        2144,
+        590
+      ]
+    }
+  ],
+  "method": "Eight complete drawings generated jointly from approved neutral and authored crouch target, isolated by connected alpha components. One common neutral-to-original scale and rear foot translation only."
+}

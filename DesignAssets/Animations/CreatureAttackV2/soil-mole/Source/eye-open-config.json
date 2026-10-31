@@ -1,0 +1,42 @@
+{
+  "provider": "built-in image_gen", 
+  "generatedSheet": "Source/eye-open-generated.png", 
+  "prompt": "Source/eye-open-prompt.txt", 
+  "referenceSheet": "attack.webp before this correction, preserved under project $Trash/attack-v2-eye-fix-20261030/soil-mole/before", 
+  "inputLayout": [
+    2048, 
+    1024, 
+    4, 
+    2
+  ], 
+  "method": "Only the new eyes and adjacent eyelid fur are composited through narrow feathered ellipse masks. Original alpha and all pixels outside these eye masks are unchanged. Existing cels, scale, anchor, endpoints and timing are preserved.", 
+  "patches": [
+    {
+      "frame": 3, 
+      "ellipse": [
+        141, 
+        274, 
+        195, 
+        337
+      ]
+    }, 
+    {
+      "frame": 4, 
+      "ellipse": [
+        204, 
+        291, 
+        263, 
+        350
+      ]
+    }, 
+    {
+      "frame": 5, 
+      "ellipse": [
+        250, 
+        200, 
+        308, 
+        260
+      ]
+    }
+  ]
+}

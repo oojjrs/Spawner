@@ -1,0 +1,12 @@
+{
+
+  "provider": "OpenAI native image_gen",
+
+  "outputSource": "anatomy-underpainting.png",
+
+  "registration": "Single common 0.2 scale from 1280x1280 to 256x256, with original feet and anatomy composing in the same canvas. Original visible pixels override underpainting.",
+
+  "prompt": "Production 2D sprite anatomy underpainting for the referenced stone/crystal-backed turtle. Same left-facing three-quarter view, head size, three planted feet at exact original locations and canvas composition. Remove stones, crystals and carriage to reveal the hidden olive-green turtle body, rounded back, smooth neck/shoulder/hip surfaces. Complete hidden upper legs and underside with overlapping joints. Preserve visible head, belly, tail, feet pose and proportions, cream toenails, soft painted lighting and palette. Transparent background; no text, no additional objects. Used only behind original rigid shell and original visible limb textures."
+
+}
+

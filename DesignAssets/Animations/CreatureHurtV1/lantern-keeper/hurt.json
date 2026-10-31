@@ -1,0 +1,32 @@
+{
+  "image": "DesignAssets/Animations/CreatureHurtV1/lantern-keeper/hurt.webp",
+  "frameSize": 384,
+  "columns": 4,
+  "pivotX": 203.25,
+  "pivotY": 324.75,
+  "durationsMs": [
+    20,
+    30,
+    30,
+    40,
+    80,
+    60,
+    60,
+    60,
+    60,
+    50,
+    50,
+    50,
+    40,
+    40,
+    40,
+    50
+  ],
+  "loop": false,
+  "frameCount": 16,
+  "durationMs": 760,
+  "preview": "hurt-preview.webp",
+  "matrix": "hurt-matrix.webp",
+  "rig": "rig.json",
+  "method": "Head tucks sharply, long ears fold in opposite directions after impact and the tail settles while paws stay planted."
+}

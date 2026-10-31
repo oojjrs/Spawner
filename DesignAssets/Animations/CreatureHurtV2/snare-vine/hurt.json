@@ -1,0 +1,113 @@
+{
+  "image": "DesignAssets/Animations/CreatureHurtV2/snare-vine/hurt.webp",
+  "frameSize": 424,
+  "columns": 4,
+  "pivotX": 211.585938,
+  "pivotY": 389.35125,
+  "durationsMs": [
+    20,
+    30,
+    30,
+    30,
+    400,
+    30,
+    30,
+    30,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+  ],
+  "frameCount": 16,
+  "durationMs": 760,
+  "loop": false,
+  "authoredCelCount": 8,
+  "runtimeCelMap": [
+    0,
+    1,
+    2,
+    3,
+    3,
+    3,
+    4,
+    4,
+    5,
+    5,
+    6,
+    6,
+    7,
+    7,
+    0,
+    0
+  ],
+  "hurtReference": "DesignAssets/Animations/UnitHurt/V3/hurt.png",
+  "closedEyeHold": {
+    "fromMs": 110,
+    "toMs": 510,
+    "durationMs": 400
+  },
+  "method": "OpenAI Game Studio sprite-pipeline; built-in imagegen whole-strip drawings, shared-scale registration and original neutral lockback.",
+  "source": "Source/generated-strip.png",
+  "seed": "Source/seed.png",
+  "seedSha256": "65fb7576d07f902ce084f8937cb2e6f6f2d6ed8d5ebbbb744880d3888bd0c1c7",
+  "sharedRegistrationScale": 0.6848137535816619,
+  "sourceCelBoundaries": [
+    [
+      42,
+      229,
+      296,
+      529
+    ],
+    [
+      322,
+      229,
+      579,
+      529
+    ],
+    [
+      596,
+      227,
+      849,
+      524
+    ],
+    [
+      868,
+      220,
+      1129,
+      529
+    ],
+    [
+      1145,
+      229,
+      1396,
+      529
+    ],
+    [
+      1401,
+      228,
+      1653,
+      529
+    ],
+    [
+      1657,
+      228,
+      1898,
+      529
+    ],
+    [
+      1894,
+      229,
+      2147,
+      529
+    ]
+  ],
+  "preview": "hurt-preview.webp",
+  "thumbnail": "hurt-thumbnail.webp",
+  "matrix": "hurt-matrix.webp",
+  "prompt": "prompts.json",
+  "renderer": "pack.py"
+}

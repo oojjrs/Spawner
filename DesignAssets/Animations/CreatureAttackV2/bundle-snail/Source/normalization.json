@@ -1,0 +1,273 @@
+{
+  "pipeline": "OpenAI game-studio sprite-pipeline; one full-strip edit from approved original seed; official split_strip with HD shared-scale common-anchor wrapper", 
+  "officialNormalizeScript": "D:\\.codex\\plugins\\cache\\openai-curated\\game-studio\\1dc19589\\scripts\\normalize_sprite_strip.py", 
+  "sharedScale": 1.3760447097991384, 
+  "neutralRegistrationInliers": 34, 
+  "neutralRegistrationMatches": 45, 
+  "neutralRegistrationMatrix": [
+    [
+      1.3755899701784942, 
+      -0.03537339834571412, 
+      83.19742500217778
+    ], 
+    [
+      0.03537339834571412, 
+      1.3755899701784942, 
+      -242.38855373722953
+    ]
+  ], 
+  "neutralRegistrationApplied": "Uniform scale from robust original neutral texture landmarks. Rotation from the fit is not applied. One common x origin from inliers and one support-foot baseline are used. No per-frame scaling or tight centering.", 
+  "sharedOffsetX": 70.95405578613281, 
+  "sharedSupportAnchorY": 426, 
+  "pivot": [
+    256, 
+    448
+  ], 
+  "anchorPolicy": "The visible support-foot baseline is read from the exact seed main opaque component, not low-alpha source speckles. A stationary snail shell is anchored with its unchanged texture landmarks; the drawn head travel remains relative to that shell.", 
+  "alphaCleanup": "Eight main alpha components above 180, padded by two pixels. Original alpha is retained in the padded body/appendage contour; only detached noise is removed.", 
+  "poses": [
+    {
+      "rawComponent": 3, 
+      "coreBounds": [
+        31, 
+        298, 
+        225, 
+        178
+      ], 
+      "extractionBounds": [
+        29, 
+        296, 
+        258, 
+        478
+      ], 
+      "nominalSlotOrigin": 0.0, 
+      "uniformScale": 1.3760447097991384, 
+      "placement": [
+        111, 
+        178
+      ], 
+      "supportAnchorY": 426, 
+      "intentionalAirborneY": 0, 
+      "rigidShellTranslationAnchorX": 70.6855697631836, 
+      "renderedBounds": [
+        111, 
+        178, 
+        426, 
+        428
+      ]
+    }, 
+    {
+      "rawComponent": 4, 
+      "coreBounds": [
+        301, 
+        299, 
+        215, 
+        177
+      ], 
+      "extractionBounds": [
+        300, 
+        298, 
+        518, 
+        478
+      ], 
+      "nominalSlotOrigin": 271.5, 
+      "uniformScale": 1.3760447097991384, 
+      "placement": [
+        135, 
+        181
+      ], 
+      "supportAnchorY": 426, 
+      "intentionalAirborneY": 0, 
+      "rigidShellTranslationAnchorX": 95.7512435913086, 
+      "renderedBounds": [
+        135, 
+        181, 
+        435, 
+        429
+      ]
+    }, 
+    {
+      "rawComponent": 5, 
+      "coreBounds": [
+        565, 
+        299, 
+        193, 
+        176
+      ], 
+      "extractionBounds": [
+        563, 
+        298, 
+        760, 
+        477
+      ], 
+      "nominalSlotOrigin": 543.0, 
+      "uniformScale": 1.3760447097991384, 
+      "placement": [
+        162, 
+        182
+      ], 
+      "supportAnchorY": 426, 
+      "intentionalAirborneY": 0, 
+      "rigidShellTranslationAnchorX": 134.48516845703125, 
+      "renderedBounds": [
+        162, 
+        182, 
+        433, 
+        428
+      ]
+    }, 
+    {
+      "rawComponent": 6, 
+      "coreBounds": [
+        769, 
+        299, 
+        307, 
+        176
+      ], 
+      "extractionBounds": [
+        767, 
+        297, 
+        1078, 
+        477
+      ], 
+      "nominalSlotOrigin": 814.5, 
+      "uniformScale": 1.3760447097991384, 
+      "placement": [
+        7, 
+        181
+      ], 
+      "supportAnchorY": 426, 
+      "intentionalAirborneY": 0, 
+      "rigidShellTranslationAnchorX": 71.94998168945312, 
+      "renderedBounds": [
+        7, 
+        181, 
+        435, 
+        429
+      ]
+    }, 
+    {
+      "rawComponent": 2, 
+      "coreBounds": [
+        1096, 
+        296, 
+        311, 
+        180
+      ], 
+      "extractionBounds": [
+        1094, 
+        294, 
+        1409, 
+        478
+      ], 
+      "nominalSlotOrigin": 1086.0, 
+      "uniformScale": 1.3760447097991384, 
+      "placement": [
+        17, 
+        176
+      ], 
+      "supportAnchorY": 426, 
+      "intentionalAirborneY": 0, 
+      "rigidShellTranslationAnchorX": 6.4597930908203125, 
+      "renderedBounds": [
+        17, 
+        176, 
+        450, 
+        429
+      ]
+    }, 
+    {
+      "rawComponent": 1, 
+      "coreBounds": [
+        1432, 
+        282, 
+        217, 
+        193
+      ], 
+      "extractionBounds": [
+        1431, 
+        281, 
+        1651, 
+        477
+      ], 
+      "nominalSlotOrigin": 1357.5, 
+      "uniformScale": 1.3760447097991384, 
+      "placement": [
+        121, 
+        159
+      ], 
+      "supportAnchorY": 426, 
+      "intentionalAirborneY": 0, 
+      "rigidShellTranslationAnchorX": 19.53759765625, 
+      "renderedBounds": [
+        121, 
+        159, 
+        424, 
+        429
+      ]
+    }, 
+    {
+      "rawComponent": 7, 
+      "coreBounds": [
+        1658, 
+        298, 
+        226, 
+        178
+      ], 
+      "extractionBounds": [
+        1656, 
+        296, 
+        1886, 
+        478
+      ], 
+      "nominalSlotOrigin": 1629.0, 
+      "uniformScale": 1.3760447097991384, 
+      "placement": [
+        108, 
+        178
+      ], 
+      "supportAnchorY": 426, 
+      "intentionalAirborneY": 0, 
+      "rigidShellTranslationAnchorX": 71.16227722167969, 
+      "renderedBounds": [
+        108, 
+        178, 
+        424, 
+        428
+      ]
+    }, 
+    {
+      "rawComponent": 8, 
+      "coreBounds": [
+        1912, 
+        298, 
+        230, 
+        178
+      ], 
+      "extractionBounds": [
+        1910, 
+        296, 
+        2144, 
+        478
+      ], 
+      "nominalSlotOrigin": 1900.5, 
+      "uniformScale": 1.3760447097991384, 
+      "placement": [
+        102, 
+        178
+      ], 
+      "supportAnchorY": 426, 
+      "intentionalAirborneY": 0, 
+      "rigidShellTranslationAnchorX": 89.10975646972656, 
+      "renderedBounds": [
+        102, 
+        178, 
+        424, 
+        428
+      ]
+    }
+  ], 
+  "frame1And8": "Exact Source/seed.png lockback. No seed regeneration.", 
+  "sourceSha256": "8c2c203827b89cbf76d98f41630b6793b109dd538988297dd61f32483c270529", 
+  "rawStripSha256": "3b22177fdd4c4f776807f03a2d299d90e5f27246e3dbf3587b48c56783c9d24d"
+}

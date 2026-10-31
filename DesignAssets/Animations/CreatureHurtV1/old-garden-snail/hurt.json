@@ -1,0 +1,32 @@
+{
+  "image": "DesignAssets/Animations/CreatureHurtV1/old-garden-snail/hurt.webp",
+  "frameSize": 352,
+  "columns": 4,
+  "pivotX": 180.8125,
+  "pivotY": 304.5625,
+  "durationsMs": [
+    20,
+    30,
+    30,
+    40,
+    80,
+    60,
+    60,
+    60,
+    60,
+    50,
+    50,
+    50,
+    40,
+    40,
+    40,
+    50
+  ],
+  "loop": false,
+  "frameCount": 16,
+  "durationMs": 760,
+  "preview": "hurt-preview.webp",
+  "matrix": "hurt-matrix.webp",
+  "rig": "rig.json",
+  "method": "Eyestalks retract toward the shell, the face withdraws and the tree canopy lags the shell shock; lower slime contact stays registered."
+}

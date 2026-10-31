@@ -1,0 +1,51 @@
+{
+  "closed": {
+    "source": "Source/donor-closed.png",
+    "near": {
+      "matrix": [
+        [
+          0.8660254037844387,
+          0.49999999999999994,
+          -57.779454914683654
+        ],
+        [
+          -0.49999999999999994,
+          0.8660254037844387,
+          127.56029104747195
+        ]
+      ],
+      "rgbShift": [
+        -6.0,
+        -1.0,
+        3.0
+      ],
+      "mask": "Masks/near-closed.png"
+    },
+    "far": {
+      "matrix": [
+        [
+          0.4303849443228745,
+          0.09148114395981412,
+          11.611400553956209
+        ],
+        [
+          -0.09148114395981412,
+          0.4303849443228745,
+          134.10523370739503
+        ]
+      ],
+      "rgbShift": [
+        20.0,
+        23.0,
+        21.0
+      ],
+      "mask": "Masks/far-eye.png"
+    },
+    "outsideExpressionMask": "Exact approved neutral pixels. Spatial feathering only; no temporal crossfade."
+  },
+  "half": {
+    "source": "Source/eyes-closed.png",
+    "mask": "Masks/half-occlusion.png",
+    "occlusion": "Painted upper eyelid covers the upper iris while the lower original iris remains intentionally visible."
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "format": "project-native layered rigid attachments; baked sprite output; no Spine compatibility claim",
+  "canvas": [
+    384,
+    384
+  ],
+  "root": [
+    157.5,
+    307.5
+  ],
+  "bones": [
+    {
+      "name": "body",
+      "parent": "root",
+      "pivot": [
+        157.5,
+        307.5
+      ]
+    },
+    {
+      "name": "tail-fan",
+      "parent": "body",
+      "pivot": [
+        215,
+        229
+      ]
+    },
+    {
+      "name": "crest",
+      "parent": "body",
+      "pivot": [
+        123,
+        146
+      ]
+    }
+  ],
+  "drawOrder": [
+    "tail-fan",
+    "crest",
+    "base-foreground"
+  ],
+  "attachments": [
+    {
+      "name": "tail-fan",
+      "bone": "tail-fan",
+      "parent": "body",
+      "pivot": [
+        215,
+        229
+      ],
+      "sourceMask": "Masks/tail-fan.png",
+      "underlapMask": "Masks/tail-fan-overlap.png",
+      "binding": {
+        "type": "rigid-region",
+        "weight": 1
+      },
+      "scale": 1,
+      "occlusion": "Below base foreground at the root. Existing source overlap completes the covered root; no newly exposed viewing angle."
+    },
+    {
+      "name": "crest",
+      "bone": "crest",
+      "parent": "body",
+      "pivot": [
+        123,
+        146
+      ],
+      "sourceMask": "Masks/crest.png",
+      "underlapMask": "Masks/crest-overlap.png",
+      "binding": {
+        "type": "rigid-region",
+        "weight": 1
+      },
+      "scale": 1,
+      "occlusion": "Below base foreground at the root. Existing source overlap completes the covered root; no newly exposed viewing angle."
+    }
+  ],
+  "newArtwork": false,
+  "hiddenSurfaces": "All articulation is in the original image plane. Root underlap uses original source pixels; fixed foreground covers every root cut."
+}

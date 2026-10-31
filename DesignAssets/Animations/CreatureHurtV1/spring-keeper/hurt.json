@@ -1,0 +1,32 @@
+{
+  "image": "DesignAssets/Animations/CreatureHurtV1/spring-keeper/hurt.webp",
+  "frameSize": 384,
+  "columns": 4,
+  "pivotX": 157.5,
+  "pivotY": 307.5,
+  "durationsMs": [
+    20,
+    30,
+    30,
+    40,
+    80,
+    60,
+    60,
+    60,
+    60,
+    50,
+    50,
+    50,
+    40,
+    40,
+    40,
+    50
+  ],
+  "loop": false,
+  "frameCount": 16,
+  "durationMs": 760,
+  "preview": "hurt-preview.webp",
+  "matrix": "hurt-matrix.webp",
+  "rig": "rig.json",
+  "method": "Head recoils into the collar, crown tips follow the hit and the tail fans recoil with delay; claws remain planted."
+}

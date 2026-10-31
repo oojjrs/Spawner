@@ -1,0 +1,18 @@
+Use case: identity-preserve.
+Create one production-quality newly drawn 2D browser-game attack spritesheet of Spiny Back Leader, the exact imposing glossy crimson-armored beetle with cream hooked mandibles, one huge central cream horn and two smaller side horns, golden eyes, dark purple-red segmented legs and pale shell scars. Image 1 is the approved character seed; image 2 is the official transparent edit canvas reserving eight slots. Preserve exactly the seed character identity, left-facing three-quarter side camera, anatomy, proportions, palette, outline weight, textures and painterly polished game-art style. This is not pixel art. Anatomy lock: six jointed beetle legs, two large cream mandibles, three major cream horns and the same carapace markings; no extra legs, eyes, horns or floating armor parts.
+
+EXACTLY EIGHT separate complete full-body poses in ONE horizontal row, left to right, eight equal-width cells. Wide 3:1 landscape PNG with one centered row and generous empty transparent margins above/below. Same body scale and shared ground baseline in every cell. Each pose wholly fits inside its cell with a clear gap. No text, labels, numbers, guides, scenery, floor, cast shadows, enemies, weapons, motion ghosts, slash/impact effects, or painted checkerboard. Genuinely transparent background.
+
+Draw a strong anatomical whole-body attack with clear weight preparation, fast commitment, a distinct readable contact silhouette and expression, follow-through and recovery. Actually draw newly exposed undersides, joint bends, overlapping limbs and changed expressions. Do not produce tiny local edits, a rigid sprite rotated or slid around, body-wide scaling, or repetitive idle motion. Intentional lunge, short hop and foot replant are allowed where described. Keep underlying body size, limb lengths, costume and identity stable.
+
+Eight exact poses:
+1. Exact seed-like neutral armored beetle stance, mandibles partly open and front feet grounded.
+2. Clear preparation: weight shifts to rear legs, front body and horned headplate rise, forelegs begin lifting, both cream mandibles open.
+3. Maximum wind-up: forebody rears high, front pair of legs raised and bent, headplate/horns up, mandibles widely opened to show newly drawn dark mouth cavity and inner hinges, golden eyes narrowed. This must expose a new underside and have a much taller silhouette.
+4. Fast downward-forward launch toward LEFT: front legs spear toward ground as headplate and forebody plunge, two mandibles start snapping shut; rear legs push and shell follows.
+5. Strong bite CONTACT: body low and committed forward, front feet spread to brace, headplate/horns pitched low, cream mandibles tightly snapped together around empty space, focused narrowed golden eyes. Closed-jaw low silhouette sharply contrasts with the high open-jaw wind-up.
+6. Recoil: forebody rises slightly after contact, mandibles loosen just a little, legs replant and rear carapace follows late.
+7. Settle all six feet, lift headplate back and open mandibles toward the original resting gap.
+8. Exact initial neutral seed-like beetle pose with the same scale, location, horn count and shell markings as pose one.
+
+Keep each phase visually distinct, especially raised/retracted anticipation versus low extended contact, while preserving exact character identity. Contact pose must read clearly at 64 px display size. Pose 1 and 8 closely match the seed. This entire strip is the actual final source for the animation; draw all eight at once.

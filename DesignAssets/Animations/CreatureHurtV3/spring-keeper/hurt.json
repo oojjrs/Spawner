@@ -1,0 +1,41 @@
+{
+  "image": "DesignAssets/Animations/CreatureHurtV3/spring-keeper/hurt.webp",
+  "frameSize": 384,
+  "columns": 4,
+  "pivotX": 157.5,
+  "pivotY": 307.5,
+  "durationsMs": [
+    20,
+    30,
+    30,
+    30,
+    400,
+    30,
+    30,
+    30,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+  ],
+  "frameCount": 16,
+  "durationMs": 760,
+  "loop": false,
+  "closedEyeHold": {
+    "fromMs": 110,
+    "toMs": 510,
+    "durationMs": 400
+  },
+  "method": "Corrective compositing of registered V2 closed-eye artwork onto the unchanged approved seed, followed by one coherent rigid ground-pivot recoil and recovery. No mesh, part rig, body rescaling or full-body drawing swaps.",
+  "source": "Source/seed.png",
+  "timeline": "timeline.json",
+  "renderer": "render.py",
+  "preview": "hurt-preview.webp",
+  "thumbnail": "hurt-thumbnail.webp",
+  "matrix": "hurt-matrix.webp",
+  "sourceSeedSha256": "50475581617d495d5f723e8a24409e6ae72de0eac5490f2faecab58a2cf9f7ae"
+}

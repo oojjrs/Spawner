@@ -1,0 +1,55 @@
+{
+  "image": "DesignAssets/Animations/CreatureHurtV7/spiny-back-leader/hurt.webp",
+  "frameSize": 256,
+  "columns": 4,
+  "pivotX": 128,
+  "pivotY": 224,
+  "durationsMs": [
+    20,
+    30,
+    30,
+    30,
+    400,
+    30,
+    30,
+    30,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+  ],
+  "frameCount": 16,
+  "durationMs": 760,
+  "loop": false,
+  "closedEyeHold": {
+    "fromMs": 110,
+    "toMs": 510,
+    "durationMs": 400
+  },
+  "method": "hard-rock-around-planted-foot",
+  "source": "Source/seed.png",
+  "timeline": "timeline.json",
+  "renderer": "render.py",
+  "preview": "hurt-preview.webp",
+  "thumbnail": "hurt-thumbnail.webp",
+  "matrix": "hurt-matrix.webp",
+  "sourceSeedSha256": "fa34bb7a09158c588ece1dcf1e4428a6db603a88e8396e91adb6998480d8e8c9",
+  "rig": "rig.json",
+  "sourceVersion": "CreatureHurtV3",
+  "previousVersion": "CreatureHurtV4",
+  "supportPixels": [
+    121.83333333333333,
+    223
+  ],
+  "supportSemanticROI": [
+    112,
+    143,
+    198,
+    226
+  ],
+  "supportMetric": "Center of the bottom three visible-alpha rows inside the visually identified sole region."
+}

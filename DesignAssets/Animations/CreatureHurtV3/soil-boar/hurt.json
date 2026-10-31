@@ -1,0 +1,51 @@
+{
+  "image": "DesignAssets/Animations/CreatureHurtV3/soil-boar/hurt.webp",
+  "frameSize": 369,
+  "columns": 4,
+  "pivotX": 184.5,
+  "pivotY": 283.957031,
+  "frameCount": 16,
+  "durationsMs": [
+    20,
+    30,
+    30,
+    30,
+    400,
+    30,
+    30,
+    30,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+  ],
+  "durationMs": 760,
+  "loop": false,
+  "closedEyeHold": {
+    "fromMs": 110,
+    "toMs": 510,
+    "durationMs": 400
+  },
+  "method": "Approved neutral artwork reused for the entire body; locally registered and color-corrected painted eyelids from V2; one coherent ground-pivot rotation/lift with constant scale. This is corrective compositing, not a part rig.",
+  "seed": "Source/seed.png",
+  "seedSha256": "ec564fb985a1517480d7ba15a88dc4e0faa82509bae8507cfd348fb198c24266",
+  "expressionRegistration": "expression-registration.json",
+  "masks": "Masks/expression.png",
+  "timeline": "timeline.json",
+  "renderer": "render.py",
+  "preview": "hurt-preview.webp",
+  "thumbnail": "hurt-thumbnail.webp",
+  "matrix": "hurt-matrix.webp",
+  "previewPauseMs": 900,
+  "artworkScale": 1,
+  "rotationPivot": [
+    184.5,
+    283.957031
+  ],
+  "peakRotationDegrees": 7,
+  "peakLiftPixels": 4.32
+}

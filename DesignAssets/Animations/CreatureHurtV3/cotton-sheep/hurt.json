@@ -1,0 +1,78 @@
+{
+  "frameSize": 256, 
+  "columns": 4, 
+  "pivotX": 128.0, 
+  "pivotY": 224.0, 
+  "closedEyeHold": {
+    "fromMs": 110, 
+    "toMs": 510, 
+    "durationMs": 400
+  }, 
+  "image": "DesignAssets/Animations/CreatureHurtV3/cotton-sheep/hurt.webp", 
+  "durationsMs": [
+    20, 
+    30, 
+    30, 
+    30, 
+    400, 
+    30, 
+    30, 
+    30, 
+    20, 
+    20, 
+    20, 
+    20, 
+    20, 
+    20, 
+    20, 
+    20
+  ], 
+  "frameCount": 16, 
+  "durationMs": 760, 
+  "loop": false, 
+  "method": "Approved neutral body preserved; local face-surface repair and reuse of the V2 drawn eyelid; compressed original eye for the half-close; coherent rigid ground-pivot tilt/lift with no per-frame scaling or whole-body drawing swap. No mesh or part rig is used.", 
+  "source": "Source/neutral.png", 
+  "sourceSha256": "bda1467c74a5a3be23b4e4261b74df48846297363d4a96faef2af539eceb913f", 
+  "expressionDonor": "DesignAssets/Animations/CreatureHurtV2/cotton-sheep/Source/Cels/03.png", 
+  "expressionMasks": [
+    "Source/face-repair-mask.png", 
+    "Source/pain-eye.png", 
+    "Source/half-eye.png"
+  ], 
+  "expressionParameters": {
+    "eyes": [
+      [
+        103, 
+        122, 
+        9, 
+        10
+      ], 
+      [
+        62.5, 
+        111.5, 
+        5.5, 
+        9
+      ]
+    ], 
+    "donorEyes": [
+      [
+        102, 
+        109.5, 
+        11, 
+        8
+      ], 
+      [
+        61.5, 
+        88, 
+        6, 
+        6
+      ]
+    ], 
+    "donorCel": "03.png"
+  }, 
+  "renderer": "render.py", 
+  "timeline": "timeline.json", 
+  "preview": "hurt-preview.webp", 
+  "thumbnail": "hurt-thumbnail.webp", 
+  "matrix": "hurt-matrix.webp"
+}

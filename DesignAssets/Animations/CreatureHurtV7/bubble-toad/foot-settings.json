@@ -1,0 +1,156 @@
+{
+  "columns": [
+    279,
+    286,
+    289,
+    292,
+    284,
+    282,
+    284
+  ],
+  "ranges": [
+    [
+      258,
+      266
+    ],
+    [
+      258,
+      266
+    ],
+    [
+      260,
+      268
+    ],
+    [
+      260,
+      269
+    ],
+    [
+      262,
+      270
+    ],
+    [
+      262,
+      274
+    ],
+    [
+      262,
+      270
+    ]
+  ],
+  "halfWidth": 43,
+  "jointRise": 43,
+  "rigidRise": 22,
+  "species": "bubble-toad",
+  "contacts": [
+    {
+      "cel": 0,
+      "source": "Source/seed.png",
+      "contact": [
+        279,
+        264.5
+      ],
+      "soleRgba": [
+        15,
+        39,
+        37,
+        238
+      ],
+      "belowAlpha": 91
+    },
+    {
+      "cel": 1,
+      "source": "Source/DrawnPoses/01.png",
+      "contact": [
+        286,
+        265.5
+      ],
+      "soleRgba": [
+        8,
+        13,
+        9,
+        235
+      ],
+      "belowAlpha": 63
+    },
+    {
+      "cel": 2,
+      "source": "Source/DrawnPoses/02.png",
+      "contact": [
+        289,
+        266.5
+      ],
+      "soleRgba": [
+        8,
+        12,
+        9,
+        243
+      ],
+      "belowAlpha": 65
+    },
+    {
+      "cel": 3,
+      "source": "Source/DrawnPoses/03.png",
+      "contact": [
+        292,
+        264.5
+      ],
+      "soleRgba": [
+        2,
+        4,
+        4,
+        250
+      ],
+      "belowAlpha": 80
+    },
+    {
+      "cel": 4,
+      "source": "Source/DrawnPoses/04.png",
+      "contact": [
+        284,
+        269.5
+      ],
+      "soleRgba": [
+        19,
+        31,
+        23,
+        209
+      ],
+      "belowAlpha": 32
+    },
+    {
+      "cel": 5,
+      "source": "Source/DrawnPoses/05.png",
+      "contact": [
+        282,
+        270.5
+      ],
+      "soleRgba": [
+        47,
+        65,
+        51,
+        129
+      ],
+      "belowAlpha": 0
+    },
+    {
+      "cel": 6,
+      "source": "Source/DrawnPoses/06.png",
+      "contact": [
+        284,
+        267.5
+      ],
+      "soleRgba": [
+        22,
+        34,
+        25,
+        162
+      ],
+      "belowAlpha": 0
+    }
+  ],
+  "anchor": [
+    279,
+    264.5
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "provider": "OpenAI built-in image_gen",
+  "reference": "Source/seed.png",
+  "softBodyReference": "Source/soft-reference.png",
+  "editCanvas": "Source/edit-canvas.png",
+  "key": "Source/authored-peak-body.png",
+  "drawings": "Source/generated-strip.png",
+  "keyPrompt": "Production 2D animation KEY PART edit of attached original cream-and-mint snail character. Draw only ONE complete SOFT SLUG BODY layer, with the full hidden back/torso painted behind where its shell normally sits. Omit the hard golden shell, leaves, berry bundle and mushrooms entirely: those remain exact original cutouts in production. The layer must retain exactly the original cream/mint palette, soft shaded 2D illustration, same facing left 3/4 camera, same character size and broad low muscular foot shape, curled tapered tail tip. Draw the hurt peak: the flexible head/neck contracts BACK toward the shell mount and slightly DOWN by about 12-18 percent of head width, eyes shut and BOTH eye stalks shorten/fold softly backward toward the face. The contraction must change the actual neck/body silhouette, not rotate the entire image. The underside of the broad muscular sole stays planted on the SAME original ground plane, with the SAME width and no lifting, walking or sliding. No overall growth/shrink, no body flip, no new limbs or props. The soft back can compress a little above the planted sole; preserve body volume. Complete a naturally connected neck, cheek and foot, without seams or holes. Keep generous transparent margin, same framing as reference. Do not add shell, fruit, leaves, mushrooms, background, shadow, effects, text or a second character.",
+  "drawingsPrompt": "Production 2D game animation EDIT of Image1: one transparent horizontal strip of FOUR equally spaced soft-body cels in exactly its existing four slots. Image1 contains four exact copies of the approved original snail SOFT BODY layer and is the absolute authority for size, palette, facing, narrow eye-stalk thickness and eye-cap diameter. Image2 is only a MOTION/hidden-back guide; its oversized eye caps must NOT be copied. Keep each eye cap at the same small diameter as Image1, not growing into wide paddles. Draw only the cream/mint slug, no shell, leaves, fruit, mushroom, shadow or prop: its original hard shell/backpack will be placed on top later. Complete the hidden torso/back under that shell, smoothly continuous with the lower foot. Preserve the original exact body/eye proportions and cream/mint shading. Motion sequence: slot0 10percent slight onset head/neck retract, eyelids beginning close; slot1 35percent short backward/downward neck contraction, eye stalks lower and begin folding back; slot2 65percent contraction eyes shut; slot3 hurt peak with flexible head/neck retracting BACK under the shell mount and slightly down by only12-18percent of original head width, eye stalks gently shortening/folding backward without getting fatter. The broad lower muscular FOOT and its tapered curled tail stay in their exact copied world positions and ground plane in every slot. The front of the HEAD above the foot contracts toward the shell, while the planted lower foot does not travel. Do not lift the entire foot, do not shrink/rotate/translate the entire sprite, no exaggerated new body bulges. Retain body volume. Head, neck, foot and stalk bases must be naturally joined, fully painted with no seams or holes. Same head/stalk size, illustration style, facing left3/4 and anatomy all4cels. Transparent background, preserve canvas and four-slot layout, no labels/effects/background. This is a subtle material-correct recoil of soft tissue above a planted sole, not a walking cycle.",
+  "selectedNativeCels": [
+    2,
+    3,
+    4
+  ],
+  "calibrationOnlyCel": 1,
+  "construction": "Original hard shell/leaf/berry/mushroom layer stays at exact native coordinates. The complete generated key supplies hidden back under its opaque interior. Four joint body drawings use one neutral-calibrated artwork scale. Actual broad sole region x175..252, y292..322 gives support registration at (212.21,309), excluding raised tail and shell. Runtime uses exact original half-eye bridges and draws2/3/4, then reverses them. Extended generated cel1 is excluded. No whole-image rotation or animation scaling.",
+  "keyInputs": [
+    "Source/imagegen-reference.png"
+  ],
+  "drawingsInputs": [
+    "Source/edit-canvas.png",
+    "Source/authored-peak-body.png"
+  ]
+}

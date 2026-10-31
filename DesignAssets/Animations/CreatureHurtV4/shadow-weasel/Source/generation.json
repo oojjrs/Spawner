@@ -1,0 +1,9 @@
+{
+  "raw": "hidden-surfaces-generated.png",
+  "purpose": "Rump fur hidden by the original independently flexing tail.",
+  "prompt": "Remove only the right-side curled tail from this exact brown weasel. Restore the few hidden rump fur pixels. Preserve face, body, feet, proportions, palette and source registration. Transparent outside. No redesign or scenery.",
+  "tool": "Built-in image_gen.imagegen",
+  "reference": "DesignAssets/Animations/CreatureHurtV3/shadow-weasel/Source/seed.png",
+  "alpha": true,
+  "scalePolicy": "One fixed source canvas and artwork scale; no per-frame fit."
+}

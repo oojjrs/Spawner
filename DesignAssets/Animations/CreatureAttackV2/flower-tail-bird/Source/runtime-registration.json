@@ -1,0 +1,29 @@
+{
+  "frameSize": 283,
+  "displaySize": 282.9473684210526,
+  "scale": 0.552734375,
+  "idleReference": "DesignAssets/Animations/CreatureIdleV3/flower-tail-bird/idle.webp",
+  "viewSize": 276.77600235849053,
+  "pivotX": 138.03967423349056,
+  "pivotY": 259.49940300707544,
+  "sourcePivot": [
+    256,
+    448
+  ],
+  "sourceFrameSize": 512,
+  "columns": 4,
+  "frameCount": 8,
+  "image": "DesignAssets/Animations/CreatureAttackV2/flower-tail-bird/runtime.webp",
+  "durationsMs": [
+    100,
+    110,
+    110,
+    40,
+    220,
+    80,
+    130,
+    180
+  ],
+  "loop": false,
+  "facing": "left"
+}

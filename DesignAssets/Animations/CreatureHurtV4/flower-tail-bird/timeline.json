@@ -1,0 +1,252 @@
+{
+  "contract": "20ms neutral; impact closes by80ms; peak at110ms held400ms; return to exact neutral before760ms.",
+  "pivot": [
+    194.0,
+    339.5
+  ],
+  "scaling": 1,
+  "poses": [
+    {
+      "expression": "neutral",
+      "clockwiseDegrees": 0,
+      "translationPixels": [
+        0,
+        0.0
+      ],
+      "durationMs": 20,
+      "parts": {
+        "flower-fan": {
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        }
+      }
+    },
+    {
+      "expression": "half",
+      "clockwiseDegrees": 1.5,
+      "translationPixels": [
+        0,
+        -1.3640625
+      ],
+      "durationMs": 30,
+      "parts": {
+        "flower-fan": {
+          "baseDegrees": -1.3199999999999998,
+          "tipDegrees": 0
+        }
+      }
+    },
+    {
+      "expression": "pain",
+      "clockwiseDegrees": 3.5,
+      "translationPixels": [
+        0,
+        -3.1828125000000003
+      ],
+      "durationMs": 30,
+      "parts": {
+        "flower-fan": {
+          "baseDegrees": -5.279999999999999,
+          "tipDegrees": -1.76
+        }
+      }
+    },
+    {
+      "expression": "pain",
+      "clockwiseDegrees": 4.6,
+      "translationPixels": [
+        0,
+        -4.16796875
+      ],
+      "durationMs": 30,
+      "parts": {
+        "flower-fan": {
+          "baseDegrees": -9.35,
+          "tipDegrees": -5.12
+        }
+      }
+    },
+    {
+      "expression": "pain",
+      "clockwiseDegrees": 5,
+      "translationPixels": [
+        0,
+        -4.546875
+      ],
+      "durationMs": 400,
+      "parts": {
+        "flower-fan": {
+          "baseDegrees": -11,
+          "tipDegrees": -8
+        }
+      }
+    },
+    {
+      "expression": "pain",
+      "clockwiseDegrees": 4.7,
+      "translationPixels": [
+        0,
+        -4.2437499999999995
+      ],
+      "durationMs": 30,
+      "parts": {
+        "flower-fan": {
+          "baseDegrees": -10.23,
+          "tipDegrees": -7.84
+        }
+      }
+    },
+    {
+      "expression": "pain",
+      "clockwiseDegrees": 3.5,
+      "translationPixels": [
+        0,
+        -3.1828125000000003
+      ],
+      "durationMs": 30,
+      "parts": {
+        "flower-fan": {
+          "baseDegrees": -8.14,
+          "tipDegrees": -7.04
+        }
+      }
+    },
+    {
+      "expression": "pain",
+      "clockwiseDegrees": 2.2,
+      "translationPixels": [
+        0,
+        -1.9703125000000001
+      ],
+      "durationMs": 30,
+      "parts": {
+        "flower-fan": {
+          "baseDegrees": -4.51,
+          "tipDegrees": -5.12
+        }
+      }
+    },
+    {
+      "expression": "half",
+      "clockwiseDegrees": 1.1,
+      "translationPixels": [
+        0,
+        -0.9851562500000001
+      ],
+      "durationMs": 20,
+      "parts": {
+        "flower-fan": {
+          "baseDegrees": -1.1,
+          "tipDegrees": -2.4
+        }
+      }
+    },
+    {
+      "expression": "half",
+      "clockwiseDegrees": 0.3,
+      "translationPixels": [
+        0,
+        -0.30312500000000003
+      ],
+      "durationMs": 20,
+      "parts": {
+        "flower-fan": {
+          "baseDegrees": 1.98,
+          "tipDegrees": 0.64
+        }
+      }
+    },
+    {
+      "expression": "half",
+      "clockwiseDegrees": 0,
+      "translationPixels": [
+        0,
+        0.0
+      ],
+      "durationMs": 20,
+      "parts": {
+        "flower-fan": {
+          "baseDegrees": 2.8600000000000003,
+          "tipDegrees": 2.16
+        }
+      }
+    },
+    {
+      "expression": "neutral",
+      "clockwiseDegrees": 0,
+      "translationPixels": [
+        0,
+        0.0
+      ],
+      "durationMs": 20,
+      "parts": {
+        "flower-fan": {
+          "baseDegrees": 1.76,
+          "tipDegrees": 1.92
+        }
+      }
+    },
+    {
+      "expression": "neutral",
+      "clockwiseDegrees": 0,
+      "translationPixels": [
+        0,
+        0.0
+      ],
+      "durationMs": 20,
+      "parts": {
+        "flower-fan": {
+          "baseDegrees": 0.6599999999999999,
+          "tipDegrees": 1.04
+        }
+      }
+    },
+    {
+      "expression": "neutral",
+      "clockwiseDegrees": 0,
+      "translationPixels": [
+        0,
+        0.0
+      ],
+      "durationMs": 20,
+      "parts": {
+        "flower-fan": {
+          "baseDegrees": -0.275,
+          "tipDegrees": 0.28
+        }
+      }
+    },
+    {
+      "expression": "neutral",
+      "clockwiseDegrees": 0,
+      "translationPixels": [
+        0,
+        0.0
+      ],
+      "durationMs": 20,
+      "parts": {
+        "flower-fan": {
+          "baseDegrees": -0.132,
+          "tipDegrees": -0.144
+        }
+      }
+    },
+    {
+      "expression": "neutral",
+      "clockwiseDegrees": 0,
+      "translationPixels": [
+        0,
+        0.0
+      ],
+      "durationMs": 20,
+      "parts": {
+        "flower-fan": {
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        }
+      }
+    }
+  ],
+  "method": "V3 registered expression artwork and ground recoil, augmented with separately extracted articulated attachments, two-bone FK and LBS mesh deformation, fixed-scale body, foreground occluders and delayed follow-through.",
+  "scale": 1
+}

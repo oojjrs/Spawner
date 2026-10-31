@@ -1,0 +1,54 @@
+{
+  "format": "project-native layered rigid attachments; baked sprite output; no Spine compatibility claim",
+  "canvas": [
+    288,
+    288
+  ],
+  "root": [
+    192.5,
+    242
+  ],
+  "bones": [
+    {
+      "name": "body",
+      "parent": "root",
+      "pivot": [
+        192.5,
+        242
+      ]
+    },
+    {
+      "name": "tail",
+      "parent": "body",
+      "pivot": [
+        195,
+        211
+      ]
+    }
+  ],
+  "drawOrder": [
+    "tail",
+    "base-foreground"
+  ],
+  "attachments": [
+    {
+      "name": "tail",
+      "bone": "tail",
+      "parent": "body",
+      "pivot": [
+        195,
+        211
+      ],
+      "sourceMask": "Masks/tail.png",
+      "underlapMask": "Masks/tail-overlap.png",
+      "binding": {
+        "type": "rigid-region",
+        "weight": 1
+      },
+      "scale": 1,
+      "occlusion": "Below base foreground at the root. Existing source overlap completes the covered root; no newly exposed viewing angle."
+    }
+  ],
+  "newArtwork": false,
+  "hiddenSurfaces": "All articulation is in the original image plane. Root underlap uses original source pixels; fixed foreground covers every root cut."
+}

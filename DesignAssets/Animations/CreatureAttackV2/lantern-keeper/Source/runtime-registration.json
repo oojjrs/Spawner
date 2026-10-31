@@ -1,0 +1,29 @@
+{
+  "frameSize": 270,
+  "displaySize": 269.55185185185184,
+  "scale": 0.52734375,
+  "idleReference": "DesignAssets/Animations/UniqueIdleV4/lantern-keeper/idle.webp",
+  "viewSize": 259.43060498220643,
+  "pivotX": 141.5871052046263,
+  "pivotY": 235.53874277135233,
+  "sourcePivot": [
+    256,
+    448
+  ],
+  "sourceFrameSize": 512,
+  "columns": 4,
+  "frameCount": 8,
+  "image": "DesignAssets/Animations/CreatureAttackV2/lantern-keeper/runtime.webp",
+  "durationsMs": [
+    70,
+    100,
+    120,
+    40,
+    260,
+    110,
+    160,
+    140
+  ],
+  "loop": false,
+  "facing": "left"
+}

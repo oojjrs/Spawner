@@ -1,0 +1,5 @@
+Use case: precise-object-edit
+Asset type: existing 2D game attack animation corrective face cel.
+Image 1 is the EXACT edit target: a small bulb creature in a tall coiled-vine anticipation pose. Image 2 is ONLY the identity reference for its OPEN eyes.
+Primary request: In image 1 replace only the two closed eyes on its yellow bulb face with OPEN dark forest-green oval eyes and their small pale catchlights, matching image 2. Keep the left small farther eye near (174,391) and larger near eye near (227,412), maintaining the target head perspective. Both eyes must be visibly open and alert, with round/oval dark iris, no smile-shaped or slit eyelids. Preserve their existing centers and sizes relative to the head.
+Absolutely preserve image 1 body, bulb shading, leaves, vine curve, feet, silhouette, position, dimensions, scale, palette, lighting, outline, transparency and pose. Change ONLY the tiny eye areas. Do not repaint the whole character, add a mouth, move the face, alter expressions elsewhere, add effects/text/scenery. Target canvas 512x512, transparent background.

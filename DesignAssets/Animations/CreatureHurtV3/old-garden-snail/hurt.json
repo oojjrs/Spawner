@@ -1,0 +1,41 @@
+{
+  "image": "DesignAssets/Animations/CreatureHurtV3/old-garden-snail/hurt.webp",
+  "frameSize": 352,
+  "columns": 4,
+  "pivotX": 180.8125,
+  "pivotY": 304.5625,
+  "durationsMs": [
+    20,
+    30,
+    30,
+    30,
+    400,
+    30,
+    30,
+    30,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+  ],
+  "frameCount": 16,
+  "durationMs": 760,
+  "loop": false,
+  "closedEyeHold": {
+    "fromMs": 110,
+    "toMs": 510,
+    "durationMs": 400
+  },
+  "method": "Corrective compositing of registered V2 closed-eye artwork onto the unchanged approved seed, followed by one coherent rigid ground-pivot recoil and recovery. No mesh, part rig, body rescaling or full-body drawing swaps.",
+  "source": "Source/seed.png",
+  "timeline": "timeline.json",
+  "renderer": "render.py",
+  "preview": "hurt-preview.webp",
+  "thumbnail": "hurt-thumbnail.webp",
+  "matrix": "hurt-matrix.webp",
+  "sourceSeedSha256": "f8c2cb09431f407cfd519aeb95f68a26069b6dbe0df742c0b704cf3d8fc5656a"
+}

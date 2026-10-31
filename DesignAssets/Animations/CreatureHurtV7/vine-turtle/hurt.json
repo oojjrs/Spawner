@@ -1,0 +1,43 @@
+{
+  "image": "DesignAssets/Animations/CreatureHurtV7/vine-turtle/hurt.webp",
+  "frameSize": 346,
+  "columns": 4,
+  "pivotX": 177.392578,
+  "pivotY": 298.438516,
+  "frameCount": 16,
+  "durationsMs": [
+    20,
+    30,
+    30,
+    30,
+    400,
+    30,
+    30,
+    30,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+  ],
+  "durationMs": 760,
+  "loop": false,
+  "closedEyeHold": {
+    "fromMs": 110,
+    "toMs": 510,
+    "durationMs": 400
+  },
+  "source": "Source/seed.png",
+  "method": "The shell and legs are stationary. An independently layered rigid head retracts eight pixels into a softly weighted neck; crown leaf follow-through is retained. Four foot contacts keep original artwork pixels.",
+  "rig": "rig.json",
+  "timeline": "timeline.json",
+  "renderer": "render.py",
+  "preview": "hurt-preview.webp",
+  "thumbnail": "hurt-thumbnail.webp",
+  "matrix": "hurt-matrix.webp",
+  "artworkScale": 1,
+  "previewPauseMs": 900
+}

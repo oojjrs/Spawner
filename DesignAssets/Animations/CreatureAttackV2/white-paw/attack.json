@@ -1,0 +1,207 @@
+{
+  "species": "white-paw", 
+  "action": "attack", 
+  "revision": 2, 
+  "image": "DesignAssets/Animations/CreatureAttackV2/white-paw/attack.webp", 
+  "frameSize": 512, 
+  "columns": 4, 
+  "frameCount": 8, 
+  "durationsMs": [
+    70, 
+    100, 
+    90, 
+    40, 
+    260, 
+    110, 
+    130, 
+    120
+  ], 
+  "durationMs": 920, 
+  "loop": false, 
+  "pivotX": 256, 
+  "pivotY": 448, 
+  "impactFrame": 4, 
+  "impactMs": 300, 
+  "impactHoldMs": 260, 
+  "facing": "left", 
+  "rootMotion": true, 
+  "rootMotionDescription": "Drawn shoulder lunge and forepaw reach toward the left, hind-leg push, then deliberate foot replant; the common ground baseline is not fitted separately per pose.", 
+  "description": "Coil weight onto the hindquarters, cock the near forepaw high, launch a reach, hold a snarling claw-rake contact, follow through and replant.", 
+  "artworkMethod": "full-strip newly drawn cels with image_gen; no mesh warp, in-between crossfade or reused V1 artwork", 
+  "actualSource": "Source/raw-drawn-strip.png", 
+  "seed": "Source/seed.png", 
+  "editCanvas": "Source/edit-canvas.png", 
+  "prompt": "Source/prompt.txt", 
+  "frames": "Frames", 
+  "exporter": "export.py", 
+  "preview": "attack-preview.webp", 
+  "thumbnail": "attack-thumbnail.webp", 
+  "sourceBounds": [
+    76, 
+    243, 
+    436, 
+    448
+  ], 
+  "normalization": {
+    "pipeline": "OpenAI game-studio sprite-pipeline", 
+    "officialNormalizer": "normalize_sprite_strip.py", 
+    "wrapperPurpose": "Official extractor and frame-1 lockback are retained; its per-content bottom-center translation is replaced by explicit nose landmarks and one raw ground transform so the intended lunge and pose-height change survive.", 
+    "scale": 1.33, 
+    "registrations": [
+      {
+        "cell": 0, 
+        "rawCrop": [
+          0, 
+          250, 
+          278, 
+          490
+        ], 
+        "commonScale": 1.33, 
+        "registrationLandmark": "nose tip", 
+        "rawNoseLocalX": 28, 
+        "targetNoseX": 100, 
+        "translation": [
+          63, 
+          171
+        ], 
+        "commonRawGroundY": 458, 
+        "targetGroundY": 448
+      }, 
+      {
+        "cell": 1, 
+        "rawCrop": [
+          278, 
+          250, 
+          525, 
+          490
+        ], 
+        "commonScale": 1.33, 
+        "registrationLandmark": "nose tip", 
+        "rawNoseLocalX": 20, 
+        "targetNoseX": 116, 
+        "translation": [
+          89, 
+          171
+        ], 
+        "commonRawGroundY": 458, 
+        "targetGroundY": 448
+      }, 
+      {
+        "cell": 2, 
+        "rawCrop": [
+          525, 
+          250, 
+          749, 
+          490
+        ], 
+        "commonScale": 1.33, 
+        "registrationLandmark": "nose tip", 
+        "rawNoseLocalX": 20, 
+        "targetNoseX": 132, 
+        "translation": [
+          105, 
+          171
+        ], 
+        "commonRawGroundY": 458, 
+        "targetGroundY": 448
+      }, 
+      {
+        "cell": 3, 
+        "rawCrop": [
+          749, 
+          250, 
+          1104, 
+          490
+        ], 
+        "commonScale": 1.33, 
+        "registrationLandmark": "nose tip", 
+        "rawNoseLocalX": 65, 
+        "targetNoseX": 92, 
+        "translation": [
+          6, 
+          171
+        ], 
+        "commonRawGroundY": 458, 
+        "targetGroundY": 448
+      }, 
+      {
+        "cell": 4, 
+        "rawCrop": [
+          1104, 
+          250, 
+          1394, 
+          490
+        ], 
+        "commonScale": 1.33, 
+        "registrationLandmark": "nose tip", 
+        "rawNoseLocalX": 26, 
+        "targetNoseX": 70, 
+        "translation": [
+          35, 
+          171
+        ], 
+        "commonRawGroundY": 458, 
+        "targetGroundY": 448
+      }, 
+      {
+        "cell": 5, 
+        "rawCrop": [
+          1394, 
+          250, 
+          1648, 
+          490
+        ], 
+        "commonScale": 1.33, 
+        "registrationLandmark": "nose tip", 
+        "rawNoseLocalX": 24, 
+        "targetNoseX": 80, 
+        "translation": [
+          48, 
+          171
+        ], 
+        "commonRawGroundY": 458, 
+        "targetGroundY": 448
+      }, 
+      {
+        "cell": 6, 
+        "rawCrop": [
+          1648, 
+          250, 
+          1904, 
+          490
+        ], 
+        "commonScale": 1.33, 
+        "registrationLandmark": "nose tip", 
+        "rawNoseLocalX": 29, 
+        "targetNoseX": 101, 
+        "translation": [
+          62, 
+          171
+        ], 
+        "commonRawGroundY": 458, 
+        "targetGroundY": 448
+      }, 
+      {
+        "cell": 7, 
+        "rawCrop": [
+          1904, 
+          250, 
+          2172, 
+          490
+        ], 
+        "commonScale": 1.33, 
+        "registrationLandmark": "nose tip", 
+        "rawNoseLocalX": 33, 
+        "targetNoseX": 100, 
+        "translation": [
+          56, 
+          171
+        ], 
+        "commonRawGroundY": 458, 
+        "targetGroundY": 448
+      }
+    ], 
+    "firstAndLast": "exact seed pixels"
+  }, 
+  "previewPauseMs": 800
+}

@@ -1,0 +1,43 @@
+{
+  "image": "DesignAssets/Animations/CreatureHurtV4/shadow-weasel/hurt.webp",
+  "frameSize": 319,
+  "columns": 4,
+  "pivotX": 160.123047,
+  "pivotY": 263.897734,
+  "frameCount": 16,
+  "durationsMs": [
+    20,
+    30,
+    30,
+    30,
+    400,
+    30,
+    30,
+    30,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+  ],
+  "durationMs": 760,
+  "loop": false,
+  "closedEyeHold": {
+    "fromMs": 110,
+    "toMs": 510,
+    "durationMs": 400
+  },
+  "source": "Source/seed.png",
+  "method": "Original registered expressions with separately extracted articulated attachments; generated hidden torso surfaces; local two-bone skinning per flexible part, fixed body scale, coherent ground-pivot recoil and delayed damped follow-through. Custom baked sprite renderer, not Spine.",
+  "rig": "rig.json",
+  "timeline": "timeline.json",
+  "renderer": "render.py",
+  "preview": "hurt-preview.webp",
+  "thumbnail": "hurt-thumbnail.webp",
+  "matrix": "hurt-matrix.webp",
+  "artworkScale": 1,
+  "previewPauseMs": 900
+}

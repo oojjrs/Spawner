@@ -1,0 +1,110 @@
+{
+  "species": "soil-boar",
+  "size": 369,
+  "registrationScale": 0.717425431711146,
+  "commonCanvasTranslation": [
+    29.437990580847725,
+    7.36106750392463
+  ],
+  "anchor": [
+    185.5212765957447,
+    282.0
+  ],
+  "anchorRegion": [
+    145,
+    220,
+    245,
+    320
+  ],
+  "cells": [
+    {
+      "cel": 0,
+      "translationPixels": [
+        2,
+        1
+      ],
+      "footAnchor": [
+        183.126213592233,
+        281.0
+      ]
+    },
+    {
+      "cel": 1,
+      "translationPixels": [
+        3,
+        0
+      ],
+      "footAnchor": [
+        182.9051724137931,
+        282.0
+      ]
+    },
+    {
+      "cel": 2,
+      "translationPixels": [
+        13,
+        -3
+      ],
+      "footAnchor": [
+        172.14953271028037,
+        285.0
+      ]
+    },
+    {
+      "cel": 3,
+      "translationPixels": [
+        16,
+        -3
+      ],
+      "footAnchor": [
+        169.82608695652175,
+        285.0
+      ]
+    },
+    {
+      "cel": 4,
+      "translationPixels": [
+        8,
+        19
+      ],
+      "footAnchor": [
+        177.13934426229508,
+        263.0
+      ]
+    },
+    {
+      "cel": 5,
+      "translationPixels": [
+        10,
+        18
+      ],
+      "footAnchor": [
+        175.50980392156862,
+        264.0
+      ]
+    },
+    {
+      "cel": 6,
+      "translationPixels": [
+        13,
+        18
+      ],
+      "footAnchor": [
+        172.5,
+        264.0
+      ]
+    },
+    {
+      "cel": 7,
+      "translationPixels": [
+        2,
+        18
+      ],
+      "footAnchor": [
+        183.07476635514018,
+        264.0
+      ]
+    }
+  ],
+  "construction": "Eight complete native drawn anatomical poses; common neutral-to-original scale registration and planted near-forefoot translation. No whole-body animation transforms or mesh; every body bend and joint pose is drawn."
+}

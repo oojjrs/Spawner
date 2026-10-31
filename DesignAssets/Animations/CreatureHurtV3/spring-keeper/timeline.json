@@ -1,0 +1,163 @@
+{
+  "species": "spring-keeper",
+  "method": "Corrective compositing of registered V2 closed-eye artwork onto the unchanged approved seed, followed by one coherent rigid ground-pivot recoil and recovery. No mesh, part rig, body rescaling or full-body drawing swaps.",
+  "canvas": [
+    384,
+    384
+  ],
+  "pivot": [
+    157.5,
+    307.5
+  ],
+  "groundPivot": [
+    157.5,
+    307.5
+  ],
+  "durationMs": 760,
+  "closedEyeHold": {
+    "fromMs": 110,
+    "toMs": 510,
+    "durationMs": 400
+  },
+  "previewPauseMs": 900,
+  "sourceSeed": "DesignAssets/Animations/CreatureHurtV2/spring-keeper/Source/seed.png",
+  "sourceSeedSha256": "50475581617d495d5f723e8a24409e6ae72de0eac5490f2faecab58a2cf9f7ae",
+  "donorSource": "DesignAssets/Animations/CreatureHurtV2/spring-keeper/Source/Cels/02.png",
+  "donorSourceSha256": "273fcf755f89b96861cfa915125582adc49751bae6c370f7f9db4d9efeedca24",
+  "expressionPatches": [
+    {
+      "name": "eye",
+      "targetToDonorAffine": [
+        1,
+        0,
+        6,
+        0,
+        1,
+        5
+      ],
+      "colorMatching": "local-boundary-skin-plane-and-registered-eyelid-ink",
+      "medianBoundaryColorDelta": [
+        1.0,
+        3.0,
+        5.0
+      ],
+      "painMask": "Source/Masks/eye-pain.png",
+      "halfMask": "Source/Masks/eye-half.png",
+      "halfLidBoundaryY": 176.5
+    }
+  ],
+  "sources": {
+    "seed": "Source/seed.png",
+    "half": "Source/half.png",
+    "pain": "Source/pain.png"
+  },
+  "poses": [
+    {
+      "durationMs": 20,
+      "rotationDegrees": 0.0,
+      "liftPixels": 0.0,
+      "expression": "seed"
+    },
+    {
+      "durationMs": 30,
+      "rotationDegrees": 1.5,
+      "liftPixels": 1.35,
+      "expression": "half"
+    },
+    {
+      "durationMs": 30,
+      "rotationDegrees": 3.5,
+      "liftPixels": 3.15,
+      "expression": "pain"
+    },
+    {
+      "durationMs": 30,
+      "rotationDegrees": 4.6,
+      "liftPixels": 4.125,
+      "expression": "pain"
+    },
+    {
+      "durationMs": 400,
+      "rotationDegrees": 5.0,
+      "liftPixels": 4.5,
+      "expression": "pain"
+    },
+    {
+      "durationMs": 30,
+      "rotationDegrees": 4.7,
+      "liftPixels": 4.2,
+      "expression": "pain"
+    },
+    {
+      "durationMs": 30,
+      "rotationDegrees": 3.5,
+      "liftPixels": 3.15,
+      "expression": "pain"
+    },
+    {
+      "durationMs": 30,
+      "rotationDegrees": 2.2,
+      "liftPixels": 1.95,
+      "expression": "pain"
+    },
+    {
+      "durationMs": 20,
+      "rotationDegrees": 1.1,
+      "liftPixels": 0.975,
+      "expression": "half"
+    },
+    {
+      "durationMs": 20,
+      "rotationDegrees": 0.3,
+      "liftPixels": 0.3,
+      "expression": "half"
+    },
+    {
+      "durationMs": 20,
+      "rotationDegrees": 0.0,
+      "liftPixels": 0.0,
+      "expression": "seed"
+    },
+    {
+      "durationMs": 20,
+      "rotationDegrees": 0.0,
+      "liftPixels": 0.0,
+      "expression": "seed"
+    },
+    {
+      "durationMs": 20,
+      "rotationDegrees": 0.0,
+      "liftPixels": 0.0,
+      "expression": "seed"
+    },
+    {
+      "durationMs": 20,
+      "rotationDegrees": 0.0,
+      "liftPixels": 0.0,
+      "expression": "seed"
+    },
+    {
+      "durationMs": 20,
+      "rotationDegrees": 0.0,
+      "liftPixels": 0.0,
+      "expression": "seed"
+    },
+    {
+      "durationMs": 20,
+      "rotationDegrees": 0.0,
+      "liftPixels": 0.0,
+      "expression": "seed"
+    }
+  ],
+  "supersample": 4,
+  "rootMotion": "One intentional impact arc around the registered ground pivot, then exact recovery. No unrelated wobble or scale change.",
+  "compositor": "Source/compose.py",
+  "expressionLayers": [
+    {
+      "name": "eye",
+      "texture": "Source/eye-color-matched.png",
+      "painMask": "Source/Masks/eye-pain.png",
+      "halfMask": "Source/Masks/eye-half.png"
+    }
+  ]
+}

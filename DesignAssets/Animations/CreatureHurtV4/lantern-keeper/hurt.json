@@ -1,0 +1,43 @@
+{
+  "image": "DesignAssets/Animations/CreatureHurtV4/lantern-keeper/hurt.webp",
+  "frameSize": 384,
+  "columns": 4,
+  "pivotX": 203.25,
+  "pivotY": 324.75,
+  "durationsMs": [
+    20,
+    30,
+    30,
+    30,
+    400,
+    30,
+    30,
+    30,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+  ],
+  "frameCount": 16,
+  "durationMs": 760,
+  "loop": false,
+  "closedEyeHold": {
+    "fromMs": 110,
+    "toMs": 510,
+    "durationMs": 400
+  },
+  "method": "Original registered expressions with separately layered rigid ear-far, ear-near attachments. Covered root overlaps, delayed local recoil and gentle settling, plus the existing impact root arc.",
+  "source": "Source/seed.png",
+  "timeline": "timeline.json",
+  "renderer": "render.py",
+  "preview": "hurt-preview.webp",
+  "thumbnail": "hurt-thumbnail.webp",
+  "matrix": "hurt-matrix.webp",
+  "sourceSeedSha256": "e608f2558a38990a335909b5b53dfca8bf666123c0f687db36e5e42fbc61db9e",
+  "rig": "rig.json",
+  "sourceVersion": "CreatureHurtV3"
+}

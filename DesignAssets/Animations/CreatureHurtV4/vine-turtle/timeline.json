@@ -1,0 +1,474 @@
+{
+  "durationMs": 760,
+  "closedEyeHold": {
+    "fromMs": 110,
+    "toMs": 510,
+    "durationMs": 400
+  },
+  "poses": [
+    {
+      "frame": 0,
+      "expression": "open",
+      "durationMs": 20,
+      "bodyDegrees": 0.0,
+      "bodyLiftPixels": 0.0,
+      "parts": [
+        {
+          "name": "rear-leaf",
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "left-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "right-leaf",
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "front-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0
+        }
+      ]
+    },
+    {
+      "frame": 1,
+      "expression": "half",
+      "durationMs": 30,
+      "bodyDegrees": 0.9800000000000001,
+      "bodyLiftPixels": 0.5040000000000001,
+      "parts": [
+        {
+          "name": "rear-leaf",
+          "baseDegrees": -0.88,
+          "tipDegrees": 0
+        },
+        {
+          "name": "left-leaf",
+          "baseDegrees": 0.9568000000000001,
+          "tipDegrees": 0
+        },
+        {
+          "name": "right-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "front-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0
+        }
+      ]
+    },
+    {
+      "frame": 2,
+      "expression": "closed",
+      "durationMs": 30,
+      "bodyDegrees": 2.275,
+      "bodyLiftPixels": 1.1700000000000002,
+      "parts": [
+        {
+          "name": "rear-leaf",
+          "baseDegrees": -4.62,
+          "tipDegrees": -0.7000000000000001
+        },
+        {
+          "name": "left-leaf",
+          "baseDegrees": 5.0232,
+          "tipDegrees": 0.8400000000000001
+        },
+        {
+          "name": "right-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0.0
+        },
+        {
+          "name": "front-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0.0
+        }
+      ]
+    },
+    {
+      "frame": 3,
+      "expression": "closed",
+      "durationMs": 30,
+      "bodyDegrees": 3.15,
+      "bodyLiftPixels": 1.62,
+      "parts": [
+        {
+          "name": "rear-leaf",
+          "baseDegrees": -8.58,
+          "tipDegrees": -2.75
+        },
+        {
+          "name": "left-leaf",
+          "baseDegrees": 9.328800000000001,
+          "tipDegrees": 3.3000000000000003
+        },
+        {
+          "name": "right-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0.0
+        },
+        {
+          "name": "front-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0.0
+        }
+      ]
+    },
+    {
+      "frame": 4,
+      "expression": "closed",
+      "durationMs": 400,
+      "bodyDegrees": 3.5,
+      "bodyLiftPixels": 1.8,
+      "parts": [
+        {
+          "name": "rear-leaf",
+          "baseDegrees": -11,
+          "tipDegrees": -5
+        },
+        {
+          "name": "left-leaf",
+          "baseDegrees": 11.96,
+          "tipDegrees": 6
+        },
+        {
+          "name": "right-leaf",
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "front-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0
+        }
+      ]
+    },
+    {
+      "frame": 5,
+      "expression": "closed",
+      "durationMs": 30,
+      "bodyDegrees": 3.22,
+      "bodyLiftPixels": 1.6560000000000001,
+      "parts": [
+        {
+          "name": "rear-leaf",
+          "baseDegrees": -10.559999999999999,
+          "tipDegrees": -4.9
+        },
+        {
+          "name": "left-leaf",
+          "baseDegrees": 11.4816,
+          "tipDegrees": 5.88
+        },
+        {
+          "name": "right-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0.0
+        },
+        {
+          "name": "front-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0.0
+        }
+      ]
+    },
+    {
+      "frame": 6,
+      "expression": "closed",
+      "durationMs": 30,
+      "bodyDegrees": 2.275,
+      "bodyLiftPixels": 1.1700000000000002,
+      "parts": [
+        {
+          "name": "rear-leaf",
+          "baseDegrees": -7.699999999999999,
+          "tipDegrees": -4.0
+        },
+        {
+          "name": "left-leaf",
+          "baseDegrees": 8.372,
+          "tipDegrees": 4.800000000000001
+        },
+        {
+          "name": "right-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0.0
+        },
+        {
+          "name": "front-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0.0
+        }
+      ]
+    },
+    {
+      "frame": 7,
+      "expression": "closed",
+      "durationMs": 30,
+      "bodyDegrees": 1.2249999999999999,
+      "bodyLiftPixels": 0.63,
+      "parts": [
+        {
+          "name": "rear-leaf",
+          "baseDegrees": -3.8499999999999996,
+          "tipDegrees": -2.0
+        },
+        {
+          "name": "left-leaf",
+          "baseDegrees": 4.186,
+          "tipDegrees": 2.4000000000000004
+        },
+        {
+          "name": "right-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0.0
+        },
+        {
+          "name": "front-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0.0
+        }
+      ]
+    },
+    {
+      "frame": 8,
+      "expression": "half",
+      "durationMs": 20,
+      "bodyDegrees": 0.35000000000000003,
+      "bodyLiftPixels": 0.18000000000000002,
+      "parts": [
+        {
+          "name": "rear-leaf",
+          "baseDegrees": 1.98,
+          "tipDegrees": 0.6
+        },
+        {
+          "name": "left-leaf",
+          "baseDegrees": -2.1528,
+          "tipDegrees": -0.72
+        },
+        {
+          "name": "right-leaf",
+          "baseDegrees": -0.0,
+          "tipDegrees": -0.0
+        },
+        {
+          "name": "front-leaf",
+          "baseDegrees": -0.0,
+          "tipDegrees": -0.0
+        }
+      ]
+    },
+    {
+      "frame": 9,
+      "expression": "half",
+      "durationMs": 20,
+      "bodyDegrees": -0.42,
+      "bodyLiftPixels": -0.216,
+      "parts": [
+        {
+          "name": "rear-leaf",
+          "baseDegrees": 3.3,
+          "tipDegrees": 1.7000000000000002
+        },
+        {
+          "name": "left-leaf",
+          "baseDegrees": -3.588,
+          "tipDegrees": -2.04
+        },
+        {
+          "name": "right-leaf",
+          "baseDegrees": -0.0,
+          "tipDegrees": -0.0
+        },
+        {
+          "name": "front-leaf",
+          "baseDegrees": -0.0,
+          "tipDegrees": -0.0
+        }
+      ]
+    },
+    {
+      "frame": 10,
+      "expression": "open",
+      "durationMs": 20,
+      "bodyDegrees": -0.455,
+      "bodyLiftPixels": -0.234,
+      "parts": [
+        {
+          "name": "rear-leaf",
+          "baseDegrees": 2.42,
+          "tipDegrees": 1.4000000000000001
+        },
+        {
+          "name": "left-leaf",
+          "baseDegrees": -2.6312,
+          "tipDegrees": -1.6800000000000002
+        },
+        {
+          "name": "right-leaf",
+          "baseDegrees": -0.0,
+          "tipDegrees": -0.0
+        },
+        {
+          "name": "front-leaf",
+          "baseDegrees": -0.0,
+          "tipDegrees": -0.0
+        }
+      ]
+    },
+    {
+      "frame": 11,
+      "expression": "open",
+      "durationMs": 20,
+      "bodyDegrees": -0.24500000000000002,
+      "bodyLiftPixels": -0.12600000000000003,
+      "parts": [
+        {
+          "name": "rear-leaf",
+          "baseDegrees": 1.1,
+          "tipDegrees": 0.7000000000000001
+        },
+        {
+          "name": "left-leaf",
+          "baseDegrees": -1.1960000000000002,
+          "tipDegrees": -0.8400000000000001
+        },
+        {
+          "name": "right-leaf",
+          "baseDegrees": -0.0,
+          "tipDegrees": -0.0
+        },
+        {
+          "name": "front-leaf",
+          "baseDegrees": -0.0,
+          "tipDegrees": -0.0
+        }
+      ]
+    },
+    {
+      "frame": 12,
+      "expression": "open",
+      "durationMs": 20,
+      "bodyDegrees": -0.08750000000000001,
+      "bodyLiftPixels": -0.045000000000000005,
+      "parts": [
+        {
+          "name": "rear-leaf",
+          "baseDegrees": 0.275,
+          "tipDegrees": 0.2
+        },
+        {
+          "name": "left-leaf",
+          "baseDegrees": -0.29900000000000004,
+          "tipDegrees": -0.24
+        },
+        {
+          "name": "right-leaf",
+          "baseDegrees": -0.0,
+          "tipDegrees": -0.0
+        },
+        {
+          "name": "front-leaf",
+          "baseDegrees": -0.0,
+          "tipDegrees": -0.0
+        }
+      ]
+    },
+    {
+      "frame": 13,
+      "expression": "open",
+      "durationMs": 20,
+      "bodyDegrees": 0.0,
+      "bodyLiftPixels": 0.0,
+      "parts": [
+        {
+          "name": "rear-leaf",
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "left-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "right-leaf",
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "front-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0
+        }
+      ]
+    },
+    {
+      "frame": 14,
+      "expression": "open",
+      "durationMs": 20,
+      "bodyDegrees": 0.0,
+      "bodyLiftPixels": 0.0,
+      "parts": [
+        {
+          "name": "rear-leaf",
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "left-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "right-leaf",
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "front-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0
+        }
+      ]
+    },
+    {
+      "frame": 15,
+      "expression": "open",
+      "durationMs": 20,
+      "bodyDegrees": 0.0,
+      "bodyLiftPixels": 0.0,
+      "parts": [
+        {
+          "name": "rear-leaf",
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "left-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "right-leaf",
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "front-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0
+        }
+      ]
+    }
+  ]
+}

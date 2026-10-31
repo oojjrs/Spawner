@@ -1,0 +1,17 @@
+{
+  "provider": "OpenAI built-in image_gen",
+  "neutralReference": "seed.png",
+  "referenceCanvas": "edit-canvas.png",
+  "authoredCrouchTarget": "authored-crouch-key.png",
+  "drawnStrip": "generated-strip.png",
+  "requestedLayout": "eight complete cels in a single row",
+  "usedDrawings": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "recovery": "Reverse the same approved contact drawings, then seed-half.png and seed.png. Generated neutral cels 0,6,7 are excluded.",
+  "method": "Complete drawn neck/torso/limb overlaps. Failed rig source remains only in the project $Trash.",
+  "prompt": "Precise eight-cel production animation EDIT. Image1 is the actual edit canvas: EIGHT identical copies of the APPROVED original character at their exact intended scale, anatomy, footprint, camera and color. Keep that exact canvas layout and padding; NEVER enlarge the copied characters, lengthen legs/body, change head size or restyle them. Image2 is a supporting crouched-pose guide only: use its physical body curling, not its enlarged rendering. Change the EIGHT copies in image1 into a coherent animation row while preserving original absolute anatomy and illustration appearance. Cel0 unchanged original. Cel1 a VERY SMALL contact recoil, only 15 percent of total curl, eyes half shut; keep it extremely near original body/limb proportions. Cel2 45 percent curl, eyes shut, head/chest descending and front knees bending. Cel3 75 percent curl. Cel4 deepest fully curled pose matching image2 anatomy idea, eyes shut; this is the held peak. Cel5 same intermediate75 percent pose as cel3 on return. Cel6 same small 45 percent pose as cel2 on return with eyes reopening. Cel7 unchanged original as cel0. All COMPLETE bodies must be drawn intact: neck/shoulders/forelimbs overlap smoothly inside each cel, no detachable cutout appearance, holes or black gaps. Same palette, exact character proportions, fur texture, light direction, face identity and limb lengths throughout. The rear planted foot must retain its copied image1 position in each slot. Do not rotate or scale whole sprites; draw actual body/neck/joint flexion. No effects, text, lines, scenery, white matte, ghosting or extra anatomy. Transparent background. Mole: pull muzzle/neck/shoulders inward under rounded back, fold elbows and gather rigid-claw paws under the tucked face. Preserve original camera with the REAR foot visually higher in image space than the FRONT claws. Claw length/count and head size stay identical."
+}

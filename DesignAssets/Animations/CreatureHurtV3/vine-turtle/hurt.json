@@ -1,0 +1,52 @@
+{
+  "image": "DesignAssets/Animations/CreatureHurtV3/vine-turtle/hurt.webp",
+  "frameSize": 346,
+  "columns": 4,
+  "pivotX": 177.392578,
+  "pivotY": 298.438516,
+  "frameCount": 16,
+  "durationsMs": [
+    20,
+    30,
+    30,
+    30,
+    400,
+    30,
+    30,
+    30,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+  ],
+  "durationMs": 760,
+  "loop": false,
+  "closedEyeHold": {
+    "fromMs": 110,
+    "toMs": 510,
+    "durationMs": 400
+  },
+  "method": "Approved neutral body reused at fixed scale; V2 painted eyelids locally registered and color-corrected; coherent ground-pivot rotation/lift. Corrective compositing, not a part rig.",
+  "seed": "Source/seed.png",
+  "seedSha256": "4d0e0a2026b7471dcb9e655a7b1aea036b9e49a74b1128a63db742b16c8e1f76",
+  "expressionRegistration": "expression-registration.json",
+  "expressionConfig": "expression-config.json",
+  "masks": "Masks/expression.png",
+  "timeline": "timeline.json",
+  "renderer": "render.py",
+  "preview": "hurt-preview.webp",
+  "thumbnail": "hurt-thumbnail.webp",
+  "matrix": "hurt-matrix.webp",
+  "previewPauseMs": 900,
+  "artworkScale": 1,
+  "rotationPivot": [
+    177.392578,
+    298.438516
+  ],
+  "peakRotationDegrees": 5.5,
+  "peakLiftPixels": 3.8
+}

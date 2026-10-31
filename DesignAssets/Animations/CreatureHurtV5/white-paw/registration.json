@@ -1,0 +1,158 @@
+{
+  "species": "white-paw",
+  "registrationScale": 0.565,
+  "scaleAuthority": "One shared original-head and paw-size match, unchanged for every drawn pose. No per-pose bounding-box fitting.",
+  "commonTranslation": [
+    5,
+    9
+  ],
+  "anchor": [
+    192.1860465116279,
+    241.0
+  ],
+  "anchorRegion": [
+    166,
+    207,
+    180,
+    259
+  ],
+  "anchorMeaning": "Planted near hind-paw contact bearing the curled pose; front paws retain the intentional lift or folding drawn in each cel.",
+  "cells": [
+    {
+      "cel": 0,
+      "rawCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "translationPixels": [
+        1,
+        -1
+      ],
+      "hindPawLandmarkBeforeTranslation": [
+        191.6326530612245,
+        242.0
+      ]
+    },
+    {
+      "cel": 1,
+      "rawCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "translationPixels": [
+        8,
+        -2
+      ],
+      "hindPawLandmarkBeforeTranslation": [
+        184.41304347826087,
+        243.0
+      ]
+    },
+    {
+      "cel": 2,
+      "rawCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "translationPixels": [
+        20,
+        -5
+      ],
+      "hindPawLandmarkBeforeTranslation": [
+        172.390243902439,
+        246.0
+      ]
+    },
+    {
+      "cel": 3,
+      "rawCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "translationPixels": [
+        26,
+        -1
+      ],
+      "hindPawLandmarkBeforeTranslation": [
+        166.25,
+        242.0
+      ]
+    },
+    {
+      "cel": 4,
+      "rawCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "translationPixels": [
+        0,
+        14
+      ],
+      "hindPawLandmarkBeforeTranslation": [
+        191.84444444444443,
+        227.0
+      ]
+    },
+    {
+      "cel": 5,
+      "rawCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "translationPixels": [
+        20,
+        22
+      ],
+      "hindPawLandmarkBeforeTranslation": [
+        171.89473684210526,
+        219.0
+      ]
+    },
+    {
+      "cel": 6,
+      "rawCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "translationPixels": [
+        11,
+        26
+      ],
+      "hindPawLandmarkBeforeTranslation": [
+        181.125,
+        215.0
+      ]
+    },
+    {
+      "cel": 7,
+      "rawCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "translationPixels": [
+        10,
+        26
+      ],
+      "hindPawLandmarkBeforeTranslation": [
+        182.6,
+        215.0
+      ]
+    }
+  ]
+}

@@ -1,0 +1,634 @@
+{
+  "durationMs": 760,
+  "closedEyeHold": {
+    "fromMs": 110,
+    "toMs": 510,
+    "durationMs": 400
+  },
+  "poses": [
+    {
+      "frame": 0,
+      "expression": "open",
+      "durationMs": 20,
+      "bodyDegrees": 0.0,
+      "bodyLiftPixels": 0.0,
+      "parts": [
+        {
+          "name": "loop-vine",
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "curl-vine",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "rear-right-leaf",
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "rear-left-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "front-left-leaf",
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "front-right-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0
+        }
+      ]
+    },
+    {
+      "frame": 1,
+      "expression": "half",
+      "durationMs": 30,
+      "bodyDegrees": 0.9800000000000001,
+      "bodyLiftPixels": 0.7000000000000001,
+      "parts": [
+        {
+          "name": "loop-vine",
+          "baseDegrees": 0.72,
+          "tipDegrees": 0
+        },
+        {
+          "name": "curl-vine",
+          "baseDegrees": -0.8096,
+          "tipDegrees": 0
+        },
+        {
+          "name": "rear-right-leaf",
+          "baseDegrees": -1.2,
+          "tipDegrees": 0
+        },
+        {
+          "name": "rear-left-leaf",
+          "baseDegrees": 1.0304000000000002,
+          "tipDegrees": 0
+        },
+        {
+          "name": "front-left-leaf",
+          "baseDegrees": 0.96,
+          "tipDegrees": 0
+        },
+        {
+          "name": "front-right-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0
+        }
+      ]
+    },
+    {
+      "frame": 2,
+      "expression": "closed",
+      "durationMs": 30,
+      "bodyDegrees": 2.275,
+      "bodyLiftPixels": 1.625,
+      "parts": [
+        {
+          "name": "loop-vine",
+          "baseDegrees": 3.78,
+          "tipDegrees": -0.9800000000000001
+        },
+        {
+          "name": "curl-vine",
+          "baseDegrees": -4.2504,
+          "tipDegrees": 1.6800000000000002
+        },
+        {
+          "name": "rear-right-leaf",
+          "baseDegrees": -6.3,
+          "tipDegrees": -0.7000000000000001
+        },
+        {
+          "name": "rear-left-leaf",
+          "baseDegrees": 5.4096,
+          "tipDegrees": 0.8400000000000001
+        },
+        {
+          "name": "front-left-leaf",
+          "baseDegrees": 5.04,
+          "tipDegrees": 0.56
+        },
+        {
+          "name": "front-right-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0.0
+        }
+      ]
+    },
+    {
+      "frame": 3,
+      "expression": "closed",
+      "durationMs": 30,
+      "bodyDegrees": 3.15,
+      "bodyLiftPixels": 2.25,
+      "parts": [
+        {
+          "name": "loop-vine",
+          "baseDegrees": 7.0200000000000005,
+          "tipDegrees": -3.8500000000000005
+        },
+        {
+          "name": "curl-vine",
+          "baseDegrees": -7.8936,
+          "tipDegrees": 6.6000000000000005
+        },
+        {
+          "name": "rear-right-leaf",
+          "baseDegrees": -11.700000000000001,
+          "tipDegrees": -2.75
+        },
+        {
+          "name": "rear-left-leaf",
+          "baseDegrees": 10.0464,
+          "tipDegrees": 3.3000000000000003
+        },
+        {
+          "name": "front-left-leaf",
+          "baseDegrees": 9.36,
+          "tipDegrees": 2.2
+        },
+        {
+          "name": "front-right-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0.0
+        }
+      ]
+    },
+    {
+      "frame": 4,
+      "expression": "closed",
+      "durationMs": 400,
+      "bodyDegrees": 3.5,
+      "bodyLiftPixels": 2.5,
+      "parts": [
+        {
+          "name": "loop-vine",
+          "baseDegrees": 9,
+          "tipDegrees": -7
+        },
+        {
+          "name": "curl-vine",
+          "baseDegrees": -10.120000000000001,
+          "tipDegrees": 12
+        },
+        {
+          "name": "rear-right-leaf",
+          "baseDegrees": -15,
+          "tipDegrees": -5
+        },
+        {
+          "name": "rear-left-leaf",
+          "baseDegrees": 12.88,
+          "tipDegrees": 6
+        },
+        {
+          "name": "front-left-leaf",
+          "baseDegrees": 12,
+          "tipDegrees": 4
+        },
+        {
+          "name": "front-right-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0
+        }
+      ]
+    },
+    {
+      "frame": 5,
+      "expression": "closed",
+      "durationMs": 30,
+      "bodyDegrees": 3.22,
+      "bodyLiftPixels": 2.3000000000000003,
+      "parts": [
+        {
+          "name": "loop-vine",
+          "baseDegrees": 8.64,
+          "tipDegrees": -6.859999999999999
+        },
+        {
+          "name": "curl-vine",
+          "baseDegrees": -9.7152,
+          "tipDegrees": 11.76
+        },
+        {
+          "name": "rear-right-leaf",
+          "baseDegrees": -14.399999999999999,
+          "tipDegrees": -4.9
+        },
+        {
+          "name": "rear-left-leaf",
+          "baseDegrees": 12.3648,
+          "tipDegrees": 5.88
+        },
+        {
+          "name": "front-left-leaf",
+          "baseDegrees": 11.52,
+          "tipDegrees": 3.92
+        },
+        {
+          "name": "front-right-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0.0
+        }
+      ]
+    },
+    {
+      "frame": 6,
+      "expression": "closed",
+      "durationMs": 30,
+      "bodyDegrees": 2.275,
+      "bodyLiftPixels": 1.625,
+      "parts": [
+        {
+          "name": "loop-vine",
+          "baseDegrees": 6.3,
+          "tipDegrees": -5.6000000000000005
+        },
+        {
+          "name": "curl-vine",
+          "baseDegrees": -7.084,
+          "tipDegrees": 9.600000000000001
+        },
+        {
+          "name": "rear-right-leaf",
+          "baseDegrees": -10.5,
+          "tipDegrees": -4.0
+        },
+        {
+          "name": "rear-left-leaf",
+          "baseDegrees": 9.016,
+          "tipDegrees": 4.800000000000001
+        },
+        {
+          "name": "front-left-leaf",
+          "baseDegrees": 8.399999999999999,
+          "tipDegrees": 3.2
+        },
+        {
+          "name": "front-right-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0.0
+        }
+      ]
+    },
+    {
+      "frame": 7,
+      "expression": "closed",
+      "durationMs": 30,
+      "bodyDegrees": 1.2249999999999999,
+      "bodyLiftPixels": 0.875,
+      "parts": [
+        {
+          "name": "loop-vine",
+          "baseDegrees": 3.15,
+          "tipDegrees": -2.8000000000000003
+        },
+        {
+          "name": "curl-vine",
+          "baseDegrees": -3.542,
+          "tipDegrees": 4.800000000000001
+        },
+        {
+          "name": "rear-right-leaf",
+          "baseDegrees": -5.25,
+          "tipDegrees": -2.0
+        },
+        {
+          "name": "rear-left-leaf",
+          "baseDegrees": 4.508,
+          "tipDegrees": 2.4000000000000004
+        },
+        {
+          "name": "front-left-leaf",
+          "baseDegrees": 4.199999999999999,
+          "tipDegrees": 1.6
+        },
+        {
+          "name": "front-right-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0.0
+        }
+      ]
+    },
+    {
+      "frame": 8,
+      "expression": "half",
+      "durationMs": 20,
+      "bodyDegrees": 0.35000000000000003,
+      "bodyLiftPixels": 0.25,
+      "parts": [
+        {
+          "name": "loop-vine",
+          "baseDegrees": -1.6199999999999999,
+          "tipDegrees": 0.84
+        },
+        {
+          "name": "curl-vine",
+          "baseDegrees": 1.8216,
+          "tipDegrees": -1.44
+        },
+        {
+          "name": "rear-right-leaf",
+          "baseDegrees": 2.6999999999999997,
+          "tipDegrees": 0.6
+        },
+        {
+          "name": "rear-left-leaf",
+          "baseDegrees": -2.3184,
+          "tipDegrees": -0.72
+        },
+        {
+          "name": "front-left-leaf",
+          "baseDegrees": -2.16,
+          "tipDegrees": -0.48
+        },
+        {
+          "name": "front-right-leaf",
+          "baseDegrees": -0.0,
+          "tipDegrees": -0.0
+        }
+      ]
+    },
+    {
+      "frame": 9,
+      "expression": "half",
+      "durationMs": 20,
+      "bodyDegrees": -0.42,
+      "bodyLiftPixels": -0.3,
+      "parts": [
+        {
+          "name": "loop-vine",
+          "baseDegrees": -2.6999999999999997,
+          "tipDegrees": 2.3800000000000003
+        },
+        {
+          "name": "curl-vine",
+          "baseDegrees": 3.036,
+          "tipDegrees": -4.08
+        },
+        {
+          "name": "rear-right-leaf",
+          "baseDegrees": 4.5,
+          "tipDegrees": 1.7000000000000002
+        },
+        {
+          "name": "rear-left-leaf",
+          "baseDegrees": -3.8640000000000003,
+          "tipDegrees": -2.04
+        },
+        {
+          "name": "front-left-leaf",
+          "baseDegrees": -3.5999999999999996,
+          "tipDegrees": -1.36
+        },
+        {
+          "name": "front-right-leaf",
+          "baseDegrees": -0.0,
+          "tipDegrees": -0.0
+        }
+      ]
+    },
+    {
+      "frame": 10,
+      "expression": "open",
+      "durationMs": 20,
+      "bodyDegrees": -0.455,
+      "bodyLiftPixels": -0.325,
+      "parts": [
+        {
+          "name": "loop-vine",
+          "baseDegrees": -1.98,
+          "tipDegrees": 1.9600000000000002
+        },
+        {
+          "name": "curl-vine",
+          "baseDegrees": 2.2264,
+          "tipDegrees": -3.3600000000000003
+        },
+        {
+          "name": "rear-right-leaf",
+          "baseDegrees": 3.3,
+          "tipDegrees": 1.4000000000000001
+        },
+        {
+          "name": "rear-left-leaf",
+          "baseDegrees": -2.8336,
+          "tipDegrees": -1.6800000000000002
+        },
+        {
+          "name": "front-left-leaf",
+          "baseDegrees": -2.64,
+          "tipDegrees": -1.12
+        },
+        {
+          "name": "front-right-leaf",
+          "baseDegrees": -0.0,
+          "tipDegrees": -0.0
+        }
+      ]
+    },
+    {
+      "frame": 11,
+      "expression": "open",
+      "durationMs": 20,
+      "bodyDegrees": -0.24500000000000002,
+      "bodyLiftPixels": -0.17500000000000002,
+      "parts": [
+        {
+          "name": "loop-vine",
+          "baseDegrees": -0.9,
+          "tipDegrees": 0.9800000000000001
+        },
+        {
+          "name": "curl-vine",
+          "baseDegrees": 1.0120000000000002,
+          "tipDegrees": -1.6800000000000002
+        },
+        {
+          "name": "rear-right-leaf",
+          "baseDegrees": 1.5,
+          "tipDegrees": 0.7000000000000001
+        },
+        {
+          "name": "rear-left-leaf",
+          "baseDegrees": -1.2880000000000003,
+          "tipDegrees": -0.8400000000000001
+        },
+        {
+          "name": "front-left-leaf",
+          "baseDegrees": -1.2000000000000002,
+          "tipDegrees": -0.56
+        },
+        {
+          "name": "front-right-leaf",
+          "baseDegrees": -0.0,
+          "tipDegrees": -0.0
+        }
+      ]
+    },
+    {
+      "frame": 12,
+      "expression": "open",
+      "durationMs": 20,
+      "bodyDegrees": -0.08750000000000001,
+      "bodyLiftPixels": -0.0625,
+      "parts": [
+        {
+          "name": "loop-vine",
+          "baseDegrees": -0.225,
+          "tipDegrees": 0.28
+        },
+        {
+          "name": "curl-vine",
+          "baseDegrees": 0.25300000000000006,
+          "tipDegrees": -0.48
+        },
+        {
+          "name": "rear-right-leaf",
+          "baseDegrees": 0.375,
+          "tipDegrees": 0.2
+        },
+        {
+          "name": "rear-left-leaf",
+          "baseDegrees": -0.32200000000000006,
+          "tipDegrees": -0.24
+        },
+        {
+          "name": "front-left-leaf",
+          "baseDegrees": -0.30000000000000004,
+          "tipDegrees": -0.16
+        },
+        {
+          "name": "front-right-leaf",
+          "baseDegrees": -0.0,
+          "tipDegrees": -0.0
+        }
+      ]
+    },
+    {
+      "frame": 13,
+      "expression": "open",
+      "durationMs": 20,
+      "bodyDegrees": 0.0,
+      "bodyLiftPixels": 0.0,
+      "parts": [
+        {
+          "name": "loop-vine",
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "curl-vine",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "rear-right-leaf",
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "rear-left-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "front-left-leaf",
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "front-right-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0
+        }
+      ]
+    },
+    {
+      "frame": 14,
+      "expression": "open",
+      "durationMs": 20,
+      "bodyDegrees": 0.0,
+      "bodyLiftPixels": 0.0,
+      "parts": [
+        {
+          "name": "loop-vine",
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "curl-vine",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "rear-right-leaf",
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "rear-left-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "front-left-leaf",
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "front-right-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0
+        }
+      ]
+    },
+    {
+      "frame": 15,
+      "expression": "open",
+      "durationMs": 20,
+      "bodyDegrees": 0.0,
+      "bodyLiftPixels": 0.0,
+      "parts": [
+        {
+          "name": "loop-vine",
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "curl-vine",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "rear-right-leaf",
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "rear-left-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "front-left-leaf",
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "front-right-leaf",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0
+        }
+      ]
+    }
+  ]
+}

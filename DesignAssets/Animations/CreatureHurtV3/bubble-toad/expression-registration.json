@@ -1,0 +1,51 @@
+{
+  "eyes": [
+    {
+      "name": "near-eye",
+      "source": "Source/donor-closed.png",
+      "matrix": [
+        [
+          1.0,
+          -0.0,
+          -11.0
+        ],
+        [
+          0.0,
+          1.0,
+          -19.0
+        ]
+      ],
+      "rgbShift": [
+        8.0,
+        10.0,
+        12.0
+      ],
+      "mask": "Masks/near-eye.png"
+    },
+    {
+      "name": "far-eye",
+      "source": "Source/donor-closed.png",
+      "matrix": [
+        [
+          0.4443057770090072,
+          0.37281681361819274,
+          -25.130742292496052
+        ],
+        [
+          -0.37281681361819274,
+          0.4443057770090072,
+          112.11162256531352
+        ]
+      ],
+      "rgbShift": [
+        5.0,
+        18.0,
+        22.0
+      ],
+      "mask": "Masks/far-eye.png"
+    }
+  ],
+  "halfSource": "Source/eyes-closed.png",
+  "halfMask": "Masks/half-occlusion.png",
+  "outsideExpressionMask": "Exact approved neutral pixels; no temporal crossfade."
+}

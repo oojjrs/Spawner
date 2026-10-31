@@ -1,0 +1,18 @@
+Use case: identity-preserve.
+Create one production-quality newly drawn 2D browser-game attack spritesheet of Spring Keeper, the exact small bird with a cream round head, dark round eye, short golden beak, green layered wing feathers, orange-pink breast ruff, swept cream-orange crest and huge fan of cream-yellow-orange tail feathers. Image 1 is the approved character seed; image 2 is the official transparent edit canvas reserving eight slots. Preserve exactly the seed character identity, left-facing three-quarter side camera, anatomy, proportions, palette, outline weight, textures and painterly polished game-art style. This is not pixel art. Anatomy lock: two short bird legs, one beak, two wings, the same crest and multi-feather fan tail; never grow talons, extra wings, a long beak, or mammal limbs.
+
+EXACTLY EIGHT separate complete full-body poses in ONE horizontal row, left to right, eight equal-width cells. Wide 3:1 landscape PNG with one centered row and generous empty transparent margins above/below. Same body scale and shared ground baseline in every cell. Each pose wholly fits inside its cell with a clear gap. No text, labels, numbers, guides, scenery, floor, cast shadows, enemies, weapons, motion ghosts, slash/impact effects, or painted checkerboard. Genuinely transparent background.
+
+Draw a strong anatomical whole-body attack with clear weight preparation, fast commitment, a distinct readable contact silhouette and expression, follow-through and recovery. Actually draw newly exposed undersides, joint bends, overlapping limbs and changed expressions. Do not produce tiny local edits, a rigid sprite rotated or slid around, body-wide scaling, or repetitive idle motion. Intentional lunge, short hop and foot replant are allowed where described. Keep underlying body size, limb lengths, costume and identity stable.
+
+Eight exact poses:
+1. Exact seed-like alert neutral standing pose, wings folded, crest and tail fan as in the seed.
+2. Clear weight preparation: hips crouch on the short legs, chest and head lift back, wings start opening to brace and tail fan counter-rotates.
+3. Maximum wind-up: head and beak pull back, neck flexes, chest twists slightly, wings visibly lifted with newly drawn inner feathers, eyes focused and narrowed, tail high behind.
+4. Fast forward launch: hind-leg push and short intentional hop, body pitches forward toward LEFT, head and short beak shoot forward/down, wings sweep back and fan tail counters upward.
+5. Strong peck CONTACT: whole front body dips low, head and beak point sharply down-left at a close target, neck visibly compressed into the impact, eyes squeezed with effort, wings spread as braces and tail fans upward. A distinctly lower sharper silhouette than the seed.
+6. Recoil: head lifts back from the strike, chest rebounds, wings follow late and the heavy fan tail overshoots.
+7. Replant feet and fold wings while the head, crest and tail recover toward the neutral stance.
+8. Exact initial neutral seed-like pose, same scale, location and tail/crest arrangement as pose one.
+
+Keep each phase visually distinct, especially raised/retracted anticipation versus low extended contact, while preserving exact character identity. Contact pose must read clearly at 64 px display size. Pose 1 and 8 closely match the seed. This entire strip is the actual final source for the animation; draw all eight at once.

@@ -1,0 +1,110 @@
+{
+  "species": "shadow-weasel",
+  "size": 319,
+  "registrationScale": 0.6904315196998124,
+  "commonCanvasTranslation": [
+    6.962476547842385,
+    7.906191369605978
+  ],
+  "anchor": [
+    133.14606741573033,
+    268.0
+  ],
+  "anchorRegion": [
+    110,
+    180,
+    230,
+    295
+  ],
+  "cells": [
+    {
+      "cel": 0,
+      "translationPixels": [
+        -3,
+        0
+      ],
+      "footAnchor": [
+        136.35,
+        268.0
+      ]
+    },
+    {
+      "cel": 1,
+      "translationPixels": [
+        -2,
+        0
+      ],
+      "footAnchor": [
+        135.57971014492753,
+        268.0
+      ]
+    },
+    {
+      "cel": 2,
+      "translationPixels": [
+        -2,
+        0
+      ],
+      "footAnchor": [
+        135.0126582278481,
+        268.0
+      ]
+    },
+    {
+      "cel": 3,
+      "translationPixels": [
+        -3,
+        0
+      ],
+      "footAnchor": [
+        135.93827160493828,
+        268.0
+      ]
+    },
+    {
+      "cel": 4,
+      "translationPixels": [
+        -13,
+        16
+      ],
+      "footAnchor": [
+        145.9718309859155,
+        252.0
+      ]
+    },
+    {
+      "cel": 5,
+      "translationPixels": [
+        -18,
+        17
+      ],
+      "footAnchor": [
+        151.46987951807228,
+        251.0
+      ]
+    },
+    {
+      "cel": 6,
+      "translationPixels": [
+        -18,
+        15
+      ],
+      "footAnchor": [
+        151.14084507042253,
+        253.0
+      ]
+    },
+    {
+      "cel": 7,
+      "translationPixels": [
+        -6,
+        4
+      ],
+      "footAnchor": [
+        138.7910447761194,
+        264.0
+      ]
+    }
+  ],
+  "construction": "Eight complete native drawn anatomical poses; common neutral-to-original scale registration and planted near-forefoot translation. No whole-body animation transforms or mesh; every body bend and joint pose is drawn."
+}

@@ -1,0 +1,184 @@
+{
+  "species": "talon-owl",
+  "commonArtworkScale": 1.0695067264573992,
+  "commonNeutralTranslation": [
+    -72.75336322869958,
+    -286.9461883408072
+  ],
+  "neutralOnlyScaleCalibration": true,
+  "preserveNativeSlotCoordinates": true,
+  "footAnchor": [
+    232.7,
+    344.0
+  ],
+  "footRegion": [
+    197,
+    251,
+    309,
+    355
+  ],
+  "paletteShiftSharedByAllCels": [
+    12.0,
+    12.0,
+    12.0
+  ],
+  "feetFixedMask": "Source/feet-fixed-mask.png",
+  "feetOriginal": "Source/feet-original.png",
+  "footMarkers": [
+    [
+      168,
+      331
+    ],
+    [
+      220,
+      342
+    ]
+  ],
+  "cels": [
+    {
+      "cel": 0,
+      "contactTranslation": [
+        0,
+        0
+      ],
+      "drawnFootAnchor": [
+        228.69387755102042,
+        346.0
+      ],
+      "sourceBox": [
+        50,
+        348,
+        248,
+        600
+      ],
+      "sourceSlotOrigin": 0.0
+    },
+    {
+      "cel": 1,
+      "contactTranslation": [
+        0,
+        0
+      ],
+      "drawnFootAnchor": [
+        232.74193548387098,
+        347.0
+      ],
+      "sourceBox": [
+        316,
+        361,
+        522,
+        599
+      ],
+      "sourceSlotOrigin": 271.5
+    },
+    {
+      "cel": 2,
+      "contactTranslation": [
+        0,
+        0
+      ],
+      "drawnFootAnchor": [
+        233.4,
+        348.0
+      ],
+      "sourceBox": [
+        572,
+        365,
+        800,
+        601
+      ],
+      "sourceSlotOrigin": 543.0
+    },
+    {
+      "cel": 3,
+      "contactTranslation": [
+        0,
+        0
+      ],
+      "drawnFootAnchor": [
+        237.13333333333333,
+        347.0
+      ],
+      "sourceBox": [
+        829,
+        382,
+        1073,
+        600
+      ],
+      "sourceSlotOrigin": 814.5
+    },
+    {
+      "cel": 4,
+      "contactTranslation": [
+        0,
+        0
+      ],
+      "drawnFootAnchor": [
+        237.37209302325581,
+        348.0
+      ],
+      "sourceBox": [
+        1097,
+        394,
+        1375,
+        600
+      ],
+      "sourceSlotOrigin": 1086.0
+    },
+    {
+      "cel": 5,
+      "contactTranslation": [
+        0,
+        0
+      ],
+      "drawnFootAnchor": [
+        240.6,
+        347.0
+      ],
+      "sourceBox": [
+        1399,
+        371,
+        1619,
+        599
+      ],
+      "sourceSlotOrigin": 1357.5
+    },
+    {
+      "cel": 6,
+      "contactTranslation": [
+        0,
+        0
+      ],
+      "drawnFootAnchor": [
+        238.93939393939394,
+        347.0
+      ],
+      "sourceBox": [
+        1674,
+        363,
+        1885,
+        599
+      ],
+      "sourceSlotOrigin": 1629.0
+    },
+    {
+      "cel": 7,
+      "contactTranslation": [
+        0,
+        0
+      ],
+      "drawnFootAnchor": [
+        227.22916666666666,
+        346.0
+      ],
+      "sourceBox": [
+        1945,
+        348,
+        2145,
+        599
+      ],
+      "sourceSlotOrigin": 1900.5
+    }
+  ],
+  "method": "Jointly drawn whole-body head-down and small wing-open poses preserve original shared slot coordinates, one anatomical scale and one neutral translation. Exact original foot/claw support plate in every final frame. No per-pose fit, root tilt/scale or new perch."
+}

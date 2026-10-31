@@ -1,0 +1,80 @@
+{
+  "format": "project-native layered rigid attachments; baked sprite output; no Spine compatibility claim",
+  "canvas": [
+    256,
+    256
+  ],
+  "root": [
+    128,
+    224
+  ],
+  "bones": [
+    {
+      "name": "body",
+      "parent": "root",
+      "pivot": [
+        128,
+        224
+      ]
+    },
+    {
+      "name": "mandible-far",
+      "parent": "body",
+      "pivot": [
+        52,
+        156
+      ]
+    },
+    {
+      "name": "mandible-near",
+      "parent": "body",
+      "pivot": [
+        88,
+        164
+      ]
+    }
+  ],
+  "drawOrder": [
+    "mandible-far",
+    "mandible-near",
+    "base-foreground"
+  ],
+  "attachments": [
+    {
+      "name": "mandible-far",
+      "bone": "mandible-far",
+      "parent": "body",
+      "pivot": [
+        52,
+        156
+      ],
+      "sourceMask": "Masks/mandible-far.png",
+      "underlapMask": "Masks/mandible-far-overlap.png",
+      "binding": {
+        "type": "rigid-region",
+        "weight": 1
+      },
+      "scale": 1,
+      "occlusion": "Below base foreground at the root. Existing source overlap completes the covered root; no newly exposed viewing angle."
+    },
+    {
+      "name": "mandible-near",
+      "bone": "mandible-near",
+      "parent": "body",
+      "pivot": [
+        88,
+        164
+      ],
+      "sourceMask": "Masks/mandible-near.png",
+      "underlapMask": "Masks/mandible-near-overlap.png",
+      "binding": {
+        "type": "rigid-region",
+        "weight": 1
+      },
+      "scale": 1,
+      "occlusion": "Below base foreground at the root. Existing source overlap completes the covered root; no newly exposed viewing angle."
+    }
+  ],
+  "newArtwork": false,
+  "hiddenSurfaces": "All articulation is in the original image plane. Root underlap uses original source pixels; fixed foreground covers every root cut."
+}

@@ -1,0 +1,215 @@
+{
+  "species": "lantern-keeper", 
+  "action": "attack", 
+  "revision": 2, 
+  "image": "DesignAssets/Animations/CreatureAttackV2/lantern-keeper/attack.webp", 
+  "frameSize": 512, 
+  "columns": 4, 
+  "frameCount": 8, 
+  "durationsMs": [
+    70, 
+    100, 
+    120, 
+    40, 
+    260, 
+    110, 
+    160, 
+    140
+  ], 
+  "durationMs": 1000, 
+  "loop": false, 
+  "pivotX": 256, 
+  "pivotY": 448, 
+  "impactFrame": 4, 
+  "impactMs": 330, 
+  "impactHoldMs": 260, 
+  "previewPauseMs": 800, 
+  "facing": "left", 
+  "rootMotion": true, 
+  "rootMotionDescription": "Intentional short hind-leg push and shoulder lunge toward the left, forepaw replant and leaf-ear overshoot; the common raw ground transform preserves the drawn posture height.", 
+  "description": "Fold leaf ears while loading the hind legs, launch a low body/head butt, hold the forehead contact with eyes braced, then replant and let ear-tip dew drops follow.", 
+  "artworkMethod": "full-strip newly drawn cels with image_gen; no mesh warp, in-between crossfade or reused V1 artwork", 
+  "actualSource": "Source/raw-drawn-strip.png", 
+  "seed": "Source/seed.png", 
+  "editCanvas": "Source/edit-canvas.png", 
+  "prompt": "Source/prompt.txt", 
+  "frames": "Frames", 
+  "exporter": "export.py", 
+  "preview": "attack-preview.webp", 
+  "thumbnail": "attack-thumbnail.webp", 
+  "sourceBounds": [
+    76, 
+    119, 
+    436, 
+    448
+  ], 
+  "normalization": {
+    "pipeline": "OpenAI game-studio sprite-pipeline", 
+    "officialNormalizer": "normalize_sprite_strip.py", 
+    "wrapperPurpose": "Official slot extraction and frame-1 lockback are retained; explicit anatomical landmarks, ground contacts and one shared scale preserve the intended attack trajectory instead of fitting each pose to its own bounds.", 
+    "commonScale": 1.24, 
+    "registrations": [
+      {
+        "cell": 0, 
+        "rawCrop": [
+          0, 
+          150, 
+          285, 
+          550
+        ], 
+        "sharedScale": 1.24, 
+        "landmark": "nose tip", 
+        "rawLandmarkLocalX": 76, 
+        "targetLandmarkX": 178, 
+        "rawGroundContactY": 532, 
+        "targetGroundY": 448, 
+        "declaredVerticalMotion": 0, 
+        "translation": [
+          81, 
+          -26
+        ]
+      }, 
+      {
+        "cell": 1, 
+        "rawCrop": [
+          285, 
+          150, 
+          535, 
+          550
+        ], 
+        "sharedScale": 1.24, 
+        "landmark": "nose tip", 
+        "rawLandmarkLocalX": 20, 
+        "targetLandmarkX": 188, 
+        "rawGroundContactY": 532, 
+        "targetGroundY": 448, 
+        "declaredVerticalMotion": 0, 
+        "translation": [
+          161, 
+          -26
+        ]
+      }, 
+      {
+        "cell": 2, 
+        "rawCrop": [
+          552, 
+          150, 
+          787, 
+          550
+        ], 
+        "sharedScale": 1.24, 
+        "landmark": "nose tip", 
+        "rawLandmarkLocalX": 20, 
+        "targetLandmarkX": 196, 
+        "rawGroundContactY": 532, 
+        "targetGroundY": 448, 
+        "declaredVerticalMotion": 0, 
+        "translation": [
+          169, 
+          -26
+        ]
+      }, 
+      {
+        "cell": 3, 
+        "rawCrop": [
+          794, 
+          150, 
+          1089, 
+          550
+        ], 
+        "sharedScale": 1.24, 
+        "landmark": "nose tip", 
+        "rawLandmarkLocalX": 28, 
+        "targetLandmarkX": 155, 
+        "rawGroundContactY": 532, 
+        "targetGroundY": 448, 
+        "declaredVerticalMotion": -14, 
+        "translation": [
+          118, 
+          -40
+        ]
+      }, 
+      {
+        "cell": 4, 
+        "rawCrop": [
+          1095, 
+          150, 
+          1383, 
+          550
+        ], 
+        "sharedScale": 1.24, 
+        "landmark": "nose tip", 
+        "rawLandmarkLocalX": 27, 
+        "targetLandmarkX": 145, 
+        "rawGroundContactY": 532, 
+        "targetGroundY": 448, 
+        "declaredVerticalMotion": 0, 
+        "translation": [
+          109, 
+          -26
+        ]
+      }, 
+      {
+        "cell": 5, 
+        "rawCrop": [
+          1394, 
+          150, 
+          1642, 
+          550
+        ], 
+        "sharedScale": 1.24, 
+        "landmark": "nose tip", 
+        "rawLandmarkLocalX": 22, 
+        "targetLandmarkX": 165, 
+        "rawGroundContactY": 532, 
+        "targetGroundY": 448, 
+        "declaredVerticalMotion": 0, 
+        "translation": [
+          135, 
+          -26
+        ]
+      }, 
+      {
+        "cell": 6, 
+        "rawCrop": [
+          1635, 
+          150, 
+          1879, 
+          550
+        ], 
+        "sharedScale": 1.24, 
+        "landmark": "nose tip", 
+        "rawLandmarkLocalX": 20, 
+        "targetLandmarkX": 177, 
+        "rawGroundContactY": 532, 
+        "targetGroundY": 448, 
+        "declaredVerticalMotion": 0, 
+        "translation": [
+          150, 
+          -26
+        ]
+      }, 
+      {
+        "cell": 7, 
+        "rawCrop": [
+          1886, 
+          150, 
+          2170, 
+          550
+        ], 
+        "sharedScale": 1.24, 
+        "landmark": "nose tip", 
+        "rawLandmarkLocalX": 74, 
+        "targetLandmarkX": 178, 
+        "rawGroundContactY": 532, 
+        "targetGroundY": 448, 
+        "declaredVerticalMotion": 0, 
+        "translation": [
+          84, 
+          -26
+        ]
+      }
+    ], 
+    "firstAndLast": "exact seed pixels"
+  }
+}

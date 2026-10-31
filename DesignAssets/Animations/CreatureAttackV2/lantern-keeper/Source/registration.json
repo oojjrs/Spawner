@@ -1,0 +1,56 @@
+{
+  "commonScale": 1.24, 
+  "landmark": "nose tip", 
+  "localLandmarkX": [
+    76, 
+    20, 
+    20, 
+    28, 
+    27, 
+    22, 
+    20, 
+    74
+  ], 
+  "targetLandmarkX": [
+    178, 
+    188, 
+    196, 
+    155, 
+    145, 
+    165, 
+    177, 
+    178
+  ], 
+  "groundY": [
+    532, 
+    532, 
+    532, 
+    532, 
+    532, 
+    532, 
+    532, 
+    532
+  ], 
+  "verticalMotion": [
+    0, 
+    0, 
+    0, 
+    -14, 
+    0, 
+    0, 
+    0, 
+    0
+  ], 
+  "durationsMs": [
+    70, 
+    100, 
+    120, 
+    40, 
+    260, 
+    110, 
+    160, 
+    140
+  ], 
+  "description": "Fold leaf ears while loading the hind legs, launch a low body/head butt, hold the forehead contact with eyes braced, then replant and let ear-tip dew drops follow.", 
+  "rootMotionDescription": "Intentional short hind-leg push and shoulder lunge toward the left, forepaw replant and leaf-ear overshoot; the common raw ground transform preserves the drawn posture height."
+}

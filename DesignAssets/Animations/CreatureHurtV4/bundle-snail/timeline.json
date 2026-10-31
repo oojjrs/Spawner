@@ -1,0 +1,316 @@
+{
+  "contract": "20ms neutral; impact closes by80ms; peak at110ms held400ms; return to exact neutral before760ms.",
+  "pivot": [
+    199.0,
+    348.25
+  ],
+  "scaling": 1,
+  "poses": [
+    {
+      "expression": "neutral",
+      "clockwiseDegrees": 0,
+      "translationPixels": [
+        0,
+        0.0
+      ],
+      "durationMs": 20,
+      "parts": {
+        "eye-far": {
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        },
+        "eye-near": {
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        }
+      }
+    },
+    {
+      "expression": "half",
+      "clockwiseDegrees": 1.5,
+      "translationPixels": [
+        0,
+        -1.39921875
+      ],
+      "durationMs": 30,
+      "parts": {
+        "eye-far": {
+          "baseDegrees": 1.44,
+          "tipDegrees": 0
+        },
+        "eye-near": {
+          "baseDegrees": -1.2,
+          "tipDegrees": 0
+        }
+      }
+    },
+    {
+      "expression": "pain",
+      "clockwiseDegrees": 3.5,
+      "translationPixels": [
+        0,
+        -3.2648437500000003
+      ],
+      "durationMs": 30,
+      "parts": {
+        "eye-far": {
+          "baseDegrees": 5.76,
+          "tipDegrees": 0.22
+        },
+        "eye-near": {
+          "baseDegrees": -4.8,
+          "tipDegrees": -0.44
+        }
+      }
+    },
+    {
+      "expression": "pain",
+      "clockwiseDegrees": 4.6,
+      "translationPixels": [
+        0,
+        -4.275390625
+      ],
+      "durationMs": 30,
+      "parts": {
+        "eye-far": {
+          "baseDegrees": 10.2,
+          "tipDegrees": 0.64
+        },
+        "eye-near": {
+          "baseDegrees": -8.5,
+          "tipDegrees": -1.28
+        }
+      }
+    },
+    {
+      "expression": "pain",
+      "clockwiseDegrees": 5,
+      "translationPixels": [
+        0,
+        -4.6640625
+      ],
+      "durationMs": 400,
+      "parts": {
+        "eye-far": {
+          "baseDegrees": 12,
+          "tipDegrees": 1
+        },
+        "eye-near": {
+          "baseDegrees": -10,
+          "tipDegrees": -2
+        }
+      }
+    },
+    {
+      "expression": "pain",
+      "clockwiseDegrees": 4.7,
+      "translationPixels": [
+        0,
+        -4.3531249999999995
+      ],
+      "durationMs": 30,
+      "parts": {
+        "eye-far": {
+          "baseDegrees": 11.16,
+          "tipDegrees": 0.98
+        },
+        "eye-near": {
+          "baseDegrees": -9.3,
+          "tipDegrees": -1.96
+        }
+      }
+    },
+    {
+      "expression": "pain",
+      "clockwiseDegrees": 3.5,
+      "translationPixels": [
+        0,
+        -3.2648437500000003
+      ],
+      "durationMs": 30,
+      "parts": {
+        "eye-far": {
+          "baseDegrees": 8.879999999999999,
+          "tipDegrees": 0.88
+        },
+        "eye-near": {
+          "baseDegrees": -7.4,
+          "tipDegrees": -1.76
+        }
+      }
+    },
+    {
+      "expression": "pain",
+      "clockwiseDegrees": 2.2,
+      "translationPixels": [
+        0,
+        -2.02109375
+      ],
+      "durationMs": 30,
+      "parts": {
+        "eye-far": {
+          "baseDegrees": 4.92,
+          "tipDegrees": 0.64
+        },
+        "eye-near": {
+          "baseDegrees": -4.1,
+          "tipDegrees": -1.28
+        }
+      }
+    },
+    {
+      "expression": "half",
+      "clockwiseDegrees": 1.1,
+      "translationPixels": [
+        0,
+        -1.010546875
+      ],
+      "durationMs": 20,
+      "parts": {
+        "eye-far": {
+          "baseDegrees": 1.2000000000000002,
+          "tipDegrees": 0.3
+        },
+        "eye-near": {
+          "baseDegrees": -1.0,
+          "tipDegrees": -0.6
+        }
+      }
+    },
+    {
+      "expression": "half",
+      "clockwiseDegrees": 0.3,
+      "translationPixels": [
+        0,
+        -0.31093750000000003
+      ],
+      "durationMs": 20,
+      "parts": {
+        "eye-far": {
+          "baseDegrees": -2.16,
+          "tipDegrees": -0.08
+        },
+        "eye-near": {
+          "baseDegrees": 1.7999999999999998,
+          "tipDegrees": 0.16
+        }
+      }
+    },
+    {
+      "expression": "half",
+      "clockwiseDegrees": 0,
+      "translationPixels": [
+        0,
+        0.0
+      ],
+      "durationMs": 20,
+      "parts": {
+        "eye-far": {
+          "baseDegrees": -3.12,
+          "tipDegrees": -0.27
+        },
+        "eye-near": {
+          "baseDegrees": 2.6,
+          "tipDegrees": 0.54
+        }
+      }
+    },
+    {
+      "expression": "neutral",
+      "clockwiseDegrees": 0,
+      "translationPixels": [
+        0,
+        0.0
+      ],
+      "durationMs": 20,
+      "parts": {
+        "eye-far": {
+          "baseDegrees": -1.92,
+          "tipDegrees": -0.24
+        },
+        "eye-near": {
+          "baseDegrees": 1.6,
+          "tipDegrees": 0.48
+        }
+      }
+    },
+    {
+      "expression": "neutral",
+      "clockwiseDegrees": 0,
+      "translationPixels": [
+        0,
+        0.0
+      ],
+      "durationMs": 20,
+      "parts": {
+        "eye-far": {
+          "baseDegrees": -0.72,
+          "tipDegrees": -0.13
+        },
+        "eye-near": {
+          "baseDegrees": 0.6,
+          "tipDegrees": 0.26
+        }
+      }
+    },
+    {
+      "expression": "neutral",
+      "clockwiseDegrees": 0,
+      "translationPixels": [
+        0,
+        0.0
+      ],
+      "durationMs": 20,
+      "parts": {
+        "eye-far": {
+          "baseDegrees": 0.30000000000000004,
+          "tipDegrees": -0.035
+        },
+        "eye-near": {
+          "baseDegrees": -0.25,
+          "tipDegrees": 0.07
+        }
+      }
+    },
+    {
+      "expression": "neutral",
+      "clockwiseDegrees": 0,
+      "translationPixels": [
+        0,
+        0.0
+      ],
+      "durationMs": 20,
+      "parts": {
+        "eye-far": {
+          "baseDegrees": 0.14400000000000002,
+          "tipDegrees": 0.018
+        },
+        "eye-near": {
+          "baseDegrees": -0.12,
+          "tipDegrees": -0.036
+        }
+      }
+    },
+    {
+      "expression": "neutral",
+      "clockwiseDegrees": 0,
+      "translationPixels": [
+        0,
+        0.0
+      ],
+      "durationMs": 20,
+      "parts": {
+        "eye-far": {
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        },
+        "eye-near": {
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        }
+      }
+    }
+  ],
+  "method": "V3 registered expression artwork and ground recoil, augmented with separately extracted articulated attachments, two-bone FK and LBS mesh deformation, fixed-scale body, foreground occluders and delayed follow-through.",
+  "scale": 1
+}

@@ -1,0 +1,127 @@
+{
+  "rawSize": [
+    2172, 
+    724
+  ], 
+  "sourceSlots": 6, 
+  "slotWidth": 362.0, 
+  "sharedScale": 1.2112211221122111, 
+  "sharedOffset": [
+    42.240924092409244, 
+    -214.03300330032994
+  ], 
+  "perFrameFit": false, 
+  "perFrameTranslation": false, 
+  "firstAndLastLockedToSeed": true, 
+  "edgeCleanup": "Only exterior neon matte fringe, detached components smaller than64px farther than8px from substantive artwork, and alpha below16 farther than8px from visible artwork are cleared. Raw source and exact seed are preserved.", 
+  "frames": [
+    {
+      "index": 0, 
+      "file": "Source/Frames/pose-01.png", 
+      "durationMs": 70, 
+      "exactSeed": true, 
+      "sourceCellOriginX": 0.0, 
+      "sharedScale": 1.2112211221122111, 
+      "sharedOffset": [
+        42.240924092409244, 
+        -214.03300330032994
+      ], 
+      "bounds": [
+        77, 
+        120, 
+        451, 
+        397
+      ]
+    }, 
+    {
+      "index": 1, 
+      "file": "Source/Frames/pose-02.png", 
+      "durationMs": 210, 
+      "exactSeed": false, 
+      "sourceCellOriginX": 362.0, 
+      "sharedScale": 1.2112211221122111, 
+      "sharedOffset": [
+        42.240924092409244, 
+        -214.03300330032994
+      ], 
+      "bounds": [
+        59, 
+        23, 
+        456, 
+        388
+      ]
+    }, 
+    {
+      "index": 2, 
+      "file": "Source/Frames/pose-03.png", 
+      "durationMs": 50, 
+      "exactSeed": false, 
+      "sourceCellOriginX": 724.0, 
+      "sharedScale": 1.2112211221122111, 
+      "sharedOffset": [
+        42.240924092409244, 
+        -214.03300330032994
+      ], 
+      "bounds": [
+        21, 
+        98, 
+        478, 
+        393
+      ]
+    }, 
+    {
+      "index": 3, 
+      "file": "Source/Frames/pose-04.png", 
+      "durationMs": 300, 
+      "exactSeed": false, 
+      "sourceCellOriginX": 1086.0, 
+      "sharedScale": 1.2112211221122111, 
+      "sharedOffset": [
+        42.240924092409244, 
+        -214.03300330032994
+      ], 
+      "bounds": [
+        54, 
+        124, 
+        503, 
+        403
+      ]
+    }, 
+    {
+      "index": 4, 
+      "file": "Source/Frames/pose-05.png", 
+      "durationMs": 170, 
+      "exactSeed": false, 
+      "sourceCellOriginX": 1448.0, 
+      "sharedScale": 1.2112211221122111, 
+      "sharedOffset": [
+        42.240924092409244, 
+        -214.03300330032994
+      ], 
+      "bounds": [
+        68, 
+        76, 
+        483, 
+        402
+      ]
+    }, 
+    {
+      "index": 5, 
+      "file": "Source/Frames/pose-06.png", 
+      "durationMs": 220, 
+      "exactSeed": true, 
+      "sourceCellOriginX": 1810.0, 
+      "sharedScale": 1.2112211221122111, 
+      "sharedOffset": [
+        42.240924092409244, 
+        -214.03300330032994
+      ], 
+      "bounds": [
+        77, 
+        120, 
+        451, 
+        397
+      ]
+    }
+  ]
+}

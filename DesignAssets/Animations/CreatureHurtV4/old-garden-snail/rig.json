@@ -1,0 +1,80 @@
+{
+  "format": "project-native layered rigid attachments; baked sprite output; no Spine compatibility claim",
+  "canvas": [
+    352,
+    352
+  ],
+  "root": [
+    180.8125,
+    304.5625
+  ],
+  "bones": [
+    {
+      "name": "body",
+      "parent": "root",
+      "pivot": [
+        180.8125,
+        304.5625
+      ]
+    },
+    {
+      "name": "eye-stalk-far",
+      "parent": "body",
+      "pivot": [
+        75,
+        223
+      ]
+    },
+    {
+      "name": "eye-stalk-near",
+      "parent": "body",
+      "pivot": [
+        102,
+        225
+      ]
+    }
+  ],
+  "drawOrder": [
+    "eye-stalk-far",
+    "eye-stalk-near",
+    "base-foreground"
+  ],
+  "attachments": [
+    {
+      "name": "eye-stalk-far",
+      "bone": "eye-stalk-far",
+      "parent": "body",
+      "pivot": [
+        75,
+        223
+      ],
+      "sourceMask": "Masks/eye-stalk-far.png",
+      "underlapMask": "Masks/eye-stalk-far-overlap.png",
+      "binding": {
+        "type": "rigid-region",
+        "weight": 1
+      },
+      "scale": 1,
+      "occlusion": "Below base foreground at the root. Existing source overlap completes the covered root; no newly exposed viewing angle."
+    },
+    {
+      "name": "eye-stalk-near",
+      "bone": "eye-stalk-near",
+      "parent": "body",
+      "pivot": [
+        102,
+        225
+      ],
+      "sourceMask": "Masks/eye-stalk-near.png",
+      "underlapMask": "Masks/eye-stalk-near-overlap.png",
+      "binding": {
+        "type": "rigid-region",
+        "weight": 1
+      },
+      "scale": 1,
+      "occlusion": "Below base foreground at the root. Existing source overlap completes the covered root; no newly exposed viewing angle."
+    }
+  ],
+  "newArtwork": false,
+  "hiddenSurfaces": "All articulation is in the original image plane. Root underlap uses original source pixels; fixed foreground covers every root cut."
+}

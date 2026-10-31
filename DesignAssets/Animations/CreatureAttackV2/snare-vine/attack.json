@@ -1,0 +1,311 @@
+{
+  "name": "snare-vine", 
+  "action": "attack", 
+  "status": "new drawn cels awaiting actual playback review", 
+  "image": "DesignAssets/Animations/CreatureAttackV2/snare-vine/attack.webp", 
+  "frameSize": 512, 
+  "columns": 6, 
+  "frameCount": 6, 
+  "durationsMs": [
+    70, 
+    210, 
+    50, 
+    300, 
+    170, 
+    220
+  ], 
+  "durationMs": 1020, 
+  "loop": false, 
+  "rootMotion": false, 
+  "rootMotionNote": "Main loop coils upward and back, unfurls into a broad continuous arc, lashes down-left with a planted bulb held 300ms, curls back through a newly drawn recovery.", 
+  "pivotX": 255.5, 
+  "pivotY": 470.16, 
+  "impactFrame": 3, 
+  "hitAtMs": 330, 
+  "impactHoldMs": 300, 
+  "previewPauseMs": 800, 
+  "facing": "left", 
+  "provider": "built-in image_gen", 
+  "artworkMethod": "Newly drawn full-strip cels from one seed-anchored six-pose generation, followed by a targeted anatomy edit of the full strip. Source cels2-5 are new full drawings; first and last are locked exactly to shipped neutral. No mesh warp, crossfade, synthetic motion interpolation, or per-frame scaling.", 
+  "motion": "Main loop coils upward and back, unfurls into a broad continuous arc, lashes down-left with a planted bulb held 300ms, curls back through a newly drawn recovery.", 
+  "source": "Source/raw-drawn-strip.png", 
+  "initialSource": "Source/raw-initial.png", 
+  "seed": "Source/seed.png", 
+  "editCanvas": "Source/edit-canvas.png", 
+  "prompt": "Source/prompt.txt", 
+  "initialPrompt": "Source/prompt-initial.txt", 
+  "renderer": "export.py", 
+  "preview": "attack-preview.webp", 
+  "contact": "contact.png", 
+  "thumbnail": "DesignAssets/Planning/UnitPreviews/snare-vine/attack-v2.webp", 
+  "normalization": "Official edit-canvas and strip normalizer used; anatomical-anchor registration with one global scale preserves rigid body features and explicit local trajectories. Per-pose translation only registers the declared anatomical anchor; it does not fit each frame to its own extents.", 
+  "normalizationScale": 0.9965034965034965, 
+  "anchorMethod": "bulb-root", 
+  "rootTrajectory": [
+    [
+      0, 
+      0
+    ], 
+    [
+      0, 
+      0
+    ], 
+    [
+      0, 
+      0
+    ], 
+    [
+      0, 
+      0
+    ], 
+    [
+      0, 
+      0
+    ], 
+    [
+      0, 
+      0
+    ]
+  ], 
+  "firstAndLastFrameIdentical": true, 
+  "frames": [
+    {
+      "index": 0, 
+      "file": "Source/Frames/pose-01.png", 
+      "durationMs": 70, 
+      "exactSeed": true, 
+      "anchorMethod": "bulb-root", 
+      "sourceAnchor": [
+        180.3557365383095, 
+        582
+      ], 
+      "targetAnchor": [
+        237.33428935627788, 
+        477
+      ], 
+      "sharedScale": 0.9965034965034965, 
+      "translation": [
+        57.60916728138906, 
+        -102.96503496503499
+      ], 
+      "sourceBounds": [
+        59, 
+        250, 
+        345, 
+        582
+      ], 
+      "projectedBounds": [
+        116.40287357509536, 
+        146.16083916083912, 
+        401.4028735750953, 
+        477.0
+      ], 
+      "bounds": [
+        108, 
+        131, 
+        403, 
+        480
+      ]
+    }, 
+    {
+      "index": 1, 
+      "file": "Source/Frames/pose-02.png", 
+      "durationMs": 210, 
+      "exactSeed": false, 
+      "anchorMethod": "bulb-root", 
+      "sourceAnchor": [
+        493.6567480568423, 
+        582
+      ], 
+      "targetAnchor": [
+        237.33428935627788, 
+        477
+      ], 
+      "sharedScale": 0.9965034965034965, 
+      "translation": [
+        -254.59638615491107, 
+        -102.96503496503499
+      ], 
+      "sourceBounds": [
+        412, 
+        173, 
+        682, 
+        582
+      ], 
+      "projectedBounds": [
+        155.96305440452946, 
+        69.43006993006989, 
+        425.0189984604734, 
+        477.0
+      ], 
+      "bounds": [
+        113, 
+        0, 
+        456, 
+        480
+      ]
+    }, 
+    {
+      "index": 2, 
+      "file": "Source/Frames/pose-03.png", 
+      "durationMs": 50, 
+      "exactSeed": false, 
+      "anchorMethod": "bulb-root", 
+      "sourceAnchor": [
+        897.817425803006, 
+        582
+      ], 
+      "targetAnchor": [
+        237.33428935627788, 
+        477
+      ], 
+      "sharedScale": 0.9965034965034965, 
+      "translation": [
+        -657.3439146781861, 
+        -102.96503496503499
+      ], 
+      "sourceBounds": [
+        694, 
+        184, 
+        1052, 
+        582
+      ], 
+      "projectedBounds": [
+        34.22951189524042, 
+        80.39160839160837, 
+        390.97776364349215, 
+        477.0
+      ], 
+      "bounds": [
+        27, 
+        0, 
+        507, 
+        481
+      ]
+    }, 
+    {
+      "index": 3, 
+      "file": "Source/Frames/pose-04.png", 
+      "durationMs": 300, 
+      "exactSeed": false, 
+      "anchorMethod": "bulb-root", 
+      "sourceAnchor": [
+        1307.4172568664708, 
+        590
+      ], 
+      "targetAnchor": [
+        237.33428935627788, 
+        477
+      ], 
+      "sharedScale": 0.9965034965034965, 
+      "translation": [
+        -1065.5115785001703, 
+        -110.93706293706293
+      ], 
+      "sourceBounds": [
+        1106, 
+        340, 
+        1440, 
+        590
+      ], 
+      "projectedBounds": [
+        36.62128863269663, 
+        227.87412587412587, 
+        369.45345646486453, 
+        477.0
+      ], 
+      "bounds": [
+        33, 
+        14, 
+        397, 
+        509
+      ]
+    }, 
+    {
+      "index": 4, 
+      "file": "Source/Frames/pose-05.png", 
+      "durationMs": 170, 
+      "exactSeed": false, 
+      "anchorMethod": "bulb-root", 
+      "sourceAnchor": [
+        1667.035407814713, 
+        582
+      ], 
+      "targetAnchor": [
+        237.33428935627788, 
+        477
+      ], 
+      "sharedScale": 0.9965034965034965, 
+      "translation": [
+        -1423.8723233262158, 
+        -102.96503496503499
+      ], 
+      "sourceBounds": [
+        1551, 
+        221, 
+        1817, 
+        582
+      ], 
+      "projectedBounds": [
+        121.7045997507073, 
+        117.26223776223773, 
+        386.7745298206373, 
+        477.0
+      ], 
+      "bounds": [
+        4, 
+        0, 
+        416, 
+        480
+      ]
+    }, 
+    {
+      "index": 5, 
+      "file": "Source/Frames/pose-06.png", 
+      "durationMs": 220, 
+      "exactSeed": true, 
+      "anchorMethod": "bulb-root", 
+      "sourceAnchor": [
+        1957.467729019859, 
+        582
+      ], 
+      "targetAnchor": [
+        237.33428935627788, 
+        477
+      ], 
+      "sharedScale": 0.9965034965034965, 
+      "translation": [
+        -1713.2891469047704, 
+        -102.96503496503499
+      ], 
+      "sourceBounds": [
+        1835, 
+        250, 
+        2122, 
+        582
+      ], 
+      "projectedBounds": [
+        115.29476917914553, 
+        146.16083916083912, 
+        401.291272675649, 
+        477.0
+      ], 
+      "bounds": [
+        108, 
+        131, 
+        403, 
+        480
+      ]
+    }
+  ], 
+  "eyeCorrection": {
+    "frame": 1, 
+    "provider": "built-in image_gen", 
+    "generated": "Source/eye-open-generated.png", 
+    "registered": "Source/eye-open-registered.png", 
+    "mask": "Source/eye-open-mask.png", 
+    "prompt": "Source/eye-open-prompt.txt", 
+    "registration": "Source/eye-open-registration.json", 
+    "preserveOutsideMask": true
+  }
+}

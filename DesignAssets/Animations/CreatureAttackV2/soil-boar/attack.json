@@ -1,0 +1,156 @@
+{
+  "name": "soil-boar", 
+  "action": "attack", 
+  "status": "representative awaiting actual playback review", 
+  "image": "DesignAssets/Animations/CreatureAttackV2/soil-boar/attack.webp", 
+  "frameSize": 512, 
+  "columns": 6, 
+  "frameCount": 6, 
+  "durationsMs": [
+    70, 
+    210, 
+    50, 
+    300, 
+    170, 
+    220
+  ], 
+  "durationMs": 1020, 
+  "loop": false, 
+  "rootMotion": true, 
+  "rootMotionNote": "Intentional short charge inside fixed sprite canvas: body mass moves left, near forehoof lifts and reaches, front hooves replant; returns exactly to neutral.", 
+  "pivotX": 256, 
+  "pivotY": 394, 
+  "impactFrame": 3, 
+  "hitAtMs": 330, 
+  "impactHoldMs": 300, 
+  "previewPauseMs": 800, 
+  "facing": "left", 
+  "provider": "built-in image_gen", 
+  "artworkMethod": "Six full-body hand-drawn-style cels generated in one edit strip. Source cels 2-5 newly drawn; first and last locked to shipped neutral. No local mesh deformation, crossfade, synthetic tweening, or per-frame rescaling.", 
+  "motion": "Weight shifts back and up with a lifted forehoof, rapid short charge, low tusk shove with replanted forehooves and 300ms contact hold, weight recoil, exact return.", 
+  "source": "Source/raw-drawn-strip.png", 
+  "seed": "Source/seed.png", 
+  "editCanvas": "Source/edit-canvas.png", 
+  "prompt": "Source/prompt.txt", 
+  "renderer": "export.py", 
+  "preview": "attack-preview.webp", 
+  "contact": "contact.png", 
+  "thumbnail": "DesignAssets/Planning/UnitPreviews/soil-boar/attack-v2.webp", 
+  "normalization": "Official build_sprite_edit_canvas.py and normalize_sprite_strip.py used; export wrapper keeps one shared affine map of original slot coordinates to preserve intentional root and hoof trajectories. Connected components only isolate overhanging tail/hoof pixels crossing nominal cell boundaries.", 
+  "normalizationScale": 1.2112211221122111, 
+  "normalizationOffset": [
+    42.240924092409244, 
+    -214.03300330032994
+  ], 
+  "firstAndLastFrameIdentical": true, 
+  "frames": [
+    {
+      "index": 0, 
+      "file": "Source/Frames/pose-01.png", 
+      "durationMs": 70, 
+      "exactSeed": true, 
+      "sourceCellOriginX": 0.0, 
+      "sharedScale": 1.2112211221122111, 
+      "sharedOffset": [
+        42.240924092409244, 
+        -214.03300330032994
+      ], 
+      "bounds": [
+        77, 
+        120, 
+        451, 
+        397
+      ]
+    }, 
+    {
+      "index": 1, 
+      "file": "Source/Frames/pose-02.png", 
+      "durationMs": 210, 
+      "exactSeed": false, 
+      "sourceCellOriginX": 362.0, 
+      "sharedScale": 1.2112211221122111, 
+      "sharedOffset": [
+        42.240924092409244, 
+        -214.03300330032994
+      ], 
+      "bounds": [
+        59, 
+        23, 
+        456, 
+        388
+      ]
+    }, 
+    {
+      "index": 2, 
+      "file": "Source/Frames/pose-03.png", 
+      "durationMs": 50, 
+      "exactSeed": false, 
+      "sourceCellOriginX": 724.0, 
+      "sharedScale": 1.2112211221122111, 
+      "sharedOffset": [
+        42.240924092409244, 
+        -214.03300330032994
+      ], 
+      "bounds": [
+        21, 
+        98, 
+        478, 
+        393
+      ]
+    }, 
+    {
+      "index": 3, 
+      "file": "Source/Frames/pose-04.png", 
+      "durationMs": 300, 
+      "exactSeed": false, 
+      "sourceCellOriginX": 1086.0, 
+      "sharedScale": 1.2112211221122111, 
+      "sharedOffset": [
+        42.240924092409244, 
+        -214.03300330032994
+      ], 
+      "bounds": [
+        54, 
+        124, 
+        503, 
+        403
+      ]
+    }, 
+    {
+      "index": 4, 
+      "file": "Source/Frames/pose-05.png", 
+      "durationMs": 170, 
+      "exactSeed": false, 
+      "sourceCellOriginX": 1448.0, 
+      "sharedScale": 1.2112211221122111, 
+      "sharedOffset": [
+        42.240924092409244, 
+        -214.03300330032994
+      ], 
+      "bounds": [
+        68, 
+        76, 
+        483, 
+        402
+      ]
+    }, 
+    {
+      "index": 5, 
+      "file": "Source/Frames/pose-06.png", 
+      "durationMs": 220, 
+      "exactSeed": true, 
+      "sourceCellOriginX": 1810.0, 
+      "sharedScale": 1.2112211221122111, 
+      "sharedOffset": [
+        42.240924092409244, 
+        -214.03300330032994
+      ], 
+      "bounds": [
+        77, 
+        120, 
+        451, 
+        397
+      ]
+    }
+  ]
+}

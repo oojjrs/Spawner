@@ -1,0 +1,56 @@
+{
+  "commonScale": 1.3, 
+  "landmark": "near visible eye center", 
+  "localLandmarkX": [
+    65, 
+    63, 
+    85, 
+    70, 
+    74, 
+    63, 
+    65, 
+    65
+  ], 
+  "targetLandmarkX": [
+    160, 
+    173, 
+    180, 
+    145, 
+    139, 
+    154, 
+    160, 
+    160
+  ], 
+  "groundY": [
+    516, 
+    506, 
+    507, 
+    512, 
+    517, 
+    507, 
+    515, 
+    516
+  ], 
+  "verticalMotion": [
+    0, 
+    0, 
+    0, 
+    0, 
+    0, 
+    0, 
+    0, 
+    0
+  ], 
+  "durationsMs": [
+    100, 
+    180, 
+    220, 
+    60, 
+    320, 
+    180, 
+    220, 
+    180
+  ], 
+  "description": "Transfer rock-shell weight onto hind feet, lift the forebody and expose the belly, drive both front feet and head downward-forward, hold the low stomp/ram and recover the heavy mineral mass.", 
+  "rootMotionDescription": "Rear feet carry the raised shell, then front feet deliberately replant into the stomp; the rear contact anchors preserve the rearing height instead of shrinking taller poses."
+}

@@ -1,0 +1,27 @@
+{
+  "frameSize": 283,
+  "displaySize": 282.9473684210526,
+  "scale": 0.552734375,
+  "idleReference": "DesignAssets/Animations/CreatureIdleStudies/V1/snare-vine/idle.webp",
+  "viewSize": 283.21875,
+  "pivotX": 141.23318481445312,
+  "pivotY": 259.8811083984375,
+  "sourcePivot": [
+    255.5,
+    470.16
+  ],
+  "sourceFrameSize": 512,
+  "columns": 6,
+  "frameCount": 6,
+  "image": "DesignAssets/Animations/CreatureAttackV2/snare-vine/runtime.webp",
+  "durationsMs": [
+    70,
+    210,
+    50,
+    300,
+    170,
+    220
+  ],
+  "loop": false,
+  "facing": "left"
+}

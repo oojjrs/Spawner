@@ -1,0 +1,314 @@
+{
+  "durationMs": 760,
+  "closedEyeHold": {
+    "fromMs": 110,
+    "toMs": 510,
+    "durationMs": 400
+  },
+  "poses": [
+    {
+      "frame": 0,
+      "expression": "open",
+      "durationMs": 20,
+      "bodyDegrees": 0.0,
+      "bodyLiftPixels": 0.0,
+      "parts": [
+        {
+          "name": "near-wing",
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "head",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0
+        }
+      ]
+    },
+    {
+      "frame": 1,
+      "expression": "half",
+      "durationMs": 30,
+      "bodyDegrees": 0.6160000000000001,
+      "bodyLiftPixels": 0.5040000000000001,
+      "parts": [
+        {
+          "name": "near-wing",
+          "baseDegrees": -0.8,
+          "tipDegrees": 0
+        },
+        {
+          "name": "head",
+          "baseDegrees": 0.2944,
+          "tipDegrees": 0
+        }
+      ]
+    },
+    {
+      "frame": 2,
+      "expression": "closed",
+      "durationMs": 30,
+      "bodyDegrees": 1.4300000000000002,
+      "bodyLiftPixels": 1.1700000000000002,
+      "parts": [
+        {
+          "name": "near-wing",
+          "baseDegrees": -4.2,
+          "tipDegrees": -0.7000000000000001
+        },
+        {
+          "name": "head",
+          "baseDegrees": 1.5456,
+          "tipDegrees": 0.0
+        }
+      ]
+    },
+    {
+      "frame": 3,
+      "expression": "closed",
+      "durationMs": 30,
+      "bodyDegrees": 1.9800000000000002,
+      "bodyLiftPixels": 1.62,
+      "parts": [
+        {
+          "name": "near-wing",
+          "baseDegrees": -7.800000000000001,
+          "tipDegrees": -2.75
+        },
+        {
+          "name": "head",
+          "baseDegrees": 2.8704,
+          "tipDegrees": 0.0
+        }
+      ]
+    },
+    {
+      "frame": 4,
+      "expression": "closed",
+      "durationMs": 400,
+      "bodyDegrees": 2.2,
+      "bodyLiftPixels": 1.8,
+      "parts": [
+        {
+          "name": "near-wing",
+          "baseDegrees": -10,
+          "tipDegrees": -5
+        },
+        {
+          "name": "head",
+          "baseDegrees": 3.68,
+          "tipDegrees": 0
+        }
+      ]
+    },
+    {
+      "frame": 5,
+      "expression": "closed",
+      "durationMs": 30,
+      "bodyDegrees": 2.0240000000000005,
+      "bodyLiftPixels": 1.6560000000000001,
+      "parts": [
+        {
+          "name": "near-wing",
+          "baseDegrees": -9.6,
+          "tipDegrees": -4.9
+        },
+        {
+          "name": "head",
+          "baseDegrees": 3.5328,
+          "tipDegrees": 0.0
+        }
+      ]
+    },
+    {
+      "frame": 6,
+      "expression": "closed",
+      "durationMs": 30,
+      "bodyDegrees": 1.4300000000000002,
+      "bodyLiftPixels": 1.1700000000000002,
+      "parts": [
+        {
+          "name": "near-wing",
+          "baseDegrees": -7.0,
+          "tipDegrees": -4.0
+        },
+        {
+          "name": "head",
+          "baseDegrees": 2.576,
+          "tipDegrees": 0.0
+        }
+      ]
+    },
+    {
+      "frame": 7,
+      "expression": "closed",
+      "durationMs": 30,
+      "bodyDegrees": 0.77,
+      "bodyLiftPixels": 0.63,
+      "parts": [
+        {
+          "name": "near-wing",
+          "baseDegrees": -3.5,
+          "tipDegrees": -2.0
+        },
+        {
+          "name": "head",
+          "baseDegrees": 1.288,
+          "tipDegrees": 0.0
+        }
+      ]
+    },
+    {
+      "frame": 8,
+      "expression": "half",
+      "durationMs": 20,
+      "bodyDegrees": 0.22000000000000003,
+      "bodyLiftPixels": 0.18000000000000002,
+      "parts": [
+        {
+          "name": "near-wing",
+          "baseDegrees": 1.7999999999999998,
+          "tipDegrees": 0.6
+        },
+        {
+          "name": "head",
+          "baseDegrees": -0.6624,
+          "tipDegrees": -0.0
+        }
+      ]
+    },
+    {
+      "frame": 9,
+      "expression": "half",
+      "durationMs": 20,
+      "bodyDegrees": -0.264,
+      "bodyLiftPixels": -0.216,
+      "parts": [
+        {
+          "name": "near-wing",
+          "baseDegrees": 3.0,
+          "tipDegrees": 1.7000000000000002
+        },
+        {
+          "name": "head",
+          "baseDegrees": -1.104,
+          "tipDegrees": -0.0
+        }
+      ]
+    },
+    {
+      "frame": 10,
+      "expression": "open",
+      "durationMs": 20,
+      "bodyDegrees": -0.28600000000000003,
+      "bodyLiftPixels": -0.234,
+      "parts": [
+        {
+          "name": "near-wing",
+          "baseDegrees": 2.2,
+          "tipDegrees": 1.4000000000000001
+        },
+        {
+          "name": "head",
+          "baseDegrees": -0.8096,
+          "tipDegrees": -0.0
+        }
+      ]
+    },
+    {
+      "frame": 11,
+      "expression": "open",
+      "durationMs": 20,
+      "bodyDegrees": -0.15400000000000003,
+      "bodyLiftPixels": -0.12600000000000003,
+      "parts": [
+        {
+          "name": "near-wing",
+          "baseDegrees": 1.0,
+          "tipDegrees": 0.7000000000000001
+        },
+        {
+          "name": "head",
+          "baseDegrees": -0.36800000000000005,
+          "tipDegrees": -0.0
+        }
+      ]
+    },
+    {
+      "frame": 12,
+      "expression": "open",
+      "durationMs": 20,
+      "bodyDegrees": -0.05500000000000001,
+      "bodyLiftPixels": -0.045000000000000005,
+      "parts": [
+        {
+          "name": "near-wing",
+          "baseDegrees": 0.25,
+          "tipDegrees": 0.2
+        },
+        {
+          "name": "head",
+          "baseDegrees": -0.09200000000000001,
+          "tipDegrees": -0.0
+        }
+      ]
+    },
+    {
+      "frame": 13,
+      "expression": "open",
+      "durationMs": 20,
+      "bodyDegrees": 0.0,
+      "bodyLiftPixels": 0.0,
+      "parts": [
+        {
+          "name": "near-wing",
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "head",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0
+        }
+      ]
+    },
+    {
+      "frame": 14,
+      "expression": "open",
+      "durationMs": 20,
+      "bodyDegrees": 0.0,
+      "bodyLiftPixels": 0.0,
+      "parts": [
+        {
+          "name": "near-wing",
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "head",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0
+        }
+      ]
+    },
+    {
+      "frame": 15,
+      "expression": "open",
+      "durationMs": 20,
+      "bodyDegrees": 0.0,
+      "bodyLiftPixels": 0.0,
+      "parts": [
+        {
+          "name": "near-wing",
+          "baseDegrees": 0,
+          "tipDegrees": 0
+        },
+        {
+          "name": "head",
+          "baseDegrees": 0.0,
+          "tipDegrees": 0
+        }
+      ]
+    }
+  ]
+}

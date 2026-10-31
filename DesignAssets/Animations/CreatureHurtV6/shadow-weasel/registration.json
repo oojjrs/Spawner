@@ -1,0 +1,228 @@
+{
+  "species": "shadow-weasel",
+  "frameSize": 319,
+  "worldSpritePivot": [
+    160.123047,
+    263.897734
+  ],
+  "worldPivotChanged": false,
+  "artworkScale": 1,
+  "anchor": [
+    225,
+    248.5
+  ],
+  "anchorType": "near-hind-paw-visible-front-toe-sole",
+  "selection": "All seven contacts were identified from enlarged source anatomy. The source and registered marker sheets show the chosen toe below the rear hock; no automatic search or tail-tip anchor is used.",
+  "sourceVersion": "CreatureHurtV5",
+  "sourceDrawingsPreserved": true,
+  "construction": "Only per-cel integer registration translation changes from V5. The accepted drawn spine curvature, chest/hip compression, face, joint flexion and tail shape are unchanged.",
+  "cells": [
+    {
+      "cel": 0,
+      "source": "Source/seed.png",
+      "anatomicalContact": [
+        225,
+        248.5
+      ],
+      "contactIdentity": "Visible front toe sole of the near hind paw, underneath rear hock and ahead of the thick tail. Hand-identified in source drawing, not a box maximum or tail endpoint.",
+      "solePixel": [
+        225,
+        248
+      ],
+      "soleRgba": [
+        11,
+        34,
+        35,
+        234
+      ],
+      "nextPixelAlpha": 81,
+      "translationPixels": [
+        0,
+        0
+      ],
+      "registeredContact": [
+        225,
+        248.5
+      ],
+      "registeredDrawing": "Drawings/00.png"
+    },
+    {
+      "cel": 1,
+      "source": "Source/V5Drawings/01.png",
+      "anatomicalContact": [
+        231,
+        247.5
+      ],
+      "contactIdentity": "Visible front toe sole of the near hind paw, underneath rear hock and ahead of the thick tail. Hand-identified in source drawing, not a box maximum or tail endpoint.",
+      "solePixel": [
+        231,
+        247
+      ],
+      "soleRgba": [
+        12,
+        19,
+        24,
+        217
+      ],
+      "nextPixelAlpha": 83,
+      "translationPixels": [
+        -6,
+        1
+      ],
+      "registeredContact": [
+        225,
+        248.5
+      ],
+      "registeredDrawing": "Drawings/01.png"
+    },
+    {
+      "cel": 2,
+      "source": "Source/V5Drawings/02.png",
+      "anatomicalContact": [
+        235,
+        249.5
+      ],
+      "contactIdentity": "Visible front toe sole of the near hind paw, underneath rear hock and ahead of the thick tail. Hand-identified in source drawing, not a box maximum or tail endpoint.",
+      "solePixel": [
+        235,
+        249
+      ],
+      "soleRgba": [
+        17,
+        23,
+        25,
+        224
+      ],
+      "nextPixelAlpha": 51,
+      "translationPixels": [
+        -10,
+        -1
+      ],
+      "registeredContact": [
+        225,
+        248.5
+      ],
+      "registeredDrawing": "Drawings/02.png"
+    },
+    {
+      "cel": 3,
+      "source": "Source/V5Drawings/03.png",
+      "anatomicalContact": [
+        207,
+        260.5
+      ],
+      "contactIdentity": "Visible front toe sole of the near hind paw, underneath rear hock and ahead of the thick tail. Hand-identified in source drawing, not a box maximum or tail endpoint.",
+      "solePixel": [
+        207,
+        260
+      ],
+      "soleRgba": [
+        22,
+        27,
+        29,
+        158
+      ],
+      "nextPixelAlpha": 12,
+      "translationPixels": [
+        18,
+        -12
+      ],
+      "registeredContact": [
+        225,
+        248.5
+      ],
+      "registeredDrawing": "Drawings/03.png"
+    },
+    {
+      "cel": 4,
+      "source": "Source/V5Drawings/04.png",
+      "anatomicalContact": [
+        211,
+        259.5
+      ],
+      "contactIdentity": "Visible front toe sole of the near hind paw, underneath rear hock and ahead of the thick tail. Hand-identified in source drawing, not a box maximum or tail endpoint.",
+      "solePixel": [
+        211,
+        259
+      ],
+      "soleRgba": [
+        15,
+        21,
+        24,
+        225
+      ],
+      "nextPixelAlpha": 70,
+      "translationPixels": [
+        14,
+        -11
+      ],
+      "registeredContact": [
+        225,
+        248.5
+      ],
+      "registeredDrawing": "Drawings/04.png"
+    },
+    {
+      "cel": 5,
+      "source": "Source/V5Drawings/05.png",
+      "anatomicalContact": [
+        205,
+        262.5
+      ],
+      "contactIdentity": "Visible front toe sole of the near hind paw, underneath rear hock and ahead of the thick tail. Hand-identified in source drawing, not a box maximum or tail endpoint.",
+      "solePixel": [
+        205,
+        262
+      ],
+      "soleRgba": [
+        21,
+        25,
+        27,
+        177
+      ],
+      "nextPixelAlpha": 11,
+      "translationPixels": [
+        20,
+        -14
+      ],
+      "registeredContact": [
+        225,
+        248.5
+      ],
+      "registeredDrawing": "Drawings/05.png"
+    },
+    {
+      "cel": 6,
+      "source": "Source/V5Drawings/06.png",
+      "anatomicalContact": [
+        193,
+        261.5
+      ],
+      "contactIdentity": "Visible front toe sole of the near hind paw, underneath rear hock and ahead of the thick tail. Hand-identified in source drawing, not a box maximum or tail endpoint.",
+      "solePixel": [
+        193,
+        261
+      ],
+      "soleRgba": [
+        25,
+        28,
+        30,
+        226
+      ],
+      "nextPixelAlpha": 50,
+      "translationPixels": [
+        32,
+        -13
+      ],
+      "registeredContact": [
+        225,
+        248.5
+      ],
+      "registeredDrawing": "Drawings/06.png"
+    }
+  ],
+  "sourceMarkers": "support-markers-source.png",
+  "registeredMarkers": "support-markers-aligned.png",
+  "contactCrops": "support-contact-crops.png",
+  "registerer": "register.py"
+}

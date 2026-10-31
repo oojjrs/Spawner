@@ -1,0 +1,103 @@
+{
+  "method": "Eight disconnected opaque character components; isolate each with a two-pixel antialias fringe, translate horizontally into equal slots, keep one shared scale and original y registration.",
+  "raw": "../raw-source.png",
+  "slotWidth": 360,
+  "cells": [
+    {
+      "componentLabel": 4323,
+      "opaqueArea": 39745,
+      "rawBounds": [
+        42,
+        230,
+        295,
+        529
+      ],
+      "preparedTranslationX": 11,
+      "scale": 1
+    },
+    {
+      "componentLabel": 4324,
+      "opaqueArea": 40536,
+      "rawBounds": [
+        322,
+        231,
+        578,
+        529
+      ],
+      "preparedTranslationX": 90,
+      "scale": 1
+    },
+    {
+      "componentLabel": 4282,
+      "opaqueArea": 39734,
+      "rawBounds": [
+        597,
+        228,
+        849,
+        523
+      ],
+      "preparedTranslationX": 177,
+      "scale": 1
+    },
+    {
+      "componentLabel": 4325,
+      "opaqueArea": 42799,
+      "rawBounds": [
+        869,
+        221,
+        1128,
+        529
+      ],
+      "preparedTranslationX": 261,
+      "scale": 1
+    },
+    {
+      "componentLabel": 4319,
+      "opaqueArea": 39860,
+      "rawBounds": [
+        1146,
+        231,
+        1394,
+        528
+      ],
+      "preparedTranslationX": 350,
+      "scale": 1
+    },
+    {
+      "componentLabel": 4326,
+      "opaqueArea": 40306,
+      "rawBounds": [
+        1401,
+        228,
+        1652,
+        529
+      ],
+      "preparedTranslationX": 453,
+      "scale": 1
+    },
+    {
+      "componentLabel": 4327,
+      "opaqueArea": 38971,
+      "rawBounds": [
+        1657,
+        230,
+        1898,
+        529
+      ],
+      "preparedTranslationX": 562,
+      "scale": 1
+    },
+    {
+      "componentLabel": 4328,
+      "opaqueArea": 39661,
+      "rawBounds": [
+        1894,
+        230,
+        2146,
+        529
+      ],
+      "preparedTranslationX": 680,
+      "scale": 1
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "name": "dew-rabbit", 
+  "action": "attack", 
+  "revision": 2, 
+  "artworkMethod": "Full-strip newly drawn cels with image_gen eye-open correction, composited only inside the declared eye masks.", 
+  "generationReferences": [
+    "DesignAssets/CreatureConcepts/v3/dew-rabbit.png", 
+    "Source/seed.png", 
+    "Source/edit-canvas.png"
+  ], 
+  "generationTool": "built-in image_gen", 
+  "generationPrompt": "Source/prompt.txt", 
+  "status": "parent-playback-review", 
+  "method": "Eight-pose full-strip drawn animation from the locked approved seed using built-in image_gen. Six new intermediate drawings; exact approved seed at both endpoints. No mesh deformation, crossfades or synthetic inbetweens.", 
+  "image": "DesignAssets/Animations/CreatureAttackV2/dew-rabbit/attack.webp", 
+  "frameSize": 512, 
+  "columns": 4, 
+  "frameCount": 8, 
+  "durationsMs": [
+    100, 
+    110, 
+    110, 
+    40, 
+    200, 
+    90, 
+    130, 
+    190
+  ], 
+  "durationMs": 970, 
+  "impactFrame": 4, 
+  "impactAtMs": 360, 
+  "impactHoldMs": 200, 
+  "loop": false, 
+  "previewPauseMs": 800, 
+  "pivotX": 256, 
+  "pivotY": 448, 
+  "facing": "left", 
+  "rootMotion": false, 
+  "trajectory": "Rear-foot loading, raised front paws, fast forward double-paw shove, short contact hold and paw/ear recoil. Pose 4 has a deliberate 12px takeoff lift; support feet share the approved seed baseline.", 
+  "supportAnchor": "Source/normalization.json", 
+  "source": "Source/raw-drawn-strip.png", 
+  "seed": "Source/seed.png", 
+  "normalization": "Source/normalization.json", 
+  "preview": "attack-preview.webp", 
+  "thumbnail": "DesignAssets/Planning/UnitPreviews/dew-rabbit/attack-v2.webp", 
+  "sourceFrames": [
+    "Frames/01.png", 
+    "Frames/02.png", 
+    "Frames/03.png", 
+    "Frames/04.png", 
+    "Frames/05.png", 
+    "Frames/06.png", 
+    "Frames/07.png", 
+    "Frames/08.png"
+  ], 
+  "spineCompatibilityVerified": false, 
+  "eyeCorrection": {
+    "revisionDate": "2026-10-30", 
+    "provider": "built-in image_gen", 
+    "generatedSource": "Source/eyes-open-generated.png", 
+    "editReference": "Source/eyes-edit-reference.png", 
+    "prompt": "Source/eyes-prompt.txt", 
+    "patches": [
+      {
+        "frameIndex": 4, 
+        "generatedEyeOffset": [
+          0, 
+          0
+        ], 
+        "maskBounds": [
+          117, 
+          247, 
+          181, 
+          308
+        ]
+      }
+    ], 
+    "generatedRegistration": "One common canvas rescale from generated 1774x887 to original2048x1024; integer local eye-patch offsets only. Original drawn frame registration, scale, silhouette and duration remain unchanged.", 
+    "mask": "Source/eyes-open-mask.png", 
+    "maskMethod": "Rounded rectangles with10px corners and2px Gaussian edge feather; only corrected eye/eyelid area is composited.", 
+    "untouchedFrames": [
+      0, 
+      1, 
+      2, 
+      3, 
+      5, 
+      6, 
+      7
+    ], 
+    "firstAndLastExactSeed": true
+  }
+}

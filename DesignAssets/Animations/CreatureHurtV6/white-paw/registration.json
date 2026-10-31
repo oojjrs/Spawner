@@ -1,0 +1,383 @@
+{
+  "species": "white-paw",
+  "previousVersion": "CreatureHurtV5",
+  "scale": 1,
+  "sourceArtworkScale": 0.565,
+  "canvas": [
+    288,
+    288
+  ],
+  "nearSupportTarget": [
+    192.186,
+    241.0
+  ],
+  "worldPivot": [
+    192.5,
+    242
+  ],
+  "identification": "Near hind paw is the complete white paw directly below the near hip, not the tail or opposite paw. Its manually identified per-cel ROI excludes neighboring body and tail pixels.",
+  "soleMetric": "Center of the bottom three visible-alpha rows within each explicitly identified near-hind-paw ROI.",
+  "farPawMotion": "Opposite hind paw follows the drawn compact stance toward the planted near paw during the strongest curl. Its sole remains on the neighboring ground level; it is not used as the primary support anchor.",
+  "records": [
+    {
+      "label": "cel 0",
+      "cel": 0,
+      "nearHindSole": [
+        192.633,
+        241.0
+      ],
+      "nearHindSemanticROI": [
+        182,
+        203,
+        223,
+        247
+      ],
+      "farHindSole": [
+        146.521,
+        236.0
+      ],
+      "farHindSemanticROI": [
+        138,
+        163,
+        218,
+        239
+      ],
+      "pelvis": [
+        174,
+        202
+      ],
+      "source": "Source/V5Drawings/00.png",
+      "translationPixels": [
+        0,
+        0
+      ],
+      "nearHindSoleAfter": [
+        192.633,
+        241.0
+      ],
+      "farHindSoleAfter": [
+        146.521,
+        236.0
+      ],
+      "pelvisAfter": [
+        174,
+        202
+      ]
+    },
+    {
+      "label": "cel 1",
+      "cel": 1,
+      "nearHindSole": [
+        192.413,
+        241.0
+      ],
+      "nearHindSemanticROI": [
+        182,
+        204,
+        221,
+        247
+      ],
+      "farHindSole": [
+        149.587,
+        234.0
+      ],
+      "farHindSemanticROI": [
+        140,
+        165,
+        218,
+        239
+      ],
+      "pelvis": [
+        176,
+        203
+      ],
+      "source": "Source/V5Drawings/01.png",
+      "translationPixels": [
+        0,
+        0
+      ],
+      "nearHindSoleAfter": [
+        192.413,
+        241.0
+      ],
+      "farHindSoleAfter": [
+        149.587,
+        234.0
+      ],
+      "pelvisAfter": [
+        176,
+        203
+      ]
+    },
+    {
+      "label": "cel 2",
+      "cel": 2,
+      "nearHindSole": [
+        190.13,
+        241.0
+      ],
+      "nearHindSemanticROI": [
+        178,
+        205,
+        219,
+        248
+      ],
+      "farHindSole": [
+        153.5,
+        233.0
+      ],
+      "farHindSemanticROI": [
+        142,
+        168,
+        219,
+        239
+      ],
+      "pelvis": [
+        177,
+        204
+      ],
+      "source": "Source/V5Drawings/02.png",
+      "translationPixels": [
+        2,
+        0
+      ],
+      "nearHindSoleAfter": [
+        192.13,
+        241.0
+      ],
+      "farHindSoleAfter": [
+        155.5,
+        233.0
+      ],
+      "pelvisAfter": [
+        179,
+        204
+      ]
+    },
+    {
+      "label": "cel 3",
+      "cel": 3,
+      "nearHindSole": [
+        177.815,
+        248.0
+      ],
+      "nearHindSemanticROI": [
+        168,
+        195,
+        225,
+        253
+      ],
+      "farHindSole": [
+        164.222,
+        243.0
+      ],
+      "farHindSemanticROI": [
+        150,
+        171,
+        220,
+        244
+      ],
+      "pelvis": [
+        173,
+        211
+      ],
+      "source": "Source/V5Drawings/03.png",
+      "translationPixels": [
+        14,
+        -7
+      ],
+      "nearHindSoleAfter": [
+        191.815,
+        241.0
+      ],
+      "farHindSoleAfter": [
+        178.222,
+        236.0
+      ],
+      "pelvisAfter": [
+        187,
+        204
+      ]
+    },
+    {
+      "label": "cel 4",
+      "cel": 4,
+      "nearHindSole": [
+        158.534,
+        241.0
+      ],
+      "nearHindSemanticROI": [
+        149,
+        174,
+        219,
+        248
+      ],
+      "farHindSole": [
+        143.062,
+        240.0
+      ],
+      "farHindSemanticROI": [
+        126,
+        149,
+        221,
+        243
+      ],
+      "pelvis": [
+        160,
+        204
+      ],
+      "source": "Source/V5Drawings/04.png",
+      "translationPixels": [
+        34,
+        0
+      ],
+      "nearHindSoleAfter": [
+        192.534,
+        241.0
+      ],
+      "farHindSoleAfter": [
+        177.062,
+        240.0
+      ],
+      "pelvisAfter": [
+        194,
+        204
+      ]
+    },
+    {
+      "label": "cel 5",
+      "cel": 5,
+      "nearHindSole": [
+        189.13,
+        241.0
+      ],
+      "nearHindSemanticROI": [
+        177,
+        205,
+        220,
+        248
+      ],
+      "farHindSole": [
+        156.769,
+        234.0
+      ],
+      "farHindSemanticROI": [
+        143,
+        168,
+        218,
+        240
+      ],
+      "pelvis": [
+        175,
+        205
+      ],
+      "source": "Source/V5Drawings/05.png",
+      "translationPixels": [
+        3,
+        0
+      ],
+      "nearHindSoleAfter": [
+        192.13,
+        241.0
+      ],
+      "farHindSoleAfter": [
+        159.769,
+        234.0
+      ],
+      "pelvisAfter": [
+        178,
+        205
+      ]
+    },
+    {
+      "label": "cel 6",
+      "cel": 6,
+      "nearHindSole": [
+        192.125,
+        241.0
+      ],
+      "nearHindSemanticROI": [
+        181,
+        205,
+        220,
+        248
+      ],
+      "farHindSole": [
+        144.395,
+        236.0
+      ],
+      "farHindSemanticROI": [
+        136,
+        160,
+        219,
+        242
+      ],
+      "pelvis": [
+        177,
+        205
+      ],
+      "source": "Source/V5Drawings/06.png",
+      "translationPixels": [
+        0,
+        0
+      ],
+      "nearHindSoleAfter": [
+        192.125,
+        241.0
+      ],
+      "farHindSoleAfter": [
+        144.395,
+        236.0
+      ],
+      "pelvisAfter": [
+        177,
+        205
+      ]
+    },
+    {
+      "label": "cel 7",
+      "cel": 7,
+      "nearHindSole": [
+        192.6,
+        241.0
+      ],
+      "nearHindSemanticROI": [
+        183,
+        205,
+        220,
+        248
+      ],
+      "farHindSole": [
+        146.703,
+        236.0
+      ],
+      "farHindSemanticROI": [
+        138,
+        163,
+        219,
+        241
+      ],
+      "pelvis": [
+        177,
+        205
+      ],
+      "source": "Source/V5Drawings/07.png",
+      "translationPixels": [
+        0,
+        0
+      ],
+      "nearHindSoleAfter": [
+        192.6,
+        241.0
+      ],
+      "farHindSoleAfter": [
+        146.703,
+        236.0
+      ],
+      "pelvisAfter": [
+        177,
+        205
+      ]
+    }
+  ]
+}

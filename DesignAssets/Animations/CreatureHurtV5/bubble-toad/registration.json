@@ -1,0 +1,110 @@
+{
+  "species": "bubble-toad",
+  "size": 361,
+  "registrationScale": 0.7929203539823009,
+  "commonCanvasTranslation": [
+    3.6964601769911667,
+    3.8858407079646042
+  ],
+  "anchor": [
+    190.3695652173913,
+    273.0
+  ],
+  "anchorRegion": [
+    145,
+    230,
+    240,
+    310
+  ],
+  "cells": [
+    {
+      "cel": 0,
+      "translationPixels": [
+        1,
+        -1
+      ],
+      "footAnchor": [
+        189.3921568627451,
+        274.0
+      ]
+    },
+    {
+      "cel": 1,
+      "translationPixels": [
+        -8,
+        -23
+      ],
+      "footAnchor": [
+        198.67164179104478,
+        296.0
+      ]
+    },
+    {
+      "cel": 2,
+      "translationPixels": [
+        0,
+        -30
+      ],
+      "footAnchor": [
+        190.53061224489795,
+        303.0
+      ]
+    },
+    {
+      "cel": 3,
+      "translationPixels": [
+        3,
+        -33
+      ],
+      "footAnchor": [
+        187.59154929577466,
+        306.0
+      ]
+    },
+    {
+      "cel": 4,
+      "translationPixels": [
+        -10,
+        -7
+      ],
+      "footAnchor": [
+        200.64,
+        280.0
+      ]
+    },
+    {
+      "cel": 5,
+      "translationPixels": [
+        -5,
+        -6
+      ],
+      "footAnchor": [
+        194.96153846153845,
+        279.0
+      ]
+    },
+    {
+      "cel": 6,
+      "translationPixels": [
+        4,
+        -6
+      ],
+      "footAnchor": [
+        186.17460317460316,
+        279.0
+      ]
+    },
+    {
+      "cel": 7,
+      "translationPixels": [
+        -3,
+        1
+      ],
+      "footAnchor": [
+        193.231884057971,
+        272.0
+      ]
+    }
+  ],
+  "construction": "Eight complete native drawn anatomical poses; common neutral-to-original scale registration and planted near-forefoot translation. No whole-body animation transforms or mesh; every body bend and joint pose is drawn."
+}

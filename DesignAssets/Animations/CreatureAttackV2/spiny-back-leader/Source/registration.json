@@ -1,0 +1,56 @@
+{
+  "commonScale": 1.4, 
+  "landmark": "main carapace center", 
+  "localLandmarkX": [
+    140, 
+    140, 
+    130, 
+    155, 
+    165, 
+    150, 
+    150, 
+    140
+  ], 
+  "targetLandmarkX": [
+    270, 
+    276, 
+    282, 
+    258, 
+    252, 
+    263, 
+    269, 
+    270
+  ], 
+  "groundY": [
+    520, 
+    509, 
+    494, 
+    518, 
+    518, 
+    519, 
+    519, 
+    520
+  ], 
+  "verticalMotion": [
+    0, 
+    0, 
+    0, 
+    0, 
+    0, 
+    0, 
+    0, 
+    0
+  ], 
+  "durationsMs": [
+    90, 
+    170, 
+    220, 
+    50, 
+    340, 
+    180, 
+    220, 
+    170
+  ], 
+  "description": "Rear the front body high with forelegs raised and mandibles open, expose the dark mouth/hinges, plunge forward into a low closed-jaw bite, hold it firmly and recover through replanting.", 
+  "rootMotionDescription": "Rear legs brace the high wind-up while front legs lift and replant into the bite; one carapace scale is retained across the newly drawn underside and closed-jaw poses."
+}

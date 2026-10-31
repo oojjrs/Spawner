@@ -1,0 +1,12 @@
+{
+  "raw": "hidden-surfaces-generated.png",
+  "purpose": "Underlying shell behind separately extracted original crown leaves. Original body, eyes and scale retained.",
+  "prompt": "Remove only the large crown leaves from the exact source turtle and reconstruct their hidden rocky shell. Preserve head, feet, body, thin vines, palette, camera and original canvas registration. Transparent outside. No redesign or scenery.",
+  "tool": "Built-in image_gen.imagegen",
+  "reference": "DesignAssets/Animations/CreatureHurtV3/vine-turtle/Source/seed.png",
+  "alpha": true,
+  "scalePolicy": "One fixed source canvas and artwork scale; no per-frame fit.",
+  "v7Revision": "The shell and legs are stationary. An independently layered rigid head retracts eight pixels into a softly weighted neck; crown leaf follow-through is retained. Four foot contacts keep original artwork pixels.",
+  "newV7GenerationCalls": 1,
+  "newHiddenSource": "Source/head-hidden-generated.png"
+}

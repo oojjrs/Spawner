@@ -1,0 +1,63 @@
+from pathlib import Path
+from PIL import Image,ImageDraw,ImageFilter
+from collections import deque
+import numpy as np
+import json
+
+FOLDER=Path(__file__).resolve().parent
+
+def save_json(path,value):
+ path.write_bytes((json.dumps(value,**{'indent':2})+'\n').replace('\n','\r\n').encode('utf8'))
+
+def foot_erase_mask(image,settings):
+ pixels=np.array(image);r,g,b=[pixels[:,:,i].astype(int) for i in range(3)];x0,y0,x1,y1=settings['clearRect'];warm=(r>g+18)&(g>b+18)&(g<210)&(r>80)&(pixels[:,:,3]>8);region=np.zeros(warm.shape,bool);region[y0:y1,x0:x1]=True;warm&=region;visited=np.zeros(warm.shape,bool);selected=np.zeros(warm.shape,bool)
+ for y,x in np.argwhere(warm):
+  if visited[y,x]:continue
+  queue=deque([(int(y),int(x))]);visited[y,x]=True;component=[];bottom=0
+  while queue:
+   yy,xx=queue.popleft();component.append((yy,xx));bottom=max(bottom,yy)
+   for ny,nx in [(yy-1,xx),(yy+1,xx),(yy,xx-1),(yy,xx+1)]:
+    if ny<0 or nx<0 or ny>=warm.shape[0] or nx>=warm.shape[1] or visited[ny,nx] or not warm[ny,nx]:continue
+    visited[ny,nx]=True;queue.append((ny,nx))
+  if bottom>=settings['selectorBottom']:
+   for yy,xx in component:selected[yy,xx]=True
+ expanded=np.array(Image.fromarray(np.uint8(selected)*255).filter(ImageFilter.MaxFilter(9)))
+ feather=(((g>130)&(r<g*1.3))|((r>150)&(b>g*.7)))&(pixels[:,:,3]>8);protected=np.zeros(feather.shape,bool);protected[:max(0,y0-4)]=feather[:max(0,y0-4)];ys,xs=np.nonzero(protected);queue=deque(zip(ys.tolist(),xs.tolist()))
+ while queue:
+  yy,xx=queue.popleft()
+  for ny,nx in [(yy-1,xx),(yy+1,xx),(yy,xx-1),(yy,xx+1)]:
+   if ny<0 or nx<0 or ny>=feather.shape[0] or nx>=feather.shape[1] or protected[ny,nx] or not feather[ny,nx]:continue
+   protected[ny,nx]=True;queue.append((ny,nx))
+ protected=np.array(Image.fromarray(np.uint8(protected)*255).filter(ImageFilter.MaxFilter(5)))>0;expanded[protected]=0
+ if 'toeBand' in settings:
+  tx0,ty0,tx1,ty1=settings['toeBand'];expanded[ty0:ty1,tx0:tx1]=np.uint8(pixels[ty0:ty1,tx0:tx1,3]>0)*255
+ return Image.fromarray(expanded)
+
+def lock_feet(image,seed,mask,settings,index):
+ pixels=np.array(image);original=np.array(seed);core=np.array(mask)>0;x0,y0,x1,y1=settings['clearRect'];clear=np.zeros(core.shape,bool);clear[y0:y1,x0:x1]=True
+ preserve=(original[:,:,3]>8)&~core
+ if settings.get('eraseMode')=='local-warm-foot-components':
+  erase=foot_erase_mask(image,settings);(FOLDER/'Source/FootEraseMasks').mkdir(**{'exist_ok':True});erase.save(FOLDER/'Source/FootEraseMasks'/('%02d.png'%index));pixels[(np.array(erase)>0)|(pixels[:,:,3]<=8)]=0
+  plate=np.zeros(original.shape,np.uint8);plate[core]=original[core];result=Image.fromarray(plate);result.alpha_composite(Image.fromarray(pixels));return result
+ else:pixels[clear&~preserve]=0
+ pixels[core]=original[core]
+ return Image.fromarray(pixels)
+
+def main():
+ settings=json.loads((FOLDER/'settings.json').read_bytes());size=settings['frameSize'];seed=Image.open(FOLDER/'Source/seed.png').convert('RGBA');mask=Image.open(FOLDER/'Source/feet-fixed-mask.png').convert('L');cels={0:seed,8:Image.open(FOLDER/'Source/seed-half.png').convert('RGBA')}
+ for i in range(1,5):cels[i]=lock_feet(Image.open(FOLDER/'Drawings'/('%02d.png'%i)).convert('RGBA'),seed,mask,settings['feet'],i)
+ sequence=[0,1,2,3,4,3,2,1,1,8,0,0,0,0,0,0];frames=[cels[i].copy() for i in sequence];sheet=Image.new('RGBA',(size*4,size*4));matrix=Image.new('RGBA',(256,256));options={'lossless':True,'method':4,'exact':True}
+ for i,frame in enumerate(frames):sheet.paste(frame,(i%4*size,i//4*size));matrix.paste(frame.resize((64,64),Image.Resampling.LANCZOS),(i%4*64,i//4*64))
+ sheet.save(FOLDER/'hurt.webp','WEBP',**options);matrix.save(FOLDER/'hurt-matrix.webp','WEBP',**options);durations=settings['durationsMs'].copy();durations[-1]+=900
+ for name,images in [('hurt-preview.webp',frames),('hurt-thumbnail.webp',[f.resize((64,64),Image.Resampling.LANCZOS) for f in frames])]:images[0].save(FOLDER/name,'WEBP',**{'save_all':True,'append_images':images[1:],'duration':durations,'loop':0,**options})
+ poses=[{'frame':i,'durationMs':settings['durationsMs'][i],'source':'Source/seed.png' if cel==0 else 'Source/seed-half.png' if cel==8 else 'Drawings/%02d.png'%cel,'phase':'contact' if i<4 else 'head-down-hold' if i==4 else 'recovery','drawnCel':cel,'fixedFootPlate':True,'rootScale':1,'rootRotation':0} for i,cel in enumerate(sequence)]
+ save_json(FOLDER/'timeline.json',{'durationMs':760,'closedEyeHold':settings['closedEyeHold'],'poses':poses,'method':'Whole-body drawn head/neck downward bob and slight bilateral wing opening above exact original stationary feet and toe/claw grip. No whole-image recoil transform.'})
+ metadata={key:settings[key] for key in ['frameSize','columns','pivotX','pivotY','frameCount','durationsMs','durationMs','loop','closedEyeHold']};metadata.update({'image':'DesignAssets/Animations/CreatureHurtV6/'+FOLDER.name+'/hurt.webp','source':'Source/seed.png','method':'Jointly generated full body poses from eight-slot exact-original edit canvas and an authored head-bob peak; original stationary feet/claws composited with a fixed alpha mask. Head lowers into breast with modest wing spread while feet keep exact original coordinates and grip. Four contact cels played in reverse for recovery, with original half-eye bridge and exact neutral endpoints. No rig, root rotation, global animation scaling or new support prop.','registration':'registration.json','timeline':'timeline.json','renderer':'render.py','generation':'Source/generation.json','feetMask':'Source/feet-fixed-mask.png','feetPlate':'Source/feet-original.png','preview':'hurt-preview.webp','thumbnail':'hurt-thumbnail.webp','matrix':'hurt-matrix.webp','drawnPoseCount':6,'previewPauseMs':900});save_json(FOLDER/'hurt.json',metadata)
+ contact=Image.new('RGB',(size*4,(size+20)*2),(35,43,39));drawing=ImageDraw.Draw(contact)
+ markers=Image.new('RGB',(size*4,(size+20)*2),(35,43,39));marker_draw=ImageDraw.Draw(markers)
+ for number,i in enumerate([0,1,2,4,6,7,9,15]):
+  x=number%4*size;y=number//4*(size+20);contact.paste(frames[i],(x,y+20),frames[i]);drawing.text((x+5,y+5),'frame '+str(i)+' / cel '+str(sequence[i]),(240,245,230));markers.paste(frames[i],(x,y+20),frames[i]);marker_draw.text((x+5,y+5),'frame '+str(i),(240,245,230))
+  for px,py in settings['feet']['markers']:marker_draw.line((x+px-4,y+20+py,x+px+4,y+20+py),(240,110,110),1);marker_draw.line((x+px,y+20+py-4,x+px,y+20+py+4),(240,110,110),1)
+ contact.save(FOLDER/'hurt-contact.png');markers.save(FOLDER/'feet-contact-markers.png');print(FOLDER.name,len(frames),sum(settings['durationsMs']))
+
+if __name__=='__main__':main()

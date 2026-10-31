@@ -1,0 +1,165 @@
+{
+  "species": "dew-rabbit",
+  "commonArtworkScale": 1.2932692307692308,
+  "commonInitialTranslation": [
+    87.11298076923076,
+    -354.59855769230774
+  ],
+  "neutralCalibrationOnly": true,
+  "poseBoundingBoxesDoNotSetScale": true,
+  "rootAnchor": [
+    251.0,
+    352.0
+  ],
+  "anchorRegion": [
+    225,
+    307,
+    319,
+    417
+  ],
+  "anchorMeaning": "Planted hind foot; front paws are allowed to bend and gather.",
+  "paletteShiftSharedByAllCels": [
+    2.0,
+    5.0,
+    4.0
+  ],
+  "cels": [
+    {
+      "cel": 0,
+      "translationPixels": [
+        1,
+        -1
+      ],
+      "plantedRearFoot": [
+        249.7829457364341,
+        353.0
+      ],
+      "sourceBox": [
+        41,
+        327,
+        238,
+        550
+      ]
+    },
+    {
+      "cel": 1,
+      "translationPixels": [
+        -16,
+        -2
+      ],
+      "plantedRearFoot": [
+        266.7162162162162,
+        354.0
+      ],
+      "sourceBox": [
+        297,
+        327,
+        508,
+        550
+      ]
+    },
+    {
+      "cel": 2,
+      "translationPixels": [
+        10,
+        -3
+      ],
+      "plantedRearFoot": [
+        241.1015625,
+        355.0
+      ],
+      "sourceBox": [
+        582,
+        362,
+        774,
+        551
+      ]
+    },
+    {
+      "cel": 3,
+      "translationPixels": [
+        12,
+        -3
+      ],
+      "plantedRearFoot": [
+        239.01769911504425,
+        355.0
+      ],
+      "sourceBox": [
+        859,
+        369,
+        1049,
+        551
+      ]
+    },
+    {
+      "cel": 4,
+      "translationPixels": [
+        13,
+        -3
+      ],
+      "plantedRearFoot": [
+        237.88571428571427,
+        355.0
+      ],
+      "sourceBox": [
+        1136,
+        380,
+        1332,
+        551
+      ]
+    },
+    {
+      "cel": 5,
+      "translationPixels": [
+        13,
+        -4
+      ],
+      "plantedRearFoot": [
+        238.05882352941177,
+        356.0
+      ],
+      "sourceBox": [
+        1411,
+        364,
+        1604,
+        551
+      ]
+    },
+    {
+      "cel": 6,
+      "translationPixels": [
+        -7,
+        -2
+      ],
+      "plantedRearFoot": [
+        258.12,
+        354.0
+      ],
+      "sourceBox": [
+        1673,
+        328,
+        1876,
+        550
+      ]
+    },
+    {
+      "cel": 7,
+      "translationPixels": [
+        2,
+        0
+      ],
+      "plantedRearFoot": [
+        248.765625,
+        352.0
+      ],
+      "sourceBox": [
+        1955,
+        327,
+        2151,
+        549
+      ]
+    }
+  ],
+  "method": "Eight complete drawings generated jointly from approved neutral and authored crouch target, isolated by connected alpha components. One common neutral-to-original scale and rear foot translation only."
+}

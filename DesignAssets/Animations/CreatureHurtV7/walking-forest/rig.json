@@ -1,0 +1,31 @@
+{
+  "method": "hard-rock-around-planted-foot",
+  "species": "walking-forest",
+  "canvas": [
+    256,
+    256
+  ],
+  "worldPivot": [
+    128,
+    224
+  ],
+  "sources": {
+    "seed": "Source/seed.png",
+    "half": "Source/half.png",
+    "pain": "Source/pain.png"
+  },
+  "support": [
+    120.80882352941177,
+    223
+  ],
+  "supportMeaning": "Visually identified near front weight-bearing toe, beneath the near leg. The hard body rocks around this planted toe; other unloaded legs may briefly lift rather than sliding the primary contact.",
+  "attachments": [],
+  "compatibility": "Project-local baked source; no Spine claim",
+  "supportSemanticROI": [
+    102,
+    145,
+    196,
+    227
+  ],
+  "supportMetric": "Center of the bottom three visible-alpha rows inside the visually identified sole region."
+}

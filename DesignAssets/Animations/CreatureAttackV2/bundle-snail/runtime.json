@@ -1,0 +1,32 @@
+{
+  "frameSize": 293, 
+  "displaySize": 292.35045317220545, 
+  "scale": 0.572265625, 
+  "idleReference": "DesignAssets/Animations/CreatureIdleV4/bundle-snail/idle.webp", 
+  "viewSize": 266.3926816475265, 
+  "pivotX": 146.9266715437279, 
+  "pivotY": 270.04213884441253, 
+  "sourcePivot": [
+    256, 
+    448
+  ], 
+  "sourceFrameSize": 512, 
+  "columns": 4, 
+  "frameCount": 8, 
+  "image": "DesignAssets/Animations/CreatureAttackV2/bundle-snail/runtime.webp", 
+  "durationsMs": [
+    100, 
+    130, 
+    120, 
+    45, 
+    220, 
+    100, 
+    140, 
+    210
+  ], 
+  "loop": false, 
+  "facing": "left", 
+  "source": "attack.webp", 
+  "exporter": "../export-runtime.py", 
+  "processing": "One common whole-cel scale for every frame. Original artwork, timing and source registration remain unchanged; runtime pivot aligns the exact seed to its accepted idle appearance."
+}

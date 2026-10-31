@@ -1,0 +1,29 @@
+{
+  "frameSize": 312,
+  "displaySize": 311.1511254019292,
+  "scale": 0.609375,
+  "idleReference": "DesignAssets/Animations/RollingAcornIdle/v1/idle.webp",
+  "viewSize": 281.2599381625442,
+  "pivotX": 157.38239840989397,
+  "pivotY": 270.69152788896866,
+  "sourcePivot": [
+    256,
+    448
+  ],
+  "sourceFrameSize": 512,
+  "columns": 4,
+  "frameCount": 8,
+  "image": "DesignAssets/Animations/CreatureAttackV2/rolling-acorn/runtime.webp",
+  "durationsMs": [
+    100,
+    110,
+    130,
+    40,
+    220,
+    90,
+    140,
+    190
+  ],
+  "loop": false,
+  "facing": "left"
+}

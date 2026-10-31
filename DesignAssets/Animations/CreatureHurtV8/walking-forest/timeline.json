@@ -1,0 +1,216 @@
+{
+
+  "durationsMs": [
+
+    20,
+
+    30,
+
+    30,
+
+    30,
+
+    400,
+
+    30,
+
+    30,
+
+    30,
+
+    20,
+
+    20,
+
+    20,
+
+    20,
+
+    20,
+
+    20,
+
+    20,
+
+    20
+
+  ],
+
+  "durationMs": 760,
+
+  "closedEyeHold": {
+
+    "fromMs": 110,
+
+    "toMs": 510,
+
+    "durationMs": 400
+
+  },
+
+  "poses": [
+
+    {
+
+      "expression": "seed",
+
+      "load": 0,
+
+      "neck": 0
+
+    },
+
+    {
+
+      "expression": "half",
+
+      "load": 0.28,
+
+      "neck": 0.28
+
+    },
+
+    {
+
+      "expression": "pain",
+
+      "load": 0.65,
+
+      "neck": 0.65
+
+    },
+
+    {
+
+      "expression": "pain",
+
+      "load": 0.9,
+
+      "neck": 0.9
+
+    },
+
+    {
+
+      "expression": "pain",
+
+      "load": 1,
+
+      "neck": 1
+
+    },
+
+    {
+
+      "expression": "pain",
+
+      "load": 0.91,
+
+      "neck": 0.91
+
+    },
+
+    {
+
+      "expression": "pain",
+
+      "load": 0.7,
+
+      "neck": 0.7
+
+    },
+
+    {
+
+      "expression": "pain",
+
+      "load": 0.46,
+
+      "neck": 0.46
+
+    },
+
+    {
+
+      "expression": "half",
+
+      "load": 0.25,
+
+      "neck": 0.25
+
+    },
+
+    {
+
+      "expression": "half",
+
+      "load": 0.09,
+
+      "neck": 0.09
+
+    },
+
+    {
+
+      "expression": "seed",
+
+      "load": 0,
+
+      "neck": 0
+
+    },
+
+    {
+
+      "expression": "seed",
+
+      "load": 0,
+
+      "neck": 0
+
+    },
+
+    {
+
+      "expression": "seed",
+
+      "load": 0,
+
+      "neck": 0
+
+    },
+
+    {
+
+      "expression": "seed",
+
+      "load": 0,
+
+      "neck": 0
+
+    },
+
+    {
+
+      "expression": "seed",
+
+      "load": 0,
+
+      "neck": 0
+
+    },
+
+    {
+
+      "expression": "seed",
+
+      "load": 0,
+
+      "neck": 0
+
+    }
+
+  ]
+
+}
+

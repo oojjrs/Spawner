@@ -1,0 +1,154 @@
+{
+  "contract": "20ms neutral; impact closes by80ms; peak at110ms held400ms; return to exact neutral before760ms.", 
+  "pivot": [
+    208.5, 
+    364.875
+  ], 
+  "scaling": 1, 
+  "poses": [
+    {
+      "expression": "neutral", 
+      "clockwiseDegrees": 0, 
+      "translationPixels": [
+        0, 
+        0.0
+      ], 
+      "durationMs": 20
+    }, 
+    {
+      "expression": "half", 
+      "clockwiseDegrees": 1.5, 
+      "translationPixels": [
+        0, 
+        -1.466015625
+      ], 
+      "durationMs": 30
+    }, 
+    {
+      "expression": "pain", 
+      "clockwiseDegrees": 3.5, 
+      "translationPixels": [
+        0, 
+        -3.420703125
+      ], 
+      "durationMs": 30
+    }, 
+    {
+      "expression": "pain", 
+      "clockwiseDegrees": 4.6, 
+      "translationPixels": [
+        0, 
+        -4.4794921875
+      ], 
+      "durationMs": 30
+    }, 
+    {
+      "expression": "pain", 
+      "clockwiseDegrees": 5, 
+      "translationPixels": [
+        0, 
+        -4.88671875
+      ], 
+      "durationMs": 400
+    }, 
+    {
+      "expression": "pain", 
+      "clockwiseDegrees": 4.7, 
+      "translationPixels": [
+        0, 
+        -4.5609375
+      ], 
+      "durationMs": 30
+    }, 
+    {
+      "expression": "pain", 
+      "clockwiseDegrees": 3.5, 
+      "translationPixels": [
+        0, 
+        -3.420703125
+      ], 
+      "durationMs": 30
+    }, 
+    {
+      "expression": "pain", 
+      "clockwiseDegrees": 2.2, 
+      "translationPixels": [
+        0, 
+        -2.117578125
+      ], 
+      "durationMs": 30
+    }, 
+    {
+      "expression": "half", 
+      "clockwiseDegrees": 1.1, 
+      "translationPixels": [
+        0, 
+        -1.0587890625
+      ], 
+      "durationMs": 20
+    }, 
+    {
+      "expression": "half", 
+      "clockwiseDegrees": 0.3, 
+      "translationPixels": [
+        0, 
+        -0.32578125
+      ], 
+      "durationMs": 20
+    }, 
+    {
+      "expression": "half", 
+      "clockwiseDegrees": 0, 
+      "translationPixels": [
+        0, 
+        0.0
+      ], 
+      "durationMs": 20
+    }, 
+    {
+      "expression": "neutral", 
+      "clockwiseDegrees": 0, 
+      "translationPixels": [
+        0, 
+        0.0
+      ], 
+      "durationMs": 20
+    }, 
+    {
+      "expression": "neutral", 
+      "clockwiseDegrees": 0, 
+      "translationPixels": [
+        0, 
+        0.0
+      ], 
+      "durationMs": 20
+    }, 
+    {
+      "expression": "neutral", 
+      "clockwiseDegrees": 0, 
+      "translationPixels": [
+        0, 
+        0.0
+      ], 
+      "durationMs": 20
+    }, 
+    {
+      "expression": "neutral", 
+      "clockwiseDegrees": 0, 
+      "translationPixels": [
+        0, 
+        0.0
+      ], 
+      "durationMs": 20
+    }, 
+    {
+      "expression": "neutral", 
+      "clockwiseDegrees": 0, 
+      "translationPixels": [
+        0, 
+        0.0
+      ], 
+      "durationMs": 20
+    }
+  ]
+}

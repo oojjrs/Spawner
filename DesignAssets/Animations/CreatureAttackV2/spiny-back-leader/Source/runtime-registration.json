@@ -1,0 +1,29 @@
+{
+  "frameSize": 512,
+  "displaySize": 537.6,
+  "scale": 1,
+  "idleReference": "DesignAssets/Animations/MountainPawLeaderIdle/spiny-back-leader/idle-runtime.webp",
+  "viewSize": 418.9090909090909,
+  "pivotX": 255.99999999999997,
+  "pivotY": 449.5454545454545,
+  "sourcePivot": [
+    256,
+    448
+  ],
+  "sourceFrameSize": 512,
+  "columns": 4,
+  "frameCount": 8,
+  "image": "DesignAssets/Animations/CreatureAttackV2/spiny-back-leader/runtime.webp",
+  "durationsMs": [
+    90,
+    170,
+    220,
+    50,
+    340,
+    180,
+    220,
+    170
+  ],
+  "loop": false,
+  "facing": "left"
+}

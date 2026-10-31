@@ -1,0 +1,37 @@
+{
+  "image": "attack-right.webp",
+  "facing": "right",
+  "frameSize": 345,
+  "columns": 5,
+  "frameCount": 5,
+  "frames": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    0
+  ],
+  "durations": [
+    80,
+    160,
+    280,
+    440,
+    160,
+    160
+  ],
+  "durationMs": 1280,
+  "hitTimeMs": 520,
+  "pivot": [
+    166.435546875,
+    303.22265625
+  ],
+  "source": "atlas.webp",
+  "sourceFrames": [
+    10,
+    11,
+    12,
+    13,
+    14
+  ]
+}

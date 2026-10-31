@@ -1,0 +1,155 @@
+{
+  "durationMs": 760,
+  "closedEyeHold": {
+    "fromMs": 110,
+    "toMs": 510,
+    "durationMs": 400
+  },
+  "poses": [
+    {
+      "frame": 0,
+      "durationMs": 20,
+      "source": "Source/seed.png",
+      "phase": "contact",
+      "drawnPose": 0,
+      "scale": 1,
+      "runtimeRotation": 0
+    },
+    {
+      "frame": 1,
+      "durationMs": 30,
+      "source": "Drawings/01.png",
+      "phase": "contact",
+      "drawnPose": 1,
+      "scale": 1,
+      "runtimeRotation": 0
+    },
+    {
+      "frame": 2,
+      "durationMs": 30,
+      "source": "Drawings/02.png",
+      "phase": "contact",
+      "drawnPose": 2,
+      "scale": 1,
+      "runtimeRotation": 0
+    },
+    {
+      "frame": 3,
+      "durationMs": 30,
+      "source": "Drawings/03.png",
+      "phase": "contact",
+      "drawnPose": 3,
+      "scale": 1,
+      "runtimeRotation": 0
+    },
+    {
+      "frame": 4,
+      "durationMs": 400,
+      "source": "Drawings/04.png",
+      "phase": "pain-hold",
+      "drawnPose": 4,
+      "scale": 1,
+      "runtimeRotation": 0
+    },
+    {
+      "frame": 5,
+      "durationMs": 30,
+      "source": "Drawings/03.png",
+      "phase": "recovery",
+      "drawnPose": 3,
+      "scale": 1,
+      "runtimeRotation": 0
+    },
+    {
+      "frame": 6,
+      "durationMs": 30,
+      "source": "Drawings/02.png",
+      "phase": "recovery",
+      "drawnPose": 2,
+      "scale": 1,
+      "runtimeRotation": 0
+    },
+    {
+      "frame": 7,
+      "durationMs": 30,
+      "source": "Drawings/01.png",
+      "phase": "recovery",
+      "drawnPose": 1,
+      "scale": 1,
+      "runtimeRotation": 0
+    },
+    {
+      "frame": 8,
+      "durationMs": 20,
+      "source": "Drawings/01.png",
+      "phase": "recovery",
+      "drawnPose": 1,
+      "scale": 1,
+      "runtimeRotation": 0
+    },
+    {
+      "frame": 9,
+      "durationMs": 20,
+      "source": "Source/seed-half.png",
+      "phase": "recovery",
+      "drawnPose": 8,
+      "scale": 1,
+      "runtimeRotation": 0
+    },
+    {
+      "frame": 10,
+      "durationMs": 20,
+      "source": "Source/seed.png",
+      "phase": "recovery",
+      "drawnPose": 0,
+      "scale": 1,
+      "runtimeRotation": 0
+    },
+    {
+      "frame": 11,
+      "durationMs": 20,
+      "source": "Source/seed.png",
+      "phase": "recovery",
+      "drawnPose": 0,
+      "scale": 1,
+      "runtimeRotation": 0
+    },
+    {
+      "frame": 12,
+      "durationMs": 20,
+      "source": "Source/seed.png",
+      "phase": "recovery",
+      "drawnPose": 0,
+      "scale": 1,
+      "runtimeRotation": 0
+    },
+    {
+      "frame": 13,
+      "durationMs": 20,
+      "source": "Source/seed.png",
+      "phase": "recovery",
+      "drawnPose": 0,
+      "scale": 1,
+      "runtimeRotation": 0
+    },
+    {
+      "frame": 14,
+      "durationMs": 20,
+      "source": "Source/seed.png",
+      "phase": "recovery",
+      "drawnPose": 0,
+      "scale": 1,
+      "runtimeRotation": 0
+    },
+    {
+      "frame": 15,
+      "durationMs": 20,
+      "source": "Source/seed.png",
+      "phase": "recovery",
+      "drawnPose": 0,
+      "scale": 1,
+      "runtimeRotation": 0
+    }
+  ],
+  "method": "Complete jointly drawn body and joint poses, one common scale and planted hind-foot registration. No temporal crossfade, cutout rig or whole-image animation transform."
+}

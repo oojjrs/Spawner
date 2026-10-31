@@ -1,0 +1,377 @@
+{
+  "name": "talon-owl", 
+  "action": "attack", 
+  "status": "new drawn cels awaiting actual playback review", 
+  "image": "DesignAssets/Animations/CreatureAttackV2/talon-owl/attack.webp", 
+  "frameSize": 512, 
+  "columns": 6, 
+  "frameCount": 6, 
+  "durationsMs": [
+    70, 
+    210, 
+    50, 
+    300, 
+    170, 
+    220
+  ], 
+  "durationMs": 1020, 
+  "loop": false, 
+  "rootMotion": true, 
+  "rootMotionNote": "Crouch and half-open wing preparation, airborne wing spread with reaching talons, low down-left talon rake held 300ms, partial wing fold and landing recovery.", 
+  "pivotX": 234, 
+  "pivotY": 400, 
+  "impactFrame": 3, 
+  "hitAtMs": 330, 
+  "impactHoldMs": 300, 
+  "previewPauseMs": 800, 
+  "facing": "left", 
+  "provider": "built-in image_gen", 
+  "artworkMethod": "Newly drawn full-strip cels from one seed-anchored six-pose generation, followed by a targeted anatomy edit of the full strip. Source cels2-5 are new full drawings; first and last are locked exactly to shipped neutral. No mesh warp, crossfade, synthetic motion interpolation, or per-frame scaling.", 
+  "motion": "Crouch and half-open wing preparation, airborne wing spread with reaching talons, low down-left talon rake held 300ms, partial wing fold and landing recovery.", 
+  "source": "Source/raw-drawn-strip.png", 
+  "initialSource": "Source/raw-initial.png", 
+  "seed": "Source/seed.png", 
+  "editCanvas": "Source/edit-canvas.png", 
+  "prompt": "Source/prompt.txt", 
+  "initialPrompt": "Source/prompt-initial.txt", 
+  "renderer": "export.py", 
+  "preview": "attack-preview.webp", 
+  "contact": "contact.png", 
+  "thumbnail": "DesignAssets/Planning/UnitPreviews/talon-owl/attack-v2.webp", 
+  "normalization": "Official edit-canvas and strip normalizer used; anatomical-anchor registration with one global scale preserves rigid body features and explicit local trajectories. Per-pose translation only registers the declared anatomical anchor; it does not fit each frame to its own extents.", 
+  "normalizationScale": 1.125, 
+  "anchorMethod": "manual-iris-pair", 
+  "seedEyeCenters": [
+    [
+      174, 
+      197
+    ], 
+    [
+      230, 
+      200
+    ]
+  ], 
+  "rootTrajectory": [
+    [
+      0, 
+      0
+    ], 
+    [
+      -0.5, 
+      73.5
+    ], 
+    [
+      -21, 
+      36.5
+    ], 
+    [
+      -56, 
+      47.5
+    ], 
+    [
+      0, 
+      -1
+    ], 
+    [
+      0, 
+      0
+    ]
+  ], 
+  "firstAndLastFrameIdentical": true, 
+  "frames": [
+    {
+      "index": 0, 
+      "phase": "neutral", 
+      "file": "Source/Frames/pose-01.png", 
+      "durationMs": 70, 
+      "exactSeed": true, 
+      "anchorMethod": "manual-iris-pair", 
+      "sourceEyeCenters": [
+        [
+          101, 
+          331
+        ], 
+        [
+          152, 
+          332
+        ]
+      ], 
+      "sourceAnchor": [
+        126.5, 
+        331.5
+      ], 
+      "targetAnchor": [
+        202.0, 
+        198.5
+      ], 
+      "sharedScale": 1.125, 
+      "translation": [
+        59.6875, 
+        -174.4375
+      ], 
+      "sourceBounds": [
+        73, 
+        247, 
+        306, 
+        541
+      ], 
+      "projectedBounds": [
+        141.8125, 
+        103.4375, 
+        403.9375, 
+        434.1875
+      ], 
+      "bounds": [
+        138, 
+        98, 
+        393, 
+        423
+      ]
+    }, 
+    {
+      "index": 1, 
+      "phase": "grounded-crouch-wing-load", 
+      "file": "Source/Frames/pose-02.png", 
+      "durationMs": 210, 
+      "exactSeed": false, 
+      "anchorMethod": "manual-iris-pair", 
+      "sourceEyeCenters": [
+        [
+          400, 
+          424
+        ], 
+        [
+          442, 
+          425
+        ]
+      ], 
+      "sourceAnchor": [
+        421.0, 
+        424.5
+      ], 
+      "targetAnchor": [
+        201.5, 
+        272.0
+      ], 
+      "sharedScale": 1.125, 
+      "translation": [
+        -272.125, 
+        -205.5625
+      ], 
+      "sourceBounds": [
+        349, 
+        192, 
+        656, 
+        537
+      ], 
+      "projectedBounds": [
+        120.5, 
+        10.4375, 
+        465.875, 
+        398.5625
+      ], 
+      "bounds": [
+        119, 
+        8, 
+        469, 
+        401
+      ]
+    }, 
+    {
+      "index": 2, 
+      "phase": "airborne-talon-reach", 
+      "file": "Source/Frames/pose-03.png", 
+      "durationMs": 50, 
+      "exactSeed": false, 
+      "anchorMethod": "manual-iris-pair", 
+      "sourceEyeCenters": [
+        [
+          775, 
+          343
+        ], 
+        [
+          820, 
+          344
+        ]
+      ], 
+      "sourceAnchor": [
+        797.5, 
+        343.5
+      ], 
+      "targetAnchor": [
+        181.0, 
+        235.0
+      ], 
+      "sharedScale": 1.125, 
+      "translation": [
+        -716.1875, 
+        -151.4375
+      ], 
+      "sourceBounds": [
+        689, 
+        144, 
+        1083, 
+        529
+      ], 
+      "projectedBounds": [
+        58.9375, 
+        10.5625, 
+        502.1875, 
+        443.6875
+      ], 
+      "bounds": [
+        56, 
+        9, 
+        505, 
+        446
+      ]
+    }, 
+    {
+      "index": 3, 
+      "phase": "down-left-talon-contact", 
+      "file": "Source/Frames/pose-04.png", 
+      "durationMs": 300, 
+      "exactSeed": false, 
+      "anchorMethod": "manual-iris-pair", 
+      "sourceEyeCenters": [
+        [
+          1124, 
+          405
+        ], 
+        [
+          1171, 
+          414
+        ]
+      ], 
+      "sourceAnchor": [
+        1147.5, 
+        409.5
+      ], 
+      "targetAnchor": [
+        146.0, 
+        246.0
+      ], 
+      "sharedScale": 1.125, 
+      "translation": [
+        -1144.9375, 
+        -214.6875
+      ], 
+      "sourceBounds": [
+        1025, 
+        208, 
+        1463, 
+        549
+      ], 
+      "projectedBounds": [
+        8.1875, 
+        19.3125, 
+        500.9375, 
+        402.9375
+      ], 
+      "bounds": [
+        4, 
+        17, 
+        502, 
+        404
+      ]
+    }, 
+    {
+      "index": 4, 
+      "phase": "wing-fold-landing", 
+      "file": "Source/Frames/pose-05.png", 
+      "durationMs": 170, 
+      "exactSeed": false, 
+      "anchorMethod": "manual-iris-pair", 
+      "sourceEyeCenters": [
+        [
+          1561, 
+          328
+        ], 
+        [
+          1611, 
+          331
+        ]
+      ], 
+      "sourceAnchor": [
+        1586.0, 
+        329.5
+      ], 
+      "targetAnchor": [
+        202.0, 
+        197.5
+      ], 
+      "sharedScale": 1.125, 
+      "translation": [
+        -1582.25, 
+        -173.1875
+      ], 
+      "sourceBounds": [
+        1498, 
+        246, 
+        1851, 
+        542
+      ], 
+      "projectedBounds": [
+        103.0, 
+        103.5625, 
+        500.125, 
+        436.5625
+      ], 
+      "bounds": [
+        100, 
+        100, 
+        501, 
+        440
+      ]
+    }, 
+    {
+      "index": 5, 
+      "phase": "neutral", 
+      "file": "Source/Frames/pose-06.png", 
+      "durationMs": 220, 
+      "exactSeed": true, 
+      "anchorMethod": "manual-iris-pair", 
+      "sourceEyeCenters": [
+        [
+          1935, 
+          333
+        ], 
+        [
+          1984, 
+          335
+        ]
+      ], 
+      "sourceAnchor": [
+        1959.5, 
+        334.0
+      ], 
+      "targetAnchor": [
+        202.0, 
+        198.5
+      ], 
+      "sharedScale": 1.125, 
+      "translation": [
+        -2002.4375, 
+        -177.25
+      ], 
+      "sourceBounds": [
+        1907, 
+        247, 
+        2137, 
+        541
+      ], 
+      "projectedBounds": [
+        142.9375, 
+        100.625, 
+        401.6875, 
+        431.375
+      ], 
+      "bounds": [
+        138, 
+        98, 
+        393, 
+        423
+      ]
+    }
+  ]
+}

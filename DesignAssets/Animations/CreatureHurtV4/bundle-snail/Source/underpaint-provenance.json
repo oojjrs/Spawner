@@ -1,0 +1,16 @@
+{
+  "provider": "OpenAI built-in image_gen",
+  "reference": "Source/neutral.png",
+  "generated": "head-underpaint-generated.png",
+  "registered": "head-underpaint-registered.png",
+  "use": "Skin behind articulated eye-stalk roots only. All shell and original unoccluded head pixels retained.",
+  "inverseAffine": [
+    3.257328990228013,
+    0,
+    -16.286644951140065,
+    0,
+    3.257328990228013,
+    -22.80130293159609
+  ],
+  "prompt": "Use case: precise-object-edit. This attached image is the approved bundle-snail sprite, edit target. Produce the EXACT same snail body and same golden shell, leaves, mushrooms, berries, pose, facing, scale and lighting on transparent background, but remove ONLY both protruding eye stalks and eyeballs. Complete the small smooth pale mint skin surface of the rounded snail head behind the two eye-stalk roots. Do not change the shell or any carried objects. Do not add facial features, mouths, eyes, new anatomy, scenery or text. This is only a hidden surface underpainting for an articulated eye-stalk rig. Preserve the whole remaining character and transparent square composition."
+}
