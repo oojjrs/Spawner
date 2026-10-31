@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createCreatures } from "./creatures.mjs";
+import { BURROW_TYPES } from "./burrows.mjs";
 import { BEETLE_ANIMATIONS, beetleAnimationPose } from "./beetle-animation.mjs";
 import { combatDamage } from "./combat-stats.mjs";
 import { createGame } from "./game.mjs";
@@ -296,7 +297,7 @@ function population(system, room) {
 test("작은 굴 120초·큰 굴 60초 주기로 한 마리씩 늘고 각 상한 3·6마리를 지킨다", () => {
   const room = environment(), system = createCreatures(room, null);
   assert.deepEqual(population(system, room), [1, 3]);
-  for (const [time, counts] of [[59.999, [1, 3]], [60, [1, 4]], [119.999, [1, 4]], [120, [2, 5]], [180, [2, 6]], [240, [3, 6]], [3600, [3, 6]]]) {
+  for (const [time, counts] of [[59.999, [1, 3]], [60, [1, 4]], [119.999, [1, 4]], [120, [2, 5]], [180, [2, 6]], [240, [3, 6]], [1800, [3, 6]]]) {
     room.simSeconds = time; system.tick();
     assert.deepEqual(population(system, room), counts, String(time));
   }
@@ -319,7 +320,7 @@ test("굴에서 멀리 나간 개체도 생존 상한에 포함하며 상한 중
 test("전멸해도 굴이 남으면 다음 회차에 한 마리씩 다시 생성한다", () => {
   const room = environment(), system = createCreatures(room, null);
   for (const agent of system.agents) system.receiveDamage(agent, 100);
-  room.simSeconds = 59.99; system.tick();
+  room.simSeconds = 59.995; system.tick();
   assert.deepEqual(population(system, room), [0, 0]);
   room.simSeconds = 60; system.tick();
   assert.deepEqual(population(system, room), [0, 1]);
@@ -335,7 +336,7 @@ test("저장·복원으로 증식 시각이 초기화되지 않고 새 개체 �
   const saved = JSON.parse(JSON.stringify(system.save()));
   system = createCreatures(room, saved);
   assert.deepEqual(system.save(), saved);
-  room.simSeconds = 119.99; system.tick();
+  room.simSeconds = 119.995; system.tick();
   assert.deepEqual(population(system, room), [1, 4]);
   room.simSeconds = 120; system.tick();
   assert.deepEqual(population(system, room), [2, 5]);
@@ -387,10 +388,12 @@ test("실제 월드를 저장·복원하고 스냅샷에서 소속 굴을 유지
   assert.equal(restored.world.generationVersion, room.world.generationVersion);
   assert.deepEqual(restored.world.burrows, room.world.burrows);
   assert.ok(restored.world.encounters.some(plan => plan.unique));
+  const savedCounts = new Map(saved.creatures.burrows.map(record => [record.id,
+    saved.creatures.agents.filter(agent => agent.health > 0 && agent.burrowId === record.id).length]));
   restored.simSeconds = 120; restored.creatureSystem.tick();
   for (const burrow of restored.world.burrows) {
     const count = restored.creatureSystem.agents.filter(agent => agent.species === "spiny-back-beetle" && agent.health > 0 && agent.burrowId === burrow.id).length;
-    assert.ok(count >= 0 && count <= (burrow.type === "small" ? 3 : 6), burrow.id);
+    assert.ok(count <= Math.max(savedCounts.get(burrow.id), BURROW_TYPES[burrow.type].populationLimit), burrow.id);
   }
   const colony = restored.colonies[0], beetle = restored.creatureSystem.agents.find(agent => agent.species === "spiny-back-beetle");
   Object.assign(beetle, { x: colony.x + 2, y: colony.y + 3 });

@@ -16,24 +16,34 @@ function fixture(tribe) {
 }
 
 test("기본 채집량은 1개이며 채집량·감지·수명·이속 보너스를 적용한다", () => {
-  assert.equal(unitStats(attributeCounts([])).capacity, 1);
+  for (const tribe of ["bean", "spore", "pebble", "spring"]) assert.equal(unitStats(attributeCounts([]), tribe).capacity, 1, tribe);
   assert.equal(unitStats(attributeCounts(["strength"])).capacity, 2);
-  assert.equal(unitStats(attributeCounts(["strength", "strength"])).capacity, 3);
-  assert.equal(unitStats(attributeCounts(["antenna"])).vision, 5);
+  assert.equal(unitStats(attributeCounts(["strength", "strength"])).capacity, 2);
+  assert.equal(unitStats(attributeCounts(["strength"], { strength: 2 })).capacity, 3);
+  assert.equal(unitStats(attributeCounts(["antenna"])).vision, 6);
   assert.equal(unitStats(attributeCounts([])).lifespan, 180);
   assert.equal(unitStats(attributeCounts(["lifespan"])).lifespan, 300);
   assert.equal(unitMovementSpeed(unitStats(attributeCounts(["feet"]))), .8);
 });
 
-test("네 부족의 초반 두 유닛에 감지와 채집량 증가를 각각 실제 장착한다", () => {
-  for (const tribe of ["bean", "spore", "pebble", "spring"]) {
+test("부족별 시작 인원과 실제 장착 속성이 채집 방식에 따라 다르다", () => {
+  const starts = { bean:[["antenna"], ["strength"], [], []], spore:[["strength"], ["lifespan"], [], []],
+    pebble:[["strength"], ["strength"], ["antenna"]], spring:[["feet"], ["feet"], ["antenna"]] };
+  for (const [tribe, slots] of Object.entries(starts)) {
     const game = fixture(tribe);
-    assert.deepEqual(game.agents.map(agent => agent.slots), [["antenna"], ["strength"]]);
-    assert.deepEqual(game.agents.map(agent => agent.stats.capacity), [1, 2]);
-    assert.deepEqual(game.agents.map(agent => agent.stats.vision), [5, 3]);
-    assert.ok(game.agents.every(agent => agent.attributes.feet === 0));
+    assert.deepEqual(game.agents.map(agent => agent.slots), slots);
+    assert.equal(game.nestLevel, 1);
+    assert.equal(new Set(game.agents.map(agent => agent.x + "," + agent.y)).size, slots.length);
     for (const agent of game.agents) assert.deepEqual(agent.appearanceAttributes, agent.attributes);
+    const saved = game.save(), ids = game.agents.map(agent => agent.id);
+    game.restore(saved);
+    assert.deepEqual(game.agents.map(agent => agent.id), ids);
+    assert.deepEqual(game.agents.map(agent => agent.slots), slots);
   }
+  assert.deepEqual(fixture("pebble").agents.map(agent => agent.stats.capacity), [2, 2, 1]);
+  assert.ok(fixture("spring").agents.slice(0, 2).every(agent => unitMovementSpeed(agent.stats) === .8));
+  assert.equal(fixture("spore").agents[1].stats.lifespan, 300);
+  assert.ok(fixture("pebble").agents.every(agent => agent.lifespan === 300));
 });
 
 test("1레벨에서 속성 없이 또는 하나만 넣어 생성하고 두 개는 거부한다", () => {
@@ -45,6 +55,24 @@ test("1레벨에서 속성 없이 또는 하나만 넣어 생성하고 두 개�
     assert.ok(game.command({ type: "birth", templateId: result.templateId }).agentId);
   }
   assert.throws(() => game.command({ type: "design", templateId: null, name: "초과", slots: ["antenna", "strength"], birth: true }), /설계 속성/);
+});
+
+test("몽돌의 5분 수명은 복제에 계승되고 이전 저장의 나이를 보존하며 한 번만 연장한다", () => {
+  const game = fixture("pebble");
+  const childId = game.command({type:"birth",agentId:game.agents[0].id}).agentId;
+  assert.equal(game.agents.find(agent=>agent.id===childId).lifespan, 300);
+  const saved = JSON.parse(game.save());
+  const legacy = saved.state.agents[0];
+  legacy.bornAt = 0;
+  saved.state.simSeconds = 120;
+  for (const lifespan of [180, 240]) {
+    legacy.lifespan = lifespan; legacy.stats.lifespan = lifespan;
+    game.restore(JSON.stringify(saved));
+    assert.equal(game.agents[0].bornAt, 0);
+    assert.equal(game.agents[0].lifespan, 300);
+    game.restore(game.save());
+    assert.equal(game.agents[0].lifespan, 300);
+  }
 });
 
 test("수명 속성은 출생부터 5분을 적용하고 3분에 죽지 않는다", () => {
@@ -84,18 +112,18 @@ test("두 번째 슬롯의 수명도 즉시 적용하고 이전 저장 복원과
   }
 });
 
-test("네 부족 모두 다섯 속성과 복수·중복 슬롯을 생성 즉시 적용하고 저장·복원한다", () => {
+test("네 부족 모두 고유 속성 슬롯과 강화 단계를 생성 즉시 적용하고 저장·복원한다", () => {
   const designs = [
-    [["antenna"], 5, 1, .5, 180],
+    [["antenna"], 6, 1, .5, 180],
     [["strength"], 3, 2, .5, 180],
     [["butchery"], 3, 1, .5, 180],
     [["lifespan"], 3, 1, .5, 300],
     [["feet"], 3, 1, .8, 180],
-    [["antenna", "strength"], 5, 2, .5, 180],
-    [["antenna", "strength", "butchery"], 5, 2, .5, 180],
-    [["antenna", "strength", "butchery", "feet"], 5, 2, .8, 180],
-    [["antenna", "butchery", "feet", "lifespan"], 5, 1, .8, 300],
-    [["strength", "strength", "feet", "lifespan"], 3, 3, .8, 300]
+    [["antenna", "strength"], 6, 2, .5, 180],
+    [["antenna", "strength", "butchery"], 6, 2, .5, 180],
+    [["antenna", "strength", "butchery", "feet"], 6, 2, .8, 180],
+    [["antenna", "butchery", "feet", "lifespan"], 6, 1, .8, 300],
+    [["strength", "feet", "lifespan"], 3, 2, .8, 300]
   ];
   for (const tribe of ["bean", "spore", "pebble", "spring"]) {
     for (const [slots, vision, capacity, speed, lifespan] of designs) {
@@ -113,7 +141,7 @@ test("네 부족 모두 다섯 속성과 복수·중복 슬롯을 생성 즉시 
         assert.equal(agent.stats.vision, vision, tribe);
         assert.equal(agent.stats.capacity, capacity, tribe);
         assert.equal(unitMovementSpeed(agent.stats), speed, tribe);
-        assert.equal(agent.lifespan, lifespan, tribe);
+        assert.equal(agent.lifespan, lifespan + (tribe === "pebble" ? slots.includes("lifespan") ? 180 : 120 : 0), tribe);
         assert.equal(agent.attributes.butchery, slots.includes("butchery") ? 1 : 0, tribe);
       }
     }
@@ -123,6 +151,9 @@ test("네 부족 모두 다섯 속성과 복수·중복 슬롯을 생성 즉시 
 test("이전 저장의 초반 유닛도 행동 역할에 맞는 실제 속성을 복원한다", () => {
   const game = fixture("bean");
   const saved = JSON.parse(game.save());
+  saved.state.agents = saved.state.agents.slice(0, 2);
+  saved.state.agents[0].actionPriorities = ["explore"];
+  saved.state.agents[1].actionPriorities = ["collect"];
   for (const agent of saved.state.agents) {
     agent.slots = [];
     agent.activeSlots = [];
@@ -134,9 +165,9 @@ test("이전 저장의 초반 유닛도 행동 역할에 맞는 실제 속성을
   assert.deepEqual(game.agents.map(agent => agent.stats.capacity), [1, 2]);
 });
 
-test("전용 이미지가 있는 다섯 속성만 제공하며 삭제한 속성의 시너지는 발동하지 않는다", () => {
-  assert.deepEqual(ATTRIBUTES.map(attribute => attribute.key), ["antenna", "strength", "butchery", "lifespan", "feet"]);
-  assert.deepEqual(ATTRIBUTES.map(attribute => attribute.name), ["감지", "채집량 증가", "분해", "수명", "이속 증가"]);
+test("기본·채집·건설·전투 속성을 제공하며 삭제한 속성의 시너지는 발동하지 않는다", () => {
+  assert.deepEqual(ATTRIBUTES.map(attribute => attribute.key), ["antenna", "strength", "butchery", "lifespan", "feet", "excavation", "construction", "blade", "piercing", "carapace", "guard", "regeneration", "secretion"]);
+  assert.deepEqual(ATTRIBUTES.map(attribute => attribute.name), ["감지", "채집량 증가", "흡수", "수명", "이속 증가", "굴착", "변태", "칼날", "관통", "갑피", "엄호", "재생", "분비"]);
   const counts = attributeCounts(["antenna", "strength", "strength", "lifespan", "feet", "feet"]);
   for (const key of ["harvest", "digging", "absorption", "climbing", "shell", "aggression", "peaceful"]) {
     assert.equal(Object.hasOwn(attributeCounts([key]), key), false);
@@ -148,7 +179,7 @@ test("전용 이미지가 있는 다섯 속성만 제공하며 삭제한 속성�
   assert.ok(Object.values(unitStats({})).every(Number.isFinite));
 });
 
-test("저장한 설계·개체의 폐기 속성은 제거하고 네 속성과 중복 장착을 보존한다", () => {
+test("저장한 설계·개체의 폐기 속성은 제거하고 중복 장착은 강화 단계로 보존한다", () => {
   const game = fixture("bean");
   const saved = JSON.parse(game.save());
   saved.state.nestLevel = 4;
@@ -158,7 +189,8 @@ test("저장한 설계·개체의 폐기 속성은 제거하고 네 속성과 �
     shield: 4, shieldUntil: 100, warningUntil: 100 });
   game.restore(JSON.stringify(saved));
   const restored = JSON.parse(game.save()).state;
-  assert.deepEqual(restored.templates[0].slots, ["strength", "antenna", "lifespan", "feet", "feet"]);
+  assert.deepEqual(restored.templates[0].slots, ["strength", "antenna", "lifespan", "feet"]);
+  assert.deepEqual(restored.templates[0].attributeLevels, { strength: 1, antenna: 1, lifespan: 1, feet: 2 });
   assert.deepEqual(game.agents[0].slots, restored.templates[0].slots);
   assert.equal(game.agents[0].stats.resistance, 1);
   assert.equal(game.agents[0].shield, 0);

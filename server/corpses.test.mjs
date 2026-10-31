@@ -21,7 +21,7 @@ function fixture(tribe) {
 function collect(game, agent, food) {
   Object.assign(agent, { x: food.x, y: food.y, renderFromX: food.x, renderFromY: food.y,
     moveStartedAt: 0, moveDuration: 0, moveBudget: 0, carrying: 0, carryingType: null,
-    mode: "approach", birth: null, decisionPending: null, nextDecisionAt: 1000,
+    mode: "approach", birth: null, survivalState: "stable", decisionPending: null, nextDecisionAt: 1000,
     utility: { action: "collect", target: { x: food.x, y: food.y, key: food.key || food.x + "," + food.y },
       route: [{ x: food.x, y: food.y }], plannedCargo: 1 } });
   game.snapshot();
@@ -31,15 +31,17 @@ test("사체는 자원·다른 사체와 같은 사망 칸에 남고 발견 기�
   const { game, environment } = fixture("bean");
   const resource = { x: 46, y: 42, amount: 7, resourceType: "clay", kind: "resource" };
   environment.food.set("46,42", resource);
-  for (const agent of [...game.agents]) {
+  const victims = [...game.agents];
+  for (const agent of victims) {
     Object.assign(agent, { x: 46, y: 42, renderFromX: 46, renderFromY: 42 });
     game.receiveDamage(agent, 1000);
   }
   const snapshot = game.snapshot();
   assert.equal(environment.food.get("46,42"), resource);
   assert.equal(resource.amount, 7);
-  assert.equal(snapshot.corpses.length, 2);
-  assert.equal(new Set(snapshot.corpses.map(cell => cell.key)).size, 2);
+  assert.equal(snapshot.corpses.length, victims.length);
+  assert.equal(new Set(snapshot.corpses.map(cell => cell.key)).size, victims.length);
+  assert.deepEqual(new Set(snapshot.corpses.map(cell => cell.agentId)), new Set(victims.map(agent => agent.id)));
   for (const corpse of snapshot.corpses) assert.deepEqual([corpse.x, corpse.y], [46,42]);
   assert.ok(snapshot.discoveries.some(entry => entry.key === "material:clay"));
   assert.ok(snapshot.discoveries.every(entry => entry.kind !== "corpse"));
@@ -91,8 +93,10 @@ test("겹친 사체도 지정한 대상을 채집하고 원래 자원을 보존�
   const { game, environment } = fixture("bean");
   const saved = JSON.parse(game.save());
   saved.state.evolutionPoints = 10;
+  saved.state.agents.splice(1);
   game.restore(JSON.stringify(saved));
   const designed = game.command({ type: "design", templateId: null, name: "분해 유닛", slots: ["butchery"], birth: true });
+  assert.ok(designed.agentId, "빈 탄생 공간에 회수 속성 개체가 생성되어야 합니다.");
   game.restore(game.save());
   const victim = game.agents[0];
   const harvester = game.agents.find(agent => agent.id === designed.agentId);
@@ -111,11 +115,13 @@ test("겹친 사체도 지정한 대상을 채집하고 원래 자원을 보존�
   game.prepare(2.501); game.tick(1.501);
   assert.equal(harvester.carryingType, "meat");
   assert.equal(harvester.carrying, 1);
-  assert.equal(environment.food.get(corpse.key).amount, before - 1);
+  assert.equal(environment.food.get(corpse.key)?.amount || 0, before - 1);
+  assert.equal(environment.food.has(corpse.key), before > 1);
+  assert.equal(game.snapshot().corpses.some(cell => cell.id === corpse.id), before > 1);
   assert.equal(resource.amount, 7);
 });
 
-test("고기 채집은 별도 속성으로 해금하고 네 종족의 시작 유닛은 모두 채집하지 못한다", () => {
+test("남겨진 양분은 회수 속성으로 해금하고 네 종족의 시작 유닛은 모두 채집하지 못한다", () => {
   const corpse = { x: 46, y: 42, kind: "corpse", resourceType: "meat", amount: 4 };
   for (const tribe of ["bean", "spore", "pebble", "spring"]) {
     const { game, environment } = fixture(tribe);

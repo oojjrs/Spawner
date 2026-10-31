@@ -1,0 +1,20 @@
+export const CREATURE_ATTACK_TIMINGS = Object.freeze({
+  "flower-tail-bird": Object.freeze({ durationMs: 970, hitTimeMs: 360 }),
+  "dew-rabbit": Object.freeze({ durationMs: 970, hitTimeMs: 360 }),
+  "soil-mole": Object.freeze({ durationMs: 1000, hitTimeMs: 370 }),
+  "bundle-snail": Object.freeze({ durationMs: 1065, hitTimeMs: 395 }),
+  "cotton-sheep": Object.freeze({ durationMs: 1030, hitTimeMs: 370 }),
+  "rolling-acorn": Object.freeze({ durationMs: 1020, hitTimeMs: 380 }),
+  "soil-boar": Object.freeze({ durationMs: 1020, hitTimeMs: 330 }),
+  "bubble-toad": Object.freeze({ durationMs: 1020, hitTimeMs: 330 }),
+  "vine-turtle": Object.freeze({ durationMs: 1020, hitTimeMs: 330 }),
+  "shadow-weasel": Object.freeze({ durationMs: 1020, hitTimeMs: 330 }),
+  "snare-vine": Object.freeze({ durationMs: 1020, hitTimeMs: 330 }),
+  "talon-owl": Object.freeze({ durationMs: 1020, hitTimeMs: 330 }),
+  "spring-keeper": Object.freeze({ durationMs: 905, hitTimeMs: 295 }),
+  "lantern-keeper": Object.freeze({ durationMs: 1000, hitTimeMs: 330 }),
+  "old-garden-snail": Object.freeze({ durationMs: 1570, hitTimeMs: 590 }),
+  "walking-forest": Object.freeze({ durationMs: 1460, hitTimeMs: 560 }),
+  "white-paw": Object.freeze({ durationMs: 920, hitTimeMs: 300 }),
+  "spiny-back-leader": Object.freeze({ durationMs: 1440, hitTimeMs: 530 })
+});

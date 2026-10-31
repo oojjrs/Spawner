@@ -1,11 +1,14 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import { createCombat, combatDisposition, canPursueCombat, peacefulEscapeChance, COMBAT_EXCHANGE_PAUSE } from "./combat.mjs";
 import { ENCOUNTER_TYPES } from "./encounter-types.mjs";
 import { createGame } from "./game.mjs";
 import { createCreatures } from "./creatures.mjs";
 import { AGENT_ATTACK_DURATION, AGENT_ATTACK_HIT_TIME, AGENT_HURT_DURATION } from "./attack.mjs";
 import { unitAnimationPose } from "../client/unit-animation.mjs";
+import { CREATURE_ATTACK_TIMINGS } from "./creature-attack.mjs";
+import { BEETLE_ANIMATIONS } from "./beetle-animation.mjs";
 
 function unit(id, ownerId, disposition) {
   return { id, ownerId, combatDisposition: disposition, x: 100, y: 100, renderFromX: 100, renderFromY: 100,
@@ -28,6 +31,10 @@ function fixture(units) {
   return { environment, combat, tick, hits };
 }
 
+function enclose(fixture, agent) {
+  for (const [dx, dy] of [[-1, 0], [1, 0], [0, -1], [0, 1]]) fixture.environment.world.terrain[(agent.y + dy) * 320 + agent.x + dx] = 0;
+}
+
 function finishExchange(fixture) {
   const agents = [...fixture.environment.games.values()].flatMap(game => game.agents);
   const attack = agents.find(agent => agent.attack)?.attack;
@@ -38,6 +45,9 @@ function finishExchange(fixture) {
   if (counter) {
     fixture.tick(counter.hitAt);
     fixture.tick(counter.exchangeEndsAt);
+  } else {
+    const pending = agents.find(agent => agent.combat?.pendingCounter)?.combat.pendingCounter;
+    if (pending) { fixture.tick(pending.hitAt); fixture.tick(pending.endsAt); }
   }
 }
 
@@ -64,10 +74,10 @@ test("비선공은 붙잡히면 반격하고 일반 행동·도주는 전투를 
   const a = unit("a", "left", "aggressive"), b = unit("b", "right", "passive");
   const f = fixture([a, b]);
   f.tick(0); f.tick(.3);
-  assert.equal(a.health, 70); assert.equal(b.health, 70);
+  assert.equal(a.health, 100); assert.equal(b.health, 85);
   const next = a.attack.exchangeEndsAt;
   f.tick(next); f.tick(next + .3);
-  assert.equal(a.health, 70); assert.equal(b.health, 70);
+  assert.equal(a.health, 85); assert.equal(b.health, 85);
   b.mode = "flee"; b.moveBudget = 5;
   f.tick(next + .4);
   assert.equal(b.combat.id, a.combat.id);
@@ -105,7 +115,7 @@ test("평화형은 근접 교전에서 반격하고 교전 사이에 안전한 �
   let rolls = 0;
   f.environment.combatRandom = () => ++rolls === 1 ? .9 : .1;
   f.tick(0); f.tick(.3);
-  assert.equal(a.health, 70); assert.equal(b.health, 70);
+  assert.equal(a.health, 100); assert.equal(b.health, 85);
   assert.equal(rolls, 0);
   const counterAt = a.attack.exchangeEndsAt;
   f.tick(counterAt);
@@ -158,7 +168,7 @@ test("저장한 공격과 탈출 대기를 복원해도 중복 피해·즉시 �
   const restored = JSON.parse(JSON.stringify([a, b]));
   const next = fixture(restored);
   next.tick(.3); next.tick(.3);
-  assert.deepEqual(next.hits, ["b", "a"]);
+  assert.deepEqual(next.hits, ["b"]);
   const again = fixture(JSON.parse(JSON.stringify(restored)));
   again.tick(.4);
   assert.equal(again.hits.length, 0);
@@ -174,6 +184,9 @@ test("마지막 적이 죽으면 전투를 해제하며 죽은 생명체의 사�
   assert.equal(b.mode, "death");
   assert.ok(a.combat);
   f.tick(a.attack.exchangeEndsAt);
+  const pending = a.combat.pendingCounter;
+  f.tick(pending.hitAt);
+  f.tick(pending.endsAt);
   assert.ok(!a.combat);
 });
 
@@ -185,7 +198,7 @@ test("유니크는 비선공 또는 선공만 허용하고 일반 평화종과 �
 });
 
 test("네 종족 모두 실제 게임에서 성향을 적용하고 전투 상태를 저장·복원한다", () => {
-  for (const [tribe, remaining] of [["bean", 70], ["spore", 72], ["pebble", 68], ["spring", 71]]) {
+  for (const [tribe, remaining] of [["bean", 85], ["spore", 86], ["pebble", 84], ["spring", 86]]) {
     const colony = { id: 1, ownerId: tribe, tribe, x: 40, y: 40, occupiedCells: new Set(["2,2"]) };
     const environment = { simSeconds: 10, damageRandom: () => .5, world: { seed: 13, terrain: new Uint8Array(320 * 320).fill(4), hazards: new Uint8Array(320 * 320) },
       colonies: [colony], games: new Map(), food: new Map(), foodSpots: new Map() };
@@ -230,7 +243,7 @@ test("실제 딱정벌레는 인접 셀에서 원격 공격하지 않고 같은 
   assert.ok(beetle.attack);
   environment.simSeconds = beetle.attack.hitAt;
   environment.creatureSystem.tick();
-  assert.equal(target.health, 52);
+  assert.equal(target.health, 76);
 });
 
 test("중립으로 표시된 비선공 유니크도 실제 전투에 붙잡히면 반격한다", () => {
@@ -250,6 +263,7 @@ test("중립으로 표시된 비선공 유니크도 실제 전투에 붙잡히�
   const unique = environment.creatureSystem.agents[0];
   assert.equal(unique.faction, "neutral");
   game.agents[0].x = 140;
+  enclose({ environment }, game.agents[0]);
   game.prepare(400); game.tick(.01);
   assert.equal(unique.combat.id, game.agents[0].combat.id);
   for (let exchange = 0; exchange < 3 && !unique.attack; exchange++) {
@@ -259,7 +273,7 @@ test("중립으로 표시된 비선공 유니크도 실제 전투에 붙잡히�
   }
   assert.ok(unique.attack);
   environment.simSeconds = unique.attack.hitAt; game.prepare(environment.simSeconds); environment.creatureSystem.tick();
-  assert.equal(game.agents[0].health, 28);
+  assert.equal(game.agents[0].health, 64);
   assert.deepEqual([unique.x, unique.y], [140, 140]);
 });
 
@@ -325,7 +339,7 @@ test("구형 저장에서 겹친 공격은 한 교환으로 정리하고 피해�
   delete a.combat.nextAttackTurn; delete b.combat.nextAttackTurn;
   f.tick(.5); f.tick(.5);
   assert.equal(b.attack, null);
-  assert.deepEqual(f.hits, ["B", "A"]);
+  assert.deepEqual(f.hits, ["B"]);
 });
 
 for (const [leftCount, rightCount] of [[3, 1], [1, 3], [2, 2]]) {
@@ -351,22 +365,148 @@ for (const [leftCount, rightCount] of [[3, 1], [1, 3], [2, 2]]) {
   });
 }
 
-test("누가 근접전을 시작해도 같은 교전에서 양쪽 피해를 적용한다", () => {
+test("양쪽 피해를 교전 시작에 확정하고 공격과 반격의 명중 시점에 따로 차감한다", () => {
   for (const first of ["A", "B"]) {
     const a = unit("A", "left", "aggressive"), b = unit("B", "right", "aggressive"), f = fixture([a, b]);
     f.combat.engage(first === "A" ? a : b, first === "A" ? b : a, 0);
-    f.tick(0); f.tick(AGENT_ATTACK_HIT_TIME);
-    assert.equal(a.health, 70); assert.equal(b.health, 70);
+    f.tick(0); f.tick(AGENT_ATTACK_HIT_TIME - .001);
+    assert.deepEqual([a.health, b.health], [100, 100]);
+    f.tick(AGENT_ATTACK_HIT_TIME);
+    assert.deepEqual([a.health, b.health], first === "A" ? [100, 85] : [85, 100]);
+    const attacker = first === "A" ? a : b, defender = first === "A" ? b : a;
+    f.tick(attacker.attack.exchangeEndsAt);
+    const hitAt = defender.attack.hitAt;
+    f.tick(hitAt - .001);
+    assert.deepEqual([a.health, b.health], first === "A" ? [100, 85] : [85, 100]);
+    f.tick(hitAt);
+    assert.deepEqual([a.health, b.health], [85, 85]);
     assert.deepEqual([...f.hits].sort(), ["A", "B"]);
   }
 });
 
-test("치명타로 양쪽이 사망해도 이미 성립한 반격 피해를 누락하지 않는다", () => {
+test("부상은 교전 시작 체력을 기준으로 양쪽 피해에 한 번 반영한다", () => {
+  for (const first of ["A", "B"]) {
+    const a = unit("A", "left", "aggressive"), b = unit("B", "right", "aggressive");
+    a.health = 50;
+    const f = fixture([a, b]);
+    enclose(f, a);
+    f.combat.engage(first === "A" ? a : b, first === "A" ? b : a, 0);
+    f.tick(0);
+    finishExchange(f);
+    assert.deepEqual([a.health, b.health], [32, 88]);
+    assert.equal(f.hits.length, 2);
+  }
+});
+
+test("구형 저장의 미명중 교전은 부상을 반영하되 명중한 교전은 다시 적용하지 않는다", () => {
+  const a = unit("A", "left", "aggressive"), b = unit("B", "right", "passive");
+  a.health = 50;
+  let f = fixture([a, b]);
+  enclose(f, a);
+  f.tick(0);
+  a.attack.exchange = { ...a.attack.exchange, attackDamage: 30, counterDamage: 30 };
+  delete a.attack.exchange.damageVersion;
+  let saved = JSON.parse(JSON.stringify([a, b]));
+  f = fixture(saved);
+  f.tick(AGENT_ATTACK_HIT_TIME);
+  assert.deepEqual(saved.map(agent => agent.health), [50, 88]);
+  delete saved[0].attack.exchange.damageVersion;
+  saved = JSON.parse(JSON.stringify(saved));
+  f = fixture(saved);
+  f.tick(.5);
+  assert.deepEqual(saved.map(agent => agent.health), [50, 88]);
+  assert.deepEqual(f.hits, []);
+  f.tick(saved[0].attack.exchangeEndsAt);
+  f.tick(saved[1].attack.hitAt);
+  assert.deepEqual(saved.map(agent => agent.health), [32, 88]);
+});
+
+test("방어자가 첫 타격에 죽어 제거돼도 확정한 반격은 다음 명중 시점에 한 번 처리한다", () => {
   const a = unit("A", "left", "aggressive"), b = unit("B", "right", "passive"), f = fixture([a, b]);
   a.health = b.health = 1;
+  enclose(f, a);
   f.tick(0); f.tick(AGENT_ATTACK_HIT_TIME);
-  assert.equal(a.health, 0); assert.equal(b.health, 0);
+  assert.equal(a.health, 1); assert.equal(b.health, 0);
+  assert.deepEqual(f.hits, ["B"]);
+  f.environment.games.get("right").agents.length = 0;
+  f.tick(a.attack.exchangeEndsAt);
+  assert.equal(b.attack, null);
+  assert.equal(a.health, 1);
+  const pending = a.combat.pendingCounter;
+  assert.ok(pending);
+  f.tick(pending.hitAt - .001);
+  assert.equal(a.health, 1);
+  f.tick(pending.hitAt);
+  assert.equal(a.health, 0);
   assert.deepEqual(f.hits, ["B", "A"]);
+});
+
+test("교전 시작에 양쪽 난수를 한 번씩 뽑고 반격 명중 때 다시 뽑지 않는다", () => {
+  const a = unit("A", "left", "aggressive"), b = unit("B", "right", "passive"), f = fixture([a, b]);
+  let rolls = 0;
+  f.environment.damageRandom = () => { rolls++; return .5; };
+  f.tick(0);
+  assert.equal(rolls, 2);
+  assert.deepEqual([a.attack.exchange.attackerHealth, a.attack.exchange.targetHealth], [100, 100]);
+  finishExchange(f);
+  assert.deepEqual([a.health, b.health], [85, 85]);
+  assert.equal(rolls, 4);
+});
+
+test("방어자 제거 뒤 저장한 확정 반격도 복원 후 중복 없이 처리한다", () => {
+  const a = unit("A", "left", "aggressive"), b = unit("B", "right", "passive");
+  b.health = 1;
+  let f = fixture([a, b]);
+  f.tick(0); f.tick(AGENT_ATTACK_HIT_TIME); f.tick(a.attack.exchangeEndsAt);
+  const saved = JSON.parse(JSON.stringify(a));
+  f = fixture([saved]);
+  f.tick(saved.combat.pendingCounter.hitAt);
+  assert.equal(saved.health, 90);
+  assert.deepEqual(f.hits, ["A"]);
+  const again = JSON.parse(JSON.stringify(saved));
+  const restored = fixture([again]);
+  restored.tick(again.combat.pendingCounter.hitAt + .01);
+  assert.equal(again.health, 90);
+  assert.deepEqual(restored.hits, []);
+});
+
+test("이전 동시 피해 저장에서 이미 차감한 반격을 새 명중 시점에 다시 차감하지 않는다", () => {
+  const a = unit("A", "left", "aggressive"), b = unit("B", "right", "passive");
+  let f = fixture([a, b]);
+  f.tick(0);
+  a.health = b.health = 70;
+  a.attack.resolved = a.attack.hit = true;
+  Object.assign(a.attack.exchange, { damageVersion: 2, attackApplied: true, counterApplied: true,
+    attackDamage: 30, counterDamage: 30, resolved: true });
+  const saved = JSON.parse(JSON.stringify([a, b]));
+  f = fixture(saved);
+  f.tick(saved[0].attack.exchangeEndsAt);
+  f.tick(saved[1].attack.hitAt);
+  assert.deepEqual(saved.map(agent => agent.health), [70, 70]);
+  assert.deepEqual(f.hits, []);
+});
+
+test("구형 딱정벌레의 인접 공격도 같은 셀에 이동해 새 근접전 명중부터 처리한다", () => {
+  const environment = { simSeconds: 0, damageRandom: () => .5, games: new Map(), colonies: [], food: new Map(), foodSpots: new Map(),
+    world: { seed: 7, sites: [], terrain: new Uint8Array(320 * 320).fill(4), hazards: new Uint8Array(320 * 320),
+      burrows: [{ id: "home", type: "small", x: 130, y: 200, width: 1, height: 1, entrance: { x: 130, y: 201 } }] } };
+  environment.creatureSystem = createCreatures(environment, null);
+  const beetle = environment.creatureSystem.agents[0], target = unit("target", "player", "passive");
+  target.x = 101;
+  Object.assign(beetle, { x: 100, y: 100, homeX: 100, homeY: 100, renderFromX: 100, renderFromY: 100,
+    mode: "attack", attackStartedAt: -1, attackTargetId: target.id, attackHit: false });
+  environment.games.set("player", { agents: [target], receiveDamage(agent, damage) { agent.health -= damage; } });
+  environment.creatureSystem.tick();
+  assert.equal(target.health, 100);
+  assert.equal(beetle.mode, "walk");
+  environment.simSeconds = beetle.moveDuration;
+  environment.creatureSystem.tick();
+  assert.ok(beetle.attack?.combatId);
+  const hitAt = beetle.attack.hitAt;
+  environment.simSeconds = hitAt;
+  environment.creatureSystem.tick();
+  assert.equal(target.health, 76);
+  assert.equal(beetle.health, 100);
 });
 
 test("반격 연출 중 저장·복원해도 피해와 차례를 다시 적용하지 않는다", () => {
@@ -379,8 +519,11 @@ test("반격 연출 중 저장·복원해도 피해와 차례를 다시 적용�
   const saved = JSON.parse(JSON.stringify([a, b]));
   f = fixture(saved);
   f.tick(saved[1].attack.hitAt);
-  assert.deepEqual(saved.map(agent => agent.health), [70, 70]);
-  assert.deepEqual(f.hits, []);
+  assert.deepEqual(saved.map(agent => agent.health), [85, 85]);
+  assert.deepEqual(f.hits, ["A"]);
+  const restored = fixture(JSON.parse(JSON.stringify(saved)));
+  restored.tick(saved[1].attack.hitAt + .01);
+  assert.deepEqual(restored.hits, []);
   f.tick(saved[1].attack.exchangeEndsAt);
   assert.ok(saved[1].attack && !saved[1].attack.counter);
   assert.equal(saved[1].combat.nextAttackTurn, 2);
@@ -398,4 +541,186 @@ test("이동 속도로 가중된 이전 저장 차례를 교대 교전으로 변
   assert.ok(saved[1].attack && !saved[1].attack.counter);
   assert.equal(saved[0].combat.turnOrderVersion, 1);
   assert.equal(saved[1].combat.turnOrderVersion, 1);
+});
+
+test("18종의 공격과 반격은 V2 타격 셀에서 한 번 명중하고 전체 동작을 마친다", () => {
+  assert.equal(Object.keys(CREATURE_ATTACK_TIMINGS).length, 18);
+  for (const species of Object.keys(CREATURE_ATTACK_TIMINGS)) {
+    const animation = JSON.parse(readFileSync(new URL("../DesignAssets/Animations/CreatureAttackV2/" + species + "/attack.json", import.meta.url), "utf8"));
+    const hitTime = animation.durationsMs.slice(0, animation.impactFrame).reduce((total, duration) => total + duration, 0) / 1000;
+    const duration = animation.durationsMs.reduce((total, value) => total + value, 0) / 1000;
+    assert.deepEqual(CREATURE_ATTACK_TIMINGS[species], { durationMs: duration * 1000, hitTimeMs: hitTime * 1000 });
+    for (const counter of [false, true]) {
+      const creature = unit("creature", "wild", "aggressive"), player = unit("player", "colony", "aggressive");
+      creature.species = species;
+      const f = fixture([creature, player]);
+      enclose(f, player);
+      f.combat.engage(counter ? player : creature, counter ? creature : player, 0);
+      f.tick(0);
+      if (counter) {
+        assert.equal(player.attack.exchange.counterHitTime, hitTime);
+        assert.equal(player.attack.exchange.counterDuration, duration);
+        f.tick(player.attack.hitAt);
+        f.tick(player.attack.exchangeEndsAt);
+      }
+      const attack = creature.attack;
+      assert.equal(attack.counter, counter);
+      assert.ok(Math.abs(attack.hitAt - attack.startedAt - hitTime) < 1e-8);
+      assert.ok(Math.abs(attack.endsAt - attack.startedAt - duration) < 1e-8);
+      const health = player.health, hits = f.hits.length;
+      f.tick(attack.hitAt - .000001);
+      assert.equal(player.health, health);
+      f.tick(attack.hitAt);
+      assert.ok(player.health < health);
+      assert.equal(f.hits.length, hits + 1);
+      const remaining = player.health;
+      f.tick(attack.hitAt);
+      assert.equal(player.health, remaining);
+      f.tick(attack.endsAt - .000001);
+      assert.equal(creature.attack, attack);
+    }
+  }
+});
+
+test("플레이어와 기존 딱정벌레의 공격 명중 및 종료 시점은 유지한다", () => {
+  for (const species of [null, "spiny-back-beetle"]) {
+    const a = unit("a", "left", "aggressive"), b = unit("b", "right", "passive"), f = fixture([a, b]);
+    a.species = species;
+    f.tick(0);
+    assert.equal(a.attack.hitAt, species ? BEETLE_ANIMATIONS.attack.hitTimeMs / 1000 : AGENT_ATTACK_HIT_TIME);
+    assert.equal(a.attack.endsAt, species ? BEETLE_ANIMATIONS.attack.durationMs / 1000 : AGENT_ATTACK_DURATION);
+  }
+});
+
+test("이전 종별 공격 저장은 새 타격 시점으로 옮기며 이미 적용한 피해는 보존한다", () => {
+  for (const resolved of [false, true]) {
+    const creature = unit("creature", "wild", "aggressive"), player = unit("player", "colony", "passive");
+    creature.species = "old-garden-snail";
+    let f = fixture([creature, player]);
+    f.tick(0);
+    if (resolved) f.tick(creature.attack.hitAt);
+    Object.assign(creature.attack, { hitAt: .3, endsAt: 1, exchangeEndsAt: 1.2 });
+    const saved = JSON.parse(JSON.stringify([creature, player])), health = saved[1].health;
+    f = fixture(saved);
+    f.tick(.31);
+    assert.equal(saved[0].attack.hitAt, .59);
+    assert.equal(saved[0].attack.endsAt, 1.57);
+    assert.equal(saved[1].health, health);
+    f.tick(.59);
+    assert.equal(f.hits.length, resolved ? 0 : 1);
+    f.tick(.59);
+    assert.equal(f.hits.length, resolved ? 0 : 1);
+  }
+});
+
+test("제거된 생명체의 저장된 확정 반격도 해당 종의 타격 시점과 길이를 따른다", () => {
+  const player = unit("player", "colony", "aggressive"), creature = unit("creature", "wild", "passive");
+  creature.species = "old-garden-snail";
+  creature.health = 1;
+  let f = fixture([player, creature]);
+  f.tick(0);
+  f.tick(player.attack.hitAt);
+  f.environment.games.get("wild").agents.length = 0;
+  f.tick(player.attack.exchangeEndsAt);
+  const pending = player.combat.pendingCounter, startedAt = pending.startedAt;
+  Object.assign(pending, { hitAt: startedAt + .3, endsAt: startedAt + 1.2 });
+  Object.assign(pending.exchange, { counterHitTime: .3, counterDuration: 1 });
+  delete pending.startedAt;
+  const saved = JSON.parse(JSON.stringify(player));
+  f = fixture([saved]);
+  f.tick(startedAt + .31);
+  assert.equal(saved.health, 100);
+  assert.ok(Math.abs(saved.combat.pendingCounter.hitAt - startedAt - .59) < 1e-8);
+  assert.ok(Math.abs(saved.combat.pendingCounter.endsAt - startedAt - 1.77) < 1e-8);
+  f.tick(startedAt + .59);
+  assert.equal(f.hits.length, 1);
+  const health = saved.health;
+  f.tick(startedAt + .59);
+  assert.equal(saved.health, health);
+});
+
+test("일반 유닛은 위급한 자기 차례에 공격 대신 탈출하고 회복 의사를 유지한다", () => {
+  const a = unit("a", "left", "aggressive"), b = unit("b", "right", "passive");
+  a.health = 25;
+  const f = fixture([a, b]);
+  let rolls = 0;
+  f.environment.combatRandom = () => { rolls++; return .1; };
+  f.tick(0);
+  assert.equal(rolls, 1);
+  assert.equal(a.attack, null);
+  assert.equal(a.combat, null);
+  assert.equal(a.retreat.recoverHealth, 70);
+  assert.equal(a.retreat.attempts, 1);
+  assert.equal(a.mode, "flee");
+  assert.equal(canPursueCombat(a, b, 10), false);
+  assert.deepEqual(f.hits, []);
+});
+
+test("탈출 실패는 차례를 소모하고 진행 중인 반격 뒤 다음 자기 차례에 다시 시도한다", () => {
+  const a = unit("a", "left", "aggressive"), b = unit("b", "right", "passive");
+  a.health = 45;
+  const f = fixture([a, b]);
+  let rolls = 0;
+  f.environment.combatRandom = () => ++rolls === 1 ? .99 : .1;
+  f.tick(0);
+  assert.equal(rolls, 1);
+  assert.ok(a.retreat);
+  assert.equal(a.attack, null);
+  f.tick(0); f.tick(.1);
+  assert.equal(rolls, 1);
+  f.tick(.2);
+  assert.ok(b.attack && !b.attack.counter);
+  f.tick(b.attack.hitAt);
+  assert.equal(rolls, 1);
+  const savedRetreat = structuredClone(a.retreat);
+  f.tick(b.attack.exchangeEndsAt);
+  assert.ok(a.attack.counter);
+  assert.deepEqual(a.retreat, savedRetreat);
+  f.tick(a.attack.hitAt);
+  const endedAt = a.attack.exchangeEndsAt;
+  f.tick(endedAt);
+  assert.equal(rolls, 2);
+  assert.equal(a.combat, null);
+  assert.equal(a.retreat.attempts, 2);
+});
+
+test("후퇴 중인 아군은 같은 셀의 전투에 자동 합류하지 않지만 적에게 붙잡힐 수 있다", () => {
+  const a = unit("a", "left", "aggressive"), b = unit("b", "right", "passive"), ally = unit("ally", "left", "passive");
+  ally.retreat = { recoverHealth: 70, safeSince: null, startedAt: 0, attempts: 1 };
+  const f = fixture([a, b, ally]);
+  f.tick(0);
+  assert.ok(a.combat && b.combat);
+  assert.equal(ally.combat, undefined);
+  b.combatDisposition = "aggressive";
+  assert.equal(canPursueCombat(b, ally, 5), true);
+  assert.equal(canPursueCombat(ally, b, 5), false);
+});
+
+test("탈출할 인접 셀이 없으면 위급해도 멈추지 않고 마지막 전투를 수행한다", () => {
+  const a = unit("a", "left", "aggressive"), b = unit("b", "right", "passive");
+  a.health = 20;
+  const f = fixture([a, b]);
+  for (const [x, y] of [[99, 100], [101, 100], [100, 99], [100, 101]]) f.environment.world.terrain[y * 320 + x] = 0;
+  let rolls = 0;
+  f.environment.combatRandom = () => { rolls++; return 0; };
+  f.tick(0);
+  assert.ok(a.attack);
+  assert.ok(a.retreat);
+  assert.equal(rolls, 0);
+});
+
+test("변태 중에도 공격받지만 반격이나 도주로 행동을 바꾸지 않는다", () => {
+  const a = unit("a", "left", "aggressive"), b = unit("b", "right", "passive");
+  b.construction = { state: "transforming" };
+  const f = fixture([a, b]);
+  f.tick(0);
+  assert.ok(b.combat);
+  assert.equal(b.mode, "transform");
+  f.tick(a.attack.hitAt);
+  assert.equal(b.health, 85);
+  f.tick(a.attack.exchangeEndsAt);
+  assert.equal(b.attack, null);
+  assert.equal(b.retreat, undefined);
+  assert.equal(b.mode, "transform");
+  assert.equal(a.health, 100);
 });

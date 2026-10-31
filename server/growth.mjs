@@ -1,21 +1,19 @@
 import { attributeCounts, unitStats } from "./attributes.mjs";
 import { AGENT_LIFESPAN } from "./lifespan.mjs";
 
-export const AGENT_GROWTH_THRESHOLDS = Object.freeze([0, 15, 35, 60, 90, 120, 155, 195, 240, 290, 345, 405]);
+export const AGENT_GROWTH_BONUSES = Object.freeze({ movement: .02, harvest: .03, combatStrength: .5 });
+
+export const AGENT_GROWTH_THRESHOLDS = Object.freeze([0, 15, 33, 54, 78, 105, 135, 168, 204, 243]);
 
 export function agentGrowth(agent, simSeconds) {
-  const age = Math.max(0, simSeconds - agent.bornAt);
-  const activity = Math.max(0, Number.isFinite(agent.growthActivity) ? agent.growthActivity : 0);
-  const experience = age + Math.min(age * 0.4, activity);
+  const experience = Math.max(0, Number.isFinite(agent.growthActivity) ? agent.growthActivity : 0);
   let level = 1;
   while (experience >= growthThreshold(level + 1)) level++;
   return { level, experience, activeSlots: [...agent.slots] };
 }
 
 export function growthThreshold(level) {
-  if (level <= AGENT_GROWTH_THRESHOLDS.length) return AGENT_GROWTH_THRESHOLDS[level - 1];
-  const extra = level - AGENT_GROWTH_THRESHOLDS.length;
-  return 405 + extra * 60 + extra * (extra + 1) * 2.5;
+  return 1.5 * (level - 1) * (level + 8);
 }
 
 export function applyAgentGrowth(agent, simSeconds) {
@@ -25,8 +23,12 @@ export function applyAgentGrowth(agent, simSeconds) {
   const previousLifespan = agent.stats.lifespan || AGENT_LIFESPAN;
   agent.level = growth.level;
   agent.activeSlots = growth.activeSlots;
-  agent.attributes = attributeCounts(agent.activeSlots);
+  agent.attributes = attributeCounts(agent.activeSlots, agent.attributeLevels);
   agent.stats = unitStats(agent.attributes, agent.tribe);
+  const ranks = growth.level - 1;
+  agent.stats.movementMultiplier = (agent.stats.movementMultiplier ?? 1) * (1 + ranks * AGENT_GROWTH_BONUSES.movement);
+  agent.stats.harvestSpeedMultiplier = 1 + ranks * AGENT_GROWTH_BONUSES.harvest;
+  agent.stats.combatStrength += ranks * AGENT_GROWTH_BONUSES.combatStrength;
   agent.lifespan = (Number.isFinite(agent.lifespan) ? agent.lifespan : previousLifespan) + agent.stats.lifespan - previousLifespan;
   agent.health = Math.min(agent.stats.health, agent.health + Math.max(0, agent.stats.health - previousHealth));
   return true;

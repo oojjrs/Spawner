@@ -1,6 +1,8 @@
 import { imageAnimation } from "../client/image-geometry.mjs";
 
 export const BEETLE_ANIMATION_ASSET = "DesignAssets/Animations/Beetle/atlas.webp";
+export const BEETLE_ATTACK_ASSET = "DesignAssets/Animations/Beetle/attack-right.webp";
+export const BEETLE_ATTACK_SPRITE = Object.freeze(imageAnimation({ image: BEETLE_ATTACK_ASSET, frameSize: 512, columns: 5, pivotX: 247, pivotY: 450, scale: 1.6, facing: "right" }));
 export const BEETLE_NEUTRAL_ASSET = "DesignAssets/Animations/Beetle/neutral.webp";
 export const BEETLE_SPRITE = Object.freeze(imageAnimation({ image: BEETLE_ANIMATION_ASSET, frameSize: 512, columns: 5, pivotX: 265, pivotY: 450, scale: 1.6 }));
 export const BEETLE_ANIMATIONS = {
@@ -56,12 +58,12 @@ export const BEETLE_ANIMATIONS = {
   },
   "attack": {
     "frames": [
-      10,
-      11,
-      12,
-      13,
-      14,
-      10
+      0,
+      1,
+      2,
+      3,
+      4,
+      0
     ],
     "durations": [
       80,

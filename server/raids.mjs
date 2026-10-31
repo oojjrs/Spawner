@@ -1,11 +1,18 @@
-export const BEETLE_RAIDS = Object.freeze({ firstAt:180, firstSpread:30, interval:120, intervalSpread:60, activityDuration:30, defenders:3 });
+import { COLONY_RAID_PRESSURE, colonyRaidPressure } from "./raid-pressure.mjs";
+
+export const BEETLE_RAIDS = Object.freeze({ firstAt:120, firstSpread:30, interval:60, intervalSpread:0, activityDuration:30, defenders:3, concurrent:4 });
 
 export function createBeetleRaids(environment, state, actions, restoring) {
   const size = 320, sites = new Map((environment.world.burrows || []).map(burrow => [burrow.id, burrow]));
-  const routes = new Map(), checks = new Map();
+  const routes = new Map(), checks = new Map(), origins = new Map(), sourceIds = new Set(), approaches = new Map();
   if (restoring) {
     if (!Array.isArray(state.raidCooldowns) || new Set(state.raidCooldowns.map(entry => entry?.colonyId)).size !== state.raidCooldowns.length ||
-        state.raidCooldowns.some(entry => !Number.isInteger(entry?.colonyId) || !Number.isFinite(entry.nextRaidAt) || entry.nextRaidAt < 0)) throw new Error("습격 저장 형식이 올바르지 않습니다.");
+        state.raidCooldowns.some(entry => !Number.isInteger(entry?.colonyId) || !Number.isFinite(entry.nextRaidAt) || entry.nextRaidAt < 0 ||
+          entry.opening && (entry.opening.version !== 1 || !Number.isFinite(entry.opening.rate) || entry.opening.rate < 0 ||
+            !Number.isFinite(entry.opening.pressure) || entry.opening.pressure < 0 || entry.opening.pressure > 1 ||
+            !Number.isInteger(entry.opening.nearby) || entry.opening.nearby < 0 ||
+            !Number.isFinite(entry.opening.interval) || entry.opening.interval < COLONY_RAID_PRESSURE.fastInterval || entry.opening.interval > COLONY_RAID_PRESSURE.slowInterval ||
+            !Number.isFinite(entry.opening.arrivalAt) || entry.opening.arrivalAt < BEETLE_RAIDS.firstAt))) throw new Error("습격 저장 형식이 올바르지 않습니다.");
   } else state.raidCooldowns = [];
   for (const record of state.burrows) {
     const site = sites.get(record.id);
@@ -61,36 +68,85 @@ export function createBeetleRaids(environment, state, actions, restoring) {
     }
     return null;
   }
-  function dispatch() {
-    const now = environment.simSeconds;
+  function source(colony) {
+    const distances = new Int32Array(size * size).fill(-1), queue = new Int32Array(size * size), candidates = [];
+    let head = 0, tail = 0;
+    for (const cell of boundary(colony)) {
+      const index = cell.y * size + cell.x;
+      if (distances[index] >= 0) continue;
+      distances[index] = 0; queue[tail++] = index;
+    }
+    while (head < tail) {
+      const index = queue[head++], x = index % size, y = Math.floor(index / size);
+      for (const [nx, ny] of [[x - 1,y], [x + 1,y], [x,y - 1], [x,y + 1]]) {
+        if (nx < 0 || ny < 0 || nx >= size || ny >= size) continue;
+        const next = ny * size + nx;
+        if (distances[next] >= 0 || !actions.walkable(nx, ny, true)) continue;
+        distances[next] = distances[index] + 1; queue[tail++] = next;
+      }
+    }
     for (const record of state.burrows) {
       const site = sites.get(record.id);
-      if (site.type !== "large" || record.health <= 0 || now + 1e-8 < record.nextRaidAt || now < (checks.get(record.id) || 0)) continue;
-      checks.set(record.id, now + 5);
+      if (site.type !== "large" || site.creature?.unique || record.health <= 0) continue;
+      const distance = distances[site.entrance.y * size + site.entrance.x];
+      if (distance >= 0) candidates.push({ record, distance });
+    }
+    candidates.sort((left, right) => left.distance - right.distance);
+    approaches.set(colony.id, candidates.map(candidate => ({ id:candidate.record.id, seconds:candidate.distance * actions.stepSeconds })));
+    const selected = candidates.find(candidate => !sourceIds.has(candidate.record.id)) || candidates[0];
+    if (!selected) return null;
+    origins.set(colony.id, selected.record);
+    sourceIds.add(selected.record.id);
+    return selected.record;
+  }
+  for (const colony of environment.colonies) {
+    if (!environment.games.has(colony.ownerId) || environment.games.get(colony.ownerId).nest?.health === 0) continue;
+    const record = source(colony);
+    if (!state.raidCooldowns.some(entry => entry.colonyId === colony.id)) state.raidCooldowns.push({ colonyId:colony.id,
+      nextRaidAt:Math.max(environment.simSeconds, record?.nextRaidAt ?? BEETLE_RAIDS.firstAt) });
+    if (record) actions.reinforce(record);
+  }
+  function dispatch() {
+    const now = environment.simSeconds;
+    for (const colony of environment.colonies) {
+      if (!environment.games.has(colony.ownerId) || environment.games.get(colony.ownerId).nest?.health === 0) continue;
+      let cooldown = state.raidCooldowns.find(entry => entry.colonyId === colony.id);
+      if (!cooldown) {
+        cooldown = { colonyId:colony.id, nextRaidAt:Math.max(BEETLE_RAIDS.firstAt, now) };
+        state.raidCooldowns.push(cooldown);
+      }
+      const game = environment.games.get(colony.ownerId);
+      if (!cooldown.opening && now >= COLONY_RAID_PRESSURE.openingSeconds && Number.isFinite(game.colonyFood)) {
+        const options = approaches.get(colony.id) || [];
+        cooldown.opening = colonyRaidPressure(game.colonyFood, Math.max(now, COLONY_RAID_PRESSURE.openingSeconds),
+          options.map(option => option.seconds), BEETLE_RAIDS.firstAt, colony.tribe);
+        const origin = origins.get(colony.id), approach = options.find(option => option.id === origin?.id);
+        if (origin?.raidSequence === 0 && approach && !state.agents.some(agent => agent.raid?.colonyId === colony.id))
+          cooldown.nextRaidAt = Math.max(cooldown.nextRaidAt, cooldown.opening.arrivalAt - approach.seconds);
+      }
+      if (now + 1e-8 < cooldown.nextRaidAt || now < (checks.get(colony.id) || 0)) continue;
+      checks.set(colony.id, now + 5);
+      if (state.agents.filter(agent => agent.health > 0 && agent.raid?.colonyId === colony.id).length >= BEETLE_RAIDS.concurrent) continue;
+      let record = origins.get(colony.id);
+      if (!record || record.health <= 0) record = source(colony);
+      if (!record) continue;
+      const site = sites.get(record.id);
       const guards = state.agents.filter(agent => agent.health > 0 && agent.burrowId === record.id && !agent.raid);
       if (guards.length <= BEETLE_RAIDS.defenders) continue;
       const agent = guards.filter(agent => agent.mode !== "attack")
         .sort((left, right) => right.health - left.health || Math.hypot(left.x - site.entrance.x, left.y - site.entrance.y) - Math.hypot(right.x - site.entrance.x, right.y - site.entrance.y))[0];
       if (!agent) continue;
-      const colonies = environment.colonies.filter(colony => environment.games.has(colony.ownerId) && environment.games.get(colony.ownerId).nest?.health !== 0 &&
-        !state.agents.some(other => other.health > 0 && other.raid?.colonyId === colony.id) &&
-        !state.raidCooldowns.some(entry => entry.colonyId === colony.id && now < entry.nextRaidAt))
-        .sort((left, right) => Math.hypot(site.x - left.x, site.y - left.y) - Math.hypot(site.x - right.x, site.y - right.y));
-      for (const colony of colonies) {
-        const cells = path(agent, boundary(colony), false);
-        if (!cells) continue;
-        agent.raid = { colonyId:colony.id, phase:"outbound", departedAt:now, activeUntil:null };
-        agent.attackTargetId = null; agent.attackHit = true;
-        if (now >= agent.moveStartedAt + agent.moveDuration) actions.idle(agent, 0);
-        routes.set(agent.id, { phase:"outbound", path:cells, cursor:1, retryAt:now });
-        record.raidSequence++;
-        const interval = BEETLE_RAIDS.interval + actions.noise(site.x + record.raidSequence * 421, site.y - record.raidSequence * 733) * BEETLE_RAIDS.intervalSpread;
-        record.nextRaidAt = now + interval;
-        const cooldown = state.raidCooldowns.find(entry => entry.colonyId === colony.id);
-        if (cooldown) cooldown.nextRaidAt = record.nextRaidAt;
-        else state.raidCooldowns.push({ colonyId:colony.id, nextRaidAt:record.nextRaidAt });
-        break;
-      }
+      const cells = path(agent, boundary(colony), false);
+      if (!cells) continue;
+      agent.raid = { colonyId:colony.id, phase:"outbound", departedAt:now, activeUntil:null };
+      agent.attackTargetId = null; agent.attackHit = true;
+      if (now >= agent.moveStartedAt + agent.moveDuration) actions.idle(agent, 0);
+      routes.set(agent.id, { phase:"outbound", path:cells, cursor:1, retryAt:now });
+      record.raidSequence++;
+      const interval = (cooldown.opening?.interval ?? BEETLE_RAIDS.interval) +
+        actions.noise(site.x + record.raidSequence * 421, site.y - record.raidSequence * 733) * BEETLE_RAIDS.intervalSpread;
+      record.nextRaidAt = now + interval;
+      cooldown.nextRaidAt = record.nextRaidAt;
     }
     for (const id of routes.keys()) if (!state.agents.some(agent => agent.id === id && agent.health > 0 && agent.raid)) routes.delete(id);
   }
@@ -144,5 +200,5 @@ export function createBeetleRaids(environment, state, actions, restoring) {
     const colony = colonyFor(agent);
     return agent.raid.phase === "active" && colony && environment.games.get(colony.ownerId) === game;
   }
-  return { dispatch, update, home, targetAllowed };
+  return { dispatch, update, home, targetAllowed, sourceIds };
 }

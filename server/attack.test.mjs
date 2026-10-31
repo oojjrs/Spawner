@@ -45,15 +45,15 @@ test("같은 셀에 고정한 대상에게 6번째 프레임에 한 번 피해�
   assert.equal(target.health, 100);
   game.prepare(10.3);
   game.tick(.001);
-  assert.equal(target.health, 70);
+  assert.equal(target.health, 85);
   assert.equal(agent.attack.hit, true);
   assert.equal(agent.attack.targetX, 48);
   assert.equal(agent.attack.targetY, 42);
   assert.deepEqual({ x: agent.x, y: agent.y }, { x: 48, y: 42 });
   game.prepare(10.599);
   game.tick(.299);
-  assert.equal(target.health, 70);
-  assert.deepEqual(hits, [30]);
+  assert.equal(target.health, 85);
+  assert.deepEqual(hits, [15]);
 });
 
 test("빠른 유닛도 공격 모션의 명중 시점을 유지하고 복원 후 중복 명중하지 않는다", () => {
@@ -66,11 +66,11 @@ test("빠른 유닛도 공격 모션의 명중 시점을 유지하고 복원 후
   game.restore(game.save());
   game.prepare(10.3);
   game.tick(.05);
-  assert.equal(target.health, 70);
+  assert.equal(target.health, 85);
   game.restore(game.save());
   game.prepare(10.4);
   game.tick(.05);
-  assert.deepEqual(hits, [30]);
+  assert.deepEqual(hits, [15]);
 });
 
 test("정해 둔 대상이 사라져도 다른 대상에게 피해를 넘기지 않는다", () => {

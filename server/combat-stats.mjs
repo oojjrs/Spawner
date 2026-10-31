@@ -1,5 +1,6 @@
-export const COMBAT_BASE_DAMAGE = 30;
+export const COMBAT_BASE_DAMAGE = 15;
 export const COMBAT_STRENGTH_SCALE = 25;
+export const COMBAT_MAX_INJURY_PENALTY = 10;
 export const UNIT_MAX_HEALTH = 100;
 
 export const UNIT_COMBAT_STATS = Object.freeze(Object.fromEntries([
@@ -32,15 +33,26 @@ export function unitCombatStats(key) {
   return UNIT_COMBAT_STATS[key] || UNIT_COMBAT_STATS.bean;
 }
 
+export function combatInjuryPenalty(agent) {
+  const maximum = Number.isFinite(agent.stats?.health) && agent.stats.health > 0 ? agent.stats.health : UNIT_MAX_HEALTH;
+  const health = Number.isFinite(agent.health) ? Math.max(0, Math.min(maximum, agent.health)) : maximum;
+  return Math.round(COMBAT_MAX_INJURY_PENALTY * (maximum - health) / maximum);
+}
+
 export function combatStrength(agent) {
-  return Number.isFinite(agent.stats?.combatStrength) ? agent.stats.combatStrength :
+  const base = Number.isFinite(agent.stats?.combatStrength) ? agent.stats.combatStrength :
     unitCombatStats(agent.species || agent.tribe).combatStrength;
+  return base + (agent.combat?.secretionBonus || 0) - combatInjuryPenalty(agent);
 }
 
 export function combatDamage(attacker, target, variation) {
   const multiplier = Number.isFinite(variation) ? .8 + .4 * Math.max(0, Math.min(1, variation)) : 1;
+  const penetration = Math.max(0, Math.min(1, attacker.stats?.armorPenetration || 0));
+  const armor = Math.max(0, Math.min(.8, target.stats?.damageReduction || 0));
+  const guard = Math.max(0, Math.min(.6, Math.max(target.stats?.guardProtection || 0, target.combat?.guardProtection || 0)));
   return Math.max(1, Math.round(COMBAT_BASE_DAMAGE * multiplier *
-    Math.exp((combatStrength(attacker) - combatStrength(target)) / COMBAT_STRENGTH_SCALE)));
+    Math.exp((combatStrength(attacker) + (attacker.stats?.attackBonus || 0) - combatStrength(target)) / COMBAT_STRENGTH_SCALE) *
+    (1 - armor * (1 - penetration)) * (1 - guard)));
 }
 
 export function migrateCombatStats(agent) {
