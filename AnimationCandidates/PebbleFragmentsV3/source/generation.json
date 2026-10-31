@@ -1,0 +1,8 @@
+{
+  "tool": "built-in image_gen",
+  "role": "actual exposed fracture-side material",
+  "reference": "source/neutral.png",
+  "output": "source/fracture-material.png",
+  "transparent_background": false,
+  "prompt": "Use case: stylized-concept. Asset type: ACTUAL material source texture for newly exposed fracture side faces in a 2D cutout stone-creature animation, not a preview image. Input image: STYLE AND COLOR REFERENCE ONLY, the approved cute ochre stone creature. Preserve this material family but do not draw the creature. Create one square edge-to-edge fully opaque warm honey-ochre sandstone interior material swatch. Entire canvas consists of close-up golden tan rough sandstone with broad understated soft facets, subtle dry mineral grain, a few soft amber shade transitions, and restrained painterly game-sprite shading. It must be suitable for tiny thin broken stone side surfaces, so do not include strong graphic features. Match the reference's warm ochre material and cozy hand-painted 2D game finish. Low contrast even illumination; no large center highlight, no cast shadow. No eyes, face, mouth, character, object silhouette, borders, seams, large cracks, voids, black strokes, text, labels, watermark or transparent margins. This image will be texture-mapped onto complete narrow fracture faces behind exact original front-surface pieces; the original creature face and design will remain unchanged."
+}

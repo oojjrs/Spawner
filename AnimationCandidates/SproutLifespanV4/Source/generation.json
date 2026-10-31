@@ -1,0 +1,10 @@
+{
+  "tool": "image_gen.imagegen",
+  "mode": "built-in",
+  "transparent_background": true,
+  "referenced_image": "AnimationCandidates/SproutLifespanV1/Parts/body.png",
+  "prompt": "Use case: precise-object-edit. Edit target: the attached transparent 2D game sprite body. Create ONE production-ready transparent sprite body asset, matching the attached original exactly in style, pale cream-green palette, soft painted shading, dark green outline, and cute appearance. The sole design change is a taller, vertically elongated bean-shaped torso indicating increased lifespan: retain the original maximum torso width, lengthen the torso upward by approximately 35 percent, and preserve the same rounded bottom and foot baseline. The body should be a gently rounded tall oval, with softly rounded shoulders and no neck or waist. Keep BOTH original dark green oval eyes the SAME SIZE, shape and horizontal spacing as the reference; move them upward slightly to sit naturally near the vertical middle of the elongated torso. Keep the tiny cream feet unchanged in size, shape, and horizontal positions. Do not stretch the eyes or feet. Remove the tiny green stem stub at the very top so the torso has a clean continuous rounded crown for separately composited head attachments. No sprout, no leaves, no antenna, no flower, no mouth, no eyebrows, no extra decorations, no arms, no text, no labels, no background, no floor shadow. Keep the front-facing symmetrical camera and existing lighting direction. Maintain the original outline thickness and restrained shading. Use a square transparent canvas and leave generous transparent padding. Match this registration in a 1024x1024 canvas: horizontal center 512, maximum body width approximately 470 pixels, feet bottom at y=920, torso top approximately y=310, eye centers approximately x=395 and x=628 at y=610. The intended final body bounding box aspect ratio, including feet, is approximately 0.77 width to height. Only one character body asset.",
+  "generated_source": "Source/body-generated.png",
+  "registered_body": "Parts/body.png",
+  "comparison": "comparison.png"
+}

@@ -1,0 +1,104 @@
+{
+  "reference": "DesignAssets/Tribes/pebble/BaseParts/body.png",
+  "bodySource": "source/body.png",
+  "sourceCanvas": [
+    512,
+    512
+  ],
+  "groundPivot": [
+    256,
+    480
+  ],
+  "bodyPivot": [
+    256,
+    339
+  ],
+  "bodyType": "rigid attachment; no scaling or squash",
+  "bones": [
+    {
+      "name": "root",
+      "parent": null
+    },
+    {
+      "name": "body",
+      "parent": "root",
+      "pivot": [
+        256,
+        339
+      ]
+    },
+    {
+      "name": "roller-1",
+      "parent": "root",
+      "centerX": 159
+    },
+    {
+      "name": "roller-2",
+      "parent": "root",
+      "centerX": 256
+    },
+    {
+      "name": "roller-3",
+      "parent": "root",
+      "centerX": 352
+    }
+  ],
+  "rollerAttachments": [
+    "source/roller-1.png",
+    "source/roller-2.png",
+    "source/roller-3.png"
+  ],
+  "drawOrder": [
+    "shadow",
+    "roller-1",
+    "roller-2",
+    "roller-3",
+    "body"
+  ],
+  "rollerContactY": 480,
+  "rollerPhaseDegrees": [
+    0,
+    113,
+    237
+  ],
+  "rollerCycleMs": 720,
+  "bodyStartLag": "0.75 degrees rigid tilt at acceleration; face remains camera-facing",
+  "preview": {
+    "size": [
+      720,
+      480
+    ],
+    "fps": 25,
+    "frameCount": 232,
+    "rootMotion": true
+  },
+  "path": [
+    [
+      186,
+      390
+    ],
+    [
+      534,
+      390
+    ],
+    [
+      534,
+      220
+    ],
+    [
+      186,
+      220
+    ],
+    [
+      186,
+      390
+    ]
+  ],
+  "segmentMs": 2320,
+  "moveMs": 1840,
+  "stopMs": 480,
+  "interpolation": "constant speed center with sine acceleration and deceleration",
+  "generatedPartPrompt": "Three complete separate rounded ochre sandstone roller attachments matching the original pebble body; transparent alpha, no face, full closed silhouettes.",
+  "generator": "built-in image_gen; generated source parts are actually used in this rig",
+  "installation": "concept only; no runtime or project asset replacement"
+}

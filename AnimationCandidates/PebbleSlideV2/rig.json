@@ -1,0 +1,89 @@
+{
+  "reference": "DesignAssets/Tribes/pebble/starter.png",
+  "attachment": "source/neutral.png",
+  "sourceCanvas": [
+    512,
+    512
+  ],
+  "groundPivot": [
+    256,
+    448
+  ],
+  "bones": [
+    {
+      "name": "root",
+      "parent": null
+    },
+    {
+      "name": "stone",
+      "parent": "root"
+    }
+  ],
+  "motion": {
+    "rotationDegrees": 0,
+    "scale": 1,
+    "verticalBobPx": 0,
+    "movingParts": [],
+    "rootTremorPxAtPreviewSize": 0.55,
+    "rootTremorAxes": "screen x only; same oscillator for all travel directions",
+    "rootTremorHz": [
+      8,
+      11
+    ],
+    "contact": "original foot baseline continuously follows ground; no lift",
+    "accelerationMs": 180,
+    "holdMs": 400
+  },
+  "effects": {
+    "dust": "deterministic procedural particles emitted at ground contacts; world-space lifetime",
+    "dustDirection": "opposite current root velocity; footprint width remains unchanged",
+    "drawOrder": [
+      "floor",
+      "dust",
+      "contact-shadow",
+      "stone"
+    ]
+  },
+  "preview": {
+    "size": [
+      720,
+      480
+    ],
+    "fps": 25,
+    "frames": 212,
+    "durationMs": 8480,
+    "path": [
+      [
+        186,
+        390
+      ],
+      [
+        534,
+        390
+      ],
+      [
+        534,
+        220
+      ],
+      [
+        186,
+        220
+      ],
+      [
+        186,
+        390
+      ]
+    ],
+    "moveFramesPerSegment": [
+      56,
+      30,
+      56,
+      30
+    ],
+    "holdFramesPerSegment": 10,
+    "sameAttachmentForAllDirections": true
+  },
+  "source": "preserved high-resolution neutral artwork before project image-size reduction",
+  "artworkGeneration": "none; original body and feet preserved together",
+  "scope": "GIF concept and editable source only"
+}

@@ -1,0 +1,1 @@
+{"frameSize": [256, 256], "frameCount": 20, "columns": 5, "durationsMs": [40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40], "durationMs": 800, "pivot": [128, 204.8], "directionVariants": 1, "source": "source/body-complete.png and original foot attachments", "note": "One baked in-place cycle; no movement direction is passed into pose generation."}
