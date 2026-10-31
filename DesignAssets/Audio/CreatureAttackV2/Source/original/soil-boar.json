@@ -1,0 +1,21 @@
+{
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "One small stocky wild boar forcefully lunges forward with its tusks. A short dense low body whoof through air, quick bristly hide brush and tiny dry hoof movement, compact and weighty. No grunt or breath vocalization. One motion, immediate onset, peak at 0.06s, short dry tail. No target impact, voices, weapons, metal, music, ambience or reverb.",
+  "duration_seconds": 0.5,
+  "prompt_influence": 0.85,
+  "loop": false,
+  "output_format": "mp3_44100_128",
+  "processing": "none",
+  "asset": "DesignAssets/Audio/CreatureAttackV2/soil-boar.mp3",
+  "input": "text prompt only",
+  "reference_assets": [
+    "DesignAssets/Audio/unit-attack.json",
+    "DesignAssets/Audio/beetle-attack.json"
+  ],
+  "generated_at": "2026-10-29T18:59:38.064377+00:00",
+  "request_id": null,
+  "character_cost": "5",
+  "sha256": "170135226c56f2a674b3b97270c6f81c1d991ac44c07991c2b8c0fbf0f5f1420",
+  "installationAuthorization": "User explicitly requested creating and attaching attack SFX for all eighteen species and applying them to the game."
+}

@@ -1,0 +1,35 @@
+{
+  "key": "spore",
+  "label": "포자버섯",
+  "provider": "ElevenLabs",
+  "endpoint": "https://api.elevenlabs.io/v1/sound-generation",
+  "output_format": "mp3_44100_128",
+  "request": {
+    "text": "One tiny soft mushroom stalk foot planting on damp moss. A delicate rounded papery pat with faint dry fungal fiber brushing, intimate miniature forest foley. Exactly one movement event beginning immediately, concise natural decay, low intensity and dry intimate recording. No second event, repeated footsteps, voice, animal call, melody, music, ambient bed, dramatic bass, or reverb.",
+    "duration_seconds": 0.5,
+    "prompt_influence": 0.85,
+    "loop": false,
+    "model_id": "eleven_text_to_sound_v2"
+  },
+  "state": "installed",
+  "submitted_at": "2026-10-29T19:06:01.667061+00:00",
+  "processing": "none",
+  "input_sources": [],
+  "request_id": null,
+  "character_cost": "5",
+  "bytes": 8820,
+  "sha256": "c7a5b17baf57c96506fccc26a1c5ba857ec3b3c85ee6f0feaced8fd6c5410d07",
+  "completed_at": "2026-10-29T19:06:03.417198+00:00",
+  "asset": "DesignAssets/Audio/MovementV1/spore.mp3",
+  "timing": {
+    "name": "move-spore",
+    "source": "DesignAssets/Audio/MovementV1/spore.mp3",
+    "gain": 0.261,
+    "phases": [
+      0,
+      0.5
+    ],
+    "leadMs": 0
+  },
+  "installationAuthorization": "User requested creating all missing movement sounds and applying them to the game and Design.html."
+}

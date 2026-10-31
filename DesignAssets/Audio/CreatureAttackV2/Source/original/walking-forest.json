@@ -1,0 +1,21 @@
+{
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "One huge tree-carrying turtle drives its front body forward and down. A short weighty low air whuff with a restrained wooden load creak, leathery joint flex and small leaf rustle, dense miniature foley. No ground impact, earthquake or long rumble. One motion, immediate onset, peak at 0.06s, short dry tail. No target impact, voices, weapons, metal, music, ambience or reverb.",
+  "duration_seconds": 0.65,
+  "prompt_influence": 0.85,
+  "loop": false,
+  "output_format": "mp3_44100_128",
+  "processing": "none",
+  "asset": "DesignAssets/Audio/CreatureAttackV2/walking-forest.mp3",
+  "input": "text prompt only",
+  "reference_assets": [
+    "DesignAssets/Audio/unit-attack.json",
+    "DesignAssets/Audio/beetle-attack.json"
+  ],
+  "generated_at": "2026-10-29T18:59:50.917483+00:00",
+  "request_id": null,
+  "character_cost": "6",
+  "sha256": "0c4899a14d716df83e96fe6eaf2aff82b909dca89d36c8f8e51c0a25ed39c0c9",
+  "installationAuthorization": "User explicitly requested creating and attaching attack SFX for all eighteen species and applying them to the game."
+}

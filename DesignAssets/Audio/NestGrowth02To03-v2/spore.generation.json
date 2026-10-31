@@ -1,0 +1,16 @@
+{
+  "provider": "ElevenLabs", 
+  "state": "complete", 
+  "submittedAt": "2026-10-30T10:41:49.849139+00:00", 
+  "request": {
+    "text": "Prominent close dry foley of a mushroom canopy folding and reopening over a nest. 0-.9s: soft leathery wings sweep down with a papery flap. .9-1.6s: hollow ceramic vents and wood collar seat with clear clacks. 1.6-3.1s: wings steadily lift, a wood valve turns. 3.1-3.6s: one small bellows compresses with an audible short air puff and firm wood tick. Warm tactile foreground game sound. No voice, music, ambience or reverb.", 
+    "duration_seconds": 3.6, 
+    "prompt_influence": 0.85, 
+    "model_id": "eleven_text_to_sound_v2", 
+    "loop": false
+  }, 
+  "processing": "none", 
+  "requestId": "", 
+  "sha256": "466d10511da35dacb009e8485cb87b5a18cb4d5ad9d3d487b786d496597d440c", 
+  "bytes": 58139
+}

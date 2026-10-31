@@ -1,0 +1,21 @@
+{
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "One large fluffy rabbit springs into a short forward body ram. A quick warm low air whuff with a dense soft fur brush and taut forepaw sweep, compact and weighty without a contact thud. One motion, immediate onset, peak at 0.06s, short dry tail. No target impact, voices, weapons, metal, music, ambience or reverb.",
+  "duration_seconds": 0.5,
+  "prompt_influence": 0.85,
+  "loop": false,
+  "output_format": "mp3_44100_128",
+  "processing": "none",
+  "asset": "DesignAssets/Audio/CreatureAttackV2/lantern-keeper.mp3",
+  "input": "text prompt only",
+  "reference_assets": [
+    "DesignAssets/Audio/unit-attack.json",
+    "DesignAssets/Audio/beetle-attack.json"
+  ],
+  "generated_at": "2026-10-29T18:59:48.480761+00:00",
+  "request_id": null,
+  "character_cost": "5",
+  "sha256": "720508939ce0e7aa0bc2ef39ba5f04026902b27927321060d9e51a4b63b1a88a",
+  "installationAuthorization": "User explicitly requested creating and attaching attack SFX for all eighteen species and applying them to the game."
+}

@@ -1,6 +1,7 @@
 (() => {
   const sources = {
   ...globalThis.SpawnerCombatAudio.sources,
+  ...globalThis.SpawnerMovementAudio?.sources,
   "click": "DesignAssets/Audio/ui-click.wav",
   "discovery": "DesignAssets/Audio/new-discovery.mp3",
   "footstep": "DesignAssets/Audio/bean-footstep.mp3",
@@ -10,6 +11,10 @@
   "spring-birth": "DesignAssets/Audio/spring-birth.mp3",
   "pebble-birth": "DesignAssets/Audio/pebble-birth-roll.mp3",
   "spore-birth": "DesignAssets/Audio/spore-birth.mp3",
+  "nest-growth-bean": "DesignAssets/Audio/NestGrowthV3/sprout.mp3",
+  "nest-growth-spore": "DesignAssets/Audio/NestGrowthV3/spore.mp3",
+  "nest-growth-pebble": "DesignAssets/Audio/NestGrowthV3/pebble.mp3",
+  "nest-growth-spring": "DesignAssets/Audio/NestGrowthV3/spring.mp3",
   "spring-landing": "DesignAssets/Audio/spring-landing.mp3",
   "spring-footstep": "DesignAssets/Audio/spring-footstep.mp3",
   "harvest": "DesignAssets/Audio/mushroom-harvest-loop.mp3",
@@ -30,7 +35,7 @@
 };
   const harvestSounds = Object.freeze({
     "honey-mushrooms": "harvest", clay: "harvest-soil", tree: "harvest-wood", pebbles: "harvest-pebbles",
-    dew: "harvest-dew", meat: "harvest-meat", carapace: "harvest-carapace", "grass-fiber": "harvest-grass-fiber",
+    dew: "harvest-dew", meat: "harvest-dew", carapace: "harvest-carapace", "grass-fiber": "harvest-grass-fiber",
     sand: "harvest-sand", "iron-ore": "harvest-iron-ore", "copper-ore": "harvest-copper-ore", quartz: "harvest-quartz"
   });
   globalThis.SpawnerAudio = Object.freeze({ create: function () {
@@ -53,7 +58,7 @@
     let prepared = false;
     const voices = new Set();
     const lastPlayed = new Map();
-    const levels = { harvest: 0.8, "harvest-soil": 0.8, landing: 1.2, footstep: 0.6, throw: 1.5, catch: 2, "seed-eject": 1, "seed-crack": 1, "sprout-pop": 1, "spring-birth": 1, "pebble-birth": 1, "spring-landing": 1.2, "spring-footstep": 0.6 };
+    const levels = { harvest: 0.8, "harvest-soil": 0.8, landing: 1.2, footstep: 0.6, throw: 1.5, catch: 2, "seed-eject": 1, "seed-crack": 1, "sprout-pop": 1, "spring-birth": 0.7, "pebble-birth": 1, "spore-birth": 0.3, "spring-landing": 1.2, "spring-footstep": 0.6 };
     const button = document.getElementById("sound-toggle");
 
     function updateButton() {
@@ -151,7 +156,7 @@
 
     function start(name, volume, loop) {
       if (!available() || volume <= 0) return null;
-      const priority = name.endsWith("-death") ? 3 : name.endsWith("-hurt") ? 2 : name.endsWith("-attack") ? 1 : 0;
+      const priority = name.startsWith("nest-growth-") || name.endsWith("-death") ? 3 : name.endsWith("-hurt") ? 2 : name.endsWith("-attack") ? 1 : 0;
       const voice = channels.find(channel => channel.source === null && channel.sources.has(name)) ||
         channels.filter(channel => channel.sources.has(name) && channel.priority < priority)
           .sort((first, second) => first.priority - second.priority)[0];
@@ -166,7 +171,7 @@
       voice.source = source;
       voice.name = name;
       source.loop = loop;
-      voice.gain.gain.value = (levels[name] ?? (name.startsWith("harvest-") ? .8 : 1)) * Math.min(1, volume);
+      voice.gain.gain.value = (levels[name] ?? globalThis.SpawnerMovementAudio?.levels[name] ?? (name.startsWith("harvest-") ? .8 : 1)) * Math.min(1, volume);
       voices.add(voice);
       source.start();
       return voice;
@@ -196,11 +201,12 @@
       }
       const footstep = name === "footstep" || name === "spring-footstep";
       const landing = name === "landing" || name === "spring-landing";
-      const interval = footstep ? 0.04 : landing ? 0.075 : 0.1;
+      const movement = name.startsWith("move-");
+      const interval = footstep ? 0.04 : landing ? 0.075 : movement ? 0.09 : 0.1;
       if (context.currentTime - (lastPlayed.get(name) ?? -Infinity) < interval) return;
       let concurrent = 0;
       for (const voice of voices) if (voice.name === name) concurrent++;
-      if (landing && concurrent >= 3 || footstep && concurrent >= 6) return;
+      if (landing && concurrent >= 3 || footstep && concurrent >= 6 || movement && concurrent >= 2) return;
       if (start(name, volume, false)) lastPlayed.set(name, context.currentTime);
     }
 
@@ -247,7 +253,7 @@
     button.addEventListener("click", () => {
       muted = !muted;
       if (muted) { stop(); stopClick(); music.suspend(); }
-      else playClick();
+      else { unlock(); playClick(); }
       updateButton();
     });
     document.addEventListener("click", event => {
@@ -262,7 +268,9 @@
       else unlock();
     });
     window.addEventListener("pagehide", () => { stop(); stopClick(); music.suspend(); });
+    music.update(null);
     updateButton();
+    unlock();
     return { available, play, playClick, setHarvest, setActive, stop, updateMusic: music.update };
   } });
 })();

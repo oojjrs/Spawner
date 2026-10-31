@@ -1,0 +1,42 @@
+{
+  "sounds": [
+    {
+      "tribe": "sprout", 
+      "asset": "DesignAssets/Audio/NestGrowthV2/sprout.mp3", 
+      "previousAsset": "DesignAssets/Audio/NestGrowthV1/sprout.mp3", 
+      "provider": "ElevenLabs", 
+      "model": "eleven_text_to_sound_v2", 
+      "prompt": "Close foreground: thick fresh petals and a pea pod fold firmly shut, swell, then unfurl. Distinct leafy CRUNCH, firm fibrous CREAK, then a full papery FLAP and leaf rattle. Strong clear midrange body with audible attacks, not a faint hiss. 0-.68s close; .68-.92s pause; .92-1.32s swell; 1.32-2.36s open; settle by 2.7s. No music, voice, bells, wind, breaking or reverb.", 
+      "requestedDurationSeconds": 2.7, 
+      "outputFormat": "mp3_44100_128", 
+      "generatedAt": "2026-10-30T05:05:26.394870+00:00", 
+      "processing": "none", 
+      "inputSources": [], 
+      "sha256": "21541469a6eae423e71dd811750f02b1b837c527be47105c7ab3887e0f171117", 
+      "animationStartMs": 500, 
+      "playbackVolume": 1.0, 
+      "measuredIntegratedLufs": -20.0, 
+      "measuredTruePeakDbfs": -2.3, 
+      "previousIntegratedLufs": -34.0
+    }, 
+    {
+      "tribe": "spore", 
+      "asset": "DesignAssets/Audio/NestGrowthV2/spore.mp3", 
+      "previousAsset": "DesignAssets/Audio/NestGrowthV1/spore.mp3", 
+      "provider": "ElevenLabs", 
+      "model": "eleven_text_to_sound_v2", 
+      "prompt": "Close foreground: a thick mushroom cap folds onto a hollow fungal cradle, swells, then opens in a broad membrane flap. Rounded hollow POF, dense leathery creak and a clear WHUFF on opening. Strong audible low-mid body and textured attacks, not faint paper noise. 0-.68s close; .68-.92s pause; .92-1.32s swell; 1.32-2.36s open; settle by 2.7s. No voice, music, buzz, rubber squeak or reverb.", 
+      "requestedDurationSeconds": 2.7, 
+      "outputFormat": "mp3_44100_128", 
+      "generatedAt": "2026-10-30T05:05:28.509066+00:00", 
+      "processing": "none", 
+      "inputSources": [], 
+      "sha256": "33ab410d6d2527f71cb10efe81e4ea5cc09e299ba3189685fa683dc27633873a", 
+      "animationStartMs": 500, 
+      "playbackVolume": 1.0, 
+      "measuredIntegratedLufs": -33.6, 
+      "measuredTruePeakDbfs": -7.0, 
+      "previousIntegratedLufs": -43.1
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "key": "flower-tail-bird",
+  "label": "꽃꼬리새",
+  "provider": "ElevenLabs",
+  "endpoint": "https://api.elevenlabs.io/v1/sound-generation",
+  "output_format": "mp3_44100_128",
+  "request": {
+    "text": "One downstroke of a tiny fluffy bird wing close by. A light soft feather fuff with a short gentle movement of air, delicate miniature feather foley. Exactly one movement event beginning immediately, concise natural decay, low intensity and dry intimate recording. No second event, repeated footsteps, voice, animal call, melody, music, ambient bed, dramatic bass, or reverb.",
+    "duration_seconds": 0.5,
+    "prompt_influence": 0.85,
+    "loop": false,
+    "model_id": "eleven_text_to_sound_v2"
+  },
+  "state": "installed",
+  "submitted_at": "2026-10-29T19:06:05.239433+00:00",
+  "processing": "none",
+  "input_sources": [],
+  "request_id": null,
+  "character_cost": "5",
+  "bytes": 8820,
+  "sha256": "492b1e468097b74bd050998120becc43c03a4e698c0cbed4cd8323c2e4ee8c51",
+  "completed_at": "2026-10-29T19:06:07.793142+00:00",
+  "asset": "DesignAssets/Audio/MovementV1/flower-tail-bird.mp3",
+  "timing": {
+    "name": "move-flower-tail-bird",
+    "source": "DesignAssets/Audio/MovementV1/flower-tail-bird.mp3",
+    "gain": 0.123,
+    "phases": [
+      0.3598200899550225
+    ],
+    "leadMs": 0
+  },
+  "installationAuthorization": "User requested creating all missing movement sounds and applying them to the game and Design.html."
+}

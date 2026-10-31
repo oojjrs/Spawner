@@ -1,0 +1,21 @@
+{
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "One small owl drives its wings once and reaches forward with its talons. A compact low feathered wing whoosh and fine dry keratin claw swip, focused miniature motion with a short feather settling tail. No hoot or voice. One motion, immediate onset, peak at 0.06s, short dry tail. No target impact, voices, weapons, metal, music, ambience or reverb.",
+  "duration_seconds": 0.5,
+  "prompt_influence": 0.85,
+  "loop": false,
+  "output_format": "mp3_44100_128",
+  "processing": "none",
+  "asset": "DesignAssets/Audio/CreatureAttackV2/talon-owl.mp3",
+  "input": "text prompt only",
+  "reference_assets": [
+    "DesignAssets/Audio/unit-attack.json",
+    "DesignAssets/Audio/beetle-attack.json"
+  ],
+  "generated_at": "2026-10-29T18:59:46.480723+00:00",
+  "request_id": null,
+  "character_cost": "5",
+  "sha256": "e077c7ad3e383473958f3ad47b0f1deddcc0df9cb5696d075082c193e4af390c",
+  "installationAuthorization": "User explicitly requested creating and attaching attack SFX for all eighteen species and applying them to the game."
+}

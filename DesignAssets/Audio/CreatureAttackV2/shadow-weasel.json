@@ -1,0 +1,51 @@
+{
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "One small sleek weasel lunges forward with a forepaw and open jaw. A fast narrow silky fur swish and a fine dry claw sweep through air, focused and sharp. No growl, breath or animal vocalization. One motion, immediate onset, peak at 0.06s, short dry tail. No target impact, voices, weapons, metal, music, ambience or reverb.",
+  "duration_seconds": 0.5,
+  "prompt_influence": 0.85,
+  "loop": false,
+  "output_format": "mp3_44100_128",
+  "processing": "Mastered from the preserved original with high-pass/EQ, event-window gain calibration, oversampled peak limiting and MP3 encoding.",
+  "asset": "DesignAssets/Audio/CreatureAttackV2/shadow-weasel.mp3",
+  "input": "text prompt only",
+  "reference_assets": [
+    "DesignAssets/Audio/unit-attack.json",
+    "DesignAssets/Audio/beetle-attack.json"
+  ],
+  "generated_at": "2026-10-29T18:59:44.168252+00:00",
+  "request_id": null,
+  "character_cost": "5",
+  "sha256": "e8de5ff407df5d2e6f6538507d3c5b6d9f85c65c79caafca80349c30d3f3175a",
+  "installationAuthorization": "User explicitly requested creating and attaching attack SFX for all eighteen species and applying them to the game.",
+  "original_sha256": "b554cac57f1a06e972c8bd7756dc62f536173900f90c18ae60afb438e370cae7",
+  "audioLeadMs": 60,
+  "mastering": {
+    "source": "DesignAssets/Audio/CreatureAttackV2/Source/original/shadow-weasel.mp3",
+    "renderer": "DesignAssets/Audio/CreatureAttackV2/mastering.mjs",
+    "filters": [
+      "highpass=f=80:p=2"
+    ],
+    "gainDb": -1.2237497655881473,
+    "eventTargetDbfs": -14.905292989599738,
+    "limiterCeilingDbfs": -3,
+    "measured": {
+      "durationSeconds": 0.48,
+      "eventRmsDbfs": -16.665398992536826,
+      "eventAtMs": 14.965986394557822,
+      "samplePeakDbfs": -3.1919364499059855,
+      "samplePeakAtMs": 55.827664399092974,
+      "integratedLufs": -17.35,
+      "truePeakDbtp": -2.06
+    },
+    "referenceAssets": [
+      "DesignAssets/Audio/CreatureAttackV2/Source/original/unit-attack.mp3",
+      "DesignAssets/Audio/CreatureAttackV2/Source/original/beetle-attack.mp3",
+      "client/music-catalog.js",
+      "DesignAssets/Audio/bean-footstep.mp3",
+      "DesignAssets/Audio/sprout-hurt.mp3",
+      "DesignAssets/Audio/mushroom-harvest-loop.mp3"
+    ],
+    "musicReferenceVolume": 0.28
+  }
+}

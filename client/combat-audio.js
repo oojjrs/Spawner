@@ -1,7 +1,47 @@
 (() => {
+  const creatureAttackHitTimes = Object.freeze({
+    "flower-tail-bird": 0.36,
+    "dew-rabbit": 0.36,
+    "soil-mole": 0.37,
+    "bundle-snail": 0.395,
+    "cotton-sheep": 0.37,
+    "rolling-acorn": 0.38,
+    "soil-boar": 0.33,
+    "bubble-toad": 0.33,
+    "vine-turtle": 0.33,
+    "shadow-weasel": 0.33,
+    "snare-vine": 0.33,
+    "talon-owl": 0.33,
+    "spring-keeper": 0.295,
+    "lantern-keeper": 0.33,
+    "old-garden-snail": 0.59,
+    "walking-forest": 0.56,
+    "white-paw": 0.3,
+    "spiny-back-leader": 0.53
+  });
+  const creatureAttackLeadTimes = Object.freeze({ "spiny-back-leader": .08, "walking-forest": .014 });
+
   const sources = Object.freeze({
     "unit-attack": "DesignAssets/Audio/unit-attack.mp3",
     "beetle-attack": "DesignAssets/Audio/beetle-attack.mp3",
+    "flower-tail-bird-attack": "DesignAssets/Audio/CreatureAttackV2/flower-tail-bird.mp3",
+    "dew-rabbit-attack": "DesignAssets/Audio/CreatureAttackV2/dew-rabbit.mp3",
+    "soil-mole-attack": "DesignAssets/Audio/CreatureAttackV2/soil-mole.mp3",
+    "bundle-snail-attack": "DesignAssets/Audio/CreatureAttackV2/bundle-snail.mp3",
+    "cotton-sheep-attack": "DesignAssets/Audio/CreatureAttackV2/cotton-sheep.mp3",
+    "rolling-acorn-attack": "DesignAssets/Audio/CreatureAttackV2/rolling-acorn.mp3",
+    "soil-boar-attack": "DesignAssets/Audio/CreatureAttackV2/soil-boar.mp3",
+    "bubble-toad-attack": "DesignAssets/Audio/CreatureAttackV2/bubble-toad.mp3",
+    "vine-turtle-attack": "DesignAssets/Audio/CreatureAttackV2/vine-turtle.mp3",
+    "shadow-weasel-attack": "DesignAssets/Audio/CreatureAttackV2/shadow-weasel.mp3",
+    "snare-vine-attack": "DesignAssets/Audio/CreatureAttackV2/snare-vine.mp3",
+    "talon-owl-attack": "DesignAssets/Audio/CreatureAttackV2/talon-owl.mp3",
+    "spring-keeper-attack": "DesignAssets/Audio/CreatureAttackV2/spring-keeper.mp3",
+    "lantern-keeper-attack": "DesignAssets/Audio/CreatureAttackV2/lantern-keeper.mp3",
+    "old-garden-snail-attack": "DesignAssets/Audio/CreatureAttackV2/old-garden-snail.mp3",
+    "walking-forest-attack": "DesignAssets/Audio/CreatureAttackV2/walking-forest.mp3",
+    "white-paw-attack": "DesignAssets/Audio/CreatureAttackV2/white-paw.mp3",
+    "spiny-back-leader-attack": "DesignAssets/Audio/CreatureAttackV2/spiny-back-leader.mp3",
     "sprout-hurt": "DesignAssets/Audio/sprout-hurt.mp3",
     "spore-hurt": "DesignAssets/Audio/spore-hurt.mp3",
     "pebble-hurt": "DesignAssets/Audio/pebble-hurt.mp3",
@@ -15,12 +55,18 @@
   });
 
   function material(unit) {
-    if (unit.species) return unit.species === "spiny-back-beetle" ? "beetle" : null;
+    if (unit.species) return unit.species === "spiny-back-beetle" ? "beetle" :
+      Object.hasOwn(creatureAttackHitTimes, unit.species) ? unit.species : "creature";
     if (!unit.tribe || unit.tribe === "bean" || unit.tribe === "sprout") return "sprout";
     return ["spore", "pebble", "spring"].includes(unit.tribe) ? unit.tribe : null;
   }
 
   function cue(kind, action, speed) {
+    if (kind === "creature" || Object.hasOwn(creatureAttackHitTimes, kind)) {
+      if (action === "hurt") return { name: kind === "spiny-back-leader" ? "beetle-hurt" : "sprout-hurt", at: .02 };
+      return action === "attack" && kind !== "creature" ?
+        { name: kind + "-attack", at: (creatureAttackHitTimes[kind] - (creatureAttackLeadTimes[kind] ?? .06)) / speed } : null;
+    }
     if (!["sprout", "spore", "pebble", "spring", "beetle"].includes(kind)) return null;
     const name = action === "attack" ? kind === "beetle" ? "beetle-attack" : "unit-attack" : kind + "-" + action;
     if (!sources[name]) return null;

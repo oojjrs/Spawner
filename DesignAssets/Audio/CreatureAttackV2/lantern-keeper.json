@@ -1,0 +1,51 @@
+{
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "One large fluffy rabbit springs into a short forward body ram. A quick warm low air whuff with a dense soft fur brush and taut forepaw sweep, compact and weighty without a contact thud. One motion, immediate onset, peak at 0.06s, short dry tail. No target impact, voices, weapons, metal, music, ambience or reverb.",
+  "duration_seconds": 0.5,
+  "prompt_influence": 0.85,
+  "loop": false,
+  "output_format": "mp3_44100_128",
+  "processing": "Mastered from the preserved original with high-pass/EQ, event-window gain calibration, oversampled peak limiting and MP3 encoding.",
+  "asset": "DesignAssets/Audio/CreatureAttackV2/lantern-keeper.mp3",
+  "input": "text prompt only",
+  "reference_assets": [
+    "DesignAssets/Audio/unit-attack.json",
+    "DesignAssets/Audio/beetle-attack.json"
+  ],
+  "generated_at": "2026-10-29T18:59:48.480761+00:00",
+  "request_id": null,
+  "character_cost": "5",
+  "sha256": "b94ddce397fe5bbb803183984fa06e04229d336881c3e9dde5830332103b146e",
+  "installationAuthorization": "User explicitly requested creating and attaching attack SFX for all eighteen species and applying them to the game.",
+  "original_sha256": "720508939ce0e7aa0bc2ef39ba5f04026902b27927321060d9e51a4b63b1a88a",
+  "audioLeadMs": 60,
+  "mastering": {
+    "source": "DesignAssets/Audio/CreatureAttackV2/Source/original/lantern-keeper.mp3",
+    "renderer": "DesignAssets/Audio/CreatureAttackV2/mastering.mjs",
+    "filters": [
+      "highpass=f=80:p=2"
+    ],
+    "gainDb": -2.537839104887947,
+    "eventTargetDbfs": -14.405292989599738,
+    "limiterCeilingDbfs": -3,
+    "measured": {
+      "durationSeconds": 0.48,
+      "eventRmsDbfs": -14.815581031453537,
+      "eventAtMs": 79.81859410430839,
+      "samplePeakDbfs": -5.933073588833684,
+      "samplePeakAtMs": 96.96145124716553,
+      "integratedLufs": -14.55,
+      "truePeakDbtp": -5.77
+    },
+    "referenceAssets": [
+      "DesignAssets/Audio/CreatureAttackV2/Source/original/unit-attack.mp3",
+      "DesignAssets/Audio/CreatureAttackV2/Source/original/beetle-attack.mp3",
+      "client/music-catalog.js",
+      "DesignAssets/Audio/bean-footstep.mp3",
+      "DesignAssets/Audio/sprout-hurt.mp3",
+      "DesignAssets/Audio/mushroom-harvest-loop.mp3"
+    ],
+    "musicReferenceVolume": 0.28
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "key": "lantern-keeper",
+  "label": "등불지기",
+  "provider": "ElevenLabs",
+  "endpoint": "https://api.elevenlabs.io/v1/sound-generation",
+  "output_format": "mp3_44100_128",
+  "request": {
+    "text": "One small long eared rabbit landing lightly on forest moss. A warm cushioned paw pat with a faint delicate leaf and fur brush. Close miniature foley. Exactly one movement event beginning immediately, concise natural decay, low intensity and dry intimate recording. No second event, repeated footsteps, voice, animal call, melody, music, ambient bed, dramatic bass, or reverb.",
+    "duration_seconds": 0.5,
+    "prompt_influence": 0.85,
+    "loop": false,
+    "model_id": "eleven_text_to_sound_v2"
+  },
+  "state": "installed",
+  "submitted_at": "2026-10-29T19:06:19.597282+00:00",
+  "processing": "none",
+  "input_sources": [],
+  "request_id": null,
+  "character_cost": "5",
+  "bytes": 8820,
+  "sha256": "a549ddf9a71bae1d14019a8d6ef80cc83f204322ecc2354c12ee8e8213034486",
+  "completed_at": "2026-10-29T19:06:21.731820+00:00",
+  "asset": "DesignAssets/Audio/MovementV1/lantern-keeper.mp3",
+  "timing": {
+    "name": "move-lantern-keeper",
+    "source": "DesignAssets/Audio/MovementV1/lantern-keeper.mp3",
+    "gain": 0.65,
+    "phases": [
+      0.6486486486486487
+    ],
+    "leadMs": 0
+  },
+  "installationAuthorization": "User requested creating all missing movement sounds and applying them to the game and Design.html."
+}

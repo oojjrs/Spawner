@@ -1,0 +1,52 @@
+{
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "One small stocky wild boar forcefully lunges forward with its tusks. A short dense low body whoof through air, quick bristly hide brush and tiny dry hoof movement, compact and weighty. No grunt or breath vocalization. One motion, immediate onset, peak at 0.06s, short dry tail. No target impact, voices, weapons, metal, music, ambience or reverb.",
+  "duration_seconds": 0.5,
+  "prompt_influence": 0.85,
+  "loop": false,
+  "output_format": "mp3_44100_128",
+  "processing": "Mastered from the preserved original with high-pass/EQ, event-window gain calibration, oversampled peak limiting and MP3 encoding.",
+  "asset": "DesignAssets/Audio/CreatureAttackV2/soil-boar.mp3",
+  "input": "text prompt only",
+  "reference_assets": [
+    "DesignAssets/Audio/unit-attack.json",
+    "DesignAssets/Audio/beetle-attack.json"
+  ],
+  "generated_at": "2026-10-29T18:59:38.064377+00:00",
+  "request_id": null,
+  "character_cost": "5",
+  "sha256": "da8bbf0be3a460006a1f713b0ce81a4f9db1501422111b6de570bb1591b62779",
+  "installationAuthorization": "User explicitly requested creating and attaching attack SFX for all eighteen species and applying them to the game.",
+  "original_sha256": "170135226c56f2a674b3b97270c6f81c1d991ac44c07991c2b8c0fbf0f5f1420",
+  "audioLeadMs": 60,
+  "mastering": {
+    "source": "DesignAssets/Audio/CreatureAttackV2/Source/original/soil-boar.mp3",
+    "renderer": "DesignAssets/Audio/CreatureAttackV2/mastering.mjs",
+    "filters": [
+      "highpass=f=80:p=2",
+      "acompressor=threshold=0.3853286735:ratio=4:attack=0.01:release=10:knee=2.828427:makeup=1:detection=peak"
+    ],
+    "gainDb": -0.4623034069011034,
+    "eventTargetDbfs": -13.905292989599738,
+    "limiterCeilingDbfs": -3,
+    "measured": {
+      "durationSeconds": 0.48,
+      "eventRmsDbfs": -14.960049430741124,
+      "eventAtMs": 94.78458049886622,
+      "samplePeakDbfs": -2.6309474226505514,
+      "samplePeakAtMs": 125.03401360544217,
+      "integratedLufs": -13.45,
+      "truePeakDbtp": -1.61
+    },
+    "referenceAssets": [
+      "DesignAssets/Audio/CreatureAttackV2/Source/original/unit-attack.mp3",
+      "DesignAssets/Audio/CreatureAttackV2/Source/original/beetle-attack.mp3",
+      "client/music-catalog.js",
+      "DesignAssets/Audio/bean-footstep.mp3",
+      "DesignAssets/Audio/sprout-hurt.mp3",
+      "DesignAssets/Audio/mushroom-harvest-loop.mp3"
+    ],
+    "musicReferenceVolume": 0.28
+  }
+}

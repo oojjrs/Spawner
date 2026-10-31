@@ -1,0 +1,35 @@
+{
+  "key": "soil-boar",
+  "label": "흙멧돼지",
+  "provider": "ElevenLabs",
+  "endpoint": "https://api.elevenlabs.io/v1/sound-generation",
+  "output_format": "mp3_44100_128",
+  "request": {
+    "text": "One small stocky boar hoof planting firmly on crumbly soil. A compact low earthy thud with a short dry gritty scrape, close woodland animal foley. Exactly one movement event beginning immediately, concise natural decay, low intensity and dry intimate recording. No second event, repeated footsteps, voice, animal call, melody, music, ambient bed, dramatic bass, or reverb.",
+    "duration_seconds": 0.5,
+    "prompt_influence": 0.85,
+    "loop": false,
+    "model_id": "eleven_text_to_sound_v2"
+  },
+  "state": "installed",
+  "submitted_at": "2026-10-29T19:06:11.587178+00:00",
+  "processing": "none",
+  "input_sources": [],
+  "request_id": null,
+  "character_cost": "5",
+  "bytes": 8820,
+  "sha256": "9b1225f899cc9f1576fb19dd0a8df1f23a3191a0b6621de77463006a1be388ea",
+  "completed_at": "2026-10-29T19:06:15.837079+00:00",
+  "asset": "DesignAssets/Audio/MovementV1/soil-boar.mp3",
+  "timing": {
+    "name": "move-soil-boar",
+    "source": "DesignAssets/Audio/MovementV1/soil-boar.mp3",
+    "gain": 0.2,
+    "phases": [
+      0,
+      0.5
+    ],
+    "leadMs": 0
+  },
+  "installationAuthorization": "User requested creating all missing movement sounds and applying them to the game and Design.html."
+}

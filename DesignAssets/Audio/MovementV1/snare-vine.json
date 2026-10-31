@@ -1,0 +1,35 @@
+{
+  "key": "snare-vine",
+  "label": "올가미덩굴",
+  "provider": "ElevenLabs",
+  "endpoint": "https://api.elevenlabs.io/v1/sound-generation",
+  "output_format": "mp3_44100_128",
+  "request": {
+    "text": "One tiny living vine root stepping onto soil, a soft woody root tick and a delicate fresh leaf brush. Gentle close miniature plant foley. Exactly one movement event beginning immediately, concise natural decay, low intensity and dry intimate recording. No second event, repeated footsteps, voice, animal call, melody, music, ambient bed, dramatic bass, or reverb.",
+    "duration_seconds": 0.5,
+    "prompt_influence": 0.85,
+    "loop": false,
+    "model_id": "eleven_text_to_sound_v2"
+  },
+  "state": "installed",
+  "submitted_at": "2026-10-29T19:06:15.837079+00:00",
+  "processing": "none",
+  "input_sources": [],
+  "request_id": null,
+  "character_cost": "5",
+  "bytes": 8820,
+  "sha256": "2f357e580883f1bd67b63794b2c34bd18dbbef0ea061e5cd7b375e337d2d4ca8",
+  "completed_at": "2026-10-29T19:06:17.635412+00:00",
+  "asset": "DesignAssets/Audio/MovementV1/snare-vine.mp3",
+  "timing": {
+    "name": "move-snare-vine",
+    "source": "DesignAssets/Audio/MovementV1/snare-vine.mp3",
+    "gain": 0.093,
+    "phases": [
+      0,
+      0.48936170212765956
+    ],
+    "leadMs": 0
+  },
+  "installationAuthorization": "User requested creating all missing movement sounds and applying them to the game and Design.html."
+}

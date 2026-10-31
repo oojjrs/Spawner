@@ -149,7 +149,7 @@
       if (!snapshot) {
         combatUntil = -Infinity;
         lastTime = -Infinity;
-        setMode(null);
+        setMode("peace");
         return;
       }
       if (snapshot.ending && mode) return;

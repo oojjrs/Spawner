@@ -1,0 +1,47 @@
+{
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "One small mole swings its broad front claw forward once. A crisp dry keratin-claw swish with an earthy raspy edge, clearly audible on small speakers. Tight body at 200-600 Hz and bright grainy scraping detail at 1-3 kHz. Immediate onset, one main accent at 0.06s, compact tail within0.5s. No deep bass, sub rumble, DC, explosion, target impact, voice, music, ambience or reverb.",
+  "duration_seconds": 0.5,
+  "prompt_influence": 0.9,
+  "loop": false,
+  "output_format": "mp3_44100_128",
+  "processing": "Mastered from the preserved original with high-pass/EQ, event-window gain calibration, oversampled peak limiting and MP3 encoding.",
+  "input": "text prompt only",
+  "generated_at": "2026-10-29T19:35:31.111851+00:00",
+  "request_id": null,
+  "sha256": "96debf6fe97f37e18f06b0e7c8edac30a937cd4eadc9f4d3b01aaae103d41f40",
+  "asset": "DesignAssets/Audio/CreatureAttackV2/soil-mole.mp3",
+  "original_sha256": "2c1c26afa2be64c9a9880eb8fa7db245c4c9a84978382f34f05194ac397405b0",
+  "audioLeadMs": 60,
+  "mastering": {
+    "source": "DesignAssets/Audio/CreatureAttackV2/Source/revised/soil-mole.mp3",
+    "renderer": "DesignAssets/Audio/CreatureAttackV2/mastering.mjs",
+    "filters": [
+      "highpass=f=110:p=2",
+      "equalizer=f=650:t=q:w=0.7:g=3",
+      "equalizer=f=1800:t=q:w=0.8:g=2"
+    ],
+    "gainDb": -2.353939515061901,
+    "eventTargetDbfs": -13.905292989599738,
+    "limiterCeilingDbfs": -3,
+    "measured": {
+      "durationSeconds": 0.48,
+      "eventRmsDbfs": -15.932456274096296,
+      "eventAtMs": 69.84126984126985,
+      "samplePeakDbfs": -3.385410775073296,
+      "samplePeakAtMs": 123.6281179138322,
+      "integratedLufs": -17.75,
+      "truePeakDbtp": -2.72
+    },
+    "referenceAssets": [
+      "DesignAssets/Audio/CreatureAttackV2/Source/original/unit-attack.mp3",
+      "DesignAssets/Audio/CreatureAttackV2/Source/original/beetle-attack.mp3",
+      "client/music-catalog.js",
+      "DesignAssets/Audio/bean-footstep.mp3",
+      "DesignAssets/Audio/sprout-hurt.mp3",
+      "DesignAssets/Audio/mushroom-harvest-loop.mp3"
+    ],
+    "musicReferenceVolume": 0.28
+  }
+}

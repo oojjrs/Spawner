@@ -1,0 +1,35 @@
+{
+  "key": "pebble",
+  "label": "몽돌",
+  "provider": "ElevenLabs",
+  "endpoint": "https://api.elevenlabs.io/v1/sound-generation",
+  "output_format": "mp3_44100_128",
+  "request": {
+    "text": "One small smooth pebble rocking onto compact sandy soil, a restrained rounded stone tick followed by a tiny gritty settling roll. Miniature close dry foley. Exactly one movement event beginning immediately, concise natural decay, low intensity and dry intimate recording. No second event, repeated footsteps, voice, animal call, melody, music, ambient bed, dramatic bass, or reverb.",
+    "duration_seconds": 0.5,
+    "prompt_influence": 0.85,
+    "loop": false,
+    "model_id": "eleven_text_to_sound_v2"
+  },
+  "state": "installed",
+  "submitted_at": "2026-10-29T19:06:01.667061+00:00",
+  "processing": "none",
+  "input_sources": [],
+  "request_id": null,
+  "character_cost": "5",
+  "bytes": 8820,
+  "sha256": "3229a465279e0c5ed80e7e3a03feede8e88925be8b083f5f4522f5ab77e44ae0",
+  "completed_at": "2026-10-29T19:06:03.608453+00:00",
+  "asset": "DesignAssets/Audio/MovementV1/pebble.mp3",
+  "timing": {
+    "name": "move-pebble",
+    "source": "DesignAssets/Audio/MovementV1/pebble.mp3",
+    "gain": 0.326,
+    "phases": [
+      0,
+      0.5
+    ],
+    "leadMs": 0
+  },
+  "installationAuthorization": "User requested creating all missing movement sounds and applying them to the game and Design.html."
+}

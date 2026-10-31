@@ -1,0 +1,34 @@
+{
+  "key": "dew-rabbit",
+  "label": "이슬토끼",
+  "provider": "ElevenLabs",
+  "endpoint": "https://api.elevenlabs.io/v1/sound-generation",
+  "output_format": "mp3_44100_128",
+  "request": {
+    "text": "One small fluffy rabbit landing softly on moss with its front paws. A light cushioned earthy pat and a tiny soft fur brush, friendly miniature foley. Exactly one movement event beginning immediately, concise natural decay, low intensity and dry intimate recording. No second event, repeated footsteps, voice, animal call, melody, music, ambient bed, dramatic bass, or reverb.",
+    "duration_seconds": 0.5,
+    "prompt_influence": 0.85,
+    "loop": false,
+    "model_id": "eleven_text_to_sound_v2"
+  },
+  "state": "installed",
+  "submitted_at": "2026-10-29T19:06:05.672907+00:00",
+  "processing": "none",
+  "input_sources": [],
+  "request_id": null,
+  "character_cost": "5",
+  "bytes": 8820,
+  "sha256": "8e4c5afbc6ac700e73e77156b4c9cecfd9021debef523c99821533d3a74f5490",
+  "completed_at": "2026-10-29T19:06:07.630464+00:00",
+  "asset": "DesignAssets/Audio/MovementV1/dew-rabbit.mp3",
+  "timing": {
+    "name": "move-dew-rabbit",
+    "source": "DesignAssets/Audio/MovementV1/dew-rabbit.mp3",
+    "gain": 0.25,
+    "phases": [
+      0.56
+    ],
+    "leadMs": 0
+  },
+  "installationAuthorization": "User requested creating all missing movement sounds and applying them to the game and Design.html."
+}

@@ -1,0 +1,17 @@
+{
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "One fast compact body-swing through air by a palm-sized game creature. A short taut soft-edged swish, immediate airy onset, quick acceleration and a focused midrange whip of air, then a very short dry tail. One attack motion only, light but decisive, close foreground. No contact impact, target material, weapon, metal, voice, grunt, music, ambience or reverb.",
+  "duration_seconds": 0.5,
+  "prompt_influence": 0.85,
+  "loop": false,
+  "output_format": "mp3_44100_128",
+  "processing": "none",
+  "asset": "DesignAssets/Audio/unit-attack.mp3",
+  "selectedCandidate": 1,
+  "installationAuthorization": "User requested creating and attaching these combat sounds to the unit page.",
+  "input": "text prompt only",
+  "generated_at": "2026-10-25T07:42:48.620805+00:00",
+  "request_id": null,
+  "sha256": "fe4cc7b8f883ae4e984d231963873e0ddd9e921a98ba8f3235a307281c8c3120"
+}

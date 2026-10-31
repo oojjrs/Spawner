@@ -1,0 +1,37 @@
+{
+  "key": "spiny-back-beetle",
+  "label": "가시등 딱정벌레",
+  "provider": "ElevenLabs",
+  "endpoint": "https://api.elevenlabs.io/v1/sound-generation",
+  "output_format": "mp3_44100_128",
+  "request": {
+    "text": "One compact beetle tripod leg contact on dry soil, a short crisp chitinous foot tick and a very faint sandy scrape. Close small woodland insect foley. Exactly one movement event beginning immediately, concise natural decay, low intensity and dry intimate recording. No second event, repeated footsteps, voice, animal call, melody, music, ambient bed, dramatic bass, or reverb.",
+    "duration_seconds": 0.5,
+    "prompt_influence": 0.85,
+    "loop": false,
+    "model_id": "eleven_text_to_sound_v2"
+  },
+  "state": "installed",
+  "submitted_at": "2026-10-29T19:06:03.608453+00:00",
+  "processing": "none",
+  "input_sources": [],
+  "request_id": null,
+  "character_cost": "5",
+  "bytes": 8820,
+  "sha256": "26128b3faf0d0624bb1355ef85f455405bdb9871612381d47b543b1da7ddad62",
+  "completed_at": "2026-10-29T19:06:05.671403+00:00",
+  "asset": "DesignAssets/Audio/MovementV1/spiny-back-beetle.mp3",
+  "timing": {
+    "name": "move-spiny-back-beetle",
+    "source": "DesignAssets/Audio/MovementV1/spiny-back-beetle.mp3",
+    "gain": 0.427,
+    "phases": [
+      0,
+      0.25,
+      0.5,
+      0.75
+    ],
+    "leadMs": 0
+  },
+  "installationAuthorization": "User requested creating all missing movement sounds and applying them to the game and Design.html."
+}

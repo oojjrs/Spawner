@@ -1,0 +1,14 @@
+{
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "One small mole swings its broad front claw forward once. A crisp dry keratin-claw swish with an earthy raspy edge, clearly audible on small speakers. Tight body at 200-600 Hz and bright grainy scraping detail at 1-3 kHz. Immediate onset, one main accent at 0.06s, compact tail within0.5s. No deep bass, sub rumble, DC, explosion, target impact, voice, music, ambience or reverb.",
+  "duration_seconds": 0.5,
+  "prompt_influence": 0.9,
+  "loop": false,
+  "output_format": "mp3_44100_128",
+  "processing": "none",
+  "input": "text prompt only",
+  "generated_at": "2026-10-29T19:35:31.111851+00:00",
+  "request_id": null,
+  "sha256": "2c1c26afa2be64c9a9880eb8fa7db245c4c9a84978382f34f05194ac397405b0"
+}

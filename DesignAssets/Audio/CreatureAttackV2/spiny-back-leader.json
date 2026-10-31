@@ -1,0 +1,49 @@
+{
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "One palm-sized beetle forcefully snaps its chitin mandibles shut. A quick short air swish leading into one crisp dry hollow chitin clack, slight tiny joint rasp, then a short still tail. Small hard insect mechanism, close foreground, tactile and punchy rather than loud. No target impact, flesh, stone, metal, insect vocalization, voice, music, ambience or reverb.",
+  "duration_seconds": 0.5,
+  "prompt_influence": 0.85,
+  "loop": false,
+  "output_format": "mp3_44100_128",
+  "processing": "Mastered from the preserved original with high-pass/EQ, event-window gain calibration, oversampled peak limiting and MP3 encoding.",
+  "asset": "DesignAssets/Audio/CreatureAttackV2/spiny-back-leader.mp3",
+  "selectedCandidate": 1,
+  "installationAuthorization": "User requested creating and attaching these combat sounds to the unit page.",
+  "input": "text prompt only",
+  "generated_at": "2026-10-25T07:42:48.620805+00:00",
+  "request_id": null,
+  "sha256": "21d4d683e5b6b8faaab45a23aa39df67119ef9a6238a1a22ae63f0d01c497e6f",
+  "original_sha256": "df4b50cedd62159fd5a8e6ac606d66292140315d84841fd115d2a61f8b0fa377",
+  "audioLeadMs": 80,
+  "mastering": {
+    "source": "DesignAssets/Audio/CreatureAttackV2/Source/original/beetle-attack.mp3",
+    "renderer": "DesignAssets/Audio/CreatureAttackV2/mastering.mjs",
+    "filters": [
+      "highpass=f=80:p=2",
+      "acompressor=threshold=0.1543352348:ratio=4:attack=0.01:release=10:knee=2.828427:makeup=1:detection=peak"
+    ],
+    "gainDb": 9.89722613660141,
+    "eventTargetDbfs": -14.905292989599738,
+    "limiterCeilingDbfs": -3,
+    "measured": {
+      "durationSeconds": 0.48,
+      "eventRmsDbfs": -16.245143929844016,
+      "eventAtMs": 24.943310657596374,
+      "samplePeakDbfs": -2.2342068910207553,
+      "samplePeakAtMs": 101.49659863945578,
+      "integratedLufs": -14.05,
+      "truePeakDbtp": -2.44
+    },
+    "referenceAssets": [
+      "DesignAssets/Audio/CreatureAttackV2/Source/original/unit-attack.mp3",
+      "DesignAssets/Audio/CreatureAttackV2/Source/original/beetle-attack.mp3",
+      "client/music-catalog.js",
+      "DesignAssets/Audio/bean-footstep.mp3",
+      "DesignAssets/Audio/sprout-hurt.mp3",
+      "DesignAssets/Audio/mushroom-harvest-loop.mp3"
+    ],
+    "musicReferenceVolume": 0.28
+  },
+  "referenceSource": "DesignAssets/Audio/beetle-attack.mp3"
+}

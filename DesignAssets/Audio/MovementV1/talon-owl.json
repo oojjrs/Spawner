@@ -1,0 +1,34 @@
+{
+  "key": "talon-owl",
+  "label": "갈퀴부엉이",
+  "provider": "ElevenLabs",
+  "endpoint": "https://api.elevenlabs.io/v1/sound-generation",
+  "output_format": "mp3_44100_128",
+  "request": {
+    "text": "One broad owl wing downstroke heard close by. A soft rounded feathered rush of air with fine feather flutter, restrained natural movement foley. Exactly one movement event beginning immediately, concise natural decay, low intensity and dry intimate recording. No second event, repeated footsteps, voice, animal call, melody, music, ambient bed, dramatic bass, or reverb.",
+    "duration_seconds": 0.65,
+    "prompt_influence": 0.85,
+    "loop": false,
+    "model_id": "eleven_text_to_sound_v2"
+  },
+  "state": "installed",
+  "submitted_at": "2026-10-29T19:06:17.528434+00:00",
+  "processing": "none",
+  "input_sources": [],
+  "request_id": null,
+  "character_cost": "6",
+  "bytes": 11327,
+  "sha256": "9756a37c0f202d6797328c407df5ba127ee4713ad68ac91fcfee454b5b3983b0",
+  "completed_at": "2026-10-29T19:06:22.064262+00:00",
+  "asset": "DesignAssets/Audio/MovementV1/talon-owl.mp3",
+  "timing": {
+    "name": "move-talon-owl",
+    "source": "DesignAssets/Audio/MovementV1/talon-owl.mp3",
+    "gain": 0.06,
+    "phases": [
+      0.38333333333333336
+    ],
+    "leadMs": 0
+  },
+  "installationAuthorization": "User requested creating all missing movement sounds and applying them to the game and Design.html."
+}

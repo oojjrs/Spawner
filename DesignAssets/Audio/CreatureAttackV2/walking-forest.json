@@ -1,0 +1,48 @@
+{
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "One massive rock-backed turtle drops both front feet and its heavy forebody onto packed earth. Immediate solid close low THUD: crisp blunt attack at 0.04 seconds, dense short stone-and-wood weight and firm low-frequency body, tiny grit and leaf settling. One grounded strike, dry compact tail under 0.9s. No airy swish, earthquake, explosion, metal, voice, breath, music, ambience or long reverb.",
+  "duration_seconds": 0.9,
+  "prompt_influence": 0.9,
+  "loop": false,
+  "output_format": "mp3_44100_128",
+  "processing": "Mastered from the preserved original with high-pass/EQ, event-window gain calibration, oversampled peak limiting and MP3 encoding.",
+  "input": "text prompt only",
+  "generated_at": "2026-10-29T19:26:27.529175+00:00",
+  "request_id": null,
+  "sha256": "334beaed34e4419870a74c2d1c4cbe8a1d0b7244095f0890aa421a078f81618f",
+  "asset": "DesignAssets/Audio/CreatureAttackV2/walking-forest.mp3",
+  "original_sha256": "fe15e53db5e47246e184cdc9297e2b7712f5f69ebc26ffc4e7fa4a031ae4d075",
+  "audioLeadMs": 14,
+  "mastering": {
+    "source": "DesignAssets/Audio/CreatureAttackV2/Source/revised/walking-forest.mp3",
+    "renderer": "DesignAssets/Audio/CreatureAttackV2/mastering.mjs",
+    "filters": [
+      "highpass=f=45:p=2",
+      "equalizer=f=110:t=q:w=0.8:g=2",
+      "equalizer=f=2500:t=q:w=0.9:g=-1",
+      "acompressor=threshold=0.2082890773:ratio=4:attack=0.01:release=10:knee=2.828427:makeup=1:detection=peak"
+    ],
+    "gainDb": 10.352452998229202,
+    "eventTargetDbfs": -12.905292989599738,
+    "limiterCeilingDbfs": -3,
+    "measured": {
+      "durationSeconds": 0.88,
+      "eventRmsDbfs": -15.550104537364309,
+      "eventAtMs": 9.977324263038549,
+      "samplePeakDbfs": -3.1662012956833694,
+      "samplePeakAtMs": 16.235827664399093,
+      "integratedLufs": -19.25,
+      "truePeakDbtp": -3.11
+    },
+    "referenceAssets": [
+      "DesignAssets/Audio/CreatureAttackV2/Source/original/unit-attack.mp3",
+      "DesignAssets/Audio/CreatureAttackV2/Source/original/beetle-attack.mp3",
+      "client/music-catalog.js",
+      "DesignAssets/Audio/bean-footstep.mp3",
+      "DesignAssets/Audio/sprout-hurt.mp3",
+      "DesignAssets/Audio/mushroom-harvest-loop.mp3"
+    ],
+    "musicReferenceVolume": 0.28
+  }
+}

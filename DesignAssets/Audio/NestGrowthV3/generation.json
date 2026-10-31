@@ -1,0 +1,242 @@
+{
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "audioStartMs": 600,
+  "durationMs": 5720,
+  "approval": "selected all four originals and authorized segment cutting and placement",
+  "processing": [
+    "segment cutting at low-energy samples",
+    "placement and silence padding",
+    "MP3 encoding at original sample rate and channel count"
+  ],
+  "sounds": {
+    "sprout": {
+      "file": "sprout.mp3",
+      "source": "Sources/sprout.mp3",
+      "sourceSha256": "a9858be477eb2c5eb66f1183c776c150de1b9305a7027737195d34a6e81b4899",
+      "outputSha256": "89e151fa34d79d4fd0c53628284574b58c2de1cd693d9ce971fefaea5546c67a",
+      "generation": {
+        "state": "complete",
+        "submitted_at": "2026-10-30T10:43:57.709394+00:00",
+        "request": {
+          "text": "Close foreground foley of a thick living flower nest. 0-.48s firm leafy fold and cushioned close; .48-.96s quiet; .96-1.76s fibrous swelling creak; 1.76-2.56s still; 2.56-3.28s broad petal unfurl and papery flap; settle by 4s, quiet tail. Clear full midrange body, fresh organic texture. No voice, music, chime, wind, breaking, magic or reverb.",
+          "model_id": "eleven_text_to_sound_v2",
+          "duration_seconds": 5.72,
+          "prompt_influence": 0.9,
+          "loop": false
+        },
+        "provider": "ElevenLabs",
+        "output_format": "mp3_44100_128",
+        "processing": "none",
+        "bytes": 91994,
+        "sha256": "a9858be477eb2c5eb66f1183c776c150de1b9305a7027737195d34a6e81b4899",
+        "request_id": "",
+        "content_type": "audio/mpeg"
+      },
+      "sampleRate": 44100,
+      "channels": 2,
+      "gain": 1,
+      "segments": [
+        {
+          "sourceStartSample": 4139,
+          "sourceEndSample": 25170,
+          "destinationStartSample": 9892,
+          "sourceAnchorSample": 15415,
+          "targetAnimationMs": 1080,
+          "actualAnimationAnchorMs": 1080.0
+        },
+        {
+          "sourceStartSample": 33117,
+          "sourceEndSample": 73234,
+          "destinationStartSample": 49185,
+          "sourceAnchorSample": 43908,
+          "targetAnimationMs": 1960,
+          "actualAnimationAnchorMs": 1960.0
+        },
+        {
+          "sourceStartSample": 114120,
+          "sourceEndSample": 157514,
+          "destinationStartSample": 112941,
+          "sourceAnchorSample": 145827,
+          "targetAnimationMs": 3880,
+          "actualAnimationAnchorMs": 3880.0
+        }
+      ]
+    },
+    "spore": {
+      "file": "spore.mp3",
+      "source": "Sources/spore.mp3",
+      "sourceSha256": "a06b31e49655fd8c57d22532a56cb4e1610395897ec5f8be1b0c37b34194de0d",
+      "outputSha256": "5435f4cbcbf597118cb1d4a22144304f5f1364abd8836aece35ad5be05a06924",
+      "generation": {
+        "state": "complete",
+        "submitted_at": "2026-10-30T10:43:57.709394+00:00",
+        "request": {
+          "text": "Close foreground foley of a thick mushroom canopy on a fleshy cradle. 0-.48s soft hollow cushioned closure; .48-.96s quiet; .96-1.76s dense supple fungal growth creak; 1.76-2.56s still; 2.56-3.28s broad leathery cap lifting with an airy membrane flap; settle by 4s, quiet tail. Clear warm low-mid body. No voice, music, rubber squeak, suction, squelch, buzz or reverb.",
+          "model_id": "eleven_text_to_sound_v2",
+          "duration_seconds": 5.72,
+          "prompt_influence": 0.9,
+          "loop": false
+        },
+        "provider": "ElevenLabs",
+        "output_format": "mp3_44100_128",
+        "processing": "none",
+        "bytes": 91994,
+        "sha256": "a06b31e49655fd8c57d22532a56cb4e1610395897ec5f8be1b0c37b34194de0d",
+        "request_id": "",
+        "content_type": "audio/mpeg"
+      },
+      "sampleRate": 44100,
+      "channels": 2,
+      "gain": 1,
+      "segments": [
+        {
+          "sourceStartSample": 17270,
+          "sourceEndSample": 34761,
+          "destinationStartSample": 9631,
+          "sourceAnchorSample": 28807,
+          "targetAnimationMs": 1080,
+          "actualAnimationAnchorMs": 1080.0
+        },
+        {
+          "sourceStartSample": 52063,
+          "sourceEndSample": 78941,
+          "destinationStartSample": 44619,
+          "sourceAnchorSample": 67420,
+          "targetAnimationMs": 1960,
+          "actualAnimationAnchorMs": 1960.0
+        },
+        {
+          "sourceStartSample": 193808,
+          "sourceEndSample": 236307,
+          "destinationStartSample": 117352,
+          "sourceAnchorSample": 221104,
+          "targetAnimationMs": 3880,
+          "actualAnimationAnchorMs": 3880.0
+        }
+      ]
+    },
+    "pebble": {
+      "file": "pebble.mp3",
+      "source": "Sources/pebble.mp3",
+      "sourceSha256": "3a1486699a1a21f944bc9c43e6d4ff3e8d33007f44d2049a2f0152a633162ed3",
+      "outputSha256": "dae73dd0b2b16be1a39a271f9111c53a869fb7a8851febda502f8fd0aa552563",
+      "generation": {
+        "state": "complete",
+        "submitted_at": "2026-10-30T10:43:57.709394+00:00",
+        "request": {
+          "text": "Close dry foley of a small sandstone nest assembling. Three separate rounded heavy stone seating clacks, EXACTLY at .88s, 2.32s and 3.76s; each preceded by a short gritty scrape and rolling pebble movement. First left support, then right support, then broad roof cap seats. Quiet gaps, light grit settles after the last impact. Weighty clear mineral body, small scale. No cracking, avalanche, metal, glass, voice, music or reverb.",
+          "model_id": "eleven_text_to_sound_v2",
+          "duration_seconds": 5.72,
+          "prompt_influence": 0.9,
+          "loop": false
+        },
+        "provider": "ElevenLabs",
+        "output_format": "mp3_44100_128",
+        "processing": "none",
+        "bytes": 91994,
+        "sha256": "3a1486699a1a21f944bc9c43e6d4ff3e8d33007f44d2049a2f0152a633162ed3",
+        "request_id": "",
+        "content_type": "audio/mpeg"
+      },
+      "sampleRate": 44100,
+      "channels": 2,
+      "gain": 1,
+      "segments": [
+        {
+          "sourceStartSample": 97748,
+          "sourceEndSample": 131023,
+          "destinationStartSample": 30746,
+          "sourceAnchorSample": 116394,
+          "targetAnimationMs": 1720,
+          "actualAnimationAnchorMs": 1720.0
+        },
+        {
+          "sourceStartSample": 132265,
+          "sourceEndSample": 169391,
+          "destinationStartSample": 90793,
+          "sourceAnchorSample": 154368,
+          "targetAnimationMs": 3160,
+          "actualAnimationAnchorMs": 3160.0
+        },
+        {
+          "sourceStartSample": 208665,
+          "sourceEndSample": 248817,
+          "destinationStartSample": 161632,
+          "sourceAnchorSample": 234017,
+          "targetAnimationMs": 4840,
+          "actualAnimationAnchorMs": 4840.0
+        }
+      ]
+    },
+    "spring": {
+      "file": "spring.mp3",
+      "source": "Sources/spring.mp3",
+      "sourceSha256": "56b5fa9c8aeac2e1d85f8f7f995c48bd85ed0cc18ec9844782ae69a8497ac546",
+      "outputSha256": "5ad01da6a534f2b226c8df214e2f2955ebefbb48298354c9661530848d804bc0",
+      "generation": {
+        "state": "complete",
+        "submitted_at": "2026-10-30T10:43:57.710397+00:00",
+        "request": {
+          "text": "Close fresh-water foley of a magical-looking but physically liquid miniature pool growing in three stages. Soft contained water impacts EXACTLY at .88s, 2.32s and 3.76s: first basin fills with a rounded lap, then upper pool rises with a compact gulp, then a short silky waterfall pours into the lower pool and ripples settle. Quiet gaps and a delicate watery tail. No voice, music, chimes, rubber, suction, storm, ocean surf or reverb.",
+          "model_id": "eleven_text_to_sound_v2",
+          "duration_seconds": 5.72,
+          "prompt_influence": 0.9,
+          "loop": false
+        },
+        "provider": "ElevenLabs",
+        "output_format": "mp3_44100_128",
+        "processing": "none",
+        "bytes": 91994,
+        "sha256": "56b5fa9c8aeac2e1d85f8f7f995c48bd85ed0cc18ec9844782ae69a8497ac546",
+        "request_id": "",
+        "content_type": "audio/mpeg"
+      },
+      "sampleRate": 44100,
+      "channels": 2,
+      "gain": 1,
+      "segments": [
+        {
+          "sourceStartSample": 3238,
+          "sourceEndSample": 32217,
+          "destinationStartSample": 27304,
+          "sourceAnchorSample": 21798,
+          "targetAnimationMs": 1640,
+          "actualAnimationAnchorMs": 1640.0
+        },
+        {
+          "sourceStartSample": 54785,
+          "sourceEndSample": 85716,
+          "destinationStartSample": 102456,
+          "sourceAnchorSample": 65225,
+          "targetAnimationMs": 3160,
+          "actualAnimationAnchorMs": 3160.0
+        },
+        {
+          "sourceStartSample": 89268,
+          "sourceEndSample": 110212,
+          "destinationStartSample": 148176,
+          "sourceAnchorSample": null,
+          "targetAnimationMs": 3960,
+          "actualAnimationAnchorMs": null
+        },
+        {
+          "sourceStartSample": 32217,
+          "sourceEndSample": 54785,
+          "destinationStartSample": 171268,
+          "sourceAnchorSample": 40877,
+          "targetAnimationMs": 4680,
+          "actualAnimationAnchorMs": 4680.0
+        },
+        {
+          "sourceStartSample": 116738,
+          "sourceEndSample": 149739,
+          "destinationStartSample": 194922,
+          "sourceAnchorSample": null,
+          "targetAnimationMs": 5020,
+          "actualAnimationAnchorMs": null
+        }
+      ]
+    }
+  }
+}

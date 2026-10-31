@@ -1,0 +1,35 @@
+{
+  "key": "soil-mole",
+  "label": "흙두더지",
+  "provider": "ElevenLabs",
+  "endpoint": "https://api.elevenlabs.io/v1/sound-generation",
+  "output_format": "mp3_44100_128",
+  "request": {
+    "text": "One short mole forepaw plant and pull through loose garden soil. A small muted paw thump with a brief fine dry earth scrape, close miniature foley. Exactly one movement event beginning immediately, concise natural decay, low intensity and dry intimate recording. No second event, repeated footsteps, voice, animal call, melody, music, ambient bed, dramatic bass, or reverb.",
+    "duration_seconds": 0.5,
+    "prompt_influence": 0.85,
+    "loop": false,
+    "model_id": "eleven_text_to_sound_v2"
+  },
+  "state": "installed",
+  "submitted_at": "2026-10-29T19:06:07.631466+00:00",
+  "processing": "none",
+  "input_sources": [],
+  "request_id": null,
+  "character_cost": "5",
+  "bytes": 8820,
+  "sha256": "b148556a7173cbb8a8a6ed5550c353b98f9f65ecb0c08942a0a4835f31c762bb",
+  "completed_at": "2026-10-29T19:06:09.739343+00:00",
+  "asset": "DesignAssets/Audio/MovementV1/soil-mole.mp3",
+  "timing": {
+    "name": "move-soil-mole",
+    "source": "DesignAssets/Audio/MovementV1/soil-mole.mp3",
+    "gain": 0.068,
+    "phases": [
+      0,
+      0.4947526236881559
+    ],
+    "leadMs": 0
+  },
+  "installationAuthorization": "User requested creating all missing movement sounds and applying them to the game and Design.html."
+}

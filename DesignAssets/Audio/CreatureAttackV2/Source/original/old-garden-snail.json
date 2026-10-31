@@ -1,0 +1,21 @@
+{
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "One massive garden snail thrusts its soft neck forward while carrying a rigid shell and a small tree. A heavy smooth moist body stretch into a short low air whump, a delicate woody load creak and leafy rustle, grounded and compact. No suction, bubbles or shell collision. One motion, immediate onset, peak at 0.06s, short dry tail. No target impact, voices, weapons, metal, music, ambience or reverb.",
+  "duration_seconds": 0.65,
+  "prompt_influence": 0.85,
+  "loop": false,
+  "output_format": "mp3_44100_128",
+  "processing": "none",
+  "asset": "DesignAssets/Audio/CreatureAttackV2/old-garden-snail.mp3",
+  "input": "text prompt only",
+  "reference_assets": [
+    "DesignAssets/Audio/unit-attack.json",
+    "DesignAssets/Audio/beetle-attack.json"
+  ],
+  "generated_at": "2026-10-29T18:59:49.161726+00:00",
+  "request_id": null,
+  "character_cost": "6",
+  "sha256": "2f67002e3a7c3bc491bc3fc3cc9cdd116ef9add86929121c23a6af6065286abd",
+  "installationAuthorization": "User explicitly requested creating and attaching attack SFX for all eighteen species and applying them to the game."
+}

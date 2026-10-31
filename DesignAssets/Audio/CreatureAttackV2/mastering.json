@@ -1,0 +1,290 @@
+{
+  "eventWindowMs": 100, 
+  "eventHopSamplesAt22050Hz": 110, 
+  "limiterCeilingDbfs": -3, 
+  "output": {
+    "sampleRate": 44100, 
+    "codec": "libmp3lame", 
+    "bitrate": "128k"
+  }, 
+  "runtimeMusicVolume": 0.28, 
+  "references": [
+    "DesignAssets/Audio/CreatureAttackV2/Source/original/unit-attack.mp3", 
+    "DesignAssets/Audio/CreatureAttackV2/Source/original/beetle-attack.mp3", 
+    "client/music-catalog.js", 
+    "DesignAssets/Audio/bean-footstep.mp3", 
+    "DesignAssets/Audio/sprout-hurt.mp3", 
+    "DesignAssets/Audio/mushroom-harvest-loop.mp3"
+  ], 
+  "assets": [
+    {
+      "key": "flower-tail-bird", 
+      "input": "Source/original/flower-tail-bird.mp3", 
+      "provenance": "Source/original/flower-tail-bird.json", 
+      "eventTargetDbfs": -15.905292989599738, 
+      "filters": [
+        "highpass=f=80:p=2"
+      ], 
+      "output": "DesignAssets/Audio/CreatureAttackV2/flower-tail-bird.mp3", 
+      "cueLeadMs": 60, 
+      "lockedTransientProcessing": true, 
+      "musicReferenceAdjustmentDb": 2.094707010400261
+    }, 
+    {
+      "key": "dew-rabbit", 
+      "input": "Source/original/dew-rabbit.mp3", 
+      "provenance": "Source/original/dew-rabbit.json", 
+      "eventTargetDbfs": -15.405292989599738, 
+      "filters": [
+        "highpass=f=80:p=2"
+      ], 
+      "output": "DesignAssets/Audio/CreatureAttackV2/dew-rabbit.mp3", 
+      "cueLeadMs": 60, 
+      "lockedTransientProcessing": true, 
+      "musicReferenceAdjustmentDb": 2.094707010400261
+    }, 
+    {
+      "key": "soil-mole", 
+      "input": "Source/revised/soil-mole.mp3", 
+      "provenance": "Source/revised/soil-mole.json", 
+      "eventTargetDbfs": -13.905292989599738, 
+      "filters": [
+        "highpass=f=110:p=2", 
+        "equalizer=f=650:t=q:w=0.7:g=3", 
+        "equalizer=f=1800:t=q:w=0.8:g=2"
+      ], 
+      "output": "DesignAssets/Audio/CreatureAttackV2/soil-mole.mp3", 
+      "cueLeadMs": 60, 
+      "lockedTransientProcessing": true, 
+      "musicReferenceAdjustmentDb": 2.094707010400261
+    }, 
+    {
+      "key": "bundle-snail", 
+      "input": "Source/original/bundle-snail.mp3", 
+      "provenance": "Source/original/bundle-snail.json", 
+      "eventTargetDbfs": -15.905292989599738, 
+      "filters": [
+        "highpass=f=80:p=2", 
+        "acompressor=threshold=0.2705798390:ratio=4:attack=0.01:release=10:knee=2.828427:makeup=1:detection=peak"
+      ], 
+      "output": "DesignAssets/Audio/CreatureAttackV2/bundle-snail.mp3", 
+      "cueLeadMs": 60, 
+      "lockedTransientProcessing": true, 
+      "musicReferenceAdjustmentDb": 2.094707010400261
+    }, 
+    {
+      "key": "cotton-sheep", 
+      "input": "Source/original/cotton-sheep.mp3", 
+      "provenance": "Source/original/cotton-sheep.json", 
+      "eventTargetDbfs": -14.905292989599738, 
+      "filters": [
+        "highpass=f=80:p=2"
+      ], 
+      "output": "DesignAssets/Audio/CreatureAttackV2/cotton-sheep.mp3", 
+      "cueLeadMs": 60, 
+      "lockedTransientProcessing": true, 
+      "musicReferenceAdjustmentDb": 2.094707010400261
+    }, 
+    {
+      "key": "rolling-acorn", 
+      "input": "Source/original/rolling-acorn.mp3", 
+      "provenance": "Source/original/rolling-acorn.json", 
+      "eventTargetDbfs": -15.405292989599738, 
+      "filters": [
+        "highpass=f=80:p=2"
+      ], 
+      "output": "DesignAssets/Audio/CreatureAttackV2/rolling-acorn.mp3", 
+      "cueLeadMs": 60, 
+      "lockedTransientProcessing": true, 
+      "musicReferenceAdjustmentDb": 2.094707010400261
+    }, 
+    {
+      "key": "soil-boar", 
+      "input": "Source/original/soil-boar.mp3", 
+      "provenance": "Source/original/soil-boar.json", 
+      "eventTargetDbfs": -13.905292989599738, 
+      "filters": [
+        "highpass=f=80:p=2", 
+        "acompressor=threshold=0.3853286735:ratio=4:attack=0.01:release=10:knee=2.828427:makeup=1:detection=peak"
+      ], 
+      "output": "DesignAssets/Audio/CreatureAttackV2/soil-boar.mp3", 
+      "cueLeadMs": 60, 
+      "lockedTransientProcessing": true, 
+      "musicReferenceAdjustmentDb": 2.094707010400261
+    }, 
+    {
+      "key": "bubble-toad", 
+      "input": "Source/original/bubble-toad.mp3", 
+      "provenance": "Source/original/bubble-toad.json", 
+      "eventTargetDbfs": -15.405292989599738, 
+      "filters": [
+        "highpass=f=80:p=2", 
+        "acompressor=threshold=0.2439935318:ratio=4:attack=0.01:release=10:knee=2.828427:makeup=1:detection=peak"
+      ], 
+      "output": "DesignAssets/Audio/CreatureAttackV2/bubble-toad.mp3", 
+      "cueLeadMs": 60, 
+      "lockedTransientProcessing": true, 
+      "musicReferenceAdjustmentDb": 2.094707010400261
+    }, 
+    {
+      "key": "vine-turtle", 
+      "input": "Source/original/vine-turtle.mp3", 
+      "provenance": "Source/original/vine-turtle.json", 
+      "eventTargetDbfs": -14.905292989599738, 
+      "filters": [
+        "highpass=f=80:p=2", 
+        "acompressor=threshold=0.2316512683:ratio=4:attack=0.01:release=10:knee=2.828427:makeup=1:detection=peak"
+      ], 
+      "output": "DesignAssets/Audio/CreatureAttackV2/vine-turtle.mp3", 
+      "cueLeadMs": 60, 
+      "lockedTransientProcessing": true, 
+      "musicReferenceAdjustmentDb": 2.094707010400261
+    }, 
+    {
+      "key": "shadow-weasel", 
+      "input": "Source/original/shadow-weasel.mp3", 
+      "provenance": "Source/original/shadow-weasel.json", 
+      "eventTargetDbfs": -14.905292989599738, 
+      "filters": [
+        "highpass=f=80:p=2"
+      ], 
+      "output": "DesignAssets/Audio/CreatureAttackV2/shadow-weasel.mp3", 
+      "cueLeadMs": 60, 
+      "lockedTransientProcessing": true, 
+      "musicReferenceAdjustmentDb": 2.094707010400261
+    }, 
+    {
+      "key": "snare-vine", 
+      "input": "Source/original/snare-vine.mp3", 
+      "provenance": "Source/original/snare-vine.json", 
+      "eventTargetDbfs": -14.905292989599738, 
+      "filters": [
+        "highpass=f=80:p=2"
+      ], 
+      "output": "DesignAssets/Audio/CreatureAttackV2/snare-vine.mp3", 
+      "cueLeadMs": 60, 
+      "lockedTransientProcessing": true, 
+      "musicReferenceAdjustmentDb": 2.094707010400261
+    }, 
+    {
+      "key": "talon-owl", 
+      "input": "Source/original/talon-owl.mp3", 
+      "provenance": "Source/original/talon-owl.json", 
+      "eventTargetDbfs": -14.405292989599738, 
+      "filters": [
+        "highpass=f=80:p=2", 
+        "acompressor=threshold=0.2420012304:ratio=4:attack=0.01:release=10:knee=2.828427:makeup=1:detection=peak"
+      ], 
+      "output": "DesignAssets/Audio/CreatureAttackV2/talon-owl.mp3", 
+      "cueLeadMs": 60, 
+      "lockedTransientProcessing": true, 
+      "musicReferenceAdjustmentDb": 2.094707010400261
+    }, 
+    {
+      "key": "spring-keeper", 
+      "input": "Source/original/spring-keeper.mp3", 
+      "provenance": "Source/original/spring-keeper.json", 
+      "eventTargetDbfs": -14.905292989599738, 
+      "filters": [
+        "highpass=f=80:p=2"
+      ], 
+      "output": "DesignAssets/Audio/CreatureAttackV2/spring-keeper.mp3", 
+      "cueLeadMs": 60, 
+      "lockedTransientProcessing": true, 
+      "musicReferenceAdjustmentDb": 2.094707010400261
+    }, 
+    {
+      "key": "lantern-keeper", 
+      "input": "Source/original/lantern-keeper.mp3", 
+      "provenance": "Source/original/lantern-keeper.json", 
+      "eventTargetDbfs": -14.405292989599738, 
+      "filters": [
+        "highpass=f=80:p=2"
+      ], 
+      "output": "DesignAssets/Audio/CreatureAttackV2/lantern-keeper.mp3", 
+      "cueLeadMs": 60, 
+      "lockedTransientProcessing": true, 
+      "musicReferenceAdjustmentDb": 2.094707010400261
+    }, 
+    {
+      "key": "old-garden-snail", 
+      "input": "Source/original/old-garden-snail.mp3", 
+      "provenance": "Source/original/old-garden-snail.json", 
+      "eventTargetDbfs": -14.905292989599738, 
+      "filters": [
+        "highpass=f=80:p=2", 
+        "acompressor=threshold=0.1988786928:ratio=4:attack=0.01:release=10:knee=2.828427:makeup=1:detection=peak"
+      ], 
+      "output": "DesignAssets/Audio/CreatureAttackV2/old-garden-snail.mp3", 
+      "cueLeadMs": 60, 
+      "lockedTransientProcessing": true, 
+      "musicReferenceAdjustmentDb": 2.094707010400261
+    }, 
+    {
+      "key": "walking-forest", 
+      "input": "Source/revised/walking-forest.mp3", 
+      "provenance": "Source/revised/walking-forest.json", 
+      "eventTargetDbfs": -12.905292989599738, 
+      "filters": [
+        "highpass=f=45:p=2", 
+        "equalizer=f=110:t=q:w=0.8:g=2", 
+        "equalizer=f=2500:t=q:w=0.9:g=-1", 
+        "acompressor=threshold=0.2082890773:ratio=4:attack=0.01:release=10:knee=2.828427:makeup=1:detection=peak"
+      ], 
+      "output": "DesignAssets/Audio/CreatureAttackV2/walking-forest.mp3", 
+      "cueLeadMs": 14, 
+      "lockedTransientProcessing": true, 
+      "musicReferenceAdjustmentDb": 2.094707010400261
+    }, 
+    {
+      "key": "white-paw", 
+      "input": "Source/original/white-paw.mp3", 
+      "provenance": "Source/original/white-paw.json", 
+      "eventTargetDbfs": -14.405292989599738, 
+      "filters": [
+        "highpass=f=80:p=2", 
+        "acompressor=threshold=0.2887452956:ratio=4:attack=0.01:release=10:knee=2.828427:makeup=1:detection=peak"
+      ], 
+      "output": "DesignAssets/Audio/CreatureAttackV2/white-paw.mp3", 
+      "cueLeadMs": 60, 
+      "lockedTransientProcessing": true, 
+      "musicReferenceAdjustmentDb": 2.094707010400261
+    }, 
+    {
+      "key": "unit-attack", 
+      "input": "Source/original/unit-attack.mp3", 
+      "provenance": "Source/original/unit-attack.json", 
+      "eventTargetDbfs": -14.905292989599738, 
+      "filters": [
+        "highpass=f=80:p=2"
+      ], 
+      "output": "DesignAssets/Audio/unit-attack.mp3", 
+      "cueLeadMs": 60, 
+      "lockedTransientProcessing": true, 
+      "musicReferenceAdjustmentDb": 2.094707010400261
+    }, 
+    {
+      "key": "beetle-attack", 
+      "input": "Source/original/beetle-attack.mp3", 
+      "provenance": "Source/original/beetle-attack.json", 
+      "eventTargetDbfs": -14.905292989599738, 
+      "filters": [
+        "highpass=f=80:p=2", 
+        "acompressor=threshold=0.1543352348:ratio=4:attack=0.01:release=10:knee=2.828427:makeup=1:detection=peak"
+      ], 
+      "output": "DesignAssets/Audio/beetle-attack.mp3", 
+      "cueLeadMs": 80, 
+      "lockedTransientProcessing": true, 
+      "musicReferenceAdjustmentDb": 2.094707010400261
+    }
+  ], 
+  "aliases": [
+    {
+      "key": "spiny-back-leader", 
+      "source": "beetle-attack", 
+      "output": "DesignAssets/Audio/CreatureAttackV2/spiny-back-leader.mp3", 
+      "cueLeadMs": 80
+    }
+  ], 
+  "referenceMusicVolume": 0.28
+}

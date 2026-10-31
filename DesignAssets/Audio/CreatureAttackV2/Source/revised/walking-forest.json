@@ -1,0 +1,14 @@
+{
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "One massive rock-backed turtle drops both front feet and its heavy forebody onto packed earth. Immediate solid close low THUD: crisp blunt attack at 0.04 seconds, dense short stone-and-wood weight and firm low-frequency body, tiny grit and leaf settling. One grounded strike, dry compact tail under 0.9s. No airy swish, earthquake, explosion, metal, voice, breath, music, ambience or long reverb.",
+  "duration_seconds": 0.9,
+  "prompt_influence": 0.9,
+  "loop": false,
+  "output_format": "mp3_44100_128",
+  "processing": "none",
+  "input": "text prompt only",
+  "generated_at": "2026-10-29T19:26:27.529175+00:00",
+  "request_id": null,
+  "sha256": "fe15e53db5e47246e184cdc9297e2b7712f5f69ebc26ffc4e7fa4a031ae4d075"
+}

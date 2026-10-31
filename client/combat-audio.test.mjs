@@ -6,11 +6,53 @@ import { createGame } from "../server/game.mjs";
 import { createCreatures } from "../server/creatures.mjs";
 import { AGENT_ATTACK_HIT_TIME } from "../server/attack.mjs";
 import { BEETLE_ANIMATIONS } from "../server/beetle-animation.mjs";
+import { ENCOUNTER_TYPES } from "../server/encounter-types.mjs";
 
 const scope = createContext({});
 runInContext(readFileSync(new URL("./combat-audio.js", import.meta.url), "utf8"), scope);
 const combat = scope.SpawnerCombatAudio;
 const names = events => Array.from(events, event => event.name);
+
+test("일반·유니크 18종은 몸 재질에 맞는 기존 피격음을 한 번씩 재생한다", () => {
+  const agents = ENCOUNTER_TYPES.map((type, index) => ({ id: "hurt-" + index, species: type.key, health: 100 }));
+  assert.equal(agents.length, 18);
+  const playback = combat.create();
+  combat.update(playback, agents, [], 9.9);
+  for (const agent of agents) {
+    agent.hurtStartedAt = 10;
+    agent.hurtCount = 1;
+    assert.equal(combat.cue(combat.material(agent), "hurt", 1).name, agent.species === "spiny-back-leader" ? "beetle-hurt" : "sprout-hurt");
+  }
+  assert.equal(combat.update(playback, agents, [], 10.019).length, 0);
+  assert.deepEqual(names(combat.update(playback, agents, [], 10.02)), agents.map(agent => agent.species === "spiny-back-leader" ? "beetle-hurt" : "sprout-hurt"));
+  assert.equal(combat.update(playback, agents, [], 10.03).length, 0);
+  const corpses = agents.map(agent => ({ ...agent, agentId: agent.id, diedAt: 10.01 }));
+  assert.equal(combat.update(playback, [], corpses, 10.04).length, 0);
+});
+
+test("일반·유니크 18종 공격음은 작화 타격 직전에 종별로 한 번씩 재생한다", () => {
+  for (const type of ENCOUNTER_TYPES) {
+    const animation = JSON.parse(readFileSync(new URL("../DesignAssets/Animations/CreatureAttackV2/" + type.key + "/attack.json", import.meta.url), "utf8"));
+    const hitTime = animation.durationsMs.slice(0, animation.impactFrame).reduce((sum, duration) => sum + duration, 0) / 1000;
+    const unit = { id: type.key, species: type.key, health: 100 };
+    assert.equal(combat.material(unit), type.key);
+    for (const speed of [1, 2]) {
+      const sound = combat.cue(type.key, "attack", speed);
+      assert.equal(sound.name, type.key + "-attack");
+      const mastering = JSON.parse(readFileSync(new URL("../DesignAssets/Audio/CreatureAttackV2/" + type.key + ".json", import.meta.url), "utf8"));
+      assert.equal(sound.at, (hitTime - mastering.audioLeadMs / 1000) / speed);
+      assert.equal(combat.sources[sound.name], "DesignAssets/Audio/CreatureAttackV2/" + type.key + ".mp3");
+      const playback = combat.create();
+      unit.attack = null;
+      combat.update(playback, [unit], [], 10);
+      unit.attack = { startedAt: 10, speed };
+      assert.equal(combat.update(playback, [unit], [], 10 + sound.at / 2).length, 0);
+      assert.equal(combat.update(playback, [unit], [], 10 + sound.at - .001).length, 0);
+      assert.deepEqual(names(combat.update(playback, [unit], [], 10 + sound.at)), [sound.name]);
+      assert.equal(combat.update(playback, [unit], [], 10 + sound.at + .01).length, 0);
+    }
+  }
+});
 
 function fixture(tribe) {
   const colony = { id: 1, ownerId: "combat-audio", tribe, x: 40, y: 40, occupiedCells: new Set(["2,2"]) };
@@ -21,6 +63,15 @@ function fixture(tribe) {
   game.agents.splice(1);
   return { game, agent: game.agents[0], environment };
 }
+
+test("가시등 우두머리는 딱정벌레의 공격·피격 음원을 공유한다", () => {
+  const base = readFileSync(new URL("../DesignAssets/Audio/beetle-attack.mp3", import.meta.url));
+  const leader = readFileSync(new URL("../DesignAssets/Audio/CreatureAttackV2/spiny-back-leader.mp3", import.meta.url));
+  assert.deepEqual(leader, base);
+  assert.equal(combat.cue("spiny-back-leader", "hurt", 1).name, combat.cue("beetle", "hurt", 1).name);
+  const sourceLead = BEETLE_ANIMATIONS.attack.hitTimeMs / 1000 - combat.cue("beetle", "attack", 1).at;
+  assert.ok(Math.abs(.53 - combat.cue("spiny-back-leader", "attack", 1).at - sourceLead) < 1e-9);
+});
 
 test("공격 예비 동작은 명중 프레임에 앞서며 공격 속도에 따라 함께 빨라진다", () => {
   assert.equal(combat.cue("sprout", "attack", 1).at, AGENT_ATTACK_HIT_TIME - .06);
@@ -138,7 +189,7 @@ test("게임·기획서와 로컬 실행 목록이 같은 전투 음원을 참�
   const html = readFileSync(new URL("../Spawner.html", import.meta.url), "utf8");
   assert.ok(html.indexOf("client/combat-audio.js") < html.indexOf("client/audio.js"));
   assert.ok(design.includes('src="client/combat-audio.js"'));
-  assert.equal([...design.matchAll(/data-combat-material=/g)].length, 15);
+  assert.equal([...design.matchAll(/data-combat-material=/g)].length, 51);
   for (const name of Object.values(combat.sources)) {
     assert.ok(existsSync(new URL("../" + name, import.meta.url)));
     assert.ok(local.SpawnerLocalAssetFiles.includes("./client/local-assets/" + name.slice("DesignAssets/".length) + ".js"));

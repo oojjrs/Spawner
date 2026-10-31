@@ -1,0 +1,21 @@
+{
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "One large armored beetle raises its front body and snaps its mandibles shut once. A short dense air swish into one low hollow dry chitin clack with a tiny hard joint rasp, heavier than a small beetle but compact. No shell shattering or insect voice. One motion, immediate onset, peak at 0.06s, short dry tail. No target impact, voices, weapons, metal, music, ambience or reverb.",
+  "duration_seconds": 0.65,
+  "prompt_influence": 0.85,
+  "loop": false,
+  "output_format": "mp3_44100_128",
+  "processing": "none",
+  "asset": "DesignAssets/Audio/CreatureAttackV2/spiny-back-leader.mp3",
+  "input": "text prompt only",
+  "reference_assets": [
+    "DesignAssets/Audio/unit-attack.json",
+    "DesignAssets/Audio/beetle-attack.json"
+  ],
+  "generated_at": "2026-10-29T18:59:52.759223+00:00",
+  "request_id": null,
+  "character_cost": "6",
+  "sha256": "a78e4991f1775fb1bb63852eb1cf1b9fc01c060f3c5916a24f6d9d78d2216037",
+  "installationAuthorization": "User explicitly requested creating and attaching attack SFX for all eighteen species and applying them to the game."
+}

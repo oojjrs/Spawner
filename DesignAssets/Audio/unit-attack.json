@@ -6,12 +6,42 @@
   "prompt_influence": 0.85,
   "loop": false,
   "output_format": "mp3_44100_128",
-  "processing": "none",
+  "processing": "Mastered from the preserved original with high-pass/EQ, event-window gain calibration, oversampled peak limiting and MP3 encoding.",
   "asset": "DesignAssets/Audio/unit-attack.mp3",
   "selectedCandidate": 1,
   "installationAuthorization": "User requested creating and attaching these combat sounds to the unit page.",
   "input": "text prompt only",
   "generated_at": "2026-10-25T07:42:48.620805+00:00",
   "request_id": null,
-  "sha256": "fe4cc7b8f883ae4e984d231963873e0ddd9e921a98ba8f3235a307281c8c3120"
+  "sha256": "fdd42627eeb03d2a12e5d2d7d92b07f3833d9dc5c0c7533174d1283e9bf5d1ac",
+  "original_sha256": "fe4cc7b8f883ae4e984d231963873e0ddd9e921a98ba8f3235a307281c8c3120",
+  "audioLeadMs": 60,
+  "mastering": {
+    "source": "DesignAssets/Audio/CreatureAttackV2/Source/original/unit-attack.mp3",
+    "renderer": "DesignAssets/Audio/CreatureAttackV2/mastering.mjs",
+    "filters": [
+      "highpass=f=80:p=2"
+    ],
+    "gainDb": -2.913987416830347,
+    "eventTargetDbfs": -14.905292989599738,
+    "limiterCeilingDbfs": -3,
+    "measured": {
+      "durationSeconds": 0.48,
+      "eventRmsDbfs": -16.151803560513915,
+      "eventAtMs": 9.977324263038549,
+      "samplePeakDbfs": -3.5902705435414086,
+      "samplePeakAtMs": 14.37641723356009,
+      "integratedLufs": -18.95,
+      "truePeakDbtp": -3.49
+    },
+    "referenceAssets": [
+      "DesignAssets/Audio/CreatureAttackV2/Source/original/unit-attack.mp3",
+      "DesignAssets/Audio/CreatureAttackV2/Source/original/beetle-attack.mp3",
+      "client/music-catalog.js",
+      "DesignAssets/Audio/bean-footstep.mp3",
+      "DesignAssets/Audio/sprout-hurt.mp3",
+      "DesignAssets/Audio/mushroom-harvest-loop.mp3"
+    ],
+    "musicReferenceVolume": 0.28
+  }
 }

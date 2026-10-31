@@ -1,0 +1,35 @@
+{
+  "key": "shadow-weasel",
+  "label": "그늘족제비",
+  "provider": "ElevenLabs",
+  "endpoint": "https://api.elevenlabs.io/v1/sound-generation",
+  "output_format": "mp3_44100_128",
+  "request": {
+    "text": "One quick tiny weasel paw contact on dry moss. A very quiet soft brushed paw tap and a short fine fur swish. Close stealthy miniature foley. Exactly one movement event beginning immediately, concise natural decay, low intensity and dry intimate recording. No second event, repeated footsteps, voice, animal call, melody, music, ambient bed, dramatic bass, or reverb.",
+    "duration_seconds": 0.5,
+    "prompt_influence": 0.85,
+    "loop": false,
+    "model_id": "eleven_text_to_sound_v2"
+  },
+  "state": "installed",
+  "submitted_at": "2026-10-29T19:06:15.541057+00:00",
+  "processing": "none",
+  "input_sources": [],
+  "request_id": null,
+  "character_cost": "5",
+  "bytes": 8820,
+  "sha256": "d852ab17bcb3ccc911da810344bdec8d63f94301c4a85564765ee929240f6b9e",
+  "completed_at": "2026-10-29T19:06:17.527433+00:00",
+  "asset": "DesignAssets/Audio/MovementV1/shadow-weasel.mp3",
+  "timing": {
+    "name": "move-shadow-weasel",
+    "source": "DesignAssets/Audio/MovementV1/shadow-weasel.mp3",
+    "gain": 0.114,
+    "phases": [
+      0,
+      0.5
+    ],
+    "leadMs": 0
+  },
+  "installationAuthorization": "User requested creating all missing movement sounds and applying them to the game and Design.html."
+}

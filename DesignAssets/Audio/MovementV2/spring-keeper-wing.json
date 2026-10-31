@@ -1,0 +1,25 @@
+{
+  "key": "spring-keeper",
+  "provider": "ElevenLabs",
+  "request": {
+    "text": "One soft downstroke of a small bird wing heard nearby: a brief airy fuff of displaced air with fine feather flutter. Light, breathy and smooth. One stroke only, beginning immediately with a short gentle natural decay. Dry close foley. No hard clicks, rubbing squeaks, creaking, ratchets, grinding, machinery, buzz, footsteps, bird call, voice or music.",
+    "duration_seconds": 0.5,
+    "prompt_influence": 0.85,
+    "loop": false,
+    "model_id": "eleven_text_to_sound_v2"
+  },
+  "output_format": "mp3_44100_128",
+  "processing": "none",
+  "asset": "DesignAssets/Audio/MovementV2/spring-keeper-wing.mp3",
+  "sha256": "436f1902957c04ad3e9809f7cf2acaeb97bdcfb5ad50dc953d2c757e64c4b568",
+  "approved": true,
+  "timing": {
+    "sourcePeakMs": 125,
+    "leadMs": 120,
+    "phases": [
+      0.375
+    ],
+    "gain": 0.16
+  },
+  "installationAuthorization": "User approved candidate 1 in this chat."
+}

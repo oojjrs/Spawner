@@ -1,0 +1,52 @@
+{
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "One small owl drives its wings once and reaches forward with its talons. A compact low feathered wing whoosh and fine dry keratin claw swip, focused miniature motion with a short feather settling tail. No hoot or voice. One motion, immediate onset, peak at 0.06s, short dry tail. No target impact, voices, weapons, metal, music, ambience or reverb.",
+  "duration_seconds": 0.5,
+  "prompt_influence": 0.85,
+  "loop": false,
+  "output_format": "mp3_44100_128",
+  "processing": "Mastered from the preserved original with high-pass/EQ, event-window gain calibration, oversampled peak limiting and MP3 encoding.",
+  "asset": "DesignAssets/Audio/CreatureAttackV2/talon-owl.mp3",
+  "input": "text prompt only",
+  "reference_assets": [
+    "DesignAssets/Audio/unit-attack.json",
+    "DesignAssets/Audio/beetle-attack.json"
+  ],
+  "generated_at": "2026-10-29T18:59:46.480723+00:00",
+  "request_id": null,
+  "character_cost": "5",
+  "sha256": "1fc8461d7813b932bdc957a19c98fcbf0b15b1716d97a2e3810d5358c2e2393f",
+  "installationAuthorization": "User explicitly requested creating and attaching attack SFX for all eighteen species and applying them to the game.",
+  "original_sha256": "e077c7ad3e383473958f3ad47b0f1deddcc0df9cb5696d075082c193e4af390c",
+  "audioLeadMs": 60,
+  "mastering": {
+    "source": "DesignAssets/Audio/CreatureAttackV2/Source/original/talon-owl.mp3",
+    "renderer": "DesignAssets/Audio/CreatureAttackV2/mastering.mjs",
+    "filters": [
+      "highpass=f=80:p=2",
+      "acompressor=threshold=0.2420012304:ratio=4:attack=0.01:release=10:knee=2.828427:makeup=1:detection=peak"
+    ],
+    "gainDb": 2.7810656930110635,
+    "eventTargetDbfs": -14.405292989599738,
+    "limiterCeilingDbfs": -3,
+    "measured": {
+      "durationSeconds": 0.48,
+      "eventRmsDbfs": -14.921974528596573,
+      "eventAtMs": 14.965986394557822,
+      "samplePeakDbfs": -3.231455134642655,
+      "samplePeakAtMs": 65.75963718820861,
+      "integratedLufs": -19.25,
+      "truePeakDbtp": -3.26
+    },
+    "referenceAssets": [
+      "DesignAssets/Audio/CreatureAttackV2/Source/original/unit-attack.mp3",
+      "DesignAssets/Audio/CreatureAttackV2/Source/original/beetle-attack.mp3",
+      "client/music-catalog.js",
+      "DesignAssets/Audio/bean-footstep.mp3",
+      "DesignAssets/Audio/sprout-hurt.mp3",
+      "DesignAssets/Audio/mushroom-harvest-loop.mp3"
+    ],
+    "musicReferenceVolume": 0.28
+  }
+}

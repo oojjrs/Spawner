@@ -1,0 +1,96 @@
+{
+  "sounds": [
+    {
+      "tribe": "sprout", 
+      "asset": "DesignAssets/Audio/NestGrowthV1/sprout.mp3", 
+      "provider": "ElevenLabs", 
+      "model": "eleven_text_to_sound_v2", 
+      "prompt": "Close dry foley of a tiny living flower nest. 0-0.68s: thick supple petals rustle inward and cushion shut. 0.68-0.92s: still. 0.92-1.32s: quiet fibrous swelling. 1.32-2.36s: a broader silky leafy unfurl with soft stem flex. 2.36-2.7s: leaves settle. Gentle fresh botanical texture, small scale. No breaking, voices, music, chimes, wind or reverb.", 
+      "requestedDurationSeconds": 2.7, 
+      "outputFormat": "mp3_44100_128", 
+      "generatedAt": "2026-10-30T04:52:32.927757+00:00", 
+      "requestId": "", 
+      "sha256": "96f16799abaedd892d53f963856ca2b17b43a7dfc70e1882556256bbf92dc8f0", 
+      "processing": "none", 
+      "inputSources": [], 
+      "animationStartMs": 500, 
+      "animationMarkersMs": {
+        "closeStart": 500, 
+        "closed": 1180, 
+        "growthStart": 1420, 
+        "growthEnd": 1780, 
+        "openStart": 1820, 
+        "openEnd": 2860
+      }
+    }, 
+    {
+      "tribe": "spore", 
+      "asset": "DesignAssets/Audio/NestGrowthV1/spore.mp3", 
+      "provider": "ElevenLabs", 
+      "model": "eleven_text_to_sound_v2", 
+      "prompt": "Close dry foley of a tiny soft mushroom nest. 0-0.68s: thin fleshy cap wings fold down with papery membrane brushing and a spongy close. 0.68-0.92s: still. 0.92-1.32s: a quiet soft swelling. 1.32-2.36s: broader cap wings lift and fan outward with an airy fungal flap. Settle by 2.7s. Gentle miniature texture. No rubber squeak, suction, insect buzz, voice, music or reverb.", 
+      "requestedDurationSeconds": 2.7, 
+      "outputFormat": "mp3_44100_128", 
+      "generatedAt": "2026-10-30T04:52:35.251248+00:00", 
+      "requestId": "", 
+      "sha256": "9f10d44c7ea7cbd41572e9c322b9b0e391945af423008a5f77baf08cbfbb577a", 
+      "processing": "none", 
+      "inputSources": [], 
+      "animationStartMs": 500, 
+      "animationMarkersMs": {
+        "closeStart": 500, 
+        "closed": 1180, 
+        "growthStart": 1420, 
+        "growthEnd": 1780, 
+        "openStart": 1820, 
+        "openEnd": 2860
+      }
+    }, 
+    {
+      "tribe": "pebble", 
+      "asset": "DesignAssets/Audio/NestGrowthV1/pebble.mp3", 
+      "provider": "ElevenLabs", 
+      "model": "eleven_text_to_sound_v2", 
+      "prompt": "Close dry foley of a tiny rounded stone nest. 0-0.68s: river stones slide inward with dense mineral scrapes and restrained stone clicks, closing a cave. 0.68-0.92s: still. 0.92-1.32s: quiet gritty swelling. 1.32-2.36s: heavier stones slide outward and stack taller with low rounded clacks. Fine grit settles by 2.7s. Small tactile scale. No cracking, avalanche, glass, metal, voice, music or reverb.", 
+      "requestedDurationSeconds": 2.7, 
+      "outputFormat": "mp3_44100_128", 
+      "generatedAt": "2026-10-30T04:52:37.515722+00:00", 
+      "requestId": "", 
+      "sha256": "4ddf04d7be0890da0e45b7913771dc3c84dca904e5f23677b41c3b0ea591dedf", 
+      "processing": "none", 
+      "inputSources": [], 
+      "animationStartMs": 500, 
+      "animationMarkersMs": {
+        "closeStart": 500, 
+        "closed": 1180, 
+        "growthStart": 1420, 
+        "growthEnd": 1780, 
+        "openStart": 1820, 
+        "openEnd": 2860
+      }
+    }, 
+    {
+      "tribe": "spring", 
+      "asset": "DesignAssets/Audio/NestGrowthV1/spring.mp3", 
+      "provider": "ElevenLabs", 
+      "model": "eleven_text_to_sound_v2", 
+      "prompt": "Close dry foley of a tiny water nest. 0-0.68s: a shallow pool curls inward with a soft water lap and rounded surface-tension fold. 0.68-0.92s: still. 0.92-1.32s: a quiet contained liquid swell. 1.32-2.36s: a broader liquid unfurl and outward ripple, forming a larger pool and tiny upper basin. Two droplets settle by 2.7s. Gentle fresh water. No draining, suction, rubber, large splash, voice, music or reverb.", 
+      "requestedDurationSeconds": 2.7, 
+      "outputFormat": "mp3_44100_128", 
+      "generatedAt": "2026-10-30T04:52:39.389815+00:00", 
+      "requestId": "", 
+      "sha256": "903089c692f60e91e291614ed359833569312f033afe4c7d237e25c10b0997c3", 
+      "processing": "none", 
+      "inputSources": [], 
+      "animationStartMs": 500, 
+      "animationMarkersMs": {
+        "closeStart": 500, 
+        "closed": 1180, 
+        "growthStart": 1420, 
+        "growthEnd": 1780, 
+        "openStart": 1820, 
+        "openEnd": 2860
+      }
+    }
+  ]
+}

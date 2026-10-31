@@ -1,0 +1,16 @@
+{
+  "provider": "ElevenLabs", 
+  "state": "complete", 
+  "submittedAt": "2026-10-30T10:41:49.849139+00:00", 
+  "request": {
+    "text": "Close dry foley of a miniature sandstone nest folding then opening a pulley gate. 0-.9s: heavy stones scrape inward with solid rounded clacks. .9-1.6s: dressed blocks seat with gritty taps and wood fasteners click. 1.6-3.1s: a small wood pulley rolls, taut rope slides and a stone gate rises smoothly. 3.1-3.6s: counterweight settles with one deep clear stone knock and brief falling grit. Strong foreground. No music, voices, ambience or reverb.", 
+    "duration_seconds": 3.6, 
+    "prompt_influence": 0.85, 
+    "model_id": "eleven_text_to_sound_v2", 
+    "loop": false
+  }, 
+  "processing": "none", 
+  "requestId": "", 
+  "sha256": "18d4e497b77953b8ec63e597d683577232aa4aac7b757ca852c6eb684378b777", 
+  "bytes": 58139
+}

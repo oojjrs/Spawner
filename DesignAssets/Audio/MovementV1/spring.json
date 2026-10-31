@@ -1,0 +1,35 @@
+{
+  "key": "spring",
+  "label": "샘방울",
+  "provider": "ElevenLabs",
+  "endpoint": "https://api.elevenlabs.io/v1/sound-generation",
+  "output_format": "mp3_44100_128",
+  "request": {
+    "text": "One small living water droplet pressing and releasing against a damp leaf. A delicate clear liquid plip with a tiny watery surface tension wobble. Close miniature foley. Exactly one movement event beginning immediately, concise natural decay, low intensity and dry intimate recording. No second event, repeated footsteps, voice, animal call, melody, music, ambient bed, dramatic bass, or reverb.",
+    "duration_seconds": 0.5,
+    "prompt_influence": 0.85,
+    "loop": false,
+    "model_id": "eleven_text_to_sound_v2"
+  },
+  "state": "installed",
+  "submitted_at": "2026-10-29T19:06:03.418700+00:00",
+  "processing": "none",
+  "input_sources": [],
+  "request_id": null,
+  "character_cost": "5",
+  "bytes": 8820,
+  "sha256": "4931b627debca3f1f5c5b82a3f0772fb673ab14fe115f56129737f71af6812d0",
+  "completed_at": "2026-10-29T19:06:05.238429+00:00",
+  "asset": "DesignAssets/Audio/MovementV1/spring.mp3",
+  "timing": {
+    "name": "move-spring",
+    "source": "DesignAssets/Audio/MovementV1/spring.mp3",
+    "gain": 0.403,
+    "phases": [
+      0,
+      0.5
+    ],
+    "leadMs": 0
+  },
+  "installationAuthorization": "User requested creating all missing movement sounds and applying them to the game and Design.html."
+}

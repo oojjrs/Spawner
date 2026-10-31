@@ -1,0 +1,34 @@
+{
+  "key": "old-garden-snail",
+  "label": "늙은 정원달팽이",
+  "provider": "ElevenLabs",
+  "endpoint": "https://api.elevenlabs.io/v1/sound-generation",
+  "output_format": "mp3_44100_128",
+  "request": {
+    "text": "One large garden snail foot contraction sliding over moist soil, a soft low tacky rub and short smooth earthy scrape with faint leaves settling. Close quiet natural foley. Exactly one movement event beginning immediately, concise natural decay, low intensity and dry intimate recording. No second event, repeated footsteps, voice, animal call, melody, music, ambient bed, dramatic bass, or reverb.",
+    "duration_seconds": 0.75,
+    "prompt_influence": 0.85,
+    "loop": false,
+    "model_id": "eleven_text_to_sound_v2"
+  },
+  "state": "installed",
+  "submitted_at": "2026-10-29T19:06:21.731820+00:00",
+  "processing": "none",
+  "input_sources": [],
+  "request_id": null,
+  "character_cost": "8",
+  "bytes": 12581,
+  "sha256": "71175d6a673b0ab2bb52c7b151f84a4e8a32af5cbc5917b45ff6159b11527476",
+  "completed_at": "2026-10-29T19:06:23.835535+00:00",
+  "asset": "DesignAssets/Audio/MovementV1/old-garden-snail.mp3",
+  "timing": {
+    "name": "move-old-garden-snail",
+    "source": "DesignAssets/Audio/MovementV1/old-garden-snail.mp3",
+    "gain": 0.16,
+    "phases": [
+      0.3142857142857143
+    ],
+    "leadMs": 0
+  },
+  "installationAuthorization": "User requested creating all missing movement sounds and applying them to the game and Design.html."
+}

@@ -1,0 +1,35 @@
+{
+  "key": "spring-keeper",
+  "label": "봄지기",
+  "provider": "ElevenLabs",
+  "endpoint": "https://api.elevenlabs.io/v1/sound-generation",
+  "output_format": "mp3_44100_128",
+  "request": {
+    "text": "One ornate small garden bird placing a clawed foot onto soft moss, a delicate dry claw tap with a very soft petal feather brush. Close miniature foley. Exactly one movement event beginning immediately, concise natural decay, low intensity and dry intimate recording. No second event, repeated footsteps, voice, animal call, melody, music, ambient bed, dramatic bass, or reverb.",
+    "duration_seconds": 0.5,
+    "prompt_influence": 0.85,
+    "loop": false,
+    "model_id": "eleven_text_to_sound_v2"
+  },
+  "state": "installed",
+  "submitted_at": "2026-10-29T19:06:17.636413+00:00",
+  "processing": "none",
+  "input_sources": [],
+  "request_id": null,
+  "character_cost": "5",
+  "bytes": 8820,
+  "sha256": "8ec77f66aab776d41dcc9fee74e145b18191db3d5b9f975b1286e584d3942864",
+  "completed_at": "2026-10-29T19:06:19.597282+00:00",
+  "asset": "DesignAssets/Audio/MovementV1/spring-keeper.mp3",
+  "timing": {
+    "name": "move-spring-keeper",
+    "source": "DesignAssets/Audio/MovementV1/spring-keeper.mp3",
+    "gain": 0.331,
+    "phases": [
+      0,
+      0.5
+    ],
+    "leadMs": 0
+  },
+  "installationAuthorization": "User requested creating all missing movement sounds and applying them to the game and Design.html."
+}

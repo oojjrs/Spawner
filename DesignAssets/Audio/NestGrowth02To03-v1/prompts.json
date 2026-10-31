@@ -1,0 +1,39 @@
+{
+  "provider": "ElevenLabs",
+  "endpoint": "https://api.elevenlabs.io/v1/sound-generation?output_format=mp3_44100_128",
+  "processing": "none",
+  "sounds": [
+    {
+      "key": "sprout",
+      "text": "Clear close dry foley of a tiny flower nest gaining a wooden opening mechanism. 0-.68s: thick petals fold shut with a firm leafy rustle. .68-.92s: pause. .92-1.72s: wood pegs tap into place, vine rope tightens and bronze hinges click. 1.72-2.72s: a wooden winch creaks as broad petals unfold. 2.72-3.2s: one crisp ratchet latch and leaves settle. Prominent tactile foreground sound. No music, voices or reverb.",
+      "duration_seconds": 3.2,
+      "prompt_influence": 0.85,
+      "model_id": "eleven_text_to_sound_v2",
+      "loop": false
+    },
+    {
+      "key": "spore",
+      "text": "Clear close dry foley of a tiny mushroom nest gaining a ventilation device. 0-.68s: fleshy cap wings flap down and cover a bowl. .68-.92s: pause. .92-1.72s: hollow ceramic ducts seat with wooden peg taps and a brass valve click. 1.72-2.72s: cap wings open with a papery rustle. 2.72-3.2s: a little wooden bellows gives one distinct soft air puff and clack. Prominent foreground foley. No music, voices or reverb.",
+      "duration_seconds": 3.2,
+      "prompt_influence": 0.85,
+      "model_id": "eleven_text_to_sound_v2",
+      "loop": false
+    },
+    {
+      "key": "pebble",
+      "text": "Clear close dry foley of a miniature sandstone nest gaining a pulley gate. 0-.68s: rounded stones scrape inward and close with dense clacks. .68-.92s: pause. .92-1.72s: cut blocks seat with solid taps and metal fasteners click. 1.72-2.72s: a wooden pulley creaks, rope slides and a small stone gate rises. 2.72-3.2s: the counterweight lands with one low stone knock, grit settles. Foreground sound. No music, voices or reverb.",
+      "duration_seconds": 3.2,
+      "prompt_influence": 0.85,
+      "model_id": "eleven_text_to_sound_v2",
+      "loop": false
+    },
+    {
+      "key": "spring",
+      "text": "Clear close dry foley of a tiny water nest gaining a waterwheel and sluice. 0-.68s: a shallow pool curls inward with a rounded water lap. .68-.92s: pause. .92-1.72s: stone channel blocks seat and a wooden sluice latches. 1.72-2.72s: water unfolds outward, the gate opens and a small cascade pours. 2.72-3.2s: wooden wheel paddles make two distinct wet clacks and droplets settle. Foreground sound. No music, voices or reverb.",
+      "duration_seconds": 3.2,
+      "prompt_influence": 0.85,
+      "model_id": "eleven_text_to_sound_v2",
+      "loop": false
+    }
+  ]
+}

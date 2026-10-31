@@ -1,0 +1,35 @@
+{
+  "key": "spiny-back-leader",
+  "label": "가시등 우두머리",
+  "provider": "ElevenLabs",
+  "endpoint": "https://api.elevenlabs.io/v1/sound-generation",
+  "output_format": "mp3_44100_128",
+  "request": {
+    "text": "One large armored beetle tripod leg group planting on dry woodland soil. A compact low chitin clack with a tiny grainy scrape, restrained close insect foley. Exactly one movement event beginning immediately, concise natural decay, low intensity and dry intimate recording. No second event, repeated footsteps, voice, animal call, melody, music, ambient bed, dramatic bass, or reverb.",
+    "duration_seconds": 0.5,
+    "prompt_influence": 0.85,
+    "loop": false,
+    "model_id": "eleven_text_to_sound_v2"
+  },
+  "state": "installed",
+  "submitted_at": "2026-10-29T19:06:23.863222+00:00",
+  "processing": "none",
+  "input_sources": [],
+  "request_id": null,
+  "character_cost": "5",
+  "bytes": 8820,
+  "sha256": "86f284cd11a8cac9808e4e3041f2d84e90ea00833b7fd99af3f81f942e7696e4",
+  "completed_at": "2026-10-29T19:06:26.112036+00:00",
+  "asset": "DesignAssets/Audio/MovementV1/spiny-back-leader.mp3",
+  "timing": {
+    "name": "move-spiny-back-leader",
+    "source": "DesignAssets/Audio/MovementV1/spiny-back-leader.mp3",
+    "gain": 0.334,
+    "phases": [
+      0,
+      0.5
+    ],
+    "leadMs": 0
+  },
+  "installationAuthorization": "User requested creating all missing movement sounds and applying them to the game and Design.html."
+}

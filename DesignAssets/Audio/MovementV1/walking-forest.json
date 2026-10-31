@@ -1,0 +1,35 @@
+{
+  "key": "walking-forest",
+  "label": "걷는 숲",
+  "provider": "ElevenLabs",
+  "endpoint": "https://api.elevenlabs.io/v1/sound-generation",
+  "output_format": "mp3_44100_128",
+  "request": {
+    "text": "One compact stone backed woodland creature planting a heavy broad foot on soil. A soft low stone weighted thud with fine gritty settling and a tiny dry leaf brush. Close foley. Exactly one movement event beginning immediately, concise natural decay, low intensity and dry intimate recording. No second event, repeated footsteps, voice, animal call, melody, music, ambient bed, dramatic bass, or reverb.",
+    "duration_seconds": 0.5,
+    "prompt_influence": 0.85,
+    "loop": false,
+    "model_id": "eleven_text_to_sound_v2"
+  },
+  "state": "installed",
+  "submitted_at": "2026-10-29T19:06:22.064262+00:00",
+  "processing": "none",
+  "input_sources": [],
+  "request_id": null,
+  "character_cost": "5",
+  "bytes": 8820,
+  "sha256": "7cc47479a7585841ec92d46981765c9e597d9fc4a5c84bb2658edaa88cc0c912",
+  "completed_at": "2026-10-29T19:06:23.863222+00:00",
+  "asset": "DesignAssets/Audio/MovementV1/walking-forest.mp3",
+  "timing": {
+    "name": "move-walking-forest",
+    "source": "DesignAssets/Audio/MovementV1/walking-forest.mp3",
+    "gain": 0.396,
+    "phases": [
+      0,
+      0.5
+    ],
+    "leadMs": 0
+  },
+  "installationAuthorization": "User requested creating all missing movement sounds and applying them to the game and Design.html."
+}
