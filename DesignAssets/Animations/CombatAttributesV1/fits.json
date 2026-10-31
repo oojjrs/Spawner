@@ -1,0 +1,586 @@
+{
+  "sprout": {
+    "blade": {
+      "scale": 1.1,
+      "x": 164.95,
+      "y": 288,
+      "union": [
+        54,
+        109,
+        257,
+        280
+      ],
+      "desiredScale": 1.1
+    },
+    "piercing": {
+      "scale": 1.1,
+      "x": 126.44999999999999,
+      "y": 288,
+      "union": [
+        81,
+        109,
+        300,
+        280
+      ],
+      "desiredScale": 1.1
+    },
+    "carapace": {
+      "scale": 1.1,
+      "x": 157.25,
+      "y": 288,
+      "union": [
+        68,
+        109,
+        257,
+        280
+      ],
+      "desiredScale": 1.1
+    },
+    "guard": {
+      "scale": 1.1,
+      "x": 134.7,
+      "y": 288,
+      "union": [
+        81,
+        109,
+        285,
+        280
+      ],
+      "desiredScale": 1.1
+    },
+    "regeneration": {
+      "scale": 1.1,
+      "x": 163.85,
+      "y": 288,
+      "union": [
+        56,
+        102,
+        257,
+        280
+      ],
+      "desiredScale": 1.1
+    },
+    "secretion": {
+      "scale": 1.1,
+      "x": 150.1,
+      "y": 288,
+      "union": [
+        81,
+        109,
+        257,
+        280
+      ],
+      "desiredScale": 1.1
+    },
+    "blade-carapace": {
+      "scale": 1.2,
+      "x": 165.4,
+      "y": 288,
+      "union": [
+        54,
+        109,
+        257,
+        280
+      ],
+      "desiredScale": 1.2
+    },
+    "piercing-guard": {
+      "scale": 1.2,
+      "x": 123.4,
+      "y": 288,
+      "union": [
+        81,
+        109,
+        300,
+        280
+      ],
+      "desiredScale": 1.2
+    },
+    "regeneration-secretion": {
+      "scale": 1.2,
+      "x": 164.2,
+      "y": 288,
+      "union": [
+        56,
+        102,
+        257,
+        280
+      ],
+      "desiredScale": 1.2
+    },
+    "blade-piercing-carapace": {
+      "scale": 1.165991902834008,
+      "x": 140.17813765182186,
+      "y": 288,
+      "union": [
+        54,
+        109,
+        300,
+        280
+      ],
+      "desiredScale": 1.3
+    },
+    "guard-carapace-regeneration": {
+      "scale": 1.2521739130434784,
+      "x": 146.8521739130435,
+      "y": 288,
+      "union": [
+        56,
+        102,
+        285,
+        280
+      ],
+      "desiredScale": 1.3
+    },
+    "guard-regeneration-secretion": {
+      "scale": 1.2521739130434784,
+      "x": 146.8521739130435,
+      "y": 288,
+      "union": [
+        56,
+        102,
+        285,
+        280
+      ],
+      "desiredScale": 1.3
+    }
+  },
+  "spore": {
+    "blade": {
+      "scale": 1.1,
+      "x": 170.45,
+      "y": 288,
+      "union": [
+        54,
+        131,
+        247,
+        280
+      ],
+      "desiredScale": 1.1
+    },
+    "piercing": {
+      "scale": 1.1,
+      "x": 132.5,
+      "y": 288,
+      "union": [
+        71,
+        137,
+        299,
+        280
+      ],
+      "desiredScale": 1.1
+    },
+    "carapace": {
+      "scale": 1.1,
+      "x": 153.95,
+      "y": 288,
+      "union": [
+        74,
+        123,
+        257,
+        280
+      ],
+      "desiredScale": 1.1
+    },
+    "guard": {
+      "scale": 1.1,
+      "x": 139.65,
+      "y": 288,
+      "union": [
+        71,
+        126,
+        286,
+        280
+      ],
+      "desiredScale": 1.1
+    },
+    "regeneration": {
+      "scale": 1.1,
+      "x": 166.6,
+      "y": 288,
+      "union": [
+        61,
+        125,
+        247,
+        280
+      ],
+      "desiredScale": 1.1
+    },
+    "secretion": {
+      "scale": 1.1,
+      "x": 156.15,
+      "y": 288,
+      "union": [
+        71,
+        137,
+        256,
+        280
+      ],
+      "desiredScale": 1.1
+    },
+    "blade-carapace": {
+      "scale": 1.2,
+      "x": 165.4,
+      "y": 288,
+      "union": [
+        54,
+        123,
+        257,
+        280
+      ],
+      "desiredScale": 1.2
+    },
+    "piercing-guard": {
+      "scale": 1.2,
+      "x": 130,
+      "y": 288,
+      "union": [
+        71,
+        126,
+        299,
+        280
+      ],
+      "desiredScale": 1.2
+    },
+    "regeneration-secretion": {
+      "scale": 1.2,
+      "x": 161.8,
+      "y": 288,
+      "union": [
+        61,
+        125,
+        256,
+        280
+      ],
+      "desiredScale": 1.2
+    },
+    "blade-piercing-carapace": {
+      "scale": 1.170731707317073,
+      "x": 140.6829268292683,
+      "y": 288,
+      "union": [
+        54,
+        123,
+        299,
+        280
+      ],
+      "desiredScale": 1.3
+    },
+    "guard-carapace-regeneration": {
+      "scale": 1.2743362831858407,
+      "x": 142.79646017699116,
+      "y": 288,
+      "union": [
+        61,
+        117,
+        286,
+        280
+      ],
+      "desiredScale": 1.3
+    },
+    "guard-regeneration-secretion": {
+      "scale": 1.2743362831858407,
+      "x": 142.79646017699116,
+      "y": 288,
+      "union": [
+        61,
+        125,
+        286,
+        280
+      ],
+      "desiredScale": 1.3
+    }
+  },
+  "pebble": {
+    "blade": {
+      "scale": 1.1,
+      "x": 179.8,
+      "y": 288,
+      "union": [
+        49,
+        112,
+        235,
+        280
+      ],
+      "desiredScale": 1.1
+    },
+    "piercing": {
+      "scale": 1.1,
+      "x": 124.25,
+      "y": 288,
+      "union": [
+        85,
+        157,
+        300,
+        280
+      ],
+      "desiredScale": 1.1
+    },
+    "carapace": {
+      "scale": 1.1,
+      "x": 175.4,
+      "y": 288,
+      "union": [
+        57,
+        109,
+        235,
+        280
+      ],
+      "desiredScale": 1.1
+    },
+    "guard": {
+      "scale": 1.1,
+      "x": 132.5,
+      "y": 288,
+      "union": [
+        85,
+        101,
+        285,
+        280
+      ],
+      "desiredScale": 1.1
+    },
+    "regeneration": {
+      "scale": 1.1,
+      "x": 174.3,
+      "y": 288,
+      "union": [
+        59,
+        103,
+        235,
+        280
+      ],
+      "desiredScale": 1.1
+    },
+    "secretion": {
+      "scale": 1.1,
+      "x": 148.45,
+      "y": 288,
+      "union": [
+        85,
+        149,
+        256,
+        280
+      ],
+      "desiredScale": 1.1
+    },
+    "blade-carapace": {
+      "scale": 1.2,
+      "x": 181.6,
+      "y": 288,
+      "union": [
+        49,
+        109,
+        235,
+        280
+      ],
+      "desiredScale": 1.2
+    },
+    "piercing-guard": {
+      "scale": 1.2,
+      "x": 121,
+      "y": 288,
+      "union": [
+        85,
+        101,
+        300,
+        280
+      ],
+      "desiredScale": 1.2
+    },
+    "regeneration-secretion": {
+      "scale": 1.2,
+      "x": 163,
+      "y": 288,
+      "union": [
+        59,
+        103,
+        256,
+        280
+      ],
+      "desiredScale": 1.2
+    },
+    "blade-piercing-carapace": {
+      "scale": 1.1428571428571428,
+      "x": 143.42857142857144,
+      "y": 288,
+      "union": [
+        49,
+        109,
+        300,
+        280
+      ],
+      "desiredScale": 1.3
+    },
+    "guard-carapace-regeneration": {
+      "scale": 1.25764192139738,
+      "x": 146.16593886462883,
+      "y": 288,
+      "union": [
+        57,
+        101,
+        285,
+        280
+      ],
+      "desiredScale": 1.3
+    },
+    "guard-regeneration-secretion": {
+      "scale": 1.2687224669603525,
+      "x": 144.77533039647577,
+      "y": 288,
+      "union": [
+        59,
+        101,
+        285,
+        280
+      ],
+      "desiredScale": 1.3
+    }
+  },
+  "spring": {
+    "blade": {
+      "scale": 1.1,
+      "x": 185.3,
+      "y": 288,
+      "union": [
+        54,
+        129,
+        220,
+        279
+      ],
+      "desiredScale": 1.1
+    },
+    "piercing": {
+      "scale": 1.1,
+      "x": 116,
+      "y": 288,
+      "union": [
+        101,
+        129,
+        299,
+        279
+      ],
+      "desiredScale": 1.1
+    },
+    "carapace": {
+      "scale": 1.1,
+      "x": 182.55,
+      "y": 288,
+      "union": [
+        59,
+        128,
+        220,
+        280
+      ],
+      "desiredScale": 1.1
+    },
+    "guard": {
+      "scale": 1.1,
+      "x": 124.25,
+      "y": 288,
+      "union": [
+        101,
+        129,
+        284,
+        279
+      ],
+      "desiredScale": 1.1
+    },
+    "regeneration": {
+      "scale": 1.1,
+      "x": 182.55,
+      "y": 288,
+      "union": [
+        59,
+        123,
+        220,
+        279
+      ],
+      "desiredScale": 1.1
+    },
+    "secretion": {
+      "scale": 1.1,
+      "x": 139.65,
+      "y": 288,
+      "union": [
+        101,
+        121,
+        256,
+        279
+      ],
+      "desiredScale": 1.1
+    },
+    "blade-carapace": {
+      "scale": 1.2,
+      "x": 187.6,
+      "y": 288,
+      "union": [
+        54,
+        128,
+        220,
+        280
+      ],
+      "desiredScale": 1.2
+    },
+    "piercing-guard": {
+      "scale": 1.2,
+      "x": 112,
+      "y": 288,
+      "union": [
+        101,
+        129,
+        299,
+        279
+      ],
+      "desiredScale": 1.2
+    },
+    "regeneration-secretion": {
+      "scale": 1.2,
+      "x": 163,
+      "y": 288,
+      "union": [
+        59,
+        121,
+        256,
+        279
+      ],
+      "desiredScale": 1.2
+    },
+    "blade-piercing-carapace": {
+      "scale": 1.170731707317073,
+      "x": 140.6829268292683,
+      "y": 288,
+      "union": [
+        54,
+        128,
+        299,
+        280
+      ],
+      "desiredScale": 1.3
+    },
+    "guard-carapace-regeneration": {
+      "scale": 1.2743362831858407,
+      "x": 145.34513274336283,
+      "y": 288,
+      "union": [
+        59,
+        123,
+        284,
+        280
+      ],
+      "desiredScale": 1.3
+    },
+    "guard-regeneration-secretion": {
+      "scale": 1.2743362831858407,
+      "x": 145.34513274336283,
+      "y": 288,
+      "union": [
+        59,
+        121,
+        284,
+        279
+      ],
+      "desiredScale": 1.3
+    }
+  }
+}

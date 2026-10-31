@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "variantCount": 48,
+  "animationCount": 316,
+  "frameSize": 256,
+  "columns": 8,
+  "source": "Existing game renderer; original body frames and timing reused without body redraw",
+  "sizePerAttribute": 0.1,
+  "maximumCellFraction": 0.9,
+  "gameplayAttributesRegistered": false,
+  "bodyActions": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "birth",
+    "death"
+  ],
+  "equipmentActions": [
+    "heal",
+    "secretion"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "tool": "built-in image_gen",
+  "stage": "source-key-art-candidate",
+  "id": "sprout-lifespan-blade-carapace-guard-contact",
+  "fileStem": "contact",
+  "outputRoot": "H:/Spawner/DesignAssets/Concepts/CombatLifespanSampleV1",
+  "tribe": "sprout",
+  "attributes": [
+    "lifespan",
+    "blade",
+    "carapace",
+    "guard"
+  ],
+  "combinationLabel": "수명 + 칼날 + 갑피 + 엄호",
+  "prompt": "Use case: precise-object-edit. Draw this same friendly tall sprout bean in a new game-animation key pose. The supplied neutral image is the edit target: preserve the exact painted style, cream long oval body, two dark green eyes, no mouth, two tiny cream feet, two crown leaves and the layered thick leaves along its left side. Change the pose of its single large right leaf: unfold that broad cupped leaf forward towards image-right so its smooth pale curved edge is extended sideways at face height. The entire leaf stays connected to the crown by its living bent stem; keep its broad green surface and curved thin pale rim together as one leaf. Keep the long body the same proportions and lean it slightly right. Both feet stay grounded, the left protective leaves stay fitted to the torso, the face remains clear with only two eyes. No added leaves, points, drops, equipment, lettering, trails or effects. One complete character, transparent background, generous padding. Actual source artwork for the extended-leaf contact pose.",
+  "references": [
+    "H:/Spawner/DesignAssets/Concepts/CombatLifespanSampleV1/neutral.png"
+  ],
+  "previousPrompts": [
+    "Use case: precise-object-edit. Asset type: actual attack-contact source key drawing for a 2D game sprite. The supplied neutral drawing is the edit target and strict anatomy, material, palette, line, camera and proportion authority. Draw the SAME individual in the peak of a rightward sweeping leaf strike. Preserve its tall cream oval body, exactly two dark green eyes, no mouth, two tiny cream feet, two ordinary crown leaves, three thick overlapping succulent leaves fitted to the left/rear torso, and ONE broad right cupped leaf whose pale thin outer margin is a long curved sickle edge. The right leaf remains one living organ, rooted at the same crown with a continuous bent stem and substantial overlap. Swing this whole right cupped leaf forward/outward towards image-right around its crown root, opening the canopy so the curved pale cutting margin sweeps to the right at roughly face height. Show the broad green leaf surface and its cupped underside joined together; do not turn it into a held weapon or a disconnected long strip. Tall torso leans about 10 degrees right while keeping its length and volume. Left protective leaves stay fitted along that long torso. Both little feet remain close to the same ground line, one slightly forward; face stays unobstructed and two eyes visible. No overhead spear, nectar drops, extra limbs, extra leaf organs, changed species, extra eyes, dots beside eyes, motion trail, impact effect, enemy, ground shadow, text or diagram. One complete character only. Match the source scale and lighting, do not make the body squat or round. Genuine transparent background with ample padding around the full extended leaf. This is a real source key drawing, not a rendered animation preview."
+  ],
+  "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-7ad1d34b-a0aa-466c-aef3-f8f5c35f5b60.png"
+}

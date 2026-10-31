@@ -1,0 +1,102 @@
+[
+  {
+    "tribe": "sprout",
+    "variant": "blade",
+    "image": "sprout/blade/rig.json"
+  },
+  {
+    "tribe": "sprout",
+    "variant": "piercing",
+    "image": "sprout/piercing/rig.json"
+  },
+  {
+    "tribe": "sprout",
+    "variant": "carapace",
+    "image": "sprout/carapace/rig.json"
+  },
+  {
+    "tribe": "sprout",
+    "variant": "guard",
+    "image": "sprout/guard/rig.json"
+  },
+  {
+    "tribe": "sprout",
+    "variant": "secretion",
+    "image": "sprout/secretion/rig.json"
+  },
+  {
+    "tribe": "spore",
+    "variant": "blade",
+    "image": "spore/blade/rig.json"
+  },
+  {
+    "tribe": "spore",
+    "variant": "piercing",
+    "image": "spore/piercing/rig.json"
+  },
+  {
+    "tribe": "spore",
+    "variant": "carapace",
+    "image": "spore/carapace/rig.json"
+  },
+  {
+    "tribe": "spore",
+    "variant": "guard",
+    "image": "spore/guard/rig.json"
+  },
+  {
+    "tribe": "spore",
+    "variant": "secretion",
+    "image": "spore/secretion/rig.json"
+  },
+  {
+    "tribe": "pebble",
+    "variant": "blade",
+    "image": "pebble/blade/rig.json"
+  },
+  {
+    "tribe": "pebble",
+    "variant": "piercing",
+    "image": "pebble/piercing/rig.json"
+  },
+  {
+    "tribe": "pebble",
+    "variant": "carapace",
+    "image": "pebble/carapace/rig.json"
+  },
+  {
+    "tribe": "pebble",
+    "variant": "guard",
+    "image": "pebble/guard/rig.json"
+  },
+  {
+    "tribe": "pebble",
+    "variant": "secretion",
+    "image": "pebble/secretion/rig.json"
+  },
+  {
+    "tribe": "spring",
+    "variant": "blade",
+    "image": "spring/blade/rig.json"
+  },
+  {
+    "tribe": "spring",
+    "variant": "piercing",
+    "image": "spring/piercing/rig.json"
+  },
+  {
+    "tribe": "spring",
+    "variant": "carapace",
+    "image": "spring/carapace/rig.json"
+  },
+  {
+    "tribe": "spring",
+    "variant": "guard",
+    "image": "spring/guard/rig.json"
+  },
+  {
+    "tribe": "spring",
+    "variant": "secretion",
+    "image": "spring/secretion/rig.json"
+  }
+]

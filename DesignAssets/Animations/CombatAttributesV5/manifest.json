@@ -1,0 +1,11 @@
+{
+  "version": 5,
+  "parent": "CombatAttributesV4",
+  "variantCount": 16,
+  "animationCount": 120,
+  "changedAttribute": "regeneration",
+  "frameSize": 256,
+  "columns": 8,
+  "bodySourcesReused": true,
+  "source": "Source/prompts.json"
+}

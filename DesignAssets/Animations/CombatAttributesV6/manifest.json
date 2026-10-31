@@ -1,0 +1,61 @@
+{
+  "version": 6,
+  "parent": "CombatAttributesV5",
+  "changedActions": [
+    "heal"
+  ],
+  "variantCount": 16,
+  "actorAnimationCount": 32,
+  "frameSize": 256,
+  "columns": 8,
+  "frameCount": 128,
+  "durationMs": 6400,
+  "frameMs": 50,
+  "pivot": [
+    128,
+    230
+  ],
+  "bodySourcesReused": true,
+  "rigRoot": "../CombatAttributesV5",
+  "motionSource": "healing.mjs",
+  "effects": {
+    "drop": "../CombatHealingStudyV1/Source/healing-drop.png",
+    "ring": "../../Effects/LevelUp/ring.png",
+    "sparkle": "../CombatHealingStudyV1/Source/receiving-mote.png",
+    "receiving": {
+      "image": "Effects/receiving.webp",
+      "frameCount": 20,
+      "frameMs": 50,
+      "pivot": [
+        128,
+        128
+      ],
+      "width": 128,
+      "height": 128
+    }
+  },
+  "timing": {
+    "cycle": 3.2,
+    "aimStart": 0.24,
+    "aimReady": 0.68,
+    "release": 0.86,
+    "impact": 1.24,
+    "recoverStart": 1.42,
+    "recoverEnd": 1.95,
+    "effectEnd": 2.18
+  },
+  "events": [
+    {
+      "timeMs": 860,
+      "type": "release"
+    },
+    {
+      "timeMs": 1240,
+      "type": "receive"
+    }
+  ],
+  "previewModes": [
+    "self",
+    "ally"
+  ]
+}

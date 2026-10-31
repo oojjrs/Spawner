@@ -1,0 +1,66 @@
+{
+  "tool": "built-in image_gen",
+  "status": "source-key-art-candidates",
+  "pair": [
+    "piercing",
+    "guard"
+  ],
+  "jobs": [
+    {
+      "id": "sprout-piercing-guard",
+      "tribe": "sprout",
+      "label": "새싹콩",
+      "pair": [
+        "piercing",
+        "guard"
+      ],
+      "pairLabel": "관통 + 엄호",
+      "order": 5,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual source character key drawing for a 2D game combat-attribute pair, not a mockup or animation preview.\nInput image: supporting species identity, materials, palette and approved single-attribute reference. It is a six-cell reference atlas, NOT the output layout.\nPrimary request: Design the EXACT TWO selected attributes so their structures FIT TOGETHER as one coherent organism. Preserve the recognizable single-attribute design language. Adjust proportions, shared roots, continuous surfaces, intersections and silhouette together. The two functions must be visually readable within the SAME anatomical/material construction.\nOutput: Exactly ONE complete character, ONE neutral ready pose, mostly front view with a slight rightward orientation. Centered full body, feet baseline when species has feet. Entire silhouette inside a square canvas with 10% clear padding. Large subject but no edge touching. Real transparent background.\nStyle: match the approved small game sprites: charming simple readable forms, subtly hand-painted soft shading, crisp dark thin contours, consistent upper-left lighting, broad calm surfaces, restrained details. Exactly two eyes, no mouth. No cast shadow, labels, lettering, ground, effects, detached particles, extra characters or diagrams.\nDo not mechanically stack the two single-attribute drawings. Design their shared connection cleanly. Avoid adding any UNSELECTED attribute; this is a two-attribute combination, not a complete five-attribute evolution. No manufactured weapons, handles, belts, armor worn as clothes, floating equipment, horror, gritty realism, 3D toy render, pixel art, gradient backdrop or decorative sparkle.\nDraw complete clean surfaces and smooth closed outlines. This actual neutral drawing may later be used for rigging only after user approval.\n\nSPECIES: A pale cream-green plump round sprout bean with exactly TWO dark green bead eyes, no mouth, two tiny pale feet, and green leaves rooted in one living crown. Match the reference body proportions and simple soft painterly shading. The reference atlas cells are row1 base / blade / piercing, row2 carapace / guard / secretion. Guard also has exactly two eyes; never extra dots next to eyes.\nSELECTED ATTRIBUTES ONLY: piercing + guard (관통 + 엄호).\nINTEGRATED CONSTRUCTION: One broad right-flank shelter leaf is cupped around the bean (guard). Its central rib extends smoothly beyond that SAME leaf into a slender stiff pointed apex leaning upper right (piercing). Broad shelter surface and concentrated tip form one structure. Face completely readable.",
+      "reference": "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/sprout-approved.png",
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-550b7b93-5ff5-401f-b9b4-ebf1ad2865bf.png"
+    },
+    {
+      "id": "spore-piercing-guard",
+      "tribe": "spore",
+      "label": "포자버섯",
+      "pair": [
+        "piercing",
+        "guard"
+      ],
+      "pairLabel": "관통 + 엄호",
+      "order": 5,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual source character key drawing for a 2D game combat-attribute pair, not a mockup or animation preview.\nInput image: supporting species identity, materials, palette and approved single-attribute reference. It is a six-cell reference atlas, NOT the output layout.\nPrimary request: Design the EXACT TWO selected attributes so their structures FIT TOGETHER as one coherent organism. Preserve the recognizable single-attribute design language. Adjust proportions, shared roots, continuous surfaces, intersections and silhouette together. The two functions must be visually readable within the SAME anatomical/material construction.\nOutput: Exactly ONE complete character, ONE neutral ready pose, mostly front view with a slight rightward orientation. Centered full body, feet baseline when species has feet. Entire silhouette inside a square canvas with 10% clear padding. Large subject but no edge touching. Real transparent background.\nStyle: match the approved small game sprites: charming simple readable forms, subtly hand-painted soft shading, crisp dark thin contours, consistent upper-left lighting, broad calm surfaces, restrained details. Exactly two eyes, no mouth. No cast shadow, labels, lettering, ground, effects, detached particles, extra characters or diagrams.\nDo not mechanically stack the two single-attribute drawings. Design their shared connection cleanly. Avoid adding any UNSELECTED attribute; this is a two-attribute combination, not a complete five-attribute evolution. No manufactured weapons, handles, belts, armor worn as clothes, floating equipment, horror, gritty realism, 3D toy render, pixel art, gradient backdrop or decorative sparkle.\nDraw complete clean surfaces and smooth closed outlines. This actual neutral drawing may later be used for rigging only after user approval.\n\nSPECIES: A squat ivory mushroom-stem creature with exactly two dark bead eyes, no mouth, two tiny ivory feet, and one broad coral-red mushroom cap. Match the reference cap-to-stem proportions and simple soft painterly fungus shading. Atlas cells row1 base / blade / piercing, row2 carapace / guard / secretion. All features grow in continuous fungal flesh, not plant leaves or crystal equipment.\nSELECTED ATTRIBUTES ONLY: piercing + guard (관통 + 엄호).\nINTEGRATED CONSTRUCTION: ONE coral cap broadens on its right into a cupped teal shelter rim (guard). Its reinforced upper seam continues as ONE tapered violet stroma leaning upper right (piercing). The fan and point share one smooth coral-to-teal tissue base; cap center remains broad and coral.",
+      "reference": "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/spore-approved.png",
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-dc362ac7-a323-4d71-b516-b18a95025862.png"
+    },
+    {
+      "id": "pebble-piercing-guard",
+      "tribe": "pebble",
+      "label": "몽돌",
+      "pair": [
+        "piercing",
+        "guard"
+      ],
+      "pairLabel": "관통 + 엄호",
+      "order": 5,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual source character key drawing for a 2D game combat-attribute pair, not a mockup or animation preview.\nInput image: supporting species identity, materials, palette and approved single-attribute reference. It is a six-cell reference atlas, NOT the output layout.\nPrimary request: Design the EXACT TWO selected attributes so their structures FIT TOGETHER as one coherent organism. Preserve the recognizable single-attribute design language. Adjust proportions, shared roots, continuous surfaces, intersections and silhouette together. The two functions must be visually readable within the SAME anatomical/material construction.\nOutput: Exactly ONE complete character, ONE neutral ready pose, mostly front view with a slight rightward orientation. Centered full body, feet baseline when species has feet. Entire silhouette inside a square canvas with 10% clear padding. Large subject but no edge touching. Real transparent background.\nStyle: match the approved small game sprites: charming simple readable forms, subtly hand-painted soft shading, crisp dark thin contours, consistent upper-left lighting, broad calm surfaces, restrained details. Exactly two eyes, no mouth. No cast shadow, labels, lettering, ground, effects, detached particles, extra characters or diagrams.\nDo not mechanically stack the two single-attribute drawings. Design their shared connection cleanly. Avoid adding any UNSELECTED attribute; this is a two-attribute combination, not a complete five-attribute evolution. No manufactured weapons, handles, belts, armor worn as clothes, floating equipment, horror, gritty realism, 3D toy render, pixel art, gradient backdrop or decorative sparkle.\nDraw complete clean surfaces and smooth closed outlines. This actual neutral drawing may later be used for rigging only after user approval.\n\nSPECIES: A warm ochre-beige gently faceted rounded pebble creature, exactly two dark bead eyes, no mouth, and two tiny tan stone feet. The matte parent stone remains most of the body. Expensive translucent gemstones grow from natural geological seams, never strapped-on jewelry. Atlas cells row1 base / emerald blade / purple piercing, row2 sapphire carapace / rose guard / amber secretion. Preserve these role colors as SMALL coherent mineral transitions, no ring of five unrelated gems.\nSELECTED ATTRIBUTES ONLY: piercing + guard (관통 + 엄호).\nINTEGRATED CONSTRUCTION: ONE broad rose-quartz protective buttress grows from the right flank (guard); its upper ridge narrows gradually into an amethyst-purple pointed prism (piercing). One continuous zoned crystal formation with broad protective base and slender point. Mostly ochre host rock, no extra blue armor necklace.",
+      "reference": "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/pebble-approved.png",
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-ea2c609b-5897-4562-b31f-d1e16a2d3a9b.png"
+    },
+    {
+      "id": "spring-piercing-guard",
+      "tribe": "spring",
+      "label": "샘방울",
+      "pair": [
+        "piercing",
+        "guard"
+      ],
+      "pairLabel": "관통 + 엄호",
+      "order": 5,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual source character key drawing for a 2D game combat-attribute pair, not a mockup or animation preview.\nInput image: supporting species identity, materials, palette and approved single-attribute reference. It is a six-cell reference atlas, NOT the output layout.\nPrimary request: Design the EXACT TWO selected attributes so their structures FIT TOGETHER as one coherent organism. Preserve the recognizable single-attribute design language. Adjust proportions, shared roots, continuous surfaces, intersections and silhouette together. The two functions must be visually readable within the SAME anatomical/material construction.\nOutput: Exactly ONE complete character, ONE neutral ready pose, mostly front view with a slight rightward orientation. Centered full body, feet baseline when species has feet. Entire silhouette inside a square canvas with 10% clear padding. Large subject but no edge touching. Real transparent background.\nStyle: match the approved small game sprites: charming simple readable forms, subtly hand-painted soft shading, crisp dark thin contours, consistent upper-left lighting, broad calm surfaces, restrained details. Exactly two eyes, no mouth. No cast shadow, labels, lettering, ground, effects, detached particles, extra characters or diagrams.\nDo not mechanically stack the two single-attribute drawings. Design their shared connection cleanly. Avoid adding any UNSELECTED attribute; this is a two-attribute combination, not a complete five-attribute evolution. No manufactured weapons, handles, belts, armor worn as clothes, floating equipment, horror, gritty realism, 3D toy render, pixel art, gradient backdrop or decorative sparkle.\nDraw complete clean surfaces and smooth closed outlines. This actual neutral drawing may later be used for rigging only after user approval.\n\nSPECIES: One continuous clear cyan-turquoise WATER body with exactly two dark navy bead eyes and no mouth, NO FEET or limbs. Rounded taut liquid facets and glossy soft painterly water shading. Atlas row1 base / triangular blade / long-apex piercing, row2 octagonal carapace / pentagonal guard / six-lobed secretion. Every function is the geometry or tension of the same volume of liquid; no separate shield, no attached ice or gemstone.\nSELECTED ATTRIBUTES ONLY: piercing + guard (관통 + 엄호).\nINTEGRATED CONSTRUCTION: One broad rounded PENTAGONAL water body with a wide protective front and shoulders (guard). The upper-right shoulder of that SAME volume narrows into one slender long pointed apex (piercing). Broad sheltering lower body, one integrated tip, no extra triangular appendage.",
+      "reference": "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/spring-approved.png",
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-a4d06748-b151-4c93-90c6-7938cf80966a.png"
+    }
+  ]
+}

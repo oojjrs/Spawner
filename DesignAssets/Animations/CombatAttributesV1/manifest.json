@@ -1,0 +1,47 @@
+{
+  "formatVersion": 1,
+  "tribes": [
+    "sprout",
+    "spore",
+    "pebble",
+    "spring"
+  ],
+  "variantCount": 48,
+  "animationCount": 344,
+  "actionKinds": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "guard",
+    "heal",
+    "secretion",
+    "birth",
+    "death"
+  ],
+  "runtimeMode": "baked-png-sheets",
+  "frameSize": 192,
+  "columns": 8,
+  "maximumCellFraction": 0.9,
+  "sizePerAttribute": 0.1,
+  "maximumAttributes": 4,
+  "anchor": [
+    96,
+    172.8
+  ],
+  "animationIndex": "animations.json",
+  "authoringRenderer": "renderer.mjs",
+  "authoringRigs": [
+    "sprout/rig.json",
+    "spore/rig.json",
+    "pebble/rig.json",
+    "spring/rig.json"
+  ],
+  "gameplayAttributesRegistered": false,
+  "previews": [
+    "combat-attributes-playback.gif",
+    "combat-combinations-playback.gif",
+    "combat-attributes-playback.mp4",
+    "combat-combinations-playback.mp4"
+  ]
+}

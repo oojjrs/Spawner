@@ -1,0 +1,23 @@
+{
+  "tool": "built-in image_gen",
+  "stage": "source-key-art-candidate",
+  "id": "sprout-lifespan-blade-carapace-guard-neutral",
+  "fileStem": "neutral",
+  "outputRoot": "H:/Spawner/DesignAssets/Concepts/CombatLifespanSampleV1",
+  "tribe": "sprout",
+  "label": "새싹콩",
+  "attributes": [
+    "lifespan",
+    "blade",
+    "carapace",
+    "guard"
+  ],
+  "combinationLabel": "수명 + 칼날 + 갑피 + 엄호",
+  "order": 0,
+  "prompt": "Use case: precise-object-edit.\nAsset type: ONE actual neutral source key drawing for a 2D sprite animation prototype, awaiting user confirmation before part separation and rigging.\nInput image 1 is the EDIT TARGET: the approved sprout bean with blade + carapace + guard. Preserve its charming species, exactly two green-black eyes, no mouth, two tiny cream feet, soft painted materials, dark outline, camera and upper-left lighting.\nInput image 2 is the LIFESPAN BODY-PROPORTION reference. Change the ROUND cream bean body into the same distinctly TALL elongated oval lifespan body. Keep its width, make the visible cream body about 1.6 times as tall as it is wide, with a natural unbroken creamy surface, original eyes and tiny grounded feet.\nRedesign the EXISTING connected leaf system to fit this longer body as one organism. Three thick overlapping succulent leaves remain snug along the left and rear torso as carapace. The rightmost leaf becomes one tall broad cupped shelter canopy following the long right flank as guard. Its exposed outer margin curves into ONE thin smooth sickle edge as blade. All leaf roots join at one crown stem seated naturally on the taller body. Shift roots and lengthen the protective overlap so leaves fit the elongated torso; no stretched raster look, no seams or hovering leaf bases. Keep broad cream face and central torso visible.\nNeutral ready pose, upright and grounded, front three-quarter view slightly toward the right. Crown has two modest ordinary leaves. No long pointed spear leaf, amber beads, nectar glands, extra eyes, arms, held items, decorations, action effects or ground shadow.\nExactly one complete character centered on a genuinely transparent square canvas, with generous padding and entire silhouette. This drawing is the real reference pose for a possible later rig; no animation frames or separate parts yet.",
+  "references": [
+    "H:/Spawner/DesignAssets/Concepts/CombatTriplesV1/sprout-blade-carapace-guard.png",
+    "H:/Spawner/DesignAssets/Planning/Attributes/Units/bean-lifespan.png"
+  ],
+  "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-fb1795d2-7033-4c49-b5da-7cf36e253064.png"
+}

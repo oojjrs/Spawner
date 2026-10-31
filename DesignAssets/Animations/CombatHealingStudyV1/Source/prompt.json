@@ -1,0 +1,4 @@
+{
+  "provider": "built-in image_gen",
+  "prompt": "Create one real production gameplay VFX sprite: a small warm pale-gold translucent healing droplet travelling horizontally to the right, rounded luminous golden liquid head on the right and one short tapered liquid tail to the left. Match the softly painted dimensional sprite style and pale-gold healing liquid of the reference. Clearly a liquid healing mote, not fire, not a star, not a needle or nozzle, not a bottle, not a character. Compact silhouette readable when scaled down to 8 to 12 pixels in a 2D game. Restrained cream-white inner highlight and gold rim, no huge glow cloud. One isolated intact sprite centered on a genuinely transparent background, generous transparent padding, no scene, no shadow, no text or labels. This sprite will be used in the actual caster-to-recipient healing animation and absorbed by the recipient."
+}

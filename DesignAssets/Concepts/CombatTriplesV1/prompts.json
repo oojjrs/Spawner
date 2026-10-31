@@ -1,0 +1,819 @@
+{
+  "tool": "built-in image_gen",
+  "stage": "neutral-source-key-art-candidates",
+  "excludedAttribute": "regeneration",
+  "combinationCount": 10,
+  "speciesCount": 4,
+  "sourceImageCount": 40,
+  "comparisonSheets": [
+    "sprout-triples.png",
+    "spore-triples.png",
+    "pebble-triples.png",
+    "spring-triples.png"
+  ],
+  "jobs": [
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "pebble-blade-piercing-carapace",
+      "tribe": "pebble",
+      "label": "몽돌",
+      "attributes": [
+        "blade",
+        "piercing",
+        "carapace"
+      ],
+      "combinationLabel": "칼날 + 관통 + 갑피",
+      "order": 0,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: Warm ochre-beige rounded gently faceted pebble creature, exactly two dark bead eyes, no mouth, two tiny tan stone feet. Matte ochre parent rock and open face remain the dominant volume. Precious translucent minerals grow from visible natural seams. Roles: blade emerald cleavage, piercing amethyst prism, carapace low sapphire plates, guard broad rose-quartz buttress, secretion tiny honey-amber chambers/drops. Use ONE intergrown shoulder/back formation with restrained role colors, not a necklace around the face.\nSELECTED ATTRIBUTES ONLY: blade + piercing + carapace (칼날 + 관통 + 갑피).\nINTEGRATED CONSTRUCTION: One compact low sapphire crystalline crust grows over the upper back (carapace). Its right shoulder transitions into a broad emerald sharp cleavage (blade), and the SAME geological outcrop narrows into one amethyst-purple prism tip (piercing). Shared mineral seam with clean fitted facets and sparse small roots. At least two-thirds of the central visible body remains calm ochre. No rose buttress or amber pores.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/pebble-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/pebble-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-382e252e-6371-49fd-abc2-48aaeb752c69.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "spore-blade-piercing-carapace",
+      "tribe": "spore",
+      "label": "포자버섯",
+      "attributes": [
+        "blade",
+        "piercing",
+        "carapace"
+      ],
+      "combinationLabel": "칼날 + 관통 + 갑피",
+      "order": 0,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: Squat ivory mushroom-stem creature with exactly two dark bead eyes, no mouth, two tiny ivory feet, and ONE broad coral-red cap. Match the approved cap-to-stem proportions and soft painted living fungal material. Features are continuous cap tissue and gills. Piercing tips can be violet, guard shelves teal, carapace layers warm terracotta/cream, secretion vesicles sparse cyan/pink/gold. Preserve broad calm coral surfaces.\nSELECTED ATTRIBUTES ONLY: blade + piercing + carapace (칼날 + 관통 + 갑피).\nINTEGRATED CONSTRUCTION: ONE coral cap thickens into three snug low terracotta-and-cream protective shelves (carapace). Their right margins extend into thin sweeping cutting lamellae (blade). The uppermost lamella converges smoothly into ONE stiff violet-tipped point (piercing). Each shelf belongs to the same cap and continuous gill system. No teal shelter or colorful secretion vesicles.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/spore-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/spore-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-a78b75c6-df68-4f8c-bbd1-3da0fbd6e483.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "spring-blade-piercing-carapace",
+      "tribe": "spring",
+      "label": "샘방울",
+      "attributes": [
+        "blade",
+        "piercing",
+        "carapace"
+      ],
+      "combinationLabel": "칼날 + 관통 + 갑피",
+      "order": 0,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: ONE continuous clear cyan-turquoise WATER volume with exactly two dark navy eyes, no mouth, NO FEET, limbs or equipment. Glossy softly painted water, rounded taut planar facets and deep blue pressure rim. Blade is a thin swept contour; piercing one longer sharp apex; carapace dense octagonal liquid rim; guard broad pentagonal sheltering mass; secretion two tiny attached droplets. Never separate ice, crystals, polygon overlays or shields.\nSELECTED ATTRIBUTES ONLY: blade + piercing + carapace (칼날 + 관통 + 갑피).\nINTEGRATED CONSTRUCTION: One compact rounded octagonal water body has a dense doubled pressure rim (carapace). Its upper-right contour flattens into a broad swept thin cutting margin (blade), then converges into one longer sharp apex (piercing). These are successive regions of ONE flowing outer contour. Broad calm cyan lower face, no second horn, shoulder bubbles or added shell.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/spring-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/spring-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-491eca8d-0012-438e-b91a-ff4245625d22.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "sprout-blade-piercing-carapace",
+      "tribe": "sprout",
+      "label": "새싹콩",
+      "attributes": [
+        "blade",
+        "piercing",
+        "carapace"
+      ],
+      "combinationLabel": "칼날 + 관통 + 갑피",
+      "order": 0,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: Pale cream-green plump round sprout bean, exactly TWO dark green bead eyes, mouthless, two tiny pale feet, living green leaves rooted in one crown stem. Retain the original core bean and open cream face. Living leaf anatomy, soft painted waxy leaf surfaces, no extra eye dots.\nSELECTED ATTRIBUTES ONLY: blade + piercing + carapace (칼날 + 관통 + 갑피).\nINTEGRATED CONSTRUCTION: One crown leaf has a thick folded midrib ending in a long pointed upper-right tip (piercing) and one broad smoothly curving sickle margin (blade). The thick leaf base widens into two snug overlapping fleshy leaves that protect the sides (carapace). Resolve the point, sharp margin and compact protective base as one leaf system. No broad shelter fan or nectar.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/sprout-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/sprout-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-3b729958-f485-4097-a821-dbede2fb5eea.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "pebble-blade-piercing-guard",
+      "tribe": "pebble",
+      "label": "몽돌",
+      "attributes": [
+        "blade",
+        "piercing",
+        "guard"
+      ],
+      "combinationLabel": "칼날 + 관통 + 엄호",
+      "order": 1,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: Warm ochre-beige rounded gently faceted pebble creature, exactly two dark bead eyes, no mouth, two tiny tan stone feet. Matte ochre parent rock and open face remain the dominant volume. Precious translucent minerals grow from visible natural seams. Roles: blade emerald cleavage, piercing amethyst prism, carapace low sapphire plates, guard broad rose-quartz buttress, secretion tiny honey-amber chambers/drops. Use ONE intergrown shoulder/back formation with restrained role colors, not a necklace around the face.\nSELECTED ATTRIBUTES ONLY: blade + piercing + guard (칼날 + 관통 + 엄호).\nINTEGRATED CONSTRUCTION: ONE broad rose-quartz buttress grows from the right flank (guard). Its outer margin becomes an emerald-green sharp cleavage edge (blade), and its upper ridge narrows into one amethyst-purple point (piercing). A single zoned precious-mineral growth with broad pink base, green cutting margin and violet apex. Calm ochre host dominates; no sapphire necklace or amber drops.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/pebble-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/pebble-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-bbb06846-ad0c-4cd1-a52a-2d113dfaa35c.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "spore-blade-piercing-guard",
+      "tribe": "spore",
+      "label": "포자버섯",
+      "attributes": [
+        "blade",
+        "piercing",
+        "guard"
+      ],
+      "combinationLabel": "칼날 + 관통 + 엄호",
+      "order": 1,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: Squat ivory mushroom-stem creature with exactly two dark bead eyes, no mouth, two tiny ivory feet, and ONE broad coral-red cap. Match the approved cap-to-stem proportions and soft painted living fungal material. Features are continuous cap tissue and gills. Piercing tips can be violet, guard shelves teal, carapace layers warm terracotta/cream, secretion vesicles sparse cyan/pink/gold. Preserve broad calm coral surfaces.\nSELECTED ATTRIBUTES ONLY: blade + piercing + guard (칼날 + 관통 + 엄호).\nINTEGRATED CONSTRUCTION: ONE coral cap broadens on the right into a cupped teal bracket-fungus shelter (guard). Its exposed rim sweeps into thin cutting lamellae (blade); the uppermost edge narrows into one violet pointed continuation (piercing). Integrate the coral-to-teal-to-violet tissue within one coherent cap contour and underside. No extra warm armored cap or vesicles.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/spore-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/spore-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-c6517e2b-d9bf-4ac4-b753-d18f2bc04cf4.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "spring-blade-piercing-guard",
+      "tribe": "spring",
+      "label": "샘방울",
+      "attributes": [
+        "blade",
+        "piercing",
+        "guard"
+      ],
+      "combinationLabel": "칼날 + 관통 + 엄호",
+      "order": 1,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: ONE continuous clear cyan-turquoise WATER volume with exactly two dark navy eyes, no mouth, NO FEET, limbs or equipment. Glossy softly painted water, rounded taut planar facets and deep blue pressure rim. Blade is a thin swept contour; piercing one longer sharp apex; carapace dense octagonal liquid rim; guard broad pentagonal sheltering mass; secretion two tiny attached droplets. Never separate ice, crystals, polygon overlays or shields.\nSELECTED ATTRIBUTES ONLY: blade + piercing + guard (칼날 + 관통 + 엄호).\nINTEGRATED CONSTRUCTION: One broad rounded pentagonal water body has high sheltering shoulders (guard). The upper-right shoulder sweeps into a thin cutting margin (blade) and the SAME continuous margin ends in one long sharp apex (piercing). Broad protective lower mass and one elegant tapered top, not stacked separate triangles. No octagonal armored rim or droplets.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/spring-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/spring-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-47ff6126-d989-4e57-b9d9-2a608fd3e0cb.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "sprout-blade-piercing-guard",
+      "tribe": "sprout",
+      "label": "새싹콩",
+      "attributes": [
+        "blade",
+        "piercing",
+        "guard"
+      ],
+      "combinationLabel": "칼날 + 관통 + 엄호",
+      "order": 1,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: Pale cream-green plump round sprout bean, exactly TWO dark green bead eyes, mouthless, two tiny pale feet, living green leaves rooted in one crown stem. Retain the original core bean and open cream face. Living leaf anatomy, soft painted waxy leaf surfaces, no extra eye dots.\nSELECTED ATTRIBUTES ONLY: blade + piercing + guard (칼날 + 관통 + 엄호).\nINTEGRATED CONSTRUCTION: One cupped right-flank leaf forms a broad protective canopy (guard). Its outer rim curves into a smooth sickle cutting edge (blade), and its reinforced upper midrib continues to one slender pointed tip leaning upper right (piercing). ONE elegant canopy with a sharp rim and pointed rib. Small ordinary crown sprouts, face open. No extra armored leaf suit or nectar.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/sprout-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/sprout-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-b4ed410a-df09-441f-b708-0be7e620153b.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "pebble-blade-piercing-secretion",
+      "tribe": "pebble",
+      "label": "몽돌",
+      "attributes": [
+        "blade",
+        "piercing",
+        "secretion"
+      ],
+      "combinationLabel": "칼날 + 관통 + 분비",
+      "order": 2,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: Warm ochre-beige rounded gently faceted pebble creature, exactly two dark bead eyes, no mouth, two tiny tan stone feet. Matte ochre parent rock and open face remain the dominant volume. Precious translucent minerals grow from visible natural seams. Roles: blade emerald cleavage, piercing amethyst prism, carapace low sapphire plates, guard broad rose-quartz buttress, secretion tiny honey-amber chambers/drops. Use ONE intergrown shoulder/back formation with restrained role colors, not a necklace around the face.\nSELECTED ATTRIBUTES ONLY: blade + piercing + secretion (칼날 + 관통 + 분비).\nINTEGRATED CONSTRUCTION: ONE upper-right shoulder outcrop has a broad emerald sharp cleavage (blade) narrowing into one amethyst-purple prism point (piercing). A tiny amber mineral-solution chamber opens at the common root, holding two small attached honey drops (secretion). One cohesive geological seam, sparse roots, broad ochre face. No sapphire armor or pink buttress.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/pebble-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/pebble-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-43d2c70f-4f10-4966-b851-0705103bd394.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "spore-blade-piercing-secretion",
+      "tribe": "spore",
+      "label": "포자버섯",
+      "attributes": [
+        "blade",
+        "piercing",
+        "secretion"
+      ],
+      "combinationLabel": "칼날 + 관통 + 분비",
+      "order": 2,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: Squat ivory mushroom-stem creature with exactly two dark bead eyes, no mouth, two tiny ivory feet, and ONE broad coral-red cap. Match the approved cap-to-stem proportions and soft painted living fungal material. Features are continuous cap tissue and gills. Piercing tips can be violet, guard shelves teal, carapace layers warm terracotta/cream, secretion vesicles sparse cyan/pink/gold. Preserve broad calm coral surfaces.\nSELECTED ATTRIBUTES ONLY: blade + piercing + secretion (칼날 + 관통 + 분비).\nINTEGRATED CONSTRUCTION: ONE coral cap has two smooth sweeping cutting lamellae on the right (blade). The uppermost lamella stiffens into one violet-tipped point (piercing). Three small cyan/pink/gold spore vesicles sit EMBEDDED in the thick common root of the pointed rim (secretion). Quiet coral cap remains dominant. No teal fan or thick concentric armored shelves.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/spore-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/spore-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-190e3252-bc40-4621-88de-1e1122dbfe73.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "spring-blade-piercing-secretion",
+      "tribe": "spring",
+      "label": "샘방울",
+      "attributes": [
+        "blade",
+        "piercing",
+        "secretion"
+      ],
+      "combinationLabel": "칼날 + 관통 + 분비",
+      "order": 2,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: ONE continuous clear cyan-turquoise WATER volume with exactly two dark navy eyes, no mouth, NO FEET, limbs or equipment. Glossy softly painted water, rounded taut planar facets and deep blue pressure rim. Blade is a thin swept contour; piercing one longer sharp apex; carapace dense octagonal liquid rim; guard broad pentagonal sheltering mass; secretion two tiny attached droplets. Never separate ice, crystals, polygon overlays or shields.\nSELECTED ATTRIBUTES ONLY: blade + piercing + secretion (칼날 + 관통 + 분비).\nINTEGRATED CONSTRUCTION: One low triangular water body has a thin swept cutting contour (blade) continuing into one elongated sharp upper-right apex (piercing). Two tiny cyan water beads bud directly from shallow pores at the thick base of that same pointed side (secretion). One uninterrupted liquid volume with broad lower face. No dense armor ring or separate shelter polygon.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/spring-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/spring-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-3c46f268-4962-4914-b26a-ecb95021d6f3.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "sprout-blade-piercing-secretion",
+      "tribe": "sprout",
+      "label": "새싹콩",
+      "attributes": [
+        "blade",
+        "piercing",
+        "secretion"
+      ],
+      "combinationLabel": "칼날 + 관통 + 분비",
+      "order": 2,
+      "prompt": "Use case: stylized-concept. Draw ONE adorable sprout-bean game character as a clean full-body neutral key drawing on a genuinely transparent background.\nThe two input sheets are approved references for the same character's identity, leaf shapes, materials and painterly style. Output ONE character only, not a sheet.\nKeep its plump pale cream-green bean body, exactly two dark green eyes, no mouth, two tiny cream feet, and one living green crown stem. Thin clean dark outlines, softly painted leaves, upper-left highlights, full silhouette and comfortable clear margins.\nCombine three game attributes in ONE crown leaf structure: a broad curved green leaf margin forms a hooked cutting edge, the same folded leaf's thick central vein extends into a long pointed tip leaning upper right, and two tiny nectar glands with small amber drops grow naturally within that vein near its base. Add only two modest ordinary supporting leaves at the crown. Keep the cream face broad and unobstructed.\nThe hook, pointed vein and nectar glands belong to the same living leaf with continuous tissue and one common root. Keep the silhouette elegant and readable at small size. No protective leaf shell, oversized shelter canopy, separate bouquet, carried items, ground, extra characters, text, effects or loose particles.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/sprout-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/sprout-approved.png"
+      ],
+      "previousPrompts": [
+        "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: Pale cream-green plump round sprout bean, exactly TWO dark green bead eyes, mouthless, two tiny pale feet, living green leaves rooted in one crown stem. Retain the original core bean and open cream face. Living leaf anatomy, soft painted waxy leaf surfaces, no extra eye dots.\nSELECTED ATTRIBUTES ONLY: blade + piercing + secretion (칼날 + 관통 + 분비).\nINTEGRATED CONSTRUCTION: One folded crown leaf combines a strong pointed upper-right midrib (piercing) and a broad smoothly hooked side margin (blade). Two tiny nectar glands are built into the thick basal vein of THIS SAME leaf, holding warm amber beads (secretion). Compact common root with two modest supporting leaves. No broad shelter fan or layered protective coat."
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-52dedb52-6d19-4be1-998d-0cb931af9645.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "pebble-blade-carapace-guard",
+      "tribe": "pebble",
+      "label": "몽돌",
+      "attributes": [
+        "blade",
+        "carapace",
+        "guard"
+      ],
+      "combinationLabel": "칼날 + 갑피 + 엄호",
+      "order": 3,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: Warm ochre-beige rounded gently faceted pebble creature, exactly two dark bead eyes, no mouth, two tiny tan stone feet. Matte ochre parent rock and open face remain the dominant volume. Precious translucent minerals grow from visible natural seams. Roles: blade emerald cleavage, piercing amethyst prism, carapace low sapphire plates, guard broad rose-quartz buttress, secretion tiny honey-amber chambers/drops. Use ONE intergrown shoulder/back formation with restrained role colors, not a necklace around the face.\nSELECTED ATTRIBUTES ONLY: blade + carapace + guard (칼날 + 갑피 + 엄호).\nINTEGRATED CONSTRUCTION: Low sapphire plates form a compact protective crust over the upper back (carapace). This SAME crust broadens on the right into one rose-quartz buttress (guard), whose exposed outer cleavage has a restrained emerald-green cutting margin (blade). Resolve all facets into one intergrown layer, no ring around face, no separate point or amber pores.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/pebble-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/pebble-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-c1eac5dc-9c07-46ef-a917-b8dcc3f5fdc0.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "spore-blade-carapace-guard",
+      "tribe": "spore",
+      "label": "포자버섯",
+      "attributes": [
+        "blade",
+        "carapace",
+        "guard"
+      ],
+      "combinationLabel": "칼날 + 갑피 + 엄호",
+      "order": 3,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: Squat ivory mushroom-stem creature with exactly two dark bead eyes, no mouth, two tiny ivory feet, and ONE broad coral-red cap. Match the approved cap-to-stem proportions and soft painted living fungal material. Features are continuous cap tissue and gills. Piercing tips can be violet, guard shelves teal, carapace layers warm terracotta/cream, secretion vesicles sparse cyan/pink/gold. Preserve broad calm coral surfaces.\nSELECTED ATTRIBUTES ONLY: blade + carapace + guard (칼날 + 갑피 + 엄호).\nINTEGRATED CONSTRUCTION: ONE thick coral cap forms compact terracotta-and-cream protective shelves (carapace). These same shelves widen on the right into a cupped teal shelter side (guard), with their exposed edges thinning into smooth sweeping cutting rims (blade). One cap system with shared gill layers. Keep the ivory face visible; no violet point or secretion vesicles.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/spore-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/spore-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-1cdf30a6-8a4a-4837-8ab4-853c6c2f4ff4.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "spring-blade-carapace-guard",
+      "tribe": "spring",
+      "label": "샘방울",
+      "attributes": [
+        "blade",
+        "carapace",
+        "guard"
+      ],
+      "combinationLabel": "칼날 + 갑피 + 엄호",
+      "order": 3,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: ONE continuous clear cyan-turquoise WATER volume with exactly two dark navy eyes, no mouth, NO FEET, limbs or equipment. Glossy softly painted water, rounded taut planar facets and deep blue pressure rim. Blade is a thin swept contour; piercing one longer sharp apex; carapace dense octagonal liquid rim; guard broad pentagonal sheltering mass; secretion two tiny attached droplets. Never separate ice, crystals, polygon overlays or shields.\nSELECTED ATTRIBUTES ONLY: blade + carapace + guard (칼날 + 갑피 + 엄호).\nINTEGRATED CONSTRUCTION: One broad rounded pentagonal liquid mass has sheltering shoulders (guard), with five major corners chamfered into shorter octagonal facets and a dense pressure rim (carapace). The upper-right rim segment sweeps smoothly into one SHORT thin cutting edge (blade). One coherent outline, calm face, no long needle point or droplets.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/spring-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/spring-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-13d91448-c146-4c03-84c6-a5abd670a409.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "sprout-blade-carapace-guard",
+      "tribe": "sprout",
+      "label": "새싹콩",
+      "attributes": [
+        "blade",
+        "carapace",
+        "guard"
+      ],
+      "combinationLabel": "칼날 + 갑피 + 엄호",
+      "order": 3,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: Pale cream-green plump round sprout bean, exactly TWO dark green bead eyes, mouthless, two tiny pale feet, living green leaves rooted in one crown stem. Retain the original core bean and open cream face. Living leaf anatomy, soft painted waxy leaf surfaces, no extra eye dots.\nSELECTED ATTRIBUTES ONLY: blade + carapace + guard (칼날 + 갑피 + 엄호).\nINTEGRATED CONSTRUCTION: Thick succulent leaves overlap snugly around the bean sides (carapace). The rightmost leaf widens into one cupped shelter surface (guard), and the exposed outer margin of the same mantle thins into a restrained smooth sickle edge (blade). One continuous asymmetric leaf coat with a broad side and sharp outer rim, no added spear and no nectar.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/sprout-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/sprout-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-a1e31247-af34-40dc-9931-2ce0010c91cc.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "pebble-blade-carapace-secretion",
+      "tribe": "pebble",
+      "label": "몽돌",
+      "attributes": [
+        "blade",
+        "carapace",
+        "secretion"
+      ],
+      "combinationLabel": "칼날 + 갑피 + 분비",
+      "order": 4,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: Warm ochre-beige rounded gently faceted pebble creature, exactly two dark bead eyes, no mouth, two tiny tan stone feet. Matte ochre parent rock and open face remain the dominant volume. Precious translucent minerals grow from visible natural seams. Roles: blade emerald cleavage, piercing amethyst prism, carapace low sapphire plates, guard broad rose-quartz buttress, secretion tiny honey-amber chambers/drops. Use ONE intergrown shoulder/back formation with restrained role colors, not a necklace around the face.\nSELECTED ATTRIBUTES ONLY: blade + carapace + secretion (칼날 + 갑피 + 분비).\nINTEGRATED CONSTRUCTION: Low sapphire plates form a compact upper-back crust (carapace). Its rightmost exposed mineral cleavage becomes a broad emerald-green sharp edge (blade). Two tiny amber mineral-solution pores are seated in seams BETWEEN these same plates at the edge's base (secretion). Cohesive single geological layer with sparse honey drops, dominant ochre face. No purple point or pink buttress.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/pebble-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/pebble-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-294612f4-a376-4507-b91e-0847d5251479.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "spore-blade-carapace-secretion",
+      "tribe": "spore",
+      "label": "포자버섯",
+      "attributes": [
+        "blade",
+        "carapace",
+        "secretion"
+      ],
+      "combinationLabel": "칼날 + 갑피 + 분비",
+      "order": 4,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: Squat ivory mushroom-stem creature with exactly two dark bead eyes, no mouth, two tiny ivory feet, and ONE broad coral-red cap. Match the approved cap-to-stem proportions and soft painted living fungal material. Features are continuous cap tissue and gills. Piercing tips can be violet, guard shelves teal, carapace layers warm terracotta/cream, secretion vesicles sparse cyan/pink/gold. Preserve broad calm coral surfaces.\nSELECTED ATTRIBUTES ONLY: blade + carapace + secretion (칼날 + 갑피 + 분비).\nINTEGRATED CONSTRUCTION: ONE coral cap forms three compact thick terracotta protective shelves (carapace). Their right margins sweep outward into thin cutting lamellae (blade). Three small cyan/pink/gold spore vesicles are embedded at the thick seams between the lamella roots (secretion). A single layered cap, no violet spear or teal shelter fan.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/spore-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/spore-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-2daa9e3a-45b3-4868-9967-bb44b0f4e5d6.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "spring-blade-carapace-secretion",
+      "tribe": "spring",
+      "label": "샘방울",
+      "attributes": [
+        "blade",
+        "carapace",
+        "secretion"
+      ],
+      "combinationLabel": "칼날 + 갑피 + 분비",
+      "order": 4,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: ONE continuous clear cyan-turquoise WATER volume with exactly two dark navy eyes, no mouth, NO FEET, limbs or equipment. Glossy softly painted water, rounded taut planar facets and deep blue pressure rim. Blade is a thin swept contour; piercing one longer sharp apex; carapace dense octagonal liquid rim; guard broad pentagonal sheltering mass; secretion two tiny attached droplets. Never separate ice, crystals, polygon overlays or shields.\nSELECTED ATTRIBUTES ONLY: blade + carapace + secretion (칼날 + 갑피 + 분비).\nINTEGRATED CONSTRUCTION: One compact rounded octagonal water body has a dense doubled liquid rim (carapace). Its upper-right contour forms one SHORT swept cutting edge (blade). Two tiny cyan drops remain connected by narrow liquid necks to pores within the base of that same rim segment (secretion). Single pressurized water volume. No long needle apex or separate broad shield.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/spring-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/spring-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-0a6ca7d5-96db-4cce-91d2-264b5ef24999.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "sprout-blade-carapace-secretion",
+      "tribe": "sprout",
+      "label": "새싹콩",
+      "attributes": [
+        "blade",
+        "carapace",
+        "secretion"
+      ],
+      "combinationLabel": "칼날 + 갑피 + 분비",
+      "order": 4,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: Pale cream-green plump round sprout bean, exactly TWO dark green bead eyes, mouthless, two tiny pale feet, living green leaves rooted in one crown stem. Retain the original core bean and open cream face. Living leaf anatomy, soft painted waxy leaf surfaces, no extra eye dots.\nSELECTED ATTRIBUTES ONLY: blade + carapace + secretion (칼날 + 갑피 + 분비).\nINTEGRATED CONSTRUCTION: Three thick fleshy leaves overlap snugly around the bean sides (carapace). Their exposed outer margins taper into gentle hooked cutting edges (blade). Two tiny amber nectar beads emerge from glands seated at the overlapping leaf-vein junctions (secretion). One compact continuous mantle, calm cream face, modest crown sprout. No long spear or huge shelter fan.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/sprout-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/sprout-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-f8013280-5462-43b4-b976-5fbe99dc051e.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "pebble-blade-guard-secretion",
+      "tribe": "pebble",
+      "label": "몽돌",
+      "attributes": [
+        "blade",
+        "guard",
+        "secretion"
+      ],
+      "combinationLabel": "칼날 + 엄호 + 분비",
+      "order": 5,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: Warm ochre-beige rounded gently faceted pebble creature, exactly two dark bead eyes, no mouth, two tiny tan stone feet. Matte ochre parent rock and open face remain the dominant volume. Precious translucent minerals grow from visible natural seams. Roles: blade emerald cleavage, piercing amethyst prism, carapace low sapphire plates, guard broad rose-quartz buttress, secretion tiny honey-amber chambers/drops. Use ONE intergrown shoulder/back formation with restrained role colors, not a necklace around the face.\nSELECTED ATTRIBUTES ONLY: blade + guard + secretion (칼날 + 엄호 + 분비).\nINTEGRATED CONSTRUCTION: ONE broad rose-quartz buttress grows from the right flank (guard). Its outside cleavage becomes a thin emerald-green sharp rim (blade). A small amber chamber is built into the same mineral seam near the rim's root, with two tiny honey drops (secretion). One coherent formation. No purple point, sapphire armor or second opposite-side blade.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/pebble-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/pebble-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-b75bf6d1-6681-45c8-a0aa-1a1165f5226b.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "spore-blade-guard-secretion",
+      "tribe": "spore",
+      "label": "포자버섯",
+      "attributes": [
+        "blade",
+        "guard",
+        "secretion"
+      ],
+      "combinationLabel": "칼날 + 엄호 + 분비",
+      "order": 5,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: Squat ivory mushroom-stem creature with exactly two dark bead eyes, no mouth, two tiny ivory feet, and ONE broad coral-red cap. Match the approved cap-to-stem proportions and soft painted living fungal material. Features are continuous cap tissue and gills. Piercing tips can be violet, guard shelves teal, carapace layers warm terracotta/cream, secretion vesicles sparse cyan/pink/gold. Preserve broad calm coral surfaces.\nSELECTED ATTRIBUTES ONLY: blade + guard + secretion (칼날 + 엄호 + 분비).\nINTEGRATED CONSTRUCTION: ONE coral cap extends rightward into a broad cupped teal shelter shelf (guard). Two outer margins of that same shelf become smooth sweeping cutting lamellae (blade). Three small multicolored spore vesicles are embedded in its reinforced rim near the roots (secretion). Continuous tissue and gills, calm main cap. No violet tip or extra terracotta armored cap.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/spore-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/spore-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-08cbe64f-89c4-47f7-8bd6-951781c444f7.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "spring-blade-guard-secretion",
+      "tribe": "spring",
+      "label": "샘방울",
+      "attributes": [
+        "blade",
+        "guard",
+        "secretion"
+      ],
+      "combinationLabel": "칼날 + 엄호 + 분비",
+      "order": 5,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: ONE continuous clear cyan-turquoise WATER volume with exactly two dark navy eyes, no mouth, NO FEET, limbs or equipment. Glossy softly painted water, rounded taut planar facets and deep blue pressure rim. Blade is a thin swept contour; piercing one longer sharp apex; carapace dense octagonal liquid rim; guard broad pentagonal sheltering mass; secretion two tiny attached droplets. Never separate ice, crystals, polygon overlays or shields.\nSELECTED ATTRIBUTES ONLY: blade + guard + secretion (칼날 + 엄호 + 분비).\nINTEGRATED CONSTRUCTION: One broad rounded pentagonal water body has high sheltering shoulders (guard). Its upper-right shoulder becomes a SHORT smooth swept cutting edge (blade). Two tiny cyan beads bud directly from shallow pores at that edge's thick base (secretion). One flowing outline, broad front, no long needle point or separate octagonal armor ring.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/spring-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/spring-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-da134211-2fd7-4eaf-a619-4f8f99bdbc2b.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "sprout-blade-guard-secretion",
+      "tribe": "sprout",
+      "label": "새싹콩",
+      "attributes": [
+        "blade",
+        "guard",
+        "secretion"
+      ],
+      "combinationLabel": "칼날 + 엄호 + 분비",
+      "order": 5,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: Pale cream-green plump round sprout bean, exactly TWO dark green bead eyes, mouthless, two tiny pale feet, living green leaves rooted in one crown stem. Retain the original core bean and open cream face. Living leaf anatomy, soft painted waxy leaf surfaces, no extra eye dots.\nSELECTED ATTRIBUTES ONLY: blade + guard + secretion (칼날 + 엄호 + 분비).\nINTEGRATED CONSTRUCTION: One broad cupped leaf shelters the right flank (guard). Its same outer rim curves forward into one thin sickle edge (blade), while two small glands seated inside the thick rim hold tiny golden nectar beads (secretion). Leaf, cutting rim and glands share the same midrib and base. No separate bud bouquet, no long spear or layered armored coat.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/sprout-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/sprout-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-a3ba3d3a-0128-406e-82b5-b762fd666d18.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "pebble-piercing-carapace-guard",
+      "tribe": "pebble",
+      "label": "몽돌",
+      "attributes": [
+        "piercing",
+        "carapace",
+        "guard"
+      ],
+      "combinationLabel": "관통 + 갑피 + 엄호",
+      "order": 6,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: Warm ochre-beige rounded gently faceted pebble creature, exactly two dark bead eyes, no mouth, two tiny tan stone feet. Matte ochre parent rock and open face remain the dominant volume. Precious translucent minerals grow from visible natural seams. Roles: blade emerald cleavage, piercing amethyst prism, carapace low sapphire plates, guard broad rose-quartz buttress, secretion tiny honey-amber chambers/drops. Use ONE intergrown shoulder/back formation with restrained role colors, not a necklace around the face.\nSELECTED ATTRIBUTES ONLY: piercing + carapace + guard (관통 + 갑피 + 엄호).\nINTEGRATED CONSTRUCTION: Low sapphire plates protect the upper back (carapace), gradually interlocking with a broad rose-quartz buttress at the right flank (guard). The upper ridge of that same buttress tapers into ONE amethyst-purple prism (piercing). One continuous mineral bed and shared geometric junctions, broad ochre face. No emerald edge or amber drops.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/pebble-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/pebble-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-19f6e940-591b-40f9-a4a0-bda978a238fd.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "spore-piercing-carapace-guard",
+      "tribe": "spore",
+      "label": "포자버섯",
+      "attributes": [
+        "piercing",
+        "carapace",
+        "guard"
+      ],
+      "combinationLabel": "관통 + 갑피 + 엄호",
+      "order": 6,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: Squat ivory mushroom-stem creature with exactly two dark bead eyes, no mouth, two tiny ivory feet, and ONE broad coral-red cap. Match the approved cap-to-stem proportions and soft painted living fungal material. Features are continuous cap tissue and gills. Piercing tips can be violet, guard shelves teal, carapace layers warm terracotta/cream, secretion vesicles sparse cyan/pink/gold. Preserve broad calm coral surfaces.\nSELECTED ATTRIBUTES ONLY: piercing + carapace + guard (관통 + 갑피 + 엄호).\nINTEGRATED CONSTRUCTION: ONE coral cap has two compact thick terracotta-and-cream protective shelves (carapace). They widen on the right into a broad teal shelter side (guard), whose upper reinforced seam narrows into ONE stiff violet tip (piercing). Resolve the broad protective layers and narrow apex into one cap. No extra slicing lamellae or secretion vesicles.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/spore-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/spore-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-9c6dde9b-554c-4656-8325-3d8b1c4a8ec8.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "spring-piercing-carapace-guard",
+      "tribe": "spring",
+      "label": "샘방울",
+      "attributes": [
+        "piercing",
+        "carapace",
+        "guard"
+      ],
+      "combinationLabel": "관통 + 갑피 + 엄호",
+      "order": 6,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: ONE continuous clear cyan-turquoise WATER volume with exactly two dark navy eyes, no mouth, NO FEET, limbs or equipment. Glossy softly painted water, rounded taut planar facets and deep blue pressure rim. Blade is a thin swept contour; piercing one longer sharp apex; carapace dense octagonal liquid rim; guard broad pentagonal sheltering mass; secretion two tiny attached droplets. Never separate ice, crystals, polygon overlays or shields.\nSELECTED ATTRIBUTES ONLY: piercing + carapace + guard (관통 + 갑피 + 엄호).\nINTEGRATED CONSTRUCTION: One broad rounded pentagonal water volume has sheltering shoulders (guard). Its major corners are subtly chamfered into a compact dense octagonal pressure rim (carapace). The upper-right corner of this SAME contour narrows into ONE slender long apex (piercing). Broad thick lower face, no second polygon, slicing fin or droplets.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/spring-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/spring-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-b66a1834-2619-407c-b44e-6ebf7309c949.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "sprout-piercing-carapace-guard",
+      "tribe": "sprout",
+      "label": "새싹콩",
+      "attributes": [
+        "piercing",
+        "carapace",
+        "guard"
+      ],
+      "combinationLabel": "관통 + 갑피 + 엄호",
+      "order": 6,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: Pale cream-green plump round sprout bean, exactly TWO dark green bead eyes, mouthless, two tiny pale feet, living green leaves rooted in one crown stem. Retain the original core bean and open cream face. Living leaf anatomy, soft painted waxy leaf surfaces, no extra eye dots.\nSELECTED ATTRIBUTES ONLY: piercing + carapace + guard (관통 + 갑피 + 엄호).\nINTEGRATED CONSTRUCTION: Three thick leaves form a snug protective coat on the bean sides (carapace). The rightmost leaf widens into a broad cupped shelter (guard), and its reinforced central rib smoothly extends into one slender upper-right pointed apex (piercing). Single mantle with a thick base, broad side and one narrow tip. No sickle edges or nectar.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/sprout-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/sprout-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-b2162ec0-8e32-4dd4-a064-20154b703cac.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "pebble-piercing-carapace-secretion",
+      "tribe": "pebble",
+      "label": "몽돌",
+      "attributes": [
+        "piercing",
+        "carapace",
+        "secretion"
+      ],
+      "combinationLabel": "관통 + 갑피 + 분비",
+      "order": 7,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: Warm ochre-beige rounded gently faceted pebble creature, exactly two dark bead eyes, no mouth, two tiny tan stone feet. Matte ochre parent rock and open face remain the dominant volume. Precious translucent minerals grow from visible natural seams. Roles: blade emerald cleavage, piercing amethyst prism, carapace low sapphire plates, guard broad rose-quartz buttress, secretion tiny honey-amber chambers/drops. Use ONE intergrown shoulder/back formation with restrained role colors, not a necklace around the face.\nSELECTED ATTRIBUTES ONLY: piercing + carapace + secretion (관통 + 갑피 + 분비).\nINTEGRATED CONSTRUCTION: Low sapphire plates protect the upper back (carapace). The rightmost plate's common mineral root supports one tapered amethyst-purple prism (piercing), with two small amber mineral-solution pores seated in the intervening seam (secretion). One rooted crystalline formation and sparse honey drops. Calm ochre face; no emerald blade or rose buttress.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/pebble-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/pebble-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-bb1a12ba-d8ba-4c77-ab8e-8ba3e27ed8d2.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "spore-piercing-carapace-secretion",
+      "tribe": "spore",
+      "label": "포자버섯",
+      "attributes": [
+        "piercing",
+        "carapace",
+        "secretion"
+      ],
+      "combinationLabel": "관통 + 갑피 + 분비",
+      "order": 7,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: Squat ivory mushroom-stem creature with exactly two dark bead eyes, no mouth, two tiny ivory feet, and ONE broad coral-red cap. Match the approved cap-to-stem proportions and soft painted living fungal material. Features are continuous cap tissue and gills. Piercing tips can be violet, guard shelves teal, carapace layers warm terracotta/cream, secretion vesicles sparse cyan/pink/gold. Preserve broad calm coral surfaces.\nSELECTED ATTRIBUTES ONLY: piercing + carapace + secretion (관통 + 갑피 + 분비).\nINTEGRATED CONSTRUCTION: ONE coral cap forms three compact terracotta-and-cream protective shelves (carapace). The uppermost shelf narrows into one stiff violet point at the upper right (piercing). Three small colorful spore vesicles are EMBEDDED in the seam supporting this tip (secretion). One shared cap and gill system. No broad teal fan or scythe margins.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/spore-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/spore-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-88c2299e-02c5-4124-b64d-badbab5b9c50.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "spring-piercing-carapace-secretion",
+      "tribe": "spring",
+      "label": "샘방울",
+      "attributes": [
+        "piercing",
+        "carapace",
+        "secretion"
+      ],
+      "combinationLabel": "관통 + 갑피 + 분비",
+      "order": 7,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: ONE continuous clear cyan-turquoise WATER volume with exactly two dark navy eyes, no mouth, NO FEET, limbs or equipment. Glossy softly painted water, rounded taut planar facets and deep blue pressure rim. Blade is a thin swept contour; piercing one longer sharp apex; carapace dense octagonal liquid rim; guard broad pentagonal sheltering mass; secretion two tiny attached droplets. Never separate ice, crystals, polygon overlays or shields.\nSELECTED ATTRIBUTES ONLY: piercing + carapace + secretion (관통 + 갑피 + 분비).\nINTEGRATED CONSTRUCTION: One compact rounded octagonal water body has a dense protective liquid rim (carapace). Its upper-right corner narrows into ONE slender long apex (piercing). Two tiny attached cyan beads bud from pores in the thickened rim at that apex's base (secretion). Single coherent liquid mass. No swept cutting fin or broad shelter shield.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/spring-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/spring-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-f6a7c0f5-186e-4210-8dfa-5ddcc5a4131e.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "sprout-piercing-carapace-secretion",
+      "tribe": "sprout",
+      "label": "새싹콩",
+      "attributes": [
+        "piercing",
+        "carapace",
+        "secretion"
+      ],
+      "combinationLabel": "관통 + 갑피 + 분비",
+      "order": 7,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: Pale cream-green plump round sprout bean, exactly TWO dark green bead eyes, mouthless, two tiny pale feet, living green leaves rooted in one crown stem. Retain the original core bean and open cream face. Living leaf anatomy, soft painted waxy leaf surfaces, no extra eye dots.\nSELECTED ATTRIBUTES ONLY: piercing + carapace + secretion (관통 + 갑피 + 분비).\nINTEGRATED CONSTRUCTION: Compact overlapping succulent leaves protect the bean sides (carapace). The uppermost leaf continues into one stiff folded upper-right pointed apex (piercing). Two small nectar glands are seated in the junction where that leaf's thick midrib meets the protective leaves (secretion), with small amber beads. One rooted leaf system. No sickle edge or broad shelter fan.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/sprout-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/sprout-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-72a761dc-a5b8-44d5-9394-911c47aee906.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "pebble-piercing-guard-secretion",
+      "tribe": "pebble",
+      "label": "몽돌",
+      "attributes": [
+        "piercing",
+        "guard",
+        "secretion"
+      ],
+      "combinationLabel": "관통 + 엄호 + 분비",
+      "order": 8,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: Warm ochre-beige rounded gently faceted pebble creature, exactly two dark bead eyes, no mouth, two tiny tan stone feet. Matte ochre parent rock and open face remain the dominant volume. Precious translucent minerals grow from visible natural seams. Roles: blade emerald cleavage, piercing amethyst prism, carapace low sapphire plates, guard broad rose-quartz buttress, secretion tiny honey-amber chambers/drops. Use ONE intergrown shoulder/back formation with restrained role colors, not a necklace around the face.\nSELECTED ATTRIBUTES ONLY: piercing + guard + secretion (관통 + 엄호 + 분비).\nINTEGRATED CONSTRUCTION: ONE broad rose-quartz buttress grows from the right flank (guard), with its upper ridge narrowing into one amethyst-purple prism point (piercing). A tiny amber chamber opens within their shared root seam, with two small attached honey drops (secretion). One well-fitted intergrown formation, quiet ochre body. No sapphire coat or emerald blade.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/pebble-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/pebble-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-66ed1cc3-2ba6-4cdc-8542-d898ed7d145d.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "spore-piercing-guard-secretion",
+      "tribe": "spore",
+      "label": "포자버섯",
+      "attributes": [
+        "piercing",
+        "guard",
+        "secretion"
+      ],
+      "combinationLabel": "관통 + 엄호 + 분비",
+      "order": 8,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: Squat ivory mushroom-stem creature with exactly two dark bead eyes, no mouth, two tiny ivory feet, and ONE broad coral-red cap. Match the approved cap-to-stem proportions and soft painted living fungal material. Features are continuous cap tissue and gills. Piercing tips can be violet, guard shelves teal, carapace layers warm terracotta/cream, secretion vesicles sparse cyan/pink/gold. Preserve broad calm coral surfaces.\nSELECTED ATTRIBUTES ONLY: piercing + guard + secretion (관통 + 엄호 + 분비).\nINTEGRATED CONSTRUCTION: ONE coral cap widens rightward into a broad cupped teal shelter shelf (guard). Its upper seam becomes one tapered violet pointed continuation (piercing). Three small cyan/pink/gold spore vesicles are embedded within that same fleshy upper seam near its root (secretion). Preserve calm coral center, no separate horn mount, cutting lamellae or terracotta armored cap.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/spore-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/spore-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-a957ea38-4d01-471d-922e-e9b391514a20.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "spring-piercing-guard-secretion",
+      "tribe": "spring",
+      "label": "샘방울",
+      "attributes": [
+        "piercing",
+        "guard",
+        "secretion"
+      ],
+      "combinationLabel": "관통 + 엄호 + 분비",
+      "order": 8,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: ONE continuous clear cyan-turquoise WATER volume with exactly two dark navy eyes, no mouth, NO FEET, limbs or equipment. Glossy softly painted water, rounded taut planar facets and deep blue pressure rim. Blade is a thin swept contour; piercing one longer sharp apex; carapace dense octagonal liquid rim; guard broad pentagonal sheltering mass; secretion two tiny attached droplets. Never separate ice, crystals, polygon overlays or shields.\nSELECTED ATTRIBUTES ONLY: piercing + guard + secretion (관통 + 엄호 + 분비).\nINTEGRATED CONSTRUCTION: One broad rounded pentagonal water body has a sheltering front and high shoulders (guard). The upper-right shoulder converges into ONE slender long apex (piercing), with two tiny cyan beads budding directly from pores near its common root (secretion). One water contour, quiet face. No separate cutting fin or octagonal armored shell.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/spring-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/spring-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-630bdf12-82a3-48de-b376-14146fedd612.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "sprout-piercing-guard-secretion",
+      "tribe": "sprout",
+      "label": "새싹콩",
+      "attributes": [
+        "piercing",
+        "guard",
+        "secretion"
+      ],
+      "combinationLabel": "관통 + 엄호 + 분비",
+      "order": 8,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: Pale cream-green plump round sprout bean, exactly TWO dark green bead eyes, mouthless, two tiny pale feet, living green leaves rooted in one crown stem. Retain the original core bean and open cream face. Living leaf anatomy, soft painted waxy leaf surfaces, no extra eye dots.\nSELECTED ATTRIBUTES ONLY: piercing + guard + secretion (관통 + 엄호 + 분비).\nINTEGRATED CONSTRUCTION: One cupped leaf shelters the right flank (guard). Its upper rib narrows smoothly into one long stiff pointed tip (piercing). Two tiny nectar glands seated along the same reinforced rib near the canopy's root hold amber beads (secretion). One smooth leaf canopy and pointed continuation; no separate bouquet, sickle blade or protective leaf suit.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/sprout-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/sprout-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-39031f51-377c-464a-961d-4f5fe781a40e.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "pebble-carapace-guard-secretion",
+      "tribe": "pebble",
+      "label": "몽돌",
+      "attributes": [
+        "carapace",
+        "guard",
+        "secretion"
+      ],
+      "combinationLabel": "갑피 + 엄호 + 분비",
+      "order": 9,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: Warm ochre-beige rounded gently faceted pebble creature, exactly two dark bead eyes, no mouth, two tiny tan stone feet. Matte ochre parent rock and open face remain the dominant volume. Precious translucent minerals grow from visible natural seams. Roles: blade emerald cleavage, piercing amethyst prism, carapace low sapphire plates, guard broad rose-quartz buttress, secretion tiny honey-amber chambers/drops. Use ONE intergrown shoulder/back formation with restrained role colors, not a necklace around the face.\nSELECTED ATTRIBUTES ONLY: carapace + guard + secretion (갑피 + 엄호 + 분비).\nINTEGRATED CONSTRUCTION: Low sapphire plates form a compact protective upper-back crust (carapace), broadening smoothly on the right into ONE rose-quartz shelter buttress (guard). Two tiny amber mineral-solution chambers open INSIDE the seam where these minerals interlock, holding small attached honey drops (secretion). One continuous fitted formation, no spikes or blades, broad calm ochre face.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/pebble-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/pebble-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-05a6f635-751c-4b50-979a-4d8a6296d9c5.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "spore-carapace-guard-secretion",
+      "tribe": "spore",
+      "label": "포자버섯",
+      "attributes": [
+        "carapace",
+        "guard",
+        "secretion"
+      ],
+      "combinationLabel": "갑피 + 엄호 + 분비",
+      "order": 9,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: Squat ivory mushroom-stem creature with exactly two dark bead eyes, no mouth, two tiny ivory feet, and ONE broad coral-red cap. Match the approved cap-to-stem proportions and soft painted living fungal material. Features are continuous cap tissue and gills. Piercing tips can be violet, guard shelves teal, carapace layers warm terracotta/cream, secretion vesicles sparse cyan/pink/gold. Preserve broad calm coral surfaces.\nSELECTED ATTRIBUTES ONLY: carapace + guard + secretion (갑피 + 엄호 + 분비).\nINTEGRATED CONSTRUCTION: ONE coral cap has compact terracotta-and-cream protective shelves (carapace). Those same layers broaden on the right into a modest cupped teal shelter side (guard). Three small translucent colorful spore vesicles sit embedded in the seams where warm shelves transition into the teal shelter (secretion). One coherent cap, no spear or sharp slicing rims.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/spore-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/spore-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-92f95111-2aa0-47ad-9519-7012ed4fe09f.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "spring-carapace-guard-secretion",
+      "tribe": "spring",
+      "label": "샘방울",
+      "attributes": [
+        "carapace",
+        "guard",
+        "secretion"
+      ],
+      "combinationLabel": "갑피 + 엄호 + 분비",
+      "order": 9,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: ONE continuous clear cyan-turquoise WATER volume with exactly two dark navy eyes, no mouth, NO FEET, limbs or equipment. Glossy softly painted water, rounded taut planar facets and deep blue pressure rim. Blade is a thin swept contour; piercing one longer sharp apex; carapace dense octagonal liquid rim; guard broad pentagonal sheltering mass; secretion two tiny attached droplets. Never separate ice, crystals, polygon overlays or shields.\nSELECTED ATTRIBUTES ONLY: carapace + guard + secretion (갑피 + 엄호 + 분비).\nINTEGRATED CONSTRUCTION: One broad rounded pentagonal water mass has high sheltering shoulders (guard). Its five major corners are subtly chamfered into short octagonal facets, forming a dense doubled liquid pressure rim (carapace). Two tiny attached cyan beads bud from shallow pores in shoulder corners (secretion). ONE calm coherent contour, no long spear apex, cutting edge or separate shield.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/spring-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/spring-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-eb732143-1a43-4413-a6cd-d31b6cdb470c.png"
+    },
+    {
+      "tool": "built-in image_gen",
+      "stage": "neutral-source-key-art-candidate",
+      "id": "sprout-carapace-guard-secretion",
+      "tribe": "sprout",
+      "label": "새싹콩",
+      "attributes": [
+        "carapace",
+        "guard",
+        "secretion"
+      ],
+      "combinationLabel": "갑피 + 엄호 + 분비",
+      "order": 9,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE actual neutral source key drawing for a three-combat-attribute combination in a 2D game.\nInput image 1: the approved TWO-ATTRIBUTE comparison sheet for this species, as identity and coherent anatomical integration reference. Input image 2: approved SINGLE-ATTRIBUTE atlas, as the exact material and functional shape vocabulary. Both are supporting references, NOT output layouts.\nCreate exactly ONE complete character combining ONLY the three selected attributes. Make the same species look as if these functions naturally fit in one body. Design shared roots, joints, tissue/mineral transitions, proportions and silhouette TOGETHER. One dominant integrated structure; subordinate functions should appear in its surfaces, rim or junctions. Keep broad quiet areas and readable original body. Do not simply pile three complete accessories together or add the other two attributes.\nOne neutral ready pose, mostly frontal with slight rightward orientation; match the approved painterly casual-game sprite style, camera, dark thin clean contour, soft upper-left lighting, face and materials. Complete subject centered inside a square canvas with generous 10 percent transparent padding. Exactly TWO eyes, mouthless. Genuine transparent background. No text, labels, diagrams, ground, shadows, effects, detached particles, extra poses or characters. No costume, straps, held equipment, metal hardware, realistic anatomy, 3D toy rendering, pixel art or excessive surface noise.\nThis is actual source artwork for later production after review. Draw complete closed surfaces and clean connections.\n\nSPECIES: Pale cream-green plump round sprout bean, exactly TWO dark green bead eyes, mouthless, two tiny pale feet, living green leaves rooted in one crown stem. Retain the original core bean and open cream face. Living leaf anatomy, soft painted waxy leaf surfaces, no extra eye dots.\nSELECTED ATTRIBUTES ONLY: carapace + guard + secretion (갑피 + 엄호 + 분비).\nINTEGRATED CONSTRUCTION: Three thick succulent leaves overlap snugly at the sides (carapace), with the rightmost leaf broadening into one cupped shelter surface (guard). Two tiny nectar glands are integrated into the shared upper rim where the coat becomes the canopy (secretion). Compact ordinary sprout and open cream face. No pointed spear, no sickle blade, no separate tall buds.",
+      "references": [
+        "H:/Spawner/DesignAssets/Concepts/CombatPairsV1/sprout-pairs.png",
+        "H:/Spawner/DesignAssets/Animations/CombatAttributesV7/Source/sprout-approved.png"
+      ],
+      "generatedSource": "D:\\.codex\\generated_images\\01a18f4a-af28-7b60-9d1c-296eb559d00d\\exec-2bf1865c-41a8-4e41-98bf-e23a495fba91.png"
+    }
+  ]
+}

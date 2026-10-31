@@ -1,0 +1,23 @@
+{
+  "version": 7,
+  "parent": "CombatAttributesV6",
+  "variantCount": 20,
+  "animationCount": 124,
+  "frameSize": 256,
+  "columns": 8,
+  "regenerationPack": "CombatAttributesV5",
+  "healingPack": "CombatAttributesV6",
+  "gameplayAttributesRegistered": true,
+  "bodyActions": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "birth",
+    "death"
+  ],
+  "equipmentActions": [
+    "secretion"
+  ],
+  "attackVersion": 1
+}

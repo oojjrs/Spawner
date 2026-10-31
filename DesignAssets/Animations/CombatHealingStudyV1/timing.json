@@ -1,0 +1,30 @@
+{
+  "species": [
+    "sprout",
+    "spore",
+    "pebble",
+    "spring"
+  ],
+  "modes": [
+    "self",
+    "ally"
+  ],
+  "durationMs": 6400,
+  "frames": 128,
+  "frameMs": 50,
+  "timing": {
+    "cycle": 3.2,
+    "aimStart": 0.24,
+    "aimReady": 0.68,
+    "release": 0.86,
+    "impact": 1.24,
+    "recoverStart": 1.42,
+    "recoverEnd": 1.95,
+    "effectEnd": 2.18
+  },
+  "effects": {
+    "drop": "Source/healing-drop.png",
+    "ring": "DesignAssets/Effects/LevelUp/ring.png",
+    "sparkle": "Source/receiving-mote.png"
+  }
+}
