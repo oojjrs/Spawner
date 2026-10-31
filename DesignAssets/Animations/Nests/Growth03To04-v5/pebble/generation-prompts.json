@@ -1,0 +1,54 @@
+{
+  "provider": "built-in image_gen.imagegen",
+  "approvedKeyframes": "Source/key-source.png",
+  "keyframeApproval": "좋아. 계속해",
+  "rigRebuild": "v4",
+  "construction": "complete individually isolated attachments, hierarchical FK, geometric occlusion",
+  "generated": [
+    {
+      "file": "Source/stones.png",
+      "prompt": "Use case: precise-object-edit. Production SOURCE PARTS for a proper 2D cutout rig of the APPROVED stone-den growth keyframes in reference1. Preserve their warm faceted ochre sandstone, dark teal outlines, soft top-left lighting, front three-quarter camera and rounded chunky shapes. Make a THREE COLUMNS BY THREE ROWS atlas of NINE COMPLETE ISOLATED OBJECTS, true transparent RGBA, huge empty gutters, one full object wholly inside each cell. NO text, labels, backdrop, shadows or complete buildings. Every boulder has a closed natural outline, fully painted rounded back edges and underside, no rectangular cut boundaries or missing surfaces. These are individual whole stones, not cropped chunks of the nest.\nROW1 left to right: 1) upper LEFT shoulder boulder, wide angled sandstone block rising slightly toward its right end, width-to-height about 1.5; 2) LEFT middle wall boulder, chunky near-square rounded irregular rock, width-to-height 1.35; 3) LEFT lowest wall boulder, broad squat stable wedge with flat-ish ground contact, width-to-height 1.7. Match the left-side rocks in the approved keyframe.\nROW2: 4) upper RIGHT shoulder boulder, width-to-height about 1.5, corresponding source right-side shape but keep top-left lighting; 5) RIGHT middle wall boulder, chunky near-square irregular rock, width-to-height 1.35; 6) RIGHT lowest wall boulder, broad squat stable wedge, width-to-height 1.7. Do not mirror the lighting. No attached little pebbles.\nROW3: 7) ONE complete low wide central sandstone LINTEL BLOCK from the nest, width-to-height about 3.3, gently rounded facets and broad natural top plane, no door, frame or hardware; 8) ONE small broad stone wedge used to close the rear right shoulder behind the old winch during growth, width-to-height 1.4, complete standalone stone; 9) the EXACT THREE-TIER FRONT SANDSTONE STAIR UNIT from the approved level4 nest, drawn as ONE isolated rigid unit, full wide shallow stairs, complete back rim and side faces, no pedestals, columns, cave, gems, black bases, metal or other stones. Clean transparent alpha between cells. All nine parts sharp and ready for real rigging."
+    },
+    {
+      "file": "Source/mechanism.png",
+      "prompt": "Use case: precise-object-edit. Production ISOLATED COMPLETE ATTACHMENTS for rigging the EXACT level3 pebble-den winch in reference1 and the approved growth keys in reference2. Match source front three-quarter camera, warm amber wood, bronze pin caps, sandstone weight, beige twisted rope, dark teal clean outline and upper-left light. Strict THREE COLUMNS BY TWO ROWS atlas, SIX detached complete objects, each fully inside its own cell with huge transparent gutters, genuine transparent background. No complete nests, rocks behind objects, text, labels, shadows or background.\nTOP LEFT: ONLY the complete level3 wooden lifting FRAME: horizontal upper wooden beam, right vertical wooden post with two bronze pin caps, and its diagonal wooden brace, joined solidly as one rigid assembly. REMOVE pulley disk, all rope and counterweight, all surrounding sandstone. Fully paint the wood surfaces behind the removed pulley, all back edges and rounded end faces. Keep exact compact shape from the source.\nTOP MIDDLE: ONLY the complete round wooden PULLEY DISK from reference1, rich concentric wooden wheel and original small bronze axle at its center, entire round edge finished where the frame and rope previously covered it. No frame, axle stand, rope or stone attached. The wheel is round and centered for rotation.\nTOP RIGHT: ONLY the original small sandstone COUNTERWEIGHT, with its horizontal beige rope wrapping and top knot, full rear contour and underside. No dangling upper rope, rock wall or wooden post. Single compact rounded stone weight.\nBOTTOM LEFT: ONLY the full original level3 HORIZONTAL GATE BEAM, long rounded ochre sandstone block with beige rope bindings hugging its left and right ends. No long hanging ropes, full gate panel or surrounding masonry. Width-to-height about 4, complete outline and end faces.\nBOTTOM MIDDLE: ONE straight vertical segment of beige TWISTED ROPE on transparency, about 12 times taller than its thickness, consistent tight twist motif from source, clean alpha edges, complete continuous rope. No knot, hook, stone, hardware or cast shadow.\nBOTTOM RIGHT: ONE vertical length of SIX connected small BRONZE CHAIN LINKS from the level4 lifting chain, alternate front-facing and side-facing oval links with genuinely transparent openings. Complete thick gold-bronze metal and dark outlines, uniform repeating pitch, straight vertical chain. No beam, gear, wall, medallion or other attachments. The chain will be tiled and moved as a separate attachment. Keep parts entirely separate."
+    },
+    {
+      "file": "Source/stairs-flat.png",
+      "prompt": "Use case: precise-object-edit. Create ONE COMPLETE SEPARATE SOURCE SPRITE of the EXACT low wide sandstone front steps in reference1, using reference2 for high-resolution painterly style. These are an animation attachment, not a new design. Keep the footprint extremely LOW AND WIDE: overall width-to-height approximately FIVE TO ONE (5:1), exactly as reference1. Three very shallow rounded step tiers, broad flat stone treads and short vertical risers, friendly golden faceted sandstone, dark deep teal contour, soft upper-left lighting, same frontal slightly top-down perspective. The upper step is around 65 percent of the full width, middle step around 85 percent, lowest step full width. Draw the entire stair unit, including complete back rim and side faces hidden by neighboring pillars. Do NOT make a tall podium, mound, throne base, circular pedestal or steep staircase. REMOVE all black pedestal fragments, columns, building, cave, gems, bronze, ground or shadows from reference1. ONE single isolated squat stair unit, fully visible and centered with ample transparent margin, genuine transparent RGBA background. No text, labels, backdrop or extra objects. A complete production part for a bone rig."
+    },
+    {
+      "file": "Source/old-crown.png",
+      "prompt": "Use case: precise-object-edit. Create ONE complete isolated CROWN BOULDER from the LEVEL3 pebble den in reference1, matching the TOP LEFT approved key pose in reference2. Exact original front three-quarter camera, warm pale ochre sandstone, broad soft faceted planes, thin clean dark teal outline, upper-left light. This is the old level3 cap stone, NOT the larger cracked level4 crown. Keep its very low broad rounded lens silhouette, width-to-height about THREE TO ONE (3:1), mostly smooth continuous top and gently rounded underside. No deep central split into two stones; only the original subtle natural facets. Complete all hidden lower edges behind the wood and lower lintel. Only the one sandstone boulder: remove wooden winch, ropes, gate, other stones, background and shadow. Production source attachment on true transparent RGBA, ample empty margin, no text, labels or other objects. Preserve the approved level3 shape and material closely."
+    }
+  ],
+  "reusedSources": [
+    "Source/hidden-source.png",
+    "Source/part-source.png"
+  ],
+  "dependencies": [
+    "Pillow",
+    "numpy",
+    "opencv-python-headless"
+  ],
+  "timingRevision": {
+    "version": "v5",
+    "sourceRig": "Growth03To04-v4/pebble",
+    "artworkChanged": false,
+    "growthIntervalsMs": [
+      [
+        1400,
+        1800
+      ],
+      [
+        2600,
+        3000
+      ],
+      [
+        3800,
+        4200
+      ]
+    ],
+    "holdDurationMs": 800
+  }
+}

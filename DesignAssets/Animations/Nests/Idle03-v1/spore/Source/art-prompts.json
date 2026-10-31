@@ -1,0 +1,69 @@
+{
+  "sourcePoseCount": 1,
+  "additionalFullPoseDrawings": 0,
+  "provider": "built-in image_gen",
+  "hiddenSurfaceRepairs": [
+    {
+      "asset": "Source/collar-hidden-surface-generated.png",
+      "prompt": "Use case: precise-object-edit. This is HIDDEN-SURFACE SOURCE ART for a layered bone/mesh rig, NOT a new animation pose or an alternate keyframe. Image 1 is the approved neutral level-3 mushroom nest. Keep its one and only neutral pose, exact camera, framing, shape, palette, light, broad low asymmetric coral cap, three eggs, vents, bellows and ALL other parts unchanged.\nChange ONLY the CENTRAL BRASS ROTATING LEVER on the wooden cylindrical collar. In the original 512 square the moving lever has pivot center approximately (251,269), a circular brass pivot head about 29px diameter, and a brass arm ending near (291,279). REMOVE that entire circular pivot cap, the connected short arm and its end knob. Restore the hidden wooden vertical staves and grain BEHIND it, naturally continuing the surrounding collar wood. The upper and lower rope hoops across the collar should remain intact and should be completed where hidden by the removed lever. Do not remove the SMALL separate fixed brass fitting at (197,278), which is not the rotating lever. Do not add new crossbars, structures, mechanisms, markings or holes.\nOutput the full original neutral nest on true transparency with only the moving central lever erased and its previously hidden backing painted in. This drawing will supply just the small wood repair patch under the original isolated lever. Preserve the original neutral design everywhere else; no new pose, no motion, no particle effects. No labels, text, background, border or ground. Clean outline alpha."
+    },
+    {
+      "asset": "Source/bellows-complete-shell-generated.png",
+      "prompt": "Use case: precise-object-edit. Asset type: one complete hidden-surface BELLOWS DIAPHRAGM source attachment for a 2D layered bone/mesh rig. This is a separated part from the SAME neutral pose of Image 1, not a new key pose.\nExtract ONLY the soft accordion bellows body from the small wooden bellows at the lower right of the reference. Preserve the exact existing three-quarter projection, warm dark brown leather/wood-toned folded material, deep zigzag pleats on the right side, and the light tan rope edging on the front. Draw the COMPLETE flexible shell: both the front face and right-side pleated face in one connected part, including the surfaces originally hidden underneath the top and bottom wooden boards, behind the brass front port, and behind the ivory hose. Fill in that obscured front surface with continuous matching brown folded leather. There must be no hole where the brass port used to cover it.\nREMOVE the two rigid wooden boards entirely, all brass/metal fittings and the ivory hose. REMOVE the mushroom, vents, cradle and eggs entirely. Only the soft bellows shell with its sewn/bound rope edges remains. No metal port, no rigid wooden plates, no extra hardware.\nKeep its reference neutral opening, not compressed or expanded. In the original 512 canvas this attachment occupies approximately x=395..479,y=336..399 and has a front-left face with right-side accordion pleats. Render this small part LARGE and isolated, centered on the transparent canvas, filling about 70 percent of the image width, for clean source texture. Keep the original slanted top/bottom edges of the projection. Complete all edges and leave overlap/padding under the future wooden boards. Clean alpha and dark outlined painterly game-icon finish, same palette and light as Image 1. No labels, text, background, checkerboard, shadows or watermark. This is production source art, not a diagram, not a contact sheet, not another pose."
+    },
+    {
+      "asset": "Source/rear-skirt-hidden-generated.png",
+      "prompt": "Use case: precise-object-edit. Production hidden-surface source ART, not a new pose. Image 1 is the single approved neutral pose. Draw ONLY the complete hanging dark coral-red mushroom UNDERSKIRT LOBE located behind the RIGHT vent and the wooden bellows. It is the lower-right red gill/skirt surface of this exact mushroom, not the large bright top cap.\nThis soft red rear lobe occupies approximately x=338..468, y=262..352 in the original 512 canvas. Its left end attaches under the large cap; it sweeps outward and down behind the right vent, then curls into a tapered rounded tip behind the bellows. Reconstruct ALL of its previously hidden surface behind that rigid vent and behind the bellows top board: continuous dark wine-red interior, salmon-coral rounded outer rim, matching original painterly shading, original fine very dark teal outline. Do not leave cutouts or holes for the vent or the bellows. Complete the lobe as a whole unoccluded flexible part, with enough overlap at its left attachment.\nKeep the SAME neutral relaxed curvature, original camera and original material; this is NOT a bent or animated alternate pose. Render only this separated red underskirt lobe, large and centered on a true transparent background. Remove all machinery, vents, wood, ropes, stem, eggs, cradle and the bright upper cap. No new tentacles or extra lobes, no gill line pattern that is absent in the original, no background, no labels or text or watermark. It is a single clean complete source attachment to be re-registered behind the original fixed machinery."
+    }
+  ],
+  "neutralPartReconstruction": {
+    "asset": "Source/neutral-complete-parts-generated.png",
+    "parts": [
+      "bellows-top-board",
+      "bellows-bottom-board",
+      "lever",
+      "stem"
+    ],
+    "prompt": "Use case: precise-object-edit. FOUR complete production SOURCE PARTS for a layered 2D bone/mesh rig, all from the SAME NEUTRAL POSE of the reference. Not four animation poses, not a diagram or mockup.\nImage 1 is the sole design authority. Reconstruct these isolated parts in a transparent 2x2 equal-cell source atlas. Same original painterly game-icon style, exact materials and colors, thin dark teal outlines, original three-quarter view. Each part should be centered and large within its own cell, with generous clear alpha separation. No labels, text, backgrounds, glow, drop shadows, checkerboard or watermark. Clean full silhouettes, no neighboring-object fragments or holes. These must be complete usable source attachments, including hidden edges.\nTOP LEFT: The TOP WOODEN BOARD of the small lower-right bellows. A thin, rigid, warm brown wooden slab in the original slanted perspective: top face visible, shallow front and right edge, brass nail heads near its front corners. Entire board including the hidden underside edge and rear corner; no accordion folds, ropes, hose, red mushroom, port or other surrounding pixels. Preserve the reference top board's low flat silhouette.\nTOP RIGHT: The BOTTOM WOODEN BOARD of that same bellows. Entire thin wooden base slab from the same perspective, warm brown front and right side bevels and brass nail heads. The full back/left edges must be completed where the hose hid them. No leather folds, ropes, hose or port attached, no surrounding pixels. Keep this base plank rigid and thin, not a thick box.\nBOTTOM LEFT: ONLY the small CENTRAL BRASS ROTATING LEVER from the reference collar. It consists of a round brass pivot head on the left, one short slender arm pointing down-right at the original neutral angle, and one small round brass knob at the right end. Complete every edge, connected as ONE rigid piece. Preserve its exact original proportions and warm highlights, NO wooden backing, rope, rectangular frame, secondary arm or extra mechanism. Isolate the metal silhouette perfectly.\nBOTTOM RIGHT: The COMPLETE UPPER IVORY MUSHROOM STEM hidden under the cap and collar, a continuous soft ivory neck. Reconstruct the hidden top and lower continuation as a smooth rounded stalk with original warm cream shading and dark teal contour. Narrow neck with rounded top and slightly widening bottom; no cap, wood, brass, ropes, eggs or cradle. This is only the upper soft stem attachment, not the whole nest or a new character.\nAll four are source attachments for the one existing neutral pose. Do not introduce alternate positions, opening extremes or new animation frames."
+  },
+  "reusedHiddenArtwork": [
+    "Source/level-03-rear-canopy.png"
+  ],
+  "approvedReference": "References/approved-neutral.png",
+  "particlePrototype": {
+    "source": "Source/spore-grain-source.png",
+    "output": "Particles/spore.png",
+    "originalGeneratedFile": "D:/.codex/generated_images/01a18f37-2081-7af1-823b-8d88fb188691/exec-cccb15f5-1e92-4abe-826c-0bff637a2934.png",
+    "crop": [
+      43,
+      592,
+      32,
+      32
+    ]
+  },
+  "capRepair": {
+    "source": "H:/Spawner/DesignAssets/Animations/Nests/SporeLevel02-v4/Sources/canopy-03.png",
+    "sourceDimensions": [
+      1254,
+      1254
+    ],
+    "capTextureDimensions": [
+      1024,
+      1024
+    ],
+    "geometryDimensions": [
+      512,
+      512
+    ],
+    "operations": [
+      "alpha component cleanup",
+      "native source registration",
+      "continuous cap-only source layers",
+      "fixed vents drawn after cap layers",
+      "native texture sampling"
+    ],
+    "sourcePoseCount": 1,
+    "additionalFullPoseDrawings": 0,
+    "currentTaskPaidGenerations": 0
+  }
+}

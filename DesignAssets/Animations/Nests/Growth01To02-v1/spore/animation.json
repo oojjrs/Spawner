@@ -1,0 +1,1 @@
+{"sheet": "growth.png", "frameSize": [512, 512], "frameCount": 16, "columns": 4, "rows": 4, "anchor": [256, 448], "loop": false, "durationsMs": [500, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 1000], "sourceScale": 1.3820598006644518, "source": "Sources/drawn-cels.png"}

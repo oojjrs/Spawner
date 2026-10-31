@@ -1,0 +1,28 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "approvedDesign": "H:/Spawner/DesignAssets/Nests/Level04-Civilization-v1/spring.png",
+  "registeredReferenceSource": "H:/Spawner/DesignAssets/Animations/Nests/Growth03To04-v2/spring/end.png",
+  "reference": "reference.png",
+  "prompts": [
+    {
+      "output": "splash-keyposes.png",
+      "input": "H:/Spawner/DesignAssets/Nests/Level04-Civilization-v1/spring.png",
+      "transparentBackground": true,
+      "prompt": "Use case: stylized-concept. Production animation SOURCE ART atlas, not a mockup or preview. Reference image establishes the EXACT ivory/gold aquatic nest's painterly turquoise WATER style, white foam and upper-left light. Draw ONLY the small central WATER-IMPACT SPLASH at the base of its lower waterfall, no nest or architecture. One transparent wide horizontal sprite atlas with THREE equal square cells in ONE ROW, generous gutters, no text or borders. Each cell is the SAME local camera and registration: bottom water-contact line at 78 percent cell height, center at 50 percent width, perspective ellipse width 2.8 times depth. Keep the footprint equal. LEFT: EMERGENCE pose, a compact turquoise-white crown just rising from the impact, low connected surface and two short upward fingers. MIDDLE: PEAK pose, the same water crown opens, four rounded upward water tongues of unequal heights and a few fully separated small cyan droplets; crown height about 30 percent cell height, width 65 percent. RIGHT: DESCENT pose, same connected footprint flattening back into a low foamy scalloped surface, shorter curling water tongues falling outward and a few descending droplets, no giant circular ring. All three are distinct temporally neighboring key drawings of ONE modest water splash, matching the reference's creamy white foam, saturated translucent cyan water, restrained dark-teal edges and soft painted light. Keep a connected small central crown in all poses so it can be rigged between drawings. No abstract starburst, giant ocean wave, rocks, objects, black outlines, shadows, ground plane, background color, labels or glow haze. Transparent RGBA. No checkerboard painted into the artwork. This atlas will be cropped into real animation source cels."
+    },
+    {
+      "output": "wheel-underpainting-v1.png",
+      "input": "wheel-edit-target.png",
+      "transparentBackground": true,
+      "prompt": "Use case: precise-object-edit. Exact registration-preserving underpainting of the supplied crop for a layered 2D waterwheel animation. Keep the original complete canvas, camera, all stone surfaces, gold front curved ring, bronze axle and its cap, gold rear ring, right-side waterfall curtain, horizontal silver/gold piston rod, cylinder and foreground rim in EXACTLY the same positions and shapes. Remove ONLY the large horizontal chunky gold paddle planks spanning between the front and rear wheel rings AND the gold radial spokes inside the front ring. Paint the newly exposed wheel surfaces behind them: inside the front ring, a continuous dark warm brown matte wooden end disk behind the unchanged axle hub; between the front and rear rings, a continuous shaded dark brown wooden cylindrical core, preserving depth and original shadow values. These blank rotationally symmetric surfaces will receive separate animated spoke and paddle attachments. No visible static paddle boards or radial spokes should remain in this underpainting. Complete all formerly hidden brown surfaces with smooth restrained wood texture and soft occlusion. The thin golden near-side ring, fixed bearing, axle cap and rear ring remain intact. Keep water outside the removed planks unchanged; do not replace water with brown. Do not invent second wheels, new pipes or geometry. No reframing, altered perspective, zoom, decoration, labels, outline thickening, grain, blur, ground shadow or checkerboard. Preserve existing transparent background. This is an actual source underlayer, not a presentation."
+    },
+    {
+      "output": "wheel-underpainting.png",
+      "input": "wheel-underpainting-v1.png",
+      "transparentBackground": true,
+      "prompt": "Use case: precise-object-edit. Repair this animation underpainting. Remove ONLY the single remaining rectangular horizontal GOLD PADDLE PLANK in the lower middle, the small gold board directly in front of the silver piston rod and under the large brown cylindrical core (about x=0.48 to0.67, y=0.61 to0.72). Fill its formerly hidden area with the dark brown cylindrical core at left and the continuously falling cyan waterfall at right. Complete the thin silver piston rod behind where the plank overlapped it, keeping the silver rod's exact height and width. Keep EVERYTHING ELSE pixel-aligned and unchanged: the large gold front rim, axle cap, bare dark brown end disk, bare wooden cylindrical core, water curtain, gear, cylinder, stones, framing and lighting. No gold paddle planks or radial spokes anywhere in the empty wheel. No new objects, no zoom, no camera change. Preserve the original transparent background. Production exact local edit."
+    }
+  ],
+  "reusedArt": ["ripple-ring.png"],
+  "rigConstruction": "Depth-tested rigid wheel paddles and spokes, separately masked waterflow fields and surfaces, three drawn splash contours driving one continuous crown mesh, ballistic droplet attachments and masked tank bubbles. No pose alpha blending."
+}

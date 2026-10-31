@@ -1,0 +1,23 @@
+{
+  "provider": "OpenAI built-in image_gen",
+  "reference": "H:/Spawner/DesignAssets/Nests/Level04-Civilization-v1/spore.png",
+  "prompt": "Create actual production source attachments for animating the exact provided mushroom incubation nest. This is not a concept or preview. Preserve the source's precise coral red, warm ivory, polished brass, copper, dark outline and painterly highlights, exact orthographic front three-quarter camera. Transparent RGBA source atlas, strict 3 columns by 2 rows, six completely isolated parts centered in their cells, generous transparent gaps, no labels or text. TOP LEFT: ONLY the complete coral mushroom canopy, including the entire red pleated underside and all contours normally hidden behind the ivory neck, columns and vents. Reproduce the exact source's broad low dome and draping edges; no flesh stem, fittings, pipes, vents, base or seeds. TOP MIDDLE: the upper fixed structure of the source with its canopy removed: ONLY the ivory upper neck above its gold collar and the left and right ivory/brass vent assemblies, connected by the existing back wall and pipes. Restore the rounded tops and back surfaces previously hidden under the canopy. No canopy, bowl, seeds, lower columns or platform. This is a faithful underpainting attachment to fill only newly exposed tiny areas, NOT a redesign. TOP RIGHT: ONLY the right machine's complete internal dark bronze fan ROTOR, removed from its golden housing. Make it perfectly frontal and circular so it can be rotated in its own plane and projected back into the reference's tilted opening. Same source's curved dark metal blades, brass central hub, accurate dark ridges and reflected highlights; complete all hidden blade tips. No external housing, pipes, tank, background or other objects. BOTTOM LEFT: ONLY the clean turquoise liquid and inner rear wall of the source's small right cylindrical glass pressure chamber, exact source camera and proportions, with ALL BUBBLES REMOVED. Do not include brass caps, rims, pillars or plumbing. Its color and bright turquoise translucency must match the source's chamber. BOTTOM MIDDLE: ONE isolated small cyan bubble matching the original tank bubbles, circular translucent turquoise body with pale cyan highlight and subtle dark teal outline. No cluster, no tank. BOTTOM RIGHT: ONLY the fixed golden outer ring and rim of the source's fan housing, in exact original three-quarter perspective, with transparent empty aperture and completed inner edges, no blades, no central hub, no other machinery. Each object is complete, not cropped. No extra ornaments. These are neutral-position rig attachments, not six animation poses.",
+  "transparentBackground": true,
+  "generatedAtlas": "Source/generated-attachments.png",
+  "usedGeneratedParts": [
+    "tank-liquid-source",
+    "bubble"
+  ],
+  "sourcePoseCount": 1,
+  "referencePose": "Keyframes/neutral.png",
+  "construction": {
+    "canopy": "original visible upper canopy; local weighted mesh with fixed lower seam",
+    "fan": "original rotor inverse-projected to a frontal disk, rotated in its plane and projected into fixed casing",
+    "tank": "generated clean liquid interior and bubble, original glass and brass foreground retained"
+  },
+  "timing": {
+    "fps": 20,
+    "durationMs": 4000,
+    "frameCount": 80
+  }
+}

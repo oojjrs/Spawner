@@ -1,0 +1,18 @@
+[
+  {
+    "image": "level03-closed.png",
+    "referenced_image_paths": [
+      "H:/Spawner/DesignAssets/Animations/Nests/Idle03-v1/sprout/keypose.png"
+    ],
+    "transparent_background": true,
+    "prompt": "Use case: precise-object-edit. Edit the provided single nest sprite into ONE production keyframe, not an atlas. Keep the entire original lower green leaf rosette, wood/brass cradle frame, left crank, all machinery, camera, painting style, original fine contour thickness and overall scale and planted baseline EXACTLY as the image. Do not redraw or redesign the frame, the leaves, or the lower half. Change ONLY the articulation of the four IVORY FLOWER PETALS and tuck the central golden seed and sprout behind them. Draw the two front curled petals folding inward/upward to meet as a broad CLOSED BUD, not a sharp pointed cone. The two rear ivory petals meet behind them with their original pointed tips only slightly closer together. Keep the flower ROOT at exactly the same location just above the front brown wooden cup. The wood supports remain rigid and connected at their existing pins to the petals, adjusting their angles only as needed. The seed and sprout must be completely HIDDEN by the closed petals, not erased from the plant. Solid complete petal silhouettes, one clean central seam, no holes. One complete isolated nest, same original frame composition with blank space above and below retained. Exact same green/ivory/gold palette, smooth painted shading. TRUE TRANSPARENT BACKGROUND, no atmosphere, no glow, no smoky vignette, no external shadow, no backdrop. No labels, no text, no extra objects, no platform or glass dome. This drawing is the FULLY CLOSED LEVEL3 keyframe at 1.5 seconds and will become the actual source for later part rigging. Preserve original pixel positions of all unchanged regions."
+  },
+  {
+    "image": "level04-closed.png",
+    "referenced_image_paths": [
+      "H:/Spawner/DesignAssets/Nests/Level04-Civilization-v1/Runtime/sprout.png"
+    ],
+    "transparent_background": true,
+    "prompt": "Use case: precise-object-edit. Modify this exact ONE original level4 nest sprite into a single FULLY CLOSED FLOWER keyframe. This is a minimal precise local edit: KEEP the glass dome, all golden arch ribs, turquoise panels, top green crest, left glass vessel, pipes, entire ivory-and-gold platform, steps, four supports, lower green leaf rosette, camera, contour thickness, lighting and original image placement EXACTLY unchanged. Edit ONLY the four central IVORY FLOWER PETALS plus the articulated support angle directly needed. Fold the two front petals inward/upward into a plump rounded closed bud with a single neat central seam; the two rear petals fold inward behind them. Same exact petal anatomy, not a new tulip or a single cone. The little golden seed and green two-leaf sprout are entirely HIDDEN inside the bud. The bud base remains at the EXACT original attachment immediately above the central wooden lip, not higher or lower, and the petal tips do not extend above the glass crest. Mechanisms stay rigid and connected at their pin joints. Match the source's smooth painterly ivory and sage texture, thin dark teal outline and warm gold. No added decoration. Keep the exact original complete nest size, center, square framing and transparent margins. Output ONE complete isolated sprite with TRUE transparent background, no halo, vignette, glow or ground shadow, no background, no text, no sheet. This is the actual production CLOSED LEVEL4 keyframe at 3.2 seconds, not a concept image. Preserve every unchanged pixel and architectural proportion."
+  }
+]

@@ -1,0 +1,1 @@
+{"keyframe": "Sources/reference.png", "approvedSource": "AnimationCandidates/SpringNestLevel03NoWheelV1/keypose.png", "baseKeyframeApprovedByUser": true, "reusedArt": ["Sources/ripple-ring.png", "Sources/droplet.png"], "runtimeContract": {"frameSize": [512, 512], "columns": 12, "rows": 10, "frameCount": 120, "periodMs": 4000, "pivot": [256, 448]}, "renderer": "Renderer.cs"}

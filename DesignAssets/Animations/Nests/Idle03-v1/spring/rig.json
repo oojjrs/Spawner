@@ -1,0 +1,136 @@
+{
+  "frameSize": [
+    512,
+    512
+  ],
+  "fps": 30,
+  "frameCount": 120,
+  "periodMs": 4000,
+  "pivot": [
+    256,
+    448
+  ],
+  "rootMotion": false,
+  "wheel": {
+    "center": [
+      91,
+      304
+    ],
+    "planeU": [
+      32,
+      0
+    ],
+    "planeV": [
+      0,
+      44
+    ],
+    "depth": [
+      39,
+      -2
+    ],
+    "paddleCount": 8,
+    "paddleWidth": 0.36,
+    "paddleRadialThickness": [
+      0.86,
+      1.06
+    ],
+    "turns": 1
+  },
+  "waterfalls": [
+    {
+      "name": "upper",
+      "phase": 0,
+      "rows": [
+        [
+          255,
+          211,
+          248
+        ],
+        [
+          262,
+          217,
+          254
+        ],
+        [
+          271,
+          221,
+          261
+        ],
+        [
+          280,
+          224,
+          263
+        ],
+        [
+          286,
+          231,
+          265
+        ]
+      ]
+    },
+    {
+      "name": "lower",
+      "phase": 0.25,
+      "rows": [
+        [
+          298,
+          252,
+          277
+        ],
+        [
+          303,
+          257,
+          284
+        ],
+        [
+          310,
+          260,
+          288
+        ],
+        [
+          319,
+          262,
+          290
+        ],
+        [
+          325,
+          264,
+          292
+        ]
+      ]
+    },
+    {
+      "name": "wheel",
+      "phase": 0.13,
+      "rows": [
+        [
+          279,
+          164,
+          175
+        ],
+        [
+          288,
+          168,
+          180
+        ],
+        [
+          300,
+          172,
+          184
+        ],
+        [
+          313,
+          175,
+          188
+        ],
+        [
+          328,
+          173,
+          186
+        ]
+      ]
+    }
+  ],
+  "method": "painted source parts, depth-tested rigid 3D wheel projection, original-water UV advection, masked pool refraction and painted droplets/ripples",
+  "sourceArt": "Sources/reference.png"
+}

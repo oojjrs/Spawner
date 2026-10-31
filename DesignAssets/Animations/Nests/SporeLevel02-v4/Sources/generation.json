@@ -1,0 +1,34 @@
+[
+  {
+    "key": "body",
+    "prompt": "Use case: precise-object-edit. Production layer for this exact 2D mushroom nursery, not a redesign. The reference image is the approved level-2 nest on a 512x512 canvas. Remove the ENTIRE coral mushroom canopy and all its underside pixels. Keep the ivory stem, broad ivory scalloped cradle, and exactly three coral eggs in the same camera, palette, proportions, lighting, outline and locations. Reconstruct the previously hidden upper stem and shoulders as a COMPLETE continuous ivory surface, including a softly rounded stem top reaching about (256,238); there must be no jagged cut, cap-colored scraps, black holes or missing surface. The stem extends behind the future canopy with generous overlap. Keep the cradle ground at y448 and centered at x256. The cradle occupies approximately x104..413, y304..448. Nothing except the complete ivory stem/cradle and its three eggs. Real transparent background, no matte, no chroma-key border, no labels, no grid, no shadow outside the object.",
+    "source": "D:\\.codex\\generated_images\\01a18c17-92f4-7da1-a550-399f89133205\\exec-2dd22c47-885e-4bf2-8144-0c8408aae8d9.png"
+  },
+  {
+    "key": "canopy",
+    "prompt": "Use case: precise-object-edit. Production rear-canopy layer for this exact approved 2D mushroom nest. Isolate ONLY the single coral mushroom canopy in the SAME camera, palette, outline, lighting, size and position as the 512x512 reference: approximate bounds x56..456,y157..325. Remove the entire ivory stem, nursery and all eggs. Paint the hidden underside behind the stem as one COMPLETE continuous softly shaded burgundy inner canopy connecting the left and right wings. Fill the central notch with the matching mushroom underside; no holes, cutouts, disconnected wings, stem-shaped void, ivory pixels or body remnants. Preserve the outer canopy silhouette and coral top from the reference, do not invent extra caps. This is a continuous flexible canopy texture with sufficient painted underside for animation. Real transparent background, no matte, no colored fringe, no text, no registration marks, no other objects.",
+    "source": "D:\\.codex\\generated_images\\01a18c17-92f4-7da1-a550-399f89133205\\exec-311a8936-3545-48f9-b0cb-7ccba73f5409.png"
+  },
+  {
+    "key": "mechanism",
+    "prompt": "Use case: precise-object-edit. Production animation layer from the approved level-3 reference. Keep ONLY the complete wood, rope, ivory and brass mechanism assembly: the central wooden collar and support frame, both round ivory/brass ventilation pods with slats, the right-hand wooden bellows/blower box and connecting pipe. Remove all coral mushroom canopies, the ivory nursery bowl, and every egg. Draw the hidden connecting frame and pipe surfaces completely where the bowl or canopy previously covered them, so this mechanical assembly is one intact rigid attachment without jagged cut boundaries. Preserve the reference camera, painterly style, outlines, proportions, lighting and positions. On its original 512x512 canvas the main vent/frame assembly is roughly x45..458,y218..310, and the right blower is x376..482,y325..420. Keep these placements and the generous transparent margin. Absolutely no coral fragments, fungus tissue, eggs, cracks, isolated debris, chroma-key border, text, labels, or registration marks. True transparent background.",
+    "source": "D:\\.codex\\generated_images\\01a18c17-92f4-7da1-a550-399f89133205\\exec-5b20a04d-7fa6-4fbc-8822-d8426c1ca1b7.png"
+  },
+  {
+    "key": "body-01",
+    "prompt": "Use case: precise-object-edit. Animation source layer from this exact approved level-1 mushroom nest. Remove the entire coral canopy, keeping ONLY the complete ivory nursery cradle, exactly TWO coral eggs, and ivory stem. Draw the previously hidden upper stem as a continuous softly rounded ivory surface with generous overlap for a moving canopy. No jagged cut, holes, leftover coral cap pixels or dangling outline. Keep the same compact stage-1 proportions, painterly lighting, outline, egg arrangement and camera. Original 512x512 registration: cradle x147..368,y349..448, stem top around y300, root (256,448). Do not add a third egg. Real transparent background, no colored matte, no text or marks.",
+    "reference": "References/level-01.png",
+    "source": "D:\\.codex\\generated_images\\01a18c17-92f4-7da1-a550-399f89133205\\exec-928bc1eb-82e0-4891-82b1-49c374c99a98.png"
+  },
+  {
+    "key": "canopy-03",
+    "prompt": "Use case: precise-object-edit. Isolate ONLY the large main coral mushroom canopy from this exact approved level-3 nest, as one complete animation layer. Remove the entire nursery, eggs, stem, ropes, machinery, vents, pipe, bellows box, and any small side canopy. Preserve the main canopy silhouette, size, lighting, pink top and burgundy underside, and the same camera. Paint its hidden central underside continuously so the underside has no stem-shaped hole, cutouts or mechanical remnants. Main canopy on the original 512x512 canvas: x28..464,top111, central front lip around y220, underside wings down to about y303. One intact continuous cap, generous painted hidden surface for deformation. True transparent background, no colored fringe, no labels, no grid or marks.",
+    "reference": "References/level-03.png",
+    "source": "D:\\.codex\\generated_images\\01a18c17-92f4-7da1-a550-399f89133205\\exec-874b9579-70f2-4d3e-8825-915b60c1a0fe.png"
+  },
+  {
+    "key": "frame",
+    "prompt": "Use case: precise-object-edit. Animation part from this existing wood-and-brass mechanism layer. Keep ONLY the COMPLETE central wooden collar, rope bindings, upright wooden support posts and the long horizontal wooden support beam. Remove both large round ivory ventilation pods entirely, and remove the right blower box and every pipe. Paint the frame surfaces and rounded beam ends that were hidden behind the vent pods: the frame must be intact and continuous with no cut-off stubs, missing patches or floating pieces. Preserve the exact wood texture, rope, brass fittings, scale, camera, lighting, proportions and canvas locations. On a normalized 512x512 canvas retain the central collar around x190..320,y220..305, left support near x150,y220..330 and right support near x360,y220..330. This is one complete rigid wooden frame layer, with the center neck hole intact, true transparency elsewhere. No mushroom tissue, eggs, bowl, vents, blower, labels, matte or marks.",
+    "source": "D:\\.codex\\generated_images\\01a18c17-92f4-7da1-a550-399f89133205\\exec-3efcb305-6ba4-42f3-a76a-84758aaa1186.png"
+  }
+]

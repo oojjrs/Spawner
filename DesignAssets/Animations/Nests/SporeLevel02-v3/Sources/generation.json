@@ -1,0 +1,25 @@
+[
+  [
+    "parts",
+    [
+      "H:/Spawner/DesignAssets/Animations/Nests/SporeLevel02-v3/References/level-02.png"
+    ],
+    "Create a PRODUCTION SOURCE PART ATLAS for the supplied approved mushroom nest. Exact 2-column by 2-row grid, four equal square cells, transparent RGBA, no labels/gridlines/text. Preserve the reference design, coral cap, dark burgundy underside, warm ivory flesh, three coral eggs, fine dark teal outlines, lighting and slightly elevated front view. TOP LEFT: the complete isolated broad main canopy, including continuous UNDERSIDE behind the stem, no stem-shaped holes. TOP RIGHT: the complete ivory body with central stem and the nursery containing exactly three eggs, with the canopy completely removed; finish the stem's hidden upper contour and all flesh behind it. BOTTOM LEFT: the same complete canopy in a lowered protective pose, outer edges curling DOWN over the eggs; draw the coherent softer dome shape rather than flattening a pasted image. No bowl or stem in this cell. BOTTOM RIGHT: the low foreground ivory nursery lip alone, complete around both ends, with no eggs, canopy or central stem. Each part centered in its own cell with alpha padding. NO second mushroom, side canopy, duplicate stem, props, ground or checkerboard. These are actual editable attachments for a layered rig and cap-closing growth motion, not a mockup."
+  ],
+  [
+    "growth12",
+    [
+      "H:/Spawner/DesignAssets/Animations/Nests/SporeLevel02-v3/References/level-01.png",
+      "H:/Spawner/DesignAssets/Animations/Nests/SporeLevel02-v3/References/level-02.png"
+    ],
+    "Draw a finished 4-column by 4-row SPRITE KEY-POSE ATLAS, 16 complete drawn poses, transparent RGBA background, no text/borders/grid. Image 1 is the EXACT approved level-1 start; image 2 is the EXACT new level-2 finish. Keep that art style, camera, lighting, thin dark-teal outline, coral canopy, cream fleshy stem and nursery. ONE main canopy and ONE central supporting stem in EVERY pose, never any secondary mushroom. Each equal square cell is a fixed camera canvas with the same floor line and object centered; size grows intentionally from level 1 to level 2, never auto-zoom each cell. In the same camera, the level-1 width must be 75% of the final level-2 width. Row-major ordered poses: 1 approved level-1 neutral (two eggs); 2 canopy slightly lowered; 3 canopy lower; 4 canopy halfway lowered; 5 canopy lower still; 6 almost closed; 7 fully lowered cap shelters the bowl and hides most eggs; 8 same closed pose at first intermediate grown size; 9 larger closed pose; 10 full level-2 size but canopy still lowered; 11 that full-size low-canopy hold; 12 canopy half lifted, three eggs now visible; 13 canopy raised farther; 14 almost the exact approved level-2 neutral; 15 subtle settling pose; 16 EXACT approved new level-2 neutral. The eggs and nursery remain grounded; only the flexible cap/stem articulate during lowering/lifting, and the intentional middle growth enlarges and matures the nest. Distinguish anticipation, pause low, growth while protected, pause, lift and settle. No ghosting, dissolves, motion trails, decorative particles, extra objects or clipping. Draw each pose deliberately and consistently, preserving the complete coherent stem-to-cap attachment."
+  ],
+  [
+    "growth23",
+    [
+      "H:/Spawner/DesignAssets/Animations/Nests/SporeLevel02-v3/References/level-02.png",
+      "H:/Spawner/DesignAssets/Animations/Nests/SporeLevel02-v3/References/level-03.png"
+    ],
+    "Draw a finished 4-column by 4-row SPRITE KEY-POSE ATLAS, 16 complete drawn poses, transparent RGBA background, no text/borders/grid. Image 1 is the exact NEW level-2 nest (ONE canopy, one coherent stem, three eggs); Image 2 is the exact approved technological level-3 target with its existing wood/brass ventilation machinery. Maintain fixed camera, floor line and center for every equal square cell, same illustrated lighting, fine dark teal outline, coral canopy and cream body. Do not auto-zoom cells; the nest matures intentionally into the larger target. Row-major pose order: 1 EXACT NEW level-2 neutral; 2 main canopy starts lowering; 3 half lowered; 4 fully lowered over nursery; 5 body/central stem grows while cap stays down; 6 wood-brass central collar assembles inside the protective canopy; 7 left ventilation fitting swings into place; 8 right fitting and side bellows appear as the small rear mushroom grows into the TARGET structure; 9 assembled machinery while canopy stays low; 10 canopy starts lifting; 11 quarter-open; 12 half-open; 13 three-quarter-open; 14 almost the target shape; 15 full target, mechanisms settle; 16 EXACT approved level-3 target. The added small rear mushroom is allowed ONLY during this explicit level-3 growth, never in the initial level-2 poses. Keep the nursery and three eggs grounded and intact. Use clear deliberate complete drawings, not pasted crossfades or whole-image wobble. No faces, labels, captions, ground scene, particles, ghost outlines, floating disconnected machinery, holes or clipped parts. This is actual animation source artwork used for the growth sequence."
+  ]
+]

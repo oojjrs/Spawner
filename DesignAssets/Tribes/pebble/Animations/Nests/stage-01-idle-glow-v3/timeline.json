@@ -1,0 +1,52 @@
+{
+  "canvas": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "frameCount": 48,
+  "frameMs": 100,
+  "periodMs": 4800,
+  "columns": 8,
+  "source": "source/approved.png",
+  "occlusion": "source/radiance-occlusion.png",
+  "runtimeScale": 0.6255555555555555,
+  "runtimePivot": [
+    256,
+    465
+  ],
+  "emitters": [
+    {
+      "source": "source/radiance-center.png",
+      "phaseRadians": 0,
+      "offset": [
+        0,
+        24
+      ],
+      "center": [
+        260,
+        414
+      ],
+      "radius": [
+        58,
+        27
+      ]
+    }
+  ],
+  "intensity": [
+    0.01,
+    1.85
+  ],
+  "tint": [
+    1,
+    0.55,
+    0.12
+  ],
+  "blurRadius": 8,
+  "exposure": 2.05,
+  "rootMotion": false,
+  "ambientDimming": 0.72
+}

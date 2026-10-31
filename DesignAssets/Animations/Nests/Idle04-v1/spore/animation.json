@@ -1,0 +1,763 @@
+{
+  "name": "spore-nest-level-04-idle", 
+  "frameSize": [
+    512, 
+    512
+  ], 
+  "frameCount": 80, 
+  "fps": 20, 
+  "columns": 10, 
+  "rows": 8, 
+  "durationsMs": [
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50, 
+    50
+  ], 
+  "durationMs": 4000, 
+  "root": [
+    256, 
+    448
+  ], 
+  "loop": true, 
+  "rootMotion": false, 
+  "animation": "idle-sheet.png", 
+  "preview": "preview.webp", 
+  "gifPreview": "preview.gif", 
+  "poster": "poster.png", 
+  "rig": "rig.json", 
+  "sources": {
+    "reference": "Source/reference.png", 
+    "generation": "Source/generated-attachments.png", 
+    "renderer": "Source/build.py"
+  }, 
+  "method": "one-neutral-source-separated-canopy-weighted-mesh-plus-fixed-plane-rotor-and-clipped-bubbles", 
+  "sourcePoseCount": 1, 
+  "additionalFullPoseDrawings": 0, 
+  "keyframeApproval": {
+    "keyframe": "Keyframes/neutral.png", 
+    "referenceSha256": "0432b32d865909746609e6b57bf4ab459a1bd50c7f6a974b4d35509f47366ae7", 
+    "evidence": "user-confirmed-in-current-chat"
+  }, 
+  "timeline": [
+    {
+      "frame": 0, 
+      "seconds": 0.0, 
+      "center": 0.0, 
+      "left": 0.0, 
+      "right": 0.0, 
+      "fanDegrees": 0.0
+    }, 
+    {
+      "frame": 1, 
+      "seconds": 0.05, 
+      "center": 0.0, 
+      "left": 0.0, 
+      "right": 0.0, 
+      "fanDegrees": 4.5
+    }, 
+    {
+      "frame": 2, 
+      "seconds": 0.1, 
+      "center": 0.0, 
+      "left": 0.0, 
+      "right": 0.0, 
+      "fanDegrees": 9.0
+    }, 
+    {
+      "frame": 3, 
+      "seconds": 0.15, 
+      "center": 0.0, 
+      "left": 0.0, 
+      "right": 0.0, 
+      "fanDegrees": 13.5
+    }, 
+    {
+      "frame": 4, 
+      "seconds": 0.2, 
+      "center": 0.0, 
+      "left": 0.0, 
+      "right": 0.0, 
+      "fanDegrees": 18.0
+    }, 
+    {
+      "frame": 5, 
+      "seconds": 0.25, 
+      "center": 0.0, 
+      "left": 0.0, 
+      "right": 0.0, 
+      "fanDegrees": 22.5
+    }, 
+    {
+      "frame": 6, 
+      "seconds": 0.3, 
+      "center": 0.0, 
+      "left": 0.0, 
+      "right": 0.0, 
+      "fanDegrees": 27.0
+    }, 
+    {
+      "frame": 7, 
+      "seconds": 0.35, 
+      "center": 0.000876275217167232, 
+      "left": 0.0, 
+      "right": 0.0, 
+      "fanDegrees": 31.5
+    }, 
+    {
+      "frame": 8, 
+      "seconds": 0.4, 
+      "center": 0.006525883105351724, 
+      "left": 1.2851761190525958e-48, 
+      "right": 0.0, 
+      "fanDegrees": 36.0
+    }, 
+    {
+      "frame": 9, 
+      "seconds": 0.45, 
+      "center": 0.02045314838156858, 
+      "left": 0.000876275217167232, 
+      "right": 1.2851761190525958e-48, 
+      "fanDegrees": 40.5
+    }, 
+    {
+      "frame": 10, 
+      "seconds": 0.5, 
+      "center": 0.0449050300836381, 
+      "left": 0.006525883105351724, 
+      "right": 0.000876275217167232, 
+      "fanDegrees": 45.0
+    }, 
+    {
+      "frame": 11, 
+      "seconds": 0.55, 
+      "center": 0.08101082886787417, 
+      "left": 0.020453148381568604, 
+      "right": 0.006525883105351724, 
+      "fanDegrees": 49.5
+    }, 
+    {
+      "frame": 12, 
+      "seconds": 0.6, 
+      "center": 0.12892189430677234, 
+      "left": 0.0449050300836381, 
+      "right": 0.02045314838156856, 
+      "fanDegrees": 54.0
+    }, 
+    {
+      "frame": 13, 
+      "seconds": 0.65, 
+      "center": 0.18795133218669863, 
+      "left": 0.08101082886787417, 
+      "right": 0.0449050300836381, 
+      "fanDegrees": 58.5
+    }, 
+    {
+      "frame": 14, 
+      "seconds": 0.7, 
+      "center": 0.25671371180557706, 
+      "left": 0.12892189430677234, 
+      "right": 0.08101082886787411, 
+      "fanDegrees": 63.0
+    }, 
+    {
+      "frame": 15, 
+      "seconds": 0.75, 
+      "center": 0.3332647732705788, 
+      "left": 0.18795133218669863, 
+      "right": 0.12892189430677234, 
+      "fanDegrees": 67.5
+    }, 
+    {
+      "frame": 16, 
+      "seconds": 0.8, 
+      "center": 0.41524113479580993, 
+      "left": 0.2567137118055773, 
+      "right": 0.18795133218669863, 
+      "fanDegrees": 72.0
+    }, 
+    {
+      "frame": 17, 
+      "seconds": 0.85, 
+      "center": 0.5, 
+      "left": 0.3332647732705788, 
+      "right": 0.25671371180557706, 
+      "fanDegrees": 76.5
+    }, 
+    {
+      "frame": 18, 
+      "seconds": 0.9, 
+      "center": 0.5847588652041902, 
+      "left": 0.41524113479580993, 
+      "right": 0.3332647732705788, 
+      "fanDegrees": 81.0
+    }, 
+    {
+      "frame": 19, 
+      "seconds": 0.95, 
+      "center": 0.6667352267294211, 
+      "left": 0.5, 
+      "right": 0.4152411347958098, 
+      "fanDegrees": 85.5
+    }, 
+    {
+      "frame": 20, 
+      "seconds": 1.0, 
+      "center": 0.7432862881944224, 
+      "left": 0.5847588652041902, 
+      "right": 0.5, 
+      "fanDegrees": 90.0
+    }, 
+    {
+      "frame": 21, 
+      "seconds": 1.05, 
+      "center": 0.8120486678133012, 
+      "left": 0.6667352267294213, 
+      "right": 0.5847588652041902, 
+      "fanDegrees": 94.5
+    }, 
+    {
+      "frame": 22, 
+      "seconds": 1.1, 
+      "center": 0.8710781056932273, 
+      "left": 0.7432862881944224, 
+      "right": 0.6667352267294213, 
+      "fanDegrees": 99.0
+    }, 
+    {
+      "frame": 23, 
+      "seconds": 1.15, 
+      "center": 0.9189891711321264, 
+      "left": 0.8120486678133012, 
+      "right": 0.7432862881944224, 
+      "fanDegrees": 103.5
+    }, 
+    {
+      "frame": 24, 
+      "seconds": 1.2, 
+      "center": 0.9550949699163617, 
+      "left": 0.8710781056932276, 
+      "right": 0.8120486678133012, 
+      "fanDegrees": 108.0
+    }, 
+    {
+      "frame": 25, 
+      "seconds": 1.25, 
+      "center": 0.9795468516184311, 
+      "left": 0.9189891711321264, 
+      "right": 0.8710781056932273, 
+      "fanDegrees": 112.5
+    }, 
+    {
+      "frame": 26, 
+      "seconds": 1.3, 
+      "center": 0.9934741168946475, 
+      "left": 0.9550949699163617, 
+      "right": 0.9189891711321259, 
+      "fanDegrees": 117.0
+    }, 
+    {
+      "frame": 27, 
+      "seconds": 1.35, 
+      "center": 0.9991237247828334, 
+      "left": 0.9795468516184311, 
+      "right": 0.9550949699163624, 
+      "fanDegrees": 121.5
+    }, 
+    {
+      "frame": 28, 
+      "seconds": 1.4, 
+      "center": 1.0, 
+      "left": 0.9934741168946483, 
+      "right": 0.9795468516184311, 
+      "fanDegrees": 126.0
+    }, 
+    {
+      "frame": 29, 
+      "seconds": 1.45, 
+      "center": 1.0, 
+      "left": 0.9991237247828342, 
+      "right": 0.9934741168946475, 
+      "fanDegrees": 130.5
+    }, 
+    {
+      "frame": 30, 
+      "seconds": 1.5, 
+      "center": 1.0, 
+      "left": 1.0, 
+      "right": 0.9991237247828334, 
+      "fanDegrees": 135.0
+    }, 
+    {
+      "frame": 31, 
+      "seconds": 1.55, 
+      "center": 1.0, 
+      "left": 1.0, 
+      "right": 1.0, 
+      "fanDegrees": 139.5
+    }, 
+    {
+      "frame": 32, 
+      "seconds": 1.6, 
+      "center": 1.0, 
+      "left": 1.0, 
+      "right": 1.0, 
+      "fanDegrees": 144.0
+    }, 
+    {
+      "frame": 33, 
+      "seconds": 1.65, 
+      "center": 1.0, 
+      "left": 1.0, 
+      "right": 1.0, 
+      "fanDegrees": 148.5
+    }, 
+    {
+      "frame": 34, 
+      "seconds": 1.7, 
+      "center": 1.0, 
+      "left": 1.0, 
+      "right": 1.0, 
+      "fanDegrees": 153.0
+    }, 
+    {
+      "frame": 35, 
+      "seconds": 1.75, 
+      "center": 1.0, 
+      "left": 1.0, 
+      "right": 1.0, 
+      "fanDegrees": 157.5
+    }, 
+    {
+      "frame": 36, 
+      "seconds": 1.8, 
+      "center": 1.0, 
+      "left": 1.0, 
+      "right": 1.0, 
+      "fanDegrees": 162.0
+    }, 
+    {
+      "frame": 37, 
+      "seconds": 1.85, 
+      "center": 1.0, 
+      "left": 1.0, 
+      "right": 1.0, 
+      "fanDegrees": 166.5
+    }, 
+    {
+      "frame": 38, 
+      "seconds": 1.9, 
+      "center": 1.0, 
+      "left": 1.0, 
+      "right": 1.0, 
+      "fanDegrees": 171.0
+    }, 
+    {
+      "frame": 39, 
+      "seconds": 1.95, 
+      "center": 0.99956851590855, 
+      "left": 1.0, 
+      "right": 1.0, 
+      "fanDegrees": 175.5
+    }, 
+    {
+      "frame": 40, 
+      "seconds": 2.0, 
+      "center": 0.9967349913726423, 
+      "left": 1.0, 
+      "right": 1.0, 
+      "fanDegrees": 180.0
+    }, 
+    {
+      "frame": 41, 
+      "seconds": 2.05, 
+      "center": 0.9895924363732373, 
+      "left": 0.99956851590855, 
+      "right": 1.0, 
+      "fanDegrees": 184.5
+    }, 
+    {
+      "frame": 42, 
+      "seconds": 2.1, 
+      "center": 0.9767358838579163, 
+      "left": 0.9967349913726423, 
+      "right": 0.99956851590855, 
+      "fanDegrees": 189.0
+    }, 
+    {
+      "frame": 43, 
+      "seconds": 2.15, 
+      "center": 0.9572205544936634, 
+      "left": 0.9895924363732373, 
+      "right": 0.9967349913726423, 
+      "fanDegrees": 193.5
+    }, 
+    {
+      "frame": 44, 
+      "seconds": 2.2, 
+      "center": 0.9305200214196464, 
+      "left": 0.9767358838579163, 
+      "right": 0.9895924363732372, 
+      "fanDegrees": 198.0
+    }, 
+    {
+      "frame": 45, 
+      "seconds": 2.25, 
+      "center": 0.896484375, 
+      "left": 0.9572205544936634, 
+      "right": 0.9767358838579163, 
+      "fanDegrees": 202.5
+    }, 
+    {
+      "frame": 46, 
+      "seconds": 2.3, 
+      "center": 0.855298387576605, 
+      "left": 0.9305200214196466, 
+      "right": 0.9572205544936634, 
+      "fanDegrees": 207.0
+    }, 
+    {
+      "frame": 47, 
+      "seconds": 2.35, 
+      "center": 0.8074396782218716, 
+      "left": 0.896484375, 
+      "right": 0.9305200214196464, 
+      "fanDegrees": 211.5
+    }, 
+    {
+      "frame": 48, 
+      "seconds": 2.4, 
+      "center": 0.7536368774915214, 
+      "left": 0.855298387576605, 
+      "right": 0.896484375, 
+      "fanDegrees": 216.0
+    }, 
+    {
+      "frame": 49, 
+      "seconds": 2.45, 
+      "center": 0.6948277921773662, 
+      "left": 0.8074396782218716, 
+      "right": 0.8552983875766047, 
+      "fanDegrees": 220.5
+    }, 
+    {
+      "frame": 50, 
+      "seconds": 2.5, 
+      "center": 0.6321175700600938, 
+      "left": 0.7536368774915214, 
+      "right": 0.8074396782218716, 
+      "fanDegrees": 225.0
+    }, 
+    {
+      "frame": 51, 
+      "seconds": 2.55, 
+      "center": 0.5667368646620456, 
+      "left": 0.6948277921773668, 
+      "right": 0.7536368774915214, 
+      "fanDegrees": 229.5
+    }, 
+    {
+      "frame": 52, 
+      "seconds": 2.6, 
+      "center": 0.4999999999999999, 
+      "left": 0.6321175700600938, 
+      "right": 0.6948277921773662, 
+      "fanDegrees": 234.0
+    }, 
+    {
+      "frame": 53, 
+      "seconds": 2.65, 
+      "center": 0.43326313533795446, 
+      "left": 0.5667368646620456, 
+      "right": 0.6321175700600938, 
+      "fanDegrees": 238.5
+    }, 
+    {
+      "frame": 54, 
+      "seconds": 2.7, 
+      "center": 0.3678824299399056, 
+      "left": 0.4999999999999999, 
+      "right": 0.566736864662045, 
+      "fanDegrees": 243.0
+    }, 
+    {
+      "frame": 55, 
+      "seconds": 2.75, 
+      "center": 0.30517220782263343, 
+      "left": 0.43326313533795446, 
+      "right": 0.4999999999999999, 
+      "fanDegrees": 247.5
+    }, 
+    {
+      "frame": 56, 
+      "seconds": 2.8, 
+      "center": 0.2463631225084787, 
+      "left": 0.3678824299399063, 
+      "right": 0.43326313533795446, 
+      "fanDegrees": 252.0
+    }, 
+    {
+      "frame": 57, 
+      "seconds": 2.85, 
+      "center": 0.19256032177812776, 
+      "left": 0.30517220782263343, 
+      "right": 0.3678824299399056, 
+      "fanDegrees": 256.5
+    }, 
+    {
+      "frame": 58, 
+      "seconds": 2.9, 
+      "center": 0.1447016124233952, 
+      "left": 0.2463631225084787, 
+      "right": 0.30517220782263343, 
+      "fanDegrees": 261.0
+    }, 
+    {
+      "frame": 59, 
+      "seconds": 2.95, 
+      "center": 0.10351562499999956, 
+      "left": 0.19256032177812776, 
+      "right": 0.24636312250847836, 
+      "fanDegrees": 265.5
+    }, 
+    {
+      "frame": 60, 
+      "seconds": 3.0, 
+      "center": 0.06947997858035349, 
+      "left": 0.1447016124233952, 
+      "right": 0.19256032177812776, 
+      "fanDegrees": 270.0
+    }, 
+    {
+      "frame": 61, 
+      "seconds": 3.05, 
+      "center": 0.042779445506336944, 
+      "left": 0.103515625, 
+      "right": 0.1447016124233952, 
+      "fanDegrees": 274.5
+    }, 
+    {
+      "frame": 62, 
+      "seconds": 3.1, 
+      "center": 0.02326411614208368, 
+      "left": 0.06947997858035349, 
+      "right": 0.10351562499999956, 
+      "fanDegrees": 279.0
+    }, 
+    {
+      "frame": 63, 
+      "seconds": 3.15, 
+      "center": 0.010407563626762428, 
+      "left": 0.042779445506336944, 
+      "right": 0.06947997858035349, 
+      "fanDegrees": 283.5
+    }, 
+    {
+      "frame": 64, 
+      "seconds": 3.2, 
+      "center": 0.0032650086273573464, 
+      "left": 0.02326411614208368, 
+      "right": 0.04277944550633683, 
+      "fanDegrees": 288.0
+    }, 
+    {
+      "frame": 65, 
+      "seconds": 3.25, 
+      "center": 0.00043148409145066235, 
+      "left": 0.010407563626762428, 
+      "right": 0.02326411614208368, 
+      "fanDegrees": 292.5
+    }, 
+    {
+      "frame": 66, 
+      "seconds": 3.3, 
+      "center": 0.0, 
+      "left": 0.0032650086273569023, 
+      "right": 0.010407563626762428, 
+      "fanDegrees": 297.0
+    }, 
+    {
+      "frame": 67, 
+      "seconds": 3.35, 
+      "center": 0.0, 
+      "left": 0.00043148409145066235, 
+      "right": 0.0032650086273573464, 
+      "fanDegrees": 301.5
+    }, 
+    {
+      "frame": 68, 
+      "seconds": 3.4, 
+      "center": 0.0, 
+      "left": 0.0, 
+      "right": 0.00043148409145066235, 
+      "fanDegrees": 306.0
+    }, 
+    {
+      "frame": 69, 
+      "seconds": 3.45, 
+      "center": 0.0, 
+      "left": 0.0, 
+      "right": 0.0, 
+      "fanDegrees": 310.5
+    }, 
+    {
+      "frame": 70, 
+      "seconds": 3.5, 
+      "center": 0.0, 
+      "left": 0.0, 
+      "right": 0.0, 
+      "fanDegrees": 315.0
+    }, 
+    {
+      "frame": 71, 
+      "seconds": 3.55, 
+      "center": 0.0, 
+      "left": 0.0, 
+      "right": 0.0, 
+      "fanDegrees": 319.5
+    }, 
+    {
+      "frame": 72, 
+      "seconds": 3.6, 
+      "center": 0.0, 
+      "left": 0.0, 
+      "right": 0.0, 
+      "fanDegrees": 324.0
+    }, 
+    {
+      "frame": 73, 
+      "seconds": 3.65, 
+      "center": 0.0, 
+      "left": 0.0, 
+      "right": 0.0, 
+      "fanDegrees": 328.5
+    }, 
+    {
+      "frame": 74, 
+      "seconds": 3.7, 
+      "center": 0.0, 
+      "left": 0.0, 
+      "right": 0.0, 
+      "fanDegrees": 333.0
+    }, 
+    {
+      "frame": 75, 
+      "seconds": 3.75, 
+      "center": 0.0, 
+      "left": 0.0, 
+      "right": 0.0, 
+      "fanDegrees": 337.5
+    }, 
+    {
+      "frame": 76, 
+      "seconds": 3.8, 
+      "center": 0.0, 
+      "left": 0.0, 
+      "right": 0.0, 
+      "fanDegrees": 342.0
+    }, 
+    {
+      "frame": 77, 
+      "seconds": 3.85, 
+      "center": 0.0, 
+      "left": 0.0, 
+      "right": 0.0, 
+      "fanDegrees": 346.5
+    }, 
+    {
+      "frame": 78, 
+      "seconds": 3.9, 
+      "center": 0.0, 
+      "left": 0.0, 
+      "right": 0.0, 
+      "fanDegrees": 351.0
+    }, 
+    {
+      "frame": 79, 
+      "seconds": 3.95, 
+      "center": 0.0, 
+      "left": 0.0, 
+      "right": 0.0, 
+      "fanDegrees": 355.5
+    }
+  ], 
+  "referenceSha256": "0432b32d865909746609e6b57bf4ab459a1bd50c7f6a974b4d35509f47366ae7", 
+  "gifBackground": "#23282c", 
+  "runtimeAnimation": "idle-sheet.webp"
+}

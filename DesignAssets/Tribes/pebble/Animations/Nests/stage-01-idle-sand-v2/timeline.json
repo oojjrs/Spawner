@@ -1,0 +1,26 @@
+{
+  "canvas": [512, 512],
+  "pivot": [256, 448],
+  "frameCount": 48,
+  "frameMs": 100,
+  "periodMs": 4800,
+  "columns": 8,
+  "source": "source/approved.png",
+  "effects": "source/sand-effects.png",
+  "runtimeScale": 0.6255555555555555,
+  "runtimePivot": [256, 465],
+  "fixed": ["roof", "supports", "entrance", "ground", "lighting"],
+  "events": [
+    {"startMs": 0, "origin": [202, 352], "landing": [217, 452], "durationMs": 1150, "grainCount": 100, "seed": 31, "dustWidth": 260, "drift": -40},
+    {"startMs": 1200, "origin": [315, 361], "landing": [299, 453], "durationMs": 1150, "grainCount": 100, "seed": 73, "dustWidth": 244, "drift": 40},
+    {"startMs": 2400, "origin": [211, 354], "landing": [225, 452], "durationMs": 1150, "grainCount": 100, "seed": 47, "dustWidth": 252, "drift": -36},
+    {"startMs": 3600, "origin": [304, 361], "landing": [291, 453], "durationMs": 1150, "grainCount": 100, "seed": 97, "dustWidth": 260, "drift": 38}
+  ],
+  "grainWidth": [10, 20],
+  "grainTravelMs": [600, 900],
+  "grainSpread": 29,
+  "dustDurationMs": 2350,
+  "dustOpacity": 0.98,
+  "dustHeightRatio": 0.60,
+  "rootMotion": false
+}
