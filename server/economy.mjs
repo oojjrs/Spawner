@@ -2,8 +2,8 @@ import { correctStartingEconomy, measureStartingEconomy } from "./start-economy.
 
 export const RESOURCE_ECONOMY = Object.freeze([
   { tribe: "bean", key: "clay", coverage: .035, amount: 12, harvestSeconds: 2 },
-  { tribe: "spore", key: "tree", coverage: null, amount: 2, harvestSeconds: 8.5 },
-  { tribe: "pebble", key: "pebbles", coverage: .045, amount: 12, harvestSeconds: 2.5 },
+  { tribe: "spore", key: "tree", coverage: null, amount: 30, harvestSeconds: 1 },
+  { tribe: "pebble", key: "pebbles", coverage: .045, amount: 12, harvestSeconds: 4 },
   { tribe: "spring", key: "dew", coverage: null, amount: 1, harvestSeconds: .8 }
 ].map(entry => Object.freeze(entry)));
 
@@ -69,7 +69,7 @@ export function populateWorldEconomy(world, fields) {
   world.foraging = [];
   world.economy = { seconds: 300, workers: 2, resources: RESOURCE_ECONOMY.map(policy => {
     const points = [...added.values()].filter(point => point[3] === policy.key);
-    return { ...policy, harvestSeconds: policy.key === "pebbles" && !fields.currentHarvest ? 3.5 : policy.harvestSeconds,
+    return { ...policy,
       cells: points.length, coverage: points.length / (size * size),
       amount: points.reduce((sum, point) => sum + point[2], 0), sectors: new Set(points.map(([x, y]) => Math.floor(y / 32) * 10 + Math.floor(x / 32))).size };
   }), starts: starts || measureStartingEconomy(world, RESOURCE_ECONOMY) };

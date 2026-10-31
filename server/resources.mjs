@@ -2,8 +2,9 @@ import { isTreeFood } from "./food.mjs";
 import { attributeCounts } from "./attributes.mjs";
 import { LEGACY_RESOURCE_HABITATS } from "./resource-legacy.mjs";
 import { RESOURCE_ECONOMY, isEconomyHabitat } from "./economy.mjs";
+import { resourceHabitatSuitability } from "./resource-habitats.mjs";
 
-export const REMOVED_RESOURCE_TYPES = Object.freeze(["twigs","bark","root-fiber","spider-silk","water","tree-sap","leaf-mold","resin","beeswax","dry-leaves","tree-fruit","berry-bush","seed-pods","root-bulbs","nutrient-moss"]);
+export const REMOVED_RESOURCE_TYPES = Object.freeze(["honey-mushrooms","twigs","bark","root-fiber","spider-silk","water","tree-sap","leaf-mold","resin","beeswax","dry-leaves","tree-fruit","berry-bush","seed-pods","root-bulbs","nutrient-moss"]);
 
 export function migrateResourceType(key) {
   if (key === "root-fiber") return "grass-fiber";
@@ -12,9 +13,8 @@ export function migrateResourceType(key) {
 }
 
 const resourceImages = {
-  "honey-mushrooms": "DesignAssets/Foods/food-mushroom-pile.png",
-  meat: "DesignAssets/Animations/BeetleDeath/dead-v2.png",
-  carapace: "DesignAssets/Animations/BeetleDeath/dead-v2.png",
+  meat: "DesignAssets/Foods/food-nutrients.png",
+  carapace: "DesignAssets/ResourceConcepts/v1/resource-carapace.png",
   tree: "DesignAssets/Terrain/standing-tree-smooth-atlas.png",
   dew: "DesignAssets/Resources/dew-grass.png",
   pebbles: "DesignAssets/Resources/pebbles.png",
@@ -26,8 +26,7 @@ const resourceImages = {
   quartz: "DesignAssets/ResourceConcepts/v1/resource-quartz.png"
 };
 const resourceCarryImages = {
-  "honey-mushrooms": "DesignAssets/Foods/food-mushroom-single.png",
-  meat: "DesignAssets/Foods/food-meat.png",
+  meat: "DesignAssets/Foods/food-nutrients.png",
   carapace: "DesignAssets/ResourceConcepts/v1/resource-carapace.png",
   tree: "DesignAssets/Resources/wood-carry.png",
   dew: "DesignAssets/Resources/dew-carry.png",
@@ -39,18 +38,17 @@ const resourceCarryImages = {
 };
 
 export const RESOURCE_TYPES = Object.freeze([
-  ["honey-mushrooms", "버섯", "food", 1.5, []],
-  ["meat", "고기", "food", 1.5, ["butchery"]],
-  ["carapace", "갑각", "material", 2, ["strength"]],
-  ["tree", "목재", "material", 5, []],
-  ["dew", "이슬방울", "material", .8, []],
-  ["pebbles", "자갈", "material", 2, ["strength"]],
-  ["clay", "비옥토", "material", 2, []],
-  ["sand", "모래", "material", 1.5, []],
-  ["grass-fiber", "풀섬유", "material", 2, ["strength"]],
-  ["iron-ore", "철광석", "material", 3, ["strength","strength"]],
-  ["copper-ore", "구리광석", "material", 3, ["strength","strength"]],
-  ["quartz", "수정", "material", 3, ["strength","strength"]]
+  ["meat", "양분", "food", 1.5, ["butchery"]],
+  ["carapace", "갑각", "material", 2, ["piercing"]],
+  ["tree", "목재", "material", 5, ["blade"]],
+  ["dew", "이슬방울", "material", .8, ["butchery"]],
+  ["pebbles", "자갈", "material", 2, ["piercing"]],
+  ["clay", "비옥토", "material", 2, ["excavation"]],
+  ["sand", "모래", "material", 1.5, ["excavation"]],
+  ["grass-fiber", "풀섬유", "material", 2, ["blade"]],
+  ["iron-ore", "철광석", "material", 3, ["piercing"]],
+  ["copper-ore", "구리광석", "material", 3, ["piercing"]],
+  ["quartz", "수정", "material", 3, ["piercing"]]
 ].map(([key, name, category, harvestSeconds, requirements]) => Object.freeze({
   key, name, category, harvestSeconds: RESOURCE_ECONOMY.find(entry => entry.key === key)?.harvestSeconds ?? harvestSeconds,
   harvestLocked: key === "honey-mushrooms", requirements: Object.freeze(requirements),
@@ -58,7 +56,6 @@ export const RESOURCE_TYPES = Object.freeze([
 })));
 
 export const FOOD_HABITATS = Object.freeze([
-  ["honey-mushrooms", ["forest"], []]
 ].map(([key, terrains, neighbors]) => Object.freeze({
   key, terrains: Object.freeze(terrains), neighbors: Object.freeze(neighbors)
 })));
@@ -81,7 +78,7 @@ const definitions = new Map(RESOURCE_TYPES.map(definition => [definition.key, de
 const resourceHabitats = new Map(RESOURCE_HABITATS.map(habitat => [habitat.key, habitat]));
 const legacyResourceHabitats = new Map(LEGACY_RESOURCE_HABITATS.map(habitat => [habitat.key, habitat]));
 const foodHabitats = new Map(FOOD_HABITATS.map(habitat => [habitat.key, habitat]));
-const terrainTypes = ["deep", "shallow", "coast", "land", "grassland", "forest", "lowMountain", "highMountain", "ridge", "swamp"];
+const terrainTypes = ["deep", "shallow", "coast", "land", "grassland", "forest", "lowMountain", "highMountain", "ridge", "swamp", "ford"];
 
 export function resourceDefinition(key) {
   return definitions.get(key);
@@ -89,6 +86,10 @@ export function resourceDefinition(key) {
 
 export function isTribeFood(resourceType, tribe, version) {
   return RESOURCE_ECONOMY.find(entry => entry.tribe === (tribe || "bean"))?.key === resourceType;
+}
+
+export function isColonyFood(resourceType, tribe, version) {
+  return resourceType === "meat" || isTribeFood(resourceType, tribe, version);
 }
 
 export function populateColonyFood(room) {
@@ -108,6 +109,9 @@ export function populateColonyFood(room) {
 export function isFoodHabitat(resourceType, world, x, y) {
   if (resourceType === "tree-fruit" && world.hazards?.[y * 320 + x]) return false;
   const habitat = foodHabitats.get(resourceType);
+  if (world.generationVersion >= 23 && resourceType === "honey-mushrooms" && x >= 0 && y >= 0 && x < 320 && y < 320) {
+    return Boolean(world.hydrology?.resourceHabitats && resourceHabitatSuitability(resourceType, y * 320 + x, world.terrain, world.hydrology));
+  }
   if (!habitat || x < 0 || y < 0 || x >= 320 || y >= 320 ||
     !habitat.terrains.includes(terrainTypes[world.terrain[y * 320 + x]])) return false;
   return !habitat.neighbors.length || [[1, 0], [-1, 0], [0, 1], [0, -1]].some(([dx, dy]) => {
@@ -148,16 +152,19 @@ export function resourceTypeForCell(cell, world) {
 }
 
 export function resourceHarvestSeconds(resourceType, world) {
-  if (!(world.generationVersion >= 11) && ["clay", "pebbles"].includes(resourceType)) return 2;
-  if (resourceType === "pebbles" && world.generationVersion < 15) return 3.5;
   return resourceDefinition(resourceType).harvestSeconds;
+}
+
+export function resourceHarvestMultiplier(resourceType, attributes) {
+  const definition = resourceDefinition(resourceType);
+  const level = definition?.requirements.reduce((highest, key) => Math.max(highest,
+    Number.isInteger(attributes?.[key]) ? Math.max(0, Math.min(4, attributes[key])) : 0), 0) || 0;
+  return [1, .75, .65, .55, .45][level];
 }
 
 export function resourceHarvestRequirements(cell, world, tribe) {
   if (!cell) return null;
-  if (RESOURCE_ECONOMY.some(entry => entry.key === cell.resourceType)) {
-    return isTribeFood(cell.resourceType, tribe, world.generationVersion) ? {} : null;
-  }
+  if (isTribeFood(cell.resourceType, tribe, world.generationVersion)) return {};
   const definition = resourceDefinition(cell.resourceType || resourceTypeForCell(cell, world));
   if (!definition || definition.harvestLocked) return null;
   const slots = [...definition.requirements];
@@ -218,14 +225,27 @@ export function populateResourceNodes(room) {
       room.food.set(key, { x, y, amount, initialAmount: amount, resourceType, kind: "resource", terrain: terrainTypes[terrain] });
     }
   }
-  room.resourceVersion = 2;
+  if (!(room.resourceVersion >= 3) && !(room.world.generationVersion >= 20)) {
+    const amount = RESOURCE_ECONOMY.find(entry => entry.key === "tree").amount;
+    for (const point of room.world.resources) {
+      if (point[3] === "tree" && point[2] > 0) point[2] = Math.max(amount, point[2]);
+    }
+    for (const cell of room.food.values()) {
+      if (cell.resourceType !== "tree" || cell.kind !== "resource" || cell.amount <= 0 ||
+          !Number.isFinite(cell.initialAmount)) continue;
+      const initialAmount = cell.initialAmount;
+      cell.initialAmount = Math.max(amount, initialAmount);
+      cell.amount += cell.initialAmount - initialAmount;
+    }
+  }
+  room.resourceVersion = 3;
 }
 
 
 export function populateForestResources(room) {
   const cells = new Uint8Array(320 * 320);
   for (let index = 0; index < cells.length; index++) {
-    if (room.world.terrain[index] === 5 && !room.world.hazards?.[index]) cells[index] = 1;
+    if (!(room.world.generationVersion >= 20) && room.world.terrain[index] === 5 && !room.world.hazards?.[index]) cells[index] = 1;
   }
   for (const burrow of room.world.burrows || []) {
     for (let y = burrow.y; y < burrow.y + burrow.height; y++) for (let x = burrow.x; x < burrow.x + burrow.width; x++) {
@@ -235,6 +255,9 @@ export function populateForestResources(room) {
   for (const cell of room.food.values()) {
     if ((!cell.key || cell.key === cell.x + "," + cell.y) && cell.kind !== "corpse" &&
       !isTreeFood(cell, room.world) && !(cell.resourceType === "tree" && cell.amount > 0)) cells[cell.y * 320 + cell.x] = 0;
+  }
+  if (room.world.generationVersion >= 20) for (const cell of room.food.values()) {
+    if (cell.resourceType === "tree" && cell.amount > 0) cells[cell.y * 320 + cell.x] = 1;
   }
   room.world.treeCells = cells;
   if (!room.world.depletedTrees) room.world.depletedTrees = new Set();

@@ -1,3 +1,5 @@
+import { recordPlacementMap } from "./placement-maps.mjs";
+
 const SIZE = 320;
 
 const HABITATS = {
@@ -28,23 +30,35 @@ export function generateWildlife(world, plans) {
     const [terrains, tilesPerUnit, nearWater] = HABITATS[plan.key];
     const cells = [], sectors = new Map();
     for (let index = 0; index < world.terrain.length; index++) {
-      if (!terrains.includes(world.terrain[index]) || world.hazards[index] || world.blocked[index] ||
+      const forest = world.hydrology?.forestMask?.[index];
+      if (!(terrains.includes(world.terrain[index]) || forest && terrains.includes(5)) || world.hazards[index] || world.blocked[index] ||
           world.reachable[index] < 0 || world.nestDistance[index] < plan.safeRadius ||
           nearWater && world.waterDistance[index] > 6) continue;
       cells.push(index);
-      if (world.resourceCells.has(index) || occupied.has(index)) continue;
+      if (world.resourceCells.has(index) && !(world.generationVersion >= 23 && (world.terrain[index] === 5 || forest)) || occupied.has(index)) continue;
       const x = index % SIZE, y = Math.floor(index / SIZE), sector = Math.floor(y / 16) * 20 + Math.floor(x / 16);
       const priority = wildlifeHash(index, world.seed + order * 7919);
       if (!sectors.has(sector) || priority < sectors.get(sector).priority) sectors.set(sector, { index, priority });
     }
     const candidates = [...sectors.values()].sort((left, right) =>
       wildlifeHash(left.index, world.seed + order * 3571 + 17) - wildlifeHash(right.index, world.seed + order * 3571 + 17));
-    const target = Math.floor(cells.length / tilesPerUnit), spawnPoints = [];
+    const target = plan.unique && world.generationVersion >= 34 ? 1 : Math.floor(cells.length / tilesPerUnit), spawnPoints = [];
     for (const candidate of candidates) {
       if (spawnPoints.length >= target) break;
       const index = candidate.index;
       if (spawnPoints.some(other => Math.hypot(index % SIZE - other % SIZE, Math.floor(index / SIZE) - Math.floor(other / SIZE)) < Math.sqrt(tilesPerUnit) / 3)) continue;
       spawnPoints.push(index); occupied.add(index);
+    }
+    if (world.hydrology?.placementMaps) {
+      const habitat = new Uint8Array(world.terrain.length), placement = new Uint8Array(world.terrain.length);
+      for (const index of cells) habitat[index] = 1;
+      for (const index of spawnPoints) placement[index] = 1;
+      recordPlacementMap(world.hydrology, "unit:" + plan.key + ":sector-priority", ["units"], null,
+        { unit: plan.key, minimum: 0, maximum: 4294967295, sample: (x, y) => wildlifeHash(y * SIZE + x, world.seed + order * 7919) });
+      recordPlacementMap(world.hydrology, "unit:" + plan.key + ":priority", ["units"], null,
+        { unit: plan.key, minimum: 0, maximum: 4294967295, sample: (x, y) => wildlifeHash(y * SIZE + x, world.seed + order * 3571 + 17) });
+      recordPlacementMap(world.hydrology, "unit:" + plan.key + ":habitat", ["units"], habitat, { unit: plan.key, minimum: 0, maximum: 1 });
+      recordPlacementMap(world.hydrology, "unit:" + plan.key + ":spawn", ["units"], placement, { unit: plan.key, minimum: 0, maximum: 1 });
     }
     const origin = spawnPoints[0] ?? cells[0] ?? 0;
     return { ...plan, terrains, nearWater, x: origin % SIZE, y: Math.floor(origin / SIZE), cells,

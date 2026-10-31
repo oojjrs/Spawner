@@ -104,6 +104,10 @@ test("방은 생성된 먹이량을 사용하고 저장된 채집 진행과 이�
   const restoredLegacy = restoreRoom(legacy);
   assert.deepEqual([...restoredLegacy.food], legacy.food);
   assert.equal(restoredLegacy.world.generationVersion, 1);
+  for (const [owner, data] of legacy.games) {
+    assert.deepEqual(restoredLegacy.games.get(owner).agents.map(agent => [agent.id, agent.x, agent.y]),
+      JSON.parse(data).state.agents.map(agent => [agent.id, agent.x, agent.y]));
+  }
   assert.equal(createHash("sha256").update(restoredLegacy.world.terrain).digest("hex"),
     "b6efeab31d349aa21d02bd9fd8cd9bfa9e7a31530079d130a2c7e57af364d78a");
 });

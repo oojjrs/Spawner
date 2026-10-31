@@ -15,7 +15,7 @@ export function startingTravel(world, camp) {
     for (const [nx, ny] of [[x - 1, y], [x + 1, y], [x, y - 1], [x, y + 1]]) {
       const next = ny * size + nx;
       if (nx < 0 || ny < 0 || nx >= size || ny >= size || world.terrain[next] < 2 || world.hazards[next] || blocked.has(next)) continue;
-      const candidate = cost + (world.terrain[next] >= 6 && world.terrain[next] <= 8 ? 5 : 3);
+      const candidate = cost + (world.terrain[next] === 10 ? 6 : world.terrain[next] >= 6 && world.terrain[next] <= 8 ? 5 : 3);
       if (candidate > limit || costs[next] >= 0 && costs[next] <= candidate) continue;
       costs[next] = candidate; buckets[candidate].push(next);
     }
@@ -37,7 +37,7 @@ export function measureStartingEconomy(world, policies) {
 }
 
 export function correctStartingEconomy(world, policies, points, available, habitat, minimumSites, minimumTravel) {
-  const size = world.size, targets = [120, 260, 120, 95], referenceCoverage = [.035, .2, .045, .17];
+  const size = world.size, targets = [120, 3900, 120, 95], referenceCoverage = [.035, .2, .045, .17];
   const before = measureStartingEconomy({ ...world, resources: [...points.values()] }, policies);
   const corrections = [];
   for (const [order, camp] of world.camps.entries()) {

@@ -1,8 +1,12 @@
 import { generateWildlife, generateResourceAreas } from "./ecology.mjs";
 import { populateWorldEconomy } from "./economy.mjs";
+import { generateHydrology, hydrologyResourceSuitability, populateWatershedResources } from "./hydrology.mjs";
+import { createResourceHabitats } from "./resource-habitats.mjs";
+import { generateLandscapeWorld } from "./island-world.mjs";
 
 export const SIZE = 320;
 const RESOURCE_RADIUS = 22, CAMP_MIN_DISTANCE = 80;
+const SPORE_NEST_CLEAR_RADIUS = 4;
 export const NEST_SAFE_RADIUS = 10;
 const TRIBE_STARTS = [{"key":"sprout","name":"새싹콩","terrainRule":null,"resourceRule":null},{"key":"spore","name":"포자버섯","terrainRule":null,"resourceRule":null},{"key":"pebble","name":"몽돌","terrainRule":null,"resourceRule":null},{"key":"spring","name":"샘방울","terrainRule":null,"resourceRule":null}];
 export const FORAGING = { workers: 2, seconds: 300, capacity: 2, speed: 0.5, harvestSeconds: 1.5, prepareSeconds: 1, unloadSeconds: 1, nearDistance: 16 };
@@ -10,7 +14,14 @@ const CREATURES = [{"key":"flower-tail-bird","name":"꽃꼬리새","group":"공�
 const UNIQUE_CREATURES = [{"key":"spring-keeper","name":"봄지기","group":"유니크 · 꽃꼬리새","terrains":[4,5],"unique":true},{"key":"lantern-keeper","name":"등불지기","group":"유니크 · 이슬토끼","terrains":[4,5],"unique":true},{"key":"old-garden-snail","name":"오래된 등짐","group":"유니크 · 보따리달팽이","terrains":[2,4,5],"unique":true},{"key":"walking-forest","name":"걸어가는 산","group":"유니크 · 넝쿨거북","terrains":[4,5],"unique":true},{"key":"white-paw","name":"흰발","group":"유니크 · 그늘족제비","terrains":[5],"unique":true},{"key":"spiny-back-leader","name":"가시등 우두머리","group":"유니크 · 가시등 딱정벌레","terrains":[3,4,5,6],"unique":true}];
 const FOOD_HABITATS = [{"key":"honey-mushrooms","terrains":["forest"],"neighbors":[]},{"key":"tree-fruit","terrains":["forest"],"neighbors":[]},{"key":"berry-bush","terrains":["grassland"],"neighbors":["forest"]},{"key":"seed-pods","terrains":["land","grassland"],"neighbors":[]},{"key":"root-bulbs","terrains":["grassland","forest"],"neighbors":[]},{"key":"nutrient-moss","terrains":["forest","swamp"],"neighbors":[]}];
 const RESOURCE_HABITATS = [{"key":"pebbles","terrains":["coast","land","lowMountain"],"neighbors":[],"rarity":"common","minDistance":4,"nodes":36,"separation":7},{"key":"clay","terrains":["coast","grassland","swamp"],"neighbors":["deep","shallow","coast","swamp"],"rarity":"uncommon","minDistance":24,"nodes":20,"separation":8},{"key":"sand","terrains":["coast"],"neighbors":[],"rarity":"common","minDistance":4,"nodes":28,"separation":7},{"key":"grass-fiber","terrains":["grassland","forest"],"neighbors":[],"rarity":"common","minDistance":4,"nodes":42,"separation":6},{"key":"iron-ore","terrains":["lowMountain"],"neighbors":[],"rarity":"rare","minDistance":48,"nodes":10,"separation":9},{"key":"copper-ore","terrains":["lowMountain"],"neighbors":[],"rarity":"rare","minDistance":48,"nodes":8,"separation":9},{"key":"quartz","terrains":["lowMountain"],"neighbors":[],"rarity":"rare","minDistance":56,"nodes":5,"separation":10}];
-const TERRAIN = ['deep', 'shallow', 'coast', 'land', 'grassland', 'forest', 'lowMountain', 'highMountain', 'ridge', 'swamp'];
+const RESOURCE_DISTRIBUTION = {
+  sand: { coverage: .2, separation: 2 },
+  "grass-fiber": { coverage: .08, separation: 2 },
+  "iron-ore": { coverage: .08, separation: 3 },
+  "copper-ore": { coverage: .06, separation: 3 },
+  quartz: { coverage: .03, separation: 4 }
+};
+const TERRAIN = ['deep', 'shallow', 'coast', 'land', 'grassland', 'forest', 'lowMountain', 'highMountain', 'ridge', 'swamp', 'ford'];
 const ENCOUNTER_RULES = {
 "flower-tail-bird": {
   "spawn": "시작부터 먹이터에서 활동한다.",
@@ -159,7 +170,27 @@ function noise(x, y, scale, seed) {
   return ((hash(ix, iy, seed) * (1 - tx) + hash(ix + 1, iy, seed) * tx) * (1 - ty) +
     (hash(ix, iy + 1, seed) * (1 - tx) + hash(ix + 1, iy + 1, seed) * tx) * ty) * 2 - 1;
 }
-export function generateMapWorld(seed, onProgress, version) {
+function distributeMountains(terrain, moisture, seed) {
+  const counts = new Uint32Array(9), candidates = [], scores = new Float32Array(terrain.length);
+  for (let index = 0; index < terrain.length; index++) {
+    const type = terrain[index];
+    if (type < 3 || type > 8) continue;
+    counts[type]++;
+    candidates.push(index);
+    const x = index % SIZE, y = Math.floor(index / SIZE);
+    scores[index] = noise(x, y, 18, seed + 127) * .72 + noise(x, y, 7, seed + 151) * .28;
+    if (type >= 6) terrain[index] = moisture[index] > 0.1 ? 5 : moisture[index] < -0.18 ? 3 : 4;
+  }
+  candidates.sort((left, right) => scores[right] - scores[left] || left - right);
+  const high = counts[7] + counts[8], total = counts[6] + high;
+  for (let order = 0; order < total; order++) {
+    terrain[candidates[order]] = order < counts[8] ? 8 : order < high ? 7 : 6;
+  }
+}
+export function generateMapWorld(seed, onProgress, version, capturePlacementMaps) {
+  if (version === undefined || version >= 26) return generateLandscapeWorld(seed, null, onProgress, TRIBE_STARTS, ENCOUNTER_PLANS, version, capturePlacementMaps);
+  if (version === undefined || version >= 23) return generateLandscapeWorld(seed, generateMapWorld(seed, undefined, 19), onProgress, TRIBE_STARTS, ENCOUNTER_PLANS, version);
+  const baseline = version === undefined || version >= 20 ? generateMapWorld(seed, undefined, 19) : null;
   let progress = 0;
   onProgress?.(0);
   const reportProgress = value => {
@@ -168,11 +199,11 @@ export function generateMapWorld(seed, onProgress, version) {
     onProgress?.(value);
   };
   for (let revision = 0; revision < 8; revision++) {
-    try { return generateWorldCandidate(seed, revision, reportProgress, version); }
+    try { return generateWorldCandidate(seed, revision, reportProgress, version, baseline); }
     catch (error) { if (!error.encounterPlacement || revision === 7) throw error; }
   }
 }
-function generateWorldCandidate(seed, revision, onProgress, version) {
+function generateWorldCandidate(seed, revision, onProgress, version, baseline) {
   const ecological = version === undefined || version >= 10;
   const terrain = new Uint8Array(SIZE * SIZE), hazards = new Uint8Array(SIZE * SIZE);
   const moistureField = new Float32Array(SIZE * SIZE), heightField = new Float32Array(SIZE * SIZE);
@@ -180,8 +211,8 @@ function generateWorldCandidate(seed, revision, onProgress, version) {
   const mountainDistance = new Uint8Array(SIZE * SIZE).fill(255);
   const clearance = new Uint8Array(SIZE * SIZE), region = new Int32Array(SIZE * SIZE);
   const queue = new Int32Array(SIZE * SIZE), visited = new Uint32Array(SIZE * SIZE), distance = new Uint8Array(SIZE * SIZE);
-  let stamp = 0, camps = [], starts = [], foodSites = new Map();
-  const walkable = index => terrain[index] >= 2 && terrain[index] <= 8 || terrain[index] === 9;
+  let stamp = 0, camps = [], starts = [], foodSites = new Map(), hydrology = null;
+  const walkable = index => terrain[index] >= 2 && terrain[index] <= 10;
   const safe = index => walkable(index) && !hazards[index];
   const abundance = index => hazards[index] ? 1.3 + Math.max(0, moistureField[index]) * 1.2 : 1;
   const adjacent = index => {
@@ -228,6 +259,11 @@ function generateWorldCandidate(seed, revision, onProgress, version) {
   }
   function allocate(site, tribe) {
     const points = neighborhood(site).filter(index => Math.max(Math.abs(index % SIZE - site.x), Math.abs(Math.floor(index / SIZE) - site.y)) > 3);
+    if (hydrology) {
+      const key = { sprout: "clay", spore: "tree", pebble: "pebbles", spring: "dew" }[tribe.key];
+      const suitable = points.filter(index => distance[index] <= 12 && hydrologyResourceSuitability(key, index, terrain, hydrology) > 0);
+      if (suitable.length < 16 || suitable.filter(index => distance[index] <= 4).length < 2) return null;
+    }
     const initialFood = ecological && tribe.key === 'sprout' ? points.filter(index => distance[index] <= 12 &&
       habitatFits(RESOURCE_HABITATS.find(habitat => habitat.key === 'clay'), index % SIZE, Math.floor(index / SIZE), true))
       .sort((left, right) => distance[left] - distance[right] || left - right).slice(0, 3) :
@@ -324,8 +360,7 @@ function generateWorldCandidate(seed, revision, onProgress, version) {
     const spores = [];
     for (let index = 0; index < terrain.length; index++) {
       const x = index % SIZE, y = Math.floor(index / SIZE);
-      hazards[index] = terrain[index] === 5 && moistureField[index] > 0.3 && adjacent(index).filter(next => terrain[next] === 5).length >= 3 &&
-        noise(x, y, 13, landscapeSeed + 373) > 0.25 ? 2 : 0;
+      hazards[index] = 0;
       if (swampDepth[index] >= 5) spores.push({ index,
         priority: swampDepth[index] + noise(x, y, 17, landscapeSeed + 379) * 2 + moistureField[index] });
     }
@@ -360,9 +395,11 @@ function generateWorldCandidate(seed, revision, onProgress, version) {
         if (inland[(y + dy) * SIZE + x + dx] < 2) terrain[index] = 2;
       }
     }
+    if (baseline) hydrology = generateHydrology(terrain, moistureField, heightField, SIZE, landscapeSeed, baseline, version);
+    else if (version === undefined || version >= 18) distributeMountains(terrain, moistureField, landscapeSeed);
     waterDistance.fill(255);
     let waterEnd = 0;
-    for (let index = 0; index < terrain.length; index++) if (terrain[index] < 2) {
+    for (let index = 0; index < terrain.length; index++) if (terrain[index] < 2 || terrain[index] === 10) {
       waterDistance[index] = 0; queue[waterEnd++] = index;
     }
     for (let cursor = 0; cursor < waterEnd; cursor++) {
@@ -392,8 +429,7 @@ function generateWorldCandidate(seed, revision, onProgress, version) {
             moistureField[index] > 0.1 && heightField[index] < 0.18) terrain[index] = 9;
       }
       for (let index = 0; index < terrain.length; index++) {
-        hazards[index] = terrain[index] === 9 && waterDistance[index] <= 3 && moistureField[index] > 0.2 ? 1 :
-          terrain[index] === 5 && moistureField[index] > 0.3 && adjacent(index).filter(next => terrain[next] === 5).length >= 3 ? 2 : 0;
+        hazards[index] = terrain[index] === 9 && waterDistance[index] <= 3 && moistureField[index] > 0.2 ? 1 : 0;
       }
     } else if (version === 7) {
       const swampCandidates = new Uint8Array(terrain.length);
@@ -426,10 +462,7 @@ function generateWorldCandidate(seed, revision, onProgress, version) {
         swampDepth[index] = Math.min(swampDepth[index], 1 + Math.min(swampDepth[index + 1], swampDepth[index + SIZE - 1], swampDepth[index + SIZE], swampDepth[index + SIZE + 1]));
       }
       for (let index = 0; index < terrain.length; index++) {
-        const x = index % SIZE, y = Math.floor(index / SIZE);
-        hazards[index] = terrain[index] === 9 && swampDepth[index] >= 5 && moistureField[index] > 0.2 ? 1 :
-          terrain[index] === 5 && moistureField[index] > 0.3 && adjacent(index).filter(next => terrain[next] === 5).length >= 3 &&
-          noise(x, y, 13, landscapeSeed + 373) > 0.25 ? 2 : 0;
+        hazards[index] = terrain[index] === 9 && swampDepth[index] >= 5 && moistureField[index] > 0.2 ? 1 : 0;
       }
     } else {
       swampCount = placeSwamps(landscapeSeed);
@@ -527,6 +560,7 @@ function generateWorldCandidate(seed, revision, onProgress, version) {
   const occupied = new Set([...food, ...resources].map(([x, y]) => y * SIZE + x));
   const outsideStarts = (x, y, minimum) => camps.every(camp => Math.hypot(x - camp.x, y - camp.y) > Math.max(RESOURCE_RADIUS, minimum));
   function habitatFits(habitat, x, y, diagonal) {
+    if (hydrology) return hydrologyResourceSuitability(habitat.key, y * SIZE + x, terrain, hydrology) > 0;
     if (!habitat.terrains.includes(TERRAIN[terrain[y * SIZE + x]])) return false;
     if (ecological && habitat.key === 'pebbles') return waterDistance[y * SIZE + x] <= 6 || mountainDistance[y * SIZE + x] <= 6;
     if (!habitat.neighbors.length) return true;
@@ -549,12 +583,15 @@ function generateWorldCandidate(seed, revision, onProgress, version) {
       const index = y * SIZE + x;
       if (resourceReachable[index] && !occupied.has(index) && outsideStarts(x, y, habitat.minDistance) && habitatFits(habitat, x, y, true)) candidates.push(index);
     }
-    const target = habitat.nodes + Math.ceil(candidates.filter(index => hazards[index]).length * 0.1 / (habitat.separation ** 2));
+    const distribution = version === undefined || version >= 19 ? RESOURCE_DISTRIBUTION[habitat.key] : null;
+    const spacing = distribution?.separation ?? habitat.separation;
+    const target = (distribution ? Math.ceil(candidates.length * distribution.coverage) : habitat.nodes) +
+      Math.ceil(candidates.filter(index => hazards[index]).length * 0.1 / (spacing ** 2));
     const gravelWeight = index => ecological && habitat.key === 'pebbles' && waterDistance[index] <= 6 && mountainDistance[index] <= 6 ? 4 : 1;
     candidates.sort((a, b) => hash(a % SIZE, Math.floor(a / SIZE), seed + 719) / abundance(a) / gravelWeight(a) - hash(b % SIZE, Math.floor(b / SIZE), seed + 719) / abundance(b) / gravelWeight(b));
     for (const index of candidates) {
       if (placed.length >= target) break;
-      const x = index % SIZE, y = Math.floor(index / SIZE), separation = habitat.separation / Math.sqrt(abundance(index));
+      const x = index % SIZE, y = Math.floor(index / SIZE), separation = spacing / Math.sqrt(abundance(index));
       if (occupied.has(index) || placed.some(point => Math.hypot(point[0] - x, point[1] - y) < separation)) continue;
       const node = [x, y, Math.round(50 * abundance(index)), habitat.key]; resources.push(node); placed.push(node); occupied.add(index);
     }
@@ -784,10 +821,25 @@ function generateWorldCandidate(seed, revision, onProgress, version) {
 
   onProgress(1);
   const world = { seed, size: SIZE, terrain, hazards, food, resources, camps, burrows, encounters, foraging, tribeStarts: TRIBE_STARTS };
+  if (version === undefined || version >= 17) {
+    const camp = camps.find(camp => camp.tribe === "spore");
+    for (let dy = -SPORE_NEST_CLEAR_RADIUS; dy <= SPORE_NEST_CLEAR_RADIUS; dy++) {
+      for (let dx = -SPORE_NEST_CLEAR_RADIUS; dx <= SPORE_NEST_CLEAR_RADIUS; dx++) {
+        const index = (camp.y + dy) * SIZE + camp.x + dx;
+        if (dx * dx + dy * dy <= SPORE_NEST_CLEAR_RADIUS ** 2 && terrain[index] === 5) terrain[index] = 4;
+      }
+    }
+    world.food = world.food.filter(([x, y, , type]) => type !== "honey-mushrooms" || terrain[y * SIZE + x] === 5);
+  }
   if (version === undefined || version >= 11) populateWorldEconomy(world, { moisture: moistureField, waterDistance, mountainDistance,
     reachable: paths[0], paths, correctStarts: version === undefined || version >= 12, minimumSites: version === undefined || version >= 13 ? 16 : 0,
     minimumTravel: version === undefined || version >= 14 ? 5 : 6, currentHarvest: version === undefined || version >= 15,
     sparseDew: version === undefined || version >= 16 });
+  if (hydrology) {
+    world.hydrology = hydrology;
+    if (version === undefined || version >= 22) hydrology.resourceHabitats = createResourceHabitats(world);
+    populateWatershedResources(world, baseline, paths);
+  }
   if (ecological) {
     world.resourceAreas = generateResourceAreas(world);
     world.tribeStarts = TRIBE_STARTS.map(tribe => ({ ...tribe, terrainRule: true, resourceRule: true }));
