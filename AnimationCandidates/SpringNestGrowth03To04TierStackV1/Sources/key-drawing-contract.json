@@ -1,0 +1,48 @@
+{
+  "canvas": [
+    512, 
+    512
+  ], 
+  "root": [
+    256, 
+    448
+  ], 
+  "fixedRegions": [
+    [
+      0, 
+      328, 
+      512, 
+      512
+    ]
+  ], 
+  "upperSourceRegion": [
+    18, 
+    96, 
+    477, 
+    305
+  ], 
+  "upperTranslation": [
+    0, 
+    48
+  ], 
+  "newArtwork": "connected masonry and water-channel surfaces between the locked source regions", 
+  "partExtraction": false, 
+  "rigging": false, 
+  "interpolation": false, 
+  "status": "confirmed", 
+  "upperIncludes": "same reservoir, arches, upper steps and complete pressure machinery", 
+  "editableRegions": [
+    [
+      18, 
+      230, 
+      211, 
+      328
+    ], 
+    [
+      195, 
+      304, 
+      408, 
+      328
+    ]
+  ]
+}

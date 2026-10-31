@@ -1,0 +1,104 @@
+{
+  "canvas": [
+    512,
+    512
+  ],
+  "root": [
+    256,
+    448
+  ],
+  "approval": "pending",
+  "growth": "two-discrete-quantum-jumps-while-closed",
+  "poseOpacityBlend": false,
+  "growthDuringOpening": false,
+  "keys": [
+    {
+      "id": "K0",
+      "state": "level02-open",
+      "closed": false,
+      "level": 2,
+      "originalReference": "H:\\Spawner\\DesignAssets\\Animations\\Nests\\Growth02To03-v3\\pebble\\start.png",
+      "offset": [
+        0,
+        0
+      ],
+      "image": "KeyPoses/K0.png"
+    },
+    {
+      "id": "K1",
+      "state": "level02-closed",
+      "closed": true,
+      "level": 2,
+      "source": "Sources/K1-drawing.png",
+      "canvasScale": 0.4082934609250399,
+      "offset": [
+        -12,
+        -31
+      ],
+      "image": "KeyPoses/K1.png"
+    },
+    {
+      "id": "K2",
+      "state": "intermediate-closed",
+      "closed": true,
+      "level": 2.5,
+      "source": "Sources/K2-drawing.png",
+      "canvasScale": 0.4082934609250399,
+      "offset": [
+        0,
+        10
+      ],
+      "image": "KeyPoses/K2.png"
+    },
+    {
+      "id": "K3",
+      "state": "level03-closed",
+      "closed": true,
+      "level": 3,
+      "source": "Sources/K3-drawing.png",
+      "canvasScale": 0.4082934609250399,
+      "offset": [
+        0,
+        -3
+      ],
+      "image": "KeyPoses/K3.png"
+    },
+    {
+      "id": "K4",
+      "state": "level03-open",
+      "closed": false,
+      "level": 3,
+      "originalReference": "H:\\Spawner\\DesignAssets\\Nests\\Level03-Tech-v1\\pebble.png",
+      "offset": [
+        0,
+        0
+      ],
+      "image": "KeyPoses/K4.png"
+    }
+  ],
+  "transitions": [
+    {
+      "from": "K0",
+      "to": "K1",
+      "kind": "close"
+    },
+    {
+      "from": "K1",
+      "to": "K2",
+      "kind": "quantum-jump",
+      "holdAfter": true
+    },
+    {
+      "from": "K2",
+      "to": "K3",
+      "kind": "quantum-jump",
+      "holdAfter": true
+    },
+    {
+      "from": "K3",
+      "to": "K4",
+      "kind": "open",
+      "growth": false
+    }
+  ]
+}

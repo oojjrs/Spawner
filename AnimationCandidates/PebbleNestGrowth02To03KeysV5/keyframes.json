@@ -1,0 +1,101 @@
+{
+  "frameSize": [
+    512,
+    512
+  ],
+  "root": [
+    256,
+    448
+  ],
+  "durationMs": 5000,
+  "approval": "pending",
+  "supersedes": "PebbleNestGrowth02To03KeysV4",
+  "keys": [
+    {
+      "id": "K0",
+      "timeSeconds": 0,
+      "image": "KeyPoses/K0.png",
+      "source": "original-reference",
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "K1",
+      "timeSeconds": 0.95,
+      "image": "KeyPoses/K1.png",
+      "source": "Sources/K1-drawing.png",
+      "canvasScale": 0.4082934609250399,
+      "offset": [
+        0,
+        7
+      ]
+    },
+    {
+      "id": "K2",
+      "timeSeconds": 1.4,
+      "image": "KeyPoses/K2.png",
+      "source": "Sources/K2-drawing.png",
+      "canvasScale": 0.4082934609250399,
+      "offset": [
+        0,
+        -13
+      ]
+    },
+    {
+      "id": "K3",
+      "timeSeconds": 1.85,
+      "image": "KeyPoses/K3.png",
+      "source": "Sources/K3-drawing.png",
+      "canvasScale": 0.4082934609250399,
+      "offset": [
+        0,
+        -4
+      ]
+    },
+    {
+      "id": "K4",
+      "timeSeconds": 2.15,
+      "image": "KeyPoses/K4.png",
+      "source": "Sources/K4-drawing.png",
+      "canvasScale": 0.4082934609250399,
+      "offset": [
+        0,
+        -5
+      ]
+    },
+    {
+      "id": "K5",
+      "timeSeconds": 2.5,
+      "image": "KeyPoses/K5.png",
+      "source": "Sources/K5-drawing.png",
+      "canvasScale": 0.4082934609250399,
+      "offset": [
+        0,
+        19
+      ]
+    },
+    {
+      "id": "K6",
+      "timeSeconds": 2.9,
+      "image": "KeyPoses/K6.png",
+      "source": "Sources/K6-drawing.png",
+      "canvasScale": 0.4082934609250399,
+      "offset": [
+        0,
+        1
+      ]
+    },
+    {
+      "id": "K7",
+      "timeSeconds": 3.6,
+      "image": "KeyPoses/K7.png",
+      "source": "original-reference",
+      "offset": [
+        0,
+        0
+      ]
+    }
+  ]
+}

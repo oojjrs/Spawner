@@ -1,0 +1,24 @@
+{
+  "status": "approved-keyframes-rendered", 
+  "approval": {
+    "userInstruction": "해봐", 
+    "date": "2026-10-31", 
+    "target": "KeyPoses/stage-01-stone-spring.png", 
+    "sha256": "a283c64fa93fc0a4479bda03b579f2f5140e385ecedaf8b7a663dd91ff53bcff"
+  }, 
+  "stageSources": [
+    "KeyPoses/stage-00-level03.png", 
+    "KeyPoses/stage-01-stone-spring.png", 
+    "KeyPoses/stage-02-level04.png"
+  ], 
+  "stageChangeMs": [
+    1400, 
+    2760
+  ], 
+  "bodyTransform": "identity", 
+  "bodyInterpolation": false, 
+  "bodyCrossfade": false, 
+  "newPartExtraction": false, 
+  "fullAnimationRender": true, 
+  "representativePlaybackBeforeFullProduction": true
+}

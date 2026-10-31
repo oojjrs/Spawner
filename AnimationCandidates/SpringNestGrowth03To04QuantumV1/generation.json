@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1, 
+  "provider": "built-in image_gen", 
+  "asset": "SpringNestGrowth03To04QuantumV1", 
+  "status": "approved-keyframes-rendered-and-playback-checked", 
+  "method": "fixed-stage-quantum-jumps-after-droplet-submersion", 
+  "reference": "AnimationCandidates/SpringNestGrowth02To03QuantumV3", 
+  "canvas": [
+    512, 
+    512
+  ], 
+  "root": [
+    256, 
+    448
+  ], 
+  "durationMs": 4000, 
+  "plannedStageChangeMs": [
+    1400, 
+    2760
+  ], 
+  "plannedFullySubmergedMs": [
+    1320, 
+    2680
+  ], 
+  "bodyTransform": "identity", 
+  "bodyInterpolation": false, 
+  "bodyCrossfade": false, 
+  "partExtraction": false, 
+  "rigging": "reused-droplet-and-water-entry-rig", 
+  "animationRendered": true, 
+  "stageSources": [
+    "KeyPoses/stage-00-level03.png", 
+    "KeyPoses/stage-01-stone-spring.png", 
+    "KeyPoses/stage-02-level04.png"
+  ], 
+  "newDrawings": 1, 
+  "generatedSource": "D:\\.codex\\generated_images\\01a18fdc-6f03-73a2-a7a1-0c85189aee86\\exec-3a534d7f-20aa-4676-a8f8-2405cb6b1571.png", 
+  "generationCalls": [
+    {
+      "referenced_image_paths": [
+        "H:/Spawner/DesignAssets/Animations/Nests/Idle04-v2/spring/keypose.png", 
+        "H:/Spawner/DesignAssets/Animations/Nests/Idle03-v2/spring/keypose.png"
+      ], 
+      "transparent_background": true, 
+      "prompt": "Use case: precise-object-edit. Draw ONE complete production MIDDLE STAGE for a fixed-stage quantum-jump spring-nest growth animation, between the supplied level3 and level4. This is a coherent functional fixed form to hold on screen, not a frame of smooth morphing, not a partial construction, effect or sprite sheet. Image1 LEVEL4 is the exact design/camera/material authority. Image2 LEVEL3 is only starting-identity context.\nPRESERVE image1's ENTIRE LOWER BASIN and bottom: same broad oval footprint, original flowing thin ivory/teal wave ribbons, small teal scrolls, gold joins, turquoise water interior, rim, all feet, outline and texture. Keep original square framing and large transparent top margin, 512-equivalent canvas/root(256,448), same original lower silhouette x17..495 bottom448. No zoom or per-object recentering. Do not redesign the lower bowl or add a big front spiral medallion.\nREBUILD ONLY the UPPER architecture as an EARLY LOW IVORY STONE RESERVOIR: broad shallow round upper pool with pale ivory/gold lip on SHORT solid aqua/ivory pillars. Reservoir crest around y168, between level3 top206 and final level4 top112. The support wall has only low compact complete shallow arch openings; all pillars and walls are fully joined, never broken columns or a hovering bowl. A short central TWO-STEP waterfall runs continuously into the lower basin. LEFT is a short TWO-STEP ivory/gold stone chute using image1's exact rounded materials, still lower/simpler than the finished three-stage left chute. Keep exposed masonry faces completely drawn and water channels functional. This stage has upgraded the bowl and learned masonry, while the final jump raises the reservoir and completes the tall arches and pressure system.\nOn the RIGHT there is NO glass pressure tank, return pipe, side pipe, round valve, wooden sluice or brass crank. Instead a finished low ivory/teal stone overflow parapet and a simple integrated round stone mounting base occupy their proper final location. Paint all wall/water/rim surfaces behind removed devices, no cutout holes, ghost pipes or orphan gold fragments. No left waterwheel, spokes, axle, gears or piston anywhere.\nOne solid complete whole nest including full bottom and water floor. Exact reference painterly aquamarine/ivory/restrained gold, dark teal outlines, upper-left light, same slightly elevated frontal camera. Preserve water as functional turquoise falls/ripples in the same art style. No water dome hiding architecture, loose particles, glow, ground shadow, text, diagram, labels, collage or sheet. Genuine transparent RGBA."
+    }, 
+    {
+      "referenced_image_paths": [
+        "D:/.codex/generated_images/01a18fdc-6f03-73a2-a7a1-0c85189aee86/exec-ee58b105-4fc1-41d7-bfbf-17e9818a5cc9.png", 
+        "H:/Spawner/DesignAssets/Animations/Nests/Idle04-v2/spring/keypose.png"
+      ], 
+      "transparent_background": true, 
+      "prompt": "Use case: precise-object-edit. Image1 is the exact complete MIDDLE-STAGE nest sprite to correct. Image2 supplies the authoritative lower-basin ornament design. Change ONLY the large round turquoise spiral medallion newly invented on the FRONT-LEFT outer wall, centered approximately(170,430) at512equivalent. REMOVE that big round medallion and replace its entire circular raised volume with the smooth continuous overlapping teal wave ridges and thin diagonal ivory wave ribbon visible at the same front-left position in image2. This front-left wall is a flowing wave, NOT any round scroll, oval boss, disk or circular bump. Preserve the small genuine INNER-LEFT shoulder scroll near the left water chute and the small far-right corner scroll. Do not add another decoration elsewhere. Keep the entire upper reservoir, short arches, left steps, waterfalls, right bare mounting base, whole footprint, full bottom, pool water, all gold joins, all other contours/texture, original scale, framing and transparent margins exactly image1. Single complete whole-nest sprite on genuine transparent RGBA, same painterly outlines/upper-left lighting. No sheet, crop, text, shadow, glow, pipes/tank/valve/wheels or other architecture changes."
+    }
+  ], 
+  "middleExport": {
+    "rawSize": [
+      1254, 
+      1254
+    ], 
+    "fullCanvasUniformScale": 0.4082934609250399, 
+    "translation": [
+      0, 
+      -28
+    ], 
+    "opaqueBounds": [
+      16, 
+      140, 
+      500, 
+      448
+    ]
+  }, 
+  "referenceHashes": {
+    "level03": "4258ae750c0f36d950b6ec7707bac4739ef6a83da4e2333b5e2d6278348e8855", 
+    "level04": "0d22ebefb9582a9b4c7c99dcbd67d4f29b8b1131c9744b38ff8ca031ee13d1ff"
+  }, 
+  "approval": {
+    "userInstruction": "해봐", 
+    "date": "2026-10-31", 
+    "target": "KeyPoses/stage-01-stone-spring.png", 
+    "sha256": "a283c64fa93fc0a4479bda03b579f2f5140e385ecedaf8b7a663dd91ff53bcff"
+  }, 
+  "motionSource": "AnimationCandidates/SpringNestGrowth02To03QuantumV3/Renderer.py", 
+  "reusedParts": "AnimationCandidates/SpringNestGrowth02To03QuantumV3/Parts", 
+  "timingScaleFromReference": 0.8, 
+  "newPartExtraction": false, 
+  "representativePlaybackBeforeFullProduction": true, 
+  "bodySwitchFrames": [
+    26, 
+    60
+  ], 
+  "bodySwitchMs": [
+    1400, 
+    2760
+  ], 
+  "fullySubmergedFrames": [
+    24, 
+    58
+  ], 
+  "fullySubmergedMs": [
+    1320, 
+    2680
+  ], 
+  "fullPlaybackProof": "Proof/full-playback.json", 
+  "fullExportCheck": "Proof/export-check.json"
+}

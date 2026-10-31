@@ -1,0 +1,147 @@
+{
+  "format": "custom-part-rig-study",
+  "bindPoseCount": 1,
+  "canvas": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "periodMs": 4000,
+  "fps": 20,
+  "wheel": {
+    "frontCenter": [
+      94,
+      304
+    ],
+    "planeU": [
+      33,
+      0
+    ],
+    "planeV": [
+      0,
+      44
+    ],
+    "depth": [
+      39,
+      -6
+    ],
+    "paddleCount": 8,
+    "paddleHalfAngle": 0.18,
+    "paddleRadialThickness": [
+      0.94,
+      1.06
+    ],
+    "rotationTurns": 1
+  },
+  "flows": [
+    {
+      "id": "left-fall",
+      "path": [
+        161,
+        272,
+        175,
+        332,
+        11,
+        16
+      ],
+      "phase": 0.17
+    },
+    {
+      "id": "upper-fall",
+      "path": [
+        220,
+        252,
+        244,
+        292,
+        51,
+        48
+      ],
+      "phase": 0
+    },
+    {
+      "id": "lower-fall",
+      "path": [
+        257,
+        290,
+        274,
+        332,
+        32,
+        45
+      ],
+      "phase": 0.31
+    }
+  ],
+  "parts": {
+    "stationary": {
+      "source": "Parts/stationary-underlayer.png",
+      "fixed": true
+    },
+    "wheelFront": {
+      "source": "Parts/wheel-front.png",
+      "parent": "wheel",
+      "construction": "projected rigid planar attachment"
+    },
+    "wheelRear": {
+      "source": "Parts/wheel-rear-rim.png",
+      "parent": "wheel",
+      "construction": "projected rigid planar attachment"
+    },
+    "paddleFront": {
+      "source": "Parts/paddle-front.png",
+      "parent": "wheel",
+      "instances": 8,
+      "construction": "independent rigid quads with depth sorting"
+    },
+    "paddleBack": {
+      "source": "Parts/paddle-back.png",
+      "parent": "wheel",
+      "construction": "reverse and thickness faces"
+    },
+    "water": {
+      "source": "Parts/water-ribbon-tiled.png",
+      "construction": "translation under fixed spillway clipping"
+    },
+    "foam": {
+      "source": "Parts/foam.png",
+      "construction": "local height deformation"
+    },
+    "ripple": {
+      "source": "Parts/ripple-filtered.png",
+      "construction": "independent position scale and opacity"
+    },
+    "reflection": {
+      "source": "Parts/upper-reflection-filtered.png",
+      "construction": "independent position scale and opacity"
+    },
+    "droplet": {
+      "source": "Parts/droplet.png",
+      "construction": "independent ballistic trajectories"
+    },
+    "axle": {
+      "source": "Parts/axle-foreground.png",
+      "position": [
+        78,
+        288
+      ],
+      "fixed": true
+    }
+  },
+  "drawOrder": [
+    "stationary",
+    "ripples",
+    "reflection",
+    "wheelRear",
+    "left-fall",
+    "depth-sorted paddles",
+    "wheelFront",
+    "axle",
+    "upper-fall",
+    "lower-fall",
+    "foam",
+    "droplets"
+  ],
+  "verifiedRuntime": "PowerShell System.Drawing custom renderer"
+}

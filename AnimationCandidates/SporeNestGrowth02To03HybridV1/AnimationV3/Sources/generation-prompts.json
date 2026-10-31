@@ -1,0 +1,25 @@
+{
+  "tool": "built-in image_gen",
+  "approvedKeyframes": "../KeyframesV3",
+  "approvedUserMessage": "계속해봐",
+  "sourceDrawings": [
+    "Sources/key-0.png",
+    "Sources/key-1.png",
+    "Sources/key-2.png",
+    "Sources/key-3.png",
+    "Sources/key-4.png",
+    "Sources/key-5.png",
+    "Sources/key-6.png"
+  ],
+  "additionalHiddenSurfaceArtwork": [
+    {
+      "file": "adult-body-hidden-source.png",
+      "prompt": "Use case: precise-object-edit. Production HIDDEN SURFACE / body layer for the exact approved level3 mushroom nursery in this reference. Remove the ENTIRE salmon canopy, all wood, all rope, all brass, the two vent pods, lever, hose and bellows. Keep ONLY the complete ivory cradle/basket, EXACTLY THREE coral eggs in the original arrangement, and a complete ivory stem rising behind them. Preserve the exact approved cradle contours, front folds, egg positions, camera, original proportions, lighting, thin dark green outline, colors and original canvas positions. Reconstruct any ivory surfaces hidden by the removed hardware as clean continuous ivory material. Draw a short continuous rounded ivory neck behind the future collar, with ample overlap for a moving cap; NO horizontal cutoff, dark holes, rectangular strips, cap-colored fragments or remaining mechanical scraps. Do NOT change the visible silhouette or redesign the cradle. Original normalized512px registration: cradle approximately x76..414,y290..448, stem centeredx250, reachingy220. Keep exact same square source canvas and margins, groundy448/512. Real RGBA transparent background, no background shadow, matte, text, marks or loose components. This body source will be layered behind the approved original cap and machinery in animation; it is not a new character pose."
+    },
+    {
+      "file": "adult-frame-hidden-source.png",
+      "prompt": "Use case: precise-object-edit. Production COMPLETE MECHANICAL ATTACHMENT layer of this exact level3 mushroom nursery. Keep ONLY the central wood collar and bindings, the wood support frame and BOTH cream-and-brass vent pods. Remove ALL salmon mushroom tissue including every underside scrap, the ENTIRE ivory cradle, every egg, all ivory stem tissue, the lever, and the right bellows and its hose. Preserve the original relative positions, front three-quarter camera, scale, outline, wood/rope/brass/ceramic design, lighting and palette exactly. Reconstruct the wooden beam surfaces and mounting brackets hidden behind removed mushroom/ivory tissue. The central collar must be a complete intact wood ring, with its small brass axle boss but WITHOUT the lever arm; supports and both vents must remain mechanically joined to the collar. No missing patches, cut-off support ends, black holes, floating fragments, or exposed irregular cut edges. Original normalized512px extents: left vent approxx45..150,y235..303; collar approxx200..312,y240..295; right ventx354..459,y235..309; support posts extendy217..327. Keep original canvas registration and generous margins. Actual RGBA transparent negative space, no background matte, text, marks or shadow. This is a reusable hidden-surface-complete rig part, not a redesigned structure."
+    }
+  ],
+  "poseOpacityBlend": false
+}

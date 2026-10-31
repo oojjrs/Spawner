@@ -1,0 +1,95 @@
+[
+  {
+    "key": 0,
+    "sourceCell": 0,
+    "scale": null,
+    "offset": null,
+    "groundY": 448,
+    "timeSeconds": 0,
+    "authority": "exact-level-02"
+  },
+  {
+    "key": 1,
+    "sourceCell": 1,
+    "scale": 1.09,
+    "offset": [
+      27,
+      15
+    ],
+    "groundY": 448,
+    "timeSeconds": 0.95,
+    "authority": "generated-drawing"
+  },
+  {
+    "key": 2,
+    "sourceCell": 2,
+    "scale": 1.09,
+    "offset": [
+      23,
+      16
+    ],
+    "groundY": 448,
+    "timeSeconds": 1.4,
+    "authority": "generated-drawing"
+  },
+  {
+    "key": 3,
+    "sourceCell": 3,
+    "scale": 1.09,
+    "offset": [
+      21,
+      13
+    ],
+    "groundY": 448,
+    "timeSeconds": 2.1,
+    "authority": "generated-drawing"
+  },
+  {
+    "key": 4,
+    "sourceCell": 4,
+    "scale": 1.09,
+    "offset": [
+      28,
+      11
+    ],
+    "groundY": 448,
+    "timeSeconds": 2.45,
+    "authority": "generated-drawing"
+  },
+  {
+    "key": 5,
+    "sourceCell": 5,
+    "scale": null,
+    "offset": null,
+    "groundY": 448,
+    "timeSeconds": 3.0,
+    "authority": "generated-drawing"
+  },
+  {
+    "key": 6,
+    "sourceCell": 6,
+    "scale": null,
+    "offset": null,
+    "groundY": 448,
+    "timeSeconds": 3.6,
+    "authority": "existing-level-03-rig-output"
+  },
+  {
+    "key": 7,
+    "sourceCell": 7,
+    "scale": null,
+    "offset": null,
+    "groundY": 448,
+    "timeSeconds": 3.85,
+    "authority": "existing-level-03-rig-output"
+  },
+  {
+    "key": 8,
+    "sourceCell": 8,
+    "scale": null,
+    "offset": null,
+    "groundY": 448,
+    "timeSeconds": 4.1,
+    "authority": "exact-level-03"
+  }
+]

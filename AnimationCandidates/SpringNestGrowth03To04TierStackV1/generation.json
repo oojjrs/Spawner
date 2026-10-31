@@ -1,0 +1,180 @@
+{
+  "schemaVersion": 1, 
+  "asset": "SpringNestGrowth03To04TierStackV1", 
+  "provider": "built-in image_gen", 
+  "status": "applied-to-game", 
+  "construction": "shared source pixels with newly drawn connection surfaces", 
+  "sourceDesigns": [
+    "Sources/level-03.png", 
+    "Sources/level-04.png"
+  ], 
+  "stageSources": [
+    "KeyPoses/stage-00-level03.png", 
+    "KeyPoses/stage-01-one-floor-lower.png", 
+    "KeyPoses/stage-02-level04.png"
+  ], 
+  "canvas": [
+    512, 
+    512
+  ], 
+  "root": [
+    256, 
+    448
+  ], 
+  "generatedSource": "D:\\.codex\\generated_images\\01a18fdc-6f03-73a2-a7a1-0c85189aee86\\exec-41dd7ffd-0277-4259-8001-424823713ed3.png", 
+  "partExtraction": false, 
+  "rigging": "reused-water-droplet-and-entry-rig", 
+  "interpolation": false, 
+  "animationRendered": true, 
+  "replaces": "SpringNestGrowth03To04QuantumV1", 
+  "motionIntent": "two droplet-triggered quantum jumps; middle-to-final keeps the same forms and raises the upper structure one floor", 
+  "keyConstruction": {
+    "canvas": [
+      512, 
+      512
+    ], 
+    "root": [
+      256, 
+      448
+    ], 
+    "fixedRegions": [
+      [
+        0, 
+        328, 
+        512, 
+        512
+      ]
+    ], 
+    "upperSourceRegion": [
+      18, 
+      96, 
+      477, 
+      305
+    ], 
+    "upperTranslation": [
+      0, 
+      48
+    ], 
+    "newArtwork": "connected masonry and water-channel surfaces between the locked source regions", 
+    "partExtraction": false, 
+    "rigging": false, 
+    "interpolation": false, 
+    "status": "confirmed", 
+    "upperIncludes": "same reservoir, arches, upper steps and complete pressure machinery", 
+    "editableRegions": [
+      [
+        18, 
+        230, 
+        211, 
+        328
+      ], 
+      [
+        195, 
+        304, 
+        408, 
+        328
+      ]
+    ]
+  }, 
+  "newArtworkUsedRegions": [
+    [
+      18, 
+      230, 
+      211, 
+      328
+    ], 
+    [
+      195, 
+      304, 
+      408, 
+      328
+    ]
+  ], 
+  "export": {
+    "sourceSize": [
+      1254, 
+      1254
+    ], 
+    "fullCanvasUniformScale": 0.4082934609250399, 
+    "fixedRegionDifferentPixels": 0, 
+    "lockedGuideDifferentPixels": 0, 
+    "fixedRegionPixelCount": 94208, 
+    "upperMovement": [
+      0, 
+      48
+    ]
+  }, 
+  "generationCalls": [
+    {
+      "referenced_image_paths": [
+        "H:/Spawner/$Trash/SpringNestGrowth03To04TierStackV1/middle-composition-guide.png", 
+        "H:/Spawner/AnimationCandidates/SpringNestGrowth03To04TierStackV1/Sources/level-04.png"
+      ], 
+      "transparent_background": true, 
+      "prompt": "Use case: precise-object-edit. Image1 is the EXACT EDIT TARGET for one whole-nest production key drawing. It was constructed from image2's actual original pixels: the SAME reservoir/arches/upper steps/pressure pipes/glass tank/valve have all been translated DOWN48 pixels to make a one-floor-lower middle form, while the complete foreground basin and lowest left steps remain fixed in their original position. Keep that exact arrangement; do not return the tower to image2's full height, reshape the reservoir, change the machinery or redesign any basin decoration.\nComplete ONLY the two intentionally empty rectangular CONNECTION GAPS in image1, in its512x512 coordinates: LEFT staircase/stone support gap x18..195,y236..278, and CENTRAL/RIGHT lower masonry and waterfall-foot gap x195..408,y304..328. Paint coherent ivory/teal/gold masonry, complete hidden supporting faces and short functional water-channel connections across those missing bands. Connect the exact existing surfaces above/below/left/right of each gap smoothly, same perspective, line thickness and upper-left light. The left needs a complete lower stone stair connection with one fewer raised tier than the final nest, NOT a severed wall or copied long flat strip. The central two-stage waterfall meets the ORIGINAL lower water/foam at y328, using a short connected stone lip; preserve the original bottom water surface and entire rim. All structures are supported; no hovering reservoirs or broken columns.\nImage2 is only a texture/detail reference for completing the gaps, NOT permission to copy its taller composition. Every already present pixel region of image1 remains the same original shape and placement. In particular, exact same flowing ivory/aqua front ribbons, gold joins, left front circular relief, far-right curl, pool floor and underside. Do not invent ornaments or enlarge circles. The middle form ALREADY HAS the exact original pressure apparatus, simply seated lower; keep all its connected pipes and complete round valve. No left waterwheel/gears/piston anywhere.\nReturn ONE COMPLETE whole-nest production sprite with the two missing bands fully painted, original512-square-equivalent framing, unchanged base/root256,448 and upper pooltop near160. No zoom, recentering, scale fitting, sheets, labels, grids, shadows, glow, floating fragments or background. Genuine transparent RGBA, same polished painterly reference rendering. This is a functional lower-tier building, not a morph blur or construction rubble."
+    }, 
+    {
+      "referenced_image_paths": [
+        "H:/Spawner/AnimationCandidates/SpringNestGrowth03To04TierStackV1/KeyPoses/stage-01-one-floor-lower.png", 
+        "H:/Spawner/AnimationCandidates/SpringNestGrowth03To04TierStackV1/Sources/level-04.png"
+      ], 
+      "transparent_background": true, 
+      "prompt": "Use case: precise-object-edit. Image1 is the exact middle-stage whole-nest key drawing. REPAIR ONLY its LEFT staircase/support connection, approximatelyx18..211,y230..328 in512-equivalent coordinates. There are incorrect horizontal cut seams through the stone faces and falling water near y278 and a square sawn-off aqua wall edge at the far left nearx40,y280. Redraw that local left stair structure as ONE COMPLETE CONNECTED SHORT TWO-STEP STONE WATER CHUTE with rounded closed exterior stone ends, continuous ivory/teal faces, intact thin gold joining bands and smooth connected flowing water down each tread. Both falls land naturally on complete stone treads and then into the existing pool at y328. No sawn-off posts, severed half-waterfalls, horizontal pasted strips or rectangular filler. Match the exact existing edges surrounding the repair, including its upper arch/stone at y230, central stone atx211 and the original bowl/left foot at y328. Image2 is ONLY the finished stone-material and lower-foot reference; the middle structure has one fewer raised tier. Keep image1's reservoir, arches, complete pressure apparatus, valve, original shape/placement and lowered height EXACTLY unchanged. Keep the ENTIRE lower basin belowy328 exactly unchanged: same original ribbons, front circular relief, gold seams, water, outline and underside. One complete whole-nest sprite, not a cutout or patch sheet. Same fixed camera, source scale, original empty top margin, root256,448, genuine transparent RGBA. No new ornaments, wheels, particles, glow, text, labels or background. No full-height tower replacement."
+    }
+  ], 
+  "generationInputSnapshots": [
+    "Sources/initial-composition-guide.png", 
+    "Sources/key-before-left-repair.png"
+  ], 
+  "repairSource": "D:\\.codex\\generated_images\\01a18fdc-6f03-73a2-a7a1-0c85189aee86\\exec-51a2979a-4ee5-4dd7-839b-00ae0d7c5bde.png", 
+  "sharedPixelStages": [
+    1, 
+    2
+  ], 
+  "sourceStage00Preserved": true, 
+  "focusedReview": "middle-to-final-review.png", 
+  "approval": {
+    "date": "2026-10-31", 
+    "userInstruction": "한번만에 팍! 하고 성장시키겠단 건가? 아무래도 좋다 해봐라", 
+    "target": "KeyPoses/stage-01-one-floor-lower.png", 
+    "sha256": "c7f10db5e55f8d502e01806953aafafea4837179e3741e5a7020cfd33773ed3a"
+  }, 
+  "durationMs": 4000, 
+  "plannedStageChangeMs": [
+    1400, 
+    2760
+  ], 
+  "plannedFullySubmergedMs": [
+    1320, 
+    2680
+  ], 
+  "bodyTransform": "identity", 
+  "bodyInterpolation": false, 
+  "bodyCrossfade": false, 
+  "motionReference": "AnimationCandidates/SpringNestGrowth02To03QuantumV3", 
+  "representativePlaybackBeforeFullProduction": true, 
+  "bodySwitchFrames": [
+    26, 
+    60
+  ], 
+  "bodySwitchMs": [
+    1400, 
+    2760
+  ], 
+  "fullySubmergedFrames": [
+    24, 
+    58
+  ], 
+  "fullySubmergedMs": [
+    1320, 
+    2680
+  ], 
+  "fullPlaybackProof": "Proof/full-playback.json", 
+  "fullExportCheck": "Proof/export-check.json", 
+  "gameApplication": {
+    "image": "DesignAssets/Animations/Nests/Growth03To04-TierStackV1/spring/growth.png", 
+    "durationMs": 4000, 
+    "proof": "Proof/game-application.json", 
+    "userInstruction": "하고 끝내"
+  }
+}

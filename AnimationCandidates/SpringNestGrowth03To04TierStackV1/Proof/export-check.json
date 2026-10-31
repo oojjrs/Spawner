@@ -1,0 +1,43 @@
+{
+  "runtimeFrames": 64, 
+  "frameSize": [
+    512, 
+    512
+  ], 
+  "sheetSize": [
+    4096, 
+    4096
+  ], 
+  "stageChangeFrames": [
+    26, 
+    60
+  ], 
+  "stageChangeMs": [
+    1400, 
+    2760
+  ], 
+  "approvedBodiesRemainFixed": true, 
+  "firstAndLastFramesExact": true, 
+  "currentEndpointReferencesMatch": true, 
+  "approvedMiddleUnchanged": true, 
+  "sharedBasinDifferentPixels": 0, 
+  "preservedUpperTranslatedDifferentPixels": 0, 
+  "commonFrontBasinStableAfterMiddle": true, 
+  "media": [
+    {
+      "file": "growth.webp", 
+      "encodedFrames": 53, 
+      "durationMs": 4000
+    }, 
+    {
+      "file": "preview.webp", 
+      "encodedFrames": 53, 
+      "durationMs": 4000
+    }, 
+    {
+      "file": "preview.gif", 
+      "encodedFrames": 53, 
+      "durationMs": 4000
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "frameSize": [
+    512,
+    512
+  ],
+  "root": [
+    256,
+    448
+  ],
+  "durationMs": 5000,
+  "approval": "pending",
+  "keys": [
+    {
+      "id": "K0",
+      "timeSeconds": 0,
+      "image": "KeyPoses/K0.png",
+      "source": "original-reference"
+    },
+    {
+      "id": "K1",
+      "timeSeconds": 0.95,
+      "image": "KeyPoses/K1.png",
+      "source": "imagegen-drawn-pose"
+    },
+    {
+      "id": "K2",
+      "timeSeconds": 1.4,
+      "image": "KeyPoses/K2.png",
+      "source": "imagegen-drawn-pose"
+    },
+    {
+      "id": "K3",
+      "timeSeconds": 2.1,
+      "image": "KeyPoses/K3.png",
+      "source": "imagegen-drawn-pose"
+    },
+    {
+      "id": "K4",
+      "timeSeconds": 2.55,
+      "image": "KeyPoses/K4.png",
+      "source": "imagegen-drawn-pose"
+    },
+    {
+      "id": "K5",
+      "timeSeconds": 3.05,
+      "image": "KeyPoses/K5.png",
+      "source": "imagegen-drawn-pose"
+    },
+    {
+      "id": "K6",
+      "timeSeconds": 3.6,
+      "image": "KeyPoses/K6.png",
+      "source": "original-reference"
+    },
+    {
+      "id": "K7",
+      "timeSeconds": 4.1,
+      "image": "KeyPoses/K7.png",
+      "source": "original-reference"
+    }
+  ]
+}

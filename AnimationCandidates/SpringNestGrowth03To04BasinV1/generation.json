@@ -1,0 +1,343 @@
+{
+  "schemaVersion": 1, 
+  "asset": "SpringNestGrowth03To04BasinV1", 
+  "provider": "built-in image_gen", 
+  "status": "rework-required", 
+  "scope": "lower-basin-growth-only", 
+  "proposedIntervalMs": [
+    400, 
+    1200
+  ], 
+  "references": {
+    "level03": "Sources/level-03.png", 
+    "level04": "Sources/level-04.png"
+  }, 
+  "canvas": {
+    "width": 512, 
+    "height": 512, 
+    "pivot": [
+      256, 
+      448
+    ]
+  }, 
+  "production": {
+    "newDrawings": 8, 
+    "existingStartReference": 1, 
+    "partExtraction": false, 
+    "rigging": false, 
+    "interpolation": false, 
+    "fullAnimation": false
+  }, 
+  "review": {
+    "image": "basin-keyposes-review.png", 
+    "columns": 3, 
+    "rows": 3, 
+    "readingOrder": "left-to-right-top-to-bottom", 
+    "commonViewport": [
+      0, 
+      176, 
+      512, 
+      464
+    ]
+  }, 
+  "keys": [
+    {
+      "key": "0400", 
+      "timeMs": 400, 
+      "kind": "existing-reference", 
+      "output": "Keys/key-0400.png", 
+      "source": "Sources/level-03.png", 
+      "generatedSource": "H:\\Spawner\\AnimationCandidates\\SpringNestGrowth03To04BasinV1\\Sources\\level-03.png", 
+      "export": {
+        "rawSize": [
+          512, 
+          512
+        ], 
+        "fullCanvasUniformScale": 1.0, 
+        "translation": [
+          0, 
+          0
+        ], 
+        "opaqueBounds": [
+          28, 
+          206, 
+          484, 
+          448
+        ]
+      }
+    }, 
+    {
+      "key": "0500", 
+      "timeMs": 500, 
+      "kind": "drawn", 
+      "output": "Keys/key-0500.png", 
+      "source": "Sources/key-0500-generated.png", 
+      "generatedSource": "D:\\.codex\\generated_images\\01a18fdc-6f03-73a2-a7a1-0c85189aee86\\exec-e54921d1-6a63-4fd4-a571-7743e883128e.png", 
+      "generation": {
+        "referenced_image_paths": [
+          "H:/Spawner/AnimationCandidates/SpringNestGrowth03To04BasinV1/Sources/level-03.png"
+        ], 
+        "transparent_background": true, 
+        "prompt": "Use case: precise-object-edit. ONE complete whole-nest production drawing for a continuous basin growth. Same original square composition, identical upper fountain, stone chute, waterfalls and wooden sluice/crank, same fixed camera, source painterly outlines/lighting, original scale and empty top margin, root256,448 at512equivalent. Only the lower basin changes. EARLIEST growth: modify the supplied ORIGINAL basin very subtly. Increase only its lower bowl width by3pixels at512equivalent while keeping bottom448. Keep original front aquamarine mass and wave contours, NO broad ivory front ribbon yet. Only the back-left and back-right outer lip has a very thin narrow raised pale-ivory crest beginning to emerge from the existing teal surface, attached to it. On the inner-left shoulder put only one shallow almost imperceptible aqua comma indentation; no complete spiral, no ring and no projecting hook. Right-front lobe remains plain original aqua. At the two rear-side joins only two tiny gold pinhead nubs begin, NOT gold bands. Everything else exactly original. The result should be almost identical to input1, the very first contour movement, not a redesigned finished bowl. Draw real single intermediate contours on solid continuous material, not opacity blending, double outlines, color wipe, pasted rim or a cutaway. Entire bottom, water interior, rear rim and feet complete. No tower, new arches, glass tank, pipes, valve, left wheel/gears/axle, labels, sheet, shadows, glow or colored edge debris. True transparent RGBA."
+      }, 
+      "export": {
+        "rawSize": [
+          1254, 
+          1254
+        ], 
+        "fullCanvasUniformScale": 0.4082934609250399, 
+        "translation": [
+          0, 
+          -1
+        ], 
+        "opaqueBounds": [
+          28, 
+          204, 
+          485, 
+          448
+        ]
+      }
+    }, 
+    {
+      "key": "0600", 
+      "timeMs": 600, 
+      "kind": "drawn", 
+      "output": "Keys/key-0600.png", 
+      "source": "Sources/key-0600-generated.png", 
+      "generatedSource": "D:\\.codex\\generated_images\\01a18fdc-6f03-73a2-a7a1-0c85189aee86\\exec-5fc54770-480c-47c1-a249-17fbcd16423d.png", 
+      "generation": {
+        "referenced_image_paths": [
+          "D:/.codex/generated_images/01a18fdc-6f03-73a2-a7a1-0c85189aee86/exec-7c828108-4d27-418a-879f-9eaedd3e05b6.png", 
+          "D:/.codex/generated_images/01a18fdc-6f03-73a2-a7a1-0c85189aee86/exec-9d6436ea-838e-4a09-b41c-1266f7557721.png", 
+          "H:/Spawner/AnimationCandidates/SpringNestGrowth03To04BasinV1/Sources/level-03.png"
+        ], 
+        "transparent_background": true, 
+        "prompt": "Use case: precise-object-edit. Image1 is the precise edit target, an actual complete whole-nest basin-growth breakdown, not a concept. Image2 gives the end bowl and image3 the original upper spring. Change ONLY the incorrect lower-basin ornament contours specified below; keep the entire upper fountain, all waterfall pixels, wood sluice/crank, camera, lighting, original transparency margins, canvas, size, ground and every other contour of image1 unchanged. ONE COMPLETE WHOLE NEST on genuine transparent background, not parts, sheet, closeup or a collage. Repair the incorrect free-standing ivory/teal hook at the far back-left beside the chute: remove that upward sticking hook and restore the original plain rounded solid aqua support stone from image3 there, no new upper ornament. The BASIN'S left scroll is only a very shallow raised aqua comma relief, pressed into its existing inner-left basin shoulder near(94,365) at512-equivalent, with a tiny incised hook tip, no tall white loop and no hole through the rim. Right basin lobe remains solid and barely rolled. At this early quarter-growth phase no complete spiral exists. Preserve the current thin ivory crest on the sides and mostly teal front, no extra front-white strip, no new gold joins. No towers, arches, tanks, machinery, left wheels or effects. Retain source painterly dark teal contours. Nothing floats or protrudes above the unchanged upper stone supports."
+      }, 
+      "export": {
+        "rawSize": [
+          1254, 
+          1254
+        ], 
+        "fullCanvasUniformScale": 0.4082934609250399, 
+        "translation": [
+          0, 
+          -1
+        ], 
+        "opaqueBounds": [
+          26, 
+          204, 
+          490, 
+          448
+        ]
+      }
+    }, 
+    {
+      "key": "0700", 
+      "timeMs": 700, 
+      "kind": "drawn", 
+      "output": "Keys/key-0700.png", 
+      "source": "Sources/key-0700-generated.png", 
+      "generatedSource": "D:\\.codex\\generated_images\\01a18fdc-6f03-73a2-a7a1-0c85189aee86\\exec-957b3b1c-8782-4a29-a7b1-381fd24ee5e2.png", 
+      "generation": {
+        "referenced_image_paths": [
+          "D:/.codex/generated_images/01a18fdc-6f03-73a2-a7a1-0c85189aee86/exec-5fc54770-480c-47c1-a249-17fbcd16423d.png", 
+          "D:/.codex/generated_images/01a18fdc-6f03-73a2-a7a1-0c85189aee86/exec-6a1bda31-8bb7-4742-bcb8-e93e3520c4c3.png"
+        ], 
+        "transparent_background": true, 
+        "prompt": "Use case: precise-object-edit. ONE actual production full-nest key drawing, the physical HALFWAY BREAKDOWN between the same object's two supplied source drawings. They are consecutive states in a single continuous lower-basin growth. Draw genuine intermediate surface contours and volumes; no blended double exposure, fade, color wipe or pasted new rim. Keep the exact upper fountain, all stones/waterfalls, wooden sluice/crank, camera, placement, scale and lighting IDENTICAL to both sources. Same complete floor and pool, dark-teal painterly contours and genuine transparent background. Square canvas with the same original large empty top margin and root256,448 at512equivalent, upper pool top207; do not zoom or recenter. Only the lower basin changes by a SMALL amount. Halfway between these two specific lower-basin drawings. Ivory front ridge halfway extruded from the original aqua front wall, not yet the final broad ribbon. Keep the left small attached scroll in image1's position and size, tip curling a little further. At front-right, the original bulb develops only a shallow small incised inward hook; keep the entire lobe solid, no hole or free C-bracket. Original teal masses reshape continuously; new low oval ridge not fully raised yet. ONE coherent whole object with every support and underside complete. No sheets, labels, cutouts, backdrop, ground shadow, glow, new towers, machinery, left wheel/gears/axle or added ornaments."
+      }, 
+      "export": {
+        "rawSize": [
+          1254, 
+          1254
+        ], 
+        "fullCanvasUniformScale": 0.4082934609250399, 
+        "translation": [
+          0, 
+          -2
+        ], 
+        "opaqueBounds": [
+          26, 
+          203, 
+          490, 
+          448
+        ]
+      }
+    }, 
+    {
+      "key": "0800", 
+      "timeMs": 800, 
+      "kind": "drawn", 
+      "output": "Keys/key-0800.png", 
+      "source": "Sources/key-0800-generated.png", 
+      "generatedSource": "D:\\.codex\\generated_images\\01a18fdc-6f03-73a2-a7a1-0c85189aee86\\exec-6a1bda31-8bb7-4742-bcb8-e93e3520c4c3.png", 
+      "generation": {
+        "referenced_image_paths": [
+          "D:/.codex/generated_images/01a18fdc-6f03-73a2-a7a1-0c85189aee86/exec-42be835d-2568-46b9-8c03-801dde2b7153.png", 
+          "D:/.codex/generated_images/01a18fdc-6f03-73a2-a7a1-0c85189aee86/exec-9d6436ea-838e-4a09-b41c-1266f7557721.png", 
+          "H:/Spawner/AnimationCandidates/SpringNestGrowth03To04BasinV1/Sources/level-03.png"
+        ], 
+        "transparent_background": true, 
+        "prompt": "Use case: precise-object-edit. Image1 is the precise edit target, an actual complete whole-nest basin-growth breakdown, not a concept. Image2 gives the end bowl and image3 the original upper spring. Change ONLY the incorrect lower-basin ornament contours specified below; keep the entire upper fountain, all waterfall pixels, wood sluice/crank, camera, lighting, original transparency margins, canvas, size, ground and every other contour of image1 unchanged. ONE COMPLETE WHOLE NEST on genuine transparent background, not parts, sheet, closeup or a collage. Repair the overgrown cut-out C-shaped ornaments and the incorrect huge curling front-right ribbon. Both growing scrolls must be low shallow TEAL RELIEF carved/extruded on SOLID existing basin stone, with NO holes through it and no loose white C-shaped bracket. At the inner-left shoulder near(94,365), a small aqua hook is halfway curling IN PLACE, its tip incised into the continuous original shoulder, nowhere else. At far right-front near(434,416), only a small shallow open aqua hook presses into the continuous original bulb; no big ring on the upper-right rim. The front-left aqua lobe remains a low OVAL solid ridge as in image2. Restore the front ivory strip to a slender flowing WAVE ridge halfway forming the exact diagonal image2 ribbon; never a huge round curling band. Keep original aqua body volume under all white ridges. These are halfway growth SURFACE contours, not a different complete decoration design. No towers, arches, tanks, machinery, left wheels or effects. Retain source painterly dark teal contours. Nothing floats or protrudes above the unchanged upper stone supports."
+      }, 
+      "export": {
+        "rawSize": [
+          1254, 
+          1254
+        ], 
+        "fullCanvasUniformScale": 0.4082934609250399, 
+        "translation": [
+          0, 
+          1
+        ], 
+        "opaqueBounds": [
+          29, 
+          206, 
+          488, 
+          448
+        ]
+      }
+    }, 
+    {
+      "key": "0900", 
+      "timeMs": 900, 
+      "kind": "drawn", 
+      "output": "Keys/key-0900.png", 
+      "source": "Sources/key-0900-generated.png", 
+      "generatedSource": "D:\\.codex\\generated_images\\01a18fdc-6f03-73a2-a7a1-0c85189aee86\\exec-8d240dea-2a5c-4839-8708-cf67ecb71f9c.png", 
+      "generation": {
+        "referenced_image_paths": [
+          "D:/.codex/generated_images/01a18fdc-6f03-73a2-a7a1-0c85189aee86/exec-cbcf7196-f079-49d4-bb7a-e8adedde68c6.png"
+        ], 
+        "transparent_background": true, 
+        "prompt": "Use case: precise-object-edit. ONE whole-nest production sprite key pose. Remove ONLY the extra narrow GOLD strap drawn across the FRONT-RIGHT aqua lobe immediately above/left of the small right spiral near(411,402) at512equivalent. Paint the continuous original teal/aqua surface and its ivory wave edge through where that strap was. Keep every existing other gold band, every stone/ribbon/curl/waterfall, pixel position, silhouette, camera and original empty margins unchanged. Do not add any other gold or new decoration. One complete exact same whole object, true transparent background. Same exact painterly dark-teal outlines and lighting. No text, labels, sheet, glow, ground shadow, machinery or other changes."
+      }, 
+      "export": {
+        "rawSize": [
+          1254, 
+          1254
+        ], 
+        "fullCanvasUniformScale": 0.4082934609250399, 
+        "translation": [
+          0, 
+          0
+        ], 
+        "opaqueBounds": [
+          29, 
+          204, 
+          489, 
+          448
+        ]
+      }
+    }, 
+    {
+      "key": "1000", 
+      "timeMs": 1000, 
+      "kind": "drawn", 
+      "output": "Keys/key-1000.png", 
+      "source": "Sources/key-1000-generated.png", 
+      "generatedSource": "D:\\.codex\\generated_images\\01a18fdc-6f03-73a2-a7a1-0c85189aee86\\exec-eaca5cf0-6493-4b9f-a045-654addf95dc4.png", 
+      "generation": {
+        "referenced_image_paths": [
+          "D:/.codex/generated_images/01a18fdc-6f03-73a2-a7a1-0c85189aee86/exec-6a1bda31-8bb7-4742-bcb8-e93e3520c4c3.png", 
+          "D:/.codex/generated_images/01a18fdc-6f03-73a2-a7a1-0c85189aee86/exec-9d6436ea-838e-4a09-b41c-1266f7557721.png"
+        ], 
+        "transparent_background": true, 
+        "prompt": "Use case: precise-object-edit. ONE actual production full-nest key drawing, the physical HALFWAY BREAKDOWN between the same object's two supplied source drawings. They are consecutive states in a single continuous lower-basin growth. Draw genuine intermediate surface contours and volumes; no blended double exposure, fade, color wipe or pasted new rim. Keep the exact upper fountain, all stones/waterfalls, wooden sluice/crank, camera, placement, scale and lighting IDENTICAL to both sources. Same complete floor and pool, dark-teal painterly contours and genuine transparent background. Square canvas with the same original large empty top margin and root256,448 at512equivalent, upper pool top207; do not zoom or recenter. Only the lower basin changes by a SMALL amount. Halfway between these two specific lower-basin drawings. Finished connected small scroll reliefs stay attached at their existing centers; do NOT unroll them or add a new hook, keep their same coil direction. The ivory front wave ribbon and low oval teal lobe physically reshape from image1 toward image2 by half the remaining distance, conserving the solid rim. Thin gold joins approach image2. No part teleports or gets replaced. ONE coherent whole object with every support and underside complete. No sheets, labels, cutouts, backdrop, ground shadow, glow, new towers, machinery, left wheel/gears/axle or added ornaments."
+      }, 
+      "export": {
+        "rawSize": [
+          1254, 
+          1254
+        ], 
+        "fullCanvasUniformScale": 0.4082934609250399, 
+        "translation": [
+          0, 
+          1
+        ], 
+        "opaqueBounds": [
+          29, 
+          206, 
+          488, 
+          448
+        ]
+      }
+    }, 
+    {
+      "key": "1100", 
+      "timeMs": 1100, 
+      "kind": "drawn", 
+      "output": "Keys/key-1100.png", 
+      "source": "Sources/key-1100-generated.png", 
+      "generatedSource": "D:\\.codex\\generated_images\\01a18fdc-6f03-73a2-a7a1-0c85189aee86\\exec-e7c7f71c-3afe-4931-8a33-d8ce1d8b6951.png", 
+      "generation": {
+        "referenced_image_paths": [
+          "D:/.codex/generated_images/01a18fdc-6f03-73a2-a7a1-0c85189aee86/exec-9d6436ea-838e-4a09-b41c-1266f7557721.png", 
+          "D:/.codex/generated_images/01a18fdc-6f03-73a2-a7a1-0c85189aee86/exec-eaca5cf0-6493-4b9f-a045-654addf95dc4.png"
+        ], 
+        "transparent_background": true, 
+        "prompt": "Use case: precise-object-edit. ONE whole-nest production sprite key pose. Image1 is the exact near-final whole nest to edit. Image2 is the previous growth pose. Draw a very small physical step BACK from image1, only25% toward image2's front-rim geometry: its existing low oval teal ridge on the front wall is slightly less rounded and slightly farther left, and its ivory front wave is correspondingly a little flatter/narrower as in image2. Keep most of image1, it is nearly finished. Maintain image1's exact small scrolls, final gold joins and all their positions, do not copy extra straps or invent a new curled ornament. The upper spring, waterfalls, wood/crank, back/side rim, feet and original scale/position/margins remain exactly image1. Draw single solid connected surfaces, no blended ghost contours. Complete whole object, genuine transparent background. Same exact painterly dark-teal outlines and lighting. No text, labels, sheet, glow, ground shadow, machinery or other changes."
+      }, 
+      "export": {
+        "rawSize": [
+          1254, 
+          1254
+        ], 
+        "fullCanvasUniformScale": 0.4082934609250399, 
+        "translation": [
+          0, 
+          -2
+        ], 
+        "opaqueBounds": [
+          28, 
+          203, 
+          487, 
+          448
+        ]
+      }
+    }, 
+    {
+      "key": "1200", 
+      "timeMs": 1200, 
+      "kind": "drawn", 
+      "output": "Keys/key-1200.png", 
+      "source": "Sources/key-1200-generated.png", 
+      "generatedSource": "D:\\.codex\\generated_images\\01a18fdc-6f03-73a2-a7a1-0c85189aee86\\exec-9d6436ea-838e-4a09-b41c-1266f7557721.png", 
+      "generation": {
+        "referenced_image_paths": [
+          "H:/Spawner/AnimationCandidates/SpringNestGrowth03To04BasinV1/Sources/level-03.png", 
+          "H:/Spawner/AnimationCandidates/SpringNestGrowth03To04BasinV1/Sources/level-04.png"
+        ], 
+        "transparent_background": true, 
+        "prompt": "Use case: precise-object-edit. ONE complete production whole-nest endpoint for ONLY the lower-basin growth interval. Image1 is the edit target. KEEP its exact small low upper aquamarine spring, central two cascades, LEFT short stepped stone chute, RIGHT wooden sluice and brass crank IDENTICAL, same size, same x/y positions and waterfalls. Upper pool top y207 on512-equivalent square, basin bottom448. Change ONLY the lower bowl into the precise lower ivory/teal/gold bowl from image2. Image2 is ONLY the lower-basin design reference; do not copy its tall reservoir/arches, pipe, glass tank or wheel valve. Mature bowl width480 (x16..496), bottom448, camera same as image1. Carefully copy image2's thin ivory flowing wave ribbons, teal underside ridges and restrained gold rim joins. Ornament placement matters: the small left teal scroll is at the LEFT REAR/INNER SHOULDER beside the lowest LEFT stone chute, approximatelyx55,y340, NOT at the middle of the front wall. The small right curl sits at the far RIGHT FRONT corner approximatelyx450,y425. There is NO large circular ornament on the front-left wall atx140,y425. That front-left wall has only the exact flowing diagonal ivory/teal ribbon curves. Do not invent a bigger front medallion, second curl, fat white mound or new gold seams. The outer bowl shape and swirl positions must agree with image2. Keep the entire bottom, water interior, feet and rear rim complete, original low upper spring naturally supported in the new bowl. Upper/lower flowing water remains identical to image1 for this drawing, no water simulation changes. No wheel/gears/axle/piston on the left. Exact cool painterly aquamarine, pale ivory, gold, dark teal contour and original upper-left lighting. Same original square framing and large blank upper margin; never zoom or fit the object to fill the canvas. Genuine transparent RGBA. One continuous freshly painted complete asset, no collage, missing floor, cut lines, text, grid, shadow, glow or effects concealing joints."
+      }, 
+      "export": {
+        "rawSize": [
+          1254, 
+          1254
+        ], 
+        "fullCanvasUniformScale": 0.4082934609250399, 
+        "translation": [
+          0, 
+          -1
+        ], 
+        "opaqueBounds": [
+          28, 
+          204, 
+          487, 
+          448
+        ]
+      }
+    }
+  ], 
+  "quality": {
+    "continuityEstablished": false, 
+    "findings": [
+      "Front-rim contours and gold seam positions change abruptly between some selected keys.", 
+      "Opaque lower-body widths do not increase monotonically through the proposed interval.", 
+      "Final opaque body width is 459 pixels; the intended 480-pixel mature basin width was not reached.", 
+      "These source drawings are not a validated animation sequence."
+    ]
+  }
+}

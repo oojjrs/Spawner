@@ -1,0 +1,33 @@
+{
+  "approval": {
+    "userInstruction": "해봐", 
+    "date": "2026-10-31", 
+    "target": "KeyPoses/stage-01-stone-spring.png", 
+    "sha256": "a283c64fa93fc0a4479bda03b579f2f5140e385ecedaf8b7a663dd91ff53bcff"
+  }, 
+  "representativeRender": "Proof/prototype.webp", 
+  "representativePlayback": "Proof/prototype-playback.json", 
+  "representativeCheck": {
+    "source": "Proof/prototype.webp", 
+    "nativeObservedStages": [
+      0, 
+      1
+    ], 
+    "nativeChangeBracketsMs": [
+      [
+        1470, 
+        1543
+      ]
+    ], 
+    "fixedRegionMaxMeanError": 0, 
+    "fullySubmergedBeforeSwitch": true, 
+    "sampleCount": 24, 
+    "contact": "Proof/prototype-playback-contact.png"
+  }, 
+  "representativeInspectedBeforeFullProduction": true, 
+  "fullProductionStartedAtUtc": "2026-10-31T10:15:04.408843+00:00", 
+  "fullPlayback": "Proof/full-playback.json", 
+  "fullPlaybackCheck": "Proof/full-check.json", 
+  "fullExportCheck": "Proof/export-check.json", 
+  "fullProductionFinishedAtUtc": "2026-10-31T10:17:45.203006+00:00"
+}

@@ -1,0 +1,211 @@
+{
+  "engine": "isolated headless Chromium", 
+  "mode": "prototype", 
+  "source": "Proof/prototype.webp", 
+  "viewport": [
+    384, 
+    384
+  ], 
+  "durationMs": 1600, 
+  "sampleCount": 24, 
+  "distinctScreenshots": 15, 
+  "state": {
+    "complete": true, 
+    "naturalWidth": 384, 
+    "naturalHeight": 384
+  }, 
+  "samples": [
+    {
+      "file": "prototype-playback/000.png", 
+      "targetMs": 0, 
+      "elapsedMs": 173, 
+      "sha256": "6bcb5d29243897e8485af30e70cd2b20d8ada478b9f93cc2556563da0db07892", 
+      "observedStage": 0, 
+      "fixedRegionMeanError": 0.0
+    }, 
+    {
+      "file": "prototype-playback/001.png", 
+      "targetMs": 80, 
+      "elapsedMs": 254, 
+      "sha256": "6bcb5d29243897e8485af30e70cd2b20d8ada478b9f93cc2556563da0db07892", 
+      "observedStage": 0, 
+      "fixedRegionMeanError": 0.0
+    }, 
+    {
+      "file": "prototype-playback/002.png", 
+      "targetMs": 160, 
+      "elapsedMs": 292, 
+      "sha256": "6bcb5d29243897e8485af30e70cd2b20d8ada478b9f93cc2556563da0db07892", 
+      "observedStage": 0, 
+      "fixedRegionMeanError": 0.0
+    }, 
+    {
+      "file": "prototype-playback/003.png", 
+      "targetMs": 240, 
+      "elapsedMs": 323, 
+      "sha256": "6bcb5d29243897e8485af30e70cd2b20d8ada478b9f93cc2556563da0db07892", 
+      "observedStage": 0, 
+      "fixedRegionMeanError": 0.0
+    }, 
+    {
+      "file": "prototype-playback/004.png", 
+      "targetMs": 320, 
+      "elapsedMs": 354, 
+      "sha256": "6bcb5d29243897e8485af30e70cd2b20d8ada478b9f93cc2556563da0db07892", 
+      "observedStage": 0, 
+      "fixedRegionMeanError": 0.0
+    }, 
+    {
+      "file": "prototype-playback/005.png", 
+      "targetMs": 400, 
+      "elapsedMs": 419, 
+      "sha256": "6bcb5d29243897e8485af30e70cd2b20d8ada478b9f93cc2556563da0db07892", 
+      "observedStage": 0, 
+      "fixedRegionMeanError": 0.0
+    }, 
+    {
+      "file": "prototype-playback/006.png", 
+      "targetMs": 480, 
+      "elapsedMs": 497, 
+      "sha256": "6bcb5d29243897e8485af30e70cd2b20d8ada478b9f93cc2556563da0db07892", 
+      "observedStage": 0, 
+      "fixedRegionMeanError": 0.0
+    }, 
+    {
+      "file": "prototype-playback/007.png", 
+      "targetMs": 560, 
+      "elapsedMs": 574, 
+      "sha256": "6bcb5d29243897e8485af30e70cd2b20d8ada478b9f93cc2556563da0db07892", 
+      "observedStage": 0, 
+      "fixedRegionMeanError": 0.0
+    }, 
+    {
+      "file": "prototype-playback/008.png", 
+      "targetMs": 640, 
+      "elapsedMs": 675, 
+      "sha256": "f371f2c5a58b0b0369b08ac883ddb1808228aaf8fba8d308b94e9fbee488b6dd", 
+      "observedStage": 0, 
+      "fixedRegionMeanError": 0.0
+    }, 
+    {
+      "file": "prototype-playback/009.png", 
+      "targetMs": 720, 
+      "elapsedMs": 746, 
+      "sha256": "6ed3348b498d570dba14402cfc29c4ff51945cb1bd84facb1f408899a451d44a", 
+      "observedStage": 0, 
+      "fixedRegionMeanError": 0.0
+    }, 
+    {
+      "file": "prototype-playback/010.png", 
+      "targetMs": 800, 
+      "elapsedMs": 823, 
+      "sha256": "d895f0a46f1dcba4c3025451d379a001447f5dcf3db7140b7b9e169d25c76823", 
+      "observedStage": 0, 
+      "fixedRegionMeanError": 0.0
+    }, 
+    {
+      "file": "prototype-playback/011.png", 
+      "targetMs": 880, 
+      "elapsedMs": 909, 
+      "sha256": "746bbf8bbd3529d8be438bce8043236357244f77f9d2f203860082f757d78a38", 
+      "observedStage": 0, 
+      "fixedRegionMeanError": 0.0
+    }, 
+    {
+      "file": "prototype-playback/012.png", 
+      "targetMs": 960, 
+      "elapsedMs": 979, 
+      "sha256": "5cecf4454b4a29543f67b7a05729ab5f7340ff1b7ee569ee252ae1b6e93e2a27", 
+      "observedStage": 0, 
+      "fixedRegionMeanError": 0.0
+    }, 
+    {
+      "file": "prototype-playback/013.png", 
+      "targetMs": 1040, 
+      "elapsedMs": 1060, 
+      "sha256": "55a4c4bfd0196dd29e77b44675fb644f5d2efb121c6388420e1babae6571a7c5", 
+      "observedStage": 0, 
+      "fixedRegionMeanError": 0.0
+    }, 
+    {
+      "file": "prototype-playback/014.png", 
+      "targetMs": 1120, 
+      "elapsedMs": 1137, 
+      "sha256": "2cdaa886d2e025213a355ac6456a157731231ab252d24ea75abdd1dd9b8821ba", 
+      "observedStage": 0, 
+      "fixedRegionMeanError": 0.0
+    }, 
+    {
+      "file": "prototype-playback/015.png", 
+      "targetMs": 1200, 
+      "elapsedMs": 1224, 
+      "sha256": "ed8bcbc68b6ba7ef51b3cb2a57c4e5be6578d51c7a0357d25d43a4bbdfe4545b", 
+      "observedStage": 0, 
+      "fixedRegionMeanError": 0.0
+    }, 
+    {
+      "file": "prototype-playback/016.png", 
+      "targetMs": 1240, 
+      "elapsedMs": 1261, 
+      "sha256": "ed8bcbc68b6ba7ef51b3cb2a57c4e5be6578d51c7a0357d25d43a4bbdfe4545b", 
+      "observedStage": 0, 
+      "fixedRegionMeanError": 0.0
+    }, 
+    {
+      "file": "prototype-playback/017.png", 
+      "targetMs": 1280, 
+      "elapsedMs": 1294, 
+      "sha256": "085d512d6f1e61330b301815384c3be2ba6857e876f87ebbad48d0e62e83029a", 
+      "observedStage": 0, 
+      "fixedRegionMeanError": 0.0
+    }, 
+    {
+      "file": "prototype-playback/018.png", 
+      "targetMs": 1320, 
+      "elapsedMs": 1340, 
+      "sha256": "5ca7f83b73e0669d6d010b34e007b562c9034b7573a1cc390a19f5c9cff5dc3e", 
+      "observedStage": 0, 
+      "fixedRegionMeanError": 0.0
+    }, 
+    {
+      "file": "prototype-playback/019.png", 
+      "targetMs": 1360, 
+      "elapsedMs": 1387, 
+      "sha256": "1d1598f922565573e032185db3b80e66b557cc8ceea4a8cd1b00e8fa0f5cc6e2", 
+      "observedStage": 0, 
+      "fixedRegionMeanError": 0.0
+    }, 
+    {
+      "file": "prototype-playback/020.png", 
+      "targetMs": 1400, 
+      "elapsedMs": 1426, 
+      "sha256": "1d1598f922565573e032185db3b80e66b557cc8ceea4a8cd1b00e8fa0f5cc6e2", 
+      "observedStage": 0, 
+      "fixedRegionMeanError": 0.0
+    }, 
+    {
+      "file": "prototype-playback/021.png", 
+      "targetMs": 1440, 
+      "elapsedMs": 1470, 
+      "sha256": "e1832fe24c699e495ebe84308844801f3ee2c1081853bc77558d18a3ea83b4e9", 
+      "observedStage": 0, 
+      "fixedRegionMeanError": 0.0
+    }, 
+    {
+      "file": "prototype-playback/022.png", 
+      "targetMs": 1520, 
+      "elapsedMs": 1543, 
+      "sha256": "1b8fd1768645a5bf941d86cf6e59eecf488a7443aa109fb9c2c71ca1843b9d46", 
+      "observedStage": 1, 
+      "fixedRegionMeanError": 0.0
+    }, 
+    {
+      "file": "prototype-playback/023.png", 
+      "targetMs": 1560, 
+      "elapsedMs": 1576, 
+      "sha256": "fd688222f5f519e21f345c1912fc6c52f103bd718c019e9e053e5251c65f8bc2", 
+      "observedStage": 1, 
+      "fixedRegionMeanError": 0.0
+    }
+  ]
+}

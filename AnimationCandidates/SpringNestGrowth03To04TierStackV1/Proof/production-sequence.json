@@ -1,0 +1,38 @@
+{
+  "approval": {
+    "date": "2026-10-31", 
+    "userInstruction": "한번만에 팍! 하고 성장시키겠단 건가? 아무래도 좋다 해봐라", 
+    "target": "KeyPoses/stage-01-one-floor-lower.png", 
+    "sha256": "c7f10db5e55f8d502e01806953aafafea4837179e3741e5a7020cfd33773ed3a"
+  }, 
+  "representativeIntervalMs": [
+    1640, 
+    4000
+  ], 
+  "representativeRender": "Proof/transition.webp", 
+  "representativePlayback": "Proof/transition-playback.json", 
+  "representativeCheck": {
+    "source": "Proof/transition.webp", 
+    "globalTimelineOffsetMs": 1640, 
+    "nativeObservedStages": [
+      1, 
+      2
+    ], 
+    "nativeChangeBracketsMs": [
+      [
+        1095, 
+        1143
+      ]
+    ], 
+    "fixedRegionMaxMeanError": 0, 
+    "fullySubmergedBeforeSwitch": true, 
+    "sampleCount": 34, 
+    "contact": "Proof/transition-playback-contact.png"
+  }, 
+  "representativePlaybackInspectedBeforeFullProduction": true, 
+  "fullProductionStartedAtUtc": "2026-10-31T10:54:48.593683+00:00", 
+  "fullPlayback": "Proof/full-playback.json", 
+  "fullPlaybackCheck": "Proof/full-check.json", 
+  "fullExportCheck": "Proof/export-check.json", 
+  "fullProductionFinishedAtUtc": "2026-10-31T10:57:35.552337+00:00"
+}

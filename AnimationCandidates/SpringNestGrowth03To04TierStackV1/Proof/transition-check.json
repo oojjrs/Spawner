@@ -1,0 +1,18 @@
+{
+  "source": "Proof/transition.webp", 
+  "globalTimelineOffsetMs": 1640, 
+  "nativeObservedStages": [
+    1, 
+    2
+  ], 
+  "nativeChangeBracketsMs": [
+    [
+      1095, 
+      1143
+    ]
+  ], 
+  "fixedRegionMaxMeanError": 0, 
+  "fullySubmergedBeforeSwitch": true, 
+  "sampleCount": 34, 
+  "contact": "Proof/transition-playback-contact.png"
+}

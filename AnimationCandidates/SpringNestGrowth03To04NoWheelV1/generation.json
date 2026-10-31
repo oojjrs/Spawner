@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "asset": "SpringNestGrowth03To04NoWheelV1",
+  "provider": "built-in image_gen",
+  "status": "keyposes-awaiting-user-review",
+  "references": {
+    "level03": "Sources/level-03.png",
+    "level04": "Sources/level-04.png"
+  },
+  "canvas": {
+    "width": 512,
+    "height": 512,
+    "pivot": [
+      256,
+      448
+    ]
+  },
+  "production": {
+    "drawnKeyCount": 5,
+    "partExtraction": false,
+    "rigging": false,
+    "inbetweens": false,
+    "animation": false
+  },
+  "review": {
+    "image": "keyposes-review.png",
+    "columns": 3,
+    "rows": 2,
+    "order": [
+      "0800",
+      "1200",
+      "1600",
+      "2000",
+      "2400",
+      "level04-reference"
+    ]
+  },
+  "keys": [
+    {
+      "timeMs": 800,
+      "key": "0800",
+      "output": "Keys/key-0800.png",
+      "source": "Sources/key-0800-generated.png",
+      "generatedSource": "D:\\.codex\\generated_images\\01a18fdc-6f03-73a2-a7a1-0c85189aee86\\exec-8879e236-d34a-485b-807a-72e634f56eb6.png",
+      "generation": {
+        "referenced_image_paths": [
+          "H:/Spawner/AnimationCandidates/SpringNestGrowth03To04NoWheelV1/Sources/level-03.png",
+          "H:/Spawner/AnimationCandidates/SpringNestGrowth03To04NoWheelV1/Sources/level-04.png"
+        ],
+        "transparent_background": true,
+        "prompt": "Use case: precise-object-edit. Actual production KEY POSE for a 2D game nest growth animation. Draw ONE complete freshly painted whole nest, including its full bottom, entire outer basin, unobstructed water interior, connected masonry, all support feet, all left stone channels and the right control appropriate to this stage. No source-part atlas, cutaway, missing body, collage, sheet, labels, text, backdrop, shadow or effects hiding construction. Exact approved painterly aquamarine/ivory/gold style, dark teal contours, upper-left light and slightly elevated frontal three-quarter camera. Preserve the source square framing and generous empty transparent top margin, with a 512-equivalent canvas and ground root(256,448). Genuine transparent RGBA. Important: the latest source designs have NO waterwheel, hub, spokes, paddles, wheel axle, cogwheel, drive shaft or piston on the LEFT. Left side is only continuous connected stepped stone water chutes. Never reintroduce that removed machinery. Right-hand crank/valve is allowed exactly as specified. Falling water is stopped at this growth stage; upper and lower pools remain FULL with calm plain turquoise water, no bright ripple rings/foam. Paint the complete dry blue/ivory chute beds that were behind the water, all contacts and formerly hidden faces, no holes or amputated edges. POSE at0.8sec: HALF-GROWN LOWER BASIN. Input1 is the precise starting level3 appearance/placement authority. Input2 supplies only the final LOWER BASIN target. Keep the whole low upper aquamarine spring, central two stone cascade steps, short left two-step stone chute and right wooden sluice at the EXACT same size and x/y position as input1; upper pool top remains y207. Its brass crank is turned closed. The lower organic aqua basin is halfway widened toward input2, width about468, bottom448. Its rear/side rim is beginning to form the exact thin ivory flowing marble ribbons and small gold joining bands seen in input2; front rim is still mostly original aqua with only the first continuous ivory growth reaching it. Turquoise wave curls are halfway forming on the connected rim, not separate ornaments. It is one solid believable intermediate bowl, not two nested or superimposed pools. Keep the actual source lower silhouette language; do not add a fat central white mound or oversized symmetrical curls. No tall tower/arches, glass tank, bronze pipes or round valve at this stage. Complete whole body from the underside of the pool up to the little fountain."
+      },
+      "export": {
+        "rawSize": [
+          1254,
+          1254
+        ],
+        "fullCanvasUniformScale": 0.4082934609250399,
+        "translation": [
+          0,
+          -10
+        ],
+        "opaqueBounds": [
+          23,
+          192,
+          495,
+          448
+        ]
+      }
+    },
+    {
+      "timeMs": 1200,
+      "key": "1200",
+      "output": "Keys/key-1200.png",
+      "source": "Sources/key-1200-generated.png",
+      "generatedSource": "D:\\.codex\\generated_images\\01a18fdc-6f03-73a2-a7a1-0c85189aee86\\exec-79639893-cd36-4202-ac41-23a6b2d015f7.png",
+      "generation": {
+        "referenced_image_paths": [
+          "H:/Spawner/AnimationCandidates/SpringNestGrowth03To04NoWheelV1/Sources/level-03.png",
+          "H:/Spawner/AnimationCandidates/SpringNestGrowth03To04NoWheelV1/Sources/level-04.png"
+        ],
+        "transparent_background": true,
+        "prompt": "Use case: precise-object-edit. Actual production KEY POSE for a 2D game nest growth animation. Draw ONE complete freshly painted whole nest, including its full bottom, entire outer basin, unobstructed water interior, connected masonry, all support feet, all left stone channels and the right control appropriate to this stage. No source-part atlas, cutaway, missing body, collage, sheet, labels, text, backdrop, shadow or effects hiding construction. Exact approved painterly aquamarine/ivory/gold style, dark teal contours, upper-left light and slightly elevated frontal three-quarter camera. Preserve the source square framing and generous empty transparent top margin, with a 512-equivalent canvas and ground root(256,448). Genuine transparent RGBA. Important: the latest source designs have NO waterwheel, hub, spokes, paddles, wheel axle, cogwheel, drive shaft or piston on the LEFT. Left side is only continuous connected stepped stone water chutes. Never reintroduce that removed machinery. Right-hand crank/valve is allowed exactly as specified. Falling water is stopped at this growth stage; upper and lower pools remain FULL with calm plain turquoise water, no bright ripple rings/foam. Paint the complete dry blue/ivory chute beds that were behind the water, all contacts and formerly hidden faces, no holes or amputated edges. POSE at1.2sec: FINISHED LOWER BASIN with ORIGINAL LOW UPPER FOUNTAIN. Input1 defines the exact unchanged small low upper spring and its placement, upper pool top y207. Input2 defines the exact finished wide lower ivory/teal/gold basin, width480 fromx16to496 bottom448, its thin flowing ivory rim bands, turquoise curled ornaments and gold seams in their original positions. Paint this complete connected intermediate nest: original small aqua upper pool and both central dry steps, original compact LEFT stepped aqua water chute, and RIGHT wooden sluice with closed brass crank remain at input1's size and positions, seated naturally on the now-grown lower bowl. FULL lower basin has reached the exact final shape and size from input2. Do not upgrade the upper fountain yet. Do not invent a new generic bowl or thicken the front marble ribbon. Fully paint the rear rim and basin floor behind all feet; no horizontal cut seam or rectangular filler. No tall ivory architecture, pressure tank, pipework, piston or round valve yet. One whole coherent object, never individually enlarge or vertically recenter it."
+      },
+      "export": {
+        "rawSize": [
+          1254,
+          1254
+        ],
+        "fullCanvasUniformScale": 0.4082934609250399,
+        "translation": [
+          0,
+          -23
+        ],
+        "opaqueBounds": [
+          18,
+          182,
+          495,
+          448
+        ]
+      }
+    },
+    {
+      "timeMs": 1600,
+      "key": "1600",
+      "output": "Keys/key-1600.png",
+      "source": "Sources/key-1600-generated.png",
+      "generatedSource": "D:\\.codex\\generated_images\\01a18fdc-6f03-73a2-a7a1-0c85189aee86\\exec-6c9d4c64-6e01-4760-860e-206f67d805fa.png",
+      "generation": {
+        "referenced_image_paths": [
+          "D:/.codex/generated_images/01a18fdc-6f03-73a2-a7a1-0c85189aee86/exec-79639893-cd36-4202-ac41-23a6b2d015f7.png",
+          "H:/Spawner/AnimationCandidates/SpringNestGrowth03To04NoWheelV1/Sources/level-04.png"
+        ],
+        "transparent_background": true,
+        "prompt": "Use case: precise-object-edit. ONE actual production complete whole-nest KEY POSE at1.6sec in a game growth animation. Image1 is the exact1.2sec painting to continue, and the EXACT authority for its already-complete LOWER BASIN: preserve that entire lower pool, bottom, thin flowing ivory rim bands, turquoise spiral ornaments, gold seams, footprint, camera and framing without redesign or repaint drift. Image2 supplies ONLY the mature UPPER ivory arch architecture and left stepped stone water chute target. The upper fountain is now HALFWAY through vertical growth: in512-equivalent coordinates upper pooltop approximately160, between207 and112, groundroot256,448. Raise and slightly widen the small upper reservoir toward image2; its rim is becoming ivory and gold with some old aqua stone still visible. Under it build SHORT COMPLETE SUPPORTING ivory/teal pillars and short arches rising continuously from the original aqua foundation. Half-grown means the whole architectural height is intermediate, NOT broken columns or an unsupported floating upper bowl. Central TWO stone cascade stages lengthen and stay connected from upper pool to lower basin. LEFT small aqua two-step chute is midway toward image2's ivory/gold three-stage chute: a new third tread is forming from connected support stone, all channel interiors and feet completely drawn. The original right wooden sluice remains partly visible as a growing ivory footing encloses its bottom; closed brass crank remains attached, not floating. No pressure glass tank, bronze return pipes or round valve yet. No waterwheel, axle, bearing hump, spokes, paddles, gears or piston ANYWHERE on the left. Water flow stopped: full plain calm upper/lower pools, dry complete chute beds, no waterfalls/foam/ripple rings. Freshly paint ONE coherent COMPLETE object from bottom up, same painterly dark teal contours and upper-left lighting as image1. Preserve exact square composition with large original upper empty margin, true transparent RGBA. No sheet, collage seams, sliced bands, cropped edges, labels, backdrop or ground shadow."
+      },
+      "export": {
+        "rawSize": [
+          1254,
+          1254
+        ],
+        "fullCanvasUniformScale": 0.4082934609250399,
+        "translation": [
+          0,
+          -24
+        ],
+        "opaqueBounds": [
+          18,
+          142,
+          495,
+          448
+        ]
+      }
+    },
+    {
+      "timeMs": 2000,
+      "key": "2000",
+      "output": "Keys/key-2000.png",
+      "source": "Sources/key-2000-generated.png",
+      "generatedSource": "D:\\.codex\\generated_images\\01a18fdc-6f03-73a2-a7a1-0c85189aee86\\exec-c090e1ff-61ea-47a5-ad91-133f228b21af.png",
+      "generation": {
+        "referenced_image_paths": [
+          "H:/Spawner/AnimationCandidates/SpringNestGrowth03To04NoWheelV1/Sources/level-04.png"
+        ],
+        "transparent_background": true,
+        "prompt": "Use case: precise-object-edit. Actual production KEY POSE for a 2D game nest growth animation. Draw ONE complete freshly painted whole nest, including its full bottom, entire outer basin, unobstructed water interior, connected masonry, all support feet, all left stone channels and the right control appropriate to this stage. No source-part atlas, cutaway, missing body, collage, sheet, labels, text, backdrop, shadow or effects hiding construction. Exact approved painterly aquamarine/ivory/gold style, dark teal contours, upper-left light and slightly elevated frontal three-quarter camera. Preserve the source square framing and generous empty transparent top margin, with a 512-equivalent canvas and ground root(256,448). Genuine transparent RGBA. Important: the latest source designs have NO waterwheel, hub, spokes, paddles, wheel axle, cogwheel, drive shaft or piston on the LEFT. Left side is only continuous connected stepped stone water chutes. Never reintroduce that removed machinery. Right-hand crank/valve is allowed exactly as specified. Falling water is stopped at this growth stage; upper and lower pools remain FULL with calm plain turquoise water, no bright ripple rings/foam. Paint the complete dry blue/ivory chute beds that were behind the water, all contacts and formerly hidden faces, no holes or amputated edges. POSE at2.0sec: FULLY GROWN STONE ARCHITECTURE BEFORE RIGHT MACHINERY. The supplied exact no-wheel level4 is the design authority. Keep its entire original ivory/teal/gold lower basin and all flowing ribbon curves, curls and gold bands, its full-height round upper reservoir(top y112), ivory arches/pillars, central stepped chute, and complete left three-stage stone chute EXACTLY in their original shapes, scale and positions. Redraw the whole nest as a continuous production painting, not pasted fragments. The right pressure machinery has not formed yet: NO glass tank, NO bronze return loop, NO vertical side pipe and NO circular valve wheel. The old wooden sluice is already enclosed in the new stone base and no wood remains visible. Instead show the exact fully painted fixed ivory/teal pedestal and continuous wall behind that machinery, with a small capped mounting socket on its proper base. Restore all hidden masonry and pool-rim surfaces where devices were, no ghost pipe outline, empty cutout, sawed-off structure or orphan gold fragment. Dry central and left channels are fully formed and connected to the lower pool, both open pools calm and full. All final stone construction is present; only the right machinery is absent."
+      },
+      "export": {
+        "rawSize": [
+          1254,
+          1254
+        ],
+        "fullCanvasUniformScale": 0.4082934609250399,
+        "translation": [
+          0,
+          -4
+        ],
+        "opaqueBounds": [
+          15,
+          106,
+          498,
+          448
+        ]
+      }
+    },
+    {
+      "timeMs": 2400,
+      "key": "2400",
+      "output": "Keys/key-2400.png",
+      "source": "Sources/key-2400-generated.png",
+      "generatedSource": "D:\\.codex\\generated_images\\01a18fdc-6f03-73a2-a7a1-0c85189aee86\\exec-f4d172d4-5be1-4ad4-85c1-2e7183aaebdc.png",
+      "generation": {
+        "referenced_image_paths": [
+          "D:/.codex/generated_images/01a18fdc-6f03-73a2-a7a1-0c85189aee86/exec-c090e1ff-61ea-47a5-ad91-133f228b21af.png",
+          "H:/Spawner/AnimationCandidates/SpringNestGrowth03To04NoWheelV1/Sources/level-04.png"
+        ],
+        "transparent_background": true,
+        "prompt": "Use case: precise-object-edit. ONE complete whole-nest production KEY POSE at2.4sec. Image1 is the exact2.0sec architecture painting to EDIT and preserve: every lower-basin ribbon, teal spiral, gold band, water floor, upper reservoir, ivory arch, central and left stone chute, pedestal, contour, scale, position and camera remains exactly the same. Image2 is ONLY the final RIGHT pressure-machinery design target. Add the HALF-ASSEMBLED right pressure system firmly onto its proper mounting points. The exact reference glass chamber with its bottom bronze flange and top bronze cap is already fully formed and rigidly seated on the existing round pedestal. The chamber is COMPLETELY EMPTY: very pale ice-blue clear glass with reflections and cream stone visible through it, no liquid, waterline, bubbles or floating contents. A short solid bronze neck/elbow grows upward FROM its top cap, attached at the cap, with a proper rounded/capped end, but the long return loop has NOT yet reached the upper reservoir. On the right stone post install the lower section of the vertical side pipe, rooted into its capped socket; its upper elbow has not connected to the tank yet. The COMPLETE bronze round valve handwheel is already attached to the horizontal socket on that right post in its final position, not a loose half wheel. This should read as physically connected machinery under construction, not floating parts: all glass/bronze elements touch their supporting flange, pipe or base. Keep a visible gap between the two unfinished capped pipe ends instead of drawing the fully closed finished loop. No remaining wood sluice or crank at this mature stage. No waterwheel, axle, spokes, paddles, gears, drive rod or piston on the left; left is only exactimage1 stepped stone chute. Both open pools full/calm, no falling water, foam or bright ripples. All dry stone beds and previously hidden surfaces are completely painted. ONE coherent newly painted full object including entire floor/bowl and all feet, exact original empty upper margin and square registration, root256,448 at512equivalent, genuine transparent background. No labels, diagrams, sheets, shadows, extra ornaments, cropped joints or distorted rigid glass."
+      },
+      "export": {
+        "rawSize": [
+          1254,
+          1254
+        ],
+        "fullCanvasUniformScale": 0.4082934609250399,
+        "translation": [
+          0,
+          -6
+        ],
+        "opaqueBounds": [
+          14,
+          104,
+          499,
+          448
+        ]
+      }
+    }
+  ]
+}

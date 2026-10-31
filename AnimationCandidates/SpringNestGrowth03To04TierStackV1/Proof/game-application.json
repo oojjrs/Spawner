@@ -1,0 +1,39 @@
+{
+  "status": "applied-and-game-playback-checked", 
+  "gameImage": "DesignAssets/Animations/Nests/Growth03To04-TierStackV1/spring/growth.png", 
+  "sha256": "15639b52bbce774e6ceec9b8e113f6bd675cc39942c663eb33b2e3378c327b66", 
+  "durationMs": 4000, 
+  "checkedGameFrames": [
+    0, 
+    24, 
+    25, 
+    26, 
+    58, 
+    59, 
+    60, 
+    63
+  ], 
+  "realTimeGameSampleCount": 47, 
+  "lastRealTimeElapsedSeconds": 3.9635999999940394, 
+  "growthCompleted": true, 
+  "idleFrameAfterGrowth": 0, 
+  "idleImage": "DesignAssets/Animations/Nests/Idle04-v2/spring/idle-sheet.webp", 
+  "pageErrors": [], 
+  "localWrapperMatchesApprovedSheet": true, 
+  "contact": "Proof/game-application-contact.png", 
+  "existingTests": {
+    "initialRun": {
+      "passed": 10, 
+      "failed": 1, 
+      "failure": "포자버섯 2→3 팝 성장: 기존 중복 spore 분기로 upgrades[3]에 접근할 수 없음", 
+      "failurePresentInPreApplicationSnapshot": true
+    }, 
+    "failedCaseRecheckedAfterConcurrentSporeBranchMerge": {
+      "test": "포자버섯 2→3 팝 성장", 
+      "passed": 1, 
+      "failed": 0
+    }, 
+    "unresolvedFailures": 0, 
+    "concurrentSporeChangePreserved": true
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "tool": "built-in image_gen",
+  "reference": "DesignAssets/Nests/Level03-Tech-v1/spring.png",
+  "purpose": "key-pose-source-drawings",
+  "keyCount": 8,
+  "intendedLoopMs": 4000,
+  "intendedTimesMs": [
+    0,
+    500,
+    1000,
+    1500,
+    2000,
+    2500,
+    3000,
+    3500
+  ],
+  "wheelPhaseDegreesTarget": [
+    0,
+    45,
+    90,
+    135,
+    180,
+    225,
+    270,
+    315
+  ],
+  "prompts": [
+    {
+      "source": "Sources/generated-keys-01-04.png",
+      "prompt": "Use case: precise-object-edit.\nAsset type: production animation key drawings, not a presentation image.\nEdit target and sole design authority: the supplied 512 x 512 PNG of the level-3 spring-droplet nest.\nCreate ONE transparent sprite source sheet containing exactly FOUR complete animation key drawings in a regular 2 columns by 2 rows grid. Read order upper left, upper right, lower left, lower right. Use a 1024 x 1024 square canvas, each cell 512 x 512. No borders, no text, no numbers, no captions, no shadows or backgrounds outside the sprite. The eight-key idle loop is 4 seconds, clockwise rotation as seen from the visible face of the wheel. This sheet supplies keys 01 to 04 at times 0.0, 0.5, 1.0, 1.5 seconds; wheel phase offsets relative to the reference are 0, 45, 90, 135 degrees.\nPreserve the reference EXACTLY in each cell: same fixed camera, same scale, same turquoise/aqua palette, same painterly outlines and directional lighting, identical low wide silhouette and registration. Preserve the large original empty transparent top margin: the object occupies approximately x=28..485, y=207..448 in every 512px cell. Keep all pale aqua stone basin, outer pool rim, support stones, fixed wheel axle, right wooden sluice, bronze lever in the original geometry and original positions. No redesign, no new architecture, no characters.\nOnly animate the left paddle wheel's moving wooden rim/spokes/paddles, water surfaces, falling water, droplets and foam. Keep wheel hub position and projected elliptical wheel geometry fixed. Rotation is around its true axle in the existing oblique plane, with changing paddle positions and properly painted newly revealed surfaces. Do not rotate a pasted flat ellipse in screen space, do not stretch wood or move its supports.\nKey01: reference wheel phase, uninterrupted two-step waterfall, small compact foam at wheel foot and waterfall landing, a small oval ripple near the rear-center landing.\nKey02: wheel advanced clockwise 45 degrees, a wet blade rising, 2-3 tiny droplets close to its lower edge, waterfall highlight streaks travel downward, landing ripple slightly wider.\nKey03: wheel advanced clockwise 90 degrees, droplets detach and descend, modest fresh white/aqua splash at wheel foot, first ripple expanding into the front pool, waterfall outline still continuous.\nKey04: wheel advanced clockwise 135 degrees, detached droplets lower and about to meet water, slightly wider thin ripple and a new smaller ripple behind, highlight streaks in a new falling phase.\nWater remains luminous turquoise and continuous, no giant waves, no change of water level, no overall wobble or growth. Render four distinct source key drawings with consistent registration and credible small local changes; do not make four identical static copies. Real transparent alpha background."
+    },
+    {
+      "source": "Sources/generated-keys-05-08.png",
+      "prompt": "Use case: precise-object-edit.\nAsset type: real production source drawings for a level-3 spring-droplet nest idle animation.\nImage 1 is the original approved design and registration authority. Image 2 contains the preceding four key drawings (01-04), and is only a continuity reference for painterly water and wheel rendering.\nGenerate ONE transparent square sprite source sheet with exactly FOUR complete drawings in a precise 2 columns x 2 rows equal square cell grid, read upper-left, upper-right, lower-left, lower-right. These are successive keys 05, 06, 07, 08 of the same 4-second clockwise waterwheel idle loop, times 2.0, 2.5, 3.0, 3.5 seconds and wheel offsets 180, 225, 270, 315 degrees from original. Do not put any text or numbers in the image. No borders, no headings, no backdrop, real alpha transparency.\nAll four drawings must be EXACTLY the same size and position within their cells, same silhouette and same fixed geometry as original image 1. Same front slightly-downward camera, low wide pool, same proportions, aqua/teal outlines, same warm wood wheel and gate, same painterly highlights. Entire sprite safely inside each cell with transparent margin. No crop at cell edges. Keep pale aqua stones, pool rim, gate, gate lever, supports and axle immobile and unchanged. Only moving water, foam, wheel blades/rim/spokes and tiny local droplets change. Do not redesign, do not duplicate or remove any structure. No characters.\nWheel rotates clockwise in its original oblique 3D plane around its fixed axle, NOT a pasted flat shape rotating in the image plane. Keep wooden pieces rigid. Give each of the four keys a genuinely different blade arrangement and correct occlusion. Newly visible wheel surfaces should look like the same wood.\nKey05 (upper left): 180-degree phase; a rising wet paddle has just cleared the pool; a compact splash of 3 aqua droplets is highest beside the lower wheel; waterfall flowing continuously down both steps; fresh small landing ripple plus an older expanding thin ellipse.\nKey06 (upper right): 225-degree phase; those droplets arc downward, splash crown collapses, ripple spreads toward open foreground pool, waterfall white streaks move lower.\nKey07 (lower left): 270-degree phase; tiny droplets contact water, create a fresh narrow local ripple; older rings become thinner and fainter; keep cascade streams connected, not broken into floating slabs.\nKey08 (lower right): 315-degree phase; foam and ripples transition toward the original key01, broad subtle fading ellipse, next blade ready to enter water; wheel must still be rotating, no stopping pose. The following key01 at 360 degrees continues motion.\nWater movement should be readable at small game scale but modest. No big waves, pool level changes, whole-object wobble, scale differences, camera motion, extra objects or artificial glow. Preserve reference art style. These four are distinct key drawings, not presentation thumbnails."
+    }
+  ]
+}

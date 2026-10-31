@@ -1,0 +1,50 @@
+[
+  {
+    "requestedMs": 0,
+    "capturedMs": 39
+  },
+  {
+    "requestedMs": 300,
+    "capturedMs": 312
+  },
+  {
+    "requestedMs": 440,
+    "capturedMs": 452
+  },
+  {
+    "requestedMs": 510,
+    "capturedMs": 514
+  },
+  {
+    "requestedMs": 530,
+    "capturedMs": 530
+  },
+  {
+    "requestedMs": 550,
+    "capturedMs": 563
+  },
+  {
+    "requestedMs": 570,
+    "capturedMs": 579
+  },
+  {
+    "requestedMs": 600,
+    "capturedMs": 601
+  },
+  {
+    "requestedMs": 660,
+    "capturedMs": 665
+  },
+  {
+    "requestedMs": 730,
+    "capturedMs": 736
+  },
+  {
+    "requestedMs": 880,
+    "capturedMs": 895
+  },
+  {
+    "requestedMs": 1180,
+    "capturedMs": 1195
+  }
+]

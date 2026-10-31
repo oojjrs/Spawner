@@ -1,0 +1,81 @@
+{
+  "status": "key-drawings-awaiting-user-confirmation",
+  "motion": "one-quantum-growth-jump-with-anticipation-and-recoil",
+  "canvas": [
+    512,
+    512
+  ],
+  "ground": [
+    256,
+    448
+  ],
+  "common_scale_after_canvas_normalization": 0.849609375,
+  "construction": "unchanged-original-endpoints-and-three-new-full-pose-drawings",
+  "keys": [
+    {
+      "index": 1,
+      "pose": "level03-original",
+      "file": "Keys/key-01-level03-original.png",
+      "source_size": [
+        512,
+        512
+      ],
+      "translation": [
+        38,
+        67
+      ]
+    },
+    {
+      "index": 2,
+      "pose": "level03-compressed",
+      "file": "Keys/key-02-level03-compressed.png",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "translation": [
+        38,
+        67
+      ]
+    },
+    {
+      "index": 3,
+      "pose": "level04-growth-peak",
+      "file": "Keys/key-03-level04-growth-peak.png",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "translation": [
+        38,
+        35
+      ]
+    },
+    {
+      "index": 4,
+      "pose": "level04-recoil",
+      "file": "Keys/key-04-level04-recoil.png",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "translation": [
+        38,
+        46
+      ]
+    },
+    {
+      "index": 5,
+      "pose": "level04-original",
+      "file": "Keys/key-05-level04-original.png",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "translation": [
+        38,
+        46
+      ]
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "status": "key-drawings-awaiting-user-confirmation",
+  "canvas": [
+    512,
+    512
+  ],
+  "ground": [
+    256,
+    448
+  ],
+  "common_scale_after_canvas_normalization": 0.85,
+  "construction": "original-endpoints-and-six-drawn-poses; full-pose-extraction-and-common-registration-only",
+  "keys": [
+    {
+      "index": 1,
+      "pose": "level03-open",
+      "file": "Keys/key-01-level03-open.png",
+      "translation": [
+        38,
+        67
+      ]
+    },
+    {
+      "index": 2,
+      "pose": "level03-sealed",
+      "file": "Keys/key-02-level03-sealed.png",
+      "translation": [
+        38,
+        78
+      ]
+    },
+    {
+      "index": 3,
+      "pose": "level03-compressed",
+      "file": "Keys/key-03-level03-compressed.png",
+      "translation": [
+        38,
+        50
+      ]
+    },
+    {
+      "index": 4,
+      "pose": "intermediate-growth-peak",
+      "file": "Keys/key-04-intermediate-growth-peak.png",
+      "translation": [
+        38,
+        31
+      ]
+    },
+    {
+      "index": 5,
+      "pose": "intermediate-compressed",
+      "file": "Keys/key-05-intermediate-compressed.png",
+      "translation": [
+        38,
+        31
+      ]
+    },
+    {
+      "index": 6,
+      "pose": "level04-growth-peak",
+      "file": "Keys/key-06-level04-growth-peak.png",
+      "translation": [
+        38,
+        21
+      ]
+    },
+    {
+      "index": 7,
+      "pose": "level04-half-open",
+      "file": "Keys/key-07-level04-half-open.png",
+      "translation": [
+        38,
+        48
+      ]
+    },
+    {
+      "index": 8,
+      "pose": "level04-open",
+      "file": "Keys/key-08-level04-open.png",
+      "translation": [
+        38,
+        46
+      ]
+    }
+  ]
+}

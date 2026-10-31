@@ -1,0 +1,22 @@
+{
+  "status": "approved-keyframes-rendered", 
+  "approval": {
+    "date": "2026-10-31", 
+    "userInstruction": "한번만에 팍! 하고 성장시키겠단 건가? 아무래도 좋다 해봐라", 
+    "target": "KeyPoses/stage-01-one-floor-lower.png", 
+    "sha256": "c7f10db5e55f8d502e01806953aafafea4837179e3741e5a7020cfd33773ed3a"
+  }, 
+  "stageSources": [
+    "KeyPoses/stage-00-level03.png", 
+    "KeyPoses/stage-01-one-floor-lower.png", 
+    "KeyPoses/stage-02-level04.png"
+  ], 
+  "stageChangeMs": [
+    1400, 
+    2760
+  ], 
+  "newPartExtraction": false, 
+  "bodyTransform": "identity", 
+  "fullAnimationRender": true, 
+  "representativePlaybackBeforeFullProduction": true
+}

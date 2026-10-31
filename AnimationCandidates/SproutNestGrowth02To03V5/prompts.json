@@ -1,0 +1,98 @@
+[
+  {
+    "interval": 0,
+    "mode": "built-in-imagegen",
+    "referenced_image_paths": [
+      "H:/Spawner/$Trash/SproutGrowth23V5/close1-continuous-guide.png",
+      "H:/Spawner/AnimationCandidates/SproutNestGrowth02To03V3Keyframes/KeyPoses/00-start.png",
+      "H:/Spawner/AnimationCandidates/SproutNestGrowth02To03V3Keyframes/KeyPoses/01-closing.png"
+    ],
+    "transparent_background": true,
+    "prompt": "Production 2D animation inbetween drawing. Image 1 is a rough size/placement guide in four exact 2x2 cells; images 2 and 3 are the finished approved beginning and end of this interval. Draw the four chronological intermediate poses 20%,40%,60%,80% of image 2 closing inward toward image 3. Keep guide framing, basal rosette and side curls fixed, progressively shrinking main flower sizes as guide. In addition to the shrinking, the two thick front petals genuinely close inward and increasingly cover the three gold beans and green sprout: progressively narrower center opening, sprout tips descend behind petals, petal lips approach each other. The last cel is close to image 3 but not identical. Repair guide's clipped tops, straight cut edges and dark gaps with complete beautifully finished petals. Preserve EXACT original character style and material: ivory and pale mint fleshy petals, deep teal crisp outlines, cream highlights, curved cel-painted veins, full rounded volume. Same number of petals, same golden beans, same two-leaf sprout. No mechanical parts at this stage. All four basal rosettes and side curls remain identical in scale and positions. No zoom, no independent fitting, no new leaves. Transparent background and fully opaque sprite surfaces. Four usable cels in exact 2x2 grid, no labels, borders, text, effects, motion trails, double contours, ghosting or external shadow. Match the original approved high-quality painting, not a generic redraw.",
+    "archivedGuide": "Sources/Guides/close1.png"
+  },
+  {
+    "interval": 1,
+    "mode": "built-in-imagegen",
+    "referenced_image_paths": [
+      "H:/Spawner/$Trash/SproutGrowth23V5/close2-continuous-guide.png",
+      "H:/Spawner/AnimationCandidates/SproutNestGrowth02To03V3Keyframes/KeyPoses/01-closing.png",
+      "H:/Spawner/AnimationCandidates/SproutNestGrowth02To03V3Keyframes/KeyPoses/02-small-hold.png"
+    ],
+    "transparent_background": true,
+    "prompt": "Production 2D sprite animation inbetween drawings. Paint four chronological cels from approved image 2 into approved image 3, 20%,40%,60%,80%. Image 1 is the rough size and position guide in four 2x2 cells: keep its framing and successive smaller bud sizes but repair incomplete cut-out edges and black gaps. This interval completes the clumping shut: the tiny gold bean and green sprout are covered by the thick front petals during the first half, then disappear completely behind the fully opaque closed petals. The two front petal lips close into the same elegant interlocking S-shaped seam as image 3; the final two cels show fully closed buds, with no gold, green sprout or central aperture. The bud contracts and lowers gradually toward the small closed final pose, never inflates. Keep the basal leaf rosette and two side curled green leaves fixed in identical shape, scale and position throughout. Preserve exact original high-quality hand-painted style of images 2/3, crisp deep teal outlines, ivory and mint fleshy petals with curved veins, cream highlights and rounded thick petal volume. Two small rear pointed petals remain. No mechanical parts at this stage. Repair undersides into complete surfaces without black holes. All four are actual usable sprite cels, identical cell geometry, no zoom/independent fitting. Transparent background, opaque sprite surfaces. No text, labels, borders, effects, motion trails, double contours, cast shadow or ghosts.",
+    "archivedGuide": "Sources/Guides/close2.png"
+  },
+  {
+    "interval": 2,
+    "mode": "built-in-imagegen",
+    "referenced_image_paths": [
+      "H:/Spawner/$Trash/SproutGrowth23V5/growth1-guide-sheet.png",
+      "H:/Spawner/AnimationCandidates/SproutNestGrowth02To03V3Keyframes/KeyPoses/02-small-hold.png",
+      "H:/Spawner/AnimationCandidates/SproutNestGrowth02To03V3Keyframes/KeyPoses/03-middle-hold.png"
+    ],
+    "transparent_background": true,
+    "prompt": "Use case: precise-object-edit. Paint four high-quality actual animation inbetweens. Image 1 is a rough positional guide, four sprites in exact 2x2 cells. Images 2 and 3 are the approved beginning and ending sprite drawings of this interval. Keep image 1 exact camera, scale, fixed base and distinct bud sizes in chronological reading order at 20%,40%,60%,80% between images 2 and 3. Repaint rough mask boundaries, clipped petal undersides and missing overlaps into polished continuous thick ivory/mint petals; match the beautiful original hand-painted cel quality and precise dark teal outlines of images 2 and 3. Keep the S-shaped center seam, two rear pointed petals, soft cream highlights and curved mint veins. The bud physically grows upward from the same leaf rosette. The wood mechanism is initially concealed below/behind the rosette, then rises as connected assemblies: first tiny upper edges of brass/wood, then both short wood levers and upper brass pivots, finally the full two lever pairs and ONE left rope winch. Preserve the guide's gradual reveal, no instant fully formed mechanism in the first cell. Four brass pivots remain round, attached to wood; no loose brass dots, broken joints, gaps, clipped edges or rubbery metal. The upper and lower pivots on each short lever move together. Keep side green curls and all basal leaves fixed in identical size and positions. Do not zoom or independently fit each sprite. The 2x2 atlas is four production cels, no borders, labels, numbers, shadows, motion trails or effects. Genuine transparent background, opaque sprite surfaces. No blending or ghost outlines. Match the original approved quality, retain all original subject design.",
+    "archivedGuide": "Sources/Guides/growth1.png"
+  },
+  {
+    "interval": 3,
+    "mode": "built-in-imagegen",
+    "referenced_image_paths": [
+      "H:/Spawner/$Trash/SproutGrowth23V5/growth2-locked-sheet.png",
+      "H:/Spawner/AnimationCandidates/SproutNestGrowth02To03V3Keyframes/KeyPoses/03-middle-hold.png",
+      "H:/Spawner/AnimationCandidates/SproutNestGrowth02To03V3Keyframes/KeyPoses/04-large-hold.png"
+    ],
+    "transparent_background": true,
+    "prompt": "Production sprite clean-up paint-over. Image 1 is the EDIT TARGET with four already posed growth animation cels in a 2x2 atlas, chronological reading order. Preserve precisely its layout, framing, sizes and ALL silhouettes and object positions; change only the rough seams and unfinished regions into finished artwork. Images 2 and 3 are the approved bounding cels and the exact painting style. Match their original dark teal outlines, creamy ivory and pale mint petal shading, subtle curved veins, crisp painted highlights and thick sculpted petal volume. The bud grows slightly each cel, no extra squash or shape redesign. The same four brass pivot plates stay round and firmly attached to two short wood levers. Two long rear wood braces connect to these upper pivots. One left winch, green rope bindings, front wooden collar. Paint continuous opaque petal undersides immediately behind the wood collar to fill unnatural black gaps; no holes through flower or floating wood. Keep the lower rosette and side leaves identical to image 1. Its baseline is fixed in every cell. Do not zoom any cell or reduce margins. Keep the center S-shaped seam and rear pointed petals. No new details, text, panel lines, labels, effects, trails, double contours or cast shadows. Transparent background. Preserve reference quality and original proportions, clean usable game animation drawings.",
+    "archivedGuide": "Sources/Guides/growth2.png"
+  },
+  {
+    "interval": 4,
+    "mode": "built-in-imagegen",
+    "referenced_image_paths": [
+      "H:/Spawner/$Trash/SproutGrowth23V5/open1-guide-sheet.png",
+      "H:/Spawner/AnimationCandidates/SproutNestGrowth02To03V3Keyframes/KeyPoses/04-large-hold.png",
+      "H:/Spawner/AnimationCandidates/SproutNestGrowth02To03V3Keyframes/KeyPoses/05-opening.png"
+    ],
+    "transparent_background": true,
+    "prompt": "Production sprite inbetween drawing for a flower nest opening. Image 1 is a rough 2x2 four-cel placement guide. Images 2 and 3 are the exact approved beginning and ending drawings. Create four distinct chronological intermediate drawings 20%,40%,60%,80% from closed image 2 to slightly open image 3. Keep guide camera, fixed size and base placement. The flower does NOT grow in this interval. The S-seam parts very gradually from its top; the front petal lips curl a little outward. A tiny opening is already present in cel 1, gradually widening through all four cels, first revealing a pinhead of green, then tips of the same two sprout leaves, then a sliver of the gold beans behind the petal rims. No abrupt closed/open swap halfway. Rear two pointed petals remain at the same height. The lower body stays full and rounded with its base at the same point. Preserve the complete wood/brass mechanism in exactly the same position in every cel: ONE left winch, two rear braces, two short wood levers, four round brass pivots and front wood collar with green bindings. No moving or reshaping hardware, no extra pivots. Match EXACT rich original hand-painted quality: deep teal crisp outlines, ivory and mint thick sculpted petals, cream highlights and curved cel-painted veins. Repair every rough guide seam, clipped petal edge, pinhole and duplicated contour. Lower rosette and side curled leaves remain identical across cels. Same 2x2 cell geometry, no zoom, fitting, text, labels, borders, effects, trails or external shadows. Real transparent background, fully opaque sprite surfaces.",
+    "archivedGuide": "Sources/Guides/open1.png"
+  },
+  {
+    "interval": 5,
+    "mode": "built-in-imagegen",
+    "referenced_image_paths": [
+      "H:/Spawner/$Trash/SproutGrowth23V5/open2-guide-sheet.png",
+      "H:/Spawner/AnimationCandidates/SproutNestGrowth02To03V3Keyframes/KeyPoses/05-opening.png",
+      "H:/Spawner/AnimationCandidates/SproutNestGrowth02To03V3Keyframes/KeyPoses/06-end.png"
+    ],
+    "transparent_background": true,
+    "prompt": "Use case: precise-object-edit. Four actual 2D animation inbetween cels, not a concept sheet. Image 1 gives four 2x2 cell placements between approved images 2 and 3. Draw a smooth gradual widening of the opening at 20%,40%,60%,80%, chronological reading order. The two large thick front petals slowly uncurl outwards, revealing more of the SAME three gold beans and the SAME green two-leaf sprout. The sprout unfolds its two leaves wider as the petals uncover it. The two rear pointed petals separate a little. Keep the bottom root, flower outer volume and overall flower height constant; no continued growth or shrinking. Render natural curved petals without angular polygon facets, extra folds or cut planes. Match exactly the beautiful original painted style of images 2 and 3: crisp deep teal outlines, ivory/mint/cream petal volumes and smoothly curved painted veins. Keep the entire wood and brass mechanism and lower rosette completely stable across all four cels: four round brass pivots attached at the same locations to two short wooden links, two rear wood braces, green vine bindings, a front collar and ONE left winch. No rubbery metal, duplicated joints or detached parts. No holes, rough cut edges, ghosting, doubled outlines, trails, effects or text. Real transparent background, with fully opaque sprite surfaces, no gradients or cast shadows outside the sprite. Exact 2x2 layout, all four cels with identical framing and scale, no independent fit or zoom. Last cel should be very close to image 3 but still a small intermediate step before it.",
+    "archivedGuide": "Sources/Guides/open2.png"
+  },
+  {
+    "interval": 3,
+    "cel": 1,
+    "mode": "built-in-imagegen",
+    "archivedEditTarget": "Sources/EditInputs/growth2-cel1.png",
+    "referenced_image_paths": [
+      "H:/Spawner/AnimationCandidates/SproutNestGrowth02To03V5/Cels/16.png",
+      "H:/Spawner/AnimationCandidates/SproutNestGrowth02To03V3Keyframes/KeyPoses/03-middle-hold.png"
+    ],
+    "transparent_background": true,
+    "prompt": "Precise LOCAL edit of image 1. Keep the exact original sprite, pose, size, camera, all petal surfaces, shadows, veins, leaves, all brass pivots, side wooden levers, rear braces and left winch unchanged. Change ONLY the brown FRONT COLLAR, the wood strip from the left lower pivot across the front of the flower to the right lower pivot, including its brown central bowl and two green lashings at that bowl. Conceal this entire front collar behind the foreground mint leaves; it is not yet visible at this phase. Paint the lower mint flower petals and leaf overlaps in the vacated collar region to connect the flower naturally into its leaf rosette, using image 2 ONLY as reference for the mint flower-to-leaf junction. No brown horizontal collar rail and no central brown bowl should be visible. Do NOT remove or change the two side wooden levers or their four round brass discs. Do NOT change the bud size, S seam, rear petals or basal leaf sizes. Do not enlarge the central heart-shaped basal leaf. No other design or style changes. Preserve the beautiful original hand-painted quality with crisp dark teal outlines. One complete sprite, same framing and exact proportions as image 1, transparent background. This is a single animation inbetween production cel, not a new key pose or concept."
+  },
+  {
+    "interval": 3,
+    "cel": 2,
+    "mode": "built-in-imagegen",
+    "archivedEditTarget": "Sources/EditInputs/growth2-cel2.png",
+    "referenced_image_paths": [
+      "H:/Spawner/AnimationCandidates/SproutNestGrowth02To03V5/Cels/17.png",
+      "H:/Spawner/AnimationCandidates/SproutNestGrowth02To03V3Keyframes/KeyPoses/03-middle-hold.png"
+    ],
+    "transparent_background": true,
+    "prompt": "Precise LOCAL edit of image 1, one production animation cel. Keep the exact sprite, pose, bud size, camera, S seam, petal shapes, colors, beautiful painting, leaves, rear braces, left winch, two side wooden levers and all four brass discs unchanged. Change ONLY the front wood collar: the horizontal brown rail under the flower and its central brown bowl with the green lashings. At this earlier animation phase, the collar is still mostly hidden behind the mint basal leaves. Repaint it so ONLY a very thin upper brown strip is visible just above the leaves, about one quarter of the current collar height; its lower three quarters, the bowl shape and most lashings are concealed by natural opaque overlapping mint petals. Use image 2 only for the natural flower-to-leaf overlap and original basal leaf size. Do not remove the collar completely: a small brown top rim is just beginning to peek out. No transparency/fading, no holes. Preserve all side wooden and brass mechanism positions and shapes, no enlarged central basal leaf, no new design, no size or framing change. Retain the original crisp dark teal outlines and rich ivory/mint painted volume. One sprite on a true transparent background, opaque surfaces, no text, effects, shadows or other additions."
+  }
+]

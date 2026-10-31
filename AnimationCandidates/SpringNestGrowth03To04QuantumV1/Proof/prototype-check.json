@@ -1,0 +1,17 @@
+{
+  "source": "Proof/prototype.webp", 
+  "nativeObservedStages": [
+    0, 
+    1
+  ], 
+  "nativeChangeBracketsMs": [
+    [
+      1470, 
+      1543
+    ]
+  ], 
+  "fixedRegionMaxMeanError": 0, 
+  "fullySubmergedBeforeSwitch": true, 
+  "sampleCount": 24, 
+  "contact": "Proof/prototype-playback-contact.png"
+}

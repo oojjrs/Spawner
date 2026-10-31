@@ -1,0 +1,158 @@
+{
+  "version": "V3Keyframes",
+  "stage": "keyframe-review-only",
+  "canvas": [
+    512,
+    512
+  ],
+  "references": [
+    "H:/Spawner/DesignAssets/Animations/Nests/Growth01To02-v3/sprout/level-02.png",
+    "H:/Spawner/DesignAssets/Animations/Nests/Idle03-v1/sprout/keypose.png"
+  ],
+  "order": [
+    "00-start",
+    "01-closing",
+    "02-small-hold",
+    "03-middle-hold",
+    "04-large-hold",
+    "05-opening",
+    "06-end"
+  ],
+  "holdPoses": [
+    "02-small-hold",
+    "03-middle-hold",
+    "04-large-hold"
+  ],
+  "generator": "built-in imagegen",
+  "keyPoses": [
+    {
+      "id": "00-start",
+      "label": "00 시작 · 2레벨 원본",
+      "source": "H:\\Spawner\\DesignAssets\\Animations\\Nests\\Growth01To02-v3\\sprout\\level-02.png",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "scaleToCanvas": [
+        1.0,
+        1.0
+      ],
+      "landmarkTranslation": [
+        0,
+        0
+      ],
+      "generated": false
+    },
+    {
+      "id": "01-closing",
+      "label": "01 뭉치는 중",
+      "source": "D:\\.codex\\generated_images\\01a18fdb-6ca5-7d70-94dd-178b3e24c00f\\exec-fda3f56b-3cf3-41a5-87b9-fe0860c435db.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "scaleToCanvas": [
+        0.4082934609250399,
+        0.4082934609250399
+      ],
+      "landmarkTranslation": [
+        0,
+        -25
+      ],
+      "generated": true
+    },
+    {
+      "id": "02-small-hold",
+      "label": "02 뭉침 완료 · 정지",
+      "source": "D:\\.codex\\generated_images\\01a18fdb-6ca5-7d70-94dd-178b3e24c00f\\exec-8e110a03-c6fc-4444-8bda-d2c473c8f166.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "scaleToCanvas": [
+        0.4082934609250399,
+        0.4082934609250399
+      ],
+      "landmarkTranslation": [
+        0,
+        -25
+      ],
+      "generated": true
+    },
+    {
+      "id": "03-middle-hold",
+      "label": "03 첫 성장 완료 · 정지",
+      "source": "D:\\.codex\\generated_images\\01a18fdb-6ca5-7d70-94dd-178b3e24c00f\\exec-4d4ae6e4-673c-41df-ac0f-1f5db2dfed38.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "scaleToCanvas": [
+        0.4082934609250399,
+        0.4082934609250399
+      ],
+      "landmarkTranslation": [
+        0,
+        -10
+      ],
+      "generated": true
+    },
+    {
+      "id": "04-large-hold",
+      "label": "04 두 번째 성장 완료 · 정지",
+      "source": "D:\\.codex\\generated_images\\01a18fdb-6ca5-7d70-94dd-178b3e24c00f\\exec-e97adec6-b1e8-4f11-b295-c9cd3db687bf.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "scaleToCanvas": [
+        0.4082934609250399,
+        0.4082934609250399
+      ],
+      "landmarkTranslation": [
+        -4,
+        -2
+      ],
+      "generated": true
+    },
+    {
+      "id": "05-opening",
+      "label": "05 펼치는 중",
+      "source": "D:\\.codex\\generated_images\\01a18fdb-6ca5-7d70-94dd-178b3e24c00f\\exec-d29d1165-71b6-42f6-92ab-f740fb31989e.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "scaleToCanvas": [
+        0.4082934609250399,
+        0.4082934609250399
+      ],
+      "landmarkTranslation": [
+        -1,
+        -12
+      ],
+      "generated": true
+    },
+    {
+      "id": "06-end",
+      "label": "06 펼침 완료 · 3레벨 원본",
+      "source": "H:\\Spawner\\DesignAssets\\Animations\\Nests\\Idle03-v1\\sprout\\keypose.png",
+      "sourceSize": [
+        512,
+        512
+      ],
+      "scaleToCanvas": [
+        1.0,
+        1.0
+      ],
+      "landmarkTranslation": [
+        0,
+        0
+      ],
+      "generated": false
+    }
+  ],
+  "riggingPerformed": false,
+  "partExtractionPerformed": false,
+  "inbetweensRendered": false
+}

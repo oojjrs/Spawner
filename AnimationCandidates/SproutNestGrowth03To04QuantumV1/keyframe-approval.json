@@ -1,0 +1,110 @@
+{
+  "version": "SproutNestGrowth03To04QuantumKeysV1",
+  "generator": "built-in imagegen",
+  "frameSize": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "durationMs": 5600,
+  "approval": "approved",
+  "partExtraction": false,
+  "rigging": false,
+  "interpolation": false,
+  "keys": [
+    {
+      "id": "K0",
+      "time": 0,
+      "stage": "level03-open",
+      "reference": "H:\\Spawner\\DesignAssets\\Animations\\Nests\\Idle03-v1\\sprout\\keypose.png",
+      "image": "KeyPoses/K0.png",
+      "label": "시작 · 3레벨"
+    },
+    {
+      "id": "K1",
+      "time": 0.8,
+      "stage": "level03-half-close",
+      "source": "Sources/K1.png",
+      "image": "KeyPoses/K1.png",
+      "label": "닫힘 중간"
+    },
+    {
+      "id": "K2",
+      "time": 1.25,
+      "stage": "level03-closed",
+      "source": "Sources/K2.png",
+      "image": "KeyPoses/K2.png",
+      "label": "3레벨 닫힘"
+    },
+    {
+      "id": "K3",
+      "time": 1.7,
+      "stage": "foundation-closed",
+      "source": "Sources/K3.png",
+      "image": "KeyPoses/K3.png",
+      "label": "1차 점프 · 기단"
+    },
+    {
+      "id": "K4",
+      "time": 2.5,
+      "stage": "mechanism-closed",
+      "source": "Sources/K4.png",
+      "image": "KeyPoses/K4.png",
+      "label": "2차 점프 · 장치"
+    },
+    {
+      "id": "K5",
+      "time": 3.3,
+      "stage": "level04-closed",
+      "source": "Sources/K5.png",
+      "image": "KeyPoses/K5.png",
+      "label": "3차 점프 · 돔"
+    },
+    {
+      "id": "K6",
+      "time": 4.05,
+      "stage": "level04-early-open",
+      "source": "Sources/K6.png",
+      "image": "KeyPoses/K6.png",
+      "label": "펼침 시작"
+    },
+    {
+      "id": "K7",
+      "time": 4.7,
+      "stage": "level04-open",
+      "reference": "H:\\Spawner\\DesignAssets\\Nests\\Level04-Civilization-v1\\Runtime\\sprout.png",
+      "image": "KeyPoses/K7.png",
+      "label": "완료 · 4레벨"
+    }
+  ],
+  "growthEvents": [
+    {
+      "time": 1.7,
+      "from": "K2",
+      "to": "K3",
+      "partGroup": "foundation"
+    },
+    {
+      "time": 2.5,
+      "from": "K3",
+      "to": "K4",
+      "partGroup": "pillars-supports-vessel"
+    },
+    {
+      "time": 3.3,
+      "from": "K4",
+      "to": "K5",
+      "partGroup": "canopy"
+    }
+  ],
+  "display": {
+    "growth": "discrete-exclusive-state",
+    "poseOpacityBlend": false,
+    "growthWhileOpening": false
+  },
+  "approvalText": "좋아. 계속해",
+  "approvalDate": "2026-10-31"
+}
