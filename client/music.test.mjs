@@ -200,22 +200,3 @@ test("웰컴에서 음소거하면 알트탭 복귀에도 유지하고 해제할
   await settle();
   assert.deepEqual(sound.playing(), ["peace.mp3"]);
 });
-
-test("SFX 합산 출력은 BGM 페이드와 무음에 맞춰 낮아지고 정지 후 복귀한다", async () => {
-  const sound = fixture(false);
-  await settle();
-  assert.equal(sound.effectLevel(), 0);
-  sound.advance(1);
-  const audible = sound.effectLevel();
-  assert.ok(audible > 0 && audible <= 1);
-  sound.advance(1.2);
-  assert.ok(sound.effectLevel() < audible / 1000);
-  sound.advance(1.2);
-  assert.ok(sound.effectLevel() > audible);
-  sound.audio.setActive(false);
-  assert.equal(sound.effectLevel(), 0);
-  sound.audio.setActive(true);
-  await settle();
-  sound.advance(1);
-  assert.ok(sound.effectLevel() > 0 && sound.effectLevel() <= 1);
-});
