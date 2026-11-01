@@ -56,7 +56,6 @@ export function constructionHelp(state, tribe, enabled, goal, stock, world, supp
   const template = constructionHelpTemplate({ ...state, tribe }, slots, kind);
   const cost = birthCost(template, tribe);
   const issue = state.evolutionPoints < cost ? "진화 포인트가 부족합니다." :
-    state.agents.length >= 200 ? "생명체는 최대 200개까지 유지할 수 있습니다." :
     !state.templates.includes(template) && state.templates.length >= 100 ? "설계는 최대 100개까지 저장할 수 있습니다." : null;
   const members = (kind === "construction" ? state.agents.filter(agent => agent.health > 0) : ordinary)
     .filter(agent => slots.every(key => agent.slots.includes(key))).map(agent => agent.id).sort().join(",");

@@ -85,14 +85,13 @@ test("수입이 관측되기 전에는 건강한 초기 군락을 유지하고 �
   assert.equal(game.agents.length,5);
 });
 
-test("둥지가 파괴되거나 탄생 공간이 없거나 200개 제한에 닿으면 비용을 차감하지 않는다", () => {
-  for (const condition of ["destroyed","blocked","limit"]) {
+test("둥지가 파괴되거나 탄생 공간이 없으면 비용을 차감하지 않는다", () => {
+  for (const condition of ["destroyed","blocked"]) {
     const room=fixture(), game=room.games.get("bean");room.hostId="manual";
     change(game,state=>{
       state.evolutionPoints=100;
       state.nestLevel=4;
-      if(condition==="limit") state.agents=Array.from({length:200},(_,index)=>({...structuredClone(state.agents[0]),id:"1:"+(index+1)}));
-      else state.agents=[];
+      state.agents=[];
       if(condition==="destroyed") state.nestHealth=0;
     });
     if(condition==="blocked") room.world.terrain.fill(0);

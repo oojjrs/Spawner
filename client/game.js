@@ -3473,7 +3473,7 @@
     }
 
     function updateAudio() {
-      if (state.ending || !connection.active || !connection.online || state.camera.layer > 1 || !audio.available()) {
+      if (state.ending || !connection.active || !connection.online || !audio.available()) {
         if (audioTime != null) resetAudio();
         return;
       }
@@ -5006,22 +5006,13 @@
         const scale = measureUnitDisplayScale(tribe, attributes, growth);
         if (scale) unitAttributeScales.set(key, scale);
       }
-      return unitAttributeScales.get(key)?.x || base;
+      return unitAttributeScales.get(key) || base;
     }
 
     function measureUnitDisplayScale(tribe, attributes, growth) {
       const reference = unitBodySize(tribe, {}), size = unitBodySize(tribe, attributes);
       const scale = (unitDisplayScales.get(tribe) || 1) * growth;
-      return size.width > 0 && size.height > 0 ? { x: scale * reference.width / size.width, y: scale * reference.height / size.height } : null;
-    }
-
-    function unitDisplayScaleY(unit) {
-      const scale = unitDisplayScale(unit);
-      if (unit.species || unit.construction?.state === "transforming") return scale;
-      const tribe = unit.tribe || "bean", attributes = unit.appearanceAttributes || unit.attributes || {};
-      const key = tribe + ":" + ATTRIBUTES.filter(attribute => attributes[attribute.key] > 0)
-        .map(attribute => attribute.key + ":" + attributes[attribute.key]).join(",");
-      return unitAttributeScales.get(key)?.y || scale;
+      return size.width > 0 ? scale * reference.width / size.width : null;
     }
 
     function unitBodySize(tribe, attributes) {
@@ -5108,7 +5099,7 @@
       const scale = unitDisplayScale(agent);
       ctx.save();
       ctx.translate(point.x, point.y);
-      ctx.scale(scale, unitDisplayScaleY(agent));
+      ctx.scale(scale, scale);
       ctx.translate(-point.x, -point.y);
       drawAgentUnscaledBody(now, agent);
       ctx.restore();
@@ -6084,7 +6075,7 @@
         const jump = birth ? birth.lift : appearance.feet ? 0 : Math.sin(position.progress * Math.PI) * AGENT_HEIGHT * 0.18;
         const bodyPose = state.camera.zoom < 8 ? { pivot: 0, scaleX: 1, scaleY: 1 } :
           agentBodyPose(candidate, state.lastFrame, foodDeliveryPose(candidate));
-        const height = state.camera.zoom < 8 ? 3 / state.camera.zoom : AGENT_HEIGHT * unitDisplayScaleY(candidate) * (agentCombatPlacement(candidate)?.scale || 1);
+        const height = state.camera.zoom < 8 ? 3 / state.camera.zoom : AGENT_HEIGHT * unitDisplayScale(candidate) * (agentCombatPlacement(candidate)?.scale || 1);
         const sprite = agentSprite(candidate);
         const width = state.camera.zoom < 8 ? height : height *
           (sprite.naturalWidth || sprite.width || starterObjectSprite.naturalWidth) /
@@ -7832,7 +7823,7 @@
         const point = worldToScreen(corpse.x + 0.5, corpse.y + (animated ? 1 : 0.5 + AGENT_HEIGHT * .44));
         const scale = unitDisplayScale(corpse);
         ctx.translate(point.x, point.y);
-        ctx.scale(scale, unitDisplayScaleY(corpse));
+        ctx.scale(scale, scale);
         ctx.translate(-point.x, -point.y);
         drawCorpseGroundShadow(corpse, point);
         if (!drawAgentCorpse(ctx, corpse, point.x, point.y, state.camera.zoom,

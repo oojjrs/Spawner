@@ -1,20 +1,23 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { createContext, runInContext } from "node:vm";
 import { createGame } from "./game.mjs";
+import { constructionHelp } from "./beginner-help.mjs";
 import { tribeProductionTemplate } from "./tribe-production.mjs";
 import { birthCost, attributeUpgradeCost } from "./attributes.mjs";
 import { NEST_LEVELS, nestUpgradeCost } from "./nests.mjs";
 import { CONQUEST_PACING } from "./conquest-pacing.mjs";
 import { tickRoom } from "../client/room.mjs";
 
-function fixture(tribe, at) {
+function fixture(tribe, at, factory) {
   if (at === undefined) at = 0;
   const size = 80, colony = {id:1,ownerId:"ai",tribe,name:"AI",x:20,y:20,
     occupiedCells:new Set(["1,0","2,0","3,0","0,1","1,1","2,1","3,1","4,1","0,2","1,2","2,2","3,2","4,2","0,3","1,3","2,3","3,3","4,3","1,4","2,4","3,4"])};
   const room = {hostId:"human",simSeconds:at,revision:0,beginnerHelpEnabled:false,
     world:{seed:13,size,generationVersion:36,burrows:[],terrain:new Uint8Array(size*size).fill(4),hazards:new Uint8Array(size*size),treeCells:new Uint8Array(size*size)},
     colonies:[colony],games:new Map(),food:new Map(),foodSpots:new Map(),creatureSystem:{agents:[],tick(){}}};
-  const game = createGame(room,colony);
+  const game = (factory || createGame)(room,colony);
   room.games.set("ai",game);
   return {game,room,colony};
 }
@@ -41,22 +44,13 @@ for (const tribe of ["bean","spore","pebble","spring"]) {
   });
 }
 
-test("200개체와 막힌 탄생 공간은 생산만 제한하며 둥지 성장을 막지 않는다", () => {
-  for (const condition of ["limit","expiring-limit","blocked"]) {
-    const {game,room} = fixture("bean");
-    change(game,state => {
-      state.evolutionPoints=20;
-      if (condition !== "blocked") {
-        state.agents=Array.from({length:200},(_,index)=>({...structuredClone(state.agents[0]),id:"1:"+(index+1)}));
-        state.nextAgentId=201;
-        if (condition === "expiring-limit") for (const agent of state.agents) agent.lifespan=1;
-      }
-    });
-    if (condition === "blocked") room.world.terrain.fill(0);
-    game.produce();
-    assert.equal(game.nestLevel,2,condition);
-    assert.equal(game.snapshot().evolutionPoints,0,condition);
-  }
+test("탄생 공간이 막혀도 둥지 성장은 가능하다", () => {
+  const {game,room} = fixture("bean");
+  change(game,state => {state.evolutionPoints=20;});
+  room.world.terrain.fill(0);
+  game.produce();
+  assert.equal(game.nestLevel,2);
+  assert.equal(game.snapshot().evolutionPoints,0);
 });
 
 test("전멸한 군락은 성장보다 실제 비용을 지불한 재생산을 우선한다", () => {
@@ -212,4 +206,89 @@ test("플레이어와 동일하게 1레벨에서도 필요한 창고의 변태 �
   assert.equal(builder.productionRole,"builder");
   assert.equal(game.nestLevel,1);
   assert.equal(game.snapshot().evolutionPoints,19-birthCost(builder,"bean"));
+});
+
+test("브라우저 실행 번들의 AI도 같은 비용으로 모든 둥지 단계를 성장한다", () => {
+  const runtime=readFileSync(new URL("../client/runtime.js",import.meta.url),"utf8");
+  const worker=JSON.parse(runtime.match(/^const workerSource = (.+);\r?$/m)[1]);
+  const context=createContext({crypto,structuredClone,Uint8Array,navigator:{},self:{},setInterval(){}});
+  runInContext(worker.slice(0,worker.lastIndexOf("})();"))+'globalThis.gameModel=modules["server/game.mjs"];})();',context);
+  for (const tribe of ["bean","spore","pebble","spring"]) {
+    const {game}=fixture(tribe,0,context.gameModel.createGame);
+    for (const level of [1,2,3]) {
+      change(game,state=>{state.evolutionPoints=nestUpgradeCost(level,tribe);state.productionReadyAt=0;});
+      game.produce();
+      assert.equal(game.nestLevel,level+1,tribe);
+      assert.equal(game.snapshot().evolutionPoints,0,tribe);
+    }
+    populate(game,225,0);
+    game.prepare(300);
+    const id=game.produce();
+    assert.ok(game.agents.find(agent=>agent.id===id)?.birth,tribe);
+    assert.equal(game.agents.length,226,tribe);
+    const result=game.command({type:"design",templateId:null,name:"Above cap",slots:[],birth:true});
+    assert.ok(result.agentId,tribe);
+    assert.equal(game.agents.length,227,tribe);
+  }
+});
+
+function populate(game, count, at) {
+  change(game,state=>{
+    const source=state.agents[0];
+    state.agents=Array.from({length:count},(_,index)=>({...structuredClone(source),id:"1:"+(index+1),
+      slots:[],attributeLevels:{},productionRole:"worker",bornAt:at,lifespan:360,birth:null}));
+    state.nextAgentId=count+1;
+    state.evolutionPoints=100;
+  });
+}
+
+for (const tribe of ["bean","spore","pebble","spring"]) {
+  test(tribe+" 플레이어는 200개체 이상에서도 생산·복제·설계 후 탄생을 실행한다",()=>{
+    for (const count of [200,225]) for (const action of ["template","clone","design"]) {
+      const {game}=fixture(tribe);
+      populate(game,count,0);
+      const {templateId}=game.command({type:"design",templateId:null,name:"Production",slots:[],birth:false});
+      const result=action==="template" ? game.command({type:"birth",templateId}) : action==="clone" ?
+        game.command({type:"birth",agentId:game.agents[0].id}) :
+        game.command({type:"design",templateId:null,name:"New",slots:[],birth:true});
+      const newborn=game.agents.find(agent=>agent.id===result.agentId);
+      assert.ok(newborn?.birth,action);
+      assert.equal(game.agents.length,count+1,action);
+      assert.equal(game.snapshot().evolutionPoints,100-birthCost(newborn,tribe),action);
+    }
+  });
+  test(tribe+" AI는 200개체 이상에서도 필요한 보충 생산을 비용을 지불하고 실행한다",()=>{
+    for (const count of [200,225]) {
+      const {game}=fixture(tribe,300);
+      populate(game,count,0);
+      change(game,state=>{state.nestLevel=4;});
+      const id=game.produce(),newborn=game.agents.find(agent=>agent.id===id);
+      assert.ok(newborn?.birth);
+      assert.equal(game.agents.length,count+1);
+      assert.equal(game.snapshot().evolutionPoints,100-birthCost(newborn,tribe));
+    }
+  });
+}
+
+test("초보자 군사 생산 안내도 200개체 이상에서 실행할 수 있다",()=>{
+  const {game,room}=fixture("bean",400);
+  populate(game,225,400);
+  room.hostId="ai";room.beginnerHelpEnabled=true;
+  change(game,state=>{state.nestLevel=2;state.evolutionPoints=30;});
+  const offer=game.snapshot().constructionHelp;
+  assert.equal(offer?.kind,"military");
+  assert.equal(offer.canProduce,true);
+  const result=game.command({type:"beginner-construction",expectedBuildingKey:offer.buildingKey,expectedStep:offer.step});
+  assert.ok(result.agentId);
+  assert.equal(game.agents.length,226);
+});
+
+test("변태 생산 안내도 200개체 이상이라는 이유로 거부하지 않는다",()=>{
+  const {game,room}=fixture("bean");
+  populate(game,225,0);
+  const state=JSON.parse(game.save()).state;
+  const offer=constructionHelp(state,"bean",true,{buildingKey:"storage",cost:{materials:{clay:10}}},{clay:10},room.world,false);
+  assert.equal(offer?.kind,"construction");
+  assert.equal(offer.canProduce,true);
+  assert.equal(offer.issue,null);
 });

@@ -16,7 +16,6 @@ export function tribeProductionTemplate(state,tribe) {
  const living=state.agents.filter(agent=>agent.health>0&&!agent.construction&&!agent.slots.includes("construction"));
  if(!living.length){const worker=productionTemplate([profile.native],"worker",state);if(state.evolutionPoints>=birthCost(worker,tribe))return worker;
   const basic=productionTemplate([],"worker",state);return state.evolutionPoints>=birthCost(basic,tribe)?basic:null;}
- if(state.agents.length>=profile.population+4)return null;
  const young=living.filter(agent=>!Number.isFinite(agent.bornAt)||!Number.isFinite(agent.lifespan)||agent.bornAt+agent.lifespan-state.simSeconds>AGENT_DEATH_WARNING);
  const target=Math.min(profile.population,[8,20,30,profile.population][state.nestLevel-1]);
  const militaryAllowed=state.simSeconds>=CONQUEST_PACING.neutralConflictAt*profile.tempo;

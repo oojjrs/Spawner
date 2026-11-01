@@ -2107,10 +2107,6 @@ export function createGame(environment, colony, savedGame) {
         if (!required) return null;
         throw new Error("현재 둥지의 슬롯 수와 사용 가능한 속성에 맞춰 설계를 수정해 주세요.");
       }
-      if (state.agents.length >= 200) {
-        if (!required) return null;
-        throw new Error("생명체는 최대 200개까지 유지할 수 있습니다.");
-      }
       if (state.evolutionPoints < birthCost(template, colony.tribe)) {
         if (!required) return null;
         throw new Error("진화 포인트가 부족합니다.");
@@ -2148,7 +2144,7 @@ export function createGame(environment, colony, savedGame) {
 
     function automaticBirth(template, role) {
       const site = automaticSpawnSites()[0];
-      if (!site || state.agents.length >= 200 || state.evolutionPoints < birthCost(template,colony.tribe) ||
+      if (!site || state.evolutionPoints < birthCost(template,colony.tribe) ||
           template.slots.length > slotCapacity() || template.slots.some(key => !isAttributeUnlocked(key,state.nestLevel,colony.tribe))) return null;
       const matches = candidate => candidate.slots.length === template.slots.length && template.slots.every(key =>
         candidate.slots.includes(key) && (candidate.attributeLevels?.[key] || 1) === (template.attributeLevels?.[key] || 1));
@@ -2232,7 +2228,7 @@ export function createGame(environment, colony, savedGame) {
           }
         }
       }
-      if (state.agents.length >= 200 || state.simSeconds < (state.constructionProductionReadyAt || 0)) return null;
+      if (state.simSeconds < (state.constructionProductionReadyAt || 0)) return null;
       state.constructionProductionReadyAt = state.simSeconds + CONQUEST_PACING.constructionInterval;
       const offer = constructionHelpOffer(true,true);
       if (!offer?.canProduce) return null;
@@ -2262,7 +2258,7 @@ export function createGame(environment, colony, savedGame) {
         const slots = TRIBE_PACING[colony.tribe].army.filter(key => isAttributeUnlocked(key,state.nestLevel,colony.tribe)).slice(0,state.nestLevel);
         const template = constructionHelpTemplate({...state,tribe:colony.tribe},slots,"military");
         const cost = birthCost(template,colony.tribe);
-        const issue = state.evolutionPoints < cost ? "진화 포인트가 부족합니다." : state.agents.length >= 200 ? "생명체는 최대 200개까지 유지할 수 있습니다." :
+        const issue = state.evolutionPoints < cost ? "진화 포인트가 부족합니다." :
           !state.templates.includes(template) && state.templates.length >= 100 ? "설계는 최대 100개까지 저장할 수 있습니다." :
           !availableSpawnCells(null).length ? "둥지 주변이 가득 찼습니다." : null;
         return {kind:"military",step:"military:"+state.nestLevel,buildingKey:"military",buildingName:"군사 개체",name:template.name,
