@@ -5,10 +5,10 @@ import { resourceDefinition, resourceHarvestRequirements } from "./resources.mjs
 
 export function constructionHelpTemplate(state, slots, kind) {
   if (!slots) slots = ["construction"];
-  const construction = slots.includes("construction");
+  const construction = kind !== "military" && slots.includes("construction");
   const military = kind === "military";
-  const requiredOnly = construction || kind === "harvest" || kind === "transport";
-  slots = construction ? ["construction"] : [...slots];
+  const requiredOnly = construction || military || kind === "harvest" || kind === "transport";
+  slots = construction ? ["construction"] : military ? slots.filter(key => ATTRIBUTES.some(attribute => attribute.key === key && attribute.kind === "combat")) : [...slots];
   if (!requiredOnly && state.nestLevel >= 2 && slots.length < state.nestLevel) {
     const support = state.tribe === "pebble" ? "lifespan" : "feet";
     if (!slots.includes(support)) slots.push(support);

@@ -2291,7 +2291,7 @@ export function createGame(environment, colony, savedGame) {
           !state.templates.includes(template) && state.templates.length >= 100 ? "설계는 최대 100개까지 저장할 수 있습니다." :
           !availableSpawnCells(null).length ? "둥지 주변이 가득 찼습니다." : null;
         return {kind:"military",step:"military:"+state.nestLevel,buildingKey:"military",buildingName:"군사 개체",name:template.name,
-          slots:template.slots,resources:[],requirements:[],attributes:slots.map(key=>ATTRIBUTES.find(attribute=>attribute.key===key).name),cost,
+          slots:template.slots,resources:[],requirements:[],attributes:template.slots.map(key=>ATTRIBUTES.find(attribute=>attribute.key===key).name),cost,
           templateId:state.templates.includes(template)?template.id:null,canProduce:!issue,issue};
       }
       const active = state.agents.find(agent => agent.health > 0 && agent.construction);

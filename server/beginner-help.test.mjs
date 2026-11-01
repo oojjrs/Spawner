@@ -126,7 +126,14 @@ test("군사 분류나 과거 생산 기록만 있고 전투 속성 개체가 �
   saved.state.agents = saved.state.agents.slice(0,1);
   Object.assign(saved.state.agents[0], {slots:["feet"], attributeLevels:{feet:1}, productionRole:"military", birth:null});
   game.restore(JSON.stringify(saved));
-  assert.equal(game.snapshot().constructionHelp?.kind, "military");
+  const offer = game.snapshot().constructionHelp;
+  assert.equal(offer?.kind, "military");
+  assert.deepEqual(offer.slots, ["blade"]);
+  assert.deepEqual(offer.attributes, ["칼날"]);
+  const before = game.snapshot().evolutionPoints;
+  const result = game.command({type:"beginner-construction", expectedBuildingKey:offer.buildingKey, expectedStep:offer.step});
+  assert.deepEqual(game.agents.find(agent => agent.id === result.agentId).slots, ["blade"]);
+  assert.equal(game.snapshot().evolutionPoints, before - offer.cost);
 });
 
 test("사망 개체와 건물로 변태할 개체는 방어 전력 수에 포함하지 않는다", () => {
@@ -156,8 +163,14 @@ test("보유 전투 개체로 부족이 해소되면 이전 군사 안내로 추
   assert.equal(after.agents.length, before.agents.length);
 });
 
-test("군사 안내도 속성이 맞는 기존 설계도를 내부 분류와 관계없이 재사용한다", () => {
-  const template = {id:7, name:"날쌘 전사", slots:["blade", "feet"], productionRole:"worker"};
-  const state = {tribe:"spore", nestLevel:2, templates:[template]};
+test("군사 안내는 필수 전투 속성의 기존 설계도를 내부 분류와 관계없이 재사용한다", () => {
+  const template = {id:7, name:"전사", slots:["blade"], productionRole:"worker"};
+  const custom = {id:8, name:"날쌘 전사", slots:["blade", "feet", "lifespan"], productionRole:"military"};
+  const state = {tribe:"spore", nestLevel:3, templates:[custom, template], nextTemplateId:9};
   assert.equal(constructionHelpTemplate(state, ["blade", "feet"], "military"), template);
+  state.templates = [custom];
+  const fresh = constructionHelpTemplate(state, ["blade", "feet", "lifespan"], "military");
+  assert.deepEqual(fresh.slots, ["blade"]);
+  assert.notEqual(fresh, custom);
+  assert.deepEqual(custom.slots, ["blade", "feet", "lifespan"]);
 });
