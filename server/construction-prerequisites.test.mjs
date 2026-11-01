@@ -85,4 +85,17 @@ test("자원 유지 담당을 외부 건설 자재 채집 인력으로 중복 �
   assert.equal(constructionHelp(state,"bean",true,native,{},world,false,new Set(["native","food-worker"])),null);
 });
 
-test("둥지 3단계 운반 설계도 채집량 속성만 사용한다",()=>{const state=fixture("spore");state.nestLevel=3;const design=constructionHelpTemplate(state,["strength"],"transport");assert.deepEqual(design.slots,["strength"]);assert.equal(design.name,"수송꾼");});
+test("운반은 둥지 레벨과 기존 선택 속성 설계에 관계없이 무속성으로 추천한다",()=>{
+  for(const tribe of ["bean","spore","pebble","spring"])for(const nestLevel of [1,2,3,4]){
+    const state=fixture(tribe);state.nestLevel=nestLevel;
+    const custom={id:7,name:"내 수송꾼",slots:["strength","feet","lifespan"]};state.templates=[custom];
+    const design=constructionHelpTemplate(state,custom.slots,"transport");
+    assert.deepEqual(design.slots,[]);assert.equal(design.name,"일꾼");
+    assert.deepEqual(custom.slots,["strength","feet","lifespan"]);
+    const empty={id:8,name:"내 일꾼",slots:[]};state.templates.push(empty);
+    assert.equal(constructionHelpTemplate(state,custom.slots,"transport"),empty);
+    const goal={buildingKey:"storage",cost:buildingCost("storage",tribe)};
+    const offer=constructionHelp(state,tribe,true,goal,{},world,true);
+    assert.deepEqual(offer.slots,[]);assert.deepEqual(offer.attributes,[]);assert.equal(offer.cost,birthCost({slots:[]},tribe));
+  }
+});

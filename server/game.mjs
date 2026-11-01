@@ -2352,7 +2352,7 @@ export function createGame(environment, colony, savedGame) {
         }
       }
       if (!offer) return null;
-      const pending = state.agents.some(agent => agent.health > 0 && agent.birth && agent.slots.includes("strength"));
+      const pending = state.agents.some(agent => agent.health > 0 && agent.birth && !agent.slots.includes("construction"));
       const allocation = constructionSupply.allocation();
       const foodSpecialists = offer.kind === "harvest" && state.agents.some(agent => agent.health >= agent.stats.health * .6 &&
         !agent.construction && foragers.has(agent.id) && offer.resources.some(type =>

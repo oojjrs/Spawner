@@ -7,18 +7,9 @@ export function constructionHelpTemplate(state, slots, kind) {
   if (!slots) slots = ["construction"];
   const construction = kind !== "military" && slots.includes("construction");
   const military = kind === "military";
-  const requiredOnly = construction || military || kind === "harvest" || kind === "transport";
-  slots = construction ? ["construction"] : military ? slots.filter(key => ATTRIBUTES.some(attribute => attribute.key === key && attribute.kind === "combat")) : [...slots];
-  if (!requiredOnly && state.nestLevel >= 2 && slots.length < state.nestLevel) {
-    const support = state.tribe === "pebble" ? "lifespan" : "feet";
-    if (!slots.includes(support)) slots.push(support);
-  }
-  if (!requiredOnly && state.nestLevel >= 3 && slots.length < state.nestLevel) {
-    const support = slots.includes("feet") ? "lifespan" : "feet";
-    if (!slots.includes(support)) slots.push(support);
-  }
+  slots = kind === "transport" ? [] : construction ? ["construction"] : military ? slots.filter(key => ATTRIBUTES.some(attribute => attribute.key === key && attribute.kind === "combat")) : [...slots];
   const previous = state.templates.filter(template => template.slots.every(key => isAttributeUnlocked(key, state.nestLevel, state.tribe)) && slots.every(key => template.slots.includes(key)) &&
-    (requiredOnly ? template.slots.length === slots.length : !template.slots.includes("construction")))
+    template.slots.length === slots.length)
     .sort((first, second) => birthCost(first, state.tribe) - birthCost(second, state.tribe) || first.slots.length - second.slots.length)[0];
   if (previous) return previous;
   const name = suggestTemplateName(slots, state.templates);
@@ -44,7 +35,7 @@ export function constructionHelp(state, tribe, enabled, goal, stock, world, supp
     });
   });
   let kind = "construction", resources = [], slots = ["construction"];
-  if (support) { kind = "transport"; slots = ["strength"]; }
+  if (support) { kind = "transport"; slots = []; }
   else if (uncovered.length) {
     kind = "harvest"; resources = uncovered;
     slots = [...new Set(uncovered.flatMap(type => Object.entries(resourceHarvestRequirements({resourceType:type}, world, tribe)).filter(([,level]) => level > 0).map(([key]) => key)))];
