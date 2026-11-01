@@ -8,6 +8,7 @@ import sys
 BASE = Path(__file__).resolve().parent.parent
 SOURCE = BASE / 'Sources/QuantumV9'
 LEGACY = BASE / 'Sources/SupportedV8/sprout'
+IDLE = BASE.parent / 'Idle02-v1/sprout'
 OUT = Path(sys.argv[1])
 OUT.mkdir(511, True, True)
 PARTS = SOURCE / 'Parts'
@@ -69,6 +70,9 @@ def partition(a, stage):
 
 
 references = [read(LEGACY / 'start.png'), read(LEGACY / 'end.png')]
+idle_reference = read(IDLE / 'reference.png')
+idle_parts = {name: premul(read(IDLE / 'Parts' / ('2-' + str(index) + '.png')))
+              for name, index in zip(NAMES, SOURCE_IDS)}
 parts = []
 visible = []
 for stage_index, stage in enumerate([0, 2]):
@@ -196,7 +200,7 @@ def smooth(t):
     return t * t * (3 - 2 * t)
 
 
-def opening_petals(opening, stage):
+def opening_petals(opening, stage, adult):
     index = min(2, int(opening * 3))
     amount = opening * 3 - index
     if opening >= 1:
@@ -204,7 +208,7 @@ def opening_petals(opening, stage):
     result = []
     for side, name in enumerate(['petal-left', 'petal-right']):
         sequence = [affine(p[side], [256, 401], [256, 427], .84, .84) for p in poses] if stage == 0 else [p[side] for p in poses]
-        sequence[-1] = parts[stage][name]
+        sequence[-1] = parts[stage][name] if stage == 0 else adult[name]
         result.append(morph(sequence[index], sequence[index + 1], amount, ('petal', stage, side, index)))
     return result
 
@@ -246,23 +250,28 @@ for frame in range(61):
     if frame == 0 or frame == 1:
         rendered = references[0].copy()
     elif frame >= 51:
-        rendered = references[1].copy()
+        rendered = idle_reference.copy()
     else:
         image = np.zeros((512, 512, 4), np.float32)
+        adult = parts[1]
+        if frame >= 39:
+            adult = {name: morph(parts[1][name], idle_parts[name], opening, ('idle-endpoint', name))
+                     for name in NAMES if not name.startswith('petal')}
+            adult.update({name: idle_parts[name] for name in ['petal-left', 'petal-right']})
         for name in ['rear-left', 'rear-right', 'side-left', 'side-right']:
             if growth > 0:
                 pivot = [256, 420] if name.startswith('rear') else [256, 448]
                 size = growth * (.72 + .28 * opening) if name.startswith('rear') else growth
-                layer = affine(parts[1][name], pivot, pivot, size, size)
+                layer = affine(adult[name], pivot, pivot, size, size)
                 image = over(layer, image)
-        core = morph(parts[0]['core'], parts[1]['core'], growth, ('body', 'core'))
+        core = morph(parts[0]['core'], adult['core'], growth, ('body', 'core'))
         image = over(core, image)
-        sprout = morph(parts[0]['sprout'], parts[1]['sprout'], growth, ('body', 'sprout'))
+        sprout = morph(parts[0]['sprout'], adult['sprout'], growth, ('body', 'sprout'))
         fold = (1 - opening) * (72 * (1 - growth) + 42 * growth)
         sprout = affine(sprout, [256, 284 - growth * 32], [256, 284 - growth * 32 + fold], 1, 1 - .22 * (1 - opening))
         image = over(sprout, image)
         if opening > 0:
-            petals = opening_petals(opening, 0 if growth == 0 else 1)
+            petals = opening_petals(opening, 0 if growth == 0 else 1, adult)
         else:
             scale = .84 + .16 * growth
             petals = [affine(p, [256, 401], [256, 427 - growth * 26], scale, scale) for p in poses[0]]
@@ -270,10 +279,10 @@ for frame in range(61):
             hinge = [256, 427 - growth * 26]
             image = over(affine(layer, hinge, hinge, 1 - squash * .45, 1 + squash), image)
         for name in ['base-left', 'base-right']:
-            layer = morph(parts[0][name], parts[1][name], growth, ('base', name))
+            layer = morph(parts[0][name], adult[name], growth, ('base', name))
             image = over(layer, image)
         if growth > 0:
-            image = over(affine(parts[1]['base-center'], ROOT, ROOT, .6 + .4 * growth, .6 + .4 * growth), image)
+            image = over(affine(adult['base-center'], ROOT, ROOT, .6 + .4 * growth, .6 + .4 * growth), image)
         rendered = unpremul(image)
     frames.append(Image.fromarray(rendered))
     frames[-1].save(FRAMES / (str(frame).zfill(3) + '.png'))
@@ -297,6 +306,7 @@ for index, image in enumerate(frames):
     bg.paste(image, (0, 0), image)
     previews.append(bg.resize((384, 384), Image.Resampling.LANCZOS))
 sheet.save(OUT / 'growth.png')
+Image.fromarray(idle_reference).save(OUT / 'level-02.png')
 export_webp(frames, OUT / 'growth.webp')
 export_webp(previews, OUT / 'preview.webp')
 contact = Image.new('RGB', (256 * 6, 280 * 4), '#273438')
@@ -308,7 +318,10 @@ for cell, index in enumerate([0, 3, 6, 9, 12, 15, 16, 17, 21, 25, 28, 29, 30, 34
 contact.save(OUT / 'contact.png')
 metadata = json.loads((BASE / 'sprout/animation.json').read_text('utf-8'))
 metadata.update({'method': 'drawn-petal-keys-and-independent-part-deformation', 'source': 'Sources/QuantumV9/Parts', 'additionalSources': ['Sources/QuantumV9/petal-poses.png'], 'timeline': 'rig.json', 'phaseRanges': {'close': [1, 9], 'closedWait': [10, 12], 'anticipation1': [13, 15], 'growth1': [16, 17], 'intermediateHold': [22, 25], 'anticipation2': [26, 28], 'growth2': [29, 30], 'grownClosedWait': [35, 38], 'open': [39, 51], 'rest': [52, 60]}, 'markersMs': {'closeStart': 600, 'closed': 1240, 'growth1Start': 1800, 'growth1End': 1960, 'growth2Start': 2840, 'growth2End': 3000, 'openStart': 3640, 'openEnd': 4600}})
+metadata['reference']['end'] = {'source': 'DesignAssets/Animations/Nests/Idle02-v1/sprout/reference.png', 'frame': 0, 'root': [256, 448]}
+metadata['additionalSources'].append('DesignAssets/Animations/Nests/Idle02-v1/sprout/Parts')
 rig = {'format': 'local-layered-deformation-rig', 'bones': [{'id': 'root', 'parent': None, 'pivot': [256, 448]}, {'id': 'petal-hinge', 'parent': 'root', 'pivotFirst': [256, 427], 'pivotAdult': [256, 401]}], 'deformation': {'type': 'thin-plate-spline', 'boundaryControls': 48, 'interiorControls': 5, 'materialSampling': 'single-nearest-pose', 'crossfade': False}, 'canvas': [512, 512], 'root': [256, 448], 'rootMotion': False, 'frameCount': 61, 'durationMs': 6320, 'sourceRoot': 'Sources/QuantumV9', 'drawOrder': ['rear-left', 'rear-right', 'side-left', 'side-right', 'core', 'sprout', 'petal-left', 'petal-right', 'base-left', 'base-right', 'base-center'], 'parts': {name: {'sourceFirst': 'Parts/0-' + name + '.png', 'sourceAdult': 'Parts/2-' + name + '.png', 'parent': 'petal-hinge' if name.startswith('petal') else 'root', 'hiddenSurfaces': 'native visible part' if name in ['sprout', 'base-left', 'base-right'] else 'registered complete attachment beneath native visible pixels', 'canvasOffset': [0, 0], 'pivotFirst': [256, 427] if name.startswith('petal') else [256, 284] if name == 'sprout' else [256, 420] if name.startswith('rear') else [256, 448], 'pivotAdult': [256, 401] if name.startswith('petal') else [256, 252] if name == 'sprout' else [256, 420] if name.startswith('rear') else [256, 448]} for name in NAMES}, 'keys': keys, 'morphControls': {str(key): [a.tolist() for a in value] for key, value in control_cache.items()}, 'phaseRanges': metadata['phaseRanges']}
+rig['endpoint'] = {'source': metadata['reference']['end']['source'], 'parts': 'DesignAssets/Animations/Nests/Idle02-v1/sprout/Parts', 'partIds': dict(zip(NAMES, SOURCE_IDS)), 'blend': 'single-pose-deformation', 'transitionFrames': [39, 51], 'root': [256, 448]}
 save_json(OUT / 'animation.json', metadata)
 save_json(OUT / 'rig.json', rig)
 print('exported', len(frames), 'frames', sum(DURATIONS), 'ms')
