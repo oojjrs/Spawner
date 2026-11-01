@@ -7397,7 +7397,11 @@
         const attributes = agent.appearanceAttributes || agent.attributes || {};
         const cell = size * (birth?.seedVisible ? .38 : (agent.tribe || "bean") === "bean" && attributes.butchery ? 1.45 : 1.65);
         const topLeft = { x: (bounds.width - cell) / 2, y: bounds.height * .93 - cell * (.5 + AGENT_HEIGHT * .44) };
+        const levelUp = Spawner.agentLevelUpPose(agentLevelUpPlayback, agent, state.simSeconds, idleMotion.matches);
+        const levelUpAnchor = { x: bounds.width / 2, y: bounds.height * .88 };
+        Spawner.drawAgentLevelUp(context, agentLevelUpSprites, levelUp, levelUpAnchor, size * .55, false);
         drawAgentAppearance(context, now, agent, cell, topLeft, interpolatedAgentPosition(agent), birth, null);
+        Spawner.drawAgentLevelUp(context, agentLevelUpSprites, levelUp, levelUpAnchor, size * .55, true);
       }
     }
 

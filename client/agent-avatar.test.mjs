@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
+import * as Spawner from "./agent-level-up.mjs";
 
 const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
 const declaration = source.match(/^    function drawAgentAvatars\([^]*?^    }/m)[0];
@@ -21,6 +22,8 @@ function avatars() {
     },
     document: { hidden: false }, window: { devicePixelRatio: 2 },
     unitListEntries: () => entries, agentAvatars, AGENT_HEIGHT: .7,
+    Spawner, agentLevelUpPlayback: Spawner.createAgentLevelUpPlayback(), agentLevelUpSprites: {},
+    state: { simSeconds: 0 }, idleMotion: { matches: false },
     agentBirthPose: () => null, interpolatedAgentPosition: () => ({ x: 0, y: 0 }),
     drawAgentAppearance(context, now, agent) { draws.push({ id: agent.id, now }); }
   });
