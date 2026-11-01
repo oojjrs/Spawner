@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
+import { createNestGrowthPlayback, nestGrowthSounds } from "./nest-growth.mjs";
 import { SPORE_BIRTH_ANIMATION, sporeBirthPlacement } from "./birth.mjs";
 import { agentBirthDuration } from "../server/birth.mjs";
 
@@ -61,7 +62,8 @@ test("포자버섯 탄생음은 착지 강세에 맞춰 한 번만 나고 씨앗
   const state = { simSeconds: 1, camera: { layer: 0 }, agents: [agent], rivals: [] };
   const context = createContext({ state, connection: { active: true, online: true }, audioTime: .9,
     audio: { available: () => true, play: name => calls.push(name), setHarvest() {} },
-    Spawner: { SPORE_BIRTH_ANIMATION }, SpawnerCombatAudio: { update: () => [] }, combatAudio: {},
+    Spawner: { SPORE_BIRTH_ANIMATION, nestGrowthSounds }, nestGrowthPlayback: createNestGrowthPlayback(),
+    SpawnerCombatAudio: { update: () => [] }, combatAudio: {},
     displayedAgent: value => value, interpolatedAgentPosition: () => ({ x: 44, y: 45 }), audioVolume: () => 1,
     agentBirthPose: value => ({ kind: "spore", elapsed: state.simSeconds - value.birth.startedAt }),
     agentAudio: new Map(), deliveryAudio: new Map(), foodDeliveries: new Map(),

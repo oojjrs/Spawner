@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
+import { createNestGrowthPlayback, nestGrowthSounds } from "./nest-growth.mjs";
 import { SPRING_BIRTH_ANIMATION, springBirthPlacement } from "./birth.mjs";
 
 test("샘방울 물목은 분리 전 흘림턱에 붙어 있고 착지 후에는 선택한 빈 칸에 고정된다", () => {
@@ -32,7 +33,8 @@ test("샘방울 탄생음은 착지 강세에 맞춰 한 번만 나고 씨앗 �
   const state = { simSeconds: 1, camera: { layer: 0 }, agents: [agent], rivals: [] };
   const context = createContext({ state, connection: { active: true, online: true }, audioTime: .9,
     audio: { available: () => true, play: name => calls.push(name), setHarvest() {} },
-    SPRING_BIRTH_ANIMATION, SpawnerCombatAudio: { update: () => [] }, combatAudio: {},
+    SPRING_BIRTH_ANIMATION, Spawner: { nestGrowthSounds }, nestGrowthPlayback: createNestGrowthPlayback(),
+    SpawnerCombatAudio: { update: () => [] }, combatAudio: {},
     displayedAgent: value => value, interpolatedAgentPosition: () => ({ x: 44, y: 45 }), audioVolume: () => 1,
     agentBirthPose: value => ({ kind: "spring", elapsed: state.simSeconds - value.birth.startedAt }),
     agentAudio: new Map(), deliveryAudio: new Map(), foodDeliveries: new Map(),

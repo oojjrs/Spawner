@@ -54,3 +54,27 @@ test("폐기한 속성의 자산과 동작을 게임과 기획서에 노출하�
     assert.doesNotMatch(readFileSync(new URL(file, import.meta.url), "utf8"), retired);
   }
 });
+
+test("네 종족의 모든 전투 외형은 채집 중 공격을 반복하고 피격·실제 공격을 우선한다", () => {
+  for (const definition of Object.values(COMBAT_EVOLUTION_CATALOG)) {
+    const animations = definition.animations;
+    const base = { health: 100, bornAt: 0, hurtStartedAt: -Infinity, mode: "harvest", harvestStarted: 10,
+      moveStartedAt: 10, moveDuration: 10 };
+    const frames = new Set();
+    for (const age of [0, .1, .3, .5, .8, .99, 1.1, 1.3, 2.3, 4.3]) {
+      const pose = combatEvolutionPose(base, 10 + age, animations);
+      assert.equal(pose.action, "attack");
+      frames.add(pose.frame);
+    }
+    assert.ok(frames.size > 4);
+    const hit = combatEvolutionPose(base, 10.3, animations);
+    for (const time of [11.3, 12.3, 14.3]) assert.equal(combatEvolutionPose(base, time, animations).frame, hit.frame);
+    assert.equal(combatEvolutionPose({ ...base, hurtStartedAt: 11 }, 11.3, animations).action, "hurt");
+    assert.equal(combatEvolutionPose({ ...base, attack: { startedAt: 11, speed: 2 } }, 11.15, animations).frame, hit.frame);
+    for (const mode of ["idle", "return", "unload"]) {
+      assert.equal(combatEvolutionPose({ ...base, mode, moveDuration: 0 }, 14.3, animations).action, "idle");
+    }
+    const harvest = { ...animations.attack, action: "harvest" };
+    assert.equal(combatEvolutionPose(base, 11.3, { ...animations, harvest }).action, "harvest");
+  }
+});

@@ -6369,6 +6369,10 @@ function combatEvolutionPose(agent, time, animations) {
     elapsed = Math.max(0, (time - start) / Math.max(.001, end - start)) * animations.birth.durationMs;
   } else if (hurt >= 0 && hurt < animations.hurt.durationMs) { action = "hurt"; elapsed = hurt; }
   else if (attack >= 0 && attack < animations.attack.durationMs) { action = "attack"; elapsed = attack; }
+  else if (agent.mode === "harvest") {
+    action = animations.harvest ? "harvest" : "attack";
+    elapsed = Math.max(0, time - (agent.harvestStarted ?? time)) * 1000 % animations[action].durationMs;
+  }
   else if (agent.moveDuration > 0 && time >= agent.moveStartedAt && time < agent.moveStartedAt + agent.moveDuration) {
     action = "walk"; elapsed = (Math.max(0, (agent.stepCount || 1) - 1) + (time - agent.moveStartedAt) / agent.moveDuration) * animations.walk.durationMs;
   }

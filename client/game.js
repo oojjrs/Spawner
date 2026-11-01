@@ -4308,7 +4308,7 @@
 
     function drawSpringBirth(ctx, now, agent, birth, topLeft, cell, outlineColor) {
       if (birth.frame === SPRING_BIRTH_ANIMATION.frameCount - 1) {
-        drawAgentAppearance(ctx, now, agent, cell, topLeft, { x: birth.x, y: birth.y, progress: 1 }, null, outlineColor);
+        drawAgentAppearanceLayer(ctx, now, { ...agent, birth: null }, cell, topLeft, { x: birth.x, y: birth.y, progress: 1 }, null, outlineColor);
         return;
       }
       if (!springBirthSheet.complete || !springBirthSheet.naturalWidth) return;
@@ -4344,7 +4344,7 @@
     function drawPebbleBirth(ctx, now, agent, birth, topLeft, cell, outlineColor) {
       const animation = PEBBLE_BIRTH_ANIMATION;
       if (birth.frame === animation.frameCount - 1) {
-        drawAgentAppearance(ctx, now, agent, cell, topLeft, { x: birth.x, y: birth.y, progress: 1 }, null, outlineColor);
+        drawAgentAppearanceLayer(ctx, now, { ...agent, birth: null }, cell, topLeft, { x: birth.x, y: birth.y, progress: 1 }, null, outlineColor);
         return;
       }
       if (!pebbleBirthSheet.complete || !pebbleBirthSheet.naturalWidth) return;
@@ -4389,9 +4389,12 @@
         return;
       }
       const appearance = agent.appearanceAttributes || agent.attributes;
-      const body = agentSprite(agent, "body");
-      for (const layer of appearance.antenna ? ["antenna"] : ["sprout-left", "sprout-right", "sprout-stem"]) agentSprite(agent, layer);
-      if (appearance.feet) for (const layer of ["feet-left", "feet-right"]) agentSprite(agent, layer);
+      const evolved = Spawner.hasCombatEvolution(appearance) && combatAttributeArt.ready(agent.tribe || "bean");
+      const body = agentSprite(agent, evolved ? "full" : "body");
+      if (!evolved) {
+        for (const layer of appearance.antenna ? ["antenna"] : ["sprout-left", "sprout-right", "sprout-stem"]) agentSprite(agent, layer);
+        if (appearance.feet) for (const layer of ["feet-left", "feet-right"]) agentSprite(agent, layer);
+      }
       const height = cell * AGENT_HEIGHT;
       const centerX = topLeft.x + cell / 2;
       const footY = topLeft.y + cell / 2 + height * .44;
@@ -4412,19 +4415,24 @@
       if (birth.unitVisible) {
         const sprite = body;
         if (sprite && sprite.complete !== false && (sprite.naturalWidth || sprite.width) > 0) {
-          const width = height * (sprite.naturalWidth || sprite.width) / (sprite.naturalHeight || sprite.height);
+          const spriteHeight = height * (evolved ? 2 : 1), pivot = evolved ? .875 : .94;
+          const width = spriteHeight * (sprite.naturalWidth || sprite.width) / (sprite.naturalHeight || sprite.height);
           ctx.translate(centerX, footY - birth.lift * cell);
           ctx.rotate(birth.rotation);
           ctx.scale(birth.scaleX, birth.scaleY);
-          drawAgentFeet(ctx, agent, -width / 2, -height * .94, width, height, null, outlineColor);
+          if (!evolved) drawAgentFeet(ctx, agent, -width / 2, -spriteHeight * pivot, width, spriteHeight, null, outlineColor);
           if (outlineColor) {
-            drawAgentTail(ctx, agent, -width / 2, -height * .94, width, height, outlineColor);
-            drawAgentHead(ctx, agent, -width / 2, -height * .94, width, height, now, outlineColor);
-            drawSelectionOutline(sprite, -width / 2, -height * .94, width, height, null, outlineColor);
+            if (!evolved) {
+              drawAgentTail(ctx, agent, -width / 2, -spriteHeight * pivot, width, spriteHeight, outlineColor);
+              drawAgentHead(ctx, agent, -width / 2, -spriteHeight * pivot, width, spriteHeight, now, outlineColor);
+            }
+            drawSelectionOutline(sprite, -width / 2, -spriteHeight * pivot, width, spriteHeight, null, outlineColor);
           }
-          drawAgentTail(ctx, agent, -width / 2, -height * .94, width, height, null);
-          drawAgentHead(ctx, agent, -width / 2, -height * .94, width, height, now, null);
-          ctx.drawImage(sprite, -width / 2, -height * .94, width, height);
+          if (!evolved) {
+            drawAgentTail(ctx, agent, -width / 2, -spriteHeight * pivot, width, spriteHeight, null);
+            drawAgentHead(ctx, agent, -width / 2, -spriteHeight * pivot, width, spriteHeight, now, null);
+          }
+          ctx.drawImage(sprite, -width / 2, -spriteHeight * pivot, width, spriteHeight);
         }
       }
       ctx.restore();
@@ -4450,7 +4458,7 @@
       const shape = Spawner.SPORE_BIRTH_ANIMATION;
       const frame = idleMotion.matches ? shape.frameCount - 1 : birth.frame;
       if (frame === shape.frameCount - 1) {
-        drawAgentAppearance(ctx, now, agent, cell, topLeft, { x: birth.x, y: birth.y, progress: 1 }, null, outlineColor);
+        drawAgentAppearanceLayer(ctx, now, { ...agent, birth: null }, cell, topLeft, { x: birth.x, y: birth.y, progress: 1 }, null, outlineColor);
         return;
       }
       const attributeFrame = tribeArt.animationFrame(agent, sporeBirthSheet, shape, frame, "birth", birth.elapsed);
@@ -5196,7 +5204,7 @@
 
     function drawAgentAppearanceLayer(ctx, now, agent, cell, topLeft, renderPosition, birth, outlineColor) {
       const attributes = agent.appearanceAttributes || agent.attributes || {};
-      if (birth && !Spawner.hasCombatEvolution(attributes) || cell < 8 || !Spawner.combatAttributeKeys(attributes).length || !combatAttributeArt.ready(agent.tribe || "bean") ||
+      if (birth || cell < 8 || !Spawner.combatAttributeKeys(attributes).length || !combatAttributeArt.ready(agent.tribe || "bean") ||
           agent.construction?.state === "transforming") {
         drawAgentAppearanceBody(ctx, now, agent, cell, topLeft, renderPosition, birth, outlineColor);
         return;
