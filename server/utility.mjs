@@ -682,6 +682,17 @@ export function createUtilityAI(context) {
     let allowed = viable.length ? viable : candidates;
     const defense = !agent.retreat && safety.state !== "critical" ? viable.filter(candidate => candidate.defending) : [];
     if (defense.length) return defense.sort((first, second) => second.score - first.score);
+    if (safety.state === "stable" && availableWorker(agent) && !militaryAgent(agent, context.tribe) &&
+        (agent.productionRole === "scout" || agent.attributes?.antenna > 0 && !agent.attributes?.strength &&
+          !HARVEST_ATTRIBUTE_KEYS.some(key => agent.attributes?.[key] > 0))) {
+      const exploration = viable.filter(candidate => candidate.action === "explore" && candidate.damage < agent.health * .25);
+      if (exploration.length) {
+        const delivery = agent.carrying > 0 ? viable.filter(candidate =>
+          candidate.action === (agent.transportCargo ? "supply" : "return") && candidate.damage < agent.health * .25) : [];
+        return (delivery.length ? delivery : exploration).sort((first, second) =>
+          second.score + second.retention - first.score - first.retention);
+      }
+    }
     const resumed = suspendedWork && safety.state === "stable" && !agent.retreat ? viable.filter(candidate =>
       candidate.action === suspendedWork.action && candidate.target.key === suspendedWork.target.key && candidate.damage < agent.health * .25) : [];
     if (resumed.length) return resumed.sort((first, second) => second.score - first.score).map(candidate => ({ ...candidate, resuming: true }));

@@ -60,21 +60,28 @@ test("정찰은 둥지에 더 가까운 작은 빈틈보다 이동 시간 대비
   assert.equal(f.ai.nextStep(f.agent, { x: 13, y: 8 }), null);
 });
 
-test("정찰은 고립된 경계를 건너뛰고 알려진 우회로의 실제 이동 시간을 비교한다", () => {
-  const f = frontierFixture();
-  f.passable.delete(8 * f.size + 10);
-  f.passable.add(2 * f.size + 12);
-  for (let y = 9; y <= 16; y++) {
-    f.passable.add(y * f.size + 9);
-    f.passable.add(y * f.size + 11);
+test("정찰은 고립된 경계를 제외하고 수명과 실제 우회 이동 시간을 비교한다", () => {
+  for (const [lifespan, target] of [[60, { x: 8, y: 5 }], [120, { x: 12, y: 8 }]]) {
+    const f = frontierFixture();
+    f.agent.stats.lifespan = lifespan;
+    f.passable.delete(8 * f.size + 10);
+    f.passable.add(2 * f.size + 12);
+    for (let y = 9; y <= 16; y++) {
+      f.passable.add(y * f.size + 9);
+      f.passable.add(y * f.size + 11);
+    }
+    f.passable.add(16 * f.size + 10);
+    const plans = f.ai.evaluate(f.agent, false);
+    assert.equal(plans[0].action, "explore");
+    assert.deepEqual({ x: plans[0].target.x, y: plans[0].target.y }, target);
+    assert.ok(!plans.some(plan => plan.target.x === 12 && plan.target.y === 2));
+    for (const plan of plans) for (const cell of plan.route) assert.ok(f.passable.has(cell.y * f.size + cell.x));
+    const near = plans.find(plan => plan.target.x === 8 && plan.target.y === 5);
+    const detour = plans.find(plan => plan.target.x === 12 && plan.target.y === 8);
+    assert.equal(near.route.length - 1, 3);
+    assert.equal(detour.route.length - 1, 20);
+    assert.ok(detour.route.some(cell => cell.y === 16));
   }
-  f.passable.add(16 * f.size + 10);
-  const plans = f.ai.evaluate(f.agent, false);
-  assert.equal(plans[0].action, "explore");
-  assert.deepEqual({ x: plans[0].target.x, y: plans[0].target.y }, { x: 8, y: 5 });
-  assert.ok(!plans.some(plan => plan.target.x === 12 && plan.target.y === 2));
-  for (const plan of plans) for (const cell of plan.route) assert.ok(f.passable.has(cell.y * f.size + cell.x));
-  assert.ok(plans.some(plan => plan.target.x === 12 && plan.route.some(cell => cell.y === 16)));
 });
 
 test("탐색 칸 수가 같은 다른 지식을 복원해도 이전 경계를 재사용하지 않는다", () => {
@@ -254,10 +261,10 @@ test("같은 감지·이속에서도 남은 수명이 길수록 정찰 점수가
   assert.ok(f.ai.evaluate(f.advanced, true).every(plan => plan.action !== "explore"));
 });
 
-test("판단 순서와 관계없이 감지·수명·이속 개체가 정찰을 맡고 단속성·무속성 개체는 채집한다", () => {
+test("고급 정찰병이 유일한 미탐색 구역을 담당하면 다른 개체는 채집한다", () => {
   for (const reverse of [false, true]) {
     const f = scoutTeamFixture();
-    const order = reverse ? [...f.state.agents].reverse() : f.state.agents;
+    const order = reverse ? [f.advanced, f.single, f.worker] : [f.advanced, f.worker, f.single];
     for (const agent of order) agent.utility = f.ai.evaluate(agent, false)[0];
     assert.equal(f.advanced.utility?.action, "explore");
     assert.equal(f.worker.utility?.action, "collect");
@@ -274,13 +281,13 @@ test("식량 수급이 급해도 다른 납품 가능 개체가 있으면 고급
   assert.equal(f.worker.utility?.action, "collect");
 });
 
-test("고급 정찰병만 식량을 제때 납품할 수 있으면 정찰보다 수급을 우선한다", () => {
+test("고급 정찰병만 식량을 제때 납품할 수 있어도 미탐색 구역이 남으면 정찰한다", () => {
   const f = scoutTeamFixture();
   f.state.agents = [f.worker, f.advanced];
   f.worker.lifespan = 20;
   f.state.evolutionPoints = 0;
   f.state.lastFoodAt = 0;
-  assert.equal(f.ai.evaluate(f.advanced, false)[0].action, "collect");
+  assert.equal(f.ai.evaluate(f.advanced, false)[0].action, "explore");
 });
 
 test("늙은 고급 정찰병은 남은 수명이 충분한 일반 개체에 정찰을 넘긴다", () => {
@@ -328,10 +335,49 @@ test("실제 군락은 저장·복원과 다른 개체의 운반 중에도 고�
   f.game.restore(f.game.save());
   advance(f, .1);
   assert.equal(f.game.agents.find(agent => agent.id === ids[2]).utility?.action, "explore");
-  for (const id of ids.slice(0, 2)) assert.equal(f.game.agents.find(agent => agent.id === id).utility?.action, "collect");
+  assert.equal(f.game.agents.find(agent => agent.id === ids[0]).utility?.action, "collect");
+  assert.equal(f.game.agents.find(agent => agent.id === ids[1]).utility?.action, "explore");
   f.game.restore(f.game.save());
   advance(f, 3.1);
   assert.equal(f.game.agents.find(agent => agent.id === ids[2]).utility?.action, "explore");
-  assert.ok(f.game.agents.filter(agent => agent.id !== ids[2]).every(agent =>
-    ["collect", "return"].includes(agent.utility?.action)));
+  assert.ok(["collect", "return"].includes(f.game.agents.find(agent => agent.id === ids[0]).utility?.action));
+  assert.equal(f.game.agents.find(agent => agent.id === ids[1]).utility?.action, "explore");
+});
+
+test("단독 정찰콩은 식량 부족과 기존 채집 유지보다 정찰을 우선하고 완료 뒤 채집한다", () => {
+  for (const slots of [["antenna"], ["antenna", "lifespan", "feet"]]) {
+    const f = scoutTeamFixture(), agent = slots.length === 1 ? f.single : f.advanced;
+    f.state.agents = [agent];
+    f.state.evolutionPoints = 0;
+    f.state.lastFoodAt = 0;
+    agent.utility = { action: "collect", target: { key: "26,40" }, plannedCargo: 1 };
+    const pending = f.ai.evaluate(agent, true);
+    assert.ok(pending.length > 0 && pending.every(plan => plan.action === "explore"));
+    f.state.explored.add(40 * f.size + 35);
+    assert.equal(f.ai.evaluate(agent, true)[0].action, "collect");
+    f.state.explored.delete(40 * f.size + 35);
+    assert.equal(f.ai.evaluate(agent, true)[0].action, "explore");
+  }
+});
+
+test("식량 담당 배정과 중단했던 채집도 남아 있는 정찰을 막지 않는다", () => {
+  const f = scoutTeamFixture();
+  f.state.agents = [f.advanced];
+  f.state.evolutionPoints = 0;
+  f.state.lastFoodAt = 0;
+  f.context.constructionAllocation = () => ({ ids: new Set([f.advanced.id]), weights: new Map([[f.advanced.id, 3]]) });
+  f.advanced.suspendedWork = { action: "collect", target: { key: "26,40" }, plannedCargo: 1 };
+  assert.equal(f.ai.evaluate(f.advanced, true)[0].action, "explore");
+});
+
+test("채집 중 정찰할 곳이 생기면 추가 채집 없이 가진 자원을 납품하고 정찰한다", () => {
+  const f = scoutTeamFixture();
+  f.state.agents = [f.advanced];
+  f.advanced.carrying = .5;
+  f.advanced.carryingType = "clay";
+  f.advanced.utility = { action: "collect", target: { key: "26,40" }, plannedCargo: 2 };
+  assert.equal(f.ai.evaluate(f.advanced, true)[0].action, "return");
+  f.advanced.carrying = 0;
+  f.advanced.utility = { action: "return", target: { key: "home" } };
+  assert.equal(f.ai.evaluate(f.advanced, true)[0].action, "explore");
 });
