@@ -15,7 +15,7 @@ import { applyAgentGrowth } from "./growth.mjs";
 import { AGENT_EXPERIENCE, addAgentExperience, recordCombatExperience } from "./experience.mjs";
 import { AGENT_ATTACK_DURATION, AGENT_ATTACK_HIT_TIME } from "./attack.mjs";
 import { createRoadOptimizer } from "./roads.mjs";
-import { createCombat, combatDisposition, canPursueCombat, colonyDefenseTarget } from "./combat.mjs";
+import { createCombat, combatDisposition, canPursueCombat, colonyDefenseTarget, suspendDefenseWork } from "./combat.mjs";
 import { RESOURCE_TYPES, resourceDefinition, resourceTypeForCell, canHarvestResource, migrateResourceType, isColonyFood, isResourceHabitat, populateColonyFood, resourceHarvestSeconds, resourceHarvestMultiplier } from "./resources.mjs";
 import { burrowDistance, burrowApproaches } from "./burrows.mjs";
 import { commandCheat } from "./cheats.mjs";
@@ -343,6 +343,9 @@ export function createGame(environment, colony, savedGame) {
         let axis = 0;
         agent.personality = createPersonality(() => hashNoise(seed + ++axis * 17417, (agent.bornAt || 0) + axis * 7919));
       } else agent.personality = Object.freeze({ ...agent.personality });
+      if (!["collect", "return"].includes(agent.suspendedWork?.action) || typeof agent.suspendedWork?.target?.key !== "string" ||
+          !Number.isInteger(agent.suspendedWork.target.x) || !Number.isInteger(agent.suspendedWork.target.y)) agent.suspendedWork = null;
+      if (!Number.isSafeInteger(agent.defenseRevision) || agent.defenseRevision < 0) agent.defenseRevision = 0;
       agent.knownEnemyIds = agent.knownEnemyIds instanceof Set ? agent.knownEnemyIds : new Set();
       if (agent.decisionPending === undefined) agent.decisionPending = "birth";
       agent.nextDecisionAt = Number.isFinite(agent.nextDecisionAt) ? agent.nextDecisionAt : state.simSeconds;
@@ -1302,11 +1305,13 @@ export function createGame(environment, colony, savedGame) {
     function reconsiderAgent(agent, reason) {
       if (agent.health <= 0 || agent.construction || agent.combat || agent.birth && state.simSeconds < agent.birth.readyAt ||
         agent.attack && state.simSeconds < agent.attack.endsAt) return;
-      const planner = reason === "defense" ? null : environment.decisionPlanner;
+      const planner = reason === "defense" || agent.suspendedWork ? null : environment.decisionPlanner;
       const candidates = planner ? planner.request(colony.ownerId, agent, reason) :
         utilityAI.evaluate(agent, !["completed", "targetLost", "restore"].includes(reason));
       if (candidates === undefined) return;
       const best = candidates[0];
+      if (best?.defending) suspendDefenseWork(agent);
+      else if (agent.suspendedWork && agent.survivalState === "stable" && !agent.retreat) agent.suspendedWork = null;
       agent.decisionCount = (agent.decisionCount || 0) + 1;
       agent.lastDecisionAt = state.simSeconds;
       agent.lastDecisionReason = reason;
@@ -1334,7 +1339,7 @@ export function createGame(environment, colony, savedGame) {
         if (previous?.action !== "supply" || previous.target.key !== best.target.key) constructionSupply.assign(agent, best.transport);
       } else if (agent.transport) constructionSupply.release(agent);
       const same = previous?.action === best.action && previous.target?.key === best.target.key;
-      agent.utility = { action: best.action, target: best.target, route: best.route, defending: best.defending,
+      agent.utility = { action: best.action, target: best.target, route: best.route, defending: best.defending, resuming: best.resuming,
         plannedCargo: best.plannedCargo, recoverHealth: same && best.action === "recover" && reason !== "completed" && !agent.retreat ? previous.recoverHealth : best.recoverHealth,
         score: best.score, scores: candidates.map(candidate => ({ action: candidate.action, score: candidate.score, key: candidate.target.key })) };
       if (same) return;

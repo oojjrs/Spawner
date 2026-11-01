@@ -39,6 +39,13 @@ export function combatTeam(agent) {
   return agent.ownerId ? "colony:" + agent.ownerId : agent.species ? "species:" + agent.species : "agent:" + agent.id;
 }
 
+export function suspendDefenseWork(agent) {
+  const work = agent.utility;
+  if (!agent.ownerId || !militaryAgent(agent, agent.tribe) || agent.suspendedWork || !["collect", "return"].includes(work?.action)) return;
+  agent.suspendedWork = { action: work.action, target: { ...work.target }, plannedCargo: work.plannedCargo };
+  agent.defenseRevision = (agent.defenseRevision || 0) + 1;
+}
+
 export function colonyDefenseTarget(agent, target, allies, structures) {
   if (!agent.ownerId || !militaryAgent(agent, agent.tribe) || combatDisposition(agent) === "peaceful" ||
       combatTeam(agent) === combatTeam(target) || target.health <= 0 || target.hidden) return false;
@@ -86,6 +93,7 @@ export function createCombat(environment) {
   }
 
   function attach(agent, combat, side, time) {
+    suspendDefenseWork(agent);
     agent.combat = { id: combat.id, x: combat.x, y: combat.y, teams: [...combat.teams], side, joinedAt: time,
       turnOrderVersion: COMBAT_TURN_ORDER_VERSION,
       turn: combat.turn || 0, nextAttackTurn: (combat.turn || 0) + 1,

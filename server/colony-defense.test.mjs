@@ -126,14 +126,100 @@ for (const [surface, api] of surfaces) {
     f.soldier.slots = [];
     assert.equal(api.colonyDefenseTarget(f.soldier, f.enemy, f.game.agents, [f.game.nest]), false);
   });
-  test(surface + ": 공격자가 사라지면 방어 작업을 끝내고 일반 행동을 다시 고른다", () => {
+  test(surface + ": 공격자가 사라지면 중단했던 귀환 작업으로 복귀한다", () => {
     const f = fixture(api, "return", "nest");
     tick(f, .1);
     f.enemy.health = 0;
     tick(f, .1);
-    assert.notEqual(f.soldier.utility?.action, "fight");
-    assert.notEqual(f.soldier.utility?.defending, true);
+    assert.equal(f.soldier.utility?.action, "return");
+    assert.equal(f.soldier.utility?.resuming, true);
+    assert.equal(f.soldier.suspendedWork, null);
     assert.equal(f.soldier.carrying, 1);
+  });
+  test(surface + ": 방어 종료 후 다른 자원보다 원래 채집 목표와 계획량을 유지한다", () => {
+    const f = fixture(api, "harvest", "nest");
+    f.soldier.stats.capacity = 3;
+    f.soldier.utility.plannedCargo = 2;
+    f.environment.food.set("17,12", { x: 17, y: 12, amount: 100, initialAmount: 100, resourceType: "clay", kind: "resource" });
+    tick(f, .1);
+    assert.equal(f.soldier.suspendedWork?.target.key, "18,12");
+    assert.equal(f.soldier.suspendedWork?.plannedCargo, 2);
+    f.enemy.health = 0;
+    tick(f, .1);
+    assert.equal(f.soldier.utility?.action, "collect");
+    assert.equal(f.soldier.utility?.target.key, "18,12");
+    assert.equal(f.soldier.utility?.plannedCargo, 2);
+    assert.equal(f.soldier.suspendedWork, null);
+    tick(f, 3.1);
+    assert.equal(f.soldier.utility?.target.key, "18,12");
+    assert.equal(f.soldier.utility?.plannedCargo, 2);
+  });
+  test(surface + ": 방어 중 저장하고 불러와도 중단했던 채집으로 복귀한다", () => {
+    const f = fixture(api, "harvest", "nest");
+    tick(f, .1);
+    const id = f.soldier.id;
+    f.game.restore(f.game.save());
+    f.soldier = f.game.agents.find(agent => agent.id === id);
+    assert.equal(f.soldier.suspendedWork?.target.key, "18,12");
+    f.enemy.health = 0;
+    tick(f, .1);
+    assert.equal(f.soldier.utility?.action, "collect");
+    assert.equal(f.soldier.utility?.target.key, "18,12");
+    assert.equal(f.soldier.suspendedWork, null);
+  });
+  test(surface + ": 같은 칸에서 바로 교전에 들어가도 실제 전투 종료 후 채집으로 복귀한다", () => {
+    const f = fixture(api, "harvest", "nest");
+    Object.assign(f.soldier, { x: f.enemy.x, y: f.enemy.y });
+    f.enemy.health = 1;
+    assert.equal(api.createCombat(f.environment).engage(f.soldier, f.enemy, 0), true);
+    assert.equal(f.soldier.suspendedWork?.target.key, "18,12");
+    for (let step = 0; step < 120 && (f.soldier.combat || !f.soldier.utility); step++) tick(f, .1);
+    assert.equal(f.soldier.combat, null);
+    assert.equal(f.soldier.utility?.action, "collect");
+    assert.equal(f.soldier.utility?.target.key, "18,12");
+    assert.equal(f.soldier.suspendedWork, null);
+  });
+  test(surface + ": 연달아 방어해도 처음 중단한 작업을 덮어쓰지 않는다", () => {
+    const f = fixture(api, "harvest", "nest");
+    tick(f, .1);
+    const saved = f.soldier.suspendedWork;
+    const second = { ...f.enemy, id: "second-beetle", x: 15 };
+    f.environment.creatureSystem.agents.push(second);
+    f.enemy.health = 0;
+    tick(f, .1);
+    assert.equal(f.soldier.utility?.target.id, second.id);
+    assert.equal(f.soldier.suspendedWork, saved);
+    second.health = 0;
+    tick(f, .1);
+    assert.equal(f.soldier.utility?.action, "collect");
+    assert.equal(f.soldier.utility?.target.key, "18,12");
+  });
+  for (const invalid of ["depleted", "locked"]) {
+    test(surface + ": " + invalid + "인 원래 채집 목표는 복귀하지 않고 작업 기억을 해제한다", () => {
+      const f = fixture(api, "harvest", "nest");
+      tick(f, .1);
+      if (invalid === "depleted") f.tree.amount = 0;
+      else f.soldier.attributes.blade = 0;
+      f.enemy.health = 0;
+      tick(f, .1);
+      assert.ok(f.soldier.utility?.action !== "collect" || f.soldier.utility.target.key !== "18,12");
+      assert.equal(f.soldier.suspendedWork, null);
+    });
+  }
+  test(surface + ": 회복이 필요한 동안 작업을 기억하고 회복 후 원래 채집으로 복귀한다", () => {
+    const f = fixture(api, "harvest", "nest");
+    tick(f, .1);
+    f.enemy.health = 0;
+    f.soldier.health = 50;
+    tick(f, .1);
+    assert.equal(f.soldier.suspendedWork?.target.key, "18,12");
+    assert.equal(f.soldier.utility?.action, "recover");
+    f.soldier.health = f.soldier.stats.health;
+    f.soldier.decisionPending = "completed";
+    tick(f, .1);
+    assert.equal(f.soldier.utility?.action, "collect");
+    assert.equal(f.soldier.utility?.target.key, "18,12");
+    assert.equal(f.soldier.suspendedWork, null);
   });
 }
 
@@ -153,6 +239,27 @@ test("일반 전투와 같은 목표라도 방어 전환 전의 병렬 판단 �
   const job = worker.messages.find(message => message.type === "plan"), request = job.requests[0];
   worker.onmessage({ data: { results: [{ ...request, time: 0, candidates: [{ action: "return" }] }] } });
   agent.utility.defending = true;
+  assert.equal(pool.request("owner", agent, "periodic"), undefined);
+  pool.dispose();
+});
+
+
+test("방어 전의 병렬 판단 결과는 같은 채집 작업에 복귀한 뒤에도 적용하지 않는다", () => {
+  let worker;
+  const context = { navigator: { hardwareConcurrency: 3 }, performance,
+    Worker: class { constructor() { worker = this; this.messages = []; } postMessage(message) { this.messages.push(message); } terminate() {} },
+    Blob: class {}, URL: { createObjectURL: () => "worker", revokeObjectURL() {} } };
+  const source = readFileSync(new URL("../client/decision-pool.mjs", import.meta.url), "utf8");
+  runInNewContext(source.replace(/^export /gm, "") + ";globalThis.createPool = createDecisionPool;", context);
+  const agent = { id: "one", x: 1, y: 1, health: 100, carrying: 0, attributes: {}, level: 1,
+    utility: { action: "collect", target: { key: "18,12" } }, defenseRevision: 0 };
+  const game = { agents: [agent], buildings: [], nest: {}, save: () => "saved", rememberForagers() {} };
+  const room = { games: new Map([["owner", game]]), simSeconds: 0, world: {}, food: new Map(), colonies: [] };
+  const pool = context.createPool(room);
+  pool.request("owner", agent, "periodic"); pool.flush();
+  const request = worker.messages.find(message => message.type === "plan").requests[0];
+  worker.onmessage({ data: { results: [{ ...request, time: 0, candidates: [{ action: "explore" }] }] } });
+  agent.defenseRevision = 1;
   assert.equal(pool.request("owner", agent, "periodic"), undefined);
   pool.dispose();
 });

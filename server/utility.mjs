@@ -332,6 +332,8 @@ export function createUtilityAI(context) {
     const visible = enemies().filter(enemy => enemy.health > 0);
     const safety = assess(agent, visible);
     const defenseTargets = visible.filter(enemy => colonyDefenseTarget(agent, enemy, state.agents, context.defenseStructures?.()));
+    const suspendedWork = agent.suspendedWork || (retain && agent.utility?.resuming ? agent.utility : null);
+    const suspendedFoodKey = suspendedWork?.action === "collect" ? suspendedWork.target.key : null;
     const capacity = unitCarryCapacity(agent, agent.carryingType) + (synergy(agent, ["strength", "strength"]) ? 4 : 0);
     const routes = new Map(), candidates = [];
     const path = target => {
@@ -419,12 +421,14 @@ export function createUtilityAI(context) {
     if (agent.carrying < capacity && !agent.transportCargo) {
       const foods = [...state.knownFood.values()].filter(food => food.amount > 0 &&
         canHarvest(food, agent) &&
-        (!Object.keys(constructionMaterials).length || isFood(resourceType(food)) || requiredMaterials.includes(resourceType(food))) &&
+        (!Object.keys(constructionMaterials).length || isFood(resourceType(food)) || requiredMaterials.includes(resourceType(food)) ||
+          (food.key || food.x + "," + food.y) === suspendedFoodKey) &&
         (!agent.carrying || carryingType === resourceType(food)) &&
         (isFood(resourceType(food)) ? storage > 0 : materialSpace > 0))
         .sort((first, second) => distance(agent, first) - distance(agent, second));
       const currentFood = foods.find(food => (food.key || food.x + "," + food.y) === agent.utility?.target?.key);
-      const targets = [...new Set([currentFood,
+      const suspendedFood = foods.find(food => (food.key || food.x + "," + food.y) === suspendedFoodKey);
+      const targets = [...new Set([currentFood, suspendedFood,
         ...Object.keys(constructionMaterials).filter(type => constructionMaterials[type] > 0)
           .flatMap(type => foods.filter(food => resourceType(food) === type).slice(0, 2)),
         ...foods.filter(food => isFood(resourceType(food))).slice(0, 6),
@@ -440,6 +444,8 @@ export function createUtilityAI(context) {
         const available = Math.max(0, food.amount - reservation(food));
         const capacity = unitCarryCapacity(agent, type) + (synergy(agent, ["strength", "strength"]) ? 4 : 0);
         const maximum = Math.min(capacity - agent.carrying, available,
+          (food.key || food.x + "," + food.y) === suspendedFoodKey && Number.isFinite(suspendedWork.plannedCargo) ?
+            Math.max(0, suspendedWork.plannedCargo - agent.carrying) : Infinity,
           material && constructionMaterials[type] > 0 ? Math.max(0, constructionMaterials[type] - reservation(food)) : Infinity);
         const present = agent.x === food.x && agent.y === food.y && agent.mode === "harvest";
         const key = food.key || food.x + "," + food.y;
@@ -676,6 +682,9 @@ export function createUtilityAI(context) {
     let allowed = viable.length ? viable : candidates;
     const defense = !agent.retreat && safety.state !== "critical" ? viable.filter(candidate => candidate.defending) : [];
     if (defense.length) return defense.sort((first, second) => second.score - first.score);
+    const resumed = suspendedWork && safety.state === "stable" && !agent.retreat ? viable.filter(candidate =>
+      candidate.action === suspendedWork.action && candidate.target.key === suspendedWork.target.key && candidate.damage < agent.health * .25) : [];
+    if (resumed.length) return resumed.sort((first, second) => second.score - first.score).map(candidate => ({ ...candidate, resuming: true }));
     if (agent.retreat || safety.state === "critical") {
       const safest = Math.min(...allowed.map(candidate => candidate.damage));
       const survival = allowed.filter(candidate => ["flee", "recover", "return"].includes(candidate.action) &&
