@@ -19,21 +19,26 @@ test("속성 조합 보너스는 모두 중지하고 개별 속성 효과와 생
   assert.equal(unitStats(attributeCounts(["strength","antenna"]),"bean").capacity,2);
   assert.equal(unitStats(attributeCounts(["strength","antenna"]),"bean").vision,6);
   const slots = ["strength","antenna","feet","lifespan"];
-  const prices = { bean:[3,4,5,6,7], spore:[2,2,3,4,5], pebble:[4,5,6,8,10], spring:[3,4,5,6,7] };
+  const prices = { bean:[3,5,8,12,17], spore:[2,3,5,8,12], pebble:[4,7,11,16,22], spring:[3,5,7,10,14] };
   for (const [tribe,expected] of Object.entries(prices)) {
     for (let count=0;count<=4;count++) assert.equal(birthCost({slots:slots.slice(0,count)},tribe),expected[count]);
   }
   assert.deepEqual(Object.fromEntries(RESOURCE_TYPES.map(resource=>[resource.key,resource.harvestSeconds])),harvestSeconds);
 });
 
-test("브라우저와 내부 워커도 시너지를 중지하고 동일한 자원 채집 시간을 사용한다", () => {
+test("브라우저와 내부 워커도 속성 개수별 생산비와 자원 채집 시간을 동일하게 사용한다", () => {
   const source = readFileSync(new URL("../client/runtime.js",import.meta.url),"utf8"),browser={};
   runInNewContext(source,browser);
   const workerSource = JSON.parse(source.match(/const workerSource = ("[^\r\n]+");/)[1]);
   const worker = { Map,Set,Uint8Array,setTimeout,clearTimeout,performance };
   runInNewContext(workerSource.slice(0,workerSource.indexOf('modules["client/worker.mjs"]'))+
     'globalThis.rules = {...modules["server/attributes.mjs"],...modules["server/resources.mjs"]}; })();',worker);
+  const slots = ["strength","antenna","feet","lifespan"];
+  const prices = { bean:[3,5,8,12,17], spore:[2,3,5,8,12], pebble:[4,7,11,16,22], spring:[3,5,7,10,14] };
   for (const rules of [browser.Spawner,worker.rules]) {
+    for (const [tribe,expected] of Object.entries(prices)) for (let count=0;count<=4;count++) {
+      assert.equal(rules.birthCost({slots:slots.slice(0,count)},tribe),expected[count],tribe + ":" + count);
+    }
     assert.equal(rules.ATTRIBUTE_SYNERGIES_ENABLED,false);
     assert.equal(rules.ATTRIBUTE_COMBINATIONS.length,0);
     assert.equal(rules.hasSynergy({strength:4,antenna:4,feet:4},["strength","antenna"]),false);

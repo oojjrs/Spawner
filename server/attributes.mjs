@@ -190,10 +190,5 @@ const tribeBirthCosts = Object.freeze({
 
 export function birthCost(template, tribe) {
   const costs = tribeBirthCosts[tribe || template.tribe] || tribeBirthCosts.bean;
-  const ceiling = costs[template.slots.length];
-  if (ceiling === undefined) return Infinity;
-  const base = costs[0] * [1, 1.2, 1.5, 1.9, 2.4][template.slots.length];
-  const attributes = attributeCounts(template.slots, template.attributeLevels);
-  const enhancement = template.slots.length ? template.slots.reduce((sum, key) => sum + attributes[key] - 1, 0) / (3 * template.slots.length) : 0;
-  return Math.round(base + (ceiling - base) * enhancement);
+  return costs[template.slots.length] ?? Infinity;
 }

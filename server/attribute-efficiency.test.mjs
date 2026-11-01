@@ -130,16 +130,17 @@ test("감지 단속성의 생애 정찰 효율과 관련 조합의 탐색량은 
   t.diagnostic(JSON.stringify(results));
 });
 
-test("강화 생산비는 종족별 상한까지 오르고 혼합 강화도 실제 장착 단계만 반영한다", () => {
+test("생산비는 종족별 장착 속성 개수로 정하고 강화 단계는 반영하지 않는다", () => {
   const slots = ["strength", "feet", "lifespan"];
   assert.deepEqual([1, 2, 3, 4].map(grade => birthCost({ slots, attributeLevels: Object.fromEntries(slots.map(key => [key, grade])) }, "bean")),
-    [6, 8, 10, 12]);
-  assert.equal(birthCost({ slots, attributeLevels: { strength: 4, feet: 1, lifespan: 1 } }, "bean"), 8);
+    [12, 12, 12, 12]);
+  assert.equal(birthCost({ slots, attributeLevels: { strength: 4, feet: 1, lifespan: 1 } }, "bean"), 12);
   assert.equal(birthCost({ slots: [] }, "bean"), 3);
+  const prices = { bean: [3, 5, 8, 12, 17], spring: [3, 5, 7, 10, 14], pebble: [4, 7, 11, 16, 22], spore: [2, 3, 5, 8, 12] };
   for (const tribe of Object.keys(native)) for (let count = 0; count <= 4; count++) for (let grade = 1; grade <= 4; grade++) {
     const slots = ["strength", "feet", "lifespan", "antenna"].slice(0, count);
     const cost = birthCost({ slots, attributeLevels: Object.fromEntries(slots.map(key => [key, grade])) }, tribe);
-    assert.ok(Number.isInteger(cost), tribe + ":" + count + ":" + grade);
+    assert.equal(cost, prices[tribe][count], tribe + ":" + count + ":" + grade);
   }
 });
 
