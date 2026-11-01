@@ -1,4 +1,86 @@
 (() => {
+  const levels = Object.freeze({
+    "unit-attack": 0.025703958,
+    "beetle-attack": 0.0072443592,
+    "flower-tail-bird-attack": 0.010592537,
+    "dew-rabbit-attack": 0.017579236,
+    "soil-mole-attack": 0.0096605087,
+    "bundle-snail-attack": 0.012589254,
+    "cotton-sheep-attack": 0.01083927,
+    "rolling-acorn-attack": 0.014621772,
+    "soil-boar-attack": 0.0060255959,
+    "bubble-toad-attack": 0.011748976,
+    "vine-turtle-attack": 0.012589254,
+    "shadow-weasel-attack": 0.01216186,
+    "snare-vine-attack": 0.013645831,
+    "talon-owl-attack": 0.020653801,
+    "spring-keeper-attack": 0.0076736149,
+    "lantern-keeper-attack": 0.0069984196,
+    "old-garden-snail-attack": 0.0088104888,
+    "walking-forest-attack": 0.016982437,
+    "white-paw-attack": 0.010964782,
+    "spiny-back-leader-attack": 0.0072443592,
+    "sprout-hurt": 0.84139514,
+    "spore-hurt": 0.011614486,
+    "pebble-hurt": 0.15310875,
+    "spring-hurt": 0.011091747,
+    "beetle-hurt": 0.011091748,
+    "sprout-death": 0.050118723,
+    "spore-death": 0.069984199,
+    "pebble-death": 0.016032455,
+    "spring-death": 0.087096359,
+    "beetle-death": 0.023988329,
+    "move-spore": 0.0038904515,
+    "move-pebble": 0.0056885293,
+    "move-spring": 0.0085113804,
+    "move-spiny-back-beetle": 0.0037583741,
+    "move-flower-tail-bird": 0.0036307805,
+    "move-dew-rabbit": 0.0048417237,
+    "move-soil-mole": 0.013803842,
+    "move-bundle-snail": 0.0060255959,
+    "move-cotton-sheep": 0.012445146,
+    "move-rolling-acorn": 0.0065313054,
+    "move-soil-boar": 0.0038018939,
+    "move-bubble-toad": 0.0032359366,
+    "move-vine-turtle": 0.035481339,
+    "move-shadow-weasel": 0.0026915347,
+    "move-snare-vine": 0.0042169651,
+    "move-talon-owl": 0.0014621772,
+    "move-spring-keeper": 0.02113489,
+    "move-lantern-keeper": 0.013645832,
+    "move-old-garden-snail": 0.003672823,
+    "move-walking-forest": 0.0073282453,
+    "move-white-paw": 0.016982437,
+    "move-spiny-back-leader": 0.0043651584,
+    "click": 0.091201084,
+    "discovery": 0.057543997,
+    "footstep": 0.0699842,
+    "seed-eject": 0.0051286138,
+    "seed-crack": 0.017378009,
+    "sprout-pop": 0.015310874,
+    "spring-birth": 0.028183829,
+    "pebble-birth": 0.029512093,
+    "spore-birth": 0.0038459179,
+    "nest-growth-bean": 0.1,
+    "nest-growth-spore": 0.45185595,
+    "nest-growth-pebble": 0.029853826,
+    "nest-growth-spring": 0.023442288,
+    "spring-landing": 0.013031667,
+    "spring-footstep": 0.02818383,
+    "harvest": 0.02113489,
+    "harvest-soil": 0.0081283052,
+    "harvest-wood": 0.0064565421,
+    "harvest-pebbles": 0.042657952,
+    "harvest-dew": 0.013645831,
+    "harvest-grass-fiber": 0.006095369,
+    "harvest-sand": 0.007161434,
+    "harvest-iron-ore": 0.0074131025,
+    "harvest-copper-ore": 0.007161434,
+    "harvest-quartz": 0.0054325033,
+    "landing": 0.063826349,
+    "throw": 0.013335214,
+    "catch": 0.030902954
+  });
   const sources = {
   ...globalThis.SpawnerCombatAudio.sources,
   ...globalThis.SpawnerMovementAudio?.sources,
@@ -36,8 +118,31 @@
     dew: "harvest-dew", nutrients: "harvest-dew", "grass-fiber": "harvest-grass-fiber",
     sand: "harvest-sand", "iron-ore": "harvest-iron-ore", "copper-ore": "harvest-copper-ore", quartz: "harvest-quartz"
   });
+  function createMix(context) {
+    const input = context.createGain();
+    const compressor = context.createDynamicsCompressor();
+    compressor.threshold.value = -32;
+    compressor.knee.value = 3;
+    compressor.ratio.value = 20;
+    compressor.attack.value = .001;
+    compressor.release.value = .08;
+    const limiter = context.createWaveShaper();
+    const ceiling = 10 ** (-32 / 20);
+    limiter.curve = Float32Array.from({ length: 65537 }, (_, index) =>
+      Math.max(-ceiling, Math.min(ceiling, index / 32768 - 1)));
+    const output = context.createGain();
+    output.gain.value = 0;
+    input.connect(compressor);
+    compressor.connect(limiter);
+    limiter.connect(output);
+    output.connect(context.destination);
+    return { input, output };
+  }
+
   globalThis.SpawnerAudio = Object.freeze({ create: function () {
     let context = null;
+    let sfxGain = null;
+    let sfxOutput = null;
     let loading = null;
     let muted = false;
     let active = true;
@@ -56,7 +161,6 @@
     let prepared = false;
     const voices = new Set();
     const lastPlayed = new Map();
-    const levels = { harvest: 0.8, "harvest-soil": 0.8, landing: 1.2, footstep: 0.6, throw: 1.5, catch: 2, "seed-eject": 1, "seed-crack": 1, "sprout-pop": 1, "spring-birth": 0.7, "pebble-birth": 1, "spore-birth": 0.3, "spring-landing": 1.2, "spring-footstep": 0.6 };
     const button = document.getElementById("sound-toggle");
 
     function updateButton() {
@@ -83,9 +187,14 @@
     async function unlock() {
       if (!active || muted || failed || document.hidden) return;
       try {
-        if (!context) context = new AudioContext();
+        if (!context) {
+          context = new AudioContext();
+          const mix = createMix(context);
+          sfxGain = mix.input;
+          sfxOutput = mix.output;
+        }
         if (context.state === "suspended") await context.resume();
-        if (active && !muted && !document.hidden) music.unlock(context);
+        if (active && !muted && !document.hidden) music.unlock(context, sfxOutput);
         if (!loading) loading = Promise.all(Object.entries(sources).map(async ([name, source]) => {
           const encoded = await fetch(globalThis.SpawnerAssets.source(source)).then(response => {
               if (!response.ok) throw new Error("효과음을 불러오지 못했습니다.");
@@ -96,7 +205,7 @@
           for (let index = 0; index < 8; index++) {
             const gain = context.createGain();
             gain.gain.value = 0;
-            gain.connect(context.destination);
+            gain.connect(sfxGain);
             const channel = { gain, sources: new Map(), source: null, name: null, priority: 0 };
             channels.push(channel);
             for (const name of names) channel.sources.set(name, prepareSource(channel, name));
@@ -169,7 +278,7 @@
       voice.source = source;
       voice.name = name;
       source.loop = loop;
-      voice.gain.gain.value = (levels[name] ?? globalThis.SpawnerMovementAudio?.levels[name] ?? (name.startsWith("harvest-") ? .8 : 1)) * Math.min(1, volume);
+      voice.gain.gain.value = levels[name] * Math.min(1, volume);
       voices.add(voice);
       source.start();
       return voice;
@@ -184,9 +293,9 @@
         source.buffer = buffers.get(name);
         if (!discoveryGain) {
           discoveryGain = context.createGain();
-          discoveryGain.connect(context.destination);
+          discoveryGain.connect(sfxGain);
         }
-        discoveryGain.gain.value = 0.65 * Math.min(1, volume);
+        discoveryGain.gain.value = levels.discovery * Math.min(1, volume);
         source.connect(discoveryGain);
         source.onended = () => {
           source.disconnect();
@@ -216,8 +325,8 @@
       source.buffer = buffers.get("click");
       if (!clickGain) {
         clickGain = context.createGain();
-        clickGain.gain.value = 0.3;
-        clickGain.connect(context.destination);
+        clickGain.gain.value = levels.click;
+        clickGain.connect(sfxGain);
       }
       source.connect(clickGain);
       source.onended = () => {
@@ -244,7 +353,7 @@
           voice = start(name, volume, true);
           if (voice) harvests.set(type, voice);
         }
-        if (voice) voice.gain.gain.value = (levels[name] ?? .8) * Math.min(1, volume);
+        if (voice) voice.gain.gain.value = levels[name] * Math.min(1, volume);
       }
     }
 

@@ -159,6 +159,7 @@ test("게임 재생 경로는 공격자가 다른 종족이어도 피해자 위�
   const victim = { id: "victim", tribe: "spore", health: 9, x: 8, y: 9, attributes: {}, moveDuration: 0 };
   const played = [], volumes = [];
   const context = createContext({ SpawnerCombatAudio: combat, combatAudio: combat.create(),
+    Spawner: { nestGrowthSounds: () => [] }, nestGrowthPlayback: {},
     connection: { active: true, online: true }, state: { simSeconds: 10, camera: { layer: 0 }, agents: [attacker, victim], rivals: [], corpses: [] },
     audio: { available: () => true, play: (name, volume) => played.push({ name, volume }), stop() {}, setHarvest() {} },
     audioTime: null, agentAudio: new Map(), deliveryAudio: new Map(), foodDeliveries: new Map(), AGENT_FOOTSTEPS_PER_CELL: 4,
@@ -197,17 +198,27 @@ test("게임·기획서와 로컬 실행 목록이 같은 전투 음원을 참�
 });
 
 test("이동음이 채널을 채워도 피격·사망음이 우선하며 모든 음원의 재생 게인은 유효하다", async () => {
-  const started = [], stopped = [], gains = [], listeners = {};
+  const started = [], stopped = [], gains = [], compressors = [], limiters = [], listeners = {};
   let clock;
   class AudioContext {
-    constructor() { this.state = "running"; this.currentTime = 1; clock = this; }
+    constructor() { this.state = "running"; this.currentTime = 1; this.destination = {}; clock = this; }
+    createDynamicsCompressor() {
+      const node = { threshold: {}, knee: {}, ratio: {}, attack: {}, release: {}, connect(target) { this.destination = target; } };
+      compressors.push(node);
+      return node;
+    }
+    createWaveShaper() {
+      const node = { connect(target) { this.destination = target; } };
+      limiters.push(node);
+      return node;
+    }
     createGain() {
-      const gain = { gain: { value: 0 }, connect() {} };
+      const gain = { gain: { value: 1 }, connect(target) { this.destination = target; } };
       gains.push(gain);
       return gain;
     }
     createBufferSource() {
-      return { connect() {}, disconnect() {}, start() { started.push(this); },
+      return { connect(target) { this.destination = target; }, disconnect() {}, start() { started.push(this); },
         stop() { stopped.push(this); queueMicrotask(() => this.onended?.()); } };
     }
     async decodeAudioData(encoded) { return { name: new TextDecoder().decode(encoded) }; }
@@ -232,6 +243,18 @@ test("이동음이 채널을 채워도 피격·사망음이 우선하며 모든 
   assert.ok(started.some(source => source.buffer.name.endsWith("spore-hurt.mp3")));
   assert.ok(started.some(source => source.buffer.name.endsWith("pebble-death.mp3")));
   assert.equal(stopped.length, 2);
+  engine.stop();
+  await engine.playClick();
+  engine.play("discovery", 1);
+  engine.setHarvest(new Map([["clay", 1]]));
   assert.ok(gains.every(gain => Number.isFinite(gain.gain.value)));
+  assert.equal(compressors.length, 1);
+  assert.equal(limiters.length, 1);
+  for (const source of started) assert.equal(source.destination.destination, gains[0]);
+  assert.equal(gains[0].destination, compressors[0]);
+  assert.equal(compressors[0].destination, limiters[0]);
+  assert.equal(limiters[0].destination, gains[1]);
+  assert.equal(gains[1].destination, clock.destination);
+  assert.ok(limiters[0].curve.every(value => Math.abs(value) <= 10 ** (-31.99 / 20)));
   engine.stop();
 });

@@ -235,6 +235,8 @@ function audio() {
     state = "running";
     currentTime = 1;
     async decodeAudioData() { return {}; }
+    createDynamicsCompressor() { return { threshold: {}, knee: {}, ratio: {}, attack: {}, release: {}, connect() {} }; }
+    createWaveShaper() { return { connect() {} }; }
     createGain() { return { gain: {}, connect() {} }; }
     createBufferSource() {
       const source = { connect() {}, disconnect() {}, start() { starts.push(source); }, stop() { stops.push(source); } };

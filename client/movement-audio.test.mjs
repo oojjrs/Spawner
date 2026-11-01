@@ -71,7 +71,8 @@ test("정지·사망·탄생·공격·피격에는 이동음이 나오지 않고
 test("게임 재생 경로는 22종에 각각 이동음을 내고 콩 착지음을 덧붙이지 않는다", () => {
   const played = [], movementAudio = audio.create();
   const state = { simSeconds: 0, camera: { layer: 0 }, agents: Object.keys(audio.definitions).map(agent), rivals: [], corpses: [] };
-  const scope = createContext({ Spawner: animations, SpawnerMovementAudio: audio, movementAudio,
+  const scope = createContext({ Spawner: { ...animations, nestGrowthSounds: () => [] }, nestGrowthPlayback: {},
+    SpawnerMovementAudio: audio, movementAudio,
     SpawnerCombatAudio: { update: () => [] }, combatAudio: {}, state, connection: { active: true, online: true },
     audioTime: 0, agentAudio: new Map(), deliveryAudio: new Map(), foodDeliveries: new Map(),
     displayedAgent: unit => unit, interpolatedAgentPosition: unit => unit, audioVolume: () => 1,

@@ -5,10 +5,14 @@
 
   globalThis.SpawnerMusic = Object.freeze({ create: function () {
     const playlists = globalThis.SpawnerMusicCatalog;
+    const envelopes = new Map(Object.values(playlists).flat().map(track =>
+      [track, Uint8Array.from(atob(track.envelope), value => value.charCodeAt(0))]));
     const cursors = { peace: 0, combat: 0 };
     const failedTracks = new Set();
     const channels = [];
     let context = null;
+    let effects = null;
+    let effectAt = 0;
     let enabled = false;
     let mode = null;
     let active = null;
@@ -24,11 +28,30 @@
       gapTimer = null;
     }
 
+    function updateEffects() {
+      if (!effects) return;
+      let level = 0;
+      for (const channel of channels) {
+        if (!channel.track || channel.audio.paused) continue;
+        const envelope = envelopes.get(channel.track);
+        const index = Math.floor(channel.audio.currentTime * 10);
+        const encoded = Math.max(envelope[Math.max(0, index - 1)] ?? 255,
+          envelope[index] ?? 255, envelope[index + 1] ?? 255);
+        level = Math.max(level, channel.audio.volume * 10 ** (-encoded / 40));
+      }
+      const target = Math.min(1, level / 10 ** (-26 / 20));
+      const recovery = 1 - Math.exp(-Math.max(0, context.currentTime - effectAt) / .12);
+      effects.gain.value = target < effects.gain.value ? target :
+        effects.gain.value + (target - effects.gain.value) * recovery;
+      effectAt = context.currentTime;
+    }
+
     function ramp(channel, target, seconds) {
       const now = context.currentTime;
       Object.assign(channel, { from: channel.audio.volume, to: target, at: now, until: now + seconds });
       if (seconds <= 0) channel.audio.volume = target;
       else if (fadeTimer === null) fadeTimer = setInterval(updateFades, 20);
+      updateEffects();
     }
 
     function updateFades() {
@@ -39,7 +62,8 @@
         channel.audio.volume = channel.from + (channel.to - channel.from) * progress;
         if (progress < 1) fading = true;
       }
-      if (!fading) {
+      updateEffects();
+      if (!fading && channels.every(channel => channel.audio.paused)) {
         clearInterval(fadeTimer);
         fadeTimer = null;
       }
@@ -172,8 +196,10 @@
       setMode(time < combatUntil ? "combat" : "peace");
     }
 
-    function unlock(audioContext) {
+    function unlock(audioContext, effectGain) {
       context = audioContext;
+      effects = effectGain;
+      effectAt = context.currentTime;
       if (!channels.length) {
         for (let index = 0; index < 2; index++) {
           const audio = new Audio();

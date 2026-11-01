@@ -7,6 +7,14 @@
 - `hosting/prepare-site.mjs`는 원본 복사와 외부 URL 매핑을 자동 수행한다. Pages 커밋·푸시·게시 확인과 Sites 저장·배포는 Codex가 이어서 수행할 별도 단계다.
 - 완료 식별자, 실제 검증과 실행 명령은 [원본 자산 분리 배포 기록](#2026-11-01-원본-자산-분리-배포-완료)을 확인한다.
 
+## 현재 작업 요약 · SFX 음량
+
+- SFX 80종의 개별 음량 보정과 중첩 합산 제한을 완료했다. 같은 목표 집합의 측정 음량 편차는 최대 0.8 LU, 딱정벌레 이동은 다른 이동보다 3 LU 낮다.
+- BGM 14곡의 구간별 실제 음량과 페이드·정지·재개에 SFX 출력을 연동한다. 10개 중첩 검사에서 K 가중 음량은 BGM보다 최소 8.0338 LU 낮았으며 관련 회귀 검사 30개가 통과했다.
+- 과거 일괄 -20dB/딱정벌레 -37dB와 22/27·5건 실패 기록은 이 작업의 이전 단계다. 현재 설정이나 미해결 실패로 재사용하지 않는다.
+- 현재 Git 승인 범위는 오디오 코드 3개, 관련 테스트 5개와 SFX 메모리의 로컬 커밋이다. 다른 작업의 변경과 기록은 제외하며, 정확한 커밋 ID는 이 채팅의 최종 보고를 참조한다.
+- 상세 근거는 아래 「2026-11-01 SFX 균형 조정 완료 결과」와 $Trash/sfx-balance-20261101의 calibration-final.json, mix-verification.json, loudness-verification.json에 있다.
+
 ## 2026-11-01 SFX 음량 전수 조정
 
 - 요청: 전체 SFX가 BGM보다 두드러지지 않도록 낮추고, 가시등 딱정벌레 이동음은 특히 크게 낮춘다.
@@ -627,6 +635,22 @@
 - 직접 확인한 기존 근거: 격리된 실제 뿌리 렌더러에서 접지 중 발 고정·정지 높이 연속성, 개체 간 캐시 분리·몸통 캐시 재사용·건설/재생 조합을 확인했다. 최종 보행 측정의 최소 회수 표본은 60fps 기준 보통 가로 5·세로 11프레임, 질주 가로 4·세로 6프레임이다. 전체 게임 세션 검증이 아니다. 자료는 $Trash/sprout-root-flicker-20261101/evidence-motion.json, evidence.json과 comparison.gif에 있다.
 - 이번 요청에 따라 갱신된 공통·문서·기획서 지침을 다시 읽었고 CodexWorkMemory.md 자유 기록 예외를 적용했다. 기획서는 기존 이속 속성의 bean-feet.webp를 현재 리그·기존 몸통 파츠로 다시 출력하고, 본문 미리보기와 원본 확대가 같은 애니메이션을 보도록 연결한다. 새 본문 문구는 추가하지 않는다. 출력은 기존 144×144 규격의 투명 WebP이며 60fps 표본 100프레임, 시작 보행을 지나 워밍업한 6주기다.
 - 최신 Git 승인 범위는 이 기획서 미리보기·참조와 본 절의 작업 메모리의 로컬 커밋이다. 다른 채팅의 메모리·제품 변경과는 분리한다. 앞선 제품 수정의 푸시 승인을 이번 문서 푸시 승인으로 확대하지 않는다.
+
+## 2026-11-01 SFX 균형 조정 완료 결과
+
+- SFX 80종을 실제 Chrome OfflineAudioContext의 최종 compressor/limiter 출력으로 반복 측정해 개별 gain을 보정했다. 목표 대비 오차는 전부 ±0.4 LU 이내이며 동일 목표 집합의 최대 편차는 0.8 LU이다. 이동/채집/운반을 전투·탄생·성장·발견보다 낮게 배치하고 딱정벌레 이동은 다른 이동보다 3 LU 낮게 설정했다. 앞선 일괄 -20dB 및 딱정벌레 -37dB 수치는 새 보정으로 대체된다.
+- SFX 경로 전체(8개 일반 채널+클릭+발견)를 하나의 compressor와 -32dBFS sample-peak limiter로 통합했다. BGM 14곡의 실제 PCM에서 100ms RMS envelope를 생성해 music-catalog.js의 각 곡에 저장했다. music.js가 재생 위치·이전/현재/다음 구간·페이드 볼륨을 참조해 SFX 출력 gain을 낮추고 천천히 회복한다. 음악 정지/곡 사이 무음에서는 SFX 출력이 0이다. HTMLAudio 재생 방식과 file 직접 실행을 유지한다.
+- 검증: 14곡 각각의 조용한 10초 구간에서 SFX 10개를 동시에 반복 재생하고, 2초 페이드인·3초 정지·재개를 실제 네이티브 오디오 그래프로 렌더링했다. 합산 SFX의 400ms RMS 최소 여유는 9.6486dB이고, ITU-R BS.1770-5의 48kHz K 가중 400ms/75% 중첩 창 976개에서는 최소 8.0338 LU 낮았다. 검사한 모든 곡의 3초 무음 구간에서 SFX sample이 0이고, 최대 SFX sample peak는 -33.1667dBFS였다.
+- 실제 오디오 엔진을 HTTP와 file 두 방식으로 따로 실행해 80종 decode, 공통 compressor/limiter 1개씩, 클릭·발견·채집·전투 재생, 음악 재생, 정지 시 출력 gain 0, 재개를 확인했다. 두 방식 모두 브라우저 pageerror가 없었다. 사용자의 활성 브라우저나 데스크톱은 제어하지 않았다. 직접 청음 대신 최종 브라우저 출력과 K 가중 음량을 측정했다.
+- 회귀 검사: combat-audio/movement-audio/soil-harvest-audio/music 28개와 background의 오디오 수명 검사 2개로 총 30개 통과. music에 BGM 페이드·무음·정지·재개의 SFX 연동 검사를 추가했고, combat에는 일반·클릭·발견·채집이 합산 limiter를 우회하지 않는 경로 검사와 피크 상한 검사를 추가했다. 검증 중 동시 진행된 웰컴 스피커 DOM 이동 때문에 방 나가기 fixture에 appendChild 의존성이 필요해 해당 fixture만 갱신했다.
+- 결과 자료: $Trash/sfx-balance-20261101/calibration-final.json, mix-verification.json, loudness-verification.json 및 개별 렌더 WAV. 구현은 client/audio.js, music.js, music-catalog.js이며 관련 테스트 4개와 본 메모리만 추가로 수정했다. 원본 음원·기획서·게임 UI·다른 작업을 보존했고 스테이징/커밋/게시하지 않았다.
+- 측정 근거: ITU-R BS.1770-5 https://www.itu.int/dms_pubrec/itu-r/rec/bs/R-REC-BS.1770-5-202311-I!!PDF-E.pdf 의 48kHz K 가중 계수와 400ms 창을 사용했다. Web Audio 동작은 https://www.w3.org/TR/2021/REC-webaudio-20210617/ 로 확인했다.
+
+## 2026-11-01 SFX 음량 조정 로컬 커밋 범위
+
+- 최신 요청에 따라 갱신된 공통 지침(SHA-256 5a8ad04542e0d61a3067aac49fbe8d3b3c299c70879c5071302f2319cca019d1), 문서 지침, 검증 지침을 다시 읽었다. 관련 메모리의 동반 커밋은 갱신된 자유 기록 예외와 작업 커밋 범위에 따라 포함한다.
+- 확정 범위는 client/audio.js, music.js, music-catalog.js와 background/combat-audio/movement-audio/music/soil-harvest-audio 테스트 및 본 파일의 SFX 요약·완료 기록이다. 공유 메모리의 굴착 외형 기록과 다른 게임·아트·기획서·번들 변경은 보존하고 포함하지 않는다.
+- 검증된 오디오·테스트 8개 파일의 Git blob ID가 마지막 검증 이후 모두 같음을 확인했다. 80종 개별 음량 보정, 14곡·10중첩 측정, HTTP/file 오디오 실행 및 회귀 검사 30개 통과 근거를 재사용한다. 메모리 텍스트 형식과 최종 staged 범위를 확인한 뒤 SFX 음량 균형 및 중첩 제한 수정 메시지로 로컬 커밋한다.
 
 
 ## 2026-11-01 원본 자산 분리 배포 완료

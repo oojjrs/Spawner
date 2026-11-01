@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
+import { RESOURCE_TYPES } from "../server/resources.mjs";
 
 function audioFixture() {
   const starts = [], stops = [], listeners = new Map();
@@ -11,6 +12,8 @@ function audioFixture() {
   class AudioContext {
     constructor() { clock = this; this.state = "running"; this.currentTime = 1; }
     async decodeAudioData(data) { return data; }
+    createDynamicsCompressor() { return { threshold: {}, knee: {}, ratio: {}, attack: {}, release: {}, connect() {} }; }
+    createWaveShaper() { return { connect() {} }; }
     createGain() { return { gain: {}, connect() {} }; }
     createBufferSource() {
       return { connect() {}, disconnect() {}, start() { starts.push(this); },
@@ -18,7 +21,7 @@ function audioFixture() {
     }
   }
   const context = createContext({ document, AudioContext, window: { addEventListener() {} },
-    SpawnerCombatAudio: { sources: { "unit-death": "death.mp3" } },
+    SpawnerCombatAudio: { sources: { "beetle-death": "death.mp3" } },
     SpawnerMusic: { create: () => ({ update() {}, unlock() {}, suspend() {} }) },
     SpawnerAssets: { source: value => value },
     fetch: async source => ({ ok: true, arrayBuffer: async () => ({ source }) }), setTimeout, performance });
@@ -60,7 +63,7 @@ test("전투음이 비옥토 채널을 선점한 후 빈 채널이 생기면 비
   }
   const released = sound.starts.at(-1);
   sound.clock().currentTime += .2;
-  sound.api.play("unit-death", 1);
+  sound.api.play("beetle-death", 1);
   assert.ok(sound.stops.includes(soil));
   await Promise.resolve();
   released.onended();
@@ -81,7 +84,8 @@ test("화면의 비옥토 채집 개체만 흙 채널에 합산하며 채집 종
   const context = createContext({ state, connection: { active: true, online: true }, audioTime: 1,
     audio: { available: () => true, play() {}, setHarvest: volumes => calls.push(Object.fromEntries(volumes)) },
     SpawnerCombatAudio: { update: () => [] }, combatAudio: {},
-    Spawner: { resourceTypeForCell: food => food.resourceType }, worldMap: {}, foodCellMap: new Map(),
+    Spawner: { resourceTypeForCell: food => food.resourceType, nestGrowthSounds: () => [] }, nestGrowthPlayback: {},
+    worldMap: {}, foodCellMap: new Map(),
     foodCellAt: x => ({ amount: 5, resourceType: x === 12 ? "grass-fiber" : "clay" }),
     displayedAgent: value => value, interpolatedAgentPosition: value => value,
     audioVolume: x => x < 11 ? .7 : x < 12 ? .9 : .4,
@@ -100,24 +104,24 @@ test("화면의 비옥토 채집 개체만 흙 채널에 합산하며 채집 종
 });
 
 
-test("자원 12종은 기획서의 채집 원본을 각각 재생하고 로컬 실행에도 포함된다", async () => {
+test("현행 자원은 기획서의 채집 원본을 각각 재생하고 로컬 실행에도 포함된다", async () => {
   const design = readFileSync(new URL("../Design.html", import.meta.url), "utf8");
   const local = readFileSync(new URL("./local-assets.js", import.meta.url), "utf8");
   const sound = audioFixture();
   await sound.api.playClick();
-  let checked = 0;
-  for (const row of design.matchAll(/<tr data-resource="([^"]+)"[^]*?<\/tr>/g)) {
+  const rows = [...design.matchAll(/<tr data-resource="([^"]+)"[^]*?<\/tr>/g)];
+  const resourceType = row => row[1] === "wood" ? "tree" : row[1];
+  assert.deepEqual(rows.map(resourceType).sort(), RESOURCE_TYPES.map(resource => resource.key).sort());
+  for (const row of rows) {
+    const type = resourceType(row);
     const expected = row[0].match(/<audio[^>]*src="([^"]+)"/);
-    if (!expected) continue;
-    const type = row[1] === "wood" ? "tree" : row[1] === "basic-mushroom" ? "honey-mushrooms" : row[1];
+    assert.ok(expected, type);
     sound.api.setHarvest(new Map([[type, 1]]));
     assert.equal(sound.starts.at(-1).buffer.source, expected[1], type);
     assert.equal(sound.starts.at(-1).loop, true);
     assert.ok(local.includes("./client/local-assets/" + expected[1].slice("DesignAssets/".length) + ".js"), type);
     await Promise.resolve();
-    checked++;
   }
-  assert.equal(checked, 12);
   sound.api.setActive(false);
 });
 

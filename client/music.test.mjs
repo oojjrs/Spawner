@@ -8,6 +8,7 @@ const settle = () => new Promise(resolve => setImmediate(resolve));
 
 function fixture(blocked) {
   const sounds = [], starts = [], listeners = new Map(), buttonListeners = new Map(), resumes = [], timers = new Map();
+  const gains = [], intervals = new Map();
   let clock = null;
   let timerId = 0;
   const button = { setAttribute() {}, addEventListener: (type, callback) => buttonListeners.set(type, callback) };
@@ -20,7 +21,9 @@ function fixture(blocked) {
     constructor() { clock = this; this.state = blocked ? "suspended" : "running"; this.currentTime = 0; }
     resume() { return new Promise(resolve => resumes.push(resolve)); }
     async decodeAudioData(data) { return data; }
-    createGain() { return { gain: {}, connect() {} }; }
+    createDynamicsCompressor() { return { threshold: {}, knee: {}, ratio: {}, attack: {}, release: {}, connect() {} }; }
+    createWaveShaper() { return { connect() {} }; }
+    createGain() { const gain = { gain: { value: 1 }, connect() {} }; gains.push(gain); return gain; }
     createBufferSource() { return { connect() {}, disconnect() {}, start() {}, stop() {} }; }
   }
   class Audio {
@@ -29,18 +32,28 @@ function fixture(blocked) {
     pause() { this.paused = true; }
     play() { this.paused = false; this.plays++; starts.push(this.src); return Promise.resolve(); }
   }
+  const envelope = Buffer.from([...Array(20).fill(32), ...Array(10).fill(255), ...Array(20).fill(32)]).toString("base64");
   const context = createContext({ document, AudioContext, Audio, window: { addEventListener() {}, confirm: () => true },
     SpawnerCombatAudio: { sources: {} }, SpawnerAssets: { source: value => value },
-    SpawnerMusicCatalog: { peace: [{ file: "peace.mp3" }, { file: "peace-next.mp3" }, { file: "peace-last.mp3" }], combat: [{ file: "combat.mp3" }] },
+    atob: value => Buffer.from(value, "base64").toString("binary"),
+    SpawnerMusicCatalog: { peace: [{ file: "peace.mp3", envelope }, { file: "peace-next.mp3", envelope }, { file: "peace-last.mp3", envelope }], combat: [{ file: "combat.mp3", envelope }] },
     Math: Object.assign(Object.create(Math), { random: () => 0 }),
     fetch: async () => ({ ok: true, arrayBuffer: async () => new ArrayBuffer(0) }), performance,
     setTimeout: (callback, delay) => { const id = ++timerId; timers.set(id, { callback, delay }); return id; },
-    clearTimeout: id => timers.delete(id), setInterval: () => 1, clearInterval() {} });
+    clearTimeout: id => timers.delete(id),
+    setInterval: callback => { const id = ++timerId; intervals.set(id, callback); return id; },
+    clearInterval: id => intervals.delete(id) });
   for (const file of ["music.js", "audio.js"]) {
     runInContext(readFileSync(new URL(file, import.meta.url), "utf8"), context);
   }
   const audio = context.SpawnerAudio.create();
   return { context, audio, document, sounds, starts, buttonListeners, timers,
+    effectLevel: () => gains[1].gain.value,
+    advance(seconds) {
+      clock.currentTime += seconds;
+      for (const sound of sounds) if (!sound.paused) sound.currentTime += seconds;
+      for (const callback of [...intervals.values()]) callback();
+    },
     dispatch(type) { for (const callback of listeners.get(type) || []) callback(); },
     activate() { clock.state = "running"; for (const resolve of resumes) resolve(); },
     playing: () => sounds.filter(sound => !sound.paused).map(sound => sound.src) };
@@ -130,24 +143,34 @@ test("멸망한 방에서 나오는 즉시 평화 브금으로 전환하고 삭�
     audio: sound.audio, connection: { busy: false, active: true, online: true, roomId: "ended" },
     state: { ending: { endedAt: 10 } }, welcome: { hidden: true }, welcomeStatus: {}, lobbyBusy: false,
     endedRoomIds: ["ended"], endingReport: { querySelectorAll: () => [] }, endingToolbar: { querySelectorAll: () => [] },
+    roomExit: {}, roomExitDialog: { open: false }, roomTransition: false,
+    confirmRoomExit: async () => true, confirmDelete: async () => true, randomRoomSeed() {},
+    history: { state: { spawnerRoomId: "ended" }, replaceState(value) { this.state = value; } },
     client: { async call(type) { commands.push(type); return { roomIds: ["ended"] }; } },
     resetEnding() {}, closeCodex() {}, closeEvolutionPanel() {}, closeColonyMenu() {}, closeUnitPanel() {},
     refreshRooms: async () => {}, setLobbyBusy(value) { sound.context.lobbyBusy = value; },
     renderFrame: null, resetAudio() {}, scheduleRender() {}
   });
   sound.document.getElementById = () => ({ focus() {} });
-  sound.document.querySelector = () => app;
+  const heading = { appendChild() {} };
+  sound.document.querySelector = selector => selector === ".welcome-heading" ? heading : app;
   function load(name, indent) {
     const match = gameSource.match(new RegExp("^" + indent + "(?:async )?function " + name + "\\([^]*?^" + indent + "}", "m"));
     assert.ok(match, name);
     runInContext(match[0], sound.context);
   }
-  load("leaveEndedRoom", "    ");
+  load("rememberRoom", "    ");
+  load("leaveRoom", "    ");
   load("deleteEndedRooms", "    ");
   load("updateVisibility", "      ");
-  await sound.context.leaveEndedRoom();
+  await sound.context.leaveRoom();
   await settle();
   assert.equal(sound.document.body.dataset.screen, "welcome");
+  assert.equal(sound.context.history.state.spawnerRoomId, null);
+  assert.equal(sound.context.connection.active, false);
+  assert.equal(sound.context.connection.online, false);
+  assert.equal(sound.context.roomTransition, false);
+  assert.equal(sound.context.connection.busy, false);
   assert.deepEqual(sound.playing(), ["peace-next.mp3"]);
   await sound.context.deleteEndedRooms();
   assert.equal(sound.context.connection.roomId, null);
@@ -176,4 +199,23 @@ test("웰컴에서 음소거하면 알트탭 복귀에도 유지하고 해제할
   sound.buttonListeners.get("click")();
   await settle();
   assert.deepEqual(sound.playing(), ["peace.mp3"]);
+});
+
+test("SFX 합산 출력은 BGM 페이드와 무음에 맞춰 낮아지고 정지 후 복귀한다", async () => {
+  const sound = fixture(false);
+  await settle();
+  assert.equal(sound.effectLevel(), 0);
+  sound.advance(1);
+  const audible = sound.effectLevel();
+  assert.ok(audible > 0 && audible <= 1);
+  sound.advance(1.2);
+  assert.ok(sound.effectLevel() < audible / 1000);
+  sound.advance(1.2);
+  assert.ok(sound.effectLevel() > audible);
+  sound.audio.setActive(false);
+  assert.equal(sound.effectLevel(), 0);
+  sound.audio.setActive(true);
+  await settle();
+  sound.advance(1);
+  assert.ok(sound.effectLevel() > 0 && sound.effectLevel() <= 1);
 });
