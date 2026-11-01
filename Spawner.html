@@ -26,6 +26,11 @@
         <button class="secondary-action" id="ending-report-open" type="button" aria-haspopup="dialog" aria-controls="ending-report">보고서</button>
         <button class="secondary-action" id="ending-leave" type="button">방 목록</button>
       </nav>
+      <div class="portrait-zoom" role="group" aria-label="지도 확대·축소">
+        <button id="portrait-zoom-in" type="button" aria-label="지도 확대">+</button>
+        <input id="portrait-zoom-slider" type="range" min="0" max="4" step="0.25" value="3" orient="vertical" aria-label="지도 배율" aria-orientation="vertical">
+        <button id="portrait-zoom-out" type="button" aria-label="지도 축소">−</button>
+      </div>
       <div class="zoom-layers" id="zoom-layers" role="group" aria-label="맵 배율 단계">
         <button type="button" data-zoom-layer="0" aria-pressed="false" title="1단계 · 유닛 두 배 확대">상세</button>
         <button type="button" data-zoom-layer="1" aria-pressed="true" title="2단계 · 유닛 외형과 움직임">유닛</button>
@@ -83,7 +88,8 @@
       </ul>
     </aside>
     <button class="colony-focus-button controls-guide-toggle" id="controls-guide-toggle" type="button" aria-controls="controls-guide" aria-expanded="true" hidden>조작 안내</button>
-    <aside class="agent-panel" id="agent-panel" aria-label="둥지·생명체">
+    <aside class="agent-panel" id="agent-panel" aria-label="둥지·생명체" data-portrait-expanded="false">
+      <div class="portrait-panel-heading"><span>둥지 · 생명체</span><button id="portrait-panel-toggle" type="button" aria-controls="object-panel" aria-expanded="false">펼치기</button></div>
       <div class="agent-panel-resize" id="agent-panel-resize" role="separator" tabindex="0" aria-label="오른쪽 패널 너비" aria-orientation="vertical" aria-controls="agent-panel"></div>
       <div class="agent-panel-scroll" id="object-panel" tabindex="0" aria-label="둥지·생명체 목록">
         <section class="colony-browser" id="colony-browser" aria-labelledby="colony-list-title">
@@ -335,10 +341,11 @@
       <div class="tribe-selection-body">
         <section class="tribe-world">
           <canvas id="tribe-world-map" width="960" height="960" aria-label="생성된 전체 월드맵"></canvas>
+          <div class="tribe-start-slot" id="tribe-start-mobile"></div>
         </section>
         <div>
           <div class="tribe-grid" id="tribe-grid" aria-label="시작 부족"></div>
-          <button class="primary-action" id="tribe-start" type="button" disabled>이 부족으로 시작</button>
+          <div class="tribe-start-slot" id="tribe-start-desktop"><button class="primary-action" id="tribe-start" type="button" disabled>이 부족으로 시작</button></div>
         </div>
       </div>
       <p class="tribe-selection-status" id="tribe-selection-status" role="status"></p>

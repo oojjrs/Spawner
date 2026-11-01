@@ -47,6 +47,10 @@
     const ctx = canvas.getContext("2d");
     const groundShadow = createGroundShadow();
     const zoomLayerButtons = [...document.querySelectorAll("[data-zoom-layer]")];
+    const portraitLayout = window.matchMedia("(orientation: portrait) and (max-width: 900px)");
+    const portraitZoomSlider = document.getElementById("portrait-zoom-slider");
+    const portraitZoomIn = document.getElementById("portrait-zoom-in");
+    const portraitZoomOut = document.getElementById("portrait-zoom-out");
     const colonyFocus = document.getElementById("colony-focus");
     const controlsGuide = document.getElementById("controls-guide");
     const controlsGuideToggle = document.getElementById("controls-guide-toggle");
@@ -6069,9 +6073,36 @@
       return nearZoom * Math.pow(farZoom / nearZoom, selected - nearLayer);
     }
 
+    function syncPortraitZoomControls() {
+      const lastLayer = ZOOM_LAYERS.length - 1;
+      portraitZoomSlider.max = String(lastLayer);
+      portraitZoomSlider.step = String(1 / ZOOM_STEPS_PER_LAYER);
+      portraitZoomSlider.value = String(lastLayer - state.camera.layer);
+      const label = zoomLayerButtons[Math.round(state.camera.layer)]?.textContent.trim() || "지도";
+      portraitZoomSlider.setAttribute("aria-valuetext", label + " 배율");
+      portraitZoomIn.disabled = state.camera.layer <= 0;
+      portraitZoomOut.disabled = state.camera.layer >= lastLayer;
+    }
+
+    function bindPortraitZoomControls() {
+      portraitZoomIn.addEventListener("click", () => {
+        selectZoomLayer(state.camera.layer - 1 / ZOOM_STEPS_PER_LAYER, viewport.width / 2, viewport.height / 2);
+      });
+      portraitZoomOut.addEventListener("click", () => {
+        selectZoomLayer(state.camera.layer + 1 / ZOOM_STEPS_PER_LAYER, viewport.width / 2, viewport.height / 2);
+      });
+      portraitZoomSlider.addEventListener("input", () => {
+        selectZoomLayer(ZOOM_LAYERS.length - 1 - Number(portraitZoomSlider.value), viewport.width / 2, viewport.height / 2);
+      });
+      portraitZoomSlider.addEventListener("keydown", event => {
+        if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Home", "End", "PageUp", "PageDown"].includes(event.key)) event.stopPropagation();
+      });
+    }
+
     function updateZoomLayerButtons() {
       document.getElementById("zoom-layers").style.setProperty("--zoom-layer", state.camera.layer);
       zoomLayerButtons.forEach((button, index) => button.setAttribute("aria-pressed", String(index === state.camera.layer)));
+      syncPortraitZoomControls();
     }
 
     function selectZoomLayer(layer, anchorX, anchorY) {
@@ -6201,6 +6232,7 @@
       selectZoomLayer(state.camera.layer + Math.sign(event.deltaY) / ZOOM_STEPS_PER_LAYER, anchorX, anchorY);
     }, { passive: false });
 
+    bindPortraitZoomControls();
     zoomLayerButtons.forEach((button, index) => button.addEventListener("click", () => {
       selectZoomLayer(index, viewport.width / 2, viewport.height / 2);
       canvas.focus();
@@ -9314,11 +9346,27 @@
     const agentPanel = document.getElementById("agent-panel");
     const agentPanelResize = document.getElementById("agent-panel-resize");
     let agentPanelDrag = null;
+    let desktopPanelWidth = 280;
+    const portraitPanelToggle = document.getElementById("portrait-panel-toggle");
+    portraitPanelToggle.addEventListener("click", () => {
+      const expanded = agentPanel.dataset.portraitExpanded !== "true";
+      agentPanel.dataset.portraitExpanded = String(expanded);
+      portraitPanelToggle.setAttribute("aria-expanded", String(expanded));
+      portraitPanelToggle.textContent = expanded ? "접기" : "펼치기";
+    });
 
     function setAgentPanelWidth(width) {
+      agentPanelResize.tabIndex = portraitLayout.matches ? -1 : 0;
+      agentPanelResize.setAttribute("aria-hidden", String(portraitLayout.matches));
+      if (portraitLayout.matches) {
+        positionDiscoveryToasts(0);
+        resizeCanvas();
+        return;
+      }
       const minimum = Math.min(220, window.innerWidth * 0.55);
       const maximum = Math.min(560, window.innerWidth * 0.7);
       const value = Math.max(minimum, Math.min(maximum, width));
+      desktopPanelWidth = value;
       document.documentElement.style.setProperty("--agent-panel-width", value + "px");
       agentPanelResize.setAttribute("aria-valuemin", Math.round(minimum));
       agentPanelResize.setAttribute("aria-valuemax", Math.round(maximum));
@@ -9351,8 +9399,14 @@
       const width = agentPanel.getBoundingClientRect().width;
       setAgentPanelWidth(event.key === "Home" ? 0 : event.key === "End" ? window.innerWidth : width + (event.key === "ArrowLeft" ? 20 : -20));
     });
-    window.addEventListener("resize", () => setAgentPanelWidth(agentPanel.getBoundingClientRect().width));
-    setAgentPanelWidth(agentPanel.getBoundingClientRect().width);
+    window.addEventListener("resize", () => setAgentPanelWidth(desktopPanelWidth));
+    portraitLayout.addEventListener("change", () => setAgentPanelWidth(desktopPanelWidth));
+    const portraitStageResize = new ResizeObserver(() => {
+      positionDiscoveryToasts(portraitLayout.matches ? 0 : desktopPanelWidth);
+      resizeCanvas();
+    });
+    portraitStageResize.observe(document.querySelector(".stage"));
+    setAgentPanelWidth(desktopPanelWidth);
 
     const welcome = document.getElementById("welcome");
     const welcomeStatus = document.getElementById("welcome-status");
@@ -9371,6 +9425,15 @@
     const tribePreviews = new Map();
     const tribeWorldMap = document.getElementById("tribe-world-map");
     const tribeStart = document.getElementById("tribe-start");
+    function positionTribeStart() {
+      const target = document.getElementById(portraitLayout.matches ? "tribe-start-mobile" : "tribe-start-desktop");
+      if (tribeStart.parentElement === target) return;
+      const focused = document.activeElement === tribeStart;
+      target.appendChild(tribeStart);
+      if (focused) tribeStart.focus({ preventScroll: true });
+    }
+    portraitLayout.addEventListener("change", positionTribeStart);
+    positionTribeStart();
     let tribePacket = null;
     let selectedTribe = null;
     let tribeRoomId = null;
