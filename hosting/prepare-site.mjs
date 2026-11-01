@@ -78,6 +78,6 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
   const assetDirectory = process.argv[3] ? resolve(process.argv[3]) : null;
   if (!destination || !assetDirectory || process.argv.length !== 4) throw new Error("Sites 체크아웃과 공개 자산 폴더의 절대 경로가 필요합니다.");
   const revision = execFileSync("git", ["rev-parse", "HEAD"], { cwd: root, encoding: "utf8" }).trim();
-  function tracked(name) { return execFileSync("git", ["show", "HEAD:" + name], { cwd: root, maxBuffer: 128 * 1024 * 1024 }); }
+  function tracked(name) { return execFileSync("git", ["show", revision + ":" + name], { cwd: root, maxBuffer: 128 * 1024 * 1024 }); }
   console.log("ENV> SITE PREPARED : " + JSON.stringify(prepareSite(destination, tracked, revision, assetDirectory)));
 }
