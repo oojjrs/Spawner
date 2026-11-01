@@ -87,7 +87,10 @@
       <div class="agent-panel-resize" id="agent-panel-resize" role="separator" tabindex="0" aria-label="오른쪽 패널 너비" aria-orientation="vertical" aria-controls="agent-panel"></div>
       <div class="agent-panel-scroll" id="object-panel" tabindex="0" aria-label="둥지·생명체 목록">
         <section class="colony-browser" id="colony-browser" aria-labelledby="colony-list-title">
-          <h2 id="colony-list-title">둥지</h2>
+          <div class="colony-browser-heading">
+            <h2 id="colony-list-title">둥지</h2>
+            <span class="play-time"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><time id="play-time"></time></span>
+          </div>
           <input class="colony-search" id="colony-search" type="search" placeholder="둥지 이름·번호 검색" aria-label="둥지 이름 또는 번호 검색">
           <span class="colony-results" id="colony-results" role="status"></span>
           <div class="colony-list" id="colony-list"></div>

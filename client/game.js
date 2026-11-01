@@ -6534,6 +6534,7 @@
     evolutionOpenButton.addEventListener("click", () => openUnitDesign(null));
     evolutionClose.addEventListener("click", closeEvolutionPanel);
 
+    const playTime = document.getElementById("play-time");
     const colonySearch = document.getElementById("colony-search");
     const colonyList = document.getElementById("colony-list");
     const colonyResults = document.getElementById("colony-results");
@@ -6543,6 +6544,13 @@
     let colonyListPage = 0;
 
     function renderColonyList() {
+      const seconds = Math.floor(state.ending?.endedAt ?? connection.simSeconds);
+      const time = [Math.floor(seconds / 3600), Math.floor(seconds / 60) % 60, seconds % 60]
+        .map(value => String(value).padStart(2, "0")).join(":");
+      if (playTime.textContent !== time) {
+        playTime.textContent = time;
+        playTime.dateTime = "PT" + seconds + "S";
+      }
       const query = colonySearch.value.trim().toLocaleLowerCase();
       const matches = colonyEntries.filter((entry) => entry.name.toLocaleLowerCase().includes(query) || String(entry.id).includes(query));
       const pageCount = Math.max(1, Math.ceil(matches.length / 50));
