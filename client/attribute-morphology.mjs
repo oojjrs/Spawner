@@ -106,7 +106,7 @@ function outlineAt(part, u) {
   return nearest?.[1] || 1;
 }
 
-export function createTribeMorphology(createSurface, loadImage) {
+export function createTribeMorphology(createSurface, loadImage, excavation) {
   const frames = new Map();
 
   async function prepare(rig) {
@@ -196,8 +196,8 @@ export function createTribeMorphology(createSurface, loadImage) {
     return result;
   }
 
-  function sourceBase(pose, track, removeCap, removeBody, size) {
-    const key = [removeCap, removeBody].join(":");
+  function sourceBase(pose, track, removeCap, removeBody, size, excavation) {
+    const key = [removeCap, removeBody, Boolean(excavation)].join(":");
     if (pose.bases.has(key)) return pose.bases.get(key);
     const surface = createSurface(size, size), context = surface.getContext("2d"); context.drawImage(pose.surface, 0, 0);
     const image = context.getImageData(0, 0, size, size), pixels = image.data, k = size / 144, body = track.body, cap = track.cap;
@@ -205,7 +205,7 @@ export function createTribeMorphology(createSurface, loadImage) {
       const p = (y * size + x) * 4, coral = pose.tribe === "spore" && pixels[p] - pixels[p + 1] > 18 && pixels[p] > pixels[p + 2] * .9;
       const inCap = x >= (cap[0] - 2) * k && x <= (cap[0] + cap[2] + 2) * k && y >= (cap[1] - 2) * k && y <= (cap[1] + cap[3] + 2) * k;
       if (y >= track.cut * k && !coral || removeCap && inCap && (coral || y < body[1] * k || x < (body[0] - 1) * k || x > (body[0] + body[2] + 1) * k) ||
-        removeBody && !coral && x >= (body[0] - 2) * k && x <= (body[0] + body[2] + 2) * k && y >= (body[1] - 2) * k) pixels[p + 3] = 0;
+        removeBody && (!coral || excavation && y > (body[1] + body[3] * .14) * k) && x >= (body[0] - 2) * k && x <= (body[0] + body[2] + 2) * k && y >= (body[1] - 2) * k) pixels[p + 3] = 0;
     }
     context.putImageData(image, 0, 0); pose.bases.set(key, surface); return surface;
   }
@@ -220,7 +220,7 @@ export function createTribeMorphology(createSurface, loadImage) {
     const part = rig.morphs.parts["body-" + partKey], upper = rig.morphs.parts["cap-" + upperKey];
     const feet = attributes.feet > 0, clock = motion?.sampleTime ?? time, progress = motion?.motionPhase ?? index / sequence.frameCount;
     const stride = motion?.motionBlend ?? 1, key = [rig.tribe, trackAction, action, index, Math.floor(time * 20), Math.floor(clock * 20),
-      Math.round(progress * 120), Math.round(stride * 20), ...[...coreKeys, "feet"].map(k => k === "strength" ? attributes.strength || attributes.arms || 0 : attributes[k] || 0)].join(":");
+      Math.round(progress * 120), Math.round(stride * 20), ...[...coreKeys, "feet", "excavation"].map(k => k === "strength" ? attributes.strength || attributes.arms || 0 : attributes[k] || 0)].join(":");
     if (frames.has(key)) return frames.get(key);
     const size = animation.frameSize, padding = Math.ceil(size / 2), scale = size / 144;
     const surface = createSurface(size + padding * 2, size + padding * 2), core = createSurface(surface.width, surface.height), context = core.getContext("2d");
@@ -284,7 +284,7 @@ export function createTribeMorphology(createSurface, loadImage) {
         include(part, [-bodyWidth / 2, -bodyHeight, bodyWidth, bodyHeight], bodyPoint);
       }
     } else {
-      const base = sourceBase(pose, track, Boolean(upper), Boolean(part), size);
+      const base = sourceBase(pose, track, Boolean(upper), Boolean(part), size, attributes.excavation);
       items.push(() => context.drawImage(base, 0, 0, 144, 144));
       maximum = Math.max(maximum, track.cut);
       if (!upper && rig.tribe === "spore") maximum = Math.max(maximum, track.cap[1] + track.cap[3]);
@@ -323,7 +323,22 @@ export function createTribeMorphology(createSurface, loadImage) {
       context.save(); context.translate(...anchor); context.rotate(axis[4]);
       drawPart(context, upper, box, 0, createSurface); context.restore();
     } else if (rig.tribe === "spore" && part) {
-      context.drawImage(pose.front, 0, 0, 144, 144);
+      context.save();
+      if (attributes.excavation) {
+        context.beginPath(); context.rect(-24, -24, 192, 192);
+        context.rect(body[0] - 2, body[1] + body[3] * .14, body[2] + 4, body[3]); context.clip("evenodd");
+      }
+      context.drawImage(pose.front, 0, 0, 144, 144); context.restore();
+    }
+    if (attributes.excavation) {
+      const eyes = pose.eyes.slice().sort((a, b) => a.side - b.side);
+      if (eyes.length === 2) {
+        const points = eyes.map(eye => {
+          const [x, y, width, height] = eye.box, center = [x + width / 2, y + height / 2];
+          return part ? eyeTransform(center, eye) : center;
+        });
+        excavation.draw(context, rig.tribe, { left: points[0], right: points[1], bottom: bodyPoint([0, 0]) });
+      } else excavation.body(context, rig.tribe, [bodyX - bodyWidth / 2, track.cut - bodyHeight, bodyWidth, bodyHeight], bodyAngle);
     }
     if (part) {
       context.save(); context.globalCompositeOperation = "source-atop";

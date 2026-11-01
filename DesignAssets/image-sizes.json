@@ -11286,6 +11286,86 @@
         8,
         4
       ]
+    },
+    "DesignAssets/Attributes/ExcavationV2/Parts/bean.png": {
+      "display": [
+        20,
+        23
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Attributes/ExcavationV2/Parts/spore.png": {
+      "display": [
+        17,
+        13
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Attributes/ExcavationV2/Parts/pebble.png": {
+      "display": [
+        52,
+        23
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Attributes/ExcavationV2/Parts/spring.png": {
+      "display": [
+        26,
+        20
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Planning/Thumbnails/Attributes/ExcavationV2/Keyframes/bean.png.webp": {
+      "display": [
+        192,
+        192
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Planning/Thumbnails/Attributes/ExcavationV2/Keyframes/spore.png.webp": {
+      "display": [
+        192,
+        192
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Planning/Thumbnails/Attributes/ExcavationV2/Keyframes/pebble.png.webp": {
+      "display": [
+        192,
+        192
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Planning/Thumbnails/Attributes/ExcavationV2/Keyframes/spring.png.webp": {
+      "display": [
+        192,
+        192
+      ],
+      "grid": [
+        1,
+        1
+      ]
     }
   }
 }

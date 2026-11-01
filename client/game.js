@@ -4,6 +4,9 @@
     await globalThis.SpawnerAssets.ready;
     const assetSource = globalThis.SpawnerAssets.source;
     const tribeArt = Spawner.createTribeArt(Spawner.PLAYER_TRIBES, assetSource);
+    const excavationArt = Spawner.createExcavationArt(assetSource, async path => {
+      const image = new Image(); image.src = path; await image.decode(); return image;
+    });
     const combatAttributeArt = Spawner.createCombatAttributeArt(assetSource, (width, height) => {
       const surface = document.createElement("canvas"); surface.width = width; surface.height = height; return surface;
     }, async path => {
@@ -564,7 +567,7 @@
       beetleCorpseSprite, ...resourceCarrySprites.values(), ...agentParts.values(), ...agentBaseParts.values(),
       ...[...burrowAppearances.values()].map(appearance => appearance.sprite)].map(part => part.decode()));
 
-    await Promise.all([sproutLifespan.prepare(), ...Spawner.PLAYER_TRIBES.map(prepareUnitAnimationSheets),
+    await Promise.all([excavationArt.prepare(), sproutLifespan.prepare(), ...Spawner.PLAYER_TRIBES.map(prepareUnitAnimationSheets),
       ...[...sproutDecompositionSheets.values()].map(entry => entry.sprite.decode()), ...[...creatureIdleSheets.values()].map(async entry => {
       await entry.sprite.decode();
       const bounds = tribeArt.bounds(entry.sprite, entry.animation.frameSize);
@@ -4522,7 +4525,7 @@
           const frameSize = action === "walk" ? idle.animation.frameSize : entry.animation.frameSize;
           entry.scale = frameSize / 512 * Math.min(reference.width / bounds.width, reference.height / bounds.height);
           entry.referenceHeight = reference.height;
-          if (tribe.key === "bean" && ["idle", "attack", "hurt"].includes(action)) prepareSproutCombatFrames(entry, action === "idle" ? 1 : entry.animation.frameCount);
+          if (tribe.key === "bean" && ["idle", "attack", "hurt", "death"].includes(action)) prepareSproutCombatFrames(entry, action === "idle" ? 1 : entry.animation.frameCount);
           if (action === "walk") agentMovementSheets.get(tribe.key).scale = entry.scale;
         }));
       })().catch(error => { unitAnimationReady.delete(tribe.key); throw error; }));
@@ -4654,7 +4657,7 @@
       let pose = Spawner.unitAnimationPose(agent, state.simSeconds);
       if (!pose) return false;
       if ((agent.tribe || "bean") !== "bean") pose = tribeArt.animationPose(agent, pose, state.simSeconds);
-      const customized = (agent.tribe || "bean") === "bean" && ["strength", "arms", "feet", "antenna", "lifespan", "butchery"].some(key => attributes[key] > 0);
+      const customized = (agent.tribe || "bean") === "bean" && ["strength", "arms", "feet", "antenna", "lifespan", "butchery", "excavation"].some(key => attributes[key] > 0);
       const combat = ["attack", "hurt"].includes(pose.action);
       if (customized && !combat && !pose.decomposition) return false;
       const sheets = unitAnimationSheets.get(agent.tribe || "bean");
@@ -4670,7 +4673,7 @@
       const motionTime = pose.action === "harvest" ? state.simSeconds - agent.harvestStarted :
         pose.action === "throw" ? state.simSeconds - agent.foodDelivery.startedAt : state.simSeconds;
       const attributeFrame = (agent.tribe || "bean") === "bean" ||
-        !["antenna", "strength", "arms", "butchery", "lifespan", "feet"].some(key => attributes[key] > 0) ? null :
+        !["antenna", "strength", "arms", "butchery", "lifespan", "feet", "excavation"].some(key => attributes[key] > 0) ? null :
         tribeArt.animationFrame(agent, entry.sprite, animation, index, attributeAction, motionTime, pose);
       const composedFrame = lifespan?.sprite || attributeFrame || (customized && combat ? sproutCombatFrame(agent, entry, index) : null);
       const sprite = composedFrame || entry.frames?.get(index) || entry.sprite;
@@ -4919,7 +4922,7 @@
       const action = attackFrame >= 0 ? "attack" : "hurt";
       const index = attackFrame >= 0 ? attackFrame : hurtFrame;
       if (index < 0) return false;
-      const customized = (agent.tribe || "bean") === "bean" && ["strength", "arms", "feet", "antenna", "lifespan", "butchery"].some(key => appearance[key] > 0);
+      const customized = (agent.tribe || "bean") === "bean" && ["strength", "arms", "feet", "antenna", "lifespan", "butchery", "excavation"].some(key => appearance[key] > 0);
       const lifespan = customized && appearance.lifespan ? sproutLifespan.frame(appearance, action, index, agentParts, sproutRoots) : null;
       const sprite = lifespan?.sprite || (customized ? sproutCombatFrame(agent, unitAnimationSheets.get("bean")?.get(action), index) : combatSheets.get(agent.tribe || "bean")?.[action]);
       if (!sprite || sprite.complete === false || !(sprite.naturalWidth || sprite.width)) return false;
@@ -5037,7 +5040,7 @@
 
     function unitBodySize(tribe, attributes) {
       const idle = unitAnimationSheets.get(tribe).get("idle");
-      const customized = ["antenna", "strength", "arms", "butchery", "lifespan", "feet"].some(key => attributes[key] > 0);
+      const customized = ["antenna", "strength", "arms", "butchery", "lifespan", "feet", "excavation"].some(key => attributes[key] > 0);
       let size;
       const scaled = (size, scale) => ({ width: size.width * scale, height: size.height * scale });
       if (tribe === "bean") {
@@ -5268,7 +5271,7 @@
           if (construction) { context.drawImage(construction.sprite, 0, 0, 512, 512); return; }
         }
         if (Spawner.hasCombatEvolution(attributes) && sampled && (agent.tribe || "bean") !== "bean" &&
-            ["antenna", "strength", "arms", "butchery", "lifespan", "feet"].some(key => attributes[key] > 0)) {
+            ["antenna", "strength", "arms", "butchery", "lifespan", "feet", "excavation"].some(key => attributes[key] > 0)) {
           context.drawImage(tribeArt.sprite(agent.tribe, attributes, "full"), 0, 0, 512, 512); return;
         }
         drawAgentAppearanceBody(context, now, neutral, maskCell, origin, renderPosition, birth, null);
@@ -5284,7 +5287,7 @@
     }
 
     function drawCombatAgentAttributes(context, agent) {
-      const appearance = agent.appearanceAttributes || agent.attributes || {};
+      const appearance = { ...(agent.appearanceAttributes || agent.attributes || {}), excavation: 0 };
       if (!["feet", "antenna", "strength", "arms", "butchery"].some(key => appearance[key] > 0)) return;
       if ((agent.tribe || "bean") === "bean") {
         context.save(); context.globalCompositeOperation = "destination-over";
@@ -7508,7 +7511,7 @@
 
     function agentAppearanceKey(attributes) {
       return [attributes.strength ?? attributes.arms ?? 0, attributes.feet || 0,
-        attributes.antenna || 0, attributes.lifespan || 0, attributes.butchery || 0, attributes.construction || 0].join(":");
+        attributes.antenna || 0, attributes.lifespan || 0, attributes.butchery || 0, attributes.construction || 0, attributes.excavation || 0].join(":");
     }
 
     function agentSpriteLayers(attributes) {
@@ -7558,7 +7561,7 @@
       if (encounterSprites.has(agent?.species)) return encounterSprites.get(agent.species);
       const attributes = agent?.appearanceAttributes || agent?.attributes || {};
       if ((!layer || ["full", "body"].includes(layer)) && (agent.tribe || "bean") !== "bean" && !attributes.construction &&
-          Spawner.hasCombatEvolution(attributes) && ["antenna", "strength", "arms", "butchery", "lifespan", "feet"].some(key => attributes[key] > 0) && combatAttributeArt.ready(agent.tribe)) {
+          Spawner.hasCombatEvolution(attributes) && ["antenna", "strength", "arms", "butchery", "lifespan", "feet", "excavation"].some(key => attributes[key] > 0) && combatAttributeArt.ready(agent.tribe)) {
         const body = tribeArt.sprite(agent.tribe, attributes, layer || "full");
         const sprite = combatAttributeArt.frame({ ...agent, health: 1, birth: null, attack: null, hurtStartedAt: -Infinity, moveDuration: 0 }, 0, 1, context => context.drawImage(body, 0, 0, 512, 512));
         agentSpriteSet.add(sprite); return sprite;
@@ -7585,7 +7588,8 @@
         return sprite;
       }
       const counts = { strength: attributes.strength ?? attributes.arms ?? 0,
-        feet: attributes.feet || 0, antenna: attributes.antenna || 0, lifespan: attributes.lifespan || 0, butchery: attributes.butchery || 0 };
+        feet: attributes.feet || 0, antenna: attributes.antenna || 0, lifespan: attributes.lifespan || 0, butchery: attributes.butchery || 0,
+        excavation: attributes.excavation || 0 };
       const key = agentAppearanceKey(counts) + ":" + (layer || "full");
       if (!agentSprites.has(key)) {
         const sprite = composeAgentSprite(counts, layer);
@@ -7599,7 +7603,7 @@
       const base = override || constructionUnits.frame(agent, time);
       if (!base) return null;
       const attributes = agent.appearanceAttributes || agent.attributes;
-      if (!["antenna", "strength", "butchery", "lifespan", "feet"].some(key => attributes[key])) return base;
+      if (!["antenna", "strength", "butchery", "lifespan", "feet", "excavation"].some(key => attributes[key])) return base;
       const key = [agent.tribe || "bean", agentAppearanceKey(attributes), base.action, base.frame, Boolean(omitRoots)].join(":");
       if (!constructionFrames.has(key)) {
         let sprite;
@@ -7619,9 +7623,9 @@
               { rotation: 0, bob: 0, pivot: 460 - agentBodyLift(attributes) }, null); context.restore();
           };
           if (absorption) {
-            for (const attribute of ["antenna", "strength", "lifespan", "butchery"]) {
+            for (const attribute of ["antenna", "strength", "lifespan", "butchery", "excavation"]) {
               if (!attributes[attribute]) continue;
-              const isolated = { ...attributes, antenna: 0, strength: 0, arms: 0, lifespan: 0, butchery: 0, feet: attributes.feet,
+              const isolated = { ...attributes, antenna: 0, strength: 0, arms: 0, lifespan: 0, butchery: 0, excavation: 0, feet: attributes.feet,
                 [attribute]: attributes[attribute] };
               const part = composeAgentSprite(isolated, attribute === "butchery" ? "tail" : "attributes-no-feet");
               let bounds = constructionPartBounds.get(part);
@@ -7771,6 +7775,8 @@
         context.drawImage(agentParts.get("strength-" + (attributes.strength === 1 ? 1 : 2)),
           256 - width / 2, 460 - lift - height, width, height);
       }
+      if (attributes.excavation) excavationArt.sprout(context, attributes,
+        attributes.lifespan ? [136, 136 - lift, 240, 324] : [136, 110 - lift, 240, 350]);
       return sprite;
     }
 
@@ -7801,8 +7807,9 @@
       const entry = unitAnimationSheets.get(corpse.tribe || "bean")?.get("death");
       if (!entry?.sprite.complete || !entry.sprite.naturalWidth) return true;
       const frame = idleMotion.matches ? animation.frameCount - 1 : index;
-      const attributeFrame = lifespan?.sprite || ((corpse.tribe || "bean") === "bean" ||
-        !["antenna", "strength", "arms", "butchery", "lifespan", "feet"].some(key => attributes[key] > 0) ? null :
+      const attributeFrame = lifespan?.sprite || ((corpse.tribe || "bean") === "bean" && attributes.excavation ?
+        sproutCombatFrame(corpse, entry, frame) : (corpse.tribe || "bean") === "bean" ||
+        !["antenna", "strength", "arms", "butchery", "lifespan", "feet", "excavation"].some(key => attributes[key] > 0) ? null :
         tribeArt.animationFrame(corpse, entry.sprite, animation, frame, "death", corpsePlaybackTime()));
       const sheet = attributeFrame || entry.sprite;
       const frameSize = attributeFrame ? sheet.width : animation.frameSize;

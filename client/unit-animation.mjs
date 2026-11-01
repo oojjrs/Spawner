@@ -211,11 +211,11 @@ export function unitAnimationPose(agent, time) {
   }
   const attributes = agent.appearanceAttributes || agent.attributes || {};
   const decomposition = action === "idle" && (agent.tribe || "bean") === "bean" && attributes.butchery > 0 &&
-    !["strength", "arms", "feet", "lifespan"].some(key => attributes[key] > 0) && (attributes.antenna || 0) <= 1 ?
+    !["strength", "arms", "feet", "lifespan", "excavation"].some(key => attributes[key] > 0) && (attributes.antenna || 0) <= 1 ?
     attributes.antenna ? "antenna" : "basic" : null;
   const animation = decomposition ? SPROUT_DECOMPOSITION_ANIMATIONS[decomposition] :
     animations[action] || ((agent.tribe || "bean") !== "bean" && ["harvest", "throw"].includes(action) &&
-      ["antenna", "strength", "arms", "butchery", "lifespan", "feet"].some(key => attributes[key] > 0) ? animations.idle : null);
+      ["antenna", "strength", "arms", "butchery", "lifespan", "feet", "excavation"].some(key => attributes[key] > 0) ? animations.idle : null);
   return animation ? { action, animation, frame: unitAnimationFrame(animation, elapsed), ...(decomposition ? { decomposition } : {}) } : null;
 }
 

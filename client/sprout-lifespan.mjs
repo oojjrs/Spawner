@@ -1,5 +1,6 @@
 import { sproutRootGeometry } from "./sprout-roots.mjs";
 import { constructionCorePose } from "./construction-rig.mjs";
+import { createExcavationArt } from "./excavation.mjs";
 
 const root = "DesignAssets/Tribes/sprout/Animations/Attributes/lifespan-v1/";
 export const SPROUT_LIFESPAN_ASSETS = Object.freeze([root + "rig.json",
@@ -16,6 +17,7 @@ export function sproutLifespanBodyLayer(agent, time, reducedMotion) {
 export function createSproutLifespan(assetSource, createSurface, loadImage) {
   let data = null, pending = null;
   const images = new Map(), frames = new Map();
+  const excavation = createExcavationArt(assetSource, loadImage);
 
   function prepare() {
     if (!pending) pending = (async () => {
@@ -25,6 +27,7 @@ export function createSproutLifespan(assetSource, createSurface, loadImage) {
       await Promise.all(Object.values(rig.actions).flatMap(action => [action.body, action.head]).map(async name => {
         images.set(name, await loadImage(root + name));
       }));
+      await excavation.prepare();
       data = rig;
     })().catch(error => { pending = null; throw error; });
     return pending;
@@ -49,7 +52,7 @@ export function createSproutLifespan(assetSource, createSurface, loadImage) {
     if (!sequence || !attributes.lifespan) return null;
     index = Math.max(0, Math.min(sequence.tracks.length - 1, index));
     const key = [action, index, attributes.antenna || 0, attributes.strength || attributes.arms || 0,
-      attributes.feet || 0, attributes.butchery || 0].join(":");
+      attributes.feet || 0, attributes.butchery || 0, attributes.excavation || 0].join(":");
     if (frames.has(key)) return frames.get(key);
     const track = sequence.tracks[index], size = data.frameSize;
     const sprite = createSurface(size, size), context = sprite.getContext("2d");
@@ -79,6 +82,7 @@ export function createSproutLifespan(assetSource, createSurface, loadImage) {
       const width = (344 + (strength - 1) * 24) * .78 * sx, height = (142 + (strength - 1) * 12) * .78 * sy;
       context.drawImage(parts.get("strength-" + (strength === 1 ? 1 : 2)), center - width / 2, track.bottom - height, width, height);
     }
+    if (attributes.excavation) excavation.body(context, "bean", track.body, 0);
     if (track.headFront) drawHead();
     context.restore();
     const result = { sprite, scale: data.scale, animation: { frameSize: size, columns: 1,
@@ -122,6 +126,11 @@ export function createSproutLifespan(assetSource, createSurface, loadImage) {
       const eye = eyeParts[index], eyeHeight = eyeWidth * eye[3] / eye[2];
       context.drawImage(unit.partsImage, ...eye, 256 + side * pose.eyeSpread - eyeWidth / 2,
         top + height * .53 - eyeHeight / 2, eyeWidth, eyeHeight);
+    }
+    if (attributes.excavation) {
+      const amount = 1 - absorption;
+      excavation.body(context, "bean", [256 - width * amount / 2, top + height * (1 - amount),
+        width * amount, height * amount], 0);
     }
     const strength = attributes.strength || attributes.arms || 0;
     if (strength) {

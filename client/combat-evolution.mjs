@@ -1,5 +1,6 @@
 import { COMBAT_EVOLUTION_CATALOG } from "./combat-evolution-assets.mjs";
 import { unitAnimationFrame } from "./unit-animation.mjs";
+import { createExcavationArt } from "./excavation.mjs";
 import { renderEvolutionFrame, evolutionBodyTransform, renderEvolutionAttachment } from "../DesignAssets/Animations/CombatAttributesV7/renderer.mjs";
 import { renderAttributeEffects } from "../DesignAssets/Animations/CombatAttributesV7/attack.mjs";
 
@@ -36,11 +37,13 @@ export function combatEvolutionPose(agent, time, animations) {
 export function createCombatEvolutionArt(assetSource, createSurface, loadImage) {
   const prepared = new Map(), pending = new Map(), frames = new Map(), portraits = new Map(), registrations = new Map(), blank = createSurface(1, 1);
   const folder = "DesignAssets/Animations/CombatAttributesV7/";
+  const excavation = createExcavationArt(assetSource, loadImage);
   function ready(tribe) { return prepared.has(tribe || "bean"); }
   async function prepare(tribe) {
     const key = tribe || "bean", name = key === "bean" ? "sprout" : key;
     if (!["sprout", "spore", "pebble", "spring"].includes(name)) return null;
     if (!pending.has(key)) pending.set(key, (async () => {
+      await excavation.prepare();
       const variants = new Map();
       await Promise.all(COMBAT_EVOLUTION_KEYS.map(async variant => {
         const definition = COMBAT_EVOLUTION_CATALOG[name + "/" + variant], response = await fetch(assetSource(definition.rig));
@@ -188,6 +191,12 @@ export function createCombatEvolutionArt(assetSource, createSurface, loadImage) 
     context.save(); sharedTransform(context, rig, sampled); context.translate(...rig.root);
     context.scale(1 / (2 * rig.scale), 1 / (2 * rig.scale)); context.translate(-256, -448);
     drawAttributes(context, sampled); context.restore();
+    const attributes = agent.appearanceAttributes || agent.attributes || {};
+    if (attributes.excavation) {
+      context.save(); sharedTransform(context, rig, sampled);
+      excavation.draw(context, agent.tribe || "bean", { left: rig.eyes[0], right: rig.eyes[1], bottom: rig.root });
+      context.restore();
+    }
     return sprite;
   }
   function frame(agent, time, drawAttributes, drawBody) {
@@ -196,7 +205,7 @@ export function createCombatEvolutionArt(assetSource, createSurface, loadImage) 
     const source = variants.get(keys.length === 1 ? keys[0] : body(keys));
     const animations = source.definition.animations;
     const sampled = combatEvolutionPose(agent, time, animations);
-    let replacement = drawBody && (attributes.construction || source.rig.tribe !== "sprout" && ["antenna", "strength", "arms", "butchery", "lifespan", "feet"].some(key => attributes[key] > 0)) ? drawBody : null;
+    let replacement = drawBody && (attributes.construction || source.rig.tribe !== "sprout" && ["antenna", "strength", "arms", "butchery", "lifespan", "feet", "excavation"].some(key => attributes[key] > 0)) ? drawBody : null;
     if (replacement) { const paint = replacement; replacement = (context, pose) => paint(context, pose); replacement.key = JSON.stringify(attributes) + ":" + (agent.construction?.buildingKey || "") + ":" + (agent.construction?.level || ""); }
     const liveFeet = source.rig.tribe === "sprout" && attributes.feet > 0;
     const dynamic = liveFeet && drawAttributes && !replacement;
@@ -222,6 +231,11 @@ export function createCombatEvolutionArt(assetSource, createSurface, loadImage) 
       context.scale(1 / (2 * rig.scale), 1 / (2 * rig.scale)); context.translate(-256, -448);
       drawAttributes(context, sampled); context.restore();
     }
+    if (attributes.excavation && !replacement && !dynamic) {
+      context.save(); sharedTransform(context, rig, sampled);
+      excavation.draw(context, agent.tribe || "bean", { left: rig.eyes[0], right: rig.eyes[1], bottom: rig.root });
+      context.restore();
+    }
     const target = surface.getContext("2d"); target.imageSmoothingEnabled = true; target.imageSmoothingQuality = "high"; target.drawImage(large, 0, 0, 512, 512);
     frames.set(key, { sprite: surface, rig }); if (frames.size > 96) frames.delete(frames.keys().next().value);
     return dynamic ? drawSproutAttributes(surface, rig, sampled, agent, drawAttributes) : surface;
@@ -240,7 +254,7 @@ export function createCombatEvolutionArt(assetSource, createSurface, loadImage) 
     if (!variants || !keys.length) return null;
     const source = variants.get(keys.length === 1 ? keys[0] : body(keys));
     if (attributes.construction || source.rig.tribe !== "sprout" &&
-        ["antenna", "strength", "arms", "butchery", "lifespan", "feet"].some(key => attributes[key] > 0)) return replacement;
+        ["antenna", "strength", "arms", "butchery", "lifespan", "feet", "excavation"].some(key => attributes[key] > 0)) return replacement;
     if (!source.bodySize) {
       const image = source.images.body, surface = createSurface(image.naturalWidth || image.width, image.naturalHeight || image.height);
       const context = surface.getContext("2d", { willReadFrequently: true }); context.drawImage(image, 0, 0);
