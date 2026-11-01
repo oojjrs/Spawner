@@ -5110,6 +5110,36 @@
       const point = worldToScreen(renderPosition.x + .5 + (position.x - renderPosition.x) * scale + offsetX,
         renderPosition.y + anchor + (position.y + floor - renderPosition.y - anchor) * scale + offsetY);
       drawGroundShadow(point.x, point.y, radiusX * state.camera.zoom, radiusY * state.camera.zoom, opacity);
+      if (!birth && !spawn && agent.health > 0) drawAgentHealthRing(agent, point,
+        Math.max(radiusX * 1.4, Spawner.unitDisplaySize(agent) * .63) * state.camera.zoom);
+    }
+
+    function drawAgentHealthRing(agent, point, radius) {
+      const maximum = agent.stats?.health;
+      if (!(maximum > 0) || !Number.isFinite(maximum) || !Number.isFinite(agent.health)) return;
+      const ratio = clamp(agent.health / maximum, 0, 1);
+      const depth = radius * .327;
+      if (state.camera.zoom < 8 || ratio <= 0 || ratio >= 1 || point.x + radius < 0 || point.x - radius > viewport.width ||
+          point.y + depth < 0 || point.y - depth > viewport.height) return;
+      const thickness = clamp(radius * .064, 1, 6);
+      ctx.save();
+      ctx.lineCap = "round";
+      ctx.lineWidth = thickness + 2;
+      ctx.strokeStyle = "#111b17e8";
+      ctx.beginPath();
+      ctx.ellipse(point.x, point.y, radius, depth, 0, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.lineWidth = thickness;
+      ctx.strokeStyle = "#485650";
+      ctx.beginPath();
+      ctx.ellipse(point.x, point.y, radius, depth, 0, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.strokeStyle = "#eee1c8";
+      ctx.beginPath();
+      ctx.ellipse(point.x, point.y, radius, depth, 0,
+        Math.PI / 2 - Math.PI * ratio, Math.PI / 2 + Math.PI * ratio);
+      ctx.stroke();
+      ctx.restore();
     }
 
     function drawAgentBody(now, agent) {
