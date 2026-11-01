@@ -130,6 +130,7 @@
     foreignColonyDetails.hidden = true;
     document.querySelector(".unit-actions").before(foreignColonyDetails);
     const resourceLocation = document.getElementById("resource-location");
+    const resourceLocationHelp = resourceLocation.dataset.help;
     const agentDetails = document.getElementById("agent-details");
     const agentLife = document.getElementById("agent-life");
     agentLife.hidden = true;
@@ -6734,6 +6735,14 @@
 
     document.getElementById("unit-panel-close").addEventListener("click", closeUnitPanel);
     resourceLocation.addEventListener("click", () => {
+      if (state.selection?.kind === "colony" && !foreignColonyDetails.hidden) {
+        hideHelpTooltip();
+        state.camera.layer = INITIAL_ZOOM_LAYER;
+        moveToColonyEntry(state.selection.target);
+        updateZoomLayerButtons();
+        canvas.focus();
+        return;
+      }
       const cell = selectionTerrainCell();
       if (!cell || (resourceDetails.hidden && terrainDetails.hidden)) return;
       hideHelpTooltip();
@@ -7200,6 +7209,8 @@
       const entry = state.selection?.kind === "colony" ? state.selection.target : null;
       foreignColonyDetails.hidden = !entry || entry.id === connection.colonyId;
       if (foreignColonyDetails.hidden) return;
+      resourceLocation.dataset.help = resourceLocationHelp;
+      resourceLocation.setAttribute("aria-label", resourceLocationHelp);
       let overview = foreignColonyDetails.firstElementChild;
       if (!overview) {
         overview = document.createElement("div"); overview.className = "building-overview";
@@ -7256,7 +7267,7 @@
       progression.refresh();
       const building = state.selection?.kind === "building" ? state.selection.target : null;
       document.getElementById("unit-codex").hidden = false;
-      resourceLocation.hidden = resourceDetails.hidden && terrainDetails.hidden;
+      resourceLocation.hidden = resourceDetails.hidden && terrainDetails.hidden && foreignColonyDetails.hidden;
       agentDetails.hidden = !agent;
       agentLife.hidden = !agent;
       agentRenameOpen.hidden = !agent || !state.agents.includes(agent);
