@@ -1,5 +1,12 @@
 # Codex 작업 메모리
 
+## 현재 배포 상태와 재배포 순서
+
+- 운영은 https://spawner.oojjrs.chatgpt.site 의 Sites 버전 10이다. 원본 자산 782개는 https://oojjrs.github.io/spawner-assets/ 에서 제공한다. WebP 품질 90으로 줄였던 버전 9는 이전 배포다.
+- 이후 배포도 원본 자산 준비 → oojjrs.github.io 자산 변경 커밋·푸시 → Pages 게시 확인 → Sites 코드 패키지 배포 순서를 따른다. 원본 화질을 유지한다.
+- `hosting/prepare-site.mjs`는 원본 복사와 외부 URL 매핑을 자동 수행한다. Pages 커밋·푸시·게시 확인과 Sites 저장·배포는 Codex가 이어서 수행할 별도 단계다.
+- 완료 식별자, 실제 검증과 실행 명령은 [원본 자산 분리 배포 기록](#2026-11-01-원본-자산-분리-배포-완료)을 확인한다.
+
 ## 2026-11-01 SFX 음량 전수 조정
 
 - 요청: 전체 SFX가 BGM보다 두드러지지 않도록 낮추고, 가시등 딱정벌레 이동음은 특히 크게 낮춘다.
@@ -620,3 +627,19 @@
 - 직접 확인한 기존 근거: 격리된 실제 뿌리 렌더러에서 접지 중 발 고정·정지 높이 연속성, 개체 간 캐시 분리·몸통 캐시 재사용·건설/재생 조합을 확인했다. 최종 보행 측정의 최소 회수 표본은 60fps 기준 보통 가로 5·세로 11프레임, 질주 가로 4·세로 6프레임이다. 전체 게임 세션 검증이 아니다. 자료는 $Trash/sprout-root-flicker-20261101/evidence-motion.json, evidence.json과 comparison.gif에 있다.
 - 이번 요청에 따라 갱신된 공통·문서·기획서 지침을 다시 읽었고 CodexWorkMemory.md 자유 기록 예외를 적용했다. 기획서는 기존 이속 속성의 bean-feet.webp를 현재 리그·기존 몸통 파츠로 다시 출력하고, 본문 미리보기와 원본 확대가 같은 애니메이션을 보도록 연결한다. 새 본문 문구는 추가하지 않는다. 출력은 기존 144×144 규격의 투명 WebP이며 60fps 표본 100프레임, 시작 보행을 지나 워밍업한 6주기다.
 - 최신 Git 승인 범위는 이 기획서 미리보기·참조와 본 절의 작업 메모리의 로컬 커밋이다. 다른 채팅의 메모리·제품 변경과는 분리한다. 앞선 제품 수정의 푸시 승인을 이번 문서 푸시 승인으로 확대하지 않는다.
+
+
+## 2026-11-01 원본 자산 분리 배포 완료
+
+- 근거 채팅: 01a196c5-34b9-7c62-82b7-a2b479c115bc. 사용자는 최종적으로 자산을 oojjrs.github.io의 전용 폴더로 분리하고 원본 화질로 배포하도록 확정했다. 앞선 손실 압축 승인과 Sites 버전 9는 그 전 단계의 역사다.
+- 전용 저장소는 게임 H:/Spawner(origin https://github.com/oojjrs/Spawner, main), 자산 공급자 H:/oojjrs.github.io(origin https://github.com/oojjrs/oojjrs.github.io, master)다. 공개 자산 경로는 spawner-assets/이며 서로 다른 저장소의 작업·커밋·게시 상태를 구분한다.
+- 게임 코드 변경은 b7e0740(원본 자산 배포·CORS), e6a9a06(원본 커밋 고정), 5f1bbbe(공개 자산 텍스트 속성)로 커밋·푸시했다. 자산 공급자 커밋은 9e77680이며 Pages built 결과의 커밋과 일치했다. 종료 시 게임 main의 병행 커밋 64be0d3도 원격 반영을 확인했다.
+- 실제 운영 결과: Sites 버전 10 저장·배포 성공, project_id appgprj_6ada1cedf2848191938f196c4f346ee9, version_id appgprj_6ada1cedf2848191938f196c4f346ee9~appgver_80149798766c8191bf7fb307442237ce, deployment_id appgdep_6ae72b21da388191b2a7684c4bb34ec1. Sites 소스 커밋은 03ac361d41867c04132c5d79ec85f9856861d7c9, 게임 원본 스냅샷은 58edb58d8ae4197cf7dcddabbd14cc8beb57b48e다. 이후 GitHub main의 새 커밋을 이 운영 버전에 포함됐다고 가정하지 않는다.
+- 799개 자산 참조를 782개 원본 파일로 연결했다. SHA-256 파일명과 원본 바이트 일치를 전부 확인했고, 공개 PNG·WebP·JSON·MP3·MJS 표본은 HTTP 200, Access-Control-Allow-Origin: *, 원본 해시 일치를 확인했다. 실제 게임 전체 플레이 검증으로 확대하지 않는다.
+- Sites 정적 패키지에는 게임 코드만 남겼다. 압축 패키지는 622092바이트(약 0.6MiB), 저장된 아카이브의 펼친 크기는 3010560바이트·12개 파일이다. 원본 자산 약 407MiB는 Pages에 있다.
+- 재배포 준비 명령: `node hosting/prepare-site.mjs "<Sites 체크아웃 절대 경로>" "H:/oojjrs.github.io/spawner-assets"`. Sites 체크아웃은 기존 project_id의 공식 Sites 소스 도구로 먼저 열고, 준비 스크립트는 확정된 게임 커밋에서만 읽는다. 미커밋 변경을 자동 게시하지 않는다.
+- 준비 스크립트는 원본 파일을 다시 인코딩하지 않고 해시 이름으로 복사한다. 기존 해시가 같으면 재사용하고 내용이 다르면 중단한다. spawner-assets/.gitattributes는 원본 바이트의 개행 변환을 막으며 이전 해시 자산을 임의 삭제하지 않는다. Sites의 이전 dist/game-assets는 제거하고 URL 맵은 Pages로 바꾼다.
+- 외부 이미지는 client/assets.js의 SpawnerAssets.image()가 src 설정 전에 crossOrigin="anonymous"를 지정한다. 배포 준비가 산출물의 new Image() 호출에 이 팩토리를 적용한다. 이 처리를 빼면 canvas getImageData/toBlob 등의 교차 출처 제한이 생길 수 있다.
+- Pages 게시가 완료되고 새 자산의 공개 URL·CORS·해시를 확인한 뒤 Sites 코드 버전을 저장·배포한다. 파일을 로컬 폴더에 복사하는 것만으로 Pages 게시가 끝난 것은 아니다. Sites의 기존 공개 범위와 project_id를 유지한다.
+- 사이트 소스 체크아웃·업로드 아카이브·자격 증명은 영구 메모리의 실행 전제로 삼지 않는다. $Trash는 임시 자료이며 자격 증명은 필요할 때 새로 받아 메모리와 표준입력으로만 전달한다. 이후 실행 권한은 그때의 사용자 요청을 따른다.
+- 이번 마무리에서 갱신된 공통 작업 지침 SHA-256 5a8ad04542e0d61a3067aac49fbe8d3b3c299c70879c5071302f2319cca019d1과 문서 작성 지침을 다시 읽었다. CodexWorkMemory.md 자유 기록 예외를 적용하며, 다른 문서로의 전재나 별도 제품 변경은 하지 않는다. 이번 요청은 이 배포 기록의 로컬 커밋이며 다른 채팅의 메모리 변경은 제외한다.
