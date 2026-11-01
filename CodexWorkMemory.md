@@ -1,3 +1,65 @@
+## 가이드·검사 수정 메모리 정리 및 커밋 준비 · 01a198d1
+
+- 기록 ID: guide-commit-freeze-01a198d1. 기록 시각·후보 확인 시각: 2026-11-02T05:59:29+09:00. 기록자·범위 분리 및 검증 판단 주체 Codex /root, 메모리 정리·가이드 및 검사 수정만 로컬 커밋하는 결정 주체 사용자. 출처 현재 채팅 01a198d1-4465-7ee1-a0ac-9dd5f5d79d13, H:/Spawner, Windows/PowerShell, PC OOJJRS-PC. 원 발언 정확한 시각·턴·항목·딥링크 불명. 이번 사용자 지시가 아래 원기록의 Git 미요청 상태를 로컬 커밋 승인으로 갱신하며 푸시·배포는 포함하지 않는다.
+- 현재 요약: 가이드 추천의 필수 속성·해금 및 슬롯 한도·실제 생산 자격을 일치시켰다. 채집·운반·변태 역할과 담당 자원 표시, 기존 worker 설계의 군사 안내 생산, 군사 후보 필터 순서를 수정했고 남은2검사는 현행 ESM 판단 풀 계약으로 고쳤다. 조사·수정·검사 원기록6개를 날짜·기록ID·원문을 보존해 아래에 모았다. 최신 검증 상태는104성공·0실패이며 이전102성공·2준비오류 기록은 해결됐다.
+- 검증 근거: 작업 트리104검사 성공을 보존하고, 다른 미커밋 변경을 제외한 HEAD 기반 커밋 후보에서도 같은104검사를 한 번 실행해104성공·0실패·0건너뜀을 확인했다(러너849.2331ms). 실제 사용자 저장 전체 플레이나 화면 검증으로 확대하지 않는다. 근거는 프로젝트 임시 폴더 guide-fix-01a198d1/commit/candidate-tests.txt다.
+- 최종 포함 범위10경로: client/beginner-help.mjs, server/beginner-help.mjs, server/game.mjs의가이드2함수·import, server/conquest-pacing.mjs, client/runtime.js의가이드4모듈만, server/beginner-help.test.mjs, server/colony-defense.test.mjs, 신규 server/guide-recommendation.test.mjs·client/beginner-help.test.mjs 및 이 관련 메모리다. 건설·전투 수치·중립몹·시체 성능·기타 메모리는 제외·보존한다. HEAD 기반 후보 runtime의 관련4모듈과 중첩 워커 문자열 밖은 브라우저·두 워커 모두 보존됨을 확인했다.
+- Git 준비: 전용 Spawner main, 기준 1d8c795fd07d2399ff29e2dcdb88179676dfdf9e, 연결 Projects0개 결과를 재사용한다. 별도 인덱스의 정확한10경로만 검토해 한국어 제목 ‘가이드 추천 필수 속성과 검사 수정’으로 로컬 커밋한다. 공용 작업 파일·기존 index와 병행 HEAD 전진을 보호하고 실제 성공·해시는 이후 확인한다. 현재 실제 커밋 결과는 아직 미확인이다.
+- 원기록 색인: guide-audit-start-01a198d1 → guide-audit-result-01a198d1 → guide-fix-start-01a198d1 → guide-fix-complete-01a198d1 → guide-defense-test-fix-start-01a198d1 → guide-defense-tests-complete-01a198d1.
+
+### 가이드 추천·필수 속성 전수 조사 진행 · 01a198d1
+
+- 기록 ID: guide-audit-start-01a198d1. 기록 시각: 2026-11-02T05:34:56+09:00. 기록자·조사 판단 주체 Codex /root, 요청·필수 속성 기준 결정 주체 사용자. 출처 현재 채팅 01a198d1-4465-7ee1-a0ac-9dd5f5d79d13, H:/Spawner, Windows/PowerShell, PC OOJJRS-PC. 원 발언 정확한 시각·턴·항목·딥링크 불명.
+- 사용자 요청: 가이드 추천 유닛은 해당 행동의 필수 속성을 반드시 보유해야 하며 추천 유닛과 내용 전체를 조사한다. 읽기 전용 전수 조사로 진행하고 제품 수정·테스트·빌드·서버·브라우저·Git 완료·배포는 실행하지 않는다. 메모리 예외에 따라 이 조사 기록만 갱신한다.
+- 현재 근거: 기존 결정은 건설 construction만, 채집 자원별 필수 속성만, 운반 무속성, 군사 전투 속성만이며 선택 속성 자동 추가를 제거했다. 현재 요약과 관련 01a19734/01a1972b 기록을 읽었다. server/beginner-help.mjs, server/game.mjs의 전체 가이드 분기와 실제 채집·건설·전투 자격, client 표시·명령·runtime의 연결을 대조한다. 시작 변경은 CodexWorkMemory.md와 client/runtime.js이며 기존 바이트를 보존한다. 조사 결과는 아직 확정하지 않았다.
+
+### 가이드 추천·내용 전수 조사 결과 · 01a198d1
+
+- 기록 ID: guide-audit-result-01a198d1. 기록 시각·최종 근거 대조 시각: 2026-11-02T05:38:33+09:00. 기록자·정적 조사 및 판단 주체 Codex /root, 요청·필수 속성 기준 결정 주체 사용자. 출처 현재 채팅 01a198d1-4465-7ee1-a0ac-9dd5f5d79d13, H:/Spawner, Windows/PowerShell, PC OOJJRS-PC. 원 발언 정확한 시각·턴·항목·딥링크 불명. guide-audit-start-01a198d1의 진행 상태를 정적 조사 완료로 갱신한다.
+- 조사 범위: 성장·군사·채집·운반·변태 5종 안내의 생성·후속 교체·표시·기존 설계 재사용·클릭 후 재계산·실제 탄생 호출과 채집/방어 자격을 읽었다. 정의 원문에서 4종족×10자원 40쌍, 4종족×4건물 16쌍, 군사 Lv.2~4의 12구성을 독립적인 문자열 추출·집합 대조로 정리했다. 게임 함수·테스트·빌드·서버·브라우저·사용자 저장은 실행하지 않았으며 실제 플레이 증상의 직접 재현으로 확대하지 않는다.
+- 문제 1: server/game.mjs:2344~2346,2361~2367의 일부 후속 분기는 원래 harvest 제안을 support=true로 덮고 server/beginner-help.mjs:38이 slots=[] 운반으로 만든다. 특히 식량 담당이 해당 재료 속성도 갖는다는 이유만으로 교체하는 foodSpecialists 분기에는 새 무속성 인력의 자원 채집 가능성·실제 역할 대체·개선량 확인이 없다. 예를 들어 새싹콩이 알려진 비옥토 없이 양분만 회수하며 흡수+칼날 개체를 식량 담당으로 쓰면 새 무속성 개체는 양분도 목재·풀섬유도 채집할 수 없다. 이 조건부 경로는 정적 판정이며 현재 사용자 저장의 원인이라고 확정하지 않는다.
+- 문제 2: beginner-help.mjs:41~50은 요구 속성을 합치고 슬롯 수만 자른 뒤 신규 설계의 해금 여부를 issue/canProduce에 반영하지 않는다. Lv.1 새싹콩·샘방울의 잠긴 감시봉 준비에서 칼날 제안이 남을 수 있고, game.mjs:2313~2315는 몽돌 harvest만 숨긴다. 포인트·설계 수가 허용되면 canProduce=true지만 실제 birth의 2135~2138 해금 검사에서 거절한다.
+- 문제 3: client/beginner-help.mjs:13~17은 변태·채집·운반에 같은 건물 준비 문장을 쓰고, harvest에서는 offer.resources 대신 건물의 모든 부족 재료를 표시한다. 예를 들어 목재 담당이 이미 있고 자갈 담당만 부족하면 관통만 추천해도 화면에는 채집할 수 없는 목재까지 함께 나열한다. 유닛의 담당 자원과 건물 전체 필요량을 구분하지 못하는 안내다.
+- 문제 4: beginner-help.mjs:11~14는 슬롯만 일치하면 기존 worker 설계도 군사 추천에 그대로 반환한다. game.mjs:2152~2155,1880의 실제 생산도 worker 분류를 보존한다. conquest-pacing.mjs:33은 productionRole이 있으면 그 분류를 우선하므로 militaryAgent=false이고 combat.mjs:51의 군사 방어 판정에 진입하지 않는다. 반면 game.mjs:2285~2291은 실제 전투 속성만으로 이미 방어 인력이 있다고 보아 추가 군사 안내를 숨긴다. 기존 beginner-help.test.mjs:166의 재사용 검사는 이 분류 보존을 허용하며 실제 방어 결과를 검사하지 않는다.
+- 문제 5: game.mjs:2292에서 이속 증가를 포함한 군사 후보를 슬롯 한도로 먼저 자르고 beginner-help.mjs:10에서 비전투 속성을 제거한다. 샘방울 Lv.2의 관통, Lv.3의 재생은 이미 해금됐는데도 최종 슬롯이 각각 1개·2개만 남으며 선택 후보에서 빠진다. 모든 군사 개체에 관통·재생이 필수라는 뜻은 아니며 기존 군사 후보 선택과 최종 추천 사이의 누락이다.
+- 정상 대조: 변태 추천은 construction 단일 슬롯, 일반 운반은 무속성, 채집 후보 유지 시에는 해당 자원의 필수 속성만이고 정확한 슬롯 구성의 기존 설계만 재사용한다. 일반 자원 요구는 양분·이슬=흡수, 목재·풀섬유=칼날, 자갈·철광석·구리광석·수정=관통, 비옥토·모래=굴착이다. 종족 기본 자원(콩 비옥토·포자 목재·몽돌 자갈·샘 이슬)과 떨어진 운반 자원은 무속성 예외다. 건설 재료 전체 수급의 필요 속성은 창고=전 종족 없음, 감시봉=전 종족 칼날, 진화실/전초둥지=콩·샘 칼날+관통/포자 관통/몽돌 칼날이며 변태 자체에는 별도로 construction이 필요하다. 비용은 표시·탄생 모두 birthCost를 사용하고 클릭은 최신 offer와 expectedStep/buildingKey를 다시 확인한다.
+- 실행 코드 대조: runtime.js의 브라우저·게임 워커·판단 워커를 JSON 문자열로만 해독하고 import/export 포장과 CRLF 차이만 맞춰 원문과 비교했다. 가이드 UI/서버·game·resources·attributes·buildings·conquest-pacing·unit-template-names·construction-harvest·construction-supply·worker-allocation·combat 12모듈의 존재하는 실행면 모두 원문과 동일했다. 제품 실행이나 번들 재생성은 하지 않았다.
+- 완료·남은 상태: 요청한 정적 전수 조사와 결과 보고를 완료한다. 제품 코드·가이드 문구는 수정하지 않았고 기존 runtime·메모리 변경을 보존했다. 발견 사항은 미수정이며 Git 완료·배포도 하지 않았다. 이 결과를 사용자 저장 재현·자동 검사 통과·운영 배포 확인으로 해석하지 않는다.
+
+
+### 가이드 추천 5개 수정 진행 · 01a198d1
+
+- 기록 ID: guide-fix-start-01a198d1. 기록 시각: 2026-11-02T05:43:38+09:00. 기록자·구현 판단 주체 Codex /root, 수정 결정 주체 사용자. 출처 현재 채팅 01a198d1-4465-7ee1-a0ac-9dd5f5d79d13, H:/Spawner, Windows/PowerShell, PC OOJJRS-PC. 원 발언 정확한 시각·턴·항목·딥링크 불명. 사용자 후속 지시가 앞선 읽기 전용 조사 범위를 5개 문제의 로컬 수정으로 확장한다. 커밋·푸시·배포는 포함하지 않는다.
+- 결정: 자재 채집 부족은 운반 보충으로 덮지 않고 담당 자원의 완전한 요구 속성을 유지한다. 슬롯 한도·해금 상태는 생산 가능 판정에 반영하고 실제 탄생 직전에도 필수 속성을 확인한다. UI는 채집·운반·변태를 구분하고 선택한 담당 자원만 표시한다. 군사는 전투 속성을 먼저 추린 뒤 슬롯 수를 적용하고, 기존 설계 재사용 시에도 안내 생산 개체는 군사로 분류한다. worker 분류가 실제 전투 슬롯의 판정을 막지 않게 하고 가이드 보유 판정도 같은 자격을 사용한다.
+- 보존·확인: 연결 GitHub Projects0개. 기존 메모리·Combat.html·game.js·runtime.js·combat.mjs/test·game.mjs·utility.mjs·creatures.mjs·encounters.mjs 및 corpse-resources 검사는 병행 작업이며 보존한다. 가이드 관련 최소 구간만 수정하고 시작 사본은 프로젝트 임시 폴더 guide-fix-01a198d1/before에 보관한다. 첫 Node 메모리 쓰기가 UNKNOWN 파일 열기 오류로 실패했으며 파일은 읽기 전용이 아니다. 현재 최신 본문을 읽고 .NET으로 기록한다. 제품 수정과 검사는 아직 미실행이다.
+
+
+### 가이드 추천 5개 수정 완료 · 01a198d1
+
+- 기록 ID: guide-fix-complete-01a198d1. 기록 시각·결과 대조 시각: 2026-11-02T05:51:37+09:00. 기록자·구현 및 확인 주체 Codex /root, 변경 결정 주체 사용자. 출처 현재 채팅 01a198d1-4465-7ee1-a0ac-9dd5f5d79d13, H:/Spawner, Windows/PowerShell, PC OOJJRS-PC. 원 발언 정확한 시각·턴·항목·딥링크 불명. guide-fix-start-01a198d1의 미실행 상태를 실제 로컬 수정 완료로 갱신한다.
+- 구현 1·2: beginner-help는 채집 부족을 운반 보충보다 먼저 처리하고, 담당 자원의 완전한 요구 속성을 묶어 슬롯 한도 내에서 자원을 선택한다. 잠긴 속성·슬롯 한도·포인트·설계 한도를 공통 issue로 검사한다. game의 모든 보충 호출에 기존 harvestNeeds를 전달하고 지원 설계의 실제 kind를 보존한다. 실제 안내 탄생 직전에는 표시 슬롯·비용 일치, 담당 자원의 채집 자격, 변태/전투 필수 속성을 다시 확인한다.
+- 구현 3·4·5: UI는 채집·운반·변태 역할을 구분하고 채집에는 담당 자원만 표시한다. 군사 후보는 전투 속성만 거른 뒤 슬롯 한도를 적용한다. 기존 worker 설계 재사용 시 새로 생산한 안내 개체만 military로 지정하고 기존 설계는 바꾸지 않는다. worker라는 내부 분류만으로 실제 전투 슬롯의 군사 판정을 막던 조기 반환을 제거하고 가이드 보유 판정도 실제 군사 자격과 전투 속성을 함께 확인한다. 종족 기본 채집 일꾼의 기존 예외는 유지한다.
+- 실제 검증: 가이드·기존 선수 조건·신규 자원/군사/실생산·UI 검사 고유51건 성공(첫49건 성공 뒤 실패2건만 수정·재실행해2건 성공). 자원별4종족×4레벨×10자원×보충 여부320조건과 군사4종족×3단계×신규/재사용24번 실제 안내 생산·방어 자격을 포함한다. 신규 복합 재현은 흡수+칼날 식량 담당만 있는 상태에서 최종 추천과 실제 탄생이 칼날을 유지함을 확인했다. 최초 실패는 기존 재생산 검사의 transport 기대값과 신규 저장 픽스처의 route/routeIndex 누락이었다. 사용자가 승인한 harvest 동작과 유효한 저장 형식으로 바로잡았다.
+- 추가 확인: 기존 colony-defense 검사에서 소스·게임 워커·판단 워커의 방어51건 성공. 나머지2건은 변경하지 않은 검사 준비부가 client/decision-pool.mjs를 import 제거 없이 VM Script로 실행해 첫 줄 ESM import에서 SyntaxError가 발생했다. 이2건은 제품 변경 코드에 도달하지 않았으며 이번 범위에서 수정하지 않는다. 전체104건 중102건 성공·2건 준비 오류이고, 전체 검사 성공으로 확대하지 않는다.
+- 실행 코드·보존: 전체 빌드를 실행하지 않고 가이드 UI·서버 가이드·game·conquest-pacing 4모듈의 변경 구간만 runtime에 적용했다. 브라우저·두 워커의 해당 모듈은 원문과 줄바꿈 외에 동일하며, 이 모듈들과 중첩 워커 문자열을 제외한 바이트는 각 실행면에서 모두 보존됨을 확인했다. 근거는 프로젝트 임시 폴더 guide-fix-01a198d1/bundle-result.json 및 시작 사본이다. 최초 메모리 쓰기 파일 열기 오류는 최신 본문을 보존한 .NET 쓰기로 해결했다.
+- 완료·범위: 제품 소스4개·기존 검사1개·신규 검사2개·runtime·관련 메모리의9경로가 이번 작업 범위다. 실제 브라우저 화면·사용자 저장 전체 플레이·운영 배포 검증으로 확대하지 않는다. 발견했던5개 수정은 로컬 반영했으며 기존 병행 변경은 보존했다. Git 스테이징·커밋·푸시·배포는 하지 않는다. 마지막 형식·구문·scoped diff 확인은 바로 뒤 실제 명령 결과를 따른다.
+
+
+### 남은 방어 검사 2개 수정 진행 · 01a198d1
+
+- 기록 ID: guide-defense-test-fix-start-01a198d1. 기록 시각: 2026-11-02T05:53:33+09:00. 기록자·원인 및 수정 판단 주체 Codex /root, 검사2개 수정·전체 통과 요청 및 결정 주체 사용자. 출처 현재 채팅 01a198d1-4465-7ee1-a0ac-9dd5f5d79d13, H:/Spawner, Windows/PowerShell, PC OOJJRS-PC. 원 발언 정확한 시각·턴·항목·딥링크 불명. guide-fix-complete-01a198d1에서 범위 밖으로 남겼던 검사 준비2건을 이번 지시로 수정한다.
+- 확인: 현재 client/decision-pool.mjs는 createUnitIndex를 import하고 Worker 생성 없이 game.planDecisions를 동기 호출해 결과를 저장한다. colony-defense의 마지막2검사는 export만 지워 VM Script로 실행하고 가짜 Worker 메시지를 주입하는 이전 구조여서 현행 계약과 맞지 않는다. 같은 판단 풀의 현재 client/decision-pool.test.mjs는 실제 ESM import와 planDecisions 준비를 사용한다.
+- 결정·범위: 제품 코드는 바꾸지 않고 server/colony-defense.test.mjs의2검사에 실제 ESM 판단 풀과 planDecisions를 연결한다. 정상 결과를 먼저 수신하는 대조 조건을 둔 뒤 defending 또는 defenseRevision 변경 뒤 이전 결과를 버리고 새 결과를 받을 때까지 확인한다. 앞선 가이드·방어104개 전체를 한 번 실행해 통과 여부를 확인한다. 다른 병행 코드·런타임·메모리는 보존하고 커밋·푸시·배포는 하지 않는다. 연결 보드0개 결과를 재사용한다.
+
+
+### 가이드·방어 검사 104개 전체 통과 · 01a198d1
+
+- 기록 ID: guide-defense-tests-complete-01a198d1. 기록 시각·실제 결과 대조 시각: 2026-11-02T05:54:16+09:00. 기록자·수정 및 검증 주체 Codex /root, 남은2검사 수정·전체 통과 요청 및 결정 주체 사용자. 출처 현재 채팅 01a198d1-4465-7ee1-a0ac-9dd5f5d79d13, H:/Spawner, Windows/PowerShell, PC OOJJRS-PC. 원 발언 정확한 시각·턴·항목·딥링크 불명. guide-defense-test-fix-start의 진행 상태 및 guide-fix-complete의102성공·2준비오류 상태를 아래 실제 성공 결과로 갱신한다.
+- 실제 변경: server/colony-defense.test.mjs의 마지막2검사는 createDecisionPool을 ESM으로 직접 import하고 현재 game.planDecisions 계약에 맞는 준비를 사용한다. 가짜 Worker·수동 VM 변환을 제거했으며 정상 결과가 소비되는 대조 조건, 같은 목표의 defending 변경, 방어 후 원래 채집으로 돌아온 defenseRevision 변경, 오래된 결과 거절 및 새 결과 수신과 실제3회 계획 호출을 검사한다. 제품 코드와 기존 가이드 수정은 변경하지 않았다.
+- 실제 검증: server/guide-recommendation.test.mjs, server/beginner-help.test.mjs, server/construction-prerequisites.test.mjs, client/beginner-help.test.mjs, server/colony-defense.test.mjs의 전체104검사를 한 번 실행해104성공·0실패·0건너뜀을 확인했다. 테스트 러너 소요863.0904ms이며 실제 사용자 저장 게임이나 화면 전체 플레이 검증으로 확대하지 않는다. 근거는 프로젝트 임시 폴더 guide-fix-01a198d1/final-104-tests.txt, 수정 전 검사 사본 colony-defense.before-pool-fix.mjs다.
+- 완료 범위: 이번 후속 작업은 검사1개와 이 관련 메모리의2경로다. 병행 전투 밸런스·중립몹·렌더·성능·런타임 등 변경은 보존한다. 남았던2검사 오류는 해결됐고 앞선 요청 범위의104검사가 모두 성공했다. 마지막 형식·scoped diff는 바로 뒤 명령의 실제 결과를 따른다. 스테이징·커밋·푸시·배포는 하지 않았다.
+
+
 ## 중립몹 선택·타겟 커밋 범위 확정 · 01a198d6
 
 - 기록 ID: neutral-selection-freeze-01a198d6. 기록 시각: 2026-11-02T05:53:12+09:00. 기록자·범위 분리 판단 주체 Codex /root, 로컬 커밋 결정 주체 사용자. 출처 현재 채팅 01a198d6-9b56-71a0-b875-c10f4d1ecd1c, H:/Spawner, Windows/PowerShell. 원 발언 정확한 시각·턴·항목·딥링크·PC 식별은 불명.

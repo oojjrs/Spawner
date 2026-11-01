@@ -10,10 +10,14 @@ export function createBeginnerHelp(document, onAction) {
     if (panel.hidden) return;
     const last = offer.buildingName.charCodeAt(offer.buildingName.length - 1) - 0xac00;
     const particle = last >= 0 && last <= 11171 && last % 28 ? "을" : "를";
+    const resources = (offer.requirements || []).filter(item => offer.resources?.includes(item.type));
     const content = offer.kind === "upgrade" ? "둥지를 성장시킬 수 있습니다." :
-      offer.kind === "military" ? "확장한 영역을 지킬 군사 개체를 준비해볼까요?" : offer.buildingName + particle + " 마련할 개체를 준비해볼까요?";
+      offer.kind === "military" ? "확장한 영역을 지킬 군사 개체를 준비해볼까요?" :
+      offer.kind === "harvest" ? resources.map(item => item.name).join("·") + " 채집을 맡을 개체를 준비해볼까요?" :
+      offer.kind === "transport" ? "자원 운반을 보조할 개체를 준비해볼까요?" :
+      offer.buildingName + particle + " 지을 변태 개체를 준비해볼까요?";
     if (text.textContent !== content) text.textContent = content;
-    const requirements = offer.kind === "upgrade" ? "Lv." + (offer.level - 1) + " → Lv." + offer.level : (offer.requirements || []).filter(item => offer.kind === "harvest" ? item.missing > 0 : item.amount > 0).map(item => item.name + " " + (offer.kind === "harvest" ? item.missing : item.amount))
+    const requirements = offer.kind === "upgrade" ? "Lv." + (offer.level - 1) + " → Lv." + offer.level : (offer.kind === "harvest" ? resources : offer.requirements || []).filter(item => offer.kind === "harvest" ? item.missing > 0 : item.amount > 0).map(item => item.name + " " + (offer.kind === "harvest" ? item.missing : item.amount))
       .concat(offer.attributes || []).join(" · ");
     if (details.textContent !== requirements) details.textContent = requirements;
     details.hidden = !requirements;

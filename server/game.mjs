@@ -24,7 +24,7 @@ import { resourceHabitatSuitability } from "./resource-habitats.mjs";
 import { tribeHazardKind, tribeTerrainWalkable } from "./tribe-environment.mjs";
 import { createResourceStorage } from "./resource-storage.mjs";
 import { createConstructionSupply } from "./construction-supply.mjs";
-import { constructionHelp, constructionHelpTemplate } from "./beginner-help.mjs";
+import { constructionHelp, constructionHelpTemplate, constructionHelpIssue } from "./beginner-help.mjs";
 import { constructionHarvestNeeds } from "./construction-harvest.mjs";
 
 export function createGame(environment, colony, savedGame) {
@@ -2151,13 +2151,26 @@ export function createGame(environment, colony, savedGame) {
 
     function birthConstructionHelp(offer, required) {
       const template = constructionHelpTemplate({...state,tribe:colony.tribe}, offer.slots, offer.kind);
+      const attributes = attributeCounts(template.slots, template.attributeLevels);
+      const matches = template.slots.length === offer.slots.length && offer.slots.every(key => template.slots.includes(key)) &&
+        birthCost(template,colony.tribe) === offer.cost;
+      const eligible = offer.kind === "harvest" ? offer.resources.length > 0 && offer.resources.every(type =>
+        canHarvestResource({resourceType:type},worldMap,attributes,colony.tribe)) : offer.kind === "construction" ? attributes.construction > 0 :
+        offer.kind !== "military" || ATTRIBUTES.some(attribute => attribute.kind === "combat" && attributes[attribute.key] > 0);
+      if (!matches || !eligible) {
+        if (!required) return {};
+        throw new Error("추천 개체의 필수 속성을 확인해 주세요.");
+      }
       const previous = state.templates.includes(template);
       const agentId = birth(template, required, null, availableSpawnCells(null)[0]);
       if (!agentId) return {};
       if (!previous) { state.templates.push(template); state.nextTemplateId += 1; }
       state.constructionHelpResult = {templateId:template.id, agentId, step:offer.step, kind:offer.kind, producedAt:state.simSeconds};
       constructionHelpPreview = null;
-      if (offer.kind === "military") state.militaryGuidanceCompleted = true;
+      if (offer.kind === "military") {
+        state.agents.find(agent => agent.id === agentId).productionRole = "military";
+        state.militaryGuidanceCompleted = true;
+      }
       return {...state.constructionHelpResult};
     }
 
@@ -2285,16 +2298,17 @@ export function createGame(environment, colony, savedGame) {
       const defenders = state.agents.filter(agent => {
         if (!(agent.health > 0) || agent.construction) return false;
         const attributes = agent.attributes || attributeCounts(agent.slots,agent.attributeLevels);
-        return !attributes.construction && ATTRIBUTES.some(attribute => attribute.kind === "combat" && attributes[attribute.key] > 0);
+        return !attributes.construction && militaryAgent(agent,colony.tribe) &&
+          ATTRIBUTES.some(attribute => attribute.kind === "combat" && attributes[attribute.key] > 0);
       });
       if (automatic !== true && state.nestLevel >= 2 && state.simSeconds >= CONQUEST_PACING.neutralConflictAt*(TRIBE_PACING[colony.tribe]?.tempo||1) &&
           !defenders.length) {
-        const slots = TRIBE_PACING[colony.tribe].army.filter(key => isAttributeUnlocked(key,state.nestLevel,colony.tribe)).slice(0,state.nestLevel);
+        const slots = TRIBE_PACING[colony.tribe].army.filter(key => isAttributeUnlocked(key,state.nestLevel,colony.tribe) &&
+          ATTRIBUTES.some(attribute => attribute.key === key && attribute.kind === "combat")).slice(0,state.nestLevel);
         const template = constructionHelpTemplate({...state,tribe:colony.tribe},slots,"military");
         const cost = birthCost(template,colony.tribe);
-        const issue = state.evolutionPoints < cost ? "진화 포인트가 부족합니다." :
-          !state.templates.includes(template) && state.templates.length >= 100 ? "설계는 최대 100개까지 저장할 수 있습니다." :
-          !availableSpawnCells(null).length ? "둥지 주변이 가득 찼습니다." : null;
+        const issue = constructionHelpIssue(state,colony.tribe,template) ||
+          (!availableSpawnCells(null).length ? "둥지 주변이 가득 찼습니다." : null);
         return {kind:"military",step:"military:"+state.nestLevel,buildingKey:"military",buildingName:"군사 개체",name:template.name,
           slots:template.slots,resources:[],requirements:[],attributes:template.slots.map(key=>ATTRIBUTES.find(attribute=>attribute.key===key).name),cost,
           templateId:state.templates.includes(template)?template.id:null,canProduce:!issue,issue};
@@ -2311,7 +2325,7 @@ export function createGame(environment, colony, savedGame) {
       if (!positions.length) return null;
       const locked = buildingDefinition(objective.need.buildingKey).minNestLevel > state.nestLevel;
       if (locked) {
-        if (offer?.kind === "construction" || colony.tribe === "pebble" && offer?.kind === "harvest") offer = null;
+        if (offer?.kind === "construction") offer = null;
         const pending = state.agents.some(agent => agent.health > 0 && agent.birth);
         const allocation = constructionSupply.allocation();
         const workers = state.agents.filter(agent => agent.health > 0 && !agent.attributes?.construction);
@@ -2320,8 +2334,8 @@ export function createGame(environment, colony, savedGame) {
           .reduce((sum,agent) => sum + birthCost(agent,colony.tribe),0);
         if (!pending && state.evolutionPoints + allocation.incomingFood + allocation.productionRate * horizon <
             nestUpgradeCost(state.nestLevel,colony.tribe) + replacement) {
-          const support = constructionHelp(state,colony.tribe,enabled,objective.need,stock,worldMap,true,foragers);
-          const template = constructionHelpTemplate({...state,tribe:colony.tribe},support.slots,"transport");
+          const support = constructionHelp(state,colony.tribe,enabled,objective.need,stock,worldMap,true,foragers,harvestNeeds);
+          const template = constructionHelpTemplate({...state,tribe:colony.tribe},support.slots,support.kind);
           const worker = constructionPreview(template,positions[0]);worker.id += ":growth";
           const projected = {...state,evolutionPoints:Math.max(0,state.evolutionPoints - support.cost),agents:state.agents.concat(worker)};
           const forecast = createConstructionSupply({...constructionSupplyContext,state:projected}).allocation();
@@ -2338,12 +2352,12 @@ export function createGame(environment, colony, savedGame) {
         const estimated = delivered + incoming > 0 ? remaining * elapsed / (delivered + incoming) + 30 : Infinity;
         const pendingWorker = state.agents.some(agent => agent.health > 0 && agent.birth && !agent.attributes?.construction);
         if (remaining > 0 && elapsed > 25 && estimated > Math.max(30,(active.bornAt + active.lifespan - state.simSeconds) / 2) && !pendingWorker) {
-          offer = constructionHelp(state,colony.tribe,enabled,objective.need,stock,worldMap,true,foragers);
+          offer = constructionHelp(state,colony.tribe,enabled,objective.need,stock,worldMap,true,foragers,harvestNeeds);
         }
       }
       if (!active && !state.agents.some(agent => agent.health >= agent.stats.health * .6 && !agent.attributes?.construction &&
           agent.bornAt + agent.lifespan - state.simSeconds > 30)) {
-        offer = constructionHelp(state,colony.tribe,enabled,objective.need,stock,worldMap,true,foragers);
+        offer = constructionHelp(state,colony.tribe,enabled,objective.need,stock,worldMap,true,foragers,harvestNeeds);
       }
       if (!offer && !active) {
         const workers = state.agents.filter(agent => agent.health > 0 && !agent.attributes?.construction &&
@@ -2353,7 +2367,7 @@ export function createGame(environment, colony, savedGame) {
         const ready = Object.entries(objective.need.cost.materials).every(([type,amount]) => (stock[type] || 0) >= amount);
         if (!workers.length || builder && !constructionPlansFor({...builder,carrying:0,birth:null},state,constructionSupply).length &&
             (ready || constructionSupply.allocation().forecastBalance < 0)) {
-          offer = constructionHelp(state,colony.tribe,enabled,objective.need,stock,worldMap,true,foragers);
+          offer = constructionHelp(state,colony.tribe,enabled,objective.need,stock,worldMap,true,foragers,harvestNeeds);
         }
       }
       if (!offer) return null;
@@ -2362,9 +2376,9 @@ export function createGame(environment, colony, savedGame) {
       const foodSpecialists = offer.kind === "harvest" && state.agents.some(agent => agent.health >= agent.stats.health * .6 &&
         !agent.construction && foragers.has(agent.id) && offer.resources.some(type =>
           resourceDefinition(type).requirements.every(key => agent.attributes?.[key] > 0)));
-      if (foodSpecialists && !pending) offer = constructionHelp(state,colony.tribe,enabled,objective.need,stock,worldMap,true,foragers);
+      if (foodSpecialists && !pending) offer = constructionHelp(state,colony.tribe,enabled,objective.need,stock,worldMap,true,foragers,harvestNeeds);
       if (offer.kind === "harvest" && !pending && allocation.forecastBalance < 0 && allocation.productionRate < allocation.requiredRate) {
-        offer = constructionHelp(state, colony.tribe, enabled, objective.need, stock, worldMap,true,foragers);
+        offer = constructionHelp(state, colony.tribe, enabled, objective.need, stock, worldMap,true,foragers,harvestNeeds);
       }
       if (offer.kind === "construction") {
         if (active) return null;
@@ -2375,8 +2389,8 @@ export function createGame(environment, colony, savedGame) {
         const candidateSites = constructionSites(preview,projected,[objective.need]);
         if (!constructionPlansFor(preview,projected,supply,candidateSites).length) {
           if (pending) return null;
-          const supportOffer = constructionHelp(state,colony.tribe,enabled,objective.need,stock,worldMap,true,foragers);
-          const supportTemplate = constructionHelpTemplate({...state,tribe:colony.tribe},supportOffer.slots,"transport");
+          const supportOffer = constructionHelp(state,colony.tribe,enabled,objective.need,stock,worldMap,true,foragers,harvestNeeds);
+          const supportTemplate = constructionHelpTemplate({...state,tribe:colony.tribe},supportOffer.slots,supportOffer.kind);
           const worker = constructionPreview(supportTemplate,positions[0]);worker.id += ":courier";
           const supported = {...projected,evolutionPoints:Math.max(0,projected.evolutionPoints - supportOffer.cost),
             agents:projected.agents.concat(worker)};
@@ -2389,7 +2403,7 @@ export function createGame(environment, colony, savedGame) {
               after.deliveredUnits === before?.deliveredUnits && after.deliverySeconds + 1e-8 < before.deliverySeconds);
           });
           if (!useful) return null;
-          offer = constructionHelp(state, colony.tribe, enabled, objective.need, stock, worldMap,true,foragers);
+          offer = constructionHelp(state, colony.tribe, enabled, objective.need, stock, worldMap,true,foragers,harvestNeeds);
         }
       }
       if (offer.kind === "transport" && pending) return null;

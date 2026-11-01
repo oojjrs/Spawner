@@ -17,6 +17,15 @@ export function constructionHelpTemplate(state, slots, kind) {
     unlockedAttributeLevels: Object.fromEntries(slots.map(key => [key, 1])), revision: 1 };
 }
 
+export function constructionHelpIssue(state, tribe, template) {
+  if (template.slots.length > state.nestLevel || template.slots.some(key => !isAttributeUnlocked(key, state.nestLevel, tribe))) {
+    return "필요한 속성을 갖추려면 둥지를 성장시켜 주세요.";
+  }
+  if (state.evolutionPoints < birthCost(template, tribe)) return "진화 포인트가 부족합니다.";
+  if (!state.templates.includes(template) && state.templates.length >= 100) return "설계는 최대 100개까지 저장할 수 있습니다.";
+  return null;
+}
+
 export function constructionHelp(state, tribe, enabled, goal, stock, world, support, foragers, harvestNeeds) {
   const building = buildingDefinition(goal?.buildingKey);
   if (!enabled || state.ending || !building) return null;
@@ -35,25 +44,31 @@ export function constructionHelp(state, tribe, enabled, goal, stock, world, supp
     });
   });
   let kind = "construction", resources = [], slots = ["construction"];
-  if (support) { kind = "transport"; slots = []; }
-  else if (uncovered.length) {
-    kind = "harvest"; resources = uncovered;
-    slots = [...new Set(uncovered.flatMap(type => Object.entries(resourceHarvestRequirements({resourceType:type}, world, tribe)).filter(([,level]) => level > 0).map(([key]) => key)))];
-    slots = slots.slice(0, state.nestLevel);
-    resources = uncovered.filter(type => Object.entries(resourceHarvestRequirements({resourceType:type}, world, tribe)).filter(([,level]) => level > 0).every(([key]) => slots.includes(key)));
-  } else if (Object.keys(missing).length || state.agents.some(agent => agent.health > 0 && agent.slots.includes("construction") &&
+  if (uncovered.length) {
+    kind = "harvest"; slots = [];
+    for (const type of uncovered) {
+      const required = Object.entries(resourceHarvestRequirements({resourceType:type}, world, tribe)).filter(([,level]) => level > 0).map(([key]) => key);
+      const combined = [...new Set(slots.concat(required))];
+      if (combined.length > state.nestLevel) continue;
+      resources.push(type); slots = combined;
+    }
+    if (!resources.length) {
+      resources = [uncovered[0]];
+      slots = Object.entries(resourceHarvestRequirements({resourceType:resources[0]}, world, tribe)).filter(([,level]) => level > 0).map(([key]) => key);
+    }
+  } else if (support) { kind = "transport"; slots = []; }
+  else if (Object.keys(missing).length || state.agents.some(agent => agent.health > 0 && agent.slots.includes("construction") &&
       (agent.construction || (!agent.stats || agent.health >= agent.stats.health * .6) &&
         (!Number.isFinite(agent.lifespan) || agent.bornAt + agent.lifespan - state.simSeconds > 60)))) return null;
   const template = constructionHelpTemplate({ ...state, tribe }, slots, kind);
   const cost = birthCost(template, tribe);
-  const issue = state.evolutionPoints < cost ? "진화 포인트가 부족합니다." :
-    !state.templates.includes(template) && state.templates.length >= 100 ? "설계는 최대 100개까지 저장할 수 있습니다." : null;
+  const issue = constructionHelpIssue(state, tribe, template);
   const members = (kind === "construction" ? state.agents.filter(agent => agent.health > 0) : ordinary)
     .filter(agent => slots.every(key => agent.slots.includes(key))).map(agent => agent.id).sort().join(",");
   return { kind, step: building.key + ":" + kind + ":" + slots.join(",") + ":" + members,
     buildingKey: building.key, buildingName: building.name, name: template.name, slots: [...template.slots],
     attributeLevels: { ...template.attributeLevels }, resources, requirements: Object.entries(goal.cost.materials).map(([type, amount]) =>
       ({ type, name: resourceDefinition(type).name, amount, missing: missing[type] || 0 })),
-    attributes: slots.map(key => ATTRIBUTES.find(attribute => attribute.key === key).name), cost,
+    attributes: template.slots.map(key => ATTRIBUTES.find(attribute => attribute.key === key).name), cost,
     templateId: state.templates.includes(template) ? template.id : null, canProduce: !issue, issue };
 }

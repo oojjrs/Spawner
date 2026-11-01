@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
 import { createGame } from "./game.mjs";
+import { createDecisionPool } from "../client/decision-pool.mjs";
 import { createCombat, colonyDefenseTarget, canPursueCombat } from "./combat.mjs";
 
 const runtime = readFileSync(new URL("../client/runtime.js", import.meta.url), "utf8");
@@ -223,43 +224,51 @@ for (const [surface, api] of surfaces) {
   });
 }
 
-test("일반 전투와 같은 목표라도 방어 전환 전의 병렬 판단 결과는 적용하지 않는다", () => {
-  let worker;
-  const context = { navigator: { hardwareConcurrency: 3 }, performance,
-    Worker: class { constructor() { worker = this; this.messages = []; } postMessage(message) { this.messages.push(message); } terminate() {} },
-    Blob: class {}, URL: { createObjectURL: () => "worker", revokeObjectURL() {} } };
-  const source = readFileSync(new URL("../client/decision-pool.mjs", import.meta.url), "utf8");
-  runInNewContext(source.replace(/^export /gm, "") + ";globalThis.createPool = createDecisionPool;", context);
+test("일반 전투와 같은 목표라도 방어 전환 전의 판단 결과는 적용하지 않는다", () => {
   const agent = { id: "one", x: 1, y: 1, health: 100, carrying: 0, attributes: {}, level: 1,
     utility: { action: "fight", target: { key: "beetle" }, defending: false } };
-  const game = { agents: [agent], buildings: [], nest: {}, save: () => "saved", rememberForagers() {} };
-  const room = { games: new Map([["owner", game]]), simSeconds: 0, world: {}, food: new Map(), colonies: [] };
-  const pool = context.createPool(room);
-  pool.request("owner", agent, "periodic"); pool.flush();
-  const job = worker.messages.find(message => message.type === "plan"), request = job.requests[0];
-  worker.onmessage({ data: { results: [{ ...request, time: 0, candidates: [{ action: "return" }] }] } });
-  agent.utility.defending = true;
-  assert.equal(pool.request("owner", agent, "periodic"), undefined);
-  pool.dispose();
+  let candidates = [{ action: "return" }], calls = 0;
+  const game = { agents: [agent], planDecisions(requests) {
+    assert.deepEqual(requests.map(request => request.id), [agent.id]);
+    calls++; return [candidates];
+  } };
+  const room = { games: new Map([["owner", game]]), simSeconds: 0, world: {size:40} };
+  const pool = createDecisionPool(room);
+  try {
+    pool.request("owner", agent, "periodic"); pool.flush();
+    assert.deepEqual(pool.request("owner", agent, "periodic"), [{ action: "return" }]);
+    pool.request("owner", agent, "periodic"); pool.flush();
+    agent.utility.defending = true;
+    candidates = [{ action: "fight", defending: true }];
+    assert.equal(pool.request("owner", agent, "periodic"), undefined);
+    pool.flush();
+    assert.deepEqual(pool.request("owner", agent, "periodic"), [{ action: "fight", defending: true }]);
+    assert.equal(calls, 3);
+  } finally { pool.dispose(); }
 });
 
 
-test("방어 전의 병렬 판단 결과는 같은 채집 작업에 복귀한 뒤에도 적용하지 않는다", () => {
-  let worker;
-  const context = { navigator: { hardwareConcurrency: 3 }, performance,
-    Worker: class { constructor() { worker = this; this.messages = []; } postMessage(message) { this.messages.push(message); } terminate() {} },
-    Blob: class {}, URL: { createObjectURL: () => "worker", revokeObjectURL() {} } };
-  const source = readFileSync(new URL("../client/decision-pool.mjs", import.meta.url), "utf8");
-  runInNewContext(source.replace(/^export /gm, "") + ";globalThis.createPool = createDecisionPool;", context);
+test("방어 전의 판단 결과는 같은 채집 작업에 복귀한 뒤에도 적용하지 않는다", () => {
   const agent = { id: "one", x: 1, y: 1, health: 100, carrying: 0, attributes: {}, level: 1,
     utility: { action: "collect", target: { key: "18,12" } }, defenseRevision: 0 };
-  const game = { agents: [agent], buildings: [], nest: {}, save: () => "saved", rememberForagers() {} };
-  const room = { games: new Map([["owner", game]]), simSeconds: 0, world: {}, food: new Map(), colonies: [] };
-  const pool = context.createPool(room);
-  pool.request("owner", agent, "periodic"); pool.flush();
-  const request = worker.messages.find(message => message.type === "plan").requests[0];
-  worker.onmessage({ data: { results: [{ ...request, time: 0, candidates: [{ action: "explore" }] }] } });
-  agent.defenseRevision = 1;
-  assert.equal(pool.request("owner", agent, "periodic"), undefined);
-  pool.dispose();
+  let candidates = [{ action: "explore" }], calls = 0;
+  const game = { agents: [agent], planDecisions(requests) {
+    assert.deepEqual(requests.map(request => request.id), [agent.id]);
+    calls++; return [candidates];
+  } };
+  const room = { games: new Map([["owner", game]]), simSeconds: 0, world: {size:40} };
+  const pool = createDecisionPool(room);
+  try {
+    pool.request("owner", agent, "periodic"); pool.flush();
+    assert.deepEqual(pool.request("owner", agent, "periodic"), [{ action: "explore" }]);
+    pool.request("owner", agent, "periodic"); pool.flush();
+    agent.utility = { action: "fight", target: { key: "beetle" }, defending: true };
+    agent.defenseRevision = 1;
+    agent.utility = { action: "collect", target: { key: "18,12" } };
+    candidates = [{ action: "collect", target: { key: "18,12" } }];
+    assert.equal(pool.request("owner", agent, "periodic"), undefined);
+    pool.flush();
+    assert.deepEqual(pool.request("owner", agent, "periodic"), [{ action: "collect", target: { key: "18,12" } }]);
+    assert.equal(calls, 3);
+  } finally { pool.dispose(); }
 });
