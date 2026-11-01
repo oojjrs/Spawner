@@ -2062,10 +2062,10 @@
 
     function visibleAgents() {
       const view = agentView, camera = state.camera;
-      if (view.time === state.simSeconds && view.agents === state.agents && view.rivals === state.rivals &&
+      if (view.time === state.simSeconds && view.agents === state.agents && view.rivals === state.rivals && view.visible === state.visible &&
           view.x === camera.x && view.y === camera.y && view.zoom === camera.zoom &&
           view.width === viewport.width && view.height === viewport.height) return view.units;
-      Object.assign(view, { time: state.simSeconds, agents: state.agents, rivals: state.rivals,
+      Object.assign(view, { time: state.simSeconds, agents: state.agents, rivals: state.rivals, visible: state.visible,
         x: camera.x, y: camera.y, zoom: camera.zoom, width: viewport.width, height: viewport.height });
       const left = camera.x - viewport.width / camera.zoom / 2 - 6;
       const right = camera.x + viewport.width / camera.zoom / 2 + 6;
@@ -2077,6 +2077,11 @@
         const x = agent.renderFromX ?? agent.x, y = agent.renderFromY ?? agent.y;
         if (Math.max(agent.x, x, birth?.fromX ?? x) < left || Math.min(agent.x, x, birth?.fromX ?? x) > right ||
             Math.max(agent.y, y, birth?.fromY ?? y) < top || Math.min(agent.y, y, birth?.fromY ?? y) > bottom) continue;
+        if (list === state.rivals) {
+          if (!state.visible.has(source.y * WORLD_SIZE + source.x)) continue;
+          const position = camera.zoom < 8 ? agent : agentBasePosition(agent);
+          if (!state.visible.has(Math.floor(position.y + .5) * WORLD_SIZE + Math.floor(position.x + .5))) continue;
+        }
         view.units.push(source);
       }
       return view.units;
@@ -3878,7 +3883,7 @@
     function interpolatedAgentPosition(agent) {
       agent = displayedAgent(agent);
       const cached = agentPositions.get(agent);
-      if (cached?.time === state.simSeconds && cached.agents === state.agents && cached.rivals === state.rivals &&
+      if (cached?.time === state.simSeconds && cached.agents === state.agents && cached.rivals === state.rivals && cached.visible === state.visible &&
           cached.zoom === state.camera.zoom && cached.x === state.camera.x && cached.y === state.camera.y &&
           cached.width === viewport.width && cached.height === viewport.height) return cached.position;
       const birth = state.camera.zoom < 8 ? null : agentBirthPose(agent, true);
@@ -3886,7 +3891,7 @@
         birth ? { x: birth.x, y: birth.y, progress: 1 } : agentBasePosition(agent);
       const offset = birth || state.camera.zoom < 8 ? { x: 0, y: 0 } : agentDisplayOffset(agent);
       const position = { x: base.x + offset.x, y: base.y + offset.y, progress: base.progress };
-      agentPositions.set(agent, { time: state.simSeconds, agents: state.agents, rivals: state.rivals,
+      agentPositions.set(agent, { time: state.simSeconds, agents: state.agents, rivals: state.rivals, visible: state.visible,
         zoom: state.camera.zoom, x: state.camera.x, y: state.camera.y, width: viewport.width, height: viewport.height, position });
       return position;
     }
@@ -5014,8 +5019,11 @@
     }
 
     function drawAgent(now, agent) {
+      const position = interpolatedAgentPosition(agent);
+      if ((agent.species || agent.faction === "rival") &&
+          !state.visible.has(Math.floor(position.y + .5) * WORLD_SIZE + Math.floor(position.x + .5))) return;
       if (state.camera.zoom < 8) {
-        const position = interpolatedAgentPosition(agent), point = worldToScreen(position.x + .5, position.y + .5);
+        const point = worldToScreen(position.x + .5, position.y + .5);
         ctx.fillStyle = agent.species ? agent.faction === "hostile" ? "#c36c87" : "#b9c685" : agent.carrying > 0 ? "#d6b26b" : agent.faction === "rival" ? "#c78e86" : "#75c4b6";
         if (objectOutlineColor("agent", agent)) { ctx.fillStyle = "#fff2ba"; ctx.fillRect(Math.floor(point.x - 2), Math.floor(point.y - 2), 5, 5); }
         ctx.fillRect(Math.floor(point.x - 1), Math.floor(point.y - 1), 3, 3);
@@ -5028,7 +5036,6 @@
         return;
       }
       agent = displayedAgent(agent);
-      const position = interpolatedAgentPosition(agent);
       const center = worldToScreen(position.x + .5, position.y + .5);
       const attack = agent.attack;
       const progress = attack ? (state.simSeconds - attack.startedAt) / (attack.endsAt - attack.startedAt) : -1;
