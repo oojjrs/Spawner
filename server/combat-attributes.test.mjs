@@ -37,10 +37,11 @@ test("채집을 겸하는 전투 속성을 포함한 12종의 속성은 고정 �
   }
 });
 
-test("칼날은 공격만 강화하고 관통은 갑피만 무시한다", () => {
+test("기본 전투력과 별도로 칼날의 공격 보너스와 관통의 갑피 무시를 적용한다", () => {
   const plain = unit("plain", "a", []), blade = unit("blade", "a", ["blade"]);
   const shell = unit("shell", "b", ["carapace"]);
   const piercer = unit("piercer", "a", ["piercing"]);
+  for (const agent of [blade, shell, piercer]) agent.stats.combatStrength = plain.stats.combatStrength;
   assert.ok(combatDamage(blade, plain, .5) > combatDamage(plain, plain, .5));
   assert.equal(combatDamage(plain, blade, .5), combatDamage(plain, plain, .5));
   assert.ok(combatDamage(plain, shell, .5) < combatDamage(plain, plain, .5));
@@ -150,6 +151,8 @@ test("네 종족에서 고정 속성 설계·탄생·저장 복원을 지원하�
       const agent = game.agents.find(agent => agent.id === id);
       assert.ok(COMBAT_ATTRIBUTE_KEYS.some(key => agent.attributes[key] >= 1));
       assert.equal(agent.stats.health, 100);
+      assert.ok(agent.stats.combatStrength >= unitStats(agent.attributes, tribe).combatStrength);
+      assert.ok(agent.stats.combatStrength > unitStats({}, tribe).combatStrength);
     }
   }
 });

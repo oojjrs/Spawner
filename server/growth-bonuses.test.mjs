@@ -14,7 +14,7 @@ function fixture(tribe) {
   return { game, environment };
 }
 
-test("Lv.5는 모든 부족의 설계에 이동 8%·채집 12%·전투력 2를 더하고 다른 능력과 체력을 유지한다", () => {
+test("Lv.5는 모든 부족의 설계에 이동 8%·채집 20%·전투력 2를 더하고 다른 능력과 체력을 유지한다", () => {
   for (const tribe of ["bean", "spore", "pebble", "spring"]) {
     const slots = ["feet", "strength", "antenna", "lifespan", "construction"];
     const base = unitStats(attributeCounts(slots), tribe);
@@ -22,7 +22,7 @@ test("Lv.5는 모든 부족의 설계에 이동 8%·채집 12%·전투력 2를 �
     applyAgentGrowth(agent, 0);
     assert.equal(agent.level, 5);
     assert.ok(Math.abs(unitMovementSpeed(agent.stats) / unitMovementSpeed(base) - 1.08) < 1e-12);
-    assert.equal(agent.stats.harvestSpeedMultiplier, 1.12);
+    assert.equal(agent.stats.harvestSpeedMultiplier, 1.2);
     assert.equal(agent.stats.combatStrength, unitCombatStats(tribe).combatStrength + 2);
     for (const key of ["capacity", "vision", "health", "lifespan", "resistance"]) assert.equal(agent.stats[key], base[key]);
     assert.equal(agent.health, 43);
@@ -47,7 +47,7 @@ test("실제 게임은 저장·복원 때 레벨 보너스를 한 번 적용하�
     const agent = game.agents[0];
     assert.equal(agent.level, 5);
     assert.ok(Math.abs(unitMovementSpeed(agent.stats) - baseline * 1.08) < 1e-12);
-    assert.equal(agent.stats.harvestSpeedMultiplier, 1.12);
+    assert.equal(agent.stats.harvestSpeedMultiplier, 1.2);
     assert.equal(agent.stats.combatStrength, unitCombatStats(tribe).combatStrength + 2);
     const once = { ...agent.stats };
     game.restore(game.save());
@@ -56,7 +56,7 @@ test("실제 게임은 저장·복원 때 레벨 보너스를 한 번 적용하�
   }
 });
 
-test("Lv.5 채집 속도 12%는 준비 시간 뒤의 실제 채집 주기를 1.12로 나눈다", () => {
+test("Lv.5 채집 속도 20%는 준비 시간 뒤의 실제 채집 주기를 1.2로 나눈다", () => {
   const { game, environment } = fixture("bean");
   const saved = JSON.parse(game.save());
   saved.state.agents.splice(1);
@@ -68,7 +68,7 @@ test("Lv.5 채집 속도 12%는 준비 시간 뒤의 실제 채집 주기를 1.1
   environment.food.set("46,42", { x: 46, y: 42, amount: 2, initialAmount: 2, kind: "resource", resourceType: "clay" });
   game.restore(JSON.stringify(saved));
   game.prepare(1); game.tick(1);
-  const firstHarvest = 1 + 2 / 1.12;
+  const firstHarvest = 1 + 4 / 1.2;
   assert.ok(Math.abs(game.agents[0].harvestReady - firstHarvest) < 1e-12);
   game.prepare(firstHarvest - .001); game.tick(firstHarvest - 1 - .001);
   assert.equal(game.agents[0].carrying, 0);

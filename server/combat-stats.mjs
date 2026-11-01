@@ -3,6 +3,15 @@ export const COMBAT_STRENGTH_SCALE = 25;
 export const COMBAT_MAX_INJURY_PENALTY = 10;
 export const UNIT_MAX_HEALTH = 100;
 
+export const ATTRIBUTE_COMBAT_STRENGTH_BONUSES = Object.freeze({
+  blade: 10, piercing: 16, carapace: 8, guard: 8, regeneration: 12
+});
+
+export function attributeCombatStrengthBonus(attributes) {
+  return Object.entries(ATTRIBUTE_COMBAT_STRENGTH_BONUSES).reduce((sum, [key, bonus]) =>
+    sum + (attributes?.[key] > 0 ? bonus : 0), 0);
+}
+
 export const UNIT_COMBAT_STATS = Object.freeze(Object.fromEntries([
   ["bean", 20],
   ["spore", 18],
@@ -57,9 +66,10 @@ export function combatDamage(attacker, target, variation) {
 
 export function migrateCombatStats(agent) {
   const profile = unitCombatStats(agent.species || agent.tribe);
-  if (agent.stats.combatStrength === profile.combatStrength && agent.stats.health === UNIT_MAX_HEALTH) return;
+  const combatStrength = profile.combatStrength + (agent.species ? 0 : attributeCombatStrengthBonus(agent.attributes));
+  if (agent.stats.combatStrength === combatStrength && agent.stats.health === UNIT_MAX_HEALTH) return;
   const health = UNIT_MAX_HEALTH;
   const ratio = Math.max(0, Math.min(1, agent.health / agent.stats.health));
-  agent.stats = { ...agent.stats, health, combatStrength: profile.combatStrength };
+  agent.stats = { ...agent.stats, health, combatStrength };
   agent.health = health * ratio;
 }

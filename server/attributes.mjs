@@ -1,7 +1,7 @@
 import { CONQUEST_PACING } from "./conquest-pacing.mjs";
 import { TRIBE_UNIT_STATS, ATTRIBUTE_STAT_VALUES } from "./unit-stats.mjs";
 import { tribeTerrainSpeedMultiplier } from "./tribe-environment.mjs";
-import { unitCombatStats } from "./combat-stats.mjs";
+import { unitCombatStats, attributeCombatStrengthBonus } from "./combat-stats.mjs";
 
 export const ATTRIBUTES = [
   { key: "antenna", minNestLevel: 1, name: "감지", color: "#b2bffa", effect: "시야 반경 +3칸", description: "유닛의 시야 반경이 늘어납니다.", bonus: 3, bonuses: [0, 3, 4, 6, 8], stat: "시야 반경", unit: "칸" },
@@ -154,7 +154,7 @@ export function unitStats(attributes, tribe) {
     regeneration: equipped("regeneration") ? ATTRIBUTE_STAT_VALUES.regeneration : 0,
     healing: equipped("regeneration") ? ATTRIBUTE_STAT_VALUES.healing : 0,
     health: combat.health,
-    combatStrength: combat.combatStrength,
+    combatStrength: combat.combatStrength + attributeCombatStrengthBonus(attributes),
     lifespan: equipped("lifespan") ? base.lifespanWithAttribute : base.lifespan,
     resistance: 1
   };

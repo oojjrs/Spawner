@@ -52,7 +52,7 @@ export function codexAttributeEffect(attribute, level, tribe) {
     guard: "아군 받는 피해 −" + Math.round(stats.guardProtection * 100) + "%",
     regeneration: "전투 밖 아군 치유 " + stats.healing + " · 자기 회복 " + stats.regeneration + "/초"
   };
-  const effect = effects[attribute.key] || "";
+  const effect = [stats.combatStrength > base.combatStrength ? "기본 전투력 +" + (stats.combatStrength - base.combatStrength) : "", effects[attribute.key] || ""].filter(Boolean).join(" · ");
   if (!attribute.harvests?.length) return effect;
   const resource = RESOURCE_TYPES.find(resource => resource.key === attribute.harvests[0]);
   const multiplier = resourceHarvestMultiplier(resource.key, { [attribute.key]: level }, tribe);

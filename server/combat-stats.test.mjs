@@ -70,10 +70,11 @@ test("4종족과 모든 생물 23종을 정의하고 체력은 모두 100이며 
 test("전투 수치를 바꿔도 4종족의 이속·시야·운반·수명 수치는 유지한다", () => {
   for (const tribe of PLAYER_TRIBES) {
     const stats = unitStats(attributeCounts(["feet", "antenna", "strength", "lifespan"]), tribe.key);
-    assert.equal(stats.speed, 1.5);
-    assert.equal(stats.vision, 5);
+    const speeds = { bean: .8, spore: .8, pebble: .65, spring: 1.2 };
+    assert.ok(Math.abs(stats.speed - speeds[tribe.key]) < 1e-12);
+    assert.equal(stats.vision, 6);
     assert.equal(stats.capacity, 2);
-    assert.equal(stats.lifespan, tribe.key === "pebble" ? 420 : 300);
+    assert.equal(stats.lifespan, tribe.key === "pebble" ? 360 : 300);
     assert.equal(stats.resistance, 1);
     assert.equal(stats.combatStrength, unitCombatStats(tribe.key).combatStrength);
   }
@@ -123,9 +124,12 @@ test("실제 4종족의 생성·이전 저장·성장·재복원에 종족별 �
 
 test("실제 생물 생성과 이전 저장 복원에서도 생물별 전투 수치를 사용한다", () => {
   const room = environment();
+  room.simSeconds = ENCOUNTER_TYPES.find(type => type.key === "talon-owl").firstSpawnAt;
   room.world.encounters = [{ key: "talon-owl", x: 140, y: 140, radius: 22, safeRadius: 10, terrains: [4],
     cells: [140 * 320 + 140], spawnPoints: [140 * 320 + 140], route: [] }];
   const creatures = createCreatures(room, null);
+  assert.equal(creatures.agents.length, 1);
+  assert.equal(creatures.agents[0].species, "talon-owl");
   assert.equal(creatures.agents[0].stats.combatStrength, 44);
   assert.equal(creatures.agents[0].health, 100);
   const saved = JSON.parse(JSON.stringify(creatures.save()));
@@ -136,7 +140,7 @@ test("실제 생물 생성과 이전 저장 복원에서도 생물별 전투 수
   const restored = createCreatures(room, saved).agents[0];
   assert.equal(restored.health, 50);
   assert.equal(restored.stats.combatStrength, 44);
-  assert.equal(restored.stats.speed, .5);
+  assert.equal(restored.stats.speed, 2);
 });
 
 test("탈출로 없는 교전은 이속 강화가 공격 차례를 늘리지 않고 새싹콩이 갈퀴부엉이에게 진다", () => {
