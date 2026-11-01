@@ -85,6 +85,7 @@
     const discoveryToasts = document.getElementById("discovery-toasts");
     const discoveryToastTimers = new Map();
     const discoveryToastQueue = [];
+    const notifiedCombatIds = new Set();
     const objectPanel = document.getElementById("object-panel");
     const agentList = document.getElementById("agent-list");
     const agentListCount = document.getElementById("agent-list-count");
@@ -6337,6 +6338,7 @@
 
     function clearDiscoveryToasts() {
       discoveryToastQueue.length = 0;
+      notifiedCombatIds.clear();
       for (const timer of discoveryToastTimers.values()) clearTimeout(timer);
       discoveryToastTimers.clear();
       discoveryToasts.replaceChildren();
@@ -6424,7 +6426,7 @@
 
     function createDiscoveryImage(entry) {
       const key = entry.key.slice(entry.key.indexOf(":") + 1);
-      let sprite = resourceSprites.get(key) || starterObjectSprite;
+      let sprite = entry.kind === "combat" ? agentSprite(entry.agent) : resourceSprites.get(key) || starterObjectSprite;
       let crop = null;
       if (key === "tree") crop = { x: 0, y: 0, width: forest.sprite.naturalHeight, height: forest.sprite.naturalHeight };
       if (entry.kind === "creature" && key === "spiny-back-beetle") sprite = beetleSprite;
@@ -6471,9 +6473,10 @@
       const open = document.createElement("button");
       open.type = "button";
       open.className = "discovery-toast-open";
-      open.setAttribute("aria-label", entry.name + " · 발견 위치로 이동");
+      const combat = entry.kind === "combat";
+      open.setAttribute("aria-label", combat ? "전투 위치로 이동" : entry.name + " · 발견 위치로 이동");
       const label = document.createElement("small");
-      label.textContent = "발견";
+      label.textContent = combat ? "전투" : "발견";
       open.append(createDiscoveryImage(entry), label);
       open.addEventListener("click", () => {
         dismissDiscoveryToast(toast);
@@ -6482,7 +6485,7 @@
       const close = document.createElement("button");
       close.type = "button";
       close.className = "discovery-toast-close";
-      close.setAttribute("aria-label", entry.name + " 발견 알림 닫기");
+      close.setAttribute("aria-label", combat ? "전투 알림 닫기" : entry.name + " 발견 알림 닫기");
       close.textContent = "×";
       close.addEventListener("click", () => dismissDiscoveryToast(toast));
       toast.append(open, close);
@@ -6497,9 +6500,15 @@
     }
 
     function updateNotifications(previousKeys, firstSnapshot) {
-      if (firstSnapshot) { clearDiscoveryToasts(); return; }
-      const added = state.discoveries.filter(entry => !previousKeys.has(entry.key));
-      if (!added.length) return;
+      if (firstSnapshot) clearDiscoveryToasts();
+      const added = firstSnapshot ? [] : state.discoveries.filter(entry => !previousKeys.has(entry.key));
+      for (const agent of [...state.agents, ...state.rivals]) {
+        const combat = agent.health > 0 && agent.combat;
+        if (!combat || notifiedCombatIds.has(combat.id)) continue;
+        notifiedCombatIds.add(combat.id);
+        if (!firstSnapshot) added.push({ key: combat.id, kind: "combat", name: "전투",
+          x: combat.x, y: combat.y, agent });
+      }
       discoveryToastQueue.push(...added);
       showNextDiscoveryToast();
     }
