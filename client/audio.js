@@ -76,12 +76,16 @@
       button.title = failed ? "소리 사용 불가" : muted ? "배경음악·효과음 켜기" : "배경음악·효과음 끄기";
     }
 
-    function stop() {
-      if (discoverySource) discoverySource.stop();
-      discoverySource = null;
+    function stopWorld() {
       for (const voice of voices) voice.source.stop();
       voices.clear();
       harvests.clear();
+    }
+
+    function stop() {
+      if (discoverySource) discoverySource.stop();
+      discoverySource = null;
+      stopWorld();
       lastPlayed.clear();
     }
 
@@ -142,6 +146,7 @@
     function setWorldVolume(volume) {
       worldVolume = Math.max(0, Math.min(1, volume));
       if (worldGain) worldGain.gain.value = worldVolume;
+      if (worldVolume === 0 && voices.size) stopWorld();
     }
 
     function prepareSource(channel, name) {
@@ -173,7 +178,7 @@
     }
 
     function start(name, volume, loop) {
-      if (!available() || volume <= 0) return null;
+      if (!available() || worldVolume <= 0 || volume <= 0) return null;
       const priority = name.startsWith("nest-growth-") || name.endsWith("-death") ? 3 : name.endsWith("-hurt") ? 2 : name.endsWith("-attack") ? 1 : 0;
       const voice = channels.find(channel => channel.source === null && channel.sources.has(name)) ||
         channels.filter(channel => channel.sources.has(name) && channel.priority < priority)

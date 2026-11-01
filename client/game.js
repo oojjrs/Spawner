@@ -6003,7 +6003,7 @@
           zoomTransition.anchorX, zoomTransition.anchorY);
         if (progress === 1) zoomTransition = null;
       }
-      audio.setWorldVolume(Math.min(1, state.camera.zoom / ZOOM_LAYERS[2]) ** 2);
+      audio.setWorldVolume((state.camera.zoom - ZOOM_LAYERS[2]) / (ZOOM_LAYERS[1] - ZOOM_LAYERS[2]));
     }
 
     function stopCameraTransition() {
@@ -6044,7 +6044,7 @@
       state.camera.x = from.x + (to.x - from.x) * eased;
       state.camera.y = from.y + (to.y - from.y) * eased;
       state.camera.zoom = from.zoom + (to.zoom - from.zoom) * eased;
-      audio.setWorldVolume(Math.min(1, state.camera.zoom / ZOOM_LAYERS[2]) ** 2);
+      audio.setWorldVolume((state.camera.zoom - ZOOM_LAYERS[2]) / (ZOOM_LAYERS[1] - ZOOM_LAYERS[2]));
       clampCamera();
       if (progress === 1) cameraTransition = null;
     }

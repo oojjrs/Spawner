@@ -18,7 +18,7 @@ async function fixture() {
     }
     createBufferSource() {
       return { connect(output) { this.output = output; }, disconnect() {},
-        start() { started.push(this); }, stop() {} };
+        start() { started.push(this); }, stop() { this.stopped = true; queueMicrotask(() => this.onended?.()); } };
     }
     async decodeAudioData(file) { return { file }; }
   }
@@ -37,7 +37,7 @@ async function fixture() {
 }
 
 function loadCamera(sound) {
-  const state = { camera: { x: 0, y: 0, zoom: layers[2] } };
+  const state = { camera: { x: 0, y: 0, zoom: layers[1] } };
   Object.assign(sound.scope, { audio: sound.audio, state, ZOOM_LAYERS: layers,
     zoomTransition: null, cameraTransition: null, clampCamera() {},
     clamp: (value, low, high) => Math.max(low, Math.min(high, value)),
@@ -77,44 +77,85 @@ test("줌 음량 변경은 재생 중인 전투·채집음에 즉시 반영하�
   assert.equal(harvest.output.gain.value * world.gain.value, .4);
 });
 
-test("둥지·유닛·상세 줌의 음량은 같고 더 멀리 줌아웃할수록 공간음이 감소한다", async () => {
+test("3단계와 그보다 먼 줌은 무음이며 3단계보다 가까워질 때만 공간음을 허용한다", async () => {
   const sound = await fixture();
   const state = loadCamera(sound);
   sound.audio.play("beetle-attack", 1);
   const world = sound.started.at(-1).output.output;
-  for (const zoom of layers.slice(0, 3)) {
+  for (const zoom of layers.slice(0, 2)) {
     state.camera.zoom = zoom;
     sound.scope.updateZoom(0);
     assert.equal(world.gain.value, 1);
   }
-  state.camera.zoom = 18;
+  for (const zoom of [layers[2], 18, layers[3], 4]) {
+    state.camera.zoom = zoom;
+    sound.scope.updateZoom(0);
+    assert.equal(world.gain.value, 0);
+  }
+  state.camera.zoom = layers[2] + .001;
   sound.scope.updateZoom(0);
-  assert.equal(world.gain.value, .25);
-  state.camera.zoom = 8;
+  assert.ok(world.gain.value > 0 && world.gain.value < 1);
+  const nearBoundary = world.gain.value;
+  state.camera.zoom = 72;
   sound.scope.updateZoom(0);
-  assert.ok(world.gain.value > 0 && world.gain.value < .25);
-  const previous = world.gain.value;
-  state.camera.zoom = 4;
-  sound.scope.updateZoom(0);
-  assert.ok(world.gain.value > 0 && world.gain.value < previous);
+  assert.ok(world.gain.value > nearBoundary && world.gain.value < 1);
 });
 
-test("휠 줌과 대상 추적 카메라 이동 모두 현재 프레임의 거리를 공간음에 반영한다", async () => {
+test("휠 줌과 대상 추적 카메라 모두 3단계 경계에서 같은 프레임에 공간음을 차단·복원한다", async () => {
   const sound = await fixture();
   const state = loadCamera(sound);
   sound.audio.play("beetle-attack", 1);
-  const world = sound.started.at(-1).output.output;
-  sound.scope.zoomTransition = { from: 36, to: 8, startedAt: 0, center: null, anchorX: 0, anchorY: 0 };
+  const attack = sound.started.at(-1);
+  const world = attack.output.output;
+  sound.scope.zoomTransition = { from: 144, to: 8, startedAt: 0, center: null, anchorX: 0, anchorY: 0 };
+  sound.scope.updateZoom(40);
+  assert.ok(state.camera.zoom > 36 && state.camera.zoom < 144);
+  assert.ok(world.gain.value > 0 && world.gain.value < 1);
   sound.scope.updateZoom(120);
-  assert.ok(state.camera.zoom > 8 && state.camera.zoom < 36);
-  assert.equal(world.gain.value, (state.camera.zoom / 36) ** 2);
+  assert.ok(state.camera.zoom < 36);
+  assert.equal(world.gain.value, 0);
+  assert.equal(attack.stopped, true);
   sound.scope.updateZoom(240);
   assert.equal(state.camera.zoom, 8);
-  assert.equal(world.gain.value, (8 / 36) ** 2);
-  sound.scope.cameraTransition = { from: { x: 0, y: 0, zoom: 8 }, to: { x: 0, y: 0, zoom: 36 }, startedAt: 240, duration: 240 };
+  assert.equal(world.gain.value, 0);
+  sound.scope.cameraTransition = { from: { x: 0, y: 0, zoom: 8 }, to: { x: 0, y: 0, zoom: 144 }, startedAt: 240, duration: 240 };
+  sound.scope.updateCameraTransition(260);
+  assert.ok(state.camera.zoom < 36);
+  assert.equal(world.gain.value, 0);
   sound.scope.updateCameraTransition(360);
-  assert.ok(state.camera.zoom > 8 && state.camera.zoom < 36);
-  assert.equal(world.gain.value, (state.camera.zoom / 36) ** 2);
+  assert.ok(state.camera.zoom > 36 && state.camera.zoom < 144);
+  assert.ok(world.gain.value > 0 && world.gain.value < 1);
   sound.scope.updateCameraTransition(480);
   assert.equal(world.gain.value, 1);
+});
+
+test("원거리에서는 재생 중인 공간음을 정지하고 새 효과음을 만들지 않으며 줌인 후 지난 소리를 재생하지 않는다", async () => {
+  const sound = await fixture();
+  const click = sound.started.at(-1);
+  sound.audio.play("discovery", 1);
+  const discovery = sound.started.at(-1);
+  sound.audio.play("beetle-attack", 1);
+  const attack = sound.started.at(-1);
+  sound.audio.setHarvest(new Map([["clay", .5]]));
+  const harvest = sound.started.at(-1);
+  sound.audio.setWorldVolume(0);
+  assert.equal(attack.stopped, true);
+  assert.equal(harvest.stopped, true);
+  assert.equal(click.stopped, undefined);
+  assert.equal(discovery.stopped, undefined);
+  const before = sound.started.length;
+  sound.clock.currentTime += 2;
+  sound.audio.play("beetle-attack", 1);
+  sound.audio.setHarvest(new Map([["clay", .5]]));
+  assert.equal(sound.started.length, before);
+  await sound.audio.playClick();
+  sound.audio.play("discovery", 1);
+  assert.equal(sound.started.length, before + 2);
+  const afterUi = sound.started.length;
+  sound.audio.setWorldVolume(1);
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(sound.started.length, afterUi);
+  sound.audio.play("beetle-attack", 1);
+  assert.equal(sound.started.length, afterUi + 1);
+  assert.equal(sound.started.at(-1).buffer.file, "beetle-attack.mp3");
 });
