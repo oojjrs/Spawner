@@ -55,11 +55,15 @@ test("멧돼지는 감지 4칸 안의 목표를 추격하고 출생지 6칸 밖�
   f.player.x = 107;
   advance(f, 2);
   assert.equal(f.agent.returningHome, true);
+  assert.equal(f.agent.x, 106);
+  advance(f, Math.max(.25, f.agent.nextActionAt - f.room.simSeconds));
   assert.equal(f.agent.x, 105);
   Object.assign(f.player, { x: 104, y: 102 });
-  advance(f, 2);
-  assert.equal(f.agent.x, 104);
-  for (let tick = 0; tick < 160 && f.agent.returningHome; tick++) advance(f, .25);
+  advance(f, f.agent.moveDuration);
+  assert.equal(f.agent.x, 105);
+  f.game.agents.length = 0;
+  for (let tick = 0; tick < 20 && f.agent.returningHome; tick++)
+    advance(f, Math.max(.25, f.agent.nextActionAt - f.room.simSeconds));
   assert.equal(f.agent.returningHome, false);
   assert.ok(Math.hypot(f.agent.x - 100, f.agent.y - 100) <= 4);
 });
@@ -77,7 +81,8 @@ test("이전 저장에서 영역 밖에 있는 개체는 걸어서 귀환하며 
   assert.equal(f.agent.x, 119);
   assert.equal(f.agent.returningHome, true);
   assert.equal(f.agent.stats.vision, 4);
-  for (let tick = 0; tick < 240 && f.agent.returningHome; tick++) advance(f, .25);
+  for (let tick = 0; tick < 40 && f.agent.returningHome; tick++)
+    advance(f, Math.max(.25, f.agent.nextActionAt - f.room.simSeconds));
   assert.equal(f.agent.returningHome, false);
   assert.ok(Math.hypot(f.agent.x - 100, f.agent.y - 100) <= 4);
 });
@@ -91,7 +96,7 @@ test("평화형 동물 6종과 비선공 유니크 4종은 기존 배회·대기
     f.agent.stepCount = 2;
     f.system.tick();
     assert.equal(f.agent.x, 110, species);
-    assert.equal(f.agent.y, ["soil-mole", "rolling-acorn"].includes(species) ? 100 : 99, species);
+    assert.equal(f.agent.y, species === "soil-mole" ? 100 : 99, species);
     assert.equal(f.agent.returningHome, undefined, species);
     assert.equal(f.agent.stats.vision, radius, species);
   }

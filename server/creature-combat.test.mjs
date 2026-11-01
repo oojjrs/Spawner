@@ -156,9 +156,9 @@ test("건물 접근·둥지 공격은 점유 셀을 침범하지 않고 활동 �
       occupiedCells: new Set(Array.from({ length: 9 }, (_, index) => index % 3 + "," + Math.floor(index / 3))) });
     tick(context, 720);
     assert.equal(context.agent.x, 101, species);
-    tick(context, 722);
+    tick(context, context.agent.moveStartedAt + context.agent.moveDuration);
     assert.equal(context.agent.attack?.targetKind, "nest", species);
-    tick(context, 723);
+    tick(context, context.agent.attack.hitAt);
     assert.ok(target.health < 120, species);
   }
   const context = fixture("vine-turtle", false);
@@ -177,7 +177,7 @@ test("추적하던 마지막 유닛이 죽으면 이동 완료 뒤 건물 공격
     tick(context, 720);
     assert.equal(context.agent.mode, "walk", species);
     target.health = 0;
-    tick(context, 722);
+    tick(context, context.agent.moveStartedAt + context.agent.moveDuration);
     assert.equal(context.agent.attack?.targetKind, "building", species);
   }
 });

@@ -65,8 +65,8 @@ test("대기 후 보행하고 이동 완료 뒤 다시 대기한다", () => {
   system.tick();
   assert.equal(beetle.mode, "walk");
   assert.equal(Math.abs(beetle.x - beetle.renderFromX) + Math.abs(beetle.y - beetle.renderFromY), 1);
-  assert.equal(beetle.moveDuration, 1.28);
-  room.simSeconds += 1.28;
+  assert.equal(beetle.moveDuration, 1 / 1.2);
+  room.simSeconds += beetle.moveDuration;
   system.tick();
   assert.equal(beetle.mode, "idle");
 });

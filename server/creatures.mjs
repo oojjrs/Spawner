@@ -3,7 +3,7 @@ import { beginCreatureSpawn, creatureSpawning } from "./creature-spawn.mjs";
 import { createEncounters } from "./encounters.mjs";
 import { ENCOUNTER_ASSETS } from "./encounter-types.mjs";
 import { BEETLE_ANIMATIONS, BEETLE_ANIMATION_ASSET, BEETLE_ATTACK_ASSET, BEETLE_NEUTRAL_ASSET } from "./beetle-animation.mjs";
-import { unitTerrainSpeedMultiplier } from "./attributes.mjs";
+import { CREATURE_MOVEMENT, applyCreatureMovement, creatureMoveDuration, finishCreatureMove } from "./creature-movement.mjs";
 import { BURROW_TYPES, burrowDistance, burrowApproaches } from "./burrows.mjs";
 import { BEETLE_RAIDS, createBeetleRaids } from "./raids.mjs";
 import { CORPSE_LIFETIME, placeCorpse, expireCorpses } from "./lifespan.mjs";
@@ -22,7 +22,7 @@ export function createCreatures(environment, saved) {
   let encounters = null;
   let initializing = true;
   const species = "spiny-back-beetle";
-  const stats = { ...unitCombatStats(species), attack: 3, speed: .78125, vision: 4, resistance: 1 };
+  const stats = { ...unitCombatStats(species), attack: 3, speed: CREATURE_MOVEMENT[species].speed, vision: 4, resistance: 1 };
   const burrows = environment.world.burrows || [];
   const distribution = environment.world.encounters?.find(plan => plan.key === species && plan.spawnPoints);
   const burrowSites = new Map(burrows.map(burrow => [burrow.id, burrow]));
@@ -205,7 +205,10 @@ export function createCreatures(environment, saved) {
     }
   }
 
-  for (const agent of state.agents) migrateCombatStats(agent);
+  for (const agent of state.agents) {
+    migrateCombatStats(agent);
+    applyCreatureMovement(agent);
+  }
 
   function reinforce(record) {
     if (!distribution || saved) return;
@@ -213,7 +216,7 @@ export function createCreatures(environment, saved) {
     for (let index = count; index < BEETLE_RAIDS.defenders + 1; index++) if (!spawnFromBurrow(record)) break;
   }
   const raids = createBeetleRaids(environment, state, { walkable, occupied, noise, move, idle, reinforce,
-    stepSeconds:1 / stats.speed, release: combat.release }, saved?.version === 5);
+    stepSeconds:1 / stats.speed, restSeconds:CREATURE_MOVEMENT[species].restSeconds, release: combat.release }, saved?.version === 5);
 
   function idle(agent, duration) {
     if (agent.mode !== "idle") agent.animationStartedAt = environment.simSeconds;
@@ -293,7 +296,8 @@ export function createCreatures(environment, saved) {
     agent.x = destination.x;
     agent.y = destination.y;
     agent.moveStartedAt = environment.simSeconds;
-    agent.moveDuration = 1.28 / unitTerrainSpeedMultiplier(agent, environment.world.terrain[agent.y * size + agent.x]);
+    agent.moveDuration = creatureMoveDuration(agent, environment.world.terrain[agent.y * size + agent.x]);
+    agent.nextActionAt = environment.simSeconds + agent.moveDuration + CREATURE_MOVEMENT[species].restSeconds;
     agent.animationStartedAt = environment.simSeconds;
     agent.mode = "walk";
     agent.stepCount++;
@@ -311,6 +315,7 @@ export function createCreatures(environment, saved) {
     for (const agent of state.agents) {
       if (agent.health <= 0 || creatureSpawning(agent, now)) continue;
       if (agent.mode === "spawn") { agent.mode = "idle"; agent.animationStartedAt = agent.spawn.readyAt; }
+      finishCreatureMove(agent, now);
       if (raids.update(agent)) { agent.attack = null; continue; }
       if (combat.update(agent, now)) continue;
       if (now < agent.moveStartedAt + agent.moveDuration) continue;
@@ -344,7 +349,6 @@ export function createCreatures(environment, saved) {
         else idle(agent, .5);
         continue;
       }
-      if (agent.mode === "walk") idle(agent, 1.3 + noise(agent.stepCount, agent.homeX) * 2);
       if (now < agent.nextActionAt) continue;
       if (Math.hypot(agent.x - home.x, agent.y - home.y) > 4) {
         const destination = stepToward(agent, home, agent.raid ? 3 : 0);

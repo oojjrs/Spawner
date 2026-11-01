@@ -2,7 +2,7 @@ import { CONQUEST_PACING } from "./conquest-pacing.mjs";
 import { worldSize } from "./world-size.mjs";
 import { beginCreatureSpawn, creatureSpawning } from "./creature-spawn.mjs";
 import { ENCOUNTER_TYPES } from "./encounter-types.mjs";
-import { unitTerrainSpeedMultiplier } from "./attributes.mjs";
+import { CREATURE_MOVEMENT, applyCreatureMovement, creatureMoveDuration, finishCreatureMove } from "./creature-movement.mjs";
 import { CORPSE_LIFETIME, placeCorpse } from "./lifespan.mjs";
 import { createCombat, canPursueCombat, combatDisposition } from "./combat.mjs";
 import { unitCombatStats, migrateCombatStats } from "./combat-stats.mjs";
@@ -93,6 +93,7 @@ export function createEncounters(environment, saved, residents) {
       delete agent.spawn;
     }
     migrateCombatStats(agent);
+    applyCreatureMovement(agent);
     const territory = encounterTerritory(agent);
     if (territory) agent.stats.vision = territory.detectionRadius;
   }
@@ -200,7 +201,7 @@ export function createEncounters(environment, saved, residents) {
       faction: type.hostile ? "hostile" : "neutral", movementType: type.flying ? "flying" : "ground", encounterKey: record.key,
       x, y, homeX: type.unique ? region.x : plan.spawnPoints ? x : record.x,
       homeY: type.unique ? region.y : plan.spawnPoints ? y : record.y, health: combatStats.health,
-      stats: { ...combatStats, attack: 1, speed: .5, vision: territory ? territory.detectionRadius : plan.radius, resistance: 1 },
+      stats: { ...combatStats, attack: 1, speed: CREATURE_MOVEMENT[record.key].speed, vision: territory ? territory.detectionRadius : plan.radius, resistance: 1 },
       attributes: {}, carrying: 0, renderFromX: x, renderFromY: y, moveStartedAt: environment.simSeconds, moveDuration: 0,
       mode: "idle", nextActionAt: environment.simSeconds, animationStartedAt: environment.simSeconds, facing: 1, stepCount: 0,
       hidden: ["soil-mole", "bubble-toad"].includes(record.key), hiddenUntil: 0, routeCursor: 0, routeDirection: 1,
@@ -302,8 +303,8 @@ export function createEncounters(environment, saved, residents) {
     agent.x = index % size; agent.y = Math.floor(index / size);
     if (agent.x !== agent.renderFromX) agent.facing = agent.x > agent.renderFromX ? 1 : -1;
     agent.moveStartedAt = environment.simSeconds;
-    agent.moveDuration = 2 / unitTerrainSpeedMultiplier(agent, environment.world.terrain[index]);
-    agent.nextActionAt = environment.simSeconds + agent.moveDuration;
+    agent.moveDuration = creatureMoveDuration(agent, environment.world.terrain[index]);
+    agent.nextActionAt = environment.simSeconds + agent.moveDuration + CREATURE_MOVEMENT[agent.species].restSeconds;
     agent.mode = "walk"; agent.stepCount++;
     environment.unitIndex?.update(agent);
   }
@@ -311,6 +312,7 @@ export function createEncounters(environment, saved, residents) {
   function returnHome(agent) {
     agent.returningHome = Math.hypot(agent.x - agent.homeX, agent.y - agent.homeY) > 1;
     if (!agent.returningHome) return false;
+    if (environment.simSeconds < agent.nextActionAt) return true;
     const next = step(agent, { x: agent.homeX, y: agent.homeY }, 1, true);
     if (next !== null) move(agent, next); else agent.nextActionAt = environment.simSeconds + 1;
     return true;
@@ -322,6 +324,7 @@ export function createEncounters(environment, saved, residents) {
     for (const agent of [...state.agents]) {
       if (agent.health <= 0 || creatureSpawning(agent, now)) continue;
       if (agent.mode === "spawn") { agent.mode = "idle"; agent.animationStartedAt = agent.spawn.readyAt; }
+      finishCreatureMove(agent, now);
       if (combat.update(agent, now)) continue;
       if (now < agent.moveStartedAt + agent.moveDuration) continue;
       const plan = plans.get(agent.species), type = types.get(agent.species), membership = memberships.get(agent.species),
@@ -344,12 +347,12 @@ export function createEncounters(environment, saved, residents) {
               membership.has(cell.y * size + cell.x) && withinEncounterTerritory(agent, cell, true))
               .sort((left, right) => Math.abs(agent.x - left.x) + Math.abs(agent.y - left.y) - Math.abs(agent.x - right.x) - Math.abs(agent.y - right.y));
             if (candidate.distance <= 1 && approaches.some(cell => cell.x === agent.x && cell.y === agent.y)) { target = candidate; break; }
-            if (agent.species !== "snare-vine") for (const approach of approaches) {
+            for (const approach of approaches) {
               if (occupied(approach.x, approach.y, agent)) continue;
               pursuit = step(agent, approach, 0, true);
               if (pursuit !== null) break;
             }
-          } else if (agent.species !== "snare-vine") pursuit = step(agent, candidate.agent, 0, true);
+          } else pursuit = step(agent, candidate.agent, 0, true);
           if (pursuit !== null || candidate.distance === 0) { target = candidate; break; }
         }
       }
@@ -362,13 +365,9 @@ export function createEncounters(environment, saved, residents) {
       }
       if (agent.species === "white-paw" && agent.health < agent.stats.health / 2) {
         updateCreatureBuildingAttack(agent, null, now);
+        if (now < agent.nextActionAt) continue;
         const next = step(agent, { x: agent.homeX, y: agent.homeY }, 0, true);
         if (next !== null) move(agent, next); else agent.nextActionAt = now + 2;
-        continue;
-      }
-      if (agent.species === "walking-forest" && agent.stepCount > 0 && agent.stepCount % 4 === 0 && agent.restedStep !== agent.stepCount) {
-        agent.restedStep = agent.stepCount;
-        agent.nextActionAt = now + 2;
         continue;
       }
       const wasHidden = agent.hidden;
@@ -376,7 +375,7 @@ export function createEncounters(environment, saved, residents) {
         agent.species === "bubble-toad" ? !target : agent.species === "dew-rabbit" ? !!target && target.distance <= 2 : false;
       if (agent.hidden) {
         updateCreatureBuildingAttack(agent, null, now);
-        agent.nextActionAt = now + 1;
+        agent.nextActionAt = Math.max(agent.nextActionAt, now + 1);
         continue;
       }
       if (wasHidden && agent.species === "bubble-toad") {
@@ -385,15 +384,15 @@ export function createEncounters(environment, saved, residents) {
       }
       if (type.hostile && target && agent.species === "soil-boar" && agent.warningUntil === null) {
         updateCreatureBuildingAttack(agent, null, now);
-        agent.warningUntil = now + 1; agent.nextActionAt = agent.warningUntil;
+        agent.warningUntil = now + 1;
         continue;
       }
       if (now < agent.warningUntil) continue;
       if (updateCreatureBuildingAttack(agent, target, now)) continue;
-      if (now < agent.nextActionAt) continue;
       if (type.hostile && target && pursuit !== null) { move(agent, pursuit); continue; }
+      if (now < agent.nextActionAt) continue;
       if (territory && !withinEncounterTerritory(agent, agent, false) && returnHome(agent)) continue;
-      if (["snare-vine", "soil-mole", "bubble-toad"].includes(agent.species) || ["talon-owl", "rolling-acorn"].includes(agent.species) && !target) {
+      if (agent.species === "talon-owl" && !target) {
         const next = agent.species === "talon-owl" && (agent.x !== agent.homeX || agent.y !== agent.homeY) ? step(agent, { x: agent.homeX, y: agent.homeY }, 0, true) : null;
         if (next !== null) move(agent, next); else agent.nextActionAt = now + 1;
         continue;

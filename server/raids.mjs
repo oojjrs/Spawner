@@ -174,9 +174,10 @@ export function createBeetleRaids(environment, state, actions, restoring) {
         agent.raid.phase = "active"; agent.raid.activeUntil = now + BEETLE_RAIDS.activityDuration; actions.idle(agent, 0);
         return false;
       }
-      agent.homeX = entrance.x; agent.homeY = entrance.y; delete agent.raid; actions.idle(agent, 1);
+      agent.homeX = entrance.x; agent.homeY = entrance.y; delete agent.raid; actions.idle(agent, actions.restSeconds);
       return true;
     }
+    if (agent.raid.phase === "returning" && now < agent.nextActionAt) return true;
     let route = routes.get(agent.id);
     if (route && now < route.retryAt) return true;
     if (!route || route.phase !== agent.raid.phase || route.path[route.cursor - 1] !== agent.y * size + agent.x) {
