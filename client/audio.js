@@ -38,6 +38,8 @@
   });
   globalThis.SpawnerAudio = Object.freeze({ create: function () {
     let context = null;
+    let worldGain = null;
+    let worldVolume = 1;
     let loading = null;
     let muted = false;
     let active = true;
@@ -56,7 +58,15 @@
     let prepared = false;
     const voices = new Set();
     const lastPlayed = new Map();
-    const levels = { harvest: 0.8, "harvest-soil": 0.8, landing: 1.2, footstep: 0.6, throw: 1.5, catch: 2, "seed-eject": 1, "seed-crack": 1, "sprout-pop": 1, "spring-birth": 0.7, "pebble-birth": 1, "spore-birth": 0.3, "spring-landing": 1.2, "spring-footstep": 0.6 };
+    const levels = { harvest: 0.8, "harvest-soil": 0.8, landing: 1.2, footstep: 0.6, throw: 1.5, catch: 2, "seed-eject": 1, "seed-crack": 1, "sprout-pop": 1, "spring-birth": 0.7, "pebble-birth": 1, "spore-birth": 0.3, "spring-landing": 1.2, "spring-footstep": 0.6,
+      "move-spiny-back-beetle": 0.2140069,
+      "move-spiny-back-leader": 0.2107398,
+      "move-lantern-keeper": 0.4101223,
+      "move-pebble": 0.2307903,
+      "move-spore": 0.1847738,
+      "beetle-attack": 0.7079458,
+      "spiny-back-leader-attack": 0.7079458
+    };
     const button = document.getElementById("sound-toggle");
 
     function updateButton() {
@@ -83,7 +93,12 @@
     async function unlock() {
       if (!active || muted || failed || document.hidden) return;
       try {
-        if (!context) context = new AudioContext();
+        if (!context) {
+          context = new AudioContext();
+          worldGain = context.createGain();
+          worldGain.gain.value = worldVolume;
+          worldGain.connect(context.destination);
+        }
         if (context.state === "suspended") await context.resume();
         if (active && !muted && !document.hidden) music.unlock(context);
         if (!loading) loading = Promise.all(Object.entries(sources).map(async ([name, source]) => {
@@ -96,7 +111,7 @@
           for (let index = 0; index < 8; index++) {
             const gain = context.createGain();
             gain.gain.value = 0;
-            gain.connect(context.destination);
+            gain.connect(worldGain);
             const channel = { gain, sources: new Map(), source: null, name: null, priority: 0 };
             channels.push(channel);
             for (const name of names) channel.sources.set(name, prepareSource(channel, name));
@@ -122,6 +137,11 @@
       active = value;
       if (active) unlock();
       else { stop(); stopClick(); music.suspend(); }
+    }
+
+    function setWorldVolume(volume) {
+      worldVolume = Math.max(0, Math.min(1, volume));
+      if (worldGain) worldGain.gain.value = worldVolume;
     }
 
     function prepareSource(channel, name) {
@@ -269,6 +289,6 @@
     music.update(null);
     updateButton();
     unlock();
-    return { available, play, playClick, setHarvest, setActive, stop, updateMusic: music.update };
+    return { available, play, playClick, setHarvest, setActive, setWorldVolume, stop, updateMusic: music.update };
   } });
 })();

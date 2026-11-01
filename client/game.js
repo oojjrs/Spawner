@@ -3481,7 +3481,7 @@
       const horizontal = Math.abs(position.x - viewport.width / 2) / (viewport.width / 2);
       const vertical = Math.abs(position.y - viewport.height / 2) / (viewport.height / 2);
       if (horizontal >= 1 || vertical >= 1) return 0;
-      return Math.min(1, state.camera.zoom / ZOOM_LAYERS[2]) * (1 - Math.max(horizontal, vertical) * 0.8);
+      return 1 - Math.max(horizontal, vertical) * 0.8;
     }
 
     function updateAudio() {
@@ -5992,16 +5992,18 @@
     }
 
     function updateZoom(now) {
-      if (!zoomTransition) return;
-      const progress = clamp((now - zoomTransition.startedAt) / 240, 0, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      if (zoomTransition.center) {
-        state.camera.x = zoomTransition.center.x + (WORLD_SIZE / 2 - zoomTransition.center.x) * eased;
-        state.camera.y = zoomTransition.center.y + (WORLD_SIZE / 2 - zoomTransition.center.y) * eased;
+      if (zoomTransition) {
+        const progress = clamp((now - zoomTransition.startedAt) / 240, 0, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        if (zoomTransition.center) {
+          state.camera.x = zoomTransition.center.x + (WORLD_SIZE / 2 - zoomTransition.center.x) * eased;
+          state.camera.y = zoomTransition.center.y + (WORLD_SIZE / 2 - zoomTransition.center.y) * eased;
+        }
+        setZoom(zoomTransition.from * Math.pow(zoomTransition.to / zoomTransition.from, eased),
+          zoomTransition.anchorX, zoomTransition.anchorY);
+        if (progress === 1) zoomTransition = null;
       }
-      setZoom(zoomTransition.from * Math.pow(zoomTransition.to / zoomTransition.from, eased),
-        zoomTransition.anchorX, zoomTransition.anchorY);
-      if (progress === 1) zoomTransition = null;
+      audio.setWorldVolume(Math.min(1, state.camera.zoom / ZOOM_LAYERS[2]) ** 2);
     }
 
     function stopCameraTransition() {
@@ -6042,6 +6044,7 @@
       state.camera.x = from.x + (to.x - from.x) * eased;
       state.camera.y = from.y + (to.y - from.y) * eased;
       state.camera.zoom = from.zoom + (to.zoom - from.zoom) * eased;
+      audio.setWorldVolume(Math.min(1, state.camera.zoom / ZOOM_LAYERS[2]) ** 2);
       clampCamera();
       if (progress === 1) cameraTransition = null;
     }
