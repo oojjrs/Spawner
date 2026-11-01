@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { createGame } from "./game.mjs";
 import { createCreatures } from "./creatures.mjs";
-import { tickRoom } from "../client/room.mjs";
+import { tickRoom, createRoom, saveRoom, restoreRoom } from "../client/room.mjs";
 
 function fixture(saved) {
   const tribes = ["bean", "spore", "pebble", "spring"], sites = [[40, 40], [240, 40], [40, 240], [240, 240]];
@@ -68,4 +68,66 @@ test("비가시 종족의 정기 재판단은 틱당 네 개로 분산하고 대
   for (let step = 0; step < 8; step++) tickRoom(room, .1);
   assert.ok(game.agents.every(agent => agent.lastDecisionAt >= 0));
   assert.ok(game.agents.some(agent => agent.stepCount > 0 || agent.moveBudget > 0));
+});
+
+test("시야 밖 안전한 군락은 다음 행동까지 쉬고 보이는 군락은 매 틱 갱신한다", () => {
+  const room = fixture(), hidden = room.games.get("spore"), host = room.games.get("bean");
+  for (const agent of hidden.agents) Object.assign(agent, { birth: null, utility: null, mode: "wait", decisionPending: null, nextDecisionAt: 100 });
+  const tick = hidden.tick;
+  let hiddenTicks = 0, hostTicks = 0, elapsed = 0;
+  hidden.tick = seconds => { hiddenTicks++; elapsed += seconds; tick(seconds); };
+  const hostTick = host.tick;
+  host.tick = seconds => { hostTicks++; hostTick(seconds); };
+  for (let step = 0; step < 11; step++) tickRoom(room, .1);
+  assert.equal(hostTicks, 11);
+  assert.ok(hiddenTicks <= 3, String(hiddenTicks));
+  assert.ok(Math.abs(elapsed - 1.1) < 1e-8);
+  assert.equal(hidden.snapshot().simSeconds, room.simSeconds);
+});
+
+test("시야 밖 군락 근처에 다른 군락 유닛이 오면 예약 시각 전에도 즉시 깨어난다", () => {
+  const room = fixture(), hidden = room.games.get("spore");
+  for (const agent of hidden.agents) Object.assign(agent, { birth: null, utility: null, mode: "wait", decisionPending: null, nextDecisionAt: 100 });
+  let ticks = 0;
+  const tick = hidden.tick;
+  hidden.tick = seconds => { ticks++; tick(seconds); };
+  tickRoom(room, .1); tickRoom(room, .1);
+  assert.equal(ticks, 1);
+  const visitor = room.games.get("bean").agents[0], target = hidden.agents[0];
+  Object.assign(visitor, { x: target.x + 1, y: target.y, renderFromX: target.x + 1, renderFromY: target.y });
+  tickRoom(room, .1);
+  assert.equal(ticks, 2);
+});
+
+test("시야 밖 유닛의 수명 만료는 다음 정기 갱신까지 미루지 않는다", () => {
+  const room = fixture(), hidden = room.games.get("spore");
+  hidden.produce = () => null;
+  for (const agent of hidden.agents) Object.assign(agent, { bornAt: 0, lifespan: 1, cost: 10, birth: null, utility: null,
+    mode: "wait", decisionPending: null, nextDecisionAt: 100 });
+  const count = hidden.agents.length;
+  for (let step = 0; step < 9; step++) tickRoom(room, .1);
+  assert.equal(hidden.agents.length, count);
+  tickRoom(room, .100000001);
+  assert.equal(hidden.agents.length, 0);
+  assert.equal([...room.food.values()].filter(cell => cell.kind === "corpse" && cell.colonyId === 2).length, count);
+});
+
+test("저장·복원은 비가시 군락의 미처리 경과 시간과 갱신 예약을 보존한다", () => {
+  const room = createRoom("예약 저장", 13, "bean", null, false, false), owner = "tribe:spore", hidden = room.games.get(owner);
+  for (const agent of hidden.agents) Object.assign(agent, { birth: null, utility: null, mode: "wait", decisionPending: null, nextDecisionAt: 100 });
+  hidden.produce = () => null;
+  for (let step = 0; step < 4; step++) tickRoom(room, .1);
+  const saved = saveRoom(room), update = saved.simulationUpdates.find(entry => entry[0] === owner)[1];
+  assert.ok(update.time < room.simSeconds);
+  const restored = restoreRoom(structuredClone(saved));
+  assert.deepEqual(saveRoom(restored).simulationUpdates, saved.simulationUpdates);
+  const game = restored.games.get(owner), tick = game.tick;
+  let elapsed = 0;
+  game.tick = seconds => { elapsed += seconds; tick(seconds); };
+  for (let step = 0; step < 2; step++) tickRoom(restored, .1);
+  assert.ok(Math.abs(elapsed - (restored.simSeconds - update.time)) < 1e-8);
+  const legacy = structuredClone(saved); delete legacy.simulationUpdates;
+  assert.doesNotThrow(() => restoreRoom(legacy));
+  const invalid = structuredClone(saved); invalid.simulationUpdates[0][1] = { time: room.simSeconds + 1, at: 1, count: 1 };
+  assert.throws(() => restoreRoom(invalid), /월드 저장 형식/);
 });

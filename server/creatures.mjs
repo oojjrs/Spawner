@@ -314,6 +314,10 @@ export function createCreatures(environment, saved) {
     const opponents = players(), buildings = creatureBuildingTargets(environment);
     for (const agent of state.agents) {
       if (agent.health <= 0 || creatureSpawning(agent, now)) continue;
+      if (!agent.combat && !agent.attack && !agent.raid && agent.support === null && now < agent.nextActionAt &&
+          !(agent.mode === "walk" && now >= agent.moveStartedAt + agent.moveDuration) && environment.unitIndex &&
+          !environment.games.get(environment.hostId)?.isVisible(agent.x, agent.y) &&
+          !environment.unitIndex.nearby(agent.x, agent.y, agent.stats.vision || 12).some(entry => entry.game)) continue;
       if (agent.mode === "spawn") { agent.mode = "idle"; agent.animationStartedAt = agent.spawn.readyAt; }
       finishCreatureMove(agent, now);
       if (raids.update(agent)) { agent.attack = null; continue; }

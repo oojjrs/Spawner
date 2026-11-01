@@ -7,6 +7,8 @@ import { PLAYER_TRIBES } from "../server/player-tribes.mjs";
 import { commandRoomCheat } from "../server/cheats.mjs";
 import { createUnitIndex } from "../server/unit-index.mjs";
 
+const simulationUpdates = new WeakMap();
+
 const mask = ["1,0", "2,0", "3,0", "0,1", "1,1", "2,1", "3,1", "4,1", "0,2", "1,2", "2,2", "3,2", "4,2", "0,3", "1,3", "2,3", "3,3", "4,3", "1,4", "2,4", "3,4"];
 const terrainTypes = ["deep", "shallow", "coast", "land", "grassland", "forest", "lowMountain", "highMountain", "ridge", "swamp", "ford"];
 
@@ -74,6 +76,7 @@ export function saveRoom(room) {
   return { version: 2, id: room.id, title: room.title, hostId: room.hostId, seed: room.seed, world: room.world,
     cheats: room.cheats === true, beginnerHelpEnabled: room.beginnerHelpEnabled === true,
     worldGenerationVersion: room.world.generationVersion,
+    simulationUpdates: [...room.games].map(([owner, game]) => [owner, simulationUpdates.get(room)?.get(game) || null]),
     ending: room.games.get(room.hostId).ending,
     depletedTrees: [...(room.world.depletedTrees || [])],
     simSeconds: room.simSeconds, revision: room.revision, updatedAt: Date.now(), resourceVersion: room.resourceVersion,
@@ -150,6 +153,16 @@ export function restoreRoom(saved) {
     const game = createGame(room, room.colonies.find(colony => colony.ownerId === owner), data);
     room.games.set(owner, game);
   }
+  if (saved.simulationUpdates !== undefined) {
+    if (!Array.isArray(saved.simulationUpdates) || saved.simulationUpdates.length !== room.games.size ||
+        new Set(saved.simulationUpdates.map(entry => entry?.[0])).size !== room.games.size ||
+        saved.simulationUpdates.some(entry => !Array.isArray(entry) || !room.games.has(entry[0]) || entry[1] !== null &&
+          (!Number.isFinite(entry[1]?.time) || entry[1].time < 0 || entry[1].time > room.simSeconds ||
+           !Number.isFinite(entry[1].at) || !Number.isSafeInteger(entry[1].count) || entry[1].count < 0)))
+      throw new Error("월드 저장 형식이 올바르지 않습니다.");
+    simulationUpdates.set(room, new Map(saved.simulationUpdates.filter(([, update]) => update !== null)
+      .map(([owner, update]) => [room.games.get(owner), { ...update }])));
+  }
   room.creatureSystem = createCreatures(room, saved.creatures);
   prepare(room);
   room.games.get(room.hostId).checkEnding();
@@ -162,11 +175,24 @@ export function tickRoom(room, elapsed) {
   prepare(room);
   room.unitIndex = createUnitIndex(room);
   try {
+    let updates = simulationUpdates.get(room);
+    if (!updates) { updates = new Map(); simulationUpdates.set(room, updates); }
+    const host = room.games.get(room.hostId), size = room.world.size || 320;
     for (const [owner,game] of room.games) {
-      game.tick(elapsed);
+      const previous = updates.get(game);
+      const active = owner === room.hostId || !previous || previous.count !== game.agents.length || game.agents.some(agent =>
+        agent.health <= 0 || agent.combat || agent.attack || agent.retreat || agent.construction || agent.mode === "rest" ||
+        agent.stats.regeneration > 0 && agent.health < agent.stats.health || room.world.hazards?.[agent.y * size + agent.x] ||
+        host.isVisible(agent.x, agent.y) || room.unitIndex.nearby(agent.x, agent.y, agent.stats.vision + 1)
+          .some(entry => entry.game !== game && entry.agent.health > 0));
+      if (active || room.simSeconds + 1e-8 >= previous.at) {
+        game.tick(previous ? room.simSeconds - previous.time : elapsed);
+        updates.set(game, { time: room.simSeconds, at: game.nextUpdateAt(), count: game.agents.length });
+      }
       if (owner !== room.hostId) game.produce();
     }
     room.creatureSystem.tick();
+    room.decisionPlanner?.flush();
     room.games.get(room.hostId).checkEnding();
   } finally { room.unitIndex = null; }
   room.revision += 1;

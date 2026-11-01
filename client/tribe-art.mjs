@@ -2,7 +2,7 @@ import { imageFrameSize, imageScale } from "./image-geometry.mjs";
 import { createTribeAttributeAnimation, hasTribeAttributes } from "./attribute-animation.mjs";
 
 export function createTribeArt(definitions, assetSource) {
-  const previews = new Map(), units = new Map(), sprites = new Map();
+  const previews = new Map(), units = new Map(), sprites = new Map(), imageBounds = new WeakMap();
   const attributes = createTribeAttributeAnimation(assetSource, (width, height) => {
     const surface = document.createElement("canvas");
     surface.width = width; surface.height = height;
@@ -17,6 +17,16 @@ export function createTribeArt(definitions, assetSource) {
   }
 
   function bounds(sprite, frame) {
+    let cached = null;
+    if (sprite.naturalWidth > 0) {
+      const source = sprite.currentSrc || sprite.src;
+      cached = imageBounds.get(sprite);
+      if (!cached || cached.source !== source || cached.width !== sprite.naturalWidth || cached.height !== sprite.naturalHeight) {
+        cached = { source, width: sprite.naturalWidth, height: sprite.naturalHeight, frames: new Map() };
+        imageBounds.set(sprite, cached);
+      }
+      if (cached.frames.has(frame)) return cached.frames.get(frame);
+    }
     const surface = document.createElement("canvas");
     const size = typeof frame === "number" ? frame : 512;
     surface.width = frame ? size : sprite.naturalWidth || sprite.width;
@@ -30,7 +40,9 @@ export function createTribeArt(definitions, assetSource) {
       left = Math.min(left, x); top = Math.min(top, y);
       right = Math.max(right, x + 1); bottom = Math.max(bottom, y + 1);
     }
-    return { x: left, y: top, width: Math.max(1, right - left), height: Math.max(1, bottom - top) };
+    const result = { x: left, y: top, width: Math.max(1, right - left), height: Math.max(1, bottom - top) };
+    if (cached) cached.frames.set(frame, result);
+    return result;
   }
 
   function preparePreview(tribe) {

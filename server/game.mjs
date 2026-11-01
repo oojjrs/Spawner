@@ -2740,6 +2740,22 @@ export function createGame(environment, colony, savedGame) {
 
     return {
       command, snapshot, save, restore, checkEnding, produce,
+      nextUpdateAt() {
+        let at = state.simSeconds + .5;
+        for (const agent of state.agents) {
+          at = Math.min(at, agent.bornAt + agent.lifespan);
+          if (agent.birth) { at = Math.min(at, agent.birth.readyAt); continue; }
+          if (agent.decisionPending) return state.simSeconds;
+          at = Math.min(at, agent.nextDecisionAt);
+          if (agent.mode === "harvest") at = Math.min(at, agent.harvestReady);
+          else if (agent.mode === "unload") at = Math.min(at, agent.unloadReady);
+          else if (!["wait", "rest"].includes(agent.mode)) {
+            at = Math.min(at, Math.max(agent.moveStartedAt + agent.moveDuration,
+              state.simSeconds + Math.max(0, 1 - agent.moveBudget) / agentSpeed(agent)));
+          }
+        }
+        return at;
+      },
       get ending() { return state.ending; },
       get agents() { return state.agents; },
       get buildings() { return state.buildings; },

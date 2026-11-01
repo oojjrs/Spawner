@@ -26,6 +26,7 @@
     const constructionFrames = new Map();
     const constructionPartBounds = new WeakMap();
     const tribeColonies = new Map();
+    const colonyImageFrames = new WeakMap();
     const nestGrowthRendering = new Map();
     const nestGrowthLoading = new Map();
     const nestGrowthPlayback = Spawner.createNestGrowthPlayback();
@@ -6379,6 +6380,11 @@
       if (!sprite.complete || !sprite.naturalWidth) return;
       const size = Math.round((Number(image.dataset.size) || 96) * (window.devicePixelRatio || 1));
       if (image.width !== size || image.height !== size) image.width = image.height = size;
+      const index = growth ?? Spawner.nestIdleFrame(nestGrowthPlayback, entry, state.simSeconds, idleMotion.matches || colonyInactive(entry)) ??
+        (animation?.sheet && !idleMotion.matches && !colonyInactive(entry) ? idleFrameIndex(animation, now, 0) : 0);
+      const inactive = colonyInactive(entry), previous = colonyImageFrames.get(image);
+      if (previous?.sprite === sprite && previous.index === index && previous.size === size && previous.inactive === inactive) return;
+      colonyImageFrames.set(image, { sprite, index, size, inactive });
       const context = image.getContext("2d");
       context.clearRect(0, 0, size, size);
       context.imageSmoothingEnabled = true;
@@ -6388,8 +6394,6 @@
       const x = (size - width * scale) / 2 - (1 - width) / 2 * scale;
       const y = (size - height * scale) / 2 - appearance.top * scale;
       const placement = animation?.placement || { x: 0, y: 0, width: 1, height: 1 };
-      const index = growth ?? Spawner.nestIdleFrame(nestGrowthPlayback, entry, state.simSeconds, idleMotion.matches || colonyInactive(entry)) ??
-        (animation?.sheet && !idleMotion.matches && !colonyInactive(entry) ? idleFrameIndex(animation, now, 0) : 0);
       const frameWidth = animation?.sheet ? animation.frameSize : sprite.naturalWidth;
       const frameHeight = animation?.sheet ? animation.frameSize : sprite.naturalHeight;
       context.save();
@@ -7367,6 +7371,12 @@
 
     let renderedAgentListSignature = "";
     const agentAvatars = new Map();
+    const agentListButtons = new Map();
+
+    function updatePanelText(node, value) {
+      const text = String(value);
+      if (node.textContent !== text) node.textContent = text;
+    }
 
     function unitListEntries() {
       return [...state.agents, ...state.corpses.filter(corpse => corpse.colonyId === connection.colonyId).map(corpse => foodCellMap.get(corpse.key || corpse.x + "," + corpse.y) || corpse)];
@@ -7429,12 +7439,19 @@
       updateUnitPanel();
       const entries = unitListEntries();
       const corpseCount = entries.length - state.agents.length;
-      agentListCount.textContent = state.agents.length + (corpseCount ? " · 사체 " + corpseCount : "");
+      updatePanelText(agentListCount, state.agents.length + (corpseCount ? " · 사체 " + corpseCount : ""));
+      if (objectPanel.hidden) return;
       const signature = entries.map((agent) => agent.id).join(",");
       if (signature !== renderedAgentListSignature) {
-        agentAvatars.clear();
-        const fragment = document.createDocumentFragment();
+        const active = new Set(entries.map(agent => String(agent.id)));
+        for (const [id, entry] of agentListButtons) {
+          if (active.has(id)) continue;
+          if (helpTooltipTarget && entry.button.contains(helpTooltipTarget)) hideHelpTooltip();
+          entry.button.remove(); agentListButtons.delete(id); agentAvatars.delete(id);
+        }
         for (const agent of entries) {
+          const id = String(agent.id);
+          if (agentListButtons.has(id)) continue;
           const button = document.createElement("button");
           button.type = "button";
           button.className = "agent-item";
@@ -7465,39 +7482,40 @@
               moveCameraTo(current.x + 0.5, current.y + 0.5, zoomForLayer(INITIAL_ZOOM_LAYER));
             } else if (current) selectAgent(current);
           });
-          fragment.appendChild(button);
+          agentListButtons.set(id, { button, life, name: button.querySelector("[data-agent-name]"),
+            mode: button.querySelector("[data-agent-mode]"), carry: button.querySelector("[data-agent-carry]") });
         }
-        if (helpTooltipTarget && agentList.contains(helpTooltipTarget)) hideHelpTooltip();
-        agentList.replaceChildren(fragment);
+        let next = agentList.firstElementChild;
+        for (const agent of entries) {
+          const button = agentListButtons.get(String(agent.id)).button;
+          if (button === next) next = next.nextElementSibling;
+          else agentList.insertBefore(button, next);
+        }
+        invalidateAgentAvatarLayout();
         renderedAgentListSignature = signature;
       }
 
       for (const agent of entries) {
-        const button = agentList.querySelector(
-          '[data-agent-id="' + agent.id + '"]'
-        );
-        if (!button) {
-          continue;
-        }
+        const entry = agentListButtons.get(String(agent.id));
+        if (!entry) continue;
+        const button = entry.button;
         const corpse = agent.kind === "corpse";
-        const remaining = updateAgentLife(button.querySelector(".agent-life"), agent);
+        const remaining = updateAgentLife(entry.life, agent);
         button.className = "agent-item" + (corpse ? " is-corpse" : remaining <= Spawner.AGENT_LIFESPAN_WARNING ? " is-dying" : "") +
           (isSelectedObject(corpse ? "corpse" : "agent", agent) ? " is-selected" : "");
         if (corpse) {
           button.setAttribute("aria-label", agent.name + "의 사체 위치 보기");
-          button.querySelector("[data-agent-name]").textContent = agent.name;
-          button.querySelector("[data-agent-mode]").textContent = "Lv." + (agent.level || 1) + " · 사체";
-          button.querySelector("[data-agent-carry]").textContent = Spawner.resourceDefinition(Spawner.resourceTypeForCell(agent, worldMap)).name + " " + Number(Math.max(0, agent.amount).toFixed(1)) + "개";
+          updatePanelText(entry.name, agent.name);
+          updatePanelText(entry.mode, "Lv." + (agent.level || 1) + " · 사체");
+          updatePanelText(entry.carry, Spawner.resourceDefinition(Spawner.resourceTypeForCell(agent, worldMap)).name + " " + Number(Math.max(0, agent.amount).toFixed(1)) + "개");
           continue;
         }
 
         button.setAttribute("aria-label", agent.name + " 선택");
-        button.querySelector("[data-agent-name]").textContent = agent.name;
-        button.querySelector("[data-agent-mode]").textContent =
-          "Lv." + (agent.level || 1) + " · " + (AGENT_MODE_LABELS[agent.mode] || agent.mode);
-        button.querySelector("[data-agent-carry]").textContent =
-          (agent.carrying > 0 ? Spawner.resourceDefinition(agent.carryingType || "honey-mushrooms").name + " " : "운반 ") +
-          agent.carrying + "/" + (Spawner.unitCarryCapacity(agent, agent.carryingType) + (hasSynergy(agent.attributes, ["strength", "strength"]) ? 4 : 0));
+        updatePanelText(entry.name, agent.name);
+        updatePanelText(entry.mode, "Lv." + (agent.level || 1) + " · " + (AGENT_MODE_LABELS[agent.mode] || agent.mode));
+        updatePanelText(entry.carry, (agent.carrying > 0 ? Spawner.resourceDefinition(agent.carryingType || "honey-mushrooms").name + " " : "운반 ") +
+          agent.carrying + "/" + (Spawner.unitCarryCapacity(agent, agent.carryingType) + (hasSynergy(agent.attributes, ["strength", "strength"]) ? 4 : 0)));
 
       }
 
@@ -8350,7 +8368,7 @@
       for (const [key, entry] of resourceInventoryRows) {
         const amount = Math.max(0, state.resourceInventory?.[key] || 0);
         const limit = state.resourceInventoryLimits?.[key] ?? "—";
-        entry.count.textContent = amount + "/" + limit;
+        updatePanelText(entry.count, amount + "/" + limit);
         entry.row.hidden = amount <= 0;
         entry.row.dataset.help = entry.definition.name + " · 보유 " + amount + "개 / 비축 한도 " + limit + "개\n" +
           (Spawner.isColonyFood(key, state.tribe, worldMap.generationVersion) ?
@@ -8393,17 +8411,17 @@
       const progress = document.getElementById("evolution-progress");
       progress.setAttribute("aria-valuenow", state.evolutionPoints);
       progress.setAttribute("aria-valuemax", capacity);
-      evolutionPointsOutput.textContent = state.evolutionPoints;
-      document.getElementById("point-capacity").textContent = capacity;
+      updatePanelText(evolutionPointsOutput, state.evolutionPoints);
+      updatePanelText(document.getElementById("point-capacity"), capacity);
       const own = colonyEntries.find((entry) => entry.id === connection.colonyId);
-      document.getElementById("nest-name").textContent = own ? own.name : "둥지";
+      updatePanelText(document.getElementById("nest-name"), own ? own.name : "둥지");
       nestRenameOpen.disabled = !!state.ending || connection.busy || !connection.online || !own;
       nestNameSave.disabled = connection.busy || !connection.online;
       nestNameInput.disabled = connection.busy;
       nestNameCancel.disabled = connection.busy;
-      document.getElementById("nest-level").textContent = "Lv." + state.nestLevel + (state.nestHealth === 0 ? " · 파괴됨" :
-        " · 체력 " + Math.ceil(state.nestHealth ?? NEST_LEVELS[state.nestLevel - 1].health) + "/" + NEST_LEVELS[state.nestLevel - 1].health);
-      document.getElementById("nest-upgrade-points").textContent = state.nestLevel >= NEST_LEVELS.length ? "—" : upgradeCost();
+      updatePanelText(document.getElementById("nest-level"), "Lv." + state.nestLevel + (state.nestHealth === 0 ? " · 파괴됨" :
+        " · 체력 " + Math.ceil(state.nestHealth ?? NEST_LEVELS[state.nestLevel - 1].health) + "/" + NEST_LEVELS[state.nestLevel - 1].health));
+      updatePanelText(document.getElementById("nest-upgrade-points"), state.nestLevel >= NEST_LEVELS.length ? "—" : upgradeCost());
       document.getElementById("nest-upgrade-help").dataset.help = nestGrowthBenefits();
       nestUpgrade.setAttribute("aria-label", state.nestLevel >= NEST_LEVELS.length ? "최고 둥지 레벨" : "둥지 성장, 진화 포인트 " + upgradeCost() + "점");
       nestUpgrade.disabled = !!state.ending || connection.busy || !connection.online || state.nestHealth === 0 || state.nestLevel >= NEST_LEVELS.length || state.evolutionPoints < upgradeCost();

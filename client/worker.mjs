@@ -206,7 +206,6 @@ setInterval(() => {
       lastTick = now;
       prepareDecisions();
       tickRoom(room, elapsed);
-      decisionPool?.flush();
       dirty = true;
       if (room.games.get(room.hostId).ending) {
         running = false;
