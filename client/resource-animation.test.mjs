@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
+import { createAgentLifespanArt } from "./agent-lifespan.mjs";
 import { UNIT_ANIMATIONS, unitAnimationPose } from "./unit-animation.mjs";
 import { RESOURCE_TYPES, resourceTypeForCell } from "../server/resources.mjs";
 import { RESOURCE_ECONOMY } from "../server/economy.mjs";
@@ -11,7 +12,7 @@ const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
 function rendering() {
   const draws = [];
   const sprite = name => ({ name, complete: true, naturalWidth: 512, naturalHeight: 512 });
-  const context = createContext({
+  const context = createContext({ agentLifespanArt: createAgentLifespanArt(null),
     state: { simSeconds: .1 }, AGENT_HEIGHT: .7, idleMotion: { matches: false },
     displayedAgent: value => value, foodDeliveryPose: () => ({}), constructionUnitFrame: () => null,
     tribeArt: { animationPose: (agent, pose) => pose },

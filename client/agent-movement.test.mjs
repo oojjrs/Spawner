@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
+import { createAgentLifespanArt } from "./agent-lifespan.mjs";
 import { UNIT_ANIMATIONS } from "./unit-animation.mjs";
 import { SPORE_BIRTH_ANIMATION } from "./birth.mjs";
 import { combatAttributeKeys } from "./combat-attributes.mjs";
@@ -21,7 +22,7 @@ function movement() {
     constructor() { this.complete = true; this.naturalWidth = 2048; }
     async decode() {}
   }
-  const context = createContext({ Image, performance, Spawner: { UNIT_ANIMATIONS, combatAttributeKeys }, assetSource: path => path,
+  const context = createContext({ Image, performance, agentLifespanArt: createAgentLifespanArt(null), Spawner: { UNIT_ANIMATIONS, combatAttributeKeys }, assetSource: path => path,
     state: { simSeconds: .5 }, idleMotion: { matches: false }, AGENT_JUMP_PREPARATION: .2, AGENT_HEIGHT: .7,
     clamp: (value, low, high) => Math.max(low, Math.min(high, value)),
     displayedAgent: agent => agent, agentBirthPose: () => null,

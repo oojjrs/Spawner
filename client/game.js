@@ -4,6 +4,9 @@
     await globalThis.SpawnerAssets.ready;
     const assetSource = globalThis.SpawnerAssets.source;
     const tribeArt = Spawner.createTribeArt(Spawner.PLAYER_TRIBES, assetSource);
+    const agentLifespanArt = Spawner.createAgentLifespanArt((width, height) => {
+      const surface = document.createElement("canvas"); surface.width = width; surface.height = height; return surface;
+    });
     const excavationArt = Spawner.createExcavationArt(assetSource, async path => {
       const image = new Image(); image.src = path; await image.decode(); return image;
     });
@@ -492,8 +495,6 @@
       sprite.src = assetSource(Spawner.AGENT_LEVEL_UP[key]);
       return [key, sprite];
     }));
-    const agentSpiritSprite = new Image();
-    agentSpiritSprite.src = assetSource("DesignAssets/Effects/Lifespan/spirit-flame.png");
     const sporeBirthSheet = new Image();
     sporeBirthSheet.src = assetSource(Spawner.SPORE_BIRTH_ANIMATION.image);
     const sporeBirthFrames = new Map();
@@ -565,7 +566,7 @@
       part.src = source;
       return [key, part];
     }));
-    await Promise.all([starterObjectSprite, beetleSprite, beetleSheet, beetleAttackSheet, talonOwlSheet, attackSheet, agentSpiritSprite, foodSprite, treeFruitSprite, carriedFoodSprite,
+    await Promise.all([starterObjectSprite, beetleSprite, beetleSheet, beetleAttackSheet, talonOwlSheet, attackSheet, foodSprite, treeFruitSprite, carriedFoodSprite,
       beetleCorpseSprite, ...resourceCarrySprites.values(), ...agentParts.values(), ...agentBaseParts.values(),
       ...[...burrowAppearances.values()].map(appearance => appearance.sprite)].map(part => part.decode()));
 
@@ -4286,7 +4287,7 @@
         ctx.rotate(pose.leftRotation);
         ctx.scale(pose.leftScaleX ?? 1, pose.leftScaleY);
         if (outlineColor) drawSelectionOutline(sprite, -width / 2, -height * root, width, height, null, outlineColor);
-        else ctx.drawImage(sprite, -width / 2, -height * root, width, height);
+        else agentLifespanArt.draw(ctx, agent, state.simSeconds, sprite, -width / 2, -height * root, width, height);
         ctx.restore();
         return;
       }
@@ -4308,12 +4309,12 @@
         ctx.rotate(rotation);
         ctx.scale(scaleX, scaleY);
         if (outlineColor) drawSelectionOutline(sprite, -width * pivot, -height * root, width, height, null, outlineColor);
-        else ctx.drawImage(sprite, -width * pivot, -height * root, width, height);
+        else agentLifespanArt.draw(ctx, agent, state.simSeconds, sprite, -width * pivot, -height * root, width, height);
         ctx.restore();
       }
       if (stem) {
         if (outlineColor) drawSelectionOutline(stem, x, y, width, height, null, outlineColor);
-        else ctx.drawImage(stem, x, y, width, height);
+        else agentLifespanArt.draw(ctx, agent, state.simSeconds, stem, x, y, width, height);
       }
     }
 
@@ -4653,7 +4654,7 @@
         const bodyPivot = rooted ? 460 - agentBodyLift(attributes) : pivot;
         ctx.translate(0, size * (bodyPivot - pivot) / 512 - (walk?.bob || 0) * size); ctx.rotate(walk?.rotation || 0);
         if (outlineColor) drawSelectionOutline(body.sprite, -size / 2, -size * bodyPivot / 512, size, size, null, outlineColor);
-        ctx.drawImage(body.sprite, -size / 2, -size * bodyPivot / 512, size, size); ctx.restore();
+        agentLifespanArt.draw(ctx, agent, state.simSeconds, body.sprite, -size / 2, -size * bodyPivot / 512, size, size); ctx.restore();
         return construction;
       }
       let pose = Spawner.unitAnimationPose(agent, state.simSeconds);
@@ -4694,7 +4695,7 @@
       ctx.translate(centerX, floor);
       ctx.scale(facing < 0 ? -1 : 1, 1);
       if (outlineColor) drawSelectionOutline(sprite, left, top, size, size, frame, outlineColor);
-      ctx.drawImage(sprite, frame.x, frame.y, frameSize, frameSize, left, top, size, size);
+      agentLifespanArt.draw(ctx, agent, state.simSeconds, sprite, frame.x, frame.y, frameSize, frameSize, left, top, size, size);
       ctx.restore();
       return pose;
     }
@@ -4912,7 +4913,7 @@
       ctx.translate(centerX, footY);
       ctx.scale(agent.tribe === "pebble" ? 1 : agent.facing < 0 ? -1 : 1, 1);
       if (outlineColor) drawSelectionOutline(sprite, -size * animation.pivotX / frameSize, -size * animation.pivotY / frameSize, size, size, frame, outlineColor);
-      ctx.drawImage(sprite, frame.x, frame.y, frameSize, frameSize, -size * animation.pivotX / frameSize, -size * animation.pivotY / frameSize, size, size);
+      agentLifespanArt.draw(ctx, agent, state.simSeconds, sprite, frame.x, frame.y, frameSize, frameSize, -size * animation.pivotX / frameSize, -size * animation.pivotY / frameSize, size, size);
       ctx.restore();
       return true;
     }
@@ -4937,7 +4938,7 @@
       ctx.scale(agent.combat ? agent.combat.side === 0 ? -1 : 1 : agent.attack?.directionX || agent.facing || 1, 1);
       const pivot = lifespan ? lifespan.animation.pivotY / lifespan.animation.frameSize : 448 / 512;
       if (outlineColor) drawSelectionOutline(sprite, -size / 2, -size * pivot, size, size, frame, outlineColor);
-      ctx.drawImage(sprite, frame.x, frame.y, frameSize, frameSize, -size / 2, -size * pivot, size, size);
+      agentLifespanArt.draw(ctx, agent, state.simSeconds, sprite, frame.x, frame.y, frameSize, frameSize, -size / 2, -size * pivot, size, size);
       ctx.restore();
       return true;
     }
@@ -5200,19 +5201,7 @@
       const levelUpAnchor = { x: topLeft.x + cell / 2, y: topLeft.y + cell * .82 };
       Spawner.drawAgentLevelUp(ctx, agentLevelUpSprites, levelUp, levelUpAnchor, cell, false);
       drawAgentAppearance(ctx, now, agent, cell, topLeft, renderPosition, birth, objectOutlineColor("agent", agent));
-      if (!birth) drawAgentLifespanSpirit(agent, cell, topLeft, renderPosition);
       Spawner.drawAgentLevelUp(ctx, agentLevelUpSprites, levelUp, levelUpAnchor, cell, true);
-    }
-
-    function drawAgentLifespanSpirit(agent, cell, topLeft, renderPosition) {
-      const pose = Spawner.agentSpiritPose(agent, state.simSeconds);
-      if (!pose) return;
-      const crown = Spawner.AGENT_SPIRIT.anchors[agent.tribe] ?? Spawner.AGENT_SPIRIT.anchors.bean;
-      const appearance = agent.appearanceAttributes || agent.attributes;
-      const jump = appearance.feet || ["spore", "pebble", "spring"].includes(agent.tribe) ? 0 :
-        Math.sin(renderPosition.progress * Math.PI) * cell * AGENT_HEIGHT * .18;
-      Spawner.drawAgentSpirit(ctx, agentSpiritSprite, pose,
-        { x: topLeft.x + cell / 2, y: topLeft.y + cell * (crown - .07) - jump }, cell);
     }
 
     function drawAgentAppearance(ctx, now, agent, cell, topLeft, renderPosition, birth, outlineColor) {
@@ -5284,7 +5273,7 @@
       const facing = agent.combat ? agent.combat.side === 0 ? -1 : 1 : agent.facing || 1;
       ctx.save(); ctx.translate(topLeft.x + cell / 2, floor); ctx.scale(facing < 0 ? -1 : 1, 1);
       if (outlineColor) drawSelectionOutline(sprite, -size / 2, -size * .875, size, size, null, outlineColor);
-      ctx.drawImage(sprite, -size / 2, -size * .875, size, size); ctx.restore();
+      agentLifespanArt.draw(ctx, agent, state.simSeconds, sprite, -size / 2, -size * .875, size, size); ctx.restore();
 
     }
 
@@ -5409,7 +5398,7 @@
           spriteWidth, spriteHeight, null);
         drawAgentHead(ctx, agent, spriteX - centerX, -spriteHeight * bodyPose.pivot,
           spriteWidth, spriteHeight, now, null);
-        ctx.drawImage(sprite, spriteX - centerX, -spriteHeight * bodyPose.pivot,
+        agentLifespanArt.draw(ctx, agent, state.simSeconds, sprite, spriteX - centerX, -spriteHeight * bodyPose.pivot,
           spriteWidth, spriteHeight);
       }
       ctx.restore();
@@ -7492,7 +7481,7 @@
         }
         const corpse = agent.kind === "corpse";
         const remaining = updateAgentLife(button.querySelector(".agent-life"), agent);
-        button.className = "agent-item" + (corpse ? " is-corpse" : remaining <= Spawner.AGENT_DEATH_WARNING ? " is-dying" : "") +
+        button.className = "agent-item" + (corpse ? " is-corpse" : remaining <= Spawner.AGENT_LIFESPAN_WARNING ? " is-dying" : "") +
           (isSelectedObject(corpse ? "corpse" : "agent", agent) ? " is-selected" : "");
         if (corpse) {
           button.setAttribute("aria-label", agent.name + "의 사체 위치 보기");

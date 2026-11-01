@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
+import { createAgentLifespanArt } from "./agent-lifespan.mjs";
 import { createGame } from "../server/game.mjs";
 import { SPROUT_DECOMPOSITION_ANIMATIONS, unitAnimationPose, unitAnimationFrame } from "./unit-animation.mjs";
 
@@ -17,7 +18,7 @@ function rendering(action) {
   const draws = [];
   const sprite = name => ({ name, complete: true, naturalWidth: 512, naturalHeight: 512 });
   const sheet = sprite("embedded-sprout");
-  const context = createContext({
+  const context = createContext({ agentLifespanArt: createAgentLifespanArt(null),
     state: { simSeconds: .1 }, AGENT_HEIGHT: .7, idleMotion: { matches: false },
     displayedAgent: value => value, foodDeliveryPose: () => ({}),
     agentBodyPose: () => ({ pivot: 460 / 512, scaleX: 1, scaleY: 1 }), agentWalkPose: () => null,
