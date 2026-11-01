@@ -2161,6 +2161,7 @@
         objects.push({ kind: "agent", depth, birth: !!birth, target: agent });
       }
       for (const food of resourceNodeCells()) {
+        if (food.dropped) { drawDroppedResource(food); continue; }
         if (food.kind === "corpse" || food.resourceType === "tree" || Spawner.isTreeFood(food, worldMap) ||
           food.x < topLeft.x - 1 || food.x > bottomRight.x + 1 ||
           food.y < topLeft.y - 1 || food.y > bottomRight.y + 1 || !resourceNodePose(food).visible) continue;
@@ -3038,6 +3039,8 @@
     }
 
     function resourceNodePose(cell) {
+      if (cell.dropped) return { frame: 0, progress: 0, phase: "idle", opacity: cell.amount > 0 ? 1 : 0,
+        remaining: Math.max(0, cell.amount), visible: cell.amount > 0 };
       if (harvestDisplay.time !== state.simSeconds || harvestDisplay.agents !== state.agents || harvestDisplay.rivals !== state.rivals) {
         harvestDisplay.time = state.simSeconds;
         harvestDisplay.agents = state.agents;
@@ -3056,7 +3059,8 @@
       const type = Spawner.resourceTypeForCell(cell, worldMap);
       const animation = resourceHarvestSprites.get(type);
       const pose = animation ? Spawner.harvestPlaybackPose(harvestPlayback, { ...cell, resourceType: type },
-        harvestDisplay.cells.get(cell.x + "," + cell.y) || [], state.simSeconds,
+        (harvestDisplay.cells.get(cell.x + "," + cell.y) || []).filter(agent =>
+          !agent.harvestResourceKey || agent.harvestResourceKey === key), state.simSeconds,
         { ...animation, harvestSeconds: Spawner.resourceHarvestSeconds(type, worldMap) }) :
         { frame: 0, progress: 0, phase: "idle", opacity: cell.amount > 0 ? 1 : 0,
           remaining: Math.max(0, cell.amount), visible: cell.amount > 0 };
@@ -3096,7 +3100,30 @@
       ctx.globalAlpha = alpha;
     }
 
+    function drawDroppedResource(cell) {
+      const sprite = resourceCarrySprites.get(cell.resourceType), crop = resourceCarryBounds.get(cell.resourceType);
+      if (!(cell.amount > 0) || !sprite?.complete || !sprite.naturalWidth || !crop) return;
+      const point = worldToScreen(cell.x + .5, cell.y + .8);
+      const scale = state.camera.zoom * .24 / Math.max(crop.width, crop.height);
+      const width = sprite.naturalWidth * scale, height = sprite.naturalHeight * scale;
+      const outline = objectOutlineColor("food", cell);
+      ctx.save();
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
+      for (let index = 0; index < Math.min(5, Math.ceil(cell.amount)); index++) {
+        const x = point.x + (index % 3 - 1) * state.camera.zoom * .12;
+        const y = point.y - Math.floor(index / 3) * state.camera.zoom * .08;
+        const left = x - (crop.x + crop.width / 2) * scale;
+        const top = y - (crop.y + crop.height) * scale;
+        drawGroundShadow(x, y, crop.width * scale * .45, state.camera.zoom * .025, .25);
+        ctx.drawImage(sprite, left, top, width, height);
+        if (outline) drawSelectionOutline(sprite, left, top, width, height, null, outline);
+      }
+      ctx.restore();
+    }
+
     function drawResourceNode(now, cell, harvestStarted, placement) {
+      if (cell.dropped) { drawDroppedResource(cell); return; }
       const type = Spawner.resourceTypeForCell(cell, worldMap);
       const animation = resourceHarvestSprites.get(type);
       const pose = resourceNodePose(cell);

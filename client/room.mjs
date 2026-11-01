@@ -1,7 +1,7 @@
 import { generateWorld } from "../server/world.mjs";
 import { createGame } from "../server/game.mjs";
 import { createCreatures } from "../server/creatures.mjs";
-import { populateResourceNodes, clearResourceHazards, populateForestResources, populateColonyFood } from "../server/resources.mjs";
+import { populateResourceNodes, clearResourceHazards, populateForestResources, populateColonyFood, resourceDefinition } from "../server/resources.mjs";
 import { isTreeFood } from "../server/food.mjs";
 import { PLAYER_TRIBES } from "../server/player-tribes.mjs";
 import { commandRoomCheat } from "../server/cheats.mjs";
@@ -138,7 +138,9 @@ export function restoreRoom(saved) {
   if (!owners.has(room.hostId)) throw new Error("플레이할 둥지를 찾을 수 없습니다.");
   for (const [key, cell] of room.food) {
     if (!cell || !Number.isInteger(cell.x) || !Number.isInteger(cell.y) || cell.x < 0 || cell.y < 0 || cell.x >= size || cell.y >= size ||
-        key !== cell.x + "," + cell.y && (key !== "corpse:" + cell.agentId || cell.key !== key) || !Number.isFinite(cell.amount) || cell.amount < 0) throw new Error("자원 저장 형식이 올바르지 않습니다.");
+        key !== cell.x + "," + cell.y && (key !== "corpse:" + cell.agentId || cell.key !== key) &&
+        !(cell.dropped === true && cell.kind === "resource" && resourceDefinition(cell.resourceType) && cell.key === key &&
+          key === "drop:" + cell.resourceType + ":" + cell.x + "," + cell.y) || !Number.isFinite(cell.amount) || cell.amount < 0) throw new Error("자원 저장 형식이 올바르지 않습니다.");
   }
   populateResourceNodes(room);
   clearResourceHazards(room);

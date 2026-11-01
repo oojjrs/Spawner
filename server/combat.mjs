@@ -1,4 +1,5 @@
 import { worldSize } from "./world-size.mjs";
+import { dropCarriedResources } from "./resources.mjs";
 import { militaryAgent } from "./conquest-pacing.mjs";
 import { creatureSpawning } from "./creature-spawn.mjs";
 import { ENCOUNTER_TYPES } from "./encounter-types.mjs";
@@ -94,6 +95,7 @@ export function createCombat(environment) {
 
   function attach(agent, combat, side, time) {
     suspendDefenseWork(agent);
+    dropCarriedResources(environment, agent);
     agent.combat = { id: combat.id, x: combat.x, y: combat.y, teams: [...combat.teams], side, joinedAt: time,
       turnOrderVersion: COMBAT_TURN_ORDER_VERSION,
       turn: combat.turn || 0, nextAttackTurn: (combat.turn || 0) + 1,
@@ -329,6 +331,7 @@ export function createCombat(environment) {
     const combat = agent.combat;
     if (agent.health <= 0) return false;
     if (!combat) return updateRegeneration(agent, time);
+    dropCarriedResources(environment, agent);
     if (agent.x !== combat.x || agent.y !== combat.y) { release(agent, time); return false; }
     const currentMembers = members(combat);
     refreshSupport(currentMembers);

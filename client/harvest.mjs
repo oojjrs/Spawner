@@ -34,7 +34,7 @@ export function syncHarvestPlayback(playback, agents, simSeconds, firstSnapshot)
   }
   for (const agent of agents) {
     const result = agent.harvestResult;
-    if (!result || !Number.isInteger(result.sequence) || result.sequence < 0) continue;
+    if (!result || result.dropped || !Number.isInteger(result.sequence) || result.sequence < 0) continue;
     const previousSequence = playback.seen.get(agent.id);
     if (previousSequence !== undefined && result.sequence <= previousSequence) continue;
     playback.seen.set(agent.id, result.sequence);

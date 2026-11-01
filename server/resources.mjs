@@ -164,6 +164,7 @@ export function resourceHarvestMultiplier(resourceType, attributes, tribe) {
 
 export function resourceHarvestRequirements(cell, world, tribe) {
   if (!cell) return null;
+  if (cell.dropped && resourceDefinition(cell.resourceType)) return {};
   if (isTribeFood(cell.resourceType, tribe, world.generationVersion)) return {};
   const definition = resourceDefinition(cell.resourceType || resourceTypeForCell(cell, world));
   if (!definition || definition.harvestLocked) return null;
@@ -174,6 +175,27 @@ export function resourceHarvestRequirements(cell, world, tribe) {
 export function canHarvestResource(cell, world, attributes, tribe) {
   const required = resourceHarvestRequirements(cell, world, tribe);
   return required !== null && Object.entries(required).every(([key, count]) => (attributes?.[key] || 0) >= count);
+}
+
+export function dropCarriedResources(room, agent) {
+  if (!(agent.carrying > 0) || !resourceDefinition(agent.carryingType)) return;
+  const resourceType = agent.carryingType;
+  const key = "drop:" + resourceType + ":" + agent.x + "," + agent.y;
+  let cell = room.food.get(key);
+  if (!cell) {
+    cell = { key, x: agent.x, y: agent.y, resourceType, kind: "resource", dropped: true, amount: 0 };
+    room.food.set(key, cell);
+    const regionKey = Math.floor(agent.x / 18) + "," + Math.floor(agent.y / 18);
+    if (!room.foodSpots.has(regionKey)) room.foodSpots.set(regionKey, { cells: [] });
+    room.foodSpots.get(regionKey).cells.push(cell);
+  }
+  cell.amount = Math.round((cell.amount + agent.carrying) * 10) / 10;
+  cell.initialAmount = cell.amount;
+  agent.carrying = 0;
+  agent.carryingType = null;
+  agent.transportCargo = null;
+  agent.transport = null;
+  agent.transportReadyAt = null;
 }
 
 export function clearResourceHazards(room) {
@@ -235,7 +257,7 @@ export function populateResourceNodes(room) {
       if (point[3] === "tree" && point[2] > 0) point[2] = Math.max(amount, point[2]);
     }
     for (const cell of room.food.values()) {
-      if (cell.resourceType !== "tree" || cell.kind !== "resource" || cell.amount <= 0 ||
+      if (cell.dropped || cell.resourceType !== "tree" || cell.kind !== "resource" || cell.amount <= 0 ||
           !Number.isFinite(cell.initialAmount)) continue;
       const initialAmount = cell.initialAmount;
       cell.initialAmount = Math.max(amount, initialAmount);
@@ -262,10 +284,10 @@ export function populateForestResources(room) {
       !isTreeFood(cell, room.world) && !(cell.resourceType === "tree" && cell.amount > 0)) cells[cell.y * size + cell.x] = 0;
   }
   if (room.world.generationVersion >= 20) for (const cell of room.food.values()) {
-    if (cell.resourceType === "tree" && cell.amount > 0) cells[cell.y * size + cell.x] = 1;
+    if (!cell.dropped && cell.resourceType === "tree" && cell.amount > 0) cells[cell.y * size + cell.x] = 1;
   }
   room.world.treeCells = cells;
   if (!room.world.depletedTrees) room.world.depletedTrees = new Set();
-  for (const cell of room.food.values()) if (cell.resourceType === "tree" && cell.amount <= 0) room.world.depletedTrees.add(cell.y * size + cell.x);
+  for (const cell of room.food.values()) if (!cell.dropped && cell.resourceType === "tree" && cell.amount <= 0) room.world.depletedTrees.add(cell.y * size + cell.x);
   for (const index of room.world.depletedTrees) cells[index] = 0;
 }

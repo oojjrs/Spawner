@@ -1120,6 +1120,7 @@ export function createGame(environment, colony, savedGame) {
         agent.carrying > 0 && (agent.carryingType || "honey-mushrooms") !== resourceTypeForCell(food, worldMap)) {
         agent.decisionPending = "targetLost"; return;
       }
+      agent.harvestResourceKey = food.key || agent.x + "," + agent.y;
       agent.harvestWasCommute = agent.mode === "commute";
       agent.mode = "harvest";
       agent.harvestStarted = state.simSeconds;
@@ -1150,15 +1151,16 @@ export function createGame(environment, colony, savedGame) {
           agent.harvestResult = {
             sequence: (agent.harvestResult?.sequence || 0) + 1, resourceType, x: food.x, y: food.y,
             amount: collected, remaining: food.amount, initialAmount: food.initialAmount ?? food.amount + collected,
+            dropped: !!food.dropped,
             kind: food.kind || (resourceDefinition(resourceType).category === "material" ? "resource" : "food"),
             terrain: food.terrain || terrainAt(food.x, food.y), completedAt
           };
-          if (resourceType === "tree" && food.amount <= 0) {
+          if (!food.dropped && resourceType === "tree" && food.amount <= 0) {
             if (!worldMap.depletedTrees) worldMap.depletedTrees = new Set();
             worldMap.depletedTrees.add(food.y * WORLD_SIZE + food.x);
             if (worldMap.treeCells) worldMap.treeCells[food.y * WORLD_SIZE + food.x] = 0;
           }
-          if (food.kind === "corpse" && food.amount <= 0) {
+          if ((food.kind === "corpse" || food.dropped) && food.amount <= 0) {
             foodCellMap.delete(food.key || key);
             state.knownFood.delete(food.key || key);
           }
