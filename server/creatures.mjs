@@ -320,8 +320,8 @@ export function createCreatures(environment, saved) {
           !environment.unitIndex.nearby(agent.x, agent.y, agent.stats.vision || 12).some(entry => entry.game)) continue;
       if (agent.mode === "spawn") { agent.mode = "idle"; agent.animationStartedAt = agent.spawn.readyAt; }
       finishCreatureMove(agent, now);
-      if (raids.update(agent)) { agent.attack = null; continue; }
-      if (combat.update(agent, now)) continue;
+      if (raids.update(agent)) { agent.attack = null; agent.pursuitTargetId = null; continue; }
+      if (combat.update(agent, now)) { agent.pursuitTargetId = null; continue; }
       if (now < agent.moveStartedAt + agent.moveDuration) continue;
       const home = raids.home(agent);
       const candidates = (environment.unitIndex ? environment.unitIndex.nearby(agent.x, agent.y, agent.stats.vision)
@@ -347,6 +347,7 @@ export function createCreatures(environment, saved) {
         } else destination = stepToward(agent, candidate.agent, 0);
         if (destination || candidate.distance === 0) { target = candidate; break; }
       }
+      agent.pursuitTargetId = target?.agent.id || null;
       if (updateCreatureBuildingAttack(agent, target, now)) continue;
       if (target) {
         if (destination) move(agent, destination);

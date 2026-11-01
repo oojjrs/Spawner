@@ -310,6 +310,7 @@ export function createEncounters(environment, saved, residents) {
   }
 
   function returnHome(agent) {
+    agent.pursuitTargetId = null;
     agent.returningHome = Math.hypot(agent.x - agent.homeX, agent.y - agent.homeY) > 1;
     if (!agent.returningHome) return false;
     if (environment.simSeconds < agent.nextActionAt) return true;
@@ -329,7 +330,7 @@ export function createEncounters(environment, saved, residents) {
           !environment.unitIndex.nearby(agent.x, agent.y, Math.max(plans.get(agent.species).radius, encounterTerritory(agent)?.detectionRadius || 0)).some(entry => entry.game)) continue;
       if (agent.mode === "spawn") { agent.mode = "idle"; agent.animationStartedAt = agent.spawn.readyAt; }
       finishCreatureMove(agent, now);
-      if (combat.update(agent, now)) continue;
+      if (combat.update(agent, now)) { agent.pursuitTargetId = null; continue; }
       if (now < agent.moveStartedAt + agent.moveDuration) continue;
       const plan = plans.get(agent.species), type = types.get(agent.species), membership = memberships.get(agent.species),
         territory = encounterTerritory(agent);
@@ -361,6 +362,7 @@ export function createEncounters(environment, saved, residents) {
         }
       }
       if (!agent.attack) agent.mode = "idle";
+      agent.pursuitTargetId = null;
       if (!target) agent.warningUntil = null;
       if (territory && (agent.returningHome || !withinEncounterTerritory(agent, agent, true) ||
           !target && !withinEncounterTerritory(agent, agent, false))) {
@@ -386,6 +388,7 @@ export function createEncounters(environment, saved, residents) {
         beginCreatureSpawn(agent, now, "water", agent);
         continue;
       }
+      agent.pursuitTargetId = type.hostile ? target?.agent.id || null : null;
       if (type.hostile && target && agent.species === "soil-boar" && agent.warningUntil === null) {
         updateCreatureBuildingAttack(agent, null, now);
         agent.warningUntil = now + 1;

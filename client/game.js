@@ -2521,6 +2521,18 @@
       return state.hover?.kind === kind && state.hover.target === target ? hoverColor : null;
     }
 
+    function agentById(id) {
+      return state.agents.find(agent => agent.id === id) || state.rivals.find(agent => agent.id === id);
+    }
+
+    function isAgentSelectable(agent) {
+      if (!agent || agent.health <= 0 || agent.hidden) return false;
+      if (state.agents.includes(agent)) return true;
+      if (!state.rivals.includes(agent) || !state.visible.has(agent.y * WORLD_SIZE + agent.x)) return false;
+      const position = state.camera.zoom < 8 ? agent : agentBasePosition(agent);
+      return state.visible.has(Math.floor(position.y + .5) * WORLD_SIZE + Math.floor(position.x + .5));
+    }
+
     function selectObject(kind, target) {
       state.selection = target ? { kind, target } : null;
       if (kind !== "colony" || target?.id !== connection.colonyId) colonyMenu.hidden = true;
@@ -2567,7 +2579,7 @@
       const selection = state.selection;
       if (!selection) return;
       const exists = selection.kind === "terrain" ? !!selectionTerrainCell() :
-        selection.kind === "agent" ? state.agents.includes(selection.target) :
+        selection.kind === "agent" ? isAgentSelectable(selection.target) :
         selection.kind === "colony" ? colonyEntries.includes(selection.target) :
         selection.kind === "building" ? state.buildings.includes(selection.target) && selection.target.health > 0 :
         selection.kind === "tree" ? forest.cells.get(selection.target.column + "," + selection.target.row) === selection.target :
@@ -5517,13 +5529,49 @@
       const selection = state.selection;
       const agents = selection?.kind === "agent" ? [selection.target] :
         selection?.kind === "corpse" ? corpseCollectors(selection.target) : [];
-      return agents.filter(agent => displayedAgent(agent).movementPlan && state.agents.includes(agent) && agent.health > 0);
+      return agents.filter(agent => isAgentSelectable(agent) &&
+        (displayedAgent(agent).movementPlan || agent.species || displayedAgent(agent).combatTarget));
+    }
+
+    function drawSelectedAgentTarget(agent) {
+      const target = agent.combatTarget;
+      if (!target) return;
+      const unit = target.kind === "agent" ? agentById(target.id) : null;
+      if (target.kind === "agent" && !isAgentSelectable(unit)) return;
+      const foot = .5 + AGENT_HEIGHT * .44;
+      const position = interpolatedAgentPosition(agent);
+      const destination = unit ? interpolatedAgentPosition(unit) : target;
+      const from = worldToScreen(position.x + .5, position.y + foot);
+      const to = worldToScreen(destination.x + (unit ? .5 : target.width / 2),
+        destination.y + (unit ? foot : target.height / 2));
+      const radius = clamp(state.camera.zoom * .13, 6, 12);
+      ctx.save();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = "#ff9986";
+      ctx.setLineDash([7, 5]);
+      ctx.beginPath();
+      ctx.moveTo(from.x, from.y);
+      ctx.lineTo(to.x, to.y);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.beginPath();
+      ctx.ellipse(to.x, to.y, radius, radius * .6, 0, 0, Math.PI * 2);
+      ctx.moveTo(to.x - radius - 4, to.y);
+      ctx.lineTo(to.x + radius + 4, to.y);
+      ctx.moveTo(to.x, to.y - radius * .6 - 4);
+      ctx.lineTo(to.x, to.y + radius * .6 + 4);
+      ctx.stroke();
+      ctx.restore();
     }
 
     function drawSelectedAgentMovement(selectedAgent) {
       const agent = selectedAgent ? displayedAgent(selectedAgent) : null;
-      const plan = agent?.movementPlan;
-      if (!plan || !state.agents.includes(selectedAgent) || agent.health <= 0) return;
+      if (!isAgentSelectable(selectedAgent)) return;
+      drawSelectedAgentTarget(agent);
+      const plan = agent.movementPlan || (agent.species && agent.mode === "walk" &&
+        state.simSeconds < agent.moveStartedAt + agent.moveDuration ?
+        { destination: { x: agent.x, y: agent.y }, route: [{ x: agent.x, y: agent.y }] } : null);
+      if (!plan) return;
       const cell = state.camera.zoom;
       const position = interpolatedAgentPosition(agent);
       const foot = 0.5 + AGENT_HEIGHT * 0.44;
@@ -6081,8 +6129,8 @@
     function updateCameraTransition(now) {
       if (!cameraTransition) return;
       if (cameraTransition.agentId != null) {
-        const agent = state.agents.find(candidate => candidate.id === cameraTransition.agentId && candidate.health > 0);
-        if (!agent) {
+        const agent = agentById(cameraTransition.agentId);
+        if (!isAgentSelectable(agent)) {
           stopCameraTransition();
           return;
         }
@@ -6164,7 +6212,8 @@
       const cellY = Math.floor(world.y);
       const colony = colonyAt(cellX, cellY);
       const food = foodCellAt(cellX, cellY);
-      const agents = state.agents.filter((candidate) => {
+      const agents = visibleAgents().filter((candidate) => {
+        if (!isAgentSelectable(candidate)) return false;
         const fromX = candidate.renderFromX ?? candidate.x, fromY = candidate.renderFromY ?? candidate.y;
         if (world.x < Math.min(candidate.x, fromX, candidate.birth?.fromX ?? fromX) - 6 ||
             world.x > Math.max(candidate.x, fromX, candidate.birth?.fromX ?? fromX) + 6 ||
@@ -7340,26 +7389,26 @@
       updateForeignColonyDetails();
       progression.refresh();
       const building = state.selection?.kind === "building" ? state.selection.target : null;
-      document.getElementById("unit-codex").hidden = false;
+      document.getElementById("unit-codex").hidden = !!agent?.species;
       resourceLocation.hidden = resourceDetails.hidden && terrainDetails.hidden && foreignColonyDetails.hidden;
       agentDetails.hidden = !agent;
-      agentLife.hidden = !agent;
+      agentLife.hidden = !agent || !!agent.species;
       agentRenameOpen.hidden = !agent || !state.agents.includes(agent);
       agentRenameOpen.disabled = !!state.ending || connection.busy || !connection.online;
       agentNameInput.disabled = connection.busy;
       agentNameSave.disabled = connection.busy || !connection.online;
       agentNameCancel.disabled = connection.busy;
-      agentBirth.hidden = !agent;
-      agentDesign.hidden = !agent;
+      agentBirth.hidden = !agent || !state.agents.includes(agent);
+      agentDesign.hidden = !agent || !state.agents.includes(agent);
       unitPanel.hidden = !agent && !building && corpseDetails.hidden && terrainDetails.hidden && resourceDetails.hidden && burrowDetails.hidden && foreignColonyDetails.hidden;
       if (unitPanel.hidden) return;
       collapseControlsGuide();
       if (building) unitPanelTitle.textContent = building.name;
       if (!agent) return;
       unitPanelTitle.textContent = agent.name + " · Lv." + (agent.level || 1);
-      updateAgentLife(agentLife, agent);
+      if (!agentLife.hidden) updateAgentLife(agentLife, agent);
       const attributes = document.getElementById("agent-attributes");
-      const slots = agent.activeSlots || agent.slots;
+      const slots = agent.activeSlots || agent.slots || [];
       const signature = JSON.stringify([agent.tribe, agent.species, slots, agent.attributeLevels, agent.attributes]);
       if (attributes.dataset.signature !== signature) {
         attributes.dataset.signature = signature;
@@ -7412,8 +7461,8 @@
 
     function updateCameraFollow() {
       if (cameraTransition || state.camera.followAgentId === null || state.dragging) return;
-      const agent = state.agents.find(candidate => candidate.id === state.camera.followAgentId && candidate.health > 0);
-      if (!agent) {
+      const agent = agentById(state.camera.followAgentId);
+      if (!isAgentSelectable(agent)) {
         state.camera.followAgentId = null;
         return;
       }
@@ -10036,7 +10085,7 @@
       Object.assign(snapshotCollections, { food, sharedTrails, footprints, visible });
       if (selection) {
         const target = selection.kind === "terrain" ? terrainCodexCell({ ...worldMap, size: WORLD_SIZE }, state.explored, selection.target.x, selection.target.y) :
-          selection.kind === "agent" ? state.agents.find((agent) => agent.id === selection.target.id) :
+          selection.kind === "agent" ? agentById(selection.target.id) :
           selection.kind === "colony" ? colonyEntries.find((colony) => colony.id === selection.target.id) :
           selection.kind === "building" ? state.buildings.find(building => building.id === selection.target.id && building.health > 0) :
           selection.kind === "tree" ? forest.cells.get(selection.target.column + "," + selection.target.row) :
@@ -10044,7 +10093,8 @@
           selection.kind === "burrow" ? worldMap.burrows.find(burrow => burrow.id === selection.target.id && burrow.health > 0) :
           foodCellMap.get(selection.target.key || selection.target.x + "," + selection.target.y);
         const corpse = selection.kind === "agent" && !target ? state.corpses.find(cell => cell.agentId === selection.target.id) : null;
-        state.selection = corpse ? { kind: "corpse", target: corpse } : target && (selection.kind !== "corpse" ||
+        state.selection = corpse ? { kind: "corpse", target: corpse } : target &&
+          (selection.kind !== "agent" || isAgentSelectable(target)) && (selection.kind !== "corpse" ||
           target.kind === "corpse") ? { kind: selection.kind, target } : null;
         if (corpse) state.camera.followAgentId = null;
       }

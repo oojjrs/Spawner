@@ -2565,9 +2565,19 @@ export function createGame(environment, colony, savedGame) {
         state.discoveryReadCount = state.discoveries.length;
         discoveryBaselinePending = false;
       }
+      const targetAgents = new Map([...state.agents, ...state.rivals,
+        ...[...environment.games.values()].flatMap(game => [game.nest, ...(game.buildings || [])])]
+        .filter(target => target && target.health > 0 && !target.hidden &&
+          Array.from({ length: (target.width || 1) * (target.height || 1) }, (_, index) =>
+            (target.y + Math.floor(index / (target.width || 1))) * WORLD_SIZE + target.x + index % (target.width || 1))
+            .some(index => visibleCells.has(index)))
+        .map(target => [target.id, target]));
       const visibleAgent = (agent) => {
         const { visited, movementVisits, path, returnPath, rememberedRoute, profile, personality, utility, knownEnemyIds, ...visible } = agent;
-        return { ...visible, combatDisposition: combatDisposition(agent), action: agent.combat ? "fight" : agent.construction ? "build" : utility?.action === "supply" ? "return" : utility?.action || "wait", personalityLabels: personality ? personalityLabels(personality) : null };
+        const target = targetAgents.get(agent.attack?.targetId || (!agent.combat ? agent.pursuitTargetId : null));
+        const combatTarget = target ? { id: target.id, kind: target.kind || "agent", x: target.x, y: target.y,
+          width: target.width || 1, height: target.height || 1 } : null;
+        return { ...visible, combatTarget, combatDisposition: combatDisposition(agent), action: agent.combat ? "fight" : agent.construction ? "build" : utility?.action === "supply" ? "return" : utility?.action || "wait", personalityLabels: personality ? personalityLabels(personality) : null };
       };
       return {
         simSeconds: state.simSeconds, colonyFood: state.colonyFood, encounterSignals: environment.creatureSystem?.signals || [], burrows: environment.creatureSystem?.burrows || [],
