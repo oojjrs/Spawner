@@ -15,23 +15,23 @@ function fixture(simSeconds) {
   return { game, environment, agent: game.agents[0] };
 }
 
-test("군락 유닛은 게임 시간 1분까지 살고 수명에 도달하면 자연사한다", () => {
+test("군락 유닛은 게임 시간 2분까지 살고 수명에 도달하면 자연사한다", () => {
   const { game, agent, environment } = fixture(0);
-  assert.equal(AGENT_LIFESPAN, 60);
-  assert.equal(agent.lifespan, 60);
+  assert.equal(AGENT_LIFESPAN, 120);
+  assert.equal(agent.lifespan, 120);
   Object.assign(agent, { carrying: 3, carryingType: "pebbles", shield: 1000, shieldUntil: 1000 });
-  game.prepare(59.999);
+  game.prepare(119.999);
   game.tick(0);
   assert.equal(game.agents.length, 1);
   assert.ok(agent.health > 0);
-  game.prepare(60);
+  game.prepare(120);
   game.tick(0.001);
   assert.equal(agent.health, 0);
   assert.equal(game.agents.length, 0);
   assert.equal([...environment.food.values()].filter(cell => cell.kind === "corpse").length, 1);
   assert.equal([...environment.food.values()].filter(cell => cell.resourceType === "pebbles")
     .reduce((sum, cell) => sum + cell.amount, 0), 3);
-  game.prepare(61);
+  game.prepare(121);
   game.tick(1);
   assert.equal([...environment.food.values()].filter(cell => cell.kind === "corpse").length, 1);
 });
@@ -56,7 +56,7 @@ test("저장과 복원은 나이와 개체별 수명을 초기화하지 않는�
   assert.equal(restored.agents.length, 0);
 });
 
-test("수명 필드가 없는 이전 저장에도 기존 탄생 시각을 기준으로 1분을 적용한다", () => {
+test("수명 필드가 없는 이전 저장에도 기존 탄생 시각을 기준으로 2분을 적용한다", () => {
   const { game } = fixture(0);
   game.prepare(30);
   const saved = JSON.parse(game.save());
@@ -64,8 +64,8 @@ test("수명 필드가 없는 이전 저장에도 기존 탄생 시각을 기준
   const restored = fixture(30).game;
   restored.restore(JSON.stringify(saved));
   assert.equal(restored.agents[0].bornAt, 0);
-  assert.equal(restored.agents[0].lifespan, 60);
-  restored.prepare(180);
+  assert.equal(restored.agents[0].lifespan, 120);
+  restored.prepare(120);
   restored.tick(0);
   assert.equal(restored.agents.length, 0);
 });
@@ -80,11 +80,11 @@ test("나중에 생긴 군락과 새로 생산한 개체는 자신의 탄생 시
   const birth = game.command({ type: "design", templateId: null, name: "수명 시험", slots: [], birth: true });
   const child = game.agents.find(candidate => candidate.id === birth.agentId);
   assert.equal(child.bornAt, 150);
-  assert.equal(child.lifespan, 60);
-  game.prepare(180);
+  assert.equal(child.lifespan, 120);
+  game.prepare(240);
   game.tick(0);
   assert.deepEqual(game.agents.map(candidate => candidate.id), [child.id]);
-  game.prepare(210);
+  game.prepare(270);
   game.tick(0);
   assert.equal(game.agents.length, 0);
 });

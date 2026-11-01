@@ -19,9 +19,9 @@ function fixture(selected) {
 }
 function change(game,update){const saved=JSON.parse(game.save());update(saved.state);game.restore(JSON.stringify(saved));}
 
-test("기본 수명은 네 종족 모두 1분이고 새 개체도 같은 규칙을 따른다",()=>{
- const {game}=fixture(true);assert.ok(game.agents.every(agent=>agent.lifespan===60));
- for(const tribe of Object.values(TRIBE_PACING))assert.equal(tribe.lifespan,60);
+test("기본 수명은 네 종족 모두 2분이고 새 개체도 같은 규칙을 따른다",()=>{
+ const {game}=fixture(true);assert.ok(game.agents.every(agent=>agent.lifespan===120));
+ for(const tribe of Object.values(TRIBE_PACING))assert.equal(tribe.lifespan,120);
 });
 
 test("자원이 충분해도 AI 성장 시점은 4분30초·11분30초·20분 이전으로 당겨지지 않는다",()=>{

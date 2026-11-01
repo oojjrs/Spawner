@@ -2763,10 +2763,10 @@ return { generateHydrology, hydrologyResourceSuitability, populateWatershedResou
 })();
 modules["server/unit-stats.mjs"] = (() => {
 const TRIBE_UNIT_STATS = Object.freeze({
-  bean: Object.freeze({ speed: .5, loadedSpeed: .4, lifespan: 60, lifespanWithAttribute: 180 }),
-  spore: Object.freeze({ speed: .5, loadedSpeed: .4, lifespan: 60, lifespanWithAttribute: 180 }),
-  pebble: Object.freeze({ speed: .35, loadedSpeed: .3, lifespan: 60, lifespanWithAttribute: 240 }),
-  spring: Object.freeze({ speed: .9, loadedSpeed: .275, lifespan: 60, lifespanWithAttribute: 180 })
+  bean: Object.freeze({ speed: .5, loadedSpeed: .4, lifespan: 120, lifespanWithAttribute: 240 }),
+  spore: Object.freeze({ speed: .5, loadedSpeed: .4, lifespan: 120, lifespanWithAttribute: 240 }),
+  pebble: Object.freeze({ speed: .35, loadedSpeed: .3, lifespan: 120, lifespanWithAttribute: 300 }),
+  spring: Object.freeze({ speed: .9, loadedSpeed: .275, lifespan: 120, lifespanWithAttribute: 240 })
 });
 
 const ATTRIBUTE_STAT_VALUES = Object.freeze({
