@@ -16,6 +16,7 @@ export function placeCorpse(food, corpse) {
   corpse.resourceType = "nutrients";
   delete corpse.carapaceAmount;
   corpse.amount = Math.floor(Math.max(0, corpse.amount));
+  if (corpse.amount <= 0) return null;
   const position = corpse.x + "," + corpse.y;
   corpse.id = "corpse:" + corpse.agentId;
   if (!Number.isFinite(corpse.initialAmount)) corpse.initialAmount = Math.max(0, corpse.amount);
@@ -36,6 +37,6 @@ export function expireCorpses(food, simSeconds) {
     if (!Number.isFinite(cell.decaysAt) || cell.decaysAt < cell.diedAt + CORPSE_LIFETIME) cell.decaysAt = cell.diedAt + CORPSE_LIFETIME;
     if (!Number.isFinite(cell.initialAmount)) cell.initialAmount = Math.max(0, cell.amount);
     cell.initialAmount = Math.floor(cell.initialAmount);
-    if (cell.amount <= 0 && cell.initialAmount > 0 || simSeconds >= cell.decaysAt) food.delete(key);
+    if (cell.amount <= 0 || simSeconds >= cell.decaysAt) food.delete(key);
   }
 }

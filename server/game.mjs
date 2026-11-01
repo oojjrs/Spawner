@@ -240,7 +240,7 @@ export function createGame(environment, colony, savedGame) {
             state.knownFood.set(key, { ...food });
             discoverResource(food, observer);
           }
-          else if (food?.resourceType === "tree" || food?.kind === "corpse") state.knownFood.set(key, { ...food });
+          else if (food?.resourceType === "tree") state.knownFood.set(key, { ...food });
           else state.knownFood.delete(key);
         }
       }
@@ -262,11 +262,20 @@ export function createGame(environment, colony, savedGame) {
       visibleCells = new Set();
       for (const source of permanentVisionSources()) revealAround(source.x, source.y, source.radius, null);
       for (const [key, known] of state.knownFood) {
+        if (known.kind === "corpse") {
+          const current = foodCellMap.get(key);
+          if (known.amount <= 0 || state.simSeconds >= known.decaysAt || known.colonyId === colony.id &&
+              !(current?.id === known.id && current.amount > 0)) {
+            state.knownFood.delete(key);
+            continue;
+          }
+          if (known.colonyId === colony.id) state.knownFood.set(key, { ...current });
+        }
         if (key !== known.x + "," + known.y && visibleCells.has(known.y * WORLD_SIZE + known.x) &&
-          !(foodCellMap.get(key)?.amount > 0 || foodCellMap.get(key)?.kind === "corpse")) state.knownFood.delete(key);
+          !(foodCellMap.get(key)?.amount > 0)) state.knownFood.delete(key);
       }
       for (const corpse of foodCellMap.values()) {
-        if (corpse.kind !== "corpse" || corpse.colonyId !== colony.id || corpse.amount <= 0 && corpse.initialAmount !== 0 ||
+        if (corpse.kind !== "corpse" || corpse.colonyId !== colony.id || corpse.amount <= 0 ||
           state.simSeconds >= corpse.decaysAt) continue;
         revealAround(corpse.x, corpse.y, 1, null);
       }
@@ -294,7 +303,7 @@ export function createGame(environment, colony, savedGame) {
       }
       for (const [key, food] of foodCellMap) {
         if (key === food.x + "," + food.y || !visibleCells.has(food.y * WORLD_SIZE + food.x)) continue;
-        if (food.amount > 0 || food.kind === "corpse") {
+        if (food.amount > 0) {
           state.knownFood.set(key, { ...food });
           discoverResource(food, discoveryObserver(food));
         } else state.knownFood.delete(key);
@@ -1947,8 +1956,10 @@ export function createGame(environment, colony, savedGame) {
       for (const drop of drops) {
         if (drop.kind === "corpse") {
           const cell = placeCorpse(foodCellMap, { x: agent.x, y: agent.y, ...drop });
-          state.corpses.push(cell);
-          state.knownFood.set(cell.key, { ...cell });
+          if (cell) {
+            state.corpses.push(cell);
+            state.knownFood.set(cell.key, { ...cell });
+          }
           continue;
         }
         let placed = false;
@@ -2028,14 +2039,6 @@ export function createGame(environment, colony, savedGame) {
         reconsiderAgent(agent, reason);
       };
       expireCorpses(foodCellMap, state.simSeconds);
-      for (const [key, known] of state.knownFood) {
-        if (known.kind !== "corpse") continue;
-        const current = foodCellMap.get(key);
-        if (known.colonyId === colony.id) {
-          if (current?.id === known.id) state.knownFood.set(key, { ...current });
-          else state.knownFood.delete(key);
-        } else if (state.simSeconds >= known.decaysAt) state.knownFood.delete(key);
-      }
       if (state.simSeconds >= footprintCleanupAt) expireFootprints();
       constructionSupply.refresh();
       updatingAgents = true;
@@ -2601,6 +2604,7 @@ export function createGame(environment, colony, savedGame) {
         value?.collection === "Map" ? new Map(value.entries) :
         value?.collection === "Set" ? new Set(value.entries) : value);
       Object.assign(state, data.state);
+      state.corpses = [];
       state.foragerMemory = data.state.foragerMemory || null;
       state.evolutionPoints = Math.floor(state.evolutionPoints);
       state.colonyFood = Math.floor(state.colonyFood);
@@ -2670,6 +2674,7 @@ export function createGame(environment, colony, savedGame) {
         if (cell.kind === "corpse") {
           delete cell.carapaceAmount;
           cell.amount = Math.floor(cell.amount);
+          if (cell.amount <= 0) { state.knownFood.delete(key); continue; }
           if (Number.isFinite(cell.initialAmount)) cell.initialAmount = Math.floor(cell.initialAmount);
         }
         const current = foodCellMap.get(key);

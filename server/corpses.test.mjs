@@ -33,7 +33,7 @@ test("사체는 자원·다른 사체와 같은 사망 칸에 남고 발견 기�
   environment.food.set("46,42", resource);
   const victims = [...game.agents];
   for (const agent of victims) {
-    Object.assign(agent, { x: 46, y: 42, renderFromX: 46, renderFromY: 42 });
+    Object.assign(agent, { x: 46, y: 42, renderFromX: 46, renderFromY: 42, cost: 10 });
     game.receiveDamage(agent, 1000);
   }
   const snapshot = game.snapshot();
@@ -94,7 +94,7 @@ test("겹친 사체도 지정한 대상을 채집하고 원래 자원을 보존�
   const saved = JSON.parse(game.save());
   saved.state.evolutionPoints = 10;
   saved.state.nestLevel = 2;
-  saved.state.agents[0].cost = 10;
+  saved.state.agents[0].cost = 5;
   saved.state.agents.splice(1);
   game.restore(JSON.stringify(saved));
   const designed = game.command({ type: "design", templateId: null, name: "분해 유닛", slots: ["butchery"], birth: true });
@@ -114,12 +114,14 @@ test("겹친 사체도 지정한 대상을 채집하고 원래 자원을 보존�
   game.prepare(0); game.tick(0);
   assert.equal(harvester.mode, "harvest");
   game.prepare(1); game.tick(1);
-  game.prepare(2.501); game.tick(1.501);
+  const completedAt = harvester.harvestReady + .001;
+  game.prepare(completedAt); game.tick(completedAt - 1);
   assert.equal(harvester.carryingType, "nutrients");
   assert.equal(harvester.carrying, 1);
   assert.equal(environment.food.get(corpse.key)?.amount || 0, before - 1);
   assert.equal(environment.food.has(corpse.key), before > 1);
   assert.equal(game.snapshot().corpses.some(cell => cell.id === corpse.id), before > 1);
+  assert.equal(game.snapshot().food.some(cell => cell.id === corpse.id), false);
   assert.equal(resource.amount, 7);
 });
 
@@ -134,7 +136,7 @@ test("남겨진 양분은 회수 속성으로 해금하고 네 종족의 시작 
     assert.equal(canHarvestResource(corpse, environment.world, { butchery: 1, strength: 1 }, tribe), true, tribe);
     assert.equal(game.agents.filter(agent => canHarvestResource(corpse, environment.world, agent.attributes, tribe)).length, 0, tribe);
     const [victim, harvester] = game.agents;
-    Object.assign(victim, { x: 46, y: 42 });
+    Object.assign(victim, { x: 46, y: 42, cost: 10 });
     game.receiveDamage(victim, 1000);
     const remains = game.snapshot().corpses[0], amount = remains.amount;
     collect(game, harvester, remains);
@@ -225,4 +227,64 @@ test("적 사체와 회수된 아군 사체는 시야를 제공하지 않는다"
   corpse.amount = 0;
   game.snapshot();
   assert.equal(game.isVisible(100, 100), false);
+});
+
+
+test("양분이 0개인 유닛은 사체를 등록하지 않고 운반 자원만 남긴다", () => {
+  for (const [tribe, cost] of [["bean", 3], ["bean", 4], ["spore", 2], ["spore", 3]]) {
+    for (const cause of ["age", "combat"]) {
+      const { game, environment } = fixture(tribe);
+      game.agents.splice(1);
+      const victim = game.agents[0];
+      const resource = { x: 46, y: 42, amount: 7, resourceType: "clay", kind: "resource" };
+      environment.food.set("46,42", resource);
+      Object.assign(victim, { x: 46, y: 42, cost, carrying: 3, carryingType: "pebbles" });
+      if (cause === "age") { game.prepare(victim.bornAt + victim.lifespan); game.tick(0); }
+      else game.receiveDamage(victim, 1000);
+      assert.equal(game.agents.length, 0, tribe + ":" + cost + ":" + cause);
+      assert.equal([...environment.food.values()].some(cell => cell.kind === "corpse"), false);
+      const snapshot = game.snapshot();
+      assert.deepEqual(snapshot.corpses, []);
+      assert.equal(snapshot.food.some(cell => cell.kind === "corpse"), false);
+      assert.equal(environment.food.get("46,42"), resource);
+      assert.equal(resource.amount, 7);
+      assert.equal([...environment.food.values()].filter(cell => cell.resourceType === "pebbles")
+        .reduce((sum, cell) => sum + cell.amount, 0), 3);
+      const saved = JSON.parse(game.save());
+      assert.equal(saved.state.knownFood.entries.some(([, cell]) => cell.kind === "corpse"), false);
+    }
+  }
+});
+
+test("이전 저장의 양분 0개 사체는 시야 밖 월드와 발견 기억에서도 제거한다", () => {
+  const { game, environment } = fixture("bean");
+  game.agents.splice(0);
+  const resource = { x: 100, y: 100, amount: 7, resourceType: "clay", kind: "resource" };
+  environment.food.set("100,100", resource);
+  const saved = JSON.parse(game.save());
+  for (const colonyId of [1, 2]) for (const initialAmount of [0, 4]) {
+    const agentId = "zero:" + colonyId + ":" + initialAmount;
+    const key = "corpse:" + agentId;
+    const corpse = { key, id: key, agentId, colonyId, kind: "corpse", tribe: "bean",
+      x: 100, y: 100, amount: 0, initialAmount, diedAt: 0, decaysAt: 300 };
+    environment.food.set(key, corpse);
+    saved.state.knownFood.entries.push([key, { ...corpse }]);
+    saved.state.corpses.push({ ...corpse });
+  }
+  const remains = { id: "corpse:positive", agentId: "positive", colonyId: 1, kind: "corpse", tribe: "bean",
+    x: 110, y: 110, amount: 2, initialAmount: 2, diedAt: 0, decaysAt: 300 };
+  environment.food.set("110,110", remains);
+  saved.state.knownFood.entries.push(["110,110", { ...remains }]);
+  game.restore(JSON.stringify(saved));
+  assert.deepEqual([...environment.food.values()].filter(cell => cell.kind === "corpse"), [remains]);
+  const snapshot = game.snapshot();
+  assert.deepEqual(snapshot.corpses, [remains]);
+  assert.equal(snapshot.food.some(cell => cell.kind === "corpse" && cell.amount <= 0), false);
+  assert.equal(game.isVisible(100, 100), false);
+  assert.equal(game.isVisible(110, 110), true);
+  assert.equal(environment.food.get("100,100"), resource);
+  assert.equal(resource.amount, 7);
+  const restored = JSON.parse(game.save());
+  assert.equal(restored.state.knownFood.entries.some(([, cell]) => cell.kind === "corpse" && cell.amount <= 0), false);
+  assert.deepEqual(restored.state.corpses, []);
 });
