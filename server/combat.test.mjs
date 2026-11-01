@@ -635,7 +635,7 @@ test("제거된 생명체의 저장된 확정 반격도 해당 종의 타격 시
   f.tick(startedAt + .31);
   assert.equal(saved.health, 100);
   assert.ok(Math.abs(saved.combat.pendingCounter.hitAt - startedAt - .59) < 1e-8);
-  assert.ok(Math.abs(saved.combat.pendingCounter.endsAt - startedAt - 1.77) < 1e-8);
+  assert.ok(Math.abs(saved.combat.pendingCounter.endsAt - startedAt - (1.57 + COMBAT_EXCHANGE_PAUSE)) < 1e-8);
   f.tick(startedAt + .59);
   assert.equal(f.hits.length, 1);
   const health = saved.health;
@@ -681,7 +681,7 @@ test("탈출 실패는 차례를 소모하고 진행 중인 반격 뒤 다음 �
   const failedAt = f.environment.simSeconds;
   f.tick(failedAt); f.tick(failedAt + .1);
   assert.equal(rolls, 1);
-  f.tick(failedAt + .2);
+  f.tick(failedAt + COMBAT_EXCHANGE_PAUSE);
   assert.ok(b.attack && !b.attack.counter);
   f.tick(b.attack.hitAt);
   assert.equal(rolls, 1);
