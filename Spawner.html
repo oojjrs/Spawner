@@ -14,13 +14,6 @@
     </aside>
     <main class="stage">
       <canvas id="world" width="1200" height="760" tabindex="0" aria-label="Spawner world canvas"></canvas>
-      <button class="sound-toggle" id="sound-toggle" type="button" aria-label="소리 끄기" aria-pressed="true" title="배경음악·효과음 끄기">
-        <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-          <path d="M4 12h6l7-6v20l-7-6H4z" fill="currentColor" stroke="none"/>
-          <g class="sound-waves"><path d="M21 11c3 3 3 7 0 10M25 7c5 5 5 13 0 18"/></g>
-          <path class="sound-muted" d="m22 12 7 8m0-8-7 8"/>
-        </svg>
-      </button>
       <button class="sound-toggle room-exit" id="room-exit" type="button" aria-labelledby="ending-rooms">
         <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
           <path d="M15 6h7v5m0 10v5h-7M15 6 5 3v26l10-3Zm-4 9v3M19 16h11m-5-5 5 5-5 5"/>
@@ -288,7 +281,16 @@
 
   <section class="welcome" id="welcome" aria-labelledby="welcome-title" aria-busy="true">
     <div class="welcome-content">
-      <header class="welcome-heading"><p class="welcome-brand" id="welcome-title" tabindex="-1">SPAWNER</p></header>
+      <header class="welcome-heading">
+        <p class="welcome-brand" id="welcome-title" tabindex="-1">SPAWNER</p>
+        <button class="sound-toggle" id="sound-toggle" type="button" aria-label="소리 끄기" aria-pressed="true" title="배경음악·효과음 끄기">
+          <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+            <path d="M4 12h6l7-6v20l-7-6H4z" fill="currentColor" stroke="none"/>
+            <g class="sound-waves"><path d="M21 11c3 3 3 7 0 10M25 7c5 5 5 13 0 18"/></g>
+            <path class="sound-muted" d="m22 12 7 8m0-8-7 8"/>
+          </svg>
+        </button>
+      </header>
       <div class="welcome-loading" role="status" aria-label="불러오는 중">
         <span class="welcome-spinner" aria-hidden="true"></span>
         <p class="welcome-loading-message" aria-hidden="true">

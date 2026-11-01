@@ -9189,7 +9189,7 @@
 
     function setLobbyBusy(busy) {
       lobbyBusy = busy;
-      welcome.querySelectorAll("input, button, select, textarea").forEach(control => { control.disabled = busy; });
+      welcome.querySelectorAll("input, button:not(#sound-toggle), select, textarea").forEach(control => { control.disabled = busy; });
       roomsDeleteAll.disabled = busy || roomCount === 0;
       roomsDeleteAll.hidden = roomCount === 0;
       document.getElementById("rooms-refresh").hidden = roomCount === 0;
@@ -9224,6 +9224,7 @@
       tribeSelection.hidden = false;
       drawTribeWorld();
       document.body.dataset.screen = "tribe";
+      document.querySelector(".tribe-selection-heading").appendChild(document.getElementById("sound-toggle"));
       document.querySelector(".app").hidden = true;
       document.querySelector(".app").inert = true;
       document.getElementById("tribe-selection-back").focus();
@@ -9545,6 +9546,7 @@
       welcome.hidden = false;
       randomRoomSeed();
       document.body.dataset.screen = "welcome";
+      document.querySelector(".welcome-heading").appendChild(document.getElementById("sound-toggle"));
       welcomeStatus.textContent = "";
       await refreshRooms();
       document.getElementById("welcome-title").focus();
@@ -9703,6 +9705,7 @@
         welcome.hidden = false;
         randomRoomSeed();
         document.body.dataset.screen = "welcome";
+        document.querySelector(".welcome-heading").appendChild(document.getElementById("sound-toggle"));
         audio.setActive(!document.hidden);
         await refreshRooms();
         document.getElementById("welcome-title").focus();
@@ -9995,6 +9998,7 @@
         welcome.hidden = true;
         tribeSelection.hidden = true;
         document.body.dataset.screen = "game";
+        canvas.parentElement.appendChild(document.getElementById("sound-toggle"));
         document.querySelector(".app").hidden = false;
         document.querySelector(".app").inert = false;
         resizeCanvas();

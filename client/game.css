@@ -669,6 +669,7 @@
       .design-footer { margin-top: 14px; padding-top: 12px; }
     }
     .sound-toggle { position: absolute; top: 16px; right: 16px; z-index: 3; display: grid; place-items: center; width: 60px; height: 60px; padding: 12px; border: 1px solid #75c4b680; border-radius: 16px; color: #e7f7f2; background: #172522f2; box-shadow: 0 4px 16px #0006; cursor: pointer; }
+    .welcome-heading > #sound-toggle, .tribe-selection-heading > #sound-toggle { position: static; flex-shrink: 0; }
     .sound-toggle.room-exit { top: 88px; }
     .reload-toast { position: fixed; top: 16px; left: 50%; z-index: 20; width: max-content; max-width: calc(100vw - 32px); margin: 0; padding: 10px 18px; border: 1px solid #75c4b680; border-radius: 12px; background: #172522f2; color: #e7f7f2; box-shadow: 0 4px 16px #0006; font-size: .85rem; line-height: 1.5; text-align: center; word-break: keep-all; pointer-events: none; opacity: 0; visibility: hidden; transform: translateX(-50%); transition: opacity .18s, visibility 0s .18s; }
     .reload-toast.is-visible { opacity: 1; visibility: visible; transition-delay: 0s; }
@@ -693,7 +694,7 @@
     .welcome-loading-message { width: 100%; margin: 0; text-align: center; }
     @keyframes welcome-spin { to { transform: rotate(360deg); } }
     @media (prefers-reduced-motion: reduce) { .welcome-spinner { animation: none; } }
-    .welcome-heading { margin-bottom: clamp(24px, 4vh, 32px); }
+    .welcome-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: clamp(24px, 4vh, 32px); }
     .welcome-heading > .welcome-brand { margin: 0; color: var(--accent); letter-spacing: .28em; font-size: .8rem; outline: none; }
     .welcome p { color: var(--muted); font-size: .85rem; line-height: 1.6; }
     .welcome form { display: grid; gap: 10px; }
