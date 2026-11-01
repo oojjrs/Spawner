@@ -16,7 +16,7 @@ export function constructionHelpTemplate(state, slots, kind) {
     const support = slots.includes("feet") ? "lifespan" : "feet";
     if (!slots.includes(support)) slots.push(support);
   }
-  const previous = state.templates.filter(template => (!military || template.productionRole === "military") && template.slots.every(key => isAttributeUnlocked(key, state.nestLevel, state.tribe)) && slots.every(key => template.slots.includes(key)) &&
+  const previous = state.templates.filter(template => template.slots.every(key => isAttributeUnlocked(key, state.nestLevel, state.tribe)) && slots.every(key => template.slots.includes(key)) &&
     (construction ? template.slots.length === 1 : !template.slots.includes("construction")))
     .sort((first, second) => birthCost(first, state.tribe) - birthCost(second, state.tribe) || first.slots.length - second.slots.length)[0];
   if (previous) return previous;

@@ -2277,8 +2277,13 @@ export function createGame(environment, colony, savedGame) {
           level:state.nestLevel+1,cost:upgradeCost(),canProduce:true,issue:null};
       }
       if (automatic !== true && state.simSeconds < CONQUEST_PACING.guidanceAt*(TRIBE_PACING[colony.tribe]?.tempo||1)) return null;
+      const defenders = state.agents.filter(agent => {
+        if (!(agent.health > 0) || agent.construction) return false;
+        const attributes = agent.attributes || attributeCounts(agent.slots,agent.attributeLevels);
+        return !attributes.construction && ATTRIBUTES.some(attribute => attribute.kind === "combat" && attributes[attribute.key] > 0);
+      });
       if (automatic !== true && state.nestLevel >= 2 && state.simSeconds >= CONQUEST_PACING.neutralConflictAt*(TRIBE_PACING[colony.tribe]?.tempo||1) &&
-          !state.agents.some(agent => agent.health > 0 && militaryAgent(agent,colony.tribe)) && !state.militaryGuidanceCompleted) {
+          !defenders.length) {
         const slots = TRIBE_PACING[colony.tribe].army.filter(key => isAttributeUnlocked(key,state.nestLevel,colony.tribe)).slice(0,state.nestLevel);
         const template = constructionHelpTemplate({...state,tribe:colony.tribe},slots,"military");
         const cost = birthCost(template,colony.tribe);

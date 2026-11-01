@@ -10,7 +10,16 @@ function fixture(tribe){const native=Object.keys(buildingCost("storage",tribe).m
 for(const tribe of ["bean","spore","spring"])test(tribe+" 평상시 첫 전략 후보는 시야를 여는 감시봉이며 창고 물류를 확장으로 계산하지 않는다",()=>{const f=fixture(tribe),goals=tribeConstructionGoals(f.state,tribe,f.nests,[],[]);assert.equal(goals[0].buildingKey,"watchpost");assert.ok(goals.filter(goal=>goal.buildingKey==="storage").every(goal=>!goal.benefits.expansion));});
 test("현재 건설 재료만 필요하면 기본 자원 재고를 최대 용량까지 요구하지 않는다",()=>{const f=fixture("bean"),goal={buildingKey:"watchpost",cost:buildingCost("watchpost","bean")};f.state.resourceInventory.clay=200;assert.deepEqual(tribeConstructionStock(f.state,"bean",goal),goal.cost.materials);assert.equal(f.state.resourceInventory.clay,200);});
 test("현장 예약은 납품과 운반 중 화물을 빼고 실제 남은 보관 목표에만 합산한다",()=>{const f=fixture("bean");f.state.agents[0].construction={id:"site",buildingKey:"watchpost",delivered:{clay:4,tree:6,"grass-fiber":4}};f.state.agents[1].transportCargo={siteId:"site"};f.state.agents[1].carryingType="clay";f.state.agents[1].carrying=2;assert.deepEqual(tribeConstructionStock(f.state,"bean",null),{clay:2,tree:0,"grass-fiber":0});});
-test("진화실을 확보하면 실제 설계의 다음 강화 자재도 보관 목표에 반영한다",()=>{const f=fixture("pebble");f.state.buildings=[{key:"evolution-lab",health:100}];f.state.templates=[{slots:["blade"],attributeLevels:{blade:1}}];const goal={buildingKey:"watchpost",cost:buildingCost("watchpost","pebble")};const target=tribeConstructionStock(f.state,"pebble",goal);assert.equal(target.tree,9);assert.equal(target["grass-fiber"],7);assert.equal(target.pebbles,8);});
+test("속성 강화가 비활성이면 진화실이 있어도 강화 자재를 추가 비축하지 않는다", () => {
+  for (const tribe of ["bean", "spore", "pebble", "spring"]) for (const nestLevel of [2, 3, 4]) {
+    const f = fixture(tribe);
+    f.state.nestLevel = nestLevel;
+    f.state.buildings = [{key:"evolution-lab", health:100}];
+    f.state.templates = [{slots:["blade"], attributeLevels:{blade:1}}, {slots:["piercing"], attributeLevels:{piercing:1}}];
+    const goal = {buildingKey:"watchpost", cost:buildingCost("watchpost",tribe)};
+    assert.deepEqual(tribeConstructionStock(f.state,tribe,goal), goal.cost.materials, tribe + ":" + nestLevel);
+  }
+});
 test("성장 전에는 급하지 않은 창고 운반 이득이 둥지 성장을 늦추지 않는다",()=>{const f=fixture("spring");f.state.nestLevel=1;f.state.resourceInventory={dew:10};const goals=tribeConstructionGoals(f.state,"spring",f.nests,[],[]);assert.ok(!goals.some(goal=>goal.buildingKey==="storage"&&!goal.urgent));});
 
 for(const tribe of ["bean","spore","pebble","spring"])test(tribe+" 둥지 성장 후 현장까지 갈 수 있도록 건설 설계를 보완한다",()=>{const state={tribe,nestLevel:2,nextTemplateId:1,templates:[]};const design=constructionHelpTemplate(state);assert.deepEqual(design.slots,["construction",tribe==="pebble"?"lifespan":"feet"]);});

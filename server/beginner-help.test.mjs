@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {createGame} from "./game.mjs";
+import {constructionHelpTemplate} from "./beginner-help.mjs";
 import {TRIBE_STARTING_UNITS} from "./tribe-start.mjs";
 import {CONQUEST_PACING,TRIBE_PACING} from "./conquest-pacing.mjs";
 
@@ -105,4 +106,58 @@ test("성장 안내는 최고 레벨과 파괴·종료·비선택·도움말 해
     if (condition === "disabled") environment.beginnerHelpEnabled = false;
     assert.notEqual(game.snapshot().constructionHelp?.kind, "upgrade", condition);
   }
+});
+
+for (const tribe of ["bean", "spore", "pebble", "spring"]) test(tribe + " 군사 안내는 내부 분류 대신 실제 전투 속성과 보유 수를 확인한다", () => {
+  for (const count of [1, 12]) for (const productionRole of ["worker", "military", null]) {
+    const {game} = fixture(tribe, 400), saved = JSON.parse(game.save());
+    Object.assign(saved.state, {nestLevel:2, nestHealth:200, evolutionPoints:10});
+    const base = saved.state.agents[0];
+    saved.state.agents = Array.from({length:count}, (_, index) => ({...base, id:"1:" + (index + 1),
+      slots:["blade", "feet"], attributeLevels:{blade:1, feet:1}, productionRole, health:100, birth:null, construction:null}));
+    game.restore(JSON.stringify(saved));
+    assert.notEqual(game.snapshot().constructionHelp?.kind, "military", count + ":" + productionRole);
+  }
+});
+
+test("군사 분류나 과거 생산 기록만 있고 전투 속성 개체가 없으면 현재 부족을 안내한다", () => {
+  const {game} = fixture("bean", 400), saved = JSON.parse(game.save());
+  Object.assign(saved.state, {nestLevel:2, nestHealth:200, evolutionPoints:10, militaryGuidanceCompleted:true});
+  saved.state.agents = saved.state.agents.slice(0,1);
+  Object.assign(saved.state.agents[0], {slots:["feet"], attributeLevels:{feet:1}, productionRole:"military", birth:null});
+  game.restore(JSON.stringify(saved));
+  assert.equal(game.snapshot().constructionHelp?.kind, "military");
+});
+
+test("사망 개체와 건물로 변태할 개체는 방어 전력 수에 포함하지 않는다", () => {
+  for (const condition of ["dead", "construction"]) {
+    const {game} = fixture("bean", 400), saved = JSON.parse(game.save());
+    Object.assign(saved.state, {nestLevel:2, nestHealth:200, evolutionPoints:10});
+    saved.state.agents = saved.state.agents.slice(0,1);
+    Object.assign(saved.state.agents[0], {slots:condition === "dead" ? ["blade"] : ["blade", "construction"],
+      attributeLevels:{blade:1, construction:1}, health:condition === "dead" ? 0 : 100, birth:null});
+    game.restore(JSON.stringify(saved));
+    assert.equal(game.snapshot().constructionHelp?.kind, "military", condition);
+  }
+});
+
+test("보유 전투 개체로 부족이 해소되면 이전 군사 안내로 추가 생산하지 않는다", () => {
+  const {game} = fixture("bean", 400), saved = JSON.parse(game.save());
+  Object.assign(saved.state, {nestLevel:2, nestHealth:200, evolutionPoints:10});
+  game.restore(JSON.stringify(saved));
+  const offer = game.snapshot().constructionHelp;
+  assert.equal(offer?.kind, "military");
+  Object.assign(saved.state.agents[0], {slots:["blade", "feet"], attributeLevels:{blade:1, feet:1}, productionRole:"worker"});
+  game.restore(JSON.stringify(saved));
+  const before = game.snapshot();
+  assert.deepEqual(game.command({type:"beginner-construction", expectedBuildingKey:offer.buildingKey, expectedStep:offer.step}), {});
+  const after = game.snapshot();
+  assert.equal(after.evolutionPoints, before.evolutionPoints);
+  assert.equal(after.agents.length, before.agents.length);
+});
+
+test("군사 안내도 속성이 맞는 기존 설계도를 내부 분류와 관계없이 재사용한다", () => {
+  const template = {id:7, name:"날쌘 전사", slots:["blade", "feet"], productionRole:"worker"};
+  const state = {tribe:"spore", nestLevel:2, templates:[template]};
+  assert.equal(constructionHelpTemplate(state, ["blade", "feet"], "military"), template);
 });
