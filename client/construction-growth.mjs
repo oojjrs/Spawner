@@ -77,7 +77,7 @@ export function constructionDoorway(sequence) {
 }
 
 export function drawConstructionDoors(context, image, growth, sequence, opening, time) {
-  if (opening >= 1) return;
+  if (opening >= 1 || sequence.doorway?.disabled) return;
   const doorway = sequence.doorway || constructionDoorway(sequence), pulse = constructionHeartbeat(time, 0);
   const curve = Math.cos(opening * Math.PI / 2), flexible = sequence.tribe !== "pebble";
   context.save(); context.beginPath();
@@ -101,6 +101,21 @@ export function drawConstructionDoors(context, image, growth, sequence, opening,
 }
 
 export function drawConstructionGrowth(context, sequence, growth, image, pose, time, core, architecture) {
+  if (sequence.assembly && pose.progress >= sequence.assembly.start) {
+    const assembly = sequence.assembly, amount = ramp(pose.progress, assembly.start, assembly.end);
+    const floor = assembly.ground, rect = growth.parts.cocoon;
+    const height = 1.88 * rect[3] / rect[2], compression = assembly.rigid ? 1 : 1 - amount * .75;
+    context.save(); context.beginPath(); context.rect(-4, -4, 8, 4 + floor); context.clip();
+    if (amount < 1) {
+      context.save();
+      context.translate(0, floor * (1 - compression) + height * compression * amount * 1.06);
+      context.scale(1, compression);
+      drawConstructionCocoon(context, image, growth, sequence.tribe, 2, time);
+      context.restore();
+    }
+    architecture(null, amount);
+    context.restore(); return;
+  }
   if (pose.stage === 1) {
     const laid = ramp(pose.settle, .05, 1);
     if (laid > 0) drawConstructionBed(context, image, growth, mix(.14, 1.18, laid));

@@ -15,9 +15,9 @@ function fixture(tribe, create) {
   environment.games.set(colony.ownerId, game);
   const saved = JSON.parse(game.save());
   saved.state.buildings = [{ id: "warehouse", key: "storage", x: 60, y: 40, health: 100 }];
-  saved.state.resourceInventory = { tree: 3, meat: 2, clay: 4, sand: 7 };
+  saved.state.resourceInventory = { tree: 3, nutrients: 2, clay: 4, sand: 7 };
   saved.state.resourceStores = [
-    { id: "nest:1", kind: "nest", x: 40, y: 40, inventory: { tree: 3, meat: 2 } },
+    { id: "nest:1", kind: "nest", x: 40, y: 40, inventory: { tree: 3, nutrients: 2 } },
     { id: "warehouse", kind: "storage", x: 60, y: 40, inventory: { clay: 4, sand: 7 } },
     { id: "remains:fixture", kind: "remains", x: 70, y: 40, width: 1, height: 1, capacity: 0, inventory: { tree: 9, dew: 11 } }
   ];

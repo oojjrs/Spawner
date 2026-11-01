@@ -25,8 +25,21 @@ function record(owner,id,layers,values,details) {
   recordPlacementMap(owner,id,layers,values,{schemaVersion:33,...details});
 }
 
-export function formContinentalTerrain(size, seed, capture) {
-  const profile = TERRAIN_FORMATION_PROFILE, length = size*size, owner = {};
+export function formContinentalTerrain(size, seed, capture, version) {
+  const base = TERRAIN_FORMATION_PROFILE, scale = version !== undefined && version < 36 ? 1 : Math.min(1,size/base.size);
+  let profile = scale === 1 ? base : { ...base, version:36, size,
+    continentCorrelation:base.continentCorrelation*scale, upliftCorrelation:base.upliftCorrelation*scale,
+    resistanceCorrelation:base.resistanceCorrelation*scale, vegetationCorrelation:Math.max(3,base.vegetationCorrelation*scale),
+    magmaticCorrelation:base.magmaticCorrelation*scale, hydrothermalCorrelation:base.hydrothermalCorrelation*scale,
+    upliftRate:base.upliftRate*scale, reliefScale:scale, riverArea:base.riverArea*scale*scale, headwaterArea:base.headwaterArea*scale*scale,
+    mountainFraction:.2, forestFraction:.22, swampFraction:.07, dryLandFraction:.12, riverWidthMaximum:base.cellMeters*size/64,
+    adopted:{...base.adopted,upliftRate:base.upliftRate*scale},
+    selected:{...base.selected,continentCorrelation:base.continentCorrelation*scale,upliftCorrelation:base.upliftCorrelation*scale,
+      resistanceCorrelation:base.resistanceCorrelation*scale,riverArea:base.riverArea*scale*scale,headwaterArea:base.headwaterArea*scale*scale} };
+  if (version === undefined || version >= 37) profile = { ...profile, version:37,
+    upliftCorrelation:24*scale, mountainFraction:.16,
+    selected:{...profile.selected,upliftCorrelation:24*scale,upliftActivation:.6} };
+  const length = size*size, owner = {};
   initializePlacementMaps(owner,capture);
   const continentField = createLandscapeField(size,seed+4001,profile.continentCorrelation,profile.continentSmoothness);
   const upliftField = createLandscapeField(size,seed+4127,profile.upliftCorrelation,1.5);
@@ -35,11 +48,19 @@ export function formContinentalTerrain(size, seed, capture) {
   for (let index = 0; index < length; index++) {
     const x=index%size,y=Math.floor(index/size);
     continentality[index] = normalProbability(continentField[index])-Math.exp(-x/(size*.03))-Math.exp(-(size-1-x)/(size*.03))-Math.exp(-y/(size*.03))-Math.exp(-(size-1-y)/(size*.03));
-    const rise = Math.max(0,(normalProbability(upliftField[index])-.45)/.55);
+    const rise = Math.max(0,(normalProbability(upliftField[index])-profile.selected.upliftActivation)/(1-profile.selected.upliftActivation));
     uplift[index] = profile.upliftRate*(.005+1.995*rise*rise);
     resistance[index] = normalProbability(resistanceField[index]);
   }
-  const {sea,threshold,landFraction} = selectContinentalSea(continentality,size);
+  let selected = selectContinentalSea(continentality,size);
+  if (scale < 1) for (let strength=2; strength<=64 && (selected.landFraction<profile.landMinimum || selected.landFraction>profile.landMaximum); strength*=2) {
+    for (let index=0;index<length;index++) {
+      const x=index%size,y=Math.floor(index/size);
+      continentality[index]=normalProbability(continentField[index])-strength*(Math.exp(-x/(size*.03))+Math.exp(-(size-1-x)/(size*.03))+Math.exp(-y/(size*.03))+Math.exp(-(size-1-y)/(size*.03)));
+    }
+    selected=selectContinentalSea(continentality,size);
+  }
+  const {sea,threshold,landFraction}=selected;
   if (landFraction<profile.landMinimum||landFraction>profile.landMaximum) throw new Error("대륙 면적 비율을 만족하는 해수면 기준을 찾지 못했습니다.");
   let height = new Float64Array(length), nextHeight = new Float64Array(length);
   for (let index = 0; index < length; index++) height[index] = sea[index] ? -2-80*Math.max(0,threshold-continentality[index]) :
@@ -108,8 +129,8 @@ function normalDepth(discharge,slope,leftSlope,rightSlope,roughness) {
   return {depth:upper,...section(upper)};
 }
 
-export function generateFormedLandscape(terrain,moisture,heightField,size,seed,capture) {
-  const formed=formContinentalTerrain(size,seed,capture),{height,sea,drainage,profile}=formed,length=height.length,dx=profile.cellMeters;
+export function generateFormedLandscape(terrain,moisture,heightField,size,seed,capture,version) {
+  const formed=formContinentalTerrain(size,seed,capture,version),{height,sea,drainage,profile}=formed,length=height.length,dx=profile.cellMeters;
   const water=new Uint8Array(length),river=new Uint8Array(length),lake=new Uint8Array(length),slope=new Float32Array(length);
   const waterSurface=new Float64Array(length),waterDistance=new Uint8Array(length).fill(255),queue=new Int32Array(length);
   const gravel=new Float32Array(length),sand=new Float32Array(length),fines=new Float32Array(length),cover=new Float32Array(length);
@@ -126,11 +147,11 @@ export function generateFormedLandscape(terrain,moisture,heightField,size,seed,c
     slope[index]=maximum;pondDepth[index]=Math.max(0,drainage.level[index]-height[index]);
     basin[index]=parent<0||sea[parent]?index:basin[parent];
     sediment[index]=formed.erosion[index]*dx*dx;
-    const radius=10,west=y*size+Math.max(0,x-radius),east=y*size+Math.min(size-1,x+radius);
+    const radius=Math.max(3,Math.round((profile.version>=37?6:10)*(profile.reliefScale||1))),west=y*size+Math.max(0,x-radius),east=y*size+Math.min(size-1,x+radius);
     const north=Math.max(0,y-radius)*size+x,south=Math.min(size-1,y+radius)*size+x;
     const neighborhood=(height[west]+height[east]+height[north]+height[south])/4;
     const relief=height[index]-neighborhood,range=Math.max(height[west],height[east],height[north],height[south])-Math.min(height[west],height[east],height[north],height[south]);
-    terrain[index]=relief>250&&maximum>.35?8:relief>120&&maximum>.22?7:(range>=120&&maximum>=.12||relief>=40&&maximum>=.08)?6:4;
+    terrain[index]=relief>250*(profile.reliefScale||1)&&maximum>.35?8:relief>120*(profile.reliefScale||1)&&maximum>.22?7:(range>=120*(profile.reliefScale||1)&&maximum>=.12||relief>=40*(profile.reliefScale||1)&&maximum>=.08)?6:4;
     if(pondDepth[index]>.5){water[index]=2;lake[index]=1;waterSurface[index]=drainage.level[index];terrain[index]=1;}
   }
   const marked=new Uint8Array(length);
@@ -160,7 +181,9 @@ export function generateFormedLandscape(terrain,moisture,heightField,size,seed,c
     const leftSlope=Math.max(.0001,(height[leftIndex]-height[index])/dx),rightSlope=Math.max(.0001,(height[rightIndex]-height[index])/dx);
     const cross=normalDepth(discharge[index]*4/9,bedSlope,leftSlope,rightSlope,profile.manning);
     cross.depth=Math.max(cross.depth,parent>=0?waterSurface[parent]-height[index]+.00001:0);
-    cross.width=cross.depth*(1/leftSlope+1/rightSlope);cross.velocity=(discharge[index]*4/9)/Math.max(.000000001,cross.depth*cross.width/2);
+    cross.width=cross.depth*(1/leftSlope+1/rightSlope);
+    if (profile.reliefScale) cross.width=Math.min(profile.riverWidthMaximum,Math.max(cross.width,dx*size/160*(.35+.65*Math.min(1,Math.sqrt(drainage.area[index]/(profile.riverArea*6))))));
+    cross.velocity=(discharge[index]*4/9)/Math.max(.000000001,cross.depth*cross.width/2);
     width[index]=cross.width;depth[index]=cross.depth;velocity[index]=cross.velocity;
     water[index]=1;river[index]=1;terrain[index]=cross.depth>.7?0:1;waterSurface[index]=height[index]+cross.depth;
     basinSizes.set(basin[index],(basinSizes.get(basin[index])||0)+1);
@@ -201,7 +224,20 @@ export function generateFormedLandscape(terrain,moisture,heightField,size,seed,c
     rock[index]=formed.resistance[index];
     if(!water[index]&&waterDistance[index]<=2&&slope[index]<.1&&(sand[index]>.02||Array.from([index-1,index+1,index-size,index+size]).some(next=>next>=0&&next<length&&sea[next])))terrain[index]=2;
   }
-  const result={size,seed,generationVersion:33,profile,height:ground,ground,surface:drainage.level,waterSurface,
+  if (profile.mountainFraction) {
+    const mountains=[];let land=0;
+    for(let index=0;index<length;index++) {
+      if(water[index])continue;land++;
+      if(terrain[index]<6||terrain[index]>8)continue;
+      const x=index%size,y=Math.floor(index/size),radius=Math.max(3,Math.round(size/32));
+      const neighbors=[height[y*size+Math.max(0,x-radius)],height[y*size+Math.min(size-1,x+radius)],height[Math.max(0,y-radius)*size+x],height[Math.min(size-1,y+radius)*size+x]];
+      const prominence=Math.max(0,height[index]-neighbors.reduce((sum,value)=>sum+value,0)/4);
+      mountains.push({index,score:prominence+slope[index]*80+height[index]*.05});
+    }
+    mountains.sort((a,b)=>b.score-a.score||a.index-b.index);
+    for(const {index} of mountains.slice(Math.round(land*profile.mountainFraction)))terrain[index]=4;
+  }
+  const result={size,seed,generationVersion:profile.version,profile,height:ground,ground,surface:drainage.level,waterSurface,
     downstream:drainage.parent,downstreamOrder:drainage.order,flow,drainageArea:drainage.area,sediment,water,river,lake,slope,gravel,sand,fines,cover,rock,wetness,
     fertility:fines,waterDistance,fordCandidates,fords,lakeCount:0,waterBudget:water.reduce((sum,v)=>sum+(v?1:0),0),
     riverThreshold:profile.riverArea/6400,island:false,uplifts:[],uplift:formed.uplift,basement:formed.initialHeight,bedrock:formed.resistance,

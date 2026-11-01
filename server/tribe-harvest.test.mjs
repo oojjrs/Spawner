@@ -9,9 +9,9 @@ const foods = [["bean", "clay"], ["spore", "tree"], ["pebble", "pebbles"], ["spr
 
 function fixture(tribe, ownFood, create, slots) {
   const colony = { id: 1, ownerId: "tribe-harvest", tribe, x: 40, y: 40, occupiedCells: new Set(["2,2"]) };
-  const types = foods.map(([, type]) => type).filter(type => type !== ownFood).concat("sand", "meat");
+  const types = foods.map(([, type]) => type).filter(type => type !== ownFood).concat("sand", "nutrients");
   const cells = types.map((resourceType, index) => ({ x: 43 + index % 3, y: 42 + Math.floor(index / 3),
-    amount: 12, initialAmount: 12, kind: resourceType === "meat" ? "corpse" : "resource",
+    amount: 12, initialAmount: 12, kind: resourceType === "nutrients" ? "corpse" : "resource",
     terrain: "grassland", resourceType, diedAt: 120, decaysAt: 420 }));
   if (ownFood) cells.push({ x: 47, y: 42, amount: 12, initialAmount: 12, kind: "resource", terrain: "grassland", resourceType: ownFood });
   const environment = { simSeconds: 120, world: { seed: 13, generationVersion: 15,
@@ -39,7 +39,7 @@ function advance(fixture, seconds) {
   }
 }
 
-test("네 종족의 기본 먹이만 채집 가능하며 다른 종족 먹이는 기존 속성으로 해금하지 않는다", () => {
+test("네 종족의 기본 자원만 채집 가능하며 다른 종족 자원은 기존 속성으로 해금하지 않는다", () => {
   for (const generationVersion of [undefined, 10, 11, 15]) for (const [tribe, ownFood] of foods) {
     for (const [, resourceType] of foods) for (const attributes of [{}, { antenna: 2, strength: 2, feet: 2 }]) {
       const world = { generationVersion };
@@ -53,30 +53,30 @@ test("네 종족의 기본 먹이만 채집 가능하며 다른 종족 먹이는
       }
     }
   }
-  assert.equal(canHarvestResource({ resourceType: "meat" }, { generationVersion: 15 }, {}, "bean"), false);
-  assert.equal(canHarvestResource({ resourceType: "meat" }, { generationVersion: 15 }, { butchery: 1 }, "bean"), true);
+  assert.equal(canHarvestResource({ resourceType: "nutrients" }, { generationVersion: 15 }, {}, "bean"), false);
+  assert.equal(canHarvestResource({ resourceType: "nutrients" }, { generationVersion: 15 }, { butchery: 1 }, "bean"), true);
 });
 
 
 function assertMeatDelivery(f, ownFood) {
   for (const [key, cell] of f.environment.food) if ([ownFood, "dew"].includes(cell.resourceType)) f.environment.food.delete(key);
-  const meat = [...f.environment.food.values()].find(cell => cell.resourceType === "meat");
-  const others = [...f.environment.food.values()].filter(cell => cell !== meat).map(cell => [cell, cell.amount]);
+  const nutrients = [...f.environment.food.values()].find(cell => cell.resourceType === "nutrients");
+  const others = [...f.environment.food.values()].filter(cell => cell !== nutrients).map(cell => [cell, cell.amount]);
   const before = f.game.snapshot();
   advance(f, .25);
   const candidates = f.game.agents[0].utility.scores.filter(candidate => candidate.action === "collect");
   assert.ok(candidates.length > 0);
-  assert.ok(candidates.every(candidate => candidate.key === meat.x + "," + meat.y));
+  assert.ok(candidates.every(candidate => candidate.key === nutrients.x + "," + nutrients.y));
   advance(f, 80);
   const delivered = f.game.snapshot();
-  assert.ok(meat.amount < 12);
-  assert.ok(delivered.resourceInventory.meat > 0);
-  assert.equal(delivered.evolutionPoints - before.evolutionPoints, delivered.resourceInventory.meat);
-  assert.equal(delivered.colonyFood - before.colonyFood, delivered.resourceInventory.meat);
+  assert.ok(nutrients.amount < 12);
+  assert.ok(delivered.resourceInventory.nutrients > 0);
+  assert.equal(delivered.evolutionPoints - before.evolutionPoints, delivered.resourceInventory.nutrients);
+  assert.equal(delivered.colonyFood - before.colonyFood, delivered.resourceInventory.nutrients);
   for (const [cell, amount] of others) assert.equal(cell.amount, amount, cell.resourceType);
   f.game.restore(f.game.save());
   const restored = f.game.snapshot();
-  assert.equal(restored.resourceInventory.meat, delivered.resourceInventory.meat);
+  assert.equal(restored.resourceInventory.nutrients, delivered.resourceInventory.nutrients);
   assert.equal(restored.evolutionPoints, delivered.evolutionPoints);
   assert.equal(restored.colonyFood, delivered.colonyFood);
 }
@@ -87,7 +87,7 @@ for (const [tribe, ownFood] of foods) {
     assertMeatDelivery(f, ownFood);
   });
 
-  test(tribe + "은 더 가까운 다른 먹이·재료 대신 자기 먹이만 자동 채집한다", () => {
+  test(tribe + "은 더 가까운 다른 자원 대신 자기 자원만 자동 채집한다", () => {
     const f = fixture(tribe, ownFood, createGame);
     advance(f, .25);
     const candidates = f.game.agents[0].utility.scores.filter(candidate => candidate.action === "collect");
@@ -98,7 +98,7 @@ for (const [tribe, ownFood] of foods) {
     for (const [key, cell] of f.environment.food) if (key !== "47,42") assert.equal(cell.amount, 12, tribe + ":" + cell.resourceType);
   });
 
-  test(tribe + "은 자기 먹이가 없으면 다른 먹이를 채집하지 않는다", () => {
+  test(tribe + "은 자기 자원이 없으면 다른 자원을 채집하지 않는다", () => {
     const f = fixture(tribe, null, createGame);
     for (const [key, cell] of f.environment.food) if (cell.resourceType === ownFood) f.environment.food.delete(key);
     advance(f, 4);

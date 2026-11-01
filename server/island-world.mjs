@@ -1,3 +1,5 @@
+import { conquestEncounterPlan } from "./conquest-pacing.mjs";
+import { WORLD_SIZE } from "./world-size.mjs";
 import { recordPlacementMap } from "./placement-maps.mjs";
 import { campResourceTravel } from "./resource-camps.mjs";
 import { generateHydrology } from "./hydrology.mjs";
@@ -135,24 +137,34 @@ function populateBurrows(world, occupied) {
 }
 
 
-function clearCampFootprints(world) {
+function clearCampFootprints(world, version) {
   const { size, terrain, hydrology: h } = world, plots = new Uint8Array(terrain.length);
+  const clearedTrees = new Uint8Array(terrain.length);
   for (const camp of world.camps) for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++) {
     const index = (camp.y + dy) * size + camp.x + dx;
     plots[index] = 1; h.forestMask[index] = 0;
     if (terrain[index] === 5) terrain[index] = 4;
   }
-  world.resources = world.resources.filter(([x, y]) => !plots[y * size + x]);
-  world.food = world.food.filter(([x, y]) => !plots[y * size + x]);
+  if (version >= 39) for (const camp of world.camps.filter(camp => camp.tribe === "spore")) {
+    for (let dy = -4; dy <= 4; dy++) for (let dx = -4; dx <= 4; dx++) {
+      if (dx * dx + dy * dy > 16) continue;
+      const index = (camp.y + dy) * size + camp.x + dx;
+      clearedTrees[index] = 1; h.forestMask[index] = 0;
+      if (terrain[index] === 5) terrain[index] = 4;
+    }
+  }
+  world.resources = world.resources.filter(([x, y, , key]) => !plots[y * size + x] && (key !== "tree" || !clearedTrees[y * size + x]));
+  world.food = world.food.filter(([x, y, , key]) => !plots[y * size + x] && (key !== "tree" || !clearedTrees[y * size + x]));
   if (h.placementMaps) for (const field of h.placementMaps) if (field.id.startsWith("resource:") && field.id.endsWith(":amount")) {
-    for (let index = 0; index < terrain.length; index++) if (plots[index]) field.values[index] = 0;
+    for (let index = 0; index < terrain.length; index++) if (plots[index] || field.id === "resource:tree:amount" && clearedTrees[index]) field.values[index] = 0;
   }
   recordPlacementMap(h, "camp:footprint-mask", ["camps", "forest", "resources"], plots, { minimum: 0, maximum: 1, stage: "final" });
 }
 
 export function generateLandscapeWorld(seed, baseline, onProgress, tribes, encounterPlans, version, capturePlacementMaps) {
-  const size = 320, terrain = new Uint8Array(size * size), moisture = new Float32Array(terrain.length), height = new Float32Array(terrain.length);
-  const generationVersion = version === undefined ? 34 : version;
+  const generationVersion = version === undefined ? 39 : version;
+  const size = generationVersion >= 35 ? WORLD_SIZE : 320;
+  const terrain = new Uint8Array(size * size), moisture = new Float32Array(terrain.length), height = new Float32Array(terrain.length);
   const hydrology = generateHydrology(terrain, moisture, height, size, seed, baseline, generationVersion, capturePlacementMaps);
   const world = { seed, size, terrain, hydrology, hazards: new Uint8Array(terrain.length), camps: [], burrows: [], encounters: [], food: [], resources: [], foraging: [] };
   onProgress?.(.3);
@@ -161,7 +173,7 @@ export function generateLandscapeWorld(seed, baseline, onProgress, tribes, encou
   if (generationVersion >= 30) world.frontierSites = identifyFrontierSites(world);
   onProgress?.(.5);
   world.camps = placeResourceCamps(world, tribes);
-  if (generationVersion >= 32) clearCampFootprints(world);
+  if (generationVersion >= 32) clearCampFootprints(world, generationVersion);
   const occupied = new Set([...world.food, ...world.resources].map(([x, y]) => y * size + x));
   populateBurrows(world, occupied);
   if (generationVersion >= 31) for (const site of world.frontierSites) site.contenders = [];
@@ -184,7 +196,7 @@ export function generateLandscapeWorld(seed, baseline, onProgress, tribes, encou
     nestDistance[index] = Math.min(...world.camps.map(camp => Math.hypot(x - camp.x, y - camp.y)));
   }
   world.encounters = generateWildlife({ seed, terrain, hazards: world.hazards, blocked, reachable, nestDistance,
-    waterDistance: hydrology.waterDistance, resourceCells: occupied, generationVersion: generationVersion >= 34 ? generationVersion : 23, hydrology }, encounterPlans);
+    waterDistance: hydrology.waterDistance, resourceCells: occupied, generationVersion: generationVersion >= 34 ? generationVersion : 23, hydrology }, generationVersion >= 38 ? encounterPlans.map(conquestEncounterPlan) : encounterPlans);
   if (hydrology.placementMaps) {
     const habitat = new Uint8Array(terrain.length), appearances = new Uint8Array(terrain.length), nests = new Uint8Array(terrain.length);
     for (const [order, encounter] of world.encounters.entries()) {

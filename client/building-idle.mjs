@@ -6,6 +6,33 @@ const tribes = ["bean", "spore", "pebble", "spring"];
 export const BUILDING_IDLE_ASSETS = Object.freeze(tribes.flatMap(tribe =>
   BUILDING_TYPES.map(building => root(tribe) + tribe + "/" + building.key + "/idle.webp")));
 
+const watchpostBounds = Object.freeze({
+  bean: [79, 41, 274, 242], spore: [76, 17, 280, 394],
+  pebble: [87, 22, 258, 388], spring: [139, 23, 154, 386]
+});
+
+export function buildingPlacement(building) {
+  if (building.key !== "watchpost") return { x: 0, y: 0, width: 1, height: 1 };
+  const bounds = watchpostBounds[building.tribe] || watchpostBounds.bean;
+  const size = .84 * 432 / bounds[3];
+  return { x: .5 - (bounds[0] + bounds[2] / 2) / 432 * size,
+    y: .94 - (bounds[1] + bounds[3]) / 432 * size, width: size, height: size };
+}
+
+export function createBuildingPreview(building, source) {
+  const canvas = document.createElement("canvas"), image = new Image();
+  canvas.width = canvas.height = 432;
+  canvas.setAttribute("role", "img");
+  canvas.setAttribute("aria-label", buildingDefinition(building.key).name);
+  image.addEventListener("load", () => {
+    const placement = buildingPlacement(building), context = canvas.getContext("2d");
+    context.clearRect(0, 0, 432, 432);
+    context.drawImage(image, placement.x * 432, placement.y * 432, placement.width * 432, placement.height * 432);
+  }, { once: true });
+  image.src = source;
+  return canvas;
+}
+
 export function buildingIdleFrame(building, time, reducedMotion) {
   if (!buildingDefinition(building.key) || building.health <= 0) return null;
   const tribe = tribes.includes(building.tribe) ? building.tribe : "bean";

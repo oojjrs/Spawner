@@ -39,7 +39,7 @@ function queuedDelivery(count) {
   const result = fixture("bean"), saved = JSON.parse(result.game.save());
   saved.state.agents.splice(count);
   saved.state.evolutionPoints = 100;
-  saved.state.resourceInventory = { tree: 198 };
+  saved.state.resourceInventory = { tree: result.game.snapshot().resourceCapacity - 2 };
   for (const [index, agent] of saved.state.agents.entries()) Object.assign(agent, {
     x: 40, y: 40, renderFromX: 40, renderFromY: 40, carrying: 2, carryingType: index ? "dew" : "clay",
     mode: index ? "unload" : "return", unloadReady: 120.3, birth: null, bornAt: 0, survivalState: "stable",
@@ -90,10 +90,10 @@ test("다른 개체가 창고를 채우면 캐시된 납품 대기도 다음 틱
   }
 });
 
-test("새싹콩의 유일한 먹이는 기본 채집 가능한 비옥토이며 버섯은 누구도 채집하지 못한다", () => {
+test("새싹콩의 기본 자원은 비옥토이며 버섯은 누구도 채집하지 못한다", () => {
   assert.equal(resourceDefinition("clay").name, "비옥토");
   assert.equal(canHarvestResource({ resourceType: "clay" }, {}, {}), true);
-  for (const type of ["honey-mushrooms", "berry-bush", "meat", "pebbles"]) assert.equal(isTribeFood(type, "bean"), false);
+  for (const type of ["honey-mushrooms", "berry-bush", "nutrients", "pebbles"]) assert.equal(isTribeFood(type, "bean"), false);
   assert.equal(isTribeFood("clay", "bean"), true);
   assert.equal(isTribeFood("clay", "spore"), false);
   assert.equal(isTribeFood("berry-bush", "spore"), false);
@@ -135,7 +135,7 @@ test("원재료 창고도 가득 차면 남은 포인트 한도만 납품하고 
   }
 });
 
-test("다른 종족의 기본 먹이는 포인트가 가득 차도 재료로 납품하고 저장 후에도 유지한다", () => {
+test("다른 종족의 기본 자원은 포인트가 가득 차도 재료로 납품하고 저장 후에도 유지한다", () => {
   const game = deliver("dew", 100, "bean");
   assert.equal(game.snapshot().evolutionPoints, 100);
   assert.equal(game.snapshot().colonyFood, 0);

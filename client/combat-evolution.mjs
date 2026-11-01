@@ -3,7 +3,7 @@ import { unitAnimationFrame } from "./unit-animation.mjs";
 import { renderEvolutionFrame, evolutionBodyTransform, renderEvolutionAttachment } from "../DesignAssets/Animations/CombatAttributesV7/renderer.mjs";
 import { renderAttributeEffects } from "../DesignAssets/Animations/CombatAttributesV7/attack.mjs";
 
-export const COMBAT_EVOLUTION_KEYS = Object.freeze(["blade", "piercing", "carapace", "guard", "secretion"]);
+export const COMBAT_EVOLUTION_KEYS = Object.freeze(["blade", "piercing", "carapace", "guard"]);
 
 export function combatEvolutionKeys(attributes) {
   return COMBAT_EVOLUTION_KEYS.filter(key => attributes?.[key] > 0);
@@ -20,9 +20,7 @@ export function combatEvolutionPose(agent, time, animations) {
     elapsed = Math.max(0, (time - start) / Math.max(.001, end - start)) * animations.birth.durationMs;
   } else if (hurt >= 0 && hurt < animations.hurt.durationMs) { action = "hurt"; elapsed = hurt; }
   else if (attack >= 0 && attack < animations.attack.durationMs) { action = "attack"; elapsed = attack; }
-  else if (agent.support?.kind === "secretion" && animations.secretion && time >= agent.support.startedAt && time < agent.support.endsAt) {
-    action = "secretion"; elapsed = (time - agent.support.startedAt) / Math.max(.001, agent.support.endsAt - agent.support.startedAt) * animations.secretion.durationMs;
-  } else if (agent.moveDuration > 0 && time >= agent.moveStartedAt && time < agent.moveStartedAt + agent.moveDuration) {
+  else if (agent.moveDuration > 0 && time >= agent.moveStartedAt && time < agent.moveStartedAt + agent.moveDuration) {
     action = "walk"; elapsed = (Math.max(0, (agent.stepCount || 1) - 1) + (time - agent.moveStartedAt) / agent.moveDuration) * animations.walk.durationMs;
   }
   const animation = animations[action] || animations.idle;
@@ -65,12 +63,11 @@ export function createCombatEvolutionArt(assetSource, createSurface, loadImage) 
     return source.loading.get(action);
   }
   function profile(keys, action) {
-    if (action === "secretion" && keys.includes("secretion")) return "secretion";
-    return ["blade", "piercing", "guard", "carapace", "secretion"].find(key => keys.includes(key));
+    return ["blade", "piercing", "guard", "carapace"].find(key => keys.includes(key));
   }
-  function body(keys) { return ["carapace", "guard", "blade", "piercing", "secretion"].find(key => keys.includes(key)); }
+  function body(keys) { return ["carapace", "guard", "blade", "piercing"].find(key => keys.includes(key)); }
   function motionRig(base, master) {
-    const rig = { ...base.rig, opaque: true, timelines: { ...base.rig.timelines, ...(master.rig.timelines.secretion ? { secretion: master.rig.timelines.secretion } : {}) }, attackMotion: { ...base.rig.attackMotion, projectiles: [], impact: null } };
+    const rig = { ...base.rig, opaque: true, timelines: { ...base.rig.timelines }, attackMotion: { ...base.rig.attackMotion, projectiles: [], impact: null } };
     const factor = master.rig.scale / base.rig.scale, channels = master.rig.attackMotion.body;
     rig.attackMotion.body = Object.fromEntries(Object.entries(channels).map(([key, values]) =>
       [key, ["x", "y"].includes(key) ? values.map(([time, value]) => [time, value * factor]) : values]));
@@ -139,7 +136,7 @@ export function createCombatEvolutionArt(assetSource, createSurface, loadImage) 
     const images = Object.fromEntries(Object.entries(base.images).map(([key, image]) =>
       [key, key.includes("foliage-") || key.includes("cap-") ? blank : image]));
     const attachments = [];
-    for (const key of ["carapace", "guard", "blade", "piercing", "secretion"].filter(key => keys.includes(key))) {
+    for (const key of ["carapace", "guard", "blade", "piercing"].filter(key => keys.includes(key))) {
       const source = variants.get(key);
       if (rig.tribe === "sprout") {
         for (const part of source.rig.parts.filter(part => part.id.startsWith("foliage-"))) {
@@ -164,8 +161,8 @@ export function createCombatEvolutionArt(assetSource, createSurface, loadImage) 
       for (const item of attachments.filter(item => item.rear === rear)) attachment(context, base, item.source, item.id, sampled, item.feature, item.mirror);
       context.restore();
     }
-    if (sampled.action === "attack" || sampled.action === "secretion") {
-      const effects = sampled.action === "secretion" ? ["secretion"] : [...new Set([master.rig.variant, ...(keys.includes("secretion") ? ["secretion"] : [])])];
+    if (sampled.action === "attack") {
+      const effects = [master.rig.variant];
       for (const key of effects) {
         const source = variants.get(key); context.save(); context.translate(256 + rig.fitOffset[0] * 2, 448 + rig.fitOffset[1] * 2); context.scale(2 * rig.scale, 2 * rig.scale); context.translate(-rig.root[0], -rig.root[1]);
         if (registration) context.translate(...registration.offset);
@@ -176,7 +173,7 @@ export function createCombatEvolutionArt(assetSource, createSurface, loadImage) 
           const hull = rig.parts.find(part => part.id === "body").contactHull.map(point => [source.rig.face[0] + (point[0] - rig.face[0]) / factor, source.rig.face[1] + (point[1] - rig.face[1]) / factor]);
           effectRig.parts = effectRig.parts.map(part => part.id === "body" ? { ...part, contactHull: hull } : part);
         }
-        renderAttributeEffects(context, effectRig, source.images, sampled.action === "attack" ? sampled.sampleTime : sampled.sampleTime % 1000); context.restore();
+        renderAttributeEffects(context, effectRig, source.images, sampled.sampleTime); context.restore();
       }
     }
     return rig;
@@ -185,7 +182,7 @@ export function createCombatEvolutionArt(assetSource, createSurface, loadImage) 
     const variants = prepared.get(agent.tribe || "bean"), attributes = agent.appearanceAttributes || agent.attributes || {}, keys = combatEvolutionKeys(attributes);
     if (!variants || !keys.length) return null;
     const source = variants.get(keys.length === 1 ? keys[0] : body(keys));
-    const animations = keys.includes("secretion") ? { ...source.definition.animations, secretion: variants.get("secretion").definition.animations.secretion } : source.definition.animations;
+    const animations = source.definition.animations;
     const sampled = combatEvolutionPose(agent, time, animations);
     let replacement = drawBody && (attributes.construction || source.rig.tribe !== "sprout" && ["antenna", "strength", "arms", "butchery", "lifespan", "feet"].some(key => attributes[key] > 0)) ? drawBody : null;
     if (replacement) { const paint = replacement; replacement = (context, pose) => paint(context, pose); replacement.key = JSON.stringify(attributes) + ":" + (agent.construction?.buildingKey || "") + ":" + (agent.construction?.level || ""); }
@@ -221,6 +218,26 @@ export function createCombatEvolutionArt(assetSource, createSurface, loadImage) 
     }
     return portraits.get(key);
   }
-  return { prepare, ready, frame, portrait };
+  function bodyWidth(agent, replacement) {
+    const attributes = agent.appearanceAttributes || agent.attributes || {}, keys = combatEvolutionKeys(attributes);
+    const variants = prepared.get(agent.tribe || "bean");
+    if (!variants || !keys.length) return null;
+    const source = variants.get(keys.length === 1 ? keys[0] : body(keys));
+    if (attributes.construction || source.rig.tribe !== "sprout" &&
+        ["antenna", "strength", "arms", "butchery", "lifespan", "feet"].some(key => attributes[key] > 0)) return replacement;
+    if (!source.bodyWidth) {
+      const image = source.images.body, surface = createSurface(image.naturalWidth || image.width, image.naturalHeight || image.height);
+      const context = surface.getContext("2d", { willReadFrequently: true }); context.drawImage(image, 0, 0);
+      const pixels = context.getImageData(0, 0, surface.width, surface.height).data;
+      let left = surface.width, right = 0;
+      for (let y = 0; y < surface.height; y++) for (let x = 0; x < surface.width; x++) if (pixels[(y * surface.width + x) * 4 + 3] >= 16) {
+        left = Math.min(left, x); right = Math.max(right, x + 1);
+      }
+      source.bodyWidth = right - left;
+    }
+    return source.bodyWidth * source.rig.scale * 2;
+  }
+
+  return { prepare, ready, frame, portrait, bodyWidth };
 }
 

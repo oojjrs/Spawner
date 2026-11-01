@@ -1,0 +1,7 @@
+{
+  "parts": "DesignAssets/Animations/Construction/v5/pebble/outpost-parts.webp",
+  "complete": "DesignAssets/Animations/Construction/v5/pebble/outpost-complete.png",
+  "idle": "DesignAssets/Animations/Buildings/IdleV1/pebble/outpost/idle.webp",
+  "preview": "DesignAssets/Animations/Buildings/IdleV1/pebble/outpost/preview.webp",
+  "thumbnail": "DesignAssets/Planning/Thumbnails/Animations/Buildings/IdleV1/pebble/outpost/preview.webp.webp"
+}

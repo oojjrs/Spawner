@@ -36,7 +36,7 @@ function advance(context, seconds) {
   }
 }
 
-test("먹이가 고갈되면 종족별 먹이 군집을 전초 후보로 삼고 재료 부족분을 계산한다", () => {
+test("자원이 고갈되면 종족별 자원 군집을 전초 후보로 삼고 재료 부족분을 계산한다", () => {
   for(const [tribe,native] of Object.entries({bean:"clay",spore:"tree",pebble:"pebbles",spring:"dew"})) {
     const state={nestLevel:2,simSeconds:200,lastFoodAt:100,evolutionPoints:12,agents:[{health:100},{health:100}],
       buildings:[],templates:[],resourceInventory:{[native]:30},
@@ -52,7 +52,7 @@ test("먹이가 고갈되면 종족별 먹이 군집을 전초 후보로 삼고 
   }
 });
 
-test("먹이가 줄어들면 새 먹이 발견 전에도 재료를 준비하고 엉뚱한 자원으로 전초를 짓지 않는다", () => {
+test("자원이 줄어들면 새 자원 발견 전에도 재료를 준비하고 엉뚱한 자원으로 전초를 짓지 않는다", () => {
   const state={nestLevel:2,simSeconds:200,lastFoodAt:100,evolutionPoints:12,agents:[{health:100},{health:100}],
     buildings:[],templates:[],resourceInventory:{dew:12,tree:4,pebbles:4},
     knownFood:new Map([["ore",{x:90,y:42,amount:500,resourceType:"iron-ore"}]])};
@@ -61,7 +61,7 @@ test("먹이가 줄어들면 새 먹이 발견 전에도 재료를 준비하고 
   assert.equal(tribeConstructionNeeds(state,"spring",nests,[]).length,0);
 });
 
-test("아직 새 먹이를 못 찾았으면 실제 탐색 중인 전방 경계로 전초를 전진시킨다", () => {
+test("아직 새 자원을 못 찾았으면 실제 탐색 중인 전방 경계로 전초를 전진시킨다", () => {
   const state={nestLevel:2,simSeconds:200,lastFoodAt:100,colonyFood:100,evolutionPoints:20,
     agents:[{health:100,utility:{action:"explore",target:{x:75,y:42}}}],buildings:[],templates:[],resourceInventory:{dew:30,tree:4},knownFood:new Map()};
   const nests=[{x:40,y:40,width:5,height:5}], expansion=tribeExpansion(state,"spring",nests);
@@ -73,7 +73,7 @@ test("아직 새 먹이를 못 찾았으면 실제 탐색 중인 전방 경계�
   assert.equal(tribeExpansion(state,"spring",nests).anchor,null);
 });
 
-test("건설 개체의 수명으로 먹이까지 못 가면 알려진 경로 중간에 전초를 완성한다", () => {
+test("건설 개체의 수명으로 자원까지 못 가면 알려진 경로 중간에 전초를 완성한다", () => {
   const context=fixture("spring",["construction"]), {game,environment,agentId}=context;
   const saved=JSON.parse(game.save());
   environment.simSeconds=100; saved.state.simSeconds=100; saved.state.lastFoodAt=0;

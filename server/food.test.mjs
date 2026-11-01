@@ -62,7 +62,7 @@ test("새싹콩은 비옥토를 수확하고 둥지 식량으로 운반한다", 
   }
 });
 
-test("무속성 새싹콩은 비옥토만 자동 채집하고 다른 먹이·재료·사체는 선택하지 않는다", () => {
+test("무속성 새싹콩은 비옥토만 자동 채집하고 다른 자원·사체는 선택하지 않는다", () => {
   const world = { hazards: new Uint8Array(320 * 320) };
   assert.equal(canHarvestResource(null, world), false);
   assert.equal(canHarvestResource({ x: 43, y: 42, terrain: "grassland", resourceType: "unknown" }, world), false);
@@ -73,7 +73,7 @@ test("무속성 새싹콩은 비옥토만 자동 채집하고 다른 먹이·재
     if (definition.key === "clay") continue;
     const f = fixture("grassland", undefined, []);
     f.food.resourceType = definition.key;
-    f.food.kind = definition.key === "meat" ? "corpse" : "resource";
+    f.food.kind = definition.key === "nutrients" ? "corpse" : "resource";
     f.game.restore(f.game.save());
     advance(f, 10);
     assert.equal(f.food.amount, 20, definition.key);

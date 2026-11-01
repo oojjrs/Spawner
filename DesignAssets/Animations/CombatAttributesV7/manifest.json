@@ -1,8 +1,8 @@
 {
   "version": 7,
   "parent": "CombatAttributesV6",
-  "variantCount": 20,
-  "animationCount": 124,
+  "variantCount": 16,
+  "animationCount": 96,
   "frameSize": 256,
   "columns": 8,
   "regenerationPack": "CombatAttributesV5",
@@ -15,9 +15,6 @@
     "hurt",
     "birth",
     "death"
-  ],
-  "equipmentActions": [
-    "secretion"
   ],
   "attackVersion": 1
 }

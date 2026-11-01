@@ -208,7 +208,8 @@
         432,
         432
       ],
-      "reference": "DesignAssets/Animations/Construction/v5/pebble/outpost-complete.png"
+      "reference": "DesignAssets/Animations/Construction/v5/pebble/outpost-complete.png",
+      "rig": "DesignAssets/Animations/Construction/v5/pebble/Source/outpost-rig-20261101.json"
     },
     "pebble:watchpost": {
       "image": "DesignAssets/Animations/Buildings/IdleV1/pebble/watchpost/idle.webp",

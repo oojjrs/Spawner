@@ -21,6 +21,12 @@
           <path class="sound-muted" d="m22 12 7 8m0-8-7 8"/>
         </svg>
       </button>
+      <button class="sound-toggle room-exit" id="room-exit" type="button" aria-labelledby="ending-rooms">
+        <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+          <path d="M15 6h7v5m0 10v5h-7M15 6 5 3v26l10-3Zm-4 9v3M19 16h11m-5-5 5 5-5 5"/>
+        </svg>
+      </button>
+      <p class="reload-toast" id="reload-toast" role="status" aria-live="polite">새로고침해서 좋을 게 없답니다</p>
       <p class="connection-status" id="connection-status" role="status" hidden></p>
       <nav class="ending-toolbar" id="ending-toolbar" aria-label="엔딩 후 둘러보기" hidden>
         <span>끝난 군락 · 둘러보는 중</span>
@@ -107,11 +113,6 @@
     <button class="first-design discovery-toast" id="first-design" type="button" aria-haspopup="dialog" aria-controls="evolution-panel" aria-label="첫 유닛 설계"><span class="discovery-toast-open"><img class="object-image discovery-image" alt=""><small>첫 유닛 설계</small></span></button>
     <div class="discovery-toasts" id="discovery-toasts" role="log" aria-label="발견 알림" aria-live="polite" aria-relevant="additions"></div>
     <div class="resource-inventory-bar" id="resource-inventory" role="region" aria-label="자원 재고" hidden></div>
-    <div class="resource-inventory-actions" id="resource-inventory-actions" popover="auto" aria-label="자원 관리">
-      <strong id="resource-inventory-name"></strong>
-      <span id="resource-inventory-owned"></span>
-      <button class="resource-discard" id="resource-inventory-discard" type="button" data-help="">1개 버리기</button>
-    </div>
   </div>
 
   <aside class="unit-panel" id="unit-panel" aria-labelledby="unit-panel-title" hidden>
@@ -122,7 +123,7 @@
         <span class="terrain-speed" id="terrain-speed" tabindex="0" data-help=""><img alt="" aria-hidden="true"><span class="terrain-speed-value"><strong id="terrain-speed-value"></strong><span>%</span></span></span>
       </div>
       <section class="terrain-discoveries" id="terrain-discoveries" aria-labelledby="terrain-discoveries-title">
-        <h3 id="terrain-discoveries-title" tabindex="0" data-help="이 지형에서 발견할 수 있는 객체입니다.&#10;선택한 칸에 모두 존재하는 것은 아닙니다.">발견 가능</h3>
+        <h3 id="terrain-discoveries-title" tabindex="0" data-help="이 지형에서 발견할 수 있는 자원과 생물입니다.">발견 가능</h3>
         <div class="terrain-objects" id="terrain-objects"></div>
       </section>
     </section>
@@ -139,7 +140,7 @@
     <section class="corpse-details" id="corpse-details" aria-label="남겨진 자원 회수" hidden>
       <div class="unit-attributes" id="corpse-attributes" aria-label="사망 시 속성"></div>
       <div class="corpse-metrics">
-        <span class="corpse-value" tabindex="0" data-help="옆에 남은 양분입니다."><span class="corpse-point-icon"><canvas id="corpse-resource-image" aria-hidden="true"></canvas></span><strong id="corpse-value"></strong></span>
+        <span class="corpse-value" tabindex="0" data-help="사체에서 회수할 수 있는 양분입니다."><span class="corpse-point-icon"><canvas id="corpse-resource-image" aria-hidden="true"></canvas></span><strong id="corpse-value"></strong></span>
         <span class="corpse-decay" id="corpse-decay" tabindex="0" data-help=""><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 2h6M12 2v4m6 2 2-2"/><circle cx="12" cy="14" r="8"/><path d="M12 10v4l3 2"/></svg><span id="corpse-decay-value"></span></span>
       </div>
     </section>
@@ -154,7 +155,7 @@
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 2H5a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9l-7-7Zm0 0v7h7M7 18l5-8 5 8H7Zm5-3v3"/></svg>
       </button>
       <button class="primary-action unit-icon" id="corpse-design" type="button" aria-label="회수 유닛 설계" data-help="" aria-haspopup="dialog" aria-controls="evolution-panel" hidden></button>
-      <button class="secondary-action unit-icon" id="unit-codex" type="button" aria-label="코덱스 열기" data-help="코덱스 열기" aria-haspopup="dialog" aria-controls="codex">
+      <button class="secondary-action unit-icon" id="unit-codex" type="button" aria-label="도감 열기" data-help="도감 열기" aria-haspopup="dialog" aria-controls="codex">
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5C9 3 5 3 2 4v15c3-1 7-1 10 1 3-2 7-2 10-1V4c-3-1-7-1-10 1Zm0 0v15"/></svg>
       </button>
     </div>
@@ -181,18 +182,17 @@
       </div>
       <div class="nest-upgrade-actions">
         <span class="nest-upgrade-help" id="nest-upgrade-help" data-help="유닛의 속성 슬롯 +1칸 · 진화 포인트 보관량 ×5"><button class="secondary-action" id="nest-upgrade" type="button"><span>성장</span><span class="evolution-cost"><img data-evolution-symbol alt=""><strong id="nest-upgrade-points">80</strong></span></button></span>
-        <button class="nest-growth-info" id="nest-growth-info" type="button" aria-label="둥지 성장 디테일 보기" aria-haspopup="dialog" aria-controls="codex" aria-expanded="false">i</button>
+        <button class="nest-growth-info" id="nest-growth-info" type="button" aria-label="둥지 성장 자세히 보기" aria-haspopup="dialog" aria-controls="codex" aria-expanded="false">i</button>
       </div>
     </div>
     <div class="resource-storage" hidden aria-hidden="true"></div>
-    <div class="template-heading"><h3>유닛 템플릿</h3></div>
     <div class="template-list" id="template-list" aria-label="저장된 유닛 설계"><button class="template-card template-add" id="evolution-open-button" type="button" aria-label="새 유닛 설계" aria-controls="evolution-panel" aria-expanded="false">+</button></div>
     <p class="nest-status" id="nest-status" role="status"></p>
   </aside>
   <div class="design-backdrop" id="design-backdrop" hidden></div>
   <section class="evolution-panel" id="evolution-panel" role="dialog" aria-modal="true" aria-labelledby="design-title" hidden>
     <div class="panel-header">
-      <h2 id="design-title">첫 생명체 설계</h2>
+      <h2 id="design-title">새 유닛 설계</h2>
       <button class="panel-close" id="evolution-close" type="button" aria-label="설계 닫기">×</button>
     </div>
     <form id="unit-design-form">
@@ -201,13 +201,14 @@
           <img id="design-preview-image" alt="설계한 생명체의 외형">
           <dl id="design-stats"></dl>
         </div>
-        <div>
+        <div class="design-editor">
           <label class="design-name" for="design-name">템플릿 이름</label>
           <input class="design-name-input" id="design-name" type="text" maxlength="24" required autocomplete="off" placeholder="이 생명체를 뭐라고 부를까요?">
-          <div class="design-slot-heading"><strong>속성 슬롯</strong></div>
-          <div class="design-slots" id="design-slots" aria-label="설계 속성 슬롯"></div>
-          <div class="attribute-palette" id="attribute-palette" role="group" aria-label="속성 장착과 디테일"></div>
-          <div class="design-effects" id="design-effects" aria-label="장착 속성과 시너지 효과" hidden></div>
+          <div class="design-slot-group">
+            <div class="design-slot-heading"><strong>속성 슬롯</strong></div>
+            <div class="design-slots" id="design-slots" aria-label="설계 속성 슬롯"></div>
+          </div>
+          <div class="attribute-palette" id="attribute-palette" role="group" aria-label="속성 장착과 자세히 보기"></div>
         </div>
       </div>
       <div class="design-footer">
@@ -219,25 +220,24 @@
 
   <dialog class="codex" id="codex" aria-labelledby="codex-title">
     <header class="codex-toolbar">
-      <h2 id="codex-title">코덱스</h2>
+      <h2 id="codex-title">도감</h2>
       <div class="codex-history">
         <button id="codex-back" type="button" aria-label="이전 항목" disabled>← <span>뒤로</span></button>
         <button id="codex-forward" type="button" aria-label="다음 항목" disabled>→ <span>앞으로</span></button>
-        <button class="codex-close" id="codex-close" type="button" aria-label="코덱스 닫기">×</button>
+        <button class="codex-close" id="codex-close" type="button" aria-label="도감 닫기">×</button>
       </div>
     </header>
     <div class="codex-layout">
-      <aside class="codex-sidebar" aria-label="코덱스 항목 찾기">
-        <input class="codex-search" id="codex-search" type="search" autocomplete="off" placeholder="이름·효과 검색" aria-label="코덱스 검색">
+      <aside class="codex-sidebar" aria-label="도감 항목 찾기">
+        <input class="codex-search" id="codex-search" type="search" autocomplete="off" placeholder="이름·효과 검색" aria-label="도감 검색">
         <div class="codex-filter" role="group" aria-label="항목 종류">
           <button data-codex-category="all" type="button" aria-pressed="true">전체</button>
           <button data-codex-category="attribute" type="button" aria-pressed="false">속성</button>
           <button data-codex-category="synergy" type="button" aria-pressed="false">시너지</button>
           <button data-codex-category="nest" type="button" aria-pressed="false">둥지</button>
           <button data-codex-category="terrain" type="button" aria-pressed="false">지형</button>
-          <button data-codex-category="hazard" type="button" aria-pressed="false">위험 요소</button>
         </div>
-        <nav class="codex-list" id="codex-list" aria-label="코덱스 목록"></nav>
+        <nav class="codex-list" id="codex-list" aria-label="도감 목록"></nav>
       </aside>
       <article class="codex-article" id="codex-article" aria-labelledby="codex-article-name">
         <header class="codex-article-header">
@@ -276,6 +276,14 @@
     </form>
   </dialog>
 
+  <dialog class="room-exit-dialog" id="room-exit-dialog" aria-labelledby="room-exit-title">
+    <h2 id="room-exit-title">방에서 나갈까요?</h2>
+    <form method="dialog" class="room-exit-actions">
+      <button class="secondary-action" id="room-exit-cancel" value="cancel" autofocus>취소</button>
+      <button class="primary-action" value="leave">나가기</button>
+    </form>
+  </dialog>
+
   <div class="help-tooltip" id="help-tooltip" role="tooltip" hidden></div>
 
   <section class="welcome" id="welcome" aria-labelledby="welcome-title" aria-busy="true">
@@ -303,7 +311,7 @@
           })();
         </script>
       </div>
-      <section class="welcome-create" id="room-create-panel" aria-labelledby="room-create-title" hidden><h2 id="room-create-title">새 방 만들기</h2>
+      <section class="welcome-create" id="room-create-panel" hidden>
         <form id="welcome-form">
           <label for="room-title">방 이름</label><div class="room-name-controls"><input id="room-title" maxlength="24" value="나의 첫 번째 방" required autocomplete="off" aria-label="새 방 이름"><button class="secondary-action room-name-random" id="room-name-random" type="button" aria-label="방 이름 무작위로 뽑기" title="방 이름 다시 뽑기"><span aria-hidden="true">🎲</span></button></div>
           <label for="room-seed">시드</label><div class="room-name-controls"><input id="room-seed" type="number" min="0" max="4294967295" step="1" required autocomplete="off" aria-label="월드 생성 시드"><button class="secondary-action room-name-random" id="room-seed-random" type="button" aria-label="시드 무작위로 뽑기" title="시드 다시 뽑기"><span aria-hidden="true">🎲</span></button></div>
@@ -311,22 +319,22 @@
           <button class="primary-action" type="submit">방 만들기</button>
         </form>
       </section>
-      <section aria-labelledby="rooms-title"><div class="room-heading"><h2 id="rooms-title">내 방 목록 <span id="room-count">0</span></h2><div class="room-actions"><button class="secondary-action room-delete" id="rooms-delete-ended" type="button" disabled hidden>멸망한 방 삭제</button><button class="secondary-action room-delete" id="rooms-delete-all" type="button" disabled hidden>전체 삭제</button><button class="secondary-action" id="rooms-refresh" type="button" hidden>새로고침</button></div></div><div id="room-list" class="room-list" aria-live="polite" aria-busy="true"></div></section>
+      <section aria-labelledby="rooms-title" hidden><div class="room-heading"><h2 id="rooms-title">내 방 목록 <span id="room-count">0</span></h2><div class="room-actions"><button class="secondary-action room-delete" id="rooms-delete-ended" type="button" disabled hidden>멸망한 방 삭제</button><button class="secondary-action room-delete" id="rooms-delete-all" type="button" disabled hidden>전체 삭제</button><button class="secondary-action" id="rooms-refresh" type="button" hidden>새로고침</button></div></div><div id="room-list" class="room-list" aria-live="polite" aria-busy="true"></div></section>
       <p id="welcome-status" role="status"></p>
     </div>
   </section>
 
-  <section class="tribe-selection" id="tribe-selection" aria-labelledby="tribe-selection-title" hidden>
+  <section class="tribe-selection" id="tribe-selection" hidden>
     <div class="tribe-selection-content">
-      <header class="tribe-selection-heading"><div><p id="tribe-room-title"></p><h1 id="tribe-selection-title" tabindex="-1">시작할 부족을 선택하세요</h1></div><button class="secondary-action" id="tribe-selection-back" type="button">방 목록으로</button></header>
+      <header class="tribe-selection-heading"><button class="secondary-action" id="tribe-selection-back" type="button">방 목록으로</button></header>
       <div class="tribe-selection-body">
-        <section class="tribe-world" aria-labelledby="tribe-world-title">
-          <div class="tribe-world-heading"><h2 id="tribe-world-title">월드맵</h2></div>
+        <section class="tribe-world">
           <canvas id="tribe-world-map" width="960" height="960" aria-label="생성된 전체 월드맵"></canvas>
-          <p class="tribe-world-location" id="tribe-world-location" role="status">부족을 선택하면 시작 위치를 강조합니다.</p>
-          <button class="primary-action" id="tribe-start" type="button" disabled>이 부족으로 시작</button>
         </section>
-        <div class="tribe-grid" id="tribe-grid" aria-label="시작 부족"></div>
+        <div>
+          <div class="tribe-grid" id="tribe-grid" aria-label="시작 부족"></div>
+          <button class="primary-action" id="tribe-start" type="button" disabled>이 부족으로 시작</button>
+        </div>
       </div>
       <p class="tribe-selection-status" id="tribe-selection-status" role="status"></p>
     </div>

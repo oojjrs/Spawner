@@ -1,3 +1,4 @@
+import { militaryAgent } from "./conquest-pacing.mjs";
 import { HARVEST_ATTRIBUTE_KEYS, birthCost, unitCarryCapacity, unitTravelSpeed } from "./attributes.mjs";
 import { AGENT_DEATH_WARNING, tribeLifespan } from "./lifespan.mjs";
 import { nestUpgradeCost } from "./nests.mjs";
@@ -75,7 +76,7 @@ export function colonySupply(state, tribe) {
 }
 
 export function colonyForagers(state, foods, homes, scouts) {
-  let workers = state.agents.filter(agent => agent.health >= agent.stats.health * .6 && !agent.retreat && !agent.combat && !agent.construction &&
+  let workers = state.agents.filter(agent => !militaryAgent(agent,agent.tribe) && agent.health >= agent.stats.health * .6 && !agent.retreat && !agent.combat && !agent.construction &&
     !(agent.birth?.readyAt > state.simSeconds) && !agent.attributes?.construction);
   const ordinary = workers.filter(agent => !HARVEST_ATTRIBUTE_KEYS.some(key => agent.attributes?.[key] > 0));
   if (ordinary.length >= 2) workers = ordinary;

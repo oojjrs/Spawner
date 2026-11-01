@@ -60,18 +60,6 @@
       ],
       "desiredScale": 1.1
     },
-    "secretion": {
-      "scale": 1.1,
-      "x": 150.1,
-      "y": 288,
-      "union": [
-        81,
-        109,
-        257,
-        280
-      ],
-      "desiredScale": 1.1
-    },
     "blade-carapace": {
       "scale": 1.2,
       "x": 165.4,
@@ -96,18 +84,6 @@
       ],
       "desiredScale": 1.2
     },
-    "regeneration-secretion": {
-      "scale": 1.2,
-      "x": 164.2,
-      "y": 288,
-      "union": [
-        56,
-        102,
-        257,
-        280
-      ],
-      "desiredScale": 1.2
-    },
     "blade-piercing-carapace": {
       "scale": 1.165991902834008,
       "x": 140.17813765182186,
@@ -121,18 +97,6 @@
       "desiredScale": 1.3
     },
     "guard-carapace-regeneration": {
-      "scale": 1.2521739130434784,
-      "x": 146.8521739130435,
-      "y": 288,
-      "union": [
-        56,
-        102,
-        285,
-        280
-      ],
-      "desiredScale": 1.3
-    },
-    "guard-regeneration-secretion": {
       "scale": 1.2521739130434784,
       "x": 146.8521739130435,
       "y": 288,
@@ -206,18 +170,6 @@
       ],
       "desiredScale": 1.1
     },
-    "secretion": {
-      "scale": 1.1,
-      "x": 156.15,
-      "y": 288,
-      "union": [
-        71,
-        137,
-        256,
-        280
-      ],
-      "desiredScale": 1.1
-    },
     "blade-carapace": {
       "scale": 1.2,
       "x": 165.4,
@@ -242,18 +194,6 @@
       ],
       "desiredScale": 1.2
     },
-    "regeneration-secretion": {
-      "scale": 1.2,
-      "x": 161.8,
-      "y": 288,
-      "union": [
-        61,
-        125,
-        256,
-        280
-      ],
-      "desiredScale": 1.2
-    },
     "blade-piercing-carapace": {
       "scale": 1.170731707317073,
       "x": 140.6829268292683,
@@ -273,18 +213,6 @@
       "union": [
         61,
         117,
-        286,
-        280
-      ],
-      "desiredScale": 1.3
-    },
-    "guard-regeneration-secretion": {
-      "scale": 1.2743362831858407,
-      "x": 142.79646017699116,
-      "y": 288,
-      "union": [
-        61,
-        125,
         286,
         280
       ],
@@ -352,18 +280,6 @@
       ],
       "desiredScale": 1.1
     },
-    "secretion": {
-      "scale": 1.1,
-      "x": 148.45,
-      "y": 288,
-      "union": [
-        85,
-        149,
-        256,
-        280
-      ],
-      "desiredScale": 1.1
-    },
     "blade-carapace": {
       "scale": 1.2,
       "x": 181.6,
@@ -388,18 +304,6 @@
       ],
       "desiredScale": 1.2
     },
-    "regeneration-secretion": {
-      "scale": 1.2,
-      "x": 163,
-      "y": 288,
-      "union": [
-        59,
-        103,
-        256,
-        280
-      ],
-      "desiredScale": 1.2
-    },
     "blade-piercing-carapace": {
       "scale": 1.1428571428571428,
       "x": 143.42857142857144,
@@ -418,18 +322,6 @@
       "y": 288,
       "union": [
         57,
-        101,
-        285,
-        280
-      ],
-      "desiredScale": 1.3
-    },
-    "guard-regeneration-secretion": {
-      "scale": 1.2687224669603525,
-      "x": 144.77533039647577,
-      "y": 288,
-      "union": [
-        59,
         101,
         285,
         280
@@ -498,18 +390,6 @@
       ],
       "desiredScale": 1.1
     },
-    "secretion": {
-      "scale": 1.1,
-      "x": 139.65,
-      "y": 288,
-      "union": [
-        101,
-        121,
-        256,
-        279
-      ],
-      "desiredScale": 1.1
-    },
     "blade-carapace": {
       "scale": 1.2,
       "x": 187.6,
@@ -530,18 +410,6 @@
         101,
         129,
         299,
-        279
-      ],
-      "desiredScale": 1.2
-    },
-    "regeneration-secretion": {
-      "scale": 1.2,
-      "x": 163,
-      "y": 288,
-      "union": [
-        59,
-        121,
-        256,
         279
       ],
       "desiredScale": 1.2
@@ -567,18 +435,6 @@
         123,
         284,
         280
-      ],
-      "desiredScale": 1.3
-    },
-    "guard-regeneration-secretion": {
-      "scale": 1.2743362831858407,
-      "x": 145.34513274336283,
-      "y": 288,
-      "union": [
-        59,
-        121,
-        284,
-        279
       ],
       "desiredScale": 1.3
     }

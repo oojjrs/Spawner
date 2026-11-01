@@ -161,7 +161,7 @@ export function placeResourceCamps(world, tribes) {
     }
     const tribe = order[depth];
     for (const candidate of choices[tribe]) {
-      if (selected.some(other => other && Math.hypot(candidate.x - other.x, candidate.y - other.y) < 80)) continue;
+      if (selected.some(other => other && Math.hypot(candidate.x - other.x, candidate.y - other.y) < Math.min(80, size / 4))) continue;
       selected[tribe] = candidate;
       if (assign(depth + 1)) return true;
       selected[tribe] = null;

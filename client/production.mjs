@@ -12,6 +12,9 @@ export function productionRuntime(source) {
       "\r\nreturn { " + entries.join(", ") + " };\r\n})();";
     source = source.slice(0, start) + stub + source.slice(end + closing.length);
     stripped = true;
+    if (name === "client/cheats.mjs" && !source.includes("globalThis.SpawnerProduction = true;")) {
+      source = "globalThis.SpawnerProduction = true;\r\n" + source;
+    }
   }
   if (!stripped) throw new Error("치트 모듈을 분리한 실행 코드를 다시 빌드해 주세요.");
   return source.replace(/^const workerSource = (.+);\r?$/m,

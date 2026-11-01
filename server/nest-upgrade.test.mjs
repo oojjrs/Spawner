@@ -59,7 +59,7 @@ test("몽돌의 수급 전망과 첫 습격 준비 자금도 할인된 첫 성�
   assert.equal(colonyRaidPressure(20,120,[90,120],120,"pebble").arrivalAt,225);
 });
 
-test("AI의 성장 목표 자금은 몽돌 300포인트와 표준 400포인트에 맞춰 먹이 가치를 계산한다",()=>{
+test("AI의 성장 목표 자금은 몽돌 300포인트와 표준 400포인트에 맞춰 자원 가치를 계산한다",()=>{
   for (const [tribe,weight] of [["pebble",1],["bean",1.125],["spring",1.125],["spore",1.125]]) {
     const size=8,agent={id:"worker",tribe,x:1,y:1,carrying:0,slots:[],cost:4,health:100,bornAt:0,lifespan:300,
       attributes:{},stats:{speed:1,capacity:2,health:100,resistance:1,vision:3},personality:{boldness:0,aggression:0,curiosity:0}};

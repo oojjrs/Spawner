@@ -95,12 +95,20 @@ export function constructionBuildingLayout(sequence) {
   return result;
 }
 
-export function drawConstructionBuilding(context, image, sequence, gate) {
+export function drawConstructionBuilding(context, image, sequence, gate, assemblyAmount) {
   const layout = sequence.layout || constructionBuildingLayout(sequence);
   const draw = name => {
     if (name === "feature" && sequence.featureVisible === false) return;
     const part = layout[name];
-    drawPart(context, image, sequence.parts[name], ...part.center, ...part.size, 0, part.pivot, part.clipBottom);
+    let rise = 0;
+    if (sequence.assembly && Number.isFinite(assemblyAmount)) {
+      const assembly = sequence.assembly, delay = assembly.delays[name] || 0;
+      const amount = ease((assemblyAmount - delay) / (1 - delay));
+      const top = assembly.connected ? Math.min(...Object.values(layout).map(value =>
+        value.center[1] - value.size[1] * value.pivot[1])) : part.center[1] - part.size[1] * part.pivot[1];
+      rise = Math.max(0, assembly.ground - top + .01) * (1 - amount);
+    }
+    drawPart(context, image, sequence.parts[name], part.center[0], part.center[1] + rise, ...part.size, 0, part.pivot, part.clipBottom);
   };
   draw("back");
   if (!sequence.ground && sequence.kind !== "evolution-lab" && sequence.kind !== "watchpost") draw("feature");

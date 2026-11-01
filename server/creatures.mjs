@@ -1,3 +1,4 @@
+import { worldSize } from "./world-size.mjs";
 import { beginCreatureSpawn, creatureSpawning } from "./creature-spawn.mjs";
 import { createEncounters } from "./encounters.mjs";
 import { ENCOUNTER_ASSETS } from "./encounter-types.mjs";
@@ -17,11 +18,11 @@ export const CREATURE_ASSETS = [
 
 export function createCreatures(environment, saved) {
   const combat = environment.combatSystem || (environment.combatSystem = createCombat(environment));
-  const size = 320;
+  const size = worldSize(environment.world);
   let encounters = null;
   let initializing = true;
   const species = "spiny-back-beetle";
-  const stats = { ...unitCombatStats(species), attack: 3, speed: 1 / 1.28, vision: 4, resistance: 1 };
+  const stats = { ...unitCombatStats(species), attack: 3, speed: .78125, vision: 4, resistance: 1 };
   const burrows = environment.world.burrows || [];
   const distribution = environment.world.encounters?.find(plan => plan.key === species && plan.spawnPoints);
   const burrowSites = new Map(burrows.map(burrow => [burrow.id, burrow]));
@@ -244,7 +245,7 @@ export function createCreatures(environment, saved) {
   }
 
   function dropCorpse(agent) {
-    placeCorpse(environment.food, { x: agent.x, y: agent.y, kind: "corpse", species, amount: 4, carapaceAmount: 4, attributes: {}, facing: agent.facing,
+    placeCorpse(environment.food, { x: agent.x, y: agent.y, kind: "corpse", species, amount: 4, attributes: {}, facing: agent.facing,
       agentId: agent.id, hurtStartedAt: agent.hurtStartedAt, hurtCount: agent.hurtCount,
       diedAt: agent.deathStartedAt, decaysAt: agent.deathStartedAt + CORPSE_LIFETIME,
       renderX: agent.deathRenderX, renderY: agent.deathRenderY });

@@ -1,6 +1,7 @@
 import { createRoom, chooseRoomTribe, saveRoom, restoreRoom, tickRoom, snapshotRoom, commandRoom } from "./room.mjs";
 import { openStorage } from "./storage.mjs";
 import { createStateEncoder } from "./state-delta.mjs";
+import { createDecisionPool } from "./decision-pool.mjs";
 
 const stateEncoder = createStateEncoder();
 
@@ -14,6 +15,13 @@ let resumeAfterStorageError = false;
 let lastTick = Date.now();
 let lastSave = 0;
 let queue = Promise.resolve();
+let decisionPool = null;
+
+function prepareDecisions() {
+  if (decisionPool && decisionPool.room !== room) { decisionPool.dispose(); decisionPool = null; }
+  if (room && !decisionPool && [...room.games.values()].reduce((count, game) => count + game.agents.length, 0) >= 32)
+    decisionPool = createDecisionPool(room);
+}
 
 const ready = new Promise((resolve, reject) => {
   if (!navigator.locks) { reject(new Error("이 브라우저에서는 안전한 로컬 저장을 사용할 수 없습니다. 최신 브라우저에서 열어 주세요.")); return; }
@@ -65,7 +73,7 @@ async function handle(type, data, id) {
   if (type === "list") {
     return (await storage.list()).map(saved => ({ id: saved.id, title: saved.title, seed: saved.seed,
       updatedAt: saved.updatedAt, simSeconds: saved.simSeconds, ending: saved.ending || null,
-      tribe: saved.colonies.find(colony => colony.ownerId === saved.hostId)?.tribe })).sort((a, b) => b.updatedAt - a.updatedAt);
+      tribe: saved.colonies.find(colony => colony.ownerId === saved.hostId)?.tribe, worldPreview: saved.worldPreview })).sort((a, b) => b.updatedAt - a.updatedAt);
   }
   if (type === "create") {
     await persist();
@@ -74,6 +82,7 @@ async function handle(type, data, id) {
     await storage.put(saveRoom(next));
     postMessage({ id, type: "progress", progress: 1 });
     room = next;
+    prepareDecisions();
     dirty = false;
     running = false;
     storageError = false;
@@ -85,6 +94,7 @@ async function handle(type, data, id) {
       const saved = await storage.get(data.roomId);
       if (!saved) throw new Error("저장된 월드를 찾을 수 없습니다.");
       room = restoreRoom(saved);
+      prepareDecisions();
     }
     await storage.setSetting("roomId", room.id);
     storageError = false;
@@ -138,6 +148,7 @@ async function handle(type, data, id) {
     if (roomIds.includes(room?.id)) {
       running = false;
       room = null;
+      prepareDecisions();
       dirty = false;
       storageError = false;
       resumeAfterStorageError = false;
@@ -148,6 +159,7 @@ async function handle(type, data, id) {
     await storage.removeAll();
     running = false;
     room = null;
+    prepareDecisions();
     dirty = false;
     storageError = false;
     resumeAfterStorageError = false;
@@ -157,7 +169,7 @@ async function handle(type, data, id) {
     const saved = await storage.get(data.roomId);
     if (!saved || saved.title !== data.title) throw new Error("월드 이름이 일치하지 않습니다.");
     await storage.remove(data.roomId);
-    if (room?.id === data.roomId) { running = false; room = null; dirty = false; }
+    if (room?.id === data.roomId) { running = false; room = null; dirty = false; prepareDecisions(); }
     if (await storage.setting("roomId") === data.roomId) await storage.setSetting("roomId", null);
     return null;
   }
@@ -192,7 +204,9 @@ setInterval(() => {
       const now = Date.now();
       const elapsed = Math.min(0.25, Math.max(0, (now - lastTick) / 1000));
       lastTick = now;
+      prepareDecisions();
       tickRoom(room, elapsed);
+      decisionPool?.flush();
       dirty = true;
       if (room.games.get(room.hostId).ending) {
         running = false;

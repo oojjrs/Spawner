@@ -54,7 +54,7 @@ export function harvestPlaybackPose(playback, cell, agents, now, definition) {
   const settleFrame = clamp(Math.floor(definition.settleFrame), contactFrame, lastFrame);
   const postSeconds = definition.postSeconds > 0 ? definition.postSeconds : POST_SECONDS;
   const harvestSeconds = definition.harvestSeconds > 0 ? definition.harvestSeconds : 1.5;
-  const resourceType = cell.resourceType || (cell.kind === "corpse" ? "meat" : definition.key || "honey-mushrooms");
+  const resourceType = cell.resourceType || (cell.kind === "corpse" ? "nutrients" : definition.key || "honey-mushrooms");
   const key = cell.x + "," + cell.y;
   let effect = playback.effects.get(key);
   if (effect?.resourceType !== resourceType || Number.isFinite(cell.amount) && cell.amount > effect.remaining) effect = null;

@@ -1,10 +1,11 @@
+import { WORLD_SIZE } from "./world-size.mjs";
 import { generateWildlife, generateResourceAreas } from "./ecology.mjs";
 import { populateWorldEconomy } from "./economy.mjs";
 import { generateHydrology, hydrologyResourceSuitability, populateWatershedResources } from "./hydrology.mjs";
 import { createResourceHabitats } from "./resource-habitats.mjs";
 import { generateLandscapeWorld } from "./island-world.mjs";
 
-export const SIZE = 320;
+export const SIZE = WORLD_SIZE;
 const RESOURCE_RADIUS = 22, CAMP_MIN_DISTANCE = 80;
 const SPORE_NEST_CLEAR_RADIUS = 4;
 export const NEST_SAFE_RADIUS = 10;
@@ -115,7 +116,7 @@ const ENCOUNTER_RULES = {
   "implemented": true
 },
 "spring-keeper": {
-  "spawn": "꽃꼬리새 발견 후 먹이 10개를 둥지로 운반하면 등장한다.",
+  "spawn": "꽃꼬리새 발견 후 자원 10개를 둥지로 운반하면 등장한다.",
   "population": "맵 전체 초기 1마리 · 생존 상한 1마리",
   "respawn": "사망하면 재등장하지 않는다.",
   "guaranteedAt": "5분",
@@ -171,6 +172,7 @@ function noise(x, y, scale, seed) {
     (hash(ix, iy + 1, seed) * (1 - tx) + hash(ix + 1, iy + 1, seed) * tx) * ty) * 2 - 1;
 }
 function distributeMountains(terrain, moisture, seed) {
+  const SIZE = 320;
   const counts = new Uint32Array(9), candidates = [], scores = new Float32Array(terrain.length);
   for (let index = 0; index < terrain.length; index++) {
     const type = terrain[index];
@@ -204,6 +206,7 @@ export function generateMapWorld(seed, onProgress, version, capturePlacementMaps
   }
 }
 function generateWorldCandidate(seed, revision, onProgress, version, baseline) {
+  const SIZE = 320;
   const ecological = version === undefined || version >= 10;
   const terrain = new Uint8Array(SIZE * SIZE), hazards = new Uint8Array(SIZE * SIZE);
   const moistureField = new Float32Array(SIZE * SIZE), heightField = new Float32Array(SIZE * SIZE);
@@ -540,7 +543,7 @@ function generateWorldCandidate(seed, revision, onProgress, version, baseline) {
       }
     }
   }
-  if (camps.length !== 4) throw new Error('시작 먹이·자원을 확보할 네 부족의 자리가 없습니다.');
+  if (camps.length !== 4) throw new Error('시작 자원을 확보할 네 부족의 자리가 없습니다.');
   onProgress(.35);
   for (const camp of camps) for (let dy = -NEST_SAFE_RADIUS; dy <= NEST_SAFE_RADIUS; dy++) for (let dx = -NEST_SAFE_RADIUS; dx <= NEST_SAFE_RADIUS; dx++) {
     if (dx * dx + dy * dy <= NEST_SAFE_RADIUS * NEST_SAFE_RADIUS) hazards[(camp.y + dy) * SIZE + camp.x + dx] = 0;
@@ -803,7 +806,7 @@ function generateWorldCandidate(seed, revision, onProgress, version, baseline) {
   }
   const foraging = camps.map(camp => {
     const points = food.filter(point => point[5] === camp.id && point[4] <= FORAGING.nearDistance && point[6]);
-    if (points.length < 2) throw new Error('초기 두 개체가 채집할 자연 먹이 지점이 부족합니다.');
+    if (points.length < 2) throw new Error('초기 두 개체가 채집할 자연 자원 지점이 부족합니다.');
     let low = 0, high = 512;
     for (let step = 0; step < 22; step++) {
       const middle = (low + high) / 2;

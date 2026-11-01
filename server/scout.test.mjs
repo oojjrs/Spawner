@@ -303,7 +303,7 @@ test("길이 끊긴 고급 정찰병은 다른 구역의 일반 개체가 정찰
   assert.ok(ai.evaluate(f.advanced, false).every(plan => plan.action !== "explore"));
 });
 
-test("고급 정찰병도 운반 중인 먹이는 납품한 뒤 정찰 역할을 다시 선택한다", () => {
+test("고급 정찰병도 운반 중인 자원은 납품한 뒤 정찰 역할을 다시 선택한다", () => {
   const f = scoutTeamFixture();
   f.advanced.carrying = 1;
   f.advanced.carryingType = "clay";

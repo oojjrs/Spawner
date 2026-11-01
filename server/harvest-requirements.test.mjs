@@ -7,8 +7,8 @@ import { createGame } from "./game.mjs";
 import { generateWorld } from "./world.mjs";
 
 const requirements = {
-  clay: [], tree: [], dew: [], pebbles: [], sand: ["excavation"], carapace: ["piercing"],
-  "grass-fiber": ["blade"], meat: ["butchery"],
+  clay: [], tree: [], dew: [], pebbles: [], sand: ["excavation"],
+  "grass-fiber": ["blade"], nutrients: ["butchery"],
   "iron-ore": ["piercing"], "copper-ore": ["piercing"], quartz: ["piercing"]
 };
 const tribes = { clay: "bean", tree: "spore", dew: "spring", pebbles: "pebble" };
@@ -17,7 +17,7 @@ function fixture(resourceType, slots) {
   const colony = { id: 1, ownerId: "requirements-test", tribe: tribes[resourceType] || "bean", x: 40, y: 40, occupiedCells: new Set(["2,2"]) };
   const terrain = resourceType === "tree" ? "forest" : "grassland";
   const food = { x: 46, y: 42, amount: 6, initialAmount: 6, resourceType, terrain,
-    kind: resourceType === "meat" ? "corpse" : "resource" };
+    kind: resourceType === "nutrients" ? "corpse" : "resource" };
   const environment = { simSeconds: 120, world: { seed: 13, generationVersion: 16, terrain: new Uint8Array(320 * 320).fill(4),
     hazards: new Uint8Array(320 * 320) }, colonies: [colony], games: new Map(),
     food: new Map([["46,42", food]]), foodSpots: new Map() };
@@ -47,7 +47,7 @@ function advanceTo(fixture, seconds) {
   fixture.game.tick(elapsed);
 }
 
-test("채집 가능한 먹이·자원의 필요 속성을 자원 묶음대로 검사한다", () => {
+test("채집 가능한 자원의 필요 속성을 자원 묶음대로 검사한다", () => {
   const world = { hazards: new Uint8Array(320 * 320) };
   assert.equal(RESOURCE_TYPES.filter(entry => !entry.harvestLocked).length, Object.keys(requirements).length);
   assert.equal(resourceDefinition("honey-mushrooms").harvestLocked, true);
@@ -78,7 +78,7 @@ test("폐기한 열매·뿌리·이끼는 현재 속성을 모두 갖춰도 수�
 
 test("필요한 속성을 갖춘 개체만 실제 준비·수확을 마치고 종류별 적재물을 얻는다", () => {
   for (const [key, slots] of Object.entries(requirements)) {
-    if (!tribes[key] && !["meat", "carapace"].includes(key)) continue;
+    if (!tribes[key] && !["nutrients"].includes(key)) continue;
     const f = fixture(key, slots);
     advanceTo(f, 0);
     assert.equal(f.agent.mode, "harvest", key);
@@ -105,7 +105,7 @@ test("필요 속성이 하나라도 부족하면 기존 접근 명령을 취소�
 });
 
 test("수확 도중 능력을 잃은 저장을 복원하면 즉시 수확을 취소하고 새 속성 설계는 저장된다", () => {
-  for (const key of ["carapace", "meat"]) {
+  for (const key of ["nutrients"]) {
     const f = fixture(key, requirements[key]);
     advanceTo(f, 0);
     advanceTo(f, 1);

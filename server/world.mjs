@@ -7,17 +7,17 @@ import { isFoodHabitat, RESOURCE_HABITATS, RESOURCE_PLACEMENT, isResourceHabitat
 export const STARTING_FOOD_RADIUS = 22;
 export const STARTING_FOOD_CAP = 10;
 
-export const WORLD_GENERATION_VERSION = 34;
+export const WORLD_GENERATION_VERSION = 39;
 
 export function generateWorld(seed, version, onProgress, capturePlacementMaps) {
-      if (version === undefined || version === 6 || version === 7 || version === 8 || version === 9 || version === 10 || version === 11 || version === 12 || version === 13 || version === 14 || version === 15 || version === 16 || version === 17 || version === 18 || version === 19 || version === 20 || version === 21 || version === 22 || version === 23 || version === 24 || version === 25 || version === 26 || version === 27 || version === 28 || version === 29 || version === 30 || version === 31 || version === 32 || version === 33 || version === WORLD_GENERATION_VERSION) {
+      if (version === undefined || version === 6 || version === 7 || version === 8 || version === 9 || version === 10 || version === 11 || version === 12 || version === 13 || version === 14 || version === 15 || version === 16 || version === 17 || version === 18 || version === 19 || version === 20 || version === 21 || version === 22 || version === 23 || version === 24 || version === 25 || version === 26 || version === 27 || version === 28 || version === 29 || version === 30 || version === 31 || version === 32 || version === 33 || version === 34 || version === 35 || version === 36 || version === 37 || version === 38 || version === WORLD_GENERATION_VERSION) {
         const world = generateMapWorld(seed, onProgress, version, capturePlacementMaps);
         world.generationVersion = version ?? WORLD_GENERATION_VERSION;
         world.camps = world.camps.map(camp => ({ ...camp, tribe: camp.tribe === "sprout" ? "bean" : camp.tribe }));
         world.sites = world.camps.map(camp => [camp.x, camp.y]);
         world.origin = { x: world.camps[0].x, y: world.camps[0].y };
         world.tribes = world.camps.slice(1);
-        world.creatureDensity = new Uint8Array(320 * 320);
+        world.creatureDensity = new Uint8Array(world.terrain.length);
         return world;
       }
       if (version !== undefined && ![1, 2, 3, 4, 5, WORLD_GENERATION_VERSION].includes(version)) {

@@ -153,5 +153,9 @@ export function createTribeArt(definitions, assetSource) {
     return surface;
   }
 
-  return { preparePreview, prepareUnit, sprite, bounds, drawPreview, animationFrame, animationPose, constructionFrame };
+  function bodyWidth(tribe, appearance, portrait) {
+    return attributes.bodyWidth(tribe, appearance, portrait ? units.get(tribe)?.box : null);
+  }
+
+  return { preparePreview, prepareUnit, sprite, bounds, drawPreview, animationFrame, animationPose, constructionFrame, bodyWidth };
 }

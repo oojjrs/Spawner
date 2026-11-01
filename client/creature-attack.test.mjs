@@ -52,14 +52,14 @@ test("실제 게임은 피격 다음에 새 공격을 그리며 공격 원화는
   let hurt = true;
   const context = createContext({ displayedAgent: agent => agent, state: { camera: { zoom: 64 } }, viewport: { width: 500, height: 500 },
     interpolatedAgentPosition: () => ({ x: 1, y: 1 }), worldToScreen: () => ({ x: 64, y: 64 }), agentBirthPose: () => null,
-    drawAgentConstruction: () => false,
+    drawAgentConstruction: () => false, drawCreatureSpawn: () => false,
     drawCreatureHurt: () => { calls.push("hurt"); return hurt; }, drawCreatureAttack: () => { calls.push("attack"); return true; } });
-  runInContext(source.match(/^    function drawAgentBody\([^]*?^    }/m)[0], context);
-  context.drawAgentBody(0, { species: "dew-rabbit", mode: "fight" });
+  runInContext(source.match(/^    function drawAgentUnscaledBody\([^]*?^    }/m)[0], context);
+  context.drawAgentUnscaledBody(0, { species: "dew-rabbit", mode: "fight" });
   assert.deepEqual(calls, ["hurt"]);
   calls.length = 0;
   hurt = false;
-  context.drawAgentBody(0, { species: "dew-rabbit", mode: "fight" });
+  context.drawAgentUnscaledBody(0, { species: "dew-rabbit", mode: "fight" });
   assert.deepEqual(calls, ["hurt", "attack"]);
   const animation = CREATURE_ATTACK_ANIMATIONS["dew-rabbit"], mirrors = [];
   const renderer = createContext({ Spawner: { creatureAttackPose }, state: { simSeconds: 10, camera: { zoom: 64 } },

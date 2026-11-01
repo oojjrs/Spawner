@@ -1,7 +1,5 @@
 import { recordPlacementMap } from "./placement-maps.mjs";
 
-const SIZE = 320;
-
 const HABITATS = {
   "flower-tail-bird": [[4, 5], 768, false],
   "dew-rabbit": [[5], 768, false],
@@ -25,6 +23,7 @@ const HABITATS = {
 };
 
 export function generateWildlife(world, plans) {
+  const SIZE = Math.sqrt(world.terrain.length);
   const occupied = new Set();
   return plans.map((plan, order) => {
     const [terrains, tilesPerUnit, nearWater] = HABITATS[plan.key];
@@ -36,7 +35,7 @@ export function generateWildlife(world, plans) {
           nearWater && world.waterDistance[index] > 6) continue;
       cells.push(index);
       if (world.resourceCells.has(index) && !(world.generationVersion >= 23 && (world.terrain[index] === 5 || forest)) || occupied.has(index)) continue;
-      const x = index % SIZE, y = Math.floor(index / SIZE), sector = Math.floor(y / 16) * 20 + Math.floor(x / 16);
+      const x = index % SIZE, y = Math.floor(index / SIZE), sector = Math.floor(y / 16) * Math.ceil(SIZE / 16) + Math.floor(x / 16);
       const priority = wildlifeHash(index, world.seed + order * 7919);
       if (!sectors.has(sector) || priority < sectors.get(sector).priority) sectors.set(sector, { index, priority });
     }
@@ -74,6 +73,7 @@ function wildlifeHash(index, seed) {
 }
 
 export function generateResourceAreas(world) {
+  const SIZE = Math.sqrt(world.terrain.length);
   if (world.economy) {
     const areas = { wood: [], dew: [], clay: [], pebbles: [] };
     for (const [x, y, amount, key] of world.resources) if (amount > 0 && Object.hasOwn(areas, key === "tree" ? "wood" : key)) areas[key === "tree" ? "wood" : key].push(y * world.size + x);

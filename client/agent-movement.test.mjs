@@ -4,6 +4,8 @@ import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
 import { UNIT_ANIMATIONS } from "./unit-animation.mjs";
 import { SPORE_BIRTH_ANIMATION } from "./birth.mjs";
+import { combatAttributeKeys } from "./combat-attributes.mjs";
+import { createNestGrowthPlayback, nestGrowthSounds } from "./nest-growth.mjs";
 
 const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
 
@@ -19,7 +21,7 @@ function movement() {
     constructor() { this.complete = true; this.naturalWidth = 2048; }
     async decode() {}
   }
-  const context = createContext({ Image, Spawner: { UNIT_ANIMATIONS }, assetSource: path => path,
+  const context = createContext({ Image, performance, Spawner: { UNIT_ANIMATIONS, combatAttributeKeys }, assetSource: path => path,
     state: { simSeconds: .5 }, idleMotion: { matches: false }, AGENT_JUMP_PREPARATION: .2, AGENT_HEIGHT: .7,
     clamp: (value, low, high) => Math.max(low, Math.min(high, value)),
     displayedAgent: agent => agent, agentBirthPose: () => null,
@@ -35,7 +37,8 @@ function movement() {
   const start = source.indexOf("    const agentMovementSheets = new Map(");
   const end = source.indexOf("    const unitAnimationSheets = new Map(", start);
   runInContext(source.slice(start, end), context);
-  for (const name of ["agentBodyLift", "agentBasePosition", "agentBodyPose", "prepareAgentMovement", "drawAgentMovement", "drawAgentAppearance"])
+  for (const name of ["agentBodyLift", "agentBasePosition", "agentBodyPose", "prepareAgentMovement", "drawAgentMovement",
+    "drawAgentAppearance", "drawAgentAppearanceLayer", "drawAgentAppearanceBody", "drawAgentCarrying"])
     runInContext(declaration(name), context);
   return { context, draws, translations };
 }
@@ -84,8 +87,8 @@ function gameAudio() {
   const state = { simSeconds: .2, camera: { layer: 0 }, agents: [], rivals: [], corpses: [] };
   const context = createContext({ state, connection: { active: true, online: true }, audioTime: 0,
     audio: { available: () => true, play: name => played.push(name), setHarvest: volumes => harvests.push(new Map(volumes)) },
-    SpawnerCombatAudio: { update: () => [] }, combatAudio: {},
-    Spawner: { SPORE_BIRTH_ANIMATION, resourceTypeForCell: food => food.resourceType || (food.kind === "corpse" ? "meat" : "honey-mushrooms") },
+    SpawnerCombatAudio: { update: () => [] }, combatAudio: {}, nestGrowthPlayback: createNestGrowthPlayback(),
+    Spawner: { SPORE_BIRTH_ANIMATION, nestGrowthSounds, resourceTypeForCell: food => food.resourceType || (food.kind === "corpse" ? "nutrients" : "honey-mushrooms") },
     worldMap: {}, foodCellMap: new Map(), foodCellAt: () => null,
     displayedAgent: unit => unit, interpolatedAgentPosition: unit => unit, audioVolume: () => 1,
     agentBirthPose: () => null, agentAudio: new Map(), deliveryAudio: new Map(), foodDeliveries: new Map(),
@@ -123,10 +126,10 @@ test("목재와 사체도 실제 채집 대상을 따라 재생하며 중첩된 
     mode: "harvest", rememberedFoodKey: "target", carrying: 0 };
   sound.state.agents = [agent];
   sound.context.foodCellAt = () => ({ x: 1, y: 1, amount: 4, resourceType: "pebbles" });
-  for (const cell of [{ resourceType: "tree" }, { kind: "corpse" }, { resourceType: "carapace" }]) {
+  for (const cell of [{ resourceType: "tree" }, { kind: "corpse" }]) {
     sound.context.foodCellMap.set("target", { x: 1, y: 1, amount: 4, ...cell });
     sound.context.updateAudio();
-    assert.deepEqual([...sound.harvests.at(-1)], [[cell.resourceType || "meat", 1]]);
+    assert.deepEqual([...sound.harvests.at(-1)], [[cell.resourceType || "nutrients", 1]]);
   }
   sound.context.foodCellMap.get("target").amount = 0;
   sound.context.updateAudio();

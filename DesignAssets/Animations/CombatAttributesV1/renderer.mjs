@@ -5,16 +5,12 @@ export const ACTIONS = {
   hurt: { durations: [20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20], loop: false },
   guard: { durations: Array(20).fill(50), loop: false, contact: 300 },
   heal: { durations: Array(24).fill(50), loop: false, contact: 480 },
-  secretion: { durations: Array(24).fill(50), loop: false, contact: 480 },
   birth: { durations: Array(24).fill(50), loop: false },
   death: { durations: Array(24).fill(60), loop: false }
 };
 for (const action of Object.values(ACTIONS)) action.duration = action.durations.reduce((a,b)=>a+b,0);
 export const VARIANTS = [
-  ["blade"], ["piercing"], ["carapace"], ["guard"], ["regeneration"], ["secretion"],
-  ["blade","carapace"], ["piercing","guard"], ["regeneration","secretion"],
-  ["blade","piercing","carapace"], ["guard","carapace","regeneration"], ["guard","regeneration","secretion"]
-];
+  ["blade"], ["piercing"], ["carapace"], ["guard"], ["regeneration"], ["blade","carapace"], ["piercing","guard"], ["blade","piercing","carapace"], ["guard","carapace","regeneration"], ];
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const smooth=v=>{v=clamp(v,0,1);return v*v*(3-2*v)};
 function curve(p,keys) {
@@ -59,12 +55,12 @@ export function createCombatRenderer(rig,images,createSurface) {
     }
     const stone=kind==="pebble",water=kind==="spring",spore=kind==="spore";
     const walk=action==="walk",attack=action==="attack",hurt=action==="hurt",dead=action==="death";
-    const block=action==="guard"&&(has("guard")||has("carapace")),heal=action==="heal"&&has("regeneration"),signal=action==="secretion"&&has("secretion");
+    const block=action==="guard"&&(has("guard")||has("carapace")),heal=action==="heal"&&has("regeneration");
     const cycle=descriptor.loop?p*Math.PI*2:0,gait=p*Math.PI*2,breath=Math.sin(cycle);
     const hit=attack?curve(p,[[0,0],[.17,-.35],[.30,1],[.44,.72],[.8,0],[1,0]]):0;
     const recoil=hurt?curve(p,[[0,0],[.10,1],[.67,.65],[1,0]]):0;
     const blockAmount=block?curve(p,[[0,0],[.22,.8],[.3,1],[.7,1],[1,0]]):0;
-    const support=heal||signal?curve(p,[[0,0],[.22,.5],[.4,1],[.76,.85],[1,0]]):0;
+    const support=heal?curve(p,[[0,0],[.22,.5],[.4,1],[.76,.85],[1,0]]):0;
     const death=dead?smooth(p/.85):0,birth=action==="birth"?curve(p,[[0,.08],[.22,.35],[.72,1.035],[1,1]]):1;
     const fit=settings&&settings.fit||{scale:1+Math.min(4,attributes.length)*.1,x:160,y:280};
     const scale=fit.scale*birth;
@@ -102,15 +98,7 @@ export function createCombatRenderer(rig,images,createSurface) {
       onBody("bud",-42,-36,55,.87,.62,Math.sin(cycle)*.025,0,false,stone?1:1+support*.045,0);
       if(heal)glow(bx-58,by-42,34,"rgba(225,255,210,1)",support*.22);
     }
-    if(has("secretion"))for(let i=0;i<3;i++){
-      const delay=i*.11,ventPulse=signal?Math.max(0,Math.sin((p-delay)*Math.PI*3))*support:0;
-      onBody("vent",47+i*1.5,-44+i*25,38,.86,.77,-.20+i*.20+ventPulse*.07-(dead?bodyAngle:0),0,true,stone?1:1+ventPulse*.08,0);
-      if(signal)for(let k=0;k<3;k++){
-        const q=(p-delay-k*.14);if(q<0||q>.5)continue;
-        const fx=bx+74+q*46,fy=by-57+i*24-q*26;
-        glow(fx,fy,3.8,"rgba(255,220,125,1)",Math.sin(q/.5*Math.PI)*.75);
-      }
-    }
+    
     for(const side of [-1,1]){
       const phase=gait+(side>0?Math.PI:0),raised=walk?Math.max(0,Math.sin(phase))*7:0;
       const x=160+side*rig.bind.feet.spread+(walk?Math.cos(phase)*5:0)+death*side*5;

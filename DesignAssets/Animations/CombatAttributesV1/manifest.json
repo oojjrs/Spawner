@@ -6,8 +6,8 @@
     "pebble",
     "spring"
   ],
-  "variantCount": 48,
-  "animationCount": 344,
+  "variantCount": 36,
+  "animationCount": 248,
   "actionKinds": [
     "idle",
     "walk",
@@ -15,7 +15,6 @@
     "hurt",
     "guard",
     "heal",
-    "secretion",
     "birth",
     "death"
   ],

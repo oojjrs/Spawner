@@ -78,7 +78,8 @@ test("자연사한 개체는 이름과 원래 ID를 가진 사체로 보존되�
 });
 
 test("일부 양분은 사체와 함께 남고 모두 회수하면 사체도 사라진다", () => {
-  const { game, environment } = fixture();
+  const { game, environment, agent } = fixture();
+  agent.cost = 10;
   game.prepare(180);
   game.tick(0);
   const corpse = [...environment.food.values()].find(cell => cell.kind === "corpse");
@@ -96,6 +97,7 @@ test("일부 양분은 사체와 함께 남고 모두 회수하면 사체도 사
 
 test("회수 완료한 사체는 저장과 복원 후에도 다시 나타나지 않는다", () => {
   const original = fixture();
+  original.agent.cost = 10;
   original.game.prepare(180);
   original.game.tick(0);
   [...original.environment.food.values()].find(cell => cell.kind === "corpse").amount = 0;

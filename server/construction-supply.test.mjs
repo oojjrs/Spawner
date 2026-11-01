@@ -40,19 +40,22 @@ function transfer(context, courier, job) {
 
 test("새 용량을 시설별로 적용하고 초과 재고와 파괴된 창고의 회수 재료를 보존한다", () => {
   const context = fixture("storage"), { state, storage } = context;
-  storage.refresh()[0].inventory.clay += 10;
+  storage.refresh()[0].inventory.clay += 270;
   storage.refresh();
   assert.equal(storage.refresh()[0].capacity, 40);
-  assert.equal(state.resourceInventory.clay, 40);
+  assert.equal(storage.space(storage.refresh()[0]), 0);
+  assert.equal(storage.deposit(storage.refresh()[0], "tree", 1), 0);
+  assert.equal(state.resourceInventory.clay, 300);
   state.buildings.push({ id: "warehouse", key: "storage", x: 60, y: 40, width: 3, height: 3, health: 100 });
   const warehouse = storage.refresh().find(store => store.id === "warehouse");
-  assert.equal(storage.deposit(warehouse, "tree", 90), 60);
-  assert.equal(state.resourceInventory.tree, 66);
+  assert.equal(warehouse.capacity, 300);
+  assert.equal(storage.deposit(warehouse, "tree", 330), 300);
+  assert.equal(state.resourceInventory.tree, 306);
   state.buildings[0].health = 0;
   storage.refresh();
   assert.equal(state.resourceInventory.tree, 6);
   assert.equal(warehouse.kind, "remains");
-  assert.equal(warehouse.inventory.tree, 60);
+  assert.equal(warehouse.inventory.tree, 300);
 });
 
 test("예약→출고→현장 납품→흡수를 구분하고 공급 중단 시간은 성장 시간에 쌓지 않는다", () => {
@@ -74,7 +77,7 @@ test("예약→출고→현장 납품→흡수를 구분하고 공급 중단 시
   assert.equal(builder.construction.progress, .2);
   builder.construction.delivered.clay = 10;
   supply.advance(builder, 1);
-  assert.ok(Math.abs(builder.construction.progress - (.2 + 1 / 15)) < 1e-8);
+  assert.ok(Math.abs(builder.construction.progress - (.2 + 1 / 3)) < 1e-8);
 });
 
 test("필요 재료 한 종류가 빠지면 진척을 제한하고 클라이언트도 서버 진척에 고정된다", () => {
@@ -102,7 +105,7 @@ test("다른 운반 예약을 차감해 같은 부족분을 중복 배차하지 
   assert.equal(supply.plans(couriers[1]).length, 0);
 });
 
-test("먹이 채집 인력을 보호하고 수급이 급하면 운반 인원을 더 줄인다", () => {
+test("자원 채집 인력을 보호하고 수급이 급하면 운반 인원을 더 줄인다", () => {
   const context = fixture("storage"), { state, supply, couriers } = context;
   state.knownFood.set("food", { x: 46, y: 46, amount: 100, resourceType: "clay" });
   const stable = supply.allocation(), available = couriers.filter(agent => supply.plans(agent).length).length;
@@ -115,7 +118,7 @@ test("먹이 채집 인력을 보호하고 수급이 급하면 운반 인원을 
   assert.ok(couriers.filter(agent => supply.plans(agent).length).length < available);
 });
 
-test("출고한 일꾼이 먹이 근처를 지나도 채집 인력을 유지하며 맡은 자재를 계속 운반한다", () => {
+test("출고한 일꾼이 자원 근처를 지나도 채집 인력을 유지하며 맡은 자재를 계속 운반한다", () => {
   const context = fixture("watchpost"), { state, supply, couriers } = context;
   state.knownFood.set("food", { x: 46, y: 46, amount: 100, resourceType: "clay" });
   const carriers = couriers.filter(agent => supply.plans(agent).length);
@@ -147,7 +150,7 @@ test("감시봉 운반 인력을 비옥토 한 종류에 몰지 않고 예약량
   assert.deepEqual(types.sort(), ["clay", "grass-fiber", "tree"]);
 });
 
-test("일꾼이 한 명뿐이고 먹이가 있으면 건설 운반으로 마지막 채집 인력을 빼앗지 않는다", () => {
+test("일꾼이 한 명뿐이고 자원이 있으면 건설 운반으로 마지막 채집 인력을 빼앗지 않는다", () => {
   const { state, supply, couriers, builder } = fixture("watchpost");
   state.agents = [builder, couriers[0]];
   state.knownFood.set("food", { x: 46, y: 46, amount: 100, resourceType: "clay" });
@@ -264,7 +267,7 @@ function interruptedSupply() {
   return context;
 }
 
-test("공급로 재개 후 먹이를 계속 확보하면서 45초 안에 감시봉 자재를 다시 납품한다", () => {
+test("공급로 재개 후 자원을 계속 확보하면서 45초 안에 감시봉 자재를 다시 납품한다", () => {
   const context = interruptedSupply(), { game, environment } = context;
   for (let index = 0; index < 80; index++) tick(context);
   const waiting = game.agents.find(agent => agent.id === context.builderId).construction;
@@ -279,11 +282,11 @@ test("공급로 재개 후 먹이를 계속 확보하면서 45초 안에 감시�
     if (firstDelivery === null && (!builder || builder.construction.progress > .5)) firstDelivery = environment.simSeconds - openedAt;
     parallel ||= game.agents.some(agent => agent.transportCargo) && game.agents.some(agent => agent.utility?.action === "collect");
   }
-  assert.ok(firstAssignment !== null && firstAssignment <= 15, "채집한 먹이를 반납한 뒤 운반 인력이 바로 전환되어야 한다: " + firstAssignment);
+  assert.ok(firstAssignment !== null && firstAssignment <= 15, "채집한 자원을 반납한 뒤 운반 인력이 바로 전환되어야 한다: " + firstAssignment);
   assert.ok(firstDelivery !== null && firstDelivery <= 45, "경로가 열린 뒤 다음 자재가 현장에 도착해야 한다: " + firstDelivery);
-  assert.ok(game.colonyFood > foodBefore, "건설 자재를 운반하는 동안 먹이 납품도 유지해야 한다");
+  assert.ok(game.colonyFood > foodBefore, "건설 자재를 운반하는 동안 자원 납품도 유지해야 한다");
   assert.equal(parallel, true);
-  assert.ok(environment.food.get("37,41").amount + environment.food.get("37,43").amount > 900, "먹이 고갈을 기다려서는 안 된다");
+  assert.ok(environment.food.get("37,41").amount + environment.food.get("37,43").amount > 900, "자원 고갈을 기다려서는 안 된다");
 });
 
 test("실제 게임에서 일꾼이 왕복하고 저장·복원 후에도 자재 소모로 창고를 완성한다", () => {
@@ -303,7 +306,7 @@ test("실제 게임에서 일꾼이 왕복하고 저장·복원 후에도 자재
   assert.equal(game.agents.some(agent => agent.id === context.builderId), false);
   assert.equal(game.snapshot().resourceInventory.clay, 30);
   assert.equal(game.snapshot().evolutionPoints, 200);
-  assert.equal(game.snapshot().resourceCapacity, 100);
+  assert.equal(game.snapshot().resourceCapacity, 340);
 });
 
 test("운반 인력이 없으면 재료와 개체를 보존하며 변태가 대기한다", () => {
@@ -318,13 +321,15 @@ test("다른 종족 건설 AI가 고른 신규 현장에도 운반 예측과 예
   const context = gameFixture(3), { game } = context;
   const saved = JSON.parse(game.save());
   saved.state.agents[0].construction = null;
+  saved.state.resourceInventory.clay = 300;
+  for (const store of saved.state.resourceStores) if (store.kind === "nest") store.inventory.clay = 300;
   game.restore(JSON.stringify(saved));
   for (let index = 0; index < 20 && !game.agents[0].construction; index++) tick(context);
   assert.equal(game.agents[0].construction?.buildingKey, "storage");
   assert.equal(game.agents[0].construction?.supplyVersion, 1);
   for (let index = 0; index < 600 && !game.buildings.some(building => building.key === "storage"); index++) tick(context);
   assert.equal(game.buildings.filter(building => building.key === "storage").length, 1);
-  assert.equal(game.snapshot().resourceInventory.clay, 30);
+  assert.equal(game.snapshot().resourceInventory.clay, 290);
 });
 
 test("건설에 부족한 기본 재료는 가까운 전초에서 포인트만 받지 않고 저장 시설로 가져온다", () => {

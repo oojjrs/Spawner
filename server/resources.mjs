@@ -1,20 +1,21 @@
+import { worldSize } from "./world-size.mjs";
 import { isTreeFood } from "./food.mjs";
 import { attributeCounts } from "./attributes.mjs";
 import { LEGACY_RESOURCE_HABITATS } from "./resource-legacy.mjs";
 import { RESOURCE_ECONOMY, isEconomyHabitat } from "./economy.mjs";
 import { resourceHabitatSuitability } from "./resource-habitats.mjs";
 
-export const REMOVED_RESOURCE_TYPES = Object.freeze(["honey-mushrooms","twigs","bark","root-fiber","spider-silk","water","tree-sap","leaf-mold","resin","beeswax","dry-leaves","tree-fruit","berry-bush","seed-pods","root-bulbs","nutrient-moss"]);
+export const REMOVED_RESOURCE_TYPES = Object.freeze(["honey-mushrooms","twigs","bark","root-fiber","spider-silk","water","tree-sap","leaf-mold","resin","beeswax","dry-leaves","tree-fruit","berry-bush","seed-pods","root-bulbs","nutrient-moss","meat","carapace"]);
 
 export function migrateResourceType(key) {
+  if (key === "meat") return "nutrients";
   if (key === "root-fiber") return "grass-fiber";
   if (key === "wood") return "tree";
   return REMOVED_RESOURCE_TYPES.includes(key) ? null : key;
 }
 
 const resourceImages = {
-  meat: "DesignAssets/Foods/food-nutrients.png",
-  carapace: "DesignAssets/ResourceConcepts/v1/resource-carapace.png",
+  nutrients: "DesignAssets/Foods/food-nutrients.png",
   tree: "DesignAssets/Terrain/standing-tree-smooth-atlas.png",
   dew: "DesignAssets/Resources/dew-grass.png",
   pebbles: "DesignAssets/Resources/pebbles.png",
@@ -26,8 +27,7 @@ const resourceImages = {
   quartz: "DesignAssets/ResourceConcepts/v1/resource-quartz.png"
 };
 const resourceCarryImages = {
-  meat: "DesignAssets/Foods/food-nutrients.png",
-  carapace: "DesignAssets/ResourceConcepts/v1/resource-carapace.png",
+  nutrients: "DesignAssets/Foods/food-nutrients.png",
   tree: "DesignAssets/Resources/wood-carry.png",
   dew: "DesignAssets/Resources/dew-carry.png",
   pebbles: "DesignAssets/Resources/pebbles-carry.png",
@@ -38,17 +38,16 @@ const resourceCarryImages = {
 };
 
 export const RESOURCE_TYPES = Object.freeze([
-  ["meat", "양분", "food", 1.5, ["butchery"]],
-  ["carapace", "갑각", "material", 2, ["piercing"]],
-  ["tree", "목재", "material", 5, ["blade"]],
-  ["dew", "이슬방울", "material", .8, ["butchery"]],
-  ["pebbles", "자갈", "material", 2, ["piercing"]],
-  ["clay", "비옥토", "material", 2, ["excavation"]],
-  ["sand", "모래", "material", 1.5, ["excavation"]],
-  ["grass-fiber", "풀섬유", "material", 2, ["blade"]],
-  ["iron-ore", "철광석", "material", 3, ["piercing"]],
-  ["copper-ore", "구리광석", "material", 3, ["piercing"]],
-  ["quartz", "수정", "material", 3, ["piercing"]]
+  ["nutrients", "양분", "food", 5, ["butchery"]],
+  ["tree", "목재", "material", 6, ["blade"]],
+  ["dew", "이슬방울", "material", 2, ["butchery"]],
+  ["pebbles", "자갈", "material", 6, ["piercing"]],
+  ["clay", "비옥토", "material", 4, ["excavation"]],
+  ["sand", "모래", "material", 4, ["excavation"]],
+  ["grass-fiber", "풀섬유", "material", 4, ["blade"]],
+  ["iron-ore", "철광석", "material", 12, ["piercing"]],
+  ["copper-ore", "구리광석", "material", 10, ["piercing"]],
+  ["quartz", "수정", "material", 16, ["piercing"]]
 ].map(([key, name, category, harvestSeconds, requirements]) => Object.freeze({
   key, name, category, harvestSeconds: RESOURCE_ECONOMY.find(entry => entry.key === key)?.harvestSeconds ?? harvestSeconds,
   harvestLocked: key === "honey-mushrooms", requirements: Object.freeze(requirements),
@@ -89,7 +88,7 @@ export function isTribeFood(resourceType, tribe, version) {
 }
 
 export function isColonyFood(resourceType, tribe, version) {
-  return resourceType === "meat" || isTribeFood(resourceType, tribe, version);
+  return resourceType === "nutrients" || isTribeFood(resourceType, tribe, version);
 }
 
 export function populateColonyFood(room) {
@@ -107,30 +106,32 @@ export function populateColonyFood(room) {
 }
 
 export function isFoodHabitat(resourceType, world, x, y) {
-  if (resourceType === "tree-fruit" && world.hazards?.[y * 320 + x]) return false;
+  const size = worldSize(world);
+  if (resourceType === "tree-fruit" && world.hazards?.[y * size + x]) return false;
   const habitat = foodHabitats.get(resourceType);
-  if (world.generationVersion >= 23 && resourceType === "honey-mushrooms" && x >= 0 && y >= 0 && x < 320 && y < 320) {
-    return Boolean(world.hydrology?.resourceHabitats && resourceHabitatSuitability(resourceType, y * 320 + x, world.terrain, world.hydrology));
+  if (world.generationVersion >= 23 && resourceType === "honey-mushrooms" && x >= 0 && y >= 0 && x < size && y < size) {
+    return Boolean(world.hydrology?.resourceHabitats && resourceHabitatSuitability(resourceType, y * size + x, world.terrain, world.hydrology));
   }
-  if (!habitat || x < 0 || y < 0 || x >= 320 || y >= 320 ||
-    !habitat.terrains.includes(terrainTypes[world.terrain[y * 320 + x]])) return false;
+  if (!habitat || x < 0 || y < 0 || x >= size || y >= size ||
+    !habitat.terrains.includes(terrainTypes[world.terrain[y * size + x]])) return false;
   return !habitat.neighbors.length || [[1, 0], [-1, 0], [0, 1], [0, -1]].some(([dx, dy]) => {
     const nx = x + dx, ny = y + dy;
-    return nx >= 0 && ny >= 0 && nx < 320 && ny < 320 &&
-      habitat.neighbors.includes(terrainTypes[world.terrain[ny * 320 + nx]]);
+    return nx >= 0 && ny >= 0 && nx < size && ny < size &&
+      habitat.neighbors.includes(terrainTypes[world.terrain[ny * size + nx]]);
   });
 }
 
 export function isResourceHabitat(resourceType, world, x, y) {
-  if (world.generationVersion >= 11 && RESOURCE_ECONOMY.some(entry => entry.key === resourceType)) return x >= 0 && y >= 0 && x < 320 && y < 320 && isEconomyHabitat(resourceType, world.terrain[y * 320 + x]);
+  const size = worldSize(world);
+  if (world.generationVersion >= 11 && RESOURCE_ECONOMY.some(entry => entry.key === resourceType)) return x >= 0 && y >= 0 && x < size && y < size && isEconomyHabitat(resourceType, world.terrain[y * size + x]);
   const habitat = (world.generationVersion >= 1 && world.generationVersion <= 4 ? legacyResourceHabitats : resourceHabitats).get(resourceType);
-  if (!habitat || x < 0 || y < 0 || x >= 320 || y >= 320 ||
-    !habitat.terrains.includes(terrainTypes[world.terrain[y * 320 + x]])) return false;
+  if (!habitat || x < 0 || y < 0 || x >= size || y >= size ||
+    !habitat.terrains.includes(terrainTypes[world.terrain[y * size + x]])) return false;
   if (resourceType === "pebbles" && world.generationVersion >= 10) {
     for (let dy = -6; dy <= 6; dy++) for (let dx = -6; dx <= 6; dx++) {
       const nx = x + dx, ny = y + dy;
-      if (Math.abs(dx) + Math.abs(dy) > 6 || nx < 0 || ny < 0 || nx >= 320 || ny >= 320) continue;
-      const terrain = world.terrain[ny * 320 + nx];
+      if (Math.abs(dx) + Math.abs(dy) > 6 || nx < 0 || ny < 0 || nx >= size || ny >= size) continue;
+      const terrain = world.terrain[ny * size + nx];
       if (terrain < 2 || terrain >= 6 && terrain <= 8) return true;
     }
     return false;
@@ -138,15 +139,15 @@ export function isResourceHabitat(resourceType, world, x, y) {
   if (!habitat.neighbors.length) return true;
   for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
     const nx = x + dx, ny = y + dy;
-    if ((!dx && !dy) || nx < 0 || ny < 0 || nx >= 320 || ny >= 320) continue;
-    if (habitat.neighbors.includes(terrainTypes[world.terrain[ny * 320 + nx]])) return true;
+    if ((!dx && !dy) || nx < 0 || ny < 0 || nx >= size || ny >= size) continue;
+    if (habitat.neighbors.includes(terrainTypes[world.terrain[ny * size + nx]])) return true;
   }
   return false;
 }
 
 export function resourceTypeForCell(cell, world) {
   if (cell?.resourceType) return migrateResourceType(cell.resourceType);
-  if (cell?.kind === "corpse") return "meat";
+  if (cell?.kind === "corpse") return "nutrients";
   if (isTreeFood(cell, world)) return "berry-bush";
   return "honey-mushrooms";
 }
@@ -155,11 +156,10 @@ export function resourceHarvestSeconds(resourceType, world) {
   return resourceDefinition(resourceType).harvestSeconds;
 }
 
-export function resourceHarvestMultiplier(resourceType, attributes) {
+export function resourceHarvestMultiplier(resourceType, attributes, tribe) {
+  if (!tribe || !isTribeFood(resourceType, tribe)) return 1;
   const definition = resourceDefinition(resourceType);
-  const level = definition?.requirements.reduce((highest, key) => Math.max(highest,
-    Number.isInteger(attributes?.[key]) ? Math.max(0, Math.min(4, attributes[key])) : 0), 0) || 0;
-  return [1, .75, .65, .55, .45][level];
+  return definition.requirements.some(key => attributes?.[key] > 0) ? .75 : 1;
 }
 
 export function resourceHarvestRequirements(cell, world, tribe) {
@@ -177,11 +177,12 @@ export function canHarvestResource(cell, world, attributes, tribe) {
 }
 
 export function clearResourceHazards(room) {
+  const size = worldSize(room.world);
   if (room.world.generationVersion >= 6) return;
   const hazards = room.world.hazards;
   if (!hazards) return;
   for (const cell of room.food.values()) {
-    const index = cell.y * 320 + cell.x;
+    const index = cell.y * size + cell.x;
     if (cell.kind === "corpse" || !hazards[index]) continue;
     if (!cell.resourceType) cell.resourceType = resourceTypeForCell(cell, room.world);
     hazards[index] = 0;
@@ -189,9 +190,12 @@ export function clearResourceHazards(room) {
 }
 
 export function populateResourceNodes(room) {
+  const size = worldSize(room.world);
   for (const [key, cell] of room.food) {
-    if (cell.kind === "corpse" && cell.carapaceAmount === undefined &&
-      ["spiny-back-beetle", "spiny-back-leader"].includes(cell.species)) cell.carapaceAmount = 4;
+    if (cell.kind === "corpse") {
+      delete cell.carapaceAmount;
+      if (!cell.resourceType) cell.resourceType = "nutrients";
+    }
     const type = migrateResourceType(cell.resourceType);
     if (type === null) room.food.delete(key);
     else if (cell.resourceType) cell.resourceType = type;
@@ -204,21 +208,21 @@ export function populateResourceNodes(room) {
     const key = x + "," + y;
     if (room.food.has(key)) continue;
     room.food.set(key, { x, y, amount, initialAmount: amount, resourceType, kind: "resource",
-      terrain: terrainTypes[room.world.terrain[y * 320 + x]] });
+      terrain: terrainTypes[room.world.terrain[y * size + x]] });
   }
   if (!(room.resourceVersion >= 2) && room.world.generationVersion < 11) {
     const blocked = new Set();
     for (const colony of room.colonies || []) for (let y = colony.y; y < colony.y + 5; y++) {
-      for (let x = colony.x; x < colony.x + 5; x++) blocked.add(y * 320 + x);
+      for (let x = colony.x; x < colony.x + 5; x++) blocked.add(y * size + x);
     }
     for (const burrow of room.world.burrows || []) for (let y = burrow.y; y < burrow.y + burrow.height; y++) {
-      for (let x = burrow.x; x < burrow.x + burrow.width; x++) blocked.add(y * 320 + x);
+      for (let x = burrow.x; x < burrow.x + burrow.width; x++) blocked.add(y * size + x);
     }
     for (let index = 0; index < room.world.terrain.length; index++) {
       const terrain = room.world.terrain[index];
       if (![4, 5].includes(terrain) || blocked.has(index) || room.world.hazards?.[index] ||
         room.world.depletedTrees?.has(index)) continue;
-      const x = index % 320, y = Math.floor(index / 320), key = x + "," + y;
+      const x = index % size, y = Math.floor(index / size), key = x + "," + y;
       if (room.food.has(key)) continue;
       const resourceType = terrain === 5 ? "tree" : "dew";
       const amount = RESOURCE_ECONOMY.find(entry => entry.key === resourceType).amount;
@@ -243,24 +247,25 @@ export function populateResourceNodes(room) {
 
 
 export function populateForestResources(room) {
-  const cells = new Uint8Array(320 * 320);
+  const size = worldSize(room.world);
+  const cells = new Uint8Array(size * size);
   for (let index = 0; index < cells.length; index++) {
     if (!(room.world.generationVersion >= 20) && room.world.terrain[index] === 5 && !room.world.hazards?.[index]) cells[index] = 1;
   }
   for (const burrow of room.world.burrows || []) {
     for (let y = burrow.y; y < burrow.y + burrow.height; y++) for (let x = burrow.x; x < burrow.x + burrow.width; x++) {
-      if (x >= 0 && y >= 0 && x < 320 && y < 320) cells[y * 320 + x] = 0;
+      if (x >= 0 && y >= 0 && x < size && y < size) cells[y * size + x] = 0;
     }
   }
   for (const cell of room.food.values()) {
     if ((!cell.key || cell.key === cell.x + "," + cell.y) && cell.kind !== "corpse" &&
-      !isTreeFood(cell, room.world) && !(cell.resourceType === "tree" && cell.amount > 0)) cells[cell.y * 320 + cell.x] = 0;
+      !isTreeFood(cell, room.world) && !(cell.resourceType === "tree" && cell.amount > 0)) cells[cell.y * size + cell.x] = 0;
   }
   if (room.world.generationVersion >= 20) for (const cell of room.food.values()) {
-    if (cell.resourceType === "tree" && cell.amount > 0) cells[cell.y * 320 + cell.x] = 1;
+    if (cell.resourceType === "tree" && cell.amount > 0) cells[cell.y * size + cell.x] = 1;
   }
   room.world.treeCells = cells;
   if (!room.world.depletedTrees) room.world.depletedTrees = new Set();
-  for (const cell of room.food.values()) if (cell.resourceType === "tree" && cell.amount <= 0) room.world.depletedTrees.add(cell.y * 320 + cell.x);
+  for (const cell of room.food.values()) if (cell.resourceType === "tree" && cell.amount <= 0) room.world.depletedTrees.add(cell.y * size + cell.x);
   for (const index of room.world.depletedTrees) cells[index] = 0;
 }

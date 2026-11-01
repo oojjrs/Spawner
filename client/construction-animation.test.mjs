@@ -104,8 +104,7 @@ test("초기 준비 이후 생긴 종족의 건설 계획도 이동 중 미리 �
     assert.deepEqual(calls.at(-1).slice(1), [0, 0, 300, 300]);
     const geometry = manifest.sequences['bean:outpost'], bed = geometry.parts.bed;
     const floors = calls.filter(call => call.length === 9 && call[0].path === geometry.image && bed.every((value,index) => call[index+1] === value));
-    assert.equal(floors.length, 3);
-    for (const floor of floors) assert.deepEqual(floor.slice(5), [-1.4,.308-1.85/2,2.8,1.85]);
+    assert.equal(floors.length, 0);
     assert.deepEqual(errors, []);
   } finally { globalThis.fetch = originalFetch; }
 });
@@ -123,7 +122,7 @@ test("부지 중앙 진입은 마지막 이동과 이어지고 변태 중에는 
   }
 });
 
-test("새싹콩 바닥은 1단계에서 완성되고 몸체는 단계 경계에서 연속된다", () => {
+test("새싹콩 몸체는 단계 경계에서 연속된다", () => {
   const manifest = JSON.parse(readFileSync(new URL("../DesignAssets/Animations/Construction/v9/manifest.json", import.meta.url), "utf8"));
   for (const kind of ["storage", "evolution-lab", "outpost", "watchpost"]) {
     const sequence = manifest.sequences["bean:" + kind];

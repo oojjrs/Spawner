@@ -4,7 +4,7 @@
   "changedActions": [
     "heal"
   ],
-  "variantCount": 16,
+  "variantCount": 8,
   "actorAnimationCount": 32,
   "frameSize": 256,
   "columns": 8,
@@ -57,5 +57,6 @@
   "previewModes": [
     "self",
     "ally"
-  ]
+  ],
+  "animationCount": 16
 }

@@ -164,15 +164,17 @@ test("옛 저장의 적재물은 버섯으로 복원하고 새 재료 재고가 
 });
 
 test("사망한 운반자의 재료는 같은 종류로 떨어지고 고기량이나 식량 포인트로 변환되지 않는다", () => {
-  const f = fixture(46, 42);
-  Object.assign(f.agent, { carrying: 3, carryingType: "iron-ore" });
-  const points = f.game.snapshot().evolutionPoints;
-  f.game.receiveDamage(f.agent, f.agent.health);
-  const nodes = [...f.environment.food.values()];
-  assert.equal(nodes.filter(node => node.resourceType === "iron-ore").reduce((sum, node) => sum + node.amount, 0), 3);
-  const corpse = nodes.find(node => node.kind === "corpse");
-  assert.equal(corpse.resourceType, "meat");
-  assert.equal(corpse.amount, 1);
-  assert.equal(f.game.snapshot().evolutionPoints, points);
-  assert.equal(f.game.snapshot().colonyFood, 0);
+  for (const [cost, amount] of [[3, 0], [10, 2]]) {
+    const f = fixture(46, 42);
+    Object.assign(f.agent, { cost, carrying: 3, carryingType: "iron-ore" });
+    const points = f.game.snapshot().evolutionPoints;
+    f.game.receiveDamage(f.agent, f.agent.health);
+    const nodes = [...f.environment.food.values()];
+    assert.equal(nodes.filter(node => node.resourceType === "iron-ore").reduce((sum, node) => sum + node.amount, 0), 3);
+    const corpse = nodes.find(node => node.kind === "corpse");
+    assert.equal(corpse.resourceType, "nutrients");
+    assert.equal(corpse.amount, amount);
+    assert.equal(f.game.snapshot().evolutionPoints, points);
+    assert.equal(f.game.snapshot().colonyFood, 0);
+  }
 });

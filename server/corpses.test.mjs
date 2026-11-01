@@ -45,7 +45,7 @@ test("사체는 자원·다른 사체와 같은 사망 칸에 남고 발견 기�
   for (const corpse of snapshot.corpses) assert.deepEqual([corpse.x, corpse.y], [46,42]);
   assert.ok(snapshot.discoveries.some(entry => entry.key === "material:clay"));
   assert.ok(snapshot.discoveries.every(entry => entry.kind !== "corpse"));
-  assert.ok(!game.discoveredKinds.has("corpse:meat"));
+  assert.ok(!game.discoveredKinds.has("corpse:nutrients"));
   game.prepare(CORPSE_LIFETIME); game.tick(0);
   assert.equal(game.snapshot().corpses.length, 0);
   assert.equal(environment.food.get("46,42").amount, 7);
@@ -56,7 +56,7 @@ test("옛 저장의 사체 발견을 제거하며 다른 발견과 읽음 상태
   const saved = JSON.parse(game.save());
   saved.state.discoveries = [
     { key: "material:clay", kind: "material", name: "비옥토" },
-    { key: "corpse:meat", kind: "corpse", name: "사체" },
+    { key: "corpse:nutrients", kind: "corpse", name: "사체" },
     { key: "material:sand", kind: "material", name: "모래" },
     { key: "corpse:carapace", kind: "corpse", name: "사체" },
     { key: "material:dew", kind: "material", name: "이슬방울" }
@@ -67,7 +67,7 @@ test("옛 저장의 사체 발견을 제거하며 다른 발견과 읽음 상태
   assert.equal(snapshot.discoveryReadCount, 2);
   assert.ok(snapshot.discoveries.every(entry => entry.kind !== "corpse"));
   assert.deepEqual(snapshot.discoveries.slice(0,3).map(entry => entry.key), ["material:clay","material:sand","material:dew"]);
-  assert.ok(!game.discoveredKinds.has("corpse:meat"));
+  assert.ok(!game.discoveredKinds.has("corpse:nutrients"));
 });
 
 test("유닛은 채집 속성이 없어도 사체가 놓인 칸을 통과한다", () => {
@@ -93,6 +93,8 @@ test("겹친 사체도 지정한 대상을 채집하고 원래 자원을 보존�
   const { game, environment } = fixture("bean");
   const saved = JSON.parse(game.save());
   saved.state.evolutionPoints = 10;
+  saved.state.nestLevel = 2;
+  saved.state.agents[0].cost = 10;
   saved.state.agents.splice(1);
   game.restore(JSON.stringify(saved));
   const designed = game.command({ type: "design", templateId: null, name: "분해 유닛", slots: ["butchery"], birth: true });
@@ -113,7 +115,7 @@ test("겹친 사체도 지정한 대상을 채집하고 원래 자원을 보존�
   assert.equal(harvester.mode, "harvest");
   game.prepare(1); game.tick(1);
   game.prepare(2.501); game.tick(1.501);
-  assert.equal(harvester.carryingType, "meat");
+  assert.equal(harvester.carryingType, "nutrients");
   assert.equal(harvester.carrying, 1);
   assert.equal(environment.food.get(corpse.key)?.amount || 0, before - 1);
   assert.equal(environment.food.has(corpse.key), before > 1);
@@ -122,7 +124,7 @@ test("겹친 사체도 지정한 대상을 채집하고 원래 자원을 보존�
 });
 
 test("남겨진 양분은 회수 속성으로 해금하고 네 종족의 시작 유닛은 모두 채집하지 못한다", () => {
-  const corpse = { x: 46, y: 42, kind: "corpse", resourceType: "meat", amount: 4 };
+  const corpse = { x: 46, y: 42, kind: "corpse", resourceType: "nutrients", amount: 4 };
   for (const tribe of ["bean", "spore", "pebble", "spring"]) {
     const { game, environment } = fixture(tribe);
     assert.equal(canHarvestResource(corpse, environment.world, {}, tribe), false, tribe);
@@ -139,8 +141,8 @@ test("남겨진 양분은 회수 속성으로 해금하고 네 종족의 시작 
     game.prepare(0); game.tick(0);
     game.prepare(5); game.tick(5);
     assert.equal(environment.food.get(remains.key).amount, amount, tribe);
-    assert.notEqual(harvester.carryingType, "meat", tribe);
-    assert.notEqual(harvester.harvestResult?.resourceType, "meat", tribe);
+    assert.notEqual(harvester.carryingType, "nutrients", tribe);
+    assert.notEqual(harvester.harvestResult?.resourceType, "nutrients", tribe);
   }
 });
 

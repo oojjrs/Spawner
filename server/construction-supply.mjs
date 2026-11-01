@@ -65,7 +65,7 @@ export function createConstructionSupply(context) {
       foragerReservation.points === state.evolutionPoints && !proposal && foragerReservation.value) return foragerReservation.value;
     const base = foragerReservation && state.simSeconds >= foragerReservation.time && state.simSeconds - foragerReservation.time < 1 &&
       foragerReservation.members === members && foragerReservation.points === state.evolutionPoints ? foragerReservation.base :
-      allocateWorkers(context,candidates,foragerReservation?.base.ids || new Set());
+      allocateWorkers(context,candidates,new Set(state.foragerMemory?.ids || []));
     const value = {...base,ids:new Set(base.ids),weights:new Map(base.weights)};
     const active = sites().concat(proposal ? [proposal] : []).filter(builder => Object.entries(builder.construction.required).some(([type, amount]) =>
       amount > (builder.construction.delivered[type] || 0) + incoming(builder.construction.id, type, null)));
@@ -98,6 +98,7 @@ export function createConstructionSupply(context) {
         }
       }
     }
+    if (!proposal) state.foragerMemory = { time:state.simSeconds, ids:[...base.ids] };
     if (!proposal || !foragerReservation || foragerReservation.base !== base) foragerReservation = {
       time:state.simSeconds, members, points:state.evolutionPoints, base, value:proposal ? null : value };
     return value;
@@ -379,11 +380,28 @@ export function createConstructionSupply(context) {
     return Object.fromEntries(Object.entries(held).map(([type, amount]) => [type, Math.max(0, amount - (state.resourceInventory[type] || 0))]));
   }
 
+  function foragerMemory() {
+    const memory = state.foragerMemory;
+    return memory ? { time:memory.time, ids:[...memory.ids] } : null;
+  }
+
+  function rememberForagers(memory) {
+    if (!memory || !Array.isArray(memory.ids) || !Number.isFinite(memory.time) || memory.time < 0 ||
+        memory.time > state.simSeconds || memory.time < (state.foragerMemory?.time ?? -Infinity)) return false;
+    const living = new Set(state.agents.filter(agent => agent.health > 0).map(agent => agent.id));
+    state.foragerMemory = { time:memory.time, ids:[...new Set(memory.ids.filter(id => living.has(id)))] };
+    foragerReservation = null;
+    return true;
+  }
+
   function restore() {
     foragerReservation = null;
+    const memory = state.foragerMemory;
+    state.foragerMemory = null;
+    rememberForagers(memory);
     refresh();
   }
 
   return { refresh, restore, available, reserved, forecast, prepare, advance, stop, plans, assign, interact, release, lose, shortages,
-    foragers: protectedForagers, allocation };
+    foragers: protectedForagers, allocation, foragerMemory, rememberForagers };
 }

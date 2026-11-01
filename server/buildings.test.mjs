@@ -88,27 +88,27 @@ test("방벽을 해제하면 저장된 방벽과 변태 계획을 제거하고 �
   assert.deepEqual(game.snapshot().resourceInventory, inventory);
 });
 
-test("변태는 기본 15초와 최소 10초를 보장하며 감시봉은 1×1칸을 점유한다", () => {
+test("변태는 기본 3초를 적용하며 감시봉은 1×1칸을 점유한다", () => {
   for (const key of ["storage", "evolution-lab", "outpost", "watchpost"]) {
     assert.deepEqual([buildingDefinition(key).width, buildingDefinition(key).height], key === "watchpost" ? [1, 1] : key === "outpost" ? [3, 3] : [2, 2]);
-    assert.deepEqual([1, 2, 3, 4].map(level => constructionSeconds(key, level)), [15, 12.75, 10.5, 10]);
+    for (const [index, seconds] of [3, 2.55, 2.1, 2].entries()) assert.ok(Math.abs(constructionSeconds(key, index + 1) - seconds) < 1e-9);
   }
 });
 
-test("예전 3초짜리 변태 저장은 공급 진척을 유지하며 15초 구간으로 복원한다", () => {
+test("이전 15초 변태 저장은 공급 진척을 유지하며 3초 구간으로 복원한다", () => {
   const context = fixture(), { game, agentId } = context;
   const builder = game.agents[0]; builder.x = 48; builder.y = 42; builder.moveDuration = 0;
   restoreConstructionPlan(context, agentId, "storage", 48, 42);
   advance(context, .25);
   advanceUntil(context, () => game.agents.find(agent => agent.id === agentId).construction?.progress > 0);
   const saved = JSON.parse(game.save()), plan = saved.state.agents[0].construction;
-  plan.startedAt = saved.state.simSeconds - 1; plan.readyAt = plan.startedAt + 3;
+  plan.startedAt = saved.state.simSeconds - 5; plan.readyAt = plan.startedAt + 15;
   game.restore(JSON.stringify(saved));
   const restored = game.agents[0].construction;
-  assert.equal(restored.readyAt - restored.startedAt, 15);
-  assert.ok(Math.abs((context.environment.simSeconds - restored.startedAt) / 15 - 1 / 3) < 1e-8);
+  assert.equal(restored.readyAt - restored.startedAt, 3);
+  assert.ok(Math.abs((context.environment.simSeconds - restored.startedAt) / 3 - 1 / 3) < 1e-8);
   assert.equal(restored.progress, plan.progress);
-  advance(context, 9.5); game.restore(game.save());
+  advance(context, 1.5); game.restore(game.save());
   assert.equal(game.buildings.length, 0);
   advanceUntil(context, () => game.buildings.length === 1);
   assert.equal(game.buildings.length, 1);
@@ -261,19 +261,21 @@ test("기본자원 납품은 필요한 원재료와 진화 포인트로 한 번�
   assert.equal(game.snapshot().evolutionPoints, 202);
 });
 
-test("가득 찬 창고의 자원은 필요한 수량만 버리고 저장 공간을 되찾는다", () => {
+test("자원 버리기 명령을 거부하고 재고를 보존한다", () => {
   const { game } = fixture();
   const saved = JSON.parse(game.save()); saved.state.resourceInventory = { tree: 40 };
   game.restore(JSON.stringify(saved));
-  assert.throws(() => game.command({ type: "discard-resource", resourceType: "tree", amount: 0 }), /개수/);
-  assert.throws(() => game.command({ type: "discard-resource", resourceType: "tree", amount: 41 }), /개수/);
-  assert.throws(() => game.command({ type: "discard-resource", resourceType: "unknown", amount: 1 }), /종류/);
   const before = game.snapshot();
-  assert.deepEqual(game.command({ type: "discard-resource", resourceType: "tree", amount: 10 }), { resourceType: "tree", discarded: 10 });
-  assert.equal(game.snapshot().resourceInventory.tree, 30);
+  assert.equal(before.resourceCapacity, 40);
+  assert.equal(before.resourceStores.find(store => store.kind === "nest").capacity, 40);
+  for (const [resourceType, amount] of [["tree", 0], ["tree", 1], ["tree", 10], ["unknown", 1]]) {
+    assert.throws(() => game.command({ type: "discard-resource", resourceType, amount }), /지원하지 않는 요청/);
+    assert.deepEqual(game.snapshot().resourceInventory, before.resourceInventory);
+  }
   assert.equal(game.snapshot().evolutionPoints, before.evolutionPoints);
   game.restore(game.save());
-  assert.equal(game.snapshot().resourceInventory.tree, 30);
+  assert.equal(game.snapshot().resourceCapacity, 40);
+  assert.equal(game.snapshot().resourceInventory.tree, 40);
 });
 
 test("변신한 전초둥지는 본둥지가 파괴되어도 탄생·납품과 군락 생존을 유지한다", () => {

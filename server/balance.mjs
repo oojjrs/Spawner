@@ -1,3 +1,4 @@
+import { worldSize } from "./world-size.mjs";
 import { readFileSync, writeFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 import { Worker, isMainThread, parentPort, workerData } from "node:worker_threads";
@@ -20,7 +21,7 @@ export function simulateStartingEconomy(world, randomSeed) {
         x: camp.x - 2, y: camp.y - 2, occupiedCells: new Set() };
       for (let y = 0; y < 5; y++) for (let x = 0; x < 5; x++) if (!([0, 4].includes(x) && [0, 4].includes(y))) colony.occupiedCells.add(x + "," + y);
       const food = new Map([...world.food, ...world.resources].map(([x, y, amount, resourceType]) =>
-        [x + "," + y, { x, y, amount, initialAmount: amount, resourceType, kind: "resource", terrain: ["deep", "shallow", "coast", "land", "grassland", "forest", "lowMountain", "highMountain", "ridge", "swamp"][world.terrain[y * 320 + x]] }]));
+        [x + "," + y, { x, y, amount, initialAmount: amount, resourceType, kind: "resource", terrain: ["deep", "shallow", "coast", "land", "grassland", "forest", "lowMountain", "highMountain", "ridge", "swamp"][world.terrain[y * worldSize(world) + x]] }]));
       const foodSpots = new Map();
       for (const cell of food.values()) {
         const key = Math.floor(cell.x / 18) + "," + Math.floor(cell.y / 18);

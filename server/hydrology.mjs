@@ -95,7 +95,7 @@ function flood(height, rainfall, size, landscape) {
 }
 
 export function generateHydrology(terrain, moisture, heightField, size, seed, baseline, version, capturePlacementMaps) {
-  if(version>=33)return generateFormedLandscape(terrain,moisture,heightField,size,seed,capturePlacementMaps);
+  if(version>=33)return generateFormedLandscape(terrain,moisture,heightField,size,seed,capturePlacementMaps,version);
   const natural = version === undefined || version >= 21;
   const length = terrain.length, height = new Float64Array(length), rainfall = new Float64Array(length);
   const water = new Uint8Array(length), river = new Uint8Array(length), lake = new Uint8Array(length);

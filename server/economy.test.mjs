@@ -4,7 +4,7 @@ import { generateWorld } from "./world.mjs";
 import { canHarvestResource, isResourceHabitat, isTribeFood, resourceHarvestSeconds } from "./resources.mjs";
 import { startingTravel } from "./start-economy.mjs";
 
-test("네 종족의 기본 먹이와 승인된 자원 채집 시간을 적용한다", () => {
+test("네 종족의 기본 자원과 승인된 자원 채집 시간을 적용한다", () => {
   for (const [tribe, resourceType] of [["bean", "clay"], ["spore", "tree"], ["pebble", "pebbles"], ["spring", "dew"]]) {
     assert.equal(isTribeFood(resourceType, tribe, 11), true);
     assert.equal(canHarvestResource({ resourceType }, { generationVersion: 11 }, {}, tribe), true);
@@ -12,7 +12,7 @@ test("네 종족의 기본 먹이와 승인된 자원 채집 시간을 적용한
   }
   assert.equal(canHarvestResource({ resourceType: "pebbles" }, { generationVersion: 10 }, {}, "pebble"), true);
   for (const generationVersion of [undefined,10,11,15,32]) {
-    for (const [type,seconds] of [["clay",2],["dew",.8],["tree",1],["pebbles",4]]) {
+    for (const [type,seconds] of [["clay",4],["dew",2],["tree",6],["pebbles",6]]) {
       assert.equal(resourceHarvestSeconds(type,{generationVersion}),seconds,type+":"+generationVersion);
     }
   }
@@ -74,7 +74,7 @@ test("19세대 맵의 자원 칸·매장량을 집계하고 비옥토·자갈을
   for (const plan of world.encounters) for (const index of plan.spawnPoints) assert.equal(occupied.has(index), false);
 });
 
-test("다른 종족 시작권의 이슬은 일부 남기고 줄이며 샘방울 먹이와 기존 배치를 보존한다", () => {
+test("다른 종족 시작권의 이슬은 일부 남기고 줄이며 샘방울 자원과 기존 배치를 보존한다", () => {
   const previous = generateWorld(13, 15), current = generateWorld(13, 16);
   assert.equal(previous.generationVersion, 15);
   assert.equal(current.generationVersion, 16);

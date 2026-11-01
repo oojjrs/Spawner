@@ -17,7 +17,7 @@ function fixture() {
   return { game, environment, colony };
 }
 
-test("저장된 설계가 없는 시작 유닛도 같은 설계로 탄생한다", () => {
+test("시작 유닛을 복제하면 같은 속성의 설계를 저장하고 다음 복제에서 재사용한다", () => {
   const { game } = fixture();
   const source = game.agents[0];
   const before = JSON.parse(game.save()).state;
@@ -30,7 +30,18 @@ test("저장된 설계가 없는 시작 유닛도 같은 설계로 탄생한다"
   assert.equal(copy.templateName, source.templateName);
   assert.equal(copy.mode, "birth");
   assert.ok(copy.birth);
-  assert.equal(after.templates.length, 0);
+  assert.equal(after.templates.length, 1);
+  const template = after.templates[0];
+  assert.equal(copy.templateId, template.id);
+  assert.equal(result.templateId, template.id);
+  assert.deepEqual(template.slots, source.slots);
+  assert.deepEqual(template.attributeLevels, source.attributeLevels);
+  assert.deepEqual(template.unlockedAttributeLevels, source.attributeLevels);
+  const repeated = game.command({ type: "birth", agentId: source.id });
+  assert.equal(repeated.templateId, template.id);
+  assert.equal(game.snapshot().templates.length, 1);
+  game.restore(game.save());
+  assert.deepEqual(game.snapshot().templates[0].attributeLevels, template.attributeLevels);
   assert.equal(after.evolutionPoints, before.evolutionPoints - copy.cost);
   assert.throws(() => game.command({ type: "birth", agentId: "other-colony" }), /복제할 생명체/);
 });
@@ -45,6 +56,98 @@ test("유닛 복제는 나중에 수정한 템플릿 대신 탄생 당시 설계
   assert.deepEqual(copy.slots, ["antenna"]);
   assert.equal(copy.templateName, "원본");
   assert.equal(copy.templateRevision, 1);
+});
+
+test("슬롯 순서와 이름이 달라도 속성과 강화 단계가 같으면 기존 설계를 재사용한다", () => {
+  const { game } = fixture();
+  const result = game.command({ type: "design", templateId: null, name: "원본", slots: ["strength", "feet"], birth: true });
+  const saved = JSON.parse(game.save());
+  const source = saved.state.agents.find(agent => agent.id === result.agentId);
+  source.attributeLevels.strength = 2;
+  saved.state.templates[0].name = "같은 속성";
+  saved.state.templates[0].slots.reverse();
+  saved.state.templates[0].attributeLevels.strength = 2;
+  game.restore(JSON.stringify(saved));
+  const before = JSON.parse(game.save()).state;
+  const copied = game.command({ type: "birth", agentId: source.id });
+  const copy = game.agents.find(agent => agent.id === copied.agentId);
+  const after = JSON.parse(game.save()).state;
+  assert.equal(copied.templateId, result.templateId);
+  assert.equal(copy.templateId, result.templateId);
+  assert.equal(copy.templateName, "같은 속성");
+  assert.deepEqual(copy.slots, source.slots);
+  assert.deepEqual(copy.attributeLevels, source.attributeLevels);
+  assert.deepEqual(after.templates, before.templates);
+  assert.equal(after.nextTemplateId, before.nextTemplateId);
+});
+
+test("같은 속성도 강화 단계가 다르면 별도 설계로 저장한다", () => {
+  const { game } = fixture();
+  const result = game.command({ type: "design", templateId: null, name: "원본", slots: ["strength"], birth: true });
+  const saved = JSON.parse(game.save());
+  saved.state.agents.find(agent => agent.id === result.agentId).attributeLevels.strength = 2;
+  game.restore(JSON.stringify(saved));
+  const copied = game.command({ type: "birth", agentId: result.agentId });
+  const templates = game.snapshot().templates;
+  assert.notEqual(copied.templateId, result.templateId);
+  assert.equal(templates.length, 2);
+  assert.equal(templates.find(template => template.id === result.templateId).attributeLevels.strength, 1);
+  const template = templates.find(template => template.id === copied.templateId);
+  assert.equal(template.name, "원본 2");
+  assert.deepEqual(template.attributeLevels, { strength: 2 });
+  assert.deepEqual(template.unlockedAttributeLevels, { strength: 2 });
+  assert.equal(game.agents.find(agent => agent.id === copied.agentId).attributeLevels.strength, 2);
+});
+
+test("자동 저장 이름은 중복 번호와 24자 제한을 지킨다", () => {
+  const { game } = fixture();
+  const name = "가".repeat(24);
+  const result = game.command({ type: "design", templateId: null, name, slots: ["antenna"], birth: true });
+  game.command({ type: "design", templateId: result.templateId, name, slots: ["feet"], birth: false });
+  game.command({ type: "design", templateId: null, name: name.slice(0, 22) + " 2", slots: ["strength"], birth: false });
+  const copied = game.command({ type: "birth", agentId: result.agentId });
+  const template = game.snapshot().templates.find(template => template.id === copied.templateId);
+  assert.equal(template.name, name.slice(0, 22) + " 3");
+  assert.deepEqual(template.slots, ["antenna"]);
+});
+
+test("포인트나 탄생 공간이 부족하면 새 설계와 ID도 남기지 않는다", () => {
+  for (const reason of ["points", "space"]) {
+    const { game, environment } = fixture();
+    const source = game.agents[0];
+    if (reason === "points") {
+      const saved = JSON.parse(game.save());
+      saved.state.evolutionPoints = 0;
+      game.restore(JSON.stringify(saved));
+    } else environment.world.terrain.fill(0);
+    const birthState = () => {
+      const { templates, nextTemplateId, nextAgentId, evolutionPoints, agents } = JSON.parse(game.save()).state;
+      return { templates, nextTemplateId, nextAgentId, evolutionPoints, agents };
+    };
+    const before = birthState();
+    assert.throws(() => game.command({ type: "birth", agentId: source.id }), reason === "points" ? /포인트가 부족/ : /둥지 주변이 가득/);
+    assert.deepEqual(birthState(), before);
+  }
+});
+
+test("설계 100개 한도에서는 신규 설계를 거부하고 같은 속성의 기존 설계는 재사용한다", () => {
+  const { game } = fixture();
+  const source = game.agents[0];
+  const saved = JSON.parse(game.save());
+  saved.state.templates = Array.from({ length: 100 }, (_, index) => ({ id: index + 1, name: "설계 " + (index + 1),
+    slots: ["feet"], attributeLevels: { feet: 1 }, revision: 1 }));
+  saved.state.nextTemplateId = 101;
+  game.restore(JSON.stringify(saved));
+  const before = game.save();
+  assert.throws(() => game.command({ type: "birth", agentId: source.id }), /최대 100개/);
+  assert.equal(game.save(), before);
+  saved.state.templates[99].slots = [...source.slots];
+  saved.state.templates[99].attributeLevels = { ...source.attributeLevels };
+  game.restore(JSON.stringify(saved));
+  const copied = game.command({ type: "birth", agentId: source.id });
+  assert.equal(copied.templateId, 100);
+  assert.equal(game.snapshot().templates.length, 100);
+  assert.equal(JSON.parse(game.save()).state.nextTemplateId, 101);
 });
 
 test("씨앗은 두 번 굴러 튄 뒤 점프하고 착지해야 새싹콩이 나온다", () => {

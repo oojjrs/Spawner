@@ -1,3 +1,4 @@
+import { worldSize } from "./world-size.mjs";
 import { buildingDefinition, buildingCost, materialCapacity, constructionApproachCell } from "./buildings.mjs";
 import { attributeUpgradeCost, birthCost, unitTravelSpeed } from "./attributes.mjs";
 import { resourceDefinition } from "./resources.mjs";
@@ -73,6 +74,7 @@ export function tribeExpansion(state, tribe, nests) {
 }
 
 function constructionDemand(state, tribe, nests, threats, frontierSites, world, birthCells) {
+  const size = worldSize(world);
   const agents = state.agents.filter(agent => agent.health > 0);
   const pending = agents.filter(agent => agent.construction).map(agent => agent.construction);
   const buildings = state.buildings.filter(building => building.health > 0);
@@ -117,18 +119,18 @@ function constructionDemand(state, tribe, nests, threats, frontierSites, world, 
     let total = 0, fresh = 0, unknown = 0;
     for (let dy = -radius; dy <= radius; dy += 2) for (let dx = -radius; dx <= radius; dx += 2) {
       const point = { x:cell.x + dx, y:cell.y + dy };
-      if (point.x < 0 || point.y < 0 || point.x >= 320 || point.y >= 320 || dx * dx + dy * dy > radius * radius) continue;
+      if (point.x < 0 || point.y < 0 || point.x >= size || point.y >= size || dx * dx + dy * dy > radius * radius) continue;
       total++;
       if (sources.some(source => distance(source, point) <= source.radius)) continue;
       fresh++;
-      if (!state.explored?.has(point.y * 320 + point.x)) unknown++;
+      if (!state.explored?.has(point.y * size + point.x)) unknown++;
     }
     return total ? limit((fresh * .8 + unknown * .2) / total) : 0;
   };
   const critical = centers.flatMap(home => Array.from({length:16},(_,index) => ({
     x:home.x + Math.cos(index * Math.PI / 8) * 14,y:home.y + Math.sin(index * Math.PI / 8) * 14
   }))).concat(workers,foods.filter(food => nearestNest(food) <= 32).sort((a,b) => b.amount - a.amount).slice(0,8))
-    .filter(cell => cell.x >= 0 && cell.y >= 0 && cell.x < 320 && cell.y < 320);
+    .filter(cell => cell.x >= 0 && cell.y >= 0 && cell.x < size && cell.y < size);
   const blind = critical.filter(cell => !sources.some(source => distance(source,cell) <= source.radius));
   const offer = (buildingKey, cell, benefits, urgent) => {
     const definition = buildingDefinition(buildingKey);
@@ -190,7 +192,7 @@ function constructionDemand(state, tribe, nests, threats, frontierSites, world, 
     const key = Math.floor(food.x / 8) + "," + Math.floor(food.y / 8);
     if (!sites.has(key) || food.amount > sites.get(key).amount) sites.set(key, food);
   }
-  for (const site of frontierSites || []) if (state.explored?.has(site.y * 320 + site.x) && foods.some(food => distance(food, site) <= 18)) {
+  for (const site of frontierSites || []) if (state.explored?.has(site.y * size + site.x) && foods.some(food => distance(food, site) <= 18)) {
     sites.set(site.x + "," + site.y, site);
   }
   if (!centers.length) sites.set("recovery", anchor);
@@ -226,7 +228,7 @@ function constructionDemand(state, tribe, nests, threats, frontierSites, world, 
     })).concat(pending.filter(plan => plan.buildingKey === "storage").map(plan => ({x:plan.x + 1, y:plan.y + 1})));
     const materials = new Set([native, ...upgrades.flatMap(cost => Object.keys(cost.materials))]);
     const resources = [...state.knownFood.values()].filter(resource => resource.amount > 0 && materials.has(resource.resourceType) &&
-      state.explored?.has(resource.y * 320 + resource.x));
+      state.explored?.has(resource.y * size + resource.x));
     const logistics = resources.map(resource => ({ resource, gap:stores.length ? Math.min(...stores.map(store => distance(store, resource))) : 32 }))
       .filter(candidate => candidate.gap >= 18).sort((first, second) =>
         second.resource.amount / second.gap - first.resource.amount / first.gap).slice(0, 4);
@@ -237,7 +239,7 @@ function constructionDemand(state, tribe, nests, threats, frontierSites, world, 
     }
   }
   if (refugeNeeded) {
-    const escapes = [...(state.explored || [])].map(index => ({x:index % 320,y:Math.floor(index / 320)}))
+    const escapes = [...(state.explored || [])].map(index => ({x:index % size,y:Math.floor(index / size)}))
       .filter(cell => nearestNest(cell) >= 12 && nearestNest(cell) <= 32 && frontierRisk(cell) < .9)
       .sort((a,b) => frontierRisk(a) - frontierRisk(b) || nearestNest(a) - nearestNest(b)).slice(0,4);
     for (const cell of escapes) offer("outpost",cell,{expansion:.5,production:.2,information:coverage(cell,6) * .4},true);
@@ -249,7 +251,7 @@ function constructionDemand(state, tribe, nests, threats, frontierSites, world, 
   const watchSites = new Map();
   const addWatch = cell => {
     const point = { x:Math.round(cell.x), y:Math.round(cell.y) };
-    if (state.explored?.has(point.y * 320 + point.x) && point.x >= 1 && point.y >= 1 && point.x < 319 && point.y < 319) {
+    if (state.explored?.has(point.y * size + point.x) && point.x >= 1 && point.y >= 1 && point.x < (size - 1) && point.y < (size - 1)) {
       watchSites.set(point.x + "," + point.y, point);
     }
   };

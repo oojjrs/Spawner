@@ -1,8 +1,8 @@
 {
   "version": 5,
   "parent": "CombatAttributesV4",
-  "variantCount": 16,
-  "animationCount": 120,
+  "variantCount": 8,
+  "animationCount": 56,
   "changedAttribute": "regeneration",
   "frameSize": 256,
   "columns": 8,

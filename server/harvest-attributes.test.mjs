@@ -3,18 +3,19 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
 import { ATTRIBUTES, HARVEST_ATTRIBUTE_KEYS, attributeCounts, migrateAttributeSlots, migrateAttributeLevels } from "./attributes.mjs";
-import { canHarvestResource, resourceHarvestMultiplier } from "./resources.mjs";
+import { canHarvestResource, resourceHarvestMultiplier, resourceDefinition } from "./resources.mjs";
 import { createGame } from "./game.mjs";
 import { attributeEffect } from "../client/progression-ui.mjs";
+import { codexAttributeEffect, codexAttributeDescription } from "../client/codex-content.mjs";
 
 const groups = {
   excavation: ["clay", "sand"],
   blade: ["tree", "grass-fiber"],
-  piercing: ["pebbles", "iron-ore", "copper-ore", "quartz", "carapace"],
-  butchery: ["dew", "meat"]
+  piercing: ["pebbles", "iron-ore", "copper-ore", "quartz"],
+  butchery: ["dew", "nutrients"]
 };
-const native = [["bean", "clay", "excavation", 2], ["spore", "tree", "blade", 1],
-  ["pebble", "pebbles", "piercing", 4], ["spring", "dew", "butchery", .8]];
+const native = [["bean", "clay", "excavation", 4], ["spore", "tree", "blade", 6],
+  ["pebble", "pebbles", "piercing", 6], ["spring", "dew", "butchery", 2]];
 
 test("네 채집 속성은 모든 자원에 대응하며 주자원은 무속성 채집을 유지한다", () => {
   assert.deepEqual([...HARVEST_ATTRIBUTE_KEYS].sort(), Object.keys(groups).sort());
@@ -30,17 +31,24 @@ test("네 채집 속성은 모든 자원에 대응하며 주자원은 무속성 
   }
 });
 
-test("주자원과 외부 자원 모두 채집 시간과 대응 운반량 보너스를 표시한다", () => {
-  for (const [key, resources] of Object.entries(groups)) for (const resourceType of resources) {
-    assert.equal(resourceHarvestMultiplier(resourceType, {}), 1);
-    for (const [level, expected] of [[1, .75], [2, .65], [3, .55], [4, .45]]) {
-      assert.ok(Math.abs(resourceHarvestMultiplier(resourceType, { [key]: level }) - expected) < 1e-9);
-      assert.match(attributeEffect(ATTRIBUTES.find(attribute => attribute.key === key), level), new RegExp([0, 25, 35, 45, 55][level] + "%"));
+test("대응 종족의 기본 자원에만 강화 단계별 채집 속도 보너스를 적용한다", () => {
+  for (const [tribe, primary, nativeKey] of native) for (const [key, resources] of Object.entries(groups)) {
+    const attribute = ATTRIBUTES.find(attribute => attribute.key === key);
+    for (const resourceType of resources) {
+      assert.equal(resourceHarvestMultiplier(resourceType, {}, tribe), 1);
+      for (const [level, bonus] of [[1, .75], [2, .65], [3, .55], [4, .45]]) {
+        const expected = key === nativeKey && resourceType === primary ? bonus : 1;
+        assert.equal(resourceHarvestMultiplier(resourceType, { [key]: level }, tribe), expected, tribe + ":" + resourceType);
+      }
+      for (const value of [NaN, Infinity, -1, 1.5]) assert.equal(resourceHarvestMultiplier(resourceType, { [key]: value }, tribe), 1);
     }
-    for (const other of Object.keys(groups).filter(other => other !== key)) {
-      assert.equal(resourceHarvestMultiplier(resourceType, { [other]: 4 }), 1);
+    for (const level of [1, 2, 3, 4]) for (const effect of [attributeEffect(attribute, level, tribe), codexAttributeEffect(attribute, level, tribe)]) {
+      assert.equal(effect.includes("채집 시간"), key === nativeKey, tribe + ":" + key);
+      assert.doesNotMatch(effect, /운반량/);
     }
-    for (const value of [NaN, Infinity, -1, 1.5]) assert.equal(resourceHarvestMultiplier(resourceType, { [key]: value }), 1);
+    const description = codexAttributeDescription(attribute, tribe);
+    assert.equal(description.includes("더 빠르게"), key === nativeKey, tribe + ":" + key);
+    assert.doesNotMatch(description, /속성 없이|운반량/);
   }
 });
 
@@ -113,6 +121,17 @@ test("실제 게임에서 네 종족 모두 기본 채집이 되고 대응 속�
   }
 });
 
+test("추가 해금 자원과 다른 종족의 자원은 실제 게임에서도 정해진 시간에 채집한다", () => {
+  for (const [tribe, primary] of native) for (const [key, resources] of Object.entries(groups)) for (const resourceType of resources) {
+    if (resourceType === primary) continue;
+    const f = harvesting(tribe, resourceType, [key]);
+    tick(f, 120);
+    assert.equal(f.agent.mode, "harvest", tribe + ":" + resourceType);
+    tick(f, 121);
+    assert.equal(f.agent.harvestReady, 121 + resourceDefinition(resourceType).harvestSeconds, tribe + ":" + resourceType);
+  }
+});
+
 test("브라우저와 내장 워커가 네 속성의 채집 권한과 1레벨 보너스를 공유한다", () => {
   const source = readFileSync(new URL("../client/runtime.js", import.meta.url), "utf8");
   const browser = {};
@@ -123,10 +142,11 @@ test("브라우저와 내장 워커가 네 속성의 채집 권한과 1레벨 �
     'globalThis.rules = modules["server/resources.mjs"]; })();', worker);
   for (const rules of [browser.Spawner, worker.rules]) for (const [tribe, resourceType, key] of native) {
     assert.equal(rules.canHarvestResource({ resourceType }, { generationVersion: 23 }, {}, tribe), true);
-    assert.equal(rules.resourceHarvestMultiplier(resourceType, {}), 1);
-    assert.equal(rules.resourceHarvestMultiplier(resourceType, { [key]: 1 }), .75);
+    assert.equal(rules.resourceHarvestMultiplier(resourceType, {}, tribe), 1);
+    assert.equal(rules.resourceHarvestMultiplier(resourceType, { [key]: 1 }, tribe), .75);
     for (const [other, resources] of Object.entries(groups)) for (const type of resources) {
       assert.equal(rules.canHarvestResource({ resourceType: type }, { generationVersion: 23 }, { [other]: 1 }, tribe), true);
+      assert.equal(rules.resourceHarvestMultiplier(type, { [other]: 1 }, tribe), type === resourceType && other === key ? .75 : 1);
     }
   }
 });

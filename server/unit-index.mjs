@@ -1,4 +1,6 @@
+import { worldSize } from "./world-size.mjs";
 export function createUnitIndex(environment) {
+  const size = worldSize(environment.world);
   const records = new Map(), cells = new Map(), origins = new Map(), regions = new Map();
   let sequence = 0;
   const regionKey = (x, y) => Math.floor(y / 8) * 40 + Math.floor(x / 8);
@@ -18,8 +20,8 @@ export function createUnitIndex(environment) {
       record = { agent, game: game || null, order: sequence++, cell: null, origin: null, region: null };
       records.set(agent, record);
     }
-    const cell = agent.y * 320 + agent.x, region = regionKey(agent.x, agent.y);
-    const origin = environment.simSeconds < agent.moveStartedAt + agent.moveDuration ? agent.renderFromY * 320 + agent.renderFromX : null;
+    const cell = agent.y * size + agent.x, region = regionKey(agent.x, agent.y);
+    const origin = environment.simSeconds < agent.moveStartedAt + agent.moveDuration ? agent.renderFromY * size + agent.renderFromX : null;
     if (record.cell !== cell) {
       remove(cells, record.cell, record); put(cells, cell, record); record.cell = cell;
     }
@@ -32,7 +34,7 @@ export function createUnitIndex(environment) {
       remove(regions, record.region, record); put(regions, region, record); record.region = region;
     }
   }
-  function at(x, y) { return [...(cells.get(y * 320 + x) || [])].sort((first, second) => first.order - second.order); }
+  function at(x, y) { return [...(cells.get(y * size + x) || [])].sort((first, second) => first.order - second.order); }
   function nearby(x, y, radius) {
     const result = [];
     for (let row = Math.max(0, Math.floor((y - radius) / 8)); row <= Math.min(39, Math.floor((y + radius) / 8)); row++) {
@@ -46,7 +48,7 @@ export function createUnitIndex(environment) {
   }
   function occupied(x, y, excluded, includeOrigin) {
     const valid = record => record.agent !== excluded && record.agent.health > 0;
-    const cell = y * 320 + x;
+    const cell = y * size + x;
     for (const record of cells.get(cell) || []) if (valid(record)) return true;
     if (includeOrigin) for (const record of origins.get(cell) || []) {
       if (valid(record) && environment.simSeconds < record.agent.moveStartedAt + record.agent.moveDuration) return true;

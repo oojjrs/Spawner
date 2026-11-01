@@ -42,7 +42,7 @@ export function combatInjuryPenalty(agent) {
 export function combatStrength(agent) {
   const base = Number.isFinite(agent.stats?.combatStrength) ? agent.stats.combatStrength :
     unitCombatStats(agent.species || agent.tribe).combatStrength;
-  return base + (agent.combat?.secretionBonus || 0) - combatInjuryPenalty(agent);
+  return base - combatInjuryPenalty(agent);
 }
 
 export function combatDamage(attacker, target, variation) {

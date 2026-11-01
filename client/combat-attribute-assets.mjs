@@ -7,7 +7,6 @@ export const COMBAT_ATTRIBUTE_ASSETS = Object.freeze([
   "DesignAssets/Animations/CombatAttributesRuntimeV1/sprout/Parts/guard.png",
   "DesignAssets/Animations/CombatAttributesRuntimeV1/sprout/Parts/bud.png",
   "DesignAssets/Animations/CombatAttributesRuntimeV1/sprout/Parts/tendril.png",
-  "DesignAssets/Animations/CombatAttributesRuntimeV1/sprout/Parts/vent.png",
   "DesignAssets/Animations/CombatAttributesRuntimeV1/sprout/Parts/armor-0.png",
   "DesignAssets/Animations/CombatAttributesRuntimeV1/sprout/Parts/armor-1.png",
   "DesignAssets/Animations/CombatAttributesRuntimeV1/sprout/Parts/armor-2.png",
@@ -22,7 +21,6 @@ export const COMBAT_ATTRIBUTE_ASSETS = Object.freeze([
   "DesignAssets/Animations/CombatAttributesRuntimeV1/spore/Parts/guard.png",
   "DesignAssets/Animations/CombatAttributesRuntimeV1/spore/Parts/bud.png",
   "DesignAssets/Animations/CombatAttributesRuntimeV1/spore/Parts/tendril.png",
-  "DesignAssets/Animations/CombatAttributesRuntimeV1/spore/Parts/vent.png",
   "DesignAssets/Animations/CombatAttributesRuntimeV1/spore/Parts/armor-0.png",
   "DesignAssets/Animations/CombatAttributesRuntimeV1/spore/Parts/armor-1.png",
   "DesignAssets/Animations/CombatAttributesRuntimeV1/spore/Parts/armor-2.png",
@@ -41,7 +39,6 @@ export const COMBAT_ATTRIBUTE_ASSETS = Object.freeze([
   "DesignAssets/Animations/CombatAttributesRuntimeV1/pebble/Parts/guard.png",
   "DesignAssets/Animations/CombatAttributesRuntimeV1/pebble/Parts/bud.png",
   "DesignAssets/Animations/CombatAttributesRuntimeV1/pebble/Parts/tendril.png",
-  "DesignAssets/Animations/CombatAttributesRuntimeV1/pebble/Parts/vent.png",
   "DesignAssets/Animations/CombatAttributesRuntimeV1/pebble/Parts/armor-0.png",
   "DesignAssets/Animations/CombatAttributesRuntimeV1/pebble/Parts/armor-1.png",
   "DesignAssets/Animations/CombatAttributesRuntimeV1/pebble/Parts/armor-2.png",
@@ -57,7 +54,6 @@ export const COMBAT_ATTRIBUTE_ASSETS = Object.freeze([
   "DesignAssets/Animations/CombatAttributesRuntimeV1/spring/Parts/guard.png",
   "DesignAssets/Animations/CombatAttributesRuntimeV1/spring/Parts/bud.png",
   "DesignAssets/Animations/CombatAttributesRuntimeV1/spring/Parts/tendril.png",
-  "DesignAssets/Animations/CombatAttributesRuntimeV1/spring/Parts/vent.png",
   "DesignAssets/Animations/CombatAttributesRuntimeV1/spring/Parts/armor-0.png",
   "DesignAssets/Animations/CombatAttributesRuntimeV1/spring/Parts/armor-1.png",
   "DesignAssets/Animations/CombatAttributesRuntimeV1/spring/Parts/armor-2.png",
@@ -71,6 +67,5 @@ export const COMBAT_ATTRIBUTE_ASSETS = Object.freeze([
   "DesignAssets/Attributes/CombatDnaV1/piercing.png",
   "DesignAssets/Attributes/CombatDnaV1/carapace.png",
   "DesignAssets/Attributes/CombatDnaV1/guard.png",
-  "DesignAssets/Attributes/CombatDnaV1/regeneration.png",
-  "DesignAssets/Attributes/CombatDnaV1/secretion.png"
+  "DesignAssets/Attributes/CombatDnaV1/regeneration.png"
 ]);

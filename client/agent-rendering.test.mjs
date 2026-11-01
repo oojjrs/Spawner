@@ -2,7 +2,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
-import { attributeCounts } from "../server/attributes.mjs";
+import { attributeCounts, COMBAT_ATTRIBUTE_KEYS } from "../server/attributes.mjs";
+import { hasCombatEvolution } from "./combat-attributes.mjs";
 import { agentGrowth, AGENT_GROWTH_THRESHOLDS } from "../server/growth.mjs";
 
 const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
@@ -20,6 +21,12 @@ function rendering() {
   const canvas = () => ({ width: 512, height: 512, getContext: () => ({ clearRect() {}, drawImage() {} }) });
   const context = createContext({
     attributeCounts,
+    Spawner: { COMBAT_ATTRIBUTE_KEYS, hasCombatEvolution },
+    viewport: { pixelRatio: 1 },
+    Path2D: class {
+      constructor() { this.paths = []; }
+      addPath(contour, transform) { this.paths.push({ contour, transform }); }
+    },
     agentSprites: new Map(), encounterSprites: new Map(), agentSpriteSet: new WeakSet(), selectionOutlines: new WeakMap(),
     agentRenderingTasks: new Map(), agentRenderingQueue: Promise.resolve(),
     foodSelectionShape: {}, selectionOutlineWidth: 1.2,
@@ -31,7 +38,8 @@ function rendering() {
       contourTurns.push(counts.turns);
       return {};
     },
-    ctx: { save() {}, restore() {}, translate() {}, scale() {},
+    ctx: { save() {}, restore() {}, translate() {}, scale() {}, setTransform() {},
+      getTransform: () => ({ a: 1, b: 0, c: 0, d: 1, e: 0, f: 0 }),
       stroke(contour) { strokes.push({ contour, color: this.strokeStyle }); } }
   });
   for (const name of ["agentAppearanceKey", "agentSpriteLayers", "prepareAgentTemplate", "agentSprite", "selectionContour", "drawSelectionOutline"])
@@ -72,7 +80,8 @@ test("빈 속성 설계와 중복 준비 요청도 같은 이미지와 윤곽을
   render.context.drawSelectionOutline(sprite, 0, 0, 100, 100, null, "white");
   render.context.drawSelectionOutline(sprite, 0, 0, 100, 100, null, "green");
   assert.deepEqual(render.counts, prepared);
-  assert.equal(render.strokes[0].contour, render.strokes[1].contour);
+  assert.notEqual(render.strokes[0].contour, render.strokes[1].contour);
+  assert.equal(render.strokes[0].contour.paths[0].contour, render.strokes[1].contour.paths[0].contour);
   assert.deepEqual(render.strokes.map(stroke => stroke.color), ["white", "green"]);
 });
 

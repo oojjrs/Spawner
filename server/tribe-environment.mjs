@@ -8,6 +8,7 @@ export function tribeTerrainWalkable(tribe, terrain) {
 }
 
 export function tribeTerrainSpeedMultiplier(tribe, terrain) {
+  if (terrain === 1) return 0;
   if (terrain === 9) return tribe === "pebble" ? 0 : tribe === "spring" ? .8 : tribe === "spore" ? .6 : .2;
   if (tribe === "spring" && (terrain === 2 || terrain === 10)) return 1;
   if (tribe === "pebble") {

@@ -1,5 +1,6 @@
 import { BUILDING_TYPES, buildingDefinition, buildingImage } from "../server/buildings.mjs";
 import { AGENT_LEVEL_UP } from "./agent-level-up.mjs";
+import { buildingPlacement } from "./building-idle.mjs";
 import { CONSTRUCTION_APPEARANCE_ASSETS, createConstructionAppearance } from "./construction-appearance.mjs";
 import { drawConstructionCore, constructionCorePose, drawConstructionBuilding } from "./construction-rig.mjs";
 import { constructionGrowthPose, drawConstructionGrowth } from "./construction-growth.mjs";
@@ -135,7 +136,10 @@ export function createConstructionAnimation(assetSource, createSurface, loadImag
     const { pose, sequence, tribe, progress } = current;
     const definition = buildingDefinition(agent.construction.buildingKey);
     if (progress >= 1) {
-      context.drawImage(sequence.building, point.x, point.y, definition.width * cell, definition.height * cell);
+      const placement = buildingPlacement({ key: definition.key, tribe });
+      context.drawImage(sequence.building, point.x + placement.x * definition.width * cell,
+        point.y + placement.y * definition.height * cell,
+        placement.width * definition.width * cell, placement.height * definition.height * cell);
       return true;
     }
     const base = appearance.unit(tribe);
@@ -143,23 +147,29 @@ export function createConstructionAnimation(assetSource, createSurface, loadImag
     const absorption = pose.settle;
     const footPivot = tribe === "bean" && attributes.feet ? 21 / 512 * (1 - absorption) : 0;
     const elapsed = reducedMotion ? 0 : time - agent.construction.startedAt;
-    context.save(); context.translate(point.x + definition.width * cell / 2, point.y + definition.height * cell / 2);
-    const scale = sequence.kind === "watchpost" ? cell / pose.extent : cell;
+    const placement = buildingPlacement({ key: definition.key, tribe });
+    const adjustment = ease(limit((progress - .65) / .35));
+    context.save(); context.translate(point.x + definition.width * cell * (.5 + (placement.x + placement.width / 2 - .5) * adjustment),
+      point.y + definition.height * cell * (.5 + (placement.y + placement.height / 2 - .5) * adjustment));
+    const scale = sequence.kind === "watchpost" ? cell / pose.extent * (1 + (placement.width - 1) * adjustment) : cell;
     context.scale(scale, scale);
     if (sequence.organism) {
       organic ||= createOrganicConstruction(createSurface);
       organic(context, sequence, base, pose, progress, elapsed, source, footPivot);
-    } else drawConstructionGrowth(context, sequence, base.rig.growth, base.growthImage, pose, elapsed, extent => {
-      const scale = extent * 1.024;
-      const ground = base.rig.growth.ground;
-      context.save();
-      if (ground) context.translate(ground[0], ground[1] * (1 - extent));
-      context.translate(-scale / 2, -scale * (.59765625 + footPivot));
-      context.scale(scale / 512, scale / 512);
-      if (source && pose.settle < 1) context.drawImage(source, 0, 0);
-      else drawConstructionCore(context, base.partsImage, base.rig, tribe, pose.settle, elapsed);
-      context.restore();
-    }, gate => drawConstructionBuilding(context, sequence.sheet, sequence, gate));
+    } else {
+      const growth = sequence.growthGround ? { ...base.rig.growth, ground: sequence.growthGround } : base.rig.growth;
+      drawConstructionGrowth(context, sequence, growth, base.growthImage, pose, elapsed, extent => {
+        const scale = extent * 1.024;
+        const ground = growth.ground;
+        context.save();
+        if (ground) context.translate(ground[0], ground[1] * (1 - extent));
+        context.translate(-scale / 2, -scale * (.59765625 + footPivot));
+        context.scale(scale / 512, scale / 512);
+        if (source && pose.settle < 1) context.drawImage(source, 0, 0);
+        else drawConstructionCore(context, base.partsImage, base.rig, tribe, pose.settle, elapsed);
+        context.restore();
+      }, (gate, assemblyAmount) => drawConstructionBuilding(context, sequence.sheet, sequence, gate, assemblyAmount));
+    }
     if (!reducedMotion && sparkle && pose.opening > 0) {
       context.save(); context.globalAlpha *= Math.sin(Math.PI * pose.opening) * .32;
       for (let index = 0; index < 4; index++) {

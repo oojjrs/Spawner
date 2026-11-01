@@ -1,3 +1,5 @@
+import { CONQUEST_PACING } from "./conquest-pacing.mjs";
+
 export const ENCOUNTER_TYPES = Object.freeze([
   {
     "key": "flower-tail-bird",
@@ -215,6 +217,6 @@ export const ENCOUNTER_TYPES = Object.freeze([
     "hostile": true,
     "flying": false
   }
-].map(type => Object.freeze({ ...type, combatDisposition: type.hostile ? "aggressive" : type.unique ? "passive" : "peaceful" })));
+].map(type => Object.freeze({ ...type, firstSpawnAt:type.hostile ? Math.max(type.firstSpawnAt,CONQUEST_PACING.neutralConflictAt-60) : type.firstSpawnAt, combatDisposition: type.hostile ? "aggressive" : type.unique ? "passive" : "peaceful" })));
 
 export const ENCOUNTER_ASSETS = Object.freeze(ENCOUNTER_TYPES.map(type => type.image));

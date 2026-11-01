@@ -56,7 +56,7 @@ export function createRoom(title, seed, tribe, onProgress, cheats, beginnerHelpE
   const room = { id: crypto.randomUUID(), title: requireName(title, 24),
     hostId: crypto.randomUUID(), seed, cheats: cheats === true, beginnerHelpEnabled: beginnerHelpEnabled !== false, simSeconds: 0, revision: 0, updatedAt: Date.now(),
     world: generateWorld(seed, undefined, progress => onProgress?.(progress * .8)), colonies: [], games: new Map(), food: new Map(), foodSpots: new Map() };
-  for (const [x, y, amount, resourceType] of room.world.food) room.food.set(x + "," + y, { x, y, amount, initialAmount: amount, resourceType, terrain: terrainTypes[room.world.terrain[y * 320 + x]] });
+  for (const [x, y, amount, resourceType] of room.world.food) room.food.set(x + "," + y, { x, y, amount, initialAmount: amount, resourceType, terrain: terrainTypes[room.world.terrain[y * (room.world.size || 320) + x]] });
   populateResourceNodes(room);
   clearResourceHazards(room);
   indexFood(room);
@@ -101,26 +101,30 @@ export function restoreRoom(saved) {
   let world;
   if (saved.version === 2) {
     world = structuredClone(saved.world);
+    const size = world?.size ?? 320;
+    if (!world || ![160, 320].includes(size)) throw new Error("지형 저장 형식이 올바르지 않습니다.");
+    world.size = size;
     for (const name of ["terrain", "hazards", "treeCells"]) {
       const cells = world?.[name];
-      if (!cells || (cells.length ?? Object.keys(cells).length) !== 320 * 320) throw new Error("지형 저장 형식이 올바르지 않습니다.");
+      if (!cells || (cells.length ?? Object.keys(cells).length) !== size * size) throw new Error("지형 저장 형식이 올바르지 않습니다.");
       world[name] = cells instanceof Uint8Array ? cells : Uint8Array.from(Object.values(cells));
     }
     if (world.seed !== saved.seed || !Array.isArray(world.sites) || !Array.isArray(world.burrows) ||
         world.generationVersion !== saved.worldGenerationVersion) throw new Error("지형 저장 형식이 올바르지 않습니다.");
   } else world = generateWorld(saved.seed, saved.worldGenerationVersion ?? 1);
+  const size = (world.size || 320);
   const room = { id: saved.id, title: requireName(saved.title, 24),
     hostId: saved.hostId, seed: saved.seed, cheats: saved.cheats === true, beginnerHelpEnabled: saved.beginnerHelpEnabled === true, simSeconds: saved.simSeconds, revision: 0, updatedAt: saved.updatedAt,
     resourceVersion: Number.isInteger(saved.resourceVersion) ? saved.resourceVersion : 0,
     world, colonies: [], games: new Map(), food: new Map(saved.food), foodSpots: new Map() };
-  room.world.depletedTrees = new Set((saved.depletedTrees || []).filter(index => Number.isInteger(index) && index >= 0 && index < 320 * 320));
+  room.world.depletedTrees = new Set((saved.depletedTrees || []).filter(index => Number.isInteger(index) && index >= 0 && index < size * size));
   if (room.world.treeCells) for (const index of room.world.depletedTrees) room.world.treeCells[index] = 0;
   const owners = new Set();
   const colonyIds = new Set();
   for (const colony of saved.colonies) {
     if (!colony || typeof colony.ownerId !== "string" || owners.has(colony.ownerId) || !Number.isInteger(colony.id) ||
         colonyIds.has(colony.id) || !Number.isInteger(colony.x) || !Number.isInteger(colony.y) ||
-        colony.x < 0 || colony.y < 0 || colony.x > 315 || colony.y > 315 || !Array.isArray(colony.occupiedCells)) throw new Error("둥지 저장 형식이 올바르지 않습니다.");
+        colony.x < 0 || colony.y < 0 || colony.x > size - 5 || colony.y > size - 5 || !Array.isArray(colony.occupiedCells)) throw new Error("둥지 저장 형식이 올바르지 않습니다.");
     requireName(colony.name, 32);
     owners.add(colony.ownerId);
     colonyIds.add(colony.id);
@@ -130,8 +134,8 @@ export function restoreRoom(saved) {
   }
   if (!owners.has(room.hostId)) throw new Error("플레이할 둥지를 찾을 수 없습니다.");
   for (const [key, cell] of room.food) {
-    if (!cell || !Number.isInteger(cell.x) || !Number.isInteger(cell.y) || cell.x < 0 || cell.y < 0 || cell.x >= 320 || cell.y >= 320 ||
-        key !== cell.x + "," + cell.y && (key !== "corpse:" + cell.agentId || cell.key !== key) || !Number.isFinite(cell.amount) || cell.amount < 0) throw new Error("먹이 저장 형식이 올바르지 않습니다.");
+    if (!cell || !Number.isInteger(cell.x) || !Number.isInteger(cell.y) || cell.x < 0 || cell.y < 0 || cell.x >= size || cell.y >= size ||
+        key !== cell.x + "," + cell.y && (key !== "corpse:" + cell.agentId || cell.key !== key) || !Number.isFinite(cell.amount) || cell.amount < 0) throw new Error("자원 저장 형식이 올바르지 않습니다.");
   }
   populateResourceNodes(room);
   clearResourceHazards(room);
@@ -158,7 +162,10 @@ export function tickRoom(room, elapsed) {
   prepare(room);
   room.unitIndex = createUnitIndex(room);
   try {
-    for (const game of room.games.values()) game.tick(elapsed);
+    for (const [owner,game] of room.games) {
+      game.tick(elapsed);
+      if (owner !== room.hostId) game.produce();
+    }
     room.creatureSystem.tick();
     room.games.get(room.hostId).checkEnding();
   } finally { room.unitIndex = null; }
@@ -173,7 +180,7 @@ export function snapshotRoom(room, includeWorld) {
     revision: room.revision, tribeStarts: includeWorld ? roomTribeStarts(room) : undefined, colonyId: room.colonies.find(colony => colony.ownerId === room.hostId).id,
     colonies: room.colonies.filter(colony => game.colonyKnown(colony)).map(colony => ({ ...colony, occupiedCells: [...colony.occupiedCells], nestLevel: room.games.get(colony.ownerId).nestLevel,
       nestHealth: room.games.get(colony.ownerId).nest.health, nestMaxHealth: room.games.get(colony.ownerId).nest.maxHealth })),
-    world: includeWorld ? { roomId: room.id, size: 320, seed: room.seed, generationVersion: room.world.generationVersion, terrain: room.world.terrain, hazards: room.world.hazards, burrows: room.world.burrows, treeCells: room.world.treeCells,
+    world: includeWorld ? { roomId: room.id, size: (room.world.size || 320), seed: room.seed, generationVersion: room.world.generationVersion, terrain: room.world.terrain, hazards: room.world.hazards, burrows: room.world.burrows, treeCells: room.world.treeCells,
       creatureHabitats: (room.world.encounters || []).map(plan => ({ key: plan.key, terrains: plan.terrains })),
       resourceCells: [...room.food.values()].filter(cell => cell.kind !== "corpse" && cell.resourceType !== "tree" && !isTreeFood(cell, room.world)).map(cell => [cell.x, cell.y]) } : undefined,
     state: game.snapshot() };
@@ -192,9 +199,8 @@ export function commandRoom(room, action) {
   if (action.type === "rename-colony") {
     const colony = room.colonies.find(entry => entry.id === action.colonyId && entry.ownerId === room.hostId);
     if (!colony) throw new Error("자신의 둥지만 이름을 바꿀 수 있습니다.");
-    colony.name = requireName(action.name, 32);
-    colony.hasCustomName = true;
-    result = { colonyId: colony.id };
+    requireName(action.name, 32);
+    result = room.games.get(room.hostId).command(action);
   } else result = room.games.get(room.hostId).command(action);
   room.revision += 1;
   return result;

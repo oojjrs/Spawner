@@ -7,7 +7,7 @@ export function equipmentPose(rig,track,attributes,action,time,duration){
  if(!track.visible)return [];
  const span=rig.reference.span,has=key=>attributes.includes(key),p=clamp(time/Math.max(1,duration),0,.999),strike=action==='attack'?curve(p,[[0,0],[.18,-.22],[.30,1],[.48,.55],[.86,0],[1,0]]):0;
  const brace=action==='hurt'?curve(time,[[0,.4],[20,1],[80,.75],[110,.7],[510,.7],[600,.25],[760,0]]):0,impact=action==='hurt'?curve(time,[[0,0],[20,.25],[50,1],[110,.25],[510,.25],[760,0]]):0;
- const heal=action==='heal'?Math.sin(p*Math.PI*4):0,signal=action==='secretion'?Math.sin(p*Math.PI*6):0,death=action==='death'?curve(p,[[0,0],[.2,0],[.88,1],[1,1]]):0;
+ const heal=action==='heal'?Math.sin(p*Math.PI*4):0,death=action==='death'?curve(p,[[0,0],[.2,0],[.88,1],[1,1]]):0;
  const collapse=action==='death'?clamp(1-track.body[3]/Math.max(1,rig.reference.body[3]),0,.8)/.8:0,parts=[];
  function add(id){
   const mount=rig.mounts[id],pose=track.mounts[id];if(!pose)throw new Error('Missing animated attachment '+id);
@@ -17,7 +17,6 @@ export function equipmentPose(rig,track,attributes,action,time,duration){
   if(id==='guard'){const d=rotated((brace*.08-impact*.045)*span*scale,(-brace*.11+impact*.025)*span*scale,pose.angle);item.x+=d[0];item.y+=d[1];item.angle+=-brace*.22+impact*.13}
   if(id==='bud'){item.angle+=heal*.06;item.bend+=heal*.07*mount.flex}
   if(id==='tendril')item.bend+=heal*.12*mount.flex;
-  if(id.startsWith('vent-')){item.angle+=signal*.07;item.bend+=signal*.05*mount.flex}
   if(death){
    if(id==='piercing')item.angle*=1-death;
    if(id==='blade')item.angle=item.angle*(1-death)+Math.PI*.46*death;
@@ -30,7 +29,6 @@ export function equipmentPose(rig,track,attributes,action,time,duration){
  }
  if(has('carapace'))for(const id of rig.armorPanels)add(id);
  if(has('blade'))add('blade');if(has('piercing'))add('piercing');if(has('guard'))add('guard');
- if(has('secretion'))for(let i=0;i<3;i++)add('vent-'+i);
  return parts;
 }
 function triangle(context,image,uv,points){

@@ -82,13 +82,16 @@
       if (!enabled || !mode || pending || context.state !== "running") return;
       clearGap();
       const nextTrack = playlists[mode][cursors[mode]];
-      const channel = channels.find(candidate => candidate !== active && candidate.track === nextTrack) ||
+      const resuming = active?.audio.paused && playlists[mode].includes(active.track);
+      const channel = resuming ? active : channels.find(candidate => candidate !== active && candidate.track === nextTrack) ||
         channels.find(candidate => candidate !== active);
-      release(channel);
-      if (!prepare(channel)) return;
+      if (!resuming) {
+        release(channel);
+        if (!prepare(channel)) return;
+        channel.audio.currentTime = 0;
+      }
       clearTimeout(channel.timer);
       channel.timer = null;
-      channel.audio.currentTime = 0;
       const ticket = ++generation;
       const nextMode = mode;
       pending = channel;
@@ -98,7 +101,7 @@
         pending = null;
         const previous = active;
         active = channel;
-        cursors[nextMode] = (channel.index + 1) % playlists[nextMode].length;
+        if (!resuming) cursors[nextMode] = (channel.index + 1) % playlists[nextMode].length;
         ramp(channel, volume, fadeSeconds);
         channel.audio.onended = () => {
           if (active !== channel) return;
@@ -110,7 +113,7 @@
             start();
           }, gapMs);
         };
-        if (previous) {
+        if (previous && previous !== channel) {
           previous.audio.onended = null;
           ramp(previous, 0, fadeSeconds);
           previous.timer = setTimeout(() => {
@@ -123,6 +126,7 @@
         pending = null;
         release(channel);
         if (error.name === "NotAllowedError") return;
+        if (active === channel) active = null;
         failedTracks.add(channel.track.file);
         start();
       });
@@ -180,7 +184,7 @@
         }
       }
       enabled = true;
-      if (!pending && gapTimer === null && (!active || !playlists[mode]?.includes(active.track))) start();
+      if (!pending && gapTimer === null && (!active || active.audio.paused || !playlists[mode]?.includes(active.track))) start();
     }
 
     function suspend() {
@@ -190,7 +194,6 @@
       for (const channel of channels) release(channel);
       clearInterval(fadeTimer);
       fadeTimer = null;
-      active = null;
       pending = null;
     }
 

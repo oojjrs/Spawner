@@ -1,11 +1,12 @@
-import { ATTRIBUTES, attributeCounts, birthCost } from "./attributes.mjs";
+import { ATTRIBUTES, isAttributeUnlocked, attributeCounts, birthCost } from "./attributes.mjs";
+import { suggestTemplateName } from "./unit-template-names.mjs";
 import { buildingDefinition } from "./buildings.mjs";
 import { resourceDefinition, resourceHarvestRequirements } from "./resources.mjs";
 
-export function constructionHelpTemplate(state, slots, resources, kind) {
+export function constructionHelpTemplate(state, slots, kind) {
   if (!slots) slots = ["construction"];
-  if (!resources) resources = [];
   const construction = slots.includes("construction");
+  const military = kind === "military";
   slots = [...slots];
   if (state.nestLevel >= 2 && slots.length < state.nestLevel) {
     const support = state.tribe === "pebble" ? "lifespan" : "feet";
@@ -15,17 +16,12 @@ export function constructionHelpTemplate(state, slots, resources, kind) {
     const support = slots.includes("feet") ? "lifespan" : "feet";
     if (!slots.includes(support)) slots.push(support);
   }
-  const previous = state.templates.filter(template => slots.every(key => template.slots.includes(key)) &&
+  const previous = state.templates.filter(template => (!military || template.productionRole === "military") && template.slots.every(key => isAttributeUnlocked(key, state.nestLevel, state.tribe)) && slots.every(key => template.slots.includes(key)) &&
     (construction || !template.slots.includes("construction")))
     .sort((first, second) => birthCost(first, state.tribe) - birthCost(second, state.tribe) || first.slots.length - second.slots.length)[0];
   if (previous) return previous;
-  const base = construction ? "건설 일꾼" : kind === "transport" ? "채집·운반꾼" :
-    resources.map(key => resourceDefinition(key).name).join("·") + " 채집꾼";
-  const role = slots.includes("lifespan") && slots.includes("feet") ? "장거리 " :
-    slots.includes("lifespan") ? "장수 " : slots.includes("feet") ? "기동 " : "";
-  let name = role + base, suffix = 2;
-  while (state.templates.some(template => template.name === name)) name = role + base + " " + suffix++;
-  return { id: state.nextTemplateId, name, slots: [...slots], attributeLevels: Object.fromEntries(slots.map(key => [key, 1])),
+  const name = suggestTemplateName(slots, state.templates);
+  return { id: state.nextTemplateId, name, productionRole:military ? "military" : "worker", slots: [...slots], attributeLevels: Object.fromEntries(slots.map(key => [key, 1])),
     unlockedAttributeLevels: Object.fromEntries(slots.map(key => [key, 1])), revision: 1 };
 }
 
@@ -57,7 +53,7 @@ export function constructionHelp(state, tribe, enabled, goal, stock, world, supp
   } else if (Object.keys(missing).length || state.agents.some(agent => agent.health > 0 && agent.slots.includes("construction") &&
       (agent.construction || (!agent.stats || agent.health >= agent.stats.health * .6) &&
         (!Number.isFinite(agent.lifespan) || agent.bornAt + agent.lifespan - state.simSeconds > 60)))) return null;
-  const template = constructionHelpTemplate({ ...state, tribe }, slots, resources, kind);
+  const template = constructionHelpTemplate({ ...state, tribe }, slots, kind);
   const cost = birthCost(template, tribe);
   const issue = state.evolutionPoints < cost ? "진화 포인트가 부족합니다." :
     state.agents.length >= 200 ? "생명체는 최대 200개까지 유지할 수 있습니다." :

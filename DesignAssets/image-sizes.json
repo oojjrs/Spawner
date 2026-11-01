@@ -7,24 +7,186 @@
     1080
   ],
   "images": {
-    "DesignAssets/Animations/Nests/Growth02To03-PopV1/spore/growth.png": {"display":[512,512],"grid":[10,8]},
-    "DesignAssets/Animations/Nests/Growth03To04-v5/spore/growth.png": {"display":[512,512],"grid":[8,6]},
-    "DesignAssets/Animations/Nests/Growth02To03-v4/pebble/growth.png": {"display":[512,512],"grid":[8,15]},
-    "DesignAssets/Animations/Nests/Growth02To03-v4/pebble/level-03.png": {"display":[512,512],"grid":[1,1]},
-    "DesignAssets/Animations/Nests/Growth02To03-v5/sprout/growth.png": {"display":[512,512],"grid":[8,14]},
-    "DesignAssets/Animations/CreatureDeathV4/flower-tail-bird/runtime.webp": {"display":[256.0,256.0],"grid":[4,13]},
-    "DesignAssets/Animations/CreatureDeathV4/rolling-acorn/runtime.webp": {"display":[256.0,256.0],"grid":[4,23]},
-    "DesignAssets/Animations/CreatureDeathV4/snare-vine/runtime.webp": {"display":[256.0,256.0],"grid":[8,11]},
-    "DesignAssets/Animations/CreatureDeathV6/dew-rabbit/runtime.webp": {"display":[256.0,256.0],"grid":[4,9]},
-    "DesignAssets/Animations/CreatureDeathV6/cotton-sheep/runtime.webp": {"display":[256.0,256.0],"grid":[4,2]},
-    "DesignAssets/Animations/CreatureDeathV6/soil-boar/runtime.webp": {"display":[256.0,256.0],"grid":[4,2]},
-    "DesignAssets/Animations/CreatureDeathV6/talon-owl/runtime.webp": {"display":[256.0,256.0],"grid":[4,4]},
-    "DesignAssets/Animations/CreatureDeathV11/spring-keeper/runtime.webp": {"display":[288.0,288.0],"grid":[4,15]},
-    "DesignAssets/Animations/CreatureDeathV12/white-paw/runtime.webp": {"display":[256.0,256.0],"grid":[4,14]},
-    "DesignAssets/Animations/Nests/Idle03-v1/pebble/idle-sheet.webp": {"display":[512,512],"grid":[8,9]},
-    "DesignAssets/Animations/SnailDeathV1/bundle-snail/runtime.webp": {"display":[265.84615384615387,265.84615384615387],"grid":[8,6]},
-    "DesignAssets/Animations/SnailDeathV1/old-garden-snail/runtime.webp": {"display":[243.1356783919598,243.1356783919598],"grid":[8,7]},
-    "DesignAssets/Animations/BubbleToadDeath/RebuildV3/runtime.webp": {"display": [201.8219859917066, 201.8219859917066], "grid": [4, 7]},
+    "DesignAssets/Animations/Nests/Growth02To03-PopV1/spore/growth.png": {
+      "display": [
+        512,
+        512
+      ],
+      "grid": [
+        10,
+        8
+      ]
+    },
+    "DesignAssets/Animations/Nests/Growth03To04-v5/spore/growth.png": {
+      "display": [
+        512,
+        512
+      ],
+      "grid": [
+        8,
+        6
+      ]
+    },
+    "DesignAssets/Animations/Nests/Growth02To03-v4/pebble/growth.png": {
+      "display": [
+        512,
+        512
+      ],
+      "grid": [
+        8,
+        15
+      ]
+    },
+    "DesignAssets/Animations/Nests/Growth02To03-v4/pebble/level-03.png": {
+      "display": [
+        512,
+        512
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Animations/Nests/Growth02To03-v5/sprout/growth.png": {
+      "display": [
+        512,
+        512
+      ],
+      "grid": [
+        8,
+        14
+      ]
+    },
+    "DesignAssets/Animations/CreatureDeathV4/flower-tail-bird/runtime.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        13
+      ]
+    },
+    "DesignAssets/Animations/CreatureDeathV4/rolling-acorn/runtime.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        23
+      ]
+    },
+    "DesignAssets/Animations/CreatureDeathV4/snare-vine/runtime.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        11
+      ]
+    },
+    "DesignAssets/Animations/CreatureDeathV6/dew-rabbit/runtime.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        9
+      ]
+    },
+    "DesignAssets/Animations/CreatureDeathV6/cotton-sheep/runtime.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
+    "DesignAssets/Animations/CreatureDeathV6/soil-boar/runtime.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
+    "DesignAssets/Animations/CreatureDeathV6/talon-owl/runtime.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Animations/CreatureDeathV11/spring-keeper/runtime.webp": {
+      "display": [
+        288,
+        288
+      ],
+      "grid": [
+        4,
+        15
+      ]
+    },
+    "DesignAssets/Animations/CreatureDeathV12/white-paw/runtime.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        14
+      ]
+    },
+    "DesignAssets/Animations/Nests/Idle03-v1/pebble/idle-sheet.webp": {
+      "display": [
+        512,
+        512
+      ],
+      "grid": [
+        8,
+        9
+      ]
+    },
+    "DesignAssets/Animations/SnailDeathV1/bundle-snail/runtime.webp": {
+      "display": [
+        265.84615384615387,
+        265.84615384615387
+      ],
+      "grid": [
+        8,
+        6
+      ]
+    },
+    "DesignAssets/Animations/SnailDeathV1/old-garden-snail/runtime.webp": {
+      "display": [
+        243.1356783919598,
+        243.1356783919598
+      ],
+      "grid": [
+        8,
+        7
+      ]
+    },
+    "DesignAssets/Animations/BubbleToadDeath/RebuildV3/runtime.webp": {
+      "display": [
+        201.8219859917066,
+        201.8219859917066
+      ],
+      "grid": [
+        4,
+        7
+      ]
+    },
     "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/runtime.webp": {
       "display": [
         265.8461538461538,
@@ -8095,16 +8257,6 @@
         1
       ]
     },
-    "DesignAssets/Animations/CombatAttributesRuntimeV1/sprout/Parts/vent.png": {
-      "display": [
-        42,
-        37
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
     "DesignAssets/Animations/CombatAttributesRuntimeV1/sprout/Parts/armor-0.png": {
       "display": [
         239,
@@ -8229,16 +8381,6 @@
       "display": [
         103,
         69
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesRuntimeV1/spore/Parts/vent.png": {
-      "display": [
-        42,
-        37
       ],
       "grid": [
         1,
@@ -8415,16 +8557,6 @@
         1
       ]
     },
-    "DesignAssets/Animations/CombatAttributesRuntimeV1/pebble/Parts/vent.png": {
-      "display": [
-        57,
-        52
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
     "DesignAssets/Animations/CombatAttributesRuntimeV1/pebble/Parts/armor-0.png": {
       "display": [
         323,
@@ -8565,16 +8697,6 @@
         1
       ]
     },
-    "DesignAssets/Animations/CombatAttributesRuntimeV1/spring/Parts/vent.png": {
-      "display": [
-        49,
-        51
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
     "DesignAssets/Animations/CombatAttributesRuntimeV1/spring/Parts/armor-0.png": {
       "display": [
         276,
@@ -8705,23 +8827,25 @@
         1
       ]
     },
-    "DesignAssets/Attributes/CombatDnaV1/secretion.png": {
+    "DesignAssets/Animations/Nests/Idle03-v2/spring/idle-sheet.webp": {
       "display": [
-        96,
-        96
+        512,
+        512
+      ],
+      "grid": [
+        12,
+        10
+      ]
+    },
+    "DesignAssets/Animations/Nests/Idle03-v2/spring/keypose.png": {
+      "display": [
+        512,
+        512
       ],
       "grid": [
         1,
         1
       ]
-    },
-    "DesignAssets/Animations/Nests/Idle03-v2/spring/idle-sheet.webp": {
-      "display": [512, 512],
-      "grid": [12, 10]
-    },
-    "DesignAssets/Animations/Nests/Idle03-v2/spring/keypose.png": {
-      "display": [512, 512],
-      "grid": [1, 1]
     },
     "DesignAssets/Animations/Nests/Idle03-v1/spring/idle-sheet.webp": {
       "display": [
@@ -9453,186 +9577,6 @@
         2
       ]
     },
-    "DesignAssets/Animations/CombatAttributesV7/sprout/secretion/Parts/body.png": {
-      "display": [
-        387,
-        433
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/sprout/secretion/Parts/foliage-left.png": {
-      "display": [
-        455,
-        478
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/sprout/secretion/Parts/foliage-right.png": {
-      "display": [
-        455,
-        478
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/sprout/secretion/Parts/eye-0.png": {
-      "display": [
-        387,
-        433
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/sprout/secretion/Parts/eye-1.png": {
-      "display": [
-        387,
-        433
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/sprout/secretion/Parts/foot-0.png": {
-      "display": [
-        387,
-        433
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/sprout/secretion/Parts/foot-1.png": {
-      "display": [
-        387,
-        433
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/sprout/secretion/Parts/secretion-drop.png": {
-      "display": [
-        387,
-        433
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/sprout/secretion/AttackParts/body.png": {
-      "display": [
-        387,
-        433
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/sprout/secretion/AttackParts/foliage-left.png": {
-      "display": [
-        455,
-        478
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/sprout/secretion/AttackParts/foliage-right.png": {
-      "display": [
-        455,
-        478
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/secretion/idle.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        8
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/secretion/walk.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        5
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/secretion/attack.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        3
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/secretion/hurt.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        2
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/secretion/birth.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        13
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/secretion/death.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        2
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/secretion/secretion.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        6
-      ]
-    },
     "DesignAssets/Animations/CombatAttributesV7/spore/blade/Parts/body.png": {
       "display": [
         512,
@@ -10223,176 +10167,6 @@
         1
       ]
     },
-    "DesignAssets/Animations/CombatAttributesV7/spore/secretion/Parts/body.png": {
-      "display": [
-        478,
-        343
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/spore/secretion/Parts/cap-left.png": {
-      "display": [
-        478,
-        343
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/spore/secretion/Parts/eye-0.png": {
-      "display": [
-        478,
-        343
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/spore/secretion/Parts/eye-1.png": {
-      "display": [
-        478,
-        343
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/spore/secretion/Parts/foot-0.png": {
-      "display": [
-        478,
-        343
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/spore/secretion/Parts/foot-1.png": {
-      "display": [
-        478,
-        343
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/spore/secretion/Parts/secretion-drop.png": {
-      "display": [
-        478,
-        343
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/spore/secretion/AttackParts/body.png": {
-      "display": [
-        478,
-        343
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/spore/secretion/AttackParts/cap-left.png": {
-      "display": [
-        478,
-        343
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/secretion/idle.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        8
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/secretion/walk.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        2
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/secretion/attack.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        3
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/secretion/hurt.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        2
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/secretion/birth.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        10
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/secretion/death.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/secretion/secretion.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        6
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/RuntimeParts/spore-secretion.png": {
-      "display": [
-        478,
-        343
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
     "DesignAssets/Animations/CombatAttributesV7/pebble/blade/Parts/body.png": {
       "display": [
         440,
@@ -10873,146 +10647,6 @@
         1
       ]
     },
-    "DesignAssets/Animations/CombatAttributesV7/pebble/secretion/Parts/body.png": {
-      "display": [
-        456,
-        360
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/pebble/secretion/Parts/eye-0.png": {
-      "display": [
-        456,
-        360
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/pebble/secretion/Parts/eye-1.png": {
-      "display": [
-        456,
-        360
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/pebble/secretion/Parts/foot-0.png": {
-      "display": [
-        456,
-        360
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/pebble/secretion/Parts/foot-1.png": {
-      "display": [
-        456,
-        360
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/pebble/secretion/Parts/secretion-drop.png": {
-      "display": [
-        456,
-        360
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/secretion/idle.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        8
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/secretion/walk.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        3
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/secretion/attack.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        3
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/secretion/hurt.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        2
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/secretion/birth.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        9
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/secretion/death.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/secretion/secretion.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        6
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/RuntimeParts/pebble-secretion.png": {
-      "display": [
-        456,
-        360
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
     "DesignAssets/Animations/CombatAttributesV7/spring/blade/Parts/body.png": {
       "display": [
         428,
@@ -11403,126 +11037,6 @@
         1
       ]
     },
-    "DesignAssets/Animations/CombatAttributesV7/spring/secretion/Parts/body.png": {
-      "display": [
-        429,
-        388
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/spring/secretion/Parts/eye-0.png": {
-      "display": [
-        429,
-        388
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/spring/secretion/Parts/eye-1.png": {
-      "display": [
-        429,
-        388
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/spring/secretion/Parts/secretion-drop.png": {
-      "display": [
-        429,
-        388
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/secretion/idle.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        8
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/secretion/walk.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        2
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/secretion/attack.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        3
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/secretion/hurt.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        2
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/secretion/birth.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        6
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/secretion/death.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/secretion/secretion.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        6
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/RuntimeParts/spring-secretion.png": {
-      "display": [
-        429,
-        388
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
     "DesignAssets/Animations/CombatAttributesV7/AttackEffects/sprout-projectile.png": {
       "display": [
         48,
@@ -11635,21 +11149,21 @@
     },
     "DesignAssets/Animations/Nests/Idle04-v1/spore/idle-sheet.webp": {
       "display": [
-        512, 
+        512,
         512
-      ], 
+      ],
       "grid": [
-        10, 
+        10,
         8
       ]
-    }, 
+    },
     "DesignAssets/Animations/Nests/Idle04-v1/spore/poster.png": {
       "display": [
-        512, 
+        512,
         512
-      ], 
+      ],
       "grid": [
-        1, 
+        1,
         1
       ]
     },
@@ -11753,7 +11267,25 @@
         8
       ]
     },
-    "DesignAssets/Animations/CreatureDeathV12/vine-turtle/runtime.webp": {"display": [256, 256], "grid": [8, 3]},
-    "DesignAssets/Animations/CreatureDeathV12/walking-forest/runtime.webp": {"display": [256, 256], "grid": [8, 4]}
+    "DesignAssets/Animations/CreatureDeathV12/vine-turtle/runtime.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        3
+      ]
+    },
+    "DesignAssets/Animations/CreatureDeathV12/walking-forest/runtime.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        4
+      ]
+    }
   }
 }

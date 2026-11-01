@@ -201,11 +201,6 @@ export function createOrganicConstruction(createSurface) {
   const anatomy = (context, sequence, base, pose, progress, time, source, footPivot) => {
     const rig = sequence.organism, geometry = organicShellVertices(sequence, pose, time);
     const { floor, growth } = geometry;
-    const bed = organicBedPose(progress);
-    if (sequence.kind !== "watchpost" && bed.spread > 0) {
-      context.save(); context.beginPath(); context.ellipse(0, floor, bed.width * bed.spread * .76, bed.height * bed.spread * .76, 0, 0, Math.PI * 2); context.clip();
-      part(context, sequence, 'bed', 0, floor, bed.width, bed.height, [.5,.5]); context.restore();
-    }
     if (source && pose.settle < 1) { context.drawImage(source, -.512, -1.024 * (.59765625 + footPivot), 1.024, 1.024); return; }
     const drawLayer = definition => {
       const grown = definition.grown.map((value, index) => mix(value, definition.opened[index], pose.opening));
@@ -215,7 +210,7 @@ export function createOrganicConstruction(createSurface) {
       part(context, sequence, definition.name, 0, 0, w, h, definition.pivot); context.restore();
     };
     for (const definition of rig.layers) drawLayer(definition);
-    const material = ramp(progress,.18,.65);
+    const material = rig.fixedSkin ? 1 : ramp(progress,.18,.65);
     drawSkin(context, sequence, base, geometry, material);
     context.save(); context.beginPath();
     const reveal = floor - .43 + ramp(progress,.18,.40)*2.4;
@@ -236,7 +231,7 @@ export function createOrganicConstruction(createSurface) {
     const crownX = rig.crown[0]*growth, crownY = mix(floor-.41035+.44*crown[3]/crown[2]*.18,floor+rig.crown[1],growth);
     context.save();
     if (rig.crownAbsorb) context.globalAlpha *= 1-ramp(growth,.45,.90);
-    const crownPaint = rig.paintedCrown ? ramp(growth,.08,.45) : 0;
+    const crownPaint = rig.fixedCrown ? 1 : rig.paintedCrown ? ramp(growth,.08,.45) : 0;
     context.save(); context.globalAlpha *= 1-crownPaint;
     context.drawImage(base.partsImage,...crown,crownX-crownWidth/2,crownY-crownHeight,crownWidth,crownHeight); context.restore();
     if (crownPaint > 0) { context.globalAlpha *= crownPaint; context.drawImage(sequence.sheet,...crownRect,crownX-crownWidth/2,crownY-crownHeight,crownWidth,crownHeight); }

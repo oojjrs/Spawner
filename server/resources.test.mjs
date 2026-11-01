@@ -59,7 +59,7 @@ test("지면 재료 7종은 서식 지형에 배치하고 나무는 숲에서 �
   assert.equal(RESOURCE_HABITATS.length, 7);
   assert.deepEqual(RESOURCE_HABITATS.map(entry => entry.key).sort(),
     RESOURCE_TYPES.filter(entry => entry.category === "material" && !entry.harvestLocked &&
-      !["tree", "dew", "carapace"].includes(entry.key)).map(entry => entry.key).sort());
+      !["tree", "dew"].includes(entry.key)).map(entry => entry.key).sort());
   const world = fixture();
   assert.equal(isResourceHabitat("grass-fiber", world, 160, 160), true);
   assert.equal(isResourceHabitat("grass-fiber", world, 140, 160), true);

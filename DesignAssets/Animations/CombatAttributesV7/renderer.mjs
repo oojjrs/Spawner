@@ -48,10 +48,7 @@ export function evolutionPose(rig,action,time){
   if(rig.tribe==='spore'){pose.sy=1-fall*.59;pose.sx=1+fall*.06;}
   if(rig.tribe==='spring'){pose.sy=1-fall*.78;pose.sx=1+fall*.12;pose.water=6*(1-fall);}
  }
- if(action==='secretion'){
-  const pulse=Math.sin(time/600*Math.PI*2);pose.leaf=pulse*.07;pose.cap=pulse*.025;pose.water=4+3*pulse;
-  if(rig.tribe!=='pebble'){pose.sy=1+pulse*.014;pose.sx=1-pulse*.008;}
- }
+ 
  return pose;
 }
 function bodyTransform(ctx,rig,pose){
@@ -87,13 +84,7 @@ export function renderEvolutionFrame(ctx,rig,images,action,time){
   ctx.restore();
  }
 
- if(action==='secretion'&&rig.emission){
-  const e=rig.emission,part=rig.parts.find(p=>p.id===e.part);ctx.save();bodyTransform(ctx,rig,pose);
-  for(let n=0;n<8;n++){const age=time-200-n*e.intervalMs;if(age<0||age>e.lifeMs)continue;const p=age/e.lifeMs,origin=e.origins[n%e.origins.length],side=n%2?1:-1;
-   let x=origin[0],y=origin[1];if(rig.tribe==='spore'){x+=side*p*28;y-=p*75;}else if(rig.tribe==='spring'){x+=side*p*45;y+=p*12+p*p*30;}else{x+=side*p*7;y+=p*12+p*p*64;}
-   ctx.save();ctx.translate(x,y);const grow=smooth(Math.min(1,p*6));ctx.scale(grow*(rig.tribe==='spore'?.25:.48),grow*(rig.tribe==='spore'?.25:.48));ctx.globalAlpha*=1-smooth((p-.7)/.3);ctx.translate(-e.pivot[0],-e.pivot[1]);ctx.drawImage(images[e.part],0,0);ctx.restore();
-  }ctx.restore();
- }
+ 
 
  ctx.restore();return pose;
 }

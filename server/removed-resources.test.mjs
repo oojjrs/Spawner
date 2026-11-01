@@ -6,7 +6,7 @@ import { RESOURCE_HARVEST_ANIMATIONS } from "../client/harvest-assets.mjs";
 import { generateWorld } from "./world.mjs";
 import { createRoom, saveRoom, restoreRoom } from "../client/room.mjs";
 
-const retired = ["honey-mushrooms", "tree-fruit", "berry-bush", "seed-pods", "root-bulbs", "nutrient-moss"];
+const retired = ["carapace", "honey-mushrooms", "tree-fruit", "berry-bush", "seed-pods", "root-bulbs", "nutrient-moss"];
 
 test("기획서에서 삭제한 식물 자원은 목록·채집·애니메이션에서 제외한다", () => {
   for (const key of retired) {

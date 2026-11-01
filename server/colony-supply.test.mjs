@@ -22,7 +22,7 @@ function fixture(points) {
   return { state, agent, ai, context };
 }
 
-test("최후 개체의 복제 자금이 부족하면 성향보다 안전한 먹이 수급을 우선한다", () => {
+test("최후 개체의 복제 자금이 부족하면 성향보다 안전한 자원 수급을 우선한다", () => {
   const f = fixture(2), poor = f.ai.evaluate(f.agent, true);
   assert.equal(poor[0].action, "collect");
   assert.equal(colonySupply(f.state).urgency, 1);
@@ -33,7 +33,7 @@ test("최후 개체의 복제 자금이 부족하면 성향보다 안전한 먹�
   assert.ok(poor.filter(candidate=>candidate.action==="explore")[0].score < rich.filter(candidate=>candidate.action==="explore")[0].score);
 });
 
-test("먹이를 모르면 수급 위기에도 탐색을 중단하지 않는다", () => {
+test("자원을 모르면 수급 위기에도 탐색을 중단하지 않는다", () => {
   const f = fixture(2);
   f.state.knownFood.clear();
   assert.equal(f.ai.evaluate(f.agent, false)[0].action, "explore");
@@ -61,7 +61,7 @@ test("수명 경고·탄생·포인트 변화를 반영하고 교체 여력이 �
   assert.equal(colonySupply(f.state).living, 4);
 });
 
-test("초반 수급 전망이 성장·교체 비용에 못 미치면 수명 경고 전부터 먹이를 확보한다", () => {
+test("초반 수급 전망이 성장·교체 비용에 못 미치면 수명 경고 전부터 자원을 확보한다", () => {
   const f = fixture(4);
   f.state.nestLevel = 1; f.state.simSeconds = 60; f.state.colonyFood = 4;
   f.state.agents = Array.from({length:3}, (_,index)=>({...f.agent,id:String(index),bornAt:0,lifespan:240,slots:["strength"]}));
@@ -110,7 +110,7 @@ test("전초 재료가 필요하면 가까운 다른 재료보다 필요한 재�
   assert.equal(f.ai.evaluate(f.agent,false)[0].target.key,"10,10");
 });
 
-test("마지막 재료 채집 개체도 먹이 수급이 급하면 먹이를 먼저 납품한다", () => {
+test("마지막 재료 채집 개체도 자원 수급이 급하면 자원을 먼저 납품한다", () => {
   const f=fixture(0);
   f.agent.attributes={blade:1};f.state.lastFoodAt=100;
   f.context.constructionMaterials=()=>({tree:4});
@@ -118,7 +118,7 @@ test("마지막 재료 채집 개체도 먹이 수급이 급하면 먹이를 먼
   assert.equal(f.ai.evaluate(f.agent,false)[0].target.key,"10,4");
 });
 
-test("먹이를 알아도 왕복이 길면 반대 방향 대신 그 먹이 주변의 경계를 탐색한다", () => {
+test("자원을 알아도 왕복이 길면 반대 방향 대신 그 자원 주변의 경계를 탐색한다", () => {
   const f=fixture(0);
   f.state.lastFoodAt=100;f.agent.bornAt=60;
   f.state.knownFood.clear();f.state.knownFood.set("22,4",{x:22,y:4,amount:12,resourceType:"pebbles"});

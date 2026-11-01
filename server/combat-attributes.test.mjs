@@ -1,12 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { ATTRIBUTES, COMBAT_ATTRIBUTE_KEYS, attributeCounts, attributeUpgradeCost, unitStats } from "./attributes.mjs";
-import { combatDamage, combatStrength } from "./combat-stats.mjs";
+import { combatDamage } from "./combat-stats.mjs";
 import { createCombat } from "./combat.mjs";
 import { createGame } from "./game.mjs";
 
-function unit(id, ownerId, keys, levels) {
-  const attributes = attributeCounts(keys, levels);
+function unit(id, ownerId, keys) {
+  const attributes = attributeCounts(keys);
   return { id, ownerId, tribe: "bean", combatDisposition: "aggressive", x: 100, y: 100,
     renderFromX: 100, renderFromY: 100, moveStartedAt: 0, moveDuration: 0, health: 100,
     attributes, stats: unitStats(attributes, "bean"), mode: "idle", stepCount: 0 };
@@ -28,76 +28,95 @@ function battle(units) {
   } };
 }
 
-test("채집을 겸하는 전투 속성을 포함한 13종의 장착·강화 데이터를 제공한다", () => {
-  assert.deepEqual(COMBAT_ATTRIBUTE_KEYS, ["blade", "piercing", "carapace", "guard", "regeneration", "secretion"]);
-  assert.equal(ATTRIBUTES.length, 13);
+test("채집을 겸하는 전투 속성을 포함한 12종의 속성은 고정 효과를 적용하고 강화는 제공하지 않는다", () => {
+  assert.deepEqual(COMBAT_ATTRIBUTE_KEYS, ["blade", "piercing", "carapace", "guard", "regeneration"]);
+  assert.equal(ATTRIBUTES.length, 12);
   for (const attribute of ATTRIBUTES) {
     assert.equal(attributeCounts([attribute.key])[attribute.key], 1);
-    for (const level of [2, 3, 4]) assert.ok(attributeUpgradeCost(attribute.key, level));
+    for (const level of [2, 3, 4]) assert.equal(attributeUpgradeCost(attribute.key, level), null);
   }
 });
 
 test("칼날은 공격만 강화하고 관통은 갑피만 무시한다", () => {
-  const plain = unit("plain", "a", [], {}), blade = unit("blade", "a", ["blade"], { blade: 4 });
-  const shell = unit("shell", "b", ["carapace"], { carapace: 4 });
-  const piercer = unit("piercer", "a", ["piercing"], { piercing: 4 });
+  const plain = unit("plain", "a", []), blade = unit("blade", "a", ["blade"]);
+  const shell = unit("shell", "b", ["carapace"]);
+  const piercer = unit("piercer", "a", ["piercing"]);
   assert.ok(combatDamage(blade, plain, .5) > combatDamage(plain, plain, .5));
   assert.equal(combatDamage(plain, blade, .5), combatDamage(plain, plain, .5));
   assert.ok(combatDamage(plain, shell, .5) < combatDamage(plain, plain, .5));
-  assert.equal(combatDamage(piercer, shell, .5), combatDamage(plain, plain, .5));
+  assert.ok(combatDamage(piercer, shell, .5) > combatDamage(plain, shell, .5));
+  assert.ok(combatDamage(piercer, shell, .5) < combatDamage(plain, plain, .5));
+  assert.equal(piercer.stats.armorPenetration, .5);
   shell.stats.guardProtection = .4;
   assert.ok(combatDamage(piercer, shell, .5) < combatDamage(plain, plain, .5));
-  for (const level of [1, 2, 3, 4]) assert.ok(combatDamage(plain, unit("armor", "b", ["carapace"], { carapace: level }), .5) >= 1);
+  assert.ok(combatDamage(plain, unit("armor", "b", ["carapace"]), .5) >= 1);
 });
 
-test("엄호는 같은 칸 아군에 가장 높은 단계만 적용하고 이탈하면 해제된다", () => {
-  const strong = unit("a", "a", ["guard"], { guard: 3 }), weak = unit("b", "a", ["guard"], { guard: 1 });
-  const ally = unit("c", "a", [], {}), enemy = unit("enemy", "b", [], {});
-  const room = battle([strong, weak, ally, enemy]);
-  assert.ok(room.combat.engage(strong, enemy, 0));
+test("엄호는 같은 칸 아군에게 중첩되지 않고 마지막 시전자가 이탈하면 해제된다", () => {
+  const first = unit("a", "a", ["guard"]), second = unit("b", "a", ["guard"]);
+  const ally = unit("c", "a", []), enemy = unit("enemy", "b", []);
+  const room = battle([first, second, ally, enemy]);
+  assert.ok(room.combat.engage(first, enemy, 0));
   room.tick(0);
-  assert.ok(Math.abs(ally.combat.guardProtection - .42) < 1e-8);
+  assert.ok(Math.abs(ally.combat.guardProtection - .35) < 1e-8);
   assert.equal(enemy.combat.guardProtection, 0);
-  room.combat.release(strong, .1); strong.x = 102;
+  room.combat.release(first, .1); first.x = 102;
   room.tick(.1);
   assert.equal(ally.combat.guardProtection, .35);
+  room.combat.release(second, .2); second.x = 102;
+  room.tick(.2);
+  assert.equal(ally.combat.guardProtection, 0);
 });
 
-test("재생은 가장 다친 아군을 한 번 치유하고 공격 차례를 소비한다", () => {
-  const healer = unit("a", "a", ["regeneration"], { regeneration: 2 });
-  const ally = unit("wounded", "a", [], {}), enemy = unit("enemy", "b", [], {});
+test("재생은 전투 중 아군을 치유하지 않고 공격 차례를 진행한다", () => {
+  const healer = unit("a", "a", ["regeneration"]);
+  const ally = unit("wounded", "a", []), enemy = unit("enemy", "b", []);
   ally.health = 40;
   const room = battle([healer, ally, enemy]);
   assert.ok(room.combat.engage(healer, enemy, 0));
   room.tick(0);
+  assert.equal(healer.support, null);
+  assert.ok(healer.attack);
+  room.tick(.45);
+  assert.equal(ally.health, 40);
+});
+
+test("재생은 전투 밖에서 가장 다친 아군만 한 번 치유한다", () => {
+  const healer = unit("a", "a", ["regeneration"]);
+  const ally = unit("wounded", "a", []), other = unit("other", "a", []);
+  ally.health = 40; other.health = 60;
+  const room = battle([healer, ally, other]);
+  const recovered = ally.health + healer.stats.healing;
+  room.tick(0);
   assert.equal(healer.support.kind, "heal");
   assert.equal(healer.support.targetId, ally.id);
-  assert.equal(healer.attack, null);
   room.tick(.45);
-  assert.equal(ally.health, 64);
+  assert.equal(ally.health, recovered);
+  assert.equal(other.health, 60);
   room.tick(.45);
-  assert.equal(ally.health, 64);
-  assert.equal(enemy.health, 100);
+  assert.equal(ally.health, recovered);
 });
 
-test("분비는 지원 차례 후 아군만 강화하고 중첩·재적용 없이 전투 종료에 해제된다", () => {
-  const source = unit("a", "a", ["secretion"], { secretion: 2 });
-  const ally = unit("ally", "a", ["secretion"], { secretion: 1 }), enemy = unit("enemy", "b", [], {});
-  const room = battle([source, ally, enemy]);
-  room.combat.engage(source, enemy, 0); room.tick(0);
-  assert.equal(source.support.kind, "secretion");
-  room.tick(.45);
-  assert.equal(ally.combat.secretionBonus, 10);
-  assert.equal(combatStrength(ally), 30);
-  assert.equal(enemy.combat.secretionBonus, 0);
-  room.tick(.45);
-  assert.equal(combatStrength(ally), 30);
-  room.combat.release(ally, 1);
-  assert.equal(combatStrength(ally), 20);
-  assert.equal(ally.support, null);
+test("시전자나 대상이 전투에 들어가면 진행 중인 치유를 중단한다", () => {
+  for (const engaged of ["healer", "target"]) {
+    const healer = unit("a", "a", ["regeneration"]);
+    const ally = unit("wounded", "a", []), enemy = unit("enemy", "b", []);
+    ally.health = 40; enemy.x = 102;
+    const room = battle([healer, ally, enemy]);
+    room.tick(0);
+    assert.ok(healer.support);
+    if (engaged === "healer") {
+      enemy.x = 100;
+      room.combat.engage(healer, enemy, .2);
+    } else ally.combat = { id: "other", teams: ["colony:a", "colony:b"], side: 0 };
+    if (engaged === "target") healer.combatDisposition = "peaceful";
+    room.combat.update(healer, .45);
+    assert.equal(healer.support, null);
+    assert.equal(ally.health, 40);
+  }
 });
 
-test("네 종족에서 전투 설계·탄생·강화·저장 복원을 지원한다", () => {
+test("네 종족에서 고정 속성 설계·탄생·저장 복원을 지원하고 강화는 거부한다", () => {
   for (const tribe of ["bean", "spore", "pebble", "spring"]) {
     const colony = { id: 1, ownerId: tribe, tribe, x: 40, y: 40, occupiedCells: new Set(["2,2"]) };
     const environment = { simSeconds: 0, world: { seed: 13, terrain: new Uint8Array(320 * 320).fill(4), hazards: new Uint8Array(320 * 320) },
@@ -118,9 +137,9 @@ test("네 종족에서 전투 설계·탄생·강화·저장 복원을 지원한
     withLab.state.buildings.push({ id: 1, key: "evolution-lab", x: 47, y: 47, health: 100 });
     game.restore(JSON.stringify(withLab));
     const blade = game.snapshot().templates.find(template => template.slots.includes("blade"));
-    game.command({ type: "upgrade-attribute", templateId: blade.id, attributeKey: "blade" });
-    const improved = game.command({ type: "birth", templateId: blade.id });
-    assert.equal(game.agents.find(agent => agent.id === improved.agentId).stats.attackBonus, 15);
+    assert.throws(() => game.command({ type: "upgrade-attribute", templateId: blade.id, attributeKey: "blade" }), /최대/);
+    const child = game.command({ type: "birth", templateId: blade.id });
+    assert.equal(game.agents.find(agent => agent.id === child.agentId).stats.attackBonus, 12);
     const healer = game.agents.find(agent => agent.attributes.regeneration);
     healer.health = 50;
     game.prepare(20); game.tick(1);
@@ -135,14 +154,28 @@ test("네 종족에서 전투 설계·탄생·강화·저장 복원을 지원한
   }
 });
 
-test("재생은 자신의 치유량과 아군 치유량을 구분한다", () => {
-  const healer = unit("self", "a", ["regeneration"], { regeneration: 1 });
-  const enemy = unit("enemy", "b", [], {});
-  healer.health = 40;
-  const room = battle([healer, enemy]);
-  assert.ok(room.combat.engage(healer, enemy, 0));
-  room.tick(0);
-  assert.equal(healer.support.targetId, healer.id);
-  room.tick(.45);
-  assert.equal(healer.health, 50);
+test("이전 저장의 분비 속성과 전투 강화는 제거하고 나머지 속성은 보존한다", () => {
+  const colony = { id: 1, ownerId: "legacy", tribe: "bean", x: 40, y: 40, occupiedCells: new Set(["2,2"]) };
+  const environment = { simSeconds: 0, world: { seed: 13, terrain: new Uint8Array(320 * 320).fill(4), hazards: new Uint8Array(320 * 320) },
+    colonies: [colony], games: new Map(), food: new Map(), foodSpots: new Map() };
+  const game = createGame(environment, colony); environment.games.set(colony.ownerId, game);
+  const saved = JSON.parse(game.save()), agent = saved.state.agents[0], slots = [...agent.slots];
+  saved.state.nestLevel = 4;
+  saved.state.templates.push({ id: 71, name: "기존 설계", slots: ["guard", "secretion"],
+    attributeLevels: { guard: 1, secretion: 4 }, unlockedAttributeLevels: { guard: 1, secretion: 4 } });
+  agent.slots.push("secretion"); agent.attributeLevels.secretion = 4;
+  agent.combat = { id: "legacy", x: agent.x, y: agent.y, teams: ["colony:legacy", "colony:enemy"], side: 0,
+    secretionBonus: 12, secretionActive: true };
+  agent.support = { kind: "secretion", combatId: "legacy", startedAt: 0, hitAt: .45, endsAt: 1.2 };
+  game.restore(JSON.stringify(saved));
+  const restored = game.agents.find(entry => entry.id === agent.id), template = game.snapshot().templates.find(entry => entry.id === 71);
+  assert.deepEqual(restored.slots, slots);
+  assert.equal(Object.hasOwn(restored.attributes, "secretion"), false);
+  assert.equal(Object.hasOwn(restored.stats, "secretionBonus"), false);
+  assert.equal(Object.hasOwn(restored.combat, "secretionBonus"), false);
+  assert.equal(Object.hasOwn(restored.combat, "secretionActive"), false);
+  assert.equal(restored.support, null);
+  assert.deepEqual(template.slots, ["guard"]);
+  assert.equal(Object.hasOwn(template.attributeLevels, "secretion"), false);
+  assert.equal(Object.hasOwn(template.unlockedAttributeLevels, "secretion"), false);
 });

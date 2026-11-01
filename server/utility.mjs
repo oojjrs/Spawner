@@ -1,3 +1,4 @@
+import { CONQUEST_PACING, militaryAgent } from "./conquest-pacing.mjs";
 import { NEST_LEVELS, nestUpgradeCost } from "./nests.mjs";
 import { HARVEST_ATTRIBUTE_KEYS, unitCarryCapacity, unitTravelSpeed, unitTerrainSpeedMultiplier } from "./attributes.mjs";
 import { resourceDefinition, resourceTypeForCell } from "./resources.mjs";
@@ -96,7 +97,7 @@ export function createUtilityAI(context) {
     return first;
   }
 
-  function route(agent, target) {
+  function route(agent, target, supply) {
     const start = indexOf(agent), goal = indexOf(target);
     if (!state.explored.has(goal) || !walkable(target.x, target.y)) return null;
     if (start === goal) return [{ x: agent.x, y: agent.y }];
@@ -105,12 +106,13 @@ export function createUtilityAI(context) {
     push(open, { index: start, cost: 0, priority: distance(agent, target) / heuristicSpeed });
     let expanded = 0;
     const delivery = deliveryCells().some(cell => cell.x === target.x && cell.y === target.y);
-    const interrupted = colonySupply(state, context.tribe).interruption > 0;
+    const interrupted = (supply || colonySupply(state, context.tribe)).interruption > 0;
     let foodSearch = false;
     if (interrupted) for (const food of state.knownFood.values()) {
       if (food.amount > 0 && isFood(resourceType(food)) && distance(food, target) <= agent.stats.vision + 8) { foodSearch = true; break; }
     }
     const budget = interrupted && (target.amount > 0 || delivery || foodSearch) ? 8192 : 2048;
+    const speeds = new Map();
     while (open.length && expanded < budget) {
       const current = pop(open);
       if (current.cost !== costs.get(current.index)) continue;
@@ -122,8 +124,10 @@ export function createUtilityAI(context) {
       }
       expanded++;
       for (const next of neighbors(at(current.index))) {
-        const nextIndex = indexOf(next), seconds = 1 / speed(agent, next, agent.carrying, 0);
-        const damage = hazardAt(next.x, next.y) ? 0.3 * seconds * agent.stats.resistance : 0;
+        const nextIndex = indexOf(next), hazard = hazardAt(next.x, next.y), key = terrainAt(next.x, next.y) * 2 + Number(!!hazard);
+        if (!speeds.has(key)) speeds.set(key, speed(agent, next, agent.carrying, 0));
+        const seconds = 1 / speeds.get(key);
+        const damage = hazard ? 0.3 * seconds * agent.stats.resistance : 0;
         const cost = current.cost + seconds + (1.5 - agent.personality.boldness) * damage * 4 / Math.max(1, agent.health);
         if (cost >= (costs.get(nextIndex) ?? Infinity)) continue;
         costs.set(nextIndex, cost);
@@ -145,10 +149,10 @@ export function createUtilityAI(context) {
     return seconds;
   }
 
-  function homeRoute(agent, source, targets) {
+  function homeRoute(agent, source, targets, supply) {
     const proxy = { ...agent, x: source.x, y: source.y };
     for (const cell of targets.toSorted((first, second) => distance(source, first) - distance(source, second)).slice(0, 4)) {
-      const cells = route(proxy, cell);
+      const cells = route(proxy, cell, supply);
       if (cells) return cells;
     }
     return null;
@@ -301,15 +305,18 @@ export function createUtilityAI(context) {
     return availableWorker(agent) && !agent.carrying;
   }
 
-  function preferredScout(agent, plan) {
+  function preferredScout(agent, plan, supply) {
     if (!availableScout(agent)) return null;
     let preferred = { agent, capacity: scoutCapacity(agent, travelTime(agent, plan.route, 0)) };
-    for (const other of state.agents) {
-      if (other === agent || !availableScout(other)) continue;
+    if (militaryAgent(agent,context.tribe)) return preferred;
+    const scouts = state.agents.filter(other => other !== agent && availableScout(other) && !militaryAgent(other,context.tribe))
+      .sort((first,second) => second.stats.vision-first.stats.vision || String(first.id).localeCompare(String(second.id)))
+      .slice(0,CONQUEST_PACING.preferredScouts);
+    for (const other of scouts) {
       const fastest = unitTravelSpeed(other, 0) * (synergy(other, ["feet", "feet"]) ? 1.75 : 1);
       const upper = scoutCapacity(other, distance(other, plan.target) / Math.max(.01, fastest));
       if (upper < preferred.capacity || upper === preferred.capacity && String(other.id).localeCompare(String(preferred.agent.id)) >= 0) continue;
-      const cells = route(other, plan.target);
+      const cells = route(other, plan.target, supply);
       if (!cells) continue;
       const capacity = scoutCapacity(other, travelTime(other, cells, 0));
       if (capacity > preferred.capacity || capacity === preferred.capacity && String(other.id).localeCompare(String(preferred.agent.id)) < 0) {
@@ -320,13 +327,14 @@ export function createUtilityAI(context) {
   }
 
   function evaluate(agent, retain) {
+    const supply = colonySupply(state, context.tribe);
     const visible = enemies().filter(enemy => enemy.health > 0);
     const safety = assess(agent, visible);
     const capacity = unitCarryCapacity(agent, agent.carryingType) + (synergy(agent, ["strength", "strength"]) ? 4 : 0);
     const routes = new Map(), candidates = [];
     const path = target => {
       const key = indexOf(target);
-      if (!routes.has(key)) routes.set(key, route(agent, target));
+      if (!routes.has(key)) routes.set(key, route(agent, target, supply));
       return routes.get(key);
     };
     const allies = state.agents.filter(ally => ally !== agent && ally.health > 0);
@@ -347,6 +355,7 @@ export function createUtilityAI(context) {
     const needs = { food: .5 + limit(1 - state.evolutionPoints / pointTarget),
       material: carryingMaterial && agent.carrying > 0 ? 1.1 : state.evolutionPoints < 5 ? 0.4 : state.evolutionPoints < 20 ? 0.85 : 1.1,
       information: perAgent < 4 ? 1.5 : perAgent < 8 ? 1 : 0.5, defense: underAttack ? 1.5 : 1 };
+    if (militaryAgent(agent,context.tribe)) { needs.food *= .2; needs.information *= 1.6; needs.defense *= 1.2; }
     const baseline = riskValue(agent, predictedDamage(agent, [{ x: agent.x, y: agent.y }], "wait", visible, agent.carrying, 10));
     const add = (action, target, cells, gains, extra) => {
       if (!cells) return;
@@ -366,15 +375,14 @@ export function createUtilityAI(context) {
       candidate.retention = retain && same && safety.state === "stable" && !agent.retreat ? 3 : 0;
       candidates.push(candidate);
     };
-    const supply = colonySupply(state, context.tribe);
     const searchHabitats = context.resourceHabitat ? (requiredMaterials.length ? requiredMaterials :
       supply.interruption > 0 && context.foodType ? [context.foodType] : []) : [];
-    const home = homeRoute(agent, agent, homeCells());
+    const home = homeRoute(agent, agent, homeCells(), supply);
     const materialSpace = context.materialSpace ? context.materialSpace() : Infinity;
     const storage = context.deliveryCapacity ? context.deliveryCapacity(context.foodType || carryingType) :
       Math.max(materialSpace === Infinity ? 0 : materialSpace, Math.max(0, NEST_LEVELS[state.nestLevel - 1].pointCapacity - state.evolutionPoints));
     const homeTime = home ? travelTime(agent, home, agent.carrying) : Infinity;
-    const delivery = agent.carrying > 0 && (carryingMaterial ? materialSpace > 0 : storage > 0) ? homeRoute(agent, agent, deliveryCells(agent)) : null;
+    const delivery = agent.carrying > 0 && (carryingMaterial ? materialSpace > 0 : storage > 0) ? homeRoute(agent, agent, deliveryCells(agent), supply) : null;
     if (delivery) {
       const unload = agent.mode === "unload" ? Math.max(0.05, agent.unloadReady - state.simSeconds) : 1;
       const deliveryTime = travelTime(agent, delivery, agent.carrying);
@@ -425,7 +433,7 @@ export function createUtilityAI(context) {
         const material = !isFood(type);
         const cells = path(food);
         if (!cells) continue;
-        const back = homeRoute(agent, food, deliveryCells());
+        const back = homeRoute(agent, food, deliveryCells(), supply);
         if (!back) continue;
         const available = Math.max(0, food.amount - reservation(food));
         const capacity = unitCarryCapacity(agent, type) + (synergy(agent, ["strength", "strength"]) ? 4 : 0);
@@ -467,13 +475,17 @@ export function createUtilityAI(context) {
     const foodSearch = supply.interruption > 0 && knownFoods.length && !canDeliver &&
       (assignedForagers.has(agent.id) || agent.attributes?.construction && !candidates.some(candidate => candidate.action === "build"));
     const foodFrontier = foodSearch ? frontier.filter(cell => knownFoods.some(food => distance(cell, food) <= agent.stats.vision + 8)) : [];
+    const roaming = militaryAgent(agent,context.tribe) ? state.simSeconds >= CONQUEST_PACING.neutralConflictAt :
+      agent.attributes?.antenna > 0 && agent.attributes?.feet > 0 && state.simSeconds >= CONQUEST_PACING.guidanceAt;
     const terrain = scoutTerrain();
-    const terrainFrontier = frontier.filter(cell => terrain.has(indexOf(cell)));
-    const foodTerrainFrontier = foodFrontier.filter(cell => terrain.has(indexOf(cell)));
+    const terrainFrontier = roaming ? frontier : frontier.filter(cell => terrain.has(indexOf(cell)));
+    const foodTerrainFrontier = roaming ? foodFrontier : foodFrontier.filter(cell => terrain.has(indexOf(cell)));
     const searchFrontier = foodTerrainFrontier.length ? foodTerrainFrontier : terrainFrontier;
+    const searchOrigins = [...state.knownFood.values()].filter(food => searchHabitats.includes(food.resourceType) && food.amount > 0)
+      .sort((first,second) => distance(agent,first)-distance(agent,second)).slice(0,24);
     const frontierWeight = target => {
       const revisit = agent.visited.has(target.x + "," + target.y) ? 0.8 : 1;
-      const habitat = 1 + 3 * searchHabitats.reduce((best, type) => Math.max(best, context.resourceHabitat(type, target.x, target.y) || 0), 0);
+      const habitat = 1 + 3 * searchOrigins.reduce((best,food) => Math.max(best,Math.max(0,1-distance(target,food)/24)),0);
       return habitat * revisit;
     };
     const reservations = allies.filter(ally => ally.utility?.action === "explore").map(ally => {
@@ -489,14 +501,19 @@ export function createUtilityAI(context) {
       for (let dy = -radius; dy <= radius; dy++) for (let dx = -radius; dx <= radius; dx++) {
         const x = target.x + dx, y = target.y + dy;
         if (x < 0 || y < 0 || x >= size || y >= size || dx * dx + dy * dy > radius * radius || state.explored.has(y * size + x)) continue;
-        const weight = terrain.get(y * size + x) || 0;
+        const weight = terrain.get(y * size + x) || (roaming ? 1 : 0);
         if (!weight) continue;
         if (!reservedAt(x, y, seconds, capacity)) uncovered += weight;
       }
       return uncovered;
     };
     const prioritized = [];
-    const ranked = searchFrontier.map(cell => {
+    const coarseFrontier = searchFrontier.map(cell => ({cell,score:frontierWeight(cell)/Math.max(1,distance(agent,cell)+5)}))
+      .sort((first,second) => second.score-first.score);
+    const budget = CONQUEST_PACING.frontierSamples, localCount = Math.floor(budget/2);
+    const sampled = coarseFrontier.length <= budget ? coarseFrontier : coarseFrontier.slice(0,localCount).concat(
+      Array.from({length:budget-localCount},(_,index) => coarseFrontier[localCount+Math.floor(index*(coarseFrontier.length-localCount)/(budget-localCount))]));
+    const ranked = sampled.map(({cell}) => {
       const seconds = distance(agent, cell) / unitTravelSpeed(agent, agent.carrying) + 5;
       return { cell, gain: uncoveredAt(cell, agent.stats.vision, seconds) * frontierWeight(cell) / seconds };
     }).filter(candidate => candidate.gain > 0).sort((first, second) => second.gain - first.gain);
@@ -523,9 +540,9 @@ export function createUtilityAI(context) {
       if (!life) continue;
       const explorationCapacity = scoutCapacity(agent, seconds - 5);
       const uncovered = uncoveredAt(target, radius, seconds);
-      const markers = state.markers.filter(marker => terrain.has(indexOf(marker)) && !state.explored.has(indexOf(marker)) &&
+      const markers = state.markers.filter(marker => (roaming || terrain.has(indexOf(marker))) && !state.explored.has(indexOf(marker)) &&
         Math.hypot(marker.x - target.x, marker.y - target.y) <= radius &&
-        !reservedAt(marker.x, marker.y, seconds, explorationCapacity)).reduce((sum, marker) => sum + terrain.get(indexOf(marker)), 0);
+        !reservedAt(marker.x, marker.y, seconds, explorationCapacity)).reduce((sum, marker) => sum + (terrain.get(indexOf(marker)) || (roaming ? 1 : 0)), 0);
       if (uncovered > 0) add("explore", { ...target, key: "frontier:" + indexOf(target) }, cells,
         { informationGain: 60 * limit((uncovered + 20 * markers) / (10 * seconds)) *
           frontierWeight(target) * life / tribeLifespan(agent.tribe || context.tribe) }, {});
@@ -579,7 +596,7 @@ export function createUtilityAI(context) {
     const scoutPlans = availableScout(agent) ? candidates.filter(candidate => candidate.action === "explore" &&
       candidate.damage < agent.health * .25).sort((first, second) => second.score - first.score) : [];
     const scoutPlan = scoutPlans[0];
-    const scout = scoutPlan ? preferredScout(agent, scoutPlan) : null;
+    const scout = scoutPlan ? preferredScout(agent, scoutPlan, supply) : null;
     if (scout) {
       if (supply.urgency > 0 && !constructionForagers) assignedForagers = colonyForagers(state, knownFoods, deliveryCells(), new Set([scout.agent.id]));
       if (scout.agent !== agent) {
@@ -591,6 +608,12 @@ export function createUtilityAI(context) {
       }
     }
     let foragePlans = null;
+    if (scout && scout.agent !== agent && !militaryAgent(agent,context.tribe) && safety.state === "stable" && !agent.retreat && !agent.combat) {
+      const remaining = Number.isFinite(agent.bornAt) && Number.isFinite(agent.lifespan) ? agent.bornAt+agent.lifespan-state.simSeconds : Infinity;
+      const harvest = candidates.filter(candidate => (candidate.action === "collect" && candidate.foodGain > 0 || candidate.action === "return" && agent.carrying > 0) &&
+        candidate.damage < agent.health*.25 && candidate.deliverySeconds+5 < remaining);
+      if (harvest.length) foragePlans = harvest;
+    }
     if (agent.attributes?.construction > 0 && safety.state === "stable" && !agent.retreat && !agent.combat) {
       const builds = candidates.filter(candidate => candidate.action === "build" && candidate.damage < agent.health * .25);
       if (builds.length) foragePlans = builds;
@@ -642,6 +665,10 @@ export function createUtilityAI(context) {
       const transport = candidates.filter(candidate => candidate.action === "supply" && candidate.damage < agent.health * .25);
       if (transport.length) foragePlans = transport;
     }
+    if (militaryAgent(agent,context.tribe) && safety.state === "stable" && !agent.retreat && !agent.combat) {
+      const battles = candidates.filter(candidate => candidate.action === "fight" && candidate.damage < agent.health*.5);
+      if (battles.length) foragePlans = battles;
+    }
     const viable = candidates.filter(candidate => candidate.decisionDamage < agent.health * .85);
     let allowed = viable.length ? viable : candidates;
     if (agent.retreat || safety.state === "critical") {
@@ -661,7 +688,12 @@ export function createUtilityAI(context) {
       const recovery = allowed.filter(candidate => candidate.action === "recover");
       if (agent.health < agent.stats.health * .6 && recovery.length && safety.damage < .01) allowed = recovery;
     }
-    if (foragePlans && safety.state === "stable" && !agent.retreat) allowed = allowed.filter(candidate => foragePlans.includes(candidate));
+    const continuing = retain && safety.state === "stable" && !agent.retreat &&
+      ["collect", "return"].includes(agent.utility?.action) ? allowed.filter(candidate =>
+        candidate.action === agent.utility.action && candidate.target.key === agent.utility.target.key &&
+        candidate.damage < agent.health * .25) : [];
+    if (continuing.length) allowed = continuing;
+    else if (foragePlans && safety.state === "stable" && !agent.retreat) allowed = allowed.filter(candidate => foragePlans.includes(candidate));
     else if (scout?.agent === agent && safety.state === "stable" && !agent.retreat && !underAttack && !allocation?.ids.has(agent.id) &&
       (supply.urgency <= 0 || !assignedForagers.has(agent.id)) && allies.some(availableWorker) &&
       !allowed.some(candidate => candidate.action === "supply" && candidate.score > scoutPlan.score + 3)) {

@@ -93,11 +93,29 @@ export function populateFormedResources(world) {
     if(h.water[index]||terrain[index]===2||terrain[index]===10)continue;
     const slope=h.slope[index],wetness=fields.topographicWetness[index],hand=fields.drainageHeight[index];
     const swamp=wetness*Math.exp(-hand/12)/(1+slope*30);swampScore[index]=swamp;
-    if(terrain[index]===4&&wetness>.78&&slope<.035&&hand<8&&swamp>.54&&h.bankGravel[index]<.08){terrain[index]=9;continue;}
+    if(!h.profile.swampFraction&&terrain[index]===4&&wetness>.78&&slope<.035&&hand<8&&swamp>.54&&h.bankGravel[index]<.08){terrain[index]=9;continue;}
     const score=1/(1+Math.exp(-(-1.1+fields.vegetation[index]*1.1+fields.soilMoisture[index]*.7+fields.shelter[index]*.5-slope*2-Math.max(0,h.ground[index]-700)*.0008)));
     forestScore[index]=score;
-    if(slope<.8&&terrain[index]!==8&&score>.62&&h.bankGravel[index]<.08){h.forestMask[index]=1;if(terrain[index]===4)terrain[index]=5;}
-    else if(terrain[index]===4&&fields.soilMoisture[index]<.47)terrain[index]=3;
+    if(!h.profile.forestFraction&&slope<.8&&terrain[index]!==8&&score>.62&&h.bankGravel[index]<.08){h.forestMask[index]=1;if(terrain[index]===4)terrain[index]=5;}
+    else if(!h.profile.dryLandFraction&&terrain[index]===4&&fields.soilMoisture[index]<.47)terrain[index]=3;
+  }
+  if(h.profile.forestFraction) {
+    const lowlands=[],wetlands=[];let land=0;
+    for(let index=0;index<length;index++) {
+      if(h.water[index])continue;land++;
+      if(terrain[index]!==4)continue;
+      lowlands.push(index);
+      if(fields.topographicWetness[index]>.78&&h.slope[index]<.035&&fields.drainageHeight[index]<8&&swampScore[index]>.54&&h.bankGravel[index]<.08)wetlands.push(index);
+    }
+    wetlands.sort((a,b)=>swampScore[b]-swampScore[a]||a-b);
+    for(const index of wetlands.slice(0,Math.round(land*h.profile.swampFraction)))terrain[index]=9;
+    const forests=lowlands.filter(index=>terrain[index]===4&&h.slope[index]<.8&&h.bankGravel[index]<.08);
+    forests.sort((a,b)=>forestScore[b]-forestScore[a]||a-b);
+    for(const index of forests.slice(0,Math.round(land*h.profile.forestFraction))){h.forestMask[index]=1;terrain[index]=5;}
+    const dry=lowlands.filter(index=>terrain[index]===4);
+    const dryness=index=>1-fields.soilMoisture[index]+fields.sandySoil[index]*.2+fields.exposure[index]*.1;
+    dry.sort((a,b)=>dryness(b)-dryness(a)||a-b);
+    for(const index of dry.slice(0,Math.round(land*h.profile.dryLandFraction)))terrain[index]=3;
   }
   for(let index=0;index<length;index++){
     const x=index%size,y=Math.floor(index/size);let canopy=0,count=0;

@@ -20,14 +20,14 @@ test("기획서의 자원 원화·운반물과 실행 참조가 일치하고 삭
     const aliases = [key, key === "tree" ? "wood" : key === "honey-mushrooms" ? "basic-mushroom" : key];
     const row = aliases.map(alias => design.match(new RegExp('<tr data-resource="' + alias + '"[^>]*>[^]*?</tr>'))).find(Boolean);
     assert.ok(row, key);
-    const sources = [...row[0].matchAll(/<img[^>]+src="([^"]+)"/g)].map(match => match[1]);
-    assert.equal(["meat", "carapace"].includes(key) ? corpseImage : definition.image, sources[0], key + " original");
+    const sources = [...row[0].matchAll(/<img[^>]+data-original-src="([^"]+)"/g)].map(match => match[1]);
+    assert.equal(["nutrients"].includes(key) ? corpseImage : definition.image, sources[0], key + " original");
     assert.ok(existsSync(sources[0]));
     assert.equal(definition.carryImage, sources[1], key + " carry");
     assert.ok(existsSync(definition.image));
     assert.ok(existsSync(definition.carryImage));
   }
-  for (const key of ["meat", "carapace", "iron-ore", "copper-ore", "quartz"]) {
+  for (const key of ["nutrients", "iron-ore", "copper-ore", "quartz"]) {
     assert.ok(RESOURCE_HARVEST_ANIMATIONS.every(animation => animation.resourceType !== key));
   }
   for (const animation of RESOURCE_HARVEST_ANIMATIONS) {
@@ -50,7 +50,7 @@ test("살아 있는 목재 나무는 스냅샷마다 유지하고 소진한 나�
     updateForestRegion: (x, y) => changed.push([x, y]),
     food: [{ x: 10, y: 20, resourceType: "tree", amount: 2 },
       { x: 11, y: 20, resourceType: "clay", amount: 12 },
-      { x: 12, y: 20, kind: "corpse", resourceType: "meat", amount: 4 }] });
+      { x: 12, y: 20, kind: "corpse", resourceType: "nutrients", amount: 4 }] });
   runInContext(source.match(/^    function forestTreeRegions\([^]*?^    }/m)[0], context);
   runInContext("{" + sync + "}", context);
   assert.equal(forest.cells.has("10,20"), true);
@@ -86,10 +86,10 @@ test("목재·자갈·이슬은 승인된 루프를 재생하고 정지하면 �
 function fixture(resourceType, amount, carapaceAmount) {
   const tribe = resourceType === "tree" ? "spore" : resourceType === "dew" ? "spring" : "bean";
   const colony = { id: 1, ownerId: "integration", tribe, x: 40, y: 40, occupiedCells: new Set(["2,2"]) };
-  const key = resourceType === "meat" ? "corpse:beetle" : "46,42";
+  const key = resourceType === "nutrients" ? "corpse:beetle" : "46,42";
   const cell = { x: 46, y: 42, resourceType, amount, initialAmount: amount, carapaceAmount,
-    ...(resourceType === "meat" ? { key, agentId: "beetle" } : {}),
-    kind: resourceType === "meat" ? "corpse" : "resource", terrain: resourceType === "tree" ? "forest" : "grassland" };
+    ...(resourceType === "nutrients" ? { key, agentId: "beetle" } : {}),
+    kind: resourceType === "nutrients" ? "corpse" : "resource", terrain: resourceType === "tree" ? "forest" : "grassland" };
   const environment = { simSeconds: 120, world: { seed: 13, generationVersion: 11,
     terrain: new Uint8Array(320 * 320).fill(resourceType === "tree" ? 5 : 4), hazards: new Uint8Array(320 * 320) },
     colonies: [colony], games: new Map(), food: new Map([[key, cell]]), foodSpots: new Map() };
@@ -98,7 +98,7 @@ function fixture(resourceType, amount, carapaceAmount) {
   environment.games.set(colony.ownerId, game);
   const saved = JSON.parse(game.save());
   saved.state.agents.splice(1);
-  Object.assign(saved.state.agents[0], { x: 46, y: 42, renderFromX: 46, renderFromY: 42, slots: resourceType === "meat" ? ["butchery"] : resourceType === "carapace" ? ["piercing"] : ["strength"],
+  Object.assign(saved.state.agents[0], { x: 46, y: 42, renderFromX: 46, renderFromY: 42, slots: resourceType === "nutrients" ? ["butchery"] : ["strength"],
     carrying: 0, carryingType: null, birth: null, bornAt: 120, mode: "approach", moveStartedAt: 0,
     moveDuration: 0, moveBudget: 0, harvestResult: null, decisionPending: null, nextDecisionAt: 1000,
     utility: { action: "collect", target: { x: 46, y: 42, key }, route: [{ x: 46, y: 42 }], plannedCargo: 2 } });
@@ -130,27 +130,16 @@ test("목재·이슬을 실제 수확하고 소진한 나무는 시야 정보와
   }
 });
 
-test("딱정벌레의 양분과 갑각을 따로 회수하며 사체 모습을 유지한다", () => {
-  const f = fixture("meat", 1, 4);
+test("딱정벌레 사체는 양분만 회수하고 소진하면 제거한다", () => {
+  const f = fixture("nutrients", 1, 4);
   advance(f, 0); advance(f, 1); advance(f, 2.501);
-  assert.equal(f.agent.carryingType, "meat");
+  assert.equal(f.agent.carryingType, "nutrients");
   assert.equal(f.agent.carrying, 1);
-  assert.equal(f.cell.resourceType, "carapace");
+  assert.equal(f.cell.resourceType, "nutrients");
   assert.equal(f.cell.kind, "corpse");
-  assert.equal(f.cell.amount, 4);
-  const shell = fixture("carapace", 1, 0);
-  advance(shell, 0); advance(shell, 1); advance(shell, 3.001);
-  assert.equal(shell.agent.carryingType, "carapace");
-  assert.equal(shell.agent.carrying, 1);
-  const saved = JSON.parse(shell.game.save());
-  Object.assign(saved.state.agents[0], { x: 40, y: 40, renderFromX: 40, renderFromY: 40,
-    mode: "unload", unloadReady: shell.environment.simSeconds, moveDuration: 0, returnPath: [],
-    decisionPending: null, nextDecisionAt: 1000,
-    utility: { action: "return", target: { x: 40, y: 40, key: "home" }, route: [{ x: 40, y: 40 }] } });
-  shell.game.restore(JSON.stringify(saved));
-  advance(shell, 3.002);
-  assert.equal(shell.game.snapshot().resourceInventory.carapace, 1);
-  assert.equal(shell.game.snapshot().evolutionPoints, 0);
+  assert.equal(f.cell.amount, 0);
+  assert.equal(f.environment.food.has(f.cell.key), false);
+  assert.equal(f.game.snapshot().resourceInventory.carapace, undefined);
 });
 
 test("이전 저장의 목재·이슬을 지형 이동 없이 추가하고 기존 노드와 소진 기록을 보존한다", () => {
@@ -173,7 +162,7 @@ test("소진 나무 위치를 저장·복원하고 같은 칸이 사체로 바�
   const cell = [...room.food.values()].find(cell => cell.resourceType === "tree");
   const index = cell.y * 320 + cell.x;
   room.world.depletedTrees.add(index);
-  room.food.set(cell.x + "," + cell.y, { ...cell, kind: "corpse", resourceType: "meat", amount: 4 });
+  room.food.set(cell.x + "," + cell.y, { ...cell, kind: "corpse", resourceType: "nutrients", amount: 4 });
   const restored = restoreRoom(saveRoom(room));
   assert.ok(restored.world.depletedTrees.has(index));
   assert.equal(restored.world.treeCells[index], 0);
@@ -189,4 +178,37 @@ test("기획서 미리보기와 실행 맵이 같은 최신 생성 로직을 사
     [...world.terrain], [...world.hazards], world.camps, world.food, world.resources, world.resourceAreas, world.economy
   ])).digest("hex");
   assert.equal(hash(runtime), hash(preview));
+});
+
+test("이전 저장의 고기는 양분으로 옮기고 갑각 재고·운반·사체는 제거한다", () => {
+  const f = fixture("nutrients", 4, 0);
+  const saved = JSON.parse(f.game.save());
+  saved.state.resourceInventory = { meat: 3, carapace: 8 };
+  saved.state.resourceStores = [{ id: "nest:1", kind: "nest", x: 40, y: 40,
+    inventory: { meat: 3, carapace: 8 } }];
+  Object.assign(saved.state.agents[0], { carryingType: "meat", carrying: 2,
+    foodDelivery: { resourceType: "meat", amount: 2, startedAt: 120, arrivesAt: 121 } });
+  f.cell.resourceType = "meat";
+  f.cell.carapaceAmount = 4;
+  f.environment.food.set("retired-shell", { x: 47, y: 42, kind: "corpse", resourceType: "carapace",
+    amount: 4, initialAmount: 4, diedAt: 120, decaysAt: 420 });
+  f.game.restore(JSON.stringify(saved));
+  const snapshot = f.game.snapshot();
+  assert.equal(snapshot.resourceInventory.nutrients, 3);
+  assert.equal(snapshot.resourceInventory.meat, undefined);
+  assert.equal(snapshot.resourceInventory.carapace, undefined);
+  assert.equal(f.game.agents[0].carryingType, "nutrients");
+  assert.equal(f.game.agents[0].carrying, 2);
+  assert.equal(f.game.agents[0].foodDelivery.resourceType, "nutrients");
+  assert.equal(f.cell.resourceType, "nutrients");
+  assert.equal(Object.hasOwn(f.cell, "carapaceAmount"), false);
+  assert.equal(f.environment.food.has("retired-shell"), false);
+  assert.equal(resourceDefinition("meat"), undefined);
+  assert.equal(resourceDefinition("carapace"), undefined);
+  assert.equal(resourceDefinition("nutrients").image, "DesignAssets/Foods/food-nutrients.png");
+  const armor = JSON.parse(f.game.save());
+  Object.assign(armor.state.agents[0], { carryingType: "carapace", carrying: 2, foodDelivery: null });
+  f.game.restore(JSON.stringify(armor));
+  assert.equal(f.game.agents[0].carrying, 0);
+  assert.equal(f.game.agents[0].carryingType, null);
 });

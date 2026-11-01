@@ -22,6 +22,29 @@
 <section class="ledger" aria-label="타격 기록"><div class="ledger-head"><strong>타격 기록</strong><span>받은 피해 → 남은 체력</span></div><div class="scroll"><table><thead><tr><th>타격</th><th>구분</th><th>공격자</th><th>교전 시작 전투력</th><th>왼쪽</th><th>오른쪽</th><th>시각</th></tr></thead><tbody id="history"></tbody></table></div></section>
 <footer><span>게임 전투 모듈 직접 사용 · 전체 23종</span><span>조절한 수치는 이 대결에만 적용</span></footer></main><script>(() => {
 const modules = Object.create(null);
+modules["server/unit-stats.mjs"] = (() => {
+const TRIBE_UNIT_STATS = Object.freeze({
+  bean: Object.freeze({ speed: .5, loadedSpeed: .4, lifespan: 360, lifespanWithAttribute: 480 }),
+  spore: Object.freeze({ speed: .5, loadedSpeed: .4, lifespan: 330, lifespanWithAttribute: 450 }),
+  pebble: Object.freeze({ speed: .35, loadedSpeed: .3, lifespan: 480, lifespanWithAttribute: 660 }),
+  spring: Object.freeze({ speed: .9, loadedSpeed: .275, lifespan: 300, lifespanWithAttribute: 420 })
+});
+
+const ATTRIBUTE_STAT_VALUES = Object.freeze({
+  movementBonus: .3,
+  movementMultiplier: .8,
+  capacity: 2,
+  vision: 6,
+  attackBonus: 12,
+  armorPenetration: .5,
+  damageReduction: .45,
+  guardProtection: .35,
+  regeneration: 2,
+  healing: 20
+});
+
+return { TRIBE_UNIT_STATS, ATTRIBUTE_STAT_VALUES };
+})();
 modules["server/encounter-types.mjs"] = (() => {
 const ENCOUNTER_TYPES = Object.freeze([
   {
@@ -1029,14 +1052,28 @@ const CREATURE_ATTACK_TIMINGS = Object.freeze({
 return { CREATURE_ATTACK_TIMINGS };
 })();
 modules["server/lifespan.mjs"] = (() => {
-const AGENT_LIFESPAN = 3 * 60;
+const { TRIBE_UNIT_STATS } = modules["server/unit-stats.mjs"];
+
+const AGENT_LIFESPAN = TRIBE_UNIT_STATS.bean.lifespan;
 const AGENT_DEATH_WARNING = 60;
-const CORPSE_LIFETIME = 5 * 60;
+const CORPSE_LIFETIME = 300;
+
+function tribeLifespan(tribe) {
+  return (TRIBE_UNIT_STATS[tribe] || TRIBE_UNIT_STATS.bean).lifespan;
+}
+
+function corpseRecoveryAmount(cost, tribe) {
+  return Math.floor(Math.max(0, cost) * (["pebble", "spring"].includes(tribe) ? 7 : 2) / 10);
+}
 
 function placeCorpse(food, corpse) {
+  corpse.resourceType = "nutrients";
+  delete corpse.carapaceAmount;
+  corpse.amount = Math.floor(Math.max(0, corpse.amount));
   const position = corpse.x + "," + corpse.y;
   corpse.id = "corpse:" + corpse.agentId;
   if (!Number.isFinite(corpse.initialAmount)) corpse.initialAmount = Math.max(0, corpse.amount);
+  corpse.initialAmount = Math.floor(corpse.initialAmount);
   corpse.key = food.has(position) ? corpse.id : position;
   food.set(corpse.key, corpse);
   return corpse;
@@ -1045,14 +1082,19 @@ function placeCorpse(food, corpse) {
 function expireCorpses(food, simSeconds) {
   for (const [key, cell] of food) {
     if (cell.kind !== "corpse") continue;
+    if (cell.resourceType === "carapace") { food.delete(key); continue; }
+    if (!cell.resourceType || cell.resourceType === "meat") cell.resourceType = "nutrients";
+    delete cell.carapaceAmount;
+    cell.amount = Math.floor(Math.max(0, cell.amount));
     if (!Number.isFinite(cell.diedAt)) cell.diedAt = simSeconds;
     if (!Number.isFinite(cell.decaysAt) || cell.decaysAt < cell.diedAt + CORPSE_LIFETIME) cell.decaysAt = cell.diedAt + CORPSE_LIFETIME;
     if (!Number.isFinite(cell.initialAmount)) cell.initialAmount = Math.max(0, cell.amount);
-    if (cell.amount <= 0 || simSeconds >= cell.decaysAt) food.delete(key);
+    cell.initialAmount = Math.floor(cell.initialAmount);
+    if (cell.amount <= 0 && cell.initialAmount > 0 || simSeconds >= cell.decaysAt) food.delete(key);
   }
 }
 
-return { AGENT_LIFESPAN, AGENT_DEATH_WARNING, CORPSE_LIFETIME, placeCorpse, expireCorpses };
+return { AGENT_LIFESPAN, AGENT_DEATH_WARNING, CORPSE_LIFETIME, tribeLifespan, corpseRecoveryAmount, placeCorpse, expireCorpses };
 })();
 modules["server/combat-stats.mjs"] = (() => {
 const COMBAT_BASE_DAMAGE = 15;
@@ -1120,42 +1162,66 @@ function migrateCombatStats(agent) {
 return { COMBAT_BASE_DAMAGE, COMBAT_STRENGTH_SCALE, COMBAT_MAX_INJURY_PENALTY, UNIT_MAX_HEALTH, UNIT_COMBAT_STATS, unitCombatStats, combatInjuryPenalty, combatStrength, combatDamage, migrateCombatStats };
 })();
 modules["server/attributes.mjs"] = (() => {
-const { AGENT_LIFESPAN } = modules["server/lifespan.mjs"];
+const { CONQUEST_PACING } = modules["server/conquest-pacing.mjs"];
+const { TRIBE_UNIT_STATS, ATTRIBUTE_STAT_VALUES } = modules["server/unit-stats.mjs"];
+const { tribeTerrainSpeedMultiplier } = modules["server/tribe-environment.mjs"];
 const { unitCombatStats } = modules["server/combat-stats.mjs"];
 
 const ATTRIBUTES = [
-  { key: "antenna", name: "감지", color: "#b2bffa", effect: "시야 반경 +2칸", description: "군락과 공유하는 실제 시야를 넓힙니다.", bonus: 2, stat: "시야 반경", unit: "칸" },
-  { key: "strength", name: "채집량 증가", color: "#e6a79c", effect: "채집량 +1개", description: "한 번에 채집해 운반하는 자원의 양이 기본 1개에서 2개로 늘어납니다.", bonus: 1, stat: "채집량", unit: "개" },
-  { key: "butchery", name: "양분 회수", color: "#b2dce6", effect: "양분·갑각 채집 허용", description: "생물이 남긴 양분과 갑각을 모아 운반합니다. 강화할 때마다 채집 시간이 15%씩 줄어듭니다.", kind: "harvest", harvests: ["meat", "carapace"] },
-  { key: "lifespan", name: "수명", color: "#d8cd88", effect: "수명 +2분", description: "기본 수명 3분에 2분을 더해 5분 동안 살아갑니다.", bonus: 2, stat: "수명", unit: "분" },
-  { key: "feet", name: "이속 증가", color: "#8cd2bb", effect: "이동 속도 +0.3칸/초", description: "탐색과 왕복 이동을 빠르게 합니다.", bonus: 0.3, stat: "이동 속도", unit: "칸/초" },
-  { key: "botany", name: "식물 채집", color: "#9cce8a", effect: "목재·풀섬유 채집 허용", description: "목재와 풀섬유를 채집합니다. 강화할 때마다 채집 시간이 15%씩 줄어듭니다.", kind: "harvest", harvests: ["tree", "grass-fiber"] },
-  { key: "excavation", name: "토사 채집", color: "#d4b48a", effect: "비옥토·모래·자갈 채집 허용", description: "흙과 모래, 자갈을 채집합니다. 강화할 때마다 채집 시간이 15%씩 줄어듭니다.", kind: "harvest", harvests: ["clay", "sand", "pebbles"] },
-  { key: "condensation", name: "이슬 채집", color: "#9ad6df", effect: "이슬방울 채집 허용", description: "풀에 맺힌 이슬방울을 채집합니다. 강화할 때마다 채집 시간이 15%씩 줄어듭니다.", kind: "harvest", harvests: ["dew"] },
-  { key: "mining", name: "광물 채집", color: "#b6bdcf", effect: "철광석·구리광석·수정 채집 허용", description: "철광석과 구리광석, 수정을 채집합니다. 강화할 때마다 채집 시간이 15%씩 줄어듭니다.", kind: "harvest", harvests: ["iron-ore", "copper-ore", "quartz"] },
-  { key: "construction", name: "건설", color: "#d7bd80", effect: "개체의 건물 변신 허용", description: "지정한 장소로 이동해 몸을 건물로 바꿉니다. 강화할 때마다 변신 시간이 15%씩 줄어듭니다.", kind: "construction" }
+  { key: "antenna", minNestLevel: 1, name: "감지", color: "#b2bffa", effect: "시야 반경 +3칸", description: "유닛의 시야 반경이 늘어납니다.", bonus: 3, bonuses: [0, 3, 4, 6, 8], stat: "시야 반경", unit: "칸" },
+  { key: "strength", minNestLevel: 1, name: "채집량 증가", color: "#e6a79c", effect: "채집량 +1개", description: "한 번에 채집해 운반하는 자원의 양이 1개 늘어납니다.", bonus: 1, stat: "채집량", unit: "개" },
+  { key: "butchery", minNestLevel: 2, nativeTribe: "spring", name: "흡수", color: "#b2dce6", effect: "", description: "", kind: "harvest", harvests: ["dew", "nutrients"] },
+  { key: "lifespan", minNestLevel: 2, name: "수명", color: "#d8cd88", effect: "수명 +2분 · 몽돌 +3분", description: "유닛의 수명이 늘어납니다.", bonus: 2, stat: "수명", unit: "분" },
+  { key: "feet", minNestLevel: 1, name: "이속 증가", color: "#8cd2bb", effect: "이동 속도 +0.3칸/초", description: "탐색과 왕복 이동을 빠르게 합니다.", bonus: 0.3, stat: "이동 속도", unit: "칸/초" },
+  { key: "excavation", minNestLevel: 2, nativeTribe: "bean", name: "굴착", color: "#d4b48a", effect: "", description: "", kind: "harvest", harvests: ["clay", "sand"] },
+  { key: "construction", minNestLevel: 1, name: "변태", color: "#d7bd80", effect: "건물 변태 허용 · 이동 속도 −20%", description: "종족이 정한 장소에서 몸을 눌러 펼치고 건물로 성장합니다. 이 속성이 있는 개체만 변태할 수 있으며, 강화할수록 변태 시간과 이동 감속이 줄어듭니다.", kind: "construction" },
+  { key: "blade", minNestLevel: 2, nativeTribe: "spore", name: "칼날", color: "#d5d88e", effect: "공격 전투력 +12", description: "공격할 때의 전투력이 단계별로 12·15·18·20 증가합니다.", kind: "combat", bonus: 12, bonuses: [0, 12, 15, 18, 20], stat: "공격 전투력", unit: "", harvests: ["tree", "grass-fiber"] },
+  { key: "piercing", minNestLevel: 2, nativeTribe: "pebble", name: "관통", color: "#b9dca1", effect: "갑피 관통 +50%", description: "상대 갑피의 피해 감소를 단계별로 50·65·80·100% 무시합니다. 엄호 효과는 관통하지 않습니다.", kind: "combat", bonus: 50, bonuses: [0, 50, 65, 80, 100], stat: "갑피 관통", unit: "%", harvests: ["pebbles", "iron-ore", "copper-ore", "quartz"] },
+  { key: "carapace", minNestLevel: 3, name: "갑피", color: "#c8bd8c", effect: "받는 피해 −45%", description: "받는 전투 피해가 단계별로 45·50·55·60% 감소합니다.", kind: "combat", bonus: 45, bonuses: [0, 45, 50, 55, 60], stat: "피해 감소", unit: "%" },
+  { key: "guard", minNestLevel: 4, name: "엄호", color: "#a5cba4", effect: "아군 받는 피해 −35%", description: "같은 전투 칸의 자신과 아군이 받는 피해를 단계별로 35·38·42·45% 줄입니다. 여러 엄호 중 가장 높은 효과만 적용합니다.", kind: "combat", bonus: 35, bonuses: [0, 35, 38, 42, 45], stat: "아군 피해 감소", unit: "%" },
+  { key: "regeneration", minNestLevel: 3, name: "재생", color: "#b8dca4", effect: "전투 밖 아군 체력 +20 · 자기 회복 +2/초", description: "전투 밖에서 같은 칸의 가장 다친 아군을 자동으로 치유하며, 자신의 체력도 회복합니다.", kind: "combat", bonus: 20, bonuses: [0, 20, 24, 28, 32], stat: "아군 치유량", unit: "" }
 ];
 
-const ATTRIBUTE_COMBINATIONS = [
+const attributeKeys = new Set(ATTRIBUTES.map(attribute => attribute.key));
+
+function attributeUnlockLevel(attributeKey, tribe) {
+  const attribute = ATTRIBUTES.find(candidate => candidate.key === attributeKey);
+  return attribute ? attribute.nativeTribe && attribute.nativeTribe === tribe ? 1 : attribute.minNestLevel : null;
+}
+
+function isAttributeUnlocked(attributeKey, nestLevel, tribe) {
+  const level = attributeUnlockLevel(attributeKey, tribe);
+  return level !== null && Number.isInteger(nestLevel) && nestLevel >= level;
+}
+
+const HARVEST_ATTRIBUTE_KEYS = Object.freeze(ATTRIBUTES.filter(attribute => attribute.harvests?.length).map(attribute => attribute.key));
+
+const COMBAT_ATTRIBUTE_KEYS = Object.freeze(ATTRIBUTES.filter(attribute => attribute.kind === "combat").map(attribute => attribute.key));
+
+const ATTRIBUTE_SYNERGIES_ENABLED = false;
+
+const ATTRIBUTE_COMBINATIONS = ATTRIBUTE_SYNERGIES_ENABLED ? [
   { keys: ["strength", "strength"], attributeLevels: { strength: 2 }, kind: "upgrade", requirement: "채집량 증가 Lv.2", name: "과적", description: "기본 운반량을 넘겨 자원 4개를 추가로 적재합니다. 초과 적재 중 이동 속도는 20% 감소합니다." },
   { keys: ["strength", "feet"], name: "적재 가속", description: "적재율에 비례해 이동 속도가 최대 50% 증가합니다." },
-  { keys: ["strength", "antenna"], name: "맥 짚기", description: "현장 준비 후 먹이 2개를 즉시 담습니다. 같은 먹이 더미에 개체별 30초 간격으로 발동합니다." },
+  { keys: ["strength", "antenna"], name: "맥 짚기", description: "현장 준비 후 자원 2개를 즉시 담습니다. 같은 자원 지점에 개체별 30초 간격으로 발동합니다." },
   { keys: ["feet", "feet"], attributeLevels: { feet: 2 }, kind: "upgrade", requirement: "이속 증가 Lv.2", name: "질주", description: "직선으로 4칸 이동하면 이동 속도가 75% 증가합니다. 정지하거나 방향을 바꾸면 해제됩니다." },
   { keys: ["feet", "antenna"], name: "탐색 파동", description: "8칸 이동할 때마다 1초간 시야 반경이 4칸 넓어집니다." },
   { keys: ["antenna", "antenna"], attributeLevels: { antenna: 2 }, kind: "upgrade", requirement: "감지 Lv.2", name: "미지 감지", description: "반경 18칸 안개 속 미확인 대상에 느낌표를 표시합니다. 정체와 수량은 실제 시야로 확인합니다." }
-];
+] : [];
+
+const ATTRIBUTE_MIGRATIONS = Object.freeze({ arms: "strength", botany: "blade", mining: "piercing", condensation: "butchery" });
 
 function migrateAttributeSlots(slots) {
-  return [...new Set((Array.isArray(slots) ? slots : []).map(key => key === "arms" ? "strength" : key)
+  return [...new Set((Array.isArray(slots) ? slots : []).map(key => Object.hasOwn(ATTRIBUTE_MIGRATIONS, key) ? ATTRIBUTE_MIGRATIONS[key] : key)
     .filter(key => ATTRIBUTES.some(attribute => attribute.key === key)))];
 }
 
 function attributeLevelLimit(nestLevel) {
-  return Number.isInteger(nestLevel) ? Math.max(1, Math.min(4, nestLevel)) : 1;
+  return 1;
 }
 
 function migrateAttributeLevels(slots, levels, nestLevel) {
-  const limit = nestLevel === undefined ? 4 : attributeLevelLimit(nestLevel);
+  const limit = attributeLevelLimit(nestLevel);
   const existing = levels && typeof levels === "object" && !Array.isArray(levels) ? levels : null;
   const legacy = Object.create(null);
   for (const slot of Array.isArray(slots) ? slots : []) {
@@ -1163,25 +1229,34 @@ function migrateAttributeLevels(slots, levels, nestLevel) {
     legacy[key] = (legacy[key] || 0) + 1;
   }
   return Object.fromEntries(migrateAttributeSlots(slots).map(key => {
-    const value = existing && Object.hasOwn(existing, key) ? existing[key] : legacy[key];
-    return [key, Math.max(1, Math.min(limit, Number.isInteger(value) ? value : 1))];
+    const sources = [key, ...Object.keys(ATTRIBUTE_MIGRATIONS).filter(source => ATTRIBUTE_MIGRATIONS[source] === key)];
+    const explicit = sources.filter(source => existing && Object.hasOwn(existing, source));
+    const values = explicit.length ? explicit.map(source => Number.isInteger(existing[source]) ? existing[source] : 1) :
+      sources.map(source => legacy[source] || 1);
+    return [key, Math.max(1, Math.min(limit, Math.max(...values)))];
   }));
 }
 
 function attributeCounts(slots, levels) {
   const counts = Object.fromEntries(ATTRIBUTES.map(attribute => [attribute.key, 0]));
+  const migrated = migrateAttributeLevels(migrateAttributeSlots(slots), levels);
   for (const key of migrateAttributeSlots(slots)) {
-    const value = levels?.[key];
+    const value = migrated[key];
     counts[key] = Number.isInteger(value) ? Math.max(1, Math.min(4, value)) : 1;
   }
   return counts;
 }
 
 function hasSynergy(counts, keys) {
-  if (keys.some(key => !ATTRIBUTES.some(attribute => attribute.key === key))) return false;
-  const required = {};
-  for (const key of keys) required[key] = (required[key] || 0) + 1;
-  return Object.entries(required).every(([key, level]) => (counts[key] || 0) >= level);
+  if (!ATTRIBUTE_SYNERGIES_ENABLED) return false;
+  for (let index = 0; index < keys.length; index++) {
+    const key = keys[index];
+    if (!attributeKeys.has(key)) return false;
+    let level = 1;
+    for (let previous = 0; previous < index; previous++) if (keys[previous] === key) level++;
+    if (!((counts[key] || 0) >= level)) return false;
+  }
+  return true;
 }
 
 const attributeUpgradeMaterials = {
@@ -1190,26 +1265,27 @@ const attributeUpgradeMaterials = {
   butchery: { clay: 6, dew: 4 },
   lifespan: { dew: 6, "grass-fiber": 4 },
   feet: { tree: 4, "grass-fiber": 6 },
-  botany: { pebbles: 4, "grass-fiber": 4 },
   excavation: { tree: 4, pebbles: 6 },
-  condensation: { clay: 4, "grass-fiber": 4 },
-  mining: { tree: 6, pebbles: 6 },
-  construction: { tree: 8, clay: 6 }
+  construction: { tree: 8, clay: 6 },
+  blade: { tree: 6, "grass-fiber": 6 },
+  piercing: { tree: 6, pebbles: 6 },
+  carapace: { pebbles: 8, clay: 6 },
+  guard: { tree: 6, clay: 6 },
+  regeneration: { dew: 8, "grass-fiber": 6 }
 };
 
 function attributeUpgradeCost(attributeKey, targetLevel) {
   const base = Object.hasOwn(attributeUpgradeMaterials, attributeKey) ? attributeUpgradeMaterials[attributeKey] : null;
-  if (!base || !Number.isInteger(targetLevel) || targetLevel < 2 || targetLevel > 4) return null;
-  const materials = Object.fromEntries(Object.entries(base).map(([key, amount]) => [key, amount * (targetLevel - 1)]));
+  if (!base || !Number.isInteger(targetLevel) || targetLevel < 2 || targetLevel > attributeLevelLimit()) return null;
+  const materials = Object.fromEntries(Object.entries(base).map(([key, amount]) => [key, targetLevel === 2 ? Math.ceil(amount / 2) : 1]));
   if (targetLevel >= 3) {
-    materials["iron-ore"] = 4 * (targetLevel - 2);
-    materials["copper-ore"] = 4 * (targetLevel - 2);
+    materials["iron-ore"] = 1;
+    materials["copper-ore"] = 1;
   }
   if (targetLevel === 4) {
-    materials.quartz = 6;
-    materials.carapace = 4;
+    materials.quartz = 1;
   }
-  return { evolutionPoints: [0, 0, 20, 60, 160][targetLevel], materials };
+  return { evolutionPoints: CONQUEST_PACING.attributeCosts[targetLevel], materials };
 }
 
 function attributeUpgradeIssue(template, attributeKey, nestLevel, evolutionPoints, inventory) {
@@ -1227,40 +1303,77 @@ function attributeUpgradeIssue(template, attributeKey, nestLevel, evolutionPoint
 
 function unitStats(attributes, tribe) {
   const combat = unitCombatStats(tribe);
+  const base = TRIBE_UNIT_STATS[tribe] || TRIBE_UNIT_STATS.bean;
+  const equipped = key => attributes[key] > 0;
   return {
-    speed: 1 + (attributes.feet || 0) * 0.5,
-    capacity: 1 + (attributes.strength || 0),
-    vision: 3 + (attributes.antenna || 0) * 2,
+    speed: base.speed + (equipped("feet") ? ATTRIBUTE_STAT_VALUES.movementBonus : 0),
+    movementMultiplier: equipped("construction") ? ATTRIBUTE_STAT_VALUES.movementMultiplier : 1,
+    capacity: equipped("strength") ? ATTRIBUTE_STAT_VALUES.capacity : 1,
+    vision: equipped("antenna") ? ATTRIBUTE_STAT_VALUES.vision : 3,
     attack: 1,
+    attackBonus: equipped("blade") ? ATTRIBUTE_STAT_VALUES.attackBonus : 0,
+    armorPenetration: equipped("piercing") ? ATTRIBUTE_STAT_VALUES.armorPenetration : 0,
+    damageReduction: equipped("carapace") ? ATTRIBUTE_STAT_VALUES.damageReduction : 0,
+    guardProtection: equipped("guard") ? ATTRIBUTE_STAT_VALUES.guardProtection : 0,
+    regeneration: equipped("regeneration") ? ATTRIBUTE_STAT_VALUES.regeneration : 0,
+    healing: equipped("regeneration") ? ATTRIBUTE_STAT_VALUES.healing : 0,
     health: combat.health,
     combatStrength: combat.combatStrength,
-    lifespan: AGENT_LIFESPAN + (attributes.lifespan || 0) * 2 * 60,
+    lifespan: equipped("lifespan") ? base.lifespanWithAttribute : base.lifespan,
     resistance: 1
   };
 }
 
 function unitMovementSpeed(stats) {
-  return 0.5 + (stats.speed - 1) * 0.6;
+  return stats.speed * (stats.movementMultiplier ?? 1);
+}
+
+function unitCarryCapacity(agent, resourceType) {
+  return agent.stats.capacity;
+}
+
+function unitTravelSpeed(agent, carrying, resourceType) {
+  const base = TRIBE_UNIT_STATS[agent.tribe] || TRIBE_UNIT_STATS.bean;
+  const load = Math.min(1, Math.max(0, carrying || 0) / Math.max(1, unitCarryCapacity(agent, resourceType) || 1));
+  return (agent.stats.speed + (base.loadedSpeed - base.speed) * load) * (agent.stats.movementMultiplier ?? 1);
 }
 
 function unitTerrainSpeedMultiplier(agent, terrain) {
-  if (agent.movementType === "flying" || agent.species === "flower-tail-bird" || agent.species === "talon-owl") return 1;
-  return terrain >= 6 && terrain <= 8 ? 0.6 : 1;
+  if (agent.movementType === "flying" || agent.species === "flower-tail-bird" || agent.species === "talon-owl") {
+    return terrain === 5 || terrain === 7 ? 0.8 : 1;
+  }
+  return tribeTerrainSpeedMultiplier(agent.tribe, terrain);
 }
 
-function birthCost(template) {
-  return [3, 5, 8, 12, 17, 23][template.slots.length] ?? Infinity;
+const tribeBirthCosts = Object.freeze({
+  bean: Object.freeze([3, 5, 8, 12, 17]),
+  spring: Object.freeze([3, 5, 7, 10, 14]),
+  pebble: Object.freeze([4, 7, 11, 16, 22]),
+  spore: Object.freeze([2, 3, 5, 8, 12])
+});
+
+function birthCost(template, tribe) {
+  const costs = tribeBirthCosts[tribe || template.tribe] || tribeBirthCosts.bean;
+  const ceiling = costs[template.slots.length];
+  if (ceiling === undefined) return Infinity;
+  const base = costs[0] * [1, 1.2, 1.5, 1.9, 2.4][template.slots.length];
+  const attributes = attributeCounts(template.slots, template.attributeLevels);
+  const enhancement = template.slots.length ? template.slots.reduce((sum, key) => sum + attributes[key] - 1, 0) / (3 * template.slots.length) : 0;
+  return Math.round(base + (ceiling - base) * enhancement);
 }
 
-return { ATTRIBUTES, ATTRIBUTE_COMBINATIONS, migrateAttributeSlots, attributeLevelLimit, migrateAttributeLevels, attributeCounts, hasSynergy, attributeUpgradeCost, attributeUpgradeIssue, unitStats, unitMovementSpeed, unitTerrainSpeedMultiplier, birthCost };
+return { ATTRIBUTES, attributeUnlockLevel, isAttributeUnlocked, HARVEST_ATTRIBUTE_KEYS, COMBAT_ATTRIBUTE_KEYS, ATTRIBUTE_SYNERGIES_ENABLED, ATTRIBUTE_COMBINATIONS, migrateAttributeSlots, attributeLevelLimit, migrateAttributeLevels, attributeCounts, hasSynergy, attributeUpgradeCost, attributeUpgradeIssue, unitStats, unitMovementSpeed, unitCarryCapacity, unitTravelSpeed, unitTerrainSpeedMultiplier, birthCost };
 })();
 modules["server/buildings.mjs"] = (() => {
 const BUILDING_TYPES = Object.freeze([
   { key: "storage", name: "창고", minNestLevel: 1, width: 2, height: 2, health: 120, storageCapacity: 300, visionRadius: 2, description: "군락의 자원 보관량을 300개 늘립니다." },
-  { key: "evolution-lab", name: "진화실", minNestLevel: 2, width: 2, height: 2, health: 100, storageCapacity: 0, visionRadius: 2, description: "자원 재료로 설계의 속성을 둥지 레벨까지 강화합니다." },
+  { key: "evolution-lab", name: "진화실", minNestLevel: 2, width: 2, height: 2, health: 100, storageCapacity: 0, visionRadius: 2, description: "주변 2칸의 시야를 확보합니다." },
   { key: "outpost", name: "전초둥지", minNestLevel: 2, width: 3, height: 3, health: 200, storageCapacity: 0, visionRadius: 6, description: "개체를 탄생시키고 자원을 납품하는 새 둥지입니다. 본둥지가 파괴되어도 군락을 유지합니다." },
-  { key: "watchpost", name: "감시봉", minNestLevel: 2, width: 1, height: 1, health: 80, storageCapacity: 0, visionRadius: 10, description: "주변 10칸의 시야를 군락과 공유합니다." }
-].map(type => Object.freeze({ ...type, buildSeconds: 3, image: "DesignAssets/Buildings/" + type.key + ".png" })));
+  { key: "watchpost", name: "감시봉", minNestLevel: 2, width: 1, height: 1, health: 80, storageCapacity: 0, visionRadius: 10, description: "주변 10칸의 시야를 확보합니다." }
+].map(type => Object.freeze({ ...type, buildSeconds: 3,
+  image: "DesignAssets/Animations/Construction/v9/bean/" + type.key + "-complete.png" })));
+
+const nestMaterialCapacities = Object.freeze([30, 40, 50, 60]);
 
 const nativeMaterials = { bean: "clay", spore: "tree", pebble: "pebbles", spring: "dew" };
 const constructionMaterials = {
@@ -1274,11 +1387,27 @@ function buildingDefinition(key) {
   return BUILDING_TYPES.find(type => type.key === key);
 }
 
+function constructionSeconds(key, level) {
+  const definition = buildingDefinition(key);
+  return definition ? definition.buildSeconds : null;
+}
+
 function buildingImage(key, tribe) {
   const definition = buildingDefinition(key);
   if (!definition) return null;
   return ["spore", "pebble", "spring"].includes(tribe) ?
-    "DesignAssets/Buildings/" + tribe + "/" + key + ".png" : definition.image;
+    "DesignAssets/Animations/Construction/v5/" + tribe + "/" + key + "-complete.png" : definition.image;
+}
+
+function constructionApproachCell(plan) {
+  const definition = buildingDefinition(plan.buildingKey);
+  return definition ? { x: plan.x + Math.floor((definition.width - 1) / 2),
+    y: plan.y + Math.floor((definition.height - 1) / 2) } : null;
+}
+
+function constructionSiteCenter(plan) {
+  const definition = buildingDefinition(plan.buildingKey);
+  return definition ? { x: plan.x + definition.width / 2, y: plan.y + definition.height / 2 } : null;
 }
 
 function buildingCost(key, tribe) {
@@ -1292,7 +1421,7 @@ function buildingCost(key, tribe) {
 }
 
 function materialCapacity(nestLevel, buildings) {
-  return 200 + Math.max(0, Math.min(3, (nestLevel || 1) - 1)) * 100 +
+  return nestMaterialCapacities[Math.max(0, Math.min(3, (nestLevel || 1) - 1))] +
     (buildings || []).filter(building => building.health > 0).reduce((sum, building) => sum + (buildingDefinition(building.key)?.storageCapacity || 0), 0);
 }
 
@@ -1308,7 +1437,8 @@ function buildingAt(environment, x, y) {
   return null;
 }
 
-return { BUILDING_TYPES, buildingDefinition, buildingImage, buildingCost, materialCapacity, buildingContains, buildingAt };
+
+return { BUILDING_TYPES, buildingDefinition, constructionSeconds, buildingImage, constructionApproachCell, constructionSiteCenter, buildingCost, materialCapacity, buildingContains, buildingAt };
 })();
 modules["server/combat.mjs"] = (() => {
 const { ENCOUNTER_TYPES } = modules["server/encounter-types.mjs"];

@@ -54,7 +54,7 @@ test("먹이 서식지는 지형과 숲 인접 여부로 구분하며 숲이 없
   assert.equal(isFoodHabitat("berry-bush", world, 100, 100), false);
   assert.equal(isFoodHabitat("honey-mushrooms", world, 101, 100), true);
   assert.equal(isFoodHabitat("nutrient-moss", world, 101, 100), false);
-  assert.equal(isFoodHabitat("meat", world, 101, 100), false);
+  assert.equal(isFoodHabitat("nutrients", world, 101, 100), false);
   assert.equal(isFoodHabitat("berry-bush", world, -1, 100), false);
 });
 

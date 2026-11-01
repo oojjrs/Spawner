@@ -1,11 +1,13 @@
+import { generateWorld } from "../server/world.mjs";
+
 export async function openStorage() {
   const database = await new Promise((resolve, reject) => {
-    const request = indexedDB.open("spawner-local", 2);
+    const request = indexedDB.open("spawner-local", 3);
     request.onupgradeneeded = () => {
       const database = request.result;
       if (!database.objectStoreNames.contains("rooms")) database.createObjectStore("rooms", { keyPath: "id" });
       if (!database.objectStoreNames.contains("settings")) database.createObjectStore("settings");
-      database.createObjectStore("room-list", { keyPath: "id" });
+      if (!database.objectStoreNames.contains("room-list")) database.createObjectStore("room-list", { keyPath: "id" });
       const rooms = request.transaction.objectStore("rooms").openCursor();
       rooms.onsuccess = () => {
         const cursor = rooms.result;
@@ -32,9 +34,25 @@ export async function openStorage() {
     });
   }
 
+  function roomWorldPreview(room) {
+    const world = room.world || (room.version === 1 ? generateWorld(room.seed, room.worldGenerationVersion ?? 1) : null);
+    if (!world?.terrain) return null;
+    const size = 96, worldSize = world.size || 320;
+    let tiles = "";
+    for (let y = 0; y < size; y++) {
+      const row = Math.min(worldSize - 1, Math.floor((y + .5) * worldSize / size)) * worldSize;
+      for (let x = 0; x < size; x++) {
+        const column = Math.min(worldSize - 1, Math.floor((x + .5) * worldSize / size));
+        tiles += (world.terrain[row + column] ?? 0).toString(16);
+      }
+    }
+    const colony = room.colonies.find(colony => colony.ownerId === room.hostId);
+    return { size, tiles, colony: colony?.tribe ? { x: (colony.x + 2.5) / worldSize, y: (colony.y + 2.5) / worldSize, tribe: colony.tribe } : null };
+  }
+
   function roomListing(room) {
     return { id: room.id, title: room.title, seed: room.seed, updatedAt: room.updatedAt, simSeconds: room.simSeconds, ending: room.ending || null,
-      hostId: room.hostId, colonies: room.colonies.map(colony => ({ ownerId: colony.ownerId, tribe: colony.tribe })) };
+      hostId: room.hostId, colonies: room.colonies.map(colony => ({ ownerId: colony.ownerId, tribe: colony.tribe })), worldPreview: roomWorldPreview(room) };
   }
 
   return {

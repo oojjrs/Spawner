@@ -1,3 +1,5 @@
+import { CONQUEST_PACING } from "./conquest-pacing.mjs";
+import { worldSize } from "./world-size.mjs";
 import { beginCreatureSpawn, creatureSpawning } from "./creature-spawn.mjs";
 import { ENCOUNTER_TYPES } from "./encounter-types.mjs";
 import { unitTerrainSpeedMultiplier } from "./attributes.mjs";
@@ -11,7 +13,7 @@ import { encounterTerritory, withinEncounterTerritory } from "./encounter-territ
 
 export function createEncounters(environment, saved, residents) {
   const combat = environment.combatSystem || (environment.combatSystem = createCombat(environment));
-  const size = 320;
+  const size = worldSize(environment.world);
   let initializing = true;
   const types = new Map(ENCOUNTER_TYPES.map(type => [type.key, type]));
   const plans = new Map((environment.world.encounters || []).filter(plan => types.has(plan.key)).map(plan => [plan.key, plan]));
@@ -223,6 +225,7 @@ export function createEncounters(environment, saved, residents) {
 
   function eligible(record, type) {
     const now = environment.simSeconds;
+    if (type.unique && now < CONQUEST_PACING.quietUntil) return false;
     if (!type.unique) return now >= type.firstSpawnAt;
     if (now >= type.guaranteedAt) return true;
     if (type.key === "spring-keeper") return discovered("flower-tail-bird") && [...environment.games.values()].reduce((sum, game) => sum + game.colonyFood, 0) >= 10;
@@ -439,7 +442,7 @@ export function createEncounters(environment, saved, residents) {
     state.agents = state.agents.filter(entry => entry !== agent);
     environment.unitIndex?.remove(agent);
     placeCorpse(environment.food, { x: agent.x, y: agent.y, agentId: agent.id, kind: "corpse", species: agent.species, amount: 4,
-      carapaceAmount: ["spiny-back-beetle", "spiny-back-leader"].includes(agent.species) ? 4 : 0, attributes: {}, facing: agent.facing,
+      attributes: {}, facing: agent.facing,
       diedAt: environment.simSeconds, decaysAt: environment.simSeconds + CORPSE_LIFETIME, renderX: agent.x, renderY: agent.y });
   }
 

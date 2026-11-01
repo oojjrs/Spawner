@@ -87,7 +87,7 @@ test("진화실 파괴 뒤 몽돌은 남은 강화 수요에 따라 재건을 �
   assert.equal(needs(f)[0].buildingKey,"evolution-lab");
 });
 
-test("전초 파괴 뒤 다시 길어진 먹이 운반을 평가하며 무관한 광물에는 전초를 짓지 않는다", () => {
+test("전초 파괴 뒤 다시 길어진 자원 운반을 평가하며 무관한 광물에는 전초를 짓지 않는다", () => {
   const f=fixture("spring");
   const outpost={key:"outpost",x:74,y:41,width:3,height:3,health:200};
   f.state.buildings.push(outpost);f.nests.push(outpost);

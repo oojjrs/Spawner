@@ -21,7 +21,7 @@ function fixture(foodX, points) {
   return { context, state, workers, food };
 }
 
-test("같은 네 일꾼도 먹이 왕복 거리로 예상 수급을 계산해 채집 인력을 1→2→4명으로 늘린다", () => {
+test("같은 네 일꾼도 자원 왕복 거리로 예상 수급을 계산해 채집 인력을 1→2→4명으로 늘린다", () => {
   for (const [x, count] of [[1, 1], [4, 2], [6, 4]]) {
     const { context, workers } = fixture(x, 5.4);
     const allocation = allocateWorkers(context, workers, new Set());
@@ -41,7 +41,7 @@ test("같은 경로에서도 비축이 부족하면 복구에 필요한 채집 �
   assert.ok(shortage.productionRate >= shortage.requiredRate);
 });
 
-test("오는 중인 먹이는 비축 복구에 한 번만 반영하고 해당 일꾼의 다음 채집을 따로 예측한다", () => {
+test("오는 중인 자원은 비축 복구에 한 번만 반영하고 해당 일꾼의 다음 채집을 따로 예측한다", () => {
   const { context, state, workers } = fixture(1, 0);
   for (const agent of workers.slice(0, 3)) { agent.carrying = 2; agent.carryingType = "clay"; }
   const pending = allocateWorkers(context, workers, new Set());
@@ -54,7 +54,7 @@ test("오는 중인 먹이는 비축 복구에 한 번만 반영하고 해당 �
   assert.equal(deposited.requiredRate, pending.requiredRate);
 });
 
-test("같은 먹이 잔량을 여러 일꾼의 생산량으로 중복 계산하지 않는다", () => {
+test("같은 자원 잔량을 여러 일꾼의 생산량으로 중복 계산하지 않는다", () => {
   const { context, workers, food } = fixture(1, 0);
   food.amount = 2;
   const allocation = allocateWorkers(context, workers, new Set());
@@ -73,7 +73,7 @@ test("경로가 끊기거나 남은 수명 안에 납품할 수 없으면 예상
   assert.equal(allocateWorkers(short.context, short.workers, new Set()).productionRate, 0);
 });
 
-test("건설 자재 화물을 먹이 입고나 새 채집 생산량으로 계산하지 않는다", () => {
+test("건설 자재 화물을 자원 입고나 새 채집 생산량으로 계산하지 않는다", () => {
   const { context, workers } = fixture(1, 200), agent = workers[0];
   agent.carrying = 2; agent.carryingType = "clay"; agent.transportCargo = { siteId: "site" };
   const allocation = allocateWorkers(context, workers, new Set());
@@ -82,7 +82,7 @@ test("건설 자재 화물을 먹이 입고나 새 채집 생산량으로 계산
   assert.equal(allocation.rates.has(agent.id), false);
 });
 
-test("납품 예정인 먹이와 새 생산량도 실제로 받을 수 있는 용량을 초과하지 않는다", () => {
+test("납품 예정인 자원과 새 생산량도 실제로 받을 수 있는 용량을 초과하지 않는다", () => {
   const { context, workers } = fixture(1, 0);
   context.deliveryCapacity = () => 3;
   for (const agent of workers.slice(0, 3)) { agent.carrying = 2; agent.carryingType = "clay"; }
@@ -91,7 +91,7 @@ test("납품 예정인 먹이와 새 생산량도 실제로 받을 수 있는 �
   assert.equal(allocation.productionRate, 0);
 });
 
-test("네 종족의 실제 생산 비용·수명·적재 이동 속도·기본 먹이 채집 시간을 사용한다", () => {
+test("네 종족의 실제 생산 비용·수명·적재 이동 속도·기본 자원 채집 시간을 사용한다", () => {
   for (const [tribe, type] of [["bean", "clay"], ["spore", "tree"], ["pebble", "pebbles"], ["spring", "dew"]]) {
     const { context, workers, food } = fixture(1, 200);
     context.colony.tribe = tribe;
@@ -111,6 +111,6 @@ test("네 종족의 실제 생산 비용·수명·적재 이동 속도·기본 �
   }
 });
 
-test("비축 포인트로 유지 비용을 감당할 때 먹이 담당 한 명을 남기고 자재 채집과 운반 인력을 풀어 준다",()=>{const f=fixture(6,200);f.workers[0].slots=["blade"];f.workers[0].attributes=attributeCounts(f.workers[0].slots);f.workers[0].stats=unitStats(f.workers[0].attributes,"bean");const stocked=allocateWorkers(f.context,f.workers,new Set());assert.equal(stocked.requiredRate,0);assert.equal(stocked.ids.size,1);assert.equal(stocked.ids.has(f.workers[0].id),false);f.state.evolutionPoints=0;const low=allocateWorkers(f.context,f.workers,new Set());assert.ok(low.requiredRate>0);assert.ok(low.ids.size>stocked.ids.size);});
+test("비축 포인트로 유지 비용을 감당할 때 자원 담당 한 명을 남기고 자재 채집과 운반 인력을 풀어 준다",()=>{const f=fixture(6,200);f.workers[0].slots=["blade"];f.workers[0].attributes=attributeCounts(f.workers[0].slots);f.workers[0].stats=unitStats(f.workers[0].attributes,"bean");const stocked=allocateWorkers(f.context,f.workers,new Set());assert.equal(stocked.requiredRate,0);assert.equal(stocked.ids.size,1);assert.equal(stocked.ids.has(f.workers[0].id),false);f.state.evolutionPoints=0;const low=allocateWorkers(f.context,f.workers,new Set());assert.ok(low.requiredRate>0);assert.ok(low.ids.size>stocked.ids.size);});
 
-test("첫 먹이 납품이 60초 밖에 있어도 수명 안의 실제 왕복 생산량으로 추가 채집 개체의 비용 회수를 판단한다",()=>{const f=fixture(24,0);for(const a of f.workers)a.lifespan=500;const forecast=allocateWorkers(f.context,f.workers,new Set());assert.equal(forecast.productionRate,0);assert.ok(forecast.foodYields.get(f.workers[0].id)>birthCost(f.workers[0],"bean"));f.workers[0].lifespan=40;assert.equal(allocateWorkers(f.context,f.workers,new Set()).foodYields.get(f.workers[0].id)||0,0);});
+test("첫 자원 납품이 60초 밖에 있어도 수명 안의 실제 왕복 생산량으로 추가 채집 개체의 비용 회수를 판단한다",()=>{const f=fixture(24,0);for(const a of f.workers)a.lifespan=500;const forecast=allocateWorkers(f.context,f.workers,new Set());assert.equal(forecast.productionRate,0);assert.ok(forecast.foodYields.get(f.workers[0].id)>birthCost(f.workers[0],"bean"));f.workers[0].lifespan=40;assert.equal(allocateWorkers(f.context,f.workers,new Set()).foodYields.get(f.workers[0].id)||0,0);});

@@ -1,4 +1,4 @@
-export const VARIANTS=[['blade'],['piercing'],['carapace'],['guard'],['regeneration'],['secretion'],['blade','carapace'],['piercing','guard'],['regeneration','secretion'],['blade','piercing','carapace'],['guard','carapace','regeneration'],['guard','regeneration','secretion']];
+export const VARIANTS=[['blade'],['piercing'],['carapace'],['guard'],['regeneration'],['blade','carapace'],['piercing','guard'],['blade','piercing','carapace'],['guard','carapace','regeneration'],];
 function curve(value,keys){for(let i=1;i<keys.length;i++)if(value<=keys[i][0]){const a=keys[i-1],b=keys[i],t=Math.max(0,Math.min(1,(value-a[0])/(b[0]-a[0]))),s=t*t*(3-2*t);return a[1]+(b[1]-a[1])*s}return keys.at(-1)[1]}
 function triangle(context,image,uv,points){
  const [a,b,c]=uv,[p,q,r]=points,det=(b[0]-a[0])*(c[1]-a[1])-(c[0]-a[0])*(b[1]-a[1]);if(Math.abs(det)<.00001)return;
@@ -12,7 +12,7 @@ export function equipmentPose(rig,track,attributes,action,time,duration){
  const p=Math.min(.999,Math.max(0,time/Math.max(1,duration))),strike=action==='attack'?curve(p,[[0,0],[.18,-.22],[.30,1],[.48,.55],[.86,0],[1,0]]):0;
  const brace=action==='hurt'?curve(time,[[0,.4],[20,1],[80,.75],[110,.7],[510,.7],[600,.25],[760,0]]):0;
  const impact=action==='hurt'?curve(time,[[0,0],[20,.25],[50,1],[110,.25],[510,.25],[760,0]]):0;
- const heal=action==='heal'?Math.sin(p*Math.PI*4):0,signal=action==='secretion'?Math.sin(p*Math.PI*6):0;
+ const heal=action==='heal'?Math.sin(p*Math.PI*4):0;
  const death=action==='death'?curve(p,[[0,0],[.2,0],[.88,1],[1,1]]):0,water=rig.tribe==='spring',parts=[];
  const collapse=action==='death'?Math.min(1,Math.max(0,(1-h/reference.body[3])/.65)):0;
  function add(name,px,py,width,pivotX,pivotY,rotation,bend,front){parts.push({name,x:px,y:py,width,pivot:[pivotX,pivotY],angle:rotation,bend,front,projection:1})}
@@ -24,7 +24,6 @@ export function equipmentPose(rig,track,attributes,action,time,duration){
  if(has('blade'))add('blade',x+w*.12+strike*span*.12,y+h*.72,span*.44,.67,.91,angle+strike*1.65-.12,0,true);
  if(has('piercing'))add('piercing',x+w*.83+strike*span*.22,y+h*.65,span*.78,.05,.52,angle-strike*.12,0,true);
  if(has('guard'))add('guard',x+w*.91+brace*span*.08-impact*span*.045,y+h*.58-brace*span*.11+impact*span*.025,span*.67,.42,.55,angle-brace*.22+impact*.13+(water?death*.8:0),0,true);
- if(has('secretion'))for(let i=0;i<3;i++)add('vent',x+w*.94,y+h*(.16+i*.25),span*.21,.1,.55,angle-.35+i*.23+signal*.07,0,true);
  for(const item of parts)if(death){
   if(item.name==='piercing')item.angle*=1-death;
   if(item.name==='blade')item.angle=item.angle*(1-death)+Math.PI*.46*death;

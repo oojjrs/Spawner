@@ -133,12 +133,17 @@ test("감지 단속성의 생애 정찰 효율과 관련 조합의 탐색량은 
 test("강화 생산비는 종족별 상한까지 오르고 혼합 강화도 실제 장착 단계만 반영한다", () => {
   const slots = ["strength", "feet", "lifespan"];
   assert.deepEqual([1, 2, 3, 4].map(grade => birthCost({ slots, attributeLevels: Object.fromEntries(slots.map(key => [key, grade])) }, "bean")),
-    [5.7, 7.8, 9.9, 12]);
-  assert.equal(birthCost({ slots, attributeLevels: { strength: 4, feet: 1, lifespan: 1 } }, "bean"), 7.8);
+    [6, 8, 10, 12]);
+  assert.equal(birthCost({ slots, attributeLevels: { strength: 4, feet: 1, lifespan: 1 } }, "bean"), 8);
   assert.equal(birthCost({ slots: [] }, "bean"), 3);
+  for (const tribe of Object.keys(native)) for (let count = 0; count <= 4; count++) for (let grade = 1; grade <= 4; grade++) {
+    const slots = ["strength", "feet", "lifespan", "antenna"].slice(0, count);
+    const cost = birthCost({ slots, attributeLevels: Object.fromEntries(slots.map(key => [key, grade])) }, tribe);
+    assert.ok(Number.isInteger(cost), tribe + ":" + count + ":" + grade);
+  }
 });
 
-test("대응 자원 운반량과 적재 속도는 서버·브라우저·워커에서 일치하고 다른 자원에는 번지지 않는다", () => {
+test("운반량은 채집량 증가만 반영하고 서버·브라우저·워커의 적재 속도가 일치한다", () => {
   const source = readFileSync(new URL("../client/runtime.js", import.meta.url), "utf8");
   const browser = {};
   runInNewContext(source, browser);
@@ -147,12 +152,17 @@ test("대응 자원 운반량과 적재 속도는 서버·브라우저·워커�
   runInNewContext(workerSource.slice(0, workerSource.indexOf('modules["client/worker.mjs"]')) +
     'globalThis.rules = modules["server/attributes.mjs"]; })();', worker);
   for (const rules of [{ unitCarryCapacity, unitTravelSpeed }, browser.Spawner, worker.rules]) {
-    const attributes = attributeCounts(["excavation"], { excavation: 4 });
-    const agent = { tribe: "bean", attributes, stats: unitStats(attributes, "bean"), carryingType: "clay" };
-    assert.equal(rules.unitCarryCapacity(agent, "clay"), 5);
-    assert.equal(rules.unitCarryCapacity(agent, "tree"), 1);
-    assert.equal(rules.unitTravelSpeed(agent, 5, "clay"), .4);
-    agent.carryingType = null;
-    assert.equal(rules.unitCarryCapacity(agent, "clay"), 5);
+    for (const key of ["excavation", "blade", "piercing", "butchery"]) for (let level = 1; level <= 4; level++) {
+      for (let strength = 0; strength <= 4; strength++) {
+        const attributes = { [key]: level, strength };
+        const agent = { tribe: "bean", attributes, stats: unitStats(attributes, "bean"), carryingType: "clay" };
+        for (const resourceType of ["clay", "sand", "tree", "grass-fiber", "pebbles", "iron-ore", "copper-ore", "quartz", "dew", "nutrients"]) {
+          assert.equal(rules.unitCarryCapacity(agent, resourceType), 1 + strength, key + ":" + level + ":" + resourceType);
+          assert.equal(rules.unitTravelSpeed(agent, 1 + strength, resourceType), .4);
+        }
+        agent.carryingType = null;
+        assert.equal(rules.unitCarryCapacity(agent), 1 + strength);
+      }
+    }
   }
 });

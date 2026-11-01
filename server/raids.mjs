@@ -1,9 +1,11 @@
+import { CONQUEST_PACING } from "./conquest-pacing.mjs";
+import { worldSize } from "./world-size.mjs";
 import { COLONY_RAID_PRESSURE, colonyRaidPressure } from "./raid-pressure.mjs";
 
-export const BEETLE_RAIDS = Object.freeze({ firstAt:120, firstSpread:30, interval:60, intervalSpread:0, activityDuration:30, defenders:3, concurrent:4 });
+export const BEETLE_RAIDS = Object.freeze({ firstAt:CONQUEST_PACING.neutralConflictAt, firstSpread:30, interval:90, intervalSpread:0, activityDuration:30, defenders:3, concurrent:4 });
 
 export function createBeetleRaids(environment, state, actions, restoring) {
-  const size = 320, sites = new Map((environment.world.burrows || []).map(burrow => [burrow.id, burrow]));
+  const size = worldSize(environment.world), sites = new Map((environment.world.burrows || []).map(burrow => [burrow.id, burrow]));
   const routes = new Map(), checks = new Map(), origins = new Map(), sourceIds = new Set(), approaches = new Map();
   if (restoring) {
     if (!Array.isArray(state.raidCooldowns) || new Set(state.raidCooldowns.map(entry => entry?.colonyId)).size !== state.raidCooldowns.length ||
@@ -12,7 +14,7 @@ export function createBeetleRaids(environment, state, actions, restoring) {
             !Number.isFinite(entry.opening.pressure) || entry.opening.pressure < 0 || entry.opening.pressure > 1 ||
             !Number.isInteger(entry.opening.nearby) || entry.opening.nearby < 0 ||
             !Number.isFinite(entry.opening.interval) || entry.opening.interval < COLONY_RAID_PRESSURE.fastInterval || entry.opening.interval > COLONY_RAID_PRESSURE.slowInterval ||
-            !Number.isFinite(entry.opening.arrivalAt) || entry.opening.arrivalAt < BEETLE_RAIDS.firstAt))) throw new Error("습격 저장 형식이 올바르지 않습니다.");
+            !Number.isFinite(entry.opening.arrivalAt) || entry.opening.arrivalAt < 120))) throw new Error("습격 저장 형식이 올바르지 않습니다.");
   } else state.raidCooldowns = [];
   for (const record of state.burrows) {
     const site = sites.get(record.id);
@@ -21,12 +23,12 @@ export function createBeetleRaids(environment, state, actions, restoring) {
       record.nextRaidAt = site.type === "large" ? Math.max(BEETLE_RAIDS.firstAt, environment.simSeconds) +
         actions.noise(site.x + 8419, site.y - 6311) * BEETLE_RAIDS.firstSpread : null;
     } else if (!Number.isSafeInteger(record.raidSequence) || record.raidSequence < 0 ||
-        (site.type === "large" ? !Number.isFinite(record.nextRaidAt) || record.nextRaidAt < BEETLE_RAIDS.firstAt : record.nextRaidAt !== null)) {
+        (site.type === "large" ? !Number.isFinite(record.nextRaidAt) || record.nextRaidAt < 120 : record.nextRaidAt !== null)) {
       throw new Error("굴 습격 주기 저장 형식이 올바르지 않습니다.");
     }
   }
   for (const agent of state.agents) if (agent.raid && (!restoring || !Number.isInteger(agent.raid.colonyId) ||
-      !["outbound", "active", "returning"].includes(agent.raid.phase) || !Number.isFinite(agent.raid.departedAt) || agent.raid.departedAt < BEETLE_RAIDS.firstAt ||
+      !["outbound", "active", "returning"].includes(agent.raid.phase) || !Number.isFinite(agent.raid.departedAt) || agent.raid.departedAt < 120 ||
       (agent.raid.phase === "active" ? !Number.isFinite(agent.raid.activeUntil) || agent.raid.activeUntil < agent.raid.departedAt : agent.raid.activeUntil !== null))) {
     throw new Error("딱정벌레 습격 저장 형식이 올바르지 않습니다.");
   }

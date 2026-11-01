@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { existsSync } from "node:fs";
+import { unitDisplaySize } from "./unit-size.mjs";
 import { createCombat } from "../server/combat.mjs";
 import { combatLayout, combatHurtFrame, PLAYER_COMBAT_ASSETS } from "./combat.mjs";
 
@@ -10,17 +11,17 @@ test("셀 내부 좌우 진영과 여러 줄의 유닛이 겹치지 않고 인�
   const layout = combatLayout(agents);
   assert.equal(layout.size, 8);
   for (const agent of agents) {
-    const placement = layout.get(agent.id);
+    const placement = layout.get(agent.id), size = unitDisplaySize(agent);
     assert.equal(Math.sign(placement.x), agent.combat.side ? -1 : 1);
     assert.equal(placement.facing, agent.combat.side ? 1 : -1);
-    assert.ok(.5 + placement.x - .7 * placement.scale / 2 >= 0);
-    assert.ok(.5 + placement.x + .7 * placement.scale / 2 <= 1);
-    assert.ok(.5 + placement.y - .7 * placement.scale / 2 >= 0);
-    assert.ok(.5 + placement.y + .7 * placement.scale / 2 <= 1);
+    assert.ok(.5 + placement.x - size * placement.scale / 2 >= 0);
+    assert.ok(.5 + placement.x + size * placement.scale / 2 <= 1);
+    assert.ok(.5 + placement.y - size * placement.scale / 2 >= 0);
+    assert.ok(.5 + placement.y + size * placement.scale / 2 <= 1);
   }
-  assert.ok(layout.get("0:0").scale < layout.get("1:0").scale);
+  assert.equal(layout.get("0:0").scale, layout.get("1:0").scale);
   const first = layout.get("0:0"), second = layout.get("0:1");
-  assert.ok(second.y - first.y > .7 * first.scale);
+  assert.ok(second.y - first.y > unitDisplaySize(agents[0]) * first.scale);
   assert.deepEqual([...combatLayout([...agents].reverse())], [...layout]);
 });
 
@@ -56,3 +57,18 @@ for (const playerInitiates of [true, false]) {
     }
   });
 }
+
+test("전투에서도 솜양·새싹콩·유니크의 승인된 체급 비율을 유지한다", () => {
+  const agents = [
+    { id: "sheep", species: "cotton-sheep", health: 100, combat: { id: "mixed", side: 0, joinedAt: 0 } },
+    { id: "bean", tribe: "bean", health: 100, combat: { id: "mixed", side: 0, joinedAt: 1 } },
+    { id: "paw", species: "white-paw", health: 100, combat: { id: "mixed", side: 1, joinedAt: 0 } }
+  ];
+  const layout = combatLayout(agents);
+  assert.equal(layout.get("sheep").scale, layout.get("paw").scale);
+  assert.equal(layout.get("bean").scale, layout.get("paw").scale);
+  const size = agent => unitDisplaySize(agent) * layout.get(agent.id).scale;
+  assert.ok(Math.abs(size(agents[0]) / size(agents[1]) - .32 / .40) < 1e-12);
+  assert.ok(Math.abs(size(agents[2]) / size(agents[1]) - 1.44 / .40) < 1e-12);
+  assert.ok(size(agents[2]) <= .44);
+});

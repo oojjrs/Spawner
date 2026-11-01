@@ -1,0 +1,240 @@
+{
+  "tribe": "pebble",
+  "kind": "outpost",
+  "canvas": [
+    432,
+    432
+  ],
+  "root": [
+    216,
+    216
+  ],
+  "ground": [
+    216,
+    260
+  ],
+  "duration": 4800,
+  "frames": 48,
+  "frameDuration": 100,
+  "artwork": "outpost-key-20261101.png",
+  "source": "outpost-revision-20261101.png",
+  "assembly": {
+    "start": 0.55,
+    "end": 0.9,
+    "ground": 0.3055555555555556,
+    "rigid": true,
+    "connected": true,
+    "delays": {}
+  },
+  "order": [
+    "back",
+    "feature",
+    "left",
+    "right",
+    "roof",
+    "front"
+  ],
+  "parts": [
+    {
+      "name": "back",
+      "source": "outpost-back-20261101.png",
+      "atlas": [
+        4,
+        4,
+        160,
+        94
+      ],
+      "layout": {
+        "center": [
+          0.05555555555555555,
+          -0.5277777777777778
+        ],
+        "size": [
+          1.1111111111111112,
+          0.6527777777777778
+        ],
+        "pivot": [
+          0.5,
+          0.5
+        ]
+      },
+      "bone": {
+        "parent": "root",
+        "rigid": true
+      },
+      "motion": "fixed"
+    },
+    {
+      "name": "roof",
+      "source": "outpost-roof-20261101.png",
+      "atlas": [
+        436,
+        4,
+        146,
+        85
+      ],
+      "layout": {
+        "center": [
+          -0.3680555555555556,
+          -0.8576388888888888
+        ],
+        "size": [
+          1.0138888888888888,
+          0.5902777777777778
+        ],
+        "pivot": [
+          0.5,
+          0.5
+        ]
+      },
+      "bone": {
+        "parent": "root",
+        "rigid": true
+      },
+      "motion": "fixed"
+    },
+    {
+      "name": "left",
+      "source": "outpost-left-20261101.png",
+      "atlas": [
+        868,
+        4,
+        104,
+        119
+      ],
+      "layout": {
+        "center": [
+          -0.75,
+          -0.3159722222222222
+        ],
+        "size": [
+          0.7222222222222222,
+          0.8263888888888888
+        ],
+        "pivot": [
+          0.5,
+          0.5
+        ]
+      },
+      "bone": {
+        "parent": "root",
+        "rigid": true
+      },
+      "motion": "fixed"
+    },
+    {
+      "name": "right",
+      "source": "outpost-right-20261101.png",
+      "atlas": [
+        4,
+        436,
+        96,
+        90
+      ],
+      "layout": {
+        "center": [
+          0.7708333333333334,
+          -0.25
+        ],
+        "size": [
+          0.6666666666666666,
+          0.625
+        ],
+        "pivot": [
+          0.5,
+          0.5
+        ]
+      },
+      "bone": {
+        "parent": "root",
+        "rigid": true
+      },
+      "motion": "fixed"
+    },
+    {
+      "name": "front",
+      "source": "outpost-front-20261101.png",
+      "atlas": [
+        436,
+        436,
+        286,
+        76
+      ],
+      "layout": {
+        "center": [
+          0,
+          0.041666666666666664
+        ],
+        "size": [
+          1.9861111111111112,
+          0.5277777777777778
+        ],
+        "pivot": [
+          0.5,
+          0.5
+        ]
+      },
+      "bone": {
+        "parent": "root",
+        "rigid": true
+      },
+      "motion": "fixed"
+    },
+    {
+      "name": "feature",
+      "source": "outpost-feature-20261101.png",
+      "atlas": [
+        868,
+        436,
+        246,
+        143
+      ],
+      "layout": {
+        "center": [
+          0.2569444444444444,
+          -0.3993055555555556
+        ],
+        "size": [
+          1.7083333333333333,
+          0.9930555555555556
+        ],
+        "pivot": [
+          0.5,
+          0.5
+        ]
+      },
+      "bone": {
+        "parent": "root",
+        "rigid": true
+      },
+      "motion": "fixed"
+    }
+  ],
+  "idle": {
+    "deformation": false,
+    "alphaFixed": true,
+    "light": {
+      "center": [
+        163,
+        86
+      ],
+      "radius": [
+        72,
+        39
+      ],
+      "strength": 0.048,
+      "tint": [
+        255,
+        235,
+        185
+      ]
+    }
+  },
+  "output": {
+    "parts": "DesignAssets/Animations/Construction/v5/pebble/outpost-parts.webp",
+    "complete": "DesignAssets/Animations/Construction/v5/pebble/outpost-complete.png",
+    "idle": "DesignAssets/Animations/Buildings/IdleV1/pebble/outpost/idle.webp",
+    "preview": "DesignAssets/Animations/Buildings/IdleV1/pebble/outpost/preview.webp",
+    "thumbnail": "DesignAssets/Planning/Thumbnails/Animations/Buildings/IdleV1/pebble/outpost/preview.webp.webp"
+  }
+}

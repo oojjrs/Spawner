@@ -1,3 +1,4 @@
+import { worldSize } from "./world-size.mjs";
 import { createServer } from "node:http";
 import { createServer as createControlServer } from "node:net";
 import { randomBytes, randomInt, createHash } from "node:crypto";
@@ -38,9 +39,7 @@ function renameColony(room, ownerId, action) {
   const colony = room.colonies.find((entry) => entry.id === action.colonyId);
   if (!colony || colony.ownerId !== ownerId) fail(403, "자신의 둥지만 이름을 바꿀 수 있습니다.");
   if (typeof action.name !== "string" || !action.name.trim() || action.name.trim().length > 32) fail(400, "둥지 이름은 1~32자로 입력해 주세요.");
-  colony.name = action.name.trim();
-  colony.hasCustomName = true;
-  return { colonyId: colony.id };
+  return room.games.get(ownerId).command(action);
 }
 
 function makeRoom(roomId, title, hostId, seed, generationVersion) {
@@ -49,7 +48,7 @@ function makeRoom(roomId, title, hostId, seed, generationVersion) {
     colonies: [], games: new Map(), food: new Map(), foodSpots: new Map(), lastActive: 0, lastVisitedAt: Date.now(), played: false };
   const terrainTypes = ["deep", "shallow", "coast", "land", "grassland", "forest", "lowMountain", "highMountain", "ridge"];
   for (const [x, y, amount, resourceType] of world.food) {
-    const cell = { x, y, amount, initialAmount: amount, resourceType, terrain: terrainTypes[world.terrain[y * 320 + x]] };
+    const cell = { x, y, amount, initialAmount: amount, resourceType, terrain: terrainTypes[world.terrain[y * worldSize(world) + x]] };
     room.food.set(x + "," + y, cell);
   }
   populateResourceNodes(room);
@@ -96,7 +95,7 @@ function payload(room, session, includeWorld) {
     revision: room.revision, colonyId: room.colonies.find((colony) => colony.ownerId === session.id).id,
     colonies: room.colonies.filter(colony => room.games.get(session.id).colonyKnown(colony)).map((colony) => ({ ...colony, nestLevel: room.games.get(colony.ownerId).nestLevel,
       nestHealth: room.games.get(colony.ownerId).nest.health, nestMaxHealth: room.games.get(colony.ownerId).nest.maxHealth, occupiedCells: [...colony.occupiedCells] })),
-    world: includeWorld ? { size: 320, seed: room.seed, terrain: [...room.world.terrain], hazards: [...room.world.hazards], burrows: room.world.burrows,
+    world: includeWorld ? { size: worldSize(room.world), seed: room.seed, terrain: [...room.world.terrain], hazards: [...room.world.hazards], burrows: room.world.burrows,
       resourceCells: [...room.food.values()].filter(cell => cell.kind !== "corpse" && !isTreeFood(cell, room.world)).map(cell => [cell.x, cell.y]) } : undefined,
     state: room.games.get(session.id).snapshot() };
 }

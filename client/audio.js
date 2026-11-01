@@ -22,8 +22,6 @@
   "harvest-wood": "DesignAssets/Audio/wood-harvest-loop.mp3",
   "harvest-pebbles": "DesignAssets/Audio/pebbles-harvest-loop.mp3",
   "harvest-dew": "DesignAssets/Audio/dew-harvest-loop.mp3",
-  "harvest-meat": "DesignAssets/Audio/meat-harvest-loop.mp3",
-  "harvest-carapace": "DesignAssets/Audio/carapace-harvest-loop.mp3",
   "harvest-grass-fiber": "DesignAssets/Audio/grass-fiber-harvest-loop.mp3",
   "harvest-sand": "DesignAssets/Audio/sand-harvest-loop.mp3",
   "harvest-iron-ore": "DesignAssets/Audio/iron-ore-harvest-loop.wav",
@@ -35,7 +33,7 @@
 };
   const harvestSounds = Object.freeze({
     "honey-mushrooms": "harvest", clay: "harvest-soil", tree: "harvest-wood", pebbles: "harvest-pebbles",
-    dew: "harvest-dew", meat: "harvest-dew", carapace: "harvest-carapace", "grass-fiber": "harvest-grass-fiber",
+    dew: "harvest-dew", nutrients: "harvest-dew", "grass-fiber": "harvest-grass-fiber",
     sand: "harvest-sand", "iron-ore": "harvest-iron-ore", "copper-ore": "harvest-copper-ore", quartz: "harvest-quartz"
   });
   globalThis.SpawnerAudio = Object.freeze({ create: function () {

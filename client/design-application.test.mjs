@@ -17,7 +17,7 @@ import { imageDimensions } from "./image-audit.mjs";
 const root = new URL("../", import.meta.url);
 const design = readFileSync(new URL("Design.html", root), "utf8");
 
-test("기획서의 건물 크기·보관량·기본 재료를 적용하고 샘방울 할인을 유지한다", () => {
+test("기획서의 건물 크기·보관량·기본 재료를 적용한다", () => {
   for (const [key, size] of [["storage", 2], ["evolution-lab", 2], ["outpost", 3], ["watchpost", 1]]) {
     const definition = buildingDefinition(key);
     assert.deepEqual([definition.width, definition.height], [size, size]);
@@ -27,7 +27,7 @@ test("기획서의 건물 크기·보관량·기본 재료를 적용하고 샘�
   assert.ok(design.includes("자원 보관량 +300"));
   assert.equal(buildingDefinition("storage").storageCapacity, 300);
   assert.deepEqual(buildingCost("outpost", "bean").materials, { clay: 24, tree: 12, pebbles: 12 });
-  assert.deepEqual(buildingCost("outpost", "spring").materials, { dew: 12, tree: 6, pebbles: 6 });
+  assert.deepEqual(buildingCost("outpost", "spring").materials, { dew: 24, tree: 12, pebbles: 12 });
   const state = { nestHealth: 100, nestLevel: 1, resourceInventory: {},
     buildings: [{ id: "store", key: "storage", x: 50, y: 50, health: 120 }] };
   const storage = createResourceStorage(state, { id: 1, x: 40, y: 40 });

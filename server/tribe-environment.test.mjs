@@ -9,14 +9,32 @@ test("늪·수역 통행은 종족의 기본 특성으로 구분하고 제거된
   for (const tribe of ["bean", "spore", "pebble", "spring"]) {
     assert.equal(tribeTerrainWalkable(tribe, 0), false);
     assert.equal(tribeTerrainWalkable(tribe, 1), false);
+    assert.equal(unitTerrainSpeedMultiplier({ tribe }, 1), 0);
     assert.equal(tribeTerrainWalkable(tribe, 10), true);
     assert.equal(tribeTerrainWalkable(tribe, 9), tribe !== "pebble");
     assert.equal(tribeHazardKind(tribe, 2), 0);
     assert.equal(tribeHazardKind(tribe, 1), 0);
   }
+  assert.equal(unitTerrainSpeedMultiplier({ movementType: "flying" }, 1), 1);
   assert.equal(unitTerrainSpeedMultiplier({ tribe: "spring" }, 10), 1);
   assert.equal(unitTerrainSpeedMultiplier({ tribe: "spore" }, 9), .6);
   assert.equal(unitTerrainSpeedMultiplier({ tribe: "pebble" }, 7), .6);
+});
+
+test("모든 종족의 일반 개체는 얕은 물을 통과하지 않고 우회한다", () => {
+  const size = 5, terrain = (x, y) => y === 1 && x > 0 && x < 4 ? 1 : 4;
+  for (const tribe of ["bean", "spore", "pebble", "spring"]) {
+    const state = { simSeconds: 0, evolutionPoints: 0, colonyFood: 0, nestLevel: 1, agents: [],
+      explored: new Set(Array.from({ length: size * size }, (_, index) => index)) };
+    const ai = createUtilityAI({ state, size, homeCells: () => [], deliveryCells: () => [],
+      terrainAt: terrain, walkable: (x, y) => y <= 2 && tribeTerrainWalkable(tribe, terrain(x, y)),
+      hazardAt: () => 0, enemies: () => [], synergy: () => false, canHarvest: () => true });
+    const agent = { x: 0, y: 1, tribe, carrying: 0, health: 20,
+      stats: { speed: 1, capacity: 1, resistance: 1 }, personality: { boldness: .5 } };
+    const step = ai.nextStep(agent, { x: 4, y: 1 });
+    assert.ok(step, tribe);
+    assert.notEqual(step.y, 1, tribe);
+  }
 });
 
 test("몽돌 AI는 늪을 우회하고 샘방울 AI는 빠른 습지 경로를 이용한다", () => {

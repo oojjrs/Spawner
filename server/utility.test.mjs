@@ -107,7 +107,7 @@ test("같은 설계의 성향은 다르고 저장·복원과 설계 수정에도
   assert.deepEqual(f.game.agents.map(agent => ({ ...agent.personality })), migrated);
 });
 
-test("안개 속 적·먹이는 판단에 쓰지 않고 군락의 새 적 발견은 즉시 재판단한다", () => {
+test("안개 속 적·자원은 판단에 쓰지 않고 군락의 새 적 발견은 즉시 재판단한다", () => {
   const f = fixture([]);
   const rival = enemy(f, 65, 42);
   f.environment.food.set("65,43", { x: 65, y: 43, amount: 999, terrain: "grassland", kind: "resource", resourceType: "clay" });
@@ -133,7 +133,7 @@ test("다른 개체가 가한 피격은 다음 주기를 기다리지 않고 바
   assert.ok(f.agent.lastDecisionAt < next);
 });
 
-test("먹이 목표가 고갈되면 즉시 다른 후보를 선택한다", () => {
+test("자원 목표가 고갈되면 즉시 다른 후보를 선택한다", () => {
   const f = fixture(["strength"]);
   f.environment.food.set("43,42", { x: 43, y: 42, amount: 10, terrain: "grassland", kind: "resource", resourceType: "clay" });
   advance(f, 0.1);
@@ -169,7 +169,7 @@ test("회복은 둥지에서만 적용되고 부분 회복 뒤에도 다시 판�
   assert.ok(f.agent.decisionCount >= 5);
 });
 
-test("체력·생산 비용·먹이가 손실 위험을 높인다", () => {
+test("체력·생산 비용·자원이 손실 위험을 높인다", () => {
   const agent = { health: 12, cost: 3, carrying: 0 };
   const base = riskValue(agent, 3);
   assert.ok(riskValue({ ...agent, health: 3 }, 3) > base);
@@ -247,7 +247,7 @@ test("상태 요청마다 저장·복원해도 채집과 하역을 이어간다"
   assert.ok(f.game.snapshot().evolutionPoints > before);
 });
 
-test("식량 비축량과 무관하게 부족 먹이를 모으고 잠긴 재료는 선택하지 않는다", () => {
+test("식량 비축량과 무관하게 부족 자원을 모으고 잠긴 재료는 선택하지 않는다", () => {
   const f = fixture([]);
   f.game.agents.splice(1);
   Object.assign(f.agent, { actionPriorities: ["collect", "explore"],

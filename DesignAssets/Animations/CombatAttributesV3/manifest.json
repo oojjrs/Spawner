@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "variantCount": 48,
-  "animationCount": 316,
+  "variantCount": 40,
+  "animationCount": 248,
   "frameSize": 256,
   "columns": 8,
   "source": "Existing game renderer; original body frames and timing reused without body redraw",
@@ -17,8 +17,7 @@
     "death"
   ],
   "equipmentActions": [
-    "heal",
-    "secretion"
+    "heal"
   ],
   "previews": [
     "body-motion-comparison.gif",

@@ -1,3 +1,4 @@
+import { worldSize } from "../server/world-size.mjs";
 import { createGame } from "../server/game.mjs";
 import { createCreatures } from "../server/creatures.mjs";
 import { generateWorld } from "../server/world.mjs";
@@ -37,7 +38,7 @@ function world(seed) {
 function makeRoom(roomId, title, hostId, seed) {
   const room = { id: roomId, title, hostId, seed, world: world(seed), revision: 0, simSeconds: 0,
     lastStepAt: Date.now(), colonies: [], games: new Map(), food: new Map(), foodSpots: new Map(), commands: new Map() };
-  for (const [x, y, amount] of room.world.food) room.food.set(x + "," + y, { x, y, amount, initialAmount: amount, terrain: terrainTypes[room.world.terrain[y * 320 + x]] });
+  for (const [x, y, amount] of room.world.food) room.food.set(x + "," + y, { x, y, amount, initialAmount: amount, terrain: terrainTypes[room.world.terrain[y * worldSize(room.world) + x]] });
   indexFood(room);
   room.creatureSystem = createCreatures(room, null);
   return room;
@@ -122,7 +123,7 @@ function payload(room, player, includeWorld) {
   return { roomId: room.id, title: room.title, hostId: room.hostId, userId: player.id, revision: room.revision,
     colonyId: room.colonies.find((colony) => colony.ownerId === player.id).id,
     colonies: room.colonies.filter(colony => room.games.get(player.id).colonyKnown(colony)).map((colony) => ({ ...colony, nestLevel: room.games.get(colony.ownerId).nestLevel, occupiedCells: [...colony.occupiedCells] })),
-    world: includeWorld ? { size: 320, seed: room.seed, terrain: [...room.world.terrain], hazards: [...room.world.hazards] } : undefined,
+    world: includeWorld ? { size: worldSize(room.world), seed: room.seed, terrain: [...room.world.terrain], hazards: [...room.world.hazards] } : undefined,
     state: room.games.get(player.id).snapshot() };
 }
 async function body(request) {

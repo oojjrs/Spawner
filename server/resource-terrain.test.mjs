@@ -11,7 +11,7 @@ test("자원과 겹친 위험 판정을 제거하고 수량·사체·주변 위�
     { x: 40, y: 40, amount: 17, terrain: "forest" },
     { x: 41, y: 40, amount: 0, terrain: "forest", resourceType: "grass-fiber", kind: "resource" },
     { x: 42, y: 40, amount: 8, terrain: "forest", resourceType: "tree-fruit" },
-    { x: 43, y: 40, amount: 4, terrain: "forest", resourceType: "meat", kind: "corpse" }
+    { x: 43, y: 40, amount: 4, terrain: "forest", resourceType: "nutrients", kind: "corpse" }
   ];
   const hazards = new Uint8Array(320 * 320);
   for (let x = 40; x <= 44; x++) hazards[40 * 320 + x] = x % 2 + 1;
@@ -25,11 +25,11 @@ test("자원과 겹친 위험 판정을 제거하고 수량·사체·주변 위�
   assert.equal(isTreeFood(cells[2], room.world), true);
 });
 
-test("나무·나무 열매·사체를 제외한 먹이·재료를 공터로 전달한다", () => {
+test("나무·나무 열매·사체를 제외한 자원을 공터로 전달한다", () => {
   const cells = RESOURCE_TYPES.map((definition, index) => ({
     x: 40 + index, y: 40, amount: definition.key === "grass-fiber" ? 0 : 10,
     resourceType: definition.key, terrain: "forest",
-    kind: definition.key === "meat" ? "corpse" : definition.category === "material" ? "resource" : undefined
+    kind: definition.key === "nutrients" ? "corpse" : definition.category === "material" ? "resource" : undefined
   }));
   const room = {
     id: "test", title: "자원 공터", hostId: "test", seed: 13, simSeconds: 0, revision: 0,
@@ -41,9 +41,9 @@ test("나무·나무 열매·사체를 제외한 먹이·재료를 공터로 전
     food: new Map(cells.map(cell => [cell.x + "," + cell.y, cell]))
   };
   const clearings = new Set(snapshotRoom(room, true).world.resourceCells.map(([x, y]) => x + "," + y));
-  assert.equal(clearings.size, cells.filter(cell => !["tree", "meat"].includes(cell.resourceType)).length);
+  assert.equal(clearings.size, cells.filter(cell => !["tree", "nutrients"].includes(cell.resourceType)).length);
   for (const cell of cells) assert.equal(clearings.has(cell.x + "," + cell.y),
-    !["tree", "tree-fruit", "meat"].includes(cell.resourceType), cell.resourceType);
+    !["tree", "tree-fruit", "nutrients"].includes(cell.resourceType), cell.resourceType);
 });
 
 test("새 방과 저장 복원 모두 자원 위치·채집량을 유지하고 위험 지형과 겹치지 않는다", () => {
