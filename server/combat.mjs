@@ -14,6 +14,7 @@ export const COMBAT_DISPOSITIONS = Object.freeze({ peaceful: "평화형", passiv
 export const PEACEFUL_ESCAPE_CHANCE = .8;
 export const PEACEFUL_ESCAPE_INTERVAL = 1.5;
 export const COMBAT_ESCAPE_GRACE = 2;
+export const COMBAT_RETREAT_EXCHANGES = 2;
 export const COMBAT_EXCHANGE_PAUSE = .2;
 export const COMBAT_TURN_ORDER_VERSION = 1;
 export const COMBAT_EXCHANGE_DAMAGE_VERSION = 5;
@@ -27,6 +28,10 @@ export function combatDisposition(agent) {
   if (!disposition) disposition = agent.species === "spiny-back-beetle" ? "aggressive" : "passive";
   if (!Object.hasOwn(COMBAT_DISPOSITIONS, disposition)) disposition = "passive";
   return type?.unique && disposition === "peaceful" ? "passive" : disposition;
+}
+
+function peacefulCreature(agent) {
+  return !agent.ownerId && species.get(agent.species)?.combatDisposition === "peaceful" && combatDisposition(agent) === "peaceful";
 }
 
 export function combatTeam(agent) {
@@ -72,7 +77,7 @@ export function createCombat(environment) {
     agent.combat = { id: combat.id, x: combat.x, y: combat.y, teams: [...combat.teams], side, joinedAt: time,
       turnOrderVersion: COMBAT_TURN_ORDER_VERSION,
       turn: combat.turn || 0, nextAttackTurn: (combat.turn || 0) + 1,
-      nextEscapeAt: time + PEACEFUL_ESCAPE_INTERVAL };
+      nextEscapeAt: time + PEACEFUL_ESCAPE_INTERVAL, completedExchanges: 0 };
     agent.renderFromX = agent.x; agent.renderFromY = agent.y;
     agent.moveDuration = 0; agent.moveBudget = 0;
     agent.attack = null; agent.attackTargetId = null;
@@ -220,6 +225,13 @@ export function createCombat(environment) {
       attackApplied, counterApplied, resolved: attackApplied && counterApplied };
   }
 
+  function completeExchange(combat, exchange) {
+    for (const { agent } of members(combat)) {
+      if (agent.id === exchange.attackerId || agent.id === exchange.targetId)
+        agent.combat.completedExchanges = (agent.combat.completedExchanges || 0) + 1;
+    }
+  }
+
   function receiveDamage(entry, damage, attacker) {
     const previousHealth = entry.agent.health;
     if (entry.game) entry.game.receiveDamage(entry.agent, damage);
@@ -324,6 +336,7 @@ export function createCombat(environment) {
         }
       }
       if (time + 1e-8 < pending.endsAt) return true;
+      completeExchange(combat, pending.exchange);
       if (pendingOwner.agent.combat) delete pendingOwner.agent.combat.pendingCounter;
       if (agent.health <= 0) return true;
     }
@@ -414,10 +427,11 @@ export function createCombat(environment) {
           resolved: false };
         return true;
       }
+      if (attack.exchange?.resolved) completeExchange(combat, attack.exchange);
     }
     participants = members(combat);
     for (const entry of participants) {
-      if (!entry.agent.combat || combatDisposition(entry.agent) !== "peaceful" || time + 1e-8 < entry.agent.combat.nextEscapeAt) continue;
+      if (!entry.agent.combat || !peacefulCreature(entry.agent) || time + 1e-8 < entry.agent.combat.nextEscapeAt) continue;
       const enemies = members(combat).filter(other => other.agent.combat.side !== entry.agent.combat.side);
       if (enemies.length) escape(entry.agent, enemies, time, false);
     }
@@ -429,7 +443,7 @@ export function createCombat(environment) {
       Number.isFinite(entry.agent.hurtStartedAt) ? entry.agent.hurtStartedAt + hurtDuration(entry.agent) : -Infinity));
     if (time + 1e-8 < hurtEndsAt + COMBAT_EXCHANGE_PAUSE) return true;
     if (time + 1e-8 < Math.max(...participants.map(entry => entry.agent.attackReady || 0))) return true;
-    const contenders = participants.filter(entry => entry.agent.construction?.state !== "transforming" && combatDisposition(entry.agent) !== "peaceful").sort((a, b) => {
+    const contenders = participants.filter(entry => entry.agent.construction?.state !== "transforming" && !peacefulCreature(entry.agent)).sort((a, b) => {
       const difference = a.agent.combat.nextAttackTurn - b.agent.combat.nextAttackTurn;
       return Math.abs(difference) > 1e-8 ? difference : a.agent.combat.side - b.agent.combat.side ||
         a.agent.combat.joinedAt - b.agent.combat.joinedAt || String(a.agent.id).localeCompare(String(b.agent.id));
@@ -437,12 +451,13 @@ export function createCombat(environment) {
     if (!contenders.length) return true;
     const attacker = contenders[0].agent;
     const enemies = participants.filter(entry => entry.agent.combat.side !== attacker.combat.side);
-    if (attacker.ownerId && combatDisposition(attacker) !== "peaceful") {
+    if (attacker.ownerId) {
       const allies = participants.filter(entry => entry.agent.combat.side === attacker.combat.side);
       const assessment = combatSurvival(attacker, enemies.map(entry => entry.agent), allies.map(entry => entry.agent));
       attacker.survivalState = assessment.state;
       if (assessment.retreat) beginRetreat(attacker, time);
-      if (attacker.retreat && escapeCells(attacker, time, true).length) {
+      if (attacker.retreat && (attacker.combat.completedExchanges || 0) >= COMBAT_RETREAT_EXCHANGES &&
+          escapeCells(attacker, time, true).length) {
         const turn = attacker.combat.nextAttackTurn;
         for (const { agent: member } of participants) member.combat.turn = turn;
         attacker.combat.nextAttackTurn += 1;

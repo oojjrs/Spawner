@@ -3,7 +3,7 @@ import { unitTravelSpeed } from "./attributes.mjs";
 
 export const RETREAT_RECOVERY_RATIO = .7;
 export const RETREAT_SAFE_SECONDS = 5;
-export const RETREAT_ESCAPE_CHANCE = .7;
+export const RETREAT_ESCAPE_CHANCE = .15;
 
 export function survivalState(agent, damage) {
   if (damage > 0 && (damage >= agent.health * .85 || agent.health <= agent.stats.health * .3)) return "critical";
@@ -47,6 +47,6 @@ export function retreatEscapeChance(agent, opponents) {
   const speed = unit => unit.species ? unit.stats.speed : unitTravelSpeed(unit, unit.carrying);
   const fastest = Math.max(.1, ...opponents.map(speed));
   const suppression = Math.max(0, ...opponents.map(enemy => enemy.stats.escapeSuppression || 0));
-  return Math.max(.2, Math.min(.9, RETREAT_ESCAPE_CHANCE + .15 * (speed(agent) / fastest - 1))) *
+  return Math.max(.05, Math.min(.25, RETREAT_ESCAPE_CHANCE + .1 * (speed(agent) / fastest - 1))) *
     (1 - Math.max(0, Math.min(1, suppression)));
 }

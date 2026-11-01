@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createCreatures } from "./creatures.mjs";
+import { createCombat } from "./combat.mjs";
 import { createUtilityAI } from "./utility.mjs";
 import { createRoom, saveRoom, restoreRoom } from "../client/room.mjs";
 
@@ -224,4 +225,33 @@ test("이전 저장을 늦게 불러와도 전체 누적 수급을 첫 2분 수�
   const opening = restored.save().raidCooldowns[0].opening;
   assert.equal(opening.rate, 8);
   assert.equal(opening.interval, 120);
+});
+
+test("습격벌레는 출정·귀환·활동 종료 중 붙잡혀도 공격과 반격이 끝나기 전에 이탈하지 않는다", () => {
+  for (const phase of ["outbound", "returning", "active"]) {
+    const setup = fixture(false), { room, system, victim } = setup, agent = start(setup);
+    agent.raid.phase = phase;
+    agent.raid.activeUntil = phase === "active" ? room.simSeconds : null;
+    Object.assign(agent, { x: 120, y: 100, renderFromX: 120, renderFromY: 100, moveDuration: 0 });
+    Object.assign(victim, { x: agent.x, y: agent.y, combatDisposition: "aggressive" });
+    const combat = createCombat(room);
+    assert.equal(combat.engage(victim, agent, room.simSeconds), true, phase);
+    combat.update(victim, room.simSeconds);
+    const position = { x: agent.x, y: agent.y }, combatId = agent.combat.id;
+    system.tick();
+    assert.equal(agent.combat?.id, combatId, phase);
+    assert.equal(agent.raid.phase, phase, phase);
+    assert.deepEqual({ x: agent.x, y: agent.y }, position, phase);
+    advance(room, system, victim.attack.hitAt);
+    advance(room, system, victim.attack.exchangeEndsAt);
+    assert.equal(agent.combat?.id, combatId, phase);
+    assert.ok(agent.attack?.counter, phase);
+    const before = victim.health;
+    advance(room, system, agent.attack.hitAt);
+    assert.ok(victim.health < before, phase);
+    victim.health = 0;
+    until(room, system, () => !agent.combat, room.simSeconds + 10);
+    room.simSeconds += .25; system.tick();
+    if (phase === "active") assert.equal(agent.raid.phase, "returning");
+  }
 });

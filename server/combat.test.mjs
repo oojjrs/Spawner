@@ -110,7 +110,8 @@ test("아군 증원은 진행 중인 교환을 끊지 않고 자기 차례에 �
 });
 
 test("평화형은 근접 교전에서 반격하고 교전 사이에 안전한 인접 셀로 이탈한다", () => {
-  const a = unit("a", "left", "aggressive"), b = unit("b", "right", "peaceful");
+  const a = unit("a", "left", "aggressive"), b = unit("b", null, "peaceful");
+  b.species = "flower-tail-bird"; b.stats.combatStrength = 20;
   const f = fixture([a, b]);
   let rolls = 0;
   f.environment.combatRandom = () => ++rolls === 1 ? .9 : .1;
@@ -137,7 +138,8 @@ test("평화형 탈출은 기본 80%이며 사냥 억제 수치로 낮출 수 �
   assert.equal(peacefulEscapeChance(0), .8);
   assert.equal(peacefulEscapeChance(.5), .4);
   assert.equal(peacefulEscapeChance(2), 0);
-  const a = unit("a", "left", "aggressive"), b = unit("b", "right", "peaceful");
+  const a = unit("a", "left", "aggressive"), b = unit("b", null, "peaceful");
+  b.species = "flower-tail-bird"; b.stats.combatStrength = 20;
   const f = fixture([a, b]);
   a.stats.escapeSuppression = .5;
   f.environment.combatRandom = () => .6;
@@ -149,7 +151,8 @@ test("평화형 탈출은 기본 80%이며 사냥 억제 수치로 낮출 수 �
 });
 
 test("출구가 막혔으면 평화형이 순간이동하지 않고 다음 교전까지 남는다", () => {
-  const a = unit("a", "left", "aggressive"), b = unit("b", "right", "peaceful");
+  const a = unit("a", "left", "aggressive"), b = unit("b", null, "peaceful");
+  b.species = "flower-tail-bird"; b.stats.combatStrength = 20;
   const f = fixture([a, b]);
   f.environment.combatRandom = () => 0;
   for (const [x, y] of [[99, 100], [101, 100], [100, 99], [100, 101]]) f.environment.world.terrain[y * 320 + x] = 0;
@@ -162,7 +165,8 @@ test("출구가 막혔으면 평화형이 순간이동하지 않고 다음 교�
 });
 
 test("저장한 공격과 탈출 대기를 복원해도 중복 피해·즉시 재판정을 만들지 않는다", () => {
-  const a = unit("a", "left", "aggressive"), b = unit("b", "right", "peaceful");
+  const a = unit("a", "left", "aggressive"), b = unit("b", null, "peaceful");
+  b.species = "flower-tail-bird"; b.stats.combatStrength = 20;
   const f = fixture([a, b]);
   f.tick(0);
   const restored = JSON.parse(JSON.stringify([a, b]));
@@ -639,13 +643,20 @@ test("제거된 생명체의 저장된 확정 반격도 해당 종의 타격 시
   assert.equal(saved.health, health);
 });
 
-test("일반 유닛은 위급한 자기 차례에 공격 대신 탈출하고 회복 의사를 유지한다", () => {
+test("일반 유닛은 공격과 반격을 두 번 마치기 전에는 도주하지 않는다", () => {
   const a = unit("a", "left", "aggressive"), b = unit("b", "right", "passive");
-  a.health = 25;
+  a.health = 70;
   const f = fixture([a, b]);
   let rolls = 0;
   f.environment.combatRandom = () => { rolls++; return .1; };
   f.tick(0);
+  assert.equal(rolls, 0);
+  assert.ok(a.attack);
+  finishExchange(f);
+  assert.equal(rolls, 0);
+  assert.ok(a.combat && b.combat);
+  assert.deepEqual(f.hits, ["b", "a"]);
+  finishExchange(f);
   assert.equal(rolls, 1);
   assert.equal(a.attack, null);
   assert.equal(a.combat, null);
@@ -653,22 +664,24 @@ test("일반 유닛은 위급한 자기 차례에 공격 대신 탈출하고 회
   assert.equal(a.retreat.attempts, 1);
   assert.equal(a.mode, "flee");
   assert.equal(canPursueCombat(a, b, 10), false);
-  assert.deepEqual(f.hits, []);
+  assert.deepEqual(f.hits, ["b", "a", "a", "b"]);
 });
 
 test("탈출 실패는 차례를 소모하고 진행 중인 반격 뒤 다음 자기 차례에 다시 시도한다", () => {
   const a = unit("a", "left", "aggressive"), b = unit("b", "right", "passive");
-  a.health = 45;
+  a.health = 70;
   const f = fixture([a, b]);
   let rolls = 0;
   f.environment.combatRandom = () => ++rolls === 1 ? .99 : .1;
   f.tick(0);
+  finishExchange(f); finishExchange(f);
   assert.equal(rolls, 1);
   assert.ok(a.retreat);
   assert.equal(a.attack, null);
-  f.tick(0); f.tick(.1);
+  const failedAt = f.environment.simSeconds;
+  f.tick(failedAt); f.tick(failedAt + .1);
   assert.equal(rolls, 1);
-  f.tick(.2);
+  f.tick(failedAt + .2);
   assert.ok(b.attack && !b.attack.counter);
   f.tick(b.attack.hitAt);
   assert.equal(rolls, 1);
@@ -723,4 +736,32 @@ test("변태 중에도 공격받지만 반격이나 도주로 행동을 바꾸�
   assert.equal(b.retreat, undefined);
   assert.equal(b.mode, "transform");
   assert.equal(a.health, 100);
+});
+
+test("한 번 교전한 저장을 복원해도 두 번째 교전 전에는 도주하지 않는다", () => {
+  const a = unit("a", "left", "aggressive"), b = unit("b", "right", "passive");
+  a.health = 70;
+  const f = fixture([a, b]);
+  f.tick(0); finishExchange(f);
+  const restored = JSON.parse(JSON.stringify([a, b])), next = fixture(restored);
+  let rolls = 0;
+  next.environment.combatRandom = () => { rolls++; return 0; };
+  next.tick(f.environment.simSeconds);
+  assert.equal(rolls, 0);
+  assert.ok(restored.every(agent => agent.combat));
+  finishExchange(next);
+  assert.equal(rolls, 1);
+  assert.equal(restored[0].combat, null);
+});
+
+test("소속 유닛의 평화형 성향에는 중립 몹의 즉시 도주 예외를 적용하지 않는다", () => {
+  const a = unit("a", "left", "peaceful"), b = unit("b", "right", "aggressive");
+  a.health = 70;
+  const f = fixture([a, b]);
+  let rolls = 0;
+  f.environment.combatRandom = () => { rolls++; return 0; };
+  f.tick(0); finishExchange(f);
+  assert.equal(rolls, 0);
+  assert.ok(a.combat && b.combat);
+  assert.deepEqual(f.hits, ["a", "b"]);
 });

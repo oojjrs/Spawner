@@ -24,11 +24,18 @@ test("성향·생산비·짐이 달라도 즉사 위험에 대한 후퇴 결정�
   }
 });
 
-test("일반 유닛의 탈출은 기본 70%이고 이동 능력과 억제를 반영한다", () => {
+test("일반 유닛의 탈출은 기본 15%이며 속도 보정도 5~25%로 제한한다", () => {
   const agent = unit(100), enemy = unit(100);
-  assert.equal(retreatEscapeChance(agent, [enemy]), .7);
+  assert.equal(retreatEscapeChance(agent, [enemy]), .15);
   agent.stats.speed = 2;
-  assert.ok(retreatEscapeChance(agent, [enemy]) > .7);
+  assert.equal(retreatEscapeChance(agent, [enemy]), .25);
+  agent.stats.speed = 100;
+  assert.equal(retreatEscapeChance(agent, [enemy]), .25);
+  agent.stats.speed = 0;
+  assert.equal(retreatEscapeChance(agent, [enemy]), .05);
+  agent.stats.speed = 1;
+  enemy.stats.escapeSuppression = .5;
+  assert.equal(retreatEscapeChance(agent, [enemy]), .075);
   enemy.stats.escapeSuppression = 1;
   assert.equal(retreatEscapeChance(agent, [enemy]), 0);
 });

@@ -216,7 +216,7 @@ export function createCreatures(environment, saved) {
     for (let index = count; index < BEETLE_RAIDS.defenders + 1; index++) if (!spawnFromBurrow(record)) break;
   }
   const raids = createBeetleRaids(environment, state, { walkable, occupied, noise, move, idle, reinforce,
-    stepSeconds:1 / stats.speed, restSeconds:CREATURE_MOVEMENT[species].restSeconds, release: combat.release }, saved?.version === 5);
+    stepSeconds:1 / stats.speed, restSeconds:CREATURE_MOVEMENT[species].restSeconds }, saved?.version === 5);
 
   function idle(agent, duration) {
     if (agent.mode !== "idle") agent.animationStartedAt = environment.simSeconds;
