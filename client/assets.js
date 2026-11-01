@@ -9,5 +9,10 @@
       script.onerror = () => { script.remove(); reject(new Error("로컬 자산을 불러오지 못했습니다: " + file)); };
       document.head.append(script);
     }))) : Promise.resolve();
-  globalThis.SpawnerAssets = Object.freeze({ ready, source: path => sources[path] || path });
+  function image() {
+    const sprite = new Image();
+    sprite.crossOrigin = "anonymous";
+    return sprite;
+  }
+  globalThis.SpawnerAssets = Object.freeze({ ready, image, source: path => sources[path] || path });
 })();
