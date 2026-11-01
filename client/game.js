@@ -4218,6 +4218,19 @@
       ctx.restore();
     }
 
+    function agentJumpOffset(agent, position) {
+      const appearance = agent.appearanceAttributes || agent.attributes || {};
+      return !agent.species && (agent.tribe || "bean") === "bean" && !appearance.feet ?
+        Math.sin(position.progress * Math.PI) * AGENT_HEIGHT * .18 : 0;
+    }
+
+    function agentAppearanceBodyPose(agent, now) {
+      const pose = agentBodyPose(agent, now, foodDeliveryPose(agent));
+      const attributes = agent.appearanceAttributes || agent.attributes || {};
+      return !agent.species && (agent.tribe || "bean") === "bean" && !attributes.feet ?
+        { ...pose, scaleX: 1, scaleY: 1 } : pose;
+    }
+
     function agentBodyPose(agent, now, deliveryPose) {
       const appearance = agent.appearanceAttributes || agent.attributes || {};
       const lift = agentBodyLift(appearance);
@@ -5133,7 +5146,7 @@
       }
       if (spawn) opacity *= Math.min(1, spawn.progress / .25);
       else if (birth) opacity *= Math.max(.25, 1 - (birth.unitVisible ? birth.lift : birth.seedLift) * .6);
-      else if (!agent.species && !appearance.feet && !appearance.construction && key === "bean") {
+      else if (!agent.species && !appearance.feet && key === "bean") {
         const lift = Math.sin(position.progress * Math.PI);
         radiusX *= 1 - lift * .18;
         opacity *= 1 - lift * .35;
@@ -5235,6 +5248,22 @@
 
     function drawAgentAppearance(ctx, now, agent, cell, topLeft, renderPosition, birth, outlineColor) {
       agent = displayedAgent(agent);
+      const attributes = agent.appearanceAttributes || agent.attributes || {};
+      const jumping = !birth && !agent.species && (agent.tribe || "bean") === "bean" && !attributes.feet;
+      ctx.save();
+      if (jumping) {
+        const centerX = topLeft.x + cell / 2, floor = topLeft.y + cell * (.5 + AGENT_HEIGHT * .44);
+        const pose = agentBodyPose(agent, now, foodDeliveryPose(agent));
+        ctx.translate(centerX, floor - agentJumpOffset(agent, renderPosition) * cell);
+        ctx.scale(pose.scaleX, pose.scaleY);
+        ctx.translate(-centerX, -floor);
+      }
+      drawAgentAppearanceSurface(ctx, now, agent, cell, topLeft, renderPosition, birth, outlineColor);
+      ctx.restore();
+    }
+
+    function drawAgentAppearanceSurface(ctx, now, agent, cell, topLeft, renderPosition, birth, outlineColor) {
+      agent = displayedAgent(agent);
       const attributes = agent.appearanceAttributes || agent.attributes;
       if (!outlineColor || birth || cell < 8 || ctx.canvas !== canvas || (agent.tribe || "bean") !== "bean" || !attributes.feet) {
         drawAgentAppearanceLayer(ctx, now, agent, cell, topLeft, renderPosition, birth, outlineColor);
@@ -5323,10 +5352,9 @@
 
     function drawAgentCarrying(ctx, agent, cell, topLeft, renderPosition) {
       const appearance = agent.appearanceAttributes || agent.attributes, spriteHeight = cell * AGENT_HEIGHT;
-      const centerX = topLeft.x + cell / 2, centerY = topLeft.y + cell / 2, stride = Math.sin(renderPosition.progress * Math.PI);
-      const bodyPose = agentBodyPose(agent, performance.now(), foodDeliveryPose(agent)), walk = agentWalkPose(agent);
-      const jumpOffset = appearance.feet || appearance.construction || ["spore", "pebble", "spring"].includes(agent.tribe) ? 0 : stride * spriteHeight * .18;
-      const spriteY = centerY - spriteHeight / 2 - jumpOffset;
+      const centerX = topLeft.x + cell / 2, centerY = topLeft.y + cell / 2;
+      const bodyPose = agentAppearanceBodyPose(agent, performance.now()), walk = agentWalkPose(agent);
+      const spriteY = centerY - spriteHeight / 2;
       const delivery = agent.foodDelivery;
       const released = delivery && delivery.receivedAt == null &&
         state.simSeconds >= delivery.startedAt + (delivery.arrivesAt - delivery.startedAt) * 0.24;
@@ -5363,28 +5391,26 @@
       const spriteHeight = cell * AGENT_HEIGHT;
       const centerX = topLeft.x + cell / 2;
       const centerY = topLeft.y + cell / 2;
-      const stride = Math.sin(renderPosition.progress * Math.PI);
       const appearance = agent.appearanceAttributes || agent.attributes;
-      const bodyPose = agentBodyPose(agent, now, foodDeliveryPose(agent));
+      const bodyPose = agentAppearanceBodyPose(agent, now);
       const walk = agentWalkPose(agent);
-      const jumpOffset = appearance.feet || appearance.construction || ["spore", "pebble", "spring"].includes(agent.tribe) ? 0 : stride * spriteHeight * 0.18;
 
       if (cell < 8) {
         if (outlineColor) {
           drawSelectionOutline(foodSelectionShape,
-            Math.floor(centerX - 1), Math.floor(centerY - jumpOffset - 1), 3, 3, null, outlineColor);
+            Math.floor(centerX - 1), Math.floor(centerY - 1), 3, 3, null, outlineColor);
         }
         ctx.fillStyle = agent.carrying > 0 ? "#d6b26b" : "#75c4b6";
         ctx.fillRect(
           Math.floor(centerX - 1),
-          Math.floor(centerY - jumpOffset - 1),
+          Math.floor(centerY - 1),
           3,
           3
         );
         return;
       }
 
-      const spriteY = centerY - spriteHeight / 2 - jumpOffset;
+      const spriteY = centerY - spriteHeight / 2;
 
       ctx.save();
       ctx.beginPath();
@@ -6151,7 +6177,7 @@
           return world.x >= left - padding && world.x <= left + bounds.width * scale + padding &&
             world.y >= top - padding && world.y <= top + bounds.height * scale + padding;
         }
-        const jump = birth ? birth.lift : appearance.feet ? 0 : Math.sin(position.progress * Math.PI) * AGENT_HEIGHT * 0.18;
+        const jump = birth ? birth.lift : agentJumpOffset(candidate, position);
         const bodyPose = state.camera.zoom < 8 ? { pivot: 0, scaleX: 1, scaleY: 1 } :
           agentBodyPose(candidate, state.lastFrame, foodDeliveryPose(candidate));
         const height = state.camera.zoom < 8 ? 3 / state.camera.zoom : AGENT_HEIGHT * unitDisplayScale(candidate) * (agentCombatPlacement(candidate)?.scale || 1);

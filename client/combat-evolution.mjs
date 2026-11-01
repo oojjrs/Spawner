@@ -25,7 +25,8 @@ export function combatEvolutionPose(agent, time, animations) {
     action = animations.harvest ? "harvest" : "attack";
     elapsed = Math.max(0, time - (agent.harvestStarted ?? time)) * 1000 % animations[action].durationMs;
   }
-  else if (agent.moveDuration > 0 && time >= agent.moveStartedAt && time < agent.moveStartedAt + agent.moveDuration) {
+  else if (agent.moveDuration > 0 && time >= agent.moveStartedAt && time < agent.moveStartedAt + agent.moveDuration &&
+      ((agent.tribe || "bean") !== "bean" || (agent.appearanceAttributes || agent.attributes || {}).feet > 0)) {
     action = "walk"; elapsed = (Math.max(0, (agent.stepCount || 1) - 1) + (time - agent.moveStartedAt) / agent.moveDuration) * animations.walk.durationMs;
   }
   const animation = animations[action] || animations.idle;

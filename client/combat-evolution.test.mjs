@@ -78,3 +78,20 @@ test("네 종족의 모든 전투 외형은 채집 중 공격을 반복하고 �
     assert.equal(combatEvolutionPose(base, 11.3, { ...animations, harvest }).action, "harvest");
   }
 });
+
+
+test("전투 속성은 다리 없는 새싹콩의 기본 점프를 보행으로 바꾸지 않는다", () => {
+  for (const [key, definition] of Object.entries(COMBAT_EVOLUTION_CATALOG)) {
+    const tribe = key.split("/")[0] === "sprout" ? "bean" : key.split("/")[0];
+    for (const feet of [0, 1]) {
+      const agent = { tribe, attributes: { [key.split("/")[1]]: 1, feet }, health: 10,
+        bornAt: 0, moveStartedAt: 10, moveDuration: 2, stepCount: 1 };
+      const actions = new Set();
+      for (const time of [10, 10.2, 10.8, 11.2, 11.8]) actions.add(combatEvolutionPose(agent, time, definition.animations).action);
+      assert.deepEqual([...actions], [tribe === "bean" && !feet ? "idle" : "walk"], key + feet);
+      assert.equal(combatEvolutionPose({ ...agent, attack: { startedAt: 10, speed: 1 } }, 10.3, definition.animations).action, "attack");
+      assert.equal(combatEvolutionPose({ ...agent, hurtStartedAt: 10 }, 10.3, definition.animations).action, "hurt");
+      if (tribe === "bean") assert.equal(combatEvolutionPose({ ...agent, appearanceAttributes: { feet: 1 } }, 10.3, definition.animations).action, "walk");
+    }
+  }
+});
