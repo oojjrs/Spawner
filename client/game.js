@@ -2147,6 +2147,7 @@
         if (discovered) objects.push({ kind: "burrow", depth: burrow.y + burrow.height - 0.08, target: burrow });
       }
       for (const agent of agentRenderCandidates()) {
+        if (agent.combat) continue;
         const position = interpolatedAgentPosition(agent);
         const birth = state.camera.zoom < 8 ? null : agentBirthPose(agent, true);
         const depth = position.y + 0.5 + AGENT_HEIGHT * 0.44;
@@ -2173,6 +2174,12 @@
         for (const agent of movementAgents) drawSelectedAgentMovement(agent);
         for (const object of objects) if (object.kind === "agent") drawAgent(now, object.target);
       }
+    }
+
+    function drawCombatAgents(now) {
+      const agents = visibleAgents().filter(agent => agent.combat);
+      agents.sort((first, second) => interpolatedAgentPosition(first).y - interpolatedAgentPosition(second).y);
+      for (const agent of agents) drawAgent(now, agent);
     }
 
     const travelTraceStyles = {
@@ -5903,6 +5910,7 @@
       drawBuildings();
       drawWorldObjects(now);
       drawCorpses();
+      drawCombatAgents(now);
       drawAttackImpacts();
       drawAgentGroups();
       drawFoodDeliveries(now);
