@@ -16,7 +16,7 @@ import { AGENT_EXPERIENCE, addAgentExperience, recordCombatExperience } from "./
 import { AGENT_ATTACK_DURATION, AGENT_ATTACK_HIT_TIME } from "./attack.mjs";
 import { createRoadOptimizer } from "./roads.mjs";
 import { createCombat, combatDisposition, canPursueCombat } from "./combat.mjs";
-import { resourceDefinition, resourceTypeForCell, canHarvestResource, migrateResourceType, isColonyFood, isResourceHabitat, populateColonyFood, resourceHarvestSeconds, resourceHarvestMultiplier } from "./resources.mjs";
+import { RESOURCE_TYPES, resourceDefinition, resourceTypeForCell, canHarvestResource, migrateResourceType, isColonyFood, isResourceHabitat, populateColonyFood, resourceHarvestSeconds, resourceHarvestMultiplier } from "./resources.mjs";
 import { burrowDistance, burrowApproaches } from "./burrows.mjs";
 import { commandCheat } from "./cheats.mjs";
 import { migrateCombatStats } from "./combat-stats.mjs";
@@ -1804,6 +1804,17 @@ export function createGame(environment, colony, savedGame) {
       return resourceStorage.refresh().reduce((sum, store) => sum + resourceStorage.space(store), 0);
     }
 
+    function resourceInventoryLimits() {
+      const space = resourceSpace(), targets = constructionMaterialTargets();
+      const reserved = Object.entries(state.constructionMaterialNeeds || {}).reduce((sum, [type, amount]) =>
+        sum + (!isColonyFood(type, colony.tribe, worldMap.generationVersion) ? Math.max(0, amount) : 0), 0);
+      return Object.fromEntries(RESOURCE_TYPES.map(({ key }) => {
+        const native = isColonyFood(key, colony.tribe, worldMap.generationVersion);
+        const available = (state.resourceInventory[key] || 0) + Math.max(0, space - (native ? reserved : 0));
+        return [key, Number(Math.min(available, native ? targets[key] || 0 : Infinity).toFixed(1))];
+      }));
+    }
+
     function deliveryCapacity(resourceType) {
       const materials = resourceSpace();
       const native = isColonyFood(resourceType,colony.tribe,worldMap.generationVersion);
@@ -2538,6 +2549,7 @@ export function createGame(environment, colony, savedGame) {
         resourceInventory: { ...state.resourceInventory },
         resourceStores: resourceStorage.refresh().map(store => ({ ...store, inventory: { ...store.inventory } })),
         resourceReserved: constructionSupply.reserved(),
+        resourceInventoryLimits: resourceInventoryLimits(),
         resourceCapacity: resourceStorage.refresh().filter(store => store.kind !== "remains").reduce((sum, store) => sum + store.capacity, 0),
         buildings: state.buildings.map(building => ({ ...building })),
         discoveries: state.discoveries.map(entry => ({ ...entry })), discoveryReadCount: state.discoveryReadCount,

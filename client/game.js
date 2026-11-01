@@ -758,6 +758,7 @@
       ending: null,
       evolutionPoints: 0,
       resourceInventory: {},
+      resourceInventoryLimits: {},
       buildings: [],
       resourceCapacity: Spawner.materialCapacity(1, []),
       explored: new Set(), visible: new Set(), markers: [],
@@ -8269,16 +8270,16 @@
         }
       }
       const previousHelp = helpTooltipTarget?.dataset.help;
-      const total = Math.round(Spawner.RESOURCE_TYPES.reduce((sum, definition) => sum + Math.max(0, state.resourceInventory?.[definition.key] || 0), 0) * 10) / 10;
-      const capacity = state.resourceCapacity ?? Spawner.materialCapacity(state.nestLevel, state.buildings);
       let visible = 0;
       for (const [key, entry] of resourceInventoryRows) {
         const amount = Math.max(0, state.resourceInventory?.[key] || 0);
-        entry.count.textContent = amount;
+        const limit = state.resourceInventoryLimits?.[key] ?? "—";
+        entry.count.textContent = amount + "/" + limit;
         entry.row.hidden = amount <= 0;
-        entry.row.dataset.digits = Math.min(6, String(amount).length);
-        entry.row.dataset.help = entry.definition.name + " · " + amount + "개\n창고 전체 " + total + "/" + capacity + "개";
-        entry.row.setAttribute("aria-label", entry.definition.name + " · " + amount + "개");
+        entry.row.dataset.help = entry.definition.name + " · 보유 " + amount + "개 / 비축 한도 " + limit + "개\n" +
+          (Spawner.isColonyFood(key, state.tribe, worldMap.generationVersion) ?
+            "비축 한도를 넘는 납품은 진화 포인트로 전환됩니다." : "다른 자원과 창고 공간을 공유합니다.");
+        entry.row.setAttribute("aria-label", entry.definition.name + " · 보유 " + amount + "개 / 비축 한도 " + limit + "개");
         if (amount <= 0) continue;
         visible++;
         const ratio = window.devicePixelRatio || 1;
@@ -8295,7 +8296,7 @@
         else if (helpTooltipTarget.dataset.help !== previousHelp) showHelpTooltip(helpTooltipTarget);
       }
       inventory.hidden = !visible;
-      inventory.setAttribute("aria-label", "자원 재고 " + total + "/" + capacity + "개");
+      inventory.setAttribute("aria-label", "자원 재고");
       const layout = inventory.offsetWidth + "x" + inventory.offsetHeight;
       if (inventory.dataset.layout !== layout || visible && document.documentElement.style.getPropertyValue("--resource-inventory-height") === "0px") {
         inventory.dataset.layout = layout;

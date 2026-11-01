@@ -844,17 +844,14 @@
 .colony-building-list img { width: 32px; height: 32px; object-fit: contain; }
 .resource-inventory-bar { --resource-inventory-max-width: min(496px, calc(100vw - 24px)); position: fixed; z-index: 5; left: 50%; bottom: 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 12px; width: max-content; max-width: var(--resource-inventory-max-width); padding: 8px; border: 1px solid var(--line); border-radius: 10px; background: #171d20f5; box-shadow: 0 8px 28px #0006; transform: translateX(-50%); }
 .resource-inventory-bar[hidden] { display: none; }
-#resource-inventory .resource-inventory-item { display: flex; flex: 0 0 calc((var(--resource-inventory-max-width) - 78px) / 6); align-items: center; gap: 4px; min-width: max-content; height: 28px; padding: 0; border: 0; background: transparent; color: var(--ink); font: inherit; cursor: default; }
+#resource-inventory .resource-inventory-item { display: flex; flex: 0 0 calc((var(--resource-inventory-max-width) - 54px) / 4); align-items: center; gap: 4px; min-width: max-content; height: 28px; padding: 0; border: 0; background: transparent; color: var(--ink); font: inherit; cursor: default; }
 #resource-inventory .resource-inventory-item[hidden] { display: none; }
 #resource-inventory .resource-inventory-item canvas { display: block; flex: none; width: 24px; height: 24px; background: transparent; }
-#resource-inventory .resource-inventory-item strong { display: block; flex: 1; min-width: 0; padding: 3px 5px; border-radius: 5px; background: #0d1416; color: var(--ink); font-size: 14px; font-weight: 600; line-height: 20px; font-variant-numeric: tabular-nums; text-align: center; }
-#resource-inventory .resource-inventory-item[data-digits="4"] strong { font-size: 12px; }
-#resource-inventory .resource-inventory-item[data-digits="5"] strong { font-size: 10px; }
-#resource-inventory .resource-inventory-item[data-digits="6"] strong { font-size: 8px; }
+#resource-inventory .resource-inventory-item strong { display: block; flex: 1; min-width: max-content; white-space: nowrap; padding: 3px 5px; border-radius: 5px; background: #0d1416; color: var(--ink); font-size: 14px; font-weight: 600; line-height: 20px; font-variant-numeric: tabular-nums; text-align: center; }
 #resource-inventory .resource-inventory-item:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
 @media (max-width: 640px) {
   .resource-inventory-bar { gap: 6px 8px; padding: 6px; }
-  #resource-inventory .resource-inventory-item { flex-basis: calc((var(--resource-inventory-max-width) - 54px) / 6); gap: 3px; height: 26px; }
+  #resource-inventory .resource-inventory-item { flex-basis: calc((var(--resource-inventory-max-width) - 38px) / 3); gap: 3px; height: 26px; }
   #resource-inventory .resource-inventory-item canvas { width: 20px; height: 20px; }
   #resource-inventory .resource-inventory-item strong { padding: 3px 4px; font-size: 12px; line-height: 18px; }
 }
