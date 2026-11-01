@@ -643,7 +643,6 @@ globalThis.SpawnerLocalAssetFiles = Object.freeze([
   "./client/local-assets/Terrain/nest-soil-ground.png.js",
   "./client/local-assets/Terrain/poison-spore-ground.png.js",
   "./client/local-assets/Terrain/ridge-ground.png.js",
-  "./client/local-assets/Terrain/shallow-water-ground.png.js",
   "./client/local-assets/Terrain/standing-tree-smooth-atlas.png.js",
   "./client/local-assets/Terrain/swamp-ground.png.js",
   "./client/local-assets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp.js",
