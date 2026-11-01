@@ -14,6 +14,8 @@ const bonuses = [0, .3, .3, .3, .3];
 function verifyTravel(rules) {
   for (const [tribe, speeds] of Object.entries(bases)) for (let level = 0; level <= 4; level++) {
     const agent = { tribe, stats: rules.unitStats({ feet: level }, tribe) };
+    assert.equal(agent.stats.lifespan, 60, tribe);
+    assert.equal(rules.unitStats({ lifespan: 1 }, tribe).lifespan, tribe === "pebble" ? 240 : 180, tribe);
     assert.ok(Math.abs(agent.stats.speed - speeds[0] - bonuses[level]) < 1e-12, tribe);
     for (const load of [0, .25, .5, 1]) {
       const expected = speeds[0] * (1 - load) + speeds[1] * load + bonuses[level];
@@ -49,8 +51,8 @@ test("서버·브라우저·시뮬레이션 워커는 같은 고정 스탯을 �
 });
 
 test("수명·운반량·재생과 숙성 스탯은 명시된 단계 값을 적용한다", () => {
-  const lifespans = { bean: [360,480,480,480,480], spore: [330,450,450,450,450],
-    pebble: [480,660,660,660,660], spring: [300,420,420,420,420] };
+  const lifespans = { bean: [60,180,180,180,180], spore: [60,180,180,180,180],
+    pebble: [60,240,240,240,240], spring: [60,180,180,180,180] };
   for (const tribe of Object.keys(bases)) for (let level = 0; level <= 4; level++) {
     const stats = unitStats({ lifespan:level, strength:level, regeneration:level }, tribe);
     assert.equal(stats.lifespan, lifespans[tribe][level]);

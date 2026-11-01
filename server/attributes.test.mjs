@@ -21,8 +21,8 @@ test("기본 채집량은 1개이며 채집량·감지·수명·이속 보너스
   assert.equal(unitStats(attributeCounts(["strength", "strength"])).capacity, 2);
   assert.equal(unitStats(attributeCounts(["strength"], { strength: 2 })).capacity, 2);
   assert.equal(unitStats(attributeCounts(["antenna"])).vision, 6);
-  assert.equal(unitStats(attributeCounts([])).lifespan, 360);
-  assert.equal(unitStats(attributeCounts(["lifespan"])).lifespan, 480);
+  assert.equal(unitStats(attributeCounts([])).lifespan, 60);
+  assert.equal(unitStats(attributeCounts(["lifespan"])).lifespan, 180);
   assert.equal(unitMovementSpeed(unitStats(attributeCounts(["feet"]))), .8);
 });
 
@@ -42,8 +42,8 @@ test("부족별 시작 인원과 실제 장착 속성이 채집 방식에 따라
   }
   assert.deepEqual(fixture("pebble").agents.map(agent => agent.stats.capacity), [2, 2, 1]);
   assert.ok(fixture("spring").agents.slice(0, 2).every(agent => unitMovementSpeed(agent.stats) === 1.2));
-  assert.equal(fixture("spore").agents[1].stats.lifespan, 330);
-  assert.ok(fixture("pebble").agents.every(agent => agent.lifespan === 480));
+  assert.equal(fixture("spore").agents[1].stats.lifespan, 60);
+  assert.ok(fixture("pebble").agents.every(agent => agent.lifespan === 60));
 });
 
 test("1레벨에서 속성 없이 또는 하나만 넣어 생성하고 두 개는 거부한다", () => {
@@ -57,37 +57,39 @@ test("1레벨에서 속성 없이 또는 하나만 넣어 생성하고 두 개�
   assert.throws(() => game.command({ type: "design", templateId: null, name: "초과", slots: ["antenna", "strength"], birth: true }), /설계 속성/);
 });
 
-test("몽돌의 8분 수명은 복제에 계승되고 이전 저장의 나이를 보존하며 한 번만 연장한다", () => {
-  const game = fixture("pebble");
-  const childId = game.command({type:"birth",agentId:game.agents[0].id}).agentId;
-  assert.equal(game.agents.find(agent=>agent.id===childId).lifespan, 480);
-  const saved = JSON.parse(game.save());
-  const legacy = saved.state.agents[0];
-  legacy.bornAt = 0;
-  saved.state.simSeconds = 120;
-  for (const lifespan of [180, 240, 300]) {
-    legacy.lifespan = lifespan; legacy.stats.lifespan = lifespan;
-    game.restore(JSON.stringify(saved));
-    assert.equal(game.agents[0].bornAt, 0);
-    assert.equal(game.agents[0].lifespan, 480);
-    game.restore(game.save());
-    assert.equal(game.agents[0].lifespan, 480);
+test("네 종족의 1분 수명은 복제에 계승되고 이전 저장의 나이를 보존하며 한 번만 보정한다", () => {
+  for (const tribe of ["bean", "spore", "pebble", "spring"]) {
+    const game = fixture(tribe);
+    const childId = game.command({type:"birth",agentId:game.agents[0].id}).agentId;
+    assert.equal(game.agents.find(agent=>agent.id===childId).lifespan, 60);
+    const saved = JSON.parse(game.save());
+    const legacy = saved.state.agents[0];
+    legacy.bornAt = 0;
+    saved.state.simSeconds = 30;
+    for (const lifespan of [60, 180, 240, 300, 330, 360, 480]) {
+      legacy.lifespan = lifespan; legacy.stats.lifespan = lifespan;
+      game.restore(JSON.stringify(saved));
+      assert.equal(game.agents[0].bornAt, 0);
+      assert.equal(game.agents[0].lifespan, 60);
+      game.restore(game.save());
+      assert.equal(game.agents[0].lifespan, 60);
+    }
   }
 });
 
-test("수명 속성은 출생부터 8분을 적용하고 이전 수명 경계에서도 살아 있다", () => {
+test("수명 속성은 출생부터 3분을 적용하고 기본 수명 경계에서도 살아 있다", () => {
   const game = fixture("bean");
   const saved = JSON.parse(game.save());
   saved.state.nestLevel = 2;
   game.restore(JSON.stringify(saved));
   const result = game.command({ type: "design", templateId: null, name: "장수", slots: ["lifespan"], birth: true });
-  assert.equal(game.agents.find(agent => agent.id === result.agentId).lifespan, 480);
-  for (const time of [180, 300, 479.999]) {
+  assert.equal(game.agents.find(agent => agent.id === result.agentId).lifespan, 180);
+  for (const time of [60, 120, 179.999]) {
     game.prepare(time);
     game.tick(0);
     assert.ok(game.agents.some(agent => agent.id === result.agentId));
   }
-  game.prepare(480);
+  game.prepare(180);
   game.tick(0);
   assert.equal(game.agents.some(agent => agent.id === result.agentId), false);
 });
@@ -98,7 +100,7 @@ test("두 번째 슬롯의 수명도 즉시 적용하고 이전 저장 복원과
   saved.state.nestLevel = 2;
   game.restore(JSON.stringify(saved));
   const result = game.command({ type: "design", templateId: null, name: "성장 수명", slots: ["strength", "lifespan"], birth: true });
-  assert.equal(game.agents.find(agent => agent.id === result.agentId).lifespan, 480);
+  assert.equal(game.agents.find(agent => agent.id === result.agentId).lifespan, 180);
   const legacy = JSON.parse(game.save());
   const agent = legacy.state.agents.find(agent => agent.id === result.agentId);
   agent.activeSlots = ["strength"];
@@ -107,18 +109,18 @@ test("두 번째 슬롯의 수명도 즉시 적용하고 이전 저장 복원과
   agent.stats = unitStats(agent.attributes);
   agent.lifespan = 180; agent.stats.lifespan = 180;
   game.restore(JSON.stringify(legacy));
-  assert.equal(game.agents.find(agent => agent.id === result.agentId).lifespan, 480);
+  assert.equal(game.agents.find(agent => agent.id === result.agentId).lifespan, 180);
   for (const time of [35, 60]) {
     game.prepare(time);
     game.tick(0);
-    assert.equal(game.agents.find(agent => agent.id === result.agentId).lifespan, 480);
+    assert.equal(game.agents.find(agent => agent.id === result.agentId).lifespan, 180);
     game.restore(game.save());
-    assert.equal(game.agents.find(agent => agent.id === result.agentId).lifespan, 480);
+    assert.equal(game.agents.find(agent => agent.id === result.agentId).lifespan, 180);
   }
 });
 
 test("네 부족 모두 고유 속성의 고정 효과를 생성 즉시 적용하고 저장·복원한다", () => {
-  const baseLifespans = { bean: 360, spore: 330, pebble: 480, spring: 300 };
+  const baseLifespans = { bean: 60, spore: 60, pebble: 60, spring: 60 };
   const designs = [
     [["antenna"], 6, 1, .5, 0],
     [["strength"], 3, 2, .5, 0],
