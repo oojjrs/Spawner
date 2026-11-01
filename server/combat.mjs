@@ -1,4 +1,5 @@
 import { worldSize } from "./world-size.mjs";
+import { militaryAgent } from "./conquest-pacing.mjs";
 import { creatureSpawning } from "./creature-spawn.mjs";
 import { ENCOUNTER_TYPES } from "./encounter-types.mjs";
 import { AGENT_ATTACK_DURATION, AGENT_ATTACK_HIT_TIME, AGENT_HURT_DURATION } from "./attack.mjs";
@@ -38,13 +39,24 @@ export function combatTeam(agent) {
   return agent.ownerId ? "colony:" + agent.ownerId : agent.species ? "species:" + agent.species : "agent:" + agent.id;
 }
 
-export function canPursueCombat(agent, target, time) {
+export function colonyDefenseTarget(agent, target, allies, structures) {
+  if (!agent.ownerId || !militaryAgent(agent, agent.tribe) || combatDisposition(agent) === "peaceful" ||
+      combatTeam(agent) === combatTeam(target) || target.health <= 0 || target.hidden) return false;
+  if (target.combat) return target.combat.teams[1 - target.combat.side] === combatTeam(agent);
+  if (target.retreat) return false;
+  if (agent.utility?.action === "fight" && agent.utility.defending && agent.utility.target.id === target.id) return true;
+  const targetId = target.attack?.targetId;
+  return !!targetId && ((allies || []).some(ally => ally.id === targetId && ally.health > 0 && combatTeam(ally) === combatTeam(agent)) ||
+    (structures || []).some(structure => structure?.id === targetId && structure.health > 0));
+}
+
+export function canPursueCombat(agent, target, time, defending) {
   if (agent === target || combatTeam(agent) === combatTeam(target) || target.health <= 0 || target.hidden ||
       creatureSpawning(agent, time) || creatureSpawning(target, time) ||
       time < (agent.escapeUntil || 0) || time < (target.escapeUntil || 0) || agent.retreat || agent.construction?.state === "transforming" || combatDisposition(agent) === "peaceful") return false;
   if (agent.species && target.species) return false;
   if (target.combat) return target.combat.teams[1 - target.combat.side] === combatTeam(agent);
-  return combatDisposition(agent) === "aggressive";
+  return combatDisposition(agent) === "aggressive" || !!defending;
 }
 
 export function peacefulEscapeChance(suppression) {
@@ -106,8 +118,10 @@ export function createCombat(environment) {
   }
 
   function engage(agent, target, time) {
+    const game = environment.games.get(agent.ownerId);
+    const defending = colonyDefenseTarget(agent, target, game?.agents, [game?.nest, ...(game?.buildings || [])]);
     if (!settled(agent, time) || !settled(target, time) || agent.x !== target.x || agent.y !== target.y ||
-        agent.combat || !canPursueCombat(agent, target, time)) return false;
+        agent.combat || !canPursueCombat(agent, target, time, defending)) return false;
     let combat = target.combat;
     if (combat) {
       const side = combat.teams.indexOf(combatTeam(agent));

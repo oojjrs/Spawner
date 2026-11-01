@@ -15,7 +15,7 @@ import { applyAgentGrowth } from "./growth.mjs";
 import { AGENT_EXPERIENCE, addAgentExperience, recordCombatExperience } from "./experience.mjs";
 import { AGENT_ATTACK_DURATION, AGENT_ATTACK_HIT_TIME } from "./attack.mjs";
 import { createRoadOptimizer } from "./roads.mjs";
-import { createCombat, combatDisposition, canPursueCombat } from "./combat.mjs";
+import { createCombat, combatDisposition, canPursueCombat, colonyDefenseTarget } from "./combat.mjs";
 import { RESOURCE_TYPES, resourceDefinition, resourceTypeForCell, canHarvestResource, migrateResourceType, isColonyFood, isResourceHabitat, populateColonyFood, resourceHarvestSeconds, resourceHarvestMultiplier } from "./resources.mjs";
 import { burrowDistance, burrowApproaches } from "./burrows.mjs";
 import { commandCheat } from "./cheats.mjs";
@@ -140,7 +140,7 @@ export function createGame(environment, colony, savedGame) {
       } };
     const constructionSupply = createConstructionSupply(constructionSupplyContext);
     const utilityAI = createUtilityAI({ state, tribe: colony.tribe, size: WORLD_SIZE, homeCells: colonyBoundaryCells,
-      deliveryCells: colonyDeliveryCells, permanentVisionSources,
+      deliveryCells: colonyDeliveryCells, permanentVisionSources, defenseStructures,
       terrainAt: (x, y) => worldMap.terrain[y * WORLD_SIZE + x],
       walkable: (x, y) => state.explored.has(y * WORLD_SIZE + x) && isWalkable(x, y),
       hazardAt: (x, y) => state.explored.has(y * WORLD_SIZE + x) ? hazardAt(x, y) : 0,
@@ -1274,8 +1274,15 @@ export function createGame(environment, colony, savedGame) {
       return decisionTargets.filter(enemy => enemy.health > 0);
     }
 
+    function defenseStructures() {
+      return [{ id: "nest:" + colony.id, health: state.nestHealth }, ...state.buildings];
+    }
+
     function scheduledDecisionEvent(agent) {
       const targets = combatTargets();
+      if (!agent.retreat && !(agent.utility?.action === "fight" && agent.utility.defending &&
+          targets.some(target => target.id === agent.utility.target.id && colonyDefenseTarget(agent, target, state.agents, defenseStructures()))) &&
+          targets.some(target => colonyDefenseTarget(agent, target, state.agents, defenseStructures()))) return "defense";
       if (agent.decisionPending || agent.retreat || hazardAt(agent.x, agent.y) || targets.some(target => !target.kind || target.kind === "agent") ||
           state.simSeconds >= agent.nextDecisionAt) return decisionEvent(agent);
       const plan = agent.utility, food = plan?.action === "collect" ? state.knownFood.get(plan.target.key) : null;
@@ -1295,7 +1302,7 @@ export function createGame(environment, colony, savedGame) {
     function reconsiderAgent(agent, reason) {
       if (agent.health <= 0 || agent.construction || agent.combat || agent.birth && state.simSeconds < agent.birth.readyAt ||
         agent.attack && state.simSeconds < agent.attack.endsAt) return;
-      const planner = environment.decisionPlanner;
+      const planner = reason === "defense" ? null : environment.decisionPlanner;
       const candidates = planner ? planner.request(colony.ownerId, agent, reason) :
         utilityAI.evaluate(agent, !["completed", "targetLost", "restore"].includes(reason));
       if (candidates === undefined) return;
@@ -1327,7 +1334,7 @@ export function createGame(environment, colony, savedGame) {
         if (previous?.action !== "supply" || previous.target.key !== best.target.key) constructionSupply.assign(agent, best.transport);
       } else if (agent.transport) constructionSupply.release(agent);
       const same = previous?.action === best.action && previous.target?.key === best.target.key;
-      agent.utility = { action: best.action, target: best.target, route: best.route,
+      agent.utility = { action: best.action, target: best.target, route: best.route, defending: best.defending,
         plannedCargo: best.plannedCargo, recoverHealth: same && best.action === "recover" && reason !== "completed" && !agent.retreat ? previous.recoverHealth : best.recoverHealth,
         score: best.score, scores: candidates.map(candidate => ({ action: candidate.action, score: candidate.score, key: candidate.target.key })) };
       if (same) return;
@@ -1413,7 +1420,8 @@ export function createGame(environment, colony, savedGame) {
         target = combatTargets().find(enemy => enemy.id === plan.target.id);
         if (!target) { agent.decisionPending = "targetLost"; return false; }
         const building = ["burrow", "nest"].includes(target.kind);
-        if (!building && !canPursueCombat(agent, target, state.simSeconds) || combatDisposition(agent) === "peaceful") {
+        if (!building && !canPursueCombat(agent, target, state.simSeconds,
+            colonyDefenseTarget(agent, target, state.agents, defenseStructures())) || combatDisposition(agent) === "peaceful") {
           agent.decisionPending = "targetLost"; return false;
         }
         if (!building && agent.x === target.x && agent.y === target.y) {

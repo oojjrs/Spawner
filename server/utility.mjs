@@ -3,7 +3,7 @@ import { NEST_LEVELS, nestUpgradeCost } from "./nests.mjs";
 import { HARVEST_ATTRIBUTE_KEYS, unitCarryCapacity, unitTravelSpeed, unitTerrainSpeedMultiplier } from "./attributes.mjs";
 import { resourceDefinition, resourceTypeForCell } from "./resources.mjs";
 import { burrowApproaches } from "./burrows.mjs";
-import { combatDisposition, canPursueCombat } from "./combat.mjs";
+import { combatDisposition, canPursueCombat, colonyDefenseTarget } from "./combat.mjs";
 import { combatDamage } from "./combat-stats.mjs";
 import { beginRetreat, updateRetreat, survivalState, combatSurvival } from "./survival.mjs";
 import { AGENT_ATTACK_DURATION, AGENT_HURT_DURATION } from "./attack.mjs";
@@ -182,7 +182,8 @@ export function createUtilityAI(context) {
   }
 
   function participation(ally, enemy) {
-    if (!canPursueCombat(ally, enemy, state.simSeconds)) return 0;
+    if (!canPursueCombat(ally, enemy, state.simSeconds,
+      colonyDefenseTarget(ally, enemy, state.agents, context.defenseStructures?.()))) return 0;
     const intention = ally.utility?.action;
     if (["flee", "return", "recover"].includes(intention)) return 0;
     if (intention === "fight" && ally.utility.target?.id !== enemy.id) return 0;
@@ -330,6 +331,7 @@ export function createUtilityAI(context) {
     const supply = colonySupply(state, context.tribe);
     const visible = enemies().filter(enemy => enemy.health > 0);
     const safety = assess(agent, visible);
+    const defenseTargets = visible.filter(enemy => colonyDefenseTarget(agent, enemy, state.agents, context.defenseStructures?.()));
     const capacity = unitCarryCapacity(agent, agent.carryingType) + (synergy(agent, ["strength", "strength"]) ? 4 : 0);
     const routes = new Map(), candidates = [];
     const path = target => {
@@ -547,8 +549,9 @@ export function createUtilityAI(context) {
         { informationGain: 60 * limit((uncovered + 20 * markers) / (10 * seconds)) *
           frontierWeight(target) * life / tribeLifespan(agent.tribe || context.tribe) }, {});
     }
-    for (const enemy of visible.toSorted((first, second) => distance(agent, first) - distance(agent, second)).slice(0, 6)) {
-      if (!canPursueCombat(agent, enemy, state.simSeconds)) continue;
+    for (const enemy of new Set([...defenseTargets, ...visible.toSorted((first, second) => distance(agent, first) - distance(agent, second)).slice(0, 6)])) {
+      const defending = defenseTargets.includes(enemy);
+      if (!canPursueCombat(agent, enemy, state.simSeconds, defending)) continue;
       const cells = path(enemy);
       if (!cells) continue;
       const supportDamage = allies.reduce((sum, ally) => sum + participation(ally, enemy) * combatDamage(ally, enemy), 0);
@@ -564,7 +567,7 @@ export function createUtilityAI(context) {
       const foodThreat = [...state.knownFood.values()].some(food => food.amount > 0 && canHarvest(food, agent) && distance(food, enemy) <= 4);
       const value = homeThreat ? 120 : foodThreat ? 80 : 40;
       add("fight", { id: enemy.id, x: enemy.x, y: enemy.y, key: enemy.id }, cells,
-        { combatGain: value * (withMe - withoutMe) * 10 / (10 + time) }, {});
+        { combatGain: value * (withMe - withoutMe) * 10 / (10 + time) }, { defending });
     }
     for (const building of !agent.retreat && combatDisposition(agent) === "aggressive" ? [...(context.burrows ? context.burrows() : []), ...(context.nests ? context.nests() : [])] : []) {
       const cells = burrowApproaches(building).map(cell => path(cell)).filter(Boolean).sort((first, second) => first.length - second.length)[0];
@@ -671,6 +674,8 @@ export function createUtilityAI(context) {
     }
     const viable = candidates.filter(candidate => candidate.decisionDamage < agent.health * .85);
     let allowed = viable.length ? viable : candidates;
+    const defense = !agent.retreat && safety.state !== "critical" ? viable.filter(candidate => candidate.defending) : [];
+    if (defense.length) return defense.sort((first, second) => second.score - first.score);
     if (agent.retreat || safety.state === "critical") {
       const safest = Math.min(...allowed.map(candidate => candidate.damage));
       const survival = allowed.filter(candidate => ["flee", "recover", "return"].includes(candidate.action) &&

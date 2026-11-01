@@ -113,7 +113,7 @@ test("병렬 결과가 채택될 때만 담당자 기억을 본 게임에 전달
     postMessage(message) { this.messages.push(message); }
     terminate() {}
   }
-  const context = { navigator: { hardwareConcurrency: 3 }, Worker, Blob: class {},
+  const context = { navigator: { hardwareConcurrency: 3 }, performance, Worker, Blob: class {},
     URL: { createObjectURL: () => "worker", revokeObjectURL() {} } };
   const source = readFileSync(new URL("../client/decision-pool.mjs", import.meta.url), "utf8");
   runInNewContext(source.replace(/^export /gm, "") + ";globalThis.createPool = createDecisionPool;", context);

@@ -1,6 +1,6 @@
 function decisionSignature(agent) {
   return JSON.stringify([agent.x, agent.y, agent.carrying, agent.carryingType, agent.level, agent.attributes,
-    agent.utility?.action, agent.utility?.target?.key, agent.construction?.id, agent.birth?.readyAt]);
+    agent.utility?.action, agent.utility?.target?.key, agent.utility?.defending, agent.construction?.id, agent.birth?.readyAt]);
 }
 
 export function createDecisionPool(room) {

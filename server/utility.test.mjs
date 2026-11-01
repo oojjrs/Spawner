@@ -4,6 +4,7 @@ import { createGame } from "./game.mjs";
 import { createPersonality, personalityLabels, actionScore, riskValue } from "./utility.mjs";
 import { beginRetreat } from "./survival.mjs";
 import { canPursueCombat } from "./combat.mjs";
+import { resourceDefinition } from "./resources.mjs";
 
 function fixture(slots) {
   const colony = { id: 1, ownerId: "test", x: 40, y: 40, occupiedCells: new Set(["2,2"]) };
@@ -211,7 +212,7 @@ test("적 처치는 6번째 프레임에 소유 군락에 전달하고 교전 �
   assert.equal(f.agent.lastDecisionReason, "combatEnded");
 });
 
-test("이동이 끝나기 전에는 도착 칸의 채집을 시작하지 않는다", () => {
+test("이동 완료 후 준비와 채집 주기를 마쳐야 자원을 얻는다", () => {
   const f = fixture(["strength", "antenna"]);
   f.environment.food.set("46,42", { x: 46, y: 42, amount: 10, terrain: "grassland", kind: "resource", resourceType: "clay" });
   let moving = false;
@@ -226,8 +227,15 @@ test("이동이 끝나기 전에는 도착 칸의 채집을 시작하지 않는�
   assert.ok(moving, "도착 전 실제 이동 중인 상태를 검사해야 합니다.");
   assert.equal(f.agent.mode, "harvest");
   assert.ok(f.agent.harvestStarted >= f.agent.moveStartedAt + f.agent.moveDuration - 0.000001);
-  advance(f, 1.1);
-  assert.ok(f.agent.carrying >= 2);
+  advance(f, 1);
+  assert.equal(f.agent.carrying, 0);
+  assert.equal(f.environment.food.get("46,42").amount, 10);
+  advance(f, resourceDefinition("clay").harvestSeconds - .1);
+  assert.equal(f.agent.carrying, 0);
+  advance(f, .2);
+  assert.equal(f.agent.carrying, 1);
+  assert.equal(f.agent.carryingType, "clay");
+  assert.equal(f.environment.food.get("46,42").amount, 9);
 });
 
 test("상태 요청마다 저장·복원해도 채집과 하역을 이어간다", () => {
