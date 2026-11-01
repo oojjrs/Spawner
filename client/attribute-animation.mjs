@@ -418,7 +418,7 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
     return surface;
   }
 
-  function bodyWidth(tribe, appearance, box) {
+  function bodySize(tribe, appearance, box) {
     const rig = rigs.get(tribe);
     if (!rig) return null;
     const track = rig.animations.idle.tracks[0];
@@ -426,8 +426,10 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
     const key = keys.filter(key => (key === "strength" ? appearance.strength || appearance.arms : appearance[key]) > 0).join("-");
     const part = rig.morphs?.parts["body-" + key];
     const width = part ? part.size[0] * track.body[2] / rig.reference.body[2] : track.body[2];
-    return width * (box ? Math.min(box.width / track.bounds[2], box.height / track.bounds[3]) : 1);
+    const height = part ? part.size[1] * track.body[3] / rig.reference.body[3] : track.body[3];
+    const scale = box ? Math.min(box.width / track.bounds[2], box.height / track.bounds[3]) : 1;
+    return { width: width * scale, height: height * scale };
   }
 
-  return { prepare, frame, portrait, pose, bodyWidth };
+  return { prepare, frame, portrait, pose, bodySize };
 }

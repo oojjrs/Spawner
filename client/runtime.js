@@ -6567,27 +6567,27 @@ function createCombatEvolutionArt(assetSource, createSurface, loadImage) {
     }
     return portraits.get(key);
   }
-  function bodyWidth(agent, replacement) {
+  function bodySize(agent, replacement) {
     const attributes = agent.appearanceAttributes || agent.attributes || {}, keys = combatEvolutionKeys(attributes);
     const variants = prepared.get(agent.tribe || "bean");
     if (!variants || !keys.length) return null;
     const source = variants.get(keys.length === 1 ? keys[0] : body(keys));
     if (attributes.construction || source.rig.tribe !== "sprout" &&
         ["antenna", "strength", "arms", "butchery", "lifespan", "feet"].some(key => attributes[key] > 0)) return replacement;
-    if (!source.bodyWidth) {
+    if (!source.bodySize) {
       const image = source.images.body, surface = createSurface(image.naturalWidth || image.width, image.naturalHeight || image.height);
       const context = surface.getContext("2d", { willReadFrequently: true }); context.drawImage(image, 0, 0);
       const pixels = context.getImageData(0, 0, surface.width, surface.height).data;
-      let left = surface.width, right = 0;
+      let left = surface.width, right = 0, top = surface.height, bottom = 0;
       for (let y = 0; y < surface.height; y++) for (let x = 0; x < surface.width; x++) if (pixels[(y * surface.width + x) * 4 + 3] >= 16) {
-        left = Math.min(left, x); right = Math.max(right, x + 1);
+        left = Math.min(left, x); right = Math.max(right, x + 1); top = Math.min(top, y); bottom = Math.max(bottom, y + 1);
       }
-      source.bodyWidth = right - left;
+      source.bodySize = { width: right - left, height: bottom - top };
     }
-    return source.bodyWidth * source.rig.scale * 2;
+    return { width: source.bodySize.width * source.rig.scale * 2, height: source.bodySize.height * source.rig.scale * 2 };
   }
 
-  return { prepare, ready, frame, portrait, bodyWidth };
+  return { prepare, ready, frame, portrait, bodySize };
 }
 
 
@@ -7124,8 +7124,11 @@ function createCombatAttributeArt(assetSource, createSurface, loadImage) {
   return {
     prepare: tribe => Promise.all([evolution.prepare(tribe), regeneration.prepare(tribe)]),
     ready: tribe => evolution.ready(tribe) && regeneration.ready(tribe), frame, portrait,
-    bodyWidth: (agent, replacement) => (evolution.bodyWidth(agent, replacement) || replacement) *
-      ((agent.appearanceAttributes || agent.attributes || {}).regeneration ? 1.1 : 1)
+    bodySize: (agent, replacement) => {
+      const size = evolution.bodySize(agent, replacement) || replacement;
+      const growth = (agent.appearanceAttributes || agent.attributes || {}).regeneration ? 1.1 : 1;
+      return { width: size.width * growth, height: size.height * growth };
+    }
   };
 }
 
@@ -11724,7 +11727,7 @@ function createTribeAttributeAnimation(assetSource, createSurface, loadImage) {
     return surface;
   }
 
-  function bodyWidth(tribe, appearance, box) {
+  function bodySize(tribe, appearance, box) {
     const rig = rigs.get(tribe);
     if (!rig) return null;
     const track = rig.animations.idle.tracks[0];
@@ -11732,10 +11735,12 @@ function createTribeAttributeAnimation(assetSource, createSurface, loadImage) {
     const key = keys.filter(key => (key === "strength" ? appearance.strength || appearance.arms : appearance[key]) > 0).join("-");
     const part = rig.morphs?.parts["body-" + key];
     const width = part ? part.size[0] * track.body[2] / rig.reference.body[2] : track.body[2];
-    return width * (box ? Math.min(box.width / track.bounds[2], box.height / track.bounds[3]) : 1);
+    const height = part ? part.size[1] * track.body[3] / rig.reference.body[3] : track.body[3];
+    const scale = box ? Math.min(box.width / track.bounds[2], box.height / track.bounds[3]) : 1;
+    return { width: width * scale, height: height * scale };
   }
 
-  return { prepare, frame, portrait, pose, bodyWidth };
+  return { prepare, frame, portrait, pose, bodySize };
 }
 
 return { TRIBE_ATTRIBUTE_ASSETS, hasTribeAttributes, createTribeAttributeAnimation };
@@ -11896,11 +11901,11 @@ function createTribeArt(definitions, assetSource) {
     return surface;
   }
 
-  function bodyWidth(tribe, appearance, portrait) {
-    return attributes.bodyWidth(tribe, appearance, portrait ? units.get(tribe)?.box : null);
+  function bodySize(tribe, appearance, portrait) {
+    return attributes.bodySize(tribe, appearance, portrait ? units.get(tribe)?.box : null);
   }
 
-  return { preparePreview, prepareUnit, sprite, bounds, drawPreview, animationFrame, animationPose, constructionFrame, bodyWidth };
+  return { preparePreview, prepareUnit, sprite, bounds, drawPreview, animationFrame, animationPose, constructionFrame, bodySize };
 }
 
 return { createTribeArt };

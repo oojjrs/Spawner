@@ -105,7 +105,10 @@ export function createCombatAttributeArt(assetSource, createSurface, loadImage) 
   return {
     prepare: tribe => Promise.all([evolution.prepare(tribe), regeneration.prepare(tribe)]),
     ready: tribe => evolution.ready(tribe) && regeneration.ready(tribe), frame, portrait,
-    bodyWidth: (agent, replacement) => (evolution.bodyWidth(agent, replacement) || replacement) *
-      ((agent.appearanceAttributes || agent.attributes || {}).regeneration ? 1.1 : 1)
+    bodySize: (agent, replacement) => {
+      const size = evolution.bodySize(agent, replacement) || replacement;
+      const growth = (agent.appearanceAttributes || agent.attributes || {}).regeneration ? 1.1 : 1;
+      return { width: size.width * growth, height: size.height * growth };
+    }
   };
 }

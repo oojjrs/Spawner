@@ -218,26 +218,26 @@ export function createCombatEvolutionArt(assetSource, createSurface, loadImage) 
     }
     return portraits.get(key);
   }
-  function bodyWidth(agent, replacement) {
+  function bodySize(agent, replacement) {
     const attributes = agent.appearanceAttributes || agent.attributes || {}, keys = combatEvolutionKeys(attributes);
     const variants = prepared.get(agent.tribe || "bean");
     if (!variants || !keys.length) return null;
     const source = variants.get(keys.length === 1 ? keys[0] : body(keys));
     if (attributes.construction || source.rig.tribe !== "sprout" &&
         ["antenna", "strength", "arms", "butchery", "lifespan", "feet"].some(key => attributes[key] > 0)) return replacement;
-    if (!source.bodyWidth) {
+    if (!source.bodySize) {
       const image = source.images.body, surface = createSurface(image.naturalWidth || image.width, image.naturalHeight || image.height);
       const context = surface.getContext("2d", { willReadFrequently: true }); context.drawImage(image, 0, 0);
       const pixels = context.getImageData(0, 0, surface.width, surface.height).data;
-      let left = surface.width, right = 0;
+      let left = surface.width, right = 0, top = surface.height, bottom = 0;
       for (let y = 0; y < surface.height; y++) for (let x = 0; x < surface.width; x++) if (pixels[(y * surface.width + x) * 4 + 3] >= 16) {
-        left = Math.min(left, x); right = Math.max(right, x + 1);
+        left = Math.min(left, x); right = Math.max(right, x + 1); top = Math.min(top, y); bottom = Math.max(bottom, y + 1);
       }
-      source.bodyWidth = right - left;
+      source.bodySize = { width: right - left, height: bottom - top };
     }
-    return source.bodyWidth * source.rig.scale * 2;
+    return { width: source.bodySize.width * source.rig.scale * 2, height: source.bodySize.height * source.rig.scale * 2 };
   }
 
-  return { prepare, ready, frame, portrait, bodyWidth };
+  return { prepare, ready, frame, portrait, bodySize };
 }
 
