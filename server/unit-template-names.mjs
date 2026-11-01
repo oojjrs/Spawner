@@ -19,11 +19,22 @@ const UNIT_TEMPLATE_ROLES = [
 
 const UNIT_TEMPLATE_MODIFIERS = [["feet", "날쌘"], ["antenna", "눈밝은"], ["carapace", "튼튼한"], ["lifespan", "장수"]];
 
-export function suggestTemplateName(slots, templates) {
+function isDefaultTemplateName(name, base) {
+  return name === base || name.startsWith(base + " ") && /^(?:[2-9]|[1-9]\d+)$/.test(name.slice(base.length + 1));
+}
+
+export function isTemplateNameEdited(template) {
+  if (typeof template?.nameEdited === "boolean") return template.nameEdited;
+  return !!template?.name && !isDefaultTemplateName(template.name, suggestTemplateName(template.slots, []));
+}
+
+export function suggestTemplateName(slots, templates, templateId) {
   const [required, role] = UNIT_TEMPLATE_ROLES.find(([keys]) => keys.every(key => slots.includes(key)));
   const modifier = UNIT_TEMPLATE_MODIFIERS.find(([key]) => slots.includes(key) && !required.includes(key));
   const base = (modifier ? modifier[1] + " " : "") + role;
-  const names = new Set(templates.map(template => template.name));
+  const previous = templateId == null ? null : templates.find(template => template.id === templateId);
+  if (previous && isDefaultTemplateName(previous.name, base)) return previous.name;
+  const names = new Set(templates.filter(template => !previous || template.id !== previous.id).map(template => template.name));
   let name = base, number = 2;
   while (names.has(name)) name = base + " " + number++;
   return name;

@@ -1,5 +1,5 @@
 import { CONQUEST_PACING, TRIBE_PACING, militaryAgent } from "./conquest-pacing.mjs";
-import { suggestTemplateName } from "./unit-template-names.mjs";
+import { isTemplateNameEdited, suggestTemplateName } from "./unit-template-names.mjs";
 import { tribeProductionTemplate } from "./tribe-production.mjs";
 import { worldSize } from "./world-size.mjs";
 import { ATTRIBUTES, ATTRIBUTE_SYNERGIES_ENABLED, isAttributeUnlocked, attributeCounts, migrateAttributeSlots, migrateAttributeLevels, attributeUpgradeCost, attributeUpgradeIssue, unitStats, unitCarryCapacity, unitTravelSpeed, unitTerrainSpeedMultiplier, birthCost, hasSynergy } from "./attributes.mjs";
@@ -2470,6 +2470,8 @@ export function createGame(environment, colony, savedGame) {
         const unlockedAttributeLevels = { ...migrateAttributeLevels(Object.keys(purchased), purchased, state.nestLevel) };
         for (const key of action.slots) if (!unlockedAttributeLevels[key]) unlockedAttributeLevels[key] = 1;
         const template = { id: previous ? previous.id : state.nextTemplateId, name,
+          nameEdited: typeof action.nameEdited === "boolean" ? action.nameEdited :
+            isTemplateNameEdited(previous?.name === name ? previous : { name, slots: action.slots }),
           slots: [...action.slots], attributeLevels: Object.fromEntries(action.slots.map(key => [key, unlockedAttributeLevels[key]])),
           unlockedAttributeLevels,
           revision: previous ? previous.revision + 1 : 1 };

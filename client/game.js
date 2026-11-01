@@ -8116,8 +8116,8 @@
     function openUnitDesign(template, readOnly) {
       readOnly = readOnly || !!state.ending;
       designReturnFocus = document.activeElement;
-      unitDraft = { id: template ? template.id : null, tribe: template?.tribe || state.tribe || "bean", slots: template ? [...new Set(template.slots.map(key => key === "arms" ? "strength" : key))] : [], attributeLevels: { ...template?.attributeLevels }, error: "", readOnly: !!readOnly, nameEdited: !!template?.name };
-      designName.value = template?.name || Spawner.suggestTemplateName(unitDraft.slots, state.templates);
+      unitDraft = { id: template ? template.id : null, tribe: template?.tribe || state.tribe || "bean", slots: template ? [...new Set(template.slots.map(key => key === "arms" ? "strength" : key))] : [], attributeLevels: { ...template?.attributeLevels }, error: "", readOnly: !!readOnly, nameEdited: Spawner.isTemplateNameEdited(template) };
+      designName.value = template?.name || Spawner.suggestTemplateName(unitDraft.slots, state.templates, unitDraft.id);
       designName.readOnly = !!readOnly;
       designPalette.hidden = !!readOnly;
       designSave.closest(".design-footer").hidden = !!readOnly;
@@ -8199,7 +8199,7 @@
 
     function updateUnitDesign() {
       if (!unitDraft || evolutionPanel.hidden) return;
-      if (!unitDraft.nameEdited && !unitDraft.readOnly) designName.value = Spawner.suggestTemplateName(unitDraft.slots, state.templates);
+      if (!unitDraft.nameEdited && !unitDraft.readOnly) designName.value = Spawner.suggestTemplateName(unitDraft.slots, state.templates, unitDraft.id);
       const counts = attributeCounts(unitDraft.slots, unitDraft.attributeLevels);
       const stats = unitStats(counts, unitDraft.tribe);
       prepareAgentTemplate(unitDraft).catch(() => {});
@@ -8260,7 +8260,7 @@
         return;
       }
       const result = await sendCommand({ type: "design", templateId: unitDraft.id,
-        name, slots: [...unitDraft.slots], birth: false });
+        name, nameEdited: unitDraft.nameEdited, slots: [...unitDraft.slots], birth: false });
       if (!result || !unitDraft) return;
       state.selectedTemplateId = result.templateId;
       closeEvolutionPanel();
