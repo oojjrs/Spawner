@@ -54,7 +54,7 @@ export function prepareSite(destination, readSource, revision, assetDirectory) {
   }
   mkdirSync(assetDirectory, { recursive: true });
   const attributes = join(assetDirectory, ".gitattributes");
-  if (!existsSync(attributes)) writeFileSync(attributes, "* -text\r\n", "utf8");
+  if (!existsSync(attributes)) writeFileSync(attributes, "* -text\r\n.gitattributes text eol=crlf\r\n", "utf8");
   for (const [name, bytes] of assets) {
     const path = join(assetDirectory, assetFiles.get(name));
     if (existsSync(path)) {
