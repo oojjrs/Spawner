@@ -1,4 +1,5 @@
 import { combatDisposition } from "./combat.mjs";
+import { militaryAgent } from "./conquest-pacing.mjs";
 import { burrowDistance } from "./burrows.mjs";
 import { BEETLE_ANIMATIONS } from "./beetle-animation.mjs";
 import { CREATURE_ATTACK_TIMINGS } from "./creature-attack.mjs";
@@ -10,7 +11,9 @@ export function creatureBuildingTargets(environment) {
 
 export function compareCreatureCombatTargets(left, right) {
   const building = target => ["nest", "building"].includes(target.kind);
-  return Number(building(left.agent)) - Number(building(right.agent)) || left.distance - right.distance ||
+  return Number(building(left.agent)) - Number(building(right.agent)) ||
+    Number(militaryAgent(right.agent, right.agent.tribe)) - Number(militaryAgent(left.agent, left.agent.tribe)) ||
+    left.distance - right.distance ||
     String(left.agent.id).localeCompare(String(right.agent.id));
 }
 

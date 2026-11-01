@@ -490,7 +490,9 @@ export function createCombat(environment) {
       }
     }
     const target = opponents.length && participants.filter(entry => entry.agent.combat.side !== attacker.combat.side)
-      .sort((a, b) => a.agent.combat.joinedAt - b.agent.combat.joinedAt || String(a.agent.id).localeCompare(String(b.agent.id)))[0].agent;
+      .sort((a, b) => (attacker.species && combatDisposition(attacker) === "aggressive" ?
+        Number(militaryAgent(b.agent, b.agent.tribe)) - Number(militaryAgent(a.agent, a.agent.tribe)) : 0) ||
+        a.agent.combat.joinedAt - b.agent.combat.joinedAt || String(a.agent.id).localeCompare(String(b.agent.id)))[0].agent;
     const turn = attacker.combat.nextAttackTurn;
     for (const { agent: member } of participants) member.combat.turn = turn;
     attacker.combat.nextAttackTurn += 1;
