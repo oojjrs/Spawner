@@ -48,7 +48,6 @@ export function constructionHelp(state, tribe, enabled, goal, stock, world, supp
   else if (uncovered.length) {
     kind = "harvest"; resources = uncovered;
     slots = [...new Set(uncovered.flatMap(type => Object.entries(resourceHarvestRequirements({resourceType:type}, world, tribe)).filter(([,level]) => level > 0).map(([key]) => key)))];
-    if (!slots.length) slots = ["strength"];
     slots = slots.slice(0, state.nestLevel);
     resources = uncovered.filter(type => Object.entries(resourceHarvestRequirements({resourceType:type}, world, tribe)).filter(([,level]) => level > 0).every(([key]) => slots.includes(key)));
   } else if (Object.keys(missing).length || state.agents.some(agent => agent.health > 0 && agent.slots.includes("construction") &&
