@@ -12,7 +12,7 @@ const world={generationVersion:33};
 for(const tribe of ["bean","spore","pebble","spring"])test(tribe+" 감시봉의 기본 자원 예외를 반영하고 칼날 채집을 먼저 안내한다",()=>{
   const state=fixture(tribe),goal={buildingKey:"watchpost",cost:buildingCost("watchpost",tribe)};
   const offer=constructionHelp(state,tribe,true,goal,{},world,false);
-  assert.equal(offer.kind,"harvest");assert.deepEqual(offer.slots,["blade",state.tribe === "pebble" ? "lifespan" : "feet"]);
+  assert.equal(offer.kind,"harvest");assert.deepEqual(offer.slots,["blade"]);
   assert.deepEqual(offer.resources,tribe==="spore"?["grass-fiber"]:["tree","grass-fiber"]);
   assert.equal(offer.cost,birthCost({slots:offer.slots},tribe));
   state.agents.push({id:"harvester",health:100,bornAt:0,lifespan:300,slots:["blade"],attributes:attributeCounts(["blade"]),birth:{readyAt:3}});
@@ -27,10 +27,12 @@ test("재료가 일부만 모였을 때 건설 개체를 먼저 권하지 않는
 });
 
 test("채집 가능한 기존 설계는 이름과 강화를 유지하고 변태가 든 설계는 채집용으로 쓰지 않는다",()=>{
-  const state=fixture("bean");state.templates=[{id:1,name:"내 벌목꾼",slots:["blade","feet"],attributeLevels:{blade:2,feet:1}},
-    {id:2,name:"몸을 바꾸는 칼날",slots:["blade","construction"],attributeLevels:{blade:1,construction:1}}];
+  const state=fixture("bean");state.templates=[{id:1,name:"내 벌목꾼",slots:["blade"],attributeLevels:{blade:2}},
+    {id:2,name:"몸을 바꾸는 칼날",slots:["blade","construction"],attributeLevels:{blade:1,construction:1}},
+    {id:3,name:"날쌘 벌목꾼",slots:["blade","feet"],attributeLevels:{blade:1,feet:1}}];
   const template=constructionHelpTemplate(state,["blade"],"harvest");
   assert.equal(template,state.templates[0]);assert.equal(template.name,"내 벌목꾼");assert.equal(template.attributeLevels.blade,2);
+  state.templates.shift();assert.deepEqual(constructionHelpTemplate(state,["blade"],"harvest").slots,["blade"]);
 });
 
 test("기본 자원만 쓰는 창고에는 다른 채집 속성을 요구하지 않는다",()=>{
@@ -51,7 +53,7 @@ test("수명이 다해가는 채집 개체와 없는 채집 능력을 구분하�
   const state=fixture("bean");state.simSeconds=280;
   state.agents.push({health:100,bornAt:0,lifespan:300,slots:["blade"],attributes:attributeCounts(["blade"])});
   const offer=constructionHelp(state,"bean",true,{buildingKey:"watchpost",cost:buildingCost("watchpost","bean")},{clay:8},world,false);
-  assert.equal(offer.kind,"harvest");assert.deepEqual(offer.slots,["blade",state.tribe === "pebble" ? "lifespan" : "feet"]);
+  assert.equal(offer.kind,"harvest");assert.deepEqual(offer.slots,["blade"]);
 });
 
 test("회복과 수명 때문에 작업할 수 없는 기존 건설 개체가 후속 생산 안내를 막지 않는다",()=>{
@@ -71,16 +73,16 @@ test("장기 회복 중인 채집 개체는 자재 수급 가능한 인력으로
   const state=fixture("bean"),goal={buildingKey:"watchpost",cost:buildingCost("watchpost","bean")};
   state.agents.push({id:"injured",health:20,stats:{health:100},bornAt:0,lifespan:300,slots:["blade"],attributes:attributeCounts(["blade"])});
   const offer=constructionHelp(state,"bean",true,goal,{clay:8},world,false);
-  assert.equal(offer.kind,"harvest");assert.deepEqual(offer.slots,["blade",state.tribe === "pebble" ? "lifespan" : "feet"]);
+  assert.equal(offer.kind,"harvest");assert.deepEqual(offer.slots,["blade"]);
 });
 
 test("자원 유지 담당을 외부 건설 자재 채집 인력으로 중복 계산하지 않는다",()=>{
   const state=fixture("bean"),goal={buildingKey:"watchpost",cost:buildingCost("watchpost","bean")};
   state.agents.push({id:"food-worker",health:100,bornAt:0,lifespan:300,slots:["blade"],attributes:attributeCounts(["blade"])});
   const offer=constructionHelp(state,"bean",true,goal,{clay:8},world,false,new Set(["food-worker"]));
-  assert.equal(offer.kind,"harvest");assert.deepEqual(offer.slots,["blade",state.tribe === "pebble" ? "lifespan" : "feet"]);
+  assert.equal(offer.kind,"harvest");assert.deepEqual(offer.slots,["blade"]);
   const native={buildingKey:"storage",cost:buildingCost("storage","bean")};
   assert.equal(constructionHelp(state,"bean",true,native,{},world,false,new Set(["native","food-worker"])),null);
 });
 
-test("둥지 3단계 장거리 운반 설계는 이동과 수명을 함께 갖추며 이름으로 역할을 알린다",()=>{const state=fixture("spore");state.nestLevel=3;const design=constructionHelpTemplate(state,["strength"],"transport");assert.deepEqual(design.slots,["strength","feet","lifespan"]);assert.equal(design.name,"날쌘 수송꾼");});
+test("둥지 3단계 운반 설계도 채집량 속성만 사용한다",()=>{const state=fixture("spore");state.nestLevel=3;const design=constructionHelpTemplate(state,["strength"],"transport");assert.deepEqual(design.slots,["strength"]);assert.equal(design.name,"수송꾼");});
