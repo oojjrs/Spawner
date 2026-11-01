@@ -2177,6 +2177,7 @@
         else if (object.kind === "burrow") drawBurrow(object.target);
         else drawFoodSpot(now, object.target, harvesters.get(object.target.x + "," + object.target.y));
       }
+      drawCorpses();
       if (movementVisible) {
         for (const agent of movementAgents) drawSelectedAgentMovement(agent);
         for (const object of objects) if (object.kind === "agent") drawAgent(now, object.target);
@@ -5934,7 +5935,6 @@
         worldToScreen(entry.x, entry.y), COLONY_SIZE * state.camera.zoom, colonyAppearance(entry));
       drawBuildings();
       drawWorldObjects(now);
-      drawCorpses();
       drawCombatAgents(now);
       drawAttackImpacts();
       drawAgentGroups();
