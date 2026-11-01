@@ -89,40 +89,55 @@ test("이동 경로가 없으면 출발하지 않고 통로가 열리면 실제 
   assert.equal(room.world.terrain[agent.y * 320 + agent.x], 4);
 });
 
-test("도착 후 30초 안에서만 교전하고 귀환해도 생존 개체와 소속을 유지한다", () => {
-  const setup = fixture(false), { room, system, hits, victim } = setup, agent = start(setup), id = agent.id;
-  until(room, system, () => agent.raid?.phase === "active", 400);
-  const end = agent.raid.activeUntil;
-  Object.assign(victim, { x:agent.x, y:agent.y });
-  advance(room, system, end);
-  assert.equal(agent.raid.phase, "returning"); assert.ok(hits.length > 0); assert.ok(hits.every(hit => hit.time < end));
-  const count = hits.length;
-  until(room, system, () => !agent.raid, end + 200);
-  assert.equal(hits.length, count); assert.equal(agent.id, id); assert.equal(agent.burrowId, "large:1");
-  assert.ok(Math.abs(agent.x - 149) + Math.abs(agent.y - 101) <= 1);
-  assert.ok(system.agents.filter(other => other.burrowId === "large:1" && other.health > 0).length <= 6);
+test("습격벌레는 도착 후 시간 제한 없이 습격지에서 활동하며 출발 굴로 돌아가지 않는다", () => {
+  const setup = fixture(false), { room, system, victim } = setup, agent = start(setup);
+  victim.x = victim.y = 0;
+  until(room, system, () => agent.raid?.phase === "active", 500);
+  const arrivedAt = room.simSeconds, id = agent.id;
+  advance(room, system, arrivedAt + 120);
+  assert.equal(agent.raid.phase, "active");
+  assert.equal(agent.id, id);
+  assert.equal(agent.burrowId, "large:1");
+  assert.equal(Object.hasOwn(agent.raid, "activeUntil"), false);
+  assert.ok(Math.hypot(agent.x - 100, agent.y - 100) <= 5);
+  assert.ok(Math.hypot(agent.x - 149, agent.y - 101) > 8);
 });
 
-test("출정·교전·복귀 중 저장을 복원해도 대상과 30초 종료 시각·다음 출발 시각이 유지된다", () => {
+
+test("출정·활동 저장은 시한 없이 복원하고 이전 귀환 저장도 습격 활동으로 이행한다", () => {
   const setup = fixture(false), { room } = setup; let system = setup.system, agent = start(setup);
-  for (const phase of ["outbound","active","returning"]) {
-    if (phase === "active") until(room, system, () => agent.raid?.phase === "active", 400);
-    if (phase === "returning") advance(room, system, agent.raid.activeUntil);
+  for (const phase of ["outbound", "active"]) {
+    if (phase === "active") until(room, system, () => agent.raid?.phase === "active", 500);
     const saved = JSON.parse(JSON.stringify(system.save())), expected = JSON.parse(JSON.stringify(agent.raid));
     system = createCreatures(room, saved); room.creatureSystem = system; agent = system.agents.find(other => other.id === agent.id);
-    assert.deepEqual(system.save(), saved); assert.deepEqual(agent.raid, expected);
+    assert.deepEqual(agent.raid, expected);
   }
-  until(room, system, () => !agent.raid, 600);
+  const saved = JSON.parse(JSON.stringify(system.save()));
+  const previous = saved.agents.find(other => other.id === agent.id);
+  previous.raid.phase = "returning"; previous.raid.activeUntil = null;
+  system = createCreatures(room, saved); room.creatureSystem = system;
+  agent = system.agents.find(other => other.id === agent.id);
+  assert.equal(agent.raid.phase, "active");
+  assert.equal(Object.hasOwn(agent.raid, "activeUntil"), false);
 });
 
-test("파괴된 출발 굴과 사라진 대상 둥지는 출정 개체를 삭제하지 않는다", () => {
-  const setup = fixture(false), { room, system } = setup, agent = start(setup), id = agent.id;
-  system.receiveBurrowDamage("large:1", 60); room.colonies.splice(0);
-  until(room, system, () => !agent.raid, room.simSeconds + 200);
+
+test("출발 굴 파괴는 습격을 끝내지 않고 대상 군락 소멸은 현재 위치에서 습격을 끝낸다", () => {
+  const setup = fixture(false), { room, system, victim } = setup, agent = start(setup), id = agent.id;
+  victim.x = victim.y = 0;
+  until(room, system, () => agent.raid?.phase === "active", 500);
+  system.receiveBurrowDamage("large:1", 60);
+  advance(room, system, room.simSeconds + 60);
+  assert.equal(agent.raid.phase, "active");
+  room.colonies.splice(0);
+  const position = [agent.x, agent.y];
+  advance(room, system, room.simSeconds + .25);
+  assert.ok(!agent.raid);
+  assert.deepEqual([agent.homeX, agent.homeY], position);
+  assert.deepEqual([agent.x, agent.y], position);
   assert.equal(agent.id, id); assert.ok(agent.health > 0);
-  advance(room, system, room.simSeconds + 600);
-  assert.ok(system.agents.includes(agent)); assert.ok(!system.agents.some(other => other.raid));
 });
+
 
 test("둥지 안전권 안에서 처치한 습격 개체도 사체를 한 번만 남긴다", () => {
   const setup = fixture(false), { room, system } = setup, agent = start(setup);
@@ -227,8 +242,8 @@ test("이전 저장을 늦게 불러와도 전체 누적 수급을 첫 2분 수�
   assert.equal(opening.interval, 120);
 });
 
-test("습격벌레는 출정·귀환·활동 종료 중 붙잡혀도 공격과 반격이 끝나기 전에 이탈하지 않는다", () => {
-  for (const phase of ["outbound", "returning", "active"]) {
+test("습격벌레는 출정·활동 중 붙잡혀도 공격과 반격이 끝나기 전에 이탈하지 않는다", () => {
+  for (const phase of ["outbound", "active"]) {
     const setup = fixture(false), { room, system, victim } = setup, agent = start(setup);
     agent.raid.phase = phase;
     agent.raid.activeUntil = phase === "active" ? room.simSeconds : null;
@@ -252,6 +267,6 @@ test("습격벌레는 출정·귀환·활동 종료 중 붙잡혀도 공격과 �
     victim.health = 0;
     until(room, system, () => !agent.combat, room.simSeconds + 10);
     room.simSeconds += .25; system.tick();
-    if (phase === "active") assert.equal(agent.raid.phase, "returning");
+    assert.equal(agent.raid.phase, phase);
   }
 });

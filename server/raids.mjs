@@ -2,7 +2,7 @@ import { CONQUEST_PACING } from "./conquest-pacing.mjs";
 import { worldSize } from "./world-size.mjs";
 import { COLONY_RAID_PRESSURE, colonyRaidPressure } from "./raid-pressure.mjs";
 
-export const BEETLE_RAIDS = Object.freeze({ firstAt:CONQUEST_PACING.neutralConflictAt, firstSpread:30, interval:90, intervalSpread:0, activityDuration:30, defenders:3, concurrent:4 });
+export const BEETLE_RAIDS = Object.freeze({ firstAt:CONQUEST_PACING.neutralConflictAt, firstSpread:30, interval:90, intervalSpread:0, defenders:3, concurrent:4 });
 
 export function createBeetleRaids(environment, state, actions, restoring) {
   const size = worldSize(environment.world), sites = new Map((environment.world.burrows || []).map(burrow => [burrow.id, burrow]));
@@ -27,10 +27,15 @@ export function createBeetleRaids(environment, state, actions, restoring) {
       throw new Error("굴 습격 주기 저장 형식이 올바르지 않습니다.");
     }
   }
-  for (const agent of state.agents) if (agent.raid && (!restoring || !Number.isInteger(agent.raid.colonyId) ||
-      !["outbound", "active", "returning"].includes(agent.raid.phase) || !Number.isFinite(agent.raid.departedAt) || agent.raid.departedAt < 120 ||
-      (agent.raid.phase === "active" ? !Number.isFinite(agent.raid.activeUntil) || agent.raid.activeUntil < agent.raid.departedAt : agent.raid.activeUntil !== null))) {
-    throw new Error("딱정벌레 습격 저장 형식이 올바르지 않습니다.");
+  for (const agent of state.agents) {
+    if (!agent.raid) continue;
+    if (!restoring || !Number.isInteger(agent.raid.colonyId) ||
+        !["outbound", "active", "returning"].includes(agent.raid.phase) || !Number.isFinite(agent.raid.departedAt) || agent.raid.departedAt < 120 ||
+        agent.raid.activeUntil != null && (!Number.isFinite(agent.raid.activeUntil) || agent.raid.activeUntil < agent.raid.departedAt)) {
+      throw new Error("딱정벌레 습격 저장 형식이 올바르지 않습니다.");
+    }
+    if (agent.raid.phase === "returning") { agent.raid.phase = "active"; agent.returningHome = true; }
+    delete agent.raid.activeUntil;
   }
 
   function colonyFor(agent) { return environment.colonies.find(colony => colony.id === agent.raid?.colonyId && environment.games.get(colony.ownerId)?.nest?.health !== 0); }
@@ -140,7 +145,7 @@ export function createBeetleRaids(environment, state, actions, restoring) {
       if (!agent) continue;
       const cells = path(agent, boundary(colony), false);
       if (!cells) continue;
-      agent.raid = { colonyId:colony.id, phase:"outbound", departedAt:now, activeUntil:null };
+      agent.raid = { colonyId:colony.id, phase:"outbound", departedAt:now };
       agent.attackTargetId = null; agent.attackHit = true;
       if (now >= agent.moveStartedAt + agent.moveDuration) actions.idle(agent, 0);
       routes.set(agent.id, { phase:"outbound", path:cells, cursor:1, retryAt:now });
@@ -152,31 +157,26 @@ export function createBeetleRaids(environment, state, actions, restoring) {
     }
     for (const id of routes.keys()) if (!state.agents.some(agent => agent.id === id && agent.health > 0 && agent.raid)) routes.delete(id);
   }
-  function returning(agent) {
-    agent.raid.phase = "returning"; agent.raid.activeUntil = null;
+  function finish(agent) {
+    agent.homeX = agent.x; agent.homeY = agent.y;
+    delete agent.raid;
+    agent.returningHome = false;
     agent.attackHit = true; agent.attackTargetId = null;
-    if (agent.mode === "attack") actions.idle(agent, 0);
+    actions.idle(agent, 0);
     routes.delete(agent.id);
   }
   function update(agent) {
     if (!agent.raid || agent.combat) return false;
     const now = environment.simSeconds, colony = colonyFor(agent);
-    if (agent.raid.phase !== "returning" && (!colony || agent.raid.phase === "active" && now >= agent.raid.activeUntil)) returning(agent);
+    if (!colony) { finish(agent); return true; }
     if (agent.raid.phase === "active") return false;
     if (now < agent.moveStartedAt + agent.moveDuration) return true;
-    const site = sites.get(agent.burrowId), entrance = site?.entrance || { x:agent.homeX, y:agent.homeY };
-    const goals = agent.raid.phase === "outbound" ? boundary(colony) : [entrance,
-      { x:entrance.x - 1,y:entrance.y }, { x:entrance.x + 1,y:entrance.y }, { x:entrance.x,y:entrance.y - 1 }, { x:entrance.x,y:entrance.y + 1 }];
-    if (goals.some(cell => Math.abs(cell.x - agent.x) + Math.abs(cell.y - agent.y) <= (agent.raid.phase === "outbound" ? 1 : 0))) {
+    const goals = boundary(colony);
+    if (goals.some(cell => Math.abs(cell.x - agent.x) + Math.abs(cell.y - agent.y) <= 1)) {
       routes.delete(agent.id);
-      if (agent.raid.phase === "outbound") {
-        agent.raid.phase = "active"; agent.raid.activeUntil = now + BEETLE_RAIDS.activityDuration; actions.idle(agent, 0);
-        return false;
-      }
-      agent.homeX = entrance.x; agent.homeY = entrance.y; delete agent.raid; actions.idle(agent, actions.restSeconds);
-      return true;
+      agent.raid.phase = "active"; actions.idle(agent, 0);
+      return false;
     }
-    if (agent.raid.phase === "returning" && now < agent.nextActionAt) return true;
     let route = routes.get(agent.id);
     if (route && now < route.retryAt) return true;
     if (!route || route.phase !== agent.raid.phase || route.path[route.cursor - 1] !== agent.y * size + agent.x) {
@@ -188,7 +188,7 @@ export function createBeetleRaids(environment, state, actions, restoring) {
     if (next === undefined || actions.occupied(next % size, Math.floor(next / size), agent) || !actions.walkable(next % size, Math.floor(next / size), true)) {
       const cells = path(agent, goals, true);
       if (!cells) {
-        if (agent.raid.phase === "outbound" && !path(agent, goals, false)) returning(agent);
+        if (!path(agent, goals, false)) finish(agent);
         else route.retryAt = now + 1;
         actions.idle(agent, 1); return true;
       }

@@ -55,12 +55,13 @@ test("멧돼지는 감지 4칸 안의 목표를 추격하고 출생지 6칸 밖�
   f.player.x = 107;
   advance(f, 2);
   assert.equal(f.agent.returningHome, true);
-  assert.equal(f.agent.x, 106);
-  advance(f, Math.max(.25, f.agent.nextActionAt - f.room.simSeconds));
-  assert.equal(f.agent.x, 105);
+  assert.ok(f.agent.x <= 105);
+  assert.equal(f.agent.nextActionAt, f.agent.moveStartedAt + f.agent.moveDuration);
   Object.assign(f.player, { x: 104, y: 102 });
+  const before = f.agent.x;
   advance(f, f.agent.moveDuration);
-  assert.equal(f.agent.x, 105);
+  assert.ok(f.agent.x < before);
+  assert.equal(f.agent.pursuitTargetId, null);
   f.game.agents.length = 0;
   for (let tick = 0; tick < 20 && f.agent.returningHome; tick++)
     advance(f, Math.max(.25, f.agent.nextActionAt - f.room.simSeconds));

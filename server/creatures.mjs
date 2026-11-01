@@ -216,7 +216,7 @@ export function createCreatures(environment, saved) {
     for (let index = count; index < BEETLE_RAIDS.defenders + 1; index++) if (!spawnFromBurrow(record)) break;
   }
   const raids = createBeetleRaids(environment, state, { walkable, occupied, noise, move, idle, reinforce,
-    stepSeconds:1 / stats.speed, restSeconds:CREATURE_MOVEMENT[species].restSeconds }, saved?.version === 5);
+    stepSeconds:1 / stats.speed }, saved?.version === 5);
 
   function idle(agent, duration) {
     if (agent.mode !== "idle") agent.animationStartedAt = environment.simSeconds;
@@ -275,13 +275,13 @@ export function createCreatures(environment, saved) {
     const home = raids.home(agent);
     const visited = new Set([agent.x + "," + agent.y]);
     const queue = [{ x: agent.x, y: agent.y, first: null }];
-    for (let index = 0; index < queue.length && index < 192; index++) {
+    for (let index = 0; index < queue.length && index < (agent.returningHome ? size * size : 192); index++) {
       const current = queue[index];
       if (current.first && Math.abs(current.x - goal.x) + Math.abs(current.y - goal.y) <= reach) return current.first;
       for (const cell of neighbors(current.x, current.y, Boolean(agent.raid))) {
         const key = cell.x + "," + cell.y;
         if (visited.has(key) || occupied(cell.x, cell.y, agent) && !(reach === 0 && cell.x === goal.x && cell.y === goal.y) ||
-            Math.hypot(cell.x - home.x, cell.y - home.y) > 8) continue;
+            !agent.returningHome && Math.hypot(cell.x - home.x, cell.y - home.y) > 8) continue;
         visited.add(key);
         queue.push({ ...cell, first: current.first || cell });
       }
@@ -297,7 +297,7 @@ export function createCreatures(environment, saved) {
     agent.y = destination.y;
     agent.moveStartedAt = environment.simSeconds;
     agent.moveDuration = creatureMoveDuration(agent, environment.world.terrain[agent.y * size + agent.x]);
-    agent.nextActionAt = environment.simSeconds + agent.moveDuration + CREATURE_MOVEMENT[species].restSeconds;
+    agent.nextActionAt = environment.simSeconds + agent.moveDuration + (agent.returningHome ? 0 : CREATURE_MOVEMENT[species].restSeconds);
     agent.animationStartedAt = environment.simSeconds;
     agent.mode = "walk";
     agent.stepCount++;
@@ -314,19 +314,25 @@ export function createCreatures(environment, saved) {
     const opponents = players(), buildings = creatureBuildingTargets(environment);
     for (const agent of state.agents) {
       if (agent.health <= 0 || creatureSpawning(agent, now)) continue;
-      if (!agent.combat && !agent.attack && !agent.raid && agent.support === null && now < agent.nextActionAt &&
+      if (!agent.combat && !agent.attack && !agent.raid && !agent.returningHome &&
+          Math.hypot(agent.x - agent.homeX, agent.y - agent.homeY) <= 4 && agent.support === null && now < agent.nextActionAt &&
           !(agent.mode === "walk" && now >= agent.moveStartedAt + agent.moveDuration) && environment.unitIndex &&
           !environment.games.get(environment.hostId)?.isVisible(agent.x, agent.y) &&
           !environment.unitIndex.nearby(agent.x, agent.y, agent.stats.vision || 12).some(entry => entry.game)) continue;
       if (agent.mode === "spawn") { agent.mode = "idle"; agent.animationStartedAt = agent.spawn.readyAt; }
       finishCreatureMove(agent, now);
-      if (raids.update(agent)) { agent.attack = null; agent.pursuitTargetId = null; continue; }
       if (combat.update(agent, now)) { agent.pursuitTargetId = null; continue; }
+      if (raids.update(agent)) { agent.attack = null; agent.pursuitTargetId = null; continue; }
       if (now < agent.moveStartedAt + agent.moveDuration) continue;
       const home = raids.home(agent);
+      if (agent.returningHome && Math.abs(agent.x - home.x) + Math.abs(agent.y - home.y) <= (agent.raid ? 3 : 0)) {
+        agent.returningHome = false;
+        delete agent.returnRetryAt;
+        agent.nextActionAt = now + CREATURE_MOVEMENT[species].restSeconds;
+      }
       const candidates = (environment.unitIndex ? environment.unitIndex.nearby(agent.x, agent.y, agent.stats.vision)
         .filter(entry => entry.game) : opponents).concat(buildings);
-      const targets = candidates.filter(entry => entry.agent.health > 0 && raids.targetAllowed(agent, entry.game) &&
+      const targets = candidates.filter(entry => !agent.returningHome && entry.agent.health > 0 && raids.targetAllowed(agent, entry.game) &&
         (["nest", "building"].includes(entry.agent.kind) ? combatDisposition(agent) === "aggressive" && burrowDistance(home, entry.agent) <= 8 :
           canPursueCombat(agent, entry.agent, now) && !(entry.agent.birth && now < entry.agent.birth.readyAt) &&
           walkable(entry.agent.x, entry.agent.y, Boolean(agent.raid)) && Math.hypot(entry.agent.x - home.x, entry.agent.y - home.y) <= 8))
@@ -354,13 +360,15 @@ export function createCreatures(environment, saved) {
         else idle(agent, .5);
         continue;
       }
-      if (now < agent.nextActionAt) continue;
-      if (Math.hypot(agent.x - home.x, agent.y - home.y) > 4) {
+      if (agent.returningHome || Math.hypot(agent.x - home.x, agent.y - home.y) > 4) {
+        agent.returningHome = true;
+        if (now < (agent.returnRetryAt || 0)) continue;
         const destination = stepToward(agent, home, agent.raid ? 3 : 0);
-        if (destination) move(agent, destination);
-        else idle(agent, 1);
+        if (destination) { delete agent.returnRetryAt; move(agent, destination); }
+        else { agent.returnRetryAt = now + 1; idle(agent, 1); }
         continue;
       }
+      if (now < agent.nextActionAt) continue;
       const destinations = neighbors(agent.x, agent.y, Boolean(agent.raid)).filter(cell => !occupied(cell.x, cell.y, agent) && Math.hypot(cell.x - home.x, cell.y - home.y) <= 5);
       if (destinations.length) move(agent, destinations[Math.floor(noise(agent.stepCount + 41, agent.homeY) * destinations.length) % destinations.length]);
       else idle(agent, 1);

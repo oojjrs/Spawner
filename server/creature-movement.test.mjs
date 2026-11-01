@@ -52,7 +52,7 @@ function readyToRoam(f,species){
   if(species==="walking-forest")f.agent.stepCount=3;
 }
 
-test("중립 생물 19종은 지정한 실제 이속으로 한 칸 이동하고 종별 휴지 시간이 끝나야 다시 움직인다",()=>{
+test("중립 생물 19종은 실제 이속을 유지하고 평상시에만 종별 휴지를 적용한다",()=>{
   for(const [species,speed,rest] of movement){
     const f=fixture(species);readyToRoam(f,species);
     tick(f,720);
@@ -60,6 +60,12 @@ test("중립 생물 19종은 지정한 실제 이속으로 한 칸 이동하고 
     assert.equal(f.agent.mode,"walk",species);
     assert.ok(Math.abs(f.agent.moveDuration-1/speed)<1e-10,species);
     const step=f.agent.stepCount,endsAt=f.agent.moveStartedAt+f.agent.moveDuration;
+    if(f.agent.returningHome){
+      tick(f,endsAt);
+      assert.equal(f.agent.stepCount,step+1,species);
+      assert.equal(f.agent.nextActionAt,f.agent.moveStartedAt+f.agent.moveDuration,species);
+      continue;
+    }
     tick(f,endsAt);
     assert.equal(f.agent.mode,"idle",species);
     assert.equal(f.agent.animationStartedAt,endsAt,species);
@@ -71,7 +77,7 @@ test("중립 생물 19종은 지정한 실제 이속으로 한 칸 이동하고 
   }
 });
 
-test("선공 생물 9종은 긴 평상시 대기 중에도 추격하고 목표가 사라지면 이동 후 대기를 복원한다",()=>{
+test("선공 생물 9종은 평상시 대기 중 추격하고 목표 소멸 후 배회 휴지나 연속 귀환으로 전환한다",()=>{
   for(const [species,speed,rest] of movement.filter(([key])=>aggressive.has(key))){
     const f=fixture(species);
     f.agent.nextActionAt=720+rest;
@@ -86,6 +92,11 @@ test("선공 생물 9종은 긴 평상시 대기 중에도 추격하고 목표�
     f.game.agents=[];
     const endsAt=f.agent.moveStartedAt+f.agent.moveDuration;
     tick(f,endsAt);
+    if(f.agent.returningHome){
+      assert.equal(f.agent.mode,"walk",species);
+      assert.equal(f.agent.nextActionAt,f.agent.moveStartedAt+f.agent.moveDuration,species);
+      continue;
+    }
     assert.equal(f.agent.mode,"idle",species);
     tick(f,endsAt+rest-.001);
     assert.equal(f.agent.stepCount,first+1,species);
@@ -102,6 +113,12 @@ test("이전 저장은 진행 중인 이동 위치를 유지하면서 새 이속
     f.restore(saved);
     assert.equal(f.agent.stats.speed,speed,species);
     assert.equal(f.agent.moveDuration,2,species);
+    if(f.agent.returningHome){
+      assert.equal(f.agent.nextActionAt,722,species);
+      tick(f,722);
+      assert.equal(f.agent.stepCount,step+1,species);
+      continue;
+    }
     assert.equal(f.agent.nextActionAt,722+rest,species);
     tick(f,722+rest-.001);
     assert.equal(f.agent.stepCount,step,species);
@@ -122,16 +139,16 @@ test("비행 생물의 숲 감속과 지상 생물의 해안 감속은 실제 �
   }
 });
 
-test("습격을 마치고 귀환하는 딱정벌레는 한 칸마다 18초 쉬며 추격으로 취급하지 않는다",()=>{
-  const f=fixture("spiny-back-beetle");
-  Object.assign(f.agent,{x:105,renderFromX:105,raid:{colonyId:1,phase:"returning",departedAt:720,activeUntil:null}});
-  tick(f,720);
-  const step=f.agent.stepCount,endsAt=f.agent.moveStartedAt+f.agent.moveDuration;
-  assert.equal(step,1);
-  tick(f,endsAt);
-  assert.equal(f.agent.mode,"idle");
-  tick(f,endsAt+17.999);
-  assert.equal(f.agent.stepCount,step);
-  tick(f,endsAt+18);
-  assert.equal(f.agent.stepCount,step+1);
+test("선공 생물 9종은 추격 후 귀환에 이동 휴지를 적용하지 않는다",()=>{
+  for(const [species,speed] of movement.filter(([key])=>aggressive.has(key))){
+    const f=fixture(species);
+    Object.assign(f.agent,{x:105,renderFromX:105,returningHome:true,nextActionAt:840});
+    tick(f,720);
+    assert.equal(f.agent.stepCount,1,species);
+    assert.equal(f.agent.moveDuration,1/speed,species);
+    assert.equal(f.agent.nextActionAt,f.agent.moveStartedAt+f.agent.moveDuration,species);
+    tick(f,f.agent.moveStartedAt+f.agent.moveDuration);
+    assert.equal(f.agent.stepCount,2,species);
+    assert.equal(f.agent.nextActionAt,f.agent.moveStartedAt+f.agent.moveDuration,species);
+  }
 });

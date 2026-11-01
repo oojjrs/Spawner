@@ -73,7 +73,7 @@ test("파괴 상태를 저장하고 복원하며 이전 저장의 둥지는 해�
   assert.equal(restored.nest.health, 400);
 });
 
-test("습격한 딱정벌레는 인접한 둥지를 공격 프레임에 한 번 타격하고 파괴되면 귀환한다", () => {
+test("습격한 딱정벌레는 인접한 둥지를 공격 프레임에 한 번 타격하고 파괴되면 현재 위치에서 습격을 끝낸다", () => {
   const { game, room } = fixture();
   game.agents.splice(0);
   room.creatureSystem = createCreatures(room, null);
@@ -95,7 +95,8 @@ test("습격한 딱정벌레는 인접한 둥지를 공격 프레임에 한 번 
   assert.equal(game.nest.health, 97);
   game.receiveNestDamage(97);
   room.creatureSystem.tick();
-  assert.equal(beetle.raid.phase, "returning");
+  assert.ok(!beetle.raid);
+  assert.deepEqual([beetle.homeX, beetle.homeY], [beetle.x, beetle.y]);
 });
 
 test("군락 유닛도 다른 군락의 둥지에 접근해 정해진 공격 프레임에 피해를 준다", () => {

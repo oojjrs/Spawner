@@ -304,18 +304,24 @@ export function createEncounters(environment, saved, residents) {
     if (agent.x !== agent.renderFromX) agent.facing = agent.x > agent.renderFromX ? 1 : -1;
     agent.moveStartedAt = environment.simSeconds;
     agent.moveDuration = creatureMoveDuration(agent, environment.world.terrain[index]);
-    agent.nextActionAt = environment.simSeconds + agent.moveDuration + CREATURE_MOVEMENT[agent.species].restSeconds;
+    agent.nextActionAt = environment.simSeconds + agent.moveDuration + (agent.returningHome ? 0 : CREATURE_MOVEMENT[agent.species].restSeconds);
     agent.mode = "walk"; agent.stepCount++;
     environment.unitIndex?.update(agent);
   }
 
   function returnHome(agent) {
     agent.pursuitTargetId = null;
+    agent.nextActionAt = agent.moveStartedAt + agent.moveDuration;
     agent.returningHome = Math.hypot(agent.x - agent.homeX, agent.y - agent.homeY) > 1;
-    if (!agent.returningHome) return false;
-    if (environment.simSeconds < agent.nextActionAt) return true;
+    if (!agent.returningHome) {
+      delete agent.returnRetryAt;
+      agent.nextActionAt = Math.max(agent.nextActionAt, environment.simSeconds + CREATURE_MOVEMENT[agent.species].restSeconds);
+      return false;
+    }
+    if (environment.simSeconds < (agent.returnRetryAt || 0)) return true;
     const next = step(agent, { x: agent.homeX, y: agent.homeY }, 1, true);
-    if (next !== null) move(agent, next); else agent.nextActionAt = environment.simSeconds + 1;
+    if (next !== null) { delete agent.returnRetryAt; move(agent, next); }
+    else agent.returnRetryAt = environment.simSeconds + 1;
     return true;
   }
 
@@ -324,7 +330,7 @@ export function createEncounters(environment, saved, residents) {
     const now = environment.simSeconds, nearby = players(), buildings = creatureBuildingTargets(environment);
     for (const agent of [...state.agents]) {
       if (agent.health <= 0 || creatureSpawning(agent, now)) continue;
-      if (!agent.combat && !agent.attack && !agent.raid && agent.support === null && now < agent.nextActionAt &&
+      if (!agent.combat && !agent.attack && !agent.raid && !agent.returningHome && withinEncounterTerritory(agent, agent, false) && agent.support === null && now < agent.nextActionAt &&
           !(agent.mode === "walk" && now >= agent.moveStartedAt + agent.moveDuration) && environment.unitIndex &&
           !environment.games.get(environment.hostId)?.isVisible(agent.x, agent.y) &&
           !environment.unitIndex.nearby(agent.x, agent.y, Math.max(plans.get(agent.species).radius, encounterTerritory(agent)?.detectionRadius || 0)).some(entry => entry.game)) continue;
@@ -371,9 +377,7 @@ export function createEncounters(environment, saved, residents) {
       }
       if (agent.species === "white-paw" && agent.health < agent.stats.health / 2) {
         updateCreatureBuildingAttack(agent, null, now);
-        if (now < agent.nextActionAt) continue;
-        const next = step(agent, { x: agent.homeX, y: agent.homeY }, 0, true);
-        if (next !== null) move(agent, next); else agent.nextActionAt = now + 2;
+        if (!returnHome(agent)) agent.nextActionAt = now + 2;
         continue;
       }
       const wasHidden = agent.hidden;
@@ -397,8 +401,9 @@ export function createEncounters(environment, saved, residents) {
       if (now < agent.warningUntil) continue;
       if (updateCreatureBuildingAttack(agent, target, now)) continue;
       if (type.hostile && target && pursuit !== null) { move(agent, pursuit); continue; }
-      if (now < agent.nextActionAt) continue;
       if (territory && !withinEncounterTerritory(agent, agent, false) && returnHome(agent)) continue;
+      if (agent.species === "talon-owl" && !target && returnHome(agent)) continue;
+      if (now < agent.nextActionAt) continue;
       if (agent.species === "talon-owl" && !target) {
         const next = agent.species === "talon-owl" && (agent.x !== agent.homeX || agent.y !== agent.homeY) ? step(agent, { x: agent.homeX, y: agent.homeY }, 0, true) : null;
         if (next !== null) move(agent, next); else agent.nextActionAt = now + 1;
