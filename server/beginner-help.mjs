@@ -7,17 +7,17 @@ export function constructionHelpTemplate(state, slots, kind) {
   if (!slots) slots = ["construction"];
   const construction = slots.includes("construction");
   const military = kind === "military";
-  slots = [...slots];
-  if (state.nestLevel >= 2 && slots.length < state.nestLevel) {
+  slots = construction ? ["construction"] : [...slots];
+  if (!construction && state.nestLevel >= 2 && slots.length < state.nestLevel) {
     const support = state.tribe === "pebble" ? "lifespan" : "feet";
     if (!slots.includes(support)) slots.push(support);
   }
-  if (state.nestLevel >= 3 && slots.length < state.nestLevel) {
+  if (!construction && state.nestLevel >= 3 && slots.length < state.nestLevel) {
     const support = slots.includes("feet") ? "lifespan" : "feet";
     if (!slots.includes(support)) slots.push(support);
   }
   const previous = state.templates.filter(template => (!military || template.productionRole === "military") && template.slots.every(key => isAttributeUnlocked(key, state.nestLevel, state.tribe)) && slots.every(key => template.slots.includes(key)) &&
-    (construction || !template.slots.includes("construction")))
+    (construction ? template.slots.length === 1 : !template.slots.includes("construction")))
     .sort((first, second) => birthCost(first, state.tribe) - birthCost(second, state.tribe) || first.slots.length - second.slots.length)[0];
   if (previous) return previous;
   const name = suggestTemplateName(slots, state.templates);
