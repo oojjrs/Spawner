@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
+import { createGame } from "./game.mjs";
 import { ATTRIBUTES, ATTRIBUTE_COMBINATIONS, ATTRIBUTE_SYNERGIES_ENABLED, attributeCounts, birthCost, hasSynergy, unitStats } from "./attributes.mjs";
 import { RESOURCE_TYPES } from "./resources.mjs";
 import { generateWorld } from "./world.mjs";
@@ -43,6 +44,37 @@ test("브라우저와 내부 워커도 속성 개수별 생산비와 자원 채�
     assert.equal(rules.ATTRIBUTE_COMBINATIONS.length,0);
     assert.equal(rules.hasSynergy({strength:4,antenna:4,feet:4},["strength","antenna"]),false);
     for (const [key,seconds] of Object.entries(harvestSeconds)) assert.equal(rules.resourceDefinition(key).harvestSeconds,seconds,key);
+  }
+});
+
+test("새 설계와 속성을 추가한 기존 설계는 목록 가격과 실제 생산 비용을 함께 갱신한다", () => {
+  for (const [tribe, one, two] of [["bean",5,8],["spore",3,5],["pebble",7,11],["spring",5,7]]) {
+    const colony = { id:1, ownerId:"design-price", tribe, x:40, y:40, occupiedCells:new Set(["2,2"]) };
+    const environment = { simSeconds:0, world:{ seed:13, terrain:new Uint8Array(160*160).fill(4),
+      hazards:new Uint8Array(160*160) }, colonies:[colony], games:new Map(), food:new Map(), foodSpots:new Map() };
+    const game = createGame(environment,colony);
+    environment.games.set(colony.ownerId,game);
+    const saved = JSON.parse(game.save());
+    saved.state.nestLevel = 2;
+    saved.state.evolutionPoints = 100;
+    saved.state.agents = [];
+    game.restore(JSON.stringify(saved));
+    const original = game.command({type:"design",templateId:null,name:"원본",slots:["antenna"],birth:true});
+    assert.equal(game.agents.find(agent=>agent.id===original.agentId).cost,one,tribe);
+    game.command({type:"design",templateId:original.templateId,name:"수정",slots:["antenna","strength"],birth:false});
+    const template = game.snapshot().templates.find(template=>template.id===original.templateId);
+    assert.equal(birthCost(template,tribe),two,tribe);
+    let before = game.snapshot().evolutionPoints;
+    const copy = game.command({type:"birth",templateId:template.id});
+    assert.equal(game.agents.find(agent=>agent.id===copy.agentId).cost,two,tribe);
+    assert.equal(game.snapshot().evolutionPoints,before-two,tribe);
+    assert.equal(game.agents.find(agent=>agent.id===original.agentId).cost,one,tribe);
+    before = game.snapshot().evolutionPoints;
+    const fresh = game.command({type:"design",templateId:null,name:"신규",slots:["antenna","strength"],birth:true});
+    assert.equal(game.agents.find(agent=>agent.id===fresh.agentId).cost,two,tribe);
+    assert.equal(game.snapshot().evolutionPoints,before-two,tribe);
+    game.restore(game.save());
+    assert.equal(birthCost(game.snapshot().templates.find(candidate=>candidate.id===original.templateId),tribe),two,tribe);
   }
 });
 

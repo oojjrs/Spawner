@@ -36,12 +36,12 @@ function advance(fixture) {
 }
 
 function recover(fixture, expected) {
-  for (let step=0;step<1000 && fixture.game.snapshot().colonyFood<expected;step++) advance(fixture);
+  for (let step=0;step<2500 && fixture.game.snapshot().colonyFood<expected;step++) advance(fixture);
   assert.equal(fixture.game.snapshot().colonyFood,expected);
 }
 
 test("네 종족의 전사·자연사는 회수율을 적용한 정수 양분만 남기고 AI가 반납한다",()=>{
-  for (const [tribe,amount] of [["bean",0],["spore",0],["pebble",2],["spring",2]]) {
+  for (const [tribe,amount] of [["bean",1],["spore",1],["pebble",3],["spring",2]]) {
     for (const cause of ["combat","age"]) {
       const f=fixture(tribe), victim=f.game.agents.find(agent=>agent.id===f.victimId);
       const before=f.game.snapshot().evolutionPoints, paid=victim.cost;
@@ -66,6 +66,7 @@ test("과거 지불액을 기준으로 회수하고 운반 중 저장·복원해
   const f=fixture("bean"), saved=JSON.parse(f.game.save());
   const legacy=saved.state.agents.find(agent=>agent.id===f.victimId);
   legacy.cost=17; legacy.growthActivity=204;
+  saved.state.agents.find(agent=>agent.id===f.harvesterId).lifespan=1000;
   f.game.restore(JSON.stringify(saved));
   f.game.receiveDamage(f.game.agents.find(agent=>agent.id===f.victimId),1000);
   const before=f.game.snapshot().evolutionPoints;
@@ -75,9 +76,9 @@ test("과거 지불액을 기준으로 회수하고 운반 중 저장·복원해
   assert.equal(f.game.snapshot().resourceInventory.nutrients,undefined);
   f.game.restore(f.game.save());
   const corpse=[...f.environment.food.values()].find(cell=>cell.agentId===f.victimId);
-  assert.equal(corpse.cost,17); assert.equal(corpse.amount,2);
-  recover(f,3);
-  assert.equal(f.game.snapshot().evolutionPoints,before+3);
+  assert.equal(corpse.cost,17); assert.equal(corpse.amount,7);
+  recover(f,8);
+  assert.equal(f.game.snapshot().evolutionPoints,before+8);
   const returned=f.game.snapshot().evolutionPoints;
   f.game.restore(f.game.save()); advance(f);
   assert.equal(f.game.snapshot().evolutionPoints,returned);
@@ -112,8 +113,8 @@ test("창고가 가득 차도 반납한 정수 양분만 포인트로 회수한�
   f.game.restore(JSON.stringify(saved));
   f.game.receiveDamage(f.game.agents.find(agent=>agent.id===f.victimId),1000);
   const points=f.game.snapshot().evolutionPoints;
-  for (let step=0;step<1000 && f.game.snapshot().evolutionPoints===points;step++) advance(f);
-  assert.equal(f.game.snapshot().evolutionPoints,points+1);
+  recover(f,2);
+  assert.equal(f.game.snapshot().evolutionPoints,points+2);
   assert.equal(f.game.snapshot().resourceInventory.nutrients,undefined);
 });
 
@@ -144,6 +145,6 @@ test("소수 저장의 잔액·생산비·사체·운반 양분은 복원과 재
   assert.equal(f.game.snapshot().evolutionPoints,21);
   const templateId=f.game.snapshot().templates.find(template=>template.name==="회수").id;
   const {agentId}=f.game.command({type:"birth",templateId});
-  assert.equal(f.game.agents.find(agent=>agent.id===agentId).cost,4);
-  assert.equal(f.game.snapshot().evolutionPoints,17);
+  assert.equal(f.game.agents.find(agent=>agent.id===agentId).cost,5);
+  assert.equal(f.game.snapshot().evolutionPoints,16);
 });

@@ -121,7 +121,7 @@ test("겹친 사체도 지정한 대상을 채집하고 원래 자원을 보존�
   assert.equal(environment.food.get(corpse.key)?.amount || 0, before - 1);
   assert.equal(environment.food.has(corpse.key), before > 1);
   assert.equal(game.snapshot().corpses.some(cell => cell.id === corpse.id), before > 1);
-  assert.equal(game.snapshot().food.some(cell => cell.id === corpse.id), false);
+  assert.equal(game.snapshot().food.some(cell => cell.id === corpse.id), before > 1);
   assert.equal(resource.amount, 7);
 });
 
@@ -231,7 +231,7 @@ test("적 사체와 회수된 아군 사체는 시야를 제공하지 않는다"
 
 
 test("양분이 0개인 유닛은 사체를 등록하지 않고 운반 자원만 남긴다", () => {
-  for (const [tribe, cost] of [["bean", 3], ["bean", 4], ["spore", 2], ["spore", 3]]) {
+  for (const [tribe, cost] of [["bean", 0], ["spore", 0], ["pebble", 0], ["spring", 0]]) {
     for (const cause of ["age", "combat"]) {
       const { game, environment } = fixture(tribe);
       game.agents.splice(1);

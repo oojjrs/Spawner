@@ -9,7 +9,7 @@ export function tribeLifespan(tribe) {
 }
 
 export function corpseRecoveryAmount(cost, tribe) {
-  return Math.floor(Math.max(0, cost) * (["pebble", "spring"].includes(tribe) ? 7 : 2) / 10);
+  return Math.floor(Math.max(0, cost) * (["pebble", "spring"].includes(tribe) ? 8 : 5) / 10);
 }
 
 export function placeCorpse(food, corpse) {

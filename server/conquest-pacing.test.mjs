@@ -6,6 +6,7 @@ import {CONQUEST_PACING,TRIBE_PACING,colonyWorkerShare} from "./conquest-pacing.
 import {simulateConquestBuild,colonyWorkerRate} from "./conquest-economy.mjs";
 import {tribeProductionTemplate} from "./tribe-production.mjs";
 import {birthCost} from "./attributes.mjs";
+import {nestUpgradeCost} from "./nests.mjs";
 import {ENCOUNTER_TYPES} from "./encounter-types.mjs";
 import {BEETLE_RAIDS} from "./raids.mjs";
 import {agentGrowth} from "./growth.mjs";
@@ -19,15 +20,18 @@ function fixture(selected) {
 }
 function change(game,update){const saved=JSON.parse(game.save());update(saved.state);game.restore(JSON.stringify(saved));}
 
-test("기본 수명은 네 종족 모두 2분이고 새 개체도 같은 규칙을 따른다",()=>{
- const {game}=fixture(true);assert.ok(game.agents.every(agent=>agent.lifespan===120));
- for(const tribe of Object.values(TRIBE_PACING))assert.equal(tribe.lifespan,120);
+test("기본 수명은 네 종족 모두 3분이고 새 개체도 같은 규칙을 따른다",()=>{
+ const {game}=fixture(true);assert.ok(game.agents.every(agent=>agent.lifespan===180));
+ for(const tribe of Object.values(TRIBE_PACING))assert.equal(tribe.lifespan,180);
 });
 
-test("자원이 충분해도 AI 성장 시점은 4분30초·11분30초·20분 이전으로 당겨지지 않는다",()=>{
- for(const [level,at]of[[1,270],[2,690],[3,1200]]){
-  for(const offset of [-1,0]){const {game}=fixture(false);change(game,state=>{state.nestLevel=level;state.evolutionPoints=1000;state.productionReadyAt=0;});
-   game.prepare(at+offset);game.produce();assert.equal(game.nestLevel,level+(offset===0?1:0),level+":"+offset);}
+test("AI 둥지는 시간 하한 없이 현재 성장 비용이 모이면 한 단계만 성장한다",()=>{
+ for(const level of [1,2,3])for(const enough of [false,true]){
+  const {game}=fixture(false),cost=nestUpgradeCost(level,"bean"),points=cost-(enough?0:1);
+  change(game,state=>{state.nestLevel=level;state.evolutionPoints=points;state.simSeconds=60;state.productionReadyAt=0;state.constructionProductionReadyAt=1000;});
+  game.prepare(60);game.produce();
+  assert.equal(game.nestLevel,level+(enough?1:0),level+":"+enough);
+  assert.equal(game.snapshot().evolutionPoints,points-(enough?cost:0),level+":"+enough);
  }
 });
 
@@ -36,20 +40,25 @@ test("선택한 종족에는 성장과 생산을 자동 실행하지 않는다",
  const before=game.agents.length;assert.equal(game.produce(),null);assert.equal(game.nestLevel,1);assert.equal(game.agents.length,before);
 });
 
-test("안내는 160초 이전에 숨기고 300초 이후에는 군사 생산을 정상 비용으로 안내한다",()=>{
+test("성장 안내를 우선하고 성장 비용이 없을 때 군사 안내 시점과 정상 비용을 적용한다",()=>{
  const {game}=fixture(true);change(game,state=>{state.nestLevel=2;state.evolutionPoints=100;});
- game.prepare(159);assert.equal(game.snapshot().constructionHelp,null);
+ game.prepare(159);assert.equal(game.snapshot().constructionHelp?.kind,"upgrade");
+ change(game,state=>{state.evolutionPoints=79;});
+ assert.equal(game.snapshot().constructionHelp,null);
  game.prepare(300);const offer=game.snapshot().constructionHelp;assert.equal(offer?.kind,"military");assert.ok(offer.canProduce);
  const before=game.snapshot().evolutionPoints,result=game.command({type:"beginner-construction",expectedStep:offer.step,expectedBuildingKey:offer.buildingKey});
  const agent=game.agents.find(agent=>agent.id===result.agentId);assert.equal(agent.productionRole,"military");assert.equal(game.snapshot().evolutionPoints,before-birthCost(agent,"bean"));
  assert.equal(JSON.parse(game.save()).state.militaryGuidanceCompleted,true);
 });
 
-test("초반 80:20과 후반 30:70의 고정 편성을 따르고 상대 편성은 읽지 않는다",()=>{
+test("목표 편성은 초반 80:20·후반 30:70이며 부족한 정찰을 먼저 보충한다",()=>{
  const {game}=fixture(false);const state=JSON.parse(game.save()).state;
  Object.assign(state,{simSeconds:310,nestLevel:2,evolutionPoints:100,foodIncomeStartedAt:0,foodIncome:[[305,60]]});
  const base=state.agents[0];state.agents=Array.from({length:16},(_,index)=>({...base,id:"1:"+(index+1),bornAt:300,lifespan:360,productionRole:"worker",slots:["excavation","strength"]}));
- assert.equal(colonyWorkerShare(2,310,"bean"),.8);assert.equal(tribeProductionTemplate(state,"bean")?.productionRole,"military");
+ assert.equal(colonyWorkerShare(2,310,"bean"),.8);
+ assert.equal(tribeProductionTemplate(state,"bean")?.productionRole,"scout");
+ state.agents[0].slots=["antenna","strength"];
+ assert.equal(tribeProductionTemplate(state,"bean")?.productionRole,"military");
  Object.assign(state,{simSeconds:1200,nestLevel:4,foodIncome:[[1195,100]]});state.agents=state.agents.slice(0,10).map(agent=>({...agent,bornAt:1190}));
  assert.equal(colonyWorkerShare(4,1200,"bean"),.3);assert.equal(tribeProductionTemplate(state,"bean")?.productionRole,"military");
 });
@@ -64,15 +73,25 @@ test("속성·성장·동선 최적화로 후기 일꾼 12마리가 초기 32마
  assert.ok(late.perSecond*12>=early.perSecond*32);assert.ok(late.lifespan>early.lifespan);
 });
 
-test("경제 모델은 운영별 성장 차이와 AI 성장 시각 하한을 유지한다",()=>{
- const expert=simulateConquestBuild("bean","expert",6),ai=simulateConquestBuild("bean","ai",6),basic=simulateConquestBuild("bean","basic",6);
+test("운반 거리를 제외한 경제 모델은 정책별 성장 차이와 AI 모델의 시간 하한을 유지한다",()=>{
+ const expert=simulateConquestBuild("bean","expert",0),ai=simulateConquestBuild("bean","ai",0),basic=simulateConquestBuild("bean","basic",0);
  const expertTime=expert.milestones.find(entry=>entry.level===4)?.seconds;
  const aiTime=ai.milestones.find(entry=>entry.level===4)?.seconds;
  const basicTime=basic.milestones.find(entry=>entry.level===4)?.seconds;
  assert.ok(Number.isFinite(expertTime)&&expertTime>0);
- assert.ok(aiTime>=CONQUEST_PACING.aiLevelFourAt);
- assert.ok(basicTime===undefined||basicTime>expertTime);
+ assert.ok(Number.isFinite(aiTime)&&aiTime>=CONQUEST_PACING.aiLevelFourAt);
+ assert.ok(Number.isFinite(basicTime)&&basicTime>expertTime);
  assert.ok(expert.workers+expert.military>=30&&expert.workers+expert.military<=40);
+ for(const policy of ["expert","ai","basic"])for(const distance of [6,1e6]){
+  const result=simulateConquestBuild("bean",policy,distance);
+  for(const value of [result.delivered,result.spent,result.points,result.workers,result.military])assert.ok(Number.isFinite(value)&&value>=0,policy+":"+distance);
+  assert.ok(result.spent+result.points<=result.delivered,policy+":"+distance);
+  if(distance===1e6){
+   assert.deepEqual(result.milestones,[{level:1,seconds:0}]);
+   assert.equal(result.delivered,0);assert.equal(result.spent,0);assert.equal(result.points,0);
+   assert.equal(result.workers+result.military,0);
+  }
+ }
 });
 
 test("고급 정찰과 군사는 정해진 단계 이후 거점 시야 밖 경계로 나갈 수 있다",()=>{

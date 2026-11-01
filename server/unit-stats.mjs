@@ -1,8 +1,8 @@
 export const TRIBE_UNIT_STATS = Object.freeze({
-  bean: Object.freeze({ speed: .5, loadedSpeed: .4, lifespan: 120, lifespanWithAttribute: 240 }),
-  spore: Object.freeze({ speed: .5, loadedSpeed: .4, lifespan: 120, lifespanWithAttribute: 240 }),
-  pebble: Object.freeze({ speed: .35, loadedSpeed: .3, lifespan: 120, lifespanWithAttribute: 300 }),
-  spring: Object.freeze({ speed: .9, loadedSpeed: .275, lifespan: 120, lifespanWithAttribute: 240 })
+  bean: Object.freeze({ speed: .5, loadedSpeed: .4, lifespan: 180, lifespanWithAttribute: 300 }),
+  spore: Object.freeze({ speed: .5, loadedSpeed: .4, lifespan: 180, lifespanWithAttribute: 300 }),
+  pebble: Object.freeze({ speed: .35, loadedSpeed: .3, lifespan: 180, lifespanWithAttribute: 360 }),
+  spring: Object.freeze({ speed: .9, loadedSpeed: .275, lifespan: 180, lifespanWithAttribute: 300 })
 });
 
 export const ATTRIBUTE_STAT_VALUES = Object.freeze({
