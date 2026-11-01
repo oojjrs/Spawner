@@ -1321,6 +1321,7 @@ export function createGame(environment, colony, savedGame) {
         utilityAI.evaluate(agent, !["completed", "targetLost", "restore"].includes(reason));
       if (candidates === undefined) return;
       const best = candidates[0];
+      agent.constructionIntent = null;
       if (best?.defending) suspendDefenseWork(agent);
       else if (agent.suspendedWork && agent.survivalState === "stable" && !agent.retreat) agent.suspendedWork = null;
       agent.decisionCount = (agent.decisionCount || 0) + 1;
@@ -1336,6 +1337,19 @@ export function createGame(environment, colony, savedGame) {
         return;
       }
       if (best.action === "build") {
+        if (best.constructionIssue) {
+          const route = constructionRoute(agent, best.target);
+          if (!route || constructionSiteIssue(best.target.buildingKey, best.target.x, best.target.y, agent)) {
+            agent.decisionPending = "targetLost";
+            return;
+          }
+          if (agent.transport) constructionSupply.release(agent);
+          agent.utility = null;
+          agent.constructionIntent = {...best.target, route, issue:best.constructionIssue};
+          agent.mode = "wait";
+          agent.moveBudget = 0;
+          return;
+        }
         if (planner && (constructionSiteIssue(best.target.buildingKey, best.target.x, best.target.y, agent) ||
             !canSpendResources(buildingCost(best.target.buildingKey, colony.tribe)) ||
             !constructionRoute(agent, constructionApproachCell(best.target)))) {
@@ -1574,10 +1588,26 @@ export function createGame(environment, colony, savedGame) {
           state.simSeconds < candidate.moveStartedAt + candidate.moveDuration && contains(candidate.renderFromX,candidate.renderFromY)));
     }
 
+    function constructionReachableCells(site) {
+      const delivery = colonyDeliveryCells();
+      const queue = (delivery.length || !site || site.buildingKey !== "outpost" ? delivery : burrowApproaches(site)
+        .filter(cell => state.explored.has(cell.y * WORLD_SIZE + cell.x) && isWalkable(cell.x, cell.y)))
+        .filter(cell => !site || !buildingContains(site, cell.x, cell.y));
+      const reachable = new Set(queue.map(cell => cell.y * WORLD_SIZE + cell.x));
+      for (let cursor = 0; cursor < queue.length; cursor++) {
+        for (const cell of walkableNeighbors(queue[cursor].x, queue[cursor].y)) {
+          const index = cell.y * WORLD_SIZE + cell.x;
+          if (reachable.has(index) || !state.explored.has(index) || site && buildingContains(site, cell.x, cell.y)) continue;
+          reachable.add(index); queue.push(cell);
+        }
+      }
+      return reachable;
+    }
+
     function constructionSiteIssue(buildingKey, x, y, agent) {
       const definition = buildingDefinition(buildingKey);
       if (!definition || !Number.isInteger(x) || !Number.isInteger(y)) return "건물과 위치를 다시 확인해 주세요.";
-      const site = { x, y, width: definition.width, height: definition.height, health: 1 };
+      const site = { buildingKey, x, y, width: definition.width, height: definition.height, health: 1 };
       const boundary = colonyBoundaryCells();
       for (let dy = 0; dy < site.height; dy++) for (let dx = 0; dx < site.width; dx++) {
         const cx = x + dx, cy = y + dy, index = cy * WORLD_SIZE + cx;
@@ -1592,20 +1622,16 @@ export function createGame(environment, colony, savedGame) {
         candidate.construction.x < x + site.width && candidate.construction.y < y + site.height &&
         candidate.construction.x + buildingDefinition(candidate.construction.buildingKey).width > x &&
         candidate.construction.y + buildingDefinition(candidate.construction.buildingKey).height > y)) return "이미 건설이 진행 중인 자리입니다.";
-      const delivery = colonyDeliveryCells();
-      const queue = (delivery.length || buildingKey !== "outpost" ? delivery : burrowApproaches(site)
-        .filter(cell => state.explored.has(cell.y * WORLD_SIZE + cell.x) && isWalkable(cell.x, cell.y)))
-        .filter(cell => !buildingContains(site, cell.x, cell.y));
-      const reachable = new Set(queue.map(cell => cell.y * WORLD_SIZE + cell.x));
-      for (let cursor = 0; cursor < queue.length; cursor++) {
-        for (const cell of walkableNeighbors(queue[cursor].x, queue[cursor].y)) {
-          const index = cell.y * WORLD_SIZE + cell.x;
-          if (reachable.has(index) || !state.explored.has(index) || buildingContains(site, cell.x, cell.y)) continue;
-          reachable.add(index); queue.push(cell);
+      const reachable = constructionReachableCells(site);
+      const disconnected = state.agents.filter(candidate => candidate !== agent && candidate.health > 0 &&
+        !reachable.has(candidate.y * WORLD_SIZE + candidate.x));
+      if (disconnected.length) {
+        const navigation = navigationState();
+        const previous = navigation?.constructionReachable || constructionReachableCells(null);
+        if (navigation) navigation.constructionReachable = previous;
+        if (disconnected.some(candidate => previous.has(candidate.y * WORLD_SIZE + candidate.x))) {
+          return "개체가 둥지로 돌아오는 통로를 남겨 주세요.";
         }
-      }
-      if (state.agents.some(candidate => candidate !== agent && candidate.health > 0 && !reachable.has(candidate.y * WORLD_SIZE + candidate.x))) {
-        return "개체가 둥지로 돌아오는 통로를 남겨 주세요.";
       }
       return null;
     }
@@ -1617,11 +1643,14 @@ export function createGame(environment, colony, savedGame) {
       }
     }
 
-    function constructionSites(agent, planningState, needs) {
+    function constructionSites(agent, planningState, needs, supply) {
       let best = null;
+      const stock = supply?.available();
       const threats = combatTargets().filter(enemy => combatDisposition(enemy) === "aggressive" || enemy.combat);
       for (const need of needs) {
         const definition = buildingDefinition(need.buildingKey);
+        if (supply && (definition.minNestLevel > planningState.nestLevel ||
+            Object.entries(need.cost.materials).some(([type, amount]) => (stock[type] || 0) + 1e-8 < amount))) continue;
         let anchor = need.anchor;
         if (need.buildingKey === "outpost") {
           const route = constructionRoute(agent, anchor);
@@ -1664,8 +1693,11 @@ export function createGame(environment, colony, savedGame) {
           if (!route || !approach) continue;
           const travelSeconds = Math.max(...[route, approach].map(cells => cells.slice(1).reduce((sum, cell) => sum +
             1 / (unitTravelSpeed(agent, 0) * unitTerrainSpeedMultiplier(agent, worldMap.terrain[cell.y * WORLD_SIZE + cell.x])), 0)));
-          plans.push({buildingKey:need.buildingKey, x:site.x, y:site.y, gains:need.gains, travelSeconds,
-            buildSeconds:constructionSeconds(need.buildingKey, agent.attributes.construction)});
+          const plan = {buildingKey:need.buildingKey, x:site.x, y:site.y, gains:need.gains, travelSeconds,
+            buildSeconds:constructionSeconds(need.buildingKey, agent.attributes.construction)};
+          const forecast = supply ? constructionForecastPlan(agent, plan, supply) : plan;
+          if (!forecast) continue;
+          plans.push(forecast);
           if (plans.length >= (needs.length > 1 ? 1 : 12)) break;
         }
         if (plans.length) {
@@ -1722,29 +1754,48 @@ export function createGame(environment, colony, savedGame) {
           objective = constructionSites(proxy,state,[prerequisite]) || objective;
         }
       }
-      constructionHelpPreview = {signature, objective};
+      constructionHelpPreview = {signature, objective, needs};
       return objective;
+    }
+
+    function constructionForecastPlan(agent, plan, supply) {
+      if (plan.travelSeconds + constructionSeconds(plan.buildingKey, agent.attributes.construction) + 5 >=
+          agent.bornAt + agent.lifespan - state.simSeconds) return null;
+      const forecast = supply.forecast(agent, plan);
+      if (!forecast) return null;
+      const buildSeconds = constructionSeconds(plan.buildingKey, agent.attributes.construction) +
+        Math.max(0, forecast.deliverySeconds - plan.travelSeconds);
+      return plan.travelSeconds + buildSeconds + 5 < agent.bornAt + agent.lifespan - state.simSeconds ?
+        {...plan, buildSeconds, deliverySeconds:forecast.deliverySeconds} : null;
     }
 
     function constructionPlansFor(agent, planningState, supply, candidateSites) {
       if (!agent.attributes.construction || agent.carrying || agent.birth || agent.combat || agent.construction ||
           state.simSeconds < (agent.constructionRetryAt || 0)) return [];
       const objective = constructionObjective(false);
-      if (!objective || buildingDefinition(objective.need.buildingKey).minNestLevel > planningState.nestLevel) return [];
-      const candidates = candidateSites === undefined ? constructionSites(agent, planningState, [objective.need]) : candidateSites;
+      if (!objective || candidateSites !== undefined && buildingDefinition(objective.need.buildingKey).minNestLevel > planningState.nestLevel) return [];
+      const needs = [...new Set([objective.need, ...constructionHelpPreview.needs])];
+      const candidates = candidateSites === undefined ? constructionSites(agent, planningState, needs, supply) : candidateSites;
       if (!candidates) return [];
-      const plans = candidates.plans.flatMap(plan => {
-        const forecast = supply.forecast(agent, plan);
-        const buildSeconds = forecast ? constructionSeconds(plan.buildingKey,agent.attributes.construction) +
-          Math.max(0,forecast.deliverySeconds - plan.travelSeconds) : Infinity;
-        return forecast && plan.travelSeconds + buildSeconds + 5 < agent.bornAt + agent.lifespan - state.simSeconds ?
-          [{...plan,buildSeconds,deliverySeconds:forecast.deliverySeconds}] : [];
-      }).sort((a,b) => a.buildSeconds + a.travelSeconds - b.buildSeconds - b.travelSeconds);
-      return plans.slice(0,1);
+      const plans = candidateSites === undefined ? candidates.plans :
+        candidates.plans.flatMap(plan => constructionForecastPlan(agent, plan, supply) || []);
+      return plans.sort((a,b) => a.buildSeconds + a.travelSeconds - b.buildSeconds - b.travelSeconds).slice(0,1);
     }
 
     function constructionPlans(agent) {
-      return constructionPlansFor(agent, state, constructionSupply);
+      const plans = constructionPlansFor(agent, state, constructionSupply);
+      if (plans.length || !agent.attributes.construction || agent.carrying || agent.birth || agent.combat || agent.construction ||
+          state.simSeconds < (agent.constructionRetryAt || 0)) return plans;
+      const objective = constructionObjective(false);
+      if (!objective) return [];
+      const candidates = constructionSites(agent, state, [...new Set([objective.need, ...constructionHelpPreview.needs])]);
+      if (!candidates) return [];
+      const plan = candidates.plans[0], definition = buildingDefinition(plan.buildingKey);
+      const stock = constructionSupply.available(), cost = buildingCost(plan.buildingKey, colony.tribe);
+      const issue = definition.minNestLevel > state.nestLevel ? "둥지를 성장시킨 뒤 건설해 주세요." :
+        Object.entries(cost.materials).some(([type, amount]) => (stock[type] || 0) + 1e-8 < amount) ? "건설에 필요한 자원 재료가 부족합니다." :
+        constructionSupply.forecast(agent, plan) ? "이동과 건물 변태를 마칠 수명이 부족합니다." : "자재를 수명 안에 운반할 수 없습니다.";
+      return [{...plan, constructionIssue:issue}];
     }
 
     function beginConstruction(action) {
@@ -1764,6 +1815,7 @@ export function createGame(environment, colony, savedGame) {
         state: "moving", startedAt: null, readyAt: null, orderedAt: state.simSeconds };
       constructionSupply.prepare(agent);
       agent.constructionError = null;
+      agent.constructionIntent = null;
       agent.utility = null; agent.decisionPending = null; agent.attack = null; agent.foodDelivery = null;
       agent.mode = "build"; agent.moveBudget = 0;
       return { agentId: agent.id, buildingKey: definition.key };
@@ -2563,6 +2615,12 @@ export function createGame(environment, colony, savedGame) {
       if (agent.construction) {
         const route = agent.construction.route.slice(agent.construction.routeIndex).map(cell => ({ ...cell }));
         return { destination: { x: agent.construction.x, y: agent.construction.y }, route };
+      }
+      if (agent.mode === "wait" && agent.constructionIntent && agent.health > 0) {
+        const intent = agent.constructionIntent;
+        const index = intent.route.findIndex(cell => cell.x === agent.x && cell.y === agent.y);
+        if (index < 0) return null;
+        return {destination:{x:intent.x, y:intent.y}, route:intent.route.slice(index).map(cell => ({...cell}))};
       }
       const plan = agent.utility;
       if (!plan || agent.health <= 0 || !["search", "approach", "return", "recover", "flee"].includes(agent.mode)) return null;

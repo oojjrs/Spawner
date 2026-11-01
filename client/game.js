@@ -7617,6 +7617,7 @@
           button.setAttribute("aria-label", agent.name + "의 사체 위치 보기");
           updatePanelText(entry.name, agent.name);
           updatePanelText(entry.mode, "Lv." + (agent.level || 1) + " · 사체");
+          entry.mode.title = "";
           updatePanelText(entry.carry, Spawner.resourceDefinition(Spawner.resourceTypeForCell(agent, worldMap)).name + " " + Number(Math.max(0, agent.amount).toFixed(1)) + "개");
           continue;
         }
@@ -7624,6 +7625,8 @@
         button.setAttribute("aria-label", agent.name + " 선택");
         updatePanelText(entry.name, agent.name);
         updatePanelText(entry.mode, "Lv." + (agent.level || 1) + " · " + (AGENT_MODE_LABELS[agent.mode] || agent.mode));
+        const intent = agent.mode === "wait" ? agent.constructionIntent : null;
+        entry.mode.title = intent ? Spawner.buildingDefinition(intent.buildingKey).name + " (" + intent.x + ", " + intent.y + ")\n" + intent.issue : "";
         updatePanelText(entry.carry, (agent.carrying > 0 ? Spawner.resourceDefinition(agent.carryingType || "honey-mushrooms").name + " " : "운반 ") +
           agent.carrying + "/" + (Spawner.unitCarryCapacity(agent, agent.carryingType) + (hasSynergy(agent.attributes, ["strength", "strength"]) ? 4 : 0)));
 

@@ -408,9 +408,11 @@ export function createUtilityAI(context) {
         const cells = path(plan);
         if (!cells) continue;
         const seconds = travelTime(agent, cells, 0) + plan.buildSeconds;
-        if (Number.isFinite(agent.bornAt) && Number.isFinite(agent.lifespan) && seconds + 5 >= agent.bornAt + agent.lifespan - state.simSeconds) continue;
-        const gains = Object.fromEntries(Object.entries(plan.gains).map(([key, value]) => [key, value * 10 / (10 + seconds)]));
-        add("build", { x: plan.x, y: plan.y, buildingKey: plan.buildingKey, key: "build:" + plan.buildingKey + ":" + indexOf(plan) }, cells, gains, {});
+        if (!plan.constructionIssue && Number.isFinite(agent.bornAt) && Number.isFinite(agent.lifespan) &&
+            seconds + 5 >= agent.bornAt + agent.lifespan - state.simSeconds) continue;
+        const gains = Object.fromEntries(Object.entries(plan.gains).map(([key, value]) => [key, plan.constructionIssue ? 0 : value * 10 / (10 + seconds)]));
+        add("build", { x: plan.x, y: plan.y, buildingKey: plan.buildingKey, key: "build:" + plan.buildingKey + ":" + indexOf(plan) }, cells, gains,
+          {constructionIssue:plan.constructionIssue});
       }
     }
     if (!agent.attributes?.construction && safety.state === "stable" && !agent.retreat && context.constructionTransport) {
@@ -681,8 +683,12 @@ export function createUtilityAI(context) {
     const defense = !agent.retreat && safety.state !== "critical" ? viable.filter(candidate => candidate.defending) : [];
     if (defense.length) return defense.sort((first, second) => second.score - first.score);
     if (agent.attributes?.construction > 0 && safety.state === "stable" && !agent.retreat && !agent.combat) {
-      const builds = viable.filter(candidate => candidate.action === "build" && candidate.damage < agent.health * .25);
+      const builds = viable.filter(candidate => candidate.action === "build" && !candidate.constructionIssue && candidate.damage < agent.health * .25);
       if (builds.length) return builds.sort((first, second) => second.score - first.score);
+      const waiting = viable.filter(candidate => candidate.action === "build" && candidate.constructionIssue && candidate.damage < agent.health * .25);
+      if (waiting.length && !viable.some(candidate => ["return", "recover"].includes(candidate.action))) {
+        return waiting.sort((first, second) => second.score - first.score);
+      }
     }
     if (safety.state === "stable" && availableWorker(agent) && !militaryAgent(agent, context.tribe) &&
         (agent.productionRole === "scout" || agent.attributes?.antenna > 0 && !agent.attributes?.strength &&
