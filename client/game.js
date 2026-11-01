@@ -1523,7 +1523,7 @@
       if (terrainReady && forestReady) {
         if (!layout) await saveWorldRendering().catch(reportRenderingCacheError);
         terrainRendering.ready = true;
-        updateRoomCreationProgress(100);
+        updateRoomCreationProgress(95);
         return;
       }
       setEvolutionText(welcomeStatus, (terrainReady ? "숲" : "고정 지형") + " 이미지 불러오는 중…");
@@ -1578,7 +1578,7 @@
                 terrainRendering.forest.get(message.index)?.close?.();
                 terrainRendering.forest.set(message.index, message.image);
                 terrainRendering.forestKeys.set(message.index, message.key);
-                updateRoomCreationProgress(90 + terrainRendering.forest.size / (Math.ceil(WORLD_SIZE / 16) * Math.ceil(WORLD_SIZE / 16)) * 9);
+                updateRoomCreationProgress(90 + terrainRendering.forest.size / (Math.ceil(WORLD_SIZE / 16) * Math.ceil(WORLD_SIZE / 16)) * 4);
               } else if (message.type === "done") {
                 terrainRendering.cached &&= message.cached;
                 if (message.cacheError) reportRenderingCacheError(new Error(message.cacheError));
@@ -1593,7 +1593,7 @@
       } finally { worker.terminate(); URL.revokeObjectURL(url); }
       if (!layout) await saveWorldRendering().catch(reportRenderingCacheError);
       terrainRendering.ready = true;
-      updateRoomCreationProgress(100);
+      updateRoomCreationProgress(95);
     }
 
     function revealForest(indices) {
@@ -9125,6 +9125,7 @@
     let tribePacket = null;
     let selectedTribe = null;
     let tribeRoomId = null;
+    let tribePreviewError = "";
     let lobbyBusy = false;
     let roomCount = 0;
     let roomNames = new Set();
@@ -9172,10 +9173,14 @@
       document.querySelector(".app").hidden = true;
       document.querySelector(".app").inert = true;
       document.getElementById("tribe-selection-back").focus();
-      tribeSelectionStatus.textContent = "미리보기를 불러오는 중…";
-      tribeGrid.setAttribute("aria-busy", "true");
+      tribeSelectionStatus.textContent = tribePreviewError;
+      tribeGrid.setAttribute("aria-busy", "false");
       tribeGrid.querySelectorAll("button").forEach(button => { button.disabled = false; });
-      Promise.allSettled(Spawner.PLAYER_TRIBES.map(async tribe => {
+    }
+
+    async function prepareTribePreviews() {
+      welcomeStatus.textContent = "미리보기를 불러오는 중…";
+      const results = await Promise.allSettled(Spawner.PLAYER_TRIBES.map(async tribe => {
         await prepareTribeRendering([{ tribe: tribe.key }]);
         await prepareUnitAnimationSheets(tribe);
         const art = await tribeArt.preparePreview(tribe);
@@ -9185,16 +9190,12 @@
         art.unitSize = AGENT_HEIGHT * unitAnimationSheets.get(tribe.key).get("idle").scale * 2;
         art.unitBounds = tribeArt.bounds(art.idle, Spawner.imageFrameSize(tribe.idle, 512));
         return { tribe, art };
-      })).then(results => {
-        if (tribeRoomId !== packet.roomId || tribeSelection.hidden) return;
-        for (const result of results) {
-          if (result.status === "fulfilled") tribePreviews.set(result.value.tribe.key, result.value.art);
-        }
-        drawTribeWorld();
-        tribeGrid.setAttribute("aria-busy", "false");
-        if (!selectedTribe && !lobbyBusy) tribeSelectionStatus.textContent = results.some(result => result.status === "rejected") ?
-          "일부 미리보기를 불러오지 못했습니다. 부족 선택은 가능합니다." : "";
-      });
+      }));
+      for (const result of results) {
+        if (result.status === "fulfilled") tribePreviews.set(result.value.tribe.key, result.value.art);
+      }
+      tribePreviewError = results.some(result => result.status === "rejected") ?
+        "일부 미리보기를 불러오지 못했습니다. 부족 선택은 가능합니다." : "";
     }
 
     function drawTribeWorld() {
@@ -9898,7 +9899,15 @@
       history.replaceState({ ...history.state, spawnerRoomId: roomId }, "");
     }
 
-    async function enterRoom(roomId) {
+    async function prepareRoom(roomId) {
+      const packet = await client.call("enter", { roomId, visible: false });
+      await prepareWorldRendering(packet.world, packet.tribeStarts || packet.colonies);
+      if (packet.colonies.find(colony => colony.id === packet.colonyId).tribe === null) await prepareTribePreviews();
+      updateRoomCreationProgress(100);
+      return packet;
+    }
+
+    async function enterRoom(roomId, packet) {
       resetEnding();
       audio.updateMusic(null);
       connection.roomId = roomId;
@@ -9909,9 +9918,8 @@
       connection.active = false;
       connection.online = false;
       try {
-        const packet = await client.call("enter", { roomId, visible: false });
+        packet ||= await prepareRoom(roomId);
         rememberRoom(roomId);
-        await prepareWorldRendering(packet.world, packet.tribeStarts || packet.colonies);
         if (packet.colonies.find(colony => colony.id === packet.colonyId).tribe === null) {
           showTribeSelection(packet);
           return;
@@ -10119,10 +10127,11 @@
         roomCreationProgress = 0;
         updateRoomCreationProgress(0);
       }
-      welcomeStatus.textContent = "입장 준비 중…";
+      welcomeStatus.textContent = type === "create" ? "생성 중…" : "입장 준비 중…";
       try {
         const result = type === "create" ? await client.call("create", data, progress => updateRoomCreationProgress(progress * 40)) : data;
-        await enterRoom(result.roomId);
+        const packet = await prepareRoom(result.roomId);
+        await enterRoom(result.roomId, packet);
         if (welcome.hidden) welcomeStatus.textContent = "";
       } catch (error) { setEvolutionText(welcomeStatus, error.message); }
       finally {
