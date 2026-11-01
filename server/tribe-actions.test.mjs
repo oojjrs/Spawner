@@ -183,3 +183,33 @@ test("플레이어에게 비활성화된 속성 강화는 AI도 비용을 차감
   assert.equal(game.snapshot().evolutionPoints,0);
   assert.equal(game.snapshot().templates[0].attributeLevels.strength,1);
 });
+
+test("실제 방 틱에서도 비용을 모은 AI만 순서대로 4레벨까지 성장한다", () => {
+  const {game,room,colony} = fixture("pebble");
+  const human = {...colony,id:2,ownerId:"human",tribe:"bean",name:"Human",x:50,y:20};
+  room.colonies.push(human);
+  const player = createGame(room,human);
+  room.games.set("human",player);
+  for (const level of [1,2,3]) {
+    change(game,state=>{state.evolutionPoints=nestUpgradeCost(level,"pebble");});
+    tickRoom(room,CONQUEST_PACING.productionInterval);
+    assert.equal(game.nestLevel,level+1);
+    assert.equal(game.snapshot().evolutionPoints,0);
+    assert.equal(player.nestLevel,1);
+    assert.equal(player.snapshot().evolutionPoints,0);
+  }
+});
+
+test("플레이어와 동일하게 1레벨에서도 필요한 창고의 변태 개체를 생산한다", () => {
+  const {game} = fixture("bean",60);
+  change(game,state=>{
+    state.evolutionPoints=19;state.resourceInventory={clay:30};delete state.resourceStores;
+    state.explored={collection:"Set",entries:[]};
+    for(let y=14;y<35;y++)for(let x=14;x<35;x++)state.explored.entries.push(y*80+x);
+  });
+  const id=game.produce(), builder=game.agents.find(agent=>agent.id===id);
+  assert.ok(builder?.slots.includes("construction"));
+  assert.equal(builder.productionRole,"builder");
+  assert.equal(game.nestLevel,1);
+  assert.equal(game.snapshot().evolutionPoints,19-birthCost(builder,"bean"));
+});
