@@ -5034,7 +5034,7 @@
     }
 
     function measureUnitDisplayScale(tribe, attributes, growth) {
-      const reference = unitBodySize(tribe, {}), size = unitBodySize(tribe, attributes);
+      const reference = unitBodySize(tribe, attributes.construction ? { construction: attributes.construction } : {}), size = unitBodySize(tribe, attributes);
       const scale = (unitDisplayScales.get(tribe) || 1) * growth;
       return size.width > 0 ? scale * reference.width / size.width : null;
     }

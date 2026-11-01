@@ -412,13 +412,13 @@ export function createUtilityAI(context) {
         add("build", { x: plan.x, y: plan.y, buildingKey: plan.buildingKey, key: "build:" + plan.buildingKey + ":" + indexOf(plan) }, cells, gains, {});
       }
     }
-    if (safety.state === "stable" && !agent.retreat && context.constructionTransport) {
+    if (!agent.attributes?.construction && safety.state === "stable" && !agent.retreat && context.constructionTransport) {
       for (const transport of context.constructionTransport(agent)) {
         const cells = transport.route;
         if (cells) add("supply", transport.target, cells, { materialGain: transport.gain }, { transport });
       }
     }
-    if (agent.carrying < capacity && !agent.transportCargo) {
+    if (!agent.attributes?.construction && agent.carrying < capacity && !agent.transportCargo) {
       const foods = [...state.knownFood.values()].filter(food => food.amount > 0 &&
         canHarvest(food, agent) &&
         (!Object.keys(constructionMaterials).length || isFood(resourceType(food)) || requiredMaterials.includes(resourceType(food)) ||

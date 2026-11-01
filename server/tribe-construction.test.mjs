@@ -143,6 +143,70 @@ test("변태 재료가 없거나 마지막 개체이면 자율 변태를 시작�
   }
 });
 
+test("새로 태어난 개척자는 채집하지 않고 부지를 정해 이동한 뒤 건물로 변태한다", () => {
+  for (const tribe of ["bean", "spore", "pebble", "spring"]) {
+    const context = fixture(tribe, ["strength"]), { game } = context;
+    const result = game.command({ type: "design", templateId: null, name: "개척자", slots: ["construction"], birth: true });
+    let agent = game.agents.find(candidate => candidate.id === result.agentId);
+    assert.ok(agent?.birth, tribe);
+    for (let step = 0; step < 80 && !agent.construction; step++) {
+      advance(context, .25);
+      agent = game.agents.find(candidate => candidate.id === result.agentId);
+      assert.ok(agent, tribe);
+      assert.ok(!["collect", "supply"].includes(agent.utility?.action), tribe);
+      assert.equal(agent.carrying, 0, tribe);
+    }
+    assert.equal(agent.construction?.buildingKey, "storage", tribe);
+    assert.ok(agent.construction.route.length > 1, tribe);
+    advance(context, 60);
+    assert.ok(game.buildings.some(building => building.key === "storage"), tribe);
+    assert.equal(game.agents.some(candidate => candidate.id === result.agentId), false, tribe);
+  }
+});
+
+test("건설을 기다리는 개척자는 발밑에 자원이 있어도 채집꾼으로 전환하지 않는다", () => {
+  for (const tribe of ["bean", "spore", "pebble", "spring"]) {
+    const context = fixture(tribe, ["construction"]), { game, environment, native, agentId } = context;
+    const saved = JSON.parse(game.save()), agent = saved.state.agents.find(candidate => candidate.id === agentId);
+    saved.state.resourceInventory = {};
+    const key = agent.x + "," + agent.y;
+    const food = { x: agent.x, y: agent.y, amount: 100, resourceType: native, kind: "resource" };
+    environment.food.set(key, food);
+    saved.state.knownFood.entries.push([key, food]);
+    game.restore(JSON.stringify(saved));
+    for (let step = 0; step < 20; step++) {
+      advance(context, .25);
+      const builder = game.agents.find(candidate => candidate.id === agentId);
+      assert.ok(!["collect", "supply"].includes(builder.utility?.action), tribe);
+      assert.equal(builder.carrying, 0, tribe);
+      assert.equal(builder.construction, undefined, tribe);
+    }
+  }
+});
+
+test("채집 속성을 함께 지닌 개척자도 기존 채집을 이어가지 않고 가능한 건설을 선택한다", () => {
+  for (const [tribe, attribute] of [["bean", "excavation"], ["spore", "blade"], ["pebble", "piercing"], ["spring", "butchery"]]) {
+    const context = fixture(tribe, ["construction", attribute]), { game, environment, native, agentId } = context;
+    const saved = JSON.parse(game.save()), agent = saved.state.agents.find(candidate => candidate.id === agentId);
+    const worker = saved.state.agents[1];
+    saved.state.agents.push(...Array.from({ length: 3 }, (_, index) => ({ ...worker, id: "support-" + index,
+      x: 39 + index, y: 46, renderFromX: 39 + index, renderFromY: 46 })));
+    const key = agent.x + "," + agent.y;
+    const food = { x: agent.x, y: agent.y, amount: 100, resourceType: native, kind: "resource" };
+    environment.food.set(key, food);
+    saved.state.knownFood.entries.push([key, food]);
+    agent.utility = { action: "collect", target: { x: agent.x, y: agent.y, key }, plannedCargo: 1 };
+    agent.mode = "harvest";
+    agent.harvestStarted = 0;
+    agent.harvestReady = 10;
+    game.restore(JSON.stringify(saved));
+    advance(context, .25);
+    const builder = game.agents.find(candidate => candidate.id === agentId);
+    assert.equal(builder.construction?.buildingKey, "storage", tribe);
+    assert.equal(builder.carrying, 0, tribe);
+  }
+});
+
 test("건물 종류와 위치를 지정하는 수동 명령은 받지 않는다", () => {
   const { game, agentId } = fixture("bean", ["construction"]);
   assert.throws(() => game.command({ type: "build", agentId, buildingKey: "storage", x: 48, y: 42 }), /지원하지 않는 요청/);
