@@ -363,6 +363,7 @@ export function createUtilityAI(context) {
     const baseline = riskValue(agent, predictedDamage(agent, [{ x: agent.x, y: agent.y }], "wait", visible, agent.carrying, 10));
     const add = (action, target, cells, gains, extra) => {
       if (!cells) return;
+      if (agent.attributes?.construction > 0 && !["build", "return", "recover", "flee"].includes(action) && !extra.defending) return;
       const damage = predictedDamage(agent, cells, action, visible, agent.carrying, 10);
       let decisionDamage = predictedDamage(agent, cells, action, visible, agent.carrying, 3);
       if (action === "fight" && !target.kind) {
@@ -624,10 +625,6 @@ export function createUtilityAI(context) {
         candidate.damage < agent.health*.25 && candidate.deliverySeconds+5 < remaining);
       if (harvest.length) foragePlans = harvest;
     }
-    if (agent.attributes?.construction > 0 && safety.state === "stable" && !agent.retreat && !agent.combat) {
-      const builds = candidates.filter(candidate => candidate.action === "build" && candidate.damage < agent.health * .25);
-      if (builds.length) foragePlans = builds;
-    }
     if ((supply.interruption > 0 || supply.rateDeficit > 0 && supply.urgency > 0) && safety.state === "stable" && !agent.retreat && !agent.combat) {
       const expansion = candidates.filter(candidate => candidate.action === "build" && candidate.target.buildingKey === "outpost" && candidate.damage < agent.health * .25);
       if (expansion.length) foragePlans = expansion;
@@ -683,6 +680,10 @@ export function createUtilityAI(context) {
     let allowed = viable.length ? viable : candidates;
     const defense = !agent.retreat && safety.state !== "critical" ? viable.filter(candidate => candidate.defending) : [];
     if (defense.length) return defense.sort((first, second) => second.score - first.score);
+    if (agent.attributes?.construction > 0 && safety.state === "stable" && !agent.retreat && !agent.combat) {
+      const builds = viable.filter(candidate => candidate.action === "build" && candidate.damage < agent.health * .25);
+      if (builds.length) return builds.sort((first, second) => second.score - first.score);
+    }
     if (safety.state === "stable" && availableWorker(agent) && !militaryAgent(agent, context.tribe) &&
         (agent.productionRole === "scout" || agent.attributes?.antenna > 0 && !agent.attributes?.strength &&
           !HARVEST_ATTRIBUTE_KEYS.some(key => agent.attributes?.[key] > 0))) {
