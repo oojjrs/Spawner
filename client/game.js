@@ -3955,7 +3955,7 @@
     function foodCarryPlacement(appearance, resourceType) {
       const strength = appearance.strength ?? appearance.arms ?? 0;
       const crop = resourceCarryBounds.get(resourceType);
-      const scale = Spawner.resourceCarryScale(crop, AGENT_HEIGHT, strength);
+      const scale = Spawner.resourceCarryScale(crop);
       const width = crop.width * scale, height = crop.height * scale;
       const lift = agentBodyLift(appearance);
       const tray = (460 - lift - (142 + Math.max(0, strength - 1) * 12) * 0.78 * 0.48) / 512;
@@ -4070,15 +4070,14 @@
           const renderScale = Math.max(cell, 6 / Math.max(placement.width, placement.height));
           const release = agentBodyPose(source, now - sinceRelease * 1000, foodDeliveryPoseAt(0.24));
           const bodyOffset = AGENT_HEIGHT * (release.pivot - 0.94);
-          const offset = agentDisplayOffset(source);
-          const start = worldToScreen(delivery.x + offset.x + placement.x * release.scaleX,
-            delivery.y + offset.y + AGENT_HEIGHT * 0.44 + bodyOffset + (placement.y - bodyOffset) * release.scaleY);
+          const offset = agentDisplayOffset(source), displayScale = unitDisplayScale(source);
+          const start = worldToScreen(delivery.x + offset.x + placement.x * release.scaleX * displayScale,
+            delivery.y + offset.y + AGENT_HEIGHT * 0.44 + (bodyOffset + (placement.y - bodyOffset) * release.scaleY) * displayScale);
           start.y -= placement.height * renderScale * (placement.pivotY - 0.5);
           const arc = cell * Math.max(1.1, Math.hypot(target.x - delivery.x, target.y - delivery.y) * 0.45);
           const x = start.x + (end.x - start.x) * flight;
           const y = start.y + (end.y - start.y) * flight - 4 * arc * flight * (1 - flight);
-          const scale = 1 + Math.sin(Math.min(1, flight / 0.3) * Math.PI / 2) * 0.65;
-          const width = placement.width * renderScale * scale, height = placement.height * renderScale * scale;
+          const width = placement.width * renderScale, height = placement.height * renderScale;
           ctx.translate(x, y);
           ctx.rotate(flight * Math.PI * 0.65 * Math.sign(end.x - start.x || 1));
           if (sprite?.complete && sprite.naturalWidth > 0) ctx.drawImage(sprite,
@@ -4093,8 +4092,13 @@
           ctx.globalAlpha = clamp((1 - age) / 0.3, 0, 1);
           const type = delivery.resourceType || "honey-mushrooms";
           if (!Spawner.isTribeFood(type, entry.tribe, worldMap.generationVersion)) {
-            const sprite = resourceSprites.get(type);
-            if (sprite?.complete && sprite.naturalWidth) ctx.drawImage(sprite, end.x - icon, y - icon / 2, icon, icon);
+            const sprite = resourceCarrySprites.get(type), crop = resourceCarryBounds.get(type);
+            if (sprite?.complete && sprite.naturalWidth && crop) {
+              const scale = icon / Math.max(crop.width, crop.height);
+              const width = crop.width * scale, height = crop.height * scale;
+              ctx.drawImage(sprite, crop.x, crop.y, crop.width, crop.height,
+                end.x - icon / 2 - width / 2, y - height / 2, width, height);
+            }
             ctx.fillStyle = "#e6edce";
             ctx.font = "bold " + Math.max(20, Math.min(32, cell * 0.48)) + "px sans-serif";
             ctx.textAlign = "left";
@@ -5174,6 +5178,7 @@
       const attributes = agent.appearanceAttributes || agent.attributes;
       if (!outlineColor || birth || cell < 8 || ctx.canvas !== canvas || (agent.tribe || "bean") !== "bean" || !attributes.feet) {
         drawAgentAppearanceLayer(ctx, now, agent, cell, topLeft, renderPosition, birth, outlineColor);
+        if (!birth && cell >= 8) drawAgentCarrying(ctx, agent, cell, topLeft, renderPosition);
         return;
       }
       const maskWidth = 1024, maskHeight = 1024, maskCell = 512 / AGENT_HEIGHT;
@@ -5201,6 +5206,7 @@
           floor + (y0 - 2 - anchor.y) * scale, agentSelectionMask.width * scale, agentSelectionMask.height * scale, null, outlineColor);
       }
       drawAgentAppearanceLayer(ctx, now, agent, cell, topLeft, renderPosition, birth, null);
+      drawAgentCarrying(ctx, agent, cell, topLeft, renderPosition);
     }
 
     function drawAgentAppearanceLayer(ctx, now, agent, cell, topLeft, renderPosition, birth, outlineColor) {
@@ -5237,7 +5243,7 @@
       ctx.save(); ctx.translate(topLeft.x + cell / 2, floor); ctx.scale(facing < 0 ? -1 : 1, 1);
       if (outlineColor) drawSelectionOutline(sprite, -size / 2, -size * .875, size, size, null, outlineColor);
       ctx.drawImage(sprite, -size / 2, -size * .875, size, size); ctx.restore();
-      if (Spawner.hasCombatEvolution(attributes)) drawAgentCarrying(ctx, agent, cell, topLeft, renderPosition);
+
     }
 
     function drawCombatAgentAttributes(context, agent) {
@@ -5269,7 +5275,9 @@
         const sprite = resourceCarrySprites.get(type);
         const placement = foodCarryPlacement(appearance, type);
         const renderScale = Math.max(cell, 6 / Math.max(placement.width, placement.height));
-        const width = placement.width * renderScale, height = placement.height * renderScale;
+        const transform = ctx.getTransform();
+        const displayScale = ctx.canvas === canvas ? Math.hypot(transform.a, transform.b) / viewport.pixelRatio : 1;
+        const width = placement.width * renderScale / displayScale, height = placement.height * renderScale / displayScale;
         ctx.save();
         ctx.imageSmoothingEnabled = true;
         ctx.imageSmoothingQuality = "high";
@@ -5363,7 +5371,6 @@
           spriteWidth, spriteHeight);
       }
       ctx.restore();
-      drawAgentCarrying(ctx, agent, cell, topLeft, renderPosition);
     }
 
     function drawAgentGroups() {
@@ -6816,8 +6823,8 @@
       const ratio = window.devicePixelRatio || 1;
       const imageKey = definition.key + ":" + ratio;
       if (image.dataset.key !== imageKey) {
-        const sprite = resourceSprites.get(definition.key);
-        const crop = tribeArt.bounds(sprite, false);
+        const sprite = resourceCarrySprites.get(definition.key);
+        const crop = resourceCarryBounds.get(definition.key);
         image.width = image.height = Math.round(24 * ratio);
         const scale = Math.min(image.width / crop.width, image.height / crop.height) * .94;
         image.getContext("2d").drawImage(sprite, crop.x, crop.y, crop.width, crop.height,

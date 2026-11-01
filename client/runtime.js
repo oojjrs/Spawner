@@ -13757,9 +13757,8 @@ function resourceNodePlacement(resourceType, bounds, frameWidth, frameHeight, ti
     width: frameWidth * scale, height: frameHeight * scale, scale };
 }
 
-function resourceCarryScale(bounds, agentHeight, strength) {
-  return Math.min((strength ? .32 : .24) * agentHeight / bounds.width,
-    (strength ? .36 : .28) * agentHeight / bounds.height);
+function resourceCarryScale(bounds) {
+  return .28 / Math.max(bounds.width, bounds.height);
 }
 
 return { RESOURCE_WORLD_SIZES, resourceImageBounds, resourceNodePlacement, resourceCarryScale };

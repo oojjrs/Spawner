@@ -20,7 +20,7 @@
     const height = animation?.frameSize || sprite.naturalHeight;
     const placement = resourceNodePlacement(type, bounds, width, height, 128);
     if (mode === "carry") {
-      const scale = 128 * resourceCarryScale(bounds, .7, 0);
+      const scale = 128 * resourceCarryScale(bounds);
       placement.x = 64 - (bounds.x + bounds.width / 2) * scale;
       placement.y = 64 - (bounds.y + bounds.height / 2) * scale;
       placement.width = width * scale;

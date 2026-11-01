@@ -43,7 +43,6 @@ export function resourceNodePlacement(resourceType, bounds, frameWidth, frameHei
     width: frameWidth * scale, height: frameHeight * scale, scale };
 }
 
-export function resourceCarryScale(bounds, agentHeight, strength) {
-  return Math.min((strength ? .32 : .24) * agentHeight / bounds.width,
-    (strength ? .36 : .28) * agentHeight / bounds.height);
+export function resourceCarryScale(bounds) {
+  return .28 / Math.max(bounds.width, bounds.height);
 }
