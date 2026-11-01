@@ -7414,8 +7414,9 @@
         const context = avatar.context;
         context.setTransform(ratio, 0, 0, ratio, 0, 0);
         context.clearRect(0, 0, bounds.width, bounds.height);
+        const scale = unitDisplayScale(agent);
         if (agent.kind === "corpse") {
-          if (drawAgentCorpse(context, agent, bounds.width / 2, bounds.height * .93, size * 1.65, null, 1)) continue;
+          if (drawAgentCorpse(context, agent, bounds.width / 2, bounds.height * .93, size * .75 * scale, null, 1)) continue;
           context.save();
           context.filter = "grayscale(0.8)";
           context.globalAlpha = 0.6;
@@ -7425,8 +7426,7 @@
           continue;
         }
         const birth = agentBirthPose(agent, true);
-        const attributes = agent.appearanceAttributes || agent.attributes || {};
-        const cell = size * (birth?.seedVisible ? .38 : (agent.tribe || "bean") === "bean" && attributes.butchery ? 1.45 : 1.65);
+        const cell = size * (birth?.seedVisible ? .38 : .75) * scale;
         const topLeft = { x: (bounds.width - cell) / 2, y: bounds.height * .93 - cell * (.5 + AGENT_HEIGHT * .44) };
         const levelUp = Spawner.agentLevelUpPose(agentLevelUpPlayback, agent, state.simSeconds, idleMotion.matches);
         const levelUpAnchor = { x: bounds.width / 2, y: bounds.height * .88 };

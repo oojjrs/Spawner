@@ -24,7 +24,7 @@ function avatars() {
     unitListEntries: () => entries, agentAvatars, AGENT_HEIGHT: .7,
     Spawner, agentLevelUpPlayback: Spawner.createAgentLevelUpPlayback(), agentLevelUpSprites: {},
     state: { simSeconds: 0 }, idleMotion: { matches: false },
-    agentBirthPose: () => null, interpolatedAgentPosition: () => ({ x: 0, y: 0 }),
+    agentBirthPose: () => null, unitDisplayScale: () => 1, interpolatedAgentPosition: () => ({ x: 0, y: 0 }),
     drawAgentAppearance(context, now, agent) { draws.push({ id: agent.id, now }); }
   });
   runInContext(invalidation + observers + declaration, scope);
