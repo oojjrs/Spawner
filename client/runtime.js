@@ -6531,6 +6531,14 @@ function createCombatEvolutionArt(assetSource, createSurface, loadImage) {
     }
     return rig;
   }
+  function drawSproutAttributes(surface, rig, sampled, agent, drawAttributes) {
+    const sprite = createSurface(512, 512), context = sprite.getContext("2d");
+    context.drawImage(surface, 0, 0);
+    context.save(); sharedTransform(context, rig, sampled); context.translate(...rig.root);
+    context.scale(1 / (2 * rig.scale), 1 / (2 * rig.scale)); context.translate(-256, -448);
+    drawAttributes(context, sampled); context.restore();
+    return sprite;
+  }
   function frame(agent, time, drawAttributes, drawBody) {
     const variants = prepared.get(agent.tribe || "bean"), attributes = agent.appearanceAttributes || agent.attributes || {}, keys = combatEvolutionKeys(attributes);
     if (!variants || !keys.length) return null;
@@ -6539,10 +6547,14 @@ function createCombatEvolutionArt(assetSource, createSurface, loadImage) {
     const sampled = combatEvolutionPose(agent, time, animations);
     let replacement = drawBody && (attributes.construction || source.rig.tribe !== "sprout" && ["antenna", "strength", "arms", "butchery", "lifespan", "feet"].some(key => attributes[key] > 0)) ? drawBody : null;
     if (replacement) { const paint = replacement; replacement = (context, pose) => paint(context, pose); replacement.key = JSON.stringify(attributes) + ":" + (agent.construction?.buildingKey || "") + ":" + (agent.construction?.level || ""); }
-    const key = [agent.tribe || "bean", JSON.stringify(attributes), sampled.action, sampled.frame, Boolean(drawAttributes), replacement ? Math.floor(time * 25) : ""].join("|");
-    if (frames.has(key)) return frames.get(key);
+    const liveFeet = source.rig.tribe === "sprout" && attributes.feet > 0;
+    const dynamic = liveFeet && drawAttributes && !replacement;
+    const key = [agent.tribe || "bean", JSON.stringify(attributes), sampled.action, sampled.frame, Boolean(drawAttributes),
+      replacement ? liveFeet ? agent.id + ":" + time : Math.floor(time * 25) : ""].join("|");
+    const cached = frames.get(key);
+    if (cached) return dynamic ? drawSproutAttributes(cached.sprite, cached.rig, sampled, agent, drawAttributes) : cached.sprite;
     const surface = createSurface(512, 512), large = createSurface(1024, 1024), context = large.getContext("2d"); context.scale(2, 2);
-    if (sampled.action === "birth" && sampled.sampleTime < sampled.animation.durationMs * .035) { frames.set(key, surface); return surface; }
+    if (sampled.action === "birth" && sampled.sampleTime < sampled.animation.durationMs * .035) return surface;
     let rig = source.rig;
     if (keys.length === 1 && !replacement) {
       const image = source.sheets.get(sampled.action);
@@ -6554,14 +6566,14 @@ function createCombatEvolutionArt(assetSource, createSurface, loadImage) {
       }
       context.restore();
     } else rig = drawComposite(context, variants, keys, sampled, replacement);
-    if (drawAttributes && !replacement) {
+    if (drawAttributes && !replacement && !dynamic) {
       context.save(); sharedTransform(context, rig, sampled); context.translate(...rig.root);
       context.scale(1 / (2 * rig.scale), 1 / (2 * rig.scale)); context.translate(-256, -448);
       drawAttributes(context, sampled); context.restore();
     }
     const target = surface.getContext("2d"); target.imageSmoothingEnabled = true; target.imageSmoothingQuality = "high"; target.drawImage(large, 0, 0, 512, 512);
-    frames.set(key, surface); if (frames.size > 96) frames.delete(frames.keys().next().value);
-    return surface;
+    frames.set(key, { sprite: surface, rig }); if (frames.size > 96) frames.delete(frames.keys().next().value);
+    return dynamic ? drawSproutAttributes(surface, rig, sampled, agent, drawAttributes) : surface;
   }
   function portrait(agent, drawAttributes) {
     const attributes = agent.appearanceAttributes || agent.attributes || {}, key = (agent.tribe || "bean") + JSON.stringify(attributes);
@@ -7086,7 +7098,8 @@ function createRegenerationArt(assetSource, createSurface, loadImage) {
     const prepared = rigs.get(agent.tribe || "bean"), attributes = agent.appearanceAttributes || agent.attributes || {};
     const keys = combatAttributeKeys(attributes).filter(key => key === "regeneration");
     if (!prepared || !keys.length) return null;
-    const key = [agent.id, agent.tribe, Math.floor(time * 25), Object.entries(attributes).map(pair => pair.join(":")),
+    const sampledAt = (agent.tribe || "bean") === "bean" && attributes.feet ? time : Math.floor(time * 25);
+    const key = [agent.id, agent.tribe, sampledAt, Object.entries(attributes).map(pair => pair.join(":")),
       agent.support?.kind, agent.health <= 0, agent.carrying, agent.carryingType].join("|");
     if (frames.has(key)) return frames.get(key);
     const surface = createSurface(512, 512), context = surface.getContext("2d");
@@ -7371,10 +7384,12 @@ function createSproutRoots(createSurface) {
   function pose(agent, position, time) {
     const attributes = agent.appearanceAttributes || agent.attributes || {}, level = attributes.feet || 1;
     const scale = sproutRootGeometry(level).height / 84, unitScale = .7 * (attributes.construction ? 512 / 350 : 1);
-    const planPerCell = 512 / unitScale, duty = .68;
+    const planPerCell = 512 / unitScale;
     const moving = agent.moveDuration > 0 && time >= agent.moveStartedAt && time < agent.moveStartedAt + agent.moveDuration;
     const direction = { x: Math.sign(agent.x - agent.renderFromX), y: Math.sign(agent.y - agent.renderFromY) };
-    const step = scale * unitScale / .7 / 6 * (direction.y ? .65 : 1);
+    const speed = moving ? 1 / Math.max(.1, agent.moveDuration) : 0;
+    const duty = direction.y ? 1 / 3 : 2 / 3;
+    const step = Math.max(scale * unitScale / .7 / 4.5, speed / (direction.y ? 6 : 4));
     const rests = neutral(level), worldRest = index => ({ x: position.x + (rests[index].x - 256) / planPerCell,
       y: position.y + (rests[index].y - 512 * .94) / planPerCell });
     let state = gaits.get(agent.id);
@@ -7394,10 +7409,12 @@ function createSproutRoots(createSurface) {
         for (const [i, foot] of state.feet.entries()) {
           foot.plant = { ...foot.point }; foot.from = null; foot.to = null; foot.cycle = null;
           const phase = (state.cycles + i / 3) % 1;
-          foot.startup = phase < duty / 2 ? { from: { ...foot.point }, distance: state.distance,
-            length: (duty / 2 - phase) * step,
-            to: { x: worldRest(i).x + direction.x * (duty / 2 - phase) * step,
-              y: worldRest(i).y + direction.y * (duty / 2 - phase) * step } } : null;
+          const remaining = phase >= duty ? 1 - phase : duty / 2 - phase;
+          const ahead = phase >= duty ? remaining + duty / 2 : remaining;
+          foot.startup = remaining > 0 ? { from: { ...foot.point }, distance: state.distance,
+            length: remaining * step,
+            to: { x: worldRest(i).x + direction.x * ahead * step,
+              y: worldRest(i).y + direction.y * ahead * step } } : null;
         }
       }
       state.distance += distance;
@@ -7406,7 +7423,7 @@ function createSproutRoots(createSurface) {
         const total = state.cycles + i / 3, phase = total - Math.floor(total), cycle = Math.floor(total);
         if (foot.startup) {
           const q = clampRoot((state.distance - foot.startup.distance) / Math.max(.0001, foot.startup.length));
-          foot.point = rootMix(foot.startup.from, foot.startup.to, rootEase(q)); foot.lift = Math.sin(Math.PI * q) * 13 * scale; foot.planted = q === 1;
+          foot.point = rootMix(foot.startup.from, foot.startup.to, rootEase(q)); foot.lift = Math.sin(Math.PI * q) ** 2 * 13 * scale; foot.planted = q === 1;
           if (q === 1) { foot.plant = { ...foot.point }; foot.startup = null; foot.cycle = cycle; }
           continue;
         }
@@ -7423,7 +7440,7 @@ function createSproutRoots(createSurface) {
             foot.to = { x: worldRest(i).x + direction.x * ahead, y: worldRest(i).y + direction.y * ahead };
           }
           const q = (phase - duty) / (1 - duty);
-          foot.point = rootMix(foot.from, foot.to, rootEase(q)); foot.lift = Math.sin(Math.PI * q) * 14 * scale; foot.planted = false;
+          foot.point = rootMix(foot.from, foot.to, rootEase(q)); foot.lift = Math.sin(Math.PI * q) ** 2 * 14 * scale; foot.planted = false;
         }
         foot.cycle = cycle;
       }
@@ -7431,12 +7448,13 @@ function createSproutRoots(createSurface) {
     } else {
       if (state.moving) {
         state.stoppedAt = time; state.stopRotation = state.result?.rotation || 0; state.stopBob = state.result?.bob || 0;
-        for (const foot of state.feet) foot.stopFrom = { ...foot.point };
+        for (const foot of state.feet) { foot.stopFrom = { ...foot.point }; foot.stopLift = foot.lift; }
       }
       for (const [i, foot] of state.feet.entries()) {
         const q = state.stoppedAt == null ? 1 : clampRoot((time - state.stoppedAt - i * .07) / .22);
         const target = worldRest(i), from = foot.stopFrom || target;
-        foot.point = rootMix(from, target, rootEase(q)); foot.lift = Math.sin(Math.PI * q) * 9 * scale;
+        foot.point = rootMix(from, target, rootEase(q));
+        foot.lift = (foot.stopLift || 0) * (1 - rootEase(q)) + Math.sin(Math.PI * q) ** 2 * 9 * scale;
         foot.planted = q === 0 || q === 1;
       }
     }

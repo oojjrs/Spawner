@@ -93,10 +93,12 @@ export function createSproutRoots(createSurface) {
   function pose(agent, position, time) {
     const attributes = agent.appearanceAttributes || agent.attributes || {}, level = attributes.feet || 1;
     const scale = sproutRootGeometry(level).height / 84, unitScale = .7 * (attributes.construction ? 512 / 350 : 1);
-    const planPerCell = 512 / unitScale, duty = .68;
+    const planPerCell = 512 / unitScale;
     const moving = agent.moveDuration > 0 && time >= agent.moveStartedAt && time < agent.moveStartedAt + agent.moveDuration;
     const direction = { x: Math.sign(agent.x - agent.renderFromX), y: Math.sign(agent.y - agent.renderFromY) };
-    const step = scale * unitScale / .7 / 6 * (direction.y ? .65 : 1);
+    const speed = moving ? 1 / Math.max(.1, agent.moveDuration) : 0;
+    const duty = direction.y ? 1 / 3 : 2 / 3;
+    const step = Math.max(scale * unitScale / .7 / 4.5, speed / (direction.y ? 6 : 4));
     const rests = neutral(level), worldRest = index => ({ x: position.x + (rests[index].x - 256) / planPerCell,
       y: position.y + (rests[index].y - 512 * .94) / planPerCell });
     let state = gaits.get(agent.id);
@@ -116,10 +118,12 @@ export function createSproutRoots(createSurface) {
         for (const [i, foot] of state.feet.entries()) {
           foot.plant = { ...foot.point }; foot.from = null; foot.to = null; foot.cycle = null;
           const phase = (state.cycles + i / 3) % 1;
-          foot.startup = phase < duty / 2 ? { from: { ...foot.point }, distance: state.distance,
-            length: (duty / 2 - phase) * step,
-            to: { x: worldRest(i).x + direction.x * (duty / 2 - phase) * step,
-              y: worldRest(i).y + direction.y * (duty / 2 - phase) * step } } : null;
+          const remaining = phase >= duty ? 1 - phase : duty / 2 - phase;
+          const ahead = phase >= duty ? remaining + duty / 2 : remaining;
+          foot.startup = remaining > 0 ? { from: { ...foot.point }, distance: state.distance,
+            length: remaining * step,
+            to: { x: worldRest(i).x + direction.x * ahead * step,
+              y: worldRest(i).y + direction.y * ahead * step } } : null;
         }
       }
       state.distance += distance;
@@ -128,7 +132,7 @@ export function createSproutRoots(createSurface) {
         const total = state.cycles + i / 3, phase = total - Math.floor(total), cycle = Math.floor(total);
         if (foot.startup) {
           const q = clampRoot((state.distance - foot.startup.distance) / Math.max(.0001, foot.startup.length));
-          foot.point = rootMix(foot.startup.from, foot.startup.to, rootEase(q)); foot.lift = Math.sin(Math.PI * q) * 13 * scale; foot.planted = q === 1;
+          foot.point = rootMix(foot.startup.from, foot.startup.to, rootEase(q)); foot.lift = Math.sin(Math.PI * q) ** 2 * 13 * scale; foot.planted = q === 1;
           if (q === 1) { foot.plant = { ...foot.point }; foot.startup = null; foot.cycle = cycle; }
           continue;
         }
@@ -145,7 +149,7 @@ export function createSproutRoots(createSurface) {
             foot.to = { x: worldRest(i).x + direction.x * ahead, y: worldRest(i).y + direction.y * ahead };
           }
           const q = (phase - duty) / (1 - duty);
-          foot.point = rootMix(foot.from, foot.to, rootEase(q)); foot.lift = Math.sin(Math.PI * q) * 14 * scale; foot.planted = false;
+          foot.point = rootMix(foot.from, foot.to, rootEase(q)); foot.lift = Math.sin(Math.PI * q) ** 2 * 14 * scale; foot.planted = false;
         }
         foot.cycle = cycle;
       }
@@ -153,12 +157,13 @@ export function createSproutRoots(createSurface) {
     } else {
       if (state.moving) {
         state.stoppedAt = time; state.stopRotation = state.result?.rotation || 0; state.stopBob = state.result?.bob || 0;
-        for (const foot of state.feet) foot.stopFrom = { ...foot.point };
+        for (const foot of state.feet) { foot.stopFrom = { ...foot.point }; foot.stopLift = foot.lift; }
       }
       for (const [i, foot] of state.feet.entries()) {
         const q = state.stoppedAt == null ? 1 : clampRoot((time - state.stoppedAt - i * .07) / .22);
         const target = worldRest(i), from = foot.stopFrom || target;
-        foot.point = rootMix(from, target, rootEase(q)); foot.lift = Math.sin(Math.PI * q) * 9 * scale;
+        foot.point = rootMix(from, target, rootEase(q));
+        foot.lift = (foot.stopLift || 0) * (1 - rootEase(q)) + Math.sin(Math.PI * q) ** 2 * 9 * scale;
         foot.planted = q === 0 || q === 1;
       }
     }

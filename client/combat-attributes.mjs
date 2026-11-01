@@ -63,7 +63,8 @@ function createRegenerationArt(assetSource, createSurface, loadImage) {
     const prepared = rigs.get(agent.tribe || "bean"), attributes = agent.appearanceAttributes || agent.attributes || {};
     const keys = combatAttributeKeys(attributes).filter(key => key === "regeneration");
     if (!prepared || !keys.length) return null;
-    const key = [agent.id, agent.tribe, Math.floor(time * 25), Object.entries(attributes).map(pair => pair.join(":")),
+    const sampledAt = (agent.tribe || "bean") === "bean" && attributes.feet ? time : Math.floor(time * 25);
+    const key = [agent.id, agent.tribe, sampledAt, Object.entries(attributes).map(pair => pair.join(":")),
       agent.support?.kind, agent.health <= 0, agent.carrying, agent.carryingType].join("|");
     if (frames.has(key)) return frames.get(key);
     const surface = createSurface(512, 512), context = surface.getContext("2d");

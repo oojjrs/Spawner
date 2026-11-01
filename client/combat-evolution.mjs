@@ -182,6 +182,14 @@ export function createCombatEvolutionArt(assetSource, createSurface, loadImage) 
     }
     return rig;
   }
+  function drawSproutAttributes(surface, rig, sampled, agent, drawAttributes) {
+    const sprite = createSurface(512, 512), context = sprite.getContext("2d");
+    context.drawImage(surface, 0, 0);
+    context.save(); sharedTransform(context, rig, sampled); context.translate(...rig.root);
+    context.scale(1 / (2 * rig.scale), 1 / (2 * rig.scale)); context.translate(-256, -448);
+    drawAttributes(context, sampled); context.restore();
+    return sprite;
+  }
   function frame(agent, time, drawAttributes, drawBody) {
     const variants = prepared.get(agent.tribe || "bean"), attributes = agent.appearanceAttributes || agent.attributes || {}, keys = combatEvolutionKeys(attributes);
     if (!variants || !keys.length) return null;
@@ -190,10 +198,14 @@ export function createCombatEvolutionArt(assetSource, createSurface, loadImage) 
     const sampled = combatEvolutionPose(agent, time, animations);
     let replacement = drawBody && (attributes.construction || source.rig.tribe !== "sprout" && ["antenna", "strength", "arms", "butchery", "lifespan", "feet"].some(key => attributes[key] > 0)) ? drawBody : null;
     if (replacement) { const paint = replacement; replacement = (context, pose) => paint(context, pose); replacement.key = JSON.stringify(attributes) + ":" + (agent.construction?.buildingKey || "") + ":" + (agent.construction?.level || ""); }
-    const key = [agent.tribe || "bean", JSON.stringify(attributes), sampled.action, sampled.frame, Boolean(drawAttributes), replacement ? Math.floor(time * 25) : ""].join("|");
-    if (frames.has(key)) return frames.get(key);
+    const liveFeet = source.rig.tribe === "sprout" && attributes.feet > 0;
+    const dynamic = liveFeet && drawAttributes && !replacement;
+    const key = [agent.tribe || "bean", JSON.stringify(attributes), sampled.action, sampled.frame, Boolean(drawAttributes),
+      replacement ? liveFeet ? agent.id + ":" + time : Math.floor(time * 25) : ""].join("|");
+    const cached = frames.get(key);
+    if (cached) return dynamic ? drawSproutAttributes(cached.sprite, cached.rig, sampled, agent, drawAttributes) : cached.sprite;
     const surface = createSurface(512, 512), large = createSurface(1024, 1024), context = large.getContext("2d"); context.scale(2, 2);
-    if (sampled.action === "birth" && sampled.sampleTime < sampled.animation.durationMs * .035) { frames.set(key, surface); return surface; }
+    if (sampled.action === "birth" && sampled.sampleTime < sampled.animation.durationMs * .035) return surface;
     let rig = source.rig;
     if (keys.length === 1 && !replacement) {
       const image = source.sheets.get(sampled.action);
@@ -205,14 +217,14 @@ export function createCombatEvolutionArt(assetSource, createSurface, loadImage) 
       }
       context.restore();
     } else rig = drawComposite(context, variants, keys, sampled, replacement);
-    if (drawAttributes && !replacement) {
+    if (drawAttributes && !replacement && !dynamic) {
       context.save(); sharedTransform(context, rig, sampled); context.translate(...rig.root);
       context.scale(1 / (2 * rig.scale), 1 / (2 * rig.scale)); context.translate(-256, -448);
       drawAttributes(context, sampled); context.restore();
     }
     const target = surface.getContext("2d"); target.imageSmoothingEnabled = true; target.imageSmoothingQuality = "high"; target.drawImage(large, 0, 0, 512, 512);
-    frames.set(key, surface); if (frames.size > 96) frames.delete(frames.keys().next().value);
-    return surface;
+    frames.set(key, { sprite: surface, rig }); if (frames.size > 96) frames.delete(frames.keys().next().value);
+    return dynamic ? drawSproutAttributes(surface, rig, sampled, agent, drawAttributes) : surface;
   }
   function portrait(agent, drawAttributes) {
     const attributes = agent.appearanceAttributes || agent.attributes || {}, key = (agent.tribe || "bean") + JSON.stringify(attributes);
