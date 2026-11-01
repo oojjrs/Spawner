@@ -4133,7 +4133,7 @@
           const y = worldToScreen(target.x, target.top).y - Math.max(48, cell * 0.4) - icon * 0.25 - rise * cell * 0.8;
           ctx.globalAlpha = clamp((1 - age) / 0.3, 0, 1);
           const type = delivery.resourceType || "honey-mushrooms";
-          if (!Spawner.isTribeFood(type, entry.tribe, worldMap.generationVersion)) {
+          if (!Spawner.isColonyFood(type, entry.tribe, worldMap.generationVersion)) {
             const sprite = resourceCarrySprites.get(type), crop = resourceCarryBounds.get(type);
             if (sprite?.complete && sprite.naturalWidth && crop) {
               const scale = icon / Math.max(crop.width, crop.height);

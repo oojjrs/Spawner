@@ -431,6 +431,7 @@ export function createUtilityAI(context) {
       const targets = [...new Set([currentFood, suspendedFood,
         ...Object.keys(constructionMaterials).filter(type => constructionMaterials[type] > 0)
           .flatMap(type => foods.filter(food => resourceType(food) === type).slice(0, 2)),
+        ...foods.filter(food => resourceType(food) === "nutrients" && food.amount > reservation(food)).slice(0, 6),
         ...foods.filter(food => isFood(resourceType(food))).slice(0, 6),
         ...foods.filter(food => !isFood(resourceType(food))).slice(0, 6)].filter(Boolean))];
       for (const food of targets) {
@@ -690,6 +691,16 @@ export function createUtilityAI(context) {
         const delivery = agent.carrying > 0 ? viable.filter(candidate =>
           candidate.action === (agent.transportCargo ? "supply" : "return") && candidate.damage < agent.health * .25) : [];
         return (delivery.length ? delivery : exploration).sort((first, second) =>
+          second.score + second.retention - first.score - first.retention);
+      }
+    }
+    if (safety.state === "stable" && availableWorker(agent) && agent.attributes?.butchery > 0 &&
+        !militaryAgent(agent, context.tribe) && !agent.transportCargo) {
+      const nutrients = viable.filter(candidate => candidate.action === "collect" &&
+        resourceType(state.knownFood.get(candidate.target.key)) === "nutrients" && candidate.damage < agent.health * .25);
+      if (nutrients.length) {
+        const nearby = nutrients.filter(candidate => candidate.route.length <= 2);
+        return (nearby.length ? nearby : nutrients).sort((first, second) =>
           second.score + second.retention - first.score - first.retention);
       }
     }
