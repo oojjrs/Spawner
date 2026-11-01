@@ -190,8 +190,133 @@ test("마지막 적이 죽으면 전투를 해제하며 죽은 생명체의 사�
   f.tick(a.attack.exchangeEndsAt);
   const pending = a.combat.pendingCounter;
   f.tick(pending.hitAt);
-  f.tick(pending.endsAt);
+  const endsAt = pending.endsAt - COMBAT_EXCHANGE_PAUSE;
+  f.tick(endsAt - .001);
+  assert.ok(a.combat);
+  f.tick(endsAt);
   assert.ok(!a.combat);
+  assert.equal(a.nextDecisionAt, endsAt);
+  assert.equal(b.mode, "death");
+});
+
+test("반격이 마지막 적을 쓰러뜨리면 동작 종료 뒤 추가 휴식 없이 전투를 끝낸다", () => {
+  for (const reverse of [false, true]) {
+    const a = unit("a", "left", "aggressive"), b = unit("b", "right", "passive");
+    a.health = 1;
+    const f = fixture(reverse ? [b, a] : [a, b]);
+    enclose(f, a);
+    f.combat.engage(a, b, 0);
+    f.tick(0); f.tick(a.attack.hitAt); f.tick(a.attack.exchangeEndsAt);
+    const counter = b.attack;
+    f.tick(counter.hitAt);
+    assert.equal(a.health, 0);
+    const endsAt = counter.exchangeEndsAt - COMBAT_EXCHANGE_PAUSE;
+    f.tick(endsAt - .001);
+    assert.ok(b.combat);
+    f.tick(endsAt);
+    assert.equal(b.combat, null);
+    assert.equal(b.nextDecisionAt, endsAt);
+    assert.deepEqual(f.hits, ["b", "a"]);
+  }
+});
+
+test("반격으로 적 하나가 죽어도 같은 진영에 적이 남으면 1초 휴식을 유지한다", () => {
+  const a = unit("a", "left", "aggressive"), ally = unit("ally", "left", "passive"), b = unit("b", "right", "passive");
+  a.health = 1;
+  const f = fixture([a, ally, b]);
+  enclose(f, a);
+  f.tick(0); f.tick(a.attack.hitAt); f.tick(a.attack.exchangeEndsAt);
+  const counter = b.attack;
+  f.tick(counter.hitAt);
+  assert.equal(a.health, 0);
+  f.tick(counter.exchangeEndsAt - COMBAT_EXCHANGE_PAUSE);
+  assert.equal(b.attack, counter);
+  assert.ok(ally.combat && b.combat);
+  f.tick(counter.exchangeEndsAt - .001);
+  assert.equal(b.attack, counter);
+  f.tick(counter.exchangeEndsAt);
+  assert.notEqual(b.attack, counter);
+  assert.ok(ally.combat && b.combat);
+});
+
+test("제거된 방어자의 확정 반격으로 반대 진영이 전멸해도 마지막 휴식을 생략한다", () => {
+  const a = unit("a", "left", "aggressive"), b = unit("b", "right", "passive"), ally = unit("c", "right", "passive");
+  a.health = b.health = 1;
+  const f = fixture([a, b, ally]);
+  enclose(f, a);
+  f.tick(0); f.tick(a.attack.hitAt); f.tick(a.attack.exchangeEndsAt);
+  const pending = a.combat.pendingCounter;
+  f.tick(pending.hitAt);
+  assert.equal(a.health, 0);
+  assert.ok(ally.combat);
+  const endsAt = pending.endsAt - COMBAT_EXCHANGE_PAUSE;
+  f.tick(endsAt - .001);
+  assert.ok(ally.combat);
+  f.tick(endsAt);
+  assert.equal(ally.combat, null);
+  assert.equal(ally.nextDecisionAt, endsAt);
+  assert.deepEqual(f.hits, ["b", "a"]);
+});
+
+test("반격할 수 없는 마지막 변태 개체가 죽으면 공격 동작 뒤 바로 해제한다", () => {
+  const a = unit("a", "left", "aggressive"), b = unit("b", "right", "passive");
+  b.health = 1;
+  b.construction = { state: "transforming" };
+  const f = fixture([a, b]);
+  f.tick(0); f.tick(a.attack.hitAt);
+  const endsAt = a.attack.exchangeEndsAt;
+  f.tick(endsAt - .001);
+  assert.ok(a.combat);
+  f.tick(endsAt);
+  assert.equal(a.combat, null);
+  assert.equal(a.nextDecisionAt, endsAt);
+  assert.deepEqual(f.hits, ["b"]);
+});
+
+test("공격 직후 반격은 대기 없이 이어지고 다음 공수 직전에만 1초를 쉰다", () => {
+  const a = unit("a", "left", "aggressive"), b = unit("b", "right", "passive"), f = fixture([a, b]);
+  f.tick(0);
+  const attack = a.attack;
+  const attackEndsAt = Math.max(attack.endsAt, attack.hitAt + AGENT_HURT_DURATION);
+  assert.equal(attack.exchangeEndsAt, attackEndsAt);
+  f.tick(attack.hitAt);
+  f.tick(attackEndsAt - .001);
+  assert.equal(b.attack, null);
+  f.tick(attackEndsAt);
+  const counter = b.attack;
+  assert.ok(counter.counter);
+  assert.equal(counter.startedAt, attackEndsAt);
+  f.tick(counter.hitAt);
+  const counterEndsAt = Math.max(counter.endsAt, a.hurtStartedAt + AGENT_HURT_DURATION);
+  assert.equal(counter.exchangeEndsAt, counterEndsAt + COMBAT_EXCHANGE_PAUSE);
+  f.tick(counterEndsAt);
+  assert.equal(b.attack, counter);
+  f.tick(counterEndsAt + COMBAT_EXCHANGE_PAUSE - .001);
+  assert.equal(b.attack, counter);
+  f.tick(counterEndsAt + COMBAT_EXCHANGE_PAUSE);
+  assert.ok(b.attack && !b.attack.counter);
+  assert.equal(b.attack.startedAt, counterEndsAt + COMBAT_EXCHANGE_PAUSE);
+});
+
+test("구형 공격 저장의 반격 전 1초는 한 번만 제거하고 복원 후 즉시 반격한다", () => {
+  const a = unit("a", "left", "aggressive"), b = unit("b", "right", "passive");
+  let f = fixture([a, b]);
+  f.tick(0); f.tick(a.attack.hitAt);
+  const endsAt = a.attack.exchangeEndsAt;
+  const saved = JSON.parse(JSON.stringify([a, b]));
+  delete saved[0].attack.exchangePause;
+  saved[0].attack.exchangeEndsAt += COMBAT_EXCHANGE_PAUSE;
+  saved[0].attackReady += COMBAT_EXCHANGE_PAUSE;
+  f = fixture(saved);
+  f.tick(.5);
+  assert.equal(saved[0].attack.exchangeEndsAt, endsAt);
+  assert.equal(saved[0].attackReady, endsAt);
+  f.tick(.6);
+  assert.equal(saved[0].attack.exchangeEndsAt, endsAt);
+  assert.deepEqual(f.hits, []);
+  f.tick(endsAt);
+  assert.ok(saved[1].attack.counter);
+  assert.equal(saved[1].attack.startedAt, endsAt);
 });
 
 test("유니크는 비선공 또는 선공만 허용하고 일반 평화종과 구분한다", () => {
@@ -309,7 +434,7 @@ for (const speed of [.1, .5, 1, 1.5, 2, 8]) {
         }
         if (attack.resolved) {
           assert.ok(Math.abs(target.hurtStartedAt - attack.hitAt) < .021);
-          assert.ok(attack.exchangeEndsAt + 1e-8 >= target.hurtStartedAt + AGENT_HURT_DURATION + COMBAT_EXCHANGE_PAUSE);
+          assert.ok(attack.exchangeEndsAt + 1e-8 >= target.hurtStartedAt + AGENT_HURT_DURATION + (attack.counter ? COMBAT_EXCHANGE_PAUSE : 0));
           if (time < attack.endsAt) assert.equal(unitAnimationPose(attacker, time).action, "attack");
           if (time < target.hurtStartedAt + AGENT_HURT_DURATION - 1e-8) assert.equal(unitAnimationPose(target, time).action, "hurt");
         }

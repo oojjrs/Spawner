@@ -276,8 +276,9 @@ export function createCombat(environment) {
   function beginAttack(attacker, target, time, exchange, counter) {
     const beetle = attacker.species === "spiny-back-beetle";
     const timing = attackTiming(attacker), duration = timing.durationMs / 1000, hitTime = timing.hitTimeMs / 1000;
+    const pause = counter ? COMBAT_EXCHANGE_PAUSE : 0;
     attacker.attack = { combatId: attacker.combat.id, startedAt: time, speed: 1, hitAt: time + hitTime,
-      endsAt: time + duration, exchangeEndsAt: time + Math.max(duration, hitTime + hurtDuration(target)) + COMBAT_EXCHANGE_PAUSE,
+      endsAt: time + duration, exchangeEndsAt: time + Math.max(duration, hitTime + hurtDuration(target)) + pause, exchangePause: pause,
       targetId: target.id, targetKind: "agent", targetX: attacker.combat.x, targetY: attacker.combat.y,
       directionX: attacker.combat.side === 0 ? -1 : 1,
       damage: counter ? exchange.counterDamage : exchange.attackDamage, exchange, counter, resolved: false, hit: false };
@@ -360,7 +361,8 @@ export function createCombat(environment) {
           receiveDamage(pendingOwner, pending.exchange.counterDamage, source);
         }
       }
-      if (time + 1e-8 < pending.endsAt) return true;
+      const opponentsRemain = new Set(members(combat).map(entry => entry.agent.combat.side)).size > 1;
+      if (time + 1e-8 < pending.endsAt - (opponentsRemain ? 0 : COMBAT_EXCHANGE_PAUSE)) return true;
       completeExchange(combat, pending.exchange);
       if (pendingOwner.agent.combat) delete pendingOwner.agent.combat.pendingCounter;
       if (agent.health <= 0) return true;
@@ -391,6 +393,10 @@ export function createCombat(environment) {
     }
     if (attacks.length) {
       const attacker = attacks[0], attack = attacker.agent.attack;
+      const pause = attack.counter ? COMBAT_EXCHANGE_PAUSE : 0;
+      if (Number.isFinite(attack.exchangeEndsAt) && attack.exchangePause !== pause)
+        attack.exchangeEndsAt += pause - (attack.exchangePause ?? COMBAT_EXCHANGE_PAUSE);
+      attack.exchangePause = pause;
       const target = participants.find(entry => entry.agent.id === attack.targetId &&
         entry.agent.combat.side !== attacker.agent.combat.side);
       if (target && attack.exchange?.damageVersion !== COMBAT_EXCHANGE_DAMAGE_VERSION) {
@@ -406,7 +412,7 @@ export function createCombat(environment) {
           attack.endsAt = endsAt;
           attack.exchangeEndsAt = Math.max(endsAt, hitAt + hurtDuration(target?.agent || {}),
             attack.resolved && Number.isFinite(target?.agent.hurtStartedAt) ?
-              target.agent.hurtStartedAt + hurtDuration(target.agent) : -Infinity) + COMBAT_EXCHANGE_PAUSE;
+              target.agent.hurtStartedAt + hurtDuration(target.agent) : -Infinity) + pause;
           attacker.agent.attackReady = attack.exchangeEndsAt;
         }
       }
@@ -420,17 +426,20 @@ export function createCombat(environment) {
           attack.exchange.counterDuration = counterTiming.durationMs / 1000;
         }
       }
-      attack.exchangeEndsAt ??= Math.max(attack.endsAt, attack.hitAt + hurtDuration(target?.agent || {})) + COMBAT_EXCHANGE_PAUSE;
+      attack.exchangeEndsAt ??= Math.max(attack.endsAt, attack.hitAt + hurtDuration(target?.agent || {})) + pause;
       if (!attack.resolved && time + 1e-8 >= attack.hitAt) {
         attack.resolved = true;
         attacker.agent.attackHit = true;
         if (target) {
           attack.hit = true;
           resolveHit(attack, target, attacker.agent);
-          attack.exchangeEndsAt = Math.max(attack.exchangeEndsAt, time + hurtDuration(target.agent) + COMBAT_EXCHANGE_PAUSE);
+          attack.exchangeEndsAt = Math.max(attack.exchangeEndsAt, time + hurtDuration(target.agent) + pause);
         }
       }
-      if (time + 1e-8 < attack.exchangeEndsAt) return true;
+      const opponentsRemain = new Set(members(combat).map(entry => entry.agent.combat.side)).size > 1;
+      attacker.agent.attackReady = attack.exchangeEndsAt;
+      const exchangeEndsAt = attack.exchangeEndsAt - (attack.exchange?.resolved && !opponentsRemain ? pause : 0);
+      if (time + 1e-8 < exchangeEndsAt) return true;
       attacker.agent.attack = null;
       attacker.agent.attackTargetId = null;
       attacker.agent.mode = attacker.agent.species === "spiny-back-beetle" ? "idle" : "fight";
