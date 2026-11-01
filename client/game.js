@@ -5999,6 +5999,7 @@
       drawAttackImpacts();
       drawAgentGroups();
       drawFoodDeliveries(now);
+      drawCorpseResourceCounts();
       drawFoodStatus();
       drawBurrowStatus();
       drawFog(now);
@@ -7952,6 +7953,39 @@
           point.x - width / 2, point.y - height, width, height);
       }
       context.restore();
+    }
+
+    function drawCorpseResourceCounts() {
+      const selected = state.selection?.kind === "corpse" ? state.selection.target : null;
+      if (state.camera.zoom < 32 && !selected) return;
+      const piles = new Map();
+      for (const corpse of resourceNodeCells()) {
+        if (corpse.kind !== "corpse" || !(corpse.amount > 0) || state.simSeconds >= corpse.decaysAt ||
+          Spawner.resourceTypeForCell(corpse, worldMap) !== "nutrients") continue;
+        if (state.camera.zoom < 32 && (corpse.x !== selected.x || corpse.y !== selected.y)) continue;
+        const key = corpse.x + "," + corpse.y;
+        if (!piles.has(key)) piles.set(key, { x: corpse.x, y: corpse.y, amount: 0 });
+        piles.get(key).amount += corpse.amount;
+      }
+      if (!piles.size) return;
+      const size = clamp(state.camera.zoom * .12, 12, 16);
+      ctx.save();
+      ctx.font = "600 " + size + "px sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      for (const pile of piles.values()) {
+        const point = worldToScreen(pile.x + .98, pile.y + .68);
+        const label = "×" + Number(pile.amount.toFixed(1));
+        const width = ctx.measureText(label).width + 12;
+        const height = size + 8;
+        ctx.fillStyle = "rgba(16, 23, 25, 0.96)";
+        ctx.beginPath();
+        ctx.roundRect(point.x - width / 2, point.y - height, width, height, 5);
+        ctx.fill();
+        ctx.fillStyle = "#edc58d";
+        ctx.fillText(label, point.x, point.y - height / 2);
+      }
+      ctx.restore();
     }
 
     function drawCorpseGroundShadow(corpse, point) {
