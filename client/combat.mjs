@@ -33,12 +33,12 @@ export function combatLayout(agents) {
   for (const sides of combats.values()) {
     const size = Math.max(...sides.flat().map(unitDisplaySize));
     const count = Math.max(...sides.map(units => units.length));
-    const scale = Math.min(1, .44 / size, .86 / (count * size));
+    const scale = Math.min(.42, .3 / size, .72 / (Math.sqrt(count) * size));
     for (let side = 0; side < 2; side++) {
       const units = sides[side].toSorted((a, b) => a.combat.joinedAt - b.combat.joinedAt || String(a.id).localeCompare(String(b.id)));
       for (let index = 0; index < units.length; index++) {
         const agent = units[index];
-        placements.set(String(agent.id), { x: side === 0 ? .25 : -.25, y: (index + .5) / units.length - .5,
+        placements.set(String(agent.id), { x: Math.sin(index * 2.4 + side * 1.7) * .25, y: Math.cos(index * 1.8 + side) * .22,
           scale, facing: side === 0 ? -1 : 1 });
       }
     }

@@ -1,108 +1,211 @@
-import { COMBAT_LAB_UNITS, createCombatTrial } from "./combat-lab.mjs";
-import { combatDamage, combatStrength, combatInjuryPenalty } from "../server/combat-stats.mjs";
+import { COMBAT_LAB_UNITS } from "./combat-lab.mjs";
+import { SIMULATION_STATS, DEFAULT_SIMULATION_RULES, deriveSimulationStats, createSimulationTrial } from "./combat-simulation.mjs";
+import { runSimulationBatch, compareSimulationSwap } from "./combat-analysis.mjs";
 import { UNIT_ANIMATIONS, CREATURE_IDLE_ANIMATIONS, CREATURE_ATTACK_ANIMATIONS, unitAnimationPose, unitAnimationFrame, creatureHurtPose, creatureAttackPose } from "./unit-animation.mjs";
 import { TALON_OWL_IDLE, talonOwlIdleFrame } from "./talon-owl-idle.mjs";
 import { BEETLE_SPRITE, BEETLE_ATTACK_SPRITE, BEETLE_ANIMATIONS, BEETLE_NEUTRAL_ASSET } from "../server/beetle-animation.mjs";
 
-const elements = Object.fromEntries([...document.querySelectorAll("[id]")].map(element => [element.id, element]));
-const sides = ["left", "right"], images = new Map();
-let trial, playing = false, lastFrame = 0, renderedRows = -1;
-
+const sides = ["left", "right"], images = new Map(), elements = {}, inputs = {};
+const builds = Object.fromEntries(sides.map((side, index) => [side, { key: index ? "spore" : "bean", name: index ? "오른쪽" : "왼쪽",
+  organs: { attack: true, armor: true, legs: true }, counts: Object.fromEntries(SIMULATION_STATS.map(stat => [stat.key, ({power:4,vitality:5,armor:2,haste:2})[stat.key] || 0])) }]));
+let rules = { ...DEFAULT_SIMULATION_RULES }, trial, playing = false, lastFrame = 0, renderedRows = -1, generation = 0, batchBusy = false;
+const main = document.querySelector("main");
+main.replaceChildren();
+function node(tag, text, className) {
+  const element = document.createElement(tag);
+  if (text != null) element.textContent = text;
+  if (className) element.className = className;
+  return element;
+}
+function control(parent, label, element) {
+  const wrapper = node("label", null, "field");
+  wrapper.append(node("span", label), element); parent.append(wrapper); return element;
+}
+function number(value, min, max, step) {
+  const element = document.createElement("input");
+  element.type = "number"; element.value = value; element.min = min; if (max != null) element.max = max; element.step = step; return element;
+}
+function select(options, value) {
+  const element = document.createElement("select");
+  for (const [key, label] of options) element.append(new Option(label, key));
+  element.value = value; return element;
+}
+function button(parent, label, action) {
+  const element = node("button", label); element.type = "button"; element.addEventListener("click", action); parent.append(element); return element;
+}
+const header = node("header");
+const title = node("div"); title.append(node("div", "SPAWNER / COMBAT LAB", "eyebrow"), node("h1", "전투 실험실"), node("p", "초깃값은 실험용입니다. 비교 조각 수는 공정한 실험 조건이며, 외형은 수치에 영향을 주지 않습니다."));
+elements.status = node("output", "대결 준비", "status"); elements.status.setAttribute("aria-live", "polite"); header.append(title, elements.status); main.append(header);
+const top = node("section", null, "controls");
+elements.pieceLimit = control(top, "비교 조각 수", number(20, 0, null, 1));
+elements.first = control(top, "시작", select([["simultaneous","동시 시작"],["left","왼쪽 먼저"],["right","오른쪽 먼저"]], "simultaneous"));
+elements.seed = control(top, "난수 시드", number(1, 0, 4294967295, 1));
+elements.random = control(top, "피해 변동", select([["true","변동 적용"],["false","평균 피해"]], "true"));
+elements.playback = control(top, "재생 배속", select([[".5","0.5배"],["1","1배"],["4","4배"]], "1")); main.append(top);
+const arena = node("section", null, "arena"); main.append(arena);
 for (const side of sides) {
-  const select = elements[side + "Unit"];
-  for (const group of ["4종족", "일반 생물", "유니크"]) {
-    const options = document.createElement("optgroup");
-    options.label = group;
-    for (const unit of COMBAT_LAB_UNITS.filter(unit => unit.group === group)) options.append(new Option(unit.name + " · " + unit.combatStrength, unit.key));
-    select.append(options);
+  const card = node("section", null, "fighter " + side); elements[side + "Card"] = card; inputs[side] = {};
+  card.append(node("h2", builds[side].name));
+  const appearance = control(card, "외형", select(COMBAT_LAB_UNITS.map(unit => [unit.key, unit.name]), builds[side].key));
+  appearance.addEventListener("change", () => { builds[side].key = appearance.value; changed(); }); inputs[side].appearance = appearance;
+  const canvas = node("canvas"); canvas.width = 260; canvas.height = 200; canvas.setAttribute("aria-label", builds[side].name + " 전투 모습"); elements[side + "Art"] = canvas; card.append(canvas);
+  const hp = node("div", null, "hp"); elements[side + "Hp"] = node("strong"); hp.append(node("span", "HP"), elements[side + "Hp"]); card.append(hp);
+  const bar = node("div", null, "bar"); elements[side + "Bar"] = node("i"); bar.append(elements[side + "Bar"]); card.append(bar);
+  const organs = node("div", null, "organs");
+  for (const [key,label] of [["attack","공격 기관"],["armor","방어 기관"],["legs","이동 기관"]]) {
+    const input = document.createElement("input"); input.type = "checkbox"; input.checked = builds[side].organs[key];
+    control(organs, label, input); input.addEventListener("change", () => { builds[side].organs[key] = input.checked; changed(); }); inputs[side][key] = input;
   }
-  select.addEventListener("change", () => { setProfile(side); reset(); });
-  for (const stat of ["Strength", "Health"]) elements[side + stat].addEventListener("change", reset);
+  card.append(organs); elements[side + "Pieces"] = node("output", null, "pieces"); card.append(elements[side + "Pieces"]);
+  const derived = node("dl", null, "derived"); elements[side + "Derived"] = derived; card.append(derived);
+  for (const group of [...new Set(SIMULATION_STATS.map(stat => stat.group))]) {
+    const details = node("details", null, "stat-group"); details.open = ["공격","생존"].includes(group); details.append(node("summary", group));
+    const grid = node("div", null, "stat-grid");
+    for (const stat of SIMULATION_STATS.filter(stat => stat.group === group)) {
+      const input = control(grid, stat.label, number(builds[side].counts[stat.key], 0, null, 1)); inputs[side][stat.key] = input;
+      input.addEventListener("change", () => { builds[side].counts[stat.key] = Number(input.value); changed(); });
+    }
+    details.append(grid); card.append(details);
+  }
+  arena.append(card);
 }
-
-function profile(side) { return COMBAT_LAB_UNITS.find(unit => unit.key === elements[side + "Unit"].value); }
-function setProfile(side) {
-  elements[side + "Strength"].value = profile(side).combatStrength;
-  elements[side + "Health"].value = profile(side).health;
+const actions = node("div", null, "actions");
+elements.step = button(actions, "다음 사건", () => { playing = false; trial?.step(); render(); });
+elements.run = button(actions, "자동 전투", () => { playing = !playing; render(); });
+elements.finish = button(actions, "끝까지", () => { playing = false; trial?.finish(); render(); });
+button(actions, "초기화", reset); main.append(actions);
+elements.phase = node("output", null, "phase"); main.append(elements.phase);
+const ruleLabels = {
+ powerCurve:"공격 증가 곡선",powerBase:"기초 공격",powerGain:"첫 공격 투자 증가량",powerKnee:"공격 점감 무릎",healthBase:"기초 HP",healthPerPoint:"생명력당 HP",armorPerPoint:"방어력당 방어",armorCap:"방어 경감 상한",armorKnee:"방어 점감 무릎",
+ flatPenPerPoint:"고정 관통 증가량",percentPenCap:"비율 관통 상한",percentPenKnee:"관통 점감 무릎",attackRateBase:"기초 공속(회/초)",hasteCap:"공격 빈도 증가 상한",hasteKnee:"공격 빈도 무릎",maxActionRate:"최대 공속(회/초)",windupBase:"기초 준비(초)",focusPerPoint:"준비 단축(초)",windupMinimum:"최소 준비(초)",hitGapBase:"기초 연타 간격(초)",hitSpeedPerPoint:"연타 간격 단축(초)",hitGapMinimum:"최소 연타 간격(초)",recovery:"후딜(초)",followupBase:"후속타 기초 배율",comboPerPoint:"후속타 증가량",followupCap:"후속타 배율 상한",
+ critCap:"치명 확률 상한",critKnee:"치명 확률 무릎",critMultiplierBase:"기초 치명 배율",critMultiplierCap:"치명 배율 상한",critPowerKnee:"치명 위력 무릎",accuracyCap:"정밀 상한",accuracyKnee:"정밀 무릎",dodgeCap:"회피 상한",dodgeKnee:"회피 무릎",parryCap:"패링 상한",parryKnee:"패링 무릎",blockCap:"블록 상한",blockKnee:"블록 무릎",blockReductionBase:"기초 블록 경감",blockReductionCap:"블록 경감 상한",blockPowerKnee:"블록 위력 무릎",defensePreparation:"방어 준비(초)",reactionCooldown:"방어 재준비(초)",counterCap:"반격 확률 상한",counterKnee:"반격 확률 무릎",counterMultiplierBase:"기초 반격 배율",counterMultiplierCap:"반격 배율 상한",counterPowerKnee:"반격 위력 무릎",counterWindup:"반격 준비(초)",counterCooldown:"반격 재준비(초)",tenacityCap:"강인함 상한",tenacityKnee:"강인함 무릎",stunCap:"기절 확률 상한",stunKnee:"기절 확률 무릎",stunDurationBase:"기초 기절(초)",stunDurationPerPoint:"기절 시간 증가(초)",stunDurationCap:"기절 시간 상한(초)",stunImmunity:"기절 면역(초)",drainCap:"흡혈 상한",drainKnee:"흡혈 무릎",jitter:"피해 변동 폭(비율)",initiativeDelay:"선공 차이(초)",maxSeconds:"최대 전투 시간(초)",maxEvents:"최대 사건 수"
+};
+const rulesPanel = node("details", null, "panel"); rulesPanel.append(node("summary", "실험 규칙 · 비율 0–1, 시간 초"));
+const rulesGrid = node("div", null, "rule-grid");
+for (const [key,value] of Object.entries(DEFAULT_SIMULATION_RULES)) {
+  const input = key === "powerCurve" ? select([["log","로그 점감"],["linear","선형"]], value) : number(value, ["powerKnee","armorKnee"].includes(key) || ["healthBase","maxActionRate","windupMinimum","hitGapMinimum","maxSeconds"].includes(key) ? .001 : 0, key === "maxSeconds" ? 600 : key === "maxEvents" ? 50000 : key === "jitter" ? .2 : 1000000, key === "maxEvents" ? 1 : .01);
+  control(rulesGrid, ruleLabels[key], input); input.addEventListener("change", () => { rules[key] = key === "powerCurve" ? input.value : Number(input.value); changed(); }); inputs[key] = input;
 }
-function settings(seed) {
-  const selection = side => ({ key: profile(side).key, combatStrength: Number(elements[side + "Strength"].value), health: Number(elements[side + "Health"].value) });
-  return { left: selection("left"), right: selection("right"), first: elements.first.value,
-    random: elements.damage.value === "random", seed };
-}
+rulesPanel.append(rulesGrid); main.append(rulesPanel);
+const curvePanel = node("section", null, "panel"); curvePanel.append(node("h2", "투자 곡선"));
+const curveControls = node("div", null, "controls");
+elements.curveSide = control(curveControls, "설계", select([["left","왼쪽"],["right","오른쪽"]], "left"));
+elements.curveStat = control(curveControls, "투자 속성", select(SIMULATION_STATS.map(stat => [stat.key,stat.label]), "power"));
+const curveMetrics = [["attackPower","공격력"],["health","HP"],["defense","방어력"],["attackSpeed","공속(회/초)"],["windup","준비(초)"],["hitCount","타수"],["hitGap","간격(초)"],["followupMultiplier","후속타 배율"],["flatPenetration","고정 관통"],["armorPenetration","비율 관통"],["critChance","치명 확률"],["critMultiplier","치명 배율"],["accuracy","정밀"],["evasion","회피 확률"],["parry","패링 확률"],["block","블록 확률"],["blockReduction","블록 경감"],["counter","반격 확률"],["counterMultiplier","반격 배율"],["tenacity","강인함"],["stunChance","기절 확률"],["stunDuration","기절 시간(초)"],["drain","흡혈 비율"]];
+elements.curveMetric = control(curveControls, "실효 수치", select(curveMetrics,"attackPower")); curvePanel.append(curveControls);
+elements.curve = node("canvas"); elements.curve.width = 800; elements.curve.height = 250; elements.curve.setAttribute("aria-label","투자 0부터 80조각까지 실제 파생 수치 곡선"); curvePanel.append(elements.curve); elements.curveCaption = node("output"); curvePanel.append(elements.curveCaption); main.append(curvePanel);
+const curveDefaults = {power:"attackPower",vitality:"health",armor:"defense",flatPen:"flatPenetration",percentPen:"armorPenetration",haste:"attackSpeed",focus:"windup",multiHit:"hitCount",hitSpeed:"hitGap",combo:"followupMultiplier",crit:"critChance",critPower:"critMultiplier",accuracy:"accuracy",evasion:"evasion",parry:"parry",block:"block",blockPower:"blockReduction",counter:"counter",counterPower:"counterMultiplier",tenacity:"tenacity",stun:"stunChance",stunDuration:"stunDuration",drain:"drain"};
+elements.curveStat.addEventListener("change", () => { elements.curveMetric.value=curveDefaults[elements.curveStat.value];drawCurve(); });
+for (const key of ["curveSide","curveMetric"]) elements[key].addEventListener("change", drawCurve);
+const curveObserver = new ResizeObserver(drawCurve); curveObserver.observe(elements.curve);
+const batchPanel = node("section", null, "panel"); batchPanel.append(node("h2", "반복 실험 · 한 조각 교체"));
+const batchControls = node("div", null, "controls");
+elements.repeatCount = control(batchControls, "반복 횟수", select([["20","20판"],["100","100판"],["500","500판"]],"100"));
+elements.swapSide = control(batchControls, "교체 설계", select([["left","왼쪽"],["right","오른쪽"]],"left"));
+elements.removeKey = control(batchControls, "한 조각 빼기", select(SIMULATION_STATS.map(stat=>[stat.key,stat.label]),"power"));
+elements.addKey = control(batchControls, "한 조각 넣기", select(SIMULATION_STATS.map(stat=>[stat.key,stat.label]),"vitality")); batchPanel.append(batchControls);
+const batchActions = node("div", null, "actions"); elements.repeat = button(batchActions,"반복 실행",()=>runBatch(false)); elements.swap = button(batchActions,"동일 시드로 교체 비교",()=>runBatch(true)); elements.cancel = button(batchActions,"중단",()=>{generation++;}); elements.cancel.hidden = true; batchPanel.append(batchActions);
+elements.batch = node("output", null, "batch-result"); elements.batch.setAttribute("aria-live","polite"); batchPanel.append(elements.batch); main.append(batchPanel);
+const ledger = node("section", null, "panel"); ledger.append(node("h2","사건 기록"));
+const scroll = node("div", null, "scroll"); const table = node("table"); const thead = node("thead"), headrow=node("tr");
+for (const label of ["시각","사건","공격자","피해","연타","왼쪽 HP","오른쪽 HP"]) headrow.append(node("th",label)); thead.append(headrow); elements.history=node("tbody"); table.append(thead,elements.history); scroll.append(table); ledger.append(scroll); main.append(ledger);
+for (const key of ["pieceLimit","first","seed","random"]) elements[key].addEventListener("change", changed);
+function settings(seed) { return {left:structuredClone(builds.left),right:structuredClone(builds.right),rules:{...rules},seed,random:elements.random.value==="true",first:elements.first.value}; }
+function changed() { generation++; elements.batch.textContent=""; reset(); }
+function settingError(error) { return /[가-힣]/.test(error.message) ? error.message : "입력 수치와 규칙의 상한·최소값을 확인해 주세요."; }
 function reset() {
-  playing = false;
-  renderedRows = -1;
-  elements.batch.textContent = "";
+  playing=false; renderedRows=-1;
   try {
-    trial = createCombatTrial(settings(Number(elements.seed.value)));
-    elements.status.textContent = "대결 준비";
-    elements.status.dataset.state = "ready";
-    elements.run.disabled = elements.step.disabled = elements.finish.disabled = elements.repeat.disabled = false;
-  } catch (error) {
-    trial = null;
-    elements.status.textContent = error.message;
-    elements.run.disabled = elements.step.disabled = elements.finish.disabled = elements.repeat.disabled = true;
-  }
-  render();
+    const seed=Number(elements.seed.value);
+    if(!elements.seed.value.trim()||!Number.isInteger(seed)||seed<0||seed>4294967295)throw Error("난수 시드는 0–4294967295 정수로 입력해 주세요.");
+    const pieceLimit=Number(elements.pieceLimit.value);
+    if(!elements.pieceLimit.value.trim()||!Number.isSafeInteger(pieceLimit)||pieceLimit<0)throw Error("비교 조각 수는 0 이상의 안전한 정수로 입력해 주세요.");
+    for(const side of sides)for(const stat of SIMULATION_STATS)if(!inputs[side][stat.key].value.trim()||!Number.isSafeInteger(builds[side].counts[stat.key])||builds[side].counts[stat.key]<0)throw Error("조각 수는 0 이상의 안전한 정수로 입력해 주세요.");
+    for(const side of sides)if(deriveSimulationStats(builds[side],rules).pieceCount>pieceLimit)throw Error(builds[side].name+"의 비교 조각 수를 초과했습니다.");
+    trial=createSimulationTrial(settings(Number(elements.seed.value)));
+    elements.status.textContent="대결 준비";
+  } catch(error) { trial=null;elements.status.textContent=settingError(error); }
+  render();drawCurve();
 }
+function percent(value) { return (100*value).toFixed(1)+"%"; }
 function render() {
-  elements.run.textContent = playing ? "일시정지" : "자동 전투";
-  if (!trial) return;
-  const active = trial.agents.find(agent => agent.attack)?.attack;
-  const retaliation = trial.agents.find(agent => agent.combat?.pendingCounter)?.combat.pendingCounter;
-  const exchange = active?.exchange || retaliation?.exchange;
-  const fixed = exchange && (!exchange.attackApplied || !exchange.counterApplied);
-  for (let index = 0; index < sides.length; index++) {
-    const side = sides[index], agent = trial.agents[index], opponent = trial.agents[1 - index];
-    elements[side + "Hp"].textContent = agent.health + " / " + agent.stats.health;
-    elements[side + "Bar"].style.width = agent.health + "%";
-    elements[side + "Effective"].textContent = agent.health > 0 ? combatStrength(agent) : "—";
-    elements[side + "Penalty"].textContent = combatInjuryPenalty(agent);
-    elements[side + "DamageLabel"].textContent = fixed ? "이번 교전 확정 피해" : "현재 체력 기준 피해";
-    elements[side + "Damage"].textContent = fixed ?
-      exchange[exchange.attackerId === agent.id ? "attackDamage" : "counterDamage"] : agent.health > 0 && opponent.health > 0 ?
-      combatDamage(agent, opponent, 0) + "–" + combatDamage(agent, opponent, 1) : "—";
-    elements[side + "Expected"].parentElement.style.display = fixed ? "none" : "";
-    elements[side + "Expected"].textContent = agent.health > 0 && opponent.health > 0 ? combatDamage(agent, opponent) : "—";
-    elements[side + "Card"].classList.toggle("fallen", agent.health <= 0);
+  elements.run.textContent=playing?"일시정지":"자동 전투";
+  for(const side of sides) {
+    try {
+      const stats=deriveSimulationStats(builds[side],rules),agent=trial?.agents[sides.indexOf(side)];
+      elements[side+"Pieces"].textContent="조각 수 "+stats.pieceCount+" / "+elements.pieceLimit.value;
+      elements[side+"Pieces"].dataset.over=String(stats.pieceCount>Number(elements.pieceLimit.value));
+      elements[side+"Hp"].textContent=(agent?agent.health:stats.health).toFixed(1)+" / "+stats.health.toFixed(1);
+      elements[side+"Bar"].style.width=(100*(agent?agent.health:stats.health)/stats.health)+"%";
+      const values=[["공격",stats.attackPower.toFixed(2)],["방어",stats.defense.toFixed(2)],["공속",stats.attackSpeed.toFixed(2)+"/초"],["준비 / 후딜",stats.windup.toFixed(2)+" / "+stats.recovery.toFixed(2)+"초"],["연타 / 간격",stats.hitCount+"타 / "+stats.hitGap.toFixed(2)+"초"],["후속타",percent(stats.followupMultiplier)],["관통",stats.flatPenetration.toFixed(1)+" + "+percent(stats.armorPenetration)],["치명",percent(stats.critChance)+" ×"+stats.critMultiplier.toFixed(2)],["정밀 / 회피",percent(stats.accuracy)+" / "+percent(stats.evasion)],["패링 / 블록",percent(stats.parry)+" / "+percent(stats.block)],["블록 경감",percent(stats.blockReduction)],["반격",percent(stats.counter)+" ×"+stats.counterMultiplier.toFixed(2)],["강인함",percent(stats.tenacity)],["기절 / 타격당",percent(stats.stunChance)+" / "+percent(stats.stunChancePerHit)],["기절 시간",stats.stunDuration.toFixed(2)+"초"],["흡혈",percent(stats.drain)]];
+      elements[side+"Derived"].replaceChildren(...values.flatMap(([label,value])=>[node("dt",label),node("dd",value)]));
+    } catch(error) { elements.status.textContent=settingError(error); }
   }
-  elements.hits.textContent = trial.history.length;
-  elements.clock.textContent = trial.time.toFixed(2) + "초";
-  const result = trial.result();
-  if (result) {
-    playing = false;
-    elements.run.textContent = "자동 전투";
-    elements.status.textContent = result === "draw" ? "양쪽 사망" : trial.agents.find(agent => agent.id === result).name + " 승리";
-    elements.status.dataset.state = result;
-  } else {
-    elements.status.textContent = playing ? "전투 중" : trial.history.length ? "일시정지" : "대결 준비";
-    elements.status.dataset.state = "ready";
-    const attackerId = retaliation ? retaliation.exchange.targetId : active ? active.counter ? active.exchange.targetId : active.exchange.attackerId : null;
-    elements.phase.textContent = attackerId ? trial.agents.find(agent => agent.id === attackerId).name +
-      (retaliation || active.counter ? " · 반격" : " · 공격") : "교전 대기";
-  }
-  if (result) elements.phase.textContent = "전투 종료";
-  elements.run.disabled = elements.step.disabled = elements.finish.disabled = !!result;
-  if (renderedRows !== trial.history.length) {
-    renderedRows = trial.history.length;
-    elements.history.replaceChildren();
-    if (!trial.history.length) {
-      const row = elements.history.insertRow();
-      const cell = row.insertCell();
-      cell.colSpan = 7; cell.className = "empty"; cell.textContent = "1회 타격으로 명중 시점의 피해 확인";
-    }
-    for (const hit of trial.history) {
-      const row = elements.history.insertRow();
-      const attacker = trial.agents.find(agent => agent.id === hit.attackerId);
-      for (const value of [hit.index, hit.counter ? "반격" : "공격", attacker.name, hit.leftStrength + " : " + hit.rightStrength,
-        hit.leftDamage ? "−" + hit.leftDamage + " → " + hit.leftHealth : "— · " + hit.leftHealth,
-        hit.rightDamage ? "−" + hit.rightDamage + " → " + hit.rightHealth : "— · " + hit.rightHealth,
-        hit.time.toFixed(2) + "초"]) row.insertCell().textContent = value;
-    }
-    elements.history.lastElementChild?.scrollIntoView({ block: "nearest" });
+  const result=trial?.result(),ended=!!result?.reason;
+  for(const key of ["step","run","finish"])elements[key].disabled=!trial||ended||batchBusy;
+  elements.repeat.disabled=elements.swap.disabled=!trial||batchBusy;
+  if(!trial)return;
+  if(ended) {playing=false;elements.run.textContent="자동 전투";elements.status.textContent=(result.winner==="draw"?"무승부":result.winner==="left"?"왼쪽 승리":"오른쪽 승리")+" · "+({death:"사망",'time-limit':"시간 제한",'no-offense':"공격 불가",'event-limit':"사건 제한"}[result.reason]||result.reason);}
+  else elements.status.textContent=playing?"전투 중":trial.time?"일시정지":"대결 준비";
+  elements.phase.textContent=trial.time.toFixed(2)+"초 · "+trial.history.length+"개 사건";
+  if(renderedRows!==trial.history.length) {
+    renderedRows=trial.history.length;
+    const labels={hit:"타격",critical:"치명",miss:"빗나감",evasion:"회피",dodge:"회피",parry:"패링",block:"블록",stun:"기절",counter:"반격",attack:"공격 준비",death:"사망",drain:"흡혈"};
+    elements.history.replaceChildren(...trial.history.slice(-120).map(event=>{const row=node("tr");for(const value of [event.time.toFixed(2),event.counter?"반격 "+(labels[event.kind]||event.kind):(labels[event.kind]||event.kind),event.attackerId==="left"?"왼쪽":event.attackerId==="right"?"오른쪽":"—",(event.critical?"치명 ":"")+(Number(event.damage)||0).toFixed(2),event.hitIndex==null?"—":(event.hitIndex+1)+"/"+event.hitCount,Number(event.leftHealth).toFixed(1),Number(event.rightHealth).toFixed(1)])row.append(node("td",String(value)));return row;}));
   }
 }
+function drawCurve() {
+  const canvas=elements.curve,context=canvas.getContext("2d"),width=Math.max(220,Math.floor(canvas.getBoundingClientRect().width)),height=250,ratio=window.devicePixelRatio||1;
+  canvas.width=Math.round(width*ratio);canvas.height=Math.round(height*ratio);context.setTransform(ratio,0,0,ratio,0,0);context.clearRect(0,0,width,height);
+  try {
+    const build=structuredClone(builds[elements.curveSide.value]),key=elements.curveStat.value,metric=elements.curveMetric.value;
+    const points=Array.from({length:81},(_,index)=>{build.counts[key]=index;return deriveSimulationStats(build,rules)[metric];});
+    const maximum=Math.max(.001,...points)*1.08,minimum=Math.min(0,...points),current=builds[elements.curveSide.value].counts[key],left=64,right=width-18;
+    const x=n=>left+n/80*(right-left),y=n=>210-(n-minimum)/(maximum-minimum)*170;
+    context.strokeStyle="#dbe3d3";context.lineWidth=1;context.beginPath();context.moveTo(left,30);context.lineTo(left,210);context.lineTo(right,210);context.stroke();
+    context.fillStyle="#687962";context.font="13px sans-serif";context.textAlign="right";context.fillText(maximum.toFixed(2),left-8,35);context.fillText("0",left-8,215);
+    context.textAlign="center";context.fillText("0",x(0),232);context.fillText("40",x(40),232);context.textAlign="right";context.fillText("80조각",right,232);context.textAlign="left";context.fillText(curveMetrics.find(entry=>entry[0]===metric)[1],left,20);
+    context.strokeStyle="#527a3b";context.lineWidth=3;context.beginPath();points.forEach((value,index)=>index?context.lineTo(x(index),y(value)):context.moveTo(x(index),y(value)));context.stroke();
+    const currentValue=deriveSimulationStats(builds[elements.curveSide.value],rules)[metric];
+    if(current>=0&&current<=80){context.fillStyle="#b67b3c";context.beginPath();context.arc(x(current),y(currentValue),5,0,Math.PI*2);context.fill();}
+    elements.curveCaption.textContent=SIMULATION_STATS.find(stat=>stat.key===key).label+" "+current+"조각 → "+curveMetrics.find(entry=>entry[0]===metric)[1]+" "+currentValue.toFixed(3);
+  }catch(error){elements.curveCaption.textContent=settingError(error);}
+}
+function summary(samples) {
+  const count=samples.length,leftWins=samples.filter(sample=>sample.winner==="left").length,rightWins=samples.filter(sample=>sample.winner==="right").length;
+  const mean=key=>samples.reduce((sum,sample)=>sum+sample[key],0)/count;
+  return count+"판 · 왼쪽 "+percent(leftWins/count)+" / 오른쪽 "+percent(rightWins/count)+" / 무승부 "+(count-leftWins-rightWins)+" · 평균 "+mean("time").toFixed(2)+"초 · 잔여 HP "+mean("leftHealth").toFixed(1)+" / "+mean("rightHealth").toFixed(1)+" · 시간 제한 "+samples.filter(sample=>sample.reason==="time-limit").length;
+}
+async function runBatch(swap) {
+  if(batchBusy||!trial)return;
+  const inputSeed=Number(elements.seed.value);
+  if(!elements.seed.value.trim()||!Number.isInteger(inputSeed)||inputSeed<0||inputSeed>4294967295){elements.status.textContent="난수 시드는 0–4294967295 정수로 입력해 주세요.";return;}
+  playing=false;const token=++generation,total=Number(elements.repeatCount.value),seed=inputSeed,config=settings(seed),samples=[],variants=[];
+  const swapSide=elements.swapSide.value,removeKey=elements.removeKey.value,addKey=elements.addKey.value;
+  const locked=[...main.querySelectorAll("input,select,button")].filter(element=>element!==elements.cancel).map(element=>({element,disabled:element.disabled}));
+  for(const entry of locked)entry.element.disabled=true;
+  let improved=0,worsened=0,unchanged=0;batchBusy=true;elements.cancel.hidden=false;render();
+  try {
+    for(let index=0;index<total;index+=2) {
+      if(token!==generation)break;
+      const count=Math.min(2,total-index);
+      if(swap){const result=compareSimulationSwap(config,swapSide,removeKey,addKey,count,(seed+index)>>>0);samples.push(...result.baseline.samples);variants.push(...result.variant.samples);improved+=result.pairedImproved;worsened+=result.pairedWorsened;unchanged+=result.pairedUnchanged;}
+      else samples.push(...runSimulationBatch(config,count,(seed+index)>>>0).samples);
+      elements.batch.textContent=samples.length+" / "+total+"판 진행 중";
+      await new Promise(resolve=>setTimeout(resolve,0));
+    }
+    const delta=swap&&samples.length?(variants.filter(sample=>sample.winner===swapSide).length-samples.filter(sample=>sample.winner===swapSide).length)/samples.length*100:0;
+    if(samples.length)elements.batch.textContent=(swap?"기존: ":"")+summary(samples)+(swap?"\n교체: "+summary(variants)+"\n교체 설계 승률 변화 "+(delta>=0?"+":"")+delta.toFixed(1)+"%p · 동일 시드 개선 "+improved+" / 악화 "+worsened+" / 동일 "+unchanged:"")+(token!==generation?"\n중단됨":"");
+  }catch(error){elements.batch.textContent=error.message.includes("event limit") ? "계산 한도에 도달했습니다. 최대 시간이나 연타 수를 줄여 주세요." : "교체할 속성이 한 조각 이상 장착되어 있는지, 수치가 허용 범위인지 확인해 주세요.";}
+  finally{batchBusy=false;elements.cancel.hidden=true;for(const entry of locked)entry.element.disabled=entry.disabled;render();}
+}
+reset();
+function frame(now) {
+  const elapsed=lastFrame?Math.min(.1,(now-lastFrame)/1000):0;lastFrame=now;
+  if(playing&&trial){trial.advance(elapsed*Number(elements.playback.value));render();}
+  sides.forEach(draw);requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
 function image(source) {
   if (!images.has(source)) {
     const asset = new Image();
@@ -133,7 +236,7 @@ function draw(side, index) {
     while (frame < animation.durations.length - 1 && elapsed >= animation.durations[frame]) elapsed -= animation.durations[frame++];
     pose = { animation: agent.attack ? BEETLE_ATTACK_SPRITE : BEETLE_SPRITE, frame: animation.frames[frame] };
   }
-  const source = pose?.animation.image || profile(side).image || BEETLE_NEUTRAL_ASSET;
+  const source = pose?.animation.image || COMBAT_LAB_UNITS.find(unit => unit.key === builds[side].key)?.image || BEETLE_NEUTRAL_ASSET;
   const asset = image(source);
   if (!asset.complete || !asset.naturalWidth) return;
   const attack = agent.attack, progress = attack ? Math.max(0, Math.min(1, (trial.time - attack.startedAt) / (attack.endsAt - attack.startedAt))) : 0;
@@ -146,7 +249,7 @@ function draw(side, index) {
   context.scale(mirror ? -1 : 1, 1);
   if (pose) {
     const { frameSize, columns, pivotX, pivotY } = pose.animation;
-    const size = pose.action === "attack" && agent.species ? 196 * frameSize / pose.animation.viewSize : 196;
+    const size = pose.action === "attack" && agent.species ? 196 * frameSize / (pose.animation.viewSize || frameSize) : 196;
     const scale = size / frameSize;
     context.drawImage(asset, pose.frame % columns * frameSize, Math.floor(pose.frame / columns) * frameSize,
       frameSize, frameSize, -pivotX * scale, -pivotY * scale, size, size);
@@ -157,36 +260,3 @@ function draw(side, index) {
   }
   context.restore();
 }
-
-elements.step.addEventListener("click", () => { playing = false; trial.step(); render(); });
-elements.finish.addEventListener("click", () => { playing = false; trial.finish(); render(); });
-elements.run.addEventListener("click", () => { playing = !playing; render(); });
-elements.reset.addEventListener("click", reset);
-for (const name of ["first", "damage", "seed"]) elements[name].addEventListener("change", reset);
-elements.repeat.addEventListener("click", () => {
-  playing = false;
-  const wins = { left: 0, right: 0, draw: 0 }, seed = Number(elements.seed.value);
-  for (let index = 0; index < 100; index++) {
-    const battle = createCombatTrial(settings(seed + index));
-    wins[battle.finish()]++;
-  }
-  elements.batch.textContent = "100판 · 왼쪽 " + wins.left + "승 / 오른쪽 " + wins.right + "승 / 양쪽 사망 " + wins.draw;
-  render();
-});
-for (const button of document.querySelectorAll("[data-pair]")) button.addEventListener("click", () => {
-  const pair = button.dataset.pair.split(",");
-  sides.forEach((side, index) => { elements[side + "Unit"].value = pair[index]; setProfile(side); });
-  reset();
-});
-elements.leftUnit.value = "bean";
-elements.rightUnit.value = "talon-owl";
-sides.forEach(setProfile);
-reset();
-function frame(now) {
-  const elapsed = Math.min(.1, (now - lastFrame) / 1000);
-  lastFrame = now;
-  if (playing && trial) { trial.advance(elapsed * Number(elements.playback.value)); render(); }
-  sides.forEach(draw);
-  requestAnimationFrame(frame);
-}
-requestAnimationFrame(frame);

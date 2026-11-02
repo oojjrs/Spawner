@@ -959,3 +959,22 @@
   .tribe-world { padding: 12px; }
   #tribe-start { font-size: 1rem; margin-top: 12px; }
 }
+
+.combat-primary { display:flex; align-items:center; gap:12px; margin:12px 0; }
+.combat-primary[hidden] { display:none; }
+.combat-primary select { min-width:100px; max-width:100%; padding:8px; background:#223731; color:#f7eed5; border:1px solid #698375; border-radius:6px; }
+.combat-unit-stats { font-size:12px; line-height:1.7; overflow-wrap:anywhere; }
+.combat-open { position:fixed; right:16px; top:90px; z-index:35; padding:10px 16px; color:#fff1ce; background:#27433a; border:1px solid #8dbd9f; border-radius:8px; }
+.combat-open[hidden] { display:none; }
+.combat-panel { box-sizing:border-box; width:min(680px,calc(100vw - 20px)); max-width:calc(100vw - 20px); max-height:calc(100dvh - 20px); overflow:auto; padding:16px; background:#162822; color:#f7eed5; border:1px solid #8cae91; border-radius:12px; }
+.combat-panel::backdrop { background:#06100dcc; }
+.combat-panel header { display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.combat-panel h2 { margin:0; font-size:20px; }
+.combat-panel button { padding:8px 12px; border:1px solid #6b8d7b; border-radius:6px; background:#294439; color:#fff1cd; }
+.combat-panel canvas { display:block; width:100%; height:260px; margin:12px 0; border-radius:8px; background:radial-gradient(ellipse,#4a4d35,#20372b); }
+.combat-summary { margin-top:12px; font-size:13px; line-height:1.7; overflow-wrap:anywhere; }
+.combat-roster { display:flex; flex-wrap:wrap; gap:6px; }
+.combat-roster button { max-width:100%; overflow-wrap:anywhere; }
+.combat-roster button[aria-pressed=true] { border-color:#ffe4a1; color:#ffe4a1; }
+.combat-panel p { line-height:1.7; font-size:13px; overflow-wrap:anywhere; }
+.combat-panel progress { width:100%; height:12px; accent-color:#e5c778; }

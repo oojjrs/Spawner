@@ -94,7 +94,8 @@
       if (!sound) return;
       const key = action + ":" + (unit.agentId ?? unit.id);
       active.add(key);
-      const at = startedAt + sound.at;
+      const rpg = action === "attack" && unit.attack?.combatId && !unit.attack.exchange && Number.isFinite(unit.attack.hitAt);
+      const at = rpg ? unit.attack.hitAt - Math.min(.05, (unit.attack.hitAt - startedAt) * .2) : startedAt + sound.at;
       if (initial || time + 1e-8 >= at) {
         if (!initial && playback.events.get(key) !== stamp && time - at <= .2) events.push({ name: sound.name, unit });
         playback.events.set(key, stamp);
@@ -103,12 +104,22 @@
     for (const unit of agents) {
       if (!material(unit)) continue;
       if (unit.health > 0) {
-        if (unit.species === "spiny-back-beetle") {
+        if (unit.attack?.combatId && !unit.attack.exchange) {
+          collect(unit, "attack", unit.attack.startedAt, unit.attack.startedAt, unit.attack.speed);
+        } else if (unit.species === "spiny-back-beetle") {
           if (unit.mode === "attack" && !(time >= unit.hurtStartedAt && time < unit.hurtStartedAt + .67))
             collect(unit, "attack", unit.attackStartedAt, unit.attackStartedAt, 1);
         } else if (unit.attack) collect(unit, "attack", unit.attack.startedAt, unit.attack.startedAt, unit.attack.speed);
       } else collect(unit, "death", unit.deathStartedAt, unit.deathStartedAt, 1);
       collect(unit, "hurt", unit.hurtStartedAt, unit.hurtCount ?? unit.hurtStartedAt, 1);
+      const reaction = unit.combat?.lastReaction;
+      if (reaction && reaction.targetId === unit.id && ["parry", "block"].includes(reaction.kind)) {
+        const key = "reaction:" + unit.id;
+        active.add(key);
+        if (!initial && playback.events.get(key) !== reaction.id && time >= reaction.at && time - reaction.at <= .2)
+          events.push({ name: reaction.kind === "parry" ? "unit-attack" : "beetle-hurt", unit });
+        if (time >= reaction.at) playback.events.set(key, reaction.id);
+      }
     }
     for (const unit of corpses) {
       collect(unit, "hurt", unit.hurtStartedAt, unit.hurtCount ?? unit.hurtStartedAt, 1);

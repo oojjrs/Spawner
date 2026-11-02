@@ -1,3 +1,5 @@
+import { attackAnimationElapsed, AGENT_ATTACK_HIT_TIME } from "../server/attack.mjs";
+import { CREATURE_ATTACK_TIMINGS } from "../server/creature-attack.mjs";
 import { imageAnimation } from "./image-geometry.mjs";
 
 export const UNIT_ANIMATIONS = Object.freeze({
@@ -170,7 +172,7 @@ export function unitAnimationFrame(animation, elapsedMs) {
 export function creatureAttackPose(agent, time) {
   const animation = CREATURE_ATTACK_ANIMATIONS[agent.species], attack = agent.attack;
   if (!animation || !attack || agent.health <= 0 || !Number.isFinite(attack.startedAt)) return null;
-  const elapsed = (time - attack.startedAt) * (attack.speed || 1) * 1000;
+  const elapsed = attackAnimationElapsed(attack, time, CREATURE_ATTACK_TIMINGS[agent.species].hitTimeMs / 1000, animation.durationMs / 1000) * 1000;
   if (!Number.isFinite(elapsed) || elapsed < 0 || elapsed + 1e-6 >= animation.durationMs) return null;
   const direction = attack.directionX || agent.facing || -1;
   return { action: "attack", animation, frame: unitAnimationFrame(animation, elapsed), mirrorX: direction > 0 };
@@ -179,7 +181,8 @@ export function creatureAttackPose(agent, time) {
 export function creatureHurtPose(agent, time) {
   const animation = CREATURE_HURT_ANIMATIONS[agent.species];
   if (!animation || agent.health <= 0 || !Number.isFinite(agent.hurtStartedAt)) return null;
-  const elapsed = (time - agent.hurtStartedAt) * 1000;
+  if (agent.combat?.version === 2 && creatureAttackPose(agent, time)) return null;
+  const elapsed = (time - agent.hurtStartedAt) * 1000 * (agent.combat?.version === 2 ? animation.durationMs / 120 : 1);
   if (!Number.isFinite(elapsed) || elapsed < 0 || elapsed + 1e-6 >= animation.durationMs) return null;
   return { action: "hurt", animation, frame: unitAnimationFrame(animation, elapsed) };
 }
@@ -189,10 +192,12 @@ export function unitAnimationPose(agent, time) {
   const animations = UNIT_ANIMATIONS[agent.tribe || "bean"];
   if (!animations) return null;
   let action = "idle", elapsed = (time - (agent.animationStartedAt ?? agent.bornAt ?? 0)) * 1000;
-  const hurt = (time - agent.hurtStartedAt) * 1000;
-  const attack = agent.attack ? (time - agent.attack.startedAt) * (agent.attack.speed || 1) * 1000 : -1;
+  const rpg = agent.combat?.version === 2;
+  const hurt = (time - agent.hurtStartedAt) * 1000 * (rpg ? animations.hurt.durationMs / 120 : 1);
+  const attack = agent.attack ? attackAnimationElapsed(agent.attack, time, AGENT_ATTACK_HIT_TIME, animations.attack.durationMs / 1000) * 1000 : -1;
   const moving = agent.moveDuration > 0 && time >= agent.moveStartedAt && time < agent.moveStartedAt + agent.moveDuration;
-  if (hurt >= 0 && hurt < animations.hurt.durationMs) { action = "hurt"; elapsed = hurt; }
+  if (rpg && attack >= 0 && attack < animations.attack.durationMs) { action = "attack"; elapsed = attack; }
+  else if (hurt >= 0 && hurt < animations.hurt.durationMs) { action = "hurt"; elapsed = hurt; }
   else if (attack >= 0 && attack < animations.attack.durationMs) { action = "attack"; elapsed = attack; }
   else if (agent.mode === "unload" && agent.foodDelivery) { action = "throw"; elapsed = (time - agent.foodDelivery.startedAt) * 1000; }
   else if (agent.mode === "harvest") { action = "harvest"; elapsed = (time - agent.harvestStarted) * 1000; }

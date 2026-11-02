@@ -2151,6 +2151,33 @@
       for (const agent of agents) drawAgent(now, agent);
     }
 
+    function drawCombatDust() {
+      if (state.camera.layer !== 0) return;
+      for (const units of combatGroups().values()) {
+        const combat = units[0].combat;
+        const point = worldToScreen(combat.x + .5, combat.y + .5);
+        const size = state.camera.zoom;
+        ctx.save();
+        for (let index = 0; index < 7; index++) {
+          const phase = state.simSeconds * 3 + index * 2.4;
+          ctx.fillStyle = "rgba(198,180,140,.22)";
+          ctx.beginPath();
+          ctx.ellipse(point.x + Math.sin(phase) * size * .25, point.y + Math.cos(phase * .7) * size * .13,
+            size * (.09 + index % 3 * .025), size * .07, 0, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        if (size >= 18) {
+          ctx.font = "bold 11px sans-serif";
+          ctx.textAlign = "center";
+          for (let side = 0; side < 2; side++) {
+            const members = units.filter(agent => agent.combat.side === side);
+            ctx.fillStyle = side ? "#f6ada3" : "#97e4d6";
+            ctx.fillText(members.length + " · " + Math.ceil(members.reduce((sum, agent) => sum + agent.health, 0)), point.x, point.y + (side ? .57 : -.5) * size);
+          }
+        }
+        ctx.restore();
+      }
+    }
     const travelTraceStyles = {
       bean: {
         width: 1.3, distantAlpha: 0.6, color: "#725437", edgeColor: "#d2ba85", edgeAlpha: 0.32, grainAlpha: 1.6,
@@ -4906,7 +4933,7 @@
       if (cell < 8) return;
       for (const agent of visibleAgents()) {
         const attack = agent.attack;
-        if (!attack || !attack.resolved || !attack.hit) continue;
+        if (agent.combat || !attack || !attack.resolved || !attack.hit) continue;
         const age = (state.simSeconds - attack.hitAt) * attack.speed;
         if (age < 0 || age >= .18) continue;
         const target = [...state.agents, ...state.rivals].find(candidate => candidate.id === attack.targetId);
@@ -5576,7 +5603,7 @@
     }
 
     function canUseMapShortcuts(target) {
-      return connection.active && welcome.hidden && !codex.open && !endingReport.open && !templateDeleteDialog.open && evolutionPanel.hidden &&
+      return connection.active && welcome.hidden && !codex.open && !endingReport.open && !templateDeleteDialog.open && !combatPanel.open && evolutionPanel.hidden &&
         !target?.closest("input, textarea, select, [contenteditable]:not([contenteditable=false]), [role=tab], [role=separator]");
     }
 
@@ -5925,6 +5952,8 @@
       drawWorldObjects(now);
       drawCombatAgents(now);
       drawAttackImpacts();
+      drawCombatDust();
+      drawCombatPanel(now);
       drawAgentGroups();
       drawFoodDeliveries(now);
       drawFoodStatus();
@@ -6685,7 +6714,7 @@
     });
     colonyMenuClose.addEventListener("click", closeColonyMenu);
     document.addEventListener("keydown", (event) => {
-      if (event.key !== "Escape" || endingReport.open || templateDeleteDialog.open) return;
+      if (event.key !== "Escape" || endingReport.open || templateDeleteDialog.open || combatPanel.open) return;
       if (!helpTooltip.hidden) {
         hideHelpTooltip();
         event.preventDefault();
@@ -6757,7 +6786,7 @@
     });
     agentDesign.addEventListener("click", () => {
       const agent = state.selection?.kind === "agent" ? state.selection.target : null;
-      if (agent) openUnitDesign({ name: agent.templateName || agent.name, tribe: agent.tribe, slots: [...agent.slots], attributeLevels: { ...agent.attributeLevels } }, true);
+      if (agent) openUnitDesign({ name: agent.templateName || agent.name, tribe: agent.tribe, slots: [...agent.slots], attributeLevels: { ...agent.attributeLevels }, combatPrimary: agent.combatPrimary }, true);
     });
     agentBirth.addEventListener("click", async () => {
       const template = selectedAgentTemplate();
@@ -6765,7 +6794,7 @@
       const key = unitPanelSelectionKey;
       unitActionStatus.textContent = "";
       nestStatus.textContent = "";
-      const result = await sendCommand({ type: "birth", agentId: state.selection.target.id });
+      const result = await sendCommand({ type: "birth", agentId: state.selection.target.id, combatPrimary: template.combatPrimary });
       if (unitPanelSelectionKey === key) setEvolutionText(unitActionStatus, result ? "새 생명체가 탄생합니다." : nestStatus.textContent);
     });
     function updateCorpseDetails() {
@@ -6817,7 +6846,7 @@
     function selectedAgentTemplate() {
       const agent = state.selection?.kind === "agent" ? state.selection.target : null;
       return agent && state.agents.includes(agent) ? {
-        id: agent.templateId, name: agent.templateName, tribe: agent.tribe, slots: [...agent.slots], revision: agent.templateRevision
+        id: agent.templateId, name: agent.templateName, tribe: agent.tribe, slots: [...agent.slots], combatPrimary: agent.combatPrimary, revision: agent.templateRevision
       } : null;
     }
 
@@ -7179,6 +7208,7 @@
         if (helpTooltipTarget && attributes.contains(helpTooltipTarget)) hideHelpTooltip();
         attributes.replaceChildren(fragment);
       }
+      updateCombatUnitStats(agent);
       const template = selectedAgentTemplate();
       const cost = template ? birthCost(template, state.tribe) : Infinity;
       agentBirth.disabled = !!state.ending || !template || connection.busy || !connection.online || !hasBirthplace() || state.agents.filter(agent => agent.health > 0).length >= unitCapacity() || state.evolutionPoints < cost ||
@@ -7740,6 +7770,255 @@
     let designReturnFocus = null;
     let templateListSignature = "";
 
+    const combatPrimaryRow = document.createElement("label");
+    combatPrimaryRow.className = "combat-primary";
+    const combatPrimaryLabel = document.createElement("span");
+    combatPrimaryLabel.textContent = "주력";
+    const combatPrimarySelect = document.createElement("select");
+    combatPrimarySelect.setAttribute("aria-label", "주력");
+    combatPrimaryRow.append(combatPrimaryLabel, combatPrimarySelect);
+    designSlots.after(combatPrimaryRow);
+    combatPrimarySelect.addEventListener("change", () => {
+      if (!unitDraft || unitDraft.readOnly) return;
+      unitDraft.combatPrimary = combatPrimarySelect.value || null;
+      updateUnitDesign();
+    });
+    function updateCombatPrimary() {
+      const keys = ["blade", "piercing", "carapace"].filter(key => unitDraft.slots.includes(key));
+      if (!keys.includes(unitDraft.combatPrimary)) unitDraft.combatPrimary = keys[0] || null;
+      combatPrimaryRow.hidden = !keys.length;
+      combatPrimarySelect.disabled = unitDraft.readOnly;
+      if (combatPrimarySelect.dataset.keys !== keys.join(",")) {
+        combatPrimarySelect.replaceChildren(...keys.map(key => {
+          const option = document.createElement("option");
+          option.value = key;
+          option.textContent = ATTRIBUTES.find(attribute => attribute.key === key)?.name || key;
+          return option;
+        }));
+        combatPrimarySelect.dataset.keys = keys.join(",");
+      }
+      combatPrimarySelect.value = unitDraft.combatPrimary || "";
+    }
+    const combatUnitStats = document.createElement("p");
+    combatUnitStats.className = "combat-unit-stats";
+    document.getElementById("agent-attributes").after(combatUnitStats);
+    function combatStatsText(agent) {
+      const profile = Spawner.combatProfile(agent);
+      return "HP " + Math.ceil(Math.max(0, agent.health ?? agent.stats?.health ?? 100)) + "/" + (agent.stats?.health || 100) +
+        " · 공격 " + Math.round(profile.attackPower) + " · 방어 " + Math.round(profile.defense) + " · 공속 " + profile.attackSpeed.toFixed(2);
+    }
+    function updateCombatUnitStats(agent) {
+      if (agent) combatUnitStats.textContent = combatStatsText(agent);
+    }
+    const combatOpen = document.createElement("button");
+    combatOpen.type = "button";
+    combatOpen.className = "combat-open";
+    combatOpen.textContent = "⌕ 전투 확대";
+    combatOpen.hidden = true;
+    document.body.append(combatOpen);
+    const combatPanel = document.createElement("dialog");
+    combatPanel.className = "combat-panel";
+    combatPanel.setAttribute("aria-label", "전투 확대");
+    const combatHeading = document.createElement("h2");
+    combatHeading.textContent = "전투";
+    const combatClose = document.createElement("button");
+    combatClose.type = "button";
+    combatClose.textContent = "닫기";
+    const combatHeader = document.createElement("header");
+    combatHeader.append(combatHeading, combatClose);
+    const combatSummary = document.createElement("div");
+    combatSummary.className = "combat-summary";
+    const combatCanvas = document.createElement("canvas");
+    combatCanvas.setAttribute("aria-label", "전투 중인 유닛");
+    const combatRoster = document.createElement("div");
+    combatRoster.className = "combat-roster";
+    const combatDetail = document.createElement("p");
+    const combatGauge = document.createElement("progress");
+    combatGauge.max = 1;
+    combatGauge.setAttribute("aria-label", "다음 공격");
+    combatPanel.append(combatHeader, combatSummary, combatCanvas, combatRoster, combatDetail, combatGauge);
+    document.body.append(combatPanel);
+    let combatWatch = null;
+    let combatSelected = null;
+    let combatReturnFocus = null;
+    combatClose.addEventListener("click", () => combatPanel.close());
+    combatPanel.addEventListener("keydown", event => event.stopPropagation());
+    combatPanel.addEventListener("close", () => {
+      combatOpen.hidden = !selectedCombatUnits().length;
+      const focus = combatReturnFocus?.isConnected && !combatReturnFocus.hidden ? combatReturnFocus : unitPanel.querySelector("button:not([hidden])");
+      focus?.focus({ preventScroll: true });
+    });
+    combatOpen.addEventListener("click", () => {
+      const units = selectedCombatUnits();
+      if (!units.length) return;
+      combatWatch = { id: units[0].combat.id, summary: "" };
+      combatSelected = String(units[0].id);
+      combatReturnFocus = document.activeElement;
+      stopMapMovement();
+      combatPanel.showModal();
+      combatClose.focus();
+      scheduleRender();
+    });
+    function combatGroups() {
+      const groups = new Map();
+      for (const agent of visibleAgents()) {
+        if (!agent.combat || agent.health <= 0) continue;
+        if (!groups.has(agent.combat.id)) groups.set(agent.combat.id, []);
+        groups.get(agent.combat.id).push(agent);
+      }
+      return groups;
+    }
+    function selectedCombatUnits() {
+      const selection = state.selection;
+      if (!selection?.target || state.camera.layer !== 0 || !["agent", "terrain", "hazard"].includes(selection.kind)) return [];
+      const combat = selection.kind === "agent" ? selection.target.combat : null;
+      const x = combat?.x ?? selection.target.x ?? selection.target.column;
+      const y = combat?.y ?? selection.target.y ?? selection.target.row;
+      return [...combatGroups().values()].find(units => combat ? units[0].combat.id === combat.id : units[0].combat.x === x && units[0].combat.y === y) || [];
+    }
+    function combatVisualEvent(agent) {
+      if (!agent?.combat) return null;
+      const relevant = event => event && (String(event.sourceId) === String(agent.id) || String(event.targetId) === String(agent.id)) && ["hit", "counter", "parry", "block", "stun"].includes(event.kind);
+      const reaction = agent.combat.lastReaction;
+      if (relevant(reaction) && String(reaction.targetId) === String(agent.id) && state.simSeconds >= reaction.at && state.simSeconds - reaction.at < .5) return reaction;
+      const event = agent.combat.lastEvent;
+      return relevant(event) ? event : null;
+    }
+    function drawCombatCreature(context, agent, x, floor, height) {
+      if (agent.species === "spiny-back-beetle") {
+        const pose = Spawner.beetleAnimationPose(agent, state.simSeconds);
+        const attack = pose.action === "attack";
+        const shape = attack ? Spawner.BEETLE_ATTACK_SPRITE : Spawner.BEETLE_SPRITE;
+        const sprite = attack ? beetleAttackSheet : beetleSheet;
+        if (!sprite.complete || !sprite.naturalWidth) return false;
+        const size = height * shape.scale;
+        context.save(); context.translate(x, floor);
+        if (shape.facing === "right" ? agent.facing < 0 : agent.facing > 0) context.scale(-1, 1);
+        context.drawImage(sprite, pose.frame % shape.columns * shape.frameSize, Math.floor(pose.frame / shape.columns) * shape.frameSize,
+          shape.frameSize, shape.frameSize, -size * shape.pivotX / shape.frameSize, -size * shape.pivotY / shape.frameSize, size, size);
+        context.restore(); return true;
+      }
+      const hurt = Spawner.creatureHurtPose(agent, state.simSeconds);
+      const attack = Spawner.creatureAttackPose(agent, state.simSeconds);
+      const pose = hurt || attack;
+      const entry = hurt ? creatureHurtSheets.get(agent.species) : attack ? creatureAttackSheets.get(agent.species) : creatureIdleSheets.get(agent.species);
+      if (!entry?.sprite.complete || !entry.sprite.naturalWidth) return false;
+      const animation = pose?.animation || entry.animation;
+      const frame = pose?.frame ?? Spawner.unitAnimationFrame(animation, (state.simSeconds - (agent.animationStartedAt || 0)) * 1000);
+      const size = height * (agent.species === "talon-owl" ? Spawner.TALON_OWL_IDLE.scale : 1.4 * entry.scale) * (attack && !hurt ? animation.frameSize / animation.viewSize : 1);
+      context.save(); context.translate(x, floor);
+      if (attack && !hurt ? attack.mirrorX : agent.facing > 0) context.scale(-1, 1);
+      context.drawImage(entry.sprite, frame % animation.columns * animation.frameSize, Math.floor(frame / animation.columns) * animation.frameSize,
+        animation.frameSize, animation.frameSize, -size * animation.pivotX / animation.frameSize, -size * animation.pivotY / animation.frameSize, size, size);
+      context.restore(); return true;
+    }
+    function combatArenaUnits(units, selected) {
+      if (units.length <= 6) return units;
+      const target = selected && units.find(agent => String(agent.id) === String(selected.attack?.targetId ?? selected.combat.targetId));
+      return [0, 1].flatMap(side => {
+        const priority = [selected, target].filter(agent => agent?.combat.side === side);
+        return [...priority, ...units.filter(agent => agent.combat.side === side && !priority.includes(agent))].slice(0, 3);
+      });
+    }
+    function drawCombatPanel(now) {
+      combatOpen.hidden = !selectedCombatUnits().length || !evolutionPanel.hidden || !welcome.hidden || combatPanel.open;
+      if (!combatPanel.open || !combatWatch) return;
+      const units = [...state.agents, ...state.rivals].filter(agent => agent.health > 0 && agent.combat?.id === combatWatch.id);
+      if (!units.some(agent => String(agent.id) === combatSelected)) combatSelected = units.length ? String(units[0].id) : null;
+      const sides = [0, 1].map(side => units.filter(agent => agent.combat.side === side));
+      if (units.length) combatWatch.summary = sides.map((members, side) => "진영 " + (side + 1) + " · " + members.length + "명 · HP " + Math.ceil(members.reduce((sum, agent) => sum + agent.health, 0))).join("   /   ");
+      combatSummary.textContent = units.length ? combatWatch.summary : "전투 종료";
+      const rosterKey = units.map(agent => agent.id).join(",");
+      if (combatRoster.dataset.key !== rosterKey) {
+        combatRoster.replaceChildren(...units.map(agent => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.dataset.agent = String(agent.id);
+          button.textContent = agent.name || agent.species || "유닛";
+          button.addEventListener("click", () => { combatSelected = String(agent.id); scheduleRender(); });
+          return button;
+        }));
+        combatRoster.dataset.key = rosterKey;
+      }
+      for (const button of combatRoster.children) button.setAttribute("aria-pressed", String(button.dataset.agent === combatSelected));
+      const selected = units.find(agent => String(agent.id) === combatSelected);
+      const arenaUnits = combatArenaUnits(units, selected);
+      combatHeading.textContent = units.length > 6 ? "전투 · 선택 유닛 중심" : "전투";
+      const events = { parry: "패링", block: "방어", stun: "기절", counter: "반격", hit: "타격" };
+      const selectedEvent = combatVisualEvent(selected);
+      const status = selected?.combat.stunnedUntil > state.simSeconds ? "기절" : selectedEvent && state.simSeconds - selectedEvent.at < .5 && ["parry", "block", "stun"].includes(selectedEvent.kind) ? events[selectedEvent.kind] : selected?.attack?.counter ? "반격" : selected?.attack?.heavy ? "모아 찌르기" : selected?.attack && state.simSeconds < selected.attack.hitAt ? "공격 준비" : selectedEvent && state.simSeconds - selectedEvent.at < .5 ? events[selectedEvent.kind] : "교전 중";
+      combatDetail.textContent = selected ? (selected.name || "유닛") + " · " + combatStatsText(selected) + " · " + status : "전투 종료";
+      const profile = selected ? Spawner.combatProfile(selected) : null;
+      combatGauge.value = selected ? clamp(1 - ((selected.combat.nextAttackAt || state.simSeconds) - state.simSeconds) / profile.attackInterval, 0, 1) : 0;
+      const width = Math.max(1, Math.round(combatCanvas.clientWidth)), height = 260;
+      if (combatCanvas.width !== width || combatCanvas.height !== height) { combatCanvas.width = width; combatCanvas.height = height; }
+      const context = combatCanvas.getContext("2d");
+      context.clearRect(0, 0, width, height);
+      const positions = new Map();
+      [0, 1].forEach(side => arenaUnits.filter(agent => agent.combat.side === side).forEach((agent, index, members) => {
+        const rows = Math.max(3, members.length);
+        positions.set(String(agent.id), { x: width / 2 + (side ? 36 : -36) + Math.sin(index * 2.4) * 10,
+          y: 48 + (index + .5) / rows * 170 + (side ? 8 : -8) });
+      }));
+      const target = selected && positions.get(String(selected.attack?.targetId ?? selected.combat.targetId));
+      if (target) {
+        const source = positions.get(String(selected.id));
+        context.strokeStyle = "#f7da88";
+        context.setLineDash([4, 4]);
+        context.beginPath(); context.moveTo(source.x, source.y); context.lineTo(target.x, target.y); context.stroke();
+        context.setLineDash([]);
+      }
+      for (const agent of [...arenaUnits].sort((a, b) => positions.get(String(a.id)).y - positions.get(String(b.id)).y)) {
+        const point = positions.get(String(agent.id));
+        const primary = Spawner.combatPrimary(agent);
+        const attack = agent.attack;
+        const impact = combatVisualEvent(agent);
+        const age = impact ? state.simSeconds - impact.at : Infinity;
+        const hit = impact && String(impact.targetId) === String(agent.id) && ["hit", "counter", "stun"].includes(impact.kind);
+        const opponent = positions.get(String(attack?.targetId ?? agent.combat.targetId));
+        const facing = opponent ? Math.sign(opponent.x - point.x) || (agent.combat.side ? 1 : -1) : agent.combat.side ? 1 : -1;
+        const progress = attack ? clamp((state.simSeconds - attack.startedAt) / (attack.endsAt - attack.startedAt), 0, 1) : 0;
+        const distance = opponent ? Math.hypot(opponent.x - point.x, opponent.y - point.y) : 0;
+        const lunge = attack && state.simSeconds < attack.endsAt ? Math.sin(progress * Math.PI) * Math.min(30, distance * .28) : 0;
+        const recoil = hit && age >= 0 && age < .16 ? Math.sin(age / .16 * Math.PI) * 7 : 0;
+        const directionX = distance ? (opponent.x - point.x) / distance : facing;
+        const directionY = distance ? (opponent.y - point.y) / distance : 0;
+        const x = point.x + directionX * (lunge - recoil);
+        const y = point.y + directionY * (lunge - recoil);
+        const size = Math.min(72, width / 4);
+        context.save();
+        if (agent.combat.stunnedUntil > state.simSeconds) context.globalAlpha = .65;
+        const frozen = hit && age >= 0 && age < .055;
+        const visual = { ...agent, facing, hurtStartedAt: Number.isFinite(agent.hurtStartedAt) ? agent.hurtStartedAt + (frozen ? age : 0) : agent.hurtStartedAt, combat: { ...agent.combat, side: facing > 0 ? 1 : 0 }, attack: attack ? { ...attack, directionX: facing, startedAt: attack.startedAt + (frozen ? age : 0), hitAt: attack.hitAt + (frozen ? age : 0), endsAt: attack.endsAt + (frozen ? age : 0) } : null };
+        if (!(agent.species ? drawCombatCreature(context, visual, x, y + size * .45, size) : drawAgentAttack(context, visual, x, y + size * .45, size, null))) {
+          const sprite = agentSprite(agent);
+          if (sprite && sprite.complete !== false && (sprite.naturalWidth || sprite.width)) context.drawImage(sprite, x - size / 2, y - size / 2, size, size);
+        }
+        context.globalAlpha = 1;
+        context.fillStyle = "#182323"; context.fillRect(x - 20, y + size * .45, 40, 4);
+        context.fillStyle = agent.combat.side ? "#e18c82" : "#83d6c1";
+        context.fillRect(x - 20, y + size * .45, 40 * clamp(agent.health / (agent.stats?.health || 100), 0, 1), 4);
+        if (String(agent.id) === combatSelected) { context.strokeStyle = "#ffe7a5"; context.strokeRect(x - size / 2, y - size / 2, size, size); }
+        if (attack && state.simSeconds < attack.hitAt) {
+          const progress = clamp((state.simSeconds - attack.startedAt) / (attack.hitAt - attack.startedAt), 0, 1);
+          context.strokeStyle = primary === "piercing" ? "#f0b86b" : primary === "carapace" ? "#8edbe1" : "#e7e3b6";
+          context.lineWidth = attack.heavy ? 4 : 2;
+          context.beginPath();
+          if (primary === "piercing") { context.moveTo(x, y); context.lineTo(x + facing * 35 * progress, y); }
+          else context.arc(x, y, size * .4, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * progress);
+          context.stroke();
+        }
+        if (impact && String(impact.targetId) === String(agent.id) && age >= 0 && age < .25) {
+          context.globalAlpha = 1 - age / .25;
+          context.strokeStyle = impact.kind === "block" || impact.kind === "parry" ? "#a6e4fa" : "#ffe1a0";
+          context.beginPath();
+          if (primary === "piercing") { context.moveTo(x - 22, y); context.lineTo(x + 22, y); }
+          else context.arc(x, y, 14 + age * 30, 0, primary === "carapace" ? Math.PI * 2 : Math.PI);
+          context.stroke();
+        }
+        context.restore();
+      }
+    }
     function templateDescription(slots, levels) {
       const counts = attributeCounts(slots, levels);
       return ATTRIBUTES.filter((attribute) => counts[attribute.key] > 0)
@@ -7802,7 +8081,7 @@
         button.addEventListener("click", async () => {
           state.selectedTemplateId = template.id;
           nestStatus.textContent = "";
-          await sendCommand({ type: "birth", templateId: template.id });
+          await sendCommand({ type: "birth", templateId: template.id, combatPrimary: template.combatPrimary });
         });
         const edit = document.createElement("button");
         edit.type = "button";
@@ -7862,7 +8141,7 @@
     function openUnitDesign(template, readOnly) {
       readOnly = readOnly || !!state.ending;
       designReturnFocus = document.activeElement;
-      unitDraft = { id: template ? template.id : null, tribe: template?.tribe || state.tribe || "bean", slots: template ? [...new Set(template.slots.map(key => key === "arms" ? "strength" : key))] : [], attributeLevels: { ...template?.attributeLevels }, error: "", readOnly: !!readOnly, nameEdited: Spawner.isTemplateNameEdited(template) };
+      unitDraft = { id: template ? template.id : null, tribe: template?.tribe || state.tribe || "bean", slots: template ? [...new Set(template.slots.map(key => key === "arms" ? "strength" : key))] : [], attributeLevels: { ...template?.attributeLevels }, combatPrimary: template?.combatPrimary ?? null, error: "", readOnly: !!readOnly, nameEdited: Spawner.isTemplateNameEdited(template) };
       designName.value = template?.name || Spawner.suggestTemplateName(unitDraft.slots, state.templates, unitDraft.id);
       designName.readOnly = !!readOnly;
       designPalette.hidden = !!readOnly;
@@ -7945,12 +8224,14 @@
 
     function updateUnitDesign() {
       if (!unitDraft || evolutionPanel.hidden) return;
+      updateCombatPrimary();
       if (!unitDraft.nameEdited && !unitDraft.readOnly) designName.value = Spawner.suggestTemplateName(unitDraft.slots, state.templates, unitDraft.id);
       const counts = attributeCounts(unitDraft.slots, unitDraft.attributeLevels);
       const stats = unitStats(counts, unitDraft.tribe);
       prepareAgentTemplate(unitDraft).catch(() => {});
       document.getElementById("design-preview-image").src = agentImageSource({ tribe: unitDraft.tribe, attributes: counts, carrying: 0 });
-      const statValues = [["시야", stats.vision + "칸"], ["운반", stats.capacity + "개"],
+      const profile = Spawner.combatProfile({ tribe: unitDraft.tribe, attributes: counts, stats, combatPrimary: unitDraft.combatPrimary });
+      const statValues = [["공격", Math.round(profile.attackPower)], ["방어", Math.round(profile.defense)], ["공속", profile.attackSpeed.toFixed(2) + "/초"], ["시야", stats.vision + "칸"], ["운반", stats.capacity + "개"],
         ["이동", Number(agentSpeed({ stats, tribe: unitDraft.tribe, carrying: 0 }).toFixed(2)) + "칸/초"], ["체력", stats.health]];
       const statsFragment = document.createDocumentFragment();
       for (const [label, value] of statValues) {
@@ -8006,7 +8287,7 @@
         return;
       }
       const result = await sendCommand({ type: "design", templateId: unitDraft.id,
-        name, nameEdited: unitDraft.nameEdited, slots: [...unitDraft.slots], birth: false });
+        name, nameEdited: unitDraft.nameEdited, slots: [...unitDraft.slots], combatPrimary: unitDraft.combatPrimary, birth: false });
       if (!result || !unitDraft) return;
       state.selectedTemplateId = result.templateId;
       closeEvolutionPanel();

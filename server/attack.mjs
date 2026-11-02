@@ -12,9 +12,18 @@ export const AGENT_ATTACK_HIT_TIME = AGENT_ATTACK_FRAME_DURATIONS.slice(0, AGENT
 export const AGENT_ATTACK_DURATION = AGENT_ATTACK_FRAME_DURATIONS.reduce((sum, duration) => sum + Math.round(duration * 1000), 0) / 1000;
 export const AGENT_ATTACK_ASSET = "DesignAssets/Animations/UnitAttack/attack.png";
 
+export function attackAnimationElapsed(attack, time, hitTime, duration) {
+  const elapsed = time - attack.startedAt;
+  if (!attack.combatId || attack.exchange || !Number.isFinite(attack.hitAt) || !Number.isFinite(attack.endsAt) ||
+      !(attack.hitAt > attack.startedAt) || !(attack.endsAt > attack.hitAt)) return elapsed * (attack.speed || 1);
+  if (time >= attack.endsAt) return duration;
+  if (time <= attack.hitAt) return elapsed / (attack.hitAt - attack.startedAt) * hitTime;
+  return hitTime + Math.min(1, (time - attack.hitAt) / (attack.endsAt - attack.hitAt)) * (duration - hitTime);
+}
+
 export function agentAttackFrame(attack, time) {
   if (!attack) return -1;
-  const elapsed = (time - attack.startedAt) * attack.speed;
+  const elapsed = attackAnimationElapsed(attack, time, AGENT_ATTACK_HIT_TIME, AGENT_ATTACK_DURATION);
   if (elapsed < 0 || elapsed + 1e-8 >= AGENT_ATTACK_DURATION) return -1;
   let end = 0;
   for (let index = 0; index < AGENT_ATTACK_FRAME_DURATIONS.length; index++) {

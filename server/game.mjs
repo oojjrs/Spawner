@@ -17,7 +17,7 @@ import { createCombat, combatDisposition, canPursueCombat, colonyDefenseTarget, 
 import { RESOURCE_TYPES, resourceDefinition, resourceTypeForCell, canHarvestResource, migrateResourceType, isColonyFood, isResourceHabitat, populateColonyFood, resourceHarvestSeconds, resourceHarvestMultiplier } from "./resources.mjs";
 import { burrowDistance, burrowApproaches } from "./burrows.mjs";
 import { commandCheat } from "./cheats.mjs";
-import { migrateCombatStats } from "./combat-stats.mjs";
+import { combatPrimary, migrateCombatStats } from "./combat-stats.mjs";
 import { resourceHabitatSuitability } from "./resource-habitats.mjs";
 import { tribeHazardKind, tribeTerrainWalkable } from "./tribe-environment.mjs";
 import { createResourceStorage } from "./resource-storage.mjs";
@@ -271,6 +271,11 @@ export function createGame(environment, colony, savedGame) {
     function initializeAgent(agent) {
       agent.attributeLevels = migrateAttributeLevels(agent.slots, agent.attributeLevels, state.nestLevel);
       agent.slots = migrateAttributeSlots(agent.slots);
+      agent.combatPrimary = combatPrimary(agent);
+      if (agent.health <= 0 || agent.combat && agent.combat.version !== 2 || agent.attack?.exchange) {
+        agent.combat = null;
+        agent.attack = null;
+      }
       if (agent.combat || agent.support?.combatId || agent.support?.kind !== "heal") agent.support = null;
       if (agent.combat) { delete agent.combat.secretionBonus; delete agent.combat.secretionActive; }
       agent.tribe = colony.tribe || "bean";
@@ -1482,6 +1487,7 @@ export function createGame(environment, colony, savedGame) {
         templateName: template.name,
         templateRevision: template.revision,
         productionRole: template.productionRole || null,
+        combatPrimary: combatPrimary(template),
         slots: [...template.slots],
         attributeLevels: migrateAttributeLevels(template.slots, template.attributeLevels, state.nestLevel),
         attributes,
@@ -1738,7 +1744,7 @@ export function createGame(environment, colony, savedGame) {
       const site = automaticSpawnSites()[0];
       if (!site || state.agents.filter(agent => agent.health > 0).length >= NEST_LEVELS[state.nestLevel - 1].unitCapacity || state.evolutionPoints < birthCost(template,colony.tribe) ||
           template.slots.length > slotCapacity() || template.slots.some(key => !isAttributeUnlocked(key,state.nestLevel,colony.tribe))) return null;
-      const matches = candidate => candidate.slots.length === template.slots.length && template.slots.every(key =>
+      const matches = candidate => combatPrimary(candidate) === combatPrimary(template) && candidate.slots.length === template.slots.length && template.slots.every(key =>
         candidate.slots.includes(key) && (candidate.attributeLevels?.[key] || 1) === (template.attributeLevels?.[key] || 1));
       let stored = state.templates.find(matches), result;
       if (stored) result = command({type:"birth",templateId:stored.id});
@@ -1751,7 +1757,7 @@ export function createGame(environment, colony, savedGame) {
         } else {
           if (!previous && state.templates.length >= 100) return null;
           const design = command({type:"design",templateId:previous?.id ?? null,name:previous?.name || template.name,
-            slots:[...template.slots],birth:false});
+            slots:[...template.slots],combatPrimary:combatPrimary(template),birth:false});
           stored = state.templates.find(candidate => candidate.id === design.templateId);
           stored.productionRole = role;
           stored.automatic = true;
@@ -1775,7 +1781,7 @@ export function createGame(environment, colony, savedGame) {
       for (const template of [...state.templates]) {
         if (template.automatic !== true || state.agents.some(agent => agent.health > 0 && agent.templateId === template.id)) continue;
         const obsolete = template.slots.length > slotCapacity() || template.slots.some(key => !isAttributeUnlocked(key,state.nestLevel,colony.tribe));
-        const duplicate = state.templates.some(candidate => candidate.id !== template.id && candidate.slots.length === template.slots.length &&
+        const duplicate = state.templates.some(candidate => candidate.id !== template.id && combatPrimary(candidate) === combatPrimary(template) && candidate.slots.length === template.slots.length &&
           template.slots.every(key => candidate.slots.includes(key) && (candidate.attributeLevels?.[key] || 1) >= (template.attributeLevels?.[key] || 1)));
         if (obsolete || duplicate || state.templates.length >= 100) command({type:"delete-design",templateId:template.id});
       }
@@ -1820,9 +1826,6 @@ export function createGame(environment, colony, savedGame) {
     function checkEnding() {
       if (state.ending || colony.tribe === null || state.agents.some(agent => agent.health > 0) ||
           hasActiveNest() && state.evolutionPoints >= birthCost({ slots: [] }, colony.tribe)) return state.ending;
-      const combatants = [...environment.games.values()].flatMap(game => game.agents).concat(environment.creatureSystem?.agents || []);
-      if (combatants.some(agent => agent.combat?.teams.includes("colony:" + colony.ownerId) &&
-          (agent.attack?.exchange || agent.combat.pendingCounter?.exchange)?.counterApplied === false)) return state.ending;
       state.ending = { endedAt: state.simSeconds,
         reason: !hasActiveNest() ? "nest-destroyed" : "extinction",
         bornCount: state.nextAgentId - 1, exploredCells: state.explored.size,
@@ -1878,7 +1881,8 @@ export function createGame(environment, colony, savedGame) {
         const purchased = { ...previous?.unlockedAttributeLevels, ...previous?.attributeLevels };
         const unlockedAttributeLevels = { ...migrateAttributeLevels(Object.keys(purchased), purchased, state.nestLevel) };
         for (const key of action.slots) if (!unlockedAttributeLevels[key]) unlockedAttributeLevels[key] = 1;
-        const template = { id: previous ? previous.id : state.nextTemplateId, name,
+        const primary = combatPrimary({ slots: action.slots, combatPrimary: action.combatPrimary === undefined ? previous?.combatPrimary : action.combatPrimary });
+        const template = { id: previous ? previous.id : state.nextTemplateId, name, combatPrimary: primary,
           nameEdited: typeof action.nameEdited === "boolean" ? action.nameEdited :
             isTemplateNameEdited(previous?.name === name ? previous : { name, slots: action.slots }),
           slots: [...action.slots], attributeLevels: Object.fromEntries(action.slots.map(key => [key, unlockedAttributeLevels[key]])),
@@ -1897,7 +1901,7 @@ export function createGame(environment, colony, savedGame) {
           const agent = state.agents.find(candidate => candidate.id === action.agentId && candidate.health > 0);
           if (!agent) throw new Error("복제할 생명체를 찾을 수 없습니다.");
           const attributeLevels = migrateAttributeLevels(agent.slots, agent.attributeLevels, state.nestLevel);
-          const previous = state.templates.find(template => template.slots.length === agent.slots.length &&
+          const previous = state.templates.find(template => combatPrimary(template) === combatPrimary(agent) && template.slots.length === agent.slots.length &&
             agent.slots.every(key => template.slots.includes(key) && (template.attributeLevels[key] || 1) === attributeLevels[key]));
           if (!previous && state.templates.length >= 100) throw new Error("설계는 최대 100개까지 저장할 수 있습니다.");
           let name = agent.templateName, suffix = 2;
@@ -1905,7 +1909,7 @@ export function createGame(environment, colony, savedGame) {
             const ending = " " + suffix++;
             name = agent.templateName.slice(0, 24 - ending.length) + ending;
           }
-          const template = previous || { id: state.nextTemplateId, name, slots: [...agent.slots], attributeLevels,
+          const template = previous || { id: state.nextTemplateId, name, slots: [...agent.slots], attributeLevels, combatPrimary: combatPrimary(agent),
             unlockedAttributeLevels: { ...attributeLevels }, revision: 1, productionRole: agent.productionRole || null };
           const agentId = birth({ ...template, slots: [...agent.slots] }, true);
           if (!previous) {
@@ -1968,7 +1972,7 @@ export function createGame(environment, colony, savedGame) {
         .map(target => [target.id, target]));
       const visibleAgent = (agent) => {
         const { visited, movementVisits, path, returnPath, rememberedRoute, profile, personality, utility, knownEnemyIds, ...visible } = agent;
-        const target = targetAgents.get(agent.attack?.targetId || (!agent.combat ? agent.pursuitTargetId : null));
+        const target = targetAgents.get(agent.attack?.targetId || agent.combat?.targetId || (!agent.combat ? agent.pursuitTargetId : null));
         const combatTarget = target ? { id: target.id, kind: target.kind || "agent", x: target.x, y: target.y,
           width: target.width || 1, height: target.height || 1 } : null;
         return { ...visible, combatTarget, combatDisposition: combatDisposition(agent), action: agent.combat ? "fight" : utility?.action || "wait", personalityLabels: personality ? personalityLabels(personality) : null };
@@ -2031,6 +2035,7 @@ export function createGame(environment, colony, savedGame) {
       for (const template of state.templates) {
         template.attributeLevels = migrateAttributeLevels(template.slots, template.attributeLevels, state.nestLevel);
         template.slots = migrateAttributeSlots(template.slots);
+        template.combatPrimary = combatPrimary(template);
         const purchased = { ...template.unlockedAttributeLevels, ...template.attributeLevels };
         template.unlockedAttributeLevels = migrateAttributeLevels(Object.keys(purchased), purchased, state.nestLevel);
       }

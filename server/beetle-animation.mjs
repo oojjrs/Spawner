@@ -1,3 +1,4 @@
+import { attackAnimationElapsed } from "./attack.mjs";
 import { imageAnimation } from "../client/image-geometry.mjs";
 
 export const BEETLE_ANIMATION_ASSET = "DesignAssets/Animations/Beetle/atlas.webp";
@@ -135,19 +136,26 @@ export function beetleAnimationFrame(action, elapsedMs) {
 
 export function beetleAnimationPose(agent, time) {
   let action = "idle", startedAt = agent.animationStartedAt || 0;
+  const rpg = agent.combat?.version === 2;
+  if (rpg && agent.health > 0 && agent.attack) {
+    const attack = BEETLE_ANIMATIONS.attack;
+    const elapsed = attackAnimationElapsed(agent.attack, time, attack.hitTimeMs / 1000, attack.durationMs / 1000) * 1000;
+    if (elapsed >= 0 && elapsed + 1e-6 < attack.durationMs) return { action: "attack", frame: beetleAnimationFrame("attack", elapsed) };
+  }
   if (agent.health <= 0 || agent.mode === "death") {
     startedAt = agent.deathStartedAt ?? startedAt;
     action = (time - startedAt) * 1000 + 1e-6 < BEETLE_ANIMATIONS.death.durationMs ? "death" : "dead";
   } else if (Number.isFinite(agent.hurtStartedAt) && time >= agent.hurtStartedAt &&
-      (time - agent.hurtStartedAt) * 1000 + 1e-6 < BEETLE_ANIMATIONS.hurt.durationMs) {
+      (time - agent.hurtStartedAt) * 1000 + 1e-6 < (rpg ? 120 : BEETLE_ANIMATIONS.hurt.durationMs)) {
     action = "hurt";
     startedAt = agent.hurtStartedAt;
-  } else if (agent.mode === "attack" && (time - agent.attackStartedAt) * 1000 + 1e-6 < BEETLE_ANIMATIONS.attack.durationMs) {
+  } else if (!rpg && agent.mode === "attack" && (time - agent.attackStartedAt) * 1000 + 1e-6 < BEETLE_ANIMATIONS.attack.durationMs) {
     action = "attack";
     startedAt = agent.attackStartedAt;
   } else if (agent.mode === "walk" && time < agent.moveStartedAt + agent.moveDuration) {
     action = "walk";
     startedAt = agent.moveStartedAt;
   } else if (agent.mode === "walk") startedAt = agent.moveStartedAt + agent.moveDuration;
-  return { action, frame: beetleAnimationFrame(action, (time - startedAt) * 1000) };
+  return { action, frame: beetleAnimationFrame(action, (time - startedAt) * 1000 *
+    (rpg && action === "hurt" ? BEETLE_ANIMATIONS.hurt.durationMs / 120 : 1)) };
 }

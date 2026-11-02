@@ -3,11 +3,11 @@ import { dropCarriedResources } from "./resources.mjs";
 import { militaryAgent } from "./conquest-pacing.mjs";
 import { creatureSpawning } from "./creature-spawn.mjs";
 import { ENCOUNTER_TYPES } from "./encounter-types.mjs";
-import { AGENT_ATTACK_DURATION, AGENT_ATTACK_HIT_TIME, AGENT_HURT_DURATION } from "./attack.mjs";
+import { AGENT_ATTACK_DURATION } from "./attack.mjs";
 import { BEETLE_ANIMATIONS } from "./beetle-animation.mjs";
 import { CREATURE_ATTACK_TIMINGS } from "./creature-attack.mjs";
 import { unitTravelSpeed, unitTerrainSpeedMultiplier } from "./attributes.mjs";
-import { combatDamage, combatStrength } from "./combat-stats.mjs";
+import { combatDamage, combatProfile } from "./combat-stats.mjs";
 import { recordCombatExperience } from "./experience.mjs";
 import { beginRetreat, combatSurvival, retreatEscapeChance } from "./survival.mjs";
 
@@ -72,6 +72,7 @@ export function peacefulEscapeChance(suppression) {
 
 export function createCombat(environment) {
   const size = worldSize(environment.world);
+  const processed = new Map();
   function entries() {
     if (environment.unitIndex) return environment.unitIndex.entries();
     return [...environment.games.values()].flatMap(game => game.agents.map(agent => ({ agent, game })))
@@ -96,8 +97,8 @@ export function createCombat(environment) {
     suspendDefenseWork(agent);
     dropCarriedResources(environment, agent);
     agent.combat = { id: combat.id, x: combat.x, y: combat.y, teams: [...combat.teams], side, joinedAt: time,
-      turnOrderVersion: COMBAT_TURN_ORDER_VERSION,
-      turn: combat.turn || 0, nextAttackTurn: (combat.turn || 0) + 1,
+      version: 2, cycleStartedAt: time, nextAttackAt: time, targetId: null,
+      stunnedUntil: 0, stunImmuneUntil: 0, parryReadyAt: time, blockReadyAt: time, attackCount: 0,
       nextEscapeAt: time + PEACEFUL_ESCAPE_INTERVAL, completedExchanges: 0 };
     agent.renderFromX = agent.x; agent.renderFromY = agent.y;
     agent.moveDuration = 0; agent.moveBudget = 0;
@@ -216,74 +217,76 @@ export function createCombat(environment) {
     return true;
   }
 
-  function hurtDuration(agent) {
-    return agent.species === "spiny-back-beetle" ? BEETLE_ANIMATIONS.hurt.durationMs / 1000 : AGENT_HURT_DURATION;
-  }
-
-  function attackTiming(agent) {
-    return CREATURE_ATTACK_TIMINGS[agent.species] || (agent.species === "spiny-back-beetle" ? BEETLE_ANIMATIONS.attack :
-      { durationMs: AGENT_ATTACK_DURATION * 1000, hitTimeMs: AGENT_ATTACK_HIT_TIME * 1000 });
-  }
-
-  function createExchange(attacker, target, previous) {
-    const old = previous?.exchange, random = environment.damageRandom || Math.random;
-    const attackApplied = !!old?.attackApplied || !!previous?.counter || !!previous?.resolved;
-    const counterApplied = !!old?.counterApplied || !!previous?.counterResolved || !!previous?.counter && !!previous?.resolved;
-    const attackDamage = old?.attackDamage ?? previous?.damage;
-    const counterDamage = old?.counterDamage ?? (previous?.counter ? previous.damage : 0);
-    const beforeAttacker = { ...attacker, health: Math.min(attacker.stats.health,
-      attacker.health + (counterApplied && Number.isFinite(counterDamage) ? counterDamage : 0)) };
-    const beforeTarget = { ...target, health: Math.min(target.stats.health,
-      target.health + (attackApplied && Number.isFinite(attackDamage) ? attackDamage : 0)) };
-    const timing = attackTiming(target);
-    return { damageVersion: COMBAT_EXCHANGE_DAMAGE_VERSION, attackerId: attacker.id, targetId: target.id,
-      targetSpecies: target.species || null,
-      attackerHealth: beforeAttacker.health, targetHealth: beforeTarget.health,
-      attackerStrength: combatStrength(beforeAttacker), targetStrength: combatStrength(beforeTarget),
-      attackDamage: attackApplied || old?.damageVersion === 2 ? attackDamage : combatDamage(beforeAttacker, beforeTarget, random()),
-      counterDamage: counterApplied || old?.damageVersion === 2 ? counterDamage : combatDamage(beforeTarget, beforeAttacker, random()),
-      counterHitTime: timing.hitTimeMs / 1000,
-      counterDuration: timing.durationMs / 1000,
-      attackApplied, counterApplied, resolved: attackApplied && counterApplied };
-  }
-
-  function completeExchange(combat, exchange) {
-    for (const { agent } of members(combat)) {
-      if (agent.id === exchange.attackerId || agent.id === exchange.targetId)
-        agent.combat.completedExchanges = (agent.combat.completedExchanges || 0) + 1;
-    }
-  }
-
   function receiveDamage(entry, damage, attacker) {
     const previousHealth = entry.agent.health;
     if (entry.game) entry.game.receiveDamage(entry.agent, damage);
     else environment.creatureSystem.receiveDamage(entry.agent, damage);
     recordCombatExperience(attacker, entry.agent, Math.max(0, previousHealth - entry.agent.health),
       entry.agent.health <= 0 ? entries().map(entry => entry.agent) : []);
+    if (entry.agent.health <= 0) { entry.agent.attack = null; entry.agent.attackTargetId = null; }
   }
 
-  function resolveHit(attack, target, attacker) {
-    const exchange = attack.exchange, applied = attack.counter ? "counterApplied" : "attackApplied";
-    if (exchange[applied]) return;
-    attack.damage = exchange[attack.counter ? "counterDamage" : "attackDamage"];
-    exchange[applied] = true;
-    receiveDamage(target, attack.damage, attacker);
-    exchange.resolved = exchange.attackApplied && exchange.counterApplied;
+  function emit(combat, kind, at, source, target, damage) {
+    const sequence = (source.combat.eventSequence || 0) + 1;
+    source.combat.eventSequence = sequence;
+    const event = { id: combat.id + ":" + at + ":" + source.id + ":" + target.id + ":" + sequence,
+      kind, at, sourceId: source.id, targetId: target.id, damage };
+    source.combat.lastEvent = event;
+    if (target.combat?.id === combat.id) {
+      target.combat.lastEvent = event;
+      if (["parry", "block", "stun"].includes(kind)) target.combat.lastReaction = event;
+    }
   }
 
-  function beginAttack(attacker, target, time, exchange, counter) {
-    const beetle = attacker.species === "spiny-back-beetle";
-    const timing = attackTiming(attacker), duration = timing.durationMs / 1000, hitTime = timing.hitTimeMs / 1000;
-    const pause = counter ? COMBAT_EXCHANGE_PAUSE : 0;
-    attacker.attack = { combatId: attacker.combat.id, startedAt: time, speed: 1, hitAt: time + hitTime,
-      endsAt: time + duration, exchangeEndsAt: time + Math.max(duration, hitTime + hurtDuration(target)) + pause, exchangePause: pause,
-      targetId: target.id, targetKind: "agent", targetX: attacker.combat.x, targetY: attacker.combat.y,
-      directionX: attacker.combat.side === 0 ? -1 : 1,
-      damage: counter ? exchange.counterDamage : exchange.attackDamage, exchange, counter, resolved: false, hit: false };
-    attacker.attackReady = attacker.attack.exchangeEndsAt;
+  function beginAttack(attacker, target, time, counter) {
+    const profile = combatProfile(attacker), combat = attacker.combat;
+    if (!counter) combat.attackCount++;
+    const heavy = !counter && profile.primary === "piercing" && combat.attackCount % 3 === 0;
+    const windup = counter ? .12 : profile.windup + (heavy ? .15 : 0);
+    const timing = CREATURE_ATTACK_TIMINGS[attacker.species] || (attacker.species === "spiny-back-beetle" ? BEETLE_ANIMATIONS.attack :
+      { durationMs: AGENT_ATTACK_DURATION * 1000 });
+    const duration = windup + profile.recovery;
+    attacker.attack = { combatId: combat.id, startedAt: time, hitAt: time + windup, endsAt: time + duration,
+      speed: timing.durationMs / 1000 / duration, directionX: combat.side === 0 ? -1 : 1,
+      targetId: target.id, targetKind: "agent", targetX: combat.x, targetY: combat.y,
+      resolved: false, hit: false, counter, heavy };
+    combat.cycleStartedAt = time;
+    combat.nextAttackAt = time + profile.attackInterval;
+    combat.targetId = target.id;
+    combat.parryUntil = !counter && profile.primary === "blade" && time >= combat.parryReadyAt ? time + .2 : 0;
+    attacker.attackReady = combat.nextAttackAt;
     attacker.attackStartedAt = time; attacker.animationStartedAt = time;
     attacker.attackTargetId = target.id; attacker.attackHit = false;
-    attacker.mode = beetle ? "attack" : "fight";
+    attacker.mode = attacker.species === "spiny-back-beetle" ? "attack" : "fight";
+    if (counter) emit(combat, "counter", time, attacker, target, 0);
+  }
+
+  function resolveHit(attacker, target, time) {
+    const attack = attacker.attack, defender = target.agent, combat = attacker.combat;
+    attack.resolved = true; attacker.attackHit = true;
+    if (defender.health <= 0 || defender.combat?.id !== combat.id) return;
+    const defense = defender.combat, profile = combatProfile(defender);
+    let damage = combatDamage(attacker, defender, (environment.damageRandom || Math.random)());
+    let reaction = null;
+    if (!attack.counter && time < defense.parryUntil && time >= defense.parryReadyAt && profile.primary === "blade") {
+      damage = 0; defense.parryReadyAt = time + 3; defense.parryUntil = 0; reaction = "parry";
+    } else if (!attack.counter && profile.primary === "carapace" && time >= defense.blockReadyAt && time >= defense.stunnedUntil) {
+      damage = Math.max(1, Math.round(damage * (attack.heavy ? .55 : .2)));
+      defense.blockReadyAt = time + 2.5; reaction = "block";
+    }
+    attack.damage = damage; attack.hit = true;
+    if (damage > 0) { receiveDamage(target, damage, attacker); defender.hurtStartedAt = time; }
+    combat.completedExchanges++; defense.completedExchanges++;
+    emit(combat, reaction || "hit", time, attacker, defender, damage);
+    if (defender.health <= 0) return;
+    if (attack.heavy && reaction !== "parry" && time >= defense.stunImmuneUntil) {
+      defense.stunnedUntil = time + .5; defense.stunImmuneUntil = time + 2.5; defense.parryUntil = 0;
+      defender.attack = null; defender.attackTargetId = null;
+      defense.nextAttackAt = Math.max(defense.nextAttackAt, defense.stunnedUntil);
+      defense.cycleStartedAt = defense.nextAttackAt;
+      emit(combat, "stun", time, attacker, defender, damage); reaction = null;
+    }
+    if (reaction && attacker.health > 0) beginAttack(defender, attacker, time, true);
   }
 
   function refreshSupport(participants) {
@@ -326,187 +329,61 @@ export function createCombat(environment) {
   }
 
   function update(agent, time) {
+    if (agent.health <= 0) { agent.attack = null; return false; }
     if (!agent.combat) contact(agent, time);
     const combat = agent.combat;
-    if (agent.health <= 0) return false;
     if (!combat) return updateRegeneration(agent, time);
-    dropCarriedResources(environment, agent);
     if (agent.x !== combat.x || agent.y !== combat.y) { release(agent, time); return false; }
-    const currentMembers = members(combat);
-    refreshSupport(currentMembers);
-    for (const { agent: member } of currentMembers) member.support = null;
-    const pendingOwner = entriesAt(combat.x, combat.y).find(entry => entry.agent.combat?.id === combat.id && entry.agent.combat.pendingCounter);
-    if (pendingOwner) {
-      const pending = pendingOwner.agent.combat.pendingCounter;
-      const team = pendingOwner.agent.combat.teams[1 - pendingOwner.agent.combat.side];
-      const targetSpecies = pending.exchange.targetSpecies || (team.startsWith("species:") ? team.slice(8) : null);
-      const timing = CREATURE_ATTACK_TIMINGS[targetSpecies];
-      if (timing) {
-        pending.startedAt ??= pending.hitAt - pending.exchange.counterHitTime;
-        pending.exchange.targetSpecies = targetSpecies;
-        pending.exchange.counterHitTime = timing.hitTimeMs / 1000;
-        pending.exchange.counterDuration = timing.durationMs / 1000;
-        pending.hitAt = pending.startedAt + pending.exchange.counterHitTime;
-        pending.endsAt = pending.startedAt + Math.max(pending.exchange.counterDuration,
-          pending.exchange.counterHitTime + hurtDuration(pendingOwner.agent)) + COMBAT_EXCHANGE_PAUSE;
-      }
-      if (!pending.resolved && time + 1e-8 >= pending.hitAt) {
-        pending.resolved = true;
-        if (!pending.exchange.counterApplied) {
-          pending.exchange.counterApplied = true;
-          pending.exchange.resolved = true;
-          const source = entries().find(entry => entry.agent.id === pending.exchange.targetId)?.agent || { id: pending.exchange.targetId };
-          receiveDamage(pendingOwner, pending.exchange.counterDamage, source);
+    if (processed.get(combat.id) === time) return true;
+    processed.set(combat.id, time);
+    let participants = members(combat).sort((a, b) => String(a.agent.id).localeCompare(String(b.agent.id)));
+    refreshSupport(participants);
+    for (const { agent: member } of participants) member.support = null;
+    for (const { agent: member } of participants) {
+      if (member.combat.version !== 2) { const old = member.combat; attach(member, old, old.side, time); }
+      dropCarriedResources(environment, member); member.moveBudget = 0;
+      member.facing = member.combat.side === 0 ? -1 : 1;
+    }
+    let iterations = 0;
+    while (iterations++ < 10000) {
+      participants = members(combat).sort((a, b) => String(a.agent.id).localeCompare(String(b.agent.id)));
+      if (new Set(participants.map(entry => entry.agent.combat.side)).size < 2) { finish(combat, time); processed.delete(combat.id); return true; }
+      const events = participants.flatMap(({ agent: member }) => {
+        if (member.attack) return [{ agent: member, at: member.attack.resolved ? member.attack.endsAt : member.attack.hitAt, kind: member.attack.resolved ? "end" : "hit" }];
+        return [{ agent: member, at: Math.max(member.combat.nextAttackAt, member.combat.stunnedUntil), kind: "start" }];
+      }).filter(event => event.at <= time + 1e-8).sort((a, b) => a.at - b.at ||
+        ({ hit: 0, end: 1, start: 2 }[a.kind] - { hit: 0, end: 1, start: 2 }[b.kind]) || String(a.agent.id).localeCompare(String(b.agent.id)));
+      if (!events.length) break;
+      const event = events[0], member = event.agent;
+      const opponents = participants.filter(entry => entry.agent.combat.side !== member.combat.side);
+      if (event.kind === "hit") {
+        const target = opponents.find(entry => entry.agent.id === member.attack.targetId);
+        if (target) resolveHit(member, target, event.at);
+        else { member.attack.resolved = true; member.attackHit = true; }
+      } else if (event.kind === "end") {
+        member.attack = null; member.attackTargetId = null;
+        member.mode = member.species === "spiny-back-beetle" ? "idle" : "fight";
+      } else {
+        if (member.ownerId) {
+          const allies = participants.filter(entry => entry.agent.combat.side === member.combat.side);
+          const assessment = combatSurvival(member, opponents.map(entry => entry.agent), allies.map(entry => entry.agent));
+          member.survivalState = assessment.state;
+          if (assessment.retreat) beginRetreat(member, event.at);
+          if (member.retreat && member.combat.completedExchanges >= COMBAT_RETREAT_EXCHANGES && event.at >= member.combat.nextEscapeAt &&
+              escape(member, opponents, event.at, true)) continue;
         }
-      }
-      const opponentsRemain = new Set(members(combat).map(entry => entry.agent.combat.side)).size > 1;
-      if (time + 1e-8 < pending.endsAt - (opponentsRemain ? 0 : COMBAT_EXCHANGE_PAUSE)) return true;
-      completeExchange(combat, pending.exchange);
-      if (pendingOwner.agent.combat) delete pendingOwner.agent.combat.pendingCounter;
-      if (agent.health <= 0) return true;
-    }
-    let participants = members(combat);
-    let opponents = participants.filter(entry => entry.agent.combat.side !== combat.side);
-    agent.moveBudget = 0;
-    agent.facing = combat.side === 0 ? -1 : 1;
-    agent.mode = agent.species === "spiny-back-beetle" ? agent.attack ? "attack" : "idle" : "fight";
-    const attacks = participants.filter(entry => entry.agent.attack?.combatId === combat.id)
-      .sort((a, b) => a.agent.attack.startedAt - b.agent.attack.startedAt ||
-        a.agent.combat.side - b.agent.combat.side || String(a.agent.id).localeCompare(String(b.agent.id)));
-    for (const { agent: member } of attacks.slice(1)) {
-      if (member.attack.resolved && member.attack.targetId === attacks[0].agent.id &&
-          attacks[0].agent.attack.targetId === member.id) attacks[0].agent.attack.counterResolved = true;
-      member.attack = null;
-      member.attackTargetId = null;
-      member.mode = member.species === "spiny-back-beetle" ? "idle" : "fight";
-    }
-    if (participants.some(entry => entry.agent.combat.turnOrderVersion !== COMBAT_TURN_ORDER_VERSION ||
-        !Number.isFinite(entry.agent.combat.nextAttackTurn))) {
-      const turn = Math.max(0, ...participants.map(entry => Number.isFinite(entry.agent.combat.turn) ? entry.agent.combat.turn : 0));
-      for (const { agent: member } of participants) {
-        member.combat.turnOrderVersion = COMBAT_TURN_ORDER_VERSION;
-        member.combat.turn = turn;
-        member.combat.nextAttackTurn = turn + (member === attacks[0]?.agent ? 2 : 1);
+        const target = opponents.find(entry => entry.agent.id === member.combat.targetId) || opponents.sort((a, b) =>
+          (member.species && combatDisposition(member) === "aggressive" ? Number(militaryAgent(b.agent, b.agent.tribe)) - Number(militaryAgent(a.agent, a.agent.tribe)) : 0) ||
+          a.agent.combat.joinedAt - b.agent.combat.joinedAt || String(a.agent.id).localeCompare(String(b.agent.id)))[0];
+        beginAttack(member, target.agent, event.at, false);
       }
     }
-    if (attacks.length) {
-      const attacker = attacks[0], attack = attacker.agent.attack;
-      const pause = attack.counter ? COMBAT_EXCHANGE_PAUSE : 0;
-      if (Number.isFinite(attack.exchangeEndsAt) && attack.exchangePause !== pause)
-        attack.exchangeEndsAt += pause - (attack.exchangePause ?? COMBAT_EXCHANGE_PAUSE);
-      attack.exchangePause = pause;
-      const target = participants.find(entry => entry.agent.id === attack.targetId &&
-        entry.agent.combat.side !== attacker.agent.combat.side);
-      if (target && attack.exchange?.damageVersion !== COMBAT_EXCHANGE_DAMAGE_VERSION) {
-        attack.exchange = attack.counter ? createExchange(target.agent, attacker.agent, attack) :
-          createExchange(attacker.agent, target.agent, attack);
-        attack.damage = attack.counter ? attack.exchange.counterDamage : attack.exchange.attackDamage;
-      }
-      const timing = CREATURE_ATTACK_TIMINGS[attacker.agent.species];
-      if (timing) {
-        const hitAt = attack.startedAt + timing.hitTimeMs / 1000, endsAt = attack.startedAt + timing.durationMs / 1000;
-        if (attack.hitAt !== hitAt || attack.endsAt !== endsAt) {
-          attack.hitAt = hitAt;
-          attack.endsAt = endsAt;
-          attack.exchangeEndsAt = Math.max(endsAt, hitAt + hurtDuration(target?.agent || {}),
-            attack.resolved && Number.isFinite(target?.agent.hurtStartedAt) ?
-              target.agent.hurtStartedAt + hurtDuration(target.agent) : -Infinity) + pause;
-          attacker.agent.attackReady = attack.exchangeEndsAt;
-        }
-      }
-      if (attack.exchange) {
-        const team = attacker.agent.combat.teams[1 - attacker.agent.combat.side];
-        attack.exchange.targetSpecies ??= attack.counter ? attacker.agent.species || null :
-          target?.agent.species || (team.startsWith("species:") ? team.slice(8) : null);
-        const counterTiming = CREATURE_ATTACK_TIMINGS[attack.exchange.targetSpecies];
-        if (counterTiming) {
-          attack.exchange.counterHitTime = counterTiming.hitTimeMs / 1000;
-          attack.exchange.counterDuration = counterTiming.durationMs / 1000;
-        }
-      }
-      attack.exchangeEndsAt ??= Math.max(attack.endsAt, attack.hitAt + hurtDuration(target?.agent || {})) + pause;
-      if (!attack.resolved && time + 1e-8 >= attack.hitAt) {
-        attack.resolved = true;
-        attacker.agent.attackHit = true;
-        if (target) {
-          attack.hit = true;
-          resolveHit(attack, target, attacker.agent);
-          attack.exchangeEndsAt = Math.max(attack.exchangeEndsAt, time + hurtDuration(target.agent) + pause);
-        }
-      }
-      const opponentsRemain = new Set(members(combat).map(entry => entry.agent.combat.side)).size > 1;
-      attacker.agent.attackReady = attack.exchangeEndsAt;
-      const exchangeEndsAt = attack.exchangeEndsAt - (attack.exchange?.resolved && !opponentsRemain ? pause : 0);
-      if (time + 1e-8 < exchangeEndsAt) return true;
-      attacker.agent.attack = null;
-      attacker.agent.attackTargetId = null;
-      attacker.agent.mode = attacker.agent.species === "spiny-back-beetle" ? "idle" : "fight";
-      attacker.agent.animationStartedAt = attack.endsAt;
-      participants = members(combat);
-      const counter = participants.find(entry => entry.agent.id === attack.exchange?.targetId);
-      const original = participants.find(entry => entry.agent.id === attack.exchange?.attackerId);
-      if (!attack.counter && attack.hit && counter && original) {
-        beginAttack(counter.agent, original.agent, time, attack.exchange, true);
-        return true;
-      }
-      if (!attack.counter && attack.hit && original && !attack.exchange.counterApplied &&
-          Number.isFinite(attack.exchange.counterDamage)) {
-        original.agent.combat.pendingCounter = { exchange: attack.exchange,
-          startedAt: time,
-          hitAt: time + attack.exchange.counterHitTime,
-          endsAt: time + Math.max(attack.exchange.counterDuration,
-            attack.exchange.counterHitTime + hurtDuration(original.agent)) + COMBAT_EXCHANGE_PAUSE,
-          resolved: false };
-        return true;
-      }
-      if (attack.exchange?.resolved) completeExchange(combat, attack.exchange);
-    }
-    participants = members(combat);
-    for (const entry of participants) {
-      if (!entry.agent.combat || !peacefulCreature(entry.agent) || time + 1e-8 < entry.agent.combat.nextEscapeAt) continue;
-      const enemies = members(combat).filter(other => other.agent.combat.side !== entry.agent.combat.side);
-      if (enemies.length) escape(entry.agent, enemies, time, false);
-    }
-    if (!agent.combat) return true;
-    participants = members(combat);
-    opponents = participants.filter(entry => entry.agent.combat.side !== combat.side);
-    if (!opponents.length) { finish(combat, time); return true; }
-    const hurtEndsAt = Math.max(...participants.map(entry =>
-      Number.isFinite(entry.agent.hurtStartedAt) ? entry.agent.hurtStartedAt + hurtDuration(entry.agent) : -Infinity));
-    if (time + 1e-8 < hurtEndsAt + COMBAT_EXCHANGE_PAUSE) return true;
-    if (time + 1e-8 < Math.max(...participants.map(entry => entry.agent.attackReady || 0))) return true;
-    const contenders = participants.filter(entry => !peacefulCreature(entry.agent)).sort((a, b) => {
-      const difference = a.agent.combat.nextAttackTurn - b.agent.combat.nextAttackTurn;
-      return Math.abs(difference) > 1e-8 ? difference : a.agent.combat.side - b.agent.combat.side ||
-        a.agent.combat.joinedAt - b.agent.combat.joinedAt || String(a.agent.id).localeCompare(String(b.agent.id));
-    });
-    if (!contenders.length) return true;
-    const attacker = contenders[0].agent;
-    const enemies = participants.filter(entry => entry.agent.combat.side !== attacker.combat.side);
-    if (attacker.ownerId) {
-      const allies = participants.filter(entry => entry.agent.combat.side === attacker.combat.side);
-      const assessment = combatSurvival(attacker, enemies.map(entry => entry.agent), allies.map(entry => entry.agent));
-      attacker.survivalState = assessment.state;
-      if (assessment.retreat) beginRetreat(attacker, time);
-      if (attacker.retreat && (attacker.combat.completedExchanges || 0) >= COMBAT_RETREAT_EXCHANGES &&
-          escapeCells(attacker, time, true).length) {
-        const turn = attacker.combat.nextAttackTurn;
-        for (const { agent: member } of participants) member.combat.turn = turn;
-        attacker.combat.nextAttackTurn += 1;
-        if (!escape(attacker, enemies, time, true)) {
-          for (const { agent: member } of participants) member.attackReady = time + COMBAT_EXCHANGE_PAUSE;
-        }
-        return true;
+    for (const { agent: member } of members(combat)) {
+      if (peacefulCreature(member) && time >= member.combat.nextEscapeAt) {
+        const opponents = members(combat).filter(entry => entry.agent.combat.side !== member.combat.side);
+        if (opponents.length) escape(member, opponents, time, false);
       }
     }
-    const target = opponents.length && participants.filter(entry => entry.agent.combat.side !== attacker.combat.side)
-      .sort((a, b) => (attacker.species && combatDisposition(attacker) === "aggressive" ?
-        Number(militaryAgent(b.agent, b.agent.tribe)) - Number(militaryAgent(a.agent, a.agent.tribe)) : 0) ||
-        a.agent.combat.joinedAt - b.agent.combat.joinedAt || String(a.agent.id).localeCompare(String(b.agent.id)))[0].agent;
-    const turn = attacker.combat.nextAttackTurn;
-    for (const { agent: member } of participants) member.combat.turn = turn;
-    attacker.combat.nextAttackTurn += 1;
-    beginAttack(attacker, target, time, createExchange(attacker, target, null), false);
     return true;
   }
 

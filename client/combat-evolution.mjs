@@ -1,3 +1,4 @@
+import { attackAnimationElapsed, AGENT_ATTACK_HIT_TIME } from "../server/attack.mjs";
 import { COMBAT_EVOLUTION_CATALOG } from "./combat-evolution-assets.mjs";
 import { unitAnimationFrame } from "./unit-animation.mjs";
 import { createExcavationArt } from "./excavation.mjs";
@@ -12,14 +13,16 @@ export function combatEvolutionKeys(attributes) {
 
 export function combatEvolutionPose(agent, time, animations) {
   let action = "idle", elapsed = (time - (agent.animationStartedAt ?? agent.bornAt ?? 0)) * 1000;
-  const hurt = (time - agent.hurtStartedAt) * 1000;
-  const attack = agent.attack ? (time - agent.attack.startedAt) * (agent.attack.speed || 1) * 1000 : -1;
+  const rpg = agent.combat?.version === 2;
+  const hurt = (time - agent.hurtStartedAt) * 1000 * (rpg ? animations.hurt.durationMs / 120 : 1);
+  const attack = agent.attack ? attackAnimationElapsed(agent.attack, time, AGENT_ATTACK_HIT_TIME, animations.attack.durationMs / 1000) * 1000 : -1;
   if (agent.health <= 0) { action = "death"; elapsed = Math.max(0, (time - (agent.diedAt ?? time)) * 1000); }
   else if (agent.birth) {
     action = "birth";
     const start = agent.birth.startedAt ?? agent.bornAt ?? time, end = agent.birth.readyAt ?? start + animations.birth.durationMs / 1000;
     elapsed = Math.max(0, (time - start) / Math.max(.001, end - start)) * animations.birth.durationMs;
-  } else if (hurt >= 0 && hurt < animations.hurt.durationMs) { action = "hurt"; elapsed = hurt; }
+  } else if (rpg && attack >= 0 && attack < animations.attack.durationMs) { action = "attack"; elapsed = attack; }
+  else if (hurt >= 0 && hurt < animations.hurt.durationMs) { action = "hurt"; elapsed = hurt; }
   else if (attack >= 0 && attack < animations.attack.durationMs) { action = "attack"; elapsed = attack; }
   else if (agent.mode === "harvest") {
     action = animations.harvest ? "harvest" : "attack";
