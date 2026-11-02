@@ -29,11 +29,11 @@ export function updateRetreat(agent, time, threatened) {
 }
 
 export function combatSurvival(agent, opponents, allies) {
-  const incoming = opponents.map(enemy => enemy.construction?.state === "transforming" ? 0 : combatDamage(enemy, agent, 1));
+  const incoming = opponents.map(enemy => combatDamage(enemy, agent, 1));
   const target = opponents[0];
   const hits = target && opponents.length === 1 && target.health <= combatDamage(agent, target, 0) ? 1 : 2;
   const strongest = Math.max(0, ...incoming);
-  const supporters = allies.filter(ally => ally.construction?.state !== "transforming");
+  const supporters = allies;
   const damage = strongest * hits + (incoming.reduce((sum, value) => sum + value, 0) - strongest) / Math.max(1, supporters.length);
   const power = (unit, enemy) => Math.sqrt(Math.max(0, unit.health) * combatDamage(unit, enemy));
   const ownPower = target ? supporters.reduce((sum, ally) => sum + power(ally, target), 0) : 0;

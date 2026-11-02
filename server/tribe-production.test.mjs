@@ -18,7 +18,7 @@ function fixture(tribe, points, nestLevel) {
 }
 
 test("같은 30포인트로 종족별로 승인된 수의 한 속성 개체를 실제 생산한다", () => {
-  for (const [tribe, expected] of [["bean",8], ["spring",8], ["pebble",6], ["spore",12]]) {
+  for (const [tribe, expected] of [["bean",6], ["spring",6], ["pebble",4], ["spore",10]]) {
     const game = fixture(tribe, 30, 1);
     const { templateId } = game.command({type:"design", templateId:null, name:"생산", slots:["strength"], birth:false});
     for (let index = 0; index < expected; index++) {
@@ -26,24 +26,23 @@ test("같은 30포인트로 종족별로 승인된 수의 한 속성 개체를 �
       const agent = game.agents.find(entry => entry.id === agentId);
       agent.x = 65 + index * 2; agent.y = 65;
     }
-    assert.throws(() => game.command({type:"birth", templateId}), /진화 포인트/, tribe);
+    assert.throws(() => game.command({type:"birth", templateId}), /진화 포인트|한도/, tribe);
     assert.equal(game.agents.length, expected, tribe);
     assert.equal(Math.round((30-game.snapshot().evolutionPoints)*10)/10, Math.round(game.agents.reduce((sum,agent)=>sum+agent.cost,0)*10)/10, tribe);
   }
 });
 
 test("속성 네 개의 생산비 차감과 저장된 과거 지불액을 구분한다", () => {
-  for (const [tribe, remaining] of [["spore",25.2], ["pebble",20.4]]) {
+  for (const [tribe, remaining] of [["spore",18], ["pebble",8]]) {
     const game = fixture(tribe, 30, 4);
-    const { agentId } = game.command({type:"design", templateId:null, name:"복합", slots:["antenna","strength","feet","lifespan"], birth:true});
+    const { agentId } = game.command({type:"design", templateId:null, name:"복합", slots:["antenna","strength","feet","excavation"], birth:true});
     assert.equal(game.snapshot().evolutionPoints, remaining, tribe);
     const saved = JSON.parse(game.save());
     saved.state.agents[0].cost = 17;
     game.restore(JSON.stringify(saved));
     const agent = game.agents.find(entry=>entry.id===agentId);
     assert.equal(agent.cost, 17, tribe);
-    assert.equal(agent.lifespan, tribe === "pebble" ? 480 : 300, tribe);
-    assert.deepEqual(agent.slots, ["antenna","strength","feet","lifespan"]);
+    assert.deepEqual(agent.slots, ["antenna","strength","feet","excavation"]);
   }
 });
 

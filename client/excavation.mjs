@@ -63,7 +63,7 @@ export function createExcavationArt(assetSource, loadImage) {
 
   function sprout(context, attributes, box) {
     if (!attributes.excavation || !data) return false;
-    const reference = data.sprout[attributes.lifespan ? "mature" : "normal"];
+    const reference = data.sprout.normal;
     const point = value => [box[0] + value[0] / reference.size[0] * box[2],
       box[1] + value[1] / reference.size[1] * box[3]];
     return draw(context, "bean", Object.fromEntries(Object.entries(reference.guides).map(([key, value]) => [key, point(value)])));

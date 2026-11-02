@@ -6,7 +6,7 @@ export function createStructureEffectPlayback() {
   return { structures: new Map(), effects: new Map(), time: null, snapshotTime: null };
 }
 
-export function syncStructureEffectPlayback(playback, colonies, buildings, burrows, time, firstSnapshot, snapshotTime) {
+export function syncStructureEffectPlayback(playback, colonies, burrows, time, firstSnapshot, snapshotTime) {
   const reset = firstSnapshot || playback.time === null || time < playback.time || snapshotTime < playback.snapshotTime;
   const previousTime = playback.snapshotTime;
   if (reset) {
@@ -21,7 +21,6 @@ export function syncStructureEffectPlayback(playback, colonies, buildings, burro
   const structures = [
     ...colonies.map(colony => ({ id: colony.id, kind: "colony", tribe: colony.tribe || "bean", ownerId: colony.ownerId,
       x: colony.x, y: colony.y, width: 5, height: 5, health: colony.nestHealth, level: colony.nestLevel || 1 })),
-    ...buildings.map(building => ({ ...building, kind: "building" })),
     ...burrows.map(burrow => ({ ...burrow, kind: "burrow" }))
   ];
   const present = new Set();
@@ -52,9 +51,6 @@ export function syncStructureEffectPlayback(playback, colonies, buildings, burro
         const growth = nestGrowthAnimation(structure.tribe, previous.level, structure.level);
         playback.effects.set(completeKey, { structure, type: "complete", startedAt: time + (growth?.duration || 0) });
       }
-    } else if (structure.kind === "building" && !previous && Number.isFinite(structure.completedAt) &&
-        structure.completedAt >= previousTime - 1e-7 && structure.completedAt <= snapshotTime && snapshotTime - structure.completedAt < .5) {
-      playback.effects.set(completeKey, { structure, type: "complete", startedAt: structure.completedAt });
     }
   }
   for (const key of playback.structures.keys()) if (!present.has(key)) playback.structures.delete(key);

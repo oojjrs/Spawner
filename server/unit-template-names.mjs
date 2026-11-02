@@ -1,5 +1,4 @@
 const UNIT_TEMPLATE_ROLES = [
-  [["construction"], "개척자"],
   [["regeneration", "guard"], "수호 치유사"],
   [["regeneration"], "치유사"],
   [["guard"], "수호자"],
@@ -9,7 +8,6 @@ const UNIT_TEMPLATE_ROLES = [
   [["blade"], "전사"],
   [["piercing"], "관통병"],
   [["excavation"], "굴착꾼"],
-  [["butchery"], "회수꾼"],
   [["strength"], "수송꾼"],
   [["carapace"], "파수꾼"],
   [["antenna"], "정찰병"],
@@ -17,7 +15,7 @@ const UNIT_TEMPLATE_ROLES = [
   [[], "일꾼"]
 ];
 
-const UNIT_TEMPLATE_MODIFIERS = [["feet", "날쌘"], ["antenna", "눈밝은"], ["carapace", "튼튼한"], ["lifespan", "장수"]];
+const UNIT_TEMPLATE_MODIFIERS = [["feet", "날쌘"], ["antenna", "눈밝은"], ["carapace", "튼튼한"]];
 
 function isDefaultTemplateName(name, base) {
   return name === base || name.startsWith(base + " ") && /^(?:[2-9]|[1-9]\d+)$/.test(name.slice(base.length + 1));

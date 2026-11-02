@@ -9,7 +9,6 @@ import { beginRetreat, updateRetreat, survivalState, combatSurvival } from "./su
 import { AGENT_ATTACK_DURATION, AGENT_HURT_DURATION } from "./attack.mjs";
 import { encounterTerritory, withinEncounterTerritory } from "./encounter-territory.mjs";
 import { colonySupply, colonyForagers } from "./colony-supply.mjs";
-import { tribeLifespan } from "./lifespan.mjs";
 
 const SCOUT_EXPANSION_DISTANCE = 24;
 
@@ -287,19 +286,13 @@ export function createUtilityAI(context) {
     return scoutWeights;
   }
 
-  function scoutLife(agent, travelSeconds) {
-    const remaining = Number.isFinite(agent.bornAt) && Number.isFinite(agent.lifespan) ?
-      agent.bornAt + agent.lifespan - state.simSeconds : agent.stats.lifespan || tribeLifespan(agent.tribe || context.tribe);
-    return Math.max(0, remaining - travelSeconds - 5);
-  }
-
   function scoutCapacity(agent, travelSeconds) {
-    return scoutLife(agent, travelSeconds) * unitTravelSpeed(agent, 0) * (2 * agent.stats.vision + 1);
+    return unitTravelSpeed(agent, 0) * (2 * agent.stats.vision + 1) / (1 + travelSeconds);
   }
 
   function availableWorker(agent) {
     return agent.health >= agent.stats.health * .6 && !agent.retreat && !agent.combat &&
-      !agent.construction && !agent.attributes?.construction && !(agent.birth?.readyAt > state.simSeconds);
+      !(agent.birth?.readyAt > state.simSeconds);
   }
 
   function availableScout(agent) {
@@ -343,11 +336,8 @@ export function createUtilityAI(context) {
     };
     const allies = state.agents.filter(ally => ally !== agent && ally.health > 0);
     const carryingType = agent.carryingType || "honey-mushrooms";
-    const carryingMaterial = !!agent.transportCargo || !isFood(carryingType);
-    const constructionMaterials = !immediate && context.constructionMaterials ? context.constructionMaterials() : {};
-    const requiredMaterials = Object.keys(constructionMaterials).filter(type => constructionMaterials[type] > 0 && canHarvest({resourceType:type}, agent));
-    const materialNeed = key => constructionMaterials[key] > 0 ? 2 + Math.min(1, constructionMaterials[key] / 12) :
-      1 / (1 + (state.resourceInventory?.[key] || 0) / Math.max(6, state.agents.length * 2));
+    const carryingMaterial = !isFood(carryingType);
+    const materialNeed = key => 1 / (1 + (state.resourceInventory?.[key] || 0) / Math.max(6, state.agents.length * 2));
     const reservation = food => allies.reduce((sum, ally) => sum + (ally.utility?.action === "collect" &&
       ally.utility.target?.key === (food.key || food.x + "," + food.y) ? Math.max(0, ally.utility.plannedCargo - ally.carrying) : 0), 0);
     const availableFood = immediate ? 0 : [...state.knownFood.values()].filter(food => canHarvest(food, agent) && isFood(resourceType(food)))
@@ -363,7 +353,6 @@ export function createUtilityAI(context) {
     const baseline = riskValue(agent, predictedDamage(agent, [{ x: agent.x, y: agent.y }], "wait", visible, agent.carrying, 10));
     const add = (action, target, cells, gains, extra) => {
       if (!cells) return;
-      if (agent.attributes?.construction > 0 && !["build", "return", "recover", "flee"].includes(action) && !extra.defending) return;
       const damage = predictedDamage(agent, cells, action, visible, agent.carrying, 10);
       let decisionDamage = predictedDamage(agent, cells, action, visible, agent.carrying, 3);
       if (action === "fight" && !target.kind) {
@@ -380,8 +369,7 @@ export function createUtilityAI(context) {
       candidate.retention = retain && same && safety.state === "stable" && !agent.retreat ? 3 : 0;
       candidates.push(candidate);
     };
-    const searchHabitats = context.resourceHabitat ? (requiredMaterials.length ? requiredMaterials :
-      supply.interruption > 0 && context.foodType ? [context.foodType] : []) : [];
+    const searchHabitats = context.resourceHabitat && supply.interruption > 0 && context.foodType ? [context.foodType] : [];
     const home = homeRoute(agent, agent, homeCells(), supply);
     const materialSpace = context.materialSpace ? context.materialSpace() : Infinity;
     const storage = context.deliveryCapacity ? context.deliveryCapacity(context.foodType || carryingType) :
@@ -403,38 +391,15 @@ export function createUtilityAI(context) {
         { healingGain: 60 * missing / agent.stats.health * 10 / (10 + time) },
         { recoverHealth: Math.min(agent.stats.health, agent.health + amount) });
     }
-    if (!immediate && agent.attributes?.construction > 0 && !agent.carrying && !agent.retreat && safety.state === "stable" && context.constructionPlans) {
-      for (const plan of context.constructionPlans(agent)) {
-        const cells = path(plan);
-        if (!cells) continue;
-        const seconds = travelTime(agent, cells, 0) + plan.buildSeconds;
-        if (!plan.constructionIssue && Number.isFinite(agent.bornAt) && Number.isFinite(agent.lifespan) &&
-            seconds + 5 >= agent.bornAt + agent.lifespan - state.simSeconds) continue;
-        const gains = Object.fromEntries(Object.entries(plan.gains).map(([key, value]) => [key, plan.constructionIssue ? 0 : value * 10 / (10 + seconds)]));
-        add("build", { x: plan.x, y: plan.y, buildingKey: plan.buildingKey, key: "build:" + plan.buildingKey + ":" + indexOf(plan) }, cells, gains,
-          {constructionIssue:plan.constructionIssue});
-      }
-    }
-    if (!immediate && !agent.attributes?.construction && safety.state === "stable" && !agent.retreat && context.constructionTransport) {
-      for (const transport of context.constructionTransport(agent)) {
-        const cells = transport.route;
-        if (cells) add("supply", transport.target, cells, { materialGain: transport.gain }, { transport });
-      }
-    }
-    if (!agent.attributes?.construction && agent.carrying < capacity && !agent.transportCargo) {
+    if (agent.carrying < capacity) {
       const foods = (immediate ? [state.knownFood.get(suspendedFoodKey)].filter(Boolean) : [...state.knownFood.values()]).filter(food => food.amount > 0 &&
         canHarvest(food, agent) &&
-        (!Object.keys(constructionMaterials).length || isFood(resourceType(food)) || requiredMaterials.includes(resourceType(food)) ||
-          (food.key || food.x + "," + food.y) === suspendedFoodKey) &&
         (!agent.carrying || carryingType === resourceType(food)) &&
         (isFood(resourceType(food)) ? storage > 0 : materialSpace > 0))
         .sort((first, second) => distance(agent, first) - distance(agent, second));
       const currentFood = foods.find(food => (food.key || food.x + "," + food.y) === agent.utility?.target?.key);
       const suspendedFood = foods.find(food => (food.key || food.x + "," + food.y) === suspendedFoodKey);
       const targets = [...new Set([currentFood, suspendedFood,
-        ...Object.keys(constructionMaterials).filter(type => constructionMaterials[type] > 0)
-          .flatMap(type => foods.filter(food => resourceType(food) === type).slice(0, 2)),
-        ...foods.filter(food => resourceType(food) === "nutrients" && food.amount > reservation(food)).slice(0, 6),
         ...foods.filter(food => isFood(resourceType(food))).slice(0, 6),
         ...foods.filter(food => !isFood(resourceType(food))).slice(0, 6)].filter(Boolean))];
       for (const food of targets) {
@@ -449,8 +414,7 @@ export function createUtilityAI(context) {
         const capacity = unitCarryCapacity(agent, type) + (synergy(agent, ["strength", "strength"]) ? 4 : 0);
         const maximum = Math.min(capacity - agent.carrying, available,
           (food.key || food.x + "," + food.y) === suspendedFoodKey && Number.isFinite(suspendedWork.plannedCargo) ?
-            Math.max(0, suspendedWork.plannedCargo - agent.carrying) : Infinity,
-          material && constructionMaterials[type] > 0 ? Math.max(0, constructionMaterials[type] - reservation(food)) : Infinity);
+            Math.max(0, suspendedWork.plannedCargo - agent.carrying) : Infinity);
         const present = agent.x === food.x && agent.y === food.y && agent.mode === "harvest";
         const key = food.key || food.x + "," + food.y;
         const precise = synergy(agent, ["strength", "antenna"]) &&
@@ -466,26 +430,21 @@ export function createUtilityAI(context) {
           }
           const time = travelTime(agent, cells, agent.carrying) + harvestTime +
             travelTime(agent, back, agent.carrying + amount, type) + 1;
-          if (Number.isFinite(agent.bornAt) && Number.isFinite(agent.lifespan) &&
-              time * 1.2 + 5 >= agent.bornAt + agent.lifespan - state.simSeconds) continue;
           const gain = 60 * limit((material ? agent.carrying + amount : Math.min(storage, agent.carrying + amount)) /
             Math.max(0.05, time) / 0.25) * (material ? materialNeed(type) : 1);
           const rate = (material ? agent.carrying + amount : Math.min(storage, agent.carrying + amount)) / Math.max(.05, time);
           if (!best || gain > best.gain || gain === best.gain && rate > best.rate) best = { gain, amount, time, rate };
         }
         if (best) add("collect", { x: food.x, y: food.y, key }, cells, material ? { materialGain: best.gain } : { foodGain: best.gain },
-          { plannedCargo: agent.carrying + best.amount, deliverySeconds:best.time, constructionMaterial:material && constructionMaterials[type] > 0 });
+          { plannedCargo: agent.carrying + best.amount, deliverySeconds:best.time });
       }
     }
     const frontier = immediate ? [] : frontierCells();
     const knownFoods = immediate ? [] : [...state.knownFood.values()].filter(food => food.amount > 0 && isFood(resourceType(food)) && canHarvest(food, agent));
-    const allocation = immediate ? null : context.constructionAllocation?.();
-    const constructionForagers = immediate ? new Set() : allocation?.ids || context.constructionForagers?.();
-    let assignedForagers = supply.urgency > 0 ? constructionForagers || colonyForagers(state, knownFoods, deliveryCells()) : new Set();
-    const remainingLife = Number.isFinite(agent.bornAt) && Number.isFinite(agent.lifespan) ? agent.bornAt + agent.lifespan - state.simSeconds : Infinity;
-    const canDeliver = candidates.some(candidate => candidate.foodGain > 0 && ["collect", "return"].includes(candidate.action) && candidate.deliverySeconds + 5 < remainingLife);
+    let assignedForagers = supply.urgency > 0 ? colonyForagers(state, knownFoods, deliveryCells()) : new Set();
+    const canDeliver = candidates.some(candidate => candidate.foodGain > 0 && ["collect", "return"].includes(candidate.action));
     const foodSearch = supply.interruption > 0 && knownFoods.length && !canDeliver &&
-      (assignedForagers.has(agent.id) || agent.attributes?.construction && !candidates.some(candidate => candidate.action === "build"));
+      assignedForagers.has(agent.id);
     const foodFrontier = foodSearch ? frontier.filter(cell => knownFoods.some(food => distance(cell, food) <= agent.stats.vision + 8)) : [];
     const roaming = militaryAgent(agent,context.tribe) ? state.simSeconds >= CONQUEST_PACING.neutralConflictAt :
       agent.attributes?.antenna > 0 && agent.attributes?.feet > 0 && state.simSeconds >= CONQUEST_PACING.guidanceAt;
@@ -548,8 +507,6 @@ export function createUtilityAI(context) {
       const radius = agent.stats.vision + (synergy(agent, ["feet", "antenna"]) &&
         Math.floor(agent.stepCount / 8) < Math.floor((agent.stepCount + cells.length - 1) / 8) ? 4 : 0);
       const seconds = travelTime(agent, cells, agent.carrying) + 5;
-      const life = scoutLife(agent, seconds - 5);
-      if (!life) continue;
       const explorationCapacity = scoutCapacity(agent, seconds - 5);
       const uncovered = uncoveredAt(target, radius, seconds);
       const markers = state.markers.filter(marker => (roaming || terrain.has(indexOf(marker))) && !state.explored.has(indexOf(marker)) &&
@@ -557,7 +514,7 @@ export function createUtilityAI(context) {
         !reservedAt(marker.x, marker.y, seconds, explorationCapacity)).reduce((sum, marker) => sum + (terrain.get(indexOf(marker)) || (roaming ? 1 : 0)), 0);
       if (uncovered > 0) add("explore", { ...target, key: "frontier:" + indexOf(target) }, cells,
         { informationGain: 60 * limit((uncovered + 20 * markers) / (10 * seconds)) *
-          frontierWeight(target) * life / tribeLifespan(agent.tribe || context.tribe) }, {});
+          frontierWeight(target) }, {});
     }
     for (const enemy of new Set([...defenseTargets, ...visible.toSorted((first, second) => distance(agent, first) - distance(agent, second)).slice(0, 6)])) {
       const defending = defenseTargets.includes(enemy);
@@ -611,7 +568,7 @@ export function createUtilityAI(context) {
     const scoutPlan = scoutPlans[0];
     const scout = scoutPlan ? preferredScout(agent, scoutPlan, supply) : null;
     if (scout) {
-      if (supply.urgency > 0 && !constructionForagers) assignedForagers = colonyForagers(state, knownFoods, deliveryCells(), new Set([scout.agent.id]));
+      if (supply.urgency > 0) assignedForagers = colonyForagers(state, knownFoods, deliveryCells(), new Set([scout.agent.id]));
       if (scout.agent !== agent) {
         const share = scoutCapacity(agent, travelTime(agent, scoutPlan.route, 0)) / Math.max(.01, scout.capacity);
         for (const candidate of candidates) if (candidate.action === "explore") {
@@ -622,27 +579,9 @@ export function createUtilityAI(context) {
     }
     let foragePlans = null;
     if (scout && scout.agent !== agent && !militaryAgent(agent,context.tribe) && safety.state === "stable" && !agent.retreat && !agent.combat) {
-      const remaining = Number.isFinite(agent.bornAt) && Number.isFinite(agent.lifespan) ? agent.bornAt+agent.lifespan-state.simSeconds : Infinity;
       const harvest = candidates.filter(candidate => (candidate.action === "collect" && candidate.foodGain > 0 || candidate.action === "return" && agent.carrying > 0) &&
-        candidate.damage < agent.health*.25 && candidate.deliverySeconds+5 < remaining);
+        candidate.damage < agent.health*.25);
       if (harvest.length) foragePlans = harvest;
-    }
-    if ((supply.interruption > 0 || supply.rateDeficit > 0 && supply.urgency > 0) && safety.state === "stable" && !agent.retreat && !agent.combat) {
-      const expansion = candidates.filter(candidate => candidate.action === "build" && candidate.target.buildingKey === "outpost" && candidate.damage < agent.health * .25);
-      if (expansion.length) foragePlans = expansion;
-    }
-    if (safety.state === "stable" && !agent.retreat && !agent.combat && HARVEST_ATTRIBUTE_KEYS.some(key => agent.attributes?.[key] > 0) &&
-        allies.some(ally => ally.health > 0 && !ally.attributes?.construction && !ally.birth)) {
-      const remaining = Number.isFinite(agent.bornAt) && Number.isFinite(agent.lifespan) ? agent.bornAt + agent.lifespan - state.simSeconds : Infinity;
-      const materials = candidates.filter(candidate => (candidate.constructionMaterial || candidate.action === "return" && carryingMaterial && constructionMaterials[carryingType] > 0) &&
-        candidate.score > 0 && candidate.damage < agent.health * .25 && candidate.deliverySeconds + 5 < remaining);
-      if (materials.length && !allocation?.ids.has(agent.id)) foragePlans = materials;
-    }
-    if (allocation?.ids.has(agent.id) && safety.state === "stable" && !agent.retreat && !agent.combat) {
-      const remaining = Number.isFinite(agent.lifespan) && Number.isFinite(agent.bornAt) ? agent.bornAt + agent.lifespan - state.simSeconds : Infinity;
-      const food = candidates.filter(candidate => ["collect","return"].includes(candidate.action) && candidate.foodGain > 0 &&
-        candidate.score > 0 && candidate.damage < agent.health * .25 && candidate.deliverySeconds + 5 < remaining);
-      if (food.length) foragePlans = food;
     }
     if (supply.urgency > 0 && safety.state === "stable" && !agent.retreat && !agent.combat) {
       const productive = candidates.filter(candidate => ["collect", "return"].includes(candidate.action) &&
@@ -655,24 +594,11 @@ export function createUtilityAI(context) {
         }
         if (supply.interruption > 0) {
           if (assignedForagers.has(agent.id) || agent.carrying > 0 && isFood(carryingType)) {
-            const remaining = Number.isFinite(agent.lifespan) && Number.isFinite(agent.bornAt) ? agent.bornAt + agent.lifespan - state.simSeconds : Infinity;
-            const feasible = productive.filter(candidate => candidate.deliverySeconds + 5 < remaining);
+            const feasible = productive;
             if (feasible.length && !foragePlans) foragePlans = feasible;
           }
         }
       }
-    }
-    if (allocation) {
-      const hauling = candidates.some(candidate => candidate.action === "supply" && candidate.transport.priority);
-      const weight = allocation.ids.has(agent.id) || hauling ? allocation.weights.get(agent.id) ?? 1 : 1;
-      for (const candidate of candidates) {
-        if (candidate.foodGain > 0 && !(agent.carrying > 0 && isFood(carryingType))) candidate.score *= weight;
-        if (candidate.action === "supply" && candidate.transport.priority) candidate.score += Math.max(0, 1 - needs.material) * candidate.materialGain;
-      }
-    }
-    if (safety.state === "stable" && !agent.retreat && agent.transportCargo) {
-      const transport = candidates.filter(candidate => candidate.action === "supply" && candidate.damage < agent.health * .25);
-      if (transport.length) foragePlans = transport;
     }
     if (militaryAgent(agent,context.tribe) && safety.state === "stable" && !agent.retreat && !agent.combat) {
       const battles = candidates.filter(candidate => candidate.action === "fight" && candidate.damage < agent.health*.5);
@@ -682,32 +608,14 @@ export function createUtilityAI(context) {
     let allowed = viable.length ? viable : candidates;
     const defense = !agent.retreat && safety.state !== "critical" ? viable.filter(candidate => candidate.defending) : [];
     if (defense.length) return defense.sort((first, second) => second.score - first.score);
-    if (agent.attributes?.construction > 0 && safety.state === "stable" && !agent.retreat && !agent.combat) {
-      const builds = viable.filter(candidate => candidate.action === "build" && !candidate.constructionIssue && candidate.damage < agent.health * .25);
-      if (builds.length) return builds.sort((first, second) => second.score - first.score);
-      const waiting = viable.filter(candidate => candidate.action === "build" && candidate.constructionIssue && candidate.damage < agent.health * .25);
-      if (waiting.length && !viable.some(candidate => ["return", "recover"].includes(candidate.action))) {
-        return waiting.sort((first, second) => second.score - first.score);
-      }
-    }
     if (safety.state === "stable" && availableWorker(agent) && !militaryAgent(agent, context.tribe) &&
         (agent.productionRole === "scout" || agent.attributes?.antenna > 0 && !agent.attributes?.strength &&
           !HARVEST_ATTRIBUTE_KEYS.some(key => agent.attributes?.[key] > 0))) {
       const exploration = viable.filter(candidate => candidate.action === "explore" && candidate.damage < agent.health * .25);
       if (exploration.length) {
         const delivery = agent.carrying > 0 ? viable.filter(candidate =>
-          candidate.action === (agent.transportCargo ? "supply" : "return") && candidate.damage < agent.health * .25) : [];
+          candidate.action === "return" && candidate.damage < agent.health * .25) : [];
         return (delivery.length ? delivery : exploration).sort((first, second) =>
-          second.score + second.retention - first.score - first.retention);
-      }
-    }
-    if (safety.state === "stable" && availableWorker(agent) && agent.attributes?.butchery > 0 &&
-        !militaryAgent(agent, context.tribe) && !agent.transportCargo) {
-      const nutrients = viable.filter(candidate => candidate.action === "collect" &&
-        resourceType(state.knownFood.get(candidate.target.key)) === "nutrients" && candidate.damage < agent.health * .25);
-      if (nutrients.length) {
-        const nearby = nutrients.filter(candidate => candidate.route.length <= 2);
-        return (nearby.length ? nearby : nutrients).sort((first, second) =>
           second.score + second.retention - first.score - first.retention);
       }
     }
@@ -737,7 +645,7 @@ export function createUtilityAI(context) {
         candidate.damage < agent.health * .25) : [];
     if (continuing.length) allowed = continuing;
     else if (foragePlans && safety.state === "stable" && !agent.retreat) allowed = allowed.filter(candidate => foragePlans.includes(candidate));
-    else if (scout?.agent === agent && safety.state === "stable" && !agent.retreat && !underAttack && !allocation?.ids.has(agent.id) &&
+    else if (scout?.agent === agent && safety.state === "stable" && !agent.retreat && !underAttack &&
       (supply.urgency <= 0 || !assignedForagers.has(agent.id)) && allies.some(availableWorker) &&
       !allowed.some(candidate => candidate.action === "supply" && candidate.score > scoutPlan.score + 3)) {
       const exploration = allowed.filter(candidate => scoutPlans.includes(candidate));

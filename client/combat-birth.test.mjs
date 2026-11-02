@@ -10,7 +10,7 @@ import { SPORE_BIRTH_ANIMATION, sporeBirthPlacement, SPRING_BIRTH_ANIMATION, spr
 const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
 const tribes = ["bean", "spore", "pebble", "spring"];
 const combatKeys = ["blade", "piercing", "carapace", "guard", "regeneration"];
-const ordinaryKeys = ["strength", "feet", "antenna", "lifespan", "butchery"];
+const ordinaryKeys = ["strength", "feet", "antenna"];
 
 function declaration(name) {
   const match = source.match(new RegExp("^    function " + name + "\\([^]*?^    }", "m"));
@@ -89,7 +89,7 @@ test("전사 새싹콩은 공통 탄생 동작에 완성 외형을 한 번만 �
     rotate(...values) { transforms.push(["rotate", ...values]); }, scale(...values) { transforms.push(["scale", ...values]); },
     drawImage(...values) { draws.push(values); } };
   for (let mask = 1; mask < 16; mask++) {
-    const agent = { tribe: "bean", attributes: { ...attributes(combatKeys, mask), feet: 1, antenna: 1, butchery: 1 } };
+    const agent = { tribe: "bean", attributes: { ...attributes(combatKeys, mask), feet: 1, antenna: 1 } };
     for (const elapsed of [2.59, 2.8, 3.21, 3.849]) {
       const birth = { ...agentBirthMotion(elapsed, 2, 3), x: 2, y: 3, fromX: 0, fromY: 0, targetX: 2, targetY: 3 };
       draws.length = 0; transforms.length = 0;

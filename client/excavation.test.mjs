@@ -10,15 +10,15 @@ test("굴착 외형은 기본 외형과 캐시를 공유하지 않고 종족 속
   const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
   const declaration = source.match(/^    function agentAppearanceKey\([^]*?^    }/m)[0];
   const key = runInNewContext("(" + declaration + ")");
-  for (const attributes of [{}, { strength: 1, feet: 1 }, { lifespan: 1, butchery: 1, antenna: 1 }])
+  for (const attributes of [{}, { strength: 1, feet: 1 }, { antenna: 1 }])
     assert.notEqual(key(attributes), key({ ...attributes, excavation: 1 }));
   assert.equal(hasTribeAttributes({ excavation: 1 }), true);
 });
 
-test("굴착과 흡수를 함께 장착하면 굴착 부위가 없는 분해 전용 그림을 선택하지 않는다", () => {
+test("굴착을 장착하면 굴착 부위가 없는 전용 그림을 선택하지 않는다", () => {
   for (const antenna of [0, 1]) {
     const agent = { tribe: "bean", health: 10, mode: "idle", bornAt: 0,
-      attributes: { excavation: 1, butchery: 1, antenna } };
+      attributes: { excavation: 1, antenna } };
     const pose = unitAnimationPose(agent, 1.25);
     assert.equal(pose.decomposition, undefined);
     assert.equal(pose.animation, UNIT_ANIMATIONS.bean.idle);

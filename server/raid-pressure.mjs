@@ -1,6 +1,5 @@
 import { nestUpgradeCost } from "./nests.mjs";
 import { birthCost } from "./attributes.mjs";
-import { AGENT_LIFESPAN } from "./lifespan.mjs";
 
 export const COLONY_RAID_PRESSURE = Object.freeze({ openingSeconds:120, nearbySeconds:60, exposedBurrows:2,
   fastInterval:60, slowInterval:120, arrivalGrace:35, slowArrivalGrace:105, fundingGrace:20, maximumArrivalAt:300 });
@@ -8,7 +7,7 @@ export const COLONY_RAID_PRESSURE = Object.freeze({ openingSeconds:120, nearbySe
 export function colonyRaidPressure(delivered, seconds, approaches, firstAt, tribe) {
   const investment = nestUpgradeCost(1, tribe) + birthCost({slots:["antenna", "feet"]}, tribe) + birthCost({slots:["strength"]}, tribe);
   const rate = delivered * 60 / Math.max(1, seconds);
-  const low = investment * 60 / AGENT_LIFESPAN, high = investment * 60 / COLONY_RAID_PRESSURE.openingSeconds;
+  const low = investment * 60 / (COLONY_RAID_PRESSURE.openingSeconds * 1.5), high = investment * 60 / COLONY_RAID_PRESSURE.openingSeconds;
   const production = Math.max(0, Math.min(1, (rate - low) / (high - low)));
   const nearby = approaches.filter(seconds => seconds <= COLONY_RAID_PRESSURE.nearbySeconds).length;
   const exposure = Math.min(1, nearby / COLONY_RAID_PRESSURE.exposedBurrows);

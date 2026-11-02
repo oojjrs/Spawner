@@ -1,9 +1,9 @@
 const root = tribe => "DesignAssets/Tribes/" + tribe + "/Animations/Attributes/v2/Parts/";
-const coreKeys = ["antenna", "strength", "butchery", "lifespan"];
-const coreNames = Array.from({ length: 16 }, (_, mask) => "body-" + (coreKeys.filter((key, index) => mask & 1 << index).join("-") || "base"));
+const coreKeys = ["antenna", "strength"];
+const coreNames = Array.from({ length: 4 }, (_, mask) => "body-" + (coreKeys.filter((key, index) => mask & 1 << index).join("-") || "base"));
 
 const names = {
-  spore: ["cap-antenna", "cap-antenna-lifespan", "body-strength", "body-butchery", "body-strength-butchery", "feet-left", "feet-right"],
+  spore: ["cap-antenna", "body-strength", "feet-left", "feet-right"],
   pebble: [...coreNames, "feet-left", "feet-right"],
   spring: [...coreNames, "feet-left", "feet-right"]
 };
@@ -12,8 +12,8 @@ export const TRIBE_MORPHOLOGY_ASSETS = Object.freeze(Object.entries(names).flatM
 
 const models = {
   spore: {
-    upper: "cap", upperWidths: { antenna: 94, lifespan: 82, "antenna-lifespan": 94 },
-    bodies: { strength: [44, 28], butchery: [42, 29], "strength-butchery": [49, 30] },
+    upper: "cap", upperWidths: { antenna: 94 },
+    bodies: { strength: [44, 28] },
     foot: [19, 8], faceY: .56
   },
   pebble: {
@@ -33,10 +33,9 @@ export function morphologyPartSize(tribe, name, width, height) {
     if (name.startsWith("cap-")) { const w = model.upperWidths[name.slice(4)]; return [w, w * height / width]; }
     return model.bodies[name.slice(5)];
   }
-  const sense = name.includes("antenna"), strength = name.includes("strength"), butchery = name.includes("butchery"), life = name.includes("lifespan");
-  const w = tribe === "pebble" ? 82 + sense * 6 + strength * 18 + butchery * 4 + life * 4 : 61 + sense * 4 + strength * 10 + butchery * 4 + life * 26;
-  const h = life ? w * height / width :
-    Math.max(tribe === "pebble" ? 52 : 70, Math.min(tribe === "pebble" ? 78 : 104, w * height / width));
+  const sense = name.includes("antenna"), strength = name.includes("strength");
+  const w = tribe === "pebble" ? 82 + sense * 6 + strength * 18 : 61 + sense * 4 + strength * 10;
+  const h = Math.max(tribe === "pebble" ? 52 : 70, Math.min(tribe === "pebble" ? 78 : 104, w * height / width));
   return [w, h];
 }
 
@@ -215,8 +214,8 @@ export function createTribeMorphology(createSurface, loadImage, excavation) {
     const trackAction = rig.animations[sourceAction] ? sourceAction : sourceAction === "carry" ? "walk" : "idle";
     const sequence = rig.animations[trackAction], track = sequence.tracks[Math.min(index, sequence.tracks.length - 1)];
     if (!track) return null;
-    const partKey = activeKey(attributes, model.core ? coreKeys : ["strength", "butchery"]);
-    const upperKey = model.core ? "" : activeKey(attributes, ["antenna", "lifespan"]);
+    const partKey = activeKey(attributes, model.core ? coreKeys : ["strength"]);
+    const upperKey = model.core ? "" : activeKey(attributes, ["antenna"]);
     const part = rig.morphs.parts["body-" + partKey], upper = rig.morphs.parts["cap-" + upperKey];
     const feet = attributes.feet > 0, clock = motion?.sampleTime ?? time, progress = motion?.motionPhase ?? index / sequence.frameCount;
     const stride = motion?.motionBlend ?? 1, key = [rig.tribe, trackAction, action, index, Math.floor(time * 20), Math.floor(clock * 20),
@@ -253,7 +252,7 @@ export function createTribeMorphology(createSurface, loadImage, excavation) {
         include(part, box, bodyPoint);
         eyeTransform = point => {
           const local = rotate([point[0] - center[0], point[1] - center[1]], -track.angle);
-          return bodyPoint([local[0], local[1] - reference.body[3] / 2 * factor - (attributes.lifespan > 0 ? bodyHeight * .12 : 0)]);
+          return bodyPoint([local[0], local[1] - reference.body[3] / 2 * factor]);
         };
       } else {
         const base = action === "birth" ? pose : neutral;
@@ -316,7 +315,7 @@ export function createTribeMorphology(createSurface, loadImage, excavation) {
     for (const draw of footItems) draw(); for (const draw of items) draw();
     if (upper) {
       const axis = track.capAxis, width = upper.size[0] * axis[2] / reference.capAxis[2];
-      const h = upper.size[1] * axis[3] / reference.capAxis[3], height = Math.max(h, attributes.lifespan && !death ? width * upper.size[1] / upper.size[0] * .78 : 0);
+      const h = upper.size[1] * axis[3] / reference.capAxis[3], height = h;
       const anchor = [axis[0] - Math.sin(axis[4]) * axis[3] / 2, axis[1] + Math.cos(axis[4]) * axis[3] / 2], box = [-width / 2, -height, width, height];
       const point = value => { const p = rotate(value, axis[4]); return [anchor[0] + p[0], anchor[1] + p[1]]; };
       include(upper, box, point);

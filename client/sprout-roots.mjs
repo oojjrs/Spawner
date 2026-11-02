@@ -92,7 +92,7 @@ export function createSproutRoots(createSurface) {
   }
   function pose(agent, position, time) {
     const attributes = agent.appearanceAttributes || agent.attributes || {}, level = attributes.feet || 1;
-    const scale = sproutRootGeometry(level).height / 84, unitScale = .7 * (attributes.construction ? 512 / 350 : 1);
+    const scale = sproutRootGeometry(level).height / 84, unitScale = .7;
     const planPerCell = 512 / unitScale;
     const moving = agent.moveDuration > 0 && time >= agent.moveStartedAt && time < agent.moveStartedAt + agent.moveDuration;
     const direction = { x: Math.sign(agent.x - agent.renderFromX), y: Math.sign(agent.y - agent.renderFromY) };

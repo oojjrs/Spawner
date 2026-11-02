@@ -3,12 +3,11 @@ import { worldSize } from "./world-size.mjs";
 import { beginCreatureSpawn, creatureSpawning } from "./creature-spawn.mjs";
 import { ENCOUNTER_TYPES } from "./encounter-types.mjs";
 import { CREATURE_MOVEMENT, applyCreatureMovement, creatureMoveDuration, finishCreatureMove } from "./creature-movement.mjs";
-import { CORPSE_LIFETIME, placeCorpse } from "./lifespan.mjs";
+import { CORPSE_LIFETIME, placeCorpse } from "./corpses.mjs";
 import { createCombat, canPursueCombat, combatDisposition } from "./combat.mjs";
 import { unitCombatStats, migrateCombatStats } from "./combat-stats.mjs";
-import { buildingAt } from "./buildings.mjs";
 import { burrowDistance, burrowApproaches } from "./burrows.mjs";
-import { creatureBuildingTargets, compareCreatureCombatTargets, updateCreatureBuildingAttack } from "./creature-combat.mjs";
+import { creatureNestTargets, compareCreatureCombatTargets, updateCreatureNestAttack } from "./creature-combat.mjs";
 import { encounterTerritory, withinEncounterTerritory } from "./encounter-territory.mjs";
 
 export function createEncounters(environment, saved, residents) {
@@ -135,7 +134,7 @@ export function createEncounters(environment, saved, residents) {
     const index = y * size + x;
     return environment.world.terrain[index] >= 2 && environment.world.terrain[index] <= 10 && !environment.world.hazards[index] &&
       !environment.colonies.some(colony => pursuing ? environment.games.get(colony.ownerId)?.nest?.health !== 0 &&
-        colony.occupiedCells.has((x - colony.x) + "," + (y - colony.y)) : Math.hypot(x - colony.x - 2, y - colony.y - 2) < 10) && !environment.creatureSystem?.burrowAt(x, y) && !buildingAt(environment, x, y);
+        colony.occupiedCells.has((x - colony.x) + "," + (y - colony.y)) : Math.hypot(x - colony.x - 2, y - colony.y - 2) < 10) && !environment.creatureSystem?.burrowAt(x, y);
   }
 
   function occupied(x, y, excluded) {
@@ -327,7 +326,7 @@ export function createEncounters(environment, saved, residents) {
 
   function tick() {
     populate();
-    const now = environment.simSeconds, nearby = players(), buildings = creatureBuildingTargets(environment);
+    const now = environment.simSeconds, nearby = players(), buildings = creatureNestTargets(environment);
     for (const agent of [...state.agents]) {
       if (agent.health <= 0 || creatureSpawning(agent, now)) continue;
       if (!agent.combat && !agent.attack && !agent.raid && !agent.returningHome && withinEncounterTerritory(agent, agent, false) && agent.support === null && now < agent.nextActionAt &&
@@ -353,7 +352,7 @@ export function createEncounters(environment, saved, residents) {
           .filter(entry => entry.agent.health > 0 && entry.distance <= radius) : [];
         target = null;
         for (const candidate of [...targets, ...structures].sort(compareCreatureCombatTargets)) {
-          if (["nest", "building"].includes(candidate.agent.kind)) {
+          if (candidate.agent.kind === "nest") {
             const approaches = burrowApproaches(candidate.agent).filter(cell => valid(cell.x, cell.y, true) &&
               membership.has(cell.y * size + cell.x) && withinEncounterTerritory(agent, cell, true))
               .sort((left, right) => Math.abs(agent.x - left.x) + Math.abs(agent.y - left.y) - Math.abs(agent.x - right.x) - Math.abs(agent.y - right.y));
@@ -372,11 +371,11 @@ export function createEncounters(environment, saved, residents) {
       if (!target) agent.warningUntil = null;
       if (territory && (agent.returningHome || !withinEncounterTerritory(agent, agent, true) ||
           !target && !withinEncounterTerritory(agent, agent, false))) {
-        updateCreatureBuildingAttack(agent, null, now);
+        updateCreatureNestAttack(agent, null, now);
         if (returnHome(agent)) continue;
       }
       if (agent.species === "white-paw" && agent.health < agent.stats.health / 2) {
-        updateCreatureBuildingAttack(agent, null, now);
+        updateCreatureNestAttack(agent, null, now);
         if (!returnHome(agent)) agent.nextActionAt = now + 2;
         continue;
       }
@@ -384,7 +383,7 @@ export function createEncounters(environment, saved, residents) {
       agent.hidden = agent.species === "soil-mole" ? !targets.some(entry => ["gather", "harvest", "prepare"].includes(entry.agent.mode)) :
         agent.species === "bubble-toad" ? !target : agent.species === "dew-rabbit" ? !!target && target.distance <= 2 : false;
       if (agent.hidden) {
-        updateCreatureBuildingAttack(agent, null, now);
+        updateCreatureNestAttack(agent, null, now);
         agent.nextActionAt = Math.max(agent.nextActionAt, now + 1);
         continue;
       }
@@ -394,12 +393,12 @@ export function createEncounters(environment, saved, residents) {
       }
       agent.pursuitTargetId = type.hostile ? target?.agent.id || null : null;
       if (type.hostile && target && agent.species === "soil-boar" && agent.warningUntil === null) {
-        updateCreatureBuildingAttack(agent, null, now);
+        updateCreatureNestAttack(agent, null, now);
         agent.warningUntil = now + 1;
         continue;
       }
       if (now < agent.warningUntil) continue;
-      if (updateCreatureBuildingAttack(agent, target, now)) continue;
+      if (updateCreatureNestAttack(agent, target, now)) continue;
       if (type.hostile && target && pursuit !== null) { move(agent, pursuit); continue; }
       if (territory && !withinEncounterTerritory(agent, agent, false) && returnHome(agent)) continue;
       if (agent.species === "talon-owl" && !target && returnHome(agent)) continue;
@@ -452,7 +451,7 @@ export function createEncounters(environment, saved, residents) {
     if (!type.unique && region.missingSince === null) { region.missingSince = environment.simSeconds; region.nextSpawnAt = environment.simSeconds + type.respawnSeconds; }
     state.agents = state.agents.filter(entry => entry !== agent);
     environment.unitIndex?.remove(agent);
-    placeCorpse(environment.food, { x: agent.x, y: agent.y, agentId: agent.id, kind: "corpse", species: agent.species, amount: 4,
+    placeCorpse(environment.food, { x: agent.x, y: agent.y, agentId: agent.id, kind: "corpse", species: agent.species,
       attributes: {}, facing: agent.facing,
       diedAt: environment.simSeconds, decaysAt: environment.simSeconds + CORPSE_LIFETIME, renderX: agent.x, renderY: agent.y });
   }

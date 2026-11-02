@@ -16,17 +16,16 @@ function fixture(tribe) {
 
 test("Lv.5는 모든 부족의 설계에 이동 8%·채집 20%·전투력 2를 더하고 다른 능력과 체력을 유지한다", () => {
   for (const tribe of ["bean", "spore", "pebble", "spring"]) {
-    const slots = ["feet", "strength", "antenna", "lifespan", "construction"];
+    const slots = ["feet", "strength", "antenna"];
     const base = unitStats(attributeCounts(slots), tribe);
-    const agent = { tribe, slots, stats: { ...base }, health: 43, lifespan: base.lifespan, growthActivity: 100 };
+    const agent = { tribe, slots, stats: { ...base }, health: 43, growthActivity: 100 };
     applyAgentGrowth(agent, 0);
     assert.equal(agent.level, 5);
     assert.ok(Math.abs(unitMovementSpeed(agent.stats) / unitMovementSpeed(base) - 1.08) < 1e-12);
     assert.equal(agent.stats.harvestSpeedMultiplier, 1.2);
     assert.equal(agent.stats.combatStrength, unitCombatStats(tribe).combatStrength + 2);
-    for (const key of ["capacity", "vision", "health", "lifespan", "resistance"]) assert.equal(agent.stats[key], base[key]);
+    for (const key of ["capacity", "vision", "health", "resistance"]) assert.equal(agent.stats[key], base[key]);
     assert.equal(agent.health, 43);
-    assert.equal(agent.lifespan, base.lifespan);
     const once = { ...agent.stats };
     assert.equal(applyAgentGrowth(agent, 100), false);
     assert.deepEqual(agent.stats, once);

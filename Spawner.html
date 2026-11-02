@@ -8,10 +8,6 @@
 </head>
 <body data-screen="welcome">
   <div class="app" hidden inert>
-    <aside class="beginner-help" id="beginner-help" role="status" aria-live="polite" hidden>
-      <span id="beginner-help-message"></span>
-      <button id="beginner-construction" type="button">건설 일꾼 생산</button>
-    </aside>
     <main class="stage">
       <canvas id="world" width="1200" height="760" tabindex="0" aria-label="Spawner world canvas"></canvas>
       <button class="sound-toggle room-exit" id="room-exit" type="button" aria-labelledby="ending-rooms">
@@ -136,13 +132,11 @@
       </div>
     </section>
     <section id="agent-details" aria-label="생명체 정보" hidden>
-      <span class="agent-life" id="agent-life" tabindex="0" role="img" data-help=""><img class="agent-life-dead" alt=""><img class="agent-life-alive" alt=""></span>
       <div class="unit-attributes" id="agent-attributes" aria-label="발현 속성"></div>
     </section>
-    <section class="corpse-details" id="corpse-details" aria-label="남겨진 자원 회수" hidden>
+    <section class="corpse-details" id="corpse-details" hidden>
       <div class="unit-attributes" id="corpse-attributes" aria-label="사망 시 속성"></div>
       <div class="corpse-metrics">
-        <span class="corpse-value" tabindex="0" data-help="사체에서 회수할 수 있는 양분입니다."><span class="corpse-point-icon"><canvas id="corpse-resource-image" aria-hidden="true"></canvas></span><strong id="corpse-value"></strong></span>
         <span class="corpse-decay" id="corpse-decay" tabindex="0" data-help=""><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 2h6M12 2v4m6 2 2-2"/><circle cx="12" cy="14" r="8"/><path d="M12 10v4l3 2"/></svg><span id="corpse-decay-value"></span></span>
       </div>
     </section>
@@ -156,7 +150,6 @@
       <button class="secondary-action unit-icon" id="agent-design" type="button" aria-label="설계도 보기" data-help="설계도 보기" aria-haspopup="dialog" aria-controls="evolution-panel" hidden>
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 2H5a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9l-7-7Zm0 0v7h7M7 18l5-8 5 8H7Zm5-3v3"/></svg>
       </button>
-      <button class="primary-action unit-icon" id="corpse-design" type="button" aria-label="회수 유닛 설계" data-help="" aria-haspopup="dialog" aria-controls="evolution-panel" hidden></button>
       <button class="secondary-action unit-icon" id="unit-codex" type="button" aria-label="도감 열기" data-help="도감 열기" aria-haspopup="dialog" aria-controls="codex">
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5C9 3 5 3 2 4v15c3-1 7-1 10 1 3-2 7-2 10-1V4c-3-1-7-1-10 1Zm0 0v15"/></svg>
       </button>

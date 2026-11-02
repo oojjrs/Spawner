@@ -3,8 +3,6 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { createContext, runInContext } from "node:vm";
-import { buildingDefinition, buildingCost } from "../server/buildings.mjs";
-import { createResourceStorage } from "../server/resource-storage.mjs";
 import { ENCOUNTER_TYPES } from "../server/encounter-types.mjs";
 import { ENCOUNTER_PLANS } from "../server/map.mjs";
 import { BURROW_TYPES } from "../server/burrows.mjs";
@@ -16,26 +14,6 @@ import { imageDimensions } from "./image-audit.mjs";
 
 const root = new URL("../", import.meta.url);
 const design = readFileSync(new URL("Design.html", root), "utf8");
-
-test("기획서의 건물 크기·보관량·기본 재료를 적용한다", () => {
-  for (const [key, size] of [["storage", 2], ["evolution-lab", 2], ["outpost", 3], ["watchpost", 1]]) {
-    const definition = buildingDefinition(key);
-    assert.deepEqual([definition.width, definition.height], [size, size]);
-    const row = design.match(new RegExp('<th scope="row">' + definition.name + '</th>([^]*?)</tr>'))[1];
-    assert.ok(row.includes(size + "×" + size + "칸"));
-  }
-  assert.ok(design.includes("자원 보관량 +300"));
-  assert.equal(buildingDefinition("storage").storageCapacity, 300);
-  assert.deepEqual(buildingCost("outpost", "bean").materials, { clay: 24, tree: 12, pebbles: 12 });
-  assert.deepEqual(buildingCost("outpost", "spring").materials, { dew: 24, tree: 12, pebbles: 12 });
-  const state = { nestHealth: 100, nestLevel: 1, resourceInventory: {},
-    buildings: [{ id: "store", key: "storage", x: 50, y: 50, health: 120 }] };
-  const storage = createResourceStorage(state, { id: 1, x: 40, y: 40 });
-  const store = storage.refresh().find(entry => entry.id === "store");
-  assert.deepEqual([store.width, store.height, store.capacity], [2, 2, 300]);
-  assert.equal(storage.deposit(store, "tree", 350), 300);
-  assert.equal(state.resourceInventory.tree, 300);
-});
 
 test("일반 생물과 굴의 보충 주기가 기획서의 분·초 수치와 일치한다", () => {
   for (const type of ENCOUNTER_TYPES.filter(type => !type.unique)) {

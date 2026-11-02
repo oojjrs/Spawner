@@ -3,8 +3,6 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
 import { sproutRootGeometry } from "./sprout-roots.mjs";
-import { sproutLifespanBodyLayer } from "./sprout-lifespan.mjs";
-import { createAgentLifespanArt } from "./agent-lifespan.mjs";
 import { ATTRIBUTES } from "../server/attributes.mjs";
 import { UNIT_ANIMATIONS, unitAnimationPose } from "./unit-animation.mjs";
 import { SPORE_BIRTH_ANIMATION } from "./birth.mjs";
@@ -25,7 +23,7 @@ function movement() {
     constructor() { this.complete = true; this.naturalWidth = 2048; }
     async decode() {}
   }
-  const context = createContext({ Image, performance, agentLifespanArt: createAgentLifespanArt(null), Spawner: { UNIT_ANIMATIONS, combatAttributeKeys, hasCombatEvolution, unitAnimationPose, sproutRootGeometry, sproutLifespanBodyLayer }, assetSource: path => path,
+  const context = createContext({ Image, performance, Spawner: { UNIT_ANIMATIONS, combatAttributeKeys, hasCombatEvolution, unitAnimationPose, sproutRootGeometry }, assetSource: path => path,
     unitAnimationSheets: new Map(), combatAttributeArt: { ready: () => true, frame: () => ({ width: 512, height: 512 }) },
     drawAgentFeet() {}, drawAgentTail() {}, drawAgentHead() {},
     state: { simSeconds: .5 }, idleMotion: { matches: false }, AGENT_JUMP_PREPARATION: .2, AGENT_HEIGHT: .7,
@@ -94,7 +92,7 @@ function gameAudio() {
   const context = createContext({ state, connection: { active: true, online: true }, audioTime: 0,
     audio: { available: () => true, play: name => played.push(name), setHarvest: volumes => harvests.push(new Map(volumes)) },
     SpawnerCombatAudio: { update: () => [] }, combatAudio: {}, nestGrowthPlayback: createNestGrowthPlayback(),
-    Spawner: { SPORE_BIRTH_ANIMATION, nestGrowthSounds, resourceTypeForCell: food => food.resourceType || (food.kind === "corpse" ? "nutrients" : "honey-mushrooms") },
+    Spawner: { SPORE_BIRTH_ANIMATION, nestGrowthSounds, resourceTypeForCell: food => food.resourceType || "honey-mushrooms" },
     worldMap: {}, foodCellMap: new Map(), foodCellAt: () => null,
     displayedAgent: unit => unit, interpolatedAgentPosition: unit => unit, audioVolume: () => 1,
     agentBirthPose: () => null, agentAudio: new Map(), deliveryAudio: new Map(), foodDeliveries: new Map(),
@@ -126,16 +124,16 @@ test("포자버섯 등장에는 포자버섯 탄생음을 한 번 재생한다",
   assert.deepEqual(sound.played, ["spore-birth"]);
 });
 
-test("목재와 사체도 실제 채집 대상을 따라 재생하며 중첩된 다른 자원을 고르지 않는다", () => {
+test("목재와 이슬도 실제 채집 대상을 따라 재생하며 중첩된 다른 자원을 고르지 않는다", () => {
   const sound = gameAudio();
   const agent = { id: "worker", tribe: "pebble", health: 1, attributes: {}, x: 1, y: 1,
     mode: "harvest", rememberedFoodKey: "target", carrying: 0 };
   sound.state.agents = [agent];
   sound.context.foodCellAt = () => ({ x: 1, y: 1, amount: 4, resourceType: "pebbles" });
-  for (const cell of [{ resourceType: "tree" }, { kind: "corpse" }]) {
+  for (const cell of [{ resourceType: "tree" }, { resourceType: "dew" }]) {
     sound.context.foodCellMap.set("target", { x: 1, y: 1, amount: 4, ...cell });
     sound.context.updateAudio();
-    assert.deepEqual([...sound.harvests.at(-1)], [[cell.resourceType || "nutrients", 1]]);
+    assert.deepEqual([...sound.harvests.at(-1)], [[cell.resourceType, 1]]);
   }
   sound.context.foodCellMap.get("target").amount = 0;
   sound.context.updateAudio();
@@ -196,7 +194,7 @@ test("재생 단독 합성은 기본 몸체 점프를 한 번만 적용하고 �
     drawBody({ ...render.context.ctx, translate: (...args) => painted.push(args) });
     return { width: 512, height: 512 };
   };
-  for (const attributes of [{ regeneration: 1 }, { regeneration: 1, construction: 1 }]) {
+  for (const attributes of [{ regeneration: 1 }]) {
     const agent = { tribe: "bean", attributes, health: 10, x: 1, y: 0, renderFromX: 0, renderFromY: 0,
       moveStartedAt: 0, moveDuration: 1, stepCount: 1, carrying: 0 };
     render.context.state.simSeconds = .6;
@@ -208,32 +206,5 @@ test("재생 단독 합성은 기본 몸체 점프를 한 번만 적용하고 �
     assert.ok(Math.abs(render.translations[0][1] - 50 - 70 * .44 + jump * 100) < 1e-9);
     assert.equal(render.context.agentJumpOffset({ ...agent, appearanceAttributes: { feet: 1 } }, position), 0);
     assert.equal(render.context.agentJumpOffset({ ...agent, attributes: { feet: 1 }, appearanceAttributes: attributes }, position), jump);
-  }
-});
-
-
-test("후속 생산된 변태 새싹콩도 실제 변태 전용 그리기를 거쳐 기본 점프와 신축을 한 번 적용한다", () => {
-  const render = movement();
-  const construction = { sprite: { width: 512, height: 512 }, track: { body: [7, 69, 129, 60] } };
-  render.context.constructionUnitFrame = agent => agent.attributes.construction ? construction : null;
-  render.context.Spawner.constructionApproachOffset = () => ({ x: 0, y: 0 });
-  render.context.Spawner.sproutRootGeometry = () => ({ floor: 481, height: 70 });
-  runInContext(declaration("drawAgentAnimation"), render.context);
-  for (const attributes of attributeCombinations().filter(attributes => attributes.construction && !hasCombatEvolution(attributes) && !attributes.regeneration)) {
-    for (const time of [.1, .3, .6, .9, 1]) {
-      const agent = { id: "later-builder", bornAt: 80, tribe: "bean", attributes, health: 10, birth: null,
-        x: 1, y: 0, renderFromX: 0, renderFromY: 0, moveStartedAt: 100, moveDuration: 1, stepCount: 1, carrying: 0 };
-      render.context.state.simSeconds = 100 + time;
-      const position = render.context.agentBasePosition(agent);
-      render.translations.length = 0; render.scales.length = 0; render.draws.length = 0;
-      render.context.drawAgentAppearance(render.context.ctx, 0, agent, 100, { x: 0, y: 0 }, position, null, null);
-      assert.equal(render.draws.at(-1)[0], construction.sprite, JSON.stringify(attributes));
-      if (!attributes.feet) {
-        const pose = render.context.agentBodyPose(agent, 0, { scaleX: 1, scaleY: 1 });
-        assert.ok(Math.abs(render.translations[0][1] - (80.8 - Math.sin(position.progress * Math.PI) * 12.6)) < 1e-9);
-        assert.deepEqual(render.scales[0], [pose.scaleX, pose.scaleY]);
-        assert.equal(render.scales.filter(pair => pair[0] === pose.scaleX && pair[1] === pose.scaleY).length, 1);
-      } else assert.notDeepEqual(render.scales[0], [0.916, 1.24]);
-    }
   }
 });

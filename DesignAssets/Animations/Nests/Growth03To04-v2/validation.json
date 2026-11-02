@@ -1,1 +1,70 @@
-{"sprout": {"sheet": [4096, 6656], "timelineFrames": 101, "startAppearanceMaxError": 0.0, "endMatchesSheet": true, "encoded": {"growth": {"frames": 80, "durationMs": 5560, "loop": 1}, "preview": {"frames": 80, "durationMs": 5560, "loop": 0}}, "rigidAttachments": 28, "weightedParts": 12}, "spore": {"sheet": [4096, 6656], "timelineFrames": 101, "startAppearanceMaxError": 0.0, "endMatchesSheet": true, "encoded": {"growth": {"frames": 75, "durationMs": 5560, "loop": 1}, "preview": {"frames": 73, "durationMs": 5560, "loop": 0}}, "rigidAttachments": 23, "weightedParts": 8}, "pebble": {"sheet": [4096, 6656], "timelineFrames": 101, "startAppearanceMaxError": 0.0, "endMatchesSheet": true, "encoded": {"growth": {"frames": 80, "durationMs": 5560, "loop": 1}, "preview": {"frames": 80, "durationMs": 5560, "loop": 0}}, "rigidAttachments": 11, "weightedParts": 0}, "spring": {"sheet": [4096, 6656], "timelineFrames": 101, "startAppearanceMaxError": 0.0, "endMatchesSheet": true, "encoded": {"growth": {"frames": 81, "durationMs": 5560, "loop": 1}, "preview": {"frames": 81, "durationMs": 5560, "loop": 0}}, "rigidAttachments": 18, "weightedParts": 0}, "production": {"Pillow": "12.3.0", "numpy": "2.3.5", "opencv": "5.0.0", "playback": {"surface": "isolated headless Edge", "previewPixels": [384, 384], "durationMs": 5560}, "promptSources": ["pebble/key-source.png", "pebble/part-source.png", "spore/key-source.png", "spore/mechanical-source.png", "spore/organic-source.png", "spore/part-source.png", "spring/control-source.png", "spring/key-source.png", "spring/part-source.png", "sprout/hidden-source.png", "sprout/key-source.png", "sprout/link-source.png", "sprout/petal-source.png"]}}
+{
+  "sprout": {
+    "sheet": [
+      4096,
+      6656
+    ],
+    "timelineFrames": 101,
+    "startAppearanceMaxError": 0.0,
+    "endMatchesSheet": true,
+    "encoded": {
+      "growth": {
+        "frames": 80,
+        "durationMs": 5560,
+        "loop": 1
+      },
+      "preview": {
+        "frames": 80,
+        "durationMs": 5560,
+        "loop": 0
+      }
+    },
+    "rigidAttachments": 28,
+    "weightedParts": 12
+  },
+  "spring": {
+    "sheet": [
+      4096,
+      6656
+    ],
+    "timelineFrames": 101,
+    "startAppearanceMaxError": 0.0,
+    "endMatchesSheet": true,
+    "encoded": {
+      "growth": {
+        "frames": 81,
+        "durationMs": 5560,
+        "loop": 1
+      },
+      "preview": {
+        "frames": 81,
+        "durationMs": 5560,
+        "loop": 0
+      }
+    },
+    "rigidAttachments": 18,
+    "weightedParts": 0
+  },
+  "production": {
+    "Pillow": "12.3.0",
+    "numpy": "2.3.5",
+    "opencv": "5.0.0",
+    "playback": {
+      "surface": "isolated headless Edge",
+      "previewPixels": [
+        384,
+        384
+      ],
+      "durationMs": 5560
+    },
+    "promptSources": [
+      "spring/control-source.png",
+      "spring/key-source.png",
+      "spring/part-source.png",
+      "sprout/hidden-source.png",
+      "sprout/key-source.png",
+      "sprout/link-source.png",
+      "sprout/petal-source.png"
+    ]
+  }
+}

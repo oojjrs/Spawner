@@ -63,17 +63,9 @@ export const IMAGE_SCALES = Object.freeze({
     0.966796875,
     0.966796875
   ],
-  "DesignAssets/Animations/Resources/HarvestV1/grass-fiber/sheet.png": [
-    0.890625,
-    0.890625
-  ],
   "DesignAssets/Animations/Resources/HarvestV1/honey-mushrooms/sheet.png": [
     0.890625,
     0.890625
-  ],
-  "DesignAssets/Animations/Resources/SandBurst/harvest-sheet.png": [
-    0.77734375,
-    0.77734375
   ],
   "DesignAssets/Animations/RollingAcornIdle/v1/idle.webp": [
     0.8203125,
@@ -108,10 +100,6 @@ export const IMAGE_SCALES = Object.freeze({
     0.140625
   ],
   "DesignAssets/Attributes/SilhouettesV2/27-chevron.png": [
-    0.140625,
-    0.140625
-  ],
-  "DesignAssets/Attributes/SilhouettesV2/40-spiral.png": [
     0.140625,
     0.140625
   ],
@@ -195,10 +183,6 @@ export const IMAGE_SCALES = Object.freeze({
     0.18733783082511676,
     0.18781302170283806
   ],
-  "DesignAssets/Effects/Lifespan/spirit-flame.png": [
-    0.2890625,
-    0.2849462365591398
-  ],
   "DesignAssets/Foods/food-berry-bush.png": [
     0.1722488038277512,
     0.1722488038277512
@@ -215,14 +199,6 @@ export const IMAGE_SCALES = Object.freeze({
     0.029505582137161084,
     0.029505582137161084
   ],
-  "DesignAssets/ResourceConcepts/v1/resource-grass-fiber.png": [
-    0.03110047846889952,
-    0.03110047846889952
-  ],
-  "DesignAssets/ResourceConcepts/v1/resource-quartz.png": [
-    0.14752791068580542,
-    0.14752791068580542
-  ],
   "DesignAssets/Resources/clay-carry.png": [
     0.04704944178628389,
     0.04704944178628389
@@ -230,14 +206,6 @@ export const IMAGE_SCALES = Object.freeze({
   "DesignAssets/Resources/clay.png": [
     0.1379585326953748,
     0.1379585326953748
-  ],
-  "DesignAssets/Resources/copper-ore-carry.png": [
-    0.04226475279106858,
-    0.04226475279106858
-  ],
-  "DesignAssets/Resources/copper-ore.png": [
-    0.14752791068580542,
-    0.14752791068580542
   ],
   "DesignAssets/Resources/dew-carry.png": [
     0.1291866028708134,
@@ -247,27 +215,11 @@ export const IMAGE_SCALES = Object.freeze({
     0.1379585326953748,
     0.1379585326953748
   ],
-  "DesignAssets/Resources/iron-ore-carry.png": [
-    0.05342902711323764,
-    0.05342902711323764
-  ],
-  "DesignAssets/Resources/iron-ore.png": [
-    0.14752791068580542,
-    0.14752791068580542
-  ],
   "DesignAssets/Resources/pebbles-carry.png": [
     0.10127591706539076,
     0.10127591706539076
   ],
   "DesignAssets/Resources/pebbles.png": [
-    0.1379585326953748,
-    0.1379585326953748
-  ],
-  "DesignAssets/Resources/sand-carry.png": [
-    0.06618819776714513,
-    0.06618819776714513
-  ],
-  "DesignAssets/Resources/sand.png": [
     0.1379585326953748,
     0.1379585326953748
   ],
@@ -447,18 +399,6 @@ export const IMAGE_SCALES = Object.freeze({
     0.09170653907496013,
     0.09170653907496013
   ],
-  "DesignAssets/Tribes/sprout/Animations/Attributes/decomposition-idle-v1/antenna.webp": [
-    0.55078125,
-    0.55078125
-  ],
-  "DesignAssets/Tribes/sprout/Animations/Attributes/decomposition-idle-v1/basic.webp": [
-    0.55078125,
-    0.55078125
-  ],
-  "DesignAssets/Tribes/sprout/Animations/Attributes/decomposition-idle-v1/tail.webp": [
-    0.50390625,
-    0.50390625
-  ],
   "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp": [
     0.45703125,
     0.45703125
@@ -466,14 +406,6 @@ export const IMAGE_SCALES = Object.freeze({
   "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.webp": [
     0.4375,
     0.4375
-  ],
-  "DesignAssets/UI/Lifespan/leaf-alive.png": [
-    0.625,
-    0.625
-  ],
-  "DesignAssets/UI/Lifespan/leaf-dead.png": [
-    0.625,
-    0.625
   ],
   "DesignAssets/Units/BaseParts/body.png": [
     0.09090909090909091,
@@ -506,10 +438,6 @@ export const IMAGE_SCALES = Object.freeze({
   "DesignAssets/Units/Parts/feet-2.png": [
     0.04061784897025172,
     0.041044776119402986
-  ],
-  "DesignAssets/Units/Parts/lifespan-1.png": [
-    0.43333333333333335,
-    0.43209876543209874
   ],
   "DesignAssets/Units/Parts/strength-1.png": [
     0.06914893617021277,

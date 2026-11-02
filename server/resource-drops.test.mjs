@@ -34,9 +34,9 @@ test("전투에 걸린 운반자와 증원은 모든 자원을 그 셀에 보존
     for (const agent of [attacker, worker, ally]) {
       assert.equal(agent.carrying, 0);
       assert.equal(agent.carryingType, null);
-      assert.equal(agent.transportCargo, null);
-      assert.equal(agent.transport, null);
-      assert.equal(agent.transportReadyAt, null);
+      assert.equal(agent.transportCargo, undefined);
+      assert.equal(agent.transport, undefined);
+      assert.equal(agent.transportReadyAt, undefined);
       assert.equal(agent.mode, "fight");
       dropCarriedResources(room, agent);
     }
@@ -59,9 +59,9 @@ function fixture() {
 
 test("내려놓은 서로 다른 자원은 저장·복원 후에도 수량과 위치를 유지하고 나무를 생성하지 않는다", () => {
   const { room } = fixture();
-  for (const type of ["tree", "clay", "nutrients"]) dropCarriedResources(room, unit(type, "home", "passive", type));
+  for (const type of ["tree", "clay", "dew"]) dropCarriedResources(room, unit(type, "home", "passive", type));
   const restored = restoreRoom(structuredClone(saveRoom(room)));
-  for (const type of ["tree", "clay", "nutrients"]) {
+  for (const type of ["tree", "clay", "dew"]) {
     const cell = restored.food.get("drop:" + type + ":46,42");
     assert.equal(cell.amount, 2);
     assert.deepEqual([cell.x, cell.y], [46, 42]);

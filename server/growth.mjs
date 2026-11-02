@@ -1,5 +1,4 @@
 import { attributeCounts, unitStats } from "./attributes.mjs";
-import { AGENT_LIFESPAN } from "./lifespan.mjs";
 
 export const AGENT_GROWTH_BONUSES = Object.freeze([
   { movementMultiplier: 1, harvestSpeedMultiplier: 1, combatStrengthBonus: 0 },
@@ -31,16 +30,14 @@ export function applyAgentGrowth(agent, simSeconds) {
   const growth = agentGrowth(agent, simSeconds);
   if (agent.level === growth.level && agent.activeSlots?.join(",") === growth.activeSlots.join(",")) return false;
   const previousHealth = agent.stats.health;
-  const previousLifespan = agent.stats.lifespan || AGENT_LIFESPAN;
   agent.level = growth.level;
   agent.activeSlots = growth.activeSlots;
   agent.attributes = attributeCounts(agent.activeSlots, agent.attributeLevels);
   agent.stats = unitStats(agent.attributes, agent.tribe);
   const bonus = AGENT_GROWTH_BONUSES[growth.level - 1];
-  agent.stats.movementMultiplier *= bonus.movementMultiplier;
+  agent.stats.movementMultiplier = (agent.stats.movementMultiplier ?? 1) * bonus.movementMultiplier;
   agent.stats.harvestSpeedMultiplier = bonus.harvestSpeedMultiplier;
   agent.stats.combatStrength += bonus.combatStrengthBonus;
-  agent.lifespan = (Number.isFinite(agent.lifespan) ? agent.lifespan : previousLifespan) + agent.stats.lifespan - previousLifespan;
   agent.health = Math.min(agent.stats.health, agent.health + Math.max(0, agent.stats.health - previousHealth));
   return true;
 }

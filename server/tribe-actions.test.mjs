@@ -3,7 +3,6 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
 import { createGame } from "./game.mjs";
-import { constructionHelp } from "./beginner-help.mjs";
 import { tribeProductionTemplate } from "./tribe-production.mjs";
 import { birthCost, attributeUpgradeCost } from "./attributes.mjs";
 import { NEST_LEVELS, nestUpgradeCost } from "./nests.mjs";
@@ -62,19 +61,6 @@ test("전멸한 군락은 성장보다 실제 비용을 지불한 재생산을 �
   assert.equal(game.snapshot().evolutionPoints,15-birthCost(agent,"pebble"));
 });
 
-test("본둥지 출입구가 막혀도 살아 있는 전초둥지에서 정상 비용으로 생산한다", () => {
-  const {game,room} = fixture("bean");
-  change(game,state => {
-    state.nestLevel=2;state.nestHealth=200;state.evolutionPoints=30;state.agents=[];
-    state.buildings=[{id:"outpost",key:"outpost",x:50,y:50,health:200}];
-  });
-  for(let y=17;y<28;y++)for(let x=17;x<28;x++)room.world.terrain[y*80+x]=0;
-  const id=game.produce(), agent=game.agents.find(candidate=>candidate.id===id);
-  assert.equal(agent?.birth?.buildingId,"outpost");
-  assert.ok(agent.x>=49&&agent.x<=53&&agent.y>=49&&agent.y<=53);
-  assert.equal(game.snapshot().evolutionPoints,30-birthCost(agent,"bean"));
-});
-
 test("생존 개체의 복제로 초기 설계를 저장하고 탄생 단계와 소유권을 유지한다", () => {
   const {game} = fixture("spore");
   change(game,state => {state.agents=state.agents.filter(agent=>agent.slots.includes("blade"));state.evolutionPoints=10;});
@@ -118,20 +104,6 @@ test("설계가 가득 차면 미사용 AI 설계만 정리하고 플레이어 �
   assert.equal(after.templates.length,100);
   for(let index=1;index<=99;index++)assert.ok(after.templates.some(template=>template.id===index));
   assert.ok(!after.templates.some(template=>template.id===100));
-});
-
-test("완공할 수명이 남지 않은 변태는 정상 취소 명령으로 중단한다", () => {
-  const {game} = fixture("bean",100);
-  change(game,state => {
-    state.evolutionPoints=0;
-    const builder=state.agents[0];
-    Object.assign(builder,{slots:["construction"],attributeLevels:{construction:1},bornAt:0,lifespan:101,birth:null,
-      construction:{buildingKey:"storage",x:30,y:30,state:"moving",orderedAt:90,route:[{x:20,y:20},{x:30,y:30}],routeIndex:0,progress:0}});
-  });
-  game.produce();
-  assert.equal(game.agents[0].construction,null);
-  assert.equal(game.agents[0].constructionRetryAt,105);
-  assert.equal(game.snapshot().evolutionPoints,0);
 });
 
 test("AI는 알림 확인과 이름 복구에도 같은 관리 명령과 소유권 검사를 적용한다", () => {
@@ -194,20 +166,6 @@ test("실제 방 틱에서도 비용을 모은 AI만 순서대로 4레벨까지 
   }
 });
 
-test("플레이어와 동일하게 1레벨에서도 필요한 창고의 변태 개체를 생산한다", () => {
-  const {game} = fixture("bean",60);
-  change(game,state=>{
-    state.evolutionPoints=19;state.resourceInventory={clay:30};delete state.resourceStores;
-    state.explored={collection:"Set",entries:[]};
-    for(let y=14;y<35;y++)for(let x=14;x<35;x++)state.explored.entries.push(y*80+x);
-  });
-  const id=game.produce(), builder=game.agents.find(agent=>agent.id===id);
-  assert.ok(builder?.slots.includes("construction"));
-  assert.equal(builder.productionRole,"builder");
-  assert.equal(game.nestLevel,1);
-  assert.equal(game.snapshot().evolutionPoints,19-birthCost(builder,"bean"));
-});
-
 test("브라우저 실행 번들의 AI도 같은 비용으로 모든 둥지 단계를 성장한다", () => {
   const runtime=readFileSync(new URL("../client/runtime.js",import.meta.url),"utf8");
   const worker=JSON.parse(runtime.match(/^const workerSource = (.+);\r?$/m)[1]);
@@ -241,54 +199,3 @@ function populate(game, count, at) {
     state.evolutionPoints=100;
   });
 }
-
-for (const tribe of ["bean","spore","pebble","spring"]) {
-  test(tribe+" 플레이어는 200개체 이상에서도 생산·복제·설계 후 탄생을 실행한다",()=>{
-    for (const count of [200,225]) for (const action of ["template","clone","design"]) {
-      const {game}=fixture(tribe);
-      populate(game,count,0);
-      const {templateId}=game.command({type:"design",templateId:null,name:"Production",slots:[],birth:false});
-      const result=action==="template" ? game.command({type:"birth",templateId}) : action==="clone" ?
-        game.command({type:"birth",agentId:game.agents[0].id}) :
-        game.command({type:"design",templateId:null,name:"New",slots:[],birth:true});
-      const newborn=game.agents.find(agent=>agent.id===result.agentId);
-      assert.ok(newborn?.birth,action);
-      assert.equal(game.agents.length,count+1,action);
-      assert.equal(game.snapshot().evolutionPoints,100-birthCost(newborn,tribe),action);
-    }
-  });
-  test(tribe+" AI는 200개체 이상에서도 필요한 보충 생산을 비용을 지불하고 실행한다",()=>{
-    for (const count of [200,225]) {
-      const {game}=fixture(tribe,300);
-      populate(game,count,0);
-      change(game,state=>{state.nestLevel=4;});
-      const id=game.produce(),newborn=game.agents.find(agent=>agent.id===id);
-      assert.ok(newborn?.birth);
-      assert.equal(game.agents.length,count+1);
-      assert.equal(game.snapshot().evolutionPoints,100-birthCost(newborn,tribe));
-    }
-  });
-}
-
-test("초보자 군사 생산 안내도 200개체 이상에서 실행할 수 있다",()=>{
-  const {game,room}=fixture("bean",400);
-  populate(game,225,400);
-  room.hostId="ai";room.beginnerHelpEnabled=true;
-  change(game,state=>{state.nestLevel=2;state.evolutionPoints=30;});
-  const offer=game.snapshot().constructionHelp;
-  assert.equal(offer?.kind,"military");
-  assert.equal(offer.canProduce,true);
-  const result=game.command({type:"beginner-construction",expectedBuildingKey:offer.buildingKey,expectedStep:offer.step});
-  assert.ok(result.agentId);
-  assert.equal(game.agents.length,226);
-});
-
-test("변태 생산 안내도 200개체 이상이라는 이유로 거부하지 않는다",()=>{
-  const {game,room}=fixture("bean");
-  populate(game,225,0);
-  const state=JSON.parse(game.save()).state;
-  const offer=constructionHelp(state,"bean",true,{buildingKey:"storage",cost:{materials:{clay:10}}},{clay:10},room.world,false);
-  assert.equal(offer?.kind,"construction");
-  assert.equal(offer.canProduce,true);
-  assert.equal(offer.issue,null);
-});

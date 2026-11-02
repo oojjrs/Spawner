@@ -21,8 +21,8 @@ function fixture(selected) {
 function change(game,update){const saved=JSON.parse(game.save());update(saved.state);game.restore(JSON.stringify(saved));}
 
 test("기본 수명은 네 종족 모두 3분이고 새 개체도 같은 규칙을 따른다",()=>{
- const {game}=fixture(true);assert.ok(game.agents.every(agent=>agent.lifespan===180));
- for(const tribe of Object.values(TRIBE_PACING))assert.equal(tribe.lifespan,180);
+ const {game}=fixture(true);assert.ok(game.agents.every(agent=>!("lifespan" in agent)));
+ for(const tribe of Object.values(TRIBE_PACING))assert.equal("lifespan" in tribe,false);
 });
 
 test("AI 둥지는 시간 하한 없이 현재 성장 비용이 모이면 한 단계만 성장한다",()=>{
@@ -38,17 +38,6 @@ test("AI 둥지는 시간 하한 없이 현재 성장 비용이 모이면 한 �
 test("선택한 종족에는 성장과 생산을 자동 실행하지 않는다",()=>{
  const {game}=fixture(true);change(game,state=>{state.evolutionPoints=1000;});game.prepare(1400);
  const before=game.agents.length;assert.equal(game.produce(),null);assert.equal(game.nestLevel,1);assert.equal(game.agents.length,before);
-});
-
-test("성장 안내를 우선하고 성장 비용이 없을 때 군사 안내 시점과 정상 비용을 적용한다",()=>{
- const {game}=fixture(true);change(game,state=>{state.nestLevel=2;state.evolutionPoints=100;});
- game.prepare(159);assert.equal(game.snapshot().constructionHelp?.kind,"upgrade");
- change(game,state=>{state.evolutionPoints=79;});
- assert.equal(game.snapshot().constructionHelp,null);
- game.prepare(300);const offer=game.snapshot().constructionHelp;assert.equal(offer?.kind,"military");assert.ok(offer.canProduce);
- const before=game.snapshot().evolutionPoints,result=game.command({type:"beginner-construction",expectedStep:offer.step,expectedBuildingKey:offer.buildingKey});
- const agent=game.agents.find(agent=>agent.id===result.agentId);assert.equal(agent.productionRole,"military");assert.equal(game.snapshot().evolutionPoints,before-birthCost(agent,"bean"));
- assert.equal(JSON.parse(game.save()).state.militaryGuidanceCompleted,true);
 });
 
 test("목표 편성은 초반 80:20·후반 30:70이며 부족한 정찰을 먼저 보충한다",()=>{
@@ -69,8 +58,8 @@ test("습격과 일반 적대 생물의 초반 강제 전투를 늦추고 개체
 });
 
 test("속성·성장·동선 최적화로 후기 일꾼 12마리가 초기 32마리의 수입을 감당한다",()=>{
- const early=colonyWorkerRate("bean",[],{},6,1),late=colonyWorkerRate("bean",["excavation","strength","feet","lifespan"],{excavation:3,strength:3,feet:2,lifespan:1},6,6);
- assert.ok(late.perSecond*12>=early.perSecond*32);assert.ok(late.lifespan>early.lifespan);
+ const early=colonyWorkerRate("bean",[],{},6,1),late=colonyWorkerRate("bean",["excavation","strength","feet"],{excavation:3,strength:3,feet:2},6,6);
+ assert.ok(late.perSecond*12>=early.perSecond*32);
 });
 
 test("운반 거리를 제외한 경제 모델은 정책별 성장 차이와 AI 모델의 시간 하한을 유지한다",()=>{
@@ -89,7 +78,7 @@ test("운반 거리를 제외한 경제 모델은 정책별 성장 차이와 AI 
   if(distance===1e6){
    assert.deepEqual(result.milestones,[{level:1,seconds:0}]);
    assert.equal(result.delivered,0);assert.equal(result.spent,0);assert.equal(result.points,0);
-   assert.equal(result.workers+result.military,0);
+   assert.equal(result.workers+result.military,4);
   }
  }
 });

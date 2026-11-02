@@ -4,23 +4,23 @@ import { burrowDistance } from "./burrows.mjs";
 import { BEETLE_ANIMATIONS } from "./beetle-animation.mjs";
 import { CREATURE_ATTACK_TIMINGS } from "./creature-attack.mjs";
 
-export function creatureBuildingTargets(environment) {
-  return [...environment.games.values()].flatMap(game => [game.nest, ...(game.buildings || [])]
+export function creatureNestTargets(environment) {
+  return [...environment.games.values()].flatMap(game => [game.nest]
     .filter(target => target?.health > 0).map(agent => ({ game, agent })));
 }
 
 export function compareCreatureCombatTargets(left, right) {
-  const building = target => ["nest", "building"].includes(target.kind);
+  const building = target => target.kind === "nest";
   return Number(building(left.agent)) - Number(building(right.agent)) ||
     Number(militaryAgent(right.agent, right.agent.tribe)) - Number(militaryAgent(left.agent, left.agent.tribe)) ||
     left.distance - right.distance ||
     String(left.agent.id).localeCompare(String(right.agent.id));
 }
 
-export function updateCreatureBuildingAttack(agent, target, time) {
-  const buildingAttack = ["nest", "building"].includes(agent.attack?.targetKind) || agent.mode === "attack" && !agent.combat;
+export function updateCreatureNestAttack(agent, target, time) {
+  const buildingAttack = agent.attack?.targetKind === "nest" || agent.mode === "attack" && !agent.combat;
   const eligible = combatDisposition(agent) === "aggressive" && target?.agent.health > 0 &&
-    ["nest", "building"].includes(target.agent.kind) && burrowDistance(agent, target.agent) <= 1;
+    target.agent.kind === "nest" && burrowDistance(agent, target.agent) <= 1;
   if (buildingAttack && (!eligible || agent.attackTargetId !== target.agent.id)) {
     agent.attack = null; agent.attackTargetId = null; agent.attackHit = true;
     agent.mode = "idle"; agent.nextActionAt = time;
@@ -43,8 +43,7 @@ export function updateCreatureBuildingAttack(agent, target, time) {
   const attack = agent.attack;
   if (!attack.hit && time + 1e-8 >= attack.hitAt) {
     attack.hit = true; agent.attackHit = true;
-    target.agent.health = target.agent.kind === "nest" ? target.game.receiveNestDamage(attack.damage) :
-      target.game.receiveBuildingDamage(target.agent.id, attack.damage);
+    target.agent.health = target.game.receiveNestDamage(attack.damage);
   }
   if (time + 1e-8 >= attack.endsAt) {
     agent.attack = null; agent.attackTargetId = null; agent.mode = "idle";

@@ -49,7 +49,7 @@ function rendering() {
 
 test("첫 탄생과 성장 단계의 첫 표시에서는 이미지 합성과 윤곽 계산을 반복하지 않는다", async () => {
   const render = rendering();
-  const template = { slots: ["lifespan", "feet", "antenna", "strength", "lifespan"] };
+  const template = { slots: ["feet", "antenna", "strength"] };
   await render.context.prepareAgentTemplate(template);
   const prepared = { ...render.counts };
   for (const time of AGENT_GROWTH_THRESHOLDS) {

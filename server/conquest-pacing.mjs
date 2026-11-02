@@ -1,16 +1,14 @@
-import { TRIBE_UNIT_STATS } from "./unit-stats.mjs";
-
 export const CONQUEST_PACING = Object.freeze({ quietUntil:120, guidanceAt:160, neutralConflictAt:300, tribeContactAt:420,
   expertLevelFourAt:600, aiLevelFourAt:1200, activePopulation:36, inefficientPopulation:70,
   workerShare:Object.freeze([.8,.65,.45,.3]), nestCosts:Object.freeze([20,80,360,null]),
   attributeCosts:Object.freeze([0,0,8,16,24]), aiUpgradeAt:Object.freeze([0,270,690,1200]),
-  productionInterval:3, constructionInterval:20, frontierSamples:48, preferredScouts:4 });
+  productionInterval:3, frontierSamples:48, preferredScouts:4 });
 
 export const TRIBE_PACING = Object.freeze({
-  bean:Object.freeze({tempo:1,lifespan:TRIBE_UNIT_STATS.bean.lifespan,population:36,native:"excavation",army:Object.freeze(["blade","carapace","feet","guard"])}),
-  spore:Object.freeze({tempo:.95,lifespan:TRIBE_UNIT_STATS.spore.lifespan,population:40,native:"blade",army:Object.freeze(["blade","feet","regeneration"])}),
-  pebble:Object.freeze({tempo:1.1,lifespan:TRIBE_UNIT_STATS.pebble.lifespan,population:32,native:"piercing",army:Object.freeze(["piercing","carapace","blade","guard"])}),
-  spring:Object.freeze({tempo:.9,lifespan:TRIBE_UNIT_STATS.spring.lifespan,population:36,native:"butchery",army:Object.freeze(["blade","feet","piercing","regeneration"])})
+  bean:Object.freeze({tempo:1,population:36,native:"excavation",army:Object.freeze(["blade","carapace","feet","guard"])}),
+  spore:Object.freeze({tempo:.95,population:40,native:"blade",army:Object.freeze(["blade","feet","regeneration"])}),
+  pebble:Object.freeze({tempo:1.1,population:32,native:"piercing",army:Object.freeze(["piercing","carapace","blade","guard"])}),
+  spring:Object.freeze({tempo:.9,population:36,native:null,army:Object.freeze(["blade","feet","piercing","regeneration"])})
 });
 
 export function colonyWorkerShare(nestLevel,simSeconds,tribe) {
@@ -32,6 +30,6 @@ export function conquestEncounterPlan(plan) {
 export function militaryAgent(agent,tribe) {
  if(agent.productionRole==="military")return true;
  const slots=agent.slots||[],native=TRIBE_PACING[tribe||agent.tribe]?.native;
- return !slots.includes("construction")&&!slots.includes("strength")&&!slots.includes("excavation")&&!slots.includes("butchery")&&
+ return !slots.includes("strength")&&!slots.includes("excavation")&&
   slots.some(key=>["blade","piercing","carapace","guard","regeneration"].includes(key))&&!(slots.length===1&&slots[0]===native);
 }

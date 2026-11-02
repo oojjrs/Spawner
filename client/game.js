@@ -4,9 +4,6 @@
     await globalThis.SpawnerAssets.ready;
     const assetSource = globalThis.SpawnerAssets.source;
     const tribeArt = Spawner.createTribeArt(Spawner.PLAYER_TRIBES, assetSource);
-    const agentLifespanArt = Spawner.createAgentLifespanArt((width, height) => {
-      const surface = document.createElement("canvas"); surface.width = width; surface.height = height; return surface;
-    });
     const excavationArt = Spawner.createExcavationArt(assetSource, async path => {
       const image = new Image(); image.src = path; await image.decode(); return image;
     });
@@ -15,16 +12,6 @@
     }, async path => {
       const image = new Image(); image.src = assetSource(path); await image.decode(); return image;
     });
-    const constructionUnits = Spawner.createConstructionAnimation(assetSource, (width, height) => {
-      const surface = document.createElement("canvas"); surface.width = width; surface.height = height; return surface;
-    }, async path => {
-      const sprite = new Image(); sprite.src = assetSource(path); await sprite.decode(); return sprite;
-    }, error => showConnectionError(error.message, false));
-    const buildingIdle = Spawner.createBuildingIdleAnimation(async path => {
-      const image = new Image(); image.src = assetSource(path); await image.decode(); return image;
-    }, error => showConnectionError(error.message, false));
-    const constructionFrames = new Map();
-    const constructionPartBounds = new WeakMap();
     const tribeColonies = new Map();
     const colonyImageFrames = new WeakMap();
     const nestGrowthRendering = new Map();
@@ -41,8 +28,6 @@
     const connection = { active: false, online: false, busy: false, synchronizing: false, roomId: null, colonyId: null, revision: -1, simSeconds: 0, receivedAt: 0 };
     const connectionStatus = document.getElementById("connection-status");
     const cheats = Spawner.createCheats(document, sendCommand);
-    const beginnerHelp = Spawner.createBeginnerHelp(document, offer => sendCommand({ type: "beginner-construction",
-      expectedBuildingKey: offer.buildingKey, expectedStep: offer.step }));
     const canvas = document.getElementById("world");
     const ctx = canvas.getContext("2d");
     const groundShadow = createGroundShadow();
@@ -141,18 +126,11 @@
     const resourceLocation = document.getElementById("resource-location");
     const resourceLocationHelp = resourceLocation.dataset.help;
     const agentDetails = document.getElementById("agent-details");
-    const agentLife = document.getElementById("agent-life");
-    agentLife.hidden = true;
-    agentNameDisplay.append(agentLife);
-    agentLife.querySelector(".agent-life-dead").src = assetSource("DesignAssets/UI/Lifespan/leaf-dead.png");
-    agentLife.querySelector(".agent-life-alive").src = assetSource("DesignAssets/UI/Lifespan/leaf-alive.png");
     const agentBirth = document.getElementById("agent-birth");
     const agentDesign = document.getElementById("agent-design");
     const unitActionStatus = document.getElementById("unit-action-status");
     let unitPanelSelectionKey = null;
     const corpseDetails = document.getElementById("corpse-details");
-    const corpseValue = document.getElementById("corpse-value");
-    const corpseDesign = document.getElementById("corpse-design");
     const evolutionPanel = document.getElementById("evolution-panel");
     const evolutionOpenButton = document.getElementById("evolution-open-button");
     const evolutionClose = document.getElementById("evolution-close");
@@ -300,7 +278,6 @@
     }));
     const resourceCarryBounds = new Map();
     const resourceGroundContacts = {
-      nutrients: { x: .54, y: .95, width: .77, depth: .045, opacity: .34 },
       tree: { x: .48, y: .98, width: .15, depth: .025, opacity: .4 },
       dew: { x: .41, y: .89, width: .17, depth: .018, opacity: .42 },
       pebbles: { x: .56, y: .94, width: .83, depth: .025, opacity: .4 },
@@ -380,16 +357,6 @@
     const sproutRoots = Spawner.createSproutRoots((width, height) => {
       const surface = document.createElement("canvas"); surface.width = width; surface.height = height; return surface;
     });
-    const sproutLifespan = Spawner.createSproutLifespan(assetSource, (width, height) => {
-      const surface = document.createElement("canvas"); surface.width = width; surface.height = height; return surface;
-    }, async path => {
-      const image = new Image(); image.src = assetSource(path); await image.decode(); return image;
-    });
-    const sproutDecompositionSheets = new Map(Object.entries(Spawner.SPROUT_DECOMPOSITION_ANIMATIONS).map(([name, animation]) => {
-      const sprite = new Image();
-      sprite.src = assetSource(animation.image);
-      return [name, { animation, sprite, scale: 1 }];
-    }));
     const AGENT_HEIGHT = 0.7;
     const unitDisplayScales = new Map();
     const unitAttributeScales = new Map();
@@ -422,23 +389,15 @@
     const unitGroundVariants = {
       "bean:feet": { x: 0, y: -0.0116, radiusX: 0.0931, radiusY: 0.0102 },
       "bean:feet4": { x: -0.0136, y: -0.0116, radiusX: 0.1067, radiusY: 0.0119 },
-      "bean:construction": { x: -0.0058, y: -0.0078, radiusX: 0.3549, radiusY: 0.0233 },
-      "bean:constructionFeet": { x: -0.0155, y: -0.0116, radiusX: 0.1202, radiusY: 0.0135 },
       "bean:combatFeet": { x: -0.0543, y: 0.0815, radiusX: 0.1358, radiusY: 0.0154 },
       "spore:feet": { x: 0, y: -0.0087, radiusX: 0.0998, radiusY: 0.0109 },
       "spore:feet4": { x: 0, y: -0.0087, radiusX: 0.0998, radiusY: 0.0109 },
-      "spore:construction": { x: 0, y: -0.0087, radiusX: 0.2908, radiusY: 0.026 },
-      "spore:constructionFeet": { x: 0, y: -0.0087, radiusX: 0.2213, radiusY: 0.0255 },
       "spore:combatFeet": { x: -0.0911, y: -0.0043, radiusX: 0.191, radiusY: 0.0219 },
       "pebble:feet": { x: 0, y: -0.0079, radiusX: 0.1656, radiusY: 0.0189 },
       "pebble:feet4": { x: 0, y: -0.0079, radiusX: 0.1656, radiusY: 0.0189 },
-      "pebble:construction": { x: 0, y: -0.0118, radiusX: 0.3627, radiusY: 0.0237 },
-      "pebble:constructionFeet": { x: 0, y: -0.0079, radiusX: 0.3193, radiusY: 0.0237 },
       "pebble:combatFeet": { x: -0.0808, y: -0.0039, radiusX: 0.3528, radiusY: 0.0237 },
       "spring:feet": { x: 0, y: -0.0091, radiusX: 0.214, radiusY: 0.0246 },
       "spring:feet4": { x: 0, y: -0.0091, radiusX: 0.214, radiusY: 0.0246 },
-      "spring:construction": { x: -0.0046, y: -0.0091, radiusX: 0.3187, radiusY: 0.0273 },
-      "spring:constructionFeet": { x: 0, y: -0.0091, radiusX: 0.2959, radiusY: 0.0273 },
       "spring:combatFeet": { x: -0.1184, y: -0.0046, radiusX: 0.4917, radiusY: 0.0273 }
     };
     const unitCorpseContacts = {
@@ -551,10 +510,6 @@
       ["root-rig", assetSource("DesignAssets/Units/Parts/bean-root-rig.png")],
       ["antenna-1", assetSource("DesignAssets/Units/Parts/antenna-1.png")],
       ["antenna-2", assetSource("DesignAssets/Units/Parts/antenna-2.png")],
-      ["lifespan-1", assetSource("DesignAssets/Units/Parts/lifespan-1.png")],
-      ["lifespan-half", assetSource("DesignAssets/Tribes/sprout/Animations/Attributes/lifespan-v1/body-half.png")],
-      ["lifespan-closed", assetSource("DesignAssets/Tribes/sprout/Animations/Attributes/lifespan-v1/body-closed.png")],
-      ["butchery", assetSource(Spawner.SPROUT_DECOMPOSITION_PART)]
     ].map(([key, source]) => {
       const part = new Image();
       part.src = source;
@@ -575,8 +530,8 @@
       beetleCorpseSprite, ...resourceCarrySprites.values(), ...agentParts.values(), ...agentBaseParts.values(),
       ...[...burrowAppearances.values()].map(appearance => appearance.sprite)].map(part => part.decode()));
 
-    await Promise.all([excavationArt.prepare(), sproutLifespan.prepare(), ...Spawner.PLAYER_TRIBES.map(prepareUnitAnimationSheets),
-      ...[...sproutDecompositionSheets.values()].map(entry => entry.sprite.decode()), ...[...creatureIdleSheets.values()].map(async entry => {
+    await Promise.all([excavationArt.prepare(), ...Spawner.PLAYER_TRIBES.map(prepareUnitAnimationSheets),
+      ...[...creatureIdleSheets.values()].map(async entry => {
       await entry.sprite.decode();
       const bounds = tribeArt.bounds(entry.sprite, entry.animation.frameSize);
       entry.scale = entry.animation.frameSize / 512 * 480 / Math.max(bounds.width, bounds.height);
@@ -770,7 +725,6 @@
       evolutionPoints: 0,
       resourceInventory: {},
       resourceInventoryLimits: {},
-      buildings: [],
       resourceCapacity: Spawner.materialCapacity(1, []),
       explored: new Set(), visible: new Set(), markers: [],
       discoveries: [], discoveryReadCount: 0,
@@ -1336,9 +1290,6 @@
       const combatTribes = new Set([...state.agents, ...state.rivals].filter(agent => !agent.species &&
         Spawner.combatAttributeKeys(agent.attributes).length).map(agent => agent.tribe || "bean"));
       await Promise.all([...combatTribes].map(tribe => combatAttributeArt.prepare(tribe)));
-      const builders = [...state.agents, ...state.rivals].filter(agent => !agent.species && agent.attributes?.construction);
-      await Promise.all(builders.map(agent => constructionUnits.prepare(agent.tribe || "bean", agent.construction?.buildingKey)));
-      if (builders.length) await constructionUnits.prepareEffects();
       const tribes = new Set([...state.agents, ...state.rivals].filter(agent => !agent.species).map(agent => agent.tribe || "bean"));
       await Promise.all([...tribes].map(async tribe => {
         for (const entry of unitAnimationSheets.get(tribe).values()) {
@@ -2585,7 +2536,6 @@
       const exists = selection.kind === "terrain" ? !!selectionTerrainCell() :
         selection.kind === "agent" ? isAgentSelectable(selection.target) :
         selection.kind === "colony" ? colonyEntries.includes(selection.target) :
-        selection.kind === "building" ? state.buildings.includes(selection.target) && selection.target.health > 0 :
         selection.kind === "tree" ? forest.cells.get(selection.target.column + "," + selection.target.row) === selection.target :
         selection.kind === "hazard" ? hazardCells[selection.target.row * WORLD_SIZE + selection.target.column] === selection.target :
         selection.kind === "burrow" ?
@@ -3427,7 +3377,7 @@
       if (destroyed) ctx.filter = "grayscale(1) brightness(0.45)";
       let receive = 0;
       for (const delivery of foodDeliveries.values()) {
-        if (delivery.buildingId || delivery.colonyId !== entry.id || delivery.receivedAtFrame == null) continue;
+        if (delivery.colonyId !== entry.id || delivery.receivedAtFrame == null) continue;
         const age = (now - delivery.receivedAtFrame) / 1000;
         if (age >= 0 && age < 0.12) {
           const impact = age < 0.03 ? 1 - (1 - age / 0.03) ** 2 : (1 - (age - 0.03) / 0.09) ** 2;
@@ -3493,8 +3443,7 @@
       if (!structureEffectPlayback.effects.size || state.camera.zoom < 8) return;
       const key = kind + ":" + structure.id;
       const time = corpsePlaybackTime();
-      let visible = kind === "colony" && structure.id === connection.colonyId ||
-        kind === "building" && structure.colonyId === connection.colonyId;
+      let visible = kind === "colony" && structure.id === connection.colonyId;
       const columns = kind === "colony" ? COLONY_SIZE : structure.width;
       const rows = kind === "colony" ? COLONY_SIZE : structure.height;
       for (let row = structure.y; !visible && row < structure.y + rows; row++) {
@@ -3578,7 +3527,7 @@
             const due = birth.elapsed >= PEBBLE_BIRTH_ANIMATION.audioAt &&
               (sameBirth ? previous.elapsed < PEBBLE_BIRTH_ANIMATION.audioAt : birth.elapsed < PEBBLE_BIRTH_ANIMATION.audioAt + .2);
             if (!firstFrame && !played && due) {
-              const entry = agent.birth.buildingId ? null : colonyEntries.find(colony => colony.id === agent.birth.colonyId);
+              const entry = colonyEntries.find(colony => colony.id === agent.birth.colonyId);
               const outlet = entry ? colonyBirthOutlet(entry) : null;
               audio.play("pebble-birth", outlet ? audioVolume(outlet.x, outlet.y) : volume);
             }
@@ -3592,7 +3541,7 @@
             const due = birth.elapsed >= animation.audioAt &&
               (sameBirth ? previous.elapsed < animation.audioAt : birth.elapsed < animation.audioAt + .2);
             if (!firstFrame && !played && due) {
-              const entry = birth.kind === "spring" && !agent.birth.buildingId ?
+              const entry = birth.kind === "spring" ?
                 colonyEntries.find(colony => colony.id === agent.birth.colonyId) : null;
               const outlet = entry ? colonyBirthOutlet(entry) : null;
               audio.play(birth.kind + "-birth", outlet ? audioVolume(outlet.x, outlet.y) : volume);
@@ -3602,7 +3551,7 @@
           }
           if (!firstFrame && previous?.birthStartedAt === agent.birth.startedAt) {
             if (birth.seedVisible && !previous.seedVisible) {
-              const entry = agent.birth.buildingId ? null : colonyEntries.find(colony => colony.id === agent.birth.colonyId);
+              const entry = colonyEntries.find(colony => colony.id === agent.birth.colonyId);
               const mouth = entry ? foodDeliveryTarget(entry) : null;
               audio.play("seed-eject", mouth ? audioVolume(mouth.x, mouth.y) : volume);
             }
@@ -3744,8 +3693,6 @@
       const id = String(agent.id);
       if (layout.offsets.has(id)) return layout.offsets.get(id);
       const delivery = agentDeliveryOffset(agent);
-      const food = foodCellMap.get(agent.targetFoodKey || agent.x + "," + agent.y);
-      const gathering = Spawner.corpseHarvestOffset(agent, food, state.simSeconds);
       const current = layout.positions.get(id);
       let crowding = 0;
       const nearby = [];
@@ -3764,7 +3711,7 @@
         if (crowding === 1) break;
       }
       if (!crowding) {
-        const offset = { x: delivery.x + gathering.x, y: delivery.y + gathering.y };
+        const offset = { x: delivery.x, y: delivery.y };
         layout.offsets.set(id, offset);
         return offset;
       }
@@ -3774,8 +3721,8 @@
       const angle = index * 2.399963229728653 + hashNoise(seed, 17) * Math.PI * 2;
       const spread = 1 - Math.max(Math.abs(delivery.x), Math.abs(delivery.y)) / .28 * .75;
       const radius = (0.18 + hashNoise(seed, index) * 0.12) * crowding * crowding * (3 - 2 * crowding) * spread;
-      const offset = { x: delivery.x + gathering.x + Math.cos(angle) * radius,
-        y: delivery.y + gathering.y + Math.sin(angle) * radius * 0.72 };
+      const offset = { x: delivery.x + Math.cos(angle) * radius,
+        y: delivery.y + Math.sin(angle) * radius * 0.72 };
       layout.offsets.set(id, offset);
       return offset;
     }
@@ -3785,7 +3732,7 @@
       if (!birth) return null;
       const elapsed = Math.max(0, state.simSeconds - birth.startedAt);
       if (elapsed >= agentBirthDuration(agent.tribe)) return null;
-      const entry = birth.buildingId ? null : colonyEntries.find(candidate => candidate.id === birth.colonyId);
+      const entry = colonyEntries.find(candidate => candidate.id === birth.colonyId);
       if (agent.tribe === "spore") {
         const shape = Spawner.SPORE_BIRTH_ANIMATION;
         const offset = spread ? agentDisplayOffset(agent) : { x: 0, y: 0 };
@@ -4034,10 +3981,6 @@
     }
 
     function deliveryNest(delivery) {
-      if (delivery.buildingId) {
-        const building = state.buildings.find(entry => entry.id === delivery.buildingId);
-        return building ? { ...building, tribe: state.tribe } : null;
-      }
       return colonyEntries.find(entry => entry.id === delivery.colonyId);
     }
 
@@ -4315,29 +4258,8 @@
       return { leftRotation: flap, rightRotation: -flap, leftScaleY: fold, rightScaleY: fold };
     }
 
-    function drawAgentTail(ctx, agent, x, y, width, height, outlineColor) {
-      const appearance = agent.appearanceAttributes || agent.attributes || {};
-      if ((agent.tribe || "bean") !== "bean" || !appearance.butchery) return;
-      const entry = sproutDecompositionSheets.get("tail");
-      const sprite = entry?.sprite.complete && entry.sprite.naturalWidth ? entry.sprite : agentSprite(agent, "tail");
-      const animation = entry?.animation;
-      const index = sprite === entry?.sprite && !idleMotion.matches ? Spawner.unitAnimationFrame(animation,
-        (state.simSeconds - (agent.animationStartedAt ?? agent.bornAt ?? 0)) * 1000) : 0;
-      const frame = sprite === entry?.sprite ? { owner: sprite, size: animation.frameSize, index,
-        x: index % animation.columns * animation.frameSize, y: Math.floor(index / animation.columns) * animation.frameSize } : null;
-      const lift = agentBodyLift(appearance);
-      ctx.save();
-      ctx.translate(x + width / 2, y - height * lift / 512);
-      ctx.scale(agent.facing < 0 ? -1 : 1, 1);
-      if (outlineColor) drawSelectionOutline(sprite, -width / 2, 0, width, height, frame, outlineColor);
-      else if (frame) ctx.drawImage(sprite, frame.x, frame.y, frame.size, frame.size, -width / 2, 0, width, height);
-      else ctx.drawImage(sprite, -width / 2, 0, width, height);
-      ctx.restore();
-    }
-
     function drawAgentHead(ctx, agent, x, y, width, height, now, outlineColor) {
       const appearance = agent.appearanceAttributes || agent.attributes || {};
-      if ((agent.tribe || "bean") === "bean" && appearance.lifespan) y -= height * 103 / 512;
       const antenna = appearance.antenna || 0;
       if (antenna) {
         const sprite = agentSprite(agent, "antenna");
@@ -4350,7 +4272,7 @@
         ctx.rotate(pose.leftRotation);
         ctx.scale(pose.leftScaleX ?? 1, pose.leftScaleY);
         if (outlineColor) drawSelectionOutline(sprite, -width / 2, -height * root, width, height, null, outlineColor);
-        else agentLifespanArt.draw(ctx, agent, state.simSeconds, sprite, -width / 2, -height * root, width, height);
+        else ctx.drawImage(sprite, -width / 2, -height * root, width, height);
         ctx.restore();
         return;
       }
@@ -4372,12 +4294,12 @@
         ctx.rotate(rotation);
         ctx.scale(scaleX, scaleY);
         if (outlineColor) drawSelectionOutline(sprite, -width * pivot, -height * root, width, height, null, outlineColor);
-        else agentLifespanArt.draw(ctx, agent, state.simSeconds, sprite, -width * pivot, -height * root, width, height);
+        else ctx.drawImage(sprite, -width * pivot, -height * root, width, height);
         ctx.restore();
       }
       if (stem) {
         if (outlineColor) drawSelectionOutline(stem, x, y, width, height, null, outlineColor);
-        else agentLifespanArt.draw(ctx, agent, state.simSeconds, stem, x, y, width, height);
+        else ctx.drawImage(stem, x, y, width, height);
       }
     }
 
@@ -4441,7 +4363,7 @@
       ctx.save();
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = "high";
-      const entry = agent.birth.buildingId ? null : colonyEntries.find(value => value.id === agent.birth.colonyId);
+      const entry = colonyEntries.find(value => value.id === agent.birth.colonyId);
       if (entry && pebbleBirthForeground.complete && pebbleBirthForeground.naturalWidth) {
         const appearance = colonyAppearance(entry);
         const origin = worldToScreen(entry.x, entry.y);
@@ -4504,13 +4426,11 @@
           if (!evolved) drawAgentFeet(ctx, agent, -width / 2, -spriteHeight * pivot, width, spriteHeight, null, outlineColor);
           if (outlineColor) {
             if (!evolved) {
-              drawAgentTail(ctx, agent, -width / 2, -spriteHeight * pivot, width, spriteHeight, outlineColor);
               drawAgentHead(ctx, agent, -width / 2, -spriteHeight * pivot, width, spriteHeight, now, outlineColor);
             }
             drawSelectionOutline(sprite, -width / 2, -spriteHeight * pivot, width, spriteHeight, null, outlineColor);
           }
           if (!evolved) {
-            drawAgentTail(ctx, agent, -width / 2, -spriteHeight * pivot, width, spriteHeight, null);
             drawAgentHead(ctx, agent, -width / 2, -spriteHeight * pivot, width, spriteHeight, now, null);
           }
           ctx.drawImage(sprite, -width / 2, -spriteHeight * pivot, width, spriteHeight);
@@ -4685,10 +4605,6 @@
       context.translate(padding, padding - lift);
       if (feet) context.drawImage(agentParts.get("feet-1"),
         body.x + body.width / 2 - rootWidth / 2, rootTop, rootWidth, rootHeight);
-      if (attributes.butchery) {
-        const tail = agentSprite(agent, "tail");
-        context.drawImage(tail, left, top, 512 * scaleX, 512 * scaleY);
-      }
       context.save();
       if (attributes.feet) {
         context.beginPath(); context.rect(0, 0, size, cut); context.clip();
@@ -4704,51 +4620,31 @@
 
     function drawAgentAnimation(ctx, agent, centerX, floor, height, outlineColor) {
       const attributes = agent.appearanceAttributes || agent.attributes || {};
-      const construction = constructionUnitFrame(agent, idleMotion.matches ? agent.bornAt || 0 : state.simSeconds);
-      if (construction) {
-        const size = height * 512 / 350;
-        const pivot = (agent.tribe || "bean") === "bean" && attributes.feet ? Spawner.sproutRootGeometry(attributes.feet).floor : 460;
-        const approach = Spawner.constructionApproachOffset(agent, state.simSeconds);
-        ctx.save(); ctx.translate(centerX + approach.x * height / AGENT_HEIGHT, floor + approach.y * height / AGENT_HEIGHT);
-        const rooted = (agent.tribe || "bean") === "bean" && attributes.feet;
-        const body = rooted ? constructionUnitFrame(agent, state.simSeconds, null, true) : construction;
-        const walk = rooted ? agentWalkPose(agent) : null;
-        if (rooted) drawAgentFeet(ctx, agent, -size / 2, -size * pivot / 512, size, size, walk, outlineColor);
-        const bodyPivot = rooted ? 460 - agentBodyLift(attributes) : pivot;
-        ctx.translate(0, size * (bodyPivot - pivot) / 512 - (walk?.bob || 0) * size); ctx.rotate(walk?.rotation || 0);
-        if (outlineColor) drawSelectionOutline(body.sprite, -size / 2, -size * bodyPivot / 512, size, size, null, outlineColor);
-        agentLifespanArt.draw(ctx, agent, state.simSeconds, body.sprite, -size / 2, -size * bodyPivot / 512, size, size); ctx.restore();
-        return construction;
-      }
       let pose = Spawner.unitAnimationPose(agent, state.simSeconds);
       if (!pose) return false;
       if ((agent.tribe || "bean") !== "bean") pose = tribeArt.animationPose(agent, pose, state.simSeconds);
-      const customized = (agent.tribe || "bean") === "bean" && ["strength", "arms", "feet", "antenna", "lifespan", "butchery", "excavation"].some(key => attributes[key] > 0);
+      const customized = (agent.tribe || "bean") === "bean" && ["strength", "arms", "feet", "antenna", "excavation"].some(key => attributes[key] > 0);
       const combat = ["attack", "hurt"].includes(pose.action);
-      if (customized && !combat && !pose.decomposition) return false;
+      if (customized && !combat) return false;
       const sheets = unitAnimationSheets.get(agent.tribe || "bean");
-      const entry = pose.decomposition ? sproutDecompositionSheets.get(pose.decomposition) :
-        sheets?.get(pose.sourceAction || pose.action) || (["harvest", "throw"].includes(pose.action) ? sheets?.get("idle") : null);
+      const entry = sheets?.get(pose.sourceAction || pose.action) || (["harvest", "throw"].includes(pose.action) ? sheets?.get("idle") : null);
       if (!entry?.sprite.complete || !entry.sprite.naturalWidth) return false;
       let animation = pose.sourceAnimation || pose.animation;
       const index = idleMotion.matches ? 0 : pose.sourceFrame ?? pose.frame;
-      const lifespan = (agent.tribe || "bean") === "bean" && attributes.lifespan ?
-        sproutLifespan.frame(attributes, pose.action, index, agentParts, sproutRoots) : null;
-      if (lifespan) animation = lifespan.animation;
       const attributeAction = pose.action === "walk" && agent.carrying > 0 ? "carry" : pose.action;
       const motionTime = pose.action === "harvest" ? state.simSeconds - agent.harvestStarted :
         pose.action === "throw" ? state.simSeconds - agent.foodDelivery.startedAt : state.simSeconds;
       const attributeFrame = (agent.tribe || "bean") === "bean" ||
-        !["antenna", "strength", "arms", "butchery", "lifespan", "feet", "excavation"].some(key => attributes[key] > 0) ? null :
+        !["antenna", "strength", "arms", "feet", "excavation"].some(key => attributes[key] > 0) ? null :
         tribeArt.animationFrame(agent, entry.sprite, animation, index, attributeAction, motionTime, pose);
-      const composedFrame = lifespan?.sprite || attributeFrame || (customized && combat ? sproutCombatFrame(agent, entry, index) : null);
+      const composedFrame = attributeFrame || (customized && combat ? sproutCombatFrame(agent, entry, index) : null);
       const sprite = composedFrame || entry.frames?.get(index) || entry.sprite;
       if (!sprite) return false;
       const frameSize = composedFrame ? sprite.width : animation.frameSize;
       const padding = (frameSize - animation.frameSize) / 2;
-      const size = height * (lifespan?.scale || entry.scale) * frameSize / animation.frameSize;
+      const size = height * entry.scale * frameSize / animation.frameSize;
       const left = -size * (animation.pivotX + padding) / frameSize;
-      const top = pose.decomposition ? -size * .94 : -size * (animation.pivotY + padding) / frameSize;
+      const top = -size * (animation.pivotY + padding) / frameSize;
       const frame = { owner: sprite, size: frameSize, index: sprite === entry.sprite ? index : 0,
         x: sprite === entry.sprite ? index % animation.columns * animation.frameSize : 0,
         y: sprite === entry.sprite ? Math.floor(index / animation.columns) * animation.frameSize : 0 };
@@ -4758,7 +4654,7 @@
       ctx.translate(centerX, floor);
       ctx.scale(facing < 0 ? -1 : 1, 1);
       if (outlineColor) drawSelectionOutline(sprite, left, top, size, size, frame, outlineColor);
-      agentLifespanArt.draw(ctx, agent, state.simSeconds, sprite, frame.x, frame.y, frameSize, frameSize, left, top, size, size);
+      ctx.drawImage(sprite, frame.x, frame.y, frameSize, frameSize, left, top, size, size);
       ctx.restore();
       return pose;
     }
@@ -4976,7 +4872,7 @@
       ctx.translate(centerX, footY);
       ctx.scale(agent.tribe === "pebble" ? 1 : agent.facing < 0 ? -1 : 1, 1);
       if (outlineColor) drawSelectionOutline(sprite, -size * animation.pivotX / frameSize, -size * animation.pivotY / frameSize, size, size, frame, outlineColor);
-      agentLifespanArt.draw(ctx, agent, state.simSeconds, sprite, frame.x, frame.y, frameSize, frameSize, -size * animation.pivotX / frameSize, -size * animation.pivotY / frameSize, size, size);
+      ctx.drawImage(sprite, frame.x, frame.y, frameSize, frameSize, -size * animation.pivotX / frameSize, -size * animation.pivotY / frameSize, size, size);
       ctx.restore();
       return true;
     }
@@ -4988,20 +4884,19 @@
       const action = attackFrame >= 0 ? "attack" : "hurt";
       const index = attackFrame >= 0 ? attackFrame : hurtFrame;
       if (index < 0) return false;
-      const customized = (agent.tribe || "bean") === "bean" && ["strength", "arms", "feet", "antenna", "lifespan", "butchery", "excavation"].some(key => appearance[key] > 0);
-      const lifespan = customized && appearance.lifespan ? sproutLifespan.frame(appearance, action, index, agentParts, sproutRoots) : null;
-      const sprite = lifespan?.sprite || (customized ? sproutCombatFrame(agent, unitAnimationSheets.get("bean")?.get(action), index) : combatSheets.get(agent.tribe || "bean")?.[action]);
+      const customized = (agent.tribe || "bean") === "bean" && ["strength", "arms", "feet", "antenna", "excavation"].some(key => appearance[key] > 0);
+      const sprite = customized ? sproutCombatFrame(agent, unitAnimationSheets.get("bean")?.get(action), index) : combatSheets.get(agent.tribe || "bean")?.[action];
       if (!sprite || sprite.complete === false || !(sprite.naturalWidth || sprite.width)) return false;
-      const size = height * (lifespan?.scale || .94);
+      const size = height * .94;
       const frameSize = customized ? sprite.width : sprite.naturalWidth / 4;
       const frame = { owner: sprite, size: frameSize, index: customized ? 0 : index,
         x: customized ? 0 : index % 4 * frameSize, y: customized ? 0 : Math.floor(index / 4) * frameSize };
       ctx.save();
-      ctx.translate(centerX, footY - (lifespan ? 0 : height * .054));
+      ctx.translate(centerX, footY - height * .054);
       ctx.scale(agent.combat ? agent.combat.side === 0 ? -1 : 1 : agent.attack?.directionX || agent.facing || 1, 1);
-      const pivot = lifespan ? lifespan.animation.pivotY / lifespan.animation.frameSize : 448 / 512;
+      const pivot = 448 / 512;
       if (outlineColor) drawSelectionOutline(sprite, -size / 2, -size * pivot, size, size, frame, outlineColor);
-      agentLifespanArt.draw(ctx, agent, state.simSeconds, sprite, frame.x, frame.y, frameSize, frameSize, -size / 2, -size * pivot, size, size);
+      ctx.drawImage(sprite, frame.x, frame.y, frameSize, frameSize, -size / 2, -size * pivot, size, size);
       ctx.restore();
       return true;
     }
@@ -5086,11 +4981,10 @@
     function unitDisplayScale(unit) {
       const tribe = unit.tribe || "bean";
       const base = unitDisplayScales.get(unit.species || tribe) || 1;
-      if (unit.species || unit.construction?.state === "transforming") return base;
+      if (unit.species) return base;
       const attributes = unit.appearanceAttributes || unit.attributes || {};
       const equipped = ATTRIBUTES.filter(attribute => attributes[attribute.key] > 0);
-      if (!equipped.length || equipped.some(attribute => attribute.kind === "combat") && !combatAttributeArt.ready(tribe) ||
-          attributes.construction && !constructionUnits.unit(tribe, 0)) return base;
+      if (!equipped.length || equipped.some(attribute => attribute.kind === "combat") && !combatAttributeArt.ready(tribe)) return base;
       const key = tribe + ":" + equipped.map(attribute => attribute.key + ":" + attributes[attribute.key]).join(",");
       if (!unitAttributeScales.has(key)) {
         const growth = 1 + equipped.reduce((sum, attribute) => sum + UNIT_ATTRIBUTE_GROWTH[attribute.kind === "combat" ? "combat" : "common"], 0);
@@ -5101,30 +4995,26 @@
     }
 
     function measureUnitDisplayScale(tribe, attributes, growth) {
-      const reference = unitBodySize(tribe, attributes.construction ? { construction: attributes.construction } : {}), size = unitBodySize(tribe, attributes);
+      const reference = unitBodySize(tribe, {}), size = unitBodySize(tribe, attributes);
       const scale = (unitDisplayScales.get(tribe) || 1) * growth;
       return size.width > 0 ? scale * reference.width / size.width : null;
     }
 
     function unitBodySize(tribe, attributes) {
       const idle = unitAnimationSheets.get(tribe).get("idle");
-      const customized = ["antenna", "strength", "arms", "butchery", "lifespan", "feet", "excavation"].some(key => attributes[key] > 0);
+      const customized = ["antenna", "strength", "arms", "feet", "excavation"].some(key => attributes[key] > 0);
       let size;
       const scaled = (size, scale) => ({ width: size.width * scale, height: size.height * scale });
       if (tribe === "bean") {
         if (customized) {
-          const image = attributes.lifespan ? agentParts.get("lifespan-1") : agentBaseParts.get("body");
+          const image = agentBaseParts.get("body");
           const bounds = tribeArt.bounds(image, false);
           size = { width: AGENT_HEIGHT * 240 / 512 * bounds.width / image.naturalWidth,
-            height: AGENT_HEIGHT * (attributes.lifespan ? 324 : 350) / 512 * bounds.height / image.naturalHeight };
+            height: AGENT_HEIGHT * 350 / 512 * bounds.height / image.naturalHeight };
         } else size = scaled(idle.bodyBounds[0], AGENT_HEIGHT * idle.scale / idle.animation.frameSize);
       } else size = scaled(tribeArt.bodySize(tribe, attributes, false), AGENT_HEIGHT * idle.scale / 144);
-      const construction = attributes.construction ? constructionUnits.unit(tribe, 0) : null;
-      const constructionSize = construction ? { width: construction.track.body[2] * 512 / 144,
-        height: construction.track.body[3] * 512 / 144 * (tribe === "bean" && attributes.lifespan ? 1 + 99 / 225 : 1) } : null;
-      if (construction) size = scaled(constructionSize, AGENT_HEIGHT / 350);
       if (Spawner.combatAttributeKeys(attributes).length) {
-        const replacement = constructionSize || (tribe !== "bean" && customized ? tribeArt.bodySize(tribe, attributes, true) : scaled(size, 256 / AGENT_HEIGHT));
+        const replacement = tribe !== "bean" && customized ? tribeArt.bodySize(tribe, attributes, true) : scaled(size, 256 / AGENT_HEIGHT);
         size = scaled(combatAttributeArt.bodySize({ tribe, attributes }, replacement), AGENT_HEIGHT * 2 / 512);
       }
       return size;
@@ -5151,9 +5041,8 @@
       let opacity = contact.opacity;
       if (birth?.seedVisible) {
         offsetX = 0; offsetY = 0; radiusX = .055 * scale; radiusY = .018 * scale;
-      } else if (!agent.species && (appearance.feet || appearance.construction)) {
-        const family = appearance.construction ? appearance.feet ? "constructionFeet" : "construction" :
-          Spawner.hasCombatEvolution(appearance) ? "combatFeet" : "feet";
+      } else if (!agent.species && appearance.feet) {
+        const family = Spawner.hasCombatEvolution(appearance) ? "combatFeet" : "feet";
         const variant = unitGroundVariants[key + ":" + family];
         offsetX = variant.x * scale; offsetY = variant.y * scale;
         radiusX = variant.radiusX * scale; radiusY = variant.radiusY * scale;
@@ -5228,7 +5117,6 @@
 
     function drawAgentUnscaledBody(now, agent) {
       agent = displayedAgent(agent);
-      if (drawAgentConstruction(agent)) return;
       const cell = state.camera.zoom;
       const renderPosition = interpolatedAgentPosition(agent);
       const topLeft = worldToScreen(renderPosition.x, renderPosition.y);
@@ -5323,8 +5211,7 @@
 
     function drawAgentAppearanceLayer(ctx, now, agent, cell, topLeft, renderPosition, birth, outlineColor) {
       const attributes = agent.appearanceAttributes || agent.attributes || {};
-      if (birth || cell < 8 || !Spawner.combatAttributeKeys(attributes).length || !combatAttributeArt.ready(agent.tribe || "bean") ||
-          agent.construction?.state === "transforming") {
+      if (birth || cell < 8 || !Spawner.combatAttributeKeys(attributes).length || !combatAttributeArt.ready(agent.tribe || "bean")) {
         drawAgentAppearanceBody(ctx, now, agent, cell, topLeft, renderPosition, birth, outlineColor);
         return;
       }
@@ -5338,12 +5225,8 @@
         const neutral = Spawner.hasCombatEvolution(attributes) && sampled ? { ...forward, attack: null, hurtStartedAt: -Infinity,
           carrying: 0, birth: null, mode: sampled.action === "walk" ? forward.mode : "idle",
           moveDuration: sampled.action === "walk" ? forward.moveDuration : 0 } : forward;
-        if (Spawner.hasCombatEvolution(attributes) && sampled && attributes.construction) {
-          const construction = constructionUnitFrame(neutral, state.simSeconds);
-          if (construction) { context.drawImage(construction.sprite, 0, 0, 512, 512); return; }
-        }
         if (Spawner.hasCombatEvolution(attributes) && sampled && (agent.tribe || "bean") !== "bean" &&
-            ["antenna", "strength", "arms", "butchery", "lifespan", "feet", "excavation"].some(key => attributes[key] > 0)) {
+            ["antenna", "strength", "arms", "feet", "excavation"].some(key => attributes[key] > 0)) {
           context.drawImage(tribeArt.sprite(agent.tribe, attributes, "full"), 0, 0, 512, 512); return;
         }
         drawAgentAppearanceBody(context, now, neutral, maskCell, origin, renderPosition, birth, null);
@@ -5354,20 +5237,19 @@
       const facing = agent.combat ? agent.combat.side === 0 ? -1 : 1 : agent.facing || 1;
       ctx.save(); ctx.translate(topLeft.x + cell / 2, floor); ctx.scale(facing < 0 ? -1 : 1, 1);
       if (outlineColor) drawSelectionOutline(sprite, -size / 2, -size * .875, size, size, null, outlineColor);
-      agentLifespanArt.draw(ctx, agent, state.simSeconds, sprite, -size / 2, -size * .875, size, size); ctx.restore();
+      ctx.drawImage(sprite, -size / 2, -size * .875, size, size); ctx.restore();
 
     }
 
     function drawCombatAgentAttributes(context, agent) {
       const appearance = { ...(agent.appearanceAttributes || agent.attributes || {}), excavation: 0 };
-      if (!["feet", "antenna", "strength", "arms", "butchery"].some(key => appearance[key] > 0)) return;
+      if (!["feet", "antenna", "strength", "arms"].some(key => appearance[key] > 0)) return;
       if ((agent.tribe || "bean") === "bean") {
         context.save(); context.globalCompositeOperation = "destination-over";
         if (appearance.feet) {
           if (Number.isFinite(agent.x) && Number.isFinite(agent.y)) drawAgentFeet(context, agent, 0, 0, 512, 512, agentWalkPose(agent), null);
           else context.drawImage(composeAgentSprite(appearance, "feet"), 0, 0, 512, 512);
         }
-        if (appearance.butchery) context.drawImage(composeAgentSprite(appearance, "tail"), 0, 0, 512, 512);
         context.restore();
         context.drawImage(composeAgentSprite(appearance, "attributes-no-feet"), 0, 0, 512, 512);
       }
@@ -5446,8 +5328,7 @@
       ctx.clip();
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = "high";
-      const sprite = agentSprite(agent, (agent.tribe || "bean") === "bean" && appearance.lifespan ?
-        Spawner.sproutLifespanBodyLayer(agent, state.simSeconds, idleMotion.matches) : "body");
+      const sprite = agentSprite(agent, "body");
       const animated = drawAgentAnimation(ctx, agent, centerX, spriteY + spriteHeight * .94, spriteHeight, outlineColor);
       const attacking = !animated && drawAgentAttack(ctx, agent, centerX, spriteY + spriteHeight * .94, spriteHeight, outlineColor);
       const moving = !animated && !attacking && drawAgentMovement(ctx, agent, centerX, spriteY + spriteHeight * .94, spriteHeight, outlineColor);
@@ -5463,8 +5344,6 @@
         if (outlineColor) {
           ctx.save();
           ctx.scale(bodyPose.scaleX, bodyPose.scaleY);
-          drawAgentTail(ctx, agent, spriteX - centerX, -spriteHeight * bodyPose.pivot,
-            spriteWidth, spriteHeight, outlineColor);
           drawAgentHead(ctx, agent, spriteX - centerX, -spriteHeight * bodyPose.pivot,
             spriteWidth, spriteHeight, now, outlineColor);
           drawSelectionOutline(sprite, spriteX - centerX, -spriteHeight * bodyPose.pivot,
@@ -5472,11 +5351,9 @@
           ctx.restore();
         }
         ctx.scale(bodyPose.scaleX, bodyPose.scaleY);
-        drawAgentTail(ctx, agent, spriteX - centerX, -spriteHeight * bodyPose.pivot,
-          spriteWidth, spriteHeight, null);
         drawAgentHead(ctx, agent, spriteX - centerX, -spriteHeight * bodyPose.pivot,
           spriteWidth, spriteHeight, now, null);
-        agentLifespanArt.draw(ctx, agent, state.simSeconds, sprite, spriteX - centerX, -spriteHeight * bodyPose.pivot,
+        ctx.drawImage(sprite, spriteX - centerX, -spriteHeight * bodyPose.pivot,
           spriteWidth, spriteHeight);
       }
       ctx.restore();
@@ -5531,8 +5408,7 @@
 
     function selectedMovementAgents() {
       const selection = state.selection;
-      const agents = selection?.kind === "agent" ? [selection.target] :
-        selection?.kind === "corpse" ? corpseCollectors(selection.target) : [];
+      const agents = selection?.kind === "agent" ? [selection.target] : [];
       return agents.filter(agent => isAgentSelectable(agent) &&
         (displayedAgent(agent).movementPlan || agent.species || displayedAgent(agent).combatTarget));
     }
@@ -6013,6 +5889,7 @@
       updateEndingPresentation(elapsedMs);
       state.simSeconds = state.ending ? state.ending.endedAt : Math.max(state.simSeconds, connection.simSeconds +
         Math.min(0.3, (now - connection.receivedAt) / 1000) - MOVEMENT_DELAY);
+      expireClientCorpses();
       for (const delivery of foodDeliveries.values()) {
         if (delivery.receivedAtFrame == null && state.simSeconds >= delivery.arrivesAt) delivery.receivedAtFrame = now;
       }
@@ -6045,13 +5922,11 @@
       drawFlashes(now);
       for (const entry of colonyEntries) drawColonyGround(entry,
         worldToScreen(entry.x, entry.y), COLONY_SIZE * state.camera.zoom, colonyAppearance(entry));
-      drawBuildings();
       drawWorldObjects(now);
       drawCombatAgents(now);
       drawAttackImpacts();
       drawAgentGroups();
       drawFoodDeliveries(now);
-      drawCorpseResourceCounts();
       drawFoodStatus();
       drawBurrowStatus();
       drawFog(now);
@@ -6285,17 +6160,12 @@
       const agent = agents[(selected + 1) % agents.length];
       if (agent) return { kind: "agent", target: agent };
       if (colony) return { kind: "colony", target: colony };
-      const building = state.buildings.find(entry => entry.health > 0 && cellX >= entry.x && cellX < entry.x + entry.width && cellY >= entry.y && cellY < entry.y + entry.height);
-      if (building) return { kind: "building", target: building };
       const burrow = state.explored.has(cellY * WORLD_SIZE + cellX) && worldMap.burrows.find(point => point.health > 0 &&
         cellX >= point.x && cellX < point.x + point.width && cellY >= point.y && cellY < point.y + point.height);
       if (burrow) return { kind: "burrow", target: burrow };
-      const resourceCorpse = state.corpses.findLast(cell =>
-        Spawner.corpseResourceDrops(cell).some(drop => Math.hypot(world.x - drop.x, world.y - drop.y) < drop.size));
-      if (resourceCorpse) return { kind: "corpse", target: foodCellMap.get(resourceCorpse.key || resourceCorpse.x + "," + resourceCorpse.y) || resourceCorpse };
-      if (food && (food.amount > 0 || food.kind === "corpse")) return { kind: food.kind === "corpse" ? "corpse" : "food", target: food };
+      if (food?.amount > 0) return { kind: "food", target: food };
       const corpse = state.corpses.findLast(cell => cell.x === cellX && cell.y === cellY);
-      if (corpse) return { kind: "corpse", target: foodCellMap.get(corpse.key || corpse.x + "," + corpse.y) || corpse };
+      if (corpse) return { kind: "corpse", target: corpse };
       if (cellX >= 0 && cellY >= 0 && cellX < WORLD_SIZE && cellY < WORLD_SIZE &&
           state.explored.has(cellY * WORLD_SIZE + cellX)) {
         const tree = forest.cells.get(cellX + "," + cellY);
@@ -6305,47 +6175,6 @@
       }
       const cell = terrainCodexCell({ ...worldMap, size: WORLD_SIZE }, state.explored, cellX, cellY);
       return cell ? { kind: "terrain", target: cell } : null;
-    }
-
-    const buildingSprites = new Map();
-    function drawBuildings() {
-      for (const building of state.buildings) {
-        const destroyed = building.health <= 0;
-        const destruction = structureEffectPlayback.effects.get("building:" + building.id + ":damage");
-        if (destroyed && destruction?.type !== "destroy" || !Spawner.buildingDefinition(building.key)) continue;
-        if (!state.explored.has(building.y * WORLD_SIZE + building.x)) continue;
-        const spriteKey = (building.tribe || state.tribe) + ":" + building.key;
-        if (!buildingSprites.has(spriteKey)) {
-          const image = new Image();
-          image.src = assetSource(Spawner.buildingImage(building.key, building.tribe || state.tribe));
-          buildingSprites.set(spriteKey, image);
-        }
-        const image = buildingSprites.get(spriteKey);
-        if (!image.complete || !image.naturalWidth) continue;
-        const point = worldToScreen(building.x, building.y);
-        const width = building.width * state.camera.zoom;
-        const height = building.height * state.camera.zoom;
-        const placement = Spawner.buildingPlacement({ ...building, tribe: building.tribe || state.tribe });
-        const artX = point.x + placement.x * width, artY = point.y + placement.y * height;
-        const artWidth = width * placement.width, artHeight = height * placement.height;
-        ctx.save();
-        ctx.globalAlpha = 1;
-        const idle = buildingIdle.frame({ ...building, health: destroyed ? 1 : building.health, tribe: building.tribe || state.tribe },
-          destroyed ? destruction.startedAt : state.simSeconds, idleMotion.matches);
-        drawStructureEffects("building", building, idle?.image || image, idle || null, artX, artY, artWidth, artHeight, false);
-        if (!destroyed) {
-          if (idle) ctx.drawImage(idle.image, idle.x, idle.y, idle.width, idle.height, artX, artY, artWidth, artHeight);
-          else ctx.drawImage(image, artX, artY, artWidth, artHeight);
-        }
-        drawStructureEffects("building", building, idle?.image || image, idle || null, artX, artY, artWidth, artHeight, true);
-        const color = objectOutlineColor("building", building);
-        if (color) {
-          ctx.strokeStyle = color;
-          ctx.lineWidth = 2;
-          ctx.strokeRect(point.x, point.y, width, height);
-        }
-        ctx.restore();
-      }
     }
 
     function updateHover() {
@@ -6914,21 +6743,12 @@
         if (cell) openTerrainCodex(cell.x, cell.y);
         return;
       }
-      if (selected.kind === "building") {
-        openCodex("building:" + selected.target.key);
-        return;
-      }
       if (selected.kind === "burrow") {
         openCodex("burrow:" + selected.target.type);
         return;
       }
       if (selected.kind === "colony") {
         openCodex("nest:colony");
-        return;
-      }
-      if (selected.kind === "corpse") {
-        const definition = Spawner.resourceDefinition(Spawner.resourceTypeForCell(selected.target, worldMap));
-        openCodex("attribute:" + definition.requirements[0]);
         return;
       }
       const slots = selected.target.activeSlots || selected.target.slots || [];
@@ -6948,51 +6768,10 @@
       const result = await sendCommand({ type: "birth", agentId: state.selection.target.id });
       if (unitPanelSelectionKey === key) setEvolutionText(unitActionStatus, result ? "새 생명체가 탄생합니다." : nestStatus.textContent);
     });
-    corpseDesign.addEventListener("click", async () => {
-      const corpse = state.selection?.kind === "corpse" ? state.selection.target : null;
-      if (!corpse || corpseDesign.disabled) return;
-      hideHelpTooltip();
-      const recovery = corpseRecovery(corpse);
-      if (recovery.agent) {
-        selectAgent(recovery.agent);
-        canvas.focus();
-      } else if (recovery.template) {
-        const key = unitPanelSelectionKey;
-        unitActionStatus.textContent = "";
-        nestStatus.textContent = "";
-        const result = await sendCommand({ type: "birth", templateId: recovery.template.id });
-        if (unitPanelSelectionKey === key) setEvolutionText(unitActionStatus, result ? "회수 유닛이 탄생합니다." : nestStatus.textContent);
-      } else {
-        const definition = Spawner.resourceDefinition(Spawner.resourceTypeForCell(corpse, worldMap));
-        openUnitDesign({ id: null, tribe: state.tribe, slots: [...definition.requirements] }, false);
-        document.getElementById("design-title").textContent = "회수 유닛 설계";
-      }
-    });
-
-    function corpseCollectors(corpse) {
-      const key = corpse.key || corpse.x + "," + corpse.y;
-      return state.agents.filter(agent => agent.health > 0 && agent.action === "collect" &&
-        ["approach", "harvest"].includes(agent.mode) && agent.targetFoodKey === key &&
-        Spawner.canHarvestResource(corpse, worldMap, agent.attributes, state.tribe));
-    }
-
-    function corpseRecovery(corpse) {
-      const collectors = corpseCollectors(corpse);
-      const agents = collectors.length ? collectors : state.agents.filter(agent => agent.health > 0 &&
-        Spawner.canHarvestResource(corpse, worldMap, agent.attributes, state.tribe));
-      const agent = agents.reduce((nearest, candidate) => !nearest ||
-        Math.hypot(candidate.x - corpse.x, candidate.y - corpse.y) < Math.hypot(nearest.x - corpse.x, nearest.y - corpse.y) ? candidate : nearest, null);
-      const template = agent ? null : state.templates.find(template =>
-        Spawner.canHarvestResource(corpse, worldMap, attributeCounts(template.slots, template.attributeLevels), template.tribe || state.tribe));
-      return { agent, template };
-    }
-
     function updateCorpseDetails() {
       const corpse = state.selection?.kind === "corpse" ? state.selection.target : null;
       corpseDetails.hidden = !corpse || corpse.kind !== "corpse";
-      corpseDesign.hidden = corpseDetails.hidden;
       if (corpseDetails.hidden) return;
-      const previousHelp = helpTooltipTarget?.dataset.help + (helpTooltipTarget?.dataset.helpHint || "");
       const species = Spawner.ENCOUNTER_TYPES.find(type => type.key === corpse.species);
       const name = corpse.name || species?.name || (corpse.species === "spiny-back-beetle" ? "가시등벌레" : "");
       unitPanelTitle.textContent = name ? name + (Number.isFinite(corpse.level) ? " · Lv." + (corpse.level || 1) : "") + " · 사체" : "사체";
@@ -7022,77 +6801,17 @@
         }
         attributes.replaceChildren(fragment);
       }
-      const definition = Spawner.resourceDefinition(Spawner.resourceTypeForCell(corpse, worldMap));
-      corpseValue.textContent = Number(Math.max(0, corpse.amount).toFixed(1));
-      const image = document.getElementById("corpse-resource-image");
-      const ratio = window.devicePixelRatio || 1;
-      const imageKey = definition.key + ":" + ratio;
-      if (image.dataset.key !== imageKey) {
-        const sprite = resourceCarrySprites.get(definition.key);
-        const crop = resourceCarryBounds.get(definition.key);
-        image.width = image.height = Math.round(24 * ratio);
-        const scale = Math.min(image.width / crop.width, image.height / crop.height) * .94;
-        image.getContext("2d").drawImage(sprite, crop.x, crop.y, crop.width, crop.height,
-          (image.width - crop.width * scale) / 2, (image.height - crop.height * scale) / 2, crop.width * scale, crop.height * scale);
-        image.dataset.key = imageKey;
-      }
-      corpseValue.closest("[data-help]").dataset.help = corpse.amount > 0 ?
-        "사체에서 회수할 수 있는 " + definition.name + "입니다." : "남은 자원을 모두 회수했습니다.";
       const decay = document.getElementById("corpse-decay");
       const remaining = Math.ceil(Math.max(0, corpse.decaysAt - state.simSeconds));
       decay.hidden = !Number.isFinite(corpse.decaysAt);
       document.getElementById("corpse-decay-value").textContent = decay.hidden ? "" : Math.floor(remaining / 60) + ":" + String(remaining % 60).padStart(2, "0");
-      decay.dataset.help = "사라짐까지 " + formatLifetime(remaining) + "\n사라지면 남은 자원도 없어집니다.";
+      decay.dataset.help = "사라짐까지 " + formatLifetime(remaining);
       decay.setAttribute("aria-label", decay.dataset.help);
-      const recovery = corpseRecovery(corpse);
-      const cost = recovery.template ? birthCost(recovery.template, state.tribe) : 0;
-      const action = corpse.amount <= 0 ? "회수 완료" : recovery.agent ? "회수 유닛으로 이동" : recovery.template ? "회수 유닛 탄생" : "회수 유닛 설계";
-      corpseDesign.setAttribute("aria-label", action);
-      const source = recovery.agent ? resourceLocation : recovery.template ? agentBirth : agentDesign;
-      if (corpseDesign.dataset.action !== source.id) {
-        corpseDesign.dataset.action = source.id;
-        corpseDesign.replaceChildren(source.querySelector("svg").cloneNode(true));
-      }
-      corpseDesign.disabled = corpse.amount <= 0 || !recovery.agent && (!!state.ending || connection.busy || !connection.online || state.nestHealth === 0 ||
-        recovery.template && (state.evolutionPoints < cost || recovery.template.slots.length > slotCapacity() ||
-          recovery.template.slots.some(key => !isAttributeUnlocked(key, state.nestLevel, state.tribe))));
-      corpseDesign.dataset.help = action + "\n" + (recovery.agent ? recovery.agent.name + " 선택 · 위치로 이동" :
-        recovery.template ? recovery.template.name + "\n진화 포인트 " + cost + "점" :
-        definition.requirements.map(key => ATTRIBUTES.find(attribute => attribute.key === key).name).join(" · ") + " 속성을 갖춘 회수 유닛 설계");
-      corpseDesign.dataset.helpHint = recovery.agent ? "" : state.ending ? "종료된 군락입니다." :
-        connection.busy ? "처리 중입니다." : !connection.online ? "연결을 확인해 주세요." :
-        !hasBirthplace() ? "살아 있는 둥지가 없습니다." : state.evolutionPoints < cost ? "진화 포인트가 부족합니다." :
-        corpseDesign.disabled ? "둥지에서 설계를 확인해 주세요." : "";
-      if (recovery.agent || recovery.template) {
-        corpseDesign.removeAttribute("aria-haspopup");
-        corpseDesign.removeAttribute("aria-controls");
-      } else {
-        corpseDesign.setAttribute("aria-haspopup", "dialog");
-        corpseDesign.setAttribute("aria-controls", "evolution-panel");
-      }
-      if (helpTooltipTarget && (corpseDetails.contains(helpTooltipTarget) || helpTooltipTarget === corpseDesign)) {
-        const help = helpTooltipTarget.dataset.help + (helpTooltipTarget.dataset.helpHint || "");
-        if (previousHelp !== help) showHelpTooltip(helpTooltipTarget);
-      }
     }
 
     function formatLifetime(seconds) {
       const total = Math.max(0, Math.floor(seconds));
       return Math.floor(total / 60) + "분 " + total % 60 + "초";
-    }
-
-    function updateAgentLife(life, agent) {
-      const corpse = agent.kind === "corpse";
-      const remaining = Math.max(0, corpse ? agent.decaysAt - state.simSeconds : agent.bornAt + agent.lifespan - state.simSeconds);
-      const personality = agent.personalityLabels;
-      const help = corpse ? agent.name + "의 사체 · 사라짐까지 " + formatLifetime(Math.ceil(remaining)) :
-        agent.name + " · 남은 수명 " + formatLifetime(Math.ceil(remaining)) + (personality ? "\n대담함 " + personality.boldness + " · 호전성 " + personality.aggression + " · 호기심 " + personality.curiosity : "");
-      const previousHelp = life.dataset.help;
-      life.dataset.help = help;
-      life.setAttribute("aria-label", help);
-      life.querySelector(".agent-life-alive").style.clipPath = "inset(" + (corpse ? 100 : (1 - clamp(remaining / agent.lifespan, 0, 1)) * 100) + "% 0 0)";
-      if (helpTooltipTarget === life && previousHelp !== help) showHelpTooltip(life);
-      return remaining;
     }
 
     function selectedAgentTemplate() {
@@ -7419,12 +7138,9 @@
       updateResourceDetails();
       updateBurrowDetails();
       updateForeignColonyDetails();
-      progression.refresh();
-      const building = state.selection?.kind === "building" ? state.selection.target : null;
       document.getElementById("unit-codex").hidden = !!agent?.species;
       resourceLocation.hidden = resourceDetails.hidden && terrainDetails.hidden && foreignColonyDetails.hidden;
       agentDetails.hidden = !agent;
-      agentLife.hidden = !agent || !!agent.species;
       agentRenameOpen.hidden = !agent || !state.agents.includes(agent);
       agentRenameOpen.disabled = !!state.ending || connection.busy || !connection.online;
       agentNameInput.disabled = connection.busy;
@@ -7432,13 +7148,11 @@
       agentNameCancel.disabled = connection.busy;
       agentBirth.hidden = !agent || !state.agents.includes(agent);
       agentDesign.hidden = !agent || !state.agents.includes(agent);
-      unitPanel.hidden = !agent && !building && corpseDetails.hidden && terrainDetails.hidden && resourceDetails.hidden && burrowDetails.hidden && foreignColonyDetails.hidden;
+      unitPanel.hidden = !agent && corpseDetails.hidden && terrainDetails.hidden && resourceDetails.hidden && burrowDetails.hidden && foreignColonyDetails.hidden;
       if (unitPanel.hidden) return;
       collapseControlsGuide();
-      if (building) unitPanelTitle.textContent = building.name;
       if (!agent) return;
       unitPanelTitle.textContent = agent.name + " · Lv." + (agent.level || 1);
-      if (!agentLife.hidden) updateAgentLife(agentLife, agent);
       const attributes = document.getElementById("agent-attributes");
       const slots = agent.activeSlots || agent.slots || [];
       const signature = JSON.stringify([agent.tribe, agent.species, slots, agent.attributeLevels, agent.attributes]);
@@ -7467,7 +7181,7 @@
       }
       const template = selectedAgentTemplate();
       const cost = template ? birthCost(template, state.tribe) : Infinity;
-      agentBirth.disabled = !!state.ending || !template || connection.busy || !connection.online || !hasBirthplace() || state.evolutionPoints < cost ||
+      agentBirth.disabled = !!state.ending || !template || connection.busy || !connection.online || !hasBirthplace() || state.agents.filter(agent => agent.health > 0).length >= unitCapacity() || state.evolutionPoints < cost ||
         template.slots.length > slotCapacity() || template.slots.some(key => !isAttributeUnlocked(key, state.nestLevel, state.tribe));
       const help = "같은 설계로 탄생" + (Number.isFinite(cost) ? "\n진화 포인트 " + cost + "점" : "");
       const hint = unitActionStatus.textContent || (connection.busy ? "처리 중입니다." : !connection.online ? "연결을 확인해 주세요." :
@@ -7521,7 +7235,7 @@
     }
 
     function unitListEntries() {
-      return [...state.agents, ...state.corpses.filter(corpse => corpse.colonyId === connection.colonyId).map(corpse => foodCellMap.get(corpse.key || corpse.x + "," + corpse.y) || corpse)];
+      return [...state.agents, ...state.corpses.filter(corpse => corpse.colonyId === connection.colonyId)];
     }
 
     function invalidateAgentAvatarLayout() {
@@ -7581,8 +7295,7 @@
       updateUnitPanel();
       const entries = unitListEntries();
       const corpseCount = entries.length - state.agents.length;
-      updatePanelText(agentListCount, state.agents.length + (corpseCount ? " · 사체 " + corpseCount : ""));
-      if (objectPanel.hidden) return;
+      updatePanelText(agentListCount, state.agents.filter(agent => agent.health > 0).length + "/" + unitCapacity() + (corpseCount ? " · 사체 " + corpseCount : ""));
       const signature = entries.map((agent) => agent.id).join(",");
       if (signature !== renderedAgentListSignature) {
         const active = new Set(entries.map(agent => String(agent.id)));
@@ -7602,20 +7315,9 @@
             "<canvas data-agent-avatar aria-hidden=\"true\"></canvas>" +
             "<strong data-agent-name></strong>" +
             "<span data-agent-mode></span>" +
-            "<small data-agent-carry></small>" +
-            "<span class=\"agent-life\" role=\"img\" data-help=\"\"><img class=\"agent-life-dead\" alt=\"\">" +
-            "<img class=\"agent-life-alive\" alt=\"\"></span>";
-          button.querySelector(".agent-life-dead").src = assetSource("DesignAssets/UI/Lifespan/leaf-dead.png");
-          button.querySelector(".agent-life-alive").src = assetSource("DesignAssets/UI/Lifespan/leaf-alive.png");
+            "<small data-agent-carry></small>";
           const avatar = button.querySelector("[data-agent-avatar]");
           agentAvatars.set(agent.id, { canvas: avatar, context: avatar.getContext("2d") });
-          const life = button.querySelector(".agent-life");
-          life.addEventListener("pointerenter", () => showHelpTooltip(life));
-          life.addEventListener("pointerleave", () => {
-            if (document.activeElement !== button) hideHelpTooltip();
-          });
-          button.addEventListener("focus", () => showHelpTooltip(life));
-          button.addEventListener("blur", hideHelpTooltip);
           button.addEventListener("click", () => {
             hideHelpTooltip();
             const current = unitListEntries().find(candidate => candidate.id === button.dataset.agentId);
@@ -7624,7 +7326,7 @@
               moveCameraTo(current.x + 0.5, current.y + 0.5, zoomForLayer(INITIAL_ZOOM_LAYER));
             } else if (current) selectAgent(current);
           });
-          agentListButtons.set(id, { button, life, name: button.querySelector("[data-agent-name]"),
+          agentListButtons.set(id, { button, name: button.querySelector("[data-agent-name]"),
             mode: button.querySelector("[data-agent-mode]"), carry: button.querySelector("[data-agent-carry]") });
         }
         let next = agentList.firstElementChild;
@@ -7642,23 +7344,21 @@
         if (!entry) continue;
         const button = entry.button;
         const corpse = agent.kind === "corpse";
-        const remaining = updateAgentLife(entry.life, agent);
-        button.className = "agent-item" + (corpse ? " is-corpse" : remaining <= Spawner.AGENT_LIFESPAN_WARNING ? " is-dying" : "") +
+        button.className = "agent-item" + (corpse ? " is-corpse" : "") +
           (isSelectedObject(corpse ? "corpse" : "agent", agent) ? " is-selected" : "");
         if (corpse) {
           button.setAttribute("aria-label", agent.name + "의 사체 위치 보기");
           updatePanelText(entry.name, agent.name);
           updatePanelText(entry.mode, "Lv." + (agent.level || 1) + " · 사체");
           entry.mode.title = "";
-          updatePanelText(entry.carry, Spawner.resourceDefinition(Spawner.resourceTypeForCell(agent, worldMap)).name + " " + Number(Math.max(0, agent.amount).toFixed(1)) + "개");
+          updatePanelText(entry.carry, "");
           continue;
         }
 
         button.setAttribute("aria-label", agent.name + " 선택");
         updatePanelText(entry.name, agent.name);
         updatePanelText(entry.mode, "Lv." + (agent.level || 1) + " · " + (AGENT_MODE_LABELS[agent.mode] || agent.mode));
-        const intent = agent.mode === "wait" ? agent.constructionIntent : null;
-        entry.mode.title = intent ? Spawner.buildingDefinition(intent.buildingKey).name + " (" + intent.x + ", " + intent.y + ")\n" + intent.issue : "";
+        entry.mode.title = "";
         updatePanelText(entry.carry, (agent.carrying > 0 ? Spawner.resourceDefinition(agent.carryingType || "honey-mushrooms").name + " " : "운반 ") +
           agent.carrying + "/" + (Spawner.unitCarryCapacity(agent, agent.carryingType) + (hasSynergy(agent.attributes, ["strength", "strength"]) ? 4 : 0)));
 
@@ -7668,11 +7368,8 @@
 
     const ATTRIBUTE_SYMBOLS = { antenna: "DesignAssets/Attributes/SilhouettesV2/23-y-branch.png",
       strength: "DesignAssets/Attributes/SilhouettesV2/24-horseshoe.png",
-      butchery: "DesignAssets/Attributes/SilhouettesV2/04-crescent.png",
-      lifespan: "DesignAssets/Attributes/SilhouettesV2/40-spiral.png",
       feet: "DesignAssets/Attributes/SilhouettesV2/27-chevron.png",
       excavation: "DesignAssets/Planning/Attributes/SilhouettesV2/14-pentagon.png",
-      construction: "DesignAssets/Planning/Attributes/SilhouettesV2/25-h-bridge.png",
       blade: "DesignAssets/Attributes/CombatDnaV1/blade.png",
       piercing: "DesignAssets/Attributes/CombatDnaV1/piercing.png",
       carapace: "DesignAssets/Attributes/CombatDnaV1/carapace.png",
@@ -7681,7 +7378,11 @@
     const ATTRIBUTE_IMAGES = Object.fromEntries(ATTRIBUTES.map(attribute =>
       [attribute.key, assetSource(ATTRIBUTE_SYMBOLS[attribute.key])]));
     function hasBirthplace() {
-      return state.nestHealth !== 0 || state.buildings.some(building => building.key === "outpost" && building.health > 0);
+      return state.nestHealth !== 0;
+    }
+
+    function unitCapacity() {
+      return NEST_LEVELS[state.nestLevel - 1].unitCapacity;
     }
 
     function slotCapacity() {
@@ -7698,21 +7399,17 @@
 
     function agentAppearanceKey(attributes) {
       return [attributes.strength ?? attributes.arms ?? 0, attributes.feet || 0,
-        attributes.antenna || 0, attributes.lifespan || 0, attributes.butchery || 0, attributes.construction || 0, attributes.excavation || 0].join(":");
+        attributes.antenna || 0, attributes.excavation || 0].join(":");
     }
 
     function agentSpriteLayers(attributes) {
-      return ["body", ...(attributes.butchery ? ["tail"] : []), ...(attributes.feet ? ["feet-left", "feet-right"] : []),
+      return ["body", ...(attributes.feet ? ["feet-left", "feet-right"] : []),
         ...(attributes.antenna ? ["antenna"] : ["sprout-left", "sprout-right", "sprout-stem"])];
     }
 
     function prepareAgentTemplate(template) {
       if (template.slots.some(key => Spawner.COMBAT_ATTRIBUTE_KEYS.includes(key)) && !combatAttributeArt.ready(template.tribe || "bean")) {
         return combatAttributeArt.prepare(template.tribe || "bean").then(() => prepareAgentTemplate(template));
-      }
-      if (template.slots.includes("construction") && !constructionUnits.unit(template.tribe || "bean", 0)) {
-        return Promise.all([constructionUnits.prepare(template.tribe || "bean"), constructionUnits.prepareEffects()])
-          .then(() => prepareAgentTemplate(template));
       }
       if (template.tribe && template.tribe !== "bean") {
         const tribe = Spawner.PLAYER_TRIBES.find(entry => entry.key === template.tribe);
@@ -7747,27 +7444,15 @@
       if (agent?.species === "talon-owl") return talonOwlFrames.get(0);
       if (encounterSprites.has(agent?.species)) return encounterSprites.get(agent.species);
       const attributes = agent?.appearanceAttributes || agent?.attributes || {};
-      if ((!layer || ["full", "body"].includes(layer)) && (agent.tribe || "bean") !== "bean" && !attributes.construction &&
-          Spawner.hasCombatEvolution(attributes) && ["antenna", "strength", "arms", "butchery", "lifespan", "feet", "excavation"].some(key => attributes[key] > 0) && combatAttributeArt.ready(agent.tribe)) {
+      if ((!layer || ["full", "body"].includes(layer)) && (agent.tribe || "bean") !== "bean" &&
+          Spawner.hasCombatEvolution(attributes) && ["antenna", "strength", "arms", "feet", "excavation"].some(key => attributes[key] > 0) && combatAttributeArt.ready(agent.tribe)) {
         const body = tribeArt.sprite(agent.tribe, attributes, layer || "full");
         const sprite = combatAttributeArt.frame({ ...agent, health: 1, birth: null, attack: null, hurtStartedAt: -Infinity, moveDuration: 0 }, 0, 1, context => context.drawImage(body, 0, 0, 512, 512));
         agentSpriteSet.add(sprite); return sprite;
       }
-      if ((!layer || ["full", "body"].includes(layer)) && Spawner.hasCombatEvolution(attributes) && !attributes.construction && combatAttributeArt.ready(agent.tribe || "bean")) {
+      if ((!layer || ["full", "body"].includes(layer)) && Spawner.hasCombatEvolution(attributes) && combatAttributeArt.ready(agent.tribe || "bean")) {
         const sprite = combatAttributeArt.portrait(agent, context => drawCombatAgentAttributes(context, agent));
         if (sprite) { agentSpriteSet.add(sprite); return sprite; }
-      }
-      if (attributes.construction) {
-        const construction = constructionUnitFrame({ ...agent, attributes, appearanceAttributes: attributes, birth: null, health: 1 }, 0);
-        if (construction) {
-          if (layer && !["body", "full"].includes(layer)) {
-            const empty = document.createElement("canvas"); empty.width = empty.height = 512; return empty;
-          }
-          const sprite = Spawner.hasCombatEvolution(attributes) && combatAttributeArt.ready(agent.tribe || "bean") ?
-            combatAttributeArt.frame({ ...agent, health: 1, birth: null, attack: null, hurtStartedAt: -Infinity, moveDuration: 0 }, 0, 1, context => context.drawImage(construction.sprite, 0, 0)) : construction.sprite;
-          agentSpriteSet.add(sprite);
-          return sprite;
-        }
       }
       if (agent?.tribe && agent.tribe !== "bean") {
         const sprite = tribeArt.sprite(agent.tribe, attributes, layer || "full");
@@ -7775,7 +7460,7 @@
         return sprite;
       }
       const counts = { strength: attributes.strength ?? attributes.arms ?? 0,
-        feet: attributes.feet || 0, antenna: attributes.antenna || 0, lifespan: attributes.lifespan || 0, butchery: attributes.butchery || 0,
+        feet: attributes.feet || 0, antenna: attributes.antenna || 0,
         excavation: attributes.excavation || 0 };
       const key = agentAppearanceKey(counts) + ":" + (layer || "full");
       if (!agentSprites.has(key)) {
@@ -7784,84 +7469,6 @@
         agentSpriteSet.add(sprite);
       }
       return agentSprites.get(key);
-    }
-
-    function constructionUnitFrame(agent, time, override, omitRoots) {
-      const base = override || constructionUnits.frame(agent, time);
-      if (!base) return null;
-      const attributes = agent.appearanceAttributes || agent.attributes;
-      if (!["antenna", "strength", "butchery", "lifespan", "feet", "excavation"].some(key => attributes[key])) return base;
-      const key = [agent.tribe || "bean", agentAppearanceKey(attributes), base.action, base.frame, Boolean(omitRoots)].join(":");
-      if (!constructionFrames.has(key)) {
-        let sprite;
-        if ((agent.tribe || "bean") === "bean" && attributes.lifespan)
-          sprite = sproutLifespan.construction(base, attributes, agentParts, sproutRoots, constructionUnits.unit("bean", 0), omitRoots);
-        else if ((agent.tribe || "bean") !== "bean") sprite = tribeArt.constructionFrame(agent, base, time);
-        else {
-          sprite = document.createElement("canvas"); sprite.width = sprite.height = 512;
-          const absorption = base.absorption || 0;
-          const context = sprite.getContext("2d"), lift = agentBodyLift(attributes) * (1 - absorption);
-          const drawFeet = () => {
-            if (!attributes.feet || omitRoots) return;
-            const geometry = Spawner.sproutRootGeometry(attributes.feet), top = geometry.floor - geometry.height;
-            context.save(); context.translate(256, top - 100 * absorption);
-            context.scale(1 - .75 * absorption, 1 - .45 * absorption); context.translate(-256, -top);
-            sproutRoots.drawRig(context, agentParts.get("root-rig"), attributes.feet, null,
-              { rotation: 0, bob: 0, pivot: 460 - agentBodyLift(attributes) }, null); context.restore();
-          };
-          if (absorption) {
-            for (const attribute of ["antenna", "strength", "lifespan", "butchery", "excavation"]) {
-              if (!attributes[attribute]) continue;
-              const isolated = { ...attributes, antenna: 0, strength: 0, arms: 0, lifespan: 0, butchery: 0, excavation: 0, feet: attributes.feet,
-                [attribute]: attributes[attribute] };
-              const part = composeAgentSprite(isolated, attribute === "butchery" ? "tail" : "attributes-no-feet");
-              let bounds = constructionPartBounds.get(part);
-              if (!bounds) {
-                const data = part.getContext("2d").getImageData(0, 0, 512, 512).data;
-                bounds = [0, 1].map(side => {
-                  let left = 512, top = 512, right = 0, bottom = 0;
-                  for (let y = 0; y < 512; y++) for (let x = attribute === "strength" ? side * 256 : 0;
-                    x < (attribute === "strength" ? (side + 1) * 256 : 512); x++) if (data[(y * 512 + x) * 4 + 3] > 16) {
-                    left = Math.min(left, x); top = Math.min(top, y); right = Math.max(right, x + 1); bottom = Math.max(bottom, y + 1);
-                  }
-                  return right > left ? [left, top, right - left, bottom - top] : null;
-                });
-                constructionPartBounds.set(part, bounds);
-              }
-              for (const [index, box] of bounds.entries()) {
-                if (!box || attribute !== "strength" && index) continue;
-                const [x, y, width, height] = box, body = base.track.body;
-                const dx = ((body[0] + body[2] * .5) * 512 / 144 - x - width / 2) * absorption;
-                const dy = ((body[1] + body[3] * .4) * 512 / 144 - y - height / 2) * absorption;
-                context.drawImage(part, x, y, width, height, x + dx, y + dy, width, height);
-              }
-            }
-            drawFeet();
-          } else {
-            if (attributes.butchery) context.drawImage(composeAgentSprite(attributes, "tail"), 0, 0);
-            drawFeet();
-          }
-          context.drawImage(base.sprite, 0, -lift);
-          if (!absorption) {
-            context.drawImage(composeAgentSprite(attributes, "attributes-no-feet"), 0, 0);
-          }
-        }
-        constructionFrames.set(key, sprite);
-        if (constructionFrames.size > 64) constructionFrames.delete(constructionFrames.keys().next().value);
-      }
-      return { ...base, sprite: constructionFrames.get(key) };
-    }
-
-    function drawAgentConstruction(agent) {
-      const pose = Spawner.constructionMorphPose(agent, state.simSeconds);
-      if (!pose) return false;
-      const definition = Spawner.buildingDefinition(agent.construction.buildingKey), cell = state.camera.zoom;
-      const point = worldToScreen(agent.construction.x, agent.construction.y);
-      if (point.x + (definition.width + .6) * cell < 0 || point.x - .6 * cell > viewport.width ||
-        point.y + (definition.height + .65) * cell < 0 || point.y - .65 * cell > viewport.height) return true;
-      const early = constructionUnits.morphFrame(agent, state.simSeconds);
-      const frame = early ? constructionUnitFrame(agent, state.simSeconds, early) : null;
-      return constructionUnits.drawMorph(ctx, agent, frame?.sprite || null, state.simSeconds, point, state.camera.zoom, idleMotion.matches);
     }
 
     function agentImageSource(agent) {
@@ -7874,13 +7481,13 @@
       if (!attributes.feet) return 0;
       const height = Spawner.sproutRootGeometry(attributes.feet).height;
       const lift = 426 - 512 * .94 + height * .88;
-      return attributes.construction ? Math.max(40, lift) : lift;
+      return lift;
     }
 
     function composeAgentAntennae(context, attributes) {
       const count = attributes.antenna;
       if (!count) return;
-      const lift = agentBodyLift(attributes) + (attributes.lifespan ? 103 : 0);
+      const lift = agentBodyLift(attributes);
       const part = agentParts.get("antenna-" + (count === 1 ? 1 : 2));
       const width = count === 1 ? 196 : 344 + (count - 2) * 16;
       const height = width * part.naturalHeight / part.naturalWidth;
@@ -7889,8 +7496,8 @@
 
     function composeAgentBaseFeet(context, attributes, layer) {
       if (attributes.feet) return;
-      const mature = Boolean(attributes.lifespan), sourceHeight = mature ? 140 : 153;
-      const top = mature ? 136 : 110, height = mature ? 324 : 350, y = mature ? 124 : 136;
+      const sourceHeight = 153;
+      const top = 110, height = 350, y = 136;
       const part = agentBaseParts.get("green-foot");
       for (const [index, x] of [16.5, 66.5].entries()) {
         if (layer === "feet-left" && index || layer === "feet-right" && !index) continue;
@@ -7902,7 +7509,7 @@
     function composeAgentSprite(attributes, layer) {
       const expression = layer === "body-half" ? "half" : layer === "body-closed" ? "closed" : "open";
       if (layer === "body-half" || layer === "body-closed") layer = "body";
-      const portraitPadding = attributes.lifespan && (!layer || layer === "full") ? 64 : 0;
+      const portraitPadding = 0;
       const sprite = document.createElement("canvas");
       const resolution = Math.max(512, Math.ceil(ZOOM_LAYERS[0] * AGENT_HEIGHT * (window.devicePixelRatio || 1) * 2 / 256) * 256);
       sprite.width = sprite.height = resolution * (512 + portraitPadding * 2) / 512;
@@ -7912,16 +7519,12 @@
       context.imageSmoothingEnabled = true;
       context.imageSmoothingQuality = "high";
       const lift = agentBodyLift(attributes);
-      if (attributes.butchery && (!layer || layer === "full" || layer === "tail")) {
-        context.drawImage(agentParts.get("butchery"), 0, -lift, 512, 512);
-      }
-      if (layer === "tail") return sprite;
       if (layer === "sprout-left" || layer === "sprout-right" || layer === "sprout-stem") {
         if (!attributes.antenna) context.drawImage(agentBaseParts.get(layer), 136, 110 - lift, 240, 350);
         return sprite;
       }
       if (layer === "antenna") {
-        composeAgentAntennae(context, { ...attributes, lifespan: 0 });
+        composeAgentAntennae(context, attributes);
         return sprite;
       }
       if (attributes.feet && layer !== "body" && layer !== "attributes-no-feet") {
@@ -7941,18 +7544,11 @@
       if (attributes.antenna && layer !== "body") composeAgentAntennae(context, attributes);
       if (layer !== "attributes" && layer !== "attributes-no-feet") {
         context.save();
-        if (attributes.lifespan) {
-          if (layer !== "body" && !attributes.antenna) for (const name of ["sprout-left", "sprout-right", "sprout-stem"])
-            context.drawImage(agentBaseParts.get(name), 136, 7 - lift, 240, 350);
-          context.drawImage(agentParts.get(expression === "open" ? "lifespan-1" : "lifespan-" + expression),
-            136, 136 - lift, 240, 324);
-        } else {
           if (layer !== "body" && !attributes.antenna)
             for (const name of ["sprout-left", "sprout-right", "sprout-stem"])
               context.drawImage(agentBaseParts.get(name), 136, 110 - lift, 240, 350);
           context.drawImage(agentBaseParts.get("body"),
             136, 110 - lift, 240, 350);
-        }
         context.restore();
         composeAgentBaseFeet(context, attributes, layer);
       }
@@ -7963,7 +7559,7 @@
           256 - width / 2, 460 - lift - height, width, height);
       }
       if (attributes.excavation) excavationArt.sprout(context, attributes,
-        attributes.lifespan ? [136, 136 - lift, 240, 324] : [136, 110 - lift, 240, 350]);
+        [136, 110 - lift, 240, 350]);
       return sprite;
     }
 
@@ -7988,20 +7584,18 @@
       const index = agentDeathFrame(corpse, corpsePlaybackTime());
       if (index < 0) return false;
       const attributes = corpse.appearanceAttributes || corpse.attributes || {};
-      const lifespan = (corpse.tribe || "bean") === "bean" && attributes.lifespan ?
-        sproutLifespan.frame(attributes, "death", idleMotion.matches ? 15 : index, agentParts, sproutRoots) : null;
-      const animation = lifespan?.animation || Spawner.agentDeathAnimation(corpse);
+      const animation = Spawner.agentDeathAnimation(corpse);
       const entry = unitAnimationSheets.get(corpse.tribe || "bean")?.get("death");
       if (!entry?.sprite.complete || !entry.sprite.naturalWidth) return true;
       const frame = idleMotion.matches ? animation.frameCount - 1 : index;
-      const attributeFrame = lifespan?.sprite || ((corpse.tribe || "bean") === "bean" && attributes.excavation ?
+      const attributeFrame = ((corpse.tribe || "bean") === "bean" && attributes.excavation ?
         sproutCombatFrame(corpse, entry, frame) : (corpse.tribe || "bean") === "bean" ||
-        !["antenna", "strength", "arms", "butchery", "lifespan", "feet", "excavation"].some(key => attributes[key] > 0) ? null :
+        !["antenna", "strength", "arms", "feet", "excavation"].some(key => attributes[key] > 0) ? null :
         tribeArt.animationFrame(corpse, entry.sprite, animation, frame, "death", corpsePlaybackTime()));
       const sheet = attributeFrame || entry.sprite;
       const frameSize = attributeFrame ? sheet.width : animation.frameSize;
       const padding = (frameSize - animation.frameSize) / 2;
-      const size = cell * AGENT_HEIGHT * (lifespan?.scale || entry.scale) * frameSize / animation.frameSize;
+      const size = cell * AGENT_HEIGHT * entry.scale * frameSize / animation.frameSize;
       const left = -size * (animation.pivotX + padding) / frameSize;
       const top = -size * (animation.pivotY + padding) / frameSize;
       const sourceX = attributeFrame ? 0 : frame % animation.columns * animation.frameSize;
@@ -8022,56 +7616,6 @@
       return true;
     }
 
-    function drawCorpseResources(context, corpse) {
-      const type = Spawner.resourceTypeForCell(corpse, worldMap);
-      const sprite = resourceCarrySprites.get(type);
-      const crop = resourceCarryBounds.get(type);
-      if (!sprite?.complete || !sprite.naturalWidth || !crop) return;
-      context.save();
-      context.imageSmoothingEnabled = true;
-      for (const drop of Spawner.corpseResourceDrops(corpse)) {
-        const point = worldToScreen(drop.x, drop.y);
-        const width = drop.size * state.camera.zoom;
-        const height = width * crop.height / crop.width;
-        context.drawImage(sprite, crop.x, crop.y, crop.width, crop.height,
-          point.x - width / 2, point.y - height, width, height);
-      }
-      context.restore();
-    }
-
-    function drawCorpseResourceCounts() {
-      const selected = state.selection?.kind === "corpse" ? state.selection.target : null;
-      if (state.camera.zoom < 32 && !selected) return;
-      const piles = new Map();
-      for (const corpse of resourceNodeCells()) {
-        if (corpse.kind !== "corpse" || !(corpse.amount > 0) || state.simSeconds >= corpse.decaysAt ||
-          Spawner.resourceTypeForCell(corpse, worldMap) !== "nutrients") continue;
-        if (state.camera.zoom < 32 && (corpse.x !== selected.x || corpse.y !== selected.y)) continue;
-        const key = corpse.x + "," + corpse.y;
-        if (!piles.has(key)) piles.set(key, { x: corpse.x, y: corpse.y, amount: 0 });
-        piles.get(key).amount += corpse.amount;
-      }
-      if (!piles.size) return;
-      const size = clamp(state.camera.zoom * .12, 12, 16);
-      ctx.save();
-      ctx.font = "600 " + size + "px sans-serif";
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      for (const pile of piles.values()) {
-        const point = worldToScreen(pile.x + .98, pile.y + .68);
-        const label = "×" + Number(pile.amount.toFixed(1));
-        const width = ctx.measureText(label).width + 12;
-        const height = size + 8;
-        ctx.fillStyle = "rgba(16, 23, 25, 0.96)";
-        ctx.beginPath();
-        ctx.roundRect(point.x - width / 2, point.y - height, width, height, 5);
-        ctx.fill();
-        ctx.fillStyle = "#edc58d";
-        ctx.fillText(label, point.x, point.y - height / 2);
-      }
-      ctx.restore();
-    }
-
     function drawCorpseGroundShadow(corpse, point) {
       const contact = unitCorpseContacts[corpse.species || corpse.tribe || "bean"];
       const age = corpsePlaybackTime() - corpse.diedAt;
@@ -8087,12 +7631,33 @@
         radiusX * cell, radiusY * cell, .3 * (1 - decay * .4));
     }
 
+    function expireClientCorpses() {
+      const expired = state.corpses.filter(corpse => corpsePlaybackTime() >= corpse.decaysAt);
+      if (!expired.length) return;
+      const ids = new Set(expired.map(corpse => String(corpse.id)));
+      state.corpses = state.corpses.filter(corpse => !ids.has(String(corpse.id)));
+      if (state.selection?.kind === "corpse" && ids.has(String(state.selection.target.id))) selectObject(null, null);
+      if (state.hover?.kind === "corpse" && ids.has(String(state.hover.target.id))) state.hover = null;
+      for (const id of ids) {
+        const entry = agentListButtons.get(id);
+        if (entry) {
+          if (helpTooltipTarget && entry.button.contains(helpTooltipTarget)) hideHelpTooltip();
+          entry.button.remove();
+          agentListButtons.delete(id);
+        }
+        agentAvatars.delete(id);
+      }
+      combatAttributeArt.clearDeaths();
+      for (const sheets of unitAnimationSheets.values()) sheets.get("death")?.attributeFrames?.clear();
+      renderedAgentListSignature = "";
+      updateAgentList();
+    }
+
     function drawCorpses() {
       const combatCells = new Set([...(state.agents || []), ...(state.rivals || [])].map(agent => displayedAgent(agent))
         .filter(agent => agent.health > 0 && agent.combat).map(agent => agent.x + "," + agent.y));
-      for (const corpse of resourceNodeCells()) {
-        if (corpse.kind !== "corpse") continue;
-        if (corpse.amount <= 0 || state.simSeconds >= corpse.decaysAt) continue;
+      for (const corpse of state.corpses) {
+        if (corpsePlaybackTime() >= corpse.decaysAt) continue;
         ctx.save();
         if (combatCells.has(corpse.x + "," + corpse.y)) {
           const anchor = worldToScreen(corpse.x + .5, corpse.y + .92);
@@ -8107,16 +7672,15 @@
         ctx.scale(scale, scale);
         ctx.translate(-point.x, -point.y);
         drawCorpseGroundShadow(corpse, point);
-        if (!drawAgentCorpse(ctx, corpse, point.x, point.y, state.camera.zoom,
-          objectOutlineColor("corpse", corpse), 1)) drawResourceNode(state.lastFrame, corpse, undefined);
+        drawAgentCorpse(ctx, corpse, point.x, point.y, state.camera.zoom,
+          objectOutlineColor("corpse", corpse), 1);
         ctx.restore();
-        drawCorpseResources(ctx, corpse);
       }
     }
 
     const EVOLUTION_SYMBOL = assetSource("DesignAssets/evolution-point-symbol.png");
     const COLONY_CODEX = { key: "colony", name: "군락 둥지", effect: "군락의 본둥지",
-      description: "진화 포인트로 둥지를 성장시키면 체력과 속성 슬롯이 늘고 새 속성과 건물이 열립니다. 진화 포인트와 자원의 보관량도 늘어납니다. 몽돌의 성장 비용은 25% 적습니다." };
+      description: "진화 포인트로 둥지를 성장시키면 체력과 속성 슬롯이 늘고 새 속성이 열립니다. 진화 포인트와 자원의 보관량도 늘어납니다. 몽돌의 성장 비용은 25% 적습니다." };
     const NEST_CODEX = [COLONY_CODEX];
     const evolutionSprite = new Image();
     evolutionSprite.src = EVOLUTION_SYMBOL;
@@ -8156,12 +7720,6 @@
       } else document.getElementById("codex-article-name").focus({ preventScroll: true });
     });
     setCodexView("article");
-    const buildingCodexFilter = document.createElement("button");
-    buildingCodexFilter.type = "button";
-    buildingCodexFilter.dataset.codexCategory = "building";
-    buildingCodexFilter.setAttribute("aria-pressed", "false");
-    buildingCodexFilter.textContent = "건물";
-    document.querySelector(".codex-filter").append(buildingCodexFilter);
     const burrowCodexFilter = document.createElement("button");
     burrowCodexFilter.type = "button";
     burrowCodexFilter.dataset.codexCategory = "burrow";
@@ -8181,38 +7739,6 @@
     let unitDraft = null;
     let designReturnFocus = null;
     let templateListSignature = "";
-    const progression = Spawner.createProgressionUi(document, state, {
-      source: assetSource,
-      setHelp: (element, text) => {
-        if (!element.hasAttribute("data-help")) {
-          element.addEventListener("pointerenter", () => showHelpTooltip(element));
-          element.addEventListener("pointerleave", hideHelpTooltip);
-          element.addEventListener("focus", () => showHelpTooltip(element));
-          element.addEventListener("blur", hideHelpTooltip);
-        }
-        const changed = element.dataset.help !== text;
-        element.dataset.help = text;
-        element.setAttribute("aria-label", text);
-        if (changed && helpTooltipTarget === element) showHelpTooltip(element);
-      },
-      busy: () => connection.busy,
-      online: () => connection.online,
-      send: sendCommand,
-      stopFollow: () => { state.camera.followAgentId = null; },
-      selectBuilding: building => {
-        selectObject("building", building);
-        state.camera.x = building.x + building.width / 2;
-        state.camera.y = building.y + building.height / 2;
-        updateUnitPanel();
-      },
-      upgrade: async (draft, attributeKey) => {
-        const result = await sendCommand({ type: "upgrade-attribute", templateId: draft.id, attributeKey });
-        if (!result || unitDraft !== draft) return;
-        draft.attributeLevels[attributeKey] = result.level;
-        renderDesignSlots();
-        updateUnitDesign();
-      }
-    });
 
     function templateDescription(slots, levels) {
       const counts = attributeCounts(slots, levels);
@@ -8425,7 +7951,7 @@
       prepareAgentTemplate(unitDraft).catch(() => {});
       document.getElementById("design-preview-image").src = agentImageSource({ tribe: unitDraft.tribe, attributes: counts, carrying: 0 });
       const statValues = [["시야", stats.vision + "칸"], ["운반", stats.capacity + "개"],
-        ["이동", Number(agentSpeed({ stats, tribe: unitDraft.tribe, carrying: 0 }).toFixed(2)) + "칸/초"], ["체력", stats.health], ["수명", formatLifetime(stats.lifespan)]];
+        ["이동", Number(agentSpeed({ stats, tribe: unitDraft.tribe, carrying: 0 }).toFixed(2)) + "칸/초"], ["체력", stats.health]];
       const statsFragment = document.createDocumentFragment();
       for (const [label, value] of statValues) {
         const term = document.createElement("dt");
@@ -8580,10 +8106,7 @@
       if (document.hidden) return;
       cheats?.update(connection.active && document.body.dataset.screen === "game",
         connection.busy || !connection.online, state.tribe, !!state.ending);
-      beginnerHelp.update(connection.roomId, state.constructionHelp,
-        connection.active && document.body.dataset.screen === "game" && !state.ending, connection.busy || !connection.online);
       updateResourceInventory();
-      progression.refresh();
       const capacity = pointCapacity();
       foodProgressFill.style.width = (state.evolutionPoints / capacity * 100) + "%";
       const progress = document.getElementById("evolution-progress");
@@ -8608,7 +8131,7 @@
       renderUnitTemplates();
       for (const card of templateList.querySelectorAll("[data-template-id]")) {
         const template = state.templates.find((candidate) => candidate.id === Number(card.dataset.templateId));
-        card.querySelector(".template-spawn").disabled = !!state.ending || connection.busy || !connection.online || !hasBirthplace() || state.evolutionPoints < birthCost(template, state.tribe) || template.slots.length > slotCapacity() || template.slots.some(key => !isAttributeUnlocked(key, state.nestLevel, state.tribe));
+        card.querySelector(".template-spawn").disabled = !!state.ending || connection.busy || !connection.online || !hasBirthplace() || state.agents.filter(agent => agent.health > 0).length >= unitCapacity() || state.evolutionPoints < birthCost(template, state.tribe) || template.slots.length > slotCapacity() || template.slots.some(key => !isAttributeUnlocked(key, state.nestLevel, state.tribe));
         card.querySelector(".template-edit").disabled = connection.busy || !connection.online;
         card.querySelector(".template-delete").disabled = !!state.ending || connection.busy || !connection.online;
       }
@@ -8622,7 +8145,6 @@
       const value = kind === "attribute" ? ATTRIBUTES.find((attribute) => attribute.key === key) :
         kind === "synergy" ? ATTRIBUTE_COMBINATIONS[Number(key)] :
         kind === "nest" ? NEST_CODEX.find((entry) => entry.key === key) :
-        kind === "building" ? Spawner.buildingDefinition(key) :
         kind === "resource" ? Spawner.resourceDefinition(key) :
         kind === "burrow" ? BURROW_CODEX.find(value => value.key === key) :
         kind === "terrain" ? TERRAIN_CODEX.find(value => value.key === key) :
@@ -8812,7 +8334,7 @@
     function renderCodexList() {
       const query = codexSearch.value.trim().toLocaleLowerCase();
       const fragment = document.createDocumentFragment();
-      for (const [kind, title, values] of [["attribute", "속성", ATTRIBUTES], ["resource", "자원", Spawner.RESOURCE_TYPES], ["synergy", "조합 시너지", ATTRIBUTE_COMBINATIONS], ["nest", "둥지", NEST_CODEX], ["building", "건물", Spawner.BUILDING_TYPES], ["burrow", "굴", BURROW_CODEX], ["terrain", "지형", TERRAIN_CODEX]]) {
+      for (const [kind, title, values] of [["attribute", "속성", ATTRIBUTES], ["resource", "자원", Spawner.RESOURCE_TYPES], ["synergy", "조합 시너지", ATTRIBUTE_COMBINATIONS], ["nest", "둥지", NEST_CODEX], ["burrow", "굴", BURROW_CODEX], ["terrain", "지형", TERRAIN_CODEX]]) {
         if (codexState.category !== "all" && codexState.category !== kind) continue;
         const matches = values.map((value, index) => ({ value, key: kind === "synergy" ? String(index) : value.key }))
           .filter(({ value }) => kind !== "synergy" || value.kind !== "upgrade")
@@ -8847,9 +8369,6 @@
             image.src = assetSource(value.carryImage); image.alt = "";
             icons.append(image);
           }
-          if (kind === "building") {
-            icons.append(Spawner.createBuildingPreview({ key, tribe: state.tribe }, assetSource(Spawner.buildingImage(key, state.tribe))));
-          }
           if (kind === "nest" && key === "colony") icons.append(createColonyInfoImage(colonyInfoEntry(), 96));
           if (kind === "nest" && key !== "colony") {
             const image = document.createElement("img");
@@ -8881,11 +8400,11 @@
       setCodexView("article");
       const article = document.getElementById("codex-article");
       article.style.setProperty("--attribute-color", kind === "attribute" ? value.color : "#b4dfcf");
-      document.getElementById("codex-entry-kind").textContent = kind === "attribute" ? "속성" : kind === "resource" ? "자원" : kind === "nest" ? "둥지" : kind === "building" ? "건물" : kind === "burrow" ? "굴" : kind === "terrain" ? "지형" : kind === "hazard" ? "위험 요소" : "조합 시너지";
+      document.getElementById("codex-entry-kind").textContent = kind === "attribute" ? "속성" : kind === "resource" ? "자원" : kind === "nest" ? "둥지" : kind === "burrow" ? "굴" : kind === "terrain" ? "지형" : kind === "hazard" ? "위험 요소" : "조합 시너지";
       document.getElementById("codex-article-name").textContent = value.name;
       const attributeLevel = kind === "attribute" ? attributeCounts(unitDraft?.slots || [], unitDraft?.attributeLevels)[key] || 1 : 1;
       const setEffectText = kind === "attribute" && value.harvests?.length ? setCodexResourceText : setEvolutionText;
-      setEffectText(document.getElementById("codex-article-effect"), ["building", "burrow"].includes(kind) ? "체력 " + value.health : kind === "attribute" ? Spawner.codexAttributeEffect(value, attributeLevel, unitDraft?.tribe || state.tribe) : kind === "resource" ? "채집 시간 · 1개당 " + value.harvestSeconds + "초" : kind !== "synergy" ? value.effect : value.requirement ||
+      setEffectText(document.getElementById("codex-article-effect"), kind === "burrow" ? "체력 " + value.health : kind === "attribute" ? Spawner.codexAttributeEffect(value, attributeLevel, unitDraft?.tribe || state.tribe) : kind === "resource" ? "채집 시간 · 1개당 " + value.harvestSeconds + "초" : kind !== "synergy" ? value.effect : value.requirement ||
         value.keys.map((attributeKey) => ATTRIBUTES.find((attribute) => attribute.key === attributeKey).name).join(" + "));
       const description = document.getElementById("codex-description");
       if (kind === "attribute" && value.harvests?.length) setCodexResourceText(description, Spawner.codexAttributeDescription(value, unitDraft?.tribe || state.tribe));
@@ -8897,8 +8416,7 @@
       if (kind === "terrain" || kind === "hazard") {
         hero.append(codexTerrainImage(value, kind));
         renderTerrainCodex(entry, related);
-      } else if (kind === "building") {
-        renderBuildingCodex(value, hero, related);
+
       } else if (kind === "burrow") {
         renderBurrowCodex(value, hero, related);
       } else if (kind === "resource") {
@@ -9033,25 +8551,6 @@
     function renderBurrowCodex(value, hero, related) {
       hero.append(createBurrowImage(value.key, 96));
       document.getElementById("codex-related-title").textContent = "";
-    }
-
-    function renderBuildingCodex(definition, hero, related) {
-      const image = Spawner.createBuildingPreview({ key: definition.key, tribe: state.tribe },
-        assetSource(Spawner.buildingImage(definition.key, state.tribe)));
-      image.className = "codex-building-image";
-      hero.append(image);
-      document.getElementById("codex-related-title").textContent = "필요 자원";
-      const materials = document.createElement("ul");
-      materials.className = "codex-terrain-resources codex-resource-icons";
-      for (const [key, amount] of Object.entries(Spawner.buildingCost(definition.key, state.tribe).materials)) {
-        const resource = Spawner.resourceDefinition(key);
-        const item = document.createElement("li"), icon = document.createElement("img"), count = document.createElement("strong");
-        icon.src = assetSource(resource.carryImage); icon.alt = "";
-        count.textContent = "×" + amount;
-        attachObjectHelp(item, resource.name);
-        item.append(icon, count); materials.append(item);
-      }
-      related.append(materials);
     }
 
     function createNestGrowthTable() {
@@ -10105,12 +9604,16 @@
       Object.assign(COLONY_CENTER, { x: own.x + 2.5, y: own.y + 2.5 });
       if (colonyChanged) focusColony();
       const { food, sharedTrails, footprints, explored, visible, ...view } = packet.state;
+      if (state.corpses.some(corpse => !view.corpses.some(current => current.id === corpse.id))) {
+        combatAttributeArt.clearDeaths();
+        for (const sheets of unitAnimationSheets.values()) sheets.get("death")?.attributeFrames?.clear();
+      }
       Object.assign(state, view);
       if (!firstSnapshot && !state.ending) state.simSeconds = renderedAt;
       syncAgentMovements([...state.agents, ...state.rivals], packet.state.simSeconds, firstSnapshot);
       Spawner.syncAgentLevelUpPlayback(agentLevelUpPlayback, [...state.agents, ...state.rivals], packet.state.simSeconds, firstSnapshot);
       Spawner.syncNestGrowthPlayback(nestGrowthPlayback, colonyEntries, state.simSeconds, firstSnapshot);
-      Spawner.syncStructureEffectPlayback(structureEffectPlayback, colonyEntries, state.buildings,
+      Spawner.syncStructureEffectPlayback(structureEffectPlayback, colonyEntries,
         view.burrows || worldMap.burrows, state.simSeconds, firstSnapshot, packet.state.simSeconds);
       Spawner.syncHarvestPlayback(harvestPlayback, [...state.agents, ...state.rivals], packet.state.simSeconds, firstSnapshot);
       harvestDisplay.time = null;
@@ -10152,8 +9655,8 @@
       if (selection) {
         const target = selection.kind === "terrain" ? terrainCodexCell({ ...worldMap, size: WORLD_SIZE }, state.explored, selection.target.x, selection.target.y) :
           selection.kind === "agent" ? agentById(selection.target.id) :
+          selection.kind === "corpse" ? state.corpses.find(corpse => corpse.id === selection.target.id) :
           selection.kind === "colony" ? colonyEntries.find((colony) => colony.id === selection.target.id) :
-          selection.kind === "building" ? state.buildings.find(building => building.id === selection.target.id && building.health > 0) :
           selection.kind === "tree" ? forest.cells.get(selection.target.column + "," + selection.target.row) :
           selection.kind === "hazard" ? hazardCells[selection.target.row * WORLD_SIZE + selection.target.column] :
           selection.kind === "burrow" ? worldMap.burrows.find(burrow => burrow.id === selection.target.id && burrow.health > 0) :
@@ -10187,10 +9690,8 @@
       connection.busy = true;
       updateColonyPanel();
       try {
-        if (action.type === "birth" || action.type === "design" && action.birth ||
-            action.type === "beginner-construction" && state.constructionHelp?.kind !== "upgrade") {
-          const template = action.type === "beginner-construction" ? { slots: state.constructionHelp?.slots || [],
-            attributeLevels: state.constructionHelp?.attributeLevels, tribe: state.tribe } : action.type === "birth" ? action.agentId !== undefined ?
+        if (action.type === "birth" || action.type === "design" && action.birth) {
+          const template = action.type === "birth" ? action.agentId !== undefined ?
             state.agents.find(candidate => candidate.id === action.agentId) : state.templates.find(candidate => candidate.id === action.templateId) : action;
           if (template) await prepareAgentTemplate(template);
           if (connection.roomId !== roomId || !connection.active || !connection.online) return null;
@@ -10487,8 +9988,7 @@
     document.getElementById("room-name-random").addEventListener("click", randomRoomName);
     document.getElementById("welcome-form").addEventListener("submit", (event) => {
       event.preventDefault();
-      lobbyAction("create", { title: roomTitle.value.trim(), seed: roomSeed.value === "" ? null : Number(roomSeed.value),
-        beginnerHelpEnabled: document.getElementById("room-beginner-help").checked });
+      lobbyAction("create", { title: roomTitle.value.trim(), seed: roomSeed.value === "" ? null : Number(roomSeed.value) });
     });
     document.getElementById("rooms-refresh").addEventListener("click", refreshRooms);
     roomsDeleteAll.addEventListener("click", deleteAllRooms);

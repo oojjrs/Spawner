@@ -6,11 +6,10 @@ import { BEETLE_ANIMATIONS, BEETLE_ANIMATION_ASSET, BEETLE_ATTACK_ASSET, BEETLE_
 import { CREATURE_MOVEMENT, applyCreatureMovement, creatureMoveDuration, finishCreatureMove } from "./creature-movement.mjs";
 import { BURROW_TYPES, burrowDistance, burrowApproaches } from "./burrows.mjs";
 import { BEETLE_RAIDS, createBeetleRaids } from "./raids.mjs";
-import { CORPSE_LIFETIME, placeCorpse, expireCorpses } from "./lifespan.mjs";
+import { CORPSE_LIFETIME, placeCorpse, expireCorpses } from "./corpses.mjs";
 import { createCombat, canPursueCombat, combatDisposition } from "./combat.mjs";
 import { unitCombatStats, migrateCombatStats } from "./combat-stats.mjs";
-import { buildingAt } from "./buildings.mjs";
-import { creatureBuildingTargets, compareCreatureCombatTargets, updateCreatureBuildingAttack } from "./creature-combat.mjs";
+import { creatureNestTargets, compareCreatureCombatTargets, updateCreatureNestAttack } from "./creature-combat.mjs";
 
 export const CREATURE_ASSETS = [
   ...ENCOUNTER_ASSETS, "DesignAssets/Units/spiny-back-beetle.png", BEETLE_ANIMATION_ASSET, BEETLE_ATTACK_ASSET, BEETLE_NEUTRAL_ASSET
@@ -56,7 +55,7 @@ export function createCreatures(environment, saved) {
     if (x < 0 || y < 0 || x >= size || y >= size) return false;
     const terrain = environment.world.terrain[y * size + x];
     if (terrain < 2 || terrain > 10) return false;
-    if (burrowAt(x, y) || buildingAt(environment, x, y)) return false;
+    if (burrowAt(x, y)) return false;
     if (!raiding && environment.world.sites.some(site => Math.hypot(x - site[0], y - site[1]) < (environment.world.generationVersion >= 6 ? 10 : 18))) return false;
     return !environment.colonies.some(colony => environment.games.get(colony.ownerId)?.nest?.health !== 0 && colony.occupiedCells.has((x - colony.x) + "," + (y - colony.y)));
   }
@@ -248,7 +247,8 @@ export function createCreatures(environment, saved) {
   }
 
   function dropCorpse(agent) {
-    placeCorpse(environment.food, { x: agent.x, y: agent.y, kind: "corpse", species, amount: 4, attributes: {}, facing: agent.facing,
+    if (environment.simSeconds >= agent.deathStartedAt + CORPSE_LIFETIME) return;
+    placeCorpse(environment.food, { x: agent.x, y: agent.y, kind: "corpse", species, attributes: {}, facing: agent.facing,
       agentId: agent.id, hurtStartedAt: agent.hurtStartedAt, hurtCount: agent.hurtCount,
       diedAt: agent.deathStartedAt, decaysAt: agent.deathStartedAt + CORPSE_LIFETIME,
       renderX: agent.deathRenderX, renderY: agent.deathRenderY });
@@ -311,7 +311,7 @@ export function createCreatures(environment, saved) {
     raids.dispatch();
     encounters.tick();
     const now = environment.simSeconds;
-    const opponents = players(), buildings = creatureBuildingTargets(environment);
+    const opponents = players(), buildings = creatureNestTargets(environment);
     for (const agent of state.agents) {
       if (agent.health <= 0 || creatureSpawning(agent, now)) continue;
       if (!agent.combat && !agent.attack && !agent.raid && !agent.returningHome &&
@@ -333,15 +333,15 @@ export function createCreatures(environment, saved) {
       const candidates = (environment.unitIndex ? environment.unitIndex.nearby(agent.x, agent.y, agent.stats.vision)
         .filter(entry => entry.game) : opponents).concat(buildings);
       const targets = candidates.filter(entry => !agent.returningHome && entry.agent.health > 0 && raids.targetAllowed(agent, entry.game) &&
-        (["nest", "building"].includes(entry.agent.kind) ? combatDisposition(agent) === "aggressive" && burrowDistance(home, entry.agent) <= 8 :
+        (entry.agent.kind === "nest" ? combatDisposition(agent) === "aggressive" && burrowDistance(home, entry.agent) <= 8 :
           canPursueCombat(agent, entry.agent, now) && !(entry.agent.birth && now < entry.agent.birth.readyAt) &&
           walkable(entry.agent.x, entry.agent.y, Boolean(agent.raid)) && Math.hypot(entry.agent.x - home.x, entry.agent.y - home.y) <= 8))
-        .map(entry => ({ ...entry, distance: ["nest", "building"].includes(entry.agent.kind) ? burrowDistance(agent, entry.agent) :
+        .map(entry => ({ ...entry, distance: entry.agent.kind === "nest" ? burrowDistance(agent, entry.agent) :
           Math.abs(agent.x - entry.agent.x) + Math.abs(agent.y - entry.agent.y) }))
         .filter(entry => entry.distance <= agent.stats.vision).sort(compareCreatureCombatTargets);
       let target = null, destination = null;
       for (const candidate of targets) {
-        if (["nest", "building"].includes(candidate.agent.kind)) {
+        if (candidate.agent.kind === "nest") {
           if (candidate.distance <= 1) { target = candidate; break; }
           const approaches = burrowApproaches(candidate.agent).filter(cell => walkable(cell.x, cell.y, Boolean(agent.raid)) &&
             !occupied(cell.x, cell.y, agent) && Math.hypot(cell.x - home.x, cell.y - home.y) <= 8)
@@ -354,7 +354,7 @@ export function createCreatures(environment, saved) {
         if (destination || candidate.distance === 0) { target = candidate; break; }
       }
       agent.pursuitTargetId = target?.agent.id || null;
-      if (updateCreatureBuildingAttack(agent, target, now)) continue;
+      if (updateCreatureNestAttack(agent, target, now)) continue;
       if (target) {
         if (destination) move(agent, destination);
         else idle(agent, .5);

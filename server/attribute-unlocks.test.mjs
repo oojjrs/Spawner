@@ -18,10 +18,10 @@ function fixture(tribe, level) {
 }
 
 test("승인한 4종족·4단계 개방표를 설계 명령에서도 강제한다", () => {
-  const common = { antenna:1, strength:1, feet:1, construction:1, lifespan:2, carapace:3, regeneration:3, guard:4 };
-  const harvest = { bean:"excavation", spore:"blade", pebble:"piercing", spring:"butchery" };
+  const common = { antenna:1, strength:1, feet:1, carapace:3, regeneration:3, guard:4 };
+  const harvest = { bean:"excavation", spore:"blade", pebble:"piercing", spring:null };
   for (const [tribe, native] of Object.entries(harvest)) {
-    const expected = { ...common, ...Object.fromEntries(Object.values(harvest).map(key => [key, key === native ? 1 : 2])) };
+    const expected = { ...common, ...Object.fromEntries(Object.values(harvest).filter(Boolean).map(key => [key, key === native ? 1 : 2])) };
     for (const [key, level] of Object.entries(expected)) assert.equal(attributeUnlockLevel(key, tribe), level);
     for (const level of [1,2,3,4]) {
       const game = fixture(tribe, level);
@@ -44,7 +44,6 @@ test("이전 개체는 보존하고 잠긴 설계·복제·강화는 거부하�
   const saved = JSON.parse(game.save());
   const agentId = saved.state.agents[0].id;
   saved.state.templates = [{id:700, name:"이전 엄호", slots:["guard"], attributeLevels:{guard:1}, revision:1}];
-  saved.state.buildings = [{id:1, key:"evolution-lab", x:50, y:50, health:100}];
   Object.assign(saved.state.agents[0], {slots:["guard"], attributeLevels:{guard:1}, activeSlots:["guard"]});
   game.restore(JSON.stringify(saved));
   assert.deepEqual(game.agents[0].slots,["guard"]);
@@ -63,6 +62,5 @@ test("기획서 속성 페이지에 확정된 개방표와 기본 채집 속성�
   const html = readFileSync(new URL("../Design.html",import.meta.url),"utf8");
   const table = html.split('<table id="attribute-unlocks">')[1].split('</table>')[0];
   assert.equal((table.match(/data-nest-level=/g) || []).length,4);
-  for (const text of ["감지, 채집량 증가, 이속 증가, 변태 + 종족 기본 채집 속성", "수명 + 나머지 채집 속성", "갑피, 재생", "엄호"]) assert.ok(table.includes(text));
-  assert.ok(html.includes("새싹콩=굴착, 포자버섯=칼날, 몽돌=관통, 샘방울=흡수"));
+  for (const text of ["감지, 채집량 증가, 이속 증가 + 종족 기본 채집 속성", "나머지 채집 속성", "갑피, 재생", "엄호"]) assert.ok(table.includes(text));
 });

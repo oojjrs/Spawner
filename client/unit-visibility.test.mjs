@@ -13,7 +13,7 @@ function fixture() {
   const context = createContext({ state, viewport: { width: 1280, height: 720 }, agentView: { units: [] },
     agentPositions: new WeakMap(), agentMovements: new Map(),
     agentDisplayLayout: { positions: new Map(), cells: new Map(), offsets: new Map() }, agentCombatLayout: {},
-    Spawner: { combatLayout, corpseHarvestOffset: () => ({ x: 0, y: 0 }) },
+    Spawner: { combatLayout },
     displayedAgent: agent => agent, agentBirthPose: () => null, agentDeliveryOffset: () => ({ x: 0, y: 0 }),
     WORLD_SIZE: 160, foodCellMap: new Map(), worldMap: { seed: 13 }, AGENT_HEIGHT: .7, AGENT_JUMP_PREPARATION: .2,
     idleMotion: { matches: false }, hashNoise: () => .5, clamp: (value, low, high) => Math.max(low, Math.min(high, value)) });

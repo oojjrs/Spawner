@@ -1,8 +1,0 @@
-{
-  "tool": "image_gen",
-  "mode": "built-in",
-  "input": "approved-key.png",
-  "output": "hidden-underpaint-imagegen.png",
-  "transparent_background": true,
-  "prompt": "Use case: precise-object-edit. Production hidden-surface texture preparation for a locked 2D game sprite, NOT a new design. Edit target: the provided approved ivory seed-pod outpost. Preserve its EXACT main shell silhouette, camera, angle, cream/green faceted paint, dark outline, placement and scale in the canvas. Change ONLY these occluding attachments: remove the small two-leaf shoot at the upper-left, remove the small gold seed inside the entrance, remove the loose pale flap at the front-right. Restore the surfaces immediately underneath those attachments: complete the continuous cream shell behind the shoot; continue the dark green cavity behind the seed; complete the dark green inner floor behind the front flap. Keep the same bottom small green supporting cotyledons. This is an UNDERPAINT LAYER that will be covered again by the approved original attachments. Do not change any visible main shell contours, curl, highlights or upper-right silhouette. Single sprite on true transparent background, same composition/placement as input, no ground disc, no shadow disc, no contact patch, no text. Keep the shell at its current size with ample original transparent canvas."
-}

@@ -2,6 +2,7 @@ import { generateWorld } from "../server/world.mjs";
 import { createGame } from "../server/game.mjs";
 import { createCreatures } from "../server/creatures.mjs";
 import { populateResourceNodes, clearResourceHazards, populateForestResources, populateColonyFood, resourceDefinition } from "../server/resources.mjs";
+import { expireCorpses } from "../server/corpses.mjs";
 import { isTreeFood } from "../server/food.mjs";
 import { PLAYER_TRIBES } from "../server/player-tribes.mjs";
 import { commandRoomCheat } from "../server/cheats.mjs";
@@ -52,11 +53,11 @@ function populateColonies(room, tribe) {
   for (const colony of room.colonies) room.games.set(colony.ownerId, createGame(room, colony));
 }
 
-export function createRoom(title, seed, tribe, onProgress, cheats, beginnerHelpEnabled) {
+export function createRoom(title, seed, tribe, onProgress, cheats) {
   if (tribe === undefined) tribe = "bean";
   if (tribe !== null && !PLAYER_TRIBES.some(entry => entry.key === tribe)) throw new Error("시작할 부족을 선택해 주세요.");
   const room = { id: crypto.randomUUID(), title: requireName(title, 24),
-    hostId: crypto.randomUUID(), seed, cheats: cheats === true, beginnerHelpEnabled: beginnerHelpEnabled !== false, simSeconds: 0, revision: 0, updatedAt: Date.now(),
+    hostId: crypto.randomUUID(), seed, cheats: cheats === true, simSeconds: 0, revision: 0, updatedAt: Date.now(),
     world: generateWorld(seed, undefined, progress => onProgress?.(progress * .8)), colonies: [], games: new Map(), food: new Map(), foodSpots: new Map() };
   for (const [x, y, amount, resourceType] of room.world.food) room.food.set(x + "," + y, { x, y, amount, initialAmount: amount, resourceType, terrain: terrainTypes[room.world.terrain[y * (room.world.size || 320) + x]] });
   populateResourceNodes(room);
@@ -74,7 +75,7 @@ export function createRoom(title, seed, tribe, onProgress, cheats, beginnerHelpE
 
 export function saveRoom(room) {
   return { version: 2, id: room.id, title: room.title, hostId: room.hostId, seed: room.seed, world: room.world,
-    cheats: room.cheats === true, beginnerHelpEnabled: room.beginnerHelpEnabled === true,
+    cheats: room.cheats === true,
     worldGenerationVersion: room.world.generationVersion,
     simulationUpdates: [...room.games].map(([owner, game]) => [owner, simulationUpdates.get(room)?.get(game) || null]),
     ending: room.games.get(room.hostId).ending,
@@ -117,7 +118,7 @@ export function restoreRoom(saved) {
   } else world = generateWorld(saved.seed, saved.worldGenerationVersion ?? 1);
   const size = (world.size || 320);
   const room = { id: saved.id, title: requireName(saved.title, 24),
-    hostId: saved.hostId, seed: saved.seed, cheats: saved.cheats === true, beginnerHelpEnabled: saved.beginnerHelpEnabled === true, simSeconds: saved.simSeconds, revision: 0, updatedAt: saved.updatedAt,
+    hostId: saved.hostId, seed: saved.seed, cheats: saved.cheats === true, simSeconds: saved.simSeconds, revision: 0, updatedAt: saved.updatedAt,
     resourceVersion: Number.isInteger(saved.resourceVersion) ? saved.resourceVersion : 0,
     world, colonies: [], games: new Map(), food: new Map(saved.food), foodSpots: new Map() };
   room.world.depletedTrees = new Set((saved.depletedTrees || []).filter(index => Number.isInteger(index) && index >= 0 && index < size * size));
@@ -140,8 +141,9 @@ export function restoreRoom(saved) {
     if (!cell || !Number.isInteger(cell.x) || !Number.isInteger(cell.y) || cell.x < 0 || cell.y < 0 || cell.x >= size || cell.y >= size ||
         key !== cell.x + "," + cell.y && (key !== "corpse:" + cell.agentId || cell.key !== key) &&
         !(cell.dropped === true && cell.kind === "resource" && resourceDefinition(cell.resourceType) && cell.key === key &&
-          key === "drop:" + cell.resourceType + ":" + cell.x + "," + cell.y) || !Number.isFinite(cell.amount) || cell.amount < 0) throw new Error("자원 저장 형식이 올바르지 않습니다.");
+          key === "drop:" + cell.resourceType + ":" + cell.x + "," + cell.y) || cell.kind !== "corpse" && (!Number.isFinite(cell.amount) || cell.amount < 0)) throw new Error("자원 저장 형식이 올바르지 않습니다.");
   }
+  expireCorpses(room.food, room.simSeconds);
   populateResourceNodes(room);
   clearResourceHazards(room);
   populateColonyFood(room);
@@ -183,7 +185,7 @@ export function tickRoom(room, elapsed) {
     for (const [owner,game] of room.games) {
       const previous = updates.get(game);
       const active = owner === room.hostId || !previous || previous.count !== game.agents.length || game.agents.some(agent =>
-        agent.health <= 0 || agent.combat || agent.attack || agent.retreat || agent.construction || agent.mode === "rest" ||
+        agent.health <= 0 || agent.combat || agent.attack || agent.retreat || agent.mode === "rest" ||
         agent.stats.regeneration > 0 && agent.health < agent.stats.health || room.world.hazards?.[agent.y * size + agent.x] ||
         host.isVisible(agent.x, agent.y) || room.unitIndex.nearby(agent.x, agent.y, agent.stats.vision + 1)
           .some(entry => entry.game !== game && entry.agent.health > 0));
@@ -204,7 +206,7 @@ export function snapshotRoom(room, includeWorld) {
   prepare(room);
   const game = room.games.get(room.hostId);
   return { roomId: room.id, title: room.title, hostId: room.hostId, userId: room.hostId,
-    cheats: room.cheats === true, beginnerHelpEnabled: room.beginnerHelpEnabled === true,
+    cheats: room.cheats === true,
     revision: room.revision, tribeStarts: includeWorld ? roomTribeStarts(room) : undefined, colonyId: room.colonies.find(colony => colony.ownerId === room.hostId).id,
     colonies: room.colonies.filter(colony => game.colonyKnown(colony)).map(colony => ({ ...colony, occupiedCells: [...colony.occupiedCells], nestLevel: room.games.get(colony.ownerId).nestLevel,
       nestHealth: room.games.get(colony.ownerId).nest.health, nestMaxHealth: room.games.get(colony.ownerId).nest.maxHealth })),

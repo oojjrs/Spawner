@@ -1,4 +1,4 @@
-import { buildingDefinition, materialCapacity } from "./buildings.mjs";
+import { materialCapacity } from "./nests.mjs";
 import { resourceDefinition, migrateResourceType } from "./resources.mjs";
 
 const quantity = value => Number.isFinite(value) ? Math.max(0, value) : 0;
@@ -8,15 +8,8 @@ export function createResourceStorage(state, colony) {
   let sequence = 0;
 
   function facilities() {
-    const refuge = state.nestHealth > 0 ? null : state.buildings.find(building => building.health > 0 && building.key === "outpost");
-    const base = state.nestHealth > 0 ? [{ id: "nest:" + colony.id, kind: "nest", x: colony.x, y: colony.y,
-      width: 5, height: 5, capacity: materialCapacity(state.nestLevel, []) }] : refuge ? [{
-      id: refuge.id, kind: "outpost", x: refuge.x, y: refuge.y, width: refuge.width || 3, height: refuge.height || 3,
-      capacity: materialCapacity(state.nestLevel, []) }] : [];
-    return base
-      .concat(state.buildings.filter(building => building.health > 0 && building.key === "storage").map(building => ({
-        id: building.id, kind: "storage", x: building.x, y: building.y,
-        width: building.width || buildingDefinition("storage").width, height: building.height || buildingDefinition("storage").height, capacity: buildingDefinition("storage").storageCapacity })));
+    return state.nestHealth > 0 ? [{ id: "nest:" + colony.id, kind: "nest", x: colony.x, y: colony.y,
+      width: 5, height: 5, capacity: materialCapacity(state.nestLevel) }] : [];
   }
 
   function aggregate() {
@@ -47,6 +40,7 @@ export function createResourceStorage(state, colony) {
 
   function restore() {
     const expected = { ...state.resourceInventory };
+    if (Array.isArray(state.resourceStores)) state.resourceStores = state.resourceStores.filter(store => store.id === "nest:" + colony.id);
     const previous = Array.isArray(state.resourceStores) ? {} : null;
     if (Array.isArray(state.resourceStores)) for (const store of state.resourceStores) {
       const inventory = {};

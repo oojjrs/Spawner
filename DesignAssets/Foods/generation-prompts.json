@@ -60,23 +60,6 @@
       "oldFootprintPreserved": true,
       "role": "reference-only; runtime has no berry food mechanics",
       "prompt": "Use case: stylized-concept. Asset type: production static transparent 2D strategy game berry bush food sprite. Reference image 1 is the new in-game nest and is the style authority. Reference image 2 is the old berry bush and is the identity/composition reference only. Redraw from scratch as a smooth high-resolution hand-painted botanical fantasy game illustration belonging exactly to the same art family as the nest. Preserve three vivid raspberry-red clustered berries arranged in a triangle with one upper center, one lower left, one lower right, each composed of a few softly rounded juicy lobes, held by compact sage/olive-green broad leaves and small stems. Broad simple cream highlights, soft rounded gradients, fine dark deep-teal/olive contours with clean anti-aliased edges. Limited organic detail, no noise. Soft warm upper-left light, mild three-quarter top view, full compact near-square silhouette centered with 7% clear padding. Genuine transparent alpha background. No pot, no ground tile, no soil disc, no cast shadow. No pixel art, no blocky edges, no visible grid, no dithering, no text, no labels, no watermark. Single static source illustration only, not animation frames or a preview."
-    },
-    {
-      "file": "DesignAssets/Foods/carried-food.png",
-      "source": "D:\\.codex\\generated_images\\01a15964-c034-78d1-9ce2-1e5e419e018b\\exec-c3c72576-c4b8-40ee-87bd-eb108c3f4419.png",
-      "rawSource": "$Trash/smooth-foods/carried-food-source.png",
-      "alphaBounds": "813x940+106+60",
-      "basePivot": [
-        0.50048828125,
-        0.9765625
-      ],
-      "gameCanvas": [
-        1024,
-        1024
-      ],
-      "oldFootprintPreserved": false,
-      "role": "reference-only carried nutrient concept; runtime carry and throw retain mushroom cluster",
-      "prompt": "Use case: stylized-concept. Asset type: production static transparent 2D strategy game carried food/nutrient sprite. Reference image 1 is the new in-game nest and is the style authority. Reference image 2 is the old carried golden nutrient and is identity reference only. Redraw this single small rounded honey-gold nutrient droplet from scratch as a smooth high-resolution hand-painted botanical fantasy game illustration matching the warm golden center of the nest. Preserve the simple upright teardrop/seed silhouette: rounded broad base, gently tapering point at top, asymmetrically warm ivory-gold left upper highlight, warm amber shaded right edge, slender dark deep-teal/olive outer outline. Softly painted gradients, smooth anti-aliased contour, tangible gentle rounded volume, no internal texture, no leaves, no face. Full silhouette centered with 8% clear padding, true transparent alpha background. No ground tile, no drop shadow, no text, no labels, no watermark. Absolutely no pixel art, no blocky stair edges, no dithering. One static source illustration, not animation sheet or preview."
     }
   ]
 }

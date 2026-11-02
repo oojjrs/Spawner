@@ -6,7 +6,7 @@ import { unitStats, unitTravelSpeed, unitTerrainSpeedMultiplier, attributeCounts
 import { TRIBE_UNIT_STATS, ATTRIBUTE_STAT_VALUES } from "./unit-stats.mjs";
 import { applyAgentGrowth, AGENT_GROWTH_BONUSES } from "./growth.mjs";
 import { createGame } from "./game.mjs";
-import { constructionSeconds, materialCapacity } from "./buildings.mjs";
+import { materialCapacity } from "./nests.mjs";
 
 const bases = { bean: [.5, .4], spore: [.5, .4], pebble: [.35, .3], spring: [.9, .275] };
 const bonuses = [0, .3, .3, .3, .3];
@@ -14,8 +14,7 @@ const bonuses = [0, .3, .3, .3, .3];
 function verifyTravel(rules) {
   for (const [tribe, speeds] of Object.entries(bases)) for (let level = 0; level <= 4; level++) {
     const agent = { tribe, stats: rules.unitStats({ feet: level }, tribe) };
-    assert.equal(agent.stats.lifespan, 180, tribe);
-    assert.equal(rules.unitStats({ lifespan: 1 }, tribe).lifespan, tribe === "pebble" ? 360 : 300, tribe);
+    assert.equal("lifespan" in agent.stats, false, tribe);
     assert.ok(Math.abs(agent.stats.speed - speeds[0] - bonuses[level]) < 1e-12, tribe);
     for (const load of [0, .25, .5, 1]) {
       const expected = speeds[0] * (1 - load) + speeds[1] * load + bonuses[level];
@@ -50,12 +49,10 @@ test("서버·브라우저·시뮬레이션 워커는 같은 고정 스탯을 �
   verifyTravel(planner.rules);
 });
 
-test("수명·운반량·재생과 숙성 스탯은 명시된 단계 값을 적용한다", () => {
-  const lifespans = { bean: [180,300,300,300,300], spore: [180,300,300,300,300],
-    pebble: [180,360,360,360,360], spring: [180,300,300,300,300] };
+test("운반량·재생과 숙성 스탯은 명시된 단계 값을 적용한다", () => {
   for (const tribe of Object.keys(bases)) for (let level = 0; level <= 4; level++) {
-    const stats = unitStats({ lifespan:level, strength:level, regeneration:level }, tribe);
-    assert.equal(stats.lifespan, lifespans[tribe][level]);
+    const stats = unitStats({ strength:level, regeneration:level }, tribe);
+    assert.equal("lifespan" in stats, false);
     assert.equal(stats.capacity, [1,2,2,2,2][level]);
     assert.equal(stats.regeneration, [0,2,2,2,2][level]);
   }
@@ -64,13 +61,13 @@ test("수명·운반량·재생과 숙성 스탯은 명시된 단계 값을 적�
   assert.equal(attributeCounts(["feet"], {feet:4}).feet, 1);
   assert.equal(attributeUpgradeCost("feet", 2), null);
   for (const tribe of Object.keys(bases)) {
-    const slots = ["feet","construction"], stats = unitStats({feet:1,construction:1}, tribe);
-    const agent = {tribe, slots, attributeLevels:{feet:1,construction:1}, stats, health:43,
-      lifespan:stats.lifespan, growthActivity:100};
+    const slots = ["feet"], stats = unitStats({feet:1}, tribe);
+    const agent = {tribe, slots, attributeLevels:{feet:1}, stats, health:43,
+      growthActivity:100};
     applyAgentGrowth(agent, 0);
     assert.equal(agent.level, 5);
     assert.equal(agent.stats.harvestSpeedMultiplier, 1.2);
-    assert.equal(agent.stats.movementMultiplier, .8640000000000001);
+    assert.equal(agent.stats.movementMultiplier, 1.08);
     const once = {...agent.stats};
     agent.level = 0;
     applyAgentGrowth(agent, 0);
@@ -78,7 +75,6 @@ test("수명·운반량·재생과 숙성 스탯은 명시된 단계 값을 적�
     assert.equal(agent.health, 43);
   }
   assert.equal(AGENT_GROWTH_BONUSES.length, 10);
-  assert.deepEqual([1,2,3,4].map(level => constructionSeconds("storage", level)), [3,3,3,3]);
   assert.deepEqual([1,2,3,4].map(level => materialCapacity(level, [])), [30,40,50,60]);
 });
 

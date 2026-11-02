@@ -5,17 +5,15 @@ import { LEGACY_RESOURCE_HABITATS } from "./resource-legacy.mjs";
 import { RESOURCE_ECONOMY, isEconomyHabitat } from "./economy.mjs";
 import { resourceHabitatSuitability } from "./resource-habitats.mjs";
 
-export const REMOVED_RESOURCE_TYPES = Object.freeze(["honey-mushrooms","twigs","bark","root-fiber","spider-silk","water","tree-sap","leaf-mold","resin","beeswax","dry-leaves","tree-fruit","berry-bush","seed-pods","root-bulbs","nutrient-moss","meat","carapace"]);
+export const REMOVED_RESOURCE_TYPES = Object.freeze(["honey-mushrooms","twigs","bark","root-fiber","spider-silk","water","tree-sap","leaf-mold","resin","beeswax","dry-leaves","tree-fruit","berry-bush","seed-pods","root-bulbs","nutrient-moss","meat","carapace","nutrients"]);
 
 export function migrateResourceType(key) {
-  if (key === "meat") return "nutrients";
   if (key === "root-fiber") return "grass-fiber";
   if (key === "wood") return "tree";
   return REMOVED_RESOURCE_TYPES.includes(key) ? null : key;
 }
 
 const resourceImages = {
-  nutrients: "DesignAssets/Foods/food-nutrients.png",
   tree: "DesignAssets/Terrain/standing-tree-smooth-atlas.png",
   dew: "DesignAssets/Resources/dew-grass.png",
   pebbles: "DesignAssets/Resources/pebbles.png",
@@ -27,7 +25,6 @@ const resourceImages = {
   quartz: "DesignAssets/ResourceConcepts/v1/resource-quartz.png"
 };
 const resourceCarryImages = {
-  nutrients: "DesignAssets/Foods/food-nutrients.png",
   tree: "DesignAssets/Resources/wood-carry.png",
   dew: "DesignAssets/Resources/dew-carry.png",
   pebbles: "DesignAssets/Resources/pebbles-carry.png",
@@ -38,9 +35,8 @@ const resourceCarryImages = {
 };
 
 export const RESOURCE_TYPES = Object.freeze([
-  ["nutrients", "양분", "food", 5, ["butchery"]],
   ["tree", "목재", "material", 6, ["blade"]],
-  ["dew", "이슬방울", "material", 2, ["butchery"]],
+  ["dew", "이슬방울", "material", 2, []],
   ["pebbles", "자갈", "material", 6, ["piercing"]],
   ["clay", "비옥토", "material", 4, ["excavation"]],
   ["sand", "모래", "material", 4, ["excavation"]],
@@ -88,7 +84,7 @@ export function isTribeFood(resourceType, tribe, version) {
 }
 
 export function isColonyFood(resourceType, tribe, version) {
-  return resourceType === "nutrients" || isTribeFood(resourceType, tribe, version);
+  return isTribeFood(resourceType, tribe, version);
 }
 
 export function populateColonyFood(room) {
@@ -146,8 +142,8 @@ export function isResourceHabitat(resourceType, world, x, y) {
 }
 
 export function resourceTypeForCell(cell, world) {
+  if (cell?.kind === "corpse") return null;
   if (cell?.resourceType) return migrateResourceType(cell.resourceType);
-  if (cell?.kind === "corpse") return "nutrients";
   if (isTreeFood(cell, world)) return "berry-bush";
   return "honey-mushrooms";
 }
@@ -163,7 +159,7 @@ export function resourceHarvestMultiplier(resourceType, attributes, tribe) {
 }
 
 export function resourceHarvestRequirements(cell, world, tribe) {
-  if (!cell) return null;
+  if (!cell || cell.kind === "corpse") return null;
   if (cell.dropped && resourceDefinition(cell.resourceType)) return {};
   if (isTribeFood(cell.resourceType, tribe, world.generationVersion)) return {};
   const definition = resourceDefinition(cell.resourceType || resourceTypeForCell(cell, world));
@@ -193,9 +189,7 @@ export function dropCarriedResources(room, agent) {
   cell.initialAmount = cell.amount;
   agent.carrying = 0;
   agent.carryingType = null;
-  agent.transportCargo = null;
-  agent.transport = null;
-  agent.transportReadyAt = null;
+  for (const key of ["transportCargo", "transport", "transportReadyAt"]) delete agent[key];
 }
 
 export function clearResourceHazards(room) {
@@ -214,10 +208,7 @@ export function clearResourceHazards(room) {
 export function populateResourceNodes(room) {
   const size = worldSize(room.world);
   for (const [key, cell] of room.food) {
-    if (cell.kind === "corpse") {
-      delete cell.carapaceAmount;
-      if (!cell.resourceType) cell.resourceType = "nutrients";
-    }
+    if (cell.kind === "corpse") continue;
     const type = migrateResourceType(cell.resourceType);
     if (type === null) room.food.delete(key);
     else if (cell.resourceType) cell.resourceType = type;

@@ -135,6 +135,6 @@ if (!isMainThread) {
   process.stdout.write(JSON.stringify({ summary, variation: { ...variation, seeds: undefined } }) + "\n");
   const previous = baseline ? JSON.parse(readFileSync(baseline, "utf8")) : null;
   if (output) writeFileSync(output, JSON.stringify({ seconds: 300, stepSeconds: .25,
-    initialWorkers: "antenna + strength", birthCost: 3, newbornSlots: [], combat: false, lifespan: true, summary, variation, results,
+    initialWorkers: "antenna + strength", birthCost: 3, newbornSlots: [], combat: false, summary, variation, results,
     baseline: previous ? { summary: previous.summary, variation: balanceVariation(previous.results), results: previous.results } : undefined }, null, 2).replace(/\r?\n/g, "\r\n") + "\r\n");
 }

@@ -3,7 +3,7 @@ import { createExcavationArt, EXCAVATION_ASSETS } from "./excavation.mjs";
 
 export const TRIBE_ATTRIBUTE_ASSETS = Object.freeze(["spore", "pebble", "spring"].flatMap(tribe => {
   const root = "DesignAssets/Tribes/" + tribe + "/Animations/Attributes/v1/";
-  return [root + "rig.json", ...["antenna", "strength", "butchery", "lifespan", "feet"].flatMap(attribute =>
+  return [root + "rig.json", ...["antenna", "strength", "feet"].flatMap(attribute =>
     ["strength", "feet"].includes(attribute) || attribute === "antenna" && tribe !== "spring" ?
       [root + "Parts/" + attribute + "-left.png", root + "Parts/" + attribute + "-right.png"] :
       [root + "Parts/" + attribute + ".png"])];
@@ -13,28 +13,22 @@ const attachments = {
   spore: {
     antenna: { anchor: "cap", root: [.28, .81], pivot: [.5, .2], width: 16, inset: true, rear: false, flex: 0 },
     strength: { anchor: "body", root: [.16, .74], pivot: [.55, .2], width: 12, rear: false, flex: .35 },
-    butchery: { anchor: "body", root: [.5, .91], pivot: [.5, .4], width: 20, inset: true, rear: false, flex: 0 },
-    lifespan: { anchor: "cap", root: [.5, 1], pivot: [.5, 1], width: 82, replaces: "cap", rear: true, flex: 0 },
     feet: { anchor: "body", root: [.25, 1], pivot: [.5, .3], width: 15, rear: true, flex: .25 }
   },
   pebble: {
     antenna: { anchor: "body", root: [.23, .19], pivot: [.5, .5], width: 15, inset: true, rear: false, flex: 0 },
     strength: { anchor: "body", root: [.13, .73], pivot: [.58, .25], width: 17, rear: false, flex: 0 },
-    butchery: { anchor: "body", root: [.5, .88], pivot: [.5, .5], width: 49, inset: true, rear: false, flex: 0 },
-    lifespan: { anchor: "body", root: [.72, .24], pivot: [.5, .5], width: 37, inset: true, rear: false, flex: 0 },
     feet: { anchor: "body", root: [.24, 1], pivot: [.5, .3], width: 20, rear: true, flex: 0 }
   },
   spring: {
     antenna: { anchor: "tip", root: [0, 0], pivot: [.5, .5], width: 11, inset: true, rear: false, flex: 0 },
     strength: { anchor: "body", root: [.13, .8], pivot: [.58, .25], width: 15, rear: false, flex: .65 },
-    butchery: { anchor: "body", root: [.74, .83], pivot: [.5, .5], width: 17, inset: true, rear: false, flex: 0 },
-    lifespan: { anchor: "body", root: [.1, .76], pivot: [.5, .5], width: 24, angle: 1.571, inset: true, rear: false, flex: 0 },
     feet: { anchor: "body", root: [.26, 1], pivot: [.5, .3], width: 23, rear: true, flex: .45 }
   }
 };
 
 export function hasTribeAttributes(attributes) {
-  return ["antenna", "strength", "arms", "butchery", "lifespan", "feet", "excavation"].some(key => attributes[key] > 0);
+  return ["antenna", "strength", "arms", "feet", "excavation"].some(key => attributes[key] > 0);
 }
 
 function triangle(context, image, source, target) {
@@ -168,6 +162,7 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
       const response = await fetch(assetSource(path));
       if (!response.ok) throw new Error("종족 파츠를 불러오지 못했습니다.");
       const rig = await response.json();
+      rig.parts = Object.fromEntries(Object.entries(rig.parts).filter(([attribute]) => Object.hasOwn(attachments[tribe], attribute)));
       await Promise.all(Object.entries(rig.parts).flatMap(([attribute, parts]) => parts.map(async part => {
         part.sprite = await loadImage(part.image);
         const source = attachments[tribe][attribute];
@@ -192,56 +187,6 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
     return pending.get(tribe);
   }
 
-  function caplessBody(rig, source, animation, index, action, track, replacement) {
-    const size = animation.frameSize, key = action + ":" + index + ":" + (replacement?.key ?? -1) + ":" + size;
-    if (rig.bodyFrames.has(key)) return rig.bodyFrames.get(key);
-    const sprite = createSurface(size, size), context = sprite.getContext("2d");
-    if (replacement) context.drawImage(replacement.sprite, 0, 0, size, size);
-    else context.drawImage(source, index % animation.columns * size, Math.floor(index / animation.columns) * size, size, size, 0, 0, size, size);
-    const image = context.getImageData(0, 0, size, size), pixels = image.data, k = size / 144;
-    const bounds = track.body, cap = track.cap;
-    let capAxis = track.capAxis;
-    if (!replacement) {
-      for (let y = Math.max(0, Math.floor((cap[1] - 2) * k)); y < Math.min(size, (cap[1] + cap[3] + 2) * k); y++) {
-        for (let x = Math.max(0, Math.floor((cap[0] - 2) * k)); x < Math.min(size, (cap[0] + cap[2] + 2) * k); x++) {
-          const p = (y * size + x) * 4;
-          if (y < bounds[1] * k || x < (bounds[0] - 1) * k || x > (bounds[0] + bounds[2] + 1) * k ||
-            (pixels[p] - pixels[p + 1] > 18 && pixels[p] > pixels[p + 2] * .9)) pixels[p + 3] = 0;
-        }
-      }
-    } else {
-      const mask = new Uint8Array(size * size), limit = Math.min(size, Math.ceil((bounds[1] + bounds[3] * .45) * k));
-      for (let y = 0; y < limit; y++) for (let x = 0; x < size; x++) {
-        const p = (y * size + x) * 4;
-        if (pixels[p + 3] >= 32 && pixels[p] - pixels[p + 1] > 18 && pixels[p] > pixels[p + 2] * .9) mask[y * size + x] = 1;
-      }
-      let largest = [];
-      for (let p = 0; p < mask.length; p++) if (mask[p]) {
-        const queue = [p]; mask[p] = 0;
-        for (let i = 0; i < queue.length; i++) {
-          const at = queue[i], x = at % size, y = Math.floor(at / size);
-          for (const next of [x ? at - 1 : -1, x + 1 < size ? at + 1 : -1, y ? at - size : -1, y + 1 < size ? at + size : -1]) {
-            if (next < 0 || !mask[next]) continue;
-            mask[next] = 0; queue.push(next);
-          }
-        }
-        if (queue.length > largest.length) largest = queue;
-      }
-      const left = new Int32Array(size).fill(size), right = new Int32Array(size).fill(-1);
-      let top = size, bottom = 0, minX = size, maxX = 0;
-      for (const p of largest) {
-        const x = p % size, y = Math.floor(p / size);
-        pixels[p * 4 + 3] = 0; left[y] = Math.min(left[y], x); right[y] = Math.max(right[y], x);
-        top = Math.min(top, y); bottom = Math.max(bottom, y + 1); minX = Math.min(minX, x); maxX = Math.max(maxX, x + 1);
-      }
-      for (let y = top; y < Math.min(bottom, bounds[1] * k); y++) for (let x = left[y]; x <= right[y]; x++) pixels[(y * size + x) * 4 + 3] = 0;
-      if (maxX > minX && bottom > top) capAxis = [(minX + maxX) / 2 / k, (top + bottom) / 2 / k, (maxX - minX) / k, (bottom - top) / k, track.capAxis?.[4] || 0];
-    }
-    context.putImageData(image, 0, 0);
-    const result = { sprite, capAxis }; rig.bodyFrames.set(key, result);
-    return result;
-  }
-
   function frame(tribe, attributes, source, animation, index, action, time, motion, replacement) {
     const rig = rigs.get(tribe);
     if (!rig || !hasTribeAttributes(attributes) && !replacement) return null;
@@ -250,17 +195,14 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
     const sequence = rig.animations[trackAction];
     const track = replacement?.track || sequence.tracks[Math.min(index, sequence.tracks.length - 1)];
     if (!track) return null;
-    const approvedCap = tribe === "spore" && attributes.lifespan > 0 &&
-      !["antenna", "strength", "arms", "butchery", "feet"].some(key => attributes[key] > 0);
-    if (rig.morphs && !replacement && !approvedCap) return morphology.frame(rig, attributes, source, animation, index, action, time, motion);
+    if (rig.morphs && !replacement) return morphology.frame(rig, attributes, source, animation, index, action, time, motion);
     const birthAge = action === "birth" ? sequence.durationsMs.slice(0, index).reduce((sum, value) => sum + value, 0) / 1000 : 0;
     const growth = action !== "birth" || tribe === "pebble" ? 1 :
       Math.max(0, Math.min(1, (birthAge - sequence.detachAt) / Math.max(.1, sequence.contactAt - sequence.detachAt)));
-    const capReplacement = attributes.lifespan && rig.parts.lifespan[0].spec.replaces === "cap" ? rig.parts.lifespan[0] : null;
-    if (!growth && !capReplacement) return null;
+    if (!growth) return null;
     const absorption = Math.max(0, Math.min(1, replacement?.absorption || 0));
-    const keys = [attributes.antenna || 0, attributes.strength || attributes.arms || 0, attributes.butchery || 0, attributes.lifespan || 0, attributes.feet || 0,
-      attributes.construction || 0, attributes.excavation || 0, replacement?.key ?? -1, Math.round(absorption * 24)];
+    const keys = [attributes.antenna || 0, attributes.strength || attributes.arms || 0, attributes.feet || 0,
+      attributes.excavation || 0, replacement?.key ?? -1, Math.round(absorption * 24)];
     const clock = Number.isFinite(motion?.sampleTime) ? motion.sampleTime : time;
     const phaseProgress = Number.isFinite(motion?.motionPhase) ? motion.motionPhase : index / sequence.tracks.length;
     const stride = Number.isFinite(motion?.motionBlend) ? motion.motionBlend : 1;
@@ -287,16 +229,8 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
     const lift = attributes.feet ? (replacement ? footHeight * .6 : Math.max(0,
       footHeight * (1 - footSpec.pivot[1]) - (track.floor - track.cut) - factor * 2.5)) * (1 - death) * (1 - absorption) : 0;
     const drawn = [];
-    const bodyFrame = capReplacement ? caplessBody(rig, source, animation, index, trackAction, track, replacement) : null;
+    const bodyFrame = null;
     let capAxis = bodyFrame?.capAxis || track.capAxis;
-    if (capReplacement && capAxis) {
-      const base = rig.reference.capAxis, level = 1 + Math.min(3, Math.max(0, attributes.lifespan - 1)) * .035;
-      const width = capReplacement.spec.width * capAxis[2] / base[2] * level;
-      const height = Math.max(capReplacement.height / capReplacement.width * capReplacement.spec.width * capAxis[3] / base[3] * level,
-        action === "death" ? 0 : width * capReplacement.height / capReplacement.width * .78);
-      const offset = (capAxis[3] - height) / 2;
-      capAxis = [capAxis[0] - Math.sin(capAxis[4]) * offset, capAxis[1] + Math.cos(capAxis[4]) * offset, width, height, capAxis[4]];
-    }
     for (const [attribute, parts] of Object.entries(rig.parts)) {
       const level = attributes[attribute] || (attribute === "strength" ? attributes.arms : 0);
       if (!level) continue;
@@ -319,7 +253,6 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
           y = axis[1] + dx * Math.sin(axis[4]) + dy * Math.cos(axis[4]) - lift;
         }
         if (spec.anchor === "tip") { x = track.tip[0] - factor * 2; y = track.tip[1] + factor * 10 - lift; }
-        if (attribute === "butchery" && !spec.inset) y = Math.min(y, track.floor - part.height * scale * flatten * (1 - spec.pivot[1]));
         let rotation = (spec.anchor === "cap" ? track.capAxis?.[4] || 0 : track.angle) + (spec.angle || 0), bend = 0;
         const phase = cycle + (side > 0 ? Math.PI : 0);
         const sway = Math.sin(phase - .35);
@@ -429,7 +362,7 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
     const rig = rigs.get(tribe);
     if (!rig) return null;
     const track = rig.animations.idle.tracks[0];
-    const keys = tribe === "spore" ? ["strength", "butchery"] : ["antenna", "strength", "butchery", "lifespan"];
+    const keys = tribe === "spore" ? ["strength"] : ["antenna", "strength"];
     const key = keys.filter(key => (key === "strength" ? appearance.strength || appearance.arms : appearance[key]) > 0).join("-");
     const part = rig.morphs?.parts["body-" + key];
     const width = part ? part.size[0] * track.body[2] / rig.reference.body[2] : track.body[2];

@@ -3,7 +3,7 @@ import { createUnitIndex } from "../server/unit-index.mjs";
 function decisionSignature(agent) {
   return JSON.stringify([agent.x, agent.y, agent.carrying, agent.carryingType, agent.level, agent.attributes,
     agent.utility?.action, agent.utility?.target?.key, agent.utility?.defending, agent.defenseRevision || 0,
-    agent.survivalState, Boolean(agent.retreat), agent.retreat?.recoverHealth, agent.suspendedWork?.target?.key, agent.construction?.id, agent.birth?.readyAt]);
+    agent.survivalState, Boolean(agent.retreat), agent.retreat?.recoverHealth, agent.suspendedWork?.target?.key, agent.birth?.readyAt]);
 }
 
 export function createDecisionPool(room) {
@@ -41,7 +41,7 @@ export function createDecisionPool(room) {
             if (request.owner !== owner) continue;
             pending.delete(key);
             const agent = agents.get(request.id);
-            if (!agent || agent.health <= 0 || agent.birth || agent.construction || agent.combat) continue;
+            if (!agent || agent.health <= 0 || agent.birth || agent.combat) continue;
             requests.push({ ...request, key, signature: decisionSignature(agent) });
             if (requests.length >= 4) break;
           }
@@ -114,7 +114,6 @@ function createDecisionWorkers(room) {
       if (result) {
         completed.delete(key);
         if (result.reason === reason && result.signature === decisionSignature(agent) && room.simSeconds - result.time <= 1) {
-          room.games.get(owner)?.rememberForagers(result.foragerMemory);
           return result.candidates;
         }
       }
@@ -144,7 +143,7 @@ function createDecisionWorkers(room) {
           if (request.owner !== owner) continue;
           const agent = game.agents.find(value => value.id === request.id);
           pending.delete(key);
-          if (!agent || agent.health <= 0 || agent.birth || agent.construction || agent.combat) continue;
+          if (!agent || agent.health <= 0 || agent.birth || agent.combat) continue;
           requests.push({ ...request, key, signature: decisionSignature(agent) }); active.add(key);
           if (requests.length >= 4) break;
         }
@@ -154,7 +153,7 @@ function createDecisionWorkers(room) {
         const packet = { type: "plan", owner, requests, saved: game.decisionSnapshot(), simSeconds: room.simSeconds,
           hostId: room.hostId, food: [...room.food], targetRevision: room.targetRevision,
           colonies: room.colonies, treeCells: room.world.treeCells, hazards: room.world.hazards, games: [...room.games].map(([id, value]) => [id,
-            { agents: id === owner ? [] : value.agents.map(unit), buildings: value.buildings, nest: value.nest }]),
+            { agents: id === owner ? [] : value.agents.map(unit), nest: value.nest }]),
           creatures: { agents: (room.creatureSystem?.agents || []).map(unit), burrows: room.creatureSystem?.burrows || [] } };
         try { slot.worker.postMessage(packet); }
         catch { recover(slot, slot.worker); }

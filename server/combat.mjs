@@ -9,7 +9,6 @@ import { CREATURE_ATTACK_TIMINGS } from "./creature-attack.mjs";
 import { unitTravelSpeed, unitTerrainSpeedMultiplier } from "./attributes.mjs";
 import { combatDamage, combatStrength } from "./combat-stats.mjs";
 import { recordCombatExperience } from "./experience.mjs";
-import { buildingAt } from "./buildings.mjs";
 import { beginRetreat, combatSurvival, retreatEscapeChance } from "./survival.mjs";
 
 export const COMBAT_DISPOSITIONS = Object.freeze({ peaceful: "평화형", passive: "비선공", aggressive: "선공" });
@@ -61,7 +60,7 @@ export function colonyDefenseTarget(agent, target, allies, structures) {
 export function canPursueCombat(agent, target, time, defending) {
   if (agent === target || combatTeam(agent) === combatTeam(target) || target.health <= 0 || target.hidden ||
       creatureSpawning(agent, time) || creatureSpawning(target, time) ||
-      time < (agent.escapeUntil || 0) || time < (target.escapeUntil || 0) || agent.retreat || agent.construction?.state === "transforming" || combatDisposition(agent) === "peaceful") return false;
+      time < (agent.escapeUntil || 0) || time < (target.escapeUntil || 0) || agent.retreat || combatDisposition(agent) === "peaceful") return false;
   if (agent.species && target.species) return false;
   if (target.combat) return target.combat.teams[1 - target.combat.side] === combatTeam(agent);
   return combatDisposition(agent) === "aggressive" || !!defending;
@@ -107,7 +106,7 @@ export function createCombat(environment) {
     agent.attackReady = time;
     agent.utility = null; agent.decisionPending = null;
     if (agent.foodDelivery?.receivedAt === null) agent.foodDelivery = null;
-    agent.mode = agent.construction?.state === "transforming" ? "transform" : "fight";
+    agent.mode = "fight";
     agent.facing = side === 0 ? -1 : 1;
     environment.unitIndex?.update(agent);
   }
@@ -129,7 +128,7 @@ export function createCombat(environment) {
 
   function engage(agent, target, time) {
     const game = environment.games.get(agent.ownerId);
-    const defending = colonyDefenseTarget(agent, target, game?.agents, [game?.nest, ...(game?.buildings || [])]);
+    const defending = colonyDefenseTarget(agent, target, game?.agents, [game?.nest]);
     if (!settled(agent, time) || !settled(target, time) || agent.x !== target.x || agent.y !== target.y ||
         agent.combat || !canPursueCombat(agent, target, time, defending)) return false;
     let combat = target.combat;
@@ -178,7 +177,6 @@ export function createCombat(environment) {
       .filter(cell => cell.x >= 0 && cell.y >= 0 && cell.x < size && cell.y < size &&
         environment.world.terrain[cell.y * size + cell.x] >= 2 && environment.world.terrain[cell.y * size + cell.x] <= 10 &&
         !environment.creatureSystem?.burrowAt?.(cell.x, cell.y) &&
-        !buildingAt(environment, cell.x, cell.y) &&
         !environment.colonies.some(colony => environment.games.get(colony.ownerId)?.nest?.health !== 0 &&
           colony.occupiedCells.has((cell.x - colony.x) + "," + (cell.y - colony.y))) &&
         !(environment.unitIndex ? environment.unitIndex.occupied(cell.x, cell.y, agent, true) : occupied.some(entry => entry.agent.x === cell.x && entry.agent.y === cell.y ||
@@ -230,7 +228,7 @@ export function createCombat(environment) {
   function createExchange(attacker, target, previous) {
     const old = previous?.exchange, random = environment.damageRandom || Math.random;
     const attackApplied = !!old?.attackApplied || !!previous?.counter || !!previous?.resolved;
-    const counterApplied = target.construction?.state === "transforming" || !!old?.counterApplied || !!previous?.counterResolved || !!previous?.counter && !!previous?.resolved;
+    const counterApplied = !!old?.counterApplied || !!previous?.counterResolved || !!previous?.counter && !!previous?.resolved;
     const attackDamage = old?.attackDamage ?? previous?.damage;
     const counterDamage = old?.counterDamage ?? (previous?.counter ? previous.damage : 0);
     const beforeAttacker = { ...attacker, health: Math.min(attacker.stats.health,
@@ -243,7 +241,7 @@ export function createCombat(environment) {
       attackerHealth: beforeAttacker.health, targetHealth: beforeTarget.health,
       attackerStrength: combatStrength(beforeAttacker), targetStrength: combatStrength(beforeTarget),
       attackDamage: attackApplied || old?.damageVersion === 2 ? attackDamage : combatDamage(beforeAttacker, beforeTarget, random()),
-      counterDamage: target.construction?.state === "transforming" ? 0 : counterApplied || old?.damageVersion === 2 ? counterDamage : combatDamage(beforeTarget, beforeAttacker, random()),
+      counterDamage: counterApplied || old?.damageVersion === 2 ? counterDamage : combatDamage(beforeTarget, beforeAttacker, random()),
       counterHitTime: timing.hitTimeMs / 1000,
       counterDuration: timing.durationMs / 1000,
       attackApplied, counterApplied, resolved: attackApplied && counterApplied };
@@ -291,7 +289,7 @@ export function createCombat(environment) {
   function refreshSupport(participants) {
     for (const side of [0, 1]) {
       const allies = participants.filter(entry => entry.agent.combat.side === side);
-      const guard = Math.max(0, ...allies.map(entry => entry.agent.construction?.state === "transforming" ? 0 : entry.agent.stats.guardProtection || 0));
+      const guard = Math.max(0, ...allies.map(entry => entry.agent.stats.guardProtection || 0));
       for (const { agent } of allies) {
         agent.combat.guardProtection = guard;
       }
@@ -299,13 +297,13 @@ export function createCombat(environment) {
   }
 
   function updateRegeneration(agent, time) {
-    if (!(agent.stats.healing > 0) || !settled(agent, time) || agent.construction || agent.retreat ||
+    if (!(agent.stats.healing > 0) || !settled(agent, time) || agent.retreat ||
         agent.attack && time < agent.attack.endsAt) {
       agent.support = null;
       return false;
     }
     const allies = entriesAt(agent.x, agent.y).map(entry => entry.agent).filter(target => target !== agent &&
-      combatTeam(target) === combatTeam(agent) && !target.combat && !target.construction && settled(target, time));
+      combatTeam(target) === combatTeam(agent) && !target.combat && settled(target, time));
     if (agent.support?.kind === "heal") {
       const support = agent.support, target = allies.find(target => target.id === support.targetId);
       if (!target) { agent.support = null; return false; }
@@ -371,7 +369,7 @@ export function createCombat(environment) {
     let opponents = participants.filter(entry => entry.agent.combat.side !== combat.side);
     agent.moveBudget = 0;
     agent.facing = combat.side === 0 ? -1 : 1;
-    agent.mode = agent.construction?.state === "transforming" ? "transform" : agent.species === "spiny-back-beetle" ? agent.attack ? "attack" : "idle" : "fight";
+    agent.mode = agent.species === "spiny-back-beetle" ? agent.attack ? "attack" : "idle" : "fight";
     const attacks = participants.filter(entry => entry.agent.attack?.combatId === combat.id)
       .sort((a, b) => a.agent.attack.startedAt - b.agent.attack.startedAt ||
         a.agent.combat.side - b.agent.combat.side || String(a.agent.id).localeCompare(String(b.agent.id)));
@@ -447,7 +445,7 @@ export function createCombat(environment) {
       participants = members(combat);
       const counter = participants.find(entry => entry.agent.id === attack.exchange?.targetId);
       const original = participants.find(entry => entry.agent.id === attack.exchange?.attackerId);
-      if (!attack.counter && attack.hit && counter && original && counter.agent.construction?.state !== "transforming") {
+      if (!attack.counter && attack.hit && counter && original) {
         beginAttack(counter.agent, original.agent, time, attack.exchange, true);
         return true;
       }
@@ -477,7 +475,7 @@ export function createCombat(environment) {
       Number.isFinite(entry.agent.hurtStartedAt) ? entry.agent.hurtStartedAt + hurtDuration(entry.agent) : -Infinity));
     if (time + 1e-8 < hurtEndsAt + COMBAT_EXCHANGE_PAUSE) return true;
     if (time + 1e-8 < Math.max(...participants.map(entry => entry.agent.attackReady || 0))) return true;
-    const contenders = participants.filter(entry => entry.agent.construction?.state !== "transforming" && !peacefulCreature(entry.agent)).sort((a, b) => {
+    const contenders = participants.filter(entry => !peacefulCreature(entry.agent)).sort((a, b) => {
       const difference = a.agent.combat.nextAttackTurn - b.agent.combat.nextAttackTurn;
       return Math.abs(difference) > 1e-8 ? difference : a.agent.combat.side - b.agent.combat.side ||
         a.agent.combat.joinedAt - b.agent.combat.joinedAt || String(a.agent.id).localeCompare(String(b.agent.id));

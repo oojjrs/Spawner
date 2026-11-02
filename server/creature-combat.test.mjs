@@ -11,14 +11,9 @@ const attackers = ["spiny-back-beetle", "soil-boar", "bubble-toad", "vine-turtle
 function fixture(species, indexed) {
   const cells = [];
   for (let y = 85; y <= 115; y++) for (let x = 85; x <= 115; x++) cells.push(y * 320 + x);
-  const hits = [], game = { agents: [], buildings: [], nest: null, discoveredKinds: new Set(),
+  const hits = [], game = { agents: [], nest: null, discoveredKinds: new Set(),
     colonyFood: 0, isVisible: () => false,
     receiveDamage(agent, amount) { agent.health = Math.max(0, agent.health - amount); },
-    receiveBuildingDamage(id, amount) {
-      const target = this.buildings.find(building => building.id === id);
-      hits.push({ id, amount }); target.health = Math.max(0, target.health - amount);
-      return target.health;
-    },
     receiveNestDamage(amount) {
       hits.push({ id: this.nest.id, amount }); this.nest.health = Math.max(0, this.nest.health - amount);
       return this.nest.health;
@@ -40,10 +35,9 @@ function fixture(species, indexed) {
   return { room, game, agent, hits, indexed };
 }
 
-function building(context, kind, x, y) {
-  const target = { id: kind + ":test", kind, key: "storage", x, y, width: 3, height: 3, health: 120 };
-  if (kind === "nest") context.game.nest = target;
-  else context.game.buildings.push(target);
+function nest(context, kind, x, y) {
+  const target = { id: kind + ":test", kind, x, y, width: 3, height: 3, health: 120 };
+  context.game.nest = target;
   return target;
 }
 
@@ -61,18 +55,18 @@ function tick(context, time) {
   context.room.creatureSystem.tick();
 }
 
-function beginBuildingAttack(context) {
+function beginNestAttack(context) {
   tick(context, 720);
   if (context.agent.species === "soil-boar") tick(context, 721);
   if (context.agent.species === "bubble-toad") tick(context, context.agent.spawn.readyAt);
-  assert.equal(context.agent.attack?.targetKind, "building", context.agent.species);
+  assert.equal(context.agent.attack?.targetKind, "nest", context.agent.species);
   return context.agent.attack.startedAt;
 }
 
-test("선공 중립 몹 9종은 유닛이 없으면 건물을 종별 명중 시점에 한 번 타격한다", () => {
+test("선공 중립 몹 9종은 유닛이 없으면 둥지를 종별 명중 시점에 한 번 타격한다", () => {
   for (const species of attackers) {
-    const context = fixture(species, true), target = building(context, "building", 101, 100);
-    const startedAt = beginBuildingAttack(context), timing = CREATURE_ATTACK_TIMINGS[species] || BEETLE_ANIMATIONS.attack;
+    const context = fixture(species, true), target = nest(context, "nest", 101, 100);
+    const startedAt = beginNestAttack(context), timing = CREATURE_ATTACK_TIMINGS[species] || BEETLE_ANIMATIONS.attack;
     tick(context, startedAt + timing.hitTimeMs / 1000 - .001);
     assert.equal(target.health, 120, species);
     tick(context, startedAt + timing.hitTimeMs / 1000);
@@ -82,10 +76,10 @@ test("선공 중립 몹 9종은 유닛이 없으면 건물을 종별 명중 시�
   }
 });
 
-test("더 가까운 건물보다 공격 가능한 유닛을 우선 추적한다", () => {
+test("더 가까운 둥지보다 공격 가능한 유닛을 우선 추적한다", () => {
   for (const species of ["spiny-back-beetle", "vine-turtle"]) for (const indexed of [false, true]) {
     const context = fixture(species, indexed);
-    building(context, "building", 101, 100);
+    nest(context, "nest", 101, 100);
     unit(context, 100, 103);
     tick(context, 720);
     assert.equal(context.agent.mode, "walk", species);
@@ -95,10 +89,10 @@ test("더 가까운 건물보다 공격 가능한 유닛을 우선 추적한다"
   }
 });
 
-test("건물 타격 직전 유닛이 접근하면 타격을 취소하고 유닛을 추적한다", () => {
+test("둥지 타격 직전 유닛이 접근하면 타격을 취소하고 유닛을 추적한다", () => {
   for (const species of ["spiny-back-beetle", "vine-turtle"]) {
-    const context = fixture(species, true), target = building(context, "building", 101, 100);
-    const startedAt = beginBuildingAttack(context);
+    const context = fixture(species, true), target = nest(context, "nest", 101, 100);
+    const startedAt = beginNestAttack(context);
     unit(context, 100, 102);
     tick(context, startedAt + .5);
     assert.equal(target.health, 120, species);
@@ -108,10 +102,10 @@ test("건물 타격 직전 유닛이 접근하면 타격을 취소하고 유닛�
   }
 });
 
-test("죽거나 숨거나 등장·탄생·도주 중이거나 도달 불가능한 유닛은 건물 공격을 막지 않는다", () => {
+test("죽거나 숨거나 등장·탄생·도주 중이거나 도달 불가능한 유닛은 둥지 공격을 막지 않는다", () => {
   for (const species of ["spiny-back-beetle", "vine-turtle"]) for (const condition of ["dead", "hidden", "spawn", "birth", "escape", "blocked"]) {
     const context = fixture(species, false);
-    building(context, "building", 101, 100);
+    nest(context, "nest", 101, 100);
     const target = unit(context, 100, 103);
     if (condition === "dead") target.health = 0;
     if (condition === "hidden") target.hidden = true;
@@ -120,14 +114,14 @@ test("죽거나 숨거나 등장·탄생·도주 중이거나 도달 불가능�
     if (condition === "escape") target.escapeUntil = 730;
     if (condition === "blocked") for (const [x, y] of [[99, 103], [101, 103], [100, 102], [100, 104]])
       context.room.world.terrain[y * 320 + x] = 0;
-    beginBuildingAttack(context);
+    beginNestAttack(context);
   }
 });
 
-test("타격 전후 저장·복원해도 건물 피해가 중복되지 않고 파괴된 목표를 버린다", () => {
+test("타격 전후 저장·복원해도 둥지 피해가 중복되지 않고 파괴된 목표를 버린다", () => {
   for (const species of ["spiny-back-beetle", "vine-turtle"]) {
-    const context = fixture(species, false), target = building(context, "building", 101, 100);
-    const startedAt = beginBuildingAttack(context), timing = CREATURE_ATTACK_TIMINGS[species] || BEETLE_ANIMATIONS.attack;
+    const context = fixture(species, false), target = nest(context, "nest", 101, 100);
+    const startedAt = beginNestAttack(context), timing = CREATURE_ATTACK_TIMINGS[species] || BEETLE_ANIMATIONS.attack;
     context.room.creatureSystem = createCreatures(context.room, structuredClone(context.room.creatureSystem.save()));
     tick(context, startedAt + timing.hitTimeMs / 1000);
     assert.equal(context.hits.length, 1, species);
@@ -140,18 +134,18 @@ test("타격 전후 저장·복원해도 건물 피해가 중복되지 않고 �
   }
 });
 
-test("평화형·비선공 중립 몹은 인접 건물을 선공하지 않는다", () => {
+test("평화형·비선공 중립 몹은 인접 둥지를 선공하지 않는다", () => {
   for (const species of ["dew-rabbit", "spring-keeper"]) {
-    const context = fixture(species, false), target = building(context, "building", 101, 100);
+    const context = fixture(species, false), target = nest(context, "nest", 101, 100);
     tick(context, 720);
     assert.equal(context.agent.attack, undefined, species);
     assert.equal(target.health, 120, species);
   }
 });
 
-test("건물 접근·둥지 공격은 점유 셀을 침범하지 않고 활동 반경을 지킨다", () => {
+test("둥지 접근·둥지 공격은 점유 셀을 침범하지 않고 활동 반경을 지킨다", () => {
   for (const species of ["spiny-back-beetle", "vine-turtle"]) {
-    const context = fixture(species, true), target = building(context, "nest", 102, 100);
+    const context = fixture(species, true), target = nest(context, "nest", 102, 100);
     context.room.colonies.push({ id: 1, ownerId: "test", x: 102, y: 100,
       occupiedCells: new Set(Array.from({ length: 9 }, (_, index) => index % 3 + "," + Math.floor(index / 3))) });
     tick(context, 720);
@@ -163,29 +157,29 @@ test("건물 접근·둥지 공격은 점유 셀을 침범하지 않고 활동 �
   }
   const context = fixture("vine-turtle", false);
   Object.assign(context.agent, { x: 104, renderFromX: 104 });
-  building(context, "building", 107, 100);
+  nest(context, "nest", 107, 100);
   tick(context, 720);
   assert.equal(context.agent.attack, undefined);
   assert.ok(Math.hypot(context.agent.x - 100, context.agent.y - 100) <= 4);
 });
 
-test("추적하던 마지막 유닛이 죽으면 이동 완료 뒤 건물 공격으로 전환한다", () => {
+test("추적하던 마지막 유닛이 죽으면 이동 완료 뒤 둥지 공격으로 전환한다", () => {
   for (const species of ["spiny-back-beetle", "vine-turtle"]) {
     const context = fixture(species, true);
-    building(context, "building", 101, 100);
+    nest(context, "nest", 101, 100);
     const target = unit(context, 100, 102);
     tick(context, 720);
     assert.equal(context.agent.mode, "walk", species);
     target.health = 0;
     tick(context, context.agent.moveStartedAt + context.agent.moveDuration);
-    assert.equal(context.agent.attack?.targetKind, "building", species);
+    assert.equal(context.agent.attack?.targetKind, "nest", species);
   }
 });
 
-test("건물 공격 중 같은 셀의 적과 교전하면 근접전을 먼저 처리한다", () => {
+test("둥지 공격 중 같은 셀의 적과 교전하면 근접전을 먼저 처리한다", () => {
   for (const species of ["spiny-back-beetle", "vine-turtle"]) {
-    const context = fixture(species, true), target = building(context, "building", 101, 100);
-    const startedAt = beginBuildingAttack(context);
+    const context = fixture(species, true), target = nest(context, "nest", 101, 100);
+    const startedAt = beginNestAttack(context);
     unit(context, 100, 100);
     tick(context, startedAt + .2);
     assert.ok(context.agent.combat, species);
@@ -194,9 +188,9 @@ test("건물 공격 중 같은 셀의 적과 교전하면 근접전을 먼저 �
   }
 });
 
-test("두꺼비는 마지막 건물이 사라져 다시 숨을 때 준비 중인 타격을 버린다", () => {
-  const context = fixture("bubble-toad", false), target = building(context, "building", 101, 100);
-  const startedAt = beginBuildingAttack(context);
+test("두꺼비는 마지막 둥지가 사라져 다시 숨을 때 준비 중인 타격을 버린다", () => {
+  const context = fixture("bubble-toad", false), target = nest(context, "nest", 101, 100);
+  const startedAt = beginNestAttack(context);
   target.health = 0;
   tick(context, startedAt + .1);
   assert.equal(context.agent.hidden, true);
@@ -204,11 +198,11 @@ test("두꺼비는 마지막 건물이 사라져 다시 숨을 때 준비 중인
   assert.equal(context.hits.length, 0);
 });
 
-test("공격 객체가 없는 이전 딱정벌레 저장도 이미 준 건물 피해를 보존한다", () => {
+test("공격 객체가 없는 이전 딱정벌레 저장도 이미 준 둥지 피해를 보존한다", () => {
   for (const hit of [false, true]) {
     const context = fixture("spiny-back-beetle", false);
-    building(context, "building", 101, 100);
-    const startedAt = beginBuildingAttack(context);
+    nest(context, "nest", 101, 100);
+    const startedAt = beginNestAttack(context);
     if (hit) tick(context, startedAt + BEETLE_ANIMATIONS.attack.hitTimeMs / 1000);
     const saved = structuredClone(context.room.creatureSystem.save());
     delete saved.agents[0].attack;
@@ -218,8 +212,8 @@ test("공격 객체가 없는 이전 딱정벌레 저장도 이미 준 건물 �
   }
 });
 
-test("둥지 주변 배회 제한 안에서도 유닛을 우선 추적하고 건물이 사라지면 귀환한다", () => {
-  const context = fixture("shadow-weasel", true), target = building(context, "nest", 106, 100);
+test("둥지 주변 배회 제한 안에서도 유닛을 우선 추적하고 둥지가 사라지면 귀환한다", () => {
+  const context = fixture("shadow-weasel", true), target = nest(context, "nest", 106, 100);
   context.room.colonies.push({ id: 1, ownerId: "test", x: 106, y: 100,
     occupiedCells: new Set(Array.from({ length: 9 }, (_, index) => index % 3 + "," + Math.floor(index / 3))) });
   Object.assign(context.agent, { x: 105, renderFromX: 105 });

@@ -38,17 +38,10 @@ test("승인한 16프레임과 피벗·재생 시간을 런타임에서도 그�
   assert.equal(agentDeathFrame(corpse, 79.999), 15);
 });
 
-test("자연사와 전투 사망 모두 사체 생성부터 재생하고 부패까지 마지막 자세를 유지한다", () => {
-  for (const cause of ["age", "combat"]) {
+test("전투 사망은 사체 생성부터 재생하고 3초까지 마지막 자세를 유지한다", () => {
+  {
     const { game, agent } = fixture();
-    if (cause === "age") {
-      const diesAt = agent.bornAt + agent.lifespan;
-      game.prepare(diesAt - .001); game.tick(0);
-      assert.ok(agent.health > 0);
-      assert.equal(game.snapshot().corpses.some(entry => entry.agentId === agent.id), false);
-      game.prepare(diesAt); game.tick(0);
-    }
-    else { game.prepare(10); game.receiveDamage(agent, 10000); }
+    game.prepare(10); game.receiveDamage(agent, 10000);
     const corpse = game.snapshot().corpses.find(entry => entry.agentId === agent.id);
     assert.ok(corpse);
     assert.equal(game.agents.length, 0);
@@ -75,13 +68,13 @@ test("각 부족의 사망 그림을 고르고 오래된 사체는 마지막 자
 test("월드 사체 렌더러와 목록 아이콘이 같은 애셋을 사용하고 감소된 동작에서는 마지막 자세를 표시한다", () => {
   const draws = [], fallback = [];
   const context = { globalAlpha: 1, save() {}, restore() {}, translate() {}, scale() {}, drawImage(...args) { draws.push(args); }, setTransform() {}, clearRect() {} };
-  const corpse = { id: "corpse:1", agentId: "1", kind: "corpse", tribe: "bean", x: 5, y: 5, diedAt: 10, decaysAt: 70, amount: 4 };
+  const corpse = { id: "corpse:1", agentId: "1", kind: "corpse", tribe: "bean", x: 5, y: 5, diedAt: 10, decaysAt: 13 };
   const sheet = { complete: true, naturalWidth: 1024 };
   const scope = createContext({ AGENT_DEATH_ANIMATION, agentDeathFrame, AGENT_HEIGHT: 0.7, agentDeathSheet: sheet,
     Spawner: { agentDeathAnimation, hasCombatEvolution }, unitAnimationSheets: new Map(["bean", "spore", "pebble", "spring"].map(tribe =>
       [tribe, new Map([["death", { sprite: sheet, scale: .8 }]])])),
     corpsePlaybackTime: () => scope.state.simSeconds,
-    state: { simSeconds: 10, camera: { zoom: 100 }, lastFrame: 0 }, idleMotion: { matches: false },
+    state: { corpses: [corpse], agents: [], rivals: [], simSeconds: 10, camera: { zoom: 100 }, lastFrame: 0 }, idleMotion: { matches: false },
     clamp: (value, min, max) => Math.max(min, Math.min(max, value)), ctx: context,
     resourceNodeCells: () => [corpse], resourceNodePose: () => ({ visible: true, opacity: 1 }),
     worldToScreen: (x, y) => ({ x: x * 100, y: y * 100 }), objectOutlineColor: () => null,
@@ -99,7 +92,7 @@ test("월드 사체 렌더러와 목록 아이콘이 같은 애셋을 사용하�
   corpse.tribe = "spore"; scope.drawCorpses(); assert.equal(fallback.length, 0);
   assert.deepEqual(draws.at(-1).slice(1, 5), [3 * AGENT_DEATH_ANIMATIONS.spore.frameSize, AGENT_DEATH_ANIMATIONS.spore.frameSize, AGENT_DEATH_ANIMATIONS.spore.frameSize, AGENT_DEATH_ANIMATIONS.spore.frameSize]);
   const count = draws.length;
-  corpse.amount = 0; scope.drawCorpses(); assert.equal(draws.length, count);
+  scope.state.simSeconds = 13; scope.drawCorpses(); assert.equal(draws.length, count);
 });
 
 test("로컬 실행 목록과 생성된 번들에도 같은 사망 애셋과 프레임 계산이 포함된다", () => {

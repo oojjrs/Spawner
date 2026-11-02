@@ -74,7 +74,7 @@ test("기획서와 같은 종족별 원본·프레임·반복·재생 시간을 
 
 test("속성이 있어도 피격·공격을 재생하고 채집·운반·투척·대기를 실제 상태로 선택한다", () => {
   for (const tribe of ["bean", "spore", "pebble", "spring"]) {
-    const agent = { id: tribe, tribe, health: 10, attributes: { strength: 1, feet: 1, antenna: 1, lifespan: 1 },
+    const agent = { id: tribe, tribe, health: 10, attributes: { strength: 1, feet: 1, antenna: 1 },
       mode: "idle", hurtStartedAt: -10, bornAt: 0, moveDuration: 0, carrying: 0 };
     assert.equal(unitAnimationPose(agent, .1).action, "idle");
     agent.attack = { startedAt: 0, speed: 1 };

@@ -67,14 +67,14 @@ test("4종족과 모든 생물 23종을 정의하고 체력은 모두 100이며 
   assert.ok(unitCombatStats("walking-forest").combatStrength < unitCombatStats("spiny-back-leader").combatStrength);
 });
 
-test("전투 수치를 바꿔도 4종족의 이속·시야·운반·수명 수치는 유지한다", () => {
+test("전투 수치를 바꿔도 4종족의 이속·시야·운반 수치는 유지한다", () => {
   for (const tribe of PLAYER_TRIBES) {
-    const stats = unitStats(attributeCounts(["feet", "antenna", "strength", "lifespan"]), tribe.key);
+    const stats = unitStats(attributeCounts(["feet", "antenna", "strength"]), tribe.key);
     const speeds = { bean: .8, spore: .8, pebble: .65, spring: 1.2 };
     assert.ok(Math.abs(stats.speed - speeds[tribe.key]) < 1e-12);
     assert.equal(stats.vision, 6);
     assert.equal(stats.capacity, 2);
-    assert.equal(stats.lifespan, tribe.key === "pebble" ? 360 : 300);
+    assert.equal("lifespan" in stats, false);
     assert.equal(stats.resistance, 1);
     assert.equal(stats.combatStrength, unitCombatStats(tribe.key).combatStrength);
   }

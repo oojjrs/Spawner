@@ -1,5 +1,4 @@
 import { createGame } from "../server/game.mjs";
-import { buildingContains } from "../server/buildings.mjs";
 
 let world, environment;
 const games = new Map();
@@ -12,7 +11,7 @@ self.onmessage = event => {
     Object.assign(environment, { colonies: data.colonies, simSeconds: data.simSeconds,
       hostId: data.hostId, targetRevision: data.targetRevision,
       creatureSystem: { ...data.creatures, burrowAt(x, y) {
-        return data.creatures.burrows.find(burrow => buildingContains(burrow, x, y)) || null;
+        return data.creatures.burrows.find(burrow => x >= burrow.x && x < burrow.x + burrow.width && y >= burrow.y && y < burrow.y + burrow.height) || null;
       } } });
     environment.games.clear();
     for (const [owner, game] of data.games) environment.games.set(owner, game);
@@ -37,6 +36,6 @@ self.onmessage = event => {
     }
     const decisions = game.planDecisions(data.requests);
     postMessage({ results: data.requests.map((request, index) =>
-      ({ ...request, time: data.simSeconds, candidates: decisions[index], foragerMemory: game.foragerMemory })) });
+      ({ ...request, time: data.simSeconds, candidates: decisions[index] })) });
   } catch (error) { postMessage({ error: error.message }); }
 };

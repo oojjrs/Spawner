@@ -39,46 +39,12 @@ function fixture(create, tribe) {
 }
 
 for (const [surface, create] of surfaces) {
-  for (const tribe of ["bean", "spore", "pebble", "spring"]) {
-    test(surface + ": " + tribe + " 회수 개체는 빠른 이슬보다 양분을 먼저 회수한다", () => {
-      const f = fixture(create, tribe);
-      assert.equal(f.ai.evaluate(f.agent, false)[0]?.target.key, f.corpse.key);
-    });
-  }
-  test(surface + ": 기존 이슬 작업을 유지 중이어도 인접 사체로 전환한다", () => {
-    const f = fixture(create, "spring"); f.retain(f.dew);
-    assert.equal(f.ai.evaluate(f.agent, true)[0]?.target.key, f.corpse.key);
-  });
-  test(surface + ": 가까운 이슬 후보가 여섯 개를 넘어도 사체를 평가한다", () => {
-    const f = fixture(create, "spring"); f.corpse.x = 13;
-    for (const [x, y] of [[9, 10], [10, 9], [10, 11], [11, 10], [9, 9], [9, 11]]) {
-      const key = x + "," + y;
-      f.state.knownFood.set(key, { key, x, y, amount: 100, resourceType: "dew" });
-    }
-    assert.equal(f.ai.evaluate(f.agent, false)[0]?.target.key, f.corpse.key);
-  });
-  test(surface + ": 멀리 있는 사체를 향하던 빈손 개체도 옆 사체를 먼저 회수한다", () => {
-    const f = fixture(create, "spring"), far = { ...f.corpse, key: "corpse:far", x: 15 };
-    f.state.knownFood.set(far.key, far); f.retain(far);
-    assert.equal(f.ai.evaluate(f.agent, true)[0]?.target.key, f.corpse.key);
-  });
-  test(surface + ": 고갈·예약·막힌 경로·적재물·보관 한도는 양분 우선에서도 지킨다", () => {
-    for (const invalid of ["고갈", "예약", "경로", "적재", "한도"]) {
-      const f = fixture(create, "spring");
-      if (invalid === "고갈") f.corpse.amount = 0;
-      if (invalid === "예약") f.state.agents.push({ ...f.agent, id: "other", utility: {
-        action: "collect", target: { key: f.corpse.key }, plannedCargo: 4 } });
-      if (invalid === "경로") f.block();
-      if (invalid === "적재") { f.agent.carrying = 1; f.agent.carryingType = "dew"; }
-      if (invalid === "한도") f.fill();
-      assert.notEqual(f.ai.evaluate(f.agent, false)[0]?.target.key, f.corpse.key, invalid);
-    }
-  });
-  test(surface + ": 양분을 구할 수 없으면 이슬을 채집하고 퇴각 중에는 회수를 우선하지 않는다", () => {
-    const f = fixture(create, "spring"); f.corpse.amount = 0;
-    assert.equal(f.ai.evaluate(f.agent, false)[0]?.target.key, f.dew.key);
-    f.corpse.amount = 4; f.agent.health /= 2;
-    f.agent.retreat = { startedAt: 0, recoverHealth: f.agent.stats.health, safeSince: null };
-    assert.notEqual(f.ai.evaluate(f.agent, true)[0]?.action, "collect");
+  test(surface + ": 사체는 알려진 음식에 남아도 채집 후보가 아니며 이슬을 계속 채집한다", () => {
+    const f = fixture(create, "spring");
+    const candidates = f.ai.evaluate(f.agent, false);
+    assert.equal(candidates[0]?.target.key, f.dew.key);
+    assert.ok(candidates.every(candidate => candidate.target.key !== f.corpse.key));
+    f.retain(f.corpse);
+    assert.ok(f.ai.evaluate(f.agent, true).every(candidate => candidate.target.key !== f.corpse.key));
   });
 }

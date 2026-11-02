@@ -1,7 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createGame } from "./game.mjs";
-import { canHarvestResource } from "./resources.mjs";
 
 function fixture(tribe) {
   const occupiedCells = new Set(["1,0", "2,0", "3,0", "0,1", "1,1", "2,1", "3,1", "4,1", "0,2", "1,2", "2,2", "3,2", "4,2", "0,3", "1,3", "2,3", "3,3", "4,3", "1,4", "2,4", "3,4"]);
@@ -15,7 +14,7 @@ function fixture(tribe) {
   const saved = JSON.parse(game.save());
   saved.state.agents=[]; saved.state.nestLevel=2; saved.state.evolutionPoints=30;
   game.restore(JSON.stringify(saved));
-  const {agentId} = game.command({type:"design",templateId:null,name:"회수",slots:["butchery"],birth:true});
+  const {agentId} = game.command({type:"design",templateId:null,name:"회수",slots:[],birth:true});
   const harvester=game.agents.find(agent=>agent.id===agentId);
   Object.assign(harvester,{x:46,y:42,renderFromX:46,renderFromY:42,birth:null,
     moveStartedAt:0,moveDuration:0,personality:Object.freeze({boldness:0,aggression:0,curiosity:0})});
@@ -29,122 +28,38 @@ function fixture(tribe) {
   return {game,environment,harvesterId:agentId,victimId:born.agentId};
 }
 
-function advance(fixture) {
-  fixture.environment.simSeconds=Math.round((fixture.environment.simSeconds+.1)*10)/10;
-  fixture.game.prepare(fixture.environment.simSeconds);
-  fixture.game.tick(.1);
-}
-
-function recover(fixture, expected) {
-  for (let step=0;step<2500 && fixture.game.snapshot().colonyFood<expected;step++) advance(fixture);
-  assert.equal(fixture.game.snapshot().colonyFood,expected);
-}
-
-test("네 종족의 전사·자연사는 회수율을 적용한 정수 양분만 남기고 AI가 반납한다",()=>{
-  for (const [tribe,amount] of [["bean",1],["spore",1],["pebble",3],["spring",2]]) {
-    for (const cause of ["combat","age"]) {
-      const f=fixture(tribe), victim=f.game.agents.find(agent=>agent.id===f.victimId);
-      const before=f.game.snapshot().evolutionPoints, paid=victim.cost;
-      if (cause==="age") { victim.bornAt=-victim.lifespan; f.game.tick(0); }
-      else f.game.receiveDamage(victim,1000);
-      const corpse=f.game.snapshot().corpses.find(cell=>cell.agentId===f.victimId);
-      assert.equal(corpse.cost,paid,tribe);
-      assert.equal(corpse.initialAmount,amount,tribe);
-      assert.equal(corpse.amount,amount,tribe);
-      assert.equal(f.game.snapshot().evolutionPoints,before);
-      assert.equal(f.game.snapshot().resourceInventory.nutrients,undefined);
-      recover(f,amount);
-      assert.equal(f.game.snapshot().evolutionPoints,before+amount,tribe);
-      assert.equal(f.game.snapshot().colonyFood,amount,tribe);
-      assert.equal(f.game.snapshot().corpses.length,amount > 0 ? 0 : 1,tribe);
-      assert.equal(f.game.agents.find(agent=>agent.id===f.harvesterId).carrying,0,tribe);
-    }
+test("구버전 양분과 고기 재고·운반·채집·예약·발견은 복원에서 제거한다", () => {
+  for (const type of ["nutrients", "meat"]) {
+    const f = fixture("bean"), saved = JSON.parse(f.game.save());
+    saved.state.resourceInventory = { [type]: 8, clay: 4 };
+    saved.state.resourceStores = [{ id: "nest:1", kind: "nest", inventory: { [type]: 8, clay: 4 } }];
+    Object.assign(saved.state.agents[0], { carrying: 2, carryingType: type, foodDelivery: { resourceType: type, amount: 2 },
+      harvestResult: { kind: "corpse", resourceType: type }, transport: { type, amount: 2 }, transportCargo: { siteId: "old" },
+      utility: { action: "collect", target: { key: "47,42", x: 47, y: 42 }, scores: [{ key: "47,42" }] },
+      suspendedWork: { action: "collect", target: { key: "47,42", x: 47, y: 42 } }, rememberedFoodKey: "47,42", rememberedRoute: [{ x: 47, y: 42 }],
+      preciseHarvestTimes: { collection: "Map", entries: [["47,42", 0]] }, appearanceAttributes: { butchery: 1, blade: 1 } });
+    const old = { kind: "corpse", agentId: "old", colonyId: 1, x: 47, y: 42, resourceType: type, amount: 0, initialAmount: 4, diedAt: 0, decaysAt: 300 };
+    f.environment.food.set("47,42", old);
+    f.environment.food.set("drop:" + type, { resourceType: type, amount: 2, dropped: true, x: 48, y: 42 });
+    f.environment.foodSpots.set("old", { cells: [old] });
+    saved.state.knownFood.entries.push(["47,42", { ...old }]);
+    saved.state.discoveries.push({ key: "food:" + type, kind: "food" }, { key: "attribute:butchery", kind: "attribute" });
+    const before = saved.state.evolutionPoints;
+    f.game.restore(JSON.stringify(saved));
+    const restored = f.game.agents[0];
+    assert.equal(restored.carrying, 0); assert.equal(restored.carryingType, null);
+    for (const key of ["foodDelivery", "harvestResult", "utility", "suspendedWork", "rememberedFoodKey", "rememberedRoute"]) assert.equal(restored[key], null, key);
+    assert.equal("transport" in restored, false); assert.equal("transportCargo" in restored, false);
+    assert.equal(restored.preciseHarvestTimes.size, 0); assert.equal("butchery" in restored.appearanceAttributes, false);
+    const snapshot = f.game.snapshot();
+    assert.deepEqual(snapshot.resourceInventory, { clay: 4 });
+    assert.ok(snapshot.resourceStores.every(store => !(type in store.inventory)));
+    assert.ok(snapshot.discoveries.every(entry => !["food:" + type, "attribute:butchery"].includes(entry.key)));
+    assert.ok(snapshot.food.every(cell => cell.kind !== "corpse" && cell.resourceType !== type));
+    assert.equal(f.environment.foodSpots.get("old").cells.length, 0); assert.equal(f.environment.food.has("drop:" + type), false);
+    assert.equal(snapshot.corpses.length, 1);
+    f.game.prepare(3); f.game.tick(0);
+    assert.equal(f.game.snapshot().corpses.length, 0); assert.equal(f.game.snapshot().evolutionPoints, before);
+    assert.equal(JSON.parse(f.game.save()).state.knownFood.entries.some(([, cell]) => cell.kind === "corpse"), false);
   }
-});
-
-test("과거 지불액을 기준으로 회수하고 운반 중 저장·복원해도 반납 전 지급하거나 중복 지급하지 않는다",()=>{
-  const f=fixture("bean"), saved=JSON.parse(f.game.save());
-  const legacy=saved.state.agents.find(agent=>agent.id===f.victimId);
-  legacy.cost=17; legacy.growthActivity=204;
-  saved.state.agents.find(agent=>agent.id===f.harvesterId).lifespan=1000;
-  f.game.restore(JSON.stringify(saved));
-  f.game.receiveDamage(f.game.agents.find(agent=>agent.id===f.victimId),1000);
-  const before=f.game.snapshot().evolutionPoints;
-  for (let step=0;step<1000 && !f.game.agents.find(agent=>agent.id===f.harvesterId).carrying;step++) advance(f);
-  assert.equal(f.game.agents.find(agent=>agent.id===f.harvesterId).carrying,1);
-  assert.equal(f.game.snapshot().evolutionPoints,before);
-  assert.equal(f.game.snapshot().resourceInventory.nutrients,undefined);
-  f.game.restore(f.game.save());
-  const corpse=[...f.environment.food.values()].find(cell=>cell.agentId===f.victimId);
-  assert.equal(corpse.cost,17); assert.equal(corpse.amount,7);
-  recover(f,8);
-  assert.equal(f.game.snapshot().evolutionPoints,before+8);
-  const returned=f.game.snapshot().evolutionPoints;
-  f.game.restore(f.game.save()); advance(f);
-  assert.equal(f.game.snapshot().evolutionPoints,returned);
-  const templateId=f.game.snapshot().templates.find(template=>template.name==="개체").id;
-  const {agentId}=f.game.command({type:"birth",templateId});
-  const newborn=f.game.agents.find(agent=>agent.id===agentId);
-  assert.equal(newborn.level,1); assert.equal(newborn.growthActivity,0);
-  assert.deepEqual(newborn.slots,[]);
-  assert.equal(f.game.snapshot().evolutionPoints,returned-3);
-});
-
-test("회수율은 수거 종족이 아닌 사체 종족을 따르고 회수 속성 없이 채집하지 못한다",()=>{
-  const f=fixture("spring");
-  f.game.receiveDamage(f.game.agents.find(agent=>agent.id===f.victimId),1000);
-  const corpse=f.game.snapshot().corpses[0], remaining=corpse.amount;
-  corpse.colonyId=2; corpse.tribe="spring";
-  f.environment.colonies[0].tribe="bean";
-  for (const tribe of ["bean","spore","pebble","spring"]) {
-    assert.equal(canHarvestResource(corpse,f.environment.world,{},tribe),false,tribe);
-    assert.equal(canHarvestResource(corpse,f.environment.world,{butchery:1},tribe),true,tribe);
-  }
-  const points=f.game.snapshot().evolutionPoints;
-  recover(f,remaining);
-  assert.equal(remaining,2);
-  assert.equal(f.game.snapshot().evolutionPoints,points+2);
-});
-
-test("창고가 가득 차도 반납한 정수 양분만 포인트로 회수한다",()=>{
-  const f=fixture("spore"), saved=JSON.parse(f.game.save());
-  saved.state.resourceInventory={clay:30};
-  saved.state.agents.find(agent=>agent.id===f.victimId).cost=5;
-  f.game.restore(JSON.stringify(saved));
-  f.game.receiveDamage(f.game.agents.find(agent=>agent.id===f.victimId),1000);
-  const points=f.game.snapshot().evolutionPoints;
-  recover(f,2);
-  assert.equal(f.game.snapshot().evolutionPoints,points+2);
-  assert.equal(f.game.snapshot().resourceInventory.nutrients,undefined);
-});
-
-test("소수 저장의 잔액·생산비·사체·운반 양분은 복원과 재생산 후에도 정수를 유지한다",()=>{
-  const f=fixture("bean"), saved=JSON.parse(f.game.save());
-  saved.state.evolutionPoints=19.9;
-  saved.state.colonyFood=8.4;
-  const harvester=saved.state.agents.find(agent=>agent.id===f.harvesterId);
-  Object.assign(harvester,{cost:3.6,carrying:2.8,carryingType:"nutrients",mode:"unload",unloadReady:0,x:40,y:40,
-    foodDelivery:{resourceType:"nutrients",amount:2.8,startedAt:0,arrivesAt:0},decisionPending:null,nextDecisionAt:1000,
-    utility:{action:"return",target:{x:40,y:40,key:"home"},route:[{x:40,y:40}]}});
-  f.environment.food.set("50,50",{id:"corpse:legacy",agentId:"legacy",colonyId:1,tribe:"bean",kind:"corpse",
-    resourceType:"nutrients",x:50,y:50,amount:3.4,initialAmount:3.4,diedAt:0,decaysAt:300});
-  f.game.restore(JSON.stringify(saved));
-  assert.equal(f.game.snapshot().evolutionPoints,19);
-  assert.equal(f.game.snapshot().colonyFood,8);
-  const restored=f.game.agents.find(agent=>agent.id===f.harvesterId);
-  assert.equal(restored.cost,4);
-  assert.equal(restored.carrying,2);
-  assert.equal(restored.foodDelivery.amount,2);
-  assert.equal(f.environment.food.get("50,50").amount,3);
-  assert.equal(f.environment.food.get("50,50").initialAmount,3);
-  advance(f);
-  assert.equal(f.game.snapshot().evolutionPoints,21);
-  assert.equal(f.game.snapshot().colonyFood,10);
-  f.game.restore(f.game.save());
-  advance(f);
-  assert.equal(f.game.snapshot().evolutionPoints,21);
-  const templateId=f.game.snapshot().templates.find(template=>template.name==="회수").id;
-  const {agentId}=f.game.command({type:"birth",templateId});
-  assert.equal(f.game.agents.find(agent=>agent.id===agentId).cost,5);
-  assert.equal(f.game.snapshot().evolutionPoints,16);
 });

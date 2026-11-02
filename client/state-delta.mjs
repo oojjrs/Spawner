@@ -4,7 +4,7 @@ const collectionKeys = {
   footprints: value => value.x + "," + value.y,
   sharedTrails: value => value[0], explored: value => value, visible: value => value,
   corpses: value => value.id || value.key || value.agentId,
-  buildings: value => value.id, templates: value => value.id,
+  templates: value => value.id,
   discoveries: value => value.key, burrows: value => value.id
 };
 

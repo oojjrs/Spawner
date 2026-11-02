@@ -8,7 +8,7 @@ import { resourceHarvestMultiplier } from "./resources.mjs";
 import { createGame } from "./game.mjs";
 import { applyAgentGrowth } from "./growth.mjs";
 
-const native = { bean: ["clay", "excavation"], spring: ["dew", "butchery"], pebble: ["pebbles", "piercing"], spore: ["tree", "blade"] };
+const native = { bean: ["clay", "excavation"], spring: ["dew", null], pebble: ["pebbles", "piercing"], spore: ["tree", "blade"] };
 
 function fixture(tribe, slots, grade, distance, scouting) {
   const terrain = new Uint8Array(320 * 320);
@@ -51,15 +51,13 @@ test("네 종족의 단속성 개체는 실제 생산비와 정해진 개별 효
     assert.equal(plain.cost, prices[tribe][0], tribe);
     assert.equal(plain.stats.capacity, 1, tribe);
     assert.equal(plain.stats.vision, 3, tribe);
-    assert.equal(plain.lifespan, 180, tribe);
-    for (const key of ["strength", "feet", "lifespan", native[tribe][1]]) {
+    for (const key of ["strength", "feet", "antenna", native[tribe][1]].filter(Boolean)) {
       const { agent } = fixture(tribe, [key], 1, 8, false);
       const context = tribe + ":" + key;
       assert.equal(agent.cost, prices[tribe][1], context);
       assert.equal(agent.level, 1, context);
       assert.equal(agent.stats.capacity, key === "strength" ? 2 : 1, context);
       assert.ok(Math.abs(agent.stats.speed - speeds[tribe][0] - (key === "feet" ? .3 : 0)) < 1e-12, context);
-      assert.equal(agent.lifespan, key === "lifespan" ? (tribe === "pebble" ? 360 : 300) : 180, context);
       assert.equal(resourceHarvestMultiplier(native[tribe][0], agent.attributes, tribe), key === native[tribe][1] ? .75 : 1, context);
     }
   }
@@ -67,38 +65,36 @@ test("네 종족의 단속성 개체는 실제 생산비와 정해진 개별 효
 
 test("복합 속성 개체는 개수별 생산비와 개별 효과만 적용하고 추가 시너지를 얻지 않는다", () => {
   for (const tribe of Object.keys(native)) {
-    for (const slots of [["strength", "feet"], ["strength", "feet", "lifespan"], ["strength", "feet", native[tribe][1]]]) {
-      const { agent } = fixture(tribe, slots, 1, 12, false);
+    for (const slots of [["strength", "feet"], ["strength", "feet", "antenna"], ["strength", "feet", native[tribe][1]]]) {
+      const { agent } = fixture(tribe, slots.filter(Boolean), 1, 12, false);
       const context = tribe + ":" + slots.join(",");
-      assert.equal(agent.cost, prices[tribe][slots.length], context);
+      assert.equal(agent.cost, prices[tribe][slots.filter(Boolean).length], context);
       assert.equal(agent.stats.capacity, 2, context);
       assert.ok(Math.abs(agent.stats.speed - speeds[tribe][0] - .3) < 1e-12, context);
       assert.ok(Math.abs(unitTravelSpeed(agent, 2, native[tribe][0]) - speeds[tribe][1] - .3) < 1e-12, context);
-      assert.equal(agent.stats.vision, 3, context);
+      assert.equal(agent.stats.vision, slots.includes("antenna") ? 6 : 3, context);
       assert.equal(agent.stats.movementMultiplier, 1, context);
       assert.equal(agent.stats.harvestSpeedMultiplier, 1, context);
-      assert.equal(agent.lifespan, slots.includes("lifespan") ? (tribe === "pebble" ? 360 : 300) : 180, context);
-      assert.equal(resourceHarvestMultiplier(native[tribe][0], agent.attributes, tribe), slots.includes(native[tribe][1]) ? .75 : 1, context);
+      assert.equal(resourceHarvestMultiplier(native[tribe][0], agent.attributes, tribe), native[tribe][1] && slots.includes(native[tribe][1]) ? .75 : 1, context);
     }
   }
 });
 
 test("이전 강화 설계는 1단계로 생산하고 개체 숙성은 10레벨에서 멈춘다", () => {
-  const slots = ["strength", "feet", "lifespan"];
+  const slots = ["strength", "feet", "antenna"];
   const baseline = fixture("bean", slots, 1, 12, false).agent;
   for (const grade of [1, 2, 3, 4]) {
     const { game, agent } = fixture("bean", slots, grade, 12, false);
-    assert.deepEqual(agent.attributeLevels, { strength: 1, feet: 1, lifespan: 1 });
+    assert.deepEqual(agent.attributeLevels, { strength: 1, feet: 1, antenna: 1 });
     assert.deepEqual(agent.stats, baseline.stats);
     assert.equal(agent.cost, 12);
     const template = JSON.parse(game.save()).state.templates[0];
-    assert.deepEqual(template.attributeLevels, { strength: 1, feet: 1, lifespan: 1 });
+    assert.deepEqual(template.attributeLevels, { strength: 1, feet: 1, antenna: 1 });
     for (const key of slots) for (const targetLevel of [2, 3, 4]) assert.equal(attributeUpgradeCost(key, targetLevel), null);
     agent.growthActivity = Number.MAX_SAFE_INTEGER;
     applyAgentGrowth(agent, 0);
     assert.equal(agent.level, 10);
     assert.deepEqual(agent.activeSlots, slots);
-    assert.equal(agent.lifespan, baseline.lifespan);
     const matureStats = { ...agent.stats };
     assert.equal(applyAgentGrowth(agent, 1), false);
     assert.deepEqual(agent.stats, matureStats);
@@ -107,12 +103,12 @@ test("이전 강화 설계는 1단계로 생산하고 개체 숙성은 10레벨�
 
 test("감지 조합은 정해진 시야와 생산비로 상시 시야 밖 지형을 실제 탐색한다", t => {
   const results = [];
-  for (const slots of [[], ["antenna"], ["antenna", "feet"], ["antenna", "feet", "lifespan"]]) {
+  for (const slots of [[], ["antenna"], ["antenna", "feet"], ["antenna", "feet", "strength"]]) {
     const f = fixture("bean", slots, 1, 0, true);
     const initial = new Set(f.game.snapshot().explored);
     assert.equal(f.agent.stats.vision, slots.includes("antenna") ? 6 : 3);
     assert.equal(f.agent.cost, prices.bean[slots.length]);
-    for (let step = 1; step <= f.agent.lifespan * 5; step++) {
+    for (let step = 1; step <= 180 * 5; step++) {
       const time = step / 5;
       f.environment.simSeconds = time;
       f.game.prepare(time);
@@ -130,14 +126,14 @@ test("감지 조합은 정해진 시야와 생산비로 상시 시야 밖 지형
 });
 
 test("생산비는 종족별 장착 속성 개수로 정하고 강화 단계는 반영하지 않는다", () => {
-  const slots = ["strength", "feet", "lifespan"];
+  const slots = ["strength", "feet", "antenna"];
   assert.deepEqual([1, 2, 3, 4].map(grade => birthCost({ slots, attributeLevels: Object.fromEntries(slots.map(key => [key, grade])) }, "bean")),
     [12, 12, 12, 12]);
-  assert.equal(birthCost({ slots, attributeLevels: { strength: 4, feet: 1, lifespan: 1 } }, "bean"), 12);
+  assert.equal(birthCost({ slots, attributeLevels: { strength: 4, feet: 1, antenna: 1 } }, "bean"), 12);
   assert.equal(birthCost({ slots: [] }, "bean"), 3);
   const prices = { bean: [3, 5, 8, 12, 17], spring: [3, 5, 7, 10, 14], pebble: [4, 7, 11, 16, 22], spore: [2, 3, 5, 8, 12] };
   for (const tribe of Object.keys(native)) for (let count = 0; count <= 4; count++) for (let grade = 1; grade <= 4; grade++) {
-    const slots = ["strength", "feet", "lifespan", "antenna"].slice(0, count);
+    const slots = ["strength", "feet", "antenna", "antenna"].slice(0, count);
     const cost = birthCost({ slots, attributeLevels: Object.fromEntries(slots.map(key => [key, grade])) }, tribe);
     assert.equal(cost, prices[tribe][count], tribe + ":" + count + ":" + grade);
   }
@@ -152,14 +148,14 @@ test("운반량은 채집량 증가 유무만 반영하고 서버·브라우저�
   runInNewContext(workerSource.slice(0, workerSource.indexOf('modules["client/worker.mjs"]')) +
     'globalThis.rules = modules["server/attributes.mjs"]; })();', worker);
   for (const rules of [{ unitStats, unitCarryCapacity, unitTravelSpeed }, browser.Spawner, worker.rules]) {
-    for (const tribe of Object.keys(native)) for (const key of ["excavation", "blade", "piercing", "butchery"]) {
+    for (const tribe of Object.keys(native)) for (const key of ["excavation", "blade", "piercing"]) {
       for (let strength = 0; strength <= 4; strength++) for (const feet of [0, 1]) {
         const capacity = strength > 0 ? 2 : 1;
         const attributes = { [key]: 1, strength, feet };
         const agent = { tribe, attributes, stats: rules.unitStats(attributes, tribe), carryingType: "clay" };
         const emptySpeed = speeds[tribe][0] + (feet ? .3 : 0);
         const loadedSpeed = speeds[tribe][1] + (feet ? .3 : 0);
-        for (const resourceType of ["clay", "sand", "tree", "grass-fiber", "pebbles", "iron-ore", "copper-ore", "quartz", "dew", "nutrients"]) {
+        for (const resourceType of ["clay", "sand", "tree", "grass-fiber", "pebbles", "iron-ore", "copper-ore", "quartz", "dew"]) {
           const context = tribe + ":" + key + ":" + strength + ":" + feet + ":" + resourceType;
           assert.equal(rules.unitCarryCapacity(agent, resourceType), capacity, context);
           for (const [load, expected] of [[0, emptySpeed], [capacity / 2, (emptySpeed + loadedSpeed) / 2], [capacity, loadedSpeed], [capacity + 1, loadedSpeed]]) {

@@ -1,11 +1,9 @@
 export const RESOURCE_WORLD_SIZES = Object.freeze({
   tree: .82, dew: .54, pebbles: .68, clay: .78, sand: .74,
   "grass-fiber": .66, "iron-ore": .72, "copper-ore": .72, quartz: .70,
-  nutrients: .32
 });
 
 const imageBounds = Object.freeze({
-  "DesignAssets/Foods/food-nutrients.png": { x: 10, y: 16, width: 26, height: 19 },
   "DesignAssets/Terrain/standing-tree-smooth-atlas.png": { x: 15, y: 16, width: 180, height: 177 },
   "DesignAssets/Resources/wood-carry.png": { x: 26, y: 29, width: 38, height: 33 },
   "DesignAssets/Resources/dew-grass.png": { x: 59, y: 25, width: 92, height: 136 },

@@ -85,7 +85,7 @@ export function createTribeArt(definitions, assetSource) {
 
   function sprite(tribe, attributes, layer) {
     const key = [tribe, layer, attributes.strength ?? attributes.arms ?? 0,
-      ...["feet", "antenna", "lifespan", "butchery", "excavation"].map(name => attributes[name] || 0)].join(":");
+      ...["feet", "antenna", "excavation"].map(name => attributes[name] || 0)].join(":");
     if (sprites.has(key)) return sprites.get(key);
     const unit = units.get(tribe);
     if (!unit || unit instanceof Promise) throw new Error("부족 유닛을 불러오는 중입니다.");
@@ -101,7 +101,7 @@ export function createTribeArt(definitions, assetSource) {
       const crop = part.crop;
       context.drawImage(part.sprite, crop.x, crop.y, crop.width, crop.height, part.x, part.y, part.width, part.height);
     };
-    const part = name => unit.mounted.get(name + "-" + Math.min(name === "lifespan" ? 1 : 2, attributes[name] || 1));
+    const part = name => unit.mounted.get(name + "-" + Math.min(2, attributes[name] || 1));
     if (!layer || layer === "full" || layer === "body") {
       const crop = unit.starterBounds, box = unit.box;
       if (attributes.feet && part("feet")) {
@@ -111,7 +111,6 @@ export function createTribeArt(definitions, assetSource) {
           256 - body.width * scale / 2, box.y, body.width * scale, body.height * scale);
       } else context.drawImage(unit.starter, crop.x, crop.y, crop.width, crop.height, box.x, box.y, box.width, box.height);
       if (attributes.strength) draw(part("strength"));
-      if (attributes.lifespan) draw(part("lifespan"));
     }
     if (attributes.antenna && (!layer || layer === "full" || layer === "antenna")) draw(part("antenna"));
     if (attributes.feet && (!layer || layer === "full" || layer.startsWith("feet-"))) {
@@ -153,21 +152,9 @@ export function createTribeArt(definitions, assetSource) {
     return attributes.pose(agent, pose, time);
   }
 
-  function constructionFrame(agent, base, time) {
-    const animation = { frameSize: 512, columns: 1, pivotX: 256, pivotY: 460 };
-    const sprite = attributes.frame(agent.tribe, agent.appearanceAttributes || agent.attributes, base.sprite, animation, 0,
-      base.action, time, { sourceAction: "idle", sampleTime: time, motionPhase: base.phase, motionBlend: 1 },
-      { sprite: base.sprite, track: base.track, reference: base.track, key: base.artKey ?? base.frame, absorption: base.absorption || 0 });
-    if (!sprite) return base.sprite;
-    const surface = document.createElement("canvas"); surface.width = surface.height = 512;
-    const padding = Math.ceil(512 / 6);
-    surface.getContext("2d").drawImage(sprite, padding, padding, 512, 512, 0, 0, 512, 512);
-    return surface;
-  }
-
   function bodySize(tribe, appearance, portrait) {
     return attributes.bodySize(tribe, appearance, portrait ? units.get(tribe)?.box : null);
   }
 
-  return { preparePreview, prepareUnit, sprite, bounds, drawPreview, animationFrame, animationPose, constructionFrame, bodySize };
+  return { preparePreview, prepareUnit, sprite, bounds, drawPreview, animationFrame, animationPose, bodySize };
 }

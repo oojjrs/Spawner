@@ -1,5 +1,4 @@
 import { attributeUnlockLevel, unitStats, unitTravelSpeed, unitTerrainSpeedMultiplier } from "../server/attributes.mjs";
-import { constructionSeconds } from "../server/buildings.mjs";
 import { RESOURCE_TYPES, resourceHarvestMultiplier } from "../server/resources.mjs";
 import { PLAYER_TRIBES } from "../server/player-tribes.mjs";
 import { tribeTerrainWalkable } from "../server/tribe-environment.mjs";
@@ -7,11 +6,8 @@ import { tribeTerrainWalkable } from "../server/tribe-environment.mjs";
 export const CODEX_ATTRIBUTE_DESCRIPTIONS = Object.freeze({
   antenna: "유닛의 시야 반경이 늘어납니다.",
   strength: "한 번에 채집해 운반하는 자원의 양을 늘립니다.",
-  butchery: "양분과 이슬방울을 채집할 수 있습니다.",
-  lifespan: "유닛의 수명이 늘어납니다.",
   feet: "이동 속도를 높입니다.",
   excavation: "모래와 비옥토를 채집할 수 있습니다.",
-  construction: "필요에 따라 건물로 자동 변태합니다.",
   blade: "공격할 때의 전투력을 높입니다.\n풀섬유와 목재를 채집할 수 있습니다.",
   piercing: "상대 갑피의 피해 감소를 무시합니다. 엄호 효과는 관통하지 않습니다.\n철광석·구리광석·수정·자갈을 채집할 수 있습니다.",
   carapace: "받는 전투 피해를 줄입니다. 관통 공격에는 효과가 줄어듭니다.",
@@ -20,7 +16,6 @@ export const CODEX_ATTRIBUTE_DESCRIPTIONS = Object.freeze({
 });
 
 const CODEX_NATIVE_ATTRIBUTE_DESCRIPTIONS = Object.freeze({
-  butchery: "양분을 채집할 수 있습니다.\n이슬방울을 더 빠르게 채집할 수 있습니다.",
   excavation: "모래를 채집할 수 있습니다.\n비옥토를 더 빠르게 채집할 수 있습니다.",
   blade: "공격할 때의 전투력을 높입니다.\n풀섬유를 채집할 수 있습니다.\n목재를 더 빠르게 채집할 수 있습니다.",
   piercing: "상대 갑피의 피해 감소를 무시합니다. 엄호 효과는 관통하지 않습니다.\n철광석·구리광석·수정을 채집할 수 있습니다.\n자갈을 더 빠르게 채집할 수 있습니다."
@@ -43,9 +38,7 @@ export function codexAttributeEffect(attribute, level, tribe) {
   const effects = {
     antenna: "시야 반경 +" + (stats.vision - base.vision) + "칸",
     strength: "운반량 +" + (stats.capacity - base.capacity) + "개",
-    lifespan: "총수명 " + codexNumber(stats.lifespan / 60) + "분 · +" + codexNumber((stats.lifespan - base.lifespan) / 60) + "분",
     feet: "이동 +" + codexNumber(unitTravelSpeed({ tribe, stats }, 0) - unitTravelSpeed({ tribe, stats: base }, 0)) + "칸/초",
-    construction: "건물 변태 " + constructionSeconds("storage", level) + "초 · 이동 −" + Math.round((1 - stats.movementMultiplier) * 100) + "%",
     blade: "공격 전투력 +" + stats.attackBonus,
     piercing: "갑피 관통 " + Math.round(stats.armorPenetration * 100) + "%",
     carapace: "받는 피해 −" + Math.round(stats.damageReduction * 100) + "%",

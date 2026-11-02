@@ -20,7 +20,7 @@ async function animator(tribe) {
 
 test("낮아진 버섯 대기 자세를 이동 첫 순간까지 유지하고 작화 프레임으로 중립 자세에 연결한다", async () => {
   const art = await animator("spore"), animations = UNIT_ANIMATIONS.spore;
-  const agent = { id: "transition", tribe: "spore", attributes: { antenna: 1, strength: 1, feet: 1, lifespan: 1 } };
+  const agent = { id: "transition", tribe: "spore", attributes: { antenna: 1, strength: 1, feet: 1 } };
   const idle = { action: "idle", animation: animations.idle, frame: 30 };
   const previous = art.pose(agent, idle, 10);
   const walk = { action: "walk", animation: animations.walk, frame: 0 };
@@ -39,7 +39,7 @@ test("낮아진 버섯 대기 자세를 이동 첫 순간까지 유지하고 작
 test("채집·투척·대기를 오갈 때 몸체 시간을 유지하고 전투 프레임의 시간은 바꾸지 않는다", async () => {
   for (const tribe of ["spore", "pebble", "spring"]) {
     const art = await animator(tribe), animations = UNIT_ANIMATIONS[tribe];
-    const agent = { id: tribe, tribe, attributes: { antenna: 1, strength: 1, feet: 1, butchery: 1 } };
+    const agent = { id: tribe, tribe, attributes: { antenna: 1, strength: 1, feet: 1 } };
     art.pose(agent, { action: "idle", animation: animations.idle, frame: 23 }, 20);
     const harvest = art.pose(agent, { action: "harvest", animation: animations.idle, frame: 0 }, 20.02);
     assert.equal(harvest.sourceAction, "idle");

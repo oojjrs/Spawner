@@ -58,8 +58,7 @@
       if (!original) continue;
       const animation = mode === "carry" ? null : animations.get(type);
       const sprite = new Image();
-      const corpse = type === "nutrients";
-      const source = mode === "carry" ? definition.carryImage : animation?.image || (corpse ? original.dataset.originalSrc : definition.image);
+      const source = mode === "carry" ? definition.carryImage : animation?.image || definition.image;
       sprite.src = source;
       sprite.decode().then(() => {
         const shape = type === "tree" && mode !== "carry" && !animation ? { frameSize: sprite.naturalHeight, columns: 3, frameCount: 1 } : animation;
@@ -69,7 +68,7 @@
         canvas.setAttribute("aria-hidden", "true");
         const context = canvas.getContext("2d");
         context.imageSmoothingQuality = "high";
-        const panel = { canvas, context, sprite, animation: shape, bounds, type: corpse && mode !== "carry" ? "tree" : type, mode };
+        const panel = { canvas, context, sprite, animation: shape, bounds, type, mode };
         draw(panel, 0);
         original.style.visibility = "hidden";
         link.querySelector(".food-world-sprite")?.remove();

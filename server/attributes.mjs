@@ -6,11 +6,8 @@ import { unitCombatStats, attributeCombatStrengthBonus } from "./combat-stats.mj
 export const ATTRIBUTES = [
   { key: "antenna", minNestLevel: 1, name: "감지", color: "#b2bffa", effect: "시야 반경 +3칸", description: "유닛의 시야 반경이 늘어납니다.", bonus: 3, bonuses: [0, 3, 4, 6, 8], stat: "시야 반경", unit: "칸" },
   { key: "strength", minNestLevel: 1, name: "채집량 증가", color: "#e6a79c", effect: "채집량 +1개", description: "한 번에 채집해 운반하는 자원의 양이 1개 늘어납니다.", bonus: 1, stat: "채집량", unit: "개" },
-  { key: "butchery", minNestLevel: 2, nativeTribe: "spring", name: "흡수", color: "#b2dce6", effect: "", description: "", kind: "harvest", harvests: ["dew", "nutrients"] },
-  { key: "lifespan", minNestLevel: 2, name: "수명", color: "#d8cd88", effect: "수명 +2분 · 몽돌 +3분", description: "유닛의 수명이 늘어납니다.", bonus: 2, stat: "수명", unit: "분" },
   { key: "feet", minNestLevel: 1, name: "이속 증가", color: "#8cd2bb", effect: "이동 속도 +0.3칸/초", description: "탐색과 왕복 이동을 빠르게 합니다.", bonus: 0.3, stat: "이동 속도", unit: "칸/초" },
   { key: "excavation", minNestLevel: 2, nativeTribe: "bean", name: "굴착", color: "#d4b48a", effect: "", description: "", kind: "harvest", harvests: ["clay", "sand"] },
-  { key: "construction", minNestLevel: 1, name: "변태", color: "#d7bd80", effect: "건물 변태 허용 · 이동 속도 −20%", description: "종족이 정한 장소에서 몸을 눌러 펼치고 건물로 성장합니다. 이 속성이 있는 개체만 변태할 수 있으며, 강화할수록 변태 시간과 이동 감속이 줄어듭니다.", kind: "construction" },
   { key: "blade", minNestLevel: 2, nativeTribe: "spore", name: "칼날", color: "#d5d88e", effect: "공격 전투력 +12", description: "공격할 때의 전투력이 단계별로 12·15·18·20 증가합니다.", kind: "combat", bonus: 12, bonuses: [0, 12, 15, 18, 20], stat: "공격 전투력", unit: "", harvests: ["tree", "grass-fiber"] },
   { key: "piercing", minNestLevel: 2, nativeTribe: "pebble", name: "관통", color: "#b9dca1", effect: "갑피 관통 +50%", description: "상대 갑피의 피해 감소를 단계별로 50·65·80·100% 무시합니다. 엄호 효과는 관통하지 않습니다.", kind: "combat", bonus: 50, bonuses: [0, 50, 65, 80, 100], stat: "갑피 관통", unit: "%", harvests: ["pebbles", "iron-ore", "copper-ore", "quartz"] },
   { key: "carapace", minNestLevel: 3, name: "갑피", color: "#c8bd8c", effect: "받는 피해 −45%", description: "받는 전투 피해가 단계별로 45·50·55·60% 감소합니다.", kind: "combat", bonus: 45, bonuses: [0, 45, 50, 55, 60], stat: "피해 감소", unit: "%" },
@@ -45,7 +42,7 @@ export const ATTRIBUTE_COMBINATIONS = ATTRIBUTE_SYNERGIES_ENABLED ? [
   { keys: ["antenna", "antenna"], attributeLevels: { antenna: 2 }, kind: "upgrade", requirement: "감지 Lv.2", name: "미지 감지", description: "반경 18칸 안개 속 미확인 대상에 느낌표를 표시합니다. 정체와 수량은 실제 시야로 확인합니다." }
 ] : [];
 
-const ATTRIBUTE_MIGRATIONS = Object.freeze({ arms: "strength", botany: "blade", mining: "piercing", condensation: "butchery" });
+const ATTRIBUTE_MIGRATIONS = Object.freeze({ arms: "strength", botany: "blade", mining: "piercing" });
 
 export function migrateAttributeSlots(slots) {
   return [...new Set((Array.isArray(slots) ? slots : []).map(key => Object.hasOwn(ATTRIBUTE_MIGRATIONS, key) ? ATTRIBUTE_MIGRATIONS[key] : key)
@@ -98,11 +95,8 @@ export function hasSynergy(counts, keys) {
 const attributeUpgradeMaterials = {
   antenna: { dew: 6, "grass-fiber": 4 },
   strength: { tree: 6, pebbles: 4 },
-  butchery: { clay: 6, dew: 4 },
-  lifespan: { dew: 6, "grass-fiber": 4 },
   feet: { tree: 4, "grass-fiber": 6 },
   excavation: { tree: 4, pebbles: 6 },
-  construction: { tree: 8, clay: 6 },
   blade: { tree: 6, "grass-fiber": 6 },
   piercing: { tree: 6, pebbles: 6 },
   carapace: { pebbles: 8, clay: 6 },
@@ -143,7 +137,6 @@ export function unitStats(attributes, tribe) {
   const equipped = key => attributes[key] > 0;
   return {
     speed: base.speed + (equipped("feet") ? ATTRIBUTE_STAT_VALUES.movementBonus : 0),
-    movementMultiplier: equipped("construction") ? ATTRIBUTE_STAT_VALUES.movementMultiplier : 1,
     capacity: equipped("strength") ? ATTRIBUTE_STAT_VALUES.capacity : 1,
     vision: equipped("antenna") ? ATTRIBUTE_STAT_VALUES.vision : 3,
     attack: 1,
@@ -155,7 +148,6 @@ export function unitStats(attributes, tribe) {
     healing: equipped("regeneration") ? ATTRIBUTE_STAT_VALUES.healing : 0,
     health: combat.health,
     combatStrength: combat.combatStrength + attributeCombatStrengthBonus(attributes),
-    lifespan: equipped("lifespan") ? base.lifespanWithAttribute : base.lifespan,
     resistance: 1
   };
 }

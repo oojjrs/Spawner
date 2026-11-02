@@ -206,8 +206,8 @@ export function createCombatEvolutionArt(assetSource, createSurface, loadImage) 
     const source = variants.get(keys.length === 1 ? keys[0] : body(keys));
     const animations = source.definition.animations;
     const sampled = combatEvolutionPose(agent, time, animations);
-    let replacement = drawBody && (attributes.construction || source.rig.tribe !== "sprout" && ["antenna", "strength", "arms", "butchery", "lifespan", "feet", "excavation"].some(key => attributes[key] > 0)) ? drawBody : null;
-    if (replacement) { const paint = replacement; replacement = (context, pose) => paint(context, pose); replacement.key = JSON.stringify(attributes) + ":" + (agent.construction?.buildingKey || "") + ":" + (agent.construction?.level || ""); }
+    let replacement = drawBody && (source.rig.tribe !== "sprout" && ["antenna", "strength", "arms", "feet", "excavation"].some(key => attributes[key] > 0)) ? drawBody : null;
+    if (replacement) { const paint = replacement; replacement = (context, pose) => paint(context, pose); replacement.key = JSON.stringify(attributes); }
     const liveFeet = sampled.action !== "death" && source.rig.tribe === "sprout" && attributes.feet > 0;
     const dynamic = liveFeet && drawAttributes && !replacement;
     const key = [agent.tribe || "bean", JSON.stringify(attributes), sampled.action, sampled.frame, Boolean(drawAttributes),
@@ -254,8 +254,8 @@ export function createCombatEvolutionArt(assetSource, createSurface, loadImage) 
     const variants = prepared.get(agent.tribe || "bean");
     if (!variants || !keys.length) return null;
     const source = variants.get(keys.length === 1 ? keys[0] : body(keys));
-    if (attributes.construction || source.rig.tribe !== "sprout" &&
-        ["antenna", "strength", "arms", "butchery", "lifespan", "feet", "excavation"].some(key => attributes[key] > 0)) return replacement;
+    if (source.rig.tribe !== "sprout" &&
+        ["antenna", "strength", "arms", "feet", "excavation"].some(key => attributes[key] > 0)) return replacement;
     if (!source.bodySize) {
       const image = source.images.body, surface = createSurface(image.naturalWidth || image.width, image.naturalHeight || image.height);
       const context = surface.getContext("2d", { willReadFrequently: true }); context.drawImage(image, 0, 0);
@@ -269,6 +269,10 @@ export function createCombatEvolutionArt(assetSource, createSurface, loadImage) 
     return { width: source.bodySize.width * source.rig.scale * 2, height: source.bodySize.height * source.rig.scale * 2 };
   }
 
-  return { prepare, ready, frame, portrait, bodySize };
+  function clearDeaths() {
+    for (const key of frames.keys()) if (key.split("|")[2] === "death") frames.delete(key);
+  }
+
+  return { prepare, ready, frame, portrait, bodySize, clearDeaths };
 }
 

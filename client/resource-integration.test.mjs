@@ -14,14 +14,13 @@ import { createHarvestPlayback, harvestPlaybackPose } from "./harvest.mjs";
 test("기획서의 자원 원화·운반물과 실행 참조가 일치하고 삭제한 애니메이션은 등록하지 않는다", () => {
   const design = readFileSync(new URL("../Design.html", import.meta.url), "utf8");
   const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
-  const corpseImage = source.match(/beetleCorpseSprite\.src = assetSource\("([^"]+)"\)/)[1];
   for (const definition of RESOURCE_TYPES) {
     const key = definition.key;
     const aliases = [key, key === "tree" ? "wood" : key === "honey-mushrooms" ? "basic-mushroom" : key];
     const row = aliases.map(alias => design.match(new RegExp('<tr data-resource="' + alias + '"[^>]*>[^]*?</tr>'))).find(Boolean);
     assert.ok(row, key);
     const sources = [...row[0].matchAll(/<img[^>]+data-original-src="([^"]+)"/g)].map(match => match[1]);
-    assert.equal(["nutrients"].includes(key) ? corpseImage : definition.image, sources[0], key + " original");
+    assert.equal(definition.image, sources[0], key + " original");
     assert.ok(existsSync(sources[0]));
     assert.equal(definition.carryImage, sources[1], key + " carry");
     assert.ok(existsSync(definition.image));
@@ -86,10 +85,9 @@ test("목재·자갈·이슬은 승인된 루프를 재생하고 정지하면 �
 function fixture(resourceType, amount, carapaceAmount) {
   const tribe = resourceType === "tree" ? "spore" : resourceType === "dew" ? "spring" : "bean";
   const colony = { id: 1, ownerId: "integration", tribe, x: 40, y: 40, occupiedCells: new Set(["2,2"]) };
-  const key = resourceType === "nutrients" ? "corpse:beetle" : "46,42";
+  const key = "46,42";
   const cell = { x: 46, y: 42, resourceType, amount, initialAmount: amount, carapaceAmount,
-    ...(resourceType === "nutrients" ? { key, agentId: "beetle" } : {}),
-    kind: resourceType === "nutrients" ? "corpse" : "resource", terrain: resourceType === "tree" ? "forest" : "grassland" };
+    kind: "resource", terrain: resourceType === "tree" ? "forest" : "grassland" };
   const environment = { simSeconds: 120, world: { seed: 13, generationVersion: 11,
     terrain: new Uint8Array(320 * 320).fill(resourceType === "tree" ? 5 : 4), hazards: new Uint8Array(320 * 320) },
     colonies: [colony], games: new Map(), food: new Map([[key, cell]]), foodSpots: new Map() };
@@ -98,7 +96,7 @@ function fixture(resourceType, amount, carapaceAmount) {
   environment.games.set(colony.ownerId, game);
   const saved = JSON.parse(game.save());
   saved.state.agents.splice(1);
-  Object.assign(saved.state.agents[0], { x: 46, y: 42, renderFromX: 46, renderFromY: 42, slots: resourceType === "nutrients" ? ["butchery"] : ["strength"],
+  Object.assign(saved.state.agents[0], { x: 46, y: 42, renderFromX: 46, renderFromY: 42, slots: ["strength"],
     carrying: 0, carryingType: null, birth: null, bornAt: 120, mode: "approach", moveStartedAt: 0,
     moveDuration: 0, moveBudget: 0, harvestResult: null, decisionPending: null, nextDecisionAt: 1000,
     utility: { action: "collect", target: { x: 46, y: 42, key }, route: [{ x: 46, y: 42 }], plannedCargo: 2 } });
@@ -130,18 +128,6 @@ test("목재·이슬을 실제 수확하고 소진한 나무는 시야 정보와
   }
 });
 
-test("딱정벌레 사체는 양분만 회수하고 소진하면 제거한다", () => {
-  const f = fixture("nutrients", 1, 4);
-  advance(f, 0); advance(f, 1); advance(f, 2.501);
-  assert.equal(f.agent.carryingType, "nutrients");
-  assert.equal(f.agent.carrying, 1);
-  assert.equal(f.cell.resourceType, "nutrients");
-  assert.equal(f.cell.kind, "corpse");
-  assert.equal(f.cell.amount, 0);
-  assert.equal(f.environment.food.has(f.cell.key), false);
-  assert.equal(f.game.snapshot().resourceInventory.carapace, undefined);
-});
-
 test("이전 저장의 목재·이슬을 지형 이동 없이 추가하고 기존 노드와 소진 기록을 보존한다", () => {
   const terrain = new Uint8Array(320 * 320);
   for (const [x, type] of [[10, 5], [11, 4], [12, 5], [13, 5]]) terrain[10 * 320 + x] = type;
@@ -162,7 +148,7 @@ test("소진 나무 위치를 저장·복원하고 같은 칸이 사체로 바�
   const cell = [...room.food.values()].find(cell => cell.resourceType === "tree");
   const index = cell.y * 320 + cell.x;
   room.world.depletedTrees.add(index);
-  room.food.set(cell.x + "," + cell.y, { ...cell, kind: "corpse", resourceType: "nutrients", amount: 4 });
+  room.food.set("corpse:test", { id: "corpse:test", key: "corpse:test", agentId: "test", x: cell.x, y: cell.y, kind: "corpse", diedAt: room.simSeconds, decaysAt: room.simSeconds + 3 });
   const restored = restoreRoom(saveRoom(room));
   assert.ok(restored.world.depletedTrees.has(index));
   assert.equal(restored.world.treeCells[index], 0);
@@ -180,8 +166,8 @@ test("기획서 미리보기와 실행 맵이 같은 최신 생성 로직을 사
   assert.equal(hash(runtime), hash(preview));
 });
 
-test("이전 저장의 고기는 양분으로 옮기고 갑각 재고·운반·사체는 제거한다", () => {
-  const f = fixture("nutrients", 4, 0);
+test("이전 저장의 고기와 양분·갑각 재고·운반을 제거한다", () => {
+  const f = fixture("dew", 4, 0);
   const saved = JSON.parse(f.game.save());
   saved.state.resourceInventory = { meat: 3, carapace: 8 };
   saved.state.resourceStores = [{ id: "nest:1", kind: "nest", x: 40, y: 40,
@@ -194,18 +180,17 @@ test("이전 저장의 고기는 양분으로 옮기고 갑각 재고·운반·�
     amount: 4, initialAmount: 4, diedAt: 120, decaysAt: 420 });
   f.game.restore(JSON.stringify(saved));
   const snapshot = f.game.snapshot();
-  assert.equal(snapshot.resourceInventory.nutrients, 3);
+  assert.equal(snapshot.resourceInventory.nutrients, undefined);
   assert.equal(snapshot.resourceInventory.meat, undefined);
   assert.equal(snapshot.resourceInventory.carapace, undefined);
-  assert.equal(f.game.agents[0].carryingType, "nutrients");
-  assert.equal(f.game.agents[0].carrying, 2);
-  assert.equal(f.game.agents[0].foodDelivery.resourceType, "nutrients");
-  assert.equal(f.cell.resourceType, "nutrients");
-  assert.equal(Object.hasOwn(f.cell, "carapaceAmount"), false);
+  assert.equal(f.game.agents[0].carryingType, null);
+  assert.equal(f.game.agents[0].carrying, 0);
+  assert.equal(f.game.agents[0].foodDelivery, null);
+  assert.equal(f.environment.food.has("46,42"), false);
   assert.equal(f.environment.food.has("retired-shell"), false);
   assert.equal(resourceDefinition("meat"), undefined);
   assert.equal(resourceDefinition("carapace"), undefined);
-  assert.equal(resourceDefinition("nutrients").image, "DesignAssets/Foods/food-nutrients.png");
+  assert.equal(resourceDefinition("nutrients"), undefined);
   const armor = JSON.parse(f.game.save());
   Object.assign(armor.state.agents[0], { carryingType: "carapace", carrying: 2, foodDelivery: null });
   f.game.restore(JSON.stringify(armor));

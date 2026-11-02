@@ -32,13 +32,6 @@ export const UNIT_ANIMATIONS = Object.freeze({
   },
 });
 
-export const SPROUT_DECOMPOSITION_PART = "DesignAssets/Tribes/sprout/AnimationStudies/idle-tail-v1/Parts/tail.png";
-
-export const SPROUT_DECOMPOSITION_ANIMATIONS = Object.freeze(Object.fromEntries(["basic", "antenna", "tail"].map(name => [name, {
-  image: "DesignAssets/Tribes/sprout/Animations/Attributes/decomposition-idle-v1/" + name + ".webp",
-  frameSize: 256, columns: 8, loop: true, pivotX: 128, pivotY: 224, durationsMs: Array(128).fill(50)
-}])));
-
 export const CREATURE_IDLE_ANIMATIONS = Object.freeze({
   "spring-keeper": {"image":"DesignAssets/Animations/UniqueIdleV4/spring-keeper/idle.webp","frameSize":384,"columns":8,"durationsMs":[1450,50,50,50,50,50,50,50,50,50,50,50,100,200,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,1350,150,1700],"loop":true,"pivotX":157.5,"pivotY":307.5},
   "lantern-keeper": {"image":"DesignAssets/Animations/UniqueIdleV4/lantern-keeper/idle.webp","frameSize":384,"columns":8,"durationsMs":[1650,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,400,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,2700],"loop":true,"pivotX":203.25,"pivotY":324.75},
@@ -143,7 +136,7 @@ export const CREATURE_DEATH_ANIMATIONS = Object.freeze({
   "spiny-back-leader": {"image":"DesignAssets/Animations/CreatureDeathV10/spiny-back-leader/runtime.webp","frameSize":256,"viewSize":256,"pivotX":128,"pivotY":224,"columns":3,"durationsMs":[80,120,520],"loop":false}
 });
 
-for (const animations of [...Object.values(UNIT_ANIMATIONS), SPROUT_DECOMPOSITION_ANIMATIONS]) for (const animation of Object.values(animations)) {
+for (const animations of Object.values(UNIT_ANIMATIONS)) for (const animation of Object.values(animations)) {
   Object.assign(animation, imageAnimation(animation));
   animation.frameCount = animation.durationsMs.length;
   animation.durationMs = animation.durationsMs.reduce((sum, duration) => sum + duration, 0);
@@ -160,7 +153,6 @@ for (const animation of [...Object.values(CREATURE_IDLE_ANIMATIONS), ...Object.v
 
 export const UNIT_ANIMATION_ASSETS = Object.freeze([...new Set([
   ...Object.values(UNIT_ANIMATIONS).flatMap(animations => Object.values(animations).map(animation => animation.image)),
-  SPROUT_DECOMPOSITION_PART, ...Object.values(SPROUT_DECOMPOSITION_ANIMATIONS).map(animation => animation.image),
   ...[...Object.values(CREATURE_IDLE_ANIMATIONS), ...Object.values(CREATURE_ATTACK_ANIMATIONS), ...Object.values(CREATURE_HURT_ANIMATIONS), ...Object.values(CREATURE_DEATH_ANIMATIONS)].map(animation => animation.image),
   ...Object.values(CREATURE_WALK_ANIMATIONS).map(animation => animation.image)
 ])]);
@@ -210,13 +202,9 @@ export function unitAnimationPose(agent, time) {
     elapsed = (Math.max(0, (agent.stepCount || 1) - 1) + (time - agent.moveStartedAt) / agent.moveDuration) * (animations[action]?.cyclesPerCell || 1) * (animations[action]?.durationMs || 0);
   }
   const attributes = agent.appearanceAttributes || agent.attributes || {};
-  const decomposition = action === "idle" && (agent.tribe || "bean") === "bean" && attributes.butchery > 0 &&
-    !["strength", "arms", "feet", "lifespan", "excavation"].some(key => attributes[key] > 0) && (attributes.antenna || 0) <= 1 ?
-    attributes.antenna ? "antenna" : "basic" : null;
-  const animation = decomposition ? SPROUT_DECOMPOSITION_ANIMATIONS[decomposition] :
-    animations[action] || ((agent.tribe || "bean") !== "bean" && ["harvest", "throw"].includes(action) &&
-      ["antenna", "strength", "arms", "butchery", "lifespan", "feet", "excavation"].some(key => attributes[key] > 0) ? animations.idle : null);
-  return animation ? { action, animation, frame: unitAnimationFrame(animation, elapsed), ...(decomposition ? { decomposition } : {}) } : null;
+  const animation = animations[action] || ((agent.tribe || "bean") !== "bean" && ["harvest", "throw"].includes(action) &&
+      ["antenna", "strength", "arms", "feet", "excavation"].some(key => attributes[key] > 0) ? animations.idle : null);
+  return animation ? { action, animation, frame: unitAnimationFrame(animation, elapsed) } : null;
 }
 
 export function creatureWalkPose(agent, time) {
