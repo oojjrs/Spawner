@@ -208,7 +208,7 @@ export function createCombatEvolutionArt(assetSource, createSurface, loadImage) 
     const sampled = combatEvolutionPose(agent, time, animations);
     let replacement = drawBody && (attributes.construction || source.rig.tribe !== "sprout" && ["antenna", "strength", "arms", "butchery", "lifespan", "feet", "excavation"].some(key => attributes[key] > 0)) ? drawBody : null;
     if (replacement) { const paint = replacement; replacement = (context, pose) => paint(context, pose); replacement.key = JSON.stringify(attributes) + ":" + (agent.construction?.buildingKey || "") + ":" + (agent.construction?.level || ""); }
-    const liveFeet = source.rig.tribe === "sprout" && attributes.feet > 0;
+    const liveFeet = sampled.action !== "death" && source.rig.tribe === "sprout" && attributes.feet > 0;
     const dynamic = liveFeet && drawAttributes && !replacement;
     const key = [agent.tribe || "bean", JSON.stringify(attributes), sampled.action, sampled.frame, Boolean(drawAttributes),
       replacement ? liveFeet ? agent.id + ":" + time : Math.floor(time * 25) : ""].join("|");

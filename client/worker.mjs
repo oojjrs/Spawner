@@ -19,7 +19,7 @@ let decisionPool = null;
 
 function prepareDecisions() {
   if (decisionPool && decisionPool.room !== room) { decisionPool.dispose(); decisionPool = null; }
-  if (room && !decisionPool && [...room.games.values()].reduce((count, game) => count + game.agents.length, 0) >= 32)
+  if (room && !decisionPool)
     decisionPool = createDecisionPool(room);
 }
 

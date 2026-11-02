@@ -1316,11 +1316,19 @@ export function createGame(environment, colony, savedGame) {
     function reconsiderAgent(agent, reason) {
       if (agent.health <= 0 || agent.construction || agent.combat || agent.birth && state.simSeconds < agent.birth.readyAt ||
         agent.attack && state.simSeconds < agent.attack.endsAt) return;
-      const planner = reason === "defense" || agent.suspendedWork ? null : environment.decisionPlanner;
-      const candidates = planner ? planner.request(colony.ownerId, agent, reason) :
+      const planner = environment.decisionPlanner;
+      if (planner) utilityAI.safety(agent);
+      const immediate = planner && (reason === "defense" || agent.suspendedWork) ?
+        utilityAI.evaluate(agent, !["completed", "targetLost", "restore"].includes(reason), true) : null;
+      const candidates = immediate?.length ? immediate : planner ? planner.request(colony.ownerId, agent, reason) :
         utilityAI.evaluate(agent, !["completed", "targetLost", "restore"].includes(reason));
       if (candidates === undefined) return;
       const best = candidates[0];
+      if (best?.defending && !combatTargets().some(target => target.id === best.target.id &&
+          colonyDefenseTarget(agent,target,state.agents,defenseStructures()))) {
+        agent.decisionPending = "targetLost";
+        return;
+      }
       agent.constructionIntent = null;
       if (best?.defending) suspendDefenseWork(agent);
       else if (agent.suspendedWork && agent.survivalState === "stable" && !agent.retreat) agent.suspendedWork = null;
@@ -2684,9 +2692,9 @@ export function createGame(environment, colony, savedGame) {
     function restore(saved) {
       roadOptimizer.clear();
       constructionHelpPreview = null;
-      const data = JSON.parse(saved, (key, value) =>
+      const data = typeof saved === "string" ? JSON.parse(saved, (key, value) =>
         value?.collection === "Map" ? new Map(value.entries) :
-        value?.collection === "Set" ? new Set(value.entries) : value);
+        value?.collection === "Set" ? new Set(value.entries) : value) : saved;
       Object.assign(state, data.state);
       state.corpses = [];
       state.foragerMemory = data.state.foragerMemory || null;
@@ -2824,6 +2832,21 @@ export function createGame(environment, colony, savedGame) {
 
     return {
       command, snapshot, save, restore, checkEnding, produce,
+      decisionSnapshot() {
+        return {state:{...state,rivals:[],corpses:[],footprints:new Map()}};
+      },
+      updateDecisionState(saved) {
+        const explored = state.explored;
+        for (const index of saved.state.explored) explored.add(index);
+        Object.assign(state,saved.state,{explored});
+        constructionHelpPreview = null;
+        resourceStorage.restore();
+        constructionSupply.restore();
+        this.prepare(environment.simSeconds);
+        updatePerception();
+      },
+
+
       nextUpdateAt() {
         let at = state.simSeconds + .5;
         for (const agent of state.agents) {
