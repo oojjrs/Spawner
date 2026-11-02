@@ -276,8 +276,8 @@ export function createGame(environment, colony, savedGame) {
         agent.combat = null;
         agent.attack = null;
       }
-      if (agent.combat || agent.support?.combatId || agent.support?.kind !== "heal") agent.support = null;
-      if (agent.combat) { delete agent.combat.secretionBonus; delete agent.combat.secretionActive; }
+      delete agent.support;
+      if (agent.combat) { delete agent.combat.secretionBonus; delete agent.combat.secretionActive; delete agent.combat.guardProtection; }
       agent.tribe = colony.tribe || "bean";
       agent.cost = Math.round(agent.cost);
       if (["pebble", "spore"].includes(agent.tribe) && agent.birth) agent.birth.readyAt = agent.birth.startedAt + agentBirthDuration(agent.tribe);
@@ -295,16 +295,17 @@ export function createGame(environment, colony, savedGame) {
           fromX:COLONY_CENTER.x - .5, fromY:COLONY_CENTER.y - .5 });
       }
       const carryingType = migrateResourceType(agent.carryingType);
+      if (agent.carryingType != null && carryingType === null) { agent.utility = null; agent.suspendedWork = null; }
       if (carryingType === null) agent.carrying = 0;
       agent.carryingType = carryingType;
-      const removedTarget = target => typeof target?.key === "string" && (target.key.startsWith("corpse:") ||
+      const removedTarget = target => target?.resourceType != null && migrateResourceType(target.resourceType) === null || typeof target?.key === "string" && (target.key.startsWith("corpse:") ||
         removedFoodKeys.has(target.key) || foodCellMap.get(target.key)?.kind === "corpse");
       if (removedTarget(agent.utility?.target) || migrateResourceType(agent.utility?.resourceType) === null) {
         agent.utility = null;
         agent.mode = agent.birth && state.simSeconds < agent.birth.readyAt ? "birth" : "search";
         agent.decisionPending = "targetLost";
       }
-      if (removedTarget(agent.suspendedWork?.target)) agent.suspendedWork = null;
+      if (removedTarget(agent.suspendedWork?.target) || agent.suspendedWork?.resourceType != null && migrateResourceType(agent.suspendedWork.resourceType) === null) agent.suspendedWork = null;
       if (removedTarget({ key: agent.rememberedFoodKey })) {
         agent.rememberedFoodKey = null;
         agent.rememberedRoute = null;
@@ -315,6 +316,9 @@ export function createGame(environment, colony, savedGame) {
         delete agent.appearanceAttributes.condensation;
         delete agent.appearanceAttributes.construction;
         delete agent.appearanceAttributes.lifespan;
+        delete agent.appearanceAttributes.guard;
+        delete agent.appearanceAttributes.regeneration;
+        delete agent.appearanceAttributes.excavation;
       }
       for (const key of ["foodDelivery", "harvestResult"]) {
         if (!agent[key]) continue;
@@ -1661,9 +1665,6 @@ export function createGame(environment, colony, savedGame) {
         updateEnvironment(agent, elapsed);
         if (agent.health <= 0) continue;
         const occupied = combat.update(agent, state.simSeconds);
-        if (!agent.combat && agent.stats.regeneration > 0) {
-          agent.health = Math.min(agent.stats.health, agent.health + agent.stats.regeneration * elapsed);
-        }
         if (occupied) continue;
         if (updateAttack(agent)) continue;
         const reason = scheduledDecisionEvent(agent);
@@ -2047,7 +2048,7 @@ export function createGame(environment, colony, savedGame) {
       const discovered = new Set();
       let readCount = 0;
       state.discoveries.forEach((entry, index) => {
-        if (entry.kind === "corpse" || entry.kind === "building" || entry.key.startsWith("corpse:") || entry.key.startsWith("building:") || ["attribute:secretion", "attribute:butchery", "attribute:condensation", "attribute:construction", "attribute:lifespan"].includes(entry.key)) return;
+        if (entry.kind === "corpse" || entry.kind === "building" || entry.key.startsWith("corpse:") || entry.key.startsWith("building:") || ["attribute:secretion", "attribute:butchery", "attribute:condensation", "attribute:construction", "attribute:lifespan", "attribute:guard", "attribute:regeneration", "attribute:excavation"].includes(entry.key)) return;
         const key = entry.key.slice(entry.key.indexOf(":") + 1);
         const type = migrateResourceType(key);
         if (type === null) return;

@@ -14,14 +14,7 @@ export const FORAGING = { workers: 2, seconds: 300, capacity: 2, speed: 0.5, har
 const CREATURES = [{"key":"flower-tail-bird","name":"꽃꼬리새","group":"공생","terrains":[4,5],"nearWater":false,"small":true,"large":false,"order":0},{"key":"dew-rabbit","name":"이슬토끼","group":"공생","terrains":[4,5],"nearWater":false,"small":true,"large":false,"order":1},{"key":"soil-mole","name":"흙두더지","group":"공생","terrains":[3,4],"nearWater":false,"small":true,"large":false,"order":2},{"key":"bundle-snail","name":"보따리달팽이","group":"생활 중립","terrains":[2,4,5],"nearWater":false,"small":true,"large":false,"order":3},{"key":"cotton-sheep","name":"솜양","group":"생활 중립","terrains":[3,4],"nearWater":false,"small":true,"large":false,"order":4},{"key":"rolling-acorn","name":"굴림도토리","group":"생활 중립","terrains":[3,5],"nearWater":false,"small":true,"large":false,"order":5},{"key":"soil-boar","name":"흙멧돼지","group":"영역","terrains":[3,4,5],"nearWater":false,"small":false,"large":true,"order":6},{"key":"bubble-toad","name":"방울두꺼비","group":"영역","terrains":[2,4,5],"nearWater":true,"small":false,"large":true,"order":7},{"key":"vine-turtle","name":"넝쿨거북","group":"영역","terrains":[4,5],"nearWater":false,"small":false,"large":true,"order":8},{"key":"shadow-weasel","name":"그늘족제비","group":"상위 포식자","terrains":[5],"nearWater":false,"small":false,"large":true,"order":9},{"key":"snare-vine","name":"올가미덩굴","group":"상위 포식자","terrains":[5],"nearWater":false,"small":false,"large":true,"order":10},{"key":"talon-owl","name":"갈퀴부엉이","group":"상위 포식자","terrains":[5,6],"nearWater":false,"small":false,"large":true,"order":11},{"key":"spiny-back-beetle","name":"가시등 딱정벌레","group":"영역","terrains":[3,4,5,6],"small":true,"large":true,"order":12}];
 const UNIQUE_CREATURES = [{"key":"spring-keeper","name":"봄지기","group":"유니크 · 꽃꼬리새","terrains":[4,5],"unique":true},{"key":"lantern-keeper","name":"등불지기","group":"유니크 · 이슬토끼","terrains":[4,5],"unique":true},{"key":"old-garden-snail","name":"오래된 등짐","group":"유니크 · 보따리달팽이","terrains":[2,4,5],"unique":true},{"key":"walking-forest","name":"걸어가는 산","group":"유니크 · 넝쿨거북","terrains":[4,5],"unique":true},{"key":"white-paw","name":"흰발","group":"유니크 · 그늘족제비","terrains":[5],"unique":true},{"key":"spiny-back-leader","name":"가시등 우두머리","group":"유니크 · 가시등 딱정벌레","terrains":[3,4,5,6],"unique":true}];
 const FOOD_HABITATS = [{"key":"honey-mushrooms","terrains":["forest"],"neighbors":[]},{"key":"tree-fruit","terrains":["forest"],"neighbors":[]},{"key":"berry-bush","terrains":["grassland"],"neighbors":["forest"]},{"key":"seed-pods","terrains":["land","grassland"],"neighbors":[]},{"key":"root-bulbs","terrains":["grassland","forest"],"neighbors":[]},{"key":"nutrient-moss","terrains":["forest","swamp"],"neighbors":[]}];
-const RESOURCE_HABITATS = [{"key":"pebbles","terrains":["coast","land","lowMountain"],"neighbors":[],"rarity":"common","minDistance":4,"nodes":36,"separation":7},{"key":"clay","terrains":["coast","grassland","swamp"],"neighbors":["deep","shallow","coast","swamp"],"rarity":"uncommon","minDistance":24,"nodes":20,"separation":8},{"key":"sand","terrains":["coast"],"neighbors":[],"rarity":"common","minDistance":4,"nodes":28,"separation":7},{"key":"grass-fiber","terrains":["grassland","forest"],"neighbors":[],"rarity":"common","minDistance":4,"nodes":42,"separation":6},{"key":"iron-ore","terrains":["lowMountain"],"neighbors":[],"rarity":"rare","minDistance":48,"nodes":10,"separation":9},{"key":"copper-ore","terrains":["lowMountain"],"neighbors":[],"rarity":"rare","minDistance":48,"nodes":8,"separation":9},{"key":"quartz","terrains":["lowMountain"],"neighbors":[],"rarity":"rare","minDistance":56,"nodes":5,"separation":10}];
-const RESOURCE_DISTRIBUTION = {
-  sand: { coverage: .2, separation: 2 },
-  "grass-fiber": { coverage: .08, separation: 2 },
-  "iron-ore": { coverage: .08, separation: 3 },
-  "copper-ore": { coverage: .06, separation: 3 },
-  quartz: { coverage: .03, separation: 4 }
-};
+const RESOURCE_HABITATS = [{"key":"pebbles","terrains":["coast","land","lowMountain"],"neighbors":[],"rarity":"common","minDistance":4,"nodes":36,"separation":7},{"key":"clay","terrains":["coast","grassland","swamp"],"neighbors":["deep","shallow","coast","swamp"],"rarity":"uncommon","minDistance":24,"nodes":20,"separation":8}];
 const TERRAIN = ['deep', 'shallow', 'coast', 'land', 'grassland', 'forest', 'lowMountain', 'highMountain', 'ridge', 'swamp', 'ford'];
 const ENCOUNTER_RULES = {
 "flower-tail-bird": {
@@ -586,9 +579,8 @@ function generateWorldCandidate(seed, revision, onProgress, version, baseline) {
       const index = y * SIZE + x;
       if (resourceReachable[index] && !occupied.has(index) && outsideStarts(x, y, habitat.minDistance) && habitatFits(habitat, x, y, true)) candidates.push(index);
     }
-    const distribution = version === undefined || version >= 19 ? RESOURCE_DISTRIBUTION[habitat.key] : null;
-    const spacing = distribution?.separation ?? habitat.separation;
-    const target = (distribution ? Math.ceil(candidates.length * distribution.coverage) : habitat.nodes) +
+    const spacing = habitat.separation;
+    const target = habitat.nodes +
       Math.ceil(candidates.filter(index => hazards[index]).length * 0.1 / (spacing ** 2));
     const gravelWeight = index => ecological && habitat.key === 'pebbles' && waterDistance[index] <= 6 && mountainDistance[index] <= 6 ? 4 : 1;
     candidates.sort((a, b) => hash(a % SIZE, Math.floor(a / SIZE), seed + 719) / abundance(a) / gravelWeight(a) - hash(b % SIZE, Math.floor(b / SIZE), seed + 719) / abundance(b) / gravelWeight(b));

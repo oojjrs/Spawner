@@ -18,8 +18,8 @@ function fixture(tribe, level) {
 }
 
 test("승인한 4종족·4단계 개방표를 설계 명령에서도 강제한다", () => {
-  const common = { antenna:1, strength:1, feet:1, carapace:3, regeneration:3, guard:4 };
-  const harvest = { bean:"excavation", spore:"blade", pebble:"piercing", spring:null };
+  const common = { antenna:1, strength:1, feet:1, carapace:3 };
+  const harvest = { bean:null, spore:"blade", pebble:"piercing", spring:null };
   for (const [tribe, native] of Object.entries(harvest)) {
     const expected = { ...common, ...Object.fromEntries(Object.values(harvest).filter(Boolean).map(key => [key, key === native ? 1 : 2])) };
     for (const [key, level] of Object.entries(expected)) assert.equal(attributeUnlockLevel(key, tribe), level);
@@ -40,27 +40,27 @@ test("승인한 4종족·4단계 개방표를 설계 명령에서도 강제한�
 });
 
 test("이전 개체는 보존하고 잠긴 설계·복제·강화는 거부하며 둥지 성장 직후 탄생을 허용한다", () => {
-  const game = fixture("bean",3);
+  const game = fixture("bean",2);
   const saved = JSON.parse(game.save());
   const agentId = saved.state.agents[0].id;
-  saved.state.templates = [{id:700, name:"이전 엄호", slots:["guard"], attributeLevels:{guard:1}, revision:1}];
-  Object.assign(saved.state.agents[0], {slots:["guard"], attributeLevels:{guard:1}, activeSlots:["guard"]});
+  saved.state.templates = [{id:700, name:"이전 갑피", slots:["carapace"], attributeLevels:{carapace:1}, revision:1}];
+  Object.assign(saved.state.agents[0], {slots:["carapace"], attributeLevels:{carapace:1}, activeSlots:["carapace"]});
   game.restore(JSON.stringify(saved));
-  assert.deepEqual(game.agents[0].slots,["guard"]);
-  assert.equal(game.agents[0].attributes.guard,1);
+  assert.deepEqual(game.agents[0].slots,["carapace"]);
+  assert.equal(game.agents[0].attributes.carapace,1);
   assert.throws(() => game.command({type:"birth",templateId:700}), /설계를 수정/);
   assert.throws(() => game.command({type:"birth",agentId}), /설계를 수정/);
-  assert.throws(() => game.command({type:"upgrade-attribute",templateId:700,attributeKey:"guard"}), /둥지/);
+  assert.throws(() => game.command({type:"upgrade-attribute",templateId:700,attributeKey:"carapace"}), /둥지/);
   game.command({type:"upgrade"});
-  assert.equal(game.nestLevel,4);
+  assert.equal(game.nestLevel,3);
   assert.ok(game.command({type:"birth",templateId:700}).agentId);
   game.restore(game.save());
-  assert.deepEqual(game.agents.find(agent => agent.id === agentId).slots,["guard"]);
+  assert.deepEqual(game.agents.find(agent => agent.id === agentId).slots,["carapace"]);
 });
 
 test("기획서 속성 페이지에 확정된 개방표와 기본 채집 속성을 표시한다", () => {
   const html = readFileSync(new URL("../Design.html",import.meta.url),"utf8");
   const table = html.split('<table id="attribute-unlocks">')[1].split('</table>')[0];
   assert.equal((table.match(/data-nest-level=/g) || []).length,4);
-  for (const text of ["감지, 채집량 증가, 이속 증가 + 종족 기본 채집 속성", "나머지 채집 속성", "갑피, 재생", "엄호"]) assert.ok(table.includes(text));
+  for (const text of ["감지, 채집량 증가, 이속 증가 + 종족 기본 채집 속성", "나머지 채집 속성", "갑피"]) assert.ok(table.includes(text));
 });

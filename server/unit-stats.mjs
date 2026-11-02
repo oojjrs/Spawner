@@ -11,8 +11,5 @@ export const ATTRIBUTE_STAT_VALUES = Object.freeze({
   vision: 6,
   attackBonus: 12,
   armorPenetration: .5,
-  damageReduction: .45,
-  guardProtection: .35,
-  regeneration: 2,
-  healing: 20
+  damageReduction: .45
 });

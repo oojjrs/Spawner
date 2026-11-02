@@ -8,6 +8,9 @@ export function placeCorpse(food, corpse) {
     delete corpse[key].condensation;
     delete corpse[key].construction;
     delete corpse[key].lifespan;
+    delete corpse[key].excavation;
+    delete corpse[key].guard;
+    delete corpse[key].regeneration;
   }
   corpse.id = "corpse:" + corpse.agentId;
   corpse.key = corpse.id;

@@ -22,7 +22,7 @@ for (const tribe of ["bean", "spore", "pebble", "spring"]) {
 }
 
 test("속성 조합은 순서·중복·옛 강화 단계에 따라 기본 전투력이 달라지지 않는다", () => {
-  const slots = ["blade", "piercing", "carapace", "guard"];
+  const slots = ["blade", "piercing", "carapace"];
   const expected = unitStats(attributeCounts(slots), "bean").combatStrength;
   assert.equal(unitStats(attributeCounts([...slots].reverse()), "bean").combatStrength, expected);
   assert.equal(unitStats(attributeCounts([...slots, ...slots]), "bean").combatStrength, expected);

@@ -92,11 +92,7 @@ export function populateNaturalResources(world, version) {
   }
   const definitions = [
     ["clay", .025, .065, 12, 28], ["pebbles", ...(version >= 29 ? [0, .4, 12, 42] : [.02, .085, 10, 30])], ["dew", .025, .06, 3, 10],
-    ["grass-fiber", .015, .045, 25, 100], ["honey-mushrooms", .04, .15, 10, 35],
-    ["sand", ...(version >= 29 ? [.25, .4, 60, 180] : [.035, .08, 40, 140])],
-    ["iron-ore", ...(version >= 29 ? [.04, .24, 55, 220] : [.005, .07, 40, 180])],
-    ["copper-ore", ...(version >= 29 ? [.03, .2, 45, 190] : [.003, .055, 30, 150])],
-    ["quartz", ...(version >= 29 ? [.02, .16, 30, 150] : [.002, .04, 20, 120])]
+    ["honey-mushrooms", .04, .15, 10, 35]
   ];
   for (const [order, [key, minimum, density, baseAmount, richness]] of definitions.entries()) {
     if (version >= 30 && key === "honey-mushrooms") continue;

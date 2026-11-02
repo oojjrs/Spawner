@@ -378,11 +378,10 @@ function generateLegacyResources(world) {
   const reachable = new Uint8Array(size * size);
   const terrains = new Map([
     ["twigs", [5, 4]], ["bark", [5]], ["pebbles", [6, 2, 3]],
-    ["clay", [2, 4]], ["sand", [2, 3]], ["dry-leaves", [5, 4]],
-    ["grass-fiber", [4, 3]], ["root-fiber", [5, 2, 4]], ["spider-silk", [5, 6]],
+    ["clay", [2, 4]], ["dry-leaves", [5, 4]],
+    ["spider-silk", [5, 6]],
     ["water", [2, 4]], ["tree-sap", [5]], ["leaf-mold", [5, 4]],
-    ["resin", [5]], ["beeswax", [5]], ["carapace", [4, 5, 6]],
-    ["iron-ore", [6, 3]], ["copper-ore", [6, 3]], ["quartz", [6, 2]]
+    ["resin", [5]], ["beeswax", [5]], ["carapace", [4, 5, 6]]
   ]);
   for (let index = 0; index < blocked.length; index++) {
     if (world.terrain[index] < 2 || world.terrain[index] > 6 || world.hazards[index]) blocked[index] = 1;

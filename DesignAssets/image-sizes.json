@@ -817,16 +817,6 @@
         3
       ]
     },
-    "DesignAssets/Animations/Resources/HarvestV1/grass-fiber/sheet.png": {
-      "display": [
-        152.41846153846154,
-        152.41846153846154
-      ],
-      "grid": [
-        6,
-        4
-      ]
-    },
     "DesignAssets/Animations/Resources/HarvestV1/honey-mushrooms/sheet.png": {
       "display": [
         152.41846153846154,
@@ -835,16 +825,6 @@
       "grid": [
         6,
         4
-      ]
-    },
-    "DesignAssets/Animations/Resources/SandBurst/harvest-sheet.png": {
-      "display": [
-        133.20605042016808,
-        133.20605042016808
-      ],
-      "grid": [
-        6,
-        8
       ]
     },
     "DesignAssets/Animations/RollingAcornIdle/v1/idle.webp": {
@@ -1207,26 +1187,6 @@
         1
       ]
     },
-    "DesignAssets/ResourceConcepts/v1/resource-grass-fiber.png": {
-      "display": [
-        123.84,
-        123.84
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/ResourceConcepts/v1/resource-quartz.png": {
-      "display": [
-        123.83999999999999,
-        123.83999999999999
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
     "DesignAssets/Resources/clay-carry.png": {
       "display": [
         58.15039999999998,
@@ -1241,26 +1201,6 @@
       "display": [
         123.84,
         123.84
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Resources/copper-ore-carry.png": {
-      "display": [
-        35.616,
-        35.616
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Resources/copper-ore.png": {
-      "display": [
-        123.83999999999999,
-        123.83999999999999
       ],
       "grid": [
         1,
@@ -1287,26 +1227,6 @@
         1
       ]
     },
-    "DesignAssets/Resources/iron-ore-carry.png": {
-      "display": [
-        47.2752,
-        47.2752
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Resources/iron-ore.png": {
-      "display": [
-        123.83999999999999,
-        123.83999999999999
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
     "DesignAssets/Resources/pebbles-carry.png": {
       "display": [
         90.36423529411763,
@@ -1318,26 +1238,6 @@
       ]
     },
     "DesignAssets/Resources/pebbles.png": {
-      "display": [
-        123.84,
-        123.84
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Resources/sand-carry.png": {
-      "display": [
-        59.05694117647057,
-        59.05694117647057
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Resources/sand.png": {
       "display": [
         123.84,
         123.84
@@ -3098,16 +2998,6 @@
       ]
     },
     "DesignAssets/Planning/Attributes/SilhouettesV2/05-ring.png": {
-      "display": [
-        96,
-        96
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Planning/Attributes/SilhouettesV2/14-pentagon.png": {
       "display": [
         96,
         96
@@ -8125,86 +8015,6 @@
       "grid": [
         8,
         4
-      ]
-    },
-    "DesignAssets/Attributes/ExcavationV2/Parts/bean.png": {
-      "display": [
-        20,
-        23
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Attributes/ExcavationV2/Parts/spore.png": {
-      "display": [
-        17,
-        13
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Attributes/ExcavationV2/Parts/pebble.png": {
-      "display": [
-        52,
-        23
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Attributes/ExcavationV2/Parts/spring.png": {
-      "display": [
-        26,
-        20
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Planning/Thumbnails/Attributes/ExcavationV2/Keyframes/bean.png.webp": {
-      "display": [
-        192,
-        192
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Planning/Thumbnails/Attributes/ExcavationV2/Keyframes/spore.png.webp": {
-      "display": [
-        192,
-        192
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Planning/Thumbnails/Attributes/ExcavationV2/Keyframes/pebble.png.webp": {
-      "display": [
-        192,
-        192
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Planning/Thumbnails/Attributes/ExcavationV2/Keyframes/spring.png.webp": {
-      "display": [
-        192,
-        192
-      ],
-      "grid": [
-        1,
-        1
       ]
     }
   }

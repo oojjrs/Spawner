@@ -49,12 +49,11 @@ test("서버·브라우저·시뮬레이션 워커는 같은 고정 스탯을 �
   verifyTravel(planner.rules);
 });
 
-test("운반량·재생과 숙성 스탯은 명시된 단계 값을 적용한다", () => {
+test("운반량과 숙성 스탯은 명시된 단계 값을 적용한다", () => {
   for (const tribe of Object.keys(bases)) for (let level = 0; level <= 4; level++) {
-    const stats = unitStats({ strength:level, regeneration:level }, tribe);
+    const stats = unitStats({ strength:level }, tribe);
     assert.equal("lifespan" in stats, false);
     assert.equal(stats.capacity, [1,2,2,2,2][level]);
-    assert.equal(stats.regeneration, [0,2,2,2,2][level]);
   }
   assert.equal(ATTRIBUTE_STAT_VALUES.movementBonus, .3);
   assert.equal(attributeLevelLimit(4), 1);

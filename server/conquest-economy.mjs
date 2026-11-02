@@ -49,7 +49,7 @@ export function simulateConquestBuild(tribe,policy,distance) {
   if(now>=nextBirth&&units.length<NEST_LEVELS[level-1].unitCapacity&&(!researchSaving||workers.length<4)){
    const army=now>=CONQUEST_PACING.neutralConflictAt*tempo&&workers.length>=workerGoal;
    const count=army?young.length-workers.length:workers.length,target=army?goal-workerGoal:workerGoal;
-   if(count<target){const slots=(army?profile.army:expert?[profile.native,"feet","strength"]:[profile.native,"strength","feet"]).filter(Boolean).filter(key=>key!=="guard"||level===4).filter(key=>key!=="carapace"&&key!=="regeneration"||level>=3).slice(0,level);
+   if(count<target){const slots=(army?profile.army:expert?[profile.native,"feet","strength"]:[profile.native,"strength","feet"]).filter(Boolean).filter(key=>key!=="carapace"||level>=3).slice(0,level);
     const levels=Object.fromEntries(slots.map(key=>[key,[...purchases].filter(token=>token.startsWith((expert?"worker":level)+":"+key+":")).length+1]));
     const charge=birthCost({slots,attributeLevels:levels},tribe);
     if(points>=charge&&(workers.length<4||points>=charge+reserve)){points-=charge;spent+=charge;make(slots,levels,army?"military":"worker",now);nextBirth=now+(expert?2:basic?6:CONQUEST_PACING.productionInterval);}

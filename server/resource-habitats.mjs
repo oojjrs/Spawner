@@ -73,16 +73,6 @@ export function createResourceHabitats(world) {
   }
   recordPlacementMap(h, "habitat:mountain-distance", ["mountains", "resources"], mountainDistance, { minimum: 0, maximum: 12, excluded: 255 });
   const result = { rainfall, soilMoisture, soilDepth, soilFertility, forestCover, exposure, parentRock, sandySoil, shelter, mountainDistance };
-  const minerals = ["iron-ore", "copper-ore", "quartz"].map((key, ore) => {
-    const warp = placementNoise(h, "resource:" + key + ":warp", ["resources"],
-      (x, y) => noise(x, y, 43, seed + 2027 + ore * 17), { resource: key });
-    const vein = placementNoise(h, "resource:" + key + ":vein", ["resources"], (x, y) => {
-      const offset = warp(x, y) * 8;
-      return noise(x + offset, y - offset, 19, seed + 1901 + ore * 6);
-    }, { resource: key });
-    return { warp, vein };
-  });
-  Object.defineProperty(result, "minerals", { value: minerals });
   return result;
 }
 
@@ -94,7 +84,6 @@ export function resourceHabitatSuitability(key, index, terrain, h) {
   const moisture = fields.soilMoisture[index], depth = fields.soilDepth[index], canopy = fields.forestCover[index];
   if (key === "tree") return type === 5 ? depth * (.35 + moisture * .65) : 0;
   if (key === "honey-mushrooms") return (h.island || h.continent ? type === 4 && canopy > 0 : type === 5) ? depth * canopy * (.2 + moisture * .8) : 0;
-  if (key === "grass-fiber") return type === 4 || type === 5 ? (.2 + depth * .8) * (.3 + moisture * .7) * (1 - canopy * .65) : 0;
   if (key === "dew") return type === 4 || h.generationVersion >= 30 && type === 9 ? (.2 + moisture * .6 + fields.shelter[index] * .2) * (.6 + canopy * .4) : 0;
   if (key === "clay") return [3, 4, 5, 9].includes(type) ? fields.soilFertility[index] * (.5 + depth * .5) : 0;
   if (key === "pebbles" && h.generationVersion >= 29) {
@@ -106,12 +95,5 @@ export function resourceHabitatSuitability(key, index, terrain, h) {
   }
   if (key === "pebbles") return [2, 3, 4, 6].includes(type) ? h.gravel[index] * .5 +
     Math.exp(-fields.mountainDistance[index] / 4) * (.3 + fields.exposure[index]) + fields.exposure[index] * fields.parentRock[index] * .2 : 0;
-  if (key === "sand") return type === 2 ? (.2 + fields.sandySoil[index] * .8) * (.3 + h.sand[index]) : 0;
-  const ore = ["iron-ore", "copper-ore", "quartz"].indexOf(key);
-  if (ore < 0 || type !== 6) return 0;
-  const x = index % h.size, y = Math.floor(index / h.size), seed = h.seed;
-  const province = ore === 0 ? fields.parentRock[index] : ore === 1 ? 1 - fields.parentRock[index] : fields.sandySoil[index];
-  const warp = noise(x, y, 43, seed + 2027 + ore * 17) * 8;
-  const vein = Math.max(0, 1 - Math.abs(fields.minerals ? fields.minerals[ore].vein(x, y) : noise(x + warp, y - warp, 19, seed + 1901 + ore * 6)) / (h.generationVersion >= 29 ? .3 : .18));
-  return province * vein * (.3 + fields.exposure[index]);
+  return 0;
 }

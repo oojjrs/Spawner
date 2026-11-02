@@ -97,7 +97,6 @@ export function landscapeResourceSuitability(key,index,terrain,h) {
   const type=terrain[index],f=h.resourceHabitats;if(type<2||type===10)return 0;
   const moisture=f.soilMoisture[index],depth=f.soilDepth[index],canopy=f.forestCover[index];
   if(key==='tree')return h.forestMask[index]?depth*(.35+moisture*.65):0;
-  if(key==='grass-fiber')return type===4||type===5?(.2+depth*.8)*(.3+moisture*.7)*(1-canopy*.65):0;
   if(key==='dew')return type===4||type===9?(.2+moisture*.6+f.shelter[index]*.2)*(.6+canopy*.4):0;
   if(key==='clay')return [3,4,5,9].includes(type)?f.soilFertility[index]*(.5+depth*.5):0;
   if(key==='pebbles'){
@@ -106,10 +105,5 @@ export function landscapeResourceSuitability(key,index,terrain,h) {
     const fan=distance<=10&&h.flow[index]>35&&h.slope[index]<.03?Math.min(1,Math.log1p(h.flow[index])/6)*.1:0;
     return h.gravel[index]*18+talus+fan;
   }
-  if(key==='sand')return type===2?(.2+f.sandySoil[index]*.8)*(.3+h.sand[index]):0;
-  const ore=['iron-ore','copper-ore','quartz'].indexOf(key);if(ore<0||type!==6||h.forestMask[index])return 0;
-  const rock=f.parentRock[index],strain=bounded(h.uplift[index]*.8+h.slope[index]*7+Math.abs(f.terrainPosition[index])*4);
-  const province=ore===0?rock:ore===1?1-Math.abs(rock-.5):1-rock;
-  const vein=Math.max(0,1-Math.abs(Math.sin(rock*14+ore*1.8+strain*2))/.6);
-  return province*vein*(.3+f.exposure[index])*(1-depth*.35);
+  return 0;
 }

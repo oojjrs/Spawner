@@ -43,7 +43,7 @@ test("선택한 종족에는 성장과 생산을 자동 실행하지 않는다",
 test("목표 편성은 초반 80:20·후반 30:70이며 부족한 정찰을 먼저 보충한다",()=>{
  const {game}=fixture(false);const state=JSON.parse(game.save()).state;
  Object.assign(state,{simSeconds:310,nestLevel:2,evolutionPoints:100,foodIncomeStartedAt:0,foodIncome:[[305,60]]});
- const base=state.agents[0];state.agents=Array.from({length:16},(_,index)=>({...base,id:"1:"+(index+1),bornAt:300,lifespan:360,productionRole:"worker",slots:["excavation","strength"]}));
+ const base=state.agents[0];state.agents=Array.from({length:16},(_,index)=>({...base,id:"1:"+(index+1),bornAt:300,lifespan:360,productionRole:"worker",slots:["strength"]}));
  assert.equal(colonyWorkerShare(2,310,"bean"),.8);
  assert.equal(tribeProductionTemplate(state,"bean")?.productionRole,"scout");
  state.agents[0].slots=["antenna","strength"];
@@ -58,7 +58,7 @@ test("습격과 일반 적대 생물의 초반 강제 전투를 늦추고 개체
 });
 
 test("속성·성장·동선 최적화로 후기 일꾼 12마리가 초기 32마리의 수입을 감당한다",()=>{
- const early=colonyWorkerRate("bean",[],{},6,1),late=colonyWorkerRate("bean",["excavation","strength","feet"],{excavation:3,strength:3,feet:2},6,6);
+ const early=colonyWorkerRate("bean",[],{},6,1),late=colonyWorkerRate("bean",["strength","feet"],{strength:3,feet:2},6,6);
  assert.ok(late.perSecond*12>=early.perSecond*32);
 });
 

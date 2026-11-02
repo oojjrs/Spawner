@@ -35,14 +35,14 @@ test("같은 30포인트로 종족별로 승인된 수의 한 속성 개체를 �
 test("속성 네 개의 생산비 차감과 저장된 과거 지불액을 구분한다", () => {
   for (const [tribe, remaining] of [["spore",18], ["pebble",8]]) {
     const game = fixture(tribe, 30, 4);
-    const { agentId } = game.command({type:"design", templateId:null, name:"복합", slots:["antenna","strength","feet","excavation"], birth:true});
+    const { agentId } = game.command({type:"design", templateId:null, name:"복합", slots:["antenna","strength","feet","carapace"], birth:true});
     assert.equal(game.snapshot().evolutionPoints, remaining, tribe);
     const saved = JSON.parse(game.save());
     saved.state.agents[0].cost = 17;
     game.restore(JSON.stringify(saved));
     const agent = game.agents.find(entry=>entry.id===agentId);
     assert.equal(agent.cost, 17, tribe);
-    assert.deepEqual(agent.slots, ["antenna","strength","feet","excavation"]);
+    assert.deepEqual(agent.slots, ["antenna","strength","feet","carapace"]);
   }
 });
 

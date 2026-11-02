@@ -5,10 +5,10 @@ export const CONQUEST_PACING = Object.freeze({ quietUntil:120, guidanceAt:160, n
   productionInterval:3, frontierSamples:48, preferredScouts:4 });
 
 export const TRIBE_PACING = Object.freeze({
-  bean:Object.freeze({tempo:1,population:36,native:"excavation",army:Object.freeze(["blade","carapace","feet","guard"])}),
-  spore:Object.freeze({tempo:.95,population:40,native:"blade",army:Object.freeze(["blade","feet","regeneration"])}),
-  pebble:Object.freeze({tempo:1.1,population:32,native:"piercing",army:Object.freeze(["piercing","carapace","blade","guard"])}),
-  spring:Object.freeze({tempo:.9,population:36,native:null,army:Object.freeze(["blade","feet","piercing","regeneration"])})
+  bean:Object.freeze({tempo:1,population:36,native:null,army:Object.freeze(["blade","carapace","feet"])}),
+  spore:Object.freeze({tempo:.95,population:40,native:"blade",army:Object.freeze(["blade","feet"])}),
+  pebble:Object.freeze({tempo:1.1,population:32,native:"piercing",army:Object.freeze(["piercing","carapace","blade"])}),
+  spring:Object.freeze({tempo:.9,population:36,native:null,army:Object.freeze(["blade","feet","piercing"])})
 });
 
 export function colonyWorkerShare(nestLevel,simSeconds,tribe) {
@@ -30,6 +30,6 @@ export function conquestEncounterPlan(plan) {
 export function militaryAgent(agent,tribe) {
  if(agent.productionRole==="military")return true;
  const slots=agent.slots||[],native=TRIBE_PACING[tribe||agent.tribe]?.native;
- return !slots.includes("strength")&&!slots.includes("excavation")&&
-  slots.some(key=>["blade","piercing","carapace","guard","regeneration"].includes(key))&&!(slots.length===1&&slots[0]===native);
+ return !slots.includes("strength")&&
+  slots.some(key=>["blade","piercing","carapace"].includes(key))&&!(slots.length===1&&slots[0]===native);
 }

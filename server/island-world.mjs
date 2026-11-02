@@ -65,9 +65,10 @@ export function populateLandscapeResources(world, baseline) {
   }
   allocate(trees, budgets.get("tree"));
   world.resources = trees; world.food = [];
-  const nodeAmounts = { dew: 6, clay: 24, pebbles: 24, sand: 100, "grass-fiber": 100, "iron-ore": 120, "copper-ore": 120, quartz: 120, "honey-mushrooms": 30 };
+  const nodeAmounts = { dew: 6, clay: 24, pebbles: 24, "honey-mushrooms": 30 };
   let order = 0;
   for (const [key, budget] of budgets) {
+    if (["nutrients", "grass-fiber", "sand", "iron-ore", "copper-ore", "quartz"].includes(key)) continue;
     if (key === "tree") continue;
     const sectors = new Map();
     let weight = 0, candidates = 0;

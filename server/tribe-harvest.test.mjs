@@ -43,10 +43,10 @@ test("네 종족의 기본 자원만 채집 가능하며 다른 종족 자원은
   for (const generationVersion of [undefined, 10, 11, 15]) for (const [tribe, ownFood] of foods) {
     for (const [, resourceType] of foods) for (const attributes of [{}, { antenna: 2, strength: 2, feet: 2 }]) {
       const world = { generationVersion };
-      assert.equal(canHarvestResource({ resourceType }, world, attributes, tribe), (resourceType === ownFood || resourceType === "dew"), tribe + ":" + resourceType);
-      const attribute = resourceType === "tree" ? "blade" : resourceType === "dew" ? "butchery" : resourceType === "pebbles" ? "piercing" : "excavation";
+      assert.equal(canHarvestResource({ resourceType }, world, attributes, tribe), (resourceType === ownFood || ["dew", "clay"].includes(resourceType)), tribe + ":" + resourceType);
+      const attribute = resourceType === "tree" ? "blade" : resourceType === "pebbles" ? "piercing" : null;
       const requirements = resourceHarvestRequirements({ resourceType }, world, tribe);
-      if (resourceType === ownFood || resourceType === "dew") assert.deepEqual(requirements, {});
+      if (resourceType === ownFood || ["dew", "clay"].includes(resourceType)) assert.ok(Object.values(requirements).every(value => value === 0));
       else {
         assert.equal(requirements[attribute], 1);
         assert.equal(canHarvestResource({ resourceType }, world, { [attribute]: 1 }, tribe), true);
@@ -64,15 +64,15 @@ for (const [tribe, ownFood] of foods) {
     advance(f, .25);
     const candidates = f.game.agents[0].utility.scores.filter(candidate => candidate.action === "collect");
     assert.ok(candidates.length > 0);
-    assert.ok(candidates.every(candidate => candidate.key === "47,42" || f.environment.food.get(candidate.key)?.resourceType === "dew"));
+    assert.ok(candidates.every(candidate => candidate.key === "47,42" || ["dew", "clay"].includes(f.environment.food.get(candidate.key)?.resourceType)));
     advance(f, 24);
     assert.ok(f.environment.food.get("47,42").amount < 12);
-    for (const [key, cell] of f.environment.food) if (key !== "47,42" && cell.resourceType !== "dew") assert.equal(cell.amount, 12, tribe + ":" + cell.resourceType);
+    for (const [key, cell] of f.environment.food) if (key !== "47,42" && !["dew", "clay"].includes(cell.resourceType)) assert.equal(cell.amount, 12, tribe + ":" + cell.resourceType);
   });
 
   test(tribe + "은 자기 자원이 없으면 다른 자원을 채집하지 않는다", () => {
     const f = fixture(tribe, null, createGame);
-    for (const [key, cell] of f.environment.food) if ([ownFood, "dew"].includes(cell.resourceType)) f.environment.food.delete(key);
+    for (const [key, cell] of f.environment.food) if ([ownFood, "dew", "clay"].includes(cell.resourceType)) f.environment.food.delete(key);
     advance(f, 4);
     assert.ok(f.game.agents[0].utility.scores.every(candidate => candidate.action !== "collect"));
     for (const cell of f.environment.food.values()) assert.equal(cell.amount, 12);
@@ -83,18 +83,18 @@ for (const [tribe, ownFood] of foods) {
     const f = fixture(tribe, ownFood, createGame);
     advance(f, .25);
     f.environment.world.generationVersion = 10;
-    const cell = [...f.environment.food.values()].find(cell => foods.some(([, type]) => type === cell.resourceType) && cell.resourceType !== ownFood && cell.resourceType !== "dew");
+    const cell = [...f.environment.food.values()].find(cell => foods.some(([, type]) => type === cell.resourceType) && cell.resourceType !== ownFood && !["dew", "clay"].includes(cell.resourceType));
     const key = cell.x + "," + cell.y;
     Object.assign(f.game.agents[0], { x: cell.x, y: cell.y, renderFromX: cell.x, renderFromY: cell.y,
       mode: "harvest", harvestPrepared: true, harvestReady: 120, decisionPending: null, nextDecisionAt: 1000,
       utility: { action: "collect", target: { x: cell.x, y: cell.y, key }, route: [{ x: cell.x, y: cell.y }], plannedCargo: 2 } });
     const saved = JSON.parse(f.game.save());
-    saved.state.resourceInventory = { dew: 7, sand: 3 };
+    saved.state.resourceInventory = { dew: 7, clay: 3 };
     f.game.restore(JSON.stringify(saved));
     advance(f, .25);
     assert.equal(cell.amount, 12);
     assert.ok(f.game.agents[0].utility?.action !== "collect" || f.game.agents[0].utility.target.key !== key);
-    assert.deepEqual(f.game.snapshot().resourceInventory, { dew: 7, sand: 3 });
+    assert.deepEqual(f.game.snapshot().resourceInventory, { dew: 7, clay: 3 });
   });
 }
 
@@ -103,7 +103,7 @@ test("브라우저 번들과 내장 워커에도 동일한 종족별 채집 규�
   const browser = {};
   runInNewContext(runtime, browser);
   for (const [tribe, ownFood] of foods) for (const [, resourceType] of foods) {
-    assert.equal(browser.Spawner.canHarvestResource({ resourceType }, { generationVersion: 15 }, { strength: 2 }, tribe), resourceType === ownFood || resourceType === "dew");
+    assert.equal(browser.Spawner.canHarvestResource({ resourceType }, { generationVersion: 15 }, { strength: 2 }, tribe), resourceType === ownFood || ["dew", "clay"].includes(resourceType));
   }
   const worker = JSON.parse(runtime.match(/const workerSource = ("[^\r\n]+");/)[1]);
   const context = { Map, Set, Uint8Array, setTimeout, clearTimeout, performance };
@@ -114,14 +114,14 @@ test("브라우저 번들과 내장 워커에도 동일한 종족별 채집 규�
     advance(f, .25);
     const candidates = f.game.agents[0].utility.scores.filter(candidate => candidate.action === "collect");
     assert.ok(candidates.length > 0);
-    assert.ok(candidates.every(candidate => candidate.key === "47,42" || f.environment.food.get(candidate.key)?.resourceType === "dew"));
+    assert.ok(candidates.every(candidate => candidate.key === "47,42" || ["dew", "clay"].includes(f.environment.food.get(candidate.key)?.resourceType)));
   }
 });
 
 test("저장된 일반 재료 자동 채집도 즉시 중단한다", () => {
   const f = fixture("bean", "clay", createGame);
   advance(f, .25);
-  const cell = [...f.environment.food.values()].find(cell => cell.resourceType === "sand");
+  const cell = [...f.environment.food.values()].find(cell => cell.resourceType === "tree");
   const key = cell.x + "," + cell.y;
   Object.assign(f.game.agents[0], { x: cell.x, y: cell.y, renderFromX: cell.x, renderFromY: cell.y,
     mode: "harvest", harvestPrepared: true, harvestReady: 120, decisionPending: null, nextDecisionAt: 1000,

@@ -186,7 +186,7 @@ export function tickRoom(room, elapsed) {
       const previous = updates.get(game);
       const active = owner === room.hostId || !previous || previous.count !== game.agents.length || game.agents.some(agent =>
         agent.health <= 0 || agent.combat || agent.attack || agent.retreat || agent.mode === "rest" ||
-        agent.stats.regeneration > 0 && agent.health < agent.stats.health || room.world.hazards?.[agent.y * size + agent.x] ||
+        room.world.hazards?.[agent.y * size + agent.x] ||
         host.isVisible(agent.x, agent.y) || room.unitIndex.nearby(agent.x, agent.y, agent.stats.vision + 1)
           .some(entry => entry.game !== game && entry.agent.health > 0));
       if (active || room.simSeconds + 1e-8 >= previous.at) {

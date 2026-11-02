@@ -44,7 +44,7 @@ test("부족별 시작 인원과 실제 장착 속성이 채집 방식에 따라
 
 test("1레벨에서 속성 없이 또는 하나만 넣어 생성하고 두 개는 거부한다", () => {
   const game = fixture("bean");
-  for (const slots of [[], ["excavation"]]) {
+  for (const slots of [[], ["feet"]]) {
     const result = game.command({ type: "design", templateId: null, name: "속성 " + slots.length, slots, birth: true });
     assert.ok(result.agentId);
     assert.deepEqual(game.agents.find(agent => agent.id === result.agentId).slots, slots);
@@ -104,11 +104,11 @@ test("이전 저장의 초반 유닛도 행동 역할에 맞는 실제 속성을
   assert.deepEqual(game.agents.map(agent => agent.stats.capacity), [1, 2]);
 });
 
-test("기본·채집·건설·전투 속성을 제공하며 삭제한 속성의 시너지는 발동하지 않는다", () => {
-  assert.deepEqual(ATTRIBUTES.map(attribute => attribute.key), ["antenna", "strength", "feet", "excavation", "blade", "piercing", "carapace", "guard", "regeneration"]);
-  assert.deepEqual(ATTRIBUTES.map(attribute => attribute.name), ["감지", "채집량 증가", "이속 증가", "굴착", "칼날", "관통", "갑피", "엄호", "재생"]);
+test("기본·채집·전투 속성을 제공하며 삭제한 속성의 시너지는 발동하지 않는다", () => {
+  assert.deepEqual(ATTRIBUTES.map(attribute => attribute.key), ["antenna", "strength", "feet", "blade", "piercing", "carapace"]);
+  assert.deepEqual(ATTRIBUTES.map(attribute => attribute.name), ["감지", "채집량 증가", "이속 증가", "칼날", "관통", "갑피"]);
   const counts = attributeCounts(["antenna", "strength", "strength", "feet", "feet"]);
-  for (const key of ["harvest", "digging", "absorption", "climbing", "shell", "aggression", "peaceful", "secretion"]) {
+  for (const key of ["harvest", "digging", "absorption", "climbing", "shell", "aggression", "peaceful", "secretion", "guard", "regeneration", "excavation"]) {
     assert.equal(Object.hasOwn(attributeCounts([key]), key), false);
     assert.equal(hasSynergy(counts, [key]), false);
     assert.equal(hasSynergy(counts, ["strength", key]), false);

@@ -19,7 +19,6 @@ export const COMBAT_RETREAT_EXCHANGES = 2;
 export const COMBAT_EXCHANGE_PAUSE = 1;
 export const COMBAT_TURN_ORDER_VERSION = 1;
 export const COMBAT_EXCHANGE_DAMAGE_VERSION = 5;
-export const REGENERATION_DURATION = 1.2;
 
 const species = new Map(ENCOUNTER_TYPES.map(type => [type.key, type]));
 
@@ -103,7 +102,6 @@ export function createCombat(environment) {
     agent.renderFromX = agent.x; agent.renderFromY = agent.y;
     agent.moveDuration = 0; agent.moveBudget = 0;
     agent.attack = null; agent.attackTargetId = null;
-    agent.support = null;
     agent.attackReady = time;
     agent.utility = null; agent.decisionPending = null;
     if (agent.foodDelivery?.receivedAt === null) agent.foodDelivery = null;
@@ -114,7 +112,6 @@ export function createCombat(environment) {
 
   function release(agent, time) {
     agent.combat = null;
-    agent.support = null;
     agent.attack = null; agent.attackTargetId = null; agent.attackHit = true;
     if (agent.health <= 0) return;
     agent.utility = null; agent.decisionPending = "combatEnded";
@@ -289,56 +286,15 @@ export function createCombat(environment) {
     if (reaction && attacker.health > 0) beginAttack(defender, attacker, time, true);
   }
 
-  function refreshSupport(participants) {
-    for (const side of [0, 1]) {
-      const allies = participants.filter(entry => entry.agent.combat.side === side);
-      const guard = Math.max(0, ...allies.map(entry => entry.agent.stats.guardProtection || 0));
-      for (const { agent } of allies) {
-        agent.combat.guardProtection = guard;
-      }
-    }
-  }
-
-  function updateRegeneration(agent, time) {
-    if (!(agent.stats.healing > 0) || !settled(agent, time) || agent.retreat ||
-        agent.attack && time < agent.attack.endsAt) {
-      agent.support = null;
-      return false;
-    }
-    const allies = entriesAt(agent.x, agent.y).map(entry => entry.agent).filter(target => target !== agent &&
-      combatTeam(target) === combatTeam(agent) && !target.combat && settled(target, time));
-    if (agent.support?.kind === "heal") {
-      const support = agent.support, target = allies.find(target => target.id === support.targetId);
-      if (!target) { agent.support = null; return false; }
-      if (!support.applied && time + 1e-8 >= support.hitAt) {
-        support.applied = true;
-        target.health = Math.min(target.stats.health, target.health + agent.stats.healing);
-      }
-      if (time + 1e-8 < support.endsAt) return true;
-      agent.support = null;
-    }
-    const target = allies.filter(target => target.health < target.stats.health)
-      .sort((a, b) => a.health / a.stats.health - b.health / b.stats.health || String(a.id).localeCompare(String(b.id)))[0];
-    if (!target) return false;
-    agent.support = { kind: "heal", targetId: target.id, startedAt: time,
-      hitAt: time + .45, endsAt: time + REGENERATION_DURATION, applied: false };
-    agent.moveBudget = 0;
-    agent.mode = "rest";
-    agent.animationStartedAt = time;
-    return true;
-  }
-
   function update(agent, time) {
     if (agent.health <= 0) { agent.attack = null; return false; }
     if (!agent.combat) contact(agent, time);
     const combat = agent.combat;
-    if (!combat) return updateRegeneration(agent, time);
+    if (!combat) return false;
     if (agent.x !== combat.x || agent.y !== combat.y) { release(agent, time); return false; }
     if (processed.get(combat.id) === time) return true;
     processed.set(combat.id, time);
     let participants = members(combat).sort((a, b) => String(a.agent.id).localeCompare(String(b.agent.id)));
-    refreshSupport(participants);
-    for (const { agent: member } of participants) member.support = null;
     for (const { agent: member } of participants) {
       if (member.combat.version !== 2) { const old = member.combat; attach(member, old, old.side, time); }
       dropCarriedResources(environment, member); member.moveBudget = 0;

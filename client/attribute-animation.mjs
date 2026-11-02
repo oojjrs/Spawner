@@ -1,5 +1,4 @@
 import { createTribeMorphology, TRIBE_MORPHOLOGY_ASSETS } from "./attribute-morphology.mjs";
-import { createExcavationArt, EXCAVATION_ASSETS } from "./excavation.mjs";
 
 export const TRIBE_ATTRIBUTE_ASSETS = Object.freeze(["spore", "pebble", "spring"].flatMap(tribe => {
   const root = "DesignAssets/Tribes/" + tribe + "/Animations/Attributes/v1/";
@@ -7,7 +6,7 @@ export const TRIBE_ATTRIBUTE_ASSETS = Object.freeze(["spore", "pebble", "spring"
     ["strength", "feet"].includes(attribute) || attribute === "antenna" && tribe !== "spring" ?
       [root + "Parts/" + attribute + "-left.png", root + "Parts/" + attribute + "-right.png"] :
       [root + "Parts/" + attribute + ".png"])];
-}).concat(TRIBE_MORPHOLOGY_ASSETS, EXCAVATION_ASSETS));
+}).concat(TRIBE_MORPHOLOGY_ASSETS));
 
 const attachments = {
   spore: {
@@ -28,7 +27,7 @@ const attachments = {
 };
 
 export function hasTribeAttributes(attributes) {
-  return ["antenna", "strength", "arms", "feet", "excavation"].some(key => attributes[key] > 0);
+  return ["antenna", "strength", "arms", "feet"].some(key => attributes[key] > 0);
 }
 
 function triangle(context, image, source, target) {
@@ -93,8 +92,7 @@ function drawAttachment(context, part, spec, x, y, scale, rotation, bend, flatte
 
 export function createTribeAttributeAnimation(assetSource, createSurface, loadImage) {
   const rigs = new Map(), pending = new Map(), frames = new Map(), motions = new Map();
-  const excavation = createExcavationArt(assetSource, loadImage);
-  const morphology = createTribeMorphology(createSurface, loadImage, excavation);
+  const morphology = createTribeMorphology(createSurface, loadImage);
 
   function neutralDistance(tribe, track, reference) {
     const box = tribe === "spore" ? track.cap : track.body;
@@ -179,7 +177,7 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
         }
       })));
       rig.idle = await loadImage(rig.animations.idle.image);
-      await Promise.all([morphology.prepare(rig), excavation.prepare()]);
+      await morphology.prepare(rig);
       rig.bodyFrames = new Map();
       rigs.set(tribe, rig);
       return rig;
@@ -202,7 +200,7 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
     if (!growth) return null;
     const absorption = Math.max(0, Math.min(1, replacement?.absorption || 0));
     const keys = [attributes.antenna || 0, attributes.strength || attributes.arms || 0, attributes.feet || 0,
-      attributes.excavation || 0, replacement?.key ?? -1, Math.round(absorption * 24)];
+      replacement?.key ?? -1, Math.round(absorption * 24)];
     const clock = Number.isFinite(motion?.sampleTime) ? motion.sampleTime : time;
     const phaseProgress = Number.isFinite(motion?.motionPhase) ? motion.motionPhase : index / sequence.tracks.length;
     const stride = Number.isFinite(motion?.motionBlend) ? motion.motionBlend : 1;
@@ -323,11 +321,6 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
     };
     for (const item of drawn) if (item.rear && !item.spec.inset && !item.spec.replaces) draw(context, item);
     drawCreature(context);
-    if (attributes.excavation) {
-      const amount = 1 - absorption, box = track.body;
-      excavation.body(context, tribe, [box[0] + box[2] * (1 - amount) / 2,
-        box[1] - lift + box[3] * (1 - amount), box[2] * amount, box[3] * amount], track.angle);
-    }
     const insets = drawn.filter(item => item.spec.inset).sort((a, b) => Number(a.attribute === "antenna") - Number(b.attribute === "antenna"));
     if (insets.length) {
       const layer = createSurface(surface.width, surface.height), layerContext = layer.getContext("2d");

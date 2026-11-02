@@ -85,7 +85,7 @@ export function createTribeArt(definitions, assetSource) {
 
   function sprite(tribe, attributes, layer) {
     const key = [tribe, layer, attributes.strength ?? attributes.arms ?? 0,
-      ...["feet", "antenna", "excavation"].map(name => attributes[name] || 0)].join(":");
+      ...["feet", "antenna"].map(name => attributes[name] || 0)].join(":");
     if (sprites.has(key)) return sprites.get(key);
     const unit = units.get(tribe);
     if (!unit || unit instanceof Promise) throw new Error("부족 유닛을 불러오는 중입니다.");

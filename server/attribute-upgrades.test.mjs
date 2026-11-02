@@ -41,8 +41,8 @@ test("모든 속성의 강화 비용과 강화 요청을 허용하지 않는다"
 });
 
 test("네 종족 모두 기본 채집 속성으로 대응 자원을 채집한다", () => {
-  const groups = { blade: ["tree", "grass-fiber"], excavation: ["clay", "sand"],
-    piercing: ["pebbles", "iron-ore", "copper-ore", "quartz"] };
+  const groups = { blade: ["tree"],
+    piercing: ["pebbles"] };
   const world = { generationVersion: 16 };
   for (const tribe of ["bean", "spore", "pebble", "spring"]) {
     for (const [key, resources] of Object.entries(groups)) {
@@ -56,7 +56,7 @@ test("네 종족 모두 기본 채집 속성으로 대응 자원을 채집한다
 });
 
 test("종족 기본 자원의 전문 채집 효과는 이전 강화 수치로 증가하지 않는다", () => {
-  const native = { clay: ["bean", "excavation"], tree: ["spore", "blade"], pebbles: ["pebble", "piercing"] };
+  const native = { tree: ["spore", "blade"], pebbles: ["pebble", "piercing"] };
   for (const [resourceType, [tribe, key]] of Object.entries(native)) {
     for (const legacyLevel of [1, 2, 3, 4]) {
       assert.equal(resourceHarvestMultiplier(resourceType, { [key]: legacyLevel }, tribe), .75);
@@ -68,7 +68,7 @@ test("종족 기본 자원의 전문 채집 효과는 이전 강화 수치로 �
   }
   for (const resourceType of ["sand", "grass-fiber", "iron-ore", "copper-ore", "quartz"]) {
     for (const [tribe] of Object.values(native)) {
-      assert.equal(resourceHarvestMultiplier(resourceType, { excavation: 1, blade: 1, piercing: 1 }, tribe), 1);
+      assert.equal(resourceHarvestMultiplier(resourceType, { blade: 1, piercing: 1 }, tribe), 1);
     }
   }
   assert.equal(resourceHarvestMultiplier("unknown", { mining: 4 }, "bean"), 1);

@@ -29,8 +29,8 @@ export function tribeProductionTemplate(state,tribe) {
  if(!role)return null;
  const supply=colonySupply(state,tribe),replacing=living.length<initial.length;
  if(!replacing&&young.length>=initial.length&&(!supply.incomeObserved||supply.rateDeficit>0))return null;
- const armies=[profile.army,["piercing","blade","feet","carapace"],["regeneration","guard","feet",profile.army[0]],
-  ["guard","carapace","regeneration",profile.army[0]]].map(slots=>[...new Set(slots.filter(key=>isAttributeUnlocked(key,state.nestLevel,tribe)))].slice(0,state.nestLevel));
+ const armies=[profile.army,["piercing","blade","feet","carapace"],["feet",profile.army[0]],
+  ["carapace",profile.army[0]]].map(slots=>[...new Set(slots.filter(key=>isAttributeUnlocked(key,state.nestLevel,tribe)))].slice(0,state.nestLevel));
  const count=slots=>soldiers.filter(agent=>slots.every(key=>agent.slots.includes(key))).length;
  const army=armies.filter(slots=>slots.length).sort((first,second)=>count(first)-count(second))[0];
  const slots=role==="scout"?["antenna","feet",profile.native]:role==="worker"?[profile.native,"strength","feet"]:army;

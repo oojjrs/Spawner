@@ -4,7 +4,7 @@ export const COMBAT_MAX_INJURY_PENALTY = 10;
 export const UNIT_MAX_HEALTH = 100;
 
 export const ATTRIBUTE_COMBAT_STRENGTH_BONUSES = Object.freeze({
-  blade: 10, piercing: 16, carapace: 8, guard: 8, regeneration: 12
+  blade: 10, piercing: 16, carapace: 8
 });
 
 export function attributeCombatStrengthBonus(attributes) {
@@ -89,8 +89,7 @@ export function combatDamage(attacker, target, variation) {
   const heavy = attacker.attack?.heavy === true;
   const penetration = Math.min(.9, source.armorPenetration + (heavy ? .3 : 0));
   const power = source.attackPower * (source.primary === "piercing" ? 1.25 : 1) * (heavy ? 1.5 : 1);
-  const guard = Math.max(0, Math.min(.6, Math.max(target.stats?.guardProtection || 0, target.combat?.guardProtection || 0)));
-  return Math.max(1, Math.round(power * multiplier * 100 / (100 + defense.defense * (1 - penetration)) * (1 - guard)));
+  return Math.max(1, Math.round(power * multiplier * 100 / (100 + defense.defense * (1 - penetration))));
 }
 
 export function migrateCombatStats(agent) {

@@ -30,10 +30,10 @@ const CONQUEST_PACING = Object.freeze({ quietUntil:120, guidanceAt:160, neutralC
   productionInterval:3, frontierSamples:48, preferredScouts:4 });
 
 const TRIBE_PACING = Object.freeze({
-  bean:Object.freeze({tempo:1,population:36,native:"excavation",army:Object.freeze(["blade","carapace","feet","guard"])}),
-  spore:Object.freeze({tempo:.95,population:40,native:"blade",army:Object.freeze(["blade","feet","regeneration"])}),
-  pebble:Object.freeze({tempo:1.1,population:32,native:"piercing",army:Object.freeze(["piercing","carapace","blade","guard"])}),
-  spring:Object.freeze({tempo:.9,population:36,native:null,army:Object.freeze(["blade","feet","piercing","regeneration"])})
+  bean:Object.freeze({tempo:1,population:36,native:null,army:Object.freeze(["blade","carapace","feet"])}),
+  spore:Object.freeze({tempo:.95,population:40,native:"blade",army:Object.freeze(["blade","feet"])}),
+  pebble:Object.freeze({tempo:1.1,population:32,native:"piercing",army:Object.freeze(["piercing","carapace","blade"])}),
+  spring:Object.freeze({tempo:.9,population:36,native:null,army:Object.freeze(["blade","feet","piercing"])})
 });
 
 function colonyWorkerShare(nestLevel,simSeconds,tribe) {
@@ -55,8 +55,8 @@ function conquestEncounterPlan(plan) {
 function militaryAgent(agent,tribe) {
  if(agent.productionRole==="military")return true;
  const slots=agent.slots||[],native=TRIBE_PACING[tribe||agent.tribe]?.native;
- return !slots.includes("strength")&&!slots.includes("excavation")&&
-  slots.some(key=>["blade","piercing","carapace","guard","regeneration"].includes(key))&&!(slots.length===1&&slots[0]===native);
+ return !slots.includes("strength")&&
+  slots.some(key=>["blade","piercing","carapace"].includes(key))&&!(slots.length===1&&slots[0]===native);
 }
 
 return { CONQUEST_PACING, TRIBE_PACING, colonyWorkerShare, aiUpgradeReadyAt, conquestEncounterPlan, militaryAgent };
@@ -75,10 +75,7 @@ const ATTRIBUTE_STAT_VALUES = Object.freeze({
   vision: 6,
   attackBonus: 12,
   armorPenetration: .5,
-  damageReduction: .45,
-  guardProtection: .35,
-  regeneration: 2,
-  healing: 20
+  damageReduction: .45
 });
 
 return { TRIBE_UNIT_STATS, ATTRIBUTE_STAT_VALUES };
@@ -118,7 +115,7 @@ const COMBAT_MAX_INJURY_PENALTY = 10;
 const UNIT_MAX_HEALTH = 100;
 
 const ATTRIBUTE_COMBAT_STRENGTH_BONUSES = Object.freeze({
-  blade: 10, piercing: 16, carapace: 8, guard: 8, regeneration: 12
+  blade: 10, piercing: 16, carapace: 8
 });
 
 function attributeCombatStrengthBonus(attributes) {
@@ -203,8 +200,7 @@ function combatDamage(attacker, target, variation) {
   const heavy = attacker.attack?.heavy === true;
   const penetration = Math.min(.9, source.armorPenetration + (heavy ? .3 : 0));
   const power = source.attackPower * (source.primary === "piercing" ? 1.25 : 1) * (heavy ? 1.5 : 1);
-  const guard = Math.max(0, Math.min(.6, Math.max(target.stats?.guardProtection || 0, target.combat?.guardProtection || 0)));
-  return Math.max(1, Math.round(power * multiplier * 100 / (100 + defense.defense * (1 - penetration)) * (1 - guard)));
+  return Math.max(1, Math.round(power * multiplier * 100 / (100 + defense.defense * (1 - penetration))));
 }
 
 function migrateCombatStats(agent) {
@@ -229,12 +225,9 @@ const ATTRIBUTES = [
   { key: "antenna", minNestLevel: 1, name: "감지", color: "#b2bffa", effect: "시야 반경 +3칸", description: "유닛의 시야 반경이 늘어납니다.", bonus: 3, bonuses: [0, 3, 4, 6, 8], stat: "시야 반경", unit: "칸" },
   { key: "strength", minNestLevel: 1, name: "채집량 증가", color: "#e6a79c", effect: "채집량 +1개", description: "한 번에 채집해 운반하는 자원의 양이 1개 늘어납니다.", bonus: 1, stat: "채집량", unit: "개" },
   { key: "feet", minNestLevel: 1, name: "이속 증가", color: "#8cd2bb", effect: "이동 속도 +0.3칸/초", description: "탐색과 왕복 이동을 빠르게 합니다.", bonus: 0.3, stat: "이동 속도", unit: "칸/초" },
-  { key: "excavation", minNestLevel: 2, nativeTribe: "bean", name: "굴착", color: "#d4b48a", effect: "", description: "", kind: "harvest", harvests: ["clay", "sand"] },
-  { key: "blade", minNestLevel: 2, nativeTribe: "spore", name: "칼날", color: "#d5d88e", effect: "공격력 +12", description: "장착하면 공격력이 12 증가합니다. 주력으로 선택하면 빠르게 베고 짧은 패링으로 공격을 막아 반격합니다.", kind: "combat", bonus: 12, bonuses: [0, 12], stat: "공격력", unit: "", harvests: ["tree", "grass-fiber"] },
-  { key: "piercing", minNestLevel: 2, nativeTribe: "pebble", name: "관통", color: "#b9dca1", effect: "방어 관통 +50%", description: "장착하면 상대 방어력의 50%를 무시합니다. 주력으로 선택하면 세 번째 공격마다 모아찌르기로 적을 잠시 기절시킵니다. 엄호 효과는 관통하지 않습니다.", kind: "combat", bonus: 50, bonuses: [0, 50], stat: "방어 관통", unit: "%", harvests: ["pebbles", "iron-ore", "copper-ore", "quartz"] },
+  { key: "blade", minNestLevel: 2, nativeTribe: "spore", name: "칼날", color: "#d5d88e", effect: "공격력 +12", description: "장착하면 공격력이 12 증가합니다. 주력으로 선택하면 빠르게 베고 짧은 패링으로 공격을 막아 반격합니다.", kind: "combat", bonus: 12, bonuses: [0, 12], stat: "공격력", unit: "", harvests: ["tree"] },
+  { key: "piercing", minNestLevel: 2, nativeTribe: "pebble", name: "관통", color: "#b9dca1", effect: "방어 관통 +50%", description: "장착하면 상대 방어력의 50%를 무시합니다. 주력으로 선택하면 세 번째 공격마다 모아찌르기로 적을 잠시 기절시킵니다.", kind: "combat", bonus: 50, bonuses: [0, 50], stat: "방어 관통", unit: "%", harvests: ["pebbles"] },
   { key: "carapace", minNestLevel: 3, name: "갑피", color: "#c8bd8c", effect: "방어력 약 +82", description: "장착하면 방어력이 약 82 증가합니다. 주력으로 선택하면 준비된 블록으로 공격 피해를 줄이고 반격합니다.", kind: "combat", bonus: 100 * .45 / (1 - .45), bonuses: [0, 100 * .45 / (1 - .45)], stat: "방어력", unit: "" },
-  { key: "guard", minNestLevel: 4, name: "엄호", color: "#a5cba4", effect: "아군 받는 피해 −35%", description: "같은 전투 칸의 자신과 아군이 받는 피해를 단계별로 35·38·42·45% 줄입니다. 여러 엄호 중 가장 높은 효과만 적용합니다.", kind: "combat", bonus: 35, bonuses: [0, 35, 38, 42, 45], stat: "아군 피해 감소", unit: "%" },
-  { key: "regeneration", minNestLevel: 3, name: "재생", color: "#b8dca4", effect: "전투 밖 아군 체력 +20 · 자기 회복 +2/초", description: "전투 밖에서 같은 칸의 가장 다친 아군을 자동으로 치유하며, 자신의 체력도 회복합니다.", kind: "combat", bonus: 20, bonuses: [0, 20, 24, 28, 32], stat: "아군 치유량", unit: "" }
 ];
 
 const attributeKeys = new Set(ATTRIBUTES.map(attribute => attribute.key));
@@ -315,28 +308,18 @@ function hasSynergy(counts, keys) {
 }
 
 const attributeUpgradeMaterials = {
-  antenna: { dew: 6, "grass-fiber": 4 },
+  antenna: { dew: 6 },
   strength: { tree: 6, pebbles: 4 },
-  feet: { tree: 4, "grass-fiber": 6 },
-  excavation: { tree: 4, pebbles: 6 },
-  blade: { tree: 6, "grass-fiber": 6 },
+  feet: { tree: 4 },
+  blade: { tree: 6 },
   piercing: { tree: 6, pebbles: 6 },
   carapace: { pebbles: 8, clay: 6 },
-  guard: { tree: 6, clay: 6 },
-  regeneration: { dew: 8, "grass-fiber": 6 }
 };
 
 function attributeUpgradeCost(attributeKey, targetLevel) {
   const base = Object.hasOwn(attributeUpgradeMaterials, attributeKey) ? attributeUpgradeMaterials[attributeKey] : null;
   if (!base || !Number.isInteger(targetLevel) || targetLevel < 2 || targetLevel > attributeLevelLimit()) return null;
   const materials = Object.fromEntries(Object.entries(base).map(([key, amount]) => [key, targetLevel === 2 ? Math.ceil(amount / 2) : 1]));
-  if (targetLevel >= 3) {
-    materials["iron-ore"] = 1;
-    materials["copper-ore"] = 1;
-  }
-  if (targetLevel === 4) {
-    materials.quartz = 1;
-  }
   return { evolutionPoints: CONQUEST_PACING.attributeCosts[targetLevel], materials };
 }
 
@@ -365,9 +348,6 @@ function unitStats(attributes, tribe) {
     attackBonus: equipped("blade") ? ATTRIBUTE_STAT_VALUES.attackBonus : 0,
     armorPenetration: equipped("piercing") ? ATTRIBUTE_STAT_VALUES.armorPenetration : 0,
     damageReduction: equipped("carapace") ? ATTRIBUTE_STAT_VALUES.damageReduction : 0,
-    guardProtection: equipped("guard") ? ATTRIBUTE_STAT_VALUES.guardProtection : 0,
-    regeneration: equipped("regeneration") ? ATTRIBUTE_STAT_VALUES.regeneration : 0,
-    healing: equipped("regeneration") ? ATTRIBUTE_STAT_VALUES.healing : 0,
     health: combat.health,
     combatStrength: combat.combatStrength + attributeCombatStrengthBonus(attributes),
     resistance: 1
@@ -426,9 +406,6 @@ const LEGACY_RESOURCE_HABITATS = Object.freeze([
   {"key":"bark","terrains":["forest"],"neighbors":[],"rarity":"uncommon","minDistance":24,"nodes":20,"separation":8},
   {"key":"pebbles","terrains":["coast","land","lowMountain"],"neighbors":[],"rarity":"common","minDistance":4,"nodes":36,"separation":7},
   {"key":"clay","terrains":["coast","grassland"],"neighbors":["deep","shallow","coast"],"rarity":"uncommon","minDistance":24,"nodes":20,"separation":8},
-  {"key":"sand","terrains":["coast"],"neighbors":[],"rarity":"common","minDistance":4,"nodes":28,"separation":7},
-  {"key":"grass-fiber","terrains":["grassland"],"neighbors":[],"rarity":"common","minDistance":4,"nodes":42,"separation":6},
-  {"key":"root-fiber","terrains":["forest","grassland"],"neighbors":["forest"],"rarity":"uncommon","minDistance":24,"nodes":18,"separation":9},
   {"key":"spider-silk","terrains":["forest","lowMountain"],"neighbors":[],"rarity":"uncommon","minDistance":30,"nodes":12,"separation":10},
   {"key":"water","terrains":["coast"],"neighbors":["deep","shallow"],"rarity":"common","minDistance":4,"nodes":24,"separation":8},
   {"key":"tree-sap","terrains":["forest"],"neighbors":[],"rarity":"uncommon","minDistance":28,"nodes":16,"separation":10},
@@ -436,9 +413,6 @@ const LEGACY_RESOURCE_HABITATS = Object.freeze([
   {"key":"resin","terrains":["forest"],"neighbors":[],"rarity":"rare","minDistance":42,"nodes":10,"separation":8},
   {"key":"beeswax","terrains":["forest"],"neighbors":[],"rarity":"rare","minDistance":42,"nodes":6,"separation":10},
   {"key":"carapace","terrains":["grassland","forest","lowMountain"],"neighbors":[],"rarity":"uncommon","minDistance":30,"nodes":12,"separation":11},
-  {"key":"iron-ore","terrains":["lowMountain"],"neighbors":[],"rarity":"rare","minDistance":48,"nodes":10,"separation":9},
-  {"key":"copper-ore","terrains":["lowMountain"],"neighbors":[],"rarity":"rare","minDistance":48,"nodes":8,"separation":9},
-  {"key":"quartz","terrains":["lowMountain"],"neighbors":[],"rarity":"rare","minDistance":56,"nodes":5,"separation":10}
 ]);
 
 return { LEGACY_FOOD_HABITATS, LEGACY_RESOURCE_HABITATS };
@@ -941,7 +915,6 @@ function landscapeResourceSuitability(key,index,terrain,h) {
   const type=terrain[index],f=h.resourceHabitats;if(type<2||type===10)return 0;
   const moisture=f.soilMoisture[index],depth=f.soilDepth[index],canopy=f.forestCover[index];
   if(key==='tree')return h.forestMask[index]?depth*(.35+moisture*.65):0;
-  if(key==='grass-fiber')return type===4||type===5?(.2+depth*.8)*(.3+moisture*.7)*(1-canopy*.65):0;
   if(key==='dew')return type===4||type===9?(.2+moisture*.6+f.shelter[index]*.2)*(.6+canopy*.4):0;
   if(key==='clay')return [3,4,5,9].includes(type)?f.soilFertility[index]*(.5+depth*.5):0;
   if(key==='pebbles'){
@@ -950,12 +923,7 @@ function landscapeResourceSuitability(key,index,terrain,h) {
     const fan=distance<=10&&h.flow[index]>35&&h.slope[index]<.03?Math.min(1,Math.log1p(h.flow[index])/6)*.1:0;
     return h.gravel[index]*18+talus+fan;
   }
-  if(key==='sand')return type===2?(.2+f.sandySoil[index]*.8)*(.3+h.sand[index]):0;
-  const ore=['iron-ore','copper-ore','quartz'].indexOf(key);if(ore<0||type!==6||h.forestMask[index])return 0;
-  const rock=f.parentRock[index],strain=bounded(h.uplift[index]*.8+h.slope[index]*7+Math.abs(f.terrainPosition[index])*4);
-  const province=ore===0?rock:ore===1?1-Math.abs(rock-.5):1-rock;
-  const vein=Math.max(0,1-Math.abs(Math.sin(rock*14+ore*1.8+strain*2))/.6);
-  return province*vein*(.3+f.exposure[index])*(1-depth*.35);
+  return 0;
 }
 
 return { createLandscapeHabitats, distributeLandscapeBiomes, landscapeResourceSuitability };
@@ -1108,7 +1076,7 @@ function selectContinentalSea(values, size) {
 return { normalProbability, createLandscapeField, routeLandscape, selectContinentalSea };
 })();
 modules["server/terrain-resources.mjs"] = (() => {
-const { createLandscapeField, normalProbability } = modules["server/landscape-fields.mjs"];
+const { createLandscapeField } = modules["server/landscape-fields.mjs"];
 const { createHillslopeFlow, landscapeHash, quantizeLandscapeValue } = modules["server/landscape-processes.mjs"];
 const { recordPlacementMap } = modules["server/placement-maps.mjs"];
 
@@ -1128,8 +1096,6 @@ function record(h,id,layers,values,details) {
 function createFormedHabitats(world) {
   const {size,seed,terrain,hydrology:h}=world,length=terrain.length;
   const vegetation=createLandscapeField(size,seed+3001,h.profile.vegetationCorrelation,1.5);
-  const magmatic=createLandscapeField(size,seed+1901,h.profile.magmaticCorrelation,1.5);
-  const hydrothermal=createLandscapeField(size,seed+1907,h.profile.hydrothermalCorrelation,1.5);
   const hillslopeFlow=createHillslopeFlow(h.ground,h.rainfall,size,h.seaLevel,h.water);
   const wetness=new Float32Array(length),drainageHeight=new Float32Array(length),referenceHeight=new Float64Array(length);
   const fields=Object.fromEntries(["rainfall","soilMoisture","soilDepth","soilFertility","forestCover","exposure","parentRock","sandySoil","shelter","terrainPosition","topographicWetness"].map(key=>[key,new Float32Array(length)]));
@@ -1166,33 +1132,24 @@ function createFormedHabitats(world) {
   record(h,"habitat:hillslope-flow",["forest","swamp","resources"],hillslopeFlow,{stage:"intermediate",minimum:0,logarithmic:true});
   record(h,"habitat:mountain-distance",["mountains","resources"],mountainDistance,{stage:"intermediate",minimum:0,maximum:12,excluded:255});
   record(h,"resource:tree:suitability",["forest","resources"],vegetation,{resource:"tree",stage:"original"});
-  record(h,"resource:iron-ore:suitability",["resources"],magmatic,{resource:"iron-ore",appliesTo:["iron-ore","copper-ore"],stage:"original"});
-  record(h,"resource:copper-ore:suitability",["resources"],hydrothermal,{resource:"copper-ore",appliesTo:["copper-ore","quartz"],stage:"original"});
-  return {...fields,mountainDistance,hillslopeFlow,vegetation,magmatic,hydrothermal,drainageHeight,wetness,
+  return {...fields,mountainDistance,hillslopeFlow,vegetation,drainageHeight,wetness,
     fieldSemantics:{soilDepth:"relative-rooting-suitability",soilFertility:"relative-resource-suitability",soilMoisture:"relative-moisture-index",topographicWetness:"land-percentile"}};
 }
 
 function formedResourceSuitability(key,index,terrain,h) {
   if(h.water[index]||terrain[index]===10)return 0;
   const f=h.resourceHabitats,slope=h.slope[index],type=terrain[index],moisture=f.soilMoisture[index];
-  const flat=1/(1+slope*8),open=1-f.forestCover[index],nearWater=Math.exp(-h.waterDistance[index]/2);
+  const flat=1/(1+slope*8),open=1-f.forestCover[index];
   if(key==="tree")return h.forestMask?.[index]?1:0;
   if(key==="clay")return type<=5||type===9?flat*(.35+.45*(1-h.bedrock[index])+.2*(1-Math.exp(-h.fines[index]/.005))):0;
   if(key==="dew")return type===4||type===9?moisture*(.6+.4*open)*(type===9?2.5:1):0;
-  if(key==="grass-fiber")return type===4?flat*(.4+.6*moisture)*open:0;
   if(key==="pebbles"){
     if(type===9||type>=7)return 0;
     const alluvium=h.bankGravel[index]*16;
     const talus=type===6?.005*f.exposure[index]*h.bedrock[index]:0;
     return alluvium+talus;
   }
-  if(key==="sand")return (type===2||nearWater>.3)?(1-Math.exp(-h.sand[index]/.001))*(.3+.7*flat):0;
-  if(!["iron-ore","copper-ore","quartz"].includes(key)||type<6||type>8)return 0;
-  const exposed=bounded(.25+f.exposure[index]*.75)*(1-Math.min(.9,h.cover[index]));
-  const magmatic=normalProbability(f.magmatic[index]),hydrothermal=normalProbability(f.hydrothermal[index]);
-  if(key==="iron-ore")return exposed*Math.max(0,(magmatic-.55)/.45);
-  if(key==="copper-ore")return exposed*Math.max(0,(magmatic-.4)/.6)*Math.max(0,(hydrothermal-.45)/.55);
-  return exposed*Math.max(0,(hydrothermal-.5)/.5);
+  return 0;
 }
 
 function populateFormedResources(world) {
@@ -1239,7 +1196,7 @@ function populateFormedResources(world) {
     const amount=Math.round(30+fields.soilMoisture[index]*35+fields.soilDepth[index]*20);
     world.resources.push([index%size,Math.floor(index/size),amount,"tree"]);occupied[index]=1;
   }
-  const definitions=[["clay",.11,12,28],["pebbles",1.1,12,42],["dew",.11,3,10],["grass-fiber",.08,25,100],["sand",.9,60,180],["iron-ore",.4,55,220],["copper-ore",.6,45,190],["quartz",.35,30,150]];
+  const definitions=[["clay",.11,12,28],["pebbles",1.1,12,42],["dew",.11,3,10]];
   for(const[order,[key,intensity,base,richness]]of definitions.entries()){
     const suitability=new Float32Array(length),probability=new Float32Array(length);
     const draw=(x,y)=>landscapeHash(x,y,seed+3083+order*41);
@@ -1252,7 +1209,7 @@ function populateFormedResources(world) {
       if(terrain[index]===9){if(key==="dew")amount=Math.round(24+36*fields.soilMoisture[index]+20*landscapeHash(x,y,seed+3359));if(key==="clay")amount*=2;}
       world.resources.push([x,y,amount,key]);occupied[index]=1;
     }
-    if(!["iron-ore","copper-ore"].includes(key))record(h,"resource:"+key+":suitability",["resources"],suitability,{resource:key,stage:"intermediate",minimum:0});
+    record(h,"resource:"+key+":suitability",["resources"],suitability,{resource:key,stage:"intermediate",minimum:0});
     record(h,"resource:"+key+":draw",["resources"],null,{resource:key,stage:"original",sample:draw,minimum:0,maximum:1});
     record(h,"resource:"+key+":probability",["resources"],probability,{resource:key,stage:"intermediate",minimum:0,maximum:1});
   }
@@ -1265,7 +1222,7 @@ function populateFormedResources(world) {
     }
   }
   for(const[id,layer,values]of[["forest","forest",h.forestMask],["swamp","swamp",Uint8Array.from(terrain,type=>type===9?1:0)]])record(h,"biome:"+id+"-mask",[layer],values,{stage:"final",minimum:0,maximum:1});
-  h.resourceProfile={model:"conditional-intensity",selected:{forestThreshold:.62,swampWetness:.78,swampSlope:.035,swampDrainageHeight:8,activeBarExclusion:.08,definitions},mineralPriors:"independent-magmatic-and-hydrothermal-proxies",resistanceControlsMinerals:false};
+  h.resourceProfile={model:"conditional-intensity",selected:{forestThreshold:.62,swampWetness:.78,swampSlope:.035,swampDrainageHeight:8,activeBarExclusion:.08,definitions}};
 }
 
 return { createFormedHabitats, formedResourceSuitability, populateFormedResources };
@@ -1346,16 +1303,6 @@ function createResourceHabitats(world) {
   }
   recordPlacementMap(h, "habitat:mountain-distance", ["mountains", "resources"], mountainDistance, { minimum: 0, maximum: 12, excluded: 255 });
   const result = { rainfall, soilMoisture, soilDepth, soilFertility, forestCover, exposure, parentRock, sandySoil, shelter, mountainDistance };
-  const minerals = ["iron-ore", "copper-ore", "quartz"].map((key, ore) => {
-    const warp = placementNoise(h, "resource:" + key + ":warp", ["resources"],
-      (x, y) => noise(x, y, 43, seed + 2027 + ore * 17), { resource: key });
-    const vein = placementNoise(h, "resource:" + key + ":vein", ["resources"], (x, y) => {
-      const offset = warp(x, y) * 8;
-      return noise(x + offset, y - offset, 19, seed + 1901 + ore * 6);
-    }, { resource: key });
-    return { warp, vein };
-  });
-  Object.defineProperty(result, "minerals", { value: minerals });
   return result;
 }
 
@@ -1367,7 +1314,6 @@ function resourceHabitatSuitability(key, index, terrain, h) {
   const moisture = fields.soilMoisture[index], depth = fields.soilDepth[index], canopy = fields.forestCover[index];
   if (key === "tree") return type === 5 ? depth * (.35 + moisture * .65) : 0;
   if (key === "honey-mushrooms") return (h.island || h.continent ? type === 4 && canopy > 0 : type === 5) ? depth * canopy * (.2 + moisture * .8) : 0;
-  if (key === "grass-fiber") return type === 4 || type === 5 ? (.2 + depth * .8) * (.3 + moisture * .7) * (1 - canopy * .65) : 0;
   if (key === "dew") return type === 4 || h.generationVersion >= 30 && type === 9 ? (.2 + moisture * .6 + fields.shelter[index] * .2) * (.6 + canopy * .4) : 0;
   if (key === "clay") return [3, 4, 5, 9].includes(type) ? fields.soilFertility[index] * (.5 + depth * .5) : 0;
   if (key === "pebbles" && h.generationVersion >= 29) {
@@ -1379,14 +1325,7 @@ function resourceHabitatSuitability(key, index, terrain, h) {
   }
   if (key === "pebbles") return [2, 3, 4, 6].includes(type) ? h.gravel[index] * .5 +
     Math.exp(-fields.mountainDistance[index] / 4) * (.3 + fields.exposure[index]) + fields.exposure[index] * fields.parentRock[index] * .2 : 0;
-  if (key === "sand") return type === 2 ? (.2 + fields.sandySoil[index] * .8) * (.3 + h.sand[index]) : 0;
-  const ore = ["iron-ore", "copper-ore", "quartz"].indexOf(key);
-  if (ore < 0 || type !== 6) return 0;
-  const x = index % h.size, y = Math.floor(index / h.size), seed = h.seed;
-  const province = ore === 0 ? fields.parentRock[index] : ore === 1 ? 1 - fields.parentRock[index] : fields.sandySoil[index];
-  const warp = noise(x, y, 43, seed + 2027 + ore * 17) * 8;
-  const vein = Math.max(0, 1 - Math.abs(fields.minerals ? fields.minerals[ore].vein(x, y) : noise(x + warp, y - warp, 19, seed + 1901 + ore * 6)) / (h.generationVersion >= 29 ? .3 : .18));
-  return province * vein * (.3 + fields.exposure[index]);
+  return 0;
 }
 
 return { createResourceHabitats, resourceHabitatSuitability };
@@ -1399,10 +1338,9 @@ const { LEGACY_RESOURCE_HABITATS } = modules["server/resource-legacy.mjs"];
 const { RESOURCE_ECONOMY, isEconomyHabitat } = modules["server/economy.mjs"];
 const { resourceHabitatSuitability } = modules["server/resource-habitats.mjs"];
 
-const REMOVED_RESOURCE_TYPES = Object.freeze(["honey-mushrooms","twigs","bark","root-fiber","spider-silk","water","tree-sap","leaf-mold","resin","beeswax","dry-leaves","tree-fruit","berry-bush","seed-pods","root-bulbs","nutrient-moss","meat","carapace","nutrients"]);
+const REMOVED_RESOURCE_TYPES = Object.freeze(["honey-mushrooms","twigs","bark","root-fiber","spider-silk","water","tree-sap","leaf-mold","resin","beeswax","dry-leaves","tree-fruit","berry-bush","seed-pods","root-bulbs","nutrient-moss","meat","carapace","nutrients","sand","grass-fiber","iron-ore","copper-ore","quartz"]);
 
 function migrateResourceType(key) {
-  if (key === "root-fiber") return "grass-fiber";
   if (key === "wood") return "tree";
   return REMOVED_RESOURCE_TYPES.includes(key) ? null : key;
 }
@@ -1412,32 +1350,19 @@ const resourceImages = {
   dew: "DesignAssets/Resources/dew-grass.png",
   pebbles: "DesignAssets/Resources/pebbles.png",
   clay: "DesignAssets/Resources/clay.png",
-  sand: "DesignAssets/Resources/sand.png",
-  "grass-fiber": "DesignAssets/ResourceConcepts/v1/resource-grass-fiber.png",
-  "iron-ore": "DesignAssets/Resources/iron-ore.png",
-  "copper-ore": "DesignAssets/Resources/copper-ore.png",
-  quartz: "DesignAssets/ResourceConcepts/v1/resource-quartz.png"
 };
 const resourceCarryImages = {
   tree: "DesignAssets/Resources/wood-carry.png",
   dew: "DesignAssets/Resources/dew-carry.png",
   pebbles: "DesignAssets/Resources/pebbles-carry.png",
   clay: "DesignAssets/Resources/clay-carry.png",
-  sand: "DesignAssets/Resources/sand-carry.png",
-  "iron-ore": "DesignAssets/Resources/iron-ore-carry.png",
-  "copper-ore": "DesignAssets/Resources/copper-ore-carry.png"
 };
 
 const RESOURCE_TYPES = Object.freeze([
   ["tree", "목재", "material", 6, ["blade"]],
   ["dew", "이슬방울", "material", 2, []],
   ["pebbles", "자갈", "material", 6, ["piercing"]],
-  ["clay", "비옥토", "material", 4, ["excavation"]],
-  ["sand", "모래", "material", 4, ["excavation"]],
-  ["grass-fiber", "풀섬유", "material", 4, ["blade"]],
-  ["iron-ore", "철광석", "material", 12, ["piercing"]],
-  ["copper-ore", "구리광석", "material", 10, ["piercing"]],
-  ["quartz", "수정", "material", 16, ["piercing"]]
+  ["clay", "비옥토", "material", 4, []],
 ].map(([key, name, category, harvestSeconds, requirements]) => Object.freeze({
   key, name, category, harvestSeconds: RESOURCE_ECONOMY.find(entry => entry.key === key)?.harvestSeconds ?? harvestSeconds,
   harvestLocked: key === "honey-mushrooms", requirements: Object.freeze(requirements),
@@ -1454,11 +1379,6 @@ const RESOURCE_PLACEMENT = Object.freeze({ nearRadius: 22, nearTypes: 3, nearNod
 const RESOURCE_HABITATS = Object.freeze([
   ["pebbles", ["coast", "land", "lowMountain"], [], "common", 4, 36, 7],
   ["clay", ["coast", "grassland", "swamp"], ["deep", "shallow", "coast", "swamp"], "uncommon", 24, 20, 8],
-  ["sand", ["coast"], [], "common", 4, 28, 7],
-  ["grass-fiber", ["grassland", "forest"], [], "common", 4, 42, 6],
-  ["iron-ore", ["lowMountain"], [], "rare", 48, 10, 9],
-  ["copper-ore", ["lowMountain"], [], "rare", 48, 8, 9],
-  ["quartz", ["lowMountain"], [], "rare", 56, 5, 10]
 ].map(([key, terrains, neighbors, rarity, minDistance, nodes, separation]) => Object.freeze({
   key, terrains: Object.freeze(terrains), neighbors: Object.freeze(neighbors), rarity, minDistance, nodes, separation
 })));
@@ -2767,7 +2687,6 @@ const COMBAT_RETREAT_EXCHANGES = 2;
 const COMBAT_EXCHANGE_PAUSE = 1;
 const COMBAT_TURN_ORDER_VERSION = 1;
 const COMBAT_EXCHANGE_DAMAGE_VERSION = 5;
-const REGENERATION_DURATION = 1.2;
 
 const species = new Map(ENCOUNTER_TYPES.map(type => [type.key, type]));
 
@@ -2851,7 +2770,6 @@ function createCombat(environment) {
     agent.renderFromX = agent.x; agent.renderFromY = agent.y;
     agent.moveDuration = 0; agent.moveBudget = 0;
     agent.attack = null; agent.attackTargetId = null;
-    agent.support = null;
     agent.attackReady = time;
     agent.utility = null; agent.decisionPending = null;
     if (agent.foodDelivery?.receivedAt === null) agent.foodDelivery = null;
@@ -2862,7 +2780,6 @@ function createCombat(environment) {
 
   function release(agent, time) {
     agent.combat = null;
-    agent.support = null;
     agent.attack = null; agent.attackTargetId = null; agent.attackHit = true;
     if (agent.health <= 0) return;
     agent.utility = null; agent.decisionPending = "combatEnded";
@@ -3037,56 +2954,15 @@ function createCombat(environment) {
     if (reaction && attacker.health > 0) beginAttack(defender, attacker, time, true);
   }
 
-  function refreshSupport(participants) {
-    for (const side of [0, 1]) {
-      const allies = participants.filter(entry => entry.agent.combat.side === side);
-      const guard = Math.max(0, ...allies.map(entry => entry.agent.stats.guardProtection || 0));
-      for (const { agent } of allies) {
-        agent.combat.guardProtection = guard;
-      }
-    }
-  }
-
-  function updateRegeneration(agent, time) {
-    if (!(agent.stats.healing > 0) || !settled(agent, time) || agent.retreat ||
-        agent.attack && time < agent.attack.endsAt) {
-      agent.support = null;
-      return false;
-    }
-    const allies = entriesAt(agent.x, agent.y).map(entry => entry.agent).filter(target => target !== agent &&
-      combatTeam(target) === combatTeam(agent) && !target.combat && settled(target, time));
-    if (agent.support?.kind === "heal") {
-      const support = agent.support, target = allies.find(target => target.id === support.targetId);
-      if (!target) { agent.support = null; return false; }
-      if (!support.applied && time + 1e-8 >= support.hitAt) {
-        support.applied = true;
-        target.health = Math.min(target.stats.health, target.health + agent.stats.healing);
-      }
-      if (time + 1e-8 < support.endsAt) return true;
-      agent.support = null;
-    }
-    const target = allies.filter(target => target.health < target.stats.health)
-      .sort((a, b) => a.health / a.stats.health - b.health / b.stats.health || String(a.id).localeCompare(String(b.id)))[0];
-    if (!target) return false;
-    agent.support = { kind: "heal", targetId: target.id, startedAt: time,
-      hitAt: time + .45, endsAt: time + REGENERATION_DURATION, applied: false };
-    agent.moveBudget = 0;
-    agent.mode = "rest";
-    agent.animationStartedAt = time;
-    return true;
-  }
-
   function update(agent, time) {
     if (agent.health <= 0) { agent.attack = null; return false; }
     if (!agent.combat) contact(agent, time);
     const combat = agent.combat;
-    if (!combat) return updateRegeneration(agent, time);
+    if (!combat) return false;
     if (agent.x !== combat.x || agent.y !== combat.y) { release(agent, time); return false; }
     if (processed.get(combat.id) === time) return true;
     processed.set(combat.id, time);
     let participants = members(combat).sort((a, b) => String(a.agent.id).localeCompare(String(b.agent.id)));
-    refreshSupport(participants);
-    for (const { agent: member } of participants) member.support = null;
     for (const { agent: member } of participants) {
       if (member.combat.version !== 2) { const old = member.combat; attach(member, old, old.side, time); }
       dropCarriedResources(environment, member); member.moveBudget = 0;
@@ -3138,7 +3014,7 @@ function createCombat(environment) {
   return { update, engage, release };
 }
 
-return { COMBAT_DISPOSITIONS, PEACEFUL_ESCAPE_CHANCE, PEACEFUL_ESCAPE_INTERVAL, COMBAT_ESCAPE_GRACE, COMBAT_RETREAT_EXCHANGES, COMBAT_EXCHANGE_PAUSE, COMBAT_TURN_ORDER_VERSION, COMBAT_EXCHANGE_DAMAGE_VERSION, REGENERATION_DURATION, combatDisposition, combatTeam, suspendDefenseWork, colonyDefenseTarget, canPursueCombat, peacefulEscapeChance, createCombat };
+return { COMBAT_DISPOSITIONS, PEACEFUL_ESCAPE_CHANCE, PEACEFUL_ESCAPE_INTERVAL, COMBAT_ESCAPE_GRACE, COMBAT_RETREAT_EXCHANGES, COMBAT_EXCHANGE_PAUSE, COMBAT_TURN_ORDER_VERSION, COMBAT_EXCHANGE_DAMAGE_VERSION, combatDisposition, combatTeam, suspendDefenseWork, colonyDefenseTarget, canPursueCombat, peacefulEscapeChance, createCombat };
 })();
 modules["server/player-tribes.mjs"] = (() => {
 const PLAYER_TRIBES = Object.freeze([
@@ -3891,7 +3767,7 @@ function unitAnimationPose(agent, time) {
   }
   const attributes = agent.appearanceAttributes || agent.attributes || {};
   const animation = animations[action] || ((agent.tribe || "bean") !== "bean" && ["harvest", "throw"].includes(action) &&
-      ["antenna", "strength", "arms", "feet", "excavation"].some(key => attributes[key] > 0) ? animations.idle : null);
+      ["antenna", "strength", "arms", "feet"].some(key => attributes[key] > 0) ? animations.idle : null);
   return animation ? { action, animation, frame: unitAnimationFrame(animation, elapsed) } : null;
 }
 

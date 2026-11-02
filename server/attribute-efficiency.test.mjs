@@ -8,7 +8,7 @@ import { resourceHarvestMultiplier } from "./resources.mjs";
 import { createGame } from "./game.mjs";
 import { applyAgentGrowth } from "./growth.mjs";
 
-const native = { bean: ["clay", "excavation"], spring: ["dew", null], pebble: ["pebbles", "piercing"], spore: ["tree", "blade"] };
+const native = { bean: ["clay", null], spring: ["dew", null], pebble: ["pebbles", "piercing"], spore: ["tree", "blade"] };
 
 function fixture(tribe, slots, grade, distance, scouting) {
   const terrain = new Uint8Array(320 * 320);
@@ -148,14 +148,14 @@ test("운반량은 채집량 증가 유무만 반영하고 서버·브라우저�
   runInNewContext(workerSource.slice(0, workerSource.indexOf('modules["client/worker.mjs"]')) +
     'globalThis.rules = modules["server/attributes.mjs"]; })();', worker);
   for (const rules of [{ unitStats, unitCarryCapacity, unitTravelSpeed }, browser.Spawner, worker.rules]) {
-    for (const tribe of Object.keys(native)) for (const key of ["excavation", "blade", "piercing"]) {
+    for (const tribe of Object.keys(native)) for (const key of ["blade", "piercing"]) {
       for (let strength = 0; strength <= 4; strength++) for (const feet of [0, 1]) {
         const capacity = strength > 0 ? 2 : 1;
         const attributes = { [key]: 1, strength, feet };
         const agent = { tribe, attributes, stats: rules.unitStats(attributes, tribe), carryingType: "clay" };
         const emptySpeed = speeds[tribe][0] + (feet ? .3 : 0);
         const loadedSpeed = speeds[tribe][1] + (feet ? .3 : 0);
-        for (const resourceType of ["clay", "sand", "tree", "grass-fiber", "pebbles", "iron-ore", "copper-ore", "quartz", "dew"]) {
+        for (const resourceType of ["clay", "tree", "pebbles", "dew"]) {
           const context = tribe + ":" + key + ":" + strength + ":" + feet + ":" + resourceType;
           assert.equal(rules.unitCarryCapacity(agent, resourceType), capacity, context);
           for (const [load, expected] of [[0, emptySpeed], [capacity / 2, (emptySpeed + loadedSpeed) / 2], [capacity, loadedSpeed], [capacity + 1, loadedSpeed]]) {

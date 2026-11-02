@@ -7,12 +7,9 @@ export const ATTRIBUTES = [
   { key: "antenna", minNestLevel: 1, name: "감지", color: "#b2bffa", effect: "시야 반경 +3칸", description: "유닛의 시야 반경이 늘어납니다.", bonus: 3, bonuses: [0, 3, 4, 6, 8], stat: "시야 반경", unit: "칸" },
   { key: "strength", minNestLevel: 1, name: "채집량 증가", color: "#e6a79c", effect: "채집량 +1개", description: "한 번에 채집해 운반하는 자원의 양이 1개 늘어납니다.", bonus: 1, stat: "채집량", unit: "개" },
   { key: "feet", minNestLevel: 1, name: "이속 증가", color: "#8cd2bb", effect: "이동 속도 +0.3칸/초", description: "탐색과 왕복 이동을 빠르게 합니다.", bonus: 0.3, stat: "이동 속도", unit: "칸/초" },
-  { key: "excavation", minNestLevel: 2, nativeTribe: "bean", name: "굴착", color: "#d4b48a", effect: "", description: "", kind: "harvest", harvests: ["clay", "sand"] },
-  { key: "blade", minNestLevel: 2, nativeTribe: "spore", name: "칼날", color: "#d5d88e", effect: "공격력 +12", description: "장착하면 공격력이 12 증가합니다. 주력으로 선택하면 빠르게 베고 짧은 패링으로 공격을 막아 반격합니다.", kind: "combat", bonus: 12, bonuses: [0, 12], stat: "공격력", unit: "", harvests: ["tree", "grass-fiber"] },
-  { key: "piercing", minNestLevel: 2, nativeTribe: "pebble", name: "관통", color: "#b9dca1", effect: "방어 관통 +50%", description: "장착하면 상대 방어력의 50%를 무시합니다. 주력으로 선택하면 세 번째 공격마다 모아찌르기로 적을 잠시 기절시킵니다. 엄호 효과는 관통하지 않습니다.", kind: "combat", bonus: 50, bonuses: [0, 50], stat: "방어 관통", unit: "%", harvests: ["pebbles", "iron-ore", "copper-ore", "quartz"] },
+  { key: "blade", minNestLevel: 2, nativeTribe: "spore", name: "칼날", color: "#d5d88e", effect: "공격력 +12", description: "장착하면 공격력이 12 증가합니다. 주력으로 선택하면 빠르게 베고 짧은 패링으로 공격을 막아 반격합니다.", kind: "combat", bonus: 12, bonuses: [0, 12], stat: "공격력", unit: "", harvests: ["tree"] },
+  { key: "piercing", minNestLevel: 2, nativeTribe: "pebble", name: "관통", color: "#b9dca1", effect: "방어 관통 +50%", description: "장착하면 상대 방어력의 50%를 무시합니다. 주력으로 선택하면 세 번째 공격마다 모아찌르기로 적을 잠시 기절시킵니다.", kind: "combat", bonus: 50, bonuses: [0, 50], stat: "방어 관통", unit: "%", harvests: ["pebbles"] },
   { key: "carapace", minNestLevel: 3, name: "갑피", color: "#c8bd8c", effect: "방어력 약 +82", description: "장착하면 방어력이 약 82 증가합니다. 주력으로 선택하면 준비된 블록으로 공격 피해를 줄이고 반격합니다.", kind: "combat", bonus: 100 * .45 / (1 - .45), bonuses: [0, 100 * .45 / (1 - .45)], stat: "방어력", unit: "" },
-  { key: "guard", minNestLevel: 4, name: "엄호", color: "#a5cba4", effect: "아군 받는 피해 −35%", description: "같은 전투 칸의 자신과 아군이 받는 피해를 단계별로 35·38·42·45% 줄입니다. 여러 엄호 중 가장 높은 효과만 적용합니다.", kind: "combat", bonus: 35, bonuses: [0, 35, 38, 42, 45], stat: "아군 피해 감소", unit: "%" },
-  { key: "regeneration", minNestLevel: 3, name: "재생", color: "#b8dca4", effect: "전투 밖 아군 체력 +20 · 자기 회복 +2/초", description: "전투 밖에서 같은 칸의 가장 다친 아군을 자동으로 치유하며, 자신의 체력도 회복합니다.", kind: "combat", bonus: 20, bonuses: [0, 20, 24, 28, 32], stat: "아군 치유량", unit: "" }
 ];
 
 const attributeKeys = new Set(ATTRIBUTES.map(attribute => attribute.key));
@@ -93,28 +90,18 @@ export function hasSynergy(counts, keys) {
 }
 
 const attributeUpgradeMaterials = {
-  antenna: { dew: 6, "grass-fiber": 4 },
+  antenna: { dew: 6 },
   strength: { tree: 6, pebbles: 4 },
-  feet: { tree: 4, "grass-fiber": 6 },
-  excavation: { tree: 4, pebbles: 6 },
-  blade: { tree: 6, "grass-fiber": 6 },
+  feet: { tree: 4 },
+  blade: { tree: 6 },
   piercing: { tree: 6, pebbles: 6 },
   carapace: { pebbles: 8, clay: 6 },
-  guard: { tree: 6, clay: 6 },
-  regeneration: { dew: 8, "grass-fiber": 6 }
 };
 
 export function attributeUpgradeCost(attributeKey, targetLevel) {
   const base = Object.hasOwn(attributeUpgradeMaterials, attributeKey) ? attributeUpgradeMaterials[attributeKey] : null;
   if (!base || !Number.isInteger(targetLevel) || targetLevel < 2 || targetLevel > attributeLevelLimit()) return null;
   const materials = Object.fromEntries(Object.entries(base).map(([key, amount]) => [key, targetLevel === 2 ? Math.ceil(amount / 2) : 1]));
-  if (targetLevel >= 3) {
-    materials["iron-ore"] = 1;
-    materials["copper-ore"] = 1;
-  }
-  if (targetLevel === 4) {
-    materials.quartz = 1;
-  }
   return { evolutionPoints: CONQUEST_PACING.attributeCosts[targetLevel], materials };
 }
 
@@ -143,9 +130,6 @@ export function unitStats(attributes, tribe) {
     attackBonus: equipped("blade") ? ATTRIBUTE_STAT_VALUES.attackBonus : 0,
     armorPenetration: equipped("piercing") ? ATTRIBUTE_STAT_VALUES.armorPenetration : 0,
     damageReduction: equipped("carapace") ? ATTRIBUTE_STAT_VALUES.damageReduction : 0,
-    guardProtection: equipped("guard") ? ATTRIBUTE_STAT_VALUES.guardProtection : 0,
-    regeneration: equipped("regeneration") ? ATTRIBUTE_STAT_VALUES.regeneration : 0,
-    healing: equipped("regeneration") ? ATTRIBUTE_STAT_VALUES.healing : 0,
     health: combat.health,
     combatStrength: combat.combatStrength + attributeCombatStrengthBonus(attributes),
     resistance: 1

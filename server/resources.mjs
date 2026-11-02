@@ -5,10 +5,9 @@ import { LEGACY_RESOURCE_HABITATS } from "./resource-legacy.mjs";
 import { RESOURCE_ECONOMY, isEconomyHabitat } from "./economy.mjs";
 import { resourceHabitatSuitability } from "./resource-habitats.mjs";
 
-export const REMOVED_RESOURCE_TYPES = Object.freeze(["honey-mushrooms","twigs","bark","root-fiber","spider-silk","water","tree-sap","leaf-mold","resin","beeswax","dry-leaves","tree-fruit","berry-bush","seed-pods","root-bulbs","nutrient-moss","meat","carapace","nutrients"]);
+export const REMOVED_RESOURCE_TYPES = Object.freeze(["honey-mushrooms","twigs","bark","root-fiber","spider-silk","water","tree-sap","leaf-mold","resin","beeswax","dry-leaves","tree-fruit","berry-bush","seed-pods","root-bulbs","nutrient-moss","meat","carapace","nutrients","sand","grass-fiber","iron-ore","copper-ore","quartz"]);
 
 export function migrateResourceType(key) {
-  if (key === "root-fiber") return "grass-fiber";
   if (key === "wood") return "tree";
   return REMOVED_RESOURCE_TYPES.includes(key) ? null : key;
 }
@@ -18,32 +17,19 @@ const resourceImages = {
   dew: "DesignAssets/Resources/dew-grass.png",
   pebbles: "DesignAssets/Resources/pebbles.png",
   clay: "DesignAssets/Resources/clay.png",
-  sand: "DesignAssets/Resources/sand.png",
-  "grass-fiber": "DesignAssets/ResourceConcepts/v1/resource-grass-fiber.png",
-  "iron-ore": "DesignAssets/Resources/iron-ore.png",
-  "copper-ore": "DesignAssets/Resources/copper-ore.png",
-  quartz: "DesignAssets/ResourceConcepts/v1/resource-quartz.png"
 };
 const resourceCarryImages = {
   tree: "DesignAssets/Resources/wood-carry.png",
   dew: "DesignAssets/Resources/dew-carry.png",
   pebbles: "DesignAssets/Resources/pebbles-carry.png",
   clay: "DesignAssets/Resources/clay-carry.png",
-  sand: "DesignAssets/Resources/sand-carry.png",
-  "iron-ore": "DesignAssets/Resources/iron-ore-carry.png",
-  "copper-ore": "DesignAssets/Resources/copper-ore-carry.png"
 };
 
 export const RESOURCE_TYPES = Object.freeze([
   ["tree", "목재", "material", 6, ["blade"]],
   ["dew", "이슬방울", "material", 2, []],
   ["pebbles", "자갈", "material", 6, ["piercing"]],
-  ["clay", "비옥토", "material", 4, ["excavation"]],
-  ["sand", "모래", "material", 4, ["excavation"]],
-  ["grass-fiber", "풀섬유", "material", 4, ["blade"]],
-  ["iron-ore", "철광석", "material", 12, ["piercing"]],
-  ["copper-ore", "구리광석", "material", 10, ["piercing"]],
-  ["quartz", "수정", "material", 16, ["piercing"]]
+  ["clay", "비옥토", "material", 4, []],
 ].map(([key, name, category, harvestSeconds, requirements]) => Object.freeze({
   key, name, category, harvestSeconds: RESOURCE_ECONOMY.find(entry => entry.key === key)?.harvestSeconds ?? harvestSeconds,
   harvestLocked: key === "honey-mushrooms", requirements: Object.freeze(requirements),
@@ -60,11 +46,6 @@ export const RESOURCE_PLACEMENT = Object.freeze({ nearRadius: 22, nearTypes: 3, 
 export const RESOURCE_HABITATS = Object.freeze([
   ["pebbles", ["coast", "land", "lowMountain"], [], "common", 4, 36, 7],
   ["clay", ["coast", "grassland", "swamp"], ["deep", "shallow", "coast", "swamp"], "uncommon", 24, 20, 8],
-  ["sand", ["coast"], [], "common", 4, 28, 7],
-  ["grass-fiber", ["grassland", "forest"], [], "common", 4, 42, 6],
-  ["iron-ore", ["lowMountain"], [], "rare", 48, 10, 9],
-  ["copper-ore", ["lowMountain"], [], "rare", 48, 8, 9],
-  ["quartz", ["lowMountain"], [], "rare", 56, 5, 10]
 ].map(([key, terrains, neighbors, rarity, minDistance, nodes, separation]) => Object.freeze({
   key, terrains: Object.freeze(terrains), neighbors: Object.freeze(neighbors), rarity, minDistance, nodes, separation
 })));

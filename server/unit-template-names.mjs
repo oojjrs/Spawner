@@ -1,13 +1,9 @@
 const UNIT_TEMPLATE_ROLES = [
-  [["regeneration", "guard"], "수호 치유사"],
-  [["regeneration"], "치유사"],
-  [["guard"], "수호자"],
   [["blade", "piercing"], "돌격병"],
   [["blade", "strength"], "벌목꾼"],
   [["piercing", "strength"], "광부"],
   [["blade"], "전사"],
   [["piercing"], "관통병"],
-  [["excavation"], "굴착꾼"],
   [["strength"], "수송꾼"],
   [["carapace"], "파수꾼"],
   [["antenna"], "정찰병"],

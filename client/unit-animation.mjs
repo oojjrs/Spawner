@@ -208,7 +208,7 @@ export function unitAnimationPose(agent, time) {
   }
   const attributes = agent.appearanceAttributes || agent.attributes || {};
   const animation = animations[action] || ((agent.tribe || "bean") !== "bean" && ["harvest", "throw"].includes(action) &&
-      ["antenna", "strength", "arms", "feet", "excavation"].some(key => attributes[key] > 0) ? animations.idle : null);
+      ["antenna", "strength", "arms", "feet"].some(key => attributes[key] > 0) ? animations.idle : null);
   return animation ? { action, animation, frame: unitAnimationFrame(animation, elapsed) } : null;
 }
 

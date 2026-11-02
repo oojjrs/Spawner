@@ -60,7 +60,7 @@ for (const seed of [1, 13, 4294967295]) test("수계·자원 총량·도하·빈
   const dryLand = world.terrain.filter(type => type >= 2 && type !== 10).length;
   assert.ok(occupied.size < dryLand / 4);
   assert.equal(world.resourceHotspots.length, 0);
-  for (const key of ["tree", "dew", "clay", "grass-fiber", "honey-mushrooms"]) {
+  for (const key of ["tree", "dew", "clay", "honey-mushrooms"]) {
     const points = [...world.food, ...world.resources].filter(point => point[3] === key);
     const inland = points.filter(([x, y]) => h.waterDistance[y * world.size + x] > 10);
     assert.ok(inland.length > points.length * .1, key + " inland habitat");

@@ -77,14 +77,14 @@ test("둥지 성장 후 AI 소유 설계를 재설계하고 플레이어 설계�
   const {game} = fixture("bean",60);
   change(game,state => {
     state.nestLevel=2;state.evolutionPoints=30;state.foodIncomeStartedAt=0;state.foodIncome=[[55,60]];
-    state.templates=[{id:1,name:"AI",slots:["excavation"],attributeLevels:{excavation:1},revision:1,productionRole:"worker",automatic:true},
+    state.templates=[{id:1,name:"AI",slots:[],attributeLevels:{},revision:1,productionRole:"worker",automatic:true},
       {id:2,name:"Player",slots:["antenna"],attributeLevels:{antenna:1},revision:1}];
     state.nextTemplateId=3;
   });
   const player=game.snapshot().templates.find(template=>template.id===2);
   const id=game.produce(), after=game.snapshot(), design=after.templates.find(template=>template.id===1);
   assert.ok(id);
-  assert.deepEqual(design.slots,["excavation","strength"]);
+  assert.deepEqual(design.slots,["strength","feet"]);
   assert.equal(design.revision,2);
   assert.equal(design.automatic,true);
   assert.deepEqual(after.templates.find(template=>template.id===2),player);

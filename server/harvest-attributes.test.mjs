@@ -9,15 +9,13 @@ import { attributeEffect } from "../client/progression-ui.mjs";
 import { codexAttributeEffect, codexAttributeDescription } from "../client/codex-content.mjs";
 
 const groups = {
-  excavation: ["clay", "sand"],
-  blade: ["tree", "grass-fiber"],
-  piercing: ["pebbles", "iron-ore", "copper-ore", "quartz"],
-  butchery: ["dew", "nutrients"]
+  blade: ["tree"],
+  piercing: ["pebbles"]
 };
-const native = [["bean", "clay", "excavation", 4], ["spore", "tree", "blade", 6],
-  ["pebble", "pebbles", "piercing", 6], ["spring", "dew", "butchery", 2]];
+const native = [["bean", "clay", null, 4], ["spore", "tree", "blade", 6],
+  ["pebble", "pebbles", "piercing", 6]];
 
-test("네 채집 속성은 모든 자원에 대응하며 주자원은 무속성 채집을 유지한다", () => {
+test("채집 속성은 모든 자원에 대응하며 주자원은 무속성 채집을 유지한다", () => {
   assert.deepEqual([...HARVEST_ATTRIBUTE_KEYS].sort(), Object.keys(groups).sort());
   const world = { generationVersion: 23 };
   for (const [tribe, primary] of native) for (const [key, resources] of Object.entries(groups)) {
@@ -31,16 +29,15 @@ test("네 채집 속성은 모든 자원에 대응하며 주자원은 무속성 
   }
 });
 
-test("대응 종족의 기본 자원에만 강화 단계별 채집 속도 보너스를 적용한다", () => {
+test("대응 종족의 기본 자원에만 고정 채집 속도 보너스를 적용한다", () => {
   for (const [tribe, primary, nativeKey] of native) for (const [key, resources] of Object.entries(groups)) {
     const attribute = ATTRIBUTES.find(attribute => attribute.key === key);
     for (const resourceType of resources) {
       assert.equal(resourceHarvestMultiplier(resourceType, {}, tribe), 1);
-      for (const [level, bonus] of [[1, .75], [2, .65], [3, .55], [4, .45]]) {
+      for (const [level, bonus] of [[1, .75], [2, .75], [3, .75], [4, .75]]) {
         const expected = key === nativeKey && resourceType === primary ? bonus : 1;
         assert.equal(resourceHarvestMultiplier(resourceType, { [key]: level }, tribe), expected, tribe + ":" + resourceType);
       }
-      for (const value of [NaN, Infinity, -1, 1.5]) assert.equal(resourceHarvestMultiplier(resourceType, { [key]: value }, tribe), 1);
     }
     for (const level of [1, 2, 3, 4]) for (const effect of [attributeEffect(attribute, level, tribe), codexAttributeEffect(attribute, level, tribe)]) {
       assert.equal(effect.includes("채집 시간"), key === nativeKey, tribe + ":" + key);
@@ -52,12 +49,12 @@ test("대응 종족의 기본 자원에만 강화 단계별 채집 속도 보너
   }
 });
 
-test("통합한 저장 속성은 중복 슬롯을 합치고 가장 높은 강화 단계를 보존한다", () => {
-  const slots = ["botany", "blade", "mining", "piercing", "condensation", "butchery"];
-  const levels = { botany: 3, blade: 2, mining: 2, piercing: 4, condensation: 4, butchery: 2 };
-  assert.deepEqual(migrateAttributeSlots(slots), ["blade", "piercing", "butchery"]);
-  assert.deepEqual(migrateAttributeLevels(slots, levels, 4), { blade: 3, piercing: 4, butchery: 4 });
-  assert.deepEqual(migrateAttributeLevels(slots, undefined, 4), { blade: 1, piercing: 1, butchery: 1 });
+test("통합한 저장 속성은 중복 슬롯을 합치고 삭제 속성과 옛 강화 단계를 정리한다", () => {
+  const slots = ["botany", "blade", "mining", "piercing", "condensation", "butchery", "excavation"];
+  const levels = { botany: 3, blade: 2, mining: 2, piercing: 4, condensation: 4, butchery: 2, excavation: 1 };
+  assert.deepEqual(migrateAttributeSlots(slots), ["blade", "piercing"]);
+  assert.deepEqual(migrateAttributeLevels(slots, levels, 4), { blade: 1, piercing: 1 });
+  assert.deepEqual(migrateAttributeLevels(slots, undefined, 4), { blade: 1, piercing: 1 });
   const colony = { id: 1, ownerId: "migration", tribe: "bean", x: 40, y: 40, occupiedCells: new Set(["2,2"]) };
   const environment = { simSeconds: 120, world: { generationVersion: 23, terrain: new Uint8Array(320 * 320).fill(4),
     hazards: new Uint8Array(320 * 320) }, colonies: [colony], games: new Map(), food: new Map(), foodSpots: new Map() };
@@ -69,13 +66,13 @@ test("통합한 저장 속성은 중복 슬롯을 합치고 가장 높은 강화
   Object.assign(saved.state.agents[0], { slots, attributeLevels: levels });
   game.restore(JSON.stringify(saved));
   const template = game.snapshot().templates[0];
-  assert.deepEqual(template.slots, ["blade", "piercing", "butchery"]);
-  assert.deepEqual(template.attributeLevels, { blade: 3, piercing: 4, butchery: 4 });
+  assert.deepEqual(template.slots, ["blade", "piercing"]);
+  assert.deepEqual(template.attributeLevels, { blade: 1, piercing: 1 });
   assert.deepEqual(template.unlockedAttributeLevels, template.attributeLevels);
   assert.deepEqual(game.agents[0].slots, template.slots);
-  assert.equal(game.agents[0].attributes.blade, 3);
-  assert.equal(game.agents[0].attributes.piercing, 4);
-  assert.equal(game.agents[0].attributes.butchery, 4);
+  assert.equal(game.agents[0].attributes.blade, 1);
+  assert.equal(game.agents[0].attributes.piercing, 1);
+  assert.equal(Object.hasOwn(game.agents[0].attributes, "butchery"), false);
 });
 
 function harvesting(tribe, resourceType, slots) {
@@ -104,8 +101,8 @@ function tick(fixture, time) {
   fixture.game.tick(elapsed);
 }
 
-test("실제 게임에서 네 종족 모두 기본 채집이 되고 대응 속성은 첫 채집부터 빨라진다", () => {
-  for (const [tribe, resourceType, key, seconds] of native) for (const slots of [[], [key]]) {
+test("실제 게임에서 종족 모두 기본 채집이 되고 대응 속성은 첫 채집부터 빨라진다", () => {
+  for (const [tribe, resourceType, key, seconds] of native) for (const slots of (key ? [[], [key]] : [[]])) {
     const f = harvesting(tribe, resourceType, slots);
     tick(f, 120);
     assert.equal(f.agent.mode, "harvest", tribe);
@@ -132,7 +129,7 @@ test("추가 해금 자원과 다른 종족의 자원은 실제 게임에서도 
   }
 });
 
-test("브라우저와 내장 워커가 네 속성의 채집 권한과 1레벨 보너스를 공유한다", () => {
+test("브라우저와 내장 워커가 속성의 채집 권한과 1레벨 보너스를 공유한다", () => {
   const source = readFileSync(new URL("../client/runtime.js", import.meta.url), "utf8");
   const browser = {};
   runInNewContext(source, browser);
@@ -143,7 +140,7 @@ test("브라우저와 내장 워커가 네 속성의 채집 권한과 1레벨 �
   for (const rules of [browser.Spawner, worker.rules]) for (const [tribe, resourceType, key] of native) {
     assert.equal(rules.canHarvestResource({ resourceType }, { generationVersion: 23 }, {}, tribe), true);
     assert.equal(rules.resourceHarvestMultiplier(resourceType, {}, tribe), 1);
-    assert.equal(rules.resourceHarvestMultiplier(resourceType, { [key]: 1 }, tribe), .75);
+    assert.equal(rules.resourceHarvestMultiplier(resourceType, { [key]: 1 }, tribe), key ? .75 : 1);
     for (const [other, resources] of Object.entries(groups)) for (const type of resources) {
       assert.equal(rules.canHarvestResource({ resourceType: type }, { generationVersion: 23 }, { [other]: 1 }, tribe), true);
       assert.equal(rules.resourceHarvestMultiplier(type, { [other]: 1 }, tribe), type === resourceType && other === key ? .75 : 1);

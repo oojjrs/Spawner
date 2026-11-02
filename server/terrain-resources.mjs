@@ -1,4 +1,4 @@
-import { createLandscapeField, normalProbability } from "./landscape-fields.mjs";
+import { createLandscapeField } from "./landscape-fields.mjs";
 import { createHillslopeFlow, landscapeHash, quantizeLandscapeValue } from "./landscape-processes.mjs";
 import { recordPlacementMap } from "./placement-maps.mjs";
 
@@ -18,8 +18,6 @@ function record(h,id,layers,values,details) {
 export function createFormedHabitats(world) {
   const {size,seed,terrain,hydrology:h}=world,length=terrain.length;
   const vegetation=createLandscapeField(size,seed+3001,h.profile.vegetationCorrelation,1.5);
-  const magmatic=createLandscapeField(size,seed+1901,h.profile.magmaticCorrelation,1.5);
-  const hydrothermal=createLandscapeField(size,seed+1907,h.profile.hydrothermalCorrelation,1.5);
   const hillslopeFlow=createHillslopeFlow(h.ground,h.rainfall,size,h.seaLevel,h.water);
   const wetness=new Float32Array(length),drainageHeight=new Float32Array(length),referenceHeight=new Float64Array(length);
   const fields=Object.fromEntries(["rainfall","soilMoisture","soilDepth","soilFertility","forestCover","exposure","parentRock","sandySoil","shelter","terrainPosition","topographicWetness"].map(key=>[key,new Float32Array(length)]));
@@ -56,33 +54,24 @@ export function createFormedHabitats(world) {
   record(h,"habitat:hillslope-flow",["forest","swamp","resources"],hillslopeFlow,{stage:"intermediate",minimum:0,logarithmic:true});
   record(h,"habitat:mountain-distance",["mountains","resources"],mountainDistance,{stage:"intermediate",minimum:0,maximum:12,excluded:255});
   record(h,"resource:tree:suitability",["forest","resources"],vegetation,{resource:"tree",stage:"original"});
-  record(h,"resource:iron-ore:suitability",["resources"],magmatic,{resource:"iron-ore",appliesTo:["iron-ore","copper-ore"],stage:"original"});
-  record(h,"resource:copper-ore:suitability",["resources"],hydrothermal,{resource:"copper-ore",appliesTo:["copper-ore","quartz"],stage:"original"});
-  return {...fields,mountainDistance,hillslopeFlow,vegetation,magmatic,hydrothermal,drainageHeight,wetness,
+  return {...fields,mountainDistance,hillslopeFlow,vegetation,drainageHeight,wetness,
     fieldSemantics:{soilDepth:"relative-rooting-suitability",soilFertility:"relative-resource-suitability",soilMoisture:"relative-moisture-index",topographicWetness:"land-percentile"}};
 }
 
 export function formedResourceSuitability(key,index,terrain,h) {
   if(h.water[index]||terrain[index]===10)return 0;
   const f=h.resourceHabitats,slope=h.slope[index],type=terrain[index],moisture=f.soilMoisture[index];
-  const flat=1/(1+slope*8),open=1-f.forestCover[index],nearWater=Math.exp(-h.waterDistance[index]/2);
+  const flat=1/(1+slope*8),open=1-f.forestCover[index];
   if(key==="tree")return h.forestMask?.[index]?1:0;
   if(key==="clay")return type<=5||type===9?flat*(.35+.45*(1-h.bedrock[index])+.2*(1-Math.exp(-h.fines[index]/.005))):0;
   if(key==="dew")return type===4||type===9?moisture*(.6+.4*open)*(type===9?2.5:1):0;
-  if(key==="grass-fiber")return type===4?flat*(.4+.6*moisture)*open:0;
   if(key==="pebbles"){
     if(type===9||type>=7)return 0;
     const alluvium=h.bankGravel[index]*16;
     const talus=type===6?.005*f.exposure[index]*h.bedrock[index]:0;
     return alluvium+talus;
   }
-  if(key==="sand")return (type===2||nearWater>.3)?(1-Math.exp(-h.sand[index]/.001))*(.3+.7*flat):0;
-  if(!["iron-ore","copper-ore","quartz"].includes(key)||type<6||type>8)return 0;
-  const exposed=bounded(.25+f.exposure[index]*.75)*(1-Math.min(.9,h.cover[index]));
-  const magmatic=normalProbability(f.magmatic[index]),hydrothermal=normalProbability(f.hydrothermal[index]);
-  if(key==="iron-ore")return exposed*Math.max(0,(magmatic-.55)/.45);
-  if(key==="copper-ore")return exposed*Math.max(0,(magmatic-.4)/.6)*Math.max(0,(hydrothermal-.45)/.55);
-  return exposed*Math.max(0,(hydrothermal-.5)/.5);
+  return 0;
 }
 
 export function populateFormedResources(world) {
@@ -129,7 +118,7 @@ export function populateFormedResources(world) {
     const amount=Math.round(30+fields.soilMoisture[index]*35+fields.soilDepth[index]*20);
     world.resources.push([index%size,Math.floor(index/size),amount,"tree"]);occupied[index]=1;
   }
-  const definitions=[["clay",.11,12,28],["pebbles",1.1,12,42],["dew",.11,3,10],["grass-fiber",.08,25,100],["sand",.9,60,180],["iron-ore",.4,55,220],["copper-ore",.6,45,190],["quartz",.35,30,150]];
+  const definitions=[["clay",.11,12,28],["pebbles",1.1,12,42],["dew",.11,3,10]];
   for(const[order,[key,intensity,base,richness]]of definitions.entries()){
     const suitability=new Float32Array(length),probability=new Float32Array(length);
     const draw=(x,y)=>landscapeHash(x,y,seed+3083+order*41);
@@ -142,7 +131,7 @@ export function populateFormedResources(world) {
       if(terrain[index]===9){if(key==="dew")amount=Math.round(24+36*fields.soilMoisture[index]+20*landscapeHash(x,y,seed+3359));if(key==="clay")amount*=2;}
       world.resources.push([x,y,amount,key]);occupied[index]=1;
     }
-    if(!["iron-ore","copper-ore"].includes(key))record(h,"resource:"+key+":suitability",["resources"],suitability,{resource:key,stage:"intermediate",minimum:0});
+    record(h,"resource:"+key+":suitability",["resources"],suitability,{resource:key,stage:"intermediate",minimum:0});
     record(h,"resource:"+key+":draw",["resources"],null,{resource:key,stage:"original",sample:draw,minimum:0,maximum:1});
     record(h,"resource:"+key+":probability",["resources"],probability,{resource:key,stage:"intermediate",minimum:0,maximum:1});
   }
@@ -155,5 +144,5 @@ export function populateFormedResources(world) {
     }
   }
   for(const[id,layer,values]of[["forest","forest",h.forestMask],["swamp","swamp",Uint8Array.from(terrain,type=>type===9?1:0)]])record(h,"biome:"+id+"-mask",[layer],values,{stage:"final",minimum:0,maximum:1});
-  h.resourceProfile={model:"conditional-intensity",selected:{forestThreshold:.62,swampWetness:.78,swampSlope:.035,swampDrainageHeight:8,activeBarExclusion:.08,definitions},mineralPriors:"independent-magmatic-and-hydrothermal-proxies",resistanceControlsMinerals:false};
+  h.resourceProfile={model:"conditional-intensity",selected:{forestThreshold:.62,swampWetness:.78,swampSlope:.035,swampDrainageHeight:8,activeBarExclusion:.08,definitions}};
 }

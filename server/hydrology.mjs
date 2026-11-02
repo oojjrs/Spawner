@@ -419,7 +419,7 @@ export function generateHydrology(terrain, moisture, heightField, size, seed, ba
       ["hydrology:wetness", wetness, ["water", "forest", "swamp", "resources"], { minimum: 0, maximum: 1 }],
       ["hydrology:fertility", fertility, ["resources"], { minimum: 0 }],
       ["hydrology:gravel", gravel, ["water", "resources"], { minimum: 0, resource: "pebbles" }],
-      ["hydrology:sand", sand, ["water", "resources"], { minimum: 0, resource: "sand" }],
+      ["hydrology:sand", sand, ["water", "resources"], { minimum: 0 }],
       ["hydrology:water", water, ["water"], { categorical: true }],
       ["hydrology:river", river, ["water"], { minimum: 0, maximum: 1, water: "river" }],
       ["hydrology:lake", lake, ["water"], { minimum: 0, maximum: 1, water: "lake" }],
@@ -434,7 +434,7 @@ export function generateHydrology(terrain, moisture, heightField, size, seed, ba
 }
 
 export function hydrologyResourceSuitability(key, index, terrain, fields) {
-  const type = terrain[index], x = index % fields.size, y = Math.floor(index / fields.size);
+  const type = terrain[index];
   const h = fields.hydrology || fields;
   if (h.resourceHabitats) return resourceHabitatSuitability(key, index, terrain, h);
   if (type < 2 || type === 10) return 0;
@@ -443,13 +443,6 @@ export function hydrologyResourceSuitability(key, index, terrain, fields) {
   if (key === "dew") return type === 4 && (h.wetness[index] > .12 || h.fertility[index] > .08) ? .1 + h.wetness[index] : 0;
   if (key === "clay") return [3, 4, 5, 9].includes(type) && h.fertility[index] > .08 ? h.fertility[index] : 0;
   if (key === "pebbles") return [2, 3, 4, 6].includes(type) ? h.gravel[index] + (type === 6 ? h.rock[index] * .5 : 0) : 0;
-  if (key === "sand") return type === 2 ? h.sand[index] : 0;
-  if (key === "grass-fiber") return [4, 5].includes(type) ? .05 + h.wetness[index] * .7 : 0;
-  if (["iron-ore", "copper-ore", "quartz"].includes(key)) {
-    if (type !== 6) return 0;
-    const vein = noise(x, y, key === "quartz" ? 11 : 19, fields.seed + (key === "iron-ore" ? 1901 : key === "copper-ore" ? 1907 : 1913));
-    return vein > -.15 ? h.rock[index] * (vein + .2) : 0;
-  }
   return 0;
 }
 
@@ -531,8 +524,9 @@ export function populateWatershedResources(world, baseline, paths) {
     for (const site of sites) value = Math.max(value, Math.exp(-((x - site.x) ** 2 + (y - site.y) ** 2) / 290));
     return value;
   };
-  const nodeAmounts = { tree: 120, dew: 12, clay: 60, pebbles: 55, sand: 150, "grass-fiber": 150, "iron-ore": 150, "copper-ore": 150, quartz: 150, "honey-mushrooms": 15 };
+  const nodeAmounts = { tree: 120, dew: 12, clay: 60, pebbles: 55, "honey-mushrooms": 15 };
   for (const [key, budget] of budgets) {
+    if (["nutrients", "grass-fiber", "sand", "iron-ore", "copper-ore", "quartz"].includes(key)) continue;
     const selected = points.get(key) || [], candidates = [];
     const patchSeed = world.seed + 2111 + [...budgets.keys()].indexOf(key) * 37;
     const initialCount = selected.length;
@@ -541,10 +535,9 @@ export function populateWatershedResources(world, baseline, paths) {
       const suitability = hydrologyResourceSuitability(key, index, world.terrain, world);
       if (!suitability) continue;
       const x = index % size, y = Math.floor(index / size);
-      if (["iron-ore", "copper-ore", "quartz"].includes(key) && world.camps.some(camp => Math.hypot(x - camp.x, y - camp.y) < (key === "quartz" ? 56 : 48))) continue;
       const patch = h.resourceHabitats ? .2 + Math.max(0, noise(x, y, 14, patchSeed)) ** 2 * 3 :
         .15 + Math.max(0, noise(x, y, 12, world.seed + 1931));
-      const attraction = h.resourceHabitats || ["iron-ore", "copper-ore", "quartz"].includes(key) ? 1 : cluster(index);
+      const attraction = h.resourceHabitats ? 1 : cluster(index);
       candidates.push({ index, priority: suitability * patch * attraction });
     }
     candidates.sort((left, right) => right.priority - left.priority || left.index - right.index);
