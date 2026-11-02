@@ -905,7 +905,7 @@
     grid-template-rows: minmax(0, 1fr) var(--portrait-panel-space);
   }
   .app > .stage { grid-column: 1; grid-row: 1; min-height: 0; }
-  #world { width: 100%; height: 100%; touch-action: none; }
+  #world { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; }
   .beginner-help {
     position: relative; grid-column: 1; grid-row: 1; top: auto; left: auto;
     transform: none; width: auto; max-width: none; margin: 8px;
@@ -986,7 +986,7 @@
     bottom: calc(var(--portrait-panel-space) + 12px);
     max-height: calc(100dvh - var(--portrait-panel-space) - 28px);
   }
-  .controls-guide-toggle { bottom: calc(var(--portrait-panel-space) + 12px); min-height: 44px; }
+  .controls-guide-toggle, :root[data-discovery-info-above]:has(.discovery-toast) .controls-guide-toggle { bottom: calc(var(--portrait-panel-space) + 64px); min-height: 44px; }
   .resource-inventory-bar { bottom: calc(var(--portrait-panel-space) + 8px); }
   :root[data-resource-info-above] :is(.unit-panel, .colony-menu, .controls-guide) {
     bottom: calc(var(--portrait-panel-space) + var(--resource-inventory-height) + 24px);
