@@ -1,3 +1,4 @@
+import { dnaAppearance, dnaUnitStats } from "./dna-unit.mjs";
 import { attributeCounts, unitStats } from "./attributes.mjs";
 
 export const AGENT_GROWTH_BONUSES = Object.freeze([
@@ -32,9 +33,13 @@ export function applyAgentGrowth(agent, simSeconds) {
   const previousHealth = agent.stats.health;
   agent.level = growth.level;
   agent.activeSlots = growth.activeSlots;
-  agent.attributes = attributeCounts(agent.activeSlots, agent.attributeLevels);
-  agent.stats = unitStats(agent.attributes, agent.tribe);
+  agent.attributes = agent.dna ? { ...dnaAppearance(agent.dna), dnaGather: dnaUnitStats(agent.dna).harvest > 0 } : attributeCounts(agent.activeSlots, agent.attributeLevels);
+  agent.stats = agent.dna ? dnaUnitStats(agent.dna) : unitStats(agent.attributes, agent.tribe);
   const bonus = AGENT_GROWTH_BONUSES[growth.level - 1];
+  if (agent.dna) {
+    agent.health = Math.min(agent.stats.health, agent.health + Math.max(0, agent.stats.health - previousHealth));
+    return true;
+  }
   agent.stats.movementMultiplier = (agent.stats.movementMultiplier ?? 1) * bonus.movementMultiplier;
   agent.stats.harvestSpeedMultiplier = bonus.harvestSpeedMultiplier;
   agent.stats.combatStrength += bonus.combatStrengthBonus;

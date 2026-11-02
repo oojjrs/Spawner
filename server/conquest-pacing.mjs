@@ -29,6 +29,7 @@ export function conquestEncounterPlan(plan) {
 
 export function militaryAgent(agent,tribe) {
  if(agent.productionRole==="military")return true;
+ if(agent.dna)return agent.dna.pieces.some(piece=>piece.gene==="blade")&&!agent.dna.pieces.some(piece=>piece.gene==="gather");
  const slots=agent.slots||[],native=TRIBE_PACING[tribe||agent.tribe]?.native;
  return !slots.includes("strength")&&
   slots.some(key=>["blade","piercing","carapace"].includes(key))&&!(slots.length===1&&slots[0]===native);

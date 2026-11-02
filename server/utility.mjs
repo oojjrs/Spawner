@@ -97,6 +97,7 @@ export function createUtilityAI(context) {
   }
 
   function route(agent, target, supply) {
+    if (context.canMove && !context.canMove(agent, target.x, target.y)) return null;
     const start = indexOf(agent), goal = indexOf(target);
     if (!state.explored.has(goal) || !walkable(target.x, target.y)) return null;
     if (start === goal) return [{ x: agent.x, y: agent.y }];
@@ -123,6 +124,7 @@ export function createUtilityAI(context) {
       }
       expanded++;
       for (const next of neighbors(at(current.index))) {
+        if (context.canMove && !context.canMove(agent, next.x, next.y)) continue;
         const nextIndex = indexOf(next), hazard = hazardAt(next.x, next.y), key = terrainAt(next.x, next.y) * 2 + Number(!!hazard);
         if (!speeds.has(key)) speeds.set(key, speed(agent, next, agent.carrying, 0));
         const seconds = 1 / speeds.get(key);
@@ -386,7 +388,7 @@ export function createUtilityAI(context) {
     const missing = agent.stats.health - agent.health;
     if (missing > 0.01 && home) {
       const amount = agent.retreat ? Math.max(0, agent.retreat.recoverHealth - agent.health) : Math.min(missing, agent.stats.health / 4);
-      const time = homeTime + amount / 0.25;
+      const time = homeTime + amount / (0.25 * (agent.dna ? 1 + agent.stats.dna.healing / 100 : 1));
       add("recover", { ...home.at(-1), key: "home" }, home,
         { healingGain: 60 * missing / agent.stats.health * 10 / (10 + time) },
         { recoverHealth: Math.min(agent.stats.health, agent.health + amount) });
@@ -422,7 +424,7 @@ export function createUtilityAI(context) {
         let best = null;
         for (let count = 1; count <= Math.ceil(maximum); count++) {
           const amount = Math.min(count, maximum);
-          const harvestCycles = Math.ceil(amount);
+          const harvestCycles = Math.ceil(amount / (agent.dna ? agent.stats.dna.harvest : 1));
           let harvestTime = 1 + Math.max(0, harvestCycles - precise) * (context.harvestSeconds ? context.harvestSeconds(type, agent) : definition.harvestSeconds);
           if (present) {
             const ready = Math.max(0, agent.harvestReady - state.simSeconds);
@@ -536,7 +538,7 @@ export function createUtilityAI(context) {
       add("fight", { id: enemy.id, x: enemy.x, y: enemy.y, key: enemy.id }, cells,
         { combatGain: value * (withMe - withoutMe) * 10 / (10 + time) }, { defending });
     }
-    for (const building of !immediate && !agent.retreat && combatDisposition(agent) === "aggressive" ? [...(context.burrows ? context.burrows() : []), ...(context.nests ? context.nests() : [])] : []) {
+    for (const building of !immediate && !agent.retreat && (!agent.dna || agent.stats.dna.power > 0) && combatDisposition(agent) === "aggressive" ? [...(context.burrows ? context.burrows() : []), ...(context.nests ? context.nests() : [])] : []) {
       const cells = burrowApproaches(building).map(cell => path(cell)).filter(Boolean).sort((first, second) => first.length - second.length)[0];
       if (!cells) continue;
       const time = travelTime(agent, cells, agent.carrying) + building.health / Math.max(0.1, agent.stats.attack);

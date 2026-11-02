@@ -6778,7 +6778,7 @@
     });
     agentDesign.addEventListener("click", () => {
       const agent = state.selection?.kind === "agent" ? state.selection.target : null;
-      if (agent) openUnitDesign({ name: agent.templateName || agent.name, tribe: agent.tribe, slots: [...agent.slots], attributeLevels: { ...agent.attributeLevels }, combatPrimary: agent.combatPrimary }, true);
+      if (agent) openUnitDesign({ name: agent.templateName || agent.name, tribe: agent.tribe, slots: [...agent.slots], attributeLevels: { ...agent.attributeLevels }, dna: agent.dna ? Spawner.cloneDna(agent.dna) : null, combatPrimary: agent.combatPrimary }, true);
     });
     agentBirth.addEventListener("click", async () => {
       const template = selectedAgentTemplate();
@@ -6838,7 +6838,7 @@
     function selectedAgentTemplate() {
       const agent = state.selection?.kind === "agent" ? state.selection.target : null;
       return agent && state.agents.includes(agent) ? {
-        id: agent.templateId, name: agent.templateName, tribe: agent.tribe, slots: [...agent.slots], combatPrimary: agent.combatPrimary, revision: agent.templateRevision
+        id: agent.templateId, name: agent.templateName, tribe: agent.tribe, slots: [...agent.slots], dna: agent.dna ? Spawner.cloneDna(agent.dna) : null, combatPrimary: agent.combatPrimary, revision: agent.templateRevision
       } : null;
     }
 
@@ -7204,7 +7204,7 @@
       const template = selectedAgentTemplate();
       const cost = template ? birthCost(template, state.tribe) : Infinity;
       agentBirth.disabled = !!state.ending || !template || connection.busy || !connection.online || !hasBirthplace() || state.agents.filter(agent => agent.health > 0).length >= unitCapacity() || state.evolutionPoints < cost ||
-        template.slots.length > slotCapacity() || template.slots.some(key => !isAttributeUnlocked(key, state.nestLevel, state.tribe));
+        (template.dna ? !dnaDesignValid(template.dna) : template.slots.length > slotCapacity() || template.slots.some(key => !isAttributeUnlocked(key, state.nestLevel, state.tribe)));
       const help = "같은 설계로 탄생" + (Number.isFinite(cost) ? "\n진화 포인트 " + cost + "점" : "");
       const hint = unitActionStatus.textContent || (connection.busy ? "처리 중입니다." : !connection.online ? "연결을 확인해 주세요." :
         !hasBirthplace() ? "살아 있는 둥지가 없습니다." : state.evolutionPoints < cost ? "진화 포인트가 부족합니다." :
@@ -7427,6 +7427,10 @@
     }
 
     function prepareAgentTemplate(template) {
+      if (template.dna) {
+        const attributes = Spawner.dnaAppearance(template.dna);
+        return prepareAgentTemplate({ tribe: template.tribe, slots: Object.keys(attributes).filter(key => attributes[key] > 0), attributeLevels: attributes });
+      }
       if (template.slots.some(key => Spawner.COMBAT_ATTRIBUTE_KEYS.includes(key)) && !combatAttributeArt.ready(template.tribe || "bean")) {
         return combatAttributeArt.prepare(template.tribe || "bean").then(() => prepareAgentTemplate(template));
       }
@@ -7755,6 +7759,45 @@
     let designReturnFocus = null;
     let templateListSignature = "";
 
+    const designDnaHost = document.createElement("div");
+    designDnaHost.className = "dna-editor-host";
+    designDnaHost.hidden = true;
+    document.querySelector(".design-editor").append(designDnaHost);
+    const designDnaEditor = Spawner.createDnaEditor(designDnaHost, Spawner.ATTRIBUTE_DNA, design => {
+      if (!unitDraft?.dna || unitDraft.readOnly || state.ending) return;
+      const dna = Spawner.ATTRIBUTE_DNA.validate(design);
+      if (!dna) return;
+      unitDraft.dna = Spawner.cloneDna(dna);
+      unitDraft.error = "";
+      updateUnitDesign();
+    });
+    function dnaDesignValid(dna) {
+      const model = Spawner.ATTRIBUTE_DNA;
+      return !!model.validate(dna) && model.trace(dna.pieces, state.nestLevel).valid && model.price(dna.pieces) <= state.evolutionPoints;
+    }
+    function updateDnaDesign() {
+      combatPrimaryRow.hidden = true;
+      designDnaEditor.context(state.nestLevel, state.evolutionPoints, unitDraft.readOnly || !!state.ending);
+      if (!unitDraft.nameEdited && !unitDraft.readOnly) designName.value = Spawner.suggestTemplateName(unitDraft.slots, state.templates, unitDraft.id);
+      document.getElementById("design-preview-image").style.setProperty("--dna-scale", String(1 + unitDraft.dna.pieces.length * .01));
+      const stats = Spawner.dnaUnitStats(unitDraft.dna);
+      const counts = Spawner.dnaAppearance(unitDraft.dna);
+      prepareAgentTemplate(unitDraft).catch(() => {});
+      document.getElementById("design-preview-image").src = agentImageSource({ tribe: unitDraft.tribe, attributes: counts, carrying: 0 });
+      const statValues = [["진화포인트", birthCost(unitDraft, unitDraft.tribe)], ["공격", stats.attackPower], ["방어", stats.defense], ["공속", stats.attackSpeed.toFixed(2) + "/초"], ["시야", stats.vision + "칸"], ["운반", stats.capacity + "개"], ["이동", Number(stats.speed.toFixed(2)) + "칸/초"], ["체력", stats.health]];
+      const fragment = document.createDocumentFragment();
+      for (const [label, value] of statValues) {
+        const term = document.createElement("dt");
+        term.textContent = label;
+        const description = document.createElement("dd");
+        description.textContent = value;
+        fragment.append(term, description);
+      }
+      document.getElementById("design-stats").replaceChildren(fragment);
+      designSave.disabled = unitDraft.readOnly || !!state.ending || connection.busy || !connection.online || !dnaDesignValid(unitDraft.dna);
+      setEvolutionText(designStatus, unitDraft.error);
+    }
+
     const combatPrimaryRow = document.createElement("label");
     combatPrimaryRow.className = "combat-primary";
     const combatPrimaryLabel = document.createElement("span");
@@ -8058,7 +8101,7 @@
         button.className = "template-spawn";
         button.setAttribute("aria-label", template.name + " 탄생, 진화 포인트 " + birthCost(template, state.tribe) + "점");
         const image = document.createElement("img");
-        image.src = agentImageSource({ tribe: template.tribe, attributes: attributeCounts(template.slots, template.attributeLevels), carrying: 0 });
+        image.src = agentImageSource({ tribe: template.tribe, attributes: template.dna ? Spawner.dnaAppearance(template.dna) : attributeCounts(template.slots, template.attributeLevels), carrying: 0 });
         image.alt = "";
         const name = document.createElement("strong");
         name.textContent = template.name;
@@ -8119,17 +8162,21 @@
 
     function nestGrowthBenefits() {
       return state.nestLevel >= NEST_LEVELS.length ? "최고 둥지 레벨입니다." :
-        "유닛의 속성 슬롯 " + slotCapacity() + " → " + NEST_LEVELS[state.nestLevel].slotCapacity +
-        "칸 · 진화 포인트 보관량 " + pointCapacity().toLocaleString("ko-KR") + " → " + NEST_LEVELS[state.nestLevel].pointCapacity.toLocaleString("ko-KR");
+        "진화 포인트 보관량 " + pointCapacity().toLocaleString("ko-KR") + " → " + NEST_LEVELS[state.nestLevel].pointCapacity.toLocaleString("ko-KR");
     }
 
     function openUnitDesign(template, readOnly) {
       readOnly = readOnly || !!state.ending;
       designReturnFocus = document.activeElement;
-      unitDraft = { id: template ? template.id : null, tribe: template?.tribe || state.tribe || "bean", slots: template ? [...new Set(template.slots.map(key => key === "arms" ? "strength" : key))] : [], attributeLevels: { ...template?.attributeLevels }, combatPrimary: template?.combatPrimary ?? null, error: "", readOnly: !!readOnly, nameEdited: Spawner.isTemplateNameEdited(template) };
+      unitDraft = { id: template ? template.id : null, tribe: template?.tribe || state.tribe || "bean", slots: template ? [...new Set((template.slots || []).map(key => key === "arms" ? "strength" : key))] : [], dna: !template || template.dna ? Spawner.cloneDna(template?.dna || { version: 3, pieces: [], budget: state.evolutionPoints, level: state.nestLevel }) : null, attributeLevels: { ...template?.attributeLevels }, combatPrimary: template?.combatPrimary ?? null, error: "", readOnly: !!readOnly, nameEdited: Spawner.isTemplateNameEdited(template) };
       designName.value = template?.name || Spawner.suggestTemplateName(unitDraft.slots, state.templates, unitDraft.id);
       designName.readOnly = !!readOnly;
-      designPalette.hidden = !!readOnly;
+      designPalette.hidden = !!readOnly || !!unitDraft.dna;
+      evolutionPanel.classList.toggle("has-dna-editor", !!unitDraft.dna);
+      designSlots.closest(".design-slot-group").hidden = !!unitDraft.dna;
+      designDnaHost.hidden = !unitDraft.dna;
+      document.getElementById("design-preview-image").style.removeProperty("--dna-scale");
+      if (unitDraft.dna) designDnaEditor.load({ ...Spawner.cloneDna(unitDraft.dna), budget: state.evolutionPoints, level: state.nestLevel }, unitDraft.readOnly || !!state.ending);
       designSave.closest(".design-footer").hidden = !!readOnly;
       closeCodex(false);
       designName.setCustomValidity("");
@@ -8142,6 +8189,7 @@
       evolutionOpenButton.setAttribute("aria-expanded", "true");
       renderDesignSlots();
       updateUnitDesign();
+      if (unitDraft.dna) designDnaEditor.fit();
       if (readOnly) evolutionClose.focus();
       else designName.focus();
     }
@@ -8158,6 +8206,7 @@
 
     function renderDesignSlots() {
       if (!unitDraft) return;
+      if (unitDraft.dna) return;
       hideHelpTooltip();
       const fragment = document.createDocumentFragment();
       for (let index = 0; index < NEST_LEVELS[NEST_LEVELS.length - 1].slotCapacity; index += 1) {
@@ -8209,6 +8258,7 @@
 
     function updateUnitDesign() {
       if (!unitDraft || evolutionPanel.hidden) return;
+      if (unitDraft.dna) { updateDnaDesign(); return; }
       updateCombatPrimary();
       if (!unitDraft.nameEdited && !unitDraft.readOnly) designName.value = Spawner.suggestTemplateName(unitDraft.slots, state.templates, unitDraft.id);
       const counts = attributeCounts(unitDraft.slots, unitDraft.attributeLevels);
@@ -8271,7 +8321,9 @@
         designName.reportValidity();
         return;
       }
-      const result = await sendCommand({ type: "design", templateId: unitDraft.id,
+      if (unitDraft.dna && !dnaDesignValid(unitDraft.dna)) return;
+      const result = await sendCommand(unitDraft.dna ? { type: "design", templateId: unitDraft.id,
+        name, nameEdited: unitDraft.nameEdited, dna: { ...Spawner.cloneDna(unitDraft.dna), budget: state.evolutionPoints, level: state.nestLevel }, birth: false } : { type: "design", templateId: unitDraft.id,
         name, nameEdited: unitDraft.nameEdited, slots: [...unitDraft.slots], combatPrimary: unitDraft.combatPrimary, birth: false });
       if (!result || !unitDraft) return;
       state.selectedTemplateId = result.templateId;
@@ -8397,7 +8449,7 @@
       renderUnitTemplates();
       for (const card of templateList.querySelectorAll("[data-template-id]")) {
         const template = state.templates.find((candidate) => candidate.id === Number(card.dataset.templateId));
-        card.querySelector(".template-spawn").disabled = !!state.ending || connection.busy || !connection.online || !hasBirthplace() || state.agents.filter(agent => agent.health > 0).length >= unitCapacity() || state.evolutionPoints < birthCost(template, state.tribe) || template.slots.length > slotCapacity() || template.slots.some(key => !isAttributeUnlocked(key, state.nestLevel, state.tribe));
+        card.querySelector(".template-spawn").disabled = !!state.ending || connection.busy || !connection.online || !hasBirthplace() || state.agents.filter(agent => agent.health > 0).length >= unitCapacity() || state.evolutionPoints < birthCost(template, state.tribe) || (template.dna ? !dnaDesignValid(template.dna) : template.slots.length > slotCapacity() || template.slots.some(key => !isAttributeUnlocked(key, state.nestLevel, state.tribe)));
         card.querySelector(".template-edit").disabled = connection.busy || !connection.online;
         card.querySelector(".template-delete").disabled = !!state.ending || connection.busy || !connection.online;
       }
@@ -8993,7 +9045,7 @@
     }
 
     function equipDesignAttribute(attributeKey) {
-      if (!unitDraft || unitDraft.readOnly || evolutionPanel.hidden || !isAttributeUnlocked(attributeKey, state.nestLevel, unitDraft.tribe) || unitDraft.slots.length >= slotCapacity()) return;
+      if (!unitDraft || unitDraft.dna || unitDraft.readOnly || evolutionPanel.hidden || !isAttributeUnlocked(attributeKey, state.nestLevel, unitDraft.tribe) || unitDraft.slots.length >= slotCapacity()) return;
       if (unitDraft.slots.includes(attributeKey)) return;
       unitDraft.slots.push(attributeKey);
       unitDraft.attributeLevels[attributeKey] ||= 1;

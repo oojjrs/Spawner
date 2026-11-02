@@ -150,6 +150,7 @@ export function resourceHarvestRequirements(cell, world, tribe) {
 }
 
 export function canHarvestResource(cell, world, attributes, tribe) {
+  if (typeof attributes?.dnaGather === "boolean") return attributes.dnaGather && !!cell && cell.kind !== "corpse" && !resourceDefinition(resourceTypeForCell(cell, world))?.harvestLocked;
   const required = resourceHarvestRequirements(cell, world, tribe);
   return required !== null && Object.entries(required).every(([key, count]) => (attributes?.[key] || 0) >= count);
 }

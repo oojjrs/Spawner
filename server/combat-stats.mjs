@@ -63,6 +63,13 @@ export function combatPrimary(agent) {
 }
 
 export function combatProfile(agent) {
+  const dna = agent.stats?.dna;
+  if (dna) {
+    const attackInterval = dna.speed > 0 ? 1 / dna.speed : Infinity;
+    return { primary: dna.power > 0 ? "blade" : null, attackPower: dna.power, defense: dna.armor,
+      armorPenetration: 0, attackSpeed: dna.speed, attackInterval, windup: dna.focus,
+      recovery: Math.max(0, attackInterval - dna.focus - Math.max(0, dna.hits - 1) * dna.comboSpeed) };
+  }
   const base = unitCombatStats(agent.species || agent.tribe);
   const equipped = key => Array.isArray(agent.slots) ? agent.slots.includes(key) : agent.attributes?.[key] > 0;
   const primary = combatPrimary(agent);
@@ -86,6 +93,13 @@ export function combatProfile(agent) {
 export function combatDamage(attacker, target, variation) {
   const source = combatProfile(attacker), defense = combatProfile(target);
   const multiplier = Number.isFinite(variation) ? .8 + .4 * Math.max(0, Math.min(1, variation)) : 1;
+  if (attacker.stats?.dna || target.stats?.dna) {
+    const dna = attacker.stats?.dna, heavy = !dna && attacker.attack?.heavy === true;
+    const armor = Math.max(0, defense.defense - (dna?.penetration || 0)) * (dna ? 1 : 1 - Math.min(.9, source.armorPenetration + (heavy ? .3 : 0)));
+    const power = source.attackPower * (dna ? attacker.attack?.counter ? dna.counterPower / 100 : 1 :
+      (source.primary === "piercing" ? 1.25 : 1) * (heavy ? 1.5 : 1));
+    return Math.max(0, power * multiplier * 100 / (100 + armor) * (1 - (target.stats?.dna?.reduction || 0) / 100));
+  }
   const heavy = attacker.attack?.heavy === true;
   const penetration = Math.min(.9, source.armorPenetration + (heavy ? .3 : 0));
   const power = source.attackPower * (source.primary === "piercing" ? 1.25 : 1) * (heavy ? 1.5 : 1);
@@ -93,6 +107,7 @@ export function combatDamage(attacker, target, variation) {
 }
 
 export function migrateCombatStats(agent) {
+  if (agent.dna || agent.stats?.dna) return;
   const profile = unitCombatStats(agent.species || agent.tribe);
   const combatStrength = profile.combatStrength + (agent.species ? 0 : attributeCombatStrengthBonus(agent.attributes));
   if (agent.stats.combatStrength === combatStrength && agent.stats.health === UNIT_MAX_HEALTH) return;

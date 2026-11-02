@@ -9,5 +9,6 @@ export const UNIT_DISPLAY_SIZES = Object.freeze({
 });
 
 export function unitDisplaySize(unit) {
-  return UNIT_DISPLAY_SIZES[unit.species || unit.tribe || "bean"] || UNIT_DISPLAY_SIZES.bean;
+  const scale=Array.isArray(unit.dna?.pieces)?1+.01*unit.dna.pieces.length:1;
+  return (UNIT_DISPLAY_SIZES[unit.species || unit.tribe || "bean"] || UNIT_DISPLAY_SIZES.bean)*scale;
 }

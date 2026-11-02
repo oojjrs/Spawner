@@ -1,3 +1,4 @@
+import { ATTRIBUTE_DNA } from "./dna.mjs";
 import { CONQUEST_PACING } from "./conquest-pacing.mjs";
 import { TRIBE_UNIT_STATS, ATTRIBUTE_STAT_VALUES } from "./unit-stats.mjs";
 import { tribeTerrainSpeedMultiplier } from "./tribe-environment.mjs";
@@ -145,7 +146,7 @@ export function unitCarryCapacity(agent, resourceType) {
 }
 
 export function unitTravelSpeed(agent, carrying, resourceType) {
-  const base = TRIBE_UNIT_STATS[agent.tribe] || TRIBE_UNIT_STATS.bean;
+  const base = agent.dna ? agent.stats : TRIBE_UNIT_STATS[agent.tribe] || TRIBE_UNIT_STATS.bean;
   const load = Math.min(1, Math.max(0, carrying || 0) / Math.max(1, unitCarryCapacity(agent, resourceType) || 1));
   return (agent.stats.speed + (base.loadedSpeed - base.speed) * load) * (agent.stats.movementMultiplier ?? 1);
 }
@@ -166,5 +167,6 @@ const tribeBirthCosts = Object.freeze({
 
 export function birthCost(template, tribe) {
   const costs = tribeBirthCosts[tribe || template.tribe] || tribeBirthCosts.bean;
+  if (template.dna) return costs[0] + ATTRIBUTE_DNA.price(template.dna.pieces);
   return costs[template.slots.length] ?? Infinity;
 }
