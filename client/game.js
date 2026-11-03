@@ -7772,12 +7772,13 @@
       updateUnitDesign();
     });
     function dnaDesignValid(dna) {
-      const model = Spawner.ATTRIBUTE_DNA;
-      return !!model.validate(dna) && model.trace(dna.pieces, state.nestLevel).valid && model.price(dna.pieces) <= state.evolutionPoints;
+      return !!Spawner.validateDna(dna, state.nestLevel, state.evolutionPoints);
     }
     function updateDnaDesign() {
       combatPrimaryRow.hidden = true;
       designDnaEditor.context(state.nestLevel, state.evolutionPoints, unitDraft.readOnly || !!state.ending);
+      unitDraft.dna.level = state.nestLevel;
+      unitDraft.dna.budget = state.evolutionPoints;
       if (!unitDraft.nameEdited && !unitDraft.readOnly) designName.value = Spawner.suggestTemplateName(unitDraft.slots, state.templates, unitDraft.id);
       document.getElementById("design-preview-image").style.setProperty("--dna-scale", String(1 + unitDraft.dna.pieces.length * .01));
       const stats = Spawner.dnaUnitStats(unitDraft.dna);
@@ -8176,7 +8177,10 @@
       designSlots.closest(".design-slot-group").hidden = !!unitDraft.dna;
       designDnaHost.hidden = !unitDraft.dna;
       document.getElementById("design-preview-image").style.removeProperty("--dna-scale");
-      if (unitDraft.dna) designDnaEditor.load({ ...Spawner.cloneDna(unitDraft.dna), budget: state.evolutionPoints, level: state.nestLevel }, unitDraft.readOnly || !!state.ending);
+      if (unitDraft.dna) {
+        designDnaEditor.context(state.nestLevel, state.evolutionPoints, unitDraft.readOnly || !!state.ending);
+        designDnaEditor.load(unitDraft.dna, unitDraft.readOnly || !!state.ending);
+      }
       designSave.closest(".design-footer").hidden = !!readOnly;
       closeCodex(false);
       designName.setCustomValidity("");

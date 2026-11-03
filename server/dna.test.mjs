@@ -23,9 +23,9 @@ function design(ids, level) {
   return {version:3,pieces,level,budget:10000};
 }
 
-function fixture(level) {
+function fixture(level, tribe) {
   const occupiedCells=new Set(["1,0","2,0","3,0","0,1","1,1","2,1","3,1","4,1","0,2","1,2","2,2","3,2","4,2","0,3","1,3","2,3","3,3","4,3","1,4","2,4","3,4"]);
-  const colony={id:1,ownerId:"dna-test",x:40,y:40,tribe:"bean",occupiedCells};
+  const colony={id:1,ownerId:"dna-test",x:40,y:40,tribe:tribe||"bean",occupiedCells};
   const environment={simSeconds:0,world:{seed:13,terrain:new Uint8Array(320*320).fill(4),hazards:new Uint8Array(320*320)},colonies:[colony],games:new Map(),food:new Map(),foodSpots:new Map()};
   const game=createGame(environment,colony);environment.games.set(colony.ownerId,game);
   const saved=JSON.parse(game.save());saved.state.evolutionPoints=10000;saved.state.nestLevel=level;game.restore(JSON.stringify(saved));
@@ -45,6 +45,47 @@ test("DNA 명령은 포인트·등급·형태 위조를 거부하고 현재 판 
   const {game}=fixture(1),before=game.snapshot().templates.length;
   assert.throws(()=>game.command({type:"design",templateId:null,name:"위조",dna:forged,birth:false}),/설계 속성/);
   assert.equal(game.snapshot().templates.length,before);
+});
+
+test("실제 둥지 성장으로 DNA 등급을 열고 저장된 높은 레벨로 설계·탄생·복제를 우회하지 못한다",()=>{
+  const {game}=fixture(1);
+  for (const [level,gene] of [[2,"power"],[3,"combo"],[4,"parry"]]) {
+    const dna=design([gene],4);
+    assert.throws(()=>game.command({type:"design",templateId:null,name:gene,dna,birth:false}),/설계 속성/);
+    game.command({type:"upgrade"});
+    assert.equal(game.snapshot().nestLevel,level);
+    const {templateId}=game.command({type:"design",templateId:null,name:gene,dna,birth:false});
+    assert.equal(game.snapshot().templates.find(item=>item.id===templateId).dna.level,level);
+    const {agentId}=game.command({type:"birth",templateId});
+    const saved=JSON.parse(game.save());
+    saved.state.nestLevel=level-1;
+    game.restore(JSON.stringify(saved));
+    const points=game.snapshot().evolutionPoints,count=game.agents.length;
+    assert.throws(()=>game.command({type:"birth",templateId}),/설계를 수정/);
+    assert.throws(()=>game.command({type:"birth",agentId}),/설계를 수정/);
+    assert.equal(game.snapshot().evolutionPoints,points);
+    assert.equal(game.agents.length,count);
+    assert.deepEqual(game.agents.find(item=>item.id===agentId).dna.pieces,dna.pieces);
+    saved.state.nestLevel=level;
+    game.restore(JSON.stringify(saved));
+  }
+});
+
+test("같은 DNA는 네 종족 모두 기본비 3포인트로 저장하고 실제 탄생 비용을 차감한다",()=>{
+  const dna=design(["gather","health"],1);
+  for(const tribe of ["bean","spring","pebble","spore"]) {
+    assert.equal(birthCost({dna:design([],1)},tribe),3,tribe);
+    assert.equal(birthCost({dna},tribe),34,tribe);
+    assert.equal(birthCost({dna,tribe}),34,tribe);
+    const {game}=fixture(1,tribe),saved=JSON.parse(game.save());
+    saved.state.agents=[];game.restore(JSON.stringify(saved));
+    const points=game.snapshot().evolutionPoints;
+    const {templateId}=game.command({type:"design",templateId:null,name:"공통 일꾼",dna,birth:false});
+    assert.equal(game.snapshot().evolutionPoints,points,tribe);
+    const {agentId}=game.command({type:"birth",templateId});
+    assert.equal(game.snapshot().evolutionPoints,points-34,tribe);
+    assert.equal(game.agents.find(agent=>agent.id===agentId).cost,34,tribe);
+  }
 });
 
 test("DNA 저장·탄생·수정·복제·복원은 원본 개체의 서열과 실험 스탯을 보존한다",()=>{

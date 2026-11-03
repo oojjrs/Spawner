@@ -167,6 +167,6 @@ const tribeBirthCosts = Object.freeze({
 
 export function birthCost(template, tribe) {
   const costs = tribeBirthCosts[tribe || template.tribe] || tribeBirthCosts.bean;
-  if (template.dna) return costs[0] + ATTRIBUTE_DNA.price(template.dna.pieces);
+  if (template.dna) return 3 + ATTRIBUTE_DNA.price(template.dna.pieces);
   return costs[template.slots.length] ?? Infinity;
 }

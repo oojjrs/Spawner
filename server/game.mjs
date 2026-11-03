@@ -1727,6 +1727,10 @@ export function createGame(environment, colony, savedGame) {
         if (!required) return null;
         throw new Error("파괴된 둥지에서는 개체를 생산할 수 없습니다.");
       }
+      if (template.dna && !validateDna(template.dna, state.nestLevel, state.evolutionPoints)) {
+        if (!required) return null;
+        throw new Error("현재 둥지의 슬롯 수와 사용 가능한 속성에 맞춰 설계를 수정해 주세요.");
+      }
       if (!template.dna && (template.slots.length > slotCapacity() || new Set(template.slots).size !== template.slots.length || template.slots.some(key => !ATTRIBUTES.some(attribute => attribute.key === key)))) {
         throw new Error("현재 둥지의 슬롯 수와 사용 가능한 속성에 맞춰 설계를 수정해 주세요.");
       }
