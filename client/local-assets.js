@@ -530,5 +530,8 @@ globalThis.SpawnerLocalAssetFiles = Object.freeze([
   "./client/local-assets/Units/Parts/strength-2.png.js",
   "./client/local-assets/Units/spiny-back-beetle.png.js",
   "./client/local-assets/Units/starter-sprout-bean.png.js",
-  "./client/local-assets/evolution-point-symbol.png.js"
+  "./client/local-assets/evolution-point-symbol.png.js",
+  "./client/local-assets/Combat/grassland.webp.js",
+  "./client/local-assets/Combat/forest.webp.js",
+  "./client/local-assets/Combat/riverbank.webp.js"
 ]);

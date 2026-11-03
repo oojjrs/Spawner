@@ -1,3 +1,122 @@
+## 전투 뷰어 관련 메모리 포함 로컬 커밋 범위 확정 · 01a1a155
+
+- 기록 ID: combat-viewer-local-commit-scope-20261103-01a1a155. 기록·마지막 근거 확인 시각: 2026-11-03T22:10:08+09:00. 기록자·범위분리판단 Codex /root, 메모리기록·로컬커밋결정주체 사용자. 출처 현재채팅01a1a155-d06b-7243-b396-e5c947a4714e,H:/Spawner Windows/PowerShell. 원발언정확시각·턴/항목ID·PC식별불명.
+- 사용자 명시 요청:「메모리 기록, 커밋까지 해놔」. 직전완료한지형별상세뷰어/실제유닛크기적용범위의관련코드·자산·이채팅메모리를같은로컬커밋에포함한다. 푸시/배포는요청하지않았다.
+- 범위 조정: 공유작업트리에는다른채팅의DNA/웰컴/피벗·접지/음악/문서변경이있다. 현재HEAD를기준으로combatOpen부터templateDescription직전까지만우리뷰어블록을대입하고CSS의combat-panel블록만대입해후보를구성한다. local-assets.js에는Combat3등록만추가하며배경3webp/대응3file래퍼를포함한다. CodexWorkMemory는HEAD기록을모두보존하고현재채팅의01a1a155기록블록만포함한다. 그밖에현재dirty/미추적·같은파일의다른훙크는미스테이징으로보존한다. 현재공유index는비어있음을확인했다.
+- 근거·동결: 앞서완료한실제교전지형4경우/23종기본크기·DNA확대/PC·모바일/file로딩검수와형식결과를재사용한다. 분리후보는현재작업트리의다른미커밋sprite등록/메타데이터전체를포함하지않으므로앞선시각검수가분리커밋전체의실행검증이었다고주장하지않는다. 기존HEAD의크기계약과optional registrationScale호환을정적으로대조하고최종staged범위·공백·HEAD/index guard확인후커밋한다. 이채팅에서조회한연결Projects0개결과를재사용한다. 실제성공해시는커밋후확인해기록한다.
+
+## 전투 뷰어 반영 마감·동시 변경 보존 확인 · 01a1a155
+
+- 기록 ID: combat-viewer-integration-finish-20261103-01a1a155. 기록·마지막근거확인 시각: 2026-11-03T22:05:05+09:00. 기록자·도구관찰/범위판단 Codex /root, 제품반영결정주체 사용자. 출처 현재채팅01a1a155-d06b-7243-b396-e5c947a4714e,H:/Spawner Windows/PowerShell. 새사용자결정없음·동시변경작성자/원발언시각불명.
+- 실제마감: 제품텍스트6개(game.js/game.css/local-assets.js/Combat의3file래퍼)와메모리의공통형식7개가모두UTF8NoBom/CRLF/OK다. before대비3제품소스국소diff를직접확인했다. 상세뷰어밖game.js약4955의dnaHealEvent중복키에targetId를포함하는2줄변화가before후동시에추가됐음을관찰했으며우리apply스크립트의수정범위가아니다. 해당비소유변화를보존하고전투뷰어초안범위에포함/되돌림/검사확장을하지않는다. 스테이징/커밋없음,실제배경/23종크기/모바일/file성공근거는integration-complete를유지한다.
+
+## 지형별 전투 뷰어·실제 유닛 크기 제품 초안 적용 완료 · 01a1a155 현재 요약
+
+- 기록 ID: combat-viewer-integration-complete-20261103-01a1a155. 기록·마지막 근거 확인 시각: 2026-11-03T22:04:02+09:00. 기록자·구현/실제렌더감수 Codex /root, 초안제품반영주체 사용자. 출처 현재채팅01a1a155-d06b-7243-b396-e5c947a4714e,H:/Spawner Windows/PowerShell. 원발언정확시각·턴/항목ID·PC식별불명. integration-start의미완료상태를이실제결과로갱신하며원기록보존.
+- 실제적용: client/game.js의메인동적combat-panel에승인배경3종을연결했다. 저장한combat.x/y의실제교전셀을사용해forest→숲,ford/shallow/deep/coast및이들에4방향인접한비숲셀→강가,그외→평야다. 강수문/해수구분정보를새로추가하지않고현재노출된지형코드로물가를대응한다. 전멸후에도마지막교전좌표/배경을유지한다. 산·습지별추가배경은현재범위없어평야fallback이다.
+- 크기/renderer: client/game.css에본PC1280x800/전장약1200x560구도를제품적용했다. unitDisplayScales/unitDisplayScale·UNIT_DISPLAY_SIZES의종별실제비율을재사용하고DNA개체는unitDisplaySize의조각당1%체형계약과기존외형정규화를적용한다. 전체참가자의최대크기를기억해한전투내같은공통cell배율로fit하고종별크기를같게맞추지않는다. player는기존drawAgentAppearanceBody,중립은기존실제atlas/등록scale/pivot을사용하며부엉이idle도연결했다. 진영당최대3명/선택과타깃우선/전체로스터유지.
+- 자산·범위: DesignAssets/Combat/grassland.webp·forest.webp·riverbank.webp는수용한1774x887/2:1원본에서losslessWebP로변환했다. file용client/local-assets/Combat의대응3webp.js와client/local-assets.js에등록했다. 제품변경은이3원본/3file래퍼/manifest/game.js/game.css와관련메모리뿐이다. Spawner.html/runtime.js/Design/원화sprite/전투규칙/타팀변경은수정하지않고전체build도실행하지않았다. before와변경목록은literal $Trash/combat-viewer-integration-20261103/before·changes.json.
+- 실제검수1: 실제제품소스의관찰hook과worker샘플fixture만임시응답에주입한격리headlessChrome에서평야/숲/여울/인접물가4경우의배경,선택셀이다른곳이어도교전좌표사용,panel1280x800/canvasCSS1200x560.0625/backing1200x560/넘침0을확인했다. 부모가세지형제품PNG를직접열어배경·유닛크기·정보배치를감수했다. 이전미리보기용CSS/좌표/그리기코드응답patch는검수에서사용하지않았다.
+- 실제검수2: 현재제품실제bodyrenderer/atlas를offscreen에래스터해23종의최장변을UNIT_DISPLAY_SIZES×300과독립대조했다. 전종오차0~2px,25조각새싹콩148px/기본118px로1.25배체형계약의래스터오차범위안이다. 처음검사의그늘족제비/흰발은alpha128외곽과기존world크기정의의alpha16차이로10px/18px부족판정이었으며tribe-art.mjs의명시alpha16계약을확인해두종만재측정215/216·432/432로통과했다. 제품수치를검사에맞춰바꾸지않고원실패qa-result.json을보존한다. 나머지성공종은재실행하지않았다. 애니전프레임·모든DNA조합·전투밸런스검증으로확대하지않는다.
+- 실제검수3: 10명fixture의표시6명/진영각3명/선택·타깃포함,전투종료후배경유지,HTTP pageerror/consoleerror0,실제file Spawner초기화와3개data:image/webp 배경decode1774x887을확인했다. 모바일390x844에서첫검수의auto-grid가824px높이에불필요한빈공간을만든것을PNG로발견해해당CSS만height:max-content/align-content:start로교정했다. 모바일만재검수해panel370x392.21875/canvas344x160.53125/backing344x161/문서·패널가로넘침0/JS오류0을확인했고부모가최종PNG를직접감수했다. 통과한PC/종별크기/file검사는반복하지않았다.
+- 산출물·근거: D:/.codex/visualizations/2026/11/03/01a1a155-d06b-7243-b396-e5c947a4714e/combat-applied-grassland.png·combat-applied-forest.png·combat-applied-riverbank.png·combat-applied-mobile.png. 임시apply.mjs/qa.mjs/qa-resume.mjs/qa-mobile.mjs와qa-result.json(원실패)/qa-resume-result.json(성공)/qa-mobile-result.json(최종모바일)은프로젝트literal $Trash/combat-viewer-integration-20261103. 각실행finally에서독립browser/server종료. 새game.js와manifest구문검사/배경3실측은성공했으며공통형식·국소diff마감은직후결과를따른다.
+- 완료상태: 요청한제품초안반영과필요한실제표시검수를완료했다. 스테이징·커밋·푸시·게시없고사용자desktop/browser/Codexsidepanel제어없음. 기존열린게임은새로고침해야새소스와file자산목록을읽는다. 관련없는dirty파일과병행메모리기록보존.
+
+## 지형별 전투 뷰어 실제 적용 착수 · 01a1a155 현재 요약
+
+- 기록 ID: combat-viewer-integration-start-20261103-01a1a155. 기록·마지막 근거 확인 시각: 2026-11-03T21:53:11+09:00. 기록자·구현판단 Codex /root, 제품초안반영주체 사용자. 출처 현재채팅01a1a155-d06b-7243-b396-e5c947a4714e,H:/Spawner Windows/PowerShell. 원발언정확시각·턴/항목ID·PC식별불명.
+- 사용자 명시 요청: 평야·숲·강가 배경을 실제 교전 셀 지형에 맞게 상세뷰어에 적용하고, 본 미리보기의 뷰어크기를 유지하며 실제 유닛 크기를 반영한 초안을 제품에 반영한다. 기존 후보단계를 제품구현승인으로 확대하지만 Git완료/게시승인은없다.
+- 구현판단: PC1280x800/전장1200x560에맞추고좁은viewport만축소한다. 교전combat.x/y를유지하여셀forest는숲,ford/수면/해안및인접물가는강가,나머지는평야로연결한다. 개체가사망해도마지막교전셀배경을유지한다. 실제UNIT_DISPLAY_SIZES와기존world sprite정규화/외형보정및DNA조각수체형계약을사용하며유닛마다임의크기를주지않는다. 큰개체포함/viewport제약에서는전군공통fit으로상대비율을보존한다.
+- 범위: client/game.js의상세뷰어구간/client/game.css해당구간과3개accepted배경의losslessWebP설치·file용3localasset등록·관련메모리만변경한다. 기존dirty/병행welcome/DNA/전투수치/원본sprite/runtime/Spawner/Design보존,전체build없음. before는literal $Trash/combat-viewer-integration-20261103/before. 실제적용·렌더검수결과는완료후갱신한다.
+
+## 숲·강가 배경 병렬 제작·같은 실제 유닛 미리보기 완료 · 01a1a155 현재 요약
+
+- 기록 ID: combat-forest-riverbank-parallel-complete-20261103-01a1a155. 기록·마지막 근거 확인 시각: 2026-11-03T21:42:39+09:00. 기록자·최종PNG직접감수 Codex /root, 평야방향수용·추가제작주체 사용자, 실제생성 forest_background/riverbank_background(gpt-6.1-sol low). 출처 현재채팅01a1a155-d06b-7243-b396-e5c947a4714e,H:/Spawner Windows/PowerShell. 원발언정확시각·턴/항목ID·PC식별불명. parallel-start의생성/검수진행중상태를이실제완료결과로갱신하며원기록보존.
+- 실제제작: 요청한모델의두워커가평야원본을각자내장image_gen edit1회씩병렬편집해숲/강가배경1장씩만들었다. 두배경모두1774x887/정확2:1/sRGB이며재생성/리사이즈없이사용했다. 부모가원본PNG2개를직접열어같은낮은측면시점·그림체·평탄지면을확인했다. 숲은후경과양끝나무/옅은canopy,강가는후경수평강/넓은마른강둑으로구분된다. 지정6자리·중앙전투공간에큰장애물·수면없고배경자체의유닛/UI/글자없다.
+- 사용자배경: D:/.codex/visualizations/2026/11/03/01a1a155-d06b-7243-b396-e5c947a4714e/combat-forest-v1.png 및combat-riverbank-v1.png. 프로젝트원본사본은H:/Spawner/$Trash/combat-background-draft-20261103/forest-v1/combat-forest-v1.png 및riverbank-v1/combat-riverbank-v1.png. 기본생성원본도보존: 숲 D:/.codex/generated_images/01a1a16a-182e-7983-a7a8-a750bd76753d/exec-f45e5a25-69c8-4967-a559-be39a53bcc74.png;강가 D:/.codex/generated_images/01a1a16a-921d-7c02-9ece-0e1898129cea/exec-5419b9d0-a587-486c-9ec8-008ef3b06610.png.
+- 실제뷰어합성: 부모가이전격리캡처스크립트복사본render-biome-viewers.mjs로현재메인게임UI와실제6종을다시렌더했다. 유닛canvas레이어를고정·보존한채CSS배경만교체했으며숲/강가각unitLayerPreserved=true. panel1280x800/전장CSS와backing1200x560일치·참가자6명·진영HP258/221·panelOverflow=false·pageerror/consoleerror0. 이전평야샷과프레임/HP가동일하다는주장은아니며이번두지형간유닛레이어는동일하다. 새imagegen미리보기호출없음.
+- 사용자미리보기: 같은시각화폴더combat-forest-viewer-v1.png와combat-riverbank-viewer-v1.png(각1280x800). 부모가두PNG를직접열어기존6종배치·접지면·배경식별·체력/선택링/정보/게이지/전체로스터·글자잘림없음을확인했다. 임시capture/스크립트·combat-biome-unit-layer.png·biome-viewer-preview-result.json은프로젝트literal $Trash/combat-background-draft-20261103에있으며독립server/browser는finally종료했다.
+- 완료범위·다음: 요청한숲/강가2종배경제작과같은구도실제유닛미리보기를완료했다. 평야원본/제품코드/Design/전투규칙/Git완료/게시변경없음. 실제게임설치는미수행한후보단계이며최종지형연결은후속요청범위다. 마감은이번메모리/새임시스크립트공통형식과해당기록국소diff로한정한다.
+- 최종프롬프트(숲,내장image_gen edit target=combat-plain-v1.png,원문):
+
+Use case: style-transfer.
+Asset type: one actual source/candidate raster background for SPAWNER's 2D creature battle viewer.
+Input image 1 is the EDIT TARGET: the approved empty grassland battlefield. Edit this original image into a FOREST CLEARING background, keeping its exact 2:1 landscape framing, low oblique side-facing camera, ground-plane perspective, ground height, soft matte hand-painted brushwork, subdued contrast and rounded storybook forms. Preserve the broad continuous level walkable meadow floor and the same feeling of distance; change the environment rather than inventing a different camera or battle arena.
+Replace the distant hills and much of the open sky with a temperate broadleaf forest around the REAR perimeter and the far left/right edges: rounded muted sage/olive tree crowns, simple softly painted brown trunks, layered airy desaturated green foliage and sparse low shrubs. A light partial canopy can touch the upper edge. Make it unmistakably a forest clearing, but with diffuse pleasant daylight, open breathing room and readable soft depth, never a dark tunnel. No dramatic sunbeams.
+The central 70% width must remain an expansive uninterrupted low-detail battle surface of very short subdued green grass and lightly compacted earth. All creature staging zones must be empty, with no trunks, roots, rocks, bushes, tall grass or large leaves: left front foot position at image x=.39,y=.76; left rear x=.20,y=.58; left bottom x=.21,y=.88; and their right-side mirrors x=.61/.80/.79 at the same heights. These coordinates are invisible staging instructions, DO NOT draw markers, characters or shadows for them. Keep calm middle-ground color behind the future bodies as well. Trees stay BEHIND the battle plane and at the outermost edges, never between the opposing teams. No central path, pedestal, circular arena, enclosing rock ring or water.
+Match the original's painterly soft green contour accents, modest texture and natural low-to-medium saturation. Forest values may be subtly cooler than the original grassland, while retaining sufficient brightness and contrast for cream-green mushroom, plant and colorful beetle sprites. No fluorescent green, photorealism, 3D render or pixel art.
+Output exactly one empty uninterrupted opaque forest background. No people, animals, creatures, units, UI, frame, border, lettering, labels, logo or watermark. Preserve exact 2:1 aspect ratio. Keep the defining forest and usable floor within the inner 90% so slight vertical cropping for a 1200x560 display remains safe.
+
+- 최종프롬프트(강가,내장image_gen edit target=combat-plain-v1.png,원문):
+
+Use case: style-transfer.
+Asset type: one actual production-candidate raster background for SPAWNER's 2D creature combat viewer.
+Input image 1 is the EDIT TARGET: the approved grassland background, 1774 x 887, exactly 2:1. Edit this environment into a RIVERBANK battlefield. Keep its existing camera, framing, perspective, matte hand-painted brushwork, rounded shapes, soft daytime lighting, restrained fine contours and quiet low-contrast value structure. Keep the image exactly 2:1 and keep the same visual scale and ground plane.
+Replace the distant meadow strip with a clearly visible calm horizontal river of muted sage blue-grey water in the BACKGROUND, spanning across the frame around 32-48% of image height, with rounded distant hills and sparse low trees on the far bank. A few tiny reeds and smooth pebbles may occur only at the extreme left and right edges. Water should read clearly yet have subdued reflections and no dazzling highlights.
+The entire foreground and middle combat floor must remain a broad continuous flat DRY grassy-earth riverbank. All creature foot positions must be on dry level unobstructed ground: left front x39% y76%, left back x20% y58%, left bottom x21% y88%, and their mirrored right-side positions x61% y76%, x80% y58%, x79% y88%. Keep generous clear floor around every position. No water, puddles, large rocks, reeds, slopes, cliffs or banks cutting through these positions. Central 70% of width must remain wide spacious quiet low-detail fighting ground with short muted olive/sage grass and natural brown earth, like the input. The river is behind both armies, never a vertical channel separating them.
+Preserve the narrow pale desaturated blue-grey sky, broad gentle landscape value groups and sprite-friendly moderate brightness. The result must look like the same illustrator painted a sister location in the same game. Do not increase contrast, saturation, gloss or environmental detail.
+No units, characters, animals, people, UI, letters, labels, logo, watermark, health bars, fixed character shadows, weapons, buildings, circular arena, borders, split panels, paths into the distance, photorealism, 3D, pixel art, ink-blue water, fluorescent colors or huge reflections. Render exactly one uninterrupted empty usable riverbank background.
+
+## 평야 구도·그림체 수용 후 숲·강가 병렬 제작 · 01a1a155 현재 요약
+
+- 기록 ID: combat-forest-riverbank-parallel-start-20261103-01a1a155. 기록·마지막 근거 확인 시각: 2026-11-03T21:39:08+09:00. 기록자·공통조건판단 Codex /root, 평야평가·추가제작·모델분담결정 사용자. 출처 현재채팅01a1a155-d06b-7243-b396-e5c947a4714e,H:/Spawner Windows/PowerShell. 원발언정확시각·턴/항목ID·PC식별불명.
+- 사용자 명시 결정: 평야+실제6유닛상세뷰어를보고「괜찮네」라평가하고「이 구도랑 그림체 유지해서 숲이랑 강가 배경도 만들어보자. 6.1 솔 low 서브 워커들한테 나눠서 동시에 진행해줘」라고요청했다. 앞선평야확인뒤확대의대기조건을충족하며평야배경/뷰어구도·그림체를유지하는두지형추가제작을승인했다. 게임설치/Git완료권한으로확대하지않는다.
+- 분담: forest_background와riverbank_background를fork none/gpt-6.1-sol/low로각각호출해내장image_gen의평야원본편집으로실제배경1장씩동시에제작한다. 부모는결정기록/최종양쪽검수/같은실제유닛배치미리보기통합담당. 메모리는부모전담,제품파일/Design변경없음.
+- 공통보존: 실제평야원본combat-plain-v1.png(1774x887/2:1)과수용한combat-plain-viewer-v1.png(1280x800/전장1200x560)기준. 낮은사선측면시점/같은지면높이/저채도손그림/넓은중앙빈전투면·양쪽3명배치공간을유지한다. 숲은뒤와양끝의나무/낮은수풀,강가는중후경수평강과넓은마른강둑으로구분하고유닛발밑의장애물/수면을피한다. 실제유닛/UI/글자는배경자체에포함하지않는다.
+- 산출물계획: 현재시각화폴더combat-forest-v1.png와combat-riverbank-v1.png,원본후보는H:/Spawner/$Trash/combat-background-draft-20261103의각자하위폴더로보존한다. 부모가검수후실제유닛레이어로비교미리보기를만들며새imagegen프리뷰는호출하지않는다. 현재생성/검수진행중이며완료·실제크기/경로/프롬프트는결과후갱신한다.
+
+## 평야 배경 실제 유닛 3대3 상세 뷰어 미리보기 완료 · 01a1a155 현재 요약
+
+- 기록 ID: combat-plain-viewer-preview-complete-20261103-01a1a155. 기록·마지막 근거 확인 시각: 2026-11-03T21:34:21+09:00. 기록자·실제PNG감수 Codex /root, 미리보기요청주체 사용자. 출처 현재채팅01a1a155-d06b-7243-b396-e5c947a4714e,H:/Spawner Windows/PowerShell. 원발언정확시각·턴/항목ID·PC식별불명. preview-start의미완료상태를이실제결과로갱신하고원기록보존.
+- 실제 실행: 현재hosting/serve.mjs를임의비점유포트의독립서버로실행하고격리Chrome headless/FHD1920x1080/dpr1에서실제메인게임동적combat-panel과drawAgentAttack/drawCombatCreature를사용했다. page.route응답에서만샘플fixture·제안패널크기·유닛배치/크기·선택링·HP막대를적용하고평야원본을CSS배경cover로연결했다. 실제유닛스프라이트·현재등록geometry/pivot을그대로사용했으며새그림/아트생성은없다.
+- 표시 유닛: 아군 새싹콩/포자버섯/몽돌, 적 가시등 딱정벌레/흙멧돼지/방울두꺼비. 실제worker전투fixture0.7초교전상태의공격포즈/HP를표시했다. 샘플수치/배치는보기용이며사용자저장상태·밸런스검증·제품적용증거가아니다.
+- 결과·부모 직접 확인: panel1280x800/전장CSS1200x560/backing1200x560일치,참가자6명·진영HP246/204·panelOverflow=false·pageerror/consoleerror0. 부모가PNG를직접열어실제6종·평야지면·타격자세·진영별체력색·선택링·하단수치/공격게이지·전체로스터·닫기버튼/글자잘림없음을확인했다. 호버/모바일/전체전투재생을검증했다고확대하지않는다.
+- 사용자 산출물: D:/.codex/visualizations/2026/11/03/01a1a155-d06b-7243-b396-e5c947a4714e/combat-plain-viewer-v1.png(1280x800), 같은폴더combat-plain-viewer-fhd-v1.png(1920x1080). 임시스크립트render-viewer.mjs·원본캡처·viewer-preview-result.json은H:/Spawner/$Trash/combat-background-draft-20261103에보존. 실행finally에서독립browser/server를종료했다.
+- 완료 범위: 요청한평야+실제유닛상세뷰어미리보기를채팅이미지로제시한다. 제품파일/Design/원본아트/전투규칙/다른지형/스테이징·커밋·푸시·배포변경없음. HTML문서/새제품문구를추가하지않고기존실제UI문구만사용했다. 마감은이번임시스크립트/메모리형식과관련기록국소diff확인으로한정한다.
+
+## 평야 배경 위 실제 유닛 상세 뷰어 미리보기 요청 · 01a1a155 현재 요약
+
+- 기록 ID: combat-plain-viewer-preview-start-20261103-01a1a155. 기록·마지막 근거 확인 시각: 2026-11-03T21:31:43+09:00. 기록자·구현판단 Codex /root, 실제유닛미리보기요청 주체 사용자. 출처 현재채팅 01a1a155-d06b-7243-b396-e5c947a4714e, H:/Spawner Windows/PowerShell. 원발언정확시각·턴/항목ID·PC식별불명.
+- 사용자 요청: 생성한 평야 배경에 실제 유닛들을 올려 전투 상세 뷰어가 어떻게 보일지 보여달라고 했다. Codex 판단: 실제 현재 게임의 동적 combat-panel·유닛 renderer·스프라이트를 격리 headless 브라우저에서 사용하고, 요청응답에만 평야배경/제안한1280x800패널·1200x560전장/샘플교전과확대배치를적용해 PNG를 캡처한다. imagegen으로미리보기를재생성하지않는다.
+- 범위: 최근 combat-image-registration-complete의수정된실제geometry·pivot을사용한다. 샘플은실제세종족/중립세유닛의3대3을우선구성한다. 임시스크립트/근거는프로젝트literal $Trash/combat-background-draft-20261103아래,사용자용PNG는현재시각화쓰기루트에보존한다. 제품파일/Design/원본이미지/전투규칙/다른지형/Git완료변경은없다. 실제제품설치나운영교전을캡처한것으로확대하지않는다. 격리headless만사용하고사용자desktop/browser/Codexsidepanel은열거나제어하지않는다.
+
+## 평야 전투 배경 1차안 생성 완료·뷰어 규격 제안 · 01a1a155 현재 요약
+
+- 기록 ID: combat-plain-background-draft-complete-20261103-01a1a155. 기록·마지막 근거 확인 시각: 2026-11-03T21:25:36+09:00. 기록자·이미지 직접 확인 Codex /root, 제작순서·초안위임 주체 사용자, 읽기전용조사 viewer_size/plain_art_direction(gpt-6.1-sol low). 출처 현재 채팅 01a1a155-d06b-7243-b396-e5c947a4714e, H:/Spawner Windows/PowerShell. 원 발언 정확시각·턴/항목 ID·PC 식별 불명. start 기록의 생성 전 상태를 이 실제 결과로 갱신하며 원기록 보존.
+- 실제 결과: built-in image_gen 호출1회로 평야 배경 후보1장을 생성했다. 생성결과가 채팅에 직접 표시됐고 부모가 저채도올리브잔디·먼구릉·넓은중앙지면·양끝작은풀/돌·유닛/UI/글자없음을 확인했다. 생성 요청2048x1024와 달리 실제파일은 ImageMagick identify 기준1774x887/sRGB3채널·정확2:1이며 이 실제 크기를 보고한다.
+- 산출물: 사용자 확인용 D:/.codex/visualizations/2026/11/03/01a1a155-d06b-7243-b396-e5c947a4714e/combat-plain-v1.png, 프로젝트후보 H:/Spawner/$Trash/combat-background-draft-20261103/combat-plain-v1.png. 두 파일은 기본 생성 원본 D:/.codex/generated_images/01a1a155-d06b-7243-b396-e5c947a4714e/exec-56b67d99-0093-47b2-8a37-e30042efd8d0.png에서 그대로 복사했다. 기본 생성 원본은 보존했다.
+- 뷰어 초안(기획제안·제품미적용): FHD 기준 외곽1280x800px/전장1200x560px. 양쪽여백39px+외곽선각1px; 세로는상하여백40px+헤더44px+양진영전황32px+전장560px+하단선택/공격게이지·로스터100px+간격24px=800px. 로스터만필요시스크롤. 좁은화면은 viewport좌우10px여백/약2:1전장/정보세로배치를제안한다. 이는사용자의확정규격이아니다.
+- 메인 renderer와의 구분: client/game.js drawCombatPanel은canvas높이260px도별도로고정하므로후속제품반영시CSS와실제renderer를함께변경해야한다. 현재combat-stage.mjs의실험실샷을메인뷰어설치증거로쓰지않는다. 새배경을실제게임에연결하거나실제패널을확대해검증한것은아니다.
+- 완료·다음: 요청한평야한장과뷰어크기초안을제시한다. 다른지형생성은사용자최신순서대로대기하며평야의그림체/구도피드백후확대한다. 제품코드/Design/다른지형/스테이징·커밋·푸시·배포변경없음. 메모리공통형식·이번기록국소diff마감은직후검사결과를따른다.
+- 최종 생성 프롬프트(내장 image_gen, 원문):
+
+Use case: stylized-concept.
+Asset type: one actual production-candidate raster background for SPAWNER, a cozy hand-painted 2D creature auto-battler's enlarged combat viewer.
+Primary request: create ONE empty temperate GRASSLAND battlefield background, landscape 2:1, target 2048 x 1024. This is source artwork to place animated creature sprites onto later, not a mockup or a comparison board.
+Scene: a broad quiet meadow clearing, muted olive and sage green short grass, subtle natural brown earth showing through the level turf, distant gently rounded green hills and only very sparse far-away tree silhouettes. A narrow pale desaturated blue-grey sky band and soft atmosphere. It must read immediately as open plains rather than forest or river.
+Style: polished 2D hand-painted storybook game environment, simple rounded organic forms, soft brush shading, restrained fine dark-green contour accents, gently textured matte paint. Match small rounded cream-green plant creatures, red-capped mushroom creatures and cartoon beetles with subtle outlines. The environment is deliberately quieter and lower-contrast than the sprites. No photorealism, no 3D render, no pixel art.
+Camera and staging: low oblique side-facing battle-stage view, only slightly looking downward, not aerial/top-down/isometric. Eye-level composition has a soft distant horizon at about 36-40% image height. The foreground is a wide level continuous walkable meadow plane. Ground for the creature feet at approximately 76-80% image height must be perfectly unobstructed, suitable for combatants facing one another from left and right. Reserve the central 70% width as spacious clear low-detail short-grass/earth battle surface; no tall plants or rocks through this central area. Keep enough calm middle-ground behind sprite bodies for readability. Grass height very low compared with the later creature sprites.
+Peripheral detail: small low grass tufts, a few smooth small stones, and at most a few tiny pale wildflowers only at the far left/right and very bottom corners. No huge foreground leaves. A little asymmetry, natural believable meadow depth, no circular arena, no stage pedestal, no tile borders. Broad gentle value groups rather than busy blades of grass.
+Lighting: soft neutral daytime diffuse light, moderate brightness, muted low-to-medium saturation olive/sage, no dramatic yellow rim lighting or fluorescent lime grass, no dense flower garden, no strong black shadows. No fixed shadows for absent combatants.
+Cropping safety: keep all defining geography and usable battlefield within inner 90% of image; top/bottom edges can be cropped a little for a roughly 1200 x 560 display.
+Text: none. No lettering, labels, logo, watermark, UI, borders, health bars, people, creatures, characters, weapons, buildings, paths leading centrally into distance, split panels or extra scenes. Render exactly one uninterrupted usable background image.
+
+## 평야 전투 배경 한 장 우선 제작·뷰어 크기 초안 · 01a1a155 현재 요약
+
+- 기록 ID: combat-plain-background-draft-start-20261103-01a1a155. 기록·마지막 근거 확인 시각: 2026-11-03T21:22:53+09:00. 기록자·초안 판단 Codex /root, 제작순서·위임주체 사용자. 출처 현재 채팅 01a1a155-d06b-7243-b396-e5c947a4714e, H:/Spawner Windows/PowerShell. 원 발언 정확 시각·턴/항목 ID·PC 식별 불명.
+- 사용자 명시 요청: GPT-6.1 Sol low 서브 워커들을 동원해 여러 지형 배경과 전투 셀 돋보기로 여는 상세 viewer의 크기 초안을 맡겼다. 직후「평야부터 하나 만들어보고 나머지 하자」로 순서를 좁혔다. 이에 실제 생성은 평야 한 장부터 진행하고 다른 지형 제작은 평야 확인 뒤로 미룬다. 앞선 combat-detail-terrain-background-requirement의 기억만 하는 범위를 이번 초안 제작 요청이 확대한다.
+- 분담·도구: 사용자 지정 gpt-6.1-sol/low 워커 viewer_size와 plain_art_direction은 각각 기존 메인 패널 크기/배치와 실제 기존 아트의 스타일을 읽기 전용으로 조사했다. 부모가 built-in image_gen으로 평야 후보 한 장을 생성·직접 확인하며 새 애니메이션은 만들지 않는다.
+- 도구 관찰: 메인 상세viewer는 client/game.js의 동적 dialog.combat-panel이고 client/game.css에서 폭680px/padding16px/canvas높이260px다. combat-stage.mjs는 실험실 쪽이므로 메인 viewer 설치와 구분한다. 평야 타일은 저채도 어두운 올리브, 기존 유닛은 둥근 형태·붓 음영·얇은 진한 윤곽이다. origin은 https://github.com/oojjrs/Spawner이고 연결 ProjectsV2 조회 결과0개다.
+- Codex 초안(사용자 세부 확정 전): FHD를 기준으로 PC패널 약1280x800px, 전장 약1200x560px, 원본 배경2:1을 제안한다. 낮은 사선 측면 시점·지평선40%·발 접지75~80%·중앙70%의 평탄한 빈 지면·저채도올리브/세이지·양끝 소량풀과돌로 구성한다. 실제 제품 크기/코드를 변경한 것은 아니다.
+- 상태·범위: 평야 후보 생성은 착수 전이며 실제 산출물·생성경로·검수결과는 완료 후 별도 갱신한다. Design.html/제품코드/다른지형/스테이징·커밋·푸시·배포는 이번 초안 단계에서 변경하지 않는다. 현재 쓰기루트가 시각화경로로 제한되어 H메모리·프로젝트의 literal 임시폴더 보존은 필요한 작업별 require_escalated로만 실행한다.
+
+## 전투 상세 화면 지형별 배경 샷 요구 · 01a1a155 현재 요약
+
+- 기록 ID: combat-detail-terrain-background-requirement-20261103-01a1a155. 기록·마지막 근거 확인 시각: 2026-11-03T21:17:11+09:00. 기록자 Codex /root, 요구·결정 주체 사용자. 출처 현재 채팅 01a1a155-d06b-7243-b396-e5c947a4714e, 작업 환경 H:/Spawner Windows/PowerShell. 원 발언 정확 시각·턴/항목 ID·PC 식별 불명.
+- 사용자 요구(현재 유효): 변경하기로 한 전투 연출을 상세 보기로 별도 열었을 때 배경으로 사용할 이미지 샷들도 준비해야 한다. 실제 교전 지형의 평야·숲·강가 등의 차이를 반영하고, 배경 하나만 반복되는 어색함을 피할 수 있는 소수의 여러 배경을 원한다. 많은 수량은 필요하지 않다. 최종 지형 목록·장수·제작 규격은 아직 정하지 않았다.
+- 연계 근거: rpg-combat-proposal-01a19be0와 rpg-combat-local-complete-01a19be0의 같은 실시간 교전을 보여주는 별도 확대 패널 기획·로컬 구현 기록에 추가되는 배경 아트 요구다. 배경 자산의 생성·연결 완료로 기록하지 않는다.
+- 이번 범위·상태: 기억해두라는 요청에 따라 이 요구만 작업 메모리에 보존한다. 이미지 생성·제품 코드·Design.html 수정·보드 변경·Git 완료·배포는 실행하지 않는다. 후속 배경 제작 시 교전 지형 대응과 소수 변형 준비를 작업 범위에 포함한다.
+
 ## 유닛표·티어페이지 로컬 커밋 범위 분리 결정 · 01a1a0e9
 
 - 기록 ID: neutral-tier-local-commit-scope-20261103-01a1a0e9. 기록 시각: 2026-11-03T22:09:51+09:00. 기록자·후보합성 Codex /root/unit_stat_images, 분리판단·검수 부모 /root, 로컬커밋승인 사용자. 출처 현재채팅01a1a0e9-2e09-7703-a7f5-613c21744e11의「메모리에 기록할 거 있음 하고, 커밋은 해놔」및부모승격Git확인보고, H:/Spawner Windows/PowerShell. 원발언시각·턴ID불명.

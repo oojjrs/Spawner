@@ -968,18 +968,27 @@
 .combat-unit-stats { font-size:12px; line-height:1.7; overflow-wrap:anywhere; }
 .combat-open { position:fixed; right:16px; top:90px; z-index:35; padding:10px 16px; color:#fff1ce; background:#27433a; border:1px solid #8dbd9f; border-radius:8px; }
 .combat-open[hidden] { display:none; }
-.combat-panel { box-sizing:border-box; width:min(680px,calc(100vw - 20px)); max-width:calc(100vw - 20px); max-height:calc(100dvh - 20px); overflow:auto; padding:16px; background:#162822; color:#f7eed5; border:1px solid #8cae91; border-radius:12px; }
+.combat-panel { box-sizing:border-box; width:min(1280px,calc(100vw - 20px)); height:min(800px,calc(100dvh - 20px)); max-width:calc(100vw - 20px); max-height:calc(100dvh - 20px); overflow:hidden; padding:20px 39px; background:#162822; color:#f7eed5; border:1px solid #8cae91; border-radius:12px; box-shadow:0 24px 90px #0009; }
+.combat-panel[open] { display:grid; grid-template-rows:44px 32px minmax(0,1fr) 24px 8px 44px; row-gap:9.2px; }
 .combat-panel::backdrop { background:#06100dcc; }
-.combat-panel header { display:flex; justify-content:space-between; align-items:center; gap:12px; }
-.combat-panel h2 { margin:0; font-size:20px; }
+.combat-panel header { grid-row:1; display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.combat-panel h2 { margin:0; font-size:24px; }
 .combat-panel button { padding:8px 12px; border:1px solid #6b8d7b; border-radius:6px; background:#294439; color:#fff1cd; }
-.combat-panel canvas { display:block; width:100%; height:260px; margin:12px 0; border-radius:8px; background:radial-gradient(ellipse,#4a4d35,#20372b); }
-.combat-summary { margin-top:12px; font-size:13px; line-height:1.7; overflow-wrap:anywhere; }
-.combat-roster { display:flex; flex-wrap:wrap; gap:6px; }
-.combat-roster button { max-width:100%; overflow-wrap:anywhere; }
+.combat-panel header button { min-width:64px; min-height:44px; }
+.combat-panel canvas { grid-row:3; display:block; width:100%; height:100%; min-height:0; margin:0; border-radius:8px; background:#344735 center/cover no-repeat; }
+.combat-summary { grid-row:2; margin:0; align-self:center; font-size:15px; line-height:1.7; overflow-wrap:anywhere; }
+.combat-roster { grid-row:6; display:flex; min-width:0; overflow-x:auto; gap:8px; }
+.combat-roster button { flex:1; min-width:max-content; white-space:nowrap; }
 .combat-roster button[aria-pressed=true] { border-color:#ffe4a1; color:#ffe4a1; }
-.combat-panel p { line-height:1.7; font-size:13px; overflow-wrap:anywhere; }
-.combat-panel progress { width:100%; height:12px; accent-color:#e5c778; }
+.combat-panel p { grid-row:4; min-width:0; margin:0; align-self:center; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; line-height:1.7; font-size:14px; }
+.combat-panel progress { grid-row:5; width:100%; height:8px; margin:0; accent-color:#e5c778; }
+@media (max-width:700px) {
+  .combat-panel { height:max-content; padding:12px; overflow:auto; align-content:start; }
+  .combat-panel[open] { grid-template-rows:44px auto auto auto 8px 44px; row-gap:8px; }
+  .combat-panel canvas { height:auto; aspect-ratio:15/7; }
+  .combat-panel p { white-space:normal; overflow:visible; }
+  .combat-summary { font-size:13px; }
+}
 .evolution-panel.has-dna-editor { width:min(1360px,calc(100vw - 24px)); height:min(920px,calc(100dvh - 24px)); padding:18px; }
 .has-dna-editor .design-body { flex:1; min-height:0; display:grid; grid-template-columns:190px minmax(0,1fr); gap:18px; }
 .has-dna-editor .design-preview { min-width:0; overflow:hidden; background:radial-gradient(ellipse at 50% 35%,#314b39,#14271f 72%); border:1px solid var(--line); border-radius:12px; padding:18px 12px; }

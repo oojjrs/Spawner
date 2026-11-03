@@ -7857,6 +7857,11 @@
     combatHeader.append(combatHeading, combatClose);
     const combatSummary = document.createElement("div");
     combatSummary.className = "combat-summary";
+    const combatBackgrounds = Object.freeze({
+      grassland: assetSource("DesignAssets/Combat/grassland.webp"),
+      forest: assetSource("DesignAssets/Combat/forest.webp"),
+      riverbank: assetSource("DesignAssets/Combat/riverbank.webp")
+    });
     const combatCanvas = document.createElement("canvas");
     combatCanvas.setAttribute("aria-label", "전투 중인 유닛");
     const combatRoster = document.createElement("div");
@@ -7880,7 +7885,7 @@
     combatOpen.addEventListener("click", () => {
       const units = selectedCombatUnits();
       if (!units.length) return;
-      combatWatch = { id: units[0].combat.id, summary: "" };
+      combatWatch = { id: units[0].combat.id, x: units[0].combat.x, y: units[0].combat.y, summary: "" };
       combatSelected = String(units[0].id);
       combatReturnFocus = document.activeElement;
       stopMapMovement();
@@ -7913,6 +7918,25 @@
       const event = agent.combat.lastEvent;
       return relevant(event) ? event : null;
     }
+    function combatBackgroundAt(x, y) {
+      if (!Number.isFinite(x) || !Number.isFinite(y)) return "grassland";
+      const terrain = terrainAt(x, y);
+      if (terrain === "forest") return "forest";
+      const water = type => ["ford", "shallow", "deep", "coast"].includes(type);
+      if (water(terrain) || [[-1,0],[1,0],[0,-1],[0,1]].some(offset => water(terrainAt(x + offset[0], y + offset[1])))) return "riverbank";
+      return "grassland";
+    }
+    function combatUnitScale(agent) {
+      if (!Array.isArray(agent.dna?.pieces)) return unitDisplayScale(agent);
+      const tribe = agent.tribe || "bean", kind = agent.species || tribe;
+      const base = unitDisplayScales.get(kind) || 1;
+      const growth = Spawner.unitDisplaySize(agent) / (Spawner.UNIT_DISPLAY_SIZES[kind] || Spawner.UNIT_DISPLAY_SIZES.bean);
+      if (agent.species) return base * growth;
+      const attributes = agent.appearanceAttributes || agent.attributes || {};
+      const key = "dna:" + tribe + ":" + growth + ":" + agentAppearanceKey(attributes);
+      if (!unitAttributeScales.has(key)) unitAttributeScales.set(key, measureUnitDisplayScale(tribe, attributes, growth) || base * growth);
+      return unitAttributeScales.get(key);
+    }
     function drawCombatCreature(context, agent, x, floor, height) {
       if (agent.species === "spiny-back-beetle") {
         const pose = Spawner.beetleAnimationPose(agent, state.simSeconds);
@@ -7920,7 +7944,7 @@
         const shape = attack ? Spawner.BEETLE_ATTACK_SPRITE : Spawner.BEETLE_SPRITE;
         const sprite = attack ? beetleAttackSheet : beetleSheet;
         if (!sprite.complete || !sprite.naturalWidth) return false;
-        const size = height * shape.scale;
+        const size = height * shape.scale * (shape.registrationScale || 1);
         context.save(); context.translate(x, floor);
         if (shape.facing === "right" ? agent.facing < 0 : agent.facing > 0) context.scale(-1, 1);
         context.drawImage(sprite, pose.frame % shape.columns * shape.frameSize, Math.floor(pose.frame / shape.columns) * shape.frameSize,
@@ -7930,11 +7954,11 @@
       const hurt = Spawner.creatureHurtPose(agent, state.simSeconds);
       const attack = Spawner.creatureAttackPose(agent, state.simSeconds);
       const pose = hurt || attack;
-      const entry = hurt ? creatureHurtSheets.get(agent.species) : attack ? creatureAttackSheets.get(agent.species) : creatureIdleSheets.get(agent.species);
+      const entry = hurt ? creatureHurtSheets.get(agent.species) : attack ? creatureAttackSheets.get(agent.species) : agent.species === "talon-owl" ? { sprite: talonOwlSheet, animation: Spawner.TALON_OWL_IDLE } : creatureIdleSheets.get(agent.species);
       if (!entry?.sprite.complete || !entry.sprite.naturalWidth) return false;
       const animation = pose?.animation || entry.animation;
       const frame = pose?.frame ?? Spawner.unitAnimationFrame(animation, (state.simSeconds - (agent.animationStartedAt || 0)) * 1000);
-      const size = height * (agent.species === "talon-owl" ? Spawner.TALON_OWL_IDLE.scale : 1.4 * entry.scale) * (attack && !hurt ? animation.frameSize / animation.viewSize : 1);
+      const size = height * (agent.species === "talon-owl" ? Spawner.TALON_OWL_IDLE.scale : 1.4 * entry.scale) * (attack && !hurt ? animation.frameSize / animation.viewSize : 1) * (animation.registrationScale || 1);
       context.save(); context.translate(x, floor);
       if (attack && !hurt ? attack.mirrorX : agent.facing > 0) context.scale(-1, 1);
       context.drawImage(entry.sprite, frame % animation.columns * animation.frameSize, Math.floor(frame / animation.columns) * animation.frameSize,
@@ -7942,7 +7966,7 @@
       context.restore(); return true;
     }
     function combatArenaUnits(units, selected) {
-      if (units.length <= 6) return units;
+      if ([0, 1].every(side => units.filter(agent => agent.combat.side === side).length <= 3)) return units;
       const target = selected && units.find(agent => String(agent.id) === String(selected.attack?.targetId ?? selected.combat.targetId));
       return [0, 1].flatMap(side => {
         const priority = [selected, target].filter(agent => agent?.combat.side === side);
@@ -7972,77 +7996,92 @@
       for (const button of combatRoster.children) button.setAttribute("aria-pressed", String(button.dataset.agent === combatSelected));
       const selected = units.find(agent => String(agent.id) === combatSelected);
       const arenaUnits = combatArenaUnits(units, selected);
-      combatHeading.textContent = units.length > 6 ? "전투 · 선택 유닛 중심" : "전투";
+      combatHeading.textContent = units.length > arenaUnits.length ? "전투 · 선택 유닛 중심" : "전투";
       const events = { parry: "패링", block: "방어", stun: "기절", counter: "반격", hit: "타격" };
       const selectedEvent = combatVisualEvent(selected);
       const status = selected?.combat.stunnedUntil > state.simSeconds ? "기절" : selectedEvent && state.simSeconds - selectedEvent.at < .5 && ["parry", "block", "stun"].includes(selectedEvent.kind) ? events[selectedEvent.kind] : selected?.attack?.counter ? "반격" : selected?.attack?.heavy ? "모아 찌르기" : selected?.attack && state.simSeconds < selected.attack.hitAt ? "공격 준비" : selectedEvent && state.simSeconds - selectedEvent.at < .5 ? events[selectedEvent.kind] : "교전 중";
       combatDetail.textContent = selected ? (selected.name || "유닛") + " · " + combatStatsText(selected) + " · " + status : "전투 종료";
       const profile = selected ? Spawner.combatProfile(selected) : null;
       combatGauge.value = selected ? clamp(1 - ((selected.combat.nextAttackAt || state.simSeconds) - state.simSeconds) / profile.attackInterval, 0, 1) : 0;
-      const width = Math.max(1, Math.round(combatCanvas.clientWidth)), height = 260;
+      if (units.length) { combatWatch.x = units[0].combat.x; combatWatch.y = units[0].combat.y; }
+      const background = combatBackgroundAt(combatWatch.x, combatWatch.y);
+      if (combatCanvas.dataset.background !== background) {
+        combatCanvas.dataset.background = background;
+        combatCanvas.style.backgroundImage = "url(" + JSON.stringify(combatBackgrounds[background]) + ")";
+      }
+      const width = Math.max(1, Math.round(combatCanvas.clientWidth)), height = Math.max(1, Math.round(combatCanvas.clientHeight));
       if (combatCanvas.width !== width || combatCanvas.height !== height) { combatCanvas.width = width; combatCanvas.height = height; }
       const context = combatCanvas.getContext("2d");
       context.clearRect(0, 0, width, height);
+      const dimensions = new Map(units.map(agent => {
+        const kind = agent.species || agent.tribe || "bean", scale = combatUnitScale(agent);
+        const bounds = unitDisplayBounds.get(kind), growth = scale / (unitDisplayScales.get(kind) || 1);
+        return [String(agent.id), { scale, width: (bounds?.width || .4) * growth, height: (bounds?.height || .4) * growth }];
+      }));
+      combatWatch.maxWidth = Math.max(combatWatch.maxWidth || .4, ...[...dimensions.values()].map(size => size.width));
+      combatWatch.maxHeight = Math.max(combatWatch.maxHeight || .4, ...[...dimensions.values()].map(size => size.height));
+      const cell = Math.min(width * .31, width * .22 / combatWatch.maxWidth, height * .43 / combatWatch.maxHeight);
       const positions = new Map();
-      [0, 1].forEach(side => arenaUnits.filter(agent => agent.combat.side === side).forEach((agent, index, members) => {
-        const rows = Math.max(3, members.length);
-        positions.set(String(agent.id), { x: width / 2 + (side ? 36 : -36) + Math.sin(index * 2.4) * 10,
-          y: 48 + (index + .5) / rows * 170 + (side ? 8 : -8) });
+      const slots = [{ x:.39, floor:.76 }, { x:.20, floor:.58 }, { x:.21, floor:.88 }];
+      [0, 1].forEach(side => arenaUnits.filter(agent => agent.combat.side === side).forEach((agent, index) => {
+        const slot = slots[index], size = dimensions.get(String(agent.id));
+        positions.set(String(agent.id), { x: width * (side ? 1 - slot.x : slot.x), y: height * slot.floor,
+          scale: size.scale, width: size.width * cell, height: size.height * cell });
       }));
       const target = selected && positions.get(String(selected.attack?.targetId ?? selected.combat.targetId));
       if (target) {
         const source = positions.get(String(selected.id));
-        context.strokeStyle = "#f7da88";
-        context.setLineDash([4, 4]);
-        context.beginPath(); context.moveTo(source.x, source.y); context.lineTo(target.x, target.y); context.stroke();
+        context.strokeStyle = "#f7da88"; context.setLineDash([4, 4]);
+        context.beginPath(); context.moveTo(source.x, source.y - source.height * .5); context.lineTo(target.x, target.y - target.height * .5); context.stroke();
         context.setLineDash([]);
       }
       for (const agent of [...arenaUnits].sort((a, b) => positions.get(String(a.id)).y - positions.get(String(b.id)).y)) {
-        const point = positions.get(String(agent.id));
-        const primary = Spawner.combatPrimary(agent);
-        const attack = agent.attack;
-        const impact = combatVisualEvent(agent);
-        const age = impact ? state.simSeconds - impact.at : Infinity;
+        const point = positions.get(String(agent.id)), primary = Spawner.combatPrimary(agent), attack = agent.attack;
+        const impact = combatVisualEvent(agent), age = impact ? state.simSeconds - impact.at : Infinity;
         const hit = impact && String(impact.targetId) === String(agent.id) && ["hit", "counter", "stun"].includes(impact.kind);
         const opponent = positions.get(String(attack?.targetId ?? agent.combat.targetId));
-        const facing = opponent ? Math.sign(opponent.x - point.x) || (agent.combat.side ? 1 : -1) : agent.combat.side ? 1 : -1;
+        const facing = opponent ? Math.sign(opponent.x - point.x) || (agent.combat.side ? -1 : 1) : agent.combat.side ? -1 : 1;
         const progress = attack ? clamp((state.simSeconds - attack.startedAt) / (attack.endsAt - attack.startedAt), 0, 1) : 0;
         const distance = opponent ? Math.hypot(opponent.x - point.x, opponent.y - point.y) : 0;
-        const lunge = attack && state.simSeconds < attack.endsAt ? Math.sin(progress * Math.PI) * Math.min(30, distance * .28) : 0;
-        const recoil = hit && age >= 0 && age < .16 ? Math.sin(age / .16 * Math.PI) * 7 : 0;
+        const lunge = attack && state.simSeconds < attack.endsAt ? Math.sin(progress * Math.PI) * Math.min(30 * width / 1200, distance * .28) : 0;
+        const recoil = hit && age >= 0 && age < .16 ? Math.sin(age / .16 * Math.PI) * 7 * width / 1200 : 0;
         const directionX = distance ? (opponent.x - point.x) / distance : facing;
         const directionY = distance ? (opponent.y - point.y) / distance : 0;
-        const x = point.x + directionX * (lunge - recoil);
-        const y = point.y + directionY * (lunge - recoil);
-        const size = Math.min(72, width / 4);
+        const x = point.x + directionX * (lunge - recoil), y = point.y + directionY * (lunge - recoil);
+        const bodyY = y - point.height * .5;
         context.save();
-        if (agent.combat.stunnedUntil > state.simSeconds) context.globalAlpha = .65;
+        context.fillStyle = "#13251e3d"; context.beginPath(); context.ellipse(x, y, Math.max(4, point.width * .28), Math.max(2, point.height * .035), 0, 0, Math.PI * 2); context.fill();
         const frozen = hit && age >= 0 && age < .055;
-        const visual = { ...agent, facing, hurtStartedAt: Number.isFinite(agent.hurtStartedAt) ? agent.hurtStartedAt + (frozen ? age : 0) : agent.hurtStartedAt, combat: { ...agent.combat, side: facing > 0 ? 1 : 0 }, attack: attack ? { ...attack, directionX: facing, startedAt: attack.startedAt + (frozen ? age : 0), hitAt: attack.hitAt + (frozen ? age : 0), endsAt: attack.endsAt + (frozen ? age : 0) } : null };
-        if (!(agent.species ? drawCombatCreature(context, visual, x, y + size * .45, size) : drawAgentAttack(context, visual, x, y + size * .45, size, null))) {
-          const sprite = agentSprite(agent);
-          if (sprite && sprite.complete !== false && (sprite.naturalWidth || sprite.width)) context.drawImage(sprite, x - size / 2, y - size / 2, size, size);
-        }
-        context.globalAlpha = 1;
-        context.fillStyle = "#182323"; context.fillRect(x - 20, y + size * .45, 40, 4);
+        const visual = { ...agent, facing, hurtStartedAt: Number.isFinite(agent.hurtStartedAt) ? agent.hurtStartedAt + (frozen ? age : 0) : agent.hurtStartedAt,
+          combat: { ...agent.combat, side: facing > 0 ? 1 : 0 }, attack: attack ? { ...attack, directionX: facing,
+            startedAt: attack.startedAt + (frozen ? age : 0), hitAt: attack.hitAt + (frozen ? age : 0), endsAt: attack.endsAt + (frozen ? age : 0) } : null };
+        context.save(); context.translate(x, y); context.scale(point.scale, point.scale);
+        if (agent.combat.stunnedUntil > state.simSeconds) context.globalAlpha = .65;
+        if (agent.species) drawCombatCreature(context, visual, 0, 0, cell);
+        else drawAgentAppearanceBody(context, now, visual, cell, { x:-cell / 2, y:-cell * (.5 + AGENT_HEIGHT * .44) }, null, null, null);
+        context.restore();
+        const barWidth = clamp(point.width * .6, 32, 100), barY = y + 8;
+        context.fillStyle = "#182323"; context.fillRect(x - barWidth / 2, barY, barWidth, 5);
         context.fillStyle = agent.combat.side ? "#e18c82" : "#83d6c1";
-        context.fillRect(x - 20, y + size * .45, 40 * clamp(agent.health / (agent.stats?.health || 100), 0, 1), 4);
-        if (String(agent.id) === combatSelected) { context.strokeStyle = "#ffe7a5"; context.strokeRect(x - size / 2, y - size / 2, size, size); }
+        context.fillRect(x - barWidth / 2, barY, barWidth * clamp(agent.health / (agent.stats?.health || 100), 0, 1), 5);
+        if (String(agent.id) === combatSelected) {
+          context.strokeStyle = "#ffe7a5"; context.lineWidth = 2; context.beginPath();
+          context.ellipse(x, y, Math.max(7, point.width * .55), Math.max(3, point.height * .055), 0, 0, Math.PI * 2); context.stroke();
+        }
         if (attack && state.simSeconds < attack.hitAt) {
           const progress = clamp((state.simSeconds - attack.startedAt) / (attack.hitAt - attack.startedAt), 0, 1);
           context.strokeStyle = primary === "piercing" ? "#f0b86b" : primary === "carapace" ? "#8edbe1" : "#e7e3b6";
-          context.lineWidth = attack.heavy ? 4 : 2;
-          context.beginPath();
-          if (primary === "piercing") { context.moveTo(x, y); context.lineTo(x + facing * 35 * progress, y); }
-          else context.arc(x, y, size * .4, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * progress);
+          context.lineWidth = attack.heavy ? 4 : 2; context.beginPath();
+          if (primary === "piercing") { context.moveTo(x, bodyY); context.lineTo(x + facing * point.width * .4 * progress, bodyY); }
+          else context.arc(x, bodyY, point.width * .5, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * progress);
           context.stroke();
         }
         if (impact && String(impact.targetId) === String(agent.id) && age >= 0 && age < .25) {
           context.globalAlpha = 1 - age / .25;
           context.strokeStyle = impact.kind === "block" || impact.kind === "parry" ? "#a6e4fa" : "#ffe1a0";
           context.beginPath();
-          if (primary === "piercing") { context.moveTo(x - 22, y); context.lineTo(x + 22, y); }
-          else context.arc(x, y, 14 + age * 30, 0, primary === "carapace" ? Math.PI * 2 : Math.PI);
+          if (primary === "piercing") { context.moveTo(x - 22, bodyY); context.lineTo(x + 22, bodyY); }
+          else context.arc(x, bodyY, 14 + age * 30, 0, primary === "carapace" ? Math.PI * 2 : Math.PI);
           context.stroke();
         }
         context.restore();
