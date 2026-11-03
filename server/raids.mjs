@@ -1,8 +1,8 @@
 import { CONQUEST_PACING } from "./conquest-pacing.mjs";
 import { worldSize } from "./world-size.mjs";
-import { COLONY_RAID_PRESSURE, colonyRaidPressure } from "./raid-pressure.mjs";
+import { COLONY_RAID_PRESSURE, colonyRaidPressure, colonyRaidCadence } from "./raid-pressure.mjs";
 
-export const BEETLE_RAIDS = Object.freeze({ firstAt:CONQUEST_PACING.neutralConflictAt, firstSpread:30, interval:90, intervalSpread:0, defenders:3, concurrent:4 });
+export const BEETLE_RAIDS = Object.freeze({ firstAt:CONQUEST_PACING.neutralConflictAt, firstSpread:30, defenders:3 });
 
 export function createBeetleRaids(environment, state, actions, restoring) {
   const size = worldSize(environment.world), sites = new Map((environment.world.burrows || []).map(burrow => [burrow.id, burrow]));
@@ -131,9 +131,10 @@ export function createBeetleRaids(environment, state, actions, restoring) {
         if (origin?.raidSequence === 0 && approach && !state.agents.some(agent => agent.raid?.colonyId === colony.id))
           cooldown.nextRaidAt = Math.max(cooldown.nextRaidAt, cooldown.opening.arrivalAt - approach.seconds);
       }
-      if (now + 1e-8 < cooldown.nextRaidAt || now < (checks.get(colony.id) || 0)) continue;
+      if (now < BEETLE_RAIDS.firstAt || now + 1e-8 < cooldown.nextRaidAt || now < (checks.get(colony.id) || 0)) continue;
       checks.set(colony.id, now + 5);
-      if (state.agents.filter(agent => agent.health > 0 && agent.raid?.colonyId === colony.id).length >= BEETLE_RAIDS.concurrent) continue;
+      const cadence = colonyRaidCadence(now, cooldown.opening?.pressure);
+      if (state.agents.filter(agent => agent.health > 0 && agent.raid?.colonyId === colony.id).length >= cadence.concurrent) continue;
       let record = origins.get(colony.id);
       if (!record || record.health <= 0) record = source(colony);
       if (!record) continue;
@@ -150,9 +151,7 @@ export function createBeetleRaids(environment, state, actions, restoring) {
       if (now >= agent.moveStartedAt + agent.moveDuration) actions.idle(agent, 0);
       routes.set(agent.id, { phase:"outbound", path:cells, cursor:1, retryAt:now });
       record.raidSequence++;
-      const interval = (cooldown.opening?.interval ?? BEETLE_RAIDS.interval) +
-        actions.noise(site.x + record.raidSequence * 421, site.y - record.raidSequence * 733) * BEETLE_RAIDS.intervalSpread;
-      record.nextRaidAt = now + interval;
+      record.nextRaidAt = now + cadence.interval;
       cooldown.nextRaidAt = record.nextRaidAt;
     }
     for (const id of routes.keys()) if (!state.agents.some(agent => agent.id === id && agent.health > 0 && agent.raid)) routes.delete(id);

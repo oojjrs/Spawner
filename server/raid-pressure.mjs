@@ -1,5 +1,20 @@
 import { nestUpgradeCost } from "./nests.mjs";
 import { birthCost } from "./attributes.mjs";
+import { CONQUEST_PACING } from "./conquest-pacing.mjs";
+
+export const COLONY_RAID_CADENCE = Object.freeze([
+  Object.freeze({ elapsed:0, fastInterval:120, slowInterval:150, concurrent:2 }),
+  Object.freeze({ elapsed:180, fastInterval:90, slowInterval:120, concurrent:3 }),
+  Object.freeze({ elapsed:420, fastInterval:60, slowInterval:90, concurrent:4 })
+]);
+
+export function colonyRaidCadence(seconds, pressure) {
+  const elapsed = seconds - CONQUEST_PACING.neutralConflictAt;
+  const phase = COLONY_RAID_CADENCE.findLast(entry => elapsed >= entry.elapsed) || COLONY_RAID_CADENCE[0];
+  const value = Number.isFinite(pressure) ? Math.max(0, Math.min(1, pressure)) : .5;
+  return { interval:5 * Math.round((phase.slowInterval - value * (phase.slowInterval - phase.fastInterval)) / 5),
+    concurrent:phase.concurrent };
+}
 
 export const COLONY_RAID_PRESSURE = Object.freeze({ openingSeconds:120, nearbySeconds:60, exposedBurrows:2,
   fastInterval:60, slowInterval:120, arrivalGrace:35, slowArrivalGrace:105, fundingGrace:20, maximumArrivalAt:300 });
