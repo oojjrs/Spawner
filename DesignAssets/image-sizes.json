@@ -8016,6 +8016,26 @@
         8,
         4
       ]
+    },
+    "DesignAssets/Welcome/spore-jump.webp": {
+      "display": [
+        368,
+        368
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Welcome/pebble-jump.webp": {
+      "display": [
+        368,
+        368
+      ],
+      "grid": [
+        4,
+        4
+      ]
     }
   }
 }

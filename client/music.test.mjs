@@ -30,7 +30,7 @@ function fixture(blocked) {
   }
   class Audio {
     constructor() { this.volume = 0; this.currentTime = 0; this.paused = true; this.plays = 0; sounds.push(this); }
-    load() {}
+    load() { assert.equal(this.crossOrigin, "anonymous", "CORS must be set before loading a Web Audio track"); }
     pause() { this.paused = true; }
     play() { this.paused = false; this.plays++; starts.push(this.src); return Promise.resolve(); }
   }

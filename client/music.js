@@ -228,6 +228,7 @@
       if (!channels.length) {
         for (let index = 0; index < 2; index++) {
           const audio = new Audio();
+          audio.crossOrigin = "anonymous";
           audio.preload = "auto";
           audio.loop = false;
           audio.volume = 0;

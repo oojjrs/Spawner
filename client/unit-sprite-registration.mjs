@@ -1,4 +1,8 @@
 export const UNIT_SPRITE_REGISTRATION = Object.freeze({
+  "DesignAssets/Animations/CreatureWalkV2/soil-boar/walk.webp": Object.freeze({"frameSize":256,"viewSize":253.42641509433966,"pivotX":130.77735849056603,"pivotY":184.6377358490566,"registrationScale":1,"groundRadiusX":0.325203,"groundRadiusY":0.04607}),
+  "DesignAssets/Animations/CreatureWalkV2/bubble-toad/walk.webp": Object.freeze({"frameSize":288,"viewSize":239.75849056603775,"pivotX":144.66792386415096,"pivotY":216.6943396226415,"registrationScale":1,"groundRadiusX":0.34626,"groundRadiusY":0.027701}),
+  "DesignAssets/Animations/CreatureWalkV2/shadow-weasel/walk.webp": Object.freeze({"frameSize":256,"viewSize":265.8333333333333,"pivotX":126.66666583333334,"pivotY":201.16666833333332,"registrationScale":1,"groundRadiusX":0.285266,"groundRadiusY":0.037618}),
+  "DesignAssets/Animations/CreatureWalkV2/white-paw/walk.webp": Object.freeze({"frameSize":288,"viewSize":286.6909090909091,"pivotX":122.55454545454545,"pivotY":242.06363636363636,"registrationScale":1,"groundRadiusX":0.267361,"groundRadiusY":0.048611}),
   "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.webp": Object.freeze({"frameSize":276,"pivotX":138,"pivotY":242,"viewSize":276,"registrationScale":1.2321428571428572}),
   "DesignAssets/Animations/UnitAttack/attack.png": Object.freeze({"frameSize":148,"pivotX":74,"pivotY":130,"viewSize":148,"registrationScale":1.2333333333333334}),
   "DesignAssets/Animations/UnitHurt/V3/hurt.png": Object.freeze({"frameSize":148,"pivotX":74,"pivotY":130,"viewSize":148,"registrationScale":1.2333333333333334}),

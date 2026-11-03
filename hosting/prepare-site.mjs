@@ -41,7 +41,12 @@ export function prepareSite(destination, readSource, revision, assetDirectory) {
   }
   const assetFiles = new Map([...assets].map(([name, bytes]) => [name,
     createHash("sha256").update(bytes).digest("hex") + "." + name.split(".").at(-1)]));
-  const assetPaths = new Map([...assetFiles].map(([name, file]) => [name, assetBase + file]));
+  // Header jumps use the original high resolution sheets. Ship them with the
+  // Site so a source publication does not depend on a separate CDN deployment.
+  const localAssets = new Set(["DesignAssets/Welcome/spore-jump.webp", "DesignAssets/Welcome/pebble-jump.webp"]);
+  const assetPaths = new Map([...assetFiles].map(([name, file]) => [name,
+    localAssets.has(name) ? "./welcome-assets/" + file : assetBase + file]));
+  for (const name of localAssets) if (assets.has(name)) write("welcome-assets/" + assetFiles.get(name), assets.get(name));
   write("index.html", html);
   write("Spawner.html", html);
   for (const [name, source] of clients) {

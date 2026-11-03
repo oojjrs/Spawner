@@ -19,13 +19,18 @@
   const context = canvas.getContext("2d");
   const tribes = ["bean", "spore", "pebble", "spring"];
   const animations = globalThis.Spawner.UNIT_ANIMATIONS;
+  // Original 512px sheets from 2c93271 keep the large, high-DPI header sharp.
+  const jumpSources = {
+    spore: "DesignAssets/Welcome/spore-jump.webp",
+    pebble: "DesignAssets/Welcome/pebble-jump.webp"
+  };
   const sheets = new Map();
   const sources = new Map();
   await Promise.all(tribes.flatMap(tribe => Object.entries(animations[tribe])
     .filter(([action]) => action === "idle" || action === "walk" || action === "jump")
     .map(async ([action, animation]) => {
       const image = new Image();
-      image.src = globalThis.SpawnerAssets.source(animation.image);
+      image.src = globalThis.SpawnerAssets.source(action === "jump" && jumpSources[tribe] || animation.image);
       try {
         await image.decode();
         sheets.set(tribe + ":" + action, image);
@@ -45,9 +50,10 @@
     { bean: { feet: 1, strength: 1 }, others: { strength: 1 } }
   ];
   const neutralSpecies = [...Object.keys(globalThis.Spawner.CREATURE_IDLE_ANIMATIONS), "talon-owl", "spiny-back-beetle"];
-  const pool = [...tribes, ...neutralSpecies];
+  const nextChoice = globalThis.Spawner.createWelcomeRoster(tribes, neutralSpecies, appearances.length);
+  const neutralMetrics = new Map();
   let appearanceNumber = 0;
-  let current = { key: "bean", variant: 0 };
+  let current = nextChoice();
   let upcoming = null;
   const pendingSources = new Map();
   function neutralAnimations(species) {
@@ -58,11 +64,6 @@
     }));
     return { idle: species === "talon-owl" ? globalThis.Spawner.TALON_OWL_IDLE : globalThis.Spawner.CREATURE_IDLE_ANIMATIONS[species],
       walk: globalThis.Spawner.CREATURE_WALK_ANIMATIONS[species], attack: globalThis.Spawner.CREATURE_ATTACK_ANIMATIONS[species] };
-  }
-  function selectChoice(number) {
-    if (number < tribes.length) return { key: tribes[number], variant: 0 };
-    const key = pool[Math.floor(Math.random() * pool.length)];
-    return { key, variant: tribes.includes(key) ? Math.floor(Math.random() * appearances.length) : 0 };
   }
   async function prepareChoice(choice) {
     if (tribes.includes(choice.key)) return;
@@ -77,9 +78,30 @@
       })());
       await pendingSources.get(animation.image);
     }));
+    if (!neutralMetrics.has(choice.key)) {
+      const idle = neutralAnimations(choice.key).idle;
+      const image = sources.get(idle.image);
+      const bounds = tribeArt.bounds(image, idle.frameSize);
+      const sample = document.createElement("canvas");
+      sample.width = sample.height = 96;
+      const pixels = sample.getContext("2d", { willReadFrequently: true });
+      let top = 96;
+      for (let frame = 0; frame < idle.durationsMs.length; frame++) {
+        pixels.clearRect(0, 0, 96, 96);
+        pixels.drawImage(image, frame % idle.columns * idle.frameSize,
+          Math.floor(frame / idle.columns) * idle.frameSize, idle.frameSize, idle.frameSize, 0, 0, 96, 96);
+        const data = pixels.getImageData(0, 0, 96, 96).data;
+        for (let y = 0; y < top; y++) {
+          let found = false;
+          for (let x = 0; x < 96; x++) if (data[(y * 96 + x) * 4 + 3] >= 16) { found = true; break; }
+          if (found) { top = y; break; }
+        }
+      }
+      neutralMetrics.set(choice.key, { bounds, top: top * idle.frameSize / 96 });
+    }
   }
   function prepareUpcoming() {
-    const choice = selectChoice(appearanceNumber + 1);
+    const choice = nextChoice();
     upcoming = { choice, ready: false };
     const preparation = upcoming;
     prepareChoice(choice).then(() => { preparation.ready = true; });
@@ -253,15 +275,18 @@
     const animation = neutralAnimations(species)[action];
     const source = sources.get(animation.image);
     if (!source) throw new Error("Missing welcome neutral source: " + animation.image);
-    const cell = species === "talon-owl" ? Math.min(72, width * .24) : Math.min(96, width * .32);
-    const typeScale = species === "talon-owl" ? globalThis.Spawner.TALON_OWL_IDLE.scale : species === "spiny-back-beetle" ? globalThis.Spawner.BEETLE_SPRITE.scale : 1.4;
+    const idle = neutralAnimations(species).idle;
+    const metrics = neutralMetrics.get(species);
+    const baseSize = globalThis.Spawner.welcomeCreatureScale(idle, metrics.bounds, metrics.top,
+      globalThis.Spawner.UNIT_DISPLAY_SIZES[species], width, height);
+    const cell = Math.min(240, width * .75);
     const geometryScale = action === "walk" ? animation.frameSize / (animation.viewSize || animation.frameSize) : action === "attack" && species !== "spiny-back-beetle" ? animation.frameSize / (animation.viewSize || animation.frameSize) * (animation.registrationScale || 1) : animation.registrationScale || 1;
-    const size = cell * typeScale * geometryScale;
+    const size = baseSize * geometryScale;
     const center = width / 2;
     const distance = center + size / 2;
     const progress = elapsed / travelDuration;
     const x = moving ? phase === "enter" ? width + size / 2 - distance * progress : center - distance * progress : center;
-    const animationTime = reducedMotion.matches ? 0 : moving && species !== "talon-owl" ? progress * distance / cell * (animation.cyclesPerCell || 1) * duration(animation) : elapsed;
+    const animationTime = reducedMotion.matches ? 0 : elapsed;
     let frame;
     if (animation.frameIndices) frame = globalThis.Spawner.beetleAnimationFrame(action, animationTime);
     else if (species === "talon-owl" && action === "idle") frame = globalThis.Spawner.talonOwlIdleFrame(animationTime);
