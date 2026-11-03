@@ -1,3 +1,5 @@
+export const PLAYER_STARTING_POINTS = 30;
+
 export const TRIBE_STARTING_UNITS = Object.freeze({
   bean: Object.freeze([["antenna"], ["strength"], [], []].map(slots => Object.freeze(slots))),
   spore: Object.freeze([["strength"], ["blade"], [], []].map(slots => Object.freeze(slots))),

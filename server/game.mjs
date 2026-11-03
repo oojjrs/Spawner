@@ -6,7 +6,7 @@ import { worldSize } from "./world-size.mjs";
 import { ATTRIBUTES, ATTRIBUTE_SYNERGIES_ENABLED, isAttributeUnlocked, attributeCounts, migrateAttributeSlots, migrateAttributeLevels, attributeUpgradeCost, attributeUpgradeIssue, unitStats, unitCarryCapacity, unitTravelSpeed, unitTerrainSpeedMultiplier, birthCost, hasSynergy } from "./attributes.mjs";
 import { createPersonality, personalityLabels, createUtilityAI } from "./utility.mjs";
 import { NEST_LEVELS, nestUpgradeCost } from "./nests.mjs";
-import { TRIBE_STARTING_UNITS } from "./tribe-start.mjs";
+import { TRIBE_STARTING_UNITS, PLAYER_STARTING_POINTS } from "./tribe-start.mjs";
 import { colonySupply, recordColonyIncome, restoreColonyIncome } from "./colony-supply.mjs";
 import { agentBirthDuration } from "./birth.mjs";
 import { CORPSE_LIFETIME, placeCorpse, expireCorpses } from "./corpses.mjs";
@@ -76,6 +76,7 @@ export function createGame(environment, colony, savedGame) {
       ending: null,
       resourceInventory: {},
       evolutionPoints: 0,
+      startingPointsGranted: false,
       explored: new Set(),
       knownFood: new Map(),
       discoveries: [],
@@ -2029,6 +2030,12 @@ export function createGame(environment, colony, savedGame) {
       };
     }
 
+    function grantStartingPoints() {
+      if (colony.ownerId !== environment.hostId || state.startingPointsGranted === true) return;
+      state.evolutionPoints += PLAYER_STARTING_POINTS;
+      state.startingPointsGranted = true;
+    }
+
     function save() {
       return JSON.stringify({ state: { ...state, rivals: [], corpses: [] } }, (key, value) =>
         value instanceof Map ? { collection: "Map", entries: [...value] } :
@@ -2041,6 +2048,7 @@ export function createGame(environment, colony, savedGame) {
         value?.collection === "Map" ? new Map(value.entries) :
         value?.collection === "Set" ? new Set(value.entries) : value) : saved;
       Object.assign(state, data.state);
+      state.startingPointsGranted = data.state.startingPointsGranted === true;
       for (const key of ["buildings", "nextBuildingId", "constructionProductionReadyAt", "constructionHelpResult", "constructionHelpBuildings", "constructionMaterialNeeds", "foragerMemory"]) delete state[key];
       state.corpses = [];
       removedFoodKeys = new Set([...foodCellMap].filter(([, cell]) => cell.kind === "corpse" ||
@@ -2052,6 +2060,7 @@ export function createGame(environment, colony, savedGame) {
       for (const spot of foodSpotCache.values()) spot.cells = spot.cells.filter(cell => cell.kind !== "corpse" &&
         migrateResourceType(cell.resourceType) !== null);
       state.evolutionPoints = Math.floor(state.evolutionPoints);
+      grantStartingPoints();
       state.colonyFood = Math.floor(state.colonyFood);
       expireCorpses(foodCellMap, state.simSeconds);
       state.productionReadyAt = Number.isFinite(data.state.productionReadyAt) && data.state.productionReadyAt >= 0 ? data.state.productionReadyAt : 0;
@@ -2159,6 +2168,7 @@ export function createGame(environment, colony, savedGame) {
 
     if (savedGame !== undefined) restore(savedGame);
     else {
+      grantStartingPoints();
       for (const slots of TRIBE_STARTING_UNITS[colony.tribe] || TRIBE_STARTING_UNITS.bean) {
         const agent = spawnAgent({ id: null, name: suggestTemplateName(slots, state.templates), slots: [...slots], revision: 1 }, "colony");
         if (!agent) throw new Error("둥지 주변에 초기 개체를 배치할 공간이 없습니다.");
