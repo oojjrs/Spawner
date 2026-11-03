@@ -1,3 +1,9 @@
+## 초보자 도움말 체크박스 정렬 수정 · 01a1a11f
+
+- 기록 ID: beginner-checkbox-align-20261103-01a1a11f. 기록 시각: 2026-11-03T20:18:28+09:00. 기록자·구현 Codex /root/checkbox_fix(gpt-6.1-sol/low), 요청·로컬커밋 승인 사용자, 검수 부모 /root. 출처 채팅 01a1a11f-42dd-7942-8ca1-d614db002bc6 및 부모 위임. H:/Spawner Windows/PowerShell. 원발언 정확시각·턴ID 불명.
+- 사용자 요청: 방 생성 폼의 초보자 도움말 체크박스 위치를 수정하고 로컬 커밋한다. 원인: .welcome input의 width:100%가 체크박스에도 적용됐다. client/game.css에서 해당 라벨을 flex/중앙정렬/8px간격으로 묶고 자식 input의 width:auto·margin/padding:0·flex:none으로 제한했다. 기존 문구·HTML·동작은 유지한다. 연결 GitHub Projects 조회 성공·보드0개. 기존 병행 변경은 보존하고 제품 CSS와 이 작업 기록만 커밋한다. 부모 소스·JSON·두 PNG 실제 검수 통과, 푸시 지시 없음.
+- 실제 검증: headless Edge로 실제 Spawner.html/CSS의 방 생성 폼을 1440/390px에서 렌더했다(스크립트 차단·폼 노출). 두 폭 모두 체크박스13×13px, 글자와 간격8px, 세로중앙차1px, 가로넘침없음·초기checked·라벨클릭토글 통과. QA JSON/PNG: $Trash/checkbox-fix-01a1a11f. 형식검사 UTF8NoBom/CRLF 정상, scoped CSS diff는2줄 추가다. 검증 batch7.52초. 부모의 소스·JSON·1440/390 PNG 실제 검수 완료, 최종 stage 검수 후 로컬커밋 예정이며 기존 메모리 변경은 제외한다.
+
 ## DNA 공통 3P 확정 및 즉시 게시 승인 · 01a19f68
 
 - 기록 ID: dna-common-cost-publish-approved-20261103-01a19f68. 기록 시각: 2026-11-03T12:34:05+09:00. 기록자 Codex /root, 비용·게시·메모리 기록 승인 주체 사용자. 출처 채팅 01a19f68-f013-73f2-8d09-207bcec09265, E:/Spawner, Windows/PowerShell. 원 발언 정확 시각·턴 ID 불명.
