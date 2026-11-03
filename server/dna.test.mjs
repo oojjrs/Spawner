@@ -33,8 +33,8 @@ function fixture(level, tribe) {
 }
 
 test("DNA 판은 처음 반경을 유지하며 한 레벨마다 한 겹 늘어난다",()=>{
-  assert.deepEqual([1,2,3,4].map(ATTRIBUTE_DNA.boardRadius),[3,4,5,6]);
-  assert.deepEqual([1,2,3,4].map(level=>{let count=0;for(let q=-6;q<=6;q++)for(let r=-6;r<=6;r++)if(ATTRIBUTE_DNA.inside({q,r},level))count++;return count;}),[37,61,91,127]);
+  assert.deepEqual([1,2,3,4].map(ATTRIBUTE_DNA.boardRadius),[2,3,4,5]);
+  assert.deepEqual([1,2,3,4].map(level=>{let count=0;for(let q=-6;q<=6;q++)for(let r=-6;r<=6;r++)if(ATTRIBUTE_DNA.inside({q,r},level))count++;return count;}),[19,37,61,91]);
 });
 
 test("DNA 명령은 포인트·등급·형태 위조를 거부하고 현재 판 안의 설계만 저장한다",()=>{
@@ -154,4 +154,22 @@ test("0포인트에서도 DNA를 저장하지만 실제 탄생은 차단한다",
   assert.equal(result.agentId,null);
   assert.equal(game.snapshot().evolutionPoints,0);
   assert.equal(game.agents.length,count);
+});
+test("DNA 원이 중앙에 겹친 뒤 빈 선으로 계속 배치하고 겹치는 선은 거부한다",()=>{
+  const piece=(gene,rotation)=>{const entry=ATTRIBUTE_DNA.lookup.get(gene);return {gene,rotation,grade:entry.grade,shape:[...entry.steps]};};
+  const loop=[piece("blade",0),piece("blade",2),piece("blade",4)];
+  assert.equal(ATTRIBUTE_DNA.trace(loop,1).closed,true);
+  const pieces=loop.concat(piece("gather",5)),dna={version:3,pieces,level:1,budget:10000};
+  assert.equal(ATTRIBUTE_DNA.trace(pieces,1).valid,true);
+  assert.equal(ATTRIBUTE_DNA.trace(pieces,1).closed,false);
+  assert.ok(validateDna(dna,1,10000));
+  assert.equal(ATTRIBUTE_DNA.trace(loop.concat(piece("blade",0)),1).reason,"collision");
+  assert.equal(ATTRIBUTE_DNA.trace(loop.concat(piece("gather",1)),1).reason,"collision");
+  assert.equal(ATTRIBUTE_DNA.trace(loop.concat(piece("blade",5)),1).reason,"collision");
+  const overlap=[{gene:"gather",grade:1,rotation:0,shape:[0,3]}];
+  assert.equal(ATTRIBUTE_DNA.trace(overlap,1).reason,"collision");
+  const {game}=fixture(1);
+  const {templateId}=game.command({type:"design",templateId:null,name:"겹친 원",dna,birth:false});
+  const {agentId}=game.command({type:"birth",templateId});
+  assert.deepEqual(game.agents.find(agent=>agent.id===agentId).dna.pieces,pieces);
 });

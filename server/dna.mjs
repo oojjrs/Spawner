@@ -15,7 +15,7 @@ export const ATTRIBUTE_DNA = (() => {
   for(const entry of specification){const gene=lookup.get(entry.gene);gene.grade=entry.grade;gene.steps=entry.steps;gene.order=entry.order;}
   const catalog=genes.slice().sort((a,b)=>a.grade-b.grade||a.order-b.order);
 
-  const boardRadii=[3,4,5,6],profiles=new Map(),shapeCache=new Map();
+  const boardRadii=[2,3,4,5],profiles=new Map(),shapeCache=new Map();
   function boardRadius(level){return Number.isInteger(level)&&level>=1&&level<=4?boardRadii[level-1]:Infinity;}
   function inside(point,level){return Math.max(Math.abs(point.q),Math.abs(point.r),Math.abs(point.q+point.r))<=boardRadius(level);}
   function legacyShape(gene,grade){
@@ -37,14 +37,16 @@ export const ATTRIBUTE_DNA = (() => {
   function key(point) {return point.q+','+point.r;}
   function step(point,direction) {const delta=directions[((direction%6)+6)%6];return {q:point.q+delta[0],r:point.r+delta[1]};}
   function trace(pieces,level){
-    const nodes=[{q:0,r:0}],paths=[],occupied=new Map([['0,0',{kind:'node',index:0}]]),outside=[];let closed=false,issue='';
+    const nodes=[{q:0,r:0}],paths=[],occupied=new Map([['0,0',{kind:'node',index:0}]]),outside=[],edges=new Set();let closed=false,issue='';
     for(let index=0;index<pieces.length;index++){
       const piece=pieces[index],gene=lookup.get(piece.gene),grade=piece.grade===undefined?1:piece.grade;
-      if(!gene||!Number.isInteger(piece.rotation)||piece.rotation<0||piece.rotation>5||!Number.isInteger(grade)||grade<1||grade>4||closed)return {valid:false,reason:closed?'closed':'invalid',nodes,paths,closed,at:index,outside};
+      if(!gene||!Number.isInteger(piece.rotation)||piece.rotation<0||piece.rotation>5||!Number.isInteger(grade)||grade<1||grade>4)return {valid:false,reason:'invalid',nodes,paths,closed,at:index,outside};
       if(Number.isInteger(level)&&grade>level&&!issue)issue='level';
-      const start=nodes[nodes.length-1],points=route(start,gene,grade,piece.rotation,piece.shape),end=points[points.length-1];
+      closed=false;const start=nodes[nodes.length-1],points=route(start,gene,grade,piece.rotation,piece.shape),end=points[points.length-1];
       for(let pointIndex=1;pointIndex<points.length;pointIndex++){
-        const point=points[pointIndex],last=pointIndex===points.length-1,contact=occupied.get(key(point));
+        const point=points[pointIndex],last=pointIndex===points.length-1,contact=occupied.get(key(point)),edge=[key(points[pointIndex-1]),key(point)].sort().join(':');
+        if(edges.has(edge))return {valid:false,reason:'collision',nodes,paths,closed,at:index,problem:point,outside};
+        edges.add(edge);
         if(contact&&(!last||contact.kind!=='node'))return {valid:false,reason:'collision',nodes,paths,closed,at:index,problem:point,outside};
         if(!inside(point,level)){outside.push(point);if(!issue)issue='boundary';}
         if(last&&contact)closed=true;else occupied.set(key(point),{kind:last?'node':'path',index:last?index+1:index});
