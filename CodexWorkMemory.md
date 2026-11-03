@@ -1,3 +1,11 @@
+## 배포판 중첩 워커 개발 코드 제거와 게시 준비 · 01a1a0d5
+
+- 기록 ID: combat-music-production-ready-20261104-01a1a0d5. 기록·실제근거확인 시각: 2026-11-04T05:20:08+09:00. 기록자·게시준비/검수 Codex /root, 최소fix와CDN공급 /root/attribute_nest_fix(gpt-6.1-sol/low), 음악포함배포·커밋푸시승인 주체 사용자. 출처현재채팅01a1a0d5-24ef-74c1-bb1e-8d4a43e1cbd2,H:/Spawner Windows/PowerShell. 발언정확시각·턴ID불명.
+- GitHub게임main은3713cb7에서14ae274cb3da50174e005a92a577ea5dab13af4f로일반push성공했고ls-remote/로컬HEAD가같았다. CDN필수97파일(94,285,199bytes)은178b5d613b7d4cb4f4564c7f3ab138084c67217f Spawner 배포 자산 추가 로master에push·readback됐고자산repo보호3dirty파일SHA불변/index0을확인했다. Pages게시작업41710596789는아직진행중이다.
+- 배포판검사에서cheat키가남은위치를추적해globalThis.SpawnerDecisionWorkerSource의JSON중첩server/cheats원본임을확인했다. client/production.mjs의기존workerSource재귀에이decision-source재귀만추가해3+/1-로교정했다. 메인/worker/decision3realm각cheat키없음·script구문정상·createCheats가DOM만들지않고null임을worker가실제확인했고부모가diff/production-validation.json과출력키부재를확인했다. 실제게임원본runtime/모델/치트기능개발본은바꾸지않는다.
+- 국소산출물: Git14ae274의rawruntime(배포앱입력108f와동일)을교정함수로변환해SHA c0e900ba76c98e4361b3895b199f59ecb2c2d34fb0379c52cd2e4776f9037976인production-runtime.js를만들었고Site dist/client/runtime.js만교체했다. 이전에통과한음악6/peace10·신곡CDN경로/Welcome원본연결은그대로다. 처음Site소스752fbba5430c07e215f75819809619a491d84523은아직게시전이며교정출력을후속source커밋한뒤공식helper를실행한다. 전체sourceprepare/게임검사를반복하지않았다.
+- 이번지원커밋은production.mjs와이기록만포함해새HEADpush후readback한다. 기존dirty게임/습격/메모리와assetrepo스킬변경은보존한다. Sitepublic권한유지,저장·실제배포·CDN음원HTTP동일성은아직확인전이다.
+
 ## 전투 음악 배포 산출물·웰컴 배경 포장 교정 · 01a1a0d5
 
 - 기록 ID: combat-music-packaging-ready-20261104-01a1a0d5. 기록·실제확인 시각: 2026-11-04T05:12:58+09:00. 기록자·Git/배포준비 Codex /root, 포장최소수정 /root/attribute_nest_fix(gpt-6.1-sol/low), 음악포함커밋·푸시·배포승인 주체 사용자. 출처현재채팅01a1a0d5-24ef-74c1-bb1e-8d4a43e1cbd2,H:/Spawner Windows/PowerShell. 발언정확시각·턴ID불명.

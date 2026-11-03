@@ -18,5 +18,7 @@ export function productionRuntime(source) {
   }
   if (!stripped) throw new Error("치트 모듈을 분리한 실행 코드를 다시 빌드해 주세요.");
   return source.replace(/^const workerSource = (.+);\r?$/m,
-    (line, worker) => "const workerSource = " + JSON.stringify(productionRuntime(JSON.parse(worker))) + ";");
+    (line, worker) => "const workerSource = " + JSON.stringify(productionRuntime(JSON.parse(worker))) + ";")
+    .replace(/^globalThis\.SpawnerDecisionWorkerSource = (.+);\r?$/m,
+      (line, worker) => "globalThis.SpawnerDecisionWorkerSource = " + JSON.stringify(productionRuntime(JSON.parse(worker))) + ";");
 }
