@@ -6,10 +6,12 @@ import { createContext, runInContext } from "node:vm";
 const gameSource = readFileSync(new URL("./game.js", import.meta.url), "utf8");
 const settle = () => new Promise(resolve => setImmediate(resolve));
 
-function fixture(blocked) {
+function fixture(blocked, touchActivation = false, mediaActivation = false) {
   const sounds = [], starts = [], listeners = new Map(), buttonListeners = new Map(), resumes = [], timers = new Map();
   const gains = [], intervals = new Map();
   let clock = null;
+  let userActivated = false;
+  let playbackActivated = false;
   let timerId = 0;
   const button = { setAttribute() {}, addEventListener: (type, callback) => buttonListeners.set(type, callback) };
   const document = { hidden: false, body: { dataset: { screen: "welcome" } }, getElementById: () => button,
@@ -19,7 +21,14 @@ function fixture(blocked) {
     } };
   class AudioContext {
     constructor() { clock = this; this.state = blocked ? "suspended" : "running"; this.currentTime = 0; }
-    resume() { return new Promise(resolve => resumes.push(resolve)); }
+    resume() {
+      if (touchActivation) {
+        if (!userActivated) return new Promise(() => {});
+        this.state = "running";
+        return Promise.resolve();
+      }
+      return new Promise(resolve => resumes.push(resolve));
+    }
     async decodeAudioData(data) { return data; }
     createDynamicsCompressor() { return { threshold: {}, knee: {}, ratio: {}, attack: {}, release: {}, connect() {} }; }
     createWaveShaper() { return { connect() {} }; }
@@ -32,7 +41,11 @@ function fixture(blocked) {
     constructor() { this.volume = 0; this.currentTime = 0; this.paused = true; this.plays = 0; sounds.push(this); }
     load() { assert.equal(this.crossOrigin, "anonymous", "CORS must be set before loading a Web Audio track"); }
     pause() { this.paused = true; }
-    play() { this.paused = false; this.plays++; starts.push(this.src); return Promise.resolve(); }
+    play() {
+      if (mediaActivation && !playbackActivated)
+        return Promise.reject(Object.assign(new Error("A user gesture is required"), { name: "NotAllowedError" }));
+      this.paused = false; this.plays++; starts.push(this.src); return Promise.resolve();
+    }
   }
   const envelope = Buffer.from([...Array(20).fill(32), ...Array(10).fill(255), ...Array(20).fill(32)]).toString("base64");
   const context = createContext({ document, AudioContext, Audio, location: { protocol: "http:" }, window: { addEventListener() {}, confirm: () => true },
@@ -56,7 +69,12 @@ function fixture(blocked) {
       for (const sound of sounds) if (!sound.paused) sound.currentTime += seconds;
       for (const callback of [...intervals.values()]) callback();
     },
-    dispatch(type) { for (const callback of listeners.get(type) || []) callback(); },
+    dispatch(type) {
+      userActivated = type === "pointerup" || type === "click" || type === "keydown";
+      if (userActivated) playbackActivated = true;
+      for (const callback of listeners.get(type) || []) callback({ target: { closest: () => null } });
+      userActivated = false;
+    },
     activate() { clock.state = "running"; for (const resolve of resumes) resolve(); },
     playing: () => sounds.filter(sound => !sound.paused).map(sound => sound.src) };
 }
@@ -130,6 +148,43 @@ test("자동 재생이 막힌 웰컴에서도 첫 사용자 입력으로 평화 
   sound.dispatch("pointerdown");
   await settle();
   assert.deepEqual(sound.playing(), ["peace.mp3"]);
+  assert.equal(sound.sounds.reduce((count, channel) => count + channel.plays, 0), 1);
+});
+
+test("터치를 뗄 때 활성화되는 모바일에서도 첫 탭으로 브금을 시작한다", async () => {
+  const sound = fixture(true, true);
+  await settle();
+  sound.dispatch("pointerdown");
+  await settle();
+  assert.deepEqual(sound.playing(), []);
+  sound.dispatch("pointerup");
+  await settle();
+  assert.deepEqual(sound.playing(), ["peace.mp3"]);
+  sound.dispatch("click");
+  await settle();
+  assert.equal(sound.sounds.reduce((count, channel) => count + channel.plays, 0), 1);
+});
+
+test("클릭으로 활성화되는 환경에서도 스피커를 껐다 켜지 않아도 재생한다", async () => {
+  const sound = fixture(true, true);
+  await settle();
+  sound.dispatch("click");
+  await settle();
+  assert.deepEqual(sound.playing(), ["peace.mp3"]);
+});
+
+test("오디오 컨텍스트가 실행 중이어도 막힌 음악은 첫 터치 해제에서 재시도한다", async () => {
+  const sound = fixture(false, false, true);
+  await settle();
+  assert.deepEqual(sound.playing(), []);
+  sound.dispatch("pointerdown");
+  await settle();
+  assert.deepEqual(sound.playing(), []);
+  sound.dispatch("pointerup");
+  await settle();
+  assert.deepEqual(sound.playing(), ["peace.mp3"]);
+  sound.dispatch("click");
+  await settle();
   assert.equal(sound.sounds.reduce((count, channel) => count + channel.plays, 0), 1);
 });
 

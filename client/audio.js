@@ -274,11 +274,14 @@
       updateButton();
     });
     document.addEventListener("click", event => {
+      unlock();
       const target = event.target.closest?.("button, [role='button']");
       if (!target || target === button || target.matches(":disabled") || target.closest("[aria-disabled='true'], [inert]")) return;
       playClick();
     }, true);
     document.addEventListener("pointerdown", unlock, true);
+    // Touch input gains playback activation on release, after pointerdown.
+    document.addEventListener("pointerup", unlock, true);
     document.addEventListener("keydown", unlock, true);
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) { stop(); stopClick(); music.suspend(); }
