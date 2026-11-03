@@ -1,3 +1,131 @@
+## 속성 설계 패널 최종 커밋 준비·검수 완료 · 01a1a129
+
+- 기록 ID: ingame-attribute-panel-git-ready-20261103-01a1a129. 기록 시각: 2026-11-03T22:18:16+09:00. 기록자·Git범위/검수 Codex /root, Git업로드·배포보류승인 사용자. 출처현재채팅01a1a129-d9d6-79c3-830d-58009e34c915,H:/Spawner Windows/PowerShell. 원발언정확시각·턴ID불명.
+- 범위분류교정: git-freeze의보수적그리기제외판단중패널내shapeSvg/dnaPath/drawGrid/node/draw는현재수용화면을그대로보존할관련보조로재분류해포함한다. 기존보호bytes의관련support스테이징을허용하는공통rule1에따라live그림을되돌리지않고후보에도동일하게포함,새모델이름·근접/원거리분리행과전투/Welcome/원본에셋변경은제외한다. HEAD에없는필드skip가드는후보/livehelper양쪽에같이추가해NaN과역변경을예방했다.
+- 실제최종후보검수: HEAD의기존의존성48파일과분리후보소스에서node tests13pass/0fail(184.098ms). 부모격리Edge의후보HTML/CSS/runtime/editor+실제stats/update·원본미리보기합성으로mobile이름100x44.39/font16/자주색/중앙고정·격자하단547.703<이름top565.313·조작/비용비중첩·손뗌숨김·JS오류0을확인하고PNG직접감수했다. 처음보수적그림제외후보의외곽색/redghost재등장문제를발견해관련그림보조를포함한최종후보로고쳤고변경후검수결과만완료근거다. 전체앱startup/배포검증으로확대하지않는다.
+- 최종9경로: Spawner.html,client/game.css,client/game.js,client/dna-editor.mjs,client/dna-editor.test.mjs,client/runtime.js,server/game.mjs,server/dna.test.mjs,CodexWorkMemory.md. runtime은HEAD의editor1모듈과중복내장된design검증호출2개만치환해다른모듈·worker동작을보존한다. 현재작업트리/빈index확인후이9경로의최종bytes만stage할예정이다.
+- 기준·제외: main의시작aba8c6a와origin/main cd0717e(앞1/뒤0),연결보드0개. 기존localcommit은브랜치역사로유지한다. 다른채팅진행중인소스/메모리/아트는작업트리에보존. 사용자명시대로배포하지않는다. 커밋·푸시성공은아직선기록하지않으며성공식별자는검증후로컬메모리에기록한다. 근거literal $Trash/attribute-panel-git-20261103의candidate/verification/qa/명세이며임시후보는Gitindex검증을위한것이다.
+
+## 속성 설계 패널 Git 반영 범위 확정 · 01a1a129 현재 요약
+
+- 기록 ID: ingame-attribute-panel-git-freeze-20261103-01a1a129. 기록 시각: 2026-11-03T22:07:44+09:00. 기록자·분리/검수 Codex /root, 작업정리·Git업로드승인 및 배포보류 주체 사용자. 출처 현재채팅01a1a129-d9d6-79c3-830d-58009e34c915, H:/Spawner Windows/PowerShell. 원발언정확시각·턴ID불명.
+- 최종결정: 제목 속성 설계, 자동맞춤/현재둥지해금 전체표시, 상단 이름·저장, 확대미리보기, 기본0항목숨김·DNA효과추가, 합산값만녹색굵게/괄호증감회색·괄호단위생략. 모바일필터제거·110px정사각형가로한줄·길게누르기이름은자주색큰박스로격자아래검은여백중앙에고정한다. Q/E·방향키·휠회전/Enter·Space·연결점배치/우클릭·Back·CtrlZ/Y되돌리기,readonly보호,편집저장은포인트제약없이실제탄생에만비용검사다.
+- 근거: 앞v1~v8의실제PC/모바일/터치·격자하단측정기록과회귀검사. user가최종자주색·검은여백배치를수용하고메모리정리후올리되배포는하지말라고명시했다. 배포명령·Sites게시·릴리스는범위에없다.
+- 동시변경분리: 같은workingtree의다른채팅전투/Welcome/에셋/모델·그림변경은보존/제외. HEAD aba8c6a를기준으로이번UI/입력/저장검증과관련테스트만후보9경로로구성한다. 새근접/원거리분리모델은미포함하고현재게시된power/speed계약을사용,모델에없는boolean키는건너뛰어NaN을방지한다. 역사검수의당시live값/이미지와게시후보모델은시점·범위가다르며수치밸런스변경을이번커밋으로주장하지않는다.
+- 메모리범위: 현재workingtree기록중이채팅의원래기록19개와이요약만HEAD메모리에추가한다. 다른채팅의미커밋기록은live에보존하고이번index에넣지않는다. 기존공통·기획·역사기록은삭제하지않는다.
+- Git대상: 전용 H:/Spawner origin https://github.com/oojjrs/Spawner main. 시작HEAD aba8c6a, fetch결과origin/main cd0717e보다기존localcommit1개앞/뒤처짐0. 연결Projects0개. 후보별분리·검수완료후스테이징/커밋/푸시하고원격tip검증으로완료판정한다. 아직이기록은성공을선언하지않는다.
+
+## DNA 이름 검은 여백·자주색 확대 완료 · 01a1a129 현재 요약
+
+- 기록 ID: ingame-attribute-panel-v8-complete-20261103-01a1a129. 기록·마지막근거확인 시각: 2026-11-03T21:52:41+09:00. 기록자·코드/시각검수 Codex /root, 구현 panel_layout/editor_input(gpt-6.1-sol low), 교정주체 사용자. 출처현재채팅01a1a129-d9d6-79c3-830d-58009e34c915,H:/Spawner Windows/PowerShell. 원발언정확시각·턴ID불명. v8-start를완료로갱신한다.
+- 완료: 이름표를육각판중앙아래빈검은영역으로내렸다(left50%/bottom12px). mobilefit만하단64px예약/남은영역자동맞춤,desktopfit/panel전체크기/제스처/값계산은보존. 박스bg#673d64·border#d4a1c6·text#fff1fb·font16/600·padding10x18/minwidth100으로기존orange/blue/mint와구분하고확대했다. 기존이름만쓰며새UI문구없음.
+- 실제검수: 부모격리headlessEdge390x844/CDPtouch540ms후tooltip100x44.390625/center195px/bottom630,board22/250/346x392,실제canvas격자stroke최하단564.57295px·tooltiptop585.609375로검은여백내21.036px간격을확인했다. 폰트16px·bg/border/text색일치·boardbottom12px여유·회전/추가dock/cost비중첩·release숨김·JS오류0이다. 실제canvasdrawGrid좌표를측정했으므로단순CSS가정만으로검은영역이라고하지않았다. 부모가최종모바일PNG를직접열어위치·대비·크기를감수했고기존성공한입력전반검사는반복하지않았다.
+- 근거·범위: literal $Trash/ingame-attribute-panel-v8-20261103/qa.mjs·qa-result.json·before/runtime.presync사본,갱신D:/.codex/visualizations/2026/11/03/01a1a129-d9d6-79c3-830d-58009e34c915/attribute-design-mobile.png. 국소diff는CSStooltip1줄과editorfit예약/MQL변경리스너1구간이며runtime은그editor1모듈만sync/구문정상. 제품client/game.css/dna-editor.mjs/runtime.js+메모리만범위,병행코드/아트/문서변경보존·미스테이징·미커밋·미게시. 남은요청구현없고4파일공통형식/공백마감은직후실제결과를따른다.
+## DNA 이름 검은 여백·자주색 확대 진행 · 01a1a129 v8
+
+- 기록 ID: ingame-attribute-panel-v8-start-20261103-01a1a129. 기록 시각: 2026-11-03T21:51:50+09:00. 기록자·배치판단 Codex /root, 검은부분/배경구분·크기교정주체 사용자, 구현 panel_layout/editor_input(gpt-6.1-sol low). 출처현재채팅01a1a129-d9d6-79c3-830d-58009e34c915,H:/Spawner Windows/PowerShell. 원발언정확시각·턴ID불명.
+- 사용자교정: 격자와겹치는v7위치대신검은부분으로옮기고다른UI색과구분되는배경으로눈에띄게조금키운다. 부모는board중앙하단bottom12px/자주색#673d64·밝은border#d4a1c6/text#fff1fb/font16/600·padding10x18/minwidth100을선택했다. 현재실제black하단45px보다44.4px이름박스+bottom12가크므로mobilefit에하단64px예약을추가해검은여백을명시적으로확보한다. desktopfit과panel/board전체크기는불변,모바일grid만남은영역안에서자동맞춤한다. 화면폭전환은catalog+fit동시갱신,기존gesture/이름문구/좌우scroll은유지한다.
+- 범위·준비: 제품client/game.css·dna-editor.mjs와해당runtime모듈,메모리. before사본literal $Trash/ingame-attribute-panel-v8-20261103. 부모는실제canvas격자최하단과tooltip박스를측정해이름이검은여백에들어가는지확인한다. 이전중앙하단방향은유지하되bottom76의격자위표시는이요구로대체한다.
+## DNA 이름 중앙 하단 고정 완료 · 01a1a129 현재 요약
+
+- 기록 ID: ingame-attribute-panel-v7-complete-20261103-01a1a129. 기록·마지막근거확인 시각: 2026-11-03T21:47:30+09:00. 기록자·검수 Codex /root, 위치확정주체 사용자, 구현 editor_input(gpt-6.1-sol low). 출처현재채팅01a1a129-d9d6-79c3-830d-58009e34c915,H:/Spawner Windows/PowerShell. 원발언정확시각·턴ID불명. v7-start를완료로갱신한다.
+- 결과: tooltip은DNA버튼위치와관계없이육각판중앙하단left50%/bottom76px에고정. 부모실제Edge390x844/CDPtouch540ms에서board중심195px와tooltip중심195px정확일치·board내부/회전·추가·비용비중첩·pieces보존·release숨김·JS오류0확인. 근거literal $Trash/ingame-attribute-panel-v7-20261103/qa.mjs·qa-result.json·before/runtime.presync사본이며기존성공한전체입력/좌우clamp검사는다시하지않았다. 모바일PNG를갱신했고바로뒤부모image출력으로시각감수한다. 이전카드추적표시는최종사용자확정으로대체됨.
+- 범위·통합: client/dna-editor.mjs와runtime의해당1모듈,이메모리만변경. 기존CSS/모델/숫자/제스처·다른채팅변경보존,미스테이징·미커밋·미게시. 남은요청구현없으며3파일국소형식/공백마감은직후실제결과를따른다. 현재PNG는D:/.codex/visualizations/2026/11/03/01a1a129-d9d6-79c3-830d-58009e34c915/attribute-design-mobile.png다.
+## DNA 이름 육각판 중앙 하단 고정 진행 · 01a1a129 v7
+
+- 기록 ID: ingame-attribute-panel-v7-start-20261103-01a1a129. 기록 시각: 2026-11-03T21:47:06+09:00. 기록자·구현해석 Codex /root, 최종위치확정주체 사용자, 구현 editor_input(gpt-6.1-sol low). 출처현재채팅01a1a129-d9d6-79c3-830d-58009e34c915, H:/Spawner Windows/PowerShell. 원발언정확시각·턴ID불명.
+- 사용자는육각판중앙하단이손가락에가리지않고적당히높아가장적당하다고교정했다. v6의누른DNA버튼가로중심추적·좌우클램프정책을대체한다. tooltip은같은board자식/bottom76px를유지하고left50%/translateX(-50%)로고정,기존timer·내용·손뗌숨김·선택/undo/scroll은불변. 동적좌표계산1구간을제거했다. 원본사본literal $Trash/ingame-attribute-panel-v7-20261103/client_dna-editor.mjs.before이며부모는실제중앙위치만좁게검수할예정이다.
+## DNA 이름을 육각판 내부로 이동 완료 · 01a1a129 현재 요약
+
+- 기록 ID: ingame-attribute-panel-v6-complete-20261103-01a1a129. 기록·마지막근거확인 시각: 2026-11-03T21:43:50+09:00. 기록자·부모실제터치/화면검수 Codex /root, 구현 editor_input/panel_layout(gpt-6.1-sol low), 중첩지적·교정주체 사용자. 출처현재채팅01a1a129-d9d6-79c3-830d-58009e34c915, H:/Spawner Windows/PowerShell. 원발언정확시각·턴ID불명. v6-start를완료로갱신한다.
+- 완료: tooltip부모를board로옮기고눌린DNA버튼의가로중심을board좌표로환산,실제tooltip반폭으로양끝8px클램프. bottom76px로회전/추가dock와비용상단둘다피한다. 기존이름/hold480ms/선택·스크롤·0행숨김·숫자표시/PC불변. catalog.fixedcenter+위로8px이던v5위치정책은사용자반려로대체됐다.
+- 실제검수exit0: 부모격리headlessEdge390x844/CDP에서첫gather일부가가로스크롤로잘린상태·중간health·마지막secretion을각540ms길게눌렀다. tooltip3개모두board안/좌우8px클램프·item중심일치(<1px)·dock/회전/추가/cost비중첩·pieces보존·release숨김·JS오류0을확인했다. 실제tooltipbottom566/costtop580/docktop642로각14px/76px이상분리된다. 부모가갱신mobilePNG를직접열어육각판내위치와조작부비중첩을감수했다.
+- 근거·마감: literal $Trash/ingame-attribute-panel-v6-20261103/qa.mjs·qa-result.json·각before/runtime.presync사본. D:/.codex/visualizations/2026/11/03/01a1a129-d9d6-79c3-830d-58009e34c915/attribute-design-mobile.png는중간health이름표시상태다. 제품client/dna-editor.mjs/game.css/runtime.js와이메모리만범위,editor1모듈narrow sync·구문정상. 병행모델/다른아트/문서변경보존·미스테이징·미커밋·미게시. 남은요청구현없고국소형식/공백마감은직후결과를따른다.
+## DNA 길게누르기 이름 위치 교정 진행 · 01a1a129 v6
+
+- 기록 ID: ingame-attribute-panel-v6-start-20261103-01a1a129. 기록 시각: 2026-11-03T21:43:03+09:00. 기록자·배치판단 Codex /root, 중첩지적·교정주체 사용자, 구현 editor_input/panel_layout(gpt-6.1-sol low). 출처현재채팅01a1a129-d9d6-79c3-830d-58009e34c915, H:/Spawner Windows/PowerShell. 원발언정확시각·턴ID불명.
+- 사용자지적: longpress이름이회전버튼과겹치니누르는DNA버튼바로위또는육각판영역으로옮기라고했다. 부모는육각판하단내부에서누른DNA버튼의가로중심을따라표시하고좌우8px여백으로클램프한다. 이전catalog위fixed중앙이름배치는대체된다. CSS초안bottom12px는우하단비용box와겹칠수있어부모가bottom76px로올리는판단을추가했다. 판외부dock의회전/추가버튼과비용모두피한다.
+- scope: tooltipDOM의부모를board로이동·hold발동시item/board실제좌표와tooltip폭으로left계산,기존이름/시간/터치·스크롤/모바일query·선택/undo불변. CSStooltipbottom만76px. 원본사본literal $Trash/ingame-attribute-panel-v6-20261103에보존했고이모듈만runtime에동기화한뒤실제첫/중간/마지막카드를길게눌러clamp·조작/비용비중첩을검수할예정이다.
+## 모바일 큰 DNA 한줄 목록 완료 · 01a1a129 현재 요약
+
+- 기록 ID: ingame-attribute-panel-v5-complete-20261103-01a1a129. 기록·마지막근거확인 시각: 2026-11-03T21:37:39+09:00. 기록자·부모실제화면검수 Codex /root, 구현 panel_layout/editor_input(gpt-6.1-sol low), 요구주체 사용자. 출처현재채팅01a1a129-d9d6-79c3-830d-58009e34c915, H:/Spawner Windows/PowerShell. 원발언정확시각·턴ID불명. v5-start를완료로갱신한다.
+- 결과: mobilemax700카테고리4개숨김·옛필터열회수,110x110DNA정사각형을가로한줄/80x72SVG로확대. 기존124px카탈로그높이/board/preview/toolbar/PC카드는보존. mediaQuerychange는모바일에서현재level전체gene를보이고PC복귀시원래filter복원,조각/선택/history불변·destroy리스너정리. 길게누르기이름·가로스와이프유지.
+- 실제검수: 부모격리headlessEdge실제제품runtime/editor/CSS로PCorgan필터→mobile전체5gene→PCorgan필터복원과pieces3개보존통과. 5카드모두110x110/같은y706/80x72SVG·filters none/document390. 첫실행은listscrollHeight112/client111의1px세로넘침에서중단,마지막CSScatalogpadding5px6px교정후실패layout와미실행입력을확인했다. 최종client/scrollHeight113일치,CDPtouch550ms체력이름표시·pieces보존·가로scroll242·손뗌/scroll시이름숨김통과,JS오류0. 최초통과한괄호단위제거/PC기본상태검사는반복하지않았다.
+- 증거: literal $Trash/ingame-attribute-panel-v5-20261103/qa.mjs·qa-result.json·before사본. D:/.codex/visualizations/2026/11/03/01a1a129-d9d6-79c3-830d-58009e34c915/attribute-design-pc.png는v4단위없는최종표시로갱신,attribute-design-mobile.png는v5큰한줄카드와hold이름상태로갱신했다. 부모가최종모바일PNG를직접열어모양과간격을감수했다. 제품client/game.css/dna-editor.mjs/runtime.js와이메모리가이번범위이며runtime은editor1모듈만sync했다. 무관한동시작업보존·미스테이징·미커밋·미게시,남은요청구현없음. 국소형식4파일·공백마감은직후결과를따른다.
+## 모바일 DNA 큰 정사각형 한줄 목록 진행 · 01a1a129 v5
+
+- 기록 ID: ingame-attribute-panel-v5-start-20261103-01a1a129. 기록 시각: 2026-11-03T21:33:58+09:00. 기록자·구현해석 Codex /root, 요구·개선제안주체 사용자, 구현 panel_layout/editor_input(gpt-6.1-sol low). 출처현재채팅01a1a129-d9d6-79c3-830d-58009e34c915, H:/Spawner Windows/PowerShell. 원발언정확시각·턴ID불명.
+- 사용자는모바일하단카테고리4개를없애고한줄의큰정사각형DNA표시를제안했다. 부모는큰정사각형버튼을가로한줄로배치해좌우스와이프선택·길게누르기이름을유지하는방향으로명시안내하고실행했다. v3의56px2행/좌측필터방식은대체한다. 한화면에DNA전체를하나의거대한1개로보여주는해석은선택하지않았다.
+- CSS변경: mobilemax700카테고리숨김·옛86px열회수,110x110정사각형DNA카드/80x72SVG·한행가로scroll. 기존catalog124높이/board·toolbar·preview/PC표시는보존한다. JS는mobileQuery로PCfilter무시해현level전체gene표시,viewport전환은renderCatalog만·destroy리스너정리. 현재선택/조각/history는보존한다. 타이머/툴팁/undo기존의도유지.
+- 선행v4결과: game.js사본국소diff에서delta문자열의unit삭제1줄만확인했고game.js/메모리공통UTF8NoBom/CRLF·공백검사는정상이다. no-indexdiff의exit1은차이존재정상값이며검사실패가아니다. 이번에도괄호단위는생략상태를유지한다. H쓰기는require_escalated,원본사본literal $Trash/ingame-attribute-panel-v5-20261103. 실제모바일/viewport전환검수는진행중이다.
+## 괄호 증가분 단위 제거 · 01a1a129 v4
+
+- 기록 ID: ingame-attribute-panel-v4-delta-units-20261103-01a1a129. 기록 시각: 2026-11-03T21:30:57+09:00. 기록자·검수 Codex /root, 요구·단위생략결정 사용자, 구현 budget_tests(gpt-6.1-sol low). 출처현재채팅01a1a129-d9d6-79c3-830d-58009e34c915, H:/Spawner Windows/PowerShell. 원발언정확시각·턴ID불명. v3의괄호내단위포함표시는이번명시요구로대체된다.
+- 요구·범위: 개/초등괄호안단위를모두생략한다. 합산결과본체의단위는유지하므로1개 (+1),0.29칸/초 (+0.04),75% (+75)처럼표시한다. renderDnaDesignStats의delta문자열에붙던unit1곳만제거하며색/굵기/0숨김/시간계산/모바일터치/다른행정의는보존한다. 원본사본은literal $Trash/ingame-attribute-panel-v4-20261103/client-game.js.before. 텍스트포맷1줄변경은국소diff와공통형식으로마감하고성공한브라우저/터치검사를반복하지않는다. 새스크린샷재캡처는요청없어하지않으며v3PNG는이한줄교정전시점의근거로유지한다. 이번제품범위client/game.js와이메모리,미스테이징·미커밋·미게시다.
+## 합산 결과 강조·모바일 DNA 길게 누르기 완료 · 01a1a129 현재 요약
+
+- 기록 ID: ingame-attribute-panel-v3-complete-20261103-01a1a129. 기록·마지막근거확인 시각: 2026-11-03T21:29:21+09:00. 기록자·코드/실제터치화면검수 Codex /root, 구현 budget_tests/panel_layout/editor_input(gpt-6.1-sol low), 표시방식·모바일제안주체 사용자. 출처현재채팅01a1a129-d9d6-79c3-830d-58009e34c915, H:/Spawner Windows/PowerShell. 원발언정확시각·턴ID불명. v3-start를완료로갱신하며v2의graybase+greendelta방식은이요구로대체된다.
+- 완료변경: stats앞숫자는현재합산결과다. diff가있을때최종숫자만green#92daa5/700,뒤괄호(+10)는gray#8d9c96/400span. diff0은회색최종값만이며0값숨김/시간기준/기존행정의·계산유지. actualsample체력20 (+10),이동.29칸/초 (+.04칸/초)를표시한다. 같은helper에병행추가된근접/원거리공격력·공속정의와다른모델변경을보존했다.
+- 모바일: max700에서DNA카드56px폭/51.5px실제높이의모양만,이름/가격/사용수숨김. 접근성이름은기존gene이름aria-label. touch/pen480ms길게누르면카탈로그위기존이름tooltip,짧은tap은선택.9px이동/up/cancel/재렌더/destroy에서timer·표시정리,hold후합성click차단,터치contextmenu를catalog에서멈춰rootundo보호. PCmouse우클릭undo와카드텍스트보존. parent최종검수에서CSS만max700인반면JS모든touch폭에서발동하는불일치를발견해JS에도동일max700조건1개추가,큰터치화면unstyledtooltip회귀를예방했다.
+- 실제검증: 부모가현재제품runtime/editor,game.js실제render/update/미리보기합성함수와원본5parts를써격리headlessEdgePC1440x900·mobile390x844를렌더했다. 체력value20/괄호(+10),valuegreen700/괄호gray400,변경없는시야gray400/괄호없음·NaN없음확인. 모바일카드56px/이름·costdisplaynone/aria존재/가로넘침0/통계셀textoverflow0. CDP실제touchStart560ms후체력tooltipvisible·선택과3pieces불변,release숨김·선택보존,짧은taphealth선택,level4실제가로scroll1033px·hold취소·pieces보존을확인했고JS오류0이다. 마지막max700gate는같은검수viewport조건을제한하는최소정적교정으로성공한터치검사를반복하지않았다.
+- 렌더증거: D:/.codex/visualizations/2026/11/03/01a1a129-d9d6-79c3-830d-58009e34c915/attribute-design-pc.png·attribute-design-mobile.png를갱신했고부모가둘다직접열어합산강조·모바일아이콘/hold이름을감수했다. 모바일PNG는hold중이름이보이는상태다. 임시근거literal $Trash/ingame-attribute-panel-v3-20261103/qa.mjs·qa-result.json·runtime.presync.js·sync-final.mjs·각before사본. 전체게임network저장/생성/전투검증으로확대하지않는다.
+- 최종통합: runtime의현재editor모듈1개만narrow sync,동시쓰기guard·구문정상. 제품4경로client/game.js/game.css/dna-editor.mjs/runtime.js와이메모리만이번범위. 다른채팅의모델/Welcome/아트/문서변경보존,스테이징·커밋·푸시·배포없음. 남은요청구현없으며공통형식5파일과공백국소diff마감은직후결과를따른다.
+## 합산 결과 강조·모바일 DNA 아이콘화 진행 · 01a1a129 v3
+
+- 기록 ID: ingame-attribute-panel-v3-start-20261103-01a1a129. 기록 시각: 2026-11-03T21:23:20+09:00. 기록자·구현판단 Codex /root, 요구·표시교정주체 사용자. 출처현재채팅01a1a129-d9d6-79c3-830d-58009e34c915, H:/Spawner Windows/PowerShell. 원발언정확시각·턴ID불명. 기존Sol6.1low분담·부모검수유지.
+- 명시표시교정: 회색앞숫자를기본값이아닌합산최종값으로보여주고괄호(+10)를붙인다. 결과숫자만녹색굵게,괄호는회색보통. workergame.js의renderhelper만currentvalue출력/changedclass/delta span으로교정했고CSSworker도동일클래스계약을맞췄다. diff0은gray최종값만,기본/현재0행숨김·timebaseline·모델/계산은보존한다. 앞v2의base+녹색delta표시는이요구로대체된다.
+- 이어진모바일교정: 하단DNA텍스트를빼고길게누르면이름을보여주는제안을기존UI개선의실행방향으로수용한다. 부모판단은모바일에서이름/가격/사용수텍스트를숨겨DNA모양만작은버튼으로배치,단탭선택·longpress기존이름tooltip·스크롤중hold취소·길게누르기contextmenu가undo로전달되지않게하는것이다. PC카드텍스트/전체비용합계/기존우클릭undo유지. 새설명문구는추가하지않는다.
+- 현재접근근거: 같은helper의행정의에다른채팅이근접/원거리공격력·공속키를추가한것을확인했고보존한다. 이번부모/worker는그데이터/label변경을자기범위로되돌리지않는다. 임시근거는literal $Trash/ingame-attribute-panel-v3-20261103이며H쓰기는require_escalated로실행한다.
+## 속성 설계 패널 v2 완료·PC/모바일 최종 캡처 · 01a1a129 현재 요약
+
+- 기록 ID: ingame-attribute-panel-v2-complete-20261103-01a1a129. 기록·마지막근거확인 시각: 2026-11-03T21:15:17+09:00. 기록자·부모코드/실제화면검수 Codex /root, 구현 panel_layout/editor_input/budget_tests(gpt-6.1-sol low), 요구·0값정책교정주체 사용자. 출처현재채팅01a1a129-d9d6-79c3-830d-58009e34c915와항목명질문응답call_5cdf204e4669401292d9e08f664650f9 항목0, H:/Spawner Windows/PowerShell. 원발언정확시각·턴ID불명. v2-start와stat-filter를完了로갱신하며41행항상노출안은사용자반려로대체됐음을유지한다.
+- 변경: 연결가능ready문구/회전각도span제거,빈상태row숨김. name/input/save를상단툴바로옮기고input/save의formassociation유지,readonly저장button숨김을closestfooter가아닌button자체로교정,빈footer회수. PC미리보기180x210px/좌측270px로확대,모바일100x112px와독립stats114pxscroll로편집판높이보존. 부모첫실제검수에서PCinput width100%+flex:none상속이name/save60px겹침을만든것을발견하고flex:1/width:0으로고쳤다. 재캡처에서inputright1209/saveleft1221로12px간격확인.
+- 스탯: 실제dnaUnitStats.dna의41키(36numeric+scale+4bool)를모두지원하되emptybaseline과현재값둘다0이면행제외. 기본5행은체력10/이동.25/시야1/방어숙련50%/크기1배이며실제source출력에서얻는다. gray #8d9c96/개선delta #92daa5 굵기700. 시간은활성기관만둔stats의4/.12/.3초기준으로감소량을표시,다른필드는빈DNA기준현재-기본. boolean은0/1이며falsehide. 3소수trim. 종족/능력치/가격/현재모델분류는변경없고파생alias/loadedSpeed를중복표시하지않는다.
+- 실제부모검수: 현재runtime의실제editor와game.js의renderDnaDesignStats/updateDnaDesign함수를추출해제품DOM/CSS에연결했다. 유닛그림도실제composeAgentSprite/기본발/몸체함수와현5개basepart원본을사용했다. 빈DNA5행·실제유효level1채집/체력/이동DNA9행전환,체력+10·이동+.04및녹색700·영인공격숨김,41metadata키와실제stats키완전일치,0point저장활성·headerformsubmit1회,ready빈문구/각도DOM0·JS오류0을확인했다. 전체게임시작/network저장까지실행했다고확대하지않는다.
+- 최종렌더: PC1440x900 panel1360x876/board816x715/preview180x210,모바일390x844 panel378x832/board346x392/preview100x112. document가로넘침0·panelviewport내부·회전/추가정중앙·name/saveheader내부/겹침없음·nativeform연결유지. 부모가두PNG를직접열어전체를감수했고header교정후PC최종PNG도재감수했다. 모바일stats는독립스크롤이다. 이미성공한stats/form동작은반복하지않고공유CSS교정의레이아웃만재검증했다.
+- 캡처·증거: D:/.codex/visualizations/2026/11/03/01a1a129-d9d6-79c3-830d-58009e34c915/attribute-design-pc.png 및attribute-design-mobile.png를사용자에게채팅직접표시한다. 임시근거는literal $Trash/ingame-attribute-panel-v2-20261103/qa.mjs·qa-result.json(실제stats와submit)/qa-layout-final.json(겹침교정후)/runtime.presync.js·각before사본이다. 부모runtime동기화는editor1모듈만이며기존모델/서버/다른모듈은전면build하지않았다. editor카드끝원반경균등화와welcome-waveform별도배치등새동시변경은다른작업으로보호했다.
+- 완료범위: Spawner.html/client/game.css/client/game.js/client/dna-editor.mjs/client/runtime.js와이메모리. H쓰기/독립headless는변경된권한에맞춰require_escalated로실행,사용자desktop/browser/Codexsidepanel제어없음. 스테이징·커밋·푸시·배포없고요청구현남은것없음. 공통형식6파일·공백국소diff마감은직후실제결과를따른다.
+## 스탯 목록 0값 숨김·조건부 추가 확정 · 01a1a129 v2
+
+- 기록 ID: ingame-attribute-panel-v2-stat-filter-20261103-01a1a129. 기록 시각: 2026-11-03T21:07:02+09:00. 기록자·구현해석 Codex /root, 목록정책교정주체 사용자. 출처현재채팅01a1a129-d9d6-79c3-830d-58009e34c915의request_user_input_async call_5cdf204e4669401292d9e08f664650f9 항목0답변, H:/Spawner Windows/PowerShell. 원발언정확시각불명.
+- 사용자명시교정: 41개가너무많으니기본0이아닌스탯만표시하고DNA로추가된스탯은그때그때추가한다. 앞v2-start의41행항상노출은대체됨. 부모는앞질문의정확항목명41개에대한답변을동일이름의조건부표시승인으로해석하고문구를추가확인하지않는다. 별도설명문구없음유지.
+- 실행결정: 메타데이터41key전체를지원하되base!==0또는현재값!==0일때만DOM에렌더하고둘다0이면숨긴다. 기본gray/차이greenbold,기관boolean0/1도false는숨김. 기본nonzero예상은체력10·이동.25·시야1·방어숙련50%·크기1배이며실제모델값으로판정한다. 시간항목은활성기관만남긴실제stats의기본시간을gray로놓고감소분을green으로표시해0초→4초를속도개선으로오해시키지않는다. 모델수치/분류재설계는하지않는다.
+## 속성 설계 패널 상세 스탯·툴바 개선 진행 · 01a1a129 v2
+
+- 기록 ID: ingame-attribute-panel-v2-start-20261103-01a1a129. 기록 시각: 2026-11-03T21:04:45+09:00. 기록자·검수 Codex /root, 요청·분담주체 사용자. 출처 현재채팅01a1a129-d9d6-79c3-830d-58009e34c915, H:/Spawner Windows/PowerShell. 원발언정확시각·턴ID불명. 사용자직전실제PC스크린샷확인후후속요청이다.
+- 사용자요구: 연결가능텍스트·회전각도제거,왼쪽누락스탯전체추가,기본텍스트회색/증가분녹색굵게,유닛미리보기확대,과도하게긴이름입력과저장버튼배치개선,PC/모바일스크린샷둘다채팅표시. 이전Sol6.1low분담요청유효하여3기존worker재사용·부모검수. 환경write root는D시각화폴더하나로변경돼H변경은모두require_escalated로실행하며사용자desktop은제어하지않는다.
+- 구현판단: name/save를modalheadercompacttoolbar로이동하고formassociation유지,footer빈영역회수. PCside270px와preview180x210px/독립stats스크롤,모바일preview100px와stats128px영역으로board높이보존. ready문구만빈값·angleDOM제거. 기존organ굵기/길이·다른채팅의welcome/전투/모델변경보존.
+- 스탯조사: dnaUnitStats.dna의36numeric효과+scale1+boolean4=41원본키를전체노출하고alias/loadedSpeed파생중복은제외한다. 상위speed는이속으로덮이므로반드시.dna의speed를공속으로읽는다. base는emptyDNA실제값/변경분은현재값-base. 시간효과의활성0기준과확률/횟수는현재모델을그대로표시하며기능을정수횟수로재설계하지않는다. 신규항목명은정확문구사전승인지침때문에부모가최종mapping을제시한후응답대기할예정이며,다른레이아웃수정은병행한다. 전체스탯요청을새이름문구승인으로추정하지않는다.
+## 속성 설계 패널 최종 마감 확인 · 01a1a129
+
+- 기록 ID: ingame-attribute-panel-final-20261103-01a1a129. 기록·마지막 근거확인 시각: 2026-11-03T20:45:18+09:00. 기록자·검수주체 Codex /root, 요구주체 사용자. 출처 현재채팅01a1a129-d9d6-79c3-830d-58009e34c915, H:/Spawner Windows/PowerShell. complete기록의예정마감을실제결과로갱신한다.
+- 실제마감: 공통형식검사9파일전부UTF8NoBom/CRLF정상·git diff --check정상(병렬마감7.6초). final-static.json은현재runtime의editor모듈이최종source와일치하고design검증999999999가반영됨·runtime/game.js구문정상을확인했다. presync이후동시작업이runtime의별도투사체조건/모델을갱신해외부전체byte동일성assert1회실패했다. 이는제품결함이아닌시점이다른동시변경으로확인해보존했으며,외부모듈불변이라고주장하지않는다. 후속검사는해당비교를동시변경보고로바꾸고구문/본인모듈동기화만확인했다. 증거final-static.json의첫차이projectile.source.ownerId조건과기존presync사본에있다. 검증성공입력/서버회귀는반복하지않았다.
+- 최종상태: 부모가요청목록과완료기록·실제코드/렌더/회귀근거를대조했고남은요청구현없음. 낮은가로화면본문스크롤은유효한반응형처리다. 원본아트/다른채팅의게임·전투·기획서/추가welcome-header변경을보존했고스테이징·커밋·푸시·배포하지않았다. 이기록의국소형식검사는직후결과를따른다.
+## 인게임 속성 설계 패널 개선 완료 · 01a1a129 현재 요약
+
+- 기록 ID: ingame-attribute-panel-complete-20261103-01a1a129. 기록·마지막 근거확인 시각: 2026-11-03T20:43:40+09:00. 기록자·통합/코드/실제화면검수 Codex /root, 구현 editor_input/panel_layout/budget_tests(gpt-6.1-sol low), 요구·분담승인 사용자. 출처 현재채팅01a1a129-d9d6-79c3-830d-58009e34c915, H:/Spawner Windows/PowerShell. 원발언 정확시각·턴 ID 불명. start/contract/review-fixes기록을완료로갱신하며MAX_SAFE_INTEGER폐기이유와원기록을보존한다.
+- 변경결과: 제목속성설계, 이름입력과view간격확보·본문남는높이전체사용, 전체보기/줌/pan제거·viewport/둥지변경시tight-fit. 우하단비용2줄합계는실제기본3+DNA이며좌측중복비용제거. 등급1~4/조각수/진화포인트분모/크기/좌하단선택DNA제거,현둥지level이하전체카탈로그표시와선택gene고정grade사용. 기관주황·기능파랑·스탯민트배경은선택시에도유지하고기존DNA색유지. 하단회전/추가실제중앙정렬. 현재category/효과·밸런스는병행모델그대로사용한다.
+- 조작: 유효끝점/선택연결점클릭과Enter/Space배치, Q/E/R/좌우방향·휠회전,우클릭/Backspace/BrowserBack·마우스Back최신구조변경undo,CtrlZ/Y·ShiftCtrlZundo/redo. pieces와insertion을함께복원. gene/filter선택후editorfocus복원,버튼focusEnter/Space는native활성보존,readonlymutation차단. 예산부족문구·편집/저장제약제거하되실제탄생비용/포인트검증유지.
+- 실제검수: worker의UI회귀4pass와서버신규0포인트저장/직접탄생거부/birth:true미탄생회귀1pass를부모코드검토와대조했다. 부모isolatedheadlessEdge에서현제품DOM/CSS/editor를사용해1440x900/390x844/844x390를렌더했다. 최초sandboxEdge시작은crashpad파이프제약으로불가하여동일독립프로필headless를require_escalated로실행했다. 사용자desktop/browser/Codexsidepanel제어없음. 전체게임시작흐름을실행했다고주장하지않는다.
+- 화면·입력근거: 첫QA실제wheel/QE/Space0point배치·비용23·우클릭undo·CtrlY·Backspace·Enter·nativeundoEnter·readonly·level4전카탈로그/JS오류0통과. 부모가PC/모바일/가로PNG직접열어선택카드녹색덮임과가로board64px축소/비용잘림을발견했다. CSS선택배경우선순위및낮은화면본문내부scroll/min380px교정후해당레이아웃만재검증해PCboard571.7px/모바일358.7px/가로225.7px,이름겹침없음·document가로넘침0·dock정중앙·격자10px여백fit·비용board내부·선택3category상이색·DNAstroke유지·JS오류0을확인했다. 낮은가로화면은본문을세로scroll해하단조작을이용하며저장footer는고정이다. 실제7stats도현재game.js표현식과dnaUnitStats로채워모바일/가로PNG를직접재감수했다.
+- 근거·범위: literal $Trash/ingame-attribute-panel-20261103의before/budget-before사본,qa.mjs·qa-result.json(입력)/qa-layout-result.json(교정후layout)/panel-1440·390·844.png와runtime.presync/sync-runtime.mjs/runtime-sync.json. 전체builder없이현재runtimeeditor1모듈만sync했고서버design호출은병행runtime에이미999999999여서추가치환0. final-static과공통형식·국소diff마감은직후실제결과를따른다. 관련8제품파일(Spawner.html,client/game.css·game.js·dna-editor.mjs·dna-editor.test.mjs·runtime.js,server/game.mjs·dna.test.mjs)+이메모리. 기존/동시다른제품변경을보존했다. 미스테이징·미커밋·미푸시·미배포. 요청범위남은필수구현없음.
+## 패널 검수 중 계약·입력 결함 교정 · 01a1a129
+
+- 기록 ID: ingame-attribute-panel-review-fixes-20261103-01a1a129. 기록 시각: 2026-11-03T20:38:45+09:00. 기록자·검수/교정판단 Codex /root, 발견 budget_tests·부모, 구현 3워커 gpt-6.1-sol low. 요청주체 사용자. 출처 현재채팅01a1a129-d9d6-79c3-830d-58009e34c915, H:/Spawner Windows/PowerShell. 원발언정확시각불명.
+- contract기록의MAX_SAFE_INTEGER사용판단은대체됨: 실제M.validate의budget상한999999999때문에MAX_SAFE_INTEGER는설계저장전부를거부함을신규회귀가포착했다. 모델상한은바꾸지않고UI2곳/서버design분기만허용최대999999999로교정했다. 0포인트설계저장·실제탄생차단회귀재검증1pass. UI테스트4개(둥지/보존/회전배치undo/readonly)는실제통과했다. 최초서버전체검사에서health등급불일치2건을관찰했으나그후해당기존테스트에병행수정이등장해현재결과로확대하지않는다.
+- 부모코드검수교정: dock의status margin-left:auto가중앙정렬을깨므로2열중앙grid+다음행status로변경. Enter/Space가undo/회전버튼native활성화를가로채던handler는button대상native동작을보존. catalog재생성으로선택후focus가body로사라지는단축키결함은선택/필터후편집focus를복원하도록후속수정중. healer/secretion이름추가는editorworker본인변경이아니라동시작업임을보고받았고보존한다.
+- 통합판단: 전체builder는Attribute/Design및병행runtime모듈을불필요하게재생성하므로사용하지않는다. 현재runtime의editor모듈1개와embeddedserverdesign검증호출1곳만narrow치환하고그밖바이트를보존한다. 부모는실제제품DOM/CSS/editor로PC/모바일/가로뷰검수준비중이다.
+## 속성 패널 입력·비용 구현 판단 · 01a1a129
+
+- 기록 ID: ingame-attribute-panel-contract-20261103-01a1a129. 기록 시각: 2026-11-03T20:32:48+09:00. 기록자·검수 Codex /root, 구체구현판단 워커 editor_input/panel_layout, 기능요구·분담주체 사용자. 출처 현재채팅01a1a129-d9d6-79c3-830d-58009e34c915, H:/Spawner Windows/PowerShell, 워커 gpt-6.1-sol low. 원발언 시각 불명.
+- 확인한 코드: birthCost는 DNA 전종족 공통3+ATTRIBUTE_DNA.price이며 편집기 합계를 이공식에 맞춘다. 같은 비용의좌측진화포인트행은제거한다. validateDna는탄생공용이므로바꾸지않고편집저장UI2곳/서버design분기만MAX_SAFE_INTEGER로검증해실제생성의보유포인트검사를보존한다.
+- 구현계약: 현재level이하모든해금조각을목록에표시하고선택gene.grade를사용한다. undo/redo는pieces와삽입위치snapshot. 유효끝점/선택연결점클릭과Enter/Space배치,휠/QE/좌우회전,우클릭/Backspace/BrowserBack·마우스Back되돌리기. 자유pan/zoom제거,resize/level마다육각외곽에fit한다. 합계markup은.dna-cost의strong이다. 문구추가는사용자가명시한속성설계/비용만,새설명·툴팁은생략한다. readonly모두변경차단.
+- 검수준비: canonical validation guideline과visual-qa를읽었다. 실제현재panelDOM/CSS를격리headlessEdge에서검수할예정이며사용자의브라우저/데스크톱/Codex패널은열거나제어하지않는다. 다른채팅이client/game.js의4924부근투사체루프를동시에수정한것을before대조에서관찰했으며이번작업변경으로분류하지않고보존한다.
+## 인게임 속성 설계 패널 개선 진행 · 01a1a129 현재 요약
+
+- 기록 ID: ingame-attribute-panel-start-20261103-01a1a129. 기록 시각: 2026-11-03T20:28:35+09:00. 기록자·검수 Codex /root, 요청·분담결정 사용자. 출처 현재채팅 01a1a129-d9d6-79c3-830d-58009e34c915, H:/Spawner Windows/PowerShell. 원발언 정확시각·턴 ID 불명.
+- 사용자 요청: 인게임 제목을 속성 설계로 변경, 전체화면/줌 및 자유view제어 제거와 패널에 항상 맞춤, view 세로 확대와 이름 겹침 해결, view 우하단 비용/합계 표시, 카탈로그 category 배경과 DNA 색 유지, 좌하단 선택DNA·조각수/포인트/크기·레벨1~4 제거, 현재 둥지 레벨 자동 적용, 하단 회전·추가 중앙정렬. 우클릭과 Back은 최신 변경 되돌리기, 키보드/휠 회전과 반복배치 개선. 설계 중 예산 경고·제약 제거하고 실제 탄생의 포인트 차감은 유지한다. 기능은 횟수 정수, 스탯은 공속/이속 등 증가값이라는 방향이며 이번에는 데이터 밸런스 임의 변경 없이 현 category 표시를 개선한다.
+- 분담: 사용자 명시대로 GPT-6.1 Sol low 워커를 UI 구조/레이아웃과 편집동작으로 나누고 부모가 통합·코드/실제화면 감수한다. 보호된 기존 dirty 파일 다수이며 task 직전 사본은 literal $Trash/ingame-attribute-panel-20261103. 관련 보드 조회는 origin https://github.com/oojjrs/Spawner의 연결 Projects 0개. Git 완료/배포 요청은 없으므로 미스테이징·미커밋으로 남긴다.
 ## 전투 뷰어 관련 메모리 포함 로컬 커밋 범위 확정 · 01a1a155
 
 - 기록 ID: combat-viewer-local-commit-scope-20261103-01a1a155. 기록·마지막 근거 확인 시각: 2026-11-03T22:10:08+09:00. 기록자·범위분리판단 Codex /root, 메모리기록·로컬커밋결정주체 사용자. 출처 현재채팅01a1a155-d06b-7243-b396-e5c947a4714e,H:/Spawner Windows/PowerShell. 원발언정확시각·턴/항목ID·PC식별불명.

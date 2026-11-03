@@ -138,3 +138,20 @@ test("DNA 연타는 같은 공격 주기 안에 후속 타격하고 범위 공�
   const lethal=combatFixture({...base,dna:{...base.dna,power:1000,area:1,areaPower:50}},target);lethal.tick(0);lethal.tick(lethal.a.attack.hitAt);
   assert.equal(lethal.b.health,0);assert.ok(lethal.c.health<100);
 });
+
+test("0포인트에서도 DNA를 저장하지만 실제 탄생은 차단한다",()=>{
+  const {game}=fixture(1),dna=design(["gather"],1),saved=JSON.parse(game.save());
+  saved.state.evolutionPoints=0;game.restore(JSON.stringify(saved));
+  const count=game.agents.length;
+  assert.ok(ATTRIBUTE_DNA.price(dna.pieces)>0);
+  const {templateId}=game.command({type:"design",templateId:null,name:"미리 설계",dna,birth:false});
+  assert.equal(game.snapshot().evolutionPoints,0);
+  assert.deepEqual(game.snapshot().templates.find(item=>item.id===templateId).dna.pieces,dna.pieces);
+  const before=game.save();
+  assert.throws(()=>game.command({type:"birth",templateId}),/설계를 수정|포인트가 부족/);
+  assert.equal(game.save(),before);
+  const result=game.command({type:"design",templateId,name:"미리 설계",dna,birth:true});
+  assert.equal(result.agentId,null);
+  assert.equal(game.snapshot().evolutionPoints,0);
+  assert.equal(game.agents.length,count);
+});

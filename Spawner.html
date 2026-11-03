@@ -187,7 +187,12 @@
   <div class="design-backdrop" id="design-backdrop" hidden></div>
   <section class="evolution-panel" id="evolution-panel" role="dialog" aria-modal="true" aria-labelledby="design-title" hidden>
     <div class="panel-header">
-      <h2 id="design-title">새 유닛 설계</h2>
+      <h2 id="design-title">속성 설계</h2>
+      <div class="design-toolbar-name">
+        <label class="design-name" for="design-name">템플릿 이름</label>
+        <input class="design-name-input" id="design-name" type="text" form="unit-design-form" maxlength="24" required autocomplete="off" placeholder="이 생명체를 뭐라고 부를까요?">
+      </div>
+      <button class="primary-action" id="design-save" type="submit" form="unit-design-form"><span id="design-save-label">설계 저장</span></button>
       <button class="panel-close" id="evolution-close" type="button" aria-label="설계 닫기">×</button>
     </div>
     <form id="unit-design-form">
@@ -197,8 +202,6 @@
           <dl id="design-stats"></dl>
         </div>
         <div class="design-editor">
-          <label class="design-name" for="design-name">템플릿 이름</label>
-          <input class="design-name-input" id="design-name" type="text" maxlength="24" required autocomplete="off" placeholder="이 생명체를 뭐라고 부를까요?">
           <div class="design-slot-group">
             <div class="design-slot-heading"><strong>속성 슬롯</strong></div>
             <div class="design-slots" id="design-slots" aria-label="설계 속성 슬롯"></div>
@@ -208,7 +211,6 @@
       </div>
       <div class="design-footer">
         <p class="design-status" id="design-status" role="status"></p>
-        <div class="design-buttons"><button class="primary-action" id="design-save" type="submit"><span id="design-save-label">설계 저장</span></button></div>
       </div>
     </form>
   </section>

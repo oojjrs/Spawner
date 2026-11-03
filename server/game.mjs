@@ -1884,7 +1884,7 @@ export function createGame(environment, colony, savedGame) {
       }
       if (action.type === "design") {
         const name = requireName(action.name);
-        const dna = action.dna ? validateDna(action.dna, state.nestLevel, state.evolutionPoints) : null;
+        const dna = action.dna ? validateDna(action.dna, state.nestLevel, 999999999) : null;
         if (action.dna && !dna) throw new Error("설계 속성을 다시 확인해 주세요.");
         if (dna) action = { ...action, slots: Object.keys(dnaAppearance(dna)).filter(key => key !== "dnaGather") };
         if (!dna && (!Array.isArray(action.slots) || action.slots.length > slotCapacity() || new Set(action.slots).size !== action.slots.length ||

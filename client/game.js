@@ -7774,6 +7774,45 @@
     function dnaDesignValid(dna) {
       return !!Spawner.validateDna(dna, state.nestLevel, state.evolutionPoints);
     }
+    function renderDnaDesignStats(container, stats, base) {
+      const rows = [
+        ["health", "체력", ""], ["power", "공격", ""], ["hits", "공격횟수", "회"], ["speed", "공속", "/초"],
+        ["armor", "방어", ""], ["parry", "패링", "%"], ["block", "블록", "%"], ["evasion", "회피", "%"],
+        ["capacity", "운반", "개"], ["harvest", "채집량", "개"], ["harvestTime", "채집 시간", "초"], ["movement", "이동", "칸/초"],
+        ["vision", "시야", "칸"], ["comboPower", "연격숙련", "%"], ["critical", "치명", "%"], ["criticalPower", "치명위력", "%"],
+        ["accuracy", "정밀", "%"], ["penetration", "예리함", ""], ["blockPower", "방어숙련", "%"], ["counter", "반격", "%"],
+        ["counterPower", "반격위력", "%"], ["tenacity", "강인함", "%"], ["reduction", "완충", "%"], ["loadSpeed", "하중적응", "%"],
+        ["healing", "회복력", "%"], ["stun", "기절", "%"], ["stunTime", "기절연장", "초"], ["bleed", "출혈", "%"],
+        ["bleedPower", "출혈강도", ""], ["area", "범위공격", "칸"], ["areaPower", "확산위력", "%"], ["lifesteal", "흡혈", "%"],
+        ["reflection", "반사", "%"], ["regeneration", "재생", "/초"], ["comboSpeed", "연타 간격", "초"], ["focus", "공격 준비", "초"],
+        ["scale", "크기", "배"], ["melee", "칼날", ""], ["ranged", "분비기관", ""], ["healer", "치유기관", ""], ["roaming", "안테나", ""]
+      ];
+      const format = value => String(Number(value.toFixed(3)));
+      const fragment = document.createDocumentFragment();
+      for (const [key, label, unit] of rows) {
+        if (stats[key] === undefined || base[key] === undefined) continue;
+        const value = Number(stats[key]), initial = Number(base[key]);
+        if (initial === 0 && value === 0) continue;
+        const term = document.createElement("dt");
+        term.textContent = label;
+        term.dataset.stat = key;
+        const description = document.createElement("dd");
+        description.dataset.stat = key;
+        const difference = Number((value - initial).toFixed(3));
+        const result = document.createElement("span");
+        result.className = "design-stat-value" + (difference !== 0 ? " design-stat-changed" : "");
+        result.textContent = format(value) + unit;
+        description.append(result);
+        if (difference !== 0) {
+          const delta = document.createElement("span");
+          delta.className = "design-stat-delta";
+          delta.textContent = " (" + (difference > 0 ? "+" : "") + format(difference) + ")";
+          description.append(delta);
+        }
+        fragment.append(term, description);
+      }
+      container.replaceChildren(fragment);
+    }
     function updateDnaDesign() {
       combatPrimaryRow.hidden = true;
       designDnaEditor.context(state.nestLevel, state.evolutionPoints, unitDraft.readOnly || !!state.ending);
@@ -7785,17 +7824,12 @@
       const counts = Spawner.dnaAppearance(unitDraft.dna);
       prepareAgentTemplate(unitDraft).catch(() => {});
       document.getElementById("design-preview-image").src = agentImageSource({ tribe: unitDraft.tribe, attributes: counts, carrying: 0 });
-      const statValues = [["진화포인트", birthCost(unitDraft, unitDraft.tribe)], ["공격", stats.attackPower], ["방어", stats.defense], ["공속", stats.attackSpeed.toFixed(2) + "/초"], ["시야", stats.vision + "칸"], ["운반", stats.capacity + "개"], ["이동", Number(stats.speed.toFixed(2)) + "칸/초"], ["체력", stats.health]];
-      const fragment = document.createDocumentFragment();
-      for (const [label, value] of statValues) {
-        const term = document.createElement("dt");
-        term.textContent = label;
-        const description = document.createElement("dd");
-        description.textContent = value;
-        fragment.append(term, description);
-      }
-      document.getElementById("design-stats").replaceChildren(fragment);
-      designSave.disabled = unitDraft.readOnly || !!state.ending || connection.busy || !connection.online || !dnaDesignValid(unitDraft.dna);
+      const base = { ...Spawner.dnaUnitStats({ ...unitDraft.dna, pieces: [] }).dna };
+      const organPieces = unitDraft.dna.pieces.filter(piece => Spawner.ATTRIBUTE_DNA.lookup.get(piece.gene)?.category === "organ");
+      const organStats = Spawner.dnaUnitStats({ ...unitDraft.dna, pieces: organPieces }).dna;
+      for (const key of ["harvestTime", "comboSpeed", "focus"]) if (stats.dna[key] > 0) base[key] = organStats[key];
+      renderDnaDesignStats(document.getElementById("design-stats"), stats.dna, base);
+      designSave.disabled = unitDraft.readOnly || !!state.ending || connection.busy || !connection.online || !Spawner.validateDna(unitDraft.dna, state.nestLevel, 999999999);
       setEvolutionText(designStatus, unitDraft.error);
     }
 
@@ -8220,10 +8254,10 @@
         designDnaEditor.context(state.nestLevel, state.evolutionPoints, unitDraft.readOnly || !!state.ending);
         designDnaEditor.load(unitDraft.dna, unitDraft.readOnly || !!state.ending);
       }
-      designSave.closest(".design-footer").hidden = !!readOnly;
+      designSave.hidden = !!readOnly;
       closeCodex(false);
       designName.setCustomValidity("");
-      document.getElementById("design-title").textContent = readOnly ? "유닛 설계도" : template ? "유닛 설계 수정" : "새 유닛 설계";
+      document.getElementById("design-title").textContent = "속성 설계";
       evolutionPanel.hidden = false;
       designBackdrop.hidden = false;
       document.querySelector(".app").inert = true;
@@ -8364,7 +8398,7 @@
         designName.reportValidity();
         return;
       }
-      if (unitDraft.dna && !dnaDesignValid(unitDraft.dna)) return;
+      if (unitDraft.dna && !Spawner.validateDna(unitDraft.dna, state.nestLevel, 999999999)) return;
       const result = await sendCommand(unitDraft.dna ? { type: "design", templateId: unitDraft.id,
         name, nameEdited: unitDraft.nameEdited, dna: { ...Spawner.cloneDna(unitDraft.dna), budget: state.evolutionPoints, level: state.nestLevel }, birth: false } : { type: "design", templateId: unitDraft.id,
         name, nameEdited: unitDraft.nameEdited, slots: [...unitDraft.slots], combatPrimary: unitDraft.combatPrimary, birth: false });
