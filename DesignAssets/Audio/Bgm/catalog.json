@@ -157,6 +157,30 @@
       "sourceFile": "Spawner/batches/AMG_Spawner_Slow_20261022/14_Dry_Chamber_240/Dry_Chamber_240-B-f0ac58f1.mp3",
       "sourcePage": "https://ai-music-generator.ai/ko/song/f0ac58f1-65a3-4466-8e6c-b59fa64e3a92",
       "sha256": "e7b889594e4d172aad1ec85fc14ff235ae63d1e1986796a422966de00d3a21c9"
+    },
+    {
+      "id": "04d493d0-ed85-421a-ac32-8a494a0c304b",
+      "number": 9,
+      "title": "클래식 × 에픽 · 소편성 시네마틱",
+      "mode": "combat",
+      "file": "DesignAssets/Audio/Bgm/combat-viewer/Chamber_Epic_Tension-A-04d493d0.mp3",
+      "durationSeconds": 167.17297916666666,
+      "sourceFile": "Spawner/batches/AMG_Spawner_Battle_20261103/05_Chamber_Epic_Tension/Chamber_Epic_Tension-A-04d493d0.mp3",
+      "sourcePage": "https://ai-music-generator.ai/ko/song/04d493d0-ed85-421a-ac32-8a494a0c304b",
+      "sha256": "fc0be59180aa33911ddf1ad6376c8862106abded1fc41c332586d82f40ac641e",
+      "sourceBatchId": "AMG_Spawner_Battle_20261103"
+    },
+    {
+      "id": "49d5706f-ca60-416b-8855-f88f793c41db",
+      "number": 10,
+      "title": "클래식 × 에픽 · 소편성 시네마틱",
+      "mode": "combat",
+      "file": "DesignAssets/Audio/Bgm/combat-viewer/Chamber_Epic_Tension-B-49d5706f.mp3",
+      "durationSeconds": 148.02097916666668,
+      "sourceFile": "Spawner/batches/AMG_Spawner_Battle_20261103/05_Chamber_Epic_Tension/Chamber_Epic_Tension-B-49d5706f.mp3",
+      "sourcePage": "https://ai-music-generator.ai/ko/song/49d5706f-ca60-416b-8855-f88f793c41db",
+      "sha256": "a7cdd022040a421bb1c274cd35035bc40504af4701851cc4ddca8e1dc50da4c2",
+      "sourceBatchId": "AMG_Spawner_Battle_20261103"
     }
   ]
 }

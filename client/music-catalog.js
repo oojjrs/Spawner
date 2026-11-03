@@ -71,6 +71,16 @@ globalThis.SpawnerMusicCatalog = Object.freeze({
       "number": 28,
       "title": "목관·피치카토 · 지속 긴장",
       "file": "DesignAssets/Audio/Bgm/combat/Dry_Chamber_240-B-f0ac58f1.mp3"
+    },
+    {
+      "number": 9,
+      "title": "클래식 × 에픽 · 소편성 시네마틱",
+      "file": "DesignAssets/Audio/Bgm/combat-viewer/Chamber_Epic_Tension-A-04d493d0.mp3"
+    },
+    {
+      "number": 10,
+      "title": "클래식 × 에픽 · 소편성 시네마틱",
+      "file": "DesignAssets/Audio/Bgm/combat-viewer/Chamber_Epic_Tension-B-49d5706f.mp3"
     }
   ]
 });
