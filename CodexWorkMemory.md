@@ -1,3 +1,11 @@
+## 전투 음악 배포 산출물·웰컴 배경 포장 교정 · 01a1a0d5
+
+- 기록 ID: combat-music-packaging-ready-20261104-01a1a0d5. 기록·실제확인 시각: 2026-11-04T05:12:58+09:00. 기록자·Git/배포준비 Codex /root, 포장최소수정 /root/attribute_nest_fix(gpt-6.1-sol/low), 음악포함커밋·푸시·배포승인 주체 사용자. 출처현재채팅01a1a0d5-24ef-74c1-bb1e-8d4a43e1cbd2,H:/Spawner Windows/PowerShell. 발언정확시각·턴ID불명.
+- 실제로컬커밋: 108f3ff944d7c68d65ab6f2a5c8e6326379d1a58 전투 음악 2곡과 로컬 재생 자산 추가, parent e148ca1,tree803af66cc3f0c210351224a95dbb3cb83162c566. 음악6제품경로와관련기록을동일커밋에넣었고직후cached0/root음악바이트불변을확인했다.
+- 준비실패·해결: 기존prepareSite의내장자산금지검사가새Welcome의client/welcome-art.js 실제base64에걸려첫포장이중단됐다. 내장WebP는원본DesignAssets/Welcome/forest-clearing.webp(58008bytes/SHA5baf988de24cba01ed3f470d4e6e357bbf938ecbf77f4f6a2d9cfcebd7fb2d92)와동일했다. hosting/prepare-site.mjs에서이정확dataURI/원본바이트일치를검증하고출력용Map만원본경로→hashedCDN URL로치환한다. 전체base64금지검사는유지하고실제welcome-client/원본이미지·HTML은변경하지않았다. 부모가7+/1-실제diff를읽고재실행성공을확인했다.
+- 실제산출물: 프로젝트ID appgprj_6ada1cedf2848191938f196c4f346ee9,클라이언트원본revision108f3ff944d7c68d65ab6f2a5c8e6326379d1a58,논리자산554개/357590664bytes/최대8698897bytes. 실제CDN해시파일은중복제거541개다. raw원본추가목록은정확출력URLset을기준으로기존H:/oojjrs.github.io/spawner-assets에게시한다. 원래554를중복제거count로가정한검사는Git변경전에멈췄고실제set541을oracle로교정했다. 신곡원본2개와Welcome원본도이계약에포함한다.
+- 다음순서·보존: 현재호스팅수정과이기록을지원커밋으로올린다. 배포용클라이언트입력은108f로고정돼있고이번지원커밋은hosting/메모리만달라같은산출물을재사용한다. CDN필수신규파일만먼저게시한뒤전용게임main push·readback/Sites한국어source commit·공식helper포장·저장·public배포·신곡실제HTTP해시확인을이어간다. 아직원격push/배포성공은미확인. 기존dirty루트/공유index/자산repo3보호파일을보존한다.
+
 ## 로컬 전투 음악 포함 커밋·푸시·공개 배포 진행 · 01a1a0d5
 
 - 기록 ID: combat-music-publication-start-20261104-01a1a0d5. 기록 시각: 2026-11-04T05:04:32+09:00. 기록자·배포/Git범위판단 Codex /root, 음악연결 /root/attribute_nest_fix(gpt-6.1-sol/low), 전투음악포함·메모리·커밋·푸시·배포 승인 주체 사용자. 출처 현재채팅01a1a0d5-24ef-74c1-bb1e-8d4a43e1cbd2,H:/Spawner Windows/PowerShell. 발언정확시각·턴ID불명.

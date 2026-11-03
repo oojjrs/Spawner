@@ -16,6 +16,12 @@ export function prepareSite(destination, readSource, revision, assetDirectory) {
     .replace(/^  <script src="\.\/client\/local-assets\.js"><\/script>\r?\n/m, "");
   const clients = new Map([...html.matchAll(/<(?:script|link)\b[^>]*(?:src|href)="\.\/(client\/[^"]+)"/g)]
     .map(match => [match[1], readSource(match[1]).toString("utf8")]));
+  if (clients.has("client/welcome-art.js")) {
+    const welcomePath = "DesignAssets/Welcome/forest-clearing.webp";
+    const welcomeSource = clients.get("client/welcome-art.js").match(/^globalThis\.SpawnerWelcomeBackground = ("data:image\/webp;base64,[A-Za-z0-9+/]*={0,2}");\r?\n?$/);
+    if (!welcomeSource || !Buffer.from(JSON.parse(welcomeSource[1]).slice("data:image/webp;base64,".length), "base64").equals(readSource(welcomePath))) throw new Error("내장 자산을 DesignAssets 파일로 분리해 주세요.");
+    clients.set("client/welcome-art.js", "globalThis.SpawnerWelcomeBackground = " + JSON.stringify(welcomePath) + ";\r\n");
+  }
   const assets = new Map();
   for (const source of [html, ...clients.values()]) {
     if (/data:[^;,\s]+;base64,/.test(source)) throw new Error("내장 자산을 DesignAssets 파일로 분리해 주세요.");
@@ -43,7 +49,7 @@ export function prepareSite(destination, readSource, revision, assetDirectory) {
       const marker = "const sources = Object.create(null);";
       if (source.split(marker).length !== 2) throw new Error("자산 경로 초기화를 확인해 주세요.");
       write(name, source.replace(marker, "const sources = Object.assign(Object.create(null), " + JSON.stringify(Object.fromEntries(assetPaths)) + ");"));
-    } else if (name === "client/music-catalog.js") {
+    } else if (name === "client/music-catalog.js" || name === "client/welcome-art.js") {
       let catalog = source;
       for (const [assetName, assetPath] of assetPaths) catalog = catalog.replaceAll(assetName, assetPath);
       write(name, catalog);
