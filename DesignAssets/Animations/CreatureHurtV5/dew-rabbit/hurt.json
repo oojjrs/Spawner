@@ -41,5 +41,6 @@
   "matrix": "hurt-matrix.webp",
   "previewPauseMs": 900,
   "drawnPoseCount": 6,
-  "artworkScale": 1
+  "artworkScale": 1,
+  "runtimeRegistration": {"frameSize":430,"pivotX":223,"pivotY":360.5,"viewSize":430,"registrationScale":1.0311750599520384,"groundRadiusX":0.199041,"groundRadiusY":0.03717}
 }

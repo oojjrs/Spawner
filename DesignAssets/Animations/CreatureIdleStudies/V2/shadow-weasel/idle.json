@@ -274,5 +274,6 @@
   "preview": "idle-preview.webp",
   "gif": "idle-preview.gif",
   "rig": "rig.json",
-  "thumbnail": "idle-thumbnail.webp"
+  "thumbnail": "idle-thumbnail.webp",
+  "runtimeRegistration": {"frameSize":414,"pivotX":200.999999,"pivotY":350.000002,"viewSize":414.00000000000006,"registrationScale":1.297805642633229,"groundRadiusX":0.285266,"groundRadiusY":0.037618}
 }

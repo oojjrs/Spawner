@@ -1,11 +1,11 @@
 {
-  "frameSize": 264, 
+  "frameSize": 264,
   "displaySize": 263.6242424242424, 
   "scale": 0.515625, 
   "idleReference": "DesignAssets/Animations/UniqueIdleV3/old-garden-snail/idle.webp", 
-  "viewSize": 239.34065934065933, 
-  "pivotX": 133.57237293956044, 
-  "pivotY": 230.11323832417582, 
+  "viewSize": 239.34065934065933,
+  "pivotX": 125.200549,
+  "pivotY": 217.401099,
   "sourcePivot": [
     256, 
     448
@@ -28,5 +28,7 @@
   "facing": "left", 
   "source": "attack.webp", 
   "exporter": "../export-runtime.py", 
-  "processing": "One common whole-cel scale for every frame. Original artwork, timing and source registration remain unchanged; runtime pivot aligns the exact seed to its accepted idle appearance."
+  "processing": "One common whole-cel scale for every frame. Original artwork, timing and source registration remain unchanged; runtime pivot aligns the exact seed to its accepted idle appearance.",
+  "groundRadiusX": 0.318182,
+  "groundRadiusY": 0.056818
 }

@@ -167,5 +167,6 @@
   "attachmentRepairCount": 1,
   "uniquePoseCount": 9,
   "expressionHoldMs": 450,
-  "expressionContact": "expression-contact.png"
+  "expressionContact": "expression-contact.png",
+  "runtimeRegistration": {"frameSize":472,"pivotX":236,"pivotY":413,"viewSize":472,"registrationScale":1.0925925925925926}
 }

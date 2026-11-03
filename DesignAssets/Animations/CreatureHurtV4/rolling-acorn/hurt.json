@@ -77,5 +77,6 @@
   "matrix": "hurt-matrix.webp",
   "rig": "rig.json",
   "layers": "Layers",
-  "previousVersion": "DesignAssets/Animations/CreatureHurtV3/rolling-acorn/hurt.webp"
+  "previousVersion": "DesignAssets/Animations/CreatureHurtV3/rolling-acorn/hurt.webp",
+  "runtimeRegistration": {"frameSize":428,"pivotX":215,"pivotY":358.5,"viewSize":428,"registrationScale":1.019047619047619,"groundRadiusX":0.178571,"groundRadiusY":0.039286}
 }

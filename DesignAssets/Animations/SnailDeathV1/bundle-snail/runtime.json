@@ -2,10 +2,10 @@
   "name": "bundle-snail",
   "action": "death",
   "image": "DesignAssets/Animations/SnailDeathV1/bundle-snail/runtime.webp",
-  "frameSize": 256,
-  "viewSize": 255.95759717314488,
-  "pivotX": 128.03533568904592,
-  "pivotY": 248.9558303886926,
+  "frameSize": 304,
+  "viewSize": 303.94964664310953,
+  "pivotX": 146.855124,
+  "pivotY": 254.745583,
   "columns": 8,
   "frameCount": 43,
   "durationsMs": [
@@ -78,5 +78,8 @@
       220,
       225
     ]
-  }
+  },
+  "groundRadiusX": 0.288945,
+  "groundRadiusY": 0.04397,
+  "frameGeometry": {"0":{"pivotX":146.855124,"pivotY":254.745583,"groundRadiusX":0.288945,"groundRadiusY":0.04397},"1":{"pivotX":147.120478,"pivotY":254.751641,"groundRadiusX":0.285786,"groundRadiusY":0.043946},"2":{"pivotX":147.385832,"pivotY":254.757698,"groundRadiusX":0.282627,"groundRadiusY":0.043923},"3":{"pivotX":147.651186,"pivotY":254.763756,"groundRadiusX":0.279468,"groundRadiusY":0.043899},"4":{"pivotX":147.91654,"pivotY":254.769813,"groundRadiusX":0.27631,"groundRadiusY":0.043875},"5":{"pivotX":148.181895,"pivotY":254.775871,"groundRadiusX":0.273151,"groundRadiusY":0.043852},"6":{"pivotX":148.447249,"pivotY":254.781928,"groundRadiusX":0.269992,"groundRadiusY":0.043828},"7":{"pivotX":148.712603,"pivotY":254.787986,"groundRadiusX":0.266833,"groundRadiusY":0.043804},"8":{"pivotX":148.977957,"pivotY":254.794043,"groundRadiusX":0.263674,"groundRadiusY":0.043781},"9":{"pivotX":149.243311,"pivotY":254.800101,"groundRadiusX":0.260516,"groundRadiusY":0.043757},"10":{"pivotX":149.508666,"pivotY":254.806159,"groundRadiusX":0.257357,"groundRadiusY":0.043733},"11":{"pivotX":149.77402,"pivotY":254.812216,"groundRadiusX":0.254198,"groundRadiusY":0.04371},"12":{"pivotX":150.039374,"pivotY":254.818274,"groundRadiusX":0.251039,"groundRadiusY":0.043686},"13":{"pivotX":150.304728,"pivotY":254.824331,"groundRadiusX":0.247881,"groundRadiusY":0.043662},"14":{"pivotX":150.570082,"pivotY":254.830389,"groundRadiusX":0.244722,"groundRadiusY":0.043639},"15":{"pivotX":150.835437,"pivotY":254.836446,"groundRadiusX":0.241563,"groundRadiusY":0.043615},"16":{"pivotX":151.100791,"pivotY":254.842504,"groundRadiusX":0.238404,"groundRadiusY":0.043591},"17":{"pivotX":151.366145,"pivotY":254.848561,"groundRadiusX":0.235245,"groundRadiusY":0.043568},"18":{"pivotX":151.631499,"pivotY":254.854619,"groundRadiusX":0.232087,"groundRadiusY":0.043544},"19":{"pivotX":151.896853,"pivotY":254.860676,"groundRadiusX":0.228928,"groundRadiusY":0.04352},"20":{"pivotX":152.162208,"pivotY":254.866734,"groundRadiusX":0.225769,"groundRadiusY":0.043497},"21":{"pivotX":152.427562,"pivotY":254.872792,"groundRadiusX":0.22261,"groundRadiusY":0.043473},"22":{"pivotX":152.692916,"pivotY":254.878849,"groundRadiusX":0.219452,"groundRadiusY":0.043449},"23":{"pivotX":152.95827,"pivotY":254.884907,"groundRadiusX":0.216293,"groundRadiusY":0.043426},"24":{"pivotX":153.223624,"pivotY":254.890964,"groundRadiusX":0.213134,"groundRadiusY":0.043402},"25":{"pivotX":153.488979,"pivotY":254.897022,"groundRadiusX":0.209975,"groundRadiusY":0.043378},"26":{"pivotX":153.754333,"pivotY":254.903079,"groundRadiusX":0.206816,"groundRadiusY":0.043355},"27":{"pivotX":154.019687,"pivotY":254.909137,"groundRadiusX":0.203658,"groundRadiusY":0.043331},"28":{"pivotX":154.285041,"pivotY":254.915194,"groundRadiusX":0.200499,"groundRadiusY":0.043307},"29":{"pivotX":154.550395,"pivotY":254.921252,"groundRadiusX":0.19734,"groundRadiusY":0.043284},"30":{"pivotX":154.81575,"pivotY":254.927309,"groundRadiusX":0.194181,"groundRadiusY":0.04326},"31":{"pivotX":155.081104,"pivotY":254.933367,"groundRadiusX":0.191022,"groundRadiusY":0.043236},"32":{"pivotX":155.346458,"pivotY":254.939425,"groundRadiusX":0.187864,"groundRadiusY":0.043213},"33":{"pivotX":155.611812,"pivotY":254.945482,"groundRadiusX":0.184705,"groundRadiusY":0.043189},"34":{"pivotX":155.877166,"pivotY":254.95154,"groundRadiusX":0.181546,"groundRadiusY":0.043165},"35":{"pivotX":156.142521,"pivotY":254.957597,"groundRadiusX":0.178387,"groundRadiusY":0.043142},"36":{"pivotX":156.407875,"pivotY":254.963655,"groundRadiusX":0.175229,"groundRadiusY":0.043118},"37":{"pivotX":156.673229,"pivotY":254.969712,"groundRadiusX":0.17207,"groundRadiusY":0.043094},"38":{"pivotX":156.938583,"pivotY":254.97577,"groundRadiusX":0.168911,"groundRadiusY":0.043071},"39":{"pivotX":157.203937,"pivotY":254.981827,"groundRadiusX":0.165752,"groundRadiusY":0.043047},"40":{"pivotX":157.469292,"pivotY":254.987885,"groundRadiusX":0.162593,"groundRadiusY":0.043023},"41":{"pivotX":157.734646,"pivotY":254.993942,"groundRadiusX":0.159435,"groundRadiusY":0.043},"42":{"pivotX":158,"pivotY":255,"groundRadiusX":0.156276,"groundRadiusY":0.042976}}
 }

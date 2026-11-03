@@ -55,8 +55,7 @@
     "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/Frames/015.png"
   ],
   "runtimeAtlas": "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp",
-  "runtimeFrameSize": [
-    117,
-    117
-  ]
+  "runtimeFrameSize": [144,144],
+  "runtimePivot": [72,126],
+  "runtimeRegistration": {"frameSize":144,"pivotX":72,"pivotY":126,"viewSize":144,"registrationScale":1.2307692307692308}
 }

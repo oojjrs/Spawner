@@ -99,5 +99,6 @@
     "supportFootFixed": true,
     "maximumTiltDegrees": 15.469860468532227,
     "liftedFoot": "left"
-  }
+  },
+  "runtimeRegistration": {"frameSize":224,"pivotX":112,"pivotY":196,"viewSize":224,"registrationScale":1}
 }

@@ -1,6 +1,6 @@
 {
   "image": "DesignAssets/Animations/MountainPawLeaderIdle/white-paw/idle-runtime.webp",
-  "frameSize": 288,
+  "frameSize": 312,
   "columns": 8,
   "durationsMs": [
     1400,
@@ -62,8 +62,11 @@
     2700
   ],
   "loop": true,
-  "pivotX": 192.5,
-  "pivotY": 242.0,
+  "pivotX": 152,
+  "pivotY": 259,
   "sourceAtlasSha256": "c74c39fb3787526672a5ea27ce50aaa99fcbe9711f8e286d61196ce76e856356",
-  "sourceScale": 0.5
+  "sourceScale": 0.5,
+  "viewSize": 312,
+  "groundRadiusX": 0.267361,
+  "groundRadiusY": 0.048611
 }

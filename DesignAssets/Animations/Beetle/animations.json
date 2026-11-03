@@ -226,5 +226,6 @@
       "file": "DesignAssets/Animations/BeetleDeath/FramesV2/death-02.png",
       "sha256": "166466e56a70b27662f8c7359a78c2177db5efb7ce120a3e1e3df4689c05380a"
     }
-  ]
+  ],
+  "runtimeRegistration": {"frameSize":346,"pivotX":172,"pivotY":281.999998,"viewSize":346,"registrationScale":1.0028985507246377,"groundRadiusX":0.347826,"groundRadiusY":0.06087,"frameGeometry":{"17":{"pivotX":172.5,"pivotY":285.972972,"groundRadiusX":0.349589,"groundRadiusY":0.049354},"18":{"pivotX":173,"pivotY":289.945945,"groundRadiusX":0.351351,"groundRadiusY":0.037838}}}
 }

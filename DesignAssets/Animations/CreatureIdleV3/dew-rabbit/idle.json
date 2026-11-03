@@ -96,5 +96,6 @@
     "middle-2": "894302fb9cd2e82f5e25679a8fc4c8dc0ab7d5f9b7670ec7c14c1628a21e11e1",
     "settle-2": "3180616f6e69038fe9bffd016b573adbc3e49c12176422111602cfe89e24dd68"
   },
-  "reusedDrawingCount": 5
+  "reusedDrawingCount": 5,
+  "runtimeRegistration": {"frameSize":430,"pivotX":223,"pivotY":360.5,"viewSize":430,"registrationScale":1.0311750599520384,"groundRadiusX":0.199041,"groundRadiusY":0.03717}
 }

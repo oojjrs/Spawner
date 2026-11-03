@@ -18,5 +18,6 @@
     "action": "dead",
     "atlas": "../Beetle/atlas.webp",
     "manifest": "../Beetle/animations.json"
-  }
+  },
+  "runtimeRegistration": {"frameSize":186,"pivotX":93,"pivotY":156,"viewSize":186,"registrationScale":1.0054054054054054,"groundRadiusX":0.351351,"groundRadiusY":0.037838}
 }

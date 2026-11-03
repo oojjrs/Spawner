@@ -95,5 +95,6 @@
     "start-2": "b2b7d118dc60f80f065ced40c7c20a2214c79bae41d88cf270fe2ab7c6cbfcb1",
     "start-3": "198fe02b9a7302ecefe50d47218c1249c48b60f8d0ca8d4052b5e89574922e49"
   },
-  "reusedDrawingCount": 0
+  "reusedDrawingCount": 0,
+  "runtimeRegistration": {"frameSize":440,"pivotX":226,"pivotY":367,"viewSize":440,"registrationScale":1.134020618556701,"groundRadiusX":0.14433,"groundRadiusY":0.043814}
 }

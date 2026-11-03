@@ -1,11 +1,11 @@
 {
-  "frameSize": 312, 
+  "frameSize": 318,
   "displaySize": 311.1511254019292, 
   "scale": 0.609375, 
   "idleReference": "DesignAssets/Animations/RollingAcornIdle/v1/idle.webp", 
-  "viewSize": 281.2599381625442, 
-  "pivotX": 157.38239840989397, 
-  "pivotY": 270.69152788896866, 
+  "viewSize": 286.6687831272085,
+  "pivotX": 159.669667,
+  "pivotY": 266.950502,
   "sourcePivot": [
     256, 
     448
@@ -28,5 +28,7 @@
   "facing": "left", 
   "source": "attack.webp", 
   "exporter": "../export-runtime.py", 
-  "processing": "One common whole-cel scale for every frame. Original artwork, timing and source registration remain unchanged; runtime pivot aligns the exact seed to its accepted idle appearance."
+  "processing": "One common whole-cel scale for every frame. Original artwork, timing and source registration remain unchanged; runtime pivot aligns the exact seed to its accepted idle appearance.",
+  "groundRadiusX": 0.178571,
+  "groundRadiusY": 0.039286
 }

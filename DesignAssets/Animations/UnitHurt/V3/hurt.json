@@ -147,5 +147,6 @@
       "liftPixels": 0,
       "durationMs": 20
     }
-  ]
+  ],
+  "runtimeRegistration": {"frameSize":148,"pivotX":74,"pivotY":130,"viewSize":148,"registrationScale":1.2333333333333334}
 }

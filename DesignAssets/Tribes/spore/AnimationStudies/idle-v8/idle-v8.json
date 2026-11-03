@@ -244,5 +244,6 @@
       2
     ],
     "previousAtlasSha256": "36f1f1bc1332b51ad28b8d3ef5dbada06cb9f620ea983f7b503aecc91c191c42"
-  }
+  },
+  "runtimeRegistration": {"frameSize":240,"pivotX":120,"pivotY":210,"viewSize":240,"registrationScale":1.0714285714285714}
 }

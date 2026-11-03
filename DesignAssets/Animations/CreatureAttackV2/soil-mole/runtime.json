@@ -1,11 +1,11 @@
 {
-  "frameSize": 273, 
+  "frameSize": 274,
   "displaySize": 272.5859154929578, 
   "scale": 0.533203125, 
   "idleReference": "DesignAssets/Animations/CreatureIdleV3/soil-mole/idle.webp", 
-  "viewSize": 237.44496052340986, 
-  "pivotX": 136.9022574812279, 
-  "pivotY": 246.37352221593417, 
+  "viewSize": 238.31472228356887,
+  "pivotX": 143.354161,
+  "pivotY": 219.26537,
   "sourcePivot": [
     256, 
     448
@@ -28,5 +28,7 @@
   "facing": "left", 
   "source": "attack.webp", 
   "exporter": "../export-runtime.py", 
-  "processing": "One common whole-cel scale for every frame. Original artwork, timing and source registration remain unchanged; runtime pivot aligns the exact seed to its accepted idle appearance."
+  "processing": "One common whole-cel scale for every frame. Original artwork, timing and source registration remain unchanged; runtime pivot aligns the exact seed to its accepted idle appearance.",
+  "groundRadiusX": 0.387324,
+  "groundRadiusY": 0.087324
 }

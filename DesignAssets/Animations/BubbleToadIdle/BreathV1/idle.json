@@ -667,5 +667,6 @@
       "back": 0,
       "eyes": "open"
     }
-  ]
+  ],
+  "runtimeRegistration": {"frameSize":362,"pivotX":184.999999,"pivotY":307,"viewSize":362,"registrationScale":1.002770083102493,"groundRadiusX":0.34626,"groundRadiusY":0.027701}
 }

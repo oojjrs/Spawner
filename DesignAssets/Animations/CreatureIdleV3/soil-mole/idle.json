@@ -77,5 +77,6 @@
     "breath-2": "cf67a7e7e68a23487975fe1cf61db8af67b6e3d2450fc588ac00440ea319df84",
     "breath-3": "342c3e3a4962d2a45e19f857a2a623897f2bd7aea8afa23f524ade70b56c4f4b"
   },
-  "reusedDrawingCount": 0
+  "reusedDrawingCount": 0,
+  "runtimeRegistration": {"frameSize":356,"pivotX":187.5,"pivotY":281,"viewSize":356,"registrationScale":1.0028169014084507,"groundRadiusX":0.387324,"groundRadiusY":0.087324}
 }

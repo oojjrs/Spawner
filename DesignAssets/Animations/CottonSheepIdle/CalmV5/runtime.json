@@ -124,9 +124,12 @@
     100
   ],
   "loop": true,
-  "pivotX": 128,
-  "pivotY": 224,
+  "pivotX": 142.5,
+  "pivotY": 204.5,
   "sourceImage": "DesignAssets/Planning/Animations/CottonSheepIdle/CalmV5/idle.webp",
   "sourceAtlasSha256": "91ea8d7f32925fd11621f956e7b1d0e90e191593f9006ff2cf2962923053401b",
-  "sourceScale": 0.5
+  "sourceScale": 0.5,
+  "viewSize": 256,
+  "groundRadiusX": 0.244141,
+  "groundRadiusY": 0.064453
 }

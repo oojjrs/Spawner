@@ -1,3 +1,169 @@
+## 접지 커밋 공유 index 충돌 복원과 분리 · 01a1a0bf
+
+- 기록 ID: neutral-ground-footprint-index-isolation-20261103-01a1a0bf. 기록 시각: 2026-11-03T22:23:40+09:00. 기록자·Git 범위 판단 Codex /root, 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d,H:/Spawner. 새 사용자 결정 없음.
+- 시작 후 main에 5a62631/e740a41 병행 커밋이 추가돼 두 커밋을 새 기준으로 보존했다. 이미 반영된 스탯 표/티어를 되돌리지 않고 전투·피벗의 필요한 부분만 구성했다. 후보 448경로, 관련 메모리22기록이며 숫자는 최신 생성 manifest가 기준이다.
+- 공유 index가 비어 있는지 확인한 뒤 blob 준비 중 다른 채팅의 DNA 패널 9경로가 stage됐고, 우리 update-index 후 합쳐진454경로를 가드가 탐지해 커밋 전에 중단했다. 소스 변경이나 커밋/푸시는 발생하지 않았다. shared-index-preserved로 전체 당시index를 보존하고 상대의 staged-blobs.json 9개 정확한 해시로 공유index를 복원·대조했다. 이후 별도 GIT_INDEX_FILE로만 후보 stage/검토하고 main ref 원자비교로 반영한다. 상대 staged 변경은 새 HEAD 위에 보존하며 작업 파일은 덮지 않는다.
+- 검증 보완: 후보의 HEAD LF와 작업 CRLF가 섞인 임시 Combat/runtime/memory 3개 형식 불일치는 임시 후보만 CRLF로 교정했다. 갱신된 후보5개와 준비스크립트 공용 형식6개 OK. 추가 제품 실행/원화 변경은 없고 사용자 수용 fighter 함수 바이트 일치는 별도index 준비에서 확인한다.
+## 접지 수정 사용자 최종 수용·커밋과 푸시 승인 · 01a1a0bf
+
+- 기록 ID: neutral-ground-footprint-accepted-publish-20261103-01a1a0bf. 기록 시각: 2026-11-03T22:11:37+09:00. 기록자 Codex /root, 원발언·판정·Git 승인 주체 사용자. 출처 현재채팅 01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, H:/Spawner Windows/PowerShell. 원발언 정확 시각·항목 ID 불명.
+- 사용자 최종 확인: “완벽해졌다.” 사용자 관찰로 최신 이미지 피벗·생존/시체 접지 결과를 수용했으며 앞선 불만/진행 상태를 이 최종 수용으로 갱신한다. 이어 메모리 기록·커밋·푸시를 명시 지시했다.
+- Git 진행 판단: 이 채팅의 전투 실험실 연출/주사위·기획서 기본 스탯 정렬 표·유닛 이미지 등록/공통 피벗과 그림자·정식 시체·그에 필요한 미리보기/캐시/메타데이터/테스트·관련 메모리를 범위로 삼는다. DNA/원거리·치유/다른 채팅의 전투뷰어·오디오·티어 재편은 제외한다. 공유 파일은 HEAD 위에 해당 부분만 구성해 index에 넣고 실제 작업 파일의 병행 변경은 보존한다. 전용 remote https://github.com/oojjrs/Spawner, 시작 checkout H:/Spawner main/aba8c6a84be19158b7392743ad15db29141b5487. origin/main fetch 결과 local-only1/remote-only0. 기존 로컬 커밋은 분기 이력으로 함께 push한다. 이전 board 조회 0개 근거 재사용. 아직 커밋·푸시 성공을 기록하지 않는다.
+## 중립 접지 수정 마감 근거 · 01a1a0bf
+
+- 기록 ID: neutral-ground-footprint-finish-20261103-01a1a0bf. 기록 시각: 2026-11-03T22:04:15+09:00. 기록자·판단 Codex /root, 출처 현재채팅 01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, H:/Spawner. 위 complete 기록의 실제 렌더·자동 전투 결과와 완료 범위는 유효하다.
+- 공용 텍스트 검사 82파일이 UTF8NoBom/CRLF로 통과(exit0). 국소 코드 diff에서 새 피벗/그림자 호출·배율을 검토했고 병행 DNA/UI 변경은 보존했다. diff 공백 검사에서 관련 runtime JSON의 기존 숫자 필드 뒤 공백이 나타나, 이번 수정 소유 frameSize/viewSize/pivotX/pivotY 줄의 후행 공백만 제거했다. 다른 메타데이터 문구/필드는 보존한다. 변경 JSON와 이 마감 메모리만 교정 후 형식·공백 검사하며 이미 통과한 원본/렌더 검사는 반복하지 않는다.
+## 중립 유닛 접지면 중심 재교정 완료 · 01a1a0bf 현재 요약
+
+- 기록 ID: neutral-ground-footprint-complete-20261103-01a1a0bf. 기록·마지막 검수 시각: 2026-11-03T22:02:27+09:00. 기록자·구현·실제 PNG 감수 Codex /root, 지적·교정 주체 사용자, 접지 랜드마크 검토 Godel/Heisenberg/Dirac(gpt-6.1-sol low). 출처 현재 채팅 01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, H:/Spawner Windows/PowerShell. 원발언 정확 시각·항목 ID 불명. neutral-ground-footprint-start의 진행 상태를 실제 적용 결과로 갱신하며 원기록 보존.
+- 변경: 중립 18종/런타임 이미지 참조 71개의 이미지 pivot을 최저 발끝에서 앞뒤 발·몸체 지지면 중심으로 이동했다. 원화 픽셀/프레임/속도/전투 이동 연출은 이번 단계에서 변경하지 않았다. 살아 있는 idle/attack/hurt에는 같은 display 크기 기준 보정을 적용하고, 사망은 생존 접지면에서 최종 시체 지지면으로 프레임별 geometry를 보간했다. 딱정벌레 공유 atlas의 17/18과 정식 dead-v2도 별도로 반영했다. 종족 4종과 부엉이의 기존 등록·그림자 경로는 유지한다.
+- 실제 경로: unit-sprite-registration.mjs와 imageFrameGeometry를 전투 실험실·본게임이 공유하며 그림자 반경도 같은 메타데이터로 환산한다. 실험실은 원점/이동을 유지하고 종별 접지 폭·깊이를 사용한다. 본게임의 생존/시체 렌더도 같은 피벗·프레임 기준을 쓰도록 맞췄다. 관련 JSON 68개의 등록/피벗/프레임 geometry 데이터만 좁게 갱신했고 나머지 메타 필드는 원본과 동일함을 스크립트가 대조했다. Combat.html/runtime.js의 해당 모듈만 갱신하며 나머지 모듈은 바이트 보존을 확인했다.
+- 검수: 격리 headless Edge, 실제 combat-stage와 현재 PNG/WebP를 사용해 23종×대기/공격/피격/사망중간/최종시체 115장, 매 장 양쪽 방향 230표시를 캡처했다. 부모가 5개 전체 요약 PNG와 우두머리 원본 크기 캡처를 직접 열어 앞뒤 발이 타원 중심선 양쪽에 놓임·시체가 지지면 위에 놓임을 감수했다. 이는 5개 대표 상태이며 모든 애니 프레임을 시각 통과했다는 주장은 하지 않는다. 이전 최하단 발끝=원점 수치 oracle은 폐기했으며 이번 coverage pass를 시각 품질의 독립 증거로 오인하지 않는다. 지지면 좌표 자체는 실제 아트에서 사람이 판단한 근사값이다.
+- 실제 페이지: 정상 Combat.html에서 우두머리/버섯 렌더 확인, 자동 전투 꽃꼬리새/우두머리 ended와 양측 정식 death 자산 호출 확인, pageerror 0. 본게임 HTTP 초기화/메타데이터 준비 오류 0. 본게임 모든 중립의 보행까지 시각검수한 것은 아니며, Heisenberg가 생존·시체 몸체와 그림자 배율 및 호출 계약을 독립 정적 검토해 확인된 오류 없음을 보고했다.
+- 근거: literal $Trash/ground-footprint-20261103의 3개 worker JSON, installed.json, metadata-files.json, artifacts/summary-{idle,attack,hurt,death,dead}.png와 actual-combat.png, actual-ui.json, playback-ui.json. PNG를 사용자에게 별도 전달하지 말라는 기존 지시 유지. 부모 도구가 Godel 후속 교차감수 Bad Request를 반환해 그 검수는 완료 근거로 쓰지 않았다. Dirac의 꽃꼬리새/토끼/양 교차검토는 완료됐다.
+- 상태: 요청한 전투 실험실 접지 수정 적용·실제 대표 상태 전수 감수 완료. 미스테이징·미커밋·미게시. 병행 변경 보존. 마감은 이번 정확한 텍스트 파일 목록의 공용 형식 검사와 국소 diff 결과를 따른다.
+## 중립 유닛 접지면 중심 재교정 진행 · 01a1a0bf 현재 요약
+
+- 기록 ID: neutral-ground-footprint-start-20261103-01a1a0bf. 기록 시각: 2026-11-03T21:48:09+09:00. 기록자·수정 판단 Codex /root, 지적·교정 주체 사용자. 출처 현재 채팅 01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, H:/Spawner Windows/PowerShell. 원발언 정확 시각·항목 ID 불명.
+- 사용자 최신 교정: 중립 19종은 발들이 그림자 중심선 위에 몰려 떠 보이고 부엉이만 자연스럽다. 종족 4종은 제외하며, 네 발이 접지 타원의 앞뒤에 걸쳐야 한다. 기존 전수 수정 요청과 이미지 중심을 고치라는 지시는 유효하다.
+- 확인: combat-stage의 모든 그림자/링이 같은 원점·폭·깊이를 쓴다. 앞선 combat-image-registration-complete의 최하단 발끝=원점 검사는 이 사선 접지면의 중심을 검증하지 못했으며 그 접지 완료 판단은 대체된다. 원본 픽셀·프레임 무손실 검증 자체는 유효하다.
+- 현재 판단: 중립 18종의 이미지 pivot을 발/몸체 지지면 중심으로 옮겨 앞뒤 발이 그림자 중심 양쪽에 놓이게 하고 접지 타원의 폭/깊이를 종별 조정한다. 종족 4종과 부엉이는 보존한다. 그림자만 위로 옮기는 안은 사용자의 이미지 기준점 교정 지시에 맞지 않아 폐기했다. 실제 PNG 접지점을 워커 3명(Sol 6.1 low)이 분담 확인하고 부모가 실제 전투 렌더로 감수한다. 기존 액션 이동·속도·전투 연출과 병행 변경은 보존한다.
+## 전 유닛 이미지 중심·접지 수정 완료 · 01a1a0bf
+
+- 기록 ID: combat-image-registration-complete-20261103-01a1a0bf. 기록 시각: 2026-11-03T21:27:36+09:00. 기록자·통합검수 Codex /root, 수정전부명령 사용자. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d,H:/Spawner Windows/PowerShell. 원발언정확시각·턴ID불명. Godel/Heisenberg/Dirac 기존GPT-6.1-sol low. 사용자중간상태질문에작업중임/프레임geometry연결상태를보고하고계속완료했다.
+- 실제수정:23종idle/attack/hurt/death및정식beetledead총91atlas/2592사용프레임을이미지내몸통X/발·배·껍데기지지ROI에등록했다. 정수dx/dy이동과투명padding만수행하고91encoded출력재decode로원본alpha있는모든RGBA픽셀exact동일·alpha합·dimensions/프레임손실없음을검사했다. 원본/제품백업before/,inventory.json의91sourceSHA,plans3JSON,registration.json·installation.json의프레임별이동/landmark/검사값은literal $Trash/combat-image-registration-20261103에있다. 새작화/리그/중간프레임생성없고airborne구간은원래groundedreference대비높이차보존.
+- 코드연결:새client/unit-sprite-registration.mjs의91고정geometry/pivot/viewSize/padding보상배율을image-geometry.mjs가imageAnimation/imageFrameSize에적용한다. stage는프레임별bboxcontain확대/중앙하단이동/clip을폐기하고고정pivot으로재생,obsolete combat-stage-ground.mjs와Combat내모듈을제거했다. game.js에는padding이기존idle/hurt/attack/특수sprite실제크기와미변경walk배율을바꾸지않게고정배율보상만추가했다. 전투lunge/recoil/반전/이펙트/시간/수치/주사위보존. Combat/runtime는관련모듈만치환하고당시타팀모듈/workerSource를byte보존했으며전체재번들하지않았다. file용localasset91js갱신/구문검사통과.
+- 문서/메타:Design92/92상태셀과기존preview/thumbnail을실제수정runtime으로연결했다. 그림밖문구/행/열·기존표정렬을보존하고beetle비순차frames를위해data-frames와재생기2부분만확장. runtime.json38개와beansequence의runtimeFrameSize=[144,144]/runtimePivot=[72,126]/runtimeRegistration갱신,원화geometry/승인/출처SHA/타이밍보존. agent-death/design-application의자산관련테스트2개를원본시간/출처+새등록runtimepivot계약으로갱신. 변경목록은design-sync의3report와metadata-sync/report.json.
+- 실제화면검수:현재stage23종×5상태115샷/230bodies를manual sourcecontact ROI로실제drawImage변환재래스터검사,missing/error/fail0. grounded228건접지최대1CSSpx·몸통등록점최대1.381CSSpx(원픽셀정수이동반올림),샘플airborne2건은강제접지제외. 부모가5상태23종전체요약과owl/springkeeper/bean시체/whitepaw시체등주요장면직접열어감수했다. Heisenberg가8종24corrected대표frame을직접감수했고acorn/vine/marten ROI확정오류없음. owl은원본600×300발격자확대와x225..241 alpha128bottom345가실제발톱임을부모/Dirac대조. 숫자bbox통과를발접지로확대한예전판정과구분한다.
+- 실사용실행:실제Combat새로드owlframe472/atlas1888·sporeframe240·JS오류0(actual-ui.json/actual-combat.png직접감수). 실제bean/beetle4배자동전투→ended→공식bean death-runtime전환오류0(playback-ui.json). HTTP Spawnergeometry정합·오류0, file Spawnerlocalassets534·초기화끝welcome방생성disabled=false·오류0(game-ready.json). Design실제lightbox beetlehurt10→15→16과owlframe472재생오류0(design-ui.json).
+- 테스트실제결과:기존asset연결/시간/크기/기획서검사4파일20건중19통과. 실패1건은design-application의별도월드생성버전고정assert39!==34로스프라이트범위밖기존/병행모델변경과구테스트의불일치다. source/test를임의수정하지않고그대로보존했다. 로그tests.log. 이미통과한19건반복없음. 마감형식·범위diff는직후공통검사결과를따른다.
+- 완료상태:요청한이미지중심·생존/시체접지를제품에수정적용했고남은필수구현없음. 사용자원치않은PNG/ZIP재전달없음. 모든게임기능/애니전프레임을사람이수작업감수했다는주장은하지않는다. 기존열린페이지는새로고침해야새이미지와geometry를함께읽는다. 다른팀변경/메모리보존·미스테이징/미커밋/미푸시. 별도월드테스트실패는현스프라이트수정성공과분리해서보고한다.
+
+## 전 유닛 이미지 등록 수정 실행 · 01a1a0bf
+
+- 기록 ID: combat-image-registration-start-20261103-01a1a0bf. 기록 시각: 2026-11-03T20:36:46+09:00. 기록자·구현판단 Codex, 전수수정명령 사용자. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d,H:/Spawner Windows. 원발언정확시각·턴ID불명.
+- 사용자가 조사만한상태를확인하고 '수정 다 해'라고명시했다. 기존승인그림/포즈의이미지내부중심·실제발/배/껍데기접지와원본pivot불일치를수정한다. 새포즈/리깅/중간프레임생성단계가아니며기존보여준프레임을등록하는범위다. sprite-animation스킬의공통canvas/고정scale/landmark등록기준적용. 전투lunge/recoil/시간/수치/주사위는보존한다.
+- 구현판단:91runtimeatlas를원본pixels기반손실없는등록으로수정하고clip위험은투명padding으로처리한다. 원본과제품파일은 literal $Trash/combat-image-registration-20261103/before에사본보존,inventory.json에91sourceSHA/23종원본geometry기록. frame별bbox자동contain확대/이동은폐기하고imageAnimation의고정geometry/pivot으로재생한다. worker기존6.1-sol low3명은분리된plans JSON의원본몸통X/발contact ROI/의도적airborne프레임만작성,부모는공통변환기·등록metadata·런타임/Combat모듈동기화·실제사용화면감수담당. 원본포즈/타이밍/배율비율보존,접지보정으로의도된공중동작을없애지않는다. Git완료지시는없음.
+## 이미지 중심·발 접지 전수 조사 완료 · 이전 통과 판정 정정 · 01a1a0bf
+
+- 기록 ID: combat-image-contact-audit-result-20261103-01a1a0bf. 기록 시각: 2026-11-03T20:28:10+09:00. 기록자·최종감수 Codex /root, 기준교정·조사요청 사용자. 출처현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d,H:/Spawner Windows/PowerShell. 원발언정확시각·턴ID불명. 시각분담Godel/Heisenberg/Dirac기존gpt-6.1-sol low.
+- 현재결론: 중앙정렬/발접지전부정상이라는이전판정을철회한다. combat-fixed-rect-capture-complete의숫자통과는alpha외곽중심/최하단만맞춘증거이며몸통·발바닥·시체지지면/원본등록검증이아니다. 최신사용자명시대로전투연출이아니라이미지자체중심·접지기준을고쳐야한다. stage114,125~137은매프레임bounds기반가변배율·중앙/하단이동을사용하고등록pivotX/Y를배치에사용하지않는다. 원본불일치를가리고긴꼬리/깃털/덩굴이몸통축/배율까지움직일수있는구조다.
+- 실제시각범위: Godel8종40overlay+원본13=53파일,Heisenberg8종40overlay+clean4+원본overview1/시체8=53파일,Dirac7종35overlay. 따라서23종각idle/attack/hurt/death/dead115대표샷전부직접열람. 부모는5상태전체요약과원본alive/overview-first.png·death/settled-23-both-sides.png·talon-owl/white-paw전체idle시트·white-paw/bean-canonical-settled.png,현재snare-vine attack/dead·shadow-weasel dead·rolling-acorn dead·spring-keeper idle·talon-owl idle을직접확인하고현재exportgeometry/91assetmetadata를대조했다. 애니메이션전프레임의발을수작업으로검증했다고주장하지않는다.
+- 현재확실문제: 갈퀴부엉이idle/hurt는깃털끝이바닥이고발톱은약10~20화면px위. 꽃꼬리새/봄지기idle/hurt는꼬리포함외곽중심과몸통·발중심불일치(봄지기우측약60~90px). 굴림도토리5상태몸통우측약30~60px. 올가미덩굴attack구근왼쪽약40~55px/death·dead오른쪽약30~45px. 화면숫자는육안근사이며landmark실측이아니다. 부모도주요사례직접확인.
+- 원본등록확실불일치: 꽃꼬리새/흙두더지/보따리달팽이의중립실제발/배·시체지지면전체가기준선위. 이슬토끼/솜양생존발도위. 굴림도토리원본시체지지면위. 흰발은생존가로pivot과그림중심큰편차·시체큰부유. 새싹콩정식시체잎은기준선아래. 현재강제bbox정렬이원본편차를숨기므로현재대표양호를원본정상으로확대하지않는다.
+- 현재대표frame기하값(각frameSize대비512환산,alpha127.5외곽이며발의정확측정치아님): 흙두더지idle/attack/hurt/dead bottom-pivotY=-50.9/-46.1/-51.5/-51.2,보따리달팽이=-49.1/-45.4/-49.1/-49.3,꽃꼬리새=-25.2/-21.2/-25.2/-22.6,이슬토끼생존=-13.8/-15.3/-14.6,솜양생존=-12.0/-10.9/-19.8,굴림도토리시체=-22.0,흰발시체=-77.5·idle center-pivotX=-92.7,새싹콩시체bottom-pivotY=+65.4. 오래된등짐시체center-pivotX=+34.0도관찰하되자세의도까지오류확정하지않는다.
+- 23종별대표판정: 새싹콩(대기/피격접지양호·공격기울기의도가능·시체잎지지보류/원본하단불일치),포자버섯(대표정적접지뚜렷한이상없음),몽돌(동일·공격회전발식별한계),샘방울(중립/시체양호·공격돌출부중심이동은의도구분),꽃꼬리새(대기/피격중심편향·원본접지불일치),이슬토끼(현재중립양호/원본생존부유·시체지지면보류),흙두더지(원본생존/시체부유·현재발톱과발바닥지지구분보류),보따리달팽이(현재양호/원본생존·시체부유),솜양(현재양호/원본생존부유),굴림도토리(몸통중심편향/원본시체부유),방울두꺼비(대표가까운발접지양호),올가미덩굴(공격/사망/시체구근중심편향),가시등딱정벌레(대표가까운다리/정식시체지지면양호),흙멧돼지(대표접지양호),넝쿨거북(대표가까운중앙발양호),그늘족제비(중립양호·공격도약가능·피격/사망/시체지지면보류·시체앞발/턱약7~15px위),갈퀴부엉이(대기/피격발부유·공격공중가능·시체대표양호),봄지기(대기/피격몸통·발중심우측편향·시체대표양호),등불지기(생존대표양호·시체털/귀장식과실제지지면보류),오래된등짐(현재배발/껍데기접지양호·원본시체가로기준변화),걸어가는산(대표가까운중앙발접지양호),흰발(현재대표는보정으로가려짐·원본가로pivot/시체부유),가시등우두머리(대표가까운다리/시체지지면양호). 먼발의원근상높이차이/공격도약/사망중간포즈는자동오류판정하지않았다.
+- 교정방향판단: 이미지프레임내몸체·실제지지점을기준으로idle/attack/hurt/death/dead의배치와pivot을등록해야한다. 프레임별외곽contain확대/중앙이동을대체책으로쓰지않는다. 이번턴은조사만했으며제품/원본아트/전투연출좌표추가수정없고이전보정코드는그대로남아있다. 사용자에게PNG/ZIP재전달없이결과만보고한다. 첫최종메모리쓰기시도는동시작업중파일open UNKNOWN오류로실패했고기존내용은유지됨을읽어확인,현재최신내용을읽어이기록만prepend한다. 스테이징/커밋/푸시없음.
+## 이미지 자체 중심·발 접지 기준으로 전수 조사 재지정 · 01a1a0bf
+
+- 기록 ID: combat-image-contact-audit-request-20261103-01a1a0bf. 기록 시각: 2026-11-03T20:14:09+09:00. 기록자·조사해석 Codex, 기준교정/조사요청 사용자. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, H:/Spawner Windows. 원발언정확시각·턴ID불명.
+- 사용자최신명시: 스크린샷전달은필요없고이를활용해전수조사하여중앙정렬과하단pivot(발이땅에붙음)을확인한다. 이어서전투연출을바꾸는것이아니라이미지자체의중심을바꿔야한다고명확히했다. 조사대상은23종idle/attack/hurt/death/dead및원본frame/pivot메타데이터다. 전투lunge/recoil/화면actor좌표를이미지오류보정수단으로바꾸지않는다.
+- 기존combat-fixed-rect-capture-complete의alpha외곽0px/가로0.9px통과는그림bbox정렬증거뿐이며발/몸체접지·원본frame중심정렬정확성의증거가아니다. 이를의미상통과로확대했던판정을철회한다. 프레임별contain배율과bbox중앙이동이그림중심/발의기준점문제를가릴가능성을조사한다. 현재단계는시각/원본구조조사이며제품/원본자산변경없이사실·추정·불명확을구분한다.
+
+## 고정 rect 전 상태 촬영 완료 · 01a1a0bf
+
+- 기록 ID: combat-fixed-rect-capture-complete-20261103-01a1a0bf. 기록 시각: 2026-11-03T20:06:54+09:00. 기록자·최종감수 Codex /root, 요청주체 사용자, bounds생성Godel/stage구현Heisenberg/capture하네스Dirac(gpt-6.1-sol low). 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, H:/Spawner Windows/PowerShell. 원사용자발언정확시각·턴ID불명.
+- 현재유효결과: 실제원본alpha127.5bilinear contour의프레임별subpixelbounds91assets/2592usedframes를frozen내장했다. 모든pose의그림은공통rect에비율유지contain·가로중앙·하단정렬되며몸체만rectclip한다. 기존pivotX/viewSize에영향받지않고원본아트/정식bean·beetle시체/사망시간/X동작을보존했다. 이전first-raster기록의11실패는contour보정으로해소됐다.
+- 실제산출물: 첨부와동일1696x523·HUD없는전장renderer에서23종각idle/attack/hurt/death/dead대표프레임115장clean및동일장면rect/center/flooroverlay115장. 우측포자버섯idle0기준고정,rect322x324/floor413. idle첫프레임,attack/hurt/death논리중간프레임,dead최종프레임이며beetle은정식dead-v2.png다. sourcepose강제는테스트HTTP응답안에서만수행했고제품에진단문구·rect테두리를넣지않았다.
+- 최종실측: 독립원본crop alpha128scan과실제drawImage transform/clip재래스터측정115records/230bodies에서missing0/error0/fail0,중심최대0.9px·하단0px·표시rect넘침0px·XY배율차이0. unclipped AA외곽최대0.6px. 정수원픽셀bbox와continuous경계차이때문에raw targetScale동일성은최종oracle에서제외하고기록만남겼다. 부모가23종idle/dead전체요약과attack/hurt/death전체요약,첨부동일pair·beanattack·sporedead·owlhurt단독을직접열어그림배치/원본비율을감수했다. 원본해상도나그림의자세자체를바꾼것은아니다.
+- 전달자료: $Trash/combat-fixed-rect-20261103/capture/artifacts의clean/overlay각115PNG·summary-idle/attack/hurt/death/dead5PNG·measurements.json. PNG230개모두실제헤더1696x523확인. combat-unit-screenshots.zip실제324575561bytes,중앙목록clean115/overlay115/summary5·총236entries확인. 생성기와metadata는data/,촬영/요약스크립트는capture/scripts/,bundle-sync.json에source SHA/보존모듈증거가있다. 요약시트추가합성초기same-origin보안오류는임시HTTProot정상응답으로해결했다.
+- 제품변경범위: client/combat-stage-ground.mjs/client/combat-stage.mjs/Combat.html과이메모리. Combat은해당2모듈만치환하고나머지37기존모듈은byte동일보존,별도DNA/습격/Design/Attribute/runtime/주사위UI변경은건드리지않았다. 최종텍스트형식·범위diff는마지막공통검사에서정리한다. 스테이징/커밋/푸시/배포없음. 요청된고정rect전수스크린샷의남은필수작업없으며시각적수용은사용자검토대기다.
+
+## 고정 rect 첫 촬영 결과와 확대 경계 보정 · 01a1a0bf
+
+- 기록 ID: combat-fixed-rect-first-raster-20261103-01a1a0bf. 기록 시각: 2026-11-03T20:00:11+09:00. 기록자·보정판단 Codex, 관찰주체 headless Edge/부모. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, H:/Spawner Windows. 원사용자발언시각불명.
+- 실제115clean+115overlay촬영완료,누락/브라우저오류0. 부모가idle/dead23종요약과첨부동일pair를열었다. 실제raw source crop을별도투명canvas에측정한결과11장numericfail: 원정수alpha128pixelbbox의경계를그대로확대하면bilinear contour가1~2px가량달라져spore시체바닥411/floor413,sporeattack가로중심+1.1,일부rawunclipped외곽2.6px가확인됐다. 현재촬영본을최종통과로보고하지않는다.
+- 구현판단: 실제그림contour에맞는subpixelbounds(alpha127.5경계의bilinear교차)로데이터생성을보정한다. 고정rect/비율유지/중앙하단기준과원본자산은유지한다. Godel은bounds생성기/제품데이터만,Dirac은capture의정수bboxscale동일성가정만제거하고실제raster중심/바닥/contain±1px와uniformscale/sourceframe검사를유지,부모가모든영향장면을재촬영해확인한다. 앞선첫촬영기록은보존한다.
+
+## 유닛 고정 rect 중앙 정렬·전장 스크린샷 전수 요청 · 01a1a0bf
+
+- 기록 ID: combat-fixed-rect-capture-request-20261103-01a1a0bf. 기록 시각: 2026-11-03T19:53:19+09:00. 기록자·rect/capture구현해석 주체 Codex, 중심문제교정·스크린샷요청 주체 사용자. 출처현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, H:/Spawner, Windows/PowerShell. 원발언정확시각·턴ID불명.
+- 사용자최신요청: pivot뿐아니라이미지중심도이상하므로유닛이미지를고정rect안에넣고전투실험실에서모든스크린샷을첨부형식대로찍는다. 실제첨부 D:/Temp/codex-clipboard-50f86471-3bc1-4aef-b568-bb0c7616ee88.png를부모가열어확인했다. 첨부는1696x523·HUD없는전장canvas·왼쪽벌레오른쪽포자버섯구도다. 이전하단만검증한판정은가로중심/표시rect기준을충족한것으로확대하지않는다.
+- 실행해석: 투명여백을제외한프레임실제좌상우하bounds를구해공통rect에비율유지contain,가로중앙/하단정렬한다. 두유닛rect는각width*.19/height*.62로동일하며기본point.x .4/.6·floor는유지한다. 캡처1696x523에서는322x324px고정rect가된다. 이전pivotX/viewSize기준의수평중심오차·종별여백에따른크기차이를제거한다.
+- 전달범위:23종각idle/attack/hurt/death/dead5상태=115개전장PNG를첨부처럼HUD없이찍고오른쪽포자버섯을고정비교대상으로둔다. 동일장면의rect/가로중앙/바닥기준선표시본도115개를별도보존하고23종idle/dead비교시트와전체ZIP을제공한다. 원본아트는수정하지않는다. 실제stage렌더를촬영하며새아트를생성하지않는다. 제품은framebounds데이터와stagecontain배치/관련Combat모듈,메모리범위에한정하고주사위/전투수치/다른프로젝트변경은보존한다. 커밋·배포지시는없다.
+
+## 전 유닛 전 프레임 바닥 피벗 재정렬 완료 · 01a1a0bf 현재 요약
+
+- 기록 ID: combat-ground-allframes-complete-20261103-01a1a0bf. 기록·최종증거확인 시각: 2026-11-03T19:41:54+09:00. 기록자·기준정정/통합/원본pixel감수 주체 Codex, 이전접지반려·전체재수정승인 주체 사용자. 출처현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, H:/Spawner, Windows/PowerShell. 개별발언정확시각·턴ID불명. Godel/Heisenberg/Dirac는앞기록과같은gpt-6.1-sol/low워커이며각각데이터생성/stage구현/독립raster하네스준비를담당했다. combat-ground-rejected-all-frames의재구현상태를완료로갱신하며이전소수종접지완료기록은반려된과거결과로보존한다.
+- 기준교정·구현: 기존groundReferences의소수5/7종예외수치와death lerp를전부제거했다. 실제그림의alpha128이상최하단rawpixel경계(y+1)를각asset/atlasFrame별로추출해새client/combat-stage-ground.mjs에freeze된데이터로내장했다. 91자산사용2592프레임,전체atlas2667셀,사용null0. normalizedimageAnimation후좌표이며pivot/표시배율을미리곱하지않는다. stage는모든23종idle/attack/hurt/death/dead를예외없이해당프레임하단으로등록한다. 원본프레임의수직여백/움직임을따로바닥이탈로보존하던이전Codex판단을이번요구의정확한프레임하단기준으로대체했다. 원본그림/변형/Xpivot/수평접근·회피·반동은보존한다.
+- 바닥/그림자정합: floorY=Math.round(height*.79),shadow/ringcenterY=0으로동일점에정렬했다. 과거+2/+3임의오프셋을제거했다. 데이터누락은source:frame오류로드러나며기존pivot로조용히fallback하지않는다. 사망시계와정식bean16프레임/beetledeath0·17·18→dead-v2,주사위/선택/전투모델은보존한다. runtime이미지pixelreadback이없는내장메타방식이어서file://에서추가CORS/readback권한을요구하지않는다.
+- 독립실제검증: 부모가하네스의원본pixel→최종raster측정과asset/frame/mirror선택을직접검토하고실행했다. 보정값배열을expected값으로읽지않는다. desktop1130x350DPR1은전23종모든사용idle/attack/hurt/death/dead프레임을좌우반전으로측정, mobile364x255DPR2는전23종idle/settled좌우와실제pose선택을확인했다. 총5394건,실패0·누락0·오류0,1CSSpx초과잔차없음으로pass=true이며실제측정7.044초다. runtimeidle/settled선택92건을포함한다. 종별예외없고18종이전좌표보존을성공기준으로쓰지않았다.
+- 시각감수: 실제renderer의PC23종생존/시체4715px요약과모바일23종6555px요약에공통바닥빨간선을덧그렸고부모가둘다직접열어실제그림하단·바닥선·그림자중심정합을확인했다. 프레임강제geometry측정은장식background만생략해예산을줄였고대표realpose요약은원래background를그렸다. body그리기/배율/반전은현재실제함수를그대로호출한다. 임시HTTPfavicon204로이전하네스노이즈를없앴다. 이전투명canvas·상대import·요약비율오류를부모가실행전교정했으며통과결과반복검사는없다.
+- 통합/근거: Combat.html의stage모듈만현재source로치환하고ground모듈1개추가,다른37모듈은byte동일을확인했다. scope는client/combat-stage.mjs/client/combat-stage-ground.mjs/Combat.html과이메모리다. 자료는프로젝트임시combat-ground-allframes-20261103의before사본·sync-combat.mjs·bundle-sync.json,data/generate.mjs·metadata.json(assetSHA/coverage/rawbottom),qa/run.mjs·browser.mjs·results.json·summary-stage.png·summary-mobile.png. 제품3텍스트UTF8NoBom/CRLF와Combat공백·stage구문정상. 별도UI/DNA/습격/Design/Attribute/runtime변경과원본아트를보존했다. 미스테이징·미커밋·미배포. 사용자실제페이지는기존로드상태를새로고침해야변경된inline번들을읽는다. 마지막메모리형식검사는직후실제결과를따른다.
+
+## 전 유닛 바닥 피벗 재교정 · 사용자 반려 및 기준 재정의 · 01a1a0bf
+
+- 기록 ID: combat-ground-rejected-all-frames-20261103-01a1a0bf. 기록 시각: 2026-11-03T19:32:01+09:00. 기록자·이전판정오류인정/재구현판단 주체 Codex, 반려·재교정요청주체 사용자. 출처현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, H:/Spawner, Windows/PowerShell. 정확발언시각·턴ID불명.
+- 사용자명시교정: 여전히대다수개체의바닥pivot이정확히바닥과맞지않는다며다시맞추라고했다. 앞combat-ground-dice-complete의접지완료판정을사용자반려로대체하며기존기록·증거는보존한다. 소수5/7종만보정하고비대상18종보존을성공oracle로삼았던Codex판단이요구를충족하지못했다.
+- 새실행판단: 소수종예외수치·death중간lerp를제거하고23종의각실제재생프레임의불투명그림하단을공통groundline에등록한다. 원본투명여백/기존pivotY·꼬리등을이유로일부종을보정에서제외하지않고살아있는idle/attack/hurt와death/settled모두같은기준을적용한다. 원본아트는변경하지않고프레임접지메타데이터를이미지에서한번추출해내장하므로file://에서도canvas보안제약없이재생한다. ring/shadow의임의+2/+3오프셋도공통바닥점에맞춘다. 수치/주사위/정식시체연결은유지한다.
+- 분담계획: 기존6.1Sol low워커에게전프레임접지데이터생성/renderer적용/독립raster검증준비를분리하고부모가코드·실제현재번들·원본pixel대바닥선잔차를직접검수한다. 소수종만통과하거나before오차를보존하는검사는재사용하지않는다. 별도Design/Attribute/DNA/습격/runtime·병행메모리기존변경은보존한다. 커밋·배포승인은없다.
+
+## 전투 접지·정식 시체·양쪽 주사위 선택 완료 · 01a1a0bf 현재 요약
+
+- 기록 ID: combat-ground-dice-complete-20261103-01a1a0bf. 기록·최종근거확인 시각: 2026-11-03T19:24:39+09:00. 기록자·통합/코드/화면감수 주체 Codex, 수정/주사위/워커모델 승인 주체 사용자. 출처현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, H:/Spawner, Windows/PowerShell. 원발언정확시각·턴ID불명. 구현Heisenberg/Dirac와검증준비Godel은이채팅기존ID의gpt-6.1-sol/low워커다. 아래combat-ground-fix-approved와combat-random-units-approved의진행상태를완료로갱신한다.
+- 접지수정: stage의확정생존5종idle/attack/hurt및확정시체7종에조사된상태별등록오프셋을적용해기존point.y접지선/그림자와맞췄다. 생존의상태별보정은고정값으로원래도약/피격상대운동을보존한다. 불확실6종은일괄bbox바닥고정으로변경하지않았다. bean은정식AGENT_DEATH_ANIMATION death-runtime.webp16프레임을연결하고0/8/15기준프레임사이의보정을사용한다. 초안시간lerp에서새부유가생겨worker정적검토후기준프레임방식으로고쳤으며기준유지프레임중보정이변하지않는다. 앞으로넘어진잎의alphaenvelope를몸체바닥으로단정하지않았다.
+- beetle수정:정식deathatlas0→17→18을80/120/520ms로재생한뒤dead-v2.png에정착한다. 정식PNG185x185의alpha128bounds24..166/78..162로축소된좌표pivot95.5/163을사용하며imageScale를중복적용하지않는다. 회전idle대체·시체의idle움직임을제거했고살아있을때기존attack/idle타이밍을보존하며hurt도선택한다. deathStarted별도Map으로효과목록1.8초만료와사망시계수명을분리한다.
+- 주사위완료: 전장HUD중앙🎲버튼하나와사용자표현「주사위」접근성이름을추가했다. 양쪽23종을독립동일확률로뽑아외형select/builds를동기화하고changed1회로현재전투를초기화한다. 중복선택가능,능력치·조각·기관·규칙·seed·배속보존,실제반복실험중잠금/취소후복귀. PC·390·320px에서44x44버튼·겹침없음·페이지가로넘침0을확인했다.
+- 통합범위: client/combat-stage.mjs, client/combat-lab.js/css, Combat.html과본메모리. Combat은현재임베드원본의stage/UI2모듈·CSS만치환하고agent-death모듈1개를추가했다. 기존35모듈의바이트동일을동기화스크립트로확인해병행DNA/습격/스탯변경을재번들하지않았다. 원본아트/공통애니메타/게임playlogic/Design/Attribute/별도runtime과다른작업을보존한다. bundle-sync.json에전후/source SHA와보존목록이있다.
+- 실제검증: 부모가별도headless Edge두실행과변경4텍스트형식검사를배치했다. geometry하네스8.333초측정에서509assertion실패0(render순수성425,확정5종상태별전프레임상대운동15,중립접지15,비대상18종대기완전동일18,정식자산2,사망회전제거33,beetlehurt1)을확인했다. 다만하네스전체pass필드는임시HTTP서버의자동favicon.ico요청404때문에false이며raw결과를고쳐성공으로만들지않았다. 실제sprite검사실패/미수행으로확대하지않으며review-notes.json에진단노이즈와통과검사를구분했다. 성공한불변검사를다시돌리지않았다.
+- UI실제검증:실제Combat번들에서주사위1개/양쪽독립값/23종모두도달/중복허용/전투reset/나머지설정완전보존,0.5x·1x·4x재생/일시정지,최종damage/history/result와독립createSimulationTrial모델일치,실제반복실험중lock/cancel복귀,PC1440·mobile390/320배치와JS오류0을확인했다. 부모가before/after23종대기·시체양쪽요약2장과실제PC/모바일PNG를직접열어감수했고beetle선택프레임0/17/18후정식dead/bean15최종기록을확인했다. 전체사망전프레임을추가재실행했다고주장하지않는다.
+- 근거/상태: 프로젝트임시combat-ground-fix-20261103의before사본·sync-combat.mjs·bundle-sync.json·review-notes.json·ui-qa.mjs/ui-result.json/ui-desktop.png/ui-mobile.png,qa/run.mjs·contract.json·result.json·before/after-23-idle-dead.png. 제품4파일UTF8NoBom/CRLF와scoped diff공백오류없음·stage구문통과를확인했다. 새문구/유료생성/스테이징/커밋/push/배포없음. 사용자체험피드백대기이며요청한접지/시체/주사위구현은완료했다. 마지막메모리형식검사는직후실제명령결과를따른다.
+
+## 전투 실험실 양쪽 유닛 주사위 선택 추가 · 01a1a0bf
+
+- 기록 ID: combat-random-units-approved-20261103-01a1a0bf. 기록 시각: 2026-11-03T19:15:59+09:00. 기록자·버튼동작해석 주체 Codex, 요청·기능승인 주체 사용자. 출처현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, H:/Spawner. 원발언정확시각/턴ID불명.
+- 사용자요청: 전투실험실에서양쪽유닛을랜덤으로고르는주사위버튼하나를추가한다. 매번개별선택하는불편을줄인다. 한버튼클릭으로양쪽외형선택을독립랜덤변경하고현재전투를초기화하며능력치/조각/규칙/시드는유지하는범위로구현한다. 버튼은주사위아이콘과사용자가말한「주사위」접근성이름만사용하고추가설명문구는쓰지않는다.
+- 분담·기존작업유지: Dirac가client/combat-lab.js/css만담당하고Heisenberg의combat-stage접지/시체수정과분리한다. Godel은독립QA하네스준비,부모는통합번들관련모듈동기화·코드/실제화면감수를담당한다. 원래접지/시체수정은계속진행하며Git완료/배포승인으로확대하지않는다.
+
+## 전투 생존·시체 접지 및 정식 시체 연결 수정 승인 · 01a1a0bf
+
+- 기록 ID: combat-ground-fix-approved-20261103-01a1a0bf. 기록 시각: 2026-11-03T19:12:06+09:00. 기록자 Codex, 수정승인주체 사용자. 출처현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, H:/Spawner, Windows/PowerShell. 원발언정확시각·턴ID불명.
+- 사용자최신지시: 확인된문제들을전부고친다. 살아있을때와시체모두바닥위치를맞추고새싹콩/딱정벌레를정식시체자산으로연결한다. 이전조사만범위는이수정지시로대체되며확정생존5종/시체7종과딱정벌레hurt누락을포함한다. 이전허용한gpt-6.1-sol/low구현워커와부모직접감수방식을재사용한다.
+- 실행판단·경계: client/combat-stage.mjs의종별/상태별접지등록과정식death매핑·beetlehurt를수정한다. 점프/도약/꼬리/원근의의도된움직임을지우는전체프레임일괄bbox고정은피한다. 원본아트·server전투/스탯·기획서문구·기존별도작업을변경하지않고Combat.html관련모듈만동기화한다. 병행Attribute/DNA/습격/runtime/Design/메모리기존바이트를보존한다. 커밋·push·배포는요청받지않았다.
+
+## 전 유닛 피벗 전수 조사·기획서 정렬 표 완료 · 01a1a0bf 현재 요약
+
+- 기록 ID: pivot-stats-complete-20261103-01a1a0bf. 기록·최종근거확인 시각: 2026-11-03T19:08:25+09:00. 기록자·최종감수 주체 Codex, 조사/표/문구/모델결정 주체 사용자. 출처현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, H:/Spawner, Windows/PowerShell. 워커는본채팅앞기록의Godel·Heisenberg·Dirac(gpt-6.1-sol/low)이며원발언정확시각/턴ID불명. 아래pivot-audit-result와표승인기록의진행상태를완료로갱신한다.
+- 피벗조사결과는바로아래pivot-audit-result-20261103-01a1a0bf의23종/생존1903·정식사망678프레임/좌우46개근거를재사용한다. 부모원본·메타데이터·전체대표/극단/좌우시트·실제전투화면대조완료. 확정생존5종/시체7종(합쳐9종),가시등딱정벌레hurt미선택,가능성은별도보존. 원본pivot자체가잘못됐다고단정하지않고전투stage의종별접지/그림자보정및bean/beetle정식시체연결누락으로보고한다. 수정지시로확대하지않아전투코드/애셋은이후변경하지않았다.
+- 기획서완료: Design.html유닛페이지애니표바로위에승인한「기본 스탯 · 속성 미적용」23종8열표1개를추가했다. 원본unitStats/combatProfile/이동/시야에서독립산출한161숫자/23명이실제DOM과일치한다. 이름/숫자모든8열오름·내림,동률원래순서,키보드Enter/aria-sort통과. 일반10종시야는map.mjs ENCOUNTER_PLANS.radius→island-world/ecology→encounters.spawn값을따라확정했고territory8종은detectionRadius,beetle4/종족3을반영한다. DNA개별설계·속성효과는이기본표의고정종족수치와별개다.
+- 화면감수완료: 처음발견한sticky헤더가림을국소scroll-margin두규칙으로수정한뒤해당배치만재검증했다. 1440px에서헤더하단92.33/표제목103.33/정렬버튼153.23,390px에서79.88/114.44/164.34px로가림없고실제hit-test로버튼접근가능. 모바일페이지가로넘침0,표는폭340안에서850px가로스크롤한다. 부모가PC/모바일최종PNG직접감수했고이전수치/정렬성공검사는반복하지않았다.
+- 근거/최종범위: 프로젝트임시pivot-audit-20261103/parent의combined-audit.json·stats-qa-result.json·stats-layout-result.json·stats-desktop-final.png·stats-mobile-final.png,alive/death하위전수자료. 이번추가변경은Design.html과본메모리이며직전전투페이지미커밋5경로는보존했다. 새제품문구는승인제목/열/23종이름·숫자외없음. 미스테이징·미커밋이며push/배포없음. 다음작업은필요시사용자의피벗수정지시로진행한다. 마지막형식/국소차이확인은직후실제명령결과를따른다.
+
+## 전 유닛 피벗 조사 완료·스탯 표 감수 진행 · 01a1a0bf
+
+- 기록 ID: pivot-audit-result-20261103-01a1a0bf. 기록·근거확인 시각: 2026-11-03T19:06:59+09:00. 기록자·확정판정/부모감수 주체 Codex, 조사·표추가·6.1Sol low분담 승인 주체 사용자. 출처현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, 워커Godel/Heisenberg/Dirac는앞기록의ID와동일. H:/Spawner, Windows/PowerShell. 개별발언정확시각불명.
+- 조사완료범위: 전투페이지23종의생존idle1349+attack202+hurt352=1903시퀀스프레임, 정식사망자산678프레임과현재stage시체좌우46개. 전프레임alpha수치·대표/극단contactsheet·실제렌더경로를조사했다. 모든프레임을사람이한장씩감수했다고주장하지않으며전수수치검사와대표시각감수를구분한다. 부모는alive overview2장·전체23종좌우최종시체시트와원본함수/메타데이터,실제Combat renderer의bean/beetle/soil-mole/white-paw생존vs시체4화면을직접대조했다. 제품/피벗/자산/Combat번들수정은없다.
+- 확정생존접지5종(size252): 꽃꼬리새약12px, 이슬토끼약7px, 흙두더지약25px, 보따리달팽이약24px, 솜양약6px가원점/고정그림자위로뜬다. 생존판정은정상12·확정5·불확실6(방울두꺼비/올가미덩굴/넝쿨거북/그늘족제비/갈퀴부엉이/흰발)이며꼬리·도약·원근과발접지를분리한다. 가시등딱정벌레는별도hurt애니선택누락도확정됐다.
+- 확정시체7종: 새싹콩·가시등딱정벌레는정식사망자산연결누락으로idle회전대체(약+18.5px/+44.5~48.5px, 후자는반복idle로시체도움직임). 꽃꼬리새−11.5/흙두더지−25.5/보따리달팽이−24.5/굴림도토리−10.5/흰발−38.5px는본게임의종별시체그림자보정누락과일치한다. 원본자산pivot자체오류로확정하지않는다. 그늘족제비+7.5,흙멧돼지/방울두꺼비/갈퀴부엉이각+3.5px는가능성으로분리,나머지12종확정문제없음. mainunitGroundContacts/unitCorpseContacts와stage고정ellipse차이가주원인이다.
+- 근거: 프로젝트임시pivot-audit-20261103/alive의alive-audit.json/frame-measurements.json/overview-first·extreme.png, death의findings.json/measurements.json/source-evidence.json/settled-23-both-sides.png, parent의combined-audit.json/stage-proof.json/실제stage4PNG. 조사후피벗수정까지승인받았다고해석하지않는다.
+- 표현재상태: Dirac가승인문구·위치에Design.html23종8열표1개와정렬을추가했고부모가현재productionunitStats/combatProfile/이동/종별시야소스에서독립산출한23명·161숫자와일치,8열오름/내림·한국어이름·키보드Enter/aria-sort·390px페이지가로넘침0/표내스크롤을확인했다. 실제PC/모바일PNG에서sticky상단헤더가caption/thead를가려국소수정반환했다. 수치/정렬통과증거는재사용하며수정된배치만후속확인한다. 새문구추가없음,스테이징/커밋/push/배포없음.
+
+## 기획서 스탯 표 문구·위치 승인 · 01a1a0bf
+
+- 기록 ID: unit-stats-table-wording-approved-20261103-01a1a0bf. 기록 시각: 2026-11-03T18:58:17+09:00. 기록자 Codex, 명시승인주체 사용자. 출처현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, async call_352ca39f647e40949ac66ef759a6af1c의사용자답변. 원발언정확시각불명, H:/Spawner.
+- 사용자승인: 기획서유닛페이지의기존애니메이션표바로위에표추가. 정확한제목은「기본 스탯 · 속성 미적용」, 열은「유닛 / HP / 전투력 / 공격력 / 방어력 / 공속(회/초) / 이동(칸/초) / 시야(칸)」. 현재코드로확인한23종의이름·수치를넣고열제목클릭으로오름/내림정렬한다. 응답「이 문구와 위치로 추가」로문구·위치·데이터출력을명시승인했다. 추가설명·다른표·새문구는범위에넣지않는다.
+
+## 전 유닛 생존·시체 피벗 조사와 기획서 스탯 표 추가 진행 · 01a1a0bf
+
+- 기록 ID: pivot-stats-audit-start-20261103-01a1a0bf. 기록 시각: 2026-11-03T18:55:39+09:00. 기록자·작업 분할 판단 주체 Codex, 조사/표/정렬·워커모델 결정 주체 사용자. 출처 채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, H:/Spawner, Windows/PowerShell. 발언정확시각·턴ID불명.
+- 사용자 요청: 전투페이지에서바닥pivot이맞지않는유닛을전수조사하며생존·시체모두포함한다. 이어Design.html유닛페이지에유닛스탯표1개와정렬기능을추가한다. 6.1Sol low서브워커구현/조사와부모감수를명시허용했다. 피벗은조사요청이므로제품수정없이원인·상태·전체coverage를보고한다. 기존미커밋전투페이지5경로를보존한다.
+- 분담: Godel(01a1a0d4-d3a3-7712-a46a-3e587503e467)이생존idle/attack/hurt전프레임, Heisenberg(01a1a0d4-e189-79f3-848a-218047182472)가death/settledcorpse23종및본게임경로비교, Dirac(01a1a0d5-5626-7ad0-8d9c-55e7f096835e)이실제기본스탯caller와표데이터를조사한다. 모두gpt-6.1-sol/low이며진단산출물은프로젝트임시pivot-audit-20261103하위분리폴더에만저장한다. 부모가원본/현재renderer/실제접지화면을독립대조하고메모리를기록한다.
+- 표기획: 기존유닛페이지한곳에표1개만추가하고동일열의숫자/이름을오름·내림정렬한다. 실제게임기본값과전투실험실의조각투자stats를혼동하지않고정확한기준·필수열문구를확인한뒤문서작성지침의문구승인을진행한다. 제품source/기획서/Git완료/배포는아직변경하지않았다.
+
+## 전투 실험실 실전 연출 개선 완료 · 01a1a0bf 현재 요약
+
+- 기록 ID: combat-stage-complete-20261103-01a1a0bf. 기록·최종 근거 확인 시각: 2026-11-03T18:43:24+09:00. 기록자·구현/감수 주체 Codex, 원 요청·pull 우선 교정 주체 사용자. 출처 채팅 01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, H:/Spawner, Windows/PowerShell. 개별 발언 시각·턴/항목 ID 불명. 아래 combat-stage-start-20261103-01a1a0bf의 진행 상태를 완료로 갱신하며 과거 기록은 보존한다.
+- 변경: client/combat-stage.mjs에서 기존 자산 기반 공동 전장, 마주보기/공격 접근·피격 밀림, 사건별 타격/방어/회피/반격/기절 효과·피해/치명 숫자, 사망·승자 강조를 표시한다. lab.js/css는 전장 상단 외형·HP·공격 주기·반응, 하단 조작과 반응형 배치를 연결했다. 기존 설정·곡선·반복/교체 실험·사건 기록을 보존하고 전투 모델 수치·난수·승패는 수정하지 않았다. Combat.html은 전용 builder로 동기화했다.
+- 실제 검증: 격리 headless Edge의 첫 실행에서 공동 canvas1개, 카드별 canvas제거, 다음 사건/최종 결과와 기존 createSimulationTrial 모델의 일치, 자동재생·일시정지·종료버튼·초기화를 확인했다. 외형 선택기의 label을 명확히 연결하고 숨김 caption을 보존했다. 후속 실행은 이미 통과한 전투 검사를 반복하지 않고 외형변경/390·320px 가로넘침없음/40px 조작버튼/잘못된 조각수 후 복구/reduced-motion을 통과했다. 실제 모델의 dodge·hit·block·counter·parry·stun·death 및 치명 사건을 렌더해 JS오류0·이미지요청실패0·renderer의결과변경없음을 확인했다. 중간 sandbox Edge1회가실행직후종료되어 후속은별도headless임시프로필의sandbox밖실행으로확인했으며사용자브라우저는제어하지않았다.
+- 시각 근거: 프로젝트임시 combat-stage-20261103의 desktop.png·impact.png·finished.png·mobile.png와 qa.mjs/result.json. PC대기/타격과모바일PNG를직접열어감수했다. 새문구·새아트·유료생성·전체게임runtime·Design.html 변경없음. 제품대상4경로와본메모리만미스테이징·미커밋으로남긴다. origin/main cd0717e pull완료/연결Projects0개근거를재사용한다. push·배포없음. 사용자실제전투감피드백대기이며필수구현은완료했다. 마지막형식/범위검사는직후실제명령결과를따른다.
+
+## 전투 실험실 실전 연출 개선 진행 · 01a1a0bf
+
+- 기록 ID: combat-stage-start-20261103-01a1a0bf. 기록 시각: 2026-11-03T18:34:49+09:00. 기록자·구현 판단 주체 Codex, 요청·pull 우선 교정 주체 사용자. 출처 채팅 01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, H:/Spawner, Windows/PowerShell. 개별 발언 시각·턴 ID 불명.
+- 사용자 요청: 전투 테스트 페이지를 실제 전투 연출처럼 꾸민다. 중단 뒤 재개했으며 사용자가 먼저 pull받으라고 교정했다. 파일 편집 전 깨끗한 main에서 git pull --ff-only origin main을 실행해 14c86bb에서 cd0717e로 전진했다. 연결 GitHub Projects는 0개다.
+- 구현 판단: Combat.html의 원본 client/combat-lab.js·css에 공동 전장과 기존 자산 기반 마주보기·접근·피격 밀림·사건별 효과·피해 숫자·체력/공격 주기 표시를 연결하고 설정·분석 도구를 보존한다. 전투 시뮬레이션 수치/난수/승패는 바꾸지 않는다. 기존 문구를 이동·재사용하며 새 안내 문구·새 아트·유료 생성은 추가하지 않는다.
+- 범위·상태: client/combat-stage.mjs 신설과 실험실 원본/Combat.html 생성물 및 이 메모리만 변경 예정. 렌더 배치·모바일/상태 전환은 격리 headless Edge로 확인한다. 미스테이징·미커밋으로 남기며 push·배포 승인으로 확대하지 않는다. 과거 전투 논의는 메모리의 RPG 전투/실험실 기록을 참조했고 이번 범위는 독립 실험실 화면에 한정한다.
+
 ## 속성 설계 패널 최종 커밋 준비·검수 완료 · 01a1a129
 
 - 기록 ID: ingame-attribute-panel-git-ready-20261103-01a1a129. 기록 시각: 2026-11-03T22:18:16+09:00. 기록자·Git범위/검수 Codex /root, Git업로드·배포보류승인 사용자. 출처현재채팅01a1a129-d9d6-79c3-830d-58009e34c915,H:/Spawner Windows/PowerShell. 원발언정확시각·턴ID불명.

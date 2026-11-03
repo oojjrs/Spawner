@@ -51,5 +51,6 @@
     278,
     307
   ],
-  "supportMetric": "Center of the bottom three visible-alpha rows inside the visually identified sole region."
+  "supportMetric": "Center of the bottom three visible-alpha rows inside the visually identified sole region.",
+  "runtimeRegistration": {"frameSize":352,"pivotX":166,"pivotY":288,"viewSize":352,"registrationScale":1,"groundRadiusX":0.318182,"groundRadiusY":0.056818}
 }

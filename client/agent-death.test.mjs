@@ -25,8 +25,8 @@ test("승인한 16프레임과 피벗·재생 시간을 런타임에서도 그�
   assert.equal(AGENT_DEATH_ANIMATION.frameCount, metadata.frameCount);
   assert.equal(AGENT_DEATH_ANIMATION.image, metadata.runtimeAtlas);
   assert.equal(AGENT_DEATH_ANIMATION.frameSize, metadata.runtimeFrameSize[0]);
-  assert.equal(AGENT_DEATH_ANIMATION.pivotX / AGENT_DEATH_ANIMATION.frameSize, metadata.pivot[0] / metadata.frameSize[0]);
-  assert.equal(AGENT_DEATH_ANIMATION.pivotY / AGENT_DEATH_ANIMATION.frameSize, metadata.pivot[1] / metadata.frameSize[1]);
+  assert.equal(AGENT_DEATH_ANIMATION.pivotX, metadata.runtimePivot[0]);
+  assert.equal(AGENT_DEATH_ANIMATION.pivotY, metadata.runtimePivot[1]);
   const corpse = { kind: "corpse", tribe: "bean", diedAt: 20 };
   let elapsed = 0;
   for (const [index, duration] of metadata.durationsMs.entries()) {

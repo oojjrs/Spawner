@@ -125,5 +125,6 @@
   "preparation": "fixed canvas output resolution and small common ground registration; stationary source pixels retained at their original coordinates",
   "preview": "DesignAssets/Tribes/Previews/death-tail-repair-lineup-v6.webp",
   "approvalScope": "design and v3 middle key confirmed; eye corrections and revised sequence await user review",
-  "runtimeIntegration": "none"
+  "runtimeIntegration": "none",
+  "runtimeRegistration": {"frameSize":106,"pivotX":53,"pivotY":93,"viewSize":106,"registrationScale":1.0095238095238095}
 }

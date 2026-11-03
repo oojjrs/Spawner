@@ -3,8 +3,8 @@
   "frameSize": 256,
   "viewSize": 256,
   "columns": 4,
-  "pivotX": 128.0,
-  "pivotY": 224.0,
+  "pivotX": 142.5,
+  "pivotY": 204.5,
   "durationsMs": [
     120,
     90,
@@ -17,5 +17,8 @@
   ],
   "loop": false,
   "sourceAtlas": "DesignAssets/Animations/CreatureDeathV6/cotton-sheep/death.webp",
-  "sourceAtlasSha256": "198c4d38e2a96dfc77b53a0be59bd054ac14d7b9b54add429e4b018efd668466"
+  "sourceAtlasSha256": "198c4d38e2a96dfc77b53a0be59bd054ac14d7b9b54add429e4b018efd668466",
+  "groundRadiusX": 0.244141,
+  "groundRadiusY": 0.064453,
+  "frameGeometry": {"0":{"pivotX":142.5,"pivotY":204.5,"groundRadiusX":0.244141,"groundRadiusY":0.064453},"1":{"pivotX":140.5,"pivotY":205.214286,"groundRadiusX":0.254185,"groundRadiusY":0.063337},"2":{"pivotX":138.5,"pivotY":205.928571,"groundRadiusX":0.26423,"groundRadiusY":0.062221},"3":{"pivotX":136.5,"pivotY":206.642857,"groundRadiusX":0.274275,"groundRadiusY":0.061105},"4":{"pivotX":134.5,"pivotY":207.357143,"groundRadiusX":0.284319,"groundRadiusY":0.059989},"5":{"pivotX":132.5,"pivotY":208.071429,"groundRadiusX":0.294364,"groundRadiusY":0.058873},"6":{"pivotX":130.5,"pivotY":208.785714,"groundRadiusX":0.304408,"groundRadiusY":0.057757},"7":{"pivotX":128.5,"pivotY":209.5,"groundRadiusX":0.314453,"groundRadiusY":0.056641}}
 }

@@ -138,5 +138,6 @@
     4.5
   ],
   "blinkDrawingProvider": "built-in image_gen",
-  "blinkDrawings": "Source/blink-drawings.png"
+  "blinkDrawings": "Source/blink-drawings.png",
+  "runtimeRegistration": {"frameSize":428,"pivotX":215,"pivotY":358.5,"viewSize":428,"registrationScale":1.019047619047619,"groundRadiusX":0.178571,"groundRadiusY":0.039286}
 }

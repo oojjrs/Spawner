@@ -54,5 +54,6 @@
     0,
     1,
     2
-  ]
+  ],
+  "runtimeRegistration": {"frameSize":256,"pivotX":124,"pivotY":202,"viewSize":256,"registrationScale":1,"groundRadiusX":0.398438,"groundRadiusY":0.085938,"frameGeometry":{"0":{"pivotX":124,"pivotY":202,"groundRadiusX":0.398438,"groundRadiusY":0.085938},"1":{"pivotX":125,"pivotY":208.5,"groundRadiusX":0.410156,"groundRadiusY":0.068359},"2":{"pivotX":126,"pivotY":215,"groundRadiusX":0.421875,"groundRadiusY":0.050781}}}
 }

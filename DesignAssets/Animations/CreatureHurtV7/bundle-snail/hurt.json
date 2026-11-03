@@ -41,5 +41,6 @@
   "matrix": "hurt-matrix.webp",
   "drawnPoseCount": 5,
   "previewPauseMs": 900,
-  "previousVersion": "DesignAssets/Animations/CreatureHurtV4/bundle-snail/hurt.webp"
+  "previousVersion": "DesignAssets/Animations/CreatureHurtV4/bundle-snail/hurt.webp",
+  "runtimeRegistration": {"frameSize":470,"pivotX":227,"pivotY":393.5,"viewSize":469.99999999999994,"registrationScale":1.1809045226130652,"groundRadiusX":0.288945,"groundRadiusY":0.04397}
 }

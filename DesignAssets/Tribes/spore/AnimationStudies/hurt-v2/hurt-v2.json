@@ -56,5 +56,6 @@
     "DesignAssets/Tribes/spore/AnimationStudies/hurt-v2/Parts/foot-right.png"
   ],
   "preview": "DesignAssets/Tribes/Previews/hurt-lineup-v1.webp",
-  "motion": "body recoils first, heavy cap bends and follows with a short delayed settle"
+  "motion": "body recoils first, heavy cap bends and follows with a short delayed settle",
+  "runtimeRegistration": {"frameSize":110,"pivotX":55,"pivotY":96,"viewSize":110,"registrationScale":1.0784313725490196}
 }

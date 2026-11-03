@@ -1,11 +1,11 @@
 {
-  "frameSize": 258, 
+  "frameSize": 258,
   "displaySize": 257.36170212765956, 
   "scale": 0.50390625, 
   "idleReference": "DesignAssets/Animations/BubbleToadIdle/BreathV1/idle.webp", 
-  "viewSize": 258.10648584905664, 
-  "pivotX": 130.59410861033314, 
-  "pivotY": 191.8959035874853, 
+  "viewSize": 258.10648584905664,
+  "pivotX": 131.859905,
+  "pivotY": 218.850236,
   "sourcePivot": [
     259, 
     380.52
@@ -26,5 +26,7 @@
   "facing": "left", 
   "source": "attack.webp", 
   "exporter": "../export-runtime.py", 
-  "processing": "One common whole-cel scale for every frame. Original artwork, timing and source registration remain unchanged; runtime pivot aligns the exact seed to its accepted idle appearance."
+  "processing": "One common whole-cel scale for every frame. Original artwork, timing and source registration remain unchanged; runtime pivot aligns the exact seed to its accepted idle appearance.",
+  "groundRadiusX": 0.34626,
+  "groundRadiusY": 0.027701
 }

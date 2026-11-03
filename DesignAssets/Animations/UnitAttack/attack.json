@@ -30,5 +30,6 @@
   "hitFrame": 6,
   "hitAtMs": 300,
   "impactHoldMs": 300,
-  "leafCount": 2
+  "leafCount": 2,
+  "runtimeRegistration": {"frameSize":148,"pivotX":74,"pivotY":130,"viewSize":148,"registrationScale":1.2333333333333334}
 }

@@ -39,5 +39,6 @@
   "thumbnail": "hurt-thumbnail.webp",
   "matrix": "hurt-matrix.webp",
   "artworkScale": 1,
-  "previewPauseMs": 900
+  "previewPauseMs": 900,
+  "runtimeRegistration": {"frameSize":346,"pivotX":173,"pivotY":293.000001,"viewSize":346,"registrationScale":1,"groundRadiusX":0.401734,"groundRadiusY":0.028902}
 }

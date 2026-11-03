@@ -1,11 +1,11 @@
 {
-  "frameSize": 231, 
+  "frameSize": 232,
   "displaySize": 230.4, 
   "scale": 0.451171875, 
   "idleReference": "DesignAssets/Animations/CreatureIdleStudies/V2/vine-turtle/idle.webp", 
-  "viewSize": 231.67596068904592, 
-  "pivotX": 118.58627518832472, 
-  "pivotY": 199.84869689941402, 
+  "viewSize": 232.67888692579504,
+  "pivotX": 116,
+  "pivotY": 196.304164,
   "sourcePivot": [
     262.5, 
     441.62
@@ -26,5 +26,7 @@
   "facing": "left", 
   "source": "attack.webp", 
   "exporter": "../export-runtime.py", 
-  "processing": "One common whole-cel scale for every frame. Original artwork, timing and source registration remain unchanged; runtime pivot aligns the exact seed to its accepted idle appearance."
+  "processing": "One common whole-cel scale for every frame. Original artwork, timing and source registration remain unchanged; runtime pivot aligns the exact seed to its accepted idle appearance.",
+  "groundRadiusX": 0.401734,
+  "groundRadiusY": 0.028902
 }

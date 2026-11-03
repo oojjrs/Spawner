@@ -44,5 +44,6 @@
   "previewPauseMs": 900,
   "artworkScale": 1,
   "drawnPoseCount": 7,
-  "previousVersion": "CreatureHurtV5"
+  "previousVersion": "CreatureHurtV5",
+  "runtimeRegistration": {"frameSize":312,"pivotX":152,"pivotY":259,"viewSize":312,"registrationScale":1.0833333333333333,"groundRadiusX":0.267361,"groundRadiusY":0.048611}
 }

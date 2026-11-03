@@ -53,5 +53,6 @@
     "DesignAssets/Tribes/spring/AnimationStudies/hurt-v2/Parts/closed-right.png"
   ],
   "preview": "DesignAssets/Tribes/Previews/hurt-lineup-v1.webp",
-  "motion": "one local dent on the contacted side; displaced liquid bulges and ripples back into shape"
+  "motion": "one local dent on the contacted side; displaced liquid bulges and ripples back into shape",
+  "runtimeRegistration": {"frameSize":164,"pivotX":82,"pivotY":144,"viewSize":164,"registrationScale":1.0061349693251533}
 }

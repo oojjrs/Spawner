@@ -64,8 +64,11 @@
     2550
   ],
   "loop": true,
-  "pivotX": 128.0,
-  "pivotY": 224.0,
+  "pivotX": 124,
+  "pivotY": 202,
   "sourceAtlasSha256": "a291e094990e10b9e9ecc1dea0506c2440564d8a929e07d7eb409ed46817265f",
-  "sourceScale": 0.5
+  "sourceScale": 0.5,
+  "viewSize": 256,
+  "groundRadiusX": 0.398438,
+  "groundRadiusY": 0.085938
 }

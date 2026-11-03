@@ -1,11 +1,11 @@
 {
-  "frameSize": 512, 
+  "frameSize": 512,
   "displaySize": 537.6, 
   "scale": 1, 
   "idleReference": "DesignAssets/Animations/MountainPawLeaderIdle/spiny-back-leader/idle-runtime.webp", 
-  "viewSize": 418.9090909090909, 
-  "pivotX": 255.99999999999997, 
-  "pivotY": 449.5454545454545, 
+  "viewSize": 418.9090909090909,
+  "pivotX": 249.454545,
+  "pivotY": 412,
   "sourcePivot": [
     256, 
     448
@@ -28,5 +28,7 @@
   "facing": "left", 
   "source": "attack.webp", 
   "exporter": "../export-runtime.py", 
-  "processing": "One common whole-cel scale for every frame. Original artwork, timing and source registration remain unchanged; runtime pivot aligns the exact seed to its accepted idle appearance."
+  "processing": "One common whole-cel scale for every frame. Original artwork, timing and source registration remain unchanged; runtime pivot aligns the exact seed to its accepted idle appearance.",
+  "groundRadiusX": 0.398438,
+  "groundRadiusY": 0.085938
 }

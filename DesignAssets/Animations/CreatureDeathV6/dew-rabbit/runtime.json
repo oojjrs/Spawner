@@ -1,10 +1,10 @@
 {
   "image": "DesignAssets/Animations/CreatureDeathV6/dew-rabbit/runtime.webp",
-  "frameSize": 256,
-  "viewSize": 256,
+  "frameSize": 264,
+  "viewSize": 264,
   "columns": 4,
-  "pivotX": 128.0,
-  "pivotY": 224.0,
+  "pivotX": 136.911271,
+  "pivotY": 221.484412,
   "durationsMs": [
     33,
     33,
@@ -45,5 +45,8 @@
   ],
   "loop": false,
   "sourceAtlas": "DesignAssets/Animations/CreatureDeathV6/dew-rabbit/death.webp",
-  "sourceAtlasSha256": "5f7bb223f4af85eebf4bd21f1ce0febfcac32f5b2dc66b29d34c035714df5382"
+  "sourceAtlasSha256": "5f7bb223f4af85eebf4bd21f1ce0febfcac32f5b2dc66b29d34c035714df5382",
+  "groundRadiusX": 0.199041,
+  "groundRadiusY": 0.03717,
+  "frameGeometry": {"0":{"pivotX":136.911271,"pivotY":221.484412,"groundRadiusX":0.199041,"groundRadiusY":0.03717},"1":{"pivotX":137.070949,"pivotY":221.413429,"groundRadiusX":0.200106,"groundRadiusY":0.037224},"2":{"pivotX":137.230627,"pivotY":221.342446,"groundRadiusX":0.201171,"groundRadiusY":0.037278},"3":{"pivotX":137.390305,"pivotY":221.271463,"groundRadiusX":0.202237,"groundRadiusY":0.037332},"4":{"pivotX":137.549983,"pivotY":221.20048,"groundRadiusX":0.203302,"groundRadiusY":0.037387},"5":{"pivotX":137.709661,"pivotY":221.129496,"groundRadiusX":0.204368,"groundRadiusY":0.037441},"6":{"pivotX":137.869339,"pivotY":221.058513,"groundRadiusX":0.205433,"groundRadiusY":0.037495},"7":{"pivotX":138.029017,"pivotY":220.98753,"groundRadiusX":0.206498,"groundRadiusY":0.037549},"8":{"pivotX":138.188695,"pivotY":220.916547,"groundRadiusX":0.207564,"groundRadiusY":0.037603},"9":{"pivotX":138.348373,"pivotY":220.845564,"groundRadiusX":0.208629,"groundRadiusY":0.037657},"10":{"pivotX":138.508051,"pivotY":220.77458,"groundRadiusX":0.209694,"groundRadiusY":0.037711},"11":{"pivotX":138.667729,"pivotY":220.703597,"groundRadiusX":0.21076,"groundRadiusY":0.037765},"12":{"pivotX":138.827407,"pivotY":220.632614,"groundRadiusX":0.211825,"groundRadiusY":0.037819},"13":{"pivotX":138.987085,"pivotY":220.561631,"groundRadiusX":0.21289,"groundRadiusY":0.037873},"14":{"pivotX":139.146763,"pivotY":220.490647,"groundRadiusX":0.213956,"groundRadiusY":0.037927},"15":{"pivotX":139.306441,"pivotY":220.419664,"groundRadiusX":0.215021,"groundRadiusY":0.037981},"16":{"pivotX":139.466119,"pivotY":220.348681,"groundRadiusX":0.216086,"groundRadiusY":0.038035},"17":{"pivotX":139.625797,"pivotY":220.277698,"groundRadiusX":0.217152,"groundRadiusY":0.038089},"18":{"pivotX":139.785474,"pivotY":220.206715,"groundRadiusX":0.218217,"groundRadiusY":0.038143},"19":{"pivotX":139.945152,"pivotY":220.135731,"groundRadiusX":0.219282,"groundRadiusY":0.038197},"20":{"pivotX":140.10483,"pivotY":220.064748,"groundRadiusX":0.220348,"groundRadiusY":0.038252},"21":{"pivotX":140.264508,"pivotY":219.993765,"groundRadiusX":0.221413,"groundRadiusY":0.038306},"22":{"pivotX":140.424186,"pivotY":219.922782,"groundRadiusX":0.222479,"groundRadiusY":0.03836},"23":{"pivotX":140.583864,"pivotY":219.851799,"groundRadiusX":0.223544,"groundRadiusY":0.038414},"24":{"pivotX":140.743542,"pivotY":219.780815,"groundRadiusX":0.224609,"groundRadiusY":0.038468},"25":{"pivotX":140.90322,"pivotY":219.709832,"groundRadiusX":0.225675,"groundRadiusY":0.038522},"26":{"pivotX":141.062898,"pivotY":219.638849,"groundRadiusX":0.22674,"groundRadiusY":0.038576},"27":{"pivotX":141.222576,"pivotY":219.567866,"groundRadiusX":0.227805,"groundRadiusY":0.03863},"28":{"pivotX":141.382254,"pivotY":219.496882,"groundRadiusX":0.228871,"groundRadiusY":0.038684},"29":{"pivotX":141.541932,"pivotY":219.425899,"groundRadiusX":0.229936,"groundRadiusY":0.038738},"30":{"pivotX":141.70161,"pivotY":219.354916,"groundRadiusX":0.231001,"groundRadiusY":0.038792},"31":{"pivotX":141.861288,"pivotY":219.283933,"groundRadiusX":0.232067,"groundRadiusY":0.038846},"32":{"pivotX":142.020966,"pivotY":219.21295,"groundRadiusX":0.233132,"groundRadiusY":0.0389},"33":{"pivotX":142.180644,"pivotY":219.141966,"groundRadiusX":0.234197,"groundRadiusY":0.038954},"34":{"pivotX":142.340322,"pivotY":219.070983,"groundRadiusX":0.235263,"groundRadiusY":0.039008},"35":{"pivotX":142.5,"pivotY":219,"groundRadiusX":0.236328,"groundRadiusY":0.039063}}
 }

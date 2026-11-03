@@ -3,8 +3,8 @@
   "frameSize": 256,
   "viewSize": 256,
   "columns": 4,
-  "pivotX": 128.0,
-  "pivotY": 224.0,
+  "pivotX": 134.937669,
+  "pivotY": 212.205962,
   "durationsMs": [
     80,
     40,
@@ -17,5 +17,8 @@
   ],
   "loop": false,
   "sourceAtlas": "DesignAssets/Animations/CreatureDeathV6/soil-boar/death.webp",
-  "sourceAtlasSha256": "1d04f2c58093d634c15b27b7119290a34507675f974351299d72fa5abe03ea1d"
+  "sourceAtlasSha256": "1d04f2c58093d634c15b27b7119290a34507675f974351299d72fa5abe03ea1d",
+  "groundRadiusX": 0.325203,
+  "groundRadiusY": 0.04607,
+  "frameGeometry": {"0":{"pivotX":134.937669,"pivotY":212.205962,"groundRadiusX":0.325203,"groundRadiusY":0.04607},"1":{"pivotX":132.232288,"pivotY":212.60511,"groundRadiusX":0.319482,"groundRadiusY":0.044511},"2":{"pivotX":129.526907,"pivotY":213.004259,"groundRadiusX":0.313761,"groundRadiusY":0.042952},"3":{"pivotX":126.821525,"pivotY":213.403407,"groundRadiusX":0.30804,"groundRadiusY":0.041393},"4":{"pivotX":124.116144,"pivotY":213.802555,"groundRadiusX":0.302319,"groundRadiusY":0.039834},"5":{"pivotX":121.410763,"pivotY":214.201703,"groundRadiusX":0.296598,"groundRadiusY":0.038275},"6":{"pivotX":118.705381,"pivotY":214.600852,"groundRadiusX":0.290877,"groundRadiusY":0.036715},"7":{"pivotX":116,"pivotY":215,"groundRadiusX":0.285156,"groundRadiusY":0.035156}}
 }

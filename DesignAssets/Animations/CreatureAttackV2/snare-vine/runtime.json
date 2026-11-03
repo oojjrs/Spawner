@@ -1,11 +1,11 @@
 {
-  "frameSize": 283, 
+  "frameSize": 304,
   "displaySize": 282.9473684210526, 
   "scale": 0.552734375, 
   "idleReference": "DesignAssets/Animations/CreatureIdleStudies/V1/snare-vine/idle.webp", 
-  "viewSize": 283.21875, 
-  "pivotX": 141.23318481445312, 
-  "pivotY": 259.8811083984375, 
+  "viewSize": 304.2349823321555,
+  "pivotX": 153.335937,
+  "pivotY": 259.98828,
   "sourcePivot": [
     255.5, 
     470.16
@@ -26,5 +26,7 @@
   "facing": "left", 
   "source": "attack.webp", 
   "exporter": "../export-runtime.py", 
-  "processing": "One common whole-cel scale for every frame. Original artwork, timing and source registration remain unchanged; runtime pivot aligns the exact seed to its accepted idle appearance."
+  "processing": "One common whole-cel scale for every frame. Original artwork, timing and source registration remain unchanged; runtime pivot aligns the exact seed to its accepted idle appearance.",
+  "groundRadiusX": 0.122642,
+  "groundRadiusY": 0.021226
 }

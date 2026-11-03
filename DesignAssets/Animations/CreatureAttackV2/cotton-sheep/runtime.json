@@ -1,11 +1,11 @@
 {
-  "frameSize": 290, 
+  "frameSize": 290,
   "displaySize": 289.1294117647059, 
   "scale": 0.56640625, 
   "idleReference": "DesignAssets/Animations/CottonSheepIdle/CalmV5/idle-runtime.webp", 
-  "viewSize": 256.7708333333333, 
-  "pivotX": 145.43660481770834, 
-  "pivotY": 249.0771484375, 
+  "viewSize": 256.7708333333333,
+  "pivotX": 159.54366,
+  "pivotY": 234.441284,
   "sourcePivot": [
     256, 
     448
@@ -28,5 +28,7 @@
   "facing": "left", 
   "source": "attack.webp", 
   "exporter": "../export-runtime.py", 
-  "processing": "One common whole-cel scale for every frame. Original artwork, timing and source registration remain unchanged; runtime pivot aligns the exact seed to its accepted idle appearance."
+  "processing": "One common whole-cel scale for every frame. Original artwork, timing and source registration remain unchanged; runtime pivot aligns the exact seed to its accepted idle appearance.",
+  "groundRadiusX": 0.244141,
+  "groundRadiusY": 0.064453
 }

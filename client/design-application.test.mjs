@@ -54,17 +54,18 @@ test("기획서에 사망 애니메이션이 있는 생물 18종을 모두 게�
   }
 });
 
-test("새로 연결한 사망 시트 9종은 기획서 원본과 프레임 순서·시간·피벗을 유지한다", () => {
+test("사망 시트 9종은 원본 프레임 순서·시간과 등록된 런타임 피벗을 사용한다", () => {
   for (const key of ["flower-tail-bird", "rolling-acorn", "snare-vine", "dew-rabbit", "cotton-sheep", "soil-boar", "talon-owl", "spring-keeper", "white-paw"]) {
     const animation = CREATURE_DEATH_ANIMATIONS[key];
     const metadata = JSON.parse(readFileSync(new URL(animation.image.replace("runtime.webp", "runtime.json"), root), "utf8"));
     const original = JSON.parse(readFileSync(new URL(metadata.sourceAtlas.replace("death.webp", "death.json"), root), "utf8"));
     const row = design.match(new RegExp('<tr id="unit-' + key + '"[^>]*>([^]*?)</tr>'))[1];
-    assert.ok(row.match(/<td data-action="death"[^]*?<\/td>/)[0].includes(metadata.sourceAtlas), key);
+    assert.ok(row.match(/<td data-action="death"[^]*?<\/td>/)[0].includes(animation.image), key);
     assert.equal(createHash("sha256").update(readFileSync(new URL(metadata.sourceAtlas, root))).digest("hex"), metadata.sourceAtlasSha256, key);
     assert.deepEqual(animation.durationsMs, original.durationsMs, key);
-    assert.equal(animation.pivotX / animation.frameSize, original.pivotX / original.frameSize, key);
-    assert.equal(animation.pivotY / animation.frameSize, original.pivotY / original.frameSize, key);
+    assert.equal(animation.frameSize, metadata.frameSize, key);
+    assert.equal(animation.pivotX, metadata.pivotX, key);
+    assert.equal(animation.pivotY, metadata.pivotY, key);
   }
 });
 

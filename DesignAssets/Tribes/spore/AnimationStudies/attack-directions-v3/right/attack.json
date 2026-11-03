@@ -46,5 +46,6 @@
   "screenDirection": [
     1,
     0
-  ]
+  ],
+  "runtimeRegistration": {"frameSize":110,"pivotX":55,"pivotY":96,"viewSize":110,"registrationScale":1.0784313725490196}
 }

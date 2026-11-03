@@ -54,5 +54,6 @@
     "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/Parts/foot-right.png"
   ],
   "preview": "DesignAssets/Tribes/Previews/hurt-lineup-v1.webp",
-  "motion": "constant rigid body shape; brief recoil and a firm small stop"
+  "motion": "constant rigid body shape; brief recoil and a firm small stop",
+  "runtimeRegistration": {"frameSize":106,"pivotX":53,"pivotY":93,"viewSize":106,"registrationScale":1.0095238095238095}
 }

@@ -1,11 +1,11 @@
 {
-  "frameSize": 270, 
+  "frameSize": 270,
   "displaySize": 269.55185185185184, 
   "scale": 0.52734375, 
   "idleReference": "DesignAssets/Animations/UniqueIdleV4/lantern-keeper/idle.webp", 
-  "viewSize": 259.43060498220643, 
-  "pivotX": 141.5871052046263, 
-  "pivotY": 235.53874277135233, 
+  "viewSize": 259.43060498220643,
+  "pivotX": 128.243995,
+  "pivotY": 228.568394,
   "sourcePivot": [
     256, 
     448
@@ -28,5 +28,7 @@
   "facing": "left", 
   "source": "attack.webp", 
   "exporter": "../export-runtime.py", 
-  "processing": "One common whole-cel scale for every frame. Original artwork, timing and source registration remain unchanged; runtime pivot aligns the exact seed to its accepted idle appearance."
+  "processing": "One common whole-cel scale for every frame. Original artwork, timing and source registration remain unchanged; runtime pivot aligns the exact seed to its accepted idle appearance.",
+  "groundRadiusX": 0.182292,
+  "groundRadiusY": 0.033854
 }

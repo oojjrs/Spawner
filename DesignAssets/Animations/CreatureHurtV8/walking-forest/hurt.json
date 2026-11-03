@@ -80,7 +80,7 @@
 
   "previousVersion": "CreatureHurtV7",
 
-  "sourceSeedSha256": "34fec55e6f6079b289cfe567dbf03841ceca33463f364cce7ebf4828aed785f8"
-
+  "sourceSeedSha256": "34fec55e6f6079b289cfe567dbf03841ceca33463f364cce7ebf4828aed785f8",
+  "runtimeRegistration": {"frameSize":260,"pivotX":128,"pivotY":214,"viewSize":260,"registrationScale":1.015625,"groundRadiusX":0.414063,"groundRadiusY":0.0625}
 }
 

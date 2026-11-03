@@ -282,6 +282,8 @@
     };
     const beetleCorpseSprite = new Image();
     beetleCorpseSprite.src = assetSource("DesignAssets/Animations/BeetleDeath/dead-v2.png");
+    const beetleCorpseAnimation = Spawner.imageAnimation({ image: "DesignAssets/Animations/BeetleDeath/dead-v2.png",
+      frameSize: 185, columns: 1, pivotX: 95.5, pivotY: 163 });
     const resourceHarvestSprites = new Map(Spawner.RESOURCE_HARVEST_ANIMATIONS.map(animation => {
       const sprite = new Image();
       sprite.src = assetSource(animation.image);
@@ -418,6 +420,7 @@
       "white-paw": { start: {"x":-0.2813,"y":-0.2563,"radiusX":0.1958,"radiusY":0.017}, end: {"x":-0.0676,"y":-0.2599,"radiusX":0.4985,"radiusY":0.0249}, duration: 1.97 }
     };
     const unitDisplayBounds = new Map();
+    const unitGroundShapes = new Map();
     let beetleCorpseScale = 1.6;
     const creatureIdleSheets = new Map(Object.entries(Spawner.CREATURE_IDLE_ANIMATIONS).map(([species, animation]) => {
       const sprite = new Image();
@@ -545,9 +548,9 @@
       prepareUnitDisplaySize(tribe.key, entry.sprite, entry.animation, AGENT_HEIGHT * entry.scale);
     }
     for (const [species, entry] of creatureIdleSheets)
-      prepareUnitDisplaySize(species, entry.sprite, entry.animation, 1.4 * entry.scale);
-    prepareUnitDisplaySize("talon-owl", talonOwlSheet, Spawner.TALON_OWL_IDLE, Spawner.TALON_OWL_IDLE.scale);
-    prepareUnitDisplaySize("spiny-back-beetle", beetleSheet, Spawner.BEETLE_SPRITE, Spawner.BEETLE_SPRITE.scale);
+      prepareUnitDisplaySize(species, entry.sprite, entry.animation, 1.4 * entry.scale * (entry.animation.registrationScale || 1));
+    prepareUnitDisplaySize("talon-owl", talonOwlSheet, Spawner.TALON_OWL_IDLE, Spawner.TALON_OWL_IDLE.scale * (Spawner.TALON_OWL_IDLE.registrationScale || 1));
+    prepareUnitDisplaySize("spiny-back-beetle", beetleSheet, Spawner.BEETLE_SPRITE, Spawner.BEETLE_SPRITE.scale * (Spawner.BEETLE_SPRITE.registrationScale || 1));
     for (const [species, entry] of creatureDeathSheets) prepareCreatureDeathSize(species, entry);
     const beetleCorpseBounds = tribeArt.bounds(beetleCorpseSprite, false);
     beetleCorpseScale = Spawner.UNIT_DISPLAY_SIZES["spiny-back-beetle"] * beetleCorpseSprite.naturalWidth /
@@ -3886,7 +3889,7 @@
       const index = idleMotion.matches || agent.mode !== "idle" ? 0 : Spawner.talonOwlIdleFrame(elapsed);
       const sprite = talonOwlFrames.get(index);
       if (!sprite) return;
-      const size = cell * shape.scale;
+      const size = cell * shape.scale * (shape.registrationScale || 1);
       const left = -size * shape.pivotX / shape.frameSize;
       const top = -size * shape.pivotY / shape.frameSize;
       ctx.save();
@@ -3902,9 +3905,9 @@
 
     function drawBeetleFrame(index, facing, x, floor, cell, outlineColor, action) {
       const attack = action === "attack";
-      const shape = attack ? Spawner.BEETLE_ATTACK_SPRITE : Spawner.BEETLE_SPRITE;
+      const shape = Spawner.imageFrameGeometry(attack ? Spawner.BEETLE_ATTACK_SPRITE : Spawner.BEETLE_SPRITE, index);
       const sheet = attack ? beetleAttackSheet : beetleSheet;
-      const size = cell * shape.scale;
+      const size = cell * shape.scale * (shape.registrationScale || 1);
       const left = -size * shape.pivotX / shape.frameSize;
       const top = -size * shape.pivotY / shape.frameSize;
       const prepared = attack ? null : beetleFrames.get(index);
@@ -4529,6 +4532,7 @@
           const bounds = action === "walk" ? idleBounds : tribeArt.bounds(entry.sprite, entry.animation.frameSize);
           const frameSize = action === "walk" ? idle.animation.frameSize : entry.animation.frameSize;
           entry.scale = frameSize / 512 * Math.min(reference.width / bounds.width, reference.height / bounds.height);
+          if (action === "walk") entry.scale *= (entry.animation.registrationScale || 1) / (idle.animation.registrationScale || 1);
           entry.referenceHeight = reference.height;
           if (tribe.key === "bean" && ["idle", "attack", "hurt", "death"].includes(action)) prepareSproutCombatFrames(entry, action === "idle" ? 1 : entry.animation.frameCount);
           if (action === "walk") agentMovementSheets.get(tribe.key).scale = entry.scale;
@@ -4763,7 +4767,7 @@
       const animation = pose.animation, owl = agent.species === "talon-owl";
       const point = worldToScreen(renderPosition.x + .5, renderPosition.y + (owl ? .86 : 1));
       const size = state.camera.zoom * (owl ? Spawner.TALON_OWL_IDLE.scale : 1.4 * entry.scale) *
-        animation.frameSize / animation.viewSize;
+        animation.frameSize / animation.viewSize * (animation.registrationScale || 1);
       const left = -size * animation.pivotX / animation.frameSize;
       const top = -size * animation.pivotY / animation.frameSize;
       const frame = { owner: entry.sprite, size: animation.frameSize, index: pose.frame,
@@ -4785,7 +4789,7 @@
       if (!entry || !entry.sprite.complete || !entry.sprite.naturalWidth) return false;
       const animation = pose.animation, owl = agent.species === "talon-owl";
       const point = worldToScreen(renderPosition.x + .5, renderPosition.y + (owl ? .86 : 1));
-      const size = state.camera.zoom * (owl ? Spawner.TALON_OWL_IDLE.scale : 1.4 * entry.scale);
+      const size = state.camera.zoom * (owl ? Spawner.TALON_OWL_IDLE.scale : 1.4 * entry.scale) * (animation.registrationScale || 1);
       const left = -size * animation.pivotX / animation.frameSize;
       const top = -size * animation.pivotY / animation.frameSize;
       const frame = { owner: entry.sprite, size: animation.frameSize, index: pose.frame,
@@ -4808,7 +4812,7 @@
       const frame = idleMotion.matches ? 0 : Spawner.unitAnimationFrame(animation,
         (state.simSeconds - (agent.animationStartedAt ?? agent.moveStartedAt ?? 0)) * 1000);
       const point = worldToScreen(renderPosition.x + .5, renderPosition.y + 1);
-      const size = state.camera.zoom * 1.4 * entry.scale;
+      const size = state.camera.zoom * 1.4 * entry.scale * (animation.registrationScale || 1);
       const left = -size * animation.pivotX / animation.frameSize;
       const top = -size * animation.pivotY / animation.frameSize;
       const source = { owner: entry.sprite, size: animation.frameSize, index: frame,
@@ -4829,9 +4833,10 @@
       const animation = entry.animation;
       const frame = idleMotion.matches ? animation.frameCount - 1 :
         Spawner.unitAnimationFrame(animation, (corpsePlaybackTime() - corpse.diedAt) * 1000);
+      const geometry = Spawner.imageFrameGeometry(animation, frame);
       const size = cell * 1.4 * entry.scale * animation.frameSize / animation.viewSize;
-      const left = -size * animation.pivotX / animation.frameSize;
-      const top = -size * animation.pivotY / animation.frameSize;
+      const left = -size * geometry.pivotX / animation.frameSize;
+      const top = -size * geometry.pivotY / animation.frameSize;
       const source = { owner: entry.sprite, size: animation.frameSize, index: frame,
         x: frame % animation.columns * animation.frameSize, y: Math.floor(frame / animation.columns) * animation.frameSize };
       const decay = Number.isFinite(corpse.decaysAt) ?
@@ -4868,8 +4873,9 @@
         context.rotate(Math.PI / 2);
         context.scale(corpse.facing < 0 ? -1 : 1, 1);
       }
-      const left = -size * (corpse.species === "talon-owl" ? Spawner.TALON_OWL_IDLE.pivotX / Spawner.TALON_OWL_IDLE.frameSize : .5);
-      const top = -size * (corpse.species === "talon-owl" ? Spawner.TALON_OWL_IDLE.pivotY / Spawner.TALON_OWL_IDLE.frameSize : .88);
+      const shape = corpse.species === "talon-owl" ? Spawner.TALON_OWL_IDLE : beetleCorpseAnimation;
+      const left = -size * shape.pivotX / shape.frameSize;
+      const top = -size * shape.pivotY / shape.frameSize;
       context.drawImage(sprite, left, top, size, size);
       if (outlineColor) drawSelectionOutline(sprite, left, top, size, size, null, outlineColor);
       context.restore();
@@ -4988,6 +4994,10 @@
       const scale = target / length;
       unitDisplayBounds.set(key, { x: (bounds.x - animation.pivotX) * scale,
         y: (bounds.y - animation.pivotY) * scale, width: bounds.width * scale, height: bounds.height * scale });
+      if (animation.groundRadiusX) {
+        const reference = scale * (animation.viewSize || animation.frameSize) / (animation.registrationScale || 1);
+        unitGroundShapes.set(key, { radiusX: animation.groundRadiusX * reference, radiusY: animation.groundRadiusY * reference });
+      }
     }
 
     function prepareCreatureDeathSize(species, entry) {
@@ -5058,6 +5068,8 @@
       let radiusX = bounds.width * contact.width / 2;
       let radiusY = Spawner.UNIT_DISPLAY_SIZES[key] * contact.depth;
       let opacity = contact.opacity;
+      const ground = unitGroundShapes.get(key);
+      if (ground) { offsetX = 0; offsetY = 0; radiusX = ground.radiusX; radiusY = ground.radiusY; }
       if (birth?.seedVisible) {
         offsetX = 0; offsetY = 0; radiusX = .055 * scale; radiusY = .018 * scale;
       } else if (!agent.species && appearance.feet) {
@@ -7636,6 +7648,19 @@
     }
 
     function drawCorpseGroundShadow(corpse, point) {
+      const entry = creatureDeathSheets.get(corpse.species);
+      const animation = entry?.animation || (corpse.species === "spiny-back-beetle" ? beetleCorpseAnimation : null);
+      if (animation?.groundRadiusX) {
+        const elapsed = (corpsePlaybackTime() - corpse.diedAt) * 1000;
+        const frame = entry ? idleMotion.matches ? animation.frameCount - 1 : Spawner.unitAnimationFrame(animation, elapsed) : 0;
+        const geometry = Spawner.imageFrameGeometry(animation, frame);
+        const reference = entry ? 1.4 * entry.scale / (animation.registrationScale || 1) :
+          beetleCorpseScale * animation.viewSize / ((animation.registrationScale || 1) * animation.frameSize);
+        const decay = Number.isFinite(corpse.decaysAt) ? clamp(elapsed / ((corpse.decaysAt - corpse.diedAt) * 1000), 0, 1) : 0;
+        drawGroundShadow(point.x, point.y, geometry.groundRadiusX * reference * state.camera.zoom,
+          geometry.groundRadiusY * reference * state.camera.zoom, .3 * (1 - decay * .4));
+        return;
+      }
       const contact = unitCorpseContacts[corpse.species || corpse.tribe || "bean"];
       const age = corpsePlaybackTime() - corpse.diedAt;
       const progress = contact.duration && Number.isFinite(age) ? clamp(age / contact.duration, 0, 1) : 1;

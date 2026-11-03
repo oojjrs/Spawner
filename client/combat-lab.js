@@ -1,14 +1,12 @@
 import { COMBAT_LAB_UNITS } from "./combat-lab.mjs";
 import { SIMULATION_STATS, DEFAULT_SIMULATION_RULES, deriveSimulationStats, createSimulationTrial } from "./combat-simulation.mjs";
 import { runSimulationBatch, compareSimulationSwap } from "./combat-analysis.mjs";
-import { UNIT_ANIMATIONS, CREATURE_IDLE_ANIMATIONS, CREATURE_ATTACK_ANIMATIONS, unitAnimationPose, unitAnimationFrame, creatureHurtPose, creatureAttackPose } from "./unit-animation.mjs";
-import { TALON_OWL_IDLE, talonOwlIdleFrame } from "./talon-owl-idle.mjs";
-import { BEETLE_SPRITE, BEETLE_ATTACK_SPRITE, BEETLE_ANIMATIONS, BEETLE_NEUTRAL_ASSET } from "../server/beetle-animation.mjs";
+import { createCombatStage } from "./combat-stage.mjs";
 
-const sides = ["left", "right"], images = new Map(), elements = {}, inputs = {};
+const sides = ["left", "right"], elements = {}, inputs = {};
 const builds = Object.fromEntries(sides.map((side, index) => [side, { key: index ? "spore" : "bean", name: index ? "오른쪽" : "왼쪽",
   organs: { attack: true, armor: true, legs: true }, counts: Object.fromEntries(SIMULATION_STATS.map(stat => [stat.key, ({power:4,vitality:5,armor:2,haste:2})[stat.key] || 0])) }]));
-let rules = { ...DEFAULT_SIMULATION_RULES }, trial, playing = false, lastFrame = 0, renderedRows = -1, generation = 0, batchBusy = false;
+let rules = { ...DEFAULT_SIMULATION_RULES }, trial, playing = false, lastFrame = 0, renderedRows = -1, generation = 0, batchBusy = false, controlId = 0;
 const main = document.querySelector("main");
 main.replaceChildren();
 function node(tag, text, className) {
@@ -19,7 +17,9 @@ function node(tag, text, className) {
 }
 function control(parent, label, element) {
   const wrapper = node("label", null, "field");
-  wrapper.append(node("span", label), element); parent.append(wrapper); return element;
+  const caption = node("span", label); caption.id = "combat-field-" + controlId++;
+  element.setAttribute("aria-labelledby", caption.id);
+  wrapper.append(caption, element); parent.append(wrapper); return element;
 }
 function number(value, min, max, step) {
   const element = document.createElement("input");
@@ -41,16 +41,36 @@ elements.pieceLimit = control(top, "비교 조각 수", number(20, 0, null, 1));
 elements.first = control(top, "시작", select([["simultaneous","동시 시작"],["left","왼쪽 먼저"],["right","오른쪽 먼저"]], "simultaneous"));
 elements.seed = control(top, "난수 시드", number(1, 0, 4294967295, 1));
 elements.random = control(top, "피해 변동", select([["true","변동 적용"],["false","평균 피해"]], "true"));
-elements.playback = control(top, "재생 배속", select([[".5","0.5배"],["1","1배"],["4","4배"]], "1")); main.append(top);
+elements.playback = control(top, "재생 배속", select([[".5","0.5배"],["1","1배"],["4","4배"]], "1"));
+const stage = node("section", null, "stage"); main.append(stage);
+const stageHud = node("div", null, "stage-hud"); stage.append(stageHud);
+const stageCenter = node("div", null, "stage-center"); stageCenter.append(elements.status); stageHud.append(stageCenter);
+elements.dice = button(stageCenter, "🎲", () => {
+  if (batchBusy) return;
+  for (const side of sides) {
+    const unit = COMBAT_LAB_UNITS[Math.floor(Math.random() * COMBAT_LAB_UNITS.length)];
+    builds[side].key = unit.key;
+    inputs[side].appearance.value = unit.key;
+  }
+  changed();
+});
+elements.dice.className = "stage-dice"; elements.dice.setAttribute("aria-label", "주사위");
+const stageView = node("div", null, "stage-view");
+elements.stage = node("canvas"); elements.stage.width = 1100; elements.stage.height = 400;
+elements.stage.setAttribute("aria-hidden", "true"); stageView.append(elements.stage); stage.append(stageView);
+const combatStage = createCombatStage(elements.stage);
 const arena = node("section", null, "arena"); main.append(arena);
 for (const side of sides) {
   const card = node("section", null, "fighter " + side); elements[side + "Card"] = card; inputs[side] = {};
-  card.append(node("h2", builds[side].name));
-  const appearance = control(card, "외형", select(COMBAT_LAB_UNITS.map(unit => [unit.key, unit.name]), builds[side].key));
+  const hud = node("div", null, "stage-side " + side); stageHud.append(hud);
+  hud.append(node("h2", builds[side].name));
+  const appearance = control(hud, "외형", select(COMBAT_LAB_UNITS.map(unit => [unit.key, unit.name]), builds[side].key));
   appearance.addEventListener("change", () => { builds[side].key = appearance.value; changed(); }); inputs[side].appearance = appearance;
-  const canvas = node("canvas"); canvas.width = 260; canvas.height = 200; canvas.setAttribute("aria-label", builds[side].name + " 전투 모습"); elements[side + "Art"] = canvas; card.append(canvas);
-  const hp = node("div", null, "hp"); elements[side + "Hp"] = node("strong"); hp.append(node("span", "HP"), elements[side + "Hp"]); card.append(hp);
-  const bar = node("div", null, "bar"); elements[side + "Bar"] = node("i"); bar.append(elements[side + "Bar"]); card.append(bar);
+  const hp = node("div", null, "hp"); elements[side + "Hp"] = node("strong"); hp.append(node("span", "HP"), elements[side + "Hp"]); hud.append(hp);
+  const bar = node("div", null, "bar"); elements[side + "Bar"] = node("i"); bar.append(elements[side + "Bar"]); hud.append(bar);
+  const gauge = node("div", null, "action-bar"); elements[side + "Gauge"] = node("i"); gauge.append(elements[side + "Gauge"]); hud.append(gauge);
+  elements[side + "Reaction"] = node("output", null, "reaction"); hud.append(elements[side + "Reaction"]);
+  card.append(node("h2", builds[side].name));
   const organs = node("div", null, "organs");
   for (const [key,label] of [["attack","공격 기관"],["armor","방어 기관"],["legs","이동 기관"]]) {
     const input = document.createElement("input"); input.type = "checkbox"; input.checked = builds[side].organs[key];
@@ -73,8 +93,9 @@ const actions = node("div", null, "actions");
 elements.step = button(actions, "다음 사건", () => { playing = false; trial?.step(); render(); });
 elements.run = button(actions, "자동 전투", () => { playing = !playing; render(); });
 elements.finish = button(actions, "끝까지", () => { playing = false; trial?.finish(); render(); });
-button(actions, "초기화", reset); main.append(actions);
-elements.phase = node("output", null, "phase"); main.append(elements.phase);
+button(actions, "초기화", reset);
+const stageFooter = node("div", null, "stage-footer");
+elements.phase = node("output", null, "phase"); stageFooter.append(actions, elements.phase); stage.append(stageFooter); main.insertBefore(top, arena);
 const ruleLabels = {
  powerCurve:"공격 증가 곡선",powerBase:"기초 공격",powerGain:"첫 공격 투자 증가량",powerKnee:"공격 점감 무릎",healthBase:"기초 HP",healthPerPoint:"생명력당 HP",armorPerPoint:"방어력당 방어",armorCap:"방어 경감 상한",armorKnee:"방어 점감 무릎",
  flatPenPerPoint:"고정 관통 증가량",percentPenCap:"비율 관통 상한",percentPenKnee:"관통 점감 무릎",attackRateBase:"기초 공속(회/초)",hasteCap:"공격 빈도 증가 상한",hasteKnee:"공격 빈도 무릎",maxActionRate:"최대 공속(회/초)",windupBase:"기초 준비(초)",focusPerPoint:"준비 단축(초)",windupMinimum:"최소 준비(초)",hitGapBase:"기초 연타 간격(초)",hitSpeedPerPoint:"연타 간격 단축(초)",hitGapMinimum:"최소 연타 간격(초)",recovery:"후딜(초)",followupBase:"후속타 기초 배율",comboPerPoint:"후속타 증가량",followupCap:"후속타 배율 상한",
@@ -130,6 +151,7 @@ function reset() {
 function percent(value) { return (100*value).toFixed(1)+"%"; }
 function render() {
   elements.run.textContent=playing?"일시정지":"자동 전투";
+  stage.dataset.state = !trial ? "invalid" : trial.result()?.reason ? "ended" : playing ? "playing" : "paused";
   for(const side of sides) {
     try {
       const stats=deriveSimulationStats(builds[side],rules),agent=trial?.agents[sides.indexOf(side)];
@@ -137,6 +159,12 @@ function render() {
       elements[side+"Pieces"].dataset.over=String(stats.pieceCount>Number(elements.pieceLimit.value));
       elements[side+"Hp"].textContent=(agent?agent.health:stats.health).toFixed(1)+" / "+stats.health.toFixed(1);
       elements[side+"Bar"].style.width=(100*(agent?agent.health:stats.health)/stats.health)+"%";
+      const start = agent?.combat.cycleStartedAt || 0, end = agent?.combat.nextAttackAt || 0;
+      const progress = agent?.health > 0 && agent.stats.canAttack && end > start ? Math.max(0, Math.min(1, (trial.time - start) / (end - start))) : 0;
+      elements[side+"Gauge"].style.width=(100*progress)+"%";
+      const reaction = agent?.combat.lastReaction, event = agent?.combat.lastEvent;
+      const labels = {dodge:"회피",parry:"패링",block:"블록",stun:"기절"};
+      elements[side+"Reaction"].textContent = !agent ? "" : agent.health <= 0 ? "사망" : agent.combat.stunnedUntil > trial.time ? "기절" : reaction && trial.time - reaction.at < .65 ? labels[reaction.kind] || "" : event?.kind === "counter" && trial.time - event.at < .45 ? "반격" : agent.attack && trial.time < agent.attack.hitAt ? "공격 준비" : "";
       const values=[["공격",stats.attackPower.toFixed(2)],["방어",stats.defense.toFixed(2)],["공속",stats.attackSpeed.toFixed(2)+"/초"],["준비 / 후딜",stats.windup.toFixed(2)+" / "+stats.recovery.toFixed(2)+"초"],["연타 / 간격",stats.hitCount+"타 / "+stats.hitGap.toFixed(2)+"초"],["후속타",percent(stats.followupMultiplier)],["관통",stats.flatPenetration.toFixed(1)+" + "+percent(stats.armorPenetration)],["치명",percent(stats.critChance)+" ×"+stats.critMultiplier.toFixed(2)],["정밀 / 회피",percent(stats.accuracy)+" / "+percent(stats.evasion)],["패링 / 블록",percent(stats.parry)+" / "+percent(stats.block)],["블록 경감",percent(stats.blockReduction)],["반격",percent(stats.counter)+" ×"+stats.counterMultiplier.toFixed(2)],["강인함",percent(stats.tenacity)],["기절 / 타격당",percent(stats.stunChance)+" / "+percent(stats.stunChancePerHit)],["기절 시간",stats.stunDuration.toFixed(2)+"초"],["흡혈",percent(stats.drain)]];
       elements[side+"Derived"].replaceChildren(...values.flatMap(([label,value])=>[node("dt",label),node("dd",value)]));
     } catch(error) { elements.status.textContent=settingError(error); }
@@ -144,7 +172,7 @@ function render() {
   const result=trial?.result(),ended=!!result?.reason;
   for(const key of ["step","run","finish"])elements[key].disabled=!trial||ended||batchBusy;
   elements.repeat.disabled=elements.swap.disabled=!trial||batchBusy;
-  if(!trial)return;
+  if(!trial){elements.phase.textContent="";return;}
   if(ended) {playing=false;elements.run.textContent="자동 전투";elements.status.textContent=(result.winner==="draw"?"무승부":result.winner==="left"?"왼쪽 승리":"오른쪽 승리")+" · "+({death:"사망",'time-limit':"시간 제한",'no-offense':"공격 불가",'event-limit':"사건 제한"}[result.reason]||result.reason);}
   else elements.status.textContent=playing?"전투 중":trial.time?"일시정지":"대결 준비";
   elements.phase.textContent=trial.time.toFixed(2)+"초 · "+trial.history.length+"개 사건";
@@ -203,60 +231,6 @@ reset();
 function frame(now) {
   const elapsed=lastFrame?Math.min(.1,(now-lastFrame)/1000):0;lastFrame=now;
   if(playing&&trial){trial.advance(elapsed*Number(elements.playback.value));render();}
-  sides.forEach(draw);requestAnimationFrame(frame);
+  combatStage.render(trial, now, playing);requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);
-function image(source) {
-  if (!images.has(source)) {
-    const asset = new Image();
-    asset.src = source;
-    images.set(source, asset);
-  }
-  return images.get(source);
-}
-for (const animation of Object.values(CREATURE_ATTACK_ANIMATIONS)) image(animation.image);
-
-function draw(side, index) {
-  const canvas = elements[side + "Art"], context = canvas.getContext("2d");
-  context.clearRect(0, 0, canvas.width, canvas.height);
-  if (!trial) return;
-  const agent = trial.agents[index];
-  let pose = creatureHurtPose(agent, trial.time) || creatureAttackPose(agent, trial.time) || unitAnimationPose(agent, trial.time);
-  if (!pose && agent.tribe) pose = { animation: UNIT_ANIMATIONS[agent.tribe].idle, frame: 0 };
-  if (!pose && CREATURE_IDLE_ANIMATIONS[agent.species]) {
-    const animation = CREATURE_IDLE_ANIMATIONS[agent.species];
-    pose = { animation, frame: unitAnimationFrame(animation, trial.time * 1000) };
-  }
-  if (!pose && agent.species === "talon-owl") pose = { animation: TALON_OWL_IDLE, frame: talonOwlIdleFrame(trial.time * 1000) };
-  if (!pose && agent.species === "spiny-back-beetle") {
-    const animation = BEETLE_ANIMATIONS[agent.attack ? "attack" : "idle"];
-    let elapsed = (trial.time - (agent.attack?.startedAt || 0)) * 1000;
-    if (animation.loop) elapsed %= animation.durationMs;
-    let frame = 0;
-    while (frame < animation.durations.length - 1 && elapsed >= animation.durations[frame]) elapsed -= animation.durations[frame++];
-    pose = { animation: agent.attack ? BEETLE_ATTACK_SPRITE : BEETLE_SPRITE, frame: animation.frames[frame] };
-  }
-  const source = pose?.animation.image || COMBAT_LAB_UNITS.find(unit => unit.key === builds[side].key)?.image || BEETLE_NEUTRAL_ASSET;
-  const asset = image(source);
-  if (!asset.complete || !asset.naturalWidth) return;
-  const attack = agent.attack, progress = attack ? Math.max(0, Math.min(1, (trial.time - attack.startedAt) / (attack.endsAt - attack.startedAt))) : 0;
-  const offset = CREATURE_ATTACK_ANIMATIONS[agent.species] ? 0 : Math.sin(progress * Math.PI) * (index === 0 ? 18 : -18);
-  context.save();
-  context.globalAlpha = agent.health > 0 ? 1 : .28;
-  context.translate(canvas.width / 2 + offset, canvas.height - 12);
-  const mirror = agent.species === "spiny-back-beetle" ? agent.attack ? index === 1 : index === 0 :
-    agent.species && CREATURE_ATTACK_ANIMATIONS[agent.species] ? index === 0 : index === 1;
-  context.scale(mirror ? -1 : 1, 1);
-  if (pose) {
-    const { frameSize, columns, pivotX, pivotY } = pose.animation;
-    const size = pose.action === "attack" && agent.species ? 196 * frameSize / (pose.animation.viewSize || frameSize) : 196;
-    const scale = size / frameSize;
-    context.drawImage(asset, pose.frame % columns * frameSize, Math.floor(pose.frame / columns) * frameSize,
-      frameSize, frameSize, -pivotX * scale, -pivotY * scale, size, size);
-  } else {
-    const scale = Math.min(212 / asset.naturalWidth, 182 / asset.naturalHeight);
-    const width = asset.naturalWidth * scale, height = asset.naturalHeight * scale;
-    context.drawImage(asset, -width / 2, -height, width, height);
-  }
-  context.restore();
-}

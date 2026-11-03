@@ -1,6 +1,6 @@
 {
   "image": "DesignAssets/Animations/MountainPawLeaderIdle/walking-forest/idle-runtime.webp",
-  "frameSize": 256,
+  "frameSize": 260,
   "columns": 8,
   "durationsMs": [
     1450,
@@ -106,8 +106,11 @@
     1600
   ],
   "loop": true,
-  "pivotX": 128.0,
-  "pivotY": 224.0,
+  "pivotX": 128,
+  "pivotY": 214,
   "sourceAtlasSha256": "7b01206f06f05ff440ac74c04a4b35cde0e1a94333df21702f6ec104c356daac",
-  "sourceScale": 0.5
+  "sourceScale": 0.5,
+  "viewSize": 260,
+  "groundRadiusX": 0.414063,
+  "groundRadiusY": 0.0625
 }

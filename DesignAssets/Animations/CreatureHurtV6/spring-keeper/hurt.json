@@ -42,5 +42,6 @@
   "thumbnail": "hurt-thumbnail.webp",
   "matrix": "hurt-matrix.webp",
   "drawnPoseCount": 6,
-  "previewPauseMs": 900
+  "previewPauseMs": 900,
+  "runtimeRegistration": {"frameSize":412,"pivotX":206,"pivotY":349,"viewSize":412,"registrationScale":1.0729166666666667,"groundRadiusX":0.125,"groundRadiusY":0.028646}
 }

@@ -94,5 +94,6 @@
     "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/Parts/leaf-right.png",
     "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/Parts/stem.png"
   ],
-  "motion": "small anchored breath, loose leaves and a brief flutter"
+  "motion": "small anchored breath, loose leaves and a brief flutter",
+  "runtimeRegistration": {"frameSize":276,"pivotX":138,"pivotY":242,"viewSize":276,"registrationScale":1.2321428571428572}
 }

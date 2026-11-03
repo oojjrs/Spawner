@@ -97,5 +97,6 @@
     "lowerBody": "fixed below source y=300",
     "crest": "stretch upward, curl clockwise and settle",
     "parts": "shared inverse deformation across the complementary body and tip masks"
-  }
+  },
+  "runtimeRegistration": {"frameSize":224,"pivotX":112,"pivotY":196,"viewSize":224,"registrationScale":1}
 }

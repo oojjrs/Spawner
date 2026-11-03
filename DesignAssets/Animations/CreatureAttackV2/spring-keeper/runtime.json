@@ -1,11 +1,11 @@
 {
-  "frameSize": 269, 
+  "frameSize": 288,
   "displaySize": 268.9259259259259, 
   "scale": 0.525390625, 
   "idleReference": "DesignAssets/Animations/UniqueIdleV4/spring-keeper/idle.webp", 
-  "viewSize": 274.07547169811323, 
-  "pivotX": 101.66804245283019, 
-  "pivotY": 235.25604363207546, 
+  "viewSize": 293.4339622641509,
+  "pivotX": 144,
+  "pivotY": 243.435142,
   "sourcePivot": [
     256, 
     448
@@ -28,5 +28,7 @@
   "facing": "left", 
   "source": "attack.webp", 
   "exporter": "../export-runtime.py", 
-  "processing": "One common whole-cel scale for every frame. Original artwork, timing and source registration remain unchanged; runtime pivot aligns the exact seed to its accepted idle appearance."
+  "processing": "One common whole-cel scale for every frame. Original artwork, timing and source registration remain unchanged; runtime pivot aligns the exact seed to its accepted idle appearance.",
+  "groundRadiusX": 0.125,
+  "groundRadiusY": 0.028646
 }

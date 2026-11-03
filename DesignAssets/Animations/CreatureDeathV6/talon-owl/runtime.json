@@ -1,10 +1,10 @@
 {
   "image": "DesignAssets/Animations/CreatureDeathV6/talon-owl/runtime.webp",
-  "frameSize": 256,
-  "viewSize": 256,
+  "frameSize": 280,
+  "viewSize": 280,
   "columns": 4,
-  "pivotX": 128.0,
-  "pivotY": 224.0,
+  "pivotX": 140,
+  "pivotY": 245,
   "durationsMs": [
     40,
     40,
