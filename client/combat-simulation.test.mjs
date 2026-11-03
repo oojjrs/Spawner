@@ -42,7 +42,7 @@ test("timing floors and multi-hit cycle budget prevent independent speed multipl
   assert.equal(stats.hitCount, 81);
   assert.ok(stats.attackInterval >= stats.windup + 80 * stats.hitGap + stats.recovery);
   assert.ok(stats.attackSpeed <= stats.targetAttackSpeed && stats.attackSpeed <= 4);
-  assert.equal(stats.pieceCount, 323);
+  assert.equal(stats.pieceCount, 321);
 });
 
 test("per-hit stun allocation preserves action-level probability and has one proc per action", () => {
@@ -104,16 +104,16 @@ test("defensive counter replaces a prepared action and cannot chain or repeat fo
   both.finish(); assert.equal(both.history.filter(row => row.kind === "counter").length, 2);
 });
 
-test("organ gates remove unavailable actions and zero-offense trials terminate immediately", () => {
+test("attack organs gate offense while defense remains a stat and zero-offense trials terminate immediately", () => {
   const full = Object.fromEntries(SIMULATION_STATS.map(stat => [stat.key, 80]));
   const gated = { key: "bean", counts: full, organs: { attack: false, armor: false, legs: false } };
   const stats = deriveSimulationStats(gated);
-  assert.equal(stats.attackPower, 0); assert.equal(stats.defense, 0); assert.equal(stats.parry, 0);
-  assert.equal(stats.block, 0); assert.equal(stats.evasion, 0); assert.equal(stats.canAttack, false);
+  assert.equal(stats.attackPower, 0); assert.ok(stats.defense > 0); assert.ok(stats.parry > 0);
+  assert.ok(stats.block > 0); assert.ok(stats.evasion > 0); assert.equal(stats.canAttack, false);
   const trial = createSimulationTrial({ left: gated, right: gated });
   assert.deepEqual(trial.finish(), { winner: "draw", reason: "no-offense", time: 0, leftHealth: 810, rightHealth: 810 });
   assert.equal(trial.history.length, 0);
-  assert.equal(deriveSimulationStats({ key: "bean" }).pieceCount, 3);
+  assert.equal(deriveSimulationStats({ key: "bean" }).pieceCount, 1);
 });
 
 test("invalid counts, organs, probabilities, rule names, clocks and settings fail clearly", () => {
@@ -141,21 +141,124 @@ test("fractional armor and follow-up damage have no artificial one-damage floor"
 test("DNA piece counts accept 81 and 160 while guarding JS safe totals and finite derived values", () => {
   for (const count of [81, 160]) {
     const stats = deriveSimulationStats(build({ power: count, multiHit: count }));
-    assert.equal(stats.pieceCount, count * 2 + 3);
+    assert.equal(stats.pieceCount, count * 2 + 1);
     assert.equal(stats.hitCount, count + 1);
     assert.ok(Number.isFinite(stats.attackPower));
     assert.ok(Number.isFinite(stats.attackInterval));
     assert.equal(Object.hasOwn(stats, "slotCount"), false);
   }
   const maximum = Number.MAX_SAFE_INTEGER;
-  assert.equal(deriveSimulationStats(build({ power: maximum - 3 })).pieceCount, maximum);
+  assert.equal(deriveSimulationStats(build({ power: maximum - 1 })).pieceCount, maximum);
   const manyHits = deriveSimulationStats(build({ multiHit: maximum - 4, stun: 1 }));
   assert.ok(manyHits.stunChancePerHit > 0);
   assert.throws(() => deriveSimulationStats(build({ power: maximum + 1 })), /safe integer/);
   assert.throws(() => deriveSimulationStats(build({ power: maximum })), /Total piece count/);
-  assert.throws(() => deriveSimulationStats(build({ power: maximum - 5, vitality: 4 })), /Total piece count/);
+  assert.throws(() => deriveSimulationStats(build({ power: maximum - 3, vitality: 4 })), /Total piece count/);
   assert.throws(() => deriveSimulationStats(build({ power: 160 }), { powerKnee: Number.MIN_VALUE }), /Derived attackPower must be finite/);
   assert.throws(() => deriveSimulationStats(build({}), { attackRateBase: Number.MIN_VALUE }), /Derived attackInterval must be finite/);
   const noRate = deriveSimulationStats(build({}), { attackRateBase: 0 });
   assert.equal(noRate.attackInterval, Infinity); assert.equal(noRate.canAttack, false);
+});
+
+test("ranged shots share a cycle with blades and retain travel delay", () => {
+  const left = { key: "bean", organs: { attack: true, ranged: true }, counts: { vitality: 20 } };
+  const right = { key: "spore", organs: { attack: false }, counts: { vitality: 20 } };
+  const trial = createSimulationTrial({ left, right, distance: 3, random: false, rules: { maxSeconds: 20 } });
+  trial.finish();
+  const shots = trial.history.filter(event => event.kind === "shoot");
+  const hits = trial.history.filter(event => event.kind === "hit");
+  assert.ok(shots.length > 0); assert.ok(hits[0].time > shots[0].time);
+  close(hits[0].damage, 1.4);
+  assert.ok(hits.some(event => event.damage === 2));
+  assert.ok(shots.every((event, index) => !index || event.time - shots[index - 1].time >= 2 - 1e-9));
+  const onlyRanged = createSimulationTrial({ left: { ...left, organs: { attack: false, ranged: true } }, right, distance: 1,
+    random: false, rules: { maxSeconds: 1 } });
+  onlyRanged.finish(); assert.ok(onlyRanged.history.some(event => event.kind === "shoot"));
+  close(onlyRanged.history.find(event => event.kind === "hit").damage, 1.4);
+});
+
+test("support healing excludes the healer and runs beside the attack cycle", () => {
+  const trial = createSimulationTrial({ left: { key: "bean", organs: { attack: true, heal: true }, healing: 50, counts: { vitality: 20 } },
+    right: { key: "spore", organs: { attack: false }, counts: { vitality: 20 } }, support: true, random: false, rules: { maxSeconds: 5 } });
+  trial.finish();
+  assert.deepEqual(trial.history.filter(event => event.kind === "heal").map(event => [event.time, event.targetId, event.damage]),
+    [[2, "left-support", -1.5], [4, "left-support", -1.5]]);
+  assert.ok(trial.history.some(event => event.kind === "hit" && event.time > 2));
+  assert.equal(trial.supportAgents[0].health, 108); assert.equal(trial.agents.length, 2);
+});
+
+test("independent melee and ranged investment does not cross profiles", () => {
+  const build = { key: "bean", organs: { attack: true, ranged: true }, counts: { power: 3, haste: 4, rangedPower: 2, rangedHaste: 1 } };
+  const original = deriveSimulationStats(build);
+  const melee = deriveSimulationStats({ ...build, counts: { ...build.counts, power: 4, haste: 5 } });
+  const ranged = deriveSimulationStats({ ...build, counts: { ...build.counts, rangedPower: 3, rangedHaste: 2 } });
+  assert.ok(melee.attackPower > original.attackPower); assert.ok(melee.attackSpeed > original.attackSpeed);
+  close(melee.rangedPower, original.rangedPower); close(melee.rangedSpeed, original.rangedSpeed);
+  assert.ok(ranged.rangedPower > original.rangedPower); assert.ok(ranged.rangedSpeed > original.rangedSpeed);
+  close(ranged.attackPower, original.attackPower); close(ranged.attackSpeed, original.attackSpeed);
+  const changedRules = deriveSimulationStats(build, { rangedPowerBase: 10, rangedAttackRateBase: 1 });
+  close(changedRules.attackPower, original.attackPower); close(changedRules.attackSpeed, original.attackSpeed);
+  const empty = deriveSimulationStats({ ...build, counts: {} });
+  close(empty.attackPower, 2); close(empty.rangedPower, 1.4); close(empty.attackSpeed, .5); close(empty.rangedSpeed, .5);
+});
+
+test("ranged damage reads its own power without another efficiency multiplier", () => {
+  const right = { key: "spore", organs: { attack: false }, counts: { vitality: 20 } };
+  const shoot = counts => {
+    const trial = createSimulationTrial({ left: { key: "bean", organs: { attack: false, ranged: true }, counts }, right,
+      distance: 3, random: false, rules: { maxSeconds: 1 } }); trial.finish();
+    return trial.history.find(event => event.kind === "hit").damage;
+  };
+  close(shoot({}), 1.4); close(shoot({ power: 80, haste: 80 }), 1.4); close(shoot({ rangedPower: 1 }), 2.8);
+});
+
+test("weapon changes preserve reserved shared cooldown and use the selected next rate", () => {
+  const right = { key: "spore", organs: { attack: false }, counts: { vitality: 20 } };
+  const build = { key: "bean", organs: { attack: true, ranged: true }, counts: { haste: 4 } };
+  const trial = createSimulationTrial({ left: build, right, distance: 3, random: false });
+  trial.advance(0); assert.equal(trial.agents[0].attack.mode, "ranged"); close(trial.agents[0].combat.nextAttackAt, 2);
+  trial.agents[1].x = 1;
+  trial.advance(1.9); close(trial.agents[0].combat.nextAttackAt, 2);
+  trial.advance(.1); assert.equal(trial.agents[0].attack.mode, "melee");
+  close(trial.agents[0].combat.nextAttackAt, 2 + deriveSimulationStats(build).attackInterval);
+  const inverse = { ...build, counts: { rangedHaste: 4 } };
+  const other = createSimulationTrial({ left: inverse, right, distance: 1, random: false });
+  other.advance(.7); other.agents[1].x = 3;
+  close(other.agents[0].combat.nextAttackAt, 2); other.advance(1.3);
+  assert.equal(other.agents[0].attack.mode, "ranged");
+  close(other.agents[0].combat.nextAttackAt, 2 + deriveSimulationStats(inverse).rangedAttackInterval);
+});
+
+test("physical organ copies scale base output and piece budget without scaling rate", () => {
+  const one = deriveSimulationStats({ key: "bean", organs: { attack: 1, ranged: 1, heal: 1 } });
+  const six = deriveSimulationStats({ key: "bean", organs: { attack: 6, ranged: 6, heal: 6 } });
+  close(one.meleePower, 2); close(one.rangedPower, 1.4); close(six.meleePower, 12); close(six.rangedPower, 8.4);
+  close(six.meleeSpeed, .5); close(six.rangedSpeed, .5); assert.equal(six.healerCount, 6); assert.equal(six.pieceCount, 18);
+  close(six.meleePower * six.meleeSpeed, 6 * one.meleePower * one.meleeSpeed);
+  close(six.rangedPower * six.rangedSpeed, 6 * one.rangedPower * one.rangedSpeed);
+  const upgraded = deriveSimulationStats({ key: "bean", organs: { attack: 6, ranged: 6 }, counts: { power: 1, rangedPower: 1 } });
+  close(upgraded.meleePower - six.meleePower, 2); close(upgraded.rangedPower - six.rangedPower, 1.4);
+  const legacy = deriveSimulationStats({ key: "bean", organs: { attack: true, ranged: false, heal: true } });
+  assert.equal(legacy.pieceCount, 2); close(legacy.meleePower, 2); close(legacy.rangedPower, 0); close(legacy.rangedSpeed, 0);
+  for (const count of [-1, .5, Number.MAX_SAFE_INTEGER + 1]) assert.throws(() => deriveSimulationStats({ key: "bean", organs: { attack: count } }), /safe integer/);
+});
+
+test("stacked healing distributes one budget across injured allies while attacking", () => {
+  const trial = createSimulationTrial({ left: { key: "bean", organs: { attack: 1, heal: 6 }, counts: { vitality: 5 } },
+    right: { key: "spore", organs: { attack: 0 }, counts: { vitality: 5 } }, support: true, random: false });
+  const first = trial.supportAgents[0]; first.health = 59;
+  const second = { ...first, id: "left-support-2", health: 55, stats: { ...first.stats }, combat: { ...first.combat } };
+  trial.supportAgents.push(second); trial.advance(2);
+  const events = trial.history.filter(event => event.kind === "heal");
+  assert.deepEqual(events.map(event => [event.targetId, event.damage]), [[second.id, -5], [first.id, -1]]);
+  close(first.health, 60); close(second.health, 60); assert.ok(trial.history.some(event => event.kind === "hit"));
+  trial.advance(2); assert.equal(trial.history.filter(event => event.kind === "heal").length, 2);
+});
+
+test("stacked healing applies recipient recovery and clamps scarce missing health", () => {
+  const trial = createSimulationTrial({ left: { key: "bean", organs: { attack: 0, heal: 6 }, counts: { vitality: 5 } },
+    right: { key: "spore", organs: { attack: 0 }, counts: { vitality: 5 } }, support: true });
+  const target = trial.supportAgents[0]; target.stats.healing = 100; target.health = 40;
+  trial.advance(2); close(target.health, 52); close(trial.history[0].damage, -12);
+  trial.advance(2); close(target.health, 60); close(trial.history[1].damage, -8);
 });

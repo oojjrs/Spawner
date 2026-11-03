@@ -100,3 +100,6 @@ main{padding:16px 8px 32px}.stage-hud{gap:8px 18px;padding:14px 12px 0}.stage-si
 .stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.derived{font-size:11px}.controls{gap:8px}.rule-grid{gap:8px}.field{font-size:11px}button,select,input[type=number]{padding:8px}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;scroll-behavior:auto!important}}
+.controls>.support-field{display:flex;flex-direction:row-reverse;align-items:center;justify-content:flex-end;gap:6px;min-height:42px}
+.support-field input{width:17px;height:17px;margin:0;accent-color:#567644}
+.organs input[type=number]{width:64px;height:42px}

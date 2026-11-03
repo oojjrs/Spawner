@@ -52,7 +52,7 @@ test("한 조각 교체는 원본과 기관을 보존하고 같은 시드로 실
   assert.equal(report.variantBuild.counts.power, input.left.counts.power - 1);
   assert.equal(report.variantBuild.counts.vitality, input.left.counts.vitality + 1);
   assert.equal(report.baselinePieces, report.variantPieces);
-  assert.equal(report.baselinePieces, Object.values(input.left.counts).reduce((sum, value) => sum + value, 0) + 3);
+  assert.equal(report.baselinePieces, Object.values(input.left.counts).reduce((sum, value) => sum + value, 0) + 1);
   const oldProfile = deriveSimulationStats(input.left, input.rules), newProfile = deriveSimulationStats(report.variantBuild, input.rules);
   assert.ok(newProfile.health > oldProfile.health);
   assert.ok(newProfile.attackPower < oldProfile.attackPower);

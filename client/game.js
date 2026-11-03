@@ -4929,6 +4929,42 @@
 
     function drawAttackImpacts() {
       const cell = state.camera.zoom;
+      const drawnDnaEvents = new Set();
+      for (const agent of visibleAgents()) {
+        for (const attack of agent.dnaProjectiles || []) {
+        if (state.simSeconds >= attack.launchedAt && state.simSeconds <= attack.hitAt) {
+          const start = worldToScreen(attack.fromX + .5, attack.fromY + .5), end = worldToScreen(attack.targetX + .5, attack.targetY + .5);
+          const progress = Math.max(0, Math.min(1, (state.simSeconds - attack.launchedAt) / Math.max(.001, attack.hitAt - attack.launchedAt)));
+          ctx.save(); ctx.fillStyle = "#b6ed84"; ctx.strokeStyle = "#e0ffb7"; ctx.lineWidth = Math.max(1, cell * .035);
+          ctx.beginPath(); ctx.moveTo(start.x, start.y); ctx.lineTo(start.x + (end.x - start.x) * progress, start.y + (end.y - start.y) * progress); ctx.stroke();
+          ctx.beginPath(); ctx.arc(start.x + (end.x - start.x) * progress, start.y + (end.y - start.y) * progress, Math.max(2, cell * .07), 0, Math.PI * 2); ctx.fill(); ctx.restore();
+        }
+        }
+        const impact = agent.dnaActionEvent;
+        if (impact?.kind === "ranged" && state.simSeconds >= impact.at && state.simSeconds - impact.at < .22 && !drawnDnaEvents.has("ranged:" + impact.sourceId + ":" + impact.at)) {
+          drawnDnaEvents.add("ranged:" + impact.sourceId + ":" + impact.at);
+          const point = worldToScreen(impact.x + .5, impact.y + .5), progress = (state.simSeconds - impact.at) / .22;
+          ctx.save(); ctx.globalAlpha = 1 - progress; ctx.strokeStyle = "#e0ffb7"; ctx.lineWidth = Math.max(1, cell * .025);
+          ctx.beginPath();
+          for (let ray = 0; ray < 6; ray++) {
+            const angle = ray * Math.PI / 3, radius = cell * (.12 + progress * .15);
+            ctx.moveTo(point.x + Math.cos(angle) * radius * .4, point.y + Math.sin(angle) * radius * .4);
+            ctx.lineTo(point.x + Math.cos(angle) * radius, point.y + Math.sin(angle) * radius);
+          }
+          ctx.stroke(); ctx.restore();
+        }
+        const event = agent.dnaHealEvent;
+        if (event && state.simSeconds >= event.at && state.simSeconds - event.at < .7 && !drawnDnaEvents.has(event.sourceId + ":" + event.targetId + ":" + event.at)) {
+          drawnDnaEvents.add(event.sourceId + ":" + event.targetId + ":" + event.at);
+          const source = [...state.agents, ...state.rivals].find(other => other.id === event.sourceId);
+          if (!source) continue;
+          const start = worldToScreen(source.x + .5, source.y + .5), end = worldToScreen(event.x + .5, event.y + .5), age = (state.simSeconds - event.at) / .7;
+          ctx.save(); ctx.globalAlpha = 1 - age; ctx.strokeStyle = "#87ebc6"; ctx.lineWidth = Math.max(1.5, cell * .035);
+          ctx.beginPath(); ctx.moveTo(start.x, start.y); ctx.lineTo(end.x, end.y); ctx.stroke();
+          ctx.beginPath(); ctx.arc(end.x, end.y, cell * (.15 + age * .2), 0, Math.PI * 2); ctx.stroke(); ctx.restore();
+        }
+      }
+
       if (cell < 8) return;
       for (const agent of visibleAgents()) {
         const attack = agent.attack;
@@ -7802,7 +7838,7 @@
     }
     function renderDnaDesignStats(container, stats, base) {
       const rows = [
-        ["health", "체력", ""], ["power", "공격", ""], ["hits", "공격횟수", "회"], ["speed", "공속", "/초"],
+        ["health", "체력", ""], ["meleePower", "근접 공격력", ""], ["rangedPower", "원거리 공격력", ""], ["hits", "공격횟수", "회"], ["meleeSpeed", "근접 공속", "/초"], ["rangedSpeed", "원거리 공속", "/초"],
         ["armor", "방어", ""], ["parry", "패링", "%"], ["block", "블록", "%"], ["evasion", "회피", "%"],
         ["capacity", "운반", "개"], ["harvest", "채집량", "개"], ["harvestTime", "채집 시간", "초"], ["movement", "이동", "칸/초"],
         ["vision", "시야", "칸"], ["comboPower", "연격숙련", "%"], ["critical", "치명", "%"], ["criticalPower", "치명위력", "%"],
@@ -7892,7 +7928,10 @@
     combatUnitStats.className = "combat-unit-stats";
     document.getElementById("agent-attributes").after(combatUnitStats);
     function combatStatsText(agent) {
-      const profile = Spawner.combatProfile(agent);
+      const profile = Spawner.combatProfile(agent), dna = agent.stats?.dna;
+      if (dna) return "HP " + Math.ceil(Math.max(0, agent.health ?? agent.stats.health)) + "/" + agent.stats.health +
+        " · 근접 공격력 " + Number(dna.meleePower.toFixed(2)) + " · 근접 공속 " + Number(dna.meleeSpeed.toFixed(2)) +
+        " · 원거리 공격력 " + Number(dna.rangedPower.toFixed(2)) + " · 원거리 공속 " + Number(dna.rangedSpeed.toFixed(2)) + " · 방어 " + Number(dna.armor.toFixed(2));
       return "HP " + Math.ceil(Math.max(0, agent.health ?? agent.stats?.health ?? 100)) + "/" + (agent.stats?.health || 100) +
         " · 공격 " + Math.round(profile.attackPower) + " · 방어 " + Math.round(profile.defense) + " · 공속 " + profile.attackSpeed.toFixed(2);
     }

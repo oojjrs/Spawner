@@ -1,0 +1,75 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { ATTRIBUTE_DNA as M } from "./dna.mjs";
+import { birthCost, unitTravelSpeed } from "./attributes.mjs";
+import { validateDna, dnaUnitStats } from "./dna-unit.mjs";
+import { dnaHealAllocations } from "./dna-actions.mjs";
+import { createGame } from "./game.mjs";
+
+const piece=id=>{const g=M.lookup.get(id);return {gene:id,grade:g.grade,rotation:0,shape:[...g.steps]};};
+const build=n=>({version:3,pieces:[0,2,4,3,5,1].slice(0,n).map(rotation=>({...piece("gather"),rotation})),level:2,budget:500});
+
+test("stack prices are order independent and every split pays extra body bases",()=>{
+  assert.equal(birthCost({dna:build(0)},"bean"),3);
+  for(let n=1;n<=6;n++){
+    assert.equal(birthCost({dna:build(n)},"bean"),3+20*n);
+    if(n>1)assert.ok(birthCost({dna:build(n)},"bean")<23*n);
+    for(let left=1;left<n;left++)assert.equal(birthCost({dna:build(left)},"bean")+birthCost({dna:build(n-left)},"bean")-birthCost({dna:build(n)},"bean"),3);
+  }
+  const mixed=[piece("gather"),piece("antenna"),piece("rangedPower"),piece("health")];
+  assert.equal(M.price(mixed),M.price([...mixed].reverse()));
+  assert.equal(M.price([piece("antenna")]),27);
+  assert.equal(M.price([piece("rangedPower")]),20);
+  assert.equal(validateDna(build(6),1,100),null);assert.ok(validateDna(build(6),2,123));
+  assert.ok(validateDna(build(4),1,100));assert.ok(validateDna(build(5),1,100));assert.equal(birthCost({dna:build(5)},"bean"),103);
+});
+
+test("physical organ copies preserve basic role throughput without extra hits or attack rate",()=>{
+  const six=id=>M.stats(Array.from({length:6},()=>piece(id)));
+  const gather=six("gather"),blade=six("blade"),ranged=six("secretion"),antenna=six("antenna"),healer=six("healer");
+  assert.equal(gather.capacity,6);assert.equal(gather.harvest,6);assert.equal(gather.harvestTime,4);assert.equal(gather.loadSpeed,75);assert.equal(gather.health,10);
+  assert.equal(blade.meleePower,12);assert.equal(blade.meleeSpeed,.5);assert.equal(blade.hits,1);assert.equal(blade.rangedPower,0);
+  assert.ok(Math.abs(ranged.rangedPower-8.4)<1e-9);assert.equal(ranged.rangedSpeed,.5);assert.equal(ranged.hits,1);assert.equal(ranged.meleePower,0);
+  assert.equal(antenna.vision,7);assert.equal(healer.healerCount,6);
+  const capped=M.stats(Array.from({length:20},()=>piece("antenna")));assert.equal(capped.vision,12);
+});
+
+test("pooled healer copies spend remaining budget across injured allies",()=>{
+  const source={id:"source",team:"a",health:10,stats:{dna:M.stats(Array.from({length:6},()=>piece("healer")))}};
+  const first={id:"first",team:"a",health:9,stats:{health:10}},second={id:"second",team:"a",health:95,stats:{health:100}},enemy={id:"enemy",team:"b",health:1,stats:{health:10}};
+  const allocations=dnaHealAllocations(source,[source,first,second,enemy],a=>a.team,()=>1);
+  assert.deepEqual(allocations.map(a=>[a.target.id,a.amount]),[["first",1],["second",5]]);
+  first.health=9;first.stats.healing=100;second.health=90;
+  const boosted=dnaHealAllocations(source,[first,second],a=>a.team,()=>1);assert.ok(boosted.every(a=>a.amount<=a.target.stats.health-a.target.health));assert.ok(boosted.reduce((sum,a)=>sum+a.amount,0)>=6);
+});
+
+function gameFixture(n){
+  const occupiedCells=new Set(["1,0","2,0","3,0","0,1","1,1","2,1","3,1","4,1","0,2","1,2","2,2","3,2","4,2","0,3","1,3","2,3","3,3","4,3","1,4","2,4","3,4"]);
+  const colony={id:1,ownerId:"stack-test",x:40,y:40,tribe:"bean",occupiedCells};
+  const environment={simSeconds:0,world:{seed:13,generationVersion:13,terrain:new Uint8Array(320*320).fill(4),hazards:new Uint8Array(320*320)},colonies:[colony],games:new Map(),food:new Map(),foodSpots:new Map()};
+  const game=createGame(environment,colony);environment.games.set(colony.ownerId,game);
+  const saved=JSON.parse(game.save());saved.state.evolutionPoints=500;saved.state.nestLevel=2;saved.state.agents=[];game.restore(JSON.stringify(saved));
+  const {templateId}=game.command({type:"design",templateId:null,name:"stack",dna:build(n),birth:false});assert.equal(game.snapshot().evolutionPoints,500);
+  const {agentId}=game.command({type:"birth",templateId}),agent=game.agents.find(a=>a.id===agentId);assert.equal(game.snapshot().evolutionPoints,500-(3+20*n));
+  const food={key:"38,40",x:38,y:40,resourceType:"clay",kind:"resource",amount:20,initialAmount:20};environment.food.set(food.key,food);
+  Object.assign(agent,{x:38,y:40,renderFromX:38,renderFromY:40,birth:null,level:1,activeSlots:[...agent.slots],moveStartedAt:0,moveDuration:0,mode:"harvest",harvestReady:1,harvestPrepared:false,harvestStarted:0,nextDecisionAt:100000,decisionPending:null,utility:{action:"collect",target:{key:food.key,x:38,y:40},plannedCargo:n,route:[]}});
+  const tick=at=>{environment.simSeconds=at;game.prepare(at);game.tick(1);};return {game,agent,food,tick,environment};
+}
+
+test("real gather loop removes and carries six resources and deposits six points",()=>{
+  for(const n of [1,6]){
+    const f=gameFixture(n);f.tick(1);assert.equal(f.agent.carrying,0);f.tick(5);
+    assert.equal(f.food.amount,20-n);assert.equal(f.agent.carrying,n);assert.equal(f.agent.harvestResult.amount,n);
+    assert.equal(unitTravelSpeed(f.agent,n,"clay"),.1875);
+    Object.assign(f.agent,{x:40,y:40,renderFromX:40,renderFromY:40,mode:"unload",unloadReady:6,nextDecisionAt:100000,decisionPending:null,moveDuration:0,utility:{action:"return",target:{x:40,y:40},route:[]}});
+    const before=f.game.snapshot().evolutionPoints;f.tick(6);assert.equal(f.agent.carrying,0);assert.equal(f.game.snapshot().evolutionPoints,before+n);assert.equal(f.agent.foodDelivery.amount,n);
+    const paid=f.agent.cost;f.game.restore(f.game.save());assert.equal(f.game.agents.find(a=>a.id===f.agent.id).cost,paid);
+  }
+});
+
+test("historical paid cost survives restore while a fresh clone uses the new price",()=>{
+  const f=gameFixture(6);f.agent.cost=143;const id=f.agent.id;f.game.restore(f.game.save());
+  const restored=f.game.agents.find(a=>a.id===id);assert.equal(restored.cost,143);
+  const before=f.game.snapshot().evolutionPoints,{agentId}=f.game.command({type:"birth",agentId:id});
+  assert.equal(f.game.agents.find(a=>a.id===agentId).cost,123);assert.equal(f.game.snapshot().evolutionPoints,before-123);assert.equal(restored.cost,143);
+});

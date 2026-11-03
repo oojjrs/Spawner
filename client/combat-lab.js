@@ -5,7 +5,7 @@ import { createCombatStage } from "./combat-stage.mjs";
 
 const sides = ["left", "right"], elements = {}, inputs = {};
 const builds = Object.fromEntries(sides.map((side, index) => [side, { key: index ? "spore" : "bean", name: index ? "오른쪽" : "왼쪽",
-  organs: { attack: true, armor: true, legs: true }, counts: Object.fromEntries(SIMULATION_STATS.map(stat => [stat.key, ({power:4,vitality:5,armor:2,haste:2})[stat.key] || 0])) }]));
+  organs: { attack: 1, ranged: 0, heal: 0 }, counts: Object.fromEntries(SIMULATION_STATS.map(stat => [stat.key, ({power:4,vitality:5,armor:2,haste:2})[stat.key] || 0])) }]));
 let rules = { ...DEFAULT_SIMULATION_RULES }, trial, playing = false, lastFrame = 0, renderedRows = -1, generation = 0, batchBusy = false, controlId = 0;
 const main = document.querySelector("main");
 main.replaceChildren();
@@ -41,6 +41,8 @@ elements.pieceLimit = control(top, "비교 조각 수", number(20, 0, null, 1));
 elements.first = control(top, "시작", select([["simultaneous","동시 시작"],["left","왼쪽 먼저"],["right","오른쪽 먼저"]], "simultaneous"));
 elements.seed = control(top, "난수 시드", number(1, 0, 4294967295, 1));
 elements.random = control(top, "피해 변동", select([["true","변동 적용"],["false","평균 피해"]], "true"));
+elements.distance = control(top, "시작 거리", number(1, 0, 20, .5));
+elements.support = document.createElement("input"); elements.support.type = "checkbox"; control(top, "아군 추가", elements.support); elements.support.closest(".field").classList.add("support-field");
 elements.playback = control(top, "재생 배속", select([[".5","0.5배"],["1","1배"],["4","4배"]], "1"));
 const stage = node("section", null, "stage"); main.append(stage);
 const stageHud = node("div", null, "stage-hud"); stage.append(stageHud);
@@ -72,9 +74,9 @@ for (const side of sides) {
   elements[side + "Reaction"] = node("output", null, "reaction"); hud.append(elements[side + "Reaction"]);
   card.append(node("h2", builds[side].name));
   const organs = node("div", null, "organs");
-  for (const [key,label] of [["attack","공격 기관"],["armor","방어 기관"],["legs","이동 기관"]]) {
-    const input = document.createElement("input"); input.type = "checkbox"; input.checked = builds[side].organs[key];
-    control(organs, label, input); input.addEventListener("change", () => { builds[side].organs[key] = input.checked; changed(); }); inputs[side][key] = input;
+  for (const [key,label] of [["attack","칼날"],["heal","치유기관"],["ranged","분비기관"]]) {
+    const input = number(builds[side].organs[key], 0, Number.MAX_SAFE_INTEGER, 1);
+    control(organs, label, input); input.addEventListener("change", () => { builds[side].organs[key] = Number(input.value); changed(); }); inputs[side][key] = input;
   }
   card.append(organs); elements[side + "Pieces"] = node("output", null, "pieces"); card.append(elements[side + "Pieces"]);
   const derived = node("dl", null, "derived"); elements[side + "Derived"] = derived; card.append(derived);
@@ -97,13 +99,14 @@ button(actions, "초기화", reset);
 const stageFooter = node("div", null, "stage-footer");
 elements.phase = node("output", null, "phase"); stageFooter.append(actions, elements.phase); stage.append(stageFooter); main.insertBefore(top, arena);
 const ruleLabels = {
- powerCurve:"공격 증가 곡선",powerBase:"기초 공격",powerGain:"첫 공격 투자 증가량",powerKnee:"공격 점감 무릎",healthBase:"기초 HP",healthPerPoint:"생명력당 HP",armorPerPoint:"방어력당 방어",armorCap:"방어 경감 상한",armorKnee:"방어 점감 무릎",
- flatPenPerPoint:"고정 관통 증가량",percentPenCap:"비율 관통 상한",percentPenKnee:"관통 점감 무릎",attackRateBase:"기초 공속(회/초)",hasteCap:"공격 빈도 증가 상한",hasteKnee:"공격 빈도 무릎",maxActionRate:"최대 공속(회/초)",windupBase:"기초 준비(초)",focusPerPoint:"준비 단축(초)",windupMinimum:"최소 준비(초)",hitGapBase:"기초 연타 간격(초)",hitSpeedPerPoint:"연타 간격 단축(초)",hitGapMinimum:"최소 연타 간격(초)",recovery:"후딜(초)",followupBase:"후속타 기초 배율",comboPerPoint:"후속타 증가량",followupCap:"후속타 배율 상한",
+ powerCurve:"공격 증가 곡선",powerBase:"근접 기초 공격",powerGain:"근접 첫 공격 투자 증가량",powerKnee:"근접 공격 점감 무릎",healthBase:"기초 HP",healthPerPoint:"생명력당 HP",armorPerPoint:"방어력당 방어",armorCap:"방어 경감 상한",armorKnee:"방어 점감 무릎",
+ flatPenPerPoint:"고정 관통 증가량",percentPenCap:"비율 관통 상한",percentPenKnee:"관통 점감 무릎",attackRateBase:"근접 기초 공속(회/초)",hasteCap:"근접 공속 증가 상한",hasteKnee:"근접 공속 무릎",maxActionRate:"최대 공속(회/초)",windupBase:"기초 준비(초)",focusPerPoint:"준비 단축(초)",windupMinimum:"최소 준비(초)",hitGapBase:"기초 연타 간격(초)",hitSpeedPerPoint:"연타 간격 단축(초)",hitGapMinimum:"최소 연타 간격(초)",recovery:"후딜(초)",followupBase:"후속타 기초 배율",comboPerPoint:"후속타 증가량",followupCap:"후속타 배율 상한",
  critCap:"치명 확률 상한",critKnee:"치명 확률 무릎",critMultiplierBase:"기초 치명 배율",critMultiplierCap:"치명 배율 상한",critPowerKnee:"치명 위력 무릎",accuracyCap:"정밀 상한",accuracyKnee:"정밀 무릎",dodgeCap:"회피 상한",dodgeKnee:"회피 무릎",parryCap:"패링 상한",parryKnee:"패링 무릎",blockCap:"블록 상한",blockKnee:"블록 무릎",blockReductionBase:"기초 블록 경감",blockReductionCap:"블록 경감 상한",blockPowerKnee:"블록 위력 무릎",defensePreparation:"방어 준비(초)",reactionCooldown:"방어 재준비(초)",counterCap:"반격 확률 상한",counterKnee:"반격 확률 무릎",counterMultiplierBase:"기초 반격 배율",counterMultiplierCap:"반격 배율 상한",counterPowerKnee:"반격 위력 무릎",counterWindup:"반격 준비(초)",counterCooldown:"반격 재준비(초)",tenacityCap:"강인함 상한",tenacityKnee:"강인함 무릎",stunCap:"기절 확률 상한",stunKnee:"기절 확률 무릎",stunDurationBase:"기초 기절(초)",stunDurationPerPoint:"기절 시간 증가(초)",stunDurationCap:"기절 시간 상한(초)",stunImmunity:"기절 면역(초)",drainCap:"흡혈 상한",drainKnee:"흡혈 무릎",jitter:"피해 변동 폭(비율)",initiativeDelay:"선공 차이(초)",maxSeconds:"최대 전투 시간(초)",maxEvents:"최대 사건 수"
 };
 const rulesPanel = node("details", null, "panel"); rulesPanel.append(node("summary", "실험 규칙 · 비율 0–1, 시간 초"));
 const rulesGrid = node("div", null, "rule-grid");
 for (const [key,value] of Object.entries(DEFAULT_SIMULATION_RULES)) {
+  if (["rangedPowerBase","rangedPowerGain","rangedPowerKnee","rangedAttackRateBase","rangedHasteCap","rangedHasteKnee"].includes(key)) continue;
   const input = key === "powerCurve" ? select([["log","로그 점감"],["linear","선형"]], value) : number(value, ["powerKnee","armorKnee"].includes(key) || ["healthBase","maxActionRate","windupMinimum","hitGapMinimum","maxSeconds"].includes(key) ? .001 : 0, key === "maxSeconds" ? 600 : key === "maxEvents" ? 50000 : key === "jitter" ? .2 : 1000000, key === "maxEvents" ? 1 : .01);
   control(rulesGrid, ruleLabels[key], input); input.addEventListener("change", () => { rules[key] = key === "powerCurve" ? input.value : Number(input.value); changed(); }); inputs[key] = input;
 }
@@ -112,10 +115,10 @@ const curvePanel = node("section", null, "panel"); curvePanel.append(node("h2", 
 const curveControls = node("div", null, "controls");
 elements.curveSide = control(curveControls, "설계", select([["left","왼쪽"],["right","오른쪽"]], "left"));
 elements.curveStat = control(curveControls, "투자 속성", select(SIMULATION_STATS.map(stat => [stat.key,stat.label]), "power"));
-const curveMetrics = [["attackPower","공격력"],["health","HP"],["defense","방어력"],["attackSpeed","공속(회/초)"],["windup","준비(초)"],["hitCount","타수"],["hitGap","간격(초)"],["followupMultiplier","후속타 배율"],["flatPenetration","고정 관통"],["armorPenetration","비율 관통"],["critChance","치명 확률"],["critMultiplier","치명 배율"],["accuracy","정밀"],["evasion","회피 확률"],["parry","패링 확률"],["block","블록 확률"],["blockReduction","블록 경감"],["counter","반격 확률"],["counterMultiplier","반격 배율"],["tenacity","강인함"],["stunChance","기절 확률"],["stunDuration","기절 시간(초)"],["drain","흡혈 비율"]];
+const curveMetrics = [["attackPower","근접 공격력"],["rangedPower","원거리 공격력"],["health","HP"],["defense","방어력"],["attackSpeed","근접 공속(회/초)"],["rangedSpeed","원거리 공속(회/초)"],["windup","준비(초)"],["hitCount","타수"],["hitGap","간격(초)"],["followupMultiplier","후속타 배율"],["flatPenetration","고정 관통"],["armorPenetration","비율 관통"],["critChance","치명 확률"],["critMultiplier","치명 배율"],["accuracy","정밀"],["evasion","회피 확률"],["parry","패링 확률"],["block","블록 확률"],["blockReduction","블록 경감"],["counter","반격 확률"],["counterMultiplier","반격 배율"],["tenacity","강인함"],["stunChance","기절 확률"],["stunDuration","기절 시간(초)"],["drain","흡혈 비율"]];
 elements.curveMetric = control(curveControls, "실효 수치", select(curveMetrics,"attackPower")); curvePanel.append(curveControls);
 elements.curve = node("canvas"); elements.curve.width = 800; elements.curve.height = 250; elements.curve.setAttribute("aria-label","투자 0부터 80조각까지 실제 파생 수치 곡선"); curvePanel.append(elements.curve); elements.curveCaption = node("output"); curvePanel.append(elements.curveCaption); main.append(curvePanel);
-const curveDefaults = {power:"attackPower",vitality:"health",armor:"defense",flatPen:"flatPenetration",percentPen:"armorPenetration",haste:"attackSpeed",focus:"windup",multiHit:"hitCount",hitSpeed:"hitGap",combo:"followupMultiplier",crit:"critChance",critPower:"critMultiplier",accuracy:"accuracy",evasion:"evasion",parry:"parry",block:"block",blockPower:"blockReduction",counter:"counter",counterPower:"counterMultiplier",tenacity:"tenacity",stun:"stunChance",stunDuration:"stunDuration",drain:"drain"};
+const curveDefaults = {power:"attackPower",rangedPower:"rangedPower",rangedHaste:"rangedSpeed",vitality:"health",armor:"defense",flatPen:"flatPenetration",percentPen:"armorPenetration",haste:"attackSpeed",focus:"windup",multiHit:"hitCount",hitSpeed:"hitGap",combo:"followupMultiplier",crit:"critChance",critPower:"critMultiplier",accuracy:"accuracy",evasion:"evasion",parry:"parry",block:"block",blockPower:"blockReduction",counter:"counter",counterPower:"counterMultiplier",tenacity:"tenacity",stun:"stunChance",stunDuration:"stunDuration",drain:"drain"};
 elements.curveStat.addEventListener("change", () => { elements.curveMetric.value=curveDefaults[elements.curveStat.value];drawCurve(); });
 for (const key of ["curveSide","curveMetric"]) elements[key].addEventListener("change", drawCurve);
 const curveObserver = new ResizeObserver(drawCurve); curveObserver.observe(elements.curve);
@@ -130,8 +133,8 @@ elements.batch = node("output", null, "batch-result"); elements.batch.setAttribu
 const ledger = node("section", null, "panel"); ledger.append(node("h2","사건 기록"));
 const scroll = node("div", null, "scroll"); const table = node("table"); const thead = node("thead"), headrow=node("tr");
 for (const label of ["시각","사건","공격자","피해","연타","왼쪽 HP","오른쪽 HP"]) headrow.append(node("th",label)); thead.append(headrow); elements.history=node("tbody"); table.append(thead,elements.history); scroll.append(table); ledger.append(scroll); main.append(ledger);
-for (const key of ["pieceLimit","first","seed","random"]) elements[key].addEventListener("change", changed);
-function settings(seed) { return {left:structuredClone(builds.left),right:structuredClone(builds.right),rules:{...rules},seed,random:elements.random.value==="true",first:elements.first.value}; }
+for (const key of ["pieceLimit","first","seed","random","distance","support"]) elements[key].addEventListener("change", changed);
+function settings(seed) { return {left:structuredClone(builds.left),right:structuredClone(builds.right),rules:{...rules},seed,random:elements.random.value==="true",first:elements.first.value,distance:Number(elements.distance.value),support:elements.support.checked}; }
 function changed() { generation++; elements.batch.textContent=""; reset(); }
 function settingError(error) { return /[가-힣]/.test(error.message) ? error.message : "입력 수치와 규칙의 상한·최소값을 확인해 주세요."; }
 function reset() {
@@ -142,6 +145,7 @@ function reset() {
     const pieceLimit=Number(elements.pieceLimit.value);
     if(!elements.pieceLimit.value.trim()||!Number.isSafeInteger(pieceLimit)||pieceLimit<0)throw Error("비교 조각 수는 0 이상의 안전한 정수로 입력해 주세요.");
     for(const side of sides)for(const stat of SIMULATION_STATS)if(!inputs[side][stat.key].value.trim()||!Number.isSafeInteger(builds[side].counts[stat.key])||builds[side].counts[stat.key]<0)throw Error("조각 수는 0 이상의 안전한 정수로 입력해 주세요.");
+    for(const side of sides)for(const key of ["attack","heal","ranged"])if(!inputs[side][key].value.trim()||!Number.isSafeInteger(builds[side].organs[key])||builds[side].organs[key]<0)throw Error("조각 수는 0 이상의 안전한 정수로 입력해 주세요.");
     for(const side of sides)if(deriveSimulationStats(builds[side],rules).pieceCount>pieceLimit)throw Error(builds[side].name+"의 비교 조각 수를 초과했습니다.");
     trial=createSimulationTrial(settings(Number(elements.seed.value)));
     elements.status.textContent="대결 준비";
@@ -165,7 +169,7 @@ function render() {
       const reaction = agent?.combat.lastReaction, event = agent?.combat.lastEvent;
       const labels = {dodge:"회피",parry:"패링",block:"블록",stun:"기절"};
       elements[side+"Reaction"].textContent = !agent ? "" : agent.health <= 0 ? "사망" : agent.combat.stunnedUntil > trial.time ? "기절" : reaction && trial.time - reaction.at < .65 ? labels[reaction.kind] || "" : event?.kind === "counter" && trial.time - event.at < .45 ? "반격" : agent.attack && trial.time < agent.attack.hitAt ? "공격 준비" : "";
-      const values=[["공격",stats.attackPower.toFixed(2)],["방어",stats.defense.toFixed(2)],["공속",stats.attackSpeed.toFixed(2)+"/초"],["준비 / 후딜",stats.windup.toFixed(2)+" / "+stats.recovery.toFixed(2)+"초"],["연타 / 간격",stats.hitCount+"타 / "+stats.hitGap.toFixed(2)+"초"],["후속타",percent(stats.followupMultiplier)],["관통",stats.flatPenetration.toFixed(1)+" + "+percent(stats.armorPenetration)],["치명",percent(stats.critChance)+" ×"+stats.critMultiplier.toFixed(2)],["정밀 / 회피",percent(stats.accuracy)+" / "+percent(stats.evasion)],["패링 / 블록",percent(stats.parry)+" / "+percent(stats.block)],["블록 경감",percent(stats.blockReduction)],["반격",percent(stats.counter)+" ×"+stats.counterMultiplier.toFixed(2)],["강인함",percent(stats.tenacity)],["기절 / 타격당",percent(stats.stunChance)+" / "+percent(stats.stunChancePerHit)],["기절 시간",stats.stunDuration.toFixed(2)+"초"],["흡혈",percent(stats.drain)]];
+      const values=[["근접 공격력",stats.attackPower.toFixed(2)],["원거리 공격력",stats.rangedPower.toFixed(2)],["방어",stats.defense.toFixed(2)],["근접 공속",stats.attackSpeed.toFixed(2)+"/초"],["원거리 공속",stats.rangedSpeed.toFixed(2)+"/초"],["준비 / 후딜",stats.windup.toFixed(2)+" / "+stats.recovery.toFixed(2)+"초"],["연타 / 간격",stats.hitCount+"타 / "+stats.hitGap.toFixed(2)+"초"],["후속타",percent(stats.followupMultiplier)],["관통",stats.flatPenetration.toFixed(1)+" + "+percent(stats.armorPenetration)],["치명",percent(stats.critChance)+" ×"+stats.critMultiplier.toFixed(2)],["정밀 / 회피",percent(stats.accuracy)+" / "+percent(stats.evasion)],["패링 / 블록",percent(stats.parry)+" / "+percent(stats.block)],["블록 경감",percent(stats.blockReduction)],["반격",percent(stats.counter)+" ×"+stats.counterMultiplier.toFixed(2)],["강인함",percent(stats.tenacity)],["기절 / 타격당",percent(stats.stunChance)+" / "+percent(stats.stunChancePerHit)],["기절 시간",stats.stunDuration.toFixed(2)+"초"],["흡혈",percent(stats.drain)]];
       elements[side+"Derived"].replaceChildren(...values.flatMap(([label,value])=>[node("dt",label),node("dd",value)]));
     } catch(error) { elements.status.textContent=settingError(error); }
   }
@@ -178,7 +182,7 @@ function render() {
   elements.phase.textContent=trial.time.toFixed(2)+"초 · "+trial.history.length+"개 사건";
   if(renderedRows!==trial.history.length) {
     renderedRows=trial.history.length;
-    const labels={hit:"타격",critical:"치명",miss:"빗나감",evasion:"회피",dodge:"회피",parry:"패링",block:"블록",stun:"기절",counter:"반격",attack:"공격 준비",death:"사망",drain:"흡혈"};
+    const labels={hit:"타격",critical:"치명",miss:"빗나감",evasion:"회피",dodge:"회피",parry:"패링",block:"블록",stun:"기절",counter:"반격",attack:"공격 준비",death:"사망",drain:"흡혈",heal:"치유",shoot:"사격"};
     elements.history.replaceChildren(...trial.history.slice(-120).map(event=>{const row=node("tr");for(const value of [event.time.toFixed(2),event.counter?"반격 "+(labels[event.kind]||event.kind):(labels[event.kind]||event.kind),event.attackerId==="left"?"왼쪽":event.attackerId==="right"?"오른쪽":"—",(event.critical?"치명 ":"")+(Number(event.damage)||0).toFixed(2),event.hitIndex==null?"—":(event.hitIndex+1)+"/"+event.hitCount,Number(event.leftHealth).toFixed(1),Number(event.rightHealth).toFixed(1)])row.append(node("td",String(value)));return row;}));
   }
 }

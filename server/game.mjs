@@ -272,6 +272,8 @@ export function createGame(environment, colony, savedGame) {
 
     function initializeAgent(agent) {
       agent.dna = cloneDna(agent.dna);
+      if (agent.attack?.dnaRanged) { agent.attack = null; agent.attackTargetId = null; }
+      agent.dnaHealEvent = null; agent.dnaActionEvent = null; agent.dnaProjectiles = [];
       agent.attributeLevels = migrateAttributeLevels(agent.slots, agent.attributeLevels, state.nestLevel);
       agent.slots = migrateAttributeSlots(agent.slots);
       agent.combatPrimary = combatPrimary(agent);
@@ -1332,7 +1334,16 @@ export function createGame(environment, colony, savedGame) {
     }
 
     function stepUtilityAgent(agent, elapsed) {
-      const plan = agent.utility;
+      let plan = agent.utility;
+      if (agent.stats?.dna?.healer && !agent.stats.dna.melee && !agent.stats.dna.ranged && !agent.carrying && !agent.retreat && !["flee", "recover"].includes(plan?.action)) {
+        const supportAgents = environment.unitIndex ? environment.unitIndex.nearby(agent.x, agent.y, agent.stats.vision).map(entry => entry.agent).filter(other => other.ownerId === agent.ownerId) : state.agents;
+        const target = supportAgents.filter(other => other !== agent && other.health > 0 && !other.hidden && other.health < other.stats.health &&
+          Math.hypot(other.x - agent.x, other.y - agent.y) <= agent.stats.vision).sort((a, b) => a.health / a.stats.health - b.health / b.stats.health)[0];
+        if (target) {
+          if (Math.hypot(target.x - agent.x, target.y - agent.y) <= 2) return false;
+          plan = { action: "explore", target, route: [] };
+        }
+      }
       if (!plan) return false;
       const movingFor = state.simSeconds - agent.moveStartedAt;
       if (movingFor < agent.moveDuration) {

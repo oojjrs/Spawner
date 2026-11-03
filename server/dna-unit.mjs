@@ -11,10 +11,13 @@ export function validateDna(dna, nestLevel, budget) {
   if (!dna || dna.version !== 3 || !Array.isArray(dna.pieces)) return null;
   for (const piece of dna.pieces) {
     const gene = ATTRIBUTE_DNA.lookup.get(piece?.gene);
-    if (!gene || piece.grade !== gene.grade || !Array.isArray(piece.shape) ||
-        JSON.stringify(piece.shape) !== JSON.stringify(ATTRIBUTE_DNA.shape(gene, gene.grade))) return null;
+    if (!gene) return null;
+    const legacy = [["health",2,"[0,1,2]"],["antenna",1,"[0,1]"],["movement",2,"[0,1,3]"],["healer",1,"[0,5]"]].some(entry =>
+      piece.gene === entry[0] && piece.grade === entry[1] && JSON.stringify(piece.shape) === entry[2]);
+    if (!gene || !legacy && (piece.grade !== gene.grade || !Array.isArray(piece.shape) ||
+        JSON.stringify(piece.shape) !== JSON.stringify(ATTRIBUTE_DNA.shape(gene, gene.grade)))) return null;
   }
-  const result = ATTRIBUTE_DNA.validate({ ...dna, level: nestLevel, budget });
+  const result = ATTRIBUTE_DNA.validate({ ...dna, level: nestLevel, budget: Math.min(999999999, budget) });
   if (!result || !ATTRIBUTE_DNA.trace(result.pieces, nestLevel).valid || ATTRIBUTE_DNA.price(result.pieces) > budget) return null;
   return result;
 }

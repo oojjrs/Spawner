@@ -1,3 +1,4 @@
+import { dnaAttackStats } from "./dna-actions.mjs";
 export const COMBAT_BASE_DAMAGE = 15;
 export const COMBAT_STRENGTH_SCALE = 25;
 export const COMBAT_MAX_INJURY_PENALTY = 10;
@@ -65,9 +66,10 @@ export function combatPrimary(agent) {
 export function combatProfile(agent) {
   const dna = agent.stats?.dna;
   if (dna) {
-    const attackInterval = dna.speed > 0 ? 1 / dna.speed : Infinity;
-    return { primary: dna.power > 0 ? "blade" : null, attackPower: dna.power, defense: dna.armor,
-      armorPenetration: 0, attackSpeed: dna.speed, attackInterval, windup: dna.focus,
+    const selected = dnaAttackStats(dna, agent.attack?.attackMode || (dna.melee ? "melee" : "ranged"));
+    const attackInterval = selected.speed > 0 ? 1 / selected.speed : Infinity;
+    return { primary: selected.power > 0 ? "blade" : null, attackPower: selected.power, defense: dna.armor,
+      armorPenetration: 0, attackSpeed: selected.speed, attackInterval, windup: dna.focus,
       recovery: Math.max(0, attackInterval - dna.focus - Math.max(0, dna.hits - 1) * dna.comboSpeed) };
   }
   const base = unitCombatStats(agent.species || agent.tribe);

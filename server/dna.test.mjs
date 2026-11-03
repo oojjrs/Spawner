@@ -72,24 +72,24 @@ test("실제 둥지 성장으로 DNA 등급을 열고 저장된 높은 레벨로
 });
 
 test("같은 DNA는 네 종족 모두 기본비 3포인트로 저장하고 실제 탄생 비용을 차감한다",()=>{
-  const dna=design(["gather","health"],1);
+  const dna=design(["gather","health"],2);
   for(const tribe of ["bean","spring","pebble","spore"]) {
     assert.equal(birthCost({dna:design([],1)},tribe),3,tribe);
-    assert.equal(birthCost({dna},tribe),34,tribe);
-    assert.equal(birthCost({dna,tribe}),34,tribe);
-    const {game}=fixture(1,tribe),saved=JSON.parse(game.save());
+    assert.equal(birthCost({dna},tribe),33,tribe);
+    assert.equal(birthCost({dna,tribe}),33,tribe);
+    const {game}=fixture(2,tribe),saved=JSON.parse(game.save());
     saved.state.agents=[];game.restore(JSON.stringify(saved));
     const points=game.snapshot().evolutionPoints;
     const {templateId}=game.command({type:"design",templateId:null,name:"공통 일꾼",dna,birth:false});
     assert.equal(game.snapshot().evolutionPoints,points,tribe);
     const {agentId}=game.command({type:"birth",templateId});
-    assert.equal(game.snapshot().evolutionPoints,points-34,tribe);
-    assert.equal(game.agents.find(agent=>agent.id===agentId).cost,34,tribe);
+    assert.equal(game.snapshot().evolutionPoints,points-33,tribe);
+    assert.equal(game.agents.find(agent=>agent.id===agentId).cost,33,tribe);
   }
 });
 
 test("DNA 저장·탄생·수정·복제·복원은 원본 개체의 서열과 실험 스탯을 보존한다",()=>{
-  const {game}=fixture(1),dna=design(["gather","health"],1),points=game.snapshot().evolutionPoints;
+  const {game}=fixture(2),dna=design(["gather","health"],2),points=game.snapshot().evolutionPoints;
   const {templateId}=game.command({type:"design",templateId:null,name:"일꾼 DNA",dna,birth:false});
   assert.equal(game.snapshot().evolutionPoints,points);
   const template=game.snapshot().templates.find(item=>item.id===templateId),cost=birthCost(template,"bean");
@@ -135,25 +135,8 @@ test("DNA 연타는 같은 공격 주기 안에 후속 타격하고 범위 공�
   const source={...base,dna:{...base.dna,hits:3,area:1,areaPower:50}},target=dnaUnitStats(design([],1));
   const f=combatFixture(source,target);f.tick(0);const first=f.a.attack.hitAt;f.tick(first);const health=f.b.health;
   f.tick(first+source.dna.comboSpeed);assert.ok(f.b.health<health);
-  const lethal=combatFixture({...base,dna:{...base.dna,power:1000,area:1,areaPower:50}},target);lethal.tick(0);lethal.tick(lethal.a.attack.hitAt);
+  const lethal=combatFixture({...base,dna:{...base.dna,power:1000,meleePower:1000,area:1,areaPower:50}},target);lethal.tick(0);lethal.tick(lethal.a.attack.hitAt);
   assert.equal(lethal.b.health,0);assert.ok(lethal.c.health<100);
-});
-
-test("0포인트에서도 DNA를 저장하지만 실제 탄생은 차단한다",()=>{
-  const {game}=fixture(1),dna=design(["gather"],1),saved=JSON.parse(game.save());
-  saved.state.evolutionPoints=0;game.restore(JSON.stringify(saved));
-  const count=game.agents.length;
-  assert.ok(ATTRIBUTE_DNA.price(dna.pieces)>0);
-  const {templateId}=game.command({type:"design",templateId:null,name:"미리 설계",dna,birth:false});
-  assert.equal(game.snapshot().evolutionPoints,0);
-  assert.deepEqual(game.snapshot().templates.find(item=>item.id===templateId).dna.pieces,dna.pieces);
-  const before=game.save();
-  assert.throws(()=>game.command({type:"birth",templateId}),/설계를 수정|포인트가 부족/);
-  assert.equal(game.save(),before);
-  const result=game.command({type:"design",templateId,name:"미리 설계",dna,birth:true});
-  assert.equal(result.agentId,null);
-  assert.equal(game.snapshot().evolutionPoints,0);
-  assert.equal(game.agents.length,count);
 });
 test("DNA 원이 중앙에 겹친 뒤 빈 선으로 계속 배치하고 겹치는 선은 거부한다",()=>{
   const piece=(gene,rotation)=>{const entry=ATTRIBUTE_DNA.lookup.get(gene);return {gene,rotation,grade:entry.grade,shape:[...entry.steps]};};
@@ -172,4 +155,21 @@ test("DNA 원이 중앙에 겹친 뒤 빈 선으로 계속 배치하고 겹치�
   const {templateId}=game.command({type:"design",templateId:null,name:"겹친 원",dna,birth:false});
   const {agentId}=game.command({type:"birth",templateId});
   assert.deepEqual(game.agents.find(agent=>agent.id===agentId).dna.pieces,pieces);
+});
+
+test("0포인트에서도 DNA를 저장하지만 실제 탄생은 차단한다",()=>{
+  const {game}=fixture(1),dna=design(["gather"],1),saved=JSON.parse(game.save());
+  saved.state.evolutionPoints=0;game.restore(JSON.stringify(saved));
+  const count=game.agents.length;
+  assert.ok(ATTRIBUTE_DNA.price(dna.pieces)>0);
+  const {templateId}=game.command({type:"design",templateId:null,name:"미리 설계",dna,birth:false});
+  assert.equal(game.snapshot().evolutionPoints,0);
+  assert.deepEqual(game.snapshot().templates.find(item=>item.id===templateId).dna.pieces,dna.pieces);
+  const before=game.save();
+  assert.throws(()=>game.command({type:"birth",templateId}),/설계를 수정|포인트가 부족/);
+  assert.equal(game.save(),before);
+  const result=game.command({type:"design",templateId,name:"미리 설계",dna,birth:true});
+  assert.equal(result.agentId,null);
+  assert.equal(game.snapshot().evolutionPoints,0);
+  assert.equal(game.agents.length,count);
 });

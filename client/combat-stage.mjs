@@ -6,7 +6,7 @@ import { TALON_OWL_IDLE, talonOwlIdleFrame } from "./talon-owl-idle.mjs";
 import { BEETLE_SPRITE, BEETLE_ATTACK_SPRITE, BEETLE_ANIMATIONS, BEETLE_NEUTRAL_ASSET, beetleAnimationFrame, beetleAnimationPose } from "../server/beetle-animation.mjs";
 
 const colors = ["#c4e19c", "#efba90"];
-const reactionLabels = { dodge: "회피", parry: "패링", block: "블록", stun: "기절", counter: "반격" };
+const reactionLabels = { dodge: "회피", parry: "패링", block: "블록", stun: "기절", counter: "반격", heal: "치유", shoot: "사격" };
 const beetleCorpse = imageAnimation({ image: "DesignAssets/Animations/BeetleDeath/dead-v2.png", frameSize: 185, columns: 1, pivotX: 95.5, pivotY: 163 });
 
 function clamp(value) {
@@ -80,7 +80,7 @@ export function createCombatStage(canvas) {
     const direction = index === 0 ? 1 : -1;
     const attack = agent.attack;
     let lunge = 0;
-    if (attack && !reducedMotion.matches) {
+    if (attack && attack.mode !== "ranged" && !reducedMotion.matches) {
       const windup = clamp((time - attack.startedAt) / Math.max(.001, attack.hitAt - attack.startedAt));
       const recovery = clamp((time - attack.hitAt) / Math.max(.001, attack.endsAt - attack.hitAt));
       lunge = time < attack.hitAt ? -8 * Math.sin(windup * Math.PI) + 45 * windup ** 4 : 45 * (1 - recovery) ** 2;
@@ -90,7 +90,9 @@ export function createCombatStage(canvas) {
     const dodge = recent.find(effect => effect.event.kind === "dodge");
     const age = impact ? (clock - impact.born) / .22 : 1;
     const recoil = reducedMotion.matches ? 0 : impact ? Math.sin(age * Math.PI) * 16 : dodge ? 26 * Math.sin((clock - dodge.born) / .22 * Math.PI) : 0;
-    return { x: width * (index === 0 ? .4 : .6) + direction * (lunge - recoil) * width / 1040, y: height * .79, direction };
+    const distance = currentTrial?.agents.every(entry => Number.isFinite(entry.x)) ? Math.abs(currentTrial.agents[1].x - currentTrial.agents[0].x) : 1;
+    const gap = Math.min(.64, .2 * Math.max(1, distance));
+    return { x: width * (.5 - direction * gap / 2) + direction * (lunge - recoil) * width / 1040, y: Math.round(height * .79), direction };
   }
 
   function fighter(agent, index, width, height, time, ended) {
@@ -148,9 +150,15 @@ export function createCombatStage(canvas) {
 
   function effectArt(effect, points, width, height) {
     const event = effect.event, age = clock - effect.born, progress = clamp(age / .85);
-    const index = event.kind === "counter" ? event.attackerId === "left" ? 0 : 1 : event.targetId === "left" ? 0 : 1;
-    const point = points[index], x = point.x, y = point.y - height * .25;
+    const index = ["counter", "shoot"].includes(event.kind) ? event.attackerId === "left" ? 0 : 1 : event.targetId === "left" ? 0 : 1;
+    const support = currentTrial.supportAgents?.find(agent => agent.id === event.targetId);
+    const point = support ? supportPoint(support, points, width, height) : points[index], x = point.x, y = point.y - height * (support ? .1 : .25);
     context.save(); context.globalAlpha = 1 - progress ** 2;
+    if (event.kind === "heal") {
+      context.strokeStyle = "#c1ffc4"; context.lineWidth = 3;
+      context.beginPath(); context.arc(x, y, 15 + progress * 30, 0, Math.PI * 2); context.stroke();
+      context.beginPath(); context.moveTo(x - 8, y); context.lineTo(x + 8, y); context.moveTo(x, y - 8); context.lineTo(x, y + 8); context.stroke();
+    }
     if (age < .28 && !reducedMotion.matches && (event.damage > 0 || ["parry", "block"].includes(event.kind))) {
       const strength = clamp(age / .28), color = event.kind === "parry" ? "#b9e8f0" : event.kind === "block" ? "#c2dce8" : event.critical ? "#ffe1a0" : "#f7e9b4";
       context.strokeStyle = color; context.lineWidth = (1 - strength) * 3 + 1;
@@ -171,20 +179,54 @@ export function createCombatStage(canvas) {
     }
     const lift = reducedMotion.matches ? 0 : progress * 45;
     const lane = effect.lane * 24;
+    const labelY = Math.max(20, Math.min(height - 20, y - height * .28 - lift - lane));
     context.textAlign = "center"; context.textBaseline = "middle"; context.lineJoin = "round";
     context.font = (event.critical ? "800 " : "700 ") + Math.max(17, Math.min(30, width / 30)) + 'px "Malgun Gothic", sans-serif';
     context.lineWidth = 4; context.strokeStyle = "#203125";
-    let label = event.damage > 0 ? "−" + event.damage.toFixed(1) : reactionLabels[event.kind];
+    let label = event.kind === "heal" ? "+" + (-event.damage).toFixed(1) : event.damage > 0 ? "−" + event.damage.toFixed(1) : reactionLabels[event.kind];
     if (event.kind === "stun" || event.kind === "counter") context.font = '700 16px "Malgun Gothic", sans-serif';
     if (label) {
       context.fillStyle = event.critical ? "#ffda8a" : ["parry", "block", "dodge"].includes(event.kind) ? "#d3f1ff" : event.kind === "counter" ? "#ffe0ae" : "#fff9df";
-      context.strokeText(label, x, y - height * .28 - lift - lane); context.fillText(label, x, y - height * .28 - lift - lane);
+      context.strokeText(label, x, labelY); context.fillText(label, x, labelY);
     }
     if (event.critical && event.damage > 0) {
       context.font = '800 13px "Malgun Gothic", sans-serif'; context.fillStyle = "#ffda8a";
-      context.fillText("치명", x, y - height * .28 - lift - lane - 27);
+      context.fillText("치명", x, Math.max(12, labelY - 27));
     }
     context.restore();
+  }
+
+  function supportPoint(agent, points, width, height) {
+    const point = points[agent.combat.side];
+    return { x: point.x - point.direction * width * .13, y: height * .88, direction: point.direction };
+  }
+
+  function supportArt(agent, points, width, height, time) {
+    const point = supportPoint(agent, points, width, height), pose = poseFor(agent, time, 0);
+    const source = pose?.animation.image || COMBAT_LAB_UNITS.find(unit => unit.key === agent.key)?.image || BEETLE_NEUTRAL_ASSET;
+    const asset = image(source), bounds = frameBounds(source, pose?.frame ?? 0);
+    const scale = Math.min(width * .065 / (bounds[2] - bounds[0]), height * .22 / (bounds[3] - bounds[1]));
+    context.save(); context.translate(point.x, point.y);
+    context.strokeStyle = colors[agent.combat.side]; context.lineWidth = 2;
+    context.beginPath(); context.ellipse(0, 0, width * .035, height * .014, 0, 0, Math.PI * 2); context.stroke();
+    if (asset) {
+      const drawX = -(bounds[0] + bounds[2]) / 2 * scale, drawY = -bounds[3] * scale;
+      if (pose) { const { frameSize, columns } = pose.animation;
+        context.drawImage(asset, pose.frame % columns * frameSize, Math.floor(pose.frame / columns) * frameSize,
+          frameSize, frameSize, drawX, drawY, frameSize * scale, frameSize * scale);
+      } else context.drawImage(asset, drawX, drawY, asset.naturalWidth * scale, asset.naturalHeight * scale);
+    }
+    context.fillStyle = "#eef6dc"; context.font = '700 12px "Malgun Gothic", sans-serif'; context.textAlign = "center"; context.fillText("아군", 0, 29);
+    context.fillStyle = "#203125"; context.fillRect(-30, 7, 60, 5);
+    context.fillStyle = "#b8ef98"; context.fillRect(-30, 7, 60 * agent.health / agent.stats.health, 5);
+    context.restore();
+  }
+
+  function projectileArt(projectile, points, time, height) {
+    const source = points[projectile.source.combat.side], target = points[projectile.target.combat.side];
+    const progress = clamp((time - projectile.launchedAt) / Math.max(.001, projectile.at - projectile.launchedAt));
+    context.save(); context.fillStyle = "#e5e9a4"; context.shadowColor = "#e5e9a4"; context.shadowBlur = 8;
+    context.beginPath(); context.arc(source.x + (target.x - source.x) * progress, source.y - height * .3, 5, 0, Math.PI * 2); context.fill(); context.restore();
   }
 
   function render(trial, now, playing) {
@@ -216,6 +258,8 @@ export function createCombatStage(canvas) {
       context.translate(Math.sin(clock * 150) * fade * (impact.event.critical ? 3 : 1.5), 0);
     }
     const points = trial.agents.map((agent, index) => fighter(agent, index, width, height, time, ended));
+    for (const agent of trial.supportAgents || []) supportArt(agent, points, width, height, time);
+    for (const projectile of trial.projectiles || []) projectileArt(projectile, points, time, height);
     for (const effect of effects) if (clock - effect.born < .85) effectArt(effect, points, width, height);
     context.restore();
   }
