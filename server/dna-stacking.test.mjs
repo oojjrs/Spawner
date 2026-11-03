@@ -12,16 +12,16 @@ const build=n=>({version:3,pieces:[0,2,4,3,5,1].slice(0,n).map(rotation=>({...pi
 test("stack prices are order independent and every split pays extra body bases",()=>{
   assert.equal(birthCost({dna:build(0)},"bean"),3);
   for(let n=1;n<=6;n++){
-    assert.equal(birthCost({dna:build(n)},"bean"),3+20*n);
-    if(n>1)assert.ok(birthCost({dna:build(n)},"bean")<23*n);
+    assert.equal(birthCost({dna:build(n)},"bean"),3+10*n);
+    if(n>1)assert.ok(birthCost({dna:build(n)},"bean")<13*n);
     for(let left=1;left<n;left++)assert.equal(birthCost({dna:build(left)},"bean")+birthCost({dna:build(n-left)},"bean")-birthCost({dna:build(n)},"bean"),3);
   }
   const mixed=[piece("gather"),piece("antenna"),piece("rangedPower"),piece("health")];
   assert.equal(M.price(mixed),M.price([...mixed].reverse()));
-  assert.equal(M.price([piece("antenna")]),27);
-  assert.equal(M.price([piece("rangedPower")]),20);
-  assert.equal(validateDna(build(6),1,100),null);assert.ok(validateDna(build(6),2,123));
-  assert.ok(validateDna(build(4),1,100));assert.ok(validateDna(build(5),1,100));assert.equal(birthCost({dna:build(5)},"bean"),103);
+  assert.equal(M.price([piece("antenna")]),14);
+  assert.equal(M.price([piece("rangedPower")]),10);
+  assert.equal(validateDna(build(6),1,59),null);assert.ok(validateDna(build(6),1,60));
+  assert.ok(validateDna(build(4),1,100));assert.ok(validateDna(build(5),1,100));assert.equal(birthCost({dna:build(5)},"bean"),53);
 });
 
 test("physical organ copies preserve basic role throughput without extra hits or attack rate",()=>{
@@ -50,7 +50,7 @@ function gameFixture(n){
   const game=createGame(environment,colony);environment.games.set(colony.ownerId,game);
   const saved=JSON.parse(game.save());saved.state.evolutionPoints=500;saved.state.nestLevel=2;saved.state.agents=[];game.restore(JSON.stringify(saved));
   const {templateId}=game.command({type:"design",templateId:null,name:"stack",dna:build(n),birth:false});assert.equal(game.snapshot().evolutionPoints,500);
-  const {agentId}=game.command({type:"birth",templateId}),agent=game.agents.find(a=>a.id===agentId);assert.equal(game.snapshot().evolutionPoints,500-(3+20*n));
+  const {agentId}=game.command({type:"birth",templateId}),agent=game.agents.find(a=>a.id===agentId);assert.equal(game.snapshot().evolutionPoints,500-(3+10*n));
   const food={key:"38,40",x:38,y:40,resourceType:"clay",kind:"resource",amount:20,initialAmount:20};environment.food.set(food.key,food);
   Object.assign(agent,{x:38,y:40,renderFromX:38,renderFromY:40,birth:null,level:1,activeSlots:[...agent.slots],moveStartedAt:0,moveDuration:0,mode:"harvest",harvestReady:1,harvestPrepared:false,harvestStarted:0,nextDecisionAt:100000,decisionPending:null,utility:{action:"collect",target:{key:food.key,x:38,y:40},plannedCargo:n,route:[]}});
   const tick=at=>{environment.simSeconds=at;game.prepare(at);game.tick(1);};return {game,agent,food,tick,environment};
@@ -71,5 +71,5 @@ test("historical paid cost survives restore while a fresh clone uses the new pri
   const f=gameFixture(6);f.agent.cost=143;const id=f.agent.id;f.game.restore(f.game.save());
   const restored=f.game.agents.find(a=>a.id===id);assert.equal(restored.cost,143);
   const before=f.game.snapshot().evolutionPoints,{agentId}=f.game.command({type:"birth",agentId:id});
-  assert.equal(f.game.agents.find(a=>a.id===agentId).cost,123);assert.equal(f.game.snapshot().evolutionPoints,before-123);assert.equal(restored.cost,143);
+  assert.equal(f.game.agents.find(a=>a.id===agentId).cost,63);assert.equal(f.game.snapshot().evolutionPoints,before-63);assert.equal(restored.cost,143);
 });

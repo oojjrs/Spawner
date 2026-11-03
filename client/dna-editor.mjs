@@ -1,3 +1,16 @@
+export function dnaEditorViewport(M,level,start,gene,width,height) {
+  const radius=M.boardRadius(level),halfWidth=34*Math.sqrt(3)*(radius+.5),halfHeight=51*radius+34;
+  let minX=-halfWidth,maxX=halfWidth,minY=-halfHeight,maxY=halfHeight;
+  if(start&&gene)for(let rotation=0;rotation<6;rotation++)for(const point of M.route(start,gene,gene.grade,rotation)){
+    const x=34*Math.sqrt(3)*(point.q+point.r/2),y=51*point.r;
+    minX=Math.min(minX,x);maxX=Math.max(maxX,x);minY=Math.min(minY,y);maxY=Math.max(maxY,y);
+  }
+  const margin=46,top=54,bottom=66;
+  minX-=margin;maxX+=margin;minY-=margin;maxY+=margin;
+  const scale=Math.max(.01,Math.min(Math.max(1,width-40)/(maxX-minX),Math.max(1,height-top-bottom)/(maxY-minY)));
+  return {scale,x:width/2-(minX+maxX)*scale/2,y:top+(height-top-bottom)/2-(minY+maxY)*scale/2};
+}
+
 export function createDnaEditor(container, dnaModel, onChange) {
   const M=dnaModel;
   const names={blade:'칼날',carapace:'갑각',antenna:'안테나',gather:'채집기관',legs:'다리',power:'근접 공격력',combo:'연타',speed:'근접 공속',comboPower:'연격숙련',critical:'치명',criticalPower:'치명위력',accuracy:'정밀',penetration:'예리함',health:'체력',armor:'경화',evasion:'회피',parry:'패링',block:'방어본능',blockPower:'방어숙련',counter:'반격',counterPower:'반격위력',tenacity:'강인함',reduction:'완충',movement:'이속',capacity:'운반',harvest:'채집량',harvestSpeed:'채집속도',vision:'시야',loadSpeed:'하중적응',healing:'회복력',stun:'기절',stunTime:'기절연장',bleed:'출혈',bleedPower:'출혈강도',area:'범위공격',areaPower:'확산위력',lifesteal:'흡혈',reflection:'반사',regeneration:'재생',comboSpeed:'연타속도',focus:'집중',healer:'치유기관',secretion:'분비기관',rangedPower:'원거리 공격력',rangedSpeed:'원거리 공속'};
@@ -33,9 +46,9 @@ export function createDnaEditor(container, dnaModel, onChange) {
   function getDesign(){return {version:3,pieces:pieces.map(M.clonePiece),level,budget};}
   function snapshot(){return {pieces:pieces.map(M.clonePiece),insertion};}
   function checkpoint(){history.push(snapshot());if(history.length>200)history.shift();future=[];}
-  function candidate(){const gene=M.lookup.get(selected),proposed=pieces.map(M.clonePiece);proposed.splice(insertion,0,{gene:selected,grade:gene.grade,rotation,shape:[...M.shape(gene,gene.grade)]});const result=M.trace(proposed,level),cost=M.price(proposed);return {pieces:proposed,result,cost,valid:result.valid,reason:result.valid?'ready':result.reason};}
+  function candidate(){const gene=M.lookup.get(selected),proposed=pieces.map(M.clonePiece),start=model.nodes[insertion],points=M.route(start,gene,gene.grade,rotation),path={gene:selected,points,start,end:points[points.length-1]};proposed.splice(insertion,0,{gene:selected,grade:gene.grade,rotation,shape:[...M.shape(gene,gene.grade)]});const result=M.trace(proposed,level),cost=M.price(proposed);return {pieces:proposed,result,path,cost,valid:result.valid,reason:result.valid?'ready':result.reason};}
   function changed(){notice='';state();if(typeof onChange==='function')onChange(getDesign());}
-  function state(){model=M.trace(pieces,level);preview=candidate();renderCatalog();renderControls();requestDraw();}
+  function state(){model=M.trace(pieces,level);preview=candidate();renderCatalog();renderControls();fit();requestDraw();}
   function renderCatalog(){
     hideGeneName();geneClick=null;
     const filters=find('.dna-filters');filters.replaceChildren();
@@ -73,9 +86,9 @@ export function createDnaEditor(container, dnaModel, onChange) {
   function draw(){
     context.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);context.clearRect(0,0,view.width,view.height);drawGrid();
     for(const path of model.paths)dnaPath(path,M.lookup.get(path.gene).color,1);
-    const futurePaths=readOnly||!preview.valid?[]:preview.result.paths.slice(insertion);for(let index=0;index<futurePaths.length;index++)dnaPath(futurePaths[index],preview.valid?'#8be3c3':'#ed9293',index===0?.6:.2);
+    const futurePaths=readOnly?[]:preview.valid?preview.result.paths.slice(insertion):[preview.path];for(let index=0;index<futurePaths.length;index++)dnaPath(futurePaths[index],preview.valid?'#8be3c3':'#ed9293',index===0?.6:.2);
     for(let index=0;index<model.nodes.length;index++){if(model.nodes.some((other,otherIndex)=>otherIndex!==index&&M.key(other)===M.key(model.nodes[index])&&(otherIndex===insertion||(index!==insertion&&otherIndex>index))))continue;const point=model.nodes[index],color=!M.inside(point,level)?'#ed9293':index===insertion?'#d9f4c0':index===0?'#86e2c5':'#587d73';node(point,index,color,false);}
-    const path=readOnly||!preview.valid?null:preview.result.paths[insertion];if(path)node(path.end,-1,preview.valid?'#9cf0ce':'#ed9293',true);
+    const path=readOnly?null:preview.path;if(path)node(path.end,-1,preview.valid?'#9cf0ce':'#ed9293',true);
     for(const point of model.outside||[]){const p=screen(point);context.beginPath();context.arc(p.x,p.y,9*view.scale,0,Math.PI*2);context.strokeStyle='#ed9293';context.lineWidth=view.scale;context.stroke();}
   }
   function commit(){if(readOnly)return;const proposed=candidate();if(!proposed.valid){notice=proposed.reason;renderControls();return;}checkpoint();pieces=proposed.pieces;insertion++;changed();}
@@ -83,7 +96,7 @@ export function createDnaEditor(container, dnaModel, onChange) {
   function undo(){if(readOnly||!history.length)return;future.push(snapshot());const previous=history.pop();pieces=previous.pieces;insertion=previous.insertion;changed();}
   function redo(){if(readOnly||!future.length)return;history.push(snapshot());const next=future.pop();pieces=next.pieces;insertion=next.insertion;changed();}
   function remove(){if(readOnly||!pieces.length)return;const index=Math.max(0,insertion-1),next=pieces.map(M.clonePiece);next.splice(index,1);const result=M.trace(next,level);if(!result.valid){notice=result.reason;renderControls();return;}checkpoint();pieces=next;insertion=index;changed();}
-  function fit(){if(!view.width||!view.height)return;const radius=M.boardRadius(level),width=34*Math.sqrt(3)*(radius*2+1),height=102*radius+68,reserved=mobileQuery?.matches?64:0;view.scale=Math.max(.01,Math.min((view.width-20)/width,(view.height-reserved-20)/height));view.x=view.width/2;view.y=(view.height-reserved)/2;requestDraw();}
+  function fit(){if(!view.width||!view.height)return;Object.assign(view,dnaEditorViewport(M,level,readOnly?null:model.nodes[insertion],readOnly?null:M.lookup.get(selected),view.width,view.height));requestDraw();}
   function resize(){const bounds=board.getBoundingClientRect();if(!bounds.width||!bounds.height)return;view.width=bounds.width;view.height=bounds.height;canvas.width=Math.ceil(bounds.width*devicePixelRatio);canvas.height=Math.ceil(bounds.height*devicePixelRatio);fit();}
   canvas.addEventListener('pointerdown',event=>{if(event.button!==0||pointer)return;root.focus({preventScroll:true});pointer={id:event.pointerId,x:event.clientX,y:event.clientY};moved=false;canvas.setPointerCapture(event.pointerId);});
   canvas.addEventListener('pointermove',event=>{if(pointer&&pointer.id===event.pointerId&&Math.hypot(event.clientX-pointer.x,event.clientY-pointer.y)>4)moved=true;});
