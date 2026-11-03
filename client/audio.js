@@ -288,6 +288,6 @@
     music.update(null);
     updateButton();
     unlock();
-    return { available, play, playClick, setHarvest, setActive, setWorldVolume, stop, updateMusic: music.update };
+    return { available, play, playClick, setHarvest, setActive, setWorldVolume, stop, updateMusic: music.update, musicWaveform: music.waveform };
   } });
 })();

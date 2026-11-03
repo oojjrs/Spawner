@@ -287,13 +287,6 @@
     <div class="welcome-content">
       <header class="welcome-heading">
         <p class="welcome-brand" id="welcome-title" tabindex="-1">SPAWNER</p>
-        <button class="sound-toggle" id="sound-toggle" type="button" aria-label="소리 끄기" aria-pressed="true" title="배경음악·효과음 끄기">
-          <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-            <path d="M4 12h6l7-6v20l-7-6H4z" fill="currentColor" stroke="none"/>
-            <g class="sound-waves"><path d="M21 11c3 3 3 7 0 10M25 7c5 5 5 13 0 18"/></g>
-            <path class="sound-muted" d="m22 12 7 8m0-8-7 8"/>
-          </svg>
-        </button>
       </header>
       <div class="welcome-loading" role="status" aria-label="불러오는 중">
         <span class="welcome-spinner" aria-hidden="true"></span>
@@ -316,6 +309,15 @@
             }, 1500);
           })();
         </script>
+      </div>
+      <div class="welcome-audio">
+        <button class="sound-toggle" id="sound-toggle" type="button" aria-label="소리 끄기" aria-pressed="true" title="배경음악·효과음 끄기">
+          <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+            <path d="M4 12h6l7-6v20l-7-6H4z" fill="currentColor" stroke="none"/>
+            <g class="sound-waves"><path d="M21 11c3 3 3 7 0 10M25 7c5 5 5 13 0 18"/></g>
+            <path class="sound-muted" d="m22 12 7 8m0-8-7 8"/>
+          </svg>
+        </button>
       </div>
       <section class="welcome-create" id="room-create-panel" hidden>
         <form id="welcome-form">
@@ -353,8 +355,11 @@
   <script src="./client/combat-audio.js"></script>
   <script src="./client/movement-audio.js"></script>
   <script src="./client/audio.js"></script>
+  <script src="./client/welcome-waveform.js"></script>
   <script src="./client/local-assets.js"></script>
   <script src="./client/assets.js"></script>
+  <script src="./client/welcome-art.js"></script>
+  <script src="./client/welcome-header.js"></script>
   <script src="./client/game.js"></script>
 </body>
 </html>

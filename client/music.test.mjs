@@ -23,7 +23,9 @@ function fixture(blocked) {
     async decodeAudioData(data) { return data; }
     createDynamicsCompressor() { return { threshold: {}, knee: {}, ratio: {}, attack: {}, release: {}, connect() {} }; }
     createWaveShaper() { return { connect() {} }; }
-    createGain() { const gain = { gain: { value: 1 }, connect() {} }; gains.push(gain); return gain; }
+    createGain() { const gain = { gain: { value: 1 }, connect() {}, disconnect() {} }; gains.push(gain); return gain; }
+    createMediaElementSource() { return { connect() {} }; }
+    createAnalyser() { return { getFloatTimeDomainData(samples) { samples.fill(0); } }; }
     createBufferSource() { return { connect() {}, disconnect() {}, start() {}, stop() {} }; }
   }
   class Audio {
@@ -33,7 +35,7 @@ function fixture(blocked) {
     play() { this.paused = false; this.plays++; starts.push(this.src); return Promise.resolve(); }
   }
   const envelope = Buffer.from([...Array(20).fill(32), ...Array(10).fill(255), ...Array(20).fill(32)]).toString("base64");
-  const context = createContext({ document, AudioContext, Audio, window: { addEventListener() {}, confirm: () => true },
+  const context = createContext({ document, AudioContext, Audio, location: { protocol: "http:" }, window: { addEventListener() {}, confirm: () => true },
     SpawnerCombatAudio: { sources: {} }, SpawnerAssets: { source: value => value },
     atob: value => Buffer.from(value, "base64").toString("binary"),
     SpawnerMusicCatalog: { peace: [{ file: "peace.mp3", envelope }, { file: "peace-next.mp3", envelope }, { file: "peace-last.mp3", envelope }], combat: [{ file: "combat.mp3", envelope }] },
@@ -153,7 +155,7 @@ test("멸망한 방에서 나오는 즉시 평화 브금으로 전환하고 삭�
   });
   sound.document.getElementById = () => ({ focus() {} });
   const heading = { appendChild() {} };
-  sound.document.querySelector = selector => selector === ".welcome-heading" ? heading : app;
+  sound.document.querySelector = selector => selector === ".welcome-audio" ? heading : app;
   function load(name, indent) {
     const match = gameSource.match(new RegExp("^" + indent + "(?:async )?function " + name + "\\([^]*?^" + indent + "}", "m"));
     assert.ok(match, name);

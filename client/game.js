@@ -3483,6 +3483,7 @@
     }
 
     const audio = globalThis.SpawnerAudio.create();
+    globalThis.SpawnerWelcomeWaveform.create(audio.musicWaveform);
     const combatAudio = globalThis.SpawnerCombatAudio.create();
     const movementAudio = globalThis.SpawnerMovementAudio.create();
     const agentAudio = new Map();
@@ -9723,7 +9724,7 @@
       welcome.hidden = false;
       randomRoomSeed();
       document.body.dataset.screen = "welcome";
-      document.querySelector(".welcome-heading").appendChild(document.getElementById("sound-toggle"));
+      document.querySelector(".welcome-audio").appendChild(document.getElementById("sound-toggle"));
       welcomeStatus.textContent = "";
       await refreshRooms();
       document.getElementById("welcome-title").focus();
@@ -9882,7 +9883,7 @@
         welcome.hidden = false;
         randomRoomSeed();
         document.body.dataset.screen = "welcome";
-        document.querySelector(".welcome-heading").appendChild(document.getElementById("sound-toggle"));
+        document.querySelector(".welcome-audio").appendChild(document.getElementById("sound-toggle"));
         audio.setActive(!document.hidden);
         await refreshRooms();
         document.getElementById("welcome-title").focus();
