@@ -85,13 +85,52 @@
 </style>
 <script defer src="client/design-previews.js"></script>
 <script defer src="client/design-page.js"></script>
+<style id="unit-base-stats-style">
+#unit-base-stats-wrap{max-width:100%;margin-bottom:20px;overflow-x:auto}
+#unit-base-stats{width:100%;min-width:800px;table-layout:fixed;font-variant-numeric:tabular-nums}
+#unit-base-stats-wrap,#unit-base-stats{scroll-margin-top:112px}
+#unit-base-stats button{scroll-margin-top:164px}
+#unit-base-stats caption{padding:12px;text-align:left;color:var(--accent);font-weight:700}
+#unit-base-stats th,#unit-base-stats td{white-space:nowrap}
+#unit-base-stats td{text-align:right}
+#unit-base-stats tbody th{font-weight:400;position:relative;text-align:center}
+#unit-base-stats tbody img{display:block;width:64px;height:64px;object-fit:contain;margin:auto}
+#unit-base-stats .unit-stat-name{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+#unit-base-stats thead th{padding:0}
+#unit-base-stats button{display:flex;align-items:center;gap:8px;width:100%;min-height:44px;padding:10px 12px;border:0;background:transparent;color:inherit;font:inherit;text-align:left;cursor:pointer}
+#unit-base-stats button:hover{background:var(--soft)}
+#unit-base-stats button:focus-visible{outline:2px solid var(--accent);outline-offset:-3px}
+#unit-base-stats button::after{content:"";width:0;height:0;margin-left:auto;border-left:4px solid transparent;border-right:4px solid transparent}
+#unit-base-stats th[aria-sort="ascending"] button::after{border-bottom:6px solid currentColor}
+#unit-base-stats th[aria-sort="descending"] button::after{border-top:6px solid currentColor}
+</style>
+<style id="neutral-unit-tiers-style">
+#codex-unit-tiers{scroll-margin-top:112px}
+#codex-unit-tiers .details-body{min-width:0}
+#neutral-unit-tier-design{min-width:0}
+#codex-unit-tiers .table-responsive{min-width:0;max-width:100%;max-height:calc(100dvh - 200px);overflow:auto;isolation:isolate}
+#codex-unit-tiers table{width:max-content;min-width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+#codex-unit-tiers th,#codex-unit-tiers td{padding:6px 8px;white-space:nowrap}
+#codex-unit-tiers tbody th{font-weight:400}
+#codex-unit-tiers tbody td{vertical-align:middle}
+#codex-unit-tiers tbody th figure{display:flex;justify-content:center;margin:0 0 4px}
+#codex-unit-tiers tbody th img{display:block;width:64px;height:64px;object-fit:contain}
+#codex-unit-tiers tbody th>span{display:block;text-align:center}
+#codex-unit-tiers .text-end{text-align:right}
+#codex-unit-tiers thead th{position:sticky;top:0;z-index:2;padding:0;background:var(--paper)}
+#codex-unit-tiers button{display:flex;align-items:center;gap:5px;width:100%;min-height:38px;padding:6px 8px;border:0;background:transparent;color:var(--ink);font:inherit;font-size:12px;white-space:nowrap;cursor:pointer}
+#codex-unit-tiers button:hover{background:var(--soft)}
+#codex-unit-tiers button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+#codex-unit-tiers thead th:first-child,#codex-unit-tiers tbody th:first-child{position:sticky;left:0;z-index:1;background:var(--paper);box-shadow:1px 0 0 var(--line)}
+#codex-unit-tiers thead th:first-child{z-index:3}
+</style>
 </head>
 <body>
 <header><h1>Spawner</h1></header>
 <div class="layout">
 <nav class="side-nav" aria-label="기획 문서 목차">
 <div class="nav-group" data-section-group="core"><span class="nav-group-title">핵심</span><div class="nav-items"><a id="world-nav" href="#world">맵 디자인</a><a href="#art-terrain">지형</a></div></div>
-<div class="nav-group" data-section-group="codex"><span class="nav-group-title">코덱스</span><div class="nav-items"><a href="#codex-units">유닛</a><a href="#codex-food">자원</a><a href="#codex-attributes">속성</a><a href="#codex-nest">건물</a></div></div>
+<div class="nav-group" data-section-group="codex"><span class="nav-group-title">코덱스</span><div class="nav-items"><a href="#codex-units">유닛</a><a href="#codex-unit-tiers">중립 유닛 티어</a><a href="#codex-food">자원</a><a href="#codex-attributes">속성</a><a href="#codex-nest">건물</a></div></div>
 </nav>
 <main>
 <details class="section-group" data-section-group="core"><summary hidden></summary><div class="section-group-body">
@@ -5868,6 +5907,60 @@ return { colonyWorkerRate, simulateConquestBuild };
 <details class="section-group" data-section-group="codex"><summary hidden></summary><div class="section-group-body">
 <details id="codex-units"><summary></summary><div class="details-body unit-matrix-body">
 <span id="approved-tribes-art"></span><span id="tribe-ecology"></span><span id="world-creatures"></span><span id="unit-sprout-runtime"></span>
+<div class="table-wrap" id="unit-base-stats-wrap"><table id="unit-base-stats" aria-labelledby="unit-base-stats-caption">
+<caption id="unit-base-stats-caption">기본 스탯 · 속성 미적용</caption>
+<colgroup><col style="width:88px"><col style="width:72px"><col style="width:88px"><col style="width:88px"><col style="width:88px"><col style="width:120px"><col style="width:120px"><col style="width:104px"><col></colgroup>
+<thead><tr><th scope="col" id="unit-stat-name" aria-sort="none"><button type="button" data-column="0" aria-controls="unit-base-stats-rows">유닛</button></th><th scope="col" id="unit-stat-health" aria-sort="none"><button type="button" data-column="1" aria-controls="unit-base-stats-rows">HP</button></th><th scope="col" id="unit-stat-combatStrength" aria-sort="none"><button type="button" data-column="2" aria-controls="unit-base-stats-rows">전투력</button></th><th scope="col" id="unit-stat-attackPower" aria-sort="none"><button type="button" data-column="3" aria-controls="unit-base-stats-rows">공격력</button></th><th scope="col" id="unit-stat-defense" aria-sort="none"><button type="button" data-column="4" aria-controls="unit-base-stats-rows">방어력</button></th><th scope="col" id="unit-stat-attackSpeed" aria-sort="none"><button type="button" data-column="5" aria-controls="unit-base-stats-rows">공속(회/초)</button></th><th scope="col" id="unit-stat-movementSpeed" aria-sort="none"><button type="button" data-column="6" aria-controls="unit-base-stats-rows">이동(칸/초)</button></th><th scope="col" id="unit-stat-vision" aria-sort="none"><button type="button" data-column="7" aria-controls="unit-base-stats-rows">시야(칸)</button></th><th aria-hidden="true"></th></tr></thead>
+<tbody id="unit-base-stats-rows">
+<tr><th scope="row" headers="unit-stat-name" data-sort="새싹콩"><a href="DesignAssets/Planning/Attributes/Units/bean-base.png"><img src="DesignAssets/Planning/Thumbnails/Planning/Attributes/Units/bean-base.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><span class="unit-stat-name">새싹콩</span></a></th><td headers="unit-stat-health" data-sort="100">100</td><td headers="unit-stat-combatStrength" data-sort="20">20</td><td headers="unit-stat-attackPower" data-sort="19">19</td><td headers="unit-stat-defense" data-sort="16">16</td><td headers="unit-stat-attackSpeed" data-sort="0.8">0.8</td><td headers="unit-stat-movementSpeed" data-sort="0.5">0.5</td><td headers="unit-stat-vision" data-sort="3">3</td><td aria-hidden="true"></td></tr>
+<tr><th scope="row" headers="unit-stat-name" data-sort="포자버섯"><a href="DesignAssets/Tribes/spore/starter.png"><img src="DesignAssets/Planning/Thumbnails/Tribes/spore/starter.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><span class="unit-stat-name">포자버섯</span></a></th><td headers="unit-stat-health" data-sort="100">100</td><td headers="unit-stat-combatStrength" data-sort="18">18</td><td headers="unit-stat-attackPower" data-sort="18.3">18.3</td><td headers="unit-stat-defense" data-sort="15.2">15.2</td><td headers="unit-stat-attackSpeed" data-sort="0.8">0.8</td><td headers="unit-stat-movementSpeed" data-sort="0.5">0.5</td><td headers="unit-stat-vision" data-sort="3">3</td><td aria-hidden="true"></td></tr>
+<tr><th scope="row" headers="unit-stat-name" data-sort="몽돌"><a href="DesignAssets/Tribes/pebble/starter.png"><img src="DesignAssets/Planning/Thumbnails/Tribes/pebble/starter.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><span class="unit-stat-name">몽돌</span></a></th><td headers="unit-stat-health" data-sort="100">100</td><td headers="unit-stat-combatStrength" data-sort="22">22</td><td headers="unit-stat-attackPower" data-sort="19.7">19.7</td><td headers="unit-stat-defense" data-sort="16.8">16.8</td><td headers="unit-stat-attackSpeed" data-sort="0.8">0.8</td><td headers="unit-stat-movementSpeed" data-sort="0.35">0.35</td><td headers="unit-stat-vision" data-sort="3">3</td><td aria-hidden="true"></td></tr>
+<tr><th scope="row" headers="unit-stat-name" data-sort="샘방울"><a href="DesignAssets/Tribes/spring/starter.png"><img src="DesignAssets/Planning/Thumbnails/Tribes/spring/starter.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><span class="unit-stat-name">샘방울</span></a></th><td headers="unit-stat-health" data-sort="100">100</td><td headers="unit-stat-combatStrength" data-sort="19">19</td><td headers="unit-stat-attackPower" data-sort="18.65">18.65</td><td headers="unit-stat-defense" data-sort="15.600000000000001">15.6</td><td headers="unit-stat-attackSpeed" data-sort="0.8">0.8</td><td headers="unit-stat-movementSpeed" data-sort="0.9">0.9</td><td headers="unit-stat-vision" data-sort="3">3</td><td aria-hidden="true"></td></tr>
+<tr><th scope="row" headers="unit-stat-name" data-sort="꽃꼬리새"><a href="DesignAssets/CreatureConcepts/v3/flower-tail-bird.png"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/flower-tail-bird.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><span class="unit-stat-name">꽃꼬리새</span></a></th><td headers="unit-stat-health" data-sort="100">100</td><td headers="unit-stat-combatStrength" data-sort="8">8</td><td headers="unit-stat-attackPower" data-sort="14.8">14.8</td><td headers="unit-stat-defense" data-sort="11.2">11.2</td><td headers="unit-stat-attackSpeed" data-sort="0.8">0.8</td><td headers="unit-stat-movementSpeed" data-sort="2">2</td><td headers="unit-stat-vision" data-sort="10">10</td><td aria-hidden="true"></td></tr>
+<tr><th scope="row" headers="unit-stat-name" data-sort="이슬토끼"><a href="DesignAssets/CreatureConcepts/v3/dew-rabbit.png"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/dew-rabbit.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><span class="unit-stat-name">이슬토끼</span></a></th><td headers="unit-stat-health" data-sort="100">100</td><td headers="unit-stat-combatStrength" data-sort="10">10</td><td headers="unit-stat-attackPower" data-sort="15.5">15.5</td><td headers="unit-stat-defense" data-sort="12">12</td><td headers="unit-stat-attackSpeed" data-sort="0.8">0.8</td><td headers="unit-stat-movementSpeed" data-sort="2.6">2.6</td><td headers="unit-stat-vision" data-sort="8">8</td><td aria-hidden="true"></td></tr>
+<tr><th scope="row" headers="unit-stat-name" data-sort="흙두더지"><a href="DesignAssets/CreatureConcepts/v3/soil-mole.png"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/soil-mole.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><span class="unit-stat-name">흙두더지</span></a></th><td headers="unit-stat-health" data-sort="100">100</td><td headers="unit-stat-combatStrength" data-sort="14">14</td><td headers="unit-stat-attackPower" data-sort="16.9">16.9</td><td headers="unit-stat-defense" data-sort="13.600000000000001">13.6</td><td headers="unit-stat-attackSpeed" data-sort="0.8">0.8</td><td headers="unit-stat-movementSpeed" data-sort="0.8">0.8</td><td headers="unit-stat-vision" data-sort="6">6</td><td aria-hidden="true"></td></tr>
+<tr><th scope="row" headers="unit-stat-name" data-sort="보따리달팽이"><a href="DesignAssets/CreatureConcepts/v3/bundle-snail.png"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/bundle-snail.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><span class="unit-stat-name">보따리달팽이</span></a></th><td headers="unit-stat-health" data-sort="100">100</td><td headers="unit-stat-combatStrength" data-sort="16">16</td><td headers="unit-stat-attackPower" data-sort="17.6">17.6</td><td headers="unit-stat-defense" data-sort="14.4">14.4</td><td headers="unit-stat-attackSpeed" data-sort="0.8">0.8</td><td headers="unit-stat-movementSpeed" data-sort="0.4">0.4</td><td headers="unit-stat-vision" data-sort="3">3</td><td aria-hidden="true"></td></tr>
+<tr><th scope="row" headers="unit-stat-name" data-sort="솜양"><a href="DesignAssets/CreatureConcepts/v3/cotton-sheep.png"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/cotton-sheep.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><span class="unit-stat-name">솜양</span></a></th><td headers="unit-stat-health" data-sort="100">100</td><td headers="unit-stat-combatStrength" data-sort="12">12</td><td headers="unit-stat-attackPower" data-sort="16.2">16.2</td><td headers="unit-stat-defense" data-sort="12.8">12.8</td><td headers="unit-stat-attackSpeed" data-sort="0.8">0.8</td><td headers="unit-stat-movementSpeed" data-sort="0.8">0.8</td><td headers="unit-stat-vision" data-sort="12">12</td><td aria-hidden="true"></td></tr>
+<tr><th scope="row" headers="unit-stat-name" data-sort="굴림도토리"><a href="DesignAssets/CreatureConcepts/v3/rolling-acorn.png"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/rolling-acorn.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><span class="unit-stat-name">굴림도토리</span></a></th><td headers="unit-stat-health" data-sort="100">100</td><td headers="unit-stat-combatStrength" data-sort="16">16</td><td headers="unit-stat-attackPower" data-sort="17.6">17.6</td><td headers="unit-stat-defense" data-sort="14.4">14.4</td><td headers="unit-stat-attackSpeed" data-sort="0.8">0.8</td><td headers="unit-stat-movementSpeed" data-sort="1.8">1.8</td><td headers="unit-stat-vision" data-sort="10">10</td><td aria-hidden="true"></td></tr>
+<tr><th scope="row" headers="unit-stat-name" data-sort="방울두꺼비"><a href="DesignAssets/CreatureConcepts/v3/bubble-toad.png"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/bubble-toad.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><span class="unit-stat-name">방울두꺼비</span></a></th><td headers="unit-stat-health" data-sort="100">100</td><td headers="unit-stat-combatStrength" data-sort="28">28</td><td headers="unit-stat-attackPower" data-sort="21.799999999999997">21.8</td><td headers="unit-stat-defense" data-sort="19.200000000000003">19.2</td><td headers="unit-stat-attackSpeed" data-sort="0.8">0.8</td><td headers="unit-stat-movementSpeed" data-sort="0.8">0.8</td><td headers="unit-stat-vision" data-sort="3">3</td><td aria-hidden="true"></td></tr>
+<tr><th scope="row" headers="unit-stat-name" data-sort="올가미덩굴"><a href="DesignAssets/CreatureConcepts/v3/snare-vine.png"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/snare-vine.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><span class="unit-stat-name">올가미덩굴</span></a></th><td headers="unit-stat-health" data-sort="100">100</td><td headers="unit-stat-combatStrength" data-sort="34">34</td><td headers="unit-stat-attackPower" data-sort="23.9">23.9</td><td headers="unit-stat-defense" data-sort="21.6">21.6</td><td headers="unit-stat-attackSpeed" data-sort="0.8">0.8</td><td headers="unit-stat-movementSpeed" data-sort="1.4">1.4</td><td headers="unit-stat-vision" data-sort="2">2</td><td aria-hidden="true"></td></tr>
+<tr><th scope="row" headers="unit-stat-name" data-sort="가시등 딱정벌레"><a href="DesignAssets/Units/spiny-back-beetle.png"><img src="DesignAssets/Planning/Thumbnails/Units/spiny-back-beetle.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><span class="unit-stat-name">가시등 딱정벌레</span></a></th><td headers="unit-stat-health" data-sort="100">100</td><td headers="unit-stat-combatStrength" data-sort="32">32</td><td headers="unit-stat-attackPower" data-sort="23.2">23.2</td><td headers="unit-stat-defense" data-sort="20.8">20.8</td><td headers="unit-stat-attackSpeed" data-sort="0.8">0.8</td><td headers="unit-stat-movementSpeed" data-sort="1.2">1.2</td><td headers="unit-stat-vision" data-sort="4">4</td><td aria-hidden="true"></td></tr>
+<tr><th scope="row" headers="unit-stat-name" data-sort="흙멧돼지"><a href="DesignAssets/CreatureConcepts/v3/soil-boar.png"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/soil-boar.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><span class="unit-stat-name">흙멧돼지</span></a></th><td headers="unit-stat-health" data-sort="100">100</td><td headers="unit-stat-combatStrength" data-sort="36">36</td><td headers="unit-stat-attackPower" data-sort="24.6">24.6</td><td headers="unit-stat-defense" data-sort="22.4">22.4</td><td headers="unit-stat-attackSpeed" data-sort="0.8">0.8</td><td headers="unit-stat-movementSpeed" data-sort="1.6">1.6</td><td headers="unit-stat-vision" data-sort="4">4</td><td aria-hidden="true"></td></tr>
+<tr><th scope="row" headers="unit-stat-name" data-sort="넝쿨거북"><a href="DesignAssets/CreatureConcepts/v3/vine-turtle.png"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/vine-turtle.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><span class="unit-stat-name">넝쿨거북</span></a></th><td headers="unit-stat-health" data-sort="100">100</td><td headers="unit-stat-combatStrength" data-sort="28">28</td><td headers="unit-stat-attackPower" data-sort="21.799999999999997">21.8</td><td headers="unit-stat-defense" data-sort="19.200000000000003">19.2</td><td headers="unit-stat-attackSpeed" data-sort="0.8">0.8</td><td headers="unit-stat-movementSpeed" data-sort="0.4">0.4</td><td headers="unit-stat-vision" data-sort="3">3</td><td aria-hidden="true"></td></tr>
+<tr><th scope="row" headers="unit-stat-name" data-sort="그늘족제비"><a href="DesignAssets/CreatureConcepts/v3/shadow-weasel.png"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/shadow-weasel.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><span class="unit-stat-name">그늘족제비</span></a></th><td headers="unit-stat-health" data-sort="100">100</td><td headers="unit-stat-combatStrength" data-sort="40">40</td><td headers="unit-stat-attackPower" data-sort="26">26</td><td headers="unit-stat-defense" data-sort="24">24</td><td headers="unit-stat-attackSpeed" data-sort="0.8">0.8</td><td headers="unit-stat-movementSpeed" data-sort="2.6">2.6</td><td headers="unit-stat-vision" data-sort="5">5</td><td aria-hidden="true"></td></tr>
+<tr><th scope="row" headers="unit-stat-name" data-sort="갈퀴부엉이"><a href="DesignAssets/CreatureConcepts/v3/talon-owl.png"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/talon-owl.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><span class="unit-stat-name">갈퀴부엉이</span></a></th><td headers="unit-stat-health" data-sort="100">100</td><td headers="unit-stat-combatStrength" data-sort="44">44</td><td headers="unit-stat-attackPower" data-sort="27.4">27.4</td><td headers="unit-stat-defense" data-sort="25.6">25.6</td><td headers="unit-stat-attackSpeed" data-sort="0.8">0.8</td><td headers="unit-stat-movementSpeed" data-sort="2">2</td><td headers="unit-stat-vision" data-sort="6">6</td><td aria-hidden="true"></td></tr>
+<tr><th scope="row" headers="unit-stat-name" data-sort="봄지기"><a href="DesignAssets/CreatureConcepts/v3/spring-keeper.png"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/spring-keeper.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><span class="unit-stat-name">봄지기</span></a></th><td headers="unit-stat-health" data-sort="100">100</td><td headers="unit-stat-combatStrength" data-sort="36">36</td><td headers="unit-stat-attackPower" data-sort="24.6">24.6</td><td headers="unit-stat-defense" data-sort="22.4">22.4</td><td headers="unit-stat-attackSpeed" data-sort="0.8">0.8</td><td headers="unit-stat-movementSpeed" data-sort="1.6">1.6</td><td headers="unit-stat-vision" data-sort="12">12</td><td aria-hidden="true"></td></tr>
+<tr><th scope="row" headers="unit-stat-name" data-sort="등불지기"><a href="DesignAssets/CreatureConcepts/v3/lantern-keeper.png"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/lantern-keeper.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><span class="unit-stat-name">등불지기</span></a></th><td headers="unit-stat-health" data-sort="100">100</td><td headers="unit-stat-combatStrength" data-sort="38">38</td><td headers="unit-stat-attackPower" data-sort="25.299999999999997">25.3</td><td headers="unit-stat-defense" data-sort="23.200000000000003">23.2</td><td headers="unit-stat-attackSpeed" data-sort="0.8">0.8</td><td headers="unit-stat-movementSpeed" data-sort="2.8">2.8</td><td headers="unit-stat-vision" data-sort="10">10</td><td aria-hidden="true"></td></tr>
+<tr><th scope="row" headers="unit-stat-name" data-sort="오래된 등짐"><a href="DesignAssets/CreatureConcepts/v3/old-garden-snail.png"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/old-garden-snail.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><span class="unit-stat-name">오래된 등짐</span></a></th><td headers="unit-stat-health" data-sort="100">100</td><td headers="unit-stat-combatStrength" data-sort="42">42</td><td headers="unit-stat-attackPower" data-sort="26.7">26.7</td><td headers="unit-stat-defense" data-sort="24.8">24.8</td><td headers="unit-stat-attackSpeed" data-sort="0.8">0.8</td><td headers="unit-stat-movementSpeed" data-sort="0.3">0.3</td><td headers="unit-stat-vision" data-sort="4">4</td><td aria-hidden="true"></td></tr>
+<tr><th scope="row" headers="unit-stat-name" data-sort="걸어가는 산"><a href="DesignAssets/CreatureConcepts/v3/walking-forest.png"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/walking-forest.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><span class="unit-stat-name">걸어가는 산</span></a></th><td headers="unit-stat-health" data-sort="100">100</td><td headers="unit-stat-combatStrength" data-sort="48">48</td><td headers="unit-stat-attackPower" data-sort="28.799999999999997">28.8</td><td headers="unit-stat-defense" data-sort="27.200000000000003">27.2</td><td headers="unit-stat-attackSpeed" data-sort="0.8">0.8</td><td headers="unit-stat-movementSpeed" data-sort="0.3">0.3</td><td headers="unit-stat-vision" data-sort="5">5</td><td aria-hidden="true"></td></tr>
+<tr><th scope="row" headers="unit-stat-name" data-sort="흰발"><a href="DesignAssets/CreatureConcepts/v3/white-paw.png"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/white-paw.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><span class="unit-stat-name">흰발</span></a></th><td headers="unit-stat-health" data-sort="100">100</td><td headers="unit-stat-combatStrength" data-sort="64">64</td><td headers="unit-stat-attackPower" data-sort="34.4">34.4</td><td headers="unit-stat-defense" data-sort="33.6">33.6</td><td headers="unit-stat-attackSpeed" data-sort="0.8">0.8</td><td headers="unit-stat-movementSpeed" data-sort="3.2">3.2</td><td headers="unit-stat-vision" data-sort="6">6</td><td aria-hidden="true"></td></tr>
+<tr><th scope="row" headers="unit-stat-name" data-sort="가시등 우두머리"><a href="DesignAssets/CreatureConcepts/v3/spiny-back-leader.png"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/spiny-back-leader.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><span class="unit-stat-name">가시등 우두머리</span></a></th><td headers="unit-stat-health" data-sort="100">100</td><td headers="unit-stat-combatStrength" data-sort="54">54</td><td headers="unit-stat-attackPower" data-sort="30.9">30.9</td><td headers="unit-stat-defense" data-sort="29.6">29.6</td><td headers="unit-stat-attackSpeed" data-sort="0.8">0.8</td><td headers="unit-stat-movementSpeed" data-sort="1.4">1.4</td><td headers="unit-stat-vision" data-sort="5">5</td><td aria-hidden="true"></td></tr>
+</tbody></table></div>
+<script id="unit-base-stats-sort">
+(() => {
+  const table = document.getElementById("unit-base-stats");
+  const body = document.getElementById("unit-base-stats-rows");
+  const rows = [...body.rows].map((row, index) => ({ row, index }));
+  const headers = [...table.tHead.rows[0].cells];
+  const collator = new Intl.Collator("ko");
+  for (const button of table.tHead.querySelectorAll("button")) {
+    button.addEventListener("click", () => {
+      const column = Number(button.dataset.column);
+      const header = headers[column];
+      const ascending = header.getAttribute("aria-sort") !== "ascending";
+      for (const cell of headers) cell.setAttribute("aria-sort", "none");
+      header.setAttribute("aria-sort", ascending ? "ascending" : "descending");
+      const sorted = [...rows].sort((left, right) => {
+        const a = left.row.cells[column].dataset.sort;
+        const b = right.row.cells[column].dataset.sort;
+        const order = column === 0 ? collator.compare(a, b) : Number(a) - Number(b);
+        return (ascending ? order : -order) || left.index - right.index;
+      });
+      body.append(...sorted.map(entry => entry.row));
+    });
+  }
+})();
+</script>
 <div class="unit-matrix-wrap"><table class="unit-matrix"><colgroup><col class="unit-matrix-name-column"><col span="11"></colgroup>
 <thead><tr><th scope="col"></th><th scope="col">기본 이미지</th><th scope="col" id="tribes-idle-study">대기</th><th scope="col" id="approved-tribes-movement">이동</th><th scope="col">점프</th><th scope="col">채집</th><th scope="col">운반</th><th scope="col">투척</th><th scope="col" id="tribes-attack-study">공격</th><th scope="col" id="tribes-hurt-study">피격</th><th scope="col">탄생</th><th scope="col" id="tribes-death-study">사망</th></tr></thead>
 <tbody>
@@ -6239,6 +6332,148 @@ new MutationObserver(()=>{if(!lightbox.classList.contains('is-open'))clearPanel(
 document.addEventListener('visibilitychange',()=>{if(document.hidden){if(frame!==null){cancelAnimationFrame(frame);frame=null}stopSounds();if(panel){panel.ready=false;panel.generation++}}else if(panel)startPanel(panel)});
 });
 </script>
+<details id="codex-unit-tiers"><summary>중립 유닛 티어</summary><div class="details-body">
+<div id="neutral-unit-tier-design">
+  <div class="table-responsive">
+    <table class="table table-sm">
+      <thead><tr>
+        <th scope="col" aria-sort="none"><button type="button" class="btn btn-ghost btn-sm" data-column="0">중립 유닛 <span aria-hidden="true">↕</span></button></th>
+        <th scope="col" aria-sort="none"><button type="button" class="btn btn-ghost btn-sm" data-column="1">종합 전투력 티어 <span aria-hidden="true">↕</span></button></th>
+        <th scope="col" aria-sort="none"><button type="button" class="btn btn-ghost btn-sm" data-column="1">HP <span aria-hidden="true">↕</span></button></th>
+        <th scope="col" aria-sort="none"><button type="button" class="btn btn-ghost btn-sm" data-column="2">공격 <span aria-hidden="true">↕</span></button></th>
+        <th scope="col" aria-sort="none"><button type="button" class="btn btn-ghost btn-sm" data-column="3">방어 <span aria-hidden="true">↕</span></button></th>
+        <th scope="col" aria-sort="none"><button type="button" class="btn btn-ghost btn-sm" data-column="4">공속 <span aria-hidden="true">↕</span></button></th>
+        <th scope="col" aria-sort="none"><button type="button" class="btn btn-ghost btn-sm" data-column="5">이동 <span aria-hidden="true">↕</span></button></th>
+        <th scope="col" aria-sort="none"><button type="button" class="btn btn-ghost btn-sm" data-column="6">시야 <span aria-hidden="true">↕</span></button></th>
+        <th scope="col" aria-sort="none"><button type="button" class="btn btn-ghost btn-sm" data-column="7">배정 의도 <span aria-hidden="true">↕</span></button></th>
+      </tr></thead>
+      <tbody aria-live="polite">
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/flower-tail-bird.png" aria-labelledby="tier-unit-name-1"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/flower-tail-bird.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-1">꽃꼬리새</span></th><td class="text-end">1</td><td class="text-end">1</td><td class="text-end">4</td><td class="text-end">1</td><td class="text-end">16</td><td class="text-end">13</td><td class="text-end">16</td><td>연약하지만 빠르게 쪼고 넓게 살핌</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/dew-rabbit.png" aria-labelledby="tier-unit-name-2"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/dew-rabbit.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-2">이슬토끼</span></th><td class="text-end">2</td><td class="text-end">2</td><td class="text-end">3</td><td class="text-end">2</td><td class="text-end">14</td><td class="text-end">15</td><td class="text-end">13</td><td>낮은 내구를 빠른 도주로 보완</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/soil-mole.png" aria-labelledby="tier-unit-name-3"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/soil-mole.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-3">흙두더지</span></th><td class="text-end">6</td><td class="text-end">8</td><td class="text-end">8</td><td class="text-end">10</td><td class="text-end">8</td><td class="text-end">6</td><td class="text-end">1</td><td>단단한 몸과 앞발, 좁은 시야</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/bundle-snail.png" aria-labelledby="tier-unit-name-4"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/bundle-snail.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-4">보따리달팽이</span></th><td class="text-end">5</td><td class="text-end">11</td><td class="text-end">2</td><td class="text-end">13</td><td class="text-end">4</td><td class="text-end">4</td><td class="text-end">3</td><td>강한 갑피로 버티는 느린 생물</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/cotton-sheep.png" aria-labelledby="tier-unit-name-5"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/cotton-sheep.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-5">솜양</span></th><td class="text-end">4</td><td class="text-end">10</td><td class="text-end">1</td><td class="text-end">7</td><td class="text-end">6</td><td class="text-end">7</td><td class="text-end">11</td><td>공격은 약하고 체력으로 견딤</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/rolling-acorn.png" aria-labelledby="tier-unit-name-6"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/rolling-acorn.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-6">굴림도토리</span></th><td class="text-end">3</td><td class="text-end">3</td><td class="text-end">7</td><td class="text-end">12</td><td class="text-end">9</td><td class="text-end">11</td><td class="text-end">2</td><td>작은 몸에 단단한 외피</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/bubble-toad.png" aria-labelledby="tier-unit-name-7"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/bubble-toad.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-7">방울두꺼비</span></th><td class="text-end">9</td><td class="text-end">9</td><td class="text-end">9</td><td class="text-end">8</td><td class="text-end">10</td><td class="text-end">8</td><td class="text-end">8</td><td>큰 편향 없는 중간형</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/snare-vine.png" aria-labelledby="tier-unit-name-8"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/snare-vine.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-8">올가미덩굴</span></th><td class="text-end">11</td><td class="text-end">12</td><td class="text-end">13</td><td class="text-end">11</td><td class="text-end">5</td><td class="text-end">1</td><td class="text-end">12</td><td>접근을 감지하고 강하게 붙드는 매복형</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/Units/spiny-back-beetle.png" aria-labelledby="tier-unit-name-9"><img src="DesignAssets/Planning/Thumbnails/Units/spiny-back-beetle.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-9">가시등 딱정벌레</span></th><td class="text-end">10</td><td class="text-end">13</td><td class="text-end">12</td><td class="text-end">17</td><td class="text-end">11</td><td class="text-end">9</td><td class="text-end">4</td><td>갑각 중심의 근접 전투형</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/soil-boar.png" aria-labelledby="tier-unit-name-10"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/soil-boar.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-10">흙멧돼지</span></th><td class="text-end">12</td><td class="text-end">15</td><td class="text-end">15</td><td class="text-end">14</td><td class="text-end">7</td><td class="text-end">12</td><td class="text-end">6</td><td>체중을 실은 강타, 느린 연속 공격</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/vine-turtle.png" aria-labelledby="tier-unit-name-11"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/vine-turtle.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-11">넝쿨거북</span></th><td class="text-end">15</td><td class="text-end">16</td><td class="text-end">11</td><td class="text-end">18</td><td class="text-end">3</td><td class="text-end">5</td><td class="text-end">5</td><td>높은 생존력과 둔한 동작</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/shadow-weasel.png" aria-labelledby="tier-unit-name-12"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/shadow-weasel.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-12">그늘족제비</span></th><td class="text-end">13</td><td class="text-end">5</td><td class="text-end">14</td><td class="text-end">5</td><td class="text-end">19</td><td class="text-end">18</td><td class="text-end">14</td><td>빠른 연속 공격과 추격, 낮은 내구</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/talon-owl.png" aria-labelledby="tier-unit-name-13"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/talon-owl.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-13">갈퀴부엉이</span></th><td class="text-end">14</td><td class="text-end">4</td><td class="text-end">16</td><td class="text-end">3</td><td class="text-end">17</td><td class="text-end">16</td><td class="text-end">19</td><td>먼저 발견하고 강하게 급습</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/spring-keeper.png" aria-labelledby="tier-unit-name-14"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/spring-keeper.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-14">봄지기 ★</span></th><td class="text-end">8</td><td class="text-end">6</td><td class="text-end">6</td><td class="text-end">4</td><td class="text-end">15</td><td class="text-end">14</td><td class="text-end">17</td><td>파괴력보다 반응과 경계에 특화</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/lantern-keeper.png" aria-labelledby="tier-unit-name-15"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/lantern-keeper.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-15">등불지기 ★</span></th><td class="text-end">7</td><td class="text-end">7</td><td class="text-end">5</td><td class="text-end">6</td><td class="text-end">13</td><td class="text-end">17</td><td class="text-end">18</td><td>기동성과 넓은 시야를 가진 안내자</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/old-garden-snail.png" aria-labelledby="tier-unit-name-16"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/old-garden-snail.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-16">오래된 등짐 ★</span></th><td class="text-end">16</td><td class="text-end">18</td><td class="text-end">10</td><td class="text-end">19</td><td class="text-end">2</td><td class="text-end">2</td><td class="text-end">7</td><td>최상급 갑피와 체력, 극도로 느림</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/walking-forest.png" aria-labelledby="tier-unit-name-17"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/walking-forest.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-17">걸어가는 산 ★</span></th><td class="text-end">19</td><td class="text-end">19</td><td class="text-end">17</td><td class="text-end">16</td><td class="text-end">1</td><td class="text-end">3</td><td class="text-end">10</td><td>최대 체급과 무거운 일격</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/white-paw.png" aria-labelledby="tier-unit-name-18"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/white-paw.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-18">흰발 ★</span></th><td class="text-end">17</td><td class="text-end">14</td><td class="text-end">18</td><td class="text-end">9</td><td class="text-end">18</td><td class="text-end">19</td><td class="text-end">15</td><td>빠르게 추격하고 몰아치는 공격형 강적</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/spiny-back-leader.png" aria-labelledby="tier-unit-name-19"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/spiny-back-leader.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-19">가시등 우두머리 ★</span></th><td class="text-end">18</td><td class="text-end">17</td><td class="text-end">19</td><td class="text-end">15</td><td class="text-end">12</td><td class="text-end">10</td><td class="text-end">9</td><td>높은 체력·공격·갑각을 함께 가진 강적</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>
+(() => {
+  const root = document.getElementById("neutral-unit-tier-design");
+  const table = root.querySelector("table");
+  const body = table.tBodies[0];
+  const fields = ["name", "combatTier", "health", "power", "armor", "speed", "movement", "vision", "combo", "comboPower", "critical", "criticalPower", "accuracy", "penetration", "comboSpeed", "focus", "evasion", "parry", "block", "blockPower", "counter", "counterPower", "tenacity", "reduction", "stun", "stunTime", "bleed", "bleedPower", "area", "areaPower", "lifesteal", "reflection", "regeneration", "capacity", "harvest", "harvestSpeed", "loadSpeed", "healing", "role"];
+  const extraLabels = ["연타", "연격숙련", "치명", "치명위력", "정밀", "예리함", "연타속도", "집중", "회피", "패링", "방어본능", "방어숙련", "반격", "반격위력", "강인함", "완충", "기절", "기절연장", "출혈", "출혈강도", "범위공격", "확산위력", "흡혈", "반사", "재생", "운반", "채집량", "채집속도", "하중적응", "회복력"];
+  const extraTiers = [
+    [16,2,6,3,11,6,17,11,19,13,1,1,6,3,1,1,1,1,11,6,2,2,4,4,9,1,8,19,1,10],
+    [14,1,7,2,10,2,14,12,15,10,2,2,4,2,2,2,2,2,2,2,1,1,3,1,10,2,13,17,3,11],
+    [8,13,14,8,13,11,8,10,7,9,11,11,10,8,11,11,12,11,12,11,9,10,13,7,8,9,19,16,12,8],
+    [4,6,2,6,2,3,4,2,3,2,17,17,2,6,13,16,5,6,3,3,8,6,7,13,15,17,18,4,18,16],
+    [6,3,1,1,3,1,5,6,8,4,7,7,1,1,9,14,6,5,1,1,12,5,2,12,13,12,16,14,11,13],
+    [9,7,11,7,1,8,10,1,12,8,13,12,9,7,7,7,14,9,6,7,7,7,1,11,1,6,11,12,9,1],
+    [10,9,10,9,7,7,9,7,11,7,8,8,11,11,8,8,17,19,7,8,18,16,15,8,12,8,7,9,7,14],
+    [5,14,15,14,14,14,6,13,5,1,10,10,13,12,10,9,9,18,17,18,14,15,19,15,18,13,12,5,10,12],
+    [11,12,12,12,9,15,11,9,9,15,14,14,18,17,14,13,11,10,14,13,11,11,11,18,2,11,5,8,14,2],
+    [7,16,13,16,8,13,7,8,6,12,12,13,12,15,15,12,18,16,13,14,17,18,14,10,5,14,6,6,13,4],
+    [3,10,3,10,6,10,3,5,4,6,19,18,15,14,16,17,15,13,9,10,16,14,8,17,14,16,10,2,16,15],
+    [19,18,18,13,17,16,19,17,17,17,4,6,17,9,6,5,7,8,19,16,3,8,17,2,7,7,2,13,6,7],
+    [17,15,17,15,19,17,16,14,16,16,3,3,14,10,3,3,8,7,16,15,6,9,16,3,4,3,1,10,2,5],
+    [15,5,9,5,15,5,15,19,14,14,5,4,7,4,4,4,3,3,5,5,5,4,5,6,17,4,15,18,4,18],
+    [13,4,8,4,12,4,13,18,13,11,6,5,8,5,5,6,4,4,4,4,4,3,6,5,16,5,14,15,5,19],
+    [2,11,4,11,5,9,2,4,2,3,18,19,5,13,17,19,10,14,8,9,15,13,9,14,19,18,17,3,19,17],
+    [1,8,5,19,4,12,1,3,1,5,16,16,3,18,19,18,19,17,10,12,19,19,10,16,11,19,9,1,17,9],
+    [18,17,19,18,18,19,18,16,18,18,9,9,16,16,12,10,13,12,18,19,10,12,18,9,6,10,3,11,8,6],
+    [12,19,16,17,16,18,12,15,10,19,15,15,19,19,18,15,16,15,15,17,13,17,12,19,3,15,4,7,15,3]
+  ];
+  const headerRow = table.tHead.rows[0];
+  const roleHeader = headerRow.lastElementChild;
+  extraLabels.forEach(label => {
+    const header = document.createElement("th");
+    header.scope = "col";
+    header.setAttribute("aria-sort", "none");
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "btn btn-ghost btn-sm";
+    button.append(document.createTextNode(label + " "));
+    const arrow = document.createElement("span");
+    arrow.setAttribute("aria-hidden", "true");
+    arrow.textContent = "↕";
+    button.append(arrow);
+    header.append(button);
+    headerRow.insertBefore(header, roleHeader);
+  });
+  [...body.rows].forEach((row, index) => {
+    const role = row.lastElementChild;
+    role.classList.add("text-nowrap");
+    extraTiers[index].forEach(value => {
+      const cell = document.createElement("td");
+      cell.className = "text-end";
+      cell.textContent = String(value);
+      row.insertBefore(cell, role);
+    });
+    [...row.cells].slice(1, -1).forEach(cell => {
+      cell.dataset.tooltip = row.cells[0].textContent;
+    });
+  });
+  const headers = [...table.tHead.rows[0].cells];
+  const buttons = headers.map(header => header.querySelector("button"));
+  buttons.forEach((button, column) => {
+    button.dataset.column = String(column);
+    button.dataset.field = fields[column];
+  });
+  const rows = [...body.rows].map((row, index) => ({ row, index }));
+  const collator = new Intl.Collator("ko");
+  let current = null;
+
+  function validSort(value) {
+    return value && Number.isInteger(value.column) && value.column >= 0 && value.column < fields.length &&
+      (value.direction === "ascending" || value.direction === "descending");
+  }
+
+  function render(sort) {
+    current = validSort(sort) ? { column: sort.column, direction: sort.direction } : null;
+    const ordered = [...rows];
+    if (current) {
+      const { column, direction } = current;
+      ordered.sort((left, right) => {
+        const a = left.row.cells[column].textContent;
+        const b = right.row.cells[column].textContent;
+        const order = column > 0 && column < fields.length - 1 ? Number(a) - Number(b) : collator.compare(a, b);
+        return (direction === "ascending" ? order : -order) || left.index - right.index;
+      });
+    }
+    body.append(...ordered.map(entry => entry.row));
+    headers.forEach((header, column) => {
+      const direction = current && current.column === column ? current.direction : "none";
+      header.setAttribute("aria-sort", direction);
+      buttons[column].querySelector("span").textContent = direction === "ascending" ? "↑" : direction === "descending" ? "↓" : "↕";
+    });
+  }
+
+  buttons.forEach((button, column) => {
+    button.addEventListener("click", () => {
+      const direction = current && current.column === column && current.direction === "ascending" ? "descending" : "ascending";
+      render({ column, direction });
+    });
+  });
+  render(null);
+})();
+</script>
+</div></details>
 <details id="codex-food"><summary hidden></summary><div class="details-body art-style">
 <p>자원은 재생하지 않으며, 자원 점유율·매장량·채집 및 운반 효율로 종족 간 성장을 맞춘다.</p>
 <div class="table-wrap food-table-wrap" id="art-food-plan"><table class="food-asset-table" id="art-food" aria-label="자원"><colgroup><col class="food-title-column"><col><col><col></colgroup><thead><tr><th scope="col">자원</th><th scope="col">원화</th><th scope="col">운반물</th><th scope="col">채집애니</th></tr></thead><tbody>
@@ -6354,7 +6589,7 @@ const original=document.getElementById('lightbox-original');
 const close=lightbox.querySelector('.lightbox-close');
 let returnFocus=null;
 function closeLightbox(){lightbox.classList.remove('is-open');lightbox.setAttribute('aria-hidden','true');image.removeAttribute('src');image.alt='';if(returnFocus?.isConnected)returnFocus.focus()}
-document.querySelectorAll('figure a[href]').forEach(link=>{const preview=link.querySelector('img');if(!preview)return;link.addEventListener('click',event=>{if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey||event.button!==0)return;event.preventDefault();returnFocus=link;lightbox.classList.toggle('is-food-image',!!link.closest('#codex-food'));lightbox.classList.toggle('is-unit-matrix',!!link.closest('#codex-units'));lightbox.classList.toggle('is-unit-image',!!link.closest('#codex-units,#codex-attributes,#codex-nest')&&!link.closest('#combat-attribute-concepts'));lightbox.classList.toggle('is-nest-image',!!link.closest('#codex-nest'));image.src=link.dataset.preview||link.href;image.alt=preview.alt;original.href=link.href;title.textContent=link.closest('#codex-food')?link.closest('tr').querySelector('th[scope="row"]').textContent:link.closest('#codex-units,#codex-attributes,#codex-nest')?'':link.getAttribute('href').split('/').pop();lightbox.classList.add('is-open');lightbox.setAttribute('aria-hidden','false');close.focus()})});
+document.querySelectorAll('figure a[href],#unit-base-stats tbody a[href]').forEach(link=>{const preview=link.querySelector('img');if(!preview)return;link.addEventListener('click',event=>{if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey||event.button!==0)return;event.preventDefault();returnFocus=link;lightbox.classList.toggle('is-food-image',!!link.closest('#codex-food'));lightbox.classList.toggle('is-unit-matrix',!!link.closest('#codex-units'));lightbox.classList.toggle('is-unit-image',!!link.closest('#codex-units,#codex-unit-tiers,#codex-attributes,#codex-nest')&&!link.closest('#combat-attribute-concepts'));lightbox.classList.toggle('is-nest-image',!!link.closest('#codex-nest'));image.src=link.dataset.preview||link.href;image.alt=preview.alt;original.href=link.href;title.textContent=link.closest('#codex-food')?link.closest('tr').querySelector('th[scope="row"]').textContent:link.closest('#codex-units,#codex-unit-tiers,#codex-attributes,#codex-nest')?'':link.getAttribute('href').split('/').pop();lightbox.classList.add('is-open');lightbox.setAttribute('aria-hidden','false');close.focus()})});
 close.addEventListener('click',closeLightbox);
 lightbox.addEventListener('click',event=>{if(event.target===lightbox)closeLightbox()});
 window.addEventListener('keydown',event=>{if(event.key==='Escape'&&lightbox.classList.contains('is-open'))closeLightbox()});
