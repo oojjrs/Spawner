@@ -106,23 +106,30 @@
 </style>
 <style id="neutral-unit-tiers-style">
 #codex-unit-tiers{scroll-margin-top:112px}
-#codex-unit-tiers .details-body{min-width:0}
-#neutral-unit-tier-design{min-width:0}
+#codex-unit-tiers .details-body,#neutral-unit-tier-design{min-width:0}
+#neutral-unit-tier-design{display:grid;gap:16px}
 #codex-unit-tiers .table-responsive{min-width:0;max-width:100%;max-height:calc(100dvh - 200px);overflow:auto;isolation:isolate}
-#codex-unit-tiers table{width:max-content;min-width:100%;font-size:13px;font-variant-numeric:tabular-nums}
-#codex-unit-tiers th,#codex-unit-tiers td{padding:6px 8px;white-space:nowrap}
+#codex-unit-tiers table{width:100%;min-width:0;table-layout:fixed;font-size:12px;font-variant-numeric:tabular-nums}
+#codex-unit-tiers th,#codex-unit-tiers td{padding:6px 1px;white-space:normal;overflow-wrap:anywhere;border:1px solid var(--line)}
+#codex-unit-tiers tr>:nth-child(even){background:#24312f}
 #codex-unit-tiers tbody th{font-weight:400}
-#codex-unit-tiers tbody td{vertical-align:middle}
+#codex-unit-tiers tbody td{vertical-align:middle;text-align:center}
 #codex-unit-tiers tbody th figure{display:flex;justify-content:center;margin:0 0 4px}
-#codex-unit-tiers tbody th img{display:block;width:64px;height:64px;object-fit:contain}
+#codex-unit-tiers tbody th img{display:block;width:64px;height:64px;max-width:100%;object-fit:contain}
 #codex-unit-tiers tbody th>span{display:block;text-align:center}
-#codex-unit-tiers .text-end{text-align:right}
+#codex-unit-tiers .text-end{text-align:center}
 #codex-unit-tiers thead th{position:sticky;top:0;z-index:2;padding:0;background:var(--paper)}
-#codex-unit-tiers button{display:flex;align-items:center;gap:5px;width:100%;min-height:38px;padding:6px 8px;border:0;background:transparent;color:var(--ink);font:inherit;font-size:12px;white-space:nowrap;cursor:pointer}
+#codex-unit-tiers thead th:nth-child(even){background:#24312f}
+#codex-unit-tiers button{display:block;width:100%;min-width:0;min-height:90px;padding:5px 1px;border:0;background:transparent;color:var(--ink);font:inherit;font-size:11px;line-height:1.4;white-space:normal;overflow-wrap:anywhere;text-align:center;cursor:pointer}
+#codex-unit-tiers button>span{display:block}
 #codex-unit-tiers button:hover{background:var(--soft)}
 #codex-unit-tiers button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 #codex-unit-tiers thead th:first-child,#codex-unit-tiers tbody th:first-child{position:sticky;left:0;z-index:1;background:var(--paper);box-shadow:1px 0 0 var(--line)}
 #codex-unit-tiers thead th:first-child{z-index:3}
+#codex-unit-tiers [data-field="role"]{text-align:left;padding:6px 4px}
+#codex-unit-tiers .tier-group button{min-height:64px;font-size:12px}
+#codex-unit-tiers .tier-group td{font-size:13px}
+#codex-unit-tiers [hidden]{display:none!important}
 </style>
 </head>
 <body>
@@ -6338,35 +6345,35 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden){if(frame!=
     <table class="table table-sm">
       <thead><tr>
         <th scope="col" aria-sort="none"><button type="button" class="btn btn-ghost btn-sm" data-column="0">중립 유닛 <span aria-hidden="true">↕</span></button></th>
-        <th scope="col" aria-sort="none"><button type="button" class="btn btn-ghost btn-sm" data-column="1">종합 전투력 티어 <span aria-hidden="true">↕</span></button></th>
+        <th data-field="role" scope="col" aria-sort="none"><button type="button" class="btn btn-ghost btn-sm" data-column="7">배정 의도 <span aria-hidden="true">↕</span></button></th>
+        <th scope="col" aria-sort="none"><button type="button" class="btn btn-ghost btn-sm" data-column="1">종합 티어 <span aria-hidden="true">↕</span></button></th>
         <th scope="col" aria-sort="none"><button type="button" class="btn btn-ghost btn-sm" data-column="1">HP <span aria-hidden="true">↕</span></button></th>
         <th scope="col" aria-sort="none"><button type="button" class="btn btn-ghost btn-sm" data-column="2">공격 <span aria-hidden="true">↕</span></button></th>
         <th scope="col" aria-sort="none"><button type="button" class="btn btn-ghost btn-sm" data-column="3">방어 <span aria-hidden="true">↕</span></button></th>
         <th scope="col" aria-sort="none"><button type="button" class="btn btn-ghost btn-sm" data-column="4">공속 <span aria-hidden="true">↕</span></button></th>
         <th scope="col" aria-sort="none"><button type="button" class="btn btn-ghost btn-sm" data-column="5">이동 <span aria-hidden="true">↕</span></button></th>
         <th scope="col" aria-sort="none"><button type="button" class="btn btn-ghost btn-sm" data-column="6">시야 <span aria-hidden="true">↕</span></button></th>
-        <th scope="col" aria-sort="none"><button type="button" class="btn btn-ghost btn-sm" data-column="7">배정 의도 <span aria-hidden="true">↕</span></button></th>
       </tr></thead>
       <tbody aria-live="polite">
-        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/flower-tail-bird.png" aria-labelledby="tier-unit-name-1"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/flower-tail-bird.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-1">꽃꼬리새</span></th><td class="text-end">1</td><td class="text-end">1</td><td class="text-end">4</td><td class="text-end">1</td><td class="text-end">16</td><td class="text-end">13</td><td class="text-end">16</td><td>연약하지만 빠르게 쪼고 넓게 살핌</td></tr>
-        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/dew-rabbit.png" aria-labelledby="tier-unit-name-2"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/dew-rabbit.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-2">이슬토끼</span></th><td class="text-end">2</td><td class="text-end">2</td><td class="text-end">3</td><td class="text-end">2</td><td class="text-end">14</td><td class="text-end">15</td><td class="text-end">13</td><td>낮은 내구를 빠른 도주로 보완</td></tr>
-        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/soil-mole.png" aria-labelledby="tier-unit-name-3"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/soil-mole.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-3">흙두더지</span></th><td class="text-end">6</td><td class="text-end">8</td><td class="text-end">8</td><td class="text-end">10</td><td class="text-end">8</td><td class="text-end">6</td><td class="text-end">1</td><td>단단한 몸과 앞발, 좁은 시야</td></tr>
-        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/bundle-snail.png" aria-labelledby="tier-unit-name-4"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/bundle-snail.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-4">보따리달팽이</span></th><td class="text-end">5</td><td class="text-end">11</td><td class="text-end">2</td><td class="text-end">13</td><td class="text-end">4</td><td class="text-end">4</td><td class="text-end">3</td><td>강한 갑피로 버티는 느린 생물</td></tr>
-        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/cotton-sheep.png" aria-labelledby="tier-unit-name-5"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/cotton-sheep.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-5">솜양</span></th><td class="text-end">4</td><td class="text-end">10</td><td class="text-end">1</td><td class="text-end">7</td><td class="text-end">6</td><td class="text-end">7</td><td class="text-end">11</td><td>공격은 약하고 체력으로 견딤</td></tr>
-        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/rolling-acorn.png" aria-labelledby="tier-unit-name-6"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/rolling-acorn.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-6">굴림도토리</span></th><td class="text-end">3</td><td class="text-end">3</td><td class="text-end">7</td><td class="text-end">12</td><td class="text-end">9</td><td class="text-end">11</td><td class="text-end">2</td><td>작은 몸에 단단한 외피</td></tr>
-        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/bubble-toad.png" aria-labelledby="tier-unit-name-7"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/bubble-toad.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-7">방울두꺼비</span></th><td class="text-end">9</td><td class="text-end">9</td><td class="text-end">9</td><td class="text-end">8</td><td class="text-end">10</td><td class="text-end">8</td><td class="text-end">8</td><td>큰 편향 없는 중간형</td></tr>
-        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/snare-vine.png" aria-labelledby="tier-unit-name-8"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/snare-vine.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-8">올가미덩굴</span></th><td class="text-end">11</td><td class="text-end">12</td><td class="text-end">13</td><td class="text-end">11</td><td class="text-end">5</td><td class="text-end">1</td><td class="text-end">12</td><td>접근을 감지하고 강하게 붙드는 매복형</td></tr>
-        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/Units/spiny-back-beetle.png" aria-labelledby="tier-unit-name-9"><img src="DesignAssets/Planning/Thumbnails/Units/spiny-back-beetle.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-9">가시등 딱정벌레</span></th><td class="text-end">10</td><td class="text-end">13</td><td class="text-end">12</td><td class="text-end">17</td><td class="text-end">11</td><td class="text-end">9</td><td class="text-end">4</td><td>갑각 중심의 근접 전투형</td></tr>
-        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/soil-boar.png" aria-labelledby="tier-unit-name-10"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/soil-boar.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-10">흙멧돼지</span></th><td class="text-end">12</td><td class="text-end">15</td><td class="text-end">15</td><td class="text-end">14</td><td class="text-end">7</td><td class="text-end">12</td><td class="text-end">6</td><td>체중을 실은 강타, 느린 연속 공격</td></tr>
-        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/vine-turtle.png" aria-labelledby="tier-unit-name-11"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/vine-turtle.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-11">넝쿨거북</span></th><td class="text-end">15</td><td class="text-end">16</td><td class="text-end">11</td><td class="text-end">18</td><td class="text-end">3</td><td class="text-end">5</td><td class="text-end">5</td><td>높은 생존력과 둔한 동작</td></tr>
-        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/shadow-weasel.png" aria-labelledby="tier-unit-name-12"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/shadow-weasel.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-12">그늘족제비</span></th><td class="text-end">13</td><td class="text-end">5</td><td class="text-end">14</td><td class="text-end">5</td><td class="text-end">19</td><td class="text-end">18</td><td class="text-end">14</td><td>빠른 연속 공격과 추격, 낮은 내구</td></tr>
-        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/talon-owl.png" aria-labelledby="tier-unit-name-13"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/talon-owl.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-13">갈퀴부엉이</span></th><td class="text-end">14</td><td class="text-end">4</td><td class="text-end">16</td><td class="text-end">3</td><td class="text-end">17</td><td class="text-end">16</td><td class="text-end">19</td><td>먼저 발견하고 강하게 급습</td></tr>
-        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/spring-keeper.png" aria-labelledby="tier-unit-name-14"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/spring-keeper.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-14">봄지기 ★</span></th><td class="text-end">8</td><td class="text-end">6</td><td class="text-end">6</td><td class="text-end">4</td><td class="text-end">15</td><td class="text-end">14</td><td class="text-end">17</td><td>파괴력보다 반응과 경계에 특화</td></tr>
-        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/lantern-keeper.png" aria-labelledby="tier-unit-name-15"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/lantern-keeper.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-15">등불지기 ★</span></th><td class="text-end">7</td><td class="text-end">7</td><td class="text-end">5</td><td class="text-end">6</td><td class="text-end">13</td><td class="text-end">17</td><td class="text-end">18</td><td>기동성과 넓은 시야를 가진 안내자</td></tr>
-        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/old-garden-snail.png" aria-labelledby="tier-unit-name-16"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/old-garden-snail.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-16">오래된 등짐 ★</span></th><td class="text-end">16</td><td class="text-end">18</td><td class="text-end">10</td><td class="text-end">19</td><td class="text-end">2</td><td class="text-end">2</td><td class="text-end">7</td><td>최상급 갑피와 체력, 극도로 느림</td></tr>
-        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/walking-forest.png" aria-labelledby="tier-unit-name-17"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/walking-forest.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-17">걸어가는 산 ★</span></th><td class="text-end">19</td><td class="text-end">19</td><td class="text-end">17</td><td class="text-end">16</td><td class="text-end">1</td><td class="text-end">3</td><td class="text-end">10</td><td>최대 체급과 무거운 일격</td></tr>
-        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/white-paw.png" aria-labelledby="tier-unit-name-18"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/white-paw.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-18">흰발 ★</span></th><td class="text-end">17</td><td class="text-end">14</td><td class="text-end">18</td><td class="text-end">9</td><td class="text-end">18</td><td class="text-end">19</td><td class="text-end">15</td><td>빠르게 추격하고 몰아치는 공격형 강적</td></tr>
-        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/spiny-back-leader.png" aria-labelledby="tier-unit-name-19"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/spiny-back-leader.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-19">가시등 우두머리 ★</span></th><td class="text-end">18</td><td class="text-end">17</td><td class="text-end">19</td><td class="text-end">15</td><td class="text-end">12</td><td class="text-end">10</td><td class="text-end">9</td><td>높은 체력·공격·갑각을 함께 가진 강적</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/flower-tail-bird.png" aria-labelledby="tier-unit-name-1"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/flower-tail-bird.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-1">꽃꼬리새</span></th><td data-field="role">연약하지만 빠르게 쪼고 넓게 살핌</td><td class="text-end">1</td><td class="text-end">1</td><td class="text-end">3</td><td class="text-end">1</td><td class="text-end">16</td><td class="text-end">14</td><td class="text-end">17</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/dew-rabbit.png" aria-labelledby="tier-unit-name-2"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/dew-rabbit.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-2">이슬토끼</span></th><td data-field="role">낮은 내구를 빠른 도주로 보완</td><td class="text-end">2</td><td class="text-end">2</td><td class="text-end">2</td><td class="text-end">2</td><td class="text-end">13</td><td class="text-end">16</td><td class="text-end">13</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/soil-mole.png" aria-labelledby="tier-unit-name-3"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/soil-mole.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-3">흙두더지</span></th><td data-field="role">단단한 몸과 앞발, 좁은 시야</td><td class="text-end">6</td><td class="text-end">6</td><td class="text-end">6</td><td class="text-end">7</td><td class="text-end">8</td><td class="text-end">6</td><td class="text-end">1</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/bundle-snail.png" aria-labelledby="tier-unit-name-4"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/bundle-snail.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-4">보따리달팽이</span></th><td data-field="role">강한 갑피로 버티는 느린 생물</td><td class="text-end">5</td><td class="text-end">10</td><td class="text-end">5</td><td class="text-end">15</td><td class="text-end">4</td><td class="text-end">4</td><td class="text-end">3</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/cotton-sheep.png" aria-labelledby="tier-unit-name-5"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/cotton-sheep.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-5">솜양</span></th><td data-field="role">공격은 약하고 체력으로 견딤</td><td class="text-end">4</td><td class="text-end">7</td><td class="text-end">1</td><td class="text-end">5</td><td class="text-end">6</td><td class="text-end">7</td><td class="text-end">10</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/rolling-acorn.png" aria-labelledby="tier-unit-name-6"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/rolling-acorn.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-6">굴림도토리</span></th><td data-field="role">작은 몸에 단단한 외피</td><td class="text-end">3</td><td class="text-end">3</td><td class="text-end">4</td><td class="text-end">12</td><td class="text-end">10</td><td class="text-end">10</td><td class="text-end">2</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/bubble-toad.png" aria-labelledby="tier-unit-name-7"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/bubble-toad.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-7">방울두꺼비</span></th><td data-field="role">큰 편향 없는 중간형</td><td class="text-end">7</td><td class="text-end">8</td><td class="text-end">7</td><td class="text-end">6</td><td class="text-end">11</td><td class="text-end">9</td><td class="text-end">8</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/snare-vine.png" aria-labelledby="tier-unit-name-8"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/snare-vine.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-8">올가미덩굴</span></th><td data-field="role">접근을 감지하고 강하게 붙드는 매복형</td><td class="text-end">9</td><td class="text-end">11</td><td class="text-end">10</td><td class="text-end">11</td><td class="text-end">5</td><td class="text-end">1</td><td class="text-end">12</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/Units/spiny-back-beetle.png" aria-labelledby="tier-unit-name-9"><img src="DesignAssets/Planning/Thumbnails/Units/spiny-back-beetle.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-9">가시등 딱정벌레</span></th><td data-field="role">갑각 중심의 근접 전투형</td><td class="text-end">8</td><td class="text-end">9</td><td class="text-end">8</td><td class="text-end">14</td><td class="text-end">9</td><td class="text-end">8</td><td class="text-end">4</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/soil-boar.png" aria-labelledby="tier-unit-name-10"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/soil-boar.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-10">흙멧돼지</span></th><td data-field="role">체중을 실은 강타, 느린 연속 공격</td><td class="text-end">10</td><td class="text-end">14</td><td class="text-end">14</td><td class="text-end">13</td><td class="text-end">7</td><td class="text-end">11</td><td class="text-end">6</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/vine-turtle.png" aria-labelledby="tier-unit-name-11"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/vine-turtle.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-11">넝쿨거북</span></th><td data-field="role">높은 생존력과 둔한 동작</td><td class="text-end">13</td><td class="text-end">16</td><td class="text-end">9</td><td class="text-end">16</td><td class="text-end">3</td><td class="text-end">5</td><td class="text-end">5</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/shadow-weasel.png" aria-labelledby="tier-unit-name-12"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/shadow-weasel.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-12">그늘족제비</span></th><td data-field="role">빠른 연속 공격과 추격, 낮은 내구</td><td class="text-end">11</td><td class="text-end">5</td><td class="text-end">15</td><td class="text-end">4</td><td class="text-end">19</td><td class="text-end">18</td><td class="text-end">14</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/talon-owl.png" aria-labelledby="tier-unit-name-13"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/talon-owl.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-13">갈퀴부엉이</span></th><td data-field="role">먼저 발견하고 강하게 급습</td><td class="text-end">12</td><td class="text-end">4</td><td class="text-end">16</td><td class="text-end">3</td><td class="text-end">15</td><td class="text-end">13</td><td class="text-end">19</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/spring-keeper.png" aria-labelledby="tier-unit-name-14"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/spring-keeper.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-14">봄지기 ★</span></th><td data-field="role">파괴력보다 반응과 경계에 특화</td><td class="text-end">15</td><td class="text-end">12</td><td class="text-end">12</td><td class="text-end">8</td><td class="text-end">17</td><td class="text-end">15</td><td class="text-end">18</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/lantern-keeper.png" aria-labelledby="tier-unit-name-15"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/lantern-keeper.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-15">등불지기 ★</span></th><td data-field="role">기동성과 넓은 시야를 가진 안내자</td><td class="text-end">14</td><td class="text-end">13</td><td class="text-end">11</td><td class="text-end">9</td><td class="text-end">14</td><td class="text-end">17</td><td class="text-end">15</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/old-garden-snail.png" aria-labelledby="tier-unit-name-16"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/old-garden-snail.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-16">오래된 등짐 ★</span></th><td data-field="role">최상급 갑피와 체력, 극도로 느림</td><td class="text-end">16</td><td class="text-end">18</td><td class="text-end">13</td><td class="text-end">18</td><td class="text-end">2</td><td class="text-end">2</td><td class="text-end">7</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/walking-forest.png" aria-labelledby="tier-unit-name-17"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/walking-forest.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-17">걸어가는 산 ★</span></th><td data-field="role">최대 체급과 무거운 일격</td><td class="text-end">19</td><td class="text-end">19</td><td class="text-end">18</td><td class="text-end">19</td><td class="text-end">1</td><td class="text-end">3</td><td class="text-end">11</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/white-paw.png" aria-labelledby="tier-unit-name-18"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/white-paw.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-18">흰발 ★</span></th><td data-field="role">빠르게 추격하고 몰아치는 공격형 강적</td><td class="text-end">18</td><td class="text-end">15</td><td class="text-end">19</td><td class="text-end">10</td><td class="text-end">18</td><td class="text-end">19</td><td class="text-end">16</td></tr>
+        <tr><th scope="row" class="text-nowrap"><figure><a href="DesignAssets/CreatureConcepts/v3/spiny-back-leader.png" aria-labelledby="tier-unit-name-19"><img src="DesignAssets/Planning/Thumbnails/CreatureConcepts/v3/spiny-back-leader.png.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></a></figure><span id="tier-unit-name-19">가시등 우두머리 ★</span></th><td data-field="role">높은 체력·공격·갑각을 함께 가진 강적</td><td class="text-end">17</td><td class="text-end">17</td><td class="text-end">17</td><td class="text-end">17</td><td class="text-end">12</td><td class="text-end">12</td><td class="text-end">9</td></tr>
       </tbody>
     </table>
   </div>
@@ -6376,31 +6383,30 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden){if(frame!=
   const root = document.getElementById("neutral-unit-tier-design");
   const table = root.querySelector("table");
   const body = table.tBodies[0];
-  const fields = ["name", "combatTier", "health", "power", "armor", "speed", "movement", "vision", "combo", "comboPower", "critical", "criticalPower", "accuracy", "penetration", "comboSpeed", "focus", "evasion", "parry", "block", "blockPower", "counter", "counterPower", "tenacity", "reduction", "stun", "stunTime", "bleed", "bleedPower", "area", "areaPower", "lifesteal", "reflection", "regeneration", "capacity", "harvest", "harvestSpeed", "loadSpeed", "healing", "role"];
-  const extraLabels = ["연타", "연격숙련", "치명", "치명위력", "정밀", "예리함", "연타속도", "집중", "회피", "패링", "방어본능", "방어숙련", "반격", "반격위력", "강인함", "완충", "기절", "기절연장", "출혈", "출혈강도", "범위공격", "확산위력", "흡혈", "반사", "재생", "운반", "채집량", "채집속도", "하중적응", "회복력"];
+  const fields = ["name","role","combatTier","health","power","armor","speed","movement","vision","combo","comboPower","critical","criticalPower","accuracy","penetration","comboSpeed","focus","evasion","parry","block","blockPower","counter","counterPower","tenacity","reduction","stun","stunTime","bleed","bleedPower","area","areaPower","lifesteal","reflection","regeneration","capacity","harvestSpeed","healing"];
+  const extraLabels = ["연타","연격숙련","치명","치명위력","정밀","예리함","연타속도","집중","회피","패링","방어본능","방어숙련","반격","반격위력","강인함","완충","기절","기절연장","출혈","출혈강도","범위공격","확산위력","흡혈","반사","재생","운반","채집속도","회복력"];
   const extraTiers = [
-    [16,2,6,3,11,6,17,11,19,13,1,1,6,3,1,1,1,1,11,6,2,2,4,4,9,1,8,19,1,10],
-    [14,1,7,2,10,2,14,12,15,10,2,2,4,2,2,2,2,2,2,2,1,1,3,1,10,2,13,17,3,11],
-    [8,13,14,8,13,11,8,10,7,9,11,11,10,8,11,11,12,11,12,11,9,10,13,7,8,9,19,16,12,8],
-    [4,6,2,6,2,3,4,2,3,2,17,17,2,6,13,16,5,6,3,3,8,6,7,13,15,17,18,4,18,16],
-    [6,3,1,1,3,1,5,6,8,4,7,7,1,1,9,14,6,5,1,1,12,5,2,12,13,12,16,14,11,13],
-    [9,7,11,7,1,8,10,1,12,8,13,12,9,7,7,7,14,9,6,7,7,7,1,11,1,6,11,12,9,1],
-    [10,9,10,9,7,7,9,7,11,7,8,8,11,11,8,8,17,19,7,8,18,16,15,8,12,8,7,9,7,14],
-    [5,14,15,14,14,14,6,13,5,1,10,10,13,12,10,9,9,18,17,18,14,15,19,15,18,13,12,5,10,12],
-    [11,12,12,12,9,15,11,9,9,15,14,14,18,17,14,13,11,10,14,13,11,11,11,18,2,11,5,8,14,2],
-    [7,16,13,16,8,13,7,8,6,12,12,13,12,15,15,12,18,16,13,14,17,18,14,10,5,14,6,6,13,4],
-    [3,10,3,10,6,10,3,5,4,6,19,18,15,14,16,17,15,13,9,10,16,14,8,17,14,16,10,2,16,15],
-    [19,18,18,13,17,16,19,17,17,17,4,6,17,9,6,5,7,8,19,16,3,8,17,2,7,7,2,13,6,7],
-    [17,15,17,15,19,17,16,14,16,16,3,3,14,10,3,3,8,7,16,15,6,9,16,3,4,3,1,10,2,5],
-    [15,5,9,5,15,5,15,19,14,14,5,4,7,4,4,4,3,3,5,5,5,4,5,6,17,4,15,18,4,18],
-    [13,4,8,4,12,4,13,18,13,11,6,5,8,5,5,6,4,4,4,4,4,3,6,5,16,5,14,15,5,19],
-    [2,11,4,11,5,9,2,4,2,3,18,19,5,13,17,19,10,14,8,9,15,13,9,14,19,18,17,3,19,17],
-    [1,8,5,19,4,12,1,3,1,5,16,16,3,18,19,18,19,17,10,12,19,19,10,16,11,19,9,1,17,9],
-    [18,17,19,18,18,19,18,16,18,18,9,9,16,16,12,10,13,12,18,19,10,12,18,9,6,10,3,11,8,6],
-    [12,19,16,17,16,18,12,15,10,19,15,15,19,19,18,15,16,15,15,17,13,17,12,19,3,15,4,7,15,3]
+    [14,8,8,3,14,5,16,12,15,12,1,1,7,3,1,1,1,1,5,6,2,2,4,4,9,1,19,10],
+    [13,7,7,2,10,2,13,11,14,11,2,2,2,2,2,2,2,2,2,2,1,1,3,1,10,2,17,11],
+    [8,10,11,8,12,11,8,10,7,10,11,11,8,8,10,10,12,9,12,11,8,8,12,7,8,9,16,8],
+    [4,4,2,6,2,3,4,2,3,2,15,16,3,7,12,15,6,4,3,3,9,6,7,13,14,17,4,16],
+    [6,5,1,1,3,1,5,6,8,4,7,7,1,1,9,14,5,3,1,1,12,5,2,12,12,12,14,13],
+    [10,6,6,7,1,7,10,1,11,8,13,12,6,6,4,4,10,5,6,7,7,7,1,11,1,6,12,1],
+    [11,9,10,9,7,8,11,7,12,7,8,8,11,9,8,8,17,19,7,8,18,16,15,8,11,8,9,14],
+    [5,11,14,13,13,14,6,13,5,1,10,10,12,12,11,9,9,18,15,14,17,13,19,15,18,13,5,12],
+    [9,12,12,12,9,15,9,9,9,16,14,14,18,16,14,12,11,8,14,13,11,11,11,18,2,11,8,2],
+    [7,16,16,16,8,13,7,8,6,9,12,13,13,15,15,13,18,11,13,15,13,17,13,10,5,14,6,4],
+    [3,3,3,10,6,10,3,5,4,6,19,17,15,13,16,17,15,12,9,10,16,15,8,17,15,16,2,15],
+    [18,18,18,14,16,18,18,17,16,17,4,4,17,11,5,5,8,7,18,17,5,10,17,2,7,7,13,7],
+    [16,14,17,15,19,17,15,14,13,15,3,3,14,10,3,3,7,6,17,16,6,9,16,3,4,3,10,5],
+    [17,15,13,5,17,9,17,18,18,14,5,5,9,5,6,6,3,10,10,9,4,4,6,9,13,4,18,9],
+    [15,13,9,4,15,4,14,16,17,13,6,6,4,4,7,7,4,13,4,4,3,3,5,5,16,5,15,17],
+    [2,2,4,11,4,6,2,3,1,3,17,18,5,14,17,18,13,14,8,5,14,12,9,14,17,19,3,19],
+    [1,1,5,17,5,12,1,4,2,5,18,19,10,18,19,19,19,17,11,12,19,19,10,16,19,18,1,18],
+    [19,19,19,19,18,19,19,19,19,19,9,9,16,17,13,11,14,15,19,19,10,14,18,6,6,10,11,6],
+    [12,17,15,18,11,16,12,15,10,18,16,15,19,19,18,16,16,16,16,18,15,18,14,19,3,15,7,3]
   ];
   const headerRow = table.tHead.rows[0];
-  const roleHeader = headerRow.lastElementChild;
   extraLabels.forEach(label => {
     const header = document.createElement("th");
     header.scope = "col";
@@ -6414,19 +6420,18 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden){if(frame!=
     arrow.textContent = "↕";
     button.append(arrow);
     header.append(button);
-    headerRow.insertBefore(header, roleHeader);
+    headerRow.append(header);
   });
   [...body.rows].forEach((row, index) => {
-    const role = row.lastElementChild;
-    role.classList.add("text-nowrap");
     extraTiers[index].forEach(value => {
       const cell = document.createElement("td");
       cell.className = "text-end";
       cell.textContent = String(value);
-      row.insertBefore(cell, role);
+      row.append(cell);
     });
-    [...row.cells].slice(1, -1).forEach(cell => {
-      cell.dataset.tooltip = row.cells[0].textContent;
+    [...row.cells].forEach((cell, column) => {
+      cell.dataset.field = fields[column];
+      if (fields[column] !== "name" && fields[column] !== "role") cell.dataset.tooltip = row.cells[0].textContent;
     });
   });
   const headers = [...table.tHead.rows[0].cells];
@@ -6436,6 +6441,59 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden){if(frame!=
     button.dataset.field = fields[column];
   });
   const rows = [...body.rows].map((row, index) => ({ row, index }));
+  const masterWrap = table.parentElement;
+  const groups = [];
+  const columnWidths = document.createElement("colgroup");
+  fields.forEach((field, index) => {
+    const column = document.createElement("col");
+    if (index === 0) column.style.width = "88px";
+    if (field === "role") column.style.width = "92px";
+    columnWidths.append(column);
+  });
+  table.prepend(columnWidths);
+  function rebuildGroups() {
+    const width = root.clientWidth;
+    if (!width) return;
+    const count = width >= 840 ? 0 : Math.max(2, Math.min(8, Math.floor((width - 80) / 54)));
+    if (Number(root.dataset.groupSize) === count) return;
+    root.dataset.groupSize = String(count);
+    groups.splice(0).forEach(group => group.wrap.remove());
+    masterWrap.hidden = count > 0;
+    if (!count) return;
+    for (let start = 1; start < fields.length; start += count) {
+      const indices = [0, ...fields.slice(start, start + count).map((field, offset) => start + offset)];
+      const wrap = document.createElement("div");
+      wrap.className = "table-responsive tier-group";
+      const groupTable = document.createElement("table");
+      groupTable.className = table.className;
+      const cols = document.createElement("colgroup");
+      indices.forEach((column, index) => {
+        const col = document.createElement("col");
+        if (index === 0) col.style.width = "80px";
+        if (fields[column] === "role") col.style.width = "92px";
+        cols.append(col);
+      });
+      const head = groupTable.createTHead().insertRow();
+      indices.forEach(column => head.append(headers[column].cloneNode(true)));
+      const groupBody = groupTable.createTBody();
+      const groupRows = new Map();
+      rows.forEach(entry => {
+        const row = document.createElement("tr");
+        indices.forEach(column => row.append(entry.row.cells[column].cloneNode(true)));
+        row.querySelectorAll("[id]").forEach(element => { element.id += "-group-" + start; });
+        row.querySelectorAll("[aria-labelledby]").forEach(element => {
+          element.setAttribute("aria-labelledby", element.getAttribute("aria-labelledby").split(" ").map(id => id + "-group-" + start).join(" "));
+        });
+        groupRows.set(entry.index, row);
+        groupBody.append(row);
+      });
+      groupTable.prepend(cols);
+      wrap.append(groupTable);
+      root.append(wrap);
+      groups.push({ wrap, table: groupTable, body: groupBody, rows: groupRows });
+    }
+    render(current);
+  }
   const collator = new Intl.Collator("ko");
   let current = null;
 
@@ -6452,25 +6510,30 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden){if(frame!=
       ordered.sort((left, right) => {
         const a = left.row.cells[column].textContent;
         const b = right.row.cells[column].textContent;
-        const order = column > 0 && column < fields.length - 1 ? Number(a) - Number(b) : collator.compare(a, b);
+        const order = fields[column] !== "name" && fields[column] !== "role" ? Number(a) - Number(b) : collator.compare(a, b);
         return (direction === "ascending" ? order : -order) || left.index - right.index;
       });
     }
     body.append(...ordered.map(entry => entry.row));
-    headers.forEach((header, column) => {
+    groups.forEach(group => group.body.append(...ordered.map(entry => group.rows.get(entry.index))));
+    [...headers, ...groups.flatMap(group => [...group.table.tHead.rows[0].cells])].forEach(header => {
+      const column = Number(header.querySelector("button").dataset.column);
       const direction = current && current.column === column ? current.direction : "none";
       header.setAttribute("aria-sort", direction);
-      buttons[column].querySelector("span").textContent = direction === "ascending" ? "↑" : direction === "descending" ? "↓" : "↕";
+      header.querySelector("button span").textContent = direction === "ascending" ? "↑" : direction === "descending" ? "↓" : "↕";
     });
   }
 
-  buttons.forEach((button, column) => {
-    button.addEventListener("click", () => {
-      const direction = current && current.column === column && current.direction === "ascending" ? "descending" : "ascending";
-      render({ column, direction });
-    });
+  root.addEventListener("click", event => {
+    const button = event.target.closest("button[data-column]");
+    if (!button || !root.contains(button)) return;
+    const column = Number(button.dataset.column);
+    const direction = current && current.column === column && current.direction === "ascending" ? "descending" : "ascending";
+    render({ column, direction });
   });
   render(null);
+  new ResizeObserver(rebuildGroups).observe(root);
+  rebuildGroups();
 })();
 </script>
 </div></details>
@@ -6638,7 +6701,7 @@ const original=document.getElementById('lightbox-original');
 const close=lightbox.querySelector('.lightbox-close');
 let returnFocus=null;
 function closeLightbox(){lightbox.classList.remove('is-open');lightbox.setAttribute('aria-hidden','true');image.removeAttribute('src');image.alt='';if(returnFocus?.isConnected)returnFocus.focus()}
-document.querySelectorAll('figure a[href],#unit-base-stats tbody a[href]').forEach(link=>{const preview=link.querySelector('img');if(!preview)return;link.addEventListener('click',event=>{if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey||event.button!==0)return;event.preventDefault();returnFocus=link;lightbox.classList.toggle('is-food-image',!!link.closest('#codex-food'));lightbox.classList.toggle('is-unit-matrix',!!link.closest('#codex-units'));lightbox.classList.toggle('is-unit-image',!!link.closest('#codex-units,#codex-unit-tiers,#codex-attributes,#codex-nest')&&!link.closest('#combat-attribute-concepts'));lightbox.classList.toggle('is-nest-image',!!link.closest('#codex-nest'));image.src=link.dataset.preview||link.href;image.alt=preview.alt;original.href=link.href;title.textContent=link.closest('#codex-food')?link.closest('tr').querySelector('th[scope="row"]').textContent:link.closest('#codex-units,#codex-unit-tiers,#codex-attributes,#codex-nest')?'':link.getAttribute('href').split('/').pop();lightbox.classList.add('is-open');lightbox.setAttribute('aria-hidden','false');close.focus()})});
+document.addEventListener('click',event=>{const link=event.target.closest('figure a[href],#unit-base-stats tbody a[href]');if(!link)return;const preview=link.querySelector('img');if(!preview)return;if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey||event.button!==0)return;event.preventDefault();returnFocus=link;lightbox.classList.toggle('is-food-image',!!link.closest('#codex-food'));lightbox.classList.toggle('is-unit-matrix',!!link.closest('#codex-units'));lightbox.classList.toggle('is-unit-image',!!link.closest('#codex-units,#codex-unit-tiers,#codex-attributes,#codex-nest')&&!link.closest('#combat-attribute-concepts'));lightbox.classList.toggle('is-nest-image',!!link.closest('#codex-nest'));image.src=link.dataset.preview||link.href;image.alt=preview.alt;original.href=link.href;title.textContent=link.closest('#codex-food')?link.closest('tr').querySelector('th[scope="row"]').textContent:link.closest('#codex-units,#codex-unit-tiers,#codex-attributes,#codex-nest')?'':link.getAttribute('href').split('/').pop();lightbox.classList.add('is-open');lightbox.setAttribute('aria-hidden','false');close.focus()});
 close.addEventListener('click',closeLightbox);
 lightbox.addEventListener('click',event=>{if(event.target===lightbox)closeLightbox()});
 window.addEventListener('keydown',event=>{if(event.key==='Escape'&&lightbox.classList.contains('is-open'))closeLightbox()});
