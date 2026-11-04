@@ -7,7 +7,7 @@
   const canvas=$('unit'),marks=$('marks').getContext('2d');
   const gl=canvas.getContext('webgl',{alpha:true,premultipliedAlpha:true,preserveDrawingBuffer:true,antialias:false});
   let cpu=null,program,locations,textures=[];
-  let selected=null,revision=0,start=performance.now(),age=0,paused=matchMedia('(prefers-reduced-motion:reduce)').matches,lastFrame=-Infinity,raf;
+  let selected=null,revision=0,start=performance.now(),age=0,speed=1,paused=matchMedia('(prefers-reduced-motion:reduce)').matches,lastFrame=-Infinity,raf;
   if(gl){
     const vertex='attribute vec2 position;varying vec2 uv;void main(){uv=vec2((position.x+1.0)*.5,(1.0-position.y)*.5);gl_Position=vec4(position,0,1);}';
     const fragment=`precision highp float;varying vec2 uv;uniform sampler2D original,weights,partIds,palette;uniform vec2 delta;uniform float tint,part;
@@ -43,7 +43,17 @@
     if(action==='hurt'){const impulse=Math.sin(Math.PI*t)*Math.exp(-.8*t);return [-4*impulse*scale,2*impulse*scale];}
     return [0,0];
   }
-  function reset(){age=0;start=performance.now();}
+  function duration(){return selected?.entry.draftActions[$('action').value]?.durationMs||3600;}
+  function advance(now){
+    const elapsed=Math.max(0,now-start);start=now;
+    if(!paused&&!document.hidden)age+=elapsed*speed;
+    if($('action').value==='hurt')age=Math.min(age,duration());
+    else if($('action').value==='neutral')age=0;
+    else if(age>duration())age%=duration();
+  }
+  function setPaused(value){paused=value;$('pause').textContent=paused?'재생':'일시정지';start=performance.now();}
+  function seek(time){age=Math.max(0,Math.min(duration(),time));setPaused(true);lastFrame=-Infinity;}
+  function reset(){age=0;start=performance.now();lastFrame=-Infinity;}
   function clearSelected(){if(selected){selected.bitmap.close();selected.lease.release();selected=null;}source.clear();for(const texture of textures)gl.deleteTexture(texture);textures=[];if(gl)gl.clear(gl.COLOR_BUFFER_BIT);else cpu.clearRect(0,0,512,512);marks.clearRect(0,0,512,512);}
   async function choose(mask){
     const token=++revision;clearSelected();$('status').textContent='선택한 원화를 확인하는 중…';
@@ -102,9 +112,14 @@
   }
   entries.forEach(entry=>{const option=document.createElement('option');option.value=entry.mask;option.textContent='새싹콩 '+entry.mask.toString(16).padStart(2,'0');$('form').append(option);});
   $('form').addEventListener('change',()=>choose(+$('form').value).catch(console.error));$('action').addEventListener('change',reset);
-  $('pause').textContent=paused?'재생':'일시정지';$('pause').addEventListener('click',()=>{paused=!paused;$('pause').textContent=paused?'재생':'일시정지';if(!paused)start=performance.now()-age;});$('restart').addEventListener('click',reset);
-  function tick(now){if(!document.hidden&&now-lastFrame>=1000/(gl?30:10)){lastFrame=now;if(!paused)age=now-start;const action=$('action').value,duration=selected?.entry.draftActions[action]?.durationMs||3600,t=action==='idle'?(age%duration)/duration:Math.min(1,age/duration);draw(action,t);$('clock').textContent=(Math.min(age,action==='hurt'?duration:Infinity)/1000).toFixed(2)+'s';const stats=source.stats();$('budget').textContent=`원화 ${(stats.residentBytes/1048576).toFixed(2)} / ${(stats.byteBudget/1048576).toFixed(0)} MiB · 선택한 원화 1개만 유지`;}raf=requestAnimationFrame(tick);}
-  globalThis.SpawnerBeanRigReview={choose,draw,validate,pixels,entries,sourceStats:()=>source.stats(),pause(){paused=true;},get selected(){return selected?.entry.mask;}};
+  setPaused(paused);$('pause').addEventListener('click',()=>{advance(performance.now());setPaused(!paused);});$('restart').addEventListener('click',reset);
+  $('seek').addEventListener('input',()=>seek(+$('seek').value/1000*duration()));
+  $('previous-frame').addEventListener('click',()=>{advance(performance.now());seek(age-1000/30);});
+  $('next-frame').addEventListener('click',()=>{advance(performance.now());seek(age+1000/30);});
+  $('speed').addEventListener('change',()=>{advance(performance.now());speed=+$('speed').value;});
+  document.addEventListener('visibilitychange',()=>{start=performance.now();});
+  function tick(now){advance(now);if(!document.hidden&&now-lastFrame>=1000/(gl?30:10)){lastFrame=now;const action=$('action').value,length=duration(),t=Math.min(1,age/length);draw(action,t);$('seek').value=Math.round(t*1000);$('phase').textContent=Math.round(t*100)+'%';$('seek').setAttribute('aria-valuetext',Math.round(t*100)+'%');$('clock').textContent=(age/1000).toFixed(2)+'s';const stats=source.stats();$('budget').textContent=`원화 ${(stats.residentBytes/1048576).toFixed(2)} / ${(stats.byteBudget/1048576).toFixed(0)} MiB · 선택한 원화 1개만 유지`;}raf=requestAnimationFrame(tick);}
+  globalThis.SpawnerBeanRigReview={choose,draw,validate,pixels,entries,sourceStats:()=>source.stats(),pause(){setPaused(true);},get selected(){return selected?.entry.mask;}};
   await choose(0);raf=requestAnimationFrame(tick);
   addEventListener('pagehide',()=>{revision++;cancelAnimationFrame(raf);clearSelected();});
 })().catch(error=>{document.getElementById('status').textContent='불러오기 실패: '+error.message;console.error(error);});

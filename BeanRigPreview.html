@@ -27,6 +27,13 @@
         <canvas id="marks" width="512" height="512" aria-hidden="true"></canvas>
       </div>
       <div class="transport"><button id="pause" type="button">일시정지</button><button id="restart" type="button">처음부터</button><span id="clock">0.00s</span></div>
+      <div class="timeline">
+        <label for="seek">동작 위치 <output id="phase">0%</output></label>
+        <input id="seek" type="range" min="0" max="1000" step="1" value="0" aria-label="동작 위치">
+        <div class="transport step-controls"><button id="previous-frame" type="button">이전 프레임</button><button id="next-frame" type="button">다음 프레임</button></div>
+        <label for="speed">재생 속도<select id="speed"><option value="0.25">0.25배</option><option value="0.5">0.5배</option><option value="1" selected>1배</option></select></label>
+        <small>위치를 옮기면 일시정지합니다. 프레임 이동은 30fps 기준이며 완성된 애니메이션 프레임 수가 아닙니다.</small>
+      </div>
       <p id="status" role="status">원화와 부위 정보를 불러오는 중…</p>
       <p id="budget"></p>
     </div>
