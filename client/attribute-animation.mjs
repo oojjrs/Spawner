@@ -1,3 +1,4 @@
+import { TRIBE_CANVAS_CACHE_BUDGET } from "./canvas-cache.mjs";
 import { createTribeMorphology, TRIBE_MORPHOLOGY_ASSETS } from "./attribute-morphology.mjs";
 import { UNIT_ANIMATIONS } from "./unit-animation.mjs";
 
@@ -92,7 +93,7 @@ function drawAttachment(context, part, spec, x, y, scale, rotation, bend, flatte
 }
 
 export function createTribeAttributeAnimation(assetSource, createSurface, loadImage) {
-  const rigs = new Map(), pending = new Map(), frames = new Map(), motions = new Map();
+  const rigs = new Map(), pending = new Map(), frames = TRIBE_CANVAS_CACHE_BUDGET.createCache(), motions = new Map();
   const morphology = createTribeMorphology(createSurface, loadImage);
 
   function neutralDistance(tribe, track, reference) {
@@ -367,5 +368,5 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
     return { width: width * scale, height: height * scale };
   }
 
-  return { prepare, frame, portrait, pose, bodySize };
+  return { prepare, frame, portrait, pose, bodySize, cacheStats: TRIBE_CANVAS_CACHE_BUDGET.stats };
 }

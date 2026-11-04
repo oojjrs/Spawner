@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { createWelcomeRoster, welcomeCreatureScale, welcomeTravelMotion } from "./welcome-presentation.mjs";
+import { createWelcomeRoster, welcomeCreatureScale, prepareWelcomeChoice, welcomeTravelMotion } from "./welcome-presentation.mjs";
 import { CREATURE_IDLE_ANIMATIONS, unitMovementPosition, creatureAnimationSpeed } from "./unit-animation.mjs";
 import { unitStats } from "../server/attributes.mjs";
 
@@ -86,4 +86,21 @@ test("welcome movement keeps exact cue stamps and exposes the final landing cell
     assert.ok(Math.abs(end - (request.startedAt + duration / 1000)) < 1e-12);
     assert.ok(Math.abs(unitMovementPosition(final.agent, end, false).progress - 1) < 1e-10);
   }
+});
+
+
+test("failed antenna rig falls back to loaded basic art without stopping later choices", async () => {
+  const calls=[],errors=[];
+  const choice=await prepareWelcomeChoice({key:"pebble",variant:2},async value=>{calls.push(value.variant);if(value.variant)throw new Error("rig unavailable")},{onError:error=>errors.push(error)});
+  assert.deepEqual(choice,{key:"pebble",variant:0});assert.deepEqual(calls,[2,0]);assert.equal(errors.length,1);
+  assert.deepEqual(await prepareWelcomeChoice({key:"spring",variant:1},async()=>{}),{key:"spring",variant:1});
+});
+test("rejected neutral sources can retry, and permanently unavailable ones can be skipped",async()=>{
+  let calls=0;
+  assert.equal((await prepareWelcomeChoice({key:"dew-rabbit",variant:0},async()=>{if(++calls===1)throw new Error("decode") })).key,"dew-rabbit");
+  assert.equal(await prepareWelcomeChoice({key:"soil-mole",variant:0},async()=>{throw new Error("404")}),null);
+});
+test("a never-settling lazy source releases the rotation after its deadline",async()=>{
+  const value=await prepareWelcomeChoice({key:"pebble",variant:2},v=>v.variant?new Promise(()=>{}):Promise.resolve(),{timeoutMs:5});
+  assert.equal(value.variant,0);
 });

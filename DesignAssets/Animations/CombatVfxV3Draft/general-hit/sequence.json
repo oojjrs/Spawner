@@ -1,0 +1,47 @@
+{
+  "status": "draft-pending-user-review",
+  "purpose": "One general physical hit effect; not connected to game runtime",
+  "source": "drawn-sequence.png",
+  "sourceSha256": "20f17fa64f600e10d6f043d4752a619d3ab06afea6e4c0c01d88e88b5b64d787",
+  "sourceGrid": {
+    "columns": 4,
+    "rows": 2,
+    "cellSize": 443.5
+  },
+  "packing": "pack.py; one fixed extent transform for every cell, no motion synthesis",
+  "frameSize": 256,
+  "columns": 4,
+  "frameCount": 8,
+  "durationsMs": [
+    20,
+    30,
+    40,
+    55,
+    65,
+    75,
+    80,
+    90
+  ],
+  "loop": false,
+  "origin": {
+    "x": 128,
+    "y": 128
+  },
+  "sequence": [
+    "pinprick",
+    "compact snap",
+    "break apart",
+    "outward fragments",
+    "rotated remnants",
+    "few chips",
+    "tiny flecks",
+    "empty"
+  ],
+  "reviewNotes": [
+    "The first generated candidate had a large pale halo and was rejected.",
+    "This corrected drawing removes the diffuse halo; shape and material still require user acceptance.",
+    "Frame 8 has no alpha >=16 in the original (maximum alpha 1 generator noise)."
+  ],
+  "image": "DesignAssets/Animations/CombatVfxV3Draft/general-hit/hit.webp",
+  "imageSha256": "a6ef48b5a50e1fc4e10d277e4d9ea7bfe6b9faab02e72bf8430a654b5e79ea1d"
+}

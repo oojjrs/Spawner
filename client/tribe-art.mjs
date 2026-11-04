@@ -261,5 +261,5 @@ export function createTribeArt(definitions, assetSource) {
     return attributes.bodySize(tribe, appearance, portrait ? units.get(tribe)?.box : null);
   }
 
-  return { preparePreview, prepareUnit, sprite, bounds, prepareBounds, drawPreview, animationFrame, animationPose, bodySize };
+  return { preparePreview, prepareUnit, sprite, bounds, prepareBounds, drawPreview, animationFrame, animationPose, bodySize, animationCacheStats: attributes.cacheStats };
 }

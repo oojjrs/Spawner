@@ -61,3 +61,23 @@ export function welcomeTravelMotion(model, { key, attributes = {}, width, size, 
   const x = moving ? width / 2 + (phase === "enter" ? steps * cell : 0) + position.x * cell : width / 2;
   return { agent, position, x, durationMs, cell };
 }
+
+// A rejected decode or lazy rig must not leave the rotation waiting forever.
+export async function prepareWelcomeChoice(choice, prepare, { timeoutMs = 15000, onError = () => {} } = {}) {
+  async function attempt(value) {
+    let timer;
+    try { await Promise.race([Promise.resolve().then(() => prepare(value)), new Promise((_, reject) => {
+      timer = setTimeout(() => reject(new Error("Welcome asset preparation timed out")), timeoutMs);
+    })]); return value; }
+    finally { clearTimeout(timer); }
+  }
+  try { return await attempt(choice); }
+  catch (error) {
+    onError(error, choice);
+    // Basic tribe art is already loaded before the rotation starts. Keep the
+    // character moving with that art; a later round may retry its lazy rig.
+    const fallback = ["bean", "spore", "pebble", "spring"].includes(choice.key) && choice.variant > 0 ? { ...choice, variant: 0 } : choice;
+    try { return await attempt(fallback); }
+    catch (retryError) { onError(retryError, fallback); return null; }
+  }
+}

@@ -2693,6 +2693,124 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
       "ready": false
     }
   },
+  "spore/01": {
+    "source": {
+      "tribe": "spore",
+      "mask": 1,
+      "sourceId": "unit-appearance-v1-spore-01-neutral-v1",
+      "approvalState": "pending",
+      "approvalRef": null,
+      "sourceHash": "ec422a18982b5fefa7b2f503632dda6bac9777a03cba48a01f7d5291d658977a",
+      "frameWidth": 512,
+      "frameHeight": 512,
+      "pivot": {
+        "x": 256,
+        "y": 448
+      },
+      "camera": {
+        "pixelsPerWorld": 512
+      },
+      "cameraVerified": false,
+      "visualBits": [
+        "blade"
+      ],
+      "coreReference": {
+        "sourceId": "unit-appearance-v1-spore-01-neutral-v1",
+        "verified": false,
+        "coreBounds": null,
+        "landmarks": {
+          "leftEye": [
+            236.15206837606837,
+            405.3628034188034
+          ],
+          "rightEye": [
+            276.06181196581196,
+            405.3628034188034
+          ],
+          "ground": [
+            256,
+            448
+          ]
+        },
+        "canonicalSpeciesSize": 0.38,
+        "canonicalCoreLongest": 194.56
+      },
+      "provenance": {
+        "kind": "imagegen-integrated-whole-body",
+        "sourceHash": "fe4a90ea47be4edb748c5762e608cbbb1c420d0b61f13333c6ef535e834c1074",
+        "referenceVerified": false,
+        "reuseAuthorized": false
+      }
+    },
+    "actions": {},
+    "previewStatus": {},
+    "readiness": {
+      "sourceApproved": false,
+      "cameraVerified": false,
+      "actionSetComplete": false,
+      "worldReady": false,
+      "ready": false
+    }
+  },
+  "spore/02": {
+    "source": {
+      "tribe": "spore",
+      "mask": 2,
+      "sourceId": "unit-appearance-v1-spore-02-neutral-v1",
+      "approvalState": "pending",
+      "approvalRef": null,
+      "sourceHash": "0514364bd2068a184f79b40e9bb5ed2162423c57cfd4e408571b0b91273aa45d",
+      "frameWidth": 512,
+      "frameHeight": 512,
+      "pivot": {
+        "x": 256,
+        "y": 448
+      },
+      "camera": {
+        "pixelsPerWorld": 512
+      },
+      "cameraVerified": false,
+      "visualBits": [
+        "carapace"
+      ],
+      "coreReference": {
+        "sourceId": "unit-appearance-v1-spore-02-neutral-v1",
+        "verified": false,
+        "coreBounds": null,
+        "landmarks": {
+          "leftEye": [
+            236.8036923076923,
+            408.52458119658115
+          ],
+          "rightEye": [
+            276.0482735042735,
+            408.52458119658115
+          ],
+          "ground": [
+            256,
+            448
+          ]
+        },
+        "canonicalSpeciesSize": 0.38,
+        "canonicalCoreLongest": 194.56
+      },
+      "provenance": {
+        "kind": "imagegen-integrated-whole-body",
+        "sourceHash": "fe326448660d4de7fd138873e45e94e1904be8e4db132b0f10e0ac7ceae677e7",
+        "referenceVerified": false,
+        "reuseAuthorized": false
+      }
+    },
+    "actions": {},
+    "previewStatus": {},
+    "readiness": {
+      "sourceApproved": false,
+      "cameraVerified": false,
+      "actionSetComplete": false,
+      "worldReady": false,
+      "ready": false
+    }
+  },
   "spore/04": {
     "source": {
       "tribe": "spore",
@@ -2738,6 +2856,126 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
       "provenance": {
         "kind": "imagegen-integrated-whole-body",
         "sourceHash": "5d8ec10efbd6eda6c45f3060644fe5c88896e211c151c5979b28d4122f38d76b",
+        "referenceVerified": false,
+        "reuseAuthorized": false
+      }
+    },
+    "actions": {},
+    "previewStatus": {},
+    "readiness": {
+      "sourceApproved": false,
+      "cameraVerified": false,
+      "actionSetComplete": false,
+      "worldReady": false,
+      "ready": false
+    }
+  },
+  "spore/05": {
+    "source": {
+      "tribe": "spore",
+      "mask": 5,
+      "sourceId": "unit-appearance-v1-spore-05-neutral-v1",
+      "approvalState": "pending",
+      "approvalRef": null,
+      "sourceHash": "22931373726fdcb5ce9e46a0e62c68578e1670dc4b1ea249db7941bed0b113ee",
+      "frameWidth": 512,
+      "frameHeight": 512,
+      "pivot": {
+        "x": 256,
+        "y": 448
+      },
+      "camera": {
+        "pixelsPerWorld": 512
+      },
+      "cameraVerified": false,
+      "visualBits": [
+        "blade",
+        "antenna"
+      ],
+      "coreReference": {
+        "sourceId": "unit-appearance-v1-spore-05-neutral-v1",
+        "verified": false,
+        "coreBounds": null,
+        "landmarks": {
+          "leftEye": [
+            236.3431794871795,
+            405.3628034188034
+          ],
+          "rightEye": [
+            275.2551794871795,
+            405.3628034188034
+          ],
+          "ground": [
+            256,
+            448
+          ]
+        },
+        "canonicalSpeciesSize": 0.38,
+        "canonicalCoreLongest": 194.56
+      },
+      "provenance": {
+        "kind": "imagegen-integrated-whole-body",
+        "sourceHash": "fe4a90ea47be4edb748c5762e608cbbb1c420d0b61f13333c6ef535e834c1074",
+        "referenceVerified": false,
+        "reuseAuthorized": false
+      }
+    },
+    "actions": {},
+    "previewStatus": {},
+    "readiness": {
+      "sourceApproved": false,
+      "cameraVerified": false,
+      "actionSetComplete": false,
+      "worldReady": false,
+      "ready": false
+    }
+  },
+  "spore/06": {
+    "source": {
+      "tribe": "spore",
+      "mask": 6,
+      "sourceId": "unit-appearance-v1-spore-06-neutral-v1",
+      "approvalState": "pending",
+      "approvalRef": null,
+      "sourceHash": "9301191af9e4705a1d001f74ec3efeca461895ad1e02f83690a9eee203cef688",
+      "frameWidth": 512,
+      "frameHeight": 512,
+      "pivot": {
+        "x": 256,
+        "y": 448
+      },
+      "camera": {
+        "pixelsPerWorld": 512
+      },
+      "cameraVerified": false,
+      "visualBits": [
+        "carapace",
+        "antenna"
+      ],
+      "coreReference": {
+        "sourceId": "unit-appearance-v1-spore-06-neutral-v1",
+        "verified": false,
+        "coreBounds": null,
+        "landmarks": {
+          "leftEye": [
+            235.6531965811966,
+            408.52458119658115
+          ],
+          "rightEye": [
+            275.39664957264955,
+            408.52458119658115
+          ],
+          "ground": [
+            256,
+            448
+          ]
+        },
+        "canonicalSpeciesSize": 0.38,
+        "canonicalCoreLongest": 194.56
+      },
+      "provenance": {
+        "kind": "imagegen-integrated-whole-body",
+        "sourceHash": "fe326448660d4de7fd138873e45e94e1904be8e4db132b0f10e0ac7ceae677e7",
         "referenceVerified": false,
         "reuseAuthorized": false
       }
@@ -2811,6 +3049,126 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
       "ready": false
     }
   },
+  "spore/09": {
+    "source": {
+      "tribe": "spore",
+      "mask": 9,
+      "sourceId": "unit-appearance-v1-spore-09-neutral-v1",
+      "approvalState": "pending",
+      "approvalRef": null,
+      "sourceHash": "ba06f051f894a18a43a0508988347b4ce66a7947f80b38e6befd38daaf8b517d",
+      "frameWidth": 512,
+      "frameHeight": 512,
+      "pivot": {
+        "x": 256,
+        "y": 448
+      },
+      "camera": {
+        "pixelsPerWorld": 512
+      },
+      "cameraVerified": false,
+      "visualBits": [
+        "blade",
+        "feet"
+      ],
+      "coreReference": {
+        "sourceId": "unit-appearance-v1-spore-09-neutral-v1",
+        "verified": false,
+        "coreBounds": null,
+        "landmarks": {
+          "leftEye": [
+            236.31835897435897,
+            392.90905982905986
+          ],
+          "rightEye": [
+            275.8955213675214,
+            392.90905982905986
+          ],
+          "ground": [
+            256,
+            448
+          ]
+        },
+        "canonicalSpeciesSize": 0.38,
+        "canonicalCoreLongest": 194.56
+      },
+      "provenance": {
+        "kind": "imagegen-integrated-whole-body",
+        "sourceHash": "fe4a90ea47be4edb748c5762e608cbbb1c420d0b61f13333c6ef535e834c1074",
+        "referenceVerified": false,
+        "reuseAuthorized": false
+      }
+    },
+    "actions": {},
+    "previewStatus": {},
+    "readiness": {
+      "sourceApproved": false,
+      "cameraVerified": false,
+      "actionSetComplete": false,
+      "worldReady": false,
+      "ready": false
+    }
+  },
+  "spore/0a": {
+    "source": {
+      "tribe": "spore",
+      "mask": 10,
+      "sourceId": "unit-appearance-v1-spore-0a-neutral-v1",
+      "approvalState": "pending",
+      "approvalRef": null,
+      "sourceHash": "adb0d16c936b265cc96fb4b528955b37b4d6b36b4b2a57ee84f185a351435689",
+      "frameWidth": 512,
+      "frameHeight": 512,
+      "pivot": {
+        "x": 256,
+        "y": 448
+      },
+      "camera": {
+        "pixelsPerWorld": 512
+      },
+      "cameraVerified": false,
+      "visualBits": [
+        "carapace",
+        "feet"
+      ],
+      "coreReference": {
+        "sourceId": "unit-appearance-v1-spore-0a-neutral-v1",
+        "verified": false,
+        "coreBounds": null,
+        "landmarks": {
+          "leftEye": [
+            236.8036923076923,
+            399.89326495726493
+          ],
+          "rightEye": [
+            276.0482735042735,
+            399.89326495726493
+          ],
+          "ground": [
+            256,
+            448
+          ]
+        },
+        "canonicalSpeciesSize": 0.38,
+        "canonicalCoreLongest": 194.56
+      },
+      "provenance": {
+        "kind": "imagegen-integrated-whole-body",
+        "sourceHash": "fe326448660d4de7fd138873e45e94e1904be8e4db132b0f10e0ac7ceae677e7",
+        "referenceVerified": false,
+        "reuseAuthorized": false
+      }
+    },
+    "actions": {},
+    "previewStatus": {},
+    "readiness": {
+      "sourceApproved": false,
+      "cameraVerified": false,
+      "actionSetComplete": false,
+      "worldReady": false,
+      "ready": false
+    }
+  },
   "spore/0c": {
     "source": {
       "tribe": "spore",
@@ -2857,6 +3215,128 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
       "provenance": {
         "kind": "imagegen-integrated-whole-body",
         "sourceHash": "5d8ec10efbd6eda6c45f3060644fe5c88896e211c151c5979b28d4122f38d76b",
+        "referenceVerified": false,
+        "reuseAuthorized": false
+      }
+    },
+    "actions": {},
+    "previewStatus": {},
+    "readiness": {
+      "sourceApproved": false,
+      "cameraVerified": false,
+      "actionSetComplete": false,
+      "worldReady": false,
+      "ready": false
+    }
+  },
+  "spore/0d": {
+    "source": {
+      "tribe": "spore",
+      "mask": 13,
+      "sourceId": "unit-appearance-v1-spore-0d-neutral-v1",
+      "approvalState": "pending",
+      "approvalRef": null,
+      "sourceHash": "87b6b10edaf1f6877f3edf3bd0aff82560a866cd1e618ad141b4df9c91dc1612",
+      "frameWidth": 512,
+      "frameHeight": 512,
+      "pivot": {
+        "x": 256,
+        "y": 448
+      },
+      "camera": {
+        "pixelsPerWorld": 512
+      },
+      "cameraVerified": false,
+      "visualBits": [
+        "blade",
+        "antenna",
+        "feet"
+      ],
+      "coreReference": {
+        "sourceId": "unit-appearance-v1-spore-0d-neutral-v1",
+        "verified": false,
+        "coreBounds": null,
+        "landmarks": {
+          "leftEye": [
+            236.50947008547007,
+            392.90905982905986
+          ],
+          "rightEye": [
+            275.2551794871795,
+            392.90905982905986
+          ],
+          "ground": [
+            256,
+            448
+          ]
+        },
+        "canonicalSpeciesSize": 0.38,
+        "canonicalCoreLongest": 194.56
+      },
+      "provenance": {
+        "kind": "imagegen-integrated-whole-body",
+        "sourceHash": "fe4a90ea47be4edb748c5762e608cbbb1c420d0b61f13333c6ef535e834c1074",
+        "referenceVerified": false,
+        "reuseAuthorized": false
+      }
+    },
+    "actions": {},
+    "previewStatus": {},
+    "readiness": {
+      "sourceApproved": false,
+      "cameraVerified": false,
+      "actionSetComplete": false,
+      "worldReady": false,
+      "ready": false
+    }
+  },
+  "spore/0e": {
+    "source": {
+      "tribe": "spore",
+      "mask": 14,
+      "sourceId": "unit-appearance-v1-spore-0e-neutral-v1",
+      "approvalState": "pending",
+      "approvalRef": null,
+      "sourceHash": "40027c8c48a436d8a6dc4016b3ce11fd0116c185fb1a42066fc7da0f27a671a3",
+      "frameWidth": 512,
+      "frameHeight": 512,
+      "pivot": {
+        "x": 256,
+        "y": 448
+      },
+      "camera": {
+        "pixelsPerWorld": 512
+      },
+      "cameraVerified": false,
+      "visualBits": [
+        "carapace",
+        "antenna",
+        "feet"
+      ],
+      "coreReference": {
+        "sourceId": "unit-appearance-v1-spore-0e-neutral-v1",
+        "verified": false,
+        "coreBounds": null,
+        "landmarks": {
+          "leftEye": [
+            235.6531965811966,
+            399.89326495726493
+          ],
+          "rightEye": [
+            275.39664957264955,
+            399.89326495726493
+          ],
+          "ground": [
+            256,
+            448
+          ]
+        },
+        "canonicalSpeciesSize": 0.38,
+        "canonicalCoreLongest": 194.56
+      },
+      "provenance": {
+        "kind": "imagegen-integrated-whole-body",
+        "sourceHash": "fe326448660d4de7fd138873e45e94e1904be8e4db132b0f10e0ac7ceae677e7",
         "referenceVerified": false,
         "reuseAuthorized": false
       }

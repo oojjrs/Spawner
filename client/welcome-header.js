@@ -92,7 +92,8 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
         if (image.naturalWidth !== animation.frameSize * animation.columns) throw new Error("Welcome source geometry mismatch: " + animation.image);
         sources.set(animation.image, image);
       })());
-      await pendingSources.get(animation.image);
+      try { await pendingSources.get(animation.image); }
+      catch (error) { pendingSources.delete(animation.image); throw error; }
     }));
     if (!neutralMetrics.has(choice.key)) {
       const poses = neutralAnimations(choice.key);
@@ -127,7 +128,13 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
     const choice = nextChoice();
     upcoming = { choice, ready: false };
     const preparation = upcoming;
-    prepareChoice(choice).then(() => { preparation.ready = true; });
+    globalThis.Spawner.prepareWelcomeChoice(choice, prepareChoice, {
+      onError: (error, failed) => console.warn("Welcome asset unavailable:", failed.key, failed.variant, error)
+    }).then(prepared => {
+      if (upcoming !== preparation) return;
+      if (prepared) { preparation.choice = prepared; preparation.ready = true; }
+      else setTimeout(() => { if (upcoming === preparation) prepareUpcoming(); }, 100);
+    });
   }
   const beanParts = new Map();
   await Promise.all(["body", "sprout-left", "sprout-right", "sprout-stem", "green-foot", "root-rig", "antenna-1", "strength-1"].map(async name => {

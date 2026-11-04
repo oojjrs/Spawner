@@ -1,0 +1,29 @@
+{
+  "status": "draft-pending-user-review",
+  "kind": "key-pose-reference-not-animation",
+  "tribe": "bean",
+  "mask": 31,
+  "approvedNeutral": "DesignAssets/Animations/UnitAppearanceV1/bean/1f/Source/neutral.png",
+  "approvedNeutralSha256": "030e75b71127be552ac3ab9bdf51c707884d5c234706b1803c10ba2abcb39dfb",
+  "image": "Research/UnitAppearance/2026-11-04/bean-1f/keyposes-draft.png",
+  "imageSha256": "cf5ea4c04115e80328a5bde1727c6835eba4884298cc99866813938a716709c8",
+  "dimensions": [
+    2172,
+    724
+  ],
+  "proposedPoses": [
+    "melee-anticipation",
+    "melee-contact",
+    "ranged-release",
+    "death-end"
+  ],
+  "sourceColumns": 4,
+  "cameraVerified": false,
+  "runtimeInstalled": false,
+  "notes": [
+    "Integrated body design referenced from the approved bean/1f neutral.",
+    "New pose drawings have not been approved or camera-registered.",
+    "Do not treat this sheet as 512px runtime frames or completed motion.",
+    "Register one shared scale and camera against original idle landmarks before animating; never fit each pose to its own bounds."
+  ]
+}

@@ -179,11 +179,16 @@ export function createUnitAppearanceCache(loadSource, makeBitmap, pixelBudget) {
           selected = Math.max(minimumRatio, selected / 2); pixels = pixelsAt(animation, selected);
         }
         if (pixels + residentPixels > pixelBudget) return null;
-        const source = await loadSource(animation.image);
-        const blob = typeof Blob !== "undefined" && source instanceof Blob;
-        const sourceWidth = blob ? width : source.naturalWidth || source.width, sourceHeight = blob ? height : source.naturalHeight || source.height;
-        if (sourceWidth !== width || sourceHeight !== height) throw new Error(`APPEARANCE ATLAS GEOMETRY MISMATCH : ${animation.image}`);
-        const bitmap = await makeBitmap(source, { resizeWidth: Math.round(width * selected), resizeHeight: Math.round(height * selected), resizeQuality: "high" });
+        const acquired = await loadSource(animation.image);
+        const lease = acquired && typeof acquired.release === "function" && acquired.blob ? acquired : null;
+        const source = lease?.blob || acquired;
+        let bitmap;
+        try {
+          const blob = typeof Blob !== "undefined" && source instanceof Blob;
+          const sourceWidth = blob ? width : source.naturalWidth || source.width, sourceHeight = blob ? height : source.naturalHeight || source.height;
+          if (sourceWidth !== width || sourceHeight !== height) throw new Error(`APPEARANCE ATLAS GEOMETRY MISMATCH : ${animation.image}`);
+          bitmap = await makeBitmap(source, { resizeWidth: Math.round(width * selected), resizeHeight: Math.round(height * selected), resizeQuality: "high" });
+        } finally { lease?.release(); }
         const actualPixels = bitmap.width * bitmap.height;
         if (actualPixels + residentPixels > pixelBudget) { bitmap.close?.(); throw new Error("APPEARANCE DECODED BUDGET EXCEEDED"); }
         decodes++; current.bitmap = bitmap; current.pixels = actualPixels; current.ratio = selected; current.rasterScaleX = bitmap.width / width; current.rasterScaleY = bitmap.height / height; residentPixels += actualPixels;

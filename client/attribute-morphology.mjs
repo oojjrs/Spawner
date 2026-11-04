@@ -1,3 +1,4 @@
+import { TRIBE_CANVAS_CACHE_BUDGET } from "./canvas-cache.mjs";
 const root = tribe => "DesignAssets/Tribes/" + tribe + "/Animations/Attributes/v2/Parts/";
 const coreKeys = ["antenna", "strength"];
 const coreNames = Array.from({ length: 4 }, (_, mask) => "body-" + (coreKeys.filter((key, index) => mask & 1 << index).join("-") || "base"));
@@ -106,11 +107,13 @@ function outlineAt(part, u) {
 }
 
 export function createTribeMorphology(createSurface, loadImage) {
-  const frames = new Map();
+  const frames = TRIBE_CANVAS_CACHE_BUDGET.createCache(), bases = TRIBE_CANVAS_CACHE_BUDGET.createCache();
 
   async function prepare(rig) {
     if (!rig.morphs) return;
-    rig.morphs.cache = new Map();
+    rig.morphs.cache = TRIBE_CANVAS_CACHE_BUDGET.createCache(pose =>
+      [...new Set([pose.surface, pose.front, ...pose.eyes.map(eye => eye.sprite)].filter(Boolean))]
+        .reduce((sum, image) => sum + image.width * image.height, 0));
     await Promise.all(Object.entries(rig.morphs.parts).map(async ([name, part]) => {
       part.sprite = await loadImage(part.image);
       const surface = createSurface(part.width, part.height), context = surface.getContext("2d", { willReadFrequently: true }); context.drawImage(part.sprite, 0, 0);
@@ -190,14 +193,14 @@ export function createTribeMorphology(createSurface, loadImage) {
       if (pixels[(y * size + x) * 4 + 3] < 80) continue;
       outline.push([x / size, (y + 1) / size]); break;
     }
-    const result = { tribe: rig.tribe, surface, front, eyes, outline, neck: neck.slice(0, 2), torso: torso.slice(0, 2), torsoWidth: torso[2], root: [rootRow[0], track.cut], tip: track.tip, bases: new Map() };
+    const result = { tribe: rig.tribe, surface, front, eyes, outline, neck: neck.slice(0, 2), torso: torso.slice(0, 2), torsoWidth: torso[2], root: [rootRow[0], track.cut], tip: track.tip, cacheKey: rig.tribe + ":" + key };
     rig.morphs.cache.set(key, result); if (rig.morphs.cache.size > 80) rig.morphs.cache.delete(rig.morphs.cache.keys().next().value);
     return result;
   }
 
   function sourceBase(pose, track, removeCap, removeBody, size) {
-    const key = [removeCap, removeBody].join(":");
-    if (pose.bases.has(key)) return pose.bases.get(key);
+    const key = [pose.cacheKey, removeCap, removeBody].join(":");
+    if (bases.has(key)) return bases.get(key);
     const surface = createSurface(size, size), context = surface.getContext("2d"); context.drawImage(pose.surface, 0, 0);
     const image = context.getImageData(0, 0, size, size), pixels = image.data, k = size / 144, body = track.body, cap = track.cap;
     for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
@@ -206,7 +209,7 @@ export function createTribeMorphology(createSurface, loadImage) {
       if (y >= track.cut * k && !coral || removeCap && inCap && (coral || y < body[1] * k || x < (body[0] - 1) * k || x > (body[0] + body[2] + 1) * k) ||
         removeBody && !coral && x >= (body[0] - 2) * k && x <= (body[0] + body[2] + 2) * k && y >= (body[1] - 2) * k) pixels[p + 3] = 0;
     }
-    context.putImageData(image, 0, 0); pose.bases.set(key, surface); return surface;
+    context.putImageData(image, 0, 0); bases.set(key, surface); return surface;
   }
 
   function frame(rig, attributes, source, animation, index, action, time, motion) {

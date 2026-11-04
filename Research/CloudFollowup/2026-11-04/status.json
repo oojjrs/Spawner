@@ -1,0 +1,38 @@
+{
+  "recorded_at": "2026-11-04T14:33:58+00:00",
+  "source_base": "da9b724",
+  "scope": [
+    "welcome-recovery-and-memory",
+    "neutral-stat-curves",
+    "dna-layout-review",
+    "appearance-source-state-pipeline",
+    "vfx-hit-draft"
+  ],
+  "tests_passed": 35,
+  "appearance": {
+    "registered": 52,
+    "approved": 38,
+    "pending_approval": 14,
+    "world_complete": 0,
+    "slots": 128
+  },
+  "review_pages": [
+    "NeutralStats.html",
+    "DnaLayouts.html",
+    "UnitPreview.html",
+    "VfxPreview.html"
+  ],
+  "keyposes": "Research/UnitAppearance/2026-11-04/bean-1f/keyposes-draft.json",
+  "blocked_on_review": [
+    "spore-14-source-shapes",
+    "general-hit-style",
+    "bean-1f-new-pose-drawings"
+  ],
+  "known_validation_limits": [
+    "file navigation blocked by browser administrator",
+    "full runtime image audit has 38 pre-existing registration/size failures"
+  ],
+  "cdn_commit": "412dbc46d059ea3a879f818efcf29471ae4fe120",
+  "site_version_before": 25,
+  "publication": "pending"
+}

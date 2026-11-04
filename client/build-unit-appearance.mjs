@@ -14,7 +14,7 @@ function assetPath(image) {
   return path;
 }
 function hashFile(image) { return createHash("sha256").update(readFileSync(assetPath(image))).digest("hex"); }
-function writeText(path, text) { mkdirSync(dirname(path), { recursive: true }); writeFileSync(path, text.replace(/\r?\n/g, "\r\n"), "utf8"); }
+function writeText(path, text) { mkdirSync(dirname(path), { recursive: true }); writeFileSync(path, text.replace(/\r?\n/g, existsSync(path) && readFileSync(path, "utf8").includes("\r\n") ? "\r\n" : "\n"), "utf8"); }
 function pick(value, keys) { return Object.fromEntries(keys.filter(key => value?.[key] !== undefined).map(key => [key, value[key]])); }
 function registerFile(image) {
   if (files[image]) return;

@@ -14,7 +14,11 @@ export function prepareSite(destination, readSource, revision, assetDirectory) {
   if (manifest.project_id !== sourceManifest.project_id || manifest.static?.directory !== "dist") throw new Error("Spawner Site를 확인해 주세요.");
   const html = readSource("Spawner.html").toString("utf8")
     .replace(/^  <script src="\.\/client\/local-assets\.js"><\/script>\r?\n/m, "");
-  const clients = new Map([...html.matchAll(/<(?:script|link)\b[^>]*(?:src|href)="\.\/(client\/[^"]+)"/g)]
+  const pages = new Map([["Spawner.html", html]]);
+  for (const name of ["NeutralStats.html", "DnaLayouts.html", "UnitPreview.html", "VfxPreview.html"]) {
+    if (existsSync(join(root, name))) pages.set(name, readSource(name).toString("utf8"));
+  }
+  const clients = new Map([...pages.values()].flatMap(page => [...page.matchAll(/<(?:script|link)\b[^>]*(?:src|href)="\.\/(client\/[^"]+)"/g)])
     .map(match => [match[1], readSource(match[1]).toString("utf8")]));
   if (clients.has("client/welcome-art.js")) {
     const welcomePath = "DesignAssets/Welcome/forest-clearing.webp";
@@ -23,7 +27,7 @@ export function prepareSite(destination, readSource, revision, assetDirectory) {
     clients.set("client/welcome-art.js", "globalThis.SpawnerWelcomeBackground = " + JSON.stringify(welcomePath) + ";\r\n");
   }
   const assets = new Map();
-  for (const source of [html, ...clients.values()]) {
+  for (const source of [...pages.values(), ...clients.values()]) {
     if (/data:[^;,\s]+;base64,/.test(source)) throw new Error("내장 자산을 DesignAssets 파일로 분리해 주세요.");
     const dependencies = source.replace(/modules\["client\/image-scales\.mjs"\] = \(\(\) => \{[\s\S]*?^\}\)\(\);/m, "");
     for (const match of dependencies.matchAll(/["'](DesignAssets\/[^"'?#\r\n]+)["']/g)) {
@@ -48,7 +52,7 @@ export function prepareSite(destination, readSource, revision, assetDirectory) {
     localAssets.has(name) ? "./welcome-assets/" + file : assetBase + file]));
   for (const name of localAssets) if (assets.has(name)) write("welcome-assets/" + assetFiles.get(name), assets.get(name));
   write("index.html", html);
-  write("Spawner.html", html);
+  for (const [name, page] of pages) write(name, page);
   for (const [name, source] of clients) {
     if (name === "client/assets.js") {
       const marker = "const sources = Object.create(null);";
