@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Spawner · 전투 실험실</title><style>:root{color-scheme:light;font-family:"Segoe UI","Malgun Gothic",sans-serif;color:#293d32;background:#eef0e8;font-synthesis:none}
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Spawner · 전투 실험실</title><style>
+:root{color-scheme:light;font-family:"Segoe UI","Malgun Gothic",sans-serif;color:#293d32;background:#eef0e8;font-synthesis:none}
 *{box-sizing:border-box}
 body{margin:0;background:radial-gradient(ellipse at 50% 0,#dce4d0,transparent 650px)}
 button,select,input{font:inherit;color:inherit}
@@ -2482,8 +2483,8 @@ const IMAGE_SCALES = Object.freeze({
     0.2109375
   ],
   "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.webp": [
-    0.197265625,
-    0.197265625
+    1,
+    1
   ],
   "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp": [
     0.203125,
@@ -2506,8 +2507,8 @@ const IMAGE_SCALES = Object.freeze({
     0.4375
   ],
   "DesignAssets/Tribes/pebble/AnimationStudies/walk-in-place-v1/walk.webp": [
-    0.20703125,
-    0.20703125
+    1,
+    1
   ],
   "DesignAssets/Tribes/pebble/AnimationStudies/roll-v2/roll-v2.webp": [
     0.20703125,
@@ -2526,8 +2527,8 @@ const IMAGE_SCALES = Object.freeze({
     0.0733652312599681
   ],
   "DesignAssets/Tribes/spore/Animations/Units/jump/jump.webp": [
-    0.19140625,
-    0.19140625
+    1,
+    1
   ],
   "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/right/attack.webp": [
     0.19921875,
@@ -2546,8 +2547,8 @@ const IMAGE_SCALES = Object.freeze({
     0.4375
   ],
   "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/walk-v2.webp": [
-    0.2109375,
-    0.2109375
+    1,
+    1
   ],
   "DesignAssets/Tribes/spore/BaseParts/body.png": [
     0.439453125,
@@ -2562,8 +2563,8 @@ const IMAGE_SCALES = Object.freeze({
     0.06937799043062201
   ],
   "DesignAssets/Tribes/spring/Animations/Units/jump/jump.webp": [
-    0.306640625,
-    0.306640625
+    1,
+    1
   ],
   "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp": [
     0.318359375,
@@ -2578,8 +2579,8 @@ const IMAGE_SCALES = Object.freeze({
     0.318359375
   ],
   "DesignAssets/Tribes/spring/AnimationStudies/flow-v4/flow-v4.webp": [
-    0.31640625,
-    0.31640625
+    1,
+    1
   ],
   "DesignAssets/Tribes/spring/AnimationStudies/hurt-v2/hurt-v2.webp": [
     0.318359375,
@@ -2664,22 +2665,40 @@ return { IMAGE_SCALES };
 })();
 modules["client/unit-sprite-registration.mjs"] = (() => {
 const UNIT_SPRITE_REGISTRATION = Object.freeze({
-  "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.webp": Object.freeze({"frameSize":276,"pivotX":138,"pivotY":242,"viewSize":276,"registrationScale":1.2321428571428572}),
-  "DesignAssets/Animations/UnitAttack/attack.png": Object.freeze({"frameSize":148,"pivotX":74,"pivotY":130,"viewSize":148,"registrationScale":1.2333333333333334}),
-  "DesignAssets/Animations/UnitHurt/V3/hurt.png": Object.freeze({"frameSize":148,"pivotX":74,"pivotY":130,"viewSize":148,"registrationScale":1.2333333333333334}),
-  "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp": Object.freeze({"frameSize":144,"pivotX":72,"pivotY":126,"viewSize":144,"registrationScale":1.2307692307692308}),
-  "DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp": Object.freeze({"frameSize":240,"pivotX":120,"pivotY":210,"viewSize":240,"registrationScale":1.0714285714285714}),
-  "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/right/attack.webp": Object.freeze({"frameSize":110,"pivotX":55,"pivotY":96,"viewSize":110,"registrationScale":1.0784313725490196}),
-  "DesignAssets/Tribes/spore/AnimationStudies/hurt-v2/hurt-v2.webp": Object.freeze({"frameSize":110,"pivotX":55,"pivotY":96,"viewSize":110,"registrationScale":1.0784313725490196}),
-  "DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png": Object.freeze({"frameSize":110,"pivotX":55,"pivotY":96,"viewSize":110,"registrationScale":1.0784313725490196}),
-  "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp": Object.freeze({"frameSize":224,"pivotX":112,"pivotY":196,"viewSize":224,"registrationScale":1}),
-  "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp": Object.freeze({"frameSize":104,"pivotX":52,"pivotY":91,"viewSize":104,"registrationScale":1}),
-  "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp": Object.freeze({"frameSize":106,"pivotX":53,"pivotY":93,"viewSize":106,"registrationScale":1.0095238095238095}),
-  "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png": Object.freeze({"frameSize":106,"pivotX":53,"pivotY":93,"viewSize":106,"registrationScale":1.0095238095238095}),
-  "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp": Object.freeze({"frameSize":224,"pivotX":112,"pivotY":196,"viewSize":224,"registrationScale":1}),
-  "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp": Object.freeze({"frameSize":164,"pivotX":82,"pivotY":144,"viewSize":164,"registrationScale":1.0061349693251533}),
-  "DesignAssets/Tribes/spring/AnimationStudies/hurt-v2/hurt-v2.webp": Object.freeze({"frameSize":164,"pivotX":82,"pivotY":144,"viewSize":164,"registrationScale":1.0061349693251533}),
-  "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png": Object.freeze({"frameSize":164,"pivotX":82,"pivotY":144,"viewSize":164,"registrationScale":1.0061349693251533}),
+  "DesignAssets/Animations/CreatureWalkV2/flower-tail-bird/walk.webp": Object.freeze({"frameSize":388,"viewSize":388,"pivotX":170.0,"pivotY":320.0,"groundRadiusX":0.14433,"groundRadiusY":0.043814,"registrationScale":1,"cyclesPerCell":1.0}),
+  "DesignAssets/Animations/CreatureWalkV2/dew-rabbit/walk.webp": Object.freeze({"frameSize":433,"viewSize":429.51,"pivotX":221.885,"pivotY":401.035,"groundRadiusX":0.199041,"groundRadiusY":0.03717,"registrationScale":1,"travelWindow":[0.18,0.56],"cyclesPerCell":1}),
+  "DesignAssets/Animations/CreatureWalkV2/soil-mole/walk.webp": Object.freeze({"frameSize":355,"viewSize":344.35,"pivotX":176.05,"pivotY":241.135,"groundRadiusX":0.387324,"groundRadiusY":0.087324,"registrationScale":1,"cyclesPerCell":2.5}),
+  "DesignAssets/Animations/CreatureWalkV2/bundle-snail/walk.webp": Object.freeze({"frameSize":398,"viewSize":374.12,"pivotX":201.1,"pivotY":294.83,"groundRadiusX":0.288945,"groundRadiusY":0.04397,"registrationScale":1,"travelWindow":[0.22,0.82],"cyclesPerCell":1,"frameGeometry":{"0":{"pivotX":200.6,"pivotY":294.83},"1":{"pivotX":201.6,"pivotY":294.83},"2":{"pivotX":201.6,"pivotY":295.58},"3":{"pivotX":199.6,"pivotY":293.83},"4":{"pivotX":202.1,"pivotY":295.33},"5":{"pivotX":200.35,"pivotY":295.08},"6":{"pivotX":201.6,"pivotY":295.08},"7":{"pivotX":201.35,"pivotY":294.08}}}),
+  "DesignAssets/Animations/CreatureWalkV2/cotton-sheep/walk.webp": Object.freeze({"frameSize":256,"viewSize":256,"pivotX":145.5,"pivotY":194.5,"groundRadiusX":0.244141,"groundRadiusY":0.064453,"registrationScale":1,"cyclesPerCell":2}),
+  "DesignAssets/Animations/CreatureWalkV2/rolling-acorn/walk.webp": Object.freeze({"frameSize":420,"viewSize":420,"pivotX":205.0,"pivotY":335.5,"groundRadiusX":0.178571,"groundRadiusY":0.039286,"registrationScale":1,"cyclesPerCell":0.4}),
+  "DesignAssets/Animations/CreatureWalkV2/soil-boar/walk.webp": Object.freeze({"frameSize":256,"viewSize":253.426415,"pivotX":131.077358,"pivotY":180.745283,"groundRadiusX":0.325203,"groundRadiusY":0.04607,"registrationScale":1,"cyclesPerCell":1.25}),
+  "DesignAssets/Animations/CreatureWalkV2/bubble-toad/walk.webp": Object.freeze({"frameSize":288,"viewSize":239.758491,"pivotX":147.854716,"pivotY":216.69434,"groundRadiusX":0.34626,"groundRadiusY":0.027701,"registrationScale":1,"travelWindow":[0.26136363636363635,0.625],"cyclesPerCell":1}),
+  "DesignAssets/Animations/CreatureWalkV2/vine-turtle/walk.webp": Object.freeze({"frameSize":256,"viewSize":256,"pivotX":131.25,"pivotY":220.81,"groundRadiusX":0.401734,"groundRadiusY":0.028902,"registrationScale":1,"cyclesPerCell":1.5,"frameGeometry":{"0":{"pivotX":132.25,"pivotY":221.31},"1":{"pivotX":132.25,"pivotY":221.06},"2":{"pivotX":128.25,"pivotY":220.31},"3":{"pivotX":134.25,"pivotY":220.31},"4":{"pivotX":129.75,"pivotY":221.81},"5":{"pivotX":131.25,"pivotY":219.56},"6":{"pivotX":129.25,"pivotY":221.81},"7":{"pivotX":133.25,"pivotY":220.31}}}),
+  "DesignAssets/Animations/CreatureWalkV2/shadow-weasel/walk.webp": Object.freeze({"frameSize":256,"viewSize":273.808333,"pivotX":125.158332,"pivotY":192.841668,"groundRadiusX":0.285266,"groundRadiusY":0.037618,"registrationScale":1,"cyclesPerCell":0.769231}),
+  "DesignAssets/Animations/CreatureWalkV2/snare-vine/walk.webp": Object.freeze({"frameSize":256,"viewSize":263.68,"pivotX":128.537358,"pivotY":227.825659,"groundRadiusX":0.122642,"groundRadiusY":0.021226,"registrationScale":1,"cyclesPerCell":1.428571}),
+  "DesignAssets/Animations/CreatureWalkV2/talon-owl/walk.webp": Object.freeze({"frameSize":432,"viewSize":271.36,"pivotX":209.783704,"pivotY":318.478519,"registrationScale":1,"cyclesPerCell":1.0}),
+  "DesignAssets/Animations/CreatureWalkV2/spring-keeper/walk.webp": Object.freeze({"frameSize":512,"viewSize":384,"pivotX":207.0,"pivotY":344.0,"groundRadiusX":0.125,"groundRadiusY":0.028646,"registrationScale":1,"cyclesPerCell":1.25}),
+  "DesignAssets/Animations/CreatureWalkV2/lantern-keeper/walk.webp": Object.freeze({"frameSize":384,"viewSize":360.96,"pivotX":187.4,"pivotY":313.72,"groundRadiusX":0.182292,"groundRadiusY":0.033854,"registrationScale":1,"travelWindow":[0.32432432432432434,0.6486486486486487],"cyclesPerCell":1}),
+  "DesignAssets/Animations/CreatureWalkV2/old-garden-snail/walk.webp": Object.freeze({"frameSize":352,"viewSize":352,"pivotX":172.0,"pivotY":291.0,"groundRadiusX":0.318182,"groundRadiusY":0.056818,"registrationScale":1,"travelWindow":[0.25,0.82],"cyclesPerCell":1,"frameGeometry":{"0":{"pivotX":169.0,"pivotY":291.0},"1":{"pivotX":175.0,"pivotY":290.75},"2":{"pivotX":175.0,"pivotY":291.5},"3":{"pivotX":169.0,"pivotY":290.25},"4":{"pivotX":172.75,"pivotY":292.0},"5":{"pivotX":175.0,"pivotY":290.5}}}),
+  "DesignAssets/Animations/CreatureWalkV2/walking-forest/walk.webp": Object.freeze({"frameSize":256,"viewSize":248.32,"pivotX":125.78,"pivotY":209.27,"groundRadiusX":0.414063,"groundRadiusY":0.0625,"registrationScale":1,"cyclesPerCell":1.4,"frameGeometry":{"0":{"pivotX":127.28,"pivotY":209.02},"1":{"pivotX":125.53,"pivotY":209.77},"2":{"pivotX":126.78,"pivotY":209.02},"3":{"pivotX":124.78,"pivotY":209.02},"4":{"pivotX":125.78,"pivotY":209.77},"5":{"pivotX":124.53,"pivotY":209.02}}}),
+  "DesignAssets/Animations/CreatureWalkV2/white-paw/walk.webp": Object.freeze({"frameSize":288,"viewSize":295.291636,"pivotX":120.645545,"pivotY":242.411455,"groundRadiusX":0.267361,"groundRadiusY":0.048611,"registrationScale":1,"cyclesPerCell":0.625}),
+  "DesignAssets/Animations/CreatureWalkV2/spiny-back-leader/walk.webp": Object.freeze({"frameSize":256,"viewSize":248.32,"pivotX":132.87,"pivotY":196.51,"groundRadiusX":0.398438,"groundRadiusY":0.085938,"registrationScale":1,"cyclesPerCell":1.428571,"frameGeometry":{"0":{"pivotX":135.87,"pivotY":196.51},"1":{"pivotX":131.87,"pivotY":196.01},"2":{"pivotX":132.62,"pivotY":197.26},"3":{"pivotX":132.12,"pivotY":196.51},"4":{"pivotX":133.62,"pivotY":196.26},"5":{"pivotX":130.62,"pivotY":196.51}}}),
+  "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.webp": Object.freeze({"frameSize":631,"pivotX":315.5,"pivotY":553.268115942029,"viewSize":631,"registrationScale":1.2321428571428572}),
+  "DesignAssets/Animations/UnitAttack/attack.png": Object.freeze({"frameSize":632,"pivotX":316,"pivotY":555.1351351351351,"viewSize":632,"registrationScale":1.2333333333333334}),
+  "DesignAssets/Animations/UnitHurt/V3/hurt.png": Object.freeze({"frameSize":632,"pivotX":316,"pivotY":555.1351351351351,"viewSize":632,"registrationScale":1.2333333333333334}),
+  "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp": Object.freeze({"frameSize":316,"pivotX":158,"pivotY":276.5,"viewSize":316,"registrationScale":1.2307692307692308}),
+  "DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp": Object.freeze({"frameSize":549,"pivotX":274.5,"pivotY":480.375,"viewSize":549,"registrationScale":1.0714285714285714}),
+  "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/right/attack.webp": Object.freeze({"frameSize":553,"pivotX":276.5,"pivotY":482.6181818181818,"viewSize":553,"registrationScale":1.0784313725490196}),
+  "DesignAssets/Tribes/spore/AnimationStudies/hurt-v2/hurt-v2.webp": Object.freeze({"frameSize":553,"pivotX":276.5,"pivotY":482.6181818181818,"viewSize":553,"registrationScale":1.0784313725490196}),
+  "DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png": Object.freeze({"frameSize":553,"pivotX":276.5,"pivotY":482.6181818181818,"viewSize":553,"registrationScale":1.0784313725490196}),
+  "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp": Object.freeze({"frameSize":512,"pivotX":256,"pivotY":448,"viewSize":512,"registrationScale":1}),
+  "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp": Object.freeze({"frameSize":512,"pivotX":256,"pivotY":448,"viewSize":512,"registrationScale":1}),
+  "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp": Object.freeze({"frameSize":517,"pivotX":258.5,"pivotY":453.5943396226415,"viewSize":517,"registrationScale":1.0095238095238095}),
+  "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png": Object.freeze({"frameSize":517,"pivotX":258.5,"pivotY":453.5943396226415,"viewSize":517,"registrationScale":1.0095238095238095}),
+  "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp": Object.freeze({"frameSize":512,"pivotX":256,"pivotY":448,"viewSize":512,"registrationScale":1}),
+  "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp": Object.freeze({"frameSize":516,"pivotX":258,"pivotY":453.07317073170736,"viewSize":516,"registrationScale":1.0061349693251533}),
+  "DesignAssets/Tribes/spring/AnimationStudies/hurt-v2/hurt-v2.webp": Object.freeze({"frameSize":516,"pivotX":258,"pivotY":453.07317073170736,"viewSize":516,"registrationScale":1.0061349693251533}),
+  "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png": Object.freeze({"frameSize":516,"pivotX":258,"pivotY":453.07317073170736,"viewSize":516,"registrationScale":1.0061349693251533}),
   "DesignAssets/Animations/CreatureIdleV3/flower-tail-bird/idle.webp": Object.freeze({"frameSize":440,"pivotX":226,"pivotY":367,"viewSize":440,"registrationScale":1.134020618556701,"groundRadiusX":0.14433,"groundRadiusY":0.043814}),
   "DesignAssets/Animations/CreatureAttackV2/flower-tail-bird/runtime.webp": Object.freeze({"frameSize":320,"pivotX":164.280041,"pivotY":267.159876,"viewSize":312.9622641509434,"registrationScale":1.1307420494699647,"groundRadiusX":0.14433,"groundRadiusY":0.043814}),
   "DesignAssets/Animations/CreatureHurtV6/flower-tail-bird/hurt.webp": Object.freeze({"frameSize":440,"pivotX":226,"pivotY":367,"viewSize":440,"registrationScale":1.134020618556701,"groundRadiusX":0.14433,"groundRadiusY":0.043814}),
@@ -4307,10 +4326,36 @@ function compareSimulationSwap(settings, side, removeKey, addKey, count, seed) {
 
 return { runSimulationBatch, compareSimulationSwap };
 })();
+modules["server/creature-movement-profiles.mjs"] = (() => {
+const CREATURE_MOVEMENT_PROFILES = Object.freeze(Object.fromEntries([
+  ["flower-tail-bird", 2, 3],
+  ["dew-rabbit", 2.6, 2.5],
+  ["soil-mole", .8, 5],
+  ["bundle-snail", .4, 6],
+  ["cotton-sheep", .8, 4],
+  ["rolling-acorn", 1.8, 6],
+  ["bubble-toad", .8, 20],
+  ["snare-vine", 1.4, 30],
+  ["spiny-back-beetle", 1.2, 18],
+  ["soil-boar", 1.6, 24],
+  ["vine-turtle", .4, 30],
+  ["shadow-weasel", 2.6, 30],
+  ["talon-owl", 2, 40],
+  ["spring-keeper", 1.6, 30],
+  ["lantern-keeper", 2.8, 30],
+  ["old-garden-snail", .3, 45],
+  ["walking-forest", .3, 60],
+  ["white-paw", 3.2, 90],
+  ["spiny-back-leader", 1.4, 120]
+].map(([species, speed, restSeconds]) => [species, Object.freeze({ speed, restSeconds })])));
+
+return { CREATURE_MOVEMENT_PROFILES };
+})();
 modules["client/unit-animation.mjs"] = (() => {
 const { attackAnimationElapsed, AGENT_ATTACK_HIT_TIME } = modules["server/attack.mjs"];
 const { CREATURE_ATTACK_TIMINGS } = modules["server/creature-attack.mjs"];
 const { imageAnimation } = modules["client/image-geometry.mjs"];
+const { CREATURE_MOVEMENT_PROFILES } = modules["server/creature-movement-profiles.mjs"];
 
 const UNIT_ANIMATIONS = Object.freeze({
   "bean": {
@@ -4532,6 +4577,32 @@ function creatureWalkPose(agent, time) {
   return { animation, frame: unitAnimationFrame(animation, progress * (animation.cyclesPerCell || 1) * animation.durationMs) };
 }
 
+function creatureAnimationSpeed(species) {
+  return CREATURE_MOVEMENT_PROFILES[species]?.speed || 1;
+}
+
+function unitMovementPosition(agent, time, reducedMotion = false) {
+  const raw = agent.moveDuration > 0 ? Math.max(0, Math.min(1, (time - agent.moveStartedAt) / agent.moveDuration)) : 1;
+  const attributes = agent.appearanceAttributes || agent.attributes || {};
+  const beanHop = !agent.species && (agent.tribe || "bean") === "bean" && !attributes.feet;
+  let progress = raw, travel = raw;
+  if (!reducedMotion && beanHop) {
+    progress = Math.max(0, Math.min(1, (raw - .18) / .82));
+    travel = progress * progress * (3 - 2 * progress);
+  } else if (!reducedMotion && agent.species) {
+    const animation = CREATURE_WALK_ANIMATIONS[agent.species], window = animation?.travelWindow;
+    if (window) {
+      const cycles = animation.cyclesPerCell || 1;
+      const phase = raw * cycles, complete = Math.floor(phase), local = phase - complete;
+      const airborne = Math.max(0, Math.min(1, (local - window[0]) / (window[1] - window[0])));
+      travel = (complete + airborne * airborne * (3 - 2 * airborne)) / cycles;
+      if (raw === 1) travel = 1;
+    }
+  }
+  return { x: agent.moveDuration ? agent.renderFromX + (agent.x - agent.renderFromX) * travel : agent.x,
+    y: agent.moveDuration ? agent.renderFromY + (agent.y - agent.renderFromY) * travel : agent.y, progress };
+}
+
 function springKeeperFlightPose(agent, time) {
   if (agent.species !== "spring-keeper" || !(agent.health > 0) || !(agent.moveDuration > 0)) return null;
   const animation = CREATURE_WALK_ANIMATIONS[agent.species];
@@ -4553,7 +4624,7 @@ function springKeeperFlightPose(agent, time) {
   return { animation, frame: unitAnimationFrame(animation, animation.takeoffDurationMs + animation.flightDurationMs + landing), stage: "landing" };
 }
 
-return { UNIT_ANIMATIONS, CREATURE_IDLE_ANIMATIONS, CREATURE_WALK_ANIMATIONS, CREATURE_ATTACK_ANIMATIONS, CREATURE_HURT_ANIMATIONS, CREATURE_DEATH_ANIMATIONS, UNIT_ANIMATION_ASSETS, unitAnimationFrame, creatureAttackPose, creatureHurtPose, unitAnimationPose, creatureWalkPose, springKeeperFlightPose };
+return { UNIT_ANIMATIONS, CREATURE_IDLE_ANIMATIONS, CREATURE_WALK_ANIMATIONS, CREATURE_ATTACK_ANIMATIONS, CREATURE_HURT_ANIMATIONS, CREATURE_DEATH_ANIMATIONS, UNIT_ANIMATION_ASSETS, unitAnimationFrame, creatureAttackPose, creatureHurtPose, unitAnimationPose, creatureWalkPose, creatureAnimationSpeed, unitMovementPosition, springKeeperFlightPose };
 })();
 modules["client/talon-owl-idle.mjs"] = (() => {
 const { imageAnimation } = modules["client/image-geometry.mjs"];
@@ -4636,6 +4707,9 @@ return { UNIT_DISPLAY_SIZES, unitDisplaySize };
 })();
 modules["client/unit-image-bounds.mjs"] = (() => {
 const UNIT_IMAGE_BOUNDS = Object.freeze({
+  "DesignAssets/Tribes/spore/Animations/Units/jump/jump.webp": Object.freeze({"height":287,"width":440,"frameSize":512}),
+  "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.webp": Object.freeze({"height":287,"width":421,"frameSize":512}),
+  "DesignAssets/Tribes/spring/Animations/Units/jump/jump.webp": Object.freeze({"height":287,"width":238,"frameSize":512}),
   "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.webp": Object.freeze({"frameSize":631,"width":201,"height":247,"bodyWidth":237.69230769230768,"bodyHeight":290.52287581699346}),
   "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp": Object.freeze({"frameSize":316,"width":140,"height":173}),
   "DesignAssets/Animations/UnitAttack/attack.png": Object.freeze({"frameSize":632,"width":295,"height":331}),

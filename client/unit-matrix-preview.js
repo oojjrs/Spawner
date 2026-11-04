@@ -6,6 +6,35 @@
     'DesignAssets/Planning/Tribes/pebble/Previews/Resources/pebbles/carry-walk-sheet.webp': { frameSize: 106, pivotX: 53, pivotY: 93 }
   };
   let scheduled = null;
+  function canvasBackingSize(canvas, extent) {
+    const width = canvas.getBoundingClientRect().width || extent;
+    return Math.max(1, Math.round(width * (window.devicePixelRatio || 1)));
+  }
+  function canvasNeedsResize(canvas, extent) {
+    const size = canvasBackingSize(canvas, extent);
+    return canvas.width !== size || canvas.height !== size;
+  }
+  function prepareCanvas(canvas, context, extent) {
+    const size = canvasBackingSize(canvas, extent);
+    if (canvas.width !== size || canvas.height !== size) canvas.width = canvas.height = size;
+    const ratio = size / extent;
+    context.setTransform(ratio, 0, 0, ratio, 0, 0); context.clearRect(0, 0, extent, extent);
+  }
+  globalThis.SpawnerUnitMatrixPrepareCanvas = prepareCanvas;
+  globalThis.SpawnerUnitMatrixCanvasNeedsResize = canvasNeedsResize;
+  const projectiles = new Map();
+  function drawProjectile(context, animation, scale, elapsed) {
+    const spec = animation?.projectile;
+    if (!spec || elapsed < spec.launchAtMs || elapsed >= spec.launchAtMs + spec.flightMs) return;
+    if (!projectiles.has(spec.image)) { const image = new Image(); image.src = spec.image; projectiles.set(spec.image, image); }
+    const sprite = projectiles.get(spec.image);
+    if (!sprite.complete || !sprite.naturalWidth) return;
+    const progress = (elapsed - spec.launchAtMs) / spec.flightMs;
+    const x = stageSize / 2 + (spec.outletX - animation.pivotX) * scale + progress * spec.travel;
+    const y = floor + (spec.outletY - animation.pivotY) * scale;
+    context.drawImage(sprite, x - spec.width * scale / 2, y - spec.height * scale / 2, spec.width * scale, spec.height * scale);
+  }
+  globalThis.SpawnerUnitMatrixProjectile = drawProjectile;
   function geometry(animation, index) { return { ...animation, ...animation.frameGeometry?.[index] }; }
   function sourceScale(unit, animation, action) {
     if (animation.sourceScale) return animation.sourceScale;
@@ -24,7 +53,7 @@
       (animation.registrationScale || 1) / (idle.registrationScale || 1);
   }
   function draw(panel, now) {
-    if (!panel.ready) return;
+    if (!panel.ready || !panel.visible) return;
     const { animation, context, canvas, sprite } = panel;
     const durations = animation.durationsMs || [1000], duration = durations.reduce((sum, value) => sum + value, 0);
     const phase = now % (duration + (animation.loop === false ? 900 : 0));
@@ -32,11 +61,12 @@
     while (index < durations.length - 1 && elapsed >= durations[index]) elapsed -= durations[index++];
     const frame = animation.frames?.[index] ?? index, shape = geometry(animation, frame);
     const size = shape.frameSize || sprite.naturalWidth, height = animation.frameHeight || (animation.native ? sprite.naturalHeight : size);
-    context.setTransform(1, 0, 0, 1, 0, 0); context.clearRect(0, 0, stageSize, stageSize);
+    prepareCanvas(canvas, context, stageSize);
     const scale = panel.scale, x = stageSize / 2 - (shape.pivotX ?? size / 2) * scale, y = floor - (shape.pivotY ?? height * .875) * scale;
     if (panel.mirror) { context.translate(stageSize, 0); context.scale(-1, 1); }
     context.drawImage(sprite, animation.native ? 0 : frame % animation.columns * size, animation.native ? 0 : Math.floor(frame / animation.columns) * size,
       size, height, x, y, size * scale, height * scale);
+    drawProjectile(context, animation, scale, phase);
     canvas.dataset.frame = String(index);
   }
   function tick(now) {
@@ -52,6 +82,7 @@
     for (const entry of entries) {
       const panel = panels.find(panel => panel.canvas === entry.target);
       panel.visible = entry.isIntersecting;
+      if (!panel.visible) panel.canvas.width = panel.canvas.height = 1;
       if (panel.visible && !panel.sprite.src) panel.sprite.src = panel.animation.image;
     }
     schedule();
@@ -81,6 +112,12 @@
     for (const cell of row.querySelectorAll('td[data-action]')) {
       const action = cell.dataset.action;
       let animation = unit.animations[action], element = cell.querySelector('.unit-matrix-preview');
+      if (!element && animation && action === 'ranged-attack') {
+        const figure = document.createElement('figure'), link = document.createElement('a'), thumbnail = document.createElement('img');
+        figure.className = 'unit-matrix-image'; link.href = animation.image; thumbnail.src = animation.image; thumbnail.alt = '';
+        element = document.createElement('span'); element.className = 'unit-matrix-preview'; element.append(thumbnail); link.append(element); figure.append(link);
+        cell.querySelector('.unit-matrix-empty')?.replaceWith(figure); delete cell.dataset.missing;
+      }
       if (!element) continue;
       if (action === 'base') animation = unit.base;
       if (action === 'birth' && unit.birthScene) {

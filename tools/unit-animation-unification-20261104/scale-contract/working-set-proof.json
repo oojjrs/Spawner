@@ -1,0 +1,96 @@
+{
+  "passes": [
+    {
+      "frame": 0,
+      "plan": {
+        "atlases": 4,
+        "pixels": 7471104,
+        "ratios": {
+          "DesignAssets/Animations/UnitRangedV1/spore/shoot.webp": 0.5,
+          "DesignAssets/Animations/UnitRangedV1/pebble/shoot.webp": 0.5,
+          "DesignAssets/Animations/UnitRangedV1/spring/shoot.webp": 0.5,
+          "DesignAssets/Animations/UnitRangedV1/bean/shoot.webp": 0.5
+        }
+      },
+      "loads": 4,
+      "bitmaps": 4,
+      "entries": 4,
+      "residentPixels": 7471104,
+      "pixelBudget": 8388608,
+      "decodes": 4,
+      "cacheHits": 0,
+      "workingAtlases": 4
+    },
+    {
+      "frame": 1,
+      "plan": {
+        "atlases": 4,
+        "pixels": 7471104,
+        "ratios": {
+          "DesignAssets/Animations/UnitRangedV1/spore/shoot.webp": 0.5,
+          "DesignAssets/Animations/UnitRangedV1/pebble/shoot.webp": 0.5,
+          "DesignAssets/Animations/UnitRangedV1/spring/shoot.webp": 0.5,
+          "DesignAssets/Animations/UnitRangedV1/bean/shoot.webp": 0.5
+        }
+      },
+      "loads": 4,
+      "bitmaps": 4,
+      "entries": 4,
+      "residentPixels": 7471104,
+      "pixelBudget": 8388608,
+      "decodes": 4,
+      "cacheHits": 4,
+      "workingAtlases": 4
+    },
+    {
+      "frame": 2,
+      "plan": {
+        "atlases": 4,
+        "pixels": 7471104,
+        "ratios": {
+          "DesignAssets/Animations/UnitRangedV1/spore/shoot.webp": 0.5,
+          "DesignAssets/Animations/UnitRangedV1/pebble/shoot.webp": 0.5,
+          "DesignAssets/Animations/UnitRangedV1/spring/shoot.webp": 0.5,
+          "DesignAssets/Animations/UnitRangedV1/bean/shoot.webp": 0.5
+        }
+      },
+      "loads": 4,
+      "bitmaps": 4,
+      "entries": 4,
+      "residentPixels": 7471104,
+      "pixelBudget": 8388608,
+      "decodes": 4,
+      "cacheHits": 8,
+      "workingAtlases": 4
+    },
+    {
+      "frame": 3,
+      "plan": {
+        "atlases": 4,
+        "pixels": 7471104,
+        "ratios": {
+          "DesignAssets/Animations/UnitRangedV1/spore/shoot.webp": 0.5,
+          "DesignAssets/Animations/UnitRangedV1/pebble/shoot.webp": 0.5,
+          "DesignAssets/Animations/UnitRangedV1/spring/shoot.webp": 0.5,
+          "DesignAssets/Animations/UnitRangedV1/bean/shoot.webp": 0.5
+        }
+      },
+      "loads": 4,
+      "bitmaps": 4,
+      "entries": 4,
+      "residentPixels": 7471104,
+      "pixelBudget": 8388608,
+      "decodes": 4,
+      "cacheHits": 12,
+      "workingAtlases": 4
+    }
+  ],
+  "afterClear": {
+    "entries": 0,
+    "residentPixels": 0,
+    "pixelBudget": 8388608,
+    "decodes": 4,
+    "cacheHits": 12,
+    "workingAtlases": 0
+  }
+}

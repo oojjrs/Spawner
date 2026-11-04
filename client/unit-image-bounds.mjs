@@ -1,4 +1,7 @@
 export const UNIT_IMAGE_BOUNDS = Object.freeze({
+  "DesignAssets/Tribes/spore/Animations/Units/jump/jump.webp": Object.freeze({"height":287,"width":440,"frameSize":512}),
+  "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.webp": Object.freeze({"height":287,"width":421,"frameSize":512}),
+  "DesignAssets/Tribes/spring/Animations/Units/jump/jump.webp": Object.freeze({"height":287,"width":238,"frameSize":512}),
   "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.webp": Object.freeze({"frameSize":631,"width":201,"height":247,"bodyWidth":237.69230769230768,"bodyHeight":290.52287581699346}),
   "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp": Object.freeze({"frameSize":316,"width":140,"height":173}),
   "DesignAssets/Animations/UnitAttack/attack.png": Object.freeze({"frameSize":632,"width":295,"height":331}),

@@ -1,0 +1,77 @@
+{
+  "tribe": "sprout",
+  "variant": "blade",
+  "neutralEyes": [
+    [
+      195.7249155415741,
+      371.97899761336515
+    ],
+    [
+      277.41852578249507,
+      373.5457966616085
+    ]
+  ],
+  "groups": [
+    {
+      "x": 202,
+      "y": 381,
+      "w": 35,
+      "h": 15,
+      "area": 233
+    },
+    {
+      "x": 299.5,
+      "y": 384,
+      "w": 40,
+      "h": 15,
+      "area": 286
+    }
+  ],
+  "pair": {
+    "a": {
+      "x": 202,
+      "y": 381,
+      "w": 35,
+      "h": 15,
+      "area": 233
+    },
+    "b": {
+      "x": 299.5,
+      "y": 384,
+      "w": 40,
+      "h": 15,
+      "area": 286
+    },
+    "score": 6.425000000000001
+  },
+  "fixedAssetCameraScale": 0.8376408456656923,
+  "dx": 26.53327861136222,
+  "ground": 451,
+  "midDy": 74.89926029610416,
+  "finalDy": 84.95095044409248,
+  "method": "fixed interocular distance",
+  "neutralBounds": {
+    "left": 82,
+    "top": 206,
+    "right": 418,
+    "bottom": 451,
+    "width": 336,
+    "height": 245
+  },
+  "midBounds": {
+    "left": 90,
+    "top": 196,
+    "right": 423,
+    "bottom": 449,
+    "width": 333,
+    "height": 253
+  },
+  "finalBounds": {
+    "left": 67,
+    "top": 217,
+    "right": 445,
+    "bottom": 437,
+    "width": 378,
+    "height": 220
+  }
+}

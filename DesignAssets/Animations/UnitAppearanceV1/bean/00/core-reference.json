@@ -1,0 +1,33 @@
+{
+  "sourceId": "unit-appearance-v1-bean-00-neutral-v1",
+  "referenceImage": "DesignAssets/Animations/UnitAppearanceV1/bean/00/Source/neutral.png",
+  "coreBounds": [
+    173,
+    243,
+    167,
+    206
+  ],
+  "landmarks": {
+    "leftEye": [
+      216,
+      375
+    ],
+    "rightEye": [
+      296.5,
+      375
+    ],
+    "ground": [
+      256,
+      448
+    ],
+    "innateLeavesIncluded": true
+  },
+  "canonicalSpeciesSize": 0.4,
+  "canonicalCoreLongest": 204.8,
+  "verified": true,
+  "measurement": {
+    "alphaThreshold": 16,
+    "coreSource": "existing-original-no-visual-bits"
+  },
+  "verificationScope": "camera-and-observed-landmarks"
+}

@@ -1,5 +1,6 @@
 import { attackAnimationElapsed, AGENT_ATTACK_HIT_TIME } from "../server/attack.mjs";
 import { COMBAT_EVOLUTION_CATALOG } from "./combat-evolution-assets.mjs";
+import { UNIT_COMBAT_DEATH_ANIMATIONS } from "./combat-death.mjs";
 import { unitAnimationFrame } from "./unit-animation.mjs";
 import { renderEvolutionFrame, evolutionBodyTransform, renderEvolutionAttachment } from "../DesignAssets/Animations/CombatAttributesV7/renderer.mjs";
 import { renderAttributeEffects } from "../DesignAssets/Animations/CombatAttributesV7/attack.mjs";
@@ -56,16 +57,16 @@ export function createCombatEvolutionArt(assetSource, createSurface, loadImage) 
         images["attack-impact"] = await loadImage(folder + "AttackEffects/" + name + "-impact.png");
         const feature = definition.feature ? await loadImage(definition.feature.image) : null;
         const sheets = new Map(), loading = new Map();
-        const value = { definition, rig, images, feature, sheets, loading };
+        const value = { definition, rig, images, feature, sheets, loading, deathAnimation: UNIT_COMBAT_DEATH_ANIMATIONS[name + "/" + variant] };
         variants.set(variant, value);
-        await Promise.all(["idle", "attack"].map(action => sheet(value, action)));
+        await Promise.all(["idle", "attack", "death"].map(action => sheet(value, action)));
       }));
       prepared.set(key, variants); return variants;
     })().catch(error => { pending.delete(key); throw error; }));
     return pending.get(key);
   }
   function sheet(source, action) {
-    if (!source.loading.has(action)) source.loading.set(action, loadImage(source.definition.animations[action].image).then(image => {
+    if (!source.loading.has(action)) source.loading.set(action, loadImage((action === "death" && source.deathAnimation || source.definition.animations[action]).image).then(image => {
       source.sheets.set(action, image); frames.clear(); return image;
     }).catch(error => { source.loading.delete(action); throw error; }));
     return source.loading.get(action);
@@ -197,10 +198,11 @@ export function createCombatEvolutionArt(assetSource, createSurface, loadImage) 
     const variants = prepared.get(agent.tribe || "bean"), attributes = agent.appearanceAttributes || agent.attributes || {}, keys = combatEvolutionKeys(attributes);
     if (!variants || !keys.length) return null;
     const source = variants.get(keys.length === 1 ? keys[0] : body(keys));
-    const animations = source.definition.animations;
-    const sampled = combatEvolutionPose(agent, time, animations);
     let replacement = drawBody && (source.rig.tribe !== "sprout" && ["antenna", "strength", "arms", "feet"].some(key => attributes[key] > 0)) ? drawBody : null;
     if (replacement) { const paint = replacement; replacement = (context, pose) => paint(context, pose); replacement.key = JSON.stringify(attributes); }
+    const deathAnimation = keys.length === 1 && !replacement && !["antenna", "strength", "arms", "feet"].some(key => attributes[key] > 0) ? source.deathAnimation : null;
+    const animations = deathAnimation ? { ...source.definition.animations, death: deathAnimation } : source.definition.animations;
+    const sampled = combatEvolutionPose(agent, time, animations);
     const liveFeet = sampled.action !== "death" && source.rig.tribe === "sprout" && attributes.feet > 0;
     const dynamic = liveFeet && drawAttributes && !replacement;
     const key = [agent.tribe || "bean", JSON.stringify(attributes), sampled.action, sampled.frame, Boolean(drawAttributes),
@@ -211,9 +213,11 @@ export function createCombatEvolutionArt(assetSource, createSurface, loadImage) 
     if (sampled.action === "birth" && sampled.sampleTime < sampled.animation.durationMs * .035) return surface;
     let rig = source.rig;
     if (keys.length === 1 && !replacement) {
-      const image = source.sheets.get(sampled.action);
-      context.save(); context.translate(256, 448); context.scale(2, 2); context.translate(-128, -230);
-      if (image) context.drawImage(image, sampled.frame % 8 * 256, Math.floor(sampled.frame / 8) * 256, 256, 256, 0, 0, 256, 256);
+      const animation = sampled.animation, frameSize = animation.frameSize || 256, columns = animation.columns || 8;
+      const pivotX = animation.pivotX ?? animation.pivot?.[0] ?? 128, pivotY = animation.pivotY ?? animation.pivot?.[1] ?? 230;
+      const image = sampled.action === "death" && !deathAnimation ? null : source.sheets.get(sampled.action);
+      context.save(); context.translate(256, 448); context.scale(512 / frameSize, 512 / frameSize); context.translate(-pivotX, -pivotY);
+      if (image) context.drawImage(image, sampled.frame % columns * frameSize, Math.floor(sampled.frame / columns) * frameSize, frameSize, frameSize, 0, 0, frameSize, frameSize);
       else {
         sheet(source, sampled.action).catch(() => {});
         renderEvolutionFrame(context, source.rig, source.images, sampled.action, sampled.sampleTime);

@@ -280,8 +280,8 @@ export const IMAGE_SCALES = Object.freeze({
     0.2109375
   ],
   "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.webp": [
-    0.197265625,
-    0.197265625
+    1,
+    1
   ],
   "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp": [
     0.203125,
@@ -304,8 +304,8 @@ export const IMAGE_SCALES = Object.freeze({
     0.4375
   ],
   "DesignAssets/Tribes/pebble/AnimationStudies/walk-in-place-v1/walk.webp": [
-    0.20703125,
-    0.20703125
+    1,
+    1
   ],
   "DesignAssets/Tribes/pebble/AnimationStudies/roll-v2/roll-v2.webp": [
     0.20703125,
@@ -324,8 +324,8 @@ export const IMAGE_SCALES = Object.freeze({
     0.0733652312599681
   ],
   "DesignAssets/Tribes/spore/Animations/Units/jump/jump.webp": [
-    0.19140625,
-    0.19140625
+    1,
+    1
   ],
   "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/right/attack.webp": [
     0.19921875,
@@ -344,8 +344,8 @@ export const IMAGE_SCALES = Object.freeze({
     0.4375
   ],
   "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/walk-v2.webp": [
-    0.2109375,
-    0.2109375
+    1,
+    1
   ],
   "DesignAssets/Tribes/spore/BaseParts/body.png": [
     0.439453125,
@@ -360,8 +360,8 @@ export const IMAGE_SCALES = Object.freeze({
     0.06937799043062201
   ],
   "DesignAssets/Tribes/spring/Animations/Units/jump/jump.webp": [
-    0.306640625,
-    0.306640625
+    1,
+    1
   ],
   "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp": [
     0.318359375,
@@ -376,8 +376,8 @@ export const IMAGE_SCALES = Object.freeze({
     0.318359375
   ],
   "DesignAssets/Tribes/spring/AnimationStudies/flow-v4/flow-v4.webp": [
-    0.31640625,
-    0.31640625
+    1,
+    1
   ],
   "DesignAssets/Tribes/spring/AnimationStudies/hurt-v2/hurt-v2.webp": [
     0.318359375,

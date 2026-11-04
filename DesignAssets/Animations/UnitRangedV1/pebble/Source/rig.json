@@ -1,0 +1,189 @@
+{
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ],
+  "durationMs": 600,
+  "launchAtMs": 200,
+  "parts": [
+    {
+      "id": "body",
+      "source": "Source/Parts/body-under-plate.png",
+      "parent": "root",
+      "transform": "fixed"
+    },
+    {
+      "id": "top-stone-plate",
+      "source": "Source/Parts/top-stone-plate.png",
+      "parent": "body",
+      "hinge": [
+        510,
+        218
+      ],
+      "motion": "rigid-plane-projection",
+      "closedYawDeg": 30,
+      "openYawDeg": 0,
+      "openRotationDeg": -14,
+      "sourcePolygon": [
+        [
+          497,
+          169
+        ],
+        [
+          512,
+          153
+        ],
+        [
+          546,
+          147
+        ],
+        [
+          600,
+          154
+        ],
+        [
+          644,
+          173
+        ],
+        [
+          685,
+          201
+        ],
+        [
+          708,
+          225
+        ],
+        [
+          718,
+          244
+        ],
+        [
+          711,
+          258
+        ],
+        [
+          690,
+          266
+        ],
+        [
+          662,
+          274
+        ],
+        [
+          623,
+          269
+        ],
+        [
+          578,
+          255
+        ],
+        [
+          541,
+          237
+        ],
+        [
+          513,
+          216
+        ],
+        [
+          498,
+          194
+        ]
+      ]
+    },
+    {
+      "id": "ammunition-stone",
+      "source": "projectile.png",
+      "role": "partly occluded inside stone plates",
+      "attachmentWindowMs": [
+        0,
+        200
+      ],
+      "noFlightInBodySheet": true
+    }
+  ],
+  "hiddenSurfaceSource": "references/pebble.png matched core scale .7 and offset(0,-1)",
+  "poseAlphaBlending": false,
+  "projectileFlightBaked": false,
+  "timeline": {
+    "pressureKeys": [
+      [
+        0,
+        0
+      ],
+      [
+        80,
+        0.18
+      ],
+      [
+        160,
+        0.65
+      ],
+      [
+        200,
+        1
+      ],
+      [
+        230,
+        0.35
+      ],
+      [
+        320,
+        0.08
+      ],
+      [
+        440,
+        0
+      ],
+      [
+        600,
+        0
+      ]
+    ],
+    "launchAtMs": 200,
+    "durationsMs": [
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20
+    ]
+  },
+  "projectile": {
+    "image": "DesignAssets/Animations/UnitRangedV1/pebble/projectile.png",
+    "width": 65.1,
+    "height": 56.83333333333333,
+    "outletX": 340.80383314543406,
+    "outletY": 312.11724915445325,
+    "sourceWidth": 63,
+    "sourceHeight": 55,
+    "source": "Source/keys-v2.png",
+    "renderRatioToReference": 0.3
+  }
+}

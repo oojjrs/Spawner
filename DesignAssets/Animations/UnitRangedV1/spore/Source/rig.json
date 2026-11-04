@@ -1,0 +1,157 @@
+{
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ],
+  "durationMs": 600,
+  "launchAtMs": 200,
+  "parts": [
+    {
+      "id": "spore-sac-0",
+      "sourceRect": [
+        768,
+        595,
+        948,
+        791
+      ],
+      "root": [
+        858,
+        615
+      ],
+      "mode": "flexible-local-mesh",
+      "fixedBoundary": true,
+      "gridStep": 10
+    },
+    {
+      "id": "spore-sac-1",
+      "sourceRect": [
+        921,
+        623,
+        1032,
+        792
+      ],
+      "root": [
+        976,
+        637
+      ],
+      "mode": "flexible-local-mesh",
+      "fixedBoundary": true,
+      "gridStep": 10
+    },
+    {
+      "id": "spore-sac-2",
+      "sourceRect": [
+        1002,
+        650,
+        1103,
+        789
+      ],
+      "root": [
+        1052,
+        666
+      ],
+      "mode": "flexible-local-mesh",
+      "fixedBoundary": true,
+      "gridStep": 10
+    },
+    {
+      "id": "spore-sac-3",
+      "sourceRect": [
+        1080,
+        651,
+        1165,
+        767
+      ],
+      "root": [
+        1122,
+        668
+      ],
+      "mode": "flexible-local-mesh",
+      "fixedBoundary": true,
+      "gridStep": 10
+    }
+  ],
+  "poseAlphaBlending": false,
+  "projectileFlightBaked": false,
+  "timeline": {
+    "pressureKeys": [
+      [
+        0,
+        0
+      ],
+      [
+        80,
+        0.18
+      ],
+      [
+        160,
+        0.65
+      ],
+      [
+        200,
+        1
+      ],
+      [
+        230,
+        0.35
+      ],
+      [
+        320,
+        0.08
+      ],
+      [
+        440,
+        0
+      ],
+      [
+        600,
+        0
+      ]
+    ],
+    "launchAtMs": 200,
+    "durationsMs": [
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20
+    ]
+  },
+  "projectile": {
+    "image": "DesignAssets/Animations/UnitRangedV1/spore/projectile.png",
+    "width": 58.5,
+    "height": 55.574999999999996,
+    "outletX": 342.0079744816587,
+    "outletY": 381.45295055821373,
+    "sourceWidth": 60,
+    "sourceHeight": 57,
+    "source": "Source/keys-v2.png",
+    "renderRatioToReference": 0.3
+  }
+}

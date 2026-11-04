@@ -1,0 +1,103 @@
+{
+  "tribe": "pebble",
+  "variant": "piercing",
+  "action": "death",
+  "image": "DesignAssets/Animations/CombatDeathV1/pebble/piercing/death.webp",
+  "frameSize": 512,
+  "columns": 4,
+  "frameCount": 8,
+  "pivotX": 256,
+  "pivotY": 448,
+  "durationsMs": [
+    100,
+    90,
+    90,
+    100,
+    140,
+    100,
+    100,
+    1100
+  ],
+  "durationMs": 1820,
+  "loop": false,
+  "approvedMidFrame": 4,
+  "approvedFinalFrame": 7,
+  "method": "full-body drawn intermediate poses; fixed asset-camera registration; no pose alpha blending",
+  "source": {
+    "drawn": "Source/drawn-production.png",
+    "keys": "DesignAssets/Animations/CombatDeathKeysV1/Source/pebble.png",
+    "registration": "Source/registration.json",
+    "neutral": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/piercing/idle.webp"
+  },
+  "alphaCleanup": {
+    "policy": "alpha below16 removed; saturated low-alpha below64 removed; invisible RGB zeroed",
+    "frames": [
+      {
+        "removedLowAlphaPixels": 302,
+        "clearedTransparentRgb": 204
+      },
+      {
+        "removedLowAlphaPixels": 9003,
+        "clearedTransparentRgb": 1608
+      },
+      {
+        "removedLowAlphaPixels": 9705,
+        "clearedTransparentRgb": 1717
+      },
+      {
+        "removedLowAlphaPixels": 8289,
+        "clearedTransparentRgb": 1485
+      },
+      {
+        "removedLowAlphaPixels": 642,
+        "clearedTransparentRgb": 717
+      },
+      {
+        "removedLowAlphaPixels": 11406,
+        "clearedTransparentRgb": 2074
+      },
+      {
+        "removedLowAlphaPixels": 10358,
+        "clearedTransparentRgb": 1976
+      },
+      {
+        "removedLowAlphaPixels": 541,
+        "clearedTransparentRgb": 602
+      }
+    ]
+  },
+  "frameSources": [
+    {
+      "frame": 0,
+      "source": "Source/neutral-registered.png"
+    },
+    {
+      "frame": 1,
+      "source": "Source/drawn-production.png#cell1"
+    },
+    {
+      "frame": 2,
+      "source": "Source/drawn-production.png#cell2"
+    },
+    {
+      "frame": 3,
+      "source": "Source/drawn-production.png#cell3"
+    },
+    {
+      "frame": 4,
+      "source": "Source/camera-mid.png"
+    },
+    {
+      "frame": 5,
+      "source": "Source/drawn-production.png#cell5"
+    },
+    {
+      "frame": 6,
+      "source": "Source/drawn-production.png#cell6"
+    },
+    {
+      "frame": 7,
+      "source": "Source/camera-final.png"
+    }
+  ]
+}

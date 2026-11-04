@@ -533,5 +533,17 @@ globalThis.SpawnerLocalAssetFiles = Object.freeze([
   "./client/local-assets/evolution-point-symbol.png.js",
   "./client/local-assets/Combat/grassland.webp.js",
   "./client/local-assets/Combat/forest.webp.js",
-  "./client/local-assets/Combat/riverbank.webp.js"
+  "./client/local-assets/Combat/riverbank.webp.js",
+  "./client/local-assets/Animations/CombatDeathV1/sprout/blade/death.webp.js",
+  "./client/local-assets/Animations/CombatDeathV1/sprout/piercing/death.webp.js",
+  "./client/local-assets/Animations/CombatDeathV1/sprout/carapace/death.webp.js",
+  "./client/local-assets/Animations/CombatDeathV1/spore/blade/death.webp.js",
+  "./client/local-assets/Animations/CombatDeathV1/spore/piercing/death.webp.js",
+  "./client/local-assets/Animations/CombatDeathV1/spore/carapace/death.webp.js",
+  "./client/local-assets/Animations/CombatDeathV1/pebble/blade/death.webp.js",
+  "./client/local-assets/Animations/CombatDeathV1/pebble/piercing/death.webp.js",
+  "./client/local-assets/Animations/CombatDeathV1/pebble/carapace/death.webp.js",
+  "./client/local-assets/Animations/CombatDeathV1/spring/blade/death.webp.js",
+  "./client/local-assets/Animations/CombatDeathV1/spring/piercing/death.webp.js",
+  "./client/local-assets/Animations/CombatDeathV1/spring/carapace/death.webp.js"
 ]);

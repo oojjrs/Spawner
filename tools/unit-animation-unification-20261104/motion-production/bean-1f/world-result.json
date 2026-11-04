@@ -1,0 +1,47 @@
+{
+  "logicalCanvas": 256,
+  "backingCanvas": 768,
+  "dpr": 3,
+  "pixelsPerWorld": 100,
+  "sourcePixelsPerWorld": 512,
+  "contacts": [
+    {
+      "atMs": 0,
+      "foot": "left",
+      "sourceToeY": 446,
+      "transformedToeY": 223.609375,
+      "sourceGroundY": 448,
+      "logicalGroundY": 224,
+      "groundErrorPx": 0.390625
+    },
+    {
+      "atMs": 280,
+      "foot": "right",
+      "sourceToeY": 447,
+      "transformedToeY": 223.8046875,
+      "sourceGroundY": 448,
+      "logicalGroundY": 224,
+      "groundErrorPx": 0.1953125
+    },
+    {
+      "atMs": 560,
+      "foot": "left",
+      "sourceToeY": 446,
+      "transformedToeY": 223.609375,
+      "sourceGroundY": 448,
+      "logicalGroundY": 224,
+      "groundErrorPx": 0.390625
+    },
+    {
+      "atMs": 840,
+      "foot": "right",
+      "sourceToeY": 447,
+      "transformedToeY": 223.8046875,
+      "sourceGroundY": 448,
+      "logicalGroundY": 224,
+      "groundErrorPx": 0.1953125
+    }
+  ],
+  "maximumGroundErrorPx": 0.390625,
+  "errors": []
+}

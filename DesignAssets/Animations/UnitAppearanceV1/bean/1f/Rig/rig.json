@@ -1,0 +1,4488 @@
+{
+  "sourceId": "unit-appearance-v1-bean-1f-neutral-v1",
+  "sourceHash": "030e75b71127be552ac3ab9bdf51c707884d5c234706b1803c10ba2abcb39dfb",
+  "sourceImage": "DesignAssets/Animations/UnitAppearanceV1/bean/1f/Source/neutral.png",
+  "camera": {
+    "pixelsPerWorld": 512
+  },
+  "pivot": {
+    "x": 256,
+    "y": 448
+  },
+  "frameSize": 512,
+  "parts": [
+    {
+      "id": "eye-left",
+      "circle": [
+        220,
+        364,
+        13
+      ],
+      "pivot": [
+        220,
+        364
+      ],
+      "parent": "face",
+      "kind": "rigid",
+      "image": "Parts/eye-left.png",
+      "opaquePixels": 540,
+      "bone": "face"
+    },
+    {
+      "id": "eye-right",
+      "circle": [
+        295,
+        364,
+        13
+      ],
+      "pivot": [
+        295,
+        364
+      ],
+      "parent": "face",
+      "kind": "rigid",
+      "image": "Parts/eye-right.png",
+      "opaquePixels": 540,
+      "bone": "face"
+    },
+    {
+      "id": "foot-left",
+      "poly": [
+        [
+          187,
+          423
+        ],
+        [
+          206,
+          414
+        ],
+        [
+          234,
+          416
+        ],
+        [
+          249,
+          432
+        ],
+        [
+          247,
+          454
+        ],
+        [
+          188,
+          454
+        ]
+      ],
+      "pivot": [
+        220,
+        425
+      ],
+      "parent": "foot-target-left",
+      "kind": "rigid",
+      "image": "Parts/foot-left.png",
+      "opaquePixels": 1127,
+      "bone": "foot-target-left",
+      "mesh": {
+        "vertices": [
+          {
+            "point": [
+              191,
+              412
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 1
+              },
+              {
+                "bone": "foot-target-left",
+                "weight": 0
+              }
+            ]
+          },
+          {
+            "point": [
+              202.2,
+              412
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 1
+              },
+              {
+                "bone": "foot-target-left",
+                "weight": 0
+              }
+            ]
+          },
+          {
+            "point": [
+              213.4,
+              412
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 1
+              },
+              {
+                "bone": "foot-target-left",
+                "weight": 0
+              }
+            ]
+          },
+          {
+            "point": [
+              224.6,
+              412
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 1
+              },
+              {
+                "bone": "foot-target-left",
+                "weight": 0
+              }
+            ]
+          },
+          {
+            "point": [
+              235.8,
+              412
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 1
+              },
+              {
+                "bone": "foot-target-left",
+                "weight": 0
+              }
+            ]
+          },
+          {
+            "point": [
+              247,
+              412
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 1
+              },
+              {
+                "bone": "foot-target-left",
+                "weight": 0
+              }
+            ]
+          },
+          {
+            "point": [
+              191,
+              419.6
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.9037037037037029
+              },
+              {
+                "bone": "foot-target-left",
+                "weight": 0.09629629629629714
+              }
+            ]
+          },
+          {
+            "point": [
+              202.2,
+              419.6
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.9037037037037029
+              },
+              {
+                "bone": "foot-target-left",
+                "weight": 0.09629629629629714
+              }
+            ]
+          },
+          {
+            "point": [
+              213.4,
+              419.6
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.9037037037037029
+              },
+              {
+                "bone": "foot-target-left",
+                "weight": 0.09629629629629714
+              }
+            ]
+          },
+          {
+            "point": [
+              224.6,
+              419.6
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.9037037037037029
+              },
+              {
+                "bone": "foot-target-left",
+                "weight": 0.09629629629629714
+              }
+            ]
+          },
+          {
+            "point": [
+              235.8,
+              419.6
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.9037037037037029
+              },
+              {
+                "bone": "foot-target-left",
+                "weight": 0.09629629629629714
+              }
+            ]
+          },
+          {
+            "point": [
+              247,
+              419.6
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.9037037037037029
+              },
+              {
+                "bone": "foot-target-left",
+                "weight": 0.09629629629629714
+              }
+            ]
+          },
+          {
+            "point": [
+              191,
+              427.2
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.6222222222222227
+              },
+              {
+                "bone": "foot-target-left",
+                "weight": 0.3777777777777774
+              }
+            ]
+          },
+          {
+            "point": [
+              202.2,
+              427.2
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.6222222222222227
+              },
+              {
+                "bone": "foot-target-left",
+                "weight": 0.3777777777777774
+              }
+            ]
+          },
+          {
+            "point": [
+              213.4,
+              427.2
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.6222222222222227
+              },
+              {
+                "bone": "foot-target-left",
+                "weight": 0.3777777777777774
+              }
+            ]
+          },
+          {
+            "point": [
+              224.6,
+              427.2
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.6222222222222227
+              },
+              {
+                "bone": "foot-target-left",
+                "weight": 0.3777777777777774
+              }
+            ]
+          },
+          {
+            "point": [
+              235.8,
+              427.2
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.6222222222222227
+              },
+              {
+                "bone": "foot-target-left",
+                "weight": 0.3777777777777774
+              }
+            ]
+          },
+          {
+            "point": [
+              247,
+              427.2
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.6222222222222227
+              },
+              {
+                "bone": "foot-target-left",
+                "weight": 0.3777777777777774
+              }
+            ]
+          },
+          {
+            "point": [
+              191,
+              434.8
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.34074074074074034
+              },
+              {
+                "bone": "foot-target-left",
+                "weight": 0.6592592592592597
+              }
+            ]
+          },
+          {
+            "point": [
+              202.2,
+              434.8
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.34074074074074034
+              },
+              {
+                "bone": "foot-target-left",
+                "weight": 0.6592592592592597
+              }
+            ]
+          },
+          {
+            "point": [
+              213.4,
+              434.8
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.34074074074074034
+              },
+              {
+                "bone": "foot-target-left",
+                "weight": 0.6592592592592597
+              }
+            ]
+          },
+          {
+            "point": [
+              224.6,
+              434.8
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.34074074074074034
+              },
+              {
+                "bone": "foot-target-left",
+                "weight": 0.6592592592592597
+              }
+            ]
+          },
+          {
+            "point": [
+              235.8,
+              434.8
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.34074074074074034
+              },
+              {
+                "bone": "foot-target-left",
+                "weight": 0.6592592592592597
+              }
+            ]
+          },
+          {
+            "point": [
+              247,
+              434.8
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.34074074074074034
+              },
+              {
+                "bone": "foot-target-left",
+                "weight": 0.6592592592592597
+              }
+            ]
+          },
+          {
+            "point": [
+              191,
+              442.4
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.05925925925926012
+              },
+              {
+                "bone": "foot-target-left",
+                "weight": 0.9407407407407399
+              }
+            ]
+          },
+          {
+            "point": [
+              202.2,
+              442.4
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.05925925925926012
+              },
+              {
+                "bone": "foot-target-left",
+                "weight": 0.9407407407407399
+              }
+            ]
+          },
+          {
+            "point": [
+              213.4,
+              442.4
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.05925925925926012
+              },
+              {
+                "bone": "foot-target-left",
+                "weight": 0.9407407407407399
+              }
+            ]
+          },
+          {
+            "point": [
+              224.6,
+              442.4
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.05925925925926012
+              },
+              {
+                "bone": "foot-target-left",
+                "weight": 0.9407407407407399
+              }
+            ]
+          },
+          {
+            "point": [
+              235.8,
+              442.4
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.05925925925926012
+              },
+              {
+                "bone": "foot-target-left",
+                "weight": 0.9407407407407399
+              }
+            ]
+          },
+          {
+            "point": [
+              247,
+              442.4
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.05925925925926012
+              },
+              {
+                "bone": "foot-target-left",
+                "weight": 0.9407407407407399
+              }
+            ]
+          },
+          {
+            "point": [
+              191,
+              450
+            ],
+            "weights": [
+              {
+                "bone": "foot-target-left",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              202.2,
+              450
+            ],
+            "weights": [
+              {
+                "bone": "foot-target-left",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              213.4,
+              450
+            ],
+            "weights": [
+              {
+                "bone": "foot-target-left",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              224.6,
+              450
+            ],
+            "weights": [
+              {
+                "bone": "foot-target-left",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              235.8,
+              450
+            ],
+            "weights": [
+              {
+                "bone": "foot-target-left",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              247,
+              450
+            ],
+            "weights": [
+              {
+                "bone": "foot-target-left",
+                "weight": 1
+              }
+            ]
+          }
+        ],
+        "triangles": [
+          [
+            0,
+            1,
+            7
+          ],
+          [
+            0,
+            7,
+            6
+          ],
+          [
+            1,
+            2,
+            8
+          ],
+          [
+            1,
+            8,
+            7
+          ],
+          [
+            2,
+            3,
+            9
+          ],
+          [
+            2,
+            9,
+            8
+          ],
+          [
+            3,
+            4,
+            10
+          ],
+          [
+            3,
+            10,
+            9
+          ],
+          [
+            4,
+            5,
+            11
+          ],
+          [
+            4,
+            11,
+            10
+          ],
+          [
+            6,
+            7,
+            13
+          ],
+          [
+            6,
+            13,
+            12
+          ],
+          [
+            7,
+            8,
+            14
+          ],
+          [
+            7,
+            14,
+            13
+          ],
+          [
+            8,
+            9,
+            15
+          ],
+          [
+            8,
+            15,
+            14
+          ],
+          [
+            9,
+            10,
+            16
+          ],
+          [
+            9,
+            16,
+            15
+          ],
+          [
+            10,
+            11,
+            17
+          ],
+          [
+            10,
+            17,
+            16
+          ],
+          [
+            12,
+            13,
+            19
+          ],
+          [
+            12,
+            19,
+            18
+          ],
+          [
+            13,
+            14,
+            20
+          ],
+          [
+            13,
+            20,
+            19
+          ],
+          [
+            14,
+            15,
+            21
+          ],
+          [
+            14,
+            21,
+            20
+          ],
+          [
+            15,
+            16,
+            22
+          ],
+          [
+            15,
+            22,
+            21
+          ],
+          [
+            16,
+            17,
+            23
+          ],
+          [
+            16,
+            23,
+            22
+          ],
+          [
+            18,
+            19,
+            25
+          ],
+          [
+            18,
+            25,
+            24
+          ],
+          [
+            19,
+            20,
+            26
+          ],
+          [
+            19,
+            26,
+            25
+          ],
+          [
+            20,
+            21,
+            27
+          ],
+          [
+            20,
+            27,
+            26
+          ],
+          [
+            21,
+            22,
+            28
+          ],
+          [
+            21,
+            28,
+            27
+          ],
+          [
+            22,
+            23,
+            29
+          ],
+          [
+            22,
+            29,
+            28
+          ],
+          [
+            24,
+            25,
+            31
+          ],
+          [
+            24,
+            31,
+            30
+          ],
+          [
+            25,
+            26,
+            32
+          ],
+          [
+            25,
+            32,
+            31
+          ],
+          [
+            26,
+            27,
+            33
+          ],
+          [
+            26,
+            33,
+            32
+          ],
+          [
+            27,
+            28,
+            34
+          ],
+          [
+            27,
+            34,
+            33
+          ],
+          [
+            28,
+            29,
+            35
+          ],
+          [
+            28,
+            35,
+            34
+          ]
+        ],
+        "scope": "only this flexible part; not a whole-character grid"
+      }
+    },
+    {
+      "id": "foot-right",
+      "poly": [
+        [
+          266,
+          419
+        ],
+        [
+          292,
+          414
+        ],
+        [
+          312,
+          422
+        ],
+        [
+          327,
+          451
+        ],
+        [
+          267,
+          454
+        ]
+      ],
+      "pivot": [
+        294,
+        425
+      ],
+      "parent": "foot-target-right",
+      "kind": "rigid",
+      "image": "Parts/foot-right.png",
+      "opaquePixels": 1171,
+      "bone": "foot-target-right",
+      "mesh": {
+        "vertices": [
+          {
+            "point": [
+              264,
+              412
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 1
+              },
+              {
+                "bone": "foot-target-right",
+                "weight": 0
+              }
+            ]
+          },
+          {
+            "point": [
+              276,
+              412
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 1
+              },
+              {
+                "bone": "foot-target-right",
+                "weight": 0
+              }
+            ]
+          },
+          {
+            "point": [
+              288,
+              412
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 1
+              },
+              {
+                "bone": "foot-target-right",
+                "weight": 0
+              }
+            ]
+          },
+          {
+            "point": [
+              300,
+              412
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 1
+              },
+              {
+                "bone": "foot-target-right",
+                "weight": 0
+              }
+            ]
+          },
+          {
+            "point": [
+              312,
+              412
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 1
+              },
+              {
+                "bone": "foot-target-right",
+                "weight": 0
+              }
+            ]
+          },
+          {
+            "point": [
+              324,
+              412
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 1
+              },
+              {
+                "bone": "foot-target-right",
+                "weight": 0
+              }
+            ]
+          },
+          {
+            "point": [
+              264,
+              419.6
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.9037037037037029
+              },
+              {
+                "bone": "foot-target-right",
+                "weight": 0.09629629629629714
+              }
+            ]
+          },
+          {
+            "point": [
+              276,
+              419.6
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.9037037037037029
+              },
+              {
+                "bone": "foot-target-right",
+                "weight": 0.09629629629629714
+              }
+            ]
+          },
+          {
+            "point": [
+              288,
+              419.6
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.9037037037037029
+              },
+              {
+                "bone": "foot-target-right",
+                "weight": 0.09629629629629714
+              }
+            ]
+          },
+          {
+            "point": [
+              300,
+              419.6
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.9037037037037029
+              },
+              {
+                "bone": "foot-target-right",
+                "weight": 0.09629629629629714
+              }
+            ]
+          },
+          {
+            "point": [
+              312,
+              419.6
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.9037037037037029
+              },
+              {
+                "bone": "foot-target-right",
+                "weight": 0.09629629629629714
+              }
+            ]
+          },
+          {
+            "point": [
+              324,
+              419.6
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.9037037037037029
+              },
+              {
+                "bone": "foot-target-right",
+                "weight": 0.09629629629629714
+              }
+            ]
+          },
+          {
+            "point": [
+              264,
+              427.2
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.6222222222222227
+              },
+              {
+                "bone": "foot-target-right",
+                "weight": 0.3777777777777774
+              }
+            ]
+          },
+          {
+            "point": [
+              276,
+              427.2
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.6222222222222227
+              },
+              {
+                "bone": "foot-target-right",
+                "weight": 0.3777777777777774
+              }
+            ]
+          },
+          {
+            "point": [
+              288,
+              427.2
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.6222222222222227
+              },
+              {
+                "bone": "foot-target-right",
+                "weight": 0.3777777777777774
+              }
+            ]
+          },
+          {
+            "point": [
+              300,
+              427.2
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.6222222222222227
+              },
+              {
+                "bone": "foot-target-right",
+                "weight": 0.3777777777777774
+              }
+            ]
+          },
+          {
+            "point": [
+              312,
+              427.2
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.6222222222222227
+              },
+              {
+                "bone": "foot-target-right",
+                "weight": 0.3777777777777774
+              }
+            ]
+          },
+          {
+            "point": [
+              324,
+              427.2
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.6222222222222227
+              },
+              {
+                "bone": "foot-target-right",
+                "weight": 0.3777777777777774
+              }
+            ]
+          },
+          {
+            "point": [
+              264,
+              434.8
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.34074074074074034
+              },
+              {
+                "bone": "foot-target-right",
+                "weight": 0.6592592592592597
+              }
+            ]
+          },
+          {
+            "point": [
+              276,
+              434.8
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.34074074074074034
+              },
+              {
+                "bone": "foot-target-right",
+                "weight": 0.6592592592592597
+              }
+            ]
+          },
+          {
+            "point": [
+              288,
+              434.8
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.34074074074074034
+              },
+              {
+                "bone": "foot-target-right",
+                "weight": 0.6592592592592597
+              }
+            ]
+          },
+          {
+            "point": [
+              300,
+              434.8
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.34074074074074034
+              },
+              {
+                "bone": "foot-target-right",
+                "weight": 0.6592592592592597
+              }
+            ]
+          },
+          {
+            "point": [
+              312,
+              434.8
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.34074074074074034
+              },
+              {
+                "bone": "foot-target-right",
+                "weight": 0.6592592592592597
+              }
+            ]
+          },
+          {
+            "point": [
+              324,
+              434.8
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.34074074074074034
+              },
+              {
+                "bone": "foot-target-right",
+                "weight": 0.6592592592592597
+              }
+            ]
+          },
+          {
+            "point": [
+              264,
+              442.4
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.05925925925926012
+              },
+              {
+                "bone": "foot-target-right",
+                "weight": 0.9407407407407399
+              }
+            ]
+          },
+          {
+            "point": [
+              276,
+              442.4
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.05925925925926012
+              },
+              {
+                "bone": "foot-target-right",
+                "weight": 0.9407407407407399
+              }
+            ]
+          },
+          {
+            "point": [
+              288,
+              442.4
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.05925925925926012
+              },
+              {
+                "bone": "foot-target-right",
+                "weight": 0.9407407407407399
+              }
+            ]
+          },
+          {
+            "point": [
+              300,
+              442.4
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.05925925925926012
+              },
+              {
+                "bone": "foot-target-right",
+                "weight": 0.9407407407407399
+              }
+            ]
+          },
+          {
+            "point": [
+              312,
+              442.4
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.05925925925926012
+              },
+              {
+                "bone": "foot-target-right",
+                "weight": 0.9407407407407399
+              }
+            ]
+          },
+          {
+            "point": [
+              324,
+              442.4
+            ],
+            "weights": [
+              {
+                "bone": "body",
+                "weight": 0.05925925925926012
+              },
+              {
+                "bone": "foot-target-right",
+                "weight": 0.9407407407407399
+              }
+            ]
+          },
+          {
+            "point": [
+              264,
+              450
+            ],
+            "weights": [
+              {
+                "bone": "foot-target-right",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              276,
+              450
+            ],
+            "weights": [
+              {
+                "bone": "foot-target-right",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              288,
+              450
+            ],
+            "weights": [
+              {
+                "bone": "foot-target-right",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              300,
+              450
+            ],
+            "weights": [
+              {
+                "bone": "foot-target-right",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              312,
+              450
+            ],
+            "weights": [
+              {
+                "bone": "foot-target-right",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              324,
+              450
+            ],
+            "weights": [
+              {
+                "bone": "foot-target-right",
+                "weight": 1
+              }
+            ]
+          }
+        ],
+        "triangles": [
+          [
+            0,
+            1,
+            7
+          ],
+          [
+            0,
+            7,
+            6
+          ],
+          [
+            1,
+            2,
+            8
+          ],
+          [
+            1,
+            8,
+            7
+          ],
+          [
+            2,
+            3,
+            9
+          ],
+          [
+            2,
+            9,
+            8
+          ],
+          [
+            3,
+            4,
+            10
+          ],
+          [
+            3,
+            10,
+            9
+          ],
+          [
+            4,
+            5,
+            11
+          ],
+          [
+            4,
+            11,
+            10
+          ],
+          [
+            6,
+            7,
+            13
+          ],
+          [
+            6,
+            13,
+            12
+          ],
+          [
+            7,
+            8,
+            14
+          ],
+          [
+            7,
+            14,
+            13
+          ],
+          [
+            8,
+            9,
+            15
+          ],
+          [
+            8,
+            15,
+            14
+          ],
+          [
+            9,
+            10,
+            16
+          ],
+          [
+            9,
+            16,
+            15
+          ],
+          [
+            10,
+            11,
+            17
+          ],
+          [
+            10,
+            17,
+            16
+          ],
+          [
+            12,
+            13,
+            19
+          ],
+          [
+            12,
+            19,
+            18
+          ],
+          [
+            13,
+            14,
+            20
+          ],
+          [
+            13,
+            20,
+            19
+          ],
+          [
+            14,
+            15,
+            21
+          ],
+          [
+            14,
+            21,
+            20
+          ],
+          [
+            15,
+            16,
+            22
+          ],
+          [
+            15,
+            22,
+            21
+          ],
+          [
+            16,
+            17,
+            23
+          ],
+          [
+            16,
+            23,
+            22
+          ],
+          [
+            18,
+            19,
+            25
+          ],
+          [
+            18,
+            25,
+            24
+          ],
+          [
+            19,
+            20,
+            26
+          ],
+          [
+            19,
+            26,
+            25
+          ],
+          [
+            20,
+            21,
+            27
+          ],
+          [
+            20,
+            27,
+            26
+          ],
+          [
+            21,
+            22,
+            28
+          ],
+          [
+            21,
+            28,
+            27
+          ],
+          [
+            22,
+            23,
+            29
+          ],
+          [
+            22,
+            29,
+            28
+          ],
+          [
+            24,
+            25,
+            31
+          ],
+          [
+            24,
+            31,
+            30
+          ],
+          [
+            25,
+            26,
+            32
+          ],
+          [
+            25,
+            32,
+            31
+          ],
+          [
+            26,
+            27,
+            33
+          ],
+          [
+            26,
+            33,
+            32
+          ],
+          [
+            27,
+            28,
+            34
+          ],
+          [
+            27,
+            34,
+            33
+          ],
+          [
+            28,
+            29,
+            35
+          ],
+          [
+            28,
+            35,
+            34
+          ]
+        ],
+        "scope": "only this flexible part; not a whole-character grid"
+      }
+    },
+    {
+      "id": "antenna-cap",
+      "ellipse": [
+        260,
+        195,
+        42,
+        24
+      ],
+      "pivot": [
+        260,
+        195
+      ],
+      "parent": "antenna-tip",
+      "kind": "rigid",
+      "image": "Parts/antenna-cap.png",
+      "opaquePixels": 2631,
+      "bone": "antenna-tip"
+    },
+    {
+      "id": "antenna-stalk",
+      "poly": [
+        [
+          247,
+          208
+        ],
+        [
+          279,
+          208
+        ],
+        [
+          279,
+          279
+        ],
+        [
+          247,
+          279
+        ]
+      ],
+      "pivot": [
+        263,
+        275
+      ],
+      "parent": "body",
+      "kind": "flexible",
+      "image": "Parts/antenna-stalk.png",
+      "opaquePixels": 1525,
+      "bone": "antenna0",
+      "mesh": {
+        "vertices": [
+          {
+            "point": [
+              245,
+              217
+            ],
+            "weights": [
+              {
+                "bone": "antenna1",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              257,
+              217
+            ],
+            "weights": [
+              {
+                "bone": "antenna1",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              269,
+              217
+            ],
+            "weights": [
+              {
+                "bone": "antenna1",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              281,
+              217
+            ],
+            "weights": [
+              {
+                "bone": "antenna1",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              245,
+              225
+            ],
+            "weights": [
+              {
+                "bone": "antenna1",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              257,
+              225
+            ],
+            "weights": [
+              {
+                "bone": "antenna1",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              269,
+              225
+            ],
+            "weights": [
+              {
+                "bone": "antenna1",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              281,
+              225
+            ],
+            "weights": [
+              {
+                "bone": "antenna1",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              245,
+              233
+            ],
+            "weights": [
+              {
+                "bone": "antenna1",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              257,
+              233
+            ],
+            "weights": [
+              {
+                "bone": "antenna1",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              269,
+              233
+            ],
+            "weights": [
+              {
+                "bone": "antenna1",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              281,
+              233
+            ],
+            "weights": [
+              {
+                "bone": "antenna1",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              245,
+              241
+            ],
+            "weights": [
+              {
+                "bone": "antenna0",
+                "weight": 0.08287292817679559
+              },
+              {
+                "bone": "antenna1",
+                "weight": 0.9171270718232044
+              }
+            ]
+          },
+          {
+            "point": [
+              257,
+              241
+            ],
+            "weights": [
+              {
+                "bone": "antenna0",
+                "weight": 0.09944751381215466
+              },
+              {
+                "bone": "antenna1",
+                "weight": 0.9005524861878453
+              }
+            ]
+          },
+          {
+            "point": [
+              269,
+              241
+            ],
+            "weights": [
+              {
+                "bone": "antenna0",
+                "weight": 0.11602209944751385
+              },
+              {
+                "bone": "antenna1",
+                "weight": 0.8839779005524862
+              }
+            ]
+          },
+          {
+            "point": [
+              281,
+              241
+            ],
+            "weights": [
+              {
+                "bone": "antenna0",
+                "weight": 0.13259668508287292
+              },
+              {
+                "bone": "antenna1",
+                "weight": 0.8674033149171271
+              }
+            ]
+          },
+          {
+            "point": [
+              245,
+              249
+            ],
+            "weights": [
+              {
+                "bone": "antenna0",
+                "weight": 0.2928176795580111
+              },
+              {
+                "bone": "antenna1",
+                "weight": 0.7071823204419889
+              }
+            ]
+          },
+          {
+            "point": [
+              257,
+              249
+            ],
+            "weights": [
+              {
+                "bone": "antenna0",
+                "weight": 0.30939226519337015
+              },
+              {
+                "bone": "antenna1",
+                "weight": 0.6906077348066298
+              }
+            ]
+          },
+          {
+            "point": [
+              269,
+              249
+            ],
+            "weights": [
+              {
+                "bone": "antenna0",
+                "weight": 0.3259668508287292
+              },
+              {
+                "bone": "antenna1",
+                "weight": 0.6740331491712708
+              }
+            ]
+          },
+          {
+            "point": [
+              281,
+              249
+            ],
+            "weights": [
+              {
+                "bone": "antenna0",
+                "weight": 0.3425414364640884
+              },
+              {
+                "bone": "antenna1",
+                "weight": 0.6574585635359116
+              }
+            ]
+          },
+          {
+            "point": [
+              245,
+              257
+            ],
+            "weights": [
+              {
+                "bone": "antenna0",
+                "weight": 0.5027624309392265
+              },
+              {
+                "bone": "antenna1",
+                "weight": 0.4972375690607735
+              }
+            ]
+          },
+          {
+            "point": [
+              257,
+              257
+            ],
+            "weights": [
+              {
+                "bone": "antenna0",
+                "weight": 0.5193370165745856
+              },
+              {
+                "bone": "antenna1",
+                "weight": 0.48066298342541436
+              }
+            ]
+          },
+          {
+            "point": [
+              269,
+              257
+            ],
+            "weights": [
+              {
+                "bone": "antenna0",
+                "weight": 0.5359116022099448
+              },
+              {
+                "bone": "antenna1",
+                "weight": 0.46408839779005523
+              }
+            ]
+          },
+          {
+            "point": [
+              281,
+              257
+            ],
+            "weights": [
+              {
+                "bone": "antenna0",
+                "weight": 0.5524861878453038
+              },
+              {
+                "bone": "antenna1",
+                "weight": 0.44751381215469616
+              }
+            ]
+          },
+          {
+            "point": [
+              245,
+              265
+            ],
+            "weights": [
+              {
+                "bone": "antenna0",
+                "weight": 0.7127071823204421
+              },
+              {
+                "bone": "antenna1",
+                "weight": 0.287292817679558
+              }
+            ]
+          },
+          {
+            "point": [
+              257,
+              265
+            ],
+            "weights": [
+              {
+                "bone": "antenna0",
+                "weight": 0.7292817679558011
+              },
+              {
+                "bone": "antenna1",
+                "weight": 0.27071823204419887
+              }
+            ]
+          },
+          {
+            "point": [
+              269,
+              265
+            ],
+            "weights": [
+              {
+                "bone": "antenna0",
+                "weight": 0.7458563535911602
+              },
+              {
+                "bone": "antenna1",
+                "weight": 0.2541436464088398
+              }
+            ]
+          },
+          {
+            "point": [
+              281,
+              265
+            ],
+            "weights": [
+              {
+                "bone": "antenna0",
+                "weight": 0.7624309392265194
+              },
+              {
+                "bone": "antenna1",
+                "weight": 0.23756906077348067
+              }
+            ]
+          },
+          {
+            "point": [
+              245,
+              273
+            ],
+            "weights": [
+              {
+                "bone": "antenna0",
+                "weight": 0.9226519337016574
+              },
+              {
+                "bone": "antenna1",
+                "weight": 0.07734806629834254
+              }
+            ]
+          },
+          {
+            "point": [
+              257,
+              273
+            ],
+            "weights": [
+              {
+                "bone": "antenna0",
+                "weight": 0.9392265193370166
+              },
+              {
+                "bone": "antenna1",
+                "weight": 0.06077348066298342
+              }
+            ]
+          },
+          {
+            "point": [
+              269,
+              273
+            ],
+            "weights": [
+              {
+                "bone": "antenna0",
+                "weight": 0.9558011049723757
+              },
+              {
+                "bone": "antenna1",
+                "weight": 0.04419889502762431
+              }
+            ]
+          },
+          {
+            "point": [
+              281,
+              273
+            ],
+            "weights": [
+              {
+                "bone": "antenna0",
+                "weight": 0.9723756906077348
+              },
+              {
+                "bone": "antenna1",
+                "weight": 0.027624309392265192
+              }
+            ]
+          },
+          {
+            "point": [
+              245,
+              281
+            ],
+            "weights": [
+              {
+                "bone": "antenna0",
+                "weight": 1
+              },
+              {
+                "bone": "antenna1",
+                "weight": 0
+              }
+            ]
+          },
+          {
+            "point": [
+              257,
+              281
+            ],
+            "weights": [
+              {
+                "bone": "antenna0",
+                "weight": 1
+              },
+              {
+                "bone": "antenna1",
+                "weight": 0
+              }
+            ]
+          },
+          {
+            "point": [
+              269,
+              281
+            ],
+            "weights": [
+              {
+                "bone": "antenna0",
+                "weight": 1
+              },
+              {
+                "bone": "antenna1",
+                "weight": 0
+              }
+            ]
+          },
+          {
+            "point": [
+              281,
+              281
+            ],
+            "weights": [
+              {
+                "bone": "antenna0",
+                "weight": 1
+              },
+              {
+                "bone": "antenna1",
+                "weight": 0
+              }
+            ]
+          }
+        ],
+        "triangles": [
+          [
+            0,
+            1,
+            5
+          ],
+          [
+            0,
+            5,
+            4
+          ],
+          [
+            1,
+            2,
+            6
+          ],
+          [
+            1,
+            6,
+            5
+          ],
+          [
+            2,
+            3,
+            7
+          ],
+          [
+            2,
+            7,
+            6
+          ],
+          [
+            4,
+            5,
+            9
+          ],
+          [
+            4,
+            9,
+            8
+          ],
+          [
+            5,
+            6,
+            10
+          ],
+          [
+            5,
+            10,
+            9
+          ],
+          [
+            6,
+            7,
+            11
+          ],
+          [
+            6,
+            11,
+            10
+          ],
+          [
+            8,
+            9,
+            13
+          ],
+          [
+            8,
+            13,
+            12
+          ],
+          [
+            9,
+            10,
+            14
+          ],
+          [
+            9,
+            14,
+            13
+          ],
+          [
+            10,
+            11,
+            15
+          ],
+          [
+            10,
+            15,
+            14
+          ],
+          [
+            12,
+            13,
+            17
+          ],
+          [
+            12,
+            17,
+            16
+          ],
+          [
+            13,
+            14,
+            18
+          ],
+          [
+            13,
+            18,
+            17
+          ],
+          [
+            14,
+            15,
+            19
+          ],
+          [
+            14,
+            19,
+            18
+          ],
+          [
+            16,
+            17,
+            21
+          ],
+          [
+            16,
+            21,
+            20
+          ],
+          [
+            17,
+            18,
+            22
+          ],
+          [
+            17,
+            22,
+            21
+          ],
+          [
+            18,
+            19,
+            23
+          ],
+          [
+            18,
+            23,
+            22
+          ],
+          [
+            20,
+            21,
+            25
+          ],
+          [
+            20,
+            25,
+            24
+          ],
+          [
+            21,
+            22,
+            26
+          ],
+          [
+            21,
+            26,
+            25
+          ],
+          [
+            22,
+            23,
+            27
+          ],
+          [
+            22,
+            27,
+            26
+          ],
+          [
+            24,
+            25,
+            29
+          ],
+          [
+            24,
+            29,
+            28
+          ],
+          [
+            25,
+            26,
+            30
+          ],
+          [
+            25,
+            30,
+            29
+          ],
+          [
+            26,
+            27,
+            31
+          ],
+          [
+            26,
+            31,
+            30
+          ],
+          [
+            28,
+            29,
+            33
+          ],
+          [
+            28,
+            33,
+            32
+          ],
+          [
+            29,
+            30,
+            34
+          ],
+          [
+            29,
+            34,
+            33
+          ],
+          [
+            30,
+            31,
+            35
+          ],
+          [
+            30,
+            35,
+            34
+          ]
+        ],
+        "scope": "only this flexible part; not a whole-character grid"
+      }
+    },
+    {
+      "id": "blade-leaf",
+      "poly": [
+        [
+          251,
+          282
+        ],
+        [
+          260,
+          248
+        ],
+        [
+          284,
+          212
+        ],
+        [
+          334,
+          193
+        ],
+        [
+          389,
+          176
+        ],
+        [
+          427,
+          150
+        ],
+        [
+          420,
+          187
+        ],
+        [
+          403,
+          208
+        ],
+        [
+          363,
+          228
+        ],
+        [
+          315,
+          249
+        ],
+        [
+          283,
+          274
+        ],
+        [
+          269,
+          286
+        ]
+      ],
+      "pivot": [
+        263,
+        275
+      ],
+      "parent": "body",
+      "kind": "flexible",
+      "image": "Parts/blade-leaf.png",
+      "opaquePixels": 6826,
+      "bone": "blade0",
+      "mesh": {
+        "vertices": [
+          {
+            "point": [
+              249,
+              158
+            ],
+            "weights": [
+              {
+                "bone": "blade0",
+                "weight": 0
+              },
+              {
+                "bone": "blade1",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              270.875,
+              158
+            ],
+            "weights": [
+              {
+                "bone": "blade1",
+                "weight": 0.7303972143409854
+              },
+              {
+                "bone": "blade2",
+                "weight": 0.2696027856590147
+              }
+            ]
+          },
+          {
+            "point": [
+              292.75,
+              158
+            ],
+            "weights": [
+              {
+                "bone": "blade1",
+                "weight": 0.4257157596079443
+              },
+              {
+                "bone": "blade2",
+                "weight": 0.5742842403920557
+              }
+            ]
+          },
+          {
+            "point": [
+              314.625,
+              158
+            ],
+            "weights": [
+              {
+                "bone": "blade1",
+                "weight": 0.1210343048749033
+              },
+              {
+                "bone": "blade2",
+                "weight": 0.8789656951250967
+              }
+            ]
+          },
+          {
+            "point": [
+              336.5,
+              158
+            ],
+            "weights": [
+              {
+                "bone": "blade2",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              358.375,
+              158
+            ],
+            "weights": [
+              {
+                "bone": "blade2",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              380.25,
+              158
+            ],
+            "weights": [
+              {
+                "bone": "blade2",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              402.125,
+              158
+            ],
+            "weights": [
+              {
+                "bone": "blade2",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              424,
+              158
+            ],
+            "weights": [
+              {
+                "bone": "blade2",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              249,
+              179.66666666666666
+            ],
+            "weights": [
+              {
+                "bone": "blade0",
+                "weight": 0
+              },
+              {
+                "bone": "blade1",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              270.875,
+              179.66666666666666
+            ],
+            "weights": [
+              {
+                "bone": "blade1",
+                "weight": 0.9036411314590318
+              },
+              {
+                "bone": "blade2",
+                "weight": 0.0963588685409682
+              }
+            ]
+          },
+          {
+            "point": [
+              292.75,
+              179.66666666666666
+            ],
+            "weights": [
+              {
+                "bone": "blade1",
+                "weight": 0.5989596767259908
+              },
+              {
+                "bone": "blade2",
+                "weight": 0.40104032327400924
+              }
+            ]
+          },
+          {
+            "point": [
+              314.625,
+              179.66666666666666
+            ],
+            "weights": [
+              {
+                "bone": "blade1",
+                "weight": 0.29427822199294973
+              },
+              {
+                "bone": "blade2",
+                "weight": 0.7057217780070503
+              }
+            ]
+          },
+          {
+            "point": [
+              336.5,
+              179.66666666666666
+            ],
+            "weights": [
+              {
+                "bone": "blade2",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              358.375,
+              179.66666666666666
+            ],
+            "weights": [
+              {
+                "bone": "blade2",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              380.25,
+              179.66666666666666
+            ],
+            "weights": [
+              {
+                "bone": "blade2",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              402.125,
+              179.66666666666666
+            ],
+            "weights": [
+              {
+                "bone": "blade2",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              424,
+              179.66666666666666
+            ],
+            "weights": [
+              {
+                "bone": "blade2",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              249,
+              201.33333333333334
+            ],
+            "weights": [
+              {
+                "bone": "blade0",
+                "weight": 0.02716488730723632
+              },
+              {
+                "bone": "blade1",
+                "weight": 0.9728351126927637
+              }
+            ]
+          },
+          {
+            "point": [
+              270.875,
+              201.33333333333334
+            ],
+            "weights": [
+              {
+                "bone": "blade0",
+                "weight": 0
+              },
+              {
+                "bone": "blade1",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              292.75,
+              201.33333333333334
+            ],
+            "weights": [
+              {
+                "bone": "blade1",
+                "weight": 0.7722035938440376
+              },
+              {
+                "bone": "blade2",
+                "weight": 0.22779640615596244
+              }
+            ]
+          },
+          {
+            "point": [
+              314.625,
+              201.33333333333334
+            ],
+            "weights": [
+              {
+                "bone": "blade1",
+                "weight": 0.4675221391109965
+              },
+              {
+                "bone": "blade2",
+                "weight": 0.5324778608890035
+              }
+            ]
+          },
+          {
+            "point": [
+              336.5,
+              201.33333333333334
+            ],
+            "weights": [
+              {
+                "bone": "blade1",
+                "weight": 0.1628406843779555
+              },
+              {
+                "bone": "blade2",
+                "weight": 0.8371593156220445
+              }
+            ]
+          },
+          {
+            "point": [
+              358.375,
+              201.33333333333334
+            ],
+            "weights": [
+              {
+                "bone": "blade2",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              380.25,
+              201.33333333333334
+            ],
+            "weights": [
+              {
+                "bone": "blade2",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              402.125,
+              201.33333333333334
+            ],
+            "weights": [
+              {
+                "bone": "blade2",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              424,
+              201.33333333333334
+            ],
+            "weights": [
+              {
+                "bone": "blade2",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              249,
+              223
+            ],
+            "weights": [
+              {
+                "bone": "blade0",
+                "weight": 0.35871886120996443
+              },
+              {
+                "bone": "blade1",
+                "weight": 0.6412811387900356
+              }
+            ]
+          },
+          {
+            "point": [
+              270.875,
+              223
+            ],
+            "weights": [
+              {
+                "bone": "blade0",
+                "weight": 0.11739323843416372
+              },
+              {
+                "bone": "blade1",
+                "weight": 0.8826067615658363
+              }
+            ]
+          },
+          {
+            "point": [
+              292.75,
+              223
+            ],
+            "weights": [
+              {
+                "bone": "blade1",
+                "weight": 0.9454475109620841
+              },
+              {
+                "bone": "blade2",
+                "weight": 0.054552489037915916
+              }
+            ]
+          },
+          {
+            "point": [
+              314.625,
+              223
+            ],
+            "weights": [
+              {
+                "bone": "blade1",
+                "weight": 0.6407660562290431
+              },
+              {
+                "bone": "blade2",
+                "weight": 0.3592339437709569
+              }
+            ]
+          },
+          {
+            "point": [
+              336.5,
+              223
+            ],
+            "weights": [
+              {
+                "bone": "blade1",
+                "weight": 0.33608460149600206
+              },
+              {
+                "bone": "blade2",
+                "weight": 0.6639153985039979
+              }
+            ]
+          },
+          {
+            "point": [
+              358.375,
+              223
+            ],
+            "weights": [
+              {
+                "bone": "blade1",
+                "weight": 0.031403146762961076
+              },
+              {
+                "bone": "blade2",
+                "weight": 0.9685968532370389
+              }
+            ]
+          },
+          {
+            "point": [
+              380.25,
+              223
+            ],
+            "weights": [
+              {
+                "bone": "blade2",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              402.125,
+              223
+            ],
+            "weights": [
+              {
+                "bone": "blade2",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              424,
+              223
+            ],
+            "weights": [
+              {
+                "bone": "blade2",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              249,
+              244.66666666666669
+            ],
+            "weights": [
+              {
+                "bone": "blade0",
+                "weight": 0.690272835112693
+              },
+              {
+                "bone": "blade1",
+                "weight": 0.30972716488730695
+              }
+            ]
+          },
+          {
+            "point": [
+              270.875,
+              244.66666666666669
+            ],
+            "weights": [
+              {
+                "bone": "blade0",
+                "weight": 0.4489472123368923
+              },
+              {
+                "bone": "blade1",
+                "weight": 0.5510527876631077
+              }
+            ]
+          },
+          {
+            "point": [
+              292.75,
+              244.66666666666669
+            ],
+            "weights": [
+              {
+                "bone": "blade0",
+                "weight": 0.20762158956109156
+              },
+              {
+                "bone": "blade1",
+                "weight": 0.7923784104389084
+              }
+            ]
+          },
+          {
+            "point": [
+              314.625,
+              244.66666666666669
+            ],
+            "weights": [
+              {
+                "bone": "blade1",
+                "weight": 0.8140099733470898
+              },
+              {
+                "bone": "blade2",
+                "weight": 0.1859900266529102
+              }
+            ]
+          },
+          {
+            "point": [
+              336.5,
+              244.66666666666669
+            ],
+            "weights": [
+              {
+                "bone": "blade1",
+                "weight": 0.5093285186140488
+              },
+              {
+                "bone": "blade2",
+                "weight": 0.4906714813859512
+              }
+            ]
+          },
+          {
+            "point": [
+              358.375,
+              244.66666666666669
+            ],
+            "weights": [
+              {
+                "bone": "blade1",
+                "weight": 0.20464706388100784
+              },
+              {
+                "bone": "blade2",
+                "weight": 0.7953529361189922
+              }
+            ]
+          },
+          {
+            "point": [
+              380.25,
+              244.66666666666669
+            ],
+            "weights": [
+              {
+                "bone": "blade2",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              402.125,
+              244.66666666666669
+            ],
+            "weights": [
+              {
+                "bone": "blade2",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              424,
+              244.66666666666669
+            ],
+            "weights": [
+              {
+                "bone": "blade2",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              249,
+              266.3333333333333
+            ],
+            "weights": [
+              {
+                "bone": "blade0",
+                "weight": 1
+              },
+              {
+                "bone": "blade1",
+                "weight": 0
+              }
+            ]
+          },
+          {
+            "point": [
+              270.875,
+              266.3333333333333
+            ],
+            "weights": [
+              {
+                "bone": "blade0",
+                "weight": 0.7805011862396202
+              },
+              {
+                "bone": "blade1",
+                "weight": 0.21949881376037986
+              }
+            ]
+          },
+          {
+            "point": [
+              292.75,
+              266.3333333333333
+            ],
+            "weights": [
+              {
+                "bone": "blade0",
+                "weight": 0.5391755634638193
+              },
+              {
+                "bone": "blade1",
+                "weight": 0.4608244365361806
+              }
+            ]
+          },
+          {
+            "point": [
+              314.625,
+              266.3333333333333
+            ],
+            "weights": [
+              {
+                "bone": "blade0",
+                "weight": 0.29784994068801873
+              },
+              {
+                "bone": "blade1",
+                "weight": 0.7021500593119813
+              }
+            ]
+          },
+          {
+            "point": [
+              336.5,
+              266.3333333333333
+            ],
+            "weights": [
+              {
+                "bone": "blade1",
+                "weight": 0.6825724357320951
+              },
+              {
+                "bone": "blade2",
+                "weight": 0.31742756426790486
+              }
+            ]
+          },
+          {
+            "point": [
+              358.375,
+              266.3333333333333
+            ],
+            "weights": [
+              {
+                "bone": "blade1",
+                "weight": 0.37789098099905416
+              },
+              {
+                "bone": "blade2",
+                "weight": 0.6221090190009458
+              }
+            ]
+          },
+          {
+            "point": [
+              380.25,
+              266.3333333333333
+            ],
+            "weights": [
+              {
+                "bone": "blade1",
+                "weight": 0.07320952626601318
+              },
+              {
+                "bone": "blade2",
+                "weight": 0.9267904737339868
+              }
+            ]
+          },
+          {
+            "point": [
+              402.125,
+              266.3333333333333
+            ],
+            "weights": [
+              {
+                "bone": "blade2",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              424,
+              266.3333333333333
+            ],
+            "weights": [
+              {
+                "bone": "blade2",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              249,
+              288
+            ],
+            "weights": [
+              {
+                "bone": "blade0",
+                "weight": 1
+              },
+              {
+                "bone": "blade1",
+                "weight": 0
+              }
+            ]
+          },
+          {
+            "point": [
+              270.875,
+              288
+            ],
+            "weights": [
+              {
+                "bone": "blade0",
+                "weight": 1
+              },
+              {
+                "bone": "blade1",
+                "weight": 0
+              }
+            ]
+          },
+          {
+            "point": [
+              292.75,
+              288
+            ],
+            "weights": [
+              {
+                "bone": "blade0",
+                "weight": 0.870729537366548
+              },
+              {
+                "bone": "blade1",
+                "weight": 0.12927046263345196
+              }
+            ]
+          },
+          {
+            "point": [
+              314.625,
+              288
+            ],
+            "weights": [
+              {
+                "bone": "blade0",
+                "weight": 0.6294039145907473
+              },
+              {
+                "bone": "blade1",
+                "weight": 0.37059608540925265
+              }
+            ]
+          },
+          {
+            "point": [
+              336.5,
+              288
+            ],
+            "weights": [
+              {
+                "bone": "blade0",
+                "weight": 0.3880782918149466
+              },
+              {
+                "bone": "blade1",
+                "weight": 0.6119217081850534
+              }
+            ]
+          },
+          {
+            "point": [
+              358.375,
+              288
+            ],
+            "weights": [
+              {
+                "bone": "blade1",
+                "weight": 0.5511348981171009
+              },
+              {
+                "bone": "blade2",
+                "weight": 0.44886510188289913
+              }
+            ]
+          },
+          {
+            "point": [
+              380.25,
+              288
+            ],
+            "weights": [
+              {
+                "bone": "blade1",
+                "weight": 0.24645344338405983
+              },
+              {
+                "bone": "blade2",
+                "weight": 0.7535465566159402
+              }
+            ]
+          },
+          {
+            "point": [
+              402.125,
+              288
+            ],
+            "weights": [
+              {
+                "bone": "blade2",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "point": [
+              424,
+              288
+            ],
+            "weights": [
+              {
+                "bone": "blade2",
+                "weight": 1
+              }
+            ]
+          }
+        ],
+        "triangles": [
+          [
+            0,
+            1,
+            10
+          ],
+          [
+            0,
+            10,
+            9
+          ],
+          [
+            1,
+            2,
+            11
+          ],
+          [
+            1,
+            11,
+            10
+          ],
+          [
+            2,
+            3,
+            12
+          ],
+          [
+            2,
+            12,
+            11
+          ],
+          [
+            3,
+            4,
+            13
+          ],
+          [
+            3,
+            13,
+            12
+          ],
+          [
+            4,
+            5,
+            14
+          ],
+          [
+            4,
+            14,
+            13
+          ],
+          [
+            5,
+            6,
+            15
+          ],
+          [
+            5,
+            15,
+            14
+          ],
+          [
+            6,
+            7,
+            16
+          ],
+          [
+            6,
+            16,
+            15
+          ],
+          [
+            7,
+            8,
+            17
+          ],
+          [
+            7,
+            17,
+            16
+          ],
+          [
+            9,
+            10,
+            19
+          ],
+          [
+            9,
+            19,
+            18
+          ],
+          [
+            10,
+            11,
+            20
+          ],
+          [
+            10,
+            20,
+            19
+          ],
+          [
+            11,
+            12,
+            21
+          ],
+          [
+            11,
+            21,
+            20
+          ],
+          [
+            12,
+            13,
+            22
+          ],
+          [
+            12,
+            22,
+            21
+          ],
+          [
+            13,
+            14,
+            23
+          ],
+          [
+            13,
+            23,
+            22
+          ],
+          [
+            14,
+            15,
+            24
+          ],
+          [
+            14,
+            24,
+            23
+          ],
+          [
+            15,
+            16,
+            25
+          ],
+          [
+            15,
+            25,
+            24
+          ],
+          [
+            16,
+            17,
+            26
+          ],
+          [
+            16,
+            26,
+            25
+          ],
+          [
+            18,
+            19,
+            28
+          ],
+          [
+            18,
+            28,
+            27
+          ],
+          [
+            19,
+            20,
+            29
+          ],
+          [
+            19,
+            29,
+            28
+          ],
+          [
+            20,
+            21,
+            30
+          ],
+          [
+            20,
+            30,
+            29
+          ],
+          [
+            21,
+            22,
+            31
+          ],
+          [
+            21,
+            31,
+            30
+          ],
+          [
+            22,
+            23,
+            32
+          ],
+          [
+            22,
+            32,
+            31
+          ],
+          [
+            23,
+            24,
+            33
+          ],
+          [
+            23,
+            33,
+            32
+          ],
+          [
+            24,
+            25,
+            34
+          ],
+          [
+            24,
+            34,
+            33
+          ],
+          [
+            25,
+            26,
+            35
+          ],
+          [
+            25,
+            35,
+            34
+          ],
+          [
+            27,
+            28,
+            37
+          ],
+          [
+            27,
+            37,
+            36
+          ],
+          [
+            28,
+            29,
+            38
+          ],
+          [
+            28,
+            38,
+            37
+          ],
+          [
+            29,
+            30,
+            39
+          ],
+          [
+            29,
+            39,
+            38
+          ],
+          [
+            30,
+            31,
+            40
+          ],
+          [
+            30,
+            40,
+            39
+          ],
+          [
+            31,
+            32,
+            41
+          ],
+          [
+            31,
+            41,
+            40
+          ],
+          [
+            32,
+            33,
+            42
+          ],
+          [
+            32,
+            42,
+            41
+          ],
+          [
+            33,
+            34,
+            43
+          ],
+          [
+            33,
+            43,
+            42
+          ],
+          [
+            34,
+            35,
+            44
+          ],
+          [
+            34,
+            44,
+            43
+          ],
+          [
+            36,
+            37,
+            46
+          ],
+          [
+            36,
+            46,
+            45
+          ],
+          [
+            37,
+            38,
+            47
+          ],
+          [
+            37,
+            47,
+            46
+          ],
+          [
+            38,
+            39,
+            48
+          ],
+          [
+            38,
+            48,
+            47
+          ],
+          [
+            39,
+            40,
+            49
+          ],
+          [
+            39,
+            49,
+            48
+          ],
+          [
+            40,
+            41,
+            50
+          ],
+          [
+            40,
+            50,
+            49
+          ],
+          [
+            41,
+            42,
+            51
+          ],
+          [
+            41,
+            51,
+            50
+          ],
+          [
+            42,
+            43,
+            52
+          ],
+          [
+            42,
+            52,
+            51
+          ],
+          [
+            43,
+            44,
+            53
+          ],
+          [
+            43,
+            53,
+            52
+          ],
+          [
+            45,
+            46,
+            55
+          ],
+          [
+            45,
+            55,
+            54
+          ],
+          [
+            46,
+            47,
+            56
+          ],
+          [
+            46,
+            56,
+            55
+          ],
+          [
+            47,
+            48,
+            57
+          ],
+          [
+            47,
+            57,
+            56
+          ],
+          [
+            48,
+            49,
+            58
+          ],
+          [
+            48,
+            58,
+            57
+          ],
+          [
+            49,
+            50,
+            59
+          ],
+          [
+            49,
+            59,
+            58
+          ],
+          [
+            50,
+            51,
+            60
+          ],
+          [
+            50,
+            60,
+            59
+          ],
+          [
+            51,
+            52,
+            61
+          ],
+          [
+            51,
+            61,
+            60
+          ],
+          [
+            52,
+            53,
+            62
+          ],
+          [
+            52,
+            62,
+            61
+          ]
+        ],
+        "scope": "only this flexible part; not a whole-character grid"
+      }
+    },
+    {
+      "id": "upper-leaf",
+      "poly": [
+        [
+          174,
+          246
+        ],
+        [
+          188,
+          226
+        ],
+        [
+          215,
+          220
+        ],
+        [
+          246,
+          230
+        ],
+        [
+          267,
+          249
+        ],
+        [
+          266,
+          277
+        ],
+        [
+          233,
+          277
+        ],
+        [
+          207,
+          269
+        ],
+        [
+          187,
+          261
+        ]
+      ],
+      "pivot": [
+        259,
+        268
+      ],
+      "parent": "body",
+      "kind": "flexible",
+      "image": "Parts/upper-leaf.png",
+      "opaquePixels": 2489,
+      "bone": "upper"
+    },
+    {
+      "id": "gland-plate",
+      "poly": [
+        [
+          233,
+          286
+        ],
+        [
+          247,
+          270
+        ],
+        [
+          278,
+          268
+        ],
+        [
+          314,
+          278
+        ],
+        [
+          334,
+          289
+        ],
+        [
+          361,
+          282
+        ],
+        [
+          382,
+          289
+        ],
+        [
+          384,
+          316
+        ],
+        [
+          369,
+          335
+        ],
+        [
+          342,
+          343
+        ],
+        [
+          316,
+          328
+        ],
+        [
+          272,
+          316
+        ],
+        [
+          239,
+          309
+        ]
+      ],
+      "pivot": [
+        267,
+        299
+      ],
+      "parent": "body",
+      "kind": "rigid",
+      "image": "Parts/gland-plate.png",
+      "opaquePixels": 6236,
+      "bone": "gland"
+    },
+    {
+      "id": "armor-right",
+      "poly": [
+        [
+          307,
+          317
+        ],
+        [
+          342,
+          319
+        ],
+        [
+          367,
+          328
+        ],
+        [
+          386,
+          350
+        ],
+        [
+          390,
+          379
+        ],
+        [
+          381,
+          406
+        ],
+        [
+          357,
+          428
+        ],
+        [
+          319,
+          431
+        ],
+        [
+          308,
+          414
+        ],
+        [
+          320,
+          385
+        ],
+        [
+          317,
+          356
+        ]
+      ],
+      "pivot": [
+        320,
+        325
+      ],
+      "parent": "body",
+      "kind": "flexible",
+      "image": "Parts/armor-right.png",
+      "opaquePixels": 4971,
+      "bone": "armor-right"
+    },
+    {
+      "id": "armor-left",
+      "poly": [
+        [
+          148,
+          338
+        ],
+        [
+          161,
+          307
+        ],
+        [
+          186,
+          283
+        ],
+        [
+          215,
+          273
+        ],
+        [
+          245,
+          274
+        ],
+        [
+          255,
+          289
+        ],
+        [
+          236,
+          312
+        ],
+        [
+          215,
+          326
+        ],
+        [
+          202,
+          350
+        ],
+        [
+          191,
+          379
+        ],
+        [
+          177,
+          402
+        ],
+        [
+          160,
+          405
+        ],
+        [
+          150,
+          382
+        ]
+      ],
+      "pivot": [
+        235,
+        289
+      ],
+      "parent": "body",
+      "kind": "flexible",
+      "image": "Parts/armor-left.png",
+      "opaquePixels": 5716,
+      "bone": "armor-left"
+    },
+    {
+      "id": "body",
+      "poly": [
+        [
+          0,
+          0
+        ],
+        [
+          512,
+          0
+        ],
+        [
+          512,
+          512
+        ],
+        [
+          0,
+          512
+        ]
+      ],
+      "pivot": [
+        256,
+        398
+      ],
+      "parent": "root",
+      "kind": "soft-body",
+      "image": "Parts/body.png",
+      "opaquePixels": 10677,
+      "bone": "body"
+    }
+  ],
+  "backing": {
+    "image": "Parts/body-backing.png",
+    "generated": "body-hidden-generated.png",
+    "occlusion": "visible only beneath original fully opaque pixels"
+  },
+  "neutralReassembly": {
+    "maxChannelError": 1,
+    "channelErrorsAbove1": 0
+  },
+  "bones": [
+    {
+      "id": "root",
+      "parent": null,
+      "point": [
+        256,
+        448
+      ],
+      "angle": 0
+    },
+    {
+      "id": "body",
+      "parent": "root",
+      "point": [
+        256,
+        398
+      ],
+      "angle": 0
+    },
+    {
+      "id": "face",
+      "parent": "body",
+      "point": [
+        256,
+        365
+      ],
+      "angle": 0
+    },
+    {
+      "id": "foot-target-left",
+      "parent": "root",
+      "point": [
+        220,
+        425
+      ],
+      "angle": 0
+    },
+    {
+      "id": "foot-target-right",
+      "parent": "root",
+      "point": [
+        294,
+        425
+      ],
+      "angle": 0
+    },
+    {
+      "id": "blade0",
+      "parent": "body",
+      "point": [
+        263,
+        275
+      ],
+      "angle": -0.946160904023283
+    },
+    {
+      "id": "blade1",
+      "parent": "blade0",
+      "point": [
+        294,
+        232
+      ],
+      "angle": -0.5211381434841182
+    },
+    {
+      "id": "blade2",
+      "parent": "blade1",
+      "point": [
+        348,
+        201
+      ],
+      "angle": -0.5191461142465229
+    },
+    {
+      "id": "antenna0",
+      "parent": "body",
+      "point": [
+        263,
+        275
+      ],
+      "angle": -1.5707963267948966
+    },
+    {
+      "id": "antenna1",
+      "parent": "antenna0",
+      "point": [
+        261,
+        237
+      ],
+      "angle": -1.5707963267948966
+    },
+    {
+      "id": "antenna-tip",
+      "parent": "antenna1",
+      "point": [
+        260,
+        195
+      ],
+      "angle": 0
+    },
+    {
+      "id": "upper",
+      "parent": "body",
+      "point": [
+        259,
+        268
+      ],
+      "angle": 0
+    },
+    {
+      "id": "gland",
+      "parent": "body",
+      "point": [
+        267,
+        299
+      ],
+      "angle": 0
+    },
+    {
+      "id": "armor-left",
+      "parent": "body",
+      "point": [
+        235,
+        289
+      ],
+      "angle": 0
+    },
+    {
+      "id": "armor-right",
+      "parent": "body",
+      "point": [
+        320,
+        325
+      ],
+      "angle": 0
+    }
+  ],
+  "actions": {
+    "idle": {
+      "durationMs": 6400,
+      "loop": true,
+      "events": []
+    },
+    "walk": {
+      "durationMs": 1120,
+      "loop": true,
+      "events": [
+        {
+          "type": "contact",
+          "atMs": 0,
+          "attachment": "foot-left"
+        },
+        {
+          "type": "contact",
+          "atMs": 280,
+          "attachment": "foot-right"
+        },
+        {
+          "type": "contact",
+          "atMs": 560,
+          "attachment": "foot-left"
+        },
+        {
+          "type": "contact",
+          "atMs": 840,
+          "attachment": "foot-right"
+        }
+      ]
+    },
+    "hurt": {
+      "durationMs": 760,
+      "loop": false,
+      "events": [
+        {
+          "type": "contact",
+          "atMs": 0,
+          "attachment": "foot-left"
+        },
+        {
+          "type": "contact",
+          "atMs": 0,
+          "attachment": "foot-right"
+        }
+      ]
+    }
+  }
+}

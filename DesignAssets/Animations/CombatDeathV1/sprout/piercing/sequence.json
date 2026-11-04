@@ -1,0 +1,105 @@
+{
+  "tribe": "sprout",
+  "variant": "piercing",
+  "action": "death",
+  "image": "DesignAssets/Animations/CombatDeathV1/sprout/piercing/death.webp",
+  "frameSize": 512,
+  "columns": 4,
+  "frameCount": 8,
+  "pivotX": 256,
+  "pivotY": 448,
+  "durationsMs": [
+    100,
+    90,
+    90,
+    100,
+    140,
+    100,
+    100,
+    1100
+  ],
+  "durationMs": 1820,
+  "loop": false,
+  "approvedMidFrame": 4,
+  "approvedFinalFrame": 7,
+  "method": "full-body drawn intermediate poses; fixed asset-camera registration; no pose alpha blending",
+  "frameSources": [
+    {
+      "frame": 0,
+      "source": "Source/neutral-registered.png"
+    },
+    {
+      "frame": 1,
+      "source": "Source/drawn-production.png#cell1"
+    },
+    {
+      "frame": 2,
+      "source": "Source/drawn-production.png#cell2"
+    },
+    {
+      "frame": 3,
+      "source": "Source/bridge-3-production.png#cell1"
+    },
+    {
+      "frame": 4,
+      "source": "Source/camera-mid.png"
+    },
+    {
+      "frame": 5,
+      "source": "Source/drawn-production.png#cell5"
+    },
+    {
+      "frame": 6,
+      "source": "Source/drawn-production.png#cell6"
+    },
+    {
+      "frame": 7,
+      "source": "Source/camera-final.png"
+    }
+  ],
+  "source": {
+    "drawn": "Source/drawn-production.png",
+    "bridge": "Source/bridge-3-production.png",
+    "keys": "DesignAssets/Animations/CombatDeathKeysV1/Source/sprout.png",
+    "registration": "Source/registration.json",
+    "neutral": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/piercing/idle.webp",
+    "bridgeAlphaCleanup": "remove only non-opaque background farther than 3px from opaque sprite"
+  },
+  "alphaCleanup": {
+    "policy": "alpha below16 removed; saturated low-alpha below64 removed; invisible RGB zeroed",
+    "frames": [
+      {
+        "removedLowAlphaPixels": 2661,
+        "clearedTransparentRgb": 901
+      },
+      {
+        "removedLowAlphaPixels": 46880,
+        "clearedTransparentRgb": 3026
+      },
+      {
+        "removedLowAlphaPixels": 50035,
+        "clearedTransparentRgb": 3289
+      },
+      {
+        "removedLowAlphaPixels": 1469,
+        "clearedTransparentRgb": 855
+      },
+      {
+        "removedLowAlphaPixels": 226,
+        "clearedTransparentRgb": 239
+      },
+      {
+        "removedLowAlphaPixels": 9474,
+        "clearedTransparentRgb": 752
+      },
+      {
+        "removedLowAlphaPixels": 6005,
+        "clearedTransparentRgb": 864
+      },
+      {
+        "removedLowAlphaPixels": 188,
+        "clearedTransparentRgb": 203
+      }
+    ]
+  }
+}

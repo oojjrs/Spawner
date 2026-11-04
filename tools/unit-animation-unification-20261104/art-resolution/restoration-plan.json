@@ -1,0 +1,274 @@
+[
+  {
+    "source": "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.webp",
+    "unit": "bean",
+    "sourceCell": 512,
+    "oldFrame": 276,
+    "frameSize": 631,
+    "factor": 2.286231884057971,
+    "oldRegistration": {
+      "frameSize": 276,
+      "pivotX": 138,
+      "pivotY": 242,
+      "viewSize": 276,
+      "registrationScale": 1.2321428571428572
+    },
+    "originalTransformFactor": 2.2857142857142856,
+    "output": "H:/Spawner/$Trash/unit-animation-unification-20261104/art-resolution/restored/DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.webp"
+  },
+  {
+    "source": "DesignAssets/Animations/UnitAttack/attack.png",
+    "unit": "bean",
+    "sourceCell": 512,
+    "oldFrame": 148,
+    "frameSize": 632,
+    "factor": 4.27027027027027,
+    "oldRegistration": {
+      "frameSize": 148,
+      "pivotX": 74,
+      "pivotY": 130,
+      "viewSize": 148,
+      "registrationScale": 1.2333333333333334
+    },
+    "originalTransformFactor": 4.266666666666667,
+    "output": "H:/Spawner/$Trash/unit-animation-unification-20261104/art-resolution/restored/DesignAssets/Animations/UnitAttack/attack.png"
+  },
+  {
+    "source": "DesignAssets/Animations/UnitHurt/V3/hurt.png",
+    "unit": "bean",
+    "sourceCell": 512,
+    "oldFrame": 148,
+    "frameSize": 632,
+    "factor": 4.27027027027027,
+    "oldRegistration": {
+      "frameSize": 148,
+      "pivotX": 74,
+      "pivotY": 130,
+      "viewSize": 148,
+      "registrationScale": 1.2333333333333334
+    },
+    "originalTransformFactor": 4.266666666666667,
+    "output": "H:/Spawner/$Trash/unit-animation-unification-20261104/art-resolution/restored/DesignAssets/Animations/UnitHurt/V3/hurt.png"
+  },
+  {
+    "source": "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp",
+    "unit": "bean",
+    "sourceCell": 256,
+    "oldFrame": 144,
+    "frameSize": 316,
+    "factor": 2.1944444444444446,
+    "oldRegistration": {
+      "frameSize": 144,
+      "pivotX": 72,
+      "pivotY": 126,
+      "viewSize": 144,
+      "registrationScale": 1.2307692307692308
+    },
+    "originalTransformFactor": 2.1880341880341883,
+    "output": "H:/Spawner/$Trash/unit-animation-unification-20261104/art-resolution/restored/DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp"
+  },
+  {
+    "source": "DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp",
+    "unit": "spore",
+    "sourceCell": 512,
+    "oldFrame": 240,
+    "frameSize": 549,
+    "factor": 2.2875,
+    "oldRegistration": {
+      "frameSize": 240,
+      "pivotX": 120,
+      "pivotY": 210,
+      "viewSize": 240,
+      "registrationScale": 1.0714285714285714
+    },
+    "originalTransformFactor": 2.2857142857142856,
+    "output": "H:/Spawner/$Trash/unit-animation-unification-20261104/art-resolution/restored/DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp"
+  },
+  {
+    "source": "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/right/attack.webp",
+    "unit": "spore",
+    "sourceCell": 512,
+    "oldFrame": 110,
+    "frameSize": 553,
+    "factor": 5.027272727272727,
+    "oldRegistration": {
+      "frameSize": 110,
+      "pivotX": 55,
+      "pivotY": 96,
+      "viewSize": 110,
+      "registrationScale": 1.0784313725490196
+    },
+    "originalTransformFactor": 5.019607843137255,
+    "output": "H:/Spawner/$Trash/unit-animation-unification-20261104/art-resolution/restored/DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/right/attack.webp"
+  },
+  {
+    "source": "DesignAssets/Tribes/spore/AnimationStudies/hurt-v2/hurt-v2.webp",
+    "unit": "spore",
+    "sourceCell": 512,
+    "oldFrame": 110,
+    "frameSize": 553,
+    "factor": 5.027272727272727,
+    "oldRegistration": {
+      "frameSize": 110,
+      "pivotX": 55,
+      "pivotY": 96,
+      "viewSize": 110,
+      "registrationScale": 1.0784313725490196
+    },
+    "originalTransformFactor": 5.019607843137255,
+    "output": "H:/Spawner/$Trash/unit-animation-unification-20261104/art-resolution/restored/DesignAssets/Tribes/spore/AnimationStudies/hurt-v2/hurt-v2.webp"
+  },
+  {
+    "source": "DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png",
+    "unit": "spore",
+    "sourceCell": 512,
+    "oldFrame": 110,
+    "frameSize": 553,
+    "factor": 5.027272727272727,
+    "oldRegistration": {
+      "frameSize": 110,
+      "pivotX": 55,
+      "pivotY": 96,
+      "viewSize": 110,
+      "registrationScale": 1.0784313725490196
+    },
+    "originalTransformFactor": 5.019607843137255,
+    "output": "H:/Spawner/$Trash/unit-animation-unification-20261104/art-resolution/restored/DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png"
+  },
+  {
+    "source": "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp",
+    "unit": "pebble",
+    "sourceCell": 512,
+    "oldFrame": 224,
+    "frameSize": 512,
+    "factor": 2.2857142857142856,
+    "oldRegistration": {
+      "frameSize": 224,
+      "pivotX": 112,
+      "pivotY": 196,
+      "viewSize": 224,
+      "registrationScale": 1
+    },
+    "originalTransformFactor": 2.2857142857142856,
+    "output": "H:/Spawner/$Trash/unit-animation-unification-20261104/art-resolution/restored/DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp"
+  },
+  {
+    "source": "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp",
+    "unit": "pebble",
+    "sourceCell": 512,
+    "oldFrame": 104,
+    "frameSize": 512,
+    "factor": 4.923076923076923,
+    "oldRegistration": {
+      "frameSize": 104,
+      "pivotX": 52,
+      "pivotY": 91,
+      "viewSize": 104,
+      "registrationScale": 1
+    },
+    "originalTransformFactor": 4.923076923076923,
+    "output": "H:/Spawner/$Trash/unit-animation-unification-20261104/art-resolution/restored/DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp"
+  },
+  {
+    "source": "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp",
+    "unit": "pebble",
+    "sourceCell": 512,
+    "oldFrame": 106,
+    "frameSize": 517,
+    "factor": 4.877358490566038,
+    "oldRegistration": {
+      "frameSize": 106,
+      "pivotX": 53,
+      "pivotY": 93,
+      "viewSize": 106,
+      "registrationScale": 1.0095238095238095
+    },
+    "originalTransformFactor": 4.876190476190477,
+    "output": "H:/Spawner/$Trash/unit-animation-unification-20261104/art-resolution/restored/DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp"
+  },
+  {
+    "source": "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png",
+    "unit": "pebble",
+    "sourceCell": 512,
+    "oldFrame": 106,
+    "frameSize": 517,
+    "factor": 4.877358490566038,
+    "oldRegistration": {
+      "frameSize": 106,
+      "pivotX": 53,
+      "pivotY": 93,
+      "viewSize": 106,
+      "registrationScale": 1.0095238095238095
+    },
+    "originalTransformFactor": 4.876190476190477,
+    "output": "H:/Spawner/$Trash/unit-animation-unification-20261104/art-resolution/restored/DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png"
+  },
+  {
+    "source": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp",
+    "unit": "spring",
+    "sourceCell": 512,
+    "oldFrame": 224,
+    "frameSize": 512,
+    "factor": 2.2857142857142856,
+    "oldRegistration": {
+      "frameSize": 224,
+      "pivotX": 112,
+      "pivotY": 196,
+      "viewSize": 224,
+      "registrationScale": 1
+    },
+    "originalTransformFactor": 2.2857142857142856,
+    "output": "H:/Spawner/$Trash/unit-animation-unification-20261104/art-resolution/restored/DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+  },
+  {
+    "source": "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp",
+    "unit": "spring",
+    "sourceCell": 512,
+    "oldFrame": 164,
+    "frameSize": 516,
+    "factor": 3.1463414634146343,
+    "oldRegistration": {
+      "frameSize": 164,
+      "pivotX": 82,
+      "pivotY": 144,
+      "viewSize": 164,
+      "registrationScale": 1.0061349693251533
+    },
+    "originalTransformFactor": 3.1411042944785277,
+    "output": "H:/Spawner/$Trash/unit-animation-unification-20261104/art-resolution/restored/DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp"
+  },
+  {
+    "source": "DesignAssets/Tribes/spring/AnimationStudies/hurt-v2/hurt-v2.webp",
+    "unit": "spring",
+    "sourceCell": 512,
+    "oldFrame": 164,
+    "frameSize": 516,
+    "factor": 3.1463414634146343,
+    "oldRegistration": {
+      "frameSize": 164,
+      "pivotX": 82,
+      "pivotY": 144,
+      "viewSize": 164,
+      "registrationScale": 1.0061349693251533
+    },
+    "originalTransformFactor": 3.1411042944785277,
+    "output": "H:/Spawner/$Trash/unit-animation-unification-20261104/art-resolution/restored/DesignAssets/Tribes/spring/AnimationStudies/hurt-v2/hurt-v2.webp"
+  },
+  {
+    "source": "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png",
+    "unit": "spring",
+    "sourceCell": 512,
+    "oldFrame": 164,
+    "frameSize": 516,
+    "factor": 3.1463414634146343,
+    "oldRegistration": {
+      "frameSize": 164,
+      "pivotX": 82,
+      "pivotY": 144,
+      "viewSize": 164,
+      "registrationScale": 1.0061349693251533
+    },
+    "originalTransformFactor": 3.1411042944785277,
+    "output": "H:/Spawner/$Trash/unit-animation-unification-20261104/art-resolution/restored/DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png"
+  }
+]

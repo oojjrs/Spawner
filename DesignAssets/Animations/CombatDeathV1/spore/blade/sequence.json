@@ -1,0 +1,105 @@
+{
+  "tribe": "spore",
+  "variant": "blade",
+  "action": "death",
+  "image": "DesignAssets/Animations/CombatDeathV1/spore/blade/death.webp",
+  "frameSize": 512,
+  "columns": 4,
+  "frameCount": 8,
+  "pivotX": 256,
+  "pivotY": 448,
+  "durationsMs": [
+    100,
+    90,
+    90,
+    100,
+    140,
+    100,
+    100,
+    1100
+  ],
+  "durationMs": 1820,
+  "loop": false,
+  "approvedMidFrame": 4,
+  "approvedFinalFrame": 7,
+  "method": "full-body drawn intermediate poses; fixed asset-camera registration; no pose alpha blending",
+  "frameSources": [
+    {
+      "frame": 0,
+      "source": "Source/neutral-registered.png"
+    },
+    {
+      "frame": 1,
+      "source": "Source/drawn-production.png#cell1"
+    },
+    {
+      "frame": 2,
+      "source": "Source/drawn-production.png#cell2"
+    },
+    {
+      "frame": 3,
+      "source": "Source/bridge-3-production.png#cell1"
+    },
+    {
+      "frame": 4,
+      "source": "Source/camera-mid.png"
+    },
+    {
+      "frame": 5,
+      "source": "Source/drawn-production.png#cell5"
+    },
+    {
+      "frame": 6,
+      "source": "Source/drawn-production.png#cell6"
+    },
+    {
+      "frame": 7,
+      "source": "Source/camera-final.png"
+    }
+  ],
+  "source": {
+    "drawn": "Source/drawn-production.png",
+    "bridge": "Source/bridge-3-production.png",
+    "keys": "DesignAssets/Animations/CombatDeathKeysV1/Source/spore.png",
+    "registration": "Source/registration.json",
+    "neutral": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/blade/idle.webp",
+    "bridgeAlphaCleanup": "remove only non-opaque background farther than 3px from opaque sprite"
+  },
+  "alphaCleanup": {
+    "policy": "alpha below16 removed; saturated low-alpha below64 removed; invisible RGB zeroed",
+    "frames": [
+      {
+        "removedLowAlphaPixels": 2643,
+        "clearedTransparentRgb": 572
+      },
+      {
+        "removedLowAlphaPixels": 8033,
+        "clearedTransparentRgb": 2704
+      },
+      {
+        "removedLowAlphaPixels": 5922,
+        "clearedTransparentRgb": 2230
+      },
+      {
+        "removedLowAlphaPixels": 1505,
+        "clearedTransparentRgb": 739
+      },
+      {
+        "removedLowAlphaPixels": 504,
+        "clearedTransparentRgb": 549
+      },
+      {
+        "removedLowAlphaPixels": 13272,
+        "clearedTransparentRgb": 2846
+      },
+      {
+        "removedLowAlphaPixels": 10912,
+        "clearedTransparentRgb": 2171
+      },
+      {
+        "removedLowAlphaPixels": 520,
+        "clearedTransparentRgb": 583
+      }
+    ]
+  }
+}

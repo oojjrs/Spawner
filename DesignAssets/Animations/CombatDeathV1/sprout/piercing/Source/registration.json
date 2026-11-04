@@ -1,0 +1,54 @@
+{
+  "tribe": "sprout",
+  "variant": "piercing",
+  "neutralEyes": [
+    [
+      201.06545467400284,
+      381.3234180478821
+    ],
+    [
+      272.07798665006635,
+      382.37724692370796
+    ]
+  ],
+  "groups": [
+    {
+      "x": 293,
+      "y": 385.5,
+      "w": 41,
+      "h": 16,
+      "area": 260
+    }
+  ],
+  "pair": null,
+  "fixedAssetCameraScale": 0.696969696969697,
+  "dx": 67.86586543794513,
+  "ground": 451,
+  "midDy": 135.96969696969694,
+  "finalDy": 143.63636363636363,
+  "method": "visible right toe width 23/33 with right-eye anchor; left eye occluded",
+  "neutralBounds": {
+    "left": 164,
+    "top": 140,
+    "right": 406,
+    "bottom": 451,
+    "width": 242,
+    "height": 311
+  },
+  "midBounds": {
+    "left": 112,
+    "top": 212,
+    "right": 382,
+    "bottom": 452,
+    "width": 270,
+    "height": 240
+  },
+  "finalBounds": {
+    "left": 87,
+    "top": 238,
+    "right": 404,
+    "bottom": 441,
+    "width": 317,
+    "height": 203
+  }
+}

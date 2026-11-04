@@ -1,0 +1,82 @@
+[
+  {
+    "dpr": 1,
+    "errors": [],
+    "inline": {
+      "backing": [
+        256,
+        256
+      ],
+      "css": [
+        256,
+        256
+      ],
+      "body": {
+        "width": 41,
+        "height": 40,
+        "ground": 208
+      },
+      "seedWidth": 12.03883495145631,
+      "transform": 1,
+      "frame": "9"
+    },
+    "lightbox": {
+      "backing": [
+        512,
+        512
+      ],
+      "css": [
+        512,
+        512
+      ],
+      "body": {
+        "width": 81,
+        "height": 80,
+        "ground": 416
+      },
+      "seedWidth": 24.07766990291262,
+      "transform": 2,
+      "frame": "9"
+    }
+  },
+  {
+    "dpr": 2,
+    "errors": [],
+    "inline": {
+      "backing": [
+        512,
+        512
+      ],
+      "css": [
+        256,
+        256
+      ],
+      "body": {
+        "width": 40.5,
+        "height": 40,
+        "ground": 208
+      },
+      "seedWidth": 12.03883495145631,
+      "transform": 2,
+      "frame": "9"
+    },
+    "lightbox": {
+      "backing": [
+        1024,
+        1024
+      ],
+      "css": [
+        512,
+        512
+      ],
+      "body": {
+        "width": 80.5,
+        "height": 80,
+        "ground": 416
+      },
+      "seedWidth": 24.07766990291262,
+      "transform": 4,
+      "frame": "9"
+    }
+  }
+]

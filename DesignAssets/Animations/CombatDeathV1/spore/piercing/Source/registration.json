@@ -1,0 +1,77 @@
+{
+  "tribe": "spore",
+  "variant": "piercing",
+  "neutralEyes": [
+    [
+      193.4880213192303,
+      391.0892096774194
+    ],
+    [
+      253.20359358237485,
+      391.12643307086614
+    ]
+  ],
+  "groups": [
+    {
+      "x": 189,
+      "y": 396.5,
+      "w": 27,
+      "h": 14,
+      "area": 145
+    },
+    {
+      "x": 252,
+      "y": 419,
+      "w": 31,
+      "h": 15,
+      "area": 161
+    }
+  ],
+  "pair": {
+    "a": {
+      "x": 189,
+      "y": 396.5,
+      "w": 27,
+      "h": 14,
+      "area": 145
+    },
+    "b": {
+      "x": 252,
+      "y": 419,
+      "w": 31,
+      "h": 15,
+      "area": 161
+    },
+    "score": 14.3
+  },
+  "fixedAssetCameraScale": 0.8926455254078702,
+  "dx": 26.517469098367172,
+  "ground": 450,
+  "midDy": 45.631576990234805,
+  "finalDy": 81.33739800654962,
+  "method": "fixed interocular distance",
+  "neutralBounds": {
+    "left": 75,
+    "top": 156,
+    "right": 397,
+    "bottom": 450,
+    "width": 322,
+    "height": 294
+  },
+  "midBounds": {
+    "left": 66,
+    "top": 143,
+    "right": 457,
+    "bottom": 453,
+    "width": 391,
+    "height": 310
+  },
+  "finalBounds": {
+    "left": 63,
+    "top": 190,
+    "right": 441,
+    "bottom": 413,
+    "width": 378,
+    "height": 223
+  }
+}

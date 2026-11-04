@@ -1,0 +1,156 @@
+{
+  "tribe": "spore",
+  "mask": 16,
+  "sourceId": "unit-appearance-v1-spore-10-neutral-v1",
+  "approvalState": "approved",
+  "approvalRef": {
+    "sourceThread": "01a1a155-d06b-7243-b396-e5c947a4714e",
+    "callId": "call_855ca484695d4a3eb76d94115969162d",
+    "item": 0
+  },
+  "image": "DesignAssets/Animations/UnitAppearanceV1/spore/10/Source/neutral.png",
+  "frameWidth": 512,
+  "frameHeight": 512,
+  "pivot": {
+    "x": 256,
+    "y": 448
+  },
+  "camera": {
+    "pixelsPerWorld": 512
+  },
+  "coreReference": {
+    "sourceId": "unit-appearance-v1-spore-10-neutral-v1",
+    "referenceImage": "DesignAssets/Animations/UnitRangedV1/Source/TribeFormsV3/spore-neutral-registered.png",
+    "coreBounds": null,
+    "sourcePixelBounds": {
+      "x": 159,
+      "y": 310,
+      "width": 196,
+      "height": 138
+    },
+    "landmarks": {
+      "leftEye": [
+        237.5,
+        411.5
+      ],
+      "rightEye": [
+        275.5,
+        411.5
+      ],
+      "ground": [
+        256,
+        448
+      ],
+      "supportPoint": [
+        257,
+        447.5
+      ],
+      "supportPixelBounds": [
+        221,
+        440,
+        72,
+        8
+      ]
+    },
+    "canonicalSpeciesSize": 0.38,
+    "canonicalCoreLongest": 194.56,
+    "verified": true,
+    "measurement": {
+      "alphaThreshold": 16,
+      "sourcePixelBounds": {
+        "x": 159,
+        "y": 310,
+        "width": 196,
+        "height": 138
+      }
+    },
+    "sourceBodyHeightEvidence": {
+      "nativeCoreTop": 235,
+      "nativeCoreBottom": 1097,
+      "fixedScale": 0.1594896331738437,
+      "translation": [
+        157,
+        273
+      ],
+      "intrinsicHeight": 137.48006379585328
+    },
+    "verificationScope": "camera-and-observed-landmarks"
+  },
+  "baselineReference": {
+    "sourceId": "unit-appearance-v1-spore-00-neutral-v1",
+    "referenceImage": "DesignAssets/Animations/UnitAppearanceV1/spore/00/Source/neutral.png",
+    "coreBounds": [
+      158,
+      310,
+      196,
+      139
+    ],
+    "landmarks": {
+      "leftEye": [
+        237,
+        411.5
+      ],
+      "rightEye": [
+        274.5,
+        411.5
+      ],
+      "ground": [
+        256,
+        448
+      ]
+    },
+    "canonicalSpeciesSize": 0.38,
+    "canonicalCoreLongest": 194.56,
+    "verified": true,
+    "measurement": {
+      "alphaThreshold": 16,
+      "coreSource": "existing-original-no-visual-bits",
+      "eyeRois": [
+        [
+          227,
+          399,
+          248,
+          424
+        ],
+        [
+          264,
+          399,
+          285,
+          424
+        ]
+      ]
+    }
+  },
+  "cameraVerified": true,
+  "visualBits": [
+    "secretion"
+  ],
+  "generationReferenceIds": [
+    "TribeFormsV3/spore"
+  ],
+  "sourceHash": "9fd51c65eba741c15c8f1cbd6be3b1e47fa5591202655adfee5e4ba729f0641e",
+  "sourceRegistration": {
+    "translationOnly": [
+      0,
+      0
+    ],
+    "rescale": 1,
+    "originalHash": "9fd51c65eba741c15c8f1cbd6be3b1e47fa5591202655adfee5e4ba729f0641e",
+    "originalImage": "DesignAssets/Animations/UnitRangedV1/Source/TribeFormsV3/spore-neutral-registered.png"
+  },
+  "provenance": {
+    "kind": "approved-art-reuse",
+    "originalImage": "DesignAssets/Animations/UnitRangedV1/Source/TribeFormsV3/spore-neutral-registered.png",
+    "originalHash": "9fd51c65eba741c15c8f1cbd6be3b1e47fa5591202655adfee5e4ba729f0641e"
+  },
+  "states": {
+    "idle": "pending",
+    "walk": "pending",
+    "jump": "pending",
+    "hurt": "pending",
+    "birth": "pending",
+    "death": "pending",
+    "attack": "pending",
+    "ranged": "pending"
+  }
+}

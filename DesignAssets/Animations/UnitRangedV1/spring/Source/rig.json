@@ -1,0 +1,132 @@
+{
+  "source": "TribeFormsV3/spring.png",
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ],
+  "durationMs": 600,
+  "launchAtMs": 200,
+  "parts": [
+    {
+      "id": "water-body",
+      "source": "Source/neutral-native.png",
+      "mode": "continuous-water-local-mesh",
+      "patch": [
+        530,
+        365,
+        725,
+        705
+      ],
+      "gridStep": 12,
+      "fixedBoundary": true,
+      "rigidExclusions": [
+        "eyes",
+        "feet",
+        "crest"
+      ]
+    },
+    {
+      "id": "surface-opening",
+      "source": "Source/pore-open.png",
+      "sourceRect": [
+        623,
+        517,
+        667,
+        586
+      ],
+      "sourceFrameOffset": [
+        74,
+        0
+      ],
+      "attachmentWindowsMs": [
+        [
+          200,
+          280
+        ]
+      ]
+    }
+  ],
+  "poseAlphaBlending": false,
+  "projectileFlightBaked": false,
+  "timeline": {
+    "pressureKeys": [
+      [
+        0,
+        0
+      ],
+      [
+        80,
+        0.18
+      ],
+      [
+        160,
+        0.65
+      ],
+      [
+        200,
+        1
+      ],
+      [
+        230,
+        0.35
+      ],
+      [
+        320,
+        0.08
+      ],
+      [
+        440,
+        0
+      ],
+      [
+        600,
+        0
+      ]
+    ],
+    "launchAtMs": 200,
+    "durationsMs": [
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20
+    ]
+  },
+  "projectile": {
+    "image": "DesignAssets/Animations/UnitRangedV1/spring/projectile.png",
+    "width": 60.3,
+    "height": 41.746153846153845,
+    "outletX": 329.8726042841037,
+    "outletY": 376.91657271702366,
+    "sourceWidth": 65,
+    "sourceHeight": 45,
+    "source": "Source/keys-v2.png",
+    "renderRatioToReference": 0.3
+  }
+}

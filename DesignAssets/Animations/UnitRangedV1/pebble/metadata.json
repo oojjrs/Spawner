@@ -1,0 +1,62 @@
+{
+  "idle": {
+    "image": "DesignAssets/Animations/UnitRangedV1/pebble/Source/neutral.png",
+    "frameSize": 512,
+    "columns": 1,
+    "pivotX": 256,
+    "pivotY": 448
+  },
+  "animation": {
+    "image": "DesignAssets/Animations/UnitRangedV1/pebble/shoot.webp",
+    "frameSize": 512,
+    "columns": 6,
+    "frameCount": 30,
+    "durationsMs": [
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20
+    ],
+    "durationMs": 600,
+    "launchAtMs": 200,
+    "pivotX": 256,
+    "pivotY": 448
+  },
+  "reference": {
+    "width": 217,
+    "height": 166
+  },
+  "projectile": {
+    "image": "DesignAssets/Animations/UnitRangedV1/pebble/projectile.png",
+    "width": 65.1,
+    "height": 56.83333333333333,
+    "outletX": 340.80383314543406,
+    "outletY": 312.11724915445325
+  }
+}

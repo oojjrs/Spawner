@@ -1,0 +1,131 @@
+{
+  "tribe": "spore",
+  "mask": 20,
+  "sourceId": "unit-appearance-v1-spore-14-neutral-v1",
+  "approvalState": "pending",
+  "approvalRef": null,
+  "image": "DesignAssets/Animations/UnitAppearanceV1/spore/14/Source/neutral.png",
+  "frameWidth": 512,
+  "frameHeight": 512,
+  "pivot": {
+    "x": 256,
+    "y": 448
+  },
+  "camera": {
+    "pixelsPerWorld": 512
+  },
+  "coreReference": {
+    "sourceId": "unit-appearance-v1-spore-14-neutral-v1",
+    "referenceImage": "DesignAssets/Animations/UnitAppearanceV1/spore/14/Source/neutral.png",
+    "coreBounds": null,
+    "sourcePixelBounds": {
+      "x": 159,
+      "y": 315,
+      "width": 198,
+      "height": 133
+    },
+    "landmarks": {
+      "leftEye": [
+        236.57768707482995,
+        407.6625850340136
+      ],
+      "rightEye": [
+        274.9602721088435,
+        407.6625850340136
+      ],
+      "ground": [
+        256,
+        448
+      ]
+    },
+    "canonicalSpeciesSize": 0.38,
+    "canonicalCoreLongest": 194.56,
+    "verified": false,
+    "measurement": {
+      "alphaThreshold": 16,
+      "occlusion": "cap-sensory-gills-or-developed-feet",
+      "fixedBatchScale": 0.3308843537414966
+    }
+  },
+  "baselineReference": {
+    "sourceId": "unit-appearance-v1-spore-00-neutral-v1",
+    "referenceImage": "DesignAssets/Animations/UnitAppearanceV1/spore/00/Source/neutral.png",
+    "coreBounds": [
+      158,
+      310,
+      196,
+      139
+    ],
+    "landmarks": {
+      "leftEye": [
+        237,
+        411.5
+      ],
+      "rightEye": [
+        274.5,
+        411.5
+      ],
+      "ground": [
+        256,
+        448
+      ]
+    },
+    "canonicalSpeciesSize": 0.38,
+    "canonicalCoreLongest": 194.56,
+    "verified": true,
+    "measurement": {
+      "alphaThreshold": 16,
+      "coreSource": "existing-original-no-visual-bits",
+      "eyeRois": [
+        [
+          227,
+          399,
+          248,
+          424
+        ],
+        [
+          264,
+          399,
+          285,
+          424
+        ]
+      ]
+    }
+  },
+  "cameraVerified": false,
+  "visualBits": [
+    "antenna",
+    "secretion"
+  ],
+  "generationReferenceIds": [
+    "spore-existing-original",
+    "TribeFormsV3/spore",
+    "spore-historical-fungal-sensory-and-feet"
+  ],
+  "sourceHash": "170729416daba46a04e8c2fa6ef879dc2f34464b295f44e6fc606347f0c5bbce",
+  "sourceRegistration": {
+    "batch": "spore-bcs10-af-v1",
+    "scale": 0.3308843537414966,
+    "offsetX": 157,
+    "offsetY": 272,
+    "sourceFrameWidth": 627,
+    "sourceFrameHeight": 627,
+    "rule": "one-shared-batch-scale-no-per-mask-fit"
+  },
+  "provenance": {
+    "kind": "imagegen-integrated-whole-body",
+    "batchSource": "DesignAssets/Animations/UnitAppearanceV1/SourceBatches/spore-bcs10-af-v1-generated.png",
+    "sourceCell": 1,
+    "sourceHash": "4d61107779095a8bd3efbc3302978a9a3644e03b03f0a48c0202032268d697df"
+  },
+  "states": {
+    "idle": "pending",
+    "walk": "pending",
+    "jump": "pending",
+    "hurt": "pending",
+    "birth": "pending",
+    "death": "pending",
+    "attack": "pending",
+    "ranged": "pending"
+  }
+}

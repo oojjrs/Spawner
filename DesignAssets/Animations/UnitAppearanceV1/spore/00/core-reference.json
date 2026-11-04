@@ -1,0 +1,45 @@
+{
+  "sourceId": "unit-appearance-v1-spore-00-neutral-v1",
+  "referenceImage": "DesignAssets/Animations/UnitAppearanceV1/spore/00/Source/neutral.png",
+  "coreBounds": [
+    158,
+    310,
+    196,
+    139
+  ],
+  "landmarks": {
+    "leftEye": [
+      237,
+      411.5
+    ],
+    "rightEye": [
+      274.5,
+      411.5
+    ],
+    "ground": [
+      256,
+      448
+    ]
+  },
+  "canonicalSpeciesSize": 0.38,
+  "canonicalCoreLongest": 194.56,
+  "verified": false,
+  "measurement": {
+    "alphaThreshold": 16,
+    "coreSource": "existing-original-no-visual-bits",
+    "eyeRois": [
+      [
+        227,
+        399,
+        248,
+        424
+      ],
+      [
+        264,
+        399,
+        285,
+        424
+      ]
+    ]
+  }
+}

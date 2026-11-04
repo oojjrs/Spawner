@@ -1,0 +1,133 @@
+{
+  "tribe": "pebble",
+  "mask": 0,
+  "sourceId": "unit-appearance-v1-pebble-00-neutral-v1",
+  "approvalState": "existing-reference",
+  "approvalRef": null,
+  "image": "DesignAssets/Animations/UnitAppearanceV1/pebble/00/Source/neutral.png",
+  "frameWidth": 512,
+  "frameHeight": 512,
+  "pivot": {
+    "x": 256,
+    "y": 448
+  },
+  "camera": {
+    "pixelsPerWorld": 512
+  },
+  "coreReference": {
+    "sourceId": "unit-appearance-v1-pebble-00-neutral-v1",
+    "referenceImage": "DesignAssets/Animations/UnitAppearanceV1/pebble/00/Source/neutral.png",
+    "coreBounds": [
+      148,
+      289,
+      216,
+      159
+    ],
+    "landmarks": {
+      "leftEye": [
+        211,
+        377
+      ],
+      "rightEye": [
+        300,
+        377
+      ],
+      "ground": [
+        256,
+        448
+      ],
+      "supportPoint": [
+        256,
+        447.5
+      ],
+      "supportPixelBounds": [
+        186,
+        440,
+        140,
+        8
+      ]
+    },
+    "canonicalSpeciesSize": 0.42,
+    "canonicalCoreLongest": 215.04,
+    "verified": true,
+    "measurement": {
+      "alphaThreshold": 16,
+      "sourcePixelBounds": {
+        "x": 148,
+        "y": 289,
+        "width": 216,
+        "height": 159
+      }
+    },
+    "verificationScope": "camera-and-observed-landmarks"
+  },
+  "baselineReference": {
+    "sourceId": "unit-appearance-v1-pebble-00-neutral-v1",
+    "referenceImage": "DesignAssets/Animations/UnitAppearanceV1/pebble/00/Source/neutral.png",
+    "coreBounds": [
+      148,
+      289,
+      216,
+      159
+    ],
+    "landmarks": {
+      "leftEye": [
+        211,
+        377
+      ],
+      "rightEye": [
+        300,
+        377
+      ],
+      "ground": [
+        256,
+        448
+      ]
+    },
+    "canonicalSpeciesSize": 0.42,
+    "canonicalCoreLongest": 215.04,
+    "verified": true,
+    "measurement": {
+      "alphaThreshold": 16,
+      "coreSource": "existing-original-no-visual-bits"
+    }
+  },
+  "cameraVerified": true,
+  "visualBits": [],
+  "generationReferenceIds": [
+    "existing-pebble-highres-reference"
+  ],
+  "sourceHash": "9ecf44815d59ac26108dcf3b06f63d0df7637958aba28a09bc61efef5c77adb6",
+  "provenance": {
+    "kind": "existing-original",
+    "sourceImage": "DesignAssets/Animations/UnitAppearanceV1/pebble/00/Source/original-highres.png",
+    "sourceHash": "b6c4cbfa62de5db79205779c1a354e9f87d7b074dc60bfcaadd97f6af792f1fe",
+    "sourceRevision": "9f9662c^",
+    "currentOriginalReference": {
+      "image": "DesignAssets/Tribes/pebble/starter.png",
+      "sourceHash": "965814ab2c957af6dd724bf74d975bb029427cc00c7267e607c0cd0357ea367c"
+    },
+    "reuseDirective": {
+      "sourceThread": "01a1a155-d06b-7243-b396-e5c947a4714e",
+      "speaker": "parent-agent",
+      "text": "기본00은새그림승인claim말고현행원형그대로보존/사용하는existing-reference"
+    },
+    "transform": {
+      "scale": 0.18946255506607929,
+      "offsetX": 137,
+      "offsetY": 243,
+      "sourceFrameWidth": 1254,
+      "sourceFrameHeight": 1254
+    }
+  },
+  "states": {
+    "idle": "pending",
+    "walk": "pending",
+    "jump": "pending",
+    "hurt": "pending",
+    "birth": "pending",
+    "death": "pending",
+    "attack": "pending",
+    "ranged": "pending"
+  }
+}

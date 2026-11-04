@@ -1,0 +1,82 @@
+[
+  {
+    "tribe": "bean",
+    "displaySize": 0.4,
+    "sourceCell": 362,
+    "frameSize": 512,
+    "pivotX": 256,
+    "pivotY": 448,
+    "fixedScale": 0.856353591160221,
+    "translation": [
+      110,
+      145
+    ],
+    "columns": 3,
+    "sourceNeutralBounds": {
+      "x": 51,
+      "y": 116,
+      "width": 239,
+      "height": 238
+    }
+  },
+  {
+    "tribe": "spore",
+    "displaySize": 0.38,
+    "sourceCell": 362,
+    "frameSize": 512,
+    "pivotX": 256,
+    "pivotY": 448,
+    "fixedScale": 0.6795580110497238,
+    "translation": [
+      134,
+      226
+    ],
+    "columns": 3,
+    "sourceNeutralBounds": {
+      "x": 37,
+      "y": 79,
+      "width": 286,
+      "height": 248
+    }
+  },
+  {
+    "tribe": "pebble",
+    "displaySize": 0.42,
+    "sourceCell": 362,
+    "frameSize": 512,
+    "pivotX": 256,
+    "pivotY": 448,
+    "fixedScale": 0.7734806629834254,
+    "translation": [
+      115,
+      215
+    ],
+    "columns": 3,
+    "sourceNeutralBounds": {
+      "x": 43,
+      "y": 73,
+      "width": 278,
+      "height": 228
+    }
+  },
+  {
+    "tribe": "spring",
+    "displaySize": 0.39,
+    "sourceCell": 362,
+    "frameSize": 512,
+    "pivotX": 256,
+    "pivotY": 448,
+    "fixedScale": 0.8204419889502762,
+    "translation": [
+      100,
+      208
+    ],
+    "columns": 3,
+    "sourceNeutralBounds": {
+      "x": 86,
+      "y": 49,
+      "width": 209,
+      "height": 243
+    }
+  }
+]

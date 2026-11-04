@@ -1,0 +1,77 @@
+{
+  "tribe": "spore",
+  "variant": "carapace",
+  "neutralEyes": [
+    [
+      193.06205672706878,
+      389.48296189224703
+    ],
+    [
+      253.62955817453636,
+      389.43840862944165
+    ]
+  ],
+  "groups": [
+    {
+      "x": 179.5,
+      "y": 394,
+      "w": 28,
+      "h": 15,
+      "area": 150
+    },
+    {
+      "x": 243,
+      "y": 416.5,
+      "w": 31,
+      "h": 16,
+      "area": 165
+    }
+  ],
+  "pair": {
+    "a": {
+      "x": 179.5,
+      "y": 394,
+      "w": 28,
+      "h": 15,
+      "area": 150
+    },
+    "b": {
+      "x": 243,
+      "y": 416.5,
+      "w": 31,
+      "h": 16,
+      "area": 165
+    },
+    "score": 14.225000000000001
+  },
+  "fixedAssetCameraScale": 0.8990495044019969,
+  "dx": 33.42159964588072,
+  "ground": 451,
+  "midDy": 43.73057450589539,
+  "finalDy": 80.59160418637725,
+  "method": "fixed interocular distance",
+  "neutralBounds": {
+    "left": 54,
+    "top": 202,
+    "right": 409,
+    "bottom": 451,
+    "width": 355,
+    "height": 249
+  },
+  "midBounds": {
+    "left": 44,
+    "top": 190,
+    "right": 445,
+    "bottom": 453,
+    "width": 401,
+    "height": 263
+  },
+  "finalBounds": {
+    "left": 41,
+    "top": 225,
+    "right": 463,
+    "bottom": 412,
+    "width": 422,
+    "height": 187
+  }
+}

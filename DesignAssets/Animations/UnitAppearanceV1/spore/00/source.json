@@ -1,0 +1,147 @@
+{
+  "tribe": "spore",
+  "mask": 0,
+  "sourceId": "unit-appearance-v1-spore-00-neutral-v1",
+  "approvalState": "existing-reference",
+  "approvalRef": null,
+  "image": "DesignAssets/Animations/UnitAppearanceV1/spore/00/Source/neutral.png",
+  "frameWidth": 512,
+  "frameHeight": 512,
+  "pivot": {
+    "x": 256,
+    "y": 448
+  },
+  "camera": {
+    "pixelsPerWorld": 512
+  },
+  "coreReference": {
+    "sourceId": "unit-appearance-v1-spore-00-neutral-v1",
+    "referenceImage": "DesignAssets/Animations/UnitAppearanceV1/spore/00/Source/neutral.png",
+    "coreBounds": [
+      158,
+      310,
+      196,
+      139
+    ],
+    "landmarks": {
+      "leftEye": [
+        237,
+        411.5
+      ],
+      "rightEye": [
+        274.5,
+        411.5
+      ],
+      "ground": [
+        256,
+        448
+      ],
+      "supportPoint": [
+        255.5,
+        448.5
+      ],
+      "supportPixelBounds": [
+        220,
+        441,
+        71,
+        8
+      ]
+    },
+    "canonicalSpeciesSize": 0.38,
+    "canonicalCoreLongest": 194.56,
+    "verified": true,
+    "measurement": {
+      "alphaThreshold": 16,
+      "sourcePixelBounds": {
+        "x": 158,
+        "y": 310,
+        "width": 196,
+        "height": 139
+      }
+    },
+    "verificationScope": "camera-and-observed-landmarks"
+  },
+  "baselineReference": {
+    "sourceId": "unit-appearance-v1-spore-00-neutral-v1",
+    "referenceImage": "DesignAssets/Animations/UnitAppearanceV1/spore/00/Source/neutral.png",
+    "coreBounds": [
+      158,
+      310,
+      196,
+      139
+    ],
+    "landmarks": {
+      "leftEye": [
+        237,
+        411.5
+      ],
+      "rightEye": [
+        274.5,
+        411.5
+      ],
+      "ground": [
+        256,
+        448
+      ]
+    },
+    "canonicalSpeciesSize": 0.38,
+    "canonicalCoreLongest": 194.56,
+    "verified": true,
+    "measurement": {
+      "alphaThreshold": 16,
+      "coreSource": "existing-original-no-visual-bits",
+      "eyeRois": [
+        [
+          227,
+          399,
+          248,
+          424
+        ],
+        [
+          264,
+          399,
+          285,
+          424
+        ]
+      ]
+    }
+  },
+  "cameraVerified": true,
+  "visualBits": [],
+  "generationReferenceIds": [
+    "existing-spore-highres-reference"
+  ],
+  "sourceHash": "1c5046fa67f3d68626928381a168f30d2469bfe7c7a3cb49a6a2c961089e12b4",
+  "provenance": {
+    "kind": "existing-original",
+    "sourceImage": "DesignAssets/Animations/UnitAppearanceV1/spore/00/Source/original-highres.png",
+    "sourceHash": "e2c2c84bdfa64116e1dbb163e1b4d32dd48c8dcec7ceff4bfc91021a9ba44e58",
+    "sourceRevision": "9f9662c^",
+    "currentOriginalReference": {
+      "image": "DesignAssets/Tribes/spore/starter.png",
+      "sourceHash": "c4d22c4a8d65ae86b443bdd987df0756af4b0a7bdc749fb4deb293034c8c6f1d"
+    },
+    "reuseDirective": {
+      "sourceThread": "01a1a155-d06b-7243-b396-e5c947a4714e",
+      "speaker": "parent-agent",
+      "text": "기본00은새그림승인claim말고현행원형그대로보존/사용하는existing-reference"
+    },
+    "transform": {
+      "scale": 0.15934479934479934,
+      "offsetX": 156,
+      "offsetY": 273,
+      "sourceFrameWidth": 1254,
+      "sourceFrameHeight": 1254
+    }
+  },
+  "states": {
+    "idle": "pending",
+    "walk": "pending",
+    "jump": "pending",
+    "hurt": "pending",
+    "birth": "pending",
+    "death": "pending",
+    "attack": "pending",
+    "ranged": "pending"
+  }
+}

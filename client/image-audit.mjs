@@ -46,7 +46,7 @@ export function auditImages(root, paths) {
     if (!size) { failures.push(name + " : 원본 제작 기준 표시 크기 미등록 (목표 100%, 최대 150%)"); continue; }
     const dimensions = imageDimensions(resolve(root, name));
     const frame = [dimensions[0] / size.grid[0], dimensions[1] / size.grid[1]];
-    if (frame.some((value, index) => !Number.isInteger(value) || value > size.display[index] * policy.maximumScale + 1e-7))
+    if (frame.some((value, index) => !Number.isInteger(value) || value > (size.sourceMaximum?.[index] ?? size.display[index] * policy.maximumScale) + 1e-7))
       failures.push(name + " : 원본 프레임 " + frame.join("×") +
         ", 제작 목표 " + size.display.map(value => Math.floor(value * policy.preferredScale)).join("×") +
         ", 최대 " + size.display.map(value => Math.floor(value * policy.maximumScale)).join("×"));

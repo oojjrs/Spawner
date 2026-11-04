@@ -1,0 +1,91 @@
+{
+  "errors": [],
+  "runtime": {
+    "visible": 50984,
+    "width": 512,
+    "height": 512,
+    "newAssetRegistered": true
+  },
+  "clips": [
+    {
+      "source": "DesignAssets/Animations/CombatDeathV1/sprout/blade/death.webp",
+      "frameSize": 512,
+      "columns": 4,
+      "duration": 1820
+    },
+    {
+      "source": "DesignAssets/Animations/CombatDeathV1/spore/blade/death.webp",
+      "frameSize": 512,
+      "columns": 4,
+      "duration": 1820
+    },
+    {
+      "source": "DesignAssets/Animations/CombatDeathV1/pebble/blade/death.webp",
+      "frameSize": 512,
+      "columns": 4,
+      "duration": 1820
+    },
+    {
+      "source": "DesignAssets/Animations/CombatDeathV1/spring/blade/death.webp",
+      "frameSize": 512,
+      "columns": 4,
+      "duration": 1820
+    },
+    {
+      "source": "DesignAssets/Animations/CombatDeathV1/sprout/piercing/death.webp",
+      "frameSize": 512,
+      "columns": 4,
+      "duration": 1820
+    },
+    {
+      "source": "DesignAssets/Animations/CombatDeathV1/spore/piercing/death.webp",
+      "frameSize": 512,
+      "columns": 4,
+      "duration": 1820
+    },
+    {
+      "source": "DesignAssets/Animations/CombatDeathV1/pebble/piercing/death.webp",
+      "frameSize": 512,
+      "columns": 4,
+      "duration": 1820
+    },
+    {
+      "source": "DesignAssets/Animations/CombatDeathV1/spring/piercing/death.webp",
+      "frameSize": 512,
+      "columns": 4,
+      "duration": 1820
+    },
+    {
+      "source": "DesignAssets/Animations/CombatDeathV1/sprout/carapace/death.webp",
+      "frameSize": 512,
+      "columns": 4,
+      "duration": 1820
+    },
+    {
+      "source": "DesignAssets/Animations/CombatDeathV1/spore/carapace/death.webp",
+      "frameSize": 512,
+      "columns": 4,
+      "duration": 1820
+    },
+    {
+      "source": "DesignAssets/Animations/CombatDeathV1/pebble/carapace/death.webp",
+      "frameSize": 512,
+      "columns": 4,
+      "duration": 1820
+    },
+    {
+      "source": "DesignAssets/Animations/CombatDeathV1/spring/carapace/death.webp",
+      "frameSize": 512,
+      "columns": 4,
+      "duration": 1820
+    }
+  ],
+  "lightbox": {
+    "source": "file:///H:/Spawner/DesignAssets/Animations/CombatDeathV1/pebble/blade/death.webp",
+    "canvas": [
+      256,
+      256
+    ],
+    "frame": "7"
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "tribe": "bean",
+  "mask": 16,
+  "sourceId": "unit-appearance-v1-bean-10-neutral-v1",
+  "approvalState": "approved",
+  "approvalRef": {
+    "sourceThread": "01a1a155-d06b-7243-b396-e5c947a4714e",
+    "callId": "call_ac2b35a0d4a84662b9df4975654e7ee9",
+    "item": 0
+  },
+  "image": "DesignAssets/Animations/UnitAppearanceV1/bean/10/Source/neutral.png",
+  "frameWidth": 512,
+  "frameHeight": 512,
+  "pivot": {
+    "x": 256,
+    "y": 448
+  },
+  "camera": {
+    "pixelsPerWorld": 512
+  },
+  "coreReference": {
+    "sourceId": "unit-appearance-v1-bean-10-neutral-v1",
+    "referenceImage": "DesignAssets/Animations/UnitAppearanceV1/bean/10/Source/neutral.png",
+    "coreBounds": [
+      170,
+      242,
+      177,
+      206
+    ],
+    "landmarks": {
+      "leftEye": [
+        220.5,
+        377.5
+      ],
+      "rightEye": [
+        295,
+        378
+      ],
+      "supportPoint": [
+        257.5,
+        447.5
+      ],
+      "supportPixelBounds": [
+        208,
+        440,
+        99,
+        8
+      ],
+      "faceMidpoint": [
+        257.75,
+        377.75
+      ]
+    },
+    "canonicalSpeciesSize": 0.4,
+    "canonicalCoreLongest": 204.8,
+    "verified": true,
+    "measurement": {
+      "alphaThreshold": 16,
+      "sourcePixelBounds": {
+        "x": 170,
+        "y": 242,
+        "width": 202,
+        "height": 206
+      },
+      "eyeDistance": 74.5,
+      "fullCoreObservability": "visible"
+    },
+    "verificationScope": "camera-and-observed-landmarks"
+  },
+  "visualBits": [
+    "secretion"
+  ],
+  "generationReferenceIds": [
+    "BeanFormsV1/secretion",
+    "BeanFormsV1/secretion-blade-carapace-antenna-feet",
+    "existing-bean-highres-reference"
+  ],
+  "sourceHash": "65a547fbe1664cfa3e0fb534e94eae029cb9cb18a66518df670daa8e70533811",
+  "sourceRegistration": null,
+  "states": {
+    "idle": "pending",
+    "walk": "pending",
+    "jump": "pending",
+    "hurt": "pending",
+    "birth": "pending",
+    "death": "pending",
+    "attack": "pending",
+    "ranged": "pending"
+  },
+  "baselineReference": {
+    "sourceId": "unit-appearance-v1-bean-00-neutral-v1",
+    "referenceImage": "DesignAssets/Animations/UnitAppearanceV1/bean/00/Source/neutral.png",
+    "coreBounds": [
+      173,
+      243,
+      167,
+      206
+    ],
+    "landmarks": {
+      "leftEye": [
+        216,
+        375
+      ],
+      "rightEye": [
+        296.5,
+        375
+      ],
+      "ground": [
+        256,
+        448
+      ],
+      "innateLeavesIncluded": true
+    },
+    "canonicalSpeciesSize": 0.4,
+    "canonicalCoreLongest": 204.8,
+    "verified": true,
+    "measurement": {
+      "alphaThreshold": 16,
+      "coreSource": "existing-original-no-visual-bits"
+    }
+  },
+  "cameraVerified": true,
+  "provenance": {
+    "kind": "approved-art-reuse",
+    "originalImage": "DesignAssets/Animations/UnitRangedV1/Source/BeanFormsV1/secretion.png",
+    "originalHash": "65a547fbe1664cfa3e0fb534e94eae029cb9cb18a66518df670daa8e70533811",
+    "transform": {
+      "scale": 1,
+      "offsetX": 0,
+      "offsetY": 0,
+      "sourceFrameWidth": 512,
+      "sourceFrameHeight": 512
+    }
+  },
+  "approvalHistory": [
+    {
+      "approvalState": "approved",
+      "approvalRef": {
+        "sourceThread": "01a1a155-d06b-7243-b396-e5c947a4714e",
+        "callId": "call_fb25be7f0b6c4e778591f6cddcd80474",
+        "item": 0
+      },
+      "scope": "previous-source-approval"
+    }
+  ],
+  "cameraVerification": {
+    "verifiedBy": "parent-agent",
+    "sourceThread": "01a1a155-d06b-7243-b396-e5c947a4714e",
+    "scope": "frame-camera-nominal-core-foot-and-recorded-landmarks",
+    "unobservedCoreBoundsNotInferred": true
+  }
+}

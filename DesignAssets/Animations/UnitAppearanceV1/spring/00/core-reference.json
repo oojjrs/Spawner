@@ -1,0 +1,31 @@
+{
+  "sourceId": "unit-appearance-v1-spring-00-neutral-v1",
+  "referenceImage": "DesignAssets/Animations/UnitAppearanceV1/spring/00/Source/neutral.png",
+  "coreBounds": [
+    179,
+    248,
+    154,
+    200
+  ],
+  "landmarks": {
+    "leftEye": [
+      221,
+      377
+    ],
+    "rightEye": [
+      290,
+      377
+    ],
+    "ground": [
+      256,
+      448
+    ]
+  },
+  "canonicalSpeciesSize": 0.39,
+  "canonicalCoreLongest": 199.68,
+  "verified": false,
+  "measurement": {
+    "alphaThreshold": 16,
+    "coreSource": "existing-original-no-visual-bits"
+  }
+}

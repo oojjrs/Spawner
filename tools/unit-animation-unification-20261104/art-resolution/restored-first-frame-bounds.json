@@ -1,0 +1,162 @@
+[
+  {
+    "image": "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.webp",
+    "frameSize": 631,
+    "bounds": {
+      "x": 215,
+      "y": 307,
+      "width": 201,
+      "height": 247
+    }
+  },
+  {
+    "image": "DesignAssets/Animations/UnitAttack/attack.png",
+    "frameSize": 632,
+    "bounds": {
+      "x": 172,
+      "y": 225,
+      "width": 295,
+      "height": 331
+    }
+  },
+  {
+    "image": "DesignAssets/Animations/UnitHurt/V3/hurt.png",
+    "frameSize": 632,
+    "bounds": {
+      "x": 170,
+      "y": 197,
+      "width": 293,
+      "height": 360
+    }
+  },
+  {
+    "image": "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp",
+    "frameSize": 316,
+    "bounds": {
+      "x": 89,
+      "y": 103,
+      "width": 140,
+      "height": 173
+    }
+  },
+  {
+    "image": "DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp",
+    "frameSize": 549,
+    "bounds": {
+      "x": 63,
+      "y": 176,
+      "width": 423,
+      "height": 306
+    }
+  },
+  {
+    "image": "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/right/attack.webp",
+    "frameSize": 553,
+    "bounds": {
+      "x": 64,
+      "y": 183,
+      "width": 424,
+      "height": 300
+    }
+  },
+  {
+    "image": "DesignAssets/Tribes/spore/AnimationStudies/hurt-v2/hurt-v2.webp",
+    "frameSize": 553,
+    "bounds": {
+      "x": 64,
+      "y": 183,
+      "width": 424,
+      "height": 300
+    }
+  },
+  {
+    "image": "DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png",
+    "frameSize": 553,
+    "bounds": {
+      "x": 64,
+      "y": 183,
+      "width": 424,
+      "height": 300
+    }
+  },
+  {
+    "image": "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp",
+    "frameSize": 512,
+    "bounds": {
+      "x": 53,
+      "y": 148,
+      "width": 406,
+      "height": 300
+    }
+  },
+  {
+    "image": "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp",
+    "frameSize": 512,
+    "bounds": {
+      "x": 56,
+      "y": 145,
+      "width": 399,
+      "height": 303
+    }
+  },
+  {
+    "image": "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp",
+    "frameSize": 517,
+    "bounds": {
+      "x": 58,
+      "y": 153,
+      "width": 406,
+      "height": 300
+    }
+  },
+  {
+    "image": "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png",
+    "frameSize": 517,
+    "bounds": {
+      "x": 58,
+      "y": 153,
+      "width": 406,
+      "height": 300
+    }
+  },
+  {
+    "image": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp",
+    "frameSize": 512,
+    "bounds": {
+      "x": 141,
+      "y": 161,
+      "width": 230,
+      "height": 288
+    }
+  },
+  {
+    "image": "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp",
+    "frameSize": 516,
+    "bounds": {
+      "x": 144,
+      "y": 164,
+      "width": 230,
+      "height": 288
+    }
+  },
+  {
+    "image": "DesignAssets/Tribes/spring/AnimationStudies/hurt-v2/hurt-v2.webp",
+    "frameSize": 516,
+    "bounds": {
+      "x": 144,
+      "y": 164,
+      "width": 230,
+      "height": 288
+    }
+  },
+  {
+    "image": "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png",
+    "frameSize": 516,
+    "bounds": {
+      "x": 144,
+      "y": 164,
+      "width": 230,
+      "height": 288
+    }
+  }
+]

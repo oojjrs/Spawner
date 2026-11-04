@@ -1,0 +1,93 @@
+{
+  "tribe": "spring",
+  "variant": "carapace",
+  "neutralEyes": [
+    [
+      157.18864259045367,
+      329.9362047493404
+    ],
+    [
+      273.1368119415399,
+      329.7698087403599
+    ]
+  ],
+  "groups": [
+    {
+      "x": 172.5,
+      "y": 350.5,
+      "w": 40,
+      "h": 18,
+      "area": 333
+    },
+    {
+      "x": 281.5,
+      "y": 361.5,
+      "w": 42,
+      "h": 20,
+      "area": 359
+    }
+  ],
+  "pair": {
+    "a": {
+      "x": 172.5,
+      "y": 350.5,
+      "w": 40,
+      "h": 18,
+      "area": 333
+    },
+    "b": {
+      "x": 281.5,
+      "y": 361.5,
+      "w": 42,
+      "h": 20,
+      "area": 359
+    },
+    "score": 8.2
+  },
+  "core": {
+    "neutral": {
+      "left": 72,
+      "right": 371,
+      "width": 299,
+      "center": 221.5
+    },
+    "key": {
+      "left": 95,
+      "right": 400,
+      "width": 305,
+      "center": 247.5
+    },
+    "ny": 330,
+    "my": 356
+  },
+  "fixedAssetCameraScale": 0.980327868852459,
+  "dx": -27.468420274986812,
+  "ground": 453,
+  "midDy": 24.59672131147539,
+  "finalDy": 30.478688524590154,
+  "method": "fixed core cross-section at face band",
+  "neutralBounds": {
+    "left": 64,
+    "top": 156,
+    "right": 378,
+    "bottom": 453,
+    "width": 314,
+    "height": 297
+  },
+  "midBounds": {
+    "left": 61,
+    "top": 205,
+    "right": 436,
+    "bottom": 437,
+    "width": 375,
+    "height": 232
+  },
+  "finalBounds": {
+    "left": 47,
+    "top": 317,
+    "right": 436,
+    "bottom": 431,
+    "width": 389,
+    "height": 114
+  }
+}

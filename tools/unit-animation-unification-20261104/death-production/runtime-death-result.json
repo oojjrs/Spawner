@@ -1,0 +1,401 @@
+{
+  "errors": [],
+  "rows": [
+    {
+      "key": "sprout/blade",
+      "live": {
+        "left": 81,
+        "top": 205,
+        "width": 337,
+        "height": 246,
+        "bottom": 451
+      },
+      "first": {
+        "left": 82,
+        "top": 206,
+        "width": 336,
+        "height": 245,
+        "bottom": 451
+      },
+      "middle": {
+        "left": 102,
+        "top": 239,
+        "width": 279,
+        "height": 212,
+        "bottom": 451
+      },
+      "final": {
+        "left": 83,
+        "top": 266,
+        "width": 316,
+        "height": 186,
+        "bottom": 452
+      },
+      "firstGeometryMatch": true,
+      "source": "DesignAssets/Animations/CombatDeathV1/sprout/blade/death.webp"
+    },
+    {
+      "key": "sprout/piercing",
+      "live": {
+        "left": 163,
+        "top": 139,
+        "width": 243,
+        "height": 312,
+        "bottom": 451
+      },
+      "first": {
+        "left": 164,
+        "top": 140,
+        "width": 242,
+        "height": 311,
+        "bottom": 451
+      },
+      "middle": {
+        "left": 146,
+        "top": 283,
+        "width": 189,
+        "height": 169,
+        "bottom": 452
+      },
+      "final": {
+        "left": 129,
+        "top": 309,
+        "width": 220,
+        "height": 143,
+        "bottom": 452
+      },
+      "firstGeometryMatch": true,
+      "source": "DesignAssets/Animations/CombatDeathV1/sprout/piercing/death.webp"
+    },
+    {
+      "key": "sprout/carapace",
+      "live": {
+        "left": 125,
+        "top": 199,
+        "width": 292,
+        "height": 254,
+        "bottom": 453
+      },
+      "first": {
+        "left": 126,
+        "top": 200,
+        "width": 292,
+        "height": 253,
+        "bottom": 453
+      },
+      "middle": {
+        "left": 118,
+        "top": 213,
+        "width": 305,
+        "height": 240,
+        "bottom": 453
+      },
+      "final": {
+        "left": 101,
+        "top": 255,
+        "width": 324,
+        "height": 198,
+        "bottom": 453
+      },
+      "firstGeometryMatch": true,
+      "source": "DesignAssets/Animations/CombatDeathV1/sprout/carapace/death.webp"
+    },
+    {
+      "key": "spore/blade",
+      "live": {
+        "left": 71,
+        "top": 219,
+        "width": 368,
+        "height": 232,
+        "bottom": 451
+      },
+      "first": {
+        "left": 71,
+        "top": 220,
+        "width": 368,
+        "height": 231,
+        "bottom": 451
+      },
+      "middle": {
+        "left": 81,
+        "top": 223,
+        "width": 355,
+        "height": 229,
+        "bottom": 452
+      },
+      "final": {
+        "left": 65,
+        "top": 294,
+        "width": 376,
+        "height": 157,
+        "bottom": 451
+      },
+      "firstGeometryMatch": true,
+      "source": "DesignAssets/Animations/CombatDeathV1/spore/blade/death.webp"
+    },
+    {
+      "key": "spore/piercing",
+      "live": {
+        "left": 75,
+        "top": 155,
+        "width": 322,
+        "height": 295,
+        "bottom": 450
+      },
+      "first": {
+        "left": 75,
+        "top": 155,
+        "width": 323,
+        "height": 295,
+        "bottom": 450
+      },
+      "middle": {
+        "left": 85,
+        "top": 173,
+        "width": 350,
+        "height": 277,
+        "bottom": 450
+      },
+      "final": {
+        "left": 83,
+        "top": 250,
+        "width": 337,
+        "height": 200,
+        "bottom": 450
+      },
+      "firstGeometryMatch": true,
+      "source": "DesignAssets/Animations/CombatDeathV1/spore/piercing/death.webp"
+    },
+    {
+      "key": "spore/carapace",
+      "live": {
+        "left": 53,
+        "top": 201,
+        "width": 356,
+        "height": 250,
+        "bottom": 451
+      },
+      "first": {
+        "left": 54,
+        "top": 202,
+        "width": 355,
+        "height": 249,
+        "bottom": 451
+      },
+      "middle": {
+        "left": 73,
+        "top": 214,
+        "width": 361,
+        "height": 237,
+        "bottom": 451
+      },
+      "final": {
+        "left": 70,
+        "top": 283,
+        "width": 380,
+        "height": 169,
+        "bottom": 452
+      },
+      "firstGeometryMatch": true,
+      "source": "DesignAssets/Animations/CombatDeathV1/spore/carapace/death.webp"
+    },
+    {
+      "key": "pebble/blade",
+      "live": {
+        "left": 51,
+        "top": 179,
+        "width": 334,
+        "height": 271,
+        "bottom": 450
+      },
+      "first": {
+        "left": 52,
+        "top": 180,
+        "width": 333,
+        "height": 270,
+        "bottom": 450
+      },
+      "middle": {
+        "left": 58,
+        "top": 179,
+        "width": 333,
+        "height": 270,
+        "bottom": 449
+      },
+      "final": {
+        "left": 29,
+        "top": 260,
+        "width": 394,
+        "height": 191,
+        "bottom": 451
+      },
+      "firstGeometryMatch": true,
+      "source": "DesignAssets/Animations/CombatDeathV1/pebble/blade/death.webp"
+    },
+    {
+      "key": "pebble/piercing",
+      "live": {
+        "left": 73,
+        "top": 143,
+        "width": 354,
+        "height": 308,
+        "bottom": 451
+      },
+      "first": {
+        "left": 73,
+        "top": 144,
+        "width": 354,
+        "height": 307,
+        "bottom": 451
+      },
+      "middle": {
+        "left": 76,
+        "top": 144,
+        "width": 355,
+        "height": 308,
+        "bottom": 452
+      },
+      "final": {
+        "left": 30,
+        "top": 243,
+        "width": 440,
+        "height": 209,
+        "bottom": 452
+      },
+      "firstGeometryMatch": true,
+      "source": "DesignAssets/Animations/CombatDeathV1/pebble/piercing/death.webp"
+    },
+    {
+      "key": "pebble/carapace",
+      "live": {
+        "left": 55,
+        "top": 157,
+        "width": 364,
+        "height": 293,
+        "bottom": 450
+      },
+      "first": {
+        "left": 56,
+        "top": 158,
+        "width": 363,
+        "height": 292,
+        "bottom": 450
+      },
+      "middle": {
+        "left": 66,
+        "top": 153,
+        "width": 364,
+        "height": 297,
+        "bottom": 450
+      },
+      "final": {
+        "left": 17,
+        "top": 230,
+        "width": 469,
+        "height": 220,
+        "bottom": 450
+      },
+      "firstGeometryMatch": true,
+      "source": "DesignAssets/Animations/CombatDeathV1/pebble/carapace/death.webp"
+    },
+    {
+      "key": "spring/blade",
+      "live": {
+        "left": 73,
+        "top": 149,
+        "width": 334,
+        "height": 302,
+        "bottom": 451
+      },
+      "first": {
+        "left": 74,
+        "top": 149,
+        "width": 333,
+        "height": 303,
+        "bottom": 452
+      },
+      "middle": {
+        "left": 41,
+        "top": 228,
+        "width": 422,
+        "height": 223,
+        "bottom": 451
+      },
+      "final": {
+        "left": 41,
+        "top": 331,
+        "width": 438,
+        "height": 120,
+        "bottom": 451
+      },
+      "firstGeometryMatch": true,
+      "source": "DesignAssets/Animations/CombatDeathV1/spring/blade/death.webp"
+    },
+    {
+      "key": "spring/piercing",
+      "live": {
+        "left": 95,
+        "top": 115,
+        "width": 310,
+        "height": 336,
+        "bottom": 451
+      },
+      "first": {
+        "left": 95,
+        "top": 115,
+        "width": 310,
+        "height": 337,
+        "bottom": 452
+      },
+      "middle": {
+        "left": 71,
+        "top": 227,
+        "width": 297,
+        "height": 225,
+        "bottom": 452
+      },
+      "final": {
+        "left": 67,
+        "top": 368,
+        "width": 303,
+        "height": 84,
+        "bottom": 452
+      },
+      "firstGeometryMatch": true,
+      "source": "DesignAssets/Animations/CombatDeathV1/spring/piercing/death.webp"
+    },
+    {
+      "key": "spring/carapace",
+      "live": {
+        "left": 63,
+        "top": 155,
+        "width": 315,
+        "height": 298,
+        "bottom": 453
+      },
+      "first": {
+        "left": 63,
+        "top": 155,
+        "width": 315,
+        "height": 298,
+        "bottom": 453
+      },
+      "middle": {
+        "left": 32,
+        "top": 225,
+        "width": 368,
+        "height": 228,
+        "bottom": 453
+      },
+      "final": {
+        "left": 18,
+        "top": 341,
+        "width": 383,
+        "height": 112,
+        "bottom": 453
+      },
+      "firstGeometryMatch": true,
+      "source": "DesignAssets/Animations/CombatDeathV1/spring/carapace/death.webp"
+    }
+  ]
+}

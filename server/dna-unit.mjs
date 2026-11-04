@@ -24,7 +24,7 @@ export function validateDna(dna, nestLevel, budget) {
 
 export function dnaAppearance(dna) {
   const counts = ATTRIBUTE_DNA.counts(dna.pieces), attributes = {};
-  for (const [gene, key] of [["blade", "blade"], ["carapace", "carapace"], ["antenna", "antenna"], ["legs", "feet"]]) {
+  for (const [gene, key] of [["blade", "blade"], ["carapace", "carapace"], ["antenna", "antenna"], ["legs", "feet"], ["secretion", "secretion"]]) {
     if (counts[gene]) attributes[key] = counts[gene];
   }
   return attributes;

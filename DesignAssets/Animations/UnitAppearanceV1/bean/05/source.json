@@ -1,0 +1,185 @@
+{
+  "tribe": "bean",
+  "mask": 5,
+  "sourceId": "unit-appearance-v1-bean-05-neutral-v1",
+  "approvalState": "approved",
+  "approvalRef": {
+    "sourceThread": "01a1a155-d06b-7243-b396-e5c947a4714e",
+    "callId": "call_ac2b35a0d4a84662b9df4975654e7ee9",
+    "item": 0
+  },
+  "image": "DesignAssets/Animations/UnitAppearanceV1/bean/05/Source/neutral.png",
+  "frameWidth": 512,
+  "frameHeight": 512,
+  "pivot": {
+    "x": 256,
+    "y": 448
+  },
+  "camera": {
+    "pixelsPerWorld": 512
+  },
+  "coreReference": {
+    "sourceId": "unit-appearance-v1-bean-05-neutral-v1",
+    "referenceImage": "DesignAssets/Animations/UnitAppearanceV1/bean/05/Source/neutral.png",
+    "coreBounds": null,
+    "landmarks": {
+      "leftEye": [
+        220.5,
+        373.5
+      ],
+      "rightEye": [
+        294.5,
+        373.5
+      ],
+      "supportPoint": [
+        258,
+        447.5
+      ],
+      "supportPixelBounds": [
+        207,
+        440,
+        102,
+        8
+      ],
+      "faceMidpoint": [
+        257.5,
+        373.5
+      ]
+    },
+    "canonicalSpeciesSize": 0.4,
+    "canonicalCoreLongest": 204.8,
+    "verified": true,
+    "measurement": {
+      "alphaThreshold": 16,
+      "sourcePixelBounds": {
+        "x": 166,
+        "y": 185,
+        "width": 241,
+        "height": 263
+      },
+      "eyeDistance": 74,
+      "fullCoreObservability": "partly-covered-or-replaced-by-traits"
+    },
+    "verificationScope": "camera-and-observed-landmarks"
+  },
+  "visualBits": [
+    "blade",
+    "antenna"
+  ],
+  "generationReferenceIds": [
+    "BeanFormsV1/secretion",
+    "BeanFormsV1/secretion-blade",
+    "BeanFormsV1/secretion-carapace",
+    "BeanFormsV1/secretion-blade-carapace-antenna-feet",
+    "existing-bean-highres-reference"
+  ],
+  "sourceHash": "783bed93d96a0eab8e30139e6fb296414359f8b1519177b813e3d6e0edc6536d",
+  "sourceRegistration": {
+    "nativeSourceImage": "DesignAssets/Animations/UnitAppearanceV1/bean/05/Source/key-native.png",
+    "nativeSourceHash": "3f89d816391251e97f0aacea61ca138cc3be3282e377a8b9ee0902d0e4ca86d9",
+    "removedDisconnectedNoise": [],
+    "sourceBatch": "DesignAssets/Animations/UnitAppearanceV1/SourceBatches/bean-bcs01-af-v1.png",
+    "sourceBatchHash": "ecd66ba9c4b819feb6d5c84be5ff6de79c25c627fa5ac0a0e7bda1743ccfeb22",
+    "sourceRect": [
+      630,
+      0,
+      631,
+      623
+    ],
+    "sharedSourceScale": 0.5283687943262412,
+    "calibrationFrame": 0,
+    "calibrationEyes": {
+      "leftEye": [
+        234,
+        411.5
+      ],
+      "rightEye": [
+        375,
+        411.5
+      ],
+      "distance": 141
+    },
+    "calibrationReferenceSourceId": "unit-appearance-v1-bean-10-neutral-v1",
+    "translation": [
+      119,
+      156
+    ],
+    "sourceGroundY": 553,
+    "sourceEyes": {
+      "leftEye": [
+        192,
+        411.5
+      ],
+      "rightEye": [
+        333,
+        411.5
+      ],
+      "distance": 141
+    },
+    "registeredEyeSpacing": 74.5,
+    "registeredEyeMidY": 373.42375886524826,
+    "sourceBodyLiftPixels": 4.32624113475174
+  },
+  "states": {
+    "idle": "pending",
+    "walk": "pending",
+    "jump": "pending",
+    "hurt": "pending",
+    "birth": "pending",
+    "death": "pending",
+    "attack": "pending",
+    "ranged": "pending"
+  },
+  "provenance": {
+    "kind": "imagegen-integrated-neutral",
+    "sourceBatch": "DesignAssets/Animations/UnitAppearanceV1/SourceBatches/bean-bcs01-af-v1.png",
+    "sourceBatchHash": "ecd66ba9c4b819feb6d5c84be5ff6de79c25c627fa5ac0a0e7bda1743ccfeb22",
+    "sourceCell": 1
+  },
+  "baselineReference": {
+    "sourceId": "unit-appearance-v1-bean-00-neutral-v1",
+    "referenceImage": "DesignAssets/Animations/UnitAppearanceV1/bean/00/Source/neutral.png",
+    "coreBounds": [
+      173,
+      243,
+      167,
+      206
+    ],
+    "landmarks": {
+      "leftEye": [
+        216,
+        375
+      ],
+      "rightEye": [
+        296.5,
+        375
+      ],
+      "ground": [
+        256,
+        448
+      ],
+      "innateLeavesIncluded": true
+    },
+    "canonicalSpeciesSize": 0.4,
+    "canonicalCoreLongest": 204.8,
+    "verified": true,
+    "measurement": {
+      "alphaThreshold": 16,
+      "coreSource": "existing-original-no-visual-bits"
+    }
+  },
+  "cameraVerified": true,
+  "approvalHistory": [
+    {
+      "approvalState": "pending",
+      "approvalRef": null,
+      "scope": "previous-source-approval"
+    }
+  ],
+  "cameraVerification": {
+    "verifiedBy": "parent-agent",
+    "sourceThread": "01a1a155-d06b-7243-b396-e5c947a4714e",
+    "scope": "frame-camera-nominal-core-foot-and-recorded-landmarks",
+    "unobservedCoreBoundsNotInferred": true
+  }
+}

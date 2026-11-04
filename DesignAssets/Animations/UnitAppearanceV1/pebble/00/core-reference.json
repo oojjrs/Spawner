@@ -1,0 +1,31 @@
+{
+  "sourceId": "unit-appearance-v1-pebble-00-neutral-v1",
+  "referenceImage": "DesignAssets/Animations/UnitAppearanceV1/pebble/00/Source/neutral.png",
+  "coreBounds": [
+    148,
+    289,
+    216,
+    159
+  ],
+  "landmarks": {
+    "leftEye": [
+      211,
+      377
+    ],
+    "rightEye": [
+      300,
+      377
+    ],
+    "ground": [
+      256,
+      448
+    ]
+  },
+  "canonicalSpeciesSize": 0.42,
+  "canonicalCoreLongest": 215.04,
+  "verified": false,
+  "measurement": {
+    "alphaThreshold": 16,
+    "coreSource": "existing-original-no-visual-bits"
+  }
+}

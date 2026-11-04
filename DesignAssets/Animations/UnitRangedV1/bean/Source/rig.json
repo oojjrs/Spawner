@@ -1,0 +1,71 @@
+{
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ],
+  "durationMs": 600,
+  "launchAtMs": 200,
+  "parts": [
+    {
+      "id": "seed-pod",
+      "root": [
+        310,
+        348
+      ],
+      "tip": [
+        355,
+        323
+      ],
+      "patch": [
+        291,
+        294,
+        393,
+        381
+      ],
+      "role": "continuous organ local warp with stationary body root"
+    },
+    {
+      "id": "leaf-left",
+      "root": [
+        263,
+        306
+      ],
+      "patch": [
+        166,
+        236,
+        266,
+        310
+      ]
+    },
+    {
+      "id": "leaf-right",
+      "root": [
+        263,
+        306
+      ],
+      "patch": [
+        259,
+        236,
+        350,
+        310
+      ]
+    },
+    {
+      "id": "body-eyes-feet",
+      "role": "stationary source pixels"
+    }
+  ],
+  "projectile": {
+    "image": "projectile.png",
+    "size": [
+      62,
+      36
+    ],
+    "outlet": [
+      368,
+      322
+    ]
+  },
+  "method": "localized inverse warp with fixed source canvas"
+}

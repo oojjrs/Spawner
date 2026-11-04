@@ -1,0 +1,133 @@
+{
+  "tribe": "spring",
+  "mask": 0,
+  "sourceId": "unit-appearance-v1-spring-00-neutral-v1",
+  "approvalState": "existing-reference",
+  "approvalRef": null,
+  "image": "DesignAssets/Animations/UnitAppearanceV1/spring/00/Source/neutral.png",
+  "frameWidth": 512,
+  "frameHeight": 512,
+  "pivot": {
+    "x": 256,
+    "y": 448
+  },
+  "camera": {
+    "pixelsPerWorld": 512
+  },
+  "coreReference": {
+    "sourceId": "unit-appearance-v1-spring-00-neutral-v1",
+    "referenceImage": "DesignAssets/Animations/UnitAppearanceV1/spring/00/Source/neutral.png",
+    "coreBounds": [
+      179,
+      248,
+      154,
+      200
+    ],
+    "landmarks": {
+      "leftEye": [
+        221,
+        377
+      ],
+      "rightEye": [
+        290,
+        377
+      ],
+      "ground": [
+        256,
+        448
+      ],
+      "supportPoint": [
+        255,
+        447.5
+      ],
+      "supportPixelBounds": [
+        205,
+        440,
+        100,
+        8
+      ]
+    },
+    "canonicalSpeciesSize": 0.39,
+    "canonicalCoreLongest": 199.68,
+    "verified": true,
+    "measurement": {
+      "alphaThreshold": 16,
+      "sourcePixelBounds": {
+        "x": 179,
+        "y": 248,
+        "width": 154,
+        "height": 200
+      }
+    },
+    "verificationScope": "camera-and-observed-landmarks"
+  },
+  "baselineReference": {
+    "sourceId": "unit-appearance-v1-spring-00-neutral-v1",
+    "referenceImage": "DesignAssets/Animations/UnitAppearanceV1/spring/00/Source/neutral.png",
+    "coreBounds": [
+      179,
+      248,
+      154,
+      200
+    ],
+    "landmarks": {
+      "leftEye": [
+        221,
+        377
+      ],
+      "rightEye": [
+        290,
+        377
+      ],
+      "ground": [
+        256,
+        448
+      ]
+    },
+    "canonicalSpeciesSize": 0.39,
+    "canonicalCoreLongest": 199.68,
+    "verified": true,
+    "measurement": {
+      "alphaThreshold": 16,
+      "coreSource": "existing-original-no-visual-bits"
+    }
+  },
+  "cameraVerified": true,
+  "visualBits": [],
+  "generationReferenceIds": [
+    "existing-spring-highres-reference"
+  ],
+  "sourceHash": "ed7fe474673a1736c810b5e5df17007650d9afb7a3def24652ab472908284872",
+  "provenance": {
+    "kind": "existing-original",
+    "sourceImage": "DesignAssets/Animations/UnitAppearanceV1/spring/00/Source/original-highres.png",
+    "sourceHash": "88775abc86381ad98fdd686848ea84855b2ee1be390d181f5990dea547186ee7",
+    "sourceRevision": "9f9662c^",
+    "currentOriginalReference": {
+      "image": "DesignAssets/Tribes/spring/starter.png",
+      "sourceHash": "0c7f348b07635b36340551fc85594fa1f94d06e3c2fbab8c7a440b77686544cd"
+    },
+    "reuseDirective": {
+      "sourceThread": "01a1a155-d06b-7243-b396-e5c947a4714e",
+      "speaker": "parent-agent",
+      "text": "기본00은새그림승인claim말고현행원형그대로보존/사용하는existing-reference"
+    },
+    "transform": {
+      "scale": 0.19163147792706334,
+      "offsetX": 135,
+      "offsetY": 223,
+      "sourceFrameWidth": 1254,
+      "sourceFrameHeight": 1254
+    }
+  },
+  "states": {
+    "idle": "pending",
+    "walk": "pending",
+    "jump": "pending",
+    "hurt": "pending",
+    "birth": "pending",
+    "death": "pending",
+    "attack": "pending",
+    "ranged": "pending"
+  }
+}

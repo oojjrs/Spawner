@@ -1,0 +1,142 @@
+{
+  "tribe": "spring",
+  "mask": 16,
+  "sourceId": "unit-appearance-v1-spring-10-neutral-v1",
+  "approvalState": "approved",
+  "approvalRef": {
+    "sourceThread": "01a1a155-d06b-7243-b396-e5c947a4714e",
+    "callId": "call_855ca484695d4a3eb76d94115969162d",
+    "item": 0
+  },
+  "image": "DesignAssets/Animations/UnitAppearanceV1/spring/10/Source/neutral.png",
+  "frameWidth": 512,
+  "frameHeight": 512,
+  "pivot": {
+    "x": 256,
+    "y": 448
+  },
+  "camera": {
+    "pixelsPerWorld": 512
+  },
+  "coreReference": {
+    "sourceId": "unit-appearance-v1-spring-10-neutral-v1",
+    "referenceImage": "DesignAssets/Animations/UnitRangedV1/Source/TribeFormsV3/spring-neutral-registered.png",
+    "coreBounds": null,
+    "sourcePixelBounds": {
+      "x": 182,
+      "y": 248,
+      "width": 154,
+      "height": 201
+    },
+    "landmarks": {
+      "leftEye": [
+        217,
+        375.5
+      ],
+      "rightEye": [
+        269,
+        375.5
+      ],
+      "ground": [
+        256,
+        448
+      ],
+      "supportPoint": [
+        256,
+        448.5
+      ],
+      "supportPixelBounds": [
+        208,
+        441,
+        96,
+        8
+      ]
+    },
+    "canonicalSpeciesSize": 0.39,
+    "canonicalCoreLongest": 199.68,
+    "verified": true,
+    "measurement": {
+      "alphaThreshold": 16,
+      "sourcePixelBounds": {
+        "x": 182,
+        "y": 248,
+        "width": 154,
+        "height": 201
+      }
+    },
+    "sourceBodyHeightEvidence": {
+      "nativeCoreTop": 85,
+      "nativeCoreBottom": 809,
+      "fixedScale": 0.2762119503945885,
+      "translation": [
+        131,
+        225
+      ],
+      "intrinsicHeight": 199.97745208568207
+    },
+    "verificationScope": "camera-and-observed-landmarks"
+  },
+  "baselineReference": {
+    "sourceId": "unit-appearance-v1-spring-00-neutral-v1",
+    "referenceImage": "DesignAssets/Animations/UnitAppearanceV1/spring/00/Source/neutral.png",
+    "coreBounds": [
+      179,
+      248,
+      154,
+      200
+    ],
+    "landmarks": {
+      "leftEye": [
+        221,
+        377
+      ],
+      "rightEye": [
+        290,
+        377
+      ],
+      "ground": [
+        256,
+        448
+      ]
+    },
+    "canonicalSpeciesSize": 0.39,
+    "canonicalCoreLongest": 199.68,
+    "verified": true,
+    "measurement": {
+      "alphaThreshold": 16,
+      "coreSource": "existing-original-no-visual-bits"
+    }
+  },
+  "cameraVerified": true,
+  "visualBits": [
+    "secretion"
+  ],
+  "generationReferenceIds": [
+    "TribeFormsV3/spring"
+  ],
+  "sourceHash": "874aa82196597810813cf72f7506d96c5255c427d763fe06dddc271b0a72fbd2",
+  "sourceRegistration": {
+    "translationOnly": [
+      0,
+      0
+    ],
+    "rescale": 1,
+    "originalHash": "874aa82196597810813cf72f7506d96c5255c427d763fe06dddc271b0a72fbd2",
+    "originalImage": "DesignAssets/Animations/UnitRangedV1/Source/TribeFormsV3/spring-neutral-registered.png"
+  },
+  "provenance": {
+    "kind": "approved-art-reuse",
+    "originalImage": "DesignAssets/Animations/UnitRangedV1/Source/TribeFormsV3/spring-neutral-registered.png",
+    "originalHash": "874aa82196597810813cf72f7506d96c5255c427d763fe06dddc271b0a72fbd2"
+  },
+  "states": {
+    "idle": "pending",
+    "walk": "pending",
+    "jump": "pending",
+    "hurt": "pending",
+    "birth": "pending",
+    "death": "pending",
+    "attack": "pending",
+    "ranged": "pending"
+  }
+}

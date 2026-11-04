@@ -1,3 +1,143 @@
+## 유닛 애셋 제작 중단·클라우드 재개 인계 · 01a1a155 현재 요약
+
+- 기록 ID: unit-animation-stop-cloud-handoff-20261104-01a1a155. 기록 시각: 2026-11-04T22:26:54+09:00. 기록자·취합/검수 Codex /root, 제작 중단·현재 산출물 취합·메모리·로컬 커밋 결정 주체 사용자. 출처 현재 thread01a1a155-d06b-7243-b396-e5c947a4714e 최신 「야 그냥 끊어 클라우드에서 계속 시키게, 현재까지 작업한 거 걍 메모리에 기록하고 작업된 거 다 모아서 커밋해」 및 「얼른 해봐」. 원발언 정확 시각·항목 ID 불명. H:/Spawner, Windows PowerShell. 아래는 실제 파일과 Sol6.1 low 워커 unit_art_resolution/unit_design_sync/unit_scale_contract의 중단 인계에 근거하며 커밋 성공은 아직 선기록하지 않는다. 신규 제작·구현·테스트·서버를 멈췄고 worker 실행/쓰기 작업 없음으로 보고받았다. 이 상태를 완성품으로 판단하지 말 것.
+
+### 유효 결정과 반드시 보존할 기준
+
+- 전 사용처 Design·게임·전투 실험실에서 실제 종별 비율/바닥 pivot을 공유한다. 원본 전체 프레임을 고정 카메라로 축소하며 투명 여백을 매 프레임 임의 제거하거나 bbox 맞춤하지 않는다. client/unit-size.mjs의 bean .40/spore .38/pebble .42/spring .39 및 중립19종 최신 비율을 보존한다. DNA 1개당 전신 성장1%는 한 번만 적용한다. 현재 dna.pieces 우선·stats.pieceCount fallback은 병행 변경을 보존한 값이다.
+- 외형은 최대 장착 파츠를 쪼개 재조립하는 방식이 아니라 조합마다 일체감 있는 전신 원화다. 동일 조합 원화 자체를 parts/rig로 분리해 애니 제작하는 것은 가능하다. 다른 mask의 파츠로 외형을 합성하지 않는다. 중복 가능한 DNA는 외형 없음. 채집+1 별도 DNA는 미확정이므로 규칙을 바꾸지 않는다.
+- 4종족 bean/spore/pebble/spring × 5개 유무 bit blade1/carapace2/antenna4/legs→feet8/secretion16 = 각00..1f, 총128조합 전환이 승인됐다(call_b10f68d6606444c8a405bdc7da1392bf item0 「모든 외형 조합까지 전환」). strength/arms/piercing/guard 등 legacy 외형은 신규5bit에서 제외하지만 기존 fallback을 버리지 않는다. 원거리 투사체는 secretion DNA와 실제 원거리 공격 때만 발사한다. healer와 공존 가능하다.
+- 승인 원화: 순수4종 shoot v2 큰 투사체 call_1a68de40bd574e0e82cb3f9d7d417aae item0; 기존12속성 사망 keys 같은 call item1. 새싹콩 통합4키 call_fb25be7f0b6c4e778591f6cddcd80474 item0, 이어 전체32개 call_ac2b35a0d4a84662b9df4975654e7ee9 item0 「32개 이대로 확정」. 다른3종 원거리 V2는 사용자가 확정 뒤 철회했다. V3 종별 작동은 call_855ca484695d4a3eb76d94115969162d item0 승인. V1/V2 비슷한 관/주둥이 외형을 재사용하지 않는다. V3 포자=갓 아래 포자낭/주름, 몽돌=돌판이 열리는 단단한 광물 구조, 샘방울=내부 저수부와 순간 표면 개구다.
+- 월드에 새 jump 기능을 추가하지 않는다. 서버 jump emission0, bean F1 뿌리발 hop0, F0 기존 외부 root hop .126world 보존. jump는 optional preview로 전체 행동 준비 조건에 억지 추가하지 않는다. birth 둥지/root 궤적·자원 props·투사체는 body에 중복 bake하지 않는다.
+
+### 저장된 완료 범위와 증거
+
+- 고해상도22시트를 원본에서 복구하고 최신 바닥/여백 등록을 재적용했다. 524프레임 비교에서 크기/접지 차이 최대1px. image-scales/registration·local cache22·image-sizes의 개별 sourceMaximum 예산이 대응한다. global150% 제한을 풀지 않았다. 원본 프레임은512~632, bean death316이다. 모바일 최신 애니를 옛 버전으로 되돌리지 않았다. spore idle-v8 갓 하강은 사용자가 이전 승인한 동작이므로 높이 감소만으로 잘림으로 판정하지 않는다.
+- Design 기본23종·속성12×6·스탯23 총253패널의 원본/고정 카메라 정비, 큰 원본 lightbox, body-only birth 표시와 전체 원본 연결, 원거리 공격 컬럼/4종 clip 연결, DPR backing 수정 완료. PC/mobile/file 대표 검수에서 오류0,253source decode 통과. DPR1/2 body/ground CSS크기 동일. 화면 밖 backing 반환. 기존 검수 증거를 재사용했고 이번 중단 요청 이후 새 브라우저/테스트는 실행하지 않았다.
+- 4종 원거리 단독 UnitRangedV1: Design·Combat 실제 재생 완료. 기관 대기 외형, 600ms shoot·launch200ms, body 약30% 투사체 별도, 실제 ranged 조건부 연결. 게임 본체 연결은 아직 안 했다. 4종 모든 이동·피격·탄생·사망 및 조합이 준비돼야 통합 전환 가능하다.
+- CombatDeathV1 기존4종×blade/piercing/carapace=12개 완성. 원화0/4/7, 각8프레임512·1820ms. 중간 크기 축소와 새싹 잎 cover 역전 문제를 수정한 최종본이다. 부모가 all-death-frames-contact-corrected.png 직접 검수. legacy 단일 속성에만 새 사망 연결하며 여러 외형 조합에 잘못 복사하지 않는다.
+- bean/1f 대표 실제 idle64/walk28/hurt16 클립·Parts/Rig 설치 완료. 부모 구조 검수 통과, 중립 RGBA오차최대2, DPR3 실제렌더의 mesh 이음선 수정, walk quarter 접지오차최대0.390625CSSpx. idle6400/walk1120/hurt760ms. jump unsupported. 나머지 필수 행동은 준비되지 않았다.
+
+### 중단 시점 실제 WIP와 클라우드 시작점
+
+- 실제 neutral source는52개: bean32 전부 사용자 승인/camera verified; spore16(00기존/10 V3 승인2개 verified, 신규14개 pending/camera=false); pebble2/spring2 각각00·10 verified. spore 신규14 mask는01/02/04/05/06/08/09/0a/0c/0d/0e/14/18/1c. A/F6개는 부모 품질QC만 통과했고 사용자 승인 아님. B/C8개는 부모 판정도 미수신이다. 나머지76원화 없음. 다른종 신규 원화는 승인 전 rig 제작 금지.
+- compiler 마지막 출력은 source44/승인38/camera38/전체행동준비0/lazy runtime file41이다. 이후 설치된 spore B/C8개는 manifest에 아직 미반영, 해당8개 이미지 예산도 미등록. 새로 compiler를 돌려 완료 상태를 꾸미지 말고 파일52와 마지막manifest44를 구분한다. bean/1f의 실제3상태만 등록됐다.
+- client/unit-appearance.mjs·unit-appearance-renderer.mjs·server/unit-appearance.mjs·build-unit-appearance.mjs 및 생성 registry/lazy manifest/wrappers는 저장했지만 게임 활성화 안 함. decoded bitmap 예산 mobile8M/desktop32M pixels, 전체 시트 동일 LOD, serial decode/working-set/LRU·pin/close 방식. 4atlas/DPR3/mobile 실제검수7,471,104px<8,388,608,4frame 추가decode 없음. 새128자료를 기존 eager SpawnerLocalAssetFiles에 넣지 않는다.
+- client/unit-appearance-source.mjs/새 encoded source lease loader는 아직 실제 파일이 없다. lazy JS는 SpawnerUnitAppearanceData 초기화가 선행돼야 하고 HTML 연결도 없다. 다음 구현: 별도 FILE lazy namespace, acquire→blob/release, encoded budget mobile8MiB/desktop32MiB, LRU/revoke/serial reservation; renderer bitmap 생성 후 lease release. 기존 assets.js.ready/welcome/eager 로딩은 보존한다.
+- 공통 state/clock adapter(client/unit-appearance-state.mjs 또는 unit-action-state.mjs)도 실제 파일 없음. 설계: death/birth→RPGattack→hurt→attack→throw→harvest→previewjump→walk/carry→idle. 미준비 clip을 idle로 거짓 대체하지 말고, 시각 events는 absolute simulation time/cycle/dedupeId로 재발사/중복audio를 막는다. 실제월드 launchedAt와 lab hitAt의 기준을 구분한다. support/heal은 별도 FX다.
+- server/dna-unit.mjs는 secretion 전달쌍만 추가했고 해당 신규 전달의 runtime/nested worker 동기화는 미완료다. 기본00 raw 실제sheet/sourceId/cameraMapping도 base-raw-inventory.json 초안 verified=false이며 제품 motions.json 등록이 아니다. 서로 다른 원본631/632/316/549/553/512/517/516 크기를 억지512로 자르지 말고 hash/고정 변환을 검증해 연결한다. bean00은 승인상태 문자열 대신 provenance/refhash로 기존 raw 허용 여부를 판단한다.
+- 다음 순서: 저장된 미승인 원화 검수/잔여 원화 제작 및 사용자 승인 → 승인 bean32 동일source마다 자체 rig/중립 재조립 → 나머지 필수 상태 제작(필요한 새 작화키 사용자 확인) → shared state/clock·lease loader·검증 raw00 연결 → 준비된 exact조합부터 Design/Combat/게임 본체 전환·실제 크기/접지/동작 검수. 전체128은 미완성이고 ready0이다.
+
+### 클라우드에 넘기는 실제 경로와 주의
+
+- 제품/원화: DesignAssets/Animations/{UnitAppearanceV1,UnitRangedV1,CombatDeathV1,CombatDeathKeysV1}/, client/unit-appearance*·build-unit-appearance.mjs·combat-death.mjs, server/unit-appearance.mjs. 핵심 제작 원본/등록/내보내기 스크립트와 검수 근거를 tools/unit-animation-unification-20261104/로 복사했다. art-resolution, scale-contract, death-production, design-sync, motion-production 구조다. 원본 임시폴더는 literal H:/$Trash가 아니라 H:/Spawner/$Trash/unit-animation-unification-20261104/에 그대로 보존됐다.
+- archived scripts는 재현용 원문이다. H:/Spawner·Windows Sharp/Playwright 경로와 $Trash 상대 import가 남아 있으므로 클라우드 경로를 조정해야 한다. register/prepare 스크립트는 당시 approval/camera 상태를 과거 값으로 돌릴 수 있으므로 현재 승인32에 그대로 재실행 금지. 제품 source.json의 최신 approvalRef가 기준이다. motion-production/bean-family/hidden-body-unverified.png는 신규4body 복원 입력으로 아직 정합/사용 검수 전이다.
+- Art worker 중단 전 이미 진행 중이던 imagegen4개(cell g14:177, spore hex03/11/12/13 각4키)는 결과 경로를 수신하지 못했고 제품 설치/등록도 안 했다. 생성됐다고 가정하거나 재요청하지 말고 기존 결과 존재부터 확인한다. 로컬 후보 D:/.codex/generated_images/01a1a5f8-1688-7db3-8355-d321ca9faeb3/. 이번 commit에는 회수 못한16개가 들어갔다고 주장하지 않는다. 워커 재시작/추가 generation은 하지 않았다.
+- Git 후보는 이 작업의 원화·모션·해상도/피벗·Design·전투 관련 코드와 지원 메모리만이다. 병행 welcome/audio/DNA조사/중립곡선 작업 및 다른 메모리 변경은 보존한다. 공유 runtime는 image-scales/registration/combat-death/combat-evolution와12사망asset만 분리한다. Design의 별개 지도 초기화·자원메뉴 변경은 제외한다. Git 기본 index 형식 오류는 다른채팅이 O_BINARY 복구했고 현재 cached diff가 비어 있는 정상 상태를 확인했다. 원본 오류index 사본은 $Trash/.../finish/original-index.bin. 관련 board는 resolved repo https://github.com/oojjrs/Spawner의 ProjectsV2 nodes=[] 확인, 연결 없음. 현재 요청은 로컬 commit이며 push 성공/클라우드 전송은 미확인이다.
+
+
+## 졸림·예상 소요 시간 질문과 승인 대기 묶음 안내 · 01a1a155
+
+- 기록 ID: unit-work-eta-sleepy-20261104-01a1a155. 기록 시각: 2026-11-04T22:01:21+09:00. 기록자·예상/진행조율 Codex /root, 상태질문 사용자. 출처현재채팅01a1a155-d06b-7243-b396-e5c947a4714e의「얼마나 걸릴 것 같아? 나 졸려」발언. 정확원발언시각·항목ID불명,H:/Spawner Windows/PowerShell.
+- 부모답변:128조합전체전환에는몇시간이상더필요하고정확종료시각은아직잡을수없다고설명했다. 원화뿐아니라조합별전체행동·실게임연결이남았다는이유를명시했다. 이는정밀추정/완료시각약속이아니다.
+- 진행판단:사용자는작업중단·일시정지·새원화확인생략을요청하지않았다. 기존모든조합전환승인은유효하며Sol6.1 low3독립워커로승인bean32모션·공통코드·나머지원화제작을계속한다. 아직사용자가실제로잠들었다고단정하지않는다.
+- 확인부담안내:먼저주무셔도되고승인된콩동작/코드는계속진행하며추가원화확인은자고나서한번에볼수있게묶어두겠다고답변했다. art는남은spore/pebble/spring각32중신규90의실제원화/종족별contact를만들어부모QC받고모은다. 신규90이나추가death/birth키는명시확인전rig/전체애니로넘기지않으며무응답·시간경과를승인으로취급하지않는다. 독립적으로계속할수있는승인범위작업은진행한다.
+## 새싹콩32조합 원화 확정·카메라 판정 및 고DPI 표시 보정 · 01a1a155
+
+- 기록 ID: bean32-keys-approved-20261104-01a1a155. 기록 시각: 2026-11-04T21:46:10+09:00. 기록자·검수/후속범위조율 Codex /root, 명시원화확정 사용자. 출처현재채팅01a1a155-d06b-7243-b396-e5c947a4714e,request_user_input_async call_ac2b35a0d4a84662b9df4975654e7ee9 항목0「32개 이대로 확정」. 원발언정확시각불명,H:/Spawner Windows/PowerShell.
+- 확정실물: UnitAppearanceV1/bean/00..1f neutral32개를실제4열8행contact(bean-32-neutral-contact.png)로제시했다. 가로B/C유무,세로A/F/S유무순서를채팅에서설명했고사용자는세트32개를확정했다. 기존원형1·이전확정재사용4·신규27이며sourceHash/비트/규격512·기본ground448검수불일치0. 신규27pending키의후속rig/모션gate를이명시승인으로해제한다. 다른3종족신규90원화는아직미승인이다.
+- 부모실물QC:32전부B/C/A/F/S부위유무·불필요기관없음·일체감·body크기·지지점등록을직접확인했다. 이미지생성분리잡점때문에잘못바닥으로등록된source는몸체규모를바꾸지않고분리잡음만정리해실제발지지점으로평행이동했다. 승인재사용source는실제보이는픽셀변경/잘림0이며11/1f는원화기존24px좌측배치를등록전사에서만고쳤다. raw승인원본/해시/전사transform을보존한다.
+- 카메라판정:bean00/10/1f overlay와실제랜드마크/00baseline분리자료를확인했다.00의167×206·눈간80.5와승인10의177×206·눈간74.5는같은core높이안의형태비례차이로기록하며기존그림을눈간격에맞춰warp하지않는다.1f core가가려져관측불가한bbox는null로유지하고관측눈/지지점과승인raw동일크기전사근거를사용한다. bean32의cameraVerified/coreReference.verified는이범위에서부모QC통과판정,이미지형태승인과별도다. 다른3종족00/10 overlay판정은별도진행한다.
+- 새경계판단:world에서mode=jump발행은현재0건이다. 기존00의Planning/preview jump와실게임행동을구분하며새F1jump행동을이번일괄전환을핑계로추가하지않는다. bean1f는기존agentJumpOffset가feet때문에0이며00barehop .126world를복사하면새행동이되므로금지한다. 원화별raw40pxjump도같은512라는이유로복사하지않고world/canonical환산(spore17.829/pebble20.431/spring26.801px)한다. 필수world상태와preview만존재하는optional jump준비상태를분리해원래없는world행동때문에준비가영구차단되지않도록조율한다.
+- 고DPI 보정: 부모가Design256backing을CSS256/512와DPR2·3에서확대해원본해상도가손실되는경로를검수해고쳤다. worker실제DPR1→2확인에서inline CSS256/body40/ground208/seed12.0388px는같고backing256→512,lightbox CSS512/body80/ground416/seed24.0777px는같고backing512→1024,errors0이었다. 화면밖backing은1px반납,sourceLOD는현재device변환을참고하되물리배율은중복하지않는다. 전체성공표면검사는반복하지않고변경DPR대표만검증했다.
+- 진행범위:기본22고해상도/23종비례/Design최신화/4단독ranged대표/12legacy-singledeath는기존검수완료근거유지. 전체128 전환은미완료. Art는spore32neutral(기존00/10+신규30)을제작하고,Motion은확정bean32및V3승인source안의대표rig/상태를제작,Registry는선택적source승인·카메라·world필수상태별로정직하게등록한다. source 없는동작/조합은다른look나정지neutral로대체하지않는다. Git완료권한추가없다.
+- 지침갱신:전파요청으로공식본문sha22865481ff2f89f7254cc3798d6feecd44b38ce4e3d83e08eb6aa29507be7f34을1회재독했다. 새19번의안전경계적용/단일직접·독립병렬원칙과12번제목보존을확인했으나이채팅의명시Sol6.1 low·부모검수요청을우선해3독립분담은유지한다. 산출물/성공검사/권한을재시작하지않는다.
+## 단독4종·기존12사망 검수 마감과 128조합 제작 착수 · 01a1a155 현재 요약
+
+- 기록 ID: unit-animation-first-phase-complete-20261104-01a1a155. 기록 시각: 2026-11-04T21:17:33+09:00. 기록자·실물검수/전체조율 Codex /root, 작업범위결정 사용자. 출처현재채팅01a1a155-d06b-7243-b396-e5c947a4714e 및Sol6.1 low3워커,H:/Spawner Windows/PowerShell. 작업전체는진행중이며부분단계마감기록이다.
+- 4종족분비기관단독: V3버섯포자낭/경질돌판/물주머니와승인콩씨앗기관의neutral/shoot/별도탄체를Design새컬럼과Combat에실제연결했다. 최종file두표면에서4종모두idle기관유지·실제ranged판정shoot/탄체·치유동시허용·pageerror0. 부모spore/pebble/spring실제shoot캡처도직접확인했다. 탄체는body최장변30%,원본프레임전체·출구/launch200ms·고정foot보존. bean24f/나머지30f모두600ms,그림/메커니즘은서로다름. 이단독대표가게임전체전환완료라는뜻은아니다.
+- 12기존single전투속성death: 실제종족기본death참조전신작화8pose/512cell/1820ms와승인neutral0/mid4/final7를유지해제품CombatDeathV1/4종족×3속성에설치했다. 초기부모검수에서수평체급축소를반려해눈/몸체landmark의고정source-camera로수정했고,전12source가생성된뒤부모contact검수에서비몽돌9개의일괄mid/frame3교환으로잎/갓동작이역행함을발견했다. 그swap을모두제거하고9개frame3만양끝frame2/승인mid4고정으로재작화해해결했다. 부모all-death-frames-contact-corrected.png를직접확인해12single최종실물QC통과판정했다. fixedkey와0..7실제frameSource를sequence.json에보존,변경9개cache만재동기화. 실제compiledruntime12neutral/death0정합12/12·Design새atlas12재생·수정3→4→5진행/errors0,형식검사마감증거가있다. Multi/5DNA128motion은이마감에포함하지않는다.
+- 현재공통크기: 기존22개고해상도복구/524frame접지대조/23종대표행동비례/Design253원본·PC/mobile/file/lightbox검수완료근거는이전기록대로재사용한다. 전투실험실DNA성장누락은다른동시채팅이공통unit-size에서실DNA우선/stats.pieceCount fallback으로통합한현재source를확인했고중복성장을제거한stage를보존한다. formationScale의viewport공통확대도다른채팅의현재소스이므로보존했다. 개별몸체를같은크기로fit한것이아니라공통view확대+성장이다.
+- 전체128규격: 현행유효외형bits blade1/carapace2/antenna4/feet8(legs)/secretion16,4종×00..1f=128. strength/arms/piercing/guard는현행DNA비트가아닌legacy호환으로보존하며새기본look0으로무시해떨어뜨리지않는다. 이미확정재사용후보11(기본00×4+콩10/11/12/1f+타종족V3 10×3),신규후보117. 첫bean10/14/18/1c의일체형4칸중10은승인원본동일해시,신규3키는부모실물QC만통과하고사용자승인은아직pending. bean32전체키를종족묶음으로보여준뒤사용자확인받는다. 다음source그림제작은가능하나미승인키rig/애니는금지한다.
+- source-camera/출처검수: 기존00 core167×206·눈간80.5와승인콩S10 core177×206·눈간74.5의차이는같은core높이의승인된형태비례차이로구분한다. 이미승인된그림을눈간격만맞추려고임의warp/rescale하지않는다. actualsource랜드마크와00baseline을분리해기록하고원본hash/전사transform/pivot정합을검수한다. 기본00은과거approvalcall을날조하지않고existing-reference+원본hash/provenance/reuse지시로추적한다. 승인1f의원화좌측배치를몸체변형없이평행이동해footroot256448로맞추는작업중이다.
+- 새registry기초: server/unit-appearance.mjs/client/unit-appearance*.mjs·build-unit-appearance.mjs에정확mask·sourceApproval/cameraVerified/actionSetComplete3gate·미완성null·legacy보존·DNA1%·raw00/최신frameGeometry의source-cameraMapping·whole-atlasLOD/pixelbudget/lazy/pin-release캐시를준비했다. 당시실제headlessImageBitmap1Mpixel예산테스트에서원본3072×2560을768×640으로균등축소해491520px상주/clear후0을확인했다는워커근거가있다. source등록생성기/게임renderer활성화는아직미실행. server/dna-unit의secretion전달1쌍도현재소스만변경됐고runtime/nestedworker미동기화상태라고정확히구분한다.
+- 다음분담: art워커는bean첫batch부모QC통과후32neutral전체작화중,scale워커는원형00raw동작등록/새canvasadapter/registry통합준비,Design워커는이미명시확정된bean1f·V3단독S16원화안에서4종족idle/walk/jump/hurt대표rig를제작한다. 그동일조합의애니를위한분리/숨은면복원만허용하고최대장착파츠를다른조합으로재조립하지않는다. state/clock단일해석과scaleowner한개로legacy기능/최신mobile모션보존이목표다. 모든128조합의전체행동·실게임전환은아직미완료이며커밋/푸시/배포하지않았다.
+## 모든 외형 조합 실게임 전환 범위 확정 · 01a1a155
+
+- 기록 ID: all-appearance-combinations-approved-20261104-01a1a155. 기록 시각: 2026-11-04T20:29:56+09:00. 기록자·제작/전환순서조율 Codex /root, 전체전환범위명시결정 사용자. 출처현재채팅01a1a155-d06b-7243-b396-e5c947a4714e,request_user_input_async call_b10f68d6606444c8a405bdc7da1392bf 항목0에서「모든 외형 조합까지 전환」선택. 원발언정확시각불명,H:/Spawner Windows/PowerShell.
+- 최신범위: 부모가통합외형의실게임사용에는사격뿐아니라기존idle/walk/hurt/birth/death등동작도필요하고모든조합은추가완성외형이필요하다고설명한뒤사용자는단독4종우선선택대신모든외형조합전환을명시했다. 따라서이전범위미정기록(unit-appearance-combination-correction,bean-integrated-forms-approved,tribe-ranged-v3-keys-approved등)의128조합미확정/대표연결에한정된후속상태를이번결정으로전진한다. 정확개수는현행유효외형DNA를코드/데이터에서확인해확정한다(5presence bits라면4종×32=128). 퇴역legacy표현과현행DNA를혼동해무한·중복외형조합을늘리지않는다.
+- 변하지않는조건: 서로다른DNA외형을조각그림의단순합성으로때우지않고조합별일체형완성원화로등록한다. 같은DNA중복가능한것들은외형없다는사용자교정을유지하고채집+1/채집중복기획은미정그대로두며게임규칙을바꾸지않는다. 종족별개성·기존몸체크기비율·1DNA당1%성장·바닥pivot·원본전체frame표시를보존한다. 아직없는조합을가까운다른외형으로대체하지않는다.
+- 제작/검수순서: 실제appearance조합registry/기존source행동인벤토리를워커가확인하고,기존확정단독/새싹4키·원형을포함해전체조합의완성neutral키를batch로제작한다. 사용자에게실제키원화를제시한뒤확인된그림에서분리/rig/국소mesh/전신작화를선택한다. 완성몸체를해당조합의애니를위해분리하는것과한최대장착그림을쪼개다른조합을조립해만드는것을구분한다. 후자는사용자가거부한방식이며재도입하지않는다.
+- 실행분담전환: 현재4종족사격마감·기존12single속성death마감을완료하는대로3명의명시Sol6.1 low워커를전체조합source,공통registry/게임연결,종족별motion/상태통합으로확장한다. 부모는분해·조율·실물검수·재작업지시를유지한다. 새외형·키확인gate는자동생략하지않고기존성공검사는새변경없는한반복하지않는다.
+- 현재실증/미완료: 기본22시트고해상도/23종크기/Design최신화는완료근거를보존한다. 새4종단독발사중3종출력마감/metadata연결중,12death출력/사용경로연결중이다. 게임전체를정지neutral로대체하지않으며전체전환완료·커밋·푸시·배포를아직선언하지않는다. Git완료권한추가없음.
+## 종족별 원거리 V3 외형·작동 키 확정 · 01a1a155
+
+- 기록 ID: tribe-ranged-v3-keys-approved-20261104-01a1a155. 기록 시각: 2026-11-04T20:09:19+09:00. 기록자·후속범위조율 Codex /root, 명시확정 사용자. 출처현재채팅01a1a155-d06b-7243-b396-e5c947a4714e,request_user_input_async call_855ca484695d4a3eb76d94115969162d 항목0「이대로 확정」. 원발언정확시각불명,H:/Spawner Windows/PowerShell.
+- 확정실물: UnitRangedV1/Source/TribeFormsV3/keys.png의spore중립1키·pebble중립/돌판열림2키·spring중립/순간표면개방2키를실제그림으로제시했고사용자가이외형과작동자세를확정했다. V2동일발사관형은철회된상태그대로보존하며재사용하지않는다. V3는갓아래포자낭군/주름틈,등쪽경질돌층과탄환석,몸속물주머니와일시적표면개방으로서로다른원리를사용한다.
+- 크기계약: 기본몸체높이target137.6739/158.77/199.68px(512source),종족단일scale/translation·pivot256448,새기관extent때문에core몸체축소없음. neutral/작동pose를별도bboxfit하지않는다. 기존탄체크기는본체최장변30%승인계약을유지한다.
+- 후속제작: art워커가승인V3의3종족분비기관단독발사애니를각종족물성에맞춰제작,scale워커는해당metadata/API와Design/Combat/가능한게임대표경로를연결한다. 다른미확보외형조합을가까운다른몸체로그려대체하지않는다. 사망12기존속성은Design워커가통과한몽돌camera등록대표원칙으로나머지11종전신작화진행중이다. 신규secretion포함전조합·기관포함사망은아직미완료다.
+- 대표사망검수갱신: 부모가재등록후몽돌blade8포즈대표sheet를다시봤고수평체급을유지한균열→돌섹션분리→낮게퍼지는잔해로판정해다른11종확대를허용했다. 전체bbox를42에fit하지않고기존속성idle의고정몸체sourceScale로world재생한다. 일부고해상도edge색fringe가능성은워커가기술알파검수한다. 아직전12종완료/게임설치검증으로기록하지않는다.
+## 타종족 원거리 외형 확정 철회·종족별 진화 원리 재설계 · 01a1a155
+
+- 기록 ID: tribe-ranged-forms-withdrawn-20261104-01a1a155. 기록 시각: 2026-11-04T19:58:56+09:00. 기록자·철회반영/재설계제안 Codex /root, 철회·종족개성교정 사용자. 출처현재채팅01a1a155-d06b-7243-b396-e5c947a4714e, async call_e3a3e2b921d74539a36299f88c7b6169 항목0「이대로 확정」직후「아니다 야.. 너무 다 똑같이 생겼는데」「누가 봐도 몽돌은 저렇게 진화하면 안될 것 같은데. 각자 종족의 개성에 맞게 진화해야하는거 아니냐」발언. 원발언정확시각불명,H:/Spawner Windows/PowerShell.
+- 최신상태: TribeFormsV2의spore/pebble/spring단독기관3키는방금확정응답이있었으나직후철회/교정으로현재미승인·재작업대상이다. V2승인을후속rig/애니생산권한으로쓰지않는다. 새싹콩BeanFormsV1의4키확정과단독발사대표승인은별도이며이번발언으로철회됐다고확대해석하지않는다.
+- Codex오류인정: 세종족을같은발사관의재질변형으로처리했고특히몽돌의경질몸체를말랑한코처럼늘려종족특성을어겼다고답변했다. 새제안은공통발사구를버리고몸구조/발사원리부터다르게한다. 포자버섯=갓아래포자낭·주름방출,몽돌=등쪽돌층의탄환석형성·단단한돌판개방/튕김,샘방울=몸속압축물방울축적·표면순간개방/분사. 이는부모의재설계제안이며아직새원화가보여지거나확정된것이아니다.
+- 재작업범위: art워커가V1/V2를보존한V3실제외형키3개부터새로만들고부모검수/사용자실물확인전후속제작하지않는다. 단순코/나팔의길이·두께수정으로대신하지않는다. 기본몸체크기·바닥pivot·종족재질과눈/발/갓등원형은보존해야한다.
+- 독립작업진행: bean단독API의healer차단은제거됐고Design원거리셀/라이트박스도실제source/같은12.0388px씨앗표시로연결했다는워커실행결과가있다. 부모최종해당PNG검수는이어진다. game전조합연결/기관포함사망은미완료유지한다. 몽돌blade사망3키는눈간격고정camera보정으로world폭42→40→잔해49.7px로재등록했고부모같은world배율contact를검수중이다. 아직12death전체설치완료는아니다.
+## 발사 대표 조건부 연결·사망 배율 검수 재작업 · 01a1a155
+
+- 기록 ID: unit-motion-prototype-review-20261104-01a1a155. 기록 시각: 2026-11-04T19:54:39+09:00. 기록자·검수/재작업판단 Codex /root. 출처현재채팅01a1a155-d06b-7243-b396-e5c947a4714e 및3명Sol6.1 low워커, H:/Spawner Windows/PowerShell. 원도구실행정확시각은개별산출물참조.
+- 발사대표실증: 승인새싹콩분비기관단독원화512에기관·잎영역만국소inverse warp,600ms/24sample,200ms발사,눈·몸통·발고정. 부모contact/source코드검수및워커의격리headless MP4끝재생확인(ended=true .6s)을근거로대표방식통과판단했다. bone/삼각mesh제작으로과장하지않고실제국소warp방식으로기록한다. 씨앗은별도탄체로기관출구에서분리되며몸체포즈페이드없음.
+- 실제연결범위: client/unit-ranged.mjs와combat-stage·Combat해당모듈만연결해bean/칼날0/분비기관1 대표를file실험실에서idle부터기관표시·실제shoot/씨앗사용·pageerror0으로확인했다. 부모combat-idle/shoot PNG도직접확인. game전체와server dnaAppearance는아직연결하지않았다. secretion포함16조합중neutral4/사격1만확보되어미확보조합에가까운다른그림을대체하지않는다. 기관포함사망도아직없다.
+- 조건검수수정지시: 능력ranged+실제ranged공격mode와발사시간으로조건을검사한다. 초기API가healer도배제했으나현재healer는외형없으므로불필요한제약이라고부모가판정해제거/동시활성긍정케이스확인·좁은번들동기화를워커에지시했다. 실제외형bits의미확보조합만배제해야한다. 무속성/근접/자원throw가shoot되지않는부정케이스는대표검증됐다.
+- 사망대표반려: 몽돌blade8프레임전신작화첫대표는neutral전체폭약330→중간약200으로수평까지40%가량축소돼물리체급이변하는것처럼보였다. 이는기존V7living과새승인키의camera/등록배율차이를동작으로드러낸문제다. neutral원본2xpixel보존자체가목표가아니라42px/world100체급유지가목표이므로눈간격/돌대편/수정등몸체landmark로3키의고정sourcecamera등록부터수정하도록Design워커에반려했다.12종전체확대/제품설치는아직하지않았다. 프레임별bboxfit은금지유지한다.
+- 타종족외형검수반려: spore/pebble/spring원거리단독V1은기관이실제표시에서2~3px작은구멍으로보여장착판독과30%탄체출구로부족했다. 부모는3키를사용자에게아직제시하지않고기관전체길이몸체최장변25~30%의저장방·목·출구를일체형으로보완하도록지시했다. 몸체축소금지·포자기본갓폭회복·V1보존한V2원화만생성중이며새외형승인/rig/전체제작전이다.
+- 표시마감추가: 부모attribute-lightbox-final.png를직접확인했고실제runtime256셀/본문동일sourceScale .2565234053/512CSS표시로고쳐이전Planningpreview과확대를제거했다. 다른성공표시검사를전체반복하지않았다. 전체요청은계속미완료이며새Git완료지시없다.
+## 새싹콩 통합 외형4키 확정·후속 계속 지시 · 01a1a155
+
+- 기록 ID: bean-integrated-forms-approved-20261104-01a1a155. 기록 시각: 2026-11-04T19:39:31+09:00. 기록자·후속범위조율 Codex /root, 외형확정·계속지시 사용자. 출처현재채팅01a1a155-d06b-7243-b396-e5c947a4714e,request_user_input_async call_fb25be7f0b6c4e778591f6cddcd80474 항목0「이 방향으로 확정」및직후「좋긴 한데 ... ㅡ_ㅡ 뭐.. 일단 계속 해봐」. 원발언정확시각불명,H:/Spawner Windows/PowerShell.
+- 확정실물: UnitRangedV1/Source/BeanFormsV1/keys.png의새싹콩분비기관단독/분비기관+칼날/분비기관+갑피/외형5종전체의완성몸체4키를실제이미지로제시했다. 부모는우하단잎칼날끝잘림을발견해동일원본의추출여백을67px확장한수정본을직접확인한뒤제시했다. 4키동일scale .5278350515와pivot256/448,몸통개별축소없음. 이새외형4키는명시확정됐다.
+- 계속범위: 확정원화의새싹콩조건부사격대표애니,다른3종족원거리기관의실제외형키,기존승인12속성사망동작을3명의Sol6.1 low워커에분담한다. 신규다른종족외형은실제키를만들어보여준뒤후속제작gate를적용한다. 5종32조합×4의128개대량제작을확정했다고해석하지않는다. 원거리발사는활성secretion/ranged와실제ranged공격에만연결한다.
+- 독립표시마감: Design253원본성공·부모PC/mobile/file검수이후추가로이동lightbox의음원loadeddata전체대기때문에그림이멈추던버그를워커가고쳤고spore탄생lightbox를잘린Planning생성본에서실제fullscene576셀22프레임원본으로교체했다. 속성12행lightbox도Planning256확대대신실제runtime시트+본문동일고정scale/pivot으로공유하게고쳤다. 해당대표렌더오류0,부모birth전체그림실물확인. 속성최종PNG부모검수는이어진다.
+- 포자idle검수정리: 현재frame16의높이가첫포즈54%로납작해지는것은crop오류아니라idle-v8원화동작이다. 메모리thread01a17159-1dee-7672-86c1-5b3c1bb4d514의2026-10-25 사용자msg01a171a2-8996-7c50-9194-414f863cf22e가「그래. 적용해봐」로몸통유지v8을승인한근거를확인했다. 현재발사/사망작업을핑계로승인idle를임의재작화하지않는다.
+- 공통지침갱신: 다른채팅01a1a5ff의전파요청에따라공식본문sha cf190b83534e2a7cad70cacbd035a01b49c56557be6e83f00141da5b38fb0b83을한번재독했다. 새19번워커실행/부모조율검수와12번사용자·출처불명제목보존을적용한다. 이채팅의명시Sol6.1 low요청을유지하고메인모델은바꾸지않는다. 새권한·완료작업재개·성공검사반복은추론하지않는다.
+## 외형 조합 일체감 문제·중복 DNA 전제 교정 · 01a1a155 현재 요약
+
+- 기록 ID: unit-appearance-combination-correction-20261104-01a1a155. 기록 시각: 2026-11-04T19:28:25+09:00. 기록자·후속범위/제안 Codex /root, 게임기획전제·결과문제교정 사용자. 출처현재채팅01a1a155-d06b-7243-b396-e5c947a4714e,원발언정확시각·항목ID불명,H:/Spawner Windows/PowerShell. async call_c7a0c9730fae44f79c4b35cfbc75fe35 항목0응답및직후발언.
+- 사용자확정교정: 같은DNA중복이가능한것들은전부외형이없다. 채집중복은아직미정이며채집+1 DNA를별도로두는방향도고민중이다. 따라서부모의중복기관발달단계제안은잘못된전제로철회한다. 실제고민은서로다른외형파츠를동시에표시할때조각합성이너덜너덜하고일체감없던문제다. 최대장착외형을한번디자인한후분리해도유사문제가나온다고사용자가명시했다.
+- 신규요구: rangedDNA는추가됐지만전용외형변경파츠가아직없으므로원거리기관을장착한외형자체가필요하다. 기존v2발사키승인은기본몸체동작/투사체에한정되고아직그림이없는신규분비기관외형승인으로확장하지않는다. ranged는secretion기관활성+실제사격판정일때만발생해야한다.
+- Codex정정제안: 최대장착그림분리만으로해결된다고한기존제안은철회했다. 현재코드에서보이는외형DNA4종(blade/carapace/antenna/legs)에신규secretion까지독립5종이면기본포함종족당최대32외형,4종족128외형이라는조건부상한을설명했다. 이는사용자확정된128개제작범위가아니다. 원화파츠는배치참조로쓰되겹치는부분/전체실루엣을조합별로다시정리한완성외형을만들자고제안했다. 채집외형은미정이라포함하지않고애니재사용범위도완성외형검수후판단한다.
+- 최소실증: 기존요청의신규원거리외형을구체화하기위해Sol6.1 low scale워커에새싹콩의분비기관단독/분비기관+칼날/분비기관+갑피/현외형5종전체4가지실제통합키원화만의뢰했다. 32/128대량제작·게임DNA규칙변경은아직하지않는다. 새외형의rig/전체발사애니는실제원화확인전대기한다.
+- 사망후속상태: 승인12속성키후속을담당한art워커가몽돌기본몸체+수정4조각후반640ms대표만만들었으나승인최종키와몸체돌조각윤곽차이가있어탐색물로만보존한다. 사용자의일체감교정을반영해이방법으로12종전체를증산하지않고대표에서멈춘다. 사망키승인은유효하나완성애니설치주장은아직할수없다.
+- 독립수정실증: 기본22시트524프레임고해상도복구는동일고정캔버스와before를대조했고외곽오차최대1px·16등록출력해시일치(워커측정+실물대조)로최근접지/모션보존을확인했다. Design은253원본디코드오류0 및부모PC1920/모바일390·file렌더검수에서페이지오류0/모바일가로넘침없음,기본4/흰발·속성idle표시를관측했다. 아직전체요청미완료,커밋/푸시/배포하지않음.
+## 신규 발사·속성 사망 키 승인 및 원거리 발동 조건 확정 · 01a1a155
+
+- 기록 ID: unit-motion-keys-approved-20261104-01a1a155. 기록 시각: 2026-11-04T19:20:26+09:00. 기록자·연결판단 Codex /root, 명시승인·발동조건교정 사용자. 출처현재채팅01a1a155-d06b-7243-b396-e5c947a4714e,request_user_input_async call_1a68de40bd574e0e82cb3f9d7d417aae 항목0/1 각각「이대로 진행」응답과후속「원거리 속성 껴야 나가는건데 그냥 나가면 안돼」발언. 원발언정확시각불명,H:/Spawner Windows/PowerShell.
+- 키승인: UnitRangedV1/Source/keys-v2.png(몸체최장변30%투사체로수정한4종족3포즈),CombatDeathKeysV1/Source/*-registered.png(4종족×3전투속성×중간/최종,관통샘방울창형수정포함)의실제검토판을제시했고사용자는각각후속제작진행을승인했다. 위기록ranged-projectile-key-correction의v1미승인은보존하며v2승인은이기록으로전진한다.
+- 최신발동조건: 투사체는원거리속성이활성화된유닛이실제사격판정을일으킬때만생긴다. 기본유닛에원거리속성없이투사체가발사되면안된다. 원거리속성장착/활성여부와실제공격mode·발사시점을함께확인한다는부모구현판단을답변했다. 기존채집투척이나근접공격을사격발동으로잘못해석하지않는다.4종족발사키승인은이게임조건과함께적용한다.
+- 다음단계: 부모는range워커에4종족실제연속제작/조건부런타임연결,art워커에기본death참조12속성실제연속제작/기존metadata경로연결을분담한다. 각자rig사용전playbook을읽고승인된키의대표구간실제출력을검수한뒤전체로확대하며페이드/크로스페이드로포즈를바꾸지않는다. 아직완성애니설치/전체검증전이며초기키준비를전체완료로취급하지않는다.
+## 원거리 키프레임 투사체 확대 교정 · 01a1a155
+
+- 기록 ID: ranged-projectile-key-correction-20261104-01a1a155. 기록 시각: 2026-11-04T19:12:50+09:00. 기록자·제작판단 Codex /root, 크기문제제기 사용자. 출처현재채팅01a1a155-d06b-7243-b396-e5c947a4714e의 request_user_input_async call_f8ca814e5cd74edaa33b90b51e25bf28 항목0 응답「투사체 크기가 너무 작은 거 아님?」,원발언정확시각불명,H:/Spawner.
+- 승인상태: 원거리4종족준비/발사/복귀키Source/keys.png를종족비율·공통바닥으로등록한실제검토판을제시했으나사용자는투사체가작다고교정했다. 이응답은후속제작승인이아니다. 기존키를승인완료로취급하지않고보존한뒤v2를만든다.
+- Codex판단·답변: 실제전투크기에서시인성이부족하므로몸체비율을그대로유지하고주투사체를몸체최장변약30%로확대한다는수정방향을설명했다. 30%수치는사용자가지정한확정수치가아닌Codex제작판단이다. 준비/복귀포즈·바닥pivot·종족크기는보존한다. scale워커Sol6.1 low에내장imagegen원화수정/실제키검토판을위임했고부모는결과검수한다.
+- 병행상태: art워커는기본죽음의특성을반영한12속성사망24키중spring/piercing의직선창형손실을확인해그중간키를재작화중이다. 다른키도살아있는기준원화의몸체landmark와고정배율대조중이며아직후속애니미승인이다. Design워커는채집/운반/투척512scene의actor고정기준으로등록을맞추고최신메타데이터재생성중이다. 부모최종Design실제표시검수는완성본에서진행예정이다.
+## 유닛 애니 병렬 제작·크기 계약 검수 진행 · 01a1a155 현재 요약
+
+- 기록 ID: unit-animation-workers-20261104-01a1a155. 기록·마지막 근거 확인 시각: 2026-11-04T19:03:31+09:00. 기록자·배분/정합판단 Codex /root, 워커모델·최대병렬요구주체 사용자. 출처 현재채팅01a1a155-d06b-7243-b396-e5c947a4714e,H:/Spawner Windows/PowerShell. 원발언정확시각·항목ID불명.
+- 사용자 최신지시대로 Sol 6.1 low 워커3명(unit_scale_contract/unit_design_sync/unit_art_resolution)을 활성화하고 부모는통합·실제표시검수를담당한다. 동시실행한도4슬롯(부모포함)이며 과거워커명목록을실행중으로간주하지않는다. 규모/피벗게임경로,Design표동기화,해상도/신규키원화를각각분담했다.
+- 정합판단: 종족별UNIT_DISPLAY_SIZES와DNA1조각당1%계약을보존한다. 원화마다카메라/기본배율이달라애셋별중립/첫포즈를한번측정한고정등록배율은필요하며허용한다. 매프레임현재bbox로fit하거나여백을crop하는것은금지한다. 실제전체원본셀을같은등록배율/프레임pivot으로그려야하고의도된성장·찌그러짐·공중궤적은유지한다. Design 공통256px canvas·world1당100px 기준과현재다른채팅의lab UNIT_IMAGE_BOUNDS계약을맞춘다.
+- 해상도관측: 3713cb7 접지수정은단순메타데이터가아니라원화에frame별평행이동/padding을bake했다. $Trash/combat-image-registration-20261103/register.mjs·registration.json의91개sourceHash/originalFrameSize/dx/dy가복구근거다. 역사원본512에동일보정값을비례재적용해최신보정유지한고해상도후보를만든다. 부모는native품질을보존하되요청대상이미지만실측sourceMaximum예산등록을허용하고전역150%정책해제/허위display증가는금지했다. 아직제품복구완료증거없음.
+- 신규키: 원거리공격4종족3포즈원화초안은imagegen에서생성했고alpha16미만fringe정리본을검수중이다. 사망은4종족별3속성×중간/최종6개의실제키원화시트를생성한다. 키확인전rig/보간/후속전체애니는스프라이트스킬규칙대로대기한다. 새사망/발사애니완료나게임설치완료로기록하지않는다.
+- 범위충돌보존: 다른채팅01a1a0bf가combat-stage/UNIT_IMAGE_BOUNDS를수정중이므로스케일워커는그계약을읽어재사용하고해당파일중복편집을피한다. Design의별도맵복구,다른DNA/Combat/runtime/오디오/메모리변경을보존한다. 현재작업커밋/푸시/배포권한은추가되지않았다. 전체요청미완료이며독립수정과키원화검수를계속한다.
+## 전 사용처 유닛 크기·피벗·해상도·4종족 애니 정비 착수 · 01a1a155 현재 요약
+
+- 기록 ID: unit-animation-unification-start-20261104-01a1a155. 기록·마지막 근거 확인 시각: 2026-11-04T18:41:06+09:00. 기록자·범위/단계판단 Codex /root, 교정요구·작업결정주체 사용자. 출처 현재채팅01a1a155-d06b-7243-b396-e5c947a4714e,H:/Spawner Windows/PowerShell. 원발언정확시각·턴/항목ID·PC식별불명. 첨부 D:/Temp/codex-clipboard-5c530079-3f83-4d33-8d86-298a642cc102.png를부모직접확인했다.
+- 사용자 전체 요구: 같은애셋의기획서/게임/전투실험실크기를일관화하고최근바닥pivot을같이적용한다. 유닛페이지에서원본여백을임의로잘라내지않고원본프레임그대로축소한다. 작은원본해상도로흐린애니는해상도를높이고,모바일에서수정됐지만기획서에빠진애니도모두최신화한다. 잔여이상애니를수정하며4플레이어종족의전투속성사망애니는기본사망참조로재작업하고4종족투사체발사원거리공격을제작/컬럼추가한다. 최근맞춘종별크기비례와메모리계획을지켜야한다.
+- 확인한 현기준: UNIT_DISPLAY_SIZES의bean.40/spore.38/pebble.42/spring.39부터white-paw1.44까지23종비례와DNA조각당1%성장계약을유지한다. UNIT_SPRITE_REGISTRATION/imageFrameGeometry가최신지지면pivot과일부프레임geometry를가지며11/4원격수신5675285에중립19종보행/웰컴변경이있다. Design의동작별기존data-preview-scale/pivot·옛보행preview·별도작은UnitPreviews와stage의전종동일size가서로다르다. 정확한원인·변경범위는추가조사후기록한다.
+- 진행 단계: 먼저실제소스/원본/metadata/미리보기참조를대조하여원본프레임·고정배율·지지면계약을정리한다. 표현/참조교정은범위내진행하되새원거리·전투속성사망재작화는oojjrs-2d-sprite-animation에따라필요한실제키프레임을먼저제작해사용자확인후파츠분리·리깅·보간·후속전체제작으로이어간다. 현재그확인은아직없으며기존외형승인을새동작확인으로간주하지않는다.
+- 보존·문서: 현재Design의맵초기화복구와CORS관련runtime/tribe-art/메모리기존미커밋변경을보존한다. Design은유닛표의참조/표시만국소수정하고사용자가지정한컬럼「원거리 공격」외새설명문구/기획페이지는추가하지않는다. 사용자기존Git완료는이전전투배경범위였으므로이번새작업의커밋/푸시/배포는아직요청되지않았다. 관련임시/원본사본은프로젝트literal $Trash/unit-animation-unification-20261104에보존하고H쓰기는작업별승격한다. 전체요청은현재미완료다.
+
 ## DNA 형태 조사 클라우드 인계 · 01a1a10e 현재 요약
 
 - 기록 ID: dna-cloud-handoff-ready-20261104-01a1a10e. 기록 시각: 2026-11-04T22:15:20+09:00. 기록자·취합 Codex /root, 기록·커밋 및 다음 날 클라우드 재개 요청 주체 사용자. 출처 현재 채팅 01a1a10e-176c-7cb3-a1cf-2ad477deffc4, H:/Spawner Windows PowerShell. 원 발언 정확 시각·항목 ID 불명. 현재는 커밋 준비 완료 상태이며 커밋·푸시 성공을 선기록하지 않는다.

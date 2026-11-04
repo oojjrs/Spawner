@@ -1,0 +1,62 @@
+{
+  "idle": {
+    "image": "DesignAssets/Animations/UnitRangedV1/spring/Source/neutral.png",
+    "frameSize": 512,
+    "columns": 1,
+    "pivotX": 256,
+    "pivotY": 448
+  },
+  "animation": {
+    "image": "DesignAssets/Animations/UnitRangedV1/spring/shoot.webp",
+    "frameSize": 512,
+    "columns": 6,
+    "frameCount": 30,
+    "durationsMs": [
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20
+    ],
+    "durationMs": 600,
+    "launchAtMs": 200,
+    "pivotX": 256,
+    "pivotY": 448
+  },
+  "reference": {
+    "width": 154,
+    "height": 201
+  },
+  "projectile": {
+    "image": "DesignAssets/Animations/UnitRangedV1/spring/projectile.png",
+    "width": 60.3,
+    "height": 41.746153846153845,
+    "outletX": 329.8726042841037,
+    "outletY": 376.91657271702366
+  }
+}

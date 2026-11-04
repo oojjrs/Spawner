@@ -1,0 +1,82 @@
+[
+  {
+    "key": "secretion",
+    "frameSize": 512,
+    "pivotX": 256,
+    "pivotY": 448,
+    "displaySize": 0.4,
+    "scale": 0.5278350515463918,
+    "translation": [
+      98,
+      160
+    ],
+    "sourceCell": [
+      627,
+      627
+    ],
+    "sourceOrigin": [
+      0,
+      0
+    ]
+  },
+  {
+    "key": "secretion-blade",
+    "frameSize": 512,
+    "pivotX": 256,
+    "pivotY": 448,
+    "displaySize": 0.4,
+    "scale": 0.5278350515463918,
+    "translation": [
+      98,
+      160
+    ],
+    "sourceCell": [
+      627,
+      627
+    ],
+    "sourceOrigin": [
+      627,
+      0
+    ]
+  },
+  {
+    "key": "secretion-carapace",
+    "frameSize": 512,
+    "pivotX": 256,
+    "pivotY": 448,
+    "displaySize": 0.4,
+    "scale": 0.5278350515463918,
+    "translation": [
+      98,
+      151
+    ],
+    "sourceCell": [
+      627,
+      694
+    ],
+    "sourceOrigin": [
+      0,
+      560
+    ]
+  },
+  {
+    "key": "secretion-blade-carapace-antenna-feet",
+    "frameSize": 512,
+    "pivotX": 256,
+    "pivotY": 448,
+    "displaySize": 0.4,
+    "scale": 0.5278350515463918,
+    "translation": [
+      98,
+      139
+    ],
+    "sourceCell": [
+      627,
+      694
+    ],
+    "sourceOrigin": [
+      627,
+      560
+    ]
+  }
+]

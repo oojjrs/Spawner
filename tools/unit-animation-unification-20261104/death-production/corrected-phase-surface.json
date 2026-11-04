@@ -1,0 +1,17 @@
+{
+  "errors": [],
+  "frames": [
+    {
+      "frame": "3",
+      "source": "file:///H:/Spawner/DesignAssets/Animations/CombatDeathV1/sprout/piercing/death.webp"
+    },
+    {
+      "frame": "4",
+      "source": "file:///H:/Spawner/DesignAssets/Animations/CombatDeathV1/sprout/piercing/death.webp"
+    },
+    {
+      "frame": "5",
+      "source": "file:///H:/Spawner/DesignAssets/Animations/CombatDeathV1/sprout/piercing/death.webp"
+    }
+  ]
+}

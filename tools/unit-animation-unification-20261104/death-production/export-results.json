@@ -1,0 +1,938 @@
+[
+  {
+    "tribe": "sprout",
+    "variant": "blade",
+    "action": "death",
+    "image": "DesignAssets/Animations/CombatDeathV1/sprout/blade/death.webp",
+    "frameSize": 512,
+    "columns": 4,
+    "frameCount": 8,
+    "pivotX": 256,
+    "pivotY": 448,
+    "durationsMs": [
+      100,
+      90,
+      90,
+      100,
+      140,
+      100,
+      100,
+      1100
+    ],
+    "durationMs": 1820,
+    "loop": false,
+    "approvedMidFrame": 4,
+    "approvedFinalFrame": 7,
+    "method": "full-body drawn intermediate poses; fixed asset-camera registration; no pose alpha blending",
+    "frameSources": [
+      {
+        "frame": 0,
+        "source": "neutral-registered.png"
+      },
+      {
+        "frame": 1,
+        "source": "drawn-production.png#cell1"
+      },
+      {
+        "frame": 2,
+        "source": "drawn-production.png#cell2"
+      },
+      {
+        "frame": 3,
+        "source": "bridge-3-production.png#cell1"
+      },
+      {
+        "frame": 4,
+        "source": "camera-mid.png"
+      },
+      {
+        "frame": 5,
+        "source": "drawn-production.png#cell5"
+      },
+      {
+        "frame": 6,
+        "source": "drawn-production.png#cell6"
+      },
+      {
+        "frame": 7,
+        "source": "camera-final.png"
+      }
+    ],
+    "source": {
+      "drawn": "Source/drawn-production.png",
+      "bridge": "Source/bridge-3-production.png",
+      "keys": "DesignAssets/Animations/CombatDeathKeysV1/Source/sprout.png",
+      "registration": "Source/registration.json",
+      "neutral": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/blade/idle.webp"
+    },
+    "alphaCleanup": {
+      "policy": "alpha below16 removed; saturated low-alpha below64 removed; invisible RGB zeroed",
+      "frames": [
+        {
+          "removedLowAlphaPixels": 3915,
+          "clearedTransparentRgb": 1363
+        },
+        {
+          "removedLowAlphaPixels": 16875,
+          "clearedTransparentRgb": 4823
+        },
+        {
+          "removedLowAlphaPixels": 20723,
+          "clearedTransparentRgb": 5035
+        },
+        {
+          "removedLowAlphaPixels": 2780,
+          "clearedTransparentRgb": 82596
+        },
+        {
+          "removedLowAlphaPixels": 485,
+          "clearedTransparentRgb": 549
+        },
+        {
+          "removedLowAlphaPixels": 24488,
+          "clearedTransparentRgb": 2209
+        },
+        {
+          "removedLowAlphaPixels": 23459,
+          "clearedTransparentRgb": 2202
+        },
+        {
+          "removedLowAlphaPixels": 427,
+          "clearedTransparentRgb": 460
+        }
+      ]
+    }
+  },
+  {
+    "tribe": "sprout",
+    "variant": "piercing",
+    "action": "death",
+    "image": "DesignAssets/Animations/CombatDeathV1/sprout/piercing/death.webp",
+    "frameSize": 512,
+    "columns": 4,
+    "frameCount": 8,
+    "pivotX": 256,
+    "pivotY": 448,
+    "durationsMs": [
+      100,
+      90,
+      90,
+      100,
+      140,
+      100,
+      100,
+      1100
+    ],
+    "durationMs": 1820,
+    "loop": false,
+    "approvedMidFrame": 4,
+    "approvedFinalFrame": 7,
+    "method": "full-body drawn intermediate poses; fixed asset-camera registration; no pose alpha blending",
+    "frameSources": [
+      {
+        "frame": 0,
+        "source": "neutral-registered.png"
+      },
+      {
+        "frame": 1,
+        "source": "drawn-production.png#cell1"
+      },
+      {
+        "frame": 2,
+        "source": "drawn-production.png#cell2"
+      },
+      {
+        "frame": 3,
+        "source": "bridge-3-production.png#cell1"
+      },
+      {
+        "frame": 4,
+        "source": "camera-mid.png"
+      },
+      {
+        "frame": 5,
+        "source": "drawn-production.png#cell5"
+      },
+      {
+        "frame": 6,
+        "source": "drawn-production.png#cell6"
+      },
+      {
+        "frame": 7,
+        "source": "camera-final.png"
+      }
+    ],
+    "source": {
+      "drawn": "Source/drawn-production.png",
+      "bridge": "Source/bridge-3-production.png",
+      "keys": "DesignAssets/Animations/CombatDeathKeysV1/Source/sprout.png",
+      "registration": "Source/registration.json",
+      "neutral": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/piercing/idle.webp"
+    },
+    "alphaCleanup": {
+      "policy": "alpha below16 removed; saturated low-alpha below64 removed; invisible RGB zeroed",
+      "frames": [
+        {
+          "removedLowAlphaPixels": 2661,
+          "clearedTransparentRgb": 901
+        },
+        {
+          "removedLowAlphaPixels": 46880,
+          "clearedTransparentRgb": 3026
+        },
+        {
+          "removedLowAlphaPixels": 50035,
+          "clearedTransparentRgb": 3289
+        },
+        {
+          "removedLowAlphaPixels": 1469,
+          "clearedTransparentRgb": 855
+        },
+        {
+          "removedLowAlphaPixels": 226,
+          "clearedTransparentRgb": 239
+        },
+        {
+          "removedLowAlphaPixels": 9474,
+          "clearedTransparentRgb": 752
+        },
+        {
+          "removedLowAlphaPixels": 6005,
+          "clearedTransparentRgb": 864
+        },
+        {
+          "removedLowAlphaPixels": 188,
+          "clearedTransparentRgb": 203
+        }
+      ]
+    }
+  },
+  {
+    "tribe": "sprout",
+    "variant": "carapace",
+    "action": "death",
+    "image": "DesignAssets/Animations/CombatDeathV1/sprout/carapace/death.webp",
+    "frameSize": 512,
+    "columns": 4,
+    "frameCount": 8,
+    "pivotX": 256,
+    "pivotY": 448,
+    "durationsMs": [
+      100,
+      90,
+      90,
+      100,
+      140,
+      100,
+      100,
+      1100
+    ],
+    "durationMs": 1820,
+    "loop": false,
+    "approvedMidFrame": 4,
+    "approvedFinalFrame": 7,
+    "method": "full-body drawn intermediate poses; fixed asset-camera registration; no pose alpha blending",
+    "frameSources": [
+      {
+        "frame": 0,
+        "source": "neutral-registered.png"
+      },
+      {
+        "frame": 1,
+        "source": "drawn-production.png#cell1"
+      },
+      {
+        "frame": 2,
+        "source": "drawn-production.png#cell2"
+      },
+      {
+        "frame": 3,
+        "source": "bridge-3-production.png#cell1"
+      },
+      {
+        "frame": 4,
+        "source": "camera-mid.png"
+      },
+      {
+        "frame": 5,
+        "source": "drawn-production.png#cell5"
+      },
+      {
+        "frame": 6,
+        "source": "drawn-production.png#cell6"
+      },
+      {
+        "frame": 7,
+        "source": "camera-final.png"
+      }
+    ],
+    "source": {
+      "drawn": "Source/drawn-production.png",
+      "bridge": "Source/bridge-3-production.png",
+      "keys": "DesignAssets/Animations/CombatDeathKeysV1/Source/sprout.png",
+      "registration": "Source/registration.json",
+      "neutral": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/carapace/idle.webp"
+    },
+    "alphaCleanup": {
+      "policy": "alpha below16 removed; saturated low-alpha below64 removed; invisible RGB zeroed",
+      "frames": [
+        {
+          "removedLowAlphaPixels": 2181,
+          "clearedTransparentRgb": 551
+        },
+        {
+          "removedLowAlphaPixels": 8942,
+          "clearedTransparentRgb": 1667
+        },
+        {
+          "removedLowAlphaPixels": 9197,
+          "clearedTransparentRgb": 1791
+        },
+        {
+          "removedLowAlphaPixels": 1592,
+          "clearedTransparentRgb": 780
+        },
+        {
+          "removedLowAlphaPixels": 413,
+          "clearedTransparentRgb": 454
+        },
+        {
+          "removedLowAlphaPixels": 17962,
+          "clearedTransparentRgb": 2477
+        },
+        {
+          "removedLowAlphaPixels": 22803,
+          "clearedTransparentRgb": 2140
+        },
+        {
+          "removedLowAlphaPixels": 409,
+          "clearedTransparentRgb": 441
+        }
+      ]
+    }
+  },
+  {
+    "tribe": "spore",
+    "variant": "blade",
+    "action": "death",
+    "image": "DesignAssets/Animations/CombatDeathV1/spore/blade/death.webp",
+    "frameSize": 512,
+    "columns": 4,
+    "frameCount": 8,
+    "pivotX": 256,
+    "pivotY": 448,
+    "durationsMs": [
+      100,
+      90,
+      90,
+      100,
+      140,
+      100,
+      100,
+      1100
+    ],
+    "durationMs": 1820,
+    "loop": false,
+    "approvedMidFrame": 4,
+    "approvedFinalFrame": 7,
+    "method": "full-body drawn intermediate poses; fixed asset-camera registration; no pose alpha blending",
+    "frameSources": [
+      {
+        "frame": 0,
+        "source": "neutral-registered.png"
+      },
+      {
+        "frame": 1,
+        "source": "drawn-production.png#cell1"
+      },
+      {
+        "frame": 2,
+        "source": "drawn-production.png#cell2"
+      },
+      {
+        "frame": 3,
+        "source": "bridge-3-production.png#cell1"
+      },
+      {
+        "frame": 4,
+        "source": "camera-mid.png"
+      },
+      {
+        "frame": 5,
+        "source": "drawn-production.png#cell5"
+      },
+      {
+        "frame": 6,
+        "source": "drawn-production.png#cell6"
+      },
+      {
+        "frame": 7,
+        "source": "camera-final.png"
+      }
+    ],
+    "source": {
+      "drawn": "Source/drawn-production.png",
+      "bridge": "Source/bridge-3-production.png",
+      "keys": "DesignAssets/Animations/CombatDeathKeysV1/Source/spore.png",
+      "registration": "Source/registration.json",
+      "neutral": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/blade/idle.webp"
+    },
+    "alphaCleanup": {
+      "policy": "alpha below16 removed; saturated low-alpha below64 removed; invisible RGB zeroed",
+      "frames": [
+        {
+          "removedLowAlphaPixels": 2643,
+          "clearedTransparentRgb": 572
+        },
+        {
+          "removedLowAlphaPixels": 8033,
+          "clearedTransparentRgb": 2704
+        },
+        {
+          "removedLowAlphaPixels": 5922,
+          "clearedTransparentRgb": 2230
+        },
+        {
+          "removedLowAlphaPixels": 1505,
+          "clearedTransparentRgb": 739
+        },
+        {
+          "removedLowAlphaPixels": 504,
+          "clearedTransparentRgb": 549
+        },
+        {
+          "removedLowAlphaPixels": 13272,
+          "clearedTransparentRgb": 2846
+        },
+        {
+          "removedLowAlphaPixels": 10912,
+          "clearedTransparentRgb": 2171
+        },
+        {
+          "removedLowAlphaPixels": 520,
+          "clearedTransparentRgb": 583
+        }
+      ]
+    }
+  },
+  {
+    "tribe": "spore",
+    "variant": "piercing",
+    "action": "death",
+    "image": "DesignAssets/Animations/CombatDeathV1/spore/piercing/death.webp",
+    "frameSize": 512,
+    "columns": 4,
+    "frameCount": 8,
+    "pivotX": 256,
+    "pivotY": 448,
+    "durationsMs": [
+      100,
+      90,
+      90,
+      100,
+      140,
+      100,
+      100,
+      1100
+    ],
+    "durationMs": 1820,
+    "loop": false,
+    "approvedMidFrame": 4,
+    "approvedFinalFrame": 7,
+    "method": "full-body drawn intermediate poses; fixed asset-camera registration; no pose alpha blending",
+    "frameSources": [
+      {
+        "frame": 0,
+        "source": "neutral-registered.png"
+      },
+      {
+        "frame": 1,
+        "source": "drawn-production.png#cell1"
+      },
+      {
+        "frame": 2,
+        "source": "drawn-production.png#cell2"
+      },
+      {
+        "frame": 3,
+        "source": "bridge-3-production.png#cell1"
+      },
+      {
+        "frame": 4,
+        "source": "camera-mid.png"
+      },
+      {
+        "frame": 5,
+        "source": "drawn-production.png#cell5"
+      },
+      {
+        "frame": 6,
+        "source": "drawn-production.png#cell6"
+      },
+      {
+        "frame": 7,
+        "source": "camera-final.png"
+      }
+    ],
+    "source": {
+      "drawn": "Source/drawn-production.png",
+      "bridge": "Source/bridge-3-production.png",
+      "keys": "DesignAssets/Animations/CombatDeathKeysV1/Source/spore.png",
+      "registration": "Source/registration.json",
+      "neutral": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/piercing/idle.webp"
+    },
+    "alphaCleanup": {
+      "policy": "alpha below16 removed; saturated low-alpha below64 removed; invisible RGB zeroed",
+      "frames": [
+        {
+          "removedLowAlphaPixels": 347,
+          "clearedTransparentRgb": 206
+        },
+        {
+          "removedLowAlphaPixels": 7411,
+          "clearedTransparentRgb": 1667
+        },
+        {
+          "removedLowAlphaPixels": 8812,
+          "clearedTransparentRgb": 1676
+        },
+        {
+          "removedLowAlphaPixels": 1767,
+          "clearedTransparentRgb": 644
+        },
+        {
+          "removedLowAlphaPixels": 525,
+          "clearedTransparentRgb": 584
+        },
+        {
+          "removedLowAlphaPixels": 4074,
+          "clearedTransparentRgb": 1444
+        },
+        {
+          "removedLowAlphaPixels": 5672,
+          "clearedTransparentRgb": 1742
+        },
+        {
+          "removedLowAlphaPixels": 590,
+          "clearedTransparentRgb": 666
+        }
+      ]
+    }
+  },
+  {
+    "tribe": "spore",
+    "variant": "carapace",
+    "action": "death",
+    "image": "DesignAssets/Animations/CombatDeathV1/spore/carapace/death.webp",
+    "frameSize": 512,
+    "columns": 4,
+    "frameCount": 8,
+    "pivotX": 256,
+    "pivotY": 448,
+    "durationsMs": [
+      100,
+      90,
+      90,
+      100,
+      140,
+      100,
+      100,
+      1100
+    ],
+    "durationMs": 1820,
+    "loop": false,
+    "approvedMidFrame": 4,
+    "approvedFinalFrame": 7,
+    "method": "full-body drawn intermediate poses; fixed asset-camera registration; no pose alpha blending",
+    "frameSources": [
+      {
+        "frame": 0,
+        "source": "neutral-registered.png"
+      },
+      {
+        "frame": 1,
+        "source": "drawn-production.png#cell1"
+      },
+      {
+        "frame": 2,
+        "source": "drawn-production.png#cell2"
+      },
+      {
+        "frame": 3,
+        "source": "bridge-3-production.png#cell1"
+      },
+      {
+        "frame": 4,
+        "source": "camera-mid.png"
+      },
+      {
+        "frame": 5,
+        "source": "drawn-production.png#cell5"
+      },
+      {
+        "frame": 6,
+        "source": "drawn-production.png#cell6"
+      },
+      {
+        "frame": 7,
+        "source": "camera-final.png"
+      }
+    ],
+    "source": {
+      "drawn": "Source/drawn-production.png",
+      "bridge": "Source/bridge-3-production.png",
+      "keys": "DesignAssets/Animations/CombatDeathKeysV1/Source/spore.png",
+      "registration": "Source/registration.json",
+      "neutral": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/idle.webp"
+    },
+    "alphaCleanup": {
+      "policy": "alpha below16 removed; saturated low-alpha below64 removed; invisible RGB zeroed",
+      "frames": [
+        {
+          "removedLowAlphaPixels": 226,
+          "clearedTransparentRgb": 143
+        },
+        {
+          "removedLowAlphaPixels": 7099,
+          "clearedTransparentRgb": 2454
+        },
+        {
+          "removedLowAlphaPixels": 7246,
+          "clearedTransparentRgb": 2461
+        },
+        {
+          "removedLowAlphaPixels": 1339,
+          "clearedTransparentRgb": 640
+        },
+        {
+          "removedLowAlphaPixels": 401,
+          "clearedTransparentRgb": 456
+        },
+        {
+          "removedLowAlphaPixels": 9127,
+          "clearedTransparentRgb": 2552
+        },
+        {
+          "removedLowAlphaPixels": 8632,
+          "clearedTransparentRgb": 2725
+        },
+        {
+          "removedLowAlphaPixels": 375,
+          "clearedTransparentRgb": 448
+        }
+      ]
+    }
+  },
+  {
+    "tribe": "spring",
+    "variant": "blade",
+    "action": "death",
+    "image": "DesignAssets/Animations/CombatDeathV1/spring/blade/death.webp",
+    "frameSize": 512,
+    "columns": 4,
+    "frameCount": 8,
+    "pivotX": 256,
+    "pivotY": 448,
+    "durationsMs": [
+      100,
+      90,
+      90,
+      100,
+      140,
+      100,
+      100,
+      1100
+    ],
+    "durationMs": 1820,
+    "loop": false,
+    "approvedMidFrame": 4,
+    "approvedFinalFrame": 7,
+    "method": "full-body drawn intermediate poses; fixed asset-camera registration; no pose alpha blending",
+    "frameSources": [
+      {
+        "frame": 0,
+        "source": "neutral-registered.png"
+      },
+      {
+        "frame": 1,
+        "source": "drawn-production.png#cell1"
+      },
+      {
+        "frame": 2,
+        "source": "drawn-production.png#cell2"
+      },
+      {
+        "frame": 3,
+        "source": "bridge-3-production.png#cell1"
+      },
+      {
+        "frame": 4,
+        "source": "camera-mid.png"
+      },
+      {
+        "frame": 5,
+        "source": "drawn-production.png#cell5"
+      },
+      {
+        "frame": 6,
+        "source": "drawn-production.png#cell6"
+      },
+      {
+        "frame": 7,
+        "source": "camera-final.png"
+      }
+    ],
+    "source": {
+      "drawn": "Source/drawn-production.png",
+      "bridge": "Source/bridge-3-production.png",
+      "keys": "DesignAssets/Animations/CombatDeathKeysV1/Source/spring.png",
+      "registration": "Source/registration.json",
+      "neutral": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/blade/idle.webp"
+    },
+    "alphaCleanup": {
+      "policy": "alpha below16 removed; saturated low-alpha below64 removed; invisible RGB zeroed",
+      "frames": [
+        {
+          "removedLowAlphaPixels": 271,
+          "clearedTransparentRgb": 171
+        },
+        {
+          "removedLowAlphaPixels": 10027,
+          "clearedTransparentRgb": 2301
+        },
+        {
+          "removedLowAlphaPixels": 8883,
+          "clearedTransparentRgb": 3794
+        },
+        {
+          "removedLowAlphaPixels": 1689,
+          "clearedTransparentRgb": 1127
+        },
+        {
+          "removedLowAlphaPixels": 552,
+          "clearedTransparentRgb": 615
+        },
+        {
+          "removedLowAlphaPixels": 11692,
+          "clearedTransparentRgb": 4700
+        },
+        {
+          "removedLowAlphaPixels": 6752,
+          "clearedTransparentRgb": 4132
+        },
+        {
+          "removedLowAlphaPixels": 532,
+          "clearedTransparentRgb": 580
+        }
+      ]
+    }
+  },
+  {
+    "tribe": "spring",
+    "variant": "piercing",
+    "action": "death",
+    "image": "DesignAssets/Animations/CombatDeathV1/spring/piercing/death.webp",
+    "frameSize": 512,
+    "columns": 4,
+    "frameCount": 8,
+    "pivotX": 256,
+    "pivotY": 448,
+    "durationsMs": [
+      100,
+      90,
+      90,
+      100,
+      140,
+      100,
+      100,
+      1100
+    ],
+    "durationMs": 1820,
+    "loop": false,
+    "approvedMidFrame": 4,
+    "approvedFinalFrame": 7,
+    "method": "full-body drawn intermediate poses; fixed asset-camera registration; no pose alpha blending",
+    "frameSources": [
+      {
+        "frame": 0,
+        "source": "neutral-registered.png"
+      },
+      {
+        "frame": 1,
+        "source": "drawn-production.png#cell1"
+      },
+      {
+        "frame": 2,
+        "source": "drawn-production.png#cell2"
+      },
+      {
+        "frame": 3,
+        "source": "bridge-3-production.png#cell1"
+      },
+      {
+        "frame": 4,
+        "source": "camera-mid.png"
+      },
+      {
+        "frame": 5,
+        "source": "drawn-production.png#cell5"
+      },
+      {
+        "frame": 6,
+        "source": "drawn-production.png#cell6"
+      },
+      {
+        "frame": 7,
+        "source": "camera-final.png"
+      }
+    ],
+    "source": {
+      "drawn": "Source/drawn-production.png",
+      "bridge": "Source/bridge-3-production.png",
+      "keys": "DesignAssets/Animations/CombatDeathKeysV1/Source/spring.png",
+      "registration": "Source/registration.json",
+      "neutral": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/piercing/idle.webp"
+    },
+    "alphaCleanup": {
+      "policy": "alpha below16 removed; saturated low-alpha below64 removed; invisible RGB zeroed",
+      "frames": [
+        {
+          "removedLowAlphaPixels": 263,
+          "clearedTransparentRgb": 155
+        },
+        {
+          "removedLowAlphaPixels": 11000,
+          "clearedTransparentRgb": 2021
+        },
+        {
+          "removedLowAlphaPixels": 13334,
+          "clearedTransparentRgb": 2491
+        },
+        {
+          "removedLowAlphaPixels": 1513,
+          "clearedTransparentRgb": 1123
+        },
+        {
+          "removedLowAlphaPixels": 363,
+          "clearedTransparentRgb": 397
+        },
+        {
+          "removedLowAlphaPixels": 10345,
+          "clearedTransparentRgb": 2549
+        },
+        {
+          "removedLowAlphaPixels": 11156,
+          "clearedTransparentRgb": 2645
+        },
+        {
+          "removedLowAlphaPixels": 267,
+          "clearedTransparentRgb": 288
+        }
+      ]
+    }
+  },
+  {
+    "tribe": "spring",
+    "variant": "carapace",
+    "action": "death",
+    "image": "DesignAssets/Animations/CombatDeathV1/spring/carapace/death.webp",
+    "frameSize": 512,
+    "columns": 4,
+    "frameCount": 8,
+    "pivotX": 256,
+    "pivotY": 448,
+    "durationsMs": [
+      100,
+      90,
+      90,
+      100,
+      140,
+      100,
+      100,
+      1100
+    ],
+    "durationMs": 1820,
+    "loop": false,
+    "approvedMidFrame": 4,
+    "approvedFinalFrame": 7,
+    "method": "full-body drawn intermediate poses; fixed asset-camera registration; no pose alpha blending",
+    "frameSources": [
+      {
+        "frame": 0,
+        "source": "neutral-registered.png"
+      },
+      {
+        "frame": 1,
+        "source": "drawn-production.png#cell1"
+      },
+      {
+        "frame": 2,
+        "source": "drawn-production.png#cell2"
+      },
+      {
+        "frame": 3,
+        "source": "bridge-3-production.png#cell1"
+      },
+      {
+        "frame": 4,
+        "source": "camera-mid.png"
+      },
+      {
+        "frame": 5,
+        "source": "drawn-production.png#cell5"
+      },
+      {
+        "frame": 6,
+        "source": "drawn-production.png#cell6"
+      },
+      {
+        "frame": 7,
+        "source": "camera-final.png"
+      }
+    ],
+    "source": {
+      "drawn": "Source/drawn-production.png",
+      "bridge": "Source/bridge-3-production.png",
+      "keys": "DesignAssets/Animations/CombatDeathKeysV1/Source/spring.png",
+      "registration": "Source/registration.json",
+      "neutral": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/carapace/idle.webp"
+    },
+    "alphaCleanup": {
+      "policy": "alpha below16 removed; saturated low-alpha below64 removed; invisible RGB zeroed",
+      "frames": [
+        {
+          "removedLowAlphaPixels": 238,
+          "clearedTransparentRgb": 166
+        },
+        {
+          "removedLowAlphaPixels": 7886,
+          "clearedTransparentRgb": 1671
+        },
+        {
+          "removedLowAlphaPixels": 6041,
+          "clearedTransparentRgb": 2076
+        },
+        {
+          "removedLowAlphaPixels": 1573,
+          "clearedTransparentRgb": 1367
+        },
+        {
+          "removedLowAlphaPixels": 489,
+          "clearedTransparentRgb": 537
+        },
+        {
+          "removedLowAlphaPixels": 10411,
+          "clearedTransparentRgb": 2323
+        },
+        {
+          "removedLowAlphaPixels": 6226,
+          "clearedTransparentRgb": 1993
+        },
+        {
+          "removedLowAlphaPixels": 441,
+          "clearedTransparentRgb": 499
+        }
+      ]
+    }
+  }
+]

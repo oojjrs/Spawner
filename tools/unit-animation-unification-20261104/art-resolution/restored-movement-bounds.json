@@ -1,0 +1,52 @@
+[
+  {
+    "image": "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/walk-v2.webp",
+    "frameSize": 512,
+    "bounds": {
+      "x": 42,
+      "y": 151,
+      "width": 428,
+      "height": 297
+    }
+  },
+  {
+    "image": "DesignAssets/Tribes/spore/Animations/Units/jump/jump.webp",
+    "frameSize": 512,
+    "bounds": {
+      "x": 36,
+      "y": 160,
+      "width": 440,
+      "height": 287
+    }
+  },
+  {
+    "image": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.webp",
+    "frameSize": 512,
+    "bounds": {
+      "x": 46,
+      "y": 160,
+      "width": 421,
+      "height": 287
+    }
+  },
+  {
+    "image": "DesignAssets/Tribes/spring/AnimationStudies/flow-v4/flow-v4.webp",
+    "frameSize": 512,
+    "bounds": {
+      "x": 123,
+      "y": 174,
+      "width": 271,
+      "height": 275
+    }
+  },
+  {
+    "image": "DesignAssets/Tribes/spring/Animations/Units/jump/jump.webp",
+    "frameSize": 512,
+    "bounds": {
+      "x": 137,
+      "y": 160,
+      "width": 238,
+      "height": 287
+    }
+  }
+]

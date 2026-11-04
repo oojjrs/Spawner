@@ -1,0 +1,104 @@
+[
+  {
+    "tribe": "spore",
+    "displaySize": 0.38,
+    "frameSize": 512,
+    "pivotX": 256,
+    "pivotY": 448,
+    "sourceCell": [
+      1254,
+      1254
+    ],
+    "columns": 1,
+    "sourceBounds": [
+      {
+        "x": 16,
+        "y": 235,
+        "width": 1220,
+        "height": 862
+      }
+    ],
+    "coreBodyTop": 235,
+    "coreBodyBottom": 1097,
+    "bodyHeightTarget": 137.67390663390663,
+    "fixedScale": 0.1594896331738437,
+    "translation": [
+      157,
+      273
+    ],
+    "projectileScale": 0.3,
+    "keyApprovalPending": true
+  },
+  {
+    "tribe": "pebble",
+    "displaySize": 0.42,
+    "frameSize": 512,
+    "pivotX": 256,
+    "pivotY": 448,
+    "sourceCell": [
+      887,
+      887
+    ],
+    "columns": 2,
+    "sourceBounds": [
+      {
+        "x": 42,
+        "y": 147,
+        "width": 794,
+        "height": 608
+      },
+      {
+        "x": 42,
+        "y": 133,
+        "width": 794,
+        "height": 622
+      }
+    ],
+    "coreBodyTop": 174,
+    "coreBodyBottom": 755,
+    "bodyHeightTarget": 158.76962114537443,
+    "fixedScale": 0.27282976324689967,
+    "translation": [
+      137,
+      242
+    ],
+    "projectileScale": 0.3,
+    "keyApprovalPending": true
+  },
+  {
+    "tribe": "spring",
+    "displaySize": 0.39,
+    "frameSize": 512,
+    "pivotX": 256,
+    "pivotY": 448,
+    "sourceCell": [
+      887,
+      887
+    ],
+    "columns": 2,
+    "sourceBounds": [
+      {
+        "x": 186,
+        "y": 85,
+        "width": 554,
+        "height": 724
+      },
+      {
+        "x": 112,
+        "y": 85,
+        "width": 554,
+        "height": 724
+      }
+    ],
+    "coreBodyTop": 85,
+    "coreBodyBottom": 809,
+    "bodyHeightTarget": 199.68,
+    "fixedScale": 0.2762119503945885,
+    "translation": [
+      131,
+      225
+    ],
+    "projectileScale": 0.3,
+    "keyApprovalPending": true
+  }
+]

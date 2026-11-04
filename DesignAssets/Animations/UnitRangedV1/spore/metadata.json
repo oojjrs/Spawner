@@ -1,0 +1,62 @@
+{
+  "idle": {
+    "image": "DesignAssets/Animations/UnitRangedV1/spore/Source/neutral.png",
+    "frameSize": 512,
+    "columns": 1,
+    "pivotX": 256,
+    "pivotY": 448
+  },
+  "animation": {
+    "image": "DesignAssets/Animations/UnitRangedV1/spore/shoot.webp",
+    "frameSize": 512,
+    "columns": 6,
+    "frameCount": 30,
+    "durationsMs": [
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20
+    ],
+    "durationMs": 600,
+    "launchAtMs": 200,
+    "pivotX": 256,
+    "pivotY": 448
+  },
+  "reference": {
+    "width": 195,
+    "height": 138
+  },
+  "projectile": {
+    "image": "DesignAssets/Animations/UnitRangedV1/spore/projectile.png",
+    "width": 58.5,
+    "height": 55.574999999999996,
+    "outletX": 342.0079744816587,
+    "outletY": 381.45295055821373
+  }
+}

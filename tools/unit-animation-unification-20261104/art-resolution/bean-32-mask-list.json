@@ -1,0 +1,369 @@
+[
+  {
+    "mask": 0,
+    "hex": "00",
+    "visualBits": [],
+    "approvalState": "existing-reference",
+    "sourceId": "unit-appearance-v1-bean-00-neutral-v1",
+    "sourceHash": "9c8893d8792c6d4e987ec0479463ebbd9085f89d38bb1c7db2580c3f4d230f73"
+  },
+  {
+    "mask": 1,
+    "hex": "01",
+    "visualBits": [
+      "blade"
+    ],
+    "approvalState": "pending",
+    "sourceId": "unit-appearance-v1-bean-01-neutral-v1",
+    "sourceHash": "b49b4121469244acd932f1c072f46f07a40d6b6a77e1e4f174c6fdd0c5cdb8e8"
+  },
+  {
+    "mask": 2,
+    "hex": "02",
+    "visualBits": [
+      "carapace"
+    ],
+    "approvalState": "pending",
+    "sourceId": "unit-appearance-v1-bean-02-neutral-v1",
+    "sourceHash": "42b4c127042dbc5fcd78e7fe33108c29dfe1440062375e85b9197fa4c4a3e99f"
+  },
+  {
+    "mask": 3,
+    "hex": "03",
+    "visualBits": [
+      "blade",
+      "carapace"
+    ],
+    "approvalState": "pending",
+    "sourceId": "unit-appearance-v1-bean-03-neutral-v1",
+    "sourceHash": "bf4aeca1d1ebd509ef47b675bb81e70beb8317d445434b000e2f4e07c71c42cd"
+  },
+  {
+    "mask": 4,
+    "hex": "04",
+    "visualBits": [
+      "antenna"
+    ],
+    "approvalState": "pending",
+    "sourceId": "unit-appearance-v1-bean-04-neutral-v1",
+    "sourceHash": "a55aaae6f6a2da2d4ed39cce52be7169cf50c0b1087416eadbcb2d9f499a1eb3"
+  },
+  {
+    "mask": 5,
+    "hex": "05",
+    "visualBits": [
+      "blade",
+      "antenna"
+    ],
+    "approvalState": "pending",
+    "sourceId": "unit-appearance-v1-bean-05-neutral-v1",
+    "sourceHash": "783bed93d96a0eab8e30139e6fb296414359f8b1519177b813e3d6e0edc6536d"
+  },
+  {
+    "mask": 6,
+    "hex": "06",
+    "visualBits": [
+      "carapace",
+      "antenna"
+    ],
+    "approvalState": "pending",
+    "sourceId": "unit-appearance-v1-bean-06-neutral-v1",
+    "sourceHash": "f67773b4dc68c934587452d8368955ee8d4801251cc4e058d0b248ae9641a889"
+  },
+  {
+    "mask": 7,
+    "hex": "07",
+    "visualBits": [
+      "blade",
+      "carapace",
+      "antenna"
+    ],
+    "approvalState": "pending",
+    "sourceId": "unit-appearance-v1-bean-07-neutral-v1",
+    "sourceHash": "1d472b1a15f25475131e2367e5eb589b4f9d910d66d8a93e59b62a3f32507beb"
+  },
+  {
+    "mask": 8,
+    "hex": "08",
+    "visualBits": [
+      "feet"
+    ],
+    "approvalState": "pending",
+    "sourceId": "unit-appearance-v1-bean-08-neutral-v1",
+    "sourceHash": "17eec14cafbeb5024cf1e6f7036433c312c942b69024499c76956eb9f1bf610f"
+  },
+  {
+    "mask": 9,
+    "hex": "09",
+    "visualBits": [
+      "blade",
+      "feet"
+    ],
+    "approvalState": "pending",
+    "sourceId": "unit-appearance-v1-bean-09-neutral-v1",
+    "sourceHash": "049246ae1e2bf95ff207a1ece60a843a8c930229298ed65aa74c662440c5ff91"
+  },
+  {
+    "mask": 10,
+    "hex": "0a",
+    "visualBits": [
+      "carapace",
+      "feet"
+    ],
+    "approvalState": "pending",
+    "sourceId": "unit-appearance-v1-bean-0a-neutral-v1",
+    "sourceHash": "966bdc3d043ad8b14262c0c21d4c291c40439154fe4f163594d30b32e92d1dbd"
+  },
+  {
+    "mask": 11,
+    "hex": "0b",
+    "visualBits": [
+      "blade",
+      "carapace",
+      "feet"
+    ],
+    "approvalState": "pending",
+    "sourceId": "unit-appearance-v1-bean-0b-neutral-v1",
+    "sourceHash": "2a6a5df6d49ffa0a86b8166e52234d70127b2221e35afb6e430e1fac0e601f9b"
+  },
+  {
+    "mask": 12,
+    "hex": "0c",
+    "visualBits": [
+      "antenna",
+      "feet"
+    ],
+    "approvalState": "pending",
+    "sourceId": "unit-appearance-v1-bean-0c-neutral-v1",
+    "sourceHash": "e4ac7f96df732c17929e4b768ad23fa63d54576e3df58146d8c05d91711992a1"
+  },
+  {
+    "mask": 13,
+    "hex": "0d",
+    "visualBits": [
+      "blade",
+      "antenna",
+      "feet"
+    ],
+    "approvalState": "pending",
+    "sourceId": "unit-appearance-v1-bean-0d-neutral-v1",
+    "sourceHash": "5e7599a04009dee8c1d3391c889d1440f5e457677a2cf0af07be1af67b49ac47"
+  },
+  {
+    "mask": 14,
+    "hex": "0e",
+    "visualBits": [
+      "carapace",
+      "antenna",
+      "feet"
+    ],
+    "approvalState": "pending",
+    "sourceId": "unit-appearance-v1-bean-0e-neutral-v1",
+    "sourceHash": "46a02be7fc90dc6b9dfe695c1358049e2925d94c8f1328944673510586b52082"
+  },
+  {
+    "mask": 15,
+    "hex": "0f",
+    "visualBits": [
+      "blade",
+      "carapace",
+      "antenna",
+      "feet"
+    ],
+    "approvalState": "pending",
+    "sourceId": "unit-appearance-v1-bean-0f-neutral-v1",
+    "sourceHash": "2650fb9b0c9592994d2581011ba34a4290a967d4ade3968d7fde8264ee4f93b3"
+  },
+  {
+    "mask": 16,
+    "hex": "10",
+    "visualBits": [
+      "secretion"
+    ],
+    "approvalState": "approved",
+    "sourceId": "unit-appearance-v1-bean-10-neutral-v1",
+    "sourceHash": "65a547fbe1664cfa3e0fb534e94eae029cb9cb18a66518df670daa8e70533811"
+  },
+  {
+    "mask": 17,
+    "hex": "11",
+    "visualBits": [
+      "blade",
+      "secretion"
+    ],
+    "approvalState": "approved",
+    "sourceId": "unit-appearance-v1-bean-11-neutral-v1",
+    "sourceHash": "a442e5bbefd2b3a3ca655d28fc3164a459ad978e322561f4fcb966f840e32324"
+  },
+  {
+    "mask": 18,
+    "hex": "12",
+    "visualBits": [
+      "carapace",
+      "secretion"
+    ],
+    "approvalState": "approved",
+    "sourceId": "unit-appearance-v1-bean-12-neutral-v1",
+    "sourceHash": "cd27cc9c4a5c7e65a93cb91a89b4ee48489422f952e65be8a38e0d2ef3e659ee"
+  },
+  {
+    "mask": 19,
+    "hex": "13",
+    "visualBits": [
+      "blade",
+      "carapace",
+      "secretion"
+    ],
+    "approvalState": "pending",
+    "sourceId": "unit-appearance-v1-bean-13-neutral-v1",
+    "sourceHash": "b65941c3847db84af77eac2b8e97dd75a9df5f50c1e37a80cddfd9fa8f589717"
+  },
+  {
+    "mask": 20,
+    "hex": "14",
+    "visualBits": [
+      "antenna",
+      "secretion"
+    ],
+    "approvalState": "pending",
+    "sourceId": "unit-appearance-v1-bean-14-neutral-v1",
+    "sourceHash": "6847ae2f9ea518ead664fda2e657abe246250032377149288e63174338231160"
+  },
+  {
+    "mask": 21,
+    "hex": "15",
+    "visualBits": [
+      "blade",
+      "antenna",
+      "secretion"
+    ],
+    "approvalState": "pending",
+    "sourceId": "unit-appearance-v1-bean-15-neutral-v1",
+    "sourceHash": "6924db22c440c07ae12b6e19b364ec78c4f5b1c35634806f23d203e316716fc7"
+  },
+  {
+    "mask": 22,
+    "hex": "16",
+    "visualBits": [
+      "carapace",
+      "antenna",
+      "secretion"
+    ],
+    "approvalState": "pending",
+    "sourceId": "unit-appearance-v1-bean-16-neutral-v1",
+    "sourceHash": "66aef70276d8eb28b0bc2794643a061866d5785435bb66dcfce07f6884e28d10"
+  },
+  {
+    "mask": 23,
+    "hex": "17",
+    "visualBits": [
+      "blade",
+      "carapace",
+      "antenna",
+      "secretion"
+    ],
+    "approvalState": "pending",
+    "sourceId": "unit-appearance-v1-bean-17-neutral-v1",
+    "sourceHash": "9a42c0245c6ac9c44ffa4dbdb67d09c16f49b605b5c80f3735302f53693a19d6"
+  },
+  {
+    "mask": 24,
+    "hex": "18",
+    "visualBits": [
+      "feet",
+      "secretion"
+    ],
+    "approvalState": "pending",
+    "sourceId": "unit-appearance-v1-bean-18-neutral-v1",
+    "sourceHash": "550a8368b578a5cff00e4cf14f87b7b1977d8e7733104508c8d4f3f7832d6887"
+  },
+  {
+    "mask": 25,
+    "hex": "19",
+    "visualBits": [
+      "blade",
+      "feet",
+      "secretion"
+    ],
+    "approvalState": "pending",
+    "sourceId": "unit-appearance-v1-bean-19-neutral-v1",
+    "sourceHash": "68750b7176bd26c4e73c912db59b0f3ebb15b6e67b57eff70b4abc5631de4d5b"
+  },
+  {
+    "mask": 26,
+    "hex": "1a",
+    "visualBits": [
+      "carapace",
+      "feet",
+      "secretion"
+    ],
+    "approvalState": "pending",
+    "sourceId": "unit-appearance-v1-bean-1a-neutral-v1",
+    "sourceHash": "ee9c08b9d5a590816ee1db3f50a18ed1cb0cd611bce2cfcfd15973ad61b490b1"
+  },
+  {
+    "mask": 27,
+    "hex": "1b",
+    "visualBits": [
+      "blade",
+      "carapace",
+      "feet",
+      "secretion"
+    ],
+    "approvalState": "pending",
+    "sourceId": "unit-appearance-v1-bean-1b-neutral-v1",
+    "sourceHash": "5dc21f5c2a5fbd5f22b0056756d2d4e74328381394c12ec9b6aa9d9136787eb0"
+  },
+  {
+    "mask": 28,
+    "hex": "1c",
+    "visualBits": [
+      "antenna",
+      "feet",
+      "secretion"
+    ],
+    "approvalState": "pending",
+    "sourceId": "unit-appearance-v1-bean-1c-neutral-v1",
+    "sourceHash": "23fbe614fc9c2748591b5b6467fe35aeb80163decbbde1465114e456e239d36f"
+  },
+  {
+    "mask": 29,
+    "hex": "1d",
+    "visualBits": [
+      "blade",
+      "antenna",
+      "feet",
+      "secretion"
+    ],
+    "approvalState": "pending",
+    "sourceId": "unit-appearance-v1-bean-1d-neutral-v1",
+    "sourceHash": "dee3888feb50174b3f881b66bd12725adb2eaf64642c3152887f128161df516e"
+  },
+  {
+    "mask": 30,
+    "hex": "1e",
+    "visualBits": [
+      "carapace",
+      "antenna",
+      "feet",
+      "secretion"
+    ],
+    "approvalState": "pending",
+    "sourceId": "unit-appearance-v1-bean-1e-neutral-v1",
+    "sourceHash": "e087b9cff989cc7bb9fc650f8776ed2bfdbcadd75603d6b1504e82293162892c"
+  },
+  {
+    "mask": 31,
+    "hex": "1f",
+    "visualBits": [
+      "blade",
+      "carapace",
+      "antenna",
+      "feet",
+      "secretion"
+    ],
+    "approvalState": "approved",
+    "sourceId": "unit-appearance-v1-bean-1f-neutral-v1",
+    "sourceHash": "030e75b71127be552ac3ab9bdf51c707884d5c234706b1803c10ba2abcb39dfb"
+  }
+]

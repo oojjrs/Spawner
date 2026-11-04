@@ -1,0 +1,10 @@
+{
+  "width": 768,
+  "height": 640,
+  "ratio": 0.25,
+  "entries": 1,
+  "residentPixels": 491520,
+  "pixelBudget": 1048576,
+  "afterClear": 0,
+  "closedWidth": 0
+}

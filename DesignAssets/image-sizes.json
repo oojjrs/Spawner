@@ -865,6 +865,10 @@
       "grid": [
         4,
         4
+      ],
+      "sourceMaximum": [
+        632,
+        632
       ]
     },
     "DesignAssets/Animations/UnitHurt/V3/hurt.png": {
@@ -875,6 +879,10 @@
       "grid": [
         4,
         4
+      ],
+      "sourceMaximum": [
+        632,
+        632
       ]
     },
     "DesignAssets/Animations/food-mushroom-pile-harvest.png": {
@@ -1415,6 +1423,10 @@
       "grid": [
         4,
         4
+      ],
+      "sourceMaximum": [
+        512,
+        512
       ]
     },
     "DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth-foreground.png": {
@@ -1445,6 +1457,10 @@
       "grid": [
         4,
         2
+      ],
+      "sourceMaximum": [
+        517,
+        517
       ]
     },
     "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp": {
@@ -1455,6 +1471,10 @@
       "grid": [
         4,
         4
+      ],
+      "sourceMaximum": [
+        517,
+        517
       ]
     },
     "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp": {
@@ -1465,6 +1485,10 @@
       "grid": [
         4,
         16
+      ],
+      "sourceMaximum": [
+        512,
+        512
       ]
     },
     "DesignAssets/Tribes/pebble/AnimationStudies/walk-in-place-v1/walk.webp": {
@@ -1475,6 +1499,10 @@
       "grid": [
         5,
         4
+      ],
+      "sourceMaximum": [
+        512,
+        512
       ]
     },
     "DesignAssets/Tribes/pebble/AnimationStudies/roll-v2/roll-v2.webp": {
@@ -1525,6 +1553,10 @@
       "grid": [
         4,
         4
+      ],
+      "sourceMaximum": [
+        512,
+        512
       ]
     },
     "DesignAssets/Tribes/pebble/BaseParts/body.png": {
@@ -1565,6 +1597,10 @@
       "grid": [
         4,
         4
+      ],
+      "sourceMaximum": [
+        553,
+        553
       ]
     },
     "DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/birth-unit.webp": {
@@ -1605,6 +1641,10 @@
       "grid": [
         4,
         2
+      ],
+      "sourceMaximum": [
+        553,
+        553
       ]
     },
     "DesignAssets/Tribes/spore/AnimationStudies/hurt-v2/hurt-v2.webp": {
@@ -1615,6 +1655,10 @@
       "grid": [
         4,
         4
+      ],
+      "sourceMaximum": [
+        553,
+        553
       ]
     },
     "DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp": {
@@ -1625,6 +1669,10 @@
       "grid": [
         4,
         16
+      ],
+      "sourceMaximum": [
+        549,
+        549
       ]
     },
     "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/walk-v2.webp": {
@@ -1635,6 +1683,10 @@
       "grid": [
         4,
         4
+      ],
+      "sourceMaximum": [
+        512,
+        512
       ]
     },
     "DesignAssets/Tribes/spore/Animations/Nests/stage-01-idle-spine-v1/nest-stage-01-idle-sheet.png": {
@@ -1655,6 +1707,10 @@
       "grid": [
         4,
         4
+      ],
+      "sourceMaximum": [
+        512,
+        512
       ]
     },
     "DesignAssets/Tribes/spore/BaseParts/body.png": {
@@ -1695,6 +1751,10 @@
       "grid": [
         4,
         4
+      ],
+      "sourceMaximum": [
+        516,
+        516
       ]
     },
     "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp": {
@@ -1715,6 +1775,10 @@
       "grid": [
         4,
         2
+      ],
+      "sourceMaximum": [
+        516,
+        516
       ]
     },
     "DesignAssets/Tribes/spring/AnimationStudies/flow-v4/flow-v4.webp": {
@@ -1725,6 +1789,10 @@
       "grid": [
         4,
         4
+      ],
+      "sourceMaximum": [
+        512,
+        512
       ]
     },
     "DesignAssets/Tribes/spring/AnimationStudies/hurt-v2/hurt-v2.webp": {
@@ -1735,6 +1803,10 @@
       "grid": [
         4,
         4
+      ],
+      "sourceMaximum": [
+        516,
+        516
       ]
     },
     "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp": {
@@ -1745,6 +1817,10 @@
       "grid": [
         4,
         16
+      ],
+      "sourceMaximum": [
+        512,
+        512
       ]
     },
     "DesignAssets/Tribes/spring/Animations/Nests/stage-01-idle-v5/nest-stage-01-idle-sheet.png": {
@@ -1765,6 +1841,10 @@
       "grid": [
         4,
         4
+      ],
+      "sourceMaximum": [
+        512,
+        512
       ]
     },
     "DesignAssets/Tribes/spring/BaseParts/body.png": {
@@ -1805,6 +1885,10 @@
       "grid": [
         4,
         4
+      ],
+      "sourceMaximum": [
+        316,
+        316
       ]
     },
     "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.webp": {
@@ -1815,6 +1899,10 @@
       "grid": [
         4,
         16
+      ],
+      "sourceMaximum": [
+        631,
+        631
       ]
     },
     "DesignAssets/UI/hp-heart.png": {
@@ -8035,6 +8123,748 @@
       "grid": [
         4,
         4
+      ]
+    },
+    "DesignAssets/Animations/UnitRangedV1/spore/shoot.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        6,
+        5
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitRangedV1/spore/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitRangedV1/spore/projectile.png": {
+      "display": [
+        30,
+        28
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        60,
+        57
+      ]
+    },
+    "DesignAssets/Animations/UnitRangedV1/pebble/shoot.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        6,
+        5
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitRangedV1/pebble/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitRangedV1/pebble/projectile.png": {
+      "display": [
+        33,
+        29
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        63,
+        55
+      ]
+    },
+    "DesignAssets/Animations/UnitRangedV1/spring/shoot.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        6,
+        5
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitRangedV1/spring/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitRangedV1/spring/projectile.png": {
+      "display": [
+        31,
+        21
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        65,
+        45
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/00/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/01/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/02/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/03/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/04/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/05/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/06/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/07/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/08/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/09/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/0a/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/0b/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/0c/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/0d/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/0e/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/0f/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/10/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/11/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/12/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/13/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/14/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/15/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/16/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/17/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/18/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/19/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/1a/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/1b/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/1c/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/1d/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/1e/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/1f/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/spore/00/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/spore/10/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/pebble/00/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/pebble/10/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/spring/00/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/spring/10/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/spore/04/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/spore/08/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/spore/0c/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/spore/14/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/spore/18/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/spore/1c/Source/neutral.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        512
       ]
     }
   }
