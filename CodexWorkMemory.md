@@ -1,3 +1,10 @@
+## 로컬 잔여 변경 전체 커밋·main 푸시 완료 · 01a1a6c1 현재 요약
+
+- 기록 ID: local-remainder-push-complete-20261104-01a1a6c1. 기록·실제 결과 확인 시각: 2026-11-04T22:35:59+09:00. 기록자·범위검수·Git 실행 Codex /root, 전체 커밋·푸시 결정 사용자. 출처 현재 채팅 01a1a6c1-ac04-70b2-940b-bdfba26e30ae, H:/Spawner Windows PowerShell, host local. 원발언 정확 시각·항목 ID 불명. local-remainder-push-scope-20261104-01a1a6c1의 예정 상태를 이 실제 결과로 갱신한다.
+- 실제 신규 커밋 35814b72fa056c1f18d0d5cdd4efc793542b79f1 「이동·오디오 테스트와 기획서 연결 정리」, 정확 6경로 878추가/671삭제. 기존 유닛 애셋 커밋 73f95428cb125ca86d3383484179afd8176462fe와 함께 origin/main을 35665b9에서 35814b7로 푸시했다. push 성공 후 ls-remote의 exact main tip과 로컬 main이 모두 35814b72fa056c1f18d0d5cdd4efc793542b79f1임을 확인했고 당시 index·working tree clean이었다.
+- 검수: 최종 staged name-status·diff·공백검사 통과, 동결 6파일 SHA-256 불변과 각 staged blob/working Git hash 일치 확인. 공유 형식검사 5파일 통과, 기존 runtime 11791줄 Mixed는 보호 원문 그대로 게시했다. runtime 전체는 실제/직렬화 개행을 정규화하면 HEAD와 동일했다. 이번 Git 요청에서 build·테스트·브라우저·배포를 실행하지 않았다. 상세 staged.diff/frozen.json은 literal $Trash/local-remainder-push-20261104에 있다. 저장소 연결 보드는 조회 0개였다.
+- 현재 요청의 기존 로컬 변경 전체 커밋·푸시는 완료. 이번 결과는 커밋 뒤에만 확인되므로 실제 확인 후 이 메모리에 로컬 기록한다. 이 결과 기록만 다음 승인된 관련 커밋에 이월하며 메모리만의 자동 후속 커밋·amend는 하지 않는다. 원래 미완성 애니 제작/클라우드 인계 상태는 그대로 보존한다.
+
 ## 로컬 잔여 변경 전체 커밋·푸시 범위 확정 · 01a1a6c1 현재 요약
 
 - 기록 ID: local-remainder-push-scope-20261104-01a1a6c1. 기록·근거 확인 시각: 2026-11-04T22:33:24+09:00. 기록자·범위판단·실행 Codex /root, 전체 로컬 변경 커밋·푸시 결정 사용자. 출처 현재 채팅 01a1a6c1-ac04-70b2-940b-bdfba26e30ae의 「로컬에 남은 변경사항 뭐냐? 다 올리자」. 원발언 정확 시각·항목 ID 불명. 확인 환경 H:/Spawner, Windows PowerShell, host local.
