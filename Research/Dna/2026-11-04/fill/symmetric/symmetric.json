@@ -1,0 +1,3582 @@
+{
+  "boardPoints": [
+    {
+      "q": 0,
+      "r": -2
+    },
+    {
+      "q": 1,
+      "r": -2
+    },
+    {
+      "q": 2,
+      "r": -2
+    },
+    {
+      "q": -1,
+      "r": -1
+    },
+    {
+      "q": 0,
+      "r": -1
+    },
+    {
+      "q": 1,
+      "r": -1
+    },
+    {
+      "q": 2,
+      "r": -1
+    },
+    {
+      "q": -2,
+      "r": 0
+    },
+    {
+      "q": -1,
+      "r": 0
+    },
+    {
+      "q": 0,
+      "r": 0
+    },
+    {
+      "q": 1,
+      "r": 0
+    },
+    {
+      "q": 2,
+      "r": 0
+    },
+    {
+      "q": -2,
+      "r": 1
+    },
+    {
+      "q": -1,
+      "r": 1
+    },
+    {
+      "q": 0,
+      "r": 1
+    },
+    {
+      "q": 1,
+      "r": 1
+    },
+    {
+      "q": -2,
+      "r": 2
+    },
+    {
+      "q": -1,
+      "r": 2
+    },
+    {
+      "q": 0,
+      "r": 2
+    }
+  ],
+  "boardRadius": 2,
+  "halfCycleCountIncludingReverse": 8,
+  "visitedStates": 516,
+  "physicalRepresentativesAfterDihedralDedup": 4,
+  "all": [
+    {
+      "id": 1,
+      "pieces": [
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            4
+          ]
+        }
+      ],
+      "paths": [
+        {
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": 1,
+            "r": 0
+          },
+          "end": {
+            "q": 2,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "index": 1,
+          "type": "A"
+        },
+        {
+          "start": {
+            "q": 2,
+            "r": 0
+          },
+          "middle": {
+            "q": 1,
+            "r": 1
+          },
+          "end": {
+            "q": 0,
+            "r": 2
+          },
+          "points": [
+            {
+              "q": 2,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 2,
+          "grade": 1,
+          "index": 2,
+          "type": "A"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": 2
+          },
+          "middle": {
+            "q": -1,
+            "r": 2
+          },
+          "end": {
+            "q": -2,
+            "r": 2
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 2
+            },
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": -2,
+              "r": 2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 3,
+          "grade": 1,
+          "index": 3,
+          "type": "A"
+        },
+        {
+          "start": {
+            "q": -2,
+            "r": 2
+          },
+          "middle": {
+            "q": -2,
+            "r": 1
+          },
+          "end": {
+            "q": -1,
+            "r": 1
+          },
+          "points": [
+            {
+              "q": -2,
+              "r": 2
+            },
+            {
+              "q": -2,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 1
+            }
+          ],
+          "gene": "gather",
+          "rotation": 4,
+          "grade": 1,
+          "index": 4,
+          "type": "C"
+        },
+        {
+          "start": {
+            "q": -1,
+            "r": 1
+          },
+          "middle": {
+            "q": 0,
+            "r": 1
+          },
+          "end": {
+            "q": 0,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "index": 5,
+          "type": "C"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": -1,
+            "r": 0
+          },
+          "end": {
+            "q": -2,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -2,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 3,
+          "grade": 1,
+          "index": 6,
+          "type": "A"
+        },
+        {
+          "start": {
+            "q": -2,
+            "r": 0
+          },
+          "middle": {
+            "q": -1,
+            "r": -1
+          },
+          "end": {
+            "q": 0,
+            "r": -2
+          },
+          "points": [
+            {
+              "q": -2,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 5,
+          "grade": 1,
+          "index": 7,
+          "type": "A"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": -2
+          },
+          "middle": {
+            "q": 1,
+            "r": -2
+          },
+          "end": {
+            "q": 2,
+            "r": -2
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "index": 8,
+          "type": "A"
+        },
+        {
+          "start": {
+            "q": 2,
+            "r": -2
+          },
+          "middle": {
+            "q": 2,
+            "r": -1
+          },
+          "end": {
+            "q": 1,
+            "r": -1
+          },
+          "points": [
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -1
+            },
+            {
+              "q": 1,
+              "r": -1
+            }
+          ],
+          "gene": "gather",
+          "rotation": 1,
+          "grade": 1,
+          "index": 9,
+          "type": "C"
+        },
+        {
+          "start": {
+            "q": 1,
+            "r": -1
+          },
+          "middle": {
+            "q": 0,
+            "r": -1
+          },
+          "end": {
+            "q": 0,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 3,
+          "grade": 1,
+          "index": 10,
+          "type": "C"
+        }
+      ],
+      "counts": {
+        "A": 6,
+        "B": 0,
+        "C": 4
+      },
+      "occupied": 19,
+      "closed": true,
+      "rotationalSymmetry180": true,
+      "reflections": []
+    },
+    {
+      "id": 4,
+      "pieces": [
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            5
+          ]
+        }
+      ],
+      "paths": [
+        {
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": 1,
+            "r": 0
+          },
+          "end": {
+            "q": 2,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "index": 1,
+          "type": "A"
+        },
+        {
+          "start": {
+            "q": 2,
+            "r": 0
+          },
+          "middle": {
+            "q": 1,
+            "r": 1
+          },
+          "end": {
+            "q": 0,
+            "r": 2
+          },
+          "points": [
+            {
+              "q": 2,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 2,
+          "grade": 1,
+          "index": 2,
+          "type": "A"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": 2
+          },
+          "middle": {
+            "q": 0,
+            "r": 1
+          },
+          "end": {
+            "q": -1,
+            "r": 2
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 2
+            },
+            {
+              "q": 0,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 4,
+          "grade": 1,
+          "index": 3,
+          "type": "C"
+        },
+        {
+          "start": {
+            "q": -1,
+            "r": 2
+          },
+          "middle": {
+            "q": -2,
+            "r": 2
+          },
+          "end": {
+            "q": -2,
+            "r": 1
+          },
+          "points": [
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": -2,
+              "r": 2
+            },
+            {
+              "q": -2,
+              "r": 1
+            }
+          ],
+          "gene": "gather",
+          "rotation": 3,
+          "grade": 1,
+          "index": 4,
+          "type": "B"
+        },
+        {
+          "start": {
+            "q": -2,
+            "r": 1
+          },
+          "middle": {
+            "q": -1,
+            "r": 1
+          },
+          "end": {
+            "q": 0,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": -2,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "index": 5,
+          "type": "B"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": -1,
+            "r": 0
+          },
+          "end": {
+            "q": -2,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -2,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 3,
+          "grade": 1,
+          "index": 6,
+          "type": "A"
+        },
+        {
+          "start": {
+            "q": -2,
+            "r": 0
+          },
+          "middle": {
+            "q": -1,
+            "r": -1
+          },
+          "end": {
+            "q": 0,
+            "r": -2
+          },
+          "points": [
+            {
+              "q": -2,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 5,
+          "grade": 1,
+          "index": 7,
+          "type": "A"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": -2
+          },
+          "middle": {
+            "q": 0,
+            "r": -1
+          },
+          "end": {
+            "q": 1,
+            "r": -2
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 1,
+              "r": -2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 1,
+          "grade": 1,
+          "index": 8,
+          "type": "C"
+        },
+        {
+          "start": {
+            "q": 1,
+            "r": -2
+          },
+          "middle": {
+            "q": 2,
+            "r": -2
+          },
+          "end": {
+            "q": 2,
+            "r": -1
+          },
+          "points": [
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -1
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "index": 9,
+          "type": "B"
+        },
+        {
+          "start": {
+            "q": 2,
+            "r": -1
+          },
+          "middle": {
+            "q": 1,
+            "r": -1
+          },
+          "end": {
+            "q": 0,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 2,
+              "r": -1
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 3,
+          "grade": 1,
+          "index": 10,
+          "type": "B"
+        }
+      ],
+      "counts": {
+        "A": 4,
+        "B": 4,
+        "C": 2
+      },
+      "occupied": 19,
+      "closed": true,
+      "rotationalSymmetry180": true,
+      "reflections": []
+    },
+    {
+      "id": 2,
+      "pieces": [
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            5
+          ]
+        }
+      ],
+      "paths": [
+        {
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": 1,
+            "r": 0
+          },
+          "end": {
+            "q": 2,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "index": 1,
+          "type": "A"
+        },
+        {
+          "start": {
+            "q": 2,
+            "r": 0
+          },
+          "middle": {
+            "q": 1,
+            "r": 1
+          },
+          "end": {
+            "q": 0,
+            "r": 1
+          },
+          "points": [
+            {
+              "q": 2,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 1
+            }
+          ],
+          "gene": "gather",
+          "rotation": 2,
+          "grade": 1,
+          "index": 2,
+          "type": "B"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": 1
+          },
+          "middle": {
+            "q": 0,
+            "r": 2
+          },
+          "end": {
+            "q": -1,
+            "r": 2
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 2
+            },
+            {
+              "q": -1,
+              "r": 2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 1,
+          "grade": 1,
+          "index": 3,
+          "type": "C"
+        },
+        {
+          "start": {
+            "q": -1,
+            "r": 2
+          },
+          "middle": {
+            "q": -2,
+            "r": 2
+          },
+          "end": {
+            "q": -2,
+            "r": 1
+          },
+          "points": [
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": -2,
+              "r": 2
+            },
+            {
+              "q": -2,
+              "r": 1
+            }
+          ],
+          "gene": "gather",
+          "rotation": 3,
+          "grade": 1,
+          "index": 4,
+          "type": "B"
+        },
+        {
+          "start": {
+            "q": -2,
+            "r": 1
+          },
+          "middle": {
+            "q": -1,
+            "r": 1
+          },
+          "end": {
+            "q": 0,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": -2,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "index": 5,
+          "type": "B"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": -1,
+            "r": 0
+          },
+          "end": {
+            "q": -2,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -2,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 3,
+          "grade": 1,
+          "index": 6,
+          "type": "A"
+        },
+        {
+          "start": {
+            "q": -2,
+            "r": 0
+          },
+          "middle": {
+            "q": -1,
+            "r": -1
+          },
+          "end": {
+            "q": 0,
+            "r": -1
+          },
+          "points": [
+            {
+              "q": -2,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            }
+          ],
+          "gene": "gather",
+          "rotation": 5,
+          "grade": 1,
+          "index": 7,
+          "type": "B"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": -1
+          },
+          "middle": {
+            "q": 0,
+            "r": -2
+          },
+          "end": {
+            "q": 1,
+            "r": -2
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 4,
+          "grade": 1,
+          "index": 8,
+          "type": "C"
+        },
+        {
+          "start": {
+            "q": 1,
+            "r": -2
+          },
+          "middle": {
+            "q": 2,
+            "r": -2
+          },
+          "end": {
+            "q": 2,
+            "r": -1
+          },
+          "points": [
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -1
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "index": 9,
+          "type": "B"
+        },
+        {
+          "start": {
+            "q": 2,
+            "r": -1
+          },
+          "middle": {
+            "q": 1,
+            "r": -1
+          },
+          "end": {
+            "q": 0,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 2,
+              "r": -1
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 3,
+          "grade": 1,
+          "index": 10,
+          "type": "B"
+        }
+      ],
+      "counts": {
+        "A": 2,
+        "B": 6,
+        "C": 2
+      },
+      "occupied": 19,
+      "closed": true,
+      "rotationalSymmetry180": true,
+      "reflections": []
+    },
+    {
+      "id": 3,
+      "pieces": [
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            5
+          ]
+        }
+      ],
+      "paths": [
+        {
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": 0,
+            "r": 1
+          },
+          "end": {
+            "q": 1,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": 1
+            },
+            {
+              "q": 1,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 1,
+          "grade": 1,
+          "index": 1,
+          "type": "C"
+        },
+        {
+          "start": {
+            "q": 1,
+            "r": 0
+          },
+          "middle": {
+            "q": 2,
+            "r": 0
+          },
+          "end": {
+            "q": 1,
+            "r": 1
+          },
+          "points": [
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 1
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "index": 2,
+          "type": "C"
+        },
+        {
+          "start": {
+            "q": 1,
+            "r": 1
+          },
+          "middle": {
+            "q": 0,
+            "r": 2
+          },
+          "end": {
+            "q": -1,
+            "r": 2
+          },
+          "points": [
+            {
+              "q": 1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 2
+            },
+            {
+              "q": -1,
+              "r": 2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 2,
+          "grade": 1,
+          "index": 3,
+          "type": "B"
+        },
+        {
+          "start": {
+            "q": -1,
+            "r": 2
+          },
+          "middle": {
+            "q": -2,
+            "r": 2
+          },
+          "end": {
+            "q": -2,
+            "r": 1
+          },
+          "points": [
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": -2,
+              "r": 2
+            },
+            {
+              "q": -2,
+              "r": 1
+            }
+          ],
+          "gene": "gather",
+          "rotation": 3,
+          "grade": 1,
+          "index": 4,
+          "type": "B"
+        },
+        {
+          "start": {
+            "q": -2,
+            "r": 1
+          },
+          "middle": {
+            "q": -1,
+            "r": 1
+          },
+          "end": {
+            "q": 0,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": -2,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "index": 5,
+          "type": "B"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": 0,
+            "r": -1
+          },
+          "end": {
+            "q": -1,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": -1,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 4,
+          "grade": 1,
+          "index": 6,
+          "type": "C"
+        },
+        {
+          "start": {
+            "q": -1,
+            "r": 0
+          },
+          "middle": {
+            "q": -2,
+            "r": 0
+          },
+          "end": {
+            "q": -1,
+            "r": -1
+          },
+          "points": [
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -2,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": -1
+            }
+          ],
+          "gene": "gather",
+          "rotation": 3,
+          "grade": 1,
+          "index": 7,
+          "type": "C"
+        },
+        {
+          "start": {
+            "q": -1,
+            "r": -1
+          },
+          "middle": {
+            "q": 0,
+            "r": -2
+          },
+          "end": {
+            "q": 1,
+            "r": -2
+          },
+          "points": [
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 5,
+          "grade": 1,
+          "index": 8,
+          "type": "B"
+        },
+        {
+          "start": {
+            "q": 1,
+            "r": -2
+          },
+          "middle": {
+            "q": 2,
+            "r": -2
+          },
+          "end": {
+            "q": 2,
+            "r": -1
+          },
+          "points": [
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -1
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "index": 9,
+          "type": "B"
+        },
+        {
+          "start": {
+            "q": 2,
+            "r": -1
+          },
+          "middle": {
+            "q": 1,
+            "r": -1
+          },
+          "end": {
+            "q": 0,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 2,
+              "r": -1
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 3,
+          "grade": 1,
+          "index": 10,
+          "type": "B"
+        }
+      ],
+      "counts": {
+        "A": 0,
+        "B": 6,
+        "C": 4
+      },
+      "occupied": 19,
+      "closed": true,
+      "rotationalSymmetry180": true,
+      "reflections": []
+    }
+  ],
+  "chosen": [
+    {
+      "id": 1,
+      "pieces": [
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            4
+          ]
+        }
+      ],
+      "paths": [
+        {
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": 1,
+            "r": 0
+          },
+          "end": {
+            "q": 2,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "index": 1,
+          "type": "A"
+        },
+        {
+          "start": {
+            "q": 2,
+            "r": 0
+          },
+          "middle": {
+            "q": 1,
+            "r": 1
+          },
+          "end": {
+            "q": 0,
+            "r": 2
+          },
+          "points": [
+            {
+              "q": 2,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 2,
+          "grade": 1,
+          "index": 2,
+          "type": "A"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": 2
+          },
+          "middle": {
+            "q": -1,
+            "r": 2
+          },
+          "end": {
+            "q": -2,
+            "r": 2
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 2
+            },
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": -2,
+              "r": 2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 3,
+          "grade": 1,
+          "index": 3,
+          "type": "A"
+        },
+        {
+          "start": {
+            "q": -2,
+            "r": 2
+          },
+          "middle": {
+            "q": -2,
+            "r": 1
+          },
+          "end": {
+            "q": -1,
+            "r": 1
+          },
+          "points": [
+            {
+              "q": -2,
+              "r": 2
+            },
+            {
+              "q": -2,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 1
+            }
+          ],
+          "gene": "gather",
+          "rotation": 4,
+          "grade": 1,
+          "index": 4,
+          "type": "C"
+        },
+        {
+          "start": {
+            "q": -1,
+            "r": 1
+          },
+          "middle": {
+            "q": 0,
+            "r": 1
+          },
+          "end": {
+            "q": 0,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "index": 5,
+          "type": "C"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": -1,
+            "r": 0
+          },
+          "end": {
+            "q": -2,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -2,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 3,
+          "grade": 1,
+          "index": 6,
+          "type": "A"
+        },
+        {
+          "start": {
+            "q": -2,
+            "r": 0
+          },
+          "middle": {
+            "q": -1,
+            "r": -1
+          },
+          "end": {
+            "q": 0,
+            "r": -2
+          },
+          "points": [
+            {
+              "q": -2,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 5,
+          "grade": 1,
+          "index": 7,
+          "type": "A"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": -2
+          },
+          "middle": {
+            "q": 1,
+            "r": -2
+          },
+          "end": {
+            "q": 2,
+            "r": -2
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "index": 8,
+          "type": "A"
+        },
+        {
+          "start": {
+            "q": 2,
+            "r": -2
+          },
+          "middle": {
+            "q": 2,
+            "r": -1
+          },
+          "end": {
+            "q": 1,
+            "r": -1
+          },
+          "points": [
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -1
+            },
+            {
+              "q": 1,
+              "r": -1
+            }
+          ],
+          "gene": "gather",
+          "rotation": 1,
+          "grade": 1,
+          "index": 9,
+          "type": "C"
+        },
+        {
+          "start": {
+            "q": 1,
+            "r": -1
+          },
+          "middle": {
+            "q": 0,
+            "r": -1
+          },
+          "end": {
+            "q": 0,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 3,
+          "grade": 1,
+          "index": 10,
+          "type": "C"
+        }
+      ],
+      "counts": {
+        "A": 6,
+        "B": 0,
+        "C": 4
+      },
+      "occupied": 19,
+      "closed": true,
+      "rotationalSymmetry180": true,
+      "reflections": []
+    },
+    {
+      "id": 2,
+      "pieces": [
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            5
+          ]
+        }
+      ],
+      "paths": [
+        {
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": 1,
+            "r": 0
+          },
+          "end": {
+            "q": 2,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "index": 1,
+          "type": "A"
+        },
+        {
+          "start": {
+            "q": 2,
+            "r": 0
+          },
+          "middle": {
+            "q": 1,
+            "r": 1
+          },
+          "end": {
+            "q": 0,
+            "r": 1
+          },
+          "points": [
+            {
+              "q": 2,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 1
+            }
+          ],
+          "gene": "gather",
+          "rotation": 2,
+          "grade": 1,
+          "index": 2,
+          "type": "B"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": 1
+          },
+          "middle": {
+            "q": 0,
+            "r": 2
+          },
+          "end": {
+            "q": -1,
+            "r": 2
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 2
+            },
+            {
+              "q": -1,
+              "r": 2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 1,
+          "grade": 1,
+          "index": 3,
+          "type": "C"
+        },
+        {
+          "start": {
+            "q": -1,
+            "r": 2
+          },
+          "middle": {
+            "q": -2,
+            "r": 2
+          },
+          "end": {
+            "q": -2,
+            "r": 1
+          },
+          "points": [
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": -2,
+              "r": 2
+            },
+            {
+              "q": -2,
+              "r": 1
+            }
+          ],
+          "gene": "gather",
+          "rotation": 3,
+          "grade": 1,
+          "index": 4,
+          "type": "B"
+        },
+        {
+          "start": {
+            "q": -2,
+            "r": 1
+          },
+          "middle": {
+            "q": -1,
+            "r": 1
+          },
+          "end": {
+            "q": 0,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": -2,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "index": 5,
+          "type": "B"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": -1,
+            "r": 0
+          },
+          "end": {
+            "q": -2,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -2,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 3,
+          "grade": 1,
+          "index": 6,
+          "type": "A"
+        },
+        {
+          "start": {
+            "q": -2,
+            "r": 0
+          },
+          "middle": {
+            "q": -1,
+            "r": -1
+          },
+          "end": {
+            "q": 0,
+            "r": -1
+          },
+          "points": [
+            {
+              "q": -2,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            }
+          ],
+          "gene": "gather",
+          "rotation": 5,
+          "grade": 1,
+          "index": 7,
+          "type": "B"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": -1
+          },
+          "middle": {
+            "q": 0,
+            "r": -2
+          },
+          "end": {
+            "q": 1,
+            "r": -2
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 4,
+          "grade": 1,
+          "index": 8,
+          "type": "C"
+        },
+        {
+          "start": {
+            "q": 1,
+            "r": -2
+          },
+          "middle": {
+            "q": 2,
+            "r": -2
+          },
+          "end": {
+            "q": 2,
+            "r": -1
+          },
+          "points": [
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -1
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "index": 9,
+          "type": "B"
+        },
+        {
+          "start": {
+            "q": 2,
+            "r": -1
+          },
+          "middle": {
+            "q": 1,
+            "r": -1
+          },
+          "end": {
+            "q": 0,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 2,
+              "r": -1
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 3,
+          "grade": 1,
+          "index": 10,
+          "type": "B"
+        }
+      ],
+      "counts": {
+        "A": 2,
+        "B": 6,
+        "C": 2
+      },
+      "occupied": 19,
+      "closed": true,
+      "rotationalSymmetry180": true,
+      "reflections": []
+    },
+    {
+      "id": 3,
+      "pieces": [
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            5
+          ]
+        }
+      ],
+      "paths": [
+        {
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": 0,
+            "r": 1
+          },
+          "end": {
+            "q": 1,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": 1
+            },
+            {
+              "q": 1,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 1,
+          "grade": 1,
+          "index": 1,
+          "type": "C"
+        },
+        {
+          "start": {
+            "q": 1,
+            "r": 0
+          },
+          "middle": {
+            "q": 2,
+            "r": 0
+          },
+          "end": {
+            "q": 1,
+            "r": 1
+          },
+          "points": [
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 1
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "index": 2,
+          "type": "C"
+        },
+        {
+          "start": {
+            "q": 1,
+            "r": 1
+          },
+          "middle": {
+            "q": 0,
+            "r": 2
+          },
+          "end": {
+            "q": -1,
+            "r": 2
+          },
+          "points": [
+            {
+              "q": 1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 2
+            },
+            {
+              "q": -1,
+              "r": 2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 2,
+          "grade": 1,
+          "index": 3,
+          "type": "B"
+        },
+        {
+          "start": {
+            "q": -1,
+            "r": 2
+          },
+          "middle": {
+            "q": -2,
+            "r": 2
+          },
+          "end": {
+            "q": -2,
+            "r": 1
+          },
+          "points": [
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": -2,
+              "r": 2
+            },
+            {
+              "q": -2,
+              "r": 1
+            }
+          ],
+          "gene": "gather",
+          "rotation": 3,
+          "grade": 1,
+          "index": 4,
+          "type": "B"
+        },
+        {
+          "start": {
+            "q": -2,
+            "r": 1
+          },
+          "middle": {
+            "q": -1,
+            "r": 1
+          },
+          "end": {
+            "q": 0,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": -2,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "index": 5,
+          "type": "B"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": 0,
+            "r": -1
+          },
+          "end": {
+            "q": -1,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": -1,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 4,
+          "grade": 1,
+          "index": 6,
+          "type": "C"
+        },
+        {
+          "start": {
+            "q": -1,
+            "r": 0
+          },
+          "middle": {
+            "q": -2,
+            "r": 0
+          },
+          "end": {
+            "q": -1,
+            "r": -1
+          },
+          "points": [
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -2,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": -1
+            }
+          ],
+          "gene": "gather",
+          "rotation": 3,
+          "grade": 1,
+          "index": 7,
+          "type": "C"
+        },
+        {
+          "start": {
+            "q": -1,
+            "r": -1
+          },
+          "middle": {
+            "q": 0,
+            "r": -2
+          },
+          "end": {
+            "q": 1,
+            "r": -2
+          },
+          "points": [
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 5,
+          "grade": 1,
+          "index": 8,
+          "type": "B"
+        },
+        {
+          "start": {
+            "q": 1,
+            "r": -2
+          },
+          "middle": {
+            "q": 2,
+            "r": -2
+          },
+          "end": {
+            "q": 2,
+            "r": -1
+          },
+          "points": [
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -1
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "index": 9,
+          "type": "B"
+        },
+        {
+          "start": {
+            "q": 2,
+            "r": -1
+          },
+          "middle": {
+            "q": 1,
+            "r": -1
+          },
+          "end": {
+            "q": 0,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 2,
+              "r": -1
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 3,
+          "grade": 1,
+          "index": 10,
+          "type": "B"
+        }
+      ],
+      "counts": {
+        "A": 0,
+        "B": 6,
+        "C": 4
+      },
+      "occupied": 19,
+      "closed": true,
+      "rotationalSymmetry180": true,
+      "reflections": []
+    },
+    {
+      "id": 4,
+      "pieces": [
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            5
+          ]
+        }
+      ],
+      "paths": [
+        {
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": 1,
+            "r": 0
+          },
+          "end": {
+            "q": 2,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "index": 1,
+          "type": "A"
+        },
+        {
+          "start": {
+            "q": 2,
+            "r": 0
+          },
+          "middle": {
+            "q": 1,
+            "r": 1
+          },
+          "end": {
+            "q": 0,
+            "r": 2
+          },
+          "points": [
+            {
+              "q": 2,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 2,
+          "grade": 1,
+          "index": 2,
+          "type": "A"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": 2
+          },
+          "middle": {
+            "q": 0,
+            "r": 1
+          },
+          "end": {
+            "q": -1,
+            "r": 2
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 2
+            },
+            {
+              "q": 0,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 4,
+          "grade": 1,
+          "index": 3,
+          "type": "C"
+        },
+        {
+          "start": {
+            "q": -1,
+            "r": 2
+          },
+          "middle": {
+            "q": -2,
+            "r": 2
+          },
+          "end": {
+            "q": -2,
+            "r": 1
+          },
+          "points": [
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": -2,
+              "r": 2
+            },
+            {
+              "q": -2,
+              "r": 1
+            }
+          ],
+          "gene": "gather",
+          "rotation": 3,
+          "grade": 1,
+          "index": 4,
+          "type": "B"
+        },
+        {
+          "start": {
+            "q": -2,
+            "r": 1
+          },
+          "middle": {
+            "q": -1,
+            "r": 1
+          },
+          "end": {
+            "q": 0,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": -2,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "index": 5,
+          "type": "B"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": -1,
+            "r": 0
+          },
+          "end": {
+            "q": -2,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -2,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 3,
+          "grade": 1,
+          "index": 6,
+          "type": "A"
+        },
+        {
+          "start": {
+            "q": -2,
+            "r": 0
+          },
+          "middle": {
+            "q": -1,
+            "r": -1
+          },
+          "end": {
+            "q": 0,
+            "r": -2
+          },
+          "points": [
+            {
+              "q": -2,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 5,
+          "grade": 1,
+          "index": 7,
+          "type": "A"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": -2
+          },
+          "middle": {
+            "q": 0,
+            "r": -1
+          },
+          "end": {
+            "q": 1,
+            "r": -2
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 1,
+              "r": -2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 1,
+          "grade": 1,
+          "index": 8,
+          "type": "C"
+        },
+        {
+          "start": {
+            "q": 1,
+            "r": -2
+          },
+          "middle": {
+            "q": 2,
+            "r": -2
+          },
+          "end": {
+            "q": 2,
+            "r": -1
+          },
+          "points": [
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -1
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "index": 9,
+          "type": "B"
+        },
+        {
+          "start": {
+            "q": 2,
+            "r": -1
+          },
+          "middle": {
+            "q": 1,
+            "r": -1
+          },
+          "end": {
+            "q": 0,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 2,
+              "r": -1
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 3,
+          "grade": 1,
+          "index": 10,
+          "type": "B"
+        }
+      ],
+      "counts": {
+        "A": 4,
+        "B": 4,
+        "C": 2
+      },
+      "occupied": 19,
+      "closed": true,
+      "rotationalSymmetry180": true,
+      "reflections": []
+    }
+  ],
+  "notes": [
+    "Each candidate fills all 19 level-1 points with 10 anonymous 3-point DNA pieces.",
+    "All candidates pass current M.trace(pieces,1) with explicit shape; no DNA attribute has been assigned.",
+    "Each candidate consists of a 10-edge half-cycle and its 180-degree copy.",
+    "This is the restricted two-half-cycle family, not the total full-board count."
+  ]
+}

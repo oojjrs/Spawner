@@ -1,0 +1,163 @@
+{
+  "sourceThread": "01a1a10e-176c-7cb3-a1cf-2ad477deffc4",
+  "archivedAt": "2026-11-04T13:15:20.556Z",
+  "sourceHead": "e89100cf72fed9038c6e52a78122e98d8d63a70e",
+  "files": [
+    {
+      "path": "Research/Dna/2026-11-04/combinations/calculate.mjs",
+      "sourceSha256": "06cd1fafcf6d00fb84c944fffcac774634f02bf23afecc07553db6771af669c0",
+      "sha256": "4cd73ac094b5467e12619cb664ed387895825e1814fe85d7f49021863efca0c5",
+      "portableImport": true
+    },
+    {
+      "path": "Research/Dna/2026-11-04/combinations/combos.json",
+      "sourceSha256": "8831060d2571edcf7f26219a33ba6e304106bb34b8f93f497bdbd19804bbf1d5",
+      "sha256": "8831060d2571edcf7f26219a33ba6e304106bb34b8f93f497bdbd19804bbf1d5",
+      "portableImport": false
+    },
+    {
+      "path": "Research/Dna/2026-11-04/combinations/combos-gather.png",
+      "sourceSha256": "d431d5ee28e605be362aa3a6497f41ddc60f05d8c224a3e06359994516cc4398",
+      "sha256": "d431d5ee28e605be362aa3a6497f41ddc60f05d8c224a3e06359994516cc4398",
+      "portableImport": false
+    },
+    {
+      "path": "Research/Dna/2026-11-04/combinations/combos-mixed.png",
+      "sourceSha256": "884787b889aff0c9e818c42b81e52d28b312b32905232c46504521bce9ee7511",
+      "sha256": "884787b889aff0c9e818c42b81e52d28b312b32905232c46504521bce9ee7511",
+      "portableImport": false
+    },
+    {
+      "path": "Research/Dna/2026-11-04/combinations/combos-combat.png",
+      "sourceSha256": "eac91dbd97f21b65d6be35c21df1e496280ac51e66643a85ea18c8471576181b",
+      "sha256": "eac91dbd97f21b65d6be35c21df1e496280ac51e66643a85ea18c8471576181b",
+      "portableImport": false
+    },
+    {
+      "path": "Research/Dna/2026-11-04/shape-exchange/explore.mjs",
+      "sourceSha256": "c7be3c1e9f05836de2741467de30c7a7db5a395c8db284877f60aafd02b7dbe3",
+      "sha256": "e2d28cce523384265412d66bff440beff7b4ab61df8198ba3d80b8ba2ca49fa5",
+      "portableImport": true
+    },
+    {
+      "path": "Research/Dna/2026-11-04/shape-exchange/exchange.json",
+      "sourceSha256": "81eae996de9852870b85c539b67d3cb43a1fcd792e1081ba9fdf1d778f19fbee",
+      "sha256": "81eae996de9852870b85c539b67d3cb43a1fcd792e1081ba9fdf1d778f19fbee",
+      "portableImport": false
+    },
+    {
+      "path": "Research/Dna/2026-11-04/shape-exchange/gather-exchange.png",
+      "sourceSha256": "a0847f0057040c674ced929abf7ce0d1d17f41f533d8f22f028d14d737f27dd1",
+      "sha256": "a0847f0057040c674ced929abf7ce0d1d17f41f533d8f22f028d14d737f27dd1",
+      "portableImport": false
+    },
+    {
+      "path": "Research/Dna/2026-11-04/shape-exchange/current-combat-refined.png",
+      "sourceSha256": "42f99380e2fd2a1b6ace7751c795fb10cc5ea2a0c15d4d31edcb9914eab0fdd8",
+      "sha256": "42f99380e2fd2a1b6ace7751c795fb10cc5ea2a0c15d4d31edcb9914eab0fdd8",
+      "portableImport": false
+    },
+    {
+      "path": "Research/Dna/2026-11-04/shape-exchange/ranged-exchange.png",
+      "sourceSha256": "f9e0e86e9e7d2abfe491f4cb4251a6a8c2b5090a149508cd60d742c3f369339e",
+      "sha256": "f9e0e86e9e7d2abfe491f4cb4251a6a8c2b5090a149508cd60d742c3f369339e",
+      "portableImport": false
+    },
+    {
+      "path": "Research/Dna/2026-11-04/worker-swap/materialize.mjs",
+      "sourceSha256": "5de3209708f095d5824aad56267d846aa00974dee6a3a0866991357d50ab7633",
+      "sha256": "f296e1f787a23fca677e4bc22ed9c7c1752e906f724df39127f4e1dd26f774c9",
+      "portableImport": true
+    },
+    {
+      "path": "Research/Dna/2026-11-04/worker-swap/worker.json",
+      "sourceSha256": "e0ae4a70b63cc823bd81b3ed8a870cec5ef880c3d34e738242999639948d43e0",
+      "sha256": "e0ae4a70b63cc823bd81b3ed8a870cec5ef880c3d34e738242999639948d43e0",
+      "portableImport": false
+    },
+    {
+      "path": "Research/Dna/2026-11-04/worker-swap/worker-comparison.png",
+      "sourceSha256": "8208368ac16d5296a5e407009cd196729ff19f90e8d9ce43907bf9a892f5b926",
+      "sha256": "8208368ac16d5296a5e407009cd196729ff19f90e8d9ce43907bf9a892f5b926",
+      "portableImport": false
+    },
+    {
+      "path": "Research/Dna/2026-11-04/fill/exact/exact.mjs",
+      "sourceSha256": "0500b9387e8c66e9ba5fad094d1ffb9d6cddb1422c086459b329dbfbd6e8bfa0",
+      "sha256": "86b3360a91e70205e96c0a222a99e137d25c3b271251fe004d7fa95ba1e0f607",
+      "portableImport": true
+    },
+    {
+      "path": "Research/Dna/2026-11-04/fill/exact/exact.json",
+      "sourceSha256": "27179116ace62ec4ef6798bf78b165b05670150ab110296378cda848c344b568",
+      "sha256": "27179116ace62ec4ef6798bf78b165b05670150ab110296378cda848c344b568",
+      "portableImport": false
+    },
+    {
+      "path": "Research/Dna/2026-11-04/fill/hamiltonian/count.mjs",
+      "sourceSha256": "56b4079fceb7ac8e48f2e5776c43c74515000bbbff393314ebcc9462c67eb4bb",
+      "sha256": "3a17aca8a8541a46467e66d64696265182960680ee94a2600d8e117874a38023",
+      "portableImport": true
+    },
+    {
+      "path": "Research/Dna/2026-11-04/fill/hamiltonian/hamiltonian.json",
+      "sourceSha256": "a9a9f4ac13d123463037e74387d1eee04dd0caf9c7df98afa0d5ebaa9572ab07",
+      "sha256": "a9a9f4ac13d123463037e74387d1eee04dd0caf9c7df98afa0d5ebaa9572ab07",
+      "portableImport": false
+    },
+    {
+      "path": "Research/Dna/2026-11-04/fill/symmetric/search.mjs",
+      "sourceSha256": "504db1a04f0cebe9fa72df7578e06ff7a9f3a2086c324a579b2619bd84ec804f",
+      "sha256": "dd945b4d42ceb2f0a69195ba7bbbc26b4a9f2ffd4ce7022ff4570f2c04deae72",
+      "portableImport": true
+    },
+    {
+      "path": "Research/Dna/2026-11-04/fill/symmetric/symmetric.json",
+      "sourceSha256": "7bdb8f96ed581296961c8610e695b4bcb124288bca0d5c1815cdb8196e8d4b5a",
+      "sha256": "7bdb8f96ed581296961c8610e695b4bcb124288bca0d5c1815cdb8196e8d4b5a",
+      "portableImport": false
+    },
+    {
+      "path": "Research/Dna/2026-11-04/fill/symmetric/dense.json",
+      "sourceSha256": "1d84190b3eab140649425ff0f12c720dfdb05f77bcd327fa8bafe7ee5f92dd31",
+      "sha256": "1d84190b3eab140649425ff0f12c720dfdb05f77bcd327fa8bafe7ee5f92dd31",
+      "portableImport": false
+    },
+    {
+      "path": "Research/Dna/2026-11-04/fill/symmetric/full-1.png",
+      "sourceSha256": "a9e3123e04e59f0558fcaebdecf79461561e0264400ff2cd1b958cb32581d95a",
+      "sha256": "a9e3123e04e59f0558fcaebdecf79461561e0264400ff2cd1b958cb32581d95a",
+      "portableImport": false
+    },
+    {
+      "path": "Research/Dna/2026-11-04/fill/symmetric/full-2.png",
+      "sourceSha256": "b80603f250059d6a6caf0e6d647cb554ebc0660aebc15a62ccab97944095b33e",
+      "sha256": "b80603f250059d6a6caf0e6d647cb554ebc0660aebc15a62ccab97944095b33e",
+      "portableImport": false
+    },
+    {
+      "path": "Research/Dna/2026-11-04/fill/symmetric/full-3.png",
+      "sourceSha256": "c0c37a4d3e85b66344a35930b2cf84dffa3fe93ee7c5c48ed8232e94e213c629",
+      "sha256": "c0c37a4d3e85b66344a35930b2cf84dffa3fe93ee7c5c48ed8232e94e213c629",
+      "portableImport": false
+    },
+    {
+      "path": "Research/Dna/2026-11-04/fill/symmetric/symmetric-1.png",
+      "sourceSha256": "2d92a19181dcbf1e9128b3b4f20a0395350b455fb4a967444b836074236cac44",
+      "sha256": "2d92a19181dcbf1e9128b3b4f20a0395350b455fb4a967444b836074236cac44",
+      "portableImport": false
+    },
+    {
+      "path": "Research/Dna/2026-11-04/fill/symmetric/symmetric-2.png",
+      "sourceSha256": "e113467a80795515c1602e7242d7d13a56f3b95877132888e088657fc092e852",
+      "sha256": "e113467a80795515c1602e7242d7d13a56f3b95877132888e088657fc092e852",
+      "portableImport": false
+    },
+    {
+      "path": "Research/Dna/2026-11-04/fill/symmetric/dense-11-12.png",
+      "sourceSha256": "2d7d7976c179524974c83f5e076716909ea824589a3a3241b8f2407c7903048c",
+      "sha256": "2d7d7976c179524974c83f5e076716909ea824589a3a3241b8f2407c7903048c",
+      "portableImport": false
+    }
+  ]
+}

@@ -1,0 +1,642 @@
+{
+  "hypothetical": true,
+  "assumedMapping": {
+    "health": {
+      "grade": 2,
+      "shape": [
+        0,
+        1,
+        5
+      ]
+    },
+    "capacity": {
+      "grade": 1,
+      "shape": [
+        0,
+        0
+      ]
+    },
+    "gather": {
+      "grade": 1,
+      "shape": [
+        0,
+        1
+      ]
+    }
+  },
+  "combos": [
+    {
+      "pieces": [
+        {
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "capacity",
+          "rotation": 3,
+          "grade": 1,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "capacity",
+          "rotation": 4,
+          "grade": 1,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "capacity",
+          "rotation": 0,
+          "grade": 1,
+          "shape": [
+            0,
+            0
+          ]
+        }
+      ],
+      "paths": [
+        {
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "shape": [
+            0,
+            1
+          ],
+          "index": 1,
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 1
+            }
+          ],
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": 1,
+            "r": 0
+          },
+          "end": {
+            "q": 1,
+            "r": 1
+          }
+        },
+        {
+          "gene": "capacity",
+          "rotation": 3,
+          "grade": 1,
+          "shape": [
+            0,
+            0
+          ],
+          "index": 2,
+          "points": [
+            {
+              "q": 1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 1
+            }
+          ],
+          "start": {
+            "q": 1,
+            "r": 1
+          },
+          "middle": {
+            "q": 0,
+            "r": 1
+          },
+          "end": {
+            "q": -1,
+            "r": 1
+          }
+        },
+        {
+          "gene": "capacity",
+          "rotation": 4,
+          "grade": 1,
+          "shape": [
+            0,
+            0
+          ],
+          "index": 3,
+          "points": [
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": -1
+            }
+          ],
+          "start": {
+            "q": -1,
+            "r": 1
+          },
+          "middle": {
+            "q": -1,
+            "r": 0
+          },
+          "end": {
+            "q": -1,
+            "r": -1
+          }
+        },
+        {
+          "gene": "capacity",
+          "rotation": 0,
+          "grade": 1,
+          "shape": [
+            0,
+            0
+          ],
+          "index": 4,
+          "points": [
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 1,
+              "r": -1
+            }
+          ],
+          "start": {
+            "q": -1,
+            "r": -1
+          },
+          "middle": {
+            "q": 0,
+            "r": -1
+          },
+          "end": {
+            "q": 1,
+            "r": -1
+          }
+        }
+      ],
+      "price": 28,
+      "stats": {
+        "gatherCount": 1,
+        "bladeCount": 0,
+        "antennaCount": 0,
+        "healerCount": 0,
+        "secretionCount": 0,
+        "melee": false,
+        "ranged": false,
+        "meleePower": 0,
+        "meleeSpeed": 0,
+        "rangedPower": 0,
+        "rangedSpeed": 0,
+        "healer": false,
+        "health": 10,
+        "power": 0,
+        "hits": 0,
+        "speed": 0,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "capacity": 4,
+        "harvest": 1,
+        "harvestTime": 4,
+        "movement": 0.25,
+        "vision": 1,
+        "scale": 1.04,
+        "roaming": false,
+        "comboPower": 0,
+        "critical": 0,
+        "criticalPower": 0,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 0,
+        "tenacity": 0,
+        "reduction": 0,
+        "loadSpeed": 75,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0,
+        "focus": 0
+      }
+    },
+    {
+      "pieces": [
+        {
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "capacity",
+          "rotation": 3,
+          "grade": 1,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "movement",
+          "rotation": 4,
+          "grade": 1,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "capacity",
+          "rotation": 5,
+          "grade": 1,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "capacity",
+          "rotation": 0,
+          "grade": 1,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "capacity",
+          "rotation": 2,
+          "grade": 1,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "capacity",
+          "rotation": 4,
+          "grade": 1,
+          "shape": [
+            0,
+            0
+          ]
+        }
+      ],
+      "paths": [
+        {
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "shape": [
+            0,
+            1
+          ],
+          "index": 1,
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 1
+            }
+          ],
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": 1,
+            "r": 0
+          },
+          "end": {
+            "q": 1,
+            "r": 1
+          }
+        },
+        {
+          "gene": "capacity",
+          "rotation": 3,
+          "grade": 1,
+          "shape": [
+            0,
+            0
+          ],
+          "index": 2,
+          "points": [
+            {
+              "q": 1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 1
+            }
+          ],
+          "start": {
+            "q": 1,
+            "r": 1
+          },
+          "middle": {
+            "q": 0,
+            "r": 1
+          },
+          "end": {
+            "q": -1,
+            "r": 1
+          }
+        },
+        {
+          "gene": "movement",
+          "rotation": 4,
+          "grade": 1,
+          "shape": [
+            0,
+            5
+          ],
+          "index": 3,
+          "points": [
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -2,
+              "r": 0
+            }
+          ],
+          "start": {
+            "q": -1,
+            "r": 1
+          },
+          "middle": {
+            "q": -1,
+            "r": 0
+          },
+          "end": {
+            "q": -2,
+            "r": 0
+          }
+        },
+        {
+          "gene": "capacity",
+          "rotation": 5,
+          "grade": 1,
+          "shape": [
+            0,
+            0
+          ],
+          "index": 4,
+          "points": [
+            {
+              "q": -2,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            }
+          ],
+          "start": {
+            "q": -2,
+            "r": 0
+          },
+          "middle": {
+            "q": -1,
+            "r": -1
+          },
+          "end": {
+            "q": 0,
+            "r": -2
+          }
+        },
+        {
+          "gene": "capacity",
+          "rotation": 0,
+          "grade": 1,
+          "shape": [
+            0,
+            0
+          ],
+          "index": 5,
+          "points": [
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            }
+          ],
+          "start": {
+            "q": 0,
+            "r": -2
+          },
+          "middle": {
+            "q": 1,
+            "r": -2
+          },
+          "end": {
+            "q": 2,
+            "r": -2
+          }
+        },
+        {
+          "gene": "capacity",
+          "rotation": 2,
+          "grade": 1,
+          "shape": [
+            0,
+            0
+          ],
+          "index": 6,
+          "points": [
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": 0
+            }
+          ],
+          "start": {
+            "q": 2,
+            "r": -2
+          },
+          "middle": {
+            "q": 1,
+            "r": -1
+          },
+          "end": {
+            "q": 0,
+            "r": 0
+          }
+        },
+        {
+          "gene": "capacity",
+          "rotation": 4,
+          "grade": 1,
+          "shape": [
+            0,
+            0
+          ],
+          "index": 7,
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            }
+          ],
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": 0,
+            "r": -1
+          },
+          "end": {
+            "q": 0,
+            "r": -2
+          }
+        }
+      ],
+      "price": 43,
+      "stats": {
+        "gatherCount": 1,
+        "bladeCount": 0,
+        "antennaCount": 0,
+        "healerCount": 0,
+        "secretionCount": 0,
+        "melee": false,
+        "ranged": false,
+        "meleePower": 0,
+        "meleeSpeed": 0,
+        "rangedPower": 0,
+        "rangedSpeed": 0,
+        "healer": false,
+        "health": 10,
+        "power": 0,
+        "hits": 0,
+        "speed": 0,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "capacity": 6,
+        "harvest": 1,
+        "harvestTime": 4,
+        "movement": 0.29,
+        "vision": 1,
+        "scale": 1.07,
+        "roaming": false,
+        "comboPower": 0,
+        "critical": 0,
+        "criticalPower": 0,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 0,
+        "tenacity": 0,
+        "reduction": 0,
+        "loadSpeed": 75,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0,
+        "focus": 0
+      }
+    }
+  ]
+}

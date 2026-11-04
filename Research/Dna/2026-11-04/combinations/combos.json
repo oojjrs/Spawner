@@ -1,0 +1,2514 @@
+{
+  "provenance": {
+    "model": "server/dna.mjs",
+    "serverValidator": "server/dna-unit.mjs:validateDna",
+    "birthCost": "server/attributes.mjs:birthCost",
+    "price": "base3 + sum(ceil(gene.price*(grade+2)/3))",
+    "grade1BasePrices": {
+      "gather": 10,
+      "blade": 10,
+      "secretion": 10,
+      "health": 5,
+      "movement": 5
+    },
+    "maximumGatherPriceBound": 9
+  },
+  "boardRadius": 2,
+  "boardPoints": [
+    {
+      "q": 0,
+      "r": -2
+    },
+    {
+      "q": 1,
+      "r": -2
+    },
+    {
+      "q": 2,
+      "r": -2
+    },
+    {
+      "q": -1,
+      "r": -1
+    },
+    {
+      "q": 0,
+      "r": -1
+    },
+    {
+      "q": 1,
+      "r": -1
+    },
+    {
+      "q": 2,
+      "r": -1
+    },
+    {
+      "q": -2,
+      "r": 0
+    },
+    {
+      "q": -1,
+      "r": 0
+    },
+    {
+      "q": 0,
+      "r": 0
+    },
+    {
+      "q": 1,
+      "r": 0
+    },
+    {
+      "q": 2,
+      "r": 0
+    },
+    {
+      "q": -2,
+      "r": 1
+    },
+    {
+      "q": -1,
+      "r": 1
+    },
+    {
+      "q": 0,
+      "r": 1
+    },
+    {
+      "q": 1,
+      "r": 1
+    },
+    {
+      "q": -2,
+      "r": 2
+    },
+    {
+      "q": -1,
+      "r": 2
+    },
+    {
+      "q": 0,
+      "r": 2
+    }
+  ],
+  "mirror": false,
+  "combos": [
+    {
+      "id": 1,
+      "design": {
+        "version": 3,
+        "pieces": [
+          {
+            "gene": "gather",
+            "grade": 1,
+            "rotation": 0,
+            "shape": [
+              0,
+              0
+            ]
+          },
+          {
+            "gene": "gather",
+            "grade": 1,
+            "rotation": 2,
+            "shape": [
+              0,
+              0
+            ]
+          },
+          {
+            "gene": "gather",
+            "grade": 1,
+            "rotation": 3,
+            "shape": [
+              0,
+              0
+            ]
+          },
+          {
+            "gene": "gather",
+            "grade": 1,
+            "rotation": 4,
+            "shape": [
+              0,
+              0
+            ]
+          },
+          {
+            "gene": "gather",
+            "grade": 1,
+            "rotation": 0,
+            "shape": [
+              0,
+              0
+            ]
+          },
+          {
+            "gene": "gather",
+            "grade": 1,
+            "rotation": 4,
+            "shape": [
+              0,
+              0
+            ]
+          },
+          {
+            "gene": "gather",
+            "grade": 1,
+            "rotation": 0,
+            "shape": [
+              0,
+              0
+            ]
+          },
+          {
+            "gene": "gather",
+            "grade": 1,
+            "rotation": 2,
+            "shape": [
+              0,
+              0
+            ]
+          },
+          {
+            "gene": "gather",
+            "grade": 1,
+            "rotation": 1,
+            "shape": [
+              0,
+              0
+            ]
+          }
+        ],
+        "budget": 100,
+        "level": 1
+      },
+      "counts": {
+        "gather": 9
+      },
+      "paths": [
+        {
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": 1,
+            "r": 0
+          },
+          "end": {
+            "q": 2,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "index": 1,
+          "name": "채집기관",
+          "color": "#edba87",
+          "category": "organ"
+        },
+        {
+          "start": {
+            "q": 2,
+            "r": 0
+          },
+          "middle": {
+            "q": 1,
+            "r": 1
+          },
+          "end": {
+            "q": 0,
+            "r": 2
+          },
+          "points": [
+            {
+              "q": 2,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 2,
+          "grade": 1,
+          "index": 2,
+          "name": "채집기관",
+          "color": "#edba87",
+          "category": "organ"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": 2
+          },
+          "middle": {
+            "q": -1,
+            "r": 2
+          },
+          "end": {
+            "q": -2,
+            "r": 2
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 2
+            },
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": -2,
+              "r": 2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 3,
+          "grade": 1,
+          "index": 3,
+          "name": "채집기관",
+          "color": "#edba87",
+          "category": "organ"
+        },
+        {
+          "start": {
+            "q": -2,
+            "r": 2
+          },
+          "middle": {
+            "q": -2,
+            "r": 1
+          },
+          "end": {
+            "q": -2,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": -2,
+              "r": 2
+            },
+            {
+              "q": -2,
+              "r": 1
+            },
+            {
+              "q": -2,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 4,
+          "grade": 1,
+          "index": 4,
+          "name": "채집기관",
+          "color": "#edba87",
+          "category": "organ"
+        },
+        {
+          "start": {
+            "q": -2,
+            "r": 0
+          },
+          "middle": {
+            "q": -1,
+            "r": 0
+          },
+          "end": {
+            "q": 0,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": -2,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "index": 5,
+          "name": "채집기관",
+          "color": "#edba87",
+          "category": "organ"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": 0,
+            "r": -1
+          },
+          "end": {
+            "q": 0,
+            "r": -2
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 4,
+          "grade": 1,
+          "index": 6,
+          "name": "채집기관",
+          "color": "#edba87",
+          "category": "organ"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": -2
+          },
+          "middle": {
+            "q": 1,
+            "r": -2
+          },
+          "end": {
+            "q": 2,
+            "r": -2
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "index": 7,
+          "name": "채집기관",
+          "color": "#edba87",
+          "category": "organ"
+        },
+        {
+          "start": {
+            "q": 2,
+            "r": -2
+          },
+          "middle": {
+            "q": 1,
+            "r": -1
+          },
+          "end": {
+            "q": 0,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 2,
+          "grade": 1,
+          "index": 8,
+          "name": "채집기관",
+          "color": "#edba87",
+          "category": "organ"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": 0,
+            "r": 1
+          },
+          "end": {
+            "q": 0,
+            "r": 2
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 1,
+          "grade": 1,
+          "index": 9,
+          "name": "채집기관",
+          "color": "#edba87",
+          "category": "organ"
+        }
+      ],
+      "stats": {
+        "gatherCount": 9,
+        "bladeCount": 0,
+        "antennaCount": 0,
+        "healerCount": 0,
+        "secretionCount": 0,
+        "melee": false,
+        "ranged": false,
+        "meleePower": 0,
+        "meleeSpeed": 0,
+        "rangedPower": 0,
+        "rangedSpeed": 0,
+        "healer": false,
+        "health": 10,
+        "power": 0,
+        "hits": 0,
+        "speed": 0,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "capacity": 9,
+        "harvest": 9,
+        "harvestTime": 4,
+        "movement": 0.25,
+        "vision": 1,
+        "scale": 1.09,
+        "roaming": false,
+        "comboPower": 0,
+        "critical": 0,
+        "criticalPower": 0,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 0,
+        "tenacity": 0,
+        "reduction": 0,
+        "loadSpeed": 75,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0,
+        "focus": 0
+      },
+      "birthCost": 93,
+      "dnaPrice": 90,
+      "pointCap": 100,
+      "loadedMovement": 0.1875,
+      "validated": true,
+      "closed": true
+    },
+    {
+      "id": 2,
+      "design": {
+        "version": 3,
+        "pieces": [
+          {
+            "gene": "gather",
+            "grade": 1,
+            "rotation": 0,
+            "shape": [
+              0,
+              0
+            ]
+          },
+          {
+            "gene": "gather",
+            "grade": 1,
+            "rotation": 2,
+            "shape": [
+              0,
+              0
+            ]
+          },
+          {
+            "gene": "gather",
+            "grade": 1,
+            "rotation": 3,
+            "shape": [
+              0,
+              0
+            ]
+          },
+          {
+            "gene": "movement",
+            "grade": 1,
+            "rotation": 5,
+            "shape": [
+              0,
+              5
+            ]
+          },
+          {
+            "gene": "movement",
+            "grade": 1,
+            "rotation": 2,
+            "shape": [
+              0,
+              5
+            ]
+          }
+        ],
+        "budget": 100,
+        "level": 1
+      },
+      "counts": {
+        "gather": 3,
+        "movement": 2
+      },
+      "paths": [
+        {
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": 1,
+            "r": 0
+          },
+          "end": {
+            "q": 2,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "index": 1,
+          "name": "채집기관",
+          "color": "#edba87",
+          "category": "organ"
+        },
+        {
+          "start": {
+            "q": 2,
+            "r": 0
+          },
+          "middle": {
+            "q": 1,
+            "r": 1
+          },
+          "end": {
+            "q": 0,
+            "r": 2
+          },
+          "points": [
+            {
+              "q": 2,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 2,
+          "grade": 1,
+          "index": 2,
+          "name": "채집기관",
+          "color": "#edba87",
+          "category": "organ"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": 2
+          },
+          "middle": {
+            "q": -1,
+            "r": 2
+          },
+          "end": {
+            "q": -2,
+            "r": 2
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 2
+            },
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": -2,
+              "r": 2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 3,
+          "grade": 1,
+          "index": 3,
+          "name": "채집기관",
+          "color": "#edba87",
+          "category": "organ"
+        },
+        {
+          "start": {
+            "q": -2,
+            "r": 2
+          },
+          "middle": {
+            "q": -1,
+            "r": 1
+          },
+          "end": {
+            "q": -1,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": -2,
+              "r": 2
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 0
+            }
+          ],
+          "gene": "movement",
+          "rotation": 5,
+          "grade": 1,
+          "index": 4,
+          "name": "이속",
+          "color": "#87d7b8",
+          "category": "stat"
+        },
+        {
+          "start": {
+            "q": -1,
+            "r": 0
+          },
+          "middle": {
+            "q": -2,
+            "r": 1
+          },
+          "end": {
+            "q": -2,
+            "r": 2
+          },
+          "points": [
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -2,
+              "r": 1
+            },
+            {
+              "q": -2,
+              "r": 2
+            }
+          ],
+          "gene": "movement",
+          "rotation": 2,
+          "grade": 1,
+          "index": 5,
+          "name": "이속",
+          "color": "#87d7b8",
+          "category": "stat"
+        }
+      ],
+      "stats": {
+        "gatherCount": 3,
+        "bladeCount": 0,
+        "antennaCount": 0,
+        "healerCount": 0,
+        "secretionCount": 0,
+        "melee": false,
+        "ranged": false,
+        "meleePower": 0,
+        "meleeSpeed": 0,
+        "rangedPower": 0,
+        "rangedSpeed": 0,
+        "healer": false,
+        "health": 10,
+        "power": 0,
+        "hits": 0,
+        "speed": 0,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "capacity": 3,
+        "harvest": 3,
+        "harvestTime": 4,
+        "movement": 0.33,
+        "vision": 1,
+        "scale": 1.05,
+        "roaming": false,
+        "comboPower": 0,
+        "critical": 0,
+        "criticalPower": 0,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 0,
+        "tenacity": 0,
+        "reduction": 0,
+        "loadSpeed": 75,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0,
+        "focus": 0
+      },
+      "birthCost": 43,
+      "dnaPrice": 40,
+      "pointCap": 100,
+      "loadedMovement": 0.2475,
+      "validated": true,
+      "closed": true
+    },
+    {
+      "id": 3,
+      "design": {
+        "version": 3,
+        "pieces": [
+          {
+            "gene": "gather",
+            "grade": 1,
+            "rotation": 0,
+            "shape": [
+              0,
+              0
+            ]
+          },
+          {
+            "gene": "gather",
+            "grade": 1,
+            "rotation": 2,
+            "shape": [
+              0,
+              0
+            ]
+          },
+          {
+            "gene": "gather",
+            "grade": 1,
+            "rotation": 3,
+            "shape": [
+              0,
+              0
+            ]
+          },
+          {
+            "gene": "health",
+            "grade": 1,
+            "rotation": 4,
+            "shape": [
+              0,
+              1
+            ]
+          },
+          {
+            "gene": "health",
+            "grade": 1,
+            "rotation": 1,
+            "shape": [
+              0,
+              1
+            ]
+          }
+        ],
+        "budget": 100,
+        "level": 1
+      },
+      "counts": {
+        "gather": 3,
+        "health": 2
+      },
+      "paths": [
+        {
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": 1,
+            "r": 0
+          },
+          "end": {
+            "q": 2,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "index": 1,
+          "name": "채집기관",
+          "color": "#edba87",
+          "category": "organ"
+        },
+        {
+          "start": {
+            "q": 2,
+            "r": 0
+          },
+          "middle": {
+            "q": 1,
+            "r": 1
+          },
+          "end": {
+            "q": 0,
+            "r": 2
+          },
+          "points": [
+            {
+              "q": 2,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 2,
+          "grade": 1,
+          "index": 2,
+          "name": "채집기관",
+          "color": "#edba87",
+          "category": "organ"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": 2
+          },
+          "middle": {
+            "q": -1,
+            "r": 2
+          },
+          "end": {
+            "q": -2,
+            "r": 2
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 2
+            },
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": -2,
+              "r": 2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 3,
+          "grade": 1,
+          "index": 3,
+          "name": "채집기관",
+          "color": "#edba87",
+          "category": "organ"
+        },
+        {
+          "start": {
+            "q": -2,
+            "r": 2
+          },
+          "middle": {
+            "q": -2,
+            "r": 1
+          },
+          "end": {
+            "q": -1,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": -2,
+              "r": 2
+            },
+            {
+              "q": -2,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 0
+            }
+          ],
+          "gene": "health",
+          "rotation": 4,
+          "grade": 1,
+          "index": 4,
+          "name": "체력",
+          "color": "#87d7b8",
+          "category": "stat"
+        },
+        {
+          "start": {
+            "q": -1,
+            "r": 0
+          },
+          "middle": {
+            "q": -1,
+            "r": 1
+          },
+          "end": {
+            "q": -2,
+            "r": 2
+          },
+          "points": [
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": -2,
+              "r": 2
+            }
+          ],
+          "gene": "health",
+          "rotation": 1,
+          "grade": 1,
+          "index": 5,
+          "name": "체력",
+          "color": "#87d7b8",
+          "category": "stat"
+        }
+      ],
+      "stats": {
+        "gatherCount": 3,
+        "bladeCount": 0,
+        "antennaCount": 0,
+        "healerCount": 0,
+        "secretionCount": 0,
+        "melee": false,
+        "ranged": false,
+        "meleePower": 0,
+        "meleeSpeed": 0,
+        "rangedPower": 0,
+        "rangedSpeed": 0,
+        "healer": false,
+        "health": 30,
+        "power": 0,
+        "hits": 0,
+        "speed": 0,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "capacity": 3,
+        "harvest": 3,
+        "harvestTime": 4,
+        "movement": 0.25,
+        "vision": 1,
+        "scale": 1.05,
+        "roaming": false,
+        "comboPower": 0,
+        "critical": 0,
+        "criticalPower": 0,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 0,
+        "tenacity": 0,
+        "reduction": 0,
+        "loadSpeed": 75,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0,
+        "focus": 0
+      },
+      "birthCost": 43,
+      "dnaPrice": 40,
+      "pointCap": 100,
+      "loadedMovement": 0.1875,
+      "validated": true,
+      "closed": true
+    },
+    {
+      "id": 4,
+      "design": {
+        "version": 3,
+        "pieces": [
+          {
+            "gene": "blade",
+            "grade": 1,
+            "rotation": 0,
+            "shape": [
+              0,
+              2
+            ]
+          },
+          {
+            "gene": "blade",
+            "grade": 1,
+            "rotation": 0,
+            "shape": [
+              0,
+              2
+            ]
+          },
+          {
+            "gene": "blade",
+            "grade": 1,
+            "rotation": 3,
+            "shape": [
+              0,
+              2
+            ]
+          },
+          {
+            "gene": "health",
+            "grade": 1,
+            "rotation": 3,
+            "shape": [
+              0,
+              1
+            ]
+          },
+          {
+            "gene": "health",
+            "grade": 1,
+            "rotation": 4,
+            "shape": [
+              0,
+              1
+            ]
+          }
+        ],
+        "budget": 100,
+        "level": 1
+      },
+      "counts": {
+        "blade": 3,
+        "health": 2
+      },
+      "paths": [
+        {
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": 1,
+            "r": 0
+          },
+          "end": {
+            "q": 0,
+            "r": 1
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": 1
+            }
+          ],
+          "gene": "blade",
+          "rotation": 0,
+          "grade": 1,
+          "index": 1,
+          "name": "칼날",
+          "color": "#edba87",
+          "category": "organ"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": 1
+          },
+          "middle": {
+            "q": 1,
+            "r": 1
+          },
+          "end": {
+            "q": 0,
+            "r": 2
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 1
+            },
+            {
+              "q": 1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 2
+            }
+          ],
+          "gene": "blade",
+          "rotation": 0,
+          "grade": 1,
+          "index": 2,
+          "name": "칼날",
+          "color": "#edba87",
+          "category": "organ"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": 2
+          },
+          "middle": {
+            "q": -1,
+            "r": 2
+          },
+          "end": {
+            "q": 0,
+            "r": 1
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 2
+            },
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": 0,
+              "r": 1
+            }
+          ],
+          "gene": "blade",
+          "rotation": 3,
+          "grade": 1,
+          "index": 3,
+          "name": "칼날",
+          "color": "#edba87",
+          "category": "organ"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": 1
+          },
+          "middle": {
+            "q": -1,
+            "r": 1
+          },
+          "end": {
+            "q": -1,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 0
+            }
+          ],
+          "gene": "health",
+          "rotation": 3,
+          "grade": 1,
+          "index": 4,
+          "name": "체력",
+          "color": "#87d7b8",
+          "category": "stat"
+        },
+        {
+          "start": {
+            "q": -1,
+            "r": 0
+          },
+          "middle": {
+            "q": -1,
+            "r": -1
+          },
+          "end": {
+            "q": 0,
+            "r": -2
+          },
+          "points": [
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            }
+          ],
+          "gene": "health",
+          "rotation": 4,
+          "grade": 1,
+          "index": 5,
+          "name": "체력",
+          "color": "#87d7b8",
+          "category": "stat"
+        }
+      ],
+      "stats": {
+        "gatherCount": 0,
+        "bladeCount": 3,
+        "antennaCount": 0,
+        "healerCount": 0,
+        "secretionCount": 0,
+        "melee": true,
+        "ranged": false,
+        "meleePower": 6,
+        "meleeSpeed": 0.5,
+        "rangedPower": 0,
+        "rangedSpeed": 0,
+        "healer": false,
+        "health": 30,
+        "power": 6,
+        "hits": 1,
+        "speed": 0.5,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "capacity": 0,
+        "harvest": 0,
+        "harvestTime": 0,
+        "movement": 0.25,
+        "vision": 1,
+        "scale": 1.05,
+        "roaming": false,
+        "comboPower": 50,
+        "critical": 0,
+        "criticalPower": 150,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 100,
+        "tenacity": 0,
+        "reduction": 0,
+        "loadSpeed": 0,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0.12,
+        "focus": 0.3
+      },
+      "birthCost": 43,
+      "dnaPrice": 40,
+      "pointCap": 100,
+      "loadedMovement": 0,
+      "validated": true,
+      "closed": false
+    },
+    {
+      "id": 5,
+      "design": {
+        "version": 3,
+        "pieces": [
+          {
+            "gene": "secretion",
+            "grade": 1,
+            "rotation": 0,
+            "shape": [
+              0,
+              4
+            ]
+          },
+          {
+            "gene": "secretion",
+            "grade": 1,
+            "rotation": 3,
+            "shape": [
+              0,
+              4
+            ]
+          },
+          {
+            "gene": "secretion",
+            "grade": 1,
+            "rotation": 2,
+            "shape": [
+              0,
+              4
+            ]
+          },
+          {
+            "gene": "health",
+            "grade": 1,
+            "rotation": 2,
+            "shape": [
+              0,
+              1
+            ]
+          },
+          {
+            "gene": "health",
+            "grade": 1,
+            "rotation": 4,
+            "shape": [
+              0,
+              1
+            ]
+          }
+        ],
+        "budget": 100,
+        "level": 1
+      },
+      "counts": {
+        "secretion": 3,
+        "health": 2
+      },
+      "paths": [
+        {
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": 1,
+            "r": 0
+          },
+          "end": {
+            "q": 1,
+            "r": -1
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": -1
+            }
+          ],
+          "gene": "secretion",
+          "rotation": 0,
+          "grade": 1,
+          "index": 1,
+          "name": "분비기관",
+          "color": "#edba87",
+          "category": "organ"
+        },
+        {
+          "start": {
+            "q": 1,
+            "r": -1
+          },
+          "middle": {
+            "q": 0,
+            "r": -1
+          },
+          "end": {
+            "q": 0,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": 0
+            }
+          ],
+          "gene": "secretion",
+          "rotation": 3,
+          "grade": 1,
+          "index": 2,
+          "name": "분비기관",
+          "color": "#edba87",
+          "category": "organ"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": -1,
+            "r": 1
+          },
+          "end": {
+            "q": 0,
+            "r": 1
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 1
+            }
+          ],
+          "gene": "secretion",
+          "rotation": 2,
+          "grade": 1,
+          "index": 3,
+          "name": "분비기관",
+          "color": "#edba87",
+          "category": "organ"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": 1
+          },
+          "middle": {
+            "q": -1,
+            "r": 2
+          },
+          "end": {
+            "q": -2,
+            "r": 2
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": -2,
+              "r": 2
+            }
+          ],
+          "gene": "health",
+          "rotation": 2,
+          "grade": 1,
+          "index": 4,
+          "name": "체력",
+          "color": "#87d7b8",
+          "category": "stat"
+        },
+        {
+          "start": {
+            "q": -2,
+            "r": 2
+          },
+          "middle": {
+            "q": -2,
+            "r": 1
+          },
+          "end": {
+            "q": -1,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": -2,
+              "r": 2
+            },
+            {
+              "q": -2,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 0
+            }
+          ],
+          "gene": "health",
+          "rotation": 4,
+          "grade": 1,
+          "index": 5,
+          "name": "체력",
+          "color": "#87d7b8",
+          "category": "stat"
+        }
+      ],
+      "stats": {
+        "gatherCount": 0,
+        "bladeCount": 0,
+        "antennaCount": 0,
+        "healerCount": 0,
+        "secretionCount": 3,
+        "melee": false,
+        "ranged": true,
+        "meleePower": 0,
+        "meleeSpeed": 0,
+        "rangedPower": 4.199999999999999,
+        "rangedSpeed": 0.5,
+        "healer": false,
+        "health": 30,
+        "power": 4.199999999999999,
+        "hits": 1,
+        "speed": 0.5,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "capacity": 0,
+        "harvest": 0,
+        "harvestTime": 0,
+        "movement": 0.25,
+        "vision": 1,
+        "scale": 1.05,
+        "roaming": false,
+        "comboPower": 50,
+        "critical": 0,
+        "criticalPower": 150,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 100,
+        "tenacity": 0,
+        "reduction": 0,
+        "loadSpeed": 0,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0.12,
+        "focus": 0.3
+      },
+      "birthCost": 43,
+      "dnaPrice": 40,
+      "pointCap": 100,
+      "loadedMovement": 0,
+      "validated": true,
+      "closed": false
+    },
+    {
+      "id": 6,
+      "design": {
+        "version": 3,
+        "pieces": [
+          {
+            "gene": "blade",
+            "grade": 1,
+            "rotation": 0,
+            "shape": [
+              0,
+              2
+            ]
+          },
+          {
+            "gene": "blade",
+            "grade": 1,
+            "rotation": 1,
+            "shape": [
+              0,
+              2
+            ]
+          },
+          {
+            "gene": "secretion",
+            "grade": 1,
+            "rotation": 4,
+            "shape": [
+              0,
+              4
+            ]
+          },
+          {
+            "gene": "health",
+            "grade": 1,
+            "rotation": 4,
+            "shape": [
+              0,
+              1
+            ]
+          },
+          {
+            "gene": "health",
+            "grade": 1,
+            "rotation": 4,
+            "shape": [
+              0,
+              1
+            ]
+          }
+        ],
+        "budget": 100,
+        "level": 1
+      },
+      "counts": {
+        "blade": 2,
+        "secretion": 1,
+        "health": 2
+      },
+      "paths": [
+        {
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": 1,
+            "r": 0
+          },
+          "end": {
+            "q": 0,
+            "r": 1
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": 1
+            }
+          ],
+          "gene": "blade",
+          "rotation": 0,
+          "grade": 1,
+          "index": 1,
+          "name": "칼날",
+          "color": "#edba87",
+          "category": "organ"
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": 1
+          },
+          "middle": {
+            "q": 0,
+            "r": 2
+          },
+          "end": {
+            "q": -1,
+            "r": 2
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 2
+            },
+            {
+              "q": -1,
+              "r": 2
+            }
+          ],
+          "gene": "blade",
+          "rotation": 1,
+          "grade": 1,
+          "index": 2,
+          "name": "칼날",
+          "color": "#edba87",
+          "category": "organ"
+        },
+        {
+          "start": {
+            "q": -1,
+            "r": 2
+          },
+          "middle": {
+            "q": -1,
+            "r": 1
+          },
+          "end": {
+            "q": -2,
+            "r": 2
+          },
+          "points": [
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": -2,
+              "r": 2
+            }
+          ],
+          "gene": "secretion",
+          "rotation": 4,
+          "grade": 1,
+          "index": 3,
+          "name": "분비기관",
+          "color": "#edba87",
+          "category": "organ"
+        },
+        {
+          "start": {
+            "q": -2,
+            "r": 2
+          },
+          "middle": {
+            "q": -2,
+            "r": 1
+          },
+          "end": {
+            "q": -1,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": -2,
+              "r": 2
+            },
+            {
+              "q": -2,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 0
+            }
+          ],
+          "gene": "health",
+          "rotation": 4,
+          "grade": 1,
+          "index": 4,
+          "name": "체력",
+          "color": "#87d7b8",
+          "category": "stat"
+        },
+        {
+          "start": {
+            "q": -1,
+            "r": 0
+          },
+          "middle": {
+            "q": -1,
+            "r": -1
+          },
+          "end": {
+            "q": 0,
+            "r": -2
+          },
+          "points": [
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            }
+          ],
+          "gene": "health",
+          "rotation": 4,
+          "grade": 1,
+          "index": 5,
+          "name": "체력",
+          "color": "#87d7b8",
+          "category": "stat"
+        }
+      ],
+      "stats": {
+        "gatherCount": 0,
+        "bladeCount": 2,
+        "antennaCount": 0,
+        "healerCount": 0,
+        "secretionCount": 1,
+        "melee": true,
+        "ranged": true,
+        "meleePower": 4,
+        "meleeSpeed": 0.5,
+        "rangedPower": 1.4,
+        "rangedSpeed": 0.5,
+        "healer": false,
+        "health": 30,
+        "power": 4,
+        "hits": 1,
+        "speed": 0.5,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "capacity": 0,
+        "harvest": 0,
+        "harvestTime": 0,
+        "movement": 0.25,
+        "vision": 1,
+        "scale": 1.05,
+        "roaming": false,
+        "comboPower": 50,
+        "critical": 0,
+        "criticalPower": 150,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 100,
+        "tenacity": 0,
+        "reduction": 0,
+        "loadSpeed": 0,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0.12,
+        "focus": 0.3
+      },
+      "birthCost": 43,
+      "dnaPrice": 40,
+      "pointCap": 100,
+      "loadedMovement": 0,
+      "validated": true,
+      "closed": false
+    }
+  ],
+  "maximumPureGather": {
+    "id": 7,
+    "design": {
+      "version": 3,
+      "pieces": [
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            0
+          ]
+        }
+      ],
+      "budget": 100,
+      "level": 1
+    },
+    "counts": {
+      "gather": 9
+    },
+    "paths": [
+      {
+        "start": {
+          "q": 0,
+          "r": 0
+        },
+        "middle": {
+          "q": 1,
+          "r": 0
+        },
+        "end": {
+          "q": 2,
+          "r": 0
+        },
+        "points": [
+          {
+            "q": 0,
+            "r": 0
+          },
+          {
+            "q": 1,
+            "r": 0
+          },
+          {
+            "q": 2,
+            "r": 0
+          }
+        ],
+        "gene": "gather",
+        "rotation": 0,
+        "grade": 1,
+        "index": 1,
+        "name": "채집기관",
+        "color": "#edba87",
+        "category": "organ"
+      },
+      {
+        "start": {
+          "q": 2,
+          "r": 0
+        },
+        "middle": {
+          "q": 1,
+          "r": 1
+        },
+        "end": {
+          "q": 0,
+          "r": 2
+        },
+        "points": [
+          {
+            "q": 2,
+            "r": 0
+          },
+          {
+            "q": 1,
+            "r": 1
+          },
+          {
+            "q": 0,
+            "r": 2
+          }
+        ],
+        "gene": "gather",
+        "rotation": 2,
+        "grade": 1,
+        "index": 2,
+        "name": "채집기관",
+        "color": "#edba87",
+        "category": "organ"
+      },
+      {
+        "start": {
+          "q": 0,
+          "r": 2
+        },
+        "middle": {
+          "q": -1,
+          "r": 2
+        },
+        "end": {
+          "q": -2,
+          "r": 2
+        },
+        "points": [
+          {
+            "q": 0,
+            "r": 2
+          },
+          {
+            "q": -1,
+            "r": 2
+          },
+          {
+            "q": -2,
+            "r": 2
+          }
+        ],
+        "gene": "gather",
+        "rotation": 3,
+        "grade": 1,
+        "index": 3,
+        "name": "채집기관",
+        "color": "#edba87",
+        "category": "organ"
+      },
+      {
+        "start": {
+          "q": -2,
+          "r": 2
+        },
+        "middle": {
+          "q": -2,
+          "r": 1
+        },
+        "end": {
+          "q": -2,
+          "r": 0
+        },
+        "points": [
+          {
+            "q": -2,
+            "r": 2
+          },
+          {
+            "q": -2,
+            "r": 1
+          },
+          {
+            "q": -2,
+            "r": 0
+          }
+        ],
+        "gene": "gather",
+        "rotation": 4,
+        "grade": 1,
+        "index": 4,
+        "name": "채집기관",
+        "color": "#edba87",
+        "category": "organ"
+      },
+      {
+        "start": {
+          "q": -2,
+          "r": 0
+        },
+        "middle": {
+          "q": -1,
+          "r": 0
+        },
+        "end": {
+          "q": 0,
+          "r": 0
+        },
+        "points": [
+          {
+            "q": -2,
+            "r": 0
+          },
+          {
+            "q": -1,
+            "r": 0
+          },
+          {
+            "q": 0,
+            "r": 0
+          }
+        ],
+        "gene": "gather",
+        "rotation": 0,
+        "grade": 1,
+        "index": 5,
+        "name": "채집기관",
+        "color": "#edba87",
+        "category": "organ"
+      },
+      {
+        "start": {
+          "q": 0,
+          "r": 0
+        },
+        "middle": {
+          "q": 0,
+          "r": -1
+        },
+        "end": {
+          "q": 0,
+          "r": -2
+        },
+        "points": [
+          {
+            "q": 0,
+            "r": 0
+          },
+          {
+            "q": 0,
+            "r": -1
+          },
+          {
+            "q": 0,
+            "r": -2
+          }
+        ],
+        "gene": "gather",
+        "rotation": 4,
+        "grade": 1,
+        "index": 6,
+        "name": "채집기관",
+        "color": "#edba87",
+        "category": "organ"
+      },
+      {
+        "start": {
+          "q": 0,
+          "r": -2
+        },
+        "middle": {
+          "q": 1,
+          "r": -2
+        },
+        "end": {
+          "q": 2,
+          "r": -2
+        },
+        "points": [
+          {
+            "q": 0,
+            "r": -2
+          },
+          {
+            "q": 1,
+            "r": -2
+          },
+          {
+            "q": 2,
+            "r": -2
+          }
+        ],
+        "gene": "gather",
+        "rotation": 0,
+        "grade": 1,
+        "index": 7,
+        "name": "채집기관",
+        "color": "#edba87",
+        "category": "organ"
+      },
+      {
+        "start": {
+          "q": 2,
+          "r": -2
+        },
+        "middle": {
+          "q": 1,
+          "r": -1
+        },
+        "end": {
+          "q": 0,
+          "r": 0
+        },
+        "points": [
+          {
+            "q": 2,
+            "r": -2
+          },
+          {
+            "q": 1,
+            "r": -1
+          },
+          {
+            "q": 0,
+            "r": 0
+          }
+        ],
+        "gene": "gather",
+        "rotation": 2,
+        "grade": 1,
+        "index": 8,
+        "name": "채집기관",
+        "color": "#edba87",
+        "category": "organ"
+      },
+      {
+        "start": {
+          "q": 0,
+          "r": 0
+        },
+        "middle": {
+          "q": 0,
+          "r": 1
+        },
+        "end": {
+          "q": 0,
+          "r": 2
+        },
+        "points": [
+          {
+            "q": 0,
+            "r": 0
+          },
+          {
+            "q": 0,
+            "r": 1
+          },
+          {
+            "q": 0,
+            "r": 2
+          }
+        ],
+        "gene": "gather",
+        "rotation": 1,
+        "grade": 1,
+        "index": 9,
+        "name": "채집기관",
+        "color": "#edba87",
+        "category": "organ"
+      }
+    ],
+    "stats": {
+      "gatherCount": 9,
+      "bladeCount": 0,
+      "antennaCount": 0,
+      "healerCount": 0,
+      "secretionCount": 0,
+      "melee": false,
+      "ranged": false,
+      "meleePower": 0,
+      "meleeSpeed": 0,
+      "rangedPower": 0,
+      "rangedSpeed": 0,
+      "healer": false,
+      "health": 10,
+      "power": 0,
+      "hits": 0,
+      "speed": 0,
+      "armor": 0,
+      "parry": 0,
+      "block": 0,
+      "evasion": 0,
+      "capacity": 9,
+      "harvest": 9,
+      "harvestTime": 4,
+      "movement": 0.25,
+      "vision": 1,
+      "scale": 1.09,
+      "roaming": false,
+      "comboPower": 0,
+      "critical": 0,
+      "criticalPower": 0,
+      "accuracy": 0,
+      "penetration": 0,
+      "blockPower": 50,
+      "counter": 0,
+      "counterPower": 0,
+      "tenacity": 0,
+      "reduction": 0,
+      "loadSpeed": 75,
+      "healing": 0,
+      "stun": 0,
+      "stunTime": 0,
+      "bleed": 0,
+      "bleedPower": 0,
+      "area": 0,
+      "areaPower": 0,
+      "lifesteal": 0,
+      "reflection": 0,
+      "regeneration": 0,
+      "comboSpeed": 0,
+      "focus": 0
+    },
+    "birthCost": 93,
+    "dnaPrice": 90,
+    "pointCap": 100,
+    "loadedMovement": 0.1875,
+    "validated": true,
+    "closed": true
+  },
+  "maxGatherSearch": "exhaustive 6 rotations at each continuation; no mirror; canonical level-1 gather shape",
+  "caveats": [
+    "Five-piece cards are examples, not global optima.",
+    "No level-1 antenna: movement is confined to distance 3 from any colony rectangle.",
+    "Speed excludes terrain; loaded speed applies at full capacity.",
+    "Combat power is per attack, not DPS."
+  ]
+}

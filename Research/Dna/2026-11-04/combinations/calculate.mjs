@@ -1,0 +1,13 @@
+import fs from 'node:fs';
+import {ATTRIBUTE_DNA as M} from '../../../../server/dna.mjs';
+import {validateDna} from '../../../../server/dna-unit.mjs';
+const sets=[['gather','gather','gather','gather','gather'],['gather','gather','gather','movement','movement'],['gather','gather','gather','health','health'],['blade','blade','blade','health','health'],['secretion','secretion','secretion','health','health'],['blade','blade','secretion','health','health']];
+const rotations=[[0,2,3,4,0],[0,2,3,5,2],[0,2,3,4,1],[0,0,3,3,4],[0,3,2,2,4],[0,1,4,4,4]];
+const names={gather:'채집기관',health:'체력',blade:'칼날',movement:'이속',secretion:'분비기관'};
+function record(genes,rs,id){const pieces=genes.map((gene,i)=>({gene,grade:1,rotation:rs[i],shape:[...M.lookup.get(gene).steps]}));const design={version:3,pieces,budget:100,level:1};const trace=M.trace(pieces,1),validated=!!validateDna(design,1,100),stats=M.stats(pieces);if(!validated||!trace.valid||M.price(pieces)+3>100)throw Error('invalid');return {id,design,counts:M.counts(pieces),paths:trace.paths.map((p,i)=>({...p,index:i+1,name:names[p.gene],color:M.lookup.get(p.gene).color,category:M.lookup.get(p.gene).category})),stats,birthCost:3+M.price(pieces),dnaPrice:M.price(pieces),pointCap:100,loadedMovement:stats.movement*stats.loadSpeed/100,validated,closed:trace.closed};}
+const combos=sets.map((s,i)=>record(s,rotations[i],i+1));
+let best=[];function dfs(p){if(p.length>best.length)best=p;for(let rotation=0;rotation<6;rotation++){const a=[...p,{gene:'gather',grade:1,rotation}];if(M.trace(a,1).valid)dfs(a);}}dfs([]);
+combos[0]=record(best.map(p=>p.gene),best.map(p=>p.rotation),1);
+const provenance={model:'server/dna.mjs',serverValidator:'server/dna-unit.mjs:validateDna',birthCost:'server/attributes.mjs:birthCost',price:'base3 + sum(ceil(gene.price*(grade+2)/3))',grade1BasePrices:{gather:10,blade:10,secretion:10,health:5,movement:5},maximumGatherPriceBound:9};
+const data={provenance,boardRadius:2,boardPoints:[],mirror:false,combos,maximumPureGather:record(best.map(p=>p.gene),best.map(p=>p.rotation),7),maxGatherSearch:'exhaustive 6 rotations at each continuation; no mirror; canonical level-1 gather shape',caveats:['Five-piece cards are examples, not global optima.','No level-1 antenna: movement is confined to distance 3 from any colony rectangle.','Speed excludes terrain; loaded speed applies at full capacity.','Combat power is per attack, not DPS.']};for(let r=-2;r<=2;r++)for(let q=-2;q<=2;q++)if(M.inside({q,r},1))data.boardPoints.push({q,r});
+fs.writeFileSync(new URL('./combos.json',import.meta.url),JSON.stringify(data,null,2).replace(/\n/g,'\r\n'),'utf8');console.log(JSON.stringify(combos.map(c=>({id:c.id,valid:c.validated,cost:c.birthCost})))+' maximumGather='+best.length);

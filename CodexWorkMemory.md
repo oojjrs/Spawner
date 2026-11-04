@@ -1,3 +1,13 @@
+## DNA 형태 조사 클라우드 인계 · 01a1a10e 현재 요약
+
+- 기록 ID: dna-cloud-handoff-ready-20261104-01a1a10e. 기록 시각: 2026-11-04T22:15:20+09:00. 기록자·취합 Codex /root, 기록·커밋 및 다음 날 클라우드 재개 요청 주체 사용자. 출처 현재 채팅 01a1a10e-176c-7cb3-a1cf-2ad477deffc4, H:/Spawner Windows PowerShell. 원 발언 정확 시각·항목 ID 불명. 현재는 커밋 준비 완료 상태이며 커밋·푸시 성공을 선기록하지 않는다.
+- 현재 목표는 반드시 1렙 판(중앙 포함19칸)이다. 먼저 속성 없는 DNA 완성형을 고르고 그다음 속성을 배정한다. 2렙37칸으로 진행하지 않는다. 모양·등급·속성 재배치는 아직 제품에 적용하지 않았고 새 세트 효과도 확정하지 않았다.
+- 최신 전수 결과: 현행3칸 DNA5방향·6회전과 끝접점 합류를 허용한 완전채움은 raw39605, 회전 중복 제거6606, 회전·반전 제거3320종. 가닥9개2382종/10개3605종/11개599종/12개20종(C6);13가닥 이상19칸 완전점유는 없다. 속성·100P가격 제약은 이 기하 계산에서 제외했다. 9가닥 계수는 독립 조사와 일치하고 대표들은 실제M.trace에서19점 유효 확인.
+- 그림의 A=직선/B=완만한꺾임/C=급한꺾임은 속성 없는 윤곽 분류다. 방향을 구분한5형태는 윤곽3종으로 묶인다. 특히 fill/symmetric/dense-11-12.png 오른쪽은 B윤곽12개로 완전점유한다. JSON의 gene 필드는 기존 모델에서 기하 검사를 하기 위한 임시 표식이며 사용자 확정 속성 배정이 아니다.
+- 앞선 제안은 미확정으로 보존한다: 체력↔운반의 등급·모양 교환 후 운반↔채집의 모양 교환을 하면 체력2렙4칸[0,1,5],운반1렙직선[0,0],채집1렙꺾임[0,1]이 된다는 해석이다. 이 가정에서 채집1+운반3은28P/HP10/가방4/이속0.25, 이속1을 섞으면 채집1+운반5+이속1이43P/HP10/가방6/이속0.29로 배치된다. 현행 동작상 운반은 가방만 늘리고 채집1개는4초당1개 그대로다. 사용자는 이 안을 적용하라고 확정하지 않고 완성형 우선 조사로 순서를 바꿨다.
+- 클라우드용 자료는 Research/Dna/2026-11-04/ 에 보존한다. combinations=초기역할조합,shape-exchange=한쌍모양교환비교,worker-swap=체력/운반/채집교환가정,fill=정확전수·독립9가닥계수·대칭대표. manifest.json은 파일별 해시와 출처를 담는다. 계산 .mjs의 server 상대 import만 새 위치에 맞췄고 실제게임 모델은 바꾸지 않았다. 예: node Research/Dna/2026-11-04/fill/exact/exact.mjs. 기존 $Trash 경로가 클라우드에 없어도 이 보존본을 사용한다.
+- 다음 작업: 보존한1렙완성형 중 반복·대칭과 원하는 역할비율이 좋은 후보를 고른 뒤, 기능개방DNA/반복강화DNA의 속성을 배정한다. 같은 기능을 한 유닛에 모으면 여러 단일기능 유닛보다 저렴해야 한다는 기존 원칙을 유지하고, 속성 배정 후 실제비용·능력·배치를 함께 확인한다. 관련 상세기록7개(dna-level1-combos/shape-exchange-start/result/level2-shape-discussion/worker-swap-proposal/level1-fill-scope/complete)를 원문 보존하며, 다른 대화의 변경·기록은 이 커밋에 섞지 않는다.
+
 ## 웰컴 커밋 후보 범위 동결 · 01a1a12e
 
 - 기록 ID: welcome-commit-scope-freeze-20261104-01a1a12e. 기록 시각: 2026-11-04T22:10:25+09:00. 기록자·범위검수 Codex /root, 로컬 커밋·버그 인계 승인 사용자, 출처 thread01a1a12e-3f3f-72c1-95e2-0b5b349b5ffb,H:/Spawner. welcome-cloud-handoff-request-20261104-01a1a12e의 안테나 몽돌 정지는 미해결로 포함하며 지금 수정하지 않는다.
@@ -172756,3 +172766,59 @@ Text: none. No lettering, labels, logo, watermark, UI, borders, health bars, peo
 - lab: worker소유simulation/UI/CSS/test4파일수정,기관3종체크를기존라벨재사용정수copy입력으로바꾸고legacybool1/0호환·safeinteger검증·물리합pieceCount·기초2c/1.4c·healerc분배를연결했다. rate/.5·hits1·전용강화가산은유지. 3새표적계약(c1/c6/baseDPS·공속/타수/강화독립·치유분배/clamp)통과,0copyflag가numeric0이아닌booleanfalse가되도록국소보완해해당계약통과했다. actualCombat1440/390둘다기관6/6/6숫자입력64×42/총25조각·근접12/원거리8.4/각공속.5/1타/errors0/가로overflow0,worker/부모가실제이미지로모바일줄바꿈·잘림없음을확인했다. stage/geometry는수정하지않았다.
 - 감사/파생보호: 감사worker가game1093-1100/1130재고·적재및plannedCargo,utility414-428capacity/harvestCycles,deposit1184,attributes144-151속도·capacity,cost170/game1521/1752/1761·무료설계1898이후·기존agentcost287/utility33/corpse1580소비자를읽기추적해추가누락0보고했다. 최종에는Attribute118/131총비용4지점·clientgame4957-58대상별dedupe·sharedallocation32-39의수혜unit별예산/실health처리만국소readback해정상보고했으며실행검사는main/root역할로구분했다. 이번5source모듈만재귀worker/Combat14사본동기화하고labCSS는before와동일확인후정수입력1줄override포함현재CSS반영했다. integration-result.json은45gene/grade/steps/code보존·해당14사본정확·Attribute원가120/실생산123·capacity/harvest6·Design표불변·labCSS정확·runtime초기화정상/이번외부모듈변화0이다. 이전단계부터의병행tooltip/다른이미지·음악·welcome수정은보호하고재생성하지않았다.
 - 범위/근거/상태: main제품·검사10파일(serverdna/dna-actions/combat/dna-actions.test/dna.test/newdna-stacking.test,clientgame/runtime,Attribute/Combat)와메모리만수정했다. sourceattributes/gameharvest·deposit및Design/45형태/grade/입출구원/기관굵기는직접수정하지않았다. literal달러Trash/dna-stacking-adjustment-20261103의before/task.patch/task-manifest.json/integration-result.json/ui-result.json/attribute-six.png/multi-heal.png가main근거다. contracts-summary.json은이미관찰한tool출력의명시요약이며rawstdout캡처파일로오인하지않는다(25중23+실패2교정재실행2,이력별도1). lab근거는literal달러Trash/dna-lab-stacking-01a1a10e의before/task.patch/inline-ui-qa.json/inputs-1440.png/inputs-390.png. 미스테이징·미커밋/푸시·배포없음. 최종공유형식·이번scope diff마감은직후실제결과를따른다.
+
+## 1렙 DNA 조합 채팅 도식 · 현재 관찰·제안
+
+- 기록 ID: dna-level1-combos-20261104-01a1a10e; 기록 시각: 2026-11-04T21:20:23+09:00; 기록자 Codex /root/dna_level1_combos(부모 메인 모델 상속 low), 원요청·판단주체 사용자/부모 Codex. 출처 현재 채팅 01a1a10e-176c-7cb3-a1cf-2ad477deffc4, H:/Spawner Windows PowerShell. 원발언 정확시각·턴ID 불명.
+- 사용자 요청은 현행1렙DNA만 사용한 유효 조합 탐색과 채팅 그림이다. 완료/커밋작업 재개나 제품수정 요청이 아니다. 제안6개는 채집9, 채집3+이속2, 채집3+체력2, 칼날3+체력2, 분비3+체력2, 칼날2+분비1+체력2이며 확정 밸런스·제품구현과 구분한다.
+- 관찰: server/dna.mjs 반경2/19점/중앙시작, 연속경로·끝접점합류 허용/중간관통·선중복 금지/회전6방향. server/dna-unit.mjs validateDna(design,1,100) 6개모두 유효. 현행가격은 기본3+기관10/체력·이속5 합산이라 첫93P 나머지43P; 채집9는 가격상한9와 실제배치가 일치한 유닛당채집량·운반량최대다. 거리별 실수입최적이라고 판단하지 않는다. 안테나없는1렙은 둥지사각형거리3이내 이동제한을 받는다.
+- 산출: literal $Trash/dna-level1-combos-20261104의 combos.json(정확좌표/회전/색/모델수치/가격근거), combos-1.png·combos-2.png(각1800x1100). 결정적 System.Drawing 도식으로 제작했고 두이미지 직접확인. 제품파일·Design·Git수정없음, 전체테스트/빌드/서버/브라우저없음. PNG와기술JSON/스크립트만임시저장하고 이메모리예외추가. 실제게임플레이·전투밸런스실측은아니다.
+- dna-level1-combos-20261104-01a1a10e 그림개선 추가(2026-11-04T21:22:01+09:00, Codex 동일워커/부모검수지시): 같은 확정좌표·수치를 가로2카드씩3장 combos-gather.png/combos-mixed.png/combos-combat.png(1400x1020)으로 재구성했다. 개별회전목록은 제거하고 역할명·수량요약·핵심수치를 크게 표시했다. 여섯개는 채팅용 조합 제안이며 게임프리셋을 추가한 것이 아니다. 기존모델검증은재사용하고제품재검사없음.
+
+## 1렙 DNA 모양 교환 탐색 시작 · 01a1a10e
+
+- 기록 ID: dna-shape-exchange-start-20261104-01a1a10e. 기록 시각: 2026-11-04T21:33:00+09:00. 기록자 Codex /root, 원 발언·의도 주체 사용자. 출처 현재 채팅 01a1a10e-176c-7cb3-a1cf-2ad477deffc4, H:/Spawner Windows PowerShell. 원 발언 정확 시각·항목 ID 불명.
+- 사용자는 앞선 조합 그림을 보고 1렙 DNA의 실용성과 예쁜 완성형을 함께 만들기 어렵다고 느끼며 DNA 하나의 모양을 다른 종류와 교환하는 방안을 물었다. 현재 요청은 비교·제안이며 카탈로그 변경 승인이 아니다. 기존 다섯 조각 역할 조합의 수량·스탯·가격을 유지한 채 현행 매핑과 한 쌍 교환 10안을 순수 기하 탐색하고, 기존 그림이 임의 첫 배치였다는 한계도 함께 비교한다.
+- 최신 공통19 전파로 low 강제 위임을 대체하고 단일 작업은 메인 직접 수행·검수로 전환했다. /root/dna_shape_exchange 워커는 탐색·파일쓰기 전에 안전 경계에서 종료해 산출 손실이 없었다. 메인 모델·추론 설정과 출처 불명 제목은 유지한다.
+- 제품·Design·Git 변경 없이 literal $Trash/dna-shape-exchange-20261104 안의 기술 계산·도식만 생성할 예정이다. 대칭·닫힘·밀집도는 탐색용 판단 기준이며 미적 최적 또는 사용자 확정 결정으로 기록하지 않는다.
+
+## 1렙 DNA 모양 교환 비교 결과 · 01a1a10e 현재 요약
+
+- 기록 ID: dna-shape-exchange-result-20261104-01a1a10e. 기록 시각: 2026-11-04T21:37:03+09:00. 기록자·실행·판단 Codex /root, 원 질문 주체 사용자. 출처 현재 채팅 01a1a10e-176c-7cb3-a1cf-2ad477deffc4 및 dna-shape-exchange-start-20261104-01a1a10e, H:/Spawner Windows PowerShell. 원 발언 정확 시각·항목 ID 불명.
+- 범위·실행: 현행 다섯 모양 매핑과 한 쌍 교환10안, 기존 다섯 조각 역할 조합5종의 모든 유효 순서·회전을 순수 계산했다. 첫 회전0은 육각판 회전 대칭으로 정규화했다. server/dna.mjs M.trace의 실제 경계·중간점·선충돌·끝접점 합류 규칙에 가상 piece.shape를 공급했고 카탈로그 원본은 바꾸지 않았다. 가상 모양은 현재 validateDna의 카탈로그 일치 검사 통과로 주장하지 않는다. 가격·스탯은 실제 M.price/stats로 계산했고 모든 비교에서 동일 조합의 수량·43P·스탯을 유지했다.
+- 사실: 현행 모양만으로도 다섯 조합 모두 종류별 좌우대칭과 중앙 시작점으로 닫히는 배치가 있었다. 앞선 첫 예시들은 유효성 위주로 골라 대칭 탐색이 충분하지 않았으며, 예쁘게 만들기 어렵다는 구조적 결론을 지지하지 않는다. 현행 칼날3+체력2, 분비3+체력2는 삼각형+마름모의 조밀한 대칭 배치가 가능했다.
+- 교환 후보 관찰: 채집[0,0]↔분비[0,4]를 교환하면 채집3+이속2가 기존 원거리형처럼 삼각형+마름모의 조밀한 대칭형이 된다. 기존 원거리형은 현재 채집형의 늘어진 삼각형+평행사변형 배치를 물려받는다. 추가 순수 단일기관 탐색529상태에서 굽은채집[0,4]의 1렙 배치 최대는8개/83P였고, 현재 직선채집의9개/93P 최대와 비교하면 모양교환에 실용적 배치 상한 영향이 있다. 이 결과는 기하상한이며 실제 전투·수입 실측이 아니다.
+- Codex 판단·미확정: 모양 맞교환은 역할별 완성형을 옮기는 후보이며 이번 결과만으로 교환 확정을 추천하지 않는다. 우선 현행 모양의 잘 정돈된 배치를 비교해 사용자 미적 선호를 받는 것이 타당하다. 대칭·닫힘·밀집도 점수는 내부 선별 휴리스틱이고 아름다움의 객관적 최적·전체120순열 최적이라고 주장하지 않는다.
+- 산출: literal $Trash/dna-shape-exchange-20261104의 explore.mjs·exchange.json·render.ps1 및 gather-exchange.png/current-combat-refined.png/ranged-exchange.png. 세 도식을 직접 열어 경로·수량·수치·잘림을 확인했다. 제품소스·Design·Git 변경은 없으며 카탈로그 교환은 미적용이다. 요청·관찰·한계·미확정 상태 기록을 완료하고 소유텍스트 형식검사와 관련 메모리 diff만 남겼다.
+
+## 2렙 DNA 형태 설계 논의 전환 · 01a1a10e 현재 요약
+
+- 기록 ID: dna-level2-shape-discussion-20261104-01a1a10e. 기록 시각: 2026-11-04T21:41:22+09:00. 기록자 Codex /root, 원 지시·범위 결정 사용자. 출처 현재 채팅 01a1a10e-176c-7cb3-a1cf-2ad477deffc4, H:/Spawner Windows PowerShell. 원 발언 정확 시각·항목 ID 불명.
+- 사용자 최신 지시로 1렙 형태 탐색·교환 논의는 종료하고 2렙 DNA 형태의 의도적 조합을 논의한다. 앞선 교환 비교는 제안 자료로 보존하되 재개하거나 카탈로그에 적용하지 않는다.
+- 현행 server/dna.mjs 관찰: 2렙은 power[0,0,0], speed[0,0,1], capacity[0,1,5], healer[0,1,3], antenna[0,1,2], carapace[0,1,0] 여섯 종류이고 4접점/3선 DNA, 판 반경3이다. 이번 확인은 해당 모델의 읽기·순수 수치 조회이며 제품 변경·빌드·테스트·서버 실행이 아니다.
+- Codex 미확정 제안: 2렙 근접 공격력+근접 공속은 같은 단계의 서로 맞물리는 반복 조합을 우선 설계하고, 갑각+체력·운반+채집/이속·안테나+이속·치유기관+체력은 기존 낮은 단계와 연관되는 조합으로 고려한다. 각 조각 단독 반복도 가능하며 관련 조각끼리 붙이면 더 정돈되는 형태를 목표로 삼는다. 이는 실제 모양 변경·조합 유효성 검증·새 세트 보너스 확정이 아니다. 우선 근접 공격력+근접 공속 쌍이 가장 명확한 관련 속성이므로 논의 출발점으로 제안할 예정이다.
+
+## 체력·운반 및 운반·채집 모양 순차 교환 제안 · 01a1a10e
+
+- 기록 ID: dna-worker-swap-proposal-20261104-01a1a10e. 기록 시각: 2026-11-04T21:47:41+09:00. 기록자·조사 Codex /root, 제안·의도 주체 사용자. 출처 현재 채팅 01a1a10e-176c-7cb3-a1cf-2ad477deffc4, H:/Spawner Windows PowerShell. 원 발언 정확 시각·항목 ID 불명.
+- 사용자는 체력과 운반을 스왑한 뒤 운반과 채집기관의 형태를 스왑하면, 채집기관 하나에 직선 운반을 반복하는 체력 없는 일꾼을 만들 수 있을 것이라 제안했다. 첫 교환은 등급·형태, 두 번째는 형태만 교환한다는 Codex 해석으로 최종 체력2렙4접점[0,1,5], 운반1렙3접점직선[0,0], 채집1렙3접점꺾임[0,1]을 가정한다. 이는 질문·제안이며 제품 변경 확정·승인이 아니다. 이전 1렙 종료 범위에 대한 사용자의 새 구체 제안으로 논의 범위만 다시 열린다.
+- 현행 동작 사실: 운반은 가방 capacity만 증가시키며 채집기관1개면 harvest1/4초 그대로다. game.mjs 1093~1135의 반복 채집은 이 수치로 plannedCargo/가방상한까지 모으므로 왕복횟수 감소는 가능하지만 채집 동작 자체는 빨라지지 않는다. 체력 DNA가 없으면 기본HP10이다.
+- 가상 기하 관찰: 현재 M.trace 규칙에 위 형태를 공급해 1렙 판·채집기관 먼저 배치를 순수 탐색했다. 직선 운반만 계속 붙이면 최대3개(24분기), 28P/운반4/채집1/이속0.25/HP10. 이속을 정확히1개 포함해 순서·회전을 허용하면 운반 최대5개(186분기), 43P/운반6/채집1/이속0.29/HP10. 현재 카탈로그 일치 validateDna 통과나 교환 후 실제 게임 실행으로 주장하지 않는다.
+- Codex 미확정 판단: 기능기관1개+저렴한 반복 운반은 역할을 읽기 쉽고 허약한 운반 일꾼으로 합리적이다. 모양 변경만으로 채집 속도까지 개선되지는 않으며 순수 직선 연결에 굽은 이속을 섞으면 더 많은 운반을 넣는 배치가 가능하다. 제품·Design·Git은 수정하지 않고 비교 도식만 literal $Trash/dna-worker-swap-20261104에 제작한다.
+- dna-worker-swap-proposal-20261104-01a1a10e 도식 관찰 추가: 2026-11-04T21:48:47+09:00, Codex /root. literal $Trash/dna-worker-swap-20261104의 materialize.mjs/worker.json/render.ps1로 가상1렙 채집1+운반3(28P) 및 채집1+운반5+이속1(43P)을 정확한 경로로 그렸다. worker-comparison.png 1400x1020을 직접 확인했고 누락된 운반 명칭만 보완 후 재확인했다. 두 조합 모두 HP10, 4초당채집1이고 운반4/6·이속0.25/0.29다. 채집기관 중첩은 한 번 채집량과 운반을 함께 늘리고, 운반만 추가하면 가방을 싸게 늘려 왕복을 줄이는 선택이라는 Codex 설명을 제안한다. 아직 등급·형태 교환은 미적용이며 사용자 최종 선택과 후속 실행 지시를 기다리는 논의 상태다. 제품·Design·Git은 변경하지 않았다.
+
+## 1렙 판 점유 패턴 우선 조사 · 01a1a10e 현재 범위 교정
+
+- 기록 ID: dna-level1-fill-scope-20261104-01a1a10e. 기록 시각: 2026-11-04T21:58:15+09:00. 기록자·조율 Codex /root, 범위·순서 결정 사용자. 출처 현재 채팅 01a1a10e-176c-7cb3-a1cf-2ad477deffc4, H:/Spawner Windows PowerShell. 원 발언 정확 시각·항목 ID 불명.
+- 사용자는 판을 꽉 채우는 경우부터 계산한 다음 조각별 속성을 정하는 순서가 타당하다고 판단했다. Codex가2렙37칸으로잘못해석했으나 사용자가 명시적으로1렙판이라고교정했다. 현재범위는1렙반경2/19접점이며2렙조사아니다. 앞선체력·운반·채집교환은미확정제안으로보존하고지금은속성을배정하지않는다.
+- 추가 사용자 지시: 완전채움이적을것이라는추측하에최대한많이채우는경우를조사하고서브워커를모두병렬동원해빠르게끝내라. 공통19의독립병렬조건과사용자명시지시에따라동일메인모델·동일추론강도를상속한 level1_exact_count(재합류포함전수),level1_hamiltonian(9가닥완전채움정확수·대표),level1_symmetric_fill(대칭·반복full/준full·도식)를분담했다. 메인은범위조율·결과취합을담당하며워커별자체검수결과를받는다.
+- 조건:1렙3점2선DNA의5방향×6회전,중앙시작연속가닥,실제M.trace중간점/선충돌금지·끝접점합류허용을따른다. 점유수19를상한으로하며완전채움가능하면준최대보다다양한full패턴을우선한다. 동일물리배치를삽입순서·회전으로중복계산하지않는정의를명시하고전체계수와대표샘플수를혼동하지않는다. 속성·가격·효과배정과제품·Design·Git수정없음. 임시는 literal $Trash/dna-level1-fill-20261104, 메모리는메인만기록한다.
+
+## 1렙 판 완전 채움 전수·대표 도식 완료 · 01a1a10e 현재 요약
+
+- 기록 ID: dna-level1-fill-complete-20261104-01a1a10e. 기록 시각: 2026-11-04T22:04:55+09:00. 기록자·취합 Codex /root, 요청·속성후배정결정 사용자. 출처 현재 채팅01a1a10e-176c-7cb3-a1cf-2ad477deffc4 및 dna-level1-fill-scope-20261104-01a1a10e, H:/Spawner Windows PowerShell. 독립 동일메인모델·동일effort 워커 level1_exact_count/level1_hamiltonian/level1_symmetric_fill, 원발언 정확시각·항목ID불명.
+- 정확 전수 결과: 중앙포함19점,무속성3점2선DNA,실제끝접점합류허용. 물리적으로같은가닥모음을삽입순서·개별가닥역방향으로중복세지않고 회전C6까지묶으면6606종,회전·반전D6까지묶으면3320종,방향을그대로세면39605종이다. DNA가닥9개 raw14292/C6 2382/D6 1191;10개21606/3605/1811;11개3594/599/306;12개113/20/12. 13가닥이상full19점은없다. 속성·가격·100P필터는아직적용하지않은순수기하경우수다.
+- 검증·범위: exact워커는접점/중간점분할6979개와18132547개이웃쌍선택을연결·Euler조건/Burnside로전수계산(계산구간324ms)했고,별도Hamiltonian워커의9가닥raw14292/C6 2382/D6 1191과정확히일치했다. 대표7종은실제M.trace.valid와occupied19확인. 전체6606종을모두native실행했다고주장하지않는다. 완전점유19상한에도달했으므로18/17점부분배치로탐색범위를확장할필요는없다.
+- 대표·도식: Hamiltonian9가닥모양수량조합40종에서6대표,10가닥180도두반원루프제한가족4대표,전수예제의11/12가닥대칭대표를정리했다. 최종제시3장은symmetric/full-1.png(9가닥2개),symmetric/symmetric-1.png(10가닥대칭2개),symmetric/dense-11-12.png(11/12가닥)이다. 그림은모두19/19점이고 A직선/B완만한꺾임/C급한꺾임의익명윤곽3종으로표시했다. 원래5방향형태는끝방향을지우면3윤곽으로묶이므로한윤곽과방향있는동일DNA를동일시하지않는다. 12가닥대표는B윤곽12개반복이다.
+- 산출은 literal $Trash/dna-level1-fill-20261104의exact/exact.mjs·exact.json,hamiltonian/count.mjs·hamiltonian.json,symmetric/search/render/dense-render.ps1·symmetric.json·dense.json과PNG들이다. 워커들은소유텍스트형식검사를각각완료했고부모는최종3장과관련JSON/정확계수결과를읽어취합했다. 제품소스·Design·Git은변경하지않았다. 이전체력·운반교환미확정상태를유지하고,다음단계는이완성형에속성을배정하는논의이며현재는미배정이다.
+- dna-level1-fill-complete-20261104-01a1a10e 산출 경로 표기 보완: symmetric 하위 계산·그림 스크립트의 정확한 파일명은 search.mjs, render.ps1, dense-render.ps1이다. 위 search/render 표기는 이 세 파일의 축약 표기이며 디렉터리 구조를 뜻하지 않는다.
