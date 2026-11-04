@@ -270,3 +270,90 @@ test("양 편집기 조작 안내에 좌클릭 배치와 우클릭 되돌리기�
     assert.ok(source.includes('<kbd>우클릭 / Ctrl+Z</kbd>'));
   }
 });
+
+test("초기화 뒤 우클릭과 다시 실행이 이전 설계를 되살리지 않는다",t=>{
+  const {editor,root}=fixture(t);
+  root.querySelector('.dna-add').onclick();
+  const saved=editor.getDesign();
+  editor.load(saved,false);
+  root.querySelector('.dna-add').onclick();
+  root.querySelector('.dna-tools').children[3].onclick();
+  for(const key of ['Backspace','BrowserBack'])root.dispatch('keydown',{key});
+  root.dispatch('contextmenu',{});
+  root.dispatch('keydown',{key:'z',ctrlKey:true,shiftKey:true});
+  assert.equal(editor.getDesign().pieces.length,0);
+  assert.equal(root.querySelector('.dna-tools').children[0].disabled,true);
+  assert.equal(root.querySelector('.dna-tools').children[1].disabled,true);
+  root.querySelector('.dna-add').onclick();
+  root.dispatch('contextmenu',{});
+  assert.equal(editor.getDesign().pieces.length,0);
+  root.dispatch('keydown',{key:'z',ctrlKey:true,shiftKey:true});
+  assert.equal(editor.getDesign().pieces.length,1);
+});
+
+function attributeHistoryFixture(){
+  const source=readFileSync(new URL('../Attribute.html',import.meta.url),'utf8'),elements=new Map();
+  const element=()=>({children:[],value:'',files:[],append(...items){this.children.push(...items);},replaceChildren(){this.children=[];},setAttribute(){},focus(){}});
+  const scope={M:ATTRIBUTE_DNA,pieces:[],level:1,insertion:0,notice:'',history:[],future:[],library:[],
+    $(id){if(!elements.has(id))elements.set(id,element());return elements.get(id);},
+    document:{createElement:element},state(){},fit(){},persist(){},renderControls(){},icon(){return '';},copy(){return '';},
+    commit(){},rotate(){},remove(){},zoom(){}};
+  const functions=['design','snapshot','checkpoint','restore','loadDesign','undo','redo','renderTemplates'];
+  const lines=source.split(/\r?\n/);
+  const declarations=functions.map(name=>lines.find(line=>line.startsWith('  function '+name+'(')));
+  assert.ok(declarations.every(Boolean));
+  const bindings=["  $('add').onclick=", "  $('save-template').onclick=", "  $('export').onclick="].map(prefix=>lines.find(line=>line.startsWith(prefix)));
+  assert.ok(bindings.every(Boolean));
+  runInNewContext([...declarations,...bindings].join('\n'),scope);
+  return scope;
+}
+
+function historyPiece(gene){
+  const entry=ATTRIBUTE_DNA.lookup.get(gene);
+  return {gene,grade:entry.grade,rotation:0,shape:[...entry.steps]};
+}
+
+for(const action of ['clear','load','save','import'])test('제작기 '+action+' 경계 뒤 되돌리기는 이전 저장 설계로 넘어가지 않는다',async()=>{
+  const scope=attributeHistoryFixture(),old=[historyPiece('gather')],current=[historyPiece('health')];
+  scope.pieces=old;
+  scope.checkpoint();
+  scope.pieces=current;
+  scope.future=[JSON.stringify({version:3,pieces:old,budget:0,level:1})];
+  let expected=current;
+  if(action==='clear'){
+    scope.$('clear').onclick();
+    expected=[];
+  }else if(action==='load'){
+    scope.library=[{name:'saved',design:{version:3,pieces:old,budget:0,level:1}}];
+    scope.renderTemplates();
+    scope.$('templates').children[0].children[0].onclick();
+    expected=old;
+  }else if(action==='save'){
+    scope.$('template-name').value='current';
+    scope.$('save-template').onclick();
+    assert.equal(scope.library.length,1);
+  }else{
+    const design={version:3,pieces:old,budget:0,level:1};
+    scope.$('file').files=[{size:100,async text(){return JSON.stringify(design);}}];
+    await scope.$('file').onchange();
+    expected=old;
+  }
+  assert.equal(scope.history.length,0);
+  assert.equal(scope.future.length,0);
+  scope.undo();scope.redo();scope.undo();
+  assert.deepEqual(JSON.parse(JSON.stringify(scope.pieces)),expected);
+  scope.checkpoint();
+  scope.pieces=[historyPiece('movement')];
+  scope.undo();
+  assert.deepEqual(JSON.parse(JSON.stringify(scope.pieces)),expected);
+  scope.redo();
+  assert.deepEqual(JSON.parse(JSON.stringify(scope.pieces)),[historyPiece('movement')]);
+});
+
+test("실행 번들의 DNA 편집기는 수정한 원본 모듈과 일치한다",()=>{
+  const source=readFileSync(new URL('./dna-editor.mjs',import.meta.url),'utf8').replace(/^export\s+/gm,'').replaceAll('\r\n','\n').trimEnd();
+  const runtime=readFileSync(new URL('./runtime.js',import.meta.url),'utf8');
+  const match=runtime.match(/modules\["client\/dna-editor.mjs"\] = \(\(\) => \{\r?\n([\s\S]*?)\r?\nreturn \{ dnaEditorViewport, createDnaEditor \};\r?\n\}\)\(\);/);
+  assert.ok(match);
+  assert.equal(match[1].replaceAll('\r\n','\n').trimEnd(),source);
+});
