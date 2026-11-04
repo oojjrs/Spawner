@@ -141,8 +141,14 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
   await Promise.all(["body", "sprout-left", "sprout-right", "sprout-stem", "green-foot", "root-rig", "antenna-1", "strength-1"].map(async name => {
     const image = new Image();
     image.src = globalThis.SpawnerAssets.source(["root-rig", "antenna-1", "strength-1"].includes(name) ? "DesignAssets/Units/Parts/" + (name === "root-rig" ? "bean-root-rig" : name) + ".png" : "DesignAssets/Units/BaseParts/" + name + ".png");
-    await image.decode();
-    beanParts.set(name, image);
+    try {
+      await image.decode();
+      beanParts.set(name, image);
+    } catch (error) {
+      // Incomplete parts use the already loaded bean sprite below. A failed
+      // decorative asset must not reject initialization of the entire header.
+      console.warn("Welcome bean part unavailable:", name, error);
+    }
   }));
   const roots = globalThis.Spawner.createSproutRoots((width, height) => {
     const surface = document.createElement("canvas");
