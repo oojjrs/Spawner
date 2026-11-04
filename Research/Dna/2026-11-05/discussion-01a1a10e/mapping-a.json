@@ -1,0 +1,7852 @@
+{
+  "globalMapping": {
+    "0": "gather",
+    "1": "blade",
+    "2": "health",
+    "4": "secretion",
+    "5": "movement"
+  },
+  "population": {
+    "allRotationClasses": 2382,
+    "dihedralClasses": 1191,
+    "visits": 17806,
+    "elapsedMs": 25.699099999999998,
+    "source": "Original saved count.mjs DFS reused for full Hamiltonian population; first direction fixed to zero"
+  },
+  "targetMatches": {
+    "worker": [
+      {
+        "counts": {
+          "gather": 4,
+          "health": 1,
+          "movement": 4
+        },
+        "matches": 2
+      },
+      {
+        "counts": {
+          "gather": 3,
+          "health": 2,
+          "movement": 4
+        },
+        "matches": 1
+      }
+    ],
+    "melee": [
+      {
+        "counts": {
+          "blade": 4,
+          "health": 3,
+          "movement": 2
+        },
+        "matches": 0
+      },
+      {
+        "counts": {
+          "blade": 3,
+          "health": 2,
+          "movement": 4
+        },
+        "matches": 0
+      }
+    ],
+    "ranged": [
+      {
+        "counts": {
+          "secretion": 3,
+          "health": 2,
+          "movement": 4
+        },
+        "matches": 24
+      },
+      {
+        "counts": {
+          "secretion": 4,
+          "health": 2,
+          "movement": 3
+        },
+        "matches": 20
+      }
+    ]
+  },
+  "usefulPoolCounts": {
+    "worker": 22,
+    "melee": 3,
+    "ranged": 74
+  },
+  "recommended": {
+    "worker": {
+      "role": "worker",
+      "path": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 2,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": -1,
+          "r": 2
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": -1,
+          "r": 1
+        },
+        {
+          "q": -2,
+          "r": 2
+        },
+        {
+          "q": -2,
+          "r": 1
+        },
+        {
+          "q": -2,
+          "r": 0
+        },
+        {
+          "q": -1,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": -1
+        },
+        {
+          "q": 1,
+          "r": -1
+        },
+        {
+          "q": 2,
+          "r": -1
+        },
+        {
+          "q": 2,
+          "r": -2
+        },
+        {
+          "q": 1,
+          "r": -2
+        },
+        {
+          "q": 0,
+          "r": -2
+        },
+        {
+          "q": -1,
+          "r": -1
+        }
+      ],
+      "pieces": [
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            5
+          ]
+        }
+      ],
+      "counts": {
+        "gather": 4,
+        "health": 1,
+        "movement": 4
+      },
+      "stats": {
+        "gatherCount": 4,
+        "bladeCount": 0,
+        "antennaCount": 0,
+        "healerCount": 0,
+        "secretionCount": 0,
+        "melee": false,
+        "ranged": false,
+        "meleePower": 0,
+        "meleeSpeed": 0,
+        "rangedPower": 0,
+        "rangedSpeed": 0,
+        "healer": false,
+        "health": 20,
+        "power": 0,
+        "hits": 0,
+        "speed": 0,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "capacity": 4,
+        "harvest": 4,
+        "harvestTime": 4,
+        "movement": 0.41000000000000003,
+        "vision": 1,
+        "scale": 1.09,
+        "roaming": false,
+        "comboPower": 0,
+        "critical": 0,
+        "criticalPower": 0,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 0,
+        "tenacity": 0,
+        "reduction": 0,
+        "loadSpeed": 75,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0,
+        "focus": 0
+      },
+      "cost": 68,
+      "layout": "ham-all-15",
+      "shownPreviously": false,
+      "mirrorFlag": false,
+      "originalLayout": {
+        "path": [
+          {
+            "q": 0,
+            "r": 0
+          },
+          {
+            "q": 1,
+            "r": 0
+          },
+          {
+            "q": 2,
+            "r": 0
+          },
+          {
+            "q": 1,
+            "r": 1
+          },
+          {
+            "q": 0,
+            "r": 2
+          },
+          {
+            "q": -1,
+            "r": 2
+          },
+          {
+            "q": 0,
+            "r": 1
+          },
+          {
+            "q": -1,
+            "r": 1
+          },
+          {
+            "q": -2,
+            "r": 2
+          },
+          {
+            "q": -2,
+            "r": 1
+          },
+          {
+            "q": -2,
+            "r": 0
+          },
+          {
+            "q": -1,
+            "r": 0
+          },
+          {
+            "q": 0,
+            "r": -1
+          },
+          {
+            "q": 1,
+            "r": -1
+          },
+          {
+            "q": 2,
+            "r": -1
+          },
+          {
+            "q": 2,
+            "r": -2
+          },
+          {
+            "q": 1,
+            "r": -2
+          },
+          {
+            "q": 0,
+            "r": -2
+          },
+          {
+            "q": -1,
+            "r": -1
+          }
+        ],
+        "pieces": [
+          {
+            "start": {
+              "q": 0,
+              "r": 0
+            },
+            "middle": {
+              "q": 1,
+              "r": 0
+            },
+            "end": {
+              "q": 2,
+              "r": 0
+            },
+            "points": [
+              {
+                "q": 0,
+                "r": 0
+              },
+              {
+                "q": 1,
+                "r": 0
+              },
+              {
+                "q": 2,
+                "r": 0
+              }
+            ],
+            "gene": "gather",
+            "rotation": 0,
+            "grade": 1,
+            "shape": [
+              0,
+              0
+            ],
+            "index": 1,
+            "sourceIndex": 0
+          },
+          {
+            "start": {
+              "q": 2,
+              "r": 0
+            },
+            "middle": {
+              "q": 1,
+              "r": 1
+            },
+            "end": {
+              "q": 0,
+              "r": 2
+            },
+            "points": [
+              {
+                "q": 2,
+                "r": 0
+              },
+              {
+                "q": 1,
+                "r": 1
+              },
+              {
+                "q": 0,
+                "r": 2
+              }
+            ],
+            "gene": "gather",
+            "rotation": 2,
+            "grade": 1,
+            "shape": [
+              0,
+              0
+            ],
+            "index": 2,
+            "sourceIndex": 1
+          },
+          {
+            "start": {
+              "q": 0,
+              "r": 2
+            },
+            "middle": {
+              "q": -1,
+              "r": 2
+            },
+            "end": {
+              "q": 0,
+              "r": 1
+            },
+            "points": [
+              {
+                "q": 0,
+                "r": 2
+              },
+              {
+                "q": -1,
+                "r": 2
+              },
+              {
+                "q": 0,
+                "r": 1
+              }
+            ],
+            "gene": "health",
+            "rotation": 3,
+            "grade": 1,
+            "shape": [
+              0,
+              2
+            ],
+            "index": 3,
+            "sourceIndex": 2
+          },
+          {
+            "start": {
+              "q": 0,
+              "r": 1
+            },
+            "middle": {
+              "q": -1,
+              "r": 1
+            },
+            "end": {
+              "q": -2,
+              "r": 2
+            },
+            "points": [
+              {
+                "q": 0,
+                "r": 1
+              },
+              {
+                "q": -1,
+                "r": 1
+              },
+              {
+                "q": -2,
+                "r": 2
+              }
+            ],
+            "gene": "movement",
+            "rotation": 3,
+            "grade": 1,
+            "shape": [
+              0,
+              5
+            ],
+            "index": 4,
+            "sourceIndex": 3
+          },
+          {
+            "start": {
+              "q": -2,
+              "r": 2
+            },
+            "middle": {
+              "q": -2,
+              "r": 1
+            },
+            "end": {
+              "q": -2,
+              "r": 0
+            },
+            "points": [
+              {
+                "q": -2,
+                "r": 2
+              },
+              {
+                "q": -2,
+                "r": 1
+              },
+              {
+                "q": -2,
+                "r": 0
+              }
+            ],
+            "gene": "gather",
+            "rotation": 4,
+            "grade": 1,
+            "shape": [
+              0,
+              0
+            ],
+            "index": 5,
+            "sourceIndex": 4
+          },
+          {
+            "start": {
+              "q": -2,
+              "r": 0
+            },
+            "middle": {
+              "q": -1,
+              "r": 0
+            },
+            "end": {
+              "q": 0,
+              "r": -1
+            },
+            "points": [
+              {
+                "q": -2,
+                "r": 0
+              },
+              {
+                "q": -1,
+                "r": 0
+              },
+              {
+                "q": 0,
+                "r": -1
+              }
+            ],
+            "gene": "movement",
+            "rotation": 0,
+            "grade": 1,
+            "shape": [
+              0,
+              5
+            ],
+            "index": 6,
+            "sourceIndex": 5
+          },
+          {
+            "start": {
+              "q": 0,
+              "r": -1
+            },
+            "middle": {
+              "q": 1,
+              "r": -1
+            },
+            "end": {
+              "q": 2,
+              "r": -1
+            },
+            "points": [
+              {
+                "q": 0,
+                "r": -1
+              },
+              {
+                "q": 1,
+                "r": -1
+              },
+              {
+                "q": 2,
+                "r": -1
+              }
+            ],
+            "gene": "gather",
+            "rotation": 0,
+            "grade": 1,
+            "shape": [
+              0,
+              0
+            ],
+            "index": 7,
+            "sourceIndex": 6
+          },
+          {
+            "start": {
+              "q": 2,
+              "r": -1
+            },
+            "middle": {
+              "q": 2,
+              "r": -2
+            },
+            "end": {
+              "q": 1,
+              "r": -2
+            },
+            "points": [
+              {
+                "q": 2,
+                "r": -1
+              },
+              {
+                "q": 2,
+                "r": -2
+              },
+              {
+                "q": 1,
+                "r": -2
+              }
+            ],
+            "gene": "movement",
+            "rotation": 4,
+            "grade": 1,
+            "shape": [
+              0,
+              5
+            ],
+            "index": 8,
+            "sourceIndex": 7
+          },
+          {
+            "start": {
+              "q": 1,
+              "r": -2
+            },
+            "middle": {
+              "q": 0,
+              "r": -2
+            },
+            "end": {
+              "q": -1,
+              "r": -1
+            },
+            "points": [
+              {
+                "q": 1,
+                "r": -2
+              },
+              {
+                "q": 0,
+                "r": -2
+              },
+              {
+                "q": -1,
+                "r": -1
+              }
+            ],
+            "gene": "movement",
+            "rotation": 3,
+            "grade": 1,
+            "shape": [
+              0,
+              5
+            ],
+            "index": 9,
+            "sourceIndex": 8
+          }
+        ]
+      },
+      "sourceFile": "Research/Dna/2026-11-04/fill/hamiltonian/count.mjs",
+      "orientedPieces": [
+        {
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": 1,
+            "r": 0
+          },
+          "end": {
+            "q": 2,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "shape": [
+            0,
+            0
+          ],
+          "index": 1,
+          "sourceIndex": 0
+        },
+        {
+          "start": {
+            "q": 2,
+            "r": 0
+          },
+          "middle": {
+            "q": 1,
+            "r": 1
+          },
+          "end": {
+            "q": 0,
+            "r": 2
+          },
+          "points": [
+            {
+              "q": 2,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 2
+            }
+          ],
+          "gene": "gather",
+          "rotation": 2,
+          "grade": 1,
+          "shape": [
+            0,
+            0
+          ],
+          "index": 2,
+          "sourceIndex": 1
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": 2
+          },
+          "middle": {
+            "q": -1,
+            "r": 2
+          },
+          "end": {
+            "q": 0,
+            "r": 1
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 2
+            },
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": 0,
+              "r": 1
+            }
+          ],
+          "gene": "health",
+          "rotation": 3,
+          "grade": 1,
+          "shape": [
+            0,
+            2
+          ],
+          "index": 3,
+          "sourceIndex": 2
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": 1
+          },
+          "middle": {
+            "q": -1,
+            "r": 1
+          },
+          "end": {
+            "q": -2,
+            "r": 2
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": -2,
+              "r": 2
+            }
+          ],
+          "gene": "movement",
+          "rotation": 3,
+          "grade": 1,
+          "shape": [
+            0,
+            5
+          ],
+          "index": 4,
+          "sourceIndex": 3
+        },
+        {
+          "start": {
+            "q": -2,
+            "r": 2
+          },
+          "middle": {
+            "q": -2,
+            "r": 1
+          },
+          "end": {
+            "q": -2,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": -2,
+              "r": 2
+            },
+            {
+              "q": -2,
+              "r": 1
+            },
+            {
+              "q": -2,
+              "r": 0
+            }
+          ],
+          "gene": "gather",
+          "rotation": 4,
+          "grade": 1,
+          "shape": [
+            0,
+            0
+          ],
+          "index": 5,
+          "sourceIndex": 4
+        },
+        {
+          "start": {
+            "q": -2,
+            "r": 0
+          },
+          "middle": {
+            "q": -1,
+            "r": 0
+          },
+          "end": {
+            "q": 0,
+            "r": -1
+          },
+          "points": [
+            {
+              "q": -2,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": -1
+            }
+          ],
+          "gene": "movement",
+          "rotation": 0,
+          "grade": 1,
+          "shape": [
+            0,
+            5
+          ],
+          "index": 6,
+          "sourceIndex": 5
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": -1
+          },
+          "middle": {
+            "q": 1,
+            "r": -1
+          },
+          "end": {
+            "q": 2,
+            "r": -1
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 2,
+              "r": -1
+            }
+          ],
+          "gene": "gather",
+          "rotation": 0,
+          "grade": 1,
+          "shape": [
+            0,
+            0
+          ],
+          "index": 7,
+          "sourceIndex": 6
+        },
+        {
+          "start": {
+            "q": 2,
+            "r": -1
+          },
+          "middle": {
+            "q": 2,
+            "r": -2
+          },
+          "end": {
+            "q": 1,
+            "r": -2
+          },
+          "points": [
+            {
+              "q": 2,
+              "r": -1
+            },
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            }
+          ],
+          "gene": "movement",
+          "rotation": 4,
+          "grade": 1,
+          "shape": [
+            0,
+            5
+          ],
+          "index": 8,
+          "sourceIndex": 7
+        },
+        {
+          "start": {
+            "q": 1,
+            "r": -2
+          },
+          "middle": {
+            "q": 0,
+            "r": -2
+          },
+          "end": {
+            "q": -1,
+            "r": -1
+          },
+          "points": [
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": -1,
+              "r": -1
+            }
+          ],
+          "gene": "movement",
+          "rotation": 3,
+          "grade": 1,
+          "shape": [
+            0,
+            5
+          ],
+          "index": 9,
+          "sourceIndex": 8
+        }
+      ],
+      "nativeTrace": {
+        "valid": true,
+        "closed": false,
+        "reason": "",
+        "occupied": 19,
+        "paths": [
+          {
+            "start": {
+              "q": 0,
+              "r": 0
+            },
+            "middle": {
+              "q": 1,
+              "r": 0
+            },
+            "end": {
+              "q": 2,
+              "r": 0
+            },
+            "points": [
+              {
+                "q": 0,
+                "r": 0
+              },
+              {
+                "q": 1,
+                "r": 0
+              },
+              {
+                "q": 2,
+                "r": 0
+              }
+            ],
+            "gene": "gather",
+            "rotation": 0,
+            "grade": 1
+          },
+          {
+            "start": {
+              "q": 2,
+              "r": 0
+            },
+            "middle": {
+              "q": 1,
+              "r": 1
+            },
+            "end": {
+              "q": 0,
+              "r": 2
+            },
+            "points": [
+              {
+                "q": 2,
+                "r": 0
+              },
+              {
+                "q": 1,
+                "r": 1
+              },
+              {
+                "q": 0,
+                "r": 2
+              }
+            ],
+            "gene": "gather",
+            "rotation": 2,
+            "grade": 1
+          },
+          {
+            "start": {
+              "q": 0,
+              "r": 2
+            },
+            "middle": {
+              "q": -1,
+              "r": 2
+            },
+            "end": {
+              "q": 0,
+              "r": 1
+            },
+            "points": [
+              {
+                "q": 0,
+                "r": 2
+              },
+              {
+                "q": -1,
+                "r": 2
+              },
+              {
+                "q": 0,
+                "r": 1
+              }
+            ],
+            "gene": "health",
+            "rotation": 3,
+            "grade": 1
+          },
+          {
+            "start": {
+              "q": 0,
+              "r": 1
+            },
+            "middle": {
+              "q": -1,
+              "r": 1
+            },
+            "end": {
+              "q": -2,
+              "r": 2
+            },
+            "points": [
+              {
+                "q": 0,
+                "r": 1
+              },
+              {
+                "q": -1,
+                "r": 1
+              },
+              {
+                "q": -2,
+                "r": 2
+              }
+            ],
+            "gene": "movement",
+            "rotation": 3,
+            "grade": 1
+          },
+          {
+            "start": {
+              "q": -2,
+              "r": 2
+            },
+            "middle": {
+              "q": -2,
+              "r": 1
+            },
+            "end": {
+              "q": -2,
+              "r": 0
+            },
+            "points": [
+              {
+                "q": -2,
+                "r": 2
+              },
+              {
+                "q": -2,
+                "r": 1
+              },
+              {
+                "q": -2,
+                "r": 0
+              }
+            ],
+            "gene": "gather",
+            "rotation": 4,
+            "grade": 1
+          },
+          {
+            "start": {
+              "q": -2,
+              "r": 0
+            },
+            "middle": {
+              "q": -1,
+              "r": 0
+            },
+            "end": {
+              "q": 0,
+              "r": -1
+            },
+            "points": [
+              {
+                "q": -2,
+                "r": 0
+              },
+              {
+                "q": -1,
+                "r": 0
+              },
+              {
+                "q": 0,
+                "r": -1
+              }
+            ],
+            "gene": "movement",
+            "rotation": 0,
+            "grade": 1
+          },
+          {
+            "start": {
+              "q": 0,
+              "r": -1
+            },
+            "middle": {
+              "q": 1,
+              "r": -1
+            },
+            "end": {
+              "q": 2,
+              "r": -1
+            },
+            "points": [
+              {
+                "q": 0,
+                "r": -1
+              },
+              {
+                "q": 1,
+                "r": -1
+              },
+              {
+                "q": 2,
+                "r": -1
+              }
+            ],
+            "gene": "gather",
+            "rotation": 0,
+            "grade": 1
+          },
+          {
+            "start": {
+              "q": 2,
+              "r": -1
+            },
+            "middle": {
+              "q": 2,
+              "r": -2
+            },
+            "end": {
+              "q": 1,
+              "r": -2
+            },
+            "points": [
+              {
+                "q": 2,
+                "r": -1
+              },
+              {
+                "q": 2,
+                "r": -2
+              },
+              {
+                "q": 1,
+                "r": -2
+              }
+            ],
+            "gene": "movement",
+            "rotation": 4,
+            "grade": 1
+          },
+          {
+            "start": {
+              "q": 1,
+              "r": -2
+            },
+            "middle": {
+              "q": 0,
+              "r": -2
+            },
+            "end": {
+              "q": -1,
+              "r": -1
+            },
+            "points": [
+              {
+                "q": 1,
+                "r": -2
+              },
+              {
+                "q": 0,
+                "r": -2
+              },
+              {
+                "q": -1,
+                "r": -1
+              }
+            ],
+            "gene": "movement",
+            "rotation": 3,
+            "grade": 1
+          }
+        ]
+      },
+      "occupied": 19,
+      "catalogValidationClaim": false
+    },
+    "melee": {
+      "role": "melee",
+      "path": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 2,
+          "r": -1
+        },
+        {
+          "q": 2,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": -1,
+          "r": 2
+        },
+        {
+          "q": -2,
+          "r": 2
+        },
+        {
+          "q": -2,
+          "r": 1
+        },
+        {
+          "q": -1,
+          "r": 1
+        },
+        {
+          "q": -1,
+          "r": 0
+        },
+        {
+          "q": -2,
+          "r": 0
+        },
+        {
+          "q": -1,
+          "r": -1
+        },
+        {
+          "q": 0,
+          "r": -1
+        },
+        {
+          "q": 0,
+          "r": -2
+        },
+        {
+          "q": 1,
+          "r": -2
+        },
+        {
+          "q": 2,
+          "r": -2
+        },
+        {
+          "q": 1,
+          "r": -1
+        }
+      ],
+      "pieces": [
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "blade",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "blade",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "blade",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            2
+          ]
+        }
+      ],
+      "counts": {
+        "movement": 2,
+        "blade": 3,
+        "health": 4
+      },
+      "stats": {
+        "gatherCount": 0,
+        "bladeCount": 3,
+        "antennaCount": 0,
+        "healerCount": 0,
+        "secretionCount": 0,
+        "melee": true,
+        "ranged": false,
+        "meleePower": 6,
+        "meleeSpeed": 0.5,
+        "rangedPower": 0,
+        "rangedSpeed": 0,
+        "healer": false,
+        "health": 50,
+        "power": 6,
+        "hits": 1,
+        "speed": 0.5,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "capacity": 0,
+        "harvest": 0,
+        "harvestTime": 0,
+        "movement": 0.33,
+        "vision": 1,
+        "scale": 1.09,
+        "roaming": false,
+        "comboPower": 50,
+        "critical": 0,
+        "criticalPower": 150,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 100,
+        "tenacity": 0,
+        "reduction": 0,
+        "loadSpeed": 0,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0.12,
+        "focus": 0.3
+      },
+      "cost": 63,
+      "layout": "ham-all-2087",
+      "shownPreviously": false,
+      "mirrorFlag": false,
+      "originalLayout": {
+        "path": [
+          {
+            "q": 0,
+            "r": 0
+          },
+          {
+            "q": 1,
+            "r": 0
+          },
+          {
+            "q": 2,
+            "r": -1
+          },
+          {
+            "q": 2,
+            "r": 0
+          },
+          {
+            "q": 1,
+            "r": 1
+          },
+          {
+            "q": 0,
+            "r": 2
+          },
+          {
+            "q": 0,
+            "r": 1
+          },
+          {
+            "q": -1,
+            "r": 2
+          },
+          {
+            "q": -2,
+            "r": 2
+          },
+          {
+            "q": -2,
+            "r": 1
+          },
+          {
+            "q": -1,
+            "r": 1
+          },
+          {
+            "q": -1,
+            "r": 0
+          },
+          {
+            "q": -2,
+            "r": 0
+          },
+          {
+            "q": -1,
+            "r": -1
+          },
+          {
+            "q": 0,
+            "r": -1
+          },
+          {
+            "q": 0,
+            "r": -2
+          },
+          {
+            "q": 1,
+            "r": -2
+          },
+          {
+            "q": 2,
+            "r": -2
+          },
+          {
+            "q": 1,
+            "r": -1
+          }
+        ],
+        "pieces": [
+          {
+            "start": {
+              "q": 0,
+              "r": 0
+            },
+            "middle": {
+              "q": 1,
+              "r": 0
+            },
+            "end": {
+              "q": 2,
+              "r": -1
+            },
+            "points": [
+              {
+                "q": 0,
+                "r": 0
+              },
+              {
+                "q": 1,
+                "r": 0
+              },
+              {
+                "q": 2,
+                "r": -1
+              }
+            ],
+            "gene": "movement",
+            "rotation": 0,
+            "grade": 1,
+            "shape": [
+              0,
+              5
+            ],
+            "index": 1,
+            "sourceIndex": 0
+          },
+          {
+            "start": {
+              "q": 2,
+              "r": -1
+            },
+            "middle": {
+              "q": 2,
+              "r": 0
+            },
+            "end": {
+              "q": 1,
+              "r": 1
+            },
+            "points": [
+              {
+                "q": 2,
+                "r": -1
+              },
+              {
+                "q": 2,
+                "r": 0
+              },
+              {
+                "q": 1,
+                "r": 1
+              }
+            ],
+            "gene": "blade",
+            "rotation": 1,
+            "grade": 1,
+            "shape": [
+              0,
+              1
+            ],
+            "index": 2,
+            "sourceIndex": 1
+          },
+          {
+            "start": {
+              "q": 1,
+              "r": 1
+            },
+            "middle": {
+              "q": 0,
+              "r": 2
+            },
+            "end": {
+              "q": 0,
+              "r": 1
+            },
+            "points": [
+              {
+                "q": 1,
+                "r": 1
+              },
+              {
+                "q": 0,
+                "r": 2
+              },
+              {
+                "q": 0,
+                "r": 1
+              }
+            ],
+            "gene": "health",
+            "rotation": 2,
+            "grade": 1,
+            "shape": [
+              0,
+              2
+            ],
+            "index": 3,
+            "sourceIndex": 2
+          },
+          {
+            "start": {
+              "q": 0,
+              "r": 1
+            },
+            "middle": {
+              "q": -1,
+              "r": 2
+            },
+            "end": {
+              "q": -2,
+              "r": 2
+            },
+            "points": [
+              {
+                "q": 0,
+                "r": 1
+              },
+              {
+                "q": -1,
+                "r": 2
+              },
+              {
+                "q": -2,
+                "r": 2
+              }
+            ],
+            "gene": "blade",
+            "rotation": 2,
+            "grade": 1,
+            "shape": [
+              0,
+              1
+            ],
+            "index": 4,
+            "sourceIndex": 3
+          },
+          {
+            "start": {
+              "q": -2,
+              "r": 2
+            },
+            "middle": {
+              "q": -2,
+              "r": 1
+            },
+            "end": {
+              "q": -1,
+              "r": 1
+            },
+            "points": [
+              {
+                "q": -2,
+                "r": 2
+              },
+              {
+                "q": -2,
+                "r": 1
+              },
+              {
+                "q": -1,
+                "r": 1
+              }
+            ],
+            "gene": "health",
+            "rotation": 4,
+            "grade": 1,
+            "shape": [
+              0,
+              2
+            ],
+            "index": 5,
+            "sourceIndex": 4
+          },
+          {
+            "start": {
+              "q": -1,
+              "r": 1
+            },
+            "middle": {
+              "q": -1,
+              "r": 0
+            },
+            "end": {
+              "q": -2,
+              "r": 0
+            },
+            "points": [
+              {
+                "q": -1,
+                "r": 1
+              },
+              {
+                "q": -1,
+                "r": 0
+              },
+              {
+                "q": -2,
+                "r": 0
+              }
+            ],
+            "gene": "movement",
+            "rotation": 4,
+            "grade": 1,
+            "shape": [
+              0,
+              5
+            ],
+            "index": 6,
+            "sourceIndex": 5
+          },
+          {
+            "start": {
+              "q": -2,
+              "r": 0
+            },
+            "middle": {
+              "q": -1,
+              "r": -1
+            },
+            "end": {
+              "q": 0,
+              "r": -1
+            },
+            "points": [
+              {
+                "q": -2,
+                "r": 0
+              },
+              {
+                "q": -1,
+                "r": -1
+              },
+              {
+                "q": 0,
+                "r": -1
+              }
+            ],
+            "gene": "blade",
+            "rotation": 5,
+            "grade": 1,
+            "shape": [
+              0,
+              1
+            ],
+            "index": 7,
+            "sourceIndex": 6
+          },
+          {
+            "start": {
+              "q": 0,
+              "r": -1
+            },
+            "middle": {
+              "q": 0,
+              "r": -2
+            },
+            "end": {
+              "q": 1,
+              "r": -2
+            },
+            "points": [
+              {
+                "q": 0,
+                "r": -1
+              },
+              {
+                "q": 0,
+                "r": -2
+              },
+              {
+                "q": 1,
+                "r": -2
+              }
+            ],
+            "gene": "health",
+            "rotation": 4,
+            "grade": 1,
+            "shape": [
+              0,
+              2
+            ],
+            "index": 8,
+            "sourceIndex": 7
+          },
+          {
+            "start": {
+              "q": 1,
+              "r": -2
+            },
+            "middle": {
+              "q": 2,
+              "r": -2
+            },
+            "end": {
+              "q": 1,
+              "r": -1
+            },
+            "points": [
+              {
+                "q": 1,
+                "r": -2
+              },
+              {
+                "q": 2,
+                "r": -2
+              },
+              {
+                "q": 1,
+                "r": -1
+              }
+            ],
+            "gene": "health",
+            "rotation": 0,
+            "grade": 1,
+            "shape": [
+              0,
+              2
+            ],
+            "index": 9,
+            "sourceIndex": 8
+          }
+        ]
+      },
+      "sourceFile": "Research/Dna/2026-11-04/fill/hamiltonian/count.mjs",
+      "orientedPieces": [
+        {
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": 1,
+            "r": 0
+          },
+          "end": {
+            "q": 2,
+            "r": -1
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": -1
+            }
+          ],
+          "gene": "movement",
+          "rotation": 0,
+          "grade": 1,
+          "shape": [
+            0,
+            5
+          ],
+          "index": 1,
+          "sourceIndex": 0
+        },
+        {
+          "start": {
+            "q": 2,
+            "r": -1
+          },
+          "middle": {
+            "q": 2,
+            "r": 0
+          },
+          "end": {
+            "q": 1,
+            "r": 1
+          },
+          "points": [
+            {
+              "q": 2,
+              "r": -1
+            },
+            {
+              "q": 2,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 1
+            }
+          ],
+          "gene": "blade",
+          "rotation": 1,
+          "grade": 1,
+          "shape": [
+            0,
+            1
+          ],
+          "index": 2,
+          "sourceIndex": 1
+        },
+        {
+          "start": {
+            "q": 1,
+            "r": 1
+          },
+          "middle": {
+            "q": 0,
+            "r": 2
+          },
+          "end": {
+            "q": 0,
+            "r": 1
+          },
+          "points": [
+            {
+              "q": 1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 2
+            },
+            {
+              "q": 0,
+              "r": 1
+            }
+          ],
+          "gene": "health",
+          "rotation": 2,
+          "grade": 1,
+          "shape": [
+            0,
+            2
+          ],
+          "index": 3,
+          "sourceIndex": 2
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": 1
+          },
+          "middle": {
+            "q": -1,
+            "r": 2
+          },
+          "end": {
+            "q": -2,
+            "r": 2
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": -2,
+              "r": 2
+            }
+          ],
+          "gene": "blade",
+          "rotation": 2,
+          "grade": 1,
+          "shape": [
+            0,
+            1
+          ],
+          "index": 4,
+          "sourceIndex": 3
+        },
+        {
+          "start": {
+            "q": -2,
+            "r": 2
+          },
+          "middle": {
+            "q": -2,
+            "r": 1
+          },
+          "end": {
+            "q": -1,
+            "r": 1
+          },
+          "points": [
+            {
+              "q": -2,
+              "r": 2
+            },
+            {
+              "q": -2,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 1
+            }
+          ],
+          "gene": "health",
+          "rotation": 4,
+          "grade": 1,
+          "shape": [
+            0,
+            2
+          ],
+          "index": 5,
+          "sourceIndex": 4
+        },
+        {
+          "start": {
+            "q": -1,
+            "r": 1
+          },
+          "middle": {
+            "q": -1,
+            "r": 0
+          },
+          "end": {
+            "q": -2,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -2,
+              "r": 0
+            }
+          ],
+          "gene": "movement",
+          "rotation": 4,
+          "grade": 1,
+          "shape": [
+            0,
+            5
+          ],
+          "index": 6,
+          "sourceIndex": 5
+        },
+        {
+          "start": {
+            "q": -2,
+            "r": 0
+          },
+          "middle": {
+            "q": -1,
+            "r": -1
+          },
+          "end": {
+            "q": 0,
+            "r": -1
+          },
+          "points": [
+            {
+              "q": -2,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            }
+          ],
+          "gene": "blade",
+          "rotation": 5,
+          "grade": 1,
+          "shape": [
+            0,
+            1
+          ],
+          "index": 7,
+          "sourceIndex": 6
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": -1
+          },
+          "middle": {
+            "q": 0,
+            "r": -2
+          },
+          "end": {
+            "q": 1,
+            "r": -2
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            }
+          ],
+          "gene": "health",
+          "rotation": 4,
+          "grade": 1,
+          "shape": [
+            0,
+            2
+          ],
+          "index": 8,
+          "sourceIndex": 7
+        },
+        {
+          "start": {
+            "q": 1,
+            "r": -2
+          },
+          "middle": {
+            "q": 2,
+            "r": -2
+          },
+          "end": {
+            "q": 1,
+            "r": -1
+          },
+          "points": [
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -1
+            }
+          ],
+          "gene": "health",
+          "rotation": 0,
+          "grade": 1,
+          "shape": [
+            0,
+            2
+          ],
+          "index": 9,
+          "sourceIndex": 8
+        }
+      ],
+      "nativeTrace": {
+        "valid": true,
+        "closed": false,
+        "reason": "",
+        "occupied": 19,
+        "paths": [
+          {
+            "start": {
+              "q": 0,
+              "r": 0
+            },
+            "middle": {
+              "q": 1,
+              "r": 0
+            },
+            "end": {
+              "q": 2,
+              "r": -1
+            },
+            "points": [
+              {
+                "q": 0,
+                "r": 0
+              },
+              {
+                "q": 1,
+                "r": 0
+              },
+              {
+                "q": 2,
+                "r": -1
+              }
+            ],
+            "gene": "movement",
+            "rotation": 0,
+            "grade": 1
+          },
+          {
+            "start": {
+              "q": 2,
+              "r": -1
+            },
+            "middle": {
+              "q": 2,
+              "r": 0
+            },
+            "end": {
+              "q": 1,
+              "r": 1
+            },
+            "points": [
+              {
+                "q": 2,
+                "r": -1
+              },
+              {
+                "q": 2,
+                "r": 0
+              },
+              {
+                "q": 1,
+                "r": 1
+              }
+            ],
+            "gene": "blade",
+            "rotation": 1,
+            "grade": 1
+          },
+          {
+            "start": {
+              "q": 1,
+              "r": 1
+            },
+            "middle": {
+              "q": 0,
+              "r": 2
+            },
+            "end": {
+              "q": 0,
+              "r": 1
+            },
+            "points": [
+              {
+                "q": 1,
+                "r": 1
+              },
+              {
+                "q": 0,
+                "r": 2
+              },
+              {
+                "q": 0,
+                "r": 1
+              }
+            ],
+            "gene": "health",
+            "rotation": 2,
+            "grade": 1
+          },
+          {
+            "start": {
+              "q": 0,
+              "r": 1
+            },
+            "middle": {
+              "q": -1,
+              "r": 2
+            },
+            "end": {
+              "q": -2,
+              "r": 2
+            },
+            "points": [
+              {
+                "q": 0,
+                "r": 1
+              },
+              {
+                "q": -1,
+                "r": 2
+              },
+              {
+                "q": -2,
+                "r": 2
+              }
+            ],
+            "gene": "blade",
+            "rotation": 2,
+            "grade": 1
+          },
+          {
+            "start": {
+              "q": -2,
+              "r": 2
+            },
+            "middle": {
+              "q": -2,
+              "r": 1
+            },
+            "end": {
+              "q": -1,
+              "r": 1
+            },
+            "points": [
+              {
+                "q": -2,
+                "r": 2
+              },
+              {
+                "q": -2,
+                "r": 1
+              },
+              {
+                "q": -1,
+                "r": 1
+              }
+            ],
+            "gene": "health",
+            "rotation": 4,
+            "grade": 1
+          },
+          {
+            "start": {
+              "q": -1,
+              "r": 1
+            },
+            "middle": {
+              "q": -1,
+              "r": 0
+            },
+            "end": {
+              "q": -2,
+              "r": 0
+            },
+            "points": [
+              {
+                "q": -1,
+                "r": 1
+              },
+              {
+                "q": -1,
+                "r": 0
+              },
+              {
+                "q": -2,
+                "r": 0
+              }
+            ],
+            "gene": "movement",
+            "rotation": 4,
+            "grade": 1
+          },
+          {
+            "start": {
+              "q": -2,
+              "r": 0
+            },
+            "middle": {
+              "q": -1,
+              "r": -1
+            },
+            "end": {
+              "q": 0,
+              "r": -1
+            },
+            "points": [
+              {
+                "q": -2,
+                "r": 0
+              },
+              {
+                "q": -1,
+                "r": -1
+              },
+              {
+                "q": 0,
+                "r": -1
+              }
+            ],
+            "gene": "blade",
+            "rotation": 5,
+            "grade": 1
+          },
+          {
+            "start": {
+              "q": 0,
+              "r": -1
+            },
+            "middle": {
+              "q": 0,
+              "r": -2
+            },
+            "end": {
+              "q": 1,
+              "r": -2
+            },
+            "points": [
+              {
+                "q": 0,
+                "r": -1
+              },
+              {
+                "q": 0,
+                "r": -2
+              },
+              {
+                "q": 1,
+                "r": -2
+              }
+            ],
+            "gene": "health",
+            "rotation": 4,
+            "grade": 1
+          },
+          {
+            "start": {
+              "q": 1,
+              "r": -2
+            },
+            "middle": {
+              "q": 2,
+              "r": -2
+            },
+            "end": {
+              "q": 1,
+              "r": -1
+            },
+            "points": [
+              {
+                "q": 1,
+                "r": -2
+              },
+              {
+                "q": 2,
+                "r": -2
+              },
+              {
+                "q": 1,
+                "r": -1
+              }
+            ],
+            "gene": "health",
+            "rotation": 0,
+            "grade": 1
+          }
+        ]
+      },
+      "occupied": 19,
+      "catalogValidationClaim": false
+    },
+    "ranged": {
+      "role": "ranged",
+      "path": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 2,
+          "r": 0
+        },
+        {
+          "q": 2,
+          "r": -1
+        },
+        {
+          "q": 1,
+          "r": -1
+        },
+        {
+          "q": 2,
+          "r": -2
+        },
+        {
+          "q": 1,
+          "r": -2
+        },
+        {
+          "q": 0,
+          "r": -1
+        },
+        {
+          "q": 0,
+          "r": -2
+        },
+        {
+          "q": -1,
+          "r": -1
+        },
+        {
+          "q": -1,
+          "r": 0
+        },
+        {
+          "q": -2,
+          "r": 0
+        },
+        {
+          "q": -2,
+          "r": 1
+        },
+        {
+          "q": -2,
+          "r": 2
+        },
+        {
+          "q": -1,
+          "r": 1
+        },
+        {
+          "q": -1,
+          "r": 2
+        },
+        {
+          "q": 0,
+          "r": 2
+        }
+      ],
+      "pieces": [
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "secretion",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "secretion",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "secretion",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            5
+          ]
+        }
+      ],
+      "counts": {
+        "health": 2,
+        "movement": 4,
+        "secretion": 3
+      },
+      "stats": {
+        "gatherCount": 0,
+        "bladeCount": 0,
+        "antennaCount": 0,
+        "healerCount": 0,
+        "secretionCount": 3,
+        "melee": false,
+        "ranged": true,
+        "meleePower": 0,
+        "meleeSpeed": 0,
+        "rangedPower": 4.199999999999999,
+        "rangedSpeed": 0.5,
+        "healer": false,
+        "health": 30,
+        "power": 4.199999999999999,
+        "hits": 1,
+        "speed": 0.5,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "capacity": 0,
+        "harvest": 0,
+        "harvestTime": 0,
+        "movement": 0.41000000000000003,
+        "vision": 1,
+        "scale": 1.09,
+        "roaming": false,
+        "comboPower": 50,
+        "critical": 0,
+        "criticalPower": 150,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 100,
+        "tenacity": 0,
+        "reduction": 0,
+        "loadSpeed": 0,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0.12,
+        "focus": 0.3
+      },
+      "cost": 63,
+      "layout": "ham-all-985",
+      "shownPreviously": false,
+      "mirrorFlag": false,
+      "originalLayout": {
+        "path": [
+          {
+            "q": 0,
+            "r": 0
+          },
+          {
+            "q": 1,
+            "r": 0
+          },
+          {
+            "q": 0,
+            "r": 1
+          },
+          {
+            "q": 1,
+            "r": 1
+          },
+          {
+            "q": 2,
+            "r": 0
+          },
+          {
+            "q": 2,
+            "r": -1
+          },
+          {
+            "q": 1,
+            "r": -1
+          },
+          {
+            "q": 2,
+            "r": -2
+          },
+          {
+            "q": 1,
+            "r": -2
+          },
+          {
+            "q": 0,
+            "r": -1
+          },
+          {
+            "q": 0,
+            "r": -2
+          },
+          {
+            "q": -1,
+            "r": -1
+          },
+          {
+            "q": -1,
+            "r": 0
+          },
+          {
+            "q": -2,
+            "r": 0
+          },
+          {
+            "q": -2,
+            "r": 1
+          },
+          {
+            "q": -2,
+            "r": 2
+          },
+          {
+            "q": -1,
+            "r": 1
+          },
+          {
+            "q": -1,
+            "r": 2
+          },
+          {
+            "q": 0,
+            "r": 2
+          }
+        ],
+        "pieces": [
+          {
+            "start": {
+              "q": 0,
+              "r": 0
+            },
+            "middle": {
+              "q": 1,
+              "r": 0
+            },
+            "end": {
+              "q": 0,
+              "r": 1
+            },
+            "points": [
+              {
+                "q": 0,
+                "r": 0
+              },
+              {
+                "q": 1,
+                "r": 0
+              },
+              {
+                "q": 0,
+                "r": 1
+              }
+            ],
+            "gene": "health",
+            "rotation": 0,
+            "grade": 1,
+            "shape": [
+              0,
+              2
+            ],
+            "index": 1,
+            "sourceIndex": 0
+          },
+          {
+            "start": {
+              "q": 0,
+              "r": 1
+            },
+            "middle": {
+              "q": 1,
+              "r": 1
+            },
+            "end": {
+              "q": 2,
+              "r": 0
+            },
+            "points": [
+              {
+                "q": 0,
+                "r": 1
+              },
+              {
+                "q": 1,
+                "r": 1
+              },
+              {
+                "q": 2,
+                "r": 0
+              }
+            ],
+            "gene": "movement",
+            "rotation": 0,
+            "grade": 1,
+            "shape": [
+              0,
+              5
+            ],
+            "index": 2,
+            "sourceIndex": 1
+          },
+          {
+            "start": {
+              "q": 2,
+              "r": 0
+            },
+            "middle": {
+              "q": 2,
+              "r": -1
+            },
+            "end": {
+              "q": 1,
+              "r": -1
+            },
+            "points": [
+              {
+                "q": 2,
+                "r": 0
+              },
+              {
+                "q": 2,
+                "r": -1
+              },
+              {
+                "q": 1,
+                "r": -1
+              }
+            ],
+            "gene": "movement",
+            "rotation": 4,
+            "grade": 1,
+            "shape": [
+              0,
+              5
+            ],
+            "index": 3,
+            "sourceIndex": 2
+          },
+          {
+            "start": {
+              "q": 1,
+              "r": -1
+            },
+            "middle": {
+              "q": 2,
+              "r": -2
+            },
+            "end": {
+              "q": 1,
+              "r": -2
+            },
+            "points": [
+              {
+                "q": 1,
+                "r": -1
+              },
+              {
+                "q": 2,
+                "r": -2
+              },
+              {
+                "q": 1,
+                "r": -2
+              }
+            ],
+            "gene": "secretion",
+            "rotation": 5,
+            "grade": 1,
+            "shape": [
+              0,
+              4
+            ],
+            "index": 4,
+            "sourceIndex": 3
+          },
+          {
+            "start": {
+              "q": 1,
+              "r": -2
+            },
+            "middle": {
+              "q": 0,
+              "r": -1
+            },
+            "end": {
+              "q": 0,
+              "r": -2
+            },
+            "points": [
+              {
+                "q": 1,
+                "r": -2
+              },
+              {
+                "q": 0,
+                "r": -1
+              },
+              {
+                "q": 0,
+                "r": -2
+              }
+            ],
+            "gene": "health",
+            "rotation": 2,
+            "grade": 1,
+            "shape": [
+              0,
+              2
+            ],
+            "index": 5,
+            "sourceIndex": 4
+          },
+          {
+            "start": {
+              "q": 0,
+              "r": -2
+            },
+            "middle": {
+              "q": -1,
+              "r": -1
+            },
+            "end": {
+              "q": -1,
+              "r": 0
+            },
+            "points": [
+              {
+                "q": 0,
+                "r": -2
+              },
+              {
+                "q": -1,
+                "r": -1
+              },
+              {
+                "q": -1,
+                "r": 0
+              }
+            ],
+            "gene": "movement",
+            "rotation": 2,
+            "grade": 1,
+            "shape": [
+              0,
+              5
+            ],
+            "index": 6,
+            "sourceIndex": 5
+          },
+          {
+            "start": {
+              "q": -1,
+              "r": 0
+            },
+            "middle": {
+              "q": -2,
+              "r": 0
+            },
+            "end": {
+              "q": -2,
+              "r": 1
+            },
+            "points": [
+              {
+                "q": -1,
+                "r": 0
+              },
+              {
+                "q": -2,
+                "r": 0
+              },
+              {
+                "q": -2,
+                "r": 1
+              }
+            ],
+            "gene": "secretion",
+            "rotation": 3,
+            "grade": 1,
+            "shape": [
+              0,
+              4
+            ],
+            "index": 7,
+            "sourceIndex": 6
+          },
+          {
+            "start": {
+              "q": -2,
+              "r": 1
+            },
+            "middle": {
+              "q": -2,
+              "r": 2
+            },
+            "end": {
+              "q": -1,
+              "r": 1
+            },
+            "points": [
+              {
+                "q": -2,
+                "r": 1
+              },
+              {
+                "q": -2,
+                "r": 2
+              },
+              {
+                "q": -1,
+                "r": 1
+              }
+            ],
+            "gene": "secretion",
+            "rotation": 1,
+            "grade": 1,
+            "shape": [
+              0,
+              4
+            ],
+            "index": 8,
+            "sourceIndex": 7
+          },
+          {
+            "start": {
+              "q": -1,
+              "r": 1
+            },
+            "middle": {
+              "q": -1,
+              "r": 2
+            },
+            "end": {
+              "q": 0,
+              "r": 2
+            },
+            "points": [
+              {
+                "q": -1,
+                "r": 1
+              },
+              {
+                "q": -1,
+                "r": 2
+              },
+              {
+                "q": 0,
+                "r": 2
+              }
+            ],
+            "gene": "movement",
+            "rotation": 1,
+            "grade": 1,
+            "shape": [
+              0,
+              5
+            ],
+            "index": 9,
+            "sourceIndex": 8
+          }
+        ]
+      },
+      "sourceFile": "Research/Dna/2026-11-04/fill/hamiltonian/count.mjs",
+      "orientedPieces": [
+        {
+          "start": {
+            "q": 0,
+            "r": 0
+          },
+          "middle": {
+            "q": 1,
+            "r": 0
+          },
+          "end": {
+            "q": 0,
+            "r": 1
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": 1
+            }
+          ],
+          "gene": "health",
+          "rotation": 0,
+          "grade": 1,
+          "shape": [
+            0,
+            2
+          ],
+          "index": 1,
+          "sourceIndex": 0
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": 1
+          },
+          "middle": {
+            "q": 1,
+            "r": 1
+          },
+          "end": {
+            "q": 2,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": 1
+            },
+            {
+              "q": 1,
+              "r": 1
+            },
+            {
+              "q": 2,
+              "r": 0
+            }
+          ],
+          "gene": "movement",
+          "rotation": 0,
+          "grade": 1,
+          "shape": [
+            0,
+            5
+          ],
+          "index": 2,
+          "sourceIndex": 1
+        },
+        {
+          "start": {
+            "q": 2,
+            "r": 0
+          },
+          "middle": {
+            "q": 2,
+            "r": -1
+          },
+          "end": {
+            "q": 1,
+            "r": -1
+          },
+          "points": [
+            {
+              "q": 2,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": -1
+            },
+            {
+              "q": 1,
+              "r": -1
+            }
+          ],
+          "gene": "movement",
+          "rotation": 4,
+          "grade": 1,
+          "shape": [
+            0,
+            5
+          ],
+          "index": 3,
+          "sourceIndex": 2
+        },
+        {
+          "start": {
+            "q": 1,
+            "r": -1
+          },
+          "middle": {
+            "q": 2,
+            "r": -2
+          },
+          "end": {
+            "q": 1,
+            "r": -2
+          },
+          "points": [
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            }
+          ],
+          "gene": "secretion",
+          "rotation": 5,
+          "grade": 1,
+          "shape": [
+            0,
+            4
+          ],
+          "index": 4,
+          "sourceIndex": 3
+        },
+        {
+          "start": {
+            "q": 1,
+            "r": -2
+          },
+          "middle": {
+            "q": 0,
+            "r": -1
+          },
+          "end": {
+            "q": 0,
+            "r": -2
+          },
+          "points": [
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            }
+          ],
+          "gene": "health",
+          "rotation": 2,
+          "grade": 1,
+          "shape": [
+            0,
+            2
+          ],
+          "index": 5,
+          "sourceIndex": 4
+        },
+        {
+          "start": {
+            "q": 0,
+            "r": -2
+          },
+          "middle": {
+            "q": -1,
+            "r": -1
+          },
+          "end": {
+            "q": -1,
+            "r": 0
+          },
+          "points": [
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": -1,
+              "r": 0
+            }
+          ],
+          "gene": "movement",
+          "rotation": 2,
+          "grade": 1,
+          "shape": [
+            0,
+            5
+          ],
+          "index": 6,
+          "sourceIndex": 5
+        },
+        {
+          "start": {
+            "q": -1,
+            "r": 0
+          },
+          "middle": {
+            "q": -2,
+            "r": 0
+          },
+          "end": {
+            "q": -2,
+            "r": 1
+          },
+          "points": [
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -2,
+              "r": 0
+            },
+            {
+              "q": -2,
+              "r": 1
+            }
+          ],
+          "gene": "secretion",
+          "rotation": 3,
+          "grade": 1,
+          "shape": [
+            0,
+            4
+          ],
+          "index": 7,
+          "sourceIndex": 6
+        },
+        {
+          "start": {
+            "q": -2,
+            "r": 1
+          },
+          "middle": {
+            "q": -2,
+            "r": 2
+          },
+          "end": {
+            "q": -1,
+            "r": 1
+          },
+          "points": [
+            {
+              "q": -2,
+              "r": 1
+            },
+            {
+              "q": -2,
+              "r": 2
+            },
+            {
+              "q": -1,
+              "r": 1
+            }
+          ],
+          "gene": "secretion",
+          "rotation": 1,
+          "grade": 1,
+          "shape": [
+            0,
+            4
+          ],
+          "index": 8,
+          "sourceIndex": 7
+        },
+        {
+          "start": {
+            "q": -1,
+            "r": 1
+          },
+          "middle": {
+            "q": -1,
+            "r": 2
+          },
+          "end": {
+            "q": 0,
+            "r": 2
+          },
+          "points": [
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": 0,
+              "r": 2
+            }
+          ],
+          "gene": "movement",
+          "rotation": 1,
+          "grade": 1,
+          "shape": [
+            0,
+            5
+          ],
+          "index": 9,
+          "sourceIndex": 8
+        }
+      ],
+      "nativeTrace": {
+        "valid": true,
+        "closed": false,
+        "reason": "",
+        "occupied": 19,
+        "paths": [
+          {
+            "start": {
+              "q": 0,
+              "r": 0
+            },
+            "middle": {
+              "q": 1,
+              "r": 0
+            },
+            "end": {
+              "q": 0,
+              "r": 1
+            },
+            "points": [
+              {
+                "q": 0,
+                "r": 0
+              },
+              {
+                "q": 1,
+                "r": 0
+              },
+              {
+                "q": 0,
+                "r": 1
+              }
+            ],
+            "gene": "health",
+            "rotation": 0,
+            "grade": 1
+          },
+          {
+            "start": {
+              "q": 0,
+              "r": 1
+            },
+            "middle": {
+              "q": 1,
+              "r": 1
+            },
+            "end": {
+              "q": 2,
+              "r": 0
+            },
+            "points": [
+              {
+                "q": 0,
+                "r": 1
+              },
+              {
+                "q": 1,
+                "r": 1
+              },
+              {
+                "q": 2,
+                "r": 0
+              }
+            ],
+            "gene": "movement",
+            "rotation": 0,
+            "grade": 1
+          },
+          {
+            "start": {
+              "q": 2,
+              "r": 0
+            },
+            "middle": {
+              "q": 2,
+              "r": -1
+            },
+            "end": {
+              "q": 1,
+              "r": -1
+            },
+            "points": [
+              {
+                "q": 2,
+                "r": 0
+              },
+              {
+                "q": 2,
+                "r": -1
+              },
+              {
+                "q": 1,
+                "r": -1
+              }
+            ],
+            "gene": "movement",
+            "rotation": 4,
+            "grade": 1
+          },
+          {
+            "start": {
+              "q": 1,
+              "r": -1
+            },
+            "middle": {
+              "q": 2,
+              "r": -2
+            },
+            "end": {
+              "q": 1,
+              "r": -2
+            },
+            "points": [
+              {
+                "q": 1,
+                "r": -1
+              },
+              {
+                "q": 2,
+                "r": -2
+              },
+              {
+                "q": 1,
+                "r": -2
+              }
+            ],
+            "gene": "secretion",
+            "rotation": 5,
+            "grade": 1
+          },
+          {
+            "start": {
+              "q": 1,
+              "r": -2
+            },
+            "middle": {
+              "q": 0,
+              "r": -1
+            },
+            "end": {
+              "q": 0,
+              "r": -2
+            },
+            "points": [
+              {
+                "q": 1,
+                "r": -2
+              },
+              {
+                "q": 0,
+                "r": -1
+              },
+              {
+                "q": 0,
+                "r": -2
+              }
+            ],
+            "gene": "health",
+            "rotation": 2,
+            "grade": 1
+          },
+          {
+            "start": {
+              "q": 0,
+              "r": -2
+            },
+            "middle": {
+              "q": -1,
+              "r": -1
+            },
+            "end": {
+              "q": -1,
+              "r": 0
+            },
+            "points": [
+              {
+                "q": 0,
+                "r": -2
+              },
+              {
+                "q": -1,
+                "r": -1
+              },
+              {
+                "q": -1,
+                "r": 0
+              }
+            ],
+            "gene": "movement",
+            "rotation": 2,
+            "grade": 1
+          },
+          {
+            "start": {
+              "q": -1,
+              "r": 0
+            },
+            "middle": {
+              "q": -2,
+              "r": 0
+            },
+            "end": {
+              "q": -2,
+              "r": 1
+            },
+            "points": [
+              {
+                "q": -1,
+                "r": 0
+              },
+              {
+                "q": -2,
+                "r": 0
+              },
+              {
+                "q": -2,
+                "r": 1
+              }
+            ],
+            "gene": "secretion",
+            "rotation": 3,
+            "grade": 1
+          },
+          {
+            "start": {
+              "q": -2,
+              "r": 1
+            },
+            "middle": {
+              "q": -2,
+              "r": 2
+            },
+            "end": {
+              "q": -1,
+              "r": 1
+            },
+            "points": [
+              {
+                "q": -2,
+                "r": 1
+              },
+              {
+                "q": -2,
+                "r": 2
+              },
+              {
+                "q": -1,
+                "r": 1
+              }
+            ],
+            "gene": "secretion",
+            "rotation": 1,
+            "grade": 1
+          },
+          {
+            "start": {
+              "q": -1,
+              "r": 1
+            },
+            "middle": {
+              "q": -1,
+              "r": 2
+            },
+            "end": {
+              "q": 0,
+              "r": 2
+            },
+            "points": [
+              {
+                "q": -1,
+                "r": 1
+              },
+              {
+                "q": -1,
+                "r": 2
+              },
+              {
+                "q": 0,
+                "r": 2
+              }
+            ],
+            "gene": "movement",
+            "rotation": 1,
+            "grade": 1
+          }
+        ]
+      },
+      "occupied": 19,
+      "catalogValidationClaim": false
+    }
+  },
+  "shownPreviouslyAlternatives": {
+    "worker": [
+      {
+        "layout": "ham0",
+        "shownPreviously": true,
+        "sourceFile": "Research/Dna/2026-11-04/fill/hamiltonian/hamiltonian.json",
+        "sourceIndex": 0,
+        "originalLayout": {
+          "criterion": "straight",
+          "score": 5988,
+          "signature": "9,10,11,15,18,17,16,12,7,3,0,1,2,6,5,4,8,13,14",
+          "path": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 2
+            },
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": -2,
+              "r": 2
+            },
+            {
+              "q": -2,
+              "r": 1
+            },
+            {
+              "q": -2,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 2,
+              "r": -1
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 1
+            }
+          ],
+          "pieces": [
+            {
+              "shape": [
+                0,
+                0
+              ],
+              "rotation": 0,
+              "type": "A",
+              "points": [
+                {
+                  "q": 0,
+                  "r": 0
+                },
+                {
+                  "q": 1,
+                  "r": 0
+                },
+                {
+                  "q": 2,
+                  "r": 0
+                }
+              ],
+              "index": 1
+            },
+            {
+              "shape": [
+                0,
+                0
+              ],
+              "rotation": 2,
+              "type": "A",
+              "points": [
+                {
+                  "q": 2,
+                  "r": 0
+                },
+                {
+                  "q": 1,
+                  "r": 1
+                },
+                {
+                  "q": 0,
+                  "r": 2
+                }
+              ],
+              "index": 2
+            },
+            {
+              "shape": [
+                0,
+                0
+              ],
+              "rotation": 3,
+              "type": "A",
+              "points": [
+                {
+                  "q": 0,
+                  "r": 2
+                },
+                {
+                  "q": -1,
+                  "r": 2
+                },
+                {
+                  "q": -2,
+                  "r": 2
+                }
+              ],
+              "index": 3
+            },
+            {
+              "shape": [
+                0,
+                0
+              ],
+              "rotation": 4,
+              "type": "A",
+              "points": [
+                {
+                  "q": -2,
+                  "r": 2
+                },
+                {
+                  "q": -2,
+                  "r": 1
+                },
+                {
+                  "q": -2,
+                  "r": 0
+                }
+              ],
+              "index": 4
+            },
+            {
+              "shape": [
+                0,
+                0
+              ],
+              "rotation": 5,
+              "type": "A",
+              "points": [
+                {
+                  "q": -2,
+                  "r": 0
+                },
+                {
+                  "q": -1,
+                  "r": -1
+                },
+                {
+                  "q": 0,
+                  "r": -2
+                }
+              ],
+              "index": 5
+            },
+            {
+              "shape": [
+                0,
+                0
+              ],
+              "rotation": 0,
+              "type": "A",
+              "points": [
+                {
+                  "q": 0,
+                  "r": -2
+                },
+                {
+                  "q": 1,
+                  "r": -2
+                },
+                {
+                  "q": 2,
+                  "r": -2
+                }
+              ],
+              "index": 6
+            },
+            {
+              "shape": [
+                0,
+                2
+              ],
+              "rotation": 1,
+              "type": "C",
+              "points": [
+                {
+                  "q": 2,
+                  "r": -2
+                },
+                {
+                  "q": 2,
+                  "r": -1
+                },
+                {
+                  "q": 1,
+                  "r": -1
+                }
+              ],
+              "index": 7
+            },
+            {
+              "shape": [
+                0,
+                5
+              ],
+              "rotation": 3,
+              "type": "B",
+              "points": [
+                {
+                  "q": 1,
+                  "r": -1
+                },
+                {
+                  "q": 0,
+                  "r": -1
+                },
+                {
+                  "q": -1,
+                  "r": 0
+                }
+              ],
+              "index": 8
+            },
+            {
+              "shape": [
+                0,
+                5
+              ],
+              "rotation": 1,
+              "type": "B",
+              "points": [
+                {
+                  "q": -1,
+                  "r": 0
+                },
+                {
+                  "q": -1,
+                  "r": 1
+                },
+                {
+                  "q": 0,
+                  "r": 1
+                }
+              ],
+              "index": 9
+            }
+          ],
+          "counts": {
+            "A": 6,
+            "B": 2,
+            "C": 1
+          },
+          "smooth": 12,
+          "outerWeight": 90
+        },
+        "mirrorFlag": false,
+        "codeCount": {
+          "0": 6,
+          "1": 0,
+          "2": 1,
+          "4": 0,
+          "5": 2
+        },
+        "orientedPieces": [
+          {
+            "sourceIndex": 0,
+            "points": [
+              {
+                "q": 0,
+                "r": 0
+              },
+              {
+                "q": 1,
+                "r": 0
+              },
+              {
+                "q": 2,
+                "r": 0
+              }
+            ],
+            "shape": [
+              0,
+              0
+            ],
+            "rotation": 0,
+            "grade": 1,
+            "index": 1,
+            "gene": "gather"
+          },
+          {
+            "sourceIndex": 1,
+            "points": [
+              {
+                "q": 2,
+                "r": 0
+              },
+              {
+                "q": 1,
+                "r": 1
+              },
+              {
+                "q": 0,
+                "r": 2
+              }
+            ],
+            "shape": [
+              0,
+              0
+            ],
+            "rotation": 2,
+            "grade": 1,
+            "index": 2,
+            "gene": "gather"
+          },
+          {
+            "sourceIndex": 2,
+            "points": [
+              {
+                "q": 0,
+                "r": 2
+              },
+              {
+                "q": -1,
+                "r": 2
+              },
+              {
+                "q": -2,
+                "r": 2
+              }
+            ],
+            "shape": [
+              0,
+              0
+            ],
+            "rotation": 3,
+            "grade": 1,
+            "index": 3,
+            "gene": "gather"
+          },
+          {
+            "sourceIndex": 3,
+            "points": [
+              {
+                "q": -2,
+                "r": 2
+              },
+              {
+                "q": -2,
+                "r": 1
+              },
+              {
+                "q": -2,
+                "r": 0
+              }
+            ],
+            "shape": [
+              0,
+              0
+            ],
+            "rotation": 4,
+            "grade": 1,
+            "index": 4,
+            "gene": "gather"
+          },
+          {
+            "sourceIndex": 4,
+            "points": [
+              {
+                "q": -2,
+                "r": 0
+              },
+              {
+                "q": -1,
+                "r": -1
+              },
+              {
+                "q": 0,
+                "r": -2
+              }
+            ],
+            "shape": [
+              0,
+              0
+            ],
+            "rotation": 5,
+            "grade": 1,
+            "index": 5,
+            "gene": "gather"
+          },
+          {
+            "sourceIndex": 5,
+            "points": [
+              {
+                "q": 0,
+                "r": -2
+              },
+              {
+                "q": 1,
+                "r": -2
+              },
+              {
+                "q": 2,
+                "r": -2
+              }
+            ],
+            "shape": [
+              0,
+              0
+            ],
+            "rotation": 0,
+            "grade": 1,
+            "index": 6,
+            "gene": "gather"
+          },
+          {
+            "sourceIndex": 6,
+            "points": [
+              {
+                "q": 2,
+                "r": -2
+              },
+              {
+                "q": 2,
+                "r": -1
+              },
+              {
+                "q": 1,
+                "r": -1
+              }
+            ],
+            "shape": [
+              0,
+              2
+            ],
+            "rotation": 1,
+            "grade": 1,
+            "index": 7,
+            "gene": "health"
+          },
+          {
+            "sourceIndex": 7,
+            "points": [
+              {
+                "q": 1,
+                "r": -1
+              },
+              {
+                "q": 0,
+                "r": -1
+              },
+              {
+                "q": -1,
+                "r": 0
+              }
+            ],
+            "shape": [
+              0,
+              5
+            ],
+            "rotation": 3,
+            "grade": 1,
+            "index": 8,
+            "gene": "movement"
+          },
+          {
+            "sourceIndex": 8,
+            "points": [
+              {
+                "q": -1,
+                "r": 0
+              },
+              {
+                "q": -1,
+                "r": 1
+              },
+              {
+                "q": 0,
+                "r": 1
+              }
+            ],
+            "shape": [
+              0,
+              5
+            ],
+            "rotation": 1,
+            "grade": 1,
+            "index": 9,
+            "gene": "movement"
+          }
+        ],
+        "pieces": [
+          {
+            "gene": "gather",
+            "grade": 1,
+            "shape": [
+              0,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "gene": "gather",
+            "grade": 1,
+            "shape": [
+              0,
+              0
+            ],
+            "rotation": 2
+          },
+          {
+            "gene": "gather",
+            "grade": 1,
+            "shape": [
+              0,
+              0
+            ],
+            "rotation": 3
+          },
+          {
+            "gene": "gather",
+            "grade": 1,
+            "shape": [
+              0,
+              0
+            ],
+            "rotation": 4
+          },
+          {
+            "gene": "gather",
+            "grade": 1,
+            "shape": [
+              0,
+              0
+            ],
+            "rotation": 5
+          },
+          {
+            "gene": "gather",
+            "grade": 1,
+            "shape": [
+              0,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "gene": "health",
+            "grade": 1,
+            "shape": [
+              0,
+              2
+            ],
+            "rotation": 1
+          },
+          {
+            "gene": "movement",
+            "grade": 1,
+            "shape": [
+              0,
+              5
+            ],
+            "rotation": 3
+          },
+          {
+            "gene": "movement",
+            "grade": 1,
+            "shape": [
+              0,
+              5
+            ],
+            "rotation": 1
+          }
+        ],
+        "counts": {
+          "gather": 6,
+          "health": 1,
+          "movement": 2
+        },
+        "stats": {
+          "gatherCount": 6,
+          "bladeCount": 0,
+          "antennaCount": 0,
+          "healerCount": 0,
+          "secretionCount": 0,
+          "melee": false,
+          "ranged": false,
+          "meleePower": 0,
+          "meleeSpeed": 0,
+          "rangedPower": 0,
+          "rangedSpeed": 0,
+          "healer": false,
+          "health": 20,
+          "power": 0,
+          "hits": 0,
+          "speed": 0,
+          "armor": 0,
+          "parry": 0,
+          "block": 0,
+          "evasion": 0,
+          "capacity": 6,
+          "harvest": 6,
+          "harvestTime": 4,
+          "movement": 0.33,
+          "vision": 1,
+          "scale": 1.09,
+          "roaming": false,
+          "comboPower": 0,
+          "critical": 0,
+          "criticalPower": 0,
+          "accuracy": 0,
+          "penetration": 0,
+          "blockPower": 50,
+          "counter": 0,
+          "counterPower": 0,
+          "tenacity": 0,
+          "reduction": 0,
+          "loadSpeed": 75,
+          "healing": 0,
+          "stun": 0,
+          "stunTime": 0,
+          "bleed": 0,
+          "bleedPower": 0,
+          "area": 0,
+          "areaPower": 0,
+          "lifesteal": 0,
+          "reflection": 0,
+          "regeneration": 0,
+          "comboSpeed": 0,
+          "focus": 0
+        },
+        "cost": 78,
+        "baseCost": 3,
+        "occupied": 19,
+        "nativeTrace": {
+          "valid": true,
+          "closed": false,
+          "reason": "",
+          "occupied": 19,
+          "actualOrientedPointsMatch": true,
+          "paths": [
+            {
+              "start": {
+                "q": 0,
+                "r": 0
+              },
+              "middle": {
+                "q": 1,
+                "r": 0
+              },
+              "end": {
+                "q": 2,
+                "r": 0
+              },
+              "points": [
+                {
+                  "q": 0,
+                  "r": 0
+                },
+                {
+                  "q": 1,
+                  "r": 0
+                },
+                {
+                  "q": 2,
+                  "r": 0
+                }
+              ],
+              "gene": "gather",
+              "rotation": 0,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": 2,
+                "r": 0
+              },
+              "middle": {
+                "q": 1,
+                "r": 1
+              },
+              "end": {
+                "q": 0,
+                "r": 2
+              },
+              "points": [
+                {
+                  "q": 2,
+                  "r": 0
+                },
+                {
+                  "q": 1,
+                  "r": 1
+                },
+                {
+                  "q": 0,
+                  "r": 2
+                }
+              ],
+              "gene": "gather",
+              "rotation": 2,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": 0,
+                "r": 2
+              },
+              "middle": {
+                "q": -1,
+                "r": 2
+              },
+              "end": {
+                "q": -2,
+                "r": 2
+              },
+              "points": [
+                {
+                  "q": 0,
+                  "r": 2
+                },
+                {
+                  "q": -1,
+                  "r": 2
+                },
+                {
+                  "q": -2,
+                  "r": 2
+                }
+              ],
+              "gene": "gather",
+              "rotation": 3,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": -2,
+                "r": 2
+              },
+              "middle": {
+                "q": -2,
+                "r": 1
+              },
+              "end": {
+                "q": -2,
+                "r": 0
+              },
+              "points": [
+                {
+                  "q": -2,
+                  "r": 2
+                },
+                {
+                  "q": -2,
+                  "r": 1
+                },
+                {
+                  "q": -2,
+                  "r": 0
+                }
+              ],
+              "gene": "gather",
+              "rotation": 4,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": -2,
+                "r": 0
+              },
+              "middle": {
+                "q": -1,
+                "r": -1
+              },
+              "end": {
+                "q": 0,
+                "r": -2
+              },
+              "points": [
+                {
+                  "q": -2,
+                  "r": 0
+                },
+                {
+                  "q": -1,
+                  "r": -1
+                },
+                {
+                  "q": 0,
+                  "r": -2
+                }
+              ],
+              "gene": "gather",
+              "rotation": 5,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": 0,
+                "r": -2
+              },
+              "middle": {
+                "q": 1,
+                "r": -2
+              },
+              "end": {
+                "q": 2,
+                "r": -2
+              },
+              "points": [
+                {
+                  "q": 0,
+                  "r": -2
+                },
+                {
+                  "q": 1,
+                  "r": -2
+                },
+                {
+                  "q": 2,
+                  "r": -2
+                }
+              ],
+              "gene": "gather",
+              "rotation": 0,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": 2,
+                "r": -2
+              },
+              "middle": {
+                "q": 2,
+                "r": -1
+              },
+              "end": {
+                "q": 1,
+                "r": -1
+              },
+              "points": [
+                {
+                  "q": 2,
+                  "r": -2
+                },
+                {
+                  "q": 2,
+                  "r": -1
+                },
+                {
+                  "q": 1,
+                  "r": -1
+                }
+              ],
+              "gene": "health",
+              "rotation": 1,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": 1,
+                "r": -1
+              },
+              "middle": {
+                "q": 0,
+                "r": -1
+              },
+              "end": {
+                "q": -1,
+                "r": 0
+              },
+              "points": [
+                {
+                  "q": 1,
+                  "r": -1
+                },
+                {
+                  "q": 0,
+                  "r": -1
+                },
+                {
+                  "q": -1,
+                  "r": 0
+                }
+              ],
+              "gene": "movement",
+              "rotation": 3,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": -1,
+                "r": 0
+              },
+              "middle": {
+                "q": -1,
+                "r": 1
+              },
+              "end": {
+                "q": 0,
+                "r": 1
+              },
+              "points": [
+                {
+                  "q": -1,
+                  "r": 0
+                },
+                {
+                  "q": -1,
+                  "r": 1
+                },
+                {
+                  "q": 0,
+                  "r": 1
+                }
+              ],
+              "gene": "movement",
+              "rotation": 1,
+              "grade": 1
+            }
+          ]
+        },
+        "catalogValidationClaim": false
+      }
+    ],
+    "melee": [
+      {
+        "layout": "dense0",
+        "shownPreviously": true,
+        "sourceFile": "Research/Dna/2026-11-04/fill/symmetric/dense.json",
+        "sourceIndex": 0,
+        "originalLayout": {
+          "joins": 4,
+          "pieces": [
+            {
+              "points": [
+                {
+                  "q": 0,
+                  "r": 0
+                },
+                {
+                  "q": 0,
+                  "r": -1
+                },
+                {
+                  "q": -1,
+                  "r": -1
+                }
+              ],
+              "type": "B",
+              "index": 1
+            },
+            {
+              "points": [
+                {
+                  "q": -1,
+                  "r": -1
+                },
+                {
+                  "q": 0,
+                  "r": -2
+                },
+                {
+                  "q": 1,
+                  "r": -2
+                }
+              ],
+              "type": "B",
+              "index": 2
+            },
+            {
+              "points": [
+                {
+                  "q": 1,
+                  "r": -2
+                },
+                {
+                  "q": 2,
+                  "r": -2
+                },
+                {
+                  "q": 2,
+                  "r": -1
+                }
+              ],
+              "type": "B",
+              "index": 3
+            },
+            {
+              "points": [
+                {
+                  "q": 2,
+                  "r": -1
+                },
+                {
+                  "q": 2,
+                  "r": 0
+                },
+                {
+                  "q": 1,
+                  "r": 1
+                }
+              ],
+              "type": "B",
+              "index": 4
+            },
+            {
+              "points": [
+                {
+                  "q": 1,
+                  "r": 1
+                },
+                {
+                  "q": 0,
+                  "r": 2
+                },
+                {
+                  "q": 0,
+                  "r": 1
+                }
+              ],
+              "type": "C",
+              "index": 5
+            },
+            {
+              "points": [
+                {
+                  "q": 0,
+                  "r": 1
+                },
+                {
+                  "q": -1,
+                  "r": 2
+                },
+                {
+                  "q": -1,
+                  "r": 1
+                }
+              ],
+              "type": "C",
+              "index": 6
+            },
+            {
+              "points": [
+                {
+                  "q": -1,
+                  "r": 1
+                },
+                {
+                  "q": -2,
+                  "r": 2
+                },
+                {
+                  "q": -2,
+                  "r": 1
+                }
+              ],
+              "type": "C",
+              "index": 7
+            },
+            {
+              "points": [
+                {
+                  "q": -2,
+                  "r": 1
+                },
+                {
+                  "q": -2,
+                  "r": 0
+                },
+                {
+                  "q": -1,
+                  "r": -1
+                }
+              ],
+              "type": "B",
+              "index": 8
+            },
+            {
+              "points": [
+                {
+                  "q": -1,
+                  "r": -1
+                },
+                {
+                  "q": -1,
+                  "r": 0
+                },
+                {
+                  "q": 0,
+                  "r": 0
+                }
+              ],
+              "type": "B",
+              "index": 9
+            },
+            {
+              "points": [
+                {
+                  "q": 0,
+                  "r": 0
+                },
+                {
+                  "q": 1,
+                  "r": -1
+                },
+                {
+                  "q": 2,
+                  "r": -1
+                }
+              ],
+              "type": "B",
+              "index": 10
+            },
+            {
+              "points": [
+                {
+                  "q": 2,
+                  "r": -1
+                },
+                {
+                  "q": 1,
+                  "r": 0
+                },
+                {
+                  "q": 0,
+                  "r": 0
+                }
+              ],
+              "type": "B",
+              "index": 11
+            }
+          ],
+          "counts": {
+            "A": 0,
+            "C": 3,
+            "B": 8
+          },
+          "sourceExample": 1,
+          "count": 11
+        },
+        "mirrorFlag": false,
+        "codeCount": {
+          "0": 0,
+          "1": 4,
+          "2": 3,
+          "4": 0,
+          "5": 4
+        },
+        "orientedPieces": [
+          {
+            "sourceIndex": 0,
+            "points": [
+              {
+                "q": 0,
+                "r": 0
+              },
+              {
+                "q": 0,
+                "r": -1
+              },
+              {
+                "q": -1,
+                "r": -1
+              }
+            ],
+            "shape": [
+              0,
+              5
+            ],
+            "rotation": 4,
+            "grade": 1,
+            "index": 1,
+            "gene": "movement"
+          },
+          {
+            "sourceIndex": 1,
+            "points": [
+              {
+                "q": -1,
+                "r": -1
+              },
+              {
+                "q": 0,
+                "r": -2
+              },
+              {
+                "q": 1,
+                "r": -2
+              }
+            ],
+            "shape": [
+              0,
+              1
+            ],
+            "rotation": 5,
+            "grade": 1,
+            "index": 2,
+            "gene": "blade"
+          },
+          {
+            "sourceIndex": 2,
+            "points": [
+              {
+                "q": 1,
+                "r": -2
+              },
+              {
+                "q": 2,
+                "r": -2
+              },
+              {
+                "q": 2,
+                "r": -1
+              }
+            ],
+            "shape": [
+              0,
+              1
+            ],
+            "rotation": 0,
+            "grade": 1,
+            "index": 3,
+            "gene": "blade"
+          },
+          {
+            "sourceIndex": 3,
+            "points": [
+              {
+                "q": 2,
+                "r": -1
+              },
+              {
+                "q": 2,
+                "r": 0
+              },
+              {
+                "q": 1,
+                "r": 1
+              }
+            ],
+            "shape": [
+              0,
+              1
+            ],
+            "rotation": 1,
+            "grade": 1,
+            "index": 4,
+            "gene": "blade"
+          },
+          {
+            "sourceIndex": 4,
+            "points": [
+              {
+                "q": 1,
+                "r": 1
+              },
+              {
+                "q": 0,
+                "r": 2
+              },
+              {
+                "q": 0,
+                "r": 1
+              }
+            ],
+            "shape": [
+              0,
+              2
+            ],
+            "rotation": 2,
+            "grade": 1,
+            "index": 5,
+            "gene": "health"
+          },
+          {
+            "sourceIndex": 5,
+            "points": [
+              {
+                "q": 0,
+                "r": 1
+              },
+              {
+                "q": -1,
+                "r": 2
+              },
+              {
+                "q": -1,
+                "r": 1
+              }
+            ],
+            "shape": [
+              0,
+              2
+            ],
+            "rotation": 2,
+            "grade": 1,
+            "index": 6,
+            "gene": "health"
+          },
+          {
+            "sourceIndex": 6,
+            "points": [
+              {
+                "q": -1,
+                "r": 1
+              },
+              {
+                "q": -2,
+                "r": 2
+              },
+              {
+                "q": -2,
+                "r": 1
+              }
+            ],
+            "shape": [
+              0,
+              2
+            ],
+            "rotation": 2,
+            "grade": 1,
+            "index": 7,
+            "gene": "health"
+          },
+          {
+            "sourceIndex": 7,
+            "points": [
+              {
+                "q": -2,
+                "r": 1
+              },
+              {
+                "q": -2,
+                "r": 0
+              },
+              {
+                "q": -1,
+                "r": -1
+              }
+            ],
+            "shape": [
+              0,
+              1
+            ],
+            "rotation": 4,
+            "grade": 1,
+            "index": 8,
+            "gene": "blade"
+          },
+          {
+            "sourceIndex": 8,
+            "points": [
+              {
+                "q": -1,
+                "r": -1
+              },
+              {
+                "q": -1,
+                "r": 0
+              },
+              {
+                "q": 0,
+                "r": 0
+              }
+            ],
+            "shape": [
+              0,
+              5
+            ],
+            "rotation": 1,
+            "grade": 1,
+            "index": 9,
+            "gene": "movement"
+          },
+          {
+            "sourceIndex": 10,
+            "points": [
+              {
+                "q": 0,
+                "r": 0
+              },
+              {
+                "q": 1,
+                "r": 0
+              },
+              {
+                "q": 2,
+                "r": -1
+              }
+            ],
+            "shape": [
+              0,
+              5
+            ],
+            "rotation": 0,
+            "grade": 1,
+            "index": 10,
+            "gene": "movement"
+          },
+          {
+            "sourceIndex": 9,
+            "points": [
+              {
+                "q": 2,
+                "r": -1
+              },
+              {
+                "q": 1,
+                "r": -1
+              },
+              {
+                "q": 0,
+                "r": 0
+              }
+            ],
+            "shape": [
+              0,
+              5
+            ],
+            "rotation": 3,
+            "grade": 1,
+            "index": 11,
+            "gene": "movement"
+          }
+        ],
+        "pieces": [
+          {
+            "gene": "movement",
+            "grade": 1,
+            "shape": [
+              0,
+              5
+            ],
+            "rotation": 4
+          },
+          {
+            "gene": "blade",
+            "grade": 1,
+            "shape": [
+              0,
+              1
+            ],
+            "rotation": 5
+          },
+          {
+            "gene": "blade",
+            "grade": 1,
+            "shape": [
+              0,
+              1
+            ],
+            "rotation": 0
+          },
+          {
+            "gene": "blade",
+            "grade": 1,
+            "shape": [
+              0,
+              1
+            ],
+            "rotation": 1
+          },
+          {
+            "gene": "health",
+            "grade": 1,
+            "shape": [
+              0,
+              2
+            ],
+            "rotation": 2
+          },
+          {
+            "gene": "health",
+            "grade": 1,
+            "shape": [
+              0,
+              2
+            ],
+            "rotation": 2
+          },
+          {
+            "gene": "health",
+            "grade": 1,
+            "shape": [
+              0,
+              2
+            ],
+            "rotation": 2
+          },
+          {
+            "gene": "blade",
+            "grade": 1,
+            "shape": [
+              0,
+              1
+            ],
+            "rotation": 4
+          },
+          {
+            "gene": "movement",
+            "grade": 1,
+            "shape": [
+              0,
+              5
+            ],
+            "rotation": 1
+          },
+          {
+            "gene": "movement",
+            "grade": 1,
+            "shape": [
+              0,
+              5
+            ],
+            "rotation": 0
+          },
+          {
+            "gene": "movement",
+            "grade": 1,
+            "shape": [
+              0,
+              5
+            ],
+            "rotation": 3
+          }
+        ],
+        "counts": {
+          "movement": 4,
+          "blade": 4,
+          "health": 3
+        },
+        "stats": {
+          "gatherCount": 0,
+          "bladeCount": 4,
+          "antennaCount": 0,
+          "healerCount": 0,
+          "secretionCount": 0,
+          "melee": true,
+          "ranged": false,
+          "meleePower": 8,
+          "meleeSpeed": 0.5,
+          "rangedPower": 0,
+          "rangedSpeed": 0,
+          "healer": false,
+          "health": 40,
+          "power": 8,
+          "hits": 1,
+          "speed": 0.5,
+          "armor": 0,
+          "parry": 0,
+          "block": 0,
+          "evasion": 0,
+          "capacity": 0,
+          "harvest": 0,
+          "harvestTime": 0,
+          "movement": 0.41000000000000003,
+          "vision": 1,
+          "scale": 1.11,
+          "roaming": false,
+          "comboPower": 50,
+          "critical": 0,
+          "criticalPower": 150,
+          "accuracy": 0,
+          "penetration": 0,
+          "blockPower": 50,
+          "counter": 0,
+          "counterPower": 100,
+          "tenacity": 0,
+          "reduction": 0,
+          "loadSpeed": 0,
+          "healing": 0,
+          "stun": 0,
+          "stunTime": 0,
+          "bleed": 0,
+          "bleedPower": 0,
+          "area": 0,
+          "areaPower": 0,
+          "lifesteal": 0,
+          "reflection": 0,
+          "regeneration": 0,
+          "comboSpeed": 0.12,
+          "focus": 0.3
+        },
+        "cost": 78,
+        "baseCost": 3,
+        "occupied": 19,
+        "nativeTrace": {
+          "valid": true,
+          "closed": true,
+          "reason": "",
+          "occupied": 19,
+          "actualOrientedPointsMatch": true,
+          "paths": [
+            {
+              "start": {
+                "q": 0,
+                "r": 0
+              },
+              "middle": {
+                "q": 0,
+                "r": -1
+              },
+              "end": {
+                "q": -1,
+                "r": -1
+              },
+              "points": [
+                {
+                  "q": 0,
+                  "r": 0
+                },
+                {
+                  "q": 0,
+                  "r": -1
+                },
+                {
+                  "q": -1,
+                  "r": -1
+                }
+              ],
+              "gene": "movement",
+              "rotation": 4,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": -1,
+                "r": -1
+              },
+              "middle": {
+                "q": 0,
+                "r": -2
+              },
+              "end": {
+                "q": 1,
+                "r": -2
+              },
+              "points": [
+                {
+                  "q": -1,
+                  "r": -1
+                },
+                {
+                  "q": 0,
+                  "r": -2
+                },
+                {
+                  "q": 1,
+                  "r": -2
+                }
+              ],
+              "gene": "blade",
+              "rotation": 5,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": 1,
+                "r": -2
+              },
+              "middle": {
+                "q": 2,
+                "r": -2
+              },
+              "end": {
+                "q": 2,
+                "r": -1
+              },
+              "points": [
+                {
+                  "q": 1,
+                  "r": -2
+                },
+                {
+                  "q": 2,
+                  "r": -2
+                },
+                {
+                  "q": 2,
+                  "r": -1
+                }
+              ],
+              "gene": "blade",
+              "rotation": 0,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": 2,
+                "r": -1
+              },
+              "middle": {
+                "q": 2,
+                "r": 0
+              },
+              "end": {
+                "q": 1,
+                "r": 1
+              },
+              "points": [
+                {
+                  "q": 2,
+                  "r": -1
+                },
+                {
+                  "q": 2,
+                  "r": 0
+                },
+                {
+                  "q": 1,
+                  "r": 1
+                }
+              ],
+              "gene": "blade",
+              "rotation": 1,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": 1,
+                "r": 1
+              },
+              "middle": {
+                "q": 0,
+                "r": 2
+              },
+              "end": {
+                "q": 0,
+                "r": 1
+              },
+              "points": [
+                {
+                  "q": 1,
+                  "r": 1
+                },
+                {
+                  "q": 0,
+                  "r": 2
+                },
+                {
+                  "q": 0,
+                  "r": 1
+                }
+              ],
+              "gene": "health",
+              "rotation": 2,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": 0,
+                "r": 1
+              },
+              "middle": {
+                "q": -1,
+                "r": 2
+              },
+              "end": {
+                "q": -1,
+                "r": 1
+              },
+              "points": [
+                {
+                  "q": 0,
+                  "r": 1
+                },
+                {
+                  "q": -1,
+                  "r": 2
+                },
+                {
+                  "q": -1,
+                  "r": 1
+                }
+              ],
+              "gene": "health",
+              "rotation": 2,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": -1,
+                "r": 1
+              },
+              "middle": {
+                "q": -2,
+                "r": 2
+              },
+              "end": {
+                "q": -2,
+                "r": 1
+              },
+              "points": [
+                {
+                  "q": -1,
+                  "r": 1
+                },
+                {
+                  "q": -2,
+                  "r": 2
+                },
+                {
+                  "q": -2,
+                  "r": 1
+                }
+              ],
+              "gene": "health",
+              "rotation": 2,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": -2,
+                "r": 1
+              },
+              "middle": {
+                "q": -2,
+                "r": 0
+              },
+              "end": {
+                "q": -1,
+                "r": -1
+              },
+              "points": [
+                {
+                  "q": -2,
+                  "r": 1
+                },
+                {
+                  "q": -2,
+                  "r": 0
+                },
+                {
+                  "q": -1,
+                  "r": -1
+                }
+              ],
+              "gene": "blade",
+              "rotation": 4,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": -1,
+                "r": -1
+              },
+              "middle": {
+                "q": -1,
+                "r": 0
+              },
+              "end": {
+                "q": 0,
+                "r": 0
+              },
+              "points": [
+                {
+                  "q": -1,
+                  "r": -1
+                },
+                {
+                  "q": -1,
+                  "r": 0
+                },
+                {
+                  "q": 0,
+                  "r": 0
+                }
+              ],
+              "gene": "movement",
+              "rotation": 1,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": 0,
+                "r": 0
+              },
+              "middle": {
+                "q": 1,
+                "r": 0
+              },
+              "end": {
+                "q": 2,
+                "r": -1
+              },
+              "points": [
+                {
+                  "q": 0,
+                  "r": 0
+                },
+                {
+                  "q": 1,
+                  "r": 0
+                },
+                {
+                  "q": 2,
+                  "r": -1
+                }
+              ],
+              "gene": "movement",
+              "rotation": 0,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": 2,
+                "r": -1
+              },
+              "middle": {
+                "q": 1,
+                "r": -1
+              },
+              "end": {
+                "q": 0,
+                "r": 0
+              },
+              "points": [
+                {
+                  "q": 2,
+                  "r": -1
+                },
+                {
+                  "q": 1,
+                  "r": -1
+                },
+                {
+                  "q": 0,
+                  "r": 0
+                }
+              ],
+              "gene": "movement",
+              "rotation": 3,
+              "grade": 1
+            }
+          ]
+        },
+        "catalogValidationClaim": false
+      },
+      {
+        "layout": "dense0",
+        "shownPreviously": true,
+        "sourceFile": "Research/Dna/2026-11-04/fill/symmetric/dense.json",
+        "sourceIndex": 0,
+        "originalLayout": {
+          "joins": 4,
+          "pieces": [
+            {
+              "points": [
+                {
+                  "q": 0,
+                  "r": 0
+                },
+                {
+                  "q": 0,
+                  "r": -1
+                },
+                {
+                  "q": -1,
+                  "r": -1
+                }
+              ],
+              "type": "B",
+              "index": 1
+            },
+            {
+              "points": [
+                {
+                  "q": -1,
+                  "r": -1
+                },
+                {
+                  "q": 0,
+                  "r": -2
+                },
+                {
+                  "q": 1,
+                  "r": -2
+                }
+              ],
+              "type": "B",
+              "index": 2
+            },
+            {
+              "points": [
+                {
+                  "q": 1,
+                  "r": -2
+                },
+                {
+                  "q": 2,
+                  "r": -2
+                },
+                {
+                  "q": 2,
+                  "r": -1
+                }
+              ],
+              "type": "B",
+              "index": 3
+            },
+            {
+              "points": [
+                {
+                  "q": 2,
+                  "r": -1
+                },
+                {
+                  "q": 2,
+                  "r": 0
+                },
+                {
+                  "q": 1,
+                  "r": 1
+                }
+              ],
+              "type": "B",
+              "index": 4
+            },
+            {
+              "points": [
+                {
+                  "q": 1,
+                  "r": 1
+                },
+                {
+                  "q": 0,
+                  "r": 2
+                },
+                {
+                  "q": 0,
+                  "r": 1
+                }
+              ],
+              "type": "C",
+              "index": 5
+            },
+            {
+              "points": [
+                {
+                  "q": 0,
+                  "r": 1
+                },
+                {
+                  "q": -1,
+                  "r": 2
+                },
+                {
+                  "q": -1,
+                  "r": 1
+                }
+              ],
+              "type": "C",
+              "index": 6
+            },
+            {
+              "points": [
+                {
+                  "q": -1,
+                  "r": 1
+                },
+                {
+                  "q": -2,
+                  "r": 2
+                },
+                {
+                  "q": -2,
+                  "r": 1
+                }
+              ],
+              "type": "C",
+              "index": 7
+            },
+            {
+              "points": [
+                {
+                  "q": -2,
+                  "r": 1
+                },
+                {
+                  "q": -2,
+                  "r": 0
+                },
+                {
+                  "q": -1,
+                  "r": -1
+                }
+              ],
+              "type": "B",
+              "index": 8
+            },
+            {
+              "points": [
+                {
+                  "q": -1,
+                  "r": -1
+                },
+                {
+                  "q": -1,
+                  "r": 0
+                },
+                {
+                  "q": 0,
+                  "r": 0
+                }
+              ],
+              "type": "B",
+              "index": 9
+            },
+            {
+              "points": [
+                {
+                  "q": 0,
+                  "r": 0
+                },
+                {
+                  "q": 1,
+                  "r": -1
+                },
+                {
+                  "q": 2,
+                  "r": -1
+                }
+              ],
+              "type": "B",
+              "index": 10
+            },
+            {
+              "points": [
+                {
+                  "q": 2,
+                  "r": -1
+                },
+                {
+                  "q": 1,
+                  "r": 0
+                },
+                {
+                  "q": 0,
+                  "r": 0
+                }
+              ],
+              "type": "B",
+              "index": 11
+            }
+          ],
+          "counts": {
+            "A": 0,
+            "C": 3,
+            "B": 8
+          },
+          "sourceExample": 1,
+          "count": 11
+        },
+        "mirrorFlag": false,
+        "codeCount": {
+          "0": 0,
+          "1": 6,
+          "2": 3,
+          "4": 0,
+          "5": 2
+        },
+        "orientedPieces": [
+          {
+            "sourceIndex": 0,
+            "points": [
+              {
+                "q": 0,
+                "r": 0
+              },
+              {
+                "q": 0,
+                "r": -1
+              },
+              {
+                "q": -1,
+                "r": -1
+              }
+            ],
+            "shape": [
+              0,
+              5
+            ],
+            "rotation": 4,
+            "grade": 1,
+            "index": 1,
+            "gene": "movement"
+          },
+          {
+            "sourceIndex": 1,
+            "points": [
+              {
+                "q": -1,
+                "r": -1
+              },
+              {
+                "q": 0,
+                "r": -2
+              },
+              {
+                "q": 1,
+                "r": -2
+              }
+            ],
+            "shape": [
+              0,
+              1
+            ],
+            "rotation": 5,
+            "grade": 1,
+            "index": 2,
+            "gene": "blade"
+          },
+          {
+            "sourceIndex": 2,
+            "points": [
+              {
+                "q": 1,
+                "r": -2
+              },
+              {
+                "q": 2,
+                "r": -2
+              },
+              {
+                "q": 2,
+                "r": -1
+              }
+            ],
+            "shape": [
+              0,
+              1
+            ],
+            "rotation": 0,
+            "grade": 1,
+            "index": 3,
+            "gene": "blade"
+          },
+          {
+            "sourceIndex": 3,
+            "points": [
+              {
+                "q": 2,
+                "r": -1
+              },
+              {
+                "q": 2,
+                "r": 0
+              },
+              {
+                "q": 1,
+                "r": 1
+              }
+            ],
+            "shape": [
+              0,
+              1
+            ],
+            "rotation": 1,
+            "grade": 1,
+            "index": 4,
+            "gene": "blade"
+          },
+          {
+            "sourceIndex": 4,
+            "points": [
+              {
+                "q": 1,
+                "r": 1
+              },
+              {
+                "q": 0,
+                "r": 2
+              },
+              {
+                "q": 0,
+                "r": 1
+              }
+            ],
+            "shape": [
+              0,
+              2
+            ],
+            "rotation": 2,
+            "grade": 1,
+            "index": 5,
+            "gene": "health"
+          },
+          {
+            "sourceIndex": 5,
+            "points": [
+              {
+                "q": 0,
+                "r": 1
+              },
+              {
+                "q": -1,
+                "r": 2
+              },
+              {
+                "q": -1,
+                "r": 1
+              }
+            ],
+            "shape": [
+              0,
+              2
+            ],
+            "rotation": 2,
+            "grade": 1,
+            "index": 6,
+            "gene": "health"
+          },
+          {
+            "sourceIndex": 6,
+            "points": [
+              {
+                "q": -1,
+                "r": 1
+              },
+              {
+                "q": -2,
+                "r": 2
+              },
+              {
+                "q": -2,
+                "r": 1
+              }
+            ],
+            "shape": [
+              0,
+              2
+            ],
+            "rotation": 2,
+            "grade": 1,
+            "index": 7,
+            "gene": "health"
+          },
+          {
+            "sourceIndex": 7,
+            "points": [
+              {
+                "q": -2,
+                "r": 1
+              },
+              {
+                "q": -2,
+                "r": 0
+              },
+              {
+                "q": -1,
+                "r": -1
+              }
+            ],
+            "shape": [
+              0,
+              1
+            ],
+            "rotation": 4,
+            "grade": 1,
+            "index": 8,
+            "gene": "blade"
+          },
+          {
+            "sourceIndex": 8,
+            "points": [
+              {
+                "q": -1,
+                "r": -1
+              },
+              {
+                "q": -1,
+                "r": 0
+              },
+              {
+                "q": 0,
+                "r": 0
+              }
+            ],
+            "shape": [
+              0,
+              5
+            ],
+            "rotation": 1,
+            "grade": 1,
+            "index": 9,
+            "gene": "movement"
+          },
+          {
+            "sourceIndex": 9,
+            "points": [
+              {
+                "q": 0,
+                "r": 0
+              },
+              {
+                "q": 1,
+                "r": -1
+              },
+              {
+                "q": 2,
+                "r": -1
+              }
+            ],
+            "shape": [
+              0,
+              1
+            ],
+            "rotation": 5,
+            "grade": 1,
+            "index": 10,
+            "gene": "blade"
+          },
+          {
+            "sourceIndex": 10,
+            "points": [
+              {
+                "q": 2,
+                "r": -1
+              },
+              {
+                "q": 1,
+                "r": 0
+              },
+              {
+                "q": 0,
+                "r": 0
+              }
+            ],
+            "shape": [
+              0,
+              1
+            ],
+            "rotation": 2,
+            "grade": 1,
+            "index": 11,
+            "gene": "blade"
+          }
+        ],
+        "pieces": [
+          {
+            "gene": "movement",
+            "grade": 1,
+            "shape": [
+              0,
+              5
+            ],
+            "rotation": 4
+          },
+          {
+            "gene": "blade",
+            "grade": 1,
+            "shape": [
+              0,
+              1
+            ],
+            "rotation": 5
+          },
+          {
+            "gene": "blade",
+            "grade": 1,
+            "shape": [
+              0,
+              1
+            ],
+            "rotation": 0
+          },
+          {
+            "gene": "blade",
+            "grade": 1,
+            "shape": [
+              0,
+              1
+            ],
+            "rotation": 1
+          },
+          {
+            "gene": "health",
+            "grade": 1,
+            "shape": [
+              0,
+              2
+            ],
+            "rotation": 2
+          },
+          {
+            "gene": "health",
+            "grade": 1,
+            "shape": [
+              0,
+              2
+            ],
+            "rotation": 2
+          },
+          {
+            "gene": "health",
+            "grade": 1,
+            "shape": [
+              0,
+              2
+            ],
+            "rotation": 2
+          },
+          {
+            "gene": "blade",
+            "grade": 1,
+            "shape": [
+              0,
+              1
+            ],
+            "rotation": 4
+          },
+          {
+            "gene": "movement",
+            "grade": 1,
+            "shape": [
+              0,
+              5
+            ],
+            "rotation": 1
+          },
+          {
+            "gene": "blade",
+            "grade": 1,
+            "shape": [
+              0,
+              1
+            ],
+            "rotation": 5
+          },
+          {
+            "gene": "blade",
+            "grade": 1,
+            "shape": [
+              0,
+              1
+            ],
+            "rotation": 2
+          }
+        ],
+        "counts": {
+          "movement": 2,
+          "blade": 6,
+          "health": 3
+        },
+        "stats": {
+          "gatherCount": 0,
+          "bladeCount": 6,
+          "antennaCount": 0,
+          "healerCount": 0,
+          "secretionCount": 0,
+          "melee": true,
+          "ranged": false,
+          "meleePower": 12,
+          "meleeSpeed": 0.5,
+          "rangedPower": 0,
+          "rangedSpeed": 0,
+          "healer": false,
+          "health": 40,
+          "power": 12,
+          "hits": 1,
+          "speed": 0.5,
+          "armor": 0,
+          "parry": 0,
+          "block": 0,
+          "evasion": 0,
+          "capacity": 0,
+          "harvest": 0,
+          "harvestTime": 0,
+          "movement": 0.33,
+          "vision": 1,
+          "scale": 1.11,
+          "roaming": false,
+          "comboPower": 50,
+          "critical": 0,
+          "criticalPower": 150,
+          "accuracy": 0,
+          "penetration": 0,
+          "blockPower": 50,
+          "counter": 0,
+          "counterPower": 100,
+          "tenacity": 0,
+          "reduction": 0,
+          "loadSpeed": 0,
+          "healing": 0,
+          "stun": 0,
+          "stunTime": 0,
+          "bleed": 0,
+          "bleedPower": 0,
+          "area": 0,
+          "areaPower": 0,
+          "lifesteal": 0,
+          "reflection": 0,
+          "regeneration": 0,
+          "comboSpeed": 0.12,
+          "focus": 0.3
+        },
+        "cost": 88,
+        "baseCost": 3,
+        "occupied": 19,
+        "nativeTrace": {
+          "valid": true,
+          "closed": true,
+          "reason": "",
+          "occupied": 19,
+          "actualOrientedPointsMatch": true,
+          "paths": [
+            {
+              "start": {
+                "q": 0,
+                "r": 0
+              },
+              "middle": {
+                "q": 0,
+                "r": -1
+              },
+              "end": {
+                "q": -1,
+                "r": -1
+              },
+              "points": [
+                {
+                  "q": 0,
+                  "r": 0
+                },
+                {
+                  "q": 0,
+                  "r": -1
+                },
+                {
+                  "q": -1,
+                  "r": -1
+                }
+              ],
+              "gene": "movement",
+              "rotation": 4,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": -1,
+                "r": -1
+              },
+              "middle": {
+                "q": 0,
+                "r": -2
+              },
+              "end": {
+                "q": 1,
+                "r": -2
+              },
+              "points": [
+                {
+                  "q": -1,
+                  "r": -1
+                },
+                {
+                  "q": 0,
+                  "r": -2
+                },
+                {
+                  "q": 1,
+                  "r": -2
+                }
+              ],
+              "gene": "blade",
+              "rotation": 5,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": 1,
+                "r": -2
+              },
+              "middle": {
+                "q": 2,
+                "r": -2
+              },
+              "end": {
+                "q": 2,
+                "r": -1
+              },
+              "points": [
+                {
+                  "q": 1,
+                  "r": -2
+                },
+                {
+                  "q": 2,
+                  "r": -2
+                },
+                {
+                  "q": 2,
+                  "r": -1
+                }
+              ],
+              "gene": "blade",
+              "rotation": 0,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": 2,
+                "r": -1
+              },
+              "middle": {
+                "q": 2,
+                "r": 0
+              },
+              "end": {
+                "q": 1,
+                "r": 1
+              },
+              "points": [
+                {
+                  "q": 2,
+                  "r": -1
+                },
+                {
+                  "q": 2,
+                  "r": 0
+                },
+                {
+                  "q": 1,
+                  "r": 1
+                }
+              ],
+              "gene": "blade",
+              "rotation": 1,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": 1,
+                "r": 1
+              },
+              "middle": {
+                "q": 0,
+                "r": 2
+              },
+              "end": {
+                "q": 0,
+                "r": 1
+              },
+              "points": [
+                {
+                  "q": 1,
+                  "r": 1
+                },
+                {
+                  "q": 0,
+                  "r": 2
+                },
+                {
+                  "q": 0,
+                  "r": 1
+                }
+              ],
+              "gene": "health",
+              "rotation": 2,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": 0,
+                "r": 1
+              },
+              "middle": {
+                "q": -1,
+                "r": 2
+              },
+              "end": {
+                "q": -1,
+                "r": 1
+              },
+              "points": [
+                {
+                  "q": 0,
+                  "r": 1
+                },
+                {
+                  "q": -1,
+                  "r": 2
+                },
+                {
+                  "q": -1,
+                  "r": 1
+                }
+              ],
+              "gene": "health",
+              "rotation": 2,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": -1,
+                "r": 1
+              },
+              "middle": {
+                "q": -2,
+                "r": 2
+              },
+              "end": {
+                "q": -2,
+                "r": 1
+              },
+              "points": [
+                {
+                  "q": -1,
+                  "r": 1
+                },
+                {
+                  "q": -2,
+                  "r": 2
+                },
+                {
+                  "q": -2,
+                  "r": 1
+                }
+              ],
+              "gene": "health",
+              "rotation": 2,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": -2,
+                "r": 1
+              },
+              "middle": {
+                "q": -2,
+                "r": 0
+              },
+              "end": {
+                "q": -1,
+                "r": -1
+              },
+              "points": [
+                {
+                  "q": -2,
+                  "r": 1
+                },
+                {
+                  "q": -2,
+                  "r": 0
+                },
+                {
+                  "q": -1,
+                  "r": -1
+                }
+              ],
+              "gene": "blade",
+              "rotation": 4,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": -1,
+                "r": -1
+              },
+              "middle": {
+                "q": -1,
+                "r": 0
+              },
+              "end": {
+                "q": 0,
+                "r": 0
+              },
+              "points": [
+                {
+                  "q": -1,
+                  "r": -1
+                },
+                {
+                  "q": -1,
+                  "r": 0
+                },
+                {
+                  "q": 0,
+                  "r": 0
+                }
+              ],
+              "gene": "movement",
+              "rotation": 1,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": 0,
+                "r": 0
+              },
+              "middle": {
+                "q": 1,
+                "r": -1
+              },
+              "end": {
+                "q": 2,
+                "r": -1
+              },
+              "points": [
+                {
+                  "q": 0,
+                  "r": 0
+                },
+                {
+                  "q": 1,
+                  "r": -1
+                },
+                {
+                  "q": 2,
+                  "r": -1
+                }
+              ],
+              "gene": "blade",
+              "rotation": 5,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": 2,
+                "r": -1
+              },
+              "middle": {
+                "q": 1,
+                "r": 0
+              },
+              "end": {
+                "q": 0,
+                "r": 0
+              },
+              "points": [
+                {
+                  "q": 2,
+                  "r": -1
+                },
+                {
+                  "q": 1,
+                  "r": 0
+                },
+                {
+                  "q": 0,
+                  "r": 0
+                }
+              ],
+              "gene": "blade",
+              "rotation": 2,
+              "grade": 1
+            }
+          ]
+        },
+        "catalogValidationClaim": false
+      }
+    ],
+    "ranged": [
+      {
+        "layout": "ham2",
+        "shownPreviously": true,
+        "sourceFile": "Research/Dna/2026-11-04/fill/hamiltonian/hamiltonian.json",
+        "sourceIndex": 2,
+        "originalLayout": {
+          "criterion": "sharp",
+          "score": 7975,
+          "signature": "9,10,14,18,15,11,6,2,5,1,4,0,3,7,8,12,13,17,16",
+          "path": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 2
+            },
+            {
+              "q": 1,
+              "r": 1
+            },
+            {
+              "q": 2,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": -1
+            },
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": -2,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -2,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": -2,
+              "r": 2
+            }
+          ],
+          "pieces": [
+            {
+              "shape": [
+                0,
+                2
+              ],
+              "rotation": 0,
+              "type": "C",
+              "points": [
+                {
+                  "q": 0,
+                  "r": 0
+                },
+                {
+                  "q": 1,
+                  "r": 0
+                },
+                {
+                  "q": 0,
+                  "r": 1
+                }
+              ],
+              "index": 1
+            },
+            {
+              "shape": [
+                0,
+                4
+              ],
+              "rotation": 1,
+              "type": "C",
+              "points": [
+                {
+                  "q": 0,
+                  "r": 1
+                },
+                {
+                  "q": 0,
+                  "r": 2
+                },
+                {
+                  "q": 1,
+                  "r": 1
+                }
+              ],
+              "index": 2
+            },
+            {
+              "shape": [
+                0,
+                5
+              ],
+              "rotation": 5,
+              "type": "B",
+              "points": [
+                {
+                  "q": 1,
+                  "r": 1
+                },
+                {
+                  "q": 2,
+                  "r": 0
+                },
+                {
+                  "q": 2,
+                  "r": -1
+                }
+              ],
+              "index": 3
+            },
+            {
+              "shape": [
+                0,
+                4
+              ],
+              "rotation": 4,
+              "type": "C",
+              "points": [
+                {
+                  "q": 2,
+                  "r": -1
+                },
+                {
+                  "q": 2,
+                  "r": -2
+                },
+                {
+                  "q": 1,
+                  "r": -1
+                }
+              ],
+              "index": 4
+            },
+            {
+              "shape": [
+                0,
+                4
+              ],
+              "rotation": 4,
+              "type": "C",
+              "points": [
+                {
+                  "q": 1,
+                  "r": -1
+                },
+                {
+                  "q": 1,
+                  "r": -2
+                },
+                {
+                  "q": 0,
+                  "r": -1
+                }
+              ],
+              "index": 5
+            },
+            {
+              "shape": [
+                0,
+                4
+              ],
+              "rotation": 4,
+              "type": "C",
+              "points": [
+                {
+                  "q": 0,
+                  "r": -1
+                },
+                {
+                  "q": 0,
+                  "r": -2
+                },
+                {
+                  "q": -1,
+                  "r": -1
+                }
+              ],
+              "index": 6
+            },
+            {
+              "shape": [
+                0,
+                4
+              ],
+              "rotation": 2,
+              "type": "C",
+              "points": [
+                {
+                  "q": -1,
+                  "r": -1
+                },
+                {
+                  "q": -2,
+                  "r": 0
+                },
+                {
+                  "q": -1,
+                  "r": 0
+                }
+              ],
+              "index": 7
+            },
+            {
+              "shape": [
+                0,
+                4
+              ],
+              "rotation": 2,
+              "type": "C",
+              "points": [
+                {
+                  "q": -1,
+                  "r": 0
+                },
+                {
+                  "q": -2,
+                  "r": 1
+                },
+                {
+                  "q": -1,
+                  "r": 1
+                }
+              ],
+              "index": 8
+            },
+            {
+              "shape": [
+                0,
+                2
+              ],
+              "rotation": 1,
+              "type": "C",
+              "points": [
+                {
+                  "q": -1,
+                  "r": 1
+                },
+                {
+                  "q": -1,
+                  "r": 2
+                },
+                {
+                  "q": -2,
+                  "r": 2
+                }
+              ],
+              "index": 9
+            }
+          ],
+          "counts": {
+            "A": 0,
+            "B": 1,
+            "C": 8
+          },
+          "smooth": 25,
+          "outerWeight": 120
+        },
+        "mirrorFlag": false,
+        "codeCount": {
+          "0": 0,
+          "1": 0,
+          "2": 2,
+          "4": 6,
+          "5": 1
+        },
+        "orientedPieces": [
+          {
+            "sourceIndex": 0,
+            "points": [
+              {
+                "q": 0,
+                "r": 0
+              },
+              {
+                "q": 1,
+                "r": 0
+              },
+              {
+                "q": 0,
+                "r": 1
+              }
+            ],
+            "shape": [
+              0,
+              2
+            ],
+            "rotation": 0,
+            "grade": 1,
+            "index": 1,
+            "gene": "health"
+          },
+          {
+            "sourceIndex": 1,
+            "points": [
+              {
+                "q": 0,
+                "r": 1
+              },
+              {
+                "q": 0,
+                "r": 2
+              },
+              {
+                "q": 1,
+                "r": 1
+              }
+            ],
+            "shape": [
+              0,
+              4
+            ],
+            "rotation": 1,
+            "grade": 1,
+            "index": 2,
+            "gene": "secretion"
+          },
+          {
+            "sourceIndex": 2,
+            "points": [
+              {
+                "q": 1,
+                "r": 1
+              },
+              {
+                "q": 2,
+                "r": 0
+              },
+              {
+                "q": 2,
+                "r": -1
+              }
+            ],
+            "shape": [
+              0,
+              5
+            ],
+            "rotation": 5,
+            "grade": 1,
+            "index": 3,
+            "gene": "movement"
+          },
+          {
+            "sourceIndex": 3,
+            "points": [
+              {
+                "q": 2,
+                "r": -1
+              },
+              {
+                "q": 2,
+                "r": -2
+              },
+              {
+                "q": 1,
+                "r": -1
+              }
+            ],
+            "shape": [
+              0,
+              4
+            ],
+            "rotation": 4,
+            "grade": 1,
+            "index": 4,
+            "gene": "secretion"
+          },
+          {
+            "sourceIndex": 4,
+            "points": [
+              {
+                "q": 1,
+                "r": -1
+              },
+              {
+                "q": 1,
+                "r": -2
+              },
+              {
+                "q": 0,
+                "r": -1
+              }
+            ],
+            "shape": [
+              0,
+              4
+            ],
+            "rotation": 4,
+            "grade": 1,
+            "index": 5,
+            "gene": "secretion"
+          },
+          {
+            "sourceIndex": 5,
+            "points": [
+              {
+                "q": 0,
+                "r": -1
+              },
+              {
+                "q": 0,
+                "r": -2
+              },
+              {
+                "q": -1,
+                "r": -1
+              }
+            ],
+            "shape": [
+              0,
+              4
+            ],
+            "rotation": 4,
+            "grade": 1,
+            "index": 6,
+            "gene": "secretion"
+          },
+          {
+            "sourceIndex": 6,
+            "points": [
+              {
+                "q": -1,
+                "r": -1
+              },
+              {
+                "q": -2,
+                "r": 0
+              },
+              {
+                "q": -1,
+                "r": 0
+              }
+            ],
+            "shape": [
+              0,
+              4
+            ],
+            "rotation": 2,
+            "grade": 1,
+            "index": 7,
+            "gene": "secretion"
+          },
+          {
+            "sourceIndex": 7,
+            "points": [
+              {
+                "q": -1,
+                "r": 0
+              },
+              {
+                "q": -2,
+                "r": 1
+              },
+              {
+                "q": -1,
+                "r": 1
+              }
+            ],
+            "shape": [
+              0,
+              4
+            ],
+            "rotation": 2,
+            "grade": 1,
+            "index": 8,
+            "gene": "secretion"
+          },
+          {
+            "sourceIndex": 8,
+            "points": [
+              {
+                "q": -1,
+                "r": 1
+              },
+              {
+                "q": -1,
+                "r": 2
+              },
+              {
+                "q": -2,
+                "r": 2
+              }
+            ],
+            "shape": [
+              0,
+              2
+            ],
+            "rotation": 1,
+            "grade": 1,
+            "index": 9,
+            "gene": "health"
+          }
+        ],
+        "pieces": [
+          {
+            "gene": "health",
+            "grade": 1,
+            "shape": [
+              0,
+              2
+            ],
+            "rotation": 0
+          },
+          {
+            "gene": "secretion",
+            "grade": 1,
+            "shape": [
+              0,
+              4
+            ],
+            "rotation": 1
+          },
+          {
+            "gene": "movement",
+            "grade": 1,
+            "shape": [
+              0,
+              5
+            ],
+            "rotation": 5
+          },
+          {
+            "gene": "secretion",
+            "grade": 1,
+            "shape": [
+              0,
+              4
+            ],
+            "rotation": 4
+          },
+          {
+            "gene": "secretion",
+            "grade": 1,
+            "shape": [
+              0,
+              4
+            ],
+            "rotation": 4
+          },
+          {
+            "gene": "secretion",
+            "grade": 1,
+            "shape": [
+              0,
+              4
+            ],
+            "rotation": 4
+          },
+          {
+            "gene": "secretion",
+            "grade": 1,
+            "shape": [
+              0,
+              4
+            ],
+            "rotation": 2
+          },
+          {
+            "gene": "secretion",
+            "grade": 1,
+            "shape": [
+              0,
+              4
+            ],
+            "rotation": 2
+          },
+          {
+            "gene": "health",
+            "grade": 1,
+            "shape": [
+              0,
+              2
+            ],
+            "rotation": 1
+          }
+        ],
+        "counts": {
+          "health": 2,
+          "secretion": 6,
+          "movement": 1
+        },
+        "stats": {
+          "gatherCount": 0,
+          "bladeCount": 0,
+          "antennaCount": 0,
+          "healerCount": 0,
+          "secretionCount": 6,
+          "melee": false,
+          "ranged": true,
+          "meleePower": 0,
+          "meleeSpeed": 0,
+          "rangedPower": 8.399999999999999,
+          "rangedSpeed": 0.5,
+          "healer": false,
+          "health": 30,
+          "power": 8.399999999999999,
+          "hits": 1,
+          "speed": 0.5,
+          "armor": 0,
+          "parry": 0,
+          "block": 0,
+          "evasion": 0,
+          "capacity": 0,
+          "harvest": 0,
+          "harvestTime": 0,
+          "movement": 0.29,
+          "vision": 1,
+          "scale": 1.09,
+          "roaming": false,
+          "comboPower": 50,
+          "critical": 0,
+          "criticalPower": 150,
+          "accuracy": 0,
+          "penetration": 0,
+          "blockPower": 50,
+          "counter": 0,
+          "counterPower": 100,
+          "tenacity": 0,
+          "reduction": 0,
+          "loadSpeed": 0,
+          "healing": 0,
+          "stun": 0,
+          "stunTime": 0,
+          "bleed": 0,
+          "bleedPower": 0,
+          "area": 0,
+          "areaPower": 0,
+          "lifesteal": 0,
+          "reflection": 0,
+          "regeneration": 0,
+          "comboSpeed": 0.12,
+          "focus": 0.3
+        },
+        "cost": 78,
+        "baseCost": 3,
+        "occupied": 19,
+        "nativeTrace": {
+          "valid": true,
+          "closed": false,
+          "reason": "",
+          "occupied": 19,
+          "actualOrientedPointsMatch": true,
+          "paths": [
+            {
+              "start": {
+                "q": 0,
+                "r": 0
+              },
+              "middle": {
+                "q": 1,
+                "r": 0
+              },
+              "end": {
+                "q": 0,
+                "r": 1
+              },
+              "points": [
+                {
+                  "q": 0,
+                  "r": 0
+                },
+                {
+                  "q": 1,
+                  "r": 0
+                },
+                {
+                  "q": 0,
+                  "r": 1
+                }
+              ],
+              "gene": "health",
+              "rotation": 0,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": 0,
+                "r": 1
+              },
+              "middle": {
+                "q": 0,
+                "r": 2
+              },
+              "end": {
+                "q": 1,
+                "r": 1
+              },
+              "points": [
+                {
+                  "q": 0,
+                  "r": 1
+                },
+                {
+                  "q": 0,
+                  "r": 2
+                },
+                {
+                  "q": 1,
+                  "r": 1
+                }
+              ],
+              "gene": "secretion",
+              "rotation": 1,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": 1,
+                "r": 1
+              },
+              "middle": {
+                "q": 2,
+                "r": 0
+              },
+              "end": {
+                "q": 2,
+                "r": -1
+              },
+              "points": [
+                {
+                  "q": 1,
+                  "r": 1
+                },
+                {
+                  "q": 2,
+                  "r": 0
+                },
+                {
+                  "q": 2,
+                  "r": -1
+                }
+              ],
+              "gene": "movement",
+              "rotation": 5,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": 2,
+                "r": -1
+              },
+              "middle": {
+                "q": 2,
+                "r": -2
+              },
+              "end": {
+                "q": 1,
+                "r": -1
+              },
+              "points": [
+                {
+                  "q": 2,
+                  "r": -1
+                },
+                {
+                  "q": 2,
+                  "r": -2
+                },
+                {
+                  "q": 1,
+                  "r": -1
+                }
+              ],
+              "gene": "secretion",
+              "rotation": 4,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": 1,
+                "r": -1
+              },
+              "middle": {
+                "q": 1,
+                "r": -2
+              },
+              "end": {
+                "q": 0,
+                "r": -1
+              },
+              "points": [
+                {
+                  "q": 1,
+                  "r": -1
+                },
+                {
+                  "q": 1,
+                  "r": -2
+                },
+                {
+                  "q": 0,
+                  "r": -1
+                }
+              ],
+              "gene": "secretion",
+              "rotation": 4,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": 0,
+                "r": -1
+              },
+              "middle": {
+                "q": 0,
+                "r": -2
+              },
+              "end": {
+                "q": -1,
+                "r": -1
+              },
+              "points": [
+                {
+                  "q": 0,
+                  "r": -1
+                },
+                {
+                  "q": 0,
+                  "r": -2
+                },
+                {
+                  "q": -1,
+                  "r": -1
+                }
+              ],
+              "gene": "secretion",
+              "rotation": 4,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": -1,
+                "r": -1
+              },
+              "middle": {
+                "q": -2,
+                "r": 0
+              },
+              "end": {
+                "q": -1,
+                "r": 0
+              },
+              "points": [
+                {
+                  "q": -1,
+                  "r": -1
+                },
+                {
+                  "q": -2,
+                  "r": 0
+                },
+                {
+                  "q": -1,
+                  "r": 0
+                }
+              ],
+              "gene": "secretion",
+              "rotation": 2,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": -1,
+                "r": 0
+              },
+              "middle": {
+                "q": -2,
+                "r": 1
+              },
+              "end": {
+                "q": -1,
+                "r": 1
+              },
+              "points": [
+                {
+                  "q": -1,
+                  "r": 0
+                },
+                {
+                  "q": -2,
+                  "r": 1
+                },
+                {
+                  "q": -1,
+                  "r": 1
+                }
+              ],
+              "gene": "secretion",
+              "rotation": 2,
+              "grade": 1
+            },
+            {
+              "start": {
+                "q": -1,
+                "r": 1
+              },
+              "middle": {
+                "q": -1,
+                "r": 2
+              },
+              "end": {
+                "q": -2,
+                "r": 2
+              },
+              "points": [
+                {
+                  "q": -1,
+                  "r": 1
+                },
+                {
+                  "q": -1,
+                  "r": 2
+                },
+                {
+                  "q": -2,
+                  "r": 2
+                }
+              ],
+              "gene": "health",
+              "rotation": 1,
+              "grade": 1
+            }
+          ]
+        },
+        "catalogValidationClaim": false
+      }
+    ]
+  }
+}

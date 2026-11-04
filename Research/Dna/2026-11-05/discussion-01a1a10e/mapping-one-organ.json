@@ -1,0 +1,1726 @@
+{
+  "scope": {
+    "populationRotationClasses": 2382,
+    "populationDihedralClasses": 1191,
+    "visits": 17806,
+    "elapsedMs": 98.20150000000001,
+    "shapeOnly": true,
+    "supportXMeaning": "Undecided; assumed same 1-level shape as current health DNA",
+    "pricing": "Undecided; not evaluated",
+    "source": "Previously saved Hamiltonian count.mjs DFS reused"
+  },
+  "fixedA": {
+    "globalMapping": {
+      "0": "gather",
+      "1": "blade",
+      "2": "X",
+      "4": "secretion",
+      "5": "movement"
+    },
+    "pools": {
+      "worker": {
+        "pureOneOrgan": 0,
+        "supportAtLeastTwoEach": 0,
+        "balanced4and4": 0,
+        "availableCountPairs": []
+      },
+      "melee": {
+        "pureOneOrgan": 2,
+        "supportAtLeastTwoEach": 0,
+        "balanced4and4": 0,
+        "availableCountPairs": [
+          "8,0",
+          "7,1"
+        ]
+      },
+      "ranged": {
+        "pureOneOrgan": 0,
+        "supportAtLeastTwoEach": 0,
+        "balanced4and4": 0,
+        "availableCountPairs": []
+      }
+    },
+    "selected": {
+      "worker": null,
+      "melee": {
+        "sourcePopulationIndex": 2134,
+        "counts": {
+          "gather": 0,
+          "blade": 1,
+          "X": 7,
+          "secretion": 0,
+          "movement": 1
+        },
+        "codeCounts": {
+          "0": 0,
+          "1": 1,
+          "2": 7,
+          "4": 0,
+          "5": 1
+        },
+        "path": [
+          {
+            "q": 0,
+            "r": 0
+          },
+          {
+            "q": 1,
+            "r": 0
+          },
+          {
+            "q": 2,
+            "r": -1
+          },
+          {
+            "q": 2,
+            "r": 0
+          },
+          {
+            "q": 1,
+            "r": 1
+          },
+          {
+            "q": 0,
+            "r": 2
+          },
+          {
+            "q": 0,
+            "r": 1
+          },
+          {
+            "q": -1,
+            "r": 2
+          },
+          {
+            "q": -1,
+            "r": 1
+          },
+          {
+            "q": -2,
+            "r": 2
+          },
+          {
+            "q": -2,
+            "r": 1
+          },
+          {
+            "q": -2,
+            "r": 0
+          },
+          {
+            "q": -1,
+            "r": 0
+          },
+          {
+            "q": -1,
+            "r": -1
+          },
+          {
+            "q": 0,
+            "r": -1
+          },
+          {
+            "q": 0,
+            "r": -2
+          },
+          {
+            "q": 1,
+            "r": -2
+          },
+          {
+            "q": 2,
+            "r": -2
+          },
+          {
+            "q": 1,
+            "r": -1
+          }
+        ],
+        "orientedPieces": [
+          {
+            "attribute": "movement",
+            "grade": 1,
+            "rotation": 0,
+            "shape": [
+              0,
+              5
+            ],
+            "index": 1,
+            "points": [
+              {
+                "q": 0,
+                "r": 0
+              },
+              {
+                "q": 1,
+                "r": 0
+              },
+              {
+                "q": 2,
+                "r": -1
+              }
+            ]
+          },
+          {
+            "attribute": "blade",
+            "grade": 1,
+            "rotation": 1,
+            "shape": [
+              0,
+              1
+            ],
+            "index": 2,
+            "points": [
+              {
+                "q": 2,
+                "r": -1
+              },
+              {
+                "q": 2,
+                "r": 0
+              },
+              {
+                "q": 1,
+                "r": 1
+              }
+            ]
+          },
+          {
+            "attribute": "X",
+            "grade": 1,
+            "rotation": 2,
+            "shape": [
+              0,
+              2
+            ],
+            "index": 3,
+            "points": [
+              {
+                "q": 1,
+                "r": 1
+              },
+              {
+                "q": 0,
+                "r": 2
+              },
+              {
+                "q": 0,
+                "r": 1
+              }
+            ]
+          },
+          {
+            "attribute": "X",
+            "grade": 1,
+            "rotation": 2,
+            "shape": [
+              0,
+              2
+            ],
+            "index": 4,
+            "points": [
+              {
+                "q": 0,
+                "r": 1
+              },
+              {
+                "q": -1,
+                "r": 2
+              },
+              {
+                "q": -1,
+                "r": 1
+              }
+            ]
+          },
+          {
+            "attribute": "X",
+            "grade": 1,
+            "rotation": 2,
+            "shape": [
+              0,
+              2
+            ],
+            "index": 5,
+            "points": [
+              {
+                "q": -1,
+                "r": 1
+              },
+              {
+                "q": -2,
+                "r": 2
+              },
+              {
+                "q": -2,
+                "r": 1
+              }
+            ]
+          },
+          {
+            "attribute": "X",
+            "grade": 1,
+            "rotation": 4,
+            "shape": [
+              0,
+              2
+            ],
+            "index": 6,
+            "points": [
+              {
+                "q": -2,
+                "r": 1
+              },
+              {
+                "q": -2,
+                "r": 0
+              },
+              {
+                "q": -1,
+                "r": 0
+              }
+            ]
+          },
+          {
+            "attribute": "X",
+            "grade": 1,
+            "rotation": 4,
+            "shape": [
+              0,
+              2
+            ],
+            "index": 7,
+            "points": [
+              {
+                "q": -1,
+                "r": 0
+              },
+              {
+                "q": -1,
+                "r": -1
+              },
+              {
+                "q": 0,
+                "r": -1
+              }
+            ]
+          },
+          {
+            "attribute": "X",
+            "grade": 1,
+            "rotation": 4,
+            "shape": [
+              0,
+              2
+            ],
+            "index": 8,
+            "points": [
+              {
+                "q": 0,
+                "r": -1
+              },
+              {
+                "q": 0,
+                "r": -2
+              },
+              {
+                "q": 1,
+                "r": -2
+              }
+            ]
+          },
+          {
+            "attribute": "X",
+            "grade": 1,
+            "rotation": 0,
+            "shape": [
+              0,
+              2
+            ],
+            "index": 9,
+            "points": [
+              {
+                "q": 1,
+                "r": -2
+              },
+              {
+                "q": 2,
+                "r": -2
+              },
+              {
+                "q": 1,
+                "r": -1
+              }
+            ]
+          }
+        ],
+        "geometryTracePieces": [
+          {
+            "gene": "gather",
+            "grade": 1,
+            "rotation": 0,
+            "shape": [
+              0,
+              5
+            ]
+          },
+          {
+            "gene": "gather",
+            "grade": 1,
+            "rotation": 1,
+            "shape": [
+              0,
+              1
+            ]
+          },
+          {
+            "gene": "gather",
+            "grade": 1,
+            "rotation": 2,
+            "shape": [
+              0,
+              2
+            ]
+          },
+          {
+            "gene": "gather",
+            "grade": 1,
+            "rotation": 2,
+            "shape": [
+              0,
+              2
+            ]
+          },
+          {
+            "gene": "gather",
+            "grade": 1,
+            "rotation": 2,
+            "shape": [
+              0,
+              2
+            ]
+          },
+          {
+            "gene": "gather",
+            "grade": 1,
+            "rotation": 4,
+            "shape": [
+              0,
+              2
+            ]
+          },
+          {
+            "gene": "gather",
+            "grade": 1,
+            "rotation": 4,
+            "shape": [
+              0,
+              2
+            ]
+          },
+          {
+            "gene": "gather",
+            "grade": 1,
+            "rotation": 4,
+            "shape": [
+              0,
+              2
+            ]
+          },
+          {
+            "gene": "gather",
+            "grade": 1,
+            "rotation": 0,
+            "shape": [
+              0,
+              2
+            ]
+          }
+        ],
+        "occupied": 19,
+        "nativeTrace": {
+          "valid": true,
+          "occupied": 19,
+          "closed": false,
+          "actualOrientedPointsMatch": true
+        },
+        "mirrorFlag": false,
+        "geometryOnly": true,
+        "catalogValidationClaim": false,
+        "statsAndPriceEvaluated": false
+      },
+      "ranged": null
+    }
+  },
+  "fallback": {
+    "mappingsChecked": 120,
+    "viable": 72,
+    "supportAtLeastTwoEach": 72,
+    "organSilhouettesSeparated": 24,
+    "chosen": {
+      "globalMapping": {
+        "0": "gather",
+        "1": "blade",
+        "2": "secretion",
+        "4": "X",
+        "5": "movement"
+      },
+      "pools": {
+        "worker": {
+          "pureOneOrgan": 3,
+          "supportAtLeastTwoEach": 1,
+          "balanced4and4": 0,
+          "availableCountPairs": [
+            "6,2",
+            "7,1"
+          ]
+        },
+        "melee": {
+          "pureOneOrgan": 7,
+          "supportAtLeastTwoEach": 6,
+          "balanced4and4": 2,
+          "availableCountPairs": [
+            "7,1",
+            "2,6",
+            "5,3",
+            "4,4"
+          ]
+        },
+        "ranged": {
+          "pureOneOrgan": 28,
+          "supportAtLeastTwoEach": 27,
+          "balanced4and4": 0,
+          "availableCountPairs": [
+            "5,3",
+            "7,1",
+            "6,2",
+            "3,5"
+          ]
+        }
+      },
+      "selected": {
+        "worker": {
+          "sourcePopulationIndex": 377,
+          "counts": {
+            "gather": 1,
+            "blade": 0,
+            "secretion": 0,
+            "X": 6,
+            "movement": 2
+          },
+          "codeCounts": {
+            "0": 1,
+            "1": 0,
+            "2": 0,
+            "4": 6,
+            "5": 2
+          },
+          "path": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": -1
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -2,
+              "r": 0
+            },
+            {
+              "q": -2,
+              "r": 1
+            },
+            {
+              "q": -2,
+              "r": 2
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": 0,
+              "r": 2
+            },
+            {
+              "q": 1,
+              "r": 1
+            },
+            {
+              "q": 0,
+              "r": 1
+            }
+          ],
+          "orientedPieces": [
+            {
+              "attribute": "gather",
+              "grade": 1,
+              "rotation": 0,
+              "shape": [
+                0,
+                0
+              ],
+              "index": 1,
+              "points": [
+                {
+                  "q": 0,
+                  "r": 0
+                },
+                {
+                  "q": 1,
+                  "r": 0
+                },
+                {
+                  "q": 2,
+                  "r": 0
+                }
+              ]
+            },
+            {
+              "attribute": "movement",
+              "grade": 1,
+              "rotation": 4,
+              "shape": [
+                0,
+                5
+              ],
+              "index": 2,
+              "points": [
+                {
+                  "q": 2,
+                  "r": 0
+                },
+                {
+                  "q": 2,
+                  "r": -1
+                },
+                {
+                  "q": 1,
+                  "r": -1
+                }
+              ]
+            },
+            {
+              "attribute": "X",
+              "grade": 1,
+              "rotation": 5,
+              "shape": [
+                0,
+                4
+              ],
+              "index": 3,
+              "points": [
+                {
+                  "q": 1,
+                  "r": -1
+                },
+                {
+                  "q": 2,
+                  "r": -2
+                },
+                {
+                  "q": 1,
+                  "r": -2
+                }
+              ]
+            },
+            {
+              "attribute": "X",
+              "grade": 1,
+              "rotation": 3,
+              "shape": [
+                0,
+                4
+              ],
+              "index": 4,
+              "points": [
+                {
+                  "q": 1,
+                  "r": -2
+                },
+                {
+                  "q": 0,
+                  "r": -2
+                },
+                {
+                  "q": 0,
+                  "r": -1
+                }
+              ]
+            },
+            {
+              "attribute": "X",
+              "grade": 1,
+              "rotation": 3,
+              "shape": [
+                0,
+                4
+              ],
+              "index": 5,
+              "points": [
+                {
+                  "q": 0,
+                  "r": -1
+                },
+                {
+                  "q": -1,
+                  "r": -1
+                },
+                {
+                  "q": -1,
+                  "r": 0
+                }
+              ]
+            },
+            {
+              "attribute": "X",
+              "grade": 1,
+              "rotation": 3,
+              "shape": [
+                0,
+                4
+              ],
+              "index": 6,
+              "points": [
+                {
+                  "q": -1,
+                  "r": 0
+                },
+                {
+                  "q": -2,
+                  "r": 0
+                },
+                {
+                  "q": -2,
+                  "r": 1
+                }
+              ]
+            },
+            {
+              "attribute": "X",
+              "grade": 1,
+              "rotation": 1,
+              "shape": [
+                0,
+                4
+              ],
+              "index": 7,
+              "points": [
+                {
+                  "q": -2,
+                  "r": 1
+                },
+                {
+                  "q": -2,
+                  "r": 2
+                },
+                {
+                  "q": -1,
+                  "r": 1
+                }
+              ]
+            },
+            {
+              "attribute": "movement",
+              "grade": 1,
+              "rotation": 1,
+              "shape": [
+                0,
+                5
+              ],
+              "index": 8,
+              "points": [
+                {
+                  "q": -1,
+                  "r": 1
+                },
+                {
+                  "q": -1,
+                  "r": 2
+                },
+                {
+                  "q": 0,
+                  "r": 2
+                }
+              ]
+            },
+            {
+              "attribute": "X",
+              "grade": 1,
+              "rotation": 5,
+              "shape": [
+                0,
+                4
+              ],
+              "index": 9,
+              "points": [
+                {
+                  "q": 0,
+                  "r": 2
+                },
+                {
+                  "q": 1,
+                  "r": 1
+                },
+                {
+                  "q": 0,
+                  "r": 1
+                }
+              ]
+            }
+          ],
+          "geometryTracePieces": [
+            {
+              "gene": "gather",
+              "grade": 1,
+              "rotation": 0,
+              "shape": [
+                0,
+                0
+              ]
+            },
+            {
+              "gene": "gather",
+              "grade": 1,
+              "rotation": 4,
+              "shape": [
+                0,
+                5
+              ]
+            },
+            {
+              "gene": "gather",
+              "grade": 1,
+              "rotation": 5,
+              "shape": [
+                0,
+                4
+              ]
+            },
+            {
+              "gene": "gather",
+              "grade": 1,
+              "rotation": 3,
+              "shape": [
+                0,
+                4
+              ]
+            },
+            {
+              "gene": "gather",
+              "grade": 1,
+              "rotation": 3,
+              "shape": [
+                0,
+                4
+              ]
+            },
+            {
+              "gene": "gather",
+              "grade": 1,
+              "rotation": 3,
+              "shape": [
+                0,
+                4
+              ]
+            },
+            {
+              "gene": "gather",
+              "grade": 1,
+              "rotation": 1,
+              "shape": [
+                0,
+                4
+              ]
+            },
+            {
+              "gene": "gather",
+              "grade": 1,
+              "rotation": 1,
+              "shape": [
+                0,
+                5
+              ]
+            },
+            {
+              "gene": "gather",
+              "grade": 1,
+              "rotation": 5,
+              "shape": [
+                0,
+                4
+              ]
+            }
+          ],
+          "occupied": 19,
+          "nativeTrace": {
+            "valid": true,
+            "occupied": 19,
+            "closed": false,
+            "actualOrientedPointsMatch": true
+          },
+          "mirrorFlag": false,
+          "geometryOnly": true,
+          "catalogValidationClaim": false,
+          "statsAndPriceEvaluated": false
+        },
+        "melee": {
+          "sourcePopulationIndex": 2338,
+          "counts": {
+            "gather": 0,
+            "blade": 1,
+            "secretion": 0,
+            "X": 4,
+            "movement": 4
+          },
+          "codeCounts": {
+            "0": 0,
+            "1": 1,
+            "2": 0,
+            "4": 4,
+            "5": 4
+          },
+          "path": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": -1
+            },
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": -2,
+              "r": 0
+            },
+            {
+              "q": -2,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": -2,
+              "r": 2
+            },
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": 0,
+              "r": 2
+            },
+            {
+              "q": 0,
+              "r": 1
+            },
+            {
+              "q": 1,
+              "r": 1
+            },
+            {
+              "q": 2,
+              "r": 0
+            }
+          ],
+          "orientedPieces": [
+            {
+              "attribute": "movement",
+              "grade": 1,
+              "rotation": 0,
+              "shape": [
+                0,
+                5
+              ],
+              "index": 1,
+              "points": [
+                {
+                  "q": 0,
+                  "r": 0
+                },
+                {
+                  "q": 1,
+                  "r": 0
+                },
+                {
+                  "q": 2,
+                  "r": -1
+                }
+              ]
+            },
+            {
+              "attribute": "X",
+              "grade": 1,
+              "rotation": 4,
+              "shape": [
+                0,
+                4
+              ],
+              "index": 2,
+              "points": [
+                {
+                  "q": 2,
+                  "r": -1
+                },
+                {
+                  "q": 2,
+                  "r": -2
+                },
+                {
+                  "q": 1,
+                  "r": -1
+                }
+              ]
+            },
+            {
+              "attribute": "movement",
+              "grade": 1,
+              "rotation": 4,
+              "shape": [
+                0,
+                5
+              ],
+              "index": 3,
+              "points": [
+                {
+                  "q": 1,
+                  "r": -1
+                },
+                {
+                  "q": 1,
+                  "r": -2
+                },
+                {
+                  "q": 0,
+                  "r": -2
+                }
+              ]
+            },
+            {
+              "attribute": "blade",
+              "grade": 1,
+              "rotation": 1,
+              "shape": [
+                0,
+                1
+              ],
+              "index": 4,
+              "points": [
+                {
+                  "q": 0,
+                  "r": -2
+                },
+                {
+                  "q": 0,
+                  "r": -1
+                },
+                {
+                  "q": -1,
+                  "r": 0
+                }
+              ]
+            },
+            {
+              "attribute": "X",
+              "grade": 1,
+              "rotation": 4,
+              "shape": [
+                0,
+                4
+              ],
+              "index": 5,
+              "points": [
+                {
+                  "q": -1,
+                  "r": 0
+                },
+                {
+                  "q": -1,
+                  "r": -1
+                },
+                {
+                  "q": -2,
+                  "r": 0
+                }
+              ]
+            },
+            {
+              "attribute": "movement",
+              "grade": 1,
+              "rotation": 1,
+              "shape": [
+                0,
+                5
+              ],
+              "index": 6,
+              "points": [
+                {
+                  "q": -2,
+                  "r": 0
+                },
+                {
+                  "q": -2,
+                  "r": 1
+                },
+                {
+                  "q": -1,
+                  "r": 1
+                }
+              ]
+            },
+            {
+              "attribute": "X",
+              "grade": 1,
+              "rotation": 2,
+              "shape": [
+                0,
+                4
+              ],
+              "index": 7,
+              "points": [
+                {
+                  "q": -1,
+                  "r": 1
+                },
+                {
+                  "q": -2,
+                  "r": 2
+                },
+                {
+                  "q": -1,
+                  "r": 2
+                }
+              ]
+            },
+            {
+              "attribute": "X",
+              "grade": 1,
+              "rotation": 0,
+              "shape": [
+                0,
+                4
+              ],
+              "index": 8,
+              "points": [
+                {
+                  "q": -1,
+                  "r": 2
+                },
+                {
+                  "q": 0,
+                  "r": 2
+                },
+                {
+                  "q": 0,
+                  "r": 1
+                }
+              ]
+            },
+            {
+              "attribute": "movement",
+              "grade": 1,
+              "rotation": 0,
+              "shape": [
+                0,
+                5
+              ],
+              "index": 9,
+              "points": [
+                {
+                  "q": 0,
+                  "r": 1
+                },
+                {
+                  "q": 1,
+                  "r": 1
+                },
+                {
+                  "q": 2,
+                  "r": 0
+                }
+              ]
+            }
+          ],
+          "geometryTracePieces": [
+            {
+              "gene": "gather",
+              "grade": 1,
+              "rotation": 0,
+              "shape": [
+                0,
+                5
+              ]
+            },
+            {
+              "gene": "gather",
+              "grade": 1,
+              "rotation": 4,
+              "shape": [
+                0,
+                4
+              ]
+            },
+            {
+              "gene": "gather",
+              "grade": 1,
+              "rotation": 4,
+              "shape": [
+                0,
+                5
+              ]
+            },
+            {
+              "gene": "gather",
+              "grade": 1,
+              "rotation": 1,
+              "shape": [
+                0,
+                1
+              ]
+            },
+            {
+              "gene": "gather",
+              "grade": 1,
+              "rotation": 4,
+              "shape": [
+                0,
+                4
+              ]
+            },
+            {
+              "gene": "gather",
+              "grade": 1,
+              "rotation": 1,
+              "shape": [
+                0,
+                5
+              ]
+            },
+            {
+              "gene": "gather",
+              "grade": 1,
+              "rotation": 2,
+              "shape": [
+                0,
+                4
+              ]
+            },
+            {
+              "gene": "gather",
+              "grade": 1,
+              "rotation": 0,
+              "shape": [
+                0,
+                4
+              ]
+            },
+            {
+              "gene": "gather",
+              "grade": 1,
+              "rotation": 0,
+              "shape": [
+                0,
+                5
+              ]
+            }
+          ],
+          "occupied": 19,
+          "nativeTrace": {
+            "valid": true,
+            "occupied": 19,
+            "closed": false,
+            "actualOrientedPointsMatch": true
+          },
+          "mirrorFlag": false,
+          "geometryOnly": true,
+          "catalogValidationClaim": false,
+          "statsAndPriceEvaluated": false
+        },
+        "ranged": {
+          "sourcePopulationIndex": 993,
+          "counts": {
+            "gather": 0,
+            "blade": 0,
+            "secretion": 1,
+            "X": 5,
+            "movement": 3
+          },
+          "codeCounts": {
+            "0": 0,
+            "1": 0,
+            "2": 1,
+            "4": 5,
+            "5": 3
+          },
+          "path": [
+            {
+              "q": 0,
+              "r": 0
+            },
+            {
+              "q": 1,
+              "r": 0
+            },
+            {
+              "q": 0,
+              "r": 1
+            },
+            {
+              "q": 1,
+              "r": 1
+            },
+            {
+              "q": 2,
+              "r": 0
+            },
+            {
+              "q": 2,
+              "r": -1
+            },
+            {
+              "q": 1,
+              "r": -1
+            },
+            {
+              "q": 2,
+              "r": -2
+            },
+            {
+              "q": 1,
+              "r": -2
+            },
+            {
+              "q": 0,
+              "r": -2
+            },
+            {
+              "q": 0,
+              "r": -1
+            },
+            {
+              "q": -1,
+              "r": -1
+            },
+            {
+              "q": -1,
+              "r": 0
+            },
+            {
+              "q": -2,
+              "r": 0
+            },
+            {
+              "q": -2,
+              "r": 1
+            },
+            {
+              "q": -2,
+              "r": 2
+            },
+            {
+              "q": -1,
+              "r": 1
+            },
+            {
+              "q": -1,
+              "r": 2
+            },
+            {
+              "q": 0,
+              "r": 2
+            }
+          ],
+          "orientedPieces": [
+            {
+              "attribute": "secretion",
+              "grade": 1,
+              "rotation": 0,
+              "shape": [
+                0,
+                2
+              ],
+              "index": 1,
+              "points": [
+                {
+                  "q": 0,
+                  "r": 0
+                },
+                {
+                  "q": 1,
+                  "r": 0
+                },
+                {
+                  "q": 0,
+                  "r": 1
+                }
+              ]
+            },
+            {
+              "attribute": "movement",
+              "grade": 1,
+              "rotation": 0,
+              "shape": [
+                0,
+                5
+              ],
+              "index": 2,
+              "points": [
+                {
+                  "q": 0,
+                  "r": 1
+                },
+                {
+                  "q": 1,
+                  "r": 1
+                },
+                {
+                  "q": 2,
+                  "r": 0
+                }
+              ]
+            },
+            {
+              "attribute": "movement",
+              "grade": 1,
+              "rotation": 4,
+              "shape": [
+                0,
+                5
+              ],
+              "index": 3,
+              "points": [
+                {
+                  "q": 2,
+                  "r": 0
+                },
+                {
+                  "q": 2,
+                  "r": -1
+                },
+                {
+                  "q": 1,
+                  "r": -1
+                }
+              ]
+            },
+            {
+              "attribute": "X",
+              "grade": 1,
+              "rotation": 5,
+              "shape": [
+                0,
+                4
+              ],
+              "index": 4,
+              "points": [
+                {
+                  "q": 1,
+                  "r": -1
+                },
+                {
+                  "q": 2,
+                  "r": -2
+                },
+                {
+                  "q": 1,
+                  "r": -2
+                }
+              ]
+            },
+            {
+              "attribute": "X",
+              "grade": 1,
+              "rotation": 3,
+              "shape": [
+                0,
+                4
+              ],
+              "index": 5,
+              "points": [
+                {
+                  "q": 1,
+                  "r": -2
+                },
+                {
+                  "q": 0,
+                  "r": -2
+                },
+                {
+                  "q": 0,
+                  "r": -1
+                }
+              ]
+            },
+            {
+              "attribute": "X",
+              "grade": 1,
+              "rotation": 3,
+              "shape": [
+                0,
+                4
+              ],
+              "index": 6,
+              "points": [
+                {
+                  "q": 0,
+                  "r": -1
+                },
+                {
+                  "q": -1,
+                  "r": -1
+                },
+                {
+                  "q": -1,
+                  "r": 0
+                }
+              ]
+            },
+            {
+              "attribute": "X",
+              "grade": 1,
+              "rotation": 3,
+              "shape": [
+                0,
+                4
+              ],
+              "index": 7,
+              "points": [
+                {
+                  "q": -1,
+                  "r": 0
+                },
+                {
+                  "q": -2,
+                  "r": 0
+                },
+                {
+                  "q": -2,
+                  "r": 1
+                }
+              ]
+            },
+            {
+              "attribute": "X",
+              "grade": 1,
+              "rotation": 1,
+              "shape": [
+                0,
+                4
+              ],
+              "index": 8,
+              "points": [
+                {
+                  "q": -2,
+                  "r": 1
+                },
+                {
+                  "q": -2,
+                  "r": 2
+                },
+                {
+                  "q": -1,
+                  "r": 1
+                }
+              ]
+            },
+            {
+              "attribute": "movement",
+              "grade": 1,
+              "rotation": 1,
+              "shape": [
+                0,
+                5
+              ],
+              "index": 9,
+              "points": [
+                {
+                  "q": -1,
+                  "r": 1
+                },
+                {
+                  "q": -1,
+                  "r": 2
+                },
+                {
+                  "q": 0,
+                  "r": 2
+                }
+              ]
+            }
+          ],
+          "geometryTracePieces": [
+            {
+              "gene": "gather",
+              "grade": 1,
+              "rotation": 0,
+              "shape": [
+                0,
+                2
+              ]
+            },
+            {
+              "gene": "gather",
+              "grade": 1,
+              "rotation": 0,
+              "shape": [
+                0,
+                5
+              ]
+            },
+            {
+              "gene": "gather",
+              "grade": 1,
+              "rotation": 4,
+              "shape": [
+                0,
+                5
+              ]
+            },
+            {
+              "gene": "gather",
+              "grade": 1,
+              "rotation": 5,
+              "shape": [
+                0,
+                4
+              ]
+            },
+            {
+              "gene": "gather",
+              "grade": 1,
+              "rotation": 3,
+              "shape": [
+                0,
+                4
+              ]
+            },
+            {
+              "gene": "gather",
+              "grade": 1,
+              "rotation": 3,
+              "shape": [
+                0,
+                4
+              ]
+            },
+            {
+              "gene": "gather",
+              "grade": 1,
+              "rotation": 3,
+              "shape": [
+                0,
+                4
+              ]
+            },
+            {
+              "gene": "gather",
+              "grade": 1,
+              "rotation": 1,
+              "shape": [
+                0,
+                4
+              ]
+            },
+            {
+              "gene": "gather",
+              "grade": 1,
+              "rotation": 1,
+              "shape": [
+                0,
+                5
+              ]
+            }
+          ],
+          "occupied": 19,
+          "nativeTrace": {
+            "valid": true,
+            "occupied": 19,
+            "closed": false,
+            "actualOrientedPointsMatch": true
+          },
+          "mirrorFlag": false,
+          "geometryOnly": true,
+          "catalogValidationClaim": false,
+          "statsAndPriceEvaluated": false
+        }
+      }
+    }
+  }
+}

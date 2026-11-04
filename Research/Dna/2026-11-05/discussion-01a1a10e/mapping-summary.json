@@ -1,0 +1,1751 @@
+{
+  "layouts": [
+    {
+      "id": "ham0",
+      "seen": true,
+      "pieces": 9,
+      "countVectors": 2
+    },
+    {
+      "id": "ham1",
+      "seen": true,
+      "pieces": 9,
+      "countVectors": 2
+    },
+    {
+      "id": "ham2",
+      "seen": true,
+      "pieces": 9,
+      "countVectors": 2
+    },
+    {
+      "id": "ham3",
+      "seen": true,
+      "pieces": 9,
+      "countVectors": 2
+    },
+    {
+      "id": "ham4",
+      "seen": false,
+      "pieces": 9,
+      "countVectors": 2
+    },
+    {
+      "id": "ham5",
+      "seen": false,
+      "pieces": 9,
+      "countVectors": 2
+    },
+    {
+      "id": "sym0",
+      "seen": true,
+      "pieces": 10,
+      "countVectors": 1
+    },
+    {
+      "id": "sym1",
+      "seen": true,
+      "pieces": 10,
+      "countVectors": 3
+    },
+    {
+      "id": "sym2",
+      "seen": true,
+      "pieces": 10,
+      "countVectors": 3
+    },
+    {
+      "id": "sym3",
+      "seen": false,
+      "pieces": 10,
+      "countVectors": 3
+    },
+    {
+      "id": "dense0",
+      "seen": true,
+      "pieces": 11,
+      "countVectors": 6
+    },
+    {
+      "id": "dense1",
+      "seen": true,
+      "pieces": 12,
+      "countVectors": 7
+    }
+  ],
+  "eulerTrails": 1350,
+  "variants": 35,
+  "mappings": 120,
+  "allRoles": 108,
+  "usefulAllRoles": 24,
+  "top": [
+    {
+      "mapping": {
+        "0": "gather",
+        "1": "blade",
+        "2": "health",
+        "4": "secretion",
+        "5": "movement"
+      },
+      "score": 121.97999999999999,
+      "useful": true,
+      "available": {
+        "worker": 1,
+        "melee": 7,
+        "ranged": 2
+      },
+      "best": {
+        "worker": [
+          {
+            "layout": "ham0",
+            "seen": true,
+            "mirror": false,
+            "countVector": [
+              6,
+              0,
+              1,
+              0,
+              2
+            ],
+            "counts": {
+              "gather": 6,
+              "health": 1,
+              "movement": 2
+            },
+            "cost": 78,
+            "hp": 20,
+            "move": 0.33,
+            "power": 0,
+            "harvest": 6,
+            "capacity": 6
+          }
+        ],
+        "melee": [
+          {
+            "layout": "dense0",
+            "seen": true,
+            "mirror": false,
+            "countVector": [
+              0,
+              4,
+              3,
+              0,
+              4
+            ],
+            "counts": {
+              "movement": 4,
+              "blade": 4,
+              "health": 3
+            },
+            "cost": 78,
+            "hp": 40,
+            "move": 0.41000000000000003,
+            "power": 8,
+            "harvest": 0,
+            "capacity": 0
+          },
+          {
+            "layout": "dense0",
+            "seen": true,
+            "mirror": false,
+            "countVector": [
+              0,
+              6,
+              3,
+              0,
+              2
+            ],
+            "counts": {
+              "movement": 2,
+              "blade": 6,
+              "health": 3
+            },
+            "cost": 88,
+            "hp": 40,
+            "move": 0.33,
+            "power": 12,
+            "harvest": 0,
+            "capacity": 0
+          },
+          {
+            "layout": "ham1",
+            "seen": true,
+            "mirror": true,
+            "countVector": [
+              0,
+              5,
+              1,
+              0,
+              3
+            ],
+            "counts": {
+              "movement": 3,
+              "blade": 5,
+              "health": 1
+            },
+            "cost": 73,
+            "hp": 20,
+            "move": 0.37,
+            "power": 10,
+            "harvest": 0,
+            "capacity": 0
+          }
+        ],
+        "ranged": [
+          {
+            "layout": "ham2",
+            "seen": true,
+            "mirror": false,
+            "countVector": [
+              0,
+              0,
+              2,
+              6,
+              1
+            ],
+            "counts": {
+              "health": 2,
+              "secretion": 6,
+              "movement": 1
+            },
+            "cost": 78,
+            "hp": 30,
+            "move": 0.29,
+            "power": 8.399999999999999,
+            "harvest": 0,
+            "capacity": 0
+          }
+        ]
+      }
+    },
+    {
+      "mapping": {
+        "0": "gather",
+        "1": "secretion",
+        "2": "health",
+        "4": "blade",
+        "5": "movement"
+      },
+      "score": 121.97999999999999,
+      "useful": true,
+      "available": {
+        "worker": 1,
+        "melee": 2,
+        "ranged": 7
+      },
+      "best": {
+        "worker": [
+          {
+            "layout": "ham0",
+            "seen": true,
+            "mirror": false,
+            "countVector": [
+              6,
+              0,
+              1,
+              0,
+              2
+            ],
+            "counts": {
+              "gather": 6,
+              "health": 1,
+              "movement": 2
+            },
+            "cost": 78,
+            "hp": 20,
+            "move": 0.33,
+            "power": 0,
+            "harvest": 6,
+            "capacity": 6
+          }
+        ],
+        "melee": [
+          {
+            "layout": "ham2",
+            "seen": true,
+            "mirror": false,
+            "countVector": [
+              0,
+              0,
+              2,
+              6,
+              1
+            ],
+            "counts": {
+              "health": 2,
+              "blade": 6,
+              "movement": 1
+            },
+            "cost": 78,
+            "hp": 30,
+            "move": 0.29,
+            "power": 12,
+            "harvest": 0,
+            "capacity": 0
+          }
+        ],
+        "ranged": [
+          {
+            "layout": "dense0",
+            "seen": true,
+            "mirror": false,
+            "countVector": [
+              0,
+              4,
+              3,
+              0,
+              4
+            ],
+            "counts": {
+              "movement": 4,
+              "secretion": 4,
+              "health": 3
+            },
+            "cost": 78,
+            "hp": 40,
+            "move": 0.41000000000000003,
+            "power": 5.6,
+            "harvest": 0,
+            "capacity": 0
+          },
+          {
+            "layout": "dense0",
+            "seen": true,
+            "mirror": false,
+            "countVector": [
+              0,
+              6,
+              3,
+              0,
+              2
+            ],
+            "counts": {
+              "movement": 2,
+              "secretion": 6,
+              "health": 3
+            },
+            "cost": 88,
+            "hp": 40,
+            "move": 0.33,
+            "power": 8.399999999999999,
+            "harvest": 0,
+            "capacity": 0
+          },
+          {
+            "layout": "ham1",
+            "seen": true,
+            "mirror": true,
+            "countVector": [
+              0,
+              5,
+              1,
+              0,
+              3
+            ],
+            "counts": {
+              "movement": 3,
+              "secretion": 5,
+              "health": 1
+            },
+            "cost": 73,
+            "hp": 20,
+            "move": 0.37,
+            "power": 7,
+            "harvest": 0,
+            "capacity": 0
+          }
+        ]
+      }
+    },
+    {
+      "mapping": {
+        "0": "gather",
+        "1": "movement",
+        "2": "blade",
+        "4": "health",
+        "5": "secretion"
+      },
+      "score": 121.97999999999999,
+      "useful": true,
+      "available": {
+        "worker": 1,
+        "melee": 2,
+        "ranged": 7
+      },
+      "best": {
+        "worker": [
+          {
+            "layout": "ham0",
+            "seen": true,
+            "mirror": true,
+            "countVector": [
+              6,
+              2,
+              0,
+              1,
+              0
+            ],
+            "counts": {
+              "gather": 6,
+              "health": 1,
+              "movement": 2
+            },
+            "cost": 78,
+            "hp": 20,
+            "move": 0.33,
+            "power": 0,
+            "harvest": 6,
+            "capacity": 6
+          }
+        ],
+        "melee": [
+          {
+            "layout": "ham2",
+            "seen": true,
+            "mirror": true,
+            "countVector": [
+              0,
+              1,
+              6,
+              2,
+              0
+            ],
+            "counts": {
+              "health": 2,
+              "blade": 6,
+              "movement": 1
+            },
+            "cost": 78,
+            "hp": 30,
+            "move": 0.29,
+            "power": 12,
+            "harvest": 0,
+            "capacity": 0
+          }
+        ],
+        "ranged": [
+          {
+            "layout": "dense0",
+            "seen": true,
+            "mirror": true,
+            "countVector": [
+              0,
+              4,
+              0,
+              3,
+              4
+            ],
+            "counts": {
+              "movement": 4,
+              "secretion": 4,
+              "health": 3
+            },
+            "cost": 78,
+            "hp": 40,
+            "move": 0.41000000000000003,
+            "power": 5.6,
+            "harvest": 0,
+            "capacity": 0
+          },
+          {
+            "layout": "dense0",
+            "seen": true,
+            "mirror": true,
+            "countVector": [
+              0,
+              2,
+              0,
+              3,
+              6
+            ],
+            "counts": {
+              "movement": 2,
+              "secretion": 6,
+              "health": 3
+            },
+            "cost": 88,
+            "hp": 40,
+            "move": 0.33,
+            "power": 8.399999999999999,
+            "harvest": 0,
+            "capacity": 0
+          },
+          {
+            "layout": "ham1",
+            "seen": true,
+            "mirror": false,
+            "countVector": [
+              0,
+              3,
+              0,
+              1,
+              5
+            ],
+            "counts": {
+              "movement": 3,
+              "secretion": 5,
+              "health": 1
+            },
+            "cost": 73,
+            "hp": 20,
+            "move": 0.37,
+            "power": 7,
+            "harvest": 0,
+            "capacity": 0
+          }
+        ]
+      }
+    },
+    {
+      "mapping": {
+        "0": "gather",
+        "1": "movement",
+        "2": "secretion",
+        "4": "health",
+        "5": "blade"
+      },
+      "score": 121.97999999999999,
+      "useful": true,
+      "available": {
+        "worker": 1,
+        "melee": 7,
+        "ranged": 2
+      },
+      "best": {
+        "worker": [
+          {
+            "layout": "ham0",
+            "seen": true,
+            "mirror": true,
+            "countVector": [
+              6,
+              2,
+              0,
+              1,
+              0
+            ],
+            "counts": {
+              "gather": 6,
+              "health": 1,
+              "movement": 2
+            },
+            "cost": 78,
+            "hp": 20,
+            "move": 0.33,
+            "power": 0,
+            "harvest": 6,
+            "capacity": 6
+          }
+        ],
+        "melee": [
+          {
+            "layout": "dense0",
+            "seen": true,
+            "mirror": true,
+            "countVector": [
+              0,
+              4,
+              0,
+              3,
+              4
+            ],
+            "counts": {
+              "movement": 4,
+              "blade": 4,
+              "health": 3
+            },
+            "cost": 78,
+            "hp": 40,
+            "move": 0.41000000000000003,
+            "power": 8,
+            "harvest": 0,
+            "capacity": 0
+          },
+          {
+            "layout": "dense0",
+            "seen": true,
+            "mirror": true,
+            "countVector": [
+              0,
+              2,
+              0,
+              3,
+              6
+            ],
+            "counts": {
+              "movement": 2,
+              "blade": 6,
+              "health": 3
+            },
+            "cost": 88,
+            "hp": 40,
+            "move": 0.33,
+            "power": 12,
+            "harvest": 0,
+            "capacity": 0
+          },
+          {
+            "layout": "ham1",
+            "seen": true,
+            "mirror": false,
+            "countVector": [
+              0,
+              3,
+              0,
+              1,
+              5
+            ],
+            "counts": {
+              "movement": 3,
+              "blade": 5,
+              "health": 1
+            },
+            "cost": 73,
+            "hp": 20,
+            "move": 0.37,
+            "power": 10,
+            "harvest": 0,
+            "capacity": 0
+          }
+        ],
+        "ranged": [
+          {
+            "layout": "ham2",
+            "seen": true,
+            "mirror": true,
+            "countVector": [
+              0,
+              1,
+              6,
+              2,
+              0
+            ],
+            "counts": {
+              "health": 2,
+              "secretion": 6,
+              "movement": 1
+            },
+            "cost": 78,
+            "hp": 30,
+            "move": 0.29,
+            "power": 8.399999999999999,
+            "harvest": 0,
+            "capacity": 0
+          }
+        ]
+      }
+    },
+    {
+      "mapping": {
+        "0": "blade",
+        "1": "gather",
+        "2": "health",
+        "4": "secretion",
+        "5": "movement"
+      },
+      "score": 121.97999999999999,
+      "useful": true,
+      "available": {
+        "worker": 7,
+        "melee": 1,
+        "ranged": 2
+      },
+      "best": {
+        "worker": [
+          {
+            "layout": "dense0",
+            "seen": true,
+            "mirror": false,
+            "countVector": [
+              0,
+              4,
+              3,
+              0,
+              4
+            ],
+            "counts": {
+              "movement": 4,
+              "gather": 4,
+              "health": 3
+            },
+            "cost": 78,
+            "hp": 40,
+            "move": 0.41000000000000003,
+            "power": 0,
+            "harvest": 4,
+            "capacity": 4
+          },
+          {
+            "layout": "dense0",
+            "seen": true,
+            "mirror": false,
+            "countVector": [
+              0,
+              6,
+              3,
+              0,
+              2
+            ],
+            "counts": {
+              "movement": 2,
+              "gather": 6,
+              "health": 3
+            },
+            "cost": 88,
+            "hp": 40,
+            "move": 0.33,
+            "power": 0,
+            "harvest": 6,
+            "capacity": 6
+          },
+          {
+            "layout": "ham1",
+            "seen": true,
+            "mirror": true,
+            "countVector": [
+              0,
+              5,
+              1,
+              0,
+              3
+            ],
+            "counts": {
+              "movement": 3,
+              "gather": 5,
+              "health": 1
+            },
+            "cost": 73,
+            "hp": 20,
+            "move": 0.37,
+            "power": 0,
+            "harvest": 5,
+            "capacity": 5
+          }
+        ],
+        "melee": [
+          {
+            "layout": "ham0",
+            "seen": true,
+            "mirror": false,
+            "countVector": [
+              6,
+              0,
+              1,
+              0,
+              2
+            ],
+            "counts": {
+              "blade": 6,
+              "health": 1,
+              "movement": 2
+            },
+            "cost": 78,
+            "hp": 20,
+            "move": 0.33,
+            "power": 12,
+            "harvest": 0,
+            "capacity": 0
+          }
+        ],
+        "ranged": [
+          {
+            "layout": "ham2",
+            "seen": true,
+            "mirror": false,
+            "countVector": [
+              0,
+              0,
+              2,
+              6,
+              1
+            ],
+            "counts": {
+              "health": 2,
+              "secretion": 6,
+              "movement": 1
+            },
+            "cost": 78,
+            "hp": 30,
+            "move": 0.29,
+            "power": 8.399999999999999,
+            "harvest": 0,
+            "capacity": 0
+          }
+        ]
+      }
+    },
+    {
+      "mapping": {
+        "0": "blade",
+        "1": "secretion",
+        "2": "health",
+        "4": "gather",
+        "5": "movement"
+      },
+      "score": 121.97999999999999,
+      "useful": true,
+      "available": {
+        "worker": 2,
+        "melee": 1,
+        "ranged": 7
+      },
+      "best": {
+        "worker": [
+          {
+            "layout": "ham2",
+            "seen": true,
+            "mirror": false,
+            "countVector": [
+              0,
+              0,
+              2,
+              6,
+              1
+            ],
+            "counts": {
+              "health": 2,
+              "gather": 6,
+              "movement": 1
+            },
+            "cost": 78,
+            "hp": 30,
+            "move": 0.29,
+            "power": 0,
+            "harvest": 6,
+            "capacity": 6
+          }
+        ],
+        "melee": [
+          {
+            "layout": "ham0",
+            "seen": true,
+            "mirror": false,
+            "countVector": [
+              6,
+              0,
+              1,
+              0,
+              2
+            ],
+            "counts": {
+              "blade": 6,
+              "health": 1,
+              "movement": 2
+            },
+            "cost": 78,
+            "hp": 20,
+            "move": 0.33,
+            "power": 12,
+            "harvest": 0,
+            "capacity": 0
+          }
+        ],
+        "ranged": [
+          {
+            "layout": "dense0",
+            "seen": true,
+            "mirror": false,
+            "countVector": [
+              0,
+              4,
+              3,
+              0,
+              4
+            ],
+            "counts": {
+              "movement": 4,
+              "secretion": 4,
+              "health": 3
+            },
+            "cost": 78,
+            "hp": 40,
+            "move": 0.41000000000000003,
+            "power": 5.6,
+            "harvest": 0,
+            "capacity": 0
+          },
+          {
+            "layout": "dense0",
+            "seen": true,
+            "mirror": false,
+            "countVector": [
+              0,
+              6,
+              3,
+              0,
+              2
+            ],
+            "counts": {
+              "movement": 2,
+              "secretion": 6,
+              "health": 3
+            },
+            "cost": 88,
+            "hp": 40,
+            "move": 0.33,
+            "power": 8.399999999999999,
+            "harvest": 0,
+            "capacity": 0
+          },
+          {
+            "layout": "ham1",
+            "seen": true,
+            "mirror": true,
+            "countVector": [
+              0,
+              5,
+              1,
+              0,
+              3
+            ],
+            "counts": {
+              "movement": 3,
+              "secretion": 5,
+              "health": 1
+            },
+            "cost": 73,
+            "hp": 20,
+            "move": 0.37,
+            "power": 7,
+            "harvest": 0,
+            "capacity": 0
+          }
+        ]
+      }
+    },
+    {
+      "mapping": {
+        "0": "blade",
+        "1": "movement",
+        "2": "gather",
+        "4": "health",
+        "5": "secretion"
+      },
+      "score": 121.97999999999999,
+      "useful": true,
+      "available": {
+        "worker": 2,
+        "melee": 1,
+        "ranged": 7
+      },
+      "best": {
+        "worker": [
+          {
+            "layout": "ham2",
+            "seen": true,
+            "mirror": true,
+            "countVector": [
+              0,
+              1,
+              6,
+              2,
+              0
+            ],
+            "counts": {
+              "health": 2,
+              "gather": 6,
+              "movement": 1
+            },
+            "cost": 78,
+            "hp": 30,
+            "move": 0.29,
+            "power": 0,
+            "harvest": 6,
+            "capacity": 6
+          }
+        ],
+        "melee": [
+          {
+            "layout": "ham0",
+            "seen": true,
+            "mirror": true,
+            "countVector": [
+              6,
+              2,
+              0,
+              1,
+              0
+            ],
+            "counts": {
+              "blade": 6,
+              "health": 1,
+              "movement": 2
+            },
+            "cost": 78,
+            "hp": 20,
+            "move": 0.33,
+            "power": 12,
+            "harvest": 0,
+            "capacity": 0
+          }
+        ],
+        "ranged": [
+          {
+            "layout": "dense0",
+            "seen": true,
+            "mirror": true,
+            "countVector": [
+              0,
+              4,
+              0,
+              3,
+              4
+            ],
+            "counts": {
+              "movement": 4,
+              "secretion": 4,
+              "health": 3
+            },
+            "cost": 78,
+            "hp": 40,
+            "move": 0.41000000000000003,
+            "power": 5.6,
+            "harvest": 0,
+            "capacity": 0
+          },
+          {
+            "layout": "dense0",
+            "seen": true,
+            "mirror": true,
+            "countVector": [
+              0,
+              2,
+              0,
+              3,
+              6
+            ],
+            "counts": {
+              "movement": 2,
+              "secretion": 6,
+              "health": 3
+            },
+            "cost": 88,
+            "hp": 40,
+            "move": 0.33,
+            "power": 8.399999999999999,
+            "harvest": 0,
+            "capacity": 0
+          },
+          {
+            "layout": "ham1",
+            "seen": true,
+            "mirror": false,
+            "countVector": [
+              0,
+              3,
+              0,
+              1,
+              5
+            ],
+            "counts": {
+              "movement": 3,
+              "secretion": 5,
+              "health": 1
+            },
+            "cost": 73,
+            "hp": 20,
+            "move": 0.37,
+            "power": 7,
+            "harvest": 0,
+            "capacity": 0
+          }
+        ]
+      }
+    },
+    {
+      "mapping": {
+        "0": "blade",
+        "1": "movement",
+        "2": "secretion",
+        "4": "health",
+        "5": "gather"
+      },
+      "score": 121.97999999999999,
+      "useful": true,
+      "available": {
+        "worker": 7,
+        "melee": 1,
+        "ranged": 2
+      },
+      "best": {
+        "worker": [
+          {
+            "layout": "dense0",
+            "seen": true,
+            "mirror": true,
+            "countVector": [
+              0,
+              4,
+              0,
+              3,
+              4
+            ],
+            "counts": {
+              "movement": 4,
+              "gather": 4,
+              "health": 3
+            },
+            "cost": 78,
+            "hp": 40,
+            "move": 0.41000000000000003,
+            "power": 0,
+            "harvest": 4,
+            "capacity": 4
+          },
+          {
+            "layout": "dense0",
+            "seen": true,
+            "mirror": true,
+            "countVector": [
+              0,
+              2,
+              0,
+              3,
+              6
+            ],
+            "counts": {
+              "movement": 2,
+              "gather": 6,
+              "health": 3
+            },
+            "cost": 88,
+            "hp": 40,
+            "move": 0.33,
+            "power": 0,
+            "harvest": 6,
+            "capacity": 6
+          },
+          {
+            "layout": "ham1",
+            "seen": true,
+            "mirror": false,
+            "countVector": [
+              0,
+              3,
+              0,
+              1,
+              5
+            ],
+            "counts": {
+              "movement": 3,
+              "gather": 5,
+              "health": 1
+            },
+            "cost": 73,
+            "hp": 20,
+            "move": 0.37,
+            "power": 0,
+            "harvest": 5,
+            "capacity": 5
+          }
+        ],
+        "melee": [
+          {
+            "layout": "ham0",
+            "seen": true,
+            "mirror": true,
+            "countVector": [
+              6,
+              2,
+              0,
+              1,
+              0
+            ],
+            "counts": {
+              "blade": 6,
+              "health": 1,
+              "movement": 2
+            },
+            "cost": 78,
+            "hp": 20,
+            "move": 0.33,
+            "power": 12,
+            "harvest": 0,
+            "capacity": 0
+          }
+        ],
+        "ranged": [
+          {
+            "layout": "ham2",
+            "seen": true,
+            "mirror": true,
+            "countVector": [
+              0,
+              1,
+              6,
+              2,
+              0
+            ],
+            "counts": {
+              "health": 2,
+              "secretion": 6,
+              "movement": 1
+            },
+            "cost": 78,
+            "hp": 30,
+            "move": 0.29,
+            "power": 8.399999999999999,
+            "harvest": 0,
+            "capacity": 0
+          }
+        ]
+      }
+    },
+    {
+      "mapping": {
+        "0": "secretion",
+        "1": "gather",
+        "2": "health",
+        "4": "blade",
+        "5": "movement"
+      },
+      "score": 121.97999999999999,
+      "useful": true,
+      "available": {
+        "worker": 7,
+        "melee": 2,
+        "ranged": 1
+      },
+      "best": {
+        "worker": [
+          {
+            "layout": "dense0",
+            "seen": true,
+            "mirror": false,
+            "countVector": [
+              0,
+              4,
+              3,
+              0,
+              4
+            ],
+            "counts": {
+              "movement": 4,
+              "gather": 4,
+              "health": 3
+            },
+            "cost": 78,
+            "hp": 40,
+            "move": 0.41000000000000003,
+            "power": 0,
+            "harvest": 4,
+            "capacity": 4
+          },
+          {
+            "layout": "dense0",
+            "seen": true,
+            "mirror": false,
+            "countVector": [
+              0,
+              6,
+              3,
+              0,
+              2
+            ],
+            "counts": {
+              "movement": 2,
+              "gather": 6,
+              "health": 3
+            },
+            "cost": 88,
+            "hp": 40,
+            "move": 0.33,
+            "power": 0,
+            "harvest": 6,
+            "capacity": 6
+          },
+          {
+            "layout": "ham1",
+            "seen": true,
+            "mirror": true,
+            "countVector": [
+              0,
+              5,
+              1,
+              0,
+              3
+            ],
+            "counts": {
+              "movement": 3,
+              "gather": 5,
+              "health": 1
+            },
+            "cost": 73,
+            "hp": 20,
+            "move": 0.37,
+            "power": 0,
+            "harvest": 5,
+            "capacity": 5
+          }
+        ],
+        "melee": [
+          {
+            "layout": "ham2",
+            "seen": true,
+            "mirror": false,
+            "countVector": [
+              0,
+              0,
+              2,
+              6,
+              1
+            ],
+            "counts": {
+              "health": 2,
+              "blade": 6,
+              "movement": 1
+            },
+            "cost": 78,
+            "hp": 30,
+            "move": 0.29,
+            "power": 12,
+            "harvest": 0,
+            "capacity": 0
+          }
+        ],
+        "ranged": [
+          {
+            "layout": "ham0",
+            "seen": true,
+            "mirror": false,
+            "countVector": [
+              6,
+              0,
+              1,
+              0,
+              2
+            ],
+            "counts": {
+              "secretion": 6,
+              "health": 1,
+              "movement": 2
+            },
+            "cost": 78,
+            "hp": 20,
+            "move": 0.33,
+            "power": 8.399999999999999,
+            "harvest": 0,
+            "capacity": 0
+          }
+        ]
+      }
+    },
+    {
+      "mapping": {
+        "0": "secretion",
+        "1": "blade",
+        "2": "health",
+        "4": "gather",
+        "5": "movement"
+      },
+      "score": 121.97999999999999,
+      "useful": true,
+      "available": {
+        "worker": 2,
+        "melee": 7,
+        "ranged": 1
+      },
+      "best": {
+        "worker": [
+          {
+            "layout": "ham2",
+            "seen": true,
+            "mirror": false,
+            "countVector": [
+              0,
+              0,
+              2,
+              6,
+              1
+            ],
+            "counts": {
+              "health": 2,
+              "gather": 6,
+              "movement": 1
+            },
+            "cost": 78,
+            "hp": 30,
+            "move": 0.29,
+            "power": 0,
+            "harvest": 6,
+            "capacity": 6
+          }
+        ],
+        "melee": [
+          {
+            "layout": "dense0",
+            "seen": true,
+            "mirror": false,
+            "countVector": [
+              0,
+              4,
+              3,
+              0,
+              4
+            ],
+            "counts": {
+              "movement": 4,
+              "blade": 4,
+              "health": 3
+            },
+            "cost": 78,
+            "hp": 40,
+            "move": 0.41000000000000003,
+            "power": 8,
+            "harvest": 0,
+            "capacity": 0
+          },
+          {
+            "layout": "dense0",
+            "seen": true,
+            "mirror": false,
+            "countVector": [
+              0,
+              6,
+              3,
+              0,
+              2
+            ],
+            "counts": {
+              "movement": 2,
+              "blade": 6,
+              "health": 3
+            },
+            "cost": 88,
+            "hp": 40,
+            "move": 0.33,
+            "power": 12,
+            "harvest": 0,
+            "capacity": 0
+          },
+          {
+            "layout": "ham1",
+            "seen": true,
+            "mirror": true,
+            "countVector": [
+              0,
+              5,
+              1,
+              0,
+              3
+            ],
+            "counts": {
+              "movement": 3,
+              "blade": 5,
+              "health": 1
+            },
+            "cost": 73,
+            "hp": 20,
+            "move": 0.37,
+            "power": 10,
+            "harvest": 0,
+            "capacity": 0
+          }
+        ],
+        "ranged": [
+          {
+            "layout": "ham0",
+            "seen": true,
+            "mirror": false,
+            "countVector": [
+              6,
+              0,
+              1,
+              0,
+              2
+            ],
+            "counts": {
+              "secretion": 6,
+              "health": 1,
+              "movement": 2
+            },
+            "cost": 78,
+            "hp": 20,
+            "move": 0.33,
+            "power": 8.399999999999999,
+            "harvest": 0,
+            "capacity": 0
+          }
+        ]
+      }
+    },
+    {
+      "mapping": {
+        "0": "secretion",
+        "1": "movement",
+        "2": "gather",
+        "4": "health",
+        "5": "blade"
+      },
+      "score": 121.97999999999999,
+      "useful": true,
+      "available": {
+        "worker": 2,
+        "melee": 7,
+        "ranged": 1
+      },
+      "best": {
+        "worker": [
+          {
+            "layout": "ham2",
+            "seen": true,
+            "mirror": true,
+            "countVector": [
+              0,
+              1,
+              6,
+              2,
+              0
+            ],
+            "counts": {
+              "health": 2,
+              "gather": 6,
+              "movement": 1
+            },
+            "cost": 78,
+            "hp": 30,
+            "move": 0.29,
+            "power": 0,
+            "harvest": 6,
+            "capacity": 6
+          }
+        ],
+        "melee": [
+          {
+            "layout": "dense0",
+            "seen": true,
+            "mirror": true,
+            "countVector": [
+              0,
+              4,
+              0,
+              3,
+              4
+            ],
+            "counts": {
+              "movement": 4,
+              "blade": 4,
+              "health": 3
+            },
+            "cost": 78,
+            "hp": 40,
+            "move": 0.41000000000000003,
+            "power": 8,
+            "harvest": 0,
+            "capacity": 0
+          },
+          {
+            "layout": "dense0",
+            "seen": true,
+            "mirror": true,
+            "countVector": [
+              0,
+              2,
+              0,
+              3,
+              6
+            ],
+            "counts": {
+              "movement": 2,
+              "blade": 6,
+              "health": 3
+            },
+            "cost": 88,
+            "hp": 40,
+            "move": 0.33,
+            "power": 12,
+            "harvest": 0,
+            "capacity": 0
+          },
+          {
+            "layout": "ham1",
+            "seen": true,
+            "mirror": false,
+            "countVector": [
+              0,
+              3,
+              0,
+              1,
+              5
+            ],
+            "counts": {
+              "movement": 3,
+              "blade": 5,
+              "health": 1
+            },
+            "cost": 73,
+            "hp": 20,
+            "move": 0.37,
+            "power": 10,
+            "harvest": 0,
+            "capacity": 0
+          }
+        ],
+        "ranged": [
+          {
+            "layout": "ham0",
+            "seen": true,
+            "mirror": true,
+            "countVector": [
+              6,
+              2,
+              0,
+              1,
+              0
+            ],
+            "counts": {
+              "secretion": 6,
+              "health": 1,
+              "movement": 2
+            },
+            "cost": 78,
+            "hp": 20,
+            "move": 0.33,
+            "power": 8.399999999999999,
+            "harvest": 0,
+            "capacity": 0
+          }
+        ]
+      }
+    },
+    {
+      "mapping": {
+        "0": "secretion",
+        "1": "movement",
+        "2": "blade",
+        "4": "health",
+        "5": "gather"
+      },
+      "score": 121.97999999999999,
+      "useful": true,
+      "available": {
+        "worker": 7,
+        "melee": 2,
+        "ranged": 1
+      },
+      "best": {
+        "worker": [
+          {
+            "layout": "dense0",
+            "seen": true,
+            "mirror": true,
+            "countVector": [
+              0,
+              4,
+              0,
+              3,
+              4
+            ],
+            "counts": {
+              "movement": 4,
+              "gather": 4,
+              "health": 3
+            },
+            "cost": 78,
+            "hp": 40,
+            "move": 0.41000000000000003,
+            "power": 0,
+            "harvest": 4,
+            "capacity": 4
+          },
+          {
+            "layout": "dense0",
+            "seen": true,
+            "mirror": true,
+            "countVector": [
+              0,
+              2,
+              0,
+              3,
+              6
+            ],
+            "counts": {
+              "movement": 2,
+              "gather": 6,
+              "health": 3
+            },
+            "cost": 88,
+            "hp": 40,
+            "move": 0.33,
+            "power": 0,
+            "harvest": 6,
+            "capacity": 6
+          },
+          {
+            "layout": "ham1",
+            "seen": true,
+            "mirror": false,
+            "countVector": [
+              0,
+              3,
+              0,
+              1,
+              5
+            ],
+            "counts": {
+              "movement": 3,
+              "gather": 5,
+              "health": 1
+            },
+            "cost": 73,
+            "hp": 20,
+            "move": 0.37,
+            "power": 0,
+            "harvest": 5,
+            "capacity": 5
+          }
+        ],
+        "melee": [
+          {
+            "layout": "ham2",
+            "seen": true,
+            "mirror": true,
+            "countVector": [
+              0,
+              1,
+              6,
+              2,
+              0
+            ],
+            "counts": {
+              "health": 2,
+              "blade": 6,
+              "movement": 1
+            },
+            "cost": 78,
+            "hp": 30,
+            "move": 0.29,
+            "power": 12,
+            "harvest": 0,
+            "capacity": 0
+          }
+        ],
+        "ranged": [
+          {
+            "layout": "ham0",
+            "seen": true,
+            "mirror": true,
+            "countVector": [
+              6,
+              2,
+              0,
+              1,
+              0
+            ],
+            "counts": {
+              "secretion": 6,
+              "health": 1,
+              "movement": 2
+            },
+            "cost": 78,
+            "hp": 20,
+            "move": 0.33,
+            "power": 8.399999999999999,
+            "harvest": 0,
+            "capacity": 0
+          }
+        ]
+      }
+    }
+  ]
+}
