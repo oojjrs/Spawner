@@ -1,0 +1,5169 @@
+{
+  "version": 1,
+  "applied": false,
+  "firstLevel": {
+    "userFixed": true,
+    "shapes": {
+      "gather": [
+        0,
+        0
+      ],
+      "health": [
+        0,
+        1
+      ],
+      "blade": [
+        0,
+        2
+      ],
+      "movement": [
+        0,
+        5
+      ],
+      "secretion": [
+        0,
+        4
+      ]
+    }
+  },
+  "activeStage": 2,
+  "laterStages": [
+    3,
+    4
+  ],
+  "board": {
+    "level": 2,
+    "radius": 3,
+    "nodes": 37
+  },
+  "sourceHash": "6f83b8d5bcef5ffbd4a10db0c8c90f723fa6696c99e6c186cd18e787e692b825",
+  "currentGenes": [
+    {
+      "gene": "power",
+      "label": "근접 공격력",
+      "shape": [
+        0,
+        0,
+        0
+      ],
+      "grade": 2,
+      "cost": 7
+    },
+    {
+      "gene": "speed",
+      "label": "근접 공속",
+      "shape": [
+        0,
+        0,
+        1
+      ],
+      "grade": 2,
+      "cost": 8
+    },
+    {
+      "gene": "capacity",
+      "label": "운반",
+      "shape": [
+        0,
+        1,
+        5
+      ],
+      "grade": 2,
+      "cost": 7
+    },
+    {
+      "gene": "healer",
+      "label": "치유기관",
+      "shape": [
+        0,
+        1,
+        3
+      ],
+      "grade": 2,
+      "cost": 14
+    },
+    {
+      "gene": "antenna",
+      "label": "안테나",
+      "shape": [
+        0,
+        1,
+        2
+      ],
+      "grade": 2,
+      "cost": 14
+    },
+    {
+      "gene": "carapace",
+      "label": "갑각",
+      "shape": [
+        0,
+        1,
+        0
+      ],
+      "grade": 2,
+      "cost": 14
+    }
+  ],
+  "method": "Exact multiset order and legal rotation enumeration; first rotation normalized to zero; native boundary/collision/node-join rules; representative aesthetics are a heuristic, not user approval.",
+  "constraints": [
+    "Level-one mapping is fixed.",
+    "No changed stats, prices, genes, grades or set bonuses.",
+    "Remapped shapes pass geometry only and require catalog/migration work before game use.",
+    "No level-three/four assignment is decided before level two."
+  ],
+  "results": [
+    {
+      "id": "current",
+      "title": "현행 배정 유지",
+      "shapes": {
+        "power": [
+          0,
+          0,
+          0
+        ],
+        "speed": [
+          0,
+          0,
+          1
+        ],
+        "capacity": [
+          0,
+          1,
+          5
+        ],
+        "healer": [
+          0,
+          1,
+          3
+        ],
+        "antenna": [
+          0,
+          1,
+          2
+        ],
+        "carapace": [
+          0,
+          1,
+          0
+        ]
+      },
+      "gameCompatible": true,
+      "distinctUndirectedOutlines": 6,
+      "changes": [],
+      "cases": [
+        {
+          "id": "one-attack-pair",
+          "title": "공격력1 + 공속1",
+          "counts": {
+            "power": 1,
+            "speed": 1
+          },
+          "layoutsModuloRotation": 2,
+          "closedAtOriginModuloRotation": 0,
+          "extendableModuloRotation": 2,
+          "birthCost": 18,
+          "stats": {
+            "gatherCount": 0,
+            "bladeCount": 0,
+            "antennaCount": 0,
+            "healerCount": 0,
+            "secretionCount": 0,
+            "melee": false,
+            "ranged": false,
+            "meleePower": 0,
+            "meleeSpeed": 0,
+            "rangedPower": 0,
+            "rangedSpeed": 0,
+            "healer": false,
+            "health": 10,
+            "power": 0,
+            "hits": 0,
+            "speed": 0,
+            "armor": 0,
+            "parry": 0,
+            "block": 0,
+            "evasion": 0,
+            "capacity": 0,
+            "harvest": 0,
+            "harvestTime": 0,
+            "movement": 0.25,
+            "vision": 1,
+            "scale": 1.02,
+            "roaming": false,
+            "comboPower": 0,
+            "critical": 0,
+            "criticalPower": 0,
+            "accuracy": 0,
+            "penetration": 0,
+            "blockPower": 50,
+            "counter": 0,
+            "counterPower": 0,
+            "tenacity": 0,
+            "reduction": 0,
+            "loadSpeed": 0,
+            "healing": 0,
+            "stun": 0,
+            "stunTime": 0,
+            "bleed": 0,
+            "bleedPower": 0,
+            "area": 0,
+            "areaPower": 0,
+            "lifesteal": 0,
+            "reflection": 0,
+            "regeneration": 0,
+            "comboSpeed": 0,
+            "focus": 0
+          },
+          "representative": {
+            "pieces": [
+              {
+                "gene": "speed",
+                "grade": 2,
+                "rotation": 0,
+                "shape": [
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "gene": "power",
+                "grade": 2,
+                "rotation": 3,
+                "shape": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            ],
+            "paths": [
+              {
+                "gene": "speed",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 0
+                  },
+                  {
+                    "q": 2,
+                    "r": 0
+                  },
+                  {
+                    "q": 2,
+                    "r": 1
+                  }
+                ]
+              },
+              {
+                "gene": "power",
+                "points": [
+                  {
+                    "q": 2,
+                    "r": 1
+                  },
+                  {
+                    "q": 1,
+                    "r": 1
+                  },
+                  {
+                    "q": 0,
+                    "r": 1
+                  },
+                  {
+                    "q": -1,
+                    "r": 1
+                  }
+                ]
+              }
+            ],
+            "occupied": 7,
+            "closedAtOrigin": false,
+            "inversionMatched": 6,
+            "inversionTotal": 7,
+            "boundingSpan": 7,
+            "extensions": 19,
+            "score": 1021.2857142857143
+          },
+          "nativeChecks": [
+            {
+              "rotation": 0,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 1,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 2,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 3,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 4,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 5,
+              "geometric": true,
+              "native": true
+            }
+          ],
+          "healerHpPerSecond": 0,
+          "note": "공격기관 없는 형상 비교입니다. 실제 근접 공격에는 칼날이 필요합니다."
+        },
+        {
+          "id": "two-attack-pairs",
+          "title": "공격력2 + 공속2",
+          "counts": {
+            "power": 2,
+            "speed": 2
+          },
+          "layoutsModuloRotation": 21,
+          "closedAtOriginModuloRotation": 2,
+          "extendableModuloRotation": 17,
+          "birthCost": 33,
+          "stats": {
+            "gatherCount": 0,
+            "bladeCount": 0,
+            "antennaCount": 0,
+            "healerCount": 0,
+            "secretionCount": 0,
+            "melee": false,
+            "ranged": false,
+            "meleePower": 0,
+            "meleeSpeed": 0,
+            "rangedPower": 0,
+            "rangedSpeed": 0,
+            "healer": false,
+            "health": 10,
+            "power": 0,
+            "hits": 0,
+            "speed": 0,
+            "armor": 0,
+            "parry": 0,
+            "block": 0,
+            "evasion": 0,
+            "capacity": 0,
+            "harvest": 0,
+            "harvestTime": 0,
+            "movement": 0.25,
+            "vision": 1,
+            "scale": 1.04,
+            "roaming": false,
+            "comboPower": 0,
+            "critical": 0,
+            "criticalPower": 0,
+            "accuracy": 0,
+            "penetration": 0,
+            "blockPower": 50,
+            "counter": 0,
+            "counterPower": 0,
+            "tenacity": 0,
+            "reduction": 0,
+            "loadSpeed": 0,
+            "healing": 0,
+            "stun": 0,
+            "stunTime": 0,
+            "bleed": 0,
+            "bleedPower": 0,
+            "area": 0,
+            "areaPower": 0,
+            "lifesteal": 0,
+            "reflection": 0,
+            "regeneration": 0,
+            "comboSpeed": 0,
+            "focus": 0
+          },
+          "representative": {
+            "pieces": [
+              {
+                "gene": "power",
+                "grade": 2,
+                "rotation": 0,
+                "shape": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "gene": "speed",
+                "grade": 2,
+                "rotation": 2,
+                "shape": [
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "gene": "power",
+                "grade": 2,
+                "rotation": 3,
+                "shape": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "gene": "speed",
+                "grade": 2,
+                "rotation": 5,
+                "shape": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "paths": [
+              {
+                "gene": "power",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 0
+                  },
+                  {
+                    "q": 2,
+                    "r": 0
+                  },
+                  {
+                    "q": 3,
+                    "r": 0
+                  }
+                ]
+              },
+              {
+                "gene": "speed",
+                "points": [
+                  {
+                    "q": 3,
+                    "r": 0
+                  },
+                  {
+                    "q": 2,
+                    "r": 1
+                  },
+                  {
+                    "q": 1,
+                    "r": 2
+                  },
+                  {
+                    "q": 0,
+                    "r": 2
+                  }
+                ]
+              },
+              {
+                "gene": "power",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 2
+                  },
+                  {
+                    "q": -1,
+                    "r": 2
+                  },
+                  {
+                    "q": -2,
+                    "r": 2
+                  },
+                  {
+                    "q": -3,
+                    "r": 2
+                  }
+                ]
+              },
+              {
+                "gene": "speed",
+                "points": [
+                  {
+                    "q": -3,
+                    "r": 2
+                  },
+                  {
+                    "q": -2,
+                    "r": 1
+                  },
+                  {
+                    "q": -1,
+                    "r": 0
+                  },
+                  {
+                    "q": 0,
+                    "r": 0
+                  }
+                ]
+              }
+            ],
+            "occupied": 12,
+            "closedAtOrigin": true,
+            "inversionMatched": 12,
+            "inversionTotal": 12,
+            "boundingSpan": 12,
+            "extensions": 12,
+            "score": 12
+          },
+          "nativeChecks": [
+            {
+              "rotation": 0,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 1,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 2,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 3,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 4,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 5,
+              "geometric": true,
+              "native": true
+            }
+          ],
+          "healerHpPerSecond": 0,
+          "note": "공격기관 없는 형상 비교입니다. 실제 근접 공격에는 칼날이 필요합니다."
+        },
+        {
+          "id": "fighter",
+          "title": "칼날1 + 공격력2 + 공속2",
+          "counts": {
+            "blade": 1,
+            "power": 2,
+            "speed": 2
+          },
+          "layoutsModuloRotation": 92,
+          "closedAtOriginModuloRotation": 4,
+          "extendableModuloRotation": 88,
+          "birthCost": 43,
+          "stats": {
+            "gatherCount": 0,
+            "bladeCount": 1,
+            "antennaCount": 0,
+            "healerCount": 0,
+            "secretionCount": 0,
+            "melee": true,
+            "ranged": false,
+            "meleePower": 10,
+            "meleeSpeed": 0.7,
+            "rangedPower": 0,
+            "rangedSpeed": 0,
+            "healer": false,
+            "health": 10,
+            "power": 10,
+            "hits": 1,
+            "speed": 0.7,
+            "armor": 0,
+            "parry": 0,
+            "block": 0,
+            "evasion": 0,
+            "capacity": 0,
+            "harvest": 0,
+            "harvestTime": 0,
+            "movement": 0.25,
+            "vision": 1,
+            "scale": 1.05,
+            "roaming": false,
+            "comboPower": 50,
+            "critical": 0,
+            "criticalPower": 150,
+            "accuracy": 0,
+            "penetration": 0,
+            "blockPower": 50,
+            "counter": 0,
+            "counterPower": 100,
+            "tenacity": 0,
+            "reduction": 0,
+            "loadSpeed": 0,
+            "healing": 0,
+            "stun": 0,
+            "stunTime": 0,
+            "bleed": 0,
+            "bleedPower": 0,
+            "area": 0,
+            "areaPower": 0,
+            "lifesteal": 0,
+            "reflection": 0,
+            "regeneration": 0,
+            "comboSpeed": 0.12,
+            "focus": 0.3
+          },
+          "representative": {
+            "pieces": [
+              {
+                "gene": "power",
+                "grade": 2,
+                "rotation": 0,
+                "shape": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "gene": "power",
+                "grade": 2,
+                "rotation": 2,
+                "shape": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "gene": "speed",
+                "grade": 2,
+                "rotation": 3,
+                "shape": [
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "gene": "blade",
+                "grade": 1,
+                "rotation": 2,
+                "shape": [
+                  0,
+                  2
+                ]
+              },
+              {
+                "gene": "speed",
+                "grade": 2,
+                "rotation": 5,
+                "shape": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "paths": [
+              {
+                "gene": "power",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 0
+                  },
+                  {
+                    "q": 2,
+                    "r": 0
+                  },
+                  {
+                    "q": 3,
+                    "r": 0
+                  }
+                ]
+              },
+              {
+                "gene": "power",
+                "points": [
+                  {
+                    "q": 3,
+                    "r": 0
+                  },
+                  {
+                    "q": 2,
+                    "r": 1
+                  },
+                  {
+                    "q": 1,
+                    "r": 2
+                  },
+                  {
+                    "q": 0,
+                    "r": 3
+                  }
+                ]
+              },
+              {
+                "gene": "speed",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 3
+                  },
+                  {
+                    "q": -1,
+                    "r": 3
+                  },
+                  {
+                    "q": -2,
+                    "r": 3
+                  },
+                  {
+                    "q": -2,
+                    "r": 2
+                  }
+                ]
+              },
+              {
+                "gene": "blade",
+                "points": [
+                  {
+                    "q": -2,
+                    "r": 2
+                  },
+                  {
+                    "q": -3,
+                    "r": 3
+                  },
+                  {
+                    "q": -3,
+                    "r": 2
+                  }
+                ]
+              },
+              {
+                "gene": "speed",
+                "points": [
+                  {
+                    "q": -3,
+                    "r": 2
+                  },
+                  {
+                    "q": -2,
+                    "r": 1
+                  },
+                  {
+                    "q": -1,
+                    "r": 0
+                  },
+                  {
+                    "q": 0,
+                    "r": 0
+                  }
+                ]
+              }
+            ],
+            "occupied": 14,
+            "closedAtOrigin": true,
+            "inversionMatched": 10,
+            "inversionTotal": 14,
+            "boundingSpan": 13,
+            "extensions": 15,
+            "score": 41.57142857142857
+          },
+          "nativeChecks": [
+            {
+              "rotation": 0,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 1,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 2,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 3,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 4,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 5,
+              "geometric": true,
+              "native": true
+            }
+          ],
+          "healerHpPerSecond": 0
+        },
+        {
+          "id": "worker",
+          "title": "채집2 + 운반1 + 체력1 + 이속1",
+          "counts": {
+            "gather": 2,
+            "capacity": 1,
+            "health": 1,
+            "movement": 1
+          },
+          "layoutsModuloRotation": 1048,
+          "closedAtOriginModuloRotation": 42,
+          "extendableModuloRotation": 1019,
+          "birthCost": 40,
+          "stats": {
+            "gatherCount": 2,
+            "bladeCount": 0,
+            "antennaCount": 0,
+            "healerCount": 0,
+            "secretionCount": 0,
+            "melee": false,
+            "ranged": false,
+            "meleePower": 0,
+            "meleeSpeed": 0,
+            "rangedPower": 0,
+            "rangedSpeed": 0,
+            "healer": false,
+            "health": 20,
+            "power": 0,
+            "hits": 0,
+            "speed": 0,
+            "armor": 0,
+            "parry": 0,
+            "block": 0,
+            "evasion": 0,
+            "capacity": 4,
+            "harvest": 2,
+            "harvestTime": 4,
+            "movement": 0.29,
+            "vision": 1,
+            "scale": 1.05,
+            "roaming": false,
+            "comboPower": 0,
+            "critical": 0,
+            "criticalPower": 0,
+            "accuracy": 0,
+            "penetration": 0,
+            "blockPower": 50,
+            "counter": 0,
+            "counterPower": 0,
+            "tenacity": 0,
+            "reduction": 0,
+            "loadSpeed": 75,
+            "healing": 0,
+            "stun": 0,
+            "stunTime": 0,
+            "bleed": 0,
+            "bleedPower": 0,
+            "area": 0,
+            "areaPower": 0,
+            "lifesteal": 0,
+            "reflection": 0,
+            "regeneration": 0,
+            "comboSpeed": 0,
+            "focus": 0
+          },
+          "representative": {
+            "pieces": [
+              {
+                "gene": "gather",
+                "grade": 1,
+                "rotation": 0,
+                "shape": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "gene": "capacity",
+                "grade": 2,
+                "rotation": 4,
+                "shape": [
+                  0,
+                  1,
+                  5
+                ]
+              },
+              {
+                "gene": "health",
+                "grade": 1,
+                "rotation": 2,
+                "shape": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "gene": "gather",
+                "grade": 1,
+                "rotation": 2,
+                "shape": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "gene": "movement",
+                "grade": 1,
+                "rotation": 0,
+                "shape": [
+                  0,
+                  5
+                ]
+              }
+            ],
+            "paths": [
+              {
+                "gene": "gather",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 0
+                  },
+                  {
+                    "q": 2,
+                    "r": 0
+                  }
+                ]
+              },
+              {
+                "gene": "capacity",
+                "points": [
+                  {
+                    "q": 2,
+                    "r": 0
+                  },
+                  {
+                    "q": 2,
+                    "r": -1
+                  },
+                  {
+                    "q": 3,
+                    "r": -2
+                  },
+                  {
+                    "q": 2,
+                    "r": -2
+                  }
+                ]
+              },
+              {
+                "gene": "health",
+                "points": [
+                  {
+                    "q": 2,
+                    "r": -2
+                  },
+                  {
+                    "q": 1,
+                    "r": -1
+                  },
+                  {
+                    "q": 0,
+                    "r": -1
+                  }
+                ]
+              },
+              {
+                "gene": "gather",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": -1
+                  },
+                  {
+                    "q": -1,
+                    "r": 0
+                  },
+                  {
+                    "q": -2,
+                    "r": 1
+                  }
+                ]
+              },
+              {
+                "gene": "movement",
+                "points": [
+                  {
+                    "q": -2,
+                    "r": 1
+                  },
+                  {
+                    "q": -1,
+                    "r": 1
+                  },
+                  {
+                    "q": 0,
+                    "r": 0
+                  }
+                ]
+              }
+            ],
+            "occupied": 11,
+            "closedAtOrigin": true,
+            "inversionMatched": 10,
+            "inversionTotal": 11,
+            "boundingSpan": 11,
+            "extensions": 3,
+            "score": 20.090909090909093
+          },
+          "nativeChecks": [
+            {
+              "rotation": 0,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 1,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 2,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 3,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 4,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 5,
+              "geometric": true,
+              "native": true
+            }
+          ],
+          "healerHpPerSecond": 0
+        },
+        {
+          "id": "scout",
+          "title": "안테나1 + 이속2 + 체력1",
+          "counts": {
+            "antenna": 1,
+            "movement": 2,
+            "health": 1
+          },
+          "layoutsModuloRotation": 136,
+          "closedAtOriginModuloRotation": 0,
+          "extendableModuloRotation": 136,
+          "birthCost": 32,
+          "stats": {
+            "gatherCount": 0,
+            "bladeCount": 0,
+            "antennaCount": 1,
+            "healerCount": 0,
+            "secretionCount": 0,
+            "melee": false,
+            "ranged": false,
+            "meleePower": 0,
+            "meleeSpeed": 0,
+            "rangedPower": 0,
+            "rangedSpeed": 0,
+            "healer": false,
+            "health": 20,
+            "power": 0,
+            "hits": 0,
+            "speed": 0,
+            "armor": 0,
+            "parry": 0,
+            "block": 0,
+            "evasion": 0,
+            "capacity": 0,
+            "harvest": 0,
+            "harvestTime": 0,
+            "movement": 0.33,
+            "vision": 2,
+            "scale": 1.04,
+            "roaming": true,
+            "comboPower": 0,
+            "critical": 0,
+            "criticalPower": 0,
+            "accuracy": 0,
+            "penetration": 0,
+            "blockPower": 50,
+            "counter": 0,
+            "counterPower": 0,
+            "tenacity": 0,
+            "reduction": 0,
+            "loadSpeed": 0,
+            "healing": 0,
+            "stun": 0,
+            "stunTime": 0,
+            "bleed": 0,
+            "bleedPower": 0,
+            "area": 0,
+            "areaPower": 0,
+            "lifesteal": 0,
+            "reflection": 0,
+            "regeneration": 0,
+            "comboSpeed": 0,
+            "focus": 0
+          },
+          "representative": {
+            "pieces": [
+              {
+                "gene": "antenna",
+                "grade": 2,
+                "rotation": 0,
+                "shape": [
+                  0,
+                  1,
+                  2
+                ]
+              },
+              {
+                "gene": "health",
+                "grade": 1,
+                "rotation": 3,
+                "shape": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "gene": "movement",
+                "grade": 1,
+                "rotation": 3,
+                "shape": [
+                  0,
+                  5
+                ]
+              },
+              {
+                "gene": "movement",
+                "grade": 1,
+                "rotation": 1,
+                "shape": [
+                  0,
+                  5
+                ]
+              }
+            ],
+            "paths": [
+              {
+                "gene": "antenna",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 1
+                  },
+                  {
+                    "q": 0,
+                    "r": 2
+                  }
+                ]
+              },
+              {
+                "gene": "health",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 2
+                  },
+                  {
+                    "q": -1,
+                    "r": 2
+                  },
+                  {
+                    "q": -1,
+                    "r": 1
+                  }
+                ]
+              },
+              {
+                "gene": "movement",
+                "points": [
+                  {
+                    "q": -1,
+                    "r": 1
+                  },
+                  {
+                    "q": -2,
+                    "r": 1
+                  },
+                  {
+                    "q": -3,
+                    "r": 2
+                  }
+                ]
+              },
+              {
+                "gene": "movement",
+                "points": [
+                  {
+                    "q": -3,
+                    "r": 2
+                  },
+                  {
+                    "q": -3,
+                    "r": 3
+                  },
+                  {
+                    "q": -2,
+                    "r": 3
+                  }
+                ]
+              }
+            ],
+            "occupied": 10,
+            "closedAtOrigin": false,
+            "inversionMatched": 10,
+            "inversionTotal": 10,
+            "boundingSpan": 10,
+            "extensions": 4,
+            "score": 1010
+          },
+          "nativeChecks": [
+            {
+              "rotation": 0,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 1,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 2,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 3,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 4,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 5,
+              "geometric": true,
+              "native": true
+            }
+          ],
+          "healerHpPerSecond": 0
+        },
+        {
+          "id": "healer",
+          "title": "치유기관1 + 체력3",
+          "counts": {
+            "healer": 1,
+            "health": 3
+          },
+          "layoutsModuloRotation": 69,
+          "closedAtOriginModuloRotation": 0,
+          "extendableModuloRotation": 66,
+          "birthCost": 32,
+          "stats": {
+            "gatherCount": 0,
+            "bladeCount": 0,
+            "antennaCount": 0,
+            "healerCount": 1,
+            "secretionCount": 0,
+            "melee": false,
+            "ranged": false,
+            "meleePower": 0,
+            "meleeSpeed": 0,
+            "rangedPower": 0,
+            "rangedSpeed": 0,
+            "healer": true,
+            "health": 40,
+            "power": 0,
+            "hits": 0,
+            "speed": 0,
+            "armor": 0,
+            "parry": 0,
+            "block": 0,
+            "evasion": 0,
+            "capacity": 0,
+            "harvest": 0,
+            "harvestTime": 0,
+            "movement": 0.25,
+            "vision": 1,
+            "scale": 1.04,
+            "roaming": false,
+            "comboPower": 0,
+            "critical": 0,
+            "criticalPower": 0,
+            "accuracy": 0,
+            "penetration": 0,
+            "blockPower": 50,
+            "counter": 0,
+            "counterPower": 0,
+            "tenacity": 0,
+            "reduction": 0,
+            "loadSpeed": 0,
+            "healing": 0,
+            "stun": 0,
+            "stunTime": 0,
+            "bleed": 0,
+            "bleedPower": 0,
+            "area": 0,
+            "areaPower": 0,
+            "lifesteal": 0,
+            "reflection": 0,
+            "regeneration": 0,
+            "comboSpeed": 0,
+            "focus": 0
+          },
+          "representative": {
+            "pieces": [
+              {
+                "gene": "healer",
+                "grade": 2,
+                "rotation": 0,
+                "shape": [
+                  0,
+                  1,
+                  3
+                ]
+              },
+              {
+                "gene": "health",
+                "grade": 1,
+                "rotation": 3,
+                "shape": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "gene": "health",
+                "grade": 1,
+                "rotation": 5,
+                "shape": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "gene": "health",
+                "grade": 1,
+                "rotation": 0,
+                "shape": [
+                  0,
+                  1
+                ]
+              }
+            ],
+            "paths": [
+              {
+                "gene": "healer",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 1
+                  },
+                  {
+                    "q": 0,
+                    "r": 1
+                  }
+                ]
+              },
+              {
+                "gene": "health",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 1
+                  },
+                  {
+                    "q": -1,
+                    "r": 1
+                  },
+                  {
+                    "q": -1,
+                    "r": 0
+                  }
+                ]
+              },
+              {
+                "gene": "health",
+                "points": [
+                  {
+                    "q": -1,
+                    "r": 0
+                  },
+                  {
+                    "q": 0,
+                    "r": -1
+                  },
+                  {
+                    "q": 1,
+                    "r": -1
+                  }
+                ]
+              },
+              {
+                "gene": "health",
+                "points": [
+                  {
+                    "q": 1,
+                    "r": -1
+                  },
+                  {
+                    "q": 2,
+                    "r": -1
+                  },
+                  {
+                    "q": 2,
+                    "r": 0
+                  }
+                ]
+              }
+            ],
+            "occupied": 10,
+            "closedAtOrigin": false,
+            "inversionMatched": 10,
+            "inversionTotal": 10,
+            "boundingSpan": 8,
+            "extensions": 6,
+            "score": 1008
+          },
+          "nativeChecks": [
+            {
+              "rotation": 0,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 1,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 2,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 3,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 4,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 5,
+              "geometric": true,
+              "native": true
+            }
+          ],
+          "healerHpPerSecond": 0.5
+        },
+        {
+          "id": "tank",
+          "title": "갑각2 + 체력3",
+          "counts": {
+            "carapace": 2,
+            "health": 3
+          },
+          "layoutsModuloRotation": 134,
+          "closedAtOriginModuloRotation": 4,
+          "extendableModuloRotation": 131,
+          "birthCost": 46,
+          "stats": {
+            "gatherCount": 0,
+            "bladeCount": 0,
+            "antennaCount": 0,
+            "healerCount": 0,
+            "secretionCount": 0,
+            "melee": false,
+            "ranged": false,
+            "meleePower": 0,
+            "meleeSpeed": 0,
+            "rangedPower": 0,
+            "rangedSpeed": 0,
+            "healer": false,
+            "health": 40,
+            "power": 0,
+            "hits": 0,
+            "speed": 0,
+            "armor": 4,
+            "parry": 0,
+            "block": 20,
+            "evasion": 0,
+            "capacity": 0,
+            "harvest": 0,
+            "harvestTime": 0,
+            "movement": 0.25,
+            "vision": 1,
+            "scale": 1.05,
+            "roaming": false,
+            "comboPower": 0,
+            "critical": 0,
+            "criticalPower": 0,
+            "accuracy": 0,
+            "penetration": 0,
+            "blockPower": 50,
+            "counter": 0,
+            "counterPower": 0,
+            "tenacity": 0,
+            "reduction": 0,
+            "loadSpeed": 0,
+            "healing": 0,
+            "stun": 0,
+            "stunTime": 0,
+            "bleed": 0,
+            "bleedPower": 0,
+            "area": 0,
+            "areaPower": 0,
+            "lifesteal": 0,
+            "reflection": 0,
+            "regeneration": 0,
+            "comboSpeed": 0,
+            "focus": 0
+          },
+          "representative": {
+            "pieces": [
+              {
+                "gene": "carapace",
+                "grade": 2,
+                "rotation": 0,
+                "shape": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "gene": "health",
+                "grade": 1,
+                "rotation": 2,
+                "shape": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "gene": "health",
+                "grade": 1,
+                "rotation": 2,
+                "shape": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "gene": "health",
+                "grade": 1,
+                "rotation": 3,
+                "shape": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "gene": "carapace",
+                "grade": 2,
+                "rotation": 5,
+                "shape": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ],
+            "paths": [
+              {
+                "gene": "carapace",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 1
+                  },
+                  {
+                    "q": 2,
+                    "r": 1
+                  }
+                ]
+              },
+              {
+                "gene": "health",
+                "points": [
+                  {
+                    "q": 2,
+                    "r": 1
+                  },
+                  {
+                    "q": 1,
+                    "r": 2
+                  },
+                  {
+                    "q": 0,
+                    "r": 2
+                  }
+                ]
+              },
+              {
+                "gene": "health",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 2
+                  },
+                  {
+                    "q": -1,
+                    "r": 3
+                  },
+                  {
+                    "q": -2,
+                    "r": 3
+                  }
+                ]
+              },
+              {
+                "gene": "health",
+                "points": [
+                  {
+                    "q": -2,
+                    "r": 3
+                  },
+                  {
+                    "q": -3,
+                    "r": 3
+                  },
+                  {
+                    "q": -3,
+                    "r": 2
+                  }
+                ]
+              },
+              {
+                "gene": "carapace",
+                "points": [
+                  {
+                    "q": -3,
+                    "r": 2
+                  },
+                  {
+                    "q": -2,
+                    "r": 1
+                  },
+                  {
+                    "q": -1,
+                    "r": 1
+                  },
+                  {
+                    "q": 0,
+                    "r": 0
+                  }
+                ]
+              }
+            ],
+            "occupied": 12,
+            "closedAtOrigin": true,
+            "inversionMatched": 10,
+            "inversionTotal": 12,
+            "boundingSpan": 12,
+            "extensions": 14,
+            "score": 28.666666666666664
+          },
+          "nativeChecks": [
+            {
+              "rotation": 0,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 1,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 2,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 3,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 4,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 5,
+              "geometric": true,
+              "native": true
+            }
+          ],
+          "healerHpPerSecond": 0
+        }
+      ]
+    },
+    {
+      "id": "paired-capacity-l",
+      "title": "공격 쌍 맞물림 · 운반 L형",
+      "gameCompatible": false,
+      "shapes": {
+        "power": [
+          0,
+          1,
+          5
+        ],
+        "speed": [
+          0,
+          5,
+          4
+        ],
+        "capacity": [
+          0,
+          0,
+          1
+        ],
+        "healer": [
+          0,
+          1,
+          3
+        ],
+        "antenna": [
+          0,
+          0,
+          0
+        ],
+        "carapace": [
+          0,
+          1,
+          0
+        ]
+      },
+      "distinctUndirectedOutlines": 6,
+      "changes": [
+        {
+          "gene": "power",
+          "label": "근접 공격력",
+          "from": [
+            0,
+            0,
+            0
+          ],
+          "to": [
+            0,
+            1,
+            5
+          ]
+        },
+        {
+          "gene": "speed",
+          "label": "근접 공속",
+          "from": [
+            0,
+            0,
+            1
+          ],
+          "to": [
+            0,
+            5,
+            4
+          ]
+        },
+        {
+          "gene": "capacity",
+          "label": "운반",
+          "from": [
+            0,
+            1,
+            5
+          ],
+          "to": [
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "antenna",
+          "label": "안테나",
+          "from": [
+            0,
+            1,
+            2
+          ],
+          "to": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "id": "one-attack-pair",
+          "title": "공격력1 + 공속1",
+          "counts": {
+            "power": 1,
+            "speed": 1
+          },
+          "layoutsModuloRotation": 4,
+          "closedAtOriginModuloRotation": 2,
+          "extendableModuloRotation": 4,
+          "birthCost": 18,
+          "stats": {
+            "gatherCount": 0,
+            "bladeCount": 0,
+            "antennaCount": 0,
+            "healerCount": 0,
+            "secretionCount": 0,
+            "melee": false,
+            "ranged": false,
+            "meleePower": 0,
+            "meleeSpeed": 0,
+            "rangedPower": 0,
+            "rangedSpeed": 0,
+            "healer": false,
+            "health": 10,
+            "power": 0,
+            "hits": 0,
+            "speed": 0,
+            "armor": 0,
+            "parry": 0,
+            "block": 0,
+            "evasion": 0,
+            "capacity": 0,
+            "harvest": 0,
+            "harvestTime": 0,
+            "movement": 0.25,
+            "vision": 1,
+            "scale": 1.02,
+            "roaming": false,
+            "comboPower": 0,
+            "critical": 0,
+            "criticalPower": 0,
+            "accuracy": 0,
+            "penetration": 0,
+            "blockPower": 50,
+            "counter": 0,
+            "counterPower": 0,
+            "tenacity": 0,
+            "reduction": 0,
+            "loadSpeed": 0,
+            "healing": 0,
+            "stun": 0,
+            "stunTime": 0,
+            "bleed": 0,
+            "bleedPower": 0,
+            "area": 0,
+            "areaPower": 0,
+            "lifesteal": 0,
+            "reflection": 0,
+            "regeneration": 0,
+            "comboSpeed": 0,
+            "focus": 0
+          },
+          "representative": {
+            "pieces": [
+              {
+                "gene": "power",
+                "grade": 2,
+                "rotation": 0,
+                "shape": [
+                  0,
+                  1,
+                  5
+                ]
+              },
+              {
+                "gene": "speed",
+                "grade": 2,
+                "rotation": 4,
+                "shape": [
+                  0,
+                  5,
+                  4
+                ]
+              }
+            ],
+            "paths": [
+              {
+                "gene": "power",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 1
+                  },
+                  {
+                    "q": 2,
+                    "r": 0
+                  }
+                ]
+              },
+              {
+                "gene": "speed",
+                "points": [
+                  {
+                    "q": 2,
+                    "r": 0
+                  },
+                  {
+                    "q": 2,
+                    "r": -1
+                  },
+                  {
+                    "q": 1,
+                    "r": -1
+                  },
+                  {
+                    "q": 0,
+                    "r": 0
+                  }
+                ]
+              }
+            ],
+            "occupied": 6,
+            "closedAtOrigin": true,
+            "inversionMatched": 5,
+            "inversionTotal": 6,
+            "boundingSpan": 6,
+            "extensions": 17,
+            "score": 22.666666666666664
+          },
+          "nativeChecks": [
+            {
+              "rotation": 0,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 1,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 2,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 3,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 4,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 5,
+              "geometric": true,
+              "native": false
+            }
+          ],
+          "healerHpPerSecond": 0,
+          "note": "공격기관 없는 형상 비교입니다. 실제 근접 공격에는 칼날이 필요합니다."
+        },
+        {
+          "id": "two-attack-pairs",
+          "title": "공격력2 + 공속2",
+          "counts": {
+            "power": 2,
+            "speed": 2
+          },
+          "layoutsModuloRotation": 53,
+          "closedAtOriginModuloRotation": 14,
+          "extendableModuloRotation": 51,
+          "birthCost": 33,
+          "stats": {
+            "gatherCount": 0,
+            "bladeCount": 0,
+            "antennaCount": 0,
+            "healerCount": 0,
+            "secretionCount": 0,
+            "melee": false,
+            "ranged": false,
+            "meleePower": 0,
+            "meleeSpeed": 0,
+            "rangedPower": 0,
+            "rangedSpeed": 0,
+            "healer": false,
+            "health": 10,
+            "power": 0,
+            "hits": 0,
+            "speed": 0,
+            "armor": 0,
+            "parry": 0,
+            "block": 0,
+            "evasion": 0,
+            "capacity": 0,
+            "harvest": 0,
+            "harvestTime": 0,
+            "movement": 0.25,
+            "vision": 1,
+            "scale": 1.04,
+            "roaming": false,
+            "comboPower": 0,
+            "critical": 0,
+            "criticalPower": 0,
+            "accuracy": 0,
+            "penetration": 0,
+            "blockPower": 50,
+            "counter": 0,
+            "counterPower": 0,
+            "tenacity": 0,
+            "reduction": 0,
+            "loadSpeed": 0,
+            "healing": 0,
+            "stun": 0,
+            "stunTime": 0,
+            "bleed": 0,
+            "bleedPower": 0,
+            "area": 0,
+            "areaPower": 0,
+            "lifesteal": 0,
+            "reflection": 0,
+            "regeneration": 0,
+            "comboSpeed": 0,
+            "focus": 0
+          },
+          "representative": {
+            "pieces": [
+              {
+                "gene": "power",
+                "grade": 2,
+                "rotation": 0,
+                "shape": [
+                  0,
+                  1,
+                  5
+                ]
+              },
+              {
+                "gene": "speed",
+                "grade": 2,
+                "rotation": 4,
+                "shape": [
+                  0,
+                  5,
+                  4
+                ]
+              },
+              {
+                "gene": "power",
+                "grade": 2,
+                "rotation": 3,
+                "shape": [
+                  0,
+                  1,
+                  5
+                ]
+              },
+              {
+                "gene": "speed",
+                "grade": 2,
+                "rotation": 1,
+                "shape": [
+                  0,
+                  5,
+                  4
+                ]
+              }
+            ],
+            "paths": [
+              {
+                "gene": "power",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 1
+                  },
+                  {
+                    "q": 2,
+                    "r": 0
+                  }
+                ]
+              },
+              {
+                "gene": "speed",
+                "points": [
+                  {
+                    "q": 2,
+                    "r": 0
+                  },
+                  {
+                    "q": 2,
+                    "r": -1
+                  },
+                  {
+                    "q": 1,
+                    "r": -1
+                  },
+                  {
+                    "q": 0,
+                    "r": 0
+                  }
+                ]
+              },
+              {
+                "gene": "power",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 0
+                  },
+                  {
+                    "q": -1,
+                    "r": 0
+                  },
+                  {
+                    "q": -1,
+                    "r": -1
+                  },
+                  {
+                    "q": -2,
+                    "r": 0
+                  }
+                ]
+              },
+              {
+                "gene": "speed",
+                "points": [
+                  {
+                    "q": -2,
+                    "r": 0
+                  },
+                  {
+                    "q": -2,
+                    "r": 1
+                  },
+                  {
+                    "q": -1,
+                    "r": 1
+                  },
+                  {
+                    "q": 0,
+                    "r": 0
+                  }
+                ]
+              }
+            ],
+            "occupied": 11,
+            "closedAtOrigin": true,
+            "inversionMatched": 11,
+            "inversionTotal": 11,
+            "boundingSpan": 10,
+            "extensions": 4,
+            "score": 10
+          },
+          "nativeChecks": [
+            {
+              "rotation": 0,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 1,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 2,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 3,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 4,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 5,
+              "geometric": true,
+              "native": false
+            }
+          ],
+          "healerHpPerSecond": 0,
+          "note": "공격기관 없는 형상 비교입니다. 실제 근접 공격에는 칼날이 필요합니다."
+        },
+        {
+          "id": "fighter",
+          "title": "칼날1 + 공격력2 + 공속2",
+          "counts": {
+            "blade": 1,
+            "power": 2,
+            "speed": 2
+          },
+          "layoutsModuloRotation": 355,
+          "closedAtOriginModuloRotation": 0,
+          "extendableModuloRotation": 315,
+          "birthCost": 43,
+          "stats": {
+            "gatherCount": 0,
+            "bladeCount": 1,
+            "antennaCount": 0,
+            "healerCount": 0,
+            "secretionCount": 0,
+            "melee": true,
+            "ranged": false,
+            "meleePower": 10,
+            "meleeSpeed": 0.7,
+            "rangedPower": 0,
+            "rangedSpeed": 0,
+            "healer": false,
+            "health": 10,
+            "power": 10,
+            "hits": 1,
+            "speed": 0.7,
+            "armor": 0,
+            "parry": 0,
+            "block": 0,
+            "evasion": 0,
+            "capacity": 0,
+            "harvest": 0,
+            "harvestTime": 0,
+            "movement": 0.25,
+            "vision": 1,
+            "scale": 1.05,
+            "roaming": false,
+            "comboPower": 50,
+            "critical": 0,
+            "criticalPower": 150,
+            "accuracy": 0,
+            "penetration": 0,
+            "blockPower": 50,
+            "counter": 0,
+            "counterPower": 100,
+            "tenacity": 0,
+            "reduction": 0,
+            "loadSpeed": 0,
+            "healing": 0,
+            "stun": 0,
+            "stunTime": 0,
+            "bleed": 0,
+            "bleedPower": 0,
+            "area": 0,
+            "areaPower": 0,
+            "lifesteal": 0,
+            "reflection": 0,
+            "regeneration": 0,
+            "comboSpeed": 0.12,
+            "focus": 0.3
+          },
+          "representative": {
+            "pieces": [
+              {
+                "gene": "power",
+                "grade": 2,
+                "rotation": 0,
+                "shape": [
+                  0,
+                  1,
+                  5
+                ]
+              },
+              {
+                "gene": "speed",
+                "grade": 2,
+                "rotation": 4,
+                "shape": [
+                  0,
+                  5,
+                  4
+                ]
+              },
+              {
+                "gene": "blade",
+                "grade": 1,
+                "rotation": 1,
+                "shape": [
+                  0,
+                  2
+                ]
+              },
+              {
+                "gene": "power",
+                "grade": 2,
+                "rotation": 4,
+                "shape": [
+                  0,
+                  1,
+                  5
+                ]
+              },
+              {
+                "gene": "speed",
+                "grade": 2,
+                "rotation": 2,
+                "shape": [
+                  0,
+                  5,
+                  4
+                ]
+              }
+            ],
+            "paths": [
+              {
+                "gene": "power",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 1
+                  },
+                  {
+                    "q": 2,
+                    "r": 0
+                  }
+                ]
+              },
+              {
+                "gene": "speed",
+                "points": [
+                  {
+                    "q": 2,
+                    "r": 0
+                  },
+                  {
+                    "q": 2,
+                    "r": -1
+                  },
+                  {
+                    "q": 1,
+                    "r": -1
+                  },
+                  {
+                    "q": 0,
+                    "r": 0
+                  }
+                ]
+              },
+              {
+                "gene": "blade",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 0
+                  },
+                  {
+                    "q": 0,
+                    "r": 1
+                  },
+                  {
+                    "q": -1,
+                    "r": 1
+                  }
+                ]
+              },
+              {
+                "gene": "power",
+                "points": [
+                  {
+                    "q": -1,
+                    "r": 1
+                  },
+                  {
+                    "q": -1,
+                    "r": 0
+                  },
+                  {
+                    "q": 0,
+                    "r": -1
+                  },
+                  {
+                    "q": -1,
+                    "r": -1
+                  }
+                ]
+              },
+              {
+                "gene": "speed",
+                "points": [
+                  {
+                    "q": -1,
+                    "r": -1
+                  },
+                  {
+                    "q": -2,
+                    "r": 0
+                  },
+                  {
+                    "q": -2,
+                    "r": 1
+                  },
+                  {
+                    "q": -1,
+                    "r": 1
+                  }
+                ]
+              }
+            ],
+            "occupied": 13,
+            "closedAtOrigin": false,
+            "inversionMatched": 13,
+            "inversionTotal": 13,
+            "boundingSpan": 10,
+            "extensions": 8,
+            "score": 1010
+          },
+          "nativeChecks": [
+            {
+              "rotation": 0,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 1,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 2,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 3,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 4,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 5,
+              "geometric": true,
+              "native": false
+            }
+          ],
+          "healerHpPerSecond": 0
+        },
+        {
+          "id": "worker",
+          "title": "채집2 + 운반1 + 체력1 + 이속1",
+          "counts": {
+            "gather": 2,
+            "capacity": 1,
+            "health": 1,
+            "movement": 1
+          },
+          "layoutsModuloRotation": 1130,
+          "closedAtOriginModuloRotation": 34,
+          "extendableModuloRotation": 1110,
+          "birthCost": 40,
+          "stats": {
+            "gatherCount": 2,
+            "bladeCount": 0,
+            "antennaCount": 0,
+            "healerCount": 0,
+            "secretionCount": 0,
+            "melee": false,
+            "ranged": false,
+            "meleePower": 0,
+            "meleeSpeed": 0,
+            "rangedPower": 0,
+            "rangedSpeed": 0,
+            "healer": false,
+            "health": 20,
+            "power": 0,
+            "hits": 0,
+            "speed": 0,
+            "armor": 0,
+            "parry": 0,
+            "block": 0,
+            "evasion": 0,
+            "capacity": 4,
+            "harvest": 2,
+            "harvestTime": 4,
+            "movement": 0.29,
+            "vision": 1,
+            "scale": 1.05,
+            "roaming": false,
+            "comboPower": 0,
+            "critical": 0,
+            "criticalPower": 0,
+            "accuracy": 0,
+            "penetration": 0,
+            "blockPower": 50,
+            "counter": 0,
+            "counterPower": 0,
+            "tenacity": 0,
+            "reduction": 0,
+            "loadSpeed": 75,
+            "healing": 0,
+            "stun": 0,
+            "stunTime": 0,
+            "bleed": 0,
+            "bleedPower": 0,
+            "area": 0,
+            "areaPower": 0,
+            "lifesteal": 0,
+            "reflection": 0,
+            "regeneration": 0,
+            "comboSpeed": 0,
+            "focus": 0
+          },
+          "representative": {
+            "pieces": [
+              {
+                "gene": "gather",
+                "grade": 1,
+                "rotation": 0,
+                "shape": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "gene": "gather",
+                "grade": 1,
+                "rotation": 2,
+                "shape": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "gene": "movement",
+                "grade": 1,
+                "rotation": 4,
+                "shape": [
+                  0,
+                  5
+                ]
+              },
+              {
+                "gene": "health",
+                "grade": 1,
+                "rotation": 2,
+                "shape": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "gene": "capacity",
+                "grade": 2,
+                "rotation": 5,
+                "shape": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "paths": [
+              {
+                "gene": "gather",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 0
+                  },
+                  {
+                    "q": 2,
+                    "r": 0
+                  }
+                ]
+              },
+              {
+                "gene": "gather",
+                "points": [
+                  {
+                    "q": 2,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 1
+                  },
+                  {
+                    "q": 0,
+                    "r": 2
+                  }
+                ]
+              },
+              {
+                "gene": "movement",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 2
+                  },
+                  {
+                    "q": 0,
+                    "r": 1
+                  },
+                  {
+                    "q": -1,
+                    "r": 1
+                  }
+                ]
+              },
+              {
+                "gene": "health",
+                "points": [
+                  {
+                    "q": -1,
+                    "r": 1
+                  },
+                  {
+                    "q": -2,
+                    "r": 2
+                  },
+                  {
+                    "q": -3,
+                    "r": 2
+                  }
+                ]
+              },
+              {
+                "gene": "capacity",
+                "points": [
+                  {
+                    "q": -3,
+                    "r": 2
+                  },
+                  {
+                    "q": -2,
+                    "r": 1
+                  },
+                  {
+                    "q": -1,
+                    "r": 0
+                  },
+                  {
+                    "q": 0,
+                    "r": 0
+                  }
+                ]
+              }
+            ],
+            "occupied": 11,
+            "closedAtOrigin": true,
+            "inversionMatched": 10,
+            "inversionTotal": 11,
+            "boundingSpan": 10,
+            "extensions": 8,
+            "score": 19.090909090909093
+          },
+          "nativeChecks": [
+            {
+              "rotation": 0,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 1,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 2,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 3,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 4,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 5,
+              "geometric": true,
+              "native": false
+            }
+          ],
+          "healerHpPerSecond": 0
+        },
+        {
+          "id": "scout",
+          "title": "안테나1 + 이속2 + 체력1",
+          "counts": {
+            "antenna": 1,
+            "movement": 2,
+            "health": 1
+          },
+          "layoutsModuloRotation": 125,
+          "closedAtOriginModuloRotation": 8,
+          "extendableModuloRotation": 125,
+          "birthCost": 32,
+          "stats": {
+            "gatherCount": 0,
+            "bladeCount": 0,
+            "antennaCount": 1,
+            "healerCount": 0,
+            "secretionCount": 0,
+            "melee": false,
+            "ranged": false,
+            "meleePower": 0,
+            "meleeSpeed": 0,
+            "rangedPower": 0,
+            "rangedSpeed": 0,
+            "healer": false,
+            "health": 20,
+            "power": 0,
+            "hits": 0,
+            "speed": 0,
+            "armor": 0,
+            "parry": 0,
+            "block": 0,
+            "evasion": 0,
+            "capacity": 0,
+            "harvest": 0,
+            "harvestTime": 0,
+            "movement": 0.33,
+            "vision": 2,
+            "scale": 1.04,
+            "roaming": true,
+            "comboPower": 0,
+            "critical": 0,
+            "criticalPower": 0,
+            "accuracy": 0,
+            "penetration": 0,
+            "blockPower": 50,
+            "counter": 0,
+            "counterPower": 0,
+            "tenacity": 0,
+            "reduction": 0,
+            "loadSpeed": 0,
+            "healing": 0,
+            "stun": 0,
+            "stunTime": 0,
+            "bleed": 0,
+            "bleedPower": 0,
+            "area": 0,
+            "areaPower": 0,
+            "lifesteal": 0,
+            "reflection": 0,
+            "regeneration": 0,
+            "comboSpeed": 0,
+            "focus": 0
+          },
+          "representative": {
+            "pieces": [
+              {
+                "gene": "movement",
+                "grade": 1,
+                "rotation": 0,
+                "shape": [
+                  0,
+                  5
+                ]
+              },
+              {
+                "gene": "antenna",
+                "grade": 2,
+                "rotation": 3,
+                "shape": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "gene": "health",
+                "grade": 1,
+                "rotation": 1,
+                "shape": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "gene": "movement",
+                "grade": 1,
+                "rotation": 0,
+                "shape": [
+                  0,
+                  5
+                ]
+              }
+            ],
+            "paths": [
+              {
+                "gene": "movement",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 0
+                  },
+                  {
+                    "q": 2,
+                    "r": -1
+                  }
+                ]
+              },
+              {
+                "gene": "antenna",
+                "points": [
+                  {
+                    "q": 2,
+                    "r": -1
+                  },
+                  {
+                    "q": 1,
+                    "r": -1
+                  },
+                  {
+                    "q": 0,
+                    "r": -1
+                  },
+                  {
+                    "q": -1,
+                    "r": -1
+                  }
+                ]
+              },
+              {
+                "gene": "health",
+                "points": [
+                  {
+                    "q": -1,
+                    "r": -1
+                  },
+                  {
+                    "q": -1,
+                    "r": 0
+                  },
+                  {
+                    "q": -2,
+                    "r": 1
+                  }
+                ]
+              },
+              {
+                "gene": "movement",
+                "points": [
+                  {
+                    "q": -2,
+                    "r": 1
+                  },
+                  {
+                    "q": -1,
+                    "r": 1
+                  },
+                  {
+                    "q": 0,
+                    "r": 0
+                  }
+                ]
+              }
+            ],
+            "occupied": 9,
+            "closedAtOrigin": true,
+            "inversionMatched": 7,
+            "inversionTotal": 9,
+            "boundingSpan": 9,
+            "extensions": 3,
+            "score": 31.22222222222222
+          },
+          "nativeChecks": [
+            {
+              "rotation": 0,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 1,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 2,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 3,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 4,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 5,
+              "geometric": true,
+              "native": false
+            }
+          ],
+          "healerHpPerSecond": 0
+        },
+        {
+          "id": "healer",
+          "title": "치유기관1 + 체력3",
+          "counts": {
+            "healer": 1,
+            "health": 3
+          },
+          "layoutsModuloRotation": 69,
+          "closedAtOriginModuloRotation": 0,
+          "extendableModuloRotation": 66,
+          "birthCost": 32,
+          "stats": {
+            "gatherCount": 0,
+            "bladeCount": 0,
+            "antennaCount": 0,
+            "healerCount": 1,
+            "secretionCount": 0,
+            "melee": false,
+            "ranged": false,
+            "meleePower": 0,
+            "meleeSpeed": 0,
+            "rangedPower": 0,
+            "rangedSpeed": 0,
+            "healer": true,
+            "health": 40,
+            "power": 0,
+            "hits": 0,
+            "speed": 0,
+            "armor": 0,
+            "parry": 0,
+            "block": 0,
+            "evasion": 0,
+            "capacity": 0,
+            "harvest": 0,
+            "harvestTime": 0,
+            "movement": 0.25,
+            "vision": 1,
+            "scale": 1.04,
+            "roaming": false,
+            "comboPower": 0,
+            "critical": 0,
+            "criticalPower": 0,
+            "accuracy": 0,
+            "penetration": 0,
+            "blockPower": 50,
+            "counter": 0,
+            "counterPower": 0,
+            "tenacity": 0,
+            "reduction": 0,
+            "loadSpeed": 0,
+            "healing": 0,
+            "stun": 0,
+            "stunTime": 0,
+            "bleed": 0,
+            "bleedPower": 0,
+            "area": 0,
+            "areaPower": 0,
+            "lifesteal": 0,
+            "reflection": 0,
+            "regeneration": 0,
+            "comboSpeed": 0,
+            "focus": 0
+          },
+          "representative": {
+            "pieces": [
+              {
+                "gene": "healer",
+                "grade": 2,
+                "rotation": 0,
+                "shape": [
+                  0,
+                  1,
+                  3
+                ]
+              },
+              {
+                "gene": "health",
+                "grade": 1,
+                "rotation": 3,
+                "shape": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "gene": "health",
+                "grade": 1,
+                "rotation": 5,
+                "shape": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "gene": "health",
+                "grade": 1,
+                "rotation": 0,
+                "shape": [
+                  0,
+                  1
+                ]
+              }
+            ],
+            "paths": [
+              {
+                "gene": "healer",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 1
+                  },
+                  {
+                    "q": 0,
+                    "r": 1
+                  }
+                ]
+              },
+              {
+                "gene": "health",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 1
+                  },
+                  {
+                    "q": -1,
+                    "r": 1
+                  },
+                  {
+                    "q": -1,
+                    "r": 0
+                  }
+                ]
+              },
+              {
+                "gene": "health",
+                "points": [
+                  {
+                    "q": -1,
+                    "r": 0
+                  },
+                  {
+                    "q": 0,
+                    "r": -1
+                  },
+                  {
+                    "q": 1,
+                    "r": -1
+                  }
+                ]
+              },
+              {
+                "gene": "health",
+                "points": [
+                  {
+                    "q": 1,
+                    "r": -1
+                  },
+                  {
+                    "q": 2,
+                    "r": -1
+                  },
+                  {
+                    "q": 2,
+                    "r": 0
+                  }
+                ]
+              }
+            ],
+            "occupied": 10,
+            "closedAtOrigin": false,
+            "inversionMatched": 10,
+            "inversionTotal": 10,
+            "boundingSpan": 8,
+            "extensions": 6,
+            "score": 1008
+          },
+          "nativeChecks": [
+            {
+              "rotation": 0,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 1,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 2,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 3,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 4,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 5,
+              "geometric": true,
+              "native": true
+            }
+          ],
+          "healerHpPerSecond": 0.5
+        },
+        {
+          "id": "tank",
+          "title": "갑각2 + 체력3",
+          "counts": {
+            "carapace": 2,
+            "health": 3
+          },
+          "layoutsModuloRotation": 134,
+          "closedAtOriginModuloRotation": 4,
+          "extendableModuloRotation": 131,
+          "birthCost": 46,
+          "stats": {
+            "gatherCount": 0,
+            "bladeCount": 0,
+            "antennaCount": 0,
+            "healerCount": 0,
+            "secretionCount": 0,
+            "melee": false,
+            "ranged": false,
+            "meleePower": 0,
+            "meleeSpeed": 0,
+            "rangedPower": 0,
+            "rangedSpeed": 0,
+            "healer": false,
+            "health": 40,
+            "power": 0,
+            "hits": 0,
+            "speed": 0,
+            "armor": 4,
+            "parry": 0,
+            "block": 20,
+            "evasion": 0,
+            "capacity": 0,
+            "harvest": 0,
+            "harvestTime": 0,
+            "movement": 0.25,
+            "vision": 1,
+            "scale": 1.05,
+            "roaming": false,
+            "comboPower": 0,
+            "critical": 0,
+            "criticalPower": 0,
+            "accuracy": 0,
+            "penetration": 0,
+            "blockPower": 50,
+            "counter": 0,
+            "counterPower": 0,
+            "tenacity": 0,
+            "reduction": 0,
+            "loadSpeed": 0,
+            "healing": 0,
+            "stun": 0,
+            "stunTime": 0,
+            "bleed": 0,
+            "bleedPower": 0,
+            "area": 0,
+            "areaPower": 0,
+            "lifesteal": 0,
+            "reflection": 0,
+            "regeneration": 0,
+            "comboSpeed": 0,
+            "focus": 0
+          },
+          "representative": {
+            "pieces": [
+              {
+                "gene": "carapace",
+                "grade": 2,
+                "rotation": 0,
+                "shape": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "gene": "health",
+                "grade": 1,
+                "rotation": 2,
+                "shape": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "gene": "health",
+                "grade": 1,
+                "rotation": 2,
+                "shape": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "gene": "health",
+                "grade": 1,
+                "rotation": 3,
+                "shape": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "gene": "carapace",
+                "grade": 2,
+                "rotation": 5,
+                "shape": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ],
+            "paths": [
+              {
+                "gene": "carapace",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 1
+                  },
+                  {
+                    "q": 2,
+                    "r": 1
+                  }
+                ]
+              },
+              {
+                "gene": "health",
+                "points": [
+                  {
+                    "q": 2,
+                    "r": 1
+                  },
+                  {
+                    "q": 1,
+                    "r": 2
+                  },
+                  {
+                    "q": 0,
+                    "r": 2
+                  }
+                ]
+              },
+              {
+                "gene": "health",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 2
+                  },
+                  {
+                    "q": -1,
+                    "r": 3
+                  },
+                  {
+                    "q": -2,
+                    "r": 3
+                  }
+                ]
+              },
+              {
+                "gene": "health",
+                "points": [
+                  {
+                    "q": -2,
+                    "r": 3
+                  },
+                  {
+                    "q": -3,
+                    "r": 3
+                  },
+                  {
+                    "q": -3,
+                    "r": 2
+                  }
+                ]
+              },
+              {
+                "gene": "carapace",
+                "points": [
+                  {
+                    "q": -3,
+                    "r": 2
+                  },
+                  {
+                    "q": -2,
+                    "r": 1
+                  },
+                  {
+                    "q": -1,
+                    "r": 1
+                  },
+                  {
+                    "q": 0,
+                    "r": 0
+                  }
+                ]
+              }
+            ],
+            "occupied": 12,
+            "closedAtOrigin": true,
+            "inversionMatched": 10,
+            "inversionTotal": 12,
+            "boundingSpan": 12,
+            "extensions": 14,
+            "score": 28.666666666666664
+          },
+          "nativeChecks": [
+            {
+              "rotation": 0,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 1,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 2,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 3,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 4,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 5,
+              "geometric": true,
+              "native": true
+            }
+          ],
+          "healerHpPerSecond": 0
+        }
+      ]
+    },
+    {
+      "id": "paired-antenna-l",
+      "title": "공격 쌍 맞물림 · 안테나 L형",
+      "gameCompatible": false,
+      "shapes": {
+        "power": [
+          0,
+          1,
+          5
+        ],
+        "speed": [
+          0,
+          5,
+          4
+        ],
+        "capacity": [
+          0,
+          0,
+          0
+        ],
+        "healer": [
+          0,
+          1,
+          3
+        ],
+        "antenna": [
+          0,
+          0,
+          1
+        ],
+        "carapace": [
+          0,
+          1,
+          0
+        ]
+      },
+      "distinctUndirectedOutlines": 6,
+      "changes": [
+        {
+          "gene": "power",
+          "label": "근접 공격력",
+          "from": [
+            0,
+            0,
+            0
+          ],
+          "to": [
+            0,
+            1,
+            5
+          ]
+        },
+        {
+          "gene": "speed",
+          "label": "근접 공속",
+          "from": [
+            0,
+            0,
+            1
+          ],
+          "to": [
+            0,
+            5,
+            4
+          ]
+        },
+        {
+          "gene": "capacity",
+          "label": "운반",
+          "from": [
+            0,
+            1,
+            5
+          ],
+          "to": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "antenna",
+          "label": "안테나",
+          "from": [
+            0,
+            1,
+            2
+          ],
+          "to": [
+            0,
+            0,
+            1
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "id": "one-attack-pair",
+          "title": "공격력1 + 공속1",
+          "counts": {
+            "power": 1,
+            "speed": 1
+          },
+          "layoutsModuloRotation": 4,
+          "closedAtOriginModuloRotation": 2,
+          "extendableModuloRotation": 4,
+          "birthCost": 18,
+          "stats": {
+            "gatherCount": 0,
+            "bladeCount": 0,
+            "antennaCount": 0,
+            "healerCount": 0,
+            "secretionCount": 0,
+            "melee": false,
+            "ranged": false,
+            "meleePower": 0,
+            "meleeSpeed": 0,
+            "rangedPower": 0,
+            "rangedSpeed": 0,
+            "healer": false,
+            "health": 10,
+            "power": 0,
+            "hits": 0,
+            "speed": 0,
+            "armor": 0,
+            "parry": 0,
+            "block": 0,
+            "evasion": 0,
+            "capacity": 0,
+            "harvest": 0,
+            "harvestTime": 0,
+            "movement": 0.25,
+            "vision": 1,
+            "scale": 1.02,
+            "roaming": false,
+            "comboPower": 0,
+            "critical": 0,
+            "criticalPower": 0,
+            "accuracy": 0,
+            "penetration": 0,
+            "blockPower": 50,
+            "counter": 0,
+            "counterPower": 0,
+            "tenacity": 0,
+            "reduction": 0,
+            "loadSpeed": 0,
+            "healing": 0,
+            "stun": 0,
+            "stunTime": 0,
+            "bleed": 0,
+            "bleedPower": 0,
+            "area": 0,
+            "areaPower": 0,
+            "lifesteal": 0,
+            "reflection": 0,
+            "regeneration": 0,
+            "comboSpeed": 0,
+            "focus": 0
+          },
+          "representative": {
+            "pieces": [
+              {
+                "gene": "power",
+                "grade": 2,
+                "rotation": 0,
+                "shape": [
+                  0,
+                  1,
+                  5
+                ]
+              },
+              {
+                "gene": "speed",
+                "grade": 2,
+                "rotation": 4,
+                "shape": [
+                  0,
+                  5,
+                  4
+                ]
+              }
+            ],
+            "paths": [
+              {
+                "gene": "power",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 1
+                  },
+                  {
+                    "q": 2,
+                    "r": 0
+                  }
+                ]
+              },
+              {
+                "gene": "speed",
+                "points": [
+                  {
+                    "q": 2,
+                    "r": 0
+                  },
+                  {
+                    "q": 2,
+                    "r": -1
+                  },
+                  {
+                    "q": 1,
+                    "r": -1
+                  },
+                  {
+                    "q": 0,
+                    "r": 0
+                  }
+                ]
+              }
+            ],
+            "occupied": 6,
+            "closedAtOrigin": true,
+            "inversionMatched": 5,
+            "inversionTotal": 6,
+            "boundingSpan": 6,
+            "extensions": 17,
+            "score": 22.666666666666664
+          },
+          "nativeChecks": [
+            {
+              "rotation": 0,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 1,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 2,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 3,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 4,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 5,
+              "geometric": true,
+              "native": false
+            }
+          ],
+          "healerHpPerSecond": 0,
+          "note": "공격기관 없는 형상 비교입니다. 실제 근접 공격에는 칼날이 필요합니다."
+        },
+        {
+          "id": "two-attack-pairs",
+          "title": "공격력2 + 공속2",
+          "counts": {
+            "power": 2,
+            "speed": 2
+          },
+          "layoutsModuloRotation": 53,
+          "closedAtOriginModuloRotation": 14,
+          "extendableModuloRotation": 51,
+          "birthCost": 33,
+          "stats": {
+            "gatherCount": 0,
+            "bladeCount": 0,
+            "antennaCount": 0,
+            "healerCount": 0,
+            "secretionCount": 0,
+            "melee": false,
+            "ranged": false,
+            "meleePower": 0,
+            "meleeSpeed": 0,
+            "rangedPower": 0,
+            "rangedSpeed": 0,
+            "healer": false,
+            "health": 10,
+            "power": 0,
+            "hits": 0,
+            "speed": 0,
+            "armor": 0,
+            "parry": 0,
+            "block": 0,
+            "evasion": 0,
+            "capacity": 0,
+            "harvest": 0,
+            "harvestTime": 0,
+            "movement": 0.25,
+            "vision": 1,
+            "scale": 1.04,
+            "roaming": false,
+            "comboPower": 0,
+            "critical": 0,
+            "criticalPower": 0,
+            "accuracy": 0,
+            "penetration": 0,
+            "blockPower": 50,
+            "counter": 0,
+            "counterPower": 0,
+            "tenacity": 0,
+            "reduction": 0,
+            "loadSpeed": 0,
+            "healing": 0,
+            "stun": 0,
+            "stunTime": 0,
+            "bleed": 0,
+            "bleedPower": 0,
+            "area": 0,
+            "areaPower": 0,
+            "lifesteal": 0,
+            "reflection": 0,
+            "regeneration": 0,
+            "comboSpeed": 0,
+            "focus": 0
+          },
+          "representative": {
+            "pieces": [
+              {
+                "gene": "power",
+                "grade": 2,
+                "rotation": 0,
+                "shape": [
+                  0,
+                  1,
+                  5
+                ]
+              },
+              {
+                "gene": "speed",
+                "grade": 2,
+                "rotation": 4,
+                "shape": [
+                  0,
+                  5,
+                  4
+                ]
+              },
+              {
+                "gene": "power",
+                "grade": 2,
+                "rotation": 3,
+                "shape": [
+                  0,
+                  1,
+                  5
+                ]
+              },
+              {
+                "gene": "speed",
+                "grade": 2,
+                "rotation": 1,
+                "shape": [
+                  0,
+                  5,
+                  4
+                ]
+              }
+            ],
+            "paths": [
+              {
+                "gene": "power",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 1
+                  },
+                  {
+                    "q": 2,
+                    "r": 0
+                  }
+                ]
+              },
+              {
+                "gene": "speed",
+                "points": [
+                  {
+                    "q": 2,
+                    "r": 0
+                  },
+                  {
+                    "q": 2,
+                    "r": -1
+                  },
+                  {
+                    "q": 1,
+                    "r": -1
+                  },
+                  {
+                    "q": 0,
+                    "r": 0
+                  }
+                ]
+              },
+              {
+                "gene": "power",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 0
+                  },
+                  {
+                    "q": -1,
+                    "r": 0
+                  },
+                  {
+                    "q": -1,
+                    "r": -1
+                  },
+                  {
+                    "q": -2,
+                    "r": 0
+                  }
+                ]
+              },
+              {
+                "gene": "speed",
+                "points": [
+                  {
+                    "q": -2,
+                    "r": 0
+                  },
+                  {
+                    "q": -2,
+                    "r": 1
+                  },
+                  {
+                    "q": -1,
+                    "r": 1
+                  },
+                  {
+                    "q": 0,
+                    "r": 0
+                  }
+                ]
+              }
+            ],
+            "occupied": 11,
+            "closedAtOrigin": true,
+            "inversionMatched": 11,
+            "inversionTotal": 11,
+            "boundingSpan": 10,
+            "extensions": 4,
+            "score": 10
+          },
+          "nativeChecks": [
+            {
+              "rotation": 0,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 1,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 2,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 3,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 4,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 5,
+              "geometric": true,
+              "native": false
+            }
+          ],
+          "healerHpPerSecond": 0,
+          "note": "공격기관 없는 형상 비교입니다. 실제 근접 공격에는 칼날이 필요합니다."
+        },
+        {
+          "id": "fighter",
+          "title": "칼날1 + 공격력2 + 공속2",
+          "counts": {
+            "blade": 1,
+            "power": 2,
+            "speed": 2
+          },
+          "layoutsModuloRotation": 355,
+          "closedAtOriginModuloRotation": 0,
+          "extendableModuloRotation": 315,
+          "birthCost": 43,
+          "stats": {
+            "gatherCount": 0,
+            "bladeCount": 1,
+            "antennaCount": 0,
+            "healerCount": 0,
+            "secretionCount": 0,
+            "melee": true,
+            "ranged": false,
+            "meleePower": 10,
+            "meleeSpeed": 0.7,
+            "rangedPower": 0,
+            "rangedSpeed": 0,
+            "healer": false,
+            "health": 10,
+            "power": 10,
+            "hits": 1,
+            "speed": 0.7,
+            "armor": 0,
+            "parry": 0,
+            "block": 0,
+            "evasion": 0,
+            "capacity": 0,
+            "harvest": 0,
+            "harvestTime": 0,
+            "movement": 0.25,
+            "vision": 1,
+            "scale": 1.05,
+            "roaming": false,
+            "comboPower": 50,
+            "critical": 0,
+            "criticalPower": 150,
+            "accuracy": 0,
+            "penetration": 0,
+            "blockPower": 50,
+            "counter": 0,
+            "counterPower": 100,
+            "tenacity": 0,
+            "reduction": 0,
+            "loadSpeed": 0,
+            "healing": 0,
+            "stun": 0,
+            "stunTime": 0,
+            "bleed": 0,
+            "bleedPower": 0,
+            "area": 0,
+            "areaPower": 0,
+            "lifesteal": 0,
+            "reflection": 0,
+            "regeneration": 0,
+            "comboSpeed": 0.12,
+            "focus": 0.3
+          },
+          "representative": {
+            "pieces": [
+              {
+                "gene": "power",
+                "grade": 2,
+                "rotation": 0,
+                "shape": [
+                  0,
+                  1,
+                  5
+                ]
+              },
+              {
+                "gene": "speed",
+                "grade": 2,
+                "rotation": 4,
+                "shape": [
+                  0,
+                  5,
+                  4
+                ]
+              },
+              {
+                "gene": "blade",
+                "grade": 1,
+                "rotation": 1,
+                "shape": [
+                  0,
+                  2
+                ]
+              },
+              {
+                "gene": "power",
+                "grade": 2,
+                "rotation": 4,
+                "shape": [
+                  0,
+                  1,
+                  5
+                ]
+              },
+              {
+                "gene": "speed",
+                "grade": 2,
+                "rotation": 2,
+                "shape": [
+                  0,
+                  5,
+                  4
+                ]
+              }
+            ],
+            "paths": [
+              {
+                "gene": "power",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 1
+                  },
+                  {
+                    "q": 2,
+                    "r": 0
+                  }
+                ]
+              },
+              {
+                "gene": "speed",
+                "points": [
+                  {
+                    "q": 2,
+                    "r": 0
+                  },
+                  {
+                    "q": 2,
+                    "r": -1
+                  },
+                  {
+                    "q": 1,
+                    "r": -1
+                  },
+                  {
+                    "q": 0,
+                    "r": 0
+                  }
+                ]
+              },
+              {
+                "gene": "blade",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 0
+                  },
+                  {
+                    "q": 0,
+                    "r": 1
+                  },
+                  {
+                    "q": -1,
+                    "r": 1
+                  }
+                ]
+              },
+              {
+                "gene": "power",
+                "points": [
+                  {
+                    "q": -1,
+                    "r": 1
+                  },
+                  {
+                    "q": -1,
+                    "r": 0
+                  },
+                  {
+                    "q": 0,
+                    "r": -1
+                  },
+                  {
+                    "q": -1,
+                    "r": -1
+                  }
+                ]
+              },
+              {
+                "gene": "speed",
+                "points": [
+                  {
+                    "q": -1,
+                    "r": -1
+                  },
+                  {
+                    "q": -2,
+                    "r": 0
+                  },
+                  {
+                    "q": -2,
+                    "r": 1
+                  },
+                  {
+                    "q": -1,
+                    "r": 1
+                  }
+                ]
+              }
+            ],
+            "occupied": 13,
+            "closedAtOrigin": false,
+            "inversionMatched": 13,
+            "inversionTotal": 13,
+            "boundingSpan": 10,
+            "extensions": 8,
+            "score": 1010
+          },
+          "nativeChecks": [
+            {
+              "rotation": 0,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 1,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 2,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 3,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 4,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 5,
+              "geometric": true,
+              "native": false
+            }
+          ],
+          "healerHpPerSecond": 0
+        },
+        {
+          "id": "worker",
+          "title": "채집2 + 운반1 + 체력1 + 이속1",
+          "counts": {
+            "gather": 2,
+            "capacity": 1,
+            "health": 1,
+            "movement": 1
+          },
+          "layoutsModuloRotation": 908,
+          "closedAtOriginModuloRotation": 52,
+          "extendableModuloRotation": 890,
+          "birthCost": 40,
+          "stats": {
+            "gatherCount": 2,
+            "bladeCount": 0,
+            "antennaCount": 0,
+            "healerCount": 0,
+            "secretionCount": 0,
+            "melee": false,
+            "ranged": false,
+            "meleePower": 0,
+            "meleeSpeed": 0,
+            "rangedPower": 0,
+            "rangedSpeed": 0,
+            "healer": false,
+            "health": 20,
+            "power": 0,
+            "hits": 0,
+            "speed": 0,
+            "armor": 0,
+            "parry": 0,
+            "block": 0,
+            "evasion": 0,
+            "capacity": 4,
+            "harvest": 2,
+            "harvestTime": 4,
+            "movement": 0.29,
+            "vision": 1,
+            "scale": 1.05,
+            "roaming": false,
+            "comboPower": 0,
+            "critical": 0,
+            "criticalPower": 0,
+            "accuracy": 0,
+            "penetration": 0,
+            "blockPower": 50,
+            "counter": 0,
+            "counterPower": 0,
+            "tenacity": 0,
+            "reduction": 0,
+            "loadSpeed": 75,
+            "healing": 0,
+            "stun": 0,
+            "stunTime": 0,
+            "bleed": 0,
+            "bleedPower": 0,
+            "area": 0,
+            "areaPower": 0,
+            "lifesteal": 0,
+            "reflection": 0,
+            "regeneration": 0,
+            "comboSpeed": 0,
+            "focus": 0
+          },
+          "representative": {
+            "pieces": [
+              {
+                "gene": "gather",
+                "grade": 1,
+                "rotation": 0,
+                "shape": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "gene": "capacity",
+                "grade": 2,
+                "rotation": 2,
+                "shape": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "gene": "gather",
+                "grade": 1,
+                "rotation": 3,
+                "shape": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "gene": "health",
+                "grade": 1,
+                "rotation": 5,
+                "shape": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "gene": "movement",
+                "grade": 1,
+                "rotation": 5,
+                "shape": [
+                  0,
+                  5
+                ]
+              }
+            ],
+            "paths": [
+              {
+                "gene": "gather",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 0
+                  },
+                  {
+                    "q": 2,
+                    "r": 0
+                  }
+                ]
+              },
+              {
+                "gene": "capacity",
+                "points": [
+                  {
+                    "q": 2,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 1
+                  },
+                  {
+                    "q": 0,
+                    "r": 2
+                  },
+                  {
+                    "q": -1,
+                    "r": 3
+                  }
+                ]
+              },
+              {
+                "gene": "gather",
+                "points": [
+                  {
+                    "q": -1,
+                    "r": 3
+                  },
+                  {
+                    "q": -2,
+                    "r": 3
+                  },
+                  {
+                    "q": -3,
+                    "r": 3
+                  }
+                ]
+              },
+              {
+                "gene": "health",
+                "points": [
+                  {
+                    "q": -3,
+                    "r": 3
+                  },
+                  {
+                    "q": -2,
+                    "r": 2
+                  },
+                  {
+                    "q": -1,
+                    "r": 2
+                  }
+                ]
+              },
+              {
+                "gene": "movement",
+                "points": [
+                  {
+                    "q": -1,
+                    "r": 2
+                  },
+                  {
+                    "q": 0,
+                    "r": 1
+                  },
+                  {
+                    "q": 0,
+                    "r": 0
+                  }
+                ]
+              }
+            ],
+            "occupied": 11,
+            "closedAtOrigin": true,
+            "inversionMatched": 10,
+            "inversionTotal": 11,
+            "boundingSpan": 10,
+            "extensions": 17,
+            "score": 19.090909090909093
+          },
+          "nativeChecks": [
+            {
+              "rotation": 0,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 1,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 2,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 3,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 4,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 5,
+              "geometric": true,
+              "native": false
+            }
+          ],
+          "healerHpPerSecond": 0
+        },
+        {
+          "id": "scout",
+          "title": "안테나1 + 이속2 + 체력1",
+          "counts": {
+            "antenna": 1,
+            "movement": 2,
+            "health": 1
+          },
+          "layoutsModuloRotation": 128,
+          "closedAtOriginModuloRotation": 0,
+          "extendableModuloRotation": 128,
+          "birthCost": 32,
+          "stats": {
+            "gatherCount": 0,
+            "bladeCount": 0,
+            "antennaCount": 1,
+            "healerCount": 0,
+            "secretionCount": 0,
+            "melee": false,
+            "ranged": false,
+            "meleePower": 0,
+            "meleeSpeed": 0,
+            "rangedPower": 0,
+            "rangedSpeed": 0,
+            "healer": false,
+            "health": 20,
+            "power": 0,
+            "hits": 0,
+            "speed": 0,
+            "armor": 0,
+            "parry": 0,
+            "block": 0,
+            "evasion": 0,
+            "capacity": 0,
+            "harvest": 0,
+            "harvestTime": 0,
+            "movement": 0.33,
+            "vision": 2,
+            "scale": 1.04,
+            "roaming": true,
+            "comboPower": 0,
+            "critical": 0,
+            "criticalPower": 0,
+            "accuracy": 0,
+            "penetration": 0,
+            "blockPower": 50,
+            "counter": 0,
+            "counterPower": 0,
+            "tenacity": 0,
+            "reduction": 0,
+            "loadSpeed": 0,
+            "healing": 0,
+            "stun": 0,
+            "stunTime": 0,
+            "bleed": 0,
+            "bleedPower": 0,
+            "area": 0,
+            "areaPower": 0,
+            "lifesteal": 0,
+            "reflection": 0,
+            "regeneration": 0,
+            "comboSpeed": 0,
+            "focus": 0
+          },
+          "representative": {
+            "pieces": [
+              {
+                "gene": "movement",
+                "grade": 1,
+                "rotation": 0,
+                "shape": [
+                  0,
+                  5
+                ]
+              },
+              {
+                "gene": "health",
+                "grade": 1,
+                "rotation": 1,
+                "shape": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "gene": "antenna",
+                "grade": 2,
+                "rotation": 3,
+                "shape": [
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "gene": "movement",
+                "grade": 1,
+                "rotation": 2,
+                "shape": [
+                  0,
+                  5
+                ]
+              }
+            ],
+            "paths": [
+              {
+                "gene": "movement",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 0
+                  },
+                  {
+                    "q": 2,
+                    "r": -1
+                  }
+                ]
+              },
+              {
+                "gene": "health",
+                "points": [
+                  {
+                    "q": 2,
+                    "r": -1
+                  },
+                  {
+                    "q": 2,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 1
+                  }
+                ]
+              },
+              {
+                "gene": "antenna",
+                "points": [
+                  {
+                    "q": 1,
+                    "r": 1
+                  },
+                  {
+                    "q": 0,
+                    "r": 1
+                  },
+                  {
+                    "q": -1,
+                    "r": 1
+                  },
+                  {
+                    "q": -1,
+                    "r": 0
+                  }
+                ]
+              },
+              {
+                "gene": "movement",
+                "points": [
+                  {
+                    "q": -1,
+                    "r": 0
+                  },
+                  {
+                    "q": -2,
+                    "r": 1
+                  },
+                  {
+                    "q": -2,
+                    "r": 2
+                  }
+                ]
+              }
+            ],
+            "occupied": 10,
+            "closedAtOrigin": false,
+            "inversionMatched": 10,
+            "inversionTotal": 10,
+            "boundingSpan": 10,
+            "extensions": 10,
+            "score": 1010
+          },
+          "nativeChecks": [
+            {
+              "rotation": 0,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 1,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 2,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 3,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 4,
+              "geometric": true,
+              "native": false
+            },
+            {
+              "rotation": 5,
+              "geometric": true,
+              "native": false
+            }
+          ],
+          "healerHpPerSecond": 0
+        },
+        {
+          "id": "healer",
+          "title": "치유기관1 + 체력3",
+          "counts": {
+            "healer": 1,
+            "health": 3
+          },
+          "layoutsModuloRotation": 69,
+          "closedAtOriginModuloRotation": 0,
+          "extendableModuloRotation": 66,
+          "birthCost": 32,
+          "stats": {
+            "gatherCount": 0,
+            "bladeCount": 0,
+            "antennaCount": 0,
+            "healerCount": 1,
+            "secretionCount": 0,
+            "melee": false,
+            "ranged": false,
+            "meleePower": 0,
+            "meleeSpeed": 0,
+            "rangedPower": 0,
+            "rangedSpeed": 0,
+            "healer": true,
+            "health": 40,
+            "power": 0,
+            "hits": 0,
+            "speed": 0,
+            "armor": 0,
+            "parry": 0,
+            "block": 0,
+            "evasion": 0,
+            "capacity": 0,
+            "harvest": 0,
+            "harvestTime": 0,
+            "movement": 0.25,
+            "vision": 1,
+            "scale": 1.04,
+            "roaming": false,
+            "comboPower": 0,
+            "critical": 0,
+            "criticalPower": 0,
+            "accuracy": 0,
+            "penetration": 0,
+            "blockPower": 50,
+            "counter": 0,
+            "counterPower": 0,
+            "tenacity": 0,
+            "reduction": 0,
+            "loadSpeed": 0,
+            "healing": 0,
+            "stun": 0,
+            "stunTime": 0,
+            "bleed": 0,
+            "bleedPower": 0,
+            "area": 0,
+            "areaPower": 0,
+            "lifesteal": 0,
+            "reflection": 0,
+            "regeneration": 0,
+            "comboSpeed": 0,
+            "focus": 0
+          },
+          "representative": {
+            "pieces": [
+              {
+                "gene": "healer",
+                "grade": 2,
+                "rotation": 0,
+                "shape": [
+                  0,
+                  1,
+                  3
+                ]
+              },
+              {
+                "gene": "health",
+                "grade": 1,
+                "rotation": 3,
+                "shape": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "gene": "health",
+                "grade": 1,
+                "rotation": 5,
+                "shape": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "gene": "health",
+                "grade": 1,
+                "rotation": 0,
+                "shape": [
+                  0,
+                  1
+                ]
+              }
+            ],
+            "paths": [
+              {
+                "gene": "healer",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 1
+                  },
+                  {
+                    "q": 0,
+                    "r": 1
+                  }
+                ]
+              },
+              {
+                "gene": "health",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 1
+                  },
+                  {
+                    "q": -1,
+                    "r": 1
+                  },
+                  {
+                    "q": -1,
+                    "r": 0
+                  }
+                ]
+              },
+              {
+                "gene": "health",
+                "points": [
+                  {
+                    "q": -1,
+                    "r": 0
+                  },
+                  {
+                    "q": 0,
+                    "r": -1
+                  },
+                  {
+                    "q": 1,
+                    "r": -1
+                  }
+                ]
+              },
+              {
+                "gene": "health",
+                "points": [
+                  {
+                    "q": 1,
+                    "r": -1
+                  },
+                  {
+                    "q": 2,
+                    "r": -1
+                  },
+                  {
+                    "q": 2,
+                    "r": 0
+                  }
+                ]
+              }
+            ],
+            "occupied": 10,
+            "closedAtOrigin": false,
+            "inversionMatched": 10,
+            "inversionTotal": 10,
+            "boundingSpan": 8,
+            "extensions": 6,
+            "score": 1008
+          },
+          "nativeChecks": [
+            {
+              "rotation": 0,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 1,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 2,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 3,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 4,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 5,
+              "geometric": true,
+              "native": true
+            }
+          ],
+          "healerHpPerSecond": 0.5
+        },
+        {
+          "id": "tank",
+          "title": "갑각2 + 체력3",
+          "counts": {
+            "carapace": 2,
+            "health": 3
+          },
+          "layoutsModuloRotation": 134,
+          "closedAtOriginModuloRotation": 4,
+          "extendableModuloRotation": 131,
+          "birthCost": 46,
+          "stats": {
+            "gatherCount": 0,
+            "bladeCount": 0,
+            "antennaCount": 0,
+            "healerCount": 0,
+            "secretionCount": 0,
+            "melee": false,
+            "ranged": false,
+            "meleePower": 0,
+            "meleeSpeed": 0,
+            "rangedPower": 0,
+            "rangedSpeed": 0,
+            "healer": false,
+            "health": 40,
+            "power": 0,
+            "hits": 0,
+            "speed": 0,
+            "armor": 4,
+            "parry": 0,
+            "block": 20,
+            "evasion": 0,
+            "capacity": 0,
+            "harvest": 0,
+            "harvestTime": 0,
+            "movement": 0.25,
+            "vision": 1,
+            "scale": 1.05,
+            "roaming": false,
+            "comboPower": 0,
+            "critical": 0,
+            "criticalPower": 0,
+            "accuracy": 0,
+            "penetration": 0,
+            "blockPower": 50,
+            "counter": 0,
+            "counterPower": 0,
+            "tenacity": 0,
+            "reduction": 0,
+            "loadSpeed": 0,
+            "healing": 0,
+            "stun": 0,
+            "stunTime": 0,
+            "bleed": 0,
+            "bleedPower": 0,
+            "area": 0,
+            "areaPower": 0,
+            "lifesteal": 0,
+            "reflection": 0,
+            "regeneration": 0,
+            "comboSpeed": 0,
+            "focus": 0
+          },
+          "representative": {
+            "pieces": [
+              {
+                "gene": "carapace",
+                "grade": 2,
+                "rotation": 0,
+                "shape": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "gene": "health",
+                "grade": 1,
+                "rotation": 2,
+                "shape": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "gene": "health",
+                "grade": 1,
+                "rotation": 2,
+                "shape": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "gene": "health",
+                "grade": 1,
+                "rotation": 3,
+                "shape": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "gene": "carapace",
+                "grade": 2,
+                "rotation": 5,
+                "shape": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ],
+            "paths": [
+              {
+                "gene": "carapace",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 0
+                  },
+                  {
+                    "q": 1,
+                    "r": 1
+                  },
+                  {
+                    "q": 2,
+                    "r": 1
+                  }
+                ]
+              },
+              {
+                "gene": "health",
+                "points": [
+                  {
+                    "q": 2,
+                    "r": 1
+                  },
+                  {
+                    "q": 1,
+                    "r": 2
+                  },
+                  {
+                    "q": 0,
+                    "r": 2
+                  }
+                ]
+              },
+              {
+                "gene": "health",
+                "points": [
+                  {
+                    "q": 0,
+                    "r": 2
+                  },
+                  {
+                    "q": -1,
+                    "r": 3
+                  },
+                  {
+                    "q": -2,
+                    "r": 3
+                  }
+                ]
+              },
+              {
+                "gene": "health",
+                "points": [
+                  {
+                    "q": -2,
+                    "r": 3
+                  },
+                  {
+                    "q": -3,
+                    "r": 3
+                  },
+                  {
+                    "q": -3,
+                    "r": 2
+                  }
+                ]
+              },
+              {
+                "gene": "carapace",
+                "points": [
+                  {
+                    "q": -3,
+                    "r": 2
+                  },
+                  {
+                    "q": -2,
+                    "r": 1
+                  },
+                  {
+                    "q": -1,
+                    "r": 1
+                  },
+                  {
+                    "q": 0,
+                    "r": 0
+                  }
+                ]
+              }
+            ],
+            "occupied": 12,
+            "closedAtOrigin": true,
+            "inversionMatched": 10,
+            "inversionTotal": 12,
+            "boundingSpan": 12,
+            "extensions": 14,
+            "score": 28.666666666666664
+          },
+          "nativeChecks": [
+            {
+              "rotation": 0,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 1,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 2,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 3,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 4,
+              "geometric": true,
+              "native": true
+            },
+            {
+              "rotation": 5,
+              "geometric": true,
+              "native": true
+            }
+          ],
+          "healerHpPerSecond": 0
+        }
+      ]
+    }
+  ]
+}
