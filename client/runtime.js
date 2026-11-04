@@ -27,28 +27,30 @@ return { CREATURE_MOVEMENT_PROFILES };
 })();
 modules["client/welcome-presentation.mjs"] = (() => {
 function createWelcomeRoster(tribes, species, variants, random = Math.random) {
-  const pool = [...new Set([...tribes, ...species])];
+  const pool = [...new Set(tribes)].flatMap(key => Array.from({ length: variants }, (_, variant) => ({ key, variant })))
+    .concat([...new Set(species)].filter(key => !tribes.includes(key)).map(key => ({ key, variant: 0 })));
   let number = 0;
   let bag = [];
   const recent = [];
   return function next() {
-    let key;
-    if (number < tribes.length) key = tribes[number];
+    let choice;
+    if (number < tribes.length) choice = { key: tribes[number], variant: 0 };
     else {
       if (!bag.length) {
-        bag = [...pool];
+        bag = number === tribes.length ? pool.filter(candidate => candidate.variant !== 0 || !tribes.includes(candidate.key)) : [...pool];
         for (let i = bag.length - 1; i > 0; i--) {
           const j = Math.floor(random() * (i + 1));
           [bag[i], bag[j]] = [bag[j], bag[i]];
         }
       }
-      const index = bag.findIndex(candidate => !recent.includes(candidate));
-      key = bag.splice(index < 0 ? 0 : index, 1)[0];
+      let index = bag.findIndex(candidate => !recent.some(previous => previous.key === candidate.key));
+      if (index < 0) index = bag.findIndex(candidate => !recent.some(previous => previous.key === candidate.key && previous.variant === candidate.variant));
+      choice = bag.splice(index < 0 ? 0 : index, 1)[0];
     }
-    const variant = number++ < tribes.length || !tribes.includes(key) ? 0 : Math.floor(random() * variants);
-    recent.push(key);
+    number++;
+    recent.push(choice);
     if (recent.length > 2) recent.shift();
-    return { key, variant };
+    return { ...choice };
   };
 }
 
@@ -66,19 +68,23 @@ function welcomeCreatureScale(animation, bounds, top, displaySize, width, height
 
 // Construct the same cell moves used by the game; a complete move always lands
 // before switching to an idle/attack pose in the middle of the header.
-function welcomeTravelMotion(model, { key, attributes = {}, width, size, elapsedMs, timeline, phase, reducedMotion = false, id = "welcome" }) {
+function welcomeTravelMotion(model, { key, attributes = {}, width, size, elapsedMs, timeline, phase, startedAt, reducedMotion = false, id = "welcome" }) {
   const neutral = !["bean", "spore", "pebble", "spring"].includes(key);
   const speed = neutral ? model.creatureAnimationSpeed(key) : model.unitStats(attributes, key).speed;
   const cell = neutral ? Math.min(240, width * .75) : size / .7;
   const steps = Math.max(1, Math.ceil((width / 2 + size) / cell));
   const durationMs = steps / speed * 1000;
   const moving = !reducedMotion && (phase === "enter" || phase === "exit");
-  const age = Math.max(0, Math.min(elapsedMs / 1000, durationMs / 1000 - 1e-8));
-  const step = Math.floor(age * speed), within = age - step / speed;
+  const origin = Number.isFinite(startedAt) ? startedAt : timeline - elapsedMs / 1000;
+  let step = Math.max(0, Math.min(steps - 1, Math.floor(elapsedMs / 1000 * speed)));
+  while (step > 0 && timeline < origin + step / speed) step--;
+  while (step < steps - 1 && timeline >= origin + (step + 1) / speed) step++;
+  const moveStartedAt = origin + step / speed;
+  const moveEndedAt = origin + (step + 1) / speed;
   const agent = { id, attributes, health: 1, facing: -1, mode: moving ? "walk" : "idle",
     ...(neutral ? { species: key } : { tribe: key }), stepCount: step + 1,
-    moveDuration: moving ? 1 / speed : 0, moveStartedAt: timeline - within,
-    flightStartedAt: timeline - age, renderFromX: -step, renderFromY: 0, x: -step - 1, y: 0 };
+    moveDuration: moving ? moveEndedAt - moveStartedAt : 0, moveStartedAt,
+    flightStartedAt: origin, renderFromX: -step, renderFromY: 0, x: -step - 1, y: 0 };
   const position = model.unitMovementPosition(agent, timeline, reducedMotion);
   const x = moving ? width / 2 + (phase === "enter" ? steps * cell : 0) + position.x * cell : width / 2;
   return { agent, position, x, durationMs, cell };
@@ -9452,7 +9458,7 @@ function createTribeMorphology(createSurface, loadImage) {
     rig.morphs.cache = new Map();
     await Promise.all(Object.entries(rig.morphs.parts).map(async ([name, part]) => {
       part.sprite = await loadImage(part.image);
-      const surface = createSurface(part.width, part.height), context = surface.getContext("2d"); context.drawImage(part.sprite, 0, 0);
+      const surface = createSurface(part.width, part.height), context = surface.getContext("2d", { willReadFrequently: true }); context.drawImage(part.sprite, 0, 0);
       const pixels = context.getImageData(0, 0, part.width, part.height).data;
       part.outline = [];
       for (let x = 0; x < part.width; x++) for (let y = part.height - 1; y >= 0; y--) {
@@ -9860,7 +9866,7 @@ function createTribeAttributeAnimation(assetSource, createSurface, loadImage) {
         const pivot = part.side > 0 ? [1 - source.pivot[0], source.pivot[1]] : source.pivot;
         part.spec = { ...source, pivot };
         part.mesh = attachmentMesh(part, part.spec);
-        const surface = createSurface(part.width, part.height), context = surface.getContext("2d");
+        const surface = createSurface(part.width, part.height), context = surface.getContext("2d", { willReadFrequently: true });
         context.drawImage(part.sprite, 0, 0);
         const pixels = context.getImageData(0, 0, part.width, part.height).data;
         part.sole = [];
@@ -10066,6 +10072,72 @@ modules["client/tribe-art.mjs"] = (() => {
 const { imageFrameSize, imageScale } = modules["client/image-geometry.mjs"];
 const { createTribeAttributeAnimation, hasTribeAttributes } = modules["client/attribute-animation.mjs"];
 
+let boundsWorker = null, boundsWorkerFailed = false, boundsWorkerReady = Promise.resolve(), boundsWorkerId = 0, boundsWorkerCancel = null;
+const boundsWorkerResults = new Map();
+function boundsWorkerSource() {
+  self.onmessage = async event => {
+    const { id, source, width, height, blob } = event.data;
+    let bitmap;
+    try {
+      const response = blob ? null : await fetch(source);
+      if (response && !response.ok) throw new Error(String(response.status));
+      bitmap = await createImageBitmap(blob || await response.blob());
+      const surface = new OffscreenCanvas(width, height);
+      const context = surface.getContext("2d", { willReadFrequently: true });
+      context.drawImage(bitmap, 0, 0);
+      const pixels = context.getImageData(0, 0, width, height).data;
+      let left = width, top = height, right = 0, bottom = 0;
+      for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+        if (pixels[(y * width + x) * 4 + 3] < 16) continue;
+        left = Math.min(left, x); top = Math.min(top, y);
+        right = Math.max(right, x + 1); bottom = Math.max(bottom, y + 1);
+      }
+      self.postMessage({ id, result: { x: left, y: top, width: Math.max(1, right - left), height: Math.max(1, bottom - top) } });
+    } catch { self.postMessage({ id, error: true }); }
+    finally { bitmap?.close(); }
+  };
+}
+function prepareImageBounds(source, width, height) {
+  const key = source + "|" + width + "|" + height;
+  if (boundsWorkerResults.has(key)) return Promise.resolve(boundsWorkerResults.get(key));
+  const pending = boundsWorkerReady.then(async () => {
+    const blob = source.startsWith("blob:") ? await fetch(source).then(response => {
+      if (!response.ok) throw new Error(String(response.status));
+      return response.blob();
+    }) : null;
+    return new Promise((resolve, reject) => {
+    if (boundsWorkerResults.has(key)) { resolve(boundsWorkerResults.get(key)); return; }
+    if (boundsWorkerFailed || !globalThis.Worker || !globalThis.OffscreenCanvas) { reject(); return; }
+    if (!boundsWorker) {
+      const url = URL.createObjectURL(new Blob(["(" + boundsWorkerSource.toString() + ")()"], { type: "text/javascript" }));
+      try { boundsWorker = new Worker(url); }
+      catch { boundsWorkerFailed = true; reject(); return; }
+      finally { URL.revokeObjectURL(url); }
+    }
+    const worker = boundsWorker, id = ++boundsWorkerId;
+    let timer, settled = false;
+    function finish(result) {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      boundsWorkerCancel = null;
+      worker.onmessage = worker.onerror = null;
+      if (result) { boundsWorkerResults.set(key, result); resolve(result); }
+      else { worker.terminate(); boundsWorker = null; boundsWorkerFailed = true; reject(); }
+    }
+    boundsWorkerCancel = () => finish(null);
+    worker.onmessage = event => { if (event.data.id === id) finish(event.data.result); };
+    worker.onerror = () => finish(null);
+    timer = setTimeout(() => finish(null), 15000);
+    try { worker.postMessage({ id, source: blob ? null : source, width, height, blob }); }
+    catch { finish(null); }
+    });
+  });
+  boundsWorkerReady = pending.catch(() => {});
+  return pending;
+}
+globalThis.addEventListener?.("pagehide", () => { boundsWorkerCancel?.(); boundsWorker?.terminate(); boundsWorker = null; boundsWorkerFailed = true; });
+
 function createTribeArt(definitions, assetSource) {
   const previews = new Map(), units = new Map(), sprites = new Map(), imageBounds = new WeakMap();
   const attributes = createTribeAttributeAnimation(assetSource, (width, height) => {
@@ -10076,9 +10148,47 @@ function createTribeArt(definitions, assetSource) {
 
   async function image(path) {
     const sprite = new Image();
+    sprite.crossOrigin = "anonymous";
     sprite.src = assetSource(path);
     await sprite.decode();
     return sprite;
+  }
+
+  async function prepareBounds(sprite, frame) {
+    const source = sprite.currentSrc || sprite.src;
+    const naturalWidth = sprite.naturalWidth, naturalHeight = sprite.naturalHeight;
+    const cached = imageBounds.get(sprite);
+    if (cached && cached.source === source && cached.width === sprite.naturalWidth && cached.height === sprite.naturalHeight && cached.frames.has(frame)) return cached.frames.get(frame);
+    const size = typeof frame === "number" ? frame : 512;
+    const width = frame ? size : sprite.naturalWidth || sprite.width;
+    const height = frame ? size : sprite.naturalHeight || sprite.height;
+    try {
+      if (!source || !(sprite.naturalWidth > 0)) throw new Error();
+      const result = await prepareImageBounds(source, width, height);
+      if ((sprite.currentSrc || sprite.src) !== source || sprite.naturalWidth !== naturalWidth || sprite.naturalHeight !== naturalHeight) return bounds(sprite, frame);
+      let entry = imageBounds.get(sprite);
+      if (!entry || entry.source !== source || entry.width !== sprite.naturalWidth || entry.height !== sprite.naturalHeight) {
+        entry = { source, width: sprite.naturalWidth, height: sprite.naturalHeight, frames: new Map() };
+        imageBounds.set(sprite, entry);
+      }
+      entry.frames.set(frame, result);
+      return result;
+    } catch {
+      await new Promise(resolve => {
+        let frame = null, timer = null, settled = false;
+        function finish() {
+          if (settled) return;
+          settled = true;
+          if (frame !== null) globalThis.cancelAnimationFrame?.(frame);
+          clearTimeout(timer);
+          resolve();
+        }
+        if (document.hidden || typeof requestAnimationFrame !== "function") { timer = setTimeout(finish, 0); return; }
+        timer = setTimeout(finish, 50);
+        frame = requestAnimationFrame(() => { frame = null; setTimeout(finish, 0); });
+      });
+      return bounds(sprite, frame);
+    }
   }
 
   function bounds(sprite, frame) {
@@ -10124,6 +10234,7 @@ function createTribeArt(definitions, assetSource) {
           if (!response.ok) throw new Error("부족 정보를 불러오지 못했습니다.");
           return response.json();
         }), Promise.all(tribe.parts.map(image)), attributes.prepare(tribe.key)]);
+      await Promise.all([starter, body, ...parts].map(part => prepareBounds(part, false)));
       const starterBounds = bounds(starter, false);
       const scale = Math.min(310 / starterBounds.width, 350 / starterBounds.height);
       const box = { x: 256 - starterBounds.width * scale / 2, y: 460 - starterBounds.height * scale,
@@ -10221,7 +10332,7 @@ function createTribeArt(definitions, assetSource) {
     return attributes.bodySize(tribe, appearance, portrait ? units.get(tribe)?.box : null);
   }
 
-  return { preparePreview, prepareUnit, sprite, bounds, drawPreview, animationFrame, animationPose, bodySize };
+  return { preparePreview, prepareUnit, sprite, bounds, prepareBounds, drawPreview, animationFrame, animationPose, bodySize };
 }
 
 return { createTribeArt };

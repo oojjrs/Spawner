@@ -1,6 +1,72 @@
 import { imageFrameSize, imageScale } from "./image-geometry.mjs";
 import { createTribeAttributeAnimation, hasTribeAttributes } from "./attribute-animation.mjs";
 
+let boundsWorker = null, boundsWorkerFailed = false, boundsWorkerReady = Promise.resolve(), boundsWorkerId = 0, boundsWorkerCancel = null;
+const boundsWorkerResults = new Map();
+function boundsWorkerSource() {
+  self.onmessage = async event => {
+    const { id, source, width, height, blob } = event.data;
+    let bitmap;
+    try {
+      const response = blob ? null : await fetch(source);
+      if (response && !response.ok) throw new Error(String(response.status));
+      bitmap = await createImageBitmap(blob || await response.blob());
+      const surface = new OffscreenCanvas(width, height);
+      const context = surface.getContext("2d", { willReadFrequently: true });
+      context.drawImage(bitmap, 0, 0);
+      const pixels = context.getImageData(0, 0, width, height).data;
+      let left = width, top = height, right = 0, bottom = 0;
+      for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+        if (pixels[(y * width + x) * 4 + 3] < 16) continue;
+        left = Math.min(left, x); top = Math.min(top, y);
+        right = Math.max(right, x + 1); bottom = Math.max(bottom, y + 1);
+      }
+      self.postMessage({ id, result: { x: left, y: top, width: Math.max(1, right - left), height: Math.max(1, bottom - top) } });
+    } catch { self.postMessage({ id, error: true }); }
+    finally { bitmap?.close(); }
+  };
+}
+function prepareImageBounds(source, width, height) {
+  const key = source + "|" + width + "|" + height;
+  if (boundsWorkerResults.has(key)) return Promise.resolve(boundsWorkerResults.get(key));
+  const pending = boundsWorkerReady.then(async () => {
+    const blob = source.startsWith("blob:") ? await fetch(source).then(response => {
+      if (!response.ok) throw new Error(String(response.status));
+      return response.blob();
+    }) : null;
+    return new Promise((resolve, reject) => {
+    if (boundsWorkerResults.has(key)) { resolve(boundsWorkerResults.get(key)); return; }
+    if (boundsWorkerFailed || !globalThis.Worker || !globalThis.OffscreenCanvas) { reject(); return; }
+    if (!boundsWorker) {
+      const url = URL.createObjectURL(new Blob(["(" + boundsWorkerSource.toString() + ")()"], { type: "text/javascript" }));
+      try { boundsWorker = new Worker(url); }
+      catch { boundsWorkerFailed = true; reject(); return; }
+      finally { URL.revokeObjectURL(url); }
+    }
+    const worker = boundsWorker, id = ++boundsWorkerId;
+    let timer, settled = false;
+    function finish(result) {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      boundsWorkerCancel = null;
+      worker.onmessage = worker.onerror = null;
+      if (result) { boundsWorkerResults.set(key, result); resolve(result); }
+      else { worker.terminate(); boundsWorker = null; boundsWorkerFailed = true; reject(); }
+    }
+    boundsWorkerCancel = () => finish(null);
+    worker.onmessage = event => { if (event.data.id === id) finish(event.data.result); };
+    worker.onerror = () => finish(null);
+    timer = setTimeout(() => finish(null), 15000);
+    try { worker.postMessage({ id, source: blob ? null : source, width, height, blob }); }
+    catch { finish(null); }
+    });
+  });
+  boundsWorkerReady = pending.catch(() => {});
+  return pending;
+}
+globalThis.addEventListener?.("pagehide", () => { boundsWorkerCancel?.(); boundsWorker?.terminate(); boundsWorker = null; boundsWorkerFailed = true; });
+
 export function createTribeArt(definitions, assetSource) {
   const previews = new Map(), units = new Map(), sprites = new Map(), imageBounds = new WeakMap();
   const attributes = createTribeAttributeAnimation(assetSource, (width, height) => {
@@ -11,9 +77,47 @@ export function createTribeArt(definitions, assetSource) {
 
   async function image(path) {
     const sprite = new Image();
+    sprite.crossOrigin = "anonymous";
     sprite.src = assetSource(path);
     await sprite.decode();
     return sprite;
+  }
+
+  async function prepareBounds(sprite, frame) {
+    const source = sprite.currentSrc || sprite.src;
+    const naturalWidth = sprite.naturalWidth, naturalHeight = sprite.naturalHeight;
+    const cached = imageBounds.get(sprite);
+    if (cached && cached.source === source && cached.width === sprite.naturalWidth && cached.height === sprite.naturalHeight && cached.frames.has(frame)) return cached.frames.get(frame);
+    const size = typeof frame === "number" ? frame : 512;
+    const width = frame ? size : sprite.naturalWidth || sprite.width;
+    const height = frame ? size : sprite.naturalHeight || sprite.height;
+    try {
+      if (!source || !(sprite.naturalWidth > 0)) throw new Error();
+      const result = await prepareImageBounds(source, width, height);
+      if ((sprite.currentSrc || sprite.src) !== source || sprite.naturalWidth !== naturalWidth || sprite.naturalHeight !== naturalHeight) return bounds(sprite, frame);
+      let entry = imageBounds.get(sprite);
+      if (!entry || entry.source !== source || entry.width !== sprite.naturalWidth || entry.height !== sprite.naturalHeight) {
+        entry = { source, width: sprite.naturalWidth, height: sprite.naturalHeight, frames: new Map() };
+        imageBounds.set(sprite, entry);
+      }
+      entry.frames.set(frame, result);
+      return result;
+    } catch {
+      await new Promise(resolve => {
+        let frame = null, timer = null, settled = false;
+        function finish() {
+          if (settled) return;
+          settled = true;
+          if (frame !== null) globalThis.cancelAnimationFrame?.(frame);
+          clearTimeout(timer);
+          resolve();
+        }
+        if (document.hidden || typeof requestAnimationFrame !== "function") { timer = setTimeout(finish, 0); return; }
+        timer = setTimeout(finish, 50);
+        frame = requestAnimationFrame(() => { frame = null; setTimeout(finish, 0); });
+      });
+      return bounds(sprite, frame);
+    }
   }
 
   function bounds(sprite, frame) {
@@ -59,6 +163,7 @@ export function createTribeArt(definitions, assetSource) {
           if (!response.ok) throw new Error("부족 정보를 불러오지 못했습니다.");
           return response.json();
         }), Promise.all(tribe.parts.map(image)), attributes.prepare(tribe.key)]);
+      await Promise.all([starter, body, ...parts].map(part => prepareBounds(part, false)));
       const starterBounds = bounds(starter, false);
       const scale = Math.min(310 / starterBounds.width, 350 / starterBounds.height);
       const box = { x: 256 - starterBounds.width * scale / 2, y: 460 - starterBounds.height * scale,
@@ -156,5 +261,5 @@ export function createTribeArt(definitions, assetSource) {
     return attributes.bodySize(tribe, appearance, portrait ? units.get(tribe)?.box : null);
   }
 
-  return { preparePreview, prepareUnit, sprite, bounds, drawPreview, animationFrame, animationPose, bodySize };
+  return { preparePreview, prepareUnit, sprite, bounds, prepareBounds, drawPreview, animationFrame, animationPose, bodySize };
 }

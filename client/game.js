@@ -488,7 +488,7 @@
       const image = new Image();
       image.src = assetSource(type.image);
       await image.decode();
-      const crop = tribeArt.bounds(image, false);
+      const crop = await tribeArt.prepareBounds(image, false);
       const sprite = document.createElement("canvas");
       sprite.width = sprite.height = 512;
       const scale = Math.min(480 / crop.width, 480 / crop.height);
@@ -527,7 +527,7 @@
     await Promise.all([...Spawner.PLAYER_TRIBES.map(prepareUnitAnimationSheets),
       ...[...creatureIdleSheets.values()].map(async entry => {
       await entry.sprite.decode();
-      const bounds = tribeArt.bounds(entry.sprite, entry.animation.frameSize);
+      const bounds = await tribeArt.prepareBounds(entry.sprite, entry.animation.frameSize);
       entry.scale = entry.animation.frameSize / 512 * 480 / Math.max(bounds.width, bounds.height);
     })]);
     await Promise.all([...creatureWalkSheets.entries()].map(async ([species, entry]) => {
@@ -550,7 +550,10 @@
       prepareUnitDisplaySize(species, entry.sprite, entry.animation, 1.4 * entry.scale * (entry.animation.registrationScale || 1));
     prepareUnitDisplaySize("talon-owl", talonOwlSheet, Spawner.TALON_OWL_IDLE, Spawner.TALON_OWL_IDLE.scale * (Spawner.TALON_OWL_IDLE.registrationScale || 1));
     prepareUnitDisplaySize("spiny-back-beetle", beetleSheet, Spawner.BEETLE_SPRITE, Spawner.BEETLE_SPRITE.scale * (Spawner.BEETLE_SPRITE.registrationScale || 1));
-    for (const [species, entry] of creatureDeathSheets) prepareCreatureDeathSize(species, entry);
+    for (const [species, entry] of creatureDeathSheets) {
+      await tribeArt.prepareBounds(entry.sprite, entry.animation.frameSize);
+      prepareCreatureDeathSize(species, entry);
+    }
     const beetleCorpseBounds = tribeArt.bounds(beetleCorpseSprite, false);
     beetleCorpseScale = Spawner.UNIT_DISPLAY_SIZES["spiny-back-beetle"] * beetleCorpseSprite.naturalWidth /
       (unitDisplayScales.get("spiny-back-beetle") * Math.max(beetleCorpseBounds.width, beetleCorpseBounds.height));
@@ -3481,7 +3484,8 @@
       }
     }
 
-    const audio = globalThis.SpawnerAudio.create();
+    const audio = globalThis.SpawnerEntryAudio?.audio || globalThis.SpawnerAudio.create();
+    globalThis.SpawnerWelcomeHeader.attachAudio(audio);
     globalThis.SpawnerWelcomeWaveform.create(audio.musicWaveform);
     const combatAudio = globalThis.SpawnerCombatAudio.create();
     const movementAudio = globalThis.SpawnerMovementAudio.create();
@@ -3529,7 +3533,7 @@
       }
       for (const event of globalThis.SpawnerMovementAudio?.update(movementAudio,
         audible.map(displayedAgent), time, Spawner) || []) {
-        const position = interpolatedAgentPosition(event.unit);
+        const position = event.position || interpolatedAgentPosition(event.unit);
         audio.play(event.name, audioVolume(position.x + .5, position.y + .5));
       }
       const agents = new Set();
@@ -3592,42 +3596,6 @@
             if (!(agent.carrying > 0) || !agent.carryingType || agent.carryingType === type)
               harvesting.set(type, Math.max(harvesting.get(type) || 0, volume));
           }
-        }
-        const end = agent.moveStartedAt + agent.moveDuration;
-        const step = agent.moveStartedAt + ":" + agent.stepCount;
-        let previous = agentAudio.get(agent.id);
-        const appearance = agent.appearanceAttributes || agent.attributes;
-        if (["spore", "pebble", "spring"].includes(agent.tribe)) {
-          agentAudio.delete(agent.id);
-          continue;
-        }
-        const footstepSound = "footstep";
-        const landingSound = "landing";
-        if (appearance.feet) {
-          const progress = agent.moveDuration ? clamp((time - agent.moveStartedAt) / agent.moveDuration, 0, 1) : 0;
-          const contact = Math.min(AGENT_FOOTSTEPS_PER_CELL, Math.floor(progress * AGENT_FOOTSTEPS_PER_CELL + 1e-7));
-          const footstep = agent.stepCount * AGENT_FOOTSTEPS_PER_CELL + contact;
-          const contactAt = agent.moveStartedAt + contact * agent.moveDuration / AGENT_FOOTSTEPS_PER_CELL;
-          if (previous?.footstep < footstep && agent.moveDuration > 0 &&
-            time - contactAt <= Math.min(0.12, agent.moveDuration / AGENT_FOOTSTEPS_PER_CELL)) {
-            audio.play(footstepSound, volume);
-          }
-          agentAudio.set(agent.id, { footstep });
-          continue;
-        }
-        if (previous && previous.step !== step) {
-          if (!previous.landed && time >= previous.end && time - previous.end < 0.35) {
-            audio.play(landingSound, audioVolume(previous.x + 0.5, previous.y + 0.5));
-          }
-          previous = null;
-        }
-        if (!previous) {
-          previous = { step, end, x: agent.x, y: agent.y, landed: !agent.moveDuration || time >= end };
-          agentAudio.set(agent.id, previous);
-        }
-        if (!previous.landed && time >= end) {
-          previous.landed = true;
-          if (time - end < 0.35) audio.play(landingSound, volume);
         }
       }
       for (const id of agentAudio.keys()) if (!agents.has(id)) agentAudio.delete(id);
@@ -4513,10 +4481,10 @@
           height: body.height * 350 / starterObjectSprite.naturalHeight } : (await tribeArt.prepareUnit(tribe)).box;
         const sheets = unitAnimationSheets.get(tribe.key), idle = sheets.get("idle");
         await idle.sprite.decode();
-        const idleBounds = tribeArt.bounds(idle.sprite, idle.animation.frameSize);
+        const idleBounds = await tribeArt.prepareBounds(idle.sprite, idle.animation.frameSize);
         await Promise.all([...sheets.entries()].map(async ([action, entry]) => {
           await entry.sprite.decode();
-          const bounds = action === "walk" ? idleBounds : tribeArt.bounds(entry.sprite, entry.animation.frameSize);
+          const bounds = action === "walk" ? idleBounds : await tribeArt.prepareBounds(entry.sprite, entry.animation.frameSize);
           const frameSize = action === "walk" ? idle.animation.frameSize : entry.animation.frameSize;
           entry.scale = frameSize / 512 * Math.min(reference.width / bounds.width, reference.height / bounds.height);
           if (action === "walk") entry.scale *= (entry.animation.registrationScale || 1) / (idle.animation.registrationScale || 1);

@@ -1,5 +1,9 @@
 (() => {
+  let currentMusic = null;
+  let currentController = null;
   globalThis.SpawnerWelcomeWaveform = Object.freeze({ create: function (music) {
+    if (music === currentMusic && currentController) return currentController;
+    currentController?.dispose();
     const welcome = document.getElementById("welcome");
     const frequencies = new Float32Array(1024);
     const levels = new Float32Array(30);
@@ -105,8 +109,23 @@
       }
     }
 
-    new MutationObserver(update).observe(welcome, { attributes: true, attributeFilter: ["hidden"], childList: true, subtree: true });
+    const observer = new MutationObserver(update);
+    observer.observe(welcome, { attributes: true, attributeFilter: ["hidden"], childList: true, subtree: true });
     document.addEventListener("visibilitychange", update);
+    currentMusic = music;
+    currentController = Object.freeze({ dispose() {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", update);
+      if (frame !== null) cancelAnimationFrame(frame);
+      frame = null;
+      music.setActive(false);
+      clear();
+      if (currentMusic === music) {
+        currentMusic = null;
+        currentController = null;
+      }
+    } });
     update();
+    return currentController;
   } });
 })();

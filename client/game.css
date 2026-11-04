@@ -34,6 +34,12 @@
       overflow: hidden;
     }
 
+    body[data-screen="entry"] > :not(.entry-gate):not(script) { display: none !important; }
+    .entry-gate { display: grid; place-items: center; min-height: 100dvh; padding: 24px; }
+    .entry-gate[hidden] { display: none; }
+    #entry-button { min-width: 144px; min-height: 56px; padding: 12px 32px; border: 1px solid #75c4b680; border-radius: 12px; color: var(--ink); background: #24483d; font: inherit; cursor: pointer; }
+    #entry-button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
     .app {
       display: grid;
       grid-template-rows: 1fr;
@@ -669,7 +675,7 @@
     .welcome { min-height: 100dvh; padding: clamp(20px, 5vh, 48px) clamp(12px, 3vw, 24px); background: radial-gradient(ellipse at 75% 0, #24443b77, transparent 55%), #101719; color: var(--ink); }
     .welcome-content { width: 100%; max-width: 480px; margin: 0 auto; }
     @media (orientation: portrait) { .welcome-content { max-width: none; } }
-    .welcome[aria-busy="true"] .welcome-content > :not(.welcome-heading):not(.welcome-loading) { display: none; }
+    .welcome[aria-busy="true"] .welcome-content > :not(.welcome-heading):not(.welcome-loading):not(.welcome-audio) { display: none; }
     .welcome-loading { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; min-height: 160px; }
     .welcome[aria-busy="false"] .welcome-loading { display: none; }
     .welcome-spinner { width: 30px; height: 30px; border: 3px solid var(--line); border-top-color: var(--accent); border-radius: 50%; animation: welcome-spin .8s linear infinite; }

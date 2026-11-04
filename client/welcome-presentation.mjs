@@ -1,26 +1,28 @@
 export function createWelcomeRoster(tribes, species, variants, random = Math.random) {
-  const pool = [...new Set([...tribes, ...species])];
+  const pool = [...new Set(tribes)].flatMap(key => Array.from({ length: variants }, (_, variant) => ({ key, variant })))
+    .concat([...new Set(species)].filter(key => !tribes.includes(key)).map(key => ({ key, variant: 0 })));
   let number = 0;
   let bag = [];
   const recent = [];
   return function next() {
-    let key;
-    if (number < tribes.length) key = tribes[number];
+    let choice;
+    if (number < tribes.length) choice = { key: tribes[number], variant: 0 };
     else {
       if (!bag.length) {
-        bag = [...pool];
+        bag = number === tribes.length ? pool.filter(candidate => candidate.variant !== 0 || !tribes.includes(candidate.key)) : [...pool];
         for (let i = bag.length - 1; i > 0; i--) {
           const j = Math.floor(random() * (i + 1));
           [bag[i], bag[j]] = [bag[j], bag[i]];
         }
       }
-      const index = bag.findIndex(candidate => !recent.includes(candidate));
-      key = bag.splice(index < 0 ? 0 : index, 1)[0];
+      let index = bag.findIndex(candidate => !recent.some(previous => previous.key === candidate.key));
+      if (index < 0) index = bag.findIndex(candidate => !recent.some(previous => previous.key === candidate.key && previous.variant === candidate.variant));
+      choice = bag.splice(index < 0 ? 0 : index, 1)[0];
     }
-    const variant = number++ < tribes.length || !tribes.includes(key) ? 0 : Math.floor(random() * variants);
-    recent.push(key);
+    number++;
+    recent.push(choice);
     if (recent.length > 2) recent.shift();
-    return { key, variant };
+    return { ...choice };
   };
 }
 
@@ -38,19 +40,23 @@ export function welcomeCreatureScale(animation, bounds, top, displaySize, width,
 
 // Construct the same cell moves used by the game; a complete move always lands
 // before switching to an idle/attack pose in the middle of the header.
-export function welcomeTravelMotion(model, { key, attributes = {}, width, size, elapsedMs, timeline, phase, reducedMotion = false, id = "welcome" }) {
+export function welcomeTravelMotion(model, { key, attributes = {}, width, size, elapsedMs, timeline, phase, startedAt, reducedMotion = false, id = "welcome" }) {
   const neutral = !["bean", "spore", "pebble", "spring"].includes(key);
   const speed = neutral ? model.creatureAnimationSpeed(key) : model.unitStats(attributes, key).speed;
   const cell = neutral ? Math.min(240, width * .75) : size / .7;
   const steps = Math.max(1, Math.ceil((width / 2 + size) / cell));
   const durationMs = steps / speed * 1000;
   const moving = !reducedMotion && (phase === "enter" || phase === "exit");
-  const age = Math.max(0, Math.min(elapsedMs / 1000, durationMs / 1000 - 1e-8));
-  const step = Math.floor(age * speed), within = age - step / speed;
+  const origin = Number.isFinite(startedAt) ? startedAt : timeline - elapsedMs / 1000;
+  let step = Math.max(0, Math.min(steps - 1, Math.floor(elapsedMs / 1000 * speed)));
+  while (step > 0 && timeline < origin + step / speed) step--;
+  while (step < steps - 1 && timeline >= origin + (step + 1) / speed) step++;
+  const moveStartedAt = origin + step / speed;
+  const moveEndedAt = origin + (step + 1) / speed;
   const agent = { id, attributes, health: 1, facing: -1, mode: moving ? "walk" : "idle",
     ...(neutral ? { species: key } : { tribe: key }), stepCount: step + 1,
-    moveDuration: moving ? 1 / speed : 0, moveStartedAt: timeline - within,
-    flightStartedAt: timeline - age, renderFromX: -step, renderFromY: 0, x: -step - 1, y: 0 };
+    moveDuration: moving ? moveEndedAt - moveStartedAt : 0, moveStartedAt,
+    flightStartedAt: origin, renderFromX: -step, renderFromY: 0, x: -step - 1, y: 0 };
   const position = model.unitMovementPosition(agent, timeline, reducedMotion);
   const x = moving ? width / 2 + (phase === "enter" ? steps * cell : 0) + position.x * cell : width / 2;
   return { agent, position, x, durationMs, cell };

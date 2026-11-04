@@ -170,7 +170,7 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
         const pivot = part.side > 0 ? [1 - source.pivot[0], source.pivot[1]] : source.pivot;
         part.spec = { ...source, pivot };
         part.mesh = attachmentMesh(part, part.spec);
-        const surface = createSurface(part.width, part.height), context = surface.getContext("2d");
+        const surface = createSurface(part.width, part.height), context = surface.getContext("2d", { willReadFrequently: true });
         context.drawImage(part.sprite, 0, 0);
         const pixels = context.getImageData(0, 0, part.width, part.height).data;
         part.sole = [];

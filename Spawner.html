@@ -6,7 +6,8 @@
   <title>Spawner</title>
   <link rel="stylesheet" href="./client/game.css">
 </head>
-<body data-screen="welcome">
+<body data-screen="entry">
+  <div class="entry-gate" id="entry-gate"><button id="entry-button" type="button" autofocus>입장</button></div>
   <div class="app" hidden inert>
     <main class="stage">
       <canvas id="world" width="1200" height="760" tabindex="0" aria-label="Spawner world canvas"></canvas>
@@ -283,11 +284,20 @@
 
   <div class="help-tooltip" id="help-tooltip" role="tooltip" hidden></div>
 
-  <section class="welcome" id="welcome" aria-labelledby="welcome-title" aria-busy="true">
+  <section class="welcome" id="welcome" aria-labelledby="welcome-title" aria-busy="true" hidden inert>
     <div class="welcome-content">
       <header class="welcome-heading">
         <p class="welcome-brand" id="welcome-title" tabindex="-1">SPAWNER</p>
       </header>
+      <div class="welcome-audio">
+        <button class="sound-toggle" id="sound-toggle" type="button" aria-label="소리 끄기" aria-pressed="true" title="배경음악·효과음 끄기">
+          <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+            <path d="M4 12h6l7-6v20l-7-6H4z" fill="currentColor" stroke="none"/>
+            <g class="sound-waves"><path d="M21 11c3 3 3 7 0 10M25 7c5 5 5 13 0 18"/></g>
+            <path class="sound-muted" d="m22 12 7 8m0-8-7 8"/>
+          </svg>
+        </button>
+      </div>
       <div class="welcome-loading" role="status" aria-label="불러오는 중">
         <span class="welcome-spinner" aria-hidden="true"></span>
         <p class="welcome-loading-message" aria-hidden="true">
@@ -297,27 +307,6 @@
           <span hidden>샘방울들이 한 줄로 모이고 있어요.</span>
           <span hidden>작은 둥지에 큰 모험을 담고 있어요.</span>
         </p>
-        <script>
-          (() => {
-            const messages = [...document.querySelectorAll(".welcome-loading-message > span")];
-            let selected = Math.floor(Math.random() * messages.length);
-            messages.forEach((message, index) => { message.hidden = index !== selected; });
-            const timer = setInterval(() => {
-              if (document.getElementById("welcome").getAttribute("aria-busy") !== "true") { clearInterval(timer); return; }
-              selected = (selected + 1) % messages.length;
-              messages.forEach((message, index) => { message.hidden = index !== selected; });
-            }, 1500);
-          })();
-        </script>
-      </div>
-      <div class="welcome-audio">
-        <button class="sound-toggle" id="sound-toggle" type="button" aria-label="소리 끄기" aria-pressed="true" title="배경음악·효과음 끄기">
-          <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-            <path d="M4 12h6l7-6v20l-7-6H4z" fill="currentColor" stroke="none"/>
-            <g class="sound-waves"><path d="M21 11c3 3 3 7 0 10M25 7c5 5 5 13 0 18"/></g>
-            <path class="sound-muted" d="m22 12 7 8m0-8-7 8"/>
-          </svg>
-        </button>
       </div>
       <section class="welcome-create" id="room-create-panel" hidden>
         <form id="welcome-form">
@@ -332,7 +321,7 @@
     </div>
   </section>
 
-  <section class="tribe-selection" id="tribe-selection" hidden>
+  <section class="tribe-selection" id="tribe-selection" hidden inert>
     <div class="tribe-selection-content">
       <header class="tribe-selection-heading"><button class="secondary-action" id="tribe-selection-back" type="button">방 목록으로</button></header>
       <div class="tribe-selection-body">
@@ -349,17 +338,18 @@
     </div>
   </section>
 
-  <script src="./client/runtime.js"></script>
-  <script src="./client/music-catalog.js"></script>
-  <script src="./client/music.js"></script>
-  <script src="./client/combat-audio.js"></script>
-  <script src="./client/movement-audio.js"></script>
-  <script src="./client/audio.js"></script>
-  <script src="./client/welcome-waveform.js"></script>
-  <script src="./client/local-assets.js"></script>
-  <script src="./client/assets.js"></script>
-  <script src="./client/welcome-art.js"></script>
-  <script src="./client/welcome-header.js"></script>
-  <script src="./client/game.js"></script>
+  <script data-src="./client/runtime.js"></script>
+  <script data-src="./client/music-catalog.js"></script>
+  <script data-src="./client/music.js"></script>
+  <script data-src="./client/combat-audio.js"></script>
+  <script data-src="./client/movement-audio.js"></script>
+  <script data-src="./client/audio.js"></script>
+  <script data-src="./client/welcome-waveform.js"></script>
+  <script data-src="./client/local-assets.js"></script>
+  <script data-src="./client/assets.js"></script>
+  <script data-src="./client/welcome-art.js"></script>
+  <script data-src="./client/welcome-header.js"></script>
+  <script data-src="./client/game.js"></script>
+  <script src="./client/entry.js"></script>
 </body>
 </html>

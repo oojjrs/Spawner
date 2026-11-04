@@ -31,19 +31,23 @@
     dew: "harvest-dew"
   });
   globalThis.SpawnerAudio = Object.freeze({ create: function () {
+    const entryAudio = globalThis.SpawnerEntryAudio;
+    entryAudio?.cleanup?.();
     let context = null;
+    let entryResume = entryAudio?.resumed || null;
     let worldGain = null;
+    let welcomeGain = null;
     let worldVolume = 1;
     let loading = null;
-    let muted = false;
+    let muted = entryAudio?.muted || false;
     let active = true;
-    let failed = !globalThis.AudioContext;
+    let failed = !entryAudio?.context && !globalThis.AudioContext;
     const harvests = new Map();
     let clickSource = null;
     let clickGain = null;
     let discoverySource = null;
     let discoveryGain = null;
-    const music = globalThis.SpawnerMusic.create();
+    const music = entryAudio?.music || globalThis.SpawnerMusic.create();
     const buffers = new Map();
     const names = Object.keys(sources).filter(name => name !== "click" && name !== "discovery");
     const channels = [];
@@ -70,16 +74,30 @@
       button.title = failed ? "소리 사용 불가" : muted ? "배경음악·효과음 켜기" : "배경음악·효과음 끄기";
     }
 
+    function stopGroup(group) {
+      for (const voice of voices) if (voice.group === group) {
+        voice.source.stop();
+        voice.source = null;
+        voice.gain.gain.value = 0;
+        voices.delete(voice);
+      }
+    }
+
     function stopWorld() {
-      for (const voice of voices) voice.source.stop();
-      voices.clear();
+      stopGroup("world");
       harvests.clear();
+    }
+
+    function stopWelcome() {
+      stopGroup("welcome");
+      for (const key of lastPlayed.keys()) if (key.startsWith("welcome:")) lastPlayed.delete(key);
     }
 
     function stop() {
       if (discoverySource) discoverySource.stop();
       discoverySource = null;
       stopWorld();
+      stopWelcome();
       lastPlayed.clear();
     }
 
@@ -92,30 +110,50 @@
       if (!active || muted || failed || document.hidden) return;
       try {
         if (!context) {
-          context = new AudioContext();
+          context = entryAudio?.context || new AudioContext();
           worldGain = context.createGain();
           worldGain.gain.value = worldVolume;
           worldGain.connect(context.destination);
+          welcomeGain = context.createGain();
+          welcomeGain.connect(context.destination);
+        }
+        if (entryResume) {
+          const request = entryResume;
+          entryResume = null;
+          await request;
         }
         if (context.state === "suspended") await context.resume();
         if (active && !muted && !document.hidden) music.unlock(context);
-        if (!loading) loading = Promise.all(Object.entries(sources).map(async ([name, source]) => {
-          const encoded = await fetch(globalThis.SpawnerAssets.source(source)).then(response => {
+        if (!loading) loading = (async () => {
+          const entries = Object.entries(sources);
+          const welcomeNames = new Set(["click", "discovery", "footstep", "landing", "move-spore", "move-pebble", "move-spring"]);
+          const priority = globalThis.SpawnerWelcomeLoading ? entries.filter(([name]) => welcomeNames.has(name)) : entries;
+          async function decode(entries) {
+            await Promise.all(entries.map(async ([name, source]) => {
+              const response = await fetch(globalThis.SpawnerAssets.source(source));
               if (!response.ok) throw new Error("효과음을 불러오지 못했습니다.");
-              return response.arrayBuffer();
-            });
-          buffers.set(name, await context.decodeAudioData(encoded));
-        })).then(() => {
+              buffers.set(name, await context.decodeAudioData(await response.arrayBuffer()));
+            }));
+          }
+          await globalThis.SpawnerAssets.welcomeReady;
+          await decode(priority);
           for (let index = 0; index < 8; index++) {
             const gain = context.createGain();
             gain.gain.value = 0;
             gain.connect(worldGain);
-            const channel = { gain, sources: new Map(), source: null, name: null, priority: 0 };
+            const channel = { gain, sources: new Map(), source: null, name: null, priority: 0, group: "world" };
             channels.push(channel);
-            for (const name of names) channel.sources.set(name, prepareSource(channel, name));
+            for (const name of names) if (buffers.has(name)) channel.sources.set(name, prepareSource(channel, name));
           }
           prepared = true;
-        });
+          if (priority.length !== entries.length) {
+            await globalThis.SpawnerAssets.ready;
+            const remaining = entries.filter(([name]) => !welcomeNames.has(name));
+            await decode(remaining);
+            for (const channel of channels) for (const [name] of remaining)
+              if (names.includes(name)) channel.sources.set(name, prepareSource(channel, name));
+          }
+        })();
         await loading;
       } catch {
         failed = true;
@@ -171,8 +209,8 @@
       if (refills.length) refillTimer = setTimeout(refillSources, 0);
     }
 
-    function start(name, volume, loop) {
-      if (!available() || worldVolume <= 0 || volume <= 0) return null;
+    function start(name, volume, loop, group) {
+      if (!available() || group === "world" && worldVolume <= 0 || volume <= 0) return null;
       const priority = name.startsWith("nest-growth-") || name.endsWith("-death") ? 3 : name.endsWith("-hurt") ? 2 : name.endsWith("-attack") ? 1 : 0;
       const voice = channels.find(channel => channel.source === null && channel.sources.has(name)) ||
         channels.filter(channel => channel.sources.has(name) && channel.priority < priority)
@@ -181,6 +219,11 @@
       if (voice.source) {
         for (const [type, channel] of harvests) if (channel === voice) harvests.delete(type);
         voice.source.stop();
+      }
+      if (voice.group !== group) {
+        voice.gain.disconnect();
+        voice.gain.connect(group === "welcome" ? welcomeGain : worldGain);
+        voice.group = group;
       }
       voice.priority = priority;
       const source = voice.sources.get(name);
@@ -216,15 +259,25 @@
         source.start();
         return;
       }
+      playGroup(name, volume, "world");
+    }
+
+    function playWelcome(name, volume) {
+      playGroup(name, volume, "welcome");
+    }
+
+    function playGroup(name, volume, group) {
+      if (!available() || volume <= 0) return;
+      const key = group + ":" + name;
       const footstep = name === "footstep" || name === "spring-footstep";
       const landing = name === "landing" || name === "spring-landing";
       const movement = name.startsWith("move-");
       const interval = footstep ? 0.04 : landing ? 0.075 : movement ? 0.09 : 0.1;
-      if (context.currentTime - (lastPlayed.get(name) ?? -Infinity) < interval) return;
+      if (context.currentTime - (lastPlayed.get(key) ?? -Infinity) < interval) return;
       let concurrent = 0;
-      for (const voice of voices) if (voice.name === name) concurrent++;
+      for (const voice of voices) if (voice.name === name && voice.group === group) concurrent++;
       if (landing && concurrent >= 3 || footstep && concurrent >= 6 || movement && concurrent >= 2) return;
-      if (start(name, volume, false)) lastPlayed.set(name, context.currentTime);
+      if (start(name, volume, false, group)) lastPlayed.set(key, context.currentTime);
     }
 
     async function playClick() {
@@ -260,7 +313,7 @@
         if (!name || !(volume > 0)) continue;
         let voice = harvests.get(type);
         if (!voice) {
-          voice = start(name, volume, true);
+          voice = start(name, volume, true, "world");
           if (voice) harvests.set(type, voice);
         }
         if (voice) voice.gain.gain.value = (levels[name] ?? .8) * Math.min(1, volume);
@@ -291,6 +344,6 @@
     music.update(null);
     updateButton();
     unlock();
-    return { available, play, playClick, setHarvest, setActive, setWorldVolume, stop, updateMusic: music.update, musicWaveform: music.waveform };
+    return { available, play, playWelcome, stopWelcome, playClick, setHarvest, setActive, setWorldVolume, stop, updateMusic: music.update, musicWaveform: music.waveform };
   } });
 })();

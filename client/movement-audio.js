@@ -235,12 +235,13 @@
   }
 
   function create() {
-    return { time: null, units: new Map() };
+    return { time: null, units: new Map(), beans: new Map() };
   }
 
   function reset(playback) {
     playback.time = null;
     playback.units.clear();
+    playback.beans.clear();
   }
 
   function pose(unit, time, animations) {
@@ -278,10 +279,47 @@
     return { key, definition, phase, rate, elapsed };
   }
 
+  function updateBean(playback, unit, time, events) {
+    const end = unit.moveStartedAt + unit.moveDuration;
+    const step = unit.moveStartedAt + ":" + unit.stepCount;
+    let previous = playback.beans.get(unit.id);
+    const appearance = unit.appearanceAttributes || unit.attributes || {};
+    if (appearance.feet) {
+      const progress = unit.moveDuration ? Math.max(0, Math.min(1, (time - unit.moveStartedAt) / unit.moveDuration)) : 0;
+      const contact = Math.min(4, Math.floor(progress * 4 + 1e-7));
+      const footstep = unit.stepCount * 4 + contact;
+      const contactAt = unit.moveStartedAt + contact * unit.moveDuration / 4;
+      if (previous?.footstep < footstep && unit.moveDuration > 0 &&
+        time - contactAt <= Math.min(.12, unit.moveDuration / 4)) events.push({ name: "footstep", unit });
+      playback.beans.set(unit.id, { footstep });
+      return;
+    }
+    if (previous && previous.step !== step) {
+      if (!previous.landed && time >= previous.end && time - previous.end < .35)
+        events.push({ name: "landing", unit, position: { x: previous.x, y: previous.y } });
+      previous = null;
+    }
+    if (!previous) {
+      previous = { step, end, x: unit.x, y: unit.y, landed: !unit.moveDuration || time >= end };
+      playback.beans.set(unit.id, previous);
+    }
+    if (!previous.landed && time >= end) {
+      previous.landed = true;
+      if (time - end < .35) events.push({ name: "landing", unit });
+    }
+  }
+
   function update(playback, units, time, animations) {
     if (playback.time !== null && (time < playback.time || time - playback.time > .5)) reset(playback);
-    const initial = playback.time === null, active = new Set(), events = [];
+    const initial = playback.time === null, active = new Set(), beans = new Set(), events = [];
     for (const unit of units) {
+      if (!unit.species && !["spore", "pebble", "spring"].includes(unit.tribe)) {
+        if (unit.health > 0 && !unit.birth) {
+          beans.add(unit.id);
+          updateBean(playback, unit, time, events);
+        }
+        continue;
+      }
       const motion = pose(unit, time, animations);
       if (!motion) continue;
       active.add(unit.id);
@@ -298,6 +336,7 @@
       playback.units.set(unit.id, { startedAt, phase: motion.phase });
     }
     for (const id of playback.units.keys()) if (!active.has(id)) playback.units.delete(id);
+    for (const id of playback.beans.keys()) if (!beans.has(id)) playback.beans.delete(id);
     playback.time = time;
     return events;
   }

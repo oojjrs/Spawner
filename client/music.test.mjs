@@ -6,9 +6,11 @@ import { createContext, runInContext } from "node:vm";
 const gameSource = readFileSync(new URL("./game.js", import.meta.url), "utf8");
 const settle = () => new Promise(resolve => setImmediate(resolve));
 
-function fixture(blocked, touchActivation = false, mediaActivation = false) {
+function fixture(blocked, touchActivation = false, mediaActivation = false, seeded) {
   const sounds = [], starts = [], listeners = new Map(), buttonListeners = new Map(), resumes = [], timers = new Map();
   const gains = [], intervals = new Map();
+  const contexts = [];
+  let resumeCalls = 0;
   let clock = null;
   let userActivated = false;
   let playbackActivated = false;
@@ -20,8 +22,9 @@ function fixture(blocked, touchActivation = false, mediaActivation = false) {
       listeners.get(type).push(callback);
     } };
   class AudioContext {
-    constructor() { clock = this; this.state = blocked ? "suspended" : "running"; this.currentTime = 0; }
+    constructor() { clock = this; contexts.push(this); this.state = blocked ? "suspended" : "running"; this.currentTime = 0; }
     resume() {
+      resumeCalls++;
       if (touchActivation) {
         if (!userActivated) return new Promise(() => {});
         this.state = "running";
@@ -48,7 +51,9 @@ function fixture(blocked, touchActivation = false, mediaActivation = false) {
     }
   }
   const envelope = Buffer.from([...Array(20).fill(32), ...Array(10).fill(255), ...Array(20).fill(32)]).toString("base64");
-  const context = createContext({ document, AudioContext, Audio, location: { protocol: "http:" }, window: { addEventListener() {}, confirm: () => true },
+  const entryContext = seeded ? new AudioContext() : null;
+  const entryAudio = entryContext ? { context: entryContext, resumed: entryContext.resume() } : null;
+  const context = createContext({ document, AudioContext, Audio, SpawnerEntryAudio: entryAudio, location: { protocol: "http:" }, window: { addEventListener() {}, confirm: () => true },
     SpawnerCombatAudio: { sources: {} }, SpawnerAssets: { source: value => value },
     atob: value => Buffer.from(value, "base64").toString("binary"),
     SpawnerMusicCatalog: { peace: [{ file: "peace.mp3", envelope }, { file: "peace-next.mp3", envelope }, { file: "peace-last.mp3", envelope }], combat: [{ file: "combat.mp3", envelope }] },
@@ -62,7 +67,7 @@ function fixture(blocked, touchActivation = false, mediaActivation = false) {
     runInContext(readFileSync(new URL(file, import.meta.url), "utf8"), context);
   }
   const audio = context.SpawnerAudio.create();
-  return { context, audio, document, sounds, starts, buttonListeners, timers,
+  return { context, audio, document, sounds, starts, buttonListeners, timers, contexts, resumeCount: () => resumeCalls,
     effectLevel: () => gains[1].gain.value,
     advance(seconds) {
       clock.currentTime += seconds;
@@ -256,4 +261,42 @@ test("웰컴에서 음소거하면 알트탭 복귀에도 유지하고 해제할
   sound.buttonListeners.get("click")();
   await settle();
   assert.deepEqual(sound.playing(), ["peace.mp3"]);
+});
+
+test("입장 클릭의 오디오 컨텍스트와 진행 중인 resume을 재사용하고 복귀 때만 다시 resume한다", async () => {
+  const sound = fixture(true, false, false, true);
+  await settle();
+  assert.equal(sound.contexts.length, 1);
+  assert.equal(sound.resumeCount(), 1);
+  assert.deepEqual(sound.playing(), []);
+  sound.activate();
+  await settle();
+  assert.deepEqual(sound.playing(), ["peace.mp3"]);
+  assert.equal(sound.contexts.length, 1);
+  assert.equal(sound.resumeCount(), 1);
+  sound.audio.setActive(false);
+  sound.contexts[0].state = "suspended";
+  sound.audio.setActive(true);
+  assert.equal(sound.resumeCount(), 2);
+  sound.activate();
+  await settle();
+  assert.deepEqual(sound.playing(), ["peace.mp3"]);
+  assert.equal(sound.contexts.length, 1);
+  assert.equal(sound.resumeCount(), 2);
+});
+
+test("최초 음악 준비는 실제 재생 성공이나 자동 재생 거부 뒤에만 확정한다", async () => {
+  for (const blocked of [false, true]) {
+    const sound = fixture(false, false, blocked);
+    const music = sound.context.SpawnerMusic.create();
+    let result = null;
+    music.ready.then(value => { result = value; });
+    music.update(null);
+    await settle();
+    assert.equal(result, null);
+    music.unlock(sound.contexts[0]);
+    assert.equal(result, null);
+    await settle();
+    assert.equal(result, !blocked);
+  }
 });

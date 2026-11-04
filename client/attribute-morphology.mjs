@@ -113,7 +113,7 @@ export function createTribeMorphology(createSurface, loadImage) {
     rig.morphs.cache = new Map();
     await Promise.all(Object.entries(rig.morphs.parts).map(async ([name, part]) => {
       part.sprite = await loadImage(part.image);
-      const surface = createSurface(part.width, part.height), context = surface.getContext("2d"); context.drawImage(part.sprite, 0, 0);
+      const surface = createSurface(part.width, part.height), context = surface.getContext("2d", { willReadFrequently: true }); context.drawImage(part.sprite, 0, 0);
       const pixels = context.getImageData(0, 0, part.width, part.height).data;
       part.outline = [];
       for (let x = 0; x < part.width; x++) for (let y = part.height - 1; y >= 0; y--) {

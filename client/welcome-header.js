@@ -1,17 +1,29 @@
-(async () => {
+globalThis.SpawnerWelcomeHeaderReady = (async () => {
   "use strict";
-  await globalThis.SpawnerAssets.ready;
+  let audioConnection = null;
+  let audioReset = null;
+  globalThis.SpawnerWelcomeHeader = Object.freeze({ attachAudio(audio) {
+    if (audioConnection === audio) return;
+    audioReset?.();
+    audioConnection = audio;
+  } });
+  await globalThis.SpawnerAssets.welcomeReady;
   const welcome = document.getElementById("welcome");
   const title = document.getElementById("welcome-title");
-  const stage = document.createElement("div");
+  const stage = welcome.querySelector(".welcome-stage") || document.createElement("div");
   stage.className = "welcome-stage";
-  title.before(stage);
-  stage.append(title);
+  if (!stage.parentNode) {
+    title.before(stage);
+    stage.append(title);
+  }
   stage.style.backgroundImage = "url(" + JSON.stringify(globalThis.SpawnerWelcomeBackground || "DesignAssets/Welcome/forest-clearing.webp") + ")";
-  const waveform = document.createElement("canvas");
-  waveform.className = "welcome-waveform";
-  waveform.setAttribute("aria-hidden", "true");
-  stage.after(waveform);
+  let waveform = welcome.querySelector(".welcome-waveform");
+  if (!waveform) {
+    waveform = document.createElement("canvas");
+    waveform.className = "welcome-waveform";
+    waveform.setAttribute("aria-hidden", "true");
+    stage.after(waveform);
+  }
   const canvas = document.createElement("canvas");
   canvas.className = "welcome-characters";
   canvas.setAttribute("aria-hidden", "true");
@@ -39,10 +51,6 @@
     })));
   const tribeArt = globalThis.Spawner.createTribeArt(globalThis.Spawner.PLAYER_TRIBES, globalThis.SpawnerAssets.source);
   const tribeArtReady = new Set();
-  await Promise.all(globalThis.Spawner.PLAYER_TRIBES.filter(tribe => tribe.key !== "bean").map(async tribe => {
-    await tribeArt.prepareUnit(tribe);
-    tribeArtReady.add(tribe.key);
-  }));
   const appearances = [
     { bean: {}, others: {} },
     { bean: { feet: 1 }, others: { feet: 1 } },
@@ -54,7 +62,7 @@
   const neutralMetrics = new Map();
   let appearanceNumber = 0;
   let current = nextChoice();
-  let upcoming = null;
+  let upcoming = null, arriving = null;
   const pendingSources = new Map();
   function neutralAnimations(species) {
     if (species === "spiny-back-beetle") return Object.fromEntries(["idle", "walk", "attack"].map(action => {
@@ -66,7 +74,15 @@
       walk: globalThis.Spawner.CREATURE_WALK_ANIMATIONS[species], attack: globalThis.Spawner.CREATURE_ATTACK_ANIMATIONS[species] };
   }
   async function prepareChoice(choice) {
-    if (tribes.includes(choice.key)) return;
+    if (tribes.includes(choice.key)) {
+      if (choice.key !== "bean" && choice.variant > 0 && !tribeArtReady.has(choice.key)) {
+        await globalThis.SpawnerAssets.ready;
+        await tribeArt.prepareUnit(globalThis.Spawner.PLAYER_TRIBES.find(tribe => tribe.key === choice.key));
+        tribeArtReady.add(choice.key);
+      }
+      return;
+    }
+    await globalThis.SpawnerAssets.ready;
     await Promise.all(Object.values(neutralAnimations(choice.key)).map(async animation => {
       if (sources.has(animation.image)) return;
       if (!pendingSources.has(animation.image)) pendingSources.set(animation.image, (async () => {
@@ -81,7 +97,7 @@
     if (!neutralMetrics.has(choice.key)) {
       const poses = neutralAnimations(choice.key);
       const idle = poses.idle;
-      const bounds = tribeArt.bounds(sources.get(idle.image), idle.frameSize);
+      const bounds = await tribeArt.prepareBounds(sources.get(idle.image), idle.frameSize);
       const sample = document.createElement("canvas");
       sample.width = sample.height = 96;
       const pixels = sample.getContext("2d", { willReadFrequently: true });
@@ -127,6 +143,29 @@
     return surface;
   });
   let timeline = 0;
+  let phaseStartedAt = 0;
+  const movementPlayback = globalThis.SpawnerMovementAudio.create();
+  const combatPlayback = globalThis.SpawnerCombatAudio.create();
+  let audioPrimed = false;
+  function resetPresentationAudio() {
+    globalThis.SpawnerMovementAudio.reset(movementPlayback);
+    globalThis.SpawnerCombatAudio.reset(combatPlayback);
+    audioConnection?.stopWelcome();
+    audioPrimed = false;
+  }
+  audioReset = resetPresentationAudio;
+  function updatePresentationAudio(motion, time) {
+    if (!active() || reducedMotion.matches || !audioConnection?.available()) {
+      if (audioPrimed) resetPresentationAudio();
+      return;
+    }
+    audioPrimed = true;
+    const motions = Array.isArray(motion) ? motion : [motion];
+    const agents = motions.filter(value => value && value.x >= 0 && value.x <= width).map(value => value.agent);
+    const events = [...globalThis.SpawnerMovementAudio.update(movementPlayback, agents, time, globalThis.Spawner),
+      ...globalThis.SpawnerCombatAudio.update(combatPlayback, agents, [], time)];
+    for (const event of events) audioConnection.playWelcome(event.name, 1);
+  }
   function drawBean(motion, size, moving) {
     const { x, agent: bean } = motion;
     const appearance = appearances[current.variant].bean;
@@ -182,7 +221,7 @@
     context.restore();
   }
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
-  const restDuration = 3500;
+  const restDuration = 2000;
   let phase = "perform";
   let elapsed = 0;
   let previousTime = null;
@@ -197,36 +236,81 @@
     return action === "walk" ? animation.frameSize / (animation.viewSize || animation.frameSize) :
       action === "attack" && species !== "spiny-back-beetle" ? animation.frameSize / (animation.viewSize || animation.frameSize) * (animation.registrationScale || 1) : animation.registrationScale || 1;
   }
-  function travelMotion() {
-    const size = current.key === "bean" ? Math.min(210, width * .8) : tribes.includes(current.key) ? Math.min(184, width * .7) : Math.min(240, width * .75);
-    return globalThis.Spawner.welcomeTravelMotion(globalThis.Spawner, { key: current.key,
-      attributes: appearances[current.variant][current.key === "bean" ? "bean" : "others"], width, size, elapsedMs: elapsed,
-      timeline, phase, reducedMotion: reducedMotion.matches, id: "welcome-" + current.key + ":" + appearanceNumber });
+  function motionSize() {
+    return current.key === "bean" ? Math.min(210, width * .8) : tribes.includes(current.key) ? Math.min(184, width * .7) : Math.min(240, width * .75);
+  }
+  function travelMotion(atElapsed, atTime) {
+    const size = motionSize();
+    const motion = globalThis.Spawner.welcomeTravelMotion(globalThis.Spawner, { key: current.key,
+      attributes: appearances[current.variant][current.key === "bean" ? "bean" : "others"], width, size, elapsedMs: Number.isFinite(atElapsed) ? atElapsed : elapsed,
+      timeline: Number.isFinite(atTime) ? atTime : timeline, phase, startedAt: phaseStartedAt, reducedMotion: reducedMotion.matches,
+      id: "welcome-" + current.key + ":" + appearanceNumber });
+    motion.agent.animationStartedAt = phaseStartedAt;
+    if (phase === "perform" && !tribes.includes(current.key)) {
+      motion.agent.mode = "attack";
+      motion.agent.attackStartedAt = phaseStartedAt;
+      motion.agent.attack = { startedAt: phaseStartedAt, speed: 1, directionX: -1 };
+    }
+    return motion;
+  }
+  function presentArrival(callback) {
+    const saved = { current, phase, elapsed, phaseStartedAt, appearanceNumber };
+    current = arriving.choice;
+    phase = "enter";
+    appearanceNumber++;
+    try { return callback(); }
+    finally { ({ current, phase, elapsed, phaseStartedAt, appearanceNumber } = saved); }
+  }
+  function arrivalMotion(atElapsed, atTime) {
+    if (!arriving) return null;
+    return presentArrival(() => {
+      const initial = travelMotion(0, phaseStartedAt);
+      const lead = Math.max(0, initial.x - width - motionSize() / 2) / initial.cell * initial.agent.moveDuration * 1000;
+      const progress = (Number.isFinite(atElapsed) ? atElapsed : elapsed) + lead;
+      phaseStartedAt -= lead / 1000;
+      const motion = travelMotion(progress, atTime);
+      motion.durationMs -= lead;
+      return motion;
+    });
   }
   function phaseDuration() {
-    if (phase === "enter" || phase === "exit") return travelMotion().durationMs;
-    if (phase === "perform") return current.key === "bean" ? 6800 : duration(tribes.includes(current.key) ? animations[current.key].jump : neutralAnimations(current.key).attack);
+    if (phase === "enter" || phase === "exit") return Math.max(travelMotion().durationMs, arrivalMotion()?.durationMs || 0);
+    if (phase === "perform") return current.key === "bean" ? 0 : duration(tribes.includes(current.key) ? animations[current.key].jump : neutralAnimations(current.key).attack);
     return restDuration;
   }
   function advance() {
     if (phase === "rest") {
       if (!upcoming.ready) return false;
+      arriving = { choice: upcoming.choice };
       phase = "exit";
-    } else if (phase === "exit") {
-      current = upcoming.choice;
-      appearanceNumber++;
       prepareUpcoming();
-      phase = "enter";
+    } else if (phase === "exit") {
+      resetPresentationAudio();
+      current = arriving.choice;
+      arriving = null;
+      appearanceNumber++;
+      phase = "perform";
     } else if (phase === "enter") phase = "perform";
     else phase = "rest";
     return true;
   }
-  function draw() {
+  function draw(motion) {
     if (!width || !height) return;
-    context.clearRect(0, 0, width, height);
+    drawUnit(motion);
+    if (!arriving || reducedMotion.matches) return;
+    const incoming = arrivalMotion();
+    presentArrival(() => {
+      if (elapsed >= incoming.durationMs) { phase = "rest"; elapsed = 0; }
+      drawUnit(incoming, false);
+    });
+  }
+  function drawUnit(motion, clear) {
+    if (!width || !height) return;
+    motion ||= travelMotion();
+    if (clear !== false) context.clearRect(0, 0, width, height);
     const tribe = current.key;
     if (!tribes.includes(tribe)) {
-      drawNeutral();
+      drawNeutral(motion);
       return;
     }
     const moving = phase === "enter" || phase === "exit";
@@ -236,7 +320,6 @@
     const image = sheets.get(tribe + ":" + action) || sheets.get(tribe + ":idle");
     if (!image) return;
     const size = Math.min(184, width * .7);
-    const motion = travelMotion();
     const agent = motion.agent;
     const walkPose = moving && !reducedMotion.matches ? globalThis.Spawner.unitAnimationPose(agent, timeline) : null;
     const frame = walkPose?.frame ?? globalThis.Spawner.unitAnimationFrame(animation, reducedMotion.matches ? 0 : elapsed);
@@ -269,7 +352,7 @@
       -(sourceAnimation.pivotY + padding) * renderedSize / frameSize, renderedSize, renderedSize);
     context.restore();
   }
-  function drawNeutral() {
+  function drawNeutral(motion) {
     const species = current.key;
     const moving = !reducedMotion.matches && (phase === "enter" || phase === "exit");
     const action = reducedMotion.matches ? "idle" : moving ? "walk" : phase === "perform" ? "attack" : "idle";
@@ -280,11 +363,12 @@
     const metrics = neutralMetrics.get(species);
     const baseSize = globalThis.Spawner.welcomeCreatureScale(idle, metrics.bounds, 0,
       globalThis.Spawner.UNIT_DISPLAY_SIZES[species], width, height, metrics.envelope);
-    const motion = travelMotion();
     const animationTime = reducedMotion.matches ? 0 : elapsed;
     let frame;
-    if (sourceAnimation.frameIndices) frame = moving ? globalThis.Spawner.beetleAnimationPose(motion.agent, timeline).frame : globalThis.Spawner.beetleAnimationFrame(action, animationTime);
-    else if (moving) frame = globalThis.Spawner.creatureWalkPose(motion.agent, timeline).frame;
+    if (sourceAnimation.frameIndices) frame = globalThis.Spawner.beetleAnimationPose(motion.agent, timeline).frame;
+    else if (moving) frame = globalThis.Spawner.creatureWalkPose(motion.agent, timeline)?.frame ??
+      globalThis.Spawner.unitAnimationFrame({ ...sourceAnimation, loop: false }, sourceAnimation.durationMs);
+    else if (action === "attack") frame = globalThis.Spawner.creatureAttackPose(motion.agent, timeline)?.frame ?? globalThis.Spawner.unitAnimationFrame(sourceAnimation, animationTime);
     else if (species === "talon-owl" && action === "idle") frame = globalThis.Spawner.talonOwlIdleFrame(animationTime);
     else frame = globalThis.Spawner.unitAnimationFrame({ ...sourceAnimation, loop: action !== "attack" }, animationTime);
     const animation = globalThis.Spawner.imageFrameGeometry(sourceAnimation, frame);
@@ -304,6 +388,7 @@
     frameRequest = 0;
     if (!active() || reducedMotion.matches) {
       previousTime = null;
+      resetPresentationAudio();
       return;
     }
     if (previousTime !== null) {
@@ -313,16 +398,26 @@
     previousTime = time;
     while (elapsed >= phaseDuration()) {
       const completedDuration = phaseDuration();
+      if (phase === "enter" || phase === "exit") {
+        const completedAt = phaseStartedAt + completedDuration / 1000;
+        const completedMotion = travelMotion(completedDuration, completedAt);
+        updatePresentationAudio([completedMotion, arrivalMotion(completedDuration, completedAt)],
+          arriving ? completedAt : completedMotion.agent.moveStartedAt + completedMotion.agent.moveDuration);
+      }
       if (!advance()) {
         elapsed = completedDuration;
         break;
       }
       elapsed -= completedDuration;
+      phaseStartedAt = timeline - elapsed / 1000;
     }
-    draw();
+    const motion = travelMotion();
+    draw(motion);
+    updatePresentationAudio([motion, arrivalMotion()], timeline);
     frameRequest = requestAnimationFrame(tick);
   }
   function synchronize() {
+    resetPresentationAudio();
     if (frameRequest) cancelAnimationFrame(frameRequest);
     frameRequest = 0;
     previousTime = null;
@@ -331,6 +426,7 @@
     if (!reducedMotion.matches) frameRequest = requestAnimationFrame(tick);
   }
   new ResizeObserver(() => {
+    resetPresentationAudio();
     const bounds = canvas.getBoundingClientRect();
     width = bounds.width;
     height = bounds.height;

@@ -5,6 +5,8 @@
 
   globalThis.SpawnerMusic = Object.freeze({ create: function () {
     const playlists = globalThis.SpawnerMusicCatalog;
+    let settleReady;
+    const ready = new Promise(resolve => { settleReady = resolve; });
     const cursors = { peace: 0, combat: 0 };
     const failedTracks = new Set();
     const localTracks = new Map();
@@ -75,7 +77,7 @@
         }
         script.onload = () => {
           finish();
-          const source = globalThis.SpawnerAssets.source(track.file);
+          const source = globalThis.SpawnerAssets?.source(track.file) || globalThis.SpawnerLocalAssetSources?.[track.file] || track.file;
           if (source.startsWith("data:audio/")) resolve(source);
           else reject(new Error());
         };
@@ -132,7 +134,7 @@
         if (!await prepare(channel, nextMode, ticket)) {
           if (ticket === generation) {
             pending = null;
-            if (playlists[nextMode].some(track => !failedTracks.has(track.file))) start();
+            if (playlists[nextMode].some(track => !failedTracks.has(track.file))) start(); else settleReady(false);
           }
           return;
         }
@@ -145,6 +147,7 @@
         if (ticket !== generation) return;
         clearGap();
         pending = null;
+        settleReady(true);
         const previous = active;
         active = channel;
         if (!resuming) cursors[nextMode] = (channel.index + 1) % playlists[nextMode].length;
@@ -171,7 +174,7 @@
         if (ticket !== generation) return;
         pending = null;
         release(channel);
-        if (error.name === "NotAllowedError") return;
+        if (error.name === "NotAllowedError") { settleReady(false); return; }
         if (active === channel) active = null;
         failedTracks.add(channel.track.file);
         start();
@@ -285,7 +288,7 @@
       return true;
     }
 
-    return { update, unlock, suspend, waveform: Object.freeze({
+    return { ready, update, unlock, suspend, waveform: Object.freeze({
       read: readWaveform, readSpectrum, setActive: setAnalysisActive,
       get sampleRate() { return context?.sampleRate || 0; }
     }) };

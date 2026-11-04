@@ -1,21 +1,28 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { createWelcomeRoster, welcomeCreatureScale } from "./welcome-presentation.mjs";
+import { createWelcomeRoster, welcomeCreatureScale, welcomeTravelMotion } from "./welcome-presentation.mjs";
+import { CREATURE_IDLE_ANIMATIONS, unitMovementPosition, creatureAnimationSpeed } from "./unit-animation.mjs";
+import { unitStats } from "../server/attributes.mjs";
 
-test("four opening tribes are followed by complete shuffled rounds without A B A repeats", () => {
+test("opening base forms consume four identities from a full appearance bag", () => {
   let seed = 37;
   const random = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 2 ** 32);
   const tribes = ["bean", "spore", "pebble", "spring"];
   const species = ["boar", "toad", "weasel", "white-paw"];
+  const expected = [...tribes.flatMap(key => [0, 1, 2, 3].map(variant => key + ":" + variant)), ...species.map(key => key + ":0")].sort();
   const next = createWelcomeRoster(tribes, species, 4, random);
-  const choices = Array.from({ length: 804 }, next);
+  const choices = Array.from({ length: expected.length * 40 }, next);
+  const identities = choices.map(choice => choice.key + ":" + choice.variant);
   assert.deepEqual(choices.slice(0, 4), tribes.map(key => ({ key, variant: 0 })));
-  for (let i = 4; i < choices.length; i += 8)
-    assert.equal(new Set(choices.slice(i, i + 8).map(choice => choice.key)).size, 8);
+  assert.deepEqual(identities.slice(4, expected.length).sort(), expected.filter(identity => !tribes.some(key => identity === key + ":0")));
+  for (let i = 0; i < choices.length; i += expected.length)
+    assert.deepEqual(identities.slice(i, i + expected.length).sort(), expected);
   for (let i = 4; i < choices.length; i++) {
-    assert.notEqual(choices[i].key, choices[i - 1].key);
-    assert.notEqual(choices[i].key, choices[i - 2].key);
-    assert.ok(choices[i].variant >= 0 && choices[i].variant < 4);
+    assert.notEqual(identities[i], identities[i - 1]);
+    assert.notEqual(identities[i], identities[i - 2]);
+    const recent = choices.slice(i - 2, i).map(choice => choice.key);
+    const remaining = choices.slice(i, Math.ceil((i + 1) / expected.length) * expected.length);
+    if (remaining.some(choice => !recent.includes(choice.key))) assert.ok(!recent.includes(choices[i].key));
   }
 });
 
@@ -28,4 +35,55 @@ test("creatures keep their relative sizes while tall poses fit the mobile header
   assert.ok(weasel > small);
   assert.ok(leader > weasel);
   assert.ok(leader * idle.registrationScale * (idle.pivotY - 100) / idle.frameSize <= 168 + 1e-6);
+});
+
+test("all 35 appearance identities complete every round across different shuffle seeds", () => {
+  const tribes = ["bean", "spore", "pebble", "spring"];
+  const species = [...Object.keys(CREATURE_IDLE_ANIMATIONS), "talon-owl", "spiny-back-beetle"];
+  const expected = [...tribes.flatMap(key => [0, 1, 2, 3].map(variant => key + ":" + variant)), ...species.map(key => key + ":0")].sort();
+  assert.equal(expected.length, 35);
+  const initialOrders = new Set();
+  for (const initialSeed of [37, 749, 123456]) {
+    let seed = initialSeed;
+    const random = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 2 ** 32);
+    const next = createWelcomeRoster(tribes, species, 4, random);
+    const choices = Array.from({ length: 35 * 12 }, next);
+    const identities = choices.map(choice => choice.key + ":" + choice.variant);
+    assert.deepEqual(choices.slice(0, 4), tribes.map(key => ({ key, variant: 0 })));
+    const remainder = choices.slice(4, 35);
+    assert.equal(remainder.filter(choice => tribes.includes(choice.key) && choice.variant > 0).length, 12);
+    assert.deepEqual(remainder.filter(choice => species.includes(choice.key)).map(choice => choice.key).sort(), [...species].sort());
+    assert.deepEqual(identities.slice(4, 35).sort(), expected.filter(identity => !tribes.some(key => identity === key + ":0")));
+    initialOrders.add(identities.slice(4, 35).join(","));
+    for (let start = 0; start < choices.length; start += 35) assert.deepEqual(identities.slice(start, start + 35).sort(), expected);
+    for (let i = 4; i < choices.length; i++) {
+      assert.notEqual(identities[i], identities[i - 1]);
+      assert.notEqual(identities[i], identities[i - 2]);
+      const recent = choices.slice(i - 2, i).map(choice => choice.key);
+      const remaining = choices.slice(i, Math.ceil((i + 1) / 35) * 35);
+      if (remaining.some(choice => !recent.includes(choice.key))) assert.ok(!recent.includes(choices[i].key));
+    }
+  }
+  assert.equal(initialOrders.size, 3);
+});
+
+test("welcome movement keeps exact cue stamps and exposes the final landing cell", () => {
+  const model = { unitStats, creatureAnimationSpeed, unitMovementPosition };
+  for (const key of ["bean", "spore", "spring-keeper", "talon-owl"]) {
+    const request = { key, attributes: {}, width: 480, size: 184, elapsedMs: 0, timeline: 91.1,
+      startedAt: 91.1, phase: "enter", reducedMotion: false, id: "cue-unit" };
+    const first = welcomeTravelMotion(model, request);
+    const next = welcomeTravelMotion(model, { ...request, elapsedMs: 16, timeline: 91.11600000000001 });
+    assert.equal(first.agent.moveStartedAt, request.startedAt);
+    assert.equal(next.agent.moveStartedAt, first.agent.moveStartedAt);
+    assert.equal(next.agent.flightStartedAt, first.agent.flightStartedAt);
+    const duration = first.durationMs;
+    const final = welcomeTravelMotion(model, { ...request, elapsedMs: duration, timeline: request.startedAt + duration / 1000 });
+    assert.ok(final.agent.moveDuration > 0);
+    assert.equal(final.agent.mode, "walk");
+    assert.ok(Math.abs(final.x - request.width / 2) < .00001);
+    const end = final.agent.moveStartedAt + final.agent.moveDuration;
+    assert.ok(Math.abs(end - (request.startedAt + duration / 1000)) < 1e-12);
+    assert.ok(Math.abs(unitMovementPosition(final.agent, end, false).progress - 1) < 1e-10);
+  }
 });

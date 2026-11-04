@@ -83,3 +83,40 @@ test("게임 재생 경로는 22종에 각각 이동음을 내고 콩 착지음�
   for (let frame = 0; frame <= 120; frame++) { state.simSeconds = frame / 60; scope.updateAudio(); }
   assert.deepEqual([...new Set(played)].sort(), Object.values(audio.definitions).map(definition => definition.name).sort());
 });
+
+test("기본 콩 발소리는 셀당 네 접지만 재생하고 같은 프레임에 중복하지 않는다", () => {
+  const unit = { ...agent("bean"), attributes: { feet: 1 }, x: 1, y: 2 };
+  const playback = audio.create();
+  assert.equal(audio.update(playback, [unit], 0, animations).length, 0);
+  const played = [];
+  for (let frame = 1; frame <= 120; frame++) {
+    const time = frame / 60;
+    played.push(...audio.update(playback, [unit], time, animations));
+    assert.equal(audio.update(playback, [unit], time, animations).length, 0);
+  }
+  assert.equal(played.length, 4);
+  assert.ok(played.every(event => event.name === "footstep" && event.unit === unit));
+});
+
+test("기본 콩 마지막 착지와 이전 셀 착지 좌표를 유지하고 지난 착지는 재생하지 않는다", () => {
+  const unit = { ...agent("bean"), x: 3, y: 4 };
+  const playback = audio.create();
+  audio.update(playback, [unit], 1.8, animations);
+  assert.equal(audio.update(playback, [unit], 2, animations)[0].name, "landing");
+  assert.equal(audio.update(playback, [unit], 2, animations).length, 0);
+  audio.reset(playback);
+  audio.update(playback, [unit], 1.8, animations);
+  const next = { ...unit, x: 4, y: 4, moveStartedAt: 2, stepCount: 2 };
+  const previous = audio.update(playback, [next], 2.05, animations)[0];
+  assert.equal(previous.name, "landing");
+  assert.equal(previous.position.x, 3);
+  assert.equal(previous.position.y, 4);
+  audio.reset(playback);
+  audio.update(playback, [unit], 1.95, animations);
+  assert.equal(audio.update(playback, [next], 2.4, animations).length, 0);
+  audio.reset(playback);
+  audio.update(playback, [unit], 1.8, animations);
+  assert.equal(audio.update(playback, [unit], 3, animations).length, 0);
+  assert.equal(audio.update(playback, [], 3.1, animations).length, 0);
+  assert.equal(playback.beans.size, 0);
+});
