@@ -1,7 +1,7 @@
 {
   "recordId": "cloud-followup-additional-20261104",
-  "updatedAt": "2026-11-04T20:27:19.954072+00:00",
-  "stage": "validated-awaiting-publication",
+  "updatedAt": "2026-11-04T20:33:20.000904+00:00",
+  "stage": "published",
   "projectId": "appgprj_6ada1cedf2848191938f196c4f346ee9",
   "sourceBase": "a319b0e",
   "features": {
@@ -77,7 +77,8 @@
     "packagedMobileReviewPagesPassed": 6,
     "welcomeCachePeakPixels": 7886201,
     "welcomePixelBudget": 8388608,
-    "firstTouchBgmWaveformVisible": true
+    "firstTouchBgmWaveformVisible": true,
+    "publishedCombatCdnImagesDrawn": 4
   },
   "reviewPages": [
     "NeutralStats.html",
@@ -94,5 +95,19 @@
     "Bean per-part annotations and idle/hurt draft review; walk/remaining actions production",
     "Spore14 source art review and remaining tribe combinations",
     "Structure/environment combat VFX evidence coverage"
-  ]
+  ],
+  "publication": {
+    "appCommit": "294d453c1408e05ea1a645d4934f9d900a87e7db",
+    "implementationCommit": "ebff45098832c7c48dd1d564f556a530598abbf6",
+    "siteCommit": "23bf274e71f152549cc7aa2647f53cbd208b13d1",
+    "version": 27,
+    "versionId": "appgprj_6ada1cedf2848191938f196c4f346ee9~appgver_9a5956474ac48191bef37326cc042e22",
+    "deploymentId": "appgdep_6aeb9653e8048191805c72ad95f43bca",
+    "status": "succeeded",
+    "url": "https://spawner.oojjrs.chatgpt.site",
+    "audience": "public",
+    "archiveSha256": "026e83c79236f7b7af939a3e50b7f70e6e5ea0de090b437cc3714ddda0ea2a40",
+    "archiveFiles": 45,
+    "archiveGzipBytes": 4672576
+  }
 }
