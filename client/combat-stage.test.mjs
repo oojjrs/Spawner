@@ -2,10 +2,11 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { createCombatStage } from "./combat-stage.mjs";
 
-function renderGrowth(left, right, support) {
-  const originalWindow = globalThis.window, originalImage = globalThis.Image;
+function renderGrowth(left, right, support, sourceUrl) {
+  const originalWindow = globalThis.window, originalImage = globalThis.Image, originalAssets = globalThis.SpawnerAssets;
   globalThis.window = { matchMedia: () => ({ matches: false }), devicePixelRatio: 1 };
   globalThis.Image = class { constructor() { this.complete = true; this.naturalWidth = 4096; this.naturalHeight = 4096; } };
+  if (sourceUrl) globalThis.SpawnerAssets = { source: sourceUrl, image: () => new globalThis.Image() };
   const draws = [];
   const context = new Proxy({ drawImage(...args) { if (args.length === 9) draws.push({ image: args[0].src, width: args[7], height: args[8] }); } }, { get(target, key) { return key in target ? target[key] : () => {}; } });
   const canvas = { clientWidth: 1200, clientHeight: 560, width: 1200, height: 560, getContext: () => context };
@@ -16,8 +17,15 @@ function renderGrowth(left, right, support) {
   } finally {
     globalThis.window = originalWindow;
     globalThis.Image = originalImage;
+    globalThis.SpawnerAssets = originalAssets;
   }
 }
+
+test("published combat bodies resolve their registered CDN URLs", () => {
+  const draws = renderGrowth({}, {}, true, path => "https://assets.example/" + encodeURIComponent(path));
+  assert.equal(draws.length, 4);
+  assert.ok(draws.every(draw => draw.image.startsWith("https://assets.example/DesignAssets%2F")));
+});
 
 function near(actual, expected) { assert.ok(Math.abs(actual - expected) < 1e-9, actual + " != " + expected); }
 

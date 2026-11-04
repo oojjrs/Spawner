@@ -76,8 +76,8 @@ export function createCombatStage(canvas) {
   function image(source) {
     if (!source) return null;
     if (!images.has(source)) {
-      const asset = new Image();
-      asset.src = source;
+      const asset = globalThis.SpawnerAssets?.image?.() || new Image();
+      asset.src = globalThis.SpawnerAssets?.source(source) || source;
       images.set(source, asset);
     }
     const asset = images.get(source);
