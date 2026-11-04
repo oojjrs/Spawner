@@ -30,9 +30,16 @@
   ],
   "known_validation_limits": [
     "file navigation blocked by browser administrator",
-    "full runtime image audit has 38 pre-existing registration/size failures"
+    "full runtime image audit has 36 pre-existing registration/size failures"
   ],
   "cdn_commit": "412dbc46d059ea3a879f818efcf29471ae4fe120",
   "site_version_before": 25,
-  "publication": "pending"
+  "publication": "succeeded",
+  "application_source_sha": "68b507170abad2899bf80b6cb370d664b46e69c2",
+  "site_source_sha": "74cf73ae8d1b9bb860537bec621128f2502be315",
+  "site_version": 26,
+  "version_id": "appgprj_6ada1cedf2848191938f196c4f346ee9~appgver_2ee5b9bc4aec8191a7d69fea9f8fb761",
+  "deployment_id": "appgdep_6aeb43be9a648191bf69a92149447ef0",
+  "url": "https://spawner.oojjrs.chatgpt.site",
+  "publication_recorded_at": "2026-11-04T14:41:35+00:00"
 }
