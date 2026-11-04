@@ -7847,6 +7847,7 @@
         const description = document.createElement("dd");
         description.dataset.stat = key;
         const difference = Number((value - initial).toFixed(3));
+        term.className = difference !== 0 ? "design-stat-changed" : "";
         const result = document.createElement("span");
         result.className = "design-stat-value" + (difference !== 0 ? " design-stat-changed" : "");
         result.textContent = format(value) + unit;
