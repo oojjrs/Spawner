@@ -1,3 +1,117 @@
+## 전투 이펙트 재제작 원격 인계 · 2026-11-04 현재 요약
+
+- 기록 ID: combat-vfx-remote-handoff-20261104-01a1a5f6. 기록·마지막 근거 확인 시각: 2026-11-04T21:40:17+09:00. 기록자 Codex /root, 원발언·산출물 불수용·메모리만 로컬 커밋 결정 주체 사용자. 출처 현재 채팅 01a1a5f6-f89a-7de0-9cfd-9addb113f421, H:/Spawner Windows/PowerShell. 원발언 정확시각·턴/항목 ID·별도 PC 식별 불명.
+- 최신 사용자 지시: 필요한 것이 무엇인지 메모리에 기록해 2026-11-05 원격 작업에서 이어갈 수 있게 하고 메모리만 커밋한다. 작업한 시안은 버려도 된다는 허용이다. 이번 단계는 요구사항 인계와 로컬 메모리 커밋뿐이며 새 유료 생성·재작화·게임 연결·푸시·배포를 실행하지 않는다. 타 채팅의 유닛·코드·문서·인덱스 변경은 폐기 대상이 아니다.
+- 현재 유효 상태: V1 원화20종, V2 39클립 및 실유닛 합성15GIF는 제작·기계 재생검수 이력이지만 사용자가 최종 품질을 수용하지 않았다. 사용자 반응은 꿀렁거림 지적 후 합성 시안도 전부 새로 만들어야 할 것 같다는 것이었다. combat-effect-art-complete, combat-vfx-v2-final, combat-vfx-unit-fit-final 및 five-frozen 기록의 제작/기계검수 완료를 게임에 쓸 수 있는 최종 아트 승인으로 해석하지 않는다. 과거 기록은 원문 보존한다. 새 이펙트는 게임 제품/runtime에 연결되지 않았다.
+- 원격 재개에 D: 생성 캐시·ZIP·이 채팅 출력·프로젝트 $Trash의 스크립트/QA가 필요하지 않도록 이 요약만으로 요구사항을 복원한다. 기존 시안은 폐기 가능한 실패/참고물이며 재사용을 전제로 진행하지 않는다. 이번 메모리 커밋에는 이미지·GIF·ZIP·제작도구·제품 코드를 포함하지 않는다.
+
+### 필요한 이펙트 계열
+
+- 공격/피격: 근접 궤적, 일반 피격, 치명타, 연타의 각 후속타.
+- 원거리: 발사 순간, 비행 탄체와 꼬리, 명중/막힘/빗나감에 따른 소멸. 발사·비행·도착은 각각 별도 시점이다.
+- 방어/제어: 회피, 패링, 블록, 반격, 기절의 적용/유지/해제.
+- 피해/회복: 출혈의 발생/주기 피해, 광역 확산과 추가 대상별 피격, 흡혈 반환/도착, 피해 반사 반환/피격, 치유의 시전자/연결/수혜자, 재생. 치유는 여러 수혜자 동시 발생을 지원한다.
+- 보조: 공격 준비/집중, 사망 시 바닥 먼지/잔여 입자. 캐릭터의 공격·피격·사망 몸체 동작과 별도다. 공격력·공속·정밀·관통·강인함 같은 수치 속성마다 독립 이펙트를 만들 필요는 없다.
+
+### 사용처 배정 기준
+
+- 공용 판정 효과는 실제 해당 판정/상태/회복이 발생한 개체에만 표시한다. 회피·패링은 피해 명중과 구별하고 블록은 피해 경감, 반사는 공격자에게 되돌아간 피해로 구별한다. 효과 배정만으로 새 능력·확률·피해를 부여하지 않는다.
+- 근접 궤적·발사·탄체·명중·광역은 종족/실제 기관/공격 재질에 맞춘다. 새싹콩은 잎·씨앗/생명빛, 포자버섯은 둥근 포자·가루/보라·살구, 몽돌은 각진 돌·돌가루, 샘방울은 물날·물방울·수면 파동이 기존 배정 방향이다. 이 재질 방향은 재제작 출발점이며 실패 시안의 구체 실루엣/모션을 확정한 것이 아니다.
+- 같은 종족·기관·공격이면 아군/적군은 같은 원화를 사용한다. 피아 표시는 필요할 때 보조 외곽/표식으로 처리한다. 연타는 실제 확정 후속타마다 해당 종족 근접 효과를 한 번 재생하며 임의의 자동3연타나 무한루프를 부여하지 않는다.
+- 중립19종 기존 배정: 발톱=그늘족제비/갈퀴부엉이/흰발; 흙 접촉=흙두더지/굴림도토리/흙멧돼지/오래된 등짐/걸어가는 산의 접촉; 덩굴 궤적=올가미덩굴/넝쿨거북/봄지기/걸어가는 산의 궤적; 날카로운 접촉=가시등딱정벌레/가시등 우두머리; 공용 물리 충격=꽃꼬리새/이슬토끼/보따리달팽이/솜양/방울두꺼비/등불지기. 걸어가는 산은 궤적과 접촉 재질을 나눠 중복 기재했으며 실제 고유 중립은19종이다. 방울두꺼비의 이름만 보고 물탄을 만들지 않으며 현재 없는 중립 원거리 슬롯은 비워둔다.
+- 명중 원화는 발사자 종족으로 선택하되 대상 접촉점에 표시한다. 패링/블록은 방어자 앞면, 기절은 머리 위, 일반 피해는 대상 몸통/접촉점, 광역/재생/사망 먼지는 지면 기준을 검토한다. 흡혈/반사는 대상에서 발동자 방향으로 돌아와 도착 순간까지 보여야 한다. 치유는 수혜자 기준이다. 픽셀 발사점은 현재 실제 기관·등록 metadata를 읽어 정하며 임의로 새 몸체/기관을 그리지 않는다.
+
+### 재제작에서 바꿀 점과 첫 작업
+
+- 실패 원인은 정지 원화를 재질 구분 없이 사인파/방사형 픽셀 warp, 비등방 늘이기, 큰 광원 덩어리의 다른 위상으로 움직인 방식에 과도하게 의존한 것이다. 돌·가시·발톱까지 고무처럼 꿀렁거렸다. 원형 고정 후보는 그 변형을 뺀 비교용 정적 shape/발광/비행 시안일 뿐 최종 교정 애니메이션이 아니다.
+- Codex가 마지막으로 제안한 재출발 순서(새 작화/모션의 사용자 확정은 아직 없음): 일반 피격 하나를 먼저 새로 작화하고 발생→터짐/확산→잔여/소멸의 형태 변화를 실제 유닛 공격·피격 장면에 붙여 본다. 그 한 개가 사용자에게 납득된 뒤 발사→비행→명중 한 세트, 그다음 나머지 계열로 넓힌다. 수량/프레임 수를 미리 고정해39개를 다시 일괄 생산하지 않는다.
+- 단단한 재질의 본 실루엣을 임의로 출렁이지 말고 궤적·회전·독립 파편과 필요한 새 작화로 운동을 만든다. 물/포자는 특성에 맞는 흐름·외곽 입자를 별도 설계한다. 페이드·확대만으로 실제 필요한 형태 변화를 대신하지 않는다. 구체 새 키작화/동작은 재개 시 적용되는 애니메이션 스킬 절차에 따라 확인한다.
+- 검수 기준은 이펙트 단독 장식 그림이 아니라 현재 게임 유닛/배경에 붙인 실제 재생이다. 몸통을 덮지 않는 크기, 공격 프레임과 타격 시점, 발사구/접촉점, 머리/지면 피벗, 자연스러운 재질, 루프 연결, 반환 도착을 본다. 로드/알파/프레임/타이밍 검사 통과를 아트 자연스러움이나 사용자 승인으로 대체하지 않는다.
+- 유닛 본체는 현재 실제 공격/피격/발사/사망 시트와 고정 크기·pivot을 재사용한다. 같은 world cell scale에 종별 비례를 지키고 프레임별 bbox 확대나 전종 동일 이미지 박스를 쓰지 않는다. A/B 시안은 몸체·규모·발생시점을 같게 둔다. 작업 중 ranged 등록이 갱신돼 과거 bean만 전용 발사 몸체가 있다는 관측은 폐기됐다. 원격 시 현재 등록을 다시 읽고 존재하는 shoot를 사용하며 없는 기관/공격은 발명하지 않는다.
+- 재개 시 현재 코드 확인 지점: server/combat.mjs, server/dna.mjs, server/dna-actions.mjs, server/combat-stats.mjs, server/encounter-types.mjs, client/game.js, client/combat-stage.mjs, client/unit-animation.mjs, client/unit-ranged.mjs, client/unit-size.mjs, client/unit-sprite-registration.mjs와 image geometry/현재 body 등록. 일부 실게임 치명·흡혈·반사·광역 경로는 이력상 효과 전용 발생정보가 부족했으므로 현재 코드를 재확인하고 아트 제작과 판정 이벤트 연결 완료를 분리한다.
+- 내일 시작점: 이 요약과 최신 전투/유닛 결과물을 읽고 일반 피격 한 종의 실유닛 합성부터 제시한다. 이번 요청에서는 새 제작을 재개하지 않았고 실패 산출물/타 채팅 작업의 삭제도 실행하지 않았다. 연결 Projects0개 조회 근거는 이 채팅에서 재사용한다. 커밋 성공은 실제 Git 결과 확인 후 별도로 판단한다.
+
+## 실제 유닛 VFX GIF 15시안·최종 재생검수·GIF ZIP 완료 · 01a1a5f6
+
+- 기록 ID: combat-vfx-unit-fit-final-20261104-status. 기록 시각 2026-11-04T21:09:53+09:00. 기록자 Codex /root/status_vfx(gpt-6.1-sol low), 원품질지적·이번시안승인 사용자, 분해·조율·실제최종화상검수 부모 /root, 공유합성 defense_vfx·종족시안/공통실재생QA·패키징 offense_vfx·샘방울/공용시안 status_vfx 모두사용자지정Sol6.1 low. 출처 thread 01a1a5f6-f89a-7de0-9cfd-9addb113f421 및부모최종완료신호, H:/Spawner Windows/PowerShell. 원발언정확시각·항목ID불명.
+- 사용자최신교정은꿀렁거림지적과실제유닛에붙인GIF시안요청이다. V2원화전체에sin리플·비등방확대등범용변형을준것이물탄/충격실루엣을불필요하게흐느적거리게한원인이라는작업판단이다. 기존V2모션자연스러움은사용자미수용상태이며이번candidate도원형고정·발광·실비행으로비교하는shape프로토타입이다. 39전체새모션교정·게임설치완료를뜻하지않고후속선택은미확정이다.
+- 완료산출: D:/.codex/visualizations/2026/11/04/01a1a5f6-f89a-7de0-9cfd-9addb113f421/CombatEffectsUnitFit의15master GIF(6current/candidate쌍12+공용반응/상태/지원3)와Preview의400×200 15GIF. 모든AB는실몸체동작·고정world비례·피벗·타이밍을같게두고효과모션만비교했다. 기존게임body/background와각실행시현재등록된shoot를재사용했다. 이전bean만shoot라는중간추정은현등록증거로대체하며source hash는사후수집한범위만근거로삼는다. 부모가실게임RPGhurt120ms계약원문까지확인했으므로원본타이밍을임의조작한것이아니다.
+- 실제검수근거: H:/Spawner/$Trash/combat-effects-unit-fit-01a1a5f6/unit-fit-qa/qa-report.json을직접읽어pass=true/15masters/15preview/newBrowser9/reusedBrowser6과requested샘플시각·observed스크린샷호출/반환구간분리를확인했다. GIF디코더시작/정확compositor시각은노출되지않는다. 부모는owned6와새9의실브라우저보드4개를전부직접열어최종통과했다는완료신호를전달했다. 초기browser-batch-03상대지연샘플은browser-arrivals-corrected.png와arrivals-qa.json의수정판이대체하며초기미관측을효과누락으로기록하지않는다.
+- 배치·가독성확인: 기절머리위,흡혈/반사콩도착,regen수혜자발밑,기존death동작의바닥먼지를부모가직접확인했다. parry/block은압축6행보드에서약해보여기존GIF의640/1680ms원본800×400를추출했고부모와본워커가직접열어딱정벌레앞면접촉효과가선명하게존재함을확인했다. 합성누락이아니므로재렌더하지않았다. regen발밑과반사350ms반환경로는이번prototypeplacement로만교정했고기존V2배정/원본은보존했다.
+- GIF전용ZIP실제성공: D:/.codex/visualizations/2026/11/04/01a1a5f6-f89a-7de0-9cfd-9addb113f421/CombatEffectsUnitFit-GIFs.zip,16,954,973bytes/15entry,중복0·누락0·길이불일치0,frozen=true를gif-zip-readback.json실파일에서읽었다. offense실측SHA256 7019F7C34FC75FE5316BDEF55B5324DA90304EA5686564CD90C3CEB0F092633D. master15만포함하며Preview·PNG·QA·V2는ZIP에없다.
+- 보존·마감: 기존V2·기존CombatEffectsV2.zip·게임제품/runtime·HTML·동시변경불변이며재작화·신규기관·새제품문구·Git완료·배포없음. 이번GIF시안과검수완료만기록한다. 메모리직전스냅샷은H:/Spawner/$Trash/combat-effects-unit-fit-01a1a5f6/spring-common/memory-before-final.bin에보존했고현재잠금읽기/추가로동시기록을보호했다. 이후소유텍스트필수형식마감만하고frozen미디어는변경하지않는다.
+
+## 실제 유닛 전투 VFX 5시안 동결·부모 최종 재생검수 대기 · 01a1a5f6
+
+- 기록 ID: combat-vfx-unit-fit-five-frozen-20261104-status. 기록 시각 2026-11-04T20:57:25+09:00. 기록자·합성 status_vfx(gpt-6.1-sol low), 원품질지적·시안범위결정 사용자, 첫대표 및 후속범위 승인 부모 /root, 공유composer 소유 defense_vfx. 출처 thread 01a1a5f6-f89a-7de0-9cfd-9addb113f421 및 부모위임·확대승인메시지, H:/Spawner Windows/PowerShell. 원발언정확시각·항목ID불명.
+- 꿀렁임 원인판단: V2는고정된효과원화 전체에범용이동·확대/비등방변형·리플을적용한공통모션이물탄/일부정적충격형태까지부드럽게휘게한문제가있다. 이번candidate는실제유닛몸체를고치지않고원형source 고정비례·평행이동·회전·발광강도 중심으로붙여비교한다. 기존V2의산출·코덱완료는자연스러움의사용자승인이아니며새AB도아직사용자수용전시안이다.
+- 실제산출동결: D:/.codex/visualizations/2026/11/04/01a1a5f6-f89a-7de0-9cfd-9addb113f421/CombatEffectsUnitFit의spring-current.gif(113f/4520ms),spring-candidate.gif(113f/4520ms),reactions.gif(113f/4520ms),statuses.gif(180f/7200ms),support.gif(132f/5280ms). 기존actual몸체시트·배경과defense공유엔진만사용하며새이미지생성·몸체변형없음. 샘방울AB각3segment의body source/frame/scale/pivot/points/outlet/contact/hitAt/camera가동일한것을spring-ab-qa.json으로확인했다.
+- prototype국소교정: 흡혈/반사segment를1600ms로늘려반환끝을보이고,반사는V2clip580ms보다긴기존경로600ms때문에도착전사라져시안returnDurationMs350으로교정했다. 반사frame022(880ms)를직접열어콩몸체도착을확인했다. 재생은얼굴중앙에서수혜자발아래ground로시안배치를옮겼으며이는V2usage-map의recipient-body와다른prototypeplacement다. 기존V2파일은변경하지않았다.
+- 현재동시새shoot등록: 각실행에서현재unit-ranged 실제등록을읽었고샘방울ranged시안은실등록shoot와hitAt450/arrival800을사용,warnings0이다. 예전등록없음가정은현시안에적용하지않는다. 방어/상태/지원은순서가고정된판정배치시연이며전투랜덤확률결과를바꾼것이아니다. 기절은머리위,치유는콩수혜자,사망먼지는기존샘방울death와발밑,반환은딱정벌레→콩으로붙였다.
+- 다음검수: 부모와offense_vfx에5master동결·정확adaptive sampleMs를전달했다. 기존V2·ZIP·게임제품/runtime·동시변경보존,새문자/HTML/UI·Git배포없음. 최종9master실재생QA·전체Preview·부모최종검수·ZIP는아직미완료이며성공을기록하지않는다. 임시실프레임과설정은H:/Spawner/$Trash/combat-effects-unit-fit-01a1a5f6/spring-common에보존했다.
+
+## 전투 이펙트 꿀렁임 교정·실제 유닛 GIF 시안 착수 · 01a1a5f6
+
+- 기록 ID: combat-vfx-unit-fit-start-20261104-status. 기록 시각 2026-11-04T20:21:44+09:00. 기록자 Codex /root/status_vfx(gpt-6.1-sol low), 품질지적·이번시안범위결정 사용자, 작업조율·검수 부모 /root. 출처 thread 01a1a5f6-f89a-7de0-9cfd-9addb113f421 및부모위임메시지,H:/Spawner Windows/PowerShell. 원발언정확시각·항목ID불명.
+- 사용자최신피드백: 꿀렁거리는효과의이유를묻고실제유닛에붙여어울리는지GIF시안을요청했다. 기존V2산출·코덱검수완료를모션자연스러움의사용자최종승인으로취급하지않으며현재원인조사진행중이다.
+- 이번범위:3개Sol6.1 low워커가실제유닛시트·기준worldsize/pivot/duration/타격frame을지켜현재효과와필요한저변형candidate를합성한다. defense_vfx는공유actualunit composer·콩대표, attack_vfx는나머지종족대표, status_vfx는샘방울current/candidate와공용방어·상태·지원대표를담당한다. 부모는최종GIF실제재생·위치·비례·재질자연스러움을검수한다.
+- 보존·경계:V2원본·ZIP·제품/runtime·캐릭터그림을변경하지않고재작화·신규기관·전체39모션교정·설치·Git배포를진행하지않는다. 기존actualassets/background기반시안만 CombatEffectsUnitFit에산출하며임시는literal /combat-effects-unit-fit-01a1a5f6/spring-common. 첫대표를부모에게먼저보내검수후확대한다. 판정시연은실제전투랜덤결과변경과구분한다.
+
+## 전투 VFX V2 39클립·23종배정·ZIP 최종 완료 · 01a1a5f6
+
+- 기록 ID: combat-vfx-v2-final-20261104-status. 기록 시각 2026-11-04T20:13:17+09:00. 기록자 Codex /root/status_vfx(gpt-6.1-sol low), 원요청·최신범위승인 사용자: 사용처배정·종족변형·애니까지진행하고부모가검수해채팅표로전달한다. 추가원화/후속제작검수의부모위임을적용했다. 실제제작 defense_vfx·attack_vfx·status_vfx 3워커모두사용자지정Sol6.1 low, 부모 /root는분해·조율·실제독립검수·최종보고담당이다. 출처 thread 01a1a5f6-f89a-7de0-9cfd-9addb113f421 및부모최종완료신호, H:/Spawner Windows/PowerShell. 원발언정확시각·항목ID불명.
+- 부모최종실제확인: qa-report의39clips/567frames/78media/errors0/로드실패0/각4~6실제framehash와assignmentqa의23keys/19neutral/403resolvedcases/38referenceddirs를읽고,13batch실브라우저6시점화상을전부직접열어통과했다는완료신호를받았다.39중Common/combo는시연프리셋이며실제연타배정은각종족melee를각확정타판정때재생하므로38참조와모순되지않는다. 본기록자는부모실제검수보고와자신의직접확인범위를구분한다.
+- 최종산출경로: D:/.codex/visualizations/2026/11/04/01a1a5f6-f89a-7de0-9cfd-9addb113f421/CombatEffectsV2 및동일루트 CombatEffectsV2.zip. ZIP실검증근거 package-qa/zip-readback.json:41,712,901bytes,553파일/39meta/78codec/39source/39atlas/219parts,중복0·누락0·길이불일치0. SHA256 A04E2AFD66BDFBA928FA2991E3F7CEE21F5E074EEAB1CAFE910980DF82FFC3E0. ZIP는부모가전달한실측결과이며예정성공기록이아니다.
+- 원인정정: 수직Xreveal절단은제거했고채움소실은opacity>1이Uint8알파로wrap되는수식오류가원인이었다. 단순WebP/GIF디코더탓이라는중간추정은철회한다. defense소유코어의[0,1]alpha clamp·연속원화·focus주기scale·source메타·RGB배경수정과영향분만재렌더를적용하고성공source/atlas는보존했다. 최종codec통일과부모화상검수가완료되어앞선진행중상태를본완료근거로연결한다.
+- 범위마감: 게임runtime에는아직연결하지않았고새공격능력·확률을부여하지않았다. 기존V1·게임제품·HTML·README·동시변경을보존하며새제품문구추가·Git완료·배포없음. 이메모리추가와소유텍스트필수형식마감만수행하고실제소스/미디어는더변경하지않는다. 메모리직전스냅샷은 H:/Spawner/$Trash/combat-effects-v2-01a1a5f6/tribes-spring-neutral/memory-before-final.bin 에보존했다.
+
+## 전투 VFX V2 알파 수식 원인 교정·39클립 수집 · 01a1a5f6
+
+- 기록 ID: combat-vfx-v2-alpha-cause-corrected-20261104-status. 기록 시각 2026-11-04T20:08:12+09:00. 기록자 Codex /root/status_vfx(gpt-6.1-sol low), 검수·원인교정확인 부모 /root, 실제수정 defense_vfx. 사용자 명시승인주체 사용자: 사용처배정·종족변형·애니까지진행하고 추가원화/후속제작검수를부모에게위임한현재지시를적용한다. 출처 thread 01a1a5f6-f89a-7de0-9cfd-9addb113f421 및부모의본마일스톤기록위임메시지, H:/Spawner Windows/PowerShell. 원발언정확시각·항목ID불명.
+- 부모보고검수사실:19신규source와수정대표·종족별모션의실파일표를부모가직접확인했다. 수직Xreveal절단은삭제했다. 채움소실의실제원인은opacity>1이Uint8알파에서wrap되는수식오류였으며, 단순WebP/GIF디코더탓이라는중간추정은철회한다. 기록자는이부모확인과실제파일을구분하며보지않은검수범위의직접확인을주장하지않는다.
+- 실제소유수정: defense_vfx가draw alpha의[0,1]clamp·연속원화유지·focus주기scale·source메타·RGB배경을수정했다. Common영향6개와종족/중립영향8개만재렌더하고성공한나머지source/atlas를보존했다. 최종core SHA F4496F7FA3333BC2F652C8CF4F8885D3F113BE683A9CFCE5DAAEA0791D67124E 기준39클립수집완료라는부모보고를받았다.
+- 현재미완료: defense_vfx의전체codec통일·78media actualQA는진행중이다. 부모13batch화상최종검수와ZIP는아직미완료이며성공을예정기록하지않는다. 게임제품·HTML·V1원본·다른워커데이터는본기록에서변경하지않는다.
+
+## 전투 VFX V2 샘방울·중립9종 및23종배정 산출 · 01a1a5f6
+
+- 기록 ID: combat-vfx-v2-spring-neutral-delivered-20261104-status. 기록 시각 2026-11-04T20:05:17+09:00. 기록자·제작 Codex /root/status_vfx(gpt-6.1-sol low), 범위결정 사용자, 원화·공통대표검수 부모 /root. 출처 thread 01a1a5f6-f89a-7de0-9cfd-9addb113f421 및 부모후속메시지, H:/Spawner Windows/PowerShell. 원발언정확시각·항목ID불명.
+- 실제산출: CombatEffectsV2/Tribes/spring의melee/launch/projectile/impact/area5종과Neutral의neutral-claw/earth/vine/spine4종 source·512셀atlas·animation.webp·preview.gif·meta.json·parts. 부모가9실원화검수후후속제작승인. 수직reveal절단과alphawrap결함을공통워커수정코어 F4496F7FA3333BC2F652C8CF4F8885D3F113BE683A9CFCE5DAAEA0791D67124E로관련4종만재렌더해시점판직접확인. 나머지5종source/atlas보존.
+- 실제확인:9종투명atlas,metadata와WebP누적시간일치. 샘방울64프레임·중립48프레임의실atlas를RGB배경에합성한spring-demo.gif/neutral-demo.gif생성. 이는VFX클립데모이며게임runtime통합완료가아니다. 부모전체독립재생검수와공용워커최종codec통일은후속단계다.
+- 배정산출:usage-map.json·resolve-combat-effect.mjs에현UNIT_COMBAT_STATS23종대조/누락0/중립19종원거리null/모든meta경로존재확인. source자산선택과anchor/direction/timing배치분리,caller-facing,같은contact중복방지,combo는실제각확정타때한번재생계약이다. 새능력·확률·게임코드·HTML·V1변경없음. JSON/모듈UTF8noBOM CRLF확인.
+
+## 전투 VFX V2 사용처·종족 변형·애니 제작 착수 · 01a1a5f6
+
+- 기록 ID: combat-vfx-v2-start-20261104-status. 기록 시각: 2026-11-04T19:42:44+09:00. 기록자 Codex /root/status_vfx(gpt-6.1-sol low), 원발언·범위결정 사용자, 검수·조율 부모 /root. 출처 thread 01a1a5f6-f89a-7de0-9cfd-9addb113f421 및 부모 위임 메시지, H:/Spawner Windows/PowerShell. 원발언 정확시각·항목 ID 불명.
+- 최신 사용자 명시승인: 기존20원화 수용 후 사용처 배정·종족별 필요한 변형·애니까지 진행하고 부모가 검수한 결과를 채팅 표로 제시한다. 추가 원화의 실제 그림 검수를 부모에게 위임한 것으로 해석해 부모 시각확인 후 해당 후속 애니 제작을 진행한다.
+- V2 범위: defense_vfx 공용20종 및 공통 렌더 CLI, attack_vfx 포자·돌 종족 변형, status_vfx 샘방울5종·중립4종 원화/애니·사용처 JSON/resolver, 부모 전체 독립검수. 3워커는 사용자 지정 Sol6.1 low. 샘방울 melee 부모 원화확인 통과, 나머지는 진행 중이며 완료 아님.
+- 보존·경계: 최종 결과는 D:/.codex/visualizations/2026/11/04/01a1a5f6-f89a-7de0-9cfd-9addb113f421/CombatEffectsV2. V1 원본·게임 제품·HTML은 변경하지 않는다. runtime 설치·새 공격능력 부여·Git 완료·배포는 현재 범위가 아니다. 중립 원거리 슬롯은 없음으로 유지한다.
+
+## 전투 이펙트 공용 범위·사용처·후속 애니메이션 설명 · 01a1a5f6 현재 요약
+
+- 기록 ID: combat-effect-ownership-animation-clarification-20261104-01a1a5f6. 기록·근거 확인 시각: 2026-11-04T19:29:52+09:00. 기록자·아래 후속배정 제안 주체 Codex /root, 공용 여부·사용유닛·피아 차이·애니 후속 질문 주체 사용자. 출처 현재채팅01a1a5f6-f89a-7de0-9cfd-9addb113f421, H:/Spawner Windows/PowerShell. 원발언정확시각·턴/항목·PC식별불명.
+- 현재확인사실: combat-effect-art-complete의20 PNG는 공용 기초 원화이며 특정 유닛/종족/기관에 연결한 배정표·적/아군 전용본·종족별 변형·재생 애니메이션은 아직 없다. 기존 원화/ZIP 실파일과 현재DNA기관의blade/secretion/healer 활성 조건을 확인했다. 신규 원거리기관 외형이 별도채팅에서 아직 조율 중이라는 현재메모리를 확인했으며 그외형/발사점 확정을 대신하지 않는다.
+- Codex 제안(아직 사용자의개별배정확정 아님): 피격/치명·회피/패링/블록/반격·기절/출혈·흡혈/반사·치유/재생은 해당 실제 판정/수혜유닛에 공통계열로 적용한다. 근접궤적/발사/탄체/명중은 종족·실제기관·공격방식에 맞게 변형하고 중립 고유공격도 개별 배정한다. 같은 종족/기관/공격은 피아에 같은기본형태를 쓰되 외곽/보조표식으로진영가독성을확보하는방향을 제안한다. 현재초록탄을모든중립공격에일괄배정한상태가아니다.
+- 애니후속설명: 원화를기초로추가작화·발생/확산/소멸과이동·상태유지루프를제작하는것이후속단계다. 20종완료는정적원화완료이며애니완료로보고하지않는다. 이번질문을새애니/게임연결실행승인으로확대하지않고사용처배정과종족변형이남았음을명확히설명한다. 이번변경은메모리예외기록뿐이며제품/이미지/Git/배포상태는바꾸지않는다.
+## 전투 이펙트 20종 투명 원화 제작·부모 검수 완료 · 01a1a5f6 현재 요약
+
+- 기록 ID: combat-effect-art-complete-20261104-01a1a5f6. 기록·최종 근거 확인 시각: 2026-11-04T19:13:58+09:00. 기록자·최종 그림/알파/실파일 검수 Codex /root, 제작 offense_vfx·defense_vfx·status_vfx(각 gpt-6.1-sol/low) 및 부모 보조2종, 제작·동시작업·부모검수 요청 주체 사용자. 출처 현재채팅 01a1a5f6-f89a-7de0-9cfd-9addb113f421, H:/Spawner Windows/PowerShell. 원발언 정확시각·턴/항목·별도PC식별 불명. combat-effect-art-start의 제작 진행을 이 결과로 갱신한다.
+- 실제 완료물: 앞 목록18계열 전부의 합성용 정적 투명 PNG를 각각 builtin imagegen으로 제작하고, 부모가 공격준비 attack-focus와 사망먼지 death-dust를 추가해 총20종을 만들었다. melee-trail/hit/critical/combo/projectile-launch/projectile/projectile-impact/dodge/parry/block/counter/stun/bleed/area/lifesteal/reflection/heal/regeneration/attack-focus/death-dust. 워커 보고상 연타 연무·회피 안개·반사/반격 여백 결함은 재생성으로 교정했으며 부모는 최종 실제 그림을 합성해 별도로 확인했다.
+- 최종 경로: D:/.codex/visualizations/2026/11/04/01a1a5f6-f89a-7de0-9cfd-9addb113f421/CombatEffectsV1/의20 PNG, 그 아래 Preview/의실원본기반192px검수미리보기20개. 같은 채팅출력루트 CombatEffectsV1.zip에정규화된원본20개를묶고ZIP실제엔트리20개를읽어확인했다. 생성원본은프로젝트literal달러Trash/combat-effects-v1-01a1a5f6/Originals에보존,원래generated_images도삭제하지않았다.
+- 부모 실제 검수: 신규20파일 존재/디코드/sRGBA/1024x1024/모두alpha최솟값0·최댓값약0.992..1,contentBounds가모두캔버스사방100px이상안에있음을ImageMagick으로확인했다. 최초12종·후속지원5종·마지막방어3종의실제PNG를어두운바탕에합성해직접열어봤고,최종20종dark208px와light96px판도직접열어구분·클리핑·불필요문자/캐릭터·색테두리없는것을확인했다. 일반/치명·패링/블록/반사·치유/재생의구분을확인했다. 중간후속지원판1회는아직저장전block파일참조오류가있었고그판의실제5지원이미지만읽었으며,누락block은마지막3종판/최종20종판에서별도확인했다. 그중간명령을전체성공으로기록하지않는다.
+- 상태/경계: 사용자에게이채팅의실제미리보기표와ZIP를제시한다. 결과는정적PNG원화이며캐릭터동작·프레임애니메이션·인게임이벤트연결·게임설치는이번제작결과에포함되지않는다. 프로젝트제품/HTML/Design·기존에셋은변경하지않았고타채팅변경을보존했다. 전용origin=https://github.com/oojjrs/Spawner를실제확인하고GitHub연결Projects0개조회했다. Git완료·배포없음. 메모리와검수JSON의필수형식/국소diff는직후실제결과를따른다.
+## 전투 이펙트 18계열 병렬 원화 제작 착수 · 01a1a5f6 현재 요약
+
+- 기록 ID: combat-effect-art-start-20261104-01a1a5f6. 기록 시각: 2026-11-04T19:00:23+09:00. 기록자·제작범위 해석/부모검수 Codex /root, 제작·병렬작업·부모검수 요청 주체 사용자. 출처 현재채팅 01a1a5f6-f89a-7de0-9cfd-9addb113f421, H:/Spawner Windows/PowerShell. 원발언정확시각·턴/항목·별도PC식별불명.
+- 사용자 최신 요청: 앞 목록을 수용하며 만들 수 있는 것을 전부 제작해 이 채팅에 표로 제시하고, 서브워커들을 Sol6.1 low로 동시 활용하며 부모가 검수한다. 유료 이미지 생성은 현재의 명시적 제작 요청 범위다. 게임 설치·HTML 편집·Git 완료·배포 요청은 없다.
+- 실제 분담: 사용자 지정 gpt-6.1-sol/low 워커3명 offense_vfx(근접궤적/피격/치명/연타/발사/탄체), defense_vfx(투사체명중/회피/패링/블록/반격/기절), status_vfx(출혈/광역/흡혈/반사/치유/재생)를 동시에 시작했다. 부모는 스타일·불필요물체·알파·테두리잘림·종간판독을 검수하고 실제 원본에서 채팅용 미리보기를 합성한다. 현재 생성 완료는 아직없다.
+- 현 단계 결과물 계약: 각각 별도 imagegen으로 만드는 합성용 정적 투명 PNG 원화18종. 캐릭터 동작·프레임시트·리깅/보간이나 재생 애니메이션 완성을 뜻하지 않는다. 프로젝트 귀여운 자연생물 손그림스타일을 기준으로 공격 금빛/연두, 방어 청록/청백, 상태별 구분을 제안한다. 임시/원시결과는 H:/Spawner/literal달러Trash/combat-effects-v1-01a1a5f6, 최종선정 PNG는 현재 쓰기가능한 D:/.codex/visualizations/2026/11/04/01a1a5f6-f89a-7de0-9cfd-9addb113f421/CombatEffectsV1. 프로젝트 정식에셋/실게임 연결은 변경하지 않는다.
+## 전투 개편 이펙트 필요 목록 조사 완료 · 01a1a5f6 현재 요약
+
+- 기록 ID: combat-effect-inventory-20261104-01a1a5f6. 기록·마지막 근거 확인 시각: 2026-11-04T18:53:58+09:00. 기록자·조사 및 목록 제안 주체 Codex /root, 원 요청자·제작 범위 결정권자 사용자. 출처 현재 채팅 01a1a5f6-f89a-7de0-9cfd-9addb113f421, H:/Spawner Windows/PowerShell. 원 발언 정확 시각·턴/항목 ID·별도 PC 식별 불명.
+- 사용자 요청: 변경 중인 전투의 메모리와 결과물을 확인해 피격·투사체 발사·회피·패링·블록 등 새 시스템에 필요한 이펙트를 우선 리스팅한다. 이번 단계는 조사·채팅 목록 제안이며 아트 생성·제품 편집·문서 전재·Git 완료·배포 요청은 없다.
+- 도구 관측: RPG 전투/실험실 기록과 dna-five-actions-implemented, dna-local-commit-complete 및 독립 근접/원거리·기관 중첩 후속 기록을 현재 server/dna.mjs·dna-actions.mjs·combat.mjs, client/combat-simulation.mjs·combat-stage.mjs·game.js, Combat.html·runtime·Design의 관련 부분과 대조했다. 실게임에 출혈·광역·흡혈·피해 반사·전투 종료 후 재생 및 아군 치유가 있고, 실험실은 회피/패링/블록/반격/기절/치명·흡혈 등을 갖는다. 현재 관련 렌더는 선·원·방사선·숫자·작은 탄환 등 canvas 표현이며 DesignAssets/Effects에는 LevelUp의 ring/sparkle 2개가 확인된다. 신규 전투 이미지 완성을 확인한 것으로 해석하지 않는다.
+- Codex 제안(사용자 제작 확정 전): 근접 공격 궤적, 일반 명중/피격, 치명타, 연타, 투사체 발사, 투사체 비행, 투사체 명중/소멸, 회피, 패링, 블록, 반격, 기절, 출혈, 광역 공격, 흡혈, 피해 반사, 치유, 재생의 18계열. 투사체·상태 발생/유지/해제·치유 시전자/대상 등은 하위 연출로 분리하고 18개 파일이라는 뜻은 아니다. 캐릭터 동작 애니와 구분하며 공격 준비·상태 해제·사망 보조 효과는 별도 보완 후보, 수치 전용 속성별 독립 효과는 후순위로 제안한다.
+- 구현 경계/다음 단계: 실게임 치명·흡혈·반사·광역 등의 일부 경로는 체력 연산만 하고 전용 발생정보가 부족해 효과 연결 시 판정 이벤트 보강도 필요하다는 정적 코드 판단이다. 패링은 피해를 막는 반응, 블록은 경감, 피해 반사는 공격자에게 되돌리는 피해로 시각적으로 구분할 것을 제안한다. 종족별 투사체 외형·구체 스타일·제작 순서/수량은 미확정이다. 이번 작업은 메모리 예외 기록만 추가하며 기존/병행 변경을 보존한다. 서버·브라우저·빌드·테스트·유료 생성은 실행하지 않았다.
 ## 유닛 크기 수정 30경로 로컬 커밋 범위 동결 · 01a1a0bf 현재 요약
 
 - 기록 ID: unit-size-commit-freeze-20261104-212858-01a1a0bf. 기록 시각: 2026-11-04T21:28:58+09:00. 기록자 Codex Git/bookkeeping 워커(부모동일모델상속low), 커밋승인 사용자, 전체후보직접검수·stage/commit최종신호 부모 Codex. 출처 스레드01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d 최신커밋요청/최종승인패킷; 원발언정확시각·항목ID불명,H:/Spawner Windows/PowerShell.
