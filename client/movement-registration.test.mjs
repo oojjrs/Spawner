@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { CREATURE_WALK_ANIMATIONS, unitMovementPosition, creatureWalkPose, creatureAnimationSpeed, unitAnimationPose } from './unit-animation.mjs';
 import { CREATURE_MOVEMENT } from '../server/creature-movement.mjs';
+import { beetleAnimationPose } from '../server/beetle-animation.mjs';
 import { welcomeTravelMotion, welcomeCreatureScale } from './welcome-presentation.mjs';
 import { unitStats } from '../server/attributes.mjs';
 import { imageFrameGeometry } from './image-geometry.mjs';
@@ -50,16 +51,19 @@ test('welcome uses the same species speeds, cell interpolation and animation pha
  for(const key of ['bean','spore','pebble','spring',...reference.map(r=>r.key)])for(const feet of [0,1]){
   const speed=CREATURE_MOVEMENT[key]?.speed||unitStats({feet},key).speed;
   let previousX=Infinity;
-  for(const age of [.01,.11,.29,.61,.93,1.21]){
-   const m=welcomeTravelMotion(model,{key,attributes:{feet},width:390,size:184,elapsedMs:age*1000,timeline:20+age,phase:'enter'});
+  const start=welcomeTravelMotion(model,{key,attributes:{feet},width:390,size:184,elapsedMs:0,timeline:20,startedAt:20,phase:'enter'});
+  for(const age of [.01,.11,.29,.61,.93,1.21].filter(age=>age*1000<start.durationMs)){
+   const m=welcomeTravelMotion(model,{key,attributes:{feet},width:390,size:184,elapsedMs:age*1000,timeline:20+age,startedAt:20,phase:'enter'});
    near(m.agent.moveDuration,1/speed);near(m.position.x,unitMovementPosition(m.agent,20+age).x);
    assert.ok(m.x<=previousX+1e-6);previousX=m.x;
    const pose=m.agent.species?creatureWalkPose(m.agent,20+age):unitAnimationPose(m.agent,20+age);
    if(!['spiny-back-beetle','bean'].includes(key))assert.ok(pose,key);
   }
-  const start=welcomeTravelMotion(model,{key,attributes:{feet},width:390,size:184,elapsedMs:0,timeline:20,phase:'enter'});
-  const end=welcomeTravelMotion(model,{key,attributes:{feet},width:390,size:184,elapsedMs:start.durationMs,timeline:20+start.durationMs/1000,phase:'enter'});
-  near(end.x,195);
+  for(const overrun of [0,.21]){
+   const age=start.durationMs/1000+overrun;
+   const end=welcomeTravelMotion(model,{key,attributes:{feet},width:390,size:184,elapsedMs:age*1000,timeline:20+age,startedAt:20,phase:'enter'});
+   near(end.x,195);
+  }
  }
 });
 test('large wings and attack poses fit above and below the same header ground plane',()=>{
@@ -68,5 +72,31 @@ test('large wings and attack poses fit above and below the same header ground pl
   const size=welcomeCreatureScale(a,{width:220,height:300},0,1.44,width,280,env);
   assert.ok(214+env.top*size>=34-1e-6);assert.ok(214+env.bottom*size<=274+1e-6);
   assert.ok(width/2+env.right*size<=width-8+1e-6);assert.ok(width/2+env.left*size>=8-1e-6);
+ }
+});
+
+test('all 23 welcome units keep valid poses at exact cell boundaries and adjacent instants',()=>{
+ const keys=['bean','spore','pebble','spring',...reference.map(r=>r.key)];
+ assert.equal(keys.length,23);
+ for(const key of keys)for(const feet of [0,1])for(const origin of [0,20,91.1,100000]){
+  const attributes={feet},speed=CREATURE_MOVEMENT[key]?.speed||unitStats(attributes,key).speed;
+  const request={key,attributes,width:390,size:184,elapsedMs:0,timeline:origin,startedAt:origin,phase:'enter'};
+  const start=welcomeTravelMotion(model,request),steps=Math.round(start.durationMs/1000*speed);
+  const finalAt=origin+steps/speed;
+  for(let boundary=0;boundary<=steps;boundary++)for(const delta of [-1e-9,0,1e-9]){
+   const time=origin+boundary/speed+delta;
+   if(time<origin)continue;
+   const m=welcomeTravelMotion(model,{...request,elapsedMs:(time-origin)*1000,timeline:time});
+   assert.equal(m.agent.moveStartedAt,origin+(m.agent.stepCount-1)/speed);
+   assert.equal(m.agent.moveDuration,origin+m.agent.stepCount/speed-m.agent.moveStartedAt);
+   assert.equal(m.agent.flightStartedAt,origin);
+   assert.ok(Number.isFinite(m.x));
+   if(time>=finalAt){near(m.x,195);continue;}
+   assert.ok(time>=m.agent.moveStartedAt,key+' start '+time);
+   assert.ok(time-m.agent.moveStartedAt<m.agent.moveDuration,key+' end '+time);
+   const pose=key==='spiny-back-beetle'?beetleAnimationPose(m.agent,time):m.agent.species?creatureWalkPose(m.agent,time):unitAnimationPose(m.agent,time);
+   if(key!=='bean')assert.ok(pose,key+' pose '+time);
+   if(pose)assert.ok(Number.isInteger(pose.frame),key+' frame '+time);
+  }
  }
 });

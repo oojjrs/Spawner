@@ -87,19 +87,21 @@ test("새싹콩은 발 속성에 따라 기존 보행과 점프 구분을 유지
 
 
 function gameAudio() {
-  const played = [], harvests = [];
+  const played = [], movementPlayed = [], harvests = [];
   const state = { simSeconds: .2, camera: { layer: 0 }, agents: [], rivals: [], corpses: [] };
   const context = createContext({ state, connection: { active: true, online: true }, audioTime: 0,
-    audio: { available: () => true, play: name => played.push(name), setHarvest: volumes => harvests.push(new Map(volumes)) },
+    audio: { available: () => true, play: name => (name.startsWith("move-") ? movementPlayed : played).push(name), setHarvest: volumes => harvests.push(new Map(volumes)) },
     SpawnerCombatAudio: { update: () => [] }, combatAudio: {}, nestGrowthPlayback: createNestGrowthPlayback(),
-    Spawner: { SPORE_BIRTH_ANIMATION, nestGrowthSounds, resourceTypeForCell: food => food.resourceType || "honey-mushrooms" },
+    Spawner: { UNIT_ANIMATIONS, unitAnimationPose, SPORE_BIRTH_ANIMATION, nestGrowthSounds, resourceTypeForCell: food => food.resourceType || "honey-mushrooms" },
     worldMap: {}, foodCellMap: new Map(), foodCellAt: () => null,
     displayedAgent: unit => unit, interpolatedAgentPosition: unit => unit, audioVolume: () => 1,
     agentBirthPose: () => null, agentAudio: new Map(), deliveryAudio: new Map(), foodDeliveries: new Map(),
     AGENT_FOOTSTEPS_PER_CELL: 4, clamp: (value, low, high) => Math.max(low, Math.min(high, value)),
     resetAudio() {} });
+  runInContext(readFileSync(new URL("./movement-audio.js", import.meta.url), "utf8"), context);
+  context.movementAudio = context.SpawnerMovementAudio.create();
   runInContext(declaration("updateAudio"), context);
-  return { context, state, played, harvests };
+  return { context, state, played, movementPlayed, harvests };
 }
 
 test("지면 이동 부족에는 콩 착지음이 붙지 않고 새싹콩 점프는 착지음을 유지한다", () => {
@@ -111,6 +113,7 @@ test("지면 이동 부족에는 콩 착지음이 붙지 않고 새싹콩 점프
     sound.context.updateAudio();
   }
   assert.deepEqual(sound.played, ["landing"]);
+  assert.deepEqual([...new Set(sound.movementPlayed)].sort(), ["move-pebble", "move-spore", "move-spring"]);
 });
 
 test("포자버섯 등장에는 포자버섯 탄생음을 한 번 재생한다", () => {

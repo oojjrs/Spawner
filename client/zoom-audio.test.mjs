@@ -12,7 +12,9 @@ async function fixture() {
   class AudioContext {
     constructor() { this.state = "running"; this.currentTime = 1; this.destination = {}; clock = this; }
     createGain() {
-      const node = { gain: { value: 1 }, connect(output) { this.output = output; } };
+      const node = { gain: { value: 1 }, outputs: new Set(),
+        connect(output) { this.output = output; this.outputs.add(output); },
+        disconnect() { this.output = null; this.outputs.clear(); } };
       gains.push(node);
       return node;
     }
@@ -158,4 +160,45 @@ test("원거리에서는 재생 중인 공간음을 정지하고 새 효과음�
   sound.audio.play("beetle-attack", 1);
   assert.equal(sound.started.length, afterUi + 1);
   assert.equal(sound.started.at(-1).buffer.file, "beetle-attack.mp3");
+});
+
+test("웰컴 효과음은 게임 줌과 독립이고 채널 재사용은 출력 한 곳만 연결한다", async () => {
+  const sound = await fixture();
+  sound.audio.setWorldVolume(0);
+  sound.audio.playWelcome("footstep", 1);
+  const welcome = sound.started.at(-1);
+  const channel = welcome.output;
+  assert.equal(welcome.buffer.file, "DesignAssets/Audio/bean-footstep.mp3");
+  assert.equal(channel.gain.value, .6);
+  assert.equal(channel.output.output, sound.clock.destination);
+  assert.equal(channel.output.gain.value, 1);
+  assert.equal(channel.outputs.size, 1);
+  sound.audio.setWorldVolume(1);
+  sound.audio.play("beetle-attack", 1);
+  const world = sound.started.at(-1);
+  assert.notEqual(world.output.output, channel.output);
+  sound.audio.stopWelcome();
+  assert.equal(welcome.stopped, true);
+  assert.equal(world.stopped, undefined);
+  sound.audio.play("landing", 1);
+  const landing = sound.started.at(-1);
+  assert.equal(landing.output, channel);
+  assert.equal(channel.output, world.output.output);
+  assert.equal(channel.outputs.size, 1);
+});
+
+test("게임 줌의 공간음 정지는 웰컴을 유지하고 전체 비활성화는 두 그룹을 정지한다", async () => {
+  const sound = await fixture();
+  sound.audio.play("beetle-attack", 1);
+  const world = sound.started.at(-1);
+  sound.audio.playWelcome("footstep", 1);
+  const welcome = sound.started.at(-1);
+  sound.audio.setWorldVolume(0);
+  assert.equal(world.stopped, true);
+  assert.equal(welcome.stopped, undefined);
+  sound.audio.setActive(false);
+  assert.equal(welcome.stopped, true);
+  const before = sound.started.length;
+  sound.audio.playWelcome("landing", 1);
+  assert.equal(sound.started.length, before);
 });

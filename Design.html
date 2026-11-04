@@ -5206,6 +5206,8 @@ function simulateConquestBuild(tribe,policy,distance) {
 
 return { colonyWorkerRate, simulateConquestBuild };
 })();
+const map = modules["server/map.mjs"];
+globalThis.SpawnerDesignWorld = { ...map, ...modules["server/conquest-pacing.mjs"], ...modules["server/nests.mjs"], ...modules["server/attributes.mjs"], ...modules["server/tribe-production.mjs"], ...modules["server/conquest-economy.mjs"], ENCOUNTER_PLANS:map.ENCOUNTER_PLANS.map(modules["server/conquest-pacing.mjs"].conquestEncounterPlan), generateWorld: (seed, onProgress) => map.generateMapWorld(seed, onProgress, undefined, true) };
 })();
 </script>
   <script id="design-world-view" type="text/plain">
@@ -5266,7 +5268,6 @@ return { colonyWorkerRate, simulateConquestBuild };
   }
   function initializeResourceMenu() {
     document.querySelectorAll('#art-food tbody > tr').forEach(row => {
-      if (huntingResources.has(row.dataset.resource)) return;
       const option = document.createElement('option'), title = row.querySelector('th[scope="row"]').cloneNode(true);
       title.querySelectorAll('small,br').forEach(item => item.remove());
       option.textContent = title.textContent.trim();
