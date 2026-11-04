@@ -354,7 +354,6 @@
     const AGENT_HEIGHT = 0.7;
     const unitDisplayScales = new Map();
     const unitAttributeScales = new Map();
-    const UNIT_ATTRIBUTE_GROWTH = Object.freeze({ common: .03, combat: .05 });
     const unitGroundContacts = {
       bean: { x: .5, y: .98, width: .72, depth: .032, opacity: .32 },
       spore: { x: .5, y: .98, width: .42, depth: .025, opacity: .3 },
@@ -3869,11 +3868,12 @@
     }
 
     function drawTalonOwl(agent, renderPosition) {
-      const shape = Spawner.TALON_OWL_IDLE;
+      let shape = Spawner.TALON_OWL_IDLE;
       const cell = state.camera.zoom;
       const topLeft = worldToScreen(renderPosition.x, renderPosition.y);
       const elapsed = (state.simSeconds - (agent.animationStartedAt ?? 0)) * 1000;
       const index = idleMotion.matches || agent.mode !== "idle" ? 0 : Spawner.talonOwlIdleFrame(elapsed);
+      shape = Spawner.imageFrameGeometry(shape, index);
       const sprite = talonOwlFrames.get(index);
       if (!sprite) return;
       const size = cell * shape.scale * (shape.registrationScale || 1);
@@ -4650,6 +4650,7 @@
       const composedFrame = attributeFrame || (customized && combat ? sproutCombatFrame(agent, entry, index) : null);
       const sprite = composedFrame || entry.frames?.get(index) || entry.sprite;
       if (!sprite) return false;
+      animation = Spawner.imageFrameGeometry(animation, index);
       const frameSize = composedFrame ? sprite.width : animation.frameSize;
       const padding = (frameSize - animation.frameSize) / 2;
       const size = height * entry.scale * frameSize / animation.frameSize;
@@ -4751,7 +4752,7 @@
       const pose = Spawner.creatureAttackPose(agent, state.simSeconds);
       const entry = pose && creatureAttackSheets.get(agent.species);
       if (!entry || !entry.sprite.complete || !entry.sprite.naturalWidth) return false;
-      const animation = pose.animation, owl = agent.species === "talon-owl";
+      const animation = Spawner.imageFrameGeometry(pose.animation, pose.frame), owl = agent.species === "talon-owl";
       const point = worldToScreen(renderPosition.x + .5, renderPosition.y + (owl ? .86 : 1));
       const size = state.camera.zoom * (owl ? Spawner.TALON_OWL_IDLE.scale : 1.4 * entry.scale) *
         animation.frameSize / animation.viewSize * (animation.registrationScale || 1);
@@ -4774,7 +4775,7 @@
       const pose = Spawner.creatureHurtPose(agent, state.simSeconds);
       const entry = pose && creatureHurtSheets.get(agent.species);
       if (!entry || !entry.sprite.complete || !entry.sprite.naturalWidth) return false;
-      const animation = pose.animation, owl = agent.species === "talon-owl";
+      const animation = Spawner.imageFrameGeometry(pose.animation, pose.frame), owl = agent.species === "talon-owl";
       const point = worldToScreen(renderPosition.x + .5, renderPosition.y + (owl ? .86 : 1));
       const size = state.camera.zoom * (owl ? Spawner.TALON_OWL_IDLE.scale : 1.4 * entry.scale) * (animation.registrationScale || 1);
       const left = -size * animation.pivotX / animation.frameSize;
@@ -4795,9 +4796,10 @@
     function drawCreatureIdle(agent, renderPosition) {
       const entry = creatureIdleSheets.get(agent.species);
       if (!entry || !["idle", "fight"].includes(agent.mode) || !entry.sprite.complete || !entry.sprite.naturalWidth) return false;
-      const animation = entry.animation;
+      let animation = entry.animation;
       const frame = idleMotion.matches ? 0 : Spawner.unitAnimationFrame(animation,
         (state.simSeconds - (agent.animationStartedAt ?? agent.moveStartedAt ?? 0)) * 1000);
+      animation = Spawner.imageFrameGeometry(animation, frame);
       const point = worldToScreen(renderPosition.x + .5, renderPosition.y + 1);
       const size = state.camera.zoom * 1.4 * entry.scale * (animation.registrationScale || 1);
       const left = -size * animation.pivotX / animation.frameSize;
@@ -5032,18 +5034,19 @@
 
     function unitDisplayScale(unit) {
       const tribe = unit.tribe || "bean";
-      const base = unitDisplayScales.get(unit.species || tribe) || 1;
-      if (unit.species) return base;
+      const kind = unit.species || tribe;
+      const base = unitDisplayScales.get(kind) || 1;
+      const growth = Spawner.unitDisplaySize(unit) / (Spawner.UNIT_DISPLAY_SIZES[kind] || Spawner.UNIT_DISPLAY_SIZES.bean);
+      if (unit.species) return base * growth;
       const attributes = unit.appearanceAttributes || unit.attributes || {};
       const equipped = ATTRIBUTES.filter(attribute => attributes[attribute.key] > 0);
-      if (!equipped.length || equipped.some(attribute => attribute.kind === "combat") && !combatAttributeArt.ready(tribe)) return base;
+      if (!equipped.length || equipped.some(attribute => attribute.kind === "combat") && !combatAttributeArt.ready(tribe)) return base * growth;
       const key = tribe + ":" + equipped.map(attribute => attribute.key + ":" + attributes[attribute.key]).join(",");
       if (!unitAttributeScales.has(key)) {
-        const growth = 1 + equipped.reduce((sum, attribute) => sum + UNIT_ATTRIBUTE_GROWTH[attribute.kind === "combat" ? "combat" : "common"], 0);
-        const scale = measureUnitDisplayScale(tribe, attributes, growth);
+        const scale = measureUnitDisplayScale(tribe, attributes, 1);
         if (scale) unitAttributeScales.set(key, scale);
       }
-      return unitAttributeScales.get(key) || base;
+      return (unitAttributeScales.get(key) || base) * growth;
     }
 
     function measureUnitDisplayScale(tribe, attributes, growth) {
@@ -5083,16 +5086,17 @@
       const key = agent.species || agent.tribe || "bean";
       const contact = unitGroundContacts[key], bounds = unitDisplayBounds.get(key);
       const scale = unitDisplayScale(agent), anchor = unitDisplayFloor(agent);
+      const growth = Spawner.unitDisplaySize(agent) / Spawner.UNIT_DISPLAY_SIZES[key];
       const appearance = agent.appearanceAttributes || agent.attributes;
       const spawn = agent.spawn ? Spawner.creatureSpawnPose(agent, state.simSeconds) : null;
       const renderPosition = interpolatedAgentPosition(agent), position = birth || spawn || renderPosition;
-      let offsetX = bounds.x + bounds.width * contact.x;
-      let offsetY = bounds.y + bounds.height * contact.y;
-      let radiusX = bounds.width * contact.width / 2;
-      let radiusY = Spawner.UNIT_DISPLAY_SIZES[key] * contact.depth;
+      let offsetX = (bounds.x + bounds.width * contact.x) * growth;
+      let offsetY = (bounds.y + bounds.height * contact.y) * growth;
+      let radiusX = bounds.width * contact.width / 2 * growth;
+      let radiusY = Spawner.UNIT_DISPLAY_SIZES[key] * contact.depth * growth;
       let opacity = contact.opacity;
       const ground = unitGroundShapes.get(key);
-      if (ground) { offsetX = 0; offsetY = 0; radiusX = ground.radiusX; radiusY = ground.radiusY; }
+      if (ground) { offsetX = 0; offsetY = 0; radiusX = ground.radiusX * growth; radiusY = ground.radiusY * growth; }
       if (birth?.seedVisible) {
         offsetX = 0; offsetY = 0; radiusX = .055 * scale; radiusY = .018 * scale;
       } else if (!agent.species && appearance.feet) {
@@ -7639,7 +7643,7 @@
       const index = agentDeathFrame(corpse, corpsePlaybackTime());
       if (index < 0) return false;
       const attributes = corpse.appearanceAttributes || corpse.attributes || {};
-      const animation = Spawner.agentDeathAnimation(corpse);
+      let animation = Spawner.agentDeathAnimation(corpse);
       const entry = unitAnimationSheets.get(corpse.tribe || "bean")?.get("death");
       if (!entry?.sprite.complete || !entry.sprite.naturalWidth) return true;
       const frame = idleMotion.matches ? animation.frameCount - 1 : index;
@@ -7647,6 +7651,7 @@
         !["antenna", "strength", "arms", "feet"].some(key => attributes[key] > 0) ? null :
         tribeArt.animationFrame(corpse, entry.sprite, animation, frame, "death", corpsePlaybackTime()));
       const sheet = attributeFrame || entry.sprite;
+      animation = Spawner.imageFrameGeometry(animation, frame);
       const frameSize = attributeFrame ? sheet.width : animation.frameSize;
       const padding = (frameSize - animation.frameSize) / 2;
       const size = cell * AGENT_HEIGHT * entry.scale * frameSize / animation.frameSize;
@@ -8013,21 +8018,13 @@
       return "grassland";
     }
     function combatUnitScale(agent) {
-      if (!Array.isArray(agent.dna?.pieces)) return unitDisplayScale(agent);
-      const tribe = agent.tribe || "bean", kind = agent.species || tribe;
-      const base = unitDisplayScales.get(kind) || 1;
-      const growth = Spawner.unitDisplaySize(agent) / (Spawner.UNIT_DISPLAY_SIZES[kind] || Spawner.UNIT_DISPLAY_SIZES.bean);
-      if (agent.species) return base * growth;
-      const attributes = agent.appearanceAttributes || agent.attributes || {};
-      const key = "dna:" + tribe + ":" + growth + ":" + agentAppearanceKey(attributes);
-      if (!unitAttributeScales.has(key)) unitAttributeScales.set(key, measureUnitDisplayScale(tribe, attributes, growth) || base * growth);
-      return unitAttributeScales.get(key);
+      return unitDisplayScale(agent);
     }
     function drawCombatCreature(context, agent, x, floor, height) {
       if (agent.species === "spiny-back-beetle") {
         const pose = Spawner.beetleAnimationPose(agent, state.simSeconds);
         const attack = pose.action === "attack";
-        const shape = attack ? Spawner.BEETLE_ATTACK_SPRITE : Spawner.BEETLE_SPRITE;
+        const shape = Spawner.imageFrameGeometry(attack ? Spawner.BEETLE_ATTACK_SPRITE : Spawner.BEETLE_SPRITE, pose.frame);
         const sprite = attack ? beetleAttackSheet : beetleSheet;
         if (!sprite.complete || !sprite.naturalWidth) return false;
         const size = height * shape.scale * (shape.registrationScale || 1);
@@ -8042,8 +8039,9 @@
       const pose = hurt || attack;
       const entry = hurt ? creatureHurtSheets.get(agent.species) : attack ? creatureAttackSheets.get(agent.species) : agent.species === "talon-owl" ? { sprite: talonOwlSheet, animation: Spawner.TALON_OWL_IDLE } : creatureIdleSheets.get(agent.species);
       if (!entry?.sprite.complete || !entry.sprite.naturalWidth) return false;
-      const animation = pose?.animation || entry.animation;
+      let animation = pose?.animation || entry.animation;
       const frame = pose?.frame ?? Spawner.unitAnimationFrame(animation, (state.simSeconds - (agent.animationStartedAt || 0)) * 1000);
+      animation = Spawner.imageFrameGeometry(animation, frame);
       const size = height * (agent.species === "talon-owl" ? Spawner.TALON_OWL_IDLE.scale : 1.4 * entry.scale) * (attack && !hurt ? animation.frameSize / animation.viewSize : 1) * (animation.registrationScale || 1);
       context.save(); context.translate(x, floor);
       if (attack && !hurt ? attack.mirrorX : agent.facing > 0) context.scale(-1, 1);

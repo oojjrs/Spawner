@@ -4626,7 +4626,9 @@ const UNIT_DISPLAY_SIZES = Object.freeze({
 });
 
 function unitDisplaySize(unit) {
-  const scale=Array.isArray(unit.dna?.pieces)?1+.01*unit.dna.pieces.length:1;
+  const count = Array.isArray(unit.dna?.pieces) ? unit.dna.pieces.length :
+    Number.isFinite(unit.stats?.pieceCount) ? Math.max(0, unit.stats.pieceCount) : 0;
+  const scale = 1 + .01 * count;
   return (UNIT_DISPLAY_SIZES[unit.species || unit.tribe || "bean"] || UNIT_DISPLAY_SIZES.bean)*scale;
 }
 
@@ -4692,11 +4694,298 @@ const UNIT_IMAGE_BOUNDS = Object.freeze({
 
 return { UNIT_IMAGE_BOUNDS };
 })();
+modules["client/unit-ranged-assets.mjs"] = (() => {
+const UNIT_RANGED_ASSETS = Object.freeze({
+  "spore": {
+    "idle": {
+      "image": "DesignAssets/Animations/UnitRangedV1/spore/Source/neutral.png",
+      "frameSize": 512,
+      "columns": 1,
+      "pivotX": 256,
+      "pivotY": 448,
+      "viewSize": 512,
+      "frameCount": 1,
+      "durationMs": 600,
+      "durationsMs": [
+        600
+      ],
+      "loop": true,
+      "rangedBody": true
+    },
+    "animation": {
+      "image": "DesignAssets/Animations/UnitRangedV1/spore/shoot.webp",
+      "frameSize": 512,
+      "columns": 6,
+      "frameCount": 30,
+      "durationsMs": [
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20
+      ],
+      "durationMs": 600,
+      "launchAtMs": 200,
+      "pivotX": 256,
+      "pivotY": 448,
+      "viewSize": 512,
+      "loop": false,
+      "rangedBody": true
+    },
+    "reference": {
+      "width": 195,
+      "height": 138
+    },
+    "projectile": {
+      "image": "DesignAssets/Animations/UnitRangedV1/spore/projectile.png",
+      "width": 58.5,
+      "height": 55.574999999999996,
+      "outletX": 342.0079744816587,
+      "outletY": 381.45295055821373
+    }
+  },
+  "pebble": {
+    "idle": {
+      "image": "DesignAssets/Animations/UnitRangedV1/pebble/Source/neutral.png",
+      "frameSize": 512,
+      "columns": 1,
+      "pivotX": 256,
+      "pivotY": 448,
+      "viewSize": 512,
+      "frameCount": 1,
+      "durationMs": 600,
+      "durationsMs": [
+        600
+      ],
+      "loop": true,
+      "rangedBody": true
+    },
+    "animation": {
+      "image": "DesignAssets/Animations/UnitRangedV1/pebble/shoot.webp",
+      "frameSize": 512,
+      "columns": 6,
+      "frameCount": 30,
+      "durationsMs": [
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20
+      ],
+      "durationMs": 600,
+      "launchAtMs": 200,
+      "pivotX": 256,
+      "pivotY": 448,
+      "viewSize": 512,
+      "loop": false,
+      "rangedBody": true
+    },
+    "reference": {
+      "width": 217,
+      "height": 166
+    },
+    "projectile": {
+      "image": "DesignAssets/Animations/UnitRangedV1/pebble/projectile.png",
+      "width": 65.1,
+      "height": 56.83333333333333,
+      "outletX": 340.80383314543406,
+      "outletY": 312.11724915445325
+    }
+  },
+  "spring": {
+    "idle": {
+      "image": "DesignAssets/Animations/UnitRangedV1/spring/Source/neutral.png",
+      "frameSize": 512,
+      "columns": 1,
+      "pivotX": 256,
+      "pivotY": 448,
+      "viewSize": 512,
+      "frameCount": 1,
+      "durationMs": 600,
+      "durationsMs": [
+        600
+      ],
+      "loop": true,
+      "rangedBody": true
+    },
+    "animation": {
+      "image": "DesignAssets/Animations/UnitRangedV1/spring/shoot.webp",
+      "frameSize": 512,
+      "columns": 6,
+      "frameCount": 30,
+      "durationsMs": [
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20
+      ],
+      "durationMs": 600,
+      "launchAtMs": 200,
+      "pivotX": 256,
+      "pivotY": 448,
+      "viewSize": 512,
+      "loop": false,
+      "rangedBody": true
+    },
+    "reference": {
+      "width": 154,
+      "height": 201
+    },
+    "projectile": {
+      "image": "DesignAssets/Animations/UnitRangedV1/spring/projectile.png",
+      "width": 60.3,
+      "height": 41.746153846153845,
+      "outletX": 329.8726042841037,
+      "outletY": 376.91657271702366
+    }
+  }
+});
+
+return { UNIT_RANGED_ASSETS };
+})();
+modules["client/unit-ranged.mjs"] = (() => {
+const { UNIT_RANGED_ASSETS } = modules["client/unit-ranged-assets.mjs"];
+const { unitDisplaySize } = modules["client/unit-size.mjs"];
+
+const root = "DesignAssets/Animations/UnitRangedV1/bean/";
+const UNIT_RANGED_FORMS = Object.freeze({ ...UNIT_RANGED_ASSETS, bean: Object.freeze({
+  idle: { image: root + "Source/neutral.png", frameSize: 512, viewSize: 512, columns: 1,
+    pivotX: 256, pivotY: 448, frameCount: 1, durationMs: 600, durationsMs: [600], loop: true, rangedBody: true },
+  animation: { image: root + "shoot.webp", frameSize: 512, viewSize: 512, columns: 6,
+    pivotX: 256, pivotY: 448, frameCount: 24, durationMs: 600, durationsMs: Array(24).fill(25),
+    loop: false, launchAtMs: 200, rangedBody: true },
+  reference: { width: 202, height: 206 },
+  projectile: { image: root + "projectile.png", width: 62, height: 36, outletX: 368, outletY: 322 }
+}) });
+const UNIT_RANGED_ANIMATIONS = Object.freeze(Object.fromEntries(Object.entries(UNIT_RANGED_FORMS).map(([key, form]) => [key, form.animation])));
+
+function unitRangedAppearance(agent) {
+  const form = UNIT_RANGED_FORMS[agent.tribe || agent.key || "bean"];
+  if (agent.species || !form) return null;
+  const stats = agent.stats?.dna || agent.stats;
+  if (!stats?.ranged || stats.melee) return null;
+  const attributes = agent.appearanceAttributes || agent.attributes || {};
+  if (["blade", "carapace", "antenna", "feet", "strength", "arms"].some(key => attributes[key] > 0)) return null;
+  if (agent.dna?.pieces?.some(piece => ["blade", "carapace", "antenna", "legs"].includes(piece.gene))) return null;
+  return form;
+}
+
+function unitRangedAttack(agent) {
+  if (!unitRangedAppearance(agent) || agent.health <= 0) return null;
+  const attack = agent.attack;
+  if (!attack || !(attack.dnaRanged || attack.mode === "ranged" || attack.attackMode === "ranged")) return null;
+  const launch = Number.isFinite(attack.launchedAt) ? attack.launchedAt : attack.hitAt;
+  return Number.isFinite(attack.startedAt) && Number.isFinite(launch) && launch >= attack.startedAt &&
+    Number.isFinite(attack.endsAt) && attack.endsAt > launch ? { attack, launch } : null;
+}
+
+function unitRangedPose(agent, time) {
+  const appearance = unitRangedAppearance(agent);
+  if (!appearance || agent.health <= 0) return null;
+  const active = unitRangedAttack(agent), animation = appearance.animation;
+  if (!active || time < active.attack.startedAt || time >= active.attack.endsAt)
+    return { action: "idle", animation: appearance.idle, frame: 0, mirrorX: agent.facing < 0 };
+  const launchAt = animation.launchAtMs;
+  let elapsed = time < active.launch ? launchAt * (time - active.attack.startedAt) / Math.max(.001, active.launch - active.attack.startedAt) :
+    launchAt + (animation.durationMs - launchAt) * (time - active.launch) / Math.max(.001, active.attack.endsAt - active.launch);
+  let frame = 0;
+  while (frame < animation.frameCount - 1 && elapsed >= animation.durationsMs[frame]) elapsed -= animation.durationsMs[frame++];
+  return { action: "shoot", animation, frame, mirrorX: agent.facing < 0 };
+}
+
+function unitRangedDisplaySize(agent) {
+  const form = unitRangedAppearance(agent);
+  return form ? 100 * unitDisplaySize({ ...agent, tribe: agent.tribe || agent.key }) * form.animation.frameSize / Math.max(form.reference.width, form.reference.height) : null;
+}
+
+function unitRangedProjectile(agent) {
+  const form = unitRangedAppearance(agent);
+  return form ? { ...form.projectile, sourceScale: 100 * unitDisplaySize({ ...agent, tribe: agent.tribe || agent.key }) / Math.max(form.reference.width, form.reference.height) } : null;
+}
+return { UNIT_RANGED_FORMS, UNIT_RANGED_ANIMATIONS, unitRangedAppearance, unitRangedAttack, unitRangedPose, unitRangedDisplaySize, unitRangedProjectile };
+})();
 modules["client/combat-stage.mjs"] = (() => {
 const { COMBAT_LAB_UNITS } = modules["client/combat-lab.mjs"];
 const { AGENT_DEATH_ANIMATION } = modules["client/agent-death.mjs"];
 const { imageAnimation, imageFrameGeometry } = modules["client/image-geometry.mjs"];
 const { unitDisplaySize } = modules["client/unit-size.mjs"];
+const { unitRangedAppearance, unitRangedPose, unitRangedDisplaySize, unitRangedProjectile } = modules["client/unit-ranged.mjs"];
 const { UNIT_IMAGE_BOUNDS } = modules["client/unit-image-bounds.mjs"];
 const { UNIT_ANIMATIONS, CREATURE_IDLE_ANIMATIONS, CREATURE_ATTACK_ANIMATIONS, CREATURE_HURT_ANIMATIONS, CREATURE_DEATH_ANIMATIONS, unitAnimationPose, unitAnimationFrame, creatureHurtPose, creatureAttackPose } = modules["client/unit-animation.mjs"];
 const { TALON_OWL_IDLE, talonOwlIdleFrame } = modules["client/talon-owl-idle.mjs"];
@@ -4706,7 +4995,13 @@ const colors = ["#c4e19c", "#efba90"];
 const reactionLabels = { dodge: "회피", parry: "패링", block: "블록", stun: "기절", counter: "반격", heal: "치유", shoot: "사격" };
 const beetleCorpse = imageAnimation({ image: "DesignAssets/Animations/BeetleDeath/dead-v2.png", frameSize: 185, columns: 1, pivotX: 95.5, pivotY: 163 });
 
+function stageAgent(agent) {
+  if (agent.species || agent.tribe || !agent.key) return agent;
+  return UNIT_ANIMATIONS[agent.key] ? { ...agent, tribe: agent.key } : { ...agent, species: agent.key };
+}
+
 function displaySize(agent, pose) {
+  if (pose?.animation.rangedBody || !pose && unitRangedAppearance(agent)) return unitRangedDisplaySize(agent);
   const key = agent.species || agent.tribe || agent.key;
   const idle = UNIT_ANIMATIONS[key]?.idle || CREATURE_IDLE_ANIMATIONS[key] ||
     (key === "talon-owl" ? TALON_OWL_IDLE : BEETLE_SPRITE);
@@ -4730,6 +5025,8 @@ function clamp(value) {
 }
 
 function poseFor(agent, time, deathAge) {
+  const ranged = unitRangedPose(agent, time);
+  if (ranged) return ranged;
   const death = agent.tribe === "bean" ? AGENT_DEATH_ANIMATION : UNIT_ANIMATIONS[agent.tribe]?.death || CREATURE_DEATH_ANIMATIONS[agent.species];
   if (agent.health <= 0 && death) return { action: "death", animation: death, frame: unitAnimationFrame(death, deathAge * 1000) };
   if (agent.species === "spiny-back-beetle") {
@@ -4803,6 +5100,7 @@ function createCombatStage(canvas) {
 
   function formationScale(width, height) {
     const bounds = currentTrial.agents.map(agent => {
+      agent = stageAgent(agent);
       const key = agent.species || agent.tribe || agent.key;
       const idle = UNIT_ANIMATIONS[key]?.idle || CREATURE_IDLE_ANIMATIONS[key] ||
         (key === "talon-owl" ? TALON_OWL_IDLE : BEETLE_SPRITE);
@@ -4816,6 +5114,8 @@ function createCombatStage(canvas) {
   }
 
   function readyPose(agent, requested, time) {
+    const ranged = unitRangedAppearance(agent);
+    if (ranged) { image(ranged.idle.image); image(ranged.animation.image); image(unitRangedProjectile(agent).image); }
     const animations = UNIT_ANIMATIONS[agent.tribe];
     for (const animation of [animations?.idle, animations?.attack, animations?.hurt, animations?.death,
       agent.tribe === "bean" ? AGENT_DEATH_ANIMATION : null, agent.species === "spiny-back-beetle" ? beetleCorpse : null,
@@ -4823,6 +5123,13 @@ function createCombatStage(canvas) {
     let pose = requested;
     let source = pose?.animation.image || COMBAT_LAB_UNITS.find(unit => unit.key === agent.key)?.image || BEETLE_NEUTRAL_ASSET;
     let asset = image(source);
+    if (!asset && ranged) {
+      const previous = readyPoses.get(agent.id);
+      if (previous?.pose?.animation.rangedBody) { pose = previous.pose; source = previous.source; asset = image(source); }
+      if (!asset) { pose = { action: "idle", animation: ranged.idle, frame: 0, mirrorX: agent.facing < 0 }; source = ranged.idle.image; asset = image(source); }
+      if (asset) readyPoses.set(agent.id, { pose, source });
+      return { pose, source, asset };
+    }
     if (!asset) {
       const previous = readyPoses.get(agent.id);
       if (previous) { pose = previous.pose; source = previous.source; asset = image(source); }
@@ -4839,6 +5146,7 @@ function createCombatStage(canvas) {
 
   function fighter(agent, index, width, height, time, ended) {
     const point = position(agent, index, width, height, time), alive = agent.health > 0;
+    agent = stageAgent(agent);
     if (!alive && !deathStarted.has(agent.id)) deathStarted.set(agent.id, clock);
     const deathAge = alive ? 0 : clock - deathStarted.get(agent.id);
     const requested = poseFor(agent, time, deathAge);
@@ -4946,6 +5254,7 @@ function createCombatStage(canvas) {
   }
 
   function supportArt(agent, points, width, height, time) {
+    agent = stageAgent(agent);
     const point = supportPoint(agent, points, width, height), requested = poseFor(agent, time, 0);
     const { pose, source, asset } = readyPose(agent, requested, time);
     const geometry = pose && imageFrameGeometry(pose.animation, pose.frame);
@@ -4978,6 +5287,16 @@ function createCombatStage(canvas) {
   function projectileArt(projectile, points, time, height) {
     const source = points[projectile.source.id], target = points[projectile.target.id];
     const progress = clamp((time - projectile.launchedAt) / Math.max(.001, projectile.at - projectile.launchedAt));
+    const sprite = unitRangedProjectile(stageAgent(projectile.source)), asset = sprite && image(sprite.image);
+    if (sprite && asset) {
+      const scale = sprite.sourceScale * formationScale(canvas.clientWidth, canvas.clientHeight);
+      const startX = source.x + source.direction * (sprite.outletX - 256) * scale;
+      const startY = source.y + (sprite.outletY - 448) * scale;
+      const x = startX + (target.x - startX) * progress, y = startY + (target.y - height * .04 - startY) * progress;
+      context.save(); context.translate(x, y); context.rotate(Math.atan2(target.y - height * .04 - startY, target.x - startX));
+      context.drawImage(asset, -sprite.width * scale / 2, -sprite.height * scale / 2, sprite.width * scale, sprite.height * scale);
+      context.restore(); return;
+    }
     context.save(); context.fillStyle = "#e5e9a4"; context.shadowColor = "#e5e9a4"; context.shadowBlur = 8;
     context.beginPath(); context.arc(source.x + (target.x - source.x) * progress, source.y - height * .3, 5, 0, Math.PI * 2); context.fill(); context.restore();
   }

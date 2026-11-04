@@ -1,3 +1,108 @@
+## 유닛 크기 수정 30경로 로컬 커밋 범위 동결 · 01a1a0bf 현재 요약
+
+- 기록 ID: unit-size-commit-freeze-20261104-212858-01a1a0bf. 기록 시각: 2026-11-04T21:28:58+09:00. 기록자 Codex Git/bookkeeping 워커(부모동일모델상속low), 커밋승인 사용자, 전체후보직접검수·stage/commit최종신호 부모 Codex. 출처 스레드01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d 최신커밋요청/최종승인패킷; 원발언정확시각·항목ID불명,H:/Spawner Windows/PowerShell.
+- 최종범위: FIELD7+COMBAT18+PREVIEW4+본채팅관련메모리1=30경로. FIELD공통성장/접지/사체count/rig등록과최소geometry지원,원거리성장2호출·engine/registry·직접도달media12,동일소스로좁게compile한runtime/Combat,Design/data/helperbootstrap·weaselwrapper를포함한다. HEAD일반metadata203assetrefs와기존art를유지하고45nativeupgrade/새deathart/VFX/BGM/asyncbounds/perfhints/UI/다른채팅메모리는제외한다. 제안제목「유닛 크기 기준 통일 및 표시 오류 수정」부모수용.
+- 근거/한계: FIELD7diff·COMBAT18manifest/정확FIELD3compile입력·PREVIEWDesign.task.diff/의존성/scale-invariant.json을부모가검수했다. 음수birth측정은진단표본일뿐활성bounds미포함,실제bounds53모두양수·204활성scale유한양수·후보불변확인. 기존작업트리17테스트/대표렌더결과는재사용하며HEAD일반자산기반분리후보자체의새렌더통과로주장하지않는다. 전프레임/전DNA미검증·Welcome보존·비소유DNA잔여분류유지.
+- 실행: freshHEAD/index/대상바이트guard 후정확blob으로분리index를구성해최종staged경로/차이/check를1회검토하고승인범위일치시로컬커밋한다. 작업트리바이트와비대상기존index의미상태를보존한다. 기존0board조회는동일origin확인으로재사용한다. 성공은커밋/트리readback후에만별도기록하며추가메모리전용커밋/amend/푸시없음. 본기록은커밋준비완료이지커밋성공선언아님.
+
+## 유닛 크기 커밋 원거리 의존성 12개 확정 · 01a1a0bf 현재 요약
+
+- 기록 ID: unit-size-commit-range-closure-20261104-212440-01a1a0bf. 기록 시각: 2026-11-04T21:24:40+09:00. 기록자 Codex bookkeeping/Git 워커(부모동일모델상속 low), 커밋승인 사용자, 범위수용 부모 Codex. 출처 스레드01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d 부모검수패킷; 원판단정확시각·항목ID불명,H:/Spawner Windows/PowerShell.
+- 정정·수용: 앞선unit-size-commit-scope-accepted-20261104-212202-01a1a0bf의미디어15개는예상치였으며실제직접도달은4forms×idle/shoot/projectile=12개다. 부모는COMBAT18후보(소스/테스트4+media12+bundle2)범위를수용했다. 원거리크기호출과6테스트를유지하고불필요한3개를추가하지않는다. 일반HEAD metadata/assets보존,45native upgrade/VFX/BGM제외.
+- 부모확인: runtime은정확FIELD3후보blob에서compile,Combat분리소스일치,FIELD7diff수용유지. 원거리compileInput2개의exactFIELDcandidate표시는소유주체오표기일뿐경로/SHA/소스는맞으며결합manifest에서COMBAT출처로수정한다. PREVIEW4경로정합패킷·최종결합manifest검수전stage/commit보류. 후보자체새테스트/렌더성공주장없음. 다른채팅/index/작업트리보존·푸시없음.
+
+## 유닛 크기 커밋 후보·필수 지원 범위 수용 · 01a1a0bf 현재 요약
+
+- 기록 ID: unit-size-commit-scope-accepted-20261104-212202-01a1a0bf. 기록 시각: 2026-11-04T21:22:02+09:00. 기록자 Codex bookkeeping/Git 실행 워커(부모 동일 모델 상속 low), 로컬커밋 승인 사용자, 후보범위·의존성 판단/직접diff검수 부모 Codex. 출처 스레드01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d 부모 범위결정패킷과 최신 사용자 커밋요청. H:/Spawner Windows/PowerShell; 원판단 정확시각·항목ID 불명.
+- 부모 수용: FIELD7파일 isolated candidate.diff 약20k를 전부 검수해 공통성장·ground·corpse count·raw rig등록metadata와 최소imageFrameGeometry지원·테스트를 이번크기수정범위로 승인했다. asyncprepareBounds/perf hints/audio/UI는 제외한다. 실제작업트리 전체를후보로덮어쓰거나blindstage하지 않는다.
+- 필수의존성 결정: 검증한 unit-ranged2개크기호출은 carried범위에서유지한다. 실행가능한최소engine/registry·직접도달media15개·최소stage연결은저자/미추적여부와무관하게관련지원으로포함한다. 초기COMBAT의원거리전체제외제안은이결정으로대체된검토안이며원거리수정이연기됐다고기록하지않는다. 신규VFX/layout/archive와무관한원거리자산전체는제외한다.
+- PREVIEW helper를활성화하는 Design/data/bootstrap은관련지원이다. 후보는HEAD의기존일반자산/metadata기준을보존하여병행45native upgrade작업을끌어오지않는다. 필요한기존원거리preview연결은동일최소폐쇄graph만사용한다. bundle공유모듈은최종FIELD후보의정규화소스와일치해야하며SHA의EOL차이만으로의미불일치로판정하지않는다.
+- 상태: expanded manifest·정확dependency/media목록·최종후보diff를부모가검수하기전실제stage/commit하지않는다. 기존10관련메모리섹션+본기록을원자적후보에포함하고HEAD·다른채팅기록·실제index/workingtree는보존한다. 후보기반과포함/제외범위에맞는요약을최종동결때갱신한다. 원래작업트리17테스트/화면검증을아직실행하지않은분리후보자체통과로바꿔기록하지않는다. 새제품변경/테스트/푸시없음.
+
+## 유닛 크기 수정 로컬 커밋 요청·범위 분리 착수 · 01a1a0bf 현재 요약
+
+- 기록 ID: unit-size-local-commit-request-20261104-211410-01a1a0bf. 기록 시각: 2026-11-04T21:14:10+09:00. 기록자 Codex bookkeeping/Git 실행 워커(부모 동일 모델 상속 low), 원발언·로컬커밋 승인 사용자, 범위검수 부모 Codex. 출처 스레드01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d 최신 사용자 「이번 유닛 크기 수정한 거 메모리에 정리하고 커밋」 및 부모 위임. H:/Spawner Windows/PowerShell; 원발언 정확시각·항목ID 불명.
+- 유효 결정: 직전 완료기록의15파일과 HEAD의존성상 필요한 크기관련지원hunk, 이채팅 감사/승인/진행/완료기록 및 직접관련미커밋크기기록을 같은 로컬커밋으로 정리한다. 이전 커밋미승인 상태만 이명시요청으로 대체하고 감사원근거는 보존한다. 푸시승인없음. 다른채팅/미확인기록과 기존index·untracked·병행hunk는 제외·보존한다.
+- 검증근거: 총17targeted테스트,FIELD465+최신성종료108관측,실제패널/FIELD1.0,Lab본대/지원25/0=1.25·원거리25/1=1.23762376,Design23/162·carry20clipping0·weasel8바이트일치를부모최종승인패킷으로재사용한다. 전프레임/전DNA미검증·Welcome카메라보존·비소유DNA잔여분류는완료기록대로유지한다. 새테스트/브라우저없음.
+- 실행상태: project-finish-work와dirty-worktree-scope-split으로fresh HEAD/index/remote와15경로blob을고정해분리후보를준비한다. FIELD/COMBAT/PREVIEW의소스/blob분류를받아의존성과제외hunk를검수하며부모가구체후보를읽기전에는실제stage/commit하지않는다. 제안subject「유닛 크기 기준 통일 및 표시 오류 수정」. 결과성공을선기록하지않는다. 자료는literal $Trash/unit-size-commit-20261104에보관한다.
+
+## 유닛 크기 수정·대표 경로 재검증 완료 · 01a1a0bf 현재 요약
+
+- 기록 ID: unit-size-fix-complete-20261104-210948-01a1a0bf. 기록·최종요약 확인 시각: 2026-11-04T21:09:48+09:00. 기록자 Codex bookkeeping 실행 워커(부모 동일 모델 상속 low), 수정/재검증 승인 사용자, 최종패킷 승인·소스/JSON/실제PNG 직접검수 부모 Codex; 구현 FIELD/Herschel 01a1a63e-d190-7813-bc55-ba5eeb3da3e8, COMBAT/McClintock 01a1a63e-dd48-7d00-99f3-4e8ed52213f2, PREVIEW/Dewey 01a1a63e-ef74-7fd2-88c7-64c96f85c5f2. 출처 스레드01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d의 사용자 수정승인과 부모 최종완료패킷. H:/Spawner Windows/PowerShell; 원발언/승인 정확시각·항목ID 불명. 본 기록자의 직접 제품검수로 주장하지 않는다.
+- 완료판정: 앞선 확정4결함(FIELD DNA성장, live발crop, Lab내장pieceCount성장, Design몽돌carry) 및 그늘족제비wrapper불일치를 수정하고 대표23종 경로를 재렌더 검증했다는 부모 승인이다. shared unitDisplaySize signature 유지·실제dna.pieces 우선/finite stats.pieceCount fallback, 성장독립cached anatomy fit, 별도공통카메라 기준을 적용했다. 사망모델/server 및 nestedworker bundle은 dna제거 후에도 stats.pieceCount를 보존한다. 원본art는 보존했다.
+- FIELD 검증: targeted11테스트 통과;465관측=기본261+유효living/death/final96+utility84+feet20/combatFeet20추가24. 유효성장12oracle에서20/0=1.2,발성장24oracle에서20/5=1.142857통과. 실제createGame 사망payload32+8사체의stats count보존 확인. 부모는 valid-dna-contact·utility·phenotype20 PNG의전신복구/성장사체를직접검수했다.
+- COMBAT 검증: targeted6테스트 통과(총17);23종5상태115+DNA/지원78+원거리40표본 실패0. 실제패널18case 중16유효recipe의정규화panel/FIELD=1.0; 실제Lab10HTTP/filecase에서일반25/0=1.25(본대·지원군),4종족원거리25/1=1.23762376. 부모가 panel-dna-spore-legs-blade 및 lab-25-vs0-support-file PNG를 직접확인했다. rangedBody 성장우회도현재대상경로에포함했다.
+- PREVIEW 검증:23종/제공162reference 오류0,몽돌carry20프레임clipping0,106셀/pivot53,93·동일idle406×300@512등록으로몸체42/전체42.972×35.477(이전135.245×111.656). weasel8프레임wrapper바이트/외곽일치. 부모는소스·수치·freshness와실제carry PNG를확인했다. Welcome종별showcase카메라는최신4화면수정범위판단으로보존한다.
+- 최신성종료: 병행runtime/tribe-art변경후영향범위108관측(utility84+발20living/death/final24)만좁혀재확인하여108/108bbox불변·오류0·성장24oracle통과.8개tracked source/runtime SHA전후불변,실제로loaded tribe-art body가현소스와일치한다. 최종runtime SHA256=09a62899643f9ef3e6e5604e304997f72bda42c6859b88272d686bfa129046a8,main game ce607...은부모제공축약식별자로만보존한다. 부모는closure-summary.json과closure-phenotype-contact.png를직접검수했다. 모든중간상태/향후병행변경을동결했다는주장은아니다.
+- bundle/잔여범위:70client/73worker/40Combat모듈보존guard를부모가검수했고Combat의기존누락server/creature-movement-profiles의존성을추가했다. 전체import graph완전동기화주장은하지않는다. 비소유DNA잔여2차이(Combat geneprice entry[3] 대소스entry[3]/2,내장신규secretion→secretion appearance mapping누락)는부모수용dna-residual-summary.json상성장/piececount/stats/검사유효recipe영향없음;dnaUnitStats/ATTRIBUTE_DNA.stats의scale1+.01*pieces.length·validate/trace/counts동일. health/legs/blade/gather검사범위와Lab derivedstats.ranged경로만판정하며새secretion통합은범위밖으로보존한다.
+- 정확소스범위15파일: client/unit-size.mjs,client/unit-size.test.mjs(new),client/game.js,client/attribute-animation.mjs,client/attribute-animation.test.mjs,server/game.mjs,server/corpses.test.mjs,client/combat-stage.mjs,client/combat-stage.test.mjs(new),client/unit-ranged.mjs,client/runtime.js,Combat.html,client/unit-matrix-preview.js,client/local-assets/Animations/CreatureWalkV2/shadow-weasel/walk.webp.js,CodexWorkMemory.md. attribute-morphology미변경·제외. 기존/병행hunk를보존하고커밋·푸시는승인/실행하지않는다.
+- 근거/한계/대체: literal $Trash/unit-size-fix-20261104/{field/report.md,field/closure-summary.json,combat/report.txt,combat/dna-residual-summary.json,previews/report.txt}와각JSON/PNG가근거. unit-size-fix-authorized-20261104-204220-01a1a0bf 및unit-size-fix-preview-reviewed-20261104-205240-01a1a0bf의진행상태를완료로대체한다. 감사원기록/미수정당시관측은보존한다. 전프레임·전DNA·자연출현전체/장기이력/새secretion전체통합은미검증. 기존감사report.md변경/새prose문서없음. FIELD7/COMBAT5성공형식검사를재사용하고최종preview2+메모리만check-only,부모검수accepted patch/moduleguard와정확15경로차이확인으로끝낸다;제품테스트/렌더재실행없음.
+
+## 유닛 크기 공통 API·미리보기 검수 진행 · 01a1a0bf 현재 요약
+
+- 기록 ID: unit-size-fix-preview-reviewed-20261104-205240-01a1a0bf. 기록·요약 확인 시각: 2026-11-04T20:52:40+09:00. 기록자 Codex bookkeeping 워커(부모 동일 모델 상속 low), 요청·수정범위 결정 사용자, API판단 수용·PREVIEW 직접검수 부모 Codex, 구현 PREVIEW 워커. 출처 스레드01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d의 부모 진행패킷/위임. H:/Spawner Windows/PowerShell; 원판단·발언 정확시각·항목ID 불명. 아래 검수사실은 부모 전달이며 기록자의 제품 직접검수로 주장하지 않는다.
+- 부모 수용 판단: shared unitDisplaySize의 기존 signature를 유지하고 실제 dna.pieces를 우선하며 finite stats.pieceCount를 fallback으로 쓴다. cached anatomy fit은 성장과 독립시키고 공통 카메라 fit도 물리 크기와 분리한다. COMBAT은 병행 rangedBody의 성장 우회 여부를 검토 중이다.
+- PREVIEW 완료·부모 직접검수: unit-matrix-preview.js의106셀/pivot53,93 등록과 동일 idle406×300@512 기준을 적용했다. 몽돌 carry 등록몸체42px/전체외곽42.972×35.477로 이전135.245×111.656 확대를 교정했다. carry20프레임 edge clipping없음,23종/제공162reference 오류0, 그늘족제비wrapper8프레임 바이트일치라는 수치·freshness·실제carry PNG와 소스를 부모가 확인했다. 원본 source asset은 변경하지 않았다.
+- Welcome 판단: 최신 수정요청이 필드·인게임전투·Lab·Design 네 화면을 명시하므로 기존 종별 showcase카메라를 보존한다. 앞선 의도미해결 관측을 UI재설계 승인으로 확대하지 않는다. 본 판단은 이번 수정범위 결정이며 과거 관측근거는 보존한다.
+- 현재 상태: FIELD·COMBAT은 작업 중이며 전체 수정/재검증 완료가 아니다. 최종 bundle동기화·부모검수 패킷과 정확 touched목록을 기다린다. 새prose보고서는 작성하지 않고 기존감사report.md를 보존한다. 이번 진행기록은 형식검사를 재실행하지 않으며 최종메모리 후15초이내 exact파일 형식/작업범위차이 확인에 통합한다. 제품수정·커밋·푸시는 본 bookkeeping작업에서 수행하지 않는다.
+
+## 유닛 크기 전 경로 수정·재검증 승인 · 01a1a0bf 현재 요약
+
+- 기록 ID: unit-size-fix-authorized-20261104-204220-01a1a0bf. 기록·현재요약 확인 시각: 2026-11-04T20:42:20+09:00. 기록자 Codex bookkeeping 실행 워커(부모 메인과 동일 모델 상속 low), 원발언·수정/재검증 승인 주체 사용자, 분담·검수 주체 부모 Codex. 출처 스레드01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d의 최신 사용자 전체수정 승인 및 부모 위임. H:/Spawner Windows/PowerShell; 원발언 정확시각·턴/항목ID·워커 고유ID 불명. 기록시각과 원발언/실행시각은 구분한다.
+- 새 유효 결정: 확인된 크기 결함 전부를 수정하고 일반 필드·인게임 전투·Lab·Design을 동일 크기 기준으로 재검증한다. FIELD-01 DNA 성장, FIELD-02 발 몸체crop, C1 Lab 내장성장, P1 Design carry 및 그늘족제비 wrapper 그림 불일치가 대상이다. Welcome의 종별카메라 동작은 의도미확정 상태이며 선택적 제안만, 변경승인으로 확장하지 않는다. 커밋·푸시는 승인되지 않았다.
+- 분담: FIELD는 shared unit-size/game/attributes, COMBAT은 stage 및 runtime/Combat 내장 최종동기화, PREVIEW는 matrix/weasel wrapper를 소유한다. 메인은 조율·검수하며 실제실행은 동일모델상속low워커가 수행한다. 본 bookkeeping워커는 CodexWorkMemory.md 기록과 별도 요청시 최종 scoped형식/차이 취합만 소유한다. 모든 기존·동시작업을 보존한다.
+- 대체 관계: unit-size-full-audit-final-20261104-203615-01a1a0bf와 초기기록의 감사전용/수정미승인 상태만 이번 명시승인으로 대체한다. 4결함·자산불일치·Welcome동작·수치보정·관측시각/해시·전프레임/전DNA 미검증의 감사근거는 그대로 보존한다. 수정이나 재검증 성공은 아직 기록하지 않는다.
+- 실행전 기준: 부모 검수용 초기 Git status/name-status와 대상파일 해시를 literal $Trash/unit-size-fix-20261104/bookkeeping에 읽기전용으로 보관한다. 이는 스냅샷 시각의 상태이며 원자적 전체작업트리 동결이 아니다. 같은 작업의 linked board0개 조회결과를 재사용하고 remote변경 근거가 없는 한 재조회하지 않는다. 큰 메모리/보고서 정규화·제품테스트 반복 없이 최종패킷을 기다린다.
+
+## 유닛 크기 전 경로 감사 완료 · 01a1a0bf 현재 요약
+
+- 기록 ID: unit-size-full-audit-final-20261104-203615-01a1a0bf. 기록·요약 마지막 확인 시각: 2026-11-04T20:36:15+09:00. 기록자 Codex bookkeeping 실행 워커(부모와 동일 모델 상속 low), 감사 요청·수정/Git 미승인 주체 사용자, 분담·최종 보고서/이미지 검수 주체 부모 Codex. 출처 스레드01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d의 최신 감사 질문·부모 최종 패킷과 본 위임. H:/Spawner Windows/PowerShell; 원발언 정확시각·턴/항목ID·본 워커 고유ID 불명. 기록 시각은 원관측 시각과 별개다.
+- 확정 결과(부모 최종 검수/워커 증거 취합): 결함4건은 FIELD-01 유효 health0/5/20 DNA 성장 누락(20 기대1.2/실제1), FIELD-02 포자/몽돌/샘 live 발 몸체224crop 대549/512/512(필드·실제 전투패널·운반/채집/하역), C1 Combat.html 내장 pieceCount 성장 누락(실제25/0 본대+지원군114.0248×140.12 동일, 기대25측142.531×175.15/비1.25), P1 Design 몽돌carry135.25×111.66/기준42=3.2201배다. 별도 그늘족제비walk source/inline 그림 불일치로 크기외곽도 다름; Welcome 종별 독립fit 동작 확인, 공통 체급 의도는 미해결.
+- 정밀 구분: 필드 bare몽돌idle/carryidle44×32·carrywalk43×33이며 Design 확대는 필드 표본에서 미재현. 이상적42.000000365의 raster44폭은 float32/필터/alpha16 외곽 잔차로4.76% transform결함 아님. 포자 이상적38×27.489 대raster38×29도 body비 불일치로 판정하지 않는다. 실제패널 혼합쌍/그룹은 공통카메라에서 기본비율 보존; 유효5조각 panel/FIELD=.972222=1.05/1.08. 일반 발 사체는 live crop우회, 전투 발 사체는 독립replacement이며 전프레임 정상확정 아님. 별도eat mode없음.
+- 범위:23종 주요6상태·기존261관측/유효DNA20/추가utility84, lab115·실제HTTP/file46선택·기본draw69비교, 실제패널쌍/그룹+4유효recipe, Design159기준프레임·Welcome69대표관측. 전프레임/전DNA/자연출현전체 미검증. 초기 전체패널 미확인 한계는 실제combatOpen.click→showModal→drawCombatPanel 후속으로 대체한다. 초기 fixture/oracle실패는 제품결함에 포함하지 않는다.
+- 근거·최신성: literal $Trash/unit-size-audit-20261104/report.md와 field/report.md·combat/report.txt·combat/followup-summary.json·previews/report.txt 및 지정JSON/PNG. 부모는 all23 field-contact·유효발잘림·utility·Design몽돌carry·Welcome·실제panel/lab 이미지를 직접 검수했다고 최종확인했다. 본 기록자는 보고서/JSON을 읽었고 이미지 직접검수로 주장하지 않는다. field 마지막관측2026-11-04T11:28:50.337Z(각run핵심6소스불변), combat후속11:28:47.672Z–11:28:58.956Z(5해시전후동일;초기표본소급불가), preview11:14:20.069Z–11:14:39.155Z이후welcome/runtime/CSS병행변경한계 유지. 현재디스크전체 재검증 아님.
+- 상태/후속: unit-size-full-audit-start-20261104-201203-01a1a0bf의 감사진행 상태를 본 결과로 갱신하며 원기록 보존. 이전 lab만의 판단을 필드전경로 정상으로 확장하지 않는다. 감사완료·제품미수정; 수정/커밋/푸시 승인없음. 통합보고서와 메모리 기록만 작성하며 제품테스트 재실행하지 않는다.
+
+## 유닛 크기 전 경로 감사 착수 · 01a1a0bf 현재 요약
+
+- 기록 ID: unit-size-full-audit-start-20261104-201203-01a1a0bf. 기록 시각·요약 마지막 확인: 2026-11-04T20:12:03+09:00. 기록자 Codex bookkeeping 실행 워커(부모와 동일 모델 상속, low); 요구·감사범위 결정 사용자, 분담·검수판단 부모 Codex. 출처 스레드 01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d의 최신 질문과 부모 위임, H:/Spawner Windows/PowerShell. 원 발언 정확 시각·턴/항목 ID·워커 고유 ID 불명; 기록 시각을 발언 시각으로 보지 않는다.
+- 최신 요구: 일반 필드가 특히 의심되므로 필드·인게임 전투·실험실·Design·welcome의 유닛 크기를 전면 감사한다. 현재 요청은 감사 전용이며 제품 수정·Git 권한은 없다. 기존 자체 실험실 크기 판단은 실험실 주장만 수용된 상태이고 필드 전체 경로는 아직 검증되지 않았다.
+- 부모 분담: 필드 Herschel 01a1a63e-d190-7813-bc55-ba5eeb3da3e8, 전투 McClintock 01a1a63e-dd48-7d00-99f3-4e8ed52213f2, 미리보기 Dewey 01a1a63e-ef74-7fd2-88c7-64c96f85c5f2. 모두 메인 모델 상속 low, 메인은 조율·검수한다. 본 워커는 초기 메모리 한 건만 기록하며 감사 결과를 선행 확정하지 않는다.
+- 감사 대조 계약(부모 제공, 본 워커 제품 직접 확인 아님): 현 게임 UNIT_DISPLAY_SIZES, CSS 100px/cell 정규화, starter-box 플레이어 보정, DNA 조각당 1%, alpha16 첫 프레임 기준을 함께 추적한다. 물리 크기·공유 카메라 fit·고정 UI 썸네일·소스 고유 해상도·의도된 행동/공중 자세 차이를 구분한다. 최종 감사 결과는 부모 취합·검수 뒤 별도 기록 예정이다.
+
+## 크기 적용 마감 중 고해상도 병행 자산 정합 완료 · 01a1a0bf
+
+- 기록 ID: combat-unit-size-latest-assets-20261104-01a1a0bf. 기록·직접 근거 확인 시각: 2026-11-04T19:12:27+09:00. 기록자·정합 보완 판단 Codex /root, 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d,H:/Spawner. 새 사용자 결정 없음. apply-complete의 기능 완료는 유지하며 마지막 자산/번들 근거를 갱신한다.
+- 마감 중 병행 변경 관찰: 다른 채팅의 고해상도 자산 정비에서 새싹콩idle276→631,버섯240→549 등4종족원본/등록과unit-image-bounds가갱신됐다. Combat에이전등록이남아있는것을이미지폭/columns·sourceFrame/bundleFrame·boundsFrame으로직접확인했다. 아울러다른배경작업의background함수가grassland.webp cover로바뀐것도보존했다. 우리크기수정때문에다른작업을되돌리지않는다.
+- 보완: 4종족fit에idle.frameSize/reference.frameSize와action.frameSize/actionBounds.frameSize를적용해저장bounds와현재좌표해상도를동일하게환산했다. Combat의sprite-registration/bounds/stage3모듈만최신실제source로좁게치환했고다른39개모듈은바이트보존assert를통과했다. 외부작업의원본이미지/공통등록source는직접편집하지않았다. 마지막source3개의SHA가실제동기화report와모두같음을확인했다.
+- 변경된자산에한정한실제재검수: 4종족대기4상태8표시와attack/hurt/death/dead16상태32표시를새고해상도원본으로래스터해게임표시기준/실제main계산식대조를모두통과했다. 앞서통과한중립19종검사는반복하지않았다. 실제HTTP/file Combat에서새싹콩frame631/버섯549를호출하고사망316/553을사용함을로그로확인했다. 아군포함4배자동전투ended/JS오류0. 부모가새평야배경위에기준40px콩이표시된최신file PNG를직접열어확인했다.
+- 파일 해상도는632등으로바뀌어도표시크기는1칸100px계약으로유지된다. 원본이미지실제파일해상도가게임표시px와동일하다는사용자의가정은부모가명확히바로잡았으며픽셀해상도를40px로축소한작업이아니다. 소스2개+Combat과관련메모리로범위유지·미스테이징·미커밋·미배포다. 12텍스트형식/공백마감은통과했고이후바뀐파일만다시마감한다.
+## 전투 실험실 게임 크기 기준 적용 완료 · 01a1a0bf 현재 요약
+
+- 기록 ID: combat-unit-size-apply-complete-20261104-01a1a0bf. 기록·직접 검수 시각: 2026-11-04T19:04:31+09:00. 기록자·구현/실제 래스터 감수 Codex /root, 표시 크기 적용 지시 주체 사용자. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d,H:/Spawner Windows/PowerShell. 원발언 정확 시각·항목ID 불명. apply-approved의 진행 상태를 갱신하며 이전 접지 수용은 유지한다.
+- 제품 변경: client/combat-stage.mjs가 공통100CSSpx/칸과 게임 unitDisplaySize를 사용한다. 같은 그림 틀252px로 종별 크기를 맞추던 방식 대신 첫 기준 프레임의 alpha16 외곽과 원본 viewSize/registrationScale을 환산한다. 아군도 같은 배율/전체프레임/pivot/frameGeometry/방향을 사용하며 기존 미정의 frameBounds 참조를 해당 공통 경로로 대체했다. 그림자도 몸체 배율과 함께 조정해 기존 접지 관계를 보존했다.
+- 고정 기준 데이터: 새 client/unit-image-bounds.mjs에 실제 현재 PNG/WebP 54개(23idle+23death+4종족attack/hurt8)의 첫프레임 frameSize/width/height와 4종족 starter 몸체 기준비를 기록했다. 사용자 요구대로 전체 프레임을 그리며 이 외곽 데이터는 크기 환산에만 사용한다. 매프레임 타이트bbox 크롭/강제contain/동적몸체중심정렬은 추가하지 않는다. file://에서도 제품이 캔버스 알파를 읽지 않아 CORS 문제를 피한다.
+- 4종족 보완: 처음 모든 생존 액션에 idle 기준을 적용했을 때 새싹콩 hurt가40px 대신58px로 커지는 것을 실제 PNG에서 발견했다. 게임 prepareUnitAnimationSheets의 action별 starter/reference.box fit과 prepareUnitDisplaySize의 공통 idle 정규화 비율을 그대로 적용했다. 구체적으로 alpha16 starter의몸체비(콩은240/naturalWidth,350/naturalHeight)를 사용해 action별fit/idleFit을 고정한다. 기존 승인 pivot/원화/애니 시간은 바꾸지 않았다. 중립 attack/hurt는 idle기준, death는 해당death첫프레임기준,정식beetledead는자체기준으로게임의호출계약을맞춘다.
+- 번들: Combat.html에 unit-size/unit-image-bounds 의존성을 추가하고 stage를 좁게 갱신했다. 최종 sync는bounds/stage2module만치환,나머지기존module바이트동일을assert했다. 원본atlas/공통sprite-registration/메인게임/Design/전투규칙/다른채팅작업은이번범위에서수정하지않았다.
+- 실제검수1: 격리headlessEdge,DPR1.5,전장1130x350CSSpx에서23종x5대표상태115개를양쪽230표시로래스터했다. 대기46표시의최장변을앞표의독립고정값40/38/42/39…144px와대조해최대오차1.3333CSSpx(래스터보간포함),실패0·클립0. 아군3몸체에서같은새싹콩40px높이를확인했다. 첫실행은검수용아군fixture에stats.health가빠져finish중단,이를fixture에서만보완했고제품오류/성공으로잘못기록하지않는다. 성공결과는artifacts/measurements.json이다.
+- 실제검수2: 종족 보완 후 바뀐4종족의attack/hurt/death/dead16대표상태32표시만다시측정했다. 제품bounds데이터를oracle로재사용하지않고실제원본프레임/스타터를별도캔버스로디코드해메인게임AGENT_HEIGHT.7/entry.scale/unitDisplayScale/원본F식을독립계산했다. width/height각오차1.5px허용안에서16개전부통과·실패0. 통과한중립/대기/아군검사는반복하지않았다. 부모가5개전체상태시트와보완된종족3시트를직접열어크기비/접지/찌그러짐없음을감수했다. 애니전프레임검수로확대하지않는다.
+- 실제페이지: 정상HTTP와실제file:///H:/Spawner/Combat.html에서꽃꼬리새/흰발과아군을표시한PNG를부모가직접확인,JS오류0. 최종종족보완후실제HTTP/file에서새싹콩/버섯·아군표시/4배자동전투ended/양측정식death호출을추가확인했고오류0이었다. 원본파일해상도와표시크기는별개임을부모가사용자에게명확히설명했다.
+- 근거·상태: literal $Trash/combat-unit-size-20261104의bounds.mjs/sync.mjs/run.mjs/measure-browser.mjs,artifacts/measurements.json·summary5PNG,artifacts-tribes/measurements.json·summaryPNG,actual-ui.json/actual-file-combat.png/actual-tribes-ui.json. 관련source2개+Combat.html+본메모리로범위한정,로컬미스테이징·미커밋·미배포. 원본해상도를표의px로줄였다는뜻이아니라게임과같은표시배율을적용한결과다. 마감형식/국소diff는직후실제명령결과를따른다.
+## 전투 실험실 종별 실제 크기 적용 승인 · 01a1a0bf
+
+- 기록 ID: combat-unit-size-apply-approved-20261104-01a1a0bf. 기록 시각: 2026-11-04T18:48:02+09:00. 기록자·구현 해석 Codex /root, 적용 결정 주체 사용자. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d,H:/Spawner Windows/PowerShell. 원발언 정확 시각·항목ID 불명.
+- 사용자 최신 지시: 실제 게임 기준 크기를 유닛 이미지 실제 크기로 이해하겠으며 실험실도 그 기준으로 맞추라고 했다. 부모는 앞 표가 원본 파일 해상도가 아니라 게임1칸=100px 표시 환산값임을 명확히 설명하고, 그 표시 기준을 실험실에 적용한다. 이전 표 우선 보고 상태는 실제 적용으로 전환한다.
+- 실행 범위: 공통100CSSpx/칸과 게임의 unitDisplaySize/UNIT_DISPLAY_SIZES를 사용한다. 23종 대기 첫 프레임 alpha16 외곽을 고정 기준으로 계산해 몸체/꼬리/다른프레임에 따라 매번 확대축소하지 않는다. 원본 전체 프레임과 승인된 pivot/frameGeometry를 그리며, 공격/피격은 idle 기준·사망은 게임과 같이 death 첫 프레임 기준·정식beetle corpse도 자체기준을 쓴다. 그림자도 같은 크기 환산을 적용해 접지 관계를 유지한다.
+- 구현 판단: file:// 전투 페이지에서 canvas 알파 읽기의 CORS 문제와 매프레임 bbox 정규화 재발을 피하기 위해 현재 실제 atlas 첫 프레임의 고정 width/height/frameSize를 작은 정적 module로 기록한다. client/combat-stage.mjs와Combat.html의관련module만갱신하고원본sprite/공통pivot/게임규칙·다른채팅수정을보존한다. 아군 표시도 같은 배율·pivot을 사용하도록 맞춘다. Git완료·배포는이번요청에없다.
+## 전투 실험실·실제 유닛 크기 px 비교 조사 · 01a1a0bf 현재 요약
+
+- 기록 ID: combat-unit-size-table-20261104-01a1a0bf. 기록·직접 측정 시각: 2026-11-04T18:41:14+09:00. 기록자·조사 판단 Codex /root, 크기 불일치 지적·표 우선 요청 주체 사용자. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d,H:/Spawner Windows/PowerShell. 사용자 발언 정확 시각·항목ID 불명.
+- 요청 전환: 사용자는 전투 실험실과 실제 유닛 크기 비율을 맞추라고 했다가, 먼저 이 채팅에 유닛별 가로×세로 px 표를 제시하라고 명시했다. 현재 단계는 표·조사 보고이며 제품 크기 수정으로 진행하지 않는다. 기존 생존/시체 접지에 대한 사용자 최종 수용은 유지한다.
+- 실제 근거: 현재 Combat.html 내장 모듈(unit-animation/image-geometry/unit-sprite-registration/owl/beetle/COMBAT_LAB_UNITS)과 client/runtime.js 내장 unit-size 모듈을 읽어, 23종 대기 첫 프레임을 실제 PNG/WebP에서 sharp로 디코드했다. tribe-art.bounds와 동일한 alpha16 기준으로 투명 여백을 제외한 사각 외곽을 구했다. 서버/브라우저/빌드/제품파일 실행·수정 없이 현재 번들의 순수 메타데이터와 실제 이미지 픽셀로 계산했다.
+- 표 기준: 실험실 canvas1130×350 CSS px에서 공통size=min(width*.34,height*.72,290)=252를 사용, image 배율252*registrationScale/(viewSize||frameSize)로 표시 폭·높이 환산했다. 게임은 빈 DNA/속성 없음, 1칸=100px 기준으로 UNIT_DISPLAY_SIZES*100/원본최장변을 적용한 비교값이다. 원화 전체 atlas/frameSize 숫자와 실제 보이는 몸체 크기를 혼동하지 않는다. DPR 물리픽셀이 아닌 CSS px이며 애니메이션 다른 프레임·줌에 따라 외곽은 달라질 수 있다.
+- 원인 확인: 실험실 fighter는 UNIT_DISPLAY_SIZES를 참조하지 않고 모든 종에 공통 image-box 크기를 사용한다. 실제 게임 prepareUnitDisplaySize는 종별 target/원본 alpha16 최장변으로 정규화한다. 흰발/꽃꼬리새의 실제 최장변 비율144/26=5.5385이나 실험실192.5/172.1=1.1185다. 이전 피벗 수정 결과가 잘못됐다는 근거가 아니라 별도 크기 배율 적용 누락이다.
+- 23종 계산 결과(실험실 / 게임100px칸, 각각 가로×세로 CSSpx, 소수1자리): 새싹콩99×122.6/32.3×40;포자버섯209.3×150.8/38×27.4;몽돌200.3×148.5/42×31.1;샘방울114.8×142.9/31.3×39;꽃꼬리새172.1×157.8/26×23.8;이슬토끼155.3×171/26.3×29;흙두더지200.9×141.3/35×24.6;보따리달팽이179.2×139.3/38×29.5;솜양189×172.3/32×29.2;굴림도토리169.8×163.2/38×36.5;방울두꺼비185×129.8/52×36.5;올가미덩굴142×168.2/52.4×62;가시등딱정벌레179×142.4/58×46.2;흙멧돼지181×133.2/66×48.6;넝쿨거북206.1×150.8/52×38;그늘족제비208.6×87.7/72×30.3;갈퀴부엉이122.5×156.9/60.9×78;봄지기173.9×150.9/88×76.4;등불지기184.4×168/92×83.8;오래된등짐195.4×186.9/100×95.6;걸어가는산216.6×184.1/112×95.2;흰발192.5×109.4/144×81.8;가시등우두머리216.6×188/124×107.7.
+- 상태: 이번 단계 제품/배포/Git 변경 없음. 사용자에게 위 기준을 명시한 정수 반올림 표를 제시한다. 이후 크기 적용은 표를 우선 보라는 최신 지시 이후의 사용자 방향을 따른다. 이 기록만 메모리 예외로 갱신했다.
 ## 병행 HEAD 전진 보존·커밋 후보 메모리 재기준화 · 01a1a5fd
 
 - 기록 ID: combat-lab-commit-rebase-2993783-20261104-01a1a5fd. 기록 시각: 2026-11-04T21:00:40+09:00. 기록자·범위재대조 Codex /root/battle_lab_background(gpt-6.1-sol low), 원로컬커밋승인 사용자, HEAD경합가드/재기준화검수 부모 /root. 출처현재채팅01a1a5fd-bf0b-70a3-abf8-267f88676072 및실제Git읽기/부모메시지. H:/Spawner Windows/PowerShell,원발언정확시각·턴ID불명.

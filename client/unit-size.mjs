@@ -9,6 +9,8 @@ export const UNIT_DISPLAY_SIZES = Object.freeze({
 });
 
 export function unitDisplaySize(unit) {
-  const scale=Array.isArray(unit.dna?.pieces)?1+.01*unit.dna.pieces.length:1;
+  const count = Array.isArray(unit.dna?.pieces) ? unit.dna.pieces.length :
+    Number.isFinite(unit.stats?.pieceCount) ? Math.max(0, unit.stats.pieceCount) : 0;
+  const scale = 1 + .01 * count;
   return (UNIT_DISPLAY_SIZES[unit.species || unit.tribe || "bean"] || UNIT_DISPLAY_SIZES.bean)*scale;
 }

@@ -18,6 +18,20 @@ async function animator(tribe) {
   return art;
 }
 
+test("속성 rig는 현재 등록된 시트 셀과 피벗으로 원본을 자른다", async () => {
+  for (const tribe of ["spore", "pebble", "spring"]) {
+    const art = await animator(tribe), animations = UNIT_ANIMATIONS[tribe];
+    const agent = { id: "registered-" + tribe, tribe, attributes: { feet: 1 } };
+    for (const action of ["idle", "walk", "attack", "hurt"]) {
+      const pose = art.pose(agent, { action, animation: animations[action], frame: 0 }, 100);
+      const expected = animations[pose.sourceAction];
+      assert.equal(pose.sourceAnimation.frameSize, expected.frameSize);
+      assert.equal(pose.sourceAnimation.pivotX, expected.pivotX);
+      assert.equal(pose.sourceAnimation.pivotY, expected.pivotY);
+    }
+  }
+});
+
 test("낮아진 버섯 대기 자세를 이동 첫 순간까지 유지하고 작화 프레임으로 중립 자세에 연결한다", async () => {
   const art = await animator("spore"), animations = UNIT_ANIMATIONS.spore;
   const agent = { id: "transition", tribe: "spore", attributes: { antenna: 1, strength: 1, feet: 1 } };

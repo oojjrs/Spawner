@@ -17,6 +17,18 @@ function fixture(tribe) {
   return { game, environment };
 }
 
+test("사체 스냅샷과 저장할 월드 사체는 사망 시 DNA 실제 조각 수를 보존한다", () => {
+  for (const tribe of ["bean", "spore", "pebble", "spring"]) for (const count of [0, 20]) {
+    const { game, environment } = fixture(tribe), agent = game.agents[0];
+    agent.dna = { version: 3, pieces: Array(count).fill({ gene: "health" }) };
+    game.receiveDamage(agent, 100000);
+    const corpse = game.snapshot().corpses.find(value => value.agentId === agent.id);
+    assert.equal(corpse.stats.pieceCount, count);
+    assert.equal([...environment.food.values()].find(value => value.agentId === agent.id).stats.pieceCount, count);
+    assert.equal(JSON.parse(JSON.stringify(corpse)).stats.pieceCount, count);
+  }
+});
+
 test("모든 종족은 비용과 무관하게 비자원 사체를 3초 남긴다", () => {
   assert.equal(CORPSE_LIFETIME, 3);
   for (const tribe of ["bean", "spore", "pebble", "spring"]) for (const cost of [0, .1, 10]) {

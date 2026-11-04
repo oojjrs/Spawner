@@ -1,4 +1,5 @@
 import { createTribeMorphology, TRIBE_MORPHOLOGY_ASSETS } from "./attribute-morphology.mjs";
+import { UNIT_ANIMATIONS } from "./unit-animation.mjs";
 
 export const TRIBE_ATTRIBUTE_ASSETS = Object.freeze(["spore", "pebble", "spring"].flatMap(tribe => {
   const root = "DesignAssets/Tribes/" + tribe + "/Animations/Attributes/v1/";
@@ -160,6 +161,8 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
       const response = await fetch(assetSource(path));
       if (!response.ok) throw new Error("종족 파츠를 불러오지 못했습니다.");
       const rig = await response.json();
+      rig.animations = Object.fromEntries(Object.entries(rig.animations).map(([action, animation]) =>
+        [action, { ...animation, ...UNIT_ANIMATIONS[tribe]?.[action] }]));
       rig.parts = Object.fromEntries(Object.entries(rig.parts).filter(([attribute]) => Object.hasOwn(attachments[tribe], attribute)));
       await Promise.all(Object.entries(rig.parts).flatMap(([attribute, parts]) => parts.map(async part => {
         part.sprite = await loadImage(part.image);

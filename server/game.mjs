@@ -1579,6 +1579,7 @@ export function createGame(environment, colony, savedGame) {
         level: agent.level, tribe: agent.tribe, bornAt: agent.bornAt, diedAt: state.simSeconds, decaysAt: state.simSeconds + CORPSE_LIFETIME,
         hurtStartedAt: agent.hurtStartedAt, hurtCount: agent.hurtCount,
         cost: agent.cost, kind: "corpse",
+        stats: { pieceCount: agent.dna?.pieces.length ?? agent.stats?.pieceCount ?? 0 },
         attributes: { ...agent.attributes }, appearanceAttributes: { ...agent.appearanceAttributes } }];
       if (agent.carrying > 0 && resourceDefinition(agent.carryingType)) {
         const resourceType = agent.carryingType || "honey-mushrooms";

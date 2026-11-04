@@ -2,6 +2,7 @@ import { COMBAT_LAB_UNITS } from "./combat-lab.mjs";
 import { AGENT_DEATH_ANIMATION } from "./agent-death.mjs";
 import { imageAnimation, imageFrameGeometry } from "./image-geometry.mjs";
 import { unitDisplaySize } from "./unit-size.mjs";
+import { unitRangedAppearance, unitRangedPose, unitRangedDisplaySize, unitRangedProjectile } from "./unit-ranged.mjs";
 import { UNIT_IMAGE_BOUNDS } from "./unit-image-bounds.mjs";
 import { UNIT_ANIMATIONS, CREATURE_IDLE_ANIMATIONS, CREATURE_ATTACK_ANIMATIONS, CREATURE_HURT_ANIMATIONS, CREATURE_DEATH_ANIMATIONS, unitAnimationPose, unitAnimationFrame, creatureHurtPose, creatureAttackPose } from "./unit-animation.mjs";
 import { TALON_OWL_IDLE, talonOwlIdleFrame } from "./talon-owl-idle.mjs";
@@ -11,7 +12,13 @@ const colors = ["#c4e19c", "#efba90"];
 const reactionLabels = { dodge: "회피", parry: "패링", block: "블록", stun: "기절", counter: "반격", heal: "치유", shoot: "사격" };
 const beetleCorpse = imageAnimation({ image: "DesignAssets/Animations/BeetleDeath/dead-v2.png", frameSize: 185, columns: 1, pivotX: 95.5, pivotY: 163 });
 
+function stageAgent(agent) {
+  if (agent.species || agent.tribe || !agent.key) return agent;
+  return UNIT_ANIMATIONS[agent.key] ? { ...agent, tribe: agent.key } : { ...agent, species: agent.key };
+}
+
 function displaySize(agent, pose) {
+  if (pose?.animation.rangedBody || !pose && unitRangedAppearance(agent)) return unitRangedDisplaySize(agent);
   const key = agent.species || agent.tribe || agent.key;
   const idle = UNIT_ANIMATIONS[key]?.idle || CREATURE_IDLE_ANIMATIONS[key] ||
     (key === "talon-owl" ? TALON_OWL_IDLE : BEETLE_SPRITE);
@@ -35,6 +42,8 @@ function clamp(value) {
 }
 
 function poseFor(agent, time, deathAge) {
+  const ranged = unitRangedPose(agent, time);
+  if (ranged) return ranged;
   const death = agent.tribe === "bean" ? AGENT_DEATH_ANIMATION : UNIT_ANIMATIONS[agent.tribe]?.death || CREATURE_DEATH_ANIMATIONS[agent.species];
   if (agent.health <= 0 && death) return { action: "death", animation: death, frame: unitAnimationFrame(death, deathAge * 1000) };
   if (agent.species === "spiny-back-beetle") {
@@ -108,6 +117,7 @@ export function createCombatStage(canvas) {
 
   function formationScale(width, height) {
     const bounds = currentTrial.agents.map(agent => {
+      agent = stageAgent(agent);
       const key = agent.species || agent.tribe || agent.key;
       const idle = UNIT_ANIMATIONS[key]?.idle || CREATURE_IDLE_ANIMATIONS[key] ||
         (key === "talon-owl" ? TALON_OWL_IDLE : BEETLE_SPRITE);
@@ -121,6 +131,8 @@ export function createCombatStage(canvas) {
   }
 
   function readyPose(agent, requested, time) {
+    const ranged = unitRangedAppearance(agent);
+    if (ranged) { image(ranged.idle.image); image(ranged.animation.image); image(unitRangedProjectile(agent).image); }
     const animations = UNIT_ANIMATIONS[agent.tribe];
     for (const animation of [animations?.idle, animations?.attack, animations?.hurt, animations?.death,
       agent.tribe === "bean" ? AGENT_DEATH_ANIMATION : null, agent.species === "spiny-back-beetle" ? beetleCorpse : null,
@@ -128,6 +140,13 @@ export function createCombatStage(canvas) {
     let pose = requested;
     let source = pose?.animation.image || COMBAT_LAB_UNITS.find(unit => unit.key === agent.key)?.image || BEETLE_NEUTRAL_ASSET;
     let asset = image(source);
+    if (!asset && ranged) {
+      const previous = readyPoses.get(agent.id);
+      if (previous?.pose?.animation.rangedBody) { pose = previous.pose; source = previous.source; asset = image(source); }
+      if (!asset) { pose = { action: "idle", animation: ranged.idle, frame: 0, mirrorX: agent.facing < 0 }; source = ranged.idle.image; asset = image(source); }
+      if (asset) readyPoses.set(agent.id, { pose, source });
+      return { pose, source, asset };
+    }
     if (!asset) {
       const previous = readyPoses.get(agent.id);
       if (previous) { pose = previous.pose; source = previous.source; asset = image(source); }
@@ -144,6 +163,7 @@ export function createCombatStage(canvas) {
 
   function fighter(agent, index, width, height, time, ended) {
     const point = position(agent, index, width, height, time), alive = agent.health > 0;
+    agent = stageAgent(agent);
     if (!alive && !deathStarted.has(agent.id)) deathStarted.set(agent.id, clock);
     const deathAge = alive ? 0 : clock - deathStarted.get(agent.id);
     const requested = poseFor(agent, time, deathAge);
@@ -251,6 +271,7 @@ export function createCombatStage(canvas) {
   }
 
   function supportArt(agent, points, width, height, time) {
+    agent = stageAgent(agent);
     const point = supportPoint(agent, points, width, height), requested = poseFor(agent, time, 0);
     const { pose, source, asset } = readyPose(agent, requested, time);
     const geometry = pose && imageFrameGeometry(pose.animation, pose.frame);
@@ -283,6 +304,16 @@ export function createCombatStage(canvas) {
   function projectileArt(projectile, points, time, height) {
     const source = points[projectile.source.id], target = points[projectile.target.id];
     const progress = clamp((time - projectile.launchedAt) / Math.max(.001, projectile.at - projectile.launchedAt));
+    const sprite = unitRangedProjectile(stageAgent(projectile.source)), asset = sprite && image(sprite.image);
+    if (sprite && asset) {
+      const scale = sprite.sourceScale * formationScale(canvas.clientWidth, canvas.clientHeight);
+      const startX = source.x + source.direction * (sprite.outletX - 256) * scale;
+      const startY = source.y + (sprite.outletY - 448) * scale;
+      const x = startX + (target.x - startX) * progress, y = startY + (target.y - height * .04 - startY) * progress;
+      context.save(); context.translate(x, y); context.rotate(Math.atan2(target.y - height * .04 - startY, target.x - startX));
+      context.drawImage(asset, -sprite.width * scale / 2, -sprite.height * scale / 2, sprite.width * scale, sprite.height * scale);
+      context.restore(); return;
+    }
     context.save(); context.fillStyle = "#e5e9a4"; context.shadowColor = "#e5e9a4"; context.shadowBlur = 8;
     context.beginPath(); context.arc(source.x + (target.x - source.x) * progress, source.y - height * .3, 5, 0, Math.PI * 2); context.fill(); context.restore();
   }
