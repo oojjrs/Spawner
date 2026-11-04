@@ -43,7 +43,7 @@ p{margin:0;color:#6d796e;font-size:12px;line-height:1.7}
 .action-bar>i{display:block;height:100%;background:#dfdba0;transition:width .06s linear}
 .reaction{display:block;height:21px;margin-top:7px;color:#dce7b6;font-size:11px;letter-spacing:1px}
 .stage-view{position:relative;margin-top:-1px}
-.stage-view>canvas{display:block;width:100%;height:350px;max-width:100%}
+.stage-view>canvas{display:block;width:100%;height:auto;aspect-ratio:15/7;max-width:100%}
 .stage-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 22px;background:#20372a;border-top:1px solid #d1e5b31f}
 .actions{display:flex;flex-wrap:wrap;gap:9px;margin:16px 0}
 .stage-footer .actions{margin:0;gap:7px}
@@ -89,17 +89,19 @@ main{padding:20px 12px 40px}header{margin-bottom:16px}h1{font-size:25px}p{font-s
 .stage{border-radius:14px}.stage-hud{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 24px;padding:16px 16px 0}
 .stage-side.right{grid-column:2}.stage-center{grid-column:1/-1;grid-row:2;flex-direction:row;flex-wrap:wrap}.stage-center .status{padding:5px 14px;font-size:11px;max-width:calc(100% - 52px);margin-top:0}
 .stage-side select{font-size:16px;min-height:35px}.hp{margin-top:9px}.hp strong{font-size:13px}.reaction{margin-top:5px;height:17px;font-size:10px}
-.stage-view>canvas{height:255px}.stage-footer{flex-direction:column;align-items:stretch;gap:10px;padding:12px}
+.stage-footer{flex-direction:column;align-items:stretch;gap:10px;padding:12px}
 .stage-footer .actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}.stage-footer button{padding:8px 4px;font-size:11px;min-height:40px}
 .phase{text-align:center;font-size:10px;min-height:14px}.arena{grid-template-columns:1fr;gap:14px}.fighter,.panel{padding:16px;border-radius:12px}
 .controls{gap:9px;margin:16px 0}.controls>.field{flex-basis:100px;max-width:none}.rule-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .stat-grid{gap:8px}.organs{gap:10px}.panel .actions button{flex:1 1 120px}th,td{padding:10px 8px}
 }
 @media(max-width:360px){
-main{padding:16px 8px 32px}.stage-hud{gap:8px 18px;padding:14px 12px 0}.stage-side select{font-size:15px}.stage-view>canvas{height:240px}
+main{padding:16px 8px 32px}.stage-hud{gap:8px 18px;padding:14px 12px 0}.stage-side select{font-size:15px}
 .stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.derived{font-size:11px}.controls{gap:8px}.rule-grid{gap:8px}.field{font-size:11px}button,select,input[type=number]{padding:8px}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;scroll-behavior:auto!important}}
 .controls>.support-field{display:flex;flex-direction:row-reverse;align-items:center;justify-content:flex-end;gap:6px;min-height:42px}
 .support-field input{width:17px;height:17px;margin:0;accent-color:#567644}
 .organs input[type=number]{width:64px;height:42px}
+
+.roster-actions{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}.roster-actions button{min-height:32px;padding:4px 8px;font-size:11px;background:#2b4434;color:#e9edda;border-color:#a6bf8659}.roster-actions button:hover:not(:disabled){background:#3c5740;border-color:#a6bf8699}.roster-actions button:disabled{background:#304236;color:#bdcbbb;border-color:#627760;opacity:1;cursor:default}

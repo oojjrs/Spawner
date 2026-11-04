@@ -6,6 +6,8 @@ import { createCombatStage } from "./combat-stage.mjs";
 const sides = ["left", "right"], elements = {}, inputs = {};
 const builds = Object.fromEntries(sides.map((side, index) => [side, { key: index ? "spore" : "bean", name: index ? "오른쪽" : "왼쪽",
   organs: { attack: 1, ranged: 0, heal: 0 }, counts: Object.fromEntries(SIMULATION_STATS.map(stat => [stat.key, ({power:4,vitality:5,armor:2,haste:2})[stat.key] || 0])) }]));
+const rosters = Object.fromEntries(sides.map(side => [side, [builds[side]]]));
+const selected = { left: 0, right: 0 };
 let rules = { ...DEFAULT_SIMULATION_RULES }, trial, playing = false, lastFrame = 0, renderedRows = -1, generation = 0, batchBusy = false, controlId = 0;
 const main = document.querySelector("main");
 main.replaceChildren();
@@ -66,6 +68,18 @@ for (const side of sides) {
   const card = node("section", null, "fighter " + side); elements[side + "Card"] = card; inputs[side] = {};
   const hud = node("div", null, "stage-side " + side); stageHud.append(hud);
   hud.append(node("h2", builds[side].name));
+  const roster = control(hud, "편성", select([["0", builds[side].name + " 1"]], "0"));
+  elements[side + "Roster"] = roster;
+  roster.addEventListener("change", () => { selected[side] = Number(roster.value); selectBuild(side); render(); drawCurve(); });
+  const rosterActions = node("div", null, "roster-actions");
+  button(rosterActions, "유닛 추가", () => {
+    rosters[side].push(structuredClone(builds[side])); selected[side] = rosters[side].length - 1; selectBuild(side); changed();
+  });
+  elements[side + "Remove"] = button(rosterActions, "유닛 제거", () => {
+    if (rosters[side].length <= 1) return;
+    rosters[side].splice(selected[side], 1); selected[side] = Math.min(selected[side], rosters[side].length - 1); selectBuild(side); changed();
+  });
+  hud.append(rosterActions);
   const appearance = control(hud, "외형", select(COMBAT_LAB_UNITS.map(unit => [unit.key, unit.name]), builds[side].key));
   appearance.addEventListener("change", () => { builds[side].key = appearance.value; changed(); }); inputs[side].appearance = appearance;
   const hp = node("div", null, "hp"); elements[side + "Hp"] = node("strong"); hp.append(node("span", "HP"), elements[side + "Hp"]); hud.append(hp);
@@ -132,9 +146,18 @@ const batchActions = node("div", null, "actions"); elements.repeat = button(batc
 elements.batch = node("output", null, "batch-result"); elements.batch.setAttribute("aria-live","polite"); batchPanel.append(elements.batch); main.append(batchPanel);
 const ledger = node("section", null, "panel"); ledger.append(node("h2","사건 기록"));
 const scroll = node("div", null, "scroll"); const table = node("table"); const thead = node("thead"), headrow=node("tr");
-for (const label of ["시각","사건","공격자","피해","연타","왼쪽 HP","오른쪽 HP"]) headrow.append(node("th",label)); thead.append(headrow); elements.history=node("tbody"); table.append(thead,elements.history); scroll.append(table); ledger.append(scroll); main.append(ledger);
+for (const label of ["시각","사건","공격자","대상","피해","연타","왼쪽 HP","오른쪽 HP"]) headrow.append(node("th",label)); thead.append(headrow); elements.history=node("tbody"); table.append(thead,elements.history); scroll.append(table); ledger.append(scroll); main.append(ledger);
 for (const key of ["pieceLimit","first","seed","random","distance","support"]) elements[key].addEventListener("change", changed);
-function settings(seed) { return {left:structuredClone(builds.left),right:structuredClone(builds.right),rules:{...rules},seed,random:elements.random.value==="true",first:elements.first.value,distance:Number(elements.distance.value),support:elements.support.checked}; }
+function selectBuild(side) {
+  builds[side] = rosters[side][selected[side]];
+  for (const stat of SIMULATION_STATS) inputs[side][stat.key].value = builds[side].counts[stat.key];
+  for (const key of ["attack", "heal", "ranged"]) inputs[side][key].value = builds[side].organs[key];
+  inputs[side].appearance.value = builds[side].key;
+}
+function rosterSettings(side) {
+  return rosters[side].map((build, index) => ({ ...structuredClone(build), name: (side === "left" ? "왼쪽 " : "오른쪽 ") + (index + 1) }));
+}
+function settings(seed) { return {left:rosterSettings("left"),right:rosterSettings("right"),selected:{...selected},rules:{...rules},seed,random:elements.random.value==="true",first:elements.first.value,distance:Number(elements.distance.value),support:elements.support.checked}; }
 function changed() { generation++; elements.batch.textContent=""; reset(); }
 function settingError(error) { return /[가-힣]/.test(error.message) ? error.message : "입력 수치와 규칙의 상한·최소값을 확인해 주세요."; }
 function reset() {
@@ -146,7 +169,7 @@ function reset() {
     if(!elements.pieceLimit.value.trim()||!Number.isSafeInteger(pieceLimit)||pieceLimit<0)throw Error("비교 조각 수는 0 이상의 안전한 정수로 입력해 주세요.");
     for(const side of sides)for(const stat of SIMULATION_STATS)if(!inputs[side][stat.key].value.trim()||!Number.isSafeInteger(builds[side].counts[stat.key])||builds[side].counts[stat.key]<0)throw Error("조각 수는 0 이상의 안전한 정수로 입력해 주세요.");
     for(const side of sides)for(const key of ["attack","heal","ranged"])if(!inputs[side][key].value.trim()||!Number.isSafeInteger(builds[side].organs[key])||builds[side].organs[key]<0)throw Error("조각 수는 0 이상의 안전한 정수로 입력해 주세요.");
-    for(const side of sides)if(deriveSimulationStats(builds[side],rules).pieceCount>pieceLimit)throw Error(builds[side].name+"의 비교 조각 수를 초과했습니다.");
+    for(const side of sides)for(const build of rosters[side])if(deriveSimulationStats(build,rules).pieceCount>pieceLimit)throw Error(builds[side].name+"의 비교 조각 수를 초과했습니다.");
     trial=createSimulationTrial(settings(Number(elements.seed.value)));
     elements.status.textContent="대결 준비";
   } catch(error) { trial=null;elements.status.textContent=settingError(error); }
@@ -158,7 +181,11 @@ function render() {
   stage.dataset.state = !trial ? "invalid" : trial.result()?.reason ? "ended" : playing ? "playing" : "paused";
   for(const side of sides) {
     try {
-      const stats=deriveSimulationStats(builds[side],rules),agent=trial?.agents[sides.indexOf(side)];
+      const stats=deriveSimulationStats(builds[side],rules),agent=trial?.agents.find(agent => agent.ownerId === side && agent.slot === selected[side]);
+      const options = rosters[side].map((build, index) => [String(index), (side === "left" ? "왼쪽 " : "오른쪽 ") + (index + 1)]);
+      const roster = elements[side + "Roster"];
+      if (roster.options.length !== options.length) roster.replaceChildren(...options.map(([value, label]) => { const option = node("option", label); option.value = value; return option; }));
+      roster.value = String(selected[side]); elements[side + "Remove"].disabled = rosters[side].length <= 1 || batchBusy;
       elements[side+"Pieces"].textContent="조각 수 "+stats.pieceCount+" / "+elements.pieceLimit.value;
       elements[side+"Pieces"].dataset.over=String(stats.pieceCount>Number(elements.pieceLimit.value));
       elements[side+"Hp"].textContent=(agent?agent.health:stats.health).toFixed(1)+" / "+stats.health.toFixed(1);
@@ -183,7 +210,7 @@ function render() {
   if(renderedRows!==trial.history.length) {
     renderedRows=trial.history.length;
     const labels={hit:"타격",critical:"치명",miss:"빗나감",evasion:"회피",dodge:"회피",parry:"패링",block:"블록",stun:"기절",counter:"반격",attack:"공격 준비",death:"사망",drain:"흡혈",heal:"치유",shoot:"사격"};
-    elements.history.replaceChildren(...trial.history.slice(-120).map(event=>{const row=node("tr");for(const value of [event.time.toFixed(2),event.counter?"반격 "+(labels[event.kind]||event.kind):(labels[event.kind]||event.kind),event.attackerId==="left"?"왼쪽":event.attackerId==="right"?"오른쪽":"—",(event.critical?"치명 ":"")+(Number(event.damage)||0).toFixed(2),event.hitIndex==null?"—":(event.hitIndex+1)+"/"+event.hitCount,Number(event.leftHealth).toFixed(1),Number(event.rightHealth).toFixed(1)])row.append(node("td",String(value)));return row;}));
+    elements.history.replaceChildren(...trial.history.slice(-120).map(event=>{const row=node("tr");for(const value of [event.time.toFixed(2),event.counter?"반격 "+(labels[event.kind]||event.kind):(labels[event.kind]||event.kind),trial.agents.find(agent=>agent.id===event.attackerId)?.name||"—",trial.agents.find(agent=>agent.id===event.targetId)?.name||"—",(event.critical?"치명 ":"")+(Number(event.damage)||0).toFixed(2),event.hitIndex==null?"—":(event.hitIndex+1)+"/"+event.hitCount,Number(event.leftHealth).toFixed(1),Number(event.rightHealth).toFixed(1)])row.append(node("td",String(value)));return row;}));
   }
 }
 function drawCurve() {
