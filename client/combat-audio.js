@@ -96,7 +96,9 @@
       active.add(key);
       const rpg = action === "attack" && unit.attack?.combatId && !unit.attack.exchange && Number.isFinite(unit.attack.hitAt);
       const at = rpg ? unit.attack.hitAt - Math.min(.05, (unit.attack.hitAt - startedAt) * .2) : startedAt + sound.at;
-      if (initial || time + 1e-8 >= at) {
+      // Seed only cues that have already happened on reconnect. Future cues
+      // in an in-flight animation must remain eligible at their authored time.
+      if (time + 1e-8 >= at) {
         if (!initial && playback.events.get(key) !== stamp && time - at <= .2) events.push({ name: sound.name, unit });
         playback.events.set(key, stamp);
       }

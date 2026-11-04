@@ -236,3 +236,51 @@ test("이동음이 채널을 채워도 피격·사망음이 우선하며 모든 
   assert.ok(gains.every(gain => Number.isFinite(gain.gain.value)));
   engine.stop();
 });
+
+
+test("재접속 시 진행 중인 공격의 미래 타격음은 남기고 지난 소리는 재생하지 않는다", () => {
+  for (const tribe of ["bean", "spore", "pebble", "spring"]) {
+    const unit = { id: tribe, tribe, health: 10, attack: { startedAt: 10, speed: 1 } };
+    const playback = combat.create();
+    assert.equal(combat.update(playback, [unit], [], 10.1).length, 0);
+    assert.deepEqual(names(combat.update(playback, [unit], [], 10.24)), ["unit-attack"]);
+    assert.equal(combat.update(playback, [unit], [], 10.25).length, 0);
+    combat.reset(playback);
+    assert.equal(combat.update(playback, [unit], [], 10.26).length, 0);
+    assert.equal(combat.update(playback, [unit], [], 10.27).length, 0);
+  }
+});
+
+test("재접속 직후 미래 피격·사망 큐는 사체 전환 후에도 한 번만 재생한다", () => {
+  const unit = { id: "victim", tribe: "pebble", health: 0, deathStartedAt: 10,
+    hurtStartedAt: 10, hurtCount: 1 };
+  const playback = combat.create();
+  assert.equal(combat.update(playback, [unit], [], 10.01).length, 0);
+  const corpse = { ...unit, agentId: unit.id, diedAt: 10 };
+  assert.deepEqual(names(combat.update(playback, [], [corpse], 10.02)), ["pebble-hurt"]);
+  assert.deepEqual(names(combat.update(playback, [], [corpse], 10.12)), ["pebble-death"]);
+  assert.equal(combat.update(playback, [], [corpse], 10.13).length, 0);
+});
+
+test("중립 19종 재접속은 타격 직전 큐를 누락하거나 반복하지 않는다", () => {
+  for (const species of ["spiny-back-beetle", ...ENCOUNTER_TYPES.map(type => type.key)]) {
+    const unit = { id: species, species, health: 10, mode: "attack", attackStartedAt: 10,
+      attack: { startedAt: 10, speed: 1 } };
+    const sound = combat.cue(combat.material(unit), "attack", 1);
+    const playback = combat.create();
+    assert.equal(combat.update(playback, [unit], [], 10 + sound.at / 2).length, 0);
+    assert.equal(combat.update(playback, [unit], [], 10 + sound.at - .001).length, 0);
+    assert.deepEqual(names(combat.update(playback, [unit], [], 10 + sound.at)), [sound.name]);
+    assert.equal(combat.update(playback, [unit], [], 10 + sound.at + .001).length, 0);
+  }
+});
+
+test("전투 서버 hitAt 기준 큐는 재접속 후에도 실제 타격 직전에 한 번만 재생한다", () => {
+  const unit = { id: "rpg", tribe: "spring", health: 10,
+    attack: { combatId: "fight", startedAt: 10, hitAt: 10.4, speed: 1 } };
+  const playback = combat.create();
+  assert.equal(combat.update(playback, [unit], [], 10.1).length, 0);
+  assert.equal(combat.update(playback, [unit], [], 10.349).length, 0);
+  assert.deepEqual(names(combat.update(playback, [unit], [], 10.35)), ["unit-attack"]);
+  assert.equal(combat.update(playback, [unit], [], 10.36).length, 0);
+});
