@@ -1,6 +1,7 @@
 import { attackAnimationElapsed, AGENT_ATTACK_HIT_TIME } from "../server/attack.mjs";
 import { CREATURE_ATTACK_TIMINGS } from "../server/creature-attack.mjs";
 import { imageAnimation } from "./image-geometry.mjs";
+import { CREATURE_MOVEMENT_PROFILES } from "../server/creature-movement-profiles.mjs";
 
 export const UNIT_ANIMATIONS = Object.freeze({
   "bean": {
@@ -220,6 +221,32 @@ export function creatureWalkPose(agent, time) {
   if (agent.species === "spring-keeper") return springKeeperFlightPose(agent, time);
   const progress = Math.max(0, (agent.stepCount || 1) - 1) + elapsed / agent.moveDuration;
   return { animation, frame: unitAnimationFrame(animation, progress * (animation.cyclesPerCell || 1) * animation.durationMs) };
+}
+
+export function creatureAnimationSpeed(species) {
+  return CREATURE_MOVEMENT_PROFILES[species]?.speed || 1;
+}
+
+export function unitMovementPosition(agent, time, reducedMotion = false) {
+  const raw = agent.moveDuration > 0 ? Math.max(0, Math.min(1, (time - agent.moveStartedAt) / agent.moveDuration)) : 1;
+  const attributes = agent.appearanceAttributes || agent.attributes || {};
+  const beanHop = !agent.species && (agent.tribe || "bean") === "bean" && !attributes.feet;
+  let progress = raw, travel = raw;
+  if (!reducedMotion && beanHop) {
+    progress = Math.max(0, Math.min(1, (raw - .18) / .82));
+    travel = progress * progress * (3 - 2 * progress);
+  } else if (!reducedMotion && agent.species) {
+    const animation = CREATURE_WALK_ANIMATIONS[agent.species], window = animation?.travelWindow;
+    if (window) {
+      const cycles = animation.cyclesPerCell || 1;
+      const phase = raw * cycles, complete = Math.floor(phase), local = phase - complete;
+      const airborne = Math.max(0, Math.min(1, (local - window[0]) / (window[1] - window[0])));
+      travel = (complete + airborne * airborne * (3 - 2 * airborne)) / cycles;
+      if (raw === 1) travel = 1;
+    }
+  }
+  return { x: agent.moveDuration ? agent.renderFromX + (agent.x - agent.renderFromX) * travel : agent.x,
+    y: agent.moveDuration ? agent.renderFromY + (agent.y - agent.renderFromY) * travel : agent.y, progress };
 }
 
 export function springKeeperFlightPose(agent, time) {

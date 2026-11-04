@@ -3,8 +3,8 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
 import { sproutRootGeometry } from "./sprout-roots.mjs";
-import { ATTRIBUTES } from "../server/attributes.mjs";
-import { UNIT_ANIMATIONS, unitAnimationPose } from "./unit-animation.mjs";
+import { ATTRIBUTES, COMBAT_ATTRIBUTE_KEYS } from "../server/attributes.mjs";
+import { UNIT_ANIMATIONS, unitAnimationPose, unitMovementPosition } from "./unit-animation.mjs";
 import { SPORE_BIRTH_ANIMATION } from "./birth.mjs";
 import { combatAttributeKeys, hasCombatEvolution } from "./combat-attributes.mjs";
 import { createNestGrowthPlayback, nestGrowthSounds } from "./nest-growth.mjs";
@@ -23,7 +23,7 @@ function movement() {
     constructor() { this.complete = true; this.naturalWidth = 2048; }
     async decode() {}
   }
-  const context = createContext({ Image, performance, Spawner: { UNIT_ANIMATIONS, combatAttributeKeys, hasCombatEvolution, unitAnimationPose, sproutRootGeometry }, assetSource: path => path,
+  const context = createContext({ Image, performance, Spawner: { UNIT_ANIMATIONS, combatAttributeKeys, hasCombatEvolution, unitAnimationPose, unitMovementPosition, sproutRootGeometry }, assetSource: path => path,
     unitAnimationSheets: new Map(), combatAttributeArt: { ready: () => true, frame: () => ({ width: 512, height: 512 }) },
     drawAgentFeet() {}, drawAgentTail() {}, drawAgentHead() {},
     state: { simSeconds: .5 }, idleMotion: { matches: false }, AGENT_JUMP_PREPARATION: .2, AGENT_HEIGHT: .7,
@@ -188,13 +188,14 @@ test("전투 외형의 모든 새싹콩 조합도 기본 콩과 같은 점프 �
   }
 });
 
-test("재생 단독 합성은 기본 몸체 점프를 한 번만 적용하고 표시 속성의 다리 유무를 따른다", () => {
+test("전투 속성 합성은 기본 몸체 점프를 한 번만 적용하고 표시 속성의 다리 유무를 따른다", () => {
   const render = movement(), painted = [];
   render.context.combatAttributeArt.frame = (agent, time, scale, drawBody) => {
     drawBody({ ...render.context.ctx, translate: (...args) => painted.push(args) });
     return { width: 512, height: 512 };
   };
-  for (const attributes of [{ regeneration: 1 }]) {
+  for (const key of COMBAT_ATTRIBUTE_KEYS) {
+    const attributes = { [key]: 1 };
     const agent = { tribe: "bean", attributes, health: 10, x: 1, y: 0, renderFromX: 0, renderFromY: 0,
       moveStartedAt: 0, moveDuration: 1, stepCount: 1, carrying: 0 };
     render.context.state.simSeconds = .6;

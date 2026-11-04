@@ -42,7 +42,7 @@ test("이슬토끼 착지음은 실제 착지 프레임을 따르고 이동 속�
   for (const duration of [2, 1]) {
     const unit = agent("dew-rabbit"), playback = audio.create();
     unit.moveDuration = duration;
-    const contact = duration * .28;
+    const contact = duration * units.CREATURE_WALK_ANIMATIONS["dew-rabbit"].travelWindow[1];
     audio.update(playback, [unit], 0, animations);
     const times = [];
     for (let time = .05; time < contact - .01; time += .05) times.push(time);

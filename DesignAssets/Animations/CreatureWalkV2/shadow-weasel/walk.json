@@ -25,5 +25,15 @@
   "renderer": "render.py",
   "preview": "preview.webp",
   "thumbnail": "thumb.webp",
-  "viewSize": 256
+  "viewSize": 256,
+  "gaitRepair": {
+    "source": "rear-gait-repair.png",
+    "frames": 8,
+    "rowWidth": 2172,
+    "rowCropTop": 230,
+    "cellWidth": 271.5,
+    "runtimeFrameSize": 256,
+    "note": "Lower pelvis and animate alternating planted hind feet; keep original idle art unchanged.",
+    "runtimeGenerator": "render-repair.py"
+  }
 }

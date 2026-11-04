@@ -1,0 +1,1091 @@
+{
+  "method": "Review original idle landmarks against movement drawings. Fixed physical scale per strip; no frame-boundary fitting. Small rigid-shell registration jitter filtered independently of authored leap/flight trajectories.",
+  "creatures": [
+    {
+      "key": "flower-tail-bird",
+      "idleImage": "DesignAssets/Animations/CreatureIdleV3/flower-tail-bird/idle.webp",
+      "walkImage": "DesignAssets/Animations/CreatureWalkV2/flower-tail-bird/walk.webp",
+      "idlePatch": [
+        164,
+        196,
+        238,
+        264
+      ],
+      "walkPatch": [
+        108,
+        149,
+        182,
+        217
+      ],
+      "score": 0.9725992679595947,
+      "scaleFactor": 1,
+      "frameSize": 388,
+      "viewSize": 388,
+      "pivotX": 170.0,
+      "pivotY": 320.0,
+      "groundRadiusX": 0.14433,
+      "groundRadiusY": 0.043814,
+      "idleSha256": "627a1f48776554dd93cb7552d43b19f125834e302019b6ab080bdaa73feda4b8",
+      "walkSha256": "f4a0300443ae134db9d3fcb31d36d0ad5f0b8cb0f75d04965a4e5f5be3dca59d",
+      "originalCyclesPerCell": 3,
+      "runtime": {
+        "frameSize": 388,
+        "viewSize": 388,
+        "pivotX": 170.0,
+        "pivotY": 320.0,
+        "groundRadiusX": 0.14433,
+        "groundRadiusY": 0.043814,
+        "registrationScale": 1,
+        "cyclesPerCell": 1.0
+      },
+      "result": "Original idle body landmark / one shared strip scale; authored motion retained."
+    },
+    {
+      "key": "dew-rabbit",
+      "idleImage": "DesignAssets/Animations/CreatureIdleV3/dew-rabbit/idle.webp",
+      "walkImage": "DesignAssets/Animations/CreatureWalkV2/dew-rabbit/walk.webp",
+      "idlePatch": [
+        155,
+        225,
+        232,
+        290
+      ],
+      "walkPatch": [
+        152,
+        280,
+        231,
+        347
+      ],
+      "score": 0.974330723285675,
+      "scaleFactor": 1.03,
+      "frameSize": 433,
+      "viewSize": 429.51,
+      "pivotX": 221.885,
+      "pivotY": 419.59000000000003,
+      "groundRadiusX": 0.199041,
+      "groundRadiusY": 0.03717,
+      "idleSha256": "488443adf73c3aff932b5184b04844d1542742c90cb43de333222307ced62823",
+      "walkSha256": "41db2de2be664317f566adeb4243d02a9b81a95d1ac4916e2812769000006eca",
+      "originalCyclesPerCell": 2,
+      "idleNearFoot": 376,
+      "walkNearFoot": 417,
+      "runtime": {
+        "frameSize": 433,
+        "viewSize": 429.51,
+        "pivotX": 221.885,
+        "pivotY": 401.035,
+        "groundRadiusX": 0.199041,
+        "groundRadiusY": 0.03717,
+        "registrationScale": 1,
+        "travelWindow": [
+          0.18,
+          0.56
+        ],
+        "cyclesPerCell": 1
+      },
+      "result": "Original idle body landmark / one shared strip scale; authored motion retained."
+    },
+    {
+      "key": "soil-mole",
+      "idleImage": "DesignAssets/Animations/CreatureIdleV3/soil-mole/idle.webp",
+      "walkImage": "DesignAssets/Animations/CreatureWalkV2/soil-mole/walk.webp",
+      "idlePatch": [
+        174,
+        148,
+        271,
+        223
+      ],
+      "walkPatch": [
+        163,
+        112,
+        257,
+        185
+      ],
+      "score": 0.9569870233535767,
+      "scaleFactor": 0.97,
+      "frameSize": 355,
+      "viewSize": 344.34999999999997,
+      "pivotX": 176.05,
+      "pivotY": 241.135,
+      "groundRadiusX": 0.387324,
+      "groundRadiusY": 0.087324,
+      "idleSha256": "168820b114c3f309ae2957a4fb2c4fad5bedb2d82606b3f1ba08099d4e034811",
+      "walkSha256": "28100683bb6367bef333f0761f24a99f9617259bbb3a8f8e8b6a4ad2161773d3",
+      "originalCyclesPerCell": 3,
+      "runtime": {
+        "frameSize": 355,
+        "viewSize": 344.35,
+        "pivotX": 176.05,
+        "pivotY": 241.135,
+        "groundRadiusX": 0.387324,
+        "groundRadiusY": 0.087324,
+        "registrationScale": 1,
+        "cyclesPerCell": 2.5
+      },
+      "result": "Original idle body landmark / one shared strip scale; authored motion retained."
+    },
+    {
+      "key": "bundle-snail",
+      "idleImage": "DesignAssets/Animations/CreatureIdleV4/bundle-snail/idle.webp",
+      "walkImage": "DesignAssets/Animations/CreatureWalkV2/bundle-snail/walk.webp",
+      "idlePatch": [
+        214,
+        284,
+        310,
+        364
+      ],
+      "walkPatch": [
+        189,
+        192,
+        279,
+        267
+      ],
+      "score": 0.9633989334106445,
+      "scaleFactor": 0.94,
+      "frameSize": 398,
+      "viewSize": 374.12,
+      "pivotX": 201.1,
+      "pivotY": 294.83,
+      "groundRadiusX": 0.288945,
+      "groundRadiusY": 0.04397,
+      "idleSha256": "21aa68c376f396241db72d8adda406c5258e08a283024b9f42b079e89801c6c3",
+      "walkSha256": "049b3a2bd5570cfbd8fedc64c2136f2daecb65457857bebe1d93fefb8df2fe2f",
+      "originalCyclesPerCell": 1,
+      "bodyMatches": [
+        [
+          234.0,
+          229.5,
+          0.9633989334106445
+        ],
+        [
+          235.0,
+          230.5,
+          0.8818908929824829
+        ],
+        [
+          234.0,
+          231.5,
+          0.8593505620956421
+        ],
+        [
+          231.0,
+          229.5,
+          0.9091072082519531
+        ],
+        [
+          234.0,
+          231.5,
+          0.8776293992996216
+        ],
+        [
+          233.0,
+          231.5,
+          0.8611593842506409
+        ],
+        [
+          235.0,
+          230.5,
+          0.9144064784049988
+        ],
+        [
+          235.0,
+          228.5,
+          0.9666586518287659
+        ]
+      ],
+      "runtime": {
+        "frameSize": 398,
+        "viewSize": 374.12,
+        "pivotX": 201.1,
+        "pivotY": 294.83,
+        "groundRadiusX": 0.288945,
+        "groundRadiusY": 0.04397,
+        "registrationScale": 1,
+        "travelWindow": [
+          0.22,
+          0.82
+        ],
+        "cyclesPerCell": 1,
+        "frameGeometry": {
+          "0": {
+            "pivotX": 200.6,
+            "pivotY": 294.83
+          },
+          "1": {
+            "pivotX": 201.6,
+            "pivotY": 294.83
+          },
+          "2": {
+            "pivotX": 201.6,
+            "pivotY": 295.58
+          },
+          "3": {
+            "pivotX": 199.6,
+            "pivotY": 293.83
+          },
+          "4": {
+            "pivotX": 202.1,
+            "pivotY": 295.33
+          },
+          "5": {
+            "pivotX": 200.35,
+            "pivotY": 295.08
+          },
+          "6": {
+            "pivotX": 201.6,
+            "pivotY": 295.08
+          },
+          "7": {
+            "pivotX": 201.35,
+            "pivotY": 294.08
+          }
+        }
+      },
+      "result": "Original idle body landmark / one shared strip scale; authored motion retained."
+    },
+    {
+      "key": "cotton-sheep",
+      "idleImage": "DesignAssets/Animations/CottonSheepIdle/CalmV5/idle-runtime.webp",
+      "walkImage": "DesignAssets/Animations/CreatureWalkV2/cotton-sheep/walk.webp",
+      "idlePatch": [
+        79,
+        125,
+        144,
+        178
+      ],
+      "walkPatch": [
+        82,
+        115,
+        147,
+        168
+      ],
+      "score": 0.9265221953392029,
+      "scaleFactor": 1,
+      "frameSize": 256,
+      "viewSize": 256,
+      "pivotX": 145.5,
+      "pivotY": 194.5,
+      "groundRadiusX": 0.244141,
+      "groundRadiusY": 0.064453,
+      "idleSha256": "e1c3736d1a27d65f2de6762d337dbb833b07705363b49434924f56105cc6028e",
+      "walkSha256": "e775066f04253fa4599600cba4f3a91b678067a2695f8f71c48449e54a9118a3",
+      "originalCyclesPerCell": 2,
+      "runtime": {
+        "frameSize": 256,
+        "viewSize": 256,
+        "pivotX": 145.5,
+        "pivotY": 194.5,
+        "groundRadiusX": 0.244141,
+        "groundRadiusY": 0.064453,
+        "registrationScale": 1,
+        "cyclesPerCell": 2
+      },
+      "result": "Original idle body landmark / one shared strip scale; authored motion retained."
+    },
+    {
+      "key": "rolling-acorn",
+      "idleImage": "DesignAssets/Animations/RollingAcornIdle/v1/idle.webp",
+      "walkImage": "DesignAssets/Animations/CreatureWalkV2/rolling-acorn/walk.webp",
+      "idlePatch": [
+        195,
+        250,
+        286,
+        323
+      ],
+      "walkPatch": [
+        185,
+        227,
+        276,
+        300
+      ],
+      "score": 0.9751225113868713,
+      "scaleFactor": 1,
+      "frameSize": 420,
+      "viewSize": 420,
+      "pivotX": 205.0,
+      "pivotY": 335.5,
+      "groundRadiusX": 0.178571,
+      "groundRadiusY": 0.039286,
+      "idleSha256": "218f9dfd3f7d0b25487eaa4a00538f56e51a92a48e0c5b422a93880c8836c2d5",
+      "walkSha256": "cdb86a02cde61edb25eb8cfa70da496ecb76f73b25a0aeb4610dd054ec49bf64",
+      "originalCyclesPerCell": 0.4,
+      "runtime": {
+        "frameSize": 420,
+        "viewSize": 420,
+        "pivotX": 205.0,
+        "pivotY": 335.5,
+        "groundRadiusX": 0.178571,
+        "groundRadiusY": 0.039286,
+        "registrationScale": 1,
+        "cyclesPerCell": 0.4
+      },
+      "result": "Original idle body landmark / one shared strip scale; authored motion retained."
+    },
+    {
+      "key": "soil-boar",
+      "idleImage": "DesignAssets/Animations/SoilBoarIdle/V1/idle.webp",
+      "walkImage": "DesignAssets/Animations/CreatureWalkV2/soil-boar/walk.webp",
+      "idlePatch": [
+        176,
+        178,
+        256,
+        246
+      ],
+      "walkPatch": [
+        118,
+        92,
+        173,
+        139
+      ],
+      "score": 0.913020133972168,
+      "scaleFactor": 1,
+      "frameSize": 256,
+      "viewSize": 253.42641509433966,
+      "pivotX": 131.07735849056604,
+      "pivotY": 180.74528301886792,
+      "groundRadiusX": 0.325203,
+      "groundRadiusY": 0.04607,
+      "idleSha256": "f29a5219cc5ead3d04dde1aefb1466b4138463837226d72af0bc4a8ce05d9cf8",
+      "walkSha256": "4a658adf0ee04240ee353e6986a3389849b59e8ad4b2d63324bc7ca9bc169991",
+      "originalCyclesPerCell": 2,
+      "runtime": {
+        "frameSize": 256,
+        "viewSize": 253.426415,
+        "pivotX": 131.077358,
+        "pivotY": 180.745283,
+        "groundRadiusX": 0.325203,
+        "groundRadiusY": 0.04607,
+        "registrationScale": 1,
+        "cyclesPerCell": 1.25
+      },
+      "result": "Original idle body landmark / one shared strip scale; authored motion retained."
+    },
+    {
+      "key": "bubble-toad",
+      "idleImage": "DesignAssets/Animations/BubbleToadIdle/BreathV1/idle.webp",
+      "walkImage": "DesignAssets/Animations/CreatureWalkV2/bubble-toad/walk.webp",
+      "idlePatch": [
+        146,
+        212,
+        241,
+        272
+      ],
+      "walkPatch": [
+        122,
+        151,
+        185,
+        191
+      ],
+      "score": 0.9598298668861389,
+      "scaleFactor": 1,
+      "frameSize": 288,
+      "viewSize": 239.75849056603775,
+      "pivotX": 147.85471631698113,
+      "pivotY": 214.16981132075472,
+      "groundRadiusX": 0.34626,
+      "groundRadiusY": 0.027701,
+      "idleSha256": "8bf311deb420c7fc28581e238c85f796246a69600c6172b18ba78f24ddf58890",
+      "walkSha256": "6a8564a53d344d244625191e7130aabbf477c45e5c4fa069ed34a97a6b6e31fb",
+      "originalCyclesPerCell": 2,
+      "idleNearFoot": 318,
+      "walkNearFoot": 224,
+      "runtime": {
+        "frameSize": 288,
+        "viewSize": 239.758491,
+        "pivotX": 147.854716,
+        "pivotY": 216.69434,
+        "groundRadiusX": 0.34626,
+        "groundRadiusY": 0.027701,
+        "registrationScale": 1,
+        "travelWindow": [
+          0.26136363636363635,
+          0.625
+        ],
+        "cyclesPerCell": 1
+      },
+      "result": "Original idle body landmark / one shared strip scale; authored motion retained."
+    },
+    {
+      "key": "vine-turtle",
+      "idleImage": "DesignAssets/Animations/CreatureIdleStudies/V2/vine-turtle/idle.webp",
+      "walkImage": "DesignAssets/Animations/CreatureWalkV2/vine-turtle/walk.webp",
+      "idlePatch": [
+        163,
+        156,
+        253,
+        222
+      ],
+      "walkPatch": [
+        130,
+        110,
+        195,
+        157
+      ],
+      "score": 0.886522650718689,
+      "scaleFactor": 0.97,
+      "frameSize": 256,
+      "viewSize": 248.32,
+      "pivotX": 137.38092485549134,
+      "pivotY": 208.1395382899422,
+      "groundRadiusX": 0.401734,
+      "groundRadiusY": 0.028902,
+      "idleSha256": "6528cf28b11e4ccbb500afff22f9e3404079ede7ffb149e02136fc94158354f4",
+      "walkSha256": "97fcb422622154c0fa2dedf9fa44b0cf9a6c7f2c3034422a9c6695392fd2e2dd",
+      "originalCyclesPerCell": 1.5,
+      "preservedGroundRegistration": true,
+      "bodyMatches": [
+        [
+          162.5,
+          133.5,
+          0.8179652690887451
+        ],
+        [
+          158.5,
+          132.5,
+          0.8595800399780273
+        ],
+        [
+          150.5,
+          130.5,
+          0.8806365132331848
+        ],
+        [
+          160.5,
+          130.5,
+          0.8609577417373657
+        ],
+        [
+          154.5,
+          132.5,
+          0.8370224833488464
+        ],
+        [
+          154.5,
+          130.5,
+          0.7797528505325317
+        ],
+        [
+          154.5,
+          133.5,
+          0.8211177587509155
+        ],
+        [
+          162.5,
+          132.5,
+          0.8489705324172974
+        ]
+      ],
+      "runtime": {
+        "frameSize": 256,
+        "viewSize": 256,
+        "pivotX": 131.25,
+        "pivotY": 220.81,
+        "groundRadiusX": 0.401734,
+        "groundRadiusY": 0.028902,
+        "registrationScale": 1,
+        "cyclesPerCell": 1.5,
+        "frameGeometry": {
+          "0": {
+            "pivotX": 132.25,
+            "pivotY": 221.31
+          },
+          "1": {
+            "pivotX": 132.25,
+            "pivotY": 221.06
+          },
+          "2": {
+            "pivotX": 128.25,
+            "pivotY": 220.31
+          },
+          "3": {
+            "pivotX": 134.25,
+            "pivotY": 220.31
+          },
+          "4": {
+            "pivotX": 129.75,
+            "pivotY": 221.81
+          },
+          "5": {
+            "pivotX": 131.25,
+            "pivotY": 219.56
+          },
+          "6": {
+            "pivotX": 129.25,
+            "pivotY": 221.81
+          },
+          "7": {
+            "pivotX": 133.25,
+            "pivotY": 220.31
+          }
+        }
+      },
+      "result": "Original idle body landmark / one shared strip scale; authored motion retained."
+    },
+    {
+      "key": "shadow-weasel",
+      "idleImage": "DesignAssets/Animations/CreatureIdleStudies/V2/shadow-weasel/idle.webp",
+      "walkImage": "DesignAssets/Animations/CreatureWalkV2/shadow-weasel/walk.webp",
+      "idlePatch": [
+        102,
+        295,
+        154,
+        333
+      ],
+      "walkPatch": [
+        40,
+        139,
+        85,
+        172
+      ],
+      "score": 0.7211669087409973,
+      "scaleFactor": 1.03,
+      "frameSize": 256,
+      "viewSize": 273.80833333333334,
+      "pivotX": 124.96249914166667,
+      "pivotY": 201.27916838333334,
+      "groundRadiusX": 0.285266,
+      "groundRadiusY": 0.037618,
+      "idleSha256": "8ac9881ed82fc1a587f552be975fe0c8a8f03b17bb63879efc72b1995f2461f2",
+      "walkSha256": "a2b2dc7ffa81941ecb0c4fcaee4863d6853bd149bbce0cfd2e3b8a989c47ec98",
+      "originalCyclesPerCell": 2.5,
+      "runtime": {
+        "frameSize": 256,
+        "viewSize": 273.808333,
+        "pivotX": 125.158332,
+        "pivotY": 192.841668,
+        "groundRadiusX": 0.285266,
+        "groundRadiusY": 0.037618,
+        "registrationScale": 1,
+        "cyclesPerCell": 0.769231
+      },
+      "result": "Lowered rear stance and alternating hind paws in repaired drawing; fixed scale, original idle face X and planted near-foot Y registration.",
+      "originalWalkSha256": "10cf86cd5a4077d587bf868314236990f4bb931dabe672a8f8d8dd0f783e8024",
+      "idleNearFoot": 363,
+      "walkNearFoot": 204,
+      "gaitRepairSource": "DesignAssets/Animations/CreatureWalkV2/shadow-weasel/rear-gait-repair.png"
+    },
+    {
+      "key": "snare-vine",
+      "idleImage": "DesignAssets/Animations/CreatureIdleStudies/V1/snare-vine/idle.webp",
+      "walkImage": "DesignAssets/Animations/CreatureWalkV2/snare-vine/walk.webp",
+      "idlePatch": [
+        200,
+        289,
+        284,
+        379
+      ],
+      "walkPatch": [
+        110,
+        165,
+        162,
+        221
+      ],
+      "score": 0.8891779184341431,
+      "scaleFactor": 1.03,
+      "frameSize": 256,
+      "viewSize": 263.68,
+      "pivotX": 128.53735849056605,
+      "pivotY": 227.8256591335849,
+      "groundRadiusX": 0.122642,
+      "groundRadiusY": 0.021226,
+      "idleSha256": "922fb8c47ecfb7add24658e41aaf4dfba68f651022f3f6bfd2335c11c959f25d",
+      "walkSha256": "e20db326d5387bac77c67a68959035c7eefbde3da8eed4d6801f7270f2e81e6f",
+      "originalCyclesPerCell": 1.5,
+      "runtime": {
+        "frameSize": 256,
+        "viewSize": 263.68,
+        "pivotX": 128.537358,
+        "pivotY": 227.825659,
+        "groundRadiusX": 0.122642,
+        "groundRadiusY": 0.021226,
+        "registrationScale": 1,
+        "cyclesPerCell": 1.428571
+      },
+      "result": "Original idle body landmark / one shared strip scale; authored motion retained."
+    },
+    {
+      "key": "talon-owl",
+      "idleImage": "DesignAssets/Animations/TalonOwlIdle/PerchedV4/idle.webp",
+      "walkImage": "DesignAssets/Animations/CreatureWalkV2/talon-owl/walk.webp",
+      "idlePatch": [
+        225,
+        226,
+        305,
+        296
+      ],
+      "walkPatch": [
+        203,
+        201,
+        253,
+        245
+      ],
+      "score": 0.8623083233833313,
+      "scaleFactor": 1.06,
+      "frameSize": 432,
+      "viewSize": 271.36,
+      "pivotX": 209.7837037037037,
+      "pivotY": 318.4785185185185,
+      "groundRadiusX": null,
+      "groundRadiusY": null,
+      "idleSha256": "56ba9793f8ab273ab9bfa44de807f2bf87ef678df8b27ffb65f3e3a6e65ad522",
+      "walkSha256": "f6d237c82a6368d7000d1f1d2e96c32bbd79141fc427813e50df7d8b2a3a90d8",
+      "originalCyclesPerCell": 3,
+      "runtime": {
+        "frameSize": 432,
+        "viewSize": 271.36,
+        "pivotX": 209.783704,
+        "pivotY": 318.478519,
+        "registrationScale": 1,
+        "cyclesPerCell": 1.0
+      },
+      "result": "Original idle body landmark / one shared strip scale; authored motion retained."
+    },
+    {
+      "key": "spring-keeper",
+      "idleImage": "DesignAssets/Animations/UniqueIdleV4/spring-keeper/idle.webp",
+      "walkImage": "DesignAssets/Animations/CreatureWalkV2/spring-keeper/walk.webp",
+      "idlePatch": [
+        180,
+        202,
+        254,
+        260
+      ],
+      "walkPatch": [
+        181,
+        197,
+        255,
+        255
+      ],
+      "score": 0.9909355640411377,
+      "scaleFactor": 1,
+      "frameSize": 512,
+      "viewSize": 384,
+      "pivotX": 207.0,
+      "pivotY": 344.0,
+      "groundRadiusX": 0.125,
+      "groundRadiusY": 0.028646,
+      "idleSha256": "994d372ed86dc2ed8c7f4cf1088b842271cefeb0a788eeea1c8e2d10e8221d69",
+      "walkSha256": "6091dd7360ce347aa1f322e0fd7058e4ccac8bb5717732b6720740cf7eeeaa41",
+      "originalCyclesPerCell": 3,
+      "runtime": {
+        "frameSize": 512,
+        "viewSize": 384,
+        "pivotX": 207.0,
+        "pivotY": 344.0,
+        "groundRadiusX": 0.125,
+        "groundRadiusY": 0.028646,
+        "registrationScale": 1,
+        "cyclesPerCell": 1.25
+      },
+      "result": "Original idle body landmark / one shared strip scale; authored motion retained."
+    },
+    {
+      "key": "lantern-keeper",
+      "idleImage": "DesignAssets/Animations/UniqueIdleV4/lantern-keeper/idle.webp",
+      "walkImage": "DesignAssets/Animations/CreatureWalkV2/lantern-keeper/walk.webp",
+      "idlePatch": [
+        105,
+        183,
+        189,
+        255
+      ],
+      "walkPatch": [
+        115,
+        190,
+        194,
+        258
+      ],
+      "score": 0.8493367433547974,
+      "scaleFactor": 0.94,
+      "frameSize": 384,
+      "viewSize": 360.96,
+      "pivotX": 187.4,
+      "pivotY": 323.64,
+      "groundRadiusX": 0.182292,
+      "groundRadiusY": 0.033854,
+      "idleSha256": "38750d7f304669d4fd4cd202ae9450982b4ada40feb3858861c99cce89898963",
+      "walkSha256": "593755db2a842f3e9a55cdb10a181cb29baf29c53b60cfb995a2ac667c5096d8",
+      "originalCyclesPerCell": 2,
+      "idleNearFoot": 337,
+      "walkNearFoot": 325,
+      "runtime": {
+        "frameSize": 384,
+        "viewSize": 360.96,
+        "pivotX": 187.4,
+        "pivotY": 313.72,
+        "groundRadiusX": 0.182292,
+        "groundRadiusY": 0.033854,
+        "registrationScale": 1,
+        "travelWindow": [
+          0.32432432432432434,
+          0.6486486486486487
+        ],
+        "cyclesPerCell": 1
+      },
+      "result": "Original idle body landmark / one shared strip scale; authored motion retained."
+    },
+    {
+      "key": "old-garden-snail",
+      "idleImage": "DesignAssets/Animations/UniqueIdleV3/old-garden-snail/idle.webp",
+      "walkImage": "DesignAssets/Animations/CreatureWalkV2/old-garden-snail/walk.webp",
+      "idlePatch": [
+        161,
+        188,
+        249,
+        263
+      ],
+      "walkPatch": [
+        167,
+        191,
+        255,
+        266
+      ],
+      "score": 0.8597599864006042,
+      "scaleFactor": 1,
+      "frameSize": 352,
+      "viewSize": 352,
+      "pivotX": 172.0,
+      "pivotY": 291.0,
+      "groundRadiusX": 0.318182,
+      "groundRadiusY": 0.056818,
+      "idleSha256": "07f5b7bca7655a45c0700995f12b4389ffc7aec34994a4924531130c29844cc7",
+      "walkSha256": "dfef8df1d6debd1084fc56719e74bfed120244f8651094ac2ada056040b2f15a",
+      "originalCyclesPerCell": 1,
+      "bodyMatches": [
+        [
+          211.0,
+          228.5,
+          0.8597599864006042
+        ],
+        [
+          237.0,
+          228.5,
+          0.749823808670044
+        ],
+        [
+          234.0,
+          229.5,
+          0.8190503120422363
+        ],
+        [
+          202.0,
+          228.5,
+          0.7652618288993835
+        ],
+        [
+          211.0,
+          230.5,
+          0.8271807432174683
+        ],
+        [
+          217.0,
+          228.5,
+          0.8466037511825562
+        ]
+      ],
+      "runtime": {
+        "frameSize": 352,
+        "viewSize": 352,
+        "pivotX": 172.0,
+        "pivotY": 291.0,
+        "groundRadiusX": 0.318182,
+        "groundRadiusY": 0.056818,
+        "registrationScale": 1,
+        "travelWindow": [
+          0.25,
+          0.82
+        ],
+        "cyclesPerCell": 1,
+        "frameGeometry": {
+          "0": {
+            "pivotX": 169.0,
+            "pivotY": 291.0
+          },
+          "1": {
+            "pivotX": 175.0,
+            "pivotY": 290.75
+          },
+          "2": {
+            "pivotX": 175.0,
+            "pivotY": 291.5
+          },
+          "3": {
+            "pivotX": 169.0,
+            "pivotY": 290.25
+          },
+          "4": {
+            "pivotX": 172.75,
+            "pivotY": 292.0
+          },
+          "5": {
+            "pivotX": 175.0,
+            "pivotY": 290.5
+          }
+        }
+      },
+      "result": "Original idle body landmark / one shared strip scale; authored motion retained."
+    },
+    {
+      "key": "walking-forest",
+      "idleImage": "DesignAssets/Animations/MountainPawLeaderIdle/walking-forest/idle-runtime.webp",
+      "walkImage": "DesignAssets/Animations/CreatureWalkV2/walking-forest/walk.webp",
+      "idlePatch": [
+        121,
+        97,
+        187,
+        149
+      ],
+      "walkPatch": [
+        119,
+        96,
+        183,
+        146
+      ],
+      "score": 0.8980500102043152,
+      "scaleFactor": 0.97,
+      "frameSize": 256,
+      "viewSize": 248.32,
+      "pivotX": 125.78,
+      "pivotY": 209.26999999999998,
+      "groundRadiusX": 0.414063,
+      "groundRadiusY": 0.0625,
+      "idleSha256": "d91da525c6697bc720e0eaf4726f3f18daed387ea42a60a4b9f92c7b039c96ba",
+      "walkSha256": "6aeefef327b960ad2d542e1b35044547a938ba1432486fa86b04053d6f1408d0",
+      "originalCyclesPerCell": 1.4,
+      "bodyMatches": [
+        [
+          151.0,
+          121.0,
+          0.8980500102043152
+        ],
+        [
+          150.0,
+          122.0,
+          0.8984865546226501
+        ],
+        [
+          150.0,
+          121.0,
+          0.8841885924339294
+        ],
+        [
+          146.0,
+          121.0,
+          0.8419682383537292
+        ],
+        [
+          146.0,
+          122.0,
+          0.9288860559463501
+        ],
+        [
+          146.0,
+          121.0,
+          0.8856087327003479
+        ]
+      ],
+      "runtime": {
+        "frameSize": 256,
+        "viewSize": 248.32,
+        "pivotX": 125.78,
+        "pivotY": 209.27,
+        "groundRadiusX": 0.414063,
+        "groundRadiusY": 0.0625,
+        "registrationScale": 1,
+        "cyclesPerCell": 1.4,
+        "frameGeometry": {
+          "0": {
+            "pivotX": 127.28,
+            "pivotY": 209.02
+          },
+          "1": {
+            "pivotX": 125.53,
+            "pivotY": 209.77
+          },
+          "2": {
+            "pivotX": 126.78,
+            "pivotY": 209.02
+          },
+          "3": {
+            "pivotX": 124.78,
+            "pivotY": 209.02
+          },
+          "4": {
+            "pivotX": 125.78,
+            "pivotY": 209.77
+          },
+          "5": {
+            "pivotX": 124.53,
+            "pivotY": 209.02
+          }
+        }
+      },
+      "result": "Original idle body landmark / one shared strip scale; authored motion retained."
+    },
+    {
+      "key": "white-paw",
+      "idleImage": "DesignAssets/Animations/MountainPawLeaderIdle/white-paw/idle-runtime.webp",
+      "walkImage": "DesignAssets/Animations/CreatureWalkV2/white-paw/walk.webp",
+      "idlePatch": [
+        133,
+        204,
+        199,
+        242
+      ],
+      "walkPatch": [
+        101,
+        186,
+        169,
+        225
+      ],
+      "score": 0.9733772277832031,
+      "scaleFactor": 1.03,
+      "frameSize": 288,
+      "viewSize": 295.29163636363637,
+      "pivotX": 120.64554545454546,
+      "pivotY": 242.41145454545455,
+      "groundRadiusX": 0.267361,
+      "groundRadiusY": 0.048611,
+      "idleSha256": "e88b846299b44cad98f9edd089d40caaf2729d53863ea0ddc38a12732e827e16",
+      "walkSha256": "5025be9fc6280c92a652b9d93dd96615aadc2ad8706830c0dab6cb4aea8cb091",
+      "originalCyclesPerCell": 2.5,
+      "runtime": {
+        "frameSize": 288,
+        "viewSize": 295.291636,
+        "pivotX": 120.645545,
+        "pivotY": 242.411455,
+        "groundRadiusX": 0.267361,
+        "groundRadiusY": 0.048611,
+        "registrationScale": 1,
+        "cyclesPerCell": 0.625
+      },
+      "result": "Original idle body landmark / one shared strip scale; authored motion retained."
+    },
+    {
+      "key": "spiny-back-leader",
+      "idleImage": "DesignAssets/Animations/MountainPawLeaderIdle/spiny-back-leader/idle-runtime.webp",
+      "walkImage": "DesignAssets/Animations/CreatureWalkV2/spiny-back-leader/walk.webp",
+      "idlePatch": [
+        120,
+        90,
+        186,
+        148
+      ],
+      "walkPatch": [
+        129,
+        88,
+        193,
+        144
+      ],
+      "score": 0.9270212054252625,
+      "scaleFactor": 0.97,
+      "frameSize": 256,
+      "viewSize": 248.32,
+      "pivotX": 132.87,
+      "pivotY": 196.51,
+      "groundRadiusX": 0.398438,
+      "groundRadiusY": 0.085938,
+      "idleSha256": "b8db9ad3b53ccf2f332d722b5e5f76e293ae3ceb25bc9fdb8d1a45792c5e8029",
+      "walkSha256": "89d6fb126bff0138a55ea9296d7379938adc6baf4dce683d44ce3495eff2cc17",
+      "originalCyclesPerCell": 2.5,
+      "bodyMatches": [
+        [
+          161.0,
+          116.0,
+          0.9270212054252625
+        ],
+        [
+          155.0,
+          116.0,
+          0.841597318649292
+        ],
+        [
+          153.0,
+          118.0,
+          0.8795939683914185
+        ],
+        [
+          152.0,
+          117.0,
+          0.8911909461021423
+        ],
+        [
+          154.0,
+          116.0,
+          0.9231478571891785
+        ],
+        [
+          153.0,
+          116.0,
+          0.9024130702018738
+        ]
+      ],
+      "runtime": {
+        "frameSize": 256,
+        "viewSize": 248.32,
+        "pivotX": 132.87,
+        "pivotY": 196.51,
+        "groundRadiusX": 0.398438,
+        "groundRadiusY": 0.085938,
+        "registrationScale": 1,
+        "cyclesPerCell": 1.428571,
+        "frameGeometry": {
+          "0": {
+            "pivotX": 135.87,
+            "pivotY": 196.51
+          },
+          "1": {
+            "pivotX": 131.87,
+            "pivotY": 196.01
+          },
+          "2": {
+            "pivotX": 132.62,
+            "pivotY": 197.26
+          },
+          "3": {
+            "pivotX": 132.12,
+            "pivotY": 196.51
+          },
+          "4": {
+            "pivotX": 133.62,
+            "pivotY": 196.26
+          },
+          "5": {
+            "pivotX": 130.62,
+            "pivotY": 196.51
+          }
+        }
+      },
+      "result": "Original idle body landmark / one shared strip scale; authored motion retained."
+    },
+    {
+      "key": "spiny-back-beetle",
+      "idleImage": "DesignAssets/Animations/Beetle/atlas.webp",
+      "walkImage": "DesignAssets/Animations/Beetle/atlas.webp",
+      "idlePatch": [
+        166,
+        166,
+        240,
+        225
+      ],
+      "walkPatch": [
+        166,
+        166,
+        240,
+        225
+      ],
+      "score": 0.9999990463256836,
+      "scaleFactor": 1,
+      "frameSize": 346,
+      "viewSize": 346,
+      "pivotX": 171.91014492753624,
+      "pivotY": 282.25072263188406,
+      "groundRadiusX": 0.347826,
+      "groundRadiusY": 0.06087,
+      "idleSha256": "7506f5fa347c365422e765940e9edb8593148381a88928359451ddb6d3a46bbd",
+      "walkSha256": "7506f5fa347c365422e765940e9edb8593148381a88928359451ddb6d3a46bbd",
+      "originalCyclesPerCell": 1,
+      "result": "Shared idle/walk atlas: retain original per-frame registration and native playback."
+    }
+  ]
+}

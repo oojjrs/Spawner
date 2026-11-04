@@ -79,25 +79,32 @@
       await pendingSources.get(animation.image);
     }));
     if (!neutralMetrics.has(choice.key)) {
-      const idle = neutralAnimations(choice.key).idle;
-      const image = sources.get(idle.image);
-      const bounds = tribeArt.bounds(image, idle.frameSize);
+      const poses = neutralAnimations(choice.key);
+      const idle = poses.idle;
+      const bounds = tribeArt.bounds(sources.get(idle.image), idle.frameSize);
       const sample = document.createElement("canvas");
       sample.width = sample.height = 96;
       const pixels = sample.getContext("2d", { willReadFrequently: true });
-      let top = 96;
-      for (let frame = 0; frame < idle.durationsMs.length; frame++) {
-        pixels.clearRect(0, 0, 96, 96);
-        pixels.drawImage(image, frame % idle.columns * idle.frameSize,
-          Math.floor(frame / idle.columns) * idle.frameSize, idle.frameSize, idle.frameSize, 0, 0, 96, 96);
-        const data = pixels.getImageData(0, 0, 96, 96).data;
-        for (let y = 0; y < top; y++) {
-          let found = false;
-          for (let x = 0; x < 96; x++) if (data[(y * 96 + x) * 4 + 3] >= 16) { found = true; break; }
-          if (found) { top = y; break; }
+      const envelope = { left: 0, right: 0, top: 0, bottom: 0 };
+      for (const [action, animation] of Object.entries(poses)) {
+        const image = sources.get(animation.image);
+        for (let i = 0; i < animation.durationsMs.length; i++) {
+          const frame = animation.frameIndices?.[i] ?? i;
+          const geometry = globalThis.Spawner.imageFrameGeometry(animation, frame);
+          const scale = poseScale(geometry, action, choice.key);
+          pixels.clearRect(0, 0, 96, 96);
+          pixels.drawImage(image, frame % animation.columns * animation.frameSize,
+            Math.floor(frame / animation.columns) * animation.frameSize, animation.frameSize, animation.frameSize, 0, 0, 96, 96);
+          const data = pixels.getImageData(0, 0, 96, 96).data;
+          for (let y = 0; y < 96; y++) for (let x = 0; x < 96; x++) if (data[(y * 96 + x) * 4 + 3] >= 16) {
+            envelope.left = Math.min(envelope.left, (x / 96 - geometry.pivotX / geometry.frameSize) * scale);
+            envelope.right = Math.max(envelope.right, ((x + 1) / 96 - geometry.pivotX / geometry.frameSize) * scale);
+            envelope.top = Math.min(envelope.top, (y / 96 - geometry.pivotY / geometry.frameSize) * scale);
+            envelope.bottom = Math.max(envelope.bottom, ((y + 1) / 96 - geometry.pivotY / geometry.frameSize) * scale);
+          }
         }
       }
-      neutralMetrics.set(choice.key, { bounds, top: top * idle.frameSize / 96 });
+      neutralMetrics.set(choice.key, { bounds, envelope });
     }
   }
   function prepareUpcoming() {
@@ -119,16 +126,13 @@
     surface.height = height;
     return surface;
   });
-  const bean = { id: "welcome-bean", attributes: { feet: 1 }, x: -1, y: 0, renderFromX: 0, renderFromY: 0, moveDuration: 0, moveStartedAt: 0 };
   let timeline = 0;
-  function drawBean(x, size, moving) {
+  function drawBean(motion, size, moving) {
+    const { x, agent: bean } = motion;
     const appearance = appearances[current.variant].bean;
     const feet = appearance.feet || 0;
     bean.attributes = appearance;
     const position = { x: x * .7 / size, y: 0 };
-    const distance = width / 2 + size / 2;
-    bean.moveDuration = moving ? travelDuration / 1000 / (distance * .7 / size) : 0;
-    bean.moveStartedAt = moving ? timeline - .001 : 0;
     const gait = feet ? roots.pose(bean, position, timeline) : { phase: 0, rotation: 0, bob: 0 };
     const idlePhase = reducedMotion.matches ? 0 : elapsed / 1000 % 6.8;
     const shrugDuration = Math.PI * 2 / 7.2;
@@ -143,10 +147,8 @@
     const lift = feet ? 426 - 512 * .94 + globalThis.Spawner.sproutRootGeometry(feet).height * .88 : 0;
     const pivot = 460 - lift;
     context.save();
-    const hops = Math.max(1, Math.round(travelDuration / 600));
-    const hopProgress = (hops * elapsed / travelDuration) % 1;
-    const hop = moving && !feet ? Math.sin(hopProgress * Math.PI) * size * .035 : 0;
-    context.translate(x, height - (feet ? 20 : 24) - hop);
+    const hop = moving && !feet ? Math.sin(motion.position.progress * Math.PI) * size * .18 : 0;
+    context.translate(x, groundY() + (feet ? 4 : 0) - hop);
     context.scale(size / 512, size / 512);
     context.translate(-256, feet ? -512 * .94 : -460);
     if (feet) roots.drawRig(context, beanParts.get("root-rig"), feet, gait, { rotation: gait.rotation, bob: gait.bob, pivot }, null);
@@ -180,7 +182,6 @@
     context.restore();
   }
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
-  const travelDuration = 3600;
   const restDuration = 3500;
   let phase = "perform";
   let elapsed = 0;
@@ -191,8 +192,19 @@
   function duration(animation) {
     return animation.durationsMs.reduce((total, value) => total + value, 0);
   }
+  function groundY() { return height * 214 / 280; }
+  function poseScale(animation, action, species) {
+    return action === "walk" ? animation.frameSize / (animation.viewSize || animation.frameSize) :
+      action === "attack" && species !== "spiny-back-beetle" ? animation.frameSize / (animation.viewSize || animation.frameSize) * (animation.registrationScale || 1) : animation.registrationScale || 1;
+  }
+  function travelMotion() {
+    const size = current.key === "bean" ? Math.min(210, width * .8) : tribes.includes(current.key) ? Math.min(184, width * .7) : Math.min(240, width * .75);
+    return globalThis.Spawner.welcomeTravelMotion(globalThis.Spawner, { key: current.key,
+      attributes: appearances[current.variant][current.key === "bean" ? "bean" : "others"], width, size, elapsedMs: elapsed,
+      timeline, phase, reducedMotion: reducedMotion.matches, id: "welcome-" + current.key + ":" + appearanceNumber });
+  }
   function phaseDuration() {
-    if (phase === "enter" || phase === "exit") return travelDuration;
+    if (phase === "enter" || phase === "exit") return travelMotion().durationMs;
     if (phase === "perform") return current.key === "bean" ? 6800 : duration(tribes.includes(current.key) ? animations[current.key].jump : neutralAnimations(current.key).attack);
     return restDuration;
   }
@@ -223,27 +235,16 @@
     const animation = animations[tribe][action];
     const image = sheets.get(tribe + ":" + action) || sheets.get(tribe + ":idle");
     if (!image) return;
-    const distance = width / 2 + Math.min(184, width * .7) / 2;
-    const walkElapsed = moving ? elapsed / travelDuration * distance / (Math.min(184, width * .7) * .42) * duration(animation) : elapsed;
-    let remaining = reducedMotion.matches ? 0 : walkElapsed % duration(animation);
-    let frame = 0;
-    while (frame < animation.durationsMs.length - 1 && remaining >= animation.durationsMs[frame]) {
-      remaining -= animation.durationsMs[frame];
-      frame++;
-    }
     const size = Math.min(184, width * .7);
-    const center = width / 2;
-    const progress = elapsed / travelDuration;
-    const eased = progress;
-    let x = center;
-    if (!reducedMotion.matches && phase === "enter") x = width + size / 2 + (center - width - size / 2) * eased;
-    if (!reducedMotion.matches && phase === "exit") x = center + (-size / 2 - center) * eased;
+    const motion = travelMotion();
+    const agent = motion.agent;
+    const walkPose = moving && !reducedMotion.matches ? globalThis.Spawner.unitAnimationPose(agent, timeline) : null;
+    const frame = walkPose?.frame ?? globalThis.Spawner.unitAnimationFrame(animation, reducedMotion.matches ? 0 : elapsed);
+    const x = motion.x;
     if (tribe === "bean" && beanParts.size === 8) {
-      drawBean(x, Math.min(220, width * .8), moving && !reducedMotion.matches);
+      drawBean(motion, Math.min(210, width * .8), moving && !reducedMotion.matches);
       return;
     }
-    const appearance = appearances[current.variant].others;
-    const agent = { id: "welcome-" + tribe + ":" + appearanceNumber, tribe, attributes: appearance };
     const pose = tribeArtReady.has(tribe) ? tribeArt.animationPose(agent, { action, animation, frame }, timeline) : null;
     const registeredAnimation = pose?.sourceAnimation || animation;
     const sourceIndex = pose?.sourceFrame ?? frame;
@@ -259,7 +260,7 @@
     const padding = (frameSize - sourceAnimation.frameSize) / 2;
     const renderedSize = size * frameSize / sourceAnimation.frameSize;
     context.save();
-    context.translate(x, height - 24);
+    context.translate(x, groundY());
     const mirror = moving && !reducedMotion.matches && (sourceAnimation.facing ? sourceAnimation.facing === "right" : tribe === "spore");
     context.scale(mirror ? -1 : 1, 1);
     context.drawImage(customized || source, customized ? 0 : sourceIndex % sourceAnimation.columns * sourceAnimation.frameSize,
@@ -272,32 +273,24 @@
     const species = current.key;
     const moving = !reducedMotion.matches && (phase === "enter" || phase === "exit");
     const action = reducedMotion.matches ? "idle" : moving ? "walk" : phase === "perform" ? "attack" : "idle";
-    const animation = neutralAnimations(species)[action];
-    const source = sources.get(animation.image);
-    if (!source) throw new Error("Missing welcome neutral source: " + animation.image);
+    const sourceAnimation = neutralAnimations(species)[action];
+    const source = sources.get(sourceAnimation.image);
+    if (!source) throw new Error("Missing welcome neutral source: " + sourceAnimation.image);
     const idle = neutralAnimations(species).idle;
     const metrics = neutralMetrics.get(species);
-    const baseSize = globalThis.Spawner.welcomeCreatureScale(idle, metrics.bounds, metrics.top,
-      globalThis.Spawner.UNIT_DISPLAY_SIZES[species], width, height);
-    const cell = Math.min(240, width * .75);
-    const geometryScale = action === "walk" ? animation.frameSize / (animation.viewSize || animation.frameSize) : action === "attack" && species !== "spiny-back-beetle" ? animation.frameSize / (animation.viewSize || animation.frameSize) * (animation.registrationScale || 1) : animation.registrationScale || 1;
-    const size = baseSize * geometryScale;
-    const center = width / 2;
-    const distance = center + size / 2;
-    const progress = elapsed / travelDuration;
-    const x = moving ? phase === "enter" ? width + size / 2 - distance * progress : center - distance * progress : center;
+    const baseSize = globalThis.Spawner.welcomeCreatureScale(idle, metrics.bounds, 0,
+      globalThis.Spawner.UNIT_DISPLAY_SIZES[species], width, height, metrics.envelope);
+    const motion = travelMotion();
     const animationTime = reducedMotion.matches ? 0 : elapsed;
     let frame;
-    if (animation.frameIndices) frame = globalThis.Spawner.beetleAnimationFrame(action, animationTime);
+    if (sourceAnimation.frameIndices) frame = moving ? globalThis.Spawner.beetleAnimationPose(motion.agent, timeline).frame : globalThis.Spawner.beetleAnimationFrame(action, animationTime);
+    else if (moving) frame = globalThis.Spawner.creatureWalkPose(motion.agent, timeline).frame;
     else if (species === "talon-owl" && action === "idle") frame = globalThis.Spawner.talonOwlIdleFrame(animationTime);
-    else if (species === "spring-keeper" && action === "walk") frame = globalThis.Spawner.springKeeperFlightPose({
-      species, mode: "walk", health: 1, moveDuration: travelDuration / 1000, moveStartedAt: 0, flightStartedAt: 0, stepCount: 1
-    }, elapsed / 1000).frame;
-    else frame = globalThis.Spawner.unitAnimationFrame({ ...animation, loop: action !== "attack" }, animationTime);
+    else frame = globalThis.Spawner.unitAnimationFrame({ ...sourceAnimation, loop: action !== "attack" }, animationTime);
+    const animation = globalThis.Spawner.imageFrameGeometry(sourceAnimation, frame);
+    const size = baseSize * poseScale(animation, action, species);
     context.save();
-    const flightProgress = Math.max(0, Math.min(1, elapsed / 180, (travelDuration - elapsed) / 135));
-    const flightLift = species === "talon-owl" && moving ? (cell * .14 + 24) * flightProgress * flightProgress * (3 - 2 * flightProgress) : 0;
-    context.translate(x, height - 24 - flightLift);
+    context.translate(motion.x, groundY());
     if (animation.facing === "right") context.scale(-1, 1);
     context.drawImage(source, frame % animation.columns * animation.frameSize,
       Math.floor(frame / animation.columns) * animation.frameSize, animation.frameSize, animation.frameSize,

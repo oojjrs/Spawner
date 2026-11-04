@@ -3849,21 +3849,7 @@
       };
       const birth = agentBirthPose(agent, false);
       if (birth) return { x: birth.x, y: birth.y, progress: 1 };
-      const rawProgress = agent.moveDuration ? clamp(
-        (state.simSeconds - agent.moveStartedAt) / agent.moveDuration,
-        0,
-        1
-      ) : 1;
-      const appearance = agent.appearanceAttributes || agent.attributes;
-      const grounded = agent.species === "spiny-back-beetle" || appearance.feet || ["spore", "pebble", "spring"].includes(agent.tribe);
-      const progress = grounded || idleMotion.matches ? rawProgress :
-        clamp((rawProgress - AGENT_JUMP_PREPARATION) / (1 - AGENT_JUMP_PREPARATION), 0, 1);
-      const smoothProgress = grounded ? progress : progress * progress * (3 - 2 * progress);
-      return {
-        x: agent.moveDuration ? agent.renderFromX + (agent.x - agent.renderFromX) * smoothProgress : agent.x,
-        y: agent.moveDuration ? agent.renderFromY + (agent.y - agent.renderFromY) * smoothProgress : agent.y,
-        progress
-      };
+      return Spawner.unitMovementPosition(agent, state.simSeconds, idleMotion.matches);
     }
 
     function interpolatedAgentPosition(agent) {
@@ -4741,8 +4727,8 @@
         Spawner.creatureWalkPose(agent, state.simSeconds);
       const entry = creatureWalkSheets.get(agent.species);
       if (!pose || !entry?.sprite.complete || !entry.sprite.naturalWidth) return false;
-      const animation = pose.animation;
       const frame = idleMotion.matches ? pose.stage === "flight" ? 4 : 0 : pose.frame;
+      const animation = Spawner.imageFrameGeometry(pose.animation, frame);
       const owl = agent.species === "talon-owl";
       const point = worldToScreen(renderPosition.x + .5, renderPosition.y + (owl ? .86 : 1));
       const size = state.camera.zoom * (owl ? Spawner.TALON_OWL_IDLE.scale : 1.4 * entry.scale) *

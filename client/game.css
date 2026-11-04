@@ -679,7 +679,7 @@
     .welcome-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: clamp(24px, 4vh, 32px); }
     .welcome-heading:has(.welcome-stage) { display: block; margin-bottom: 12px; }
     .welcome-stage { position: relative; width: 100%; height: 280px; overflow: hidden; border-radius: 16px; background-size: cover; background-position: center; }
-    .welcome-characters { position: absolute; top: 34px; left: 0; display: block; width: 100%; height: 204px; background: transparent; pointer-events: none; }
+    .welcome-characters { position: absolute; top: 0; left: 0; display: block; width: 100%; height: 100%; background: transparent; pointer-events: none; }
     .welcome-stage > .welcome-brand { position: absolute; top: 10px; left: 0; z-index: 1; width: 100%; margin: 0; color: #eef3cf; letter-spacing: .36em; font-size: .85rem; font-weight: 700; text-align: center; text-shadow: 0 2px 4px #16392b; outline: none; }
     .welcome-waveform { display: block; width: 100%; height: 110px; margin-top: 8px; background: transparent; pointer-events: none; }
     .welcome-waveform[hidden] { display: none; }

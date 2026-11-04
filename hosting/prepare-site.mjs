@@ -41,9 +41,9 @@ export function prepareSite(destination, readSource, revision, assetDirectory) {
   }
   const assetFiles = new Map([...assets].map(([name, bytes]) => [name,
     createHash("sha256").update(bytes).digest("hex") + "." + name.split(".").at(-1)]));
-  // Header jumps use the original high resolution sheets. Ship them with the
-  // Site so a source publication does not depend on a separate CDN deployment.
-  const localAssets = new Set(["DesignAssets/Welcome/spore-jump.webp", "DesignAssets/Welcome/pebble-jump.webp"]);
+  // Ship revised sprites with the Site so source updates reach production
+  // together without requiring a separate asset CDN publication.
+  const localAssets = new Set(["DesignAssets/Welcome/spore-jump.webp", "DesignAssets/Welcome/pebble-jump.webp", "DesignAssets/Animations/CreatureWalkV2/shadow-weasel/walk.webp"]);
   const assetPaths = new Map([...assetFiles].map(([name, file]) => [name,
     localAssets.has(name) ? "./welcome-assets/" + file : assetBase + file]));
   for (const name of localAssets) if (assets.has(name)) write("welcome-assets/" + assetFiles.get(name), assets.get(name));
