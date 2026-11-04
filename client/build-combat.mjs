@@ -23,5 +23,6 @@ function bundle(name) {
 bundle("client/combat-lab.js");
 const html = `<!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Spawner · 전투 실험실</title><style>${readFileSync(resolve(root, "client/combat-lab.css"), "utf8")}</style></head>
-<body><main></main><script>(() => {\n${chunks.join("\n")}\n})();</script></body></html>`;
-writeFileSync(resolve(root, "Combat.html"), html.replace(/\r?\n/g, "\r\n"), "utf8");
+<body><main></main><script src="./client/assets.js"></script><script src="./client/unit-appearance-lazy-assets.js"></script><script>(() => {\n${chunks.join("\n")}\n})();</script></body></html>`;
+const previous = readFileSync(resolve(root, "Combat.html"), "utf8");
+writeFileSync(resolve(root, "Combat.html"), html.replace(/\r?\n/g, previous.includes("\r\n") ? "\r\n" : "\n"), "utf8");

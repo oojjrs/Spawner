@@ -1,0 +1,71 @@
+{
+  "reason": "Existing bean UnitRangedV1 source cameras were missing from policy; match the other three tribes without lowering native resolution.",
+  "rows": [
+    {
+      "image": "DesignAssets/Animations/UnitRangedV1/bean/Source/neutral.png",
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "65a547fbe1664cfa3e0fb534e94eae029cb9cb18a66518df670daa8e70533811",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    {
+      "image": "DesignAssets/Animations/UnitRangedV1/bean/shoot.webp",
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        6,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "b3201a6c2f7d911fc3de72251c20ebb9a5559810018a1f6e216a25b30ac9321d",
+        "dimensions": [
+          3072,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    {
+      "image": "DesignAssets/Animations/UnitRangedV1/bean/projectile.png",
+      "display": [
+        31,
+        18
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "970305d9b9ce24970738d30e8dbcfd3eaa1f0c4e247226a57b3be5ffdf262da0",
+        "dimensions": [
+          62,
+          36
+        ],
+        "frame": [
+          62,
+          36
+        ]
+      }
+    }
+  ]
+}

@@ -4,6 +4,11 @@
     await globalThis.SpawnerAssets.ready;
     const assetSource = globalThis.SpawnerAssets.source;
     const tribeArt = Spawner.createTribeArt(Spawner.PLAYER_TRIBES, assetSource);
+    const appearanceWorld = globalThis.SpawnerAppearance.createUnitAppearanceWorld({ sourceUrl: assetSource });
+    let appearanceWorldPoses = new Map();
+    const combatVfxCursor = Spawner.createCombatVfxCursor();
+    let combatVfxFrame = { active: [], projectiles: [] };
+    addEventListener("pagehide", () => appearanceWorld.clear());
     const combatAttributeArt = Spawner.createCombatAttributeArt(assetSource, (width, height) => {
       const surface = document.createElement("canvas"); surface.width = width; surface.height = height; return surface;
     }, async path => {
@@ -4317,7 +4322,11 @@
           { x: frameSize / 2, y: frameSize / 2, size: frameSize }, motion);
         drawSelectionOutline(surface, x - size / 2, y - size / 2, size * 2, size * 2, null, outlineColor);
       }
-      Spawner.drawSpringBirthSurface(ctx, sprite, source, { x, y, size }, motion);
+      const registered = !outlineColor && !attributeFrame && globalThis.SpawnerAppearance.unitAppearanceBirthSceneForAgent(agent);
+      if (registered) globalThis.SpawnerAppearance.drawUnitAppearanceBirthSceneBody(ctx, registered, springBirthSheet,
+        { frame: birth.frame, elapsed, worldPixels: cell, topLeft, outerDisplayScaleApplied: true,
+          anchor: { x: topLeft.x + cell / 2, y: topLeft.y + cell / 2 + cell * AGENT_HEIGHT * .44 } });
+      else Spawner.drawSpringBirthSurface(ctx, sprite, source, { x, y, size }, motion);
       ctx.restore();
     }
 
@@ -4351,7 +4360,11 @@
       }
       if (outlineColor) drawSelectionOutline(sprite, x, y, size, size,
         { owner: sprite, size: frameSize, index: attributeFrame ? 0 : birth.frame, x: sourceX, y: sourceY }, outlineColor);
-      ctx.drawImage(sprite, sourceX, sourceY, frameSize, frameSize, x, y, size, size);
+      const registered = !outlineColor && !attributeFrame && globalThis.SpawnerAppearance.unitAppearanceBirthSceneForAgent(agent);
+      if (registered) globalThis.SpawnerAppearance.drawUnitAppearanceBirthSceneBody(ctx, registered, pebbleBirthSheet,
+        { frame: birth.frame, elapsed: birth.elapsed, worldPixels: cell, topLeft, outerDisplayScaleApplied: true,
+          anchor: { x: topLeft.x + cell / 2, y: topLeft.y + cell / 2 + cell * AGENT_HEIGHT * .44 } });
+      else ctx.drawImage(sprite, sourceX, sourceY, frameSize, frameSize, x, y, size, size);
       ctx.restore();
     }
 
@@ -4442,6 +4455,14 @@
       const attributeFrame = tribeArt.animationFrame(agent, sporeBirthSheet, shape, frame, "birth", birth.elapsed);
       const sprite = attributeFrame || sporeBirthFrames.get(frame);
       if (!sprite) return;
+      const registered = !outlineColor && !attributeFrame && globalThis.SpawnerAppearance.unitAppearanceBirthSceneForAgent(agent);
+      if (registered && Math.abs(birth.scale - registered.legacyPixelStage.nativeWorldPerPixelBeforeDisplay) < 1e-9) {
+        globalThis.SpawnerAppearance.drawUnitAppearanceBirthSceneBody(ctx, registered, sporeBirthSheet,
+          { frame, elapsed: idleMotion.matches ? shape.duration : birth.elapsed, worldPixels: cell, topLeft,
+            outerDisplayScaleApplied: true, facing: birth.facing, nativeFrame: sprite,
+            anchor: { x: topLeft.x + cell / 2, y: topLeft.y + cell / 2 + cell * AGENT_HEIGHT * .44 } });
+        return;
+      }
       const frameSize = attributeFrame ? sprite.width : shape.frameSize;
       const padding = (frameSize - shape.frameSize) / 2;
       const size = frameSize * birth.scale * cell;
@@ -4886,7 +4907,9 @@
     function drawAttackImpacts() {
       const cell = state.camera.zoom;
       const drawnDnaEvents = new Set();
-      for (const agent of visibleAgents()) {
+      const canonical = state.combatVfx?.version === 1;
+      if (canonical) drawRecordedDnaEffects(cell);
+      for (const agent of canonical ? [] : visibleAgents()) {
         for (const attack of agent.dnaProjectiles || []) {
         if (state.simSeconds >= attack.launchedAt && state.simSeconds <= attack.hitAt) {
           const start = worldToScreen(attack.fromX + .5, attack.fromY + .5), end = worldToScreen(attack.targetX + .5, attack.targetY + .5);
@@ -4924,7 +4947,7 @@
       if (cell < 8) return;
       for (const agent of visibleAgents()) {
         const attack = agent.attack;
-        if (agent.combat || !attack || !attack.resolved || !attack.hit) continue;
+        if (agent.combat || !attack || !attack.resolved || !attack.hit || canonical && attack.dnaRanged) continue;
         const age = (state.simSeconds - attack.hitAt) * attack.speed;
         if (age < 0 || age >= .18) continue;
         const target = [...state.agents, ...state.rivals].find(candidate => candidate.id === attack.targetId);
@@ -4944,6 +4967,40 @@
         }
         ctx.stroke();
         ctx.restore();
+      }
+    }
+
+    function drawRecordedDnaEffects(cell) {
+      // Keep the existing presentation while taking timing and every recipient
+      // from the journal. The new artwork is reviewed separately.
+      for (const projectile of combatVfxFrame.projectiles) {
+        if (!projectile.from || !projectile.to) continue;
+        const start = worldToScreen(projectile.from.x + .5, projectile.from.y + .5);
+        const end = worldToScreen(projectile.to.x + .5, projectile.to.y + .5), progress = projectile.progress;
+        const x = start.x + (end.x - start.x) * progress, y = start.y + (end.y - start.y) * progress;
+        ctx.save(); ctx.fillStyle = "#b6ed84"; ctx.strokeStyle = "#e0ffb7"; ctx.lineWidth = Math.max(1, cell * .035);
+        ctx.beginPath(); ctx.moveTo(start.x, start.y); ctx.lineTo(x, y); ctx.stroke();
+        ctx.beginPath(); ctx.arc(x, y, Math.max(2, cell * .07), 0, Math.PI * 2); ctx.fill(); ctx.restore();
+      }
+      for (const cue of combatVfxFrame.active) {
+        if (cue.channel === "impact" && cue.mode === "ranged" && ["hit", "critical", "followup"].includes(cue.kind) && cue.age < .22 && cue.to) {
+          const point = worldToScreen(cue.to.x + .5, cue.to.y + .5), progress = cue.age / .22;
+          ctx.save(); ctx.globalAlpha = 1 - progress; ctx.strokeStyle = "#e0ffb7"; ctx.lineWidth = Math.max(1, cell * .025);
+          ctx.beginPath();
+          for (let ray = 0; ray < 6; ray++) {
+            const angle = ray * Math.PI / 3, radius = cell * (.12 + progress * .15);
+            ctx.moveTo(point.x + Math.cos(angle) * radius * .4, point.y + Math.sin(angle) * radius * .4);
+            ctx.lineTo(point.x + Math.cos(angle) * radius, point.y + Math.sin(angle) * radius);
+          }
+          ctx.stroke(); ctx.restore();
+        }
+        if (cue.kind === "heal" && cue.channel === "restore" && cue.from && cue.to) {
+          const start = worldToScreen(cue.from.x + .5, cue.from.y + .5), end = worldToScreen(cue.to.x + .5, cue.to.y + .5);
+          const age = Math.min(1, cue.age / Math.max(.001, cue.endsAt - cue.at));
+          ctx.save(); ctx.globalAlpha = 1 - age; ctx.strokeStyle = "#87ebc6"; ctx.lineWidth = Math.max(1.5, cell * .035);
+          ctx.beginPath(); ctx.moveTo(start.x, start.y); ctx.lineTo(end.x, end.y); ctx.stroke();
+          ctx.beginPath(); ctx.arc(end.x, end.y, cell * (.15 + age * .2), 0, Math.PI * 2); ctx.stroke(); ctx.restore();
+        }
       }
     }
 
@@ -5132,7 +5189,7 @@
       agent = displayedAgent(agent);
       const position = interpolatedAgentPosition(agent);
       const point = worldToScreen(position.x + .5, position.y + unitDisplayFloor(agent));
-      const scale = unitDisplayScale(agent);
+      const scale = appearanceWorldPoses.has(String(agent.id)) ? 1 : unitDisplayScale(agent);
       ctx.save();
       ctx.translate(point.x, point.y);
       ctx.scale(scale, scale);
@@ -5185,6 +5242,18 @@
 
     function drawAgentAppearance(ctx, now, agent, cell, topLeft, renderPosition, birth, outlineColor) {
       agent = displayedAgent(agent);
+      const appearancePose = ctx.canvas === canvas && !birth && appearanceWorldPoses.get(String(agent.id));
+      if (appearancePose) {
+        const floor = topLeft.y + cell * (.5 + AGENT_HEIGHT * .44);
+        const facing = agent.combat ? agent.combat.side === 0 ? -1 : 1 : agent.facing || 1;
+        const drawn = appearanceWorld.draw(ctx, agent, appearancePose,
+          { x: topLeft.x + cell / 2, y: floor - agentJumpOffset(agent, renderPosition) * cell }, cell,
+          facing < 0, viewport.pixelRatio, outlineColor ? (context, image, crop, destination) => {
+            drawSelectionOutline(image, destination.x, destination.y, destination.width, destination.height,
+              { owner: image, index: appearancePose.frame, x: crop.x, y: crop.y, size: crop.width }, outlineColor);
+          } : null);
+        if (drawn) { drawAgentCarrying(ctx, agent, cell, topLeft, renderPosition); return; }
+      }
       const attributes = agent.appearanceAttributes || agent.attributes || {};
       const jumping = !birth && !agent.species && (agent.tribe || "bean") === "bean" && !attributes.feet;
       ctx.save();
@@ -5925,6 +5994,14 @@
       updateTreeMotion();
       updateSelection();
       updateHover();
+      combatVfxFrame = combatVfxCursor.consume(state.combatVfx, state.simSeconds);
+
+      const appearanceAgents = state.camera.zoom >= 8 ? [...state.agents, ...state.rivals].map(displayedAgent).filter(agent => {
+        if (agent.species || agentBirthPose(agent, true)) return false;
+        const position = interpolatedAgentPosition(agent), point = worldToScreen(position.x, position.y), margin = state.camera.zoom * 2;
+        return point.x > -margin && point.y > -margin && point.x < viewport.width + margin && point.y < viewport.height + margin;
+      }) : [];
+      appearanceWorldPoses = appearanceWorld.prepare(ctx, appearanceAgents, state.simSeconds, state.camera.zoom, viewport.pixelRatio);
 
       ctx.clearRect(0, 0, viewport.width, viewport.height);
       ctx.fillStyle = "#111619";
@@ -7971,6 +8048,13 @@
     }
     function combatVisualEvent(agent) {
       if (!agent?.combat) return null;
+      if (state.combatVfx?.version === 1) {
+        const matches = combatVfxFrame.active.filter(cue => ["impact", "defense", "prepare", "status"].includes(cue.channel) &&
+          ["hit", "critical", "followup", "counter", "parry", "block", "stun"].includes(cue.kind) &&
+          (String(cue.sourceId) === String(agent.id) || String(cue.targetId) === String(agent.id)));
+        const cue = matches.findLast(cue => ["defense", "status"].includes(cue.channel) && String(cue.targetId) === String(agent.id)) || matches.at(-1);
+        return cue ? { ...cue, kind: ["critical", "followup"].includes(cue.kind) ? "hit" : cue.kind, damage: cue.amount } : null;
+      }
       const relevant = event => event && (String(event.sourceId) === String(agent.id) || String(event.targetId) === String(agent.id)) && ["hit", "counter", "parry", "block", "stun"].includes(event.kind);
       const reaction = agent.combat.lastReaction;
       if (relevant(reaction) && String(reaction.targetId) === String(agent.id) && state.simSeconds >= reaction.at && state.simSeconds - reaction.at < .5) return reaction;
@@ -8073,6 +8157,7 @@
       combatWatch.maxWidth = Math.max(combatWatch.maxWidth || .4, ...[...dimensions.values()].map(size => size.width));
       combatWatch.maxHeight = Math.max(combatWatch.maxHeight || .4, ...[...dimensions.values()].map(size => size.height));
       const cell = Math.min(width * .31, width * .22 / combatWatch.maxWidth, height * .43 / combatWatch.maxHeight);
+      const appearancePoses = appearanceWorld.prepare(context, arenaUnits, state.simSeconds, cell, 1);
       const positions = new Map();
       const slots = [{ x:.39, floor:.76 }, { x:.20, floor:.58 }, { x:.21, floor:.88 }];
       [0, 1].forEach(side => arenaUnits.filter(agent => agent.combat.side === side).forEach((agent, index) => {
@@ -8107,10 +8192,12 @@
         const visual = { ...agent, facing, hurtStartedAt: Number.isFinite(agent.hurtStartedAt) ? agent.hurtStartedAt + (frozen ? age : 0) : agent.hurtStartedAt,
           combat: { ...agent.combat, side: facing > 0 ? 1 : 0 }, attack: attack ? { ...attack, directionX: facing,
             startedAt: attack.startedAt + (frozen ? age : 0), hitAt: attack.hitAt + (frozen ? age : 0), endsAt: attack.endsAt + (frozen ? age : 0) } : null };
-        context.save(); context.translate(x, y); context.scale(point.scale, point.scale);
+        const appearancePose = appearancePoses.get(String(agent.id));
+        context.save(); context.translate(x, y); context.scale(appearancePose ? 1 : point.scale, appearancePose ? 1 : point.scale);
         if (agent.combat.stunnedUntil > state.simSeconds) context.globalAlpha = .65;
         if (agent.species) drawCombatCreature(context, visual, 0, 0, cell);
-        else drawAgentAppearanceBody(context, now, visual, cell, { x:-cell / 2, y:-cell * (.5 + AGENT_HEIGHT * .44) }, null, null, null);
+        else if (!appearancePose || !appearanceWorld.draw(context, visual, appearancePose, { x: 0, y: 0 }, cell, facing < 0, 1))
+          drawAgentAppearanceBody(context, now, visual, cell, { x:-cell / 2, y:-cell * (.5 + AGENT_HEIGHT * .44) }, null, null, null);
         context.restore();
         const barWidth = clamp(point.width * .6, 32, 100), barY = y + 8;
         context.fillStyle = "#182323"; context.fillRect(x - barWidth / 2, barY, barWidth, 5);

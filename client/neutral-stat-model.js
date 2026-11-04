@@ -5,7 +5,7 @@
     { key: 'power', name: '공격력', unit: '피해', step: 1, max: 1e12, min: 1, color: '#f08087' },
     { key: 'speed', name: '공격 속도', unit: '회/초', step: .001, max: 1e6, min: .001, color: '#83c5ed' },
     { key: 'defense', name: '방어력', unit: '방어', step: 1, max: 1e12, min: 0, color: '#ad9ae8' },
-    { key: 'regen', name: '자기 재생', unit: 'HP/초', step: 1, max: 1e12, min: 0, color: '#82cfa5' }
+    { key: 'regen', name: '자기 재생', unit: 'HP/초', step: .1, max: 1e12, min: 0, color: '#82cfa5' }
   ];
   // Per-stat ranks and comparison party sizes are the handoff's fixed inputs.
   const rows = [
@@ -30,7 +30,13 @@
     return curves;
   }
   function valid(curves) {
-    return axes.every(a=>Array.isArray(curves?.[a.key])&&curves[a.key].length===19&&curves[a.key].every((v,i,vs)=>Number.isFinite(v)&&v>=a.min&&v<=a.max&&(a.step!==1||Number.isInteger(v))&&(!i||v>vs[i-1])));
+    return axes.every(a=>Array.isArray(curves?.[a.key])&&curves[a.key].length===19&&curves[a.key].every((v,i,vs)=>Number.isFinite(v)&&v>=a.min&&v<=a.max&&Math.abs(v/a.step-Math.round(v/a.step))<1e-6&&(!i||v>vs[i-1])));
+  }
+  function runtimeScalePreset() {
+    return {hp:[30,45,65,90,96,102,108,114,120,126,132,138,144,150,156,210,270,390,590],
+      power:[1,2,3,4,5,6,7,8,9,10,11,12,24,25,26,27,28,33,53],
+      speed:Array.from({length:19},(_,i)=>Number((.4+.04*i).toFixed(3))),
+      defense:[...Array.from({length:18},(_,i)=>2+2*i),44],regen:Array.from({length:19},(_,i)=>Number((.1+.1*i).toFixed(1)))};
   }
   function edit(curves,key,index,value) {
     const axis=axes.find(a=>a.key===key);if(!axis||!Number.isInteger(index)||index<0||index>=19||!Number.isFinite(value))return false;
@@ -38,11 +44,12 @@
     values[index]=Number(Math.max(low,Math.min(high,Math.round(Math.max(axis.min,Math.min(axis.max,value))/axis.step)*axis.step)).toFixed(axis.step===1?0:3));
     return true;
   }
-  function calculate(curves) {
+  function calculate(curves,options={}) {
     if(!valid(curves))throw new Error('유효하지 않은 곡선입니다. 티어별 값은 엄격히 증가해야 합니다.');
     const units=rows.map(row=>{
       const stats=Object.fromEntries(axes.map(a=>[a.key,curves[a.key][row.ranks[a.key]-1]]));
-      const dps=stats.power*stats.speed/1.5,playerDps=7500/(100+stats.defense),netDps=row.party*playerDps-stats.regen;
+      const reference=options.reference||{power:75,speed:1,defense:50};
+      const dps=stats.power*stats.speed*100/(100+reference.defense),playerDps=reference.power*reference.speed*100/(100+stats.defense),netDps=row.party*playerDps-(options.regenInCombat===false?0:stats.regen);
       const seconds=netDps>0?stats.hp/netDps:Infinity;
       return {...row,...stats,hps:stats.regen,dps,playerDps,netDps,seconds,outside:seconds<10||seconds>60};
     });
@@ -53,5 +60,21 @@
     }
     return {units,inversions};
   }
-  globalThis.SpawnerNeutralCurves=Object.freeze({axes,rows,lineages,initial,valid,edit,calculate});
+  function diagnose(curves,balance,options={}) {
+    const {units}=calculate(curves,options),actual=new Map((balance?.runtime||[]).map(unit=>[unit.key,unit]));
+    const comparisons=units.map(unit=>{
+      const current=actual.get(unit.key);if(!current)return {...unit,current:null};
+      const reference=options.reference||{power:75,speed:1,defense:50},netDps=unit.party*reference.power*reference.speed*100/(100+current.defense)-current.regen;
+      return {...unit,current:{...current,dps:current.power*current.speed*100/(100+reference.defense),seconds:netDps>0?current.hp/netDps:Infinity}};
+    });
+    const bounds=axes.map(axis=>{
+      const bound=balance?.dna?.bounds?.[axis.key];if(!bound)return null;
+      const maximum=curves[axis.key][18];
+      // A lower-bound witness can demonstrate a safe maximum. An upper bound
+      // can disprove it. Values between them remain unproven, not "passed".
+      return {...axis,...bound,maximum,status:maximum>=bound.upper?'blocked':maximum<bound.witness?'within-witness':'unproven'};
+    }).filter(Boolean);
+    return {units:comparisons,bounds};
+  }
+  globalThis.SpawnerNeutralCurves=Object.freeze({axes,rows,lineages,initial,runtimeScalePreset,valid,edit,calculate,diagnose});
 })();

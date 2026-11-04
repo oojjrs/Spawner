@@ -1,4 +1,5 @@
 import { COMBAT_LAB_UNITS } from "./combat-lab.mjs";
+import { createUnitAppearanceWorld } from "./unit-appearance-world.mjs";
 import { AGENT_DEATH_ANIMATION } from "./agent-death.mjs";
 import { imageAnimation, imageFrameGeometry } from "./image-geometry.mjs";
 import { unitDisplaySize } from "./unit-size.mjs";
@@ -66,6 +67,8 @@ function poseFor(agent, time, deathAge) {
 
 export function createCombatStage(canvas) {
   const context = canvas.getContext("2d"), images = new Map();
+  const appearanceWorld = createUnitAppearanceWorld();
+  let appearancePoses = new Map();
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const deathStarted = new Map(), readyPoses = new Map();
   let currentTrial, seen = 0, effects = [], clock = 0, lastNow = 0;
@@ -181,7 +184,10 @@ export function createCombatStage(canvas) {
       context.fillStyle = colors[index] + "24";
       context.beginPath(); context.ellipse(0, -height * .18, width * .09, height * .3, 0, 0, Math.PI * 2); context.fill();
     }
-    if (asset) {
+    const appearancePose = appearancePoses.get(String(agent.id));
+    const appearanceDrawn = appearancePose && appearanceWorld.draw(context, agent, appearancePose, { x: 0, y: 0 },
+      100 * formationScale(width, height), index === 1, window.devicePixelRatio || 1);
+    if (!appearanceDrawn && asset) {
       const mirror = pose?.mirrorX !== undefined ? pose.mirrorX : agent.species === "spiny-back-beetle" ? pose?.action === "attack" ? index === 1 : index === 0 :
         agent.species && CREATURE_ATTACK_ANIMATIONS[agent.species] ? index === 0 : index === 1;
       context.scale(mirror ? -1 : 1, 1);
@@ -280,7 +286,10 @@ export function createCombatStage(canvas) {
     context.strokeStyle = colors[agent.combat.side]; context.lineWidth = 2;
     context.beginPath(); context.ellipse(0, 0, geometry?.groundRadiusX ? geometry.groundRadiusX * size * 1.12 : width * .065 * shadowScale,
       geometry?.groundRadiusY ? geometry.groundRadiusY * size * 1.12 : height * .03 * shadowScale, 0, 0, Math.PI * 2); context.stroke();
-    if (asset) {
+    const appearancePose = appearancePoses.get(String(agent.id));
+    const appearanceDrawn = appearancePose && appearanceWorld.draw(context, agent, appearancePose, { x: 0, y: 0 },
+      100 * formationScale(width, height), agent.combat.side === 1, window.devicePixelRatio || 1);
+    if (!appearanceDrawn && asset) {
       const mirror = pose?.mirrorX !== undefined ? pose.mirrorX : agent.species === "spiny-back-beetle" ? pose?.action === "attack" ? agent.combat.side === 1 : agent.combat.side === 0 :
         agent.species && CREATURE_ATTACK_ANIMATIONS[agent.species] ? agent.combat.side === 0 : agent.combat.side === 1;
       context.save(); context.scale(mirror ? -1 : 1, 1);
@@ -320,7 +329,7 @@ export function createCombatStage(canvas) {
 
   function render(trial, now, playing) {
     const delta = lastNow ? Math.min(.1, (now - lastNow) / 1000) : 0; lastNow = now;
-    if (trial !== currentTrial) { currentTrial = trial; seen = 0; effects = []; clock = 0; deathStarted.clear(); readyPoses.clear(); }
+    if (trial !== currentTrial) { currentTrial = trial; seen = 0; effects = []; clock = 0; deathStarted.clear(); readyPoses.clear(); appearanceWorld.clear(); }
     if (playing || !trial?.time || trial?.result()?.reason || effects.some(effect => clock - effect.born < .85)) clock += delta;
     if (trial) {
       const unseen = trial.history.slice(seen);
@@ -340,6 +349,10 @@ export function createCombatStage(canvas) {
     if (!trial) return;
     const ended = !!trial.result()?.reason;
     const time = trial.time || clock;
+    appearancePoses = appearanceWorld.prepare(context, [...trial.agents, ...(trial.supportAgents || [])].map(entry => {
+      const agent = stageAgent(entry), deathAt = deathStarted.get(agent.id);
+      return agent.health <= 0 ? { ...agent, deathStartedAt: time - (clock - (deathAt ?? clock)) } : agent;
+    }), time, 100 * formationScale(width, height), ratio, { attackClock: "lab" });
     const impact = effects.findLast(effect => effect.event.damage > 0 && clock - effect.born < .11);
     context.save();
     if (impact && !reducedMotion.matches && playing) {
@@ -353,5 +366,5 @@ export function createCombatStage(canvas) {
     context.restore();
   }
 
-  return { render };
+  return { render, clear: appearanceWorld.clear, appearanceStats: appearanceWorld.stats };
 }

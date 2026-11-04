@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { createWelcomeRoster, welcomeCreatureScale, prepareWelcomeChoice, welcomeTravelMotion } from "./welcome-presentation.mjs";
+import { createWelcomeRoster, welcomeCreatureScale, prepareWelcomeChoice, welcomeTravelMotion, drawWelcomeChoice } from "./welcome-presentation.mjs";
 import { CREATURE_IDLE_ANIMATIONS, unitMovementPosition, creatureAnimationSpeed } from "./unit-animation.mjs";
 import { unitStats } from "../server/attributes.mjs";
 
@@ -103,4 +103,26 @@ test("rejected neutral sources can retry, and permanently unavailable ones can b
 test("a never-settling lazy source releases the rotation after its deadline",async()=>{
   const value=await prepareWelcomeChoice({key:"pebble",variant:2},v=>v.variant?new Promise(()=>{}):Promise.resolve(),{timeoutMs:5});
   assert.equal(value.variant,0);
+});
+
+test("a decoded rig that fails its first draw falls back without breaking the next character", () => {
+  const attempts = [], failures = [];
+  const choice = { key: "pebble", variant: 2 };
+  const drawn = drawWelcomeChoice(choice, candidate => {
+    attempts.push(candidate.variant);
+    if (candidate.variant) throw new Error("first pose rasterization failed");
+  }, { onError: (error, candidate) => failures.push(candidate.variant) });
+  assert.deepEqual(drawn, { key: "pebble", variant: 0 });
+  assert.deepEqual(attempts, [2, 0]);
+  assert.deepEqual(failures, [2]);
+  assert.equal(choice.variant, 2);
+  assert.deepEqual(drawWelcomeChoice({ key: "spring", variant: 1 }, () => {}), { key: "spring", variant: 1 });
+});
+
+test("unrenderable base or neutral appearances are skipped without inventing a different species", () => {
+  for (const choice of [{ key: "bean", variant: 0 }, { key: "dew-rabbit", variant: 0 }]) {
+    const attempts = [];
+    assert.equal(drawWelcomeChoice(choice, candidate => { attempts.push(candidate); throw new Error("source failed"); }), null);
+    assert.deepEqual(attempts, [choice]);
+  }
 });

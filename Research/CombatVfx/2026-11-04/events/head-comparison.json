@@ -1,0 +1,356 @@
+{
+  "baseline": "HEAD core source in isolated copy",
+  "compared": 38,
+  "equality": "exact result + HP/state checkpoints + damage/history rows + random sample counts",
+  "imageChanges": false,
+  "observedServerKinds": [
+    "area",
+    "attack",
+    "bleed",
+    "bleed-apply",
+    "block",
+    "counter",
+    "critical",
+    "death",
+    "drain",
+    "followup",
+    "heal",
+    "hit",
+    "miss",
+    "parry",
+    "reflect",
+    "regeneration",
+    "shoot",
+    "stun"
+  ],
+  "comparisons": [
+    {
+      "engine": "server",
+      "scenario": "melee-effects",
+      "seed": 1,
+      "sha256": "130548e18806d904c968c4034319333c578254555a584a870927068207550293",
+      "damageEvents": 41,
+      "chanceDraws": 84,
+      "damageDraws": 14
+    },
+    {
+      "engine": "server",
+      "scenario": "melee-effects",
+      "seed": 7,
+      "sha256": "f81a9e08a42d56416ed701d25801a77008c6fbdc62728c4dc84c01e245c8291b",
+      "damageEvents": 41,
+      "chanceDraws": 84,
+      "damageDraws": 14
+    },
+    {
+      "engine": "server",
+      "scenario": "melee-effects",
+      "seed": 42,
+      "sha256": "1273dd51028ac7dd0d1031bb159d74d75a2716d05d20487f9ad14b0d079791ae",
+      "damageEvents": 41,
+      "chanceDraws": 84,
+      "damageDraws": 14
+    },
+    {
+      "engine": "server",
+      "scenario": "melee-effects",
+      "seed": 20261104,
+      "sha256": "853d5d38a26aac65a59affca66e167b6ac22bcfc0757b14b46e376000ec0e9b1",
+      "damageEvents": 41,
+      "chanceDraws": 84,
+      "damageDraws": 14
+    },
+    {
+      "engine": "server",
+      "scenario": "ranged-effects",
+      "seed": 1,
+      "sha256": "8318360902f4830e8de91d0778228a21190302a8b8ff8745dfa2f7d7547ed780",
+      "damageEvents": 27,
+      "chanceDraws": 72,
+      "damageDraws": 12
+    },
+    {
+      "engine": "server",
+      "scenario": "ranged-effects",
+      "seed": 7,
+      "sha256": "02ac3f14c8c70f60ba0a689d47439df26783d6d2eeac856ea5af10d2b507c11e",
+      "damageEvents": 27,
+      "chanceDraws": 72,
+      "damageDraws": 12
+    },
+    {
+      "engine": "server",
+      "scenario": "ranged-effects",
+      "seed": 42,
+      "sha256": "06eebea02e5521bd223c337a963377f392c5c97d8a78b3744d4e1ddbdf623e57",
+      "damageEvents": 27,
+      "chanceDraws": 72,
+      "damageDraws": 12
+    },
+    {
+      "engine": "server",
+      "scenario": "ranged-effects",
+      "seed": 20261104,
+      "sha256": "dc6aa491ae22c906b557a5573251ad498079b59065aadcdabb6bc24897a20a61",
+      "damageEvents": 27,
+      "chanceDraws": 72,
+      "damageDraws": 12
+    },
+    {
+      "engine": "server",
+      "scenario": "evasion",
+      "seed": 1,
+      "sha256": "b6454cc79f7d74e7bb859f322f0d3cf463e320fecf6bcc7d0116921c9996f6e7",
+      "damageEvents": 3,
+      "chanceDraws": 30,
+      "damageDraws": 15
+    },
+    {
+      "engine": "server",
+      "scenario": "evasion",
+      "seed": 7,
+      "sha256": "86291b85c4fa73cf4c9ac45940bbd804d5cb3350e4d11862487fa5db1eaa16d3",
+      "damageEvents": 3,
+      "chanceDraws": 30,
+      "damageDraws": 15
+    },
+    {
+      "engine": "server",
+      "scenario": "evasion",
+      "seed": 42,
+      "sha256": "174ff6584c327f74917aaf1f8a5bc9d52f1612c4955afa492abf071e1a9f5be3",
+      "damageEvents": 3,
+      "chanceDraws": 30,
+      "damageDraws": 15
+    },
+    {
+      "engine": "server",
+      "scenario": "evasion",
+      "seed": 20261104,
+      "sha256": "0815b2cb73e17c0c1e41d8bd990b4709d7d559b2408d5ac484eaf6d093ee91e3",
+      "damageEvents": 3,
+      "chanceDraws": 30,
+      "damageDraws": 15
+    },
+    {
+      "engine": "server",
+      "scenario": "parry",
+      "seed": 1,
+      "sha256": "76ae98110e3c110f2c0b2256f5082e52d9ff2be64c107eab13e0341001540fa9",
+      "damageEvents": 3,
+      "chanceDraws": 48,
+      "damageDraws": 15
+    },
+    {
+      "engine": "server",
+      "scenario": "parry",
+      "seed": 7,
+      "sha256": "3c736394c5465e5a5050a63d723dee29e93623bb8f25fcd60b9ca58f7d01263c",
+      "damageEvents": 3,
+      "chanceDraws": 48,
+      "damageDraws": 15
+    },
+    {
+      "engine": "server",
+      "scenario": "parry",
+      "seed": 42,
+      "sha256": "54db17ac1b81a3cf221cb97cff805e3490965141c6e6871d508e2dd63b3f3e73",
+      "damageEvents": 3,
+      "chanceDraws": 48,
+      "damageDraws": 15
+    },
+    {
+      "engine": "server",
+      "scenario": "parry",
+      "seed": 20261104,
+      "sha256": "369dfef198fb53e0cb5d43577506b747d8f23e2ced28a5958770de4c5a01da43",
+      "damageEvents": 3,
+      "chanceDraws": 48,
+      "damageDraws": 15
+    },
+    {
+      "engine": "server",
+      "scenario": "block",
+      "seed": 1,
+      "sha256": "01e8dc28dc3c8da3655065945a57001227d767de6beeb80ba22df32598d70a86",
+      "damageEvents": 41,
+      "chanceDraws": 96,
+      "damageDraws": 15
+    },
+    {
+      "engine": "server",
+      "scenario": "block",
+      "seed": 7,
+      "sha256": "45dad588b930f594dc01c2372383bcd545cca17ff5547b2ebe8cace5f171436b",
+      "damageEvents": 43,
+      "chanceDraws": 96,
+      "damageDraws": 15
+    },
+    {
+      "engine": "server",
+      "scenario": "block",
+      "seed": 42,
+      "sha256": "5e554029c1cd80c1a887a00d4def9ad84cd83099a3182908bc46a7dced2f9188",
+      "damageEvents": 42,
+      "chanceDraws": 96,
+      "damageDraws": 15
+    },
+    {
+      "engine": "server",
+      "scenario": "block",
+      "seed": 20261104,
+      "sha256": "9fbc4602711fb931282169509a239b55e85f2f69caafe03a008554c388111c6b",
+      "damageEvents": 42,
+      "chanceDraws": 96,
+      "damageDraws": 15
+    },
+    {
+      "engine": "server",
+      "scenario": "lethal-area",
+      "seed": 1,
+      "sha256": "4ca3f80ed2a3af0ad3c4b19d3f5eb1b2150154b6f0a2a61ff7ba8cae4d8d53bc",
+      "damageEvents": 30,
+      "chanceDraws": 84,
+      "damageDraws": 14
+    },
+    {
+      "engine": "server",
+      "scenario": "lethal-area",
+      "seed": 7,
+      "sha256": "807172a9a4eaa2e0cd6697415a213476f864c2c5de97ee855563afefe1162a9b",
+      "damageEvents": 30,
+      "chanceDraws": 84,
+      "damageDraws": 14
+    },
+    {
+      "engine": "server",
+      "scenario": "lethal-area",
+      "seed": 42,
+      "sha256": "8748f30bfdff5a8c6730ab2e5d7a6ef339e0a10e3ec69782cbb36a38b1e43ddc",
+      "damageEvents": 30,
+      "chanceDraws": 84,
+      "damageDraws": 14
+    },
+    {
+      "engine": "server",
+      "scenario": "lethal-area",
+      "seed": 20261104,
+      "sha256": "85f65f6b60e6479be274efa6c8d4b207f37fc3b3003bbded9fc5db8411ded81d",
+      "damageEvents": 30,
+      "chanceDraws": 84,
+      "damageDraws": 14
+    },
+    {
+      "engine": "server",
+      "scenario": "regeneration",
+      "seed": 1,
+      "sha256": "417dd70ae9e7b9449d5a2be28a8bf16eda860664c3f9195ed9ec2a54b0775510",
+      "damageEvents": 0,
+      "chanceDraws": 0,
+      "damageDraws": 0
+    },
+    {
+      "engine": "server",
+      "scenario": "regeneration",
+      "seed": 7,
+      "sha256": "417dd70ae9e7b9449d5a2be28a8bf16eda860664c3f9195ed9ec2a54b0775510",
+      "damageEvents": 0,
+      "chanceDraws": 0,
+      "damageDraws": 0
+    },
+    {
+      "engine": "server",
+      "scenario": "regeneration",
+      "seed": 42,
+      "sha256": "417dd70ae9e7b9449d5a2be28a8bf16eda860664c3f9195ed9ec2a54b0775510",
+      "damageEvents": 0,
+      "chanceDraws": 0,
+      "damageDraws": 0
+    },
+    {
+      "engine": "server",
+      "scenario": "regeneration",
+      "seed": 20261104,
+      "sha256": "417dd70ae9e7b9449d5a2be28a8bf16eda860664c3f9195ed9ec2a54b0775510",
+      "damageEvents": 0,
+      "chanceDraws": 0,
+      "damageDraws": 0
+    },
+    {
+      "engine": "simulation",
+      "scenario": "melee",
+      "seed": 1,
+      "sha256": "6153028cced8c6e26006a8c0a56acd5c88633eebac8764a41e867051b595ae73",
+      "historyRows": 24,
+      "randomDraws": 85
+    },
+    {
+      "engine": "simulation",
+      "scenario": "melee",
+      "seed": 7,
+      "sha256": "811cb9850058283a4e65b5cc192d26b9cd88fce5aeaa948a2976359a41b4c28d",
+      "historyRows": 27,
+      "randomDraws": 93
+    },
+    {
+      "engine": "simulation",
+      "scenario": "melee",
+      "seed": 42,
+      "sha256": "2a5a0f707dd674b93d03cc7d8a73f449f133e723ae0588ca9047047e1ebe545e",
+      "historyRows": 24,
+      "randomDraws": 69
+    },
+    {
+      "engine": "simulation",
+      "scenario": "melee",
+      "seed": 20261104,
+      "sha256": "19fd9d434ad161c86bab77d74021c41da81f254be89ad8618e13fa08aa32f568",
+      "historyRows": 24,
+      "randomDraws": 74
+    },
+    {
+      "engine": "simulation",
+      "scenario": "ranged",
+      "seed": 1,
+      "sha256": "01fcec1512634dad7a20eeebd4911d5c6a1975f00950aeebdc8d6b01ddb958c0",
+      "historyRows": 34,
+      "randomDraws": 72
+    },
+    {
+      "engine": "simulation",
+      "scenario": "ranged",
+      "seed": 7,
+      "sha256": "a06014c71e3faa76c9c6e8d6f39d38cb9f98e23e658419bcf28e4dc4773c8ce4",
+      "historyRows": 37,
+      "randomDraws": 80
+    },
+    {
+      "engine": "simulation",
+      "scenario": "ranged",
+      "seed": 42,
+      "sha256": "089397ca913c5bd384726f33adb91c742ba7e3c7fc3c65749c55076b361c3fb7",
+      "historyRows": 34,
+      "randomDraws": 56
+    },
+    {
+      "engine": "simulation",
+      "scenario": "ranged",
+      "seed": 20261104,
+      "sha256": "6f1f45d552913ffcbd786afa21e4352291d353caf677a500193b5a704ac32b83",
+      "historyRows": 34,
+      "randomDraws": 61
+    },
+    {
+      "engine": "legacy-lab",
+      "seed": 1,
+      "sha256": "b76c3a25e258b9adfbef5f21bfd3f3486dfa599d0ebd1c8f4cc405f21a048479",
+      "historyRows": 11
+    },
+    {
+      "engine": "legacy-lab",
+      "seed": 42,
+      "sha256": "8d25d0a9949272eddd55937384d6738da89ffb4030118538d16a057781de1c01",
+      "historyRows": 13
+    }
+  ]
+}

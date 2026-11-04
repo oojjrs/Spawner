@@ -7,6 +7,7 @@ import { isTreeFood } from "../server/food.mjs";
 import { PLAYER_TRIBES } from "../server/player-tribes.mjs";
 import { commandRoomCheat } from "../server/cheats.mjs";
 import { createUnitIndex } from "../server/unit-index.mjs";
+import { snapshotCombatVfx } from "../server/combat-vfx-journal.mjs";
 
 const simulationUpdates = new WeakMap();
 
@@ -205,6 +206,11 @@ export function tickRoom(room, elapsed) {
 export function snapshotRoom(room, includeWorld) {
   prepare(room);
   const game = room.games.get(room.hostId);
+  const state = game.snapshot();
+  const agentIds = new Set([...state.agents, ...state.rivals].map(agent => agent.id));
+  const combatVfx = snapshotCombatVfx(room, room.simSeconds, {
+    agentIds, isVisible: (x, y) => game.isVisible(Math.floor(x), Math.floor(y))
+  });
   return { roomId: room.id, title: room.title, hostId: room.hostId, userId: room.hostId,
     cheats: room.cheats === true,
     revision: room.revision, tribeStarts: includeWorld ? roomTribeStarts(room) : undefined, colonyId: room.colonies.find(colony => colony.ownerId === room.hostId).id,
@@ -213,7 +219,7 @@ export function snapshotRoom(room, includeWorld) {
     world: includeWorld ? { roomId: room.id, size: (room.world.size || 320), seed: room.seed, generationVersion: room.world.generationVersion, terrain: room.world.terrain, hazards: room.world.hazards, burrows: room.world.burrows, treeCells: room.world.treeCells,
       creatureHabitats: (room.world.encounters || []).map(plan => ({ key: plan.key, terrains: plan.terrains })),
       resourceCells: [...room.food.values()].filter(cell => cell.kind !== "corpse" && cell.resourceType !== "tree" && !isTreeFood(cell, room.world)).map(cell => [cell.x, cell.y]) } : undefined,
-    state: game.snapshot() };
+    state: { ...state, combatVfx } };
 }
 
 export function commandRoom(room, action) {

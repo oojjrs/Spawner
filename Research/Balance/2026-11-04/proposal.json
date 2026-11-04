@@ -1,0 +1,827 @@
+{
+  "status": "review-proposal-not-applied",
+  "reference": {
+    "pieces": [
+      {
+        "gene": "blade",
+        "grade": 1,
+        "rotation": 4,
+        "shape": [
+          0,
+          2
+        ]
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 1,
+        "shape": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 3,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 5,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 5,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 4,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 3,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 3,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 4,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 5,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 3,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 4,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 3,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 4,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 4,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 3,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 4,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 5,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 3,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 3,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 5,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 4,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 5,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 3,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 4,
+        "shape": [
+          0,
+          1
+        ]
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 3,
+        "shape": [
+          0,
+          1
+        ]
+      }
+    ],
+    "stats": {
+      "gatherCount": 0,
+      "bladeCount": 1,
+      "antennaCount": 0,
+      "healerCount": 0,
+      "secretionCount": 0,
+      "melee": true,
+      "ranged": false,
+      "meleePower": 6,
+      "meleeSpeed": 0.5,
+      "rangedPower": 0,
+      "rangedSpeed": 0,
+      "healer": false,
+      "health": 500,
+      "power": 6,
+      "hits": 1,
+      "speed": 0.5,
+      "armor": 0,
+      "parry": 0,
+      "block": 0,
+      "evasion": 0,
+      "capacity": 0,
+      "harvest": 0,
+      "harvestTime": 0,
+      "movement": 0.25,
+      "vision": 1,
+      "scale": 1.51,
+      "roaming": false,
+      "comboPower": 50,
+      "critical": 0,
+      "criticalPower": 150,
+      "accuracy": 0,
+      "penetration": 0,
+      "blockPower": 50,
+      "counter": 0,
+      "counterPower": 100,
+      "tenacity": 0,
+      "reduction": 0,
+      "loadSpeed": 0,
+      "healing": 0,
+      "stun": 0,
+      "stunTime": 0,
+      "bleed": 0,
+      "bleedPower": 0,
+      "area": 0,
+      "areaPower": 0,
+      "lifesteal": 0,
+      "reflection": 0,
+      "regeneration": 0,
+      "comboSpeed": 0.12,
+      "focus": 0.3
+    },
+    "price": 262,
+    "level": 4,
+    "description": "레벨4 실제 배치: 체력49 + 칼날1 + 공격강화1 · 500HP / 공격6 / 공속0.5 / 방어0"
+  },
+  "profiles": {
+    "flower-tail-bird": {
+      "tier": 1,
+      "health": 30,
+      "attackPower": 3,
+      "attackSpeed": 1,
+      "defense": 2,
+      "regenerationOutOfCombat": 0.9,
+      "comparisonParty": 1
+    },
+    "dew-rabbit": {
+      "tier": 2,
+      "health": 45,
+      "attackPower": 2,
+      "attackSpeed": 0.88,
+      "defense": 4,
+      "regenerationOutOfCombat": 1,
+      "comparisonParty": 1
+    },
+    "rolling-acorn": {
+      "tier": 3,
+      "health": 65,
+      "attackPower": 4,
+      "attackSpeed": 0.76,
+      "defense": 24,
+      "regenerationOutOfCombat": 0.1,
+      "comparisonParty": 1
+    },
+    "cotton-sheep": {
+      "tier": 4,
+      "health": 108,
+      "attackPower": 1,
+      "attackSpeed": 0.6,
+      "defense": 10,
+      "regenerationOutOfCombat": 1.2,
+      "comparisonParty": 1
+    },
+    "bundle-snail": {
+      "tier": 5,
+      "health": 126,
+      "attackPower": 5,
+      "attackSpeed": 0.52,
+      "defense": 30,
+      "regenerationOutOfCombat": 1.4,
+      "comparisonParty": 2
+    },
+    "soil-mole": {
+      "tier": 6,
+      "health": 102,
+      "attackPower": 6,
+      "attackSpeed": 0.68,
+      "defense": 14,
+      "regenerationOutOfCombat": 0.8,
+      "comparisonParty": 1
+    },
+    "bubble-toad": {
+      "tier": 7,
+      "health": 114,
+      "attackPower": 7,
+      "attackSpeed": 0.8,
+      "defense": 12,
+      "regenerationOutOfCombat": 1.1,
+      "comparisonParty": 2
+    },
+    "spiny-back-beetle": {
+      "tier": 8,
+      "health": 120,
+      "attackPower": 8,
+      "attackSpeed": 0.72,
+      "defense": 28,
+      "regenerationOutOfCombat": 0.2,
+      "comparisonParty": 2
+    },
+    "snare-vine": {
+      "tier": 9,
+      "health": 132,
+      "attackPower": 10,
+      "attackSpeed": 0.56,
+      "defense": 22,
+      "regenerationOutOfCombat": 1.8,
+      "comparisonParty": 2
+    },
+    "soil-boar": {
+      "tier": 10,
+      "health": 150,
+      "attackPower": 25,
+      "attackSpeed": 0.64,
+      "defense": 26,
+      "regenerationOutOfCombat": 0.5,
+      "comparisonParty": 2
+    },
+    "shadow-weasel": {
+      "tier": 11,
+      "health": 96,
+      "attackPower": 26,
+      "attackSpeed": 1.12,
+      "defense": 8,
+      "regenerationOutOfCombat": 0.7,
+      "comparisonParty": 2
+    },
+    "talon-owl": {
+      "tier": 12,
+      "health": 90,
+      "attackPower": 27,
+      "attackSpeed": 0.96,
+      "defense": 6,
+      "regenerationOutOfCombat": 0.4,
+      "comparisonParty": 3
+    },
+    "vine-turtle": {
+      "tier": 13,
+      "health": 210,
+      "attackPower": 9,
+      "attackSpeed": 0.48,
+      "defense": 32,
+      "regenerationOutOfCombat": 1.5,
+      "comparisonParty": 3
+    },
+    "lantern-keeper": {
+      "tier": 14,
+      "health": 144,
+      "attackPower": 11,
+      "attackSpeed": 0.92,
+      "defense": 18,
+      "regenerationOutOfCombat": 1.6,
+      "comparisonParty": 3
+    },
+    "spring-keeper": {
+      "tier": 15,
+      "health": 138,
+      "attackPower": 12,
+      "attackSpeed": 1.04,
+      "defense": 16,
+      "regenerationOutOfCombat": 1.3,
+      "comparisonParty": 4
+    },
+    "old-garden-snail": {
+      "tier": 16,
+      "health": 390,
+      "attackPower": 24,
+      "attackSpeed": 0.44,
+      "defense": 36,
+      "regenerationOutOfCombat": 1.7,
+      "comparisonParty": 4
+    },
+    "spiny-back-leader": {
+      "tier": 17,
+      "health": 270,
+      "attackPower": 28,
+      "attackSpeed": 0.84,
+      "defense": 34,
+      "regenerationOutOfCombat": 0.3,
+      "comparisonParty": 5
+    },
+    "white-paw": {
+      "tier": 18,
+      "health": 156,
+      "attackPower": 53,
+      "attackSpeed": 1.08,
+      "defense": 20,
+      "regenerationOutOfCombat": 0.6,
+      "comparisonParty": 5
+    },
+    "walking-forest": {
+      "tier": 19,
+      "health": 590,
+      "attackPower": 33,
+      "attackSpeed": 0.4,
+      "defense": 44,
+      "regenerationOutOfCombat": 1.9,
+      "comparisonParty": 6
+    }
+  },
+  "arena": [
+    {
+      "key": "flower-tail-bird",
+      "seconds": 10.3,
+      "result": "reference-win",
+      "survivors": 1
+    },
+    {
+      "key": "dew-rabbit",
+      "seconds": 14.3,
+      "result": "reference-win",
+      "survivors": 1
+    },
+    {
+      "key": "rolling-acorn",
+      "seconds": 26.3,
+      "result": "reference-win",
+      "survivors": 1
+    },
+    {
+      "key": "cotton-sheep",
+      "seconds": 38.3,
+      "result": "reference-win",
+      "survivors": 1
+    },
+    {
+      "key": "bundle-snail",
+      "seconds": 26.3,
+      "result": "reference-win",
+      "survivors": 2
+    },
+    {
+      "key": "soil-mole",
+      "seconds": 38.3,
+      "result": "reference-win",
+      "survivors": 1
+    },
+    {
+      "key": "bubble-toad",
+      "seconds": 20.3,
+      "result": "reference-win",
+      "survivors": 2
+    },
+    {
+      "key": "spiny-back-beetle",
+      "seconds": 24.3,
+      "result": "reference-win",
+      "survivors": 2
+    },
+    {
+      "key": "snare-vine",
+      "seconds": 26.3,
+      "result": "reference-win",
+      "survivors": 2
+    },
+    {
+      "key": "soil-boar",
+      "seconds": 32.3,
+      "result": "reference-win",
+      "survivors": 1
+    },
+    {
+      "key": "shadow-weasel",
+      "seconds": 16.3,
+      "result": "reference-win",
+      "survivors": 2
+    },
+    {
+      "key": "talon-owl",
+      "seconds": 10.3,
+      "result": "reference-win",
+      "survivors": 3
+    },
+    {
+      "key": "vine-turtle",
+      "seconds": 30.3,
+      "result": "reference-win",
+      "survivors": 3
+    },
+    {
+      "key": "lantern-keeper",
+      "seconds": 18.3,
+      "result": "reference-win",
+      "survivors": 3
+    },
+    {
+      "key": "spring-keeper",
+      "seconds": 12.3,
+      "result": "reference-win",
+      "survivors": 4
+    },
+    {
+      "key": "old-garden-snail",
+      "seconds": 44.3,
+      "result": "reference-win",
+      "survivors": 4
+    },
+    {
+      "key": "spiny-back-leader",
+      "seconds": 24.3,
+      "result": "reference-win",
+      "survivors": 4
+    },
+    {
+      "key": "white-paw",
+      "seconds": 12.3,
+      "result": "reference-win",
+      "survivors": 4
+    },
+    {
+      "key": "walking-forest",
+      "seconds": 48.3,
+      "result": "reference-win",
+      "survivors": 5
+    }
+  ],
+  "priorityDuels": [
+    {
+      "stronger": "white-paw",
+      "weaker": "spiny-back-leader",
+      "seconds": 5.866666666666666,
+      "result": "reference-win",
+      "survivors": 1
+    },
+    {
+      "stronger": "walking-forest",
+      "weaker": "white-paw",
+      "seconds": 12.8,
+      "result": "reference-win",
+      "survivors": 1
+    }
+  ]
+}

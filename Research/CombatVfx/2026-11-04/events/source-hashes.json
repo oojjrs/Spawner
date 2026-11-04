@@ -1,0 +1,16 @@
+{
+  "files": {
+    "server/combat.mjs": "0c3253a25fab19498ab3765cb3056295ed9631cc04de7894ffd3d55cfc053264",
+    "server/combat-vfx-journal.mjs": "0806b2f506bafa8026825542bf8b81daeb93f35414116571179ccf7db9eb0486",
+    "client/combat-simulation.mjs": "e64cd7a78bc953ed050fd0afba373818bc6951825d95137f5a358c99162ad5ba",
+    "client/combat-vfx-events.mjs": "731dcb367457daa2dd8a188bfbefaf4ae04d2456317f15a40544335bb2b82fdf",
+    "client/room.mjs": "6e365ff07790bee42a05224d805db7205c836f80b015b9059d840d79b8dcf0e6",
+    "client/vfx-event-preview.mjs": "9085f4a84e9e13b31c8861cd75bad2d51ecb9a9b2d94720a568ec76f4bfde04f",
+    "client/vfx-event-preview.js": "711359182d60d2512372f0693187563146a95105ab812b7e87e7dd4f12fcf179",
+    "client/vfx-event-preview-data.js": "d713c7e9517287a95ccdcbaa092fb60de8a06d727fad98f74a794e0660e2b560",
+    "DesignAssets/image-sizes.json": "be1605f38e3a6f41134f72dec43ea0477c65e008e7342a40fafb33354ac3eb76",
+    "client/vfx-event-preview.test.mjs": "cdec10372464b6d70b1e1cdc5621ad9dd37ed52d503ea1073c1945b11648d82a",
+    "client/published-image-audit.test.mjs": "7602c4fac0f28485270cb42a76303e82d18655d0a767d32f4432b8cd335d4acd"
+  },
+  "sourceImagesEdited": false
+}

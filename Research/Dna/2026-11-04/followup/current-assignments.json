@@ -1,0 +1,4527 @@
+{
+  "version": 1,
+  "applied": false,
+  "boardLevel": 1,
+  "baseBirthCost": 3,
+  "startupPoints": 30,
+  "currentGenes": [
+    {
+      "id": "gather",
+      "label": "채집기관",
+      "grade": 1,
+      "shape": [
+        0,
+        0
+      ],
+      "price": 10
+    },
+    {
+      "id": "health",
+      "label": "체력",
+      "grade": 1,
+      "shape": [
+        0,
+        1
+      ],
+      "price": 5
+    },
+    {
+      "id": "blade",
+      "label": "잎날",
+      "grade": 1,
+      "shape": [
+        0,
+        2
+      ],
+      "price": 10
+    },
+    {
+      "id": "movement",
+      "label": "이동",
+      "grade": 1,
+      "shape": [
+        0,
+        5
+      ],
+      "price": 5
+    },
+    {
+      "id": "secretion",
+      "label": "분비기관",
+      "grade": 1,
+      "shape": [
+        0,
+        4
+      ],
+      "price": 10
+    }
+  ],
+  "sourceHashes": {
+    "server/dna.mjs": "6f83b8d5bcef5ffbd4a10db0c8c90f723fa6696c99e6c186cd18e787e692b825",
+    "server/dna-unit.mjs": "9e17a2b7f2f684ae7e35b9b0c512e379e1f34ef67024dfe36bb23f4ea8dc471e",
+    "server/attributes.mjs": "2e12f28f0165dfe9214b90ba7d2de6d2de7430197668fba44fc5650cffaaef85",
+    "client/dna-layout-data.js": "59a85ea048ac66607e5281319a74706e9d9843cfd46c831176dad6c25ad21277",
+    "client/dna-layout-review.js": "a47f8de5ce164966c56ee77a9f682214da767e9328fb6c565511187f3480d956",
+    "Research/Dna/2026-11-04/followup/calculate.mjs": "c3390ea987039f7a2124c723c31677690af7f2c49d4834198c9b57e8166653a6"
+  },
+  "assignments": [
+    {
+      "candidateId": "minimal-9",
+      "mirror": false,
+      "pieces": [
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "blade",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "blade",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "blade",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "secretion",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            0
+          ]
+        }
+      ],
+      "counts": {
+        "movement": 2,
+        "health": 2,
+        "blade": 3,
+        "secretion": 1,
+        "gather": 1
+      },
+      "dnaCost": 70,
+      "birthCost": 73,
+      "stats": {
+        "gatherCount": 1,
+        "bladeCount": 3,
+        "antennaCount": 0,
+        "healerCount": 0,
+        "secretionCount": 1,
+        "melee": true,
+        "ranged": true,
+        "meleePower": 6,
+        "meleeSpeed": 0.5,
+        "rangedPower": 1.4,
+        "rangedSpeed": 0.5,
+        "healer": false,
+        "health": 30,
+        "power": 6,
+        "hits": 1,
+        "speed": 0.5,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "capacity": 1,
+        "harvest": 1,
+        "harvestTime": 4,
+        "movement": 0.33,
+        "vision": 1,
+        "scale": 1.09,
+        "roaming": false,
+        "comboPower": 50,
+        "critical": 0,
+        "criticalPower": 150,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 100,
+        "tenacity": 0,
+        "reduction": 0,
+        "loadSpeed": 75,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0.12,
+        "focus": 0.3
+      },
+      "unlocked": [
+        "gather",
+        "blade",
+        "secretion"
+      ],
+      "openingPieces": 3,
+      "reinforcementPieces": 6,
+      "prefixAt30": {
+        "pieces": 3,
+        "birthCost": 23,
+        "occupied": 7,
+        "stats": {
+          "gatherCount": 0,
+          "bladeCount": 1,
+          "antennaCount": 0,
+          "healerCount": 0,
+          "secretionCount": 0,
+          "melee": true,
+          "ranged": false,
+          "meleePower": 2,
+          "meleeSpeed": 0.5,
+          "rangedPower": 0,
+          "rangedSpeed": 0,
+          "healer": false,
+          "health": 20,
+          "power": 2,
+          "hits": 1,
+          "speed": 0.5,
+          "armor": 0,
+          "parry": 0,
+          "block": 0,
+          "evasion": 0,
+          "capacity": 0,
+          "harvest": 0,
+          "harvestTime": 0,
+          "movement": 0.29,
+          "vision": 1,
+          "scale": 1.03,
+          "roaming": false,
+          "comboPower": 50,
+          "critical": 0,
+          "criticalPower": 150,
+          "accuracy": 0,
+          "penetration": 0,
+          "blockPower": 50,
+          "counter": 0,
+          "counterPower": 100,
+          "tenacity": 0,
+          "reduction": 0,
+          "loadSpeed": 0,
+          "healing": 0,
+          "stun": 0,
+          "stunTime": 0,
+          "bleed": 0,
+          "bleedPower": 0,
+          "area": 0,
+          "areaPower": 0,
+          "lifesteal": 0,
+          "reflection": 0,
+          "regeneration": 0,
+          "comboSpeed": 0.12,
+          "focus": 0.3
+        },
+        "hasGather": false
+      },
+      "steps": [
+        {
+          "number": 1,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 5,
+          "birthCost": 8,
+          "occupied": 3
+        },
+        {
+          "number": 2,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 10,
+          "birthCost": 13,
+          "occupied": 5
+        },
+        {
+          "number": 3,
+          "gene": "blade",
+          "label": "잎날",
+          "kind": "unlock",
+          "dnaCost": 20,
+          "birthCost": 23,
+          "occupied": 7
+        },
+        {
+          "number": 4,
+          "gene": "blade",
+          "label": "잎날",
+          "kind": "reinforce",
+          "dnaCost": 30,
+          "birthCost": 33,
+          "occupied": 9
+        },
+        {
+          "number": 5,
+          "gene": "blade",
+          "label": "잎날",
+          "kind": "reinforce",
+          "dnaCost": 40,
+          "birthCost": 43,
+          "occupied": 11
+        },
+        {
+          "number": 6,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 45,
+          "birthCost": 48,
+          "occupied": 13
+        },
+        {
+          "number": 7,
+          "gene": "secretion",
+          "label": "분비기관",
+          "kind": "unlock",
+          "dnaCost": 55,
+          "birthCost": 58,
+          "occupied": 15
+        },
+        {
+          "number": 8,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 60,
+          "birthCost": 63,
+          "occupied": 17
+        },
+        {
+          "number": 9,
+          "gene": "gather",
+          "label": "채집기관",
+          "kind": "unlock",
+          "dnaCost": 70,
+          "birthCost": 73,
+          "occupied": 19
+        }
+      ],
+      "validatedRotations": 6,
+      "nativeValid": true
+    },
+    {
+      "candidateId": "minimal-9",
+      "mirror": true,
+      "pieces": [
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "secretion",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "secretion",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "secretion",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "blade",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            0
+          ]
+        }
+      ],
+      "counts": {
+        "health": 2,
+        "movement": 2,
+        "secretion": 3,
+        "blade": 1,
+        "gather": 1
+      },
+      "dnaCost": 70,
+      "birthCost": 73,
+      "stats": {
+        "gatherCount": 1,
+        "bladeCount": 1,
+        "antennaCount": 0,
+        "healerCount": 0,
+        "secretionCount": 3,
+        "melee": true,
+        "ranged": true,
+        "meleePower": 2,
+        "meleeSpeed": 0.5,
+        "rangedPower": 4.199999999999999,
+        "rangedSpeed": 0.5,
+        "healer": false,
+        "health": 30,
+        "power": 2,
+        "hits": 1,
+        "speed": 0.5,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "capacity": 1,
+        "harvest": 1,
+        "harvestTime": 4,
+        "movement": 0.33,
+        "vision": 1,
+        "scale": 1.09,
+        "roaming": false,
+        "comboPower": 50,
+        "critical": 0,
+        "criticalPower": 150,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 100,
+        "tenacity": 0,
+        "reduction": 0,
+        "loadSpeed": 75,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0.12,
+        "focus": 0.3
+      },
+      "unlocked": [
+        "gather",
+        "blade",
+        "secretion"
+      ],
+      "openingPieces": 3,
+      "reinforcementPieces": 6,
+      "prefixAt30": {
+        "pieces": 3,
+        "birthCost": 23,
+        "occupied": 7,
+        "stats": {
+          "gatherCount": 0,
+          "bladeCount": 0,
+          "antennaCount": 0,
+          "healerCount": 0,
+          "secretionCount": 1,
+          "melee": false,
+          "ranged": true,
+          "meleePower": 0,
+          "meleeSpeed": 0,
+          "rangedPower": 1.4,
+          "rangedSpeed": 0.5,
+          "healer": false,
+          "health": 20,
+          "power": 1.4,
+          "hits": 1,
+          "speed": 0.5,
+          "armor": 0,
+          "parry": 0,
+          "block": 0,
+          "evasion": 0,
+          "capacity": 0,
+          "harvest": 0,
+          "harvestTime": 0,
+          "movement": 0.29,
+          "vision": 1,
+          "scale": 1.03,
+          "roaming": false,
+          "comboPower": 50,
+          "critical": 0,
+          "criticalPower": 150,
+          "accuracy": 0,
+          "penetration": 0,
+          "blockPower": 50,
+          "counter": 0,
+          "counterPower": 100,
+          "tenacity": 0,
+          "reduction": 0,
+          "loadSpeed": 0,
+          "healing": 0,
+          "stun": 0,
+          "stunTime": 0,
+          "bleed": 0,
+          "bleedPower": 0,
+          "area": 0,
+          "areaPower": 0,
+          "lifesteal": 0,
+          "reflection": 0,
+          "regeneration": 0,
+          "comboSpeed": 0.12,
+          "focus": 0.3
+        },
+        "hasGather": false
+      },
+      "steps": [
+        {
+          "number": 1,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 5,
+          "birthCost": 8,
+          "occupied": 3
+        },
+        {
+          "number": 2,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 10,
+          "birthCost": 13,
+          "occupied": 5
+        },
+        {
+          "number": 3,
+          "gene": "secretion",
+          "label": "분비기관",
+          "kind": "unlock",
+          "dnaCost": 20,
+          "birthCost": 23,
+          "occupied": 7
+        },
+        {
+          "number": 4,
+          "gene": "secretion",
+          "label": "분비기관",
+          "kind": "reinforce",
+          "dnaCost": 30,
+          "birthCost": 33,
+          "occupied": 9
+        },
+        {
+          "number": 5,
+          "gene": "secretion",
+          "label": "분비기관",
+          "kind": "reinforce",
+          "dnaCost": 40,
+          "birthCost": 43,
+          "occupied": 11
+        },
+        {
+          "number": 6,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 45,
+          "birthCost": 48,
+          "occupied": 13
+        },
+        {
+          "number": 7,
+          "gene": "blade",
+          "label": "잎날",
+          "kind": "unlock",
+          "dnaCost": 55,
+          "birthCost": 58,
+          "occupied": 15
+        },
+        {
+          "number": 8,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 60,
+          "birthCost": 63,
+          "occupied": 17
+        },
+        {
+          "number": 9,
+          "gene": "gather",
+          "label": "채집기관",
+          "kind": "unlock",
+          "dnaCost": 70,
+          "birthCost": 73,
+          "occupied": 19
+        }
+      ],
+      "validatedRotations": 6,
+      "nativeValid": true
+    },
+    {
+      "candidateId": "symmetric-1",
+      "mirror": false,
+      "pieces": [
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "blade",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "secretion",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "blade",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "secretion",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            4
+          ]
+        }
+      ],
+      "counts": {
+        "gather": 6,
+        "blade": 2,
+        "secretion": 2
+      },
+      "dnaCost": 100,
+      "birthCost": 103,
+      "stats": {
+        "gatherCount": 6,
+        "bladeCount": 2,
+        "antennaCount": 0,
+        "healerCount": 0,
+        "secretionCount": 2,
+        "melee": true,
+        "ranged": true,
+        "meleePower": 4,
+        "meleeSpeed": 0.5,
+        "rangedPower": 2.8,
+        "rangedSpeed": 0.5,
+        "healer": false,
+        "health": 10,
+        "power": 4,
+        "hits": 1,
+        "speed": 0.5,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "capacity": 6,
+        "harvest": 6,
+        "harvestTime": 4,
+        "movement": 0.25,
+        "vision": 1,
+        "scale": 1.1,
+        "roaming": false,
+        "comboPower": 50,
+        "critical": 0,
+        "criticalPower": 150,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 100,
+        "tenacity": 0,
+        "reduction": 0,
+        "loadSpeed": 75,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0.12,
+        "focus": 0.3
+      },
+      "unlocked": [
+        "gather",
+        "blade",
+        "secretion"
+      ],
+      "openingPieces": 3,
+      "reinforcementPieces": 7,
+      "prefixAt30": {
+        "pieces": 2,
+        "birthCost": 23,
+        "occupied": 5,
+        "stats": {
+          "gatherCount": 2,
+          "bladeCount": 0,
+          "antennaCount": 0,
+          "healerCount": 0,
+          "secretionCount": 0,
+          "melee": false,
+          "ranged": false,
+          "meleePower": 0,
+          "meleeSpeed": 0,
+          "rangedPower": 0,
+          "rangedSpeed": 0,
+          "healer": false,
+          "health": 10,
+          "power": 0,
+          "hits": 0,
+          "speed": 0,
+          "armor": 0,
+          "parry": 0,
+          "block": 0,
+          "evasion": 0,
+          "capacity": 2,
+          "harvest": 2,
+          "harvestTime": 4,
+          "movement": 0.25,
+          "vision": 1,
+          "scale": 1.02,
+          "roaming": false,
+          "comboPower": 0,
+          "critical": 0,
+          "criticalPower": 0,
+          "accuracy": 0,
+          "penetration": 0,
+          "blockPower": 50,
+          "counter": 0,
+          "counterPower": 0,
+          "tenacity": 0,
+          "reduction": 0,
+          "loadSpeed": 75,
+          "healing": 0,
+          "stun": 0,
+          "stunTime": 0,
+          "bleed": 0,
+          "bleedPower": 0,
+          "area": 0,
+          "areaPower": 0,
+          "lifesteal": 0,
+          "reflection": 0,
+          "regeneration": 0,
+          "comboSpeed": 0,
+          "focus": 0
+        },
+        "hasGather": true
+      },
+      "steps": [
+        {
+          "number": 1,
+          "gene": "gather",
+          "label": "채집기관",
+          "kind": "unlock",
+          "dnaCost": 10,
+          "birthCost": 13,
+          "occupied": 3
+        },
+        {
+          "number": 2,
+          "gene": "gather",
+          "label": "채집기관",
+          "kind": "reinforce",
+          "dnaCost": 20,
+          "birthCost": 23,
+          "occupied": 5
+        },
+        {
+          "number": 3,
+          "gene": "gather",
+          "label": "채집기관",
+          "kind": "reinforce",
+          "dnaCost": 30,
+          "birthCost": 33,
+          "occupied": 7
+        },
+        {
+          "number": 4,
+          "gene": "blade",
+          "label": "잎날",
+          "kind": "unlock",
+          "dnaCost": 40,
+          "birthCost": 43,
+          "occupied": 9
+        },
+        {
+          "number": 5,
+          "gene": "secretion",
+          "label": "분비기관",
+          "kind": "unlock",
+          "dnaCost": 50,
+          "birthCost": 53,
+          "occupied": 10
+        },
+        {
+          "number": 6,
+          "gene": "gather",
+          "label": "채집기관",
+          "kind": "reinforce",
+          "dnaCost": 60,
+          "birthCost": 63,
+          "occupied": 12
+        },
+        {
+          "number": 7,
+          "gene": "gather",
+          "label": "채집기관",
+          "kind": "reinforce",
+          "dnaCost": 70,
+          "birthCost": 73,
+          "occupied": 14
+        },
+        {
+          "number": 8,
+          "gene": "gather",
+          "label": "채집기관",
+          "kind": "reinforce",
+          "dnaCost": 80,
+          "birthCost": 83,
+          "occupied": 16
+        },
+        {
+          "number": 9,
+          "gene": "blade",
+          "label": "잎날",
+          "kind": "reinforce",
+          "dnaCost": 90,
+          "birthCost": 93,
+          "occupied": 18
+        },
+        {
+          "number": 10,
+          "gene": "secretion",
+          "label": "분비기관",
+          "kind": "reinforce",
+          "dnaCost": 100,
+          "birthCost": 103,
+          "occupied": 19
+        }
+      ],
+      "validatedRotations": 6,
+      "nativeValid": true
+    },
+    {
+      "candidateId": "symmetric-1",
+      "mirror": true,
+      "pieces": [
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "secretion",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "blade",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "secretion",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "blade",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            2
+          ]
+        }
+      ],
+      "counts": {
+        "gather": 6,
+        "secretion": 2,
+        "blade": 2
+      },
+      "dnaCost": 100,
+      "birthCost": 103,
+      "stats": {
+        "gatherCount": 6,
+        "bladeCount": 2,
+        "antennaCount": 0,
+        "healerCount": 0,
+        "secretionCount": 2,
+        "melee": true,
+        "ranged": true,
+        "meleePower": 4,
+        "meleeSpeed": 0.5,
+        "rangedPower": 2.8,
+        "rangedSpeed": 0.5,
+        "healer": false,
+        "health": 10,
+        "power": 4,
+        "hits": 1,
+        "speed": 0.5,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "capacity": 6,
+        "harvest": 6,
+        "harvestTime": 4,
+        "movement": 0.25,
+        "vision": 1,
+        "scale": 1.1,
+        "roaming": false,
+        "comboPower": 50,
+        "critical": 0,
+        "criticalPower": 150,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 100,
+        "tenacity": 0,
+        "reduction": 0,
+        "loadSpeed": 75,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0.12,
+        "focus": 0.3
+      },
+      "unlocked": [
+        "gather",
+        "blade",
+        "secretion"
+      ],
+      "openingPieces": 3,
+      "reinforcementPieces": 7,
+      "prefixAt30": {
+        "pieces": 2,
+        "birthCost": 23,
+        "occupied": 5,
+        "stats": {
+          "gatherCount": 2,
+          "bladeCount": 0,
+          "antennaCount": 0,
+          "healerCount": 0,
+          "secretionCount": 0,
+          "melee": false,
+          "ranged": false,
+          "meleePower": 0,
+          "meleeSpeed": 0,
+          "rangedPower": 0,
+          "rangedSpeed": 0,
+          "healer": false,
+          "health": 10,
+          "power": 0,
+          "hits": 0,
+          "speed": 0,
+          "armor": 0,
+          "parry": 0,
+          "block": 0,
+          "evasion": 0,
+          "capacity": 2,
+          "harvest": 2,
+          "harvestTime": 4,
+          "movement": 0.25,
+          "vision": 1,
+          "scale": 1.02,
+          "roaming": false,
+          "comboPower": 0,
+          "critical": 0,
+          "criticalPower": 0,
+          "accuracy": 0,
+          "penetration": 0,
+          "blockPower": 50,
+          "counter": 0,
+          "counterPower": 0,
+          "tenacity": 0,
+          "reduction": 0,
+          "loadSpeed": 75,
+          "healing": 0,
+          "stun": 0,
+          "stunTime": 0,
+          "bleed": 0,
+          "bleedPower": 0,
+          "area": 0,
+          "areaPower": 0,
+          "lifesteal": 0,
+          "reflection": 0,
+          "regeneration": 0,
+          "comboSpeed": 0,
+          "focus": 0
+        },
+        "hasGather": true
+      },
+      "steps": [
+        {
+          "number": 1,
+          "gene": "gather",
+          "label": "채집기관",
+          "kind": "unlock",
+          "dnaCost": 10,
+          "birthCost": 13,
+          "occupied": 3
+        },
+        {
+          "number": 2,
+          "gene": "gather",
+          "label": "채집기관",
+          "kind": "reinforce",
+          "dnaCost": 20,
+          "birthCost": 23,
+          "occupied": 5
+        },
+        {
+          "number": 3,
+          "gene": "gather",
+          "label": "채집기관",
+          "kind": "reinforce",
+          "dnaCost": 30,
+          "birthCost": 33,
+          "occupied": 7
+        },
+        {
+          "number": 4,
+          "gene": "secretion",
+          "label": "분비기관",
+          "kind": "unlock",
+          "dnaCost": 40,
+          "birthCost": 43,
+          "occupied": 9
+        },
+        {
+          "number": 5,
+          "gene": "blade",
+          "label": "잎날",
+          "kind": "unlock",
+          "dnaCost": 50,
+          "birthCost": 53,
+          "occupied": 10
+        },
+        {
+          "number": 6,
+          "gene": "gather",
+          "label": "채집기관",
+          "kind": "reinforce",
+          "dnaCost": 60,
+          "birthCost": 63,
+          "occupied": 12
+        },
+        {
+          "number": 7,
+          "gene": "gather",
+          "label": "채집기관",
+          "kind": "reinforce",
+          "dnaCost": 70,
+          "birthCost": 73,
+          "occupied": 14
+        },
+        {
+          "number": 8,
+          "gene": "gather",
+          "label": "채집기관",
+          "kind": "reinforce",
+          "dnaCost": 80,
+          "birthCost": 83,
+          "occupied": 16
+        },
+        {
+          "number": 9,
+          "gene": "secretion",
+          "label": "분비기관",
+          "kind": "reinforce",
+          "dnaCost": 90,
+          "birthCost": 93,
+          "occupied": 18
+        },
+        {
+          "number": 10,
+          "gene": "blade",
+          "label": "잎날",
+          "kind": "reinforce",
+          "dnaCost": 100,
+          "birthCost": 103,
+          "occupied": 19
+        }
+      ],
+      "validatedRotations": 6,
+      "nativeValid": true
+    },
+    {
+      "candidateId": "symmetric-4",
+      "mirror": false,
+      "pieces": [
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "secretion",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "secretion",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            5
+          ]
+        }
+      ],
+      "counts": {
+        "gather": 4,
+        "secretion": 2,
+        "health": 2,
+        "movement": 2
+      },
+      "dnaCost": 80,
+      "birthCost": 83,
+      "stats": {
+        "gatherCount": 4,
+        "bladeCount": 0,
+        "antennaCount": 0,
+        "healerCount": 0,
+        "secretionCount": 2,
+        "melee": false,
+        "ranged": true,
+        "meleePower": 0,
+        "meleeSpeed": 0,
+        "rangedPower": 2.8,
+        "rangedSpeed": 0.5,
+        "healer": false,
+        "health": 30,
+        "power": 2.8,
+        "hits": 1,
+        "speed": 0.5,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "capacity": 4,
+        "harvest": 4,
+        "harvestTime": 4,
+        "movement": 0.33,
+        "vision": 1,
+        "scale": 1.1,
+        "roaming": false,
+        "comboPower": 50,
+        "critical": 0,
+        "criticalPower": 150,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 100,
+        "tenacity": 0,
+        "reduction": 0,
+        "loadSpeed": 75,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0.12,
+        "focus": 0.3
+      },
+      "unlocked": [
+        "gather",
+        "secretion"
+      ],
+      "openingPieces": 2,
+      "reinforcementPieces": 8,
+      "prefixAt30": {
+        "pieces": 2,
+        "birthCost": 23,
+        "occupied": 5,
+        "stats": {
+          "gatherCount": 2,
+          "bladeCount": 0,
+          "antennaCount": 0,
+          "healerCount": 0,
+          "secretionCount": 0,
+          "melee": false,
+          "ranged": false,
+          "meleePower": 0,
+          "meleeSpeed": 0,
+          "rangedPower": 0,
+          "rangedSpeed": 0,
+          "healer": false,
+          "health": 10,
+          "power": 0,
+          "hits": 0,
+          "speed": 0,
+          "armor": 0,
+          "parry": 0,
+          "block": 0,
+          "evasion": 0,
+          "capacity": 2,
+          "harvest": 2,
+          "harvestTime": 4,
+          "movement": 0.25,
+          "vision": 1,
+          "scale": 1.02,
+          "roaming": false,
+          "comboPower": 0,
+          "critical": 0,
+          "criticalPower": 0,
+          "accuracy": 0,
+          "penetration": 0,
+          "blockPower": 50,
+          "counter": 0,
+          "counterPower": 0,
+          "tenacity": 0,
+          "reduction": 0,
+          "loadSpeed": 75,
+          "healing": 0,
+          "stun": 0,
+          "stunTime": 0,
+          "bleed": 0,
+          "bleedPower": 0,
+          "area": 0,
+          "areaPower": 0,
+          "lifesteal": 0,
+          "reflection": 0,
+          "regeneration": 0,
+          "comboSpeed": 0,
+          "focus": 0
+        },
+        "hasGather": true
+      },
+      "steps": [
+        {
+          "number": 1,
+          "gene": "gather",
+          "label": "채집기관",
+          "kind": "unlock",
+          "dnaCost": 10,
+          "birthCost": 13,
+          "occupied": 3
+        },
+        {
+          "number": 2,
+          "gene": "gather",
+          "label": "채집기관",
+          "kind": "reinforce",
+          "dnaCost": 20,
+          "birthCost": 23,
+          "occupied": 5
+        },
+        {
+          "number": 3,
+          "gene": "secretion",
+          "label": "분비기관",
+          "kind": "unlock",
+          "dnaCost": 30,
+          "birthCost": 33,
+          "occupied": 7
+        },
+        {
+          "number": 4,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 35,
+          "birthCost": 38,
+          "occupied": 9
+        },
+        {
+          "number": 5,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 40,
+          "birthCost": 43,
+          "occupied": 10
+        },
+        {
+          "number": 6,
+          "gene": "gather",
+          "label": "채집기관",
+          "kind": "reinforce",
+          "dnaCost": 50,
+          "birthCost": 53,
+          "occupied": 12
+        },
+        {
+          "number": 7,
+          "gene": "gather",
+          "label": "채집기관",
+          "kind": "reinforce",
+          "dnaCost": 60,
+          "birthCost": 63,
+          "occupied": 14
+        },
+        {
+          "number": 8,
+          "gene": "secretion",
+          "label": "분비기관",
+          "kind": "reinforce",
+          "dnaCost": 70,
+          "birthCost": 73,
+          "occupied": 16
+        },
+        {
+          "number": 9,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 75,
+          "birthCost": 78,
+          "occupied": 18
+        },
+        {
+          "number": 10,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 80,
+          "birthCost": 83,
+          "occupied": 19
+        }
+      ],
+      "validatedRotations": 6,
+      "nativeValid": true
+    },
+    {
+      "candidateId": "symmetric-4",
+      "mirror": true,
+      "pieces": [
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "blade",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "blade",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            1
+          ]
+        }
+      ],
+      "counts": {
+        "gather": 4,
+        "blade": 2,
+        "movement": 2,
+        "health": 2
+      },
+      "dnaCost": 80,
+      "birthCost": 83,
+      "stats": {
+        "gatherCount": 4,
+        "bladeCount": 2,
+        "antennaCount": 0,
+        "healerCount": 0,
+        "secretionCount": 0,
+        "melee": true,
+        "ranged": false,
+        "meleePower": 4,
+        "meleeSpeed": 0.5,
+        "rangedPower": 0,
+        "rangedSpeed": 0,
+        "healer": false,
+        "health": 30,
+        "power": 4,
+        "hits": 1,
+        "speed": 0.5,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "capacity": 4,
+        "harvest": 4,
+        "harvestTime": 4,
+        "movement": 0.33,
+        "vision": 1,
+        "scale": 1.1,
+        "roaming": false,
+        "comboPower": 50,
+        "critical": 0,
+        "criticalPower": 150,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 100,
+        "tenacity": 0,
+        "reduction": 0,
+        "loadSpeed": 75,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0.12,
+        "focus": 0.3
+      },
+      "unlocked": [
+        "gather",
+        "blade"
+      ],
+      "openingPieces": 2,
+      "reinforcementPieces": 8,
+      "prefixAt30": {
+        "pieces": 2,
+        "birthCost": 23,
+        "occupied": 5,
+        "stats": {
+          "gatherCount": 2,
+          "bladeCount": 0,
+          "antennaCount": 0,
+          "healerCount": 0,
+          "secretionCount": 0,
+          "melee": false,
+          "ranged": false,
+          "meleePower": 0,
+          "meleeSpeed": 0,
+          "rangedPower": 0,
+          "rangedSpeed": 0,
+          "healer": false,
+          "health": 10,
+          "power": 0,
+          "hits": 0,
+          "speed": 0,
+          "armor": 0,
+          "parry": 0,
+          "block": 0,
+          "evasion": 0,
+          "capacity": 2,
+          "harvest": 2,
+          "harvestTime": 4,
+          "movement": 0.25,
+          "vision": 1,
+          "scale": 1.02,
+          "roaming": false,
+          "comboPower": 0,
+          "critical": 0,
+          "criticalPower": 0,
+          "accuracy": 0,
+          "penetration": 0,
+          "blockPower": 50,
+          "counter": 0,
+          "counterPower": 0,
+          "tenacity": 0,
+          "reduction": 0,
+          "loadSpeed": 75,
+          "healing": 0,
+          "stun": 0,
+          "stunTime": 0,
+          "bleed": 0,
+          "bleedPower": 0,
+          "area": 0,
+          "areaPower": 0,
+          "lifesteal": 0,
+          "reflection": 0,
+          "regeneration": 0,
+          "comboSpeed": 0,
+          "focus": 0
+        },
+        "hasGather": true
+      },
+      "steps": [
+        {
+          "number": 1,
+          "gene": "gather",
+          "label": "채집기관",
+          "kind": "unlock",
+          "dnaCost": 10,
+          "birthCost": 13,
+          "occupied": 3
+        },
+        {
+          "number": 2,
+          "gene": "gather",
+          "label": "채집기관",
+          "kind": "reinforce",
+          "dnaCost": 20,
+          "birthCost": 23,
+          "occupied": 5
+        },
+        {
+          "number": 3,
+          "gene": "blade",
+          "label": "잎날",
+          "kind": "unlock",
+          "dnaCost": 30,
+          "birthCost": 33,
+          "occupied": 7
+        },
+        {
+          "number": 4,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 35,
+          "birthCost": 38,
+          "occupied": 9
+        },
+        {
+          "number": 5,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 40,
+          "birthCost": 43,
+          "occupied": 10
+        },
+        {
+          "number": 6,
+          "gene": "gather",
+          "label": "채집기관",
+          "kind": "reinforce",
+          "dnaCost": 50,
+          "birthCost": 53,
+          "occupied": 12
+        },
+        {
+          "number": 7,
+          "gene": "gather",
+          "label": "채집기관",
+          "kind": "reinforce",
+          "dnaCost": 60,
+          "birthCost": 63,
+          "occupied": 14
+        },
+        {
+          "number": 8,
+          "gene": "blade",
+          "label": "잎날",
+          "kind": "reinforce",
+          "dnaCost": 70,
+          "birthCost": 73,
+          "occupied": 16
+        },
+        {
+          "number": 9,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 75,
+          "birthCost": 78,
+          "occupied": 18
+        },
+        {
+          "number": 10,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 80,
+          "birthCost": 83,
+          "occupied": 19
+        }
+      ],
+      "validatedRotations": 6,
+      "nativeValid": true
+    },
+    {
+      "candidateId": "symmetric-2",
+      "mirror": false,
+      "pieces": [
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "blade",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "blade",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            5
+          ]
+        }
+      ],
+      "counts": {
+        "gather": 2,
+        "health": 4,
+        "blade": 2,
+        "movement": 2
+      },
+      "dnaCost": 70,
+      "birthCost": 73,
+      "stats": {
+        "gatherCount": 2,
+        "bladeCount": 2,
+        "antennaCount": 0,
+        "healerCount": 0,
+        "secretionCount": 0,
+        "melee": true,
+        "ranged": false,
+        "meleePower": 4,
+        "meleeSpeed": 0.5,
+        "rangedPower": 0,
+        "rangedSpeed": 0,
+        "healer": false,
+        "health": 50,
+        "power": 4,
+        "hits": 1,
+        "speed": 0.5,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "capacity": 2,
+        "harvest": 2,
+        "harvestTime": 4,
+        "movement": 0.33,
+        "vision": 1,
+        "scale": 1.1,
+        "roaming": false,
+        "comboPower": 50,
+        "critical": 0,
+        "criticalPower": 150,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 100,
+        "tenacity": 0,
+        "reduction": 0,
+        "loadSpeed": 75,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0.12,
+        "focus": 0.3
+      },
+      "unlocked": [
+        "gather",
+        "blade"
+      ],
+      "openingPieces": 2,
+      "reinforcementPieces": 8,
+      "prefixAt30": {
+        "pieces": 3,
+        "birthCost": 28,
+        "occupied": 7,
+        "stats": {
+          "gatherCount": 1,
+          "bladeCount": 1,
+          "antennaCount": 0,
+          "healerCount": 0,
+          "secretionCount": 0,
+          "melee": true,
+          "ranged": false,
+          "meleePower": 2,
+          "meleeSpeed": 0.5,
+          "rangedPower": 0,
+          "rangedSpeed": 0,
+          "healer": false,
+          "health": 20,
+          "power": 2,
+          "hits": 1,
+          "speed": 0.5,
+          "armor": 0,
+          "parry": 0,
+          "block": 0,
+          "evasion": 0,
+          "capacity": 1,
+          "harvest": 1,
+          "harvestTime": 4,
+          "movement": 0.25,
+          "vision": 1,
+          "scale": 1.03,
+          "roaming": false,
+          "comboPower": 50,
+          "critical": 0,
+          "criticalPower": 150,
+          "accuracy": 0,
+          "penetration": 0,
+          "blockPower": 50,
+          "counter": 0,
+          "counterPower": 100,
+          "tenacity": 0,
+          "reduction": 0,
+          "loadSpeed": 75,
+          "healing": 0,
+          "stun": 0,
+          "stunTime": 0,
+          "bleed": 0,
+          "bleedPower": 0,
+          "area": 0,
+          "areaPower": 0,
+          "lifesteal": 0,
+          "reflection": 0,
+          "regeneration": 0,
+          "comboSpeed": 0.12,
+          "focus": 0.3
+        },
+        "hasGather": true
+      },
+      "steps": [
+        {
+          "number": 1,
+          "gene": "gather",
+          "label": "채집기관",
+          "kind": "unlock",
+          "dnaCost": 10,
+          "birthCost": 13,
+          "occupied": 3
+        },
+        {
+          "number": 2,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 15,
+          "birthCost": 18,
+          "occupied": 5
+        },
+        {
+          "number": 3,
+          "gene": "blade",
+          "label": "잎날",
+          "kind": "unlock",
+          "dnaCost": 25,
+          "birthCost": 28,
+          "occupied": 7
+        },
+        {
+          "number": 4,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 30,
+          "birthCost": 33,
+          "occupied": 9
+        },
+        {
+          "number": 5,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 35,
+          "birthCost": 38,
+          "occupied": 10
+        },
+        {
+          "number": 6,
+          "gene": "gather",
+          "label": "채집기관",
+          "kind": "reinforce",
+          "dnaCost": 45,
+          "birthCost": 48,
+          "occupied": 12
+        },
+        {
+          "number": 7,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 50,
+          "birthCost": 53,
+          "occupied": 14
+        },
+        {
+          "number": 8,
+          "gene": "blade",
+          "label": "잎날",
+          "kind": "reinforce",
+          "dnaCost": 60,
+          "birthCost": 63,
+          "occupied": 16
+        },
+        {
+          "number": 9,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 65,
+          "birthCost": 68,
+          "occupied": 18
+        },
+        {
+          "number": 10,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 70,
+          "birthCost": 73,
+          "occupied": 19
+        }
+      ],
+      "validatedRotations": 6,
+      "nativeValid": true
+    },
+    {
+      "candidateId": "symmetric-2",
+      "mirror": true,
+      "pieces": [
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "secretion",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            0
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "secretion",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            1
+          ]
+        }
+      ],
+      "counts": {
+        "gather": 2,
+        "movement": 4,
+        "secretion": 2,
+        "health": 2
+      },
+      "dnaCost": 70,
+      "birthCost": 73,
+      "stats": {
+        "gatherCount": 2,
+        "bladeCount": 0,
+        "antennaCount": 0,
+        "healerCount": 0,
+        "secretionCount": 2,
+        "melee": false,
+        "ranged": true,
+        "meleePower": 0,
+        "meleeSpeed": 0,
+        "rangedPower": 2.8,
+        "rangedSpeed": 0.5,
+        "healer": false,
+        "health": 30,
+        "power": 2.8,
+        "hits": 1,
+        "speed": 0.5,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "capacity": 2,
+        "harvest": 2,
+        "harvestTime": 4,
+        "movement": 0.41000000000000003,
+        "vision": 1,
+        "scale": 1.1,
+        "roaming": false,
+        "comboPower": 50,
+        "critical": 0,
+        "criticalPower": 150,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 100,
+        "tenacity": 0,
+        "reduction": 0,
+        "loadSpeed": 75,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0.12,
+        "focus": 0.3
+      },
+      "unlocked": [
+        "gather",
+        "secretion"
+      ],
+      "openingPieces": 2,
+      "reinforcementPieces": 8,
+      "prefixAt30": {
+        "pieces": 3,
+        "birthCost": 28,
+        "occupied": 7,
+        "stats": {
+          "gatherCount": 1,
+          "bladeCount": 0,
+          "antennaCount": 0,
+          "healerCount": 0,
+          "secretionCount": 1,
+          "melee": false,
+          "ranged": true,
+          "meleePower": 0,
+          "meleeSpeed": 0,
+          "rangedPower": 1.4,
+          "rangedSpeed": 0.5,
+          "healer": false,
+          "health": 10,
+          "power": 1.4,
+          "hits": 1,
+          "speed": 0.5,
+          "armor": 0,
+          "parry": 0,
+          "block": 0,
+          "evasion": 0,
+          "capacity": 1,
+          "harvest": 1,
+          "harvestTime": 4,
+          "movement": 0.29,
+          "vision": 1,
+          "scale": 1.03,
+          "roaming": false,
+          "comboPower": 50,
+          "critical": 0,
+          "criticalPower": 150,
+          "accuracy": 0,
+          "penetration": 0,
+          "blockPower": 50,
+          "counter": 0,
+          "counterPower": 100,
+          "tenacity": 0,
+          "reduction": 0,
+          "loadSpeed": 75,
+          "healing": 0,
+          "stun": 0,
+          "stunTime": 0,
+          "bleed": 0,
+          "bleedPower": 0,
+          "area": 0,
+          "areaPower": 0,
+          "lifesteal": 0,
+          "reflection": 0,
+          "regeneration": 0,
+          "comboSpeed": 0.12,
+          "focus": 0.3
+        },
+        "hasGather": true
+      },
+      "steps": [
+        {
+          "number": 1,
+          "gene": "gather",
+          "label": "채집기관",
+          "kind": "unlock",
+          "dnaCost": 10,
+          "birthCost": 13,
+          "occupied": 3
+        },
+        {
+          "number": 2,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 15,
+          "birthCost": 18,
+          "occupied": 5
+        },
+        {
+          "number": 3,
+          "gene": "secretion",
+          "label": "분비기관",
+          "kind": "unlock",
+          "dnaCost": 25,
+          "birthCost": 28,
+          "occupied": 7
+        },
+        {
+          "number": 4,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 30,
+          "birthCost": 33,
+          "occupied": 9
+        },
+        {
+          "number": 5,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 35,
+          "birthCost": 38,
+          "occupied": 10
+        },
+        {
+          "number": 6,
+          "gene": "gather",
+          "label": "채집기관",
+          "kind": "reinforce",
+          "dnaCost": 45,
+          "birthCost": 48,
+          "occupied": 12
+        },
+        {
+          "number": 7,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 50,
+          "birthCost": 53,
+          "occupied": 14
+        },
+        {
+          "number": 8,
+          "gene": "secretion",
+          "label": "분비기관",
+          "kind": "reinforce",
+          "dnaCost": 60,
+          "birthCost": 63,
+          "occupied": 16
+        },
+        {
+          "number": 9,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 65,
+          "birthCost": 68,
+          "occupied": 18
+        },
+        {
+          "number": 10,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 70,
+          "birthCost": 73,
+          "occupied": 19
+        }
+      ],
+      "validatedRotations": 6,
+      "nativeValid": true
+    },
+    {
+      "candidateId": "symmetric-3",
+      "mirror": false,
+      "pieces": [
+        {
+          "gene": "secretion",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "blade",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "secretion",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "blade",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            5
+          ]
+        }
+      ],
+      "counts": {
+        "secretion": 2,
+        "blade": 2,
+        "health": 4,
+        "movement": 2
+      },
+      "dnaCost": 70,
+      "birthCost": 73,
+      "stats": {
+        "gatherCount": 0,
+        "bladeCount": 2,
+        "antennaCount": 0,
+        "healerCount": 0,
+        "secretionCount": 2,
+        "melee": true,
+        "ranged": true,
+        "meleePower": 4,
+        "meleeSpeed": 0.5,
+        "rangedPower": 2.8,
+        "rangedSpeed": 0.5,
+        "healer": false,
+        "health": 50,
+        "power": 4,
+        "hits": 1,
+        "speed": 0.5,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "capacity": 0,
+        "harvest": 0,
+        "harvestTime": 0,
+        "movement": 0.33,
+        "vision": 1,
+        "scale": 1.1,
+        "roaming": false,
+        "comboPower": 50,
+        "critical": 0,
+        "criticalPower": 150,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 100,
+        "tenacity": 0,
+        "reduction": 0,
+        "loadSpeed": 0,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0.12,
+        "focus": 0.3
+      },
+      "unlocked": [
+        "blade",
+        "secretion"
+      ],
+      "openingPieces": 2,
+      "reinforcementPieces": 8,
+      "prefixAt30": {
+        "pieces": 3,
+        "birthCost": 28,
+        "occupied": 7,
+        "stats": {
+          "gatherCount": 0,
+          "bladeCount": 1,
+          "antennaCount": 0,
+          "healerCount": 0,
+          "secretionCount": 1,
+          "melee": true,
+          "ranged": true,
+          "meleePower": 2,
+          "meleeSpeed": 0.5,
+          "rangedPower": 1.4,
+          "rangedSpeed": 0.5,
+          "healer": false,
+          "health": 20,
+          "power": 2,
+          "hits": 1,
+          "speed": 0.5,
+          "armor": 0,
+          "parry": 0,
+          "block": 0,
+          "evasion": 0,
+          "capacity": 0,
+          "harvest": 0,
+          "harvestTime": 0,
+          "movement": 0.25,
+          "vision": 1,
+          "scale": 1.03,
+          "roaming": false,
+          "comboPower": 50,
+          "critical": 0,
+          "criticalPower": 150,
+          "accuracy": 0,
+          "penetration": 0,
+          "blockPower": 50,
+          "counter": 0,
+          "counterPower": 100,
+          "tenacity": 0,
+          "reduction": 0,
+          "loadSpeed": 0,
+          "healing": 0,
+          "stun": 0,
+          "stunTime": 0,
+          "bleed": 0,
+          "bleedPower": 0,
+          "area": 0,
+          "areaPower": 0,
+          "lifesteal": 0,
+          "reflection": 0,
+          "regeneration": 0,
+          "comboSpeed": 0.12,
+          "focus": 0.3
+        },
+        "hasGather": false
+      },
+      "steps": [
+        {
+          "number": 1,
+          "gene": "secretion",
+          "label": "분비기관",
+          "kind": "unlock",
+          "dnaCost": 10,
+          "birthCost": 13,
+          "occupied": 3
+        },
+        {
+          "number": 2,
+          "gene": "blade",
+          "label": "잎날",
+          "kind": "unlock",
+          "dnaCost": 20,
+          "birthCost": 23,
+          "occupied": 5
+        },
+        {
+          "number": 3,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 25,
+          "birthCost": 28,
+          "occupied": 7
+        },
+        {
+          "number": 4,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 30,
+          "birthCost": 33,
+          "occupied": 9
+        },
+        {
+          "number": 5,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 35,
+          "birthCost": 38,
+          "occupied": 10
+        },
+        {
+          "number": 6,
+          "gene": "secretion",
+          "label": "분비기관",
+          "kind": "reinforce",
+          "dnaCost": 45,
+          "birthCost": 48,
+          "occupied": 12
+        },
+        {
+          "number": 7,
+          "gene": "blade",
+          "label": "잎날",
+          "kind": "reinforce",
+          "dnaCost": 55,
+          "birthCost": 58,
+          "occupied": 14
+        },
+        {
+          "number": 8,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 60,
+          "birthCost": 63,
+          "occupied": 16
+        },
+        {
+          "number": 9,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 65,
+          "birthCost": 68,
+          "occupied": 18
+        },
+        {
+          "number": 10,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 70,
+          "birthCost": 73,
+          "occupied": 19
+        }
+      ],
+      "validatedRotations": 6,
+      "nativeValid": true
+    },
+    {
+      "candidateId": "symmetric-3",
+      "mirror": true,
+      "pieces": [
+        {
+          "gene": "blade",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "secretion",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "blade",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "secretion",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            1
+          ]
+        }
+      ],
+      "counts": {
+        "blade": 2,
+        "secretion": 2,
+        "movement": 4,
+        "health": 2
+      },
+      "dnaCost": 70,
+      "birthCost": 73,
+      "stats": {
+        "gatherCount": 0,
+        "bladeCount": 2,
+        "antennaCount": 0,
+        "healerCount": 0,
+        "secretionCount": 2,
+        "melee": true,
+        "ranged": true,
+        "meleePower": 4,
+        "meleeSpeed": 0.5,
+        "rangedPower": 2.8,
+        "rangedSpeed": 0.5,
+        "healer": false,
+        "health": 30,
+        "power": 4,
+        "hits": 1,
+        "speed": 0.5,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "capacity": 0,
+        "harvest": 0,
+        "harvestTime": 0,
+        "movement": 0.41000000000000003,
+        "vision": 1,
+        "scale": 1.1,
+        "roaming": false,
+        "comboPower": 50,
+        "critical": 0,
+        "criticalPower": 150,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 100,
+        "tenacity": 0,
+        "reduction": 0,
+        "loadSpeed": 0,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0.12,
+        "focus": 0.3
+      },
+      "unlocked": [
+        "blade",
+        "secretion"
+      ],
+      "openingPieces": 2,
+      "reinforcementPieces": 8,
+      "prefixAt30": {
+        "pieces": 3,
+        "birthCost": 28,
+        "occupied": 7,
+        "stats": {
+          "gatherCount": 0,
+          "bladeCount": 1,
+          "antennaCount": 0,
+          "healerCount": 0,
+          "secretionCount": 1,
+          "melee": true,
+          "ranged": true,
+          "meleePower": 2,
+          "meleeSpeed": 0.5,
+          "rangedPower": 1.4,
+          "rangedSpeed": 0.5,
+          "healer": false,
+          "health": 10,
+          "power": 2,
+          "hits": 1,
+          "speed": 0.5,
+          "armor": 0,
+          "parry": 0,
+          "block": 0,
+          "evasion": 0,
+          "capacity": 0,
+          "harvest": 0,
+          "harvestTime": 0,
+          "movement": 0.29,
+          "vision": 1,
+          "scale": 1.03,
+          "roaming": false,
+          "comboPower": 50,
+          "critical": 0,
+          "criticalPower": 150,
+          "accuracy": 0,
+          "penetration": 0,
+          "blockPower": 50,
+          "counter": 0,
+          "counterPower": 100,
+          "tenacity": 0,
+          "reduction": 0,
+          "loadSpeed": 0,
+          "healing": 0,
+          "stun": 0,
+          "stunTime": 0,
+          "bleed": 0,
+          "bleedPower": 0,
+          "area": 0,
+          "areaPower": 0,
+          "lifesteal": 0,
+          "reflection": 0,
+          "regeneration": 0,
+          "comboSpeed": 0.12,
+          "focus": 0.3
+        },
+        "hasGather": false
+      },
+      "steps": [
+        {
+          "number": 1,
+          "gene": "blade",
+          "label": "잎날",
+          "kind": "unlock",
+          "dnaCost": 10,
+          "birthCost": 13,
+          "occupied": 3
+        },
+        {
+          "number": 2,
+          "gene": "secretion",
+          "label": "분비기관",
+          "kind": "unlock",
+          "dnaCost": 20,
+          "birthCost": 23,
+          "occupied": 5
+        },
+        {
+          "number": 3,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 25,
+          "birthCost": 28,
+          "occupied": 7
+        },
+        {
+          "number": 4,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 30,
+          "birthCost": 33,
+          "occupied": 9
+        },
+        {
+          "number": 5,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 35,
+          "birthCost": 38,
+          "occupied": 10
+        },
+        {
+          "number": 6,
+          "gene": "blade",
+          "label": "잎날",
+          "kind": "reinforce",
+          "dnaCost": 45,
+          "birthCost": 48,
+          "occupied": 12
+        },
+        {
+          "number": 7,
+          "gene": "secretion",
+          "label": "분비기관",
+          "kind": "reinforce",
+          "dnaCost": 55,
+          "birthCost": 58,
+          "occupied": 14
+        },
+        {
+          "number": 8,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 60,
+          "birthCost": 63,
+          "occupied": 16
+        },
+        {
+          "number": 9,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 65,
+          "birthCost": 68,
+          "occupied": 18
+        },
+        {
+          "number": 10,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 70,
+          "birthCost": 73,
+          "occupied": 19
+        }
+      ],
+      "validatedRotations": 6,
+      "nativeValid": true
+    },
+    {
+      "candidateId": "dense-11",
+      "mirror": false,
+      "pieces": [
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "blade",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "blade",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "blade",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            2
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            1
+          ]
+        }
+      ],
+      "counts": {
+        "movement": 2,
+        "health": 6,
+        "blade": 3
+      },
+      "dnaCost": 70,
+      "birthCost": 73,
+      "stats": {
+        "gatherCount": 0,
+        "bladeCount": 3,
+        "antennaCount": 0,
+        "healerCount": 0,
+        "secretionCount": 0,
+        "melee": true,
+        "ranged": false,
+        "meleePower": 6,
+        "meleeSpeed": 0.5,
+        "rangedPower": 0,
+        "rangedSpeed": 0,
+        "healer": false,
+        "health": 70,
+        "power": 6,
+        "hits": 1,
+        "speed": 0.5,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "capacity": 0,
+        "harvest": 0,
+        "harvestTime": 0,
+        "movement": 0.33,
+        "vision": 1,
+        "scale": 1.11,
+        "roaming": false,
+        "comboPower": 50,
+        "critical": 0,
+        "criticalPower": 150,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 100,
+        "tenacity": 0,
+        "reduction": 0,
+        "loadSpeed": 0,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0.12,
+        "focus": 0.3
+      },
+      "unlocked": [
+        "blade"
+      ],
+      "openingPieces": 1,
+      "reinforcementPieces": 10,
+      "prefixAt30": {
+        "pieces": 4,
+        "birthCost": 23,
+        "occupied": 9,
+        "stats": {
+          "gatherCount": 0,
+          "bladeCount": 0,
+          "antennaCount": 0,
+          "healerCount": 0,
+          "secretionCount": 0,
+          "melee": false,
+          "ranged": false,
+          "meleePower": 0,
+          "meleeSpeed": 0,
+          "rangedPower": 0,
+          "rangedSpeed": 0,
+          "healer": false,
+          "health": 40,
+          "power": 0,
+          "hits": 0,
+          "speed": 0,
+          "armor": 0,
+          "parry": 0,
+          "block": 0,
+          "evasion": 0,
+          "capacity": 0,
+          "harvest": 0,
+          "harvestTime": 0,
+          "movement": 0.29,
+          "vision": 1,
+          "scale": 1.04,
+          "roaming": false,
+          "comboPower": 0,
+          "critical": 0,
+          "criticalPower": 0,
+          "accuracy": 0,
+          "penetration": 0,
+          "blockPower": 50,
+          "counter": 0,
+          "counterPower": 0,
+          "tenacity": 0,
+          "reduction": 0,
+          "loadSpeed": 0,
+          "healing": 0,
+          "stun": 0,
+          "stunTime": 0,
+          "bleed": 0,
+          "bleedPower": 0,
+          "area": 0,
+          "areaPower": 0,
+          "lifesteal": 0,
+          "reflection": 0,
+          "regeneration": 0,
+          "comboSpeed": 0,
+          "focus": 0
+        },
+        "hasGather": false
+      },
+      "steps": [
+        {
+          "number": 1,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 5,
+          "birthCost": 8,
+          "occupied": 3
+        },
+        {
+          "number": 2,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 10,
+          "birthCost": 13,
+          "occupied": 5
+        },
+        {
+          "number": 3,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 15,
+          "birthCost": 18,
+          "occupied": 7
+        },
+        {
+          "number": 4,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 20,
+          "birthCost": 23,
+          "occupied": 9
+        },
+        {
+          "number": 5,
+          "gene": "blade",
+          "label": "잎날",
+          "kind": "unlock",
+          "dnaCost": 30,
+          "birthCost": 33,
+          "occupied": 11
+        },
+        {
+          "number": 6,
+          "gene": "blade",
+          "label": "잎날",
+          "kind": "reinforce",
+          "dnaCost": 40,
+          "birthCost": 43,
+          "occupied": 13
+        },
+        {
+          "number": 7,
+          "gene": "blade",
+          "label": "잎날",
+          "kind": "reinforce",
+          "dnaCost": 50,
+          "birthCost": 53,
+          "occupied": 15
+        },
+        {
+          "number": 8,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 55,
+          "birthCost": 58,
+          "occupied": 16
+        },
+        {
+          "number": 9,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 60,
+          "birthCost": 63,
+          "occupied": 17
+        },
+        {
+          "number": 10,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 65,
+          "birthCost": 68,
+          "occupied": 18
+        },
+        {
+          "number": 11,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 70,
+          "birthCost": 73,
+          "occupied": 19
+        }
+      ],
+      "validatedRotations": 6,
+      "nativeValid": true
+    },
+    {
+      "candidateId": "dense-11",
+      "mirror": true,
+      "pieces": [
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "secretion",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "secretion",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "secretion",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            4
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            5
+          ]
+        }
+      ],
+      "counts": {
+        "health": 2,
+        "movement": 6,
+        "secretion": 3
+      },
+      "dnaCost": 70,
+      "birthCost": 73,
+      "stats": {
+        "gatherCount": 0,
+        "bladeCount": 0,
+        "antennaCount": 0,
+        "healerCount": 0,
+        "secretionCount": 3,
+        "melee": false,
+        "ranged": true,
+        "meleePower": 0,
+        "meleeSpeed": 0,
+        "rangedPower": 4.199999999999999,
+        "rangedSpeed": 0.5,
+        "healer": false,
+        "health": 30,
+        "power": 4.199999999999999,
+        "hits": 1,
+        "speed": 0.5,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "capacity": 0,
+        "harvest": 0,
+        "harvestTime": 0,
+        "movement": 0.49,
+        "vision": 1,
+        "scale": 1.11,
+        "roaming": false,
+        "comboPower": 50,
+        "critical": 0,
+        "criticalPower": 150,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 100,
+        "tenacity": 0,
+        "reduction": 0,
+        "loadSpeed": 0,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0.12,
+        "focus": 0.3
+      },
+      "unlocked": [
+        "secretion"
+      ],
+      "openingPieces": 1,
+      "reinforcementPieces": 10,
+      "prefixAt30": {
+        "pieces": 4,
+        "birthCost": 23,
+        "occupied": 9,
+        "stats": {
+          "gatherCount": 0,
+          "bladeCount": 0,
+          "antennaCount": 0,
+          "healerCount": 0,
+          "secretionCount": 0,
+          "melee": false,
+          "ranged": false,
+          "meleePower": 0,
+          "meleeSpeed": 0,
+          "rangedPower": 0,
+          "rangedSpeed": 0,
+          "healer": false,
+          "health": 20,
+          "power": 0,
+          "hits": 0,
+          "speed": 0,
+          "armor": 0,
+          "parry": 0,
+          "block": 0,
+          "evasion": 0,
+          "capacity": 0,
+          "harvest": 0,
+          "harvestTime": 0,
+          "movement": 0.37,
+          "vision": 1,
+          "scale": 1.04,
+          "roaming": false,
+          "comboPower": 0,
+          "critical": 0,
+          "criticalPower": 0,
+          "accuracy": 0,
+          "penetration": 0,
+          "blockPower": 50,
+          "counter": 0,
+          "counterPower": 0,
+          "tenacity": 0,
+          "reduction": 0,
+          "loadSpeed": 0,
+          "healing": 0,
+          "stun": 0,
+          "stunTime": 0,
+          "bleed": 0,
+          "bleedPower": 0,
+          "area": 0,
+          "areaPower": 0,
+          "lifesteal": 0,
+          "reflection": 0,
+          "regeneration": 0,
+          "comboSpeed": 0,
+          "focus": 0
+        },
+        "hasGather": false
+      },
+      "steps": [
+        {
+          "number": 1,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 5,
+          "birthCost": 8,
+          "occupied": 3
+        },
+        {
+          "number": 2,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 10,
+          "birthCost": 13,
+          "occupied": 5
+        },
+        {
+          "number": 3,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 15,
+          "birthCost": 18,
+          "occupied": 7
+        },
+        {
+          "number": 4,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 20,
+          "birthCost": 23,
+          "occupied": 9
+        },
+        {
+          "number": 5,
+          "gene": "secretion",
+          "label": "분비기관",
+          "kind": "unlock",
+          "dnaCost": 30,
+          "birthCost": 33,
+          "occupied": 11
+        },
+        {
+          "number": 6,
+          "gene": "secretion",
+          "label": "분비기관",
+          "kind": "reinforce",
+          "dnaCost": 40,
+          "birthCost": 43,
+          "occupied": 13
+        },
+        {
+          "number": 7,
+          "gene": "secretion",
+          "label": "분비기관",
+          "kind": "reinforce",
+          "dnaCost": 50,
+          "birthCost": 53,
+          "occupied": 15
+        },
+        {
+          "number": 8,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 55,
+          "birthCost": 58,
+          "occupied": 16
+        },
+        {
+          "number": 9,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 60,
+          "birthCost": 63,
+          "occupied": 17
+        },
+        {
+          "number": 10,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 65,
+          "birthCost": 68,
+          "occupied": 18
+        },
+        {
+          "number": 11,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 70,
+          "birthCost": 73,
+          "occupied": 19
+        }
+      ],
+      "validatedRotations": 6,
+      "nativeValid": true
+    },
+    {
+      "candidateId": "dense-12",
+      "mirror": false,
+      "pieces": [
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            5
+          ]
+        }
+      ],
+      "counts": {
+        "movement": 4,
+        "health": 8
+      },
+      "dnaCost": 60,
+      "birthCost": 63,
+      "stats": {
+        "gatherCount": 0,
+        "bladeCount": 0,
+        "antennaCount": 0,
+        "healerCount": 0,
+        "secretionCount": 0,
+        "melee": false,
+        "ranged": false,
+        "meleePower": 0,
+        "meleeSpeed": 0,
+        "rangedPower": 0,
+        "rangedSpeed": 0,
+        "healer": false,
+        "health": 90,
+        "power": 0,
+        "hits": 0,
+        "speed": 0,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "capacity": 0,
+        "harvest": 0,
+        "harvestTime": 0,
+        "movement": 0.41000000000000003,
+        "vision": 1,
+        "scale": 1.12,
+        "roaming": false,
+        "comboPower": 0,
+        "critical": 0,
+        "criticalPower": 0,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 0,
+        "tenacity": 0,
+        "reduction": 0,
+        "loadSpeed": 0,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0,
+        "focus": 0
+      },
+      "unlocked": [],
+      "openingPieces": 0,
+      "reinforcementPieces": 12,
+      "prefixAt30": {
+        "pieces": 5,
+        "birthCost": 28,
+        "occupied": 11,
+        "stats": {
+          "gatherCount": 0,
+          "bladeCount": 0,
+          "antennaCount": 0,
+          "healerCount": 0,
+          "secretionCount": 0,
+          "melee": false,
+          "ranged": false,
+          "meleePower": 0,
+          "meleeSpeed": 0,
+          "rangedPower": 0,
+          "rangedSpeed": 0,
+          "healer": false,
+          "health": 50,
+          "power": 0,
+          "hits": 0,
+          "speed": 0,
+          "armor": 0,
+          "parry": 0,
+          "block": 0,
+          "evasion": 0,
+          "capacity": 0,
+          "harvest": 0,
+          "harvestTime": 0,
+          "movement": 0.29,
+          "vision": 1,
+          "scale": 1.05,
+          "roaming": false,
+          "comboPower": 0,
+          "critical": 0,
+          "criticalPower": 0,
+          "accuracy": 0,
+          "penetration": 0,
+          "blockPower": 50,
+          "counter": 0,
+          "counterPower": 0,
+          "tenacity": 0,
+          "reduction": 0,
+          "loadSpeed": 0,
+          "healing": 0,
+          "stun": 0,
+          "stunTime": 0,
+          "bleed": 0,
+          "bleedPower": 0,
+          "area": 0,
+          "areaPower": 0,
+          "lifesteal": 0,
+          "reflection": 0,
+          "regeneration": 0,
+          "comboSpeed": 0,
+          "focus": 0
+        },
+        "hasGather": false
+      },
+      "steps": [
+        {
+          "number": 1,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 5,
+          "birthCost": 8,
+          "occupied": 3
+        },
+        {
+          "number": 2,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 10,
+          "birthCost": 13,
+          "occupied": 5
+        },
+        {
+          "number": 3,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 15,
+          "birthCost": 18,
+          "occupied": 7
+        },
+        {
+          "number": 4,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 20,
+          "birthCost": 23,
+          "occupied": 9
+        },
+        {
+          "number": 5,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 25,
+          "birthCost": 28,
+          "occupied": 11
+        },
+        {
+          "number": 6,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 30,
+          "birthCost": 33,
+          "occupied": 13
+        },
+        {
+          "number": 7,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 35,
+          "birthCost": 38,
+          "occupied": 14
+        },
+        {
+          "number": 8,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 40,
+          "birthCost": 43,
+          "occupied": 15
+        },
+        {
+          "number": 9,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 45,
+          "birthCost": 48,
+          "occupied": 16
+        },
+        {
+          "number": 10,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 50,
+          "birthCost": 53,
+          "occupied": 17
+        },
+        {
+          "number": 11,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 55,
+          "birthCost": 58,
+          "occupied": 18
+        },
+        {
+          "number": 12,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 60,
+          "birthCost": 63,
+          "occupied": 19
+        }
+      ],
+      "validatedRotations": 6,
+      "nativeValid": true
+    },
+    {
+      "candidateId": "dense-12",
+      "mirror": true,
+      "pieces": [
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 1,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 4,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 3,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 0,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            5
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 5,
+          "shape": [
+            0,
+            1
+          ]
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 2,
+          "shape": [
+            0,
+            1
+          ]
+        }
+      ],
+      "counts": {
+        "health": 4,
+        "movement": 8
+      },
+      "dnaCost": 60,
+      "birthCost": 63,
+      "stats": {
+        "gatherCount": 0,
+        "bladeCount": 0,
+        "antennaCount": 0,
+        "healerCount": 0,
+        "secretionCount": 0,
+        "melee": false,
+        "ranged": false,
+        "meleePower": 0,
+        "meleeSpeed": 0,
+        "rangedPower": 0,
+        "rangedSpeed": 0,
+        "healer": false,
+        "health": 50,
+        "power": 0,
+        "hits": 0,
+        "speed": 0,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "capacity": 0,
+        "harvest": 0,
+        "harvestTime": 0,
+        "movement": 0.5700000000000001,
+        "vision": 1,
+        "scale": 1.12,
+        "roaming": false,
+        "comboPower": 0,
+        "critical": 0,
+        "criticalPower": 0,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 0,
+        "tenacity": 0,
+        "reduction": 0,
+        "loadSpeed": 0,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0,
+        "focus": 0
+      },
+      "unlocked": [],
+      "openingPieces": 0,
+      "reinforcementPieces": 12,
+      "prefixAt30": {
+        "pieces": 5,
+        "birthCost": 28,
+        "occupied": 11,
+        "stats": {
+          "gatherCount": 0,
+          "bladeCount": 0,
+          "antennaCount": 0,
+          "healerCount": 0,
+          "secretionCount": 0,
+          "melee": false,
+          "ranged": false,
+          "meleePower": 0,
+          "meleeSpeed": 0,
+          "rangedPower": 0,
+          "rangedSpeed": 0,
+          "healer": false,
+          "health": 20,
+          "power": 0,
+          "hits": 0,
+          "speed": 0,
+          "armor": 0,
+          "parry": 0,
+          "block": 0,
+          "evasion": 0,
+          "capacity": 0,
+          "harvest": 0,
+          "harvestTime": 0,
+          "movement": 0.41000000000000003,
+          "vision": 1,
+          "scale": 1.05,
+          "roaming": false,
+          "comboPower": 0,
+          "critical": 0,
+          "criticalPower": 0,
+          "accuracy": 0,
+          "penetration": 0,
+          "blockPower": 50,
+          "counter": 0,
+          "counterPower": 0,
+          "tenacity": 0,
+          "reduction": 0,
+          "loadSpeed": 0,
+          "healing": 0,
+          "stun": 0,
+          "stunTime": 0,
+          "bleed": 0,
+          "bleedPower": 0,
+          "area": 0,
+          "areaPower": 0,
+          "lifesteal": 0,
+          "reflection": 0,
+          "regeneration": 0,
+          "comboSpeed": 0,
+          "focus": 0
+        },
+        "hasGather": false
+      },
+      "steps": [
+        {
+          "number": 1,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 5,
+          "birthCost": 8,
+          "occupied": 3
+        },
+        {
+          "number": 2,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 10,
+          "birthCost": 13,
+          "occupied": 5
+        },
+        {
+          "number": 3,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 15,
+          "birthCost": 18,
+          "occupied": 7
+        },
+        {
+          "number": 4,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 20,
+          "birthCost": 23,
+          "occupied": 9
+        },
+        {
+          "number": 5,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 25,
+          "birthCost": 28,
+          "occupied": 11
+        },
+        {
+          "number": 6,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 30,
+          "birthCost": 33,
+          "occupied": 13
+        },
+        {
+          "number": 7,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 35,
+          "birthCost": 38,
+          "occupied": 14
+        },
+        {
+          "number": 8,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 40,
+          "birthCost": 43,
+          "occupied": 15
+        },
+        {
+          "number": 9,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 45,
+          "birthCost": 48,
+          "occupied": 16
+        },
+        {
+          "number": 10,
+          "gene": "movement",
+          "label": "이동",
+          "kind": "reinforce",
+          "dnaCost": 50,
+          "birthCost": 53,
+          "occupied": 17
+        },
+        {
+          "number": 11,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 55,
+          "birthCost": 58,
+          "occupied": 18
+        },
+        {
+          "number": 12,
+          "gene": "health",
+          "label": "체력",
+          "kind": "reinforce",
+          "dnaCost": 60,
+          "birthCost": 63,
+          "occupied": 19
+        }
+      ],
+      "validatedRotations": 6,
+      "nativeValid": true
+    }
+  ]
+}

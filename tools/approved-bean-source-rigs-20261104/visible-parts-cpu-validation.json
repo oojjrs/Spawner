@@ -1,0 +1,163 @@
+{
+  "sourceCount": 2,
+  "frames": 20,
+  "pageErrors": [],
+  "sources": [
+    {
+      "mask": 0,
+      "sourceId": "unit-appearance-v1-bean-00-neutral-v1",
+      "visiblePixels": 27089,
+      "partCount": 7,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 14743
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 15679
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 14892
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 16131
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 16547
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 14516
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "cpu",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 60078,
+        "reservedBytes": 0,
+        "byteBudget": 8388608,
+        "peakBytes": 120156,
+        "loads": 2,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 18,
+      "sourceId": "unit-appearance-v1-bean-12-neutral-v1",
+      "visiblePixels": 36538,
+      "partCount": 10,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 10290
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 10995
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 10111
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 11425
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 11753
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 10298
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "cpu",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 108726,
+        "reservedBytes": 0,
+        "byteBudget": 8388608,
+        "peakBytes": 217452,
+        "loads": 3,
+        "leases": 1
+      }
+    }
+  ]
+}

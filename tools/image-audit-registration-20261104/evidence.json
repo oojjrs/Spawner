@@ -1,0 +1,905 @@
+{
+  "revision": "a319b0e9bede88e276b6ff2e5f6b7887d2a5f299",
+  "globalBudget": {
+    "preferredScale": 1,
+    "maximumScale": 1.5,
+    "viewport": [
+      1920,
+      1080
+    ]
+  },
+  "unchangedTrackedImageBlobs": true,
+  "rows": [
+    {
+      "image": "DesignAssets/Animations/CombatDeathV1/sprout/blade/death.webp",
+      "category": "combat-death",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "frame": [
+        512,
+        512
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "display": [
+        256,
+        256
+      ],
+      "previousDisplay": null,
+      "sha256": "4f717d52fe4fa2dfa0576499107514829b7ac0e0bf1e91034fd5d1835d46bc53",
+      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)"
+    },
+    {
+      "image": "DesignAssets/Animations/CombatDeathV1/sprout/piercing/death.webp",
+      "category": "combat-death",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "frame": [
+        512,
+        512
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "display": [
+        256,
+        256
+      ],
+      "previousDisplay": null,
+      "sha256": "699b62b76735ef2d03ee36de123b422abde9b143235d0508157800518309698e",
+      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)"
+    },
+    {
+      "image": "DesignAssets/Animations/CombatDeathV1/sprout/carapace/death.webp",
+      "category": "combat-death",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "frame": [
+        512,
+        512
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "display": [
+        256,
+        256
+      ],
+      "previousDisplay": null,
+      "sha256": "9866156f96295802280db350ef60260944f225f0635258eb1122a5dac9cc10a1",
+      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)"
+    },
+    {
+      "image": "DesignAssets/Animations/CombatDeathV1/spore/blade/death.webp",
+      "category": "combat-death",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "frame": [
+        512,
+        512
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "display": [
+        256,
+        256
+      ],
+      "previousDisplay": null,
+      "sha256": "6ca2a746d764f44681accc5d86fee653608df3a102815d9e376b50d0943ace68",
+      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)"
+    },
+    {
+      "image": "DesignAssets/Animations/CombatDeathV1/spore/piercing/death.webp",
+      "category": "combat-death",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "frame": [
+        512,
+        512
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "display": [
+        256,
+        256
+      ],
+      "previousDisplay": null,
+      "sha256": "af7962315e0ef7457486e513658df28f96a97763f2b324eb1293f1b0849ceb30",
+      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)"
+    },
+    {
+      "image": "DesignAssets/Animations/CombatDeathV1/spore/carapace/death.webp",
+      "category": "combat-death",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "frame": [
+        512,
+        512
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "display": [
+        256,
+        256
+      ],
+      "previousDisplay": null,
+      "sha256": "cb326f987d2d05a447aed6226d93a9c16d08278cd384cc9b4630ca7d44389a3e",
+      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)"
+    },
+    {
+      "image": "DesignAssets/Animations/CombatDeathV1/pebble/blade/death.webp",
+      "category": "combat-death",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "frame": [
+        512,
+        512
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "display": [
+        256,
+        256
+      ],
+      "previousDisplay": null,
+      "sha256": "99a8882e61a3583638e6c0327aaabca116a101eb93c6b17e9d309a63bfb53621",
+      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)"
+    },
+    {
+      "image": "DesignAssets/Animations/CombatDeathV1/pebble/piercing/death.webp",
+      "category": "combat-death",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "frame": [
+        512,
+        512
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "display": [
+        256,
+        256
+      ],
+      "previousDisplay": null,
+      "sha256": "fc2127122929d4391445cea699528b618d98ebcf3608f60fef5d3afd98b93586",
+      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)"
+    },
+    {
+      "image": "DesignAssets/Animations/CombatDeathV1/pebble/carapace/death.webp",
+      "category": "combat-death",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "frame": [
+        512,
+        512
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "display": [
+        256,
+        256
+      ],
+      "previousDisplay": null,
+      "sha256": "001ae71c79f3426bd9fb9df0034aec80746e393b954e6322e254e399daa26126",
+      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)"
+    },
+    {
+      "image": "DesignAssets/Animations/CombatDeathV1/spring/blade/death.webp",
+      "category": "combat-death",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "frame": [
+        512,
+        512
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "display": [
+        256,
+        256
+      ],
+      "previousDisplay": null,
+      "sha256": "985c9346a820d136d9d12ab1a045c8881bf9f6109be357ff46171d37c7ddb055",
+      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)"
+    },
+    {
+      "image": "DesignAssets/Animations/CombatDeathV1/spring/piercing/death.webp",
+      "category": "combat-death",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "frame": [
+        512,
+        512
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "display": [
+        256,
+        256
+      ],
+      "previousDisplay": null,
+      "sha256": "eda4e5ae90cce4e0e0217e2470c4129916931e51ef0a3bf8280fdcb144e2c6fe",
+      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)"
+    },
+    {
+      "image": "DesignAssets/Animations/CombatDeathV1/spring/carapace/death.webp",
+      "category": "combat-death",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "frame": [
+        512,
+        512
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "display": [
+        256,
+        256
+      ],
+      "previousDisplay": null,
+      "sha256": "682aa12ba2a59ad413a12a90add2f70530f9b0d4c678729d5ad81dc4c0d875bf",
+      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)"
+    },
+    {
+      "image": "DesignAssets/Animations/UniqueIdleV4/spring-keeper/idle.webp",
+      "category": "neutral-registered-camera",
+      "dimensions": [
+        3296,
+        2060
+      ],
+      "frame": [
+        412,
+        412
+      ],
+      "grid": [
+        8,
+        5
+      ],
+      "display": [
+        274,
+        274
+      ],
+      "previousDisplay": [
+        274,
+        274
+      ],
+      "sha256": "994d372ed86dc2ed8c7f4cf1088b842271cefeb0a788eeea1c8e2d10e8221d69",
+      "reference": "client/unit-sprite-registration.mjs native frameSize and viewSize"
+    },
+    {
+      "image": "DesignAssets/Animations/CreatureIdleStudies/V2/shadow-weasel/idle.webp",
+      "category": "neutral-registered-camera",
+      "dimensions": [
+        3312,
+        6624
+      ],
+      "frame": [
+        414,
+        414
+      ],
+      "grid": [
+        8,
+        16
+      ],
+      "display": [
+        228.375,
+        228.375
+      ],
+      "previousDisplay": [
+        228.375,
+        228.375
+      ],
+      "sha256": "8ac9881ed82fc1a587f552be975fe0c8a8f03b17bb63879efc72b1995f2461f2",
+      "reference": "client/unit-sprite-registration.mjs native frameSize and viewSize"
+    },
+    {
+      "image": "DesignAssets/Animations/CreatureIdleStudies/V1/snare-vine/idle.webp",
+      "category": "neutral-registered-camera",
+      "dimensions": [
+        3648,
+        5016
+      ],
+      "frame": [
+        456,
+        456
+      ],
+      "grid": [
+        8,
+        11
+      ],
+      "display": [
+        283.16607773851587,
+        283.16607773851587
+      ],
+      "previousDisplay": [
+        283.16607773851587,
+        283.16607773851587
+      ],
+      "sha256": "922fb8c47ecfb7add24658e41aaf4dfba68f651022f3f6bfd2335c11c959f25d",
+      "reference": "client/unit-sprite-registration.mjs native frameSize and viewSize"
+    },
+    {
+      "image": "DesignAssets/Animations/RollingAcornIdle/v1/idle.webp",
+      "category": "neutral-registered-camera",
+      "dimensions": [
+        1712,
+        5992
+      ],
+      "frame": [
+        428,
+        428
+      ],
+      "grid": [
+        4,
+        14
+      ],
+      "display": [
+        280.4946996466431,
+        280.4946996466431
+      ],
+      "previousDisplay": [
+        280.4946996466431,
+        280.4946996466431
+      ],
+      "sha256": "218f9dfd3f7d0b25487eaa4a00538f56e51a92a48e0c5b422a93880c8836c2d5",
+      "reference": "client/unit-sprite-registration.mjs native frameSize and viewSize"
+    },
+    {
+      "image": "DesignAssets/Animations/CreatureIdleV3/flower-tail-bird/idle.webp",
+      "category": "neutral-registered-camera",
+      "dimensions": [
+        1760,
+        2640
+      ],
+      "frame": [
+        440,
+        440
+      ],
+      "grid": [
+        4,
+        6
+      ],
+      "display": [
+        276.7245283018868,
+        276.7245283018868
+      ],
+      "previousDisplay": [
+        276.7245283018868,
+        276.7245283018868
+      ],
+      "sha256": "627a1f48776554dd93cb7552d43b19f125834e302019b6ab080bdaa73feda4b8",
+      "reference": "client/unit-sprite-registration.mjs native frameSize and viewSize"
+    },
+    {
+      "image": "DesignAssets/Animations/CreatureIdleV3/dew-rabbit/idle.webp",
+      "category": "neutral-registered-camera",
+      "dimensions": [
+        1720,
+        2580
+      ],
+      "frame": [
+        430,
+        430
+      ],
+      "grid": [
+        4,
+        6
+      ],
+      "display": [
+        278.4911660777385,
+        278.4911660777385
+      ],
+      "previousDisplay": [
+        278.4911660777385,
+        278.4911660777385
+      ],
+      "sha256": "488443adf73c3aff932b5184b04844d1542742c90cb43de333222307ced62823",
+      "reference": "client/unit-sprite-registration.mjs native frameSize and viewSize"
+    },
+    {
+      "image": "DesignAssets/Animations/CreatureIdleV3/soil-mole/idle.webp",
+      "category": "neutral-registered-camera",
+      "dimensions": [
+        1424,
+        1424
+      ],
+      "frame": [
+        356,
+        356
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "display": [
+        237.08480565371025,
+        237.08480565371025
+      ],
+      "previousDisplay": [
+        237.08480565371025,
+        237.08480565371025
+      ],
+      "sha256": "168820b114c3f309ae2957a4fb2c4fad5bedb2d82606b3f1ba08099d4e034811",
+      "reference": "client/unit-sprite-registration.mjs native frameSize and viewSize"
+    },
+    {
+      "image": "DesignAssets/Animations/CreatureIdleV4/bundle-snail/idle.webp",
+      "category": "neutral-registered-camera",
+      "dimensions": [
+        1880,
+        2820
+      ],
+      "frame": [
+        470,
+        470
+      ],
+      "grid": [
+        4,
+        6
+      ],
+      "display": [
+        265.80212014134275,
+        265.80212014134275
+      ],
+      "previousDisplay": [
+        265.80212014134275,
+        265.80212014134275
+      ],
+      "sha256": "21aa68c376f396241db72d8adda406c5258e08a283024b9f42b079e89801c6c3",
+      "reference": "client/unit-sprite-registration.mjs native frameSize and viewSize"
+    },
+    {
+      "image": "DesignAssets/Animations/CreatureHurtV6/flower-tail-bird/hurt.webp",
+      "category": "neutral-registered-camera",
+      "dimensions": [
+        1760,
+        1760
+      ],
+      "frame": [
+        440,
+        440
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "display": [
+        276.7245283018868,
+        276.7245283018868
+      ],
+      "previousDisplay": [
+        276.7245283018868,
+        276.7245283018868
+      ],
+      "sha256": "ddeaf6c1613bafecd91d045edb776aac47a195348d71a5f3880219475f4b768d",
+      "reference": "client/unit-sprite-registration.mjs native frameSize and viewSize"
+    },
+    {
+      "image": "DesignAssets/Animations/CreatureHurtV5/dew-rabbit/hurt.webp",
+      "category": "neutral-registered-camera",
+      "dimensions": [
+        1720,
+        1720
+      ],
+      "frame": [
+        430,
+        430
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "display": [
+        278.4911660777385,
+        278.4911660777385
+      ],
+      "previousDisplay": [
+        278.4911660777385,
+        278.4911660777385
+      ],
+      "sha256": "300fd8aa6ea6af395c05f53a33f27433446345004fff21a7a091914800999621",
+      "reference": "client/unit-sprite-registration.mjs native frameSize and viewSize"
+    },
+    {
+      "image": "DesignAssets/Animations/CreatureHurtV5/soil-mole/hurt.webp",
+      "category": "neutral-registered-camera",
+      "dimensions": [
+        1424,
+        1424
+      ],
+      "frame": [
+        356,
+        356
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "display": [
+        237.08480565371025,
+        237.08480565371025
+      ],
+      "previousDisplay": [
+        237.08480565371025,
+        237.08480565371025
+      ],
+      "sha256": "9684ad59bf80b96c4593862e7991081cb9a081b901ae922d8a73f1bee671b36d",
+      "reference": "client/unit-sprite-registration.mjs native frameSize and viewSize"
+    },
+    {
+      "image": "DesignAssets/Animations/CreatureHurtV7/bundle-snail/hurt.webp",
+      "category": "neutral-registered-camera",
+      "dimensions": [
+        1880,
+        1880
+      ],
+      "frame": [
+        470,
+        470
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "display": [
+        265.80212014134275,
+        265.80212014134275
+      ],
+      "previousDisplay": [
+        265.80212014134275,
+        265.80212014134275
+      ],
+      "sha256": "15f04d38b5122cad990c42d7d563f04873963f4b78cb83332ab77bfb62d28054",
+      "reference": "client/unit-sprite-registration.mjs native frameSize and viewSize"
+    },
+    {
+      "image": "DesignAssets/Animations/CreatureHurtV4/rolling-acorn/hurt.webp",
+      "category": "neutral-registered-camera",
+      "dimensions": [
+        1712,
+        1712
+      ],
+      "frame": [
+        428,
+        428
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "display": [
+        280.4946996466431,
+        280.4946996466431
+      ],
+      "previousDisplay": [
+        280.4946996466431,
+        280.4946996466431
+      ],
+      "sha256": "a30b5dd88c540cfc6b73b2d02b08fcdf4d1dfb9e6887f737c47f7584840606b4",
+      "reference": "client/unit-sprite-registration.mjs native frameSize and viewSize"
+    },
+    {
+      "image": "DesignAssets/Animations/CreatureHurtV6/shadow-weasel/hurt.webp",
+      "category": "neutral-registered-camera",
+      "dimensions": [
+        1656,
+        1656
+      ],
+      "frame": [
+        414,
+        414
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "display": [
+        228.375,
+        228.375
+      ],
+      "previousDisplay": [
+        228.375,
+        228.375
+      ],
+      "sha256": "a8322755de4286a4f0dfac2fe9f1256fb0f4488cbd750948b10ea764093f585b",
+      "reference": "client/unit-sprite-registration.mjs native frameSize and viewSize"
+    },
+    {
+      "image": "DesignAssets/Animations/CreatureHurtV7/snare-vine/hurt.webp",
+      "category": "neutral-registered-camera",
+      "dimensions": [
+        1824,
+        1824
+      ],
+      "frame": [
+        456,
+        456
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "display": [
+        283.16607773851587,
+        283.16607773851587
+      ],
+      "previousDisplay": [
+        283.16607773851587,
+        283.16607773851587
+      ],
+      "sha256": "5fef30273a9ea50e010b2ba4cec2dafc9b0b48b501a26f04ee4a0ae6bc40ceea",
+      "reference": "client/unit-sprite-registration.mjs native frameSize and viewSize"
+    },
+    {
+      "image": "DesignAssets/Animations/CreatureHurtV6/talon-owl/hurt.webp",
+      "category": "neutral-registered-camera",
+      "dimensions": [
+        1888,
+        1888
+      ],
+      "frame": [
+        472,
+        472
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "display": [
+        288,
+        288
+      ],
+      "previousDisplay": [
+        288,
+        288
+      ],
+      "sha256": "0bdfa9ed363888fbf42cdd2e97677a256e80a3dc9eab7f6d5ab5ad9e8a385e45",
+      "reference": "client/unit-sprite-registration.mjs native frameSize and viewSize"
+    },
+    {
+      "image": "DesignAssets/Animations/CreatureHurtV6/spring-keeper/hurt.webp",
+      "category": "neutral-registered-camera",
+      "dimensions": [
+        1648,
+        1648
+      ],
+      "frame": [
+        412,
+        412
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "display": [
+        274,
+        274
+      ],
+      "previousDisplay": [
+        274,
+        274
+      ],
+      "sha256": "91b94aa20a4ab4b11390b2535d3cdf2daa1c4d711cf61a2692211082d2e6f512",
+      "reference": "client/unit-sprite-registration.mjs native frameSize and viewSize"
+    },
+    {
+      "image": "DesignAssets/Animations/Beetle/atlas.webp",
+      "category": "neutral-registered-camera",
+      "dimensions": [
+        1730,
+        1384
+      ],
+      "frame": [
+        346,
+        346
+      ],
+      "grid": [
+        5,
+        4
+      ],
+      "display": [
+        230.4,
+        230.4
+      ],
+      "previousDisplay": [
+        230.4,
+        230.4
+      ],
+      "sha256": "7506f5fa347c365422e765940e9edb8593148381a88928359451ddb6d3a46bbd",
+      "reference": "client/unit-sprite-registration.mjs native frameSize and viewSize"
+    },
+    {
+      "image": "DesignAssets/Animations/Beetle/attack-right.webp",
+      "category": "neutral-registered-camera",
+      "dimensions": [
+        1730,
+        346
+      ],
+      "frame": [
+        346,
+        346
+      ],
+      "grid": [
+        5,
+        1
+      ],
+      "display": [
+        230.4,
+        230.4
+      ],
+      "previousDisplay": [
+        230.4,
+        230.4
+      ],
+      "sha256": "2e850516c4a27aba3569913b344ea9b06401cb2acf532ac52e03b8daaf22aa23",
+      "reference": "client/unit-sprite-registration.mjs native frameSize and viewSize"
+    },
+    {
+      "image": "DesignAssets/Animations/TalonOwlIdle/PerchedV4/idle.webp",
+      "category": "neutral-registered-camera",
+      "dimensions": [
+        1888,
+        2360
+      ],
+      "frame": [
+        472,
+        472
+      ],
+      "grid": [
+        4,
+        5
+      ],
+      "display": [
+        288,
+        288
+      ],
+      "previousDisplay": [
+        288,
+        288
+      ],
+      "sha256": "56ba9793f8ab273ab9bfa44de807f2bf87ef678df8b27ffb65f3e3a6e65ad522",
+      "reference": "client/unit-sprite-registration.mjs native frameSize and viewSize"
+    },
+    {
+      "image": "DesignAssets/Animations/BeetleDeath/dead-v2.png",
+      "category": "neutral-registered-camera",
+      "dimensions": [
+        186,
+        186
+      ],
+      "frame": [
+        186,
+        186
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "display": [
+        123.83999999999999,
+        123.83999999999999
+      ],
+      "previousDisplay": [
+        123.83999999999999,
+        123.83999999999999
+      ],
+      "sha256": "7d50d8000f23eee51f4c422c98151f3f18f83f8ceb9e8a3c531be9f637eaea75",
+      "reference": "client/unit-sprite-registration.mjs native frameSize and viewSize"
+    },
+    {
+      "image": "DesignAssets/Combat/grassland.webp",
+      "category": "combat-background",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "frame": [
+        1774,
+        887
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "display": [
+        1920,
+        1080
+      ],
+      "previousDisplay": null,
+      "sha256": null,
+      "reference": "client/combat-stage.mjs background cover fit; policy.viewport 1920x1080"
+    },
+    {
+      "image": "DesignAssets/Combat/forest.webp",
+      "category": "combat-background",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "frame": [
+        1774,
+        887
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "display": [
+        1920,
+        1080
+      ],
+      "previousDisplay": null,
+      "sha256": null,
+      "reference": "client/combat-stage.mjs background cover fit; policy.viewport 1920x1080"
+    },
+    {
+      "image": "DesignAssets/Combat/riverbank.webp",
+      "category": "combat-background",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "frame": [
+        1774,
+        887
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "display": [
+        1920,
+        1080
+      ],
+      "previousDisplay": null,
+      "sha256": null,
+      "reference": "client/combat-stage.mjs background cover fit; policy.viewport 1920x1080"
+    }
+  ]
+}

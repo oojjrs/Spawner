@@ -81,3 +81,17 @@ export async function prepareWelcomeChoice(choice, prepare, { timeoutMs = 15000,
     catch (retryError) { onError(retryError, fallback); return null; }
   }
 }
+
+// A lazy rig can decode successfully and still fail when its first pose is
+// rasterized. Keep that failure local to this appearance, just as preparation
+// failures are, so the next animation frame and character can still run.
+export function drawWelcomeChoice(choice, draw, { onError = () => {} } = {}) {
+  try { draw(choice); return choice; }
+  catch (error) { onError(error, choice); }
+  if (["bean", "spore", "pebble", "spring"].includes(choice.key) && choice.variant > 0) {
+    const fallback = { ...choice, variant: 0 };
+    try { draw(fallback); return fallback; }
+    catch (error) { onError(error, fallback); }
+  }
+  return null;
+}

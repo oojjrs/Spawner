@@ -15,7 +15,7 @@
     ...["move-spore", "move-pebble", "move-spring"].map(name => globalThis.SpawnerMovementAudio.sources[name])
   ] : [];
   const priorityFiles = new Set(priorityPaths.map(path => "./client/local-assets/" + path.slice("DesignAssets/".length) + ".js"));
-  const files = location.protocol === "file:" ? globalThis.SpawnerLocalAssetFiles : [];
+  const files = location.protocol === "file:" ? globalThis.SpawnerLocalAssetFiles || [] : [];
   const welcomeReady = presentation && location.protocol === "file:" ?
     loadLocalAssets(files.filter(file => priorityFiles.has(file))) : Promise.resolve();
   const ready = (async () => {

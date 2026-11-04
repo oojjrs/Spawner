@@ -2,7 +2,7 @@ import { CONQUEST_PACING } from "../server/conquest-pacing.mjs";
 import { COMBAT_ATTRIBUTE_ASSETS } from "./combat-attribute-assets.mjs";
 import { auditImages } from "./image-audit.mjs";
 import { productionRuntime } from "./production.mjs";
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { dirname, resolve, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 import { CREATURE_ASSETS } from "../server/creatures.mjs";
@@ -23,6 +23,21 @@ import { WORLD_GENERATION_VERSION } from "../server/world.mjs";
 import { createHash } from "node:crypto";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+function writeGenerated(path, content) {
+  const previous = existsSync(path) ? readFileSync(path, "utf8") : "";
+  const crlf = (previous.match(/\r\n/g) || []).length, lines = (previous.match(/\n/g) || []).length;
+  const updated = content.replace(/\r?\n/g, crlf > lines / 2 ? "\r\n" : "\n");
+  if (updated !== previous) writeFileSync(path, updated, "utf8");
+}
+function unchangedLocalJson(path, source) {
+  if (!existsSync(path)) return false;
+  try {
+    const previous = readFileSync(path, "utf8").match(/ = ("[^\r\n]*");\s*$/)?.[1];
+    const encoded = previous && JSON.parse(previous), marker = "data:application/octet-stream;base64,";
+    return typeof encoded === "string" && encoded.startsWith(marker) &&
+      JSON.stringify(JSON.parse(Buffer.from(encoded.slice(marker.length), "base64").toString("utf8"))) === JSON.stringify(JSON.parse(source));
+  } catch { return false; }
+}
 const imports = /^import\s+\{([^}]+)\}\s+from\s+["']([^"']+)["'];?\r?$/gm;
 const exports = /^export\s+(?:async\s+)?(?:function|const|let|class)\s+([A-Za-z_$][\w$]*)/gm;
 
@@ -57,7 +72,7 @@ function writeDesignResources() {
   const model = `(() => {\n${bundle(["client/harvest-assets.mjs", "client/resource-art.mjs"])}\nglobalThis.SpawnerDesignResources = { RESOURCE_TYPES: ${JSON.stringify(RESOURCE_TYPES)}, ...modules["client/harvest-assets.mjs"], ...modules["client/resource-art.mjs"] };\n})();`;
   const updated = original.replace(/(<script id="design-resource-model"[^>]*>)[\s\S]*?(<\/script>)/,
     (match, start, end) => start + "\n" + model + "\n" + end).replace(/\r?\n/g, "\r\n");
-  if (updated !== original) writeFileSync(path, updated, "utf8");
+  if (updated !== original) writeGenerated(path, updated);
 }
 
 if (process.argv.includes("--design-resources-only")) {
@@ -79,7 +94,7 @@ function writeDesignWorld() {
   if (design.includes('id="conquest-rules"')) design = design.replace(/<table[^>]*id="conquest-rules"[^>]*>[\s\S]*?<\/table>/,values);
   else design = design.replace('<details class="map-encounter-rules" id="world-encounter-rules">',values + '\n<details class="map-encounter-rules" id="world-encounter-rules">');
   const updated = design.replace(/(<script id="design-world-model"[^>]*>)[\s\S]*?(<\/script>)/, (match, start, end) => start + "\n" + model + "\n" + end).replace(/\r?\n/g, "\r\n");
-  if (updated !== original) writeFileSync(path, updated, "utf8");
+  if (updated !== original) writeGenerated(path, updated);
 }
 
 if (process.argv.includes("--design-world-only")) {
@@ -92,16 +107,16 @@ function writeAttributeDna() {
   const source = readFileSync(resolve(root, "server/dna.mjs"), "utf8").replace("export const ATTRIBUTE_DNA =", "window.AttributeDna =");
   const original = readFileSync(path, "utf8");
   const updated = original.replace(/(<script id="dna-model">)[\s\S]*?(<\/script>)/, (match, start, end) => start + "\r\n" + source + end).replace(/\r?\n/g, "\r\n");
-  if (updated !== original) writeFileSync(path, updated, "utf8");
+  if (updated !== original) writeGenerated(path, updated);
 }
 
-writeAttributeDna();
+if (!process.argv.includes("--runtime-only")) writeAttributeDna();
 
 const decisionWorker = `(() => {\n${bundle(["client/decision-worker.mjs"])}\n})();`;
 let worker = `globalThis.SpawnerDecisionWorkerSource = ${JSON.stringify(decisionWorker)};\n(() => {\n${bundle(["client/worker.mjs"])}\n})();`;
 if (process.argv.includes("--production")) worker = productionRuntime(worker);
 const assets = Object.fromEntries([...PLAYER_TRIBE_ASSETS, ...PLAYER_COMBAT_ASSETS, ...COMBAT_ATTRIBUTE_ASSETS, ...UNIT_ANIMATION_ASSETS, ...TRIBE_ATTRIBUTE_ASSETS, ...NEST_GROWTH_ASSETS, ...RESOURCE_TYPES.flatMap(item => [item.image, item.carryImage]), ...RESOURCE_HARVEST_ANIMATIONS.map(item => item.image), ...CREATURE_ASSETS, TALON_OWL_IDLE.image, AGENT_ATTACK_ASSET, AGENT_DEATH_ANIMATION.image, AGENT_LEVEL_UP.ring, AGENT_LEVEL_UP.sparkle, SPORE_BIRTH_ANIMATION.image, SPORE_BIRTH_ANIMATION.nest, SPRING_BIRTH_ANIMATION.image, PEBBLE_BIRTH_ANIMATION.image, PEBBLE_BIRTH_ANIMATION.foreground, "DesignAssets/UI/hp-heart.png", "DesignAssets/Foods/food-berry-bush.png", "DesignAssets/Terrain/standing-tree-smooth-atlas.png", "DesignAssets/Terrain/poison-spore-ground.png"].map(name => [name, name]));
-let browser = bundle(["client/welcome-presentation.mjs", "client/dna-editor.mjs", "server/dna-unit.mjs", "client/combat-attributes.mjs", "client/sprout-roots.mjs", "client/burrow-codex.mjs", "client/progression-ui.mjs", "client/cheats.mjs", "client/unit-animation.mjs", "client/unit-size.mjs", "client/terrain-codex.mjs", "server/combat.mjs", "client/combat.mjs", "server/encounter-types.mjs", "server/player-tribes.mjs", "client/tribe-art.mjs", "server/corpses.mjs", "server/growth.mjs", "server/resources.mjs", "server/attributes.mjs", "server/unit-template-names.mjs", "server/nests.mjs", "server/food.mjs", "server/birth.mjs", "server/attack.mjs", "client/agent-death.mjs", "client/agent-level-up.mjs", "client/nest-growth.mjs", "client/structure-effects.mjs", "server/beetle-animation.mjs", "client/talon-owl-idle.mjs", "client/birth.mjs", "client/creature-spawn.mjs", "client/harvest-assets.mjs", "client/harvest.mjs", "client/resource-art.mjs", "client/client.mjs", "client/codex-content.mjs"]);
+let browser = bundle(["client/combat-vfx-events.mjs", "client/welcome-presentation.mjs", "client/dna-editor.mjs", "server/dna-unit.mjs", "client/combat-attributes.mjs", "client/sprout-roots.mjs", "client/burrow-codex.mjs", "client/progression-ui.mjs", "client/cheats.mjs", "client/unit-animation.mjs", "client/unit-size.mjs", "client/terrain-codex.mjs", "server/combat.mjs", "client/combat.mjs", "server/encounter-types.mjs", "server/player-tribes.mjs", "client/tribe-art.mjs", "server/corpses.mjs", "server/growth.mjs", "server/resources.mjs", "server/attributes.mjs", "server/unit-template-names.mjs", "server/nests.mjs", "server/food.mjs", "server/birth.mjs", "server/attack.mjs", "client/agent-death.mjs", "client/agent-level-up.mjs", "client/nest-growth.mjs", "client/structure-effects.mjs", "server/beetle-animation.mjs", "client/talon-owl-idle.mjs", "client/birth.mjs", "client/creature-spawn.mjs", "client/harvest-assets.mjs", "client/harvest.mjs", "client/resource-art.mjs", "client/client.mjs", "client/codex-content.mjs"]);
 if (process.argv.includes("--production")) browser = productionRuntime(browser);
 const gameSource = readFileSync(resolve(root, "client/game.js"), "utf8");
 const gameImages = new Set(Object.keys(assets));
@@ -127,8 +142,8 @@ const renderingAssets = {
     gameSource.slice(gameSource.indexOf("const forest ="), gameSource.indexOf("const hazardCells ="))),
   hazards: renderingDigest(["poison-spore-ground.png"], ["updateHazards", "hazardGroundTile"], "")
 };
-const content = `(() => {\n${browser}\nconst workerSource = ${JSON.stringify(worker)};\nglobalThis.Spawner = Object.freeze({ ...modules["client/welcome-presentation.mjs"], ...modules["client/dna-editor.mjs"], ...modules["server/dna.mjs"], ...modules["server/dna-unit.mjs"], ...modules["client/codex-content.mjs"], ...modules["client/combat-attributes.mjs"], ...modules["client/sprout-roots.mjs"], ...modules["client/image-geometry.mjs"], ...modules["client/cheats.mjs"], ...modules["client/unit-animation.mjs"], ...modules["client/unit-size.mjs"], ...modules["client/terrain-codex.mjs"], ...modules["client/burrow-codex.mjs"], ...modules["server/combat.mjs"], ...modules["server/combat-stats.mjs"], ...modules["client/combat.mjs"], ...modules["server/encounter-types.mjs"], ...modules["server/player-tribes.mjs"], ...modules["client/tribe-art.mjs"], ...modules["server/world-size.mjs"], ...modules["server/corpses.mjs"], ...modules["server/growth.mjs"], ...modules["server/resources.mjs"], ...modules["server/attributes.mjs"], ...modules["server/unit-template-names.mjs"], ...modules["client/progression-ui.mjs"], ...modules["server/food.mjs"], ...modules["server/birth.mjs"], ...modules["server/attack.mjs"], ...modules["client/agent-death.mjs"], ...modules["client/agent-level-up.mjs"], ...modules["client/nest-growth.mjs"], ...modules["client/structure-effects.mjs"], ...modules["server/beetle-animation.mjs"], ...modules["client/talon-owl-idle.mjs"], ...modules["client/birth.mjs"], ...modules["client/creature-spawn.mjs"], ...modules["client/harvest-assets.mjs"], ...modules["client/harvest.mjs"], ...modules["client/resource-art.mjs"], NEST_LEVELS: modules["server/nests.mjs"].NEST_LEVELS, nestUpgradeCost: modules["server/nests.mjs"].nestUpgradeCost, materialCapacity: modules["server/nests.mjs"].materialCapacity, createClient: (onState, onError, onSaved) => modules["client/client.mjs"].createClient(onState, onError, onSaved, workerSource), renderingAssets: ${JSON.stringify(renderingAssets)}, assets: ${JSON.stringify(assets)} });\n})();\n`;
-writeFileSync(resolve(root, "client/runtime.js"), content.replace(/\r?\n/g, "\r\n"), "utf8");
+const content = `(() => {\n${browser}\nconst workerSource = ${JSON.stringify(worker)};\nglobalThis.Spawner = Object.freeze({ ...modules["client/combat-vfx-events.mjs"], ...modules["client/welcome-presentation.mjs"], ...modules["client/dna-editor.mjs"], ...modules["server/dna.mjs"], ...modules["server/dna-unit.mjs"], ...modules["client/codex-content.mjs"], ...modules["client/combat-attributes.mjs"], ...modules["client/sprout-roots.mjs"], ...modules["client/image-geometry.mjs"], ...modules["client/cheats.mjs"], ...modules["client/unit-animation.mjs"], ...modules["client/unit-size.mjs"], ...modules["client/terrain-codex.mjs"], ...modules["client/burrow-codex.mjs"], ...modules["server/combat.mjs"], ...modules["server/combat-stats.mjs"], ...modules["client/combat.mjs"], ...modules["server/encounter-types.mjs"], ...modules["server/player-tribes.mjs"], ...modules["client/tribe-art.mjs"], ...modules["server/world-size.mjs"], ...modules["server/corpses.mjs"], ...modules["server/growth.mjs"], ...modules["server/resources.mjs"], ...modules["server/attributes.mjs"], ...modules["server/unit-template-names.mjs"], ...modules["client/progression-ui.mjs"], ...modules["server/food.mjs"], ...modules["server/birth.mjs"], ...modules["server/attack.mjs"], ...modules["client/agent-death.mjs"], ...modules["client/agent-level-up.mjs"], ...modules["client/nest-growth.mjs"], ...modules["client/structure-effects.mjs"], ...modules["server/beetle-animation.mjs"], ...modules["client/talon-owl-idle.mjs"], ...modules["client/birth.mjs"], ...modules["client/creature-spawn.mjs"], ...modules["client/harvest-assets.mjs"], ...modules["client/harvest.mjs"], ...modules["client/resource-art.mjs"], NEST_LEVELS: modules["server/nests.mjs"].NEST_LEVELS, nestUpgradeCost: modules["server/nests.mjs"].nestUpgradeCost, materialCapacity: modules["server/nests.mjs"].materialCapacity, createClient: (onState, onError, onSaved) => modules["client/client.mjs"].createClient(onState, onError, onSaved, workerSource), renderingAssets: ${JSON.stringify(renderingAssets)}, assets: ${JSON.stringify(assets)} });\n})();\n`;
+writeGenerated(resolve(root, "client/runtime.js"), content);
 if (process.argv.includes("--runtime-only")) process.exit(0);
 if (!process.argv.includes("--preserve-design")) {
 const designPath = resolve(root, "Design.html");
@@ -153,13 +168,13 @@ if (terrainObjects) design = design.replace(terrainObjects, terrainObjects.repla
   const hazard = HAZARD_CODEX.find(hazard => hazard.name === name);
   return hazard ? row.slice(0, row.lastIndexOf('<td>')) + '<td>' + hazard.description + '</td></tr>' : row;
 }));
-if (design !== readFileSync(designPath, "utf8")) writeFileSync(designPath, design.replace(/\r?\n/g, "\r\n"), "utf8");
+if (design !== readFileSync(designPath, "utf8")) writeGenerated(designPath, design);
 writeDesignWorld();
 writeDesignResources();
 if (design.includes('<script id="world-model">')) {
   const model = `(() => {\n${bundle(["server/world.mjs"])}\nglobalThis.SpawnerWorld = { ...modules["server/world.mjs"], ...modules["server/burrows.mjs"] };\n})();`;
   const updated = design.replace(/(<script id="world-model">)[\s\S]*?(<\/script>)/, (match, start, end) => start + "\n" + model + "\n" + end).replace(/\r?\n/g, "\r\n");
-  if (updated !== design) writeFileSync(designPath, updated, "utf8");
+  if (updated !== design) writeGenerated(designPath, updated);
 }
 }
 const localAssets = new Set(Object.values(assets));
@@ -177,9 +192,12 @@ for (const name of [...localAssets].sort()) {
   const mime = { png: "image/png", webp: "image/webp", mp3: "audio/mpeg", wav: "audio/wav" }[extension] || "application/octet-stream";
   const source = "data:" + mime + ";base64," + readFileSync(resolve(root, name)).toString("base64");
   mkdirSync(dirname(path), { recursive: true });
-  writeFileSync(path, "globalThis.SpawnerLocalAssetSources[" + JSON.stringify(name) + "] = " + JSON.stringify(source) + ";\r\n", "utf8");
+  // JSON line endings do not change the asset's value. Keep an equivalent
+  // embedded payload to avoid large, unrelated binary-wrapper changes.
+  if (extension !== "json" || !unchangedLocalJson(path, readFileSync(resolve(root, name), "utf8")))
+    writeGenerated(path, "globalThis.SpawnerLocalAssetSources[" + JSON.stringify(name) + "] = " + JSON.stringify(source) + ";\n");
   localAssetFiles.push("./" + file);
 }
-writeFileSync(resolve(root, "client/local-assets.js"),
-  ("globalThis.SpawnerLocalAssetFiles = Object.freeze(" + JSON.stringify(localAssetFiles, null, 2) + ");\n").replace(/\r?\n/g, "\r\n"), "utf8");
+writeGenerated(resolve(root, "client/local-assets.js"),
+  "globalThis.SpawnerLocalAssetFiles = Object.freeze(" + JSON.stringify(localAssetFiles, null, 2) + ");\n");
 console.log(`ENV> CLIENT BUNDLE : ${Buffer.byteLength(content)} BYTES`);

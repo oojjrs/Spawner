@@ -38,7 +38,8 @@ function runtimeRecord(record) {
     if (animation.projectile?.image) registerFile(animation.projectile.image);
     actions[action] = animation;
   }
-  return { source: clean, actions, previewStatus: record.previewStatus, readiness: record.readiness };
+  return { source: clean, actions, previewStatus: record.previewStatus, readiness: record.readiness,
+    ...(publish && record.sceneActions ? { sceneActions: record.sceneActions } : {}) };
 }
 for (const tribe of UNIT_APPEARANCE_TRIBES) for (let mask = 0; mask < 32; mask++) {
   const key = unitAppearanceKey(tribe, mask), folder = resolve(root, "DesignAssets/Animations/UnitAppearanceV1", key);
@@ -70,7 +71,15 @@ for (const tribe of UNIT_APPEARANCE_TRIBES) for (let mask = 0; mask < 32; mask++
     if (clip.imageHash && imageHash !== clip.imageHash) throw new Error(`APPEARANCE IMAGE HASH MISMATCH : ${key}/${action}`);
     clip.imageHash = imageHash;
   }
-  const record = { source, actions, previewStatus: motions?.previewStatus || {} };
+  for (const scene of Object.values(motions?.sceneActions || {})) {
+    if (mask !== 0 || scene.sourceId !== source.sourceId || scene.body?.sourceId !== source.sourceId ||
+        scene.ownership?.bodyOnly !== true || scene.independentBodyAction !== false ||
+        hashFile(scene.body.image) !== scene.body.sourceHash) throw new Error(`APPEARANCE BIRTH SCENE CONTRACT MISMATCH : ${key}`);
+    for (const asset of scene.separatedSceneAssets || []) if (asset.image && hashFile(asset.image) !== asset.sourceHash)
+      throw new Error(`APPEARANCE BIRTH SCENE PROP CHANGED : ${key}`);
+  }
+  const record = { source, actions, previewStatus: motions?.previewStatus || {},
+    ...(motions?.sceneActions ? { sceneActions: motions.sceneActions } : {}) };
   record.readiness = unitAppearanceReadiness(record, mask); records[key] = record; runtime[key] = runtimeRecord(record);
 }
 const manifestRoot = resolve(root, "DesignAssets/Animations/UnitAppearanceV1");

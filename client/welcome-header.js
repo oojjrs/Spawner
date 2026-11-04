@@ -64,6 +64,7 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
   let current = nextChoice();
   let upcoming = null, arriving = null;
   const pendingSources = new Map();
+  const unavailableDraws = new WeakSet();
   function neutralAnimations(species) {
     if (species === "spiny-back-beetle") return Object.fromEntries(["idle", "walk", "attack"].map(action => {
       const animation = globalThis.Spawner.BEETLE_ANIMATIONS[action];
@@ -193,6 +194,7 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
     const lift = feet ? 426 - 512 * .94 + globalThis.Spawner.sproutRootGeometry(feet).height * .88 : 0;
     const pivot = 460 - lift;
     context.save();
+    try {
     const hop = moving && !feet ? Math.sin(motion.position.progress * Math.PI) * size * .18 : 0;
     context.translate(x, groundY() + (feet ? 4 : 0) - hop);
     context.scale(size / 512, size / 512);
@@ -207,11 +209,12 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
     const fold = 1 - Math.max(0, -flap) * .7;
     if (!appearance.antenna) for (const [name, pivotX, rotation] of [["sprout-left", 136 + 240 * 133.75 / 286, flap], ["sprout-right", 136 + 240 * 151.95 / 286, -flap]]) {
       context.save();
+      try {
       context.translate(pivotX, headRoot);
       context.rotate(rotation);
       context.scale(1, fold);
       context.drawImage(beanParts.get(name), 136 - pivotX, 110 - lift - headRoot, 240, 350);
-      context.restore();
+      } finally { context.restore(); }
     }
     if (!appearance.antenna) context.drawImage(beanParts.get("sprout-stem"), 136, 110 - lift, 240, 350);
     else {
@@ -225,7 +228,7 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
     context.drawImage(beanParts.get("body"), 136, 110 - lift, 240, 350);
     if (appearance.strength) context.drawImage(beanParts.get("strength-1"),
       256 - 344 * .78 / 2, 460 - lift - 142 * .78, 344 * .78, 142 * .78);
-    context.restore();
+    } finally { context.restore(); }
   }
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
   const restDuration = 2000;
@@ -312,6 +315,23 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
     });
   }
   function drawUnit(motion, clear) {
+    const choice = current;
+    if (unavailableDraws.has(choice)) {
+      if (clear !== false) context.clearRect(0, 0, width, height);
+      return;
+    }
+    const drawn = globalThis.Spawner.drawWelcomeChoice(choice, candidate => {
+      current = candidate;
+      try {
+        const appearance = appearances[candidate.variant][candidate.key === "bean" ? "bean" : "others"];
+        const preparedMotion = motion && { ...motion, agent: { ...motion.agent, attributes: appearance } };
+        drawPreparedUnit(preparedMotion, clear);
+      } finally { current = choice; }
+    }, { onError: (error, failed) => console.warn("Welcome pose unavailable:", failed.key, failed.variant, error) });
+    if (drawn) choice.variant = drawn.variant;
+    else unavailableDraws.add(choice);
+  }
+  function drawPreparedUnit(motion, clear) {
     if (!width || !height) return;
     motion ||= travelMotion();
     if (clear !== false) context.clearRect(0, 0, width, height);
@@ -350,6 +370,7 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
     const padding = (frameSize - sourceAnimation.frameSize) / 2;
     const renderedSize = size * frameSize / sourceAnimation.frameSize;
     context.save();
+    try {
     context.translate(x, groundY());
     const mirror = moving && !reducedMotion.matches && (sourceAnimation.facing ? sourceAnimation.facing === "right" : tribe === "spore");
     context.scale(mirror ? -1 : 1, 1);
@@ -357,7 +378,7 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
       customized ? 0 : Math.floor(sourceIndex / sourceAnimation.columns) * sourceAnimation.frameSize, frameSize, frameSize,
       -(sourceAnimation.pivotX + padding) * renderedSize / frameSize,
       -(sourceAnimation.pivotY + padding) * renderedSize / frameSize, renderedSize, renderedSize);
-    context.restore();
+    } finally { context.restore(); }
   }
   function drawNeutral(motion) {
     const species = current.key;
@@ -381,12 +402,13 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
     const animation = globalThis.Spawner.imageFrameGeometry(sourceAnimation, frame);
     const size = baseSize * poseScale(animation, action, species);
     context.save();
+    try {
     context.translate(motion.x, groundY());
     if (animation.facing === "right") context.scale(-1, 1);
     context.drawImage(source, frame % animation.columns * animation.frameSize,
       Math.floor(frame / animation.columns) * animation.frameSize, animation.frameSize, animation.frameSize,
       -size * animation.pivotX / animation.frameSize, -size * animation.pivotY / animation.frameSize, size, size);
-    context.restore();
+    } finally { context.restore(); }
   }
   function active() {
     return !document.hidden && !welcome.hidden && document.body.dataset.screen === "welcome";

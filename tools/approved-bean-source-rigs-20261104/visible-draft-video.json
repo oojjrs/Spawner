@@ -1,0 +1,17 @@
+{
+  "path": "tools/approved-bean-source-rigs-20261104/visible-idle-hurt-drafts.mp4",
+  "frames": 86,
+  "fps": 18,
+  "durationSeconds": 4.777777777777778,
+  "sourceMasks": [
+    0,
+    8,
+    18,
+    30
+  ],
+  "cameraPerSource": [
+    512,
+    512
+  ],
+  "scope": "Source-only conservative idle/hurt review drafts. No hidden art, production action registration or worldReady change."
+}

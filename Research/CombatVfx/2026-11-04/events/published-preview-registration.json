@@ -1,0 +1,172 @@
+{
+  "reason": "Five additional existing images found by auditing the complete published asset map, including review pages.",
+  "baseline": "a319b0e9bede88e276b6ff2e5f6b7887d2a5f299",
+  "priorGroups": {
+    "runtimeAudit": 36,
+    "rangedSourceFollowup": 3
+  },
+  "totalPolicyRowsChanged": 44,
+  "allFiveMatchOriginalTrackedBlobs": true,
+  "artApprovalChanged": false,
+  "rows": [
+    {
+      "image": "DesignAssets/Animations/UnitAppearanceV1/bean/1f/Motions/idle.webp",
+      "category": "existing-bean-1f-native-motion",
+      "sha256": "8bbc4cebef3ca0333e59c4f019f4a66f695e17abb027d8b9c12521b8f91e6ede",
+      "dimensions": [
+        2048,
+        8192
+      ],
+      "frame": [
+        512,
+        512
+      ],
+      "registration": {
+        "display": [
+          256,
+          256
+        ],
+        "grid": [
+          4,
+          16
+        ],
+        "nativeSource": {
+          "sha256": "8bbc4cebef3ca0333e59c4f019f4a66f695e17abb027d8b9c12521b8f91e6ede",
+          "dimensions": [
+            2048,
+            8192
+          ],
+          "frame": [
+            512,
+            512
+          ]
+        }
+      }
+    },
+    {
+      "image": "DesignAssets/Animations/UnitAppearanceV1/bean/1f/Motions/walk.webp",
+      "category": "existing-bean-1f-native-motion",
+      "sha256": "71643363b1fdaf3235d323b5774fd1c2562a3fe52742efff94255e31dd3f3df3",
+      "dimensions": [
+        2048,
+        3584
+      ],
+      "frame": [
+        512,
+        512
+      ],
+      "registration": {
+        "display": [
+          256,
+          256
+        ],
+        "grid": [
+          4,
+          7
+        ],
+        "nativeSource": {
+          "sha256": "71643363b1fdaf3235d323b5774fd1c2562a3fe52742efff94255e31dd3f3df3",
+          "dimensions": [
+            2048,
+            3584
+          ],
+          "frame": [
+            512,
+            512
+          ]
+        }
+      }
+    },
+    {
+      "image": "DesignAssets/Animations/UnitAppearanceV1/bean/1f/Motions/hurt.webp",
+      "category": "existing-bean-1f-native-motion",
+      "sha256": "990ae3e20f70165b06ec993c009deaa9c152bd5ba67690690ca3014ee4ee6db3",
+      "dimensions": [
+        2048,
+        2048
+      ],
+      "frame": [
+        512,
+        512
+      ],
+      "registration": {
+        "display": [
+          256,
+          256
+        ],
+        "grid": [
+          4,
+          4
+        ],
+        "nativeSource": {
+          "sha256": "990ae3e20f70165b06ec993c009deaa9c152bd5ba67690690ca3014ee4ee6db3",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "frame": [
+            512,
+            512
+          ]
+        }
+      }
+    },
+    {
+      "image": "DesignAssets/Welcome/forest-clearing.webp",
+      "category": "welcome-background",
+      "sha256": "5baf988de24cba01ed3f470d4e6e357bbf938ecbf77f4f6a2d9cfcebd7fb2d92",
+      "dimensions": [
+        1200,
+        400
+      ],
+      "frame": [
+        1200,
+        400
+      ],
+      "registration": {
+        "display": [
+          1920,
+          1080
+        ],
+        "grid": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "image": "DesignAssets/Animations/CombatVfxV3Draft/general-hit/hit.webp",
+      "category": "unapproved-review-only-effect",
+      "sha256": "a6ef48b5a50e1fc4e10d277e4d9ea7bfe6b9faab02e72bf8430a654b5e79ea1d",
+      "dimensions": [
+        1024,
+        512
+      ],
+      "frame": [
+        256,
+        256
+      ],
+      "registration": {
+        "display": [
+          256,
+          256
+        ],
+        "grid": [
+          4,
+          2
+        ],
+        "nativeSource": {
+          "sha256": "a6ef48b5a50e1fc4e10d277e4d9ea7bfe6b9faab02e72bf8430a654b5e79ea1d",
+          "dimensions": [
+            1024,
+            512
+          ],
+          "frame": [
+            256,
+            256
+          ]
+        }
+      }
+    }
+  ]
+}

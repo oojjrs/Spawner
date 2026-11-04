@@ -1,0 +1,198 @@
+<!doctype html><meta charset="utf-8"><title>Native birth body equivalence QA</title>
+<script type="module">
+import * as Birth from '../../client/birth.mjs';
+import * as UnitSize from '../../client/unit-size.mjs';
+import * as UnitAnimation from '../../client/unit-animation.mjs';
+import { ATTRIBUTE_DNA } from '../../server/dna.mjs';
+import { drawNativeBirthBody } from './scene-body-proposal.mjs';
+
+const tribes = ['spore', 'pebble', 'spring'];
+const loadJSON = path => fetch(path).then(r => { if (!r.ok) throw Error(path); return r.json(); });
+const [references, currentFunctions, proof, metadata, ...motions] = await Promise.all([
+  loadJSON('./legacy-body-reference.json'), loadJSON('./current-body-adapter.json'), loadJSON('./report.json'), loadJSON('./qa-native-metadata.json'),
+  ...tribes.map(tribe => loadJSON(`../../DesignAssets/Animations/UnitAppearanceV1/${tribe}/00/motions.json`))
+]);
+const images = Object.fromEntries(await Promise.all(tribes.map(async tribe => {
+  const image = new Image(); image.src = '../../' + metadata[tribe].birth.image; await image.decode(); return [tribe, image];
+})));
+const makeCanvas = () => Object.assign(document.createElement('canvas'), { width: 512, height: 512 });
+const original = makeCanvas(), proposed = makeCanvas();
+const currentCanvas = makeCanvas(), currentContext = currentCanvas.getContext('2d', { willReadFrequently: true });
+document.body.append(original, proposed);
+const left = original.getContext('2d', { willReadFrequently: true }), right = proposed.getContext('2d', { willReadFrequently: true });
+const frameImages = new Map();
+const spore = metadata.spore.birth;
+for (let frame = 0; frame < spore.frameCount; frame++) {
+  const c = Object.assign(document.createElement('canvas'), { width: spore.frameSize, height: spore.frameSize });
+  c.getContext('2d').drawImage(images.spore, frame % spore.columns * spore.frameSize, Math.floor(frame / spore.columns) * spore.frameSize,
+    spore.frameSize, spore.frameSize, 0, 0, spore.frameSize, spore.frameSize);
+  frameImages.set(frame, c);
+}
+globalThis.Spawner = { ...Birth, ...UnitSize, ...UnitAnimation, ATTRIBUTE_DNA };
+await new Promise((resolve, reject) => {
+  const script = document.createElement('script'); script.src = '../../client/unit-appearance-preview-runtime.js';
+  script.onload = resolve; script.onerror = reject; document.head.append(script);
+});
+const compiledAppearance = globalThis.SpawnerAppearance;
+let integrationHelperCalls = 0, integrationEvents = [], forcedAttributeFrame = null;
+globalThis.SpawnerAppearance = { ...compiledAppearance, drawUnitAppearanceBirthSceneBody(...args) {
+  integrationHelperCalls++; integrationEvents.push('body-helper');
+  return compiledAppearance.drawUnitAppearanceBirthSceneBody(...args);
+} };
+let activeAnchor, legacyHandoffs;
+const sentinel = (ctx, anchor, factor) => {
+  ctx.fillStyle = '#7b37a1';
+  ctx.fillRect(anchor.x - 7 * factor, anchor.y - 11 * factor, 14 * factor, 11 * factor);
+};
+const environment = {
+  Spawner: { ...Birth, imageScale: () => spore.imageScale, drawSpringBirthWater: () => { integrationEvents.push('water'); } },
+  SPRING_BIRTH_ANIMATION: metadata.spring.birth,
+  PEBBLE_BIRTH_ANIMATION: metadata.pebble.birth,
+  AGENT_HEIGHT: .7,
+  springBirthSheet: images.spring, pebbleBirthSheet: images.pebble, sporeBirthSheet: images.spore,
+  sporeBirthFrames: frameImages,
+  tribeArt: { animationFrame: () => forcedAttributeFrame }, idleMotion: { matches: false },
+  colonyEntries: [], pebbleBirthForeground: { complete: false },
+  drawAgentAppearanceLayer: ctx => { legacyHandoffs++; sentinel(ctx, activeAnchor, 1); },
+  drawSelectionOutline: () => {}
+};
+const legacy = Object.fromEntries(tribes.map(tribe => {
+  const name = `draw${tribe[0].toUpperCase() + tribe.slice(1)}Birth`;
+  const fn = Function(...Object.keys(environment), `return (${references[name]});`)(...Object.values(environment));
+  return [tribe, fn];
+}));
+const current = Object.fromEntries(tribes.map(tribe => {
+  const name = `draw${tribe[0].toUpperCase() + tribe.slice(1)}Birth`;
+  return [tribe, Function(...Object.keys(environment), `return (${currentFunctions[name]});`)(...Object.values(environment))];
+}));
+const validDNA = count => ({ version: 3, pieces: Array.from({ length: count }, () => ({ gene: 'health', grade: 1, rotation: 0, shape: [0, 1] })), budget: 1000000, level: 4 });
+
+function frameAt(animation, elapsed) {
+  let end = 0;
+  for (let frame = 0; frame < animation.frameCount; frame++) {
+    end += animation.durationsMs[frame] / 1000;
+    if (elapsed + 1e-9 < end) return frame;
+  }
+  return animation.frameCount - 1;
+}
+
+window.runNativeBirthSceneQA = () => {
+  const report = { renderer: navigator.userAgent, comparison: 'pinned original game.js body functions vs metadata-driven runtime helper; same original source pixels',
+    externalSceneEffects: 'Root travel, nest/foreground/water remain external and are not baked into either body canvas.',
+    samples: 0, maxChannelError: 0, changedPixels: 0, handoffs: 0, hiddenFrames: 0, tribes: {}, failures: [] };
+  report.currentIntegration = { samples: 0, helperCalls: 0, changedPixels: 0, maxChannelError: 0, waterBeforeBodyCases: 0, failures: [], gateCases: [] };
+  for (let index = 0; index < tribes.length; index++) {
+    const tribe = tribes[index], animation = metadata[tribe].birth, contract = motions[index].sceneActions.birth;
+    const displayScale = proof.tribes[tribe].unitDisplayScale;
+    const samples = [];
+    let start = 0;
+    for (let frame = 0; frame < animation.frameCount; frame++) {
+      samples.push({ frame, elapsed: start + animation.durationsMs[frame] / 2000 });
+      start += animation.durationsMs[frame] / 1000;
+    }
+    for (const point of [animation.detachAt, animation.contactAt]) for (const delta of [-.001, 0, .001]) {
+      const elapsed = Math.max(0, point + delta); samples.push({ frame: frameAt(animation, elapsed), elapsed });
+    }
+    const tr = report.tribes[tribe] = { samples: 0, maxChannelError: 0, changedPixels: 0,
+      sourceImage: animation.image, physicalFrameSize: animation.frameSize,
+      nativeBodyPixelsPerWorld: contract.body.cameraMapping.pixelsPerWorld,
+      deformationKind: contract.deformation.kind, firstBodyFrame: contract.visibility.firstBodyFrame,
+      lastFramePolicy: contract.visibility.lastFramePolicy };
+    for (const sample of samples) for (const size of [100, 220]) for (const pieceCount of [0, 12]) {
+      const facings = tribe === 'spore' ? [-1, 1] : [1];
+      for (const facing of facings) for (const outerDisplayScaleApplied of [false, true]) {
+        left.clearRect(0, 0, 512, 512); right.clearRect(0, 0, 512, 512);
+        const growth = 1 + .01 * pieceCount;
+        const anchor = activeAnchor = { x: 256, y: 330 };
+        const topLeft = { x: anchor.x - size / 2, y: anchor.y - size * (.5 + .7 * .44) };
+        const birth = { ...sample, facing, unitVisible: sample.frame >= (animation.firstUnitFrame ?? 0),
+          scale: 1 / (contract.body.cameraMapping.pixelsPerWorld * displayScale) };
+        legacyHandoffs = 0;
+        left.save(); left.translate(anchor.x, anchor.y); left.scale(displayScale * growth, displayScale * growth); left.translate(-anchor.x, -anchor.y);
+        legacy[tribe](left, 0, { tribe, attributes: {}, birth: { colonyId: 'qa' } }, birth, topLeft, size, null);
+        left.restore();
+        let proposalHandoffs = 0;
+        right.save();
+        if (outerDisplayScaleApplied) {
+          right.translate(anchor.x, anchor.y); right.scale(displayScale * growth, displayScale * growth); right.translate(-anchor.x, -anchor.y);
+        }
+        const status = drawNativeBirthBody(right, contract, images[tribe], { ...sample, facing, growth, anchor, topLeft, worldPixels: size, outerDisplayScaleApplied,
+          nativeFrame: tribe === 'spore' ? frameImages.get(sample.frame) : null,
+          drawIdle: ctx => { proposalHandoffs++; sentinel(ctx, anchor, outerDisplayScaleApplied ? 1 : displayScale * growth); } });
+        right.restore();
+        if (proposalHandoffs !== legacyHandoffs) throw Error(`${tribe}: handoff differs`);
+        report.handoffs += proposalHandoffs;
+        if (status === 'body-hidden') report.hiddenFrames++;
+        const before = left.getImageData(0, 0, 512, 512).data, after = right.getImageData(0, 0, 512, 512).data;
+        let changed = 0, maxError = 0;
+        for (let p = 0; p < before.length; p += 4) {
+          let pixelChanged = false;
+          for (let c = 0; c < 4; c++) { const error = Math.abs(before[p + c] - after[p + c]); maxError = Math.max(maxError, error); pixelChanged ||= error > 0; }
+          if (pixelChanged) changed++;
+        }
+        report.samples++; tr.samples++;
+        report.changedPixels += changed; tr.changedPixels += changed;
+        report.maxChannelError = Math.max(report.maxChannelError, maxError); tr.maxChannelError = Math.max(tr.maxChannelError, maxError);
+        if (maxError > 0) {
+          if (!window.firstFailureFrames) window.firstFailureFrames = { legacy: original.toDataURL(), proposal: proposed.toDataURL() };
+          report.failures.push({ tribe, ...sample, worldPixels: size, pieceCount, facing, outerDisplayScaleApplied, changedPixels: changed, maxChannelError: maxError });
+        }
+        if (outerDisplayScaleApplied) {
+          currentContext.clearRect(0, 0, 512, 512);
+          currentContext.save(); currentContext.translate(anchor.x, anchor.y);
+          currentContext.scale(displayScale * growth, displayScale * growth); currentContext.translate(-anchor.x, -anchor.y);
+          integrationHelperCalls = 0; integrationEvents = [];
+          const agent = { tribe, dna: validDNA(pieceCount), attributes: {}, birth: { colonyId: 'qa' } };
+          if (!ATTRIBUTE_DNA.validate(agent.dna)) throw Error('INVALID_QA_DNA');
+          current[tribe](currentContext, 0, agent, birth, topLeft, size, null);
+          currentContext.restore();
+          const expectedCalls = sample.frame >= contract.visibility.firstBodyFrame && sample.frame < contract.visibility.lastFrame ? 1 : 0;
+          if (integrationHelperCalls !== expectedCalls) throw Error(`${tribe}: current helper branch ${integrationHelperCalls} != ${expectedCalls}`);
+          const ci = report.currentIntegration;
+          ci.samples++; ci.helperCalls += integrationHelperCalls;
+          if (tribe === 'spring' && expectedCalls) {
+            if (integrationEvents.join(',') !== 'water,body-helper') throw Error('SPRING_WATER_ORDER_CHANGED');
+            ci.waterBeforeBodyCases++;
+          }
+          const actual = currentContext.getImageData(0, 0, 512, 512).data;
+          let changes = 0, error = 0;
+          for (let p = 0; p < actual.length; p += 4) {
+            let changed = false;
+            for (let c = 0; c < 4; c++) { const difference = Math.abs(actual[p + c] - before[p + c]); error = Math.max(error, difference); changed ||= difference > 0; }
+            if (changed) changes++;
+          }
+          ci.changedPixels += changes; ci.maxChannelError = Math.max(ci.maxChannelError, error);
+          if (changes || error) ci.failures.push({ tribe, ...sample, size, pieceCount, facing, changes, error });
+        }
+      }
+    }
+    const sample = samples.find(s => s.frame >= contract.visibility.firstBodyFrame && s.frame < contract.visibility.lastFrame);
+    const size = 100, anchor = activeAnchor = { x: 256, y: 330 }, topLeft = { x: 206, y: 330 - 100 * (.5 + .7 * .44) };
+    const baseAgent = { tribe, dna: validDNA(0), attributes: {}, birth: { colonyId: 'qa' } };
+    const baseBirth = { ...sample, unitVisible: true, facing: 1, scale: contract.legacyPixelStage.nativeWorldPerPixelBeforeDisplay };
+    const gates = [
+      ['valid-raw00', {}, null, null, 1],
+      ['legacy-dna', { dna: { ...validDNA(0), version: 2 } }, null, null, 0],
+      ['invalid-dna', { dna: { version: 3, pieces: [], budget: -1 } }, null, null, 0],
+      ['nonzero-mask', { dna: { ...validDNA(0), pieces: [{ gene: 'blade', grade: 1, rotation: 0, shape: [0, 2] }] } }, null, null, 0],
+      ['neutral-species', { species: 'dew-rabbit' }, null, null, 0],
+      ['legacy-visual-attribute', { attributes: { strength: 1 } }, null, null, 0],
+      ['new-visual-attribute', { appearanceAttributes: { feet: 1 } }, null, null, 0],
+      ['outline', {}, '#abcdef', null, 0],
+      ['attribute-frame', {}, null, makeCanvas(), 0]
+    ];
+    if (tribe === 'spore') gates.push(['different-native-scale', {}, null, null, 0]);
+    for (const [name, patch, outline, attrFrame, expectedCalls] of gates) {
+      integrationHelperCalls = 0; forcedAttributeFrame = attrFrame;
+      const birth = { ...baseBirth, scale: name === 'different-native-scale' ? baseBirth.scale * 1.01 : baseBirth.scale };
+      current[tribe](currentContext, 0, { ...baseAgent, ...patch }, birth, topLeft, size, outline);
+      forcedAttributeFrame = null;
+      if (integrationHelperCalls !== expectedCalls) throw Error(`${tribe}/${name}: helper ${integrationHelperCalls} != ${expectedCalls}`);
+      report.currentIntegration.gateCases.push({ tribe, name, helperCalls: integrationHelperCalls, expectedCalls });
+    }
+    if (compiledAppearance.unitAppearanceReady(tribe, 0)) throw Error('INCOMPLETE_RAW00_BECAME_WORLD_READY');
+  }
+  return report;
+};
+window.qaReady = true;
+</script>

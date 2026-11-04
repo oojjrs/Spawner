@@ -1,0 +1,98 @@
+{
+  "recordId": "cloud-followup-additional-20261104",
+  "updatedAt": "2026-11-04T20:27:19.954072+00:00",
+  "stage": "validated-awaiting-publication",
+  "projectId": "appgprj_6ada1cedf2848191938f196c4f346ee9",
+  "sourceBase": "a319b0e",
+  "features": {
+    "dna": {
+      "candidates": 7,
+      "validatedDirections": 84,
+      "actualCostAndRoles": true,
+      "gameDefinitionsChanged": false
+    },
+    "neutralBalance": {
+      "species": 19,
+      "lineageStatPairs": 510,
+      "realEngineSeconds": [
+        10.3,
+        48.3
+      ],
+      "runtimeProposalApplied": false,
+      "proposalMaxima": {
+        "hp": 590,
+        "attack": 53,
+        "attacksPerSecond": 1.12,
+        "defense": 44,
+        "postCombatRegeneration": 1.9
+      }
+    },
+    "welcome": {
+      "roster": 35,
+      "drawFailureIsolated": true,
+      "originalExceptionUnknown": true
+    },
+    "vfx": {
+      "canonicalUnitCombatJournal": true,
+      "headParityScenarios": 38,
+      "actualMultiHealRecipientsDrawn": 2,
+      "legacyArtPreserved": true,
+      "newHitArtApproval": "pending",
+      "structuresAndEnvironmentalDamage": "not-instrumented"
+    },
+    "appearance": {
+      "registeredSources": 52,
+      "approvedSources": 38,
+      "nativeClips": 22,
+      "nativeFramesVerified": 524,
+      "bodyBirthAdapters": 3,
+      "completeWorldActionSets": 0,
+      "preservedBean1f": true,
+      "newBeanBindRigs": 31,
+      "visibleParts": 292,
+      "idleHurtDrafts": 31,
+      "draftsRegisteredAsWorldActions": false
+    },
+    "imageAudit": {
+      "policyRowsFixed": 44,
+      "actualPublicationAssets": 622,
+      "actualPublicationImages": 511,
+      "nativePixelsPreserved": true,
+      "fullBuildPassed": true,
+      "stableGeneratedFiles": 551
+    }
+  },
+  "verification": {
+    "canonicalBrowserCueDuplicateStarts": 0,
+    "canonicalBrowserFlightProgress": 0.16666666666666666,
+    "actualBirthHelperBranches": 9,
+    "originalToBirthHelperPixelCases": 1032,
+    "actualGameBirthPixelCases": 516,
+    "pixelDifferences": 0,
+    "cdnNewFiles": 11,
+    "cdnNewBytes": 1439853,
+    "cdnHead": "8034097da6bf9f1f241985a8f8815cc21f947c4b",
+    "cdnPagesRun": 41905174572,
+    "cdnShaCorsValidated": true,
+    "packagedMobileReviewPagesPassed": 6,
+    "welcomeCachePeakPixels": 7886201,
+    "welcomePixelBudget": 8388608,
+    "firstTouchBgmWaveformVisible": true
+  },
+  "reviewPages": [
+    "NeutralStats.html",
+    "DnaLayouts.html",
+    "VfxPreview.html",
+    "UnitPreview.html",
+    "BeanRigPreview.html",
+    "Combat.html"
+  ],
+  "pending": [
+    "DNA anonymous geometry and role assignment selection",
+    "Neutral numeric proposal adoption with HP migration/recovery integration",
+    "New general-hit art review before new effect families",
+    "Bean per-part annotations and idle/hurt draft review; walk/remaining actions production",
+    "Spore14 source art review and remaining tribe combinations",
+    "Structure/environment combat VFX evidence coverage"
+  ]
+}

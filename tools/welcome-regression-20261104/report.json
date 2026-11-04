@@ -1,0 +1,151 @@
+{
+  "baselineDrawFailureReproduced": true,
+  "normalRoster": "first four then antenna-pebble then all 35 exact identities",
+  "runtimeSourceHelperInjected": true,
+  "scenarios": [
+    {
+      "scenario": "normal",
+      "state": {
+        "key": "spiny-back-beetle",
+        "variant": 0,
+        "phase": "perform",
+        "elapsed": 947.9166666666947,
+        "number": 39,
+        "ready": true
+      },
+      "seen": [
+        "bean:0",
+        "spore:0",
+        "pebble:0",
+        "spring:0",
+        "pebble:2",
+        "bean:0",
+        "bean:1",
+        "bean:2",
+        "bean:3",
+        "spore:0",
+        "spore:1",
+        "spore:2",
+        "spore:3",
+        "pebble:0",
+        "pebble:1",
+        "pebble:2",
+        "pebble:3",
+        "spring:0",
+        "spring:1",
+        "spring:2",
+        "spring:3",
+        "spring-keeper:0",
+        "lantern-keeper:0",
+        "white-paw:0",
+        "old-garden-snail:0",
+        "cotton-sheep:0",
+        "walking-forest:0",
+        "spiny-back-leader:0",
+        "vine-turtle:0",
+        "shadow-weasel:0",
+        "snare-vine:0",
+        "rolling-acorn:0",
+        "bubble-toad:0",
+        "soil-boar:0",
+        "flower-tail-bird:0",
+        "dew-rabbit:0",
+        "soil-mole:0",
+        "bundle-snail:0",
+        "talon-owl:0",
+        "spiny-back-beetle:0"
+      ],
+      "uniqueAppearances": 35,
+      "errors": [],
+      "expectedDrawWarnings": [],
+      "cache": {
+        "pixelBudget": 8388608,
+        "pixels": 7357994,
+        "peakPixels": 8353408,
+        "entries": 10,
+        "evictions": 233
+      }
+    },
+    {
+      "scenario": "rig",
+      "state": {
+        "key": "bean",
+        "variant": 2,
+        "phase": "rest",
+        "elapsed": 676.5838509316736,
+        "number": 7,
+        "ready": true
+      },
+      "seen": [
+        "bean:0",
+        "spore:0",
+        "pebble:0",
+        "spring:0",
+        "pebble:0",
+        "bean:0",
+        "bean:1",
+        "bean:2"
+      ],
+      "uniqueAppearances": 6,
+      "errors": [],
+      "expectedDrawWarnings": [
+        "Welcome pose unavailable: pebble 2 Error: QA first rig draw failure\n    at drawPreparedUnit (http://127.0.0.1:14218/client/welcome-header.js:388:42)\n    at http://127.0.0.1:14218/client/welcome-header.js:338:9\n    at Object.drawWelcomeChoice (http://127.0.0.1:14218/client/runtime.js:11865:9)\n    at drawUnit (http://127.0.0.1:14218/client/welcome-header.js:333:38)\n    at http://127.0.0.1:14218/client/welcome-header.js:324:7\n    at presentArrival (http://127.0.0.1:14218/client/welcome-header.js:275:18)\n    at draw (http://127.0.0.1:14218/client/welcome-header.js:322:5)\n    at tick (http://127.0.0.1:14218/client/welcome-header.js:460:5)\n    at window.__step (<anonymous>:6:101)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:1)"
+      ],
+      "cache": {
+        "pixelBudget": 8388608,
+        "pixels": 2103432,
+        "peakPixels": 2103432,
+        "entries": 3,
+        "evictions": 0
+      }
+    },
+    {
+      "scenario": "neutral",
+      "state": {
+        "key": "lantern-keeper",
+        "variant": 0,
+        "phase": "rest",
+        "elapsed": 750,
+        "number": 22,
+        "ready": false
+      },
+      "seen": [
+        "bean:0",
+        "spore:0",
+        "pebble:0",
+        "spring:0",
+        "pebble:2",
+        "bean:0",
+        "bean:1",
+        "bean:2",
+        "bean:3",
+        "spore:0",
+        "spore:1",
+        "spore:2",
+        "spore:3",
+        "pebble:0",
+        "pebble:1",
+        "pebble:2",
+        "pebble:3",
+        "spring:0",
+        "spring:1",
+        "spring:2",
+        "spring:3",
+        "spring-keeper:0",
+        "lantern-keeper:0"
+      ],
+      "uniqueAppearances": 18,
+      "errors": [],
+      "expectedDrawWarnings": [
+        "Welcome pose unavailable: spring-keeper 0 Error: QA neutral draw failure\n    at drawNeutral (http://127.0.0.1:14218/client/welcome-header.js:422:42)\n    at drawPreparedUnit (http://127.0.0.1:14218/client/welcome-header.js:350:7)\n    at http://127.0.0.1:14218/client/welcome-header.js:338:9\n    at Object.drawWelcomeChoice (http://127.0.0.1:14218/client/runtime.js:11865:9)\n    at drawUnit (http://127.0.0.1:14218/client/welcome-header.js:333:38)\n    at http://127.0.0.1:14218/client/welcome-header.js:324:7\n    at presentArrival (http://127.0.0.1:14218/client/welcome-header.js:275:18)\n    at draw (http://127.0.0.1:14218/client/welcome-header.js:322:5)\n    at tick (http://127.0.0.1:14218/client/welcome-header.js:460:5)\n    at window.__step (<anonymous>:6:101)"
+      ],
+      "cache": {
+        "pixelBudget": 8388608,
+        "pixels": 7357994,
+        "peakPixels": 8353408,
+        "entries": 10,
+        "evictions": 231
+      }
+    }
+  ]
+}

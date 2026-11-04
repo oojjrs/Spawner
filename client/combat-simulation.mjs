@@ -1,4 +1,5 @@
 import { DNA_ACTION_RULES, dnaAttackMode, dnaProjectileDuration, dnaProjectileValid, dnaHealAllocations, dnaAttackStats } from "../server/dna-actions.mjs";
+import { combatVfxToken, recordCombatVfx, snapshotCombatVfx } from "../server/combat-vfx-journal.mjs";
 
 export const SIMULATION_STATS = Object.freeze([
   ["power", "근접 공격력", "공격"], ["rangedPower", "원거리 공격력", "공격"], ["vitality", "생명력", "생존"], ["armor", "방어력", "방어"],
@@ -181,6 +182,7 @@ export function createSimulationTrial(settings) {
   if (settings.support !== undefined && typeof settings.support !== "boolean") throw new TypeError("support must be boolean");
   let time = 0, winner = null, reason = null, eventCount = 0;
   const history = [], states = new Map(), projectiles = [];
+  const vfxEnvironment = {}, actionCauses = new WeakMap();
   const entries = Array.from({ length: Math.max(...teams.map(team => team.length)) }, (_, slot) =>
     teams.flatMap((team, side) => team[slot] ? [{ build: team[slot], side, slot }] : [])).flat();
   const agents = entries.map(({ build, side: index, slot }) => {
@@ -248,7 +250,15 @@ export function createSimulationTrial(settings) {
     return speed > 0 && current > range ? time + (current - range) / speed : Infinity;
   }
 
-  function record(kind, source, target, damage, action, critical, duration) {
+  function evidence(kind, source, target, amount, action, extra = {}) {
+    const causeId = action && actionCauses.get(action.origin || action);
+    return recordCombatVfx(vfxEnvironment, { kind, at: time, sourceId: source.id, targetId: target.id, amount,
+      from: { x: source.x, y: source.y }, to: { x: target.x, y: target.y },
+      mode: action?.mode, counter: !!action?.counter, hitIndex: action?.index || 0, causeId,
+      ...(action?.mode === "ranged" ? { projectileId: causeId + ":" + action.index } : {}), ...extra });
+  }
+
+  function record(kind, source, target, damage, action, critical, duration, extra = {}) {
     const row = { index: history.length, time, kind, attackerId: source.id, targetId: target.id, damage,
       critical, counter: !!action?.counter, hitIndex: action?.index || 0, hitCount: action?.count || 1,
       leftHealth: teamHealth("left"), rightHealth: teamHealth("right") };
@@ -257,11 +267,14 @@ export function createSimulationTrial(settings) {
     const event = { id: "simulation:" + row.index, kind, at: time, sourceId: source.id, targetId: target.id, damage };
     source.combat.lastEvent = event; target.combat.lastEvent = event;
     if (["dodge", "parry", "block", "stun"].includes(kind)) target.combat.lastReaction = event;
+    return evidence(kind, source, target, Math.abs(damage), action, { critical: !!critical,
+      ...(duration === undefined ? {} : { duration, endsAt: time + duration }), ...extra });
   }
 
   function end(who, why) {
     winner = who; reason = why;
     for (const agent of agents) { states.get(agent.id).action = null; agent.attack = null; }
+    for (const projectile of projectiles) evidence("projectile-cancel", projectile.source, projectile.target, 0, projectile.action);
     projectiles.length = 0;
   }
 
@@ -275,6 +288,7 @@ export function createSimulationTrial(settings) {
     const count = counter ? 1 : stats.hitCount, windup = counter ? rules.counterWindup : stats.windup;
     const action = { ordinal: ++state.ordinal, startedAt: at, firstHitAt: at + windup, count, index: 0,
       counter, mode, targetId: target.id, counterTriggered: false, stunApplied: false, endsAt: at + windup + (count - 1) * stats.hitGap + stats.recovery };
+    actionCauses.set(action, combatVfxToken(vfxEnvironment, "attack"));
     state.action = action;
     agent.combat.cycleStartedAt = at;
     agent.combat.nextAttackAt = at + Math.max(mode === "ranged" ? stats.rangedAttackInterval : stats.attackInterval, action.endsAt - at);
@@ -283,7 +297,8 @@ export function createSimulationTrial(settings) {
       hitIndex: 0, hitCount: count, resolved: false, hit: false, heavy: false };
     agent.attackStartedAt = at; agent.animationStartedAt = at;
     agent.mode = agent.species === "spiny-back-beetle" ? "attack" : "fight";
-    if (counter) record("counter", agent, target, 0, action, false, undefined);
+    if (!counter) evidence("attack", agent, target, 0, action, { endsAt: action.firstHitAt });
+    if (counter) record("counter", agent, target, 0, action, false, undefined, { endsAt: action.firstHitAt });
   }
 
   function roll(agent, action, channel) {
@@ -351,6 +366,7 @@ export function createSimulationTrial(settings) {
     for (let index = projectiles.length - 1; index >= 0; index--) if (projectiles[index].at <= time + 1e-9) {
       const projectile = projectiles.splice(index, 1)[0];
       if (dnaProjectileValid(projectile.source, projectile.target)) due.push(evaluate(projectile.source, projectile.target, projectile.action));
+      else evidence("projectile-cancel", projectile.source, projectile.target, 0, projectile.action);
     }
     const launched = [];
     const outcomes = agents.flatMap(source => {
@@ -361,7 +377,7 @@ export function createSimulationTrial(settings) {
         const shot = { source, target, action: { ...action, origin: action }, launchedAt: time,
           at: time + dnaProjectileDuration(separation(source, target)) };
         projectiles.push(shot); launched.push({ source, action });
-        record("shoot", source, target, 0, action, false, undefined);
+        record("shoot", source, target, 0, action, false, undefined, { arrivesAt: shot.at });
         return [];
       }
       return [evaluate(source, target, action)];
@@ -371,15 +387,23 @@ export function createSimulationTrial(settings) {
       if (total > target.health) for (const hit of hits) hit.damage *= target.health / total;
     }
     const oldHealth = agents.map(agent => agent.health);
+    const restored = new Map();
+    const hitEvidence = new Map();
     for (let i = 0; i < agents.length; i++) {
       const agent = agents[i];
       const incoming = outcomes.filter(hit => hit.target === agent).reduce((sum, hit) => sum + hit.damage, 0);
       const healing = outcomes.filter(hit => hit.source === agent).reduce((sum, hit) => sum + hit.damage * agent.stats.drain, 0);
       agent.health = Math.max(0, Math.min(agent.stats.health, oldHealth[i] - incoming + healing));
+      restored.set(agent.id, Math.max(0, agent.health - Math.max(0, oldHealth[i] - incoming)));
     }
     for (const hit of outcomes) {
       const { source, target, action } = hit;
-      record(hit.kind, source, target, hit.damage, action, hit.critical, undefined);
+      const hitEvent = record(hit.kind, source, target, hit.damage, action, hit.critical, undefined);
+      hitEvidence.set(hit, hitEvent);
+      const outgoing = outcomes.filter(other => other.source === source).reduce((sum, other) => sum + other.damage, 0);
+      const drain = outgoing > 0 ? restored.get(source.id) * hit.damage / outgoing : 0;
+      if (drain > 0) evidence("drain", source, source, drain, null, {
+        causeId: hitEvent?.id, fromId: target.id, toId: source.id, from: { x: target.x, y: target.y } });
       if (hit.damage > 0) { target.hurtStartedAt = time; target.hurtCount = (target.hurtCount || 0) + 1; }
       if (hit.kind !== "hit") {
         target.combat.reactionReadyAt = time + rules.reactionCooldown;
@@ -412,7 +436,9 @@ export function createSimulationTrial(settings) {
         target.combat.stunImmuneUntil = target.combat.stunnedUntil + rules.stunImmunity;
         target.combat.nextAttackAt = Math.max(target.combat.nextAttackAt, target.combat.stunnedUntil);
         states.get(target.id).action = null; target.attack = null;
-        record("stun", source, target, 0, { ...action, index: action.index - (action.mode === "ranged" ? 0 : 1) }, false, hit.stunDuration);
+        record("stun", source, target, 0, { ...action, origin: action.origin || action,
+          index: action.index - (action.mode === "ranged" ? 0 : 1) }, false, hit.stunDuration,
+          { causeId: hitEvidence.get(hit)?.id });
       }
     }
     for (const hit of outcomes) {
@@ -426,7 +452,9 @@ export function createSimulationTrial(settings) {
     for (const agent of agents) if (agent.health <= 0 && oldHealth[agents.indexOf(agent)] > 0) {
       states.get(agent.id).action = null; agent.attack = null;
       agent.deathStartedAt = time; agent.diedAt = time; agent.mode = "death";
-      record("death", outcomes.find(hit => hit.target === agent)?.source || agents.find(other => other.ownerId !== agent.ownerId), agent, 0, null, false, undefined);
+      const fatal = outcomes.find(hit => hit.target === agent);
+      record("death", fatal?.source || agents.find(other => other.ownerId !== agent.ownerId), agent, 0, null, false, undefined,
+        { causeId: hitEvidence.get(fatal)?.id });
     }
     const alive = ["left", "right"].map(side => agents.some(agent => agent.ownerId === side && agent.health > 0));
     if (!alive[0] || !alive[1]) end(!alive[0] && !alive[1] ? "draw" : alive[0] ? "left" : "right", "death");
@@ -472,5 +500,7 @@ export function createSimulationTrial(settings) {
     return { winner, reason, time, leftHealth: teamHealth("left"), rightHealth: teamHealth("right") };
   }
 
-  return { agents, supportAgents, projectiles, history, advance, step, finish, result, get time() { return time; }, get reason() { return reason; } };
+  return { agents, supportAgents, projectiles, history, advance, step, finish, result,
+    get vfx() { return snapshotCombatVfx(vfxEnvironment, time); },
+    get time() { return time; }, get reason() { return reason; } };
 }

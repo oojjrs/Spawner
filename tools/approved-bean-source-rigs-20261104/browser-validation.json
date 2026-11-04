@@ -1,0 +1,302 @@
+{
+  "sources": [
+    {
+      "mask": 0,
+      "sourceId": "unit-appearance-v1-bean-00-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 2.842170943040401e-14,
+      "rigidDistanceMaxError": 1.1368683772161603e-13
+    },
+    {
+      "mask": 1,
+      "sourceId": "unit-appearance-v1-bean-01-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 0,
+      "rigidDistanceMaxError": 1.1368683772161603e-13
+    },
+    {
+      "mask": 2,
+      "sourceId": "unit-appearance-v1-bean-02-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 0,
+      "rigidDistanceMaxError": 1.1368683772161603e-13
+    },
+    {
+      "mask": 3,
+      "sourceId": "unit-appearance-v1-bean-03-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 0,
+      "rigidDistanceMaxError": 1.1368683772161603e-13
+    },
+    {
+      "mask": 4,
+      "sourceId": "unit-appearance-v1-bean-04-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 0,
+      "rigidDistanceMaxError": 8.526512829121202e-14
+    },
+    {
+      "mask": 5,
+      "sourceId": "unit-appearance-v1-bean-05-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 0,
+      "rigidDistanceMaxError": 1.1368683772161603e-13
+    },
+    {
+      "mask": 6,
+      "sourceId": "unit-appearance-v1-bean-06-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 0,
+      "rigidDistanceMaxError": 1.1368683772161603e-13
+    },
+    {
+      "mask": 7,
+      "sourceId": "unit-appearance-v1-bean-07-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 0,
+      "rigidDistanceMaxError": 1.1368683772161603e-13
+    },
+    {
+      "mask": 8,
+      "sourceId": "unit-appearance-v1-bean-08-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 0,
+      "rigidDistanceMaxError": 8.526512829121202e-14
+    },
+    {
+      "mask": 9,
+      "sourceId": "unit-appearance-v1-bean-09-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 0,
+      "rigidDistanceMaxError": 1.1368683772161603e-13
+    },
+    {
+      "mask": 10,
+      "sourceId": "unit-appearance-v1-bean-0a-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 0,
+      "rigidDistanceMaxError": 8.526512829121202e-14
+    },
+    {
+      "mask": 11,
+      "sourceId": "unit-appearance-v1-bean-0b-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 0,
+      "rigidDistanceMaxError": 1.1368683772161603e-13
+    },
+    {
+      "mask": 12,
+      "sourceId": "unit-appearance-v1-bean-0c-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 0,
+      "rigidDistanceMaxError": 8.526512829121202e-14
+    },
+    {
+      "mask": 13,
+      "sourceId": "unit-appearance-v1-bean-0d-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 0,
+      "rigidDistanceMaxError": 1.1368683772161603e-13
+    },
+    {
+      "mask": 14,
+      "sourceId": "unit-appearance-v1-bean-0e-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 0,
+      "rigidDistanceMaxError": 1.1368683772161603e-13
+    },
+    {
+      "mask": 15,
+      "sourceId": "unit-appearance-v1-bean-0f-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 5.684341886080802e-14,
+      "rigidDistanceMaxError": 1.1368683772161603e-13
+    },
+    {
+      "mask": 16,
+      "sourceId": "unit-appearance-v1-bean-10-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 0,
+      "rigidDistanceMaxError": 1.1368683772161603e-13
+    },
+    {
+      "mask": 17,
+      "sourceId": "unit-appearance-v1-bean-11-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 0,
+      "rigidDistanceMaxError": 1.1368683772161603e-13
+    },
+    {
+      "mask": 18,
+      "sourceId": "unit-appearance-v1-bean-12-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 0,
+      "rigidDistanceMaxError": 7.105427357601002e-14
+    },
+    {
+      "mask": 19,
+      "sourceId": "unit-appearance-v1-bean-13-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 0,
+      "rigidDistanceMaxError": 1.1368683772161603e-13
+    },
+    {
+      "mask": 20,
+      "sourceId": "unit-appearance-v1-bean-14-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 0,
+      "rigidDistanceMaxError": 1.1368683772161603e-13
+    },
+    {
+      "mask": 21,
+      "sourceId": "unit-appearance-v1-bean-15-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 0,
+      "rigidDistanceMaxError": 1.1368683772161603e-13
+    },
+    {
+      "mask": 22,
+      "sourceId": "unit-appearance-v1-bean-16-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 5.684341886080802e-14,
+      "rigidDistanceMaxError": 1.1368683772161603e-13
+    },
+    {
+      "mask": 23,
+      "sourceId": "unit-appearance-v1-bean-17-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 0,
+      "rigidDistanceMaxError": 1.1368683772161603e-13
+    },
+    {
+      "mask": 24,
+      "sourceId": "unit-appearance-v1-bean-18-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 5.684341886080802e-14,
+      "rigidDistanceMaxError": 8.526512829121202e-14
+    },
+    {
+      "mask": 25,
+      "sourceId": "unit-appearance-v1-bean-19-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 0,
+      "rigidDistanceMaxError": 8.526512829121202e-14
+    },
+    {
+      "mask": 26,
+      "sourceId": "unit-appearance-v1-bean-1a-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 0,
+      "rigidDistanceMaxError": 8.526512829121202e-14
+    },
+    {
+      "mask": 27,
+      "sourceId": "unit-appearance-v1-bean-1b-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 0,
+      "rigidDistanceMaxError": 8.526512829121202e-14
+    },
+    {
+      "mask": 28,
+      "sourceId": "unit-appearance-v1-bean-1c-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 0,
+      "rigidDistanceMaxError": 8.526512829121202e-14
+    },
+    {
+      "mask": 29,
+      "sourceId": "unit-appearance-v1-bean-1d-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 0,
+      "rigidDistanceMaxError": 1.1368683772161603e-13
+    },
+    {
+      "mask": 30,
+      "sourceId": "unit-appearance-v1-bean-1e-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 0,
+      "rigidDistanceMaxError": 8.526512829121202e-14
+    },
+    {
+      "mask": 31,
+      "sourceId": "unit-appearance-v1-bean-1f-neutral-v1",
+      "differentRgbaValues": 0,
+      "maxRgbaError": 0,
+      "diagnosticSamples": 64,
+      "rootMaxError": 0,
+      "rigidDistanceMaxError": 1.1368683772161603e-13
+    }
+  ],
+  "sourceCount": 32,
+  "newActionClips": 0,
+  "diagnosticScope": "whole-source rigid support-pivot test only; no action or foot-contact readiness claim",
+  "pageErrors": [],
+  "mobileViewport": [
+    390,
+    844
+  ],
+  "mobileHorizontalOverflow": false,
+  "scope": "Browser decoded-RGBA comparison. Raw PNG-decoded RGBA comparison is independently recorded by build.py."
+}

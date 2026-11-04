@@ -1,0 +1,2476 @@
+{
+  "schema": "spawner.visible-bean-browser-qa.v1",
+  "sourceCount": 31,
+  "evaluatedGpuFrames": 310,
+  "pageErrors": [],
+  "sources": [
+    {
+      "mask": 0,
+      "sourceId": "unit-appearance-v1-bean-00-neutral-v1",
+      "visiblePixels": 27089,
+      "partCount": 7,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 14730
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 15671
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 14893
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 16130
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 16546
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 14509
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 60078,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 120156,
+        "loads": 2,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 1,
+      "sourceId": "unit-appearance-v1-bean-01-neutral-v1",
+      "visiblePixels": 30738,
+      "partCount": 7,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 15147
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 15904
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 15093
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 16241
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 16549
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 15071
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 86109,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 172218,
+        "loads": 3,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 2,
+      "sourceId": "unit-appearance-v1-bean-02-neutral-v1",
+      "visiblePixels": 36508,
+      "partCount": 9,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 10939
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 11493
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 10850
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 12055
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 12336
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 10797
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 108265,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 216530,
+        "loads": 4,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 3,
+      "sourceId": "unit-appearance-v1-bean-03-neutral-v1",
+      "visiblePixels": 42948,
+      "partCount": 9,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 11353
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 11877
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 11308
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 12569
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 12896
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 11320
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 128910,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 257820,
+        "loads": 5,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 4,
+      "sourceId": "unit-appearance-v1-bean-04-neutral-v1",
+      "visiblePixels": 28777,
+      "partCount": 9,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 15868
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 16578
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 15939
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 17040
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 17319
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 15820
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 75599,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 257820,
+        "loads": 6,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 5,
+      "sourceId": "unit-appearance-v1-bean-05-neutral-v1",
+      "visiblePixels": 33266,
+      "partCount": 9,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 15036
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 15715
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 14991
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 16095
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 16370
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 14895
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 94344,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 257820,
+        "loads": 7,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 6,
+      "sourceId": "unit-appearance-v1-bean-06-neutral-v1",
+      "visiblePixels": 39254,
+      "partCount": 11,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 10747
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 11455
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 10696
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 11916
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 12218
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 10637
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 117019,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 257820,
+        "loads": 8,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 7,
+      "sourceId": "unit-appearance-v1-bean-07-neutral-v1",
+      "visiblePixels": 46080,
+      "partCount": 11,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 11287
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 11896
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 11256
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 12514
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 12897
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 11318
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 140711,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 281422,
+        "loads": 9,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 8,
+      "sourceId": "unit-appearance-v1-bean-08-neutral-v1",
+      "visiblePixels": 28313,
+      "partCount": 7,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 16030
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 16763
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 16074
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 17203
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 17533
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 15980
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 73084,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 281422,
+        "loads": 10,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 9,
+      "sourceId": "unit-appearance-v1-bean-09-neutral-v1",
+      "visiblePixels": 32519,
+      "partCount": 7,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 15828
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 16406
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 15693
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 17001
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 17293
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 15735
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 92021,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 281422,
+        "loads": 11,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 10,
+      "sourceId": "unit-appearance-v1-bean-0a-neutral-v1",
+      "visiblePixels": 38745,
+      "partCount": 9,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 11080
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 11743
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 11014
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 12233
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 12537
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 10975
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 115124,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 281422,
+        "loads": 12,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 11,
+      "sourceId": "unit-appearance-v1-bean-0b-neutral-v1",
+      "visiblePixels": 44619,
+      "partCount": 9,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 11105
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 11725
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 11024
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 12306
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 12699
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 10983
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 134923,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 281422,
+        "loads": 13,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 12,
+      "sourceId": "unit-appearance-v1-bean-0c-neutral-v1",
+      "visiblePixels": 30154,
+      "partCount": 9,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 16174
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 16912
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 16276
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 17387
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 17696
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 16121
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 80049,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 281422,
+        "loads": 14,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 13,
+      "sourceId": "unit-appearance-v1-bean-0d-neutral-v1",
+      "visiblePixels": 35489,
+      "partCount": 9,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 15866
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 16398
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 15724
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 16987
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 17309
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 15762
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 101841,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 281422,
+        "loads": 15,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 14,
+      "sourceId": "unit-appearance-v1-bean-0e-neutral-v1",
+      "visiblePixels": 41651,
+      "partCount": 11,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 10960
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 11658
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 10886
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 12184
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 12530
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 10888
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 125336,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 281422,
+        "loads": 16,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 15,
+      "sourceId": "unit-appearance-v1-bean-0f-neutral-v1",
+      "visiblePixels": 48136,
+      "partCount": 11,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 10844
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 11619
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 10693
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 12173
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 12625
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 10785
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 146966,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 293932,
+        "loads": 17,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 16,
+      "sourceId": "unit-appearance-v1-bean-10-neutral-v1",
+      "visiblePixels": 27997,
+      "partCount": 8,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 13966
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 14539
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 14095
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 15013
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 15264
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 13790
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 76590,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 293932,
+        "loads": 18,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 17,
+      "sourceId": "unit-appearance-v1-bean-11-neutral-v1",
+      "visiblePixels": 31500,
+      "partCount": 8,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 14071
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 14625
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 14141
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 15092
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 15381
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 13940
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 90173,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 293932,
+        "loads": 19,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 18,
+      "sourceId": "unit-appearance-v1-bean-12-neutral-v1",
+      "visiblePixels": 36538,
+      "partCount": 10,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 10292
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 10997
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 10115
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 11420
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 11752
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 10297
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 108726,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 293932,
+        "loads": 20,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 19,
+      "sourceId": "unit-appearance-v1-bean-13-neutral-v1",
+      "visiblePixels": 43578,
+      "partCount": 10,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 10381
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 11120
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 10399
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 11637
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 12012
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 10441
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 135637,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 293932,
+        "loads": 21,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 20,
+      "sourceId": "unit-appearance-v1-bean-14-neutral-v1",
+      "visiblePixels": 30896,
+      "partCount": 10,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 14627
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 15373
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 14849
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 15760
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 16065
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 14497
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 85776,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 293932,
+        "loads": 22,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 21,
+      "sourceId": "unit-appearance-v1-bean-15-neutral-v1",
+      "visiblePixels": 37061,
+      "partCount": 10,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 14463
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 15000
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 14538
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 15691
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 16004
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 14397
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 109009,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 293932,
+        "loads": 23,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 22,
+      "sourceId": "unit-appearance-v1-bean-16-neutral-v1",
+      "visiblePixels": 40151,
+      "partCount": 12,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 10146
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 10838
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 9877
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 11345
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 11736
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 10056
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 121971,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 293932,
+        "loads": 24,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 23,
+      "sourceId": "unit-appearance-v1-bean-17-neutral-v1",
+      "visiblePixels": 47226,
+      "partCount": 12,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 9951
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 10947
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 9900
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 11505
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 11904
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 9893
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 147922,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 295844,
+        "loads": 25,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 24,
+      "sourceId": "unit-appearance-v1-bean-18-neutral-v1",
+      "visiblePixels": 29518,
+      "partCount": 8,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 14967
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 15657
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 15162
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 16127
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 16384
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 14889
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 81677,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 295844,
+        "loads": 26,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 25,
+      "sourceId": "unit-appearance-v1-bean-19-neutral-v1",
+      "visiblePixels": 35673,
+      "partCount": 8,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 15364
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 15829
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 15465
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 16576
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 16905
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 15332
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 103684,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 295844,
+        "loads": 27,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 26,
+      "sourceId": "unit-appearance-v1-bean-1a-neutral-v1",
+      "visiblePixels": 39017,
+      "partCount": 10,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 10144
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 10848
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 9964
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 11245
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 11675
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 10045
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 118018,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 295844,
+        "loads": 28,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 27,
+      "sourceId": "unit-appearance-v1-bean-1b-neutral-v1",
+      "visiblePixels": 45473,
+      "partCount": 10,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 10817
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 11423
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 10746
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 11924
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 12340
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 10825
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 141807,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 295844,
+        "loads": 29,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 28,
+      "sourceId": "unit-appearance-v1-bean-1c-neutral-v1",
+      "visiblePixels": 32443,
+      "partCount": 10,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 14933
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 15701
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 15181
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 16094
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 16401
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 14849
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 91105,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 295844,
+        "loads": 30,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 29,
+      "sourceId": "unit-appearance-v1-bean-1d-neutral-v1",
+      "visiblePixels": 39705,
+      "partCount": 10,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 15833
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 16184
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 15826
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 16962
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 17256
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 15730
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 117628,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 295844,
+        "loads": 31,
+        "leases": 1
+      }
+    },
+    {
+      "mask": 30,
+      "sourceId": "unit-appearance-v1-bean-1e-neutral-v1",
+      "visiblePixels": 41749,
+      "partCount": 12,
+      "rows": [
+        {
+          "action": "idle",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "idle",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 10320
+        },
+        {
+          "action": "idle",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 10976
+        },
+        {
+          "action": "idle",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 9974
+        },
+        {
+          "action": "idle",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        },
+        {
+          "action": "hurt",
+          "t": 0.25,
+          "fixedMaxError": 0,
+          "changedPixels": 11345
+        },
+        {
+          "action": "hurt",
+          "t": 0.5,
+          "fixedMaxError": 0,
+          "changedPixels": 11765
+        },
+        {
+          "action": "hurt",
+          "t": 0.75,
+          "fixedMaxError": 0,
+          "changedPixels": 10098
+        },
+        {
+          "action": "hurt",
+          "t": 1,
+          "fixedMaxError": 0,
+          "changedPixels": 0
+        }
+      ],
+      "renderer": "webgl",
+      "sourceStats": {
+        "entries": 1,
+        "residentBytes": 127651,
+        "reservedBytes": 0,
+        "byteBudget": 33554432,
+        "peakBytes": 295844,
+        "loads": 32,
+        "leases": 1
+      }
+    }
+  ],
+  "fileLazyProtocolSimulation": {
+    "leases": [
+      {
+        "mask": 0,
+        "bytes": 60078
+      },
+      {
+        "mask": 8,
+        "bytes": 73084
+      },
+      {
+        "mask": 18,
+        "bytes": 108726
+      },
+      {
+        "mask": 30,
+        "bytes": 127651
+      }
+    ],
+    "stats": {
+      "entries": 0,
+      "residentBytes": 0,
+      "reservedBytes": 0,
+      "byteBudget": 8388608,
+      "peakBytes": 297983,
+      "loads": 4,
+      "leases": 0
+    },
+    "dataKeys": []
+  },
+  "mobile": {
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "touch": true,
+    "horizontalOverflow": false,
+    "minimumControlHeight": 44,
+    "sourceStats": {
+      "entries": 1,
+      "residentBytes": 127651,
+      "reservedBytes": 0,
+      "byteBudget": 8388608,
+      "peakBytes": 255302,
+      "loads": 2,
+      "leases": 1
+    }
+  },
+  "scope": "Actual rendered draft frames, not action registration or art approval. File protocol loader exercised over HTTP because file navigation is blocked in this environment."
+}

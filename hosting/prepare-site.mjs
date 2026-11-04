@@ -4,6 +4,7 @@ import { mkdirSync, readFileSync, writeFileSync, existsSync, readdirSync, unlink
 import { dirname, resolve, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { productionRuntime } from "../client/production.mjs";
+import { auditImages } from "../client/image-audit.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const assetBase = "https://oojjrs.github.io/spawner-assets/";
@@ -15,7 +16,7 @@ export function prepareSite(destination, readSource, revision, assetDirectory) {
   const html = readSource("Spawner.html").toString("utf8")
     .replace(/^  <script src="\.\/client\/local-assets\.js"><\/script>\r?\n/m, "");
   const pages = new Map([["Spawner.html", html]]);
-  for (const name of ["NeutralStats.html", "DnaLayouts.html", "UnitPreview.html", "VfxPreview.html"]) {
+  for (const name of ["NeutralStats.html", "DnaLayouts.html", "UnitPreview.html", "VfxPreview.html", "Combat.html", "BeanRigPreview.html"]) {
     if (existsSync(join(root, name))) pages.set(name, readSource(name).toString("utf8"));
   }
   const clients = new Map([...pages.values()].flatMap(page => [...page.matchAll(/<(?:script|link)\b[^>]*(?:src|href)="\.\/(client\/[^"]+)"/g)])
@@ -37,6 +38,9 @@ export function prepareSite(destination, readSource, revision, assetDirectory) {
       assets.set(name, readSource(name));
     }
   }
+  // Review pages have their own sprites. Validate the entire publication, not
+  // only the assets found by the main game's runtime build.
+  auditImages(root, [...assets.keys()].filter(name => /\.(?:png|webp|gif|jpe?g)$/i.test(name)));
   const output = join(destination, "dist");
   function write(name, value) {
     const path = join(output, name);

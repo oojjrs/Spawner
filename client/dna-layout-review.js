@@ -8,12 +8,28 @@
   function transformed(candidate,rotation=0,mirror=false){return candidate.paths.map(path=>({...path,points:path.points.map(p=>transformPoint(p,rotation,mirror))}))}
   function piecesForTrace(paths){return paths.map(path=>{const[a,b,c]=path.points,d0=directions.findIndex(([q,r])=>a.q+q===b.q&&a.r+r===b.r),d1=directions.findIndex(([q,r])=>b.q+q===c.q&&b.r+r===c.r);return{gene:'gather',grade:1,rotation:d0,shape:[0,(d1-d0+6)%6]}})}
   function exportSelection(candidate,rotation,mirror){return{format:'spawner-anonymous-dna-layout',version:1,boardLevel:1,boardPoints:19,attributesAssigned:false,gameBlueprint:false,candidateId:candidate.id,title:candidate.title,rotation:(rotation%6+6)%6,mirror,counts:candidate.counts,paths:transformed(candidate,rotation,mirror).map((p,i)=>({number:i+1,outline:p.type,points:p.points})),source:{path:candidate.source,sha256:candidate.sourceSha256}}}
-  globalThis.SpawnerDnaLayoutReview=Object.freeze({transformPoint,transformed,piecesForTrace,exportSelection});
+  const assignmentData=globalThis.SpawnerDnaLayoutAssignmentData;
+  function assignmentFor(candidate,rotation=0,mirror=false){
+    const assignment=assignmentData?.assignments.find(item=>item.candidateId===candidate.id&&item.mirror===mirror);
+    return assignment?{...assignment,pieces:assignment.pieces.map(piece=>({...piece,shape:[...piece.shape],rotation:(piece.rotation+rotation%6+6)%6}))}:null;
+  }
+  function exportAssignment(candidate,rotation,mirror){
+    const assignment=assignmentFor(candidate,rotation,mirror);
+    if(!assignment)throw new Error('DNA ASSIGNMENT NOT AVAILABLE');
+    return{format:'spawner-dna-layout-assignment-proposal',version:1,approved:false,applied:false,gameBlueprint:false,
+      candidateId:candidate.id,title:candidate.title,rotation:(rotation%6+6)%6,mirror,
+      proposalDna:{version:3,level:1,budget:assignment.dnaCost,pieces:assignment.pieces},birthCost:assignment.birthCost,stats:assignment.stats,
+      scope:'Current grade-one DNA shapes and prices; no new gene assignment or game change.',sourceHashes:assignmentData.sourceHashes};
+  }
+  globalThis.SpawnerDnaLayoutReview=Object.freeze({transformPoint,transformed,piecesForTrace,exportSelection,assignmentFor,exportAssignment});
   if(typeof document==='undefined')return;
   const $=id=>document.getElementById(id),storageKey='spawner-dna-layout-review-v1';
   let selectedId=data.candidates[0].id,rotation=0,mirrored=false,selectedStrand=null,showNumbers=true;
   try{const saved=JSON.parse(localStorage.getItem(storageKey));if(data.candidates.some(c=>c.id===saved?.candidateId)){selectedId=saved.candidateId;rotation=Number.isInteger(saved.rotation)?(saved.rotation%6+6)%6:0;mirrored=saved.mirror===true}}catch{}
   const chosen=()=>data.candidates.find(c=>c.id===selectedId);
+  const geneNames=Object.fromEntries((assignmentData?.currentGenes||[]).map(gene=>[gene.id,gene.label]));
+  const format=value=>Number.isFinite(value)?String(Math.round(value*100)/100):'—';
+  const capabilities=assignment=>assignment.unlocked.map(key=>({gather:'채집',blade:'근접',secretion:'원거리'})[key]).join(' · ')||'행동 기관 없음';
   const project=p=>[220+(p.q+p.r/2)*78,208+p.r*67.55];
   const pathD=path=>path.points.map((p,i)=>`${i?'L':'M'}${project(p).join(',')}`).join(' ');
   function boardSvg(candidate,rotationValue,mirrorValue,interactive=false){
@@ -33,6 +49,24 @@
     if(selectedStrand===null)$('selection').textContent=`전체 ${paths.length}가닥 · A ${candidate.counts.A} / B ${candidate.counts.B} / C ${candidate.counts.C}`;
     else{const path=paths[selectedStrand];$('selection').textContent=`${selectedStrand+1}번 · ${path.type} ${names[path.type]} · ${path.points.map(p=>`(${p.q}, ${p.r})`).join(' → ')}`}
     for(const{candidate:c,button}of cards){const selected=c.id===selectedId;button.setAttribute('aria-checked',String(selected));button.innerHTML=`<span class="choose">${selected?'선택됨':''}</span><svg viewBox="0 0 440 420" aria-hidden="true">${boardSvg(c,0,false)}</svg><strong>${c.title}</strong><small>${c.symmetry}</small><span class="counts"><span class="a">A ${c.counts.A}</span><span class="b">B ${c.counts.B}</span><span class="c">C ${c.counts.C}</span></span>`}
+    renderAssignment();
+  }
+  function renderAssignment(){
+    if(!assignmentData||!$('assignment-current'))return;
+    const candidate=chosen(),assignment=assignmentFor(candidate,rotation,mirrored),s=assignment.stats,prefix=assignment.prefixAt30;
+    $('assignment-current').textContent=`${candidate.title} · ${mirrored?'반전 방향':'원래 방향'}`;
+    $('assignment-summary').innerHTML=`<div><span>생산 비용</span><strong>${assignment.birthCost}P</strong><small>본체 3P + DNA ${assignment.dnaCost}P</small></div><div><span>기능 개방 / 강화</span><strong>${assignment.openingPieces} / ${assignment.reinforcementPieces}</strong><small>${capabilities(assignment)}</small></div><div><span>체력 / 이동</span><strong>${s.health} / ${format(s.movement)}</strong><small>가방 ${s.capacity} · 4초당 채집 ${s.harvest}</small></div>`;
+    $('assignment-counts').textContent=Object.entries(assignment.counts).map(([gene,count])=>`${geneNames[gene]} ${count}`).join(' · ');
+    const issues=[];
+    if(!s.gatherCount)issues.push('채집기관이 없어 스스로 자원을 모으지 못합니다.');
+    if(!s.melee&&!s.ranged)issues.push('공격기관이 없어 공격하지 못합니다.');
+    if(assignment.birthCost>100)issues.push('생산 비용이 100P를 넘습니다.');
+    issues.push('탐색 안테나·갑각·전용 발·치유기관은 현행 1레벨 모양에 없습니다.');
+    $('assignment-limitations').textContent=issues.join(' ');
+    $('assignment-startup').textContent=`시작 30P로 같은 순서의 앞 ${prefix.pieces}가닥까지 생산할 수 있습니다: ${prefix.birthCost}P, ${prefix.occupied}/19칸, HP ${prefix.stats.health}, ${prefix.hasGather?'채집 가능':'채집 불가'}. 이는 이 경로의 앞부분 비교이며 최적 일꾼 탐색 결과는 아닙니다.`;
+    $('assignment-steps').innerHTML=assignment.steps.map(step=>`<li><span class="step-number">${step.number}</span><strong>${step.label}</strong><span class="step-kind">${step.kind==='unlock'?'기능 개방':'반복·수치 강화'}</span><span class="step-price">누적 ${step.birthCost}P</span></li>`).join('');
+    $('assignment-comparison').innerHTML=data.candidates.map(c=>{const a=assignmentFor(c,0,mirrored),stats=a.stats;return`<article class="assignment-candidate${c.id===selectedId?' active':''}"><h3>${c.title}</h3><p><strong>${a.birthCost}P</strong> · HP ${stats.health} · 이동 ${format(stats.movement)}</p><p>${capabilities(a)} · 가방 ${stats.capacity}</p><p class="small">기능 개방 ${a.openingPieces} / 강화 ${a.reinforcementPieces}</p></article>`}).join('');
+    $('assignment-direction').textContent=mirrored?'모든 후보를 반전 방향으로 비교 중입니다. 위의 좌우 반전 버튼으로 원래 배정을 비교할 수 있습니다.':'모든 후보를 원래 방향으로 비교 중입니다. 좌우 반전하면 같은 윤곽에서도 잎날↔분비, 체력↔이동 배정이 바뀝니다.';
   }
   function inspect(value){
     const fromBoard=document.activeElement?.classList.contains('strand-hit'),fromList=document.activeElement?.closest('#strand-list');
@@ -52,5 +86,6 @@
   $('rotate-left').addEventListener('click',()=>{rotation=(rotation+5)%6;render();save()});$('rotate-right').addEventListener('click',()=>{rotation=(rotation+1)%6;render();save()});$('mirror').addEventListener('click',()=>{mirrored=!mirrored;render();save();$('status').textContent=mirrored?'반전한 방향입니다.':'원래 방향입니다.'});
   $('numbers').addEventListener('change',event=>{showNumbers=event.target.checked;render()});
   $('export').addEventListener('click',()=>{const candidate=chosen(),value=exportSelection(candidate,rotation,mirrored),url=URL.createObjectURL(new Blob([JSON.stringify(value,null,2)],{type:'application/json'})),link=document.createElement('a');link.href=url;link.download=`spawner-dna-layout-${candidate.id}.json`;link.click();setTimeout(()=>URL.revokeObjectURL(url),0);$('status').textContent='속성이 배정되지 않은 기하 선택 기록을 내보냈습니다.'});
+  $('export-assignment')?.addEventListener('click',()=>{const candidate=chosen(),value=exportAssignment(candidate,rotation,mirrored),url=URL.createObjectURL(new Blob([JSON.stringify(value,null,2)],{type:'application/json'})),link=document.createElement('a');link.href=url;link.download=`spawner-dna-assignment-proposal-${candidate.id}.json`;link.click();setTimeout(()=>URL.revokeObjectURL(url),0);$('assignment-status').textContent='현행 DNA 대입 결과를 검토안으로 내보냈습니다. 게임에는 적용되지 않았습니다.'});
   render();
 })();

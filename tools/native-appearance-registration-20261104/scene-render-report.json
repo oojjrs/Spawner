@@ -1,0 +1,244 @@
+{
+  "renderer": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+  "comparison": "pinned original game.js body functions vs metadata-driven runtime helper; same original source pixels",
+  "externalSceneEffects": "Root travel, nest/foreground/water remain external and are not baked into either body canvas.",
+  "samples": 1032,
+  "maxChannelError": 0,
+  "changedPixels": 0,
+  "handoffs": 32,
+  "hiddenFrames": 32,
+  "tribes": {
+    "spore": {
+      "samples": 448,
+      "maxChannelError": 0,
+      "changedPixels": 0,
+      "sourceImage": "DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/birth-unit.webp",
+      "physicalFrameSize": 192,
+      "nativeBodyPixelsPerWorld": 217.05366357069144,
+      "deformationKind": "spore-affine-body-v1",
+      "firstBodyFrame": 2,
+      "lastFramePolicy": "handoff-to-registered-idle",
+      "motionsFileHash": "4863efcc04ec96ea9c911865ff9cd8607ac18c6daa202cc15dfe73d9580b4f53",
+      "bodySourceHash": "93696aac1e9eb471a1aae0ba8932eec01e369d0d64d064218a01b4b1c2ce9761",
+      "legacyRendererHash": "fcfa816a72c568cbeeaf74768ef58434a2c7db53a658798c089bbe5dc2104715",
+      "currentIntegrationFunctionHash": "d6b6e2181748ef43fb11e653ec5aab9d657b855dfeabae35ac50265a48562e8a"
+    },
+    "pebble": {
+      "samples": 432,
+      "maxChannelError": 0,
+      "changedPixels": 0,
+      "sourceImage": "DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth-unit.webp",
+      "physicalFrameSize": 151,
+      "nativeBodyPixelsPerWorld": 217.68043154761907,
+      "deformationKind": "none",
+      "firstBodyFrame": 0,
+      "lastFramePolicy": "handoff-to-registered-idle",
+      "motionsFileHash": "46cd18ad9cb8d3d554a789b54654107a53e95a1b5fa494e78c3674264bc31064",
+      "bodySourceHash": "d8b762b189ea9767c2026dbfb692750a21b761bdd2514a5626e77f156cb76129",
+      "legacyRendererHash": "2b29deeb623b253a2eddad337c356194c95df3877eaaedc15190b18e6ab4ec79",
+      "currentIntegrationFunctionHash": "4d50df2e3b546c1e31ee3490e2c6e633738ae7ec16205d840185c8649080539f"
+    },
+    "spring": {
+      "samples": 152,
+      "maxChannelError": 0,
+      "changedPixels": 0,
+      "sourceImage": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp",
+      "physicalFrameSize": 236,
+      "nativeBodyPixelsPerWorld": 252.90073440678546,
+      "deformationKind": "spring-row-surface-v1",
+      "firstBodyFrame": 0,
+      "lastFramePolicy": "handoff-to-registered-idle",
+      "motionsFileHash": "9c4a7be36a47fc6d37fe4d7d6626eae2d277beaecb9120fa3c3611659185f65e",
+      "bodySourceHash": "01d1eafb5d7d0886dceabbfd8b249d5aae06512e4e507e732ef51e637e3deb00",
+      "legacyRendererHash": "0a60558a47b5d682affa97659ee6a3cab48921f58e7a3f5c1c7dd5f47d6d6f65",
+      "currentIntegrationFunctionHash": "eb10ac88ac19287d114e3215f9fae9d3a77c8dfc34420f73046f0c126a651222"
+    }
+  },
+  "failures": [],
+  "currentIntegration": {
+    "samples": 516,
+    "helperCalls": 484,
+    "changedPixels": 0,
+    "maxChannelError": 0,
+    "waterBeforeBodyCases": 72,
+    "failures": [],
+    "gateCases": [
+      {
+        "tribe": "spore",
+        "name": "valid-raw00",
+        "helperCalls": 1,
+        "expectedCalls": 1
+      },
+      {
+        "tribe": "spore",
+        "name": "legacy-dna",
+        "helperCalls": 0,
+        "expectedCalls": 0
+      },
+      {
+        "tribe": "spore",
+        "name": "invalid-dna",
+        "helperCalls": 0,
+        "expectedCalls": 0
+      },
+      {
+        "tribe": "spore",
+        "name": "nonzero-mask",
+        "helperCalls": 0,
+        "expectedCalls": 0
+      },
+      {
+        "tribe": "spore",
+        "name": "neutral-species",
+        "helperCalls": 0,
+        "expectedCalls": 0
+      },
+      {
+        "tribe": "spore",
+        "name": "legacy-visual-attribute",
+        "helperCalls": 0,
+        "expectedCalls": 0
+      },
+      {
+        "tribe": "spore",
+        "name": "new-visual-attribute",
+        "helperCalls": 0,
+        "expectedCalls": 0
+      },
+      {
+        "tribe": "spore",
+        "name": "outline",
+        "helperCalls": 0,
+        "expectedCalls": 0
+      },
+      {
+        "tribe": "spore",
+        "name": "attribute-frame",
+        "helperCalls": 0,
+        "expectedCalls": 0
+      },
+      {
+        "tribe": "spore",
+        "name": "different-native-scale",
+        "helperCalls": 0,
+        "expectedCalls": 0
+      },
+      {
+        "tribe": "pebble",
+        "name": "valid-raw00",
+        "helperCalls": 1,
+        "expectedCalls": 1
+      },
+      {
+        "tribe": "pebble",
+        "name": "legacy-dna",
+        "helperCalls": 0,
+        "expectedCalls": 0
+      },
+      {
+        "tribe": "pebble",
+        "name": "invalid-dna",
+        "helperCalls": 0,
+        "expectedCalls": 0
+      },
+      {
+        "tribe": "pebble",
+        "name": "nonzero-mask",
+        "helperCalls": 0,
+        "expectedCalls": 0
+      },
+      {
+        "tribe": "pebble",
+        "name": "neutral-species",
+        "helperCalls": 0,
+        "expectedCalls": 0
+      },
+      {
+        "tribe": "pebble",
+        "name": "legacy-visual-attribute",
+        "helperCalls": 0,
+        "expectedCalls": 0
+      },
+      {
+        "tribe": "pebble",
+        "name": "new-visual-attribute",
+        "helperCalls": 0,
+        "expectedCalls": 0
+      },
+      {
+        "tribe": "pebble",
+        "name": "outline",
+        "helperCalls": 0,
+        "expectedCalls": 0
+      },
+      {
+        "tribe": "pebble",
+        "name": "attribute-frame",
+        "helperCalls": 0,
+        "expectedCalls": 0
+      },
+      {
+        "tribe": "spring",
+        "name": "valid-raw00",
+        "helperCalls": 1,
+        "expectedCalls": 1
+      },
+      {
+        "tribe": "spring",
+        "name": "legacy-dna",
+        "helperCalls": 0,
+        "expectedCalls": 0
+      },
+      {
+        "tribe": "spring",
+        "name": "invalid-dna",
+        "helperCalls": 0,
+        "expectedCalls": 0
+      },
+      {
+        "tribe": "spring",
+        "name": "nonzero-mask",
+        "helperCalls": 0,
+        "expectedCalls": 0
+      },
+      {
+        "tribe": "spring",
+        "name": "neutral-species",
+        "helperCalls": 0,
+        "expectedCalls": 0
+      },
+      {
+        "tribe": "spring",
+        "name": "legacy-visual-attribute",
+        "helperCalls": 0,
+        "expectedCalls": 0
+      },
+      {
+        "tribe": "spring",
+        "name": "new-visual-attribute",
+        "helperCalls": 0,
+        "expectedCalls": 0
+      },
+      {
+        "tribe": "spring",
+        "name": "outline",
+        "helperCalls": 0,
+        "expectedCalls": 0
+      },
+      {
+        "tribe": "spring",
+        "name": "attribute-frame",
+        "helperCalls": 0,
+        "expectedCalls": 0
+      }
+    ]
+  },
+  "pageErrors": [],
+  "runtimeHelper": "client/unit-appearance-birth-scene.mjs",
+  "runtimeHelperHash": "d302ab2c871d639a6733348a92eb07d76d583481aea2530157cbf8d0ba6b8c90",
+  "outerDisplayScaleProfiles": [
+    "helper-applies-existing-outer-scale",
+    "caller-already-applied-outer-scale"
+  ],
+  "compiledAppearanceRuntimeHash": "9b0547bc0e1ff2a479f11da8e4b9228c2a8d650a200db11444dfa6bcb03b5b8b"
+}

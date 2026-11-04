@@ -77,6 +77,16 @@ export function unitAppearanceForAgent(agent) {
   return mask !== null && unitAppearanceReady(tribe, mask) && ATTRIBUTE_DNA.validate(agent.dna) ? { tribe, mask, definition: unitAppearanceDefinition(tribe, mask) } : null;
 }
 
+export function unitAppearanceBirthSceneForAgent(agent) {
+  if (agent.species || agent.dna?.version !== 3 || unitAppearanceMaskFromDna(agent.dna) !== 0 ||
+      !ATTRIBUTE_DNA.validate(agent.dna) || [agent.attributes, agent.appearanceAttributes].some(attributes =>
+        [...Object.keys(UNIT_APPEARANCE_BITS), ...UNIT_APPEARANCE_LEGACY_VISUAL_KEYS].some(key => attributes?.[key] > 0))) return null;
+  const definition = unitAppearanceDefinition(agent.tribe || "bean", 0), scene = definition?.sceneActions?.birth;
+  return sourceApproved(definition?.source) && cameraVerified(definition?.source) && scene?.runtimeEnabled === true &&
+    scene.sourceId === definition.source.sourceId && scene.mask === 0 && scene.ownership?.bodyOnly === true &&
+    scene.validation?.cameraVerified === true && scene.validation?.runtimeRendererConnected === true ? scene : null;
+}
+
 export function unitAppearancePose(tribe, mask, action, elapsedMs) {
   const definition = unitAppearanceDefinition(tribe, mask), animation = unitAppearanceAnimation(tribe, mask, action);
   if (!animation) return null;
@@ -118,7 +128,7 @@ export function unitAppearanceLodRatio(frameSize, screenPixels, devicePixelRatio
 
 export function createUnitAppearanceCache(loadSource, makeBitmap, pixelBudget) {
   if (!Number.isSafeInteger(pixelBudget) || pixelBudget <= 0) throw new RangeError("INVALID APPEARANCE PIXEL BUDGET");
-  const entries = new Map(), workingSet = new Map(), workingKeys = new Set();
+  const entries = new Map(), workingSet = new Map(), workingKeys = new Set(), preparing = new Map();
   let residentPixels = 0, decodes = 0, cacheHits = 0, queue = Promise.resolve();
   function dimensions(animation) {
     const width = animation.frameWidth || animation.frameSize, height = animation.frameHeight || animation.frameSize;
@@ -126,7 +136,7 @@ export function createUnitAppearanceCache(loadSource, makeBitmap, pixelBudget) {
   }
   function pixelsAt(animation, ratio) {
     const size = dimensions(animation);
-    return Math.round(size.width * ratio) * Math.round(size.height * ratio);
+    return Math.max(1, Math.round(size.width * ratio)) * Math.max(1, Math.round(size.height * ratio));
   }
   function setWorkingSet(requests) {
     workingSet.clear(); workingKeys.clear();
@@ -159,6 +169,34 @@ export function createUnitAppearanceCache(loadSource, makeBitmap, pixelBudget) {
       if (!entry.pins && !workingKeys.has(key)) remove(key, entry);
     }
   }
+  function imageKey(animation, requestedRatio) {
+    const ratio = workingSet.get(animation.image)?.ratio || Math.min(1, 2 ** Math.floor(Math.log2(requestedRatio)));
+    return animation.image + ":" + ratio;
+  }
+  // The world paints synchronously. A decode must never draw onto a later
+  // frame after terrain, another unit, or the camera has changed.
+  function withReadyImage(animation, requestedRatio, draw) {
+    if (!(requestedRatio > 0)) return false;
+    const key = imageKey(animation, requestedRatio), entry = entries.get(key);
+    if (!entry?.bitmap || entry.discard) return false;
+    entries.delete(key); entries.set(key, entry); entry.pins++; cacheHits++;
+    try {
+      draw({ image: entry.bitmap, sourceRatio: entry.ratio, rasterScaleX: entry.rasterScaleX, rasterScaleY: entry.rasterScaleY });
+      return true;
+    } finally { entry.pins--; if (entry.discard && !entry.pins) remove(key, entry); }
+  }
+  function prepare(animation, requestedRatio) {
+    if (!(requestedRatio > 0)) return Promise.resolve(false);
+    const key = imageKey(animation, requestedRatio);
+    if (entries.get(key)?.bitmap && !entries.get(key).discard) return Promise.resolve(true);
+    if (!preparing.has(key)) {
+      const pending = withImage(animation, requestedRatio, () => {});
+      preparing.set(key, pending);
+      pending.then(() => { if (preparing.get(key) === pending) preparing.delete(key); },
+        () => { if (preparing.get(key) === pending) preparing.delete(key); });
+    }
+    return preparing.get(key);
+  }
   async function withImage(animation, requestedRatio, draw) {
     if (!(requestedRatio > 0)) return false;
     const ratio = workingSet.get(animation.image)?.ratio || Math.min(1, 2 ** Math.floor(Math.log2(requestedRatio))), key = animation.image + ":" + ratio;
@@ -187,7 +225,7 @@ export function createUnitAppearanceCache(loadSource, makeBitmap, pixelBudget) {
           const blob = typeof Blob !== "undefined" && source instanceof Blob;
           const sourceWidth = blob ? width : source.naturalWidth || source.width, sourceHeight = blob ? height : source.naturalHeight || source.height;
           if (sourceWidth !== width || sourceHeight !== height) throw new Error(`APPEARANCE ATLAS GEOMETRY MISMATCH : ${animation.image}`);
-          bitmap = await makeBitmap(source, { resizeWidth: Math.round(width * selected), resizeHeight: Math.round(height * selected), resizeQuality: "high" });
+          bitmap = await makeBitmap(source, { resizeWidth: Math.max(1, Math.round(width * selected)), resizeHeight: Math.max(1, Math.round(height * selected)), resizeQuality: "high" });
         } finally { lease?.release(); }
         const actualPixels = bitmap.width * bitmap.height;
         if (actualPixels + residentPixels > pixelBudget) { bitmap.close?.(); throw new Error("APPEARANCE DECODED BUDGET EXCEEDED"); }
@@ -216,5 +254,5 @@ export function createUnitAppearanceCache(loadSource, makeBitmap, pixelBudget) {
       if (entry.pins) entry.discard = true; else remove(key, entry);
     }
   }
-  return { withImage, setWorkingSet, clear, stats: () => ({ entries: entries.size, residentPixels, pixelBudget, decodes, cacheHits, workingAtlases: workingSet.size }) };
+  return { withImage, withReadyImage, prepare, setWorkingSet, clear, stats: () => ({ entries: entries.size, residentPixels, pixelBudget, decodes, cacheHits, workingAtlases: workingSet.size, pending: preparing.size }) };
 }

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Approved bean source bind review</title>
+<style>
+:root{color-scheme:dark;font:16px system-ui;background:#15211b;color:#e5eddf}*{box-sizing:border-box}body{max-width:1100px;margin:auto;padding:24px}h1{font-size:23px;margin:0 0 12px}p{line-height:1.6;color:#b4c7b6}.layout{display:grid;grid-template-columns:minmax(0,512px) minmax(230px,1fr);gap:24px}canvas{width:100%;height:auto;display:block;background:linear-gradient(transparent 87.3%,#40604b 87.3%,#40604b 87.6%,transparent 87.6%),#1b2b22;border:1px solid #426149;border-radius:12px}.masks{display:grid;grid-template-columns:repeat(8,1fr);gap:4px}button{min-height:44px;padding:8px;border:1px solid #53755c;border-radius:7px;background:#22372a;color:inherit;cursor:pointer}button[aria-pressed=true]{background:#8cbd74;color:#14221b}.control{display:flex;align-items:center;gap:10px;min-height:48px}input{width:22px;height:22px}code{overflow-wrap:anywhere;font-size:12px}#status{font-size:14px;white-space:pre-wrap;padding:12px;border:1px solid #49624d;border-radius:8px}small{display:block;line-height:1.6;color:#afc1b1}@media(max-width:720px){body{padding:16px}.layout{grid-template-columns:1fr;gap:14px}.masks{grid-template-columns:repeat(8,1fr)}button{padding:4px}}
+</style>
+<h1>승인된 새싹콩 32종 · 원본 바인드 검수</h1>
+<p>각 마스크의 승인 원본을 그대로 연결한 준비용 리그입니다. 눈과 지면 기준점, 카메라, 단단한 잎과 장식의 원형을 보존합니다. 동작 클립이나 인게임 적용 완료를 뜻하지 않습니다.</p>
+<div class="layout">
+  <canvas id="canvas" width="512" height="512" aria-label="Selected bean source with optional rig anchors"></canvas>
+  <div>
+    <div class="masks" id="masks" aria-label="Bean source mask"></div>
+    <label class="control"><input id="mesh" type="checkbox">바인드 메시</label>
+    <label class="control"><input id="anchors" type="checkbox" checked>원본 눈 · 지면 기준점</label>
+    <label class="control"><input id="lean" type="checkbox">지면 기준 강체 회전 진단</label>
+    <small>회전 진단은 원본 전체를 지면 기준점 주위로 ±0.45° 돌립니다. 기준점과 단단한 요소의 모양은 고정되지만 발바닥 접촉을 보장하는 idle/hurt 동작은 아닙니다.</small>
+    <p id="identity" style="overflow-wrap:anywhere;white-space:pre-wrap;font-size:13px"></p>
+    <div id="status" role="status">불러오는 중…</div>
+    <p><a href="./README.md">범위와 검증 방법</a> · <a href="./report.json">32종 검증 기록</a></p>
+  </div>
+</div>
+<script type="module">
+import {loadSourceBind, drawSourceBind, supportLeanTransform, projectPoint} from './renderer.mjs';
+const root = new URL('../../', location.href);
+const manifest = await fetch('./manifest.json').then(r => r.json());
+const context = document.querySelector('#canvas').getContext('2d');
+const status = document.querySelector('#status');
+const cache = new Map();
+let selected, selectedMask = 0, generation = 0;
+async function load(mask) {
+  if (!cache.has(mask)) cache.set(mask, loadSourceBind(root, manifest.entries[mask]));
+  return cache.get(mask);
+}
+async function select(mask) {
+  const current = ++generation;
+  status.textContent = '불러오는 중…';
+  try {
+    const loaded = await load(mask);
+    if (current !== generation) return;
+    selected = loaded; selectedMask = mask;
+    for (const button of document.querySelectorAll('.masks button')) button.setAttribute('aria-pressed', String(+button.dataset.mask === mask));
+    document.querySelector('#identity').textContent = `${loaded.rig.sourceId}\n${loaded.rig.sourceHash}`;
+    status.textContent = `bean ${mask.toString(16).padStart(2,'0')} · 원본 전용\n브라우저 중립 복원 오차: ${loaded.validation.maxRgbaError}\n메시: ${loaded.rig.mesh.positions.length} 정점 / ${loaded.rig.mesh.triangles.length} 삼각형\n새 동작 클립: 0 · worldReady: false`;
+  } catch (error) {status.textContent = error.stack; throw error;}
+}
+for (const entry of manifest.entries) {
+  const button = document.createElement('button');
+  button.textContent = entry.mask.toString(16).padStart(2,'0');
+  button.dataset.mask = entry.mask; button.setAttribute('aria-pressed','false');
+  button.addEventListener('click', () => select(entry.mask));
+  document.querySelector('#masks').append(button);
+}
+function frame(time) {
+  if (selected) drawSourceBind(context, selected, {phase:time/2400, diagnostic:document.querySelector('#lean').checked, mesh:document.querySelector('#mesh').checked, anchors:document.querySelector('#anchors').checked});
+  requestAnimationFrame(frame);
+}
+window.bindReview = {
+  select, load,
+  async validateAll() {
+    const sources = [];
+    for (const entry of manifest.entries) {
+      const loaded = await load(entry.mask), {rig} = loaded;
+      let rootMaxError = 0, rigidDistanceMaxError = 0;
+      const pairs = [[rig.landmarks.leftEye, rig.landmarks.rightEye], [rig.mesh.positions[0], rig.mesh.positions.at(-1)]];
+      for (let sample = 0; sample < 64; sample++) {
+        const transform = supportLeanTransform(rig, sample/64);
+        const root = projectPoint(transform, rig.landmarks.supportPoint);
+        rootMaxError = Math.max(rootMaxError, Math.hypot(root[0]-rig.landmarks.supportPoint[0], root[1]-rig.landmarks.supportPoint[1]));
+        for (const [a,b] of pairs) {
+          const p=projectPoint(transform,a), q=projectPoint(transform,b);
+          rigidDistanceMaxError = Math.max(rigidDistanceMaxError, Math.abs(Math.hypot(a[0]-b[0],a[1]-b[1])-Math.hypot(p[0]-q[0],p[1]-q[1])));
+        }
+      }
+      if (rootMaxError > 1e-10 || rigidDistanceMaxError > 1e-10) throw new Error('Rigid diagnostic invariant failed');
+      sources.push({mask:entry.mask, sourceId:rig.sourceId, ...loaded.validation, diagnosticSamples:64, rootMaxError, rigidDistanceMaxError});
+    }
+    return {sources, sourceCount:sources.length, newActionClips:0, diagnosticScope:'whole-source rigid support-pivot test only; no action or foot-contact readiness claim'};
+  }
+};
+await select(0); requestAnimationFrame(frame);
+</script>
+</html>

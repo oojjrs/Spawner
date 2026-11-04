@@ -1,4 +1,5 @@
 import { openSync, readSync, closeSync, readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -44,12 +45,35 @@ export function auditImages(root, paths) {
     count++;
     const size = policy.images[name];
     if (!size) { failures.push(name + " : 원본 제작 기준 표시 크기 미등록 (목표 100%, 최대 150%)"); continue; }
-    const dimensions = imageDimensions(resolve(root, name));
+    const pair = (value, integer = false) => Array.isArray(value) && value.length === 2 &&
+      value.every(number => Number.isFinite(number) && number > 0 && (!integer || Number.isInteger(number)));
+    if (!pair(size.display) || !pair(size.grid, true) ||
+        (size.sourceMaximum !== undefined && !pair(size.sourceMaximum))) {
+      failures.push(name + " : 잘못된 표시 크기·아틀라스 등록"); continue;
+    }
+    const path = resolve(root, name);
+    const dimensions = imageDimensions(path);
     const frame = [dimensions[0] / size.grid[0], dimensions[1] / size.grid[1]];
-    if (frame.some((value, index) => !Number.isInteger(value) || value > (size.sourceMaximum?.[index] ?? size.display[index] * policy.maximumScale) + 1e-7))
+    // A retained native authoring camera is not a larger display target. Pin its
+    // exact bytes, atlas and cell together so a replacement needs a fresh review.
+    const native = size.nativeSource;
+    if (Object.hasOwn(size, "nativeSource")) {
+      if (!native || !/^[a-f0-9]{64}$/.test(native.sha256) ||
+          !pair(native.dimensions, true) || !pair(native.frame, true) ||
+          native.dimensions.some((value, index) => value !== dimensions[index]) ||
+          native.frame.some((value, index) => value !== frame[index]) ||
+          (size.sourceMaximum && size.sourceMaximum.some((value, index) => value !== native.frame[index]))) {
+        failures.push(name + " : 보존 원본 치수·프레임 등록 불일치"); continue;
+      }
+      if (createHash("sha256").update(readFileSync(path)).digest("hex") !== native.sha256) {
+        failures.push(name + " : 보존 원본 SHA-256 불일치 (교체 원본 재검토 필요)"); continue;
+      }
+    }
+    const maximum = native?.frame ?? size.sourceMaximum ?? size.display.map(value => value * policy.maximumScale);
+    if (frame.some((value, index) => !Number.isInteger(value) || value > maximum[index] + 1e-7))
       failures.push(name + " : 원본 프레임 " + frame.join("×") +
         ", 제작 목표 " + size.display.map(value => Math.floor(value * policy.preferredScale)).join("×") +
-        ", 최대 " + size.display.map(value => Math.floor(value * policy.maximumScale)).join("×"));
+        ", 최대 " + maximum.map(value => Math.floor(value)).join("×"));
   }
   if (failures.length) throw new Error("IMAGE SIZE LIMIT :\n" + failures.join("\n"));
   return count;

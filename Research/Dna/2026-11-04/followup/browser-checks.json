@@ -1,0 +1,29 @@
+[
+  {
+    "width": 320,
+    "overflow": false,
+    "pageErrors": [],
+    "assignmentExport": true,
+    "anonymousExport": true,
+    "mirror": true,
+    "persisted": true
+  },
+  {
+    "width": 390,
+    "overflow": false,
+    "pageErrors": [],
+    "assignmentExport": true,
+    "anonymousExport": true,
+    "mirror": true,
+    "persisted": true
+  },
+  {
+    "width": 1440,
+    "overflow": false,
+    "pageErrors": [],
+    "assignmentExport": true,
+    "anonymousExport": true,
+    "mirror": true,
+    "persisted": true
+  }
+]
