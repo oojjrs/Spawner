@@ -1,3 +1,20 @@
+## 로컬 잔여 7파일 전체 게시 범위 확정 · 01a1a6c1
+
+- 기록 ID: all-local-remainder-publish-scope-20261106-01a1a6c1. 기록 시각: 2026-11-06T05:55:19+09:00. 기록·범위확정·실행 Codex /root, 전체 커밋·푸시 결정 사용자. 출처 현재 채팅01a1a6c1-ac04-70b2-940b-bdfba26e30ae의 「로컬에 뭐 남은거 있던데 다 푸시해」. 원발언 정확시각·항목 ID 불명. H:/Spawner Windows PowerShell, host local.
+- 현재 잔여 CodexWorkMemory.md·Combat.html·client/build.mjs·client/combat-stage.mjs·client/game.js·client/runtime.js·신규client/unit-health-ring.mjs를 전부 같은 커밋에 포함한다. 공통 체력 링/상세 보조표식 정리, 최신 원본에 맞춘 생성물, 기존 완료·인계 메모리를 보존한다. 기존 메모리 고유 원문 삭제0·고유103줄 추가 및 기록 순서 이동을 확인했다.
+- 전용 origin은 https://github.com/oojjrs/Spawner, main과 fetched origin/main은 모두011bbd7이다. 작업본 world worker78개·decision worker50개 모듈은 HEAD와 개행/순서를 제외한 본문 차이0임을 확인했다. 체력 링의 실제 화면 검수 미완료는 기존 combat-ground-health-ring-implemented 기록의 한계를 유지한다. 현재 요청은 Git 게시이며 Sites 재배포 요청은 아니다.
+- 최종 구문·형식·staged 검수 뒤 커밋·푸시한다. 아직 성공을 선기록하지 않는다. 사용자 지시에 따라 이번 푸시 완료 후 메모리를 덧붙이거나 메모리만의 후속 커밋을 만들지 않는다.
+
+## 자원 매장량 20배 Sites v29 배포 완료 · 01a1ad5a 현재 요약
+
+- 기록 ID: resource-amount-20x-deploy-complete-20261106-01a1ad5a. 기록·실제 최종 확인 시각: 2026-11-06T05:46:37+09:00. 기록자·배포 지원 구현/검수/Git/게시 실행 Codex /root, 배포 실행 결정 사용자. 출처 현재 채팅 01a1ad5a-6af9-7001-a8af-1752c038a4d2의 “배포까지 해봐” 및 Sites native save/deploy 결과, H:/Spawner Windows PowerShell. 원 발언 정확시각·턴/항목 ID·PC 식별 정보 불명.
+- 실제 성공: 기존 public https://spawner.oojjrs.chatgpt.site 의 버전29가 Sites API status=succeeded, failure_message=null로 완료됐다. project_id appgprj_6ada1cedf2848191938f196c4f346ee9, version_id appgprj_6ada1cedf2848191938f196c4f346ee9~appgver_66fecd47fd7c8191ab56f259602151cf, deployment_id appgdep_6aeceabee1f88191add60681f6e012fe. API 완료시각 2026-11-05T20:45:19.102698+00:00는 기록시각과 구분한다. 추가 상태 polling/브라우저/패널 열기는 하지 않았다.
+- 게임·검토 페이지 기준은2af545927584f55591b87cebc1f28da53e81624f의 커밋된 원본이다. Site source 0afa3ca9a73c31eba8296a680281be680858e8ff를 공식 source helper로 push/readback 후 동일 archive를 저장·배포했다. archive SHA-256 sha256:44a5f9cf41b1f554b0230edfb9240a313809f31a34db1b4b67a3875a5e07b781, 98파일/62003200bytes다. 공개 범위는 public 그대로 유지했다.
+- 실제 준비 검수: 전체 이미지 규격 검사를 통과한671개 원본 자산 집계, CDN 미게시 신규/변경 해시53개·52029961bytes를 Site에 동봉하고 각 파일 SHA/이름/매핑 일치를 확인했다. 배포 runtime 구문·amount*20 여섯 사본·치트 실행 명령 제거를 확인했다. 기존651지점×5모델 수량/배치 검수도 같은 수식의 근거로 재사용했다. 생성물의 공백만 있는 네 줄은 보고된 trailing whitespace를 제거했고 staged diffcheck를 통과했다.
+- 배포기 지원 수정은011bbd7b8696aa353931634150317b8d8010ecfe 「Sites 배포 자산 검색과 신규 자산 동봉 수정」로 관련메모리와 원자적으로 commit/push했다. 승인 원본 경로 비교문을 검색에서 제외하고 이전 Site에 없는 새 해시를 동봉하는 최소 수정이다. 원화/이미지 규격 정책/게임 동작은 변경하지 않았다. push 직후 ls-remote와 시작 checkout main이011bbd7인 것을 확인했다. 최종 메모리 기록 시 local HEAD=011bbd7b8696aa353931634150317b8d8010ecfe, origin/main=011bbd7b8696aa353931634150317b8d8010ecfe, indexEmpty=true.
+- 기존 미커밋 전투/체력링/다른 작업 및 메모리는 보존하고 해당 바이트를 배포 소스로 사용하지 않았다. 자원 매장량20배는 새 생성 맵에 적용되며 기존 저장 게임의 저장 잔량은 유지된다. 남은 배포 단계 없음. 앞선 deploy-start/scanner/assets/support-freeze의 미완료 상태는 이 실제 완료 기록으로 대체한다.
+- 근거는 D:/.codex/visualizations/2026/11/05/01a1ad5a-6af9-7001-a8af-1752c038a4d2/$Trash/spawner-deploy-20261106/deployment-receipt.json, prepared.json, publication-check.json, asset-changes.json, asset-availability.json, source-manifest.json, source-staged.diff, site-version.tar다. 이 commit/push/deploy 후 영수증은 로컬에 기록하며 메모리 전용 후속 커밋이나 게시 이력 수정은 자동 생성하지 않는다.
+
 ## Sites 배포 지원 수정·게시본 검수 완료 / source 커밋 준비 · 01a1ad5a
 
 - 기록 ID: resource-amount-20x-deploy-support-freeze-20261106-01a1ad5a. 기록 시각: 2026-11-06T05:42:19+09:00. 기록자·배포 지원 구현/검수/Git 범위 판단 Codex /root, 배포 실행 결정 사용자. 출처 현재 채팅 01a1ad5a-6af9-7001-a8af-1752c038a4d2 및 prepared.json/publication-check.json, H:/Spawner Windows PowerShell. 원 발언 정확시각·항목 ID·PC 식별 정보 불명.
@@ -12,6 +29,14 @@
 - 실제 준비 성공: image policy를 바꾸지 않고 오탐 세 경로를 제외한 671자산·448354575bytes의 원본 자산 목록을 만들었다. 기존 Sites 소스와 달라진 53개 해시 URL을 CDN에서 HEAD 확인한 결과 53개가404였다. 성공 응답의 CORS는 모두 *였다. CDN에 미게시된 원본이 있어 그대로 배포하면 일부 동작 이미지가 빠질 수 있었다.
 - 기존 준비기의 신규 스프라이트 동봉 방식에 맞춰 현재 Sites HEAD의 자산 URL 목록에 없는 해시를 같은 Site의 welcome-assets에 동봉하도록 최소 확장한다. 기존 CDN 해시 참조와 이미 검증된 기존 파일은 유지하며 다른 GitHub 자산 저장소를 수정/푸시하지 않는다. 원본/게임 동작 변경 없이 배포 파일과 경로 매핑만 함께 준비한다. 현재 GitHub 소스의 이번 직접 배포 지원 파일과 이 채팅 메모리만 분리 커밋·push하고 동일 게임 소스를 배포한다.
 
+## 중립 수치·경제 기록 커밋 및 main push 완료 · 01a1a0e9 현재 요약
+
+- 기록 ID: neutral-stats-home-stock-twenty-pushed-20261106-01a1a0e9. 기록·실제 readback 확인 시각 2026-11-06T05:37:58+09:00. 기록자·Git실행/검수 Codex /root, 현재 변경 push 승인 사용자. 출처 현재채팅01a1a0e9-2e09-7703-a7f5-613c21744e11의 ‘지금 변경내용 푸시 함 하자’와 후속 ‘아 아직 작업이 안 끝났구나 오케이’, 실제 push-result.json 및 Git 원격 readback. H:/Spawner Windows/PowerShell. 원발언 정확시각·턴/항목 ID·딥링크·PC 식별은 불명.
+- 실제 완료: main 커밋 6dcfe6916db22620c17807c768681078dc0ec594 「중립 유닛 수치 초안과 경제·습격 계산 정리」, 부모 2af545927584f55591b87cebc1f28da53e81624f, tree cb2ba072fb75ebdc9249f60e36cb3b8a45fcc40c. Design.html의 중립19종34수치 투영·수치 정렬·그룹너비와 둥지80/400/2000 표기, 관련메모리9절만2경로로 반영했다. 다른 자원20배·역할·전투 변경은 이미 별도 main 이력에 있으며 기존 미커밋 건강링 등 제품 작업과 외부 메모리는 제외·보존했다.
+- 원격 동기화: origin/main fetch에서2af545927584f55591b87cebc1f28da53e81624f와main이같음을확인한뒤 이번커밋을적용했다. push직전 재fetch에도원격추가없음, 정방향push성공후 ls-remote의정확refs/heads/main과시작체크아웃main이모두 6dcfe6916db22620c17807c768681078dc0ec594임을확인했다. 새브랜치/이력재작성/추가배포없음. 기존연결Projects빈목록근거를재사용했다.
+- 검수: 확정 후보2텍스트UTF8NoBom/CRLF 모두OK, 별도인덱스최종staged경로2개·diff·diffcheck 통과, 메모리기존기록삭제0·관련9절추가만확인했다. 실제커밋부모/tree/경로·공유인덱스의다른항목과Design작업바이트보존을readback했다. 변경수치·레이아웃의기존PC1440/mobile390·정렬검수는동일본문을재사용했고빌드/브라우저/전투를반복하지않았다.
+- 앞선 home-stock-twenty-result-push-scope-20261106-01a1a0e9의push준비/미완료상태를이번실측완료로대체한다. 본진20배경제계산은완료, 기본채집일꾼만재생산한정책에서S출생7:36~17:47·all-tribe보수출정19/25/34/37/40/43분이며경제최적안/실제습격구현확정이아니다. 기획서수치도게임수치적용이아닌초안이다. 채집DNA/동선경제조정은다음논의사항이며이턴에서추가제품수정하지않았다.
+- 근거는 literal 루트 $Trash/neutral-stats-push-20261106/freeze.json,stage.json,staged.diff,commit-result.json,push-result.json 및 앞선 계산JSON에 있다. 이번결과는커밋뒤에확인한로컬영수증이며다음관련승인커밋에넘긴다. 이기록만의후속커밋·amend는자동생성하지않는다.
 ## Sites 배포 자산 검색의 원본 경로 비교문 오탐 보정 · 01a1ad5a
 
 - 기록 ID: resource-amount-20x-deploy-scanner-20261106-01a1ad5a. 기록 시각: 2026-11-06T05:36:47+09:00. 기록자·원인 조사/직접 배포 지원 판단 Codex /root, 기존 배포 승인 사용자. 출처 현재 채팅 01a1ad5a-6af9-7001-a8af-1752c038a4d2, H:/Spawner Windows PowerShell. 원 발언 시각·항목 ID 불명.
@@ -23,15 +48,6 @@
 - 기록 ID: resource-amount-20x-deploy-start-20261106-01a1ad5a. 기록 시각: 2026-11-06T05:31:55+09:00. 기록자·배포 판단 Codex /root, 배포 실행 결정 사용자. 출처 현재 채팅 01a1ad5a-6af9-7001-a8af-1752c038a4d2의 후속 요청 “배포까지 해봐”, H:/Spawner Windows PowerShell. 원 발언 정확시각·턴/항목 ID·PC 식별 정보 불명.
 - 배포 범위는 앞서 push한 2af545927584f55591b87cebc1f28da53e81624f의 커밋된 게임·검토 페이지 및 필수 자산이다. 미커밋 전투/체력링/기획서/다른 메모리는 공개 산출물에 넣지 않는다. 기존 hosting/prepare-site.mjs로 committed source를 준비하고 productionRuntime을 적용한다.
 - 현재 Sites API로 appgprj_6ada1cedf2848191938f196c4f346ee9의 owner·public·https://spawner.oojjrs.chatgpt.site·최신 저장버전28을 확인했다. audience를 유지하며 동일 Site 소스 checkout/open → 준비·검사 → source helper 동기화·package → 저장·deploy → terminal readback 순서로 진행한다. 작업 중간물은 현재 쓰기 가능 루트 D:/.codex/visualizations/2026/11/05/01a1ad5a-6af9-7001-a8af-1752c038a4d2/$Trash/spawner-deploy-20261106에 둔다. 아직 배포 성공 전이다.
-
-## 자원 지점 매장량 20배 반영·main push 완료 · 01a1ad5a 현재 요약
-
-- 기록 ID: resource-amount-20x-push-complete-20261106-01a1ad5a. 기록·최종 확인 시각: 2026-11-06T05:28:47+09:00. 기록자·구현/검수/Git 실행 Codex /root, 자원 매장량 20배·기획서와 게임 적용 및 push 결정 사용자. 출처 현재 채팅 01a1ad5a-6af9-7001-a8af-1752c038a4d2 및 도구 출력, H:/Spawner Windows PowerShell. 원 발언 시각·턴/항목 ID·PC 식별 정보 불명.
-- 실제 완료: 2af545927584f55591b87cebc1f28da53e81624f 「자원 지점 매장량 20배로 변경」를 origin/main에 push했다. git ls-remote의 정확한 refs/heads/main과 시작 체크아웃의 main/HEAD가 같은 해시임을 읽어 확인했다. 원격 동시 솜양 아트와 기존 로컬 전투/기타 커밋 이력을 보존해 통합한 뒤 push했으며 별도 배포는 실행하지 않았다.
-- 변경 범위는 server/terrain-resources.mjs의 최종 목재/나머지 세 자원 생성량×20, Design.html 내장 모델, runtime 브라우저/두 워커 사본 및 본 채팅 메모리 두 절이다. 새로 생성하는 현행 맵에 적용되며 기존 저장 게임의 저장 잔량은 별도 마이그레이션하지 않았다. 채집 시간·일꾼 운반량·지점 좌표·지형을 유지했다.
-- 실제 검수: 동일 32×32 입력의 네 자원 651지점을 원본과 다섯 모델에서 비교하여 모든 매장량과 수량 지도 데이터 ×20, 좌표/타입/지형 동일을 확인했다. runtime 구문, 최종 4파일 UTF8NoBom/CRLF, 선별 staged diff 및 공백 검사도 통과했다. 검사기 첫 입력에 fines 필드를 빠뜨린 오류를 검사기 입력만 보완한 뒤 통과했으며 제품 코드 오류로 바꾸지 않았다.
-- 보호 결과: 기존 8개 제품/미추적 파일의 바이트는 rebase 보존본과 최종 상태에서 동일하고 관련 없는 메모리는 원문을 보존했다. index는 비어 있다. stash 및 refs/codex-backup/resource-amount-20x-20261106-01a1ad5a는 복구 근거로 남긴다. 연결 보드 없음. 근거는 $Trash/resource-amount-20x-20261106-01a1ad5a/validation.json, restoration.json, manifest.json, staged.diff, completion.json이다.
-- 앞선 시작/동결 기록의 미완료 상태는 이 실제 완료 기록으로 대체한다. 이 절은 commit/push 후에만 확인한 결과이므로 로컬에 기록하며 메모리 전용 후속 커밋이나 게시 이력 수정은 하지 않는다.
 
 ## 본진 매장량 20배 경제·습격 재계산 완료 / 기획서 변경 push 준비 · 01a1a0e9 현재 요약
 
@@ -48,6 +64,56 @@
 {"stock":{"bean":{"nodes":5,"nativeBefore":167,"previous":167,"appliedFactor":20,"after":3340,"cells":[{"x":73,"y":107,"amount":660,"type":"clay"},{"x":77,"y":107,"amount":460,"type":"clay"},{"x":78,"y":108,"amount":700,"type":"clay"},{"x":71,"y":110,"amount":740,"type":"clay"},{"x":76,"y":116,"amount":780,"type":"clay"}]},"spore":{"nodes":1,"nativeBefore":65,"previous":65,"appliedFactor":20,"after":1300,"cells":[{"x":116,"y":118,"amount":1300,"type":"tree"}]},"pebble":{"nodes":1,"nativeBefore":91,"previous":91,"appliedFactor":20,"after":1820,"cells":[{"x":83,"y":65,"amount":1820,"type":"pebbles"}]},"spring":{"nodes":6,"nativeBefore":62,"previous":62,"appliedFactor":20,"after":1240,"cells":[{"x":14,"y":22,"amount":280,"type":"dew"},{"x":15,"y":22,"amount":220,"type":"dew"},{"x":13,"y":24,"amount":180,"type":"dew"},{"x":12,"y":27,"amount":240,"type":"dew"},{"x":14,"y":28,"amount":180,"type":"dew"},{"x":20,"y":28,"amount":140,"type":"dew"}]}},"rows":[{"tribe":"bean","upgradeCost1to2":80,"upgradeAt":510.5,"ready":{"S":{"commandAt":618,"readyAt":621.85,"cost":27},"M":{"commandAt":796.75,"readyAt":800.6,"cost":52},"R":{"commandAt":968.75,"readyAt":972.6,"cost":17},"K":{"commandAt":1163,"readyAt":1166.85,"cost":82},"H1":{"commandAt":1335,"readyAt":1338.85,"cost":72},"H2":{"commandAt":1507,"readyAt":1510.85,"cost":72}},"milestones":[{"minute":5,"workers":6,"nest":1,"income":54,"spent":39,"bank":45,"military":{"S":0,"M":0,"R":0,"K":0,"H":0},"population":6,"populationCap":10,"pointsCap":100,"ownResourceConsumed":57,"delivered":54,"remainingHomeStockFromConsumed":3283,"spending":{"worker":39,"a":0,"b":0,"r":0,"k":0,"h":0,"x":0,"upgrade":0}},{"minute":10,"workers":6,"nest":2,"income":112,"spent":119,"bank":23,"military":{"S":0,"M":0,"R":0,"K":0,"H":0},"population":6,"populationCap":20,"pointsCap":500,"ownResourceConsumed":115,"delivered":112,"remainingHomeStockFromConsumed":3225,"spending":{"worker":39,"a":0,"b":0,"r":0,"k":0,"h":0,"x":0,"upgrade":80}},{"minute":15,"workers":8,"nest":2,"income":196,"spent":224,"bank":2,"military":{"S":1,"M":1,"R":0,"K":0,"H":0},"population":10,"populationCap":20,"pointsCap":500,"ownResourceConsumed":201,"delivered":196,"remainingHomeStockFromConsumed":3139,"spending":{"worker":65,"a":27,"b":52,"r":0,"k":0,"h":0,"x":0,"upgrade":80}},{"minute":20,"workers":9,"nest":2,"income":318,"spent":336,"bank":12,"military":{"S":1,"M":1,"R":1,"K":1,"H":0},"population":13,"populationCap":20,"pointsCap":500,"ownResourceConsumed":324,"delivered":318,"remainingHomeStockFromConsumed":3016,"spending":{"worker":78,"a":27,"b":52,"r":17,"k":82,"h":0,"x":0,"upgrade":80}},{"minute":25,"workers":9,"nest":2,"income":444,"spent":408,"bank":66,"military":{"S":1,"M":1,"R":1,"K":1,"H":1},"population":14,"populationCap":20,"pointsCap":500,"ownResourceConsumed":450,"delivered":444,"remainingHomeStockFromConsumed":2890,"spending":{"worker":78,"a":27,"b":52,"r":17,"k":82,"h":72,"x":0,"upgrade":80}},{"minute":30,"workers":9,"nest":2,"income":569,"spent":480,"bank":119,"military":{"S":1,"M":1,"R":1,"K":1,"H":2},"population":15,"populationCap":20,"pointsCap":500,"ownResourceConsumed":576,"delivered":569,"remainingHomeStockFromConsumed":2764,"spending":{"worker":78,"a":27,"b":52,"r":17,"k":82,"h":144,"x":0,"upgrade":80}}],"completedAllBy":1510.85},{"tribe":"spore","upgradeCost1to2":80,"upgradeAt":895.5,"ready":{"S":{"commandAt":1064.25,"readyAt":1067.37,"cost":27},"M":{"commandAt":1339.5,"readyAt":1342.62,"cost":52},"R":{"commandAt":1587.5,"readyAt":1590.62,"cost":17},"K":{"commandAt":1870.25,"readyAt":1873.37,"cost":82},"H1":{"commandAt":2118.25,"readyAt":2121.37,"cost":72},"H2":{"commandAt":2366.25,"readyAt":2369.37,"cost":72}},"milestones":[{"minute":5,"workers":6,"nest":1,"income":34,"spent":39,"bank":25,"military":{"S":0,"M":0,"R":0,"K":0,"H":0},"population":6,"populationCap":10,"pointsCap":100,"ownResourceConsumed":36,"delivered":34,"remainingHomeStockFromConsumed":1264,"spending":{"worker":39,"a":0,"b":0,"r":0,"k":0,"h":0,"x":0,"upgrade":0}},{"minute":10,"workers":6,"nest":1,"income":76,"spent":39,"bank":67,"military":{"S":0,"M":0,"R":0,"K":0,"H":0},"population":6,"populationCap":10,"pointsCap":100,"ownResourceConsumed":76,"delivered":76,"remainingHomeStockFromConsumed":1224,"spending":{"worker":39,"a":0,"b":0,"r":0,"k":0,"h":0,"x":0,"upgrade":0}},{"minute":15,"workers":6,"nest":2,"income":90,"spent":119,"bank":1,"military":{"S":0,"M":0,"R":0,"K":0,"H":0},"population":6,"populationCap":20,"pointsCap":500,"ownResourceConsumed":90,"delivered":90,"remainingHomeStockFromConsumed":1210,"spending":{"worker":39,"a":0,"b":0,"r":0,"k":0,"h":0,"x":0,"upgrade":80}},{"minute":20,"workers":6,"nest":2,"income":140,"spent":146,"bank":24,"military":{"S":1,"M":0,"R":0,"K":0,"H":0},"population":7,"populationCap":20,"pointsCap":500,"ownResourceConsumed":142,"delivered":140,"remainingHomeStockFromConsumed":1158,"spending":{"worker":39,"a":27,"b":0,"r":0,"k":0,"h":0,"x":0,"upgrade":80}},{"minute":25,"workers":8,"nest":2,"income":201,"spent":224,"bank":7,"military":{"S":1,"M":1,"R":0,"K":0,"H":0},"population":10,"populationCap":20,"pointsCap":500,"ownResourceConsumed":202,"delivered":201,"remainingHomeStockFromConsumed":1098,"spending":{"worker":65,"a":27,"b":52,"r":0,"k":0,"h":0,"x":0,"upgrade":80}},{"minute":30,"workers":9,"nest":2,"income":284,"spent":254,"bank":60,"military":{"S":1,"M":1,"R":1,"K":0,"H":0},"population":12,"populationCap":20,"pointsCap":500,"ownResourceConsumed":288,"delivered":284,"remainingHomeStockFromConsumed":1012,"spending":{"worker":78,"a":27,"b":52,"r":17,"k":0,"h":0,"x":0,"upgrade":80}}],"completedAllBy":2369.37},{"tribe":"pebble","upgradeCost1to2":60,"upgradeAt":591.25,"ready":{"S":{"commandAt":729,"readyAt":731.62,"cost":27},"M":{"commandAt":999.5,"readyAt":1002.12,"cost":52},"R":{"commandAt":1246,"readyAt":1248.62,"cost":17},"K":{"commandAt":1526.5,"readyAt":1529.12,"cost":82},"H1":{"commandAt":1775.25,"readyAt":1777.87,"cost":72},"H2":{"commandAt":2023.25,"readyAt":2025.87,"cost":72}},"milestones":[{"minute":5,"workers":6,"nest":1,"income":35,"spent":39,"bank":26,"military":{"S":0,"M":0,"R":0,"K":0,"H":0},"population":6,"populationCap":10,"pointsCap":100,"ownResourceConsumed":35,"delivered":35,"remainingHomeStockFromConsumed":1785,"spending":{"worker":39,"a":0,"b":0,"r":0,"k":0,"h":0,"x":0,"upgrade":0}},{"minute":10,"workers":6,"nest":2,"income":71,"spent":99,"bank":2,"military":{"S":0,"M":0,"R":0,"K":0,"H":0},"population":6,"populationCap":20,"pointsCap":500,"ownResourceConsumed":72,"delivered":71,"remainingHomeStockFromConsumed":1748,"spending":{"worker":39,"a":0,"b":0,"r":0,"k":0,"h":0,"x":0,"upgrade":60}},{"minute":15,"workers":6,"nest":2,"income":126,"spent":126,"bank":30,"military":{"S":1,"M":0,"R":0,"K":0,"H":0},"population":7,"populationCap":20,"pointsCap":500,"ownResourceConsumed":131,"delivered":126,"remainingHomeStockFromConsumed":1689,"spending":{"worker":39,"a":27,"b":0,"r":0,"k":0,"h":0,"x":0,"upgrade":60}},{"minute":20,"workers":9,"nest":2,"income":191,"spent":217,"bank":4,"military":{"S":1,"M":1,"R":0,"K":0,"H":0},"population":11,"populationCap":20,"pointsCap":500,"ownResourceConsumed":194,"delivered":191,"remainingHomeStockFromConsumed":1626,"spending":{"worker":78,"a":27,"b":52,"r":0,"k":0,"h":0,"x":0,"upgrade":60}},{"minute":25,"workers":9,"nest":2,"income":279,"spent":234,"bank":75,"military":{"S":1,"M":1,"R":1,"K":0,"H":0},"population":12,"populationCap":20,"pointsCap":500,"ownResourceConsumed":281,"delivered":279,"remainingHomeStockFromConsumed":1539,"spending":{"worker":78,"a":27,"b":52,"r":17,"k":0,"h":0,"x":0,"upgrade":60}},{"minute":30,"workers":9,"nest":2,"income":362,"spent":388,"bank":4,"military":{"S":1,"M":1,"R":1,"K":1,"H":1},"population":14,"populationCap":20,"pointsCap":500,"ownResourceConsumed":370,"delivered":362,"remainingHomeStockFromConsumed":1450,"spending":{"worker":78,"a":27,"b":52,"r":17,"k":82,"h":72,"x":0,"upgrade":60}}],"completedAllBy":2025.87},{"tribe":"spring","upgradeCost1to2":80,"upgradeAt":379.25,"ready":{"S":{"commandAt":454.25,"readyAt":456.04,"cost":27},"M":{"commandAt":604.75,"readyAt":606.54,"cost":52},"R":{"commandAt":746.5,"readyAt":748.29,"cost":17},"K":{"commandAt":912.75,"readyAt":914.54,"cost":82},"H1":{"commandAt":1071,"readyAt":1072.79,"cost":72},"H2":{"commandAt":1214.25,"readyAt":1216.04,"cost":72}},"milestones":[{"minute":5,"workers":6,"nest":1,"income":70,"spent":39,"bank":61,"military":{"S":0,"M":0,"R":0,"K":0,"H":0},"population":6,"populationCap":10,"pointsCap":100,"ownResourceConsumed":71,"delivered":70,"remainingHomeStockFromConsumed":1169,"spending":{"worker":39,"a":0,"b":0,"r":0,"k":0,"h":0,"x":0,"upgrade":0}},{"minute":10,"workers":6,"nest":2,"income":167,"spent":146,"bank":51,"military":{"S":1,"M":0,"R":0,"K":0,"H":0},"population":7,"populationCap":20,"pointsCap":500,"ownResourceConsumed":168,"delivered":167,"remainingHomeStockFromConsumed":1072,"spending":{"worker":39,"a":27,"b":0,"r":0,"k":0,"h":0,"x":0,"upgrade":80}},{"minute":15,"workers":9,"nest":2,"income":299,"spent":254,"bank":75,"military":{"S":1,"M":1,"R":1,"K":0,"H":0},"population":12,"populationCap":20,"pointsCap":500,"ownResourceConsumed":303,"delivered":299,"remainingHomeStockFromConsumed":937,"spending":{"worker":78,"a":27,"b":52,"r":17,"k":0,"h":0,"x":0,"upgrade":80}},{"minute":20,"workers":9,"nest":2,"income":441,"spent":408,"bank":63,"military":{"S":1,"M":1,"R":1,"K":1,"H":1},"population":14,"populationCap":20,"pointsCap":500,"ownResourceConsumed":446,"delivered":441,"remainingHomeStockFromConsumed":794,"spending":{"worker":78,"a":27,"b":52,"r":17,"k":82,"h":72,"x":0,"upgrade":80}},{"minute":25,"workers":9,"nest":2,"income":564,"spent":480,"bank":114,"military":{"S":1,"M":1,"R":1,"K":1,"H":2},"population":15,"populationCap":20,"pointsCap":500,"ownResourceConsumed":572,"delivered":564,"remainingHomeStockFromConsumed":668,"spending":{"worker":78,"a":27,"b":52,"r":17,"k":82,"h":144,"x":0,"upgrade":80}},{"minute":30,"workers":9,"nest":2,"income":661,"spent":480,"bank":211,"military":{"S":1,"M":1,"R":1,"K":1,"H":2},"population":15,"populationCap":20,"pointsCap":500,"ownResourceConsumed":669,"delivered":661,"remainingHomeStockFromConsumed":571,"spending":{"worker":78,"a":27,"b":52,"r":17,"k":82,"h":144,"x":0,"upgrade":80}}],"completedAllBy":1216.04}],"bounds":{"S":{"minimum":{"tribe":"spring","seconds":456.04},"maximum":{"tribe":"spore","seconds":1067.37}},"M":{"minimum":{"tribe":"spring","seconds":606.54},"maximum":{"tribe":"spore","seconds":1342.62}},"R":{"minimum":{"tribe":"spring","seconds":748.29},"maximum":{"tribe":"spore","seconds":1590.62}},"K":{"minimum":{"tribe":"spring","seconds":914.54},"maximum":{"tribe":"spore","seconds":1873.37}},"H1":{"minimum":{"tribe":"spring","seconds":1072.79},"maximum":{"tribe":"spore","seconds":2121.37}},"H2":{"minimum":{"tribe":"spring","seconds":1216.04},"maximum":{"tribe":"spore","seconds":2369.37}}},"schedule":[{"stage":1,"startMinute":19,"endMinute":25,"intervalSeconds":180,"composition":{"S":1},"reserve":{},"retainedMilitaryCapitalP":27,"minimumReadinessMarginSeconds":72.63,"combatSeconds":[18.3,20.3]},{"stage":2,"startMinute":25,"endMinute":34,"intervalSeconds":180,"composition":{"M":1},"reserve":{"S":1},"retainedMilitaryCapitalP":79,"minimumReadinessMarginSeconds":157.38,"combatSeconds":[11.97,13.63]},{"stage":3,"startMinute":34,"endMinute":37,"intervalSeconds":180,"composition":{"K":1,"M":1,"S":1,"R":1},"reserve":{},"retainedMilitaryCapitalP":178,"minimumReadinessMarginSeconds":166.63,"combatSeconds":[10.3,11.97]},{"stage":4,"startMinute":37,"endMinute":40,"intervalSeconds":180,"composition":{"K":1,"M":1,"S":1,"R":1},"reserve":{},"retainedMilitaryCapitalP":178,"minimumReadinessMarginSeconds":346.63,"combatSeconds":[13.63,15.3]},{"stage":5,"startMinute":40,"endMinute":43,"intervalSeconds":180,"composition":{"K":1,"H":1,"M":1,"S":1,"R":1},"reserve":{},"retainedMilitaryCapitalP":250,"minimumReadinessMarginSeconds":278.63,"combatSeconds":[11.97,13.63]},{"stage":6,"startMinute":43,"endMinute":null,"intervalSeconds":180,"composition":{"K":1,"H":2,"M":1,"S":1,"R":1},"reserve":{},"retainedMilitaryCapitalP":322,"minimumReadinessMarginSeconds":210.63,"combatSeconds":[11.97,15.3]}]}
 ```
 
+## 자원 지점 매장량 20배 반영·main push 완료 · 01a1ad5a 현재 요약
+
+- 기록 ID: resource-amount-20x-push-complete-20261106-01a1ad5a. 기록·최종 확인 시각: 2026-11-06T05:28:47+09:00. 기록자·구현/검수/Git 실행 Codex /root, 자원 매장량 20배·기획서와 게임 적용 및 push 결정 사용자. 출처 현재 채팅 01a1ad5a-6af9-7001-a8af-1752c038a4d2 및 도구 출력, H:/Spawner Windows PowerShell. 원 발언 시각·턴/항목 ID·PC 식별 정보 불명.
+- 실제 완료: 2af545927584f55591b87cebc1f28da53e81624f 「자원 지점 매장량 20배로 변경」를 origin/main에 push했다. git ls-remote의 정확한 refs/heads/main과 시작 체크아웃의 main/HEAD가 같은 해시임을 읽어 확인했다. 원격 동시 솜양 아트와 기존 로컬 전투/기타 커밋 이력을 보존해 통합한 뒤 push했으며 별도 배포는 실행하지 않았다.
+- 변경 범위는 server/terrain-resources.mjs의 최종 목재/나머지 세 자원 생성량×20, Design.html 내장 모델, runtime 브라우저/두 워커 사본 및 본 채팅 메모리 두 절이다. 새로 생성하는 현행 맵에 적용되며 기존 저장 게임의 저장 잔량은 별도 마이그레이션하지 않았다. 채집 시간·일꾼 운반량·지점 좌표·지형을 유지했다.
+- 실제 검수: 동일 32×32 입력의 네 자원 651지점을 원본과 다섯 모델에서 비교하여 모든 매장량과 수량 지도 데이터 ×20, 좌표/타입/지형 동일을 확인했다. runtime 구문, 최종 4파일 UTF8NoBom/CRLF, 선별 staged diff 및 공백 검사도 통과했다. 검사기 첫 입력에 fines 필드를 빠뜨린 오류를 검사기 입력만 보완한 뒤 통과했으며 제품 코드 오류로 바꾸지 않았다.
+- 보호 결과: 기존 8개 제품/미추적 파일의 바이트는 rebase 보존본과 최종 상태에서 동일하고 관련 없는 메모리는 원문을 보존했다. index는 비어 있다. stash 및 refs/codex-backup/resource-amount-20x-20261106-01a1ad5a는 복구 근거로 남긴다. 연결 보드 없음. 근거는 $Trash/resource-amount-20x-20261106-01a1ad5a/validation.json, restoration.json, manifest.json, staged.diff, completion.json이다.
+- 앞선 시작/동결 기록의 미완료 상태는 이 실제 완료 기록으로 대체한다. 이 절은 commit/push 후에만 확인한 결과이므로 로컬에 기록하며 메모리 전용 후속 커밋이나 게시 이력 수정은 하지 않는다.
+
+## neutral-attack-role-commit-complete-20261106-01a1a0bf
+
+- 기록 시각: 2026-11-06T05:27:28+09:00. 기록·Git실행/실제readback Codex 메인, 중립 공격 역할 메모리 정리·로컬 커밋 승인 사용자. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d 및 literal 루트 $Trash/neutral-attack-role-commit-20261106/commit-result.json. 원발언 정확시각·항목 ID 미확인.
+- 실제 완료: main 로컬 커밋657828fae6ff5c16d1f1744ee326ab55383a7d5c 「중립 유닛 공격 역할과 기획서 정리」. 부모cebff919a4661d3299475b3d641f4534617f1a0c, treec218f65508e58623910bdffd55a5a628560cb401. Design.html의 승인 역할 표시19개와 아직 HEAD에 없던 관련메모리6절만2경로로 반영했다. 구현 start/complete메모리2절 및 실제중립 공격/검증/생성runtime은 선행adaa42a를 포함하는 현재main에 이미있어 중복수정/기록하지 않았다.
+- 안전한 범위 분리: 준비 중 병행 커밋으로 HEAD가 바뀐 것은 쓰기 전 guard에서 중단했고 최신HEAD로 다시 조정했다. staged표시19개 외HTML이HEAD와같고, memory기존기록 삭제0·다른주제추가0, 후보2텍스트UTF8NoBOM/CRLF 및staged diffcheck 통과를 확인한 뒤 별도인덱스와 ref CAS로 커밋했다. HEAD/tree/정확2경로 readback·다른 인덱스 항목과 실제 제품 작업바이트 보존을 검증했다. 기존 애플리케이션 검수결과를 재사용해 브라우저/빌드/테스트를 반복하지 않았다.
+- 완료 상태: 이번 요청의 메모리 정리·로컬 커밋은 완료. 푸시/배포는 수행하지 않았다. resource/health ring/기타 병행 파일과 메모리 기록은 보존했다. 이 커밋 뒤 실제 해시·결과 영수증은 로컬에 남겨 다음 관련 승인커밋으로 넘기며 별도메모리커밋/amend를 만들지 않는다. 앞선 commit-request의 실행전 상태를 실제 완료로 대체한다.
+## 자원 매장량 20배 구현·선별 커밋 준비 · 01a1ad5a
+
+- 기록 ID: resource-amount-20x-freeze-20261106-01a1ad5a. 기록 시각: 2026-11-06T05:27:12+09:00. 기록자·구현/검수/원격 통합 판단 Codex /root, 매장량 20배·기획서/게임 반영 및 push 결정 사용자. 출처 현재 채팅 01a1ad5a-6af9-7001-a8af-1752c038a4d2, H:/Spawner Windows PowerShell. 원 발언 시각·항목 ID·PC 식별 정보 불명.
+- 실제 변경은 최종 자원 생성 push 두 곳의 amount에 20을 곱하는 것이다. 목재·비옥토·자갈·이슬의 지점별 토양/습도 차이를 유지하고 네 자원 모두 기존 최종량의 정확히 20배로 한다. Design.html 내장 모델, runtime 브라우저·게임 워커·판단 워커에도 같은 두 수식을 투영했다. 새 문서 문구는 추가하지 않았다.
+- 실제 도구 검수: 동일한 32×32 지형·토양 입력으로 원본과 서버/기획서/브라우저/게임 워커/판단 워커의 실제 생성 함수를 비교했다. 다섯 모델 모두 네 자원 전체 지점의 수량이 원본×20이며 지점 좌표·타입·지형은 동일하다. 매장량 지도 데이터도 ×20이고 runtime 전체 구문을 확인했다. 이는 작은 결정적 생성 입력 검수이며 전체 플레이 결과는 주장하지 않는다.
+- 원격 동시 작업 통합: origin/main의 fe3ba35 솜양 승인 아트와 로컬 전투 병합 이력이 갈라져 --rebase-merges로 통합했다. 원래 병합의 Attribute/build/runtime/Combat 해석을 보존하고 원격 메모리 절을 함께 보존했다. refs/codex-backup/resource-amount-20x-20261106-01a1ad5a 및 stash의 보존본을 유지한다. 9개 미커밋/미추적 경로는 원본 바이트(메모리는 원격 절 추가만)로 복원 확인했다.
+- 선별 범위는 server/terrain-resources.mjs, Design.html, client/runtime.js의 이번 수식과 본 채팅 관련 메모리 2절이다. 기존 기획서 중립 수치/전투/체력링/다른 메모리 변경은 작업파일에 보존하고 이번 index에서 제외한다. 검수 근거는 $Trash/resource-amount-20x-20261106-01a1ad5a/validation.json, restoration.json, staged.diff와 manifest.json에 남긴다. 최종 형식·staged 확인과 커밋·push 및 원격 readback은 다음 마감 단계이며 아직 성공을 선기록하지 않는다.
+
+## neutral-attack-role-commit-request-20261106-01a1a0bf
+
+- 기록 시각: 2026-11-06T05:24:23+09:00. 중립 공격 역할 수정 메모리 정리·로컬 커밋 요청 및 승인 사용자, 범위 재조정·Git 판단 Codex 메인. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d의 「이번 중립 유닛 공격 역할 수정도 메모리에 정리하고 커밋해」. 원발언 정확시각·항목 ID 미확인.
+- 범위 재확인 사실: 이전 완료/재개 기록의 미커밋 상태 이후, 다른 채팅의 adaa42a ‘전투 판정 공통화와 중립종 추적 수정’에 실제 server/combat.mjs, creature-attack-role.mjs, creature-attack-role.test.mjs 및 runtime의 해당 browser/worker 역할 연결이 이미 포함돼 main으로 병합됐다. 현재 계획 HEAD bbfdb2fb9c4cac70b186ae68103bddc34b15f6f9에서 소스/작업 바이트 동일, source와 HEAD browser·worker의 역할 분기 일치를 확인했다. 이 현재 사실로 앞선 전체미커밋 요약을 대체하며 원기록은 보존한다.
+- 이번 커밋 후보: 아직 남은 Design.html 배정 의도 셀19개의 승인된 근딜/원딜/겸용 표시만 HEAD 위에 적용한 후보와 이 채팅의 중립 역할 제안/확정/구현/검수/재개/이번승인 메모리다. resource20배·health ring 등 다른 기획서/생성runtime·공유메모리 변경은 제외하고 실제 작업 바이트와 인덱스를 보존한다. 이미 커밋된 코드를 중복 수정하지 않는다.
+- 검수 근거: 기존 중립66+추가7+수동DNA1 및 기존DNA4, 실제 문서PC/mobile·runtime/Worker 결과와 변하지 않은 역할/검증 파일을 재사용한다. 커밋만을 이유로 빌드/테스트/브라우저를 다시 실행하지 않는다. 별도 후보 문서에서19개 표시 외 HTML이 HEAD와 같은지 확인했고 최종 staged 범위/체크 및 새 후보 메모리 형식만 검사한다.
+- 전용 저장소 origin https://github.com/oojjrs/Spawner 및 이 채팅의 연결 Projects0개 확인 결과 재사용. 요청은 로컬 커밋까지이며 푸시·배포는 포함하지 않는다. 아래 커밋은 아직 실행 전이다.
+## 2026-11-06 승인 솜양 V4 정수리 공격 게시 준비
+
+- 사용자 “솜양 공격 통과.” 승인에 따라 기존 cotton-sheep/runtime.webp 경로의 아트만 V4로 교체했다. 승인된 runtime PNG·8셀 원본 atlas·목/머리 영역·승인/출처 기록을 보존하고 내장 wrapper도 같은 WebP 바이트로 갱신했다. 4~7셀 진입/정수리 타격/복귀만 승인본을 사용하며 이전 V2 자료는 역사 기준으로 남긴다. 다른 종의 실패/미승인 후보와 사운드는 제외한다.
+- 초기 main c8431306에서 선별 14파일의 모든 이전 해시와 승인 출력 해시를 대조하고, 게시 직전 추가된 원격 6dbe4628까지의 탄생 미리보기·일꾼 DNA·웰컴·포자 이동·속성 편집기 통합 변경을 보존해 재배치했다. 기존 등록 크기/피벗·뒷발 고정·좌우반전·370ms 명중·240ms 타격 유지·1030ms 전체 시계 및 공유 렌더/서버는 그대로다. global V2 exporter에 로컬 승인 exporter 분기를 연결해 이후 일괄 export가 옛 솜양 아트로 되돌리지 않게 했고, 승인 PNG 해시와 무손실 RGBA 일치 검사를 포함했다.
+- 관련 28검사·번들 구문 2검사 총 30개, 임시 트리 bulk exporter 회귀·뒷발 alpha 52,000픽셀/불변셀·온라인/내장 바이트 일치·양 빌드를 통과했다. 생성된 솜양 wrapper는 전달본과 동일하며 원격의 무관한 runtime/Combat 코드 생성물은 보존한다. runtime.json 새 두 줄의 끝 공백만 정리했고 의미/애셋은 바꾸지 않았다. 실제 브라우저·기기 재생/성능은 미검증이고 배포하지 않았다.
+## 자원 지점 매장량 20배 상향 · 01a1ad5a 현재 진행
+
+- 기록 ID: resource-amount-20x-start-20261106-01a1ad5a. 기록 시각: 2026-11-06T05:19:37+09:00. 기록자·구현 판단 Codex /root, 결정·기획서/게임 반영 및 push 승인 사용자. 출처 현재 채팅 01a1ad5a-6af9-7001-a8af-1752c038a4d2, H:/Spawner Windows PowerShell. 원 발언 시각·턴/항목 ID·PC 식별 정보는 제공되지 않아 불명.
+- 사용자 요청은 자원 수량 약 20배 상향을 기획서와 게임에 적용하고 push하는 것이다. 추가 답변으로 일꾼 1회 채집량이 아니라 자원 지점의 매장량 20배임을 명시 확정했다.
+- 도구 확인: 현재 39세대 맵은 populateFormedResources가 토양·습도 기반으로 네 자원 수량을 만든다. RESOURCE_ECONOMY의 12/30/12/1은 구형 경로이며 현재 수량으로 오인한 최초 안내를 채팅에서 바로잡았다.
+- 구현 범위: server/terrain-resources.mjs의 최종 생성 매장량만 20배로 하고 Design.html 내장 맵 모델 및 client/runtime.js의 브라우저/워커 사본에 동일 투영한다. 기존 지점 배치·채집시간·운반량·문서 문구는 유지한다. 이번 요청은 새 자원 생성 규칙 수정이며 기존 저장 게임의 잔량을 별도로 마이그레이션하지 않는다.
+- 기존/동시 전투·편집기·기획서·메모리 변경은 보호하고 이번 2개 코드 변경과 관련 메모리 절만 분리 커밋한다. 전용 원격은 origin https://github.com/oojjrs/Spawner, 시작 체크아웃 H:/Spawner main이다. 연결된 GitHub Projects v2 조회 결과는 빈 목록이다. push 전 origin/main fetch·관계 확인 및 push 후 원격 readback을 수행한다. 아직 구현/검증/커밋/push 완료 전이다.
+
+## 전투 커밋 main 병합·분리 브랜치 삭제 완료 · 01a1a5fd
+
+- 기록 ID: combat-core-main-integrated-result-20261106-01a1a5fd. 기록 시각 2026-11-06T05:17:54+09:00. 기록자·실행/검증 Codex /root, main 병합·브랜치 삭제 결정 사용자. 출처 현재 채팅01a1a5fd-bf0b-70a3-abf8-267f88676072 및 실제 Git readback. H:/Spawner Windows PowerShell, 원 발언 시각·항목 ID 불명.
+- main=798ff2a52568677777c0462948705d38db809eb2, 제목 ‘전투 공통 판정 main 병합’, 부모 6dbe4628d425c2ebf4cb62a35c16d82b47df6d56 및 adaa42a245eb07a1724960a612f0553a6bbfecb5, tree0bb0cad9b7b2fdb7bd37888d32ac50183b5087f5. 양쪽 커밋을 보존한 병합이며 main의adaa42a포함·정확부모/tree/제목/index일치를검증했다. 지정분리브랜치codex/combat-core-unification-20261106은tip CAS로삭제했고참조없음을확인했다.
+- dirty/untracked 19개파일을백업했고병합직전/직후본문해시모두일치한다. staged변경없음. 새main의Attribute.html/build.mjs/dna.mjs/dna-combat-stats.mjs는이전main6dbe462와같아편집기·비용변경을보존했다. 다른작업파일은쓰지않았고index는병합tree의해당15경로기준만갱신했다. 푸시/배포없음.
+- 충돌후보5텍스트형식·구문·최종staged검사통과및20개공통모듈동기화근거를재사용한다. 이사후영수증은로컬메모리에남기며메모리단독커밋/amend를만들지않는다. 근거프로젝트임시폴더combat-main-integration-20261106의merge-plan.json,merge-staged.diff,preserved-state.json,result.json.
+
 ## 본진 자원20배 가정으로 경제·습격표 재계산 · 01a1a0e9 현재 요약
 
 - 기록 ID: home-stock-twenty-assumption-20261106-01a1a0e9. 기록·확인 시각: 2026-11-06T05:17:15+09:00. 기록자·계산범위 해석 Codex /root, 본진자원20배 변경예정 주체 사용자. 출처 현재채팅01a1a0e9-2e09-7703-a7f5-613c21744e11 최신 「본진 자원은 내가20배로올려둘테니그거기반으로생각해봐」, H:/Spawner Windows/PowerShell. 원발언 정확시각·항목 ID·딥링크 불명.
@@ -55,6 +121,26 @@
 - 계산해석: 직전경제진단과같은본진5×5사각형밖3칸(무안테나이동범위) 안의자기종족생산자원매장량을20배로한다. 사용자원문의범위가이를명시한것은아니므로이는경제재계산의명시가정이다. 자원위치·칸수·채집/운반/이동속도·가격·시작30P·무료gather일꾼3기는유지한다. 매장량20배를수입속도20배로대체하지않는다. 가까운지점고갈이늦어져평균왕복거리/혼잡도가달라지는효과는실제게임계산으로본다.
 - 병렬계산: home_stock_twenty_economy가실제맵4종족경제/기존병력보존장부,home_stock_twenty_raid_review가기존무손실전투근거를재사용해준비시간/간격과시간표재조정을담당한다. 두작업은부모와동일모델/추론강도를상속한다. 원HP330/380등34축수치와기존기획서숫자반영은이자원변경만으로바꾸지않는다.
 - 상태: 계산진행중. 초기매장량총량/군비완료시각은도구결과확인전선기록하지않는다. 기획서새본문/새표/라벨·게임자원/스폰·Git/배포는이번가정변경으로실행하지않는다. 관련결과는완료뒤본메모리와chat표에갱신한다. 기존원문을모두보존한다.
+## main 신규 편집기 커밋 보존 병합 판단 · 01a1a5fd
+
+- 기록 ID: combat-core-main-integrate-merge-plan-20261106-01a1a5fd. 기록 시각 2026-11-06T05:13:49+09:00. 기록자·동시 변경 재대조/병합 판단 Codex /root, main 병합·분리 브랜치 삭제 승인 사용자. 출처 현재 채팅01a1a5fd-bf0b-70a3-abf8-267f88676072. H:/Spawner Windows PowerShell, 원 발언 시각·항목 ID 불명.
+- 앞선 fast-forward 계획 후 다른 작업이main에6dbe462 ‘속성 제작기와 인게임 편집기 통합’를 추가했다. 이전 guard가쓰기전에이를감지해중단했으며HEAD/index/제품파일은변경하지않았다. main신규커밋과adaa42a양쪽을부모로보존하는일반병합으로계획을대체한다.
+- merge-tree에서Attribute.html/CodexWorkMemory.md/client/build.mjs/client/runtime.js4경로만겹쳤다. 편집기HTML·생성기는main구현이이미공통DNA의존성을포함하므로main내용을그대로유지한다. memory는양쪽과이번관련영수증/승인기록을중복없이보존한다. runtime는main의편집기·비용·다른모듈을유지하고자동병합된공통전투모듈만맞춘다. Combat의DNA모듈도동일합쳐진원본으로맞춘다.
+- 후보tree/구문/참조·정확차이를확인한뒤index를보존한원자적HEAD갱신으로적용한다. 작업파일본문은변경하지않고main최신tip/index/보호파일이바뀌면쓰기전다시멈춘다. main의adaa42a포함을확인한후해당분리브랜치만tip CAS로삭제한다. 아직병합/삭제완료아님.
+## 공통 편집기 통합 로컬 커밋 완료 · 01a1a129 현재 요약
+
+- 기록 ID: dna-shared-editor-local-commit-complete-20261106-01a1a129. 기록·실제 최종확인 시각: 2026-11-06T05:12:52+09:00. 기록자·조율/검수/Git실행 Codex /root, 메모리 정리·커밋 및 재개 승인 사용자. 출처 현재채팅01a1a129-d9d6-79c3-830d-58009e34c915의 최신 커밋/재개 요청과 실제 commit-result.json, H:/Spawner Windows/PowerShell. 원발언 정확 시각·항목 ID 불명.
+- 실제 완료: 6dbe4628d425c2ebf4cb62a35c16d82b47df6d56「속성 제작기와 인게임 편집기 통합」, parente2e512b832ded05372f08010a0143e928a5f880f, treed0759aa3d5068083d2feda25a33a033ba76775d8다. 공유 저장소의 별도 리베이스와 미커밋 복원 충돌이 끝날 때까지 기존 인덱스를 건드리지 않고 후보를 보존했다. 복원 뒤 핵심6파일 SHA가 기존 검사 시점과 같음을 확인하고 새 HEAD에 후보를 재기준화해 커밋했다. freeze의 커밋 전 상태를 이 실제 완료로 갱신한다.
+- 정확12경로: Attribute.html, CodexWorkMemory.md, client/attribute-editor.css, client/attribute-editor.js, client/build.mjs, client/dna-editor.mjs, client/dna-editor.test.mjs, client/game.js, client/runtime.js, server/attributes.mjs, server/dna.mjs, server/dna-combat-stats.mjs. 실제 검수한 공통 계산 모델의 직접 의존성도 관련 지원으로 포함했다. game.js는 공통 스탯 호출부만, build는 제작기 생성/전용모드만, runtime은 HEAD의 공통 모듈/두 worker 및 필수 계산 의존성만 변경했다. unrelated 전투/health-ring/기획서/다른 미커밋 기록과 작업 파일은 보존했다. 관련 기록5절을 코드와 원자적으로 커밋했다.
+- 기존18회귀·실제file제작기PC/실게임PC·390 검수·인게임CSS/마크업 불변을 바이트 동일성 근거로 재사용했다. 재기준화된 조립 후보4파일 형식OK·game/build/runtime 구문OK·최종staged12경로/공백0을 확인했다. 공통모듈 외 runtime/worker 모듈·footer는 HEAD와 동일함을 확인했다. 별도 index/HEAD CAS/binary lock으로 실행하고 실제 parent/tree/한국어제목/정확경로/HEAD·대상index 새HEAD 일치 및 비대상index 보존을 재조회했다. 11개 제품 작업 파일 SHA도 커밋 전후 동일했다.
+- 근거는 H:/Spawner/$Trash/dna-shared-editor-commit-20261106의 manifest.json, runtime-sync.json, staged-manifest.json, staged.diff, staged-check.txt, rebased-format.json, commit-result.json이다. 이번 채팅에서는 push/deploy를 실행하지 않았다. 다른 채팅의 전체 push 진행에 대한 완료나 승인까지 대신 주장하지 않는다.
+- 커밋 뒤에만 알 수 있는 결과를 이 로컬 후속 기록에 남긴다. 자동 amend/메모리 전용 추가 커밋은 하지 않고 다음 승인된 관련 커밋에 이어 포함한다. 원기록과 동시 기록 전체를 보존하고 본 메모리 형식만 마감한다.
+## 전투 커밋 main 통합·분리 브랜치 삭제 승인 · 01a1a5fd
+
+- 기록 ID: combat-core-main-integrate-start-20261106-01a1a5fd. 기록 시각 2026-11-06T05:11:09+09:00. 기록자·보존/통합 판단 Codex /root, main 통합·브랜치 삭제 결정 사용자. 출처 현재 채팅01a1a5fd-bf0b-70a3-abf8-267f88676072의 ‘main에 합치고 그 브랜치는 지워. 다른 작업은 건드리지 말고.’ H:/Spawner Windows PowerShell, 원 발언 정확 시각·항목 ID 불명.
+- 직전 분리 브랜치 판단을 사용자 교정에 따라 대체한다. main은e2e512b, 지정 브랜치는그직계자식adaa42a이며fast-forward관계다. 현재 index는staged/unmerged변경없고rebase/merge진행디렉터리도없다. 남은REBASE_HEAD표식은임의삭제하지않는다. 작업파일에는다른채팅의편집기/체력링/Design등과이번변경이함께있다.
+- main을검토된adaa42a로전진시키고변경된19경로의index기준만해당tree에맞춘다. 공유index와현재dirty/untracked파일을먼저복구가능한임시백업으로보관하고파일본문은변경하지않는다. 관련없는index항목·작업파일·untracked내용은보존한다. HEAD/index CAS와잠금으로동시변경을확인하며조건이바뀌면쓰기전중단한다.
+- main의target포함·정확tree/index·작업파일바이트보존을확인한뒤codex/combat-core-unification-20261106의tip을CAS로확인해삭제하고참조가없음을읽어확인한다. 새게임실행/테스트/빌드는필요없고기존검수/커밋검토를재사용한다. 푸시/배포·다른브랜치·다른작업의수정/정리는승인범위가아니다. 아직완료를선기록하지않는다.
 ## 중립19종34스탯 수치 반영·3일꾼 경제/습격표 취합 · 01a1a0e9 현재 요약
 
 - 기록 ID: neutral-stats-and-raid-tables-complete-20261106-01a1a0e9. 기록·실제 최종자료 확인 시각: 2026-11-06T05:09:40+09:00. 기록·취합/독립 실물검수 Codex /root, 수치계산·기획서갱신·시작3기·동시하위작업 요청 사용자. 문서실행/검수 finish_design_numbers,최종장부/전투자료취합 finish_raid_tables(현재메인모델/추론상속). 출처 현재채팅01a1a0e9-2e09-7703-a7f5-613c21744e11 및 각워커 산출물·루트도구출력. H:/Spawner Windows/PowerShell. 원발언 정확 시각·항목 ID·딥링크 불명.
@@ -110,285 +196,6 @@
 {"dnaProofs":[{"key":"movement","neutralMaximum":1.1,"value":1.13,"direction":1,"pieces":[["movement",1,0,[0,5]],["movement",1,0,[0,5]],["movement",1,1,[0,5]],["movement",1,2,[0,5]],["movement",1,3,[0,5]],["movement",1,0,[0,5]],["movement",1,5,[0,5]],["movement",1,4,[0,5]],["movement",1,3,[0,5]],["movement",1,1,[0,5]],["movement",1,2,[0,5]],["movement",1,2,[0,5]],["movement",1,3,[0,5]],["movement",1,0,[0,5]],["movement",1,5,[0,5]],["movement",1,3,[0,5]],["movement",1,3,[0,5]],["movement",1,0,[0,5]],["movement",1,4,[0,5]],["movement",1,2,[0,5]],["movement",1,3,[0,5]],["movement",1,0,[0,5]]]},{"key":"vision","neutralMaximum":8,"value":9.5,"direction":1,"pieces":[["vision",3,2,[0,1,2,4]],["health",1,5,[0,4]],["vision",3,3,[0,1,2,4]],["health",1,0,[0,4]],["vision",3,4,[0,1,2,4]],["health",1,1,[0,4]],["vision",3,5,[0,1,2,4]],["health",1,2,[0,4]],["vision",3,0,[0,1,2,4]],["health",1,3,[0,4]],["antenna",2,1,[0,1,2]]]},{"key":"combo","neutralMaximum":1.8,"value":3,"direction":1,"pieces":[["blade",2,0,[0,1,5]],["combo",3,0,[0,1,5,0]]]},{"key":"comboPower","neutralMaximum":75,"value":90,"direction":1,"pieces":[["blade",2,0,[0,1,5]],["comboPower",4,0,[0,1,3,1,2]],["comboPower",4,2,[0,1,3,1,2]]]},{"key":"critical","neutralMaximum":20,"value":32,"direction":1,"pieces":[["blade",2,0,[0,1,5]],["critical",4,0,[0,2,1,0,2]],["critical",4,2,[0,2,1,0,2]]]},{"key":"criticalPower","neutralMaximum":210,"value":229.99999999999997,"direction":1,"pieces":[["blade",2,4,[0,1,5]],["criticalPower",4,2,[0,1,3,1,0]],["criticalPower",4,1,[0,1,3,1,0]]]},{"key":"accuracy","neutralMaximum":18,"value":26.999999999999996,"direction":1,"pieces":[["blade",2,0,[0,1,5]],["accuracy",3,0,[0,1,0,2]],["accuracy",3,2,[0,1,0,2]],["accuracy",3,3,[0,1,0,2]]]},{"key":"penetration","neutralMaximum":18,"value":20,"direction":1,"pieces":[["blade",2,0,[0,1,5]],["penetration",4,0,[0,1,2,0,2]],["penetration",4,2,[0,1,2,0,2]],["penetration",4,3,[0,1,2,0,2]],["penetration",4,3,[0,1,2,0,2]],["penetration",4,0,[0,1,2,0,2]]]},{"key":"comboSpeed","neutralMaximum":0.09,"value":0.07999999999999999,"direction":-1,"pieces":[["blade",2,5,[0,1,5]],["comboSpeed",4,3,[0,1,2,3,4]],["comboSpeed",4,5,[0,1,2,3,4]]]},{"key":"focus","neutralMaximum":0.12,"value":0.08,"direction":-1,"pieces":[["blade",2,3,[0,1,5]],["focus",4,1,[0,2,0,1,5]],["focus",4,0,[0,2,0,1,5]],["focus",4,4,[0,2,0,1,5]]]},{"key":"evasion","neutralMaximum":18,"value":26.999999999999996,"direction":1,"pieces":[["evasion",3,0,[0,1,1,2]],["evasion",3,2,[0,1,1,2]],["evasion",3,3,[0,1,1,2]]]},{"key":"parry","neutralMaximum":12,"value":16,"direction":1,"pieces":[["parry",4,0,[0,1,2,0,1]]]},{"key":"block","neutralMaximum":24,"value":30,"direction":1,"pieces":[["block",3,0,[0,0,1,5]],["block",3,4,[0,0,1,5]]]},{"key":"blockPower","neutralMaximum":65,"value":66,"direction":1,"pieces":[["blockPower",4,0,[0,1,2,3,1]]]},{"key":"counter","neutralMaximum":18,"value":40,"direction":1,"pieces":[["blade",2,0,[0,1,5]],["counter",4,0,[0,1,0,4,0]]]},{"key":"counterPower","neutralMaximum":155,"value":180,"direction":1,"pieces":[["blade",2,5,[0,1,5]],["counterPower",4,0,[0,1,5,1,0]],["counterPower",4,2,[0,1,5,1,0]]]},{"key":"tenacity","neutralMaximum":36,"value":45,"direction":1,"pieces":[["tenacity",3,0,[0,1,0,1]],["tenacity",3,2,[0,1,0,1]],["tenacity",3,3,[0,1,0,1]]]},{"key":"reduction","neutralMaximum":9,"value":16,"direction":1,"pieces":[["reduction",4,0,[0,1,0,5,1]],["reduction",4,2,[0,1,0,5,1]]]},{"key":"stun","neutralMaximum":9,"value":12,"direction":1,"pieces":[["blade",2,0,[0,1,5]],["stun",4,0,[0,1,5,4,0]]]},{"key":"stunTime","neutralMaximum":0.65,"value":0.8500000000000001,"direction":1,"pieces":[["blade",2,3,[0,1,5]],["stun",4,2,[0,1,5,4,0]],["stunTime",4,0,[0,1,0,5,0]],["stunTime",4,5,[0,1,0,5,0]],["stunTime",4,4,[0,1,0,5,0]]]},{"key":"bleed","neutralMaximum":24,"value":40,"direction":1,"pieces":[["blade",2,5,[0,1,5]],["bleed",4,0,[0,1,2,1,0]],["bleed",4,1,[0,1,2,1,0]]]},{"key":"bleedPower","neutralMaximum":6,"value":9,"direction":1,"pieces":[["bleedPower",4,3,[0,1,2,3,5]],["movement",1,0,[0,5]],["bleedPower",4,4,[0,1,2,3,5]],["blade",2,1,[0,1,5]],["bleed",4,1,[0,1,2,1,0]]]},{"key":"area","neutralMaximum":1.8,"value":4,"direction":1,"pieces":[["blade",2,5,[0,1,5]],["area",4,0,[0,1,0,1,3]]]},{"key":"areaPower","neutralMaximum":45,"value":55,"direction":1,"pieces":[["blade",2,5,[0,1,5]],["area",4,0,[0,1,0,1,3]],["areaPower",4,1,[0,1,0,2,3]]]},{"key":"lifesteal","neutralMaximum":6,"value":8,"direction":1,"pieces":[["blade",2,4,[0,1,5]],["lifesteal",4,5,[0,1,0,5,4]],["lifesteal",4,2,[0,1,0,5,4]]]},{"key":"reflection","neutralMaximum":12,"value":24,"direction":1,"pieces":[["reflection",4,0,[0,1,2,1,3]],["reflection",4,2,[0,1,2,1,3]]]},{"key":"capacity","neutralMaximum":19,"value":20,"direction":1,"pieces":[["gather",1,4,[0,1]],["capacity",1,0,[0,0]],["capacity",1,2,[0,0]],["capacity",1,4,[0,0]],["capacity",1,5,[0,0]],["capacity",1,1,[0,0]],["capacity",1,1,[0,0]],["capacity",1,2,[0,0]],["capacity",1,4,[0,0]],["capacity",1,0,[0,0]],["capacity",1,1,[0,0]],["capacity",1,3,[0,0]],["capacity",1,1,[0,0]],["capacity",1,5,[0,0]],["capacity",1,5,[0,0]],["capacity",1,3,[0,0]],["capacity",1,5,[0,0]],["capacity",1,4,[0,0]],["capacity",1,2,[0,0]],["capacity",1,0,[0,0]]]},{"key":"harvestSpeed","neutralMaximum":1.9,"value":2,"direction":1,"pieces":[["gather",1,3,[0,1]],["harvestSpeed",1,2,[0,2]],["harvestSpeed",1,2,[0,2]],["harvestSpeed",1,5,[0,2]],["harvestSpeed",1,5,[0,2]],["harvestSpeed",1,5,[0,2]],["harvestSpeed",1,0,[0,2]],["harvestSpeed",1,0,[0,2]],["harvestSpeed",1,0,[0,2]],["harvestSpeed",1,3,[0,2]],["harvestSpeed",1,3,[0,2]]]},{"key":"healing","neutralMaximum":36,"value":60,"direction":1,"pieces":[["healing",3,0,[0,2,1,3]],["healing",3,1,[0,2,1,3]]]},{"key":"health","neutralMaximum":380,"value":390,"pieces":[["health",1,2,[0,4]],["health",1,2,[0,4]],["health",1,2,[0,4]],["health",1,5,[0,4]],["health",1,5,[0,4]],["health",1,5,[0,4]],["health",1,5,[0,4]],["health",1,3,[0,4]],["health",1,3,[0,4]],["health",1,3,[0,4]],["health",1,3,[0,4]],["health",1,3,[0,4]],["health",1,1,[0,4]],["health",1,1,[0,4]],["health",1,1,[0,4]],["health",1,1,[0,4]],["health",1,1,[0,4]],["health",1,0,[0,4]],["health",1,0,[0,4]],["health",1,0,[0,4]],["health",1,0,[0,4]],["health",1,5,[0,4]],["health",1,5,[0,4]],["health",1,5,[0,4]],["health",1,5,[0,4]],["health",1,4,[0,4]],["health",1,4,[0,4]],["health",1,4,[0,4]],["health",1,4,[0,4]],["health",1,3,[0,4]],["health",1,3,[0,4]],["health",1,3,[0,4]],["health",1,3,[0,4]],["health",1,3,[0,4]],["health",1,0,[0,4]],["health",1,0,[0,4]],["health",1,0,[0,4]],["health",1,0,[0,4]]]},{"key":"power","neutralMaximum":53,"value":54,"pieces":[["blade",2,3,[0,1,5]],["power",2,1,[0,0,0]],["power",2,0,[0,0,0]],["power",2,4,[0,0,0]],["power",2,0,[0,0,0]],["power",2,4,[0,0,0]],["power",2,2,[0,0,0]],["power",2,2,[0,0,0]],["power",2,3,[0,0,0]],["power",2,4,[0,0,0]],["power",2,0,[0,0,0]],["power",2,4,[0,0,0]],["power",2,0,[0,0,0]],["power",2,0,[0,0,0]]]},{"key":"speed","neutralMaximum":1.12,"value":1.2,"pieces":[["blade",2,5,[0,1,5]],["speed",2,3,[0,0,1]],["speed",2,2,[0,0,1]],["speed",2,1,[0,0,1]],["speed",2,4,[0,0,1]],["speed",2,5,[0,0,1]],["speed",2,5,[0,0,1]],["speed",2,1,[0,0,1]]]},{"key":"armor","neutralMaximum":44,"value":45,"pieces":[["armor",3,2,[0,1,2,0]],["armor",3,3,[0,1,2,0]],["armor",3,5,[0,1,2,0]],["armor",3,4,[0,1,2,0]],["armor",3,0,[0,1,2,0]],["armor",3,5,[0,1,2,0]],["armor",3,1,[0,1,2,0]],["armor",3,0,[0,1,2,0]],["armor",3,2,[0,1,2,0]],["armor",3,1,[0,1,2,0]],["armor",3,3,[0,1,2,0]],["armor",3,5,[0,1,2,0]],["armor",3,4,[0,1,2,0]],["armor",3,3,[0,1,2,0]],["armor",3,2,[0,1,2,0]]]},{"key":"regeneration","neutralMaximum":1.9,"value":4,"pieces":[["regeneration",4,0,[0,1,0,1,2]],["regeneration",4,2,[0,1,0,1,2]],["regeneration",4,3,[0,1,0,1,2]],["regeneration",4,4,[0,1,0,1,2]],["regeneration",4,5,[0,1,0,1,2]],["regeneration",4,0,[0,1,0,1,2]],["regeneration",4,1,[0,1,0,1,2]],["regeneration",4,3,[0,1,0,1,2]],["regeneration",4,3,[0,1,0,1,2]],["regeneration",4,0,[0,1,0,1,2]]]}],"proofSourceHashes":{"Design.html":"2960701219a79ae4fc781c81ad2c893bb203bef368b847658bdc2700c23f430c","server/dna.mjs":"12f43d3178bd0be5bee2ca434713ffe65ce1620e83fa7015a088e027dbd5a3ad","server/dna-unit.mjs":"86934849e3591549feec589b9489a0e2ba252cb9c846de13358ada1a8837beb5","server/dna-combat-stats.mjs":"bcbf944664844d0035a8d58a1e9e3d2194083470e1ff493961ea3427f53f4281"},"coreSourceHashes":{"server/dna.mjs":"12f43d3178bd0be5bee2ca434713ffe65ce1620e83fa7015a088e027dbd5a3ad","server/dna-unit.mjs":"86934849e3591549feec589b9489a0e2ba252cb9c846de13358ada1a8837beb5","server/dna-combat-stats.mjs":"bcbf944664844d0035a8d58a1e9e3d2194083470e1ff493961ea3427f53f4281"}}
 ```
 - 상세근거: literal $Trash/final-raid-tables-20261106/final-tables.json,economy-k-policy.json,$Trash/three-workers-economy-20261105/summary.json,$Trash/design-stat-integration-20261105/projection-data.json,core-five-witnesses.json.
-## 중립 스탯 표 반영·3일꾼 습격표 재개 · 01a1a0e9 현재 요약
-
-- 기록 ID: neutral-stats-economy-raid-resume-20261106-01a1a0e9. 기록·현재 확인 시각: 2026-11-06T04:54:40+09:00. 기록·취합 Codex /root, 재개 요청 사용자. 출처 현재채팅01a1a0e9-2e09-7703-a7f5-613c21744e11 최신 「재개하자」 및 직전 수치/기획서/병렬 요청. H:/Spawner Windows/PowerShell. 원발언 정확 시각·항목 ID·딥링크 불명.
-- 사용자 확정 재개 범위: 시작 일꾼3기 기준 경제·시간대별 습격 종류/레벨/수/방어표, 중립19종 나머지34스탯 초안 및 기획서 수치 갱신. 시작 일꾼3기는 확정됐으며 gather기관1개·시작30P는 이번 계산 가정이다. 직전 tentative2/3기 기록에서3기 결정을 현재 요청으로 연결한다.
-- 문서 범위: 새제목3개·경제/습격본문 추가 질문에 사용자는 「뭔데 이게. 왜 추가하는건데?」라고 되물었고 해당 새문구의 허가는 없었다. 부모가 새블록을 넣지 않고 기존중립표 수치만갱신하며 경제/습격표는chat에 정리한다고 명시했다. 이 좁힌 범위를 유지하며 새목차/제목/설명·라벨·툴팁을 추가하지 않는다. 숫자 초안 계산·기존셀 반영은 사용자가 직접 위임한 내용으로 취급한다.
-- 직전 계산 상태 확인: 실제3기gather 초기화의seed13경제는본진3칸 자원고갈로 콩167/포자65/몽돌91/샘방울62P에서정체. 근접자원3×300P 실험은 별도조건이며현재맵보장값이 아니다. 칼날/분비2등급, 둥지80/400/2000(몽돌25%할인), S27/M52/H72/R17의 현재카탈로그값을사용한다. 구형1레벨23P군사기준은 대체됐다.
-- 병렬 진행: 직전 사용자의 동시 하위에이전트 요청에 따라 finish_design_numbers가기존표숫자반영/검수,finish_raid_tables가누적K82전열·기존병력보존경제표통합을담당한다. 부모는범위보존·결과통합/독립검수를한다. 어제old agents는live목록에없어새main동일모델/추론상속작업으로연결했다.
-- 수치 초안 판단: 기존HP19티어590은currentDNA모양에서확인된390HP배치보다낮음을증명하지못했다. 안전한새초안은HP18티어330/19티어380으로하고나머지HP1..17·33축은유지해최고380<유효DNA390을맞춘다. 원HP1200안/원티어입력은보존한다. 이는Codex의초안계산판단이며 사용자최종밸런스확정이나게임수치적용이아니다.
-- 미완료: Design수치반영실행/렌더검수와K82포함누적경제표최종취합은아직대기. 기존역할근딜/원딜/겸용과모든병행바이트를보호한다. 커밋/푸시/배포는이번재개범위에추가되지않았다.
-## 시작 일꾼 축소·시간별 습격 전력 단계화 방향 · 01a1a0e9 현재 요약
-
-- 기록 ID: starting-workers-and-raid-progression-20261105-01a1a0e9. 기록·현재 확인 시각: 2026-11-05T21:24:37+09:00. 기록자 Codex /root, 시작 개체 축소 방향 및 첫 딱정벌레 고정 출정 재검토 주체 사용자. 출처 현재 채팅01a1a0e9-2e09-7703-a7f5-613c21744e11, H:/Spawner Windows/PowerShell. 원발언 정확 시각·항목 ID·딥링크 불명.
-- 사용자 발언1: 「시작 개체는 줄이긴 할 거야. 아주 간단한 채집 속성을 가진 일꾼 두 마리나 세 마리로 줄일까 하거든?」. 시작 개체 축소 방향은 유효하지만2기/3기 선택, 정확한 DNA 구성·스탯·시작30P 유지 여부까지 확정한 것은 아니다. 기존 구형 시작 개체3~4기를 사용한 경제 표본을 새 시작 조건의 수입으로 재사용하지 않는다.
-- 사용자 발언2: 「그러면 습격 유닛의 레벨도 시간이 지날수록 강해지는 형태로 좀 바꿔야겠네 처음에 무조건 딱정벌레 보낼 게 아니라」. 시간 경과에 따라 습격 전력이 강해지고 첫 습격을 무조건 가시등 딱정벌레로 고정하지 않는 방향을 반영한다. 특정 대체 종·정찰형 이름/외형, 첫 출정 시각·구간 길이·등장 수·레벨을 사용자가 확정한 것은 아니다.
-- Codex 제안: 초기에는1레벨 저가 전투형1기가 대응할 정도의 약한 정찰 단계, 성장기에는저등급1~2기, 중반에는정규 가시등 딱정벌레, 이후에는일반 개체의레벨·조합·수를 높이는 흐름을 검토한다. 동시에 종·레벨·수·빈도를 전부 올리기보다 한 번의 단계 변화 폭을 제한하고 합산 전력으로 비교한다. 이는 새 기획 제안이며 실제 출정표/게임 변경 완료가 아니다.
-- 시작 개체 수에 대한 Codex 추천: 첫 밸런스 기준은 동일한 기초 채집 일꾼3기가 더 안정적이다.2기일 때1기 손실은 개체 수50%감소,3기일 때는33%감소다. 실제 수입이 정확히 이 비율로 변한다거나3기 채택이 사용자 결정이라는 뜻은 아니다.2기안은 별도 경제 비교 후보로 보존한다.
-- 구분: 종합 티어(중립19종 상대 순서), 각 종의 개체 레벨, 전체 습격 전력을 구분한다. 기존19종·원종/유니크의34축 서열은 유지하며 초기 경제에 맞춘다는 이유로 정규 딱정벌레만 임의 약화해 순서를 깨지 않는다. 약한 초기 출정 풀과 이후 정규 출정 풀을 조정하는 방식으로 검토한다.
-- 다음 근거: 분 단위 단계 경계는 새 기초 채집 DNA·시작2/3기·시작 자원·둥지/추가 일꾼/군사 생산비를 포함한 경제로 다시 정해야 한다. 직전 기록의 정찰형HP20/공격1/공속0.5/방어0과23P 방어형1기 비교는 후보 수치로 보존하며 최종 채택으로 처리하지 않는다. 현재는 방향/제안 기록만 갱신했고 시작 스폰·습격·Design·수치 도구·Git/배포는 변경하지 않았다. 기존 병행 원문을 보존한다.
-## 첫 딱정벌레 침공의 5분 경제 계산·약한 정찰형 제안 · 01a1a0e9 현재 요약
-
-- 기록 ID: first-raid-economy-and-scout-proposal-20261105-01a1a0e9. 기록·실제 확인 시각: 2026-11-05T21:19:41+09:00. 기록자·계산/검토 Codex /root, 비용 포함 계산 및 약화/교체 검토 요청 주체 사용자. 출처 현재채팅01a1a0e9-2e09-7703-a7f5-613c21744e11의 「근데 5분 안에 2레벨 전투 유닛 3기 뽑을 자원은 나와? 둥지 업그레이드랑 일꾼 생산비까지 넣어서 계산해봐. 딱정벌레 개쎈데 고민이네 좀 더 약해야할 것 같은데, 아니면 습격가는 유닛을 바꿔도 좋다」. H:/Spawner Windows/PowerShell. 원발언 정확 시각·항목 ID·딥링크 불명.
-- 판정: 이번 실제 정책·표본에서는 5분 내2레벨전투형3기 준비가 안 됐다. 이를 모든 최적 플레이의 불가능성 증명으로 확대하지 않는다. 첫 침공의 필수 방어 전력을2레벨3기로 삼았던 직전 Codex 제안은 경제 검증 부족으로 재검토한다. 현재 실제 시뮬레이션의 비용·수입을 근거로 더 낮은 초기 방어 예산을 권한다.
-- 비용 정정: 현재 conquest-pacing.mjs의nestCosts는[80,400,2000,null]이며 nestUpgradeCost(1)는 일반80P/몽돌60P이다. 이전에 관측·사용한20P 기준과 이번 초반 commentary의164P/236P/206P 계산은 현재 소스 기준으로 대체한다. 누가 언제 이 파일을 바꿨는지는 조사하지 않았으므로 변경 주체/원인을 추정하지 않는다.
-- 현재 시작 조건: 플레이어 host에는30P 지급, 종족별 시작3~4기는 무료이다(bean/spore4,pebble/spring3). 이 무료 개체를 일꾼 생산비에 다시 넣지 않는다. 추가 DNA일꾼은 채집1+이동1(유효1레벨배치),가격18P=DNA15+탄생3. 전투형은 칼날1+공격강화1+공속강화1+체력4(유효2레벨배치),HP50/공격6/공속0.6/방어0,가격48P=DNA45+탄생3. 종족별 현 DNA 탄생비는 같다.
-
-### 목표 예산(무료 시작 개체 외의 추가 생산)
-
-| 추가 DNA일꾼 | 일꾼 비용 | 둥지1→2 | 전투형3기 | 총지출 | 시작30P 제외 필요수입 |
-| --- | --- | --- | --- | --- | --- |
-| 0기 | 0P | 80P | 144P | 224P | 194P |
-| 2기 | 36P | 80P | 144P | 260P | 230P |
-| 4기 | 72P | 80P | 144P | 296P | 266P |
-
-- 몽돌은 각 행에서20P를 뺀다(4기 확장 시 총276P/필요수입246P). 위 예산은 일반 생산비·둥지 비용이며 추가 장비/재료/사망 보충비는 없다.
-
-### 실제 경제 계산 방법과 결과
-
-- 실제 generateWorld(version39)·createGame·game.command·prepare/tick을 사용했다. 맵seed13/0/413, 각4종족, 300초,0.25초 간격. 플레이어host로30P를 실제 지급하고 시작 무료 개체·이동/채집/납품·출생 대기·인구한도·포인트 저장한도를 유지했다. 매장량은 소모되며 실제 생산/업그레이드 command로 비용을 차감했다. 누적납품을 현재잔고로 착각하지 않도록 모든28경우에 시작30+납품수입-실제지출=마지막잔고를 대조했다.
-- 대표 정책은 무료 시작 일꾼에 추가 DNA일꾼4기를 먼저 늘리고,1→2업그레이드,전투형3기를 순서대로 저축·생산하는 것이다. 모든 경우에4기 확장을 완료했다고 가정하지 않는다. 부족하면 실제로 만들 수 있는 만큼만 생산했다. 초기 적/다른군체/전투 손실은 제외했으므로 외부 위협 때문에 수입이 깎인 결과가 아니다. 병력 생산이 가능한 경우 출생 완료가300초 이전인지도 판정했다.
-- 이 정책12경우 모두 추가 전투형0기, 둥지1레벨이었다. 수입/잔고 범위와 추가 일꾼 실제 수:
-
-| 종족 | 5분 누적납품수입 | 추가 일꾼 실제 생산 | 최종잔고 | 2레벨 전투형 준비 |
-| --- | --- | --- | --- | --- |
-| 새싹콩 | 44~56P | 4~4기 | 2~14P | 0기 |
-| 포자 | 18~32P | 2~3기 | 8~16P | 0기 |
-| 몽돌 | 0~54P | 1~4기 | 5~12P | 0기 |
-| 샘방울 | 22~34P | 2~3기 | 3~16P | 0기 |
-
-- seed13에서는 추가일꾼0/2/4기의 DNA정책과 구형strength일꾼4기 정책도 비교했다(16경우). 추가일꾼을 전혀 만들지 않고 모은 경우 수입은 종족별22/4/0/12P였다. 값싼 구형 일꾼4기(종족별5/3/7/5P)를 쓰는 비교에서는 수입48/53/16/117P였으며, 샘방울만172.25초에2레벨이 됐지만300초 잔고47P로 전투형48P도 출생 완료하지 못했다. 이 구형 정책은 현 DNA 생산비18P를3~7P로 바꿔 쓴 결과가 아니라 별도 비교이다.
-- 한계: 3개 맵·수동생산 정책의 표본으로 최적 설계/최적 생산 순서·모든 종족 전체 분포를 탐색한 것은 아니다. 시작 자원/무료 개체는 현재 구형 스탯이므로 미래 모든 개체를 DNA로 통일한 경제·전투와 같다고 주장하지 않는다. 이번은 새 DNA전투형3기를 별도 생산할 수 있는지의 장부 계산이며, 무료 시작 개체까지 동원한 실제 침공 방어의 패배 판정은 아니다. 수입0인 표본도 있었으므로 초반 자원 접근/일꾼 투자 회수 역시 검토가 남는다.
-
-### 첫 습격 약화·교체 후보(새 Codex 제안, 미확정)
-
-- 정규 가시등 딱정벌레의19종 내 위상·원종/우두머리 관계를 크게 낮추기보다 첫 습격에 별도의 약한 정찰 개체를 쓰고, 정규 개체는2레벨 전투대를 마련할 경제 단계 이후로 미루는 쪽을 추천한다. 이름/외형/종족은 아직 확정하지 않았고 새 자산이나 실제 스폰 코드를 만들지 않았다.2레벨 도달만으로 즉시 정규 습격을 해금하면 남은 군비144P가 없는 문제는 남으므로 경제적 준비를 함께 봐야 한다.
-- 비교 아군은 유효1레벨 칼날1+체력2,HP30/공격2/공속0.5/방어0,총탄생비23P이다. 실제 server/combat.mjs로seed1790~1809의20경우를 같은칸·이탈/증원/외부치유 없음·새29효과 비활성 조건에서 계산했다. 실제 월드 승률 보장은 아니다.
-
-| 첫 습격 후보 | HP/공격/공속/방어 | 방어에 쓴 아군 | 총생산비 | 이번20회 처치시간 | 손실 |
-| --- | --- | --- | --- | --- | --- |
-| 별도 약한 정찰형 | 20/1/0.5/0 | 1레벨형1기 | 23P | 18.3~20.3초 | 0기 |
-| 기존 딱정벌레 대폭 약화형 | 40/2/0.5/8 | 1레벨형2기 | 46P | 20.3~22.3초 | 0기 |
-
-- 두 후보 모두20/20처치했다. 정찰형 안은 업그레이드 없이 시작30P 안에서 방어1기 비용23P를 먼저 확보할 수 있다. 여기에18P 일꾼4기까지 동시에 준비하려면 총95P이므로5분에 모두 보장된다고 말하지 않는다. 초기 경제와 방어의 충돌을 줄이는 안이며, 일꾼 확대·맵 간 수입차 자체를 해결한 결과는 아니다.
-- 현재 상태: 계산·후보 제시만 완료. 첫 습격 교체/약화 중 어느 안을 사용자가 채택한 것은 아니며 서버·Design·NeutralStats의 실제 수치/습격 로직은 변경하지 않았다. 기존29축 초안과 계보 규칙은 유지하며 첫 침공을 고정시키는 결정을 기다려 함께 조정한다. 새 커밋/푸시/배포 없음.
-
-### 재개용 표본 및 출처
-
-```json
-{"seeds":[13,0,413],"targetRows":[{"seed":13,"tribe":"bean","startingPoints":30,"freeFounders":4,"workerCost":18,"armyCost":48,"income":49,"workers":{"count":4,"spent":72},"upgradeSpent":0,"points":7,"nestLevel":1,"readyArmy":0,"requiredIncome":266},{"seed":13,"tribe":"spore","startingPoints":30,"freeFounders":4,"workerCost":18,"armyCost":48,"income":18,"workers":{"count":2,"spent":36},"upgradeSpent":0,"points":12,"nestLevel":1,"readyArmy":0,"requiredIncome":266},{"seed":13,"tribe":"pebble","startingPoints":30,"freeFounders":3,"workerCost":18,"armyCost":48,"income":0,"workers":{"count":1,"spent":18},"upgradeSpent":0,"points":12,"nestLevel":1,"readyArmy":0,"requiredIncome":246},{"seed":13,"tribe":"spring","startingPoints":30,"freeFounders":3,"workerCost":18,"armyCost":48,"income":34,"workers":{"count":3,"spent":54},"upgradeSpent":0,"points":10,"nestLevel":1,"readyArmy":0,"requiredIncome":266},{"seed":0,"tribe":"bean","startingPoints":30,"freeFounders":4,"workerCost":18,"armyCost":48,"income":44,"workers":{"count":4,"spent":72},"upgradeSpent":0,"points":2,"nestLevel":1,"readyArmy":0,"requiredIncome":266},{"seed":0,"tribe":"spore","startingPoints":30,"freeFounders":4,"workerCost":18,"armyCost":48,"income":22,"workers":{"count":2,"spent":36},"upgradeSpent":0,"points":16,"nestLevel":1,"readyArmy":0,"requiredIncome":266},{"seed":0,"tribe":"pebble","startingPoints":30,"freeFounders":3,"workerCost":18,"armyCost":48,"income":54,"workers":{"count":4,"spent":72},"upgradeSpent":0,"points":12,"nestLevel":1,"readyArmy":0,"requiredIncome":246},{"seed":0,"tribe":"spring","startingPoints":30,"freeFounders":3,"workerCost":18,"armyCost":48,"income":22,"workers":{"count":2,"spent":36},"upgradeSpent":0,"points":16,"nestLevel":1,"readyArmy":0,"requiredIncome":266},{"seed":413,"tribe":"bean","startingPoints":30,"freeFounders":4,"workerCost":18,"armyCost":48,"income":56,"workers":{"count":4,"spent":72},"upgradeSpent":0,"points":14,"nestLevel":1,"readyArmy":0,"requiredIncome":266},{"seed":413,"tribe":"spore","startingPoints":30,"freeFounders":4,"workerCost":18,"armyCost":48,"income":32,"workers":{"count":3,"spent":54},"upgradeSpent":0,"points":8,"nestLevel":1,"readyArmy":0,"requiredIncome":266},{"seed":413,"tribe":"pebble","startingPoints":30,"freeFounders":3,"workerCost":18,"armyCost":48,"income":47,"workers":{"count":4,"spent":72},"upgradeSpent":0,"points":5,"nestLevel":1,"readyArmy":0,"requiredIncome":246},{"seed":413,"tribe":"spring","startingPoints":30,"freeFounders":3,"workerCost":18,"armyCost":48,"income":27,"workers":{"count":3,"spent":54},"upgradeSpent":0,"points":3,"nestLevel":1,"readyArmy":0,"requiredIncome":266}],"sourceHashesObservedAfterRuns":{"server/game.mjs":"acb705a927f043ece9a9f606dc2afa87f7ad2668ce3b97e8e148978754714bd1","server/tribe-start.mjs":"61b13cd9d36be83480f30e0b0a1b9abe1759dbfe8b43945e907c533053ed7dcf","server/nests.mjs":"2106c3e334d0f3a3f84c4a77ff6abae9ee4a8de9ac48888859676968e301155f","server/conquest-pacing.mjs":"978caecf60cef2db127896e079276e18a294f418732ee8c135a86941394ba362","server/attributes.mjs":"093d5a42094ba6c7f463ff03ce2f69be99981a82b5a4e6488c4728e89e4c4c3c","server/dna.mjs":"cbbe6aafa3b8d269825d49896f642a8fe444844895f53f95dcbad1a6fea7525e","server/dna-unit.mjs":"a6851f865ccd71afca645518bf021cbeba4fe643c6a37b4e9c4b517017880885","server/resources.mjs":"f63c497d904d46785f4fbdd6e14be8053da5e09ff1e5860f2dd900d94bd75fdd","server/colony-supply.mjs":"f2f4bc1b2adcbe6fb18ec3b7ae8a05d22c3dd800e695455d5dc97ee3058c37ac","server/combat.mjs":"04b9d7bdc5a7aac811c9d9cb820a66b7f9de82a2b6de8fbde6419f340ec30fc0","server/combat-stats.mjs":"29c0c8357125617b30fa10950e69f61136479035817411ac22030ef5089d0d21","server/world.mjs":"766c62c68daeb0f85ec7e02ce2137815ba8a583fcc7d88078a16b548fba90a6f"}}
-```
-- 임시 재현 자료: literal $Trash/first-raid-economy-20261105/economy.mjs,results-13.json,results-0-413.json,combat-options.mjs,combat-options.json,summary.json. snapshot은summary에28경우 전체 장부·분당 경과·생산시각을 보존한다.
-- 기록 보존: 기록 직전 메모리 맨 앞에 병행 작업의 기존 merge marker가 관측됐다. 이번 작업은 그것을 해소하거나 원문을 바꾸지 않고 전체 기존 바이트 앞에 본 기록만 추가한다. 해당 충돌을 해결했다고 주장하지 않는다.
-
-## 나머지 29스탯 수치 초안·첫 딱정벌레 침공 기준 검토 · 01a1a0e9 현재 요약
-
-- 기록 ID: neutral-all-stat-draft-and-first-raid-20261105-01a1a0e9. 기록·실제 확인 시각: 2026-11-05T20:59:27+09:00. 기록자·수치 제안/계산 Codex /root, 나머지 스탯 수치 초안 요청 및 침공 필요 전력 질문 주체 사용자. 출처 현재 채팅01a1a0e9-2e09-7703-a7f5-613c21744e11의 「그럼 나머지 스탯까지 니가 수치 초안 잡아봐.」 및 진행 중 「근데 중요한 게 있다. 가시등 딱정벌레가 쳐들어오면, 이거 잡을 때, 얼마나 필요하지?」. H:/Spawner Windows/PowerShell. 원발언 정확 시각·항목 ID·딥링크 불명.
-- 현재 산출물: 기존5축을 유지한 나머지29축의 수치 곡선 및 중립19종 전체34스탯 배정 초안을 아래에 보존한다. 전부 Codex 제안이며 사용자 확정·게임 반영이 아니다. 기존 HP1200 초안과 클라우드 HP500 기준 제안은 별개로 보존한다. 후자를 사용자가 최종 채택한 것으로 처리하지 않는다. 기존 NeutralStats의5축 편집기·Design 티어·서버 실제 수치는 변경하지 않았다.
-- 실제 계산 근거: 기존 Design의34축 티어 입력(audit.json의design.tiers)과6계보를 재사용해19종 배정. 34축×15쌍=510쌍의 원종/유니크 상대 서열 역전0. 나머지29축의 최고 효율은 각각 현재 level4/native shape의 유효 DNA 배치가 더 강함을 직접 확인했다. 이는 실제 도달 가능한 하한 증거이며 최대 배치의 최적해를 구했다는 뜻이 아니다. 기존HP1200안의 기본5축 DNA 상한 문제를 이29축 검사가 해결한 것은 아니다.
-- 의미 주의: 높은 티어일수록 추가타 간격·공격 준비 시간은 짧고 나머지는 큰 값이 유리하다. 회복력은 받는 회복 증가이며 주는 치유 출력이 아니다. 확률·효율과 기능 개방을 구분한다. 29값을 배정했다는 이유만으로 모든 종에게 기절·흡혈·광역 등의 행동을 자동 부여하지 않는다. 종별 효과 활성 여부는 후속 검토 사항이다.
-- 연격·확산 초안 해석: 각각 평균 추가타/평균 추가 대상(0~1.8)이다. 정수 부분은 보장하고 소수 부분은 추가1회/대상의 확률로 쓰는 방식은 Codex의 새 제안이며 미확정이다. 현 엔진의 정수 hits/area에 그대로 대입하면 다른 동작이 되므로 직접 적용하지 않는다. 이 두 축은19단계 효율을 유지하면서 최고 중립 효과를 DNA보다 낮추기 위한 후보이고, 구현 전 규칙 검토가 필요하다.
-- 첫 침공을 우선 밸런스 기준으로 검토한다. 기존 제안표의 딱정벌레2기는 각4레벨HP500/공격6/공속0.5 기준이므로 초반 방어 권장 인원으로 사용할 수 없다. 지금 확인한 첫 출정은>=300초, 한 번에1마리, 초기 출정 간격120~150초·동시 출정 상한2마리다(raids.mjs/conquest-pacing.mjs/raid-pressure.mjs). 실제 도착 시각은 경로·압력·지연에 따라 다르다. 초반에 만들 수 있는 DNA 설계와 생산비로 먼저 방어 난이도를 맞추는 것이 Codex 제안이다.
-
-### 첫 침공 전력의 이번 실제 비교
-
-- 비교한 제안 딱정벌레: HP120·공격8·공속0.72·방어28. 현재 게임의 실제 딱정벌레는 HP100·공격23.2·공속0.8·방어20.8로 별개다. 새29효과는 아직 넣지 않았다.
-- 실제 server/combat.mjs를 사용한 계산 실험: 같은칸·전원 같은편·이탈 가능한 지형 없음·외부 치유/증원/둥지피해 없음, 난수seed1790~1809의20개 경우. 실제 월드 전체 방어 성공률이 아니다. 유효 실제 DNA 배치를 level/shape/price로 검증한 뒤 전투 시 사망에 따른 딜 감소까지 포함했다. 각20회 성공도 임의 상황의 무손실/100% 보장이 아니다.
-- 가격 구분: ATTRIBUTE_DNA.price는 설계 가격, 실제 birthCost는3+DNA가격이다. 아래 총생산비에는 이 기본3P를 포함하고 둥지 업그레이드·기존 일꾼·기회비용은 포함하지 않는다.
-
-| 유닛 배치 | 1기 스탯 | 1기 생산비 | 제안 딱정벌레1마리 비교 | 총생산비 | 이번20회 결과 |
-| --- | --- | --- | --- | --- | --- |
-| 1레벨 칼날1+체력4 | HP50/공격2/공속0.5/방어0 | 33P | 6기 | 198P | 20/20처치,30.3~34.3초,3기생존 |
-| 2레벨 칼날1+공격강화1+공속강화1+체력4 | HP50/공격6/공속0.6/방어0 | 48P | 3기 | 144P | 20/20처치,15.3~16.97초,2기생존 |
-| 같은2레벨 공격 구성+체력8 | HP90/공격6/공속0.6/방어0 | 68P | 2기 | 136P | 20/20처치,23.63~26.97초,1기생존 |
-| 같은2레벨 공격 구성+체력8 | HP90/공격6/공속0.6/방어0 | 68P | 3기 | 204P | 20/20처치,13.63초,3기생존 |
-
-- 현재 게임값을 그대로 상대하면 HP50/공격6형4기는14/20만 처치했고5기는20/20처치(6.97~8.63초,2~3기생존)였다. HP90/공격6형3기는5/20처치,4기는20/20처치(8.63초,3기생존)였다. 첫 침공의 현 게임값·새 제안값·상급 기준표의2기를 섞지 않는다.
-- Codex 추천 출발점: 제안 딱정벌레 한마리에 저비용2레벨 전투형3기 정도를 기본 방어 규모로 놓고, 준비가 부족한1레벨은6기 정도/손실 위험으로 구분한다. 새29스탯의 반사·방어·추가타 등을 실제로 활성화하면 필요 인원/손실/시간이 바뀌므로 위 결과를 그대로 최종 사냥 권장으로 확정하지 않는다. 초반 경제가 그 생산비를 감당하는지는 별도 검토가 남았다.
-
-### 나머지29축 수치 곡선 초안
-
-- 티어t=1..19에서 x=(t-1)/18, 값=시작+(끝-시작)*x^p, 소수3자리로 반올림한다. 운반량만 정수. 각 축에 서로 다른 매개변수를 사용한다. 1→19는 티어이며 시간2축은 감소한다.
-
-| 스탯 키 | 이름 | 단위 | 1티어 | 19티어 | p |
-| --- | --- | --- | --- | --- | --- |
-| movement | 이동 | 칸/초 | 0.3 | 1.1 | 0.65 |
-| vision | 시야 | 칸 | 2 | 8 | 0.7 |
-| combo | 연격 | 평균 추가타 | 0 | 1.8 | 1.6 |
-| comboPower | 연격 위력 | 기본타 % | 30 | 75 | 0.8 |
-| critical | 치명 확률 | % | 1 | 20 | 1.45 |
-| criticalPower | 치명 위력 | 기본타 % | 135 | 210 | 1.3 |
-| accuracy | 명중 보정 | %p | 0 | 18 | 1 |
-| penetration | 방어 관통 | 방어 수치 | 0 | 18 | 1.8 |
-| comboSpeed | 추가타 간격 | 초 | 0.24 | 0.09 | 0.9 |
-| focus | 공격 준비 | 초 | 0.42 | 0.12 | 0.85 |
-| evasion | 회피 | % | 0 | 18 | 1.25 |
-| parry | 받아넘기기 | % | 0 | 12 | 1.7 |
-| block | 방어 발동 | % | 0 | 24 | 1.4 |
-| blockPower | 방어 위력 | 차단 % | 25 | 65 | 1.1 |
-| counter | 반격 | 방어 성공 시 % | 0 | 18 | 1.9 |
-| counterPower | 반격 위력 | 기본타 % | 80 | 155 | 1.2 |
-| tenacity | 강인함 | 제어시간 감소 % | 0 | 36 | 0.95 |
-| reduction | 피해 감소 | % | 0 | 9 | 2 |
-| stun | 기절 확률 | % | 0 | 9 | 1.85 |
-| stunTime | 기절 시간 | 초 | 0.2 | 0.65 | 0.75 |
-| bleed | 출혈 확률 | % | 0 | 24 | 1.65 |
-| bleedPower | 출혈 위력 | HP/초 | 1 | 6 | 1.05 |
-| area | 확산 | 평균 추가 대상 | 0 | 1.8 | 2.1 |
-| areaPower | 확산 위력 | 원 타격 % | 15 | 45 | 1.15 |
-| lifesteal | 흡혈 | 실제 피해 % | 0 | 6 | 2.05 |
-| reflection | 반사 | 받은 피해 % | 0 | 12 | 1.95 |
-| capacity | 운반량 | 개 | 1 | 19 | 1 |
-| harvestSpeed | 채집 속도 | 기본 대비 배율 | 1 | 1.9 | 0.6 |
-| healing | 회복력 | 받는 회복 증가 % | 0 | 36 | 1.55 |
-
-### 19종 전체34스탯 초안(기존 HP1200 기준5축 유지)
-
-- 각 행의 stats는 Design의34축 키를 사용한다. 비교 인원party는 과거 비교값 보존이며 추가29효과 적용 후 검증 완료된 권장 인원이 아니다.
-
-```json
-{"key":"flower-tail-bird","name":"꽃꼬리새","tier":1,"party":1,"stats":{"health":650,"power":16,"armor":10,"speed":1.825,"movement":0.947,"vision":7.525,"combo":1.069,"comboPower":51.138,"critical":5.831,"criticalPower":139.311,"accuracy":13,"penetration":1.201,"comboSpeed":0.113,"focus":0.223,"evasion":13.147,"parry":5.195,"block":0,"blockPower":25,"counter":2.232,"counterPower":85.37,"tenacity":0,"reduction":0,"stun":0,"stunTime":0.2,"bleed":2.006,"bleedPower":2.303,"area":0.004,"areaPower":16.08,"lifesteal":0.152,"reflection":0.365,"regeneration":9,"capacity":1,"harvestSpeed":1.9,"healing":12.294}}
-{"key":"dew-rabbit","name":"이슬토끼","tier":2,"party":1,"stats":{"health":1487,"power":14,"armor":11,"speed":1.54,"movement":1.011,"vision":6.517,"combo":0.941,"comboPower":48.686,"critical":4.863,"criticalPower":136.751,"accuracy":9,"penetration":0.099,"comboSpeed":0.136,"focus":0.238,"evasion":11.984,"parry":4.418,"block":0.42,"blockPower":26.664,"counter":0.074,"counterPower":82.337,"tenacity":2.311,"reduction":0.028,"stun":0.043,"stunTime":0.251,"bleed":0.204,"bleedPower":1.24,"area":0,"areaPower":15,"lifesteal":0.066,"reflection":0,"regeneration":10,"capacity":2,"harvestSpeed":1.839,"healing":14.475}}
-{"key":"rolling-acorn","name":"굴림도토리","tier":3,"party":1,"stats":{"health":1833,"power":19,"armor":71,"speed":1.255,"movement":0.81,"vision":2.793,"combo":0.594,"comboPower":46.15,"critical":3.966,"criticalPower":152.981,"accuracy":0,"penetration":2.491,"comboSpeed":0.16,"focus":0.42,"evasion":8.633,"parry":2.409,"block":13.605,"blockPower":48.27,"counter":1.579,"counterPower":96.125,"tenacity":6.562,"reduction":0.25,"stun":2.497,"stunTime":0.346,"bleed":2.899,"bleedPower":2.578,"area":0.179,"areaPower":23.481,"lifesteal":0,"reflection":3.814,"regeneration":1,"capacity":6,"harvestSpeed":1.67,"healing":0}}
-{"key":"cotton-sheep","name":"솜양","tier":4,"party":1,"stats":{"health":2700,"power":12,"armor":18,"speed":0.875,"movement":0.692,"vision":5.693,"combo":0.232,"comboPower":43.51,"critical":1,"criticalPower":135,"accuracy":2,"penetration":0,"comboSpeed":0.201,"focus":0.319,"evasion":5.528,"parry":0.571,"block":5.155,"blockPower":36.946,"counter":0,"counterPower":80,"tenacity":16.662,"reduction":4.694,"stun":0.557,"stunTime":0.287,"bleed":0,"bleedPower":1,"area":0.64,"areaPower":20.32,"lifesteal":0.016,"reflection":4.593,"regeneration":12,"capacity":12,"harvestSpeed":1.74,"healing":19.203}}
-{"key":"bundle-snail","name":"보따리달팽이","tier":5,"party":2,"stats":{"health":3160,"power":21,"armor":108,"speed":0.685,"movement":0.55,"vision":3.289,"combo":0.102,"comboPower":40.732,"critical":1.287,"criticalPower":149.186,"accuracy":1,"penetration":0.345,"comboSpeed":0.21,"focus":0.394,"evasion":1.155,"parry":0.088,"block":16.881,"blockPower":57.731,"counter":0.277,"counterPower":100.069,"tenacity":22.548,"reduction":5.444,"stun":0.842,"stunTime":0.317,"bleed":0.639,"bleedPower":1.498,"area":0.328,"areaPower":21.877,"lifesteal":0.631,"reflection":5.443,"regeneration":14,"capacity":17,"harvestSpeed":1.307,"healing":27.138}}
-{"key":"soil-mole","name":"흙두더지","tier":6,"party":1,"stats":{"health":2521,"power":23,"armor":28,"speed":1.065,"movement":0.648,"vision":2,"combo":0.397,"comboPower":55.846,"critical":9.102,"criticalPower":156.97,"accuracy":11,"penetration":6.249,"comboSpeed":0.176,"focus":0.254,"evasion":4.559,"parry":3.693,"block":10.54,"blockPower":45.954,"counter":2.992,"counterPower":104.146,"tenacity":18.635,"reduction":2.25,"stun":3.619,"stunTime":0.445,"bleed":10.649,"bleedPower":3.697,"area":0.248,"areaPower":25.126,"lifesteal":2.186,"reflection":1.409,"regeneration":8,"capacity":9,"harvestSpeed":1.807,"healing":8.328}}
-{"key":"bubble-toad","name":"방울두꺼비","tier":7,"party":2,"stats":{"health":2864,"power":26,"armor":23,"speed":1.35,"movement":0.772,"vision":5.098,"combo":0.703,"comboPower":53.522,"critical":7.954,"criticalPower":161.135,"accuracy":6,"penetration":3.288,"comboSpeed":0.152,"focus":0.302,"evasion":9.726,"parry":1.854,"block":6.397,"blockPower":39.154,"counter":5.892,"counterPower":108.343,"tenacity":14.677,"reduction":1.361,"stun":7.238,"stunTime":0.65,"bleed":3.917,"bleedPower":2.855,"area":1.596,"areaPower":39.326,"lifesteal":3.584,"reflection":1.903,"regeneration":11,"capacity":8,"harvestSpeed":1.553,"healing":21.739}}
-{"key":"spiny-back-beetle","name":"가시등 딱정벌레","tier":8,"party":2,"stats":{"health":3017,"power":29,"armor":95,"speed":1.16,"movement":0.733,"vision":3.712,"combo":0.492,"comboPower":60.347,"critical":10.303,"criticalPower":174.538,"accuracy":8,"penetration":11.45,"comboSpeed":0.168,"focus":0.269,"evasion":6.532,"parry":8.802,"block":15.218,"blockPower":52.964,"counter":16.148,"counterPower":140.262,"tenacity":26.427,"reduction":3.361,"stun":3.034,"stunTime":0.422,"bleed":14.029,"bleedPower":4.266,"area":0.524,"areaPower":30.26,"lifesteal":1.798,"reflection":10.734,"regeneration":2,"capacity":11,"harvestSpeed":1.511,"healing":0.408}}
-{"key":"snare-vine","name":"올가미덩굴","tier":9,"party":2,"stats":{"health":3296,"power":34,"armor":60,"speed":0.78,"movement":0.3,"vision":6.25,"combo":0.162,"comboPower":58.119,"critical":12.853,"criticalPower":179.273,"accuracy":12,"penetration":10.02,"comboSpeed":0.193,"focus":0.207,"evasion":2.746,"parry":0,"block":9.094,"blockPower":43.661,"counter":7.062,"counterPower":121.534,"tenacity":20.597,"reduction":1.778,"stun":2.008,"stunTime":0.631,"bleed":15.853,"bleedPower":4.553,"area":1.406,"areaPower":33.82,"lifesteal":6,"reflection":7.351,"regeneration":18,"capacity":13,"harvestSpeed":1.365,"healing":16.78}}
-{"key":"soil-boar","name":"흙멧돼지","tier":10,"party":2,"stats":{"health":3667,"power":46,"armor":82,"speed":0.97,"movement":0.846,"vision":4.448,"combo":0.31,"comboPower":68.893,"critical":15.586,"criticalPower":194.173,"accuracy":7,"penetration":8.676,"comboSpeed":0.184,"focus":0.286,"evasion":3.63,"parry":3.023,"block":12.044,"blockPower":50.607,"counter":8.331,"counterPower":135.474,"tenacity":28.354,"reduction":4,"stun":8.097,"stunTime":0.49,"bleed":12.293,"bleedPower":4.84,"area":0.768,"areaPower":41.2,"lifesteal":2.613,"reflection":3.106,"regeneration":5,"capacity":14,"harvestSpeed":1.417,"healing":2.24}}
-{"key":"shadow-weasel","name":"그늘족제비","tier":11,"party":2,"stats":{"health":2323,"power":49,"armor":15,"speed":2.11,"movement":1.071,"vision":6.778,"combo":1.643,"comboPower":72.989,"critical":18.489,"criticalPower":184.128,"accuracy":15,"penetration":16.24,"comboSpeed":0.098,"focus":0.149,"evasion":14.332,"parry":9.822,"block":1.953,"blockPower":30.573,"counter":14.391,"counterPower":117.045,"tenacity":8.625,"reduction":0.444,"stun":1.568,"stunTime":0.397,"bleed":21.84,"bleedPower":5.418,"area":0.076,"areaPower":28.519,"lifesteal":4.713,"reflection":0.043,"regeneration":7,"capacity":7,"harvestSpeed":1.706,"healing":6.558}}
-{"key":"talon-owl","name":"갈퀴부엉이","tier":12,"party":3,"stats":{"health":2099,"power":52,"armor":12,"speed":1.73,"movement":0.915,"vision":8,"combo":1.345,"comboPower":64.686,"critical":17.017,"criticalPower":189.097,"accuracy":18,"penetration":14.561,"comboSpeed":0.12,"focus":0.192,"evasion":10.843,"parry":7.828,"block":1.107,"blockPower":28.568,"counter":9.699,"counterPower":112.646,"tenacity":4.464,"reduction":0.111,"stun":1.179,"stunTime":0.372,"bleed":19.761,"bleedPower":5.129,"area":0.122,"areaPower":26.806,"lifesteal":4.129,"reflection":0.165,"regeneration":4,"capacity":3,"harvestSpeed":1.594,"healing":3.498}}
-{"key":"vine-turtle","name":"넝쿨거북","tier":13,"party":3,"stats":{"health":3891,"power":31,"armor":123,"speed":0.59,"movement":0.601,"vision":4.094,"combo":0.054,"comboPower":37.759,"critical":1.785,"criticalPower":165.459,"accuracy":5,"penetration":5.169,"comboSpeed":0.219,"focus":0.336,"evasion":1.917,"parry":1.36,"block":24,"blockPower":60.139,"counter":11.166,"counterPower":126.105,"tenacity":30.275,"reduction":7.111,"stun":5.654,"stunTime":0.511,"bleed":6.297,"bleedPower":3.415,"area":1.227,"areaPower":37.47,"lifesteal":0.866,"reflection":9.537,"regeneration":15,"capacity":16,"harvestSpeed":1.159,"healing":24.385}}
-{"key":"lantern-keeper","name":"등불지기","tier":14,"party":3,"stats":{"health":3549,"power":37,"armor":42,"speed":1.635,"movement":1.041,"vision":7.032,"combo":1.204,"comboPower":62.534,"critical":6.863,"criticalPower":142.302,"accuracy":14,"penetration":0.715,"comboSpeed":0.128,"focus":0.163,"evasion":15.536,"parry":6.023,"block":3.994,"blockPower":34.775,"counter":0.598,"counterPower":88.735,"tenacity":12.678,"reduction":1,"stun":0.327,"stunTime":0.532,"bleed":1.248,"bleedPower":1.762,"area":0.018,"areaPower":17.397,"lifesteal":0.275,"reflection":0.639,"regeneration":16,"capacity":5,"harvestSpeed":1.774,"healing":29.993}}
-{"key":"spring-keeper","name":"봄지기","tier":15,"party":4,"stats":{"health":3425,"power":40,"armor":35,"speed":1.92,"movement":0.979,"vision":7.765,"combo":1.491,"comboPower":66.804,"critical":11.554,"criticalPower":145.614,"accuracy":16,"penetration":4.182,"comboSpeed":0.105,"focus":0.134,"evasion":16.759,"parry":6.901,"block":2.922,"blockPower":32.648,"counter":3.856,"counterPower":92.337,"tenacity":10.661,"reduction":0.694,"stun":0.154,"stunTime":0.468,"bleed":7.647,"bleedPower":3.134,"area":0.042,"areaPower":18.822,"lifesteal":0.434,"reflection":2.468,"regeneration":13,"capacity":4,"harvestSpeed":1.87,"healing":10.243}}
-{"key":"old-garden-snail","name":"오래된 등짐","tier":16,"party":4,"stats":{"health":4100,"power":43,"armor":155,"speed":0.495,"movement":0.422,"vision":4.781,"combo":0.018,"comboPower":34.457,"critical":2.414,"criticalPower":169.931,"accuracy":3,"penetration":1.794,"comboSpeed":0.229,"focus":0.374,"evasion":0,"parry":0.286,"block":20.352,"blockPower":62.562,"counter":1.033,"counterPower":130.754,"tenacity":32.189,"reduction":8.028,"stun":4.251,"stunTime":0.553,"bleed":5.052,"bleedPower":2.031,"area":0.909,"areaPower":32.028,"lifesteal":1.138,"reflection":6.362,"regeneration":17,"capacity":19,"harvestSpeed":1.241,"healing":36}}
-{"key":"spiny-back-leader","name":"가시등 우두머리","tier":17,"party":5,"stats":{"health":3997,"power":55,"armor":138,"speed":1.445,"movement":0.881,"vision":5.401,"combo":0.819,"comboPower":70.953,"critical":14.198,"criticalPower":204.629,"accuracy":10,"penetration":12.964,"comboSpeed":0.144,"focus":0.178,"evasion":7.568,"parry":10.889,"block":18.593,"blockPower":55.339,"counter":18,"counterPower":155,"tenacity":34.097,"reduction":6.25,"stun":6.423,"stunTime":0.592,"bleed":17.765,"bleedPower":5.709,"area":1.062,"areaPower":43.091,"lifesteal":3.079,"reflection":12,"regeneration":3,"capacity":15,"harvestSpeed":1.466,"healing":1.195}}
-{"key":"white-paw","name":"흰발","tier":18,"party":5,"stats":{"health":3781,"power":62,"armor":51,"speed":2.015,"movement":1.1,"vision":7.281,"combo":1.8,"comboPower":75,"critical":20,"criticalPower":210,"accuracy":17,"penetration":18,"comboSpeed":0.09,"focus":0.12,"evasion":18,"parry":12,"block":7.712,"blockPower":41.393,"counter":12.73,"counterPower":145.115,"tenacity":24.492,"reduction":2.778,"stun":4.929,"stunTime":0.573,"bleed":24,"bleedPower":6,"area":0.42,"areaPower":35.634,"lifesteal":5.337,"reflection":0.987,"regeneration":6,"capacity":10,"harvestSpeed":1.633,"healing":4.943}}
-{"key":"walking-forest","name":"걸어가는 산","tier":19,"party":6,"stats":{"health":4200,"power":58,"armor":172,"speed":0.4,"movement":0.492,"vision":5.976,"combo":0,"comboPower":30,"critical":3.146,"criticalPower":199.352,"accuracy":4,"penetration":7.418,"comboSpeed":0.24,"focus":0.355,"evasion":0.485,"parry":0.931,"block":22.154,"blockPower":65,"counter":4.823,"counterPower":150.028,"tenacity":36,"reduction":9,"stun":9,"stunTime":0.612,"bleed":9.099,"bleedPower":3.981,"area":1.8,"areaPower":45,"lifesteal":1.449,"reflection":8.41,"regeneration":19,"capacity":18,"harvestSpeed":1,"healing":32.948}}
-```
-
-### 추가29축의 level4 DNA 확인 배치
-
-- 각 pieces 항목은 [gene,rotation]이며 grade/shape는 아래 출처 해시의 현재 카탈로그 값을 사용한다. 전부 trace(level4).valid를 확인했고, value가 중립19티어보다 강하다(시간2축은 더 작음). 고정 순서로 같은 DNA만 연결하기 어려운 시야/출혈위력에는 연결용 체력 등도 포함한다. 이는 조각 전부가 동일해야 한다는 뜻의 순수 몰빵 최적해가 아니라 이론상 최댓값보다 낮음을 증명할 수 있는 유효 배치 근거다.
-
-```json
-{"key":"movement","value":1.13,"pieces":[["movement",0],["movement",0],["movement",1],["movement",2],["movement",3],["movement",0],["movement",5],["movement",4],["movement",3],["movement",1],["movement",2],["movement",2],["movement",3],["movement",0],["movement",5],["movement",3],["movement",3],["movement",0],["movement",4],["movement",2],["movement",3],["movement",0]]}
-{"key":"vision","value":9.5,"pieces":[["vision",3],["health",0],["vision",5],["health",2],["vision",1],["health",3],["vision",2],["health",4],["vision",3],["health",5],["antenna",0]]}
-{"key":"combo","value":3,"pieces":[["blade",0],["combo",0]]}
-{"key":"comboPower","value":90,"pieces":[["blade",0],["comboPower",0],["comboPower",2]]}
-{"key":"critical","value":32,"pieces":[["blade",0],["critical",0],["critical",2]]}
-{"key":"criticalPower","value":230,"pieces":[["blade",0],["criticalPower",1],["criticalPower",2]]}
-{"key":"accuracy","value":27,"pieces":[["blade",0],["accuracy",0],["accuracy",2],["accuracy",3]]}
-{"key":"penetration","value":20,"pieces":[["blade",0],["penetration",0],["penetration",2],["penetration",3],["penetration",3],["penetration",0]]}
-{"key":"comboSpeed","value":0.07999999999999999,"pieces":[["blade",0],["comboSpeed",0],["comboSpeed",2]]}
-{"key":"focus","value":0.08,"pieces":[["blade",0],["focus",0],["focus",4],["focus",3]]}
-{"key":"evasion","value":27,"pieces":[["evasion",0],["evasion",2],["evasion",3]]}
-{"key":"parry","value":16,"pieces":[["parry",0]]}
-{"key":"block","value":30,"pieces":[["block",0],["block",4]]}
-{"key":"blockPower","value":66,"pieces":[["blockPower",0]]}
-{"key":"counter","value":40,"pieces":[["blade",0],["counter",0]]}
-{"key":"counterPower","value":180,"pieces":[["blade",0],["counterPower",0],["counterPower",2]]}
-{"key":"tenacity","value":45,"pieces":[["tenacity",0],["tenacity",2],["tenacity",3]]}
-{"key":"reduction","value":16,"pieces":[["reduction",0],["reduction",2]]}
-{"key":"stun","value":12,"pieces":[["blade",0],["stun",0]]}
-{"key":"stunTime","value":0.8500000000000001,"pieces":[["blade",0],["stun",0],["stunTime",4],["stunTime",2],["stunTime",1]]}
-{"key":"bleed","value":40,"pieces":[["blade",0],["bleed",0],["bleed",2]]}
-{"key":"bleedPower","value":9,"pieces":[["blade",4],["bleed",1],["bleedPower",0],["health",3],["bleedPower",2]]}
-{"key":"area","value":4,"pieces":[["blade",0],["area",0]]}
-{"key":"areaPower","value":55,"pieces":[["blade",0],["area",0],["areaPower",2]]}
-{"key":"lifesteal","value":8,"pieces":[["blade",0],["lifesteal",0],["lifesteal",4]]}
-{"key":"reflection","value":24,"pieces":[["reflection",0],["reflection",2]]}
-{"key":"capacity","value":21,"pieces":[["gather",0],["capacity",0],["capacity",4],["capacity",2],["capacity",1],["capacity",2],["capacity",3],["capacity",3],["capacity",4],["capacity",4],["capacity",5]]}
-{"key":"harvestSpeed","value":2.2,"pieces":[["gather",0],["harvestSpeed",0],["harvestSpeed",0],["harvestSpeed",2],["harvestSpeed",2]]}
-{"key":"healing","value":60,"pieces":[["healing",0],["healing",1]]}
-```
-
-- 출처 SHA256: {"server/dna.mjs": "cbbe6aafa3b8d269825d49896f642a8fe444844895f53f95dcbad1a6fea7525e", "server/combat.mjs": "3affb82477daa6c6d5a1e137bcf705ab6c5d6a2a9d28a5804c6b0a521887d8c1", "server/combat-stats.mjs": "29c0c8357125617b30fa10950e69f61136479035817411ac22030ef5089d0d21", "server/attributes.mjs": "093d5a42094ba6c7f463ff03ce2f69be99981a82b5a4e6488c4728e89e4c4c3c", "client/neutral-stat-model.js": "670dbacbe7c700768d3b1831338eab3d393a465ac610da67ab0bdd16abb9a45c", "Research/Balance/2026-11-04/audit.json": "cab96f28ccc23ef0d2bfe096220288c19667dec4e434a8e3157b92cc90e9b879"}
-- 임시 계산 자료: literal $Trash/neutral-all-stat-draft-20261105/calculate.mjs 및 draft.json. 최초27개 근거 뒤 시야·출혈위력의 연결 DNA를 포함한 추가 탐색으로29/29를 보완했다. 재개에 필요한 값·배정·확인 배치를 이 기록에 보존한다.
-- 미해결·다음: 특수 행동의 활성화 방침, 연격/확산의 정수·확률 표현, 첫 침공의 저레벨 기준과 경제, 전체 효과를 포함한 DPS·피해·시간·사망자를 검토한다. 이번 게임/Design/편집기 변경이나 Git·배포는 하지 않았다.
-
-## 중립 스탯 결정 진행 방식 변경 · 01a1a0e9 현재 요약
-
-- 기록 ID: neutral-stat-verbal-direction-20261105-01a1a0e9. 기록·확인 시각: 2026-11-05T20:41:22+09:00. 기록자 Codex /root, 진행 방식 결정 주체 사용자. 출처 현재 채팅 01a1a0e9-2e09-7703-a7f5-613c21744e11 최신 원문 「아니다 됐다. 난 말만 할테니 걍 니가 수정해라. 그래서 이제 스탯 다 정할 준비가 됐어?」, H:/Spawner Windows/PowerShell. 원발언 정확 시각·항목 ID·딥링크 불명.
-- 최신 사용자 방향: 사용자가 곡선을 직접 조작하는 흐름 대신 말로 방향·교정을 전달하면 Codex가 수치와 표를 수정하며 진행한다. 직전 resume 기록의 사용자 직접 편집 안내를 이 진행 방식으로 대체한다. 기존 편집기 삭제·게임 적용·Git·배포 지시로 확대하지 않는다. 이번 발언으로 새 수치나 HP500 제안이 확정된 것은 아니다.
-- 현재 준비 근거: 19종 개별 스탯 티어·6계보 상대 서열 규칙, 기본5축(HP/공격/공속/방어/재생) 곡선 및 DPS/정적 처치 시간 계산 틀과 검사8개 성공 근거가 있다. 전체 스탯의 수치 초안을 논의·수정할 기반은 준비됐다. 남은 확정 판단은 비교 기준/실제 DNA 효과·상한과 정수 단위, 전투중 자기 재생 여부, 치명·회피·막기·연타·제어·치유 같은 파생 효과의 합성 및 실제 전투 검증이다. 기존34축 계보510쌍 유지 원칙은 계속 유효하다.
-- Codex 제안과 사용자 결정 구분: 기본5축 수치→나머지 전투/행동 스탯→레벨4 DNA 상한·사냥 시간 대조 순서로 맞춰가는 것이 다음 논의 제안이며 사용자가 순서를 확정한 것은 아니다. HP1200 가상 초안과 HP500 실제 배치 제안을 구분하고 어느 한쪽을 이미 최종 기준으로 채택했다고 말하지 않는다. 실제 엔진의 현행 재생은 전투종료5초뒤 시작하므로 초안의 전투중재생과 혼동하지 않는다.
-## 중립 스탯 곡선 편집 작업 재개 · 기존 클라우드 구현 확인 · 01a1a0e9 현재 요약
-
-- 기록 ID: neutral-curve-editor-resume-20261105-01a1a0e9. 기록·마지막 실제 확인 시각: 2026-11-05T20:36:30+09:00. 기록자·소스 검토/검사 Codex /root, 재개 요청 주체 사용자. 출처 현재 채팅 01a1a0e9-2e09-7703-a7f5-613c21744e11 최신 원문 「이거 재개해봐」, H:/Spawner Windows/PowerShell. 원발언 정확 시각·항목 ID·딥링크 불명. 사용자가 새로 HP500 수치나 실제 게임 적용을 확정한 것으로 해석하지 않는다.
-- 이전 neutral-curve-editor-cloud-handoff 및 commit-complete에 남은 구현 대기는 현재 소스와 cloud-followup-additional-20261104의 후속 구현 근거로 갱신한다. 클라우드가 이미 NeutralStats.html, client/neutral-stat-editor.js/.css, neutral-stat-model.js, neutral-stat-balance-data.js에 편집기를 추가했다. 로컬 기본 HEAD cfbb669, 작업 트리 변경은 기존 CodexWorkMemory.md뿐이었다. 이 재개에서 기존 편집기나 게임 파일을 새로 수정하지 않았다.
-- 현재 기능(소스 확인): 5개 곡선 드래그·값 입력·키보드 조절, 고정 19종 개별 티어/인원으로 수치·DPS·정적 처치 시간 동시 재계산, 이웃 값 사이 제한으로 엄격 스탯 서열 보존, 파생 DPS 계보 역전 경고, 초기값 복원·브라우저 저장·JSON 입출력. 순DPS<=0은 처치 불가로 처리하고 목표 10~60초 밖 값도 자르지 않는다.
-- 기준 구분: 기본/초기 복원은 기존 HP1200·공격75·공속1·방어50·재생10 초안. 별도 「실게임 규모 제안 불러오기」는 유효 레벨4 배치 HP500·공격6·공속0.5·방어0·전투중재생0(262P) 기준의 다른 제안이다. 원래 초안의 전투중재생과 실제 엔진의 전투종료5초뒤회복을 구분한다. HP500안은 사용자 확정 수치나 실제 중립 런타임 적용으로 취급하지 않는다. 서버 엔진 비교값은 초기안 고정 결과이며 곡선 편집 때 엔진을 재실행하는 값이 아니다.
-- 실제 이번 검사: node --test client/neutral-stat-model.test.mjs 8개 성공/실패0. 원래 19종·인원·예시 시간 재현, 5축 극단 편집 시 엄격 서열, 수치/DPS/시간 동시 갱신과 60초 밖 유지, 순피해<=0, 큰 입력·소수 간격 검증, DNA 상한의 blocked/within-witness/unproven 구분, 실제규모 제안의 DNA 확인배치 미만·10~60초·파생계보 역전0을 확인했다. 이번 실제 브라우저 드래그나 배포 상태를 재검증한 것은 아니다.
-- 재개 지점: 사용자에게 NeutralStats.html을 안내해 현재 편집기로 곡선을 직접 조절하며 수치를 검토한다. 실제 게임 수치 반영·DNA 효과 확정은 여전히 별도 결정/작업이다. 기본1200안을 새500안으로 임의 교체하거나 오래된 인라인 그래프를 중복 구현하지 않는다. 기존 기록·병행 메모리를 보존하며 이번 요청으로 새 커밋/푸시/배포를 하지 않는다.
-## 자원 매장량 20배 구현·선별 커밋 준비 · 01a1ad5a
-
-- 기록 ID: resource-amount-20x-freeze-20261106-01a1ad5a. 기록 시각: 2026-11-06T05:27:12+09:00. 기록자·구현/검수/원격 통합 판단 Codex /root, 매장량 20배·기획서/게임 반영 및 push 결정 사용자. 출처 현재 채팅 01a1ad5a-6af9-7001-a8af-1752c038a4d2, H:/Spawner Windows PowerShell. 원 발언 시각·항목 ID·PC 식별 정보 불명.
-- 실제 변경은 최종 자원 생성 push 두 곳의 amount에 20을 곱하는 것이다. 목재·비옥토·자갈·이슬의 지점별 토양/습도 차이를 유지하고 네 자원 모두 기존 최종량의 정확히 20배로 한다. Design.html 내장 모델, runtime 브라우저·게임 워커·판단 워커에도 같은 두 수식을 투영했다. 새 문서 문구는 추가하지 않았다.
-- 실제 도구 검수: 동일한 32×32 지형·토양 입력으로 원본과 서버/기획서/브라우저/게임 워커/판단 워커의 실제 생성 함수를 비교했다. 다섯 모델 모두 네 자원 전체 지점의 수량이 원본×20이며 지점 좌표·타입·지형은 동일하다. 매장량 지도 데이터도 ×20이고 runtime 전체 구문을 확인했다. 이는 작은 결정적 생성 입력 검수이며 전체 플레이 결과는 주장하지 않는다.
-- 원격 동시 작업 통합: origin/main의 fe3ba35 솜양 승인 아트와 로컬 전투 병합 이력이 갈라져 --rebase-merges로 통합했다. 원래 병합의 Attribute/build/runtime/Combat 해석을 보존하고 원격 메모리 절을 함께 보존했다. refs/codex-backup/resource-amount-20x-20261106-01a1ad5a 및 stash의 보존본을 유지한다. 9개 미커밋/미추적 경로는 원본 바이트(메모리는 원격 절 추가만)로 복원 확인했다.
-- 선별 범위는 server/terrain-resources.mjs, Design.html, client/runtime.js의 이번 수식과 본 채팅 관련 메모리 2절이다. 기존 기획서 중립 수치/전투/체력링/다른 메모리 변경은 작업파일에 보존하고 이번 index에서 제외한다. 검수 근거는 $Trash/resource-amount-20x-20261106-01a1ad5a/validation.json, restoration.json, staged.diff와 manifest.json에 남긴다. 최종 형식·staged 확인과 커밋·push 및 원격 readback은 다음 마감 단계이며 아직 성공을 선기록하지 않는다.
-
-## 자원 지점 매장량 20배 상향 · 01a1ad5a 현재 진행
-
-- 기록 ID: resource-amount-20x-start-20261106-01a1ad5a. 기록 시각: 2026-11-06T05:19:37+09:00. 기록자·구현 판단 Codex /root, 결정·기획서/게임 반영 및 push 승인 사용자. 출처 현재 채팅 01a1ad5a-6af9-7001-a8af-1752c038a4d2, H:/Spawner Windows PowerShell. 원 발언 시각·턴/항목 ID·PC 식별 정보는 제공되지 않아 불명.
-- 사용자 요청은 자원 수량 약 20배 상향을 기획서와 게임에 적용하고 push하는 것이다. 추가 답변으로 일꾼 1회 채집량이 아니라 자원 지점의 매장량 20배임을 명시 확정했다.
-- 도구 확인: 현재 39세대 맵은 populateFormedResources가 토양·습도 기반으로 네 자원 수량을 만든다. RESOURCE_ECONOMY의 12/30/12/1은 구형 경로이며 현재 수량으로 오인한 최초 안내를 채팅에서 바로잡았다.
-- 구현 범위: server/terrain-resources.mjs의 최종 생성 매장량만 20배로 하고 Design.html 내장 맵 모델 및 client/runtime.js의 브라우저/워커 사본에 동일 투영한다. 기존 지점 배치·채집시간·운반량·문서 문구는 유지한다. 이번 요청은 새 자원 생성 규칙 수정이며 기존 저장 게임의 잔량을 별도로 마이그레이션하지 않는다.
-- 기존/동시 전투·편집기·기획서·메모리 변경은 보호하고 이번 2개 코드 변경과 관련 메모리 절만 분리 커밋한다. 전용 원격은 origin https://github.com/oojjrs/Spawner, 시작 체크아웃 H:/Spawner main이다. 연결된 GitHub Projects v2 조회 결과는 빈 목록이다. push 전 origin/main fetch·관계 확인 및 push 후 원격 readback을 수행한다. 아직 구현/검증/커밋/push 완료 전이다.
-
-## neutral-attack-role-commit-request-20261106-01a1a0bf
-
-- 기록 시각: 2026-11-06T05:24:23+09:00. 중립 공격 역할 수정 메모리 정리·로컬 커밋 요청 및 승인 사용자, 범위 재조정·Git 판단 Codex 메인. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d의 「이번 중립 유닛 공격 역할 수정도 메모리에 정리하고 커밋해」. 원발언 정확시각·항목 ID 미확인.
-- 범위 재확인 사실: 이전 완료/재개 기록의 미커밋 상태 이후, 다른 채팅의 adaa42a ‘전투 판정 공통화와 중립종 추적 수정’에 실제 server/combat.mjs, creature-attack-role.mjs, creature-attack-role.test.mjs 및 runtime의 해당 browser/worker 역할 연결이 이미 포함돼 main으로 병합됐다. 현재 계획 HEAD bbfdb2fb9c4cac70b186ae68103bddc34b15f6f9에서 소스/작업 바이트 동일, source와 HEAD browser·worker의 역할 분기 일치를 확인했다. 이 현재 사실로 앞선 전체미커밋 요약을 대체하며 원기록은 보존한다.
-- 이번 커밋 후보: 아직 남은 Design.html 배정 의도 셀19개의 승인된 근딜/원딜/겸용 표시만 HEAD 위에 적용한 후보와 이 채팅의 중립 역할 제안/확정/구현/검수/재개/이번승인 메모리다. resource20배·health ring 등 다른 기획서/생성runtime·공유메모리 변경은 제외하고 실제 작업 바이트와 인덱스를 보존한다. 이미 커밋된 코드를 중복 수정하지 않는다.
-- 검수 근거: 기존 중립66+추가7+수동DNA1 및 기존DNA4, 실제 문서PC/mobile·runtime/Worker 결과와 변하지 않은 역할/검증 파일을 재사용한다. 커밋만을 이유로 빌드/테스트/브라우저를 다시 실행하지 않는다. 별도 후보 문서에서19개 표시 외 HTML이 HEAD와 같은지 확인했고 최종 staged 범위/체크 및 새 후보 메모리 형식만 검사한다.
-- 전용 저장소 origin https://github.com/oojjrs/Spawner 및 이 채팅의 연결 Projects0개 확인 결과 재사용. 요청은 로컬 커밋까지이며 푸시·배포는 포함하지 않는다. 아래 커밋은 아직 실행 전이다.
-## neutral-attack-role-resumed-complete-20261106-01a1a0bf
-
-- 기록 시각: 2026-11-06T04:54:09+09:00. 재개 요청 사용자, 현재 상태 직접 대조·완료 판단 Codex 메인. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d의 「재개하자」. 원발언 정확시각·항목 ID 미확인. 이전 구현·기획서 문구 교정 승인을 그대로 이어받았다.
-- 현재 확인: HEAD511e662 및 실제 작업 파일에서 중립 역할 카탈로그, 공격 통계 adapter·근접/원거리 선택·평화형 방어 반격·수동DNA 보존 분기가 소스/server combat과 client/runtime의 browser/embedded-worker 양쪽에 동일함을 정적 대조했다. 기획서 기존 배정 의도 셀19개 위의 역할 표시는 근딜12/원딜2/겸용5로 유지됐다. 기존 설명·셋 중 하나만 표시하는 사용자 교정을 보존한다.
-- 재사용 근거: 회귀 파일 SHA25699CC6E45F4DC4806B56248AF064A4EDF95A550BF3615F0F0B6C47EEC3ECA3178 불변, 앞선 독립66+추가7+수동DNA1 및 기존DNA4 성공과 PC1440/mobile390 시각 검수·runtime12/실제Worker3 교전 결과를 재사용한다. 이번 재개에서는 제품 코드를 다시 수정하거나 테스트·브라우저·빌드를 반복하지 않았다. 직접 비교 도구는 literal 루트 $Trash/neutral-attack-roles-20261105/resume-check.mjs.
-- 완료 상태: 추천 중립 역할 배정·실제 거리별 공격 전환·승인된 기획서 표시는 구현/검수 완료다. 중립 역할 및 관련 작업 파일은 현재 미커밋이며, 재개가 새 커밋·푸시 승인은 아니므로 Git완료를 수행하지 않았다. 다른 채팅의 공유 코드/문서/기록과 기존 EOF빈줄은 그대로 보존했다. 앞선 implementation-complete/final-check를 현재 파일과 대조해 유효함을 확인했으며 별도 콘텐츠 blocker 없음.
-## neutral-attack-role-final-check-20261105-01a1a0bf
-
-- 기록 시각: 2026-11-05T22:02:15+09:00. 기록·최종 확인 Codex 메인. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d와 최종 형식/범위 검사 출력. 앞선 implementation-complete의 검증 결과를 보완한다.
-- 형식 검사5개 실제 touched text는 UTF8NoBOM/CRLF 모두OK, 워커 최종 새 회귀 파일도 같은 형식OK였다. 범위 diff check에서 제품3개에는 문제가 없었으나 공유 CodexWorkMemory.md174043행의 EOF추가빈줄 경고가 있었다. 이번 메모리는 항상 기존 전체바이트를 보존해 앞에만 붙였으므로 해당 말미를 정리하거나 다른 채팅 기록을 고치지 않았다. 전체 diff check 통과로 주장하지 않는다. 형식/범위 검사5.83초.
-- 현재 결과: 중립역할66+추가7+수동DNA1 및 기존DNA4의 대상회귀 모두성공, 실제 문서PC/mobile과 runtime/embedded-worker 검수 완료, 요청결과 미완료 blocker 없음. 중립 역할/거리 전환·기획서 표시 수정은 커밋 전이며 이와 무관한 공유말미/병행 변경은 보존한다.
-## neutral-attack-role-document-approved-20261105-01a1a0bf
-
-- 기록 시각: 2026-11-05T21:40:26+09:00. 정확 문구·위치 교정 및 승인 사용자, 반영 판단 Codex 메인. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d의 비동기 질문 답 「아니. 배정 의도 상단에 걍 근딜, 원딜, 겸용 이렇게 셋 중 하나로만 표기해」. 질문 call_80ce9c5390674c2eb137e9962e89cde8/0; 원발언 정확시각 미확인.
-- 유효 문서 기준: 기존 중립 유닛 티어 표의 각 배정 의도 셀에서 기존 설명을 보존하고 상단에 근딜/원딜/겸용 중 정확히 하나만 넣는다. 앞서 제시한 기존 설명 대체·원거리 중심·근접 대응 문구 및 거리 전환 한 줄 안은 거절되어 폐기한다. 새 페이지·열·거리 문구를 추가하지 않는다.
-- 카탈로그 구분: 꽃꼬리새·등불지기의 표시 역할은 원딜, 방울두꺼비·흙두더지·넝쿨거북·가시등 딱정벌레·가시등 우두머리는 겸용, 나머지12는 근딜. 꽃꼬리새는 앞선 승인 추천대로 붙었을 때 부리 대응을 허용하되 주역할은 원딜로 표기한다. 공격 전환과 강약/성향 보존 구현 기준은 start기록을 유지한다.
-## neutral-ranged-role-proposal-addendum-20261105-01a1a0bf
-
-- 기록 시각: 2026-11-05T21:31:33+09:00. 기획 제안 Codex 메인, 중립 원거리/겸용 후보 질문 및 강약 제외 기준 사용자. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d; 원발언 정확시각·항목 ID 미확인.
-- 추가 미확정 제안: 가시등벌레/우두머리도 등가시 발사+집게·몸통 공격의 겸용이 외형상 자연스럽다. 꽃꼬리새는 씨앗 발사+부리 쪼기 형태의 원거리 중심 후보, 등불지기는 빛탄/빛줄기의 원거리 중심 후보로 제시한다. 방울두꺼비·흙두더지·넝쿨거북 겸용 제안은 유지한다. 이는 현재 공격 구현 사실이나 사용자 확정이 아니며 제품·수치·작화·기획서 문구를 수정하지 않았다. 탄생 커밋에 넣지 않는다.
-## neutral-ranged-role-proposal-20261105-01a1a0bf
-
-- 기록 시각: 2026-11-05T21:28:51+09:00. 질문·평가 기준 사용자, 기획 제안 Codex 메인. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d의 중립 유닛 원거리 및 근원거리 겸용 후보 질문. 원발언 정확시각·항목 ID 미확인. 탄생 미리보기 로컬 커밋 요청 진행 중 추가된 별도 읽기·기획 질문이며 구현/기획서 문구 변경 승인이 아니다.
-- 확인 자료: 현재 server/encounter-types.mjs의 실제 중립18종 명칭과 별도 가시등벌레를 확인했다. 강약을 평가 기준에서 제외한다.
-- Codex 제안·미확정: 방울두꺼비(방울 발사+혀/몸통), 흙두더지(흙덩이 던지기+발톱), 넝쿨거북(씨앗/가시 발사+넝쿨 휘두르기)을 겸용 우선 후보로 보았다. 꽃꼬리새와 등불지기는 원거리 중심 후보다. 현재 공격 구현을 조사·완료했다는 주장이 아니며 신규 공격 작화·코드·스탯·기획서 변경은 수행하지 않는다.
-- Git 분리: 이 별도 기획 제안 메모리는 이번 탄생 미리보기 커밋 범위에서 제외하고 작업 트리에 보존한다. 기존 탄생 커밋 요청은 취소되지 않았으며 계속 수행한다.
-## 2026-11-06 승인 솜양 V4 정수리 공격 게시 준비
-
-- 사용자 “솜양 공격 통과.” 승인에 따라 기존 cotton-sheep/runtime.webp 경로의 아트만 V4로 교체했다. 승인된 runtime PNG·8셀 원본 atlas·목/머리 영역·승인/출처 기록을 보존하고 내장 wrapper도 같은 WebP 바이트로 갱신했다. 4~7셀 진입/정수리 타격/복귀만 승인본을 사용하며 이전 V2 자료는 역사 기준으로 남긴다. 다른 종의 실패/미승인 후보와 사운드는 제외한다.
-- 초기 main c8431306에서 선별 14파일의 모든 이전 해시와 승인 출력 해시를 대조하고, 게시 직전 추가된 원격 6dbe4628까지의 탄생 미리보기·일꾼 DNA·웰컴·포자 이동·속성 편집기 통합 변경을 보존해 재배치했다. 기존 등록 크기/피벗·뒷발 고정·좌우반전·370ms 명중·240ms 타격 유지·1030ms 전체 시계 및 공유 렌더/서버는 그대로다. global V2 exporter에 로컬 승인 exporter 분기를 연결해 이후 일괄 export가 옛 솜양 아트로 되돌리지 않게 했고, 승인 PNG 해시와 무손실 RGBA 일치 검사를 포함했다.
-- 관련 28검사·번들 구문 2검사 총 30개, 임시 트리 bulk exporter 회귀·뒷발 alpha 52,000픽셀/불변셀·온라인/내장 바이트 일치·양 빌드를 통과했다. 생성된 솜양 wrapper는 전달본과 동일하며 원격의 무관한 runtime/Combat 코드 생성물은 보존한다. runtime.json 새 두 줄의 끝 공백만 정리했고 의미/애셋은 바꾸지 않았다. 실제 브라우저·기기 재생/성능은 미검증이고 배포하지 않았다.
-## main 신규 편집기 커밋 보존 병합 판단 · 01a1a5fd
-
-- 기록 ID: combat-core-main-integrate-merge-plan-20261106-01a1a5fd. 기록 시각 2026-11-06T05:13:49+09:00. 기록자·동시 변경 재대조/병합 판단 Codex /root, main 병합·분리 브랜치 삭제 승인 사용자. 출처 현재 채팅01a1a5fd-bf0b-70a3-abf8-267f88676072. H:/Spawner Windows PowerShell, 원 발언 시각·항목 ID 불명.
-- 앞선 fast-forward 계획 후 다른 작업이main에6dbe462 ‘속성 제작기와 인게임 편집기 통합’를 추가했다. 이전 guard가쓰기전에이를감지해중단했으며HEAD/index/제품파일은변경하지않았다. main신규커밋과adaa42a양쪽을부모로보존하는일반병합으로계획을대체한다.
-- merge-tree에서Attribute.html/CodexWorkMemory.md/client/build.mjs/client/runtime.js4경로만겹쳤다. 편집기HTML·생성기는main구현이이미공통DNA의존성을포함하므로main내용을그대로유지한다. memory는양쪽과이번관련영수증/승인기록을중복없이보존한다. runtime는main의편집기·비용·다른모듈을유지하고자동병합된공통전투모듈만맞춘다. Combat의DNA모듈도동일합쳐진원본으로맞춘다.
-- 후보tree/구문/참조·정확차이를확인한뒤index를보존한원자적HEAD갱신으로적용한다. 작업파일본문은변경하지않고main최신tip/index/보호파일이바뀌면쓰기전다시멈춘다. main의adaa42a포함을확인한후해당분리브랜치만tip CAS로삭제한다. 아직병합/삭제완료아님.
-## 전투 커밋 main 통합·분리 브랜치 삭제 승인 · 01a1a5fd
-
-- 기록 ID: combat-core-main-integrate-start-20261106-01a1a5fd. 기록 시각 2026-11-06T05:11:09+09:00. 기록자·보존/통합 판단 Codex /root, main 통합·브랜치 삭제 결정 사용자. 출처 현재 채팅01a1a5fd-bf0b-70a3-abf8-267f88676072의 ‘main에 합치고 그 브랜치는 지워. 다른 작업은 건드리지 말고.’ H:/Spawner Windows PowerShell, 원 발언 정확 시각·항목 ID 불명.
-- 직전 분리 브랜치 판단을 사용자 교정에 따라 대체한다. main은e2e512b, 지정 브랜치는그직계자식adaa42a이며fast-forward관계다. 현재 index는staged/unmerged변경없고rebase/merge진행디렉터리도없다. 남은REBASE_HEAD표식은임의삭제하지않는다. 작업파일에는다른채팅의편집기/체력링/Design등과이번변경이함께있다.
-- main을검토된adaa42a로전진시키고변경된19경로의index기준만해당tree에맞춘다. 공유index와현재dirty/untracked파일을먼저복구가능한임시백업으로보관하고파일본문은변경하지않는다. 관련없는index항목·작업파일·untracked내용은보존한다. HEAD/index CAS와잠금으로동시변경을확인하며조건이바뀌면쓰기전중단한다.
-- main의target포함·정확tree/index·작업파일바이트보존을확인한뒤codex/combat-core-unification-20261106의tip을CAS로확인해삭제하고참조가없음을읽어확인한다. 새게임실행/테스트/빌드는필요없고기존검수/커밋검토를재사용한다. 푸시/배포·다른브랜치·다른작업의수정/정리는승인범위가아니다. 아직완료를선기록하지않는다.
 ## 공통 전투 로컬 커밋 완료 · 01a1a5fd
 
 - 기록 ID: combat-core-local-commit-result-20261106-01a1a5fd. 기록 시각 2026-11-06T05:07:32+09:00. 기록자·실행/검증 Codex /root, 로컬 커밋 승인 사용자. 출처 현재 채팅01a1a5fd-bf0b-70a3-abf8-267f88676072 및 실제 Git readback. H:/Spawner Windows PowerShell. 원 발언 정확 시각·항목 ID 불명.
@@ -403,119 +210,6 @@
 - 최신HEAD의모듈/본문/카탈로그를유지하며전투후보19경로를재구성했다. stage의충돌은최신회피·기절·피격표현을보존하고이번외형투영/nullable교전상태/지원군사망시계만결합했다. build도3방향병합했으며원래작업파일은덮어쓰지않았다. 24개모듈사본과세생성파일의구문/참조확인이통과했다.
 - 관련기록9개에이동결기록을더해10개를같은커밋에넣는다. 중립역할코드/검사는추적수정의필수지원으로포함하고Design표·체력링·DNA편집기/비용·게임UI·다른채팅기록은제외한다. 기존월드14/공통156/실제N:N·20판검수와최신후보의정적검토를구분한다. 새전체빌드/테스트/브라우저는반복하지않는다.
 - 최종후보형식과private-index의staged diff/check후‘전투 판정 공통화와 중립종 추적 수정’으로커밋한다. 현재는아직커밋전이다. 전용origin과기존연결Projects0결과를재사용하며push/deploy/main병합은하지않는다.
-
-## 공통 전투·중립 추적 커밋 범위 확정 · 01a1a5fd
-
-- 기록 ID: combat-core-commit-scope-20261106-01a1a5fd. 기록 시각 2026-11-06T04:52:51+09:00. 기록자·범위 분리/커밋 판단 Codex /root, 기록·로컬 커밋 승인 사용자. 출처 현재 채팅01a1a5fd-bf0b-70a3-abf8-267f88676072의 ‘기록할 거 하고 커밋할 거 해’ 및 ‘재개하자’. H:/Spawner Windows PowerShell, 원 발언 정확 시각·항목 ID 불명.
-- 재개 관측: HEAD511e662(포자 이동 커밋) 위에 전투 공통화·중립 역할·추적 수정이 미커밋이며 shared index는 비어 있다. 전용 origin oojjrs/Spawner 일치와 기존 이 채팅의 연결 Projects0개 결과를 재사용한다. 커밋·푸시 완료를 선기록하지 않는다.
-- 후보는 공통 DNA 능력치/실제 전투 엔진을 쓰는 실험실, 편집·분석·교전해제 표시, 탄생 중 타깃 배제와 추적 회귀 및 지원 기록이다. 수정한 세계 검사가 의존하는 중립 공격 역할 카탈로그/실제 연결/검사를 관련 지원으로 포함한다. 코드 의존성만 포함하고 다른 채팅의 Design 역할 표·체력 링·DNA 편집기 통합·비용 함수·게임 UI·애셋 변경은 제외한다.
-- 공유 dna.mjs는 HEAD의 카탈로그를 보존하고 공통 stats 호출만 분리한다. stage는 HEAD에서 이번 외형 투영/nullable combat/지원군 사망 시계만 적용한다. build의 DNA 내장 생성기는 공통 모듈 의존성을 처리하는 변경만 분리한다. runtime·Combat·Attribute는 HEAD의 다른 모듈/HTML/본문을 유지하면서 이번 후보 모듈만 조합한다. 원래 작업 파일은 덮어쓰지 않고 별도 후보/인덱스에 저장한다.
-- 기존 검수 근거는 월드14/14·공통156/156·중립 역할 검사 및 실제4:4/20판 반복,12개 내장 모듈 일치이다. 분리 후보는 이전 실제 브라우저 검수와 달리 체력 링/편집기 등 병행 변경을 포함하지 않으므로 그대로 동일한 전체 화면 검증이라고 주장하지 않는다. 새 게임 실행/테스트/전체 빌드는 커밋 이유로 반복하지 않는다. 후보의 구문·참조·형식 및 최종 staged diff/check로 독립성을 검토한다.
-- 제목은 ‘전투 판정 공통화와 중립종 추적 수정’. 관련 미커밋 메모리와 중립 역할의 승인/코드 근거 기록을 같은 커밋에 포함하고 다른 채팅 기록과 기존 HEAD 기록은 보존한다. 공유 index/HEAD가 변하면 해당 범위를 재대조한 뒤 진행한다. 푸시·배포는 이번 범위에 없다.
-## neutral-attack-role-implementation-complete-20261105-01a1a0bf
-
-- 기록 시각: 2026-11-05T22:01:08+09:00. 역할·실제 거리 전환 적용 사용자, 기획서 정확 문구·위치 교정 사용자, 구현·통합 검수 Codex 메인, 독립 회귀 작성/실행 Meitner(01a1abb9-8e4e-79d3-8d7f-f98e54a670b2). 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d와 해당 워커 결과. 원발언 정확시각·항목 ID 미확인.
-- 완료 배정: 근딜12종, 원딜2종(꽃꼬리새/등불지기), 겸용5종(흙두더지/방울두꺼비/넝쿨거북/가시등 딱정벌레/가시등 우두머리). server/creature-attack-role.mjs의 명시19종 카탈로그를 실제 createCombat이 사용한다. 꽃꼬리새는 원딜이지만 근접 부리 대응을 허용하고 등불지기는 근접에서도 ranged판정을 유지한다.
-- 실제 구현: DNA_ACTION_RULES의 기존 근접1/원거리3·투사체속도6을 재사용한다. 겸용은 거리1이내 사격을 중지하고 기존 접근/같은셀 근접 교전을 따른다. 거리1초과3이하는 실제 발사 큐/비행/도착 피해, 밖은 기존 접근이다. 기존 combatProfile의 전투력·공격력·방어·공속/준비시간을 그대로 쓰며 가짜DNA나 새 공격 작화를 넣지 않는다. 시체/탄생/유닛 크기에는 관여하지 않는다. 기존 투사체 연출을 재사용한다.
-- 성향 판단·보존: 원래 선공/비선공/평화형 값은 그대로다. 평화형 중립도 자신을 직접 겨냥한 공격이 있을 때만 원거리 반격을 허용하도록 해당 판정의 actor를 임시 passive로 평가한다. 원래 agent/성향은 변경하지 않고 미공격·제3자 공격에는 발사하지 않는다. 실제 무효·후퇴 투사체 반환도 예외/피해 없이 마친다. 이는 새 역할의 반격 연결을 위한 Codex 구현 판단이다.
-- 범위 보존 보완: 실험실의 수동 stats.dna 기관/수치 편집을 역할표로 덮지 않도록 새 중립 역할/사거리/반격/애니시계 분기를 !stats.dna 자연 중립에만 제한했다. 수동 DNA 실험은 기존 기관 선택과 공통 DNA 판정/피해·공속·애니시계를 유지한다.
-- 문서 완료: 사용자 교정 승인대로 Design.html 중립 유닛 티어 표의 배정 의도 셀19개에서 기존 설명 위에 근딜/원딜/겸용 한 단어만 strong block으로 넣었다. 거절된 문구 대체·별도 거리 설명·새 페이지/열은 넣지 않았다. PC1440/mobile390 실제 Edge 화면에서19종/역할분포12·2·5와 문서 가로넘침0, 기존 설명 유지 확인·시각 검수. JS오류0.
-- 실행 산출물: client/runtime.js의 browser combat module 및 embedded worker combat module에 중립 역할 의존성과 필요한 변경만 좁게 반영했다. 다른 모듈/자산footer 및 병행 core/DNA 변경은 보존했다. 정상 client/build.mjs는 combat.mjs import를 따라 새 역할 모듈을 포함하므로 빌더 파일 자체 변경은 없다. 초기 동기화 임시 스크립트 보완 뒤 중복 ranged branch 없음·browser/worker 문법 정상 확인했다.
-- 검증: 독립 중립 회귀66개 통과 후 추가 평화형 방어/거리/후퇴7개, 실험실 수동DNA 보존1개를 변경 범위에 한해 추가실행해 각각7/7·1/1 통과했다. 기존 성공66개 전체를 재실행하지 않았다. 메인은 기존 DNA 원거리 선택·투사체·피해/공속 회귀4개 통과. 실제 Spawner.html에서 runtime API로12개 통제 교전을 실행해7종 원거리 도착피해, 겸용 거리1 사격금지/동일셀근접, 등불 동일셀원거리, 평화형 비선공/방어사격·원성향 및 noDNA를 확인했다. 실제 embedded Worker를 격리 실행한3개 교전에서도 근/원거리 사건과 HP81·noDNA를 확인했다. 검수 후 적용범위를 nonDNA로 좁힌 것은 위 자연중립 사례 동작을 바꾸지 않으며 새 수동DNA 회귀로 별도 확인했다.
-- 근거·상태: literal 루트 $Trash/neutral-attack-roles-20261105의 browser-qa.json, worker-qa.json, roles-1440.png, roles-390.png 및 작업 전 backup/동기화 recipe. 워커 최종 test SHA25699CC6E45F4DC4806B56248AF064A4EDF95A550BF3615F0F0B6C47EEC3ECA3178. 현 요청은 구현·기획서 반영까지이며 관련6경로는 unstaged/uncommitted로 남긴다. 다른 채팅의 DNA/core/실험실 편집 내용과 공유메모리는 유지한다. 커밋/푸시/배포 수행 없음.
-## 중립종 월드 추적 3실패 수정·재검수 완료 · 01a1a5fd 현재 요약
-
-- 기록 ID: creature-world-tracking-fix-result-20261105-01a1a5fd. 기록 시각 2026-11-05T21:57:58+09:00. 기록자·구현/직접 검수 Codex /root, 수정·검수 결정 사용자. 출처 현재 채팅01a1a5fd-bf0b-70a3-abf8-267f88676072의 최신 수정 요청. H:/Spawner Windows PowerShell. 원 발언 정확 시각·항목 ID 불명. creature-world-tracking-fix-start 및 combat-core-unification-final의 중립종3실패 잔여 상태를 이 결과로 대체한다.
-- 제품 수정: 공통 canPursueCombat에서 출생 readyAt 이전의 시전자·대상을 배제한다. 기존 월드 추적기가 제외하던 탄생 중 대상을 선행 원거리 스캔이 공격하는 실제 우회를 막았다. 완료 시각 경계부터는 정상 사격한다. 기존 중립 근접/원거리 역할·사거리·성향·영역·수치는 유지한다.
-- 검사 수정: 사거리3 안의 계속 걷기 기대는 승인된 겸용 사격과 충돌하므로 가시등벌레는4거리 추적, 감지반경3인 넝쿨거북은3거리 유닛 우선 사격을 검사한다. 이동 중 목표 사망 전환은 벌레4거리와 넝쿨거북1거리 접근을 검증한다. 근접 경로 차단에도3거리 원거리 타격 가능,4거리의 도달 불가/죽음/숨김/등장/탄생/도주 대상은 둥지 공격을 막지 않음을 인덱스 유무 양쪽에서 확인한다. 탄생 시전자/대상의 readyAt 직전·정확경계도 추가했다.
-- 검수 완료: 기존3실패 포함 월드 추적14/14 통과. 별도 중립 역할73검사는 같은 제품 수정 후 전부 통과했고 이후 입력 fixture만 보정했다. 공통 전투156/156 재검수 통과. 공통 모듈12개(실험실·인게임·내장 두 워커) 원본 일치·구문 확인 통과. 이번 후속 제품 수정은 combat의 eligibility 한 줄 및4개 내장 combat 블록이며 다른 모듈과 병행 변경은 보존했다.
-- 실제 화면 재검수: 중립종 외형4:4 원거리 자동 전투18.8초/151사건/타깃13전환, 최종 승패까지 완료.287프레임/생존1183 body-frame에서 누락·깜빡임0, 피격 이미지 지연33 fallback-frame 정상, 브라우저 오류0. 편성 변경·단계·끝까지·20판 반복 완료, 시간 제한0. 근거 literal 프로젝트 임시 폴더 creature-world-tracking-fix/{world-tests.tap,creature-tests.tap,shared-combat-tests.tap,browser-neutral-ranged-result.json,ranged-final.png}; creature-tests.tap에는 fixture 보정 전 세계검사3실패도 보존되어 있으므로 최종 세계 상태는 world-tests.tap이 기준이다.
-- 현재 요청의3실패 잔여는 해소되었다. 마지막5텍스트 형식/정확 국소 diff를 확인하고 미스테이징·미커밋으로 남긴다. 추가 제품 수정·푸시·배포는 수행하지 않는다.
-## 중립종 월드 추적 3실패 수정 착수 · 01a1a5fd
-
-- 기록 ID: creature-world-tracking-fix-start-20261105-01a1a5fd. 기록 시각 2026-11-05T21:53:21+09:00. 기록자·재현/구현 판단 Codex /root, 수정·재검수 결정 사용자. 출처 현재 채팅01a1a5fd-bf0b-70a3-abf8-267f88676072 최신 ‘중립종 월드 추적 검사 실패한 3개도 고치고 다시 검수해’. H:/Spawner Windows PowerShell, 원 발언 정확 시각·항목 ID 불명.
-- 범위: 앞선 combat-core-unification-final의 잔여3검사를 직접 수정·재검수하는 승인을 받았다. 다른 병행 파일·이전 전투 공통화의 미커밋 바이트를 보존하고 최소 공통 조건과 해당 검사만 고친다. 커밋/푸시 승인은 없다.
-- 재현: 가시등 딱정벌레·넝쿨거북은 사용자 승인 중립 역할에서 겸용이며 사거리1초과3이하 원거리를 쓴다. 기존 추적2검사의 거리2/3에서 walk 기대는 갱신 전 가정이다. 사거리 밖4에서 기존 유닛 우선 추적·이동 중 목표 사망 후 둥지 전환을 검증하고, 사거리 안 유닛 우선 사격 및 근접 경로 차단시 유효한 원거리 사격도 별도 검증한다. 막힌 길의 도달 불가 검사는 원거리에서도 닿지 않는4거리로 유지한다.
-- 실제 결함: 조건별 probe에서 죽음·숨김·등장·도주 대상은 둥지를 계속 공격하지만 birth.readyAt 이전 대상은 agent 사격으로 선택한다. 기존 월드 추적기는 탄생 조건을 걸렀으나 선행 공통 원거리 스캔의 canPursueCombat에는 그 조건이 빠져 우회했다. 공유 canPursueCombat에서 출생 준비 중인 시전자/대상을 배제하고 readyAt 경계는 허용한다. 아직 수정·검수 성공 아님. 근거 프로젝트 임시 폴더 creature-world-tracking-fix/probe.mjs의 조건별 실제 출력 및 메모리 neutral-attack-role-implementation-start.
-## 공통 전투 최종 재검수·병행 변경 구분 · 01a1a5fd
-
-- 기록 ID: combat-core-unification-final-20261105-01a1a5fd. 기록 시각 2026-11-05T21:49:11+09:00. 기록자·최종 구현/검수 Codex /root, 결정 주체 사용자(공통화·편집 유지) 및 Codex(최소 연결 수정). 출처 현재 채팅01a1a5fd-bf0b-70a3-abf8-267f88676072, H:/Spawner Windows PowerShell. 원 발언 정확 시각·항목 ID 불명. 직전 combat-core-unification-result-20261105-01a1a5fd의 최종 결과 일부를 보완·대체한다.
-- 마지막 검수 중 다른 작업의 server/creature-attack-role.mjs 및 중립종 원거리 교전 변경이 server/combat.mjs에 나타났다. 해당 변경을 보존하고 실제 공통 핵심·의존성을 양쪽 번들에 동기화했다. 중립종 외형에 원거리 DNA를 편집하면 species 대결/역할 제한으로 공격하지 못하는 실험실 연결 결함을 발견했다. 실험 개체는 편집 DNA를 가진 논리 개체로 유지하고 key/labAppearance를 렌더용 복사본에서 종족/생물 외형으로 투영한다. 실제 엔진의 생물 정책을 변경하지 않고 외형이 수치에 영향을 주지 않는 기존 UI 계약을 보존했다.
-- 최종 표적 검사156/156 통과. 추가된 중립종 외형 3:3 원거리의 사건·결과는 같은 편집 DNA의 종족 외형과 완전히 같다. 실제 화면에서 중립종 외형만으로4:4 원거리 자동 전투18.8초·151사건·타깃13전환을 완료했다. 287프레임/생존1187 body-frame에서 이미지 누락0·브라우저 오류0, 지연 피격 이미지32 fallback-frame도 정상 자세를 유지했다. 편성 삭제·단계·끝까지·20판 반복도 완료했고 시간 제한0이다. 최종 근접 지연 검수는149프레임/생존716 body-frame·타깃12전환·누락0이다. 근거 browser-neutral-ranged-result.json 및 browser-result.json.
-- 공통3모듈×4실행면의12개 바이트 일치/구문 검사는 현재 source/runtime/내장 워커/Combat에서 통과했다. 다른 작업의 DNA 등급·비용·체력 링·웰컴 변경은 보존했다. 메모리 포함15텍스트의 직전 형식 검사는 모두 UTF8NoBom/CRLF 통과했으며 마지막 수정 파일의 형식/국소 diff를 마무리한다.
-- 별도 발견·잔여: 추가로 실행한 server/creature-combat.test.mjs의 월드 추적 기대3개가 현재 병행 원거리 전투 경로에서 실패한다(걷기 기대, 공격 상태 관측). 공통화 전 원본 combat만 격리 loader로 대조하면 해당12검사는12/12 통과한다. 이번 공통화의156검사 및 실험실 N:N 검수와 구분하며, 병행 중립종 행동을 임의로 되돌리거나 테스트 기대를 고치지 않았다. 사용자에게 잔여로 보고한다. 근거 concurrent-core-tests.tap 및 creature-baseline.tap.
-- 현재 결과는 요청된 공통화·편집 유지·N:N 검수 완료이며 전체 인게임 월드 검사가 모두 통과했다는 뜻은 아니다. 커밋/푸시 미실행, 변경은 사용자 검토를 위해 유지한다.
-## 전투 실험실·인게임 공통 판정 완료 · 01a1a5fd 현재 요약
-
-- 기록 ID: combat-core-unification-result-20261105-01a1a5fd. 기록 시각 2026-11-05T21:42:59+09:00. 기록자·구현·검수 Codex /root, 공통화·편집 유지·N:N 자동 검수 결정 사용자. 출처 현재 채팅 01a1a5fd-bf0b-70a3-abf8-267f88676072 최신 구현 요청 및 예상 시간 질문. H:/Spawner Windows PowerShell. 원 발언 정확 시각·항목 ID 불명.
-- 완료 근거: 실험실 createSimulationTrial의 별도 판정기를 제거하고 실제 server/combat.mjs의 createCombat을 호출한다. server/dna-combat-stats.mjs의 계산을 실제 ATTRIBUTE_DNA.stats와 실험실이 공유한다. 공통화 전 인게임 DNA 원본과 45유전자×4등급×7개수=1,260조건 대조에서 최대 오차2.85e-14로 기존 수치를 보존했다. 실험실 기본값은 실제 선형 투자·확률 상한·방어식·연타·사건 순서와 같다.
-- 편집 유지: 편성 추가/삭제·외형·기관/수치·규칙·시드·거리·선공·지원군·배속·단계·끝까지·반복·교체 비교를 유지한다. 시작 기록의 전용 규칙 제거 구상은 대체됨. 방어 준비/재준비·반격 재준비·고정 후딜도 실제 엔진의 선택적 실험 입력으로 유지했고 기본값0은 기존 인게임 동작을 보존한다. 전투 종료 시 실제 엔진이 combat을 해제하는 상태를 표시부가 처리한다. 지원군도 실제 대상/치유/사망에 참여하고 분석 분모에 포함한다.
-- 실행 연결: Combat.html을 재생성했고 client/runtime.js의 공통 전투 모듈과 내장 월드/의사결정 워커만 동기화했다. 공통 3모듈×4실행면=12개 원본 바이트 일치 및 구문 검사를 통과했다. 병행 DNA 비용 cost 추가 등 비전투 변경은 별도 범위로 보존한다. 새 의존성을 읽는 Attribute 생성기만 bundle 호출로 보완했다.
-- 실제 검수: 최종 표적 검사155/155 통과. 4:4 및8:8의 사건·타깃·사망·최종HP를 실제 엔진 직접 실행과 대조했다. 광역·출혈·흡혈·반사·막기·반격·기절·연타·치유·투사체 취소와 같은 시드의 자동/단계/분할 재생을 확인했다. 기존 치유 표시 검사는 낮은 체력으로 새 실전 퇴각이 발동하므로 충분한 체력 fixture로 수정했고 표시/무변이 검사를 통과했다.
-- 격리 헤드리스 브라우저: 4:4 근접10.3초, 원거리18.8초 등의 실제 자동 전투에서 타깃 전환·승패까지 확인했다. 최종 근접 지연 검수157프레임/생존765 body-frame, 타깃12전환, 살아 있는 이미지 누락0, 브라우저 오류0. 솜양 피격 이미지 응답을 첫 피격까지 보류 후350ms 늦춰도 정상 자세 fallback2프레임을 유지했다. 별도 원거리291프레임/생존1182 body-frame에서도 누락0·13타깃 전환. 편집 후20판 반복 실행 완료, 무승부/시간 제한0. 후크와 지연은 검수용 응답에만 주입했으며 제품 후크는 없다.
-- 근거 위치: 프로젝트 임시 폴더 combat-core-unification의 targeted-tests.tap, bundle-parity.json, browser-result.json, browser-initial-result.json, melee-final.png, ranged-final.png 및 원본 백업. 제품 변경·메모리 최종 형식/국소 diff 확인 후 종료하며 커밋·푸시는 이번 범위에 없다. 병행 Design/웰컴/오디오/DNA 비용 등 변경과 Git 상태는 보존한다.
-## neutral-attack-role-implementation-start-20261105-01a1a0bf
-
-- 기록 시각: 2026-11-05T21:37:48+09:00. 역할 배정·거리 전환·기획서 반영 요청 및 결정 사용자, 구현 판단 Codex 메인. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d의 「추천한 대로 중립 유닛들 공격 역할 나누고 기획서에 반영…겸용 애들은 거리에 따라…」. 원발언 정확시각·항목 ID 미확인.
-- 확정 방향: 방울두꺼비·흙두더지·넝쿨거북·가시등 딱정벌레·가시등 우두머리의 근원거리 겸용, 꽃꼬리새의 원거리 중심+근접 대응, 등불지기의 원거리, 나머지12종의 근거리 역할로 적용한다. 앞선 proposal/addendum의 미확정 상태를 이 사용자 구현 지시로 대체한다.
-- 구현 판단: server/dna-actions.mjs에 이미 있는 meleeRange1/rangedRange3/projectileSpeed6 기준을 재사용한다. 근접 가능+거리1이하는 근접,1초과3이하는 원거리, 사거리 밖은 기존 접근을 따른다. 기존 전투력/공격력/공속/선공·비선공·평화 성향은 변경하지 않는다. 중립에 가짜 DNA를 넣지 않고 명시 역할 카탈로그와 실제 createCombat의 기존 투사체 큐·판정을 연결한다. 새 애니/래스터 아트는 제작하지 않고 기존 공격 자세와 실제 투사체 연출을 쓴다.
-- 범위 보호: 현재 combat.mjs·combat-stats.mjs·runtime·DNA·실험실 공통화 등의 병행 변경이 있다. 이를 백업·보존하고 필요한 최소 중립 역할 연결만 수정한다. Git완료·푸시·배포는 이번 요청에 없다. 독립된 거리/성향/투사체 회귀 검증을 동일 모델·추론 강도의 서브워커에 맡기고 메인은 구현·문서·통합 검수를 직접 맡는다.
-- 문구 절차: document-writing-guideline6의 별도 정확 문구·위치 사전 허가가 필요하므로 기존 중립 유닛 티어 표의 배정 의도 셀을 역할4문구로 바꾸는 안과 표 위 거리 전환 한 줄만 확인 요청한다. 사용자 답변 전 해당 HTML문구를 쓰지 않고 코드 적용은 진행한다. 새 페이지나 문구 초안/숨김 삽입은 하지 않는다.
-## 전투 판정 공통화 진행 · 01a1a5fd 현재 요약
-
-- 기록 ID: combat-core-unification-start-20261105-01a1a5fd. 기록 시각 2026-11-05T21:20:59+09:00. 기록자·구현 판단 Codex /root, 요청·결정 사용자. 출처 현재 채팅 01a1a5fd-bf0b-70a3-abf8-267f88676072의 최신 공통화·편집 유지·N:N 자동 검수 지시. H:/Spawner Windows PowerShell. 원발언 정확 시각·항목 ID 불명.
-- 이전 동일성 감사 combat-lab-core-parity-audit-20261105-01a1a5fd 후 사용자가 구현을 승인했다. 실전 server/combat.mjs를 공통 엔진으로 사용하고 DNA 능력치 기본값도 실제 ATTRIBUTE_DNA 경로와 공유한다. 실험실은 입력·편성·시드·자동/단계/반복 실험 제어만 맡는다. 별도 판정 스케줄러를 제거한다. 폐기된 실험실 전용 판정 규칙은 공유 엔진의 실제 규칙으로 정렬하고 편집 가능한 수치·편성 기능은 유지한다.
-- 실전 전투·DNA 변경 이력과 실제 진입점을 대조했다. 실험실만의 동시 체력 일괄 갱신·거리 우선 전투 타깃을 실제 엔진 판정으로 교체할 계획이다. 인게임 피해·판정 기본값과 기존 특수효과를 보존한다. 검수는 공유 엔진 직접 대조·N:N 타깃 전환/사망 후 취소/종료와 실제 격리 화면 자동 전투·깜빡임으로 한정한다. 아직 구현·검수 성공 아님.
-- 사전 dirty 파일은 메모리·Design·탄생 미리보기·웰컴/오디오·runtime 등의 병행 작업이다. 이를 보존하고 대상 원문은 작업 임시 폴더에 보관한다. 이 채팅의 origin oojjrs/Spawner Projects0개 결과를 재사용한다. 현재 요청은 커밋·푸시를 포함하지 않는다.
-## 전투 실험실과 인게임 핵심 로직 차이 확인 · 01a1a5fd 현재 요약
-
-- 기록 ID: combat-lab-core-parity-audit-20261105-01a1a5fd. 기록 시각: 2026-11-05T21:14:37+09:00. 기록자·코드 대조 Codex /root, 동일성 질문·범위 지정 사용자. 출처 현재채팅 01a1a5fd-bf0b-70a3-abf8-267f88676072의 「테스트를 위한 에디트 기능 제외하고 핵심 로직」 비교 요청. H:/Spawner Windows/PowerShell. 원 발언 정확시각·항목 ID 불명.
-- 확인 사실: 현재 client/combat-lab.js:2/173은 client/combat-simulation.mjs의 createSimulationTrial을 사용한다. 실제 게임 server/game.mjs:28은 server/combat.mjs의 createCombat을 사용한다. client/combat-lab.mjs의 예전 createCombatTrial은 실제 엔진을 호출하지만 현재 실험실 화면의 실행 경로가 아니다. 관측 HEAD는 c34abe6이며 이번 대조는 현재 작업 파일 기준이다.
-- 공유 범위는 server/dna-actions.mjs의 공격 모드/사거리, 투사체 이동시간·유효성, 아군 치유 분배와 공통 VFX 기록 일부다. 전투 판정 엔진 전체를 공유하는 상태가 아니다.
-- 핵심 차이: 실험실 derive/evaluate는 자체 로그·포화 곡선, armorCap 기반 방어 점감 및 evasion*(1-accuracy) 회피를 쓴다. 실전 combat-stats/combat의 실제 프로필·피해 100/(100+armor), DNA 피해감소와 max(0,evasion-accuracy) 회피 등과 다르다. 실험실은 같은 시점 outcomes를 모아 체력을 일괄 갱신하지만 실전은 시각/사건 종류/ID 순서로 개별 판정한다. 실험실 새 타깃은 거리/ID 우선, 실전은 현재 목표 유지 뒤 군사 우선 조건/참전 순서/ID로 고른다. 실전의 출혈·광역·피해반사·전투 후 재생·퇴각/도주를 실험실 핵심 모델이 동일하게 재현하지 않는다.
-- 판단: 편집 UI만 다른 동일 엔진이라고 답할 수 없다. 실험실 승률·피해·사망 순서 통과를 인게임 동일 결과 검증으로 취급하면 안 된다. 인게임 검증용으로 동일성을 보장하려면 편집 입력/실험 제어와 분리해 실제 createCombat·프로필·DNA 판정 경로를 재사용하는 구조가 필요하다는 Codex 판단이며, 이번 질문 자체는 구현·커밋 승인이 아니다.
-- 이번 범위는 관련 소스/기존 메모리의 읽기 전용 대조와 본 메모리 예외 기록이다. 브라우저·서버·빌드·테스트·제품 수정·Git 완료 작업을 실행하지 않았다.
-## 공통 편집기 통합 로컬 커밋 재개·범위 확정 · 01a1a129
-
-- 기록 ID: dna-shared-editor-commit-freeze-20261106-01a1a129. 기록 시각: 2026-11-06T04:54:12+09:00. 기록자·범위분리/직접검수 Codex /root, 메모리 정리·커밋 및 재개 승인 사용자. 출처 현재채팅01a1a129-d9d6-79c3-830d-58009e34c915의 통합 커밋 요청과 최신「재개하자」, H:/Spawner Windows/PowerShell. 원발언 시각·항목 ID 불명.
-- carry 범위는 직전 완료한 공통 편집기·제작기 전용 어댑터·통합 빌드와 회귀다. 계산의 직접 의존성 server/dna-combat-stats.mjs 및 dna.stats의 해당 위임은 실제 검수한 공통 모델을 재현하는 필수 지원으로 함께 포함한다. 이를 빼고 이미 생성한 Attribute만 넣으면 소스/계산 사본이 다시 달라지므로 같은 원자적 커밋이 필요하다. 무관한 combat엔진/실험실·health-ring·기획서 변경은 제외해 보존한다.
-- 후보12경로: Attribute.html, client/attribute-editor.css, client/attribute-editor.js, client/build.mjs, client/dna-editor.mjs, client/dna-editor.test.mjs, client/game.js, client/runtime.js, server/attributes.mjs, server/dna.mjs, server/dna-combat-stats.mjs, CodexWorkMemory.md. game.js는 공유 스탯 renderer 제거/호출부만, build는 writeAttributeDna/전용모드만, runtime은 HEAD의 네 공통모듈 및 필요한 중첩worker 계산모듈만 분리한다. HEAD 기존 기록은 모두 유지하고 이번 parity-review/start/view/complete/freeze 기록만 추가한다.
-- 기존18회귀·실제file제작기/실게임PC·390검수·CSS/정상마크업 불변 및 형식 결과를 재사용한다. 후보의 직접 모듈 정합과 staged 정확 경로/차이/공백만 확인하고 게임·브라우저·성공한 검사를 반복하지 않는다. 같은 전용origin oojjrs/Spawner/연결Projects0 확인을 재사용한다. 별도index/HEAD경합가드로「속성 제작기와 인게임 편집기 통합」로 로컬 커밋하며 아직 성공 전이다. 푸시·배포 승인으로 확대하지 않는다.
-
-## 속성 제작기·인게임 공통 편집기 통합 완료 · 01a1a129 현재 요약
-
-- 기록 ID: dna-shared-editor-complete-20261105-01a1a129. 기록·현재 최종근거 확인 시각: 2026-11-05T21:59:03+09:00. 기록자·계약/취합/실물검수 Codex /root, 통합·기존 인게임 레이아웃 유지·단축키 확인 승인 사용자. 구현/자체검수 shared_editor_core·shared_editor_tool, 독립 입력/실브라우저/실물검수 shared_editor_qa는 메인 모델·추론 강도 상속으로 독립 소유 범위를 분담했다. 출처 현재채팅01a1a129-d9d6-79c3-830d-58009e34c915와 직접 소스/JSON/PNG 검수, H:/Spawner Windows/PowerShell. 원발언 정확 시각·항목 ID 불명. start/view-contract 및 parity-review의 미통합 상태를 이 완료로 갱신한다.
-- 공통 구현: 양쪽이 client/dna-editor.mjs의 createDnaEditor 하나를 실제 호출한다. 배치·자동/수동 회전·후보/범위/충돌검사·삭제·undo/redo·이력 경계·그림·목록/범례·마우스/키보드·보기 계산이 공유된다. ATTRIBUTE_DNA.cost가 기본3+DNA가격을 단독 정의하고 실제 birthCost·편집 비용 표시가 호출한다. dnaDesignStats/renderDnaDesignStats도 공유한다. game.js의 중복 스탯표시/기준값 계산은 제거하고 같은 API를 호출한다.
-- 제작기 분리: Attribute.html의 별도 편집 컨트롤러/그림/단축키/이력 구현을 제거했다. classic client/attribute-editor.js에는 자유 레벨·템플릿/브라우저 저장·JSON I/O·테스트 확대 버튼만 남고, 공통 context/load/getDesign/clearHistory/zoom/fit API에 연결한다. 기존 저장키·이름/목록제한·저장/불러오기 이력 경계를 유지한다. 파일 오류는 기존 동일문구로 보이는 전용 출력에 표시하고 정상 import시 지우며 확대 후 공통 root로 focus를 돌린다. 별도 client/attribute-editor.css는 PC 제작기 바깥 도구만 담당한다.
-- 인게임 동결: client/game.css의 baseline SHA6c8695fb0dccaaabbc8873b850a84b3c5421f9714b0d728e96ce11b96aa88faf와 기존 root.innerHTML 문자열이 동일함을 확인했다. 패널/목록/스탯/비용/회전 버튼 레이아웃을 바꾸지 않았다. 기존 입력에 F=전체보기만 공통으로 보존했고 Q/E/R·방향키/휠회전, 휠클릭DNA순회, 좌클릭/Enter/Space배치, 우클릭/Backspace/BrowserBack/버튼3/CtrlZundo, CtrlY/CtrlShiftZredo, Delete삭제와 폼/contenteditable/native summary/button·readonly guard를 검수했다.
-- 빌드/최신성: build.writeAttributeDna는 공통 DNA+editor bundle을 만들며 --attribute-editor-only로 제작기만 갱신한다. runtime은 main의 DNA/attributes/editor와 두 worker의 DNA/attributes만 좁게 동기화했고 다른 모듈/assets/footer 보존 guard가 통과했다. 이후 병행 health-ring 작업의 runtime 외부 변경을 보존하고 파일 전체 hash 동결 대신 공유 모듈 본문 정합을 확인했다. 마지막 검수에서 제작기 dna-combat-stats 사본의 일부 recovery/cooldown 필드 누락을 발견해 해당 모듈1개만 원본 bcbf944664844d0035a8d58a1e9e3d2194083470e1ff493961ea3427f53f4281로 맞췄다. 다른 Attribute inline모듈/외곽HTML/CSS/script순서는 동일했다. 원인 시점을 추정해 확정하지 않는다.
-- 실제 검사: 공통 입력/API/가격/스탯17개 성공93ms를 재사용하고, 마지막 번들 회귀1개를 editor·DNA·직접combatStats·runtime attributes 본문 정합까지 강화해 최종62.0236ms 통과했다(총18개). 실패한 사본 정합만 수정 후 재확인했고 성공한 입력/브라우저를 반복하지 않았다. 소유 코드·어댑터·빌드·생성HTML/runtime·회귀파일 형식/구문 검수는 각 최종 바이트에서 성공했다. 테스트 최종SHA6953c8f4837a2357a0e38b38f82500e8899a45d09ce21fb0f2ee9c8fcd7985b9, Attribute최종SHAd108817829e8cfcdbb782cab66f7026e109c717739f3f056042a7970e711abd6, adapterSHAe310cb0669f5670858908f9c6da064a3cbd8eb824c1124dd54bc09291846b175이다.
-- 실제 화면: file 제작기PC와 정상 서버 실제 인게임PC/390모바일에서 공통 배치/회전/선택/undo/redo·native키·초기화/저장/불러오기 경계·채집기관1회·오류 import 가시/정상파일 해소를 확인했다. pageerror0/가로overflow없음, 모바일 비용이 뷰우하단에 있고 기존 패널 배치를 유지했다. QA와 부모가 standalone-pc/ingame-pc/ingame-mobile PNG3장을 각각 직접 확인해 겹침/배치 문제없음을 확인했다. 해당 브라우저 검수 중 source5hash가 전후 같았으며 이후에는 계산dep 한 사본만 변경됐고 그 차이를 소스 정합 회귀로 검수했다. 서버/격리 브라우저는 종료했다.
-- 정확 작업 범위: server/dna.mjs, server/attributes.mjs, client/dna-editor.mjs, client/game.js, Attribute.html, client/attribute-editor.js, client/attribute-editor.css, client/build.mjs, client/runtime.js, client/dna-editor.test.mjs 및 본 메모리다. 기존/동시 채집기관1회·카탈로그/전투스탯·웰컴·health-ring·기획서 등 보호된 변경은 되돌리지 않았다. 근거는 H:/Spawner/$Trash/dna-editor-unification-20261105의 baseline-manifest.json, core/{verification.json,scoped.diff}, tool/{runtime-sync.json,self-check.json,format.json,combat-stats-sync.json}, qa/{qa-summary.json,browser-report.json,final-module-parity.json,bundle-core-dependency-test.txt,PNG3장}이다. 현재 로컬 게임과 제작기 통합은 완료했으나 이 요청으로 staging/commit/push/deploy는 하지 않았다.
-
-## 공통 편집기 보기 API·단축키 보존 판단 · 01a1a129
-
-- 기록 ID: dna-shared-editor-view-contract-20261105-01a1a129. 기록 시각: 2026-11-05T21:38:12+09:00. 기록자·계약/재작업 지시 Codex /root, 공통 UX·인게임 레이아웃 동결 요구 사용자. 출처 현재채팅01a1a129-d9d6-79c3-830d-58009e34c915와 shared_editor_core/tool/qa 협업 메시지, H:/Spawner Windows/PowerShell. 원발언 시각·항목 ID 불명.
-- 제작기의 기존 수동 확대/축소는 제거하는 중간 제안 대신 명시적인 테스트 버튼으로 보존한다. core.zoom(factor) 하나만 공통 view를 변경하고 어댑터에는 자체 scale/pan 계산이나 키보드 구현을 남기지 않는다. 정상 자동맞춤/편집 명령은 양쪽이 같은 core를 사용한다. 기존 tool F=전체보기는 공통 root의 fit shortcut으로 옮겨 인게임에서도 동일하게 제공하며 입력 필드·modifier guard를 유지한다. 새 패널 버튼·가이드 문구·게임 CSS/마크업/레이아웃은 추가하지 않는다.
-- 공통 모듈 API 구현과 기존 마크업/CSS 불변 자체 검수 결과를 받았다. 마지막 F 공통화 후 정확 source hash를 갱신하고 어댑터/build 워커가 runtime의 core·DNA·attributes와 새 직접 DNAcombatStats 의존성만 메인/nestedworker에 동기화하도록 지시했다. 다른 모듈/assets/footer는 바이트 보존이 조건이다. 현재 구현 중인 새 catalog/채집기관1회/전투스탯의 병행 사용자 변경은 되돌리지 않는다.
-- QA는 이전 제작기 전용 함수 추출 검사 대신 실제 공유 editor/API 호출, 텍스트 입력 중 단축키 비발동, 마우스/키보드 undo/redo/회전/배치, readonly·막힌 미리보기, 제작기 외부 도구와 화면을 검수한다. 현재는 통합/최종검수 진행 중이며 배포·Git완료를 선기록하지 않는다.
-
-## 속성 제작기·인게임 공통 편집기 통합 착수 · 01a1a129 현재 요약
-
-- 기록 ID: dna-shared-editor-start-20261105-01a1a129. 기록 시각: 2026-11-05T21:29:31+09:00. 기록자·분해/계약/검수 판단 Codex /root, 공통 편집기 통합·인게임 레이아웃 유지·단축키 검수 승인 사용자. 출처 현재채팅01a1a129-d9d6-79c3-830d-58009e34c915 최신 통합 지시. H:/Spawner Windows/PowerShell. 원발언 정확 시각·항목 ID 불명.
-- 이번 확정 요구: 계산·상태/배치/회전/삭제/이력/미리보기/입력/표시를 공통 편집기로 쓰고 제작기만 테스트/치팅/자유 레벨·파일 I/O를 바깥에 붙인다. 현재 인게임 DOM 배치·CSS·패널 레이아웃은 변경하지 않는다. UI를 재설계하지 않고 단축키와 입력 동작을 확인한다. 직전 read-only parity-review의 미통합 상태를 이번 구현 범위로 갱신한다.
-- 계약: 기존 createDnaEditor(container,M,onChange)를 양쪽이 호출한다. 공통 M.cost(pieces)로 기본3+DNA가격을 한곳에 두고 실제 birthCost·편집기 가격에 연결한다. 공통 dnaDesignStats(M,pieces)와 renderDnaDesignStats(container,stats,base,showScale)를 같은 편집기 모듈에 둬 기존 스탯표기를 공유한다. 제작기는 공통 editor.context/load/getDesign/clearHistory/fit에만 의존하며 편집 이력/회전/그리기/키보드 구현을 별도로 가지지 않는다. showScale false 제작기/true 인게임은 기존 명시 표시 차이를 보존한다.
-- 현재 병행 변경: DNA 모델·편집기에는 다른 채팅의 채집기관1회 정책/외형 및 스탯 작업이 이미 나타나 있다. 현재 바이트를 보존해 통합하고 이를 임의 제거하거나 이전 다중기관 상태로 돌리지 않는다. client/game.css와 기존 editor root markup은 동결하고 baseline-manifest.json으로 유지 근거를 남긴다. 모든 기존·동시 제품·메모리 원문을 보호한다.
-- 독립 분담은 같은 메인 모델/추론 강도 워커에게 공통 모듈·제작기 어댑터/빌드 연결·입력/레이아웃 검수로 나눈다. 각자 소유 파일과 자체 검수를 맡고 부모는 계약·결과를 취합한다. 임시는 H:/Spawner/$Trash/dna-editor-unification-20261105. 현재 구현/검수 전이며 새 Git완료·푸시·배포는 승인되지 않았다.
-
-## 속성 제작기·인게임 공통 로직 구조 비교 · 01a1a129 현재 요약
-
-- 기록 ID: dna-editor-core-parity-review-20261105-01a1a129. 기록·현재 근거 확인 시각: 2026-11-05T21:23:16+09:00. 기록자·직접 소스 비교 Codex /root, 핵심 계산/구현 동일성과 제작기 수준의 인게임 UX 요구 주체 사용자. 출처 현재채팅01a1a129-d9d6-79c3-830d-58009e34c915 최신 질문, H:/Spawner Windows/PowerShell. 원발언 정확 시각·항목 ID 불명. 이번은 구조·호출 경로를 읽기 비교한 진단이며 제품 통합 구현·테스트 실행·Git·배포를 수행한 것으로 기록하지 않는다.
-- 사용자 기준: 제작기의 테스트용 편집/치팅 기능을 제외한 핵심 계산·구현은 인게임과 같아야 하며, 인게임도 제작기만큼 편리해야 한다. 제작기 전용 도구가 공통 핵심을 별도 복제하는 이유가 되지 않는다.
-- 직접 비교 사실: server/dna.mjs를 export→window.AttributeDna로 바꾼 본문과 Attribute.html의 dna-model이 줄바꿈/양끝 공백을 제외하고 정확 일치했다. runtime.js의 server/dna.mjs 모듈도 export 제거 후 원본과 정확 일치했다(두 비교 true). 따라서 현재 카탈로그·모양·route/trace·가격합계·counts/weights·stats·일반validate는 같은 원본 코드다. client/build.mjs의 writeAttributeDna와 bundle이 각각 사본을 만든다. 서버 최종 validateDna는 추가적인 정규 조각/현재 레벨/예산 검사 계층이며 제작기 테스트용 level·저장 I/O와 구분한다.
-- 공통화되지 않은 실제 구조: Attribute.html은 자체 candidate/previewState/commit/rotate/remove/history/fit/키 입력/그림/스탯표시를 가지며 인게임은 client/dna-editor.mjs 및 client/game.js에 각각 별도 구현이 있다. 모양·스탯·가격 모델이 같아도 편집기 전체를 같은 함수로 실행하는 구조는 아니다. UI의 기본비용3 더하기도 두 화면과 실제 birthCost에 반복되어 현재 숫자는 같지만 단일 호출로 묶이지 않았다.
-- 구체 차이: 제작기 remove는 M.trace(next)로 level을 넘기지 않고 인게임은 M.trace(next,level)을 사용한다(Attribute217/editor101). 이것이 정상 편집에서 곧바로 재현되는 범위 밖 배치를 뜻한다고 단정하지 않는다. fit도 제작기는 현재 판/조각 기준과 수동 시점, 인게임은 가능한 후보 방향을 포함한 viewport를 state마다 적용한다. Space/방향키/Ctrl+Y 등은 인게임에 더 있고 제작기는 드래그/수동 확대·레벨선택/템플릿·JSON I/O가 별도다. 후자의 테스트/기존 요청상 차이는 무조건 UX 결함으로 처리하지 않는다. 현재 스탯표의0숨김·합산/괄호 증감 방식은 대응하나 함수는 중복이고 크기행 제외는 기존 제작기 명시 범위다.
-- 결론·후속 판단: 계산모델은 현재 일치하지만 핵심 편집 구현과 UX까지 단일화됐다고 보장할 수 없다. 공통 계산모델+공통 편집 상태/명령/미리보기/입력/표시를 양쪽이 쓰고, 제작기는 바깥에 치팅/파일/자유 레벨 도구만 붙이는 방향이 사용자 요구에 맞는다. 이는 조사 결론이며 아직 실제 통합 완료나 새 UX 실화면 검수를 주장하지 않는다. 이번 변경은 메모리 예외 기록뿐이고 원제품/병행 내용·원기록은 전부 보존한다.
 
 ## 2026-11-06 승인 솜양·등불지기·가시등대장 사망 상세 연결 게시 준비
 
@@ -600,13 +294,73 @@
 ## 2026-11-05 포자버섯 원화 승인 반영
 
 - 사용자 「포자버섯 원화는 다 오케이」에 따라 검토된 포자 원화14종의 source 승인만 기록했다. 원본 픽셀/해시는 유지하며 실제 메시지 증거를 받아들이도록 승인 검사를 보완했다. 카메라 검수·동작 완성·worldReady는 올리지 않는다. 미승인 보관 이력은 포함하지 않고 공개 main의 8a4a8174에서 분리했다.
+## 중립 스탯 표 반영·3일꾼 습격표 재개 · 01a1a0e9 현재 요약
+
+- 기록 ID: neutral-stats-economy-raid-resume-20261106-01a1a0e9. 기록·현재 확인 시각: 2026-11-06T04:54:40+09:00. 기록·취합 Codex /root, 재개 요청 사용자. 출처 현재채팅01a1a0e9-2e09-7703-a7f5-613c21744e11 최신 「재개하자」 및 직전 수치/기획서/병렬 요청. H:/Spawner Windows/PowerShell. 원발언 정확 시각·항목 ID·딥링크 불명.
+- 사용자 확정 재개 범위: 시작 일꾼3기 기준 경제·시간대별 습격 종류/레벨/수/방어표, 중립19종 나머지34스탯 초안 및 기획서 수치 갱신. 시작 일꾼3기는 확정됐으며 gather기관1개·시작30P는 이번 계산 가정이다. 직전 tentative2/3기 기록에서3기 결정을 현재 요청으로 연결한다.
+- 문서 범위: 새제목3개·경제/습격본문 추가 질문에 사용자는 「뭔데 이게. 왜 추가하는건데?」라고 되물었고 해당 새문구의 허가는 없었다. 부모가 새블록을 넣지 않고 기존중립표 수치만갱신하며 경제/습격표는chat에 정리한다고 명시했다. 이 좁힌 범위를 유지하며 새목차/제목/설명·라벨·툴팁을 추가하지 않는다. 숫자 초안 계산·기존셀 반영은 사용자가 직접 위임한 내용으로 취급한다.
+- 직전 계산 상태 확인: 실제3기gather 초기화의seed13경제는본진3칸 자원고갈로 콩167/포자65/몽돌91/샘방울62P에서정체. 근접자원3×300P 실험은 별도조건이며현재맵보장값이 아니다. 칼날/분비2등급, 둥지80/400/2000(몽돌25%할인), S27/M52/H72/R17의 현재카탈로그값을사용한다. 구형1레벨23P군사기준은 대체됐다.
+- 병렬 진행: 직전 사용자의 동시 하위에이전트 요청에 따라 finish_design_numbers가기존표숫자반영/검수,finish_raid_tables가누적K82전열·기존병력보존경제표통합을담당한다. 부모는범위보존·결과통합/독립검수를한다. 어제old agents는live목록에없어새main동일모델/추론상속작업으로연결했다.
+- 수치 초안 판단: 기존HP19티어590은currentDNA모양에서확인된390HP배치보다낮음을증명하지못했다. 안전한새초안은HP18티어330/19티어380으로하고나머지HP1..17·33축은유지해최고380<유효DNA390을맞춘다. 원HP1200안/원티어입력은보존한다. 이는Codex의초안계산판단이며 사용자최종밸런스확정이나게임수치적용이아니다.
+- 미완료: Design수치반영실행/렌더검수와K82포함누적경제표최종취합은아직대기. 기존역할근딜/원딜/겸용과모든병행바이트를보호한다. 커밋/푸시/배포는이번재개범위에추가되지않았다.
+## 공통 편집기 통합 로컬 커밋 재개·범위 확정 · 01a1a129
+
+- 기록 ID: dna-shared-editor-commit-freeze-20261106-01a1a129. 기록 시각: 2026-11-06T04:54:12+09:00. 기록자·범위분리/직접검수 Codex /root, 메모리 정리·커밋 및 재개 승인 사용자. 출처 현재채팅01a1a129-d9d6-79c3-830d-58009e34c915의 통합 커밋 요청과 최신「재개하자」, H:/Spawner Windows/PowerShell. 원발언 시각·항목 ID 불명.
+- carry 범위는 직전 완료한 공통 편집기·제작기 전용 어댑터·통합 빌드와 회귀다. 계산의 직접 의존성 server/dna-combat-stats.mjs 및 dna.stats의 해당 위임은 실제 검수한 공통 모델을 재현하는 필수 지원으로 함께 포함한다. 이를 빼고 이미 생성한 Attribute만 넣으면 소스/계산 사본이 다시 달라지므로 같은 원자적 커밋이 필요하다. 무관한 combat엔진/실험실·health-ring·기획서 변경은 제외해 보존한다.
+- 후보12경로: Attribute.html, client/attribute-editor.css, client/attribute-editor.js, client/build.mjs, client/dna-editor.mjs, client/dna-editor.test.mjs, client/game.js, client/runtime.js, server/attributes.mjs, server/dna.mjs, server/dna-combat-stats.mjs, CodexWorkMemory.md. game.js는 공유 스탯 renderer 제거/호출부만, build는 writeAttributeDna/전용모드만, runtime은 HEAD의 네 공통모듈 및 필요한 중첩worker 계산모듈만 분리한다. HEAD 기존 기록은 모두 유지하고 이번 parity-review/start/view/complete/freeze 기록만 추가한다.
+- 기존18회귀·실제file제작기/실게임PC·390검수·CSS/정상마크업 불변 및 형식 결과를 재사용한다. 후보의 직접 모듈 정합과 staged 정확 경로/차이/공백만 확인하고 게임·브라우저·성공한 검사를 반복하지 않는다. 같은 전용origin oojjrs/Spawner/연결Projects0 확인을 재사용한다. 별도index/HEAD경합가드로「속성 제작기와 인게임 편집기 통합」로 로컬 커밋하며 아직 성공 전이다. 푸시·배포 승인으로 확대하지 않는다.
+## neutral-attack-role-resumed-complete-20261106-01a1a0bf
+
+- 기록 시각: 2026-11-06T04:54:09+09:00. 재개 요청 사용자, 현재 상태 직접 대조·완료 판단 Codex 메인. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d의 「재개하자」. 원발언 정확시각·항목 ID 미확인. 이전 구현·기획서 문구 교정 승인을 그대로 이어받았다.
+- 현재 확인: HEAD511e662 및 실제 작업 파일에서 중립 역할 카탈로그, 공격 통계 adapter·근접/원거리 선택·평화형 방어 반격·수동DNA 보존 분기가 소스/server combat과 client/runtime의 browser/embedded-worker 양쪽에 동일함을 정적 대조했다. 기획서 기존 배정 의도 셀19개 위의 역할 표시는 근딜12/원딜2/겸용5로 유지됐다. 기존 설명·셋 중 하나만 표시하는 사용자 교정을 보존한다.
+- 재사용 근거: 회귀 파일 SHA25699CC6E45F4DC4806B56248AF064A4EDF95A550BF3615F0F0B6C47EEC3ECA3178 불변, 앞선 독립66+추가7+수동DNA1 및 기존DNA4 성공과 PC1440/mobile390 시각 검수·runtime12/실제Worker3 교전 결과를 재사용한다. 이번 재개에서는 제품 코드를 다시 수정하거나 테스트·브라우저·빌드를 반복하지 않았다. 직접 비교 도구는 literal 루트 $Trash/neutral-attack-roles-20261105/resume-check.mjs.
+- 완료 상태: 추천 중립 역할 배정·실제 거리별 공격 전환·승인된 기획서 표시는 구현/검수 완료다. 중립 역할 및 관련 작업 파일은 현재 미커밋이며, 재개가 새 커밋·푸시 승인은 아니므로 Git완료를 수행하지 않았다. 다른 채팅의 공유 코드/문서/기록과 기존 EOF빈줄은 그대로 보존했다. 앞선 implementation-complete/final-check를 현재 파일과 대조해 유효함을 확인했으며 별도 콘텐츠 blocker 없음.
+## 공통 전투·중립 추적 커밋 범위 확정 · 01a1a5fd
+
+- 기록 ID: combat-core-commit-scope-20261106-01a1a5fd. 기록 시각 2026-11-06T04:52:51+09:00. 기록자·범위 분리/커밋 판단 Codex /root, 기록·로컬 커밋 승인 사용자. 출처 현재 채팅01a1a5fd-bf0b-70a3-abf8-267f88676072의 ‘기록할 거 하고 커밋할 거 해’ 및 ‘재개하자’. H:/Spawner Windows PowerShell, 원 발언 정확 시각·항목 ID 불명.
+- 재개 관측: HEAD511e662(포자 이동 커밋) 위에 전투 공통화·중립 역할·추적 수정이 미커밋이며 shared index는 비어 있다. 전용 origin oojjrs/Spawner 일치와 기존 이 채팅의 연결 Projects0개 결과를 재사용한다. 커밋·푸시 완료를 선기록하지 않는다.
+- 후보는 공통 DNA 능력치/실제 전투 엔진을 쓰는 실험실, 편집·분석·교전해제 표시, 탄생 중 타깃 배제와 추적 회귀 및 지원 기록이다. 수정한 세계 검사가 의존하는 중립 공격 역할 카탈로그/실제 연결/검사를 관련 지원으로 포함한다. 코드 의존성만 포함하고 다른 채팅의 Design 역할 표·체력 링·DNA 편집기 통합·비용 함수·게임 UI·애셋 변경은 제외한다.
+- 공유 dna.mjs는 HEAD의 카탈로그를 보존하고 공통 stats 호출만 분리한다. stage는 HEAD에서 이번 외형 투영/nullable combat/지원군 사망 시계만 적용한다. build의 DNA 내장 생성기는 공통 모듈 의존성을 처리하는 변경만 분리한다. runtime·Combat·Attribute는 HEAD의 다른 모듈/HTML/본문을 유지하면서 이번 후보 모듈만 조합한다. 원래 작업 파일은 덮어쓰지 않고 별도 후보/인덱스에 저장한다.
+- 기존 검수 근거는 월드14/14·공통156/156·중립 역할 검사 및 실제4:4/20판 반복,12개 내장 모듈 일치이다. 분리 후보는 이전 실제 브라우저 검수와 달리 체력 링/편집기 등 병행 변경을 포함하지 않으므로 그대로 동일한 전체 화면 검증이라고 주장하지 않는다. 새 게임 실행/테스트/전체 빌드는 커밋 이유로 반복하지 않는다. 후보의 구문·참조·형식 및 최종 staged diff/check로 독립성을 검토한다.
+- 제목은 ‘전투 판정 공통화와 중립종 추적 수정’. 관련 미커밋 메모리와 중립 역할의 승인/코드 근거 기록을 같은 커밋에 포함하고 다른 채팅 기록과 기존 HEAD 기록은 보존한다. 공유 index/HEAD가 변하면 해당 범위를 재대조한 뒤 진행한다. 푸시·배포는 이번 범위에 없다.
+## 포자버섯 이동 수정 커밋 완료 · 재개 확인
+
+- 기록 ID: spore-walk-commit-complete-20261106-01a1ab80. 기록·현재 재확인 시각 2026-11-06T04:52:19+09:00. 기록·Git실행/확인 Codex /root, 커밋승인·재개요청 사용자. 출처 현재채팅01a1ab80-f460-71f2-b106-ce21cfac6f23의「커밋해」및「재개하자」와실제Git도구결과,H:/Spawner Windows PowerShell/local. 원발언정확시각·항목ID불명. 기록시각은커밋발생시각과구분한다.
+- spore-walk-commit-scope의미완료기록을실제완료로갱신한다. 로컬main커밋511e662f58ea58b2c6ddf159a233c0892d49573d「포자버섯 이동 애니메이션 체형과 선명도 수정」,부모39187480a957d3169745e800691aa678dd205936,트리0be12845c449cd25296b78f6eb30c2aed579138f. 애니/원본/리그/래퍼/등록메타데이터17경로와이채팅메모리6구간만포함한총18파일이다. 기본인덱스의해당경로도커밋후정합확인했고다른작업의파일·메모리·인덱스를보존했다.
+- 재개시현재HEAD=위커밋,현재브랜치포함확인. 포자버섯관련자산17경로의추가작업트리차이없음. walkWebP의현재SHA256368c1bb19b3355d26bd0a156637ee75e3f6781a81df457b1a34a43611661da2d로최종검수본과동일하다. 새제작·중복커밋·푸시·배포는하지않는다.
+- 커밋전메모리분리본의CRLF/LF혼합은작업용분리본만공유형식검사기로수정한뒤Git clean필터로스테이징하여diff--check통과했다. 원본HEAD메모리바이트와다른채팅기록을바꾼해결이아니다. 최종6기록추가만포함됨을확인했다. 이커밋후확인결과는로컬메모리로남겨다음승인된관련커밋에이월하며자동메모리전용추가커밋/amend를하지않는다.
+## neutral-attack-role-final-check-20261105-01a1a0bf
+
+- 기록 시각: 2026-11-05T22:02:15+09:00. 기록·최종 확인 Codex 메인. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d와 최종 형식/범위 검사 출력. 앞선 implementation-complete의 검증 결과를 보완한다.
+- 형식 검사5개 실제 touched text는 UTF8NoBOM/CRLF 모두OK, 워커 최종 새 회귀 파일도 같은 형식OK였다. 범위 diff check에서 제품3개에는 문제가 없었으나 공유 CodexWorkMemory.md174043행의 EOF추가빈줄 경고가 있었다. 이번 메모리는 항상 기존 전체바이트를 보존해 앞에만 붙였으므로 해당 말미를 정리하거나 다른 채팅 기록을 고치지 않았다. 전체 diff check 통과로 주장하지 않는다. 형식/범위 검사5.83초.
+- 현재 결과: 중립역할66+추가7+수동DNA1 및 기존DNA4의 대상회귀 모두성공, 실제 문서PC/mobile과 runtime/embedded-worker 검수 완료, 요청결과 미완료 blocker 없음. 중립 역할/거리 전환·기획서 표시 수정은 커밋 전이며 이와 무관한 공유말미/병행 변경은 보존한다.
+## neutral-attack-role-implementation-complete-20261105-01a1a0bf
+
+- 기록 시각: 2026-11-05T22:01:08+09:00. 역할·실제 거리 전환 적용 사용자, 기획서 정확 문구·위치 교정 사용자, 구현·통합 검수 Codex 메인, 독립 회귀 작성/실행 Meitner(01a1abb9-8e4e-79d3-8d7f-f98e54a670b2). 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d와 해당 워커 결과. 원발언 정확시각·항목 ID 미확인.
+- 완료 배정: 근딜12종, 원딜2종(꽃꼬리새/등불지기), 겸용5종(흙두더지/방울두꺼비/넝쿨거북/가시등 딱정벌레/가시등 우두머리). server/creature-attack-role.mjs의 명시19종 카탈로그를 실제 createCombat이 사용한다. 꽃꼬리새는 원딜이지만 근접 부리 대응을 허용하고 등불지기는 근접에서도 ranged판정을 유지한다.
+- 실제 구현: DNA_ACTION_RULES의 기존 근접1/원거리3·투사체속도6을 재사용한다. 겸용은 거리1이내 사격을 중지하고 기존 접근/같은셀 근접 교전을 따른다. 거리1초과3이하는 실제 발사 큐/비행/도착 피해, 밖은 기존 접근이다. 기존 combatProfile의 전투력·공격력·방어·공속/준비시간을 그대로 쓰며 가짜DNA나 새 공격 작화를 넣지 않는다. 시체/탄생/유닛 크기에는 관여하지 않는다. 기존 투사체 연출을 재사용한다.
+- 성향 판단·보존: 원래 선공/비선공/평화형 값은 그대로다. 평화형 중립도 자신을 직접 겨냥한 공격이 있을 때만 원거리 반격을 허용하도록 해당 판정의 actor를 임시 passive로 평가한다. 원래 agent/성향은 변경하지 않고 미공격·제3자 공격에는 발사하지 않는다. 실제 무효·후퇴 투사체 반환도 예외/피해 없이 마친다. 이는 새 역할의 반격 연결을 위한 Codex 구현 판단이다.
+- 범위 보존 보완: 실험실의 수동 stats.dna 기관/수치 편집을 역할표로 덮지 않도록 새 중립 역할/사거리/반격/애니시계 분기를 !stats.dna 자연 중립에만 제한했다. 수동 DNA 실험은 기존 기관 선택과 공통 DNA 판정/피해·공속·애니시계를 유지한다.
+- 문서 완료: 사용자 교정 승인대로 Design.html 중립 유닛 티어 표의 배정 의도 셀19개에서 기존 설명 위에 근딜/원딜/겸용 한 단어만 strong block으로 넣었다. 거절된 문구 대체·별도 거리 설명·새 페이지/열은 넣지 않았다. PC1440/mobile390 실제 Edge 화면에서19종/역할분포12·2·5와 문서 가로넘침0, 기존 설명 유지 확인·시각 검수. JS오류0.
+- 실행 산출물: client/runtime.js의 browser combat module 및 embedded worker combat module에 중립 역할 의존성과 필요한 변경만 좁게 반영했다. 다른 모듈/자산footer 및 병행 core/DNA 변경은 보존했다. 정상 client/build.mjs는 combat.mjs import를 따라 새 역할 모듈을 포함하므로 빌더 파일 자체 변경은 없다. 초기 동기화 임시 스크립트 보완 뒤 중복 ranged branch 없음·browser/worker 문법 정상 확인했다.
+- 검증: 독립 중립 회귀66개 통과 후 추가 평화형 방어/거리/후퇴7개, 실험실 수동DNA 보존1개를 변경 범위에 한해 추가실행해 각각7/7·1/1 통과했다. 기존 성공66개 전체를 재실행하지 않았다. 메인은 기존 DNA 원거리 선택·투사체·피해/공속 회귀4개 통과. 실제 Spawner.html에서 runtime API로12개 통제 교전을 실행해7종 원거리 도착피해, 겸용 거리1 사격금지/동일셀근접, 등불 동일셀원거리, 평화형 비선공/방어사격·원성향 및 noDNA를 확인했다. 실제 embedded Worker를 격리 실행한3개 교전에서도 근/원거리 사건과 HP81·noDNA를 확인했다. 검수 후 적용범위를 nonDNA로 좁힌 것은 위 자연중립 사례 동작을 바꾸지 않으며 새 수동DNA 회귀로 별도 확인했다.
+- 근거·상태: literal 루트 $Trash/neutral-attack-roles-20261105의 browser-qa.json, worker-qa.json, roles-1440.png, roles-390.png 및 작업 전 backup/동기화 recipe. 워커 최종 test SHA25699CC6E45F4DC4806B56248AF064A4EDF95A550BF3615F0F0B6C47EEC3ECA3178. 현 요청은 구현·기획서 반영까지이며 관련6경로는 unstaged/uncommitted로 남긴다. 다른 채팅의 DNA/core/실험실 편집 내용과 공유메모리는 유지한다. 커밋/푸시/배포 수행 없음.
+## 속성 제작기·인게임 공통 편집기 통합 완료 · 01a1a129 현재 요약
+
+- 기록 ID: dna-shared-editor-complete-20261105-01a1a129. 기록·현재 최종근거 확인 시각: 2026-11-05T21:59:03+09:00. 기록자·계약/취합/실물검수 Codex /root, 통합·기존 인게임 레이아웃 유지·단축키 확인 승인 사용자. 구현/자체검수 shared_editor_core·shared_editor_tool, 독립 입력/실브라우저/실물검수 shared_editor_qa는 메인 모델·추론 강도 상속으로 독립 소유 범위를 분담했다. 출처 현재채팅01a1a129-d9d6-79c3-830d-58009e34c915와 직접 소스/JSON/PNG 검수, H:/Spawner Windows/PowerShell. 원발언 정확 시각·항목 ID 불명. start/view-contract 및 parity-review의 미통합 상태를 이 완료로 갱신한다.
+- 공통 구현: 양쪽이 client/dna-editor.mjs의 createDnaEditor 하나를 실제 호출한다. 배치·자동/수동 회전·후보/범위/충돌검사·삭제·undo/redo·이력 경계·그림·목록/범례·마우스/키보드·보기 계산이 공유된다. ATTRIBUTE_DNA.cost가 기본3+DNA가격을 단독 정의하고 실제 birthCost·편집 비용 표시가 호출한다. dnaDesignStats/renderDnaDesignStats도 공유한다. game.js의 중복 스탯표시/기준값 계산은 제거하고 같은 API를 호출한다.
+- 제작기 분리: Attribute.html의 별도 편집 컨트롤러/그림/단축키/이력 구현을 제거했다. classic client/attribute-editor.js에는 자유 레벨·템플릿/브라우저 저장·JSON I/O·테스트 확대 버튼만 남고, 공통 context/load/getDesign/clearHistory/zoom/fit API에 연결한다. 기존 저장키·이름/목록제한·저장/불러오기 이력 경계를 유지한다. 파일 오류는 기존 동일문구로 보이는 전용 출력에 표시하고 정상 import시 지우며 확대 후 공통 root로 focus를 돌린다. 별도 client/attribute-editor.css는 PC 제작기 바깥 도구만 담당한다.
+- 인게임 동결: client/game.css의 baseline SHA6c8695fb0dccaaabbc8873b850a84b3c5421f9714b0d728e96ce11b96aa88faf와 기존 root.innerHTML 문자열이 동일함을 확인했다. 패널/목록/스탯/비용/회전 버튼 레이아웃을 바꾸지 않았다. 기존 입력에 F=전체보기만 공통으로 보존했고 Q/E/R·방향키/휠회전, 휠클릭DNA순회, 좌클릭/Enter/Space배치, 우클릭/Backspace/BrowserBack/버튼3/CtrlZundo, CtrlY/CtrlShiftZredo, Delete삭제와 폼/contenteditable/native summary/button·readonly guard를 검수했다.
+- 빌드/최신성: build.writeAttributeDna는 공통 DNA+editor bundle을 만들며 --attribute-editor-only로 제작기만 갱신한다. runtime은 main의 DNA/attributes/editor와 두 worker의 DNA/attributes만 좁게 동기화했고 다른 모듈/assets/footer 보존 guard가 통과했다. 이후 병행 health-ring 작업의 runtime 외부 변경을 보존하고 파일 전체 hash 동결 대신 공유 모듈 본문 정합을 확인했다. 마지막 검수에서 제작기 dna-combat-stats 사본의 일부 recovery/cooldown 필드 누락을 발견해 해당 모듈1개만 원본 bcbf944664844d0035a8d58a1e9e3d2194083470e1ff493961ea3427f53f4281로 맞췄다. 다른 Attribute inline모듈/외곽HTML/CSS/script순서는 동일했다. 원인 시점을 추정해 확정하지 않는다.
+- 실제 검사: 공통 입력/API/가격/스탯17개 성공93ms를 재사용하고, 마지막 번들 회귀1개를 editor·DNA·직접combatStats·runtime attributes 본문 정합까지 강화해 최종62.0236ms 통과했다(총18개). 실패한 사본 정합만 수정 후 재확인했고 성공한 입력/브라우저를 반복하지 않았다. 소유 코드·어댑터·빌드·생성HTML/runtime·회귀파일 형식/구문 검수는 각 최종 바이트에서 성공했다. 테스트 최종SHA6953c8f4837a2357a0e38b38f82500e8899a45d09ce21fb0f2ee9c8fcd7985b9, Attribute최종SHAd108817829e8cfcdbb782cab66f7026e109c717739f3f056042a7970e711abd6, adapterSHAe310cb0669f5670858908f9c6da064a3cbd8eb824c1124dd54bc09291846b175이다.
+- 실제 화면: file 제작기PC와 정상 서버 실제 인게임PC/390모바일에서 공통 배치/회전/선택/undo/redo·native키·초기화/저장/불러오기 경계·채집기관1회·오류 import 가시/정상파일 해소를 확인했다. pageerror0/가로overflow없음, 모바일 비용이 뷰우하단에 있고 기존 패널 배치를 유지했다. QA와 부모가 standalone-pc/ingame-pc/ingame-mobile PNG3장을 각각 직접 확인해 겹침/배치 문제없음을 확인했다. 해당 브라우저 검수 중 source5hash가 전후 같았으며 이후에는 계산dep 한 사본만 변경됐고 그 차이를 소스 정합 회귀로 검수했다. 서버/격리 브라우저는 종료했다.
+- 정확 작업 범위: server/dna.mjs, server/attributes.mjs, client/dna-editor.mjs, client/game.js, Attribute.html, client/attribute-editor.js, client/attribute-editor.css, client/build.mjs, client/runtime.js, client/dna-editor.test.mjs 및 본 메모리다. 기존/동시 채집기관1회·카탈로그/전투스탯·웰컴·health-ring·기획서 등 보호된 변경은 되돌리지 않았다. 근거는 H:/Spawner/$Trash/dna-editor-unification-20261105의 baseline-manifest.json, core/{verification.json,scoped.diff}, tool/{runtime-sync.json,self-check.json,format.json,combat-stats-sync.json}, qa/{qa-summary.json,browser-report.json,final-module-parity.json,bundle-core-dependency-test.txt,PNG3장}이다. 현재 로컬 게임과 제작기 통합은 완료했으나 이 요청으로 staging/commit/push/deploy는 하지 않았다.
 ## 포자버섯 이동 수정 커밋 범위 확정 · 01a1ab80
 
 - 기록 ID: spore-walk-commit-scope-20261105-01a1ab80. 기록 시각 2026-11-05T21:58:46+09:00. 기록·커밋범위분리 Codex /root, 커밋승인 사용자. 출처 현재채팅01a1ab80-f460-71f2-b106-ce21cfac6f23의최신「커밋해」,H:/Spawner Windows PowerShell/local. 원발언정확시각·항목ID불명.
 - 현재승인은직전완료한포자버섯이동의그림·메타데이터·원본/리그·오프라인사본·등록해시와본채팅작업기록을묶는로컬커밋이다. 푸시·배포와다른채팅의전투/DNA/웰컴/Design변경은포함하지않는다. 연결보드없음결과는앞선동일작업의조회근거를재사용한다.
 - 후보는애니관련17경로와메모리의01a1ab80관련기록6구간뿐이다. 메모리는다른미커밋기록을보존하고이채팅구간만HEAD기록에추가한별도인덱스로분리한다. 현재기본인덱스와다른작업파일은보존하며커밋후해당경로만새HEAD에맞춘다.
 - 기존최종검수결과와바이트를재사용한다. 마지막메타데이터정리에서stridePxPerCycle도현재리그의stance8px/반주기에서유도한16px/주기로맞췄고파일형식검사가통과했다. 이번커밋을위해게임재빌드·재생검사를반복하지않는다. 아직커밋성공을선기록하지않는다.
-
 ## 포자버섯 이동 idle 기준 보정 완료 · 01a1ab80 현재 요약
 
 - 기록 ID: spore-walk-idle-harmonized-complete-20261105-01a1ab80. 기록·최종 실제 확인 시각 2026-11-05T21:53:12+09:00. 기록·제작·검수 Codex /root, 기준 승인·pull 후 잔여 보정 요청 사용자. 출처 현재 채팅01a1ab80-f460-71f2-b106-ce21cfac6f23,H:/Spawner Windows PowerShell/local. 원발언 정확시각·턴/항목ID 불명. spore-idle-walk-review의기준승인대기는사용자승인으로대체되고,spore-walk-approved-resume 및representative 기록의제작진행은이완료기록으로갱신한다.
@@ -644,16 +398,65 @@
 
 - 기록 ID: spore-walk-representative-20261105-01a1ab80. 기록 시각 2026-11-05T21:37:08+09:00. 기록·제작·검수 Codex /root, 기준 승인 사용자. 출처 현재 채팅01a1ab80-f460-71f2-b106-ce21cfac6f23,H:/Spawner/local. 대표8프레임을 실제 headless Chrome Canvas에서70ms 간격으로2회 반복했고8프레임 모두 진행·pageerror0을 관측했다. representative-playback.png와 후보 비교를 직접 열었다. 갓/몸통/발을 독립 파츠로 조립하며 발마스크의 y등록5px차이와높이20%차이를 바로잡아 남는 발윤곽을 제거했다. 현재 공통 sourceToOutput=512*(240/224)/549로 idle와walk의 기존camera차이를상쇄한다. 전체16프레임으로확대하고최종WebP·실사용wrapper·등록해시만국소동기화한다. 원본idle와공유runtime/game의병행수정은바꾸지않는범위다.
 
+## 중립종 월드 추적 3실패 수정·재검수 완료 · 01a1a5fd 현재 요약
+
+- 기록 ID: creature-world-tracking-fix-result-20261105-01a1a5fd. 기록 시각 2026-11-05T21:57:58+09:00. 기록자·구현/직접 검수 Codex /root, 수정·검수 결정 사용자. 출처 현재 채팅01a1a5fd-bf0b-70a3-abf8-267f88676072의 최신 수정 요청. H:/Spawner Windows PowerShell. 원 발언 정확 시각·항목 ID 불명. creature-world-tracking-fix-start 및 combat-core-unification-final의 중립종3실패 잔여 상태를 이 결과로 대체한다.
+- 제품 수정: 공통 canPursueCombat에서 출생 readyAt 이전의 시전자·대상을 배제한다. 기존 월드 추적기가 제외하던 탄생 중 대상을 선행 원거리 스캔이 공격하는 실제 우회를 막았다. 완료 시각 경계부터는 정상 사격한다. 기존 중립 근접/원거리 역할·사거리·성향·영역·수치는 유지한다.
+- 검사 수정: 사거리3 안의 계속 걷기 기대는 승인된 겸용 사격과 충돌하므로 가시등벌레는4거리 추적, 감지반경3인 넝쿨거북은3거리 유닛 우선 사격을 검사한다. 이동 중 목표 사망 전환은 벌레4거리와 넝쿨거북1거리 접근을 검증한다. 근접 경로 차단에도3거리 원거리 타격 가능,4거리의 도달 불가/죽음/숨김/등장/탄생/도주 대상은 둥지 공격을 막지 않음을 인덱스 유무 양쪽에서 확인한다. 탄생 시전자/대상의 readyAt 직전·정확경계도 추가했다.
+- 검수 완료: 기존3실패 포함 월드 추적14/14 통과. 별도 중립 역할73검사는 같은 제품 수정 후 전부 통과했고 이후 입력 fixture만 보정했다. 공통 전투156/156 재검수 통과. 공통 모듈12개(실험실·인게임·내장 두 워커) 원본 일치·구문 확인 통과. 이번 후속 제품 수정은 combat의 eligibility 한 줄 및4개 내장 combat 블록이며 다른 모듈과 병행 변경은 보존했다.
+- 실제 화면 재검수: 중립종 외형4:4 원거리 자동 전투18.8초/151사건/타깃13전환, 최종 승패까지 완료.287프레임/생존1183 body-frame에서 누락·깜빡임0, 피격 이미지 지연33 fallback-frame 정상, 브라우저 오류0. 편성 변경·단계·끝까지·20판 반복 완료, 시간 제한0. 근거 literal 프로젝트 임시 폴더 creature-world-tracking-fix/{world-tests.tap,creature-tests.tap,shared-combat-tests.tap,browser-neutral-ranged-result.json,ranged-final.png}; creature-tests.tap에는 fixture 보정 전 세계검사3실패도 보존되어 있으므로 최종 세계 상태는 world-tests.tap이 기준이다.
+- 현재 요청의3실패 잔여는 해소되었다. 마지막5텍스트 형식/정확 국소 diff를 확인하고 미스테이징·미커밋으로 남긴다. 추가 제품 수정·푸시·배포는 수행하지 않는다.
+## 중립종 월드 추적 3실패 수정 착수 · 01a1a5fd
+
+- 기록 ID: creature-world-tracking-fix-start-20261105-01a1a5fd. 기록 시각 2026-11-05T21:53:21+09:00. 기록자·재현/구현 판단 Codex /root, 수정·재검수 결정 사용자. 출처 현재 채팅01a1a5fd-bf0b-70a3-abf8-267f88676072 최신 ‘중립종 월드 추적 검사 실패한 3개도 고치고 다시 검수해’. H:/Spawner Windows PowerShell, 원 발언 정확 시각·항목 ID 불명.
+- 범위: 앞선 combat-core-unification-final의 잔여3검사를 직접 수정·재검수하는 승인을 받았다. 다른 병행 파일·이전 전투 공통화의 미커밋 바이트를 보존하고 최소 공통 조건과 해당 검사만 고친다. 커밋/푸시 승인은 없다.
+- 재현: 가시등 딱정벌레·넝쿨거북은 사용자 승인 중립 역할에서 겸용이며 사거리1초과3이하 원거리를 쓴다. 기존 추적2검사의 거리2/3에서 walk 기대는 갱신 전 가정이다. 사거리 밖4에서 기존 유닛 우선 추적·이동 중 목표 사망 후 둥지 전환을 검증하고, 사거리 안 유닛 우선 사격 및 근접 경로 차단시 유효한 원거리 사격도 별도 검증한다. 막힌 길의 도달 불가 검사는 원거리에서도 닿지 않는4거리로 유지한다.
+- 실제 결함: 조건별 probe에서 죽음·숨김·등장·도주 대상은 둥지를 계속 공격하지만 birth.readyAt 이전 대상은 agent 사격으로 선택한다. 기존 월드 추적기는 탄생 조건을 걸렀으나 선행 공통 원거리 스캔의 canPursueCombat에는 그 조건이 빠져 우회했다. 공유 canPursueCombat에서 출생 준비 중인 시전자/대상을 배제하고 readyAt 경계는 허용한다. 아직 수정·검수 성공 아님. 근거 프로젝트 임시 폴더 creature-world-tracking-fix/probe.mjs의 조건별 실제 출력 및 메모리 neutral-attack-role-implementation-start.
+## 공통 전투 최종 재검수·병행 변경 구분 · 01a1a5fd
+
+- 기록 ID: combat-core-unification-final-20261105-01a1a5fd. 기록 시각 2026-11-05T21:49:11+09:00. 기록자·최종 구현/검수 Codex /root, 결정 주체 사용자(공통화·편집 유지) 및 Codex(최소 연결 수정). 출처 현재 채팅01a1a5fd-bf0b-70a3-abf8-267f88676072, H:/Spawner Windows PowerShell. 원 발언 정확 시각·항목 ID 불명. 직전 combat-core-unification-result-20261105-01a1a5fd의 최종 결과 일부를 보완·대체한다.
+- 마지막 검수 중 다른 작업의 server/creature-attack-role.mjs 및 중립종 원거리 교전 변경이 server/combat.mjs에 나타났다. 해당 변경을 보존하고 실제 공통 핵심·의존성을 양쪽 번들에 동기화했다. 중립종 외형에 원거리 DNA를 편집하면 species 대결/역할 제한으로 공격하지 못하는 실험실 연결 결함을 발견했다. 실험 개체는 편집 DNA를 가진 논리 개체로 유지하고 key/labAppearance를 렌더용 복사본에서 종족/생물 외형으로 투영한다. 실제 엔진의 생물 정책을 변경하지 않고 외형이 수치에 영향을 주지 않는 기존 UI 계약을 보존했다.
+- 최종 표적 검사156/156 통과. 추가된 중립종 외형 3:3 원거리의 사건·결과는 같은 편집 DNA의 종족 외형과 완전히 같다. 실제 화면에서 중립종 외형만으로4:4 원거리 자동 전투18.8초·151사건·타깃13전환을 완료했다. 287프레임/생존1187 body-frame에서 이미지 누락0·브라우저 오류0, 지연 피격 이미지32 fallback-frame도 정상 자세를 유지했다. 편성 삭제·단계·끝까지·20판 반복도 완료했고 시간 제한0이다. 최종 근접 지연 검수는149프레임/생존716 body-frame·타깃12전환·누락0이다. 근거 browser-neutral-ranged-result.json 및 browser-result.json.
+- 공통3모듈×4실행면의12개 바이트 일치/구문 검사는 현재 source/runtime/내장 워커/Combat에서 통과했다. 다른 작업의 DNA 등급·비용·체력 링·웰컴 변경은 보존했다. 메모리 포함15텍스트의 직전 형식 검사는 모두 UTF8NoBom/CRLF 통과했으며 마지막 수정 파일의 형식/국소 diff를 마무리한다.
+- 별도 발견·잔여: 추가로 실행한 server/creature-combat.test.mjs의 월드 추적 기대3개가 현재 병행 원거리 전투 경로에서 실패한다(걷기 기대, 공격 상태 관측). 공통화 전 원본 combat만 격리 loader로 대조하면 해당12검사는12/12 통과한다. 이번 공통화의156검사 및 실험실 N:N 검수와 구분하며, 병행 중립종 행동을 임의로 되돌리거나 테스트 기대를 고치지 않았다. 사용자에게 잔여로 보고한다. 근거 concurrent-core-tests.tap 및 creature-baseline.tap.
+- 현재 결과는 요청된 공통화·편집 유지·N:N 검수 완료이며 전체 인게임 월드 검사가 모두 통과했다는 뜻은 아니다. 커밋/푸시 미실행, 변경은 사용자 검토를 위해 유지한다.
+## welcome-arrival-timing-committed-20261105-01a1a12e
+
+- 기록 시각: 2026-11-05T21:48:32+09:00; 실행·확인 주체 Codex /root, 로컬 커밋 승인 사용자; 출처 현재 채팅 최신 「커밋」 및 실제 git commit 출력.
+- main에서 39187480a957d3169745e800691aa678dd205936 「웰컴 유닛 도착 후 동작 타이밍 수정」 로컬 커밋 완료. 웰컴 header/roots, runtime의 sprout 모듈만, 관련6개 메모리 기록을4경로로 포함했다. staging된 다른 runtime 모듈/메모리는 부모 HEAD 그대로이며 작업 트리의 병행 변경을 보존했다. staged diff --check 및 새 승인 메모리 UTF8NoBom/CRLF 확인 통과. 커밋 후 HEAD와 빈 index를 실제 확인했다. 푸시는 이번 요청에 포함되지 않아 수행하지 않았다.
+- 증거 $Trash/welcome-arrival-timing-20261105/{commit-plan.json,staged-final.diff,commit-result.json}. 커밋 이후에만 알 수 있는 이 결과 영수증은 로컬 메모리로 남겨 다음 승인된 관련 커밋에 포함한다.
+
 ## welcome-arrival-timing-commit-freeze-20261105-01a1a12e
 
 - 기록 시각: 2026-11-05T21:47:30+09:00; 승인 주체: 사용자(최신 「커밋」), 범위 분리/Git 실행 주체: Codex /root; 출처 현재 채팅 01a1a12e-3f3f-72c1-95e2-0b5b349b5ffb. 원발언 정확시각/항목ID 불명.
 - 직전 보고한 도착 즉시 동작1회→종료 후2000ms 대기→퇴장 수정과 관련 메모리를 로컬 커밋 범위로 확정한다. header/roots는 검수 SHA256과 동일하며 runtime은 sprout-roots 모듈만 HEAD 기반 index에 반영한다. 다른 모듈·소스·애셋·메모리 변경은 보존한다. 현재 index는 비어 있으며 main 시작 HEAD 9cecac8b63bd3275f7393527f32a87f0bc51d7f1다.
 - 관련 브라우저3조건 통과 및 UTF8NoBom/CRLF 형식 결과를 재사용한다. 이전 웰컴 푸시 영수증은 같은 작업의 다음 승인 커밋에 포함한다는 방침에 따라 함께 기록하며, 이번 후속 타이밍4개 기록과 본 승인 기록을 묶는다. 기존 연결 Projects 없음 조회를 재사용한다. 메시지 「웰컴 유닛 도착 후 동작 타이밍 수정」. 이번 승인은 로컬 커밋이며 푸시는 요청받지 않았다.
 
+## 전투 보조 원형 표식 제거·공통 발밑 체력 링 코드 반영 · 01a1a155 현재 요약
+
+- 기록 ID: combat-ground-health-ring-implemented-20261105-01a1a155. 기록 시각: 2026-11-05T21:47:11+09:00. 기록자·구현/검수 Codex /root, 표시 변경 결정 주체 사용자. 출처 thread01a1a155-d06b-7243-b396-e5c947a4714e의 영상 후속 표시 교정 및 예상 시간 질문. 현재 제품 코드 반영은 마쳤으나 실화면 캡처 검수는 미완료다. 직전 start 기록의 실행 전 상태를 이 결과로 갱신한다.
+- 실제 변경: 신규 client/unit-health-ring.mjs에 현재/최대HP로 그리는 공통 지면 타원(.327 깊이·기존 선굵기/track) painter 추가. client/game.js의 기존 월드 HP링은 이 painter에 연결하며 만피 숨김·줌/cull 보존. 상세뷰어는 공격 준비 몸통 원/관통선·가로HP바·선택용 장식원 제거, 모든 생존 유닛 발밑에 진영색 현재HP 링 표시. 실제 피격 motion/V4그림은 유지하고 미로드 fallback 피격 원은 짧은 타격선으로 변경했다.
+- client/combat-stage.mjs의 본 전투/지원유닛 장식원을 같은 HP painter로 대체, 다인 가로HP바 제거. client/build.mjs의 browser entry/global export와 client/runtime.js의 신규 module/export, Combat.html의 해당 stage/helper module만 좁게 동기화. 전체 build·서버/시뮬레이션 변경·새 작화·commit/push 없음. 병행 welcome/DNA/전투 수치 변경을 보존했다. 근거 literal $Trash/combat-ground-health-ring-20261105/{before/,changes.json}.
+- 실제 확인: 정확 touched7텍스트 UTF8NoBom/CRLF 모두OK, helper/game/stage/runtime node --check 전부 오류 없음, 작업 직전 사본 대비 해당5기존파일 변경 통계 확인. routine 검증 시간 예산 안에서 격리 실제 상세/실험실 캡처를 시도했지만 12초 타이머에 도달했다. 결과 errors=[]이나 locator.screenshot의 modal not visible 대기가 끝나지 않아 스크린샷이 생성되지 않았다. 캡처용 bridge에 이전 성공 버전의 body.dataset.screen 전환이 빠져 있었으며, 제품 결함으로 확인한 것은 아니다. 예산 만료 후 추가 재시도/대체 검사는 하지 않았다. 따라서 실제 표시/실험실 렌더/스크린샷 검수 성공을 주장하지 않는다. 구체 결과 $Trash/combat-ground-health-ring-20261105/visual-result.json, 검수 스크립트 D:/.codex/visualizations/2026/11/03/01a1a155-d06b-7243-b396-e5c947a4714e/check-health-ring.mjs.
+- 사용자에게 코드 반영·문법/형식 검사 통과와 화면 검수 미완료를 구분해 알린다. 향후 해당 표시의 시각 검증이 요청되면 capture bridge의 screen 전환을 먼저 보정하고 실제 부분HP(50%/20%)·공격 준비 상태에서 몸통 원/가로바 없음과 접지 링을 확인한다. 기존 전달 MP4는 변경 전 영상이며 이번 결과로 재사용하지 않는다.
+
+## 1레벨 일꾼 DNA 적용·로컬 커밋 완료 · 01a1a10e 현재 요약
+
+- 기록 ID: dna-level1-local-commit-result-20261105-01a1a10e. 기록 시각: 2026-11-05T21:46:39+09:00. 기록자·커밋 실행/확인 Codex /root, 작업·로컬 커밋 승인 주체 사용자. 출처 현재 채팅01a1a10e-176c-7cb3-a1cf-2ad477deffc4 및 실제 finish-commit.mjs 결과. H:/Spawner Windows PowerShell. 원발언 정확 시각·항목 ID 불명.
+- 실제 완료: main 커밋 9cecac8b63bd3275f7393527f32a87f0bc51d7f1, 제목 ‘1레벨 일꾼 DNA 배정 변경’, parent9076d50ad5087484acc4dfd317beebdadb3a0667. 관련12파일/153삽입59삭제와메모리7구간을같은커밋에반영했고HEADreadback일치확인했다. 앞선dna-level1-apply-complete 기록의커밋준비상태는이실제결과로대체한다. 푸시는수행하지않았다.
+- 마무리근거: 마지막메모리형식검사UTF8NoBom/CRLF성공. 수동Gitblob작성시새test와메모리의CRLF가whitespace로잡혀저장소clean필터를정상적용한뒤staged check오류0확인했다. freeze뒤병행갱신된Design/runtime/Combat/메모리4파일은DNA spec·gate·editorguard·표·own기록이그대로인지재확인하고추가변경을보존했다. 다른작업인덱스/파일은커밋에포함하지않았다. 관련서버30test·두편집기headless·19칸3배치증거를재사용했다.
+- 남은제품조건: 구형저장설계는보존되지만현재규칙에맞지않는신규저장/복제생산은재설계가필요하다. 상위기관정책·수치밸런스추가논의는별도범위이다. 이사후커밋관측기록은로컬에남기며이를위한메모리단독후속커밋/이력수정은하지않는다.
 ## welcome-arrival-runtime-concurrency-correction-20261105-01a1a12e
 
 - 기록 시각: 2026-11-05T21:44:29+09:00; 정정 주체: Codex /root; 출처 현재 작업 마지막 runtime 비교 결과.
 - 직전 welcome-arrival-timing-complete의 「그 밖의 runtime 바이트는 작업 시작 백업과 동일」 문장은 실제 비교와 달라 정정한다. 작업 도중 병행 갱신된 runtime 모듈은 client/unit-health-ring.mjs, client/dna-editor.mjs, server/dna-combat-stats.mjs, server/dna.mjs, server/combat-stats.mjs, server/attributes.mjs, server/combat.mjs, client/codex-content.mjs이다. 이번 동기화 코드는 sprout 모듈만 바꿨으며 병행 모듈은 되돌리지 않았다. 최종 현재 runtime의 sprout 모듈이 수정 source와 정확히 같고 전체 runtime 문법도 정상임을 별도로 확인했다. 이 정정은 실제3조건 타이밍 검증 통과나 다른 제품 변경 범위를 바꾸지 않는다.
+
+## 방어 이펙트 최종 사용 대상은 저쪽 개선본 · 01a1a5f6 현재 요약
+
+- 기록 ID: combat-defense-improved-choice-20261105-01a1a5f6. 기록·최신 결정 확인 시각 2026-11-05T21:44:23+09:00. 기록자 Codex /root, 비교 평가·최종 사용본 선택 주체 사용자. 출처 현재 채팅01a1a5f6-f89a-7de0-9cfd-9addb113f421의 최신 발언, H:/Spawner Windows/PowerShell. 원발언 정확시각·턴/항목ID 불명.
+- 사용자 평가/결정: 여기 표시된 효과를 구형으로 인식했고 저쪽에서 본 것보다 어떤 면에서는 괜찮다고 평가했으나, 전체적으로는 개선한 것이 더 좋으므로 최종적으로 저쪽 개선본을 사용하기로 했다. 이 비교 평가를 여기 재구성본의 채택/게임 적용 승인으로 바꾸지 않는다. combat-defense-gif-final의 시안 수용 미정 중 사용본 선택은 이번 결정으로 갱신하며 과거 원문은 보존한다.
+- 출처 구분: 여기 GIF3개는 원본을 못 찾아 Codex가 재구성한 비교 시안이다. 이 사실을 사용자에게 다시 밝혔다. 저쪽 개선본의 정확한 파일/버전/현재 업로드 여부는 이번 발언만으로 확인되지 않았다. 아직 저쪽에서 안 올렸나 보인다는 말은 사용자 추정이며 원격 상태 도구 검증 사실이 아니다. 현재 재구성본은 비교용으로 유지하고 제품에 적용하지 않는다. 이후 파일이 확인되면 사용 대상은 저쪽 개선본이며 여기 재구성본으로 대체하지 않는다.
+- 표시 경로 교정: 앞 응답의 D:/CodeForge/...는 잘못된 경로였다. 실제 저장된 D:/.codex/visualizations/2026/11/04/01a1a5f6-f89a-7de0-9cfd-9addb113f421/CombatDefensePreview/{dodge,parry,block}.gif의 파일 존재/크기를 확인하고 올바른 절대경로 image embed로 다시 제시했다. 이번에는 선택 메모리만 기록하며 제품·원격·커밋·배포를 변경하지 않는다.
 
 ## welcome-arrival-timing-complete-20261105-01a1a12e
 
@@ -664,26 +467,15 @@
 - 자연 속도 샘방울: 도착/점프시작16.6508288772s, 점프종료17.7708288772s, 퇴장19.7708288772s. 느린 몽돌은 샘방울 동작 시작과 퇴장 시작 시점에도 떠나는 중이었으나 다음 단계가 막히지 않았다. 준비 지연 조건에서는 bean이 고정2초 후 퇴장해 무대를 비운 뒤 포자 입장이 준비될 때 시작했다.3조건 모두 pageerror/웰컴 렌더 경고0, AudioContext1개, spring-landing 이벤트 전달을 확인했다. 표시 시계100ms 단위 가속 검증이며 음질 평가는 아니다.
 - 문법: 수정한 header/runtime 검사 통과. 실제 자연 조건 캡처 natural.png를 육안 검수했다. 증거 $Trash/welcome-arrival-timing-20261105/{qa.mjs,qa-result.json,natural.png,slow-old-unit.png,delayed-next-asset.png,scoped-source.diff,runtime-sprout-before.txt,runtime-sprout-after.txt,final-hashes.json}. 최종 형식 검사 뒤 완료 보고하며 이번 후속 수정은 미스테이징/미커밋 상태로 남긴다.
 
-## welcome-fixed-rest-deadline-20261105-01a1a12e
+## 전투 실험실·인게임 공통 판정 완료 · 01a1a5fd 현재 요약
 
-- 기록 시각: 2026-11-05T21:41:16+09:00; 주체: Codex 구현 판단; 출처 현재 웰컴 도착/2초 타이밍 수정.
-- 기본 속도와 느린 이전 몽돌/빠른 샘방울 조건의 실제 브라우저에서 도착→즉시 jump, 원본 클립 종료→정확히2초→퇴장이 통과했다. 추가 상태 검수에서 upcoming.ready가 false이면 rest 자체를 늘리는 기존 조건도 남아 있음을 확인했다. 최신 고정 대기 요구에 맞춰 다음 에셋 준비와 퇴장 시각도 분리한다.
-- 판단: 동작 종료 후2초에 현재 유닛은 항상 퇴장하며, 다음 유닛 준비가 늦으면 기존 배경/BGM/파형을 유지한 채 입장만 기다린다. 처음4종 우선 준비는 보존한다. 다음 준비를 기다릴 때 현재 유닛을 중앙에 중복 표시하지 않고 이미 시작한 퇴장과 SFX는 계속 진행한다.
-
-## welcome-arrival-timing-start-20261105-01a1a12e
-
-- 기록 시각: 2026-11-05T21:34:56+09:00; 요구 주체: 사용자, 원인 확인·구현 판단: Codex /root; 출처 현재 채팅 01a1a12e-3f3f-72c1-95e2-0b5b349b5ffb의 몽돌 다음 샘방울 점프 지연 지적. 원발언 정확 시각/항목 ID 불명.
-- 확인: 현재 phaseDuration(exit)는 이전 유닛 퇴장과 다음 입장 duration의 max이며, 먼저 도착한 incoming은 draw에서 rest로 보이고 perform은 전체 exit 종료 후에만 시작한다. 이속 차이에 의해 도착 후 동작이 늦어지는 직접 호출/상태 원인이다.
-- 최신 의도: 실제 이동 속도는 유지하되 유닛마다 도착 즉시 기존 동작 1회 → 동작 완료 후 2000ms 대기 → 퇴장. 이전 유닛 퇴장과 다음 입장은 계속 겹친다. 종전 bean perform=0 예외는 최신 모든 유닛 동작 1회 요구에 맞춰 기존 짧은 idle 움찔 1회(공유 원본 수학의 약873ms)로 계수한다. 새 애니메이션/애셋은 만들지 않는다.
-- 구현 판단: 현재 입장/중앙 동작/대기의 주체 하나와 독립적인 퇴장 목록으로 수명을 나눈다. 새 유닛의 perform/rest는 이전 퇴장 완료를 기다리지 않으며, 오래 남는 퇴장이 있어도 다음 입장까지 타이머를 막지 않는다. 공통 이동/pose/SFX, 외형 freeze와 동일 외형 복구, 35개 중복 없는 큐는 유지한다. runtime의 타 작업 모듈 변경은 보존하고 필요한 sprout 모듈만 동기화한다. 현재 요청에는 새 커밋/푸시가 없다.
-
-## welcome-ingame-consistency-pushed-20261105-01a1a12e
-
-- 기록 시각: 2026-11-05T21:29:53+09:00; 실행·검증 주체: Codex /root; Git 완료 승인 주체: 사용자; 출처: 현재 채팅 01a1a12e-3f3f-72c1-95e2-0b5b349b5ffb의 커밋·푸시 요청 및 실제 Git 출력.
-- 실제 커밋 adcdcffac75e5a646150b1826cf91e97106cee5c 「웰컴 유닛 동작과 효과음 연결 수정」 완료. 13개 제품 파일과 현재 채팅의 감사/구현/검증/승인 7개 메모리 기록만 14개 경로로 원자 커밋했다. build.mjs 보정은 이미 부모 HEAD에 있어 중복 변경하지 않았다. 제품은 검수 SHA256과 동일했고 staged diff --check 통과. 현재 추가된 승인 기록의 UTF8NoBom/CRLF 검사도 OK였다.
-- fetch origin main 후 로컬1/원격0만 남은 상태에서 git push origin main 성공(d736c2a→adcdcff). 이후 git ls-remote origin refs/heads/main으로 원격 adcdcffac75e5a646150b1826cf91e97106cee5c를 실제 읽었고, 요청을 시작한 H:/Spawner main/HEAD도 같은 값이며 index가 비어 있음을 확인했다. 병행 작업의 미커밋 파일·공용 메모리 기록은 작업 트리에 보존했다.
-- welcome-ingame-consistency-commit-freeze의 Git 실행 대기를 위 실제 결과로 완료 갱신한다. 증거: $Trash/welcome-ingame-consistency-20261105/{commit-plan.json,staged-final.diff,commit-result.json,push-verified.json}. 이 푸시 영수증은 커밋 후에만 알 수 있는 결과라 로컬 기록으로 남겨 다음 승인된 관련 커밋에 포함하며, 별도 메모리 전용 커밋이나 공개 커밋 수정은 수행하지 않는다.
-
+- 기록 ID: combat-core-unification-result-20261105-01a1a5fd. 기록 시각 2026-11-05T21:42:59+09:00. 기록자·구현·검수 Codex /root, 공통화·편집 유지·N:N 자동 검수 결정 사용자. 출처 현재 채팅 01a1a5fd-bf0b-70a3-abf8-267f88676072 최신 구현 요청 및 예상 시간 질문. H:/Spawner Windows PowerShell. 원 발언 정확 시각·항목 ID 불명.
+- 완료 근거: 실험실 createSimulationTrial의 별도 판정기를 제거하고 실제 server/combat.mjs의 createCombat을 호출한다. server/dna-combat-stats.mjs의 계산을 실제 ATTRIBUTE_DNA.stats와 실험실이 공유한다. 공통화 전 인게임 DNA 원본과 45유전자×4등급×7개수=1,260조건 대조에서 최대 오차2.85e-14로 기존 수치를 보존했다. 실험실 기본값은 실제 선형 투자·확률 상한·방어식·연타·사건 순서와 같다.
+- 편집 유지: 편성 추가/삭제·외형·기관/수치·규칙·시드·거리·선공·지원군·배속·단계·끝까지·반복·교체 비교를 유지한다. 시작 기록의 전용 규칙 제거 구상은 대체됨. 방어 준비/재준비·반격 재준비·고정 후딜도 실제 엔진의 선택적 실험 입력으로 유지했고 기본값0은 기존 인게임 동작을 보존한다. 전투 종료 시 실제 엔진이 combat을 해제하는 상태를 표시부가 처리한다. 지원군도 실제 대상/치유/사망에 참여하고 분석 분모에 포함한다.
+- 실행 연결: Combat.html을 재생성했고 client/runtime.js의 공통 전투 모듈과 내장 월드/의사결정 워커만 동기화했다. 공통 3모듈×4실행면=12개 원본 바이트 일치 및 구문 검사를 통과했다. 병행 DNA 비용 cost 추가 등 비전투 변경은 별도 범위로 보존한다. 새 의존성을 읽는 Attribute 생성기만 bundle 호출로 보완했다.
+- 실제 검수: 최종 표적 검사155/155 통과. 4:4 및8:8의 사건·타깃·사망·최종HP를 실제 엔진 직접 실행과 대조했다. 광역·출혈·흡혈·반사·막기·반격·기절·연타·치유·투사체 취소와 같은 시드의 자동/단계/분할 재생을 확인했다. 기존 치유 표시 검사는 낮은 체력으로 새 실전 퇴각이 발동하므로 충분한 체력 fixture로 수정했고 표시/무변이 검사를 통과했다.
+- 격리 헤드리스 브라우저: 4:4 근접10.3초, 원거리18.8초 등의 실제 자동 전투에서 타깃 전환·승패까지 확인했다. 최종 근접 지연 검수157프레임/생존765 body-frame, 타깃12전환, 살아 있는 이미지 누락0, 브라우저 오류0. 솜양 피격 이미지 응답을 첫 피격까지 보류 후350ms 늦춰도 정상 자세 fallback2프레임을 유지했다. 별도 원거리291프레임/생존1182 body-frame에서도 누락0·13타깃 전환. 편집 후20판 반복 실행 완료, 무승부/시간 제한0. 후크와 지연은 검수용 응답에만 주입했으며 제품 후크는 없다.
+- 근거 위치: 프로젝트 임시 폴더 combat-core-unification의 targeted-tests.tap, bundle-parity.json, browser-result.json, browser-initial-result.json, melee-final.png, ranged-final.png 및 원본 백업. 제품 변경·메모리 최종 형식/국소 diff 확인 후 종료하며 커밋·푸시는 이번 범위에 없다. 병행 Design/웰컴/오디오/DNA 비용 등 변경과 Git 상태는 보존한다.
 ## 1레벨 일꾼 DNA 반영 완료·커밋 준비 · 01a1a10e 현재 요약
 
 - 기록 ID: dna-level1-apply-complete-20261105-01a1a10e. 기록 시각: 2026-11-05T21:42:50+09:00. 기록자·취합 Codex /root, 확정·제품 반영·메모리·로컬 커밋 요청 주체 사용자. 출처 현재 채팅01a1a10e-176c-7cb3-a1cf-2ad477deffc4 및 worker_dna_rules/editor/design 완료 보고. H:/Spawner Windows PowerShell. 원발언 정확 시각·항목 ID 불명.
@@ -736,31 +528,96 @@
 - 제시대표3개: 채집1+운반7+채집속도2(10가닥,끝접점추가합류2회),채집1+운반1+채집속도7(9가닥,추가합류0회),채집1+운반5+채집속도4(10가닥,추가합류2회). 실제M.trace로각valid/occupied19확인했다. 전체6종을모두nativeAPI로실행한것은아니며기하DFS조건과대표readback을구분한다. 기관을첫가닥으로놓아야한다는제약은없고정확1개만사용한다.
 - 산출은 literal $Trash/dna-worker-pure-three-20261105/search.mjs,pure-three.json,render.ps1,pure-1-2.png(1400x950),pure-3.png(700x950). 두PNG를직접확인했고실제속성별가닥번호·수량·19/19칸표기가일치하며글자잘림없다. 기존기관오렌지굵게/스탯녹색얇게·동일끝원규칙을유지한다. 가격·채집효율·수치밸런스는평가하지않고기하가능성만확인했다. 현재카탈로그일치검증통과로주장하지않으며제품/Design/Research/Git변경없이임시계산·도식과이기록만추가했다.
 
-## unit-page-birth-scene-commit-request-20261105-01a1a0bf
+## welcome-fixed-rest-deadline-20261105-01a1a12e
 
-- 기록 시각: 2026-11-05T21:25:23+09:00. 기록·실행 Codex 메인, 메모리 정리 및 로컬 커밋 요청·승인 사용자. 출처 현재채팅 01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d의 「이번 탄생 미리보기 수정도 메모리에 기록하고 커밋해」. 원발언 정확시각·항목 ID 미확인.
-- 확정 범위: 앞서 완료 보고한 4종 탄생 full/64px 미리보기8개, birth-scenes.json, Design 탄생 셀4개, unit-matrix data/preview 및 기존 design-sync 생성기와 이 채팅의 관련 메모리만 같은 로컬 커밋에 포함한다. 게임·웰컴·오디오·DNA·공유 메모리의 병행 내용은 제외·보존한다. 푸시·배포 요청은 없다.
-- 검수 근거: 직전 actual Edge의 4개 표/확대 재생·반복·512px 로드, 화면 잘림 시각 검수, JS오류0/자산실패0 및 timing/audio metadata 일치 결과를 재사용한다. 최종 텍스트6개 UTF8NoBOM/CRLF·범위 diff check는 4.90초에 통과했다. 커밋을 이유로 브라우저·빌드·테스트를 다시 실행하지 않는다. 실제 음질 청취 완료를 주장하지 않는다.
-- Git 상태: 이전 레이아웃 커밋 원래354fa1d는 다른 작업의 rebase 이후 현재 이력4d4bcac로 보이며 현재 HEAD d736c2a이다. 기존 원기록은 보존한다. 아래 후속 커밋은 아직 실행 전이며, 현재 HEAD/인덱스 재조정 후 이 범위만 분리할 계획이다. 원격 oojjrs/Spawner와 이 채팅에서 확인한 연결 Projects0개 결과를 재사용한다.
-## unit-page-birth-scene-complete-20261105-01a1a0bf
+- 기록 시각: 2026-11-05T21:41:16+09:00; 주체: Codex 구현 판단; 출처 현재 웰컴 도착/2초 타이밍 수정.
+- 기본 속도와 느린 이전 몽돌/빠른 샘방울 조건의 실제 브라우저에서 도착→즉시 jump, 원본 클립 종료→정확히2초→퇴장이 통과했다. 추가 상태 검수에서 upcoming.ready가 false이면 rest 자체를 늘리는 기존 조건도 남아 있음을 확인했다. 최신 고정 대기 요구에 맞춰 다음 에셋 준비와 퇴장 시각도 분리한다.
+- 판단: 동작 종료 후2초에 현재 유닛은 항상 퇴장하며, 다음 유닛 준비가 늦으면 기존 배경/BGM/파형을 유지한 채 입장만 기다린다. 처음4종 우선 준비는 보존한다. 다음 준비를 기다릴 때 현재 유닛을 중앙에 중복 표시하지 않고 이미 시작한 퇴장과 SFX는 계속 진행한다.
 
-- 기록 시각: 2026-11-05T21:20:20+09:00. 발화·결정 주체: 사용자(유닛 기획서 탄생의 옛/이상한 연결 수정), Codex 메인(구현·검수). 출처 현재채팅 01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d; 원발언 정확시각·항목 ID 미확인.
-- 완료: 새싹콩·포자버섯·몽돌·샘방울 4종 기본형 탄생을 현재 client/game.js의 drawColony/drawAgentBody와 실제 agentBirthPose/등록 애셋으로 격리 재생하여 다시 캡처했다. 게임 소스/연출이나 새 작화를 수정하지 않았다. 512x512 고정 카메라(zoom112, 둥지 상대 중심2.7/3.0, 출생 목표4/4)로 전체 둥지와 탄생·착지·대기 전환이 들어오도록 구성했고 기존 full4개/64px thumbnail4개를 갱신했다.
-- 연결: client/unit-matrix-data.js에 4종 동일 birthScene 계약을 넣고, 본문과 확대가 이 계약의 동일 native WebP/재생시간/효과음 cue를 사용하도록 client/unit-matrix-preview.js의 탄생 예외를 수정했다. Design.html의 기존 탄생 셀만 timing/audio 및 썸네일 경로를 갱신하여 오래된 썸네일 캐시를 우회한다. birth-scenes.json에 현재 미리보기 메타데이터·설치 시점 원본 해시를 보존하고 기존 design-sync 생성기도 이를 읽도록 맞췄다. body-only 시트 등록은 보존하며 다른 애니 데이터·다른 HTML은 변경하지 않았다. 탄생은 둥지를 포함하는 장면용 카메라이고 다른 동작/필드/전투의 유닛 크기 계약은 그대로다.
-- 실제 검수: file:///H:/Spawner/Design.html#codex-units를 격리 headless Edge1440x1000에서 네 셀 및 확대 실제 클릭으로 검사. 네 확대 모두512x512 로드·native 재생, 3개 시점의 프레임 진행과 반복 확인, JS오류0/자산실패0. 부모가 네 종족 실제 화면과 4x6 장면표를 시각 확인했다. 미디어 주기4750/4020/3520/2690ms(각 실제 탄생3850/3120/2620/1790ms+마지막900ms)는 WebP 실제 delay 합과 모두 일치하며 연결/재생/오디오 metadata도 같음을 확인했다. 실제 음원 청취 검증을 주장하지 않는다.
-- 범위 보존 확인: birthScene 필드를 제외한 unit-matrix-data 전체와 탄생 셀을 제외한 Design.html이 작업 시작 백업과 동일했다. 검수 후 nativeAnimation 플래그 변경은 birth일 때로 좁혀 다른 동작의 기존 분기를 보존했으며 검사한 birth 동작은 동일하다. 검증 산출물은 literal 루트 $Trash/unit-page-birth-20261105/verified.json, verification.json 및 실제 PNG/캡처 recipe에 있다.
-- Git: 이 탄생 후속 변경은 사용자 커밋 요청이 없어 unstaged/uncommitted로 남긴다. 이전 레이아웃·스탯 로컬 커밋354fa1d는 완료이며 새 커밋·푸시·배포 없음. 다른 채팅의 메모리 및 기존/병행 수정은 보존한다.
-## unit-page-birth-scene-fix-20261105-01a1a0bf
+## neutral-attack-role-document-approved-20261105-01a1a0bf
 
-- 기록 시각: 2026-11-05T21:12:05+09:00. 기록·구현 판단 Codex 메인, 문제 제기·수정 범위 사용자. 출처 현재채팅 01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, 원발언 정확시각·항목 ID 미확인.
-- 확인 사실: 탄생 칸만 공통 lightbox 연결 갱신에서 제외되어 몽돌·샘방울 본문은 현재 body-only 시트인데 확대는 옛 Planning 캡처를 사용한다. 포자 본문은 body-only인데 확대는 fullscene 원본이다. 새싹콩의 기존 캡처는 둥지와 유닛 크기가 화면에 맞지 않는다.
-- 구현 판단: body-only 시트로 확대 링크만 교체하면 실제 둥지·이동·회전·착지 씬이 누락된다. 새 그림/애니 작화 없이 현재 게임 렌더러의 실제 네 종족 기본형 탄생을 고정된 카메라로 재캡처하고, 동일 장면을 표와 확대에 연결한다. 기존 문구·유닛 크기 계약·게임 연출을 바꾸지 않는다. 현재 제품/메모리 병행 변경은 보존하며 현 요청은 커밋·푸시 미포함.
-## 유닛 페이지 레이아웃·스탯 로컬 커밋 완료 및 탄생 연결 조사 착수 · 01a1a0bf
+- 기록 시각: 2026-11-05T21:40:26+09:00. 정확 문구·위치 교정 및 승인 사용자, 반영 판단 Codex 메인. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d의 비동기 질문 답 「아니. 배정 의도 상단에 걍 근딜, 원딜, 겸용 이렇게 셋 중 하나로만 표기해」. 질문 call_80ce9c5390674c2eb137e9962e89cde8/0; 원발언 정확시각 미확인.
+- 유효 문서 기준: 기존 중립 유닛 티어 표의 각 배정 의도 셀에서 기존 설명을 보존하고 상단에 근딜/원딜/겸용 중 정확히 하나만 넣는다. 앞서 제시한 기존 설명 대체·원거리 중심·근접 대응 문구 및 거리 전환 한 줄 안은 거절되어 폐기한다. 새 페이지·열·거리 문구를 추가하지 않는다.
+- 카탈로그 구분: 꽃꼬리새·등불지기의 표시 역할은 원딜, 방울두꺼비·흙두더지·넝쿨거북·가시등 딱정벌레·가시등 우두머리는 겸용, 나머지12는 근딜. 꽃꼬리새는 앞선 승인 추천대로 붙었을 때 부리 대응을 허용하되 주역할은 원딜로 표기한다. 공격 전환과 강약/성향 보존 구현 기준은 start기록을 유지한다.
+## 전투 원형 보조 표식 제거·발밑 체력 링 통일 결정 · 01a1a155
 
-- 기록 ID: unit-page-layout-commit-complete-20261105-205847-01a1a0bf. 기록 시각 2026-11-05T20:58:47+09:00. 기록·실행 메인 Codex, 로컬 커밋 및 후속 탄생 연결 문제 제기 사용자. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, H:/Spawner Windows PowerShell. 원발언 정확시각·항목 ID 불명.
-- 실제 커밋: 354fa1d3f4435dccf0de4dd4eff56d4b4ba6b07e 「유닛 페이지 레이아웃 및 스탯 표 수정」. Design.html/client/unit-matrix-preview.js/관련 메모리4섹션을3경로로 원자적 저장했다. 최종 staged경로·tree·실제 인덱스대상blob을 재조회했고 비대상stage를 보존했다. 기존화면검수·제품형식은hash불변으로 재사용하고 신규메모리형식·staged whitespace도 통과했다. 푸시는 실행하지 않았다.
-- 본 hash/성공은 커밋후에만 알려진 사실로 로컬에 기록하고 다음 승인된 관련 커밋에 넘긴다. 메모리만의 추가 커밋/amend는 만들지 않는다. 앞선 커밋승인의 실행대기상태를 완료로 대체하며 기존 이력은 보존한다.
-- 후속 사용자 제보: 유닛 기획서 탄생 칸에 옛 자산 또는 이상한 자산이 연결된 항목이 있다는 것이다. 현재 탄생 링크/미리보기와 실제 게임의 등록된 탄생 자산·프레임을 대조해 관련 연결을 수정한다. 새 탄생 아트 제작이나 새 문구·Git완료 승인을 추론하지 않는다. 이전 레이아웃 커밋은 완료상태로 유지한다.
+- 기록 ID: combat-ground-health-ring-start-20261105-01a1a155. 기록 시각: 2026-11-05T21:38:31+09:00. 기록자·구현 판단 Codex /root, 표시 변경 결정 주체 사용자. 출처 thread01a1a155-d06b-7243-b396-e5c947a4714e의 영상 후속 피드백: 공격/피격 원형 게이지는 알아볼 수 있으나 오히려 눈에 띄어 불필요하며 기존 발밑 원형 체력 표시를 지키자는 요청. 원발언 정확 시각·항목ID 미확인.
+- 변경 범위: 상세뷰어의 공격 준비 원/관통선과 피격 원형 fallback을 제거하고, 생존 유닛의 발밑 타원형 HP 링으로 가로 HP바/선택 장식원을 대체한다. 실제 피격 모션·승인 V4 충돌 그림·방어/회피/회복 판정은 보존하고 fallback은 원형 대신 짧은 타격선만 사용한다. HP 링은 월드의 기존 지면투영(.327 깊이)·실제 현재/최대HP를 공통 painter로 공유하며 상세/실험실에서는 최대HP도 표시, 월드 기존 만피 숨김·줌/화면 cull은 유지한다. 실험실 전투/지원 유닛과 다인 HP바도 같은 발밑 링으로 맞춘다.
+- 보호·권한: 공용 전투/시뮬레이션/빌드/런타임에 병행 미완료 변경이 있으므로 관련 문자열·모듈만 좁게 수정·동기화하고 전체 build로 다른 작업을 덮지 않는다. 새 작화/능력치·발사시계 변경 없음. 사용자 요청은 구현·렌더 검수이며 Git commit/push 승인 없음. 실제 상세뷰어 시각 근거로 확인하고 성공 결과는 후속 기록한다.
+
+## 공통 편집기 보기 API·단축키 보존 판단 · 01a1a129
+
+- 기록 ID: dna-shared-editor-view-contract-20261105-01a1a129. 기록 시각: 2026-11-05T21:38:12+09:00. 기록자·계약/재작업 지시 Codex /root, 공통 UX·인게임 레이아웃 동결 요구 사용자. 출처 현재채팅01a1a129-d9d6-79c3-830d-58009e34c915와 shared_editor_core/tool/qa 협업 메시지, H:/Spawner Windows/PowerShell. 원발언 시각·항목 ID 불명.
+- 제작기의 기존 수동 확대/축소는 제거하는 중간 제안 대신 명시적인 테스트 버튼으로 보존한다. core.zoom(factor) 하나만 공통 view를 변경하고 어댑터에는 자체 scale/pan 계산이나 키보드 구현을 남기지 않는다. 정상 자동맞춤/편집 명령은 양쪽이 같은 core를 사용한다. 기존 tool F=전체보기는 공통 root의 fit shortcut으로 옮겨 인게임에서도 동일하게 제공하며 입력 필드·modifier guard를 유지한다. 새 패널 버튼·가이드 문구·게임 CSS/마크업/레이아웃은 추가하지 않는다.
+- 공통 모듈 API 구현과 기존 마크업/CSS 불변 자체 검수 결과를 받았다. 마지막 F 공통화 후 정확 source hash를 갱신하고 어댑터/build 워커가 runtime의 core·DNA·attributes와 새 직접 DNAcombatStats 의존성만 메인/nestedworker에 동기화하도록 지시했다. 다른 모듈/assets/footer는 바이트 보존이 조건이다. 현재 구현 중인 새 catalog/채집기관1회/전투스탯의 병행 사용자 변경은 되돌리지 않는다.
+- QA는 이전 제작기 전용 함수 추출 검사 대신 실제 공유 editor/API 호출, 텍스트 입력 중 단축키 비발동, 마우스/키보드 undo/redo/회전/배치, readonly·막힌 미리보기, 제작기 외부 도구와 화면을 검수한다. 현재는 통합/최종검수 진행 중이며 배포·Git완료를 선기록하지 않는다.
+## neutral-attack-role-implementation-start-20261105-01a1a0bf
+
+- 기록 시각: 2026-11-05T21:37:48+09:00. 역할 배정·거리 전환·기획서 반영 요청 및 결정 사용자, 구현 판단 Codex 메인. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d의 「추천한 대로 중립 유닛들 공격 역할 나누고 기획서에 반영…겸용 애들은 거리에 따라…」. 원발언 정확시각·항목 ID 미확인.
+- 확정 방향: 방울두꺼비·흙두더지·넝쿨거북·가시등 딱정벌레·가시등 우두머리의 근원거리 겸용, 꽃꼬리새의 원거리 중심+근접 대응, 등불지기의 원거리, 나머지12종의 근거리 역할로 적용한다. 앞선 proposal/addendum의 미확정 상태를 이 사용자 구현 지시로 대체한다.
+- 구현 판단: server/dna-actions.mjs에 이미 있는 meleeRange1/rangedRange3/projectileSpeed6 기준을 재사용한다. 근접 가능+거리1이하는 근접,1초과3이하는 원거리, 사거리 밖은 기존 접근을 따른다. 기존 전투력/공격력/공속/선공·비선공·평화 성향은 변경하지 않는다. 중립에 가짜 DNA를 넣지 않고 명시 역할 카탈로그와 실제 createCombat의 기존 투사체 큐·판정을 연결한다. 새 애니/래스터 아트는 제작하지 않고 기존 공격 자세와 실제 투사체 연출을 쓴다.
+- 범위 보호: 현재 combat.mjs·combat-stats.mjs·runtime·DNA·실험실 공통화 등의 병행 변경이 있다. 이를 백업·보존하고 필요한 최소 중립 역할 연결만 수정한다. Git완료·푸시·배포는 이번 요청에 없다. 독립된 거리/성향/투사체 회귀 검증을 동일 모델·추론 강도의 서브워커에 맡기고 메인은 구현·문서·통합 검수를 직접 맡는다.
+- 문구 절차: document-writing-guideline6의 별도 정확 문구·위치 사전 허가가 필요하므로 기존 중립 유닛 티어 표의 배정 의도 셀을 역할4문구로 바꾸는 안과 표 위 거리 전환 한 줄만 확인 요청한다. 사용자 답변 전 해당 HTML문구를 쓰지 않고 코드 적용은 진행한다. 새 페이지나 문구 초안/숨김 삽입은 하지 않는다.
+## 방어 3종 실유닛 GIF 재구성·실제 재생 확인 완료 · 01a1a5f6 현재 요약
+
+- 기록 ID: combat-defense-gif-final-20261105-01a1a5f6. 기록·최종 근거 확인 시각 2026-11-05T21:37:10+09:00. 기록자·재구성/캡처/직접 화상 검수 Codex /root, 실유닛 GIF 제시 요청·향후 시안 수용 결정 주체 사용자. 출처 현재 채팅01a1a5f6-f89a-7de0-9cfd-9addb113f421, H:/Spawner Windows/PowerShell 및 capture.mjs/result.json/gif-playback.json/실제 재생 스크린샷. 원발언 정확시각·항목ID 불명.
+- combat-defense-gif-start의 진행을 실제 결과로 갱신한다. 원본 tools/defense-reaction-review-20261105는 확보하지 못했으며 이 결과는 기록 방향을 바탕으로 다시 구성한 검토용 canvas 방어 연출이다. 원격 원본의 동일 재생·기존 승인·게임 적용을 뜻하지 않는다. 현재 실제 Combat.html stage·실제 새싹콩 칼날 공격과 몽돌 몸체/갑피·기존 접지/피벗/비례를 사용했고 몸체 새 작화·왜곡·파츠 리깅·보간·새 raster 원화를 만들지 않았다.
+- 실제 산출: D:/.codex/visualizations/2026/11/04/01a1a5f6-f89a-7de0-9cfd-9addb113f421/CombatDefensePreview/dodge.gif, parry.gif, block.gif. 각각640×320/75프레임/25fps/3초/무한반복이다. 같은 원본800×360 전투 canvas에서640×288로 캡처한 뒤 고정384×192영역(x128/y88)을 균일하게640×320으로 확대한 공통 카메라다. 유닛마다 bbox나 배율을 달리 맞추지 않았다. 회피는 기존 이동과 바람 궤적, 패링은 앞 접촉점 섬광/튕기는 입자, 블록은 앞 방어 곡면과 충격으로 구분했다. 블록의 실제 받은 피해와 기존 공통 피격도 보존한다.
+- 실제 판정/교정: 첫 캡처의 늦은 자산 준비로 몸체 외형이 달라 보이는 구간을 발견해 준비 재생 후 전 구간을 다시 캡처했다. 동시 작업이 Combat.html을 새 production simulation으로 갱신하면서 stats.dna 유무 및 원판정 miss→표시용 dodge 정규화 차이가 나타났고 fixture만 두 형식에 맞췄다. 최종 실제 사건은0.3초 회피(miss)0피해, 패링0피해, 블록3피해다. 실제 서버 판정값은 바꾸지 않고 검토 fixture의 방어 스탯만 해당 가지를 확정했으며 표시용 history에 기존 normalize 계약을 적용했다. 제품 코드 수정·가짜 명중 삽입이 아니다.
+- 실제 검수: ffprobe로 최종3GIF 각각640×320/75프레임/3초를 readback했다. headless Chrome에서 최종GIF3개를 실제 이미지로 함께 재생해6시점(요청50/730/860/1080/2300/3150ms, 실제 관측 시작/끝은gif-playback.json 별도)에6개 서로 다른 화면 hash를 관측했다. 직접860/1080ms 관측 스크린샷과 초기/접촉/잔여/끝 PNG contact sheet를 열어 몸체 유지·방어자 앞면·피해 표기·이펙트 소멸을 확인했다. 정확 decoder 시작시각은 노출되지 않으므로 요청시각을 정확 프레임 시각으로 주장하지 않는다. 최종 capture pageerror0·미로드 이미지0이다.
+- 상태/범위: 사용자에게 채팅에3GIF를 직접 embed해 제시한다. 신규 방어 시안은 여전히 사용자 수용 전·게임 미적용이다. 프로젝트 제품·공유 번들·타 채팅 변경은 수정하지 않았고 커밋·푸시·배포도 없다. 소유 스크립트/기계 검수 기록은 literal달러Trash/combat-defense-gif-20261105-01a1a5f6에 보존했다. 후속은 사용자의 시안 평가에 따른 조정 또는 별도 적용 요청이며 완성/승인을 예정 기록하지 않는다.
+
+## welcome-arrival-timing-start-20261105-01a1a12e
+
+- 기록 시각: 2026-11-05T21:34:56+09:00; 요구 주체: 사용자, 원인 확인·구현 판단: Codex /root; 출처 현재 채팅 01a1a12e-3f3f-72c1-95e2-0b5b349b5ffb의 몽돌 다음 샘방울 점프 지연 지적. 원발언 정확 시각/항목 ID 불명.
+- 확인: 현재 phaseDuration(exit)는 이전 유닛 퇴장과 다음 입장 duration의 max이며, 먼저 도착한 incoming은 draw에서 rest로 보이고 perform은 전체 exit 종료 후에만 시작한다. 이속 차이에 의해 도착 후 동작이 늦어지는 직접 호출/상태 원인이다.
+- 최신 의도: 실제 이동 속도는 유지하되 유닛마다 도착 즉시 기존 동작 1회 → 동작 완료 후 2000ms 대기 → 퇴장. 이전 유닛 퇴장과 다음 입장은 계속 겹친다. 종전 bean perform=0 예외는 최신 모든 유닛 동작 1회 요구에 맞춰 기존 짧은 idle 움찔 1회(공유 원본 수학의 약873ms)로 계수한다. 새 애니메이션/애셋은 만들지 않는다.
+- 구현 판단: 현재 입장/중앙 동작/대기의 주체 하나와 독립적인 퇴장 목록으로 수명을 나눈다. 새 유닛의 perform/rest는 이전 퇴장 완료를 기다리지 않으며, 오래 남는 퇴장이 있어도 다음 입장까지 타이머를 막지 않는다. 공통 이동/pose/SFX, 외형 freeze와 동일 외형 복구, 35개 중복 없는 큐는 유지한다. runtime의 타 작업 모듈 변경은 보존하고 필요한 sprout 모듈만 동기화한다. 현재 요청에는 새 커밋/푸시가 없다.
+
+## unit-page-birth-scene-commit-complete-20261105-01a1a0bf
+
+- 기록 시각: 2026-11-05T21:31:33+09:00. 기록·Git 실행 및 readback 검수 Codex 메인, 탄생 미리보기 메모리·로컬 커밋 요청 사용자. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d 및 literal 루트 $Trash/unit-page-birth-commit-20261105/commit-result.json. 원발언 정확시각·항목 ID 미확인.
+- 실제 완료: main 로컬 커밋9076d50ad5087484acc4dfd317beebdadb3a0667 「유닛 탄생 미리보기 연결 수정」. 직전 부모adcdcffac75e5a646150b1826cf91e97106cee5c, tree0828ff69160ca4783b9927a44e9812385c02d993. 이번 13개 제품/기획서/자산·생성기 경로 및 CodexWorkMemory.md의 관련4개 섹션만 총14경로로 커밋했다.
+- 범위·검수: 독립 인덱스에서 최종 staged name/status/diff/check와 탄생 외 HTML·matrix 데이터 동일성, 다른 메모리 제외·원기록 삭제 없음 확인. 기존 제품 검수·텍스트 형식 결과는 재사용하고 새 후보 메모리만 UTF8NoBOM/CRLF 확인했다. 마지막 HEAD/tree/14경로 readback, 다른 인덱스 항목 및 모든 제품 작업 바이트 보존을 확인했다. 푸시·배포 없음.
+- 현재 상태: 탄생 수정의 커밋 완료로 앞선 실행 전·미커밋 기록을 대체한다. 병행 웰컴·오디오·DNA·전투 작업과 중립 원거리 후보 제안 메모리는 작업 트리에 보존했다. 커밋 뒤에만 알 수 있는 이 실제 해시·결과는 로컬 기록으로 남기고 다음 관련 승인 커밋에 반영한다. 별도 메모리 전용 커밋이나 amend는 하지 않는다.
+
+## neutral-ranged-role-proposal-addendum-20261105-01a1a0bf
+
+- 기록 시각: 2026-11-05T21:31:33+09:00. 기획 제안 Codex 메인, 중립 원거리/겸용 후보 질문 및 강약 제외 기준 사용자. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d; 원발언 정확시각·항목 ID 미확인.
+- 추가 미확정 제안: 가시등벌레/우두머리도 등가시 발사+집게·몸통 공격의 겸용이 외형상 자연스럽다. 꽃꼬리새는 씨앗 발사+부리 쪼기 형태의 원거리 중심 후보, 등불지기는 빛탄/빛줄기의 원거리 중심 후보로 제시한다. 방울두꺼비·흙두더지·넝쿨거북 겸용 제안은 유지한다. 이는 현재 공격 구현 사실이나 사용자 확정이 아니며 제품·수치·작화·기획서 문구를 수정하지 않았다. 탄생 커밋에 넣지 않는다.
+## 업데이트4종족 실제 전투 상세 뷰어 영상 전달 · 01a1a155 현재 요약
+
+- 기록 ID: combat-detail-four-tribes-video-20261105-01a1a155. 기록·실제 출력 확인 시각: 2026-11-05T21:31:27+09:00. 기록자·재현/촬영/검수 Codex /root, 영상 요청 주체 사용자. 출처 thread01a1a155-d06b-7243-b396-e5c947a4714e 최신 「업데이트된 4종족 전투 애니가 실제 전투 상세 뷰어에서 어떻게 보이는지 영상으로 한 번 보여줘」. 원 발언 정확 시각·항목ID 미확인. 대상 H:/Spawner의 현재 상세뷰어 drawCombatPanel 및 공용 유닛 렌더러.
+- 병행 작업이 client/combat-simulation.mjs·game.js·runtime.js를 갱신 중이라 작업트리는 보존하고 확정 commit d736c2a의 코드220파일을 literal $Trash/combat-viewer-video-20261105/snapshot/에 읽기 전용 촬영용으로 고정했다. 실제 Spawner.html/CSS/runtime/game.js를 격리 headless Chrome에 로드하고 응답에만 observation bridge를 주입했다. 제품 코드·애셋 수정/새 작화/빌드/테스트/커밋/푸시는 하지 않았다.
+- 촬영은 같은 커밋 createSimulationTrial의 실제 근접·원거리 시계/이벤트를 실제 상세뷰어에 공급하는 재현용 교전이다. 각종족 왼쪽칼날·오른쪽분비, stats.pieceCount 기반 성장과 원래 고정카메라/바닥피벗 유지, 서브페이지 모조 렌더가 아니다. 순서 bean/grassland→spore/forest→pebble/grassland→spring/ford(강가). 각8초 simulation, 각21history events, melee/ranged 둘 다 확인. 실제 플레이어 방의 자연 발생 전투로 오인하지 말 것.
+- 완성 영상 D:/.codex/visualizations/2026/11/03/01a1a155-d06b-7243-b396-e5c947a4714e/combat-viewer-four-tribes-20261105.mp4. 실제 ffprobe=H264·1280×800·30fps·35.9초·5,725,989bytes·무음. 영상 contact8프레임을 직접 확인해 네 종족/지형·업데이트 몸/칼날·분비 발사/타격 효과가 표시됨을 확인했다. 성공 캡처 pageerror0, 자체 서버·브라우저 종료. 근거 $Trash/combat-viewer-video-20261105/{capture.mjs,result.json,video-contact.png,video/}, 전달 poster는 같은 D: 경로 combat-viewer-current-poster.png.
+- 촬영 도구 이력: Playwright용 ffmpeg 누락은 이미 설치된 binary를 이 작업 임시 cache에 복사해 해결. 첫 초기화 실패는 캡처가 welcome 공용 의존성을 누락한 도구 문제, 병행 source 갱신은 고정 snapshot으로 회피. 재현 snapshot의 방어 표기를 위해 stats.defense→stats.dna.armor 전사, 첫 RAF의 음수시간 frame index를0으로 제한해 최종 성공했다. 게임 제품 결함 수정으로 기록하지 않는다. 영상은 확인한 d736c2a 업데이트 버전의 외형 증거이며 전체24대표형 준비나 모바일 성능 완료의 증거가 아니다.
+
+## welcome-ingame-consistency-pushed-20261105-01a1a12e
+
+- 기록 시각: 2026-11-05T21:29:53+09:00; 실행·검증 주체: Codex /root; Git 완료 승인 주체: 사용자; 출처: 현재 채팅 01a1a12e-3f3f-72c1-95e2-0b5b349b5ffb의 커밋·푸시 요청 및 실제 Git 출력.
+- 실제 커밋 adcdcffac75e5a646150b1826cf91e97106cee5c 「웰컴 유닛 동작과 효과음 연결 수정」 완료. 13개 제품 파일과 현재 채팅의 감사/구현/검증/승인 7개 메모리 기록만 14개 경로로 원자 커밋했다. build.mjs 보정은 이미 부모 HEAD에 있어 중복 변경하지 않았다. 제품은 검수 SHA256과 동일했고 staged diff --check 통과. 현재 추가된 승인 기록의 UTF8NoBom/CRLF 검사도 OK였다.
+- fetch origin main 후 로컬1/원격0만 남은 상태에서 git push origin main 성공(d736c2a→adcdcff). 이후 git ls-remote origin refs/heads/main으로 원격 adcdcffac75e5a646150b1826cf91e97106cee5c를 실제 읽었고, 요청을 시작한 H:/Spawner main/HEAD도 같은 값이며 index가 비어 있음을 확인했다. 병행 작업의 미커밋 파일·공용 메모리 기록은 작업 트리에 보존했다.
+- welcome-ingame-consistency-commit-freeze의 Git 실행 대기를 위 실제 결과로 완료 갱신한다. 증거: $Trash/welcome-ingame-consistency-20261105/{commit-plan.json,staged-final.diff,commit-result.json,push-verified.json}. 이 푸시 영수증은 커밋 후에만 알 수 있는 결과라 로컬 기록으로 남겨 다음 승인된 관련 커밋에 포함하며, 별도 메모리 전용 커밋이나 공개 커밋 수정은 수행하지 않는다.
+
+## 속성 제작기·인게임 공통 편집기 통합 착수 · 01a1a129 현재 요약
+
+- 기록 ID: dna-shared-editor-start-20261105-01a1a129. 기록 시각: 2026-11-05T21:29:31+09:00. 기록자·분해/계약/검수 판단 Codex /root, 공통 편집기 통합·인게임 레이아웃 유지·단축키 검수 승인 사용자. 출처 현재채팅01a1a129-d9d6-79c3-830d-58009e34c915 최신 통합 지시. H:/Spawner Windows/PowerShell. 원발언 정확 시각·항목 ID 불명.
+- 이번 확정 요구: 계산·상태/배치/회전/삭제/이력/미리보기/입력/표시를 공통 편집기로 쓰고 제작기만 테스트/치팅/자유 레벨·파일 I/O를 바깥에 붙인다. 현재 인게임 DOM 배치·CSS·패널 레이아웃은 변경하지 않는다. UI를 재설계하지 않고 단축키와 입력 동작을 확인한다. 직전 read-only parity-review의 미통합 상태를 이번 구현 범위로 갱신한다.
+- 계약: 기존 createDnaEditor(container,M,onChange)를 양쪽이 호출한다. 공통 M.cost(pieces)로 기본3+DNA가격을 한곳에 두고 실제 birthCost·편집기 가격에 연결한다. 공통 dnaDesignStats(M,pieces)와 renderDnaDesignStats(container,stats,base,showScale)를 같은 편집기 모듈에 둬 기존 스탯표기를 공유한다. 제작기는 공통 editor.context/load/getDesign/clearHistory/fit에만 의존하며 편집 이력/회전/그리기/키보드 구현을 별도로 가지지 않는다. showScale false 제작기/true 인게임은 기존 명시 표시 차이를 보존한다.
+- 현재 병행 변경: DNA 모델·편집기에는 다른 채팅의 채집기관1회 정책/외형 및 스탯 작업이 이미 나타나 있다. 현재 바이트를 보존해 통합하고 이를 임의 제거하거나 이전 다중기관 상태로 돌리지 않는다. client/game.css와 기존 editor root markup은 동결하고 baseline-manifest.json으로 유지 근거를 남긴다. 모든 기존·동시 제품·메모리 원문을 보호한다.
+- 독립 분담은 같은 메인 모델/추론 강도 워커에게 공통 모듈·제작기 어댑터/빌드 연결·입력/레이아웃 검수로 나눈다. 각자 소유 파일과 자체 검수를 맡고 부모는 계약·결과를 취합한다. 임시는 H:/Spawner/$Trash/dna-editor-unification-20261105. 현재 구현/검수 전이며 새 Git완료·푸시·배포는 승인되지 않았다.
+## neutral-ranged-role-proposal-20261105-01a1a0bf
+
+- 기록 시각: 2026-11-05T21:28:51+09:00. 질문·평가 기준 사용자, 기획 제안 Codex 메인. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d의 중립 유닛 원거리 및 근원거리 겸용 후보 질문. 원발언 정확시각·항목 ID 미확인. 탄생 미리보기 로컬 커밋 요청 진행 중 추가된 별도 읽기·기획 질문이며 구현/기획서 문구 변경 승인이 아니다.
+- 확인 자료: 현재 server/encounter-types.mjs의 실제 중립18종 명칭과 별도 가시등벌레를 확인했다. 강약을 평가 기준에서 제외한다.
+- Codex 제안·미확정: 방울두꺼비(방울 발사+혀/몸통), 흙두더지(흙덩이 던지기+발톱), 넝쿨거북(씨앗/가시 발사+넝쿨 휘두르기)을 겸용 우선 후보로 보았다. 꽃꼬리새와 등불지기는 원거리 중심 후보다. 현재 공격 구현을 조사·완료했다는 주장이 아니며 신규 공격 작화·코드·스탯·기획서 변경은 수행하지 않는다.
+- Git 분리: 이 별도 기획 제안 메모리는 이번 탄생 미리보기 커밋 범위에서 제외하고 작업 트리에 보존한다. 기존 탄생 커밋 요청은 취소되지 않았으며 계속 수행한다.
+## 방어 3판정 실유닛 GIF 시안 재구성 착수 · 01a1a5f6 현재 요약
+
+- 기록 ID: combat-defense-gif-start-20261105-01a1a5f6. 기록·근거 확인 시각 2026-11-05T21:28:03+09:00. 기록자·조사/재구성 판단 Codex /root, 실제 유닛에 회피·패링·블록 시안을 붙여 채팅에 GIF로 제시하도록 요청·결정한 주체 사용자. 출처 현재 채팅01a1a5f6-f89a-7de0-9cfd-9addb113f421, H:/Spawner Windows/PowerShell. 원발언 정확시각·항목ID 불명.
+- 조사 결과 메모리의 tools/defense-reaction-review-20261105 폴더는 현재 체크아웃·관련 임시/보존 트리·참조 브랜치에 없고 확인한 제작 채팅 기록에서도 원본을 확보하지 못했다. 원본이 없다는 사실은 직전 확인과 일치하며 과거 새 시안 원본을 찾아 재생했다고 주장하지 않는다. 사용자에게 이 한계를 밝히고 기록된 공통 방어 표현 방향을 검토용 canvas 연출로 재구성해 진행한다고 알렸다.
+- 범위 판단: 현재 실제 Combat.html의 전투 renderer·승인된 새싹콩 공격/몽돌 몸체·기관·피벗·크기와 production simulation의 제어된 실제 방어 판정을 사용한다. 회피는 짧은 이동/바람 궤적, 패링은 앞 접촉점의 순간 섬광/튕기는 입자, 블록은 앞면의 유지되는 방어 곡면과 흩어지는 충격으로 검토용 오버레이만 구성한다. 몸체 새 작화·왜곡·파츠 리깅·보간이나 새 raster 원화 제작은 하지 않는다. 이 재구성 시안은 미승인·게임 미적용으로 유지하고 제품/공유 번들/Git/배포는 바꾸지 않는다. 임시는 literal달러Trash/combat-defense-gif-20261105-01a1a5f6, 채팅용 GIF는 현재 D: 출력 루트 CombatDefensePreview에 둔다. 아직 산출·검수 성공은 미확인이다.
 
 ## welcome-ingame-consistency-commit-freeze-20261105-01a1a12e
 
@@ -769,6 +626,29 @@
 - 제품 14개 후보의 SHA256이 직전 검수 product-hashes.json과 모두 동일함을 확인했다. 기존 52개 대상 검증, 실제 35외형/19종 SFX 및 실패 복구 증거를 재사용한다. 최종 15개 텍스트 UTF8NoBom/CRLF 검사는 전부 OK였다. 이번 메모리 추가만 형식 확인한다.
 - 전용 체크아웃 H:/Spawner, 브랜치 main, 원격 origin=https://github.com/oojjrs/Spawner. 실제 fetch origin main 후 로컬/원격 d736c2aa2a0952f439efb8c9951e374efd0503f8 동일(0/0)을 확인했다. 시작 index는 비어 있다. 링크된 Projects 없음이라는 현재 작업의 기존 조회 결과를 재사용한다. 커밋 메시지 예정 「웰컴 유닛 동작과 효과음 연결 수정」. 커밋·푸시 결과는 실행 후 실제 readback으로 기록한다.
 
+## unit-page-birth-scene-commit-request-20261105-01a1a0bf
+
+- 기록 시각: 2026-11-05T21:25:23+09:00. 기록·실행 Codex 메인, 메모리 정리 및 로컬 커밋 요청·승인 사용자. 출처 현재채팅 01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d의 「이번 탄생 미리보기 수정도 메모리에 기록하고 커밋해」. 원발언 정확시각·항목 ID 미확인.
+- 확정 범위: 앞서 완료 보고한 4종 탄생 full/64px 미리보기8개, birth-scenes.json, Design 탄생 셀4개, unit-matrix data/preview 및 기존 design-sync 생성기와 이 채팅의 관련 메모리만 같은 로컬 커밋에 포함한다. 게임·웰컴·오디오·DNA·공유 메모리의 병행 내용은 제외·보존한다. 푸시·배포 요청은 없다.
+- 검수 근거: 직전 actual Edge의 4개 표/확대 재생·반복·512px 로드, 화면 잘림 시각 검수, JS오류0/자산실패0 및 timing/audio metadata 일치 결과를 재사용한다. 최종 텍스트6개 UTF8NoBOM/CRLF·범위 diff check는 4.90초에 통과했다. 커밋을 이유로 브라우저·빌드·테스트를 다시 실행하지 않는다. 실제 음질 청취 완료를 주장하지 않는다.
+- Git 상태: 이전 레이아웃 커밋 원래354fa1d는 다른 작업의 rebase 이후 현재 이력4d4bcac로 보이며 현재 HEAD d736c2a이다. 기존 원기록은 보존한다. 아래 후속 커밋은 아직 실행 전이며, 현재 HEAD/인덱스 재조정 후 이 범위만 분리할 계획이다. 원격 oojjrs/Spawner와 이 채팅에서 확인한 연결 Projects0개 결과를 재사용한다.
+## 시작 일꾼 축소·시간별 습격 전력 단계화 방향 · 01a1a0e9 현재 요약
+
+- 기록 ID: starting-workers-and-raid-progression-20261105-01a1a0e9. 기록·현재 확인 시각: 2026-11-05T21:24:37+09:00. 기록자 Codex /root, 시작 개체 축소 방향 및 첫 딱정벌레 고정 출정 재검토 주체 사용자. 출처 현재 채팅01a1a0e9-2e09-7703-a7f5-613c21744e11, H:/Spawner Windows/PowerShell. 원발언 정확 시각·항목 ID·딥링크 불명.
+- 사용자 발언1: 「시작 개체는 줄이긴 할 거야. 아주 간단한 채집 속성을 가진 일꾼 두 마리나 세 마리로 줄일까 하거든?」. 시작 개체 축소 방향은 유효하지만2기/3기 선택, 정확한 DNA 구성·스탯·시작30P 유지 여부까지 확정한 것은 아니다. 기존 구형 시작 개체3~4기를 사용한 경제 표본을 새 시작 조건의 수입으로 재사용하지 않는다.
+- 사용자 발언2: 「그러면 습격 유닛의 레벨도 시간이 지날수록 강해지는 형태로 좀 바꿔야겠네 처음에 무조건 딱정벌레 보낼 게 아니라」. 시간 경과에 따라 습격 전력이 강해지고 첫 습격을 무조건 가시등 딱정벌레로 고정하지 않는 방향을 반영한다. 특정 대체 종·정찰형 이름/외형, 첫 출정 시각·구간 길이·등장 수·레벨을 사용자가 확정한 것은 아니다.
+- Codex 제안: 초기에는1레벨 저가 전투형1기가 대응할 정도의 약한 정찰 단계, 성장기에는저등급1~2기, 중반에는정규 가시등 딱정벌레, 이후에는일반 개체의레벨·조합·수를 높이는 흐름을 검토한다. 동시에 종·레벨·수·빈도를 전부 올리기보다 한 번의 단계 변화 폭을 제한하고 합산 전력으로 비교한다. 이는 새 기획 제안이며 실제 출정표/게임 변경 완료가 아니다.
+- 시작 개체 수에 대한 Codex 추천: 첫 밸런스 기준은 동일한 기초 채집 일꾼3기가 더 안정적이다.2기일 때1기 손실은 개체 수50%감소,3기일 때는33%감소다. 실제 수입이 정확히 이 비율로 변한다거나3기 채택이 사용자 결정이라는 뜻은 아니다.2기안은 별도 경제 비교 후보로 보존한다.
+- 구분: 종합 티어(중립19종 상대 순서), 각 종의 개체 레벨, 전체 습격 전력을 구분한다. 기존19종·원종/유니크의34축 서열은 유지하며 초기 경제에 맞춘다는 이유로 정규 딱정벌레만 임의 약화해 순서를 깨지 않는다. 약한 초기 출정 풀과 이후 정규 출정 풀을 조정하는 방식으로 검토한다.
+- 다음 근거: 분 단위 단계 경계는 새 기초 채집 DNA·시작2/3기·시작 자원·둥지/추가 일꾼/군사 생산비를 포함한 경제로 다시 정해야 한다. 직전 기록의 정찰형HP20/공격1/공속0.5/방어0과23P 방어형1기 비교는 후보 수치로 보존하며 최종 채택으로 처리하지 않는다. 현재는 방향/제안 기록만 갱신했고 시작 스폰·습격·Design·수치 도구·Git/배포는 변경하지 않았다. 기존 병행 원문을 보존한다.
+## 속성 제작기·인게임 공통 로직 구조 비교 · 01a1a129 현재 요약
+
+- 기록 ID: dna-editor-core-parity-review-20261105-01a1a129. 기록·현재 근거 확인 시각: 2026-11-05T21:23:16+09:00. 기록자·직접 소스 비교 Codex /root, 핵심 계산/구현 동일성과 제작기 수준의 인게임 UX 요구 주체 사용자. 출처 현재채팅01a1a129-d9d6-79c3-830d-58009e34c915 최신 질문, H:/Spawner Windows/PowerShell. 원발언 정확 시각·항목 ID 불명. 이번은 구조·호출 경로를 읽기 비교한 진단이며 제품 통합 구현·테스트 실행·Git·배포를 수행한 것으로 기록하지 않는다.
+- 사용자 기준: 제작기의 테스트용 편집/치팅 기능을 제외한 핵심 계산·구현은 인게임과 같아야 하며, 인게임도 제작기만큼 편리해야 한다. 제작기 전용 도구가 공통 핵심을 별도 복제하는 이유가 되지 않는다.
+- 직접 비교 사실: server/dna.mjs를 export→window.AttributeDna로 바꾼 본문과 Attribute.html의 dna-model이 줄바꿈/양끝 공백을 제외하고 정확 일치했다. runtime.js의 server/dna.mjs 모듈도 export 제거 후 원본과 정확 일치했다(두 비교 true). 따라서 현재 카탈로그·모양·route/trace·가격합계·counts/weights·stats·일반validate는 같은 원본 코드다. client/build.mjs의 writeAttributeDna와 bundle이 각각 사본을 만든다. 서버 최종 validateDna는 추가적인 정규 조각/현재 레벨/예산 검사 계층이며 제작기 테스트용 level·저장 I/O와 구분한다.
+- 공통화되지 않은 실제 구조: Attribute.html은 자체 candidate/previewState/commit/rotate/remove/history/fit/키 입력/그림/스탯표시를 가지며 인게임은 client/dna-editor.mjs 및 client/game.js에 각각 별도 구현이 있다. 모양·스탯·가격 모델이 같아도 편집기 전체를 같은 함수로 실행하는 구조는 아니다. UI의 기본비용3 더하기도 두 화면과 실제 birthCost에 반복되어 현재 숫자는 같지만 단일 호출로 묶이지 않았다.
+- 구체 차이: 제작기 remove는 M.trace(next)로 level을 넘기지 않고 인게임은 M.trace(next,level)을 사용한다(Attribute217/editor101). 이것이 정상 편집에서 곧바로 재현되는 범위 밖 배치를 뜻한다고 단정하지 않는다. fit도 제작기는 현재 판/조각 기준과 수동 시점, 인게임은 가능한 후보 방향을 포함한 viewport를 state마다 적용한다. Space/방향키/Ctrl+Y 등은 인게임에 더 있고 제작기는 드래그/수동 확대·레벨선택/템플릿·JSON I/O가 별도다. 후자의 테스트/기존 요청상 차이는 무조건 UX 결함으로 처리하지 않는다. 현재 스탯표의0숨김·합산/괄호 증감 방식은 대응하나 함수는 중복이고 크기행 제외는 기존 제작기 명시 범위다.
+- 결론·후속 판단: 계산모델은 현재 일치하지만 핵심 편집 구현과 UX까지 단일화됐다고 보장할 수 없다. 공통 계산모델+공통 편집 상태/명령/미리보기/입력/표시를 양쪽이 쓰고, 제작기는 바깥에 치팅/파일/자유 레벨 도구만 붙이는 방향이 사용자 요구에 맞는다. 이는 조사 결론이며 아직 실제 통합 완료나 새 UX 실화면 검수를 주장하지 않는다. 이번 변경은 메모리 예외 기록뿐이고 원제품/병행 내용·원기록은 전부 보존한다.
 ## welcome-ingame-consistency-complete-20261105-01a1a12e
 
 - 기록 시각: 2026-11-05T21:22:59+09:00; 발화·결정 주체: 사용자(요구), Codex(구현·검수); 출처: 현재 SPAWNER 웰컴 채팅 /root, 독립 audio_readiness_fix 워커. 실행/저장 시각은 이 기록 시각과 별개이며 정확한 최초 사용자 발화 시각은 미확인.
@@ -783,12 +663,113 @@
 - 최초 사용자 관측을 만든 원래 throw 자체는 수정 전 브라우저에서 재현하지 않았으므로 단정하지 않는다. variant 0으로 영구 변경하던 명시 경로는 제거했고, 현재 실제 35개 순회에서는 원래 렌더 예외가 관측되지 않았다.
 - 증거: $Trash/welcome-ingame-consistency-20261105/{census-detail.json,qa-result.json,fallback-file-result.json,null-frame-full-game-result.json,header-actual.png,pebble-antenna-null-pose.png,bean-antenna-after-null.png,final-scoped.diff,product-hashes.json}. 첫 full census는 실제 35개 렌더·SFX 확인을 위한 가속 실행이며 일반 형식 검사의 시간 예산과 구분한다. 마지막 텍스트 형식 검사는 이 기록 뒤 수행한다.
 
+## 전투 판정 공통화 진행 · 01a1a5fd 현재 요약
+
+- 기록 ID: combat-core-unification-start-20261105-01a1a5fd. 기록 시각 2026-11-05T21:20:59+09:00. 기록자·구현 판단 Codex /root, 요청·결정 사용자. 출처 현재 채팅 01a1a5fd-bf0b-70a3-abf8-267f88676072의 최신 공통화·편집 유지·N:N 자동 검수 지시. H:/Spawner Windows PowerShell. 원발언 정확 시각·항목 ID 불명.
+- 이전 동일성 감사 combat-lab-core-parity-audit-20261105-01a1a5fd 후 사용자가 구현을 승인했다. 실전 server/combat.mjs를 공통 엔진으로 사용하고 DNA 능력치 기본값도 실제 ATTRIBUTE_DNA 경로와 공유한다. 실험실은 입력·편성·시드·자동/단계/반복 실험 제어만 맡는다. 별도 판정 스케줄러를 제거한다. 폐기된 실험실 전용 판정 규칙은 공유 엔진의 실제 규칙으로 정렬하고 편집 가능한 수치·편성 기능은 유지한다.
+- 실전 전투·DNA 변경 이력과 실제 진입점을 대조했다. 실험실만의 동시 체력 일괄 갱신·거리 우선 전투 타깃을 실제 엔진 판정으로 교체할 계획이다. 인게임 피해·판정 기본값과 기존 특수효과를 보존한다. 검수는 공유 엔진 직접 대조·N:N 타깃 전환/사망 후 취소/종료와 실제 격리 화면 자동 전투·깜빡임으로 한정한다. 아직 구현·검수 성공 아님.
+- 사전 dirty 파일은 메모리·Design·탄생 미리보기·웰컴/오디오·runtime 등의 병행 작업이다. 이를 보존하고 대상 원문은 작업 임시 폴더에 보관한다. 이 채팅의 origin oojjrs/Spawner Projects0개 결과를 재사용한다. 현재 요청은 커밋·푸시를 포함하지 않는다.
+## unit-page-birth-scene-complete-20261105-01a1a0bf
+
+- 기록 시각: 2026-11-05T21:20:20+09:00. 발화·결정 주체: 사용자(유닛 기획서 탄생의 옛/이상한 연결 수정), Codex 메인(구현·검수). 출처 현재채팅 01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d; 원발언 정확시각·항목 ID 미확인.
+- 완료: 새싹콩·포자버섯·몽돌·샘방울 4종 기본형 탄생을 현재 client/game.js의 drawColony/drawAgentBody와 실제 agentBirthPose/등록 애셋으로 격리 재생하여 다시 캡처했다. 게임 소스/연출이나 새 작화를 수정하지 않았다. 512x512 고정 카메라(zoom112, 둥지 상대 중심2.7/3.0, 출생 목표4/4)로 전체 둥지와 탄생·착지·대기 전환이 들어오도록 구성했고 기존 full4개/64px thumbnail4개를 갱신했다.
+- 연결: client/unit-matrix-data.js에 4종 동일 birthScene 계약을 넣고, 본문과 확대가 이 계약의 동일 native WebP/재생시간/효과음 cue를 사용하도록 client/unit-matrix-preview.js의 탄생 예외를 수정했다. Design.html의 기존 탄생 셀만 timing/audio 및 썸네일 경로를 갱신하여 오래된 썸네일 캐시를 우회한다. birth-scenes.json에 현재 미리보기 메타데이터·설치 시점 원본 해시를 보존하고 기존 design-sync 생성기도 이를 읽도록 맞췄다. body-only 시트 등록은 보존하며 다른 애니 데이터·다른 HTML은 변경하지 않았다. 탄생은 둥지를 포함하는 장면용 카메라이고 다른 동작/필드/전투의 유닛 크기 계약은 그대로다.
+- 실제 검수: file:///H:/Spawner/Design.html#codex-units를 격리 headless Edge1440x1000에서 네 셀 및 확대 실제 클릭으로 검사. 네 확대 모두512x512 로드·native 재생, 3개 시점의 프레임 진행과 반복 확인, JS오류0/자산실패0. 부모가 네 종족 실제 화면과 4x6 장면표를 시각 확인했다. 미디어 주기4750/4020/3520/2690ms(각 실제 탄생3850/3120/2620/1790ms+마지막900ms)는 WebP 실제 delay 합과 모두 일치하며 연결/재생/오디오 metadata도 같음을 확인했다. 실제 음원 청취 검증을 주장하지 않는다.
+- 범위 보존 확인: birthScene 필드를 제외한 unit-matrix-data 전체와 탄생 셀을 제외한 Design.html이 작업 시작 백업과 동일했다. 검수 후 nativeAnimation 플래그 변경은 birth일 때로 좁혀 다른 동작의 기존 분기를 보존했으며 검사한 birth 동작은 동일하다. 검증 산출물은 literal 루트 $Trash/unit-page-birth-20261105/verified.json, verification.json 및 실제 PNG/캡처 recipe에 있다.
+- Git: 이 탄생 후속 변경은 사용자 커밋 요청이 없어 unstaged/uncommitted로 남긴다. 이전 레이아웃·스탯 로컬 커밋354fa1d는 완료이며 새 커밋·푸시·배포 없음. 다른 채팅의 메모리 및 기존/병행 수정은 보존한다.
+## 첫 딱정벌레 침공의 5분 경제 계산·약한 정찰형 제안 · 01a1a0e9 현재 요약
+
+- 기록 ID: first-raid-economy-and-scout-proposal-20261105-01a1a0e9. 기록·실제 확인 시각: 2026-11-05T21:19:41+09:00. 기록자·계산/검토 Codex /root, 비용 포함 계산 및 약화/교체 검토 요청 주체 사용자. 출처 현재채팅01a1a0e9-2e09-7703-a7f5-613c21744e11의 「근데 5분 안에 2레벨 전투 유닛 3기 뽑을 자원은 나와? 둥지 업그레이드랑 일꾼 생산비까지 넣어서 계산해봐. 딱정벌레 개쎈데 고민이네 좀 더 약해야할 것 같은데, 아니면 습격가는 유닛을 바꿔도 좋다」. H:/Spawner Windows/PowerShell. 원발언 정확 시각·항목 ID·딥링크 불명.
+- 판정: 이번 실제 정책·표본에서는 5분 내2레벨전투형3기 준비가 안 됐다. 이를 모든 최적 플레이의 불가능성 증명으로 확대하지 않는다. 첫 침공의 필수 방어 전력을2레벨3기로 삼았던 직전 Codex 제안은 경제 검증 부족으로 재검토한다. 현재 실제 시뮬레이션의 비용·수입을 근거로 더 낮은 초기 방어 예산을 권한다.
+- 비용 정정: 현재 conquest-pacing.mjs의nestCosts는[80,400,2000,null]이며 nestUpgradeCost(1)는 일반80P/몽돌60P이다. 이전에 관측·사용한20P 기준과 이번 초반 commentary의164P/236P/206P 계산은 현재 소스 기준으로 대체한다. 누가 언제 이 파일을 바꿨는지는 조사하지 않았으므로 변경 주체/원인을 추정하지 않는다.
+- 현재 시작 조건: 플레이어 host에는30P 지급, 종족별 시작3~4기는 무료이다(bean/spore4,pebble/spring3). 이 무료 개체를 일꾼 생산비에 다시 넣지 않는다. 추가 DNA일꾼은 채집1+이동1(유효1레벨배치),가격18P=DNA15+탄생3. 전투형은 칼날1+공격강화1+공속강화1+체력4(유효2레벨배치),HP50/공격6/공속0.6/방어0,가격48P=DNA45+탄생3. 종족별 현 DNA 탄생비는 같다.
+
+### 목표 예산(무료 시작 개체 외의 추가 생산)
+
+| 추가 DNA일꾼 | 일꾼 비용 | 둥지1→2 | 전투형3기 | 총지출 | 시작30P 제외 필요수입 |
+| --- | --- | --- | --- | --- | --- |
+| 0기 | 0P | 80P | 144P | 224P | 194P |
+| 2기 | 36P | 80P | 144P | 260P | 230P |
+| 4기 | 72P | 80P | 144P | 296P | 266P |
+
+- 몽돌은 각 행에서20P를 뺀다(4기 확장 시 총276P/필요수입246P). 위 예산은 일반 생산비·둥지 비용이며 추가 장비/재료/사망 보충비는 없다.
+
+### 실제 경제 계산 방법과 결과
+
+- 실제 generateWorld(version39)·createGame·game.command·prepare/tick을 사용했다. 맵seed13/0/413, 각4종족, 300초,0.25초 간격. 플레이어host로30P를 실제 지급하고 시작 무료 개체·이동/채집/납품·출생 대기·인구한도·포인트 저장한도를 유지했다. 매장량은 소모되며 실제 생산/업그레이드 command로 비용을 차감했다. 누적납품을 현재잔고로 착각하지 않도록 모든28경우에 시작30+납품수입-실제지출=마지막잔고를 대조했다.
+- 대표 정책은 무료 시작 일꾼에 추가 DNA일꾼4기를 먼저 늘리고,1→2업그레이드,전투형3기를 순서대로 저축·생산하는 것이다. 모든 경우에4기 확장을 완료했다고 가정하지 않는다. 부족하면 실제로 만들 수 있는 만큼만 생산했다. 초기 적/다른군체/전투 손실은 제외했으므로 외부 위협 때문에 수입이 깎인 결과가 아니다. 병력 생산이 가능한 경우 출생 완료가300초 이전인지도 판정했다.
+- 이 정책12경우 모두 추가 전투형0기, 둥지1레벨이었다. 수입/잔고 범위와 추가 일꾼 실제 수:
+
+| 종족 | 5분 누적납품수입 | 추가 일꾼 실제 생산 | 최종잔고 | 2레벨 전투형 준비 |
+| --- | --- | --- | --- | --- |
+| 새싹콩 | 44~56P | 4~4기 | 2~14P | 0기 |
+| 포자 | 18~32P | 2~3기 | 8~16P | 0기 |
+| 몽돌 | 0~54P | 1~4기 | 5~12P | 0기 |
+| 샘방울 | 22~34P | 2~3기 | 3~16P | 0기 |
+
+- seed13에서는 추가일꾼0/2/4기의 DNA정책과 구형strength일꾼4기 정책도 비교했다(16경우). 추가일꾼을 전혀 만들지 않고 모은 경우 수입은 종족별22/4/0/12P였다. 값싼 구형 일꾼4기(종족별5/3/7/5P)를 쓰는 비교에서는 수입48/53/16/117P였으며, 샘방울만172.25초에2레벨이 됐지만300초 잔고47P로 전투형48P도 출생 완료하지 못했다. 이 구형 정책은 현 DNA 생산비18P를3~7P로 바꿔 쓴 결과가 아니라 별도 비교이다.
+- 한계: 3개 맵·수동생산 정책의 표본으로 최적 설계/최적 생산 순서·모든 종족 전체 분포를 탐색한 것은 아니다. 시작 자원/무료 개체는 현재 구형 스탯이므로 미래 모든 개체를 DNA로 통일한 경제·전투와 같다고 주장하지 않는다. 이번은 새 DNA전투형3기를 별도 생산할 수 있는지의 장부 계산이며, 무료 시작 개체까지 동원한 실제 침공 방어의 패배 판정은 아니다. 수입0인 표본도 있었으므로 초반 자원 접근/일꾼 투자 회수 역시 검토가 남는다.
+
+### 첫 습격 약화·교체 후보(새 Codex 제안, 미확정)
+
+- 정규 가시등 딱정벌레의19종 내 위상·원종/우두머리 관계를 크게 낮추기보다 첫 습격에 별도의 약한 정찰 개체를 쓰고, 정규 개체는2레벨 전투대를 마련할 경제 단계 이후로 미루는 쪽을 추천한다. 이름/외형/종족은 아직 확정하지 않았고 새 자산이나 실제 스폰 코드를 만들지 않았다.2레벨 도달만으로 즉시 정규 습격을 해금하면 남은 군비144P가 없는 문제는 남으므로 경제적 준비를 함께 봐야 한다.
+- 비교 아군은 유효1레벨 칼날1+체력2,HP30/공격2/공속0.5/방어0,총탄생비23P이다. 실제 server/combat.mjs로seed1790~1809의20경우를 같은칸·이탈/증원/외부치유 없음·새29효과 비활성 조건에서 계산했다. 실제 월드 승률 보장은 아니다.
+
+| 첫 습격 후보 | HP/공격/공속/방어 | 방어에 쓴 아군 | 총생산비 | 이번20회 처치시간 | 손실 |
+| --- | --- | --- | --- | --- | --- |
+| 별도 약한 정찰형 | 20/1/0.5/0 | 1레벨형1기 | 23P | 18.3~20.3초 | 0기 |
+| 기존 딱정벌레 대폭 약화형 | 40/2/0.5/8 | 1레벨형2기 | 46P | 20.3~22.3초 | 0기 |
+
+- 두 후보 모두20/20처치했다. 정찰형 안은 업그레이드 없이 시작30P 안에서 방어1기 비용23P를 먼저 확보할 수 있다. 여기에18P 일꾼4기까지 동시에 준비하려면 총95P이므로5분에 모두 보장된다고 말하지 않는다. 초기 경제와 방어의 충돌을 줄이는 안이며, 일꾼 확대·맵 간 수입차 자체를 해결한 결과는 아니다.
+- 현재 상태: 계산·후보 제시만 완료. 첫 습격 교체/약화 중 어느 안을 사용자가 채택한 것은 아니며 서버·Design·NeutralStats의 실제 수치/습격 로직은 변경하지 않았다. 기존29축 초안과 계보 규칙은 유지하며 첫 침공을 고정시키는 결정을 기다려 함께 조정한다. 새 커밋/푸시/배포 없음.
+
+### 재개용 표본 및 출처
+
+```json
+{"seeds":[13,0,413],"targetRows":[{"seed":13,"tribe":"bean","startingPoints":30,"freeFounders":4,"workerCost":18,"armyCost":48,"income":49,"workers":{"count":4,"spent":72},"upgradeSpent":0,"points":7,"nestLevel":1,"readyArmy":0,"requiredIncome":266},{"seed":13,"tribe":"spore","startingPoints":30,"freeFounders":4,"workerCost":18,"armyCost":48,"income":18,"workers":{"count":2,"spent":36},"upgradeSpent":0,"points":12,"nestLevel":1,"readyArmy":0,"requiredIncome":266},{"seed":13,"tribe":"pebble","startingPoints":30,"freeFounders":3,"workerCost":18,"armyCost":48,"income":0,"workers":{"count":1,"spent":18},"upgradeSpent":0,"points":12,"nestLevel":1,"readyArmy":0,"requiredIncome":246},{"seed":13,"tribe":"spring","startingPoints":30,"freeFounders":3,"workerCost":18,"armyCost":48,"income":34,"workers":{"count":3,"spent":54},"upgradeSpent":0,"points":10,"nestLevel":1,"readyArmy":0,"requiredIncome":266},{"seed":0,"tribe":"bean","startingPoints":30,"freeFounders":4,"workerCost":18,"armyCost":48,"income":44,"workers":{"count":4,"spent":72},"upgradeSpent":0,"points":2,"nestLevel":1,"readyArmy":0,"requiredIncome":266},{"seed":0,"tribe":"spore","startingPoints":30,"freeFounders":4,"workerCost":18,"armyCost":48,"income":22,"workers":{"count":2,"spent":36},"upgradeSpent":0,"points":16,"nestLevel":1,"readyArmy":0,"requiredIncome":266},{"seed":0,"tribe":"pebble","startingPoints":30,"freeFounders":3,"workerCost":18,"armyCost":48,"income":54,"workers":{"count":4,"spent":72},"upgradeSpent":0,"points":12,"nestLevel":1,"readyArmy":0,"requiredIncome":246},{"seed":0,"tribe":"spring","startingPoints":30,"freeFounders":3,"workerCost":18,"armyCost":48,"income":22,"workers":{"count":2,"spent":36},"upgradeSpent":0,"points":16,"nestLevel":1,"readyArmy":0,"requiredIncome":266},{"seed":413,"tribe":"bean","startingPoints":30,"freeFounders":4,"workerCost":18,"armyCost":48,"income":56,"workers":{"count":4,"spent":72},"upgradeSpent":0,"points":14,"nestLevel":1,"readyArmy":0,"requiredIncome":266},{"seed":413,"tribe":"spore","startingPoints":30,"freeFounders":4,"workerCost":18,"armyCost":48,"income":32,"workers":{"count":3,"spent":54},"upgradeSpent":0,"points":8,"nestLevel":1,"readyArmy":0,"requiredIncome":266},{"seed":413,"tribe":"pebble","startingPoints":30,"freeFounders":3,"workerCost":18,"armyCost":48,"income":47,"workers":{"count":4,"spent":72},"upgradeSpent":0,"points":5,"nestLevel":1,"readyArmy":0,"requiredIncome":246},{"seed":413,"tribe":"spring","startingPoints":30,"freeFounders":3,"workerCost":18,"armyCost":48,"income":27,"workers":{"count":3,"spent":54},"upgradeSpent":0,"points":3,"nestLevel":1,"readyArmy":0,"requiredIncome":266}],"sourceHashesObservedAfterRuns":{"server/game.mjs":"acb705a927f043ece9a9f606dc2afa87f7ad2668ce3b97e8e148978754714bd1","server/tribe-start.mjs":"61b13cd9d36be83480f30e0b0a1b9abe1759dbfe8b43945e907c533053ed7dcf","server/nests.mjs":"2106c3e334d0f3a3f84c4a77ff6abae9ee4a8de9ac48888859676968e301155f","server/conquest-pacing.mjs":"978caecf60cef2db127896e079276e18a294f418732ee8c135a86941394ba362","server/attributes.mjs":"093d5a42094ba6c7f463ff03ce2f69be99981a82b5a4e6488c4728e89e4c4c3c","server/dna.mjs":"cbbe6aafa3b8d269825d49896f642a8fe444844895f53f95dcbad1a6fea7525e","server/dna-unit.mjs":"a6851f865ccd71afca645518bf021cbeba4fe643c6a37b4e9c4b517017880885","server/resources.mjs":"f63c497d904d46785f4fbdd6e14be8053da5e09ff1e5860f2dd900d94bd75fdd","server/colony-supply.mjs":"f2f4bc1b2adcbe6fb18ec3b7ae8a05d22c3dd800e695455d5dc97ee3058c37ac","server/combat.mjs":"04b9d7bdc5a7aac811c9d9cb820a66b7f9de82a2b6de8fbde6419f340ec30fc0","server/combat-stats.mjs":"29c0c8357125617b30fa10950e69f61136479035817411ac22030ef5089d0d21","server/world.mjs":"766c62c68daeb0f85ec7e02ce2137815ba8a583fcc7d88078a16b548fba90a6f"}}
+```
+- 임시 재현 자료: literal $Trash/first-raid-economy-20261105/economy.mjs,results-13.json,results-0-413.json,combat-options.mjs,combat-options.json,summary.json. snapshot은summary에28경우 전체 장부·분당 경과·생산시각을 보존한다.
+- 기록 보존: 기록 직전 메모리 맨 앞에 병행 작업의 기존 merge marker가 관측됐다. 이번 작업은 그것을 해소하거나 원문을 바꾸지 않고 전체 기존 바이트 앞에 본 기록만 추가한다. 해당 충돌을 해결했다고 주장하지 않는다.
+
+## 승인 전투 V4 5종 실행 적용 확인 완료 · 01a1a5f6 현재 요약
+
+- 기록 ID: combat-vfx-apply-verified-20261105-01a1a5f6. 기록·최종 근거 확인 시각 2026-11-05T21:18:27+09:00. 기록자·직접 검사/화상 검수 Codex /root, 확인 후 적용 결정 주체 사용자. 출처 현재 채팅01a1a5f6-f89a-7de0-9cfd-9addb113f421 및 실제 qa-result.json·actual-stage-v4.png, H:/Spawner Windows/PowerShell. 원발언 정확시각·항목ID 불명.
+- combat-vfx-apply-start의 확인 진행을 실제 결과로 갱신한다. 승인 V4 공통피격·새싹콩/포자버섯/몽돌/샘방울 비행 및 착탄은 기존327c9cc에 이미 적용돼 있었고 현재 파일에도 유지된다. 상세 전투 game.js와 실험실 combat-stage 호출을 직접 확인했다. combat-detail-vfx와 combat-vfx-events 원본을 runtime.js/Combat.html 내 변환 모듈과 정확히 대조한4건이 모두 일치, V4 PNG5개(1776×888)와 local-assets 래퍼의 디코드 바이트도 모두 일치한다. 과거 실패 V1/V2나 미승인 V3Draft를 재설치할 필요가 없다는 판단이다.
+- 실제 검사: 기존 대상6파일46개 검사 통과(exit0). 현재 Combat.html의 실제 bundled stage를 격리 headless Chrome에서 불러와 새싹콩→포자→몽돌→샘방울 각각 비행/착탄 총8장면을 실제 canvas로 렌더했다. 각 비행은 자기 종족0번 셀1회, 각 착탄은 해당 종족 후속 셀1회로 관측했고 pageerror0/HTTP실패0이다. 부모가 actual-stage-v4.png를 직접 열어 유닛·접촉점에 표시된 네 재질 효과를 확인했다. 판정 fixture 시연이며 일반 자동전투 전체·PC/모바일 모든 화면 검수로 확대하지 않는다.
+- 적용 범위: 공통피격 및 종족별 발사체/착탄은 상세 전투·실험실, 월드는 기존1셀 먼지 연출 유지다. 새 방어 회피/패링/블록 비교안은 현지자산 미확인·메모리상 검토 대기라 별도 완료/신규 적용으로 보고하지 않는다. 다른 필요 계열 전체20종이 새 아트로 완성됐다는 뜻은 아니다. 제품 파일 변경은 필요하지 않았고 이번에 제품·공유 번들·타 채팅 변경을 수정하거나 커밋/푸시/배포하지 않았다. 이번 변경은 메모리와 프로젝트 literal달러Trash 아래 검수 도구/근거뿐이다.
+
 ## welcome-appearance-frame-guard-20261105-01a1a12e
 
 - 기록 시각: 2026-11-05T21:18:24+09:00; 주체: Codex 검수 판단; 출처: 현재 웰컴 수정 /root.
 - 35개 실제 렌더 순회와 19종 공격/이동의 네이티브 버퍼 재생을 확인했다. file 전체 게임 로딩과 강제 몽돌 jump/idle 오류에서도 마지막 정상 프레임이 보이고 다음 선택 이후까지 진행했다. 새싹콩 perform은 원래 0ms라 해당 상태에서 정지한다는 QA 조건은 잘못되었으며 저장된 후속 진행 증거로 조건을 바로잡았다.
 - 추가 검수 판단: 외형 renderer가 예외 대신 null을 반환해도 기본 스프라이트로 빠지면 안 된다. 변형 프레임 null을 실패로 처리하고, 등장 준비 때 같은 외형의 정상 대기 프레임을 화면 밖 버퍼에 확보한다. 준비 실패는 등장 전에 같은 선택으로 재시도/건너뛰며, 이미 등장한 유닛은 마지막 정상 외형을 유지한다.
 
+## 승인 전투 V4 효과 적용 상태 확인 착수 · 01a1a5f6 현재 요약
+
+- 기록 ID: combat-vfx-apply-start-20261105-01a1a5f6. 기록·근거 확인 시각 2026-11-05T21:15:25+09:00. 기록자·구현 판단 Codex /root, 확인 후 적용 요청·결정 주체 사용자. 출처 현재 채팅01a1a5f6-f89a-7de0-9cfd-9addb113f421의 최신 요청, H:/Spawner Windows/PowerShell. 원발언 정확시각·항목ID 불명.
+- 현재 도구 근거: 커밋327c9cc의 CombatVfxV4/hit 및 bean/spore/pebble/spring PNG5종과 combat-detail-vfx, 상세 전투 game.js 및 combat-stage, runtime/Combat 번들에 연결이 존재한다. 이전 실패 V1/V2를 재설치하지 않는다. 메모리의 11월5일07:11/07:13 사용자 V4 수용 기록을 확인했고 최신 요청은 확인 후 적용이다. 월드1셀 먼지·상세 화려한 표현이라는 현행 방향을 유지한다.
+- 현지 tools/defense-reaction-review-20261105는 없고 메모리는 새 회피/패링/블록 비교안을 승인 대기·미적용으로 구분한다. 완료된 새 방어 자산이 확인된 것은 아니다. 적용 누락 여부는 실행 번들·정적 이미지 등록·실제 실험실 렌더와 기존 대상 검사로 확인 중이며 아직 결과를 단정하지 않는다. 다른 웰컴/오디오 동시 작업과 공유 Git 상태는 보존하고 제품 수정·커밋·푸시는 아직 실행하지 않았다.
+
+## 런타임 별칭 변환 수정·게시 범위 확정 · 01a1a6c1
+
+- 기록 ID: runtime-import-alias-publish-scope-20261105-01a1a6c1. 기록 시각: 2026-11-05T21:14:44+09:00. 기록·범위분리·검수 Codex /root, 수정·게시 결정 사용자. 출처 현재 채팅 01a1a6c1-ac04-70b2-940b-bdfba26e30ae의 「고쳐」 및 「고쳐서 올릴 만한 건 올려놔」. 원발언 정확 시각·항목 ID 불명. H:/Spawner Windows PowerShell, host local.
+- 원인은 client/build.mjs의 ESM import 별칭 변환 누락이다. 생성기에서 as를 객체 구조 분해의 콜론으로 바꾸고, 실행 번들은 HEAD의 SPRING_BIRTH_ANIMATION as birth 한 곳만 SPRING_BIRTH_ANIMATION: birth로 수정한 후보를 준비했다. 같은 수정이 병행 웰컴 작업본에도 있어 해당 바이트를 재사용했으며 그 외 웰컴 변경·미커밋 기록은 후보에 넣지 않았다.
+- 실제 검수: 분리 후보의 런타임·월드 워커·의사결정 워커 구문과 수정 생성기로 만든 실제 spring-dominant-birth 모듈 묶음 구문을 모두 통과했다. 후보3파일 UTF8NoBom/CRLF 검사 통과. 새 전체 빌드·실행 서버·브라우저는 시작하지 않았다. 기존 로컬 두 커밋(유닛 페이지/둥지 비용)과 이번3경로를 origin/main에 게시하는 범위다. 아직 게시 성공을 선기록하지 않는다.
+- 사용자 지시에 따라 이번 게시 완료 후 결과 메모리를 다시 추가하지 않는다. 이 사전 결정·검수 기록은 수정과 같은 커밋에 포함한다. 병행 미완료 작업은 원래 상태로 보존한다.
+
+## 전투 실험실과 인게임 핵심 로직 차이 확인 · 01a1a5fd 현재 요약
+
+- 기록 ID: combat-lab-core-parity-audit-20261105-01a1a5fd. 기록 시각: 2026-11-05T21:14:37+09:00. 기록자·코드 대조 Codex /root, 동일성 질문·범위 지정 사용자. 출처 현재채팅 01a1a5fd-bf0b-70a3-abf8-267f88676072의 「테스트를 위한 에디트 기능 제외하고 핵심 로직」 비교 요청. H:/Spawner Windows/PowerShell. 원 발언 정확시각·항목 ID 불명.
+- 확인 사실: 현재 client/combat-lab.js:2/173은 client/combat-simulation.mjs의 createSimulationTrial을 사용한다. 실제 게임 server/game.mjs:28은 server/combat.mjs의 createCombat을 사용한다. client/combat-lab.mjs의 예전 createCombatTrial은 실제 엔진을 호출하지만 현재 실험실 화면의 실행 경로가 아니다. 관측 HEAD는 c34abe6이며 이번 대조는 현재 작업 파일 기준이다.
+- 공유 범위는 server/dna-actions.mjs의 공격 모드/사거리, 투사체 이동시간·유효성, 아군 치유 분배와 공통 VFX 기록 일부다. 전투 판정 엔진 전체를 공유하는 상태가 아니다.
+- 핵심 차이: 실험실 derive/evaluate는 자체 로그·포화 곡선, armorCap 기반 방어 점감 및 evasion*(1-accuracy) 회피를 쓴다. 실전 combat-stats/combat의 실제 프로필·피해 100/(100+armor), DNA 피해감소와 max(0,evasion-accuracy) 회피 등과 다르다. 실험실은 같은 시점 outcomes를 모아 체력을 일괄 갱신하지만 실전은 시각/사건 종류/ID 순서로 개별 판정한다. 실험실 새 타깃은 거리/ID 우선, 실전은 현재 목표 유지 뒤 군사 우선 조건/참전 순서/ID로 고른다. 실전의 출혈·광역·피해반사·전투 후 재생·퇴각/도주를 실험실 핵심 모델이 동일하게 재현하지 않는다.
+- 판단: 편집 UI만 다른 동일 엔진이라고 답할 수 없다. 실험실 승률·피해·사망 순서 통과를 인게임 동일 결과 검증으로 취급하면 안 된다. 인게임 검증용으로 동일성을 보장하려면 편집 입력/실험 제어와 분리해 실제 createCombat·프로필·DNA 판정 경로를 재사용하는 구조가 필요하다는 Codex 판단이며, 이번 질문 자체는 구현·커밋 승인이 아니다.
+- 이번 범위는 관련 소스/기존 메모리의 읽기 전용 대조와 본 메모리 예외 기록이다. 브라우저·서버·빌드·테스트·제품 수정·Git 완료 작업을 실행하지 않았다.
+## unit-page-birth-scene-fix-20261105-01a1a0bf
+
+- 기록 시각: 2026-11-05T21:12:05+09:00. 기록·구현 판단 Codex 메인, 문제 제기·수정 범위 사용자. 출처 현재채팅 01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, 원발언 정확시각·항목 ID 미확인.
+- 확인 사실: 탄생 칸만 공통 lightbox 연결 갱신에서 제외되어 몽돌·샘방울 본문은 현재 body-only 시트인데 확대는 옛 Planning 캡처를 사용한다. 포자 본문은 body-only인데 확대는 fullscene 원본이다. 새싹콩의 기존 캡처는 둥지와 유닛 크기가 화면에 맞지 않는다.
+- 구현 판단: body-only 시트로 확대 링크만 교체하면 실제 둥지·이동·회전·착지 씬이 누락된다. 새 그림/애니 작화 없이 현재 게임 렌더러의 실제 네 종족 기본형 탄생을 고정된 카메라로 재캡처하고, 동일 장면을 표와 확대에 연결한다. 기존 문구·유닛 크기 계약·게임 연출을 바꾸지 않는다. 현재 제품/메모리 병행 변경은 보존하며 현 요청은 커밋·푸시 미포함.
 ## welcome-runtime-dependency-20261105-01a1a12e
 
 - 기록 시각: 2026-11-05T21:09:37+09:00; 주체: Codex 구현 판단; 출처: 현재 웰컴 수정 /root.
@@ -803,28 +784,6 @@
 - 오디오 판단: 실제 MovementAudio/CombatAudio 호출 수명을 동작 전환 사이에 유지하고, 각 유닛의 SFX 디코드·채널 등록을 준비 완료 조건에 포함한다. 공유 점프 착지 이벤트와 새싹콩 동작 수학은 인게임/웰컴이 같은 함수를 사용한다. 오디오 준비는 독립 워커 audio_readiness_fix가 맡고 메인은 상태·렌더 통합과 검수를 맡는다.
 - 보호 상태: 다른 작업이 현재 Git rebase 중이며 CodexWorkMemory.md와 client/runtime.js에 충돌 마커가 있다. 해당 Git 작업과 충돌 해결은 건드리지 않는다. 원본 백업은 $Trash/welcome-ingame-consistency-20261105/original. runtime은 필요한 모듈 블록만 동기화하고 기존/동시 변경을 보존한다.
 - 검증 예정: 기존 대상 테스트, 실제 격리 브라우저에서 35개 외형 상태/네이티브 음원 재생 및 몽돌 변형 입퇴장·실패 복구. 아직 제품 수정·검증 결과 없음. 현재 요청은 커밋·푸시 미포함.
-
-## 웰컴 SFX 전수 소스 조사·다리 몽돌 강등 경로 확인 · 01a1a12e 현재 요약
-
-- 기록 ID: welcome-sfx-census-complete-20261105-01a1a12e. 기록 시각·마지막 소스 확인: 2026-11-05T20:50:52+09:00. 기록자·전수 소스/파일 대조 Codex /root, 실제 인게임 함수/SFX 사용 여부 조사 및 다리 몽돌 입장 후 기본형 퇴장 관측 주체 사용자. 출처 thread01a1a12e-3f3f-72c1-95e2-0b5b349b5ffb,H:/Spawner Windows/PowerShell. 사용자 원발언 정확 시각·항목 ID 불명. HEAD cfbb669, 조사 관련 제품 파일 dirty없음 확인. 앞선 start 기록의 조사 대기를 이 확인 범위에서 완료로 갱신한다.
-- 범위·전수 결과: 웰컴은 4종족×4외형16+중립19=35후보. MovementAudio 정의22종(기본3+중립19)과 콩 footstep/landing, 공격 unit-attack 공통1+중립19전용을 포함해 실제 Audio.sources 전체75개를 읽었다. 75/75 원본·래퍼·로컬 매니페스트 존재, base64 래퍼 바이트와 원본75/75 동일. 중립19종 모두 이동/비행·공격 매핑 보유, 모든 공격 cue가 각 실제clip 안(235~546ms/905~1570ms,벌레440/1280). runtime의 welcome-presentation/unit-animation/image-geometry/unit-sprite-registration 본문은 현재 source와 일치했다. 실제 브라우저 재생·청음·서버/테스트/빌드는 실행하지 않은 정적 조사다.
-- 전 중립 확인 목록: 꽃꼬리새/이슬토끼/흙두더지/보따리달팽이/솜양/굴림도토리/흙멧돼지/방울두꺼비/넝쿨거북/그늘족제비/올가미덩굴/갈퀴부엉이/봄지기/등불지기/오래된 등짐/걸어가는 산/흰발/가시등 우두머리/가시등벌레. 모두 MovementV1 또는 봄지기 MovementV2 wing과 각 CreatureAttackV2 또는 beetle-attack이 있다. 파일이 없어서 생기는 공통 누락은 발견하지 못했다.
-- 확정 코드 경로1(공격): header.advance exit→perform에서 resetPresentationAudio(header298)가 CombatAudio playback.time/events를 비운다. 같은 tick 새 중립 agent에 attack를 넣고 update(175)를 호출한다. CombatAudio.collect99는 initial이면 cue시각 전에도 이벤트 stamp를 기록하면서 소리는 내지 않고, 나중에는 같은stamp로 다시 재생하지 않는다. 웰컴의 중립19종 공격 연출 모두가 이 누락 경로 대상이다. 인게임은 전투/이동 이벤트 update를 공유하지만 updateAudio가 매 행동 전환마다 playback을 reset하지 않아 동일 호출 순서가 아니다. 공유 함수가 있다는 사실만으로 같은 동작을 보장하지 않는다.
-- 확정 코드 경로2(기본 종족 행동): 콩 perform0→idle/rest, 나머지3종×4외형은 jump다(header288/344). 기본 종족에는 header.travelMotion이 attack 상태를 넣지 않는다(header259는 중립 한정). 따라서 기본 종족 공격음 공통unit-attack이 있어도 이 화면에서는 공격 자체를 하지 않으며, jump는 moveDuration0/modeidle로 전달돼 Movement/CombatAudio에 jump·landing 이벤트가 연결되지 않는다. spring-landing/footstep 자산도 선언·레벨/제한 정의 외 실제 해당 호출을 찾지 못했다.
-- 확정 준비 계약·조건부 누락: Audio148에서 첫7개 welcome/UI buffer만 준비해도 prepared=true/available=true다. 나머지68개는 Assets.ready 뒤 Promise.all decode 전체가 끝난 후 채널에 추가한다(152~155). 그 전에 생긴 중립 이동/공격 cue는 start218의 해당source 채널 없음→null로 조용히 빠지며 이벤트생성기는이미소비한다. header.prepareChoice는그림만기다리고개별SFX준비를기다리지않는다. 실제 느린로딩에서 발생했는지는이번에 재현하지 않았다. header172는 중심x가0..width일때만agent를오디오에전달하고 MovementAudio가최초cue/120ms이전cue를뒤늦게재생하지않으므로 첫걸음·날개구간누락조건이있다. audio.start의동일clip간격/동시수/8채널 제한도 공유해 적용된다. 낮은 갈퀴부엉이 gain0.06·흙두더지0.068은 수치로 확인했지만 청감상 무음 원인으로 확정하지 않는다.
-- 추가 사용자 제보·외형 상태: 사용자가 다리 몽돌은 들어올 때 추가다리로 빠르게 걷는데 나갈 때 기본형이라고 관측했다. 현재 drawWelcomeChoice(presentation87~97)는 속성 외형 그리기 예외 시 variant0으로 재시도한다. header331은 결과를 choice.variant에 영구 대입하므로 점프/idle 등 한 동작 합성 실패 뒤 그 회차의 퇴장도 기본형/기본 이동속도가 된다. 이는 관측을 만들 수 있는 명확한 코드 경로다. 실제 첫 exception/단계는 console·재현으로 확인하지 못했으므로 특정 throw 원인으로 단정하지 않는다. spore/pebble/spring rig의 idle/walk/jump 트랙·프레임·durations 수가 일치하고 비어 있지 않음을 확인해 단순 동작 자료 부재로 결론내리지 않았다.
-- 후속 수정 판단: 회차 선택 외형은 유지하고 실패한 동작만 같은 외형 idle/walk 등으로 대체할 필요가 있다. 공격은 플레이백 bootstrap과 공격 시작을 분리하고 초기 stamp 소모를 고쳐야 하며, 개별 SFX 준비완료를 재생 계약에 반영해야 한다. 이는 조사 결과·후속안이고 이번에 구현·제작·커밋/푸시/배포하지 않았다. 제품 변경 없음, 이 메모리 관련 섹션만 추가하고 기존/동시 기록 바이트를 guard로 보존했다. 범위 밖 원래 안테나 몽돌 exception/OOM까지 해결했다고 주장하지 않는다.
-## 웰컴 유닛 애니·SFX 전수 조사 착수 · 01a1a12e 현재 요약
-
-- 기록 ID: welcome-sfx-census-start-20261105-01a1a12e. 기록 시각: 2026-11-05T20:40:52+09:00. 기록자·읽기 조사 Codex /root, 웰컴이 실제 인게임 함수로 SFX를 호출하는지 전수 조사 요구 주체 사용자. 출처 thread01a1a12e-3f3f-72c1-95e2-0b5b349b5ffb,H:/Spawner Windows/PowerShell. 정확 원발언 시각·항목 ID 불명. 현재 HEAD cfbb669, 시작 때 후보 제품 파일 변경 없음/메모리만 기존 dirty.
-- 범위: 현재 등장 가능한 4종족 외형과 중립 전부에 대해 이동·비행/착지·공격 및 실제 연출 행동, SFX 파일·로컬래퍼·로더, 공유 함수/수신 상태·타이밍·재생 게이트를 소스로 대조한다. UI/게임/오디오 제품 코드를 수정하거나 서버/브라우저/테스트·빌드를 실행하지 않는다. 일반 파일 존재·정적 데이터 조회만 수행하고 이 메모리 예외로 결과를 보존한다. 이번 요청은 Git/푸시/배포나 SFX 제작 승인이 아니다.
-- 초기 관측: 공유 MovementAudio.update·CombatAudio.update와 Audio.playWelcome 호출은 실제로 연결돼 있다. 다만 header exit→perform에서 resetPresentationAudio가 두 playback을 초기화하고, CombatAudio.collect는 initial이면 future cue라도 stamp를 바로 기록한다. 이 조합으로 공격 cue가 누락될 가능성이 커서 종별 행동/분기를 확인한다. 파일 부재와 이벤트 누락·낮은 gain은 구분하며 실제 청음/재현 결과로 과장하지 않는다. 과거 안테나 몽돌 정지는 cloud 후속의 예외 복구 코드가 현재 존재함을 확인했고, 그 이전 미해결 기록만으로 현재 재현됐다고 하지 않는다.
-## 런타임 별칭 변환 수정·게시 범위 확정 · 01a1a6c1
-
-- 기록 ID: runtime-import-alias-publish-scope-20261105-01a1a6c1. 기록 시각: 2026-11-05T21:14:44+09:00. 기록·범위분리·검수 Codex /root, 수정·게시 결정 사용자. 출처 현재 채팅 01a1a6c1-ac04-70b2-940b-bdfba26e30ae의 「고쳐」 및 「고쳐서 올릴 만한 건 올려놔」. 원발언 정확 시각·항목 ID 불명. H:/Spawner Windows PowerShell, host local.
-- 원인은 client/build.mjs의 ESM import 별칭 변환 누락이다. 생성기에서 as를 객체 구조 분해의 콜론으로 바꾸고, 실행 번들은 HEAD의 SPRING_BIRTH_ANIMATION as birth 한 곳만 SPRING_BIRTH_ANIMATION: birth로 수정한 후보를 준비했다. 같은 수정이 병행 웰컴 작업본에도 있어 해당 바이트를 재사용했으며 그 외 웰컴 변경·미커밋 기록은 후보에 넣지 않았다.
-- 실제 검수: 분리 후보의 런타임·월드 워커·의사결정 워커 구문과 수정 생성기로 만든 실제 spring-dominant-birth 모듈 묶음 구문을 모두 통과했다. 후보3파일 UTF8NoBom/CRLF 검사 통과. 새 전체 빌드·실행 서버·브라우저는 시작하지 않았다. 기존 로컬 두 커밋(유닛 페이지/둥지 비용)과 이번3경로를 origin/main에 게시하는 범위다. 아직 게시 성공을 선기록하지 않는다.
-- 사용자 지시에 따라 이번 게시 완료 후 결과 메모리를 다시 추가하지 않는다. 이 사전 결정·검수 기록은 수정과 같은 커밋에 포함한다. 병행 미완료 작업은 원래 상태로 보존한다.
 
 ## 2026-11-05 승인 작업 main 게시 준비
 
@@ -988,13 +947,154 @@
 - bean01 기존 기본 공격 기반 자체 좌표 전사 대표 시안 제작. 웅크림·잎·발은 재현되나 측면/감은 눈 원화 정보가 없어 기존 기본공격 품질 미달, 사용자에게 비교 영상을 보여주었고 제품 적용하지 않았다. 이미지 생성 차단 상태이며 차단 후 유사 생성물은 저장소 밖에 격리, 사용·공유·커밋 금지. 상세 시안 tools/bean-combat-motion-20261105/source-deformation-transfer/.
 - bean 00–1e 31조합의 attack/block/parry 전신 rigid 시안 93개를 tools/bean-combat-motion-20261105/에 만들었으나 시각 검토상 공격감이 부족해 완성으로 취급하지 않는다. 대표 조합의 동작을 개선 중이며 미승인·게임 미연결이다.
 - DNA 최신 논의: 1레벨 구조 및 기관 1회는 미확정. 운반·채집속도·이속은 서로 다른 병목에 작용하며 근접/원거리 강화 해금 등급은 현재 다르다. 제품 수치나 형태는 변경하지 않았다.
+## 둥지 성장 비용 게임 반영·로컬 커밋 완료 · 01a1a129 현재 요약
+
+- 기록 ID: nest-cost-rebalance-local-commit-complete-20261105-01a1a129. 기록·실제 최종확인 시각: 2026-11-05T20:59:31+09:00. 기록자·구현/범위분리/Git실행/검수 Codex /root, 메모리 정리·로컬 커밋 승인 및 게임 적용 질문 사용자. 출처 현재채팅01a1a129-d9d6-79c3-830d-58009e34c915와 실제 commit-result.json, H:/Spawner Windows/PowerShell. 원발언 정확 시각·항목 ID 불명.
+- 실제 완료: 9ccfc53cb25dec3d44eb66b69aa7a8eba51e3da2「둥지 성장 비용 변경」, parent354fa1d3f4435dccf0de4dd4eff56d4b4ba6b07e, tree01b985ff80dc5846afa47a6d1bad7de4b6ef3836이다. 후보 준비 당시 병행 완료된 유닛 표 커밋354fa1d를 기준으로 보존했으며 freeze의 커밋 전 상태를 실제 완료로 갱신한다.
+- 정확5경로는 server/conquest-pacing.mjs, client/runtime.js, server/nest-upgrade.test.mjs, server/tribe-start.test.mjs, CodexWorkMemory.md다. 관련 메모리4개 절을 같은 커밋에 포함했고 다른 채팅/Design/UI 미커밋 내용은 제외했다. 공통80/400/2000P·몽돌60/300/1500P가 로컬 서버 및 실제 게임 실행 번들의3개 설정에 적용됐으며 시작금30P는 유지된다. 공개 서비스 배포 완료라는 뜻은 아니다.
+- 실제 검수: 기존 관련7개 성공·네 제품 파일 형식OK를 동일 바이트 guard로 재사용하고 새 후보 메모리 UTF8NoBom/CRLF OK를 확인했다. staged 정확5경로/공백 검사와 runtime의 비용3개 정의 외 바이트 불변을 확인했다. 별도 index/HEAD CAS/binary index 잠금으로 커밋 후 parent/tree/한국어제목/정확경로/현재HEAD를 재조회했고 대상 index 새HEAD 일치·비대상 index 보존·네 작업 제품파일SHA 불변을 확인했다.
+- 근거는 H:/Spawner/$Trash/nest-cost-rebalance-commit-20261105의 manifest.json, candidate-memory-format.json, staged-manifest.json, staged.diff, staged-check.txt, commit-result.json이다. 검사·브라우저·전체 build를 반복하지 않았고 푸시/배포는 실행하지 않았다. 이번 요청의 메모리 정리·로컬 커밋은 완료했다.
+- 이 hash와 성공·보존 결과는 커밋 후에만 알 수 있어 로컬 후속 기록으로 남긴다. 이를 위해 자동 amend나 메모리만의 추가 커밋을 만들지 않고 다음 승인된 관련 커밋에 이어 포함한다. 원기록·모든 동시 기록을 보존하고 본 메모리 형식만 마감한다.
+## 나머지 29스탯 수치 초안·첫 딱정벌레 침공 기준 검토 · 01a1a0e9 현재 요약
+
+- 기록 ID: neutral-all-stat-draft-and-first-raid-20261105-01a1a0e9. 기록·실제 확인 시각: 2026-11-05T20:59:27+09:00. 기록자·수치 제안/계산 Codex /root, 나머지 스탯 수치 초안 요청 및 침공 필요 전력 질문 주체 사용자. 출처 현재 채팅01a1a0e9-2e09-7703-a7f5-613c21744e11의 「그럼 나머지 스탯까지 니가 수치 초안 잡아봐.」 및 진행 중 「근데 중요한 게 있다. 가시등 딱정벌레가 쳐들어오면, 이거 잡을 때, 얼마나 필요하지?」. H:/Spawner Windows/PowerShell. 원발언 정확 시각·항목 ID·딥링크 불명.
+- 현재 산출물: 기존5축을 유지한 나머지29축의 수치 곡선 및 중립19종 전체34스탯 배정 초안을 아래에 보존한다. 전부 Codex 제안이며 사용자 확정·게임 반영이 아니다. 기존 HP1200 초안과 클라우드 HP500 기준 제안은 별개로 보존한다. 후자를 사용자가 최종 채택한 것으로 처리하지 않는다. 기존 NeutralStats의5축 편집기·Design 티어·서버 실제 수치는 변경하지 않았다.
+- 실제 계산 근거: 기존 Design의34축 티어 입력(audit.json의design.tiers)과6계보를 재사용해19종 배정. 34축×15쌍=510쌍의 원종/유니크 상대 서열 역전0. 나머지29축의 최고 효율은 각각 현재 level4/native shape의 유효 DNA 배치가 더 강함을 직접 확인했다. 이는 실제 도달 가능한 하한 증거이며 최대 배치의 최적해를 구했다는 뜻이 아니다. 기존HP1200안의 기본5축 DNA 상한 문제를 이29축 검사가 해결한 것은 아니다.
+- 의미 주의: 높은 티어일수록 추가타 간격·공격 준비 시간은 짧고 나머지는 큰 값이 유리하다. 회복력은 받는 회복 증가이며 주는 치유 출력이 아니다. 확률·효율과 기능 개방을 구분한다. 29값을 배정했다는 이유만으로 모든 종에게 기절·흡혈·광역 등의 행동을 자동 부여하지 않는다. 종별 효과 활성 여부는 후속 검토 사항이다.
+- 연격·확산 초안 해석: 각각 평균 추가타/평균 추가 대상(0~1.8)이다. 정수 부분은 보장하고 소수 부분은 추가1회/대상의 확률로 쓰는 방식은 Codex의 새 제안이며 미확정이다. 현 엔진의 정수 hits/area에 그대로 대입하면 다른 동작이 되므로 직접 적용하지 않는다. 이 두 축은19단계 효율을 유지하면서 최고 중립 효과를 DNA보다 낮추기 위한 후보이고, 구현 전 규칙 검토가 필요하다.
+- 첫 침공을 우선 밸런스 기준으로 검토한다. 기존 제안표의 딱정벌레2기는 각4레벨HP500/공격6/공속0.5 기준이므로 초반 방어 권장 인원으로 사용할 수 없다. 지금 확인한 첫 출정은>=300초, 한 번에1마리, 초기 출정 간격120~150초·동시 출정 상한2마리다(raids.mjs/conquest-pacing.mjs/raid-pressure.mjs). 실제 도착 시각은 경로·압력·지연에 따라 다르다. 초반에 만들 수 있는 DNA 설계와 생산비로 먼저 방어 난이도를 맞추는 것이 Codex 제안이다.
+
+### 첫 침공 전력의 이번 실제 비교
+
+- 비교한 제안 딱정벌레: HP120·공격8·공속0.72·방어28. 현재 게임의 실제 딱정벌레는 HP100·공격23.2·공속0.8·방어20.8로 별개다. 새29효과는 아직 넣지 않았다.
+- 실제 server/combat.mjs를 사용한 계산 실험: 같은칸·전원 같은편·이탈 가능한 지형 없음·외부 치유/증원/둥지피해 없음, 난수seed1790~1809의20개 경우. 실제 월드 전체 방어 성공률이 아니다. 유효 실제 DNA 배치를 level/shape/price로 검증한 뒤 전투 시 사망에 따른 딜 감소까지 포함했다. 각20회 성공도 임의 상황의 무손실/100% 보장이 아니다.
+- 가격 구분: ATTRIBUTE_DNA.price는 설계 가격, 실제 birthCost는3+DNA가격이다. 아래 총생산비에는 이 기본3P를 포함하고 둥지 업그레이드·기존 일꾼·기회비용은 포함하지 않는다.
+
+| 유닛 배치 | 1기 스탯 | 1기 생산비 | 제안 딱정벌레1마리 비교 | 총생산비 | 이번20회 결과 |
+| --- | --- | --- | --- | --- | --- |
+| 1레벨 칼날1+체력4 | HP50/공격2/공속0.5/방어0 | 33P | 6기 | 198P | 20/20처치,30.3~34.3초,3기생존 |
+| 2레벨 칼날1+공격강화1+공속강화1+체력4 | HP50/공격6/공속0.6/방어0 | 48P | 3기 | 144P | 20/20처치,15.3~16.97초,2기생존 |
+| 같은2레벨 공격 구성+체력8 | HP90/공격6/공속0.6/방어0 | 68P | 2기 | 136P | 20/20처치,23.63~26.97초,1기생존 |
+| 같은2레벨 공격 구성+체력8 | HP90/공격6/공속0.6/방어0 | 68P | 3기 | 204P | 20/20처치,13.63초,3기생존 |
+
+- 현재 게임값을 그대로 상대하면 HP50/공격6형4기는14/20만 처치했고5기는20/20처치(6.97~8.63초,2~3기생존)였다. HP90/공격6형3기는5/20처치,4기는20/20처치(8.63초,3기생존)였다. 첫 침공의 현 게임값·새 제안값·상급 기준표의2기를 섞지 않는다.
+- Codex 추천 출발점: 제안 딱정벌레 한마리에 저비용2레벨 전투형3기 정도를 기본 방어 규모로 놓고, 준비가 부족한1레벨은6기 정도/손실 위험으로 구분한다. 새29스탯의 반사·방어·추가타 등을 실제로 활성화하면 필요 인원/손실/시간이 바뀌므로 위 결과를 그대로 최종 사냥 권장으로 확정하지 않는다. 초반 경제가 그 생산비를 감당하는지는 별도 검토가 남았다.
+
+### 나머지29축 수치 곡선 초안
+
+- 티어t=1..19에서 x=(t-1)/18, 값=시작+(끝-시작)*x^p, 소수3자리로 반올림한다. 운반량만 정수. 각 축에 서로 다른 매개변수를 사용한다. 1→19는 티어이며 시간2축은 감소한다.
+
+| 스탯 키 | 이름 | 단위 | 1티어 | 19티어 | p |
+| --- | --- | --- | --- | --- | --- |
+| movement | 이동 | 칸/초 | 0.3 | 1.1 | 0.65 |
+| vision | 시야 | 칸 | 2 | 8 | 0.7 |
+| combo | 연격 | 평균 추가타 | 0 | 1.8 | 1.6 |
+| comboPower | 연격 위력 | 기본타 % | 30 | 75 | 0.8 |
+| critical | 치명 확률 | % | 1 | 20 | 1.45 |
+| criticalPower | 치명 위력 | 기본타 % | 135 | 210 | 1.3 |
+| accuracy | 명중 보정 | %p | 0 | 18 | 1 |
+| penetration | 방어 관통 | 방어 수치 | 0 | 18 | 1.8 |
+| comboSpeed | 추가타 간격 | 초 | 0.24 | 0.09 | 0.9 |
+| focus | 공격 준비 | 초 | 0.42 | 0.12 | 0.85 |
+| evasion | 회피 | % | 0 | 18 | 1.25 |
+| parry | 받아넘기기 | % | 0 | 12 | 1.7 |
+| block | 방어 발동 | % | 0 | 24 | 1.4 |
+| blockPower | 방어 위력 | 차단 % | 25 | 65 | 1.1 |
+| counter | 반격 | 방어 성공 시 % | 0 | 18 | 1.9 |
+| counterPower | 반격 위력 | 기본타 % | 80 | 155 | 1.2 |
+| tenacity | 강인함 | 제어시간 감소 % | 0 | 36 | 0.95 |
+| reduction | 피해 감소 | % | 0 | 9 | 2 |
+| stun | 기절 확률 | % | 0 | 9 | 1.85 |
+| stunTime | 기절 시간 | 초 | 0.2 | 0.65 | 0.75 |
+| bleed | 출혈 확률 | % | 0 | 24 | 1.65 |
+| bleedPower | 출혈 위력 | HP/초 | 1 | 6 | 1.05 |
+| area | 확산 | 평균 추가 대상 | 0 | 1.8 | 2.1 |
+| areaPower | 확산 위력 | 원 타격 % | 15 | 45 | 1.15 |
+| lifesteal | 흡혈 | 실제 피해 % | 0 | 6 | 2.05 |
+| reflection | 반사 | 받은 피해 % | 0 | 12 | 1.95 |
+| capacity | 운반량 | 개 | 1 | 19 | 1 |
+| harvestSpeed | 채집 속도 | 기본 대비 배율 | 1 | 1.9 | 0.6 |
+| healing | 회복력 | 받는 회복 증가 % | 0 | 36 | 1.55 |
+
+### 19종 전체34스탯 초안(기존 HP1200 기준5축 유지)
+
+- 각 행의 stats는 Design의34축 키를 사용한다. 비교 인원party는 과거 비교값 보존이며 추가29효과 적용 후 검증 완료된 권장 인원이 아니다.
+
+```json
+{"key":"flower-tail-bird","name":"꽃꼬리새","tier":1,"party":1,"stats":{"health":650,"power":16,"armor":10,"speed":1.825,"movement":0.947,"vision":7.525,"combo":1.069,"comboPower":51.138,"critical":5.831,"criticalPower":139.311,"accuracy":13,"penetration":1.201,"comboSpeed":0.113,"focus":0.223,"evasion":13.147,"parry":5.195,"block":0,"blockPower":25,"counter":2.232,"counterPower":85.37,"tenacity":0,"reduction":0,"stun":0,"stunTime":0.2,"bleed":2.006,"bleedPower":2.303,"area":0.004,"areaPower":16.08,"lifesteal":0.152,"reflection":0.365,"regeneration":9,"capacity":1,"harvestSpeed":1.9,"healing":12.294}}
+{"key":"dew-rabbit","name":"이슬토끼","tier":2,"party":1,"stats":{"health":1487,"power":14,"armor":11,"speed":1.54,"movement":1.011,"vision":6.517,"combo":0.941,"comboPower":48.686,"critical":4.863,"criticalPower":136.751,"accuracy":9,"penetration":0.099,"comboSpeed":0.136,"focus":0.238,"evasion":11.984,"parry":4.418,"block":0.42,"blockPower":26.664,"counter":0.074,"counterPower":82.337,"tenacity":2.311,"reduction":0.028,"stun":0.043,"stunTime":0.251,"bleed":0.204,"bleedPower":1.24,"area":0,"areaPower":15,"lifesteal":0.066,"reflection":0,"regeneration":10,"capacity":2,"harvestSpeed":1.839,"healing":14.475}}
+{"key":"rolling-acorn","name":"굴림도토리","tier":3,"party":1,"stats":{"health":1833,"power":19,"armor":71,"speed":1.255,"movement":0.81,"vision":2.793,"combo":0.594,"comboPower":46.15,"critical":3.966,"criticalPower":152.981,"accuracy":0,"penetration":2.491,"comboSpeed":0.16,"focus":0.42,"evasion":8.633,"parry":2.409,"block":13.605,"blockPower":48.27,"counter":1.579,"counterPower":96.125,"tenacity":6.562,"reduction":0.25,"stun":2.497,"stunTime":0.346,"bleed":2.899,"bleedPower":2.578,"area":0.179,"areaPower":23.481,"lifesteal":0,"reflection":3.814,"regeneration":1,"capacity":6,"harvestSpeed":1.67,"healing":0}}
+{"key":"cotton-sheep","name":"솜양","tier":4,"party":1,"stats":{"health":2700,"power":12,"armor":18,"speed":0.875,"movement":0.692,"vision":5.693,"combo":0.232,"comboPower":43.51,"critical":1,"criticalPower":135,"accuracy":2,"penetration":0,"comboSpeed":0.201,"focus":0.319,"evasion":5.528,"parry":0.571,"block":5.155,"blockPower":36.946,"counter":0,"counterPower":80,"tenacity":16.662,"reduction":4.694,"stun":0.557,"stunTime":0.287,"bleed":0,"bleedPower":1,"area":0.64,"areaPower":20.32,"lifesteal":0.016,"reflection":4.593,"regeneration":12,"capacity":12,"harvestSpeed":1.74,"healing":19.203}}
+{"key":"bundle-snail","name":"보따리달팽이","tier":5,"party":2,"stats":{"health":3160,"power":21,"armor":108,"speed":0.685,"movement":0.55,"vision":3.289,"combo":0.102,"comboPower":40.732,"critical":1.287,"criticalPower":149.186,"accuracy":1,"penetration":0.345,"comboSpeed":0.21,"focus":0.394,"evasion":1.155,"parry":0.088,"block":16.881,"blockPower":57.731,"counter":0.277,"counterPower":100.069,"tenacity":22.548,"reduction":5.444,"stun":0.842,"stunTime":0.317,"bleed":0.639,"bleedPower":1.498,"area":0.328,"areaPower":21.877,"lifesteal":0.631,"reflection":5.443,"regeneration":14,"capacity":17,"harvestSpeed":1.307,"healing":27.138}}
+{"key":"soil-mole","name":"흙두더지","tier":6,"party":1,"stats":{"health":2521,"power":23,"armor":28,"speed":1.065,"movement":0.648,"vision":2,"combo":0.397,"comboPower":55.846,"critical":9.102,"criticalPower":156.97,"accuracy":11,"penetration":6.249,"comboSpeed":0.176,"focus":0.254,"evasion":4.559,"parry":3.693,"block":10.54,"blockPower":45.954,"counter":2.992,"counterPower":104.146,"tenacity":18.635,"reduction":2.25,"stun":3.619,"stunTime":0.445,"bleed":10.649,"bleedPower":3.697,"area":0.248,"areaPower":25.126,"lifesteal":2.186,"reflection":1.409,"regeneration":8,"capacity":9,"harvestSpeed":1.807,"healing":8.328}}
+{"key":"bubble-toad","name":"방울두꺼비","tier":7,"party":2,"stats":{"health":2864,"power":26,"armor":23,"speed":1.35,"movement":0.772,"vision":5.098,"combo":0.703,"comboPower":53.522,"critical":7.954,"criticalPower":161.135,"accuracy":6,"penetration":3.288,"comboSpeed":0.152,"focus":0.302,"evasion":9.726,"parry":1.854,"block":6.397,"blockPower":39.154,"counter":5.892,"counterPower":108.343,"tenacity":14.677,"reduction":1.361,"stun":7.238,"stunTime":0.65,"bleed":3.917,"bleedPower":2.855,"area":1.596,"areaPower":39.326,"lifesteal":3.584,"reflection":1.903,"regeneration":11,"capacity":8,"harvestSpeed":1.553,"healing":21.739}}
+{"key":"spiny-back-beetle","name":"가시등 딱정벌레","tier":8,"party":2,"stats":{"health":3017,"power":29,"armor":95,"speed":1.16,"movement":0.733,"vision":3.712,"combo":0.492,"comboPower":60.347,"critical":10.303,"criticalPower":174.538,"accuracy":8,"penetration":11.45,"comboSpeed":0.168,"focus":0.269,"evasion":6.532,"parry":8.802,"block":15.218,"blockPower":52.964,"counter":16.148,"counterPower":140.262,"tenacity":26.427,"reduction":3.361,"stun":3.034,"stunTime":0.422,"bleed":14.029,"bleedPower":4.266,"area":0.524,"areaPower":30.26,"lifesteal":1.798,"reflection":10.734,"regeneration":2,"capacity":11,"harvestSpeed":1.511,"healing":0.408}}
+{"key":"snare-vine","name":"올가미덩굴","tier":9,"party":2,"stats":{"health":3296,"power":34,"armor":60,"speed":0.78,"movement":0.3,"vision":6.25,"combo":0.162,"comboPower":58.119,"critical":12.853,"criticalPower":179.273,"accuracy":12,"penetration":10.02,"comboSpeed":0.193,"focus":0.207,"evasion":2.746,"parry":0,"block":9.094,"blockPower":43.661,"counter":7.062,"counterPower":121.534,"tenacity":20.597,"reduction":1.778,"stun":2.008,"stunTime":0.631,"bleed":15.853,"bleedPower":4.553,"area":1.406,"areaPower":33.82,"lifesteal":6,"reflection":7.351,"regeneration":18,"capacity":13,"harvestSpeed":1.365,"healing":16.78}}
+{"key":"soil-boar","name":"흙멧돼지","tier":10,"party":2,"stats":{"health":3667,"power":46,"armor":82,"speed":0.97,"movement":0.846,"vision":4.448,"combo":0.31,"comboPower":68.893,"critical":15.586,"criticalPower":194.173,"accuracy":7,"penetration":8.676,"comboSpeed":0.184,"focus":0.286,"evasion":3.63,"parry":3.023,"block":12.044,"blockPower":50.607,"counter":8.331,"counterPower":135.474,"tenacity":28.354,"reduction":4,"stun":8.097,"stunTime":0.49,"bleed":12.293,"bleedPower":4.84,"area":0.768,"areaPower":41.2,"lifesteal":2.613,"reflection":3.106,"regeneration":5,"capacity":14,"harvestSpeed":1.417,"healing":2.24}}
+{"key":"shadow-weasel","name":"그늘족제비","tier":11,"party":2,"stats":{"health":2323,"power":49,"armor":15,"speed":2.11,"movement":1.071,"vision":6.778,"combo":1.643,"comboPower":72.989,"critical":18.489,"criticalPower":184.128,"accuracy":15,"penetration":16.24,"comboSpeed":0.098,"focus":0.149,"evasion":14.332,"parry":9.822,"block":1.953,"blockPower":30.573,"counter":14.391,"counterPower":117.045,"tenacity":8.625,"reduction":0.444,"stun":1.568,"stunTime":0.397,"bleed":21.84,"bleedPower":5.418,"area":0.076,"areaPower":28.519,"lifesteal":4.713,"reflection":0.043,"regeneration":7,"capacity":7,"harvestSpeed":1.706,"healing":6.558}}
+{"key":"talon-owl","name":"갈퀴부엉이","tier":12,"party":3,"stats":{"health":2099,"power":52,"armor":12,"speed":1.73,"movement":0.915,"vision":8,"combo":1.345,"comboPower":64.686,"critical":17.017,"criticalPower":189.097,"accuracy":18,"penetration":14.561,"comboSpeed":0.12,"focus":0.192,"evasion":10.843,"parry":7.828,"block":1.107,"blockPower":28.568,"counter":9.699,"counterPower":112.646,"tenacity":4.464,"reduction":0.111,"stun":1.179,"stunTime":0.372,"bleed":19.761,"bleedPower":5.129,"area":0.122,"areaPower":26.806,"lifesteal":4.129,"reflection":0.165,"regeneration":4,"capacity":3,"harvestSpeed":1.594,"healing":3.498}}
+{"key":"vine-turtle","name":"넝쿨거북","tier":13,"party":3,"stats":{"health":3891,"power":31,"armor":123,"speed":0.59,"movement":0.601,"vision":4.094,"combo":0.054,"comboPower":37.759,"critical":1.785,"criticalPower":165.459,"accuracy":5,"penetration":5.169,"comboSpeed":0.219,"focus":0.336,"evasion":1.917,"parry":1.36,"block":24,"blockPower":60.139,"counter":11.166,"counterPower":126.105,"tenacity":30.275,"reduction":7.111,"stun":5.654,"stunTime":0.511,"bleed":6.297,"bleedPower":3.415,"area":1.227,"areaPower":37.47,"lifesteal":0.866,"reflection":9.537,"regeneration":15,"capacity":16,"harvestSpeed":1.159,"healing":24.385}}
+{"key":"lantern-keeper","name":"등불지기","tier":14,"party":3,"stats":{"health":3549,"power":37,"armor":42,"speed":1.635,"movement":1.041,"vision":7.032,"combo":1.204,"comboPower":62.534,"critical":6.863,"criticalPower":142.302,"accuracy":14,"penetration":0.715,"comboSpeed":0.128,"focus":0.163,"evasion":15.536,"parry":6.023,"block":3.994,"blockPower":34.775,"counter":0.598,"counterPower":88.735,"tenacity":12.678,"reduction":1,"stun":0.327,"stunTime":0.532,"bleed":1.248,"bleedPower":1.762,"area":0.018,"areaPower":17.397,"lifesteal":0.275,"reflection":0.639,"regeneration":16,"capacity":5,"harvestSpeed":1.774,"healing":29.993}}
+{"key":"spring-keeper","name":"봄지기","tier":15,"party":4,"stats":{"health":3425,"power":40,"armor":35,"speed":1.92,"movement":0.979,"vision":7.765,"combo":1.491,"comboPower":66.804,"critical":11.554,"criticalPower":145.614,"accuracy":16,"penetration":4.182,"comboSpeed":0.105,"focus":0.134,"evasion":16.759,"parry":6.901,"block":2.922,"blockPower":32.648,"counter":3.856,"counterPower":92.337,"tenacity":10.661,"reduction":0.694,"stun":0.154,"stunTime":0.468,"bleed":7.647,"bleedPower":3.134,"area":0.042,"areaPower":18.822,"lifesteal":0.434,"reflection":2.468,"regeneration":13,"capacity":4,"harvestSpeed":1.87,"healing":10.243}}
+{"key":"old-garden-snail","name":"오래된 등짐","tier":16,"party":4,"stats":{"health":4100,"power":43,"armor":155,"speed":0.495,"movement":0.422,"vision":4.781,"combo":0.018,"comboPower":34.457,"critical":2.414,"criticalPower":169.931,"accuracy":3,"penetration":1.794,"comboSpeed":0.229,"focus":0.374,"evasion":0,"parry":0.286,"block":20.352,"blockPower":62.562,"counter":1.033,"counterPower":130.754,"tenacity":32.189,"reduction":8.028,"stun":4.251,"stunTime":0.553,"bleed":5.052,"bleedPower":2.031,"area":0.909,"areaPower":32.028,"lifesteal":1.138,"reflection":6.362,"regeneration":17,"capacity":19,"harvestSpeed":1.241,"healing":36}}
+{"key":"spiny-back-leader","name":"가시등 우두머리","tier":17,"party":5,"stats":{"health":3997,"power":55,"armor":138,"speed":1.445,"movement":0.881,"vision":5.401,"combo":0.819,"comboPower":70.953,"critical":14.198,"criticalPower":204.629,"accuracy":10,"penetration":12.964,"comboSpeed":0.144,"focus":0.178,"evasion":7.568,"parry":10.889,"block":18.593,"blockPower":55.339,"counter":18,"counterPower":155,"tenacity":34.097,"reduction":6.25,"stun":6.423,"stunTime":0.592,"bleed":17.765,"bleedPower":5.709,"area":1.062,"areaPower":43.091,"lifesteal":3.079,"reflection":12,"regeneration":3,"capacity":15,"harvestSpeed":1.466,"healing":1.195}}
+{"key":"white-paw","name":"흰발","tier":18,"party":5,"stats":{"health":3781,"power":62,"armor":51,"speed":2.015,"movement":1.1,"vision":7.281,"combo":1.8,"comboPower":75,"critical":20,"criticalPower":210,"accuracy":17,"penetration":18,"comboSpeed":0.09,"focus":0.12,"evasion":18,"parry":12,"block":7.712,"blockPower":41.393,"counter":12.73,"counterPower":145.115,"tenacity":24.492,"reduction":2.778,"stun":4.929,"stunTime":0.573,"bleed":24,"bleedPower":6,"area":0.42,"areaPower":35.634,"lifesteal":5.337,"reflection":0.987,"regeneration":6,"capacity":10,"harvestSpeed":1.633,"healing":4.943}}
+{"key":"walking-forest","name":"걸어가는 산","tier":19,"party":6,"stats":{"health":4200,"power":58,"armor":172,"speed":0.4,"movement":0.492,"vision":5.976,"combo":0,"comboPower":30,"critical":3.146,"criticalPower":199.352,"accuracy":4,"penetration":7.418,"comboSpeed":0.24,"focus":0.355,"evasion":0.485,"parry":0.931,"block":22.154,"blockPower":65,"counter":4.823,"counterPower":150.028,"tenacity":36,"reduction":9,"stun":9,"stunTime":0.612,"bleed":9.099,"bleedPower":3.981,"area":1.8,"areaPower":45,"lifesteal":1.449,"reflection":8.41,"regeneration":19,"capacity":18,"harvestSpeed":1,"healing":32.948}}
+```
+
+### 추가29축의 level4 DNA 확인 배치
+
+- 각 pieces 항목은 [gene,rotation]이며 grade/shape는 아래 출처 해시의 현재 카탈로그 값을 사용한다. 전부 trace(level4).valid를 확인했고, value가 중립19티어보다 강하다(시간2축은 더 작음). 고정 순서로 같은 DNA만 연결하기 어려운 시야/출혈위력에는 연결용 체력 등도 포함한다. 이는 조각 전부가 동일해야 한다는 뜻의 순수 몰빵 최적해가 아니라 이론상 최댓값보다 낮음을 증명할 수 있는 유효 배치 근거다.
+
+```json
+{"key":"movement","value":1.13,"pieces":[["movement",0],["movement",0],["movement",1],["movement",2],["movement",3],["movement",0],["movement",5],["movement",4],["movement",3],["movement",1],["movement",2],["movement",2],["movement",3],["movement",0],["movement",5],["movement",3],["movement",3],["movement",0],["movement",4],["movement",2],["movement",3],["movement",0]]}
+{"key":"vision","value":9.5,"pieces":[["vision",3],["health",0],["vision",5],["health",2],["vision",1],["health",3],["vision",2],["health",4],["vision",3],["health",5],["antenna",0]]}
+{"key":"combo","value":3,"pieces":[["blade",0],["combo",0]]}
+{"key":"comboPower","value":90,"pieces":[["blade",0],["comboPower",0],["comboPower",2]]}
+{"key":"critical","value":32,"pieces":[["blade",0],["critical",0],["critical",2]]}
+{"key":"criticalPower","value":230,"pieces":[["blade",0],["criticalPower",1],["criticalPower",2]]}
+{"key":"accuracy","value":27,"pieces":[["blade",0],["accuracy",0],["accuracy",2],["accuracy",3]]}
+{"key":"penetration","value":20,"pieces":[["blade",0],["penetration",0],["penetration",2],["penetration",3],["penetration",3],["penetration",0]]}
+{"key":"comboSpeed","value":0.07999999999999999,"pieces":[["blade",0],["comboSpeed",0],["comboSpeed",2]]}
+{"key":"focus","value":0.08,"pieces":[["blade",0],["focus",0],["focus",4],["focus",3]]}
+{"key":"evasion","value":27,"pieces":[["evasion",0],["evasion",2],["evasion",3]]}
+{"key":"parry","value":16,"pieces":[["parry",0]]}
+{"key":"block","value":30,"pieces":[["block",0],["block",4]]}
+{"key":"blockPower","value":66,"pieces":[["blockPower",0]]}
+{"key":"counter","value":40,"pieces":[["blade",0],["counter",0]]}
+{"key":"counterPower","value":180,"pieces":[["blade",0],["counterPower",0],["counterPower",2]]}
+{"key":"tenacity","value":45,"pieces":[["tenacity",0],["tenacity",2],["tenacity",3]]}
+{"key":"reduction","value":16,"pieces":[["reduction",0],["reduction",2]]}
+{"key":"stun","value":12,"pieces":[["blade",0],["stun",0]]}
+{"key":"stunTime","value":0.8500000000000001,"pieces":[["blade",0],["stun",0],["stunTime",4],["stunTime",2],["stunTime",1]]}
+{"key":"bleed","value":40,"pieces":[["blade",0],["bleed",0],["bleed",2]]}
+{"key":"bleedPower","value":9,"pieces":[["blade",4],["bleed",1],["bleedPower",0],["health",3],["bleedPower",2]]}
+{"key":"area","value":4,"pieces":[["blade",0],["area",0]]}
+{"key":"areaPower","value":55,"pieces":[["blade",0],["area",0],["areaPower",2]]}
+{"key":"lifesteal","value":8,"pieces":[["blade",0],["lifesteal",0],["lifesteal",4]]}
+{"key":"reflection","value":24,"pieces":[["reflection",0],["reflection",2]]}
+{"key":"capacity","value":21,"pieces":[["gather",0],["capacity",0],["capacity",4],["capacity",2],["capacity",1],["capacity",2],["capacity",3],["capacity",3],["capacity",4],["capacity",4],["capacity",5]]}
+{"key":"harvestSpeed","value":2.2,"pieces":[["gather",0],["harvestSpeed",0],["harvestSpeed",0],["harvestSpeed",2],["harvestSpeed",2]]}
+{"key":"healing","value":60,"pieces":[["healing",0],["healing",1]]}
+```
+
+- 출처 SHA256: {"server/dna.mjs": "cbbe6aafa3b8d269825d49896f642a8fe444844895f53f95dcbad1a6fea7525e", "server/combat.mjs": "3affb82477daa6c6d5a1e137bcf705ab6c5d6a2a9d28a5804c6b0a521887d8c1", "server/combat-stats.mjs": "29c0c8357125617b30fa10950e69f61136479035817411ac22030ef5089d0d21", "server/attributes.mjs": "093d5a42094ba6c7f463ff03ce2f69be99981a82b5a4e6488c4728e89e4c4c3c", "client/neutral-stat-model.js": "670dbacbe7c700768d3b1831338eab3d393a465ac610da67ab0bdd16abb9a45c", "Research/Balance/2026-11-04/audit.json": "cab96f28ccc23ef0d2bfe096220288c19667dec4e434a8e3157b92cc90e9b879"}
+- 임시 계산 자료: literal $Trash/neutral-all-stat-draft-20261105/calculate.mjs 및 draft.json. 최초27개 근거 뒤 시야·출혈위력의 연결 DNA를 포함한 추가 탐색으로29/29를 보완했다. 재개에 필요한 값·배정·확인 배치를 이 기록에 보존한다.
+- 미해결·다음: 특수 행동의 활성화 방침, 연격/확산의 정수·확률 표현, 첫 침공의 저레벨 기준과 경제, 전체 효과를 포함한 DPS·피해·시간·사망자를 검토한다. 이번 게임/Design/편집기 변경이나 Git·배포는 하지 않았다.
+
+## 유닛 페이지 레이아웃·스탯 로컬 커밋 완료 및 탄생 연결 조사 착수 · 01a1a0bf
+
+- 기록 ID: unit-page-layout-commit-complete-20261105-205847-01a1a0bf. 기록 시각 2026-11-05T20:58:47+09:00. 기록·실행 메인 Codex, 로컬 커밋 및 후속 탄생 연결 문제 제기 사용자. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, H:/Spawner Windows PowerShell. 원발언 정확시각·항목 ID 불명.
+- 실제 커밋: 354fa1d3f4435dccf0de4dd4eff56d4b4ba6b07e 「유닛 페이지 레이아웃 및 스탯 표 수정」. Design.html/client/unit-matrix-preview.js/관련 메모리4섹션을3경로로 원자적 저장했다. 최종 staged경로·tree·실제 인덱스대상blob을 재조회했고 비대상stage를 보존했다. 기존화면검수·제품형식은hash불변으로 재사용하고 신규메모리형식·staged whitespace도 통과했다. 푸시는 실행하지 않았다.
+- 본 hash/성공은 커밋후에만 알려진 사실로 로컬에 기록하고 다음 승인된 관련 커밋에 넘긴다. 메모리만의 추가 커밋/amend는 만들지 않는다. 앞선 커밋승인의 실행대기상태를 완료로 대체하며 기존 이력은 보존한다.
+- 후속 사용자 제보: 유닛 기획서 탄생 칸에 옛 자산 또는 이상한 자산이 연결된 항목이 있다는 것이다. 현재 탄생 링크/미리보기와 실제 게임의 등록된 탄생 자산·프레임을 대조해 관련 연결을 수정한다. 새 탄생 아트 제작이나 새 문구·Git완료 승인을 추론하지 않는다. 이전 레이아웃 커밋은 완료상태로 유지한다.
+
 ## 둥지 비용 게임 적용 확인·로컬 커밋 범위 확정 · 01a1a129
 
 - 기록 ID: nest-cost-rebalance-commit-freeze-20261105-01a1a129. 기록 시각: 2026-11-05T20:57:15+09:00. 기록자·범위분리/직접검수 Codex /root, 메모리 정리·로컬 커밋 승인 및 게임 적용 여부 질문 사용자. 출처 현재채팅01a1a129-d9d6-79c3-830d-58009e34c915 최신「메모리에 정리하고 커밋해. 게임에 적용한거야?」, H:/Spawner Windows/PowerShell. 원발언 정확 시각·항목 ID 불명.
 - 게임 적용 답변: 로컬 서버 원본 server/conquest-pacing.mjs와 실제 인게임이 읽는 client/runtime.js 내 설정3곳에80/400/2000을 반영했다. 몽돌 할인60/300/1500과 시작금30은 기존 호출 경로에서 적용된다. 공개 서비스에 배포했다는 뜻이 아니며 현재 질문·커밋 요청을 배포/푸시 승인으로 확대하지 않는다.
 - 확정5경로: server/conquest-pacing.mjs, client/runtime.js, server/nest-upgrade.test.mjs, server/tribe-start.test.mjs, 본 비용 조정 관련 메모리4개 절이다. 시작금 초과/보관한도 내 성장·정수 차감/저장 호환의7개 성공 및 정확5파일 형식OK·runtime3곳 외 바이트 불변 근거를 재사용한다. 변경 없는 게임 검사·브라우저·전체 build를 반복하지 않는다.
 - 기존 HEAD에 이미 있는 메모리는 전부 유지하며 다른 채팅의 미커밋 메모리·Design·유닛 표 변경을 후보에 섞지 않는다. 전용 origin oojjrs/Spawner 일치를 확인했고 이 채팅의 연결 Projects0개 확인을 재사용한다. 별도 index에서 정확 경로/국소 staged diff/공백을 검수한 뒤「둥지 성장 비용 변경」으로 로컬 커밋한다. 현재는 아직 커밋 전이다.
-
 ## 둥지 성장 비용80·400·2000 조정 완료 · 01a1a129 현재 요약
 
 - 기록 ID: nest-cost-rebalance-complete-20261105-01a1a129. 기록·실제 최종확인 시각: 2026-11-05T20:54:26+09:00. 기록자·직접 수정/검수 Codex /root, 자원 채집 경제에 맞춘 비용 상향 승인 사용자. 출처 현재채팅01a1a129-d9d6-79c3-830d-58009e34c915와 현재 비용·실제 검사 출력. H:/Spawner Windows/PowerShell. 원발언 정확 시각·항목 ID 불명. nest-cost-rebalance-start及integer-fixture의 구현/검사 대기를 완료로 갱신한다.
@@ -1002,12 +1102,16 @@
 - 기준의 한계: 전체20EP/초를 실측값으로 사용하지 않았다. 이번은 시작금만으로 즉시 성장되는 모순을 막고 보관상한80%를 성장 투자 기준으로 삼은1차 비용 조정이다. 실제 최적DNA 조합·장기 평균 채집량·레벨4 도달시간을 실측해 최종 확정했다는 뜻은 아니다. 다른 채팅의 기관1회/등급개편 미확정 논의는 구현하지 않았다.
 - 실제 관련검사 7개 성공: 새 비용의4종족×3단계 부족시 무차감/충분시 정확차감·레벨/체력/기존개체·저장 보존, 기존 몽돌 저장/최고레벨, 시작 지원금4개 회귀와 새 즉시성장 차단·보관한도 회귀다. 최초 소수점 fixture 실패는 현재 정수 복원 계약에 맞춰 비용 검사 입력만 바꿔 해결했고 성공한 나머지6개는 재사용했다. 수급전망의 옛 유지비 공식을 전제한 별도 기존 검사/알고리즘은 이 비용 범위에 섞지 않았다.
 - 인게임 runtime 설정3곳만 교체되고 다른 문자열은 수정 전 바이트와 동일함을 확인했다. 범위는 server/conquest-pacing.mjs, client/runtime.js, server/nest-upgrade.test.mjs, server/tribe-start.test.mjs, 본 메모리다. 독립 기획서/전투 실험실 사본·병행 Design/UI 작업은 유지한다. 근거는 H:/Spawner/$Trash/nest-cost-rebalance-20261105의 수정 전 백업·edit-manifest.json·세 targeted test 로그·runtime-proof.json이다. 최종 공유 형식/국소 diff 출력은 직후 같은 마감 호출에서 확인한다. 미스테이징·미커밋·미푸시·미배포 상태로 사용자 검토 가능하며 배포 보류는 유지한다.
-
 ## 둥지 비용 검사 정수 포인트 경계 보정 · 01a1a129
 
 - 기록 ID: nest-cost-rebalance-integer-fixture-20261105-01a1a129. 기록 시각: 2026-11-05T20:53:22+09:00. 기록자·직접 검사/보정 판단 Codex /root, 비용 재조정 승인 사용자. 출처 현재채팅01a1a129-d9d6-79c3-830d-58009e34c915와 실제 nest-upgrade-tests.txt/tribe-start-tests.txt. H:/Spawner Windows/PowerShell. 원발언 시각·항목 ID 불명.
 - 실제 첫 검사에서 시작 지원금5개 회귀와 기존 몽돌 저장 검사는 성공했다. 4종족×3단계 비용 검사는 기존 소수점 fixture가 복원 뒤59.9가 아닌59로 정수화되어 실패했다. 새 비용이 잘못 차감됐다는 증거가 아니라 현재 저장복원 계약과 예전 소수점 기대값의 불일치다.
 - 이번에 수정 중인 비용 검사에 한해 부족분을 cost-1, 충분한 잔액을 cost+2/차감 후2로 바꿔 실제 정수 포인트 경계를 검증한다. 게임의 포인트 저장/차감 알고리즘은 변경하지 않는다. 이미 통과한6검사는 입력이 변하지 않아 재실행하지 않고, 실패한 비용 검사1개만 보정 후 다시 확인한다. 최종 결과는 아직 확인 전이다.
+## 유닛 페이지 레이아웃·스탯 정리 로컬 커밋 승인 · 01a1a0bf
+
+- 기록 ID: unit-page-layout-commit-request-20261105-205209-01a1a0bf. 기록 시각 2026-11-05T20:52:09+09:00. 기록·범위분리 현재 메인 Codex, 메모리 정리·로컬 커밋 승인 사용자. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, H:/Spawner Windows PowerShell. 원발언 정확시각·항목 ID 불명.
+- 승인 범위: 이번 Design.html의 유닛 미리보기64px·표폭864px·헤더/세로정렬·스탯중립19행 삭제와 client/unit-matrix-preview.js의 stats전용canvas설치 제거, 이 작업 관련 메모리만 같은 커밋에 포함한다. 스탯은 새싹콩/포자버섯/몽돌/샘방울4행이며 애니메이션23종/물리scale/정렬/확대를 유지한다. 앞선 완료·start·header교정 기록과 이번 승인을 원자적으로 저장한다.
+- 이전 실제PC/390화면·숫자오름내림·512확대/닫기·가시20panel검수와 최종형식성공은 소스hash가 같을 때 재사용한다. 새 테스트/브라우저를 커밋 때문에 반복하지 않는다. 다른 채팅의 메모리·코드·인덱스는 보존한다. 같은origin oojjrs/Spawner의 연결Project0 확인을 재사용한다. 푸시·배포는 이번 승인에 없다. 커밋 성공은 실행 후 확인하며 선기록하지 않는다.
 
 ## 시작 지원금·채집 경제에 맞춘 둥지 성장 비용 조정 착수 · 01a1a129 현재 요약
 
@@ -1015,13 +1119,16 @@
 - 현재 근거: PLAYER_STARTING_POINTS30, 공통 성장비20/80/360, 레벨별 포인트 보관100/500/2500/12500이며 몽돌은 비용25% 할인이다. 현행은 첫 성장비가 지원금보다 작아 채집 없이 성장 가능하다. 이전 전체20EP/초와 일꾼5개/초는 미확정 가정이므로 실측 수입으로 쓰지 않는다. 다른 채팅의 기관1회·직업별 DNA 논의도 아직 미적용이다.
 - 이번 조정 판단은 공통 성장비80/400/2000, 몽돌60/300/1500이다. 각 현재 보관한도의80%(몽돌60%)로 맞춰 상한 안에서 모을 수 있게 하고 시작 지원금30은 유지한다. 따라서 첫 성장에 일반50/몽돌30포인트를 추가로 채집해야 한다. 실제 최적 일꾼 구성·평균 플레이 성장 시점을 실측해 확정한 최종 경제안이라는 주장은 아니다.
 - 범위는 server/conquest-pacing.mjs, 인게임 client/runtime.js에 내장된 같은 설정3곳, 성장 비용 경계/시작 지원금 관련 검사와 본 메모리다. 기존 몽돌 할인·보관한도·다른 스탯/채집효과/AI 행동은 유지한다. 게임 비용을 쓰지 않는 별도 기획서/전투 실험실의 독립 사본과 병행 Design/UI 작업은 건드리지 않는다. 전체 build·새 시뮬레이션·브라우저·Git·배포는 요청 범위에 추가하지 않는다.
+## 웰컴 SFX 전수 소스 조사·다리 몽돌 강등 경로 확인 · 01a1a12e 현재 요약
 
-## 유닛 페이지 레이아웃·스탯 정리 로컬 커밋 승인 · 01a1a0bf
-
-- 기록 ID: unit-page-layout-commit-request-20261105-205209-01a1a0bf. 기록 시각 2026-11-05T20:52:09+09:00. 기록·범위분리 현재 메인 Codex, 메모리 정리·로컬 커밋 승인 사용자. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, H:/Spawner Windows PowerShell. 원발언 정확시각·항목 ID 불명.
-- 승인 범위: 이번 Design.html의 유닛 미리보기64px·표폭864px·헤더/세로정렬·스탯중립19행 삭제와 client/unit-matrix-preview.js의 stats전용canvas설치 제거, 이 작업 관련 메모리만 같은 커밋에 포함한다. 스탯은 새싹콩/포자버섯/몽돌/샘방울4행이며 애니메이션23종/물리scale/정렬/확대를 유지한다. 앞선 완료·start·header교정 기록과 이번 승인을 원자적으로 저장한다.
-- 이전 실제PC/390화면·숫자오름내림·512확대/닫기·가시20panel검수와 최종형식성공은 소스hash가 같을 때 재사용한다. 새 테스트/브라우저를 커밋 때문에 반복하지 않는다. 다른 채팅의 메모리·코드·인덱스는 보존한다. 같은origin oojjrs/Spawner의 연결Project0 확인을 재사용한다. 푸시·배포는 이번 승인에 없다. 커밋 성공은 실행 후 확인하며 선기록하지 않는다.
-
+- 기록 ID: welcome-sfx-census-complete-20261105-01a1a12e. 기록 시각·마지막 소스 확인: 2026-11-05T20:50:52+09:00. 기록자·전수 소스/파일 대조 Codex /root, 실제 인게임 함수/SFX 사용 여부 조사 및 다리 몽돌 입장 후 기본형 퇴장 관측 주체 사용자. 출처 thread01a1a12e-3f3f-72c1-95e2-0b5b349b5ffb,H:/Spawner Windows/PowerShell. 사용자 원발언 정확 시각·항목 ID 불명. HEAD cfbb669, 조사 관련 제품 파일 dirty없음 확인. 앞선 start 기록의 조사 대기를 이 확인 범위에서 완료로 갱신한다.
+- 범위·전수 결과: 웰컴은 4종족×4외형16+중립19=35후보. MovementAudio 정의22종(기본3+중립19)과 콩 footstep/landing, 공격 unit-attack 공통1+중립19전용을 포함해 실제 Audio.sources 전체75개를 읽었다. 75/75 원본·래퍼·로컬 매니페스트 존재, base64 래퍼 바이트와 원본75/75 동일. 중립19종 모두 이동/비행·공격 매핑 보유, 모든 공격 cue가 각 실제clip 안(235~546ms/905~1570ms,벌레440/1280). runtime의 welcome-presentation/unit-animation/image-geometry/unit-sprite-registration 본문은 현재 source와 일치했다. 실제 브라우저 재생·청음·서버/테스트/빌드는 실행하지 않은 정적 조사다.
+- 전 중립 확인 목록: 꽃꼬리새/이슬토끼/흙두더지/보따리달팽이/솜양/굴림도토리/흙멧돼지/방울두꺼비/넝쿨거북/그늘족제비/올가미덩굴/갈퀴부엉이/봄지기/등불지기/오래된 등짐/걸어가는 산/흰발/가시등 우두머리/가시등벌레. 모두 MovementV1 또는 봄지기 MovementV2 wing과 각 CreatureAttackV2 또는 beetle-attack이 있다. 파일이 없어서 생기는 공통 누락은 발견하지 못했다.
+- 확정 코드 경로1(공격): header.advance exit→perform에서 resetPresentationAudio(header298)가 CombatAudio playback.time/events를 비운다. 같은 tick 새 중립 agent에 attack를 넣고 update(175)를 호출한다. CombatAudio.collect99는 initial이면 cue시각 전에도 이벤트 stamp를 기록하면서 소리는 내지 않고, 나중에는 같은stamp로 다시 재생하지 않는다. 웰컴의 중립19종 공격 연출 모두가 이 누락 경로 대상이다. 인게임은 전투/이동 이벤트 update를 공유하지만 updateAudio가 매 행동 전환마다 playback을 reset하지 않아 동일 호출 순서가 아니다. 공유 함수가 있다는 사실만으로 같은 동작을 보장하지 않는다.
+- 확정 코드 경로2(기본 종족 행동): 콩 perform0→idle/rest, 나머지3종×4외형은 jump다(header288/344). 기본 종족에는 header.travelMotion이 attack 상태를 넣지 않는다(header259는 중립 한정). 따라서 기본 종족 공격음 공통unit-attack이 있어도 이 화면에서는 공격 자체를 하지 않으며, jump는 moveDuration0/modeidle로 전달돼 Movement/CombatAudio에 jump·landing 이벤트가 연결되지 않는다. spring-landing/footstep 자산도 선언·레벨/제한 정의 외 실제 해당 호출을 찾지 못했다.
+- 확정 준비 계약·조건부 누락: Audio148에서 첫7개 welcome/UI buffer만 준비해도 prepared=true/available=true다. 나머지68개는 Assets.ready 뒤 Promise.all decode 전체가 끝난 후 채널에 추가한다(152~155). 그 전에 생긴 중립 이동/공격 cue는 start218의 해당source 채널 없음→null로 조용히 빠지며 이벤트생성기는이미소비한다. header.prepareChoice는그림만기다리고개별SFX준비를기다리지않는다. 실제 느린로딩에서 발생했는지는이번에 재현하지 않았다. header172는 중심x가0..width일때만agent를오디오에전달하고 MovementAudio가최초cue/120ms이전cue를뒤늦게재생하지않으므로 첫걸음·날개구간누락조건이있다. audio.start의동일clip간격/동시수/8채널 제한도 공유해 적용된다. 낮은 갈퀴부엉이 gain0.06·흙두더지0.068은 수치로 확인했지만 청감상 무음 원인으로 확정하지 않는다.
+- 추가 사용자 제보·외형 상태: 사용자가 다리 몽돌은 들어올 때 추가다리로 빠르게 걷는데 나갈 때 기본형이라고 관측했다. 현재 drawWelcomeChoice(presentation87~97)는 속성 외형 그리기 예외 시 variant0으로 재시도한다. header331은 결과를 choice.variant에 영구 대입하므로 점프/idle 등 한 동작 합성 실패 뒤 그 회차의 퇴장도 기본형/기본 이동속도가 된다. 이는 관측을 만들 수 있는 명확한 코드 경로다. 실제 첫 exception/단계는 console·재현으로 확인하지 못했으므로 특정 throw 원인으로 단정하지 않는다. spore/pebble/spring rig의 idle/walk/jump 트랙·프레임·durations 수가 일치하고 비어 있지 않음을 확인해 단순 동작 자료 부재로 결론내리지 않았다.
+- 후속 수정 판단: 회차 선택 외형은 유지하고 실패한 동작만 같은 외형 idle/walk 등으로 대체할 필요가 있다. 공격은 플레이백 bootstrap과 공격 시작을 분리하고 초기 stamp 소모를 고쳐야 하며, 개별 SFX 준비완료를 재생 계약에 반영해야 한다. 이는 조사 결과·후속안이고 이번에 구현·제작·커밋/푸시/배포하지 않았다. 제품 변경 없음, 이 메모리 관련 섹션만 추가하고 기존/동시 기록 바이트를 guard로 보존했다. 범위 밖 원래 안테나 몽돌 exception/OOM까지 해결했다고 주장하지 않는다.
 ## 유닛 페이지 레이아웃·4종족 스탯 정리 완료 · 01a1a0bf 현재 요약
 
 - 기록 ID: unit-page-layout-complete-20261105-204758-01a1a0bf. 기록·최종 확인 시각: 2026-11-05T20:47:58+09:00. 기록·구현·화면 검수 현재 메인 Codex, 문제 제기·플레이어블 스탯 한정 결정 사용자. 출처 현재 채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, H:/Spawner Windows PowerShell. 원발언 정확 시각·항목 ID 불명.
@@ -1037,6 +1144,17 @@
 - 실제 변경 전 PC·390px에서 스탯23행/행277px·미리보기256px를 확인했다. 64px 표시/스탯4행 교정 후 행85px·물리scale목록동일·정렬/확대/JS오류0을 확인했으나, PC 실제 이미지에서 애니메이션 열 제목이 첫 행 아래로 내려간 추가 문제를 관찰했다.
 - 같은 CSS에서 overflow-x:auto 조상의 sticky th에 viewport용 top92px를 적용한 것이 헤더를 표 안에서 내리는 원인으로 판단하여 top0으로 교정한다. 실제 열은 이름1+행동12개이므로 최소폭은96+12×64=864px다. 스탯 숫자는 이미지 행 중앙에 맞춘다. 추가 제품 문구 없이 같은 유닛 페이지 레이아웃 범위에서 적용 후 헤더와 첫 행 좌표를 다시 확인한다.
 
+## 중립 스탯 결정 진행 방식 변경 · 01a1a0e9 현재 요약
+
+- 기록 ID: neutral-stat-verbal-direction-20261105-01a1a0e9. 기록·확인 시각: 2026-11-05T20:41:22+09:00. 기록자 Codex /root, 진행 방식 결정 주체 사용자. 출처 현재 채팅 01a1a0e9-2e09-7703-a7f5-613c21744e11 최신 원문 「아니다 됐다. 난 말만 할테니 걍 니가 수정해라. 그래서 이제 스탯 다 정할 준비가 됐어?」, H:/Spawner Windows/PowerShell. 원발언 정확 시각·항목 ID·딥링크 불명.
+- 최신 사용자 방향: 사용자가 곡선을 직접 조작하는 흐름 대신 말로 방향·교정을 전달하면 Codex가 수치와 표를 수정하며 진행한다. 직전 resume 기록의 사용자 직접 편집 안내를 이 진행 방식으로 대체한다. 기존 편집기 삭제·게임 적용·Git·배포 지시로 확대하지 않는다. 이번 발언으로 새 수치나 HP500 제안이 확정된 것은 아니다.
+- 현재 준비 근거: 19종 개별 스탯 티어·6계보 상대 서열 규칙, 기본5축(HP/공격/공속/방어/재생) 곡선 및 DPS/정적 처치 시간 계산 틀과 검사8개 성공 근거가 있다. 전체 스탯의 수치 초안을 논의·수정할 기반은 준비됐다. 남은 확정 판단은 비교 기준/실제 DNA 효과·상한과 정수 단위, 전투중 자기 재생 여부, 치명·회피·막기·연타·제어·치유 같은 파생 효과의 합성 및 실제 전투 검증이다. 기존34축 계보510쌍 유지 원칙은 계속 유효하다.
+- Codex 제안과 사용자 결정 구분: 기본5축 수치→나머지 전투/행동 스탯→레벨4 DNA 상한·사냥 시간 대조 순서로 맞춰가는 것이 다음 논의 제안이며 사용자가 순서를 확정한 것은 아니다. HP1200 가상 초안과 HP500 실제 배치 제안을 구분하고 어느 한쪽을 이미 최종 기준으로 채택했다고 말하지 않는다. 실제 엔진의 현행 재생은 전투종료5초뒤 시작하므로 초안의 전투중재생과 혼동하지 않는다.
+## 웰컴 유닛 애니·SFX 전수 조사 착수 · 01a1a12e 현재 요약
+
+- 기록 ID: welcome-sfx-census-start-20261105-01a1a12e. 기록 시각: 2026-11-05T20:40:52+09:00. 기록자·읽기 조사 Codex /root, 웰컴이 실제 인게임 함수로 SFX를 호출하는지 전수 조사 요구 주체 사용자. 출처 thread01a1a12e-3f3f-72c1-95e2-0b5b349b5ffb,H:/Spawner Windows/PowerShell. 정확 원발언 시각·항목 ID 불명. 현재 HEAD cfbb669, 시작 때 후보 제품 파일 변경 없음/메모리만 기존 dirty.
+- 범위: 현재 등장 가능한 4종족 외형과 중립 전부에 대해 이동·비행/착지·공격 및 실제 연출 행동, SFX 파일·로컬래퍼·로더, 공유 함수/수신 상태·타이밍·재생 게이트를 소스로 대조한다. UI/게임/오디오 제품 코드를 수정하거나 서버/브라우저/테스트·빌드를 실행하지 않는다. 일반 파일 존재·정적 데이터 조회만 수행하고 이 메모리 예외로 결과를 보존한다. 이번 요청은 Git/푸시/배포나 SFX 제작 승인이 아니다.
+- 초기 관측: 공유 MovementAudio.update·CombatAudio.update와 Audio.playWelcome 호출은 실제로 연결돼 있다. 다만 header exit→perform에서 resetPresentationAudio가 두 playback을 초기화하고, CombatAudio.collect는 initial이면 future cue라도 stamp를 바로 기록한다. 이 조합으로 공격 cue가 누락될 가능성이 커서 종별 행동/분기를 확인한다. 파일 부재와 이벤트 누락·낮은 gain은 구분하며 실제 청음/재현 결과로 과장하지 않는다. 과거 안테나 몽돌 정지는 cloud 후속의 예외 복구 코드가 현재 존재함을 확인했고, 그 이전 미해결 기록만으로 현재 재현됐다고 하지 않는다.
 ## 유닛 페이지 축소·플레이어블 스탯 한정 착수 · 01a1a0bf 현재 요약
 
 - 기록 ID: unit-page-layout-start-20261105-203829-01a1a0bf. 기록 시각: 2026-11-05T20:38:29+09:00. 기록·실행 현재 메인 Codex, 요구·표 범위 결정 사용자. 출처 현재 채팅 01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, H:/Spawner Windows PowerShell. 원발언 정확 시각·항목 ID 불명.
@@ -1044,6 +1162,14 @@
 - 현재 소스 확인: Design의 유닛 미리보기 CSS가 256×256, 애니메이션 표가3424px, 스탯 첫 열272px·canvas256px이다. 개선은 기존64px 표시로 되돌리고 내부256 렌더·공통 물리 배율은 유지한다. 스탯은 원래64px 식별 이미지·4개 행으로 복구하고 정렬/확대 연결을 유지한다. 보이는 새 문구를 추가하지 않는다.
 - 범위: Design.html 관련 CSS/스탯19행, client/unit-matrix-preview.js의 스탯 전용 물리 canvas 설치 제거와 메모리. 실제 PC·좁은 화면을 격리 headless로 확인한다. Git 작업·푸시·배포는 이번 요청으로 추가 승인되지 않았다. 기존 코드/인덱스와 메모리 기록을 보존한다.
 
+## 중립 스탯 곡선 편집 작업 재개 · 기존 클라우드 구현 확인 · 01a1a0e9 현재 요약
+
+- 기록 ID: neutral-curve-editor-resume-20261105-01a1a0e9. 기록·마지막 실제 확인 시각: 2026-11-05T20:36:30+09:00. 기록자·소스 검토/검사 Codex /root, 재개 요청 주체 사용자. 출처 현재 채팅 01a1a0e9-2e09-7703-a7f5-613c21744e11 최신 원문 「이거 재개해봐」, H:/Spawner Windows/PowerShell. 원발언 정확 시각·항목 ID·딥링크 불명. 사용자가 새로 HP500 수치나 실제 게임 적용을 확정한 것으로 해석하지 않는다.
+- 이전 neutral-curve-editor-cloud-handoff 및 commit-complete에 남은 구현 대기는 현재 소스와 cloud-followup-additional-20261104의 후속 구현 근거로 갱신한다. 클라우드가 이미 NeutralStats.html, client/neutral-stat-editor.js/.css, neutral-stat-model.js, neutral-stat-balance-data.js에 편집기를 추가했다. 로컬 기본 HEAD cfbb669, 작업 트리 변경은 기존 CodexWorkMemory.md뿐이었다. 이 재개에서 기존 편집기나 게임 파일을 새로 수정하지 않았다.
+- 현재 기능(소스 확인): 5개 곡선 드래그·값 입력·키보드 조절, 고정 19종 개별 티어/인원으로 수치·DPS·정적 처치 시간 동시 재계산, 이웃 값 사이 제한으로 엄격 스탯 서열 보존, 파생 DPS 계보 역전 경고, 초기값 복원·브라우저 저장·JSON 입출력. 순DPS<=0은 처치 불가로 처리하고 목표 10~60초 밖 값도 자르지 않는다.
+- 기준 구분: 기본/초기 복원은 기존 HP1200·공격75·공속1·방어50·재생10 초안. 별도 「실게임 규모 제안 불러오기」는 유효 레벨4 배치 HP500·공격6·공속0.5·방어0·전투중재생0(262P) 기준의 다른 제안이다. 원래 초안의 전투중재생과 실제 엔진의 전투종료5초뒤회복을 구분한다. HP500안은 사용자 확정 수치나 실제 중립 런타임 적용으로 취급하지 않는다. 서버 엔진 비교값은 초기안 고정 결과이며 곡선 편집 때 엔진을 재실행하는 값이 아니다.
+- 실제 이번 검사: node --test client/neutral-stat-model.test.mjs 8개 성공/실패0. 원래 19종·인원·예시 시간 재현, 5축 극단 편집 시 엄격 서열, 수치/DPS/시간 동시 갱신과 60초 밖 유지, 순피해<=0, 큰 입력·소수 간격 검증, DNA 상한의 blocked/within-witness/unproven 구분, 실제규모 제안의 DNA 확인배치 미만·10~60초·파생계보 역전0을 확인했다. 이번 실제 브라우저 드래그나 배포 상태를 재검증한 것은 아니다.
+- 재개 지점: 사용자에게 NeutralStats.html을 안내해 현재 편집기로 곡선을 직접 조절하며 수치를 검토한다. 실제 게임 수치 반영·DNA 효과 확정은 여전히 별도 결정/작업이다. 기본1200안을 새500안으로 임의 교체하거나 오래된 인라인 그래프를 중복 구현하지 않는다. 기존 기록·병행 메모리를 보존하며 이번 요청으로 새 커밋/푸시/배포를 하지 않는다.
 ## DNA 기관1회·직업별강화 논의 중단 인계 · 01a1a10e 현재 요약
 
 - 기록 ID: dna-discussion-stop-handoff-20261105-01a1a10e. 기록 시각: 2026-11-05T06:05:26+09:00. 기록자·취합 Codex /root, 논의중지·기록·필요한푸시승인 사용자. 출처 현재 채팅01a1a10e-176c-7cb3-a1cf-2ad477deffc4,H:/Spawner Windows PowerShell. 원발언정확시각·항목ID불명. 사용자「끊고, 메모리에 현재 상태 기록하고 푸시할 거 있음 하자」에따라추가설계·계산·제작은중지했고인계/Git완료만수행한다.
@@ -174245,3 +174371,9 @@ Text: none. No lettering, labels, logo, watermark, UI, borders, health bars, peo
 - 현재Codex유력검토안(사용자미확정): 1렙을채집기관(1회)+운반/채집속도/체력/이속(반복)의5종으로구성하고,칼날·분비기관과전투강화를2렙이후에여는방향. 운반은왕복당적재량,채집속도는현장체류시간,이속은왕복시간,체력은생존을담당한다. 왕복시간비중이클수록운반강화의가치가크고가방이커지면채집속도강화의가치도커지지만거리·자원조건미정이라수입최적은단정하지않는다. 전투기관2렙이동은후보이며아직실행결정이아니다.
 - 기관별역할분리제안: 채집기관→채집개방/반복강화는운반·채집속도·필요시채집량;칼날→근접개방/근접공격력·공속·연타;분비→원거리개방/원거리공격력·공속;치유→아군치유개방/주는치유량·주기전문화후보;안테나→둥지밖정찰개방/시야거리. 치유의주는양강화는현행회복력(받는양)과구분하며신규전문화는아직미확정이다. 전용강화가해당기관없는unit에서무효여도문제로취급하지않는다.
 - 기관복제를금지하는안에서는직전dna-organ-specialization-proposal의%증폭은필수해결책이아니다. 전문DNA가고정값을누적해도기관과역할이겹치지않는다. 기관중첩안/%안/체격공통강화구상은미확정비교안으로보존하며사용자가선호를논의하는현재상태를확정구현으로오인하지않는다. 제품·Design·카탈로그·Research·Git수정없고수치·형태·등급교환도아직미적용이다.
+## DNA 논의 중단 인계 커밋·푸시 완료 · 01a1a10e
+
+- 기록 ID: dna-discussion-stop-pushed-20261105-01a1a10e. 기록 시각: 2026-11-05T06:06:35+09:00. 기록자·Git실행·readback Codex /root,중지·기록·푸시승인 사용자. 출처 현재 채팅01a1a10e-176c-7cb3-a1cf-2ad477deffc4,H:/Spawner Windows PowerShell. 원발언정확시각불명.
+- 실제커밋cfbb669d09a98eadf570ea456236f7a414d44a05「DNA 기관 강화 논의와 중단 상태 기록」,부모9b8258d13f77e4e8bb49596f4a9fba89c67cb7f8,트리a343c998252bd41b17790128171b5cc1e887d85a,메모리와비교자료10경로. origin/main푸시성공후원격tip=cfbb669d09a98eadf570ea456236f7a414d44a05/로컬main=cfbb669d09a98eadf570ea456236f7a414d44a05일치와본커밋포함확인. 원격6커밋fast-forward와로컬기록복원완료,복구참조는유지한다. 새제품구현없고논의중단상태다.
+- 보존위치는Research/Dna/2026-11-05/discussion-01a1a10e/이며메모리맨앞중단인계요약을기준으로사용자재개시이어간다. 본커밋뒤확인결과는로컬기록으로다음승인된관련커밋에이월하며메모리전용후속커밋/amend를자동수행하지않는다.
+

@@ -156,6 +156,36 @@ function dnaHealAllocations(source, agents, team, distance) {
 
 return { DNA_ACTION_RULES, dnaAttackMode, dnaProjectileDuration, dnaHealTarget, dnaHealAmount, dnaProjectileValid, dnaAttackStats, dnaHealAllocations };
 })();
+modules["server/creature-attack-role.mjs"] = (() => {
+const { DNA_ACTION_RULES } = modules["server/dna-actions.mjs"];
+
+const melee = { role: "melee", melee: true, ranged: false };
+const hybrid = { role: "hybrid", melee: true, ranged: true };
+const CREATURE_ATTACK_ROLES = Object.freeze(Object.fromEntries([
+  ["flower-tail-bird", { role: "ranged", melee: true, ranged: true }],
+  ["dew-rabbit", melee], ["soil-mole", hybrid], ["bundle-snail", melee],
+  ["cotton-sheep", melee], ["rolling-acorn", melee], ["bubble-toad", hybrid],
+  ["snare-vine", melee], ["spiny-back-beetle", hybrid], ["soil-boar", melee],
+  ["vine-turtle", hybrid], ["shadow-weasel", melee], ["talon-owl", melee],
+  ["spring-keeper", melee], ["lantern-keeper", { role: "ranged", melee: false, ranged: true }],
+  ["old-garden-snail", melee], ["walking-forest", melee], ["white-paw", melee],
+  ["spiny-back-leader", hybrid]
+].map(([key, value]) => [key, Object.freeze({ ...value })])));
+
+function creatureAttackRole(species) {
+  return CREATURE_ATTACK_ROLES[species] || null;
+}
+
+function creatureAttackMode(agent, separation) {
+  const role = creatureAttackRole(agent.species);
+  if (!role || !Number.isFinite(separation) || separation < 0) return null;
+  if (role.melee && separation <= DNA_ACTION_RULES.meleeRange) return "melee";
+  if (role.ranged && separation <= DNA_ACTION_RULES.rangedRange) return "ranged";
+  return null;
+}
+
+return { CREATURE_ATTACK_ROLES, creatureAttackRole, creatureAttackMode };
+})();
 modules["server/dna-combat-stats.mjs"] = (() => {
 const DNA_COMBAT_RULES = Object.freeze({
   powerCurve: "linear", powerBase: 2, powerGain: 2, powerKnee: 2,
@@ -767,7 +797,7 @@ const tribeBirthCosts = Object.freeze({
 
 function birthCost(template, tribe) {
   const costs = tribeBirthCosts[tribe || template.tribe] || tribeBirthCosts.bean;
-  if (template.dna) return 3 + ATTRIBUTE_DNA.price(template.dna.pieces);
+  if (template.dna) return ATTRIBUTE_DNA.cost(template.dna.pieces);
   return costs[template.slots.length] ?? Infinity;
 }
 
@@ -3266,36 +3296,6 @@ function snapshotCombatVfx(environment, time, visibility) {
 
 return { COMBAT_VFX_JOURNAL_LIMIT, COMBAT_VFX_JOURNAL_SECONDS, combatVfxToken, recordCombatVfx, snapshotCombatVfx };
 })();
-modules["server/creature-attack-role.mjs"] = (() => {
-const { DNA_ACTION_RULES } = modules["server/dna-actions.mjs"];
-
-const melee = { role: "melee", melee: true, ranged: false };
-const hybrid = { role: "hybrid", melee: true, ranged: true };
-const CREATURE_ATTACK_ROLES = Object.freeze(Object.fromEntries([
-  ["flower-tail-bird", { role: "ranged", melee: true, ranged: true }],
-  ["dew-rabbit", melee], ["soil-mole", hybrid], ["bundle-snail", melee],
-  ["cotton-sheep", melee], ["rolling-acorn", melee], ["bubble-toad", hybrid],
-  ["snare-vine", melee], ["spiny-back-beetle", hybrid], ["soil-boar", melee],
-  ["vine-turtle", hybrid], ["shadow-weasel", melee], ["talon-owl", melee],
-  ["spring-keeper", melee], ["lantern-keeper", { role: "ranged", melee: false, ranged: true }],
-  ["old-garden-snail", melee], ["walking-forest", melee], ["white-paw", melee],
-  ["spiny-back-leader", hybrid]
-].map(([key, value]) => [key, Object.freeze({ ...value })])));
-
-function creatureAttackRole(species) {
-  return CREATURE_ATTACK_ROLES[species] || null;
-}
-
-function creatureAttackMode(agent, separation) {
-  const role = creatureAttackRole(agent.species);
-  if (!role || !Number.isFinite(separation) || separation < 0) return null;
-  if (role.melee && separation <= DNA_ACTION_RULES.meleeRange) return "melee";
-  if (role.ranged && separation <= DNA_ACTION_RULES.rangedRange) return "ranged";
-  return null;
-}
-
-return { CREATURE_ATTACK_ROLES, creatureAttackRole, creatureAttackMode };
-})();
 modules["server/combat.mjs"] = (() => {
 const { DNA_ACTION_RULES, dnaAttackMode, dnaProjectileDuration, dnaHealTarget, dnaHealAmount, dnaHealAllocations, dnaProjectileValid } = modules["server/dna-actions.mjs"];
 const { creatureAttackRole, creatureAttackMode } = modules["server/creature-attack-role.mjs"];
@@ -4800,6 +4800,23 @@ function drawCombatDodgeLabel(ctx, p, point, { width, height, vitals = [] } = {}
 }
 
 return { combatDodgePose, drawCombatDodgeTrails, drawCombatDodgeGhosts, drawCombatDodgeLabel };
+})();
+modules["client/unit-health-ring.mjs"] = (() => {
+function drawUnitHealthRing(context, health, maximum, x, y, radius, color) {
+  if (!Number.isFinite(health) || !Number.isFinite(maximum) || maximum <= 0 || health <= 0 || !Number.isFinite(radius) || radius <= 0) return false;
+  const ratio = Math.max(0, Math.min(1, health / maximum)), depth = radius * .327;
+  const thickness = Math.max(1, Math.min(6, radius * .064));
+  context.save(); context.lineCap = "round";
+  context.lineWidth = thickness + 2; context.strokeStyle = "#111b17e8";
+  context.beginPath(); context.ellipse(x, y, radius, depth, 0, 0, Math.PI * 2); context.stroke();
+  context.lineWidth = thickness; context.strokeStyle = "#485650";
+  context.beginPath(); context.ellipse(x, y, radius, depth, 0, 0, Math.PI * 2); context.stroke();
+  context.strokeStyle = color;
+  context.beginPath(); context.ellipse(x, y, radius, depth, 0, Math.PI / 2 - Math.PI * ratio, Math.PI / 2 + Math.PI * ratio); context.stroke();
+  context.restore(); return true;
+}
+
+return { drawUnitHealthRing };
 })();
 modules["client/bean-dominant-hop.mjs"] = (() => {
 const { unitDisplayAttributes } = modules["client/unit-display-appearance.mjs"];
@@ -12263,6 +12280,8 @@ return { SPROUT_ROOT_RIG };
 modules["client/sprout-roots.mjs"] = (() => {
 const { SPROUT_ROOT_RIG } = modules["client/sprout-root-rig.mjs"];
 
+const SPROUT_IDLE_SHRUG_DURATION_MS = Math.PI * 2 / 7.2 * 1000;
+
 function createSpriteContour(sprite) {
   const source = sprite.getContext("2d").getImageData(0, 0, sprite.width, sprite.height);
   const width = sprite.width + 2, height = sprite.height + 2, data = new Uint8Array(width * height);
@@ -12513,7 +12532,7 @@ function createSproutRoots(createSurface) {
 
 function sproutIdlePose(elapsedMs, height) {
   const phase = elapsedMs / 1000 % 6.8;
-  const shrugDuration = Math.PI * 2 / 7.2;
+  const shrugDuration = SPROUT_IDLE_SHRUG_DURATION_MS / 1000;
   const shrug = phase / shrugDuration;
   const body = shrug < 1 ? Math.sin(shrug * Math.PI) ** 2 : 0;
   let flap = shrug < 1 ? -Math.sin(shrug * Math.PI * 2) * .24 : 0;
@@ -12568,7 +12587,7 @@ function sproutBobOffset(id, now, height) {
     Math.sin(seconds * 6.8 + phase * .63) * .006);
 }
 
-return { createSpriteContour, sproutRootGeometry, createSproutRoots, sproutIdlePose, sproutJumpOffset, sproutBodyPose, sproutHeadPose, sproutBobOffset };
+return { SPROUT_IDLE_SHRUG_DURATION_MS, createSpriteContour, sproutRootGeometry, createSproutRoots, sproutIdlePose, sproutJumpOffset, sproutBodyPose, sproutHeadPose, sproutBobOffset };
 })();
 modules["client/combat-stage-bean-art.mjs"] = (() => {
 const { createSproutRoots, sproutRootGeometry } = modules["client/sprout-roots.mjs"];
@@ -17775,7 +17794,7 @@ const UNIT_APPEARANCE_ASSETS = Object.freeze({
       "walk": {
         "sourceId": "unit-appearance-v1-spore-00-neutral-v1",
         "image": "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/walk-v2.webp",
-        "imageHash": "54cb430a848400e1f6742a737f135467de1852600b8555e42ae16c484d351682",
+        "imageHash": "368c1bb19b3355d26bd0a156637ee75e3f6781a81df457b1a34a43611661da2d",
         "frameSize": 512,
         "columns": 4,
         "frameCount": 16,
@@ -17802,7 +17821,7 @@ const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "pivotY": 448,
         "cameraMapping": {
           "verified": true,
-          "sourceHash": "54cb430a848400e1f6742a737f135467de1852600b8555e42ae16c484d351682",
+          "sourceHash": "368c1bb19b3355d26bd0a156637ee75e3f6781a81df457b1a34a43611661da2d",
           "pixelsPerWorld": 1112.2889190188587,
           "scale": 0.4603120567375886,
           "offsetX": 138.1601134751773,
@@ -20887,6 +20906,7 @@ const { drawCombatStun } = modules["client/combat-stun-vfx.mjs"];
 const { drawSpeciesHeldHurt } = modules["client/species-held-hurt.mjs"];
 const { beanHeldHurtSource, drawBeanHeldHurt } = modules["client/bean-held-hurt.mjs"];
 const { combatDodgePose, drawCombatDodgeTrails, drawCombatDodgeGhosts, drawCombatDodgeLabel } = modules["client/combat-dodge-vfx.mjs"];
+const { drawUnitHealthRing } = modules["client/unit-health-ring.mjs"];
 const { createCombatStageAppearance } = modules["client/combat-stage-appearance.mjs"];
 const { attackAnimationElapsed } = modules["server/attack.mjs"];
 const { createCombatVfxCursor } = modules["client/combat-vfx-events.mjs"];
@@ -21116,9 +21136,8 @@ function createCombatStage(canvas) {
     if (evade) drawCombatDodgeTrails(context, evade);
     context.save(); context.translate(point.x, point.y);
     context.fillStyle = "#15261c55"; context.beginPath(); context.ellipse(0, 0, radiusX, radiusY, 0, 0, Math.PI * 2); context.fill();
-    context.strokeStyle = colors[index] + (alive ? "a6" : "45"); context.lineWidth = 2;
-    context.beginPath(); context.ellipse(0, 0, geometry?.groundRadiusX ? radiusX * 1.12 : width * .065 * shadowScale,
-      geometry?.groundRadiusY ? radiusY * 1.12 : height * .03 * shadowScale, 0, 0, Math.PI * 2); context.stroke();
+    drawUnitHealthRing(context, agent.health, agent.stats?.health, 0, 0,
+      Math.max(7, bodyDimensions(agent).width * 100 * formationScale(width, height) * .55), colors[index]);
     if (ended && alive) {
       context.fillStyle = colors[index] + "24";
       context.beginPath(); context.ellipse(0, -height * .18, width * .09, height * .3, 0, 0, Math.PI * 2); context.fill();
@@ -21161,8 +21180,6 @@ function createCombatStage(canvas) {
     if (currentTrial.agents.length > 2) {
       context.save(); context.font = '600 11px "Malgun Gothic", sans-serif'; context.textAlign = "center";
       context.fillStyle = colors[index]; context.fillText(agent.name, point.x, point.y + 16);
-      context.fillStyle = "#15261c"; context.fillRect(point.x - 22, point.y + 21, 44, 4);
-      context.fillStyle = colors[index]; context.fillRect(point.x - 22, point.y + 21, 44 * agent.health / agent.stats.health, 4);
       context.restore();
     }
     const dimensions = bodyDimensions(agent), cell = 100 * formationScale(width, height);
@@ -21233,9 +21250,8 @@ function createCombatStage(canvas) {
     const geometry = pose && imageFrameGeometry(pose.animation, pose.frame);
     const size = displaySize(agent, pose) * formationScale(width, height), shadowScale = size / Math.min(width * .34, height * .72, 290);
     context.save(); context.translate(point.x, point.y);
-    context.strokeStyle = colors[(agent.combat?.side ?? agent.side)]; context.lineWidth = 2;
-    context.beginPath(); context.ellipse(0, 0, geometry?.groundRadiusX ? geometry.groundRadiusX * size * 1.12 : width * .065 * shadowScale,
-      geometry?.groundRadiusY ? geometry.groundRadiusY * size * 1.12 : height * .03 * shadowScale, 0, 0, Math.PI * 2); context.stroke();
+    drawUnitHealthRing(context, agent.health, agent.stats?.health, 0, 0,
+      Math.max(7, bodyDimensions(agent).width * 100 * formationScale(width, height) * .55), colors[(agent.combat?.side ?? agent.side)]);
     const appearancePose = appearancePoses.get(String(agent.id));
     const appearanceDrawn = appearancePose && appearanceWorld.draw(context, agent, appearancePose, { x: 0, y: 0 },
       100 * formationScale(width, height), (agent.combat?.side ?? agent.side) === 1, window.devicePixelRatio || 1);

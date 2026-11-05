@@ -2,6 +2,7 @@ import { drawCombatStun } from "./combat-stun-vfx.mjs";
 import { drawSpeciesHeldHurt } from "./species-held-hurt.mjs";
 import { beanHeldHurtSource, drawBeanHeldHurt } from "./bean-held-hurt.mjs";
 import { combatDodgePose, drawCombatDodgeTrails, drawCombatDodgeGhosts, drawCombatDodgeLabel } from "./combat-dodge-vfx.mjs";
+import { drawUnitHealthRing } from "./unit-health-ring.mjs";
 import { createCombatStageAppearance } from "./combat-stage-appearance.mjs";
 import { attackAnimationElapsed } from "../server/attack.mjs";
 import { createCombatVfxCursor } from "./combat-vfx-events.mjs";
@@ -231,9 +232,8 @@ export function createCombatStage(canvas) {
     if (evade) drawCombatDodgeTrails(context, evade);
     context.save(); context.translate(point.x, point.y);
     context.fillStyle = "#15261c55"; context.beginPath(); context.ellipse(0, 0, radiusX, radiusY, 0, 0, Math.PI * 2); context.fill();
-    context.strokeStyle = colors[index] + (alive ? "a6" : "45"); context.lineWidth = 2;
-    context.beginPath(); context.ellipse(0, 0, geometry?.groundRadiusX ? radiusX * 1.12 : width * .065 * shadowScale,
-      geometry?.groundRadiusY ? radiusY * 1.12 : height * .03 * shadowScale, 0, 0, Math.PI * 2); context.stroke();
+    drawUnitHealthRing(context, agent.health, agent.stats?.health, 0, 0,
+      Math.max(7, bodyDimensions(agent).width * 100 * formationScale(width, height) * .55), colors[index]);
     if (ended && alive) {
       context.fillStyle = colors[index] + "24";
       context.beginPath(); context.ellipse(0, -height * .18, width * .09, height * .3, 0, 0, Math.PI * 2); context.fill();
@@ -276,8 +276,6 @@ export function createCombatStage(canvas) {
     if (currentTrial.agents.length > 2) {
       context.save(); context.font = '600 11px "Malgun Gothic", sans-serif'; context.textAlign = "center";
       context.fillStyle = colors[index]; context.fillText(agent.name, point.x, point.y + 16);
-      context.fillStyle = "#15261c"; context.fillRect(point.x - 22, point.y + 21, 44, 4);
-      context.fillStyle = colors[index]; context.fillRect(point.x - 22, point.y + 21, 44 * agent.health / agent.stats.health, 4);
       context.restore();
     }
     const dimensions = bodyDimensions(agent), cell = 100 * formationScale(width, height);
@@ -348,9 +346,8 @@ export function createCombatStage(canvas) {
     const geometry = pose && imageFrameGeometry(pose.animation, pose.frame);
     const size = displaySize(agent, pose) * formationScale(width, height), shadowScale = size / Math.min(width * .34, height * .72, 290);
     context.save(); context.translate(point.x, point.y);
-    context.strokeStyle = colors[(agent.combat?.side ?? agent.side)]; context.lineWidth = 2;
-    context.beginPath(); context.ellipse(0, 0, geometry?.groundRadiusX ? geometry.groundRadiusX * size * 1.12 : width * .065 * shadowScale,
-      geometry?.groundRadiusY ? geometry.groundRadiusY * size * 1.12 : height * .03 * shadowScale, 0, 0, Math.PI * 2); context.stroke();
+    drawUnitHealthRing(context, agent.health, agent.stats?.health, 0, 0,
+      Math.max(7, bodyDimensions(agent).width * 100 * formationScale(width, height) * .55), colors[(agent.combat?.side ?? agent.side)]);
     const appearancePose = appearancePoses.get(String(agent.id));
     const appearanceDrawn = appearancePose && appearanceWorld.draw(context, agent, appearancePose, { x: 0, y: 0 },
       100 * formationScale(width, height), (agent.combat?.side ?? agent.side) === 1, window.devicePixelRatio || 1);

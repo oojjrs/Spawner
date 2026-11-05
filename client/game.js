@@ -5317,29 +5317,10 @@
     function drawAgentHealthRing(agent, point, radius) {
       const maximum = agent.stats?.health;
       if (!(maximum > 0) || !Number.isFinite(maximum) || !Number.isFinite(agent.health)) return;
-      const ratio = clamp(agent.health / maximum, 0, 1);
-      const depth = radius * .327;
+      const ratio = clamp(agent.health / maximum, 0, 1), depth = radius * .327;
       if (state.camera.zoom < 8 || ratio <= 0 || ratio >= 1 || point.x + radius < 0 || point.x - radius > viewport.width ||
           point.y + depth < 0 || point.y - depth > viewport.height) return;
-      const thickness = clamp(radius * .064, 1, 6);
-      ctx.save();
-      ctx.lineCap = "round";
-      ctx.lineWidth = thickness + 2;
-      ctx.strokeStyle = "#111b17e8";
-      ctx.beginPath();
-      ctx.ellipse(point.x, point.y, radius, depth, 0, 0, Math.PI * 2);
-      ctx.stroke();
-      ctx.lineWidth = thickness;
-      ctx.strokeStyle = "#485650";
-      ctx.beginPath();
-      ctx.ellipse(point.x, point.y, radius, depth, 0, 0, Math.PI * 2);
-      ctx.stroke();
-      ctx.strokeStyle = "#eee1c8";
-      ctx.beginPath();
-      ctx.ellipse(point.x, point.y, radius, depth, 0,
-        Math.PI / 2 - Math.PI * ratio, Math.PI / 2 + Math.PI * ratio);
-      ctx.stroke();
-      ctx.restore();
+      Spawner.drawUnitHealthRing(ctx, agent.health, maximum, point.x, point.y, radius, "#eee1c8");
     }
 
     function drawAgentBody(now, agent) {
@@ -8420,6 +8401,8 @@
         const bodyY = y - point.height * .5;
         context.save();
         context.fillStyle = "#13251e3d"; context.beginPath(); context.ellipse(x, y, Math.max(4, point.width * .28), Math.max(2, point.height * .035), 0, 0, Math.PI * 2); context.fill();
+        Spawner.drawUnitHealthRing(context, agent.health, agent.stats?.health, x, y,
+          Math.max(7, point.width * .55), agent.combat.side ? "#e18c82" : "#83d6c1");
         const frozen = hit && age >= 0 && age < .055;
         const visual = { ...agent, facing, hurtStartedAt: Number.isFinite(agent.hurtStartedAt) ? agent.hurtStartedAt + (frozen && (agent.tribe || "bean") !== "bean" && !Spawner.speciesHeldHurtSource?.(agent) ? age : 0) : agent.hurtStartedAt,
           combat: { ...agent.combat, side: facing > 0 ? 1 : 0 }, attack: attack ? { ...attack, directionX: facing,
@@ -8446,22 +8429,6 @@
         // Persistent stun reads current status, never a replayed impact event.
         Spawner.drawCombatStun?.(context, agent, { ...point, x, y }, state.simSeconds,
           { width, height, reducedMotion: idleMotion.matches });
-        const barWidth = clamp(point.width * .6, 32, 100), barY = y + 8;
-        context.fillStyle = "#182323"; context.fillRect(x - barWidth / 2, barY, barWidth, 5);
-        context.fillStyle = agent.combat.side ? "#e18c82" : "#83d6c1";
-        context.fillRect(x - barWidth / 2, barY, barWidth * clamp(agent.health / (agent.stats?.health || 100), 0, 1), 5);
-        if (String(agent.id) === combatSelected) {
-          context.strokeStyle = "#ffe7a5"; context.lineWidth = 2; context.beginPath();
-          context.ellipse(x, y, Math.max(7, point.width * .55), Math.max(3, point.height * .055), 0, 0, Math.PI * 2); context.stroke();
-        }
-        if (attack && state.simSeconds < attack.hitAt) {
-          const progress = clamp((state.simSeconds - attack.startedAt) / (attack.hitAt - attack.startedAt), 0, 1);
-          context.strokeStyle = primary === "piercing" ? "#f0b86b" : primary === "carapace" ? "#8edbe1" : "#e7e3b6";
-          context.lineWidth = attack.heavy ? 4 : 2; context.beginPath();
-          if (primary === "piercing") { context.moveTo(x, bodyY); context.lineTo(x + facing * point.width * .4 * progress, bodyY); }
-          else context.arc(x, bodyY, point.width * .5, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * progress);
-          context.stroke();
-        }
         // A hidden feet trait can still evade on any dominant silhouette. Use
         // the laboratory's existing semantic label, not a hit or shield burst.
         // Read all current cues so a simultaneous received hit keeps its recoil.
@@ -8523,8 +8490,9 @@
         context.save(); context.globalAlpha = 1 - age / .25;
         context.strokeStyle = defense ? "#a6e4fa" : "#ffe1a0";
         context.lineWidth = lineWidth; context.beginPath();
-        if (primary === "piercing") { context.moveTo(x - 22, bodyY); context.lineTo(x + 22, bodyY); }
-        else context.arc(x, bodyY, 14 + age * 30, 0, primary === "carapace" ? Math.PI * 2 : Math.PI);
+        const reach = 10 + age * 18;
+        context.moveTo(x - reach, bodyY + reach); context.lineTo(x + reach, bodyY - reach);
+        context.moveTo(x - reach * .5, bodyY - reach * .75); context.lineTo(x + reach * .5, bodyY + reach * .75);
         context.stroke(); context.restore();
       }
       for (const command of defenseCommands) if (!Spawner.drawDetailDefenseEffect(context, command, defenseImages.get(command.eventId), { reducedMotion: idleMotion.matches }))
