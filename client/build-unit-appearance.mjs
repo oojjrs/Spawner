@@ -51,7 +51,7 @@ for (const tribe of UNIT_APPEARANCE_TRIBES) for (let mask = 0; mask < 32; mask++
       source.camera?.pixelsPerWorld !== 512 || !source.coreReference?.landmarks || !["pending", "approved", "withdrawn", "existing-reference"].includes(source.approvalState))
     throw new Error(`APPEARANCE SOURCE CONTRACT MISMATCH : ${key}`);
   if (hashFile(source.image) !== source.sourceHash) throw new Error(`APPEARANCE SOURCE HASH MISMATCH : ${key}`);
-  if (source.approvalState === "approved" && (!source.approvalRef?.callId || !source.approvalRef?.sourceThread)) throw new Error(`APPEARANCE APPROVAL MISSING : ${key}`);
+  if (source.approvalState === "approved" && (!(source.approvalRef?.callId || source.approvalRef?.messageId) || !source.approvalRef?.sourceThread)) throw new Error(`APPEARANCE APPROVAL MISSING : ${key}`);
   const sourceDimensions = imageDimensions(assetPath(source.image));
   if (sourceDimensions[0] !== 512 || sourceDimensions[1] !== 512) throw new Error(`APPEARANCE SOURCE FRAME MISMATCH : ${key}`);
   if (source.provenance?.kind === "existing-original") {

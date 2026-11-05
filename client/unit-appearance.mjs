@@ -21,7 +21,7 @@ export function unitAppearanceDefinition(tribe, mask) {
 }
 
 function sourceApproved(source) {
-  return source?.approvalState === "approved" && !!source.approvalRef?.callId && !!source.approvalRef?.sourceThread ||
+  return source?.approvalState === "approved" && !!(source.approvalRef?.callId || source.approvalRef?.messageId) && !!source.approvalRef?.sourceThread ||
     source?.approvalState === "existing-reference" && source.mask === 0 && source.provenance?.kind === "existing-original" &&
     !!source.provenance.sourceHash && !!source.provenance.transform &&
     (!!source.provenance.sourceImage && !!source.provenance.reuseDirective || source.provenance.referenceVerified === true && source.provenance.reuseAuthorized === true);

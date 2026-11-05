@@ -2,8 +2,16 @@
   "tribe": "spore",
   "mask": 10,
   "sourceId": "unit-appearance-v1-spore-0a-neutral-v1",
-  "approvalState": "pending",
-  "approvalRef": null,
+  "approvalState": "approved",
+  "approvalRef": {
+    "sourceThread": "01a198e4-4d8c-7250-9b57-bef4b30f603f",
+    "messageId": "Sentinel_d9eacf0a67648191b894e7d6f333b47f",
+    "speaker": "user",
+    "text": "포자버섯 원화는 다 오케이",
+    "scope": "reviewed-neutral-source-art-only",
+    "sourceId": "unit-appearance-v1-spore-0a-neutral-v1",
+    "sourceHash": "adb0d16c936b265cc96fb4b528955b37b4d6b36b4b2a57ee84f185a351435689"
+  },
   "image": "DesignAssets/Animations/UnitAppearanceV1/spore/0a/Source/neutral.png",
   "frameWidth": 512,
   "frameHeight": 512,
