@@ -1,3 +1,19 @@
+## 자원 매장량 20배 구현·선별 커밋 준비 · 01a1ad5a
+
+- 기록 ID: resource-amount-20x-freeze-20261106-01a1ad5a. 기록 시각: 2026-11-06T05:27:12+09:00. 기록자·구현/검수/원격 통합 판단 Codex /root, 매장량 20배·기획서/게임 반영 및 push 결정 사용자. 출처 현재 채팅 01a1ad5a-6af9-7001-a8af-1752c038a4d2, H:/Spawner Windows PowerShell. 원 발언 시각·항목 ID·PC 식별 정보 불명.
+- 실제 변경은 최종 자원 생성 push 두 곳의 amount에 20을 곱하는 것이다. 목재·비옥토·자갈·이슬의 지점별 토양/습도 차이를 유지하고 네 자원 모두 기존 최종량의 정확히 20배로 한다. Design.html 내장 모델, runtime 브라우저·게임 워커·판단 워커에도 같은 두 수식을 투영했다. 새 문서 문구는 추가하지 않았다.
+- 실제 도구 검수: 동일한 32×32 지형·토양 입력으로 원본과 서버/기획서/브라우저/게임 워커/판단 워커의 실제 생성 함수를 비교했다. 다섯 모델 모두 네 자원 전체 지점의 수량이 원본×20이며 지점 좌표·타입·지형은 동일하다. 매장량 지도 데이터도 ×20이고 runtime 전체 구문을 확인했다. 이는 작은 결정적 생성 입력 검수이며 전체 플레이 결과는 주장하지 않는다.
+- 원격 동시 작업 통합: origin/main의 fe3ba35 솜양 승인 아트와 로컬 전투 병합 이력이 갈라져 --rebase-merges로 통합했다. 원래 병합의 Attribute/build/runtime/Combat 해석을 보존하고 원격 메모리 절을 함께 보존했다. refs/codex-backup/resource-amount-20x-20261106-01a1ad5a 및 stash의 보존본을 유지한다. 9개 미커밋/미추적 경로는 원본 바이트(메모리는 원격 절 추가만)로 복원 확인했다.
+- 선별 범위는 server/terrain-resources.mjs, Design.html, client/runtime.js의 이번 수식과 본 채팅 관련 메모리 2절이다. 기존 기획서 중립 수치/전투/체력링/다른 메모리 변경은 작업파일에 보존하고 이번 index에서 제외한다. 검수 근거는 $Trash/resource-amount-20x-20261106-01a1ad5a/validation.json, restoration.json, staged.diff와 manifest.json에 남긴다. 최종 형식·staged 확인과 커밋·push 및 원격 readback은 다음 마감 단계이며 아직 성공을 선기록하지 않는다.
+
+## 자원 지점 매장량 20배 상향 · 01a1ad5a 현재 진행
+
+- 기록 ID: resource-amount-20x-start-20261106-01a1ad5a. 기록 시각: 2026-11-06T05:19:37+09:00. 기록자·구현 판단 Codex /root, 결정·기획서/게임 반영 및 push 승인 사용자. 출처 현재 채팅 01a1ad5a-6af9-7001-a8af-1752c038a4d2, H:/Spawner Windows PowerShell. 원 발언 시각·턴/항목 ID·PC 식별 정보는 제공되지 않아 불명.
+- 사용자 요청은 자원 수량 약 20배 상향을 기획서와 게임에 적용하고 push하는 것이다. 추가 답변으로 일꾼 1회 채집량이 아니라 자원 지점의 매장량 20배임을 명시 확정했다.
+- 도구 확인: 현재 39세대 맵은 populateFormedResources가 토양·습도 기반으로 네 자원 수량을 만든다. RESOURCE_ECONOMY의 12/30/12/1은 구형 경로이며 현재 수량으로 오인한 최초 안내를 채팅에서 바로잡았다.
+- 구현 범위: server/terrain-resources.mjs의 최종 생성 매장량만 20배로 하고 Design.html 내장 맵 모델 및 client/runtime.js의 브라우저/워커 사본에 동일 투영한다. 기존 지점 배치·채집시간·운반량·문서 문구는 유지한다. 이번 요청은 새 자원 생성 규칙 수정이며 기존 저장 게임의 잔량을 별도로 마이그레이션하지 않는다.
+- 기존/동시 전투·편집기·기획서·메모리 변경은 보호하고 이번 2개 코드 변경과 관련 메모리 절만 분리 커밋한다. 전용 원격은 origin https://github.com/oojjrs/Spawner, 시작 체크아웃 H:/Spawner main이다. 연결된 GitHub Projects v2 조회 결과는 빈 목록이다. push 전 origin/main fetch·관계 확인 및 push 후 원격 readback을 수행한다. 아직 구현/검증/커밋/push 완료 전이다.
+
 ## neutral-attack-role-commit-request-20261106-01a1a0bf
 
 - 기록 시각: 2026-11-06T05:24:23+09:00. 중립 공격 역할 수정 메모리 정리·로컬 커밋 요청 및 승인 사용자, 범위 재조정·Git 판단 Codex 메인. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d의 「이번 중립 유닛 공격 역할 수정도 메모리에 정리하고 커밋해」. 원발언 정확시각·항목 ID 미확인.

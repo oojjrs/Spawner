@@ -116,7 +116,7 @@ export function populateFormedResources(world) {
   const occupied=new Uint8Array(length);
   for(let index=0;index<length;index++)if(h.forestMask[index]){
     const amount=Math.round(30+fields.soilMoisture[index]*35+fields.soilDepth[index]*20);
-    world.resources.push([index%size,Math.floor(index/size),amount,"tree"]);occupied[index]=1;
+    world.resources.push([index%size,Math.floor(index/size),amount*20,"tree"]);occupied[index]=1;
   }
   const definitions=[["clay",.11,12,28],["pebbles",1.1,12,42],["dew",.11,3,10]];
   for(const[order,[key,intensity,base,richness]]of definitions.entries()){
@@ -129,7 +129,7 @@ export function populateFormedResources(world) {
       const x=index%size,y=Math.floor(index/size);if(draw(x,y)>=chance)continue;
       let amount=Math.round(base+richness*suitability[index]*(.5+landscapeHash(x,y,seed+3089+order*43)));
       if(terrain[index]===9){if(key==="dew")amount=Math.round(24+36*fields.soilMoisture[index]+20*landscapeHash(x,y,seed+3359));if(key==="clay")amount*=2;}
-      world.resources.push([x,y,amount,key]);occupied[index]=1;
+      world.resources.push([x,y,amount*20,key]);occupied[index]=1;
     }
     record(h,"resource:"+key+":suitability",["resources"],suitability,{resource:key,stage:"intermediate",minimum:0});
     record(h,"resource:"+key+":draw",["resources"],null,{resource:key,stage:"original",sample:draw,minimum:0,maximum:1});
