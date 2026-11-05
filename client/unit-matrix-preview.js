@@ -156,15 +156,6 @@
       }
     }
   }
-  const namedUnits = new Map([...document.querySelectorAll('.unit-matrix tr[id^="unit-"]')].map(row => {
-    const raw = row.id.slice(5);
-    return [row.querySelector('th').textContent.trim(), units[aliases[raw] || raw]];
-  }));
-  for (const row of document.querySelectorAll('#unit-base-stats tbody tr')) {
-    const header = row.querySelector('th'), unit = namedUnits.get(header?.dataset.sort);
-    const link = header?.querySelector('a');
-    if (unit && link) install(link, unit, unit.base, 'base', false);
-  }
   for (const link of document.querySelectorAll('#codex-attributes [data-combat-clip]')) {
     const tribe = link.dataset.tribe, key = tribe === 'sprout' ? 'bean' : tribe;
     const animation = attributes[tribe + '/' + link.dataset.variant]?.[link.dataset.action];

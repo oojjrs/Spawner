@@ -160,6 +160,33 @@
 - bean01 기존 기본 공격 기반 자체 좌표 전사 대표 시안 제작. 웅크림·잎·발은 재현되나 측면/감은 눈 원화 정보가 없어 기존 기본공격 품질 미달, 사용자에게 비교 영상을 보여주었고 제품 적용하지 않았다. 이미지 생성 차단 상태이며 차단 후 유사 생성물은 저장소 밖에 격리, 사용·공유·커밋 금지. 상세 시안 tools/bean-combat-motion-20261105/source-deformation-transfer/.
 - bean 00–1e 31조합의 attack/block/parry 전신 rigid 시안 93개를 tools/bean-combat-motion-20261105/에 만들었으나 시각 검토상 공격감이 부족해 완성으로 취급하지 않는다. 대표 조합의 동작을 개선 중이며 미승인·게임 미연결이다.
 - DNA 최신 논의: 1레벨 구조 및 기관 1회는 미확정. 운반·채집속도·이속은 서로 다른 병목에 작용하며 근접/원거리 강화 해금 등급은 현재 다르다. 제품 수치나 형태는 변경하지 않았다.
+## 유닛 페이지 레이아웃·스탯 정리 로컬 커밋 승인 · 01a1a0bf
+
+- 기록 ID: unit-page-layout-commit-request-20261105-205209-01a1a0bf. 기록 시각 2026-11-05T20:52:09+09:00. 기록·범위분리 현재 메인 Codex, 메모리 정리·로컬 커밋 승인 사용자. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, H:/Spawner Windows PowerShell. 원발언 정확시각·항목 ID 불명.
+- 승인 범위: 이번 Design.html의 유닛 미리보기64px·표폭864px·헤더/세로정렬·스탯중립19행 삭제와 client/unit-matrix-preview.js의 stats전용canvas설치 제거, 이 작업 관련 메모리만 같은 커밋에 포함한다. 스탯은 새싹콩/포자버섯/몽돌/샘방울4행이며 애니메이션23종/물리scale/정렬/확대를 유지한다. 앞선 완료·start·header교정 기록과 이번 승인을 원자적으로 저장한다.
+- 이전 실제PC/390화면·숫자오름내림·512확대/닫기·가시20panel검수와 최종형식성공은 소스hash가 같을 때 재사용한다. 새 테스트/브라우저를 커밋 때문에 반복하지 않는다. 다른 채팅의 메모리·코드·인덱스는 보존한다. 같은origin oojjrs/Spawner의 연결Project0 확인을 재사용한다. 푸시·배포는 이번 승인에 없다. 커밋 성공은 실행 후 확인하며 선기록하지 않는다.
+
+## 유닛 페이지 레이아웃·4종족 스탯 정리 완료 · 01a1a0bf 현재 요약
+
+- 기록 ID: unit-page-layout-complete-20261105-204758-01a1a0bf. 기록·최종 확인 시각: 2026-11-05T20:47:58+09:00. 기록·구현·화면 검수 현재 메인 Codex, 문제 제기·플레이어블 스탯 한정 결정 사용자. 출처 현재 채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, H:/Spawner Windows PowerShell. 원발언 정확 시각·항목 ID 불명.
+- 최종 요구 반영: Design 유닛 스탯 표에서 중립19행을 삭제해 새싹콩·포자버섯·몽돌·샘방울만 남겼다. 기존 숫자·정렬·이미지 원본 링크는 유지한다. 애니메이션 표는23종 그대로다. 이전23종 스탯표 범위를 최신4종족 요구로 대체하며 과거 승인·실행 이력은 보존한다.
+- 원인·수정:256px 미리보기 CSS가 표 최소폭3424px·스탯 행277px를 만들었다. 유닛 표의 표시 크기를64px·이름96+행동12×64=864px로 바꾸고, stats용 물리canvas 설치를 제거해 기존64px 식별 이미지를 사용한다. 스탯 첫 열88/min800·숫자 세로중앙으로 행85px가 됐다. 내부256 논리좌표·종별물리배율·원화·피벗은 바꾸지 않았다. overflow-x:auto 표 조상 안의 sticky header top92px도0으로 교정해 첫행 아래로 밀리던 열 제목을 정상화했다.
+- 실제 검수: 격리 headless Edge가 실제 file:///H:/Spawner/Design.html#codex-units를1440×1000·390×1000으로 로드했다. 두 폭 모두 stats4행·matrix23행/13열·preview64×64, 문서 가로넘침0, 세로정렬middle, PC header bottom=첫row top590.953125였다. before/after23종 idle scale목록 동일, 공격력 오름18.3/18.65/19/19.7 및 내림19.7/19/18.65/18.3, 확대512×512와Escape닫기 통과했다. 이후 좁은화면 가시20panel의 실제ready·frame·backing>1 및assetfail0/JSerror0을 확인해 단순resize 직후 캡처의 일시적 빈칸과 구분했다.
+- 직접 확인·근거: 메인이 변경 전 PC와 좁은화면, 최종PC stats/matrix와390 stats/matrix-ready PNG를 직접 읽었다. literal $Trash/unit-page-layout-20261105/{before.json,after.json,mobile-visible.json,changes.json,Design.before.html,unit-matrix-preview.before.js,after-1440-stats.png,after-390-stats.png,after-390-matrix-ready.png}에 원본/수치/실제 캡처를 남겼다. 최종render 전후 Design SHA beb7b56a9a3fe4ae51c9ae49d9a329f36f699bed38dc87d41ca587fb02518ecb,helper SHA bd43940e7a575fb72b91889a60c37b75589959fc89c2b6fbf396785db372db05 불변이다. 전 동작·모든DNA·실게임 전투를 다시 검수했다는 주장이 아니다.
+- 최종 범위·상태: Design.html 관련CSS/스탯19행, client/unit-matrix-preview.js의 stats전용 설치 제거, 본 메모리만 수정했다. 새 보이는 문구·모델/자산·다른 페이지 구조를 추가하지 않았다. 이번 수정은 미스테이징·미커밋이며 푸시/배포도 실행하지 않는다. start/header 교정의 진행 상태를 완료로 갱신한다. 마지막 공유형식·scoped diff 결과는 뒤의 실제 도구 근거로 확인하고 성공한 렌더는 반복하지 않는다.
+
+## 유닛 표 헤더·세로 정렬 교정 판단 · 01a1a0bf
+
+- 기록 ID: unit-page-header-fix-20261105-204443-01a1a0bf. 기록 시각 2026-11-05T20:44:43+09:00. 판단·실행 메인 Codex. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, H:/Spawner Windows. 사용자 원발언 시각 불명.
+- 실제 변경 전 PC·390px에서 스탯23행/행277px·미리보기256px를 확인했다. 64px 표시/스탯4행 교정 후 행85px·물리scale목록동일·정렬/확대/JS오류0을 확인했으나, PC 실제 이미지에서 애니메이션 열 제목이 첫 행 아래로 내려간 추가 문제를 관찰했다.
+- 같은 CSS에서 overflow-x:auto 조상의 sticky th에 viewport용 top92px를 적용한 것이 헤더를 표 안에서 내리는 원인으로 판단하여 top0으로 교정한다. 실제 열은 이름1+행동12개이므로 최소폭은96+12×64=864px다. 스탯 숫자는 이미지 행 중앙에 맞춘다. 추가 제품 문구 없이 같은 유닛 페이지 레이아웃 범위에서 적용 후 헤더와 첫 행 좌표를 다시 확인한다.
+
+## 유닛 페이지 축소·플레이어블 스탯 한정 착수 · 01a1a0bf 현재 요약
+
+- 기록 ID: unit-page-layout-start-20261105-203829-01a1a0bf. 기록 시각: 2026-11-05T20:38:29+09:00. 기록·실행 현재 메인 Codex, 요구·표 범위 결정 사용자. 출처 현재 채팅 01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d, H:/Spawner Windows PowerShell. 원발언 정확 시각·항목 ID 불명.
+- 사용자 요구: 유닛 페이지 레이아웃 깨짐을 확인하고, 스탯 표는 플레이어블 4종족만 남겨 중립 19종을 삭제한다. 후속 사용자 판단은 유닛 이미지가 과도하게 커진 것이 원인 같다는 것이다. 이전 전체 23종 스탯 행 범위는 이 최신 요구로 대체하며 애니메이션 표의 중립 행 삭제로 확대하지 않는다.
+- 현재 소스 확인: Design의 유닛 미리보기 CSS가 256×256, 애니메이션 표가3424px, 스탯 첫 열272px·canvas256px이다. 개선은 기존64px 표시로 되돌리고 내부256 렌더·공통 물리 배율은 유지한다. 스탯은 원래64px 식별 이미지·4개 행으로 복구하고 정렬/확대 연결을 유지한다. 보이는 새 문구를 추가하지 않는다.
+- 범위: Design.html 관련 CSS/스탯19행, client/unit-matrix-preview.js의 스탯 전용 물리 canvas 설치 제거와 메모리. 실제 PC·좁은 화면을 격리 headless로 확인한다. Git 작업·푸시·배포는 이번 요청으로 추가 승인되지 않았다. 기존 코드/인덱스와 메모리 기록을 보존한다.
 
 ## DNA 기관1회·직업별강화 논의 중단 인계 · 01a1a10e 현재 요약
 
