@@ -1,4 +1,4 @@
-import { CREATURE_RANGED_EFFECTS, CREATURE_RANGED_EFFECT_ASSETS, creatureRangedEffectCommand } from "./creature-ranged-vfx.mjs";
+import { CREATURE_RANGED_EFFECTS, CREATURE_RANGED_EFFECT_ASSETS, creatureRangedEffectCommand, creatureRangedBodyCanvas, creatureRangedFlightPoint } from "./creature-ranged-vfx.mjs";
 import { CREATURE_RANGED_ANIMATIONS, creatureRangedOutlet } from "./creature-ranged.mjs";
 import { unitRangedProjectile } from "./unit-ranged.mjs";
 
@@ -39,7 +39,7 @@ export function createDetailCombatVfx() {
   const directDamage = new Map();
   let viewScope;
   function clearView() { anchors.clear(); flightAnchors.clear(); viewScope = undefined; }
-  let projectiles = [];
+  let projectiles = [], lastRetainedEvents = [];
   function consume(frame, time) {
     if (frame.reset) { impacts.clear(); vitals.clear(); directDamage.clear(); deaths.clear(); defenses.clear(); clearView(); }
     for (const cue of frame.started || []) if (cue.channel === "defense" && DETAIL_DEFENSE_VFX[cue.kind]) {
@@ -91,6 +91,7 @@ export function createDetailCombatVfx() {
         sourceId: cue.sourceId != null && String(cue.sourceId) === String(current.sourceId) ? cue.sourceId : null });
     }
     projectiles = frame.projectiles || [];
+    lastRetainedEvents = frame.retainedEvents || [];
     const activeFlights = new Set(projectiles.map(shot => shot.id));
     for (const id of flightAnchors.keys()) if (!activeFlights.has(id)) flightAnchors.delete(id);
   }
@@ -101,7 +102,7 @@ export function createDetailCombatVfx() {
     for (const [id, anchor] of anchors) if (time < anchor.at || time - anchor.at >= .85) anchors.delete(id);
     for (const agent of agents) {
       const id = String(agent.id), point = positions.get(id);
-      if (point) anchors.set(id, { at: time, snapshotAt, point: { ...point }, width, height, clip: projectileClip(agent) });
+      if (point) anchors.set(id, { at: time, snapshotAt, point: { ...point }, width, height, clip: projectileClip(agent), bodyCanvas: creatureRangedBodyCanvas(agent) });
     }
   }
   function recipientPoint(id, positions, time, view, retainDeath = true) {
@@ -134,7 +135,7 @@ export function createDetailCombatVfx() {
         // The server supplies timing, not modal coordinates. Keep the first
         // visible outlet, even for a late snapshot; never invent an unseen pose.
         // Later recoil, recovery and other shots must not drag a fired shot.
-        launch = { clip, x: from.x / width, y: from.y / height,
+        launch = { clip, bodyCanvas: creatureRangedBodyCanvas(source), x: from.x / width, y: from.y / height,
           // Only approved ranged bodies have a measured outlet. Other forms
           // use their displayed body centre without inventing a muzzle pose.
           offsetX: neutral ? neutral.x : sprite ? facing * (sprite.outletX - 256) * sprite.sourceScale / 100 : 0,
@@ -149,9 +150,10 @@ export function createDetailCombatVfx() {
       if (launch.clip.flightAnchor) {
         const identity = { eventId: shot.id, projectileId: shot.projectileId, sourceId: shot.sourceId,
           targetId: shot.targetId, launchedAt: shot.launchedAt, arrivesAt: shot.arrivesAt };
+        const bodyCanvas = launch.bodyCanvas * cell;
+        const path = creatureRangedFlightPoint(launch.clip, { x: startX, y: startY }, { x: target.x, y: endY }, shot.progress, bodyCanvas);
         const flight = creatureRangedEffectCommand(launch.clip, "flight", {
-          x: startX + (target.x-startX)*shot.progress, y: startY + (endY-startY)*shot.progress,
-          size: size/.85, angle, age: shot.age ?? time-shot.launchedAt, muzzle: { x: startX, y: startY } });
+          ...path, size: launch.clip.bodyCanvas ? bodyCanvas : size/.85, age: shot.age ?? time-shot.launchedAt, muzzle: { x: startX, y: startY } });
         const release = creatureRangedEffectCommand(launch.clip, "release", {
           x: startX, y: startY, size: size/.85, angle, age: shot.age ?? time-shot.launchedAt });
         if (flight) result.push({ ...flight, ...identity });
@@ -171,12 +173,15 @@ export function createDetailCombatVfx() {
       // not another projectile landing. Reuse the approved general hit only.
       const projectileImpact = cue.mode === "ranged" && ["hit", "critical", "followup"].includes(cue.kind);
       const sourceClip = projectileImpact && (projectileClip(source) || anchors.get(String(cue.sourceId))?.clip);
-      const clip = sourceClip?.image ? sourceClip : DETAIL_COMBAT_VFX.hit;
+      // A residual block number is not approval for a projectile explosion.
+      if (sourceClip?.bodyCanvas && ((defenses.has(cue.eventId)) ||
+          (lastRetainedEvents || []).some(event => event.id === cue.eventId && ["block","parry","dodge"].includes(event.kind)))) continue;
+      const clip = sourceClip?.image && sourceClip.frames.length ? sourceClip : DETAIL_COMBAT_VFX.hit;
       if (clip.flightAnchor) {
         const from = positions.get(String(cue.sourceId)) || anchors.get(String(cue.sourceId))?.point;
         const angle = from ? Math.atan2(point.y-point.height*.5-(from.y-from.height*.5), point.x-from.x) : Math.PI;
         const impact = creatureRangedEffectCommand(clip, "impact", { x: point.x, y: point.y-point.height*.5,
-          size: Math.min(444, Math.max(point.height,point.width)) * (cue.kind === "critical" ? 1.15 : 1),
+          size: clip.bodyCanvas ? (source ? creatureRangedBodyCanvas(source) : anchors.get(String(cue.sourceId))?.bodyCanvas || 0)*cell : Math.min(444, Math.max(point.height,point.width)) * (cue.kind === "critical" ? 1.15 : 1),
           angle, age: time-cue.at });
         if (impact) result.push({ ...impact, eventId: cue.eventId, sourceId: cue.sourceId,
           targetId: cue.targetId, eventAt: cue.eventAt ?? cue.at, amount: cue.amount });
@@ -321,7 +326,9 @@ export function drawDetailVitalEffect(context, command, { width, height, reduced
 }
 export function drawDetailVfxCell(context, image, command) {
   if (!image?.complete || !image.naturalWidth) return false;
-  const cell = image.naturalWidth / 4;
+  const columns = command.columns || 4, cell = image.naturalWidth / columns;
+  const sourceHeight = columns === 1 ? image.naturalHeight : cell;
+  const width = command.width || command.size, height = command.height || command.size;
   context.save();
   if (command.muzzleClip) {
     const muzzle = command.muzzleClip;
@@ -330,8 +337,9 @@ export function drawDetailVfxCell(context, image, command) {
     context.rotate(-muzzle.angle); context.translate(-muzzle.x,-muzzle.y);
   }
   context.translate(command.x, command.y); context.rotate(command.angle);
-  context.drawImage(image, command.frame % 4 * cell, Math.floor(command.frame / 4) * cell, cell, cell,
-    -command.size / 2, -command.size / 2, command.size, command.size);
+  context.globalAlpha *= command.alpha ?? 1;
+  context.drawImage(image, command.frame % columns * cell, Math.floor(command.frame / columns) * cell, cell, sourceHeight,
+    -width / 2, -height / 2, width, height);
   context.restore(); return true;
 }
 

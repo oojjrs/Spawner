@@ -1,7 +1,7 @@
 {
   "species": "vine-turtle",
   "action": "back-plant-seed-launch",
-  "status": "approved-body-integrated",
+  "status": "approved-body-and-effects-integrated",
   "designRevision": "011bbd7b",
   "designIntent": "\uacb8\uc6a9 / \ub192\uc740 \uc0dd\uc874\ub825\uacfc \ub454\ud55c \ub3d9\uc791",
   "attackMethod": "User-requested back-plant firing candidate. Temporary leaf funnel and seed projectile are artist proposals.",
@@ -247,11 +247,11 @@
   ],
   "generationTool": "built-in image_gen",
   "method": "Six newly painted full-body intermediate cels, exact approved neutral endpoints. Single common uniform scale and shell/ground translation registration only; no mesh deformation, crossfade, synthesized inbetween, or melee reuse.",
-  "integration": "Production maps each authoritative launchedAt/shotLaunches to the release cel. Existing melee, gameplay and audio remain unchanged. Only the body is approved; the existing generic flight and hit remain in use.",
+  "integration": "Approved body and projectile. Authoritative launch, arrival, speed, damage and sound are unchanged. Static enlarged projectile only; no separate impact artwork was approved. Existing impact handling is retained.",
   "image": "DesignAssets/Animations/CreatureRangedV1/vine-turtle/ranged.webp",
-  "projectileAsset": null,
-  "approvedBodyOnly": true,
-  "effectsApproved": false,
+  "projectileAsset": "DesignAssets/Animations/CreatureRangedV1/vine-turtle/projectile.png",
+  "approvedBodyOnly": false,
+  "effectsApproved": true,
   "sourcePivot": [
     262.5,
     441.62
@@ -263,5 +263,6 @@
   "registrationScale": 1,
   "loop": false,
   "idleImage": "DesignAssets/Animations/CreatureIdleStudies/V2/vine-turtle/idle.webp",
-  "approvedDate": "2026-11-06"
+  "approvedDate": "2026-11-06",
+  "impactArtApproved": false
 }

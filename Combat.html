@@ -4512,6 +4512,24 @@ const { unitDisplaySize } = modules["client/unit-size.mjs"];
 // Approved 2026-11-06. Native cels are unchanged; registration is the exact
 // inverse of the approved melee seed's lossless resize-and-padding transform.
 const CREATURE_RANGED_ANIMATIONS = Object.freeze({
+  "spiny-back-beetle": Object.freeze({
+    image: "DesignAssets/Animations/CreatureRangedV1/spiny-back-beetle/shoot.webp",
+    frameSize: 512, viewSize: 454.8367346938776, columns: 4,
+    pivotX: 263.7510204081633, pivotY: 421.314283077551,
+    durationsMs: Object.freeze([120,130,150,100,80,140,160,160]),
+    frameCount: 8, durationMs: 1040, launchAtMs: 500, launchFrame: 4,
+    outletX: 145, outletY: 339, registrationScale: 1, facing: "left", loop: false,
+    idleImage: "DesignAssets/Animations/Beetle/atlas.webp"
+  }),
+  "spiny-back-leader": Object.freeze({
+    image: "DesignAssets/Animations/CreatureRangedV1/spiny-back-leader/shoot.webp",
+    frameSize: 512, viewSize: 418.9090909090909, columns: 4,
+    pivotX: 263.454545, pivotY: 411,
+    durationsMs: Object.freeze([140,170,190,140,90,170,180,160]),
+    frameCount: 8, durationMs: 1240, launchAtMs: 640, launchFrame: 4,
+    outletX: 145, outletY: 317, registrationScale: 1, facing: "left", loop: false,
+    idleImage: "DesignAssets/Animations/MountainPawLeaderIdle/spiny-back-leader/idle-runtime.webp"
+  }),
   "flower-tail-bird": Object.freeze({
     image: "DesignAssets/Animations/CreatureRangedV1/flower-tail-bird/shoot.webp",
     frameSize: 512, viewSize: 500.7396226415094, columns: 4,
@@ -13266,6 +13284,78 @@ function createCombatVfxCursor({ maxLateness = .35, maxEvents = 512 } = {}) {
 
 return { COMBAT_VFX_ART_STATUS, normalizeCombatVfxEvent, combatVfxCues, combatVfxAt, createCombatVfxCursor };
 })();
+modules["client/creature-ranged-vfx.mjs"] = (() => {
+const { CREATURE_RANGED_ANIMATIONS } = modules["client/creature-ranged.mjs"];
+const { imageAnimation } = modules["client/image-geometry.mjs"];
+const { UNIT_IMAGE_BOUNDS } = modules["client/unit-image-bounds.mjs"];
+const { unitDisplaySize } = modules["client/unit-size.mjs"];
+
+// Width of the original 512px canvas, not its opaque bounding box.
+function creatureRangedBodyCanvas(agent) {
+  const animation = CREATURE_RANGED_ANIMATIONS[agent?.species];
+  if (!animation) return 0;
+  const idle = imageAnimation({ image: animation.idleImage, frameSize: 512, viewSize: 512 });
+  const bounds = UNIT_IMAGE_BOUNDS[animation.idleImage];
+  const length = Math.max(bounds.width, bounds.height) * idle.frameSize / bounds.frameSize;
+  return 512 * unitDisplaySize(agent) * idle.viewSize /
+    ((idle.registrationScale || 1) * length * animation.viewSize);
+}
+function creatureRangedFlightPoint(effect, start, end, progress, bodyCanvas) {
+  const u = Math.max(0, Math.min(1, progress)), h = (effect?.arcScale || 0) * bodyCanvas;
+  const dx = end.x-start.x, dy = end.y-start.y;
+  return { x: start.x+dx*u, y: start.y+dy*u-4*h*u*(1-u), angle: Math.atan2(dy-4*h*(1-2*u),dx) };
+}
+// Approved 2026-11-06. Artwork only: the journal remains the owner of launch,
+// arrival, cancellation, damage and defense. Native cells face left.
+const root = "DesignAssets/Animations/CreatureRangedV1/";
+const CREATURE_RANGED_EFFECTS = Object.freeze({
+  "bubble-toad": Object.freeze({ image: root + "bubble-toad/effects.webp", bodyCanvas: true,
+    frames: [4,5,6,7], durations: [70,100,140,170], flightScale: 180/512, impactScale: 250/512,
+    arcScale: 112/512, flightAnchor: [218/512,.5], flightFrames: 4 }),
+  "vine-turtle": Object.freeze({ image: root + "vine-turtle/projectile.png", bodyCanvas: true,
+    frames: [], durations: [], flightScale: 125/512, flightAnchor: [.35,.5], columns: 1, aspect: 139/512 }),
+  "spiny-back-beetle": Object.freeze({ image: root + "spiny-back-beetle/effects.png",
+    frames: [2,3,4,5], durations: [80,80,80,80], flightScale: .60, impactScale: .75,
+    flightAnchor: [133/512,268/512], impactAnchors: [[244,272],[170,258],[170,258],[170,258]] }),
+  "spiny-back-leader": Object.freeze({ image: root + "spiny-back-leader/effects.png",
+    frames: [2,3,4,5], durations: [80,80,80,80], flightScale: .60, impactScale: .84,
+    flightAnchor: [62/512,245.5/512], impactAnchors: [[252,264],[128,255],[128,255],[128,255]] })
+});
+const CREATURE_RANGED_EFFECT_ASSETS = Object.freeze(Object.values(CREATURE_RANGED_EFFECTS).map(effect => effect.image));
+
+// x/y identify the physical projectile tip, mouth or contact, not the image's
+// bounding centre. Rotating around that point preserves both facing directions.
+function creatureRangedEffectCommand(effect, kind, { x, y, size, angle = 0, age = 0, muzzle }) {
+  if (!effect || !Number.isFinite(age) || age < 0) return null;
+  let frame, anchor, alpha = 1, scaleX = 1, scaleY = effect.aspect || 1;
+  if (kind === "flight") {
+    frame = effect.flightFrames ? Math.floor(age*1000/70)%effect.flightFrames : 0;
+    anchor = effect.flightAnchor; size *= effect.flightScale;
+    if (effect.flightFrames) {
+      const ease = 1-Math.pow(1-Math.min(1,age/.09),3);
+      scaleX = .55+.45*ease; scaleY = .72+.28*ease;
+    }
+  }
+  else if (kind === "release") {
+    if (effect.bodyCanvas || age >= .1) return null;
+    frame = 1; anchor = [432/512,.5]; size *= .45;
+  }
+  else if (kind === "impact") {
+    let milliseconds = age*1000, index = 0;
+    while (index < effect.durations.length && milliseconds >= effect.durations[index]) milliseconds -= effect.durations[index++];
+    if (index >= effect.frames.length) return null;
+    frame = effect.frames[index]; anchor = effect.impactAnchors?.[index].map(v => v/512) || [.5,.5]; size *= effect.impactScale;
+    if (effect.flightFrames) { angle = -Math.PI; if (index === 3) alpha = 1-milliseconds/170; }
+  } else return null;
+  const width = size*scaleX, height = size*scaleY;
+  const rotation = angle + Math.PI, dx = (anchor[0]-.5)*width, dy = (anchor[1]-.5)*height;
+  return { image: effect.image, frame, x: x - Math.cos(rotation)*dx + Math.sin(rotation)*dy,
+    y: y - Math.sin(rotation)*dx - Math.cos(rotation)*dy, size, width, height, columns: effect.columns || 4, alpha, angle: rotation, kind,
+    ...(kind === "flight" ? { headX: x, headY: y, pathAngle: angle, ...(muzzle && !effect.arcScale ? { muzzleClip: { ...muzzle, angle } } : {}) } : { contactX: x, contactY: y }) };
+}
+
+return { creatureRangedBodyCanvas, creatureRangedFlightPoint, CREATURE_RANGED_EFFECTS, CREATURE_RANGED_EFFECT_ASSETS, creatureRangedEffectCommand };
+})();
 modules["client/secretion-idle.mjs"] = (() => {
 const { unitAnimationPose } = modules["client/unit-animation.mjs"];
 
@@ -14654,6 +14744,7 @@ function unitRangedProjectile(agent) {
 return { UNIT_RANGED_HURT_ANIMATIONS, UNIT_RANGED_FORMS, UNIT_RANGED_IMAGE_ASSETS, UNIT_RANGED_ANIMATIONS, unitRangedAppearance, unitRangedAttack, unitRangedBirthAppearance, unitRangedLifecycleAnimation, unitRangedPose, unitRangedResourceFrame, unitRangedDisplaySize, unitRangedProjectile };
 })();
 modules["client/combat-detail-vfx.mjs"] = (() => {
+const { CREATURE_RANGED_EFFECTS, CREATURE_RANGED_EFFECT_ASSETS, creatureRangedEffectCommand, creatureRangedBodyCanvas, creatureRangedFlightPoint } = modules["client/creature-ranged-vfx.mjs"];
 const { CREATURE_RANGED_ANIMATIONS, creatureRangedOutlet } = modules["client/creature-ranged.mjs"];
 const { unitRangedProjectile } = modules["client/unit-ranged.mjs"];
 
@@ -14670,7 +14761,7 @@ const DETAIL_DEFENSE_VFX = Object.freeze({
   block: "DesignAssets/Animations/CombatDefenseV1/block.png",
   parry: "DesignAssets/Animations/CombatDefenseV1/parry.png"
 });
-const DETAIL_COMBAT_VFX_ASSETS = [...Object.values(DETAIL_COMBAT_VFX).map(clip => clip.image), ...Object.values(DETAIL_DEFENSE_VFX)];
+const DETAIL_COMBAT_VFX_ASSETS = [...Object.values(DETAIL_COMBAT_VFX).map(clip => clip.image), ...Object.values(DETAIL_DEFENSE_VFX), ...CREATURE_RANGED_EFFECT_ASSETS];
 function detailVfxFrame(clip, milliseconds) {
   if (!Number.isFinite(milliseconds) || milliseconds < 0) return null;
   for (let index = 0; index < clip.frames.length; index++) {
@@ -14681,6 +14772,7 @@ function detailVfxFrame(clip, milliseconds) {
 }
 const neutralFlight = Object.freeze({ image: null, frames: [], durations: [] });
 function projectileClip(agent) {
+  if (CREATURE_RANGED_EFFECTS[agent?.species]) return CREATURE_RANGED_EFFECTS[agent.species];
   // Reuse the existing generic flight, not unapproved new effect artwork.
   if (CREATURE_RANGED_ANIMATIONS[agent?.species]) return neutralFlight;
   const tribe = agent?.tribe || agent?.key;
@@ -14693,7 +14785,7 @@ function createDetailCombatVfx() {
   const directDamage = new Map();
   let viewScope;
   function clearView() { anchors.clear(); flightAnchors.clear(); viewScope = undefined; }
-  let projectiles = [];
+  let projectiles = [], lastRetainedEvents = [];
   function consume(frame, time) {
     if (frame.reset) { impacts.clear(); vitals.clear(); directDamage.clear(); deaths.clear(); defenses.clear(); clearView(); }
     for (const cue of frame.started || []) if (cue.channel === "defense" && DETAIL_DEFENSE_VFX[cue.kind]) {
@@ -14745,6 +14837,7 @@ function createDetailCombatVfx() {
         sourceId: cue.sourceId != null && String(cue.sourceId) === String(current.sourceId) ? cue.sourceId : null });
     }
     projectiles = frame.projectiles || [];
+    lastRetainedEvents = frame.retainedEvents || [];
     const activeFlights = new Set(projectiles.map(shot => shot.id));
     for (const id of flightAnchors.keys()) if (!activeFlights.has(id)) flightAnchors.delete(id);
   }
@@ -14755,7 +14848,7 @@ function createDetailCombatVfx() {
     for (const [id, anchor] of anchors) if (time < anchor.at || time - anchor.at >= .85) anchors.delete(id);
     for (const agent of agents) {
       const id = String(agent.id), point = positions.get(id);
-      if (point) anchors.set(id, { at: time, snapshotAt, point: { ...point }, width, height, clip: projectileClip(agent) });
+      if (point) anchors.set(id, { at: time, snapshotAt, point: { ...point }, width, height, clip: projectileClip(agent), bodyCanvas: creatureRangedBodyCanvas(agent) });
     }
   }
   function recipientPoint(id, positions, time, view, retainDeath = true) {
@@ -14788,7 +14881,7 @@ function createDetailCombatVfx() {
         // The server supplies timing, not modal coordinates. Keep the first
         // visible outlet, even for a late snapshot; never invent an unseen pose.
         // Later recoil, recovery and other shots must not drag a fired shot.
-        launch = { clip, x: from.x / width, y: from.y / height,
+        launch = { clip, bodyCanvas: creatureRangedBodyCanvas(source), x: from.x / width, y: from.y / height,
           // Only approved ranged bodies have a measured outlet. Other forms
           // use their displayed body centre without inventing a muzzle pose.
           offsetX: neutral ? neutral.x : sprite ? facing * (sprite.outletX - 256) * sprite.sourceScale / 100 : 0,
@@ -14800,6 +14893,19 @@ function createDetailCombatVfx() {
       const startY = launch.y * height + launch.offsetY * cell;
       const endY = target.y - target.height * .5, angle = Math.atan2(endY - startY, target.x - startX);
       const size = Math.min(444, launch.size * cell);
+      if (launch.clip.flightAnchor) {
+        const identity = { eventId: shot.id, projectileId: shot.projectileId, sourceId: shot.sourceId,
+          targetId: shot.targetId, launchedAt: shot.launchedAt, arrivesAt: shot.arrivesAt };
+        const bodyCanvas = launch.bodyCanvas * cell;
+        const path = creatureRangedFlightPoint(launch.clip, { x: startX, y: startY }, { x: target.x, y: endY }, shot.progress, bodyCanvas);
+        const flight = creatureRangedEffectCommand(launch.clip, "flight", {
+          ...path, size: launch.clip.bodyCanvas ? bodyCanvas : size/.85, age: shot.age ?? time-shot.launchedAt, muzzle: { x: startX, y: startY } });
+        const release = creatureRangedEffectCommand(launch.clip, "release", {
+          x: startX, y: startY, size: size/.85, angle, age: shot.age ?? time-shot.launchedAt });
+        if (flight) result.push({ ...flight, ...identity });
+        if (release) result.push({ ...release, ...identity });
+        continue;
+      }
       // Flight heads lie right of the cell centre. Anchor the head to the true path.
       result.push({ image: launch.clip.image, frame: 0, x: startX + (target.x - startX) * shot.progress - Math.cos(angle) * size * .25,
         y: startY + (endY - startY) * shot.progress - Math.sin(angle) * size * .25, size, angle, kind: "flight", eventId: shot.id, projectileId: shot.projectileId,
@@ -14813,7 +14919,20 @@ function createDetailCombatVfx() {
       // not another projectile landing. Reuse the approved general hit only.
       const projectileImpact = cue.mode === "ranged" && ["hit", "critical", "followup"].includes(cue.kind);
       const sourceClip = projectileImpact && (projectileClip(source) || anchors.get(String(cue.sourceId))?.clip);
-      const clip = sourceClip?.image ? sourceClip : DETAIL_COMBAT_VFX.hit;
+      // A residual block number is not approval for a projectile explosion.
+      if (sourceClip?.bodyCanvas && ((defenses.has(cue.eventId)) ||
+          (lastRetainedEvents || []).some(event => event.id === cue.eventId && ["block","parry","dodge"].includes(event.kind)))) continue;
+      const clip = sourceClip?.image && sourceClip.frames.length ? sourceClip : DETAIL_COMBAT_VFX.hit;
+      if (clip.flightAnchor) {
+        const from = positions.get(String(cue.sourceId)) || anchors.get(String(cue.sourceId))?.point;
+        const angle = from ? Math.atan2(point.y-point.height*.5-(from.y-from.height*.5), point.x-from.x) : Math.PI;
+        const impact = creatureRangedEffectCommand(clip, "impact", { x: point.x, y: point.y-point.height*.5,
+          size: clip.bodyCanvas ? (source ? creatureRangedBodyCanvas(source) : anchors.get(String(cue.sourceId))?.bodyCanvas || 0)*cell : Math.min(444, Math.max(point.height,point.width)) * (cue.kind === "critical" ? 1.15 : 1),
+          angle, age: time-cue.at });
+        if (impact) result.push({ ...impact, eventId: cue.eventId, sourceId: cue.sourceId,
+          targetId: cue.targetId, eventAt: cue.eventAt ?? cue.at, amount: cue.amount });
+        continue;
+      }
       const frame = detailVfxFrame(clip, (time - cue.at) * 1000);
       if (frame === null) continue;
       result.push({ image: clip.image, frame, x: point.x, y: point.y - point.height * .5,
@@ -14953,10 +15072,20 @@ function drawDetailVitalEffect(context, command, { width, height, reducedMotion 
 }
 function drawDetailVfxCell(context, image, command) {
   if (!image?.complete || !image.naturalWidth) return false;
-  const cell = image.naturalWidth / 4;
-  context.save(); context.translate(command.x, command.y); context.rotate(command.angle);
-  context.drawImage(image, command.frame % 4 * cell, Math.floor(command.frame / 4) * cell, cell, cell,
-    -command.size / 2, -command.size / 2, command.size, command.size);
+  const columns = command.columns || 4, cell = image.naturalWidth / columns;
+  const sourceHeight = columns === 1 ? image.naturalHeight : cell;
+  const width = command.width || command.size, height = command.height || command.size;
+  context.save();
+  if (command.muzzleClip) {
+    const muzzle = command.muzzleClip;
+    context.translate(muzzle.x, muzzle.y); context.rotate(muzzle.angle);
+    context.beginPath(); context.rect(0,-1000000,1000000,2000000); context.clip();
+    context.rotate(-muzzle.angle); context.translate(-muzzle.x,-muzzle.y);
+  }
+  context.translate(command.x, command.y); context.rotate(command.angle);
+  context.globalAlpha *= command.alpha ?? 1;
+  context.drawImage(image, command.frame % columns * cell, Math.floor(command.frame / columns) * cell, cell, sourceHeight,
+    -width / 2, -height / 2, width, height);
   context.restore(); return true;
 }
 
@@ -21071,7 +21200,7 @@ function talonOwlIdleFrame(elapsedMs) {
 return { TALON_OWL_IDLE, talonOwlIdleFrame };
 })();
 modules["client/combat-stage.mjs"] = (() => {
-const { CREATURE_RANGED_ANIMATIONS } = modules["client/creature-ranged.mjs"];
+const { CREATURE_RANGED_ANIMATIONS, creatureRangedPose } = modules["client/creature-ranged.mjs"];
 const { drawCombatStun } = modules["client/combat-stun-vfx.mjs"];
 const { drawSpeciesHeldHurt } = modules["client/species-held-hurt.mjs"];
 const { beanHeldHurtSource, drawBeanHeldHurt } = modules["client/bean-held-hurt.mjs"];
@@ -21150,7 +21279,7 @@ function clamp(value) {
 }
 
 function poseFor(agent, time, deathAge) {
-  const ranged = unitRangedPose(agent, time);
+  const ranged = unitRangedPose(agent, time) || (agent.species === "spiny-back-beetle" && creatureRangedPose(agent, time));
   if (ranged) return ranged;
   const death = unitRangedLifecycleAnimation(agent, "death") || (agent.tribe === "bean" ? AGENT_DEATH_ANIMATION : UNIT_ANIMATIONS[agent.tribe]?.death || CREATURE_DEATH_ANIMATIONS[agent.species]);
   if (agent.health <= 0 && death) return { action: "death", animation: death, frame: unitAnimationFrame(death, deathAge * 1000) };
@@ -21455,8 +21584,8 @@ function createCombatStage(canvas) {
     const progress = clamp((time - projectile.launchedAt) / Math.max(.001, projectile.at - projectile.launchedAt));
     // A loading fallback must share the V4 shot's frozen origin and body-centre
     // destination. Recomputing from the recoiling shooter makes recovery jump.
-    const head = flight && { x: flight.x + Math.cos(flight.angle) * flight.size * .25,
-      y: flight.y + Math.sin(flight.angle) * flight.size * .25, angle: flight.angle };
+    const head = flight && { x: flight.headX ?? flight.x + Math.cos(flight.angle) * flight.size * .25,
+      y: flight.headY ?? flight.y + Math.sin(flight.angle) * flight.size * .25, angle: flight.pathAngle ?? flight.angle };
     const sprite = unitRangedProjectile(stageAgent(projectile.source)), asset = sprite && image(sprite.image);
     if (sprite && asset) {
       const scale = sprite.sourceScale * formationScale(canvas.clientWidth, canvas.clientHeight);

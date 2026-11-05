@@ -3,7 +3,7 @@
   "name": "\ubc29\uc6b8\ub450\uaebc\ube44",
   "role": "\uacb8\uc6a9",
   "action": "ranged-attack",
-  "status": "approved-body-integrated",
+  "status": "approved-body-and-effects-integrated",
   "image": "DesignAssets/Animations/CreatureRangedV1/bubble-toad/ranged.webp",
   "frameSize": 512,
   "viewSize": 512.211320754717,
@@ -32,7 +32,7 @@
     "y": 190
   },
   "projectileBakedIntoBody": false,
-  "projectileAsset": null,
+  "projectileAsset": "DesignAssets/Animations/CreatureRangedV1/bubble-toad/effects.webp",
   "audio": false,
   "registration": [
     {
@@ -189,9 +189,9 @@
     "commit": "011bbd7b8696aa353931634150317b8d8010ecfe",
     "path": "Design.html"
   },
-  "integration": "Production maps each authoritative launchedAt/shotLaunches to the release cel. Existing melee, gameplay and audio remain unchanged. Only the body is approved; the existing generic flight and hit remain in use.",
-  "approvedBodyOnly": true,
-  "effectsApproved": false,
+  "integration": "Approved body and projectile. Authoritative launch, arrival, speed, damage and sound are unchanged. Parabolic bubble and 480ms impact use original registered body canvas proportions.",
+  "approvedBodyOnly": false,
+  "effectsApproved": true,
   "sourceCandidate": "tools/toad-ranged-candidate-20261106/attack.json",
   "sourceFrameHashes": [
     {
@@ -236,5 +236,6 @@
   "outletY": 190,
   "registrationScale": 1,
   "idleImage": "DesignAssets/Animations/BubbleToadIdle/BreathV1/idle.webp",
-  "approvedDate": "2026-11-06"
+  "approvedDate": "2026-11-06",
+  "impactArtApproved": true
 }

@@ -122,7 +122,7 @@ test("world drawing selects native ranged frames and preserves missing-image fal
 });
 
 test("neutral flights retain their first visible outlet and reuse existing generic flight and hit", () => {
-  for (const key of species) for (const direction of [-1, 1]) {
+  for (const key of ["flower-tail-bird", "soil-mole", "lantern-keeper"]) for (const direction of [-1, 1]) {
     const source = unit(key), agents = [source, { id: "target", tribe: "bean" }];
     const positions = new Map([["source", { x: direction < 0 ? 800 : 200, y: 400, width: 40, height: 50 }],
       ["target", { x: direction < 0 ? 200 : 800, y: 400, width: 40, height: 50 }]]);
@@ -168,9 +168,9 @@ test("new body registration exactly inverts the approved melee seed transform wi
       near((y - animation.pivotY) / animation.viewSize,
         (y * map.scale + map.offset[1] - old.pivotY) * (old.registrationScale || 1) / old.viewSize);
     }
-    assert.equal(metadata.status, "approved-body-integrated");
-    assert.equal(metadata.effectsApproved, false);
-    assert.equal(metadata.projectileAsset, null);
+    assert.equal(metadata.status, key === "lantern-keeper" ? "approved-body-integrated" : "approved-body-and-effects-integrated");
+    assert.equal(metadata.effectsApproved, key !== "lantern-keeper");
+    assert.equal(!!metadata.projectileAsset, key !== "lantern-keeper");
     assert.equal(metadata.audio, false);
   }
 });

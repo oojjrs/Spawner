@@ -4,7 +4,7 @@ import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {createContext,runInContext} from 'node:vm';
 import {CREATURE_RANGED_ANIMATIONS,creatureRangedPose,creatureRangedOutlet} from './creature-ranged.mjs';
-import {CREATURE_RANGED_EFFECTS,creatureRangedEffectCommand} from './creature-ranged-vfx.mjs';
+import {CREATURE_RANGED_EFFECTS,creatureRangedEffectCommand,creatureRangedBodyCanvas,creatureRangedFlightPoint} from './creature-ranged-vfx.mjs';
 import {creatureAttackPose,creatureHurtPose} from './unit-animation.mjs';
 import {imageFrameGeometry} from './image-geometry.mjs';
 import {createCombatVfxCursor} from './combat-vfx-events.mjs';
@@ -44,7 +44,7 @@ test('all generated effect anchors are exact in both directions and release/impa
   near(c.x+Math.cos(c.angle)*dx-Math.sin(c.angle)*dy,300);near(c.y+Math.sin(c.angle)*dx+Math.cos(c.angle)*dy,220);
   assert.equal(creatureRangedEffectCommand(fx,kind,{x:0,y:0,size:90,age:-.01}),null);
  }
- for(const fx of Object.values(CREATURE_RANGED_EFFECTS)){assert.equal(creatureRangedEffectCommand(fx,'release',{age:.1}),null);assert.equal(creatureRangedEffectCommand(fx,'impact',{age:.32}),null);}
+ for(const fx of species.map(key=>CREATURE_RANGED_EFFECTS[key])){assert.equal(creatureRangedEffectCommand(fx,'release',{age:.1}),null);assert.equal(creatureRangedEffectCommand(fx,'impact',{age:.32}),null);}
 });
 function scene(key,direction=-1){
  const source=unit(key,direction),target={id:'target',tribe:'bean',health:100},agents=[source,target],positions=new Map([['source',{x:direction<0?800:200,y:400,width:100,height:80}],['target',{x:direction<0?200:800,y:400,width:100,height:80}]]),detail=createDetailCombatVfx(),cursor=createCombatVfxCursor();
@@ -80,7 +80,7 @@ test('world and modal body calls select ranged instead of the special beetle mel
 });
 test('world native effects replace only approved visible events and preserve loading/defense fallback',()=>{
  for(const missing of [false,true]){const calls=[],source=unit(species[0]),target={id:'target',tribe:'bean',health:100},images=new Map(),effect=CREATURE_RANGED_EFFECTS[species[0]],ctx=new Proxy({save(){},restore(){},translate(){},rotate(){},drawImage(){calls.push('art');},arc(){calls.push('generic');}},{get:(o,k)=>o[k]||(()=>{})});
- const box=createContext({Spawner:{CREATURE_RANGED_EFFECTS,creatureRangedEffectCommand,drawDetailVfxCell,creatureRangedOutlet,unitDisplaySize},Image:class{complete=!missing;naturalWidth=2048;},detailVfxImages:images,assetSource:x=>x,ctx,state:{simSeconds:1.5},worldToScreen:(x,y)=>({x:x*100,y:y*100}),visibleAgents:()=>[source,target],combatVfxFrame:{active:[],projectiles:[{id:'launch',sourceId:'source',targetId:'target',from:{x:4,y:2},to:{x:1,y:2},progress:.5,launchedAt:1,arrivesAt:2}]}});
+ const box=createContext({Spawner:{CREATURE_RANGED_EFFECTS,creatureRangedEffectCommand,creatureRangedBodyCanvas,creatureRangedFlightPoint,drawDetailVfxCell,creatureRangedOutlet,unitDisplaySize},Image:class{complete=!missing;naturalWidth=2048;},worldRangedFlights:new Map(),worldRangedImpacts:new Map(),detailVfxImages:images,assetSource:x=>x,ctx,state:{simSeconds:1.5},worldToScreen:(x,y)=>({x:x*100,y:y*100}),visibleAgents:()=>[source,target],combatVfxFrame:{active:[],projectiles:[{id:'launch',sourceId:'source',targetId:'target',from:{x:4,y:2},to:{x:1,y:2},progress:.5,launchedAt:1,arrivesAt:2}]}});
  runInContext(game.match(/^    function drawWorldCreatureEffect\([^]*?^    }/m)[0]+'\n'+game.match(/^    function drawRecordedDnaEffects\([^]*?^    }/m)[0],box);box.drawRecordedDnaEffects(100);assert.equal(calls.includes('art'),!missing);assert.equal(calls.includes('generic'),missing);
  calls.length=0;box.combatVfxFrame={projectiles:[],active:[{channel:'impact',kind:'hit',mode:'ranged',sourceId:'source',targetId:'target',eventId:'hit',amount:2,age:.28,from:{x:4,y:2},to:{x:1,y:2}}]};box.drawRecordedDnaEffects(100);assert.equal(calls.includes('art'),!missing);
  calls.length=0;box.combatVfxFrame.active.push({channel:'defense',kind:'block',eventId:'hit'});box.drawRecordedDnaEffects(100);assert.equal(calls.includes('art'),false);

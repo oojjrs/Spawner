@@ -10691,6 +10691,58 @@
         ]
       },
       "note": "Approved native body or effect cells; lossless original pixels retained."
+    },
+    "DesignAssets/Animations/CreatureRangedV1/bubble-toad/effects.webp": {
+      "display": [
+        512,
+        512
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ],
+      "nativeSource": {
+        "sha256": "5f47101f0e7e89a401be932ce45a3e3faf59207ac7ebbc700350c692ed76898a",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      },
+      "note": "User-approved original effect pixels, retained without resizing."
+    },
+    "DesignAssets/Animations/CreatureRangedV1/vine-turtle/projectile.png": {
+      "display": [
+        512,
+        139
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        512,
+        139
+      ],
+      "nativeSource": {
+        "sha256": "be5d5d3bfdc524223cd8c8b9f0d0aef7c8b7bedced363efe9c15d50f89966ae4",
+        "dimensions": [
+          512,
+          139
+        ],
+        "frame": [
+          512,
+          139
+        ]
+      },
+      "note": "User-approved original effect pixels, retained without resizing."
     }
   }
 }

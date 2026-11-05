@@ -1,0 +1,104 @@
+{
+  "species": "vine-turtle",
+  "frameSize": 512,
+  "frameCount": 8,
+  "columns": 4,
+  "durationsMs": [
+    160,
+    180,
+    240,
+    100,
+    90,
+    160,
+    210,
+    260
+  ],
+  "durationMs": 1400,
+  "launchFrameIndex": 4,
+  "launchAtMs": 680,
+  "releasePointPixels": {
+    "x": 103,
+    "y": 181
+  },
+  "pivotX": 262.5,
+  "pivotY": 441.62,
+  "facing": "left",
+  "stages": [
+    "대기",
+    "잎 모으기",
+    "식물 발사구 준비",
+    "식물 조준",
+    "등 식물 발사",
+    "식물 반동",
+    "잎 복귀",
+    "대기"
+  ],
+  "bodyApproval": "approved-by-user",
+  "projectileApproval": "User approved the enlarged v4 projectile and body animation.",
+  "bodyAtlas": "tools/turtle-plant-ranged-v2-20261106/body-atlas.webp",
+  "frames": "tools/turtle-plant-ranged-v2-20261106/Frames",
+  "bodyPreview": "tools/turtle-plant-ranged-v2-20261106/ranged-attack.webp",
+  "integration": "Map to launchedAt/shotLaunches; never hitAt. Keep gameplay stats, melee, movement and sound unchanged. This handoff does not modify runtime.",
+  "projectileImage": "tools/turtle-plant-projectile-v3-20261106/projectile-flight.png",
+  "projectileImageSha256": "be5d5d3bfdc524223cd8c8b9f0d0aef7c8b7bedced363efe9c15d50f89966ae4",
+  "renderSize": {
+    "previousWidthPer512pxBody": 100,
+    "newWidthPer512pxBody": 125,
+    "scaleMultiplier": 1.25,
+    "preserveAspectRatio": true,
+    "smallBodyWidth": 232,
+    "smallProjectileWidth": 56.640625,
+    "newHeightPer512pxBody": 33.935546875
+  },
+  "renderOrder": "Projectile behind body at release so wake never overlays plant/shell.",
+  "previewTipOffsetFromLaunchOrigin": {
+    "x": -43.75,
+    "y": 0
+  },
+  "integrationCaution": "Full projectile width=125 per 512 body canvas; anchor at (0.35,0.5) of projectile bounds maps to unchanged release point (103,181). Maintain server launchedAt/shotLaunches and approved timings. Do not change gameplay speed, damage, range, hitbox or travel duration.",
+  "originAnchorFraction": {
+    "x": 0.35,
+    "y": 0.5
+  },
+  "status": "integrated-approved-art",
+  "userRestrictions": {
+    "projectileSpeed": "Preserve current gameplay speed; user will adjust externally.",
+    "walk": "Keep existing game walking. Do not integrate rejected turtle-walk-articulated-v3.",
+    "sound": "No sound changes."
+  },
+  "bodyAtlasSha256": "b68ad4ac25e9c02dd646b179d46e7f68dd3a2a23bf0d4118130733f1a77d10b0",
+  "bodyFrameSha256": {
+    "00.png": "ba0f4b028749b239752565110b55d82efe4314ce762f21c35efc598221ceea70",
+    "01.png": "a5bcdc061cc53854a1bcab2bcbb5860de021393707dfa7ee5e4b5ee4266defbc",
+    "02.png": "c56f0a880294299aee7b5835f962bc4f090bac163eba9f29ca352948c608095b",
+    "03.png": "5a6414fb3e29377c6634eaeb5b77be620f1998351811a01d411a6dcba5d2f1ee",
+    "04.png": "9f23771e5f2f87080b16dd6c94f4647f0d1a7ab0747dd5ebd1fc4bf94730e682",
+    "05.png": "95be492983a1bd589529efcf17baae6a9c984ed49587598c358ed42adcee6be0",
+    "06.png": "fa4ac9d52dad7e749b53c7d3ee201a65b5dc1cad5f1fe979901f098f4e75354e",
+    "07.png": "ba0f4b028749b239752565110b55d82efe4314ce762f21c35efc598221ceea70"
+  },
+  "projectileSourceDimensions": {
+    "width": 512,
+    "height": 139,
+    "hasAlpha": true,
+    "faces": "left"
+  },
+  "releasePointRelativeToPivot": {
+    "x": -159.5,
+    "y": -260.62
+  },
+  "rotation": "Preview uses a horizontal left-facing sprite with no spin. If runtime rotates toward heading, account for authored-left direction with heading minus pi. Apply mirror/rotation to origin anchor consistently; direction variants need runtime QA.",
+  "flight": "Reuse existing server launch and arrival times/path; single static flight sprite includes its wake. Do not transplant 600ms or 350px offline preview constants.",
+  "arrival": "No new approved arrival/impact artwork. Keep existing hit handling; do not use this flight sprite as an explosion/impact effect.",
+  "bodyRegistrationCaution": "Map source release point through the exact same scale, translation, pivot and facing transform used for the registered body. Do not use raw source point against a cropped or differently normalized runtime frame.",
+  "sourceHandoffStatus": "approved-for-integration-not-yet-integrated",
+  "runtimeIntegration": {
+    "effectModule": "client/creature-ranged-vfx.mjs",
+    "detailRenderer": "client/combat-detail-vfx.mjs",
+    "worldRenderer": "client/game.js",
+    "gameplayAndSpeedChanged": false,
+    "soundChanged": false,
+    "browserPlaybackVerified": false,
+    "checks": "client/creature-arc-vfx.test.mjs; Canvas command rendering and native asset hashes"
+  }
+}

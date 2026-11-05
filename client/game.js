@@ -10,6 +10,7 @@
     const detailCombatVfx = Spawner.createDetailCombatVfx();
     const detailVfxImages = new Map();
     const agentRangedImages = new Map();
+    const worldRangedFlights = new Map(), worldRangedImpacts = new Map();
     let combatVfxFrame = { active: [], projectiles: [] };
     addEventListener("pagehide", () => appearanceWorld.clear());
     const combatAttributeArt = Spawner.createCombatAttributeArt(assetSource, (width, height) => {
@@ -5072,21 +5073,38 @@
       const drawnDnaEvents = new Set();
       const canonical = state.combatVfx?.version === 1;
       if (canonical) drawRecordedDnaEffects(cell);
+      else for (const [id,launch] of worldRangedFlights) if (!id.startsWith("legacy:") || state.simSeconds > launch.until) worldRangedFlights.delete(id);
       for (const agent of canonical ? [] : visibleAgents()) {
         for (const attack of agent.dnaProjectiles || []) {
         if (state.simSeconds >= attack.launchedAt && state.simSeconds <= attack.hitAt) {
-          const outlet = Spawner.creatureRangedOutlet(agent, Math.sign(attack.targetX - attack.fromX) || agent.facing);
-          const start = worldToScreen(attack.fromX + .5 + (outlet?.x || 0), attack.fromY + (outlet ? 1 + outlet.y : .5)), end = worldToScreen(attack.targetX + .5, attack.targetY + .5);
+          const flightKey = "legacy:"+agent.id+":"+attack.launchedAt+":"+(attack.id || "");
+          let launch = worldRangedFlights.get(flightKey);
+          if (!launch) {
+            const outlet = Spawner.creatureRangedOutlet(agent, Math.sign(attack.targetX-attack.fromX) || agent.facing);
+            launch = { x: attack.fromX+.5+(outlet?.x || 0), y: attack.fromY+(outlet ? 1+outlet.y : .5),
+              bodyCanvas: Spawner.creatureRangedBodyCanvas(agent), until: attack.hitAt };
+            worldRangedFlights.set(flightKey,launch);
+          }
+          const start = worldToScreen(launch.x,launch.y), end = worldToScreen(attack.targetX+.5,attack.targetY+.5);
           const progress = Math.max(0, Math.min(1, (state.simSeconds - attack.launchedAt) / Math.max(.001, attack.hitAt - attack.launchedAt)));
+          const effect = Spawner.CREATURE_RANGED_EFFECTS[agent.species];
+          const bodyCanvas = launch.bodyCanvas*cell;
+          const path = Spawner.creatureRangedFlightPoint(effect,start,end,progress,bodyCanvas);
+          if (effect?.bodyCanvas && drawWorldCreatureEffect(agent,"flight",path.x,path.y,bodyCanvas,path.angle,state.simSeconds-attack.launchedAt,start)) continue;
           ctx.save(); ctx.fillStyle = "#b6ed84"; ctx.strokeStyle = "#e0ffb7"; ctx.lineWidth = Math.max(1, cell * .035);
-          ctx.beginPath(); ctx.moveTo(start.x, start.y); ctx.lineTo(start.x + (end.x - start.x) * progress, start.y + (end.y - start.y) * progress); ctx.stroke();
-          ctx.beginPath(); ctx.arc(start.x + (end.x - start.x) * progress, start.y + (end.y - start.y) * progress, Math.max(2, cell * .07), 0, Math.PI * 2); ctx.fill(); ctx.restore();
+          ctx.beginPath(); ctx.moveTo(start.x, start.y); ctx.lineTo(path.x, path.y); ctx.stroke();
+          ctx.beginPath(); ctx.arc(path.x, path.y, Math.max(2, cell * .07), 0, Math.PI * 2); ctx.fill(); ctx.restore();
         }
         }
         const impact = agent.dnaActionEvent;
-        if (impact?.kind === "ranged" && state.simSeconds >= impact.at && state.simSeconds - impact.at < .22 && !drawnDnaEvents.has("ranged:" + impact.sourceId + ":" + impact.at)) {
+        const impactSource = impact && visibleAgents().find(other => other.id === impact.sourceId);
+        const bubbleImpact = impactSource?.species === "bubble-toad" && impact.damage > 0 && !impact.blocked && !impact.parried;
+        if (impact?.kind === "ranged" && state.simSeconds >= impact.at && state.simSeconds - impact.at < (bubbleImpact ? .48 : .22) && !drawnDnaEvents.has("ranged:" + impact.sourceId + ":" + impact.at)) {
           drawnDnaEvents.add("ranged:" + impact.sourceId + ":" + impact.at);
           const point = worldToScreen(impact.x + .5, impact.y + .5), progress = (state.simSeconds - impact.at) / .22;
+          const approvedImpact = bubbleImpact && drawWorldCreatureEffect(impactSource,"impact",point.x,point.y,
+            Spawner.creatureRangedBodyCanvas(impactSource)*cell,0,state.simSeconds-impact.at);
+          if (!approvedImpact && progress < 1) {
           ctx.save(); ctx.globalAlpha = 1 - progress; ctx.strokeStyle = "#e0ffb7"; ctx.lineWidth = Math.max(1, cell * .025);
           ctx.beginPath();
           for (let ray = 0; ray < 6; ray++) {
@@ -5095,6 +5113,7 @@
             ctx.lineTo(point.x + Math.cos(angle) * radius, point.y + Math.sin(angle) * radius);
           }
           ctx.stroke(); ctx.restore();
+          }
         }
         const event = agent.dnaHealEvent;
         if (event && state.simSeconds >= event.at && state.simSeconds - event.at < .7 && !drawnDnaEvents.has(event.sourceId + ":" + event.targetId + ":" + event.at)) {
@@ -5144,28 +5163,50 @@
     }
 
     function drawRecordedDnaEffects(cell) {
-      // Approved neutral artwork replaces only its own events. Authoritative
-      // timing, redacted endpoints, defense and other species retain their paths.
+      if (combatVfxFrame.reset) { worldRangedFlights.clear(); worldRangedImpacts.clear(); }
+      const activeIds = new Set(combatVfxFrame.projectiles.map(shot => shot.id));
+      for (const id of worldRangedFlights.keys()) if (!activeIds.has(id)) worldRangedFlights.delete(id);
       for (const projectile of combatVfxFrame.projectiles) {
-        if (!projectile.from || !projectile.to) continue;
+        if (!projectile.from || !projectile.to) { worldRangedFlights.delete(projectile.id); continue; }
         const source = visibleAgents().find(agent => String(agent.id) === String(projectile.sourceId));
-        const outlet = source && Spawner.creatureRangedOutlet(source, Math.sign(projectile.to.x - projectile.from.x) || source.facing);
-        const floor = source?.species === "spiny-back-beetle" ? .86 : 1;
-        const start = worldToScreen(projectile.from.x + .5 + (outlet?.x || 0), projectile.from.y + (outlet ? floor + outlet.y : .5));
-        const end = worldToScreen(projectile.to.x + .5, projectile.to.y + .5), progress = projectile.progress;
-        const x = start.x + (end.x - start.x) * progress, y = start.y + (end.y - start.y) * progress;
-        const angle = Math.atan2(end.y-start.y,end.x-start.x), age = state.simSeconds-projectile.launchedAt;
-        if (drawWorldCreatureEffect(source,"flight",x,y,Spawner.unitDisplaySize(source || {})*cell,angle,age,start)) {
-          drawWorldCreatureEffect(source,"release",start.x,start.y,Spawner.unitDisplaySize(source)*cell,angle,age);
+        let launch = worldRangedFlights.get(projectile.id);
+        if (!launch) {
+          const outlet = source && Spawner.creatureRangedOutlet(source, Math.sign(projectile.to.x-projectile.from.x) || source.facing);
+          const floor = source?.species === "spiny-back-beetle" ? .86 : 1;
+          launch = { x: projectile.from.x+.5+(outlet?.x || 0), y: projectile.from.y+(outlet ? floor+outlet.y : .5),
+            bodyCanvas: Spawner.creatureRangedBodyCanvas(source), size: Spawner.unitDisplaySize(source || {}) };
+          worldRangedFlights.set(projectile.id, launch);
+        }
+        const effect = Spawner.CREATURE_RANGED_EFFECTS[source?.species];
+        const start = worldToScreen(launch.x,launch.y), end = worldToScreen(projectile.to.x+.5,projectile.to.y+.5);
+        const path = Spawner.creatureRangedFlightPoint(effect,start,end,projectile.progress,launch.bodyCanvas*cell);
+        const { x,y,angle } = path, age = state.simSeconds-projectile.launchedAt;
+        const size = (effect?.bodyCanvas ? launch.bodyCanvas : launch.size)*cell;
+        if (drawWorldCreatureEffect(source,"flight",x,y,size,angle,age,start)) {
+          drawWorldCreatureEffect(source,"release",start.x,start.y,size,angle,age);
           continue;
         }
         ctx.save(); ctx.fillStyle = "#b6ed84"; ctx.strokeStyle = "#e0ffb7"; ctx.lineWidth = Math.max(1, cell * .035);
-        ctx.beginPath(); ctx.moveTo(start.x, start.y); ctx.lineTo(x, y); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(effect?.arcScale ? x-Math.cos(angle)*cell*.12 : start.x, effect?.arcScale ? y-Math.sin(angle)*cell*.12 : start.y); ctx.lineTo(x, y); ctx.stroke();
         ctx.beginPath(); ctx.arc(x, y, Math.max(2, cell * .07), 0, Math.PI * 2); ctx.fill(); ctx.restore();
       }
       const defended = new Set(combatVfxFrame.active.filter(cue => cue.channel === "defense" &&
         ["block","parry","dodge"].includes(cue.kind)).map(cue => cue.eventId));
-      for (const cue of combatVfxFrame.active) {
+      for (const cue of combatVfxFrame.started || []) {
+        const source = visibleAgents().find(agent => String(agent.id) === String(cue.sourceId));
+        if (source?.species === "bubble-toad" && cue.channel === "impact" && cue.mode === "ranged" &&
+            ["hit","critical","followup"].includes(cue.kind) && cue.amount > 0 && cue.to && !defended.has(cue.eventId))
+          worldRangedImpacts.set(cue.id, { ...cue, bodyCanvas: Spawner.creatureRangedBodyCanvas(source) });
+      }
+      for (const [id,cue] of worldRangedImpacts) {
+        const record = (combatVfxFrame.retainedEvents || []).find(event => event.id === cue.eventId);
+        if (state.simSeconds < cue.at || state.simSeconds-cue.at >= .48 || !record?.to ||
+            record.sourceId !== cue.sourceId || record.targetId !== cue.targetId || !(record.amount > 0) ||
+            !["hit","critical"].includes(record.kind)) { worldRangedImpacts.delete(id); continue; }
+        worldRangedImpacts.set(id,{ ...cue, to: record.to, age: state.simSeconds-cue.at });
+      }
+      const cues = [...combatVfxFrame.active.filter(cue => !worldRangedImpacts.has(cue.id)), ...worldRangedImpacts.values()];
+      for (const cue of cues) {
         if (cue.channel === "impact" && cue.mode === "ranged" && ["hit","critical","followup"].includes(cue.kind) &&
             cue.amount > 0 && cue.to && !defended.has(cue.eventId)) {
           const source = visibleAgents().find(agent => String(agent.id) === String(cue.sourceId));
@@ -5173,9 +5214,9 @@
           const point = worldToScreen(cue.to.x+.5,cue.to.y+.5);
           const angle = cue.from ? Math.atan2(cue.to.y-cue.from.y,cue.to.x-cue.from.x) : Math.PI;
           if (drawWorldCreatureEffect(source,"impact",point.x,point.y,
-              Spawner.unitDisplaySize(target || source || {})*cell*(cue.kind === "critical" ? 1.15 : 1),angle,cue.age)) continue;
+              (Spawner.CREATURE_RANGED_EFFECTS[source?.species]?.bodyCanvas ? cue.bodyCanvas || Spawner.creatureRangedBodyCanvas(source) : Spawner.unitDisplaySize(target || source || {})*(cue.kind === "critical" ? 1.15 : 1))*cell,angle,cue.age)) continue;
         }
-        if (cue.channel === "impact" && cue.mode === "ranged" && ["hit", "critical", "followup"].includes(cue.kind) && cue.age < .22 && cue.to) {
+        if (cue.channel === "impact" && cue.mode === "ranged" && ["hit", "critical", "followup"].includes(cue.kind) && cue.age < .22 && cue.amount > 0 && cue.to && !defended.has(cue.eventId)) {
           const point = worldToScreen(cue.to.x + .5, cue.to.y + .5), progress = cue.age / .22;
           ctx.save(); ctx.globalAlpha = 1 - progress; ctx.strokeStyle = "#e0ffb7"; ctx.lineWidth = Math.max(1, cell * .025);
           ctx.beginPath();

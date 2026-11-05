@@ -1,0 +1,146 @@
+{
+  "species": "bubble-toad",
+  "status": "integrated-approved-art",
+  "approved": [
+    "body motion",
+    "projectile art",
+    "impact art",
+    "parabolic flight"
+  ],
+  "speed": "unchanged; user will modify it separately",
+  "audio": false,
+  "sourceRoot": "/workspace/scratch/cdf786db13f9/Spawner-retry",
+  "files": {
+    "projectileAtlas": {
+      "path": "tools/toad-projectile-arc-v3-20261106/projectile-atlas.webp",
+      "sha256": "5f47101f0e7e89a401be932ce45a3e3faf59207ac7ebbc700350c692ed76898a"
+    },
+    "effectMetadata": {
+      "path": "tools/toad-projectile-arc-v3-20261106/effect.json",
+      "sha256": "09a88a6139e2e354ecd088359ef05e6db5de725eb810ff83204e4da4b71f3ee0"
+    },
+    "renderer": {
+      "path": "tools/toad-projectile-arc-v3-20261106/effects.mjs",
+      "sha256": "43813054596fb07d8d1f39e454cb86a6eec486eb92d5930ade3babb1d80a38ce"
+    },
+    "reviewVideo": {
+      "path": "tools/toad-projectile-arc-v3-20261106/review.mp4",
+      "sha256": "908cea52e40594ef6ad797cd2d9883cdfe6426b0f9eafc9f6b47133b1ac90ad9"
+    },
+    "bodyAtlas": {
+      "path": "DesignAssets/Animations/CreatureRangedV1/bubble-toad/ranged.webp",
+      "sha256": "eb89fb4e476e0be3f8035c4fafb7d8f4e02871675512296a83acc2885865299e"
+    },
+    "bodyMetadata": {
+      "path": "DesignAssets/Animations/CreatureRangedV1/bubble-toad/ranged.json",
+      "sha256": "0cfc8289c4a18f0cf1723814526995eb0b3179da824b010a63386e64e7ae6db4"
+    },
+    "runtimeReview": {
+      "path": "tools/toad-projectile-arc-v3-20261106/runtime-review.md",
+      "sha256": "8109681d657e846d3d42e382b42d6004594e4c807c22d89e25e1305b231965f8"
+    }
+  },
+  "approvalQuote": "두꺼비는 투사체 속도만 좀 더 빠르게하면 오케이인데 그건 밖에서 고칠거고 투사체랑 두꺼비 둘다 오케이.\n거북이도 투사체 속도가 관건인데, 밖에서 고치겠다 애니랑 투사체 다 오케이",
+  "body": {
+    "frameSize": 512,
+    "columns": 4,
+    "frames": 8,
+    "launchAtMs": 460,
+    "durationMs": 1000,
+    "outlet": [
+      125,
+      190
+    ],
+    "registrationNote": "These are native seed coordinates. Integrator owns latest-main idle scale/pivot inverse mapping; do not treat candidate viewSize/pivot as final runtime registration."
+  },
+  "effect": {
+    "frameSize": 512,
+    "columns": 4,
+    "frames": 8,
+    "flightFrames": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "flightCelMs": 70,
+    "flightPivot": [
+      218,
+      256
+    ],
+    "impactFrames": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "impactDurationsMs": [
+      70,
+      100,
+      140,
+      170
+    ],
+    "impactPivot": [
+      256,
+      256
+    ],
+    "baseFacing": "left",
+    "normalizedDisplay": {
+      "referenceBodyFramePixels": 512,
+      "flightFrameSizeOverBodyFrame": 0.3515625,
+      "impactFrameSizeOverBodyFrame": 0.48828125,
+      "flightGrowthFirst90ms": {
+        "widthStartFraction": 0.55,
+        "heightStartFraction": 0.72,
+        "easing": "1-(1-u)^3"
+      },
+      "arcHeightOverBodyFrame": 0.21875,
+      "referenceFlightSpanOverBodyFrame": 0.751953125,
+      "note": "bodyFramePixels is the on-screen 512px ranged cel extent after idle-registration transform, not opaque body width and not unit tile size. Both effects and arc height multiply this same value in world/detail/lab."
+    }
+  },
+  "trajectory": {
+    "function": "bubbleArcPoint(start,end,progress,height)",
+    "progress": "existing authoritative (now-launchedAt)/(arrivesAt-launchedAt)",
+    "formula": "y=lerp(y0,y1,u)-4*h*u*(1-u)",
+    "tangent": "[x1-x0, y1-y0-4*h*(1-2*u)]",
+    "leftFacingSpriteRotation": "atan2(tangentY,tangentX)-PI",
+    "height": "For exact preview proportions use h=(112/512)*renderedBodyFramePixels. The distance-based bubbleArcHeight helper is experimental and is not required; do not silently substitute it for this approved reference.",
+    "reviewFlightMs": 570,
+    "reviewTimingNotRuntimeRule": true,
+    "direction": "At each progress rotate the left-facing atlas by atan2(dy-4*h*(1-2*u),dx)-PI. If pre-flipping atlas for a right-facing view, use atan2 directly instead.",
+    "arrival": "At authoritative arrivesAt/hit event stop flight, draw impact frames 4/5/6/7 for 70/100/140/170ms at arrival position, fade last frame, and expire at 480ms. This does not cause damage, alter hitAt, or require shooter still in the firing pose."
+  },
+  "runtimeTargets": [
+    "client/game.js drawRecordedDnaEffects canonical world",
+    "client/game.js drawAttackImpacts legacy fallback",
+    "client/combat-detail-vfx.mjs flightAnchors/flight commands",
+    "client/combat-stage.mjs projectileArt loading fallback"
+  ],
+  "contracts": [
+    "freeze each launch outlet independently",
+    "keep launchedAt/arrivesAt/shotLaunches and damage unchanged",
+    "flight outlives body recovery",
+    "cancel/hide/death closure stays journal-owned",
+    "scope only bubble-toad; preserve melee and other species",
+    "no audio"
+  ],
+  "validation": {
+    "testsPassed": 7,
+    "bodyHashesPreserved": true,
+    "effectAtlasMatchesV2": true,
+    "wholeMp4Decoded": true,
+    "gameIntegratedByThisWorker": false,
+    "browserVerified": false
+  },
+  "sourceHandoffStatus": "user-approved-awaiting-integration",
+  "runtimeIntegration": {
+    "effectModule": "client/creature-ranged-vfx.mjs",
+    "detailRenderer": "client/combat-detail-vfx.mjs",
+    "worldRenderer": "client/game.js",
+    "gameplayAndSpeedChanged": false,
+    "soundChanged": false,
+    "browserPlaybackVerified": false,
+    "checks": "client/creature-arc-vfx.test.mjs; Canvas command rendering and native asset hashes"
+  }
+}
