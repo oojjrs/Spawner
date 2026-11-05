@@ -1,4 +1,4 @@
-import { CREATURE_RANGED_ANIMATIONS } from "./creature-ranged.mjs";
+import { CREATURE_RANGED_ANIMATIONS, creatureRangedPose } from "./creature-ranged.mjs";
 import { drawCombatStun } from "./combat-stun-vfx.mjs";
 import { drawSpeciesHeldHurt } from "./species-held-hurt.mjs";
 import { beanHeldHurtSource, drawBeanHeldHurt } from "./bean-held-hurt.mjs";
@@ -77,7 +77,7 @@ function clamp(value) {
 }
 
 function poseFor(agent, time, deathAge) {
-  const ranged = unitRangedPose(agent, time);
+  const ranged = unitRangedPose(agent, time) || (agent.species === "spiny-back-beetle" && creatureRangedPose(agent, time));
   if (ranged) return ranged;
   const death = unitRangedLifecycleAnimation(agent, "death") || (agent.tribe === "bean" ? AGENT_DEATH_ANIMATION : UNIT_ANIMATIONS[agent.tribe]?.death || CREATURE_DEATH_ANIMATIONS[agent.species]);
   if (agent.health <= 0 && death) return { action: "death", animation: death, frame: unitAnimationFrame(death, deathAge * 1000) };
@@ -382,8 +382,8 @@ export function createCombatStage(canvas) {
     const progress = clamp((time - projectile.launchedAt) / Math.max(.001, projectile.at - projectile.launchedAt));
     // A loading fallback must share the V4 shot's frozen origin and body-centre
     // destination. Recomputing from the recoiling shooter makes recovery jump.
-    const head = flight && { x: flight.x + Math.cos(flight.angle) * flight.size * .25,
-      y: flight.y + Math.sin(flight.angle) * flight.size * .25, angle: flight.angle };
+    const head = flight && { x: flight.headX ?? flight.x + Math.cos(flight.angle) * flight.size * .25,
+      y: flight.headY ?? flight.y + Math.sin(flight.angle) * flight.size * .25, angle: flight.pathAngle ?? flight.angle };
     const sprite = unitRangedProjectile(stageAgent(projectile.source)), asset = sprite && image(sprite.image);
     if (sprite && asset) {
       const scale = sprite.sourceScale * formationScale(canvas.clientWidth, canvas.clientHeight);

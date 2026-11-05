@@ -5,6 +5,24 @@ import { unitDisplaySize } from "./unit-size.mjs";
 // Approved 2026-11-06. Native cels are unchanged; registration is the exact
 // inverse of the approved melee seed's lossless resize-and-padding transform.
 export const CREATURE_RANGED_ANIMATIONS = Object.freeze({
+  "spiny-back-beetle": Object.freeze({
+    image: "DesignAssets/Animations/CreatureRangedV1/spiny-back-beetle/shoot.webp",
+    frameSize: 512, viewSize: 454.8367346938776, columns: 4,
+    pivotX: 263.7510204081633, pivotY: 421.314283077551,
+    durationsMs: Object.freeze([120,130,150,100,80,140,160,160]),
+    frameCount: 8, durationMs: 1040, launchAtMs: 500, launchFrame: 4,
+    outletX: 145, outletY: 339, registrationScale: 1, facing: "left", loop: false,
+    idleImage: "DesignAssets/Animations/Beetle/atlas.webp"
+  }),
+  "spiny-back-leader": Object.freeze({
+    image: "DesignAssets/Animations/CreatureRangedV1/spiny-back-leader/shoot.webp",
+    frameSize: 512, viewSize: 418.9090909090909, columns: 4,
+    pivotX: 263.454545, pivotY: 411,
+    durationsMs: Object.freeze([140,170,190,140,90,170,180,160]),
+    frameCount: 8, durationMs: 1240, launchAtMs: 640, launchFrame: 4,
+    outletX: 145, outletY: 317, registrationScale: 1, facing: "left", loop: false,
+    idleImage: "DesignAssets/Animations/MountainPawLeaderIdle/spiny-back-leader/idle-runtime.webp"
+  }),
   "flower-tail-bird": Object.freeze({
     image: "DesignAssets/Animations/CreatureRangedV1/flower-tail-bird/shoot.webp",
     frameSize: 512, viewSize: 500.7396226415094, columns: 4,

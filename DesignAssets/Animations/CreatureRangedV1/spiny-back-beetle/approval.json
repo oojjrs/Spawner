@@ -1,0 +1,53 @@
+{
+  "species": "spiny-back-beetle",
+  "status": "user-approved-body-and-effects",
+  "approvedOn": "2026-11-06",
+  "body": {
+    "image": "shoot.webp",
+    "sha256": "93bffae835b56921f6544dad6aa56ca75b598dc80df5d975b2f44cadf08fcb22",
+    "nativeFrameSize": 512,
+    "columns": 4,
+    "frameCount": 8,
+    "durationsMs": [
+      120,
+      130,
+      150,
+      100,
+      80,
+      140,
+      160,
+      160
+    ],
+    "launchAtMs": 500,
+    "outlet": {
+      "x": 145,
+      "y": 339
+    },
+    "method": "Approved atlas copied byte-for-byte."
+  },
+  "effects": {
+    "image": "effects.png",
+    "sha256": "5e3eb06980435db71e2b02fb80522c924febcb875e43755a5d932b1a34766a6a",
+    "nativeFrameSize": 512,
+    "columns": 4,
+    "frames": [
+      "flight",
+      "release",
+      "contact",
+      "impact-peak",
+      "impact-tail",
+      "dissipate"
+    ],
+    "cellSha256": [
+      "409480f6686e001e8753ce0c283fec6cba114a9ff21078cc4741efce42d134d3",
+      "782525b62340044811747496c648d3ada2051b373c22d81db233386d5b544935",
+      "baf2c23a4e4f7ee96956073627d6c871b3d4617a07bfe036103e49bd6683b2fd",
+      "a6362781303c06d8133eaeeb7550be476dab21b6484465736f47a2478cf567fc",
+      "3eefe96c207f0654647297ee4dce8636d726b68542685641123407ecffe7df32",
+      "ed4cd071e6b5209ecad3ec41ef8b614f4530e701917411969f65cfc530b1f6eb"
+    ],
+    "method": "Six approved RGBA cells repacked from 3x2 into 4x2 without resampling or redrawing."
+  },
+  "audio": false,
+  "review": "Approved body and distinct flight/release/impact artwork; playback mapped to authoritative server launch and outcome events. Review flight speed does not change gameplay."
+}

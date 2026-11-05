@@ -1,0 +1,53 @@
+{
+  "species": "spiny-back-leader",
+  "status": "user-approved-body-and-effects",
+  "approvedOn": "2026-11-06",
+  "body": {
+    "image": "shoot.webp",
+    "sha256": "085617911f7d3e602a92841246e0ef1b470b749171a79a5073103a65b695ccfc",
+    "nativeFrameSize": 512,
+    "columns": 4,
+    "frameCount": 8,
+    "durationsMs": [
+      140,
+      170,
+      190,
+      140,
+      90,
+      170,
+      180,
+      160
+    ],
+    "launchAtMs": 640,
+    "outlet": {
+      "x": 145,
+      "y": 317
+    },
+    "method": "Approved atlas copied byte-for-byte."
+  },
+  "effects": {
+    "image": "effects.png",
+    "sha256": "d8059c4bf42fcb7ae317f7a66803cfe5f0f36a42c1505fc50f1c6dfe6562d8bc",
+    "nativeFrameSize": 512,
+    "columns": 4,
+    "frames": [
+      "flight",
+      "release",
+      "contact",
+      "impact-peak",
+      "impact-tail",
+      "dissipate"
+    ],
+    "cellSha256": [
+      "2a9cd9fa29f3b4918c9f9c1d83fb857701a712f65bef9f9a8458de1332f964ba",
+      "086584ae144006679dbb75cceab362f9b21fe46dacab77ee7071b81499524065",
+      "dd97060bc25dcd9f56d7b9077c5a13f12285e1ccc1d101bbbdae9c98c05c685f",
+      "a9cb53b84cdb0754085fe8584f20dd713b8f8b0faaf9684d3bda6fa92267ec44",
+      "ce9408f21aebe730703c79404fed156523c8e5afda5f652d0bab156aaf07fed9",
+      "415e59544485830a247e7c47178e10fbbeaf62dd2c86564868388fb1433462f7"
+    ],
+    "method": "Six approved RGBA cells repacked from 3x2 into 4x2 without resampling or redrawing."
+  },
+  "audio": false,
+  "review": "Approved body and distinct flight/release/impact artwork; playback mapped to authoritative server launch and outcome events. Review flight speed does not change gameplay."
+}

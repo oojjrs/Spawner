@@ -559,7 +559,8 @@
     }));
     await Promise.all([...creatureAttackSheets, ...creatureRangedSheets, ...creatureDeathSheets].map(async ([species, entry]) => {
       await entry.sprite.decode();
-      entry.scale = creatureIdleSheets.get(species)?.scale || 1;
+      entry.scale = creatureIdleSheets.get(species)?.scale || (species === "spiny-back-beetle" ?
+        Spawner.BEETLE_SPRITE.scale * (Spawner.BEETLE_SPRITE.registrationScale || 1) / 1.4 : 1);
     }));
     for (const tribe of Spawner.PLAYER_TRIBES) {
       const entry = unitAnimationSheets.get(tribe.key).get("idle");
@@ -4874,7 +4875,7 @@
       const frame = idleMotion.matches ? pose.stage === "flight" ? 4 : 0 : pose.frame;
       const animation = Spawner.imageFrameGeometry(pose.animation, frame);
       const owl = agent.species === "talon-owl";
-      const point = worldToScreen(renderPosition.x + .5, renderPosition.y + (owl ? .86 : 1));
+      const point = worldToScreen(renderPosition.x + .5, renderPosition.y + (owl || agent.species === "spiny-back-beetle" ? .86 : 1));
       const size = state.camera.zoom * (owl ? Spawner.TALON_OWL_IDLE.scale : 1.4 * entry.scale) *
         animation.frameSize / (animation.viewSize || animation.frameSize);
       const left = -size * animation.pivotX / animation.frameSize;
@@ -4904,7 +4905,7 @@
       const entry = pose && (pose.action === "ranged" ? creatureRangedSheets : creatureAttackSheets).get(agent.species);
       if (!entry || !entry.sprite.complete || !entry.sprite.naturalWidth) return false;
       const animation = Spawner.imageFrameGeometry(pose.animation, pose.frame), owl = agent.species === "talon-owl";
-      const point = worldToScreen(renderPosition.x + .5, renderPosition.y + (owl ? .86 : 1));
+      const point = worldToScreen(renderPosition.x + .5, renderPosition.y + (owl || agent.species === "spiny-back-beetle" ? .86 : 1));
       const size = state.camera.zoom * (owl ? Spawner.TALON_OWL_IDLE.scale : 1.4 * entry.scale) *
         animation.frameSize / animation.viewSize * (animation.registrationScale || 1);
       const left = -size * animation.pivotX / animation.frameSize;
@@ -4927,7 +4928,7 @@
       const entry = pose && creatureHurtSheets.get(agent.species);
       if (!entry || !entry.sprite.complete || !entry.sprite.naturalWidth) return false;
       const animation = Spawner.imageFrameGeometry(pose.animation, pose.frame), owl = agent.species === "talon-owl";
-      const point = worldToScreen(renderPosition.x + .5, renderPosition.y + (owl ? .86 : 1));
+      const point = worldToScreen(renderPosition.x + .5, renderPosition.y + (owl || agent.species === "spiny-back-beetle" ? .86 : 1));
       const size = state.camera.zoom * (owl ? Spawner.TALON_OWL_IDLE.scale : 1.4 * entry.scale) * (animation.registrationScale || 1);
       const left = -size * animation.pivotX / animation.frameSize;
       const top = -size * animation.pivotY / animation.frameSize;
@@ -5133,21 +5134,47 @@
       }
     }
 
+    function drawWorldCreatureEffect(agent, kind, x, y, size, angle, age, muzzle) {
+      const effect = Spawner.CREATURE_RANGED_EFFECTS[agent?.species];
+      const command = Spawner.creatureRangedEffectCommand(effect, kind, { x, y, size, angle, age, muzzle });
+      if (!command) return false;
+      let image = detailVfxImages.get(command.image);
+      if (!image) { image = new Image(); image.src = assetSource(command.image); detailVfxImages.set(command.image, image); }
+      return Spawner.drawDetailVfxCell(ctx, image, command);
+    }
+
     function drawRecordedDnaEffects(cell) {
-      // Keep the existing presentation while taking timing and every recipient
-      // from the journal. The new artwork is reviewed separately.
+      // Approved neutral artwork replaces only its own events. Authoritative
+      // timing, redacted endpoints, defense and other species retain their paths.
       for (const projectile of combatVfxFrame.projectiles) {
         if (!projectile.from || !projectile.to) continue;
         const source = visibleAgents().find(agent => String(agent.id) === String(projectile.sourceId));
         const outlet = source && Spawner.creatureRangedOutlet(source, Math.sign(projectile.to.x - projectile.from.x) || source.facing);
-        const start = worldToScreen(projectile.from.x + .5 + (outlet?.x || 0), projectile.from.y + (outlet ? 1 + outlet.y : .5));
+        const floor = source?.species === "spiny-back-beetle" ? .86 : 1;
+        const start = worldToScreen(projectile.from.x + .5 + (outlet?.x || 0), projectile.from.y + (outlet ? floor + outlet.y : .5));
         const end = worldToScreen(projectile.to.x + .5, projectile.to.y + .5), progress = projectile.progress;
         const x = start.x + (end.x - start.x) * progress, y = start.y + (end.y - start.y) * progress;
+        const angle = Math.atan2(end.y-start.y,end.x-start.x), age = state.simSeconds-projectile.launchedAt;
+        if (drawWorldCreatureEffect(source,"flight",x,y,Spawner.unitDisplaySize(source || {})*cell,angle,age,start)) {
+          drawWorldCreatureEffect(source,"release",start.x,start.y,Spawner.unitDisplaySize(source)*cell,angle,age);
+          continue;
+        }
         ctx.save(); ctx.fillStyle = "#b6ed84"; ctx.strokeStyle = "#e0ffb7"; ctx.lineWidth = Math.max(1, cell * .035);
         ctx.beginPath(); ctx.moveTo(start.x, start.y); ctx.lineTo(x, y); ctx.stroke();
         ctx.beginPath(); ctx.arc(x, y, Math.max(2, cell * .07), 0, Math.PI * 2); ctx.fill(); ctx.restore();
       }
+      const defended = new Set(combatVfxFrame.active.filter(cue => cue.channel === "defense" &&
+        ["block","parry","dodge"].includes(cue.kind)).map(cue => cue.eventId));
       for (const cue of combatVfxFrame.active) {
+        if (cue.channel === "impact" && cue.mode === "ranged" && ["hit","critical","followup"].includes(cue.kind) &&
+            cue.amount > 0 && cue.to && !defended.has(cue.eventId)) {
+          const source = visibleAgents().find(agent => String(agent.id) === String(cue.sourceId));
+          const target = visibleAgents().find(agent => String(agent.id) === String(cue.targetId));
+          const point = worldToScreen(cue.to.x+.5,cue.to.y+.5);
+          const angle = cue.from ? Math.atan2(cue.to.y-cue.from.y,cue.to.x-cue.from.x) : Math.PI;
+          if (drawWorldCreatureEffect(source,"impact",point.x,point.y,
+              Spawner.unitDisplaySize(target || source || {})*cell*(cue.kind === "critical" ? 1.15 : 1),angle,cue.age)) continue;
+        }
         if (cue.channel === "impact" && cue.mode === "ranged" && ["hit", "critical", "followup"].includes(cue.kind) && cue.age < .22 && cue.to) {
           const point = worldToScreen(cue.to.x + .5, cue.to.y + .5), progress = cue.age / .22;
           ctx.save(); ctx.globalAlpha = 1 - progress; ctx.strokeStyle = "#e0ffb7"; ctx.lineWidth = Math.max(1, cell * .025);
@@ -8259,7 +8286,7 @@
       return unitDisplayScale(agent);
     }
     function drawCombatCreature(context, agent, x, floor, height) {
-      if (agent.species === "spiny-back-beetle") {
+      if (agent.species === "spiny-back-beetle" && !Spawner.creatureRangedPose(agent, state.simSeconds)) {
         const pose = Spawner.beetleAnimationPose(agent, state.simSeconds);
         const attack = pose.action === "attack";
         const shape = Spawner.imageFrameGeometry(attack ? Spawner.BEETLE_ATTACK_SPRITE : Spawner.BEETLE_SPRITE, pose.frame);
@@ -8471,8 +8498,8 @@
         } else if (command.kind === "flight") {
           // Keep an actual shot visible while its approved sheet loads or fails.
           // Use the same frozen origin, current head and lifetime as the artwork.
-          const directionX = Math.cos(command.angle), directionY = Math.sin(command.angle);
-          const x = command.x + directionX * command.size * .25, y = command.y + directionY * command.size * .25;
+          const directionX = Math.cos(command.pathAngle ?? command.angle), directionY = Math.sin(command.pathAngle ?? command.angle);
+          const x = command.headX ?? command.x + directionX * command.size * .25, y = command.headY ?? command.y + directionY * command.size * .25;
           const radius = clamp(command.size * .035, 2, 6);
           context.save(); context.fillStyle = "#b6ed84"; context.strokeStyle = "#e0ffb7"; context.lineWidth = Math.max(1, radius * .55);
           context.beginPath(); context.moveTo(x - directionX * radius * 4, y - directionY * radius * 4); context.lineTo(x, y); context.stroke();
@@ -8485,7 +8512,7 @@
           if (age >= 0 && age < .25 && !fallbackImpacts.some(entry => entry.impact.eventId === command.eventId)) {
             const target = arenaUnits.find(agent => String(agent.id) === String(command.targetId));
             fallbackImpacts.push({ impact: { kind: "hit", eventId: command.eventId }, age,
-              primary: target ? Spawner.combatPrimary(target) : "blade", x: command.x, bodyY: command.y, lineWidth: 1 });
+              primary: target ? Spawner.combatPrimary(target) : "blade", x: command.contactX ?? command.x, bodyY: command.contactY ?? command.y, lineWidth: 1 });
           }
         }
       }

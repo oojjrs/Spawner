@@ -10587,6 +10587,110 @@
           512
         ]
       }
+    },
+    "DesignAssets/Animations/CreatureRangedV1/spiny-back-beetle/shoot.webp": {
+      "display": [
+        512,
+        512
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ],
+      "nativeSource": {
+        "sha256": "93bffae835b56921f6544dad6aa56ca75b598dc80df5d975b2f44cadf08fcb22",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      },
+      "note": "Approved native body or effect cells; lossless original pixels retained."
+    },
+    "DesignAssets/Animations/CreatureRangedV1/spiny-back-beetle/effects.png": {
+      "display": [
+        512,
+        512
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ],
+      "nativeSource": {
+        "sha256": "5e3eb06980435db71e2b02fb80522c924febcb875e43755a5d932b1a34766a6a",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      },
+      "note": "Approved native body or effect cells; lossless original pixels retained."
+    },
+    "DesignAssets/Animations/CreatureRangedV1/spiny-back-leader/shoot.webp": {
+      "display": [
+        512,
+        512
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ],
+      "nativeSource": {
+        "sha256": "085617911f7d3e602a92841246e0ef1b470b749171a79a5073103a65b695ccfc",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      },
+      "note": "Approved native body or effect cells; lossless original pixels retained."
+    },
+    "DesignAssets/Animations/CreatureRangedV1/spiny-back-leader/effects.png": {
+      "display": [
+        512,
+        512
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ],
+      "nativeSource": {
+        "sha256": "d8059c4bf42fcb7ae317f7a66803cfe5f0f36a42c1505fc50f1c6dfe6562d8bc",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      },
+      "note": "Approved native body or effect cells; lossless original pixels retained."
     }
   }
 }

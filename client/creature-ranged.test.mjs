@@ -20,8 +20,8 @@ const unit = (key, launches = [10.3], end = launches.at(-1) + .4, directionX = -
     shotLaunches: launches, endsAt: end, directionX }
 });
 
-test("only the approved native ranged sheets are registered, without new projectile artwork", () => {
-  assert.deepEqual(Object.keys(CREATURE_RANGED_ANIMATIONS), species);
+test("approved native ranged sheets remain registered with their original bytes", () => {
+  assert.deepEqual(new Set(Object.keys(CREATURE_RANGED_ANIMATIONS)), new Set([...species, "spiny-back-beetle", "spiny-back-leader"]));
   const sizes = JSON.parse(readFileSync(new URL("../DesignAssets/image-sizes.json", import.meta.url))).images;
   for (const key of species) {
     const animation = CREATURE_RANGED_ANIMATIONS[key];

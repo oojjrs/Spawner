@@ -1,3 +1,4 @@
+import { CREATURE_RANGED_EFFECTS, CREATURE_RANGED_EFFECT_ASSETS, creatureRangedEffectCommand } from "./creature-ranged-vfx.mjs";
 import { CREATURE_RANGED_ANIMATIONS, creatureRangedOutlet } from "./creature-ranged.mjs";
 import { unitRangedProjectile } from "./unit-ranged.mjs";
 
@@ -14,7 +15,7 @@ export const DETAIL_DEFENSE_VFX = Object.freeze({
   block: "DesignAssets/Animations/CombatDefenseV1/block.png",
   parry: "DesignAssets/Animations/CombatDefenseV1/parry.png"
 });
-export const DETAIL_COMBAT_VFX_ASSETS = [...Object.values(DETAIL_COMBAT_VFX).map(clip => clip.image), ...Object.values(DETAIL_DEFENSE_VFX)];
+export const DETAIL_COMBAT_VFX_ASSETS = [...Object.values(DETAIL_COMBAT_VFX).map(clip => clip.image), ...Object.values(DETAIL_DEFENSE_VFX), ...CREATURE_RANGED_EFFECT_ASSETS];
 export function detailVfxFrame(clip, milliseconds) {
   if (!Number.isFinite(milliseconds) || milliseconds < 0) return null;
   for (let index = 0; index < clip.frames.length; index++) {
@@ -25,6 +26,7 @@ export function detailVfxFrame(clip, milliseconds) {
 }
 const neutralFlight = Object.freeze({ image: null, frames: [], durations: [] });
 function projectileClip(agent) {
+  if (CREATURE_RANGED_EFFECTS[agent?.species]) return CREATURE_RANGED_EFFECTS[agent.species];
   // Reuse the existing generic flight, not unapproved new effect artwork.
   if (CREATURE_RANGED_ANIMATIONS[agent?.species]) return neutralFlight;
   const tribe = agent?.tribe || agent?.key;
@@ -144,6 +146,18 @@ export function createDetailCombatVfx() {
       const startY = launch.y * height + launch.offsetY * cell;
       const endY = target.y - target.height * .5, angle = Math.atan2(endY - startY, target.x - startX);
       const size = Math.min(444, launch.size * cell);
+      if (launch.clip.flightAnchor) {
+        const identity = { eventId: shot.id, projectileId: shot.projectileId, sourceId: shot.sourceId,
+          targetId: shot.targetId, launchedAt: shot.launchedAt, arrivesAt: shot.arrivesAt };
+        const flight = creatureRangedEffectCommand(launch.clip, "flight", {
+          x: startX + (target.x-startX)*shot.progress, y: startY + (endY-startY)*shot.progress,
+          size: size/.85, angle, age: shot.age ?? time-shot.launchedAt, muzzle: { x: startX, y: startY } });
+        const release = creatureRangedEffectCommand(launch.clip, "release", {
+          x: startX, y: startY, size: size/.85, angle, age: shot.age ?? time-shot.launchedAt });
+        if (flight) result.push({ ...flight, ...identity });
+        if (release) result.push({ ...release, ...identity });
+        continue;
+      }
       // Flight heads lie right of the cell centre. Anchor the head to the true path.
       result.push({ image: launch.clip.image, frame: 0, x: startX + (target.x - startX) * shot.progress - Math.cos(angle) * size * .25,
         y: startY + (endY - startY) * shot.progress - Math.sin(angle) * size * .25, size, angle, kind: "flight", eventId: shot.id, projectileId: shot.projectileId,
@@ -158,6 +172,16 @@ export function createDetailCombatVfx() {
       const projectileImpact = cue.mode === "ranged" && ["hit", "critical", "followup"].includes(cue.kind);
       const sourceClip = projectileImpact && (projectileClip(source) || anchors.get(String(cue.sourceId))?.clip);
       const clip = sourceClip?.image ? sourceClip : DETAIL_COMBAT_VFX.hit;
+      if (clip.flightAnchor) {
+        const from = positions.get(String(cue.sourceId)) || anchors.get(String(cue.sourceId))?.point;
+        const angle = from ? Math.atan2(point.y-point.height*.5-(from.y-from.height*.5), point.x-from.x) : Math.PI;
+        const impact = creatureRangedEffectCommand(clip, "impact", { x: point.x, y: point.y-point.height*.5,
+          size: Math.min(444, Math.max(point.height,point.width)) * (cue.kind === "critical" ? 1.15 : 1),
+          angle, age: time-cue.at });
+        if (impact) result.push({ ...impact, eventId: cue.eventId, sourceId: cue.sourceId,
+          targetId: cue.targetId, eventAt: cue.eventAt ?? cue.at, amount: cue.amount });
+        continue;
+      }
       const frame = detailVfxFrame(clip, (time - cue.at) * 1000);
       if (frame === null) continue;
       result.push({ image: clip.image, frame, x: point.x, y: point.y - point.height * .5,
@@ -298,7 +322,14 @@ export function drawDetailVitalEffect(context, command, { width, height, reduced
 export function drawDetailVfxCell(context, image, command) {
   if (!image?.complete || !image.naturalWidth) return false;
   const cell = image.naturalWidth / 4;
-  context.save(); context.translate(command.x, command.y); context.rotate(command.angle);
+  context.save();
+  if (command.muzzleClip) {
+    const muzzle = command.muzzleClip;
+    context.translate(muzzle.x, muzzle.y); context.rotate(muzzle.angle);
+    context.beginPath(); context.rect(0,-1000000,1000000,2000000); context.clip();
+    context.rotate(-muzzle.angle); context.translate(-muzzle.x,-muzzle.y);
+  }
+  context.translate(command.x, command.y); context.rotate(command.angle);
   context.drawImage(image, command.frame % 4 * cell, Math.floor(command.frame / 4) * cell, cell, cell,
     -command.size / 2, -command.size / 2, command.size, command.size);
   context.restore(); return true;
