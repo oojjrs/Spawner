@@ -1,0 +1,724 @@
+{
+  "status": "review-only-not-registered",
+  "durationMs": 420,
+  "bilateralLeafAmplitudeDegrees": 24,
+  "sourceHash": "030e75b71127be552ac3ab9bdf51c707884d5c234706b1803c10ba2abcb39dfb",
+  "worldReadyAdded": 0,
+  "newPixelsPainted": 0,
+  "generatedBackingUsed": false,
+  "sourcePixelReownership": {
+    "bladeBasePixels": 577,
+    "fixedUpperCutFringePixels": 10,
+    "fixedFringeAlphaMax": 3.0
+  },
+  "camera": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "frameCount": 25,
+  "loopPlaybackFrames": 24,
+  "frameTimesMs": [
+    0.0,
+    17.5,
+    35.0,
+    52.5,
+    70.0,
+    87.5,
+    105.0,
+    122.5,
+    140.0,
+    157.5,
+    175.0,
+    192.5,
+    210.0,
+    227.5,
+    245.0,
+    262.5,
+    280.0,
+    297.5,
+    315.0,
+    332.5,
+    350.0,
+    367.5,
+    385.0,
+    402.5,
+    420.0
+  ],
+  "denseTimeSamples": 421,
+  "trianglesTested": 1834718,
+  "minimumMeshJacobian": 0.2834116276376432,
+  "soleLandmarkDisplacementMax": 0.0,
+  "solePixelPremultipliedErrorMax": 0.0,
+  "leftAttachmentErrorMax": 0.0,
+  "rightAttachmentErrorMax": 0.0,
+  "neutralPremultipliedSourceErrorMax": 0.0,
+  "canvasEdgeAlphaMax": 0,
+  "opaqueInteriorSourceCounts": {
+    "body": 27139,
+    "left": 1671,
+    "right": 4916
+  },
+  "projectedOpaqueInteriorAlphaMin": {
+    "body": 251.0,
+    "left": 251.8562864479909,
+    "right": 251.0
+  },
+  "comparison": {
+    "registrations": [
+      {
+        "scale": 0.7048458149779736,
+        "centerX": 254.0,
+        "floorY": 421
+      },
+      {
+        "scale": 1.1851851851851851,
+        "centerX": 250.0,
+        "floorY": 447
+      },
+      {
+        "scale": 1.1851851851851851,
+        "centerX": 250.0,
+        "floorY": 447
+      }
+    ],
+    "basicEvidence": "../refinement/basic-evidence.json",
+    "method": "Same elapsed time; fixed neutral cream-body width160 for each source; no per-frame fit. Actual basic startup ramp retained; revised candidate is a steady loop with entry blend still pending.",
+    "differentAppearances": true
+  },
+  "limitations": [
+    "No native Canvas/browser equivalence or resource prop contact validation.",
+    "Entry blend and interruption/repeated state transitions still need runtime checks.",
+    "Offline review is not user approval or production action readiness."
+  ],
+  "frames": [
+    {
+      "timeMs": 0.0,
+      "leftRadians": 0.0,
+      "rightRadians": -0.0,
+      "bodyY": 0.0,
+      "minimumMeshJacobian": 1.0,
+      "generatedBackingUsed": false,
+      "opaqueInterior": {
+        "body": {
+          "count": 27139,
+          "alphaMin": 251.0,
+          "below240": 0
+        },
+        "left": {
+          "count": 1671,
+          "alphaMin": 252.0,
+          "below240": 0
+        },
+        "right": {
+          "count": 4916,
+          "alphaMin": 251.0,
+          "below240": 0
+        }
+      }
+    },
+    {
+      "timeMs": 17.5,
+      "leftRadians": 0.10841386809376061,
+      "rightRadians": -0.10841386809376061,
+      "bodyY": -0.07407407407407407,
+      "minimumMeshJacobian": 0.8175041225660943,
+      "generatedBackingUsed": false,
+      "opaqueInterior": {
+        "body": {
+          "count": 27139,
+          "alphaMin": 251.0,
+          "below240": 0
+        },
+        "left": {
+          "count": 1671,
+          "alphaMin": 251.99999999999997,
+          "below240": 0
+        },
+        "right": {
+          "count": 4916,
+          "alphaMin": 251.0,
+          "below240": 0
+        }
+      }
+    },
+    {
+      "timeMs": 35.0,
+      "leftRadians": 0.20943951023931953,
+      "rightRadians": -0.20943951023931953,
+      "bodyY": -0.25925925925925924,
+      "minimumMeshJacobian": 0.6455519226991472,
+      "generatedBackingUsed": false,
+      "opaqueInterior": {
+        "body": {
+          "count": 27139,
+          "alphaMin": 251.0,
+          "below240": 0
+        },
+        "left": {
+          "count": 1671,
+          "alphaMin": 252.0,
+          "below240": 0
+        },
+        "right": {
+          "count": 4916,
+          "alphaMin": 251.37031879118433,
+          "below240": 0
+        }
+      }
+    },
+    {
+      "timeMs": 52.5,
+      "leftRadians": 0.2961921958772244,
+      "rightRadians": -0.2961921958772244,
+      "bodyY": -0.5,
+      "minimumMeshJacobian": 0.49646344821135174,
+      "generatedBackingUsed": false,
+      "opaqueInterior": {
+        "body": {
+          "count": 27139,
+          "alphaMin": 251.0,
+          "below240": 0
+        },
+        "left": {
+          "count": 1671,
+          "alphaMin": 251.8562864479909,
+          "below240": 0
+        },
+        "right": {
+          "count": 4916,
+          "alphaMin": 251.0421413322478,
+          "below240": 0
+        }
+      }
+    },
+    {
+      "timeMs": 70.0,
+      "leftRadians": 0.3627598728468436,
+      "rightRadians": -0.3627598728468436,
+      "bodyY": -0.7407407407407407,
+      "minimumMeshJacobian": 0.381183126090773,
+      "generatedBackingUsed": false,
+      "opaqueInterior": {
+        "body": {
+          "count": 27139,
+          "alphaMin": 251.0,
+          "below240": 0
+        },
+        "left": {
+          "count": 1671,
+          "alphaMin": 251.9491245879944,
+          "below240": 0
+        },
+        "right": {
+          "count": 4916,
+          "alphaMin": 251.0,
+          "below240": 0
+        }
+      }
+    },
+    {
+      "timeMs": 87.5,
+      "leftRadians": 0.40460606397098503,
+      "rightRadians": -0.40460606397098503,
+      "bodyY": -0.925925925925926,
+      "minimumMeshJacobian": 0.3083285825119109,
+      "generatedBackingUsed": false,
+      "opaqueInterior": {
+        "body": {
+          "count": 27139,
+          "alphaMin": 251.0,
+          "below240": 0
+        },
+        "left": {
+          "count": 1671,
+          "alphaMin": 251.98098787007456,
+          "below240": 0
+        },
+        "right": {
+          "count": 4916,
+          "alphaMin": 251.05862187828046,
+          "below240": 0
+        }
+      }
+    },
+    {
+      "timeMs": 105.0,
+      "leftRadians": 0.4188790204786391,
+      "rightRadians": -0.4188790204786391,
+      "bodyY": -1.0,
+      "minimumMeshJacobian": 0.28341162763764327,
+      "generatedBackingUsed": false,
+      "opaqueInterior": {
+        "body": {
+          "count": 27139,
+          "alphaMin": 251.0,
+          "below240": 0
+        },
+        "left": {
+          "count": 1671,
+          "alphaMin": 251.92645992623156,
+          "below240": 0
+        },
+        "right": {
+          "count": 4916,
+          "alphaMin": 251.38720102240438,
+          "below240": 0
+        }
+      }
+    },
+    {
+      "timeMs": 122.5,
+      "leftRadians": 0.40460606397098503,
+      "rightRadians": -0.40460606397098503,
+      "bodyY": -0.9259259259259259,
+      "minimumMeshJacobian": 0.3083285825119109,
+      "generatedBackingUsed": false,
+      "opaqueInterior": {
+        "body": {
+          "count": 27139,
+          "alphaMin": 251.0,
+          "below240": 0
+        },
+        "left": {
+          "count": 1671,
+          "alphaMin": 251.98098787007456,
+          "below240": 0
+        },
+        "right": {
+          "count": 4916,
+          "alphaMin": 251.05862187828046,
+          "below240": 0
+        }
+      }
+    },
+    {
+      "timeMs": 140.0,
+      "leftRadians": 0.36275987284684363,
+      "rightRadians": -0.36275987284684363,
+      "bodyY": -0.7407407407407407,
+      "minimumMeshJacobian": 0.381183126090773,
+      "generatedBackingUsed": false,
+      "opaqueInterior": {
+        "body": {
+          "count": 27139,
+          "alphaMin": 251.0,
+          "below240": 0
+        },
+        "left": {
+          "count": 1671,
+          "alphaMin": 251.9491245879944,
+          "below240": 0
+        },
+        "right": {
+          "count": 4916,
+          "alphaMin": 251.0,
+          "below240": 0
+        }
+      }
+    },
+    {
+      "timeMs": 157.5,
+      "leftRadians": 0.29619219587722445,
+      "rightRadians": -0.29619219587722445,
+      "bodyY": -0.5,
+      "minimumMeshJacobian": 0.4964634482113447,
+      "generatedBackingUsed": false,
+      "opaqueInterior": {
+        "body": {
+          "count": 27139,
+          "alphaMin": 251.0,
+          "below240": 0
+        },
+        "left": {
+          "count": 1671,
+          "alphaMin": 251.8562864479909,
+          "below240": 0
+        },
+        "right": {
+          "count": 4916,
+          "alphaMin": 251.04214133224784,
+          "below240": 0
+        }
+      }
+    },
+    {
+      "timeMs": 175.0,
+      "leftRadians": 0.20943951023931953,
+      "rightRadians": -0.20943951023931953,
+      "bodyY": -0.2592592592592593,
+      "minimumMeshJacobian": 0.6455519226991472,
+      "generatedBackingUsed": false,
+      "opaqueInterior": {
+        "body": {
+          "count": 27139,
+          "alphaMin": 251.0,
+          "below240": 0
+        },
+        "left": {
+          "count": 1671,
+          "alphaMin": 252.0,
+          "below240": 0
+        },
+        "right": {
+          "count": 4916,
+          "alphaMin": 251.37031879118433,
+          "below240": 0
+        }
+      }
+    },
+    {
+      "timeMs": 192.5,
+      "leftRadians": 0.10841386809376072,
+      "rightRadians": -0.10841386809376072,
+      "bodyY": -0.07407407407407396,
+      "minimumMeshJacobian": 0.8175041225660943,
+      "generatedBackingUsed": false,
+      "opaqueInterior": {
+        "body": {
+          "count": 27139,
+          "alphaMin": 251.0,
+          "below240": 0
+        },
+        "left": {
+          "count": 1671,
+          "alphaMin": 251.99999999999997,
+          "below240": 0
+        },
+        "right": {
+          "count": 4916,
+          "alphaMin": 251.0,
+          "below240": 0
+        }
+      }
+    },
+    {
+      "timeMs": 210.0,
+      "leftRadians": 5.1297885165914404e-17,
+      "rightRadians": -5.1297885165914404e-17,
+      "bodyY": 0.0,
+      "minimumMeshJacobian": 0.9894972453155222,
+      "generatedBackingUsed": false,
+      "opaqueInterior": {
+        "body": {
+          "count": 27139,
+          "alphaMin": 251.0,
+          "below240": 0
+        },
+        "left": {
+          "count": 1671,
+          "alphaMin": 252.0,
+          "below240": 0
+        },
+        "right": {
+          "count": 4916,
+          "alphaMin": 251.0,
+          "below240": 0
+        }
+      }
+    },
+    {
+      "timeMs": 227.5,
+      "leftRadians": -0.10841386809376044,
+      "rightRadians": 0.10841386809376044,
+      "bodyY": 0.37037037037037035,
+      "minimumMeshJacobian": 0.9662130870937095,
+      "generatedBackingUsed": false,
+      "opaqueInterior": {
+        "body": {
+          "count": 27139,
+          "alphaMin": 251.0,
+          "below240": 0
+        },
+        "left": {
+          "count": 1671,
+          "alphaMin": 252.0,
+          "below240": 0
+        },
+        "right": {
+          "count": 4916,
+          "alphaMin": 251.1375332445655,
+          "below240": 0
+        }
+      }
+    },
+    {
+      "timeMs": 245.0,
+      "leftRadians": -0.20943951023931962,
+      "rightRadians": 0.20943951023931962,
+      "bodyY": 1.2962962962962963,
+      "minimumMeshJacobian": 0.8919753086419429,
+      "generatedBackingUsed": false,
+      "opaqueInterior": {
+        "body": {
+          "count": 27139,
+          "alphaMin": 251.0,
+          "below240": 0
+        },
+        "left": {
+          "count": 1671,
+          "alphaMin": 251.97814500656983,
+          "below240": 0
+        },
+        "right": {
+          "count": 4916,
+          "alphaMin": 251.0145628647856,
+          "below240": 0
+        }
+      }
+    },
+    {
+      "timeMs": 262.5,
+      "leftRadians": -0.2961921958772244,
+      "rightRadians": 0.2961921958772244,
+      "bodyY": 2.5,
+      "minimumMeshJacobian": 0.7916666666666544,
+      "generatedBackingUsed": false,
+      "opaqueInterior": {
+        "body": {
+          "count": 27139,
+          "alphaMin": 251.0,
+          "below240": 0
+        },
+        "left": {
+          "count": 1671,
+          "alphaMin": 252.0,
+          "below240": 0
+        },
+        "right": {
+          "count": 4916,
+          "alphaMin": 251.0,
+          "below240": 0
+        }
+      }
+    },
+    {
+      "timeMs": 280.0,
+      "leftRadians": -0.36275987284684347,
+      "rightRadians": 0.36275987284684347,
+      "bodyY": 3.7037037037037033,
+      "minimumMeshJacobian": 0.6913580246913372,
+      "generatedBackingUsed": false,
+      "opaqueInterior": {
+        "body": {
+          "count": 27139,
+          "alphaMin": 251.0,
+          "below240": 0
+        },
+        "left": {
+          "count": 1671,
+          "alphaMin": 251.9963224590179,
+          "below240": 0
+        },
+        "right": {
+          "count": 4916,
+          "alphaMin": 251.0,
+          "below240": 0
+        }
+      }
+    },
+    {
+      "timeMs": 297.5,
+      "leftRadians": -0.40460606397098503,
+      "rightRadians": 0.40460606397098503,
+      "bodyY": 4.62962962962963,
+      "minimumMeshJacobian": 0.6141975308641726,
+      "generatedBackingUsed": false,
+      "opaqueInterior": {
+        "body": {
+          "count": 27139,
+          "alphaMin": 251.0,
+          "below240": 0
+        },
+        "left": {
+          "count": 1671,
+          "alphaMin": 252.0,
+          "below240": 0
+        },
+        "right": {
+          "count": 4916,
+          "alphaMin": 251.0,
+          "below240": 0
+        }
+      }
+    },
+    {
+      "timeMs": 315.0,
+      "leftRadians": -0.4188790204786391,
+      "rightRadians": 0.4188790204786391,
+      "bodyY": 5.0,
+      "minimumMeshJacobian": 0.5833333333333122,
+      "generatedBackingUsed": false,
+      "opaqueInterior": {
+        "body": {
+          "count": 27139,
+          "alphaMin": 251.0,
+          "below240": 0
+        },
+        "left": {
+          "count": 1671,
+          "alphaMin": 252.0,
+          "below240": 0
+        },
+        "right": {
+          "count": 4916,
+          "alphaMin": 251.1286335936035,
+          "below240": 0
+        }
+      }
+    },
+    {
+      "timeMs": 332.5,
+      "leftRadians": -0.4046060639709851,
+      "rightRadians": 0.4046060639709851,
+      "bodyY": 4.62962962962963,
+      "minimumMeshJacobian": 0.6141975308641726,
+      "generatedBackingUsed": false,
+      "opaqueInterior": {
+        "body": {
+          "count": 27139,
+          "alphaMin": 251.0,
+          "below240": 0
+        },
+        "left": {
+          "count": 1671,
+          "alphaMin": 252.0,
+          "below240": 0
+        },
+        "right": {
+          "count": 4916,
+          "alphaMin": 251.0,
+          "below240": 0
+        }
+      }
+    },
+    {
+      "timeMs": 350.0,
+      "leftRadians": -0.3627598728468436,
+      "rightRadians": 0.3627598728468436,
+      "bodyY": 3.7037037037037037,
+      "minimumMeshJacobian": 0.6913580246913372,
+      "generatedBackingUsed": false,
+      "opaqueInterior": {
+        "body": {
+          "count": 27139,
+          "alphaMin": 251.0,
+          "below240": 0
+        },
+        "left": {
+          "count": 1671,
+          "alphaMin": 251.9963224590179,
+          "below240": 0
+        },
+        "right": {
+          "count": 4916,
+          "alphaMin": 251.0,
+          "below240": 0
+        }
+      }
+    },
+    {
+      "timeMs": 367.5,
+      "leftRadians": -0.2961921958772245,
+      "rightRadians": 0.2961921958772245,
+      "bodyY": 2.5,
+      "minimumMeshJacobian": 0.7916666666666544,
+      "generatedBackingUsed": false,
+      "opaqueInterior": {
+        "body": {
+          "count": 27139,
+          "alphaMin": 251.0,
+          "below240": 0
+        },
+        "left": {
+          "count": 1671,
+          "alphaMin": 252.0,
+          "below240": 0
+        },
+        "right": {
+          "count": 4916,
+          "alphaMin": 251.0,
+          "below240": 0
+        }
+      }
+    },
+    {
+      "timeMs": 385.0,
+      "leftRadians": -0.20943951023931975,
+      "rightRadians": 0.20943951023931975,
+      "bodyY": 1.2962962962962967,
+      "minimumMeshJacobian": 0.8919753086419429,
+      "generatedBackingUsed": false,
+      "opaqueInterior": {
+        "body": {
+          "count": 27139,
+          "alphaMin": 251.0,
+          "below240": 0
+        },
+        "left": {
+          "count": 1671,
+          "alphaMin": 251.97814500656983,
+          "below240": 0
+        },
+        "right": {
+          "count": 4916,
+          "alphaMin": 251.0145628647856,
+          "below240": 0
+        }
+      }
+    },
+    {
+      "timeMs": 402.5,
+      "leftRadians": -0.10841386809376058,
+      "rightRadians": 0.10841386809376058,
+      "bodyY": 0.37037037037037024,
+      "minimumMeshJacobian": 0.9662130870937086,
+      "generatedBackingUsed": false,
+      "opaqueInterior": {
+        "body": {
+          "count": 27139,
+          "alphaMin": 251.0,
+          "below240": 0
+        },
+        "left": {
+          "count": 1671,
+          "alphaMin": 252.0,
+          "below240": 0
+        },
+        "right": {
+          "count": 4916,
+          "alphaMin": 251.13753324456553,
+          "below240": 0
+        }
+      }
+    },
+    {
+      "timeMs": 420.0,
+      "leftRadians": 0.0,
+      "rightRadians": -0.0,
+      "bodyY": 0.0,
+      "minimumMeshJacobian": 1.0,
+      "generatedBackingUsed": false,
+      "opaqueInterior": {
+        "body": {
+          "count": 27139,
+          "alphaMin": 251.0,
+          "below240": 0
+        },
+        "left": {
+          "count": 1671,
+          "alphaMin": 252.0,
+          "below240": 0
+        },
+        "right": {
+          "count": 4916,
+          "alphaMin": 251.0,
+          "below240": 0
+        }
+      }
+    }
+  ]
+}

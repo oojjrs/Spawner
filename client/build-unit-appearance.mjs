@@ -1,5 +1,6 @@
 import { imageDimensions } from "./image-audit.mjs";
 import { unitAppearanceReadiness } from "./unit-appearance.mjs";
+import { validateArchivedBodyAction } from "./unit-appearance-archive.mjs";
 import { existsSync, readFileSync, writeFileSync, mkdirSync, statSync } from "node:fs";
 import { resolve, dirname, sep, extname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -78,7 +79,13 @@ for (const tribe of UNIT_APPEARANCE_TRIBES) for (let mask = 0; mask < 32; mask++
     for (const asset of scene.separatedSceneAssets || []) if (asset.image && hashFile(asset.image) !== asset.sourceHash)
       throw new Error(`APPEARANCE BIRTH SCENE PROP CHANGED : ${key}`);
   }
+  // Preserve accepted historical body studies separately. They are deliberately
+  // absent from runtimeRecord, the lazy asset list and action readiness checks.
+  for (const [action, archive] of Object.entries(motions?.archivedBodyActions || {})) {
+    validateArchivedBodyAction(source, action, archive, { hashFile, imageDimensions: image => imageDimensions(assetPath(image)) });
+  }
   const record = { source, actions, previewStatus: motions?.previewStatus || {},
+    ...(motions?.archivedBodyActions ? { archivedBodyActions: motions.archivedBodyActions } : {}),
     ...(motions?.sceneActions ? { sceneActions: motions.sceneActions } : {}) };
   record.readiness = unitAppearanceReadiness(record, mask); records[key] = record; runtime[key] = runtimeRecord(record);
 }

@@ -189,5 +189,137 @@
   },
   "previewStatus": {
     "jump": "unsupported"
+  },
+  "archivedBodyActions": {
+    "harvest": {
+      "kind": "approved-source-locked-body-loop",
+      "scope": "archived-original-art",
+      "action": "harvest",
+      "sourceId": "unit-appearance-v1-bean-1f-neutral-v1",
+      "sourceHash": "030e75b71127be552ac3ab9bdf51c707884d5c234706b1803c10ba2abcb39dfb",
+      "tribe": "bean",
+      "mask": 31,
+      "canonicalTarget": false,
+      "runtimeEnabled": false,
+      "worldActionComplete": false,
+      "approval": {
+        "state": "approved",
+        "scope": "body-motion-only",
+        "receivedOn": "2026-11-05",
+        "evidence": {
+          "source": "parent-conversation",
+          "assistant": "새싹콩 1f 공격 / 새싹콩 1f 채집 / 몽돌 부속지 조합 / 포자 부속지 조합 영상",
+          "user": "1f 채집만 통과고 나머진 다 새로 만들어야겠다. 새싹콩은 머리가 찢어지고 몽돌하고 포자는 아예 이미지도 제대로 안 맞고 난리네"
+        },
+        "reviewedAsset": {
+          "path": "tools/bean-resource-motion-20261105/bilateral/basic-prior-bilateral.mp4",
+          "sha256": "a4c4750c61477890c2b47d8548e1295b5b9f290213e25957ee940eee85fb2f99"
+        }
+      },
+      "clip": {
+        "sourceId": "unit-appearance-v1-bean-1f-neutral-v1",
+        "sourceHash": "030e75b71127be552ac3ab9bdf51c707884d5c234706b1803c10ba2abcb39dfb",
+        "image": "tools/bean-resource-motion-20261105/bilateral/bean1f-bilateral-harvest.webp",
+        "imageHash": "7145c8e3667841d2d68dffa2a70e609b2e6cf74fdfee58d161c6f416b6bc3d48",
+        "frameSize": 512,
+        "columns": 4,
+        "frameCount": 25,
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "durationsMs": [
+          17.5,
+          17.5,
+          17.5,
+          17.5,
+          17.5,
+          17.5,
+          17.5,
+          17.5,
+          17.5,
+          17.5,
+          17.5,
+          17.5,
+          17.5,
+          17.5,
+          17.5,
+          17.5,
+          17.5,
+          17.5,
+          17.5,
+          17.5,
+          17.5,
+          17.5,
+          17.5,
+          17.5
+        ],
+        "loop": true,
+        "pivotX": 256,
+        "pivotY": 448,
+        "events": []
+      },
+      "clock": {
+        "loopDurationMs": 420,
+        "sampleStepMs": 17.5,
+        "closureProofFrame": 24,
+        "entry": {
+          "status": "neutral-first-frame-only",
+          "blendImplemented": false
+        },
+        "recovery": {
+          "status": "not-implemented",
+          "interruptionVerified": false,
+          "reentryVerified": false
+        },
+        "simulationClockChanged": false,
+        "cargoClockChanged": false,
+        "resourceYieldClockChanged": false
+      },
+      "ownership": {
+        "bodyOnly": true,
+        "resourceProps": "external",
+        "cargo": "external",
+        "contactAndYield": "existing-resource-scene-and-server",
+        "audio": "external",
+        "events": []
+      },
+      "validation": {
+        "offlineReport": {
+          "path": "tools/bean-resource-motion-20261105/bilateral/verification.json",
+          "sha256": "84dee6fbfa99339fed72f9b40b4f89aaaec16e3319b40a9037574fd73ec0f9a0"
+        },
+        "cameraVerified": true,
+        "nativeCanvasVerified": false,
+        "resourceContactVerified": false
+      },
+      "promotionBlockers": [
+        "Entry blend and interruption/reentry recovery are not implemented or runtime-tested.",
+        "Actual resource contact and native Canvas rendering have not been verified.",
+        "Original bean/1f is archival art, outside the current 24 canonical display targets."
+      ]
+    }
   }
 }
