@@ -2,7 +2,7 @@ import { generateMapWorld } from "./map.mjs";
 import { generateBurrows } from "./burrows.mjs";
 import { generateTribes } from "./tribes.mjs";
 import { LEGACY_FOOD_HABITATS, LEGACY_RESOURCE_HABITATS } from "./resource-legacy.mjs";
-import { isFoodHabitat, RESOURCE_HABITATS, RESOURCE_PLACEMENT, isResourceHabitat } from "./resources.mjs";
+import { RESOURCE_HABITATS, RESOURCE_PLACEMENT, isResourceHabitat } from "./resources.mjs";
 
 export const STARTING_FOOD_RADIUS = 22;
 export const STARTING_FOOD_CAP = 10;
@@ -237,7 +237,7 @@ export function generateStartingFood(world, cap) {
     const candidates = [];
     for (const [x, y] of queue) {
       if (world.terrain[y * size + x] < 3 || world.sites.some(site => Math.hypot(x - site[0], y - site[1]) < 3) ||
-        world.generationVersion !== 1 && !isFoodHabitat("honey-mushrooms", world, x, y)) continue;
+        world.generationVersion !== 1 && world.terrain[y * size + x] !== 5) continue;
       const density = Math.max(0.02, 0.5 + foodNoise(x + 317, y - 193, 13, seed + 9721) * 0.34 + foodNoise(x - 51, y + 93, 5, seed + 9743) * 0.16);
       const priority = -Math.log(Math.max(0.000001, foodHash(x + 1379, y - 411, seed + 9973))) / (0.025 + density ** 3);
       candidates.push({ x, y, distance: Math.hypot(x - cx, y - cy), path: distances[y * size + x], priority });

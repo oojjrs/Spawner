@@ -44,4 +44,32 @@ test("새 맵에는 삭제 자원을 배치하지 않고 기존 맵의 지형·�
   const original = generateWorld(saved.seed, 8);
   const camp = original.camps.find(entry => entry.tribe === "bean");
   assert.deepEqual([camp.x, camp.y], [219, 232]);
+  // Version-1 saves contain only the seed, so restoring them must use the old catalog.
+  const seedOnly = structuredClone(saved);
+  seedOnly.version = 1;
+  seedOnly.worldGenerationVersion = 8;
+  delete seedOnly.world;
+  seedOnly.creatures = { version: 1, agents: [] };
+  for (const colony of seedOnly.colonies) {
+    const start = original.camps.find(entry => entry.tribe === colony.tribe);
+    colony.x = start.x - 2; colony.y = start.y - 2;
+  }
+  seedOnly.games = seedOnly.games.map(([owner, data]) => {
+    const game = JSON.parse(data);
+    game.state.agents = [];
+    return [owner, JSON.stringify(game)];
+  });
+  const migrated = restoreRoom(seedOnly);
+  assert.equal(migrated.world.size, 320);
+  assert.equal(migrated.world.generationVersion, 8);
+  assert.deepEqual(migrated.world.terrain, original.terrain);
+  assert.deepEqual(migrated.world.camps, original.camps);
+  assert.deepEqual(migrated.colonies.map(({ x, y }) => [x, y]), seedOnly.colonies.map(({ x, y }) => [x, y]));
+  assert.ok([...migrated.food.values()].every(cell => !REMOVED_RESOURCE_TYPES.includes(cell.resourceType)));
+  const resaved = saveRoom(migrated);
+  assert.equal(resaved.version, 2);
+  const again = restoreRoom(resaved);
+  assert.deepEqual(again.world.terrain, migrated.world.terrain);
+  assert.deepEqual(again.world.camps, migrated.world.camps);
+  assert.deepEqual([...again.food], [...migrated.food]);
 });

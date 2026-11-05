@@ -1,3 +1,4 @@
+import { LEGACY_RESOURCE_HABITATS } from "./resource-legacy.mjs";
 import { WORLD_SIZE } from "./world-size.mjs";
 import { generateWildlife, generateResourceAreas } from "./ecology.mjs";
 import { populateWorldEconomy } from "./economy.mjs";
@@ -201,6 +202,8 @@ export function generateMapWorld(seed, onProgress, version, capturePlacementMaps
 function generateWorldCandidate(seed, revision, onProgress, version, baseline) {
   const SIZE = 320;
   const ecological = version === undefined || version >= 10;
+  // Old seed-only saves need their original resource catalog to reproduce camp placement.
+  const resourceHabitats = version <= 9 ? LEGACY_RESOURCE_HABITATS : RESOURCE_HABITATS;
   const terrain = new Uint8Array(SIZE * SIZE), hazards = new Uint8Array(SIZE * SIZE);
   const moistureField = new Float32Array(SIZE * SIZE), heightField = new Float32Array(SIZE * SIZE);
   const waterDistance = new Uint8Array(SIZE * SIZE);
@@ -261,14 +264,14 @@ function generateWorldCandidate(seed, revision, onProgress, version, baseline) {
       if (suitable.length < 16 || suitable.filter(index => distance[index] <= 4).length < 2) return null;
     }
     const initialFood = ecological && tribe.key === 'sprout' ? points.filter(index => distance[index] <= 12 &&
-      habitatFits(RESOURCE_HABITATS.find(habitat => habitat.key === 'clay'), index % SIZE, Math.floor(index / SIZE), true))
+      habitatFits(resourceHabitats.find(habitat => habitat.key === 'clay'), index % SIZE, Math.floor(index / SIZE), true))
       .sort((left, right) => distance[left] - distance[right] || left - right).slice(0, 3) :
       points.filter(index => distance[index] <= 12 && foodSites.has(index));
     if (initialFood.length < 2) return null;
     points.sort((a, b) => hash(a % SIZE, Math.floor(a / SIZE), seed + site.x * 17 + site.y * 31) -
       hash(b % SIZE, Math.floor(b / SIZE), seed + site.x * 17 + site.y * 31));
     const resources = [], used = new Set(ecological && tribe.key === 'sprout' ? initialFood : []);
-    const common = RESOURCE_HABITATS.filter(habitat => habitat.rarity === 'common');
+    const common = resourceHabitats.filter(habitat => habitat.rarity === 'common');
     common.sort((a, b) => ecological && tribe.key === 'pebble' && (a.key === 'pebbles' || b.key === 'pebbles') ?
       (b.key === 'pebbles' ? 1 : 0) - (a.key === 'pebbles' ? 1 : 0) :
       hash(a.nodes, a.separation, seed + site.x) - hash(b.nodes, b.separation, seed + site.x));
@@ -573,7 +576,7 @@ function generateWorldCandidate(seed, revision, onProgress, version, baseline) {
     if (!resourceReachable[index] || occupied.has(index) || camps.some(camp => Math.max(Math.abs(x - camp.x), Math.abs(y - camp.y)) <= 3)) continue;
     food.push([x, y, 0, type, null, null, initialFood.has(index)]); occupied.add(index);
   }
-  for (const habitat of RESOURCE_HABITATS) {
+  for (const habitat of resourceHabitats) {
     const candidates = [], placed = resources.filter(point => point[3] === habitat.key);
     for (let y = 2; y < SIZE - 2; y++) for (let x = 2; x < SIZE - 2; x++) {
       const index = y * SIZE + x;
@@ -590,7 +593,7 @@ function generateWorldCandidate(seed, revision, onProgress, version, baseline) {
       if (occupied.has(index) || placed.some(point => Math.hypot(point[0] - x, point[1] - y) < separation)) continue;
       const node = [x, y, Math.round(50 * abundance(index)), habitat.key]; resources.push(node); placed.push(node); occupied.add(index);
     }
-    onProgress(.35 + .15 * (RESOURCE_HABITATS.indexOf(habitat) + 1) / RESOURCE_HABITATS.length);
+    onProgress(.35 + .15 * (resourceHabitats.indexOf(habitat) + 1) / resourceHabitats.length);
   }
   const burrows = [];
   const burrowTargets = [{ type: 'large', count: 24, width: 3, separation: 22 }, { type: 'small', count: 64, width: 1, separation: 12 }];

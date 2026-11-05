@@ -40,7 +40,7 @@ test("5세대 월드의 시작 먹이는 시드별로 재현되고 모든 후보
   }
 });
 
-test("먹이 서식지는 지형과 숲 인접 여부로 구분하며 숲이 없으면 시작 버섯을 억지로 놓지 않는다", () => {
+test("삭제한 먹이는 현재 서식지에서 제외하고 옛 시작 먹이 생성은 숲이 있어야 한다", () => {
   const world = { seed: 13, sites: [[100, 100]], terrain: new Uint8Array(320 * 320).fill(3),
     hazards: new Uint8Array(320 * 320) };
   assert.equal(isFoodHabitat("honey-mushrooms", world, 100, 100), false);
@@ -52,7 +52,7 @@ test("먹이 서식지는 지형과 숲 인접 여부로 구분하며 숲이 없
   assert.equal(isFoodHabitat("berry-bush", world, 100, 100), false);
   world.terrain[100 * 320 + 101] = 5;
   assert.equal(isFoodHabitat("berry-bush", world, 100, 100), false);
-  assert.equal(isFoodHabitat("honey-mushrooms", world, 101, 100), true);
+  assert.equal(isFoodHabitat("honey-mushrooms", world, 101, 100), false);
   assert.equal(isFoodHabitat("nutrient-moss", world, 101, 100), false);
   assert.equal(isFoodHabitat("nutrients", world, 101, 100), false);
   assert.equal(isFoodHabitat("berry-bush", world, -1, 100), false);
