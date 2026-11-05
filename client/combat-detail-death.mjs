@@ -1,14 +1,39 @@
 import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
 import { unitRangedAppearance } from "./unit-ranged.mjs";
 import { UNIT_APPEARANCE_LEGACY_VISUAL_KEYS } from "../server/unit-appearance.mjs";
+import { unitAnimationFrame } from "./unit-animation.mjs";
+import { imageFrameGeometry } from "./image-geometry.mjs";
 
-// Only existing complete base/secretion death routes. Other body families keep
-// their previous behavior; this is not a readiness or hidden-anatomy workaround.
+// These two V12 slump sequences were explicitly approved together. Do not open
+// every creature route: the registry also contains unfinished/rejected studies.
+export const DETAIL_DEATH_CREATURES = Object.freeze(["vine-turtle", "walking-forest"]);
+
+// Existing complete base/secretion and the two approved creature death routes.
+// Other families keep their behavior; no readiness/hidden-anatomy workaround.
 export function detailDeathForm(unit) {
-  if (!unit || unit.species || !["bean", "spore", "pebble", "spring"].includes(unit.tribe)) return null;
+  if (!unit) return null;
+  if (unit.species) return DETAIL_DEATH_CREATURES.includes(unit.species) ? "creature/" + unit.species : null;
+  if (!["bean", "spore", "pebble", "spring"].includes(unit.tribe)) return null;
   const attributes = unitDisplayAttributes(unit);
   if ([...UNIT_APPEARANCE_LEGACY_VISUAL_KEYS, "blade", "carapace", "antenna", "feet"].some(key => attributes[key] > 0)) return null;
   return unit.tribe + "/" + (unitRangedAppearance(unit) ? "secretion" : "base");
+}
+
+// Match the existing world corpse support geometry using the already prepared
+// death entry. The caller draws its existing ground-shadow surface, not new art.
+export function detailCreatureDeathShadow(command, entry, reducedMotion = false) {
+  if (!DETAIL_DEATH_CREATURES.includes(command?.corpse?.species) || !entry?.animation ||
+    ![entry.scale, command.scale, command.cell, command.age].every(Number.isFinite) ||
+    entry.scale <= 0 || command.scale <= 0 || command.cell <= 0 || command.age < 0) return null;
+  const animation = entry.animation;
+  const frame = reducedMotion ? animation.frameCount - 1 : unitAnimationFrame(animation, command.age * 1000);
+  const geometry = imageFrameGeometry(animation, frame);
+  if (!(geometry.groundRadiusX > 0 && geometry.groundRadiusY > 0)) return null;
+  const reference = 1.4 * entry.scale / (animation.registrationScale || 1) * command.cell * command.scale;
+  const lifetime = command.corpse.decaysAt - command.corpse.diedAt;
+  const decay = Number.isFinite(lifetime) && lifetime > 0 ? Math.min(1, command.age / lifetime) : 0;
+  return { radiusX: geometry.groundRadiusX * reference, radiusY: geometry.groundRadiusY * reference,
+    opacity: .3 * (1 - decay * .4), frame };
 }
 
 export function createDetailCombatDeath() {

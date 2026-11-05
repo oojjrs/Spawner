@@ -8422,11 +8422,18 @@
         streamId: state.combatVfx?.streamId, width, height, visibleIds: arenaUnits.map(agent => agent.id),
         livingAgents: [...state.agents, ...state.rivals] });
       // Current authoritative corpses remain behind the living roster. Only
-      // this open view's previously observed base/secretion bodies are eligible.
+      // this open view's previously observed approved body routes are eligible.
       for (const command of deathPresentation?.commands(state.corpses, corpsePlaybackTime(), { width, height, cell }) || []) {
         const { point } = command;
         context.save(); context.fillStyle = "#13251e3d";
-        context.beginPath(); context.ellipse(point.x, point.y, Math.max(4, point.width * .28), Math.max(2, point.height * .035), 0, 0, Math.PI * 2); context.fill();
+        const shadow = Spawner.detailCreatureDeathShadow?.(command, creatureDeathSheets.get(command.corpse.species), idleMotion.matches);
+        if (shadow) {
+          const alpha = context.globalAlpha; context.globalAlpha *= shadow.opacity;
+          context.drawImage(groundShadow, point.x - shadow.radiusX, point.y - shadow.radiusY, shadow.radiusX * 2, shadow.radiusY * 2);
+          context.globalAlpha = alpha;
+        } else {
+          context.beginPath(); context.ellipse(point.x, point.y, Math.max(4, point.width * .28), Math.max(2, point.height * .035), 0, 0, Math.PI * 2); context.fill();
+        }
         context.translate(point.x, point.y); context.scale(command.scale, command.scale);
         drawAgentCorpse(context, command.corpse, 0, 0, command.cell, null, 1);
         context.restore();
