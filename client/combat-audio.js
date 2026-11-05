@@ -1,4 +1,5 @@
 (() => {
+  const maxLateness = .2;
   const creatureAttackHitTimes = Object.freeze({
     "flower-tail-bird": 0.36,
     "dew-rabbit": 0.36,
@@ -99,8 +100,8 @@
       // Seed only cues that have already happened on reconnect. Future cues
       // in an in-flight animation must remain eligible at their authored time.
       if (time + 1e-8 >= at) {
-        if (!initial && playback.events.get(key) !== stamp && time - at <= .2) events.push({ name: sound.name, unit });
-        playback.events.set(key, stamp);
+        if (!initial && playback.events.get(key)?.stamp !== stamp && time - at <= maxLateness) events.push({ name: sound.name, unit });
+        playback.events.set(key, { stamp, at });
       }
     }
     for (const unit of agents) {
@@ -118,16 +119,19 @@
       if (reaction && reaction.targetId === unit.id && ["parry", "block"].includes(reaction.kind)) {
         const key = "reaction:" + unit.id;
         active.add(key);
-        if (!initial && playback.events.get(key) !== reaction.id && time >= reaction.at && time - reaction.at <= .2)
+        if (!initial && playback.events.get(key)?.stamp !== reaction.id && time >= reaction.at && time - reaction.at <= maxLateness)
           events.push({ name: reaction.kind === "parry" ? "unit-attack" : "beetle-hurt", unit });
-        if (time >= reaction.at) playback.events.set(key, reaction.id);
+        if (time >= reaction.at) playback.events.set(key, { stamp: reaction.id, at: reaction.at });
       }
     }
     for (const unit of corpses) {
       collect(unit, "hurt", unit.hurtStartedAt, unit.hurtCount ?? unit.hurtStartedAt, 1);
       collect(unit, "death", unit.diedAt, unit.diedAt, 1);
     }
-    for (const key of playback.events.keys()) if (!active.has(key)) playback.events.delete(key);
+    // Camera/visibility filtering can briefly omit an audible unit or corpse.
+    // Keep its consumed cue until it is too old to replay on re-entry.
+    for (const [key, event] of playback.events)
+      if (!active.has(key) && time - event.at > maxLateness) playback.events.delete(key);
     playback.time = time;
     return events;
   }
