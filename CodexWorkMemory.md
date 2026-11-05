@@ -81,6 +81,46 @@
 ## 2026-11-05 포자버섯 원화 승인 반영
 
 - 사용자 「포자버섯 원화는 다 오케이」에 따라 검토된 포자 원화14종의 source 승인만 기록했다. 원본 픽셀/해시는 유지하며 실제 메시지 증거를 받아들이도록 승인 검사를 보완했다. 카메라 검수·동작 완성·worldReady는 올리지 않는다. 미승인 보관 이력은 포함하지 않고 공개 main의 8a4a8174에서 분리했다.
+## welcome-arrival-timing-commit-freeze-20261105-01a1a12e
+
+- 기록 시각: 2026-11-05T21:47:30+09:00; 승인 주체: 사용자(최신 「커밋」), 범위 분리/Git 실행 주체: Codex /root; 출처 현재 채팅 01a1a12e-3f3f-72c1-95e2-0b5b349b5ffb. 원발언 정확시각/항목ID 불명.
+- 직전 보고한 도착 즉시 동작1회→종료 후2000ms 대기→퇴장 수정과 관련 메모리를 로컬 커밋 범위로 확정한다. header/roots는 검수 SHA256과 동일하며 runtime은 sprout-roots 모듈만 HEAD 기반 index에 반영한다. 다른 모듈·소스·애셋·메모리 변경은 보존한다. 현재 index는 비어 있으며 main 시작 HEAD 9cecac8b63bd3275f7393527f32a87f0bc51d7f1다.
+- 관련 브라우저3조건 통과 및 UTF8NoBom/CRLF 형식 결과를 재사용한다. 이전 웰컴 푸시 영수증은 같은 작업의 다음 승인 커밋에 포함한다는 방침에 따라 함께 기록하며, 이번 후속 타이밍4개 기록과 본 승인 기록을 묶는다. 기존 연결 Projects 없음 조회를 재사용한다. 메시지 「웰컴 유닛 도착 후 동작 타이밍 수정」. 이번 승인은 로컬 커밋이며 푸시는 요청받지 않았다.
+
+## welcome-arrival-runtime-concurrency-correction-20261105-01a1a12e
+
+- 기록 시각: 2026-11-05T21:44:29+09:00; 정정 주체: Codex /root; 출처 현재 작업 마지막 runtime 비교 결과.
+- 직전 welcome-arrival-timing-complete의 「그 밖의 runtime 바이트는 작업 시작 백업과 동일」 문장은 실제 비교와 달라 정정한다. 작업 도중 병행 갱신된 runtime 모듈은 client/unit-health-ring.mjs, client/dna-editor.mjs, server/dna-combat-stats.mjs, server/dna.mjs, server/combat-stats.mjs, server/attributes.mjs, server/combat.mjs, client/codex-content.mjs이다. 이번 동기화 코드는 sprout 모듈만 바꿨으며 병행 모듈은 되돌리지 않았다. 최종 현재 runtime의 sprout 모듈이 수정 source와 정확히 같고 전체 runtime 문법도 정상임을 별도로 확인했다. 이 정정은 실제3조건 타이밍 검증 통과나 다른 제품 변경 범위를 바꾸지 않는다.
+
+## welcome-arrival-timing-complete-20261105-01a1a12e
+
+- 기록 시각: 2026-11-05T21:43:28+09:00; 주체: Codex /root 구현·직접 검수, 의도 결정 사용자; 출처 현재 채팅의 샘방울 도착 후 점프 지연 지적과 「유닛이 이속과 관계없이 … 재생 끝나면2초」 요구. 사용자 원발언 정확시각·항목ID 불명.
+- 완료: 웰컴 현재 유닛의 enter→perform→rest와 이미 떠나는 유닛들의 퇴장 목록을 독립시켰다. 중앙 도착 시각이 곧 동작 시작 시각이며 이전 퇴장이나 다음 에셋 준비가 자신의 2000ms 휴식·퇴장 시각을 늘리지 않는다. 다음 준비가 늦을 때는 입장만 기다리고 이미 시작된 퇴장·SFX를 계속 진행한다.
+- 모든 유닛 동작1회 의미에 맞춰 bean perform=0 예외를 기존 sproutIdlePose의 약872.665ms 움찔1회로 바꿨다. SPROUT_IDLE_SHRUG_DURATION_MS를 원본 idle 수학과 공유한다. 실제 이동 이속/셀 이동/pose/SFX, 외형 freeze·복구, 기존 로스터의 처음4기/이후35개 순환은 보존했다. 제품 변경은 client/welcome-header.js, client/sprout-roots.mjs와 runtime의 해당 모듈뿐이며 그 밖의 runtime 바이트는 작업 시작 백업과 동일함을 확인했다. 병행 작업의 다른 변경·메모리는 그대로 보존했다.
+- 실제 검증: 격리 headless Edge에서 기본속도, 몽돌0.15/샘방울1.8 시험 이속, 다음 포자 준비를 표시시계11초까지 보류한3조건을 통과했다. 포자/몽돌/샘방울 각각 perform.startedAt=enter.startedAt+실제 이동 duration, rest.startedAt=perform.startedAt+원본 clip duration, exit.startedAt=rest.startedAt+2를 수치 오차1e-8 이내로 확인했다. bean도 기존 움찔 길이 후 rest와 정확히2초 후 exit를 확인했다.
+- 자연 속도 샘방울: 도착/점프시작16.6508288772s, 점프종료17.7708288772s, 퇴장19.7708288772s. 느린 몽돌은 샘방울 동작 시작과 퇴장 시작 시점에도 떠나는 중이었으나 다음 단계가 막히지 않았다. 준비 지연 조건에서는 bean이 고정2초 후 퇴장해 무대를 비운 뒤 포자 입장이 준비될 때 시작했다.3조건 모두 pageerror/웰컴 렌더 경고0, AudioContext1개, spring-landing 이벤트 전달을 확인했다. 표시 시계100ms 단위 가속 검증이며 음질 평가는 아니다.
+- 문법: 수정한 header/runtime 검사 통과. 실제 자연 조건 캡처 natural.png를 육안 검수했다. 증거 $Trash/welcome-arrival-timing-20261105/{qa.mjs,qa-result.json,natural.png,slow-old-unit.png,delayed-next-asset.png,scoped-source.diff,runtime-sprout-before.txt,runtime-sprout-after.txt,final-hashes.json}. 최종 형식 검사 뒤 완료 보고하며 이번 후속 수정은 미스테이징/미커밋 상태로 남긴다.
+
+## welcome-fixed-rest-deadline-20261105-01a1a12e
+
+- 기록 시각: 2026-11-05T21:41:16+09:00; 주체: Codex 구현 판단; 출처 현재 웰컴 도착/2초 타이밍 수정.
+- 기본 속도와 느린 이전 몽돌/빠른 샘방울 조건의 실제 브라우저에서 도착→즉시 jump, 원본 클립 종료→정확히2초→퇴장이 통과했다. 추가 상태 검수에서 upcoming.ready가 false이면 rest 자체를 늘리는 기존 조건도 남아 있음을 확인했다. 최신 고정 대기 요구에 맞춰 다음 에셋 준비와 퇴장 시각도 분리한다.
+- 판단: 동작 종료 후2초에 현재 유닛은 항상 퇴장하며, 다음 유닛 준비가 늦으면 기존 배경/BGM/파형을 유지한 채 입장만 기다린다. 처음4종 우선 준비는 보존한다. 다음 준비를 기다릴 때 현재 유닛을 중앙에 중복 표시하지 않고 이미 시작한 퇴장과 SFX는 계속 진행한다.
+
+## welcome-arrival-timing-start-20261105-01a1a12e
+
+- 기록 시각: 2026-11-05T21:34:56+09:00; 요구 주체: 사용자, 원인 확인·구현 판단: Codex /root; 출처 현재 채팅 01a1a12e-3f3f-72c1-95e2-0b5b349b5ffb의 몽돌 다음 샘방울 점프 지연 지적. 원발언 정확 시각/항목 ID 불명.
+- 확인: 현재 phaseDuration(exit)는 이전 유닛 퇴장과 다음 입장 duration의 max이며, 먼저 도착한 incoming은 draw에서 rest로 보이고 perform은 전체 exit 종료 후에만 시작한다. 이속 차이에 의해 도착 후 동작이 늦어지는 직접 호출/상태 원인이다.
+- 최신 의도: 실제 이동 속도는 유지하되 유닛마다 도착 즉시 기존 동작 1회 → 동작 완료 후 2000ms 대기 → 퇴장. 이전 유닛 퇴장과 다음 입장은 계속 겹친다. 종전 bean perform=0 예외는 최신 모든 유닛 동작 1회 요구에 맞춰 기존 짧은 idle 움찔 1회(공유 원본 수학의 약873ms)로 계수한다. 새 애니메이션/애셋은 만들지 않는다.
+- 구현 판단: 현재 입장/중앙 동작/대기의 주체 하나와 독립적인 퇴장 목록으로 수명을 나눈다. 새 유닛의 perform/rest는 이전 퇴장 완료를 기다리지 않으며, 오래 남는 퇴장이 있어도 다음 입장까지 타이머를 막지 않는다. 공통 이동/pose/SFX, 외형 freeze와 동일 외형 복구, 35개 중복 없는 큐는 유지한다. runtime의 타 작업 모듈 변경은 보존하고 필요한 sprout 모듈만 동기화한다. 현재 요청에는 새 커밋/푸시가 없다.
+
+## welcome-ingame-consistency-pushed-20261105-01a1a12e
+
+- 기록 시각: 2026-11-05T21:29:53+09:00; 실행·검증 주체: Codex /root; Git 완료 승인 주체: 사용자; 출처: 현재 채팅 01a1a12e-3f3f-72c1-95e2-0b5b349b5ffb의 커밋·푸시 요청 및 실제 Git 출력.
+- 실제 커밋 adcdcffac75e5a646150b1826cf91e97106cee5c 「웰컴 유닛 동작과 효과음 연결 수정」 완료. 13개 제품 파일과 현재 채팅의 감사/구현/검증/승인 7개 메모리 기록만 14개 경로로 원자 커밋했다. build.mjs 보정은 이미 부모 HEAD에 있어 중복 변경하지 않았다. 제품은 검수 SHA256과 동일했고 staged diff --check 통과. 현재 추가된 승인 기록의 UTF8NoBom/CRLF 검사도 OK였다.
+- fetch origin main 후 로컬1/원격0만 남은 상태에서 git push origin main 성공(d736c2a→adcdcff). 이후 git ls-remote origin refs/heads/main으로 원격 adcdcffac75e5a646150b1826cf91e97106cee5c를 실제 읽었고, 요청을 시작한 H:/Spawner main/HEAD도 같은 값이며 index가 비어 있음을 확인했다. 병행 작업의 미커밋 파일·공용 메모리 기록은 작업 트리에 보존했다.
+- welcome-ingame-consistency-commit-freeze의 Git 실행 대기를 위 실제 결과로 완료 갱신한다. 증거: $Trash/welcome-ingame-consistency-20261105/{commit-plan.json,staged-final.diff,commit-result.json,push-verified.json}. 이 푸시 영수증은 커밋 후에만 알 수 있는 결과라 로컬 기록으로 남겨 다음 승인된 관련 커밋에 포함하며, 별도 메모리 전용 커밋이나 공개 커밋 수정은 수행하지 않는다.
+
 ## 1레벨 일꾼 DNA 반영 완료·커밋 준비 · 01a1a10e 현재 요약
 
 - 기록 ID: dna-level1-apply-complete-20261105-01a1a10e. 기록 시각: 2026-11-05T21:42:50+09:00. 기록자·취합 Codex /root, 확정·제품 반영·메모리·로컬 커밋 요청 주체 사용자. 출처 현재 채팅01a1a10e-176c-7cb3-a1cf-2ad477deffc4 및 worker_dna_rules/editor/design 완료 보고. H:/Spawner Windows PowerShell. 원발언 정확 시각·항목 ID 불명.

@@ -58,7 +58,8 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
   const neutralMetrics = new Map();
   let appearanceNumber = 0;
   let current = nextChoice();
-  let upcoming = null, arriving = null;
+  let upcoming = null;
+  let departing = [];
   const pendingSources = new Map();
   const reportedDraws = new WeakSet();
   const renderedChoices = new Map();
@@ -209,7 +210,7 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
     state.duration = bean.moveDuration;
     state.time = timeline;
     if (moving) state.idleStartedAt = null;
-    else if (state.idleStartedAt === null) state.idleStartedAt = timeline;
+    else if (state.idleStartedAt === null) state.idleStartedAt = phase === "perform" ? phaseStartedAt : timeline;
     const idle = !moving && !reducedMotion.matches ? globalThis.Spawner.sproutIdlePose((timeline - state.idleStartedAt) * 1000, size) : null;
     const landedAt = bean.moveDuration && timeline >= end ? end : state.landedAt;
     const head = globalThis.Spawner.sproutHeadPose(bean, appearance, timeline, landedAt,
@@ -284,10 +285,19 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
   }
   function travelMotion(atElapsed, atTime) {
     const size = motionSize();
-    const motion = globalThis.Spawner.welcomeTravelMotion(globalThis.Spawner, { key: current.key,
+    const request = { key: current.key,
       attributes: appearances[current.variant][current.key === "bean" ? "bean" : "others"], width, size, elapsedMs: Number.isFinite(atElapsed) ? atElapsed : elapsed,
       timeline: Number.isFinite(atTime) ? atTime : timeline, phase, startedAt: phaseStartedAt, reducedMotion: reducedMotion.matches,
-      id: "welcome-" + current.key + ":" + appearanceNumber });
+      id: "welcome-" + current.key + ":" + appearanceNumber };
+    let lead = 0;
+    if (phase === "enter" && !reducedMotion.matches) {
+      const initial = globalThis.Spawner.welcomeTravelMotion(globalThis.Spawner, { ...request, elapsedMs: 0, timeline: phaseStartedAt });
+      lead = Math.max(0, initial.x - width - size / 2) / initial.cell * initial.agent.moveDuration * 1000;
+      request.elapsedMs += lead;
+      request.startedAt -= lead / 1000;
+    }
+    const motion = globalThis.Spawner.welcomeTravelMotion(globalThis.Spawner, request);
+    motion.durationMs -= lead;
     motion.agent.animationStartedAt = phaseStartedAt;
     if (phase === "perform" && tribes.includes(current.key) && animations[current.key].jump) {
       motion.agent.mode = "jump";
@@ -300,62 +310,54 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
     }
     return motion;
   }
-  function presentArrival(callback) {
+  function presentDeparture(departure, time, callback) {
     const saved = { current, phase, elapsed, phaseStartedAt, appearanceNumber };
-    current = arriving.choice;
-    phase = "enter";
-    appearanceNumber++;
+    current = departure.choice;
+    phase = "exit";
+    elapsed = Math.max(0, time - departure.startedAt) * 1000;
+    phaseStartedAt = departure.startedAt;
+    appearanceNumber = departure.number;
     try { return callback(); }
     finally { ({ current, phase, elapsed, phaseStartedAt, appearanceNumber } = saved); }
   }
-  function arrivalMotion(atElapsed, atTime) {
-    if (!arriving) return null;
-    return presentArrival(() => {
-      const initial = travelMotion(0, phaseStartedAt);
-      const lead = Math.max(0, initial.x - width - motionSize() / 2) / initial.cell * initial.agent.moveDuration * 1000;
-      const progress = (Number.isFinite(atElapsed) ? atElapsed : elapsed) + lead;
-      phaseStartedAt -= lead / 1000;
-      const motion = travelMotion(progress, atTime);
-      motion.durationMs -= lead;
-      return motion;
-    });
+  function departureMotion(departure, time) {
+    return presentDeparture(departure, time, () => travelMotion(elapsed, time));
   }
   function phaseDuration() {
-    if (phase === "enter" || phase === "exit") return Math.max(travelMotion().durationMs, arrivalMotion()?.durationMs || 0);
-    if (phase === "perform") return current.key === "bean" ? 0 : duration(tribes.includes(current.key) ? animations[current.key].jump : neutralAnimations(current.key).attack);
+    if (phase === "waiting") return 0;
+    if (phase === "enter") return travelMotion().durationMs;
+    if (phase === "perform") return current.key === "bean" ? globalThis.Spawner.SPROUT_IDLE_SHRUG_DURATION_MS :
+      duration(tribes.includes(current.key) ? animations[current.key].jump : neutralAnimations(current.key).attack);
     return restDuration;
   }
-  function advance() {
+  function advance(completedAt) {
     if (phase === "rest") {
+      departing.push({ choice: current, number: appearanceNumber, startedAt: completedAt });
+      phase = "waiting";
+    } else if (phase === "waiting") {
       if (!upcoming.ready) return false;
-      arriving = { choice: upcoming.choice };
-      phase = "exit";
-      prepareUpcoming();
-    } else if (phase === "exit") {
-      current = arriving.choice;
-      arriving = null;
+      current = upcoming.choice;
       appearanceNumber++;
-      phase = "perform";
+      phase = "enter";
+      prepareUpcoming();
     } else if (phase === "enter") phase = "perform";
     else phase = "rest";
     return true;
   }
   function draw(motion) {
     if (!width || !height) return;
-    const retained = new Set([current, arriving?.choice, upcoming?.choice]);
+    departing = departing.filter(departure => (timeline - departure.startedAt) * 1000 < departureMotion(departure, timeline).durationMs);
+    const retained = new Set([phase === "waiting" ? null : current, upcoming?.choice, ...departing.map(departure => departure.choice)]);
     for (const [choice, value] of renderedChoices) if (!retained.has(choice)) {
       value.front.width = value.back.width = 0;
       renderedChoices.delete(choice);
     }
-    for (const id of beanMotions.keys()) if (id !== "welcome-" + current.key + ":" + appearanceNumber &&
-      id !== "welcome-" + arriving?.choice.key + ":" + (appearanceNumber + 1)) beanMotions.delete(id);
-    drawUnit(motion);
-    if (!arriving || reducedMotion.matches) return;
-    const incoming = arrivalMotion();
-    presentArrival(() => {
-      if (elapsed >= incoming.durationMs) { phase = "rest"; elapsed = 0; }
-      drawUnit(incoming, false);
-    });
+    const retainedIds = new Set(["welcome-" + current.key + ":" + appearanceNumber,
+      ...departing.map(departure => "welcome-" + departure.choice.key + ":" + departure.number)]);
+    for (const id of beanMotions.keys()) if (!retainedIds.has(id)) beanMotions.delete(id);
+    context.clearRect(0, 0, width, height);
+    for (const departure of departing) presentDeparture(departure, timeline, () => drawUnit(travelMotion(), false));
+    if (phase !== "waiting") drawUnit(motion, false);
   }
   function prepareFrame(choice) {
     if (!width || !height) return;
@@ -511,22 +513,22 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
     previousTime = time;
     while (elapsed >= phaseDuration()) {
       const completedDuration = phaseDuration();
-      if (phase === "enter" || phase === "exit" || phase === "perform") {
-        const completedAt = phaseStartedAt + completedDuration / 1000;
+      const completedAt = timeline - (elapsed - completedDuration) / 1000;
+      if (phase === "enter" || phase === "perform") {
         const completedMotion = travelMotion(completedDuration, completedAt);
-        updatePresentationAudio([completedMotion, arrivalMotion(completedDuration, completedAt)],
+        updatePresentationAudio([completedMotion, ...departing.map(departure => departureMotion(departure, completedAt))],
           completedAt);
       }
-      if (!advance()) {
+      if (!advance(completedAt)) {
         elapsed = completedDuration;
         break;
       }
       elapsed -= completedDuration;
       phaseStartedAt = timeline - elapsed / 1000;
     }
-    const motion = travelMotion();
+    const motion = phase === "waiting" ? null : travelMotion();
     draw(motion);
-    updatePresentationAudio([motion, arrivalMotion()], timeline);
+    updatePresentationAudio([motion, ...departing.map(departure => departureMotion(departure, timeline))], timeline);
     frameRequest = requestAnimationFrame(tick);
   }
   function synchronize() {

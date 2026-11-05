@@ -1,5 +1,7 @@
 import { SPROUT_ROOT_RIG } from "./sprout-root-rig.mjs";
 
+export const SPROUT_IDLE_SHRUG_DURATION_MS = Math.PI * 2 / 7.2 * 1000;
+
 export function createSpriteContour(sprite) {
   const source = sprite.getContext("2d").getImageData(0, 0, sprite.width, sprite.height);
   const width = sprite.width + 2, height = sprite.height + 2, data = new Uint8Array(width * height);
@@ -250,7 +252,7 @@ export function createSproutRoots(createSurface) {
 
 export function sproutIdlePose(elapsedMs, height) {
   const phase = elapsedMs / 1000 % 6.8;
-  const shrugDuration = Math.PI * 2 / 7.2;
+  const shrugDuration = SPROUT_IDLE_SHRUG_DURATION_MS / 1000;
   const shrug = phase / shrugDuration;
   const body = shrug < 1 ? Math.sin(shrug * Math.PI) ** 2 : 0;
   let flap = shrug < 1 ? -Math.sin(shrug * Math.PI * 2) * .24 : 0;
