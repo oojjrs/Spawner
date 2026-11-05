@@ -8096,46 +8096,6 @@
     function dnaDesignValid(dna) {
       return !!Spawner.validateDna(dna, state.nestLevel, state.evolutionPoints);
     }
-    function renderDnaDesignStats(container, stats, base) {
-      const rows = [
-        ["health", "체력", ""], ["meleePower", "근접 공격력", ""], ["rangedPower", "원거리 공격력", ""], ["hits", "공격횟수", "회"], ["meleeSpeed", "근접 공속", "/초"], ["rangedSpeed", "원거리 공속", "/초"],
-        ["armor", "방어", ""], ["parry", "패링", "%"], ["block", "블록", "%"], ["evasion", "회피", "%"],
-        ["capacity", "운반", "개"], ["harvest", "채집량", "개"], ["harvestTime", "채집 시간", "초"], ["movement", "이동", "칸/초"],
-        ["vision", "시야", "칸"], ["comboPower", "연격숙련", "%"], ["critical", "치명", "%"], ["criticalPower", "치명위력", "%"],
-        ["accuracy", "정밀", "%"], ["penetration", "예리함", ""], ["blockPower", "방어숙련", "%"], ["counter", "반격", "%"],
-        ["counterPower", "반격위력", "%"], ["tenacity", "강인함", "%"], ["reduction", "완충", "%"], ["loadSpeed", "하중적응", "%"],
-        ["healing", "회복력", "%"], ["stun", "기절", "%"], ["stunTime", "기절연장", "초"], ["bleed", "출혈", "%"],
-        ["bleedPower", "출혈강도", ""], ["area", "범위공격", "칸"], ["areaPower", "확산위력", "%"], ["lifesteal", "흡혈", "%"],
-        ["reflection", "반사", "%"], ["regeneration", "재생", "/초"], ["comboSpeed", "연타 간격", "초"], ["focus", "공격 준비", "초"],
-        ["scale", "크기", "배"], ["melee", "칼날", ""], ["ranged", "분비기관", ""], ["healer", "치유기관", ""], ["roaming", "안테나", ""]
-      ];
-      const format = value => String(Number(value.toFixed(3)));
-      const fragment = document.createDocumentFragment();
-      for (const [key, label, unit] of rows) {
-        if (stats[key] === undefined || base[key] === undefined) continue;
-        const value = Number(stats[key]), initial = Number(base[key]);
-        if (initial === 0 && value === 0) continue;
-        const term = document.createElement("dt");
-        term.textContent = label;
-        term.dataset.stat = key;
-        const description = document.createElement("dd");
-        description.dataset.stat = key;
-        const difference = Number((value - initial).toFixed(3));
-        term.className = difference !== 0 ? "design-stat-changed" : "";
-        const result = document.createElement("span");
-        result.className = "design-stat-value" + (difference !== 0 ? " design-stat-changed" : "");
-        result.textContent = format(value) + unit;
-        description.append(result);
-        if (difference !== 0) {
-          const delta = document.createElement("span");
-          delta.className = "design-stat-delta";
-          delta.textContent = " (" + (difference > 0 ? "+" : "") + format(difference) + ")";
-          description.append(delta);
-        }
-        fragment.append(term, description);
-      }
-      container.replaceChildren(fragment);
-    }
     function updateDnaDesign() {
       combatPrimaryRow.hidden = true;
       designDnaEditor.context(state.nestLevel, state.evolutionPoints, unitDraft.readOnly || !!state.ending);
@@ -8143,15 +8103,11 @@
       unitDraft.dna.budget = state.evolutionPoints;
       if (!unitDraft.nameEdited && !unitDraft.readOnly) designName.value = Spawner.suggestTemplateName(unitDraft.slots, state.templates, unitDraft.id);
       document.getElementById("design-preview-image").style.setProperty("--dna-scale", String(1 + unitDraft.dna.pieces.length * .01));
-      const stats = Spawner.dnaUnitStats(unitDraft.dna);
+      const { stats, base } = Spawner.dnaDesignStats(Spawner.ATTRIBUTE_DNA, unitDraft.dna.pieces);
       const counts = Spawner.dnaAppearance(unitDraft.dna);
       prepareAgentTemplate(unitDraft).catch(() => {});
       document.getElementById("design-preview-image").src = agentImageSource({ tribe: unitDraft.tribe, attributes: counts, carrying: 0 });
-      const base = { ...Spawner.dnaUnitStats({ ...unitDraft.dna, pieces: [] }).dna };
-      const organPieces = unitDraft.dna.pieces.filter(piece => Spawner.ATTRIBUTE_DNA.lookup.get(piece.gene)?.category === "organ");
-      const organStats = Spawner.dnaUnitStats({ ...unitDraft.dna, pieces: organPieces }).dna;
-      for (const key of ["harvestTime", "comboSpeed", "focus"]) if (stats.dna[key] > 0) base[key] = organStats[key];
-      renderDnaDesignStats(document.getElementById("design-stats"), stats.dna, base);
+      Spawner.renderDnaDesignStats(document.getElementById("design-stats"), stats, base, true);
       designSave.disabled = unitDraft.readOnly || !!state.ending || connection.busy || !connection.online || !Spawner.validateDna(unitDraft.dna, state.nestLevel, 999999999);
       setEvolutionText(designStatus, unitDraft.error);
     }

@@ -1,27 +1,82 @@
 <!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title></title>
-<style>
-:root{color-scheme:dark;--bg:#171f22;--panel:#1a2c23;--line:#3b5144;--ink:#e4eeec;--muted:#90aaa9;--mint:#86e2c5;--organ:#edba87;--action:#8fbbed;--stat:#87d7b8;--red:#ed9293;font-family:system-ui,-apple-system,"Malgun Gothic",sans-serif}*{box-sizing:border-box}body{min-width:980px;margin:0;background:var(--bg);color:var(--ink);overflow:hidden}button,input,select{font:inherit}button{color:inherit;background:#14282f;border:1px solid var(--line);border-radius:10px;cursor:pointer}button:hover{background:#203b42;border-color:#56887d}button:focus-visible,input:focus-visible{outline:2px solid var(--mint);outline-offset:3px}button:disabled{opacity:.35;cursor:default}button svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}header{height:79px;padding:0 24px;display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--line);background:#171f22}header>.brand{width:42px;height:42px;color:var(--mint)}h1{font-size:20px;font-weight:650;letter-spacing:-.5px;margin:0}.workspace{height:calc(100dvh - 79px);display:grid;grid-template-columns:270px minmax(0,1fr) 240px}.catalog,.inspector{background:var(--panel);min-height:0;overflow:auto}.catalog{border-left:1px solid var(--line);padding:12px 10px}.inspector{border-right:1px solid var(--line);padding:16px 18px}.filterbar{display:flex;gap:6px;margin-bottom:13px}.filterbar button{height:34px;flex:1;padding:5px;display:flex;align-items:center;justify-content:center}.filterbar button[aria-pressed=true]{border-color:var(--mint);background:#25443f}.filterbar button:nth-child(2){color:var(--organ)}.filterbar button:nth-child(3){color:var(--action)}.filterbar button:nth-child(4){color:var(--stat)}.catalog-list{display:grid;gap:7px}.gene{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:8px;align-items:center;text-align:left;min-height:62px;padding:9px;border-color:#2a3c40;background:#14252a}.gene.active{background:#25413c;border-color:var(--mint);box-shadow:inset 3px 0 var(--mint)}.gene-icon{width:42px;height:38px}.gene-name{display:block;font-size:12px;font-weight:600;min-height:15px}.gene-code{color:var(--muted);font-size:10px;letter-spacing:2px;font-family:ui-monospace,monospace}.gene-count{font-size:11px;color:var(--mint);font-variant-numeric:tabular-nums}.gene-cost{font-size:10px;color:var(--muted);display:block;text-align:right;margin-top:4px}.board{position:relative;min-width:0;min-height:0;background:radial-gradient(ellipse at 50% 45%,#1a2a24,#101719 75%);overflow:hidden;touch-action:none}#field{display:block;width:100%;height:100%;touch-action:none;cursor:crosshair}#field[data-preview=false]{cursor:not-allowed}#field.dragging{cursor:grabbing}.board-top{position:absolute;top:16px;left:16px;right:16px;display:flex;gap:7px;pointer-events:none}.board-top button{pointer-events:auto;width:37px;height:37px;display:grid;place-items:center;background:#12252eea;backdrop-filter:blur(10px)}.board-top .spacer{flex:1}.status{position:absolute;left:50%;bottom:78px;transform:translateX(-50%);display:flex;align-items:center;gap:7px;color:var(--muted);font-size:11px;white-space:nowrap;max-width:90%;padding:8px 12px;border-radius:30px;background:#101f25df;pointer-events:none;min-height:31px}.status svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.6}.status[data-kind=collision],.status[data-kind=invalid]{color:var(--red)}.status[data-kind=closed]{color:var(--organ)}.dock{position:absolute;bottom:0;left:0;right:0;min-height:66px;background:#22362a;border-top:1px solid var(--line);padding:10px 14px;display:flex;align-items:center;justify-content:center;gap:10px}.dock button{width:35px;height:35px;display:grid;place-items:center;flex-shrink:0}.dock .add{background:#8de5c4;color:#0c2520;width:43px;border-color:#a4f2d4}.dock .add:disabled{background:#435c55}.section-label{display:block;color:var(--muted);font-size:10px;letter-spacing:.5px;margin-bottom:11px;min-height:12px}.template-row input{width:100%;min-width:0;background:#0b191f;border:1px solid var(--line);border-radius:9px;color:var(--ink);padding:10px 11px;font-size:14px;font-variant-numeric:tabular-nums}.stats{display:grid;grid-template-columns:minmax(0,1fr) max-content;gap:6px 8px;margin:0 0 22px;font-size:12px;line-height:1.5}.stats dt{color:#8d9c96}.stats dd{margin:0;text-align:right}.design-stat-value,.design-stat-delta{color:#8d9c96;font-weight:400}.stats dt.design-stat-changed,.design-stat-value.design-stat-changed{color:#92daa5;font-weight:700}.template-actions{display:flex;gap:6px;margin-bottom:8px}.template-actions button{flex:1;min-height:35px;padding:6px;display:flex;align-items:center;justify-content:center;gap:5px;font-size:10px}.template-row{display:flex;gap:6px;margin-bottom:9px}.template-row button{width:36px;flex-shrink:0;display:grid;place-items:center}.template-list{display:grid;gap:6px}.template-entry{display:flex;gap:6px;align-items:center}.template-entry>button:first-child{padding:8px 10px;flex:1;min-width:0;text-align:left;font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.template-entry>button:last-child{height:31px;width:30px;display:grid;place-items:center}.template-entry svg{width:14px;height:14px}.sequence{border-top:1px solid var(--line);margin-top:20px;padding-top:16px}.sequence output{display:block;font:11px/1.9 ui-monospace,monospace;letter-spacing:1px;color:#a8ccc1;overflow-wrap:anywhere;max-height:90px;overflow:auto}#file{display:none}
-@media(max-width:1050px){header{padding:0 15px}.workspace{grid-template-columns:240px minmax(0,1fr) 220px}.catalog{padding:12px 9px}.inspector{padding:14px}.gene{gap:5px;padding:7px;grid-template-columns:34px minmax(0,1fr) auto}.gene-icon{width:34px}.gene-name{font-size:11px}.dock{gap:6px}}
-.progression{margin-bottom:15px}.progression select{width:100%;background:#0b191f;border:1px solid var(--line);border-radius:9px;color:var(--ink);padding:8px 10px}.gene-code .footprint{display:inline-flex;align-items:center;gap:2px;margin-left:6px;letter-spacing:0;color:#a3b8b4}.footprint svg{width:9px;height:9px;stroke:currentColor;fill:none;stroke-width:1}.status[data-kind=boundary],.status[data-kind=level]{color:var(--red)}
-.dna-guide { position:absolute; top:62px; right:16px; z-index:2; max-width:calc(100% - 16px); max-height:calc(100% - 130px); overflow:auto; pointer-events:none; font-size:12px; color:#e4eeec; }
-.dna-guide[open] { width:240px; }
-.dna-guide summary { pointer-events:auto; width:max-content; max-width:100%; margin-left:auto; padding:9px 11px; border:1px solid #38534f; border-radius:8px; background:#12251ff2; cursor:pointer; }
-.dna-guide summary:focus-visible { outline:2px solid #86e2c5; outline-offset:2px; }
-.dna-guide dl { pointer-events:auto; display:grid; grid-template-columns:auto minmax(0,1fr); gap:12px 14px; margin:8px 0 0; padding:14px 12px; overflow:auto; border:1px solid #38534f; border-radius:10px; background:#12251ff5; box-shadow:0 8px 24px #0005; }
-.dna-guide dt { color:#90aaa9; }.dna-guide dd { margin:0; text-align:right; }.dna-guide kbd { font:inherit; overflow-wrap:anywhere; }
-.gene[data-category=organ]{--category:#edba87;--category-background:#493327}.gene[data-category=action]{--category:#8fbbed;--category-background:#253a50}.gene[data-category=stat]{--category:#87d7b8;--category-background:#23463c}.gene{background:var(--category-background);border-color:color-mix(in srgb,var(--category) 45%,transparent)}.gene:hover{background:var(--category-background);border-color:var(--category);filter:brightness(1.2)}.gene.active{background:var(--category-background);border-color:var(--category);box-shadow:inset 0 0 0 1px var(--category);filter:brightness(1.16)}
-.status[hidden]{display:none}.design-cost{position:absolute;right:14px;bottom:78px;display:grid;justify-items:end;gap:3px;padding:8px 12px;border:1px solid #8cab9655;border-radius:8px;background:#12251fe8;font-size:11px;color:#a4c4ad;pointer-events:none}.design-cost strong{color:#e4f0df;font-size:23px;line-height:1.1;font-variant-numeric:tabular-nums}
-.dna-legend{position:absolute;left:12px;bottom:78px;width:80px;display:flex;flex-direction:column;flex-wrap:nowrap;gap:2px;padding:5px 7px;border:1px solid #8cab9655;border-radius:8px;background:#12251fe8;pointer-events:none;color:#e4eeec;font-size:12px;font-variant-numeric:tabular-nums}.dna-legend[hidden]{display:none}.dna-legend>span{display:flex;align-items:center;justify-content:space-between;gap:2px;min-width:0}.dna-legend svg{width:34px;height:30px;flex:none}
-</style></head><body>
-<header><svg class="brand" viewBox="0 0 40 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3C9 20 31 28 31 45M31 3C31 20 9 28 9 45"/><path d="m10 9 19 0M15 17h10M15 31h10M10 39h19" opacity=".45"/></svg><h1 data-copy="title"></h1></header>
-<main class="workspace"><aside class="inspector"><dl class="stats" id="stats"></dl><span class="section-label" data-copy="templates"></span><div class="template-row"><input id="template-name" type="text" maxlength="32"><button id="save-template"></button></div><div class="template-actions"><button id="export"></button><button id="import"></button></div><input id="file" type="file" accept="application/json,.json"><div class="template-list" id="templates"></div><div class="sequence"><span class="section-label" data-copy="sequence"></span><output id="sequence"></output></div></aside>
-
-<section class="board" id="board"><canvas id="field"></canvas><div class="dna-legend" id="dna-legend" hidden></div><details class="dna-guide"><summary>조작 안내</summary><dl><dt>DNA 선택</dt><dd><kbd>휠 클릭</kbd></dd><dt>회전</dt><dd><kbd>휠 위·아래 / Q·E</kbd></dd><dt>배치</dt><dd><kbd>좌클릭 / Enter</kbd></dd><dt>되돌리기</dt><dd><kbd>우클릭 / Ctrl+Z</kbd></dd></dl></details><div class="board-top"><button id="undo"></button><button id="redo"></button><button id="remove"></button><button id="clear" class="secondary"></button><span class="spacer"></span><button id="zoom-out"></button><button id="fit"></button><button id="zoom-in"></button></div><output class="design-cost">비용<strong id="cost"></strong></output><div class="status" id="status" role="status"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"/><path d="M8 4v5m0 2v.5"/></svg><span></span></div><div class="dock"><button id="rotate-left"></button><button id="rotate-right"></button><button class="add" id="add"></button></div></section>
-<aside class="catalog"><div class="progression"><label class="section-label" data-copy="nestLevel" for="nest-level"></label><select id="nest-level"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></div><div class="filterbar" id="filters"></div><div id="catalog" class="catalog-list"></div></aside>
+<link rel="stylesheet" href="client/attribute-editor.css"></head><body>
+<header><svg class="brand" viewBox="0 0 40 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3C9 20 31 28 31 45M31 3C31 20 9 28 9 45"/><path d="m10 9 19 0M15 17h10M15 31h10M10 39h19" opacity=".45"/></svg><h1 data-copy="title"></h1><div class="attribute-view-tools"><button id="zoom-out"></button><button id="fit"></button><button id="zoom-in"></button></div></header>
+<main class="workspace"><aside class="inspector"><dl class="stats" id="stats"></dl><span class="section-label" data-copy="templates"></span><div class="template-row"><input id="template-name" type="text" maxlength="32"><button id="save-template"></button></div><div class="template-actions"><button id="export"></button><button id="import"></button></div><input id="file" type="file" accept="application/json,.json"><output id="file-status" class="file-status" role="status" hidden></output><div class="template-list" id="templates"></div><div class="sequence"><span class="section-label" data-copy="sequence"></span><output id="sequence"></output></div></aside>
+<section class="attribute-editor-host" id="editor"></section>
 </main>
+<div class="progression" id="progression" hidden><label class="section-label" data-copy="nestLevel" for="nest-level"></label><select id="nest-level"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></div>
 <script id="dna-model">
-window.AttributeDna = (() => {
+(() => {
+const modules = Object.create(null);
+modules["server/dna-combat-stats.mjs"] = (() => {
+const DNA_COMBAT_RULES = Object.freeze({
+  powerCurve: "linear", powerBase: 2, powerGain: 2, powerKnee: 2,
+  rangedPowerBase: 1.4, rangedPowerGain: 1.4, rangedPowerKnee: 2,
+  rangedAttackRateBase: .5, rangedHasteCap: 7, rangedHasteKnee: 70,
+  healthBase: 10, healthPerPoint: 10, armorPerPoint: 1, armorCap: 1, armorKnee: 100,
+  flatPenPerPoint: 1, percentPenCap: .8, percentPenKnee: 4,
+  attackRateBase: .5, hasteCap: 7, hasteKnee: 70, maxActionRate: 4,
+  windupBase: .3, focusPerPoint: .02, windupMinimum: .08,
+  hitGapBase: .12, hitSpeedPerPoint: .005, hitGapMinimum: .06, recovery: 0,
+  defensePreparation: 0, reactionCooldown: 0, counterCooldown: 0,
+  followupBase: .5, comboPerPoint: .05, followupCap: 1,
+  critCap: .75, critKnee: 18.75, critMultiplierBase: 1.5, critMultiplierCap: 4, critPowerKnee: 25,
+  accuracyCap: .6, accuracyKnee: 20, dodgeCap: .6, dodgeKnee: 20,
+  parryCap: .6, parryKnee: 15, blockCap: .75, blockKnee: 15,
+  blockReductionBase: .5, blockReductionCap: .9, blockPowerKnee: 10,
+  counterCap: 1, counterKnee: 10, counterMultiplierBase: 1, counterMultiplierCap: 2,
+  counterPowerKnee: 10, counterWindup: .12,
+  tenacityCap: .75, tenacityKnee: 15, stunCap: .3, stunKnee: 10,
+  stunDurationBase: .25, stunDurationPerPoint: .05, stunDurationCap: 1, stunImmunity: 2,
+  drainCap: .2, drainKnee: 20, jitter: .2
+});
+
+function dnaCombatStats(counts, weights, inputRules) {
+  const rules = inputRules || DNA_COMBAT_RULES, n = weights, c = counts;
+  const capped = (count, cap, knee) => count ? Math.min(cap, cap * count / (knee || 1)) : 0;
+  const powerGain = (count, gain, knee) => rules.powerCurve === "log" ?
+    gain * Math.log1p(count / knee) / Math.log1p(1 / knee) : gain * count;
+  const melee = !!c.blade, ranged = !!c.secretion, attack = melee || ranged;
+  const meleePower = melee ? rules.powerBase * c.blade + powerGain(n.power || 0, rules.powerGain, rules.powerKnee) : 0;
+  const rangedPower = ranged ? rules.rangedPowerBase * c.secretion + powerGain(n.rangedPower || 0, rules.rangedPowerGain, rules.rangedPowerKnee) : 0;
+  const meleeSpeed = melee ? Math.min(rules.maxActionRate, rules.attackRateBase * (1 + capped(n.speed || 0, rules.hasteCap, rules.hasteKnee))) : 0;
+  const rangedSpeed = ranged ? Math.min(rules.maxActionRate, rules.rangedAttackRateBase * (1 + capped(n.rangedSpeed || 0, rules.rangedHasteCap, rules.rangedHasteKnee))) : 0;
+  return { bladeCount: c.blade || 0, secretionCount: c.secretion || 0, healerCount: c.healer || 0,
+    melee, ranged, meleePower, meleeSpeed, rangedPower, rangedSpeed, healer: !!n.healer,
+    ...(rules.recovery ? { recovery: rules.recovery } : {}),
+    health: rules.healthBase + rules.healthPerPoint * (n.health || 0),
+    power: melee ? meleePower : rangedPower, hits: attack ? 1 + (n.combo || 0) : 0, speed: melee ? meleeSpeed : rangedSpeed,
+    armor: rules.armorPerPoint * ((n.armor || 0) + (n.carapace || 0)),
+    parry: 100 * capped(n.parry || 0, rules.parryCap, rules.parryKnee),
+    block: 100 * capped((n.carapace || 0) + (n.block || 0), rules.blockCap, rules.blockKnee),
+    evasion: 100 * capped((n.evasion || 0) + (n.legs || 0), rules.dodgeCap, rules.dodgeKnee),
+    comboPower: attack ? 100 * Math.min(rules.followupCap, rules.followupBase + rules.comboPerPoint * (n.comboPower || 0)) : 0,
+    critical: attack ? 100 * capped(n.critical || 0, rules.critCap, rules.critKnee) : 0,
+    criticalPower: attack ? 100 * (rules.critMultiplierBase + capped(n.criticalPower || 0, rules.critMultiplierCap - rules.critMultiplierBase, rules.critPowerKnee)) : 0,
+    accuracy: attack ? 100 * capped(n.accuracy || 0, rules.accuracyCap, rules.accuracyKnee) : 0,
+    penetration: attack ? rules.flatPenPerPoint * (n.penetration || 0) : 0,
+    ...(n.percentPen ? { armorPenetration: capped(n.percentPen, rules.percentPenCap, rules.percentPenKnee) } : {}),
+    blockPower: 100 * (rules.blockReductionBase + capped(n.blockPower || 0, rules.blockReductionCap - rules.blockReductionBase, rules.blockPowerKnee)),
+    counter: attack ? 100 * capped(n.counter || 0, rules.counterCap, rules.counterKnee) : 0,
+    counterPower: attack ? 100 * (rules.counterMultiplierBase + capped(n.counterPower || 0, rules.counterMultiplierCap - rules.counterMultiplierBase, rules.counterPowerKnee)) : 0,
+    tenacity: 100 * capped(n.tenacity || 0, rules.tenacityCap, rules.tenacityKnee), reduction: Math.min(40, 2 * (n.reduction || 0)),
+    healing: 10 * (n.healing || 0), stun: attack ? 100 * capped(n.stun || 0, rules.stunCap, rules.stunKnee) : 0,
+    stunTime: attack && n.stun ? Math.min(rules.stunDurationCap, rules.stunDurationBase + rules.stunDurationPerPoint * (n.stunTime || 0)) : 0,
+    bleed: attack ? Math.min(75, 5 * (n.bleed || 0)) : 0, bleedPower: attack && n.bleed ? 1 + (n.bleedPower || 0) : 0,
+    area: attack ? Math.min(5, n.area || 0) : 0, areaPower: attack && n.area ? Math.min(75, 35 + 5 * (n.areaPower || 0)) : 0,
+    lifesteal: attack ? 100 * capped(n.lifesteal || 0, rules.drainCap, rules.drainKnee) : 0,
+    reflection: Math.min(30, 3 * (n.reflection || 0)), regeneration: .1 * (n.regeneration || 0),
+    comboSpeed: attack ? Math.max(rules.hitGapMinimum, rules.hitGapBase - rules.hitSpeedPerPoint * (n.comboSpeed || 0)) : 0,
+    focus: attack ? Math.max(rules.windupMinimum, rules.windupBase - rules.focusPerPoint * (n.focus || 0)) : 0 };
+}
+
+return { DNA_COMBAT_RULES, dnaCombatStats };
+})();
+modules["server/dna.mjs"] = (() => {
+const { dnaCombatStats } = modules["server/dna-combat-stats.mjs"];
+
+const ATTRIBUTE_DNA = (() => {
   const directions = [[1,0],[0,1],[-1,1],[-1,0],[0,-1],[1,-1]];
   const colors = {organ:'#edba87',action:'#8fbbed',stat:'#87d7b8'};
   const definitions = [
@@ -79,13 +134,16 @@ window.AttributeDna = (() => {
     return {valid:!issue,reason:issue,nodes,paths,closed,occupied,outside};
   }
   function price(pieces){return pieces.reduce((sum,piece)=>{const gene=lookup.get(piece.gene),grade=piece.grade===undefined?1:piece.grade;return sum+Math.ceil((gene?.price||0)*(grade+2)/3);},0);}
+  function cost(pieces){return 3+price(pieces);}
   function counts(pieces){const result={};for(const piece of pieces)result[piece.gene]=(result[piece.gene]||0)+1;return result;}
   function weights(pieces){const result={};for(const piece of pieces)result[piece.gene]=(result[piece.gene]||0)+(piece.grade===undefined?1:piece.grade);return result;}
   function stats(pieces){
-    const n=weights(pieces),c=counts(pieces),melee=!!c.blade,ranged=!!c.secretion,attack=melee||ranged,gather=!!c.gather,
-      meleePower=melee?2*c.blade+2*(n.power||0):0,meleeSpeed=melee?Math.min(4,.5+.05*(n.speed||0)):0,
-      rangedPower=ranged?1.4*c.secretion+1.4*(n.rangedPower||0):0,rangedSpeed=ranged?Math.min(4,.5+.05*(n.rangedSpeed||0)):0;
-    return {gatherCount:c.gather||0,bladeCount:c.blade||0,antennaCount:c.antenna||0,healerCount:c.healer||0,secretionCount:c.secretion||0,melee,ranged,meleePower,meleeSpeed,rangedPower,rangedSpeed,healer:!!n.healer,health:10+10*(n.health||0),power:melee?meleePower:rangedPower,hits:attack?1+(n.combo||0):0,speed:melee?meleeSpeed:rangedSpeed,armor:(n.armor||0)+(n.carapace||0),parry:Math.min(60,4*(n.parry||0)),block:Math.min(75,5*(n.carapace||0)+5*(n.block||0)),evasion:Math.min(60,3*(n.evasion||0)+3*(n.legs||0)),capacity:gather?c.gather+(n.capacity||0):0,harvest:gather?Math.min(c.gather+(n.harvest||0),c.gather+(n.capacity||0)):0,harvestTime:gather?4/(1+.1*(n.harvestSpeed||0)):0,movement:.25+.04*(n.movement||0),vision:Math.min(12,1+(c.antenna||0)+.5*(n.vision||0)),scale:1+.01*pieces.length,roaming:!!n.antenna,comboPower:attack?Math.min(100,50+5*(n.comboPower||0)):0,critical:attack?Math.min(75,4*(n.critical||0)):0,criticalPower:attack?Math.min(400,150+10*(n.criticalPower||0)):0,accuracy:attack?Math.min(60,3*(n.accuracy||0)):0,penetration:attack?(n.penetration||0):0,blockPower:Math.min(90,50+4*(n.blockPower||0)),counter:attack?Math.min(100,10*(n.counter||0)):0,counterPower:attack?Math.min(200,100+10*(n.counterPower||0)):0,tenacity:Math.min(75,5*(n.tenacity||0)),reduction:Math.min(40,2*(n.reduction||0)),loadSpeed:gather?Math.min(100,75+5*(n.loadSpeed||0)):0,healing:10*(n.healing||0),stun:attack?Math.min(30,3*(n.stun||0)):0,stunTime:attack&&n.stun?Math.min(1,.25+.05*(n.stunTime||0)):0,bleed:attack?Math.min(75,5*(n.bleed||0)):0,bleedPower:attack&&n.bleed?1+(n.bleedPower||0):0,area:attack?Math.min(5,n.area||0):0,areaPower:attack&&n.area?Math.min(75,35+5*(n.areaPower||0)):0,lifesteal:attack?Math.min(20,n.lifesteal||0):0,reflection:Math.min(30,3*(n.reflection||0)),regeneration:.1*(n.regeneration||0),comboSpeed:attack?Math.max(.06,.12-.005*(n.comboSpeed||0)):0,focus:attack?Math.max(.08,.3-.02*(n.focus||0)):0};
+    const n=weights(pieces),c=counts(pieces),gather=!!c.gather;
+    return {...dnaCombatStats(c,n),gatherCount:c.gather||0,antennaCount:c.antenna||0,
+      capacity:gather?c.gather+(n.capacity||0):0,harvest:gather?Math.min(c.gather+(n.harvest||0),c.gather+(n.capacity||0)):0,
+      harvestTime:gather?4/(1+.1*(n.harvestSpeed||0)):0,movement:.25+.04*(n.movement||0),
+      vision:Math.min(12,1+(c.antenna||0)+.5*(n.vision||0)),scale:1+.01*pieces.length,roaming:!!n.antenna,
+      loadSpeed:gather?Math.min(100,75+5*(n.loadSpeed||0)):0};
   }
   function clonePiece(piece){return {gene:piece.gene,rotation:piece.rotation,grade:piece.grade,shape:piece.shape.slice()};}
   function validate(value){
@@ -104,80 +162,127 @@ window.AttributeDna = (() => {
     return {version:3,pieces,budget:Math.floor(value.budget),level};
   }
 
-  return {genes,catalog,lookup,trace,price,counts,weights,stats,validate,clonePiece,step,key,shape,route,boardRadius,inside};
+  return {genes,catalog,lookup,trace,price,cost,counts,weights,stats,validate,clonePiece,step,key,shape,route,boardRadius,inside};
 })();
-</script>
-<script>
-(() => {
-  const M=window.AttributeDna,$=id=>document.getElementById(id),canvas=$('field'),context=canvas.getContext('2d');
-  const text=Object.create(null),names=Object.create(null);
-  const icons={add:'M12 5v14M5 12h14',undo:'M8 5 3 10l5 5M3 10h11a6 6 0 0 1 0 12',redo:'m16 5 5 5-5 5m5-5H10a6 6 0 0 0 0 12',remove:'M4 7h16M9 7V4h6v3M6 7l1 14h10l1-14M10 11v6m4-6v6',clear:'M4 7h16M9 7V4h6v3M6 7l1 14h10l1-14',fit:'M8 3H3v5m13-5h5v5M3 16v5h5m8 0h5v-5M8 12h8m-4-4v8',plus:'M5 12h14M12 5v14',minus:'M5 12h14',left:'M4 10a8 8 0 1 1 1 7M4 4v6h6',right:'M20 10a8 8 0 1 0-1 7M20 4v6h-6',save:'M4 3h13l4 4v14H3V3h1m3 0v6h10V3M7 21v-8h10v8',export:'M12 3v12m-4-4 4 4 4-4M4 16v5h16v-5',import:'M12 16V4m-4 4 4-4 4 4M4 16v5h16v-5',all:'m12 3 8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9',organ:'M5 20 8 9l4-6 4 6 3 11M8 9h8',action:'m13 2-8 12h6l-1 8 9-13h-6z',stat:'M5 20V10m7 10V4m7 16v-6'};
-  const copy=key=>text[key]||'';
-  function icon(name){return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="'+icons[name]+'"/></svg>';}
-  function button(id,glyph,label){$(id).innerHTML=icon(glyph);$(id).setAttribute('aria-label',copy(label));$(id).title=copy(label);}
-  const storage='spawner.attribute.dna.v1',libraryStorage='spawner.attribute.dna.templates.v1';
-  let pieces=[],level=1,grade=1,selected='power',rotation=0,insertion=0,filter='all',notice='',history=[],future=[],library=[];
-  let view={x:0,y:0,scale:.9,width:0,height:0},pointer=null,moved=false,frame=0,model=M.trace(pieces),preview=null;
-  try{const saved=M.validate(JSON.parse(localStorage.getItem(storage)||'null'));if(saved){pieces=saved.pieces;level=saved.level;insertion=pieces.length;}const list=JSON.parse(localStorage.getItem(libraryStorage)||'[]');if(Array.isArray(list))library=list.map(entry=>({name:entry?.name,design:M.validate(entry?.design)})).filter(entry=>typeof entry.name==='string'&&entry.name.length<=32&&entry.design).slice(0,60);}catch{}
-  function design(){return {version:3,pieces:pieces.map(M.clonePiece),budget:0,level};}
-  function persist(){try{localStorage.setItem(storage,JSON.stringify(design()));localStorage.setItem(libraryStorage,JSON.stringify(library));}catch{}}
-  function snapshot(){return JSON.stringify(design());}
+
+return { ATTRIBUTE_DNA };
+})();
+modules["client/dna-editor.mjs"] = (() => {
+function dnaDesignStats(M,pieces) {
+  const stats=M.stats(pieces),base={...M.stats([])},organPieces=pieces.filter(piece=>M.lookup.get(piece.gene)?.category==='organ'),organStats=M.stats(organPieces);
+  for(const key of ['harvestTime','comboSpeed','focus'])if(stats[key]>0)base[key]=organStats[key];
+  return {stats,base};
+}
+
+function renderDnaDesignStats(container, stats, base, showScale) {
+  const rows = [
+    ["health", "체력", ""], ["meleePower", "근접 공격력", ""], ["rangedPower", "원거리 공격력", ""], ["hits", "공격횟수", "회"], ["meleeSpeed", "근접 공속", "/초"], ["rangedSpeed", "원거리 공속", "/초"],
+    ["armor", "방어", ""], ["parry", "패링", "%"], ["block", "블록", "%"], ["evasion", "회피", "%"],
+    ["capacity", "운반", "개"], ["harvest", "채집량", "개"], ["harvestTime", "채집 시간", "초"], ["movement", "이동", "칸/초"],
+    ["vision", "시야", "칸"], ["comboPower", "연격숙련", "%"], ["critical", "치명", "%"], ["criticalPower", "치명위력", "%"],
+    ["accuracy", "정밀", "%"], ["penetration", "예리함", ""], ["blockPower", "방어숙련", "%"], ["counter", "반격", "%"],
+    ["counterPower", "반격위력", "%"], ["tenacity", "강인함", "%"], ["reduction", "완충", "%"], ["loadSpeed", "하중적응", "%"],
+    ["healing", "회복력", "%"], ["stun", "기절", "%"], ["stunTime", "기절연장", "초"], ["bleed", "출혈", "%"],
+    ["bleedPower", "출혈강도", ""], ["area", "범위공격", "칸"], ["areaPower", "확산위력", "%"], ["lifesteal", "흡혈", "%"],
+    ["reflection", "반사", "%"], ["regeneration", "재생", "/초"], ["comboSpeed", "연타 간격", "초"], ["focus", "공격 준비", "초"],
+    ["scale", "크기", "배"], ["melee", "칼날", ""], ["ranged", "분비기관", ""], ["healer", "치유기관", ""], ["roaming", "안테나", ""]
+  ];
+  const format = value => String(Number(value.toFixed(3)));
+  const fragment = document.createDocumentFragment();
+  for (const [key, label, unit] of rows) {
+    if (key === "scale" && !showScale) continue;
+    if (stats[key] === undefined || base[key] === undefined) continue;
+    const value = Number(stats[key]), initial = Number(base[key]);
+    if (initial === 0 && value === 0) continue;
+    const term = document.createElement("dt");
+    term.textContent = label;
+    term.dataset.stat = key;
+    const description = document.createElement("dd");
+    description.dataset.stat = key;
+    const difference = Number((value - initial).toFixed(3));
+    term.className = difference !== 0 ? "design-stat-changed" : "";
+    const result = document.createElement("span");
+    result.className = "design-stat-value" + (difference !== 0 ? " design-stat-changed" : "");
+    result.textContent = format(value) + unit;
+    description.append(result);
+    if (difference !== 0) {
+      const delta = document.createElement("span");
+      delta.className = "design-stat-delta";
+      delta.textContent = " (" + (difference > 0 ? "+" : "") + format(difference) + ")";
+      description.append(delta);
+    }
+    fragment.append(term, description);
+  }
+  container.replaceChildren(fragment);
+}
+
+function dnaEditorViewport(M,level,start,gene,width,height) {
+  const radius=M.boardRadius(level),halfWidth=34*Math.sqrt(3)*(radius+.5),halfHeight=51*radius+34;
+  let minX=-halfWidth,maxX=halfWidth,minY=-halfHeight,maxY=halfHeight;
+  if(start&&gene)for(let rotation=0;rotation<6;rotation++)for(const point of M.route(start,gene,gene.grade,rotation)){
+    const x=34*Math.sqrt(3)*(point.q+point.r/2),y=51*point.r;
+    minX=Math.min(minX,x);maxX=Math.max(maxX,x);minY=Math.min(minY,y);maxY=Math.max(maxY,y);
+  }
+  const margin=46,top=54,bottom=66;
+  minX-=margin;maxX+=margin;minY-=margin;maxY+=margin;
+  const scale=Math.max(.01,Math.min(Math.max(1,width-40)/(maxX-minX),Math.max(1,height-top-bottom)/(maxY-minY)));
+  return {scale,x:width/2-(minX+maxX)*scale/2,y:top+(height-top-bottom)/2-(minY+maxY)*scale/2};
+}
+
+function createDnaEditor(container, dnaModel, onChange) {
+  const M=dnaModel;
+  const names={blade:'칼날',carapace:'갑각',antenna:'안테나',gather:'채집기관',legs:'다리',power:'근접 공격력',combo:'연타',speed:'근접 공속',comboPower:'연격숙련',critical:'치명',criticalPower:'치명위력',accuracy:'정밀',penetration:'예리함',health:'체력',armor:'경화',evasion:'회피',parry:'패링',block:'방어본능',blockPower:'방어숙련',counter:'반격',counterPower:'반격위력',tenacity:'강인함',reduction:'완충',movement:'이속',capacity:'운반',harvest:'채집량',harvestSpeed:'채집속도',vision:'시야',loadSpeed:'하중적응',healing:'회복력',stun:'기절',stunTime:'기절연장',bleed:'출혈',bleedPower:'출혈강도',area:'범위공격',areaPower:'확산위력',lifesteal:'흡혈',reflection:'반사',regeneration:'재생',comboSpeed:'연타속도',focus:'집중',healer:'치유기관',secretion:'분비기관',rangedPower:'원거리 공격력',rangedSpeed:'원거리 공속'};
+  const root=document.createElement('section');root.className='dna-editor';root.tabIndex=0;
+  root.innerHTML='<div class="dna-board"><canvas aria-label="DNA 편집 영역" tabindex="0"></canvas><div class="dna-legend" hidden></div><div class="dna-tools"></div><details class="dna-guide"><summary>조작 안내</summary><dl><dt>DNA 선택</dt><dd><kbd>휠 클릭</kbd></dd><dt>회전</dt><dd><kbd>휠 위·아래 / Q·E</kbd></dd><dt>배치</dt><dd><kbd>좌클릭 / Enter</kbd></dd><dt>되돌리기</dt><dd><kbd>우클릭 / Ctrl+Z</kbd></dd></dl></details><output class="dna-cost">비용 <strong></strong></output></div><aside class="dna-catalog"><div class="dna-filters"></div><div class="dna-list"></div></aside><div class="dna-dock"><div class="dna-rotation"></div><button class="dna-add" type="button">조각 추가</button><output class="dna-status" aria-live="polite"></output></div>';
+  container.replaceChildren(root);
+  const find=selector=>root.querySelector(selector),canvas=find('canvas'),board=find('.dna-board'),context=canvas.getContext('2d');
+  const catalog=find('.dna-catalog'),geneName=document.createElement('div');geneName.className='dna-gene-name';geneName.setAttribute('role','tooltip');geneName.hidden=true;board.append(geneName);
+  let geneHold=null,geneTimer=0,geneClick=null,geneTouch=null;
+  const mobileQuery=typeof globalThis.matchMedia==='function'?globalThis.matchMedia('(max-width:700px)'):null;
+  const view={x:0,y:0,scale:1,width:0,height:0};
+  let pieces=[],level=1,budget=0,readOnly=false,contextSet=false,filter='all',selected=M.catalog[0].id,rotation=0,insertion=0,history=[],future=[],notice='',model=M.trace([],1),preview,frame=0,destroyed=false,pointer=null,moved=false;
+  function button(parent,label,glyph,action){const element=document.createElement('button');element.type='button';element.title=label;element.setAttribute('aria-label',label);element.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="'+glyph+'"/></svg>';element.onclick=action;parent.append(element);return element;}
+  const undoButton=button(find('.dna-tools'),'되돌리기','M9 5 4 10l5 5M4 10h9a6 6 0 0 1 0 12',undo);
+  const redoButton=button(find('.dna-tools'),'다시 실행','m15 5 5 5-5 5m5-5h-9a6 6 0 0 0 0 12',redo);
+  const removeButton=button(find('.dna-tools'),'조각 삭제','M5 7h14M9 7V4h6v3M7 7l1 14h8l1-14M10 10v7m4-7v7',remove);
+  const clearButton=button(find('.dna-tools'),'초기화','M5 10a8 8 0 1 1 1 8M5 4v6h6',()=>{if(readOnly||!pieces.length)return;clearHistory();pieces=[];insertion=0;changed();});
+  const leftButton=button(find('.dna-rotation'),'왼쪽 회전','m8 3-5 5 5 5M3 8h10a7 7 0 1 1-6 11',()=>rotate(-1));
+  const rightButton=button(find('.dna-rotation'),'오른쪽 회전','m16 3 5 5-5 5m5-5H11a7 7 0 1 0 6 11',()=>rotate(1));
+  const addButton=find('.dna-add');addButton.onclick=commit;
+  function hideGeneName(){if(geneTimer)clearTimeout(geneTimer);geneTimer=0;geneHold=null;geneName.hidden=true;geneName.textContent='';}
+  function genePointerDown(event){if((event.pointerType!=='touch'&&event.pointerType!=='pen')||!mobileQuery?.matches)return;const item=event.target.closest('.dna-gene');if(!item)return;hideGeneName();geneClick=null;geneTouch={item,time:Date.now()};geneHold={item,id:event.pointerId,x:event.clientX,y:event.clientY};geneTimer=setTimeout(()=>{geneTimer=0;if(!geneHold||!item.isConnected)return;geneClick=item;geneName.textContent=names[item.dataset.gene];geneName.hidden=false;geneName.style.left='50%';},480);}
+  function genePointerMove(event){if(geneHold&&event.pointerId===geneHold.id&&Math.hypot(event.clientX-geneHold.x,event.clientY-geneHold.y)>9)hideGeneName();}
+  function genePointerEnd(event){if(geneHold&&event.pointerId===geneHold.id)hideGeneName();}
+  function geneClickCapture(event){if(!geneClick)return;const item=event.target.closest('.dna-gene');if(item===geneClick){event.preventDefault();event.stopImmediatePropagation();}geneClick=null;}
+  function geneContextMenu(event){const item=event.target.closest('.dna-gene');if(item&&(event.pointerType==='touch'||event.pointerType==='pen'||event.sourceCapabilities?.firesTouchEvents||(geneHold&&geneHold.item===item)||(geneTouch&&geneTouch.item===item&&Date.now()-geneTouch.time<1500&&event.pointerType!=='mouse'))){event.preventDefault();event.stopPropagation();}}
+  catalog.addEventListener('pointerdown',genePointerDown);
+  catalog.addEventListener('pointermove',genePointerMove);
+  catalog.addEventListener('pointerup',genePointerEnd);
+  catalog.addEventListener('pointercancel',genePointerEnd);
+  catalog.addEventListener('click',geneClickCapture,true);
+  catalog.addEventListener('contextmenu',geneContextMenu);
+  function getDesign(){return {version:3,pieces:pieces.map(M.clonePiece),level,budget};}
+  function snapshot(){return {pieces:pieces.map(M.clonePiece),insertion};}
   function checkpoint(){history.push(snapshot());if(history.length>200)history.shift();future=[];}
-  function candidate(){const gene=M.lookup.get(selected),proposed=pieces.map(M.clonePiece),start=model.nodes[insertion],points=M.route(start,gene,gene.grade,rotation),path={gene:selected,points,start,end:points[points.length-1]};proposed.splice(insertion,0,{gene:selected,rotation,grade:gene.grade,shape:[...M.shape(gene,gene.grade)]});const result=M.trace(proposed,level);if(selected==='gather'&&pieces.some(piece=>piece.gene==='gather')){result.valid=false;result.reason='collision';}const cost=3+M.price(proposed);return {pieces:proposed,result,path,cost,valid:result.valid,reason:result.valid?'ready':result.reason};}
+  function clearHistory(){history=[];future=[];renderControls();}
+  function candidate(){const gene=M.lookup.get(selected),proposed=pieces.map(M.clonePiece),start=model.nodes[insertion],points=M.route(start,gene,gene.grade,rotation),path={gene:selected,points,start,end:points[points.length-1]};proposed.splice(insertion,0,{gene:selected,grade:gene.grade,rotation,shape:[...M.shape(gene,gene.grade)]});const result=M.trace(proposed,level);if(selected==='gather'&&pieces.some(piece=>piece.gene==='gather')){result.valid=false;result.reason='collision';}const cost=M.cost(proposed);return {pieces:proposed,result,path,cost,valid:result.valid,reason:result.valid?'ready':result.reason};}
+  function changed(){notice='';state();if(typeof onChange==='function')onChange(getDesign());}
   function previewState(){const previous=rotation,initial=candidate();if(initial.result.valid)return initial;for(let step=1;step<6;step++){rotation=(previous+step)%6;const next=candidate();if(next.result.valid)return next;}rotation=previous;return initial;}
-  function state(){if(M.lookup.get(selected).grade>level)selected=M.catalog[0].id;grade=M.lookup.get(selected).grade;model=M.trace(pieces,level);preview=previewState();persist();renderProgression();renderCatalog();renderLegend();renderStats();renderTemplates();renderControls();requestDraw();}
-  function requestDraw(){if(!frame)frame=requestAnimationFrame(()=>{frame=0;draw();});}
+  function state(){model=M.trace(pieces,level);preview=readOnly?candidate():previewState();renderCatalog();renderLegend();renderControls();fit();requestDraw();}
+  function renderLegend(){const legend=find('.dna-legend'),counts=M.counts(pieces);legend.replaceChildren();for(const gene of M.catalog){if(!counts[gene.id])continue;const item=document.createElement('span');item.dataset.gene=gene.id;const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 44 38');svg.innerHTML=shapeSvg(gene);const count=document.createElement('span');count.textContent='×'+counts[gene.id];item.append(svg,count);legend.append(item);}legend.hidden=!legend.children.length;}
+  function renderCatalog(){
+    hideGeneName();geneClick=null;
+    const filters=find('.dna-filters');filters.replaceChildren();
+    for(const [type,label] of [['all','전체'],['organ','기관'],['action','기능'],['stat','스탯']]){const item=document.createElement('button');item.type='button';item.textContent=label;item.dataset.category=type;item.setAttribute('aria-pressed',String(filter===type));item.onclick=()=>{filter=type;renderCatalog();root.focus({preventScroll:true});};filters.append(item);}
+    const list=find('.dna-list');list.replaceChildren();
+    for(const gene of M.catalog){if(gene.grade>level||(!mobileQuery?.matches&&filter!=='all'&&gene.category!==filter))continue;const item=document.createElement('button');item.type='button';item.className='dna-gene';item.setAttribute('aria-label',names[gene.id]);item.dataset.gene=gene.id;item.dataset.category=gene.category;item.disabled=gene.grade>level||(gene.id==='gather'&&pieces.some(piece=>piece.gene==='gather'));item.setAttribute('aria-pressed',String(selected===gene.id));item.style.setProperty('--dna-gene-color',gene.color);const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 44 38');svg.innerHTML=shapeSvg(gene);const name=document.createElement('strong');name.textContent=names[gene.id];const cost=document.createElement('span');cost.className='dna-gene-cost';const proposed=pieces.map(M.clonePiece);proposed.splice(insertion,0,{gene:gene.id,grade:gene.grade,rotation,shape:[...gene.steps]});cost.textContent=String(M.price(proposed)-M.price(pieces));cost.title='진화포인트';item.append(svg,name,cost);item.onclick=()=>{if(item.disabled)return;selected=gene.id;notice='';state();root.focus({preventScroll:true});};list.append(item);}
+  }
+  function renderControls(){addButton.disabled=readOnly||!preview.valid;leftButton.disabled=readOnly;rightButton.disabled=readOnly;undoButton.disabled=readOnly||!history.length;redoButton.disabled=readOnly||!future.length;removeButton.disabled=readOnly||!pieces.length;clearButton.disabled=readOnly||!pieces.length;const reason=notice||preview.reason;const labels={ready:'',collision:'경로가 겹칩니다',closed:'경로가 닫혔습니다',boundary:'판을 벗어납니다',level:'둥지 레벨이 부족합니다'};find('.dna-status').textContent=readOnly?'':labels[reason]||'';find('.dna-status').dataset.kind=reason;find('.dna-cost strong').textContent=String(M.cost(pieces));root.dataset.readonly=String(readOnly);root.dataset.preview=String(preview.valid);}
+  function requestDraw(){if(!frame&&!destroyed)frame=requestAnimationFrame(()=>{frame=0;if(!destroyed)draw();});}
   function world(point){return {x:34*Math.sqrt(3)*(point.q+point.r/2),y:51*point.r};}
   function screen(point){const p=world(point);return {x:p.x*view.scale+view.x,y:p.y*view.scale+view.y};}
   function shape(gene){const points=M.route({q:0,r:0},gene,gene.grade,0).map(world),minX=Math.min(...points.map(p=>p.x)),maxX=Math.max(...points.map(p=>p.x)),minY=Math.min(...points.map(p=>p.y)),maxY=Math.max(...points.map(p=>p.y)),scale=Math.min(30/Math.max(1,maxX-minX),24/Math.max(1,maxY-minY));return points.map(p=>[(p.x-(minX+maxX)/2)*scale+22,(p.y-(minY+maxY)/2)*scale+19]);}
   function shapeSvg(gene){const points=shape(gene),organ=gene.category==='organ';return '<polyline points="'+points.map(p=>p.join(',')).join(' ')+'" fill="none" stroke="'+gene.color+'" stroke-width="'+(organ?4.5:2)+'" stroke-linejoin="round"/>'+points.slice(1,-1).map(p=>'<circle cx="'+p[0]+'" cy="'+p[1]+'" r="'+(organ?3:1.8)+'" fill="#fff" stroke="none"/>').join('')+'<circle cx="'+points[0][0]+'" cy="'+points[0][1]+'" r="'+(organ?5:4)+'" fill="#14252a" stroke="'+gene.color+'" stroke-width="1.5"/><circle cx="'+points[points.length-1][0]+'" cy="'+points[points.length-1][1]+'" r="'+(organ?5:4)+'" fill="#14252a" stroke="'+gene.color+'" stroke-width="1.5"/>';}
-  function renderProgression(){$('nest-level').value=String(level);$('nest-level').setAttribute('aria-label',copy('nestLevel'));}
-  function renderFilters(){const root=$('filters');root.replaceChildren();for(const type of ['all','organ','action','stat']){const item=document.createElement('button');item.innerHTML=icon(type);item.setAttribute('aria-pressed',String(filter===type));item.setAttribute('aria-label',copy(type));item.title=copy(type);item.onclick=()=>{filter=type;renderFilters();renderCatalog();};root.append(item);}}
-  function renderLegend(){const legend=$('dna-legend'),counts=M.counts(pieces);legend.replaceChildren();for(const gene of M.catalog){if(!counts[gene.id])continue;const item=document.createElement('span');item.dataset.gene=gene.id;const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 44 38');svg.innerHTML=shapeSvg(gene);const count=document.createElement('span');count.textContent='×'+counts[gene.id];item.append(svg,count);legend.append(item);}legend.hidden=!legend.children.length;}
-  function renderCatalog(){const root=$('catalog');root.replaceChildren();for(const gene of M.catalog){if(gene.grade>level||(filter!=='all'&&gene.category!==filter))continue;const item=document.createElement('button');item.className='gene'+(selected===gene.id?' active':'');item.dataset.gene=gene.id;item.dataset.grade=String(gene.grade);item.dataset.category=gene.category;item.disabled=gene.id==='gather'&&pieces.some(piece=>piece.gene==='gather');item.setAttribute('aria-pressed',String(selected===gene.id));const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.classList.add('gene-icon');svg.setAttribute('viewBox','0 0 44 38');svg.innerHTML=shapeSvg(gene);const details=document.createElement('span'),name=document.createElement('span'),code=document.createElement('span');name.className='gene-name';name.textContent=names[gene.id]||'';code.className='gene-code';code.textContent=gene.code;const footprint=document.createElement('span');footprint.className='footprint';footprint.innerHTML='<svg viewBox="0 0 12 12"><path d="m6 1 4.3 2.5v5L6 11 1.7 8.5v-5z"/></svg>';footprint.append(document.createTextNode(String(gene.grade+2)));code.append(footprint);details.append(name,code);const cost=document.createElement('span');cost.className='gene-cost';const proposed=pieces.map(M.clonePiece);proposed.splice(insertion,0,{gene:gene.id,grade:gene.grade,rotation,shape:[...gene.steps]});cost.textContent=String(M.price(proposed)-M.price(pieces));item.append(svg,details,cost);item.onclick=()=>{if(item.disabled)return;selected=gene.id;notice='';state();};root.append(item);}}
-    function renderDnaDesignStats(container, stats, base) {
-      const rows = [
-        ["health", "체력", ""], ["meleePower", "근접 공격력", ""], ["rangedPower", "원거리 공격력", ""], ["hits", "공격횟수", "회"], ["meleeSpeed", "근접 공속", "/초"], ["rangedSpeed", "원거리 공속", "/초"],
-        ["armor", "방어", ""], ["parry", "패링", "%"], ["block", "블록", "%"], ["evasion", "회피", "%"],
-        ["capacity", "운반", "개"], ["harvest", "채집량", "개"], ["harvestTime", "채집 시간", "초"], ["movement", "이동", "칸/초"],
-        ["vision", "시야", "칸"], ["comboPower", "연격숙련", "%"], ["critical", "치명", "%"], ["criticalPower", "치명위력", "%"],
-        ["accuracy", "정밀", "%"], ["penetration", "예리함", ""], ["blockPower", "방어숙련", "%"], ["counter", "반격", "%"],
-        ["counterPower", "반격위력", "%"], ["tenacity", "강인함", "%"], ["reduction", "완충", "%"], ["loadSpeed", "하중적응", "%"],
-        ["healing", "회복력", "%"], ["stun", "기절", "%"], ["stunTime", "기절연장", "초"], ["bleed", "출혈", "%"],
-        ["bleedPower", "출혈강도", ""], ["area", "범위공격", "칸"], ["areaPower", "확산위력", "%"], ["lifesteal", "흡혈", "%"],
-        ["reflection", "반사", "%"], ["regeneration", "재생", "/초"], ["comboSpeed", "연타 간격", "초"], ["focus", "공격 준비", "초"],
-        ["melee", "칼날", ""], ["ranged", "분비기관", ""], ["healer", "치유기관", ""], ["roaming", "안테나", ""]
-      ];
-      const format = value => String(Number(value.toFixed(3)));
-      const fragment = document.createDocumentFragment();
-      for (const [key, label, unit] of rows) {
-        if (stats[key] === undefined || base[key] === undefined) continue;
-        const value = Number(stats[key]), initial = Number(base[key]);
-        if (initial === 0 && value === 0) continue;
-        const term = document.createElement("dt");
-        term.textContent = label;
-        term.dataset.stat = key;
-        const description = document.createElement("dd");
-        description.dataset.stat = key;
-        const difference = Number((value - initial).toFixed(3));
-        term.className = difference !== 0 ? "design-stat-changed" : "";
-        const result = document.createElement("span");
-        result.className = "design-stat-value" + (difference !== 0 ? " design-stat-changed" : "");
-        result.textContent = format(value) + unit;
-        description.append(result);
-        if (difference !== 0) {
-          const delta = document.createElement("span");
-          delta.className = "design-stat-delta";
-          delta.textContent = " (" + (difference > 0 ? "+" : "") + format(difference) + ")";
-          description.append(delta);
-        }
-        fragment.append(term, description);
-      }
-      container.replaceChildren(fragment);
-    }
-  function renderStats(){const values=M.stats(pieces),base={...M.stats([])},organPieces=pieces.filter(piece=>M.lookup.get(piece.gene)?.category==='organ'),organStats=M.stats(organPieces);for(const key of ['harvestTime','comboSpeed','focus'])if(values[key]>0)base[key]=organStats[key];renderDnaDesignStats($('stats'),values,base);$('cost').textContent=(3+M.price(pieces)).toLocaleString();$('sequence').textContent=pieces.map(piece=>M.lookup.get(piece.gene).code).join(' ');}
-  function renderTemplates(){const root=$('templates');root.replaceChildren();library.forEach((entry,index)=>{const row=document.createElement('div');row.className='template-entry';const load=document.createElement('button');load.textContent=entry.name;load.onclick=()=>loadDesign(entry.design);const remove=document.createElement('button');remove.innerHTML=icon('remove');remove.setAttribute('aria-label',copy('remove'));remove.onclick=()=>{library.splice(index,1);persist();renderTemplates();};row.append(load,remove);root.append(row);});}
-  function renderControls(){canvas.dataset.preview=String(preview.valid);$('add').disabled=!preview.valid;$('undo').disabled=!history.length;$('redo').disabled=!future.length;$('remove').disabled=!pieces.length;$('clear').disabled=!pieces.length;const reason=notice||preview.reason;$('status').dataset.kind=reason;$('status').hidden=reason==='ready';$('status').querySelector('span').textContent=copy(reason);}
   function line(points,color,width,alpha){context.save();context.strokeStyle=color;context.lineWidth=width;context.globalAlpha=alpha;context.lineCap='round';context.lineJoin='round';context.beginPath();points.forEach((p,index)=>index?context.lineTo(p.x,p.y):context.moveTo(p.x,p.y));context.stroke();context.restore();}
   function dnaPath(path,color,alpha){
     const organ=M.lookup.get(path.gene).category==='organ',points=path.points.map(screen),samples=[];
@@ -202,34 +307,48 @@ window.AttributeDna = (() => {
   function draw(){
     context.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);context.clearRect(0,0,view.width,view.height);drawGrid();
     for(const path of model.paths)dnaPath(path,M.lookup.get(path.gene).color,1);
-    const futurePaths=preview.valid?preview.result.paths.slice(insertion):[];for(let index=0;index<futurePaths.length;index++)dnaPath(futurePaths[index],preview.valid?'#8be3c3':'#ed9293',index===0?.6:.2);
+    const futurePaths=readOnly||!preview.valid?[]:preview.result.paths.slice(insertion);for(let index=0;index<futurePaths.length;index++)dnaPath(futurePaths[index],preview.valid?'#8be3c3':'#ed9293',index===0?.6:.2);
     for(let index=0;index<model.nodes.length;index++){if(model.nodes.some((other,otherIndex)=>otherIndex!==index&&M.key(other)===M.key(model.nodes[index])&&(otherIndex===insertion||(index!==insertion&&otherIndex>index))))continue;const point=model.nodes[index],color=!M.inside(point,level)?'#ed9293':index===insertion?'#d9f4c0':index===0?'#86e2c5':'#587d73';node(point,index,color,false);}
-    const path=preview.valid?preview.path:null;if(path)node(path.end,-1,preview.valid?'#9cf0ce':'#ed9293',true);
+    const path=readOnly||!preview.valid?null:preview.path;if(path)node(path.end,-1,preview.valid?'#9cf0ce':'#ed9293',true);
     for(const point of model.outside||[]){const p=screen(point);context.beginPath();context.arc(p.x,p.y,9*view.scale,0,Math.PI*2);context.strokeStyle='#ed9293';context.lineWidth=view.scale;context.stroke();}
   }
-  function commit(){const proposed=candidate();if(!proposed.valid){notice=proposed.reason;renderControls();return false;}checkpoint();pieces=proposed.pieces;insertion++;notice='';state();return true;}
-  function cycleGene(){const items=[...$('catalog').children].filter(item=>!item.disabled);if(!items.length)return;const index=items.findIndex(item=>item.dataset.gene===selected);items[(index+1)%items.length].onclick();}
-  function rotate(delta){const previous=rotation;for(let step=0;step<6;step++){rotation=(rotation+delta+6)%6;if(candidate().result.valid){notice='';state();return;}}rotation=previous;}
-  function restore(value){pieces=value.pieces.map(M.clonePiece);level=value.level;insertion=pieces.length;notice='';state();}
-  function loadDesign(value){history=[];future=[];restore(value);fit();}
-  function undo(){if(!history.length)return;future.push(snapshot());restore(JSON.parse(history.pop()));}
-  function redo(){if(!future.length)return;history.push(snapshot());restore(JSON.parse(future.pop()));}
-  function remove(){if(!pieces.length)return;const index=Math.max(0,insertion-1),next=pieces.map(M.clonePiece);next.splice(index,1);if(!M.trace(next).valid){notice='collision';renderControls();return;}checkpoint();pieces=next;insertion=index;notice='';state();}
-  function fit(){
-    const radius=M.boardRadius(level),boundary=[{q:radius,r:0},{q:0,r:radius},{q:-radius,r:radius},{q:-radius,r:0},{q:0,r:-radius},{q:radius,r:-radius}],points=boundary.concat(model.paths.flatMap(path=>path.points),model.nodes).map(world),xs=points.map(point=>point.x),ys=points.map(point=>point.y),minX=Math.min(...xs)-55,maxX=Math.max(...xs)+55,minY=Math.min(...ys)-55,maxY=Math.max(...ys)+55;
-    view.scale=Math.max(.005,Math.min(1.75,(view.width-40)/(maxX-minX),(view.height-155)/(maxY-minY)));view.x=view.width/2-(minX+maxX)/2*view.scale;view.y=(view.height-55)/2-(minY+maxY)/2*view.scale;requestDraw();
-  }
-  function zoom(factor,x,y){const next=Math.max(.005,Math.min(2.7,view.scale*factor)),ratio=next/view.scale;view.x=x-(x-view.x)*ratio;view.y=y-(y-view.y)*ratio;view.scale=next;requestDraw();}
-  function resize(){const bounds=$('board').getBoundingClientRect();view.width=bounds.width;view.height=bounds.height;canvas.width=Math.ceil(bounds.width*devicePixelRatio);canvas.height=Math.ceil(bounds.height*devicePixelRatio);fit();}
-  function applyCopy(value,geneNames){for(const key of Object.keys(text))delete text[key];Object.assign(text,value);for(const key of Object.keys(names))delete names[key];Object.assign(names,geneNames);document.title=copy('title');document.querySelectorAll('[data-copy]').forEach(element=>element.textContent=copy(element.dataset.copy));for(const [id,glyph,key] of [['undo','undo','undo'],['redo','redo','redo'],['remove','remove','remove'],['clear','clear','clear'],['fit','fit','fit'],['zoom-in','plus','zoomIn'],['zoom-out','minus','zoomOut'],['rotate-left','left','rotateLeft'],['rotate-right','right','rotateRight'],['add','add','add'],['save-template','save','save'],['export','export','export'],['import','import','import']])button(id,glyph,key);$('template-name').setAttribute('aria-label',copy('templateName'));$('field').setAttribute('aria-label',copy('field'));$('field').setAttribute('role','img');renderFilters();state();}
-  $('nest-level').onchange=()=>{const value=Number($('nest-level').value);if(!Number.isInteger(value)||value<1||value>4)return;checkpoint();level=value;filter='all';notice='';renderFilters();state();fit();};
-  $('add').onclick=commit;$('rotate-left').onclick=()=>rotate(-1);$('rotate-right').onclick=()=>rotate(1);$('undo').onclick=undo;$('redo').onclick=redo;$('remove').onclick=remove;$('clear').onclick=()=>{if(!pieces.length)return;history=[];future=[];pieces=[];insertion=0;notice='';state();fit();};$('fit').onclick=fit;$('zoom-in').onclick=()=>zoom(1.2,view.width/2,view.height/2);$('zoom-out').onclick=()=>zoom(1/1.2,view.width/2,view.height/2);
-  $('save-template').onclick=()=>{const name=$('template-name').value.trim();if(!name){$('template-name').focus();return;}const existing=library.findIndex(entry=>entry.name===name),entry={name,design:design()};if(existing<0)library.unshift(entry);else library[existing]=entry;library=library.slice(0,60);persist();history=[];future=[];renderTemplates();renderControls();};
-  $('export').onclick=()=>{const blob=new Blob([JSON.stringify(design(),null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='Attribute-DNA.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),0);};$('import').onclick=()=>$('file').click();$('file').onchange=async()=>{const file=$('file').files[0];if(!file)return;try{if(file.size>300000)throw new Error();const value=M.validate(JSON.parse(await file.text()));if(!value)throw new Error();loadDesign(value);}catch{notice='invalid';renderControls();}$('file').value='';};
-  canvas.addEventListener('pointerdown',event=>{if(event.button===1){event.preventDefault();event.stopPropagation();cycleGene();return;}if(event.button!==0)return;pointer={id:event.pointerId,x:event.clientX,y:event.clientY,lastX:event.clientX,lastY:event.clientY};moved=false;canvas.setPointerCapture(event.pointerId);});canvas.addEventListener('pointermove',event=>{if(!pointer||pointer.id!==event.pointerId)return;const distance=Math.hypot(event.clientX-pointer.x,event.clientY-pointer.y);if(distance>4)moved=true;if(moved){view.x+=event.clientX-pointer.lastX;view.y+=event.clientY-pointer.lastY;canvas.classList.add('dragging');requestDraw();}pointer.lastX=event.clientX;pointer.lastY=event.clientY;});canvas.addEventListener('pointerup',event=>{if(!pointer||pointer.id!==event.pointerId)return;canvas.classList.remove('dragging');pointer=null;if(!moved)commit();});canvas.addEventListener('pointercancel',()=>{pointer=null;canvas.classList.remove('dragging');});canvas.addEventListener('auxclick',event=>{if(event.button===1){event.preventDefault();event.stopPropagation();}});canvas.addEventListener('wheel',event=>{if(event.ctrlKey||event.metaKey||event.altKey)return;event.preventDefault();event.stopPropagation();if(event.deltaY)rotate(event.deltaY>0?1:-1);},{passive:false});document.querySelector('.workspace').addEventListener('contextmenu',event=>{if(event.ctrlKey||event.metaKey||event.altKey)return;event.preventDefault();event.stopPropagation();undo();});document.querySelector('.workspace').addEventListener('pointerdown',event=>{if(event.button!==3)return;event.preventDefault();event.stopPropagation();undo();});document.querySelector('.workspace').addEventListener('auxclick',event=>{if(event.button===3){event.preventDefault();event.stopPropagation();}});
-  document.addEventListener('keydown',event=>{if(['INPUT','SELECT','TEXTAREA'].includes(event.target.tagName))return;const key=event.key.toLowerCase();if((key==='enter'||key===' ')&&event.target.closest?.('summary'))return;if((event.ctrlKey||event.metaKey)&&key==='z'){event.preventDefault();event.shiftKey?redo():undo();}else if(key==='q'){event.preventDefault();rotate(-1);}else if(key==='e'||key==='r'){event.preventDefault();rotate(1);}else if(key==='enter'){event.preventDefault();commit();}else if(key==='backspace'||key==='browserback'){event.preventDefault();event.stopPropagation();undo();}else if(key==='delete'){event.preventDefault();remove();}else if(key==='f'){fit();}});
-  new ResizeObserver(resize).observe($('board'));
-  window.AttributeEditor={getState:()=>({pieces:pieces.map(M.clonePiece),insertion,rotation,selected,closed:model.closed,level,grade,radius:M.boardRadius(level),valid:model.valid,preview:{valid:preview.valid,reason:preview.reason},stats:M.stats(pieces)}),applyCopy};
-  applyCopy({nestLevel:'둥지 레벨',boundary:'판을 벗어납니다',level:'둥지 레벨이 부족합니다',title:'속성 제작기',all:'전체',organ:'기관',action:'기능',stat:'스탯',add:'조각 추가',rotateLeft:'왼쪽 회전',rotateRight:'오른쪽 회전',undo:'되돌리기',redo:'다시 실행',remove:'조각 삭제',clear:'초기화',fit:'전체 보기',zoomIn:'확대',zoomOut:'축소',field:'DNA 편집 영역',templates:'속성 템플릿',templateName:'템플릿 이름',save:'저장',export:'내보내기',import:'불러오기',sequence:'DNA 서열',collision:'경로가 겹칩니다',closed:'경로가 닫혔습니다',invalid:'파일을 읽을 수 없습니다',health:'체력',power:'근접 공격력',hits:'연타',speed:'근접 공속',armor:'방어력',parry:'패링',capacity:'운반',harvest:'채집량',movement:'이속',vision:'시야',comboPower:'연격숙련',critical:'치명',criticalPower:'치명위력',accuracy:'정밀',penetration:'예리함',block:'방어본능',evasion:'회피',blockPower:'방어숙련',counter:'반격',counterPower:'반격위력',tenacity:'강인함',reduction:'완충',loadSpeed:'하중적응',healing:'회복력',stun:'기절',stunTime:'기절연장',bleed:'출혈',bleedPower:'출혈강도',area:'범위공격',areaPower:'확산위력',lifesteal:'흡혈',reflection:'반사',regeneration:'재생',comboSpeed:'연타속도',focus:'집중',rangedPower:'원거리 공격력',rangedSpeed:'원거리 공속',harvestSpeed:'채집속도'}, {blade:'칼날',carapace:'갑각',antenna:'안테나',gather:'채집기관',legs:'다리',power:'근접 공격력',combo:'연타',speed:'근접 공속',comboPower:'연격숙련',critical:'치명',criticalPower:'치명위력',accuracy:'정밀',penetration:'예리함',health:'체력',armor:'경화',evasion:'회피',parry:'패링',block:'방어본능',blockPower:'방어숙련',counter:'반격',counterPower:'반격위력',tenacity:'강인함',reduction:'완충',movement:'이속',capacity:'운반',harvest:'채집량',harvestSpeed:'채집속도',vision:'시야',loadSpeed:'하중적응',healing:'회복력',stun:'기절',stunTime:'기절연장',bleed:'출혈',bleedPower:'출혈강도',area:'범위공격',areaPower:'확산위력',lifesteal:'흡혈',reflection:'반사',regeneration:'재생',comboSpeed:'연타속도',focus:'집중',rangedPower:'원거리 공격력',rangedSpeed:'원거리 공속',healer:'치유기관',secretion:'분비기관'});resize();fit();
+  function commit(){if(readOnly)return;const proposed=candidate();if(!proposed.valid){notice=proposed.reason;renderControls();return;}checkpoint();pieces=proposed.pieces;insertion++;changed();}
+  function cycleGene(){if(readOnly)return;const items=[...find('.dna-list').children].filter(item=>!item.disabled);if(!items.length)return;const index=items.findIndex(item=>item.dataset.gene===selected);items[(index+1)%items.length].onclick();}
+  function rotate(delta){if(readOnly)return;const previous=rotation;for(let step=0;step<6;step++){rotation=(rotation+delta+6)%6;if(candidate().result.valid){notice='';state();return;}}rotation=previous;}
+  function undo(){if(readOnly||!history.length)return;future.push(snapshot());const previous=history.pop();pieces=previous.pieces;insertion=previous.insertion;changed();}
+  function redo(){if(readOnly||!future.length)return;history.push(snapshot());const next=future.pop();pieces=next.pieces;insertion=next.insertion;changed();}
+  function remove(){if(readOnly||!pieces.length)return;const index=Math.max(0,insertion-1),next=pieces.map(M.clonePiece);next.splice(index,1);const result=M.trace(next,level);if(!result.valid){notice=result.reason;renderControls();return;}checkpoint();pieces=next;insertion=index;changed();}
+  function fit(){if(!view.width||!view.height)return;Object.assign(view,dnaEditorViewport(M,level,readOnly?null:model.nodes[insertion],readOnly?null:M.lookup.get(selected),view.width,view.height));requestDraw();}
+  function zoom(factor){if(!Number.isFinite(factor)||factor<=0||!view.width||!view.height)return;const next=Math.max(.005,Math.min(2.7,view.scale*factor)),ratio=next/view.scale,x=view.width/2,y=view.height/2;view.x=x-(x-view.x)*ratio;view.y=y-(y-view.y)*ratio;view.scale=next;requestDraw();}
+  function resize(){const bounds=board.getBoundingClientRect();if(!bounds.width||!bounds.height)return;view.width=bounds.width;view.height=bounds.height;canvas.width=Math.ceil(bounds.width*devicePixelRatio);canvas.height=Math.ceil(bounds.height*devicePixelRatio);fit();}
+  canvas.addEventListener('pointerdown',event=>{if(event.button===1){event.preventDefault();event.stopPropagation();cycleGene();return;}if(event.button!==0||pointer)return;root.focus({preventScroll:true});pointer={id:event.pointerId,x:event.clientX,y:event.clientY};moved=false;canvas.setPointerCapture(event.pointerId);});
+  canvas.addEventListener('pointermove',event=>{if(pointer&&pointer.id===event.pointerId&&Math.hypot(event.clientX-pointer.x,event.clientY-pointer.y)>4)moved=true;});
+  canvas.addEventListener('pointerup',event=>{if(!pointer||pointer.id!==event.pointerId)return;pointer=null;if(moved||readOnly)return;commit();});
+  canvas.addEventListener('pointercancel',()=>{pointer=null;});
+  canvas.addEventListener('auxclick',event=>{if(event.button===1){event.preventDefault();event.stopPropagation();}});
+  canvas.addEventListener('wheel',event=>{if(event.ctrlKey||event.metaKey||event.altKey)return;event.preventDefault();event.stopPropagation();if(event.deltaY)rotate(event.deltaY>0?1:-1);},{passive:false});
+  root.addEventListener('contextmenu',event=>{if(event.ctrlKey||event.metaKey||event.altKey)return;event.preventDefault();event.stopPropagation();undo();});
+  root.addEventListener('pointerdown',event=>{if(event.button!==3)return;event.preventDefault();event.stopPropagation();undo();});
+  root.addEventListener('auxclick',event=>{if(event.button===3){event.preventDefault();event.stopPropagation();}});
+  root.addEventListener('keydown',event=>{if(['INPUT','SELECT','TEXTAREA'].includes(event.target.tagName)||event.target.isContentEditable)return;const key=event.key.toLowerCase();if((key==='enter'||key===' ')&&event.target.closest?.('button,summary'))return;if((event.ctrlKey||event.metaKey)&&key==='z'){event.preventDefault();event.stopPropagation();event.shiftKey?redo():undo();}else if((event.ctrlKey||event.metaKey)&&key==='y'){event.preventDefault();event.stopPropagation();redo();}else if(!event.ctrlKey&&!event.metaKey&&!event.altKey&&['q','e','r','arrowleft','arrowright','enter',' ','delete','backspace','browserback','f'].includes(key)){event.preventDefault();event.stopPropagation();if(key==='q'||key==='arrowleft')rotate(-1);else if(key==='e'||key==='r'||key==='arrowright')rotate(1);else if(key==='enter'||key===' ')commit();else if(key==='backspace'||key==='browserback')undo();else if(key==='f')fit();else remove();}});
+  function mobileChange(){renderCatalog();fit();}
+  if(mobileQuery)mobileQuery.addEventListener('change',mobileChange);
+  const observer=new ResizeObserver(resize);observer.observe(board);
+  state();resize();
+  return {
+    load(design,locked){const value=M.validate(design);if(!value)return false;pieces=value.pieces.map(M.clonePiece);if(!contextSet){level=value.level;budget=value.budget;}readOnly=locked===true;history=[];future=[];insertion=pieces.length;notice='';selected=M.catalog.find(gene=>gene.id===pieces[pieces.length-1]?.gene&&gene.grade<=level)?.id||M.catalog[0].id;state();fit();return true;},
+    context(nextLevel,nextBudget,locked){const previousLevel=level,previousBudget=budget,previousReadOnly=readOnly;if(Number.isInteger(nextLevel)&&nextLevel>=1&&nextLevel<=4)level=nextLevel;if(Number.isFinite(nextBudget)&&nextBudget>=0)budget=Math.floor(nextBudget);contextSet=true;readOnly=locked===true;if(M.lookup.get(selected).grade>level)selected=M.catalog[0].id;if(previousLevel===level&&previousBudget===budget&&previousReadOnly===readOnly)return;notice='';state();if(previousLevel!==level)fit();},
+    getDesign,
+    clearHistory,
+    fit,
+    zoom,
+    destroy(){destroyed=true;if(mobileQuery)mobileQuery.removeEventListener('change',mobileChange);hideGeneName();geneClick=null;geneTouch=null;catalog.removeEventListener('pointerdown',genePointerDown);catalog.removeEventListener('pointermove',genePointerMove);catalog.removeEventListener('pointerup',genePointerEnd);catalog.removeEventListener('pointercancel',genePointerEnd);catalog.removeEventListener('click',geneClickCapture,true);catalog.removeEventListener('contextmenu',geneContextMenu);observer.disconnect();if(frame)cancelAnimationFrame(frame);root.remove();}
+  };
+}
+
+return { dnaDesignStats, renderDnaDesignStats, dnaEditorViewport, createDnaEditor };
 })();
-</script></body></html>
+window.AttributeDna = modules["server/dna.mjs"].ATTRIBUTE_DNA;
+globalThis.AttributeDnaEditor = modules["client/dna-editor.mjs"];
+})();</script>
+<script src="client/attribute-editor.js"></script></body></html>
