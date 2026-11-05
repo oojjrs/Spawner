@@ -52,7 +52,16 @@ export function createCombatTrial(settings) {
   });
   const combat = createCombat(environment);
   const first = settings.first === "right" ? 1 : 0;
-  combat.engage(agents[first], agents[1 - first], 0);
+  // The lab deliberately allows matchups that wild creatures cannot start in the world.
+  // Hide only the initiator's species during enrollment, then restore it before any
+  // attack so creature stats and animation timing still use the real species.
+  const initiator = agents[first], species = initiator.species;
+  try {
+    initiator.species = undefined;
+    if (!combat.engage(initiator, agents[1 - first], 0)) throw new Error("대결을 시작할 수 없습니다.");
+  } finally {
+    initiator.species = species;
+  }
   agents[1 - first].combat.nextAttackAt = .05;
   function result() {
     if (agents.every(agent => agent.health > 0)) return null;

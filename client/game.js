@@ -7,6 +7,8 @@
     const appearanceWorld = globalThis.SpawnerAppearance.createUnitAppearanceWorld({ sourceUrl: assetSource });
     let appearanceWorldPoses = new Map();
     const combatVfxCursor = Spawner.createCombatVfxCursor();
+    const detailCombatVfx = Spawner.createDetailCombatVfx();
+    const detailVfxImages = new Map();
     const agentRangedImages = new Map();
     let combatVfxFrame = { active: [], projectiles: [] };
     addEventListener("pagehide", () => appearanceWorld.clear());
@@ -6173,6 +6175,7 @@
       updateSelection();
       updateHover();
       combatVfxFrame = combatVfxCursor.consume(state.combatVfx, state.simSeconds);
+      detailCombatVfx.consume(combatVfxFrame, state.simSeconds);
 
       const appearanceAgents = state.camera.zoom >= 8 ? [...state.agents, ...state.rivals].map(displayedAgent).filter(agent => {
         if (agent.species || agentBirthPose(agent, true)) return false;
@@ -8210,6 +8213,7 @@
     combatClose.addEventListener("click", () => combatPanel.close());
     combatPanel.addEventListener("keydown", event => event.stopPropagation());
     combatPanel.addEventListener("close", () => {
+      detailCombatVfx.clearView();
       combatOpen.hidden = !selectedCombatUnits().length;
       const focus = combatReturnFocus?.isConnected && !combatReturnFocus.hidden ? combatReturnFocus : unitPanel.querySelector("button:not([hidden])");
       focus?.focus({ preventScroll: true });
@@ -8217,10 +8221,14 @@
     combatOpen.addEventListener("click", () => {
       const units = selectedCombatUnits();
       if (!units.length) return;
+      detailCombatVfx.clearView();
       combatWatch = { id: units[0].combat.id, x: units[0].combat.x, y: units[0].combat.y, summary: "" };
       combatSelected = String(units[0].id);
       combatReturnFocus = document.activeElement;
       stopMapMovement();
+      for (const path of Spawner.DETAIL_COMBAT_VFX_ASSETS) if (!detailVfxImages.has(path)) {
+        const image = new Image(); image.src = assetSource(path); detailVfxImages.set(path, image);
+      }
       combatPanel.showModal();
       combatClose.focus();
       scheduleRender();
@@ -8246,10 +8254,15 @@
       if (!agent?.combat) return null;
       if (state.combatVfx?.version === 1) {
         const matches = combatVfxFrame.active.filter(cue => ["impact", "defense", "prepare", "status"].includes(cue.channel) &&
-          ["hit", "critical", "followup", "counter", "parry", "block", "stun"].includes(cue.kind) &&
+          ["hit", "critical", "followup", "area", "reflect", "counter", "dodge", "parry", "block", "stun"].includes(cue.kind) &&
+          (cue.kind !== "dodge" || String(cue.targetId) === String(agent.id)) &&
           (String(cue.sourceId) === String(agent.id) || String(cue.targetId) === String(agent.id)));
-        const cue = matches.findLast(cue => ["defense", "status"].includes(cue.channel) && String(cue.targetId) === String(agent.id)) || matches.at(-1);
-        return cue ? { ...cue, kind: ["critical", "followup"].includes(cue.kind) ? "hit" : cue.kind, damage: cue.amount } : null;
+        // A fighter can deal and receive damage in the same tick. Its outgoing
+        // event must not hide the incoming recoil or the missing-art fallback.
+        const cue = matches.findLast(cue => ["defense", "status"].includes(cue.channel) && cue.kind !== "dodge" && String(cue.targetId) === String(agent.id)) ||
+          matches.findLast(cue => cue.channel === "impact" && String(cue.targetId) === String(agent.id)) ||
+          matches.findLast(cue => cue.kind === "dodge") || matches.at(-1);
+        return cue ? { ...cue, kind: ["critical", "followup", "area", "reflect"].includes(cue.kind) ? "hit" : cue.kind, damage: cue.amount } : null;
       }
       const relevant = event => event && (String(event.sourceId) === String(agent.id) || String(event.targetId) === String(agent.id)) && ["hit", "counter", "parry", "block", "stun"].includes(event.kind);
       const reaction = agent.combat.lastReaction;
@@ -8329,9 +8342,9 @@
       const selected = units.find(agent => String(agent.id) === combatSelected);
       const arenaUnits = combatArenaUnits(units, selected);
       combatHeading.textContent = units.length > arenaUnits.length ? "전투 · 선택 유닛 중심" : "전투";
-      const events = { parry: "패링", block: "방어", stun: "기절", counter: "반격", hit: "타격" };
+      const events = { dodge: "회피", parry: "패링", block: "방어", stun: "기절", counter: "반격", hit: "타격" };
       const selectedEvent = combatVisualEvent(selected);
-      const status = selected?.combat.stunnedUntil > state.simSeconds ? "기절" : selectedEvent && state.simSeconds - selectedEvent.at < .5 && ["parry", "block", "stun"].includes(selectedEvent.kind) ? events[selectedEvent.kind] : selected?.attack?.counter ? "반격" : selected?.attack?.heavy ? "모아 찌르기" : selected?.attack && state.simSeconds < selected.attack.hitAt ? "공격 준비" : selectedEvent && state.simSeconds - selectedEvent.at < .5 ? events[selectedEvent.kind] : "교전 중";
+      const status = selected?.combat.stunnedUntil > state.simSeconds ? "기절" : selectedEvent && state.simSeconds - selectedEvent.at < .5 && ["dodge", "parry", "block", "stun"].includes(selectedEvent.kind) ? events[selectedEvent.kind] : selected?.attack?.counter ? "반격" : selected?.attack?.heavy ? "모아 찌르기" : selected?.attack && state.simSeconds < selected.attack.hitAt ? "공격 준비" : selectedEvent && state.simSeconds - selectedEvent.at < .5 ? events[selectedEvent.kind] : "교전 중";
       combatDetail.textContent = selected ? (selected.name || "유닛") + " · " + combatStatsText(selected) + " · " + status : "전투 종료";
       const profile = selected ? Spawner.combatProfile(selected) : null;
       combatGauge.value = selected ? clamp(1 - ((selected.combat.nextAttackAt || state.simSeconds) - state.simSeconds) / profile.attackInterval, 0, 1) : 0;
@@ -8342,8 +8355,16 @@
         combatCanvas.style.backgroundImage = "url(" + JSON.stringify(combatBackgrounds[background]) + ")";
       }
       const width = Math.max(1, Math.round(combatCanvas.clientWidth)), height = Math.max(1, Math.round(combatCanvas.clientHeight));
-      if (combatCanvas.width !== width || combatCanvas.height !== height) { combatCanvas.width = width; combatCanvas.height = height; }
+      // Layout stays in CSS pixels; the backing store must resolve device pixels.
+      const pixelRatio = Math.max(1, window.devicePixelRatio || 1);
+      const backingWidth = Math.round(width * pixelRatio), backingHeight = Math.round(height * pixelRatio);
+      if (combatCanvas.width !== backingWidth || combatCanvas.height !== backingHeight) {
+        combatCanvas.width = backingWidth; combatCanvas.height = backingHeight;
+      }
       const context = combatCanvas.getContext("2d");
+      context.setTransform(backingWidth / width, 0, 0, backingHeight / height, 0, 0);
+      context.imageSmoothingEnabled = true;
+      context.imageSmoothingQuality = "high";
       context.clearRect(0, 0, width, height);
       const dimensions = new Map(units.map(agent => {
         const kind = agent.species || agent.tribe || "bean", scale = combatUnitScale(agent);
@@ -8353,14 +8374,16 @@
       combatWatch.maxWidth = Math.max(combatWatch.maxWidth || .4, ...[...dimensions.values()].map(size => size.width));
       combatWatch.maxHeight = Math.max(combatWatch.maxHeight || .4, ...[...dimensions.values()].map(size => size.height));
       const cell = Math.min(width * .31, width * .22 / combatWatch.maxWidth, height * .43 / combatWatch.maxHeight);
-      const appearancePoses = appearanceWorld.prepare(context, arenaUnits, state.simSeconds, cell, 1);
+      const appearancePoses = appearanceWorld.prepare(context, arenaUnits, state.simSeconds, cell, pixelRatio);
       const positions = new Map();
+      const fallbackImpacts = [], dodgeLabels = [];
       const slots = [{ x:.39, floor:.76 }, { x:.20, floor:.58 }, { x:.21, floor:.88 }];
       [0, 1].forEach(side => arenaUnits.filter(agent => agent.combat.side === side).forEach((agent, index) => {
         const slot = slots[index], size = dimensions.get(String(agent.id));
         positions.set(String(agent.id), { x: width * (side ? 1 - slot.x : slot.x), y: height * slot.floor,
           scale: size.scale, width: size.width * cell, height: size.height * cell });
       }));
+      const vfxPositions = new Map(positions);
       const target = selected && positions.get(String(selected.attack?.targetId ?? selected.combat.targetId));
       if (target) {
         const source = positions.get(String(selected.id));
@@ -8376,11 +8399,12 @@
         const facing = opponent ? Math.sign(opponent.x - point.x) || (agent.combat.side ? -1 : 1) : agent.combat.side ? -1 : 1;
         const progress = attack ? clamp((state.simSeconds - attack.startedAt) / (attack.endsAt - attack.startedAt), 0, 1) : 0;
         const distance = opponent ? Math.hypot(opponent.x - point.x, opponent.y - point.y) : 0;
-        const lunge = attack && state.simSeconds < attack.endsAt ? Math.sin(progress * Math.PI) * Math.min(30 * width / 1200, distance * .28) : 0;
+        const lunge = attack && !Spawner.CREATURE_ATTACK_ANIMATIONS[agent.species]?.fixedSupport && state.simSeconds < attack.endsAt ? Math.sin(progress * Math.PI) * Math.min(30 * width / 1200, distance * .28) : 0;
         const recoil = hit && age >= 0 && age < .16 ? Math.sin(age / .16 * Math.PI) * 7 * width / 1200 : 0;
         const directionX = distance ? (opponent.x - point.x) / distance : facing;
         const directionY = distance ? (opponent.y - point.y) / distance : 0;
         const x = point.x + directionX * (lunge - recoil), y = point.y + directionY * (lunge - recoil);
+        vfxPositions.set(String(agent.id), { ...point, x, y });
         const bodyY = y - point.height * .5;
         context.save();
         context.fillStyle = "#13251e3d"; context.beginPath(); context.ellipse(x, y, Math.max(4, point.width * .28), Math.max(2, point.height * .035), 0, 0, Math.PI * 2); context.fill();
@@ -8393,7 +8417,7 @@
         context.save(); context.translate(x, y); context.scale(appearancePose ? 1 : point.scale, appearancePose ? 1 : point.scale);
         if (agent.combat.stunnedUntil > state.simSeconds) context.globalAlpha = .65;
         if (agent.species) drawCombatCreature(context, visual, 0, 0, cell);
-        else if (!appearancePose || !appearanceWorld.draw(context, visual, appearancePose, { x: 0, y: 0 }, cell, facing < 0, 1))
+        else if (!appearancePose || !appearanceWorld.draw(context, visual, appearancePose, { x: 0, y: 0 }, cell, facing < 0, pixelRatio))
           drawAgentAppearanceLayer(context, now, visual, cell, { x:-cell / 2, y:-cell * (.5 + AGENT_HEIGHT * .44) }, null, null, null);
         context.restore();
         const barWidth = clamp(point.width * .6, 32, 100), barY = y + 8;
@@ -8412,15 +8436,77 @@
           else context.arc(x, bodyY, point.width * .5, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * progress);
           context.stroke();
         }
-        if (impact && String(impact.targetId) === String(agent.id) && age >= 0 && age < .25) {
-          context.globalAlpha = 1 - age / .25;
-          context.strokeStyle = impact.kind === "block" || impact.kind === "parry" ? "#a6e4fa" : "#ffe1a0";
-          context.beginPath();
-          if (primary === "piercing") { context.moveTo(x - 22, bodyY); context.lineTo(x + 22, bodyY); }
-          else context.arc(x, bodyY, 14 + age * 30, 0, primary === "carapace" ? Math.PI * 2 : Math.PI);
-          context.stroke();
-        }
+        // A hidden feet trait can still evade on any dominant silhouette. Use
+        // the laboratory's existing semantic label, not a hit or shield burst.
+        // Read all current cues so a simultaneous received hit keeps its recoil.
+        const dodge = state.combatVfx?.version === 1 && combatVfxFrame.active.findLast(cue =>
+          cue.kind === "dodge" && cue.channel === "defense" && String(cue.targetId) === String(agent.id));
+        if (dodge && state.simSeconds >= dodge.at && state.simSeconds < dodge.endsAt)
+          dodgeLabels.push({ targetId: agent.id, x, y: Math.max(20, y - point.height - 20), floor: y, age: state.simSeconds - dodge.at });
+        if (impact && impact.kind !== "dodge" && String(impact.targetId) === String(agent.id) && age >= 0 && age < .25)
+          fallbackImpacts.push({ impact, age, primary, x, bodyY, lineWidth: context.lineWidth });
         context.restore();
+      }
+      // Only this modal receives V4 artwork. Map dust and world effects are unchanged.
+      const drawnImpacts = new Set();
+      for (const command of detailCombatVfx.commands(arenaUnits, vfxPositions, state.simSeconds, cell, { scope: combatWatch.id, width, height })) {
+        let image = detailVfxImages.get(command.image);
+        if (!image) {
+          image = new Image(); image.src = assetSource(command.image);
+          detailVfxImages.set(command.image, image);
+        }
+        if (Spawner.drawDetailVfxCell(context, image, command)) {
+          if (command.kind === "impact" && command.eventId !== undefined) drawnImpacts.add(command.eventId);
+        } else if (command.kind === "flight") {
+          // Keep an actual shot visible while its approved sheet loads or fails.
+          // Use the same frozen origin, current head and lifetime as the artwork.
+          const directionX = Math.cos(command.angle), directionY = Math.sin(command.angle);
+          const x = command.x + directionX * command.size * .25, y = command.y + directionY * command.size * .25;
+          const radius = clamp(command.size * .035, 2, 6);
+          context.save(); context.fillStyle = "#b6ed84"; context.strokeStyle = "#e0ffb7"; context.lineWidth = Math.max(1, radius * .55);
+          context.beginPath(); context.moveTo(x - directionX * radius * 4, y - directionY * radius * 4); context.lineTo(x, y); context.stroke();
+          context.beginPath(); context.arc(x, y, radius, 0, Math.PI * 2); context.fill(); context.restore();
+        } else if (command.kind === "impact" && command.amount > 0) {
+          const age = state.simSeconds - command.eventAt;
+          // The actor loop has only one reaction per living fighter. A killing
+          // hit or another simultaneous hit still has its own observed point.
+          // Reuse the existing short fallback, never infer an absent recipient.
+          if (age >= 0 && age < .25 && !fallbackImpacts.some(entry => entry.impact.eventId === command.eventId)) {
+            const target = arenaUnits.find(agent => String(agent.id) === String(command.targetId));
+            fallbackImpacts.push({ impact: { kind: "hit", eventId: command.eventId }, age,
+              primary: target ? Spawner.combatPrimary(target) : "blade", x: command.x, bodyY: command.y, lineWidth: 1 });
+          }
+        }
+      }
+      // Replace only the matching impact that actually drew. An unrelated missing
+      // sheet must not duplicate loaded art or suppress an unrepresented cue.
+      for (const { impact, age, primary, x, bodyY, lineWidth } of fallbackImpacts) {
+        const defense = impact.kind === "block" || impact.kind === "parry";
+        if (!defense && state.combatVfx?.version === 1 && drawnImpacts.has(impact.eventId)) continue;
+        context.save(); context.globalAlpha = 1 - age / .25;
+        context.strokeStyle = defense ? "#a6e4fa" : "#ffe1a0";
+        context.lineWidth = lineWidth; context.beginPath();
+        if (primary === "piercing") { context.moveTo(x - 22, bodyY); context.lineTo(x + 22, bodyY); }
+        else context.arc(x, bodyY, 14 + age * 30, 0, primary === "carapace" ? Math.PI * 2 : Math.PI);
+        context.stroke(); context.restore();
+      }
+      const vitalCommands = detailCombatVfx.vitalCommands(arenaUnits, vfxPositions, state.simSeconds,
+        { scope: combatWatch.id, width, height });
+      for (const command of vitalCommands) Spawner.drawDetailVitalEffect(context, command,
+        { width, height, reducedMotion: idleMotion.matches });
+      for (const label of dodgeLabels) {
+        // Keep independently triggered healing/bleed amounts readable as well.
+        // Reserve a lane above their existing labels, or below the health bar
+        // when the upper edge leaves no room. Never move the HP feedback.
+        const healthLabels = vitalCommands.filter(command => command.kind !== "regeneration" && String(command.targetId) === String(label.targetId));
+        const top = Math.min(label.y, ...healthLabels.map(command => Math.max(20, Math.min(height - 20,
+          command.y - command.bodyHeight * .5 - 20 - (idleMotion.matches ? 0 : Math.min(1, command.age / .85) * 45) - command.lane * 24)) - 32));
+        const labelY = top < 20 ? Math.min(height - 20, label.floor + 36) : top;
+        context.save(); context.globalAlpha = 1 - (label.age / .4) ** 2;
+        context.textAlign = "center"; context.textBaseline = "middle"; context.lineJoin = "round";
+        context.font = '700 ' + Math.max(17, Math.min(30, width / 30)) + 'px "Malgun Gothic", sans-serif';
+        context.lineWidth = 4; context.strokeStyle = "#203125"; context.fillStyle = "#d3f1ff";
+        context.strokeText("회피", label.x, labelY); context.fillText("회피", label.x, labelY); context.restore();
       }
     }
     function templateDescription(slots, levels) {

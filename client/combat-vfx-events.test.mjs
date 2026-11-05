@@ -116,3 +116,27 @@ test("real simulation launches before damage and emits actual capped drain separ
   assert.ok(melee.vfx.events.some(item => item.id === drain.causeId && item.kind === "hit"));
   assert.equal(melee.history.some(item => item.kind === "drain"), false, "presentation evidence does not rewrite experiment history");
 });
+
+test("bounded cursor never restarts impacts when an oversized packet repeats or reorders", () => {
+  const cursor = createCombatVfxCursor({ maxEvents: 2 });
+  cursor.consume(packet([]), 0);
+  const rows = Array.from({ length: 6 }, (_, index) => event("hit", 1, { id: "hit-" + index, sequence: index + 1 }));
+  assert.deepEqual(cursor.consume(packet(rows), 1).started.map(cue => cue.eventId), ["hit-4", "hit-5"]);
+  for (let index = 1; index <= 5; index++) {
+    const result = cursor.consume(packet(index % 2 ? rows.toReversed() : rows), 1 + index / 100);
+    assert.equal(result.started.length, 0);
+    assert.deepEqual(result.active.map(cue => cue.eventId), ["hit-4", "hit-5"]);
+  }
+  const next = event("hit", 1.1, { id: "hit-6", sequence: 7 });
+  assert.deepEqual(cursor.consume(packet([next, ...rows]), 1.1).started.map(cue => cue.eventId), ["hit-6"]);
+});
+
+test("late older impacts cannot supersede the latest reaction through arrival order", () => {
+  const cursor = createCombatVfxCursor(); cursor.consume(packet([]), 0);
+  const newer = event("hit", 1.1, { id: "new", sequence: 2 });
+  const older = event("hit", 1, { id: "old", sequence: 1 });
+  cursor.consume(packet([newer]), 1.1);
+  const result = cursor.consume(packet([newer, older]), 1.2);
+  assert.deepEqual(result.active.map(cue => cue.eventId), ["old", "new"]);
+  assert.deepEqual(combatVfxAt([newer, older], 1.2).active.map(cue => cue.eventId), ["old", "new"]);
+});

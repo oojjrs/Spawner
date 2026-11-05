@@ -55,10 +55,14 @@ export function combatVfxCues(input, scope) {
   return cues;
 }
 
+function eventOrder(a, b) {
+  return a.at - b.at || (a.sequence || 0) - (b.sequence || 0) || a.id.localeCompare(b.id);
+}
+
 export function combatVfxAt(inputs, time, scope) {
   if (!Number.isFinite(time)) throw new TypeError("VFX time must be finite simulation seconds");
   const events = [...new Map(inputs.map(input => normalizeCombatVfxEvent(input, scope)).filter(Boolean)
-    .map(event => [event.id, event])).values()];
+    .map(event => [event.id, event])).values()].sort(eventOrder);
   const active = events.flatMap(event => combatVfxCues(event)).filter(cue => time >= cue.at && time < cue.endsAt)
     .map(cue => ({ ...cue, age: time - cue.at }));
   const closures = new Map();
@@ -91,14 +95,20 @@ export function createCombatVfxCursor({ maxLateness = .35, maxEvents = 512 } = {
     if (reset) { clear(); streamId = nextStream; }
     for (const input of snapshot?.events || []) {
       const event = normalizeCombatVfxEvent(input, streamId || "snapshot");
-      if (event && !events.has(event.id)) events.set(event.id, event);
+      // The same journal ID can gain or lose endpoint visibility in later
+      // snapshots. Refresh its current fields, including redactions, without
+      // clearing the separate seen/eligible markers or replaying its cues.
+      if (event) events.set(event.id, event);
     }
-    while (events.size > maxEvents) {
-      const id = events.keys().next().value;
-      events.delete(id); seen.delete(id); eligible.delete(id);
+    // Retain by incident time, not Map insertion order: replayed packets can
+    // reinsert an evicted older ID after a newer one, otherwise evicting its
+    // seen marker and repeatedly restarting the same recent impacts.
+    const ordered = [...events.values()].sort(eventOrder);
+    for (const event of ordered.slice(0, Math.max(0, ordered.length - maxEvents))) {
+      events.delete(event.id); seen.delete(event.id); eligible.delete(event.id);
     }
     const started = [];
-    for (const event of [...events.values()].sort((a, b) => a.at - b.at || (a.sequence || 0) - (b.sequence || 0))) {
+    for (const event of ordered.slice(-maxEvents)) {
       if (event.at > time || seen.has(event.id)) continue;
       seen.set(event.id, event.at);
       // A first snapshot/backseek reconstructs state, without replaying old bursts.

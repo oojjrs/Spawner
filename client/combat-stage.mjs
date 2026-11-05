@@ -1,5 +1,7 @@
 import { createCombatStageAppearance } from "./combat-stage-appearance.mjs";
 import { attackAnimationElapsed } from "../server/attack.mjs";
+import { createCombatVfxCursor } from "./combat-vfx-events.mjs";
+import { createDetailCombatVfx, DETAIL_COMBAT_VFX_ASSETS, drawDetailVfxCell, drawDetailVitalEffect } from "./combat-detail-vfx.mjs";
 import { COMBAT_LAB_UNITS } from "./combat-lab.mjs";
 import { createUnitAppearanceWorld } from "./unit-appearance-world.mjs";
 import { AGENT_DEATH_ANIMATION } from "./agent-death.mjs";
@@ -32,6 +34,14 @@ function bodyDimensions(agent) {
     (key === "talon-owl" ? TALON_OWL_IDLE : BEETLE_SPRITE);
   const reference = UNIT_IMAGE_BOUNDS[idle.image], scale = unitDisplaySize(agent) / Math.max(reference.width, reference.height);
   return { width: reference.width * scale, height: reference.height * scale };
+}
+
+function impactKey(source, target, at, amount) {
+  return JSON.stringify([String(source), String(target), at, amount]);
+}
+
+function flightKey(source, target, launch, arrival) {
+  return JSON.stringify([String(source), String(target), launch, arrival]);
 }
 
 function displaySize(agent, pose) {
@@ -84,10 +94,11 @@ export function createCombatStage(canvas) {
   const context = canvas.getContext("2d"), images = new Map(), imageRetryAt = new Map();
   const appearanceWorld = createUnitAppearanceWorld();
   const representativeArt = createCombatStageAppearance(image);
+  const vfxCursor = createCombatVfxCursor(), detailVfx = createDetailCombatVfx();
   let appearancePoses = new Map();
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const deathStarted = new Map(), readyPoses = new Map();
-  let currentTrial, seen = 0, effects = [], clock = 0, lastNow = 0;
+  let currentTrial, previousTime = null, seen = 0, effects = [], clock = 0, lastNow = 0;
 
   function image(source) {
     if (!source) return null;
@@ -129,7 +140,7 @@ export function createCombatStage(canvas) {
       }
     }
     const recent = effects.filter(effect => effect.event.targetId === agent.id && clock - effect.born < .22);
-    const impact = recent.find(effect => effect.event.damage > 0);
+    const impact = recent.find(effect => effect.event.damage > 0 && effect.event.kind !== "bleed");
     const dodge = recent.find(effect => effect.event.kind === "dodge");
     const age = impact ? (clock - impact.born) / .22 : 1;
     const recoil = reducedMotion.matches ? 0 : impact ? Math.sin(age * Math.PI) * 16 : dodge ? 26 * Math.sin((clock - dodge.born) / .22 * Math.PI) : 0;
@@ -253,7 +264,7 @@ export function createCombatStage(canvas) {
     return { ...point, width: dimensions.width * cell, height: dimensions.height * cell };
   }
 
-  function effectArt(effect, points, width, height) {
+  function effectArt(effect, points, width, height, impactCovered = false) {
     const event = effect.event, age = clock - effect.born, progress = clamp(age / .85);
     const id = ["counter", "shoot"].includes(event.kind) ? event.attackerId : event.targetId;
     const support = currentTrial.supportAgents?.find(agent => agent.id === event.targetId);
@@ -264,7 +275,7 @@ export function createCombatStage(canvas) {
       context.beginPath(); context.arc(x, y, 15 + progress * 30, 0, Math.PI * 2); context.stroke();
       context.beginPath(); context.moveTo(x - 8, y); context.lineTo(x + 8, y); context.moveTo(x, y - 8); context.lineTo(x, y + 8); context.stroke();
     }
-    if (age < .28 && !reducedMotion.matches && (event.damage > 0 || ["parry", "block"].includes(event.kind))) {
+    if (age < .28 && !reducedMotion.matches && (event.damage > 0 && !impactCovered || ["parry", "block"].includes(event.kind))) {
       const strength = clamp(age / .28), color = event.kind === "parry" ? "#b9e8f0" : event.kind === "block" ? "#c2dce8" : event.critical ? "#ffe1a0" : "#f7e9b4";
       context.strokeStyle = color; context.lineWidth = (1 - strength) * 3 + 1;
       for (let i = 0; i < 7; i++) {
@@ -273,7 +284,7 @@ export function createCombatStage(canvas) {
         context.beginPath(); context.moveTo(x + Math.cos(angle) * radius * .45, y + Math.sin(angle) * radius * .45);
         context.lineTo(x + Math.cos(angle) * radius, y + Math.sin(angle) * radius); context.stroke();
       }
-      if (event.damage > 0) {
+      if (event.damage > 0 && !impactCovered) {
         context.lineWidth = event.critical ? 5 : 3;
         context.beginPath(); context.moveTo(x - 20, y + 20); context.lineTo(x + 20, y - 20); context.stroke();
       }
@@ -344,27 +355,42 @@ export function createCombatStage(canvas) {
     return { ...point, width: dimensions.width * cell, height: dimensions.height * cell };
   }
 
-  function projectileArt(projectile, points, time, height) {
+  function projectileArt(projectile, points, time, height, flight) {
     const source = points[projectile.source.id], target = points[projectile.target.id];
     const progress = clamp((time - projectile.launchedAt) / Math.max(.001, projectile.at - projectile.launchedAt));
+    // A loading fallback must share the V4 shot's frozen origin and body-centre
+    // destination. Recomputing from the recoiling shooter makes recovery jump.
+    const head = flight && { x: flight.x + Math.cos(flight.angle) * flight.size * .25,
+      y: flight.y + Math.sin(flight.angle) * flight.size * .25, angle: flight.angle };
     const sprite = unitRangedProjectile(stageAgent(projectile.source)), asset = sprite && image(sprite.image);
     if (sprite && asset) {
       const scale = sprite.sourceScale * formationScale(canvas.clientWidth, canvas.clientHeight);
       const startX = source.x + source.direction * (sprite.outletX - 256) * scale;
       const startY = source.y + (sprite.outletY - 448) * scale;
-      const x = startX + (target.x - startX) * progress, y = startY + (target.y - height * .04 - startY) * progress;
-      context.save(); context.translate(x, y); context.rotate(Math.atan2(target.y - height * .04 - startY, target.x - startX));
+      const x = head ? head.x : startX + (target.x - startX) * progress;
+      const y = head ? head.y : startY + (target.y - height * .04 - startY) * progress;
+      context.save(); context.translate(x, y); context.rotate(head ? head.angle : Math.atan2(target.y - height * .04 - startY, target.x - startX));
       context.drawImage(asset, -sprite.width * scale / 2, -sprite.height * scale / 2, sprite.width * scale, sprite.height * scale);
       context.restore(); return;
     }
     context.save(); context.fillStyle = "#e5e9a4"; context.shadowColor = "#e5e9a4"; context.shadowBlur = 8;
-    context.beginPath(); context.arc(source.x + (target.x - source.x) * progress, source.y - height * .3, 5, 0, Math.PI * 2); context.fill(); context.restore();
+    context.beginPath(); context.arc(head ? head.x : source.x + (target.x - source.x) * progress,
+      head ? head.y : source.y - height * .3, 5, 0, Math.PI * 2); context.fill(); context.restore();
+  }
+
+  function clear() {
+    appearanceWorld.clear(); vfxCursor.reset(); detailVfx.consume({ reset: true }, 0);
+    currentTrial = undefined; previousTime = null; seen = 0; effects = []; clock = 0; lastNow = 0;
+    deathStarted.clear(); readyPoses.clear(); appearancePoses = new Map();
   }
 
   function render(trial, now, playing) {
     const delta = lastNow ? Math.min(.1, (now - lastNow) / 1000) : 0; lastNow = now;
-    if (trial !== currentTrial) { currentTrial = trial; seen = 0; effects = []; clock = 0; deathStarted.clear(); readyPoses.clear(); appearanceWorld.clear(); }
-    if (playing || !trial?.time || trial?.result()?.reason || effects.some(effect => clock - effect.born < .85)) clock += delta;
+    if (trial !== currentTrial || trial && previousTime !== null && trial.time < previousTime) {
+      clear(); currentTrial = trial; lastNow = now;
+    }
+    previousTime = trial?.time ?? null;
+    if (playing || !trial?.time || trial?.result()?.reason || effects.some(effect => clock - effect.born < .85) || detailVfx.vitalActive(clock)) clock += delta;
     if (trial) {
       const unseen = trial.history.slice(seen);
       for (const event of unseen) if (event.kind === "death" && !deathStarted.has(event.targetId))
@@ -381,24 +407,60 @@ export function createCombatStage(canvas) {
     if (canvas.width !== Math.round(width * ratio) || canvas.height !== Math.round(height * ratio)) { canvas.width = Math.round(width * ratio); canvas.height = Math.round(height * ratio); }
     context.setTransform(ratio, 0, 0, ratio, 0, 0); background(width, height);
     if (!trial) return;
+    const vfx = trial.vfx;
+    if (vfx?.version === 1) {
+      const frame = vfxCursor.consume(vfx, trial.time);
+      // Flights follow simulation time; authored impact tails use the stage clock,
+      // so stepping, pausing or lethal resolution does not freeze the last cell.
+      detailVfx.consume({ ...frame, started: frame.started.map(cue => ({ ...cue, eventAt: cue.at,
+        at: clock - Math.max(0, trial.time - cue.at) })) }, clock);
+      if (!reducedMotion.matches) for (const path of DETAIL_COMBAT_VFX_ASSETS) image(path);
+    }
     const ended = !!trial.result()?.reason;
     const time = trial.time || clock;
     appearancePoses = appearanceWorld.prepare(context, [...trial.agents, ...(trial.supportAgents || [])].map(entry => {
       const agent = stageAgent(entry), deathAt = deathStarted.get(agent.id);
       return agent.health <= 0 ? { ...agent, deathStartedAt: time - (clock - (deathAt ?? clock)) } : agent;
     }), time, 100 * formationScale(width, height), ratio, { attackClock: "lab" });
-    const impact = effects.findLast(effect => effect.event.damage > 0 && clock - effect.born < .11);
+    const impact = effects.findLast(effect => effect.event.damage > 0 && effect.event.kind !== "bleed" && clock - effect.born < .11);
     context.save();
     if (impact && !reducedMotion.matches && playing) {
       const fade = 1 - (clock - impact.born) / .11;
       context.translate(Math.sin(clock * 150) * fade * (impact.event.critical ? 3 : 1.5), 0);
     }
     const points = Object.fromEntries(trial.agents.map(agent => [agent.id, fighter(agent, agent.combat.side, width, height, time, ended)]));
-    for (const agent of trial.supportAgents || []) supportArt(agent, points, width, height, time);
-    for (const projectile of trial.projectiles || []) projectileArt(projectile, points, time, height);
-    for (const effect of effects) if (clock - effect.born < .85) effectArt(effect, points, width, height);
+    for (const agent of trial.supportAgents || []) points[agent.id] = supportArt(agent, points, width, height, time);
+    const drawnFlights = new Set(), drawnImpacts = new Set(), flightCommands = new Map();
+    if (vfx?.version === 1 && !reducedMotion.matches) {
+      const commands = detailVfx.commands(trial.agents.map(stageAgent), new Map(Object.entries(points)), clock,
+        100 * formationScale(width, height), { scope: trial, width, height });
+      for (const command of commands) {
+        const key = command.kind === "flight" && flightKey(command.sourceId, command.targetId, command.launchedAt, command.arrivesAt);
+        if (key) flightCommands.set(key, command);
+        if (drawDetailVfxCell(context, image(command.image), command)) {
+          if (key) drawnFlights.add(key);
+          else drawnImpacts.add(impactKey(command.sourceId, command.targetId, command.eventAt, command.amount));
+        }
+      }
+    }
+    for (const projectile of trial.projectiles || []) {
+      const key = flightKey(projectile.source.id, projectile.target.id, projectile.launchedAt, projectile.at);
+      if (!drawnFlights.has(key)) projectileArt(projectile, points, time, height, flightCommands.get(key));
+    }
+    for (const effect of effects) if (clock - effect.born < .85) {
+      const event = effect.event;
+      if (vfx?.version === 1 && ["heal", "drain", "regeneration", "bleed"].includes(event.kind)) continue;
+      const covered = ["hit", "critical", "block", "area", "reflect"].includes(event.kind) &&
+        drawnImpacts.has(impactKey(event.attackerId, event.targetId, event.time, event.damage));
+      effectArt(effect, points, width, height, covered);
+    }
+    // Use actual HP changes, including drain (which has no history entry).
+    // Support recipients use the same displayed position as their own sprite.
+    for (const command of detailVfx.vitalCommands([...trial.agents, ...(trial.supportAgents || [])].map(stageAgent),
+      new Map(Object.entries(points)), clock, { scope: trial, width, height }))
+      drawDetailVitalEffect(context, command, { width, height, reducedMotion: reducedMotion.matches });
     context.restore();
   }
 
-  return { render, clear: appearanceWorld.clear, appearanceStats: appearanceWorld.stats };
+  return { render, clear, appearanceStats: appearanceWorld.stats };
 }

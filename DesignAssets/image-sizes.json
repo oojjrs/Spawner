@@ -9661,6 +9661,56 @@
         ]
       }
     },
+    "DesignAssets/Animations/CombatVfxV4/hit.png": {
+      "display": [
+        444,
+        444
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
+    "DesignAssets/Animations/CombatVfxV4/bean.png": {
+      "display": [
+        444,
+        444
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
+    "DesignAssets/Animations/CombatVfxV4/spore.png": {
+      "display": [
+        444,
+        444
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
+    "DesignAssets/Animations/CombatVfxV4/pebble.png": {
+      "display": [
+        444,
+        444
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
+    "DesignAssets/Animations/CombatVfxV4/spring.png": {
+      "display": [
+        444,
+        444
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
     "DesignAssets/Animations/UnitRangedV1/spore/birth.png": {
       "display": [
         144,
