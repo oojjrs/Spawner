@@ -29,6 +29,7 @@ function modal({ unavailable = [], rejectDraw = false, version = 1 } = {}) {
   const canvas = { clientWidth: 1040, clientHeight: 480, dataset: {}, style: {}, getContext: () => context };
   const detail = createDetailCombatVfx(), cursor = createCombatVfxCursor();
   const sandbox = { state: { agents, rivals: [], simSeconds: 0, combatVfx: { version } },
+    connection: { get simSeconds() { return sandbox.state.simSeconds; } },
     Spawner: { DETAIL_COMBAT_VFX_ASSETS, combatProfile: () => ({ attackInterval: 1 }), combatPrimary: () => "blade",
       CREATURE_ATTACK_ANIMATIONS: {}, drawDetailVitalEffect, drawDetailVfxCell: (...args) => !rejectDraw && drawDetailVfxCell(...args) },
     detailCombatVfx: detail, detailVfxImages: new Map(DETAIL_COMBAT_VFX_ASSETS.map(path => [path,

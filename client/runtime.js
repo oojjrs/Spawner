@@ -3305,9 +3305,20 @@ function createDetailCombatVfx() {
       const current = (frame.retainedEvents || []).find(item => item.id === cue.eventId);
       if (current) {
         if (!(current.amount > 0) || !["hit", "critical", "area", "reflect"].includes(current.kind)) { directDamage.delete(id); continue; }
-        directDamage.set(id, { ...cue, sourceId: current.sourceId, targetId: current.targetId,
-          anchorId: current.toId ?? current.targetId });
       }
+    }
+    // Retained death points must not outlive an explicit recipient redaction.
+    // Revoke the cue instead of replaying it when visibility returns. Unknown
+    // source identities remain unknown for this already-started effect.
+    for (const cache of [impacts, vitals, directDamage]) for (const [id, cue] of cache) {
+      const current = (frame.retainedEvents || []).find(item => item.id === cue.eventId);
+      if (!current) continue;
+      const recipient = cue.anchorId ?? cue.targetId, currentRecipient = current.toId ?? current.targetId;
+      if (recipient == null || currentRecipient == null || String(recipient) !== String(currentRecipient)) {
+        cache.delete(id); continue;
+      }
+      cache.set(id, { ...cue, targetId: current.targetId, anchorId: currentRecipient,
+        sourceId: cue.sourceId != null && String(cue.sourceId) === String(current.sourceId) ? cue.sourceId : null });
     }
     projectiles = frame.projectiles || [];
     const activeFlights = new Set(projectiles.map(shot => shot.id));
@@ -3316,10 +3327,11 @@ function createDetailCombatVfx() {
   function observe(agents, positions, time, view) {
     if (viewScope !== view.scope) { clearView(); viewScope = view.scope; }
     const width = view.width || 1, height = view.height || 1;
+    const snapshotAt = Number.isFinite(view.snapshotTime) ? view.snapshotTime : time;
     for (const [id, anchor] of anchors) if (time < anchor.at || time - anchor.at >= .85) anchors.delete(id);
     for (const agent of agents) {
       const id = String(agent.id), point = positions.get(id);
-      if (point) anchors.set(id, { at: time, point: { ...point }, width, height, clip: projectileClip(agent) });
+      if (point) anchors.set(id, { at: time, snapshotAt, point: { ...point }, width, height, clip: projectileClip(agent) });
     }
   }
   function recipientPoint(id, positions, time, view, retainDeath = true) {
@@ -3328,7 +3340,9 @@ function createDetailCombatVfx() {
     const anchor = anchors.get(String(id)), deathAt = deaths.get(String(id));
     // Only an authoritative recent death permits an off-roster damage effect.
     // Restoring HP must never show on a corpse or an omitted living recipient.
-    if (!retainDeath || !anchor || deathAt === undefined || time < deathAt || anchor.at > deathAt) return null;
+    // A living snapshot may still be painted after its eventual death time.
+    // Compare the authoritative observation, not that extrapolated paint clock.
+    if (!retainDeath || !anchor || deathAt === undefined || time < deathAt || anchor.snapshotAt > deathAt) return null;
     const width = view.width || 1, height = view.height || 1;
     return { x: anchor.point.x * width / anchor.width, y: anchor.point.y * height / anchor.height,
       width: anchor.point.width * width / anchor.width, height: anchor.point.height * height / anchor.height };

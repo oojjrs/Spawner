@@ -117,6 +117,7 @@ function modal(reduced = false) {
   const units = [0, 1].map(side => ({ id: side ? "target" : "source", tribe: "bean", health: 50,
     stats: { health: 100, melee: true }, combat: { id: "fight", side, stunnedUntil: 0 }, attributes: {} }));
   const sandbox = { state: { agents: units, rivals: [], simSeconds: 0, combatVfx: { version: 1 } },
+    connection: { get simSeconds() { return sandbox.state.simSeconds; } },
     Spawner: { combatProfile: () => ({ attackInterval: 1 }), combatPrimary: () => "blade", CREATURE_ATTACK_ANIMATIONS: {},
       drawDetailVfxCell, drawDetailVitalEffect }, detailCombatVfx: detail,
     detailVfxImages: new Map(DETAIL_COMBAT_VFX_ASSETS.map(path => [path, { complete: true, naturalWidth: 1776 }])),

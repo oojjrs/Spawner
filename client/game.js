@@ -8527,7 +8527,7 @@
         if (Spawner.detailDefenseImageReady(image, command)) replacedDefenseIds.add(command.eventId);
       }
       const drawnImpacts = new Set();
-      for (const command of detailCombatVfx.commands(arenaUnits, vfxPositions, state.simSeconds, cell, { scope: combatWatch.id, width, height })) {
+      for (const command of detailCombatVfx.commands(arenaUnits, vfxPositions, state.simSeconds, cell, { scope: combatWatch.id, width, height, snapshotTime: connection.simSeconds })) {
         // Replace only the defended event, and only after its new image is ready.
         if (command.kind === "impact" && replacedDefenseIds.has(command.eventId)) continue;
         let image = detailVfxImages.get(command.image);
@@ -8574,7 +8574,7 @@
       for (const command of defenseCommands) if (!Spawner.drawDetailDefenseEffect(context, command, defenseImages.get(command.eventId), { reducedMotion: idleMotion.matches }))
         Spawner.drawDetailDefenseFallback(context, command);
       let vitalCommands = detailCombatVfx.vitalCommands(arenaUnits, vfxPositions, state.simSeconds,
-        { scope: combatWatch.id, width, height, includeDirectDamage: true });
+        { scope: combatWatch.id, width, height, snapshotTime: connection.simSeconds, includeDirectDamage: true });
       const labelLayout = Spawner.layoutDetailCombatLabels?.(context,
         { vitals: vitalCommands, defenses: defenseCommands, dodges: dodgeLabels },
         { width, height, reducedMotion: idleMotion.matches, positions: vfxPositions });
