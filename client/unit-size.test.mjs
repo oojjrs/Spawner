@@ -1,3 +1,4 @@
+import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -15,7 +16,7 @@ test("실제 DNA와 동일 조각 수 스탯은 모든 체급에서 같은 성�
 
 test("필드와 전투는 속성 보정 캐시에 DNA 성장을 중복하거나 고정하지 않는다", () => {
   const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
-  const scope = createContext({ Spawner: { UNIT_DISPLAY_SIZES, unitDisplaySize },
+  const scope = createContext({ Spawner: { unitDisplayAttributes, UNIT_DISPLAY_SIZES, unitDisplaySize },
     unitDisplayScales: new Map([["bean", 2]]), unitAttributeScales: new Map(),
     ATTRIBUTES: [{ key: "feet" }], combatAttributeArt: { ready: () => true },
     measureUnitDisplayScale: () => 3 });

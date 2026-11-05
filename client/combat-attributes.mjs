@@ -1,7 +1,9 @@
+import { unitDisplayAttributesFrom } from "./unit-display-appearance.mjs";
 import { createCombatEvolutionArt, combatEvolutionKeys } from "./combat-evolution.mjs";
 import { COMBAT_ATTRIBUTE_KEYS } from "../server/attributes.mjs";
 
 export function combatAttributeKeys(attributes) {
+  attributes = unitDisplayAttributesFrom(attributes);
   return COMBAT_ATTRIBUTE_KEYS.filter(key => attributes?.[key] > 0);
 }
 

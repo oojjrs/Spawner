@@ -1,3 +1,5 @@
+import { unitRangedAppearance } from "./unit-ranged.mjs";
+import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -21,7 +23,7 @@ function rendering() {
   const canvas = () => ({ width: 512, height: 512, getContext: () => ({ clearRect() {}, drawImage() {} }) });
   const context = createContext({
     attributeCounts,
-    Spawner: { COMBAT_ATTRIBUTE_KEYS, hasCombatEvolution },
+    Spawner: { unitDisplayAttributes, unitRangedAppearance, COMBAT_ATTRIBUTE_KEYS, hasCombatEvolution },
     viewport: { pixelRatio: 1 },
     Path2D: class {
       constructor() { this.paths = []; }

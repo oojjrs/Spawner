@@ -4,7 +4,7 @@
   const mobile=matchMedia('(max-width:660px)').matches,source=M.createUnitAppearanceSource({sourceUrl:path=>globalThis.SpawnerAssets.source(path),byteBudget:M.UNIT_APPEARANCE_BYTE_BUDGETS[mobile?'mobile':'desktop']});
   const renderer=M.createUnitAppearanceRenderer(path=>source.acquire(path),(blob,options)=>createImageBitmap(blob,options),M.UNIT_APPEARANCE_PIXEL_BUDGETS[mobile?'mobile':'desktop']);
   const inventory=M.unitAppearanceInventory(),available=inventory.filter(v=>v.sourceApproved&&v.cameraVerified),all=M.unitAppearanceInventory();
-  $('inventory').textContent=`원화 등록 ${all.filter(v=>v.sourceId).length}/128 · 원화 확인 ${available.length} · 전체 행동 준비 ${all.filter(v=>v.ready).length}/128`;
+  $('inventory').textContent=`원화 등록 ${all.filter(v=>v.sourceId).length}/${all.length} · 원화 확인 ${available.length} · 전체 행동 준비 ${all.filter(v=>v.ready).length}/${all.length}`;
   const names={bean:'새싹콩',spore:'포자버섯',pebble:'몽돌',spring:'샘방울'},actions={neutral:'원화',idle:'대기',walk:'이동',hurt:'피격',birth:'탄생',death:'사망',harvest:'채집',carry:'운반',throw:'납품',attack:'근접 공격',ranged:'원거리 공격',jump:'미리보기 점프'};
   $('form').innerHTML=available.map(v=>`<option value="${v.key}">${names[v.tribe]} ${v.mask.toString(16).padStart(2,'0')}</option>`).join('');
   let selected,action='neutral',start=performance.now(),paused=false,age=0,revision=0,frame=0,busy=false;

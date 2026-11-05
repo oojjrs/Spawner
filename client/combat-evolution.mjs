@@ -1,3 +1,4 @@
+import { unitDisplayAttributes, unitDisplayAttributesFrom } from "./unit-display-appearance.mjs";
 import { attackAnimationElapsed, AGENT_ATTACK_HIT_TIME } from "../server/attack.mjs";
 import { COMBAT_EVOLUTION_CATALOG } from "./combat-evolution-assets.mjs";
 import { UNIT_COMBAT_DEATH_ANIMATIONS } from "./combat-death.mjs";
@@ -8,6 +9,7 @@ import { renderAttributeEffects } from "../DesignAssets/Animations/CombatAttribu
 export const COMBAT_EVOLUTION_KEYS = Object.freeze(["blade", "piercing", "carapace"]);
 
 export function combatEvolutionKeys(attributes) {
+  attributes = unitDisplayAttributesFrom(attributes);
   return COMBAT_EVOLUTION_KEYS.filter(key => attributes?.[key] > 0);
 }
 
@@ -29,7 +31,7 @@ export function combatEvolutionPose(agent, time, animations) {
     elapsed = Math.max(0, time - (agent.harvestStarted ?? time)) * 1000 % animations[action].durationMs;
   }
   else if (agent.moveDuration > 0 && time >= agent.moveStartedAt && time < agent.moveStartedAt + agent.moveDuration &&
-      ((agent.tribe || "bean") !== "bean" || (agent.appearanceAttributes || agent.attributes || {}).feet > 0)) {
+      ((agent.tribe || "bean") !== "bean" || (unitDisplayAttributes(agent)).feet > 0)) {
     action = "walk"; elapsed = (Math.max(0, (agent.stepCount || 1) - 1) + (time - agent.moveStartedAt) / agent.moveDuration) * animations.walk.durationMs;
   }
   const animation = animations[action] || animations.idle;
@@ -195,7 +197,7 @@ export function createCombatEvolutionArt(assetSource, createSurface, loadImage) 
     return sprite;
   }
   function frame(agent, time, drawAttributes, drawBody) {
-    const variants = prepared.get(agent.tribe || "bean"), attributes = agent.appearanceAttributes || agent.attributes || {}, keys = combatEvolutionKeys(attributes);
+    const variants = prepared.get(agent.tribe || "bean"), attributes = unitDisplayAttributes(agent), keys = combatEvolutionKeys(attributes);
     if (!variants || !keys.length) return null;
     const source = variants.get(keys.length === 1 ? keys[0] : body(keys));
     let replacement = drawBody && (source.rig.tribe !== "sprout" && ["antenna", "strength", "arms", "feet"].some(key => attributes[key] > 0)) ? drawBody : null;
@@ -234,7 +236,7 @@ export function createCombatEvolutionArt(assetSource, createSurface, loadImage) 
     return dynamic ? drawSproutAttributes(surface, rig, sampled, agent, drawAttributes) : surface;
   }
   function portrait(agent, drawAttributes) {
-    const attributes = agent.appearanceAttributes || agent.attributes || {}, key = (agent.tribe || "bean") + JSON.stringify(attributes);
+    const attributes = unitDisplayAttributes(agent), key = (agent.tribe || "bean") + JSON.stringify(attributes);
     if (!portraits.has(key)) {
       const result = frame({ ...agent, health: 1, birth: null, diedAt: null, attack: null, support: null, hurtStartedAt: -Infinity, moveDuration: 0, animationStartedAt: 0 }, 0, drawAttributes);
       if (result) portraits.set(key, result); else return null;
@@ -242,7 +244,7 @@ export function createCombatEvolutionArt(assetSource, createSurface, loadImage) 
     return portraits.get(key);
   }
   function bodySize(agent, replacement) {
-    const attributes = agent.appearanceAttributes || agent.attributes || {}, keys = combatEvolutionKeys(attributes);
+    const attributes = unitDisplayAttributes(agent), keys = combatEvolutionKeys(attributes);
     const variants = prepared.get(agent.tribe || "bean");
     if (!variants || !keys.length) return null;
     const source = variants.get(keys.length === 1 ? keys[0] : body(keys));

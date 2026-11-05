@@ -1,3 +1,4 @@
+import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
 import { UNIT_RANGED_ASSETS } from "./unit-ranged-assets.mjs";
 import { unitDisplaySize } from "./unit-size.mjs";
 
@@ -11,16 +12,18 @@ export const UNIT_RANGED_FORMS = Object.freeze({ ...UNIT_RANGED_ASSETS, bean: Ob
   reference: { width: 202, height: 206 },
   projectile: { image: root + "projectile.png", width: 62, height: 36, outletX: 368, outletY: 322 }
 }) });
+export const UNIT_RANGED_IMAGE_ASSETS = Object.freeze([...new Set(Object.values(UNIT_RANGED_FORMS).flatMap(form => [form.idle.image, form.animation.image, form.projectile.image]))]);
 export const UNIT_RANGED_ANIMATIONS = Object.freeze(Object.fromEntries(Object.entries(UNIT_RANGED_FORMS).map(([key, form]) => [key, form.animation])));
 
 export function unitRangedAppearance(agent) {
   const form = UNIT_RANGED_FORMS[agent.tribe || agent.key || "bean"];
   if (agent.species || !form) return null;
   const stats = agent.stats?.dna || agent.stats;
-  if (!stats?.ranged || stats.melee) return null;
-  const attributes = agent.appearanceAttributes || agent.attributes || {};
+  const attributes = unitDisplayAttributes(agent);
+  // Current DNA selects the secretion silhouette even when lower-priority
+  // traits are mechanically present. Stat-only legacy fixtures retain support.
+  if (!(attributes.secretion > 0) && (!stats?.ranged || stats.melee)) return null;
   if (["blade", "carapace", "antenna", "feet", "strength", "arms"].some(key => attributes[key] > 0)) return null;
-  if (agent.dna?.pieces?.some(piece => ["blade", "carapace", "antenna", "legs"].includes(piece.gene))) return null;
   return form;
 }
 
@@ -44,7 +47,7 @@ export function unitRangedPose(agent, time) {
     launchAt + (animation.durationMs - launchAt) * (time - active.launch) / Math.max(.001, active.attack.endsAt - active.launch);
   let frame = 0;
   while (frame < animation.frameCount - 1 && elapsed >= animation.durationsMs[frame]) elapsed -= animation.durationsMs[frame++];
-  return { action: "shoot", animation, frame, mirrorX: agent.facing < 0 };
+  return { action: "shoot", animation, frame, mirrorX: (active.attack.directionX || agent.facing) < 0 };
 }
 
 export function unitRangedDisplaySize(agent) {

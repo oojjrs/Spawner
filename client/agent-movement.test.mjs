@@ -1,3 +1,4 @@
+import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -23,7 +24,7 @@ function movement() {
     constructor() { this.complete = true; this.naturalWidth = 2048; }
     async decode() {}
   }
-  const context = createContext({ Image, performance, Spawner: { UNIT_ANIMATIONS, combatAttributeKeys, hasCombatEvolution, unitAnimationPose, unitMovementPosition, sproutRootGeometry }, assetSource: path => path,
+  const context = createContext({ Image, performance, Spawner: { unitDisplayAttributes, UNIT_ANIMATIONS, combatAttributeKeys, hasCombatEvolution, unitAnimationPose, unitMovementPosition, sproutRootGeometry }, assetSource: path => path,
     unitAnimationSheets: new Map(), combatAttributeArt: { ready: () => true, frame: () => ({ width: 512, height: 512 }) },
     drawAgentFeet() {}, drawAgentTail() {}, drawAgentHead() {},
     state: { simSeconds: .5 }, idleMotion: { matches: false }, AGENT_JUMP_PREPARATION: .2, AGENT_HEIGHT: .7,
@@ -92,7 +93,7 @@ function gameAudio() {
   const context = createContext({ state, connection: { active: true, online: true }, audioTime: 0,
     audio: { available: () => true, play: name => (name.startsWith("move-") ? movementPlayed : played).push(name), setHarvest: volumes => harvests.push(new Map(volumes)) },
     SpawnerCombatAudio: { update: () => [] }, combatAudio: {}, nestGrowthPlayback: createNestGrowthPlayback(),
-    Spawner: { UNIT_ANIMATIONS, unitAnimationPose, SPORE_BIRTH_ANIMATION, nestGrowthSounds, resourceTypeForCell: food => food.resourceType || "honey-mushrooms" },
+    Spawner: { unitDisplayAttributes, UNIT_ANIMATIONS, unitAnimationPose, SPORE_BIRTH_ANIMATION, nestGrowthSounds, resourceTypeForCell: food => food.resourceType || "honey-mushrooms" },
     worldMap: {}, foodCellMap: new Map(), foodCellAt: () => null,
     displayedAgent: unit => unit, interpolatedAgentPosition: unit => unit, audioVolume: () => 1,
     agentBirthPose: () => null, agentAudio: new Map(), deliveryAudio: new Map(), foodDeliveries: new Map(),
@@ -157,13 +158,13 @@ test("네 종족의 모든 0~4속성 조합은 다리 유무 외에 기본 이�
     for (const attributes of attributeCombinations()) {
       const agent = { tribe, attributes, x: 1, y: 2, renderFromX: 0, renderFromY: 0,
         moveStartedAt: 0, moveDuration: 1, stepCount: 1, health: 10 };
-      const baseline = { ...agent, attributes: attributes.feet ? { feet: 1 } : {} };
+      const baseline = { ...agent, attributes: unitDisplayAttributes(agent).feet ? { feet: 1 } : {} };
       for (const time of [0, .1, .3, .6, .9, 1]) {
         render.context.state.simSeconds = time;
         const position = render.context.agentBasePosition(agent), expected = render.context.agentBasePosition(baseline);
         assert.deepEqual(position, expected, tribe + JSON.stringify(attributes));
         const jump = render.context.agentJumpOffset(agent, position);
-        assert.equal(jump, tribe === "bean" && !attributes.feet ? Math.sin(expected.progress * Math.PI) * .7 * .18 : 0);
+        assert.equal(jump, tribe === "bean" && !unitDisplayAttributes(agent).feet ? Math.sin(expected.progress * Math.PI) * .7 * .18 : 0);
       }
     }
   }
@@ -183,7 +184,7 @@ test("전투 외형의 모든 새싹콩 조합도 기본 콩과 같은 점프 �
       assert.equal(render.translations[0][0], 50);
       assert.ok(Math.abs(render.translations[0][1] - floor + expected) < 1e-9, JSON.stringify(attributes));
       assert.deepEqual(render.scales.at(-1), [facing, 1]);
-      if (!attributes.feet) {
+      if (!unitDisplayAttributes(agent).feet) {
         const pose = render.context.agentBodyPose(agent, 0, { scaleX: 1, scaleY: 1 });
         assert.deepEqual(render.scales[0], [pose.scaleX, pose.scaleY]);
       } else assert.equal(render.scales.length, 1);

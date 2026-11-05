@@ -1,3 +1,4 @@
+import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -71,7 +72,7 @@ test("월드 사체 렌더러와 목록 아이콘이 같은 애셋을 사용하�
   const corpse = { id: "corpse:1", agentId: "1", kind: "corpse", tribe: "bean", x: 5, y: 5, diedAt: 10, decaysAt: 13 };
   const sheet = { complete: true, naturalWidth: 1024 };
   const scope = createContext({ AGENT_DEATH_ANIMATION, agentDeathFrame, AGENT_HEIGHT: 0.7, agentDeathSheet: sheet,
-    Spawner: { agentDeathAnimation, hasCombatEvolution }, unitAnimationSheets: new Map(["bean", "spore", "pebble", "spring"].map(tribe =>
+    Spawner: { unitDisplayAttributes, agentDeathAnimation, hasCombatEvolution }, unitAnimationSheets: new Map(["bean", "spore", "pebble", "spring"].map(tribe =>
       [tribe, new Map([["death", { sprite: sheet, scale: .8 }]])])),
     corpsePlaybackTime: () => scope.state.simSeconds,
     state: { corpses: [corpse], agents: [], rivals: [], simSeconds: 10, camera: { zoom: 100 }, lastFrame: 0 }, idleMotion: { matches: false },
@@ -114,7 +115,7 @@ test("모든 부족의 사망 첫 자세는 256·512 프레임 해상도와 무�
   const sheets = new Map(Object.values(UNIT_ANIMATIONS).flatMap(animations => Object.values(animations))
     .concat(Object.values(AGENT_DEATH_ANIMATIONS)).map(animation => [animation.image, animation]));
   const scope = createContext({
-    Spawner: { UNIT_ANIMATIONS, AGENT_DEATH_ANIMATIONS, agentDeathAnimation },
+    Spawner: { unitDisplayAttributes, UNIT_ANIMATIONS, AGENT_DEATH_ANIMATIONS, agentDeathAnimation },
     Image: class { complete = true; naturalWidth = 2048; async decode() {} },
     assetSource: path => path, combatSheets: new Map(),
     agentMovementSheets: new Map(["spore", "pebble", "spring"].map(tribe => [tribe, {}])),
@@ -147,7 +148,7 @@ test("갈퀴부엉이 사체는 일반 자세와 같은 프레임·피벗·배�
   const sprite = { width: 512, height: 512 };
   const context = { globalAlpha: 1, save() {}, restore() {}, translate() {}, rotate() {}, scale() {}, drawImage(...args) { draws.push(args); } };
   const scope = createContext({ talonOwlFrames: new Map([[0, sprite]]), encounterSprites: new Map(),
-    Spawner: { TALON_OWL_IDLE: { scale: 2, frameSize: 512, pivotX: 234, pivotY: 400 } }, state: { simSeconds: 0 } });
+    Spawner: { unitDisplayAttributes, TALON_OWL_IDLE: { scale: 2, frameSize: 512, pivotX: 234, pivotY: 400 } }, state: { simSeconds: 0 } });
   runInContext(source.match(/^    function drawCreatureCorpse\([^]*?^    }/m)[0], scope);
   assert.equal(scope.drawCreatureCorpse(context, { species: "talon-owl", diedAt: 0 }, 0, 0, 100, null, 1), true);
   assert.deepEqual(draws, [[sprite, -200 * 234 / 512, -200 * 400 / 512, 200, 200]]);
@@ -167,7 +168,7 @@ test("중립·유니크의 사망 첫 자세는 원본 프레임 크기와 무�
       drawImage(sprite, x, y, width, height, left, top, outputWidth) {
         renderedLength = outputWidth * Math.max(bounds.width, bounds.height) / frameSize * displayScale;
       } };
-    const scope = createContext({ Spawner: { UNIT_DISPLAY_SIZES, unitAnimationFrame: () => 0 },
+    const scope = createContext({ Spawner: { unitDisplayAttributes, UNIT_DISPLAY_SIZES, unitAnimationFrame: () => 0 },
       tribeArt: { bounds: () => bounds }, unitDisplayScales: new Map([[species, displayScale]]),
       creatureDeathSheets: new Map([[species, entry]]), idleMotion: { matches: false }, state: { simSeconds: 0 }, corpsePlaybackTime: () => 0 });
     for (const name of ["prepareCreatureDeathSize", "drawCreatureDeath"])

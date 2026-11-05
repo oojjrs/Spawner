@@ -1,3 +1,4 @@
+import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -16,9 +17,9 @@ function rendering() {
     tribeArt: { animationPose: (agent, pose) => pose },
     agentBodyPose: () => ({ pivot: .94, scaleX: 1, scaleY: 1 }), agentWalkPose: () => null,
     agentSprite: () => sprite("body"), drawAgentHead() {}, drawAgentFeet() {}, drawAgentTail() {},
-    drawAgentAttack: () => false, drawAgentMovement: () => false, drawSelectionOutline() {},
+    drawAgentAttack: () => false, drawAgentMovement: () => false, drawAgentRanged: () => false, drawSelectionOutline() {},
     foodCellMap: new Map(), foodCellAt: () => ({ x: 1, y: 2, resourceType: "honey-mushrooms", amount: 5 }),
-    worldMap: {}, Spawner: { unitAnimationPose, resourceTypeForCell },
+    worldMap: {}, Spawner: { unitDisplayAttributes, unitAnimationPose, resourceTypeForCell },
     unitAnimationSheets: new Map(Object.entries(UNIT_ANIMATIONS).map(([tribe, animations]) => [tribe,
       new Map(Object.entries(animations).map(([action, animation]) => [action, {
         animation, sprite: sprite(tribe + ":" + action), scale: 1

@@ -1,3 +1,4 @@
+import { UNIT_DISPLAY_MASKS, unitDominantAppearanceMask, unitDisplayAbilityMask } from "./unit-display-appearance.mjs";
 import { UNIT_DISPLAY_SIZES, unitDisplaySize } from "./unit-size.mjs";
 import { ATTRIBUTE_DNA } from "../server/dna.mjs";
 import { UNIT_APPEARANCE_ASSETS } from "./unit-appearance-assets.mjs";
@@ -73,8 +74,10 @@ export function unitAppearanceReady(tribe, mask) {
 export function unitAppearanceForAgent(agent) {
   if (agent.species || agent.dna?.version !== 3 || !Array.isArray(agent.dna.pieces) ||
       [agent.attributes, agent.appearanceAttributes].some(attributes => UNIT_APPEARANCE_LEGACY_VISUAL_KEYS.some(key => attributes?.[key] > 0))) return null;
-  const tribe = agent.tribe || "bean", mask = unitAppearanceMaskFromDna(agent.dna);
-  return mask !== null && unitAppearanceReady(tribe, mask) && ATTRIBUTE_DNA.validate(agent.dna) ? { tribe, mask, definition: unitAppearanceDefinition(tribe, mask) } : null;
+  const tribe = agent.tribe || "bean", actualMask = unitAppearanceMaskFromDna(agent.dna), mask = unitDominantAppearanceMask(actualMask);
+  const definition = unitAppearanceDefinition(tribe, mask);
+  return mask !== null && unitAppearanceReadiness(definition, actualMask).ready && ATTRIBUTE_DNA.validate(agent.dna) ?
+    { tribe, mask, actualMask, definition } : null;
 }
 
 export function unitAppearanceBirthSceneForAgent(agent) {
@@ -109,11 +112,14 @@ export function unitAppearanceSourceScale(agent, worldPixels, source, animation)
   return worldPixels * growth / (animation.cameraMapping?.pixelsPerWorld || source.camera.pixelsPerWorld);
 }
 
-export function unitAppearanceInventory() {
-  return UNIT_APPEARANCE_TRIBES.flatMap(tribe => Array.from({ length: 32 }, (_, mask) => {
+export function unitAppearanceInventory({ includeLegacyCombinations = false } = {}) {
+  const masks = includeLegacyCombinations ? Array.from({ length: 32 }, (_, mask) => mask) : UNIT_DISPLAY_MASKS;
+  return UNIT_APPEARANCE_TRIBES.flatMap(tribe => masks.map(mask => {
     const definition = unitAppearanceDefinition(tribe, mask);
     return { key: unitAppearanceKey(tribe, mask), tribe, mask, sourceId: definition?.source?.sourceId || null,
-      ...unitAppearanceReadiness(definition, mask), missingActions: unitAppearanceMissingActions(tribe, mask),
+      ...unitAppearanceReadiness(definition, includeLegacyCombinations ? mask : unitDisplayAbilityMask(mask)),
+      missingActions: unitAppearanceRequiredActions(includeLegacyCombinations ? mask : unitDisplayAbilityMask(mask))
+        .filter(action => !clipValid(definition?.source, definition?.actions?.[action])),
       previewStatus: Object.fromEntries(UNIT_APPEARANCE_OPTIONAL_PREVIEW_ACTIONS.map(action => [action,
         definition?.previewStatus?.[action] === "unsupported" ? "unsupported" : unitAppearanceAnimation(tribe, mask, action) ? "ready" : "pending"])) };
   }));

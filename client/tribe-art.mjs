@@ -1,3 +1,4 @@
+import { unitDisplayAttributes, unitDisplayAttributesFrom } from "./unit-display-appearance.mjs";
 import { imageFrameSize, imageScale } from "./image-geometry.mjs";
 import { createTribeAttributeAnimation, hasTribeAttributes } from "./attribute-animation.mjs";
 
@@ -189,6 +190,7 @@ export function createTribeArt(definitions, assetSource) {
   }
 
   function sprite(tribe, attributes, layer) {
+    attributes = unitDisplayAttributesFrom(attributes);
     const key = [tribe, layer, attributes.strength ?? attributes.arms ?? 0,
       ...["feet", "antenna"].map(name => attributes[name] || 0)].join(":");
     if (sprites.has(key)) return sprites.get(key);
@@ -250,7 +252,7 @@ export function createTribeArt(definitions, assetSource) {
   }
 
   function animationFrame(agent, source, animation, index, action, time, pose) {
-    return attributes.frame(agent.tribe, agent.appearanceAttributes || agent.attributes || {}, source, animation, index, action, time, pose);
+    return attributes.frame(agent.tribe, unitDisplayAttributes(agent), source, animation, index, action, time, pose);
   }
 
   function animationPose(agent, pose, time) {
@@ -258,6 +260,7 @@ export function createTribeArt(definitions, assetSource) {
   }
 
   function bodySize(tribe, appearance, portrait) {
+    appearance = unitDisplayAttributesFrom(appearance);
     return attributes.bodySize(tribe, appearance, portrait ? units.get(tribe)?.box : null);
   }
 

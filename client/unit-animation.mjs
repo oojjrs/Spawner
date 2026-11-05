@@ -1,3 +1,4 @@
+import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
 import { attackAnimationElapsed, AGENT_ATTACK_HIT_TIME } from "../server/attack.mjs";
 import { CREATURE_ATTACK_TIMINGS } from "../server/creature-attack.mjs";
 import { imageAnimation } from "./image-geometry.mjs";
@@ -207,7 +208,7 @@ export function unitAnimationPose(agent, time) {
     action = "walk";
     elapsed = (Math.max(0, (agent.stepCount || 1) - 1) + (time - agent.moveStartedAt) / agent.moveDuration) * (animations[action]?.cyclesPerCell || 1) * (animations[action]?.durationMs || 0);
   }
-  const attributes = agent.appearanceAttributes || agent.attributes || {};
+  const attributes = unitDisplayAttributes(agent);
   const animation = animations[action] || ((agent.tribe || "bean") !== "bean" && ["harvest", "throw"].includes(action) &&
       ["antenna", "strength", "arms", "feet"].some(key => attributes[key] > 0) ? animations.idle : null);
   return animation ? { action, animation, frame: unitAnimationFrame(animation, elapsed) } : null;
@@ -229,7 +230,7 @@ export function creatureAnimationSpeed(species) {
 
 export function unitMovementPosition(agent, time, reducedMotion = false) {
   const raw = agent.moveDuration > 0 ? Math.max(0, Math.min(1, (time - agent.moveStartedAt) / agent.moveDuration)) : 1;
-  const attributes = agent.appearanceAttributes || agent.attributes || {};
+  const attributes = unitDisplayAttributes(agent);
   const beanHop = !agent.species && (agent.tribe || "bean") === "bean" && !attributes.feet;
   let progress = raw, travel = raw;
   if (!reducedMotion && beanHop) {

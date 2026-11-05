@@ -4,6 +4,78 @@ modules["client/unit-size.mjs"]=globalThis.Spawner;
 modules["server/dna.mjs"]=globalThis.Spawner;
 modules["client/unit-animation.mjs"]=globalThis.Spawner;
 modules["client/birth.mjs"]=globalThis.Spawner;
+modules["server/unit-appearance.mjs"]=(()=>{
+const UNIT_APPEARANCE_BITS = Object.freeze({ blade: 1, carapace: 2, antenna: 4, feet: 8, secretion: 16 });
+const UNIT_APPEARANCE_LEGACY_VISUAL_KEYS = Object.freeze(["strength", "arms", "piercing", "guard"]);
+const UNIT_APPEARANCE_TRIBES = Object.freeze(["bean", "spore", "pebble", "spring"]);
+
+function unitAppearanceKey(tribe, mask) {
+  return UNIT_APPEARANCE_TRIBES.includes(tribe) && Number.isInteger(mask) && mask >= 0 && mask < 32 ?
+    tribe + "/" + mask.toString(16).padStart(2, "0") : null;
+}
+
+function unitAppearanceMaskFromAttributes(attributes) {
+  if (UNIT_APPEARANCE_LEGACY_VISUAL_KEYS.some(key => attributes?.[key] > 0)) return null;
+  let mask = 0;
+  for (const [key, bit] of Object.entries(UNIT_APPEARANCE_BITS)) if (attributes?.[key] > 0) mask |= bit;
+  return mask;
+}
+
+function unitAppearanceMaskFromDna(dna) {
+  if (!Array.isArray(dna?.pieces)) return null;
+  let mask = 0;
+  for (const piece of dna.pieces) mask |= UNIT_APPEARANCE_BITS[piece.gene === "legs" ? "feet" : piece.gene] || 0;
+  return mask;
+}
+return {UNIT_APPEARANCE_BITS,UNIT_APPEARANCE_LEGACY_VISUAL_KEYS,UNIT_APPEARANCE_TRIBES,unitAppearanceKey,unitAppearanceMaskFromAttributes,unitAppearanceMaskFromDna};
+})();
+modules["client/unit-display-appearance.mjs"]=(()=>{
+const { UNIT_APPEARANCE_BITS, UNIT_APPEARANCE_TRIBES, UNIT_APPEARANCE_LEGACY_VISUAL_KEYS, unitAppearanceMaskFromDna }=modules["server/unit-appearance.mjs"];
+
+// Rendering only. Never assign this projection to a simulation agent, DNA,
+// snapshot, stats, or save. Lower-priority abilities remain fully effective.
+const UNIT_DISPLAY_PRIORITY = Object.freeze(["blade", "secretion", "carapace", "antenna", "feet"]);
+const UNIT_DISPLAY_MASKS = Object.freeze([0, ...UNIT_DISPLAY_PRIORITY.map(key => UNIT_APPEARANCE_BITS[key])]);
+const UNIT_DISPLAY_FORM_COUNT = UNIT_APPEARANCE_TRIBES.length * UNIT_DISPLAY_MASKS.length;
+
+function unitDominantAppearanceMask(mask) {
+  if (!Number.isInteger(mask) || mask < 0 || mask >= 32) return null;
+  return UNIT_DISPLAY_PRIORITY.map(key => UNIT_APPEARANCE_BITS[key]).find(bit => mask & bit) || 0;
+}
+
+function unitDisplayAttributesFrom(attributes = {}) {
+  attributes ||= {};
+  // Old saves using retired organs retain their authored compatibility rigs,
+  // without applying the current priority policy. Current DNA cannot produce
+  // these keys and always uses one of the six canonical silhouettes.
+  if (UNIT_APPEARANCE_LEGACY_VISUAL_KEYS.some(key => attributes[key] > 0)) return attributes;
+  const dominant = UNIT_DISPLAY_PRIORITY.find(key => attributes[key] > 0 || key === "feet" && attributes.legs > 0);
+  const result = { ...attributes };
+  for (const key of [...UNIT_DISPLAY_PRIORITY, "legs"]) delete result[key];
+  if (dominant) result[dominant] = 1;
+  return result;
+}
+
+function unitDisplayAttributes(agent) {
+  const attributes = agent?.appearanceAttributes || agent?.attributes;
+  if (agent?.species) return attributes || {};
+  if (attributes) return unitDisplayAttributesFrom(attributes);
+  const mask = unitAppearanceMaskFromDna(agent?.dna);
+  return mask === null ? {} : unitDisplayAttributesFrom(Object.fromEntries(
+    Object.entries(UNIT_APPEARANCE_BITS).filter(([, bit]) => mask & bit).map(([key]) => [key, 1])));
+}
+
+// A shared blade silhouette can also shoot. Production readiness must include
+// every action needed by builds that map to that silhouette, not just its name.
+function unitDisplayAbilityMask(mask) {
+  if (!UNIT_DISPLAY_MASKS.includes(mask)) return null;
+  let abilities = 0;
+  for (let actual = 0; actual < 32; actual++) if (unitDominantAppearanceMask(actual) === mask) abilities |= actual;
+  return abilities;
+}
+
+return {UNIT_DISPLAY_PRIORITY,UNIT_DISPLAY_MASKS,UNIT_DISPLAY_FORM_COUNT,unitDominantAppearanceMask,unitDisplayAttributesFrom,unitDisplayAttributes,unitDisplayAbilityMask};
+})();
 modules["client/unit-appearance-assets.mjs"]=(()=>{
 const UNIT_APPEARANCE_ASSETS = Object.freeze({
   "bean/00": {
@@ -5302,32 +5374,8 @@ const UNIT_APPEARANCE_ASSETS = Object.freeze({
 
 return {UNIT_APPEARANCE_ASSETS};
 })();
-modules["server/unit-appearance.mjs"]=(()=>{
-const UNIT_APPEARANCE_BITS = Object.freeze({ blade: 1, carapace: 2, antenna: 4, feet: 8, secretion: 16 });
-const UNIT_APPEARANCE_LEGACY_VISUAL_KEYS = Object.freeze(["strength", "arms", "piercing", "guard"]);
-const UNIT_APPEARANCE_TRIBES = Object.freeze(["bean", "spore", "pebble", "spring"]);
-
-function unitAppearanceKey(tribe, mask) {
-  return UNIT_APPEARANCE_TRIBES.includes(tribe) && Number.isInteger(mask) && mask >= 0 && mask < 32 ?
-    tribe + "/" + mask.toString(16).padStart(2, "0") : null;
-}
-
-function unitAppearanceMaskFromAttributes(attributes) {
-  if (UNIT_APPEARANCE_LEGACY_VISUAL_KEYS.some(key => attributes?.[key] > 0)) return null;
-  let mask = 0;
-  for (const [key, bit] of Object.entries(UNIT_APPEARANCE_BITS)) if (attributes?.[key] > 0) mask |= bit;
-  return mask;
-}
-
-function unitAppearanceMaskFromDna(dna) {
-  if (!Array.isArray(dna?.pieces)) return null;
-  let mask = 0;
-  for (const piece of dna.pieces) mask |= UNIT_APPEARANCE_BITS[piece.gene === "legs" ? "feet" : piece.gene] || 0;
-  return mask;
-}
-return {UNIT_APPEARANCE_BITS,UNIT_APPEARANCE_LEGACY_VISUAL_KEYS,UNIT_APPEARANCE_TRIBES,unitAppearanceKey,unitAppearanceMaskFromAttributes,unitAppearanceMaskFromDna};
-})();
 modules["client/unit-appearance.mjs"]=(()=>{
+const { UNIT_DISPLAY_MASKS, unitDominantAppearanceMask, unitDisplayAbilityMask }=modules["client/unit-display-appearance.mjs"];
 const { UNIT_DISPLAY_SIZES, unitDisplaySize }=modules["client/unit-size.mjs"];
 const { ATTRIBUTE_DNA }=modules["server/dna.mjs"];
 const { UNIT_APPEARANCE_ASSETS }=modules["client/unit-appearance-assets.mjs"];
@@ -5403,8 +5451,10 @@ function unitAppearanceReady(tribe, mask) {
 function unitAppearanceForAgent(agent) {
   if (agent.species || agent.dna?.version !== 3 || !Array.isArray(agent.dna.pieces) ||
       [agent.attributes, agent.appearanceAttributes].some(attributes => UNIT_APPEARANCE_LEGACY_VISUAL_KEYS.some(key => attributes?.[key] > 0))) return null;
-  const tribe = agent.tribe || "bean", mask = unitAppearanceMaskFromDna(agent.dna);
-  return mask !== null && unitAppearanceReady(tribe, mask) && ATTRIBUTE_DNA.validate(agent.dna) ? { tribe, mask, definition: unitAppearanceDefinition(tribe, mask) } : null;
+  const tribe = agent.tribe || "bean", actualMask = unitAppearanceMaskFromDna(agent.dna), mask = unitDominantAppearanceMask(actualMask);
+  const definition = unitAppearanceDefinition(tribe, mask);
+  return mask !== null && unitAppearanceReadiness(definition, actualMask).ready && ATTRIBUTE_DNA.validate(agent.dna) ?
+    { tribe, mask, actualMask, definition } : null;
 }
 
 function unitAppearanceBirthSceneForAgent(agent) {
@@ -5439,11 +5489,14 @@ function unitAppearanceSourceScale(agent, worldPixels, source, animation) {
   return worldPixels * growth / (animation.cameraMapping?.pixelsPerWorld || source.camera.pixelsPerWorld);
 }
 
-function unitAppearanceInventory() {
-  return UNIT_APPEARANCE_TRIBES.flatMap(tribe => Array.from({ length: 32 }, (_, mask) => {
+function unitAppearanceInventory({ includeLegacyCombinations = false } = {}) {
+  const masks = includeLegacyCombinations ? Array.from({ length: 32 }, (_, mask) => mask) : UNIT_DISPLAY_MASKS;
+  return UNIT_APPEARANCE_TRIBES.flatMap(tribe => masks.map(mask => {
     const definition = unitAppearanceDefinition(tribe, mask);
     return { key: unitAppearanceKey(tribe, mask), tribe, mask, sourceId: definition?.source?.sourceId || null,
-      ...unitAppearanceReadiness(definition, mask), missingActions: unitAppearanceMissingActions(tribe, mask),
+      ...unitAppearanceReadiness(definition, includeLegacyCombinations ? mask : unitDisplayAbilityMask(mask)),
+      missingActions: unitAppearanceRequiredActions(includeLegacyCombinations ? mask : unitDisplayAbilityMask(mask))
+        .filter(action => !clipValid(definition?.source, definition?.actions?.[action])),
       previewStatus: Object.fromEntries(UNIT_APPEARANCE_OPTIONAL_PREVIEW_ACTIONS.map(action => [action,
         definition?.previewStatus?.[action] === "unsupported" ? "unsupported" : unitAppearanceAnimation(tribe, mask, action) ? "ready" : "pending"])) };
   }));

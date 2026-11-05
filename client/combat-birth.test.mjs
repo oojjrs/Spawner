@@ -1,3 +1,4 @@
+import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -25,7 +26,7 @@ function attributes(keys, mask) {
 test("네 종족의 모든 전투·일반 속성 조합이 종족 탄생 경로를 공유한다", () => {
   let rendered = 0;
   const context = createContext({
-    Spawner: { combatAttributeKeys, hasCombatEvolution },
+    Spawner: { unitDisplayAttributes, combatAttributeKeys, hasCombatEvolution },
     combatAttributeArt: { ready: () => true, frame() { assert.fail("전투 전용 탄생 경로"); } },
     drawAgentAppearanceBody(ctx, now, agent, cell, topLeft, renderPosition, birth) {
       assert.equal(birth, agent.birth);
@@ -43,7 +44,7 @@ test("네 종족의 모든 전투·일반 속성 조합이 종족 탄생 경로�
 
 test("전투 속성은 종족별 탄생 경로·등장 시각·프레임을 바꾸지 않는다", () => {
   const context = createContext({ state: { simSeconds: 0 }, colonyEntries: [], AGENT_HEIGHT: .7,
-    Spawner: { SPORE_BIRTH_ANIMATION, sporeBirthPlacement }, SPRING_BIRTH_ANIMATION, springBirthPlacement,
+    Spawner: { unitDisplayAttributes, SPORE_BIRTH_ANIMATION, sporeBirthPlacement }, SPRING_BIRTH_ANIMATION, springBirthPlacement,
     PEBBLE_BIRTH_ANIMATION, pebbleBirthPlacement, agentBirthDuration, agentBirthMotion,
     idleMotion: { matches: false }, unitAnimationSheets: new Map(), agentDisplayOffset: () => ({ x: 0, y: 0 }) });
   runInContext(declaration("agentBirthPose"), context);
@@ -61,7 +62,7 @@ test("세 종족의 마지막 탄생 프레임은 전투 탄생을 다시 재생
   for (const [name, animation] of [["drawSporeBirth", SPORE_BIRTH_ANIMATION], ["drawPebbleBirth", PEBBLE_BIRTH_ANIMATION],
     ["drawSpringBirth", SPRING_BIRTH_ANIMATION]]) {
     let calls = 0;
-    const context = createContext({ Spawner: { SPORE_BIRTH_ANIMATION }, PEBBLE_BIRTH_ANIMATION, SPRING_BIRTH_ANIMATION,
+    const context = createContext({ Spawner: { unitDisplayAttributes, SPORE_BIRTH_ANIMATION }, PEBBLE_BIRTH_ANIMATION, SPRING_BIRTH_ANIMATION,
       idleMotion: { matches: false }, drawAgentAppearanceLayer(ctx, now, agent, cell, topLeft, position, birth) {
         assert.equal(agent.birth, null); assert.equal(birth, null); calls++;
       } });
@@ -78,7 +79,7 @@ test("세 종족의 마지막 탄생 프레임은 전투 탄생을 다시 재생
 test("전사 새싹콩은 공통 탄생 동작에 완성 외형을 한 번만 그리고 크기와 발 위치를 유지한다", () => {
   const draws = [], transforms = [];
   const sprite = { width: 512, height: 512 };
-  const context = createContext({ AGENT_HEIGHT: .7, Spawner: { hasCombatEvolution },
+  const context = createContext({ AGENT_HEIGHT: .7, Spawner: { unitDisplayAttributes, hasCombatEvolution },
     combatAttributeArt: { ready: () => true },
     agentSprite(agent, layer) { assert.equal(layer, "full"); return sprite; },
     drawBirthSeed() {}, drawBirthFragments() {}, drawBirthImpact() {},

@@ -1,3 +1,4 @@
+import { unitDisplayAttributes, unitDisplayAttributesFrom } from "./unit-display-appearance.mjs";
 import { TRIBE_CANVAS_CACHE_BUDGET } from "./canvas-cache.mjs";
 import { createTribeMorphology, TRIBE_MORPHOLOGY_ASSETS } from "./attribute-morphology.mjs";
 import { UNIT_ANIMATIONS } from "./unit-animation.mjs";
@@ -106,7 +107,7 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
   }
 
   function pose(agent, current, time) {
-    const rig = rigs.get(agent.tribe), attributes = agent.appearanceAttributes || agent.attributes || {};
+    const rig = rigs.get(agent.tribe), attributes = unitDisplayAttributes(agent);
     if (!rig || !hasTribeAttributes(attributes) || !current) return current;
     const action = ["harvest", "throw"].includes(current.action) ? "idle" : current.action;
     let motion = motions.get(agent.id);
@@ -190,6 +191,7 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
   }
 
   function frame(tribe, attributes, source, animation, index, action, time, motion, replacement) {
+    attributes = unitDisplayAttributesFrom(attributes);
     const rig = rigs.get(tribe);
     if (!rig || !hasTribeAttributes(attributes) && !replacement) return null;
     const bodyAction = motion?.sourceAction || action;
@@ -341,6 +343,7 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
   }
 
   function portrait(tribe, attributes, width, height, box, layer) {
+    attributes = unitDisplayAttributesFrom(attributes);
     const rig = rigs.get(tribe);
     if (!rig) return null;
     const surface = createSurface(width, height), context = surface.getContext("2d");
@@ -356,6 +359,7 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
   }
 
   function bodySize(tribe, appearance, box) {
+    appearance = unitDisplayAttributesFrom(appearance);
     const rig = rigs.get(tribe);
     if (!rig) return null;
     const track = rig.animations.idle.tracks[0];

@@ -1,3 +1,4 @@
+import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -26,9 +27,9 @@ function rendering(action) {
     agentParts: new Map(), interpolatedAgentPosition: () => ({}),
     sproutRoots: { pose: () => null, drawRig() { draws.push("feet-left", "feet-right"); } },
     sproutCombatFrame: () => sheet, agentAttackFrame: () => -1,
-    Spawner: { sproutRootGeometry: () => ({ height: 76 }), combatHurtFrame: () => -1, unitAnimationPose: () => ({ action, frame: 0, animation: { frameSize: 512, columns: 4, pivotX: 256, pivotY: 448 } }), unitAnimationFrame },
+    Spawner: { unitDisplayAttributes, sproutRootGeometry: () => ({ height: 76 }), combatHurtFrame: () => -1, unitAnimationPose: () => ({ action, frame: 0, animation: { frameSize: 512, columns: 4, pivotX: 256, pivotY: 448 } }), unitAnimationFrame },
     unitAnimationSheets: new Map([["bean", new Map([[action, { sprite: sheet, scale: 1 }]])]]),
-    drawSelectionOutline() {},
+    drawAgentRanged: () => false, drawSelectionOutline() {},
     drawing: { save() {}, restore() {}, beginPath() {}, rect() {}, clip() {}, ellipse() {}, fill() {},
       translate() {}, scale() {}, rotate() {}, drawImage(image) { draws.push(image.name); } }
   });
