@@ -8239,6 +8239,7 @@
     combatPanel.addEventListener("keydown", event => event.stopPropagation());
     combatPanel.addEventListener("close", () => {
       detailCombatVfx.clearView();
+      combatWatch?.deaths?.clear();
       combatOpen.hidden = !selectedCombatUnits().length;
       const focus = combatReturnFocus?.isConnected && !combatReturnFocus.hidden ? combatReturnFocus : unitPanel.querySelector("button:not([hidden])");
       focus?.focus({ preventScroll: true });
@@ -8410,6 +8411,20 @@
           scale: size.scale, width: size.width * cell, height: size.height * cell });
       }));
       const vfxPositions = new Map(positions);
+      const deathPresentation = combatWatch.deaths ||= Spawner.createDetailCombatDeath?.();
+      deathPresentation?.begin(state.simSeconds, { scope: combatWatch.id, roomId: connection.roomId, snapshotTime: connection.simSeconds,
+        streamId: state.combatVfx?.streamId, width, height, visibleIds: arenaUnits.map(agent => agent.id),
+        livingAgents: [...state.agents, ...state.rivals] });
+      // Current authoritative corpses remain behind the living roster. Only
+      // this open view's previously observed base/secretion bodies are eligible.
+      for (const command of deathPresentation?.commands(state.corpses, corpsePlaybackTime(), { width, height, cell }) || []) {
+        const { point } = command;
+        context.save(); context.fillStyle = "#13251e3d";
+        context.beginPath(); context.ellipse(point.x, point.y, Math.max(4, point.width * .28), Math.max(2, point.height * .035), 0, 0, Math.PI * 2); context.fill();
+        context.translate(point.x, point.y); context.scale(command.scale, command.scale);
+        drawAgentCorpse(context, command.corpse, 0, 0, command.cell, null, 1);
+        context.restore();
+      }
       const target = selected && positions.get(String(selected.attack?.targetId ?? selected.combat.targetId));
       if (target) {
         const source = positions.get(String(selected.id));
@@ -8458,6 +8473,7 @@
           Spawner.drawCombatDodgeGhosts?.(context, evade, (dx, dy) => drawDodgeBody(originalX + dx, originalY + dy));
         }
         drawDodgeBody(x, y);
+        deathPresentation?.observe(agent, { ...point, x, y }, { scale: point.scale, facing });
         // Persistent stun reads current status, never a replayed impact event.
         Spawner.drawCombatStun?.(context, agent, { ...point, x, y }, state.simSeconds,
           { width, height, reducedMotion: idleMotion.matches });
