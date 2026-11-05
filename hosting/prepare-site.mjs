@@ -30,7 +30,8 @@ export function prepareSite(destination, readSource, revision, assetDirectory) {
   const assets = new Map();
   for (const source of [...pages.values(), ...clients.values()]) {
     if (/data:[^;,\s]+;base64,/.test(source)) throw new Error("내장 자산을 DesignAssets 파일로 분리해 주세요.");
-    const dependencies = source.replace(/modules\["client\/image-scales\.mjs"\] = \(\(\) => \{[\s\S]*?^\}\)\(\);/m, "");
+    const dependencies = source.replace(/modules\["client\/image-scales\.mjs"\] = \(\(\) => \{[\s\S]*?^\}\)\(\);/m, "")
+      .replace(/\b[A-Za-z_$][\w$]*\.approvedSource\s*(?:===|!==)\s*["']DesignAssets\/[^"'\r\n]+["']/g, "");
     for (const match of dependencies.matchAll(/["'](DesignAssets\/[^"'?#\r\n]+)["']/g)) {
       const name = match[1];
       if (!/\.[a-z0-9]+$/i.test(name) || assets.has(name)) continue;
@@ -52,6 +53,8 @@ export function prepareSite(destination, readSource, revision, assetDirectory) {
   // Ship revised sprites with the Site so source updates reach production
   // together without requiring a separate asset CDN publication.
   const localAssets = new Set(["DesignAssets/Welcome/spore-jump.webp", "DesignAssets/Welcome/pebble-jump.webp", "DesignAssets/Animations/CreatureWalkV2/shadow-weasel/walk.webp"]);
+  const publishedAssets = execFileSync("git", ["show", "HEAD:dist/client/assets.js"], { cwd: destination, encoding: "utf8", maxBuffer: 128 * 1024 * 1024 });
+  for (const [name, file] of assetFiles) if (!publishedAssets.includes(assetBase + file)) localAssets.add(name);
   const assetPaths = new Map([...assetFiles].map(([name, file]) => [name,
     localAssets.has(name) ? "./welcome-assets/" + file : assetBase + file]));
   for (const name of localAssets) if (assets.has(name)) write("welcome-assets/" + assetFiles.get(name), assets.get(name));

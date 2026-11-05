@@ -1,3 +1,38 @@
+## Sites 배포 지원 수정·게시본 검수 완료 / source 커밋 준비 · 01a1ad5a
+
+- 기록 ID: resource-amount-20x-deploy-support-freeze-20261106-01a1ad5a. 기록 시각: 2026-11-06T05:42:19+09:00. 기록자·배포 지원 구현/검수/Git 범위 판단 Codex /root, 배포 실행 결정 사용자. 출처 현재 채팅 01a1ad5a-6af9-7001-a8af-1752c038a4d2 및 prepared.json/publication-check.json, H:/Spawner Windows PowerShell. 원 발언 정확시각·항목 ID·PC 식별 정보 불명.
+- 실제 결과: 승인 원본의 엄격 경로 비교문만 자산 검색 대상에서 제외한 뒤 기존 전체 이미지 규격 검사와 prepareSite가 성공했다. 671개 원본 자산·448354575bytes를 집계했다. 기존 Site HEAD에 없는 신규/변경 해시53개(52029961bytes)는 welcome-assets에 동봉했고 모든 파일의 실제 SHA-256과 해시 파일명·매핑 일치를 확인했다. 기존 CDN URL은 보존한다.
+- 배포판 runtime 전체 구문, 여섯 amount*20 사본, 치트 실행 명령 제거를 확인했다. 원본 생성 함수의 651지점×5모델 검수는 해당 수식 바이트가 같아 앞선 결과를 재사용한다. 브라우저나 추가 게임 실행을 하지 않았다.
+- 실제 게임/검토 페이지 원본은 커밋2af545927584f55591b87cebc1f28da53e81624f로 고정했다. 준비 중 추가된 main6dcfe6916db22620c17807c768681078dc0ec594는 Design.html과 메모리만 바꿨으며 대상 게임 파일은 같다. root 미커밋 게임/전투/체력링 변경은 산출물에 포함하지 않았다.
+- 이번 지원 커밋은 hosting/prepare-site.mjs의 오탐 제외 및 새 해시 자산 동봉과 이 채팅 관련 미커밋 메모리만 포함한다. 기존 다른 코드/메모리는 보존한다. 최종 형식/staged 확인·GitHub push·Site source package/save/deploy·terminal readback은 다음 마감이며 아직 배포 성공으로 기록하지 않는다. 근거 폴더 D:/.codex/visualizations/2026/11/05/01a1ad5a-6af9-7001-a8af-1752c038a4d2/$Trash/spawner-deploy-20261106.
+
+## 새 배포 자산 동봉 판단 · 01a1ad5a
+
+- 기록 ID: resource-amount-20x-deploy-assets-20261106-01a1ad5a. 기록 시각: 2026-11-06T05:38:42+09:00. 기록자·필수 자산 게시 판단 Codex /root, 배포 승인 사용자. 출처 현재 채팅 01a1ad5a-6af9-7001-a8af-1752c038a4d2 및 asset-changes.json/asset-availability.json, Windows PowerShell. 원 발언 시각·항목 ID 불명.
+- 실제 준비 성공: image policy를 바꾸지 않고 오탐 세 경로를 제외한 671자산·448354575bytes의 원본 자산 목록을 만들었다. 기존 Sites 소스와 달라진 53개 해시 URL을 CDN에서 HEAD 확인한 결과 53개가404였다. 성공 응답의 CORS는 모두 *였다. CDN에 미게시된 원본이 있어 그대로 배포하면 일부 동작 이미지가 빠질 수 있었다.
+- 기존 준비기의 신규 스프라이트 동봉 방식에 맞춰 현재 Sites HEAD의 자산 URL 목록에 없는 해시를 같은 Site의 welcome-assets에 동봉하도록 최소 확장한다. 기존 CDN 해시 참조와 이미 검증된 기존 파일은 유지하며 다른 GitHub 자산 저장소를 수정/푸시하지 않는다. 원본/게임 동작 변경 없이 배포 파일과 경로 매핑만 함께 준비한다. 현재 GitHub 소스의 이번 직접 배포 지원 파일과 이 채팅 메모리만 분리 커밋·push하고 동일 게임 소스를 배포한다.
+
+## Sites 배포 자산 검색의 원본 경로 비교문 오탐 보정 · 01a1ad5a
+
+- 기록 ID: resource-amount-20x-deploy-scanner-20261106-01a1ad5a. 기록 시각: 2026-11-06T05:36:47+09:00. 기록자·원인 조사/직접 배포 지원 판단 Codex /root, 기존 배포 승인 사용자. 출처 현재 채팅 01a1ad5a-6af9-7001-a8af-1752c038a4d2, H:/Spawner Windows PowerShell. 원 발언 시각·항목 ID 불명.
+- 실제 배포 준비에서 CombatEvolutionV1/pebble.png·sprout.png·spore.png의 image-sizes 등록 없음으로 중단했다. 세 경로는 전투/채집 rig.approvedSource 또는 original.approvedSource의 엄격 비교문에만 있고 실제 이미지 로드 참조가 아니었다. 배포 자산 검색이 이 메타데이터 비교 문자열까지 원본 자산으로 수집하는 직접 배포기 오탐이다.
+- 승인된 배포를 완성하기 위한 최소 지원 수정으로 hosting/prepare-site.mjs의 검색용 dependencies에서 approvedSource 엄격 비교문만 제외한다. 게시되는 JS/HTML, 원화 파일, image-sizes 정책 및 auditImages 검사는 그대로 유지한다. 무관한 게임 동작/아트 수정을 하지 않는다. 오탐 수정 후 같은 준비 절차를 재개하고 필요한 게시 자산·프로덕션 runtime 수량 수식을 확인한다.
+
+## 자원 매장량 20배 커밋 Sites 배포 승인 · 01a1ad5a
+
+- 기록 ID: resource-amount-20x-deploy-start-20261106-01a1ad5a. 기록 시각: 2026-11-06T05:31:55+09:00. 기록자·배포 판단 Codex /root, 배포 실행 결정 사용자. 출처 현재 채팅 01a1ad5a-6af9-7001-a8af-1752c038a4d2의 후속 요청 “배포까지 해봐”, H:/Spawner Windows PowerShell. 원 발언 정확시각·턴/항목 ID·PC 식별 정보 불명.
+- 배포 범위는 앞서 push한 2af545927584f55591b87cebc1f28da53e81624f의 커밋된 게임·검토 페이지 및 필수 자산이다. 미커밋 전투/체력링/기획서/다른 메모리는 공개 산출물에 넣지 않는다. 기존 hosting/prepare-site.mjs로 committed source를 준비하고 productionRuntime을 적용한다.
+- 현재 Sites API로 appgprj_6ada1cedf2848191938f196c4f346ee9의 owner·public·https://spawner.oojjrs.chatgpt.site·최신 저장버전28을 확인했다. audience를 유지하며 동일 Site 소스 checkout/open → 준비·검사 → source helper 동기화·package → 저장·deploy → terminal readback 순서로 진행한다. 작업 중간물은 현재 쓰기 가능 루트 D:/.codex/visualizations/2026/11/05/01a1ad5a-6af9-7001-a8af-1752c038a4d2/$Trash/spawner-deploy-20261106에 둔다. 아직 배포 성공 전이다.
+
+## 자원 지점 매장량 20배 반영·main push 완료 · 01a1ad5a 현재 요약
+
+- 기록 ID: resource-amount-20x-push-complete-20261106-01a1ad5a. 기록·최종 확인 시각: 2026-11-06T05:28:47+09:00. 기록자·구현/검수/Git 실행 Codex /root, 자원 매장량 20배·기획서와 게임 적용 및 push 결정 사용자. 출처 현재 채팅 01a1ad5a-6af9-7001-a8af-1752c038a4d2 및 도구 출력, H:/Spawner Windows PowerShell. 원 발언 시각·턴/항목 ID·PC 식별 정보 불명.
+- 실제 완료: 2af545927584f55591b87cebc1f28da53e81624f 「자원 지점 매장량 20배로 변경」를 origin/main에 push했다. git ls-remote의 정확한 refs/heads/main과 시작 체크아웃의 main/HEAD가 같은 해시임을 읽어 확인했다. 원격 동시 솜양 아트와 기존 로컬 전투/기타 커밋 이력을 보존해 통합한 뒤 push했으며 별도 배포는 실행하지 않았다.
+- 변경 범위는 server/terrain-resources.mjs의 최종 목재/나머지 세 자원 생성량×20, Design.html 내장 모델, runtime 브라우저/두 워커 사본 및 본 채팅 메모리 두 절이다. 새로 생성하는 현행 맵에 적용되며 기존 저장 게임의 저장 잔량은 별도 마이그레이션하지 않았다. 채집 시간·일꾼 운반량·지점 좌표·지형을 유지했다.
+- 실제 검수: 동일 32×32 입력의 네 자원 651지점을 원본과 다섯 모델에서 비교하여 모든 매장량과 수량 지도 데이터 ×20, 좌표/타입/지형 동일을 확인했다. runtime 구문, 최종 4파일 UTF8NoBom/CRLF, 선별 staged diff 및 공백 검사도 통과했다. 검사기 첫 입력에 fines 필드를 빠뜨린 오류를 검사기 입력만 보완한 뒤 통과했으며 제품 코드 오류로 바꾸지 않았다.
+- 보호 결과: 기존 8개 제품/미추적 파일의 바이트는 rebase 보존본과 최종 상태에서 동일하고 관련 없는 메모리는 원문을 보존했다. index는 비어 있다. stash 및 refs/codex-backup/resource-amount-20x-20261106-01a1ad5a는 복구 근거로 남긴다. 연결 보드 없음. 근거는 $Trash/resource-amount-20x-20261106-01a1ad5a/validation.json, restoration.json, manifest.json, staged.diff, completion.json이다.
+- 앞선 시작/동결 기록의 미완료 상태는 이 실제 완료 기록으로 대체한다. 이 절은 commit/push 후에만 확인한 결과이므로 로컬에 기록하며 메모리 전용 후속 커밋이나 게시 이력 수정은 하지 않는다.
+
 ## 본진 매장량 20배 경제·습격 재계산 완료 / 기획서 변경 push 준비 · 01a1a0e9 현재 요약
 
 - 기록 ID: home-stock-twenty-result-push-scope-20261106-01a1a0e9. 기록·근거 확인 시각 2026-11-06T05:29:17+09:00. 기록자·계산 취합/검수·Git 범위 판단 Codex /root, 본진 자원20배 변경 예정·현재 변경 push 결정 사용자. 출처 현재 채팅01a1a0e9-2e09-7703-a7f5-613c21744e11의 ‘본진 자원은 내가 20배로 올려둘테니 그거 기반으로 생각해봐’, ‘지금 변경내용 푸시 함 하자’, ‘아 아직 작업이 안 끝났구나 오케이’. 원 발언 정확시각·턴/항목 ID·딥링크·PC 식별 불명. H:/Spawner Windows PowerShell. 계산 하위 home_stock_twenty_economy·검토 home_stock_twenty_raid_review, 제품/메모리/Git는 이 두 하위가 수정하지 않았다.
