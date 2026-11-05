@@ -116,7 +116,7 @@ test('boar retains two full strides per cell at every movement duration',()=>{
  assert.equal(animation.cyclesPerCell,2);
  for(const duration of [.3125,.625,1.25]){
   const a={...agent('soil-boar'),moveDuration:duration};
-  for(const [progress,frame] of [[0,0],[.125,2],[.25,4],[.375,6],[.5,0],[.875,6]])
+  for(const [progress,frame] of [[0,0],[.125,16],[.25,32],[.375,48],[.5,0],[.875,48]])
    assert.equal(creatureWalkPose(a,progress*duration).frame,frame);
  }
 });

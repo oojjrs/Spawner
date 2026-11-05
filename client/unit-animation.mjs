@@ -1,3 +1,4 @@
+import { CREATURE_RANGED_ANIMATIONS, CREATURE_RANGED_ASSETS, creatureRangedPose } from "./creature-ranged.mjs";
 import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
 import { toadHopMotion } from "./toad-hop.mjs";
 import { attackAnimationElapsed, AGENT_ATTACK_HIT_TIME } from "../server/attack.mjs";
@@ -64,7 +65,7 @@ export const CREATURE_WALK_ANIMATIONS = Object.freeze({
   "bundle-snail": {"image":"DesignAssets/Animations/CreatureWalkV2/bundle-snail/walk.webp","frameSize":398,"columns":4,"durationsMs":[200,250,250,250,300,250,250,250],"loop":true,"pivotX":199,"pivotY":348.25,"cyclesPerCell":1},
   "cotton-sheep": {"image":"DesignAssets/Animations/CreatureWalkV2/cotton-sheep/walk.webp","frameSize":256,"columns":4,"durationsMs":[125,125,125,125,125,125,125,125],"loop":true,"pivotX":128,"pivotY":224,"cyclesPerCell":2},
   "rolling-acorn": {"image":"DesignAssets/Animations/CreatureWalkV2/rolling-acorn/walk.webp","frameSize":420,"columns":8,"durationsMs":[78,78,78,78,79,78,78,78,78,78,78,79,78,78,78,78,78,78,78,78,79,78,78,78,78,78,78,79,78,78,78,78,78,78,78,78,79,78,78,78,78,78,78,79,78,78,78,78,78,78,78,78,79,78,78,78,78,78,78,79,78,78,78,78],"loop":true,"pivotX":210,"pivotY":349.453125,"cyclesPerCell":0.4},
-  "soil-boar": {"image":"DesignAssets/Animations/CreatureWalkV2/soil-boar/walk.webp","frameSize":256,"columns":8,"durationsMs":[100,100,100,100,100,100,100,100],"loop":true,"pivotX":128,"pivotY":197,"cyclesPerCell":2},
+  "soil-boar": {"image":"DesignAssets/Animations/CreatureWalkApprovedV3/soil-boar/walk.webp","frameSize":640,"viewSize":506.85283,"columns":8,"durationsMs":Array(64).fill(4.8828125),"loop":true,"pivotX":326.154716,"pivotY":425.490566,"cyclesPerCell":2,"registrationScale":1},
   "bubble-toad": {"image":"DesignAssets/Animations/CreatureWalkV2/bubble-toad/walk.webp","frameSize":288,"viewSize":256,"columns":8,"durationsMs":[110,120,80,110,130,90,90,150],"loop":true,"pivotX":145.5,"pivotY":222.26,"cyclesPerCell":2},
   "vine-turtle": {"image":"DesignAssets/Animations/CreatureWalkV2/vine-turtle/walk.webp","frameSize":256,"viewSize":256,"columns":8,"durationsMs":[170,130,120,140,170,130,120,140],"loop":true,"pivotX":131.25,"pivotY":220.81,"cyclesPerCell":1.5},
   "shadow-weasel": {"image":"DesignAssets/Animations/CreatureWalkV2/shadow-weasel/walk.webp","frameSize":256,"viewSize":256,"columns":8,"durationsMs":[85,80,85,100,85,80,85,100],"loop":true,"pivotX":128.5,"pivotY":211.78,"cyclesPerCell":2.5},
@@ -163,6 +164,7 @@ const SPRING_BASIC_ATTACK_ANIMATION = Object.freeze({ ...UNIT_ANIMATIONS.spring.
 });
 
 export const UNIT_ANIMATION_ASSETS = Object.freeze([...new Set([
+  ...CREATURE_RANGED_ASSETS,
   ...Object.values(UNIT_ANIMATIONS).flatMap(animations => Object.values(animations).map(animation => animation.image)),
   ...[...Object.values(CREATURE_IDLE_ANIMATIONS), ...Object.values(CREATURE_ATTACK_ANIMATIONS), ...Object.values(CREATURE_HURT_ANIMATIONS), ...Object.values(CREATURE_DEATH_ANIMATIONS)].map(animation => animation.image),
   ...Object.values(CREATURE_WALK_ANIMATIONS).map(animation => animation.image)
@@ -179,6 +181,7 @@ export function unitAnimationFrame(animation, elapsedMs) {
 }
 
 export function creatureAttackPose(agent, time) {
+  if (CREATURE_RANGED_ANIMATIONS[agent.species] && (agent.attack?.dnaRanged || agent.attack?.mode === "ranged" || agent.attack?.attackMode === "ranged")) return creatureRangedPose(agent, time);
   const animation = CREATURE_ATTACK_ANIMATIONS[agent.species], attack = agent.attack;
   if (!animation || !attack || agent.health <= 0 || !Number.isFinite(attack.startedAt)) return null;
   const elapsed = attackAnimationElapsed(attack, time, CREATURE_ATTACK_TIMINGS[agent.species].hitTimeMs / 1000, animation.durationMs / 1000) * 1000;

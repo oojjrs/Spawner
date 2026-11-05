@@ -1,3 +1,4 @@
+import { CREATURE_RANGED_ANIMATIONS } from "./creature-ranged.mjs";
 import { drawCombatStun } from "./combat-stun-vfx.mjs";
 import { drawSpeciesHeldHurt } from "./species-held-hurt.mjs";
 import { beanHeldHurtSource, drawBeanHeldHurt } from "./bean-held-hurt.mjs";
@@ -135,7 +136,7 @@ export function createCombatStage(canvas) {
     // foot. A second arena lunge would drag that contact across the ground.
     const fixedSupport = CREATURE_ATTACK_ANIMATIONS[stageAgent(agent).species]?.fixedSupport;
     let lunge = 0;
-    if (attack && attack.mode !== "ranged" && !fixedSupport && !reducedMotion.matches) {
+    if (attack && attack.mode !== "ranged" && attack.attackMode !== "ranged" && !attack.dnaRanged && !fixedSupport && !reducedMotion.matches) {
       if (attack.meleeContacts?.length > 1) {
         const elapsed = attackAnimationElapsed(attack, time, .3, 1);
         const windup = clamp(elapsed / .3), recovery = clamp((elapsed - .3) / .7);
@@ -176,7 +177,7 @@ export function createCombatStage(canvas) {
     const animations = UNIT_ANIMATIONS[agent.tribe];
     for (const animation of [animations?.idle, animations?.attack, animations?.hurt, animations?.death,
       agent.tribe === "bean" ? AGENT_DEATH_ANIMATION : null, agent.species === "spiny-back-beetle" ? beetleCorpse : null,
-      CREATURE_IDLE_ANIMATIONS[agent.species], CREATURE_ATTACK_ANIMATIONS[agent.species], CREATURE_HURT_ANIMATIONS[agent.species], CREATURE_DEATH_ANIMATIONS[agent.species]]) if (animation) image(animation.image);
+      CREATURE_IDLE_ANIMATIONS[agent.species], CREATURE_RANGED_ANIMATIONS[agent.species], CREATURE_ATTACK_ANIMATIONS[agent.species], CREATURE_HURT_ANIMATIONS[agent.species], CREATURE_DEATH_ANIMATIONS[agent.species]]) if (animation) image(animation.image);
     let pose = requested?.idleFallback && reducedMotion.matches ? { ...requested, frame: 0 } : requested;
     let source = pose?.animation.image || COMBAT_LAB_UNITS.find(unit => unit.key === agent.key)?.image || BEETLE_NEUTRAL_ASSET;
     let asset = image(source);

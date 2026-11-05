@@ -1,0 +1,201 @@
+{
+  "species": "flower-tail-bird",
+  "action": "ranged-seed-spit",
+  "status": "approved-body-integrated",
+  "image": "DesignAssets/Animations/CreatureRangedV1/flower-tail-bird/shoot.webp",
+  "frameSize": 512,
+  "viewSize": 500.7396226415094,
+  "columns": 4,
+  "frameCount": 8,
+  "durationsMs": [
+    100,
+    120,
+    120,
+    60,
+    100,
+    120,
+    160,
+    220
+  ],
+  "durationMs": 1000,
+  "loop": false,
+  "pivotX": 228.86883742756186,
+  "pivotY": 422.2344753074205,
+  "facing": "left",
+  "launchFrameIndex": 4,
+  "launchAtMs": 400,
+  "releasePointPixels": {
+    "x": 92,
+    "y": 234
+  },
+  "projectileBakedIntoBody": false,
+  "projectileAsset": null,
+  "audio": false,
+  "registration": [
+    {
+      "frame": 0,
+      "crop": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "footAnchorSource": [
+        191.44239631336404,
+        402
+      ],
+      "scale": 0.925,
+      "translation": [
+        39,
+        69
+      ],
+      "exactApprovedEndpoint": true
+    },
+    {
+      "frame": 1,
+      "crop": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "footAnchorSource": [
+        191.21936965142976,
+        403
+      ],
+      "scale": 0.925,
+      "translation": [
+        39,
+        68
+      ],
+      "exactApprovedEndpoint": false
+    },
+    {
+      "frame": 2,
+      "crop": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "footAnchorSource": [
+        189.34254143646407,
+        403
+      ],
+      "scale": 0.925,
+      "translation": [
+        41,
+        68
+      ],
+      "exactApprovedEndpoint": false
+    },
+    {
+      "frame": 3,
+      "crop": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "footAnchorSource": [
+        189.03501280956448,
+        403
+      ],
+      "scale": 0.925,
+      "translation": [
+        41,
+        68
+      ],
+      "exactApprovedEndpoint": false
+    },
+    {
+      "frame": 4,
+      "crop": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "footAnchorSource": [
+        196.06621556307394,
+        401
+      ],
+      "scale": 0.925,
+      "translation": [
+        35,
+        70
+      ],
+      "exactApprovedEndpoint": false
+    },
+    {
+      "frame": 5,
+      "crop": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "footAnchorSource": [
+        199.1714656290532,
+        402
+      ],
+      "scale": 0.925,
+      "translation": [
+        32,
+        69
+      ],
+      "exactApprovedEndpoint": false
+    },
+    {
+      "frame": 6,
+      "crop": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "footAnchorSource": [
+        194.62066805845512,
+        401
+      ],
+      "scale": 0.925,
+      "translation": [
+        36,
+        70
+      ],
+      "exactApprovedEndpoint": false
+    },
+    {
+      "frame": 7,
+      "crop": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "footAnchorSource": [
+        194.84900166389352,
+        402
+      ],
+      "scale": 0.925,
+      "translation": [
+        36,
+        69
+      ],
+      "exactApprovedEndpoint": true
+    }
+  ],
+  "generationTool": "built-in image_gen",
+  "sources": [
+    "Source/raw-sheet-v1.png",
+    "Source/cutout-v2.png"
+  ],
+  "method": "Six newly drawn intermediate cels. Exact approved seed endpoints. Fixed uniform scale plus support-foot translations; no mesh deformation, crossfade, generated inbetween or melee reuse.",
+  "integration": "Map actual authoritative launchedAt/shotLaunches to frame4 release. Do not spawn from render time. hitAt is arrival, not release. Preserve existing melee and server timing.",
+  "approvedDate": "2026-11-06",
+  "launchFrame": 4,
+  "outletX": 92,
+  "outletY": 234,
+  "registrationScale": 1,
+  "idleImage": "DesignAssets/Animations/CreatureIdleV3/flower-tail-bird/idle.webp"
+}

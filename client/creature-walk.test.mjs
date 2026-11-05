@@ -11,7 +11,7 @@ test("생물 이동은 18종 원본과 유닛 페이지의 실제 시트·시간
   for (const type of ENCOUNTER_TYPES) {
     const animation = CREATURE_WALK_ANIMATIONS[type.key];
     assert.ok(animation, type.key);
-    const manifest = JSON.parse(readFileSync(new URL("../DesignAssets/Animations/CreatureWalkV2/" + type.key + "/walk.json", import.meta.url), "utf8"));
+    const manifest = JSON.parse(readFileSync(new URL("../" + animation.image.replace(/[^/]+$/, "walk.json"), import.meta.url), "utf8"));
     const row = design.match(new RegExp('<tr id="unit-' + type.key + '"[^>]*>([^]*?)</tr>'))[1];
     const cell = row.match(/<td data-action="walk"[^>]*>([^]*?)<\/td>/)[1];
     assert.equal(animation.image, manifest.image);

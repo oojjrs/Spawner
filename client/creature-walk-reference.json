@@ -324,7 +324,7 @@
     {
       "key": "soil-boar",
       "idleImage": "DesignAssets/Animations/SoilBoarIdle/V1/idle.webp",
-      "walkImage": "DesignAssets/Animations/CreatureWalkV2/soil-boar/walk.webp",
+      "walkImage": "DesignAssets/Animations/CreatureWalkApprovedV3/soil-boar/walk.webp",
       "idlePatch": [
         176,
         178,
@@ -339,26 +339,27 @@
       ],
       "score": 0.913020133972168,
       "scaleFactor": 1,
-      "frameSize": 256,
-      "viewSize": 253.42641509433966,
-      "pivotX": 131.07735849056604,
-      "pivotY": 180.74528301886792,
+      "frameSize": 640,
+      "viewSize": 506.85283,
+      "pivotX": 326.154716,
+      "pivotY": 425.490566,
       "groundRadiusX": 0.325203,
       "groundRadiusY": 0.04607,
       "idleSha256": "f29a5219cc5ead3d04dde1aefb1466b4138463837226d72af0bc4a8ce05d9cf8",
-      "walkSha256": "4a658adf0ee04240ee353e6986a3389849b59e8ad4b2d63324bc7ca9bc169991",
+      "walkSha256": "706665d1ba06c5f37b0b24d443f62e34d26a98289e944d5cbc2402757ead2d49",
       "originalCyclesPerCell": 2,
       "runtime": {
-        "frameSize": 256,
-        "viewSize": 253.426415,
-        "pivotX": 131.077358,
-        "pivotY": 180.745283,
+        "frameSize": 640,
+        "viewSize": 506.85283,
+        "pivotX": 326.154716,
+        "pivotY": 425.490566,
         "groundRadiusX": 0.325203,
         "groundRadiusY": 0.04607,
         "registrationScale": 1,
-        "cyclesPerCell": 1.25
+        "cyclesPerCell": 2
       },
-      "result": "Original idle body landmark / one shared strip scale; authored motion retained."
+      "result": "Original idle body landmark / one shared strip scale; authored motion retained.",
+      "approvedAttachedWalk": "2026-11-06: 64 exact approved cels, continuous legs, two strides per cell; unchanged speed and foot paths."
     },
     {
       "key": "bubble-toad",

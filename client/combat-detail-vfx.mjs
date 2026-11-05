@@ -1,3 +1,4 @@
+import { CREATURE_RANGED_ANIMATIONS, creatureRangedOutlet } from "./creature-ranged.mjs";
 import { unitRangedProjectile } from "./unit-ranged.mjs";
 
 // User-approved V4 artwork. Detailed combat only; never the world-cell renderer.
@@ -22,7 +23,10 @@ export function detailVfxFrame(clip, milliseconds) {
   }
   return null;
 }
+const neutralFlight = Object.freeze({ image: null, frames: [], durations: [] });
 function projectileClip(agent) {
+  // Reuse the existing generic flight, not unapproved new effect artwork.
+  if (CREATURE_RANGED_ANIMATIONS[agent?.species]) return neutralFlight;
   const tribe = agent?.tribe || agent?.key;
   // Effect identity comes from the visible source species, not eligibility for
   // its separate ranged-body animation. Mixed and appendage builds still fire.
@@ -124,14 +128,15 @@ export function createDetailCombatVfx() {
         const clip = projectileClip(source);
         if (!clip) continue;
         const sprite = unitRangedProjectile(source), facing = Math.sign(target.x - from.x) || 1;
+        const neutral = creatureRangedOutlet(source, facing);
         // The server supplies timing, not modal coordinates. Keep the first
         // visible outlet, even for a late snapshot; never invent an unseen pose.
         // Later recoil, recovery and other shots must not drag a fired shot.
         launch = { clip, x: from.x / width, y: from.y / height,
           // Only approved ranged bodies have a measured outlet. Other forms
           // use their displayed body centre without inventing a muzzle pose.
-          offsetX: sprite ? facing * (sprite.outletX - 256) * sprite.sourceScale / 100 : 0,
-          offsetY: sprite ? (sprite.outletY - 448) * sprite.sourceScale / 100 : -from.height * .5 / cell,
+          offsetX: neutral ? neutral.x : sprite ? facing * (sprite.outletX - 256) * sprite.sourceScale / 100 : 0,
+          offsetY: neutral ? neutral.y : sprite ? (sprite.outletY - 448) * sprite.sourceScale / 100 : -from.height * .5 / cell,
           size: Math.max(from.height, from.width) * .85 / cell };
         flightAnchors.set(shot.id, launch);
       }
@@ -151,7 +156,8 @@ export function createDetailCombatVfx() {
       // Splash and reflection are separate damage at their recorded recipient,
       // not another projectile landing. Reuse the approved general hit only.
       const projectileImpact = cue.mode === "ranged" && ["hit", "critical", "followup"].includes(cue.kind);
-      const clip = projectileImpact ? projectileClip(source) || anchors.get(String(cue.sourceId))?.clip || DETAIL_COMBAT_VFX.hit : DETAIL_COMBAT_VFX.hit;
+      const sourceClip = projectileImpact && (projectileClip(source) || anchors.get(String(cue.sourceId))?.clip);
+      const clip = sourceClip?.image ? sourceClip : DETAIL_COMBAT_VFX.hit;
       const frame = detailVfxFrame(clip, (time - cue.at) * 1000);
       if (frame === null) continue;
       result.push({ image: clip.image, frame, x: point.x, y: point.y - point.height * .5,

@@ -1,0 +1,172 @@
+{
+  "name": "soil-mole",
+  "action": "ranged-earth-throw",
+  "status": "approved-body-integrated",
+  "generationTool": "built-in image_gen",
+  "frameSize": 512,
+  "frameCount": 8,
+  "columns": 4,
+  "durationsMs": [
+    140,
+    110,
+    140,
+    160,
+    70,
+    100,
+    140,
+    180
+  ],
+  "durationMs": 1040,
+  "launchFrameIndex": 4,
+  "launchFrameOneBased": 5,
+  "launchAtMs": 550,
+  "releasePointPixels": {
+    "x": 99,
+    "y": 291
+  },
+  "releasePointNormalized": {
+    "x": 0.193359375,
+    "y": 0.568359375
+  },
+  "facing": "left",
+  "rearFootAnchorPixels": {
+    "x": 398,
+    "y": 355
+  },
+  "heldEarthFramesOneBased": [
+    3,
+    4
+  ],
+  "projectileBakedIntoBody": false,
+  "integration": "Schedule projectile at authoritative launchedAt; align frame 5 to that timestamp. Coordinates are full-frame local coordinates, mirror x for right-facing. Do not create projectile from animation clock alone.",
+  "audio": false,
+  "method": "Six newly painted articulated full-body intermediate cels; exact approved idle seed at endpoints. Uniform 98% registration and translation only. No sliced body rotation, mesh animation, or fabricated inbetweens.",
+  "stages": [
+    "rest",
+    "gather",
+    "cup-earth",
+    "windup",
+    "release",
+    "follow-through",
+    "recoil",
+    "rest"
+  ],
+  "registration": [
+    {
+      "frame": 1,
+      "sourceRearFoot": [
+        371,
+        319
+      ],
+      "targetRearFoot": [
+        398,
+        355
+      ],
+      "scale": 0.98,
+      "endpointsOriginal": true
+    },
+    {
+      "frame": 2,
+      "sourceRearFoot": [
+        383,
+        323
+      ],
+      "targetRearFoot": [
+        398,
+        355
+      ],
+      "scale": 0.98,
+      "endpointsOriginal": false
+    },
+    {
+      "frame": 3,
+      "sourceRearFoot": [
+        382,
+        329
+      ],
+      "targetRearFoot": [
+        398,
+        355
+      ],
+      "scale": 0.98,
+      "endpointsOriginal": false
+    },
+    {
+      "frame": 4,
+      "sourceRearFoot": [
+        389,
+        322
+      ],
+      "targetRearFoot": [
+        398,
+        355
+      ],
+      "scale": 0.98,
+      "endpointsOriginal": false
+    },
+    {
+      "frame": 5,
+      "sourceRearFoot": [
+        372,
+        325
+      ],
+      "targetRearFoot": [
+        398,
+        355
+      ],
+      "scale": 0.98,
+      "endpointsOriginal": false
+    },
+    {
+      "frame": 6,
+      "sourceRearFoot": [
+        382,
+        324
+      ],
+      "targetRearFoot": [
+        398,
+        355
+      ],
+      "scale": 0.98,
+      "endpointsOriginal": false
+    },
+    {
+      "frame": 7,
+      "sourceRearFoot": [
+        372,
+        323
+      ],
+      "targetRearFoot": [
+        398,
+        355
+      ],
+      "scale": 0.98,
+      "endpointsOriginal": false
+    },
+    {
+      "frame": 8,
+      "sourceRearFoot": [
+        386,
+        335
+      ],
+      "targetRearFoot": [
+        398,
+        355
+      ],
+      "scale": 0.98,
+      "endpointsOriginal": true
+    }
+  ],
+  "image": "DesignAssets/Animations/CreatureRangedV1/soil-mole/shoot.png",
+  "approvedDate": "2026-11-06",
+  "projectileAsset": null,
+  "viewSize": 445.3180212014134,
+  "pivotX": 256.16421403663,
+  "pivotY": 377.90245216117216,
+  "launchFrame": 4,
+  "outletX": 99,
+  "outletY": 291,
+  "registrationScale": 1,
+  "loop": false,
+  "idleImage": "DesignAssets/Animations/CreatureIdleV3/soil-mole/idle.webp"
+}

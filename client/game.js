@@ -460,6 +460,11 @@
       sprite.src = assetSource(animation.image);
       return [species, { animation, sprite, scale: 1 }];
     }));
+    const creatureRangedSheets = new Map(Object.entries(Spawner.CREATURE_RANGED_ANIMATIONS).map(([species, animation]) => {
+      const sprite = new Image();
+      sprite.src = assetSource(animation.image);
+      return [species, { animation, sprite, scale: 1 }];
+    }));
     const attackSheet = new Image();
     attackSheet.src = assetSource(AGENT_ATTACK_ASSET);
     const agentLevelUpSprites = Object.fromEntries(["ring", "sparkle"].map(key => {
@@ -552,7 +557,7 @@
       await entry.sprite.decode();
       entry.scale = creatureIdleSheets.get(species)?.scale || 1;
     }));
-    await Promise.all([...creatureAttackSheets, ...creatureDeathSheets].map(async ([species, entry]) => {
+    await Promise.all([...creatureAttackSheets, ...creatureRangedSheets, ...creatureDeathSheets].map(async ([species, entry]) => {
       await entry.sprite.decode();
       entry.scale = creatureIdleSheets.get(species)?.scale || 1;
     }));
@@ -4896,7 +4901,7 @@
 
     function drawCreatureAttack(agent, renderPosition) {
       const pose = Spawner.creatureAttackPose(agent, state.simSeconds);
-      const entry = pose && creatureAttackSheets.get(agent.species);
+      const entry = pose && (pose.action === "ranged" ? creatureRangedSheets : creatureAttackSheets).get(agent.species);
       if (!entry || !entry.sprite.complete || !entry.sprite.naturalWidth) return false;
       const animation = Spawner.imageFrameGeometry(pose.animation, pose.frame), owl = agent.species === "talon-owl";
       const point = worldToScreen(renderPosition.x + .5, renderPosition.y + (owl ? .86 : 1));
@@ -5069,7 +5074,8 @@
       for (const agent of canonical ? [] : visibleAgents()) {
         for (const attack of agent.dnaProjectiles || []) {
         if (state.simSeconds >= attack.launchedAt && state.simSeconds <= attack.hitAt) {
-          const start = worldToScreen(attack.fromX + .5, attack.fromY + .5), end = worldToScreen(attack.targetX + .5, attack.targetY + .5);
+          const outlet = Spawner.creatureRangedOutlet(agent, Math.sign(attack.targetX - attack.fromX) || agent.facing);
+          const start = worldToScreen(attack.fromX + .5 + (outlet?.x || 0), attack.fromY + (outlet ? 1 + outlet.y : .5)), end = worldToScreen(attack.targetX + .5, attack.targetY + .5);
           const progress = Math.max(0, Math.min(1, (state.simSeconds - attack.launchedAt) / Math.max(.001, attack.hitAt - attack.launchedAt)));
           ctx.save(); ctx.fillStyle = "#b6ed84"; ctx.strokeStyle = "#e0ffb7"; ctx.lineWidth = Math.max(1, cell * .035);
           ctx.beginPath(); ctx.moveTo(start.x, start.y); ctx.lineTo(start.x + (end.x - start.x) * progress, start.y + (end.y - start.y) * progress); ctx.stroke();
@@ -5132,7 +5138,9 @@
       // from the journal. The new artwork is reviewed separately.
       for (const projectile of combatVfxFrame.projectiles) {
         if (!projectile.from || !projectile.to) continue;
-        const start = worldToScreen(projectile.from.x + .5, projectile.from.y + .5);
+        const source = visibleAgents().find(agent => String(agent.id) === String(projectile.sourceId));
+        const outlet = source && Spawner.creatureRangedOutlet(source, Math.sign(projectile.to.x - projectile.from.x) || source.facing);
+        const start = worldToScreen(projectile.from.x + .5 + (outlet?.x || 0), projectile.from.y + (outlet ? 1 + outlet.y : .5));
         const end = worldToScreen(projectile.to.x + .5, projectile.to.y + .5), progress = projectile.progress;
         const x = start.x + (end.x - start.x) * progress, y = start.y + (end.y - start.y) * progress;
         ctx.save(); ctx.fillStyle = "#b6ed84"; ctx.strokeStyle = "#e0ffb7"; ctx.lineWidth = Math.max(1, cell * .035);
@@ -8267,7 +8275,7 @@
       const hurt = Spawner.creatureHurtPose(agent, state.simSeconds);
       const attack = Spawner.creatureAttackPose(agent, state.simSeconds);
       const pose = hurt || attack;
-      const entry = hurt ? creatureHurtSheets.get(agent.species) : attack ? creatureAttackSheets.get(agent.species) : agent.species === "talon-owl" ? { sprite: talonOwlSheet, animation: Spawner.TALON_OWL_IDLE } : creatureIdleSheets.get(agent.species);
+      const entry = hurt ? creatureHurtSheets.get(agent.species) : attack ? (attack.action === "ranged" ? creatureRangedSheets : creatureAttackSheets).get(agent.species) : agent.species === "talon-owl" ? { sprite: talonOwlSheet, animation: Spawner.TALON_OWL_IDLE } : creatureIdleSheets.get(agent.species);
       if (!entry?.sprite.complete || !entry.sprite.naturalWidth) return false;
       let animation = pose?.animation || entry.animation;
       const frame = pose?.frame ?? Spawner.unitAnimationFrame(animation, (state.simSeconds - (agent.animationStartedAt || 0)) * 1000);
@@ -8454,7 +8462,7 @@
         // Replace only the defended event, and only after its new image is ready.
         if (command.kind === "impact" && replacedDefenseIds.has(command.eventId)) continue;
         let image = detailVfxImages.get(command.image);
-        if (!image) {
+        if (!image && command.image) {
           image = new Image(); image.src = assetSource(command.image);
           detailVfxImages.set(command.image, image);
         }

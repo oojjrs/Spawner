@@ -10412,6 +10412,106 @@
         228,
         228
       ]
+    },
+    "DesignAssets/Animations/CreatureRangedV1/flower-tail-bird/shoot.webp": {
+      "display": [
+        283,
+        283
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ],
+      "nativeSource": {
+        "sha256": "475e4c48a800b06a1d0871c5e357e521b85328161519fff3501c55cc021fe7e8",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/CreatureRangedV1/soil-mole/shoot.png": {
+      "display": [
+        273,
+        273
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ],
+      "nativeSource": {
+        "sha256": "12cf4ab341a294d2923acfca1825e35283e4d98ae99579e9087ea10bc79af2e6",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/CreatureWalkApprovedV3/soil-boar/walk.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        8
+      ],
+      "sourceMaximum": [
+        640,
+        640
+      ],
+      "nativeSource": {
+        "sha256": "706665d1ba06c5f37b0b24d443f62e34d26a98289e944d5cbc2402757ead2d49",
+        "dimensions": [
+          5120,
+          5120
+        ],
+        "frame": [
+          640,
+          640
+        ]
+      }
+    },
+    "DesignAssets/Animations/CreatureWalkApprovedV3/soil-boar/thumb.png": {
+      "display": [
+        64,
+        64
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        640,
+        640
+      ],
+      "nativeSource": {
+        "sha256": "fcab2f2fb01963c08bfa66d5061cc19705bebc66a483df0fa8a0a581dee98ade",
+        "dimensions": [
+          640,
+          640
+        ],
+        "frame": [
+          640,
+          640
+        ]
+      }
     }
   }
 }
