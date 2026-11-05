@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { ATTRIBUTE_DNA } from "./dna.mjs";
-import { validateDna } from "./dna-unit.mjs";
+import { validateDna, cloneDna } from "./dna-unit.mjs";
 import { createCombat } from "./combat.mjs";
 import { dnaAttackMode } from "./dna-actions.mjs";
 
@@ -16,19 +16,21 @@ function fixture(ids) {
   return { source,target,ally,env,combat:createCombat(env) };
 }
 
-test("level one mixes three unlocks with two basic stats",()=>{
-  assert.deepEqual(ATTRIBUTE_DNA.catalog.filter(g=>g.grade===1).map(g=>g.id),["gather","health","blade","movement","secretion"]);
-  assert.ok(ATTRIBUTE_DNA.catalog.filter(g=>g.category!=="organ"&&!["health","movement"].includes(g.id)).every(g=>g.grade>=2));
+test("level one opens gathering with four repeatable worker stats",()=>{
+  assert.deepEqual(ATTRIBUTE_DNA.catalog.filter(g=>g.grade===1).map(g=>g.id),["capacity","gather","harvestSpeed","health","movement"]);
+  assert.ok(ATTRIBUTE_DNA.catalog.filter(g=>g.category!=="organ"&&!["capacity","harvestSpeed","health","movement"].includes(g.id)).every(g=>g.grade>=2));
   assert.equal(stats(["armor"]).armor,3); assert.equal(stats(["evasion"]).evasion,9);
   assert.equal(stats(["carapace"]).armor,2); assert.equal(stats(["legs"]).evasion,9);
   const once=stats(["gather","antenna","blade","healer","secretion"]), twice=stats(["gather","antenna","blade","healer","secretion","gather","antenna","blade","healer","secretion"]);
   assert.equal(twice.capacity,2*once.capacity); assert.equal(twice.harvest,2*once.harvest); assert.equal(twice.meleePower,2*once.meleePower); assert.equal(twice.rangedPower,2*once.rangedPower); assert.equal(twice.healerCount,2*once.healerCount); assert.equal(twice.meleeSpeed,once.meleeSpeed); assert.equal(twice.rangedSpeed,once.rangedSpeed);
 });
 
-test("legacy health and antenna snapshots survive without accepting malformed DNA",()=>{
-  for(const entry of [{gene:"health",grade:1,shape:[0,1],rotation:0},{gene:"antenna",grade:2,shape:[0,1,2],rotation:0},{gene:"health",grade:2,shape:[0,1,2],rotation:0},{gene:"antenna",grade:1,shape:[0,1],rotation:0},{gene:"movement",grade:2,shape:[0,1,3],rotation:0},{gene:"healer",grade:1,shape:[0,5],rotation:0}]) {
-    const dna={version:3,pieces:[entry],budget:1000,level:2}; assert.ok(validateDna(dna,2,1000));
+test("legacy snapshots survive schema restore while new designs require the current catalog",()=>{
+  for(const entry of [{gene:"health",grade:1,shape:[0,1],rotation:0},{gene:"health",grade:2,shape:[0,1,2],rotation:0},{gene:"antenna",grade:1,shape:[0,1],rotation:0},{gene:"movement",grade:2,shape:[0,1,3],rotation:0},{gene:"healer",grade:1,shape:[0,5],rotation:0}]) {
+    const dna={version:3,pieces:[entry],budget:1000,level:2};
+    assert.deepEqual(ATTRIBUTE_DNA.validate(dna),dna);assert.deepEqual(cloneDna(dna),dna);assert.equal(validateDna(dna,2,1000),null);
   }
+  assert.ok(validateDna({version:3,pieces:[piece("antenna")],budget:1000,level:2},2,1000));
   assert.equal(validateDna({version:3,pieces:[null],budget:100,level:1},1,100),null);
 });
 

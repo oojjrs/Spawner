@@ -40,7 +40,7 @@ test("DNA 판은 처음 반경을 유지하며 한 레벨마다 한 겹 늘어�
 test("DNA 명령은 포인트·등급·형태 위조를 거부하고 현재 판 안의 설계만 저장한다",()=>{
   const dna=design(["gather"],1);assert.ok(validateDna(dna,1,100));
   assert.equal(validateDna(dna,1,0),null);
-  const forged=cloneDna(dna);forged.pieces[0].shape=[0,1];assert.equal(validateDna(forged,1,100),null);
+  const forged=cloneDna(dna);forged.pieces[0].shape=[0,0];assert.equal(validateDna(forged,1,100),null);
   assert.equal(validateDna(design(["power"],2),1,100),null);
   const {game}=fixture(1),before=game.snapshot().templates.length;
   assert.throws(()=>game.command({type:"design",templateId:null,name:"위조",dna:forged,birth:false}),/설계 속성/);
@@ -115,7 +115,7 @@ test("DNA 저장·탄생·수정·복제·복원은 원본 개체의 서열과 �
   const {agentId}=game.command({type:"birth",templateId}),agent=game.agents.find(item=>item.id===agentId);
   assert.equal(game.snapshot().evolutionPoints,points-cost);
   assert.deepEqual(agent.stats.dna,ATTRIBUTE_DNA.stats(dna.pieces));
-  const original=cloneDna(agent.dna);game.command({type:"design",templateId,name:"전사 DNA",dna:design(["blade"],1),birth:false});
+  const original=cloneDna(agent.dna);game.command({type:"design",templateId,name:"전사 DNA",dna:design(["blade"],2),birth:false});
   assert.deepEqual(agent.dna,original);
   const copy=game.command({type:"birth",agentId});assert.deepEqual(game.agents.find(item=>item.id===copy.agentId).dna,original);
   game.restore(game.save());const restored=game.agents.find(item=>item.id===agentId);assert.deepEqual(restored.dna,original);
@@ -149,7 +149,7 @@ test("칼날 없는 DNA는 실제 전투에서 공격하지 않는다",()=>{
 });
 
 test("DNA 연타는 같은 공격 주기 안에 후속 타격하고 범위 공격은 주 대상 사망 때도 발생한다",()=>{
-  const base=dnaUnitStats(design(["blade"],1));
+  const base=dnaUnitStats(design(["blade"],2));
   const source={...base,dna:{...base.dna,hits:3,area:1,areaPower:50}},target=dnaUnitStats(design([],1));
   const f=combatFixture(source,target);f.tick(0);const first=f.a.attack.hitAt;f.tick(first);const health=f.b.health;
   f.tick(first+source.dna.comboSpeed);assert.ok(f.b.health<health);
@@ -158,15 +158,15 @@ test("DNA 연타는 같은 공격 주기 안에 후속 타격하고 범위 공�
 });
 test("DNA 원이 중앙에 겹친 뒤 빈 선으로 계속 배치하고 겹치는 선은 거부한다",()=>{
   const piece=(gene,rotation)=>{const entry=ATTRIBUTE_DNA.lookup.get(gene);return {gene,rotation,grade:entry.grade,shape:[...entry.steps]};};
-  const loop=[piece("blade",0),piece("blade",2),piece("blade",4)];
+  const loop=[piece("harvestSpeed",0),piece("harvestSpeed",2),piece("harvestSpeed",4)];
   assert.equal(ATTRIBUTE_DNA.trace(loop,1).closed,true);
-  const pieces=loop.concat(piece("gather",5)),dna={version:3,pieces,level:1,budget:10000};
+  const pieces=loop.concat(piece("capacity",5)),dna={version:3,pieces,level:1,budget:10000};
   assert.equal(ATTRIBUTE_DNA.trace(pieces,1).valid,true);
   assert.equal(ATTRIBUTE_DNA.trace(pieces,1).closed,false);
   assert.ok(validateDna(dna,1,10000));
-  assert.equal(ATTRIBUTE_DNA.trace(loop.concat(piece("blade",0)),1).reason,"collision");
-  assert.equal(ATTRIBUTE_DNA.trace(loop.concat(piece("gather",1)),1).reason,"collision");
-  assert.equal(ATTRIBUTE_DNA.trace(loop.concat(piece("blade",5)),1).reason,"collision");
+  assert.equal(ATTRIBUTE_DNA.trace(loop.concat(piece("harvestSpeed",0)),1).reason,"collision");
+  assert.equal(ATTRIBUTE_DNA.trace(loop.concat(piece("capacity",1)),1).reason,"collision");
+  assert.equal(ATTRIBUTE_DNA.trace(loop.concat(piece("harvestSpeed",5)),1).reason,"collision");
   const overlap=[{gene:"gather",grade:1,rotation:0,shape:[0,3]}];
   assert.equal(ATTRIBUTE_DNA.trace(overlap,1).reason,"collision");
   const {game}=fixture(1);
