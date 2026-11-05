@@ -156,6 +156,12 @@ for (const animation of [...Object.values(CREATURE_IDLE_ANIMATIONS), ...Object.v
   Object.freeze(animation);
 }
 
+// Approved single-attack rhythm from spring-combat-rhythm-20261105. Keep
+// attachment rigs on their existing timing; only the unadorned melee body uses it.
+const SPRING_BASIC_ATTACK_ANIMATION = Object.freeze({ ...UNIT_ANIMATIONS.spring.attack,
+  durationsMs: Object.freeze([60,70,60,80,30,60,16,16,16,16,32,40,52,76,100,276])
+});
+
 export const UNIT_ANIMATION_ASSETS = Object.freeze([...new Set([
   ...Object.values(UNIT_ANIMATIONS).flatMap(animations => Object.values(animations).map(animation => animation.image)),
   ...[...Object.values(CREATURE_IDLE_ANIMATIONS), ...Object.values(CREATURE_ATTACK_ANIMATIONS), ...Object.values(CREATURE_HURT_ANIMATIONS), ...Object.values(CREATURE_DEATH_ANIMATIONS)].map(animation => animation.image),
@@ -210,8 +216,10 @@ export function unitAnimationPose(agent, time) {
     elapsed = (Math.max(0, (agent.stepCount || 1) - 1) + (time - agent.moveStartedAt) / agent.moveDuration) * (animations[action]?.cyclesPerCell || 1) * (animations[action]?.durationMs || 0);
   }
   const attributes = unitDisplayAttributes(agent);
-  const animation = animations[action] || ((agent.tribe || "bean") !== "bean" && ["harvest", "throw"].includes(action) &&
+  let animation = animations[action] || ((agent.tribe || "bean") !== "bean" && ["harvest", "throw"].includes(action) &&
       ["antenna", "strength", "arms", "feet"].some(key => attributes[key] > 0) ? animations.idle : null);
+  if (action === "attack" && agent.tribe === "spring" && !Object.values(attributes).some(value => value > 0) &&
+      !agent.attack?.dnaRanged && agent.attack?.mode !== "ranged" && agent.attack?.attackMode !== "ranged") animation = SPRING_BASIC_ATTACK_ANIMATION;
   return animation ? { action, animation, frame: unitAnimationFrame(animation, elapsed) } : null;
 }
 

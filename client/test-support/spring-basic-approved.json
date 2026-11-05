@@ -1,0 +1,58 @@
+{
+  "tribe": "spring",
+  "mask": "00",
+  "source": "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp",
+  "sourceSha256": "f6bf977bbfd72490410192c6c70e6ec17accb294f3f69e5b0626936760547e58",
+  "camera": {
+    "physicalCell": [
+      516,
+      516
+    ],
+    "fixedAcrossAllFrames": true,
+    "rootMotion": false,
+    "frameCrop": "original atlas cell only; alpha margins preserved"
+  },
+  "singleAttack": {
+    "frameIndices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "durationsMs": [
+      60,
+      70,
+      60,
+      80,
+      30,
+      60,
+      16,
+      16,
+      16,
+      16,
+      32,
+      40,
+      52,
+      76,
+      100,
+      276
+    ],
+    "durationMs": 1000,
+    "hitAtMs": 300,
+    "originalHitAtMs": 300,
+    "hitHoldMs": 60
+  },
+  "status": "approved-single-attack-rhythm"
+}
