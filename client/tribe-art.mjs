@@ -1,4 +1,5 @@
 import { unitDisplayAttributes, unitDisplayAttributesFrom } from "./unit-display-appearance.mjs";
+import { springThrustAppearance } from "./spring-attachment-thrust.mjs";
 import { imageFrameSize, imageScale } from "./image-geometry.mjs";
 import { createTribeAttributeAnimation, hasTribeAttributes } from "./attribute-animation.mjs";
 
@@ -255,6 +256,12 @@ export function createTribeArt(definitions, assetSource) {
     return attributes.frame(agent.tribe, unitDisplayAttributes(agent), source, animation, index, action, time, pose);
   }
 
+  function combatAttackSprite(tribe, appearance, source, elapsed) {
+    const unit = units.get(tribe);
+    return springThrustAppearance(tribe, appearance) && unit?.box ?
+      attributes.attackPortrait(tribe, appearance, source, elapsed, unit.box) : null;
+  }
+
   function animationPose(agent, pose, time) {
     return attributes.pose(agent, pose, time);
   }
@@ -264,5 +271,5 @@ export function createTribeArt(definitions, assetSource) {
     return attributes.bodySize(tribe, appearance, portrait ? units.get(tribe)?.box : null);
   }
 
-  return { preparePreview, prepareUnit, sprite, bounds, prepareBounds, drawPreview, animationFrame, animationPose, bodySize, animationCacheStats: attributes.cacheStats };
+  return { preparePreview, prepareUnit, sprite, bounds, prepareBounds, drawPreview, animationFrame, animationPose, combatAttackSprite, bodySize, animationCacheStats: attributes.cacheStats };
 }

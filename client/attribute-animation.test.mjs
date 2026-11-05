@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createTribeAttributeAnimation } from "./attribute-animation.mjs";
-import { UNIT_ANIMATIONS } from "./unit-animation.mjs";
+import { UNIT_ANIMATIONS, unitAnimationPose } from "./unit-animation.mjs";
 
 function surface(width, height) {
   return { getContext() { return {
@@ -67,5 +67,80 @@ test("채집·투척·대기를 오갈 때 몸체 시간을 유지하고 전투 
     assert.equal(combat.action, "attack");
     assert.equal(combat.frame, 5);
     assert.equal(combat.animation, animations.attack);
+    assert.equal(combat.sourceAction, "attack");
+    assert.equal(combat.sourceFrame, 5);
+  }
+});
+
+test("부착물이 많은 유닛도 공격·피격이 시작되면 이전 보간 대신 현재 전투 프레임을 그린다", async () => {
+  for (const tribe of ["spore", "pebble", "spring"]) {
+    const art = await animator(tribe), animations = UNIT_ANIMATIONS[tribe];
+    for (const action of ["attack", "hurt"]) {
+      const agent = { id: tribe + action, tribe, attributes: { antenna: 1, strength: 1, feet: 1 } };
+      art.pose(agent, { action: "idle", animation: animations.idle, frame: 30 }, 10);
+      const walking = art.pose(agent, { action: "walk", animation: animations.walk, frame: 0 }, 10.01);
+      assert.equal(walking.sourceAction, "idle", tribe + " keeps its walking transition");
+      for (const [time, frame] of [[10.02, 0], [10.03, 5], [10.04, 10]]) {
+        const current = { action, animation: animations[action], frame };
+        const pose = art.pose(agent, current, time);
+        assert.equal(pose.sourceAction, action, tribe + " " + action);
+        assert.equal(pose.sourceFrame, frame, tribe + " " + action);
+        assert.equal(pose.sourceAnimation.image, animations[action].image);
+        assert.equal(pose.motionPhase, frame / animations[action].frameCount);
+        assert.deepEqual(current, { action, animation: animations[action], frame });
+      }
+    }
+  }
+});
+
+test("기본 유닛의 공격·피격 자세는 부착물 보간을 거치지 않는다", async () => {
+  for (const tribe of ["spore", "pebble", "spring"]) {
+    const art = await animator(tribe), animations = UNIT_ANIMATIONS[tribe];
+    const agent = { id: "basic-" + tribe, tribe, attributes: {} };
+    for (const action of ["attack", "hurt"]) {
+      const current = { action, animation: animations[action], frame: 5 };
+      assert.equal(art.pose(agent, current, 10), current);
+    }
+  }
+});
+
+test("부착물 유닛은 취소된 공격·피격 프레임을 대기·이동 중에 다시 재생하지 않는다", async () => {
+  for (const tribe of ["spore", "pebble", "spring"]) {
+    const art = await animator(tribe), animations = UNIT_ANIMATIONS[tribe];
+    for (const action of ["attack", "hurt"]) for (const next of ["idle", "walk"]) {
+      for (let frame = 0; frame < animations[action].frameCount; frame++) {
+        const agent = { id: [tribe, action, next, frame].join("-"), tribe,
+          attributes: { antenna: 1, strength: 1, feet: 1 } };
+        art.pose(agent, { action, animation: animations[action], frame }, 10);
+        for (const time of [10.01, 10.04, 10.09, 10.21]) {
+          const current = { action: next, animation: animations[next], frame: 0 };
+          const pose = art.pose(agent, current, time);
+          assert.equal(pose.sourceAction, next, [tribe, action, frame, next, time].join(" "));
+          assert.equal(pose.sourceAnimation.image, animations[next].image);
+          if (next === "walk") assert.equal(pose.sourceFrame, current.frame);
+        }
+        const retriggered = art.pose(agent, { action, animation: animations[action], frame: 2 }, 10.22);
+        assert.equal(retriggered.sourceAction, action);
+        assert.equal(retriggered.sourceFrame, 2);
+      }
+    }
+  }
+});
+
+test("실제 시뮬레이션 공격 취소와 짧은 RPG 피격 종료는 부착물에 남지 않는다", async () => {
+  for (const tribe of ["spore", "pebble", "spring"]) {
+    const art = await animator(tribe), animations = UNIT_ANIMATIONS[tribe];
+    const agent = { id: "cancel-" + tribe, tribe, health: 10, mode: "idle", bornAt: 0,
+      attributes: { antenna: 1, strength: 1, feet: 1 }, combat: { version: 2 },
+      attack: { combatId: "fight", startedAt: 10, hitAt: 10.15, endsAt: 10.5 } };
+    const attacking = unitAnimationPose(agent, 10.15);
+    assert.equal(art.pose(agent, attacking, 10.15).sourceAction, "attack");
+    agent.attack = null;
+    assert.equal(art.pose(agent, unitAnimationPose(agent, 10.16), 10.16).sourceAction, "idle");
+    agent.hurtStartedAt = 10.2;
+    assert.equal(art.pose(agent, unitAnimationPose(agent, 10.22), 10.22).sourceAction, "hurt");
+    const finished = art.pose(agent, unitAnimationPose(agent, 10.33), 10.33);
+    assert.equal(finished.sourceAction, "idle");
+    assert.equal(finished.sourceAnimation.image, animations.idle.image);
   }
 });

@@ -1,0 +1,31 @@
+{
+  "tribe": "pebble",
+  "mask": 16,
+  "productionHookEnabled": true,
+  "worldReady": false,
+  "method": "Authored body frames plus source-owned organ profile; same camera and action clock.",
+  "source": "DesignAssets/Animations/UnitAppearanceV1/pebble/10/Source/neutral.png",
+  "sourceHash": "cb9a17630710b5b4675b04eb4fadf1d82abea51562abd17f7e74839538031bc8",
+  "actions": {
+    "birth": {
+      "image": "DesignAssets/Animations/UnitRangedV1/pebble/birth.png",
+      "bodyImage": "DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth-unit.webp",
+      "bodyHash": "d8b762b189ea9767c2026dbfb692750a21b761bdd2514a5626e77f156cb76129",
+      "imageHash": "664e75e6d6a946dbbc09b4cd9516cbcdc45e42df6d9c565a8a255ab1c4864d59",
+      "frameCount": 48,
+      "sourceMask": "M262 289 C271 282 279 279 291 282 C308 283 325 296 332 308 C341 311 349 321 351 333 C360 335 366 344 365 353 L368 361 L359 366 C354 357 343 353 332 345 C322 339 315 332 310 326 C300 324 292 316 287 311 C275 308 268 300 262 289 Z",
+      "profile": "tools/secretion-lifecycle-batch-20261105/remaining/profiles.mjs",
+      "review": "tools/secretion-lifecycle-batch-20261105/remaining/pebble-birth-review.png"
+    },
+    "death": {
+      "image": "DesignAssets/Animations/UnitRangedV1/pebble/death.png",
+      "bodyImage": "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png",
+      "bodyHash": "ec1dffe7baec15492c0f2e188a930a84bd1eabfb2744079cbc87d14fcf01afb4",
+      "imageHash": "4cdf00f309490960ab54a91e44d14f05bf49bde6d282ca7ea1d12b7722836e9c",
+      "frameCount": 8,
+      "sourceMask": "M262 289 C271 282 279 279 291 282 C308 283 325 296 332 308 C341 311 349 321 351 333 C360 335 366 344 365 353 L368 361 L359 366 C354 357 343 353 332 345 C322 339 315 332 310 326 C300 324 292 316 287 311 C275 308 268 300 262 289 Z",
+      "profile": "tools/secretion-lifecycle-batch-20261105/remaining/profiles.mjs",
+      "review": "tools/secretion-lifecycle-batch-20261105/remaining/pebble-death-review.png"
+    }
+  }
+}

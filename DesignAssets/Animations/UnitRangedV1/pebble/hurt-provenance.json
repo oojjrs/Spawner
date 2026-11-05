@@ -1,0 +1,33 @@
+{
+  "kind": "procedural-own-source-motion",
+  "source": "DesignAssets/Animations/UnitRangedV1/pebble/Source/neutral.png",
+  "sourceSha256": "d688e4e363ac109847d9832551f0e0abb6f5ff810e5cd6c0bc16ddbe7b5960d8",
+  "outputSha256": "f9747410bc97637469afbed2b1576326384eb347d65711f649509c7a0371f596",
+  "method": "Shared bounded continuous body/eye deformation of this source. Species response parameters from base hurt tracks; pebble uses restrained common recoil instead of unstable PCA angle.",
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ],
+  "durationsMs": [
+    20,
+    30,
+    30,
+    30,
+    400,
+    30,
+    30,
+    30,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+  ],
+  "action": "hurt",
+  "completeActionSet": false,
+  "reviewEvidence": "tools/secretion-hurt-batch-20261105/report.json"
+}

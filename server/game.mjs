@@ -1577,6 +1577,7 @@ export function createGame(environment, colony, savedGame) {
       ensureFoodAround(agent.x, agent.y, 4);
       const drops = [{ id: "corpse:" + agent.id, agentId: agent.id, colonyId: colony.id, name: agent.name,
         level: agent.level, tribe: agent.tribe, bornAt: agent.bornAt, diedAt: state.simSeconds, decaysAt: state.simSeconds + CORPSE_LIFETIME,
+        facing: agent.combat ? agent.combat.side === 0 ? -1 : 1 : agent.facing || 1,
         hurtStartedAt: agent.hurtStartedAt, hurtCount: agent.hurtCount,
         cost: agent.cost, kind: "corpse",
         stats: { pieceCount: agent.dna?.pieces.length ?? agent.stats?.pieceCount ?? 0 },

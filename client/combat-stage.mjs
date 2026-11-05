@@ -1,9 +1,11 @@
+import { createCombatStageAppearance } from "./combat-stage-appearance.mjs";
+import { attackAnimationElapsed } from "../server/attack.mjs";
 import { COMBAT_LAB_UNITS } from "./combat-lab.mjs";
 import { createUnitAppearanceWorld } from "./unit-appearance-world.mjs";
 import { AGENT_DEATH_ANIMATION } from "./agent-death.mjs";
 import { imageAnimation, imageFrameGeometry } from "./image-geometry.mjs";
 import { unitDisplaySize } from "./unit-size.mjs";
-import { unitRangedAppearance, unitRangedPose, unitRangedDisplaySize, unitRangedProjectile } from "./unit-ranged.mjs";
+import { unitRangedAppearance, unitRangedPose, unitRangedDisplaySize, unitRangedProjectile, unitRangedLifecycleAnimation } from "./unit-ranged.mjs";
 import { UNIT_IMAGE_BOUNDS } from "./unit-image-bounds.mjs";
 import { UNIT_ANIMATIONS, CREATURE_IDLE_ANIMATIONS, CREATURE_ATTACK_ANIMATIONS, CREATURE_HURT_ANIMATIONS, CREATURE_DEATH_ANIMATIONS, unitAnimationPose, unitAnimationFrame, creatureHurtPose, creatureAttackPose } from "./unit-animation.mjs";
 import { TALON_OWL_IDLE, talonOwlIdleFrame } from "./talon-owl-idle.mjs";
@@ -14,8 +16,22 @@ const reactionLabels = { dodge: "회피", parry: "패링", block: "블록", stun
 const beetleCorpse = imageAnimation({ image: "DesignAssets/Animations/BeetleDeath/dead-v2.png", frameSize: 185, columns: 1, pivotX: 95.5, pivotY: 163 });
 
 function stageAgent(agent) {
-  if (agent.species || agent.tribe || !agent.key) return agent;
-  return UNIT_ANIMATIONS[agent.key] ? { ...agent, tribe: agent.key } : { ...agent, species: agent.key };
+  if (!agent.species && !agent.tribe && agent.key) agent = UNIT_ANIMATIONS[agent.key] ? { ...agent, tribe: agent.key } : { ...agent, species: agent.key };
+  // Laboratory builds have capability flags rather than DNA appearance traits.
+  // Keep this inference on a render-local copy, never on the simulation agent.
+  if (!agent.species && agent.combat?.id === "simulation" && !agent.dna && !agent.appearanceAttributes &&
+      !Object.keys(agent.attributes || {}).length && (agent.stats?.melee || agent.stats?.ranged))
+    return { ...agent, appearanceAttributes: { ...(agent.stats.melee ? { blade: 1 } : {}), ...(agent.stats.ranged ? { secretion: 1 } : {}) } };
+  return agent;
+}
+
+function bodyDimensions(agent) {
+  agent = stageAgent(agent);
+  const key = agent.species || agent.tribe || agent.key;
+  const idle = UNIT_ANIMATIONS[key]?.idle || CREATURE_IDLE_ANIMATIONS[key] ||
+    (key === "talon-owl" ? TALON_OWL_IDLE : BEETLE_SPRITE);
+  const reference = UNIT_IMAGE_BOUNDS[idle.image], scale = unitDisplaySize(agent) / Math.max(reference.width, reference.height);
+  return { width: reference.width * scale, height: reference.height * scale };
 }
 
 function displaySize(agent, pose) {
@@ -24,7 +40,7 @@ function displaySize(agent, pose) {
   const idle = UNIT_ANIMATIONS[key]?.idle || CREATURE_IDLE_ANIMATIONS[key] ||
     (key === "talon-owl" ? TALON_OWL_IDLE : BEETLE_SPRITE);
   if (UNIT_ANIMATIONS[key] && pose) {
-    const reference = UNIT_IMAGE_BOUNDS[idle.image], action = UNIT_IMAGE_BOUNDS[pose.animation.image];
+    const reference = UNIT_IMAGE_BOUNDS[idle.image], action = UNIT_IMAGE_BOUNDS[pose.animation.bodyReferenceImage || pose.animation.image];
     const idleRatio = idle.frameSize / reference.frameSize, actionRatio = pose.animation.frameSize / action.frameSize;
     const fit = Math.min(reference.bodyWidth / (action.width * actionRatio), reference.bodyHeight / (action.height * actionRatio));
     const idleFit = Math.min(reference.bodyWidth / (reference.width * idleRatio), reference.bodyHeight / (reference.height * idleRatio));
@@ -45,17 +61,16 @@ function clamp(value) {
 function poseFor(agent, time, deathAge) {
   const ranged = unitRangedPose(agent, time);
   if (ranged) return ranged;
-  const death = agent.tribe === "bean" ? AGENT_DEATH_ANIMATION : UNIT_ANIMATIONS[agent.tribe]?.death || CREATURE_DEATH_ANIMATIONS[agent.species];
+  const death = unitRangedLifecycleAnimation(agent, "death") || (agent.tribe === "bean" ? AGENT_DEATH_ANIMATION : UNIT_ANIMATIONS[agent.tribe]?.death || CREATURE_DEATH_ANIMATIONS[agent.species]);
   if (agent.health <= 0 && death) return { action: "death", animation: death, frame: unitAnimationFrame(death, deathAge * 1000) };
   if (agent.species === "spiny-back-beetle") {
     if (agent.health <= 0) return deathAge * 1000 < BEETLE_ANIMATIONS.death.durationMs ?
       { action: "death", animation: BEETLE_SPRITE, frame: beetleAnimationFrame("death", deathAge * 1000) } :
       { action: "dead", animation: beetleCorpse, frame: 0 };
     const beetle = beetleAnimationPose(agent, time);
-    if (beetle.action === "hurt") return { ...beetle, animation: BEETLE_SPRITE };
-    const attack = agent.attack;
-    return { action: attack ? "attack" : "idle", animation: attack ? BEETLE_ATTACK_SPRITE : BEETLE_SPRITE,
-      frame: beetleAnimationFrame(attack ? "attack" : "idle", Math.max(0, time - (attack?.startedAt || 0)) * 1000) };
+    // Keep the shared pose's hitAt/endsAt mapping. Sampling raw wall time here
+    // made fast attacks land during windup and slow attacks finish before contact.
+    return { ...beetle, animation: beetle.action === "attack" ? BEETLE_ATTACK_SPRITE : BEETLE_SPRITE };
   }
   const pose = creatureHurtPose(agent, time) || creatureAttackPose(agent, time) || unitAnimationPose(agent, time);
   if (pose) return pose;
@@ -66,8 +81,9 @@ function poseFor(agent, time, deathAge) {
 }
 
 export function createCombatStage(canvas) {
-  const context = canvas.getContext("2d"), images = new Map();
+  const context = canvas.getContext("2d"), images = new Map(), imageRetryAt = new Map();
   const appearanceWorld = createUnitAppearanceWorld();
+  const representativeArt = createCombatStageAppearance(image);
   let appearancePoses = new Map();
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const deathStarted = new Map(), readyPoses = new Map();
@@ -75,10 +91,11 @@ export function createCombatStage(canvas) {
 
   function image(source) {
     if (!source) return null;
-    if (!images.has(source)) {
+    const previous = images.get(source);
+    if (!previous || previous.complete && !previous.naturalWidth && Date.now() >= (imageRetryAt.get(source) || 0)) {
       const asset = globalThis.SpawnerAssets?.image?.() || new Image();
       asset.src = globalThis.SpawnerAssets?.source(source) || source;
-      images.set(source, asset);
+      images.set(source, asset); imageRetryAt.set(source, Date.now() + 2000);
     }
     const asset = images.get(source);
     return asset.complete && asset.naturalWidth ? asset : null;
@@ -96,11 +113,20 @@ export function createCombatStage(canvas) {
   function position(agent, index, width, height, time) {
     const direction = index === 0 ? 1 : -1;
     const attack = agent.attack;
+    // Registered support-locked attacks already move the body around a planted
+    // foot. A second arena lunge would drag that contact across the ground.
+    const fixedSupport = CREATURE_ATTACK_ANIMATIONS[stageAgent(agent).species]?.fixedSupport;
     let lunge = 0;
-    if (attack && attack.mode !== "ranged" && !reducedMotion.matches) {
-      const windup = clamp((time - attack.startedAt) / Math.max(.001, attack.hitAt - attack.startedAt));
-      const recovery = clamp((time - attack.hitAt) / Math.max(.001, attack.endsAt - attack.hitAt));
-      lunge = time < attack.hitAt ? -8 * Math.sin(windup * Math.PI) + 45 * windup ** 4 : 45 * (1 - recovery) ** 2;
+    if (attack && attack.mode !== "ranged" && !fixedSupport && !reducedMotion.matches) {
+      if (attack.meleeContacts?.length > 1) {
+        const elapsed = attackAnimationElapsed(attack, time, .3, 1);
+        const windup = clamp(elapsed / .3), recovery = clamp((elapsed - .3) / .7);
+        lunge = elapsed < .3 ? -8 * Math.sin(windup * Math.PI) + 45 * windup ** 4 : 45 * (1 - recovery) ** 2;
+      } else {
+        const windup = clamp((time - attack.startedAt) / Math.max(.001, attack.hitAt - attack.startedAt));
+        const recovery = clamp((time - attack.hitAt) / Math.max(.001, attack.endsAt - attack.hitAt));
+        lunge = time < attack.hitAt ? -8 * Math.sin(windup * Math.PI) + 45 * windup ** 4 : 45 * (1 - recovery) ** 2;
+      }
     }
     const recent = effects.filter(effect => effect.event.targetId === agent.id && clock - effect.born < .22);
     const impact = recent.find(effect => effect.event.damage > 0);
@@ -119,15 +145,7 @@ export function createCombatStage(canvas) {
   }
 
   function formationScale(width, height) {
-    const bounds = currentTrial.agents.map(agent => {
-      agent = stageAgent(agent);
-      const key = agent.species || agent.tribe || agent.key;
-      const idle = UNIT_ANIMATIONS[key]?.idle || CREATURE_IDLE_ANIMATIONS[key] ||
-        (key === "talon-owl" ? TALON_OWL_IDLE : BEETLE_SPRITE);
-      const reference = UNIT_IMAGE_BOUNDS[idle.image], length = Math.max(reference.width, reference.height);
-      const scale = unitDisplaySize(agent) / length;
-      return { width: reference.width * scale, height: reference.height * scale };
-    });
+    const bounds = currentTrial.agents.map(bodyDimensions);
     const maxWidth = Math.max(.4, ...bounds.map(bound => bound.width));
     const maxHeight = Math.max(.4, ...bounds.map(bound => bound.height));
     return Math.min(width * .31, width * .22 / maxWidth, height * .43 / maxHeight) / 100;
@@ -135,7 +153,8 @@ export function createCombatStage(canvas) {
 
   function readyPose(agent, requested, time) {
     const ranged = unitRangedAppearance(agent);
-    if (ranged) { image(ranged.idle.image); image(ranged.animation.image); image(unitRangedProjectile(agent).image); }
+    if (ranged) { image(ranged.idle.image); image(ranged.animation.image); if (ranged.hurt) image(ranged.hurt.image); image(unitRangedProjectile(agent).image); }
+    if (ranged?.lifecycle) for (const clip of Object.values(ranged.lifecycle)) image(clip.image);
     const animations = UNIT_ANIMATIONS[agent.tribe];
     for (const animation of [animations?.idle, animations?.attack, animations?.hurt, animations?.death,
       agent.tribe === "bean" ? AGENT_DEATH_ANIMATION : null, agent.species === "spiny-back-beetle" ? beetleCorpse : null,
@@ -143,6 +162,14 @@ export function createCombatStage(canvas) {
     let pose = requested;
     let source = pose?.animation.image || COMBAT_LAB_UNITS.find(unit => unit.key === agent.key)?.image || BEETLE_NEUTRAL_ASSET;
     let asset = image(source);
+    if (!asset && requested?.animation.secretionLifecycle) {
+      // A missing lifecycle sheet falls back to the same authored death frame,
+      // never a cached living idle, hurt, or shot. Retry remains image-owned.
+      pose = { ...requested, animation: agent.tribe === "bean" ? AGENT_DEATH_ANIMATION : UNIT_ANIMATIONS[agent.tribe].death };
+      source = pose.animation.image; asset = image(source);
+      if (asset) readyPoses.set(agent.id, { pose, source });
+      return { pose, source, asset };
+    }
     if (!asset && ranged) {
       const previous = readyPoses.get(agent.id);
       if (previous?.pose?.animation.rangedBody) { pose = previous.pose; source = previous.source; asset = image(source); }
@@ -187,7 +214,9 @@ export function createCombatStage(canvas) {
     const appearancePose = appearancePoses.get(String(agent.id));
     const appearanceDrawn = appearancePose && appearanceWorld.draw(context, agent, appearancePose, { x: 0, y: 0 },
       100 * formationScale(width, height), index === 1, window.devicePixelRatio || 1);
-    if (!appearanceDrawn && asset) {
+    const representativeDrawn = !appearanceDrawn && representativeArt.draw(context, agent, time, deathAge,
+      { pose, asset, geometry, size, sizeFor: current => displaySize(agent, current) * formationScale(width, height) }, 100 * formationScale(width, height), index === 1);
+    if (!appearanceDrawn && !representativeDrawn && asset) {
       const mirror = pose?.mirrorX !== undefined ? pose.mirrorX : agent.species === "spiny-back-beetle" ? pose?.action === "attack" ? index === 1 : index === 0 :
         agent.species && CREATURE_ATTACK_ANIMATIONS[agent.species] ? index === 0 : index === 1;
       context.scale(mirror ? -1 : 1, 1);
@@ -220,7 +249,8 @@ export function createCombatStage(canvas) {
       context.fillStyle = colors[index]; context.fillRect(point.x - 22, point.y + 21, 44 * agent.health / agent.stats.health, 4);
       context.restore();
     }
-    return point;
+    const dimensions = bodyDimensions(agent), cell = 100 * formationScale(width, height);
+    return { ...point, width: dimensions.width * cell, height: dimensions.height * cell };
   }
 
   function effectArt(effect, points, width, height) {
@@ -289,7 +319,9 @@ export function createCombatStage(canvas) {
     const appearancePose = appearancePoses.get(String(agent.id));
     const appearanceDrawn = appearancePose && appearanceWorld.draw(context, agent, appearancePose, { x: 0, y: 0 },
       100 * formationScale(width, height), agent.combat.side === 1, window.devicePixelRatio || 1);
-    if (!appearanceDrawn && asset) {
+    const representativeDrawn = !appearanceDrawn && representativeArt.draw(context, agent, time, 0,
+      { pose, asset, geometry, size, sizeFor: current => displaySize(agent, current) * formationScale(width, height) }, 100 * formationScale(width, height), agent.combat.side === 1);
+    if (!appearanceDrawn && !representativeDrawn && asset) {
       const mirror = pose?.mirrorX !== undefined ? pose.mirrorX : agent.species === "spiny-back-beetle" ? pose?.action === "attack" ? agent.combat.side === 1 : agent.combat.side === 0 :
         agent.species && CREATURE_ATTACK_ANIMATIONS[agent.species] ? agent.combat.side === 0 : agent.combat.side === 1;
       context.save(); context.scale(mirror ? -1 : 1, 1);
@@ -308,6 +340,8 @@ export function createCombatStage(canvas) {
     context.fillStyle = "#203125"; context.fillRect(-30, 7, 60, 5);
     context.fillStyle = "#b8ef98"; context.fillRect(-30, 7, 60 * agent.health / agent.stats.health, 5);
     context.restore();
+    const dimensions = bodyDimensions(agent), cell = 100 * formationScale(width, height);
+    return { ...point, width: dimensions.width * cell, height: dimensions.height * cell };
   }
 
   function projectileArt(projectile, points, time, height) {

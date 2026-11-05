@@ -1,0 +1,18 @@
+{
+  "kind": "source-owned-continuous-warp",
+  "sourceImage": "DesignAssets/Animations/UnitRangedV1/bean/Source/neutral.png",
+  "sourceHash": "65a547fbe1664cfa3e0fb534e94eae029cb9cb18a66518df670daa8e70533811",
+  "motionSource": "client/game.js:agentJumpOffset and client/unit-animation.mjs:unitMovementPosition",
+  "method": "shared continuous body/ankle inverse warp; existing gait timing and body tracks; own secretion pixels only",
+  "camera": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "frameCount": 24,
+  "durationMs": 960,
+  "noWorldReadyClaim": true
+}

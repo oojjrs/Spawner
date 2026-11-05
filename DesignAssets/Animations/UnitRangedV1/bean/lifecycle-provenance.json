@@ -1,0 +1,45 @@
+{
+  "tribe": "bean",
+  "mask": 16,
+  "productionHookEnabled": true,
+  "worldReady": false,
+  "method": "Death: authored body frames plus source-owned organ profile. Birth: approved own-source body/leaf adapter driven by the existing authored birth scene keys.",
+  "source": "DesignAssets/Animations/UnitAppearanceV1/bean/10/Source/neutral.png",
+  "sourceHash": "65a547fbe1664cfa3e0fb534e94eae029cb9cb18a66518df670daa8e70533811",
+  "actions": {
+    "death": {
+      "image": "DesignAssets/Animations/UnitRangedV1/bean/death.png",
+      "bodyImage": "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp",
+      "bodyHash": "2659f1cb0b65405ff1acf413883f0a5428eaf5f14ee8d3bbf7ec02f7ebc846ef",
+      "imageHash": "700e5a4b2a95fe0e854fa5035876fd98327b7040e8b2c672b1d10413c46fe9ba",
+      "frameCount": 16,
+      "sourceMask": "M296 315 C307 317 313 326 327 316 C350 299 367 300 373 314 C380 334 354 347 336 353 L331 367 C320 365 314 351 307 342 C300 335 295 325 296 315 Z",
+      "profile": "tools/secretion-lifecycle-batch-20261105/remaining/profiles.mjs",
+      "review": "tools/secretion-lifecycle-batch-20261105/remaining/bean-death-review.png"
+    }
+  },
+  "birth": {
+    "enabled": true,
+    "image": "DesignAssets/Animations/UnitRangedV1/bean/Source/neutral.png",
+    "sourceHash": "65a547fbe1664cfa3e0fb534e94eae029cb9cb18a66518df670daa8e70533811",
+    "renderer": "client/bean-secretion-birth.mjs",
+    "motion": "server/birth.mjs agentBirthMotion, unchanged body and independent left/right head keys",
+    "scene": "Existing drawAgentBirth seed, trajectory, fragments and impacts remain external and unchanged",
+    "registration": {
+      "frameSize": 512,
+      "pivot": [
+        256,
+        448
+      ],
+      "reference": [
+        202,
+        206
+      ],
+      "terminalRootDeltaAt100pxCell": 0,
+      "previousOverlayRootDeltaAt100pxCell": 5.208503858881109
+    },
+    "review": "tools/bean-secretion-birth-20261105/keyposes.png",
+    "verification": "tools/bean-secretion-birth-20261105/visual-verification.json",
+    "limitations": "Source-space adapter, not a standalone registered birth clip or complete ready rig. CPU/offline review only; browser QA and deployment remain separate."
+  }
+}

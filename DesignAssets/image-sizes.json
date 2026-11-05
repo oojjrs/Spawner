@@ -7,6 +7,130 @@
     1080
   ],
   "images": {
+    "DesignAssets/Animations/UnitRangedV1/bean/walk.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        6
+      ],
+      "nativeSource": {
+        "sha256": "327cd0eced08465750788f76bc086238a8e19328c2ada490e04c8ed13462e8b8",
+        "dimensions": [
+          2048,
+          3072
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/UnitRangedV1/spore/walk.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "96cd4a5253ff9e44d430a2dad9fb7e1f7fac0fb8005e957af40e1bb0fddbf1b1",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/UnitRangedV1/pebble/walk.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        5
+      ],
+      "nativeSource": {
+        "sha256": "bceec6e78824a416bf8f31177468d7486ecbd3d7a84bdbcbd40d096a4f237b26",
+        "dimensions": [
+          2048,
+          2560
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/UnitRangedV1/spring/walk.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "eb66e6dc933265f8d13399447accdb8771a50c743b59e8cc8fa283820aeaae3a",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/UnitRangedV1/spring/hurt.png": {
+      "display": [
+        512,
+        512
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Animations/UnitRangedV1/pebble/hurt.png": {
+      "display": [
+        512,
+        512
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Animations/UnitRangedV1/bean/hurt.png": {
+      "display": [
+        512,
+        512
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Animations/UnitRangedV1/spore/hurt.png": {
+      "display": [
+        512,
+        512
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
     "DesignAssets/Animations/Nests/Growth02To03-PopV1/spore/growth.png": {
       "display": [
         512,
@@ -9536,6 +9660,92 @@
           256
         ]
       }
+    },
+    "DesignAssets/Animations/UnitRangedV1/spore/birth.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        4,
+        6
+      ]
+    },
+    "DesignAssets/Animations/UnitRangedV1/spore/death.png": {
+      "display": [
+        72.3859011627907,
+        72.3859011627907
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "sourceMaximum": [
+        553,
+        553
+      ]
+    },
+    "DesignAssets/Animations/UnitRangedV1/bean/death.png": {
+      "display": [
+        82.61744281045752,
+        82.61744281045752
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "sourceMaximum": [
+        316,
+        316
+      ]
+    },
+    "DesignAssets/Animations/UnitRangedV1/pebble/birth.png": {
+      "display": [
+        100.80000000000001,
+        100.80000000000001
+      ],
+      "grid": [
+        8,
+        6
+      ]
+    },
+    "DesignAssets/Animations/UnitRangedV1/pebble/death.png": {
+      "display": [
+        75.39154411764706,
+        75.39154411764706
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "sourceMaximum": [
+        517,
+        517
+      ]
+    },
+    "DesignAssets/Animations/UnitRangedV1/spring/birth.png": {
+      "display": [
+        157.5,
+        157.5
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Animations/UnitRangedV1/spring/death.png": {
+      "display": [
+        114.2470360824742,
+        114.24703608247422
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "sourceMaximum": [
+        516,
+        516
+      ]
     }
   }
 }

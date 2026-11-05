@@ -1,0 +1,18 @@
+{
+  "kind": "source-owned-continuous-warp",
+  "sourceImage": "DesignAssets/Animations/UnitRangedV1/pebble/Source/neutral.png",
+  "sourceHash": "d688e4e363ac109847d9832551f0e0abb6f5ff810e5cd6c0bc16ddbe7b5960d8",
+  "motionSource": "DesignAssets/Tribes/pebble/Animations/Attributes/v1/rig.json",
+  "method": "shared continuous body/ankle inverse warp; existing gait timing and body tracks; own secretion pixels only",
+  "camera": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "frameCount": 20,
+  "durationMs": 800,
+  "noWorldReadyClaim": true
+}

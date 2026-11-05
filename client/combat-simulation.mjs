@@ -295,6 +295,14 @@ export function createSimulationTrial(settings) {
     agent.attack = { combatId: "simulation", startedAt: at, actionStartedAt: at, hitAt: action.firstHitAt, endsAt: action.endsAt,
       speed: 1, directionX: agent.facing, targetId: agent.combat.targetId, targetKind: "agent", counter, mode,
       hitIndex: 0, hitCount: count, resolved: false, hit: false, heavy: false };
+    // Preserve every launch cue for the approved ranged clip. Scheduling uses
+    // the private action state; rendering must not rewind after each shot.
+    if (mode === "ranged") {
+      agent.attack.launchedAt = action.firstHitAt;
+      agent.attack.shotLaunches = Array.from({ length: count }, (_, index) => action.firstHitAt + index * stats.hitGap);
+    } else {
+      agent.attack.meleeContacts = [action.firstHitAt];
+    }
     agent.attackStartedAt = at; agent.animationStartedAt = at;
     agent.mode = agent.species === "spiny-back-beetle" ? "attack" : "fight";
     if (!counter) evidence("attack", agent, target, 0, action, { endsAt: action.firstHitAt });
@@ -415,8 +423,10 @@ export function createSimulationTrial(settings) {
         source.attack.hit = true; source.attack.hitIndex = action.index - 1;
         source.attack.resolved = action.index >= action.count;
         if (!source.attack.resolved) {
-          source.attack.startedAt = time;
+          // Keep the action epoch and prior contacts so a completed swing
+          // recovers before the next preparation instead of rewinding on hit.
           source.attack.hitAt = action.firstHitAt + action.index * source.stats.hitGap;
+          source.attack.meleeContacts.push(source.attack.hitAt);
           source.attack.hitIndex = action.index;
         }
       }
@@ -425,7 +435,7 @@ export function createSimulationTrial(settings) {
       action.index++;
       if (source.attack) { source.attack.resolved = action.index >= action.count; source.attack.hit = true;
         source.attack.hitIndex = action.index - 1;
-        if (!source.attack.resolved) { source.attack.startedAt = time; source.attack.hitAt = action.firstHitAt + action.index * source.stats.hitGap; }
+        // Keep the original ranged clock through recovery and later launches.
       }
     }
     for (const hit of outcomes) {

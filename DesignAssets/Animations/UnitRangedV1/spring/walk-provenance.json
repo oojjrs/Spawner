@@ -1,0 +1,18 @@
+{
+  "kind": "source-owned-continuous-warp",
+  "sourceImage": "DesignAssets/Animations/UnitRangedV1/spring/Source/neutral.png",
+  "sourceHash": "05b62016490fd6792fd5255eefbc7fd907b4880c9103c7e94f1d3f8e7b53077d",
+  "motionSource": "DesignAssets/Tribes/spring/Animations/Attributes/v1/rig.json",
+  "method": "shared continuous body/ankle inverse warp; existing gait timing and body tracks; own secretion pixels only",
+  "camera": [
+    512,
+    512
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "frameCount": 16,
+  "durationMs": 1120,
+  "noWorldReadyClaim": true
+}

@@ -1,0 +1,35 @@
+{
+  "kind": "procedural-own-source-motion",
+  "source": "DesignAssets/Animations/UnitRangedV1/spore/Source/neutral.png",
+  "sourceSha256": "f4e2667b695119e422b0235edfdeb739801b358b5e55a24180fbc17ea5502f8d",
+  "referenceMotion": "DesignAssets/Tribes/spore/Animations/Attributes/v1/rig.json",
+  "referenceMotionSha256": "067b5cdb8b6d77a7b7bf522655d9d26b442cab755b1857b5ca9bb694f5666051",
+  "outputSha256": "4ed790e98c87f86c1cfd508519ac5e7c755b60713a35f27cfdecf4d4e13db132",
+  "method": "Own approved neutral surface, normalized base hurt cap tracks, local source-pixel eye compression, continuous sac lag. No invented hidden anatomy or other body pixels.",
+  "frameSize": 512,
+  "pivot": [
+    256,
+    448
+  ],
+  "durationsMs": [
+    20,
+    30,
+    30,
+    30,
+    400,
+    30,
+    30,
+    30,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+  ],
+  "action": "hurt",
+  "completeActionSet": false,
+  "reviewEvidence": "tools/secretion-hurt-study-20261105/verification.json"
+}

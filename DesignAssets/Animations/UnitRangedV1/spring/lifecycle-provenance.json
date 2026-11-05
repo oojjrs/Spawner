@@ -1,0 +1,31 @@
+{
+  "tribe": "spring",
+  "mask": 16,
+  "productionHookEnabled": true,
+  "worldReady": false,
+  "method": "Authored body frames plus source-owned organ profile; same camera and action clock.",
+  "source": "DesignAssets/Animations/UnitAppearanceV1/spring/10/Source/neutral.png",
+  "sourceHash": "874aa82196597810813cf72f7506d96c5255c427d763fe06dddc271b0a72fbd2",
+  "actions": {
+    "birth": {
+      "image": "DesignAssets/Animations/UnitRangedV1/spring/birth.png",
+      "bodyImage": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp",
+      "bodyHash": "01d1eafb5d7d0886dceabbfd8b249d5aae06512e4e507e732ef51e637e3deb00",
+      "imageHash": "e0b747699f9a8cb3c3b0bc1d7cf15c8e45f741951637aade4664fc3941daeac2",
+      "frameCount": 13,
+      "sourceMask": "M317 346 A26 9 0 1 1 265 346 A26 9 0 1 1 317 346 Z M313 346 A22 5 0 1 0 269 346 A22 5 0 1 0 313 346 Z",
+      "profile": "tools/secretion-lifecycle-batch-20261105/remaining/profiles.mjs",
+      "review": "tools/secretion-lifecycle-batch-20261105/remaining/spring-birth-review.png"
+    },
+    "death": {
+      "image": "DesignAssets/Animations/UnitRangedV1/spring/death.png",
+      "bodyImage": "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png",
+      "bodyHash": "85be0868a66a515983d14d2e10dfdd58f3978cc113e512e52e67bcaac07ca593",
+      "imageHash": "4f0129f8a24f406619cad76616c27f53d1ac6cda22858be78aa36129c041f8d6",
+      "frameCount": 8,
+      "sourceMask": "M317 346 A26 9 0 1 1 265 346 A26 9 0 1 1 317 346 Z M313 346 A22 5 0 1 0 269 346 A22 5 0 1 0 313 346 Z",
+      "profile": "tools/secretion-lifecycle-batch-20261105/remaining/profiles.mjs",
+      "review": "tools/secretion-lifecycle-batch-20261105/remaining/spring-death-review.png"
+    }
+  }
+}

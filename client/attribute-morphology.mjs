@@ -157,7 +157,10 @@ export function createTribeMorphology(createSurface, loadImage) {
           if (next < 0 || !mask[next]) continue; mask[next] = 0; queue.push(next);
         }
       }
-      if (queue.length > body[2] * body[3] * k * k * .12) continue;
+      // At the side-facing spring attack, the guessed face position is near
+      // tiny outline specks. Keep the real authored eye components instead.
+      if (queue.length > body[2] * body[3] * k * k * .12 ||
+          rig.tribe === "spring" && action === "attack" && queue.length < Math.max(4, k * k * 4)) continue;
       const points = queue.map(at => [at % size, Math.floor(at / size)]);
       groups.push({ points, x: points.reduce((sum, p) => sum + p[0], 0) / points.length / k,
         y: points.reduce((sum, p) => sum + p[1], 0) / points.length / k });
@@ -198,21 +201,21 @@ export function createTribeMorphology(createSurface, loadImage) {
     return result;
   }
 
-  function sourceBase(pose, track, removeCap, removeBody, size) {
-    const key = [pose.cacheKey, removeCap, removeBody].join(":");
+  function sourceBase(pose, track, removeCap, removeBody, size, preserveSole = false) {
+    const key = [pose.cacheKey, removeCap, removeBody, preserveSole].join(":");
     if (bases.has(key)) return bases.get(key);
     const surface = createSurface(size, size), context = surface.getContext("2d"); context.drawImage(pose.surface, 0, 0);
     const image = context.getImageData(0, 0, size, size), pixels = image.data, k = size / 144, body = track.body, cap = track.cap;
     for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
       const p = (y * size + x) * 4, coral = pose.tribe === "spore" && pixels[p] - pixels[p + 1] > 18 && pixels[p] > pixels[p + 2] * .9;
       const inCap = x >= (cap[0] - 2) * k && x <= (cap[0] + cap[2] + 2) * k && y >= (cap[1] - 2) * k && y <= (cap[1] + cap[3] + 2) * k;
-      if (y >= track.cut * k && !coral || removeCap && inCap && (coral || y < body[1] * k || x < (body[0] - 1) * k || x > (body[0] + body[2] + 1) * k) ||
+      if (y >= track.cut * k && !coral && !preserveSole || removeCap && inCap && (coral || y < body[1] * k || x < (body[0] - 1) * k || x > (body[0] + body[2] + 1) * k) ||
         removeBody && !coral && x >= (body[0] - 2) * k && x <= (body[0] + body[2] + 2) * k && y >= (body[1] - 2) * k) pixels[p + 3] = 0;
     }
     context.putImageData(image, 0, 0); bases.set(key, surface); return surface;
   }
 
-  function frame(rig, attributes, source, animation, index, action, time, motion) {
+  function frame(rig, attributes, source, animation, index, action, time, motion, layer) {
     const model = models[rig.tribe], sourceAction = motion?.sourceAction || action;
     const trackAction = rig.animations[sourceAction] ? sourceAction : sourceAction === "carry" ? "walk" : "idle";
     const sequence = rig.animations[trackAction], track = sequence.tracks[Math.min(index, sequence.tracks.length - 1)];
@@ -221,7 +224,10 @@ export function createTribeMorphology(createSurface, loadImage) {
     const upperKey = model.core ? "" : activeKey(attributes, ["antenna"]);
     const part = rig.morphs.parts["body-" + partKey], upper = rig.morphs.parts["cap-" + upperKey];
     const feet = attributes.feet > 0, clock = motion?.sampleTime ?? time, progress = motion?.motionPhase ?? index / sequence.frameCount;
-    const stride = motion?.motionBlend ?? 1, key = [rig.tribe, trackAction, action, index, Math.floor(time * 20), Math.floor(clock * 20),
+    // The approved pebble attack retracts both feet in cels 3–11. Ordinary
+    // attachments must not put permanent feet back under that rolling body.
+    const tuckedFeet = rig.tribe === "pebble" && trackAction === "attack" && index >= 3 && index <= 11;
+    const stride = motion?.motionBlend ?? 1, key = [rig.tribe, trackAction, action, layer || "full", index, Math.floor(time * 20), Math.floor(clock * 20),
       Math.round(progress * 120), Math.round(stride * 20), ...[...coreKeys, "feet"].map(k => k === "strength" ? attributes.strength || attributes.arms || 0 : attributes[k] || 0)].join(":");
     if (frames.has(key)) return frames.get(key);
     const size = animation.frameSize, padding = Math.ceil(size / 2), scale = size / 144;
@@ -286,9 +292,9 @@ export function createTribeMorphology(createSurface, loadImage) {
         include(part, [-bodyWidth / 2, -bodyHeight, bodyWidth, bodyHeight], bodyPoint);
       }
     } else {
-      const base = sourceBase(pose, track, Boolean(upper), Boolean(part), size);
+      const base = sourceBase(pose, track, Boolean(upper), Boolean(part), size, tuckedFeet);
       items.push(() => context.drawImage(base, 0, 0, 144, 144));
-      maximum = Math.max(maximum, track.cut);
+      maximum = Math.max(maximum, tuckedFeet ? track.floor : track.cut);
       if (!upper && rig.tribe === "spore") maximum = Math.max(maximum, track.cap[1] + track.cap[3]);
       bodyWidth = part ? part.size[0] * body[2] / reference.body[2] : body[2];
       bodyHeight = part ? part.size[1] * body[3] / reference.body[3] : body[3]; bodyX = center[0]; bodyAngle = track.angle;
@@ -301,7 +307,7 @@ export function createTribeMorphology(createSurface, loadImage) {
     }
 
     const footItems = [];
-    for (const [index, side] of [-1, 1].entries()) {
+    for (const [index, side] of tuckedFeet ? [] : [-1, 1].entries()) {
       const foot = rig.morphs.parts[index ? "feet-right" : "feet-left"], u = side < 0 ? .25 : .75;
       const bottom = part ? (outlineAt(part, u) - 1) * bodyHeight : 0;
       const p = phase + (index ? Math.PI : 0), strideX = walking ? Math.sin(p) * 2.8 * factor * stride : 0;
@@ -315,20 +321,25 @@ export function createTribeMorphology(createSurface, loadImage) {
       include(foot, box, point);
       footItems.push(() => { context.save(); context.translate(...root); context.rotate(rotation); drawPart(context, foot, box, 0, createSurface); context.restore(); });
     }
-    for (const draw of footItems) draw(); for (const draw of items) draw();
+    // Keep the complete silhouette in the grounding calculation for both
+    // layers. Separating feet must not re-fit or shift the body portrait.
+    if (layer !== "combat-body") for (const draw of footItems) draw();
+    if (layer !== "combat-feet") for (const draw of items) draw();
     if (upper) {
       const axis = track.capAxis, width = upper.size[0] * axis[2] / reference.capAxis[2];
       const h = upper.size[1] * axis[3] / reference.capAxis[3], height = h;
       const anchor = [axis[0] - Math.sin(axis[4]) * axis[3] / 2, axis[1] + Math.cos(axis[4]) * axis[3] / 2], box = [-width / 2, -height, width, height];
       const point = value => { const p = rotate(value, axis[4]); return [anchor[0] + p[0], anchor[1] + p[1]]; };
       include(upper, box, point);
-      context.save(); context.translate(...anchor); context.rotate(axis[4]);
-      drawPart(context, upper, box, 0, createSurface); context.restore();
-    } else if (rig.tribe === "spore" && part) {
+      if (layer !== "combat-feet") {
+        context.save(); context.translate(...anchor); context.rotate(axis[4]);
+        drawPart(context, upper, box, 0, createSurface); context.restore();
+      }
+    } else if (rig.tribe === "spore" && part && layer !== "combat-feet") {
       context.save();
       context.drawImage(pose.front, 0, 0, 144, 144); context.restore();
     }
-    if (part) {
+    if (part && layer !== "combat-feet") {
       context.save(); context.globalCompositeOperation = "source-atop";
       const eyes = part.neck && action === "birth" ? pose.eyes.filter(eye =>
         eye.box[2] < body[2] * .24 && eye.box[3] < Math.max(3, body[3] * .24)) : pose.eyes;
@@ -342,6 +353,11 @@ export function createTribeMorphology(createSurface, loadImage) {
     const target = ["birth", "jump"].includes(action) ? body[1] + body[3] + (reference.floor - reference.cut) * factor : track.floor;
     const offset = Number.isFinite(maximum) ? target - maximum : 0;
     surface.getContext("2d").drawImage(core, 0, offset * scale);
+    if (rig.tribe === "spring" && part && ["idle", "attack"].includes(trackAction)) {
+      const p = bodyPoint([.05 * bodyWidth, -.4 * bodyHeight]);
+      const q = bodyPoint([.06 * bodyWidth, -.4 * bodyHeight]);
+      surface.combatSocket = { point: [p[0], p[1] + offset], direction: [q[0] - p[0], q[1] - p[1]] };
+    }
     frames.set(key, surface); if (frames.size > 192) frames.delete(frames.keys().next().value);
     return surface;
   }

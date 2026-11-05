@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createGame } from "./game.mjs";
+import { combatDamage } from "./combat-stats.mjs";
 import { AGENT_ATTACK_DURATION, AGENT_ATTACK_HIT_TIME, agentAttackFrame } from "./attack.mjs";
 
 function fixture(speed) {
@@ -22,7 +23,7 @@ function fixture(speed) {
   agent.stats.speed = speed;
   game.prepare(10);
   game.tick(.01);
-  return { game, environment, agent, target, hits };
+  return { game, environment, agent, target, hits, hitAt: agent.attack.hitAt, damage: combatDamage(agent, target, .5) };
 }
 
 test("6번째 프레임에 명중하고 충돌 자세 여섯 프레임을 유지한다", () => {
@@ -37,47 +38,48 @@ test("6번째 프레임에 명중하고 충돌 자세 여섯 프레임을 유지
 });
 
 test("같은 셀에 고정한 대상에게 6번째 프레임에 한 번 피해를 준다", () => {
-  const { game, agent, target, hits } = fixture(1);
+  const { game, agent, target, hits, hitAt, damage } = fixture(1);
   assert.ok(agent.attack);
   assert.equal(target.health, 100);
-  game.prepare(10.299);
+  game.prepare(hitAt - .001);
   game.tick(.299);
   assert.equal(target.health, 100);
-  game.prepare(10.3);
+  game.prepare(hitAt);
   game.tick(.001);
-  assert.equal(target.health, 85);
+  assert.equal(target.health, 100 - damage);
   assert.equal(agent.attack.hit, true);
   assert.equal(agent.attack.targetX, 48);
   assert.equal(agent.attack.targetY, 42);
   assert.deepEqual({ x: agent.x, y: agent.y }, { x: 48, y: 42 });
-  game.prepare(10.599);
+  game.prepare(hitAt + .1);
   game.tick(.299);
-  assert.equal(target.health, 85);
-  assert.deepEqual(hits, [15]);
+  assert.equal(target.health, 100 - damage);
+  assert.deepEqual(hits, [damage]);
 });
 
 test("빠른 유닛도 공격 모션의 명중 시점을 유지하고 복원 후 중복 명중하지 않는다", () => {
-  const { game, target, hits } = fixture(2);
+  const { game, target, hits, hitAt, damage } = fixture(2);
   const pending = JSON.parse(game.save()).state.agents[0].attack;
-  assert.equal(pending.hitAt, 10.3);
-  assert.equal(agentAttackFrame(pending, 10.3), 5);
+  assert.ok(pending.hitAt > pending.startedAt);
+  assert.equal(pending.hitAt, hitAt);
+  assert.equal(agentAttackFrame(pending, hitAt), 5);
   game.prepare(10.1);
   game.tick(.1);
   game.restore(game.save());
-  game.prepare(10.3);
+  game.prepare(hitAt);
   game.tick(.05);
-  assert.equal(target.health, 85);
+  assert.equal(target.health, 100 - damage);
   game.restore(game.save());
-  game.prepare(10.4);
+  game.prepare(hitAt + .1);
   game.tick(.05);
-  assert.deepEqual(hits, [15]);
+  assert.deepEqual(hits, [damage]);
 });
 
 test("정해 둔 대상이 사라져도 다른 대상에게 피해를 넘기지 않는다", () => {
-  const { game, environment, target, hits } = fixture(1);
+  const { game, environment, target, hits, hitAt } = fixture(1);
   const other = { ...target, id: "rival:2" };
   environment.games.get("rival").agents = [other];
-  game.prepare(10.3);
+  game.prepare(hitAt);
   game.tick(.3);
   assert.equal(other.health, 100);
   assert.equal(game.agents[0].attack.resolved, true);

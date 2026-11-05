@@ -1,7 +1,8 @@
+import { minorTraitResourcePose, minorTraitResourceFrame } from "./minor-trait-resource-motion.mjs";
 import { unitDisplayAttributes, unitDisplayAttributesFrom } from "./unit-display-appearance.mjs";
 import { TRIBE_CANVAS_CACHE_BUDGET } from "./canvas-cache.mjs";
 import { createTribeMorphology, TRIBE_MORPHOLOGY_ASSETS } from "./attribute-morphology.mjs";
-import { UNIT_ANIMATIONS } from "./unit-animation.mjs";
+import { UNIT_ANIMATIONS, unitAnimationFrame } from "./unit-animation.mjs";
 
 export const TRIBE_ATTRIBUTE_ASSETS = Object.freeze(["spore", "pebble", "spring"].flatMap(tribe => {
   const root = "DesignAssets/Tribes/" + tribe + "/Animations/Attributes/v1/";
@@ -96,6 +97,7 @@ function drawAttachment(context, part, spec, x, y, scale, rotation, bend, flatte
 export function createTribeAttributeAnimation(assetSource, createSurface, loadImage) {
   const rigs = new Map(), pending = new Map(), frames = TRIBE_CANVAS_CACHE_BUDGET.createCache(), motions = new Map();
   const morphology = createTribeMorphology(createSurface, loadImage);
+  const reducedMotion = globalThis.matchMedia?.("(prefers-reduced-motion: reduce)");
 
   function neutralDistance(tribe, track, reference) {
     const box = tribe === "spore" ? track.cap : track.body;
@@ -121,7 +123,11 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
       if (action === "idle") motion.idleEpoch = time;
       const previous = rig.animations[motion.sourceAction], track = previous?.tracks[motion.sourceFrame];
       const reference = previous?.tracks.find(value => value);
-      if (track && reference && neutralDistance(agent.tribe, track, reference) > 3) {
+      // Combat frames follow the simulation's hit/hurt clock in both directions.
+      // A cosmetic bridge must not delay a new reaction or replay an attack/hurt
+      // pose after the simulation has ended or canceled that action.
+      if ([action, motion.sourceAction].some(value => value === "attack" || value === "hurt")) motion.bridge = null;
+      else if (track && reference && neutralDistance(agent.tribe, track, reference) > 3) {
         let target = motion.sourceFrame, distance = Infinity;
         for (let index = 0; index < previous.tracks.length; index++) {
           const candidate = previous.tracks[index];
@@ -131,7 +137,7 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
         }
         if (Number.isFinite(distance) && distance > 0) motion.bridge = {
           action: motion.sourceAction, from: motion.sourceFrame, to: target, startedAt: time,
-          duration: current.action === "hurt" ? .09 : Math.min(.2, Math.max(.08, distance * .012))
+          duration: Math.min(.2, Math.max(.08, distance * .012))
         };
       }
       motion.action = action; motion.changedAt = time;
@@ -152,6 +158,7 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
     }
     motion.seenAt = time; motion.sourceAction = sourceAction; motion.sourceFrame = sourceFrame;
     return { ...current, sourceAction, sourceFrame, sourceAnimation: rig.animations[sourceAction], sampleTime: time,
+      minorTraitResource: sourceAction === "idle" && !reducedMotion?.matches ? minorTraitResourcePose(agent, current.action, time) : null,
       motionPhase: current.frame / current.animation.frameCount,
       motionBlend: action === "walk" ? Math.max(0, Math.min(1, (time - motion.changedAt) / .12)) : 1 };
   }
@@ -190,7 +197,7 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
     return pending.get(tribe);
   }
 
-  function frame(tribe, attributes, source, animation, index, action, time, motion, replacement) {
+  function frame(tribe, attributes, source, animation, index, action, time, motion, replacement, layer) {
     attributes = unitDisplayAttributesFrom(attributes);
     const rig = rigs.get(tribe);
     if (!rig || !hasTribeAttributes(attributes) && !replacement) return null;
@@ -199,7 +206,13 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
     const sequence = rig.animations[trackAction];
     const track = replacement?.track || sequence.tracks[Math.min(index, sequence.tracks.length - 1)];
     if (!track) return null;
-    if (rig.morphs && !replacement) return morphology.frame(rig, attributes, source, animation, index, action, time, motion);
+    if (rig.morphs && !replacement) {
+      const native = morphology.frame(rig, attributes, source, animation, index, action, time, motion, layer);
+      // Deform the complete native morphology together; do not swap to base
+      // art or move the antenna separately from its authored body.
+      return !layer && motion?.minorTraitResource ?
+        minorTraitResourceFrame(native, animation, track, motion.minorTraitResource, createSurface) || native : native;
+    }
     const birthAge = action === "birth" ? sequence.durationsMs.slice(0, index).reduce((sum, value) => sum + value, 0) / 1000 : 0;
     const growth = action !== "birth" || tribe === "pebble" ? 1 :
       Math.max(0, Math.min(1, (birthAge - sequence.detachAt) / Math.max(.1, sequence.contactAt - sequence.detachAt)));
@@ -347,14 +360,39 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
     const rig = rigs.get(tribe);
     if (!rig) return null;
     const surface = createSurface(width, height), context = surface.getContext("2d");
-    if (layer && !["full", "body"].includes(layer)) return surface;
+    if (layer && !["full", "body", "combat-body", "combat-feet"].includes(layer)) return surface;
     const animation = rig.animations.idle;
-    const sprite = frame(tribe, attributes, rig.idle, animation, 0, "idle", 0);
+    const sprite = frame(tribe, attributes, rig.idle, animation, 0, "idle", 0, null, null, layer?.startsWith("combat-") ? layer : undefined);
     if (!sprite) return null;
     const track = animation.tracks[0], padding = (sprite.width - animation.frameSize) / 2;
     const scale = Math.min(box.width / track.bounds[2], box.height / track.bounds[3]) * 144 / animation.frameSize;
     context.drawImage(sprite, width / 2 - (animation.pivotX + padding) * scale,
       box.y + box.height - (animation.pivotY + padding) * scale, sprite.width * scale, sprite.height * scale);
+    return surface;
+  }
+
+  function attackPortrait(tribe, attributes, source, elapsed, box) {
+    const rig = rigs.get(tribe);
+    if (tribe !== "spring" || !rig || !source) return null;
+    const animation = rig.animations.attack;
+    const index = unitAnimationFrame(animation, elapsed), time = elapsed / 1000;
+    const motion = { sourceAction: "attack", sourceFrame: index, sampleTime: time,
+      motionPhase: index / animation.frameCount, motionBlend: 1 };
+    const sprite = frame(tribe, attributes, source, animation, index, "attack", time, motion, null, "combat-body");
+    const neutral = frame(tribe, attributes, rig.idle, rig.animations.idle, 0, "idle", 0, null, null, "combat-body");
+    if (!sprite?.combatSocket || !neutral?.combatSocket) return null;
+    const reference = rig.animations.idle.tracks[0];
+    const project = (value, clip) => {
+      const scale = Math.min(box.width / reference.bounds[2], box.height / reference.bounds[3]) * 144 / clip.frameSize;
+      return { scale, point: [256 - clip.pivotX * scale + value.point[0] * clip.frameSize / 144 * scale,
+        box.y + box.height - clip.pivotY * scale + value.point[1] * clip.frameSize / 144 * scale],
+        angle: Math.atan2(value.direction[1], value.direction[0]) };
+    };
+    const first = project(neutral.combatSocket, rig.animations.idle), current = project(sprite.combatSocket, animation);
+    const surface = createSurface(512, 512), padding = (sprite.width - animation.frameSize) / 2;
+    surface.getContext("2d").drawImage(sprite, 256 - (animation.pivotX + padding) * current.scale,
+      box.y + box.height - (animation.pivotY + padding) * current.scale, sprite.width * current.scale, sprite.height * current.scale);
+    surface.replacementSocket = { source: first.point, target: current.point, angle: current.angle - first.angle };
     return surface;
   }
 
@@ -372,5 +410,5 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
     return { width: width * scale, height: height * scale };
   }
 
-  return { prepare, frame, portrait, pose, bodySize, cacheStats: TRIBE_CANVAS_CACHE_BUDGET.stats };
+  return { prepare, frame, portrait, attackPortrait, pose, bodySize, cacheStats: TRIBE_CANVAS_CACHE_BUDGET.stats };
 }

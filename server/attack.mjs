@@ -14,6 +14,26 @@ export const AGENT_ATTACK_ASSET = "DesignAssets/Animations/UnitAttack/attack.png
 
 export function attackAnimationElapsed(attack, time, hitTime, duration) {
   const elapsed = time - attack.startedAt;
+  // DNA melee follow-ups move hitAt forward without beginning a new action.
+  // Keep the contact already reached, then finish recovery and prepare the next
+  // swing using only the server's recorded contacts, not current unit stats.
+  const contacts = attack.meleeContacts;
+  if (attack.combatId && !attack.exchange && Array.isArray(contacts) && contacts.length &&
+      Number.isFinite(attack.startedAt) && Number.isFinite(attack.endsAt) && attack.endsAt >= attack.hitAt &&
+      hitTime > 0 && duration > hitTime &&
+      contacts.at(-1) === attack.hitAt && contacts[0] > attack.startedAt &&
+      contacts.every((at, index) => Number.isFinite(at) && (!index || at > contacts[index - 1]))) {
+    if (time > attack.endsAt || time === attack.endsAt && attack.endsAt > attack.hitAt) return duration;
+    const recoveryShare = (duration - hitTime) / duration;
+    const startFor = index => index ? contacts[index - 1] +
+      (contacts[index] - contacts[index - 1]) * recoveryShare : attack.startedAt;
+    let swing = 0;
+    while (swing < contacts.length - 1 && time >= startFor(swing + 1)) swing++;
+    const start = startFor(swing), hit = contacts[swing];
+    const end = swing + 1 < contacts.length ? startFor(swing + 1) : attack.endsAt;
+    return time <= hit ? (time - start) / (hit - start) * hitTime :
+      hitTime + Math.min(1, (time - hit) / (end - hit)) * (duration - hitTime);
+  }
   if (!attack.combatId || attack.exchange || !Number.isFinite(attack.hitAt) || !Number.isFinite(attack.endsAt) ||
       !(attack.hitAt > attack.startedAt) || !(attack.endsAt > attack.hitAt)) return elapsed * (attack.speed || 1);
   if (time >= attack.endsAt) return duration;

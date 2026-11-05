@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "kind": "existing-authored-lifecycle-body-with-same-form-approved-organ",
+  "tribe": "spore",
+  "mask": 16,
+  "source": "DesignAssets/Animations/UnitAppearanceV1/spore/10/Source/neutral.png",
+  "sourceHash": "9fd51c65eba741c15c8f1cbd6be3b1e47fa5591202655adfee5e4ba729f0641e",
+  "nativeSource": "DesignAssets/Animations/UnitRangedV1/spore/Source/neutral-native.png",
+  "nativeSourceHash": "42f16a84bfb4b5d3fbf8ca293ec9c7d3c0f216ca3d46968cda777218064ad4c3",
+  "nativeRegistrationPixelEquality": true,
+  "sourceOwnedOrganOnly": true,
+  "newImageGeneration": false,
+  "worldReadyRegistration": false,
+  "occlusion": {
+    "birthClosedCapFrames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "method": "source organ clipped by existing cap lip and visible underside; face/top/silhouette untouched"
+  },
+  "actions": {
+    "birth": {
+      "image": "DesignAssets/Animations/UnitRangedV1/spore/birth.png",
+      "hash": "9dd64e9a93ff10f2a5443d2832694a8782f91985da7a565ea1d9be7e8c9f2638",
+      "bodySource": "DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/birth-unit.webp",
+      "bodySourceHash": "93696aac1e9eb471a1aae0ba8932eec01e369d0d64d064218a01b4b1c2ce9761",
+      "nativeFrameSize": 192,
+      "columns": 4,
+      "frameCount": 22,
+      "durationsMs": [
+        180,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        80,
+        80,
+        80,
+        80,
+        700
+      ],
+      "pivot": [
+        133.33333333333331,
+        162
+      ]
+    },
+    "death": {
+      "image": "DesignAssets/Animations/UnitRangedV1/spore/death.png",
+      "hash": "7f8149064c6f275efdf4cba7a1bd428c11cabbddc04e7bb80d7ad8f02d9c8db1",
+      "bodySource": "DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png",
+      "bodySourceHash": "8baf1b600e5868e4d1af9ddcc94692ebd3416a72b1b6c97db681eddaafb49c99",
+      "nativeFrameSize": 553,
+      "columns": 4,
+      "frameCount": 8,
+      "durationsMs": [
+        120,
+        100,
+        140,
+        120,
+        140,
+        100,
+        120,
+        600
+      ],
+      "pivot": [
+        276.5,
+        482.6181818181818
+      ]
+    }
+  }
+}

@@ -15,6 +15,12 @@
     }, async path => {
       const image = new Image(); image.src = assetSource(path); await image.decode(); return image;
     });
+    const sporeDominantBirthArt = Spawner.createSporeDominantBirthArt((width, height) => {
+      const surface = document.createElement("canvas"); surface.width = width; surface.height = height; return surface;
+    });
+    const springDominantBirthArt = Spawner.createSpringDominantBirthArt((width, height) => {
+      const surface = document.createElement("canvas"); surface.width = width; surface.height = height; return surface;
+    });
     const tribeColonies = new Map();
     const colonyImageFrames = new WeakMap();
     const nestGrowthRendering = new Map();
@@ -4297,11 +4303,37 @@
         drawAgentAppearanceLayer(ctx, now, { ...agent, birth: null }, cell, topLeft, { x: birth.x, y: birth.y, progress: 1 }, null, outlineColor);
         return;
       }
+      const form = Spawner.springDominantBirthForm?.(agent);
+      if (form && combatAttributeArt.ready("spring")) {
+        // Keep the current idle clock so the settled sprite and terminal idle
+        // are identical, including eye animation, facing and the common pivot.
+        const facing = agent.combat ? agent.combat.side === 0 ? -1 : 1 : agent.facing || 1;
+        const neutral = { ...agent, birth: null, attack: null, support: null, hurtStartedAt: -Infinity,
+          mode: "idle", moveDuration: 0, facing: 1, combat: agent.combat ? { ...agent.combat, side: 1 } : null };
+        const time = idleMotion.matches ? agent.bornAt || 0 : state.simSeconds;
+        const body = combatAttributeArt.frame(neutral, time, 1);
+        const elapsed = idleMotion.matches ? SPRING_BIRTH_ANIMATION.duration : birth.elapsed;
+        const sprite = springDominantBirthArt.frame(body, agent, elapsed, unitDisplayScale(agent), facing);
+        if (sprite) {
+          const floor = topLeft.y + cell * (.5 + AGENT_HEIGHT * .44);
+          const camera = sprite.combatCamera, scale = cell * AGENT_HEIGHT * 2 / (camera?.units || 512);
+          const x = -(camera?.pivotX || 256) * scale, y = -(camera?.pivotY || 448) * scale;
+          const width = sprite.width * scale, height = sprite.height * scale;
+          ctx.save(); ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
+          Spawner.drawSpringBirthWater(ctx, topLeft.x + cell / 2, floor, cell, elapsed);
+          ctx.translate(topLeft.x + cell / 2, floor); ctx.scale(facing < 0 ? -1 : 1, 1);
+          if (outlineColor) drawSelectionOutline(sprite, x, y, width, height, null, outlineColor);
+          ctx.drawImage(sprite, x, y, width, height); ctx.restore();
+          return;
+        }
+      }
       if (!springBirthSheet.complete || !springBirthSheet.naturalWidth) return;
       const animation = SPRING_BIRTH_ANIMATION;
       const scale = cell * AGENT_HEIGHT * 350 / 512 / animation.height;
+      const lifecycle = Spawner.unitRangedLifecycleAnimation?.(agent, "birth");
+      const lifecycleSheet = lifecycle && agentRangedImage(lifecycle.image);
       const attributeFrame = tribeArt.animationFrame(agent, springBirthSheet, animation, birth.frame, "birth", birth.elapsed);
-      const sprite = attributeFrame || springBirthSheet, frameSize = attributeFrame ? sprite.width : animation.frameSize;
+      const sprite = attributeFrame || lifecycleSheet || springBirthSheet, frameSize = attributeFrame ? sprite.width : animation.frameSize;
       const padding = (frameSize - animation.frameSize) / 2;
       const size = frameSize * scale;
       const x = topLeft.x + cell / 2 - (animation.pivotX + padding) * scale;
@@ -4339,8 +4371,10 @@
       }
       if (!pebbleBirthSheet.complete || !pebbleBirthSheet.naturalWidth) return;
       const scale = cell * AGENT_HEIGHT * animation.unitHeight / 512 / animation.height;
+      const lifecycle = Spawner.unitRangedLifecycleAnimation?.(agent, "birth");
+      const lifecycleSheet = lifecycle && agentRangedImage(lifecycle.image);
       const attributeFrame = tribeArt.animationFrame(agent, pebbleBirthSheet, animation, birth.frame, "birth", birth.elapsed);
-      const sprite = attributeFrame || pebbleBirthSheet, frameSize = attributeFrame ? sprite.width : animation.frameSize;
+      const sprite = attributeFrame || lifecycleSheet || pebbleBirthSheet, frameSize = attributeFrame ? sprite.width : animation.frameSize;
       const padding = (frameSize - animation.frameSize) / 2;
       const size = frameSize * scale;
       const x = topLeft.x + cell / 2 - (animation.pivotX + padding) * scale;
@@ -4369,6 +4403,25 @@
       ctx.restore();
     }
 
+    function drawAgentRangedBirth(ctx, agent, birth, centerX, floor, cell, outlineColor) {
+      const form = Spawner.unitRangedBirthAppearance?.(agent);
+      const sprite = form && agentRangedImage(form.idle.image);
+      if (!sprite) return false;
+      const size = Spawner.unitRangedDisplaySize(agent) / 100 * cell / unitDisplayScale(agent);
+      const animation = form.idle;
+      const facing = agent.combat ? agent.combat.side === 0 ? -1 : 1 : agent.facing || 1;
+      ctx.save();
+      ctx.translate(centerX, floor - birth.lift * cell);
+      ctx.rotate(birth.rotation);
+      ctx.scale(birth.scaleX * (facing < 0 ? -1 : 1), birth.scaleY);
+      ctx.scale(size / animation.frameSize, size / animation.frameSize);
+      ctx.translate(-animation.pivotX, -animation.pivotY);
+      const drawn = form.birthBody(ctx, sprite, birth.head, outlineColor ?
+        (image, x, y, width, height) => drawSelectionOutline(image, x, y, width, height, null, outlineColor) : null);
+      ctx.restore();
+      return drawn;
+    }
+
     function drawAgentBirth(ctx, now, agent, birth, topLeft, cell, outlineColor) {
       if (birth.kind === "spore") {
         drawSporeBirth(ctx, now, agent, birth, topLeft, cell, outlineColor);
@@ -4382,6 +4435,9 @@
         drawSpringBirth(ctx, now, agent, birth, topLeft, cell, outlineColor);
         return;
       }
+      // Start loading during the seed flight, before the body unfolds.
+      const rangedBirth = Spawner.unitRangedBirthAppearance?.(agent);
+      if (rangedBirth) agentRangedImage(rangedBirth.idle.image);
       const appearance = Spawner.unitDisplayAttributes(agent);
       const evolved = Spawner.hasCombatEvolution(appearance) && combatAttributeArt.ready(agent.tribe || "bean");
       const body = agentSprite(agent, evolved ? "full" : "body");
@@ -4407,6 +4463,10 @@
         drawBirthImpact(ctx, impact.x, impact.y, cell, birth.elapsed - at, .15);
       }
       if (birth.unitVisible) {
+        if (drawAgentRangedBirth(ctx, agent, birth, centerX, footY, cell, outlineColor)) {
+          ctx.restore();
+          return;
+        }
         const sprite = body;
         if (sprite && sprite.complete !== false && (sprite.naturalWidth || sprite.width) > 0) {
           const spriteHeight = height * (evolved ? 2 : 1), pivot = evolved ? .875 : .94;
@@ -4453,8 +4513,43 @@
         drawAgentAppearanceLayer(ctx, now, { ...agent, birth: null }, cell, topLeft, { x: birth.x, y: birth.y, progress: 1 }, null, outlineColor);
         return;
       }
+      const form = Spawner.sporeDominantBirthForm?.(agent);
+      if (form && combatAttributeArt.ready("spore")) {
+        const facing = agent.combat ? agent.combat.side === 0 ? -1 : 1 : agent.facing || 1;
+        const neutral = { ...agent, birth: null, attack: null, support: null, hurtStartedAt: -Infinity,
+          mode: "idle", moveDuration: 0, facing: 1, combat: agent.combat ? { ...agent.combat, side: 1 } : null };
+        const body = combatAttributeArt.frame(neutral, state.simSeconds, 1);
+        const sprite = sporeDominantBirthArt.frame(body, agent, birth.elapsed, birth.scale, facing, birth.facing);
+        const needsStalk = frame >= 3 && frame <= 8;
+        const stalk = needsStalk ? sporeDominantBirthArt.stalk(sporeBirthFrames.get(frame), frame) : null;
+        if (sprite && (!needsStalk || stalk)) {
+          const centerX = topLeft.x + cell / 2, floor = topLeft.y + cell * (.5 + AGENT_HEIGHT * .44);
+          if (stalk) {
+            const pixel = birth.scale * cell;
+            ctx.save(); ctx.translate(centerX, floor); ctx.scale(birth.facing, 1);
+            if (outlineColor) drawSelectionOutline(stalk, -shape.pivotX * pixel, -shape.pivotY * pixel,
+              shape.frameSize * pixel, shape.frameSize * pixel, null, outlineColor);
+            ctx.drawImage(stalk, -shape.pivotX * pixel, -shape.pivotY * pixel, shape.frameSize * pixel, shape.frameSize * pixel);
+            ctx.restore();
+          }
+          const camera = sprite.combatCamera, pixel = cell * AGENT_HEIGHT * 2 / (camera?.units || 512);
+          const x = -(camera?.pivotX ?? 256) * pixel, y = -(camera?.pivotY ?? 448) * pixel;
+          const width = sprite.width * pixel, height = sprite.height * pixel;
+          const motion = Spawner.sporeDominantBirthMotion(birth.elapsed);
+          const spinHeight = shape.unitHeight * Spawner.imageScale(shape.image) * birth.scale * cell;
+          ctx.save(); ctx.translate(centerX, floor); ctx.scale(facing < 0 ? -1 : 1, 1);
+          ctx.scale(motion.scaleX, motion.scaleY);
+          ctx.translate(0, -spinHeight * .5); ctx.rotate(motion.rotation); ctx.translate(0, spinHeight * .5);
+          ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
+          if (outlineColor) drawSelectionOutline(sprite, x, y, width, height, null, outlineColor);
+          ctx.drawImage(sprite, x, y, width, height); ctx.restore();
+          return;
+        }
+      }
+      const lifecycle = Spawner.unitRangedLifecycleAnimation?.(agent, "birth");
+      const lifecycleSheet = lifecycle && agentRangedImage(lifecycle.image);
       const attributeFrame = tribeArt.animationFrame(agent, sporeBirthSheet, shape, frame, "birth", birth.elapsed);
-      const sprite = attributeFrame || sporeBirthFrames.get(frame);
+      const sprite = attributeFrame || lifecycleSheet || sporeBirthFrames.get(frame);
       if (!sprite) return;
       const registered = !outlineColor && !attributeFrame && globalThis.SpawnerAppearance.unitAppearanceBirthSceneForAgent(agent);
       if (registered && Math.abs(birth.scale - registered.legacyPixelStage.nativeWorldPerPixelBeforeDisplay) < 1e-9) {
@@ -4480,8 +4575,11 @@
       ctx.translate(0, height * .5);
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = "high";
-      if (outlineColor) drawSelectionOutline(sprite, x, y, size, size, null, outlineColor);
-      ctx.drawImage(sprite, x, y, size, size);
+      const crop = !attributeFrame && lifecycleSheet ? { owner: sprite, index: frame, size: shape.frameSize,
+        x: frame % shape.columns * shape.frameSize, y: Math.floor(frame / shape.columns) * shape.frameSize } : null;
+      if (outlineColor) drawSelectionOutline(sprite, x, y, size, size, crop, outlineColor);
+      if (crop) ctx.drawImage(sprite, crop.x, crop.y, shape.frameSize, shape.frameSize, x, y, size, size);
+      else ctx.drawImage(sprite, x, y, size, size);
       ctx.restore();
     }
 
@@ -4581,8 +4679,14 @@
     }
 
     function sproutCombatFrame(agent, entry, index) {
-      if (!entry?.bodyBounds) return null;
-      const attributes = Spawner.unitDisplayAttributes(agent), key = agentAppearanceKey(attributes);
+      if (!entry?.bodyBounds?.[index] || !entry.bodyFrames?.[index] || !entry.attributeFrames) return null;
+      const attributes = Spawner.unitDisplayAttributes(agent);
+      const deathRoots = agent.kind === "corpse" && attributes.feet > 0;
+      // Missing organs keep the same authored death frame, never a cached
+      // incomplete composition. A later decoded image can retry this frame.
+      if (deathRoots && [agentParts.get("feet-1"), agentBaseParts.get("body")].some(sprite =>
+        !sprite || sprite.complete === false || !(sprite.naturalWidth || sprite.width))) return null;
+      const key = agentAppearanceKey(attributes) + (deathRoots ? ":death-roots" : "");
       if (!entry.attributeFrames.has(key)) entry.attributeFrames.set(key, new Map());
       const frames = entry.attributeFrames.get(key);
       if (frames.has(index)) return frames.get(index);
@@ -4599,14 +4703,17 @@
       const left = body.x - mount.x * scaleX, top = body.y - mount.y * scaleY;
       const roots = feet ? Spawner.sproutRootGeometry(feet) : null;
       const rootHeight = roots ? roots.height * scaleY : 0, rootWidth = roots ? roots.width * scaleX : 0;
-      const cut = body.y + body.height - size * .04;
+      // The ordinary attack adapter cuts off the base feet. On the forward
+      // collapse that cuts through the bulb itself, so preserve every authored
+      // body pixel and let the foreground foliage naturally cover the roots.
+      const cut = body.y + body.height + size * (deathRoots ? .02 : -.04);
       const rootTop = cut - rootHeight * .12;
       const lift = feet ? Math.max(0, rootTop + rootHeight - entry.floors[index]) : 0;
       context.translate(padding, padding - lift);
       if (feet) context.drawImage(agentParts.get("feet-1"),
         body.x + body.width / 2 - rootWidth / 2, rootTop, rootWidth, rootHeight);
       context.save();
-      if (attributes.feet) {
+      if (attributes.feet && !deathRoots) {
         context.beginPath(); context.rect(0, 0, size, cut); context.clip();
       }
       if (attributes.antenna) context.drawImage(entry.bodyFrames[index], 0, 0);
@@ -4630,17 +4737,26 @@
     }
 
     function drawAgentRanged(ctx, agent, centerX, floor, height, outlineColor) {
-      // Only existing idle/shoot art is used. Birth, death and resource actions
-      // retain their current action fallback; this is not a complete new rig.
-      if (agent.birth || ["harvest", "unload"].includes(agent.mode)) return false;
+      // Work/delivery reuse the selected secretion body's own source. Cargo,
+      // release, yield and deposits are still drawn by the existing scene.
+      if (agent.birth) return false;
       const pose = Spawner.unitRangedPose(agent, state.simSeconds);
-      if (!pose) return false;
+      const lifecycle = pose && Spawner.unitRangedAppearance?.(agent)?.lifecycle;
+      if (lifecycle) for (const clip of Object.values(lifecycle)) agentRangedImage(clip.image);
+      if (!pose || ["harvest", "unload"].includes(agent.mode) && !pose.resourceRest && !["shoot", "hurt", "harvest", "throw"].includes(pose.action)) return false;
       const bodyPose = Spawner.unitAnimationPose(agent, state.simSeconds);
       const moving = agent.moveDuration > 0 && state.simSeconds >= agent.moveStartedAt &&
         state.simSeconds < agent.moveStartedAt + agent.moveDuration;
-      if (bodyPose?.action === "hurt" || pose.action !== "shoot" && (moving || bodyPose && bodyPose.action !== "idle")) return false;
-      const sprite = agentRangedImage(pose.animation.image);
+      if (bodyPose?.action === "hurt" && pose.action !== "hurt" ||
+          !pose.resourceRest && !["shoot", "hurt", "walk", "harvest", "throw"].includes(pose.action) && (moving || bodyPose && bodyPose.action !== "idle")) return false;
+      let sprite = agentRangedImage(pose.animation.image);
       if (!sprite) return false;
+      if (pose.resource) {
+        sprite = Spawner.unitRangedResourceFrame(sprite, pose, (width, height) => {
+          const surface = document.createElement("canvas"); surface.width = width; surface.height = height; return surface;
+        }, idleMotion.matches);
+        if (!sprite) return false;
+      }
       const animation = pose.animation, frame = idleMotion.matches ? 0 : pose.frame;
       const size = Spawner.unitRangedDisplaySize(agent) / 100 * height / AGENT_HEIGHT / unitDisplayScale(agent);
       const left = -size * animation.pivotX / animation.frameSize, top = -size * animation.pivotY / animation.frameSize;
@@ -4769,6 +4885,14 @@
       ctx.save();
       ctx.translate(point.x, point.y);
       ctx.scale(agent.facing > 0 ? -1 : 1, 1);
+      if (!idleMotion.matches && pose.hop) {
+        const hop=pose.hop, pixel=size / 288;
+        ctx.translate(hop.targetX*pixel-size*animation.pivotX/animation.frameSize,
+          hop.targetY*pixel-size*animation.pivotY/animation.frameSize);
+        ctx.rotate(hop.rotation);
+        ctx.translate(-hop.sourceX*pixel+size*animation.pivotX/animation.frameSize,
+          -hop.sourceY*pixel+size*animation.pivotY/animation.frameSize);
+      }
       const outline = objectOutlineColor("agent", agent);
       if (outline) drawSelectionOutline(entry.sprite, left, top, size, size, source, outline);
       ctx.drawImage(entry.sprite, source.x, source.y, animation.frameSize, animation.frameSize, left, top, size, size);
@@ -5355,37 +5479,52 @@
         attack: agent.attack ? { ...agent.attack, directionX: 1 } : null };
       const maskCell = 256 / AGENT_HEIGHT;
       const origin = { x: 256 - maskCell / 2, y: 448 - maskCell * (.5 + AGENT_HEIGHT * .44) };
-      const sprite = combatAttributeArt.frame(forward, idleMotion.matches ? agent.bornAt || 0 : state.simSeconds, scale, (context, sampled) => {
+      const drawAttributes = (context, sampled, layer) => drawCombatAgentAttributes(context, forward, layer);
+      drawAttributes.splitFeet = true;
+      const drawBody = (context, sampled, layer) => {
         const neutral = Spawner.hasCombatEvolution(attributes) && sampled ? { ...forward, attack: null, hurtStartedAt: -Infinity,
           carrying: 0, birth: null, mode: sampled.action === "walk" ? forward.mode : "idle",
           moveDuration: sampled.action === "walk" ? forward.moveDuration : 0 } : forward;
         if (Spawner.hasCombatEvolution(attributes) && sampled && (agent.tribe || "bean") !== "bean" &&
             ["antenna", "strength", "arms", "feet"].some(key => attributes[key] > 0)) {
-          context.drawImage(tribeArt.sprite(agent.tribe, attributes, "full"), 0, 0, 512, 512); return;
+          if (drawBody.springThrust && sampled.action === "attack" && layer === "combat-body") {
+            const motion = tribeArt.combatAttackSprite(agent.tribe, attributes, attackSheet.sprite, sampled.sampleTime);
+            if (motion) { context.drawImage(motion, 0, 0, 512, 512); return motion.replacementSocket; }
+          }
+          context.drawImage(tribeArt.sprite(agent.tribe, attributes, layer || "full"), 0, 0, 512, 512); return;
         }
         drawAgentAppearanceBody(context, now, neutral, maskCell, origin, renderPosition, birth, null);
-      }, context =>
-        drawCombatAgentAttributes(context, forward));
+      };
+      drawBody.splitFeet = true;
+      const attackSheet = unitAnimationSheets.get(agent.tribe)?.get("attack");
+      drawBody.springThrust = Boolean(agent.attack && agent.attack.mode !== "ranged") &&
+        agent.tribe === "spring" && attributes.blade > 0 && !attributes.piercing && !attributes.carapace &&
+        (attributes.strength || attributes.arms) > 0 &&
+        Boolean(attackSheet?.sprite.complete && attackSheet.sprite.naturalWidth);
+      const sprite = combatAttributeArt.frame(forward, idleMotion.matches ? agent.bornAt || 0 : state.simSeconds, scale, drawBody, drawAttributes);
       const size = cell * AGENT_HEIGHT * 2;
       const floor = topLeft.y + cell * (.5 + AGENT_HEIGHT * .44);
       const facing = agent.combat ? agent.combat.side === 0 ? -1 : 1 : agent.facing || 1;
       ctx.save(); ctx.translate(topLeft.x + cell / 2, floor); ctx.scale(facing < 0 ? -1 : 1, 1);
-      if (outlineColor) drawSelectionOutline(sprite, -size / 2, -size * .875, size, size, null, outlineColor);
-      ctx.drawImage(sprite, -size / 2, -size * .875, size, size); ctx.restore();
+      const camera = sprite.combatCamera, pixelScale = size / (camera?.units || 512);
+      const x = -(camera?.pivotX || 256) * pixelScale, y = -(camera?.pivotY || 448) * pixelScale;
+      const width = (camera?.width || 512) * pixelScale, height = (camera?.height || 512) * pixelScale;
+      if (outlineColor) drawSelectionOutline(sprite, x, y, width, height, null, outlineColor);
+      ctx.drawImage(sprite, x, y, width, height); ctx.restore();
 
     }
 
-    function drawCombatAgentAttributes(context, agent) {
+    function drawCombatAgentAttributes(context, agent, layer) {
       const appearance = { ...(Spawner.unitDisplayAttributes(agent)) };
       if (!["feet", "antenna", "strength", "arms"].some(key => appearance[key] > 0)) return;
       if ((agent.tribe || "bean") === "bean") {
         context.save(); context.globalCompositeOperation = "destination-over";
-        if (appearance.feet) {
+        if (appearance.feet && layer !== "body") {
           if (Number.isFinite(agent.x) && Number.isFinite(agent.y)) drawAgentFeet(context, agent, 0, 0, 512, 512, agentWalkPose(agent), null);
           else context.drawImage(composeAgentSprite(appearance, "feet"), 0, 0, 512, 512);
         }
         context.restore();
-        context.drawImage(composeAgentSprite(appearance, "attributes-no-feet"), 0, 0, 512, 512);
+        if (layer !== "feet") context.drawImage(composeAgentSprite(appearance, "attributes-no-feet"), 0, 0, 512, 512);
       }
     }
 
@@ -7730,6 +7869,7 @@
         if (sprite) {
           const size = cell * AGENT_HEIGHT * 2;
           context.save(); context.translate(x, floor); context.globalAlpha *= opacity;
+          context.scale(corpse.facing < 0 ? -1 : 1, 1);
           if (outlineColor) drawSelectionOutline(sprite, -size / 2, -size * .875, size, size, null, outlineColor);
           context.drawImage(sprite, -size / 2, -size * .875, size, size); context.restore(); return true;
         }
@@ -7741,10 +7881,13 @@
       const entry = unitAnimationSheets.get(corpse.tribe || "bean")?.get("death");
       if (!entry?.sprite.complete || !entry.sprite.naturalWidth) return true;
       const frame = idleMotion.matches ? animation.frameCount - 1 : index;
-      const attributeFrame = ((corpse.tribe || "bean") === "bean" ||
+      const attributeFrame = (corpse.tribe || "bean") === "bean" ?
+        (attributes.feet && !attributes.antenna && !attributes.strength && !attributes.arms ? sproutCombatFrame(corpse, entry, frame) : null) :
         !["antenna", "strength", "arms", "feet"].some(key => attributes[key] > 0) ? null :
-        tribeArt.animationFrame(corpse, entry.sprite, animation, frame, "death", corpsePlaybackTime()));
-      const sheet = attributeFrame || entry.sprite;
+        tribeArt.animationFrame(corpse, entry.sprite, animation, frame, "death", corpsePlaybackTime());
+      const lifecycle = Spawner.unitRangedLifecycleAnimation?.(corpse, "death");
+      const lifecycleSheet = lifecycle && agentRangedImage(lifecycle.image);
+      const sheet = attributeFrame || lifecycleSheet || entry.sprite;
       animation = Spawner.imageFrameGeometry(animation, frame);
       const frameSize = attributeFrame ? sheet.width : animation.frameSize;
       const padding = (frameSize - animation.frameSize) / 2;
@@ -7761,6 +7904,10 @@
       context.globalAlpha *= opacity * (1 - decay * 0.4);
       context.filter = "saturate(" + (1 - decay * 0.8) + ")";
       context.translate(x, floor);
+      // The snapshot stores the last visible facing for every unit, not only
+      // blade/carapace bodies. Keep secretion and ordinary deaths on that same
+      // side; old saves without a facing retain their original orientation.
+      context.scale(corpse.facing < 0 ? -1 : 1, 1);
       context.drawImage(sheet, sourceX, sourceY, frameSize, frameSize,
         left, top, size, size);
       if (outlineColor) drawSelectionOutline(sheet, left, top, size, size,
@@ -8240,13 +8387,14 @@
         const frozen = hit && age >= 0 && age < .055;
         const visual = { ...agent, facing, hurtStartedAt: Number.isFinite(agent.hurtStartedAt) ? agent.hurtStartedAt + (frozen ? age : 0) : agent.hurtStartedAt,
           combat: { ...agent.combat, side: facing > 0 ? 1 : 0 }, attack: attack ? { ...attack, directionX: facing,
-            startedAt: attack.startedAt + (frozen ? age : 0), hitAt: attack.hitAt + (frozen ? age : 0), endsAt: attack.endsAt + (frozen ? age : 0) } : null };
+            startedAt: attack.startedAt + (frozen ? age : 0), hitAt: attack.hitAt + (frozen ? age : 0), endsAt: attack.endsAt + (frozen ? age : 0),
+            meleeContacts: Array.isArray(attack.meleeContacts) ? attack.meleeContacts.map(at => at + (frozen ? age : 0)) : undefined } : null };
         const appearancePose = appearancePoses.get(String(agent.id));
         context.save(); context.translate(x, y); context.scale(appearancePose ? 1 : point.scale, appearancePose ? 1 : point.scale);
         if (agent.combat.stunnedUntil > state.simSeconds) context.globalAlpha = .65;
         if (agent.species) drawCombatCreature(context, visual, 0, 0, cell);
         else if (!appearancePose || !appearanceWorld.draw(context, visual, appearancePose, { x: 0, y: 0 }, cell, facing < 0, 1))
-          drawAgentAppearanceBody(context, now, visual, cell, { x:-cell / 2, y:-cell * (.5 + AGENT_HEIGHT * .44) }, null, null, null);
+          drawAgentAppearanceLayer(context, now, visual, cell, { x:-cell / 2, y:-cell * (.5 + AGENT_HEIGHT * .44) }, null, null, null);
         context.restore();
         const barWidth = clamp(point.width * .6, 32, 100), barY = y + 8;
         context.fillStyle = "#182323"; context.fillRect(x - barWidth / 2, barY, barWidth, 5);

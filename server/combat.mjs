@@ -273,6 +273,7 @@ export function createCombat(environment) {
       targetId: target.id, targetKind: "agent", targetX: combat.x, targetY: combat.y,
       resolved: false, hit: false, counter, heavy, attackMode: mode };
     if (attacker.stats?.dna) { attacker.attack.hitIndex = 0; attacker.attack.heavy = false; }
+    if (attacker.stats?.dna && mode === "melee" && !counter) attacker.attack.meleeContacts = [attacker.attack.hitAt];
     const causeId = combatVfxToken(environment, "attack");
     attackCauses.set(attacker.attack, causeId);
     if (!counter) vfx("attack", time, attacker, target, 0, { causeId, mode, endsAt: attacker.attack.hitAt });
@@ -363,6 +364,7 @@ export function createCombat(environment) {
         (shield ? shield.power > 0 && random() * 100 < shield.counter : true)) beginAttack(defender, attacker, time, true);
     if (source && !attack.counter && attacker.health > 0 && defender.health > 0 && ++attack.hitIndex < source.hits) {
       attack.resolved = false; attack.hitAt = time + source.comboSpeed;
+      if (attack.meleeContacts) attack.meleeContacts.push(attack.hitAt);
       attack.endsAt = Math.max(attack.endsAt, attack.hitAt + combatProfile(attacker).recovery);
     }
   }
@@ -527,9 +529,13 @@ export function createCombat(environment) {
     const target = targets[0]; if (!target) return false;
     const separation = distance(agent, target.agent), windup = stats.focus, launchedAt = time + windup;
     const arrivesAt = launchedAt + dnaProjectileDuration(separation), readyAt = time + Math.max(1 / stats.rangedSpeed, windup + (stats.hits - 1) * stats.comboSpeed);
+    // readyAt groups additions differently from the per-shot schedule and may
+    // round one step before its final launch. Do not retire/cancel that shot;
+    // keep the existing cooldown, exact launch times and recovery otherwise.
+    const lastLaunchAt = launchedAt + (stats.hits - 1) * stats.comboSpeed;
     agent.attackReady = readyAt;
-    agent.attack = { dnaRanged: true, attackMode: "ranged", startedAt: time, launchedAt, hitAt: arrivesAt,
-      endsAt: Math.min(readyAt, launchedAt + (stats.hits - 1) * stats.comboSpeed + .15), speed: 1, targetId: target.agent.id, targetKind: "agent", targetX: target.agent.x, targetY: target.agent.y,
+    agent.attack = { dnaRanged: true, attackMode: "ranged", startedAt: time, launchedAt, hitAt: arrivesAt, shotLaunches: [],
+      endsAt: Math.max(lastLaunchAt, Math.min(readyAt, lastLaunchAt + .15)), speed: 1, targetId: target.agent.id, targetKind: "agent", targetX: target.agent.x, targetY: target.agent.y,
       fromX: agent.x, fromY: agent.y, directionX: Math.sign(target.agent.x - agent.x) || 1, resolved: false, hit: false };
     const causeId = combatVfxToken(environment, "attack");
     attackCauses.set(agent.attack, causeId);
@@ -537,6 +543,8 @@ export function createCombat(environment) {
     agent.attackTargetId = target.agent.id;
     for (let hitIndex = 0; hitIndex < stats.hits; hitIndex++) {
       const shotLaunch = launchedAt + hitIndex * stats.comboSpeed, shotArrival = arrivesAt + hitIndex * stats.comboSpeed;
+      // Keep the animation clock after a projectile arrives and its visual is removed.
+      agent.attack.shotLaunches.push(shotLaunch);
       const visual = { launchedAt: shotLaunch, hitAt: shotArrival, fromX: agent.x, fromY: agent.y, targetX: target.agent.x, targetY: target.agent.y };
       agent.dnaProjectiles = [...(agent.dnaProjectiles || []), visual];
       projectiles.add({ source: agent, target, arrivesAt: shotArrival, launchedAt: shotLaunch, launched: false,
