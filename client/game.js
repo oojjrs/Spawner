@@ -5416,6 +5416,7 @@
       const facing = agent.combat ? agent.combat.side === 0 ? -1 : 1 : agent.facing || 1;
       return (speciesSource ? Spawner.drawSpeciesHeldHurt : Spawner.drawBeanHeldHurt)(context, agent, state.simSeconds, agentRangedImage, {
         x, y, sourceScale, mirror: facing < 0,
+        hitSide: !agent.combat ? Spawner.heldHurtProjectileSide?.(agent, combatVfxFrame, state.simSeconds) : null,
         beforeDraw: outlineColor && context === ctx ? (context, image, crop, destination) =>
           drawSelectionOutline(image, destination.x, destination.y, destination.width, destination.height,
             { owner: image, index: crop.y * image.width + crop.x, x: crop.x, y: crop.y, size: crop.width, height: crop.height }, outlineColor) : null

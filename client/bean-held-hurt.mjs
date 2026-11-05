@@ -8,6 +8,40 @@ import { BEAN_HELD_HURT_SOURCES } from "./bean-held-hurt-assets.mjs";
 export const BEAN_HURT_HOLD_SECONDS = .5;
 export const BEAN_HURT_TOTAL_SECONDS = .88;
 export const BEAN_HELD_HURT_ASSETS = Object.freeze(Object.values(BEAN_HELD_HURT_SOURCES).map(source => source.image));
+
+// World-only direction for an already active visual hurt. Arena positions are
+// synthetic, so combat-attached actors must keep their existing facing rule.
+// Frozen visible flight endpoints remain correct if either actor moves later.
+export function heldHurtProjectileSide(agent, frame, time) {
+  if (!agent || agent.combat || agent.birth || agent.kind === "corpse" || !(agent.health > 0) || !Number.isFinite(time) ||
+      !Number.isFinite(agent.hurtStartedAt) || time < agent.hurtStartedAt || time - agent.hurtStartedAt >= BEAN_HURT_TOTAL_SECONDS) return null;
+  const events = frame?.retainedEvents || [], same = (a, b) => a != null && b != null && String(a) === String(b);
+  if (events.some(event => ["bleed", "area", "reflect"].includes(event.kind) && event.amount > 0 &&
+    same(event.toId ?? event.targetId, agent.id) && Math.abs(event.at - agent.hurtStartedAt) < 1e-6)) return null;
+  const hits = events.filter(event => ["hit", "critical", "block"].includes(event.kind) &&
+    Number.isFinite(event.amount) && event.amount > 0 && same(event.targetId, agent.id) &&
+    Number.isFinite(event.at) && Math.abs(event.at - agent.hurtStartedAt) < 1e-6 && event.at <= time);
+  if (!hits.length) return null;
+  const sides = new Set();
+  for (const hit of hits) {
+    // Do not discard an unidentified same-epoch strike before checking agreement.
+    if (hit.mode !== "ranged" || hit.sourceId == null || hit.projectileId == null) return null;
+    if (events.some(event => event.kind === "projectile-cancel" && same(event.projectileId, hit.projectileId) && event.at <= hit.at)) return null;
+    const shots = events.filter(event => event.kind === "shoot" && event.mode === "ranged" &&
+      same(event.projectileId, hit.projectileId) && same(event.sourceId, hit.sourceId) && same(event.targetId, agent.id) &&
+      Number.isFinite(event.at) && event.at <= hit.at && Number.isFinite(event.arrivesAt) && Math.abs(event.arrivesAt - hit.at) < 1e-6);
+    if (!shots.length) return null;
+    for (const shot of shots) {
+      if (![shot.from?.x, shot.from?.y, shot.to?.x, shot.to?.y, hit.to?.x, hit.to?.y].every(Number.isFinite) ||
+          shot.to.x !== hit.to.x || shot.to.y !== hit.to.y) return null;
+      const side = Math.sign(shot.from.x - shot.to.x);
+      if (!side) return null; // A vertical path does not establish left/right.
+      sides.add(side);
+    }
+  }
+  // Simultaneous strikes from opposite sides have no single supported pose.
+  return sides.size === 1 ? [...sides][0] : null;
+}
 const recovery = [[.5,1],[.66,0],[.72,-.22],[.8,.07],[.88,0]];
 export function beanHeldHurtAmount(age) {
   if (!Number.isFinite(age) || age < 0 || age >= BEAN_HURT_TOTAL_SECONDS) return 0;
