@@ -152,9 +152,12 @@ export function beetleAnimationPose(agent, time) {
   } else if (!rpg && agent.mode === "attack" && (time - agent.attackStartedAt) * 1000 + 1e-6 < BEETLE_ANIMATIONS.attack.durationMs) {
     action = "attack";
     startedAt = agent.attackStartedAt;
-  } else if (agent.mode === "walk" && time < agent.moveStartedAt + agent.moveDuration) {
-    action = "walk";
-    startedAt = agent.moveStartedAt;
+  } else if (agent.mode === "walk" && agent.moveDuration > 0 &&
+      time >= agent.moveStartedAt && time < agent.moveStartedAt + agent.moveDuration) {
+    // The authored walk strip covers one cell (two gait cycles). Play the
+    // whole strip over that cell, including when terrain changes its duration.
+    const progress = (time - agent.moveStartedAt) / agent.moveDuration;
+    return { action: "walk", frame: beetleAnimationFrame("walk", progress * BEETLE_ANIMATIONS.walk.durationMs) };
   } else if (agent.mode === "walk") startedAt = agent.moveStartedAt + agent.moveDuration;
   return { action, frame: beetleAnimationFrame(action, (time - startedAt) * 1000 *
     (rpg && action === "hurt" ? BEETLE_ANIMATIONS.hurt.durationMs / 120 : 1)) };

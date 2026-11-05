@@ -255,7 +255,7 @@
     if (key === "spiny-back-beetle") {
       if (animations.beetleAnimationPose(unit, time).action !== "walk") return null;
       animation = animations.BEETLE_ANIMATIONS.walk;
-      rate = 1000 / animation.durationMs;
+      rate = 1 / unit.moveDuration;
       phase = elapsed * rate;
     } else {
       if (unit.species) {
@@ -330,7 +330,7 @@
       if (!initial) for (const audible of motion.definition.phases) {
         const phase = audible - motion.definition.leadMs * motion.rate / 1000;
         const contact = Math.floor(motion.phase - phase + 1e-8) + phase;
-        if (contact > earlier && contact <= motion.phase + 1e-8 && (motion.phase - contact) / motion.rate <= .12)
+        if (contact > earlier + 1e-8 && contact <= motion.phase + 1e-8 && (motion.phase - contact) / motion.rate <= .12)
           events.push({ name: motion.definition.name, unit });
       }
       playback.units.set(unit.id, { startedAt, phase: motion.phase });

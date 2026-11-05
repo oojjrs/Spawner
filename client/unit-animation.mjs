@@ -1,4 +1,5 @@
 import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
+import { toadHopMotion } from "./toad-hop.mjs";
 import { attackAnimationElapsed, AGENT_ATTACK_HIT_TIME } from "../server/attack.mjs";
 import { CREATURE_ATTACK_TIMINGS } from "../server/creature-attack.mjs";
 import { imageAnimation } from "./image-geometry.mjs";
@@ -220,6 +221,10 @@ export function creatureWalkPose(agent, time) {
   if (!animation || agent.health <= 0 || agent.mode !== "walk" ||
     !(agent.moveDuration > 0) || !Number.isFinite(elapsed) || elapsed < 0 || elapsed >= agent.moveDuration) return null;
   if (agent.species === "spring-keeper") return springKeeperFlightPose(agent, time);
+  if (agent.species === "bubble-toad") {
+    const hop=toadHopMotion(elapsed / agent.moveDuration);
+    return { animation, frame:hop.frame, hop };
+  }
   const progress = Math.max(0, (agent.stepCount || 1) - 1) + elapsed / agent.moveDuration;
   return { animation, frame: unitAnimationFrame(animation, progress * (animation.cyclesPerCell || 1) * animation.durationMs) };
 }
@@ -236,6 +241,8 @@ export function unitMovementPosition(agent, time, reducedMotion = false) {
   if (!reducedMotion && beanHop) {
     progress = Math.max(0, Math.min(1, (raw - .18) / .82));
     travel = progress * progress * (3 - 2 * progress);
+  } else if (!reducedMotion && agent.species === "bubble-toad") {
+    travel=toadHopMotion(raw).travel;
   } else if (!reducedMotion && agent.species) {
     const animation = CREATURE_WALK_ANIMATIONS[agent.species], window = animation?.travelWindow;
     if (window) {

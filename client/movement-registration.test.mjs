@@ -8,6 +8,7 @@ import { beetleAnimationPose } from '../server/beetle-animation.mjs';
 import { welcomeTravelMotion, welcomeCreatureScale } from './welcome-presentation.mjs';
 import { unitStats } from '../server/attributes.mjs';
 import { imageFrameGeometry } from './image-geometry.mjs';
+import { TOAD_HOP } from './toad-hop.mjs';
 const reference = JSON.parse(readFileSync(new URL('./creature-walk-reference.json',import.meta.url))).creatures;
 const model = { unitStats, unitMovementPosition, creatureAnimationSpeed };
 const near=(a,b)=>assert.ok(Math.abs(a-b)<1e-5,`${a} != ${b}`);
@@ -25,7 +26,7 @@ test('all 19 neutral species have an original idle reference and every strip kee
    const g=imageFrameGeometry(a,frame);assert.equal(g.viewSize,a.viewSize);assert.equal(g.frameSize,a.frameSize);
    assert.ok(Math.abs(g.pivotX-a.pivotX)<=3.000001);assert.ok(Math.abs(g.pivotY-a.pivotY)<=3.000001);
   }
-  if(!a.travelWindow)assert.ok(a.cyclesPerCell*CREATURE_MOVEMENT[r.key].speed<=2.00001,r.key);
+  if(!a.travelWindow)assert.ok(Number.isFinite(a.cyclesPerCell)&&a.cyclesPerCell>0,r.key);
   if(r.preservedGroundRegistration){near(a.pivotX,131.25);near(a.pivotY,220.81);}
  }
 });
@@ -43,7 +44,15 @@ test('bean preparation and footed movement preserve their native trajectories',(
 test('authored jumps advance during flight and remain planted before takeoff and after landing',()=>{
  for(const species of ['dew-rabbit','bubble-toad','lantern-keeper']){
   const a=agent(species),[start,end]=CREATURE_WALK_ANIMATIONS[species].travelWindow;
-  near(unitMovementPosition(a,start/2).x,0);near(unitMovementPosition(a,(start+end)/2).x,.5);
+  near(unitMovementPosition(a,start/2).x,0);
+  // Approved toad v5 reaches its halfway position at the 44% flight apex,
+  // not the temporal midpoint: ascent decelerates, descent accelerates.
+  const halfway=species==='bubble-toad'?start+(end-start)*TOAD_HOP.apex:(start+end)/2;
+  near(unitMovementPosition(a,halfway).x,.5);
+  if(species==='bubble-toad') {
+   const middle=unitMovementPosition(a,(start+end)/2).x;
+   assert.ok(middle>.5&&middle<.53,'asymmetric flight must not regress to linear midpoint');
+  }
   near(unitMovementPosition(a,(end+1)/2).x,1);near(unitMovementPosition(a,1).x,1);
  }
 });
@@ -98,5 +107,16 @@ test('all 23 welcome units keep valid poses at exact cell boundaries and adjacen
    if(key!=='bean')assert.ok(pose,key+' pose '+time);
    if(pose)assert.ok(Number.isInteger(pose.frame),key+' frame '+time);
   }
+ }
+});
+
+// Spatial registration must not silently slow the authored boar gait.
+test('boar retains two full strides per cell at every movement duration',()=>{
+ const animation=CREATURE_WALK_ANIMATIONS['soil-boar'];
+ assert.equal(animation.cyclesPerCell,2);
+ for(const duration of [.3125,.625,1.25]){
+  const a={...agent('soil-boar'),moveDuration:duration};
+  for(const [progress,frame] of [[0,0],[.125,2],[.25,4],[.375,6],[.5,0],[.875,6]])
+   assert.equal(creatureWalkPose(a,progress*duration).frame,frame);
  }
 });

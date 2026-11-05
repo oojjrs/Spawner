@@ -71,7 +71,11 @@ export function createUnitAppearanceEventPlayback({maxGap=.5}={}) {
   const cursors=new Map(),seen=new Map();
   function update(state,animation,time) {
     if(!state||!animation||!Number.isFinite(time))return [];
-    const previous=cursors.get(state.unitId);cursors.set(state.unitId,time);
+    const previous=cursors.get(state.unitId);
+    // Refresh recency and bound every observation, including first sightings,
+    // rewinds and long gaps which return before event traversal.
+    cursors.delete(state.unitId);cursors.set(state.unitId,time);
+    while(cursors.size>512)cursors.delete(cursors.keys().next().value);
     if(previous===undefined||time<previous||time-previous>maxGap)return [];
     const events=[],ms=durationOf(animation),loop=animation.loop===true;
     if(!(ms>0))return [];
@@ -90,7 +94,6 @@ export function createUnitAppearanceEventPlayback({maxGap=.5}={}) {
       seen.set(id,true);events.push({...event,at,cycle,dedupeId:id,unitId:state.unitId,action:state.action});
     }
     while(seen.size>2048)seen.delete(seen.keys().next().value);
-    while(cursors.size>512)cursors.delete(cursors.keys().next().value);
     return events;
   }
   return {update,reset(){cursors.clear();seen.clear()}};
