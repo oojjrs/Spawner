@@ -45,8 +45,8 @@ function modal(species,side=1,scale=1.35) {
 }
 
 // The approved list is deliberately narrower than the existing registry.
-test('only the two approved V12 creature deaths join the existing eight tribe routes',()=>{
- assert.deepEqual(DETAIL_DEATH_CREATURES,['vine-turtle','walking-forest']);assert.ok(Object.isFrozen(DETAIL_DEATH_CREATURES));
+test('only the five approved creature deaths join the existing eight tribe routes',()=>{
+ assert.deepEqual(DETAIL_DEATH_CREATURES,['vine-turtle','walking-forest','cotton-sheep','lantern-keeper','spiny-back-leader']);assert.ok(Object.isFrozen(DETAIL_DEATH_CREATURES));
  for(const species of Object.keys(CREATURE_DEATH_ANIMATIONS))assert.equal(detailDeathForm({species}),DETAIL_DEATH_CREATURES.includes(species)?'creature/'+species:null,species);
  for(const species of ['spiny-back-beetle','unknown'])assert.equal(detailDeathForm({species,tribe:'bean'}),null);
  for(const tribe of ['bean','spore','pebble','spring'])for(const secretion of [false,true])assert.equal(detailDeathForm({tribe,attributes:secretion?{secretion:1}:{}}),tribe+(secretion?'/secretion':'/base'));

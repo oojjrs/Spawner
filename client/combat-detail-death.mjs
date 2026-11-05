@@ -4,11 +4,12 @@ import { UNIT_APPEARANCE_LEGACY_VISUAL_KEYS } from "../server/unit-appearance.mj
 import { unitAnimationFrame } from "./unit-animation.mjs";
 import { imageFrameGeometry } from "./image-geometry.mjs";
 
-// These two V12 slump sequences were explicitly approved together. Do not open
-// every creature route: the registry also contains unfinished/rejected studies.
-export const DETAIL_DEATH_CREATURES = Object.freeze(["vine-turtle", "walking-forest"]);
+// Only individually approved death sequences. Do not open every creature
+// route: the registry also contains unfinished or rejected studies.
+export const DETAIL_DEATH_CREATURES = Object.freeze(["vine-turtle", "walking-forest",
+  "cotton-sheep", "lantern-keeper", "spiny-back-leader"]);
 
-// Existing complete base/secretion and the two approved creature death routes.
+// Existing complete base/secretion and individually approved creature deaths.
 // Other families keep their behavior; no readiness/hidden-anatomy workaround.
 export function detailDeathForm(unit) {
   if (!unit) return null;

@@ -1,0 +1,299 @@
+{
+  "species": [
+    {
+      "species": "cotton-sheep",
+      "image": "DesignAssets/Animations/CreatureDeathV6/cotton-sheep/runtime.webp",
+      "runtimeSha256": "d7b2455df814b0709930db882dbf42011e1e75a4a58ce3ec3fe5275a1a132c93",
+      "sourceImage": "DesignAssets/Animations/CreatureDeathV6/cotton-sheep/death.webp",
+      "sourceSha256": "198c4d38e2a96dfc77b53a0be59bd054ac14d7b9b54add429e4b018efd668466",
+      "sourceFrames": [
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV6/cotton-sheep/Source/Frames/000.png",
+          "sha256": "adf1f77f7b1e9ca91be2c87d73822d00bedaedc0e2004f9158b815d6d96f8d62"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV6/cotton-sheep/Source/Frames/001.png",
+          "sha256": "3e84424444f189fc98ffb87e646a16aaa0ea58e8f182258a648a0f45960c72cf"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV6/cotton-sheep/Source/Frames/002.png",
+          "sha256": "91796f9cf1edca8b09d3bdf02bdce74d745a0ff2d3e5b32b8e58c6be7a87f398"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV6/cotton-sheep/Source/Frames/003.png",
+          "sha256": "b1670ae1cddaaf419477e59b6e0cd2961ff96fc84e2cde535335ba65bd4e3ff2"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV6/cotton-sheep/Source/Frames/004.png",
+          "sha256": "90b1e08235d770fae2cba7ea010948e6fcd41a45de55a3d0502c8c1e900c8a58"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV6/cotton-sheep/Source/Frames/005.png",
+          "sha256": "8b3ee22e56c86c40ade6f8652efdda8cc0785130d90fd9a74205511740679f85"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV6/cotton-sheep/Source/Frames/006.png",
+          "sha256": "2784cc6255d8b3fe77cec99613c6a4f23f0cdb69dc882d715c2a7038413ba947"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV6/cotton-sheep/Source/Frames/007.png",
+          "sha256": "2784cc6255d8b3fe77cec99613c6a4f23f0cdb69dc882d715c2a7038413ba947"
+        }
+      ],
+      "localImage": "client/local-assets/Animations/CreatureDeathV6/cotton-sheep/runtime.webp.js",
+      "idleBounds": {
+        "x": 29,
+        "y": 50,
+        "width": 192,
+        "height": 175
+      },
+      "deathBounds": {
+        "x": 27,
+        "y": 49,
+        "width": 193,
+        "height": 175
+      },
+      "idleScale": 1.25,
+      "preparedEntryScale": 1.2435233160621764,
+      "outerBaseScale": 0.2438095238095238,
+      "dimensions": [
+        1024,
+        512
+      ]
+    },
+    {
+      "species": "lantern-keeper",
+      "image": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/runtime.webp",
+      "runtimeSha256": "75de77efea52a26e3de6a10bc5d55e28108e5e26c037b04c6fd708da7307b4ba",
+      "sourceImage": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/death.webp",
+      "sourceSha256": "dbc2112237e9d5d64071dbca3bc5c64cfe0320e694bb4af04531f8a6508889ae",
+      "sourceFrames": [
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/000.png",
+          "sha256": "becf45ef1405736107ba914c47e77c297d722a923a2b869d89792b3359472a09"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/001.png",
+          "sha256": "becf45ef1405736107ba914c47e77c297d722a923a2b869d89792b3359472a09"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/002.png",
+          "sha256": "becf45ef1405736107ba914c47e77c297d722a923a2b869d89792b3359472a09"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/003.png",
+          "sha256": "52ec126a5ab0754d7f2a827732bb70734ffe6fc316d7732b5cad035569161a1e"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/004.png",
+          "sha256": "52ec126a5ab0754d7f2a827732bb70734ffe6fc316d7732b5cad035569161a1e"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/005.png",
+          "sha256": "b7d5064cda0f339397d515cfe63dbd93060098516cc6dd6eb702d7e03a9653aa"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/006.png",
+          "sha256": "b7d5064cda0f339397d515cfe63dbd93060098516cc6dd6eb702d7e03a9653aa"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/007.png",
+          "sha256": "f9faab49b9fcdc6948b184b7c6bc6a976aefc98eeab857ec14b2f8badadbc6f4"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/008.png",
+          "sha256": "aca8c75562d855059eb28ae08d700429272745eecc033aecf9275ad5f10fc3df"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/009.png",
+          "sha256": "cda7596c8658f0416188bfb77f65f27d51b331c4798ccb4ed718f8390edde35a"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/010.png",
+          "sha256": "5828af4f2a7087c29ecf88f61f2337996d49f48751ac0303bc734f2a85746716"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/011.png",
+          "sha256": "69df3baab4eea6f673f0164dff9b129ff76a716efcb5d75589df36ef000a277b"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/012.png",
+          "sha256": "35151c794d0f353dfa79c23a963b51019a2181b838089ce0f223e48f1394b550"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/013.png",
+          "sha256": "2461f8af0a0c386e456b9aa52633aee5b20afc6c1912ed85f91c797b648a49fb"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/014.png",
+          "sha256": "c909f34cee23b0af8e0f7cda76fb86532dc22a24380c7fc6ccec45fe1b3b0c57"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/015.png",
+          "sha256": "4405311b49fcef78b338788a2e6231283bc536111d215aa56aac4c240e8870a2"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/016.png",
+          "sha256": "7d274d66cac7f5bf46d1391066b84ac8f5f78a6b5f04adcd58c644622fd794a7"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/017.png",
+          "sha256": "0760ea9f18ad45e57671a3132f7a9c3ffe6742c82270dfb125667e2e17ed6d83"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/018.png",
+          "sha256": "51bbcbd4d53e7153a70f8fa9bc634b54504525838f1be806cc1b1df89634cef1"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/019.png",
+          "sha256": "6254b0094ac8a7fd7e0ebb5d4d525ad2d45b9fb29b0cc33d48bae6c354b19d96"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/020.png",
+          "sha256": "c8b27e4dc8ef6b39bca601c23e8cc954e930c15a1d5bb89708c4922187cfed51"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/021.png",
+          "sha256": "31555ed2014a44723e151cd78bfc7df226fa7c099c7df93aff3240e7e8a7ff1b"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/022.png",
+          "sha256": "99e2893f9d17e878bf2651d9703f3c55ada57be971803d809a56154d2025442a"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/023.png",
+          "sha256": "836a895d60bf64defb9ed749ef4a23e85d0b31fc4aee91247a5cdf3c102e646c"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/024.png",
+          "sha256": "0d2a96334009173df5bb4a0ce24e93868289d6ab3995770eb806dc5c285f4cf3"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/025.png",
+          "sha256": "38c6eae72d2738e798c2b6d747ec35bfb77756bb662ad11444f66b7f92306008"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/026.png",
+          "sha256": "4bbba1061b67724d12fc94480b904df2da5fd5143a7679cefd5e5f432e1e06ba"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/027.png",
+          "sha256": "e89f8efb7bffb8ec4fda12d54f199e1d7f8135f9a6d27c87f5f9fa4ca9119236"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/028.png",
+          "sha256": "6f637ac025d8a65798d108642eef15b1dd03774ed25b20417c9bacd0f6390e50"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/029.png",
+          "sha256": "a865da33af8420cf0293cebdbcc4aecfcf5b52d5a262b05a145550b615a9a16d"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/030.png",
+          "sha256": "1c10f08069be1796a9aeb8c24d5a4782fdc238fa2c5bed15305ce34ce9138b4a"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/031.png",
+          "sha256": "17c4b6217682f53bbc0a8745be1c3e759f2f1eb4cec1e1c1bde9978434ec4c48"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/032.png",
+          "sha256": "64b6efc2e3066039bab1210fdc7414437a14505ad2c6e43a1878beb8704f77b6"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/033.png",
+          "sha256": "3ad60e0d1c26c279fe22689be0f65e2e29acee308473c0807ad176ca059e4e66"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/034.png",
+          "sha256": "245189d7fc8d65c702089cbd92f2c8f650ca9744f69d32aebd6bee80bddf5ba1"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/035.png",
+          "sha256": "ac8eceba8191491a8372fb5d2a427686d61f13f419dd366917a026af228c35ed"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/036.png",
+          "sha256": "d8ef70ad89abc31251b1e8da1915cb94d4cff00cb2ac0470d147cc36fdd6e8a5"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/037.png",
+          "sha256": "47837e905de4249720cbdeadd37c1b32c8549ae6cad7be9baaafaf5deb002969"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/038.png",
+          "sha256": "61abd6dce3f48b2572c6ebf0ac1bca3118be220745f04a22659a4535c170e237"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/039.png",
+          "sha256": "a198230d3dec3f64a4ebcc7eab32d9b1350095446a8dfc3bbc97776306ecfa01"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/Source/Frames/040.png",
+          "sha256": "1706fa73cb25be53a743b578d1aef37754008f469f550a464018a47bc48a47f4"
+        }
+      ],
+      "localImage": "client/local-assets/Animations/CreatureDeathV10/lantern-keeper/runtime.webp.js",
+      "idleBounds": {
+        "x": 40,
+        "y": 81,
+        "width": 281,
+        "height": 256
+      },
+      "deathBounds": {
+        "x": 31,
+        "y": 52,
+        "width": 182,
+        "height": 172
+      },
+      "idleScale": 1.2811387900355873,
+      "preparedEntryScale": 1.2811387900355875,
+      "outerBaseScale": 0.700952380952381,
+      "dimensions": [
+        1536,
+        1792
+      ]
+    },
+    {
+      "species": "spiny-back-leader",
+      "image": "DesignAssets/Animations/CreatureDeathV10/spiny-back-leader/runtime.webp",
+      "runtimeSha256": "2c15d5441d1f1ac514d9593c5a29be49ca165e696b0471c4c87e7cf4889f4255",
+      "sourceImage": "DesignAssets/Animations/CreatureDeathV10/spiny-back-leader/death.webp",
+      "sourceSha256": "f86aff28f6b8e9015e00227aff83e7b671bb45cf939bc0008a56989ac9518e77",
+      "sourceFrames": [
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/spiny-back-leader/Source/Keys/key-00-neutral.png",
+          "sha256": "8404a3fbcd800647d8243c517caac3b9d499320a56441728a74be9c258384e72"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/spiny-back-leader/Source/Keys/key-01-buckle.png",
+          "sha256": "b6b007ef9feb339d3e100667b9c125ebd138f79175cd0e19a7bfa13bdaa3d0a1"
+        },
+        {
+          "path": "DesignAssets/Animations/CreatureDeathV10/spiny-back-leader/Source/Keys/key-02-collapse.png",
+          "sha256": "d007ddbf49850d6956a8060e52a2b6f239f4e47d8b111e99b99961a15d4d2bb1"
+        }
+      ],
+      "localImage": "client/local-assets/Animations/CreatureDeathV10/spiny-back-leader/runtime.webp.js",
+      "idleBounds": {
+        "x": 10,
+        "y": 33,
+        "width": 220,
+        "height": 191
+      },
+      "deathBounds": {
+        "x": 11,
+        "y": 49,
+        "width": 203,
+        "height": 176
+      },
+      "idleScale": 1.0909090909090908,
+      "preparedEntryScale": 1.1822660098522166,
+      "outerBaseScale": 0.9447619047619049,
+      "dimensions": [
+        768,
+        256
+      ]
+    }
+  ]
+}
