@@ -132,7 +132,7 @@ export function createCombatVfxCursor({ maxLateness = .35, maxEvents = 512 } = {
       const id = events.keys().next().value;
       events.delete(id); seen.delete(id); eligible.delete(id);
     }
-    return { started, active, projectiles: state.projectiles, reset, gap, streamId };
+    return { started, active, projectiles: state.projectiles, reset, gap, streamId, retainedEvents: ordered.slice(-maxEvents) };
   }
   return { consume, reset() { clear(); streamId = null; previousTime = null; } };
 }

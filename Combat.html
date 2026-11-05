@@ -13100,7 +13100,7 @@ function createCombatVfxCursor({ maxLateness = .35, maxEvents = 512 } = {}) {
       const id = events.keys().next().value;
       events.delete(id); seen.delete(id); eligible.delete(id);
     }
-    return { started, active, projectiles: state.projectiles, reset, gap, streamId };
+    return { started, active, projectiles: state.projectiles, reset, gap, streamId, retainedEvents: ordered.slice(-maxEvents) };
   }
   return { consume, reset() { clear(); streamId = null; previousTime = null; } };
 }
@@ -14527,11 +14527,12 @@ function projectileClip(agent) {
 }
 function createDetailCombatVfx() {
   const impacts = new Map(), vitals = new Map(), deaths = new Map(), anchors = new Map(), flightAnchors = new Map(), defenses = new Map();
+  const directDamage = new Map();
   let viewScope;
   function clearView() { anchors.clear(); flightAnchors.clear(); viewScope = undefined; }
   let projectiles = [];
   function consume(frame, time) {
-    if (frame.reset) { impacts.clear(); vitals.clear(); deaths.clear(); defenses.clear(); clearView(); }
+    if (frame.reset) { impacts.clear(); vitals.clear(); directDamage.clear(); deaths.clear(); defenses.clear(); clearView(); }
     for (const cue of frame.started || []) if (cue.channel === "defense" && DETAIL_DEFENSE_VFX[cue.kind]) {
       const damage = (frame.started || []).find(item => item.eventId === cue.eventId && item.channel === "impact" && item.amount > 0);
       defenses.set(cue.eventId, { ...cue, endsAt: cue.at + .45, residualAmount: cue.kind === "block" ? damage?.amount || 0 : 0 });
@@ -14553,6 +14554,22 @@ function createDetailCombatVfx() {
       (cue.channel === "restore" && ["heal", "drain", "regeneration"].includes(cue.kind) ||
         cue.channel === "impact" && cue.kind === "bleed")) vitals.set(cue.id, cue);
     for (const [id, cue] of vitals) if (time < cue.at || time - cue.at >= .85) vitals.delete(id);
+    // Block owns its residual number for the whole event, even after its shorter
+    // defense animation ends. Never replay it later as an ordinary damage label.
+    const blocked = new Set((frame.started || []).filter(cue => cue.channel === "defense" && cue.kind === "block").map(cue => cue.eventId));
+    for (const cue of frame.started || []) if (cue.channel === "impact" && cue.amount > 0 &&
+      ["hit", "critical", "followup", "area", "reflect"].includes(cue.kind) && !blocked.has(cue.eventId)) directDamage.set(cue.id, cue);
+    for (const [id, cue] of directDamage) {
+      if (time < cue.at || time - cue.at >= .85) { directDamage.delete(id); continue; }
+      // Caption tails outlive short impact cues. Refresh endpoint visibility
+      // from retained authoritative records even after that semantic cue ends.
+      const current = (frame.retainedEvents || []).find(item => item.id === cue.eventId);
+      if (current) {
+        if (!(current.amount > 0) || !["hit", "critical", "area", "reflect"].includes(current.kind)) { directDamage.delete(id); continue; }
+        directDamage.set(id, { ...cue, sourceId: current.sourceId, targetId: current.targetId,
+          anchorId: current.toId ?? current.targetId });
+      }
+    }
     projectiles = frame.projectiles || [];
     const activeFlights = new Set(projectiles.map(shot => shot.id));
     for (const id of flightAnchors.keys()) if (!activeFlights.has(id)) flightAnchors.delete(id);
@@ -14634,7 +14651,10 @@ function createDetailCombatVfx() {
       const id = String(cue.anchorId ?? cue.targetId), previous = latestRegeneration.get(id);
       if (!previous || cue.at >= previous.at) latestRegeneration.set(id, cue);
     }
-    return [...vitals.values()].flatMap(cue => {
+    // Laboratory already owns its direct-damage numbers. Only the actual detail
+    // panel opts in, while reusing observed recipient/death anchors and lanes.
+    const cues = [...vitals.values(), ...(view.includeDirectDamage ? [...directDamage.values()].map(cue => ({ ...cue, directDamage: true })) : [])];
+    return cues.flatMap(cue => {
       const id = String(cue.anchorId ?? cue.targetId), restore = cue.channel === "restore";
       if (restore && (!byId.has(id) || byId.get(id).health <= 0 || deaths.has(id))) return [];
       // Regeneration can arrive every simulation tick. One recovery ring per
@@ -14645,10 +14665,81 @@ function createDetailCombatVfx() {
       const lane = lanes.get(id) || 0; lanes.set(id, lane + 1);
       return [{ kind: cue.kind, channel: cue.channel, eventId: cue.eventId, sourceId: cue.sourceId,
         targetId: cue.anchorId ?? cue.targetId, eventAt: cue.eventAt ?? cue.at, amount: cue.amount,
-        age, lane, x: point.x, y: point.y - point.height * .5, bodyHeight: point.height }];
+        age, lane, x: point.x, y: point.y - point.height * .5, bodyHeight: point.height,
+        ...(cue.directDamage ? { directDamage: true, critical: cue.kind === "critical" || !!cue.critical } : {}) }];
     });
   }
   return { consume, commands, vitalCommands, defenseCommands: (positions, time) => detailDefenseCommands({ active: [...defenses.values()] }, positions, time), vitalActive: time => [...vitals.values()].some(cue => time >= cue.at && time - cue.at < .85), clearView };
+}
+
+const vitalAmount = amount => amount >= .1 ? amount.toFixed(1) : Number(amount.toPrecision(2)).toString();
+
+// Presentation-only placement. Reserve actual body/head space and place whole
+// labels (including the critical tag), rather than clamping many lanes to y=20.
+// A completely packed viewport can omit excess text; damage/events are untouched.
+function layoutDetailCombatLabels(context, { vitals = [], defenses = [], dodges = [] }, { width, height, reducedMotion = false, positions = new Map() }) {
+  const occupied = [...positions.values()].map(point => ({ left: point.x - point.width * .55 - 4,
+    right: point.x + point.width * .55 + 4, top: point.y - point.height - 46, bottom: point.y + 18 }));
+  const fontSize = Math.max(17, Math.min(30, width / 30)), overlaps = (a, b) =>
+    a.left < b.right + 4 && a.right > b.left - 4 && a.top < b.bottom + 4 && a.bottom > b.top - 4;
+  let labelCount = 0;
+  function place(command) {
+    if (command.kind === "regeneration") return command;
+    if (++labelCount > 32 || width < 32 || height < 48) return { ...command, labelHidden: true };
+    const critical = command.directDamage && command.critical;
+    const text = command.caption ?? ((command.channel === "restore" ? "+" : "−") + vitalAmount(command.amount));
+    let measured, tagWidth = 0;
+    context.save();
+    try {
+      context.font = (critical ? "800 " : "700 ") + fontSize + 'px "Malgun Gothic", sans-serif';
+      measured = context.measureText?.(text)?.width;
+      if (critical) {
+        context.font = '800 13px "Malgun Gothic", sans-serif';
+        tagWidth = context.measureText?.("치명")?.width || 0;
+      }
+    } finally { context.restore(); }
+    const halfWidth = Math.max(critical ? 20 : 0, Number.isFinite(tagWidth) ? tagWidth / 2 : 0,
+      Number.isFinite(measured) ? measured / 2 : text.length * fontSize * .34) + 4;
+    if (halfWidth * 2 > width - 16) return { ...command, labelHidden: true };
+    const above = critical ? Math.max(fontSize / 2 + 3, 36) : fontSize / 2 + 3, below = fontSize / 2 + 3;
+    const lift = reducedMotion ? 0 : Math.min(1, command.age / .85) * 45;
+    const preferred = command.y - command.bodyHeight * .5 - 20 - lift;
+    const center = Math.max(halfWidth + 8, Math.min(width - halfWidth - 8, command.x));
+    const xs = [center, center - halfWidth * 2 - 16, center + halfWidth * 2 + 16];
+    let rect;
+    for (const x of xs) {
+      if (x - halfWidth < 8 || x + halfWidth > width - 8) continue;
+      const ys = [];
+      for (let y = Math.min(height - below - 8, preferred); y >= above + 8; y -= 8) ys.push(y);
+      for (let y = Math.max(above + 8, command.y + command.bodyHeight * .5 + 40 - lift); y <= height - below - 8; y += 8) ys.push(y);
+      for (const y of ys) {
+        const candidate = { x, y, left: x - halfWidth, right: x + halfWidth, top: y - above, bottom: y + below };
+        if (!occupied.some(other => overlaps(candidate, other))) { rect = candidate; break; }
+      }
+      if (rect) break;
+    }
+    if (!rect) return { ...command, labelHidden: true };
+    occupied.push(rect);
+    return { ...command, labelX: rect.x, labelY: rect.y, labelTop: rect.top, labelBottom: rect.bottom, labelLeft: rect.left, labelRight: rect.right };
+  }
+  // The existing defensive captions keep priority; every later number uses the
+  // same occupied rectangles. This also reserves blocked residual damage once.
+  const placedDefenses = defenses.map(command => {
+    const label = place({ ...command, caption: command.kind === "block" ? "방어" : "패링" });
+    const damage = command.kind === "block" && command.amount > 0 ? place(command) : null;
+    return { ...command, labelX: label.labelX, labelY: label.labelY, labelHidden: !!label.labelHidden,
+      damageX: damage?.labelX, damageY: damage?.labelY, damageHidden: !!damage?.labelHidden };
+  });
+  const placedDodges = dodges.map(label => {
+    const point = positions.get(String(label.targetId));
+    const placed = place({ ...label, caption: "회피", y: point ? point.y - point.height * .5 : label.floor,
+      bodyHeight: point?.height || 0 });
+    return { ...label, placed: true, labelHidden: !!placed.labelHidden, x: placed.labelX, y: placed.labelY };
+  });
+  return { vitals: vitals.map(place), defenses: placedDefenses, dodges: placedDodges };
+}
+function layoutDetailVitalLabels(context, commands, options) {
+  return layoutDetailCombatLabels(context, { vitals: commands }, options).vitals;
 }
 
 // Reuse the laboratory's existing healing ring/plus and signed HP labels.
@@ -14663,16 +14754,21 @@ function drawDetailVitalEffect(context, command, { width, height, reducedMotion 
     context.beginPath(); context.moveTo(command.x - 8 * scale, command.y); context.lineTo(command.x + 8 * scale, command.y);
     context.moveTo(command.x, command.y - 8 * scale); context.lineTo(command.x, command.y + 8 * scale); context.stroke();
   }
-  if (command.kind !== "regeneration") {
+  if (command.kind !== "regeneration" && !command.labelHidden) {
     const lift = reducedMotion ? 0 : progress * 45;
-    const labelY = Math.max(20, Math.min(height - 20, command.y - command.bodyHeight * .5 - 20 - lift - command.lane * 24));
+    const labelY = command.labelY ?? Math.max(20, Math.min(height - 20, command.y - command.bodyHeight * .5 - 20 - lift - command.lane * 24));
+    const labelX = command.labelX ?? command.x, critical = command.directDamage && command.critical;
     // Keep fractional positive HP changes readable without inventing zero.
-    const amount = command.amount >= .1 ? command.amount.toFixed(1) : Number(command.amount.toPrecision(2)).toString();
+    const amount = vitalAmount(command.amount);
     const label = (restore ? "+" : "−") + amount;
     context.textAlign = "center"; context.textBaseline = "middle"; context.lineJoin = "round";
-    context.font = '700 ' + Math.max(17, Math.min(30, width / 30)) + 'px "Malgun Gothic", sans-serif';
-    context.lineWidth = 4; context.strokeStyle = "#203125"; context.fillStyle = restore ? "#c1ffc4" : "#fff9df";
-    context.strokeText(label, command.x, labelY); context.fillText(label, command.x, labelY);
+    context.font = (critical ? "800 " : "700 ") + Math.max(17, Math.min(30, width / 30)) + 'px "Malgun Gothic", sans-serif';
+    context.lineWidth = 4; context.strokeStyle = "#203125"; context.fillStyle = restore ? "#c1ffc4" : critical ? "#ffda8a" : "#fff9df";
+    context.strokeText(label, labelX, labelY); context.fillText(label, labelX, labelY);
+    if (critical) {
+      context.font = '800 13px "Malgun Gothic", sans-serif';
+      context.fillText("치명", labelX, labelY - 27);
+    }
   }
   context.restore();
 }
@@ -14739,34 +14835,40 @@ function drawDetailDefenseFallback(context, command) {
 }
 function drawDetailDefenseLabels(context, commands, { width, height, reducedMotion = false, vitals = [], reservedLabels = [] }) {
   const occupied = reservedLabels.map(label => ({ targetId: String(label.targetId), y: label.y }));
-  for (const vital of vitals) if (vital.kind !== "regeneration") occupied.push({ targetId: String(vital.targetId), y: Math.max(20, Math.min(height - 20,
-    vital.y - vital.bodyHeight * .5 - 20 - (reducedMotion ? 0 : Math.min(1, vital.age / .85) * 45) - vital.lane * 24)) });
+  for (const vital of vitals) if (vital.kind !== "regeneration" && !vital.labelHidden) {
+    const y = vital.labelY ?? Math.max(20, Math.min(height - 20,
+      vital.y - vital.bodyHeight * .5 - 20 - (reducedMotion ? 0 : Math.min(1, vital.age / .85) * 45) - vital.lane * 24));
+    occupied.push({ targetId: String(vital.targetId), y });
+    if (vital.directDamage && vital.critical) occupied.push({ targetId: String(vital.targetId), y: y - 27 });
+  }
   const lanes = new Map();
   for (const command of commands) {
     if (command.age < 0 || command.age >= .45) continue;
     const id = String(command.targetId), lane = lanes.get(id) || 0; lanes.set(id, lane + 1);
     const floor = command.y + command.bodyHeight * .5, lift = reducedMotion ? 0 : command.age * 28;
-    let damageY = command.y - command.bodyHeight * .5 - 20 - lift;
-    while (occupied.some(label => label.targetId === id && Math.abs(label.y - damageY) < 26)) damageY -= 28;
+    let damageY = command.damageY ?? command.y - command.bodyHeight * .5 - 20 - lift;
+    while (command.damageY === undefined && occupied.some(label => label.targetId === id && Math.abs(label.y - damageY) < 26)) damageY -= 28;
     damageY = Math.max(20, damageY);
-    let labelY = floor + 34 + lane * 26;
+    let labelY = command.labelY ?? floor + 34 + lane * 26;
     if (labelY > height - 18) labelY = Math.max(20, damageY - 30 - lane * 26);
     context.save(); context.globalAlpha = 1 - (command.age / .45) ** 2;
     context.textAlign = "center"; context.textBaseline = "middle"; context.lineJoin = "round";
     context.font = '700 ' + Math.max(17, Math.min(30, width / 30)) + 'px "Malgun Gothic", sans-serif';
     context.lineWidth = 4; context.strokeStyle = "#203125"; context.fillStyle = command.kind === "block" ? "#d3f1ff" : "#fff1ba";
     const label = command.kind === "block" ? "방어" : "패링";
-    context.strokeText(label, command.x, labelY); context.fillText(label, command.x, labelY);
-    if (command.kind === "block" && command.amount > 0) {
+    if (!command.labelHidden) {
+      context.strokeText(label, command.labelX ?? command.x, labelY); context.fillText(label, command.labelX ?? command.x, labelY);
+    }
+    if (command.kind === "block" && command.amount > 0 && !command.damageHidden) {
       const damage = "−" + (command.amount >= .1 ? command.amount.toFixed(1) : Number(command.amount.toPrecision(2)).toString());
-      context.fillStyle = "#fff9df"; context.strokeText(damage, command.x, damageY); context.fillText(damage, command.x, damageY);
+      context.fillStyle = "#fff9df"; context.strokeText(damage, command.damageX ?? command.x, damageY); context.fillText(damage, command.damageX ?? command.x, damageY);
       occupied.push({ targetId: id, y: damageY });
     }
     occupied.push({ targetId: id, y: labelY }); context.restore();
   }
 }
 
-return { DETAIL_COMBAT_VFX, DETAIL_DEFENSE_VFX, DETAIL_COMBAT_VFX_ASSETS, detailVfxFrame, createDetailCombatVfx, drawDetailVitalEffect, drawDetailVfxCell, detailDefenseCommands, detailDefenseImageReady, drawDetailDefenseEffect, drawDetailDefenseFallback, drawDetailDefenseLabels };
+return { DETAIL_COMBAT_VFX, DETAIL_DEFENSE_VFX, DETAIL_COMBAT_VFX_ASSETS, detailVfxFrame, createDetailCombatVfx, layoutDetailCombatLabels, layoutDetailVitalLabels, drawDetailVitalEffect, drawDetailVfxCell, detailDefenseCommands, detailDefenseImageReady, drawDetailDefenseEffect, drawDetailDefenseFallback, drawDetailDefenseLabels };
 })();
 modules["client/unit-appearance-assets.mjs"] = (() => {
 const UNIT_APPEARANCE_ASSETS = Object.freeze({

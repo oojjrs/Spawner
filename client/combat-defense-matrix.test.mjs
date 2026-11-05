@@ -111,7 +111,11 @@ for (const kind of ['block', 'parry', 'miss']) for (const mode of ['melee', 'ran
         const unrelatedDamage = journal.events.filter(e => e.amount > 0 && e.id !== outcome.id);
         for (const result of results) {
           assert.equal(result.texts.filter(t => t.text === labelFor[kind]).length, 1);
-          assert.equal(result.texts.filter(t => t.text.startsWith('−')).length, kind === 'block' ? 1 : 0);
+          const directCount = result === results[0] ? unrelatedDamage.length : 0;
+          assert.equal(result.texts.filter(t => t.text.startsWith('−')).length, (kind === 'block' ? 1 : 0) + directCount,
+            'detail also labels actual reciprocal damage; the defense result itself is unchanged');
+          if (result === results[0]) for (const event of unrelatedDamage)
+            assert.ok(result.texts.some(t => t.text === '−' + event.amount.toFixed(1)), 'actual unrelated damage is labeled once');
           if (kind === 'block') assert.ok(result.texts.some(t => t.text === '−' + outcome.amount.toFixed(1)),
             'block damage label uses only the actual residual damage');
           assert.equal(result.art.filter(c => c.image.includes('CombatVfxV4/')).length, unrelatedDamage.length,

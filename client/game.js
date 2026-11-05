@@ -8400,7 +8400,8 @@
       const cell = Math.min(width * .31, width * .22 / combatWatch.maxWidth, height * .43 / combatWatch.maxHeight);
       const appearancePoses = appearanceWorld.prepare(context, arenaUnits, state.simSeconds, cell, pixelRatio);
       const positions = new Map();
-      const fallbackImpacts = [], dodgeLabels = [];
+      const fallbackImpacts = [];
+      let dodgeLabels = [];
       const slots = [{ x:.39, floor:.76 }, { x:.20, floor:.58 }, { x:.21, floor:.88 }];
       [0, 1].forEach(side => arenaUnits.filter(agent => agent.combat.side === side).forEach((agent, index) => {
         const slot = slots[index], size = dimensions.get(String(agent.id));
@@ -8487,7 +8488,7 @@
         context.restore();
       }
       // Only this modal receives V4 artwork. Map dust and world effects are unchanged.
-      const defenseCommands = Spawner.drawDetailDefenseEffect ? detailCombatVfx.defenseCommands(vfxPositions, state.simSeconds) : [];
+      let defenseCommands = Spawner.drawDetailDefenseEffect ? detailCombatVfx.defenseCommands(vfxPositions, state.simSeconds) : [];
       const defenseImages = new Map(), replacedDefenseIds = new Set();
       for (const command of defenseCommands) {
         let image = detailVfxImages.get(command.image);
@@ -8542,20 +8543,25 @@
       }
       for (const command of defenseCommands) if (!Spawner.drawDetailDefenseEffect(context, command, defenseImages.get(command.eventId), { reducedMotion: idleMotion.matches }))
         Spawner.drawDetailDefenseFallback(context, command);
-      const vitalCommands = detailCombatVfx.vitalCommands(arenaUnits, vfxPositions, state.simSeconds,
-        { scope: combatWatch.id, width, height });
+      let vitalCommands = detailCombatVfx.vitalCommands(arenaUnits, vfxPositions, state.simSeconds,
+        { scope: combatWatch.id, width, height, includeDirectDamage: true });
+      const labelLayout = Spawner.layoutDetailCombatLabels?.(context,
+        { vitals: vitalCommands, defenses: defenseCommands, dodges: dodgeLabels },
+        { width, height, reducedMotion: idleMotion.matches, positions: vfxPositions });
+      if (labelLayout) ({ vitals: vitalCommands, defenses: defenseCommands, dodges: dodgeLabels } = labelLayout);
       for (const command of vitalCommands) Spawner.drawDetailVitalEffect(context, command,
         { width, height, reducedMotion: idleMotion.matches });
       Spawner.drawDetailDefenseLabels?.(context, defenseCommands, { width, height, reducedMotion: idleMotion.matches,
         vitals: vitalCommands, reservedLabels: dodgeLabels });
       for (const label of dodgeLabels) {
+        if (label.labelHidden) continue;
         // Keep independently triggered healing/bleed amounts readable as well.
         // Reserve a lane above their existing labels, or below the health bar
         // when the upper edge leaves no room. Never move the HP feedback.
-        const healthLabels = vitalCommands.filter(command => command.kind !== "regeneration" && String(command.targetId) === String(label.targetId));
-        const top = Math.min(label.y, ...healthLabels.map(command => Math.max(20, Math.min(height - 20,
-          command.y - command.bodyHeight * .5 - 20 - (idleMotion.matches ? 0 : Math.min(1, command.age / .85) * 45) - command.lane * 24)) - 32));
-        const labelY = top < 20 ? Math.min(height - 20, label.floor + 36) : top;
+        const healthLabels = vitalCommands.filter(command => command.kind !== "regeneration" && !command.labelHidden && String(command.targetId) === String(label.targetId));
+        const top = Math.min(label.y, ...healthLabels.map(command => (command.labelTop ?? Math.max(20, Math.min(height - 20,
+          command.y - command.bodyHeight * .5 - 20 - (idleMotion.matches ? 0 : Math.min(1, command.age / .85) * 45) - command.lane * 24))) - 32));
+        const labelY = label.placed ? label.y : top < 20 ? Math.min(height - 20, label.floor + 36) : top;
         context.save(); context.globalAlpha = 1 - (label.age / .4) ** 2;
         context.textAlign = "center"; context.textBaseline = "middle"; context.lineJoin = "round";
         context.font = '700 ' + Math.max(17, Math.min(30, width / 30)) + 'px "Malgun Gothic", sans-serif';

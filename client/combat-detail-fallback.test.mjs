@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
 import { createCombatVfxCursor } from "./combat-vfx-events.mjs";
-import { createDetailCombatVfx, DETAIL_COMBAT_VFX, DETAIL_COMBAT_VFX_ASSETS, drawDetailVfxCell } from "./combat-detail-vfx.mjs";
+import { createDetailCombatVfx, DETAIL_COMBAT_VFX, DETAIL_COMBAT_VFX_ASSETS, drawDetailVfxCell, drawDetailVitalEffect } from "./combat-detail-vfx.mjs";
 
 const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
 function extract(start, end) {
@@ -30,7 +30,7 @@ function modal({ unavailable = [], rejectDraw = false, version = 1 } = {}) {
   const detail = createDetailCombatVfx(), cursor = createCombatVfxCursor();
   const sandbox = { state: { agents, rivals: [], simSeconds: 0, combatVfx: { version } },
     Spawner: { DETAIL_COMBAT_VFX_ASSETS, combatProfile: () => ({ attackInterval: 1 }), combatPrimary: () => "blade",
-      CREATURE_ATTACK_ANIMATIONS: {}, drawDetailVfxCell: (...args) => !rejectDraw && drawDetailVfxCell(...args) },
+      CREATURE_ATTACK_ANIMATIONS: {}, drawDetailVitalEffect, drawDetailVfxCell: (...args) => !rejectDraw && drawDetailVfxCell(...args) },
     detailCombatVfx: detail, detailVfxImages: new Map(DETAIL_COMBAT_VFX_ASSETS.map(path => [path,
       { path, complete: !unavailable.includes(path), naturalWidth: 1776 }])),
     selectedCombatUnits: () => agents, combatOpen: {}, evolutionPanel: { hidden: true }, welcome: { hidden: true },
@@ -40,7 +40,7 @@ function modal({ unavailable = [], rejectDraw = false, version = 1 } = {}) {
     combatBackgrounds: { grassland: "ground.png" }, combatUnitScale: () => 1,
     unitDisplayBounds: new Map([["bean", { width: .5, height: .8 }]]), unitDisplayScales: new Map([["bean", 1]]),
     appearanceWorld: { prepare: () => new Map(), draw: () => false }, drawAgentAppearanceLayer() {},
-    window: { devicePixelRatio: 2 }, AGENT_HEIGHT: .8, clamp: (v, a, b) => Math.max(a, Math.min(b, v)),
+    window: { devicePixelRatio: 2 }, idleMotion: { matches: false }, AGENT_HEIGHT: .8, clamp: (v, a, b) => Math.max(a, Math.min(b, v)),
     combatVfxFrame: { active: [], projectiles: [] }
   };
   createContext(sandbox);
