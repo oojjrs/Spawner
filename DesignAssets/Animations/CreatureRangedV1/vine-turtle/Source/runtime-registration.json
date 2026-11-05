@@ -1,0 +1,20 @@
+{
+  "referenceImage": "DesignAssets/Animations/CreatureAttackV2/vine-turtle/runtime.webp",
+  "referenceSha256": "94158d8303b1b84a9db9dc2c148945bab196f18841a179a75a20558a88d5cf07",
+  "seed": "DesignAssets/Animations/CreatureAttackV2/vine-turtle/Source/seed.png",
+  "seedSha256": "ba0f4b028749b239752565110b55d82efe4314ce762f21c35efc598221ceea70",
+  "scale": 0.451171875,
+  "padding": [
+    -6.0,
+    -0.0
+  ],
+  "offset": [
+    -6.2744140625,
+    -0.2744140625
+  ],
+  "alphaCentroidErrorPixels": 0.0009814615359392694,
+  "method": "Invert the existing single resize and integer translation, including pixel-center offset. Atlas bytes are unchanged.",
+  "endpointAlphaAndOpaquePixelsMatchApprovedSeed": true,
+  "endpointMaximumVisibleColorError": 1,
+  "endpointNote": "Only compositing-rounding differences of at most one color value on translucent edge pixels; reviewed atlas retained unchanged."
+}

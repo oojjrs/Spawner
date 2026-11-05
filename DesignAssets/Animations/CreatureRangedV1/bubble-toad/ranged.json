@@ -1,0 +1,240 @@
+{
+  "species": "bubble-toad",
+  "name": "\ubc29\uc6b8\ub450\uaebc\ube44",
+  "role": "\uacb8\uc6a9",
+  "action": "ranged-attack",
+  "status": "approved-body-integrated",
+  "image": "DesignAssets/Animations/CreatureRangedV1/bubble-toad/ranged.webp",
+  "frameSize": 512,
+  "viewSize": 512.211320754717,
+  "columns": 4,
+  "frameCount": 8,
+  "durationsMs": [
+    100,
+    110,
+    140,
+    110,
+    70,
+    100,
+    150,
+    220
+  ],
+  "durationMs": 1000,
+  "pivotX": 264.1522145736434,
+  "pivotY": 373.28031330232557,
+  "loop": false,
+  "facing": "left",
+  "launchFrameIndex": 4,
+  "launchFrameOneBased": 5,
+  "launchAtMs": 460,
+  "releasePointPixels": {
+    "x": 125,
+    "y": 190
+  },
+  "projectileBakedIntoBody": false,
+  "projectileAsset": null,
+  "audio": false,
+  "registration": [
+    {
+      "frameIndex": 0,
+      "sourceRearFoot": [
+        358,
+        360
+      ],
+      "targetRearFoot": [
+        379,
+        376
+      ],
+      "translation": [
+        21,
+        16
+      ],
+      "uniformScale": 1,
+      "exactApprovedEndpoint": true
+    },
+    {
+      "frameIndex": 1,
+      "sourceRearFoot": [
+        356,
+        358
+      ],
+      "targetRearFoot": [
+        379,
+        376
+      ],
+      "translation": [
+        23,
+        18
+      ],
+      "uniformScale": 1,
+      "exactApprovedEndpoint": false
+    },
+    {
+      "frameIndex": 2,
+      "sourceRearFoot": [
+        356,
+        358
+      ],
+      "targetRearFoot": [
+        379,
+        376
+      ],
+      "translation": [
+        23,
+        18
+      ],
+      "uniformScale": 1,
+      "exactApprovedEndpoint": false
+    },
+    {
+      "frameIndex": 3,
+      "sourceRearFoot": [
+        356,
+        358
+      ],
+      "targetRearFoot": [
+        379,
+        376
+      ],
+      "translation": [
+        23,
+        18
+      ],
+      "uniformScale": 1,
+      "exactApprovedEndpoint": false
+    },
+    {
+      "frameIndex": 4,
+      "sourceRearFoot": [
+        357,
+        358
+      ],
+      "targetRearFoot": [
+        379,
+        376
+      ],
+      "translation": [
+        22,
+        18
+      ],
+      "uniformScale": 1,
+      "exactApprovedEndpoint": false
+    },
+    {
+      "frameIndex": 5,
+      "sourceRearFoot": [
+        357,
+        359
+      ],
+      "targetRearFoot": [
+        379,
+        376
+      ],
+      "translation": [
+        22,
+        17
+      ],
+      "uniformScale": 1,
+      "exactApprovedEndpoint": false
+    },
+    {
+      "frameIndex": 6,
+      "sourceRearFoot": [
+        357,
+        360
+      ],
+      "targetRearFoot": [
+        379,
+        376
+      ],
+      "translation": [
+        22,
+        16
+      ],
+      "uniformScale": 1,
+      "exactApprovedEndpoint": false
+    },
+    {
+      "frameIndex": 7,
+      "sourceRearFoot": [
+        357,
+        360
+      ],
+      "targetRearFoot": [
+        379,
+        376
+      ],
+      "translation": [
+        22,
+        16
+      ],
+      "uniformScale": 1,
+      "exactApprovedEndpoint": true
+    }
+  ],
+  "stages": [
+    "\ub300\uae30",
+    "\uc55e\ubc1c \ubc84\ud2f0\uae30",
+    "\ubaa9\uc8fc\uba38\ub2c8 \ud33d\ucc3d",
+    "\uc870\uc900",
+    "\ubc1c\uc0ac",
+    "\ubc18\ub3d9",
+    "\ubcf5\uadc0",
+    "\ub300\uae30"
+  ],
+  "generationTool": "built-in image_gen",
+  "method": "Six freshly drawn full-body cels; original approved seed at both endpoints. Fixed scale 1, anatomical rear-foot translations only. No mesh warp, cutout joint rotation, crossfade or fabricated inbetween.",
+  "planning": {
+    "ref": "origin/main",
+    "commit": "011bbd7b8696aa353931634150317b8d8010ecfe",
+    "path": "Design.html"
+  },
+  "integration": "Production maps each authoritative launchedAt/shotLaunches to the release cel. Existing melee, gameplay and audio remain unchanged. Only the body is approved; the existing generic flight and hit remain in use.",
+  "approvedBodyOnly": true,
+  "effectsApproved": false,
+  "sourceCandidate": "tools/toad-ranged-candidate-20261106/attack.json",
+  "sourceFrameHashes": [
+    {
+      "frame": 0,
+      "sha256": "d99a88fb496b63134ed888c666c54ce0e7d20ed36ee11f1bce4bfc95334f927b"
+    },
+    {
+      "frame": 1,
+      "sha256": "2382037a56a5d2c9ddb95ec41929121d2da98d94d7e5415d2de639ed6f0326d4"
+    },
+    {
+      "frame": 2,
+      "sha256": "253161c44c75dd3f34bc85c27d0653b8e1f530bb3c610831e282712be3abd28e"
+    },
+    {
+      "frame": 3,
+      "sha256": "b2a3ef9a280c5b23be06fbfd445690121f332f7975e4ee5497a2128ed662ad46"
+    },
+    {
+      "frame": 4,
+      "sha256": "29947c08b70a1770b862a72e0b7ca28984b191692360da4a0a7775e697bb1578"
+    },
+    {
+      "frame": 5,
+      "sha256": "bc07de244b21715d5e7635e522c13c6d7fe4f2462953aeea90bf3e68e0001ffc"
+    },
+    {
+      "frame": 6,
+      "sha256": "e459d030eb401804cff04673b3656aad0ab8ec39027b1060a5347761c70f3e42"
+    },
+    {
+      "frame": 7,
+      "sha256": "d99a88fb496b63134ed888c666c54ce0e7d20ed36ee11f1bce4bfc95334f927b"
+    }
+  ],
+  "sourcePivot": [
+    259,
+    380.52
+  ],
+  "launchFrame": 4,
+  "outletX": 125,
+  "outletY": 190,
+  "registrationScale": 1,
+  "idleImage": "DesignAssets/Animations/BubbleToadIdle/BreathV1/idle.webp",
+  "approvedDate": "2026-11-06"
+}

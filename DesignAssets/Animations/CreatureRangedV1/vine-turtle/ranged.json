@@ -1,0 +1,267 @@
+{
+  "species": "vine-turtle",
+  "action": "back-plant-seed-launch",
+  "status": "approved-body-integrated",
+  "designRevision": "011bbd7b",
+  "designIntent": "\uacb8\uc6a9 / \ub192\uc740 \uc0dd\uc874\ub825\uacfc \ub454\ud55c \ub3d9\uc791",
+  "attackMethod": "User-requested back-plant firing candidate. Temporary leaf funnel and seed projectile are artist proposals.",
+  "frameSize": 512,
+  "frameCount": 8,
+  "columns": 4,
+  "durationsMs": [
+    160,
+    180,
+    240,
+    100,
+    90,
+    160,
+    210,
+    260
+  ],
+  "durationMs": 1400,
+  "launchFrameIndex": 4,
+  "launchAtMs": 680,
+  "releasePointPixels": {
+    "x": 103,
+    "y": 181
+  },
+  "pivotX": 271.0151515151515,
+  "pivotY": 435.7066318961039,
+  "facing": "left",
+  "bodyAtlas": "body-atlas.webp",
+  "bodyPreview": "ranged-attack.webp",
+  "projectile": "projectile.png",
+  "projectileBakedIntoBody": false,
+  "audio": false,
+  "stages": [
+    "\ub300\uae30",
+    "\uc78e \ubaa8\uc73c\uae30",
+    "\uc2dd\ubb3c \ubc1c\uc0ac\uad6c \uc900\ube44",
+    "\uc2dd\ubb3c \uc870\uc900",
+    "\ub4f1 \uc2dd\ubb3c \ubc1c\uc0ac",
+    "\uc2dd\ubb3c \ubc18\ub3d9",
+    "\uc78e \ubcf5\uadc0",
+    "\ub300\uae30"
+  ],
+  "registration": [
+    {
+      "frame": 0,
+      "crop": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceShellAnchor": [
+        257.55190956979806,
+        228.26053555750659
+      ],
+      "sourceBounds": [
+        32,
+        56,
+        429,
+        358
+      ],
+      "fixedScale": 1.0554156171284634,
+      "translation": [
+        22,
+        72
+      ],
+      "exactApprovedEndpoint": true
+    },
+    {
+      "frame": 1,
+      "crop": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceShellAnchor": [
+        258.2505372695396,
+        226.55740300870943
+      ],
+      "sourceBounds": [
+        32,
+        59,
+        429,
+        358
+      ],
+      "fixedScale": 1.0554156171284634,
+      "translation": [
+        21,
+        72
+      ],
+      "exactApprovedEndpoint": false
+    },
+    {
+      "frame": 2,
+      "crop": [
+        887,
+        0,
+        1331,
+        444
+      ],
+      "sourceShellAnchor": [
+        257.67345276872965,
+        230.3412052117264
+      ],
+      "sourceBounds": [
+        32,
+        42,
+        430,
+        358
+      ],
+      "fixedScale": 1.0554156171284634,
+      "translation": [
+        22,
+        72
+      ],
+      "exactApprovedEndpoint": false
+    },
+    {
+      "frame": 3,
+      "crop": [
+        1331,
+        0,
+        1774,
+        444
+      ],
+      "sourceShellAnchor": [
+        252.49137104506232,
+        230.17929050814956
+      ],
+      "sourceBounds": [
+        32,
+        74,
+        429,
+        358
+      ],
+      "fixedScale": 1.0554156171284634,
+      "translation": [
+        27,
+        72
+      ],
+      "exactApprovedEndpoint": false
+    },
+    {
+      "frame": 4,
+      "crop": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceShellAnchor": [
+        258.40301449275364,
+        223.66063768115941
+      ],
+      "sourceBounds": [
+        32,
+        35,
+        429,
+        358
+      ],
+      "fixedScale": 1.0554156171284634,
+      "translation": [
+        21,
+        72
+      ],
+      "exactApprovedEndpoint": false
+    },
+    {
+      "frame": 5,
+      "crop": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceShellAnchor": [
+        257.42790042273367,
+        224.988961953969
+      ],
+      "sourceBounds": [
+        32,
+        42,
+        429,
+        358
+      ],
+      "fixedScale": 1.0554156171284634,
+      "translation": [
+        22,
+        72
+      ],
+      "exactApprovedEndpoint": false
+    },
+    {
+      "frame": 6,
+      "crop": [
+        887,
+        444,
+        1331,
+        887
+      ],
+      "sourceShellAnchor": [
+        258.15552029018363,
+        225.79925187032418
+      ],
+      "sourceBounds": [
+        32,
+        48,
+        430,
+        357
+      ],
+      "fixedScale": 1.0554156171284634,
+      "translation": [
+        21,
+        73
+      ],
+      "exactApprovedEndpoint": false
+    },
+    {
+      "frame": 7,
+      "crop": [
+        1331,
+        444,
+        1774,
+        887
+      ],
+      "sourceShellAnchor": [
+        256.1827422894767,
+        223.70855954718724
+      ],
+      "sourceBounds": [
+        32,
+        56,
+        429,
+        358
+      ],
+      "fixedScale": 1.0554156171284634,
+      "translation": [
+        23,
+        72
+      ],
+      "exactApprovedEndpoint": true
+    }
+  ],
+  "generationTool": "built-in image_gen",
+  "method": "Six newly painted full-body intermediate cels, exact approved neutral endpoints. Single common uniform scale and shell/ground translation registration only; no mesh deformation, crossfade, synthesized inbetween, or melee reuse.",
+  "integration": "Production maps each authoritative launchedAt/shotLaunches to the release cel. Existing melee, gameplay and audio remain unchanged. Only the body is approved; the existing generic flight and hit remain in use.",
+  "image": "DesignAssets/Animations/CreatureRangedV1/vine-turtle/ranged.webp",
+  "projectileAsset": null,
+  "approvedBodyOnly": true,
+  "effectsApproved": false,
+  "sourcePivot": [
+    262.5,
+    441.62
+  ],
+  "viewSize": 513.4982332155477,
+  "launchFrame": 4,
+  "outletX": 103,
+  "outletY": 181,
+  "registrationScale": 1,
+  "loop": false,
+  "idleImage": "DesignAssets/Animations/CreatureIdleStudies/V2/vine-turtle/idle.webp",
+  "approvedDate": "2026-11-06"
+}

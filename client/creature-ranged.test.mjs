@@ -10,8 +10,9 @@ import { UNIT_IMAGE_BOUNDS } from "./unit-image-bounds.mjs";
 import { unitDisplaySize } from "./unit-size.mjs";
 import { createDetailCombatVfx, DETAIL_COMBAT_VFX } from "./combat-detail-vfx.mjs";
 import { createCombatVfxCursor } from "./combat-vfx-events.mjs";
+import { createCombatStage } from "./combat-stage.mjs";
 
-const species = ["flower-tail-bird", "soil-mole"];
+const species = ["flower-tail-bird", "soil-mole", "lantern-keeper", "bubble-toad", "vine-turtle"];
 const near = (a, b) => assert.ok(Math.abs(a - b) < 1e-8, `${a} != ${b}`);
 const unit = (key, launches = [10.3], end = launches.at(-1) + .4, directionX = -1) => ({
   id: "source", species: key, health: 10, facing: directionX,
@@ -19,7 +20,7 @@ const unit = (key, launches = [10.3], end = launches.at(-1) + .4, directionX = -
     shotLaunches: launches, endsAt: end, directionX }
 });
 
-test("only the two approved native ranged sheets are registered, without new projectile artwork", () => {
+test("only the approved native ranged sheets are registered, without new projectile artwork", () => {
   assert.deepEqual(Object.keys(CREATURE_RANGED_ANIMATIONS), species);
   const sizes = JSON.parse(readFileSync(new URL("../DesignAssets/image-sizes.json", import.meta.url))).images;
   for (const key of species) {
@@ -96,7 +97,7 @@ test("measured outlets match the displayed body scale and mirror around the grou
     near(left.x, -right.x); near(left.y, right.y);
     assert.ok(left.x < 0 && left.y < 0);
   }
-  assert.equal(creatureRangedOutlet({ species: "vine-turtle" }), null);
+  assert.equal(creatureRangedOutlet({ species: "shadow-weasel" }), null);
 });
 
 test("world drawing selects native ranged frames and preserves missing-image fallback", () => {
@@ -147,5 +148,62 @@ test("neutral flights retain their first visible outlet and reuse existing gener
     assert.equal(hit.at(-1).image, DETAIL_COMBAT_VFX.hit.image);
     detail.clearView();
     assert.equal(draw(2.1, [launch, { ...launch, id: "cancel", kind: "projectile-cancel", at: 2.1 }]).filter(c => c.kind === "flight").length, 0);
+  }
+});
+
+test("new body registration exactly inverts the approved melee seed transform without replacing its pixels", () => {
+  for (const key of ["lantern-keeper", "bubble-toad", "vine-turtle"]) {
+    const folder = new URL(`../DesignAssets/Animations/CreatureRangedV1/${key}/`, import.meta.url);
+    const map = JSON.parse(readFileSync(new URL("Source/runtime-registration.json", folder)));
+    const metadata = JSON.parse(readFileSync(new URL("ranged.json", folder)));
+    for (const [path, hash] of [[map.seed, map.seedSha256], [map.referenceImage, map.referenceSha256]])
+      assert.equal(createHash("sha256").update(readFileSync(new URL("../" + path, import.meta.url))).digest("hex"), hash);
+    assert.ok(map.alphaCentroidErrorPixels < .03);
+    assert.ok(map.endpointAlphaAndOpaquePixelsMatchApprovedSeed);
+    assert.ok(map.endpointMaximumVisibleColorError <= 1);
+    const animation = CREATURE_RANGED_ANIMATIONS[key], old = CREATURE_ATTACK_ANIMATIONS[key];
+    for (const [x, y] of [[0, 0], [animation.outletX, animation.outletY], [512, 512]]) {
+      near((x - animation.pivotX) / animation.viewSize,
+        (x * map.scale + map.offset[0] - old.pivotX) * (old.registrationScale || 1) / old.viewSize);
+      near((y - animation.pivotY) / animation.viewSize,
+        (y * map.scale + map.offset[1] - old.pivotY) * (old.registrationScale || 1) / old.viewSize);
+    }
+    assert.equal(metadata.status, "approved-body-integrated");
+    assert.equal(metadata.effectsApproved, false);
+    assert.equal(metadata.projectileAsset, null);
+    assert.equal(metadata.audio, false);
+  }
+});
+
+test("the actual combat stage selects every approved body release without changing simulation state", () => {
+  const saved = { window: globalThis.window, Image: globalThis.Image, assets: globalThis.SpawnerAssets };
+  globalThis.window = { matchMedia: () => ({ matches: false }), devicePixelRatio: 1 };
+  globalThis.Image = class {
+    complete = true;
+    naturalWidth = 2048;
+    naturalHeight = 1024;
+    set src(value) { this.source = value; }
+    get src() { return this.source; }
+  };
+  globalThis.SpawnerAssets = { source: path => path };
+  try {
+    for (const key of species) for (const direction of [-1, 1]) {
+      const calls = [], context = new Proxy({}, { get: (target, name) => target[name] || ((...args) => calls.push({ name, args })) });
+      const stage = createCombatStage({ clientWidth: 1040, clientHeight: 480, getContext: () => context });
+      const source = { ...unit(key, [10.3], 10.7, direction), mode: "fight", attributes: {},
+        combat: { side: direction > 0 ? 0 : 1 }, stats: { health: 10, ranged: true } };
+      const target = { id: "target", tribe: "bean", health: 10, mode: "fight", attributes: {},
+        combat: { side: direction > 0 ? 1 : 0 }, stats: { health: 10, melee: true } };
+      const trial = { agents: [source, target], time: 10.3, history: [], projectiles: [], result: () => null,
+        vfx: { version: 1, streamId: "trial", events: [] } };
+      const before = JSON.stringify(trial);
+      stage.render(trial, 100, false);
+      const rendered = calls.filter(c => c.name === "drawImage" && c.args[0]?.src === CREATURE_RANGED_ANIMATIONS[key].image);
+      assert.equal(rendered.length, 1, key);
+      assert.deepEqual(rendered[0].args.slice(1, 5), [0, 512, 512, 512]);
+      assert.equal(JSON.stringify(trial), before);
+    }
+  } finally {
+    globalThis.window = saved.window; globalThis.Image = saved.Image; globalThis.SpawnerAssets = saved.assets;
   }
 });

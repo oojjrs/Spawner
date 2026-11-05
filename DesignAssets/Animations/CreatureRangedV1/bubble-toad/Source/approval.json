@@ -1,0 +1,12 @@
+{
+  "approved": "body-motion-only",
+  "unapproved": "all projectile and hit effects",
+  "quotes": [
+    "등불지기 너무 좋다. 근데 두꺼비는 발사체 이펙트가 좀 아쉽네. 모션은 합격",
+    "다 게시해. 승인된 애셋을 올릴 땐 굳이 승인을 요청하지 않아도 된다",
+    "등불지기도 모션은 합격, 이펙트는 너무 아쉽고"
+  ],
+  "audio": false,
+  "bodyAtlasSha256": "eb89fb4e476e0be3f8035c4fafb7d8f4e02871675512296a83acc2885865299e",
+  "sourceCandidate": "tools/toad-ranged-candidate-20261106"
+}

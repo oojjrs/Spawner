@@ -10512,6 +10512,81 @@
           640
         ]
       }
+    },
+    "DesignAssets/Animations/CreatureRangedV1/lantern-keeper/ranged.webp": {
+      "display": [
+        270,
+        270
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ],
+      "nativeSource": {
+        "sha256": "b4fc4b39fd736c1042114283f169ae83f1cf2eaa0bcfa9ed5fe3e1df9da36892",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/CreatureRangedV1/bubble-toad/ranged.webp": {
+      "display": [
+        258,
+        258
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ],
+      "nativeSource": {
+        "sha256": "eb89fb4e476e0be3f8035c4fafb7d8f4e02871675512296a83acc2885865299e",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/CreatureRangedV1/vine-turtle/ranged.webp": {
+      "display": [
+        232,
+        232
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ],
+      "nativeSource": {
+        "sha256": "b68ad4ac25e9c02dd646b179d46e7f68dd3a2a23bf0d4118130733f1a77d10b0",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
     }
   }
 }

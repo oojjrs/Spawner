@@ -1,0 +1,20 @@
+{
+  "referenceImage": "DesignAssets/Animations/CreatureAttackV2/lantern-keeper/runtime.webp",
+  "referenceSha256": "f731cfeaaef6f1431e8c7eef8853a4a69a7be12b3a32d1a62255f5c7f66f6598",
+  "seed": "DesignAssets/Animations/CreatureAttackV2/lantern-keeper/Source/seed.png",
+  "seedSha256": "70da6c8a6cc2a19aa881ea7b9e8d5da24f61dc4d63af6d7c8e48c12a155493d4",
+  "scale": 0.52734375,
+  "padding": [
+    -5.0,
+    -0.0
+  ],
+  "offset": [
+    -5.236328125,
+    -0.236328125
+  ],
+  "alphaCentroidErrorPixels": 0.0011851472384580989,
+  "method": "Invert the existing single resize and integer translation, including pixel-center offset. Atlas bytes are unchanged.",
+  "endpointAlphaAndOpaquePixelsMatchApprovedSeed": true,
+  "endpointMaximumVisibleColorError": 0,
+  "endpointNote": "Only compositing-rounding differences of at most one color value on translucent edge pixels; reviewed atlas retained unchanged."
+}

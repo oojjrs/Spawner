@@ -1,0 +1,20 @@
+{
+  "referenceImage": "DesignAssets/Animations/CreatureAttackV2/bubble-toad/runtime.webp",
+  "referenceSha256": "0562fbc6b8ac0782f0d636822496a14792849850ac78cfa7c9cc8170306faa60",
+  "seed": "DesignAssets/Animations/CreatureAttackV2/bubble-toad/Source/seed.png",
+  "seedSha256": "d99a88fb496b63134ed888c666c54ce0e7d20ed36ee11f1bce4bfc95334f927b",
+  "scale": 0.50390625,
+  "padding": [
+    -1.0,
+    31.0
+  ],
+  "offset": [
+    -1.248046875,
+    30.751953125
+  ],
+  "alphaCentroidErrorPixels": 0.0023747846691434217,
+  "method": "Invert the existing single resize and integer translation, including pixel-center offset. Atlas bytes are unchanged.",
+  "endpointAlphaAndOpaquePixelsMatchApprovedSeed": true,
+  "endpointMaximumVisibleColorError": 0,
+  "endpointNote": "Only compositing-rounding differences of at most one color value on translucent edge pixels; reviewed atlas retained unchanged."
+}

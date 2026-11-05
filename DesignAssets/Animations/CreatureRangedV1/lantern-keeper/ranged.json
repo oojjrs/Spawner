@@ -1,0 +1,240 @@
+{
+  "species": "lantern-keeper",
+  "name": "\ub4f1\ubd88\uc9c0\uae30",
+  "role": "\uc6d0\ub51c",
+  "action": "ranged-attack",
+  "status": "approved-body-integrated",
+  "image": "DesignAssets/Animations/CreatureRangedV1/lantern-keeper/ranged.webp",
+  "frameSize": 512,
+  "viewSize": 491.95729537366554,
+  "columns": 4,
+  "frameCount": 8,
+  "durationsMs": [
+    100,
+    100,
+    120,
+    100,
+    70,
+    110,
+    160,
+    240
+  ],
+  "durationMs": 1000,
+  "pivotX": 253.11824237037038,
+  "pivotY": 433.88154714074074,
+  "loop": false,
+  "facing": "left",
+  "launchFrameIndex": 4,
+  "launchFrameOneBased": 5,
+  "launchAtMs": 420,
+  "releasePointPixels": {
+    "x": 80,
+    "y": 236
+  },
+  "projectileBakedIntoBody": false,
+  "projectileAsset": null,
+  "audio": false,
+  "registration": [
+    {
+      "frameIndex": 0,
+      "sourceRearFoot": [
+        297,
+        389
+      ],
+      "targetRearFoot": [
+        312,
+        445
+      ],
+      "translation": [
+        15,
+        56
+      ],
+      "uniformScale": 1,
+      "exactApprovedEndpoint": true
+    },
+    {
+      "frameIndex": 1,
+      "sourceRearFoot": [
+        303,
+        389
+      ],
+      "targetRearFoot": [
+        312,
+        445
+      ],
+      "translation": [
+        9,
+        56
+      ],
+      "uniformScale": 1,
+      "exactApprovedEndpoint": false
+    },
+    {
+      "frameIndex": 2,
+      "sourceRearFoot": [
+        305,
+        389
+      ],
+      "targetRearFoot": [
+        312,
+        445
+      ],
+      "translation": [
+        7,
+        56
+      ],
+      "uniformScale": 1,
+      "exactApprovedEndpoint": false
+    },
+    {
+      "frameIndex": 3,
+      "sourceRearFoot": [
+        308,
+        389
+      ],
+      "targetRearFoot": [
+        312,
+        445
+      ],
+      "translation": [
+        4,
+        56
+      ],
+      "uniformScale": 1,
+      "exactApprovedEndpoint": false
+    },
+    {
+      "frameIndex": 4,
+      "sourceRearFoot": [
+        304,
+        388
+      ],
+      "targetRearFoot": [
+        312,
+        445
+      ],
+      "translation": [
+        8,
+        57
+      ],
+      "uniformScale": 1,
+      "exactApprovedEndpoint": false
+    },
+    {
+      "frameIndex": 5,
+      "sourceRearFoot": [
+        296,
+        388
+      ],
+      "targetRearFoot": [
+        312,
+        445
+      ],
+      "translation": [
+        16,
+        57
+      ],
+      "uniformScale": 1,
+      "exactApprovedEndpoint": false
+    },
+    {
+      "frameIndex": 6,
+      "sourceRearFoot": [
+        297,
+        388
+      ],
+      "targetRearFoot": [
+        312,
+        445
+      ],
+      "translation": [
+        15,
+        57
+      ],
+      "uniformScale": 1,
+      "exactApprovedEndpoint": false
+    },
+    {
+      "frameIndex": 7,
+      "sourceRearFoot": [
+        298,
+        388
+      ],
+      "targetRearFoot": [
+        312,
+        445
+      ],
+      "translation": [
+        14,
+        57
+      ],
+      "uniformScale": 1,
+      "exactApprovedEndpoint": true
+    }
+  ],
+  "stages": [
+    "\ub300\uae30",
+    "\uadc0 \ubaa8\uc73c\uae30",
+    "\ube5b \ucda9\uc804",
+    "\uc870\uc900",
+    "\ubc1c\uc0ac",
+    "\ubc18\ub3d9",
+    "\ubcf5\uadc0",
+    "\ub300\uae30"
+  ],
+  "generationTool": "built-in image_gen",
+  "method": "Six freshly drawn full-body cels; original approved seed at both endpoints. Fixed scale 1, anatomical rear-foot translations only. No mesh warp, cutout joint rotation, crossfade or fabricated inbetween.",
+  "planning": {
+    "ref": "origin/main",
+    "commit": "011bbd7b8696aa353931634150317b8d8010ecfe",
+    "path": "Design.html"
+  },
+  "integration": "Production maps each authoritative launchedAt/shotLaunches to the release cel. Existing melee, gameplay and audio remain unchanged. Only the body is approved; the existing generic flight and hit remain in use.",
+  "approvedBodyOnly": true,
+  "effectsApproved": false,
+  "sourceCandidate": "tools/lantern-ranged-candidate-20261106/attack.json",
+  "sourceFrameHashes": [
+    {
+      "frame": 0,
+      "sha256": "70da6c8a6cc2a19aa881ea7b9e8d5da24f61dc4d63af6d7c8e48c12a155493d4"
+    },
+    {
+      "frame": 1,
+      "sha256": "32595e021f3ef27f69f25f6095192fc454fd40f07da667dc9a583ea236dce025"
+    },
+    {
+      "frame": 2,
+      "sha256": "3bfbe890cb0fc77869d97b5fe882b86417f56d8bba0148f432b4f2fde5312a66"
+    },
+    {
+      "frame": 3,
+      "sha256": "fcc755d3e398395f2be3c6e7c4b1c3e730889d1eccf5d44ce19b612d7b39f89a"
+    },
+    {
+      "frame": 4,
+      "sha256": "abb9ae78f06f4bea6cde833645673cd24923222573cc2a5ccea52c48b979955b"
+    },
+    {
+      "frame": 5,
+      "sha256": "0ab094e8bcd50fdcdebda851af6c537c9feab58df340d8c1f2b733e083828947"
+    },
+    {
+      "frame": 6,
+      "sha256": "2a6bac09b95f60a56f0d7b22657a2c79a1cea71554484994a37fab6b742a9b91"
+    },
+    {
+      "frame": 7,
+      "sha256": "70da6c8a6cc2a19aa881ea7b9e8d5da24f61dc4d63af6d7c8e48c12a155493d4"
+    }
+  ],
+  "sourcePivot": [
+    256,
+    448
+  ],
+  "launchFrame": 4,
+  "outletX": 80,
+  "outletY": 236,
+  "registrationScale": 1,
+  "idleImage": "DesignAssets/Animations/UniqueIdleV4/lantern-keeper/idle.webp",
+  "approvedDate": "2026-11-06"
+}
