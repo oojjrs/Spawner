@@ -23,7 +23,7 @@ for(const [raw,base] of Object.entries(bases)){const key=aliases[raw]||raw,g=bas
 for(const [key,birth] of Object.entries({spore:SPORE_BIRTH_ANIMATION,spring:SPRING_BIRTH_ANIMATION,pebble:PEBBLE_BIRTH_ANIMATION})){ const u=units[key],b=UNIT_IMAGE_BOUNDS[u.idle.image];u.animations.birth={...birth,sourceScale:u.idleScale*b.height*u.idle.frameSize/b.frameSize/(birth.unitHeight?birth.unitHeight*imageScale(birth.image):birth.height),loop:true};}
 for(const [key,reference] of Object.entries(JSON.parse(readFileSync('$Trash/unit-animation-unification-20261104/design-sync/resource-geometry.json','utf8'))))units[key].resourceReference=reference;
 units.bean.movementReference=JSON.parse(readFileSync('$Trash/unit-animation-unification-20261104/design-sync/bean-movement-geometry.json','utf8'));
-units.spore.birthScene={image:'DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/birth.webp',columns:4,durationsMs:SPORE_BIRTH_ANIMATION.durationsMs,loop:true};
+for(const [key,scene] of Object.entries(JSON.parse(readFileSync('DesignAssets/Planning/UnitPreviews/birth-scenes.json','utf8')).scenes))units[key].birthScene=scene;
 const attributes=Object.fromEntries(Object.entries(COMBAT_EVOLUTION_CATALOG).map(([key,value])=>[key,Object.fromEntries(Object.entries({...value.animations,death:UNIT_COMBAT_DEATH_ANIMATIONS[key]||value.animations.death}).map(([action,animation])=>[action,imageAnimation({...animation,pivotX:animation.pivotX??animation.pivot[0],pivotY:animation.pivotY??animation.pivot[1]})]))]));
 const faceReferences=JSON.parse(readFileSync('$Trash/unit-animation-unification-20261104/design-sync/base-face-reference.json','utf8'));
 for(const [key,definition] of Object.entries(COMBAT_EVOLUTION_CATALOG)){

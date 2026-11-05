@@ -99,7 +99,9 @@
     if (updateLightbox) {
       link.href = animation.image; link.dataset.preview = animation.image;
       element.dataset.columns = String(animation.columns); element.dataset.durations = (animation.durationsMs || [1000]).join(',');
-      element.dataset.loop = String(animation.loop !== false); delete element.dataset.nativeAnimation;
+      element.dataset.loop = String(animation.loop !== false);
+      if (action === 'birth' && animation.native) element.dataset.nativeAnimation = 'true'; else delete element.dataset.nativeAnimation;
+      if (animation.audioCues) element.dataset.audioCues = JSON.stringify(animation.audioCues);
       if (animation.frames) element.dataset.frames = animation.frames.join(','); else delete element.dataset.frames;
       element.dataset.runtimeGeometry = JSON.stringify(animation); element.dataset.runtimeScale = String(scale);
       delete element.dataset.previewScale; delete element.dataset.previewPivotY; delete element.dataset.previewFloor;
@@ -120,13 +122,8 @@
       }
       if (!element) continue;
       if (action === 'base') animation = unit.base;
-      if (action === 'birth' && unit.birthScene) {
-        const scene = unit.birthScene, link = element.closest('a');
-        link.href = scene.image; link.dataset.preview = scene.image;
-        element.dataset.columns = String(scene.columns); element.dataset.durations = scene.durationsMs.join(',');
-        element.dataset.loop = 'true'; delete element.dataset.nativeAnimation;
-      }
-      if (animation) install(element, unit, animation, action, action !== 'base' && action !== 'birth');
+      if (action === 'birth' && unit.birthScene) animation = unit.birthScene;
+      if (animation) install(element, unit, animation, action, action !== 'base');
       else {
         const link = element.closest('a'), source = link.dataset.preview || link.getAttribute('href');
         const columns = Number(element.dataset.columns || 1), durationsMs = element.dataset.durations?.split(',').map(Number) || [1000];
