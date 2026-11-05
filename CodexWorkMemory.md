@@ -1,3 +1,60 @@
+## welcome-ingame-consistency-commit-freeze-20261105-01a1a12e
+
+- 기록 시각: 2026-11-05T21:27:13+09:00; 결정 주체: 사용자(커밋·푸시 승인), Codex(범위 분리·Git 실행); 출처: 현재 채팅 01a1a12e-3f3f-72c1-95e2-0b5b349b5ffb 최신 「좋아. 커밋하고 푸시해둬.」. 원발언 정확 시각·항목 ID 불명.
+- 현재 요청은 직전 보고한 웰컴 동작/SFX 공통화·입퇴장 외형 고정 14개 제품 후보와 관련 메모리를 Git 완료 범위로 이어받는다. build.mjs alias 수정은 이미 현재 HEAD에 포함되어 신규 커밋에서는 변경 없는 파일이다. 나머지 13개 제품과 이 채팅의 감사/구현/검증 6개 기록 및 본 승인 기록만 포함하고, 타 채팅의 메모리·제품·이미지 변경은 그대로 보존한다.
+- 제품 14개 후보의 SHA256이 직전 검수 product-hashes.json과 모두 동일함을 확인했다. 기존 52개 대상 검증, 실제 35외형/19종 SFX 및 실패 복구 증거를 재사용한다. 최종 15개 텍스트 UTF8NoBom/CRLF 검사는 전부 OK였다. 이번 메모리 추가만 형식 확인한다.
+- 전용 체크아웃 H:/Spawner, 브랜치 main, 원격 origin=https://github.com/oojjrs/Spawner. 실제 fetch origin main 후 로컬/원격 d736c2aa2a0952f439efb8c9951e374efd0503f8 동일(0/0)을 확인했다. 시작 index는 비어 있다. 링크된 Projects 없음이라는 현재 작업의 기존 조회 결과를 재사용한다. 커밋 메시지 예정 「웰컴 유닛 동작과 효과음 연결 수정」. 커밋·푸시 결과는 실행 후 실제 readback으로 기록한다.
+
+## welcome-ingame-consistency-complete-20261105-01a1a12e
+
+- 기록 시각: 2026-11-05T21:22:59+09:00; 발화·결정 주체: 사용자(요구), Codex(구현·검수); 출처: 현재 SPAWNER 웰컴 채팅 /root, 독립 audio_readiness_fix 워커. 실행/저장 시각은 이 기록 시각과 별개이며 정확한 최초 사용자 발화 시각은 미확인.
+- 완료 상태: 웰컴 실제 인게임 pose/MovementAudio/CombatAudio 경로 통합과 외형 수명 고정 구현. 제품 14개 파일(새 audio-readiness.test.mjs 포함)과 관련 메모리 변경은 작업 트리에 남겼고 Git staging/commit/push는 수행하지 않았다.
+- 외형: createWelcomeRoster 선택을 freeze하고 variant 0 강등/선택 객체 변이를 제거했다. 같은 외형 준비 재시도, 화면 밖 정상 프레임 사전 확보, 동일 외형 대기 자세 복구, 마지막 정상 프레임 이동 복구를 적용했다. 변형 renderer null도 기본 스프라이트로 흘러가지 않게 실패 처리한다. 버퍼는 current/arriving/upcoming 범위만 보관하고 이탈 시 캔버스 크기를 0으로 해제한다.
+- 동작: 헤더 전용 점프 이미지 대신 UNIT_ANIMATIONS 원본을 사용하며 기본 종족 perform 상태를 실제 jump 모드/시작 시각으로 넘긴다. 새싹콩 idle/몸/머리/홉/흔들림 수학은 sprout-roots 공유 함수로 추출해 인게임과 웰컴이 호출한다. 안테나 회전도 같은 head pose를 사용한다. 새 애니·SFX 제작 없음. 기존 첫 기본형 4개, 이후 35개 셔플, 2초 휴식, 동시 입퇴장과 첫 4종 우선 로딩 정책은 유지한다.
+- SFX: 동작 전환 때 매번 playback을 reset하던 코드를 제거했다. 신체 일부가 보일 때도 이동 이벤트를 전달하고, 공유 MovementAudio에 실제 jump 종료 착지 이벤트를 추가했다. spore/pebble은 기존 재질 이동음, spring은 기존 spring-landing을 사용한다. audio.prepare(names)는 이름별 디코드/8채널 등록 완료를 보장하며 각 선택은 자기 SFX 준비 후 입장한다. 개별 음원 지연/실패는 다른 소리와 BGM을 막지 않고 실패 이름은 재시도 가능하다.
+- 동시 변경 구분: 초기 감사 후 다른 작업의 rebase가 반영되어 CombatAudio의 미래 큐 처리 수정은 이미 현재 HEAD에 있었다. 해당 제품 코드는 다시 수정하지 않고 웰컴의 playback 수명을 바로잡았으며 중립 19종의 첫 공격 회귀 oracle을 추가했다. 공통 runtime의 import alias 파싱 오류 1개와 build.mjs alias 변환 1줄은 웰컴 실행 의존성으로 최소 복구했다. runtime의 다른 모든 모듈/자산 footer는 HEAD와 동일함을 비교했다.
+- 검증: 대상 welcome/movement/combat 30개와 워커의 audio-readiness/music/zoom 22개가 최종 각 대상 검증에서 통과했다(합계 52개). audio pool 기존 테스트는 비동기 unlock 가정 대신 명시 prepare 완료를 기다리게 수정했다. 기존 인게임 원본 함수와 추출 후 결과는 144개 조건에서 수치 일치했다. 변경된 runtime/game/header/build 문법 검사 통과.
+- 실제 렌더 검증: 격리 headless Edge HTTP에서 첫 4종+35개 외형의 한 바퀴를 실제 코드로 순회하고 선택의 freeze/정체성 중복 없음/렌더 속성 유지/렌더 예외 없음 확인. 중립 19종 공격음과 22종 이동·비행음, 콩 발/착지·spring 착지 총 44개 이름이 실제 네이티브 AudioBufferSource.start에 도달했다. 가속한 표시 시계로 검사했으며 귀로 들은 음질·체감 음량 평가는 하지 않았다.
+- 실패 복구 검증: file 프로토콜 전체 game.js 로딩 완료, 단일 AudioContext 유지, 몽돌 antenna jump/idle 강제 예외 64회에도 정상 외형 프레임 표시 및 다음 선택 이후 진행을 확인했다. 최초 QA 정지 조건은 0ms인 bean perform을 기다리는 잘못된 조건이었고 저장된 증거의 후속 진행으로 바로잡았다. 이후 null 프레임 guard를 넣고 HTTP 전체 게임으로 강제 null 64회를 검증해 동일 외형 표시, 다음 bean:2 rest 도달, pageerror 0, 단일 context를 통과했다. 실제 캡처의 몽돌 fallback/새싹콩 안테나·다리 외형을 눈으로 검수했다.
+- 최초 사용자 관측을 만든 원래 throw 자체는 수정 전 브라우저에서 재현하지 않았으므로 단정하지 않는다. variant 0으로 영구 변경하던 명시 경로는 제거했고, 현재 실제 35개 순회에서는 원래 렌더 예외가 관측되지 않았다.
+- 증거: $Trash/welcome-ingame-consistency-20261105/{census-detail.json,qa-result.json,fallback-file-result.json,null-frame-full-game-result.json,header-actual.png,pebble-antenna-null-pose.png,bean-antenna-after-null.png,final-scoped.diff,product-hashes.json}. 첫 full census는 실제 35개 렌더·SFX 확인을 위한 가속 실행이며 일반 형식 검사의 시간 예산과 구분한다. 마지막 텍스트 형식 검사는 이 기록 뒤 수행한다.
+
+## welcome-appearance-frame-guard-20261105-01a1a12e
+
+- 기록 시각: 2026-11-05T21:18:24+09:00; 주체: Codex 검수 판단; 출처: 현재 웰컴 수정 /root.
+- 35개 실제 렌더 순회와 19종 공격/이동의 네이티브 버퍼 재생을 확인했다. file 전체 게임 로딩과 강제 몽돌 jump/idle 오류에서도 마지막 정상 프레임이 보이고 다음 선택 이후까지 진행했다. 새싹콩 perform은 원래 0ms라 해당 상태에서 정지한다는 QA 조건은 잘못되었으며 저장된 후속 진행 증거로 조건을 바로잡았다.
+- 추가 검수 판단: 외형 renderer가 예외 대신 null을 반환해도 기본 스프라이트로 빠지면 안 된다. 변형 프레임 null을 실패로 처리하고, 등장 준비 때 같은 외형의 정상 대기 프레임을 화면 밖 버퍼에 확보한다. 준비 실패는 등장 전에 같은 선택으로 재시도/건너뛰며, 이미 등장한 유닛은 마지막 정상 외형을 유지한다.
+
+## welcome-runtime-dependency-20261105-01a1a12e
+
+- 기록 시각: 2026-11-05T21:09:37+09:00; 주체: Codex 구현 판단; 출처: 현재 웰컴 수정 /root.
+- 동시 작업의 rebase는 종료되어 충돌이 해소되었다. 현재 HEAD와 작업본 runtime 모두에 const { SPRING_BIRTH_ANIMATION as birth }라는 잘못 변환된 import alias가 남아 파싱 자체가 실패한다. 웰컴이 사용하는 공통 런타임을 로드·검증할 수 없어, 요청 범위의 실행 의존성 복구로 해당 alias 한 곳과 생성기의 import alias 변환 한 줄만 수정한다. 다른 모듈/동시 변경은 보존한다.
+- 첫 대상 회귀 검증 30개 중 29개 통과. 기존 오디오 pool 테스트는 unlock 완료를 전체 디코드 완료로 가정해서 실패했으며 신규 명시적 prepare 계약으로 리소스 완료를 기다리도록 수정한다. 실제 음원 누락과 구별한다.
+
+## welcome-ingame-consistency-start-20261105-01a1a12e
+
+- 기록 시각: 2026-11-05T21:03:15+09:00; 발화·결정 주체: 사용자(수정 범위), Codex(구현 판단); 출처: 현재 SPAWNER 웰컴 채팅 /root; 원문 사건 시각: 미확인.
+- 사용자 요청: 웰컴도 실제 인게임 동작·SFX 함수를 사용하고 입장 외형을 퇴장까지 유지하도록 전수 조사에서 확인한 결함 수정. 새 애니·SFX 제작 없이 기존 애셋 활용.
+- 구현 판단: 헤더 전용 점프 이미지 대신 인게임 원본과 실제 pose를 사용한다. 준비/렌더 실패 복구에서 variant 0 강등을 제거하고 동일 외형 재시도·정상 자세/마지막 정상 프레임으로 복구한다. 로스터 선택은 고정하며 첫 4종 기본형, 이후 35개 정체성의 중복 없는 셔플은 보존한다.
+- 오디오 판단: 실제 MovementAudio/CombatAudio 호출 수명을 동작 전환 사이에 유지하고, 각 유닛의 SFX 디코드·채널 등록을 준비 완료 조건에 포함한다. 공유 점프 착지 이벤트와 새싹콩 동작 수학은 인게임/웰컴이 같은 함수를 사용한다. 오디오 준비는 독립 워커 audio_readiness_fix가 맡고 메인은 상태·렌더 통합과 검수를 맡는다.
+- 보호 상태: 다른 작업이 현재 Git rebase 중이며 CodexWorkMemory.md와 client/runtime.js에 충돌 마커가 있다. 해당 Git 작업과 충돌 해결은 건드리지 않는다. 원본 백업은 $Trash/welcome-ingame-consistency-20261105/original. runtime은 필요한 모듈 블록만 동기화하고 기존/동시 변경을 보존한다.
+- 검증 예정: 기존 대상 테스트, 실제 격리 브라우저에서 35개 외형 상태/네이티브 음원 재생 및 몽돌 변형 입퇴장·실패 복구. 아직 제품 수정·검증 결과 없음. 현재 요청은 커밋·푸시 미포함.
+
+## 웰컴 SFX 전수 소스 조사·다리 몽돌 강등 경로 확인 · 01a1a12e 현재 요약
+
+- 기록 ID: welcome-sfx-census-complete-20261105-01a1a12e. 기록 시각·마지막 소스 확인: 2026-11-05T20:50:52+09:00. 기록자·전수 소스/파일 대조 Codex /root, 실제 인게임 함수/SFX 사용 여부 조사 및 다리 몽돌 입장 후 기본형 퇴장 관측 주체 사용자. 출처 thread01a1a12e-3f3f-72c1-95e2-0b5b349b5ffb,H:/Spawner Windows/PowerShell. 사용자 원발언 정확 시각·항목 ID 불명. HEAD cfbb669, 조사 관련 제품 파일 dirty없음 확인. 앞선 start 기록의 조사 대기를 이 확인 범위에서 완료로 갱신한다.
+- 범위·전수 결과: 웰컴은 4종족×4외형16+중립19=35후보. MovementAudio 정의22종(기본3+중립19)과 콩 footstep/landing, 공격 unit-attack 공통1+중립19전용을 포함해 실제 Audio.sources 전체75개를 읽었다. 75/75 원본·래퍼·로컬 매니페스트 존재, base64 래퍼 바이트와 원본75/75 동일. 중립19종 모두 이동/비행·공격 매핑 보유, 모든 공격 cue가 각 실제clip 안(235~546ms/905~1570ms,벌레440/1280). runtime의 welcome-presentation/unit-animation/image-geometry/unit-sprite-registration 본문은 현재 source와 일치했다. 실제 브라우저 재생·청음·서버/테스트/빌드는 실행하지 않은 정적 조사다.
+- 전 중립 확인 목록: 꽃꼬리새/이슬토끼/흙두더지/보따리달팽이/솜양/굴림도토리/흙멧돼지/방울두꺼비/넝쿨거북/그늘족제비/올가미덩굴/갈퀴부엉이/봄지기/등불지기/오래된 등짐/걸어가는 산/흰발/가시등 우두머리/가시등벌레. 모두 MovementV1 또는 봄지기 MovementV2 wing과 각 CreatureAttackV2 또는 beetle-attack이 있다. 파일이 없어서 생기는 공통 누락은 발견하지 못했다.
+- 확정 코드 경로1(공격): header.advance exit→perform에서 resetPresentationAudio(header298)가 CombatAudio playback.time/events를 비운다. 같은 tick 새 중립 agent에 attack를 넣고 update(175)를 호출한다. CombatAudio.collect99는 initial이면 cue시각 전에도 이벤트 stamp를 기록하면서 소리는 내지 않고, 나중에는 같은stamp로 다시 재생하지 않는다. 웰컴의 중립19종 공격 연출 모두가 이 누락 경로 대상이다. 인게임은 전투/이동 이벤트 update를 공유하지만 updateAudio가 매 행동 전환마다 playback을 reset하지 않아 동일 호출 순서가 아니다. 공유 함수가 있다는 사실만으로 같은 동작을 보장하지 않는다.
+- 확정 코드 경로2(기본 종족 행동): 콩 perform0→idle/rest, 나머지3종×4외형은 jump다(header288/344). 기본 종족에는 header.travelMotion이 attack 상태를 넣지 않는다(header259는 중립 한정). 따라서 기본 종족 공격음 공통unit-attack이 있어도 이 화면에서는 공격 자체를 하지 않으며, jump는 moveDuration0/modeidle로 전달돼 Movement/CombatAudio에 jump·landing 이벤트가 연결되지 않는다. spring-landing/footstep 자산도 선언·레벨/제한 정의 외 실제 해당 호출을 찾지 못했다.
+- 확정 준비 계약·조건부 누락: Audio148에서 첫7개 welcome/UI buffer만 준비해도 prepared=true/available=true다. 나머지68개는 Assets.ready 뒤 Promise.all decode 전체가 끝난 후 채널에 추가한다(152~155). 그 전에 생긴 중립 이동/공격 cue는 start218의 해당source 채널 없음→null로 조용히 빠지며 이벤트생성기는이미소비한다. header.prepareChoice는그림만기다리고개별SFX준비를기다리지않는다. 실제 느린로딩에서 발생했는지는이번에 재현하지 않았다. header172는 중심x가0..width일때만agent를오디오에전달하고 MovementAudio가최초cue/120ms이전cue를뒤늦게재생하지않으므로 첫걸음·날개구간누락조건이있다. audio.start의동일clip간격/동시수/8채널 제한도 공유해 적용된다. 낮은 갈퀴부엉이 gain0.06·흙두더지0.068은 수치로 확인했지만 청감상 무음 원인으로 확정하지 않는다.
+- 추가 사용자 제보·외형 상태: 사용자가 다리 몽돌은 들어올 때 추가다리로 빠르게 걷는데 나갈 때 기본형이라고 관측했다. 현재 drawWelcomeChoice(presentation87~97)는 속성 외형 그리기 예외 시 variant0으로 재시도한다. header331은 결과를 choice.variant에 영구 대입하므로 점프/idle 등 한 동작 합성 실패 뒤 그 회차의 퇴장도 기본형/기본 이동속도가 된다. 이는 관측을 만들 수 있는 명확한 코드 경로다. 실제 첫 exception/단계는 console·재현으로 확인하지 못했으므로 특정 throw 원인으로 단정하지 않는다. spore/pebble/spring rig의 idle/walk/jump 트랙·프레임·durations 수가 일치하고 비어 있지 않음을 확인해 단순 동작 자료 부재로 결론내리지 않았다.
+- 후속 수정 판단: 회차 선택 외형은 유지하고 실패한 동작만 같은 외형 idle/walk 등으로 대체할 필요가 있다. 공격은 플레이백 bootstrap과 공격 시작을 분리하고 초기 stamp 소모를 고쳐야 하며, 개별 SFX 준비완료를 재생 계약에 반영해야 한다. 이는 조사 결과·후속안이고 이번에 구현·제작·커밋/푸시/배포하지 않았다. 제품 변경 없음, 이 메모리 관련 섹션만 추가하고 기존/동시 기록 바이트를 guard로 보존했다. 범위 밖 원래 안테나 몽돌 exception/OOM까지 해결했다고 주장하지 않는다.
+## 웰컴 유닛 애니·SFX 전수 조사 착수 · 01a1a12e 현재 요약
+
+- 기록 ID: welcome-sfx-census-start-20261105-01a1a12e. 기록 시각: 2026-11-05T20:40:52+09:00. 기록자·읽기 조사 Codex /root, 웰컴이 실제 인게임 함수로 SFX를 호출하는지 전수 조사 요구 주체 사용자. 출처 thread01a1a12e-3f3f-72c1-95e2-0b5b349b5ffb,H:/Spawner Windows/PowerShell. 정확 원발언 시각·항목 ID 불명. 현재 HEAD cfbb669, 시작 때 후보 제품 파일 변경 없음/메모리만 기존 dirty.
+- 범위: 현재 등장 가능한 4종족 외형과 중립 전부에 대해 이동·비행/착지·공격 및 실제 연출 행동, SFX 파일·로컬래퍼·로더, 공유 함수/수신 상태·타이밍·재생 게이트를 소스로 대조한다. UI/게임/오디오 제품 코드를 수정하거나 서버/브라우저/테스트·빌드를 실행하지 않는다. 일반 파일 존재·정적 데이터 조회만 수행하고 이 메모리 예외로 결과를 보존한다. 이번 요청은 Git/푸시/배포나 SFX 제작 승인이 아니다.
+- 초기 관측: 공유 MovementAudio.update·CombatAudio.update와 Audio.playWelcome 호출은 실제로 연결돼 있다. 다만 header exit→perform에서 resetPresentationAudio가 두 playback을 초기화하고, CombatAudio.collect는 initial이면 future cue라도 stamp를 바로 기록한다. 이 조합으로 공격 cue가 누락될 가능성이 커서 종별 행동/분기를 확인한다. 파일 부재와 이벤트 누락·낮은 gain은 구분하며 실제 청음/재현 결과로 과장하지 않는다. 과거 안테나 몽돌 정지는 cloud 후속의 예외 복구 코드가 현재 존재함을 확인했고, 그 이전 미해결 기록만으로 현재 재현됐다고 하지 않는다.
 ## 런타임 별칭 변환 수정·게시 범위 확정 · 01a1a6c1
 
 - 기록 ID: runtime-import-alias-publish-scope-20261105-01a1a6c1. 기록 시각: 2026-11-05T21:14:44+09:00. 기록·범위분리·검수 Codex /root, 수정·게시 결정 사용자. 출처 현재 채팅 01a1a6c1-ac04-70b2-940b-bdfba26e30ae의 「고쳐」 및 「고쳐서 올릴 만한 건 올려놔」. 원발언 정확 시각·항목 ID 불명. H:/Spawner Windows PowerShell, host local.

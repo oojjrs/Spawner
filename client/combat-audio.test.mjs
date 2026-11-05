@@ -223,6 +223,7 @@ test("이동음이 채널을 채워도 피격·사망음이 우선하며 모든 
   runInContext(readFileSync(new URL("./audio.js", import.meta.url), "utf8"), context);
   const engine = context.SpawnerAudio.create();
   await listeners.pointerdown();
+  await engine.prepare(["footstep", "landing", "throw", "spore-hurt", "pebble-death"]);
   assert.ok(engine.available());
   for (let index = 0; index < 6; index++) { clock.currentTime += .2; engine.play("footstep", 1); }
   engine.play("landing", 1);
@@ -283,4 +284,17 @@ test("전투 서버 hitAt 기준 큐는 재접속 후에도 실제 타격 직전
   assert.equal(combat.update(playback, [unit], [], 10.349).length, 0);
   assert.deepEqual(names(combat.update(playback, [unit], [], 10.35)), ["unit-attack"]);
   assert.equal(combat.update(playback, [unit], [], 10.36).length, 0);
+});
+
+test("웰컴 첫 공격도 중립 19종의 미래 타격음을 실제 인게임 큐에서 한 번 재생한다", () => {
+  for (const species of [...ENCOUNTER_TYPES.map(type => type.key), "spiny-back-beetle"]) {
+    const unit = { id: species, species, health: 10, mode: "attack", attackStartedAt: 10, attack: { startedAt: 10, speed: 1 } };
+    const sound = combat.cue(combat.material(unit), "attack", 1);
+    const playback = combat.create();
+    assert.equal(combat.update(playback, [unit], [], 10).length, 0);
+    for (let time = 10.05; time < 10 + sound.at; time += .05)
+      assert.equal(combat.update(playback, [unit], [], time).length, 0);
+    assert.deepEqual(names(combat.update(playback, [unit], [], 10 + sound.at)), [sound.name]);
+    assert.equal(combat.update(playback, [unit], [], 10 + sound.at + .01).length, 0);
+  }
 });

@@ -235,13 +235,14 @@
   }
 
   function create() {
-    return { time: null, units: new Map(), beans: new Map() };
+    return { time: null, units: new Map(), beans: new Map(), jumps: new Map() };
   }
 
   function reset(playback) {
     playback.time = null;
     playback.units.clear();
     playback.beans.clear();
+    playback.jumps.clear();
   }
 
   function pose(unit, time, animations) {
@@ -309,10 +310,28 @@
     }
   }
 
+  function updateJump(playback, unit, time, animations, events, initial) {
+    const animation = !unit.species && animations.UNIT_ANIMATIONS?.[unit.tribe]?.jump;
+    const startedAt = unit.jumpStartedAt ?? unit.moveStartedAt;
+    let jump = playback.jumps.get(unit.id);
+    if (animation && unit.mode === "jump" && Number.isFinite(startedAt) && jump?.startedAt !== startedAt) {
+      const at = startedAt + animation.durationMs / 1000;
+      jump = { startedAt, at, played: initial && time >= at };
+      playback.jumps.set(unit.id, jump);
+    }
+    if (!jump || jump.played || time < jump.at) return;
+    jump.played = true;
+    if (!initial && unit.health > 0 && !unit.birth && time - jump.at <= .12)
+      events.push({ name: unit.tribe === "spring" ? "spring-landing" : definitions[unit.tribe].name, unit });
+  }
+
   function update(playback, units, time, animations) {
     if (playback.time !== null && (time < playback.time || time - playback.time > .5)) reset(playback);
     const initial = playback.time === null, active = new Set(), beans = new Set(), events = [];
+    const jumping = new Set();
     for (const unit of units) {
+      jumping.add(unit.id);
+      updateJump(playback, unit, time, animations, events, initial);
       if (!unit.species && !["spore", "pebble", "spring"].includes(unit.tribe)) {
         if (unit.health > 0 && !unit.birth) {
           beans.add(unit.id);
@@ -335,6 +354,7 @@
       }
       playback.units.set(unit.id, { startedAt, phase: motion.phase });
     }
+    for (const id of playback.jumps.keys()) if (!jumping.has(id)) playback.jumps.delete(id);
     for (const id of playback.units.keys()) if (!active.has(id)) playback.units.delete(id);
     for (const id of playback.beans.keys()) if (!beans.has(id)) playback.beans.delete(id);
     playback.time = time;

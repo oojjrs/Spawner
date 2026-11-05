@@ -49,7 +49,10 @@
     let discoveryGain = null;
     const music = entryAudio?.music || globalThis.SpawnerMusic.create();
     const buffers = new Map();
-    const names = Object.keys(sources).filter(name => name !== "click" && name !== "discovery");
+    const names = Object.keys(sources);
+    const welcomeNames = new Set(["click", "discovery", "footstep", "landing", "move-spore", "move-pebble", "move-spring", "spring-landing"]);
+    const pending = new Map();
+    const preparedNames = new Set();
     const channels = [];
     const refills = [];
     let refillTimer = null;
@@ -106,55 +109,71 @@
       clickSource = null;
     }
 
+    function initialize() {
+      if (failed) return false;
+      if (context) return true;
+      context = entryAudio?.context || new AudioContext();
+      worldGain = context.createGain();
+      worldGain.gain.value = worldVolume;
+      worldGain.connect(context.destination);
+      welcomeGain = context.createGain();
+      welcomeGain.connect(context.destination);
+      for (let index = 0; index < 8; index++) {
+        const gain = context.createGain();
+        gain.gain.value = 0;
+        gain.connect(worldGain);
+        channels.push({ gain, sources: new Map(), source: null, name: null, priority: 0, group: "world" });
+      }
+      return true;
+    }
+
+    function prepareSound(name) {
+      if (preparedNames.has(name)) return Promise.resolve();
+      if (pending.has(name)) return pending.get(name);
+      if (!Object.hasOwn(sources, name)) return Promise.reject(new Error(name));
+      const request = (async () => {
+        try {
+          await (welcomeNames.has(name) ? globalThis.SpawnerAssets.welcomeReady : globalThis.SpawnerAssets.ready);
+          if (!buffers.has(name)) {
+            const response = await fetch(globalThis.SpawnerAssets.source(sources[name]));
+            if (!response.ok) throw new Error("효과음을 불러오지 못했습니다.");
+            buffers.set(name, await context.decodeAudioData(await response.arrayBuffer()));
+          }
+          if (name !== "click" && name !== "discovery")
+            for (const channel of channels) if (!channel.sources.has(name)) channel.sources.set(name, prepareSource(channel, name));
+          preparedNames.add(name);
+          prepared = true;
+        } finally {
+          pending.delete(name);
+        }
+      })();
+      pending.set(name, request);
+      return request;
+    }
+
+    async function prepare(names) {
+      if (!initialize()) return false;
+      await Promise.all([...new Set(names)].map(prepareSound));
+      return true;
+    }
+
     async function unlock() {
       if (!active || muted || failed || document.hidden) return;
       try {
-        if (!context) {
-          context = entryAudio?.context || new AudioContext();
-          worldGain = context.createGain();
-          worldGain.gain.value = worldVolume;
-          worldGain.connect(context.destination);
-          welcomeGain = context.createGain();
-          welcomeGain.connect(context.destination);
-        }
+        if (!initialize()) return;
         if (entryResume) {
           const request = entryResume;
-          entryResume = null;
           await request;
+          if (entryResume === request) entryResume = null;
         }
         if (context.state === "suspended") await context.resume();
         if (active && !muted && !document.hidden) music.unlock(context);
-        if (!loading) loading = (async () => {
-          const entries = Object.entries(sources);
-          const welcomeNames = new Set(["click", "discovery", "footstep", "landing", "move-spore", "move-pebble", "move-spring"]);
-          const priority = globalThis.SpawnerWelcomeLoading ? entries.filter(([name]) => welcomeNames.has(name)) : entries;
-          async function decode(entries) {
-            await Promise.all(entries.map(async ([name, source]) => {
-              const response = await fetch(globalThis.SpawnerAssets.source(source));
-              if (!response.ok) throw new Error("효과음을 불러오지 못했습니다.");
-              buffers.set(name, await context.decodeAudioData(await response.arrayBuffer()));
-            }));
-          }
-          await globalThis.SpawnerAssets.welcomeReady;
-          await decode(priority);
-          for (let index = 0; index < 8; index++) {
-            const gain = context.createGain();
-            gain.gain.value = 0;
-            gain.connect(worldGain);
-            const channel = { gain, sources: new Map(), source: null, name: null, priority: 0, group: "world" };
-            channels.push(channel);
-            for (const name of names) if (buffers.has(name)) channel.sources.set(name, prepareSource(channel, name));
-          }
-          prepared = true;
-          if (priority.length !== entries.length) {
-            await globalThis.SpawnerAssets.ready;
-            const remaining = entries.filter(([name]) => !welcomeNames.has(name));
-            await decode(remaining);
-            for (const channel of channels) for (const [name] of remaining)
-              if (names.includes(name)) channel.sources.set(name, prepareSource(channel, name));
-          }
-        })();
-        await loading;
+        if (!loading) {
+          const priority = globalThis.SpawnerWelcomeLoading ? names.filter(name => welcomeNames.has(name)) : names;
+          loading = Promise.allSettled(priority.map(prepareSound));
+          if (priority.length !== names.length)
+            Promise.allSettled(names.filter(name => !welcomeNames.has(name)).map(prepareSound));
+        }
       } catch {
         failed = true;
         stop();
@@ -240,6 +259,7 @@
     function play(name, volume) {
       if (!available() || volume <= 0) return;
       if (name === "discovery") {
+        if (!buffers.has(name)) return;
         if (context.currentTime - (lastPlayed.get(name) ?? -Infinity) < 1.2) return;
         if (discoverySource) discoverySource.stop();
         const source = context.createBufferSource();
@@ -282,6 +302,8 @@
 
     async function playClick() {
       if (!available()) await unlock();
+      if (!active || muted || failed || document.hidden) return;
+      try { await prepare(["click"]); } catch { return; }
       if (!available()) return;
       stopClick();
       const source = context.createBufferSource();
@@ -344,6 +366,6 @@
     music.update(null);
     updateButton();
     unlock();
-    return { available, play, playWelcome, stopWelcome, playClick, setHarvest, setActive, setWorldVolume, stop, updateMusic: music.update, musicWaveform: music.waveform };
+    return { available, prepare, play, playWelcome, stopWelcome, playClick, setHarvest, setActive, setWorldVolume, stop, updateMusic: music.update, musicWaveform: music.waveform };
   } });
 })();

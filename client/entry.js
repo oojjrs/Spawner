@@ -148,6 +148,7 @@
             seed.audio ||= globalThis.SpawnerAudio.create();
             globalThis.SpawnerWelcomeHeader.attachAudio(seed.audio);
           }
+          await globalThis.SpawnerWelcomeHeader.start();
           await new Promise(resolve => {
             let frame = null, task = null, settled = false;
             function finish() {

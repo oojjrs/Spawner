@@ -4121,28 +4121,14 @@
         agentHeadMotions.set(agent.id, motion);
       }
       if (motion.idleStartedAt == null || now < motion.idleStartedAt) motion.idleStartedAt = now;
-      const phase = (now - motion.idleStartedAt) / 1000 % 6.8;
-      const shrugDuration = Math.PI * 2 / 7.2;
-      const shrug = phase / shrugDuration;
-      const body = shrug < 1 ? Math.sin(shrug * Math.PI) ** 2 : 0;
-      let flap = shrug < 1 ? -Math.sin(shrug * Math.PI * 2) * 0.24 : 0;
-      const rest = phase < 2.52 ? (phase - shrugDuration) / (2.52 - shrugDuration) :
-        (phase - 2.84) / (6.8 - 2.84);
-      if (rest >= 0 && rest < 1) flap += Math.sin(rest * Math.PI) ** 2 * 0.1;
-      const flutter = (phase - 2.52) / 0.32;
-      if (flutter >= 0 && flutter < 1) flap -= Math.sin(flutter * Math.PI * 2) * Math.sin(flutter * Math.PI) * 0.34;
-      return { bodyOffset: -AGENT_HEIGHT * body * 0.02, flap };
+      return Spawner.sproutIdlePose(now - motion.idleStartedAt, AGENT_HEIGHT);
     }
 
     function agentBobOffset(agent, now) {
       if (idleMotion.matches) return 0;
       const idle = agentIdlePose(agent, now);
       if (idle) return idle.bodyOffset;
-      const seconds = now / 1000;
-      const phase = Number(String(agent.id).split(":").pop()) || 0;
-      return AGENT_HEIGHT * (Math.sin(seconds * 2.4 + phase) * 0.03 +
-        Math.sin(seconds * 4.1 + phase * 1.7) * 0.012 +
-        Math.sin(seconds * 6.8 + phase * 0.63) * 0.006);
+      return Spawner.sproutBobOffset(agent.id, now, AGENT_HEIGHT);
     }
 
     function agentWalkPose(agent) {
@@ -4175,8 +4161,7 @@
 
     function agentJumpOffset(agent, position) {
       const appearance = Spawner.unitDisplayAttributes(agent);
-      return !agent.species && (agent.tribe || "bean") === "bean" && !appearance.feet ?
-        Math.sin(position.progress * Math.PI) * AGENT_HEIGHT * .18 : 0;
+      return Spawner.sproutJumpOffset(agent, appearance, position, AGENT_HEIGHT);
     }
 
     function agentAppearanceBodyPose(agent, now) {
@@ -4189,16 +4174,9 @@
     function agentBodyPose(agent, now, deliveryPose) {
       const appearance = Spawner.unitDisplayAttributes(agent);
       const lift = agentBodyLift(appearance);
-      const elapsed = agent.moveDuration ? state.simSeconds - agent.moveStartedAt : -1;
-      const launch = agent.moveDuration ? clamp(elapsed /
-        (agent.moveDuration * AGENT_JUMP_PREPARATION), 0, 1) : 0;
-      const landing = clamp((elapsed - (agent.moveDuration || 0) - 0.04) / 0.22, 0, 1);
-      const extension = appearance.feet || ["spore", "pebble", "spring"].includes(agent.tribe) || idleMotion.matches ? 0 :
-        launch * launch * (3 - 2 * launch) * (1 - landing * landing * (3 - 2 * landing));
-      const stretch = extension * 0.24;
-      const bob = agentWalkPose(agent) ? 0 : agentBobOffset(agent, now) * (1 - extension);
-      return { pivot: (460 - lift) / 512, scaleX: deliveryPose.scaleX * (1 - stretch * 0.35),
-        scaleY: deliveryPose.scaleY * (1 + stretch) - bob / (AGENT_HEIGHT * 350 / 512) };
+      const walk = agentWalkPose(agent);
+      return Spawner.sproutBodyPose(agent, appearance, state.simSeconds, AGENT_HEIGHT, deliveryPose, lift,
+        walk, walk ? 0 : agentBobOffset(agent, now), idleMotion.matches);
     }
 
     function agentHeadPose(agent, now) {
@@ -4218,22 +4196,8 @@
       motion.end = end;
       motion.duration = agent.moveDuration;
       motion.time = time;
-      const elapsed = agent.moveDuration ? Math.max(0, time - agent.moveStartedAt) : 0;
-      const progress = agent.moveDuration ? clamp(elapsed / agent.moveDuration, 0, 1) : 1;
-      const launch = progress < 1 ? clamp(progress / 0.18, 0, 1) : 0;
-      let flap = -0.46 * launch * launch * (3 - 2 * launch);
       const landedAt = agent.moveDuration && time >= end ? end : motion.landedAt;
-      const landing = (time - landedAt) / 0.36;
-      if (landing >= 0 && landing < 1) flap -= 0.46 * Math.cos(landing * Math.PI * 3) * (1 - landing) ** 1.35;
       const appearance = Spawner.unitDisplayAttributes(agent);
-      if (appearance.feet) {
-        const walk = agentWalkPose(agent);
-        flap = walk ? Math.sin(walk.phase - 0.5) * 0.09 - (walk.sprint ? 0.18 : 0.05) : 0;
-      }
-      if (agent.mode === "harvest") {
-        const age = Math.max(0, time - agent.harvestStarted);
-        flap += Math.sin(age * Math.PI * 2 / 0.42) * 0.44 * clamp(age / 0.12, 0, 1);
-      }
       let actionAge = -1;
       if (agent.mode === "unload") {
         const delivery = foodDeliveries.get(agent.id) || agent.foodDelivery;
@@ -4241,12 +4205,8 @@
       } else if (agent.attack) {
         actionAge = (time - agent.attack.hitAt) * agent.attack.speed;
       }
-      if (actionAge >= 0 && actionAge < 0.3) flap -= Math.sin(actionAge / 0.3 * Math.PI) * 0.44 * (1 - actionAge / 0.3);
-      const idle = agentIdlePose(agent, now);
-      if (idle) flap += idle.flap;
-      flap = clamp(flap, -0.75, 0.75);
-      const fold = 1 - Math.max(0, -flap) * 0.7;
-      return { leftRotation: flap, rightRotation: -flap, leftScaleY: fold, rightScaleY: fold };
+      return Spawner.sproutHeadPose(agent, appearance, time, landedAt, agentWalkPose(agent),
+        agentIdlePose(agent, now), actionAge, idleMotion.matches);
     }
 
     function drawAgentHead(ctx, agent, x, y, width, height, now, outlineColor) {

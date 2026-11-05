@@ -2,11 +2,12 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
   "use strict";
   let audioConnection = null;
   let audioReset = null;
+  let startPresentation = null;
   globalThis.SpawnerWelcomeHeader = Object.freeze({ attachAudio(audio) {
     if (audioConnection === audio) return;
     audioReset?.();
     audioConnection = audio;
-  } });
+  }, start() { return startPresentation?.(); } });
   await globalThis.SpawnerAssets.welcomeReady;
   const welcome = document.getElementById("welcome");
   const title = document.getElementById("welcome-title");
@@ -28,21 +29,16 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
   canvas.className = "welcome-characters";
   canvas.setAttribute("aria-hidden", "true");
   stage.prepend(canvas);
-  const context = canvas.getContext("2d");
+  let context = canvas.getContext("2d");
   const tribes = ["bean", "spore", "pebble", "spring"];
   const animations = globalThis.Spawner.UNIT_ANIMATIONS;
-  // Original 512px sheets from 2c93271 keep the large, high-DPI header sharp.
-  const jumpSources = {
-    spore: "DesignAssets/Welcome/spore-jump.webp",
-    pebble: "DesignAssets/Welcome/pebble-jump.webp"
-  };
   const sheets = new Map();
   const sources = new Map();
   await Promise.all(tribes.flatMap(tribe => Object.entries(animations[tribe])
     .filter(([action]) => action === "idle" || action === "walk" || action === "jump")
     .map(async ([action, animation]) => {
       const image = new Image();
-      image.src = globalThis.SpawnerAssets.source(action === "jump" && jumpSources[tribe] || animation.image);
+      image.src = globalThis.SpawnerAssets.source(animation.image);
       try {
         await image.decode();
         sheets.set(tribe + ":" + action, image);
@@ -64,7 +60,10 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
   let current = nextChoice();
   let upcoming = null, arriving = null;
   const pendingSources = new Map();
-  const unavailableDraws = new WeakSet();
+  const reportedDraws = new WeakSet();
+  const renderedChoices = new Map();
+  const beanMotions = new Map();
+  let started = false;
   function neutralAnimations(species) {
     if (species === "spiny-back-beetle") return Object.fromEntries(["idle", "walk", "attack"].map(action => {
       const animation = globalThis.Spawner.BEETLE_ANIMATIONS[action];
@@ -74,13 +73,21 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
     return { idle: species === "talon-owl" ? globalThis.Spawner.TALON_OWL_IDLE : globalThis.Spawner.CREATURE_IDLE_ANIMATIONS[species],
       walk: globalThis.Spawner.CREATURE_WALK_ANIMATIONS[species], attack: globalThis.Spawner.CREATURE_ATTACK_ANIMATIONS[species] };
   }
+  function soundNames(choice) {
+    if (choice.key === "bean") return ["footstep", "landing"];
+    const definition = globalThis.SpawnerMovementAudio.definitions[choice.key];
+    const attack = globalThis.SpawnerCombatAudio.cue(globalThis.SpawnerCombatAudio.material({ species: choice.key }), "attack", 1);
+    return [definition?.name, tribes.includes(choice.key) ? choice.key === "spring" ? "spring-landing" : definition?.name : attack?.name].filter(Boolean);
+  }
   async function prepareChoice(choice) {
+    await audioConnection?.prepare(soundNames(choice));
     if (tribes.includes(choice.key)) {
       if (choice.key !== "bean" && choice.variant > 0 && !tribeArtReady.has(choice.key)) {
         await globalThis.SpawnerAssets.ready;
         await tribeArt.prepareUnit(globalThis.Spawner.PLAYER_TRIBES.find(tribe => tribe.key === choice.key));
         tribeArtReady.add(choice.key);
       }
+      prepareFrame(choice);
       return;
     }
     await globalThis.SpawnerAssets.ready;
@@ -124,6 +131,7 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
       }
       neutralMetrics.set(choice.key, { bounds, envelope });
     }
+    prepareFrame(choice);
   }
   function prepareUpcoming() {
     const choice = nextChoice();
@@ -175,7 +183,7 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
     }
     audioPrimed = true;
     const motions = Array.isArray(motion) ? motion : [motion];
-    const agents = motions.filter(value => value && value.x >= 0 && value.x <= width).map(value => value.agent);
+    const agents = motions.filter(value => value && value.x + motionSize() / 2 >= 0 && value.x - motionSize() / 2 <= width).map(value => value.agent);
     const events = [...globalThis.SpawnerMovementAudio.update(movementPlayback, agents, time, globalThis.Spawner),
       ...globalThis.SpawnerCombatAudio.update(combatPlayback, agents, [], time)];
     for (const event of events) audioConnection.playWelcome(event.name, 1);
@@ -187,21 +195,34 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
     bean.attributes = appearance;
     const position = { x: x * .7 / size, y: 0 };
     const gait = feet ? roots.pose(bean, position, timeline) : { phase: 0, rotation: 0, bob: 0 };
-    const idlePhase = reducedMotion.matches ? 0 : elapsed / 1000 % 6.8;
-    const shrugDuration = Math.PI * 2 / 7.2;
-    const shrug = idlePhase / shrugDuration;
-    const body = !reducedMotion.matches && shrug < 1 ? Math.sin(shrug * Math.PI) ** 2 : 0;
-    let flap = !reducedMotion.matches && shrug < 1 ? -Math.sin(shrug * Math.PI * 2) * .24 : 0;
-    const rest = idlePhase < 2.52 ? (idlePhase - shrugDuration) / (2.52 - shrugDuration) : (idlePhase - 2.84) / (6.8 - 2.84);
-    if (!reducedMotion.matches && rest >= 0 && rest < 1) flap += Math.sin(rest * Math.PI) ** 2 * .1;
-    const flutter = (idlePhase - 2.52) / .32;
-    if (!reducedMotion.matches && flutter >= 0 && flutter < 1) flap -= Math.sin(flutter * Math.PI * 2) * Math.sin(flutter * Math.PI) * .34;
-    if (moving && feet) flap = Math.sin(gait.phase - .5) * .09 - .05;
+    const step = bean.moveStartedAt + ":" + bean.stepCount;
+    const end = bean.moveStartedAt + bean.moveDuration;
+    let state = beanMotions.get(bean.id);
+    if (!state || timeline < state.time) {
+      state = { step, end, duration: bean.moveDuration, landedAt: -Infinity, time: timeline, idleStartedAt: timeline };
+      beanMotions.set(bean.id, state);
+    } else if (state.step !== step) {
+      if (state.duration && timeline >= state.end) state.landedAt = state.end;
+      state.step = step;
+    }
+    state.end = end;
+    state.duration = bean.moveDuration;
+    state.time = timeline;
+    if (moving) state.idleStartedAt = null;
+    else if (state.idleStartedAt === null) state.idleStartedAt = timeline;
+    const idle = !moving && !reducedMotion.matches ? globalThis.Spawner.sproutIdlePose((timeline - state.idleStartedAt) * 1000, size) : null;
+    const landedAt = bean.moveDuration && timeline >= end ? end : state.landedAt;
+    const head = globalThis.Spawner.sproutHeadPose(bean, appearance, timeline, landedAt,
+      feet && (gait.moving || gait.settling) ? gait : null, idle, -1, reducedMotion.matches);
+    const flap = head.leftRotation;
     const lift = feet ? 426 - 512 * .94 + globalThis.Spawner.sproutRootGeometry(feet).height * .88 : 0;
     const pivot = 460 - lift;
     context.save();
     try {
-    const hop = moving && !feet ? Math.sin(motion.position.progress * Math.PI) * size * .18 : 0;
+    const hop = globalThis.Spawner.sproutJumpOffset(bean, appearance, motion.position, size);
+    const body = globalThis.Spawner.sproutBodyPose(bean, appearance, timeline, size, { scaleX: 1, scaleY: 1 }, lift,
+      feet && (gait.moving || gait.settling) ? gait : null,
+      reducedMotion.matches ? 0 : idle?.bodyOffset ?? globalThis.Spawner.sproutBobOffset(bean.id, timeline * 1000, size), reducedMotion.matches);
     context.translate(x, groundY() + (feet ? 4 : 0) - hop);
     context.scale(size / 512, size / 512);
     context.translate(-256, feet ? -512 * .94 : -460);
@@ -212,7 +233,7 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
     context.rotate(gait.rotation);
     context.translate(-256, -pivot);
     const headRoot = 110 - lift + 350 * 148.15 / 417;
-    const fold = 1 - Math.max(0, -flap) * .7;
+    const fold = head.leftScaleY;
     if (!appearance.antenna) for (const [name, pivotX, rotation] of [["sprout-left", 136 + 240 * 133.75 / 286, flap], ["sprout-right", 136 + 240 * 151.95 / 286, -flap]]) {
       context.save();
       try {
@@ -226,10 +247,16 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
     else {
       const antenna = beanParts.get("antenna-1");
       const antennaHeight = 196 * antenna.naturalHeight / antenna.naturalWidth;
-      context.drawImage(antenna, 158, 260 - lift - antennaHeight, 196, antennaHeight);
+      context.save();
+      try {
+        context.translate(256, 260 - lift);
+        context.rotate(head.leftRotation);
+        context.scale(1, head.leftScaleY);
+        context.drawImage(antenna, -98, -antennaHeight, 196, antennaHeight);
+      } finally { context.restore(); }
     }
     context.translate(256, pivot);
-    context.scale(1, moving ? 1 : 1 + body * .02 / (350 / 512));
+    context.scale(body.scaleX, body.scaleY);
     context.translate(-256, -pivot);
     context.drawImage(beanParts.get("body"), 136, 110 - lift, 240, 350);
     if (appearance.strength) context.drawImage(beanParts.get("strength-1"),
@@ -262,6 +289,10 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
       timeline: Number.isFinite(atTime) ? atTime : timeline, phase, startedAt: phaseStartedAt, reducedMotion: reducedMotion.matches,
       id: "welcome-" + current.key + ":" + appearanceNumber });
     motion.agent.animationStartedAt = phaseStartedAt;
+    if (phase === "perform" && tribes.includes(current.key) && animations[current.key].jump) {
+      motion.agent.mode = "jump";
+      motion.agent.jumpStartedAt = phaseStartedAt;
+    }
     if (phase === "perform" && !tribes.includes(current.key)) {
       motion.agent.mode = "attack";
       motion.agent.attackStartedAt = phaseStartedAt;
@@ -301,7 +332,6 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
       phase = "exit";
       prepareUpcoming();
     } else if (phase === "exit") {
-      resetPresentationAudio();
       current = arriving.choice;
       arriving = null;
       appearanceNumber++;
@@ -312,6 +342,13 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
   }
   function draw(motion) {
     if (!width || !height) return;
+    const retained = new Set([current, arriving?.choice, upcoming?.choice]);
+    for (const [choice, value] of renderedChoices) if (!retained.has(choice)) {
+      value.front.width = value.back.width = 0;
+      renderedChoices.delete(choice);
+    }
+    for (const id of beanMotions.keys()) if (id !== "welcome-" + current.key + ":" + appearanceNumber &&
+      id !== "welcome-" + arriving?.choice.key + ":" + (appearanceNumber + 1)) beanMotions.delete(id);
     drawUnit(motion);
     if (!arriving || reducedMotion.matches) return;
     const incoming = arrivalMotion();
@@ -320,22 +357,63 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
       drawUnit(incoming, false);
     });
   }
-  function drawUnit(motion, clear) {
+  function prepareFrame(choice) {
+    if (!width || !height) return;
+    const saved = { current, phase, elapsed };
+    current = choice;
+    phase = "rest";
+    elapsed = 0;
+    try {
+      const motion = travelMotion();
+      motion.agent.id += ":prepared";
+      if (!drawUnit(motion, false, false)) throw new Error("Missing welcome appearance frame: " + choice.key);
+    } finally { ({ current, phase, elapsed } = saved); }
+  }
+  function drawUnit(motion, clear, compose) {
+    motion ||= travelMotion();
     const choice = current;
-    if (unavailableDraws.has(choice)) {
-      if (clear !== false) context.clearRect(0, 0, width, height);
-      return;
+    const target = context;
+    let rendered = renderedChoices.get(choice);
+    if (!rendered) {
+      rendered = { front: document.createElement("canvas"), back: document.createElement("canvas"), valid: false, x: motion.x };
+      renderedChoices.set(choice, rendered);
     }
-    const drawn = globalThis.Spawner.drawWelcomeChoice(choice, candidate => {
-      current = candidate;
+    if (rendered.back.width !== canvas.width || rendered.back.height !== canvas.height) {
+      rendered.back.width = canvas.width;
+      rendered.back.height = canvas.height;
+    }
+    const surface = rendered.back.getContext("2d");
+    function render(fallback) {
+      const saved = { phase, elapsed };
+      surface.setTransform(canvas.width / width, 0, 0, canvas.height / height, 0, 0);
+      surface.clearRect(0, 0, width, height);
+      context = surface;
       try {
-        const appearance = appearances[candidate.variant][candidate.key === "bean" ? "bean" : "others"];
-        const preparedMotion = motion && { ...motion, agent: { ...motion.agent, attributes: appearance } };
-        drawPreparedUnit(preparedMotion, clear);
-      } finally { current = choice; }
-    }, { onError: (error, failed) => console.warn("Welcome pose unavailable:", failed.key, failed.variant, error) });
-    if (drawn) choice.variant = drawn.variant;
-    else unavailableDraws.add(choice);
+        if (fallback) { phase = "rest"; elapsed = 0; }
+        drawPreparedUnit(fallback ? { ...motion, agent: { ...motion.agent, mode: "idle", attack: null, moveDuration: 0 } } : motion, false);
+      } finally {
+        context = target;
+        ({ phase, elapsed } = saved);
+      }
+    }
+    const drawn = globalThis.Spawner.drawWelcomeChoice(choice, () => render(false), {
+      fallback: () => render(true),
+      onError: (error, failed) => {
+        if (reportedDraws.has(failed)) return;
+        reportedDraws.add(failed);
+        console.warn("Welcome pose unavailable:", failed.key, failed.variant, error);
+      }
+    });
+    if (drawn) {
+      [rendered.front, rendered.back] = [rendered.back, rendered.front];
+      rendered.valid = true;
+      rendered.x = motion.x;
+    }
+    if (compose !== false) {
+      if (clear !== false) target.clearRect(0, 0, width, height);
+      if (rendered.valid) target.drawImage(rendered.front, motion.x - rendered.x, 0, width, height);
+    }
+    return rendered.valid;
   }
   function drawPreparedUnit(motion, clear) {
     if (!width || !height) return;
@@ -347,15 +425,14 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
       return;
     }
     const moving = phase === "enter" || phase === "exit";
-    let action = reducedMotion.matches ? "idle" : moving && animations[tribe].walk ? "walk" : phase === "perform" && animations[tribe].jump ? "jump" : "idle";
-    if (!sheets.has(tribe + ":" + action)) action = "idle";
-    const animation = animations[tribe][action];
-    const image = sheets.get(tribe + ":" + action) || sheets.get(tribe + ":idle");
-    if (!image) return;
+    const agent = reducedMotion.matches ? { ...motion.agent, mode: "idle", moveDuration: 0, attack: null } : motion.agent;
+    const animationPose = globalThis.Spawner.unitAnimationPose(agent, reducedMotion.matches ? 0 : timeline);
+    const action = animationPose?.action || "idle";
+    const animation = animationPose?.animation || animations[tribe].idle;
+    const frame = animationPose?.frame || 0;
+    const image = sheets.get(tribe + ":" + action);
+    if (!image) throw new Error("Missing welcome animation source: " + animation.image);
     const size = Math.min(184, width * .7);
-    const agent = motion.agent;
-    const walkPose = moving && !reducedMotion.matches ? globalThis.Spawner.unitAnimationPose(agent, timeline) : null;
-    const frame = walkPose?.frame ?? globalThis.Spawner.unitAnimationFrame(animation, reducedMotion.matches ? 0 : elapsed);
     const x = motion.x;
     if (tribe === "bean" && beanParts.size === 8) {
       drawBean(motion, Math.min(210, width * .8), moving && !reducedMotion.matches);
@@ -372,6 +449,7 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
       pivotX: registeredAnimation.pivotX * registrationScale, pivotY: registeredAnimation.pivotY * registrationScale };
     if (Number.isFinite(registeredAnimation.viewSize)) sourceAnimation.viewSize = registeredAnimation.viewSize * registrationScale;
     const customized = tribeArtReady.has(tribe) ? tribeArt.animationFrame(agent, source, sourceAnimation, sourceIndex, action, timeline, pose) : null;
+    if (current.variant > 0 && !customized) throw new Error("Missing welcome appearance frame: " + tribe + ":" + action);
     const frameSize = customized ? customized.width : sourceAnimation.frameSize;
     const padding = (frameSize - sourceAnimation.frameSize) / 2;
     const renderedSize = size * frameSize / sourceAnimation.frameSize;
@@ -433,11 +511,11 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
     previousTime = time;
     while (elapsed >= phaseDuration()) {
       const completedDuration = phaseDuration();
-      if (phase === "enter" || phase === "exit") {
+      if (phase === "enter" || phase === "exit" || phase === "perform") {
         const completedAt = phaseStartedAt + completedDuration / 1000;
         const completedMotion = travelMotion(completedDuration, completedAt);
         updatePresentationAudio([completedMotion, arrivalMotion(completedDuration, completedAt)],
-          arriving ? completedAt : completedMotion.agent.moveStartedAt + completedMotion.agent.moveDuration);
+          completedAt);
       }
       if (!advance()) {
         elapsed = completedDuration;
@@ -458,7 +536,7 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
     previousTime = null;
     if (!active()) return;
     draw();
-    if (!reducedMotion.matches) frameRequest = requestAnimationFrame(tick);
+    if (started && !reducedMotion.matches) frameRequest = requestAnimationFrame(tick);
   }
   new ResizeObserver(() => {
     resetPresentationAudio();
@@ -475,6 +553,14 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
   new MutationObserver(synchronize).observe(document.body, { attributes: true, attributeFilter: ["data-screen"] });
   document.addEventListener("visibilitychange", synchronize);
   reducedMotion.addEventListener("change", synchronize);
-  prepareUpcoming();
+  startPresentation = async () => {
+    if (started) return;
+    await globalThis.Spawner.prepareWelcomeChoice(current, prepareChoice);
+    started = true;
+    previousTime = null;
+    timeline = elapsed = phaseStartedAt = 0;
+    prepareUpcoming();
+    synchronize();
+  };
   synchronize();
 })();

@@ -89,40 +89,46 @@ test("welcome movement keeps exact cue stamps and exposes the final landing cell
 });
 
 
-test("failed antenna rig falls back to loaded basic art without stopping later choices", async () => {
-  const calls=[],errors=[];
-  const choice=await prepareWelcomeChoice({key:"pebble",variant:2},async value=>{calls.push(value.variant);if(value.variant)throw new Error("rig unavailable")},{onError:error=>errors.push(error)});
-  assert.deepEqual(choice,{key:"pebble",variant:0});assert.deepEqual(calls,[2,0]);assert.equal(errors.length,1);
-  assert.deepEqual(await prepareWelcomeChoice({key:"spring",variant:1},async()=>{}),{key:"spring",variant:1});
-});
-test("rejected neutral sources can retry, and permanently unavailable ones can be skipped",async()=>{
-  let calls=0;
-  assert.equal((await prepareWelcomeChoice({key:"dew-rabbit",variant:0},async()=>{if(++calls===1)throw new Error("decode") })).key,"dew-rabbit");
-  assert.equal(await prepareWelcomeChoice({key:"soil-mole",variant:0},async()=>{throw new Error("404")}),null);
-});
-test("a never-settling lazy source releases the rotation after its deadline",async()=>{
-  const value=await prepareWelcomeChoice({key:"pebble",variant:2},v=>v.variant?new Promise(()=>{}):Promise.resolve(),{timeoutMs:5});
-  assert.equal(value.variant,0);
+test("an unavailable appearance retries its own assets without changing identity", async () => {
+  const calls = [], errors = [];
+  const selected = Object.freeze({ key: "pebble", variant: 2 });
+  const choice = await prepareWelcomeChoice(selected, async value => {
+    calls.push(value);
+    if (calls.length === 1) throw new Error("rig unavailable");
+  }, { onError: error => errors.push(error) });
+  assert.equal(choice, selected);
+  assert.deepEqual(calls, [selected, selected]);
+  assert.equal(errors.length, 1);
+  assert.equal(await prepareWelcomeChoice(selected, async () => { throw new Error("404"); }), null);
 });
 
-test("a decoded rig that fails its first draw falls back without breaking the next character", () => {
+test("a never-settling appearance releases the rotation without substituting base art", async () => {
+  const calls = [];
+  const choice = Object.freeze({ key: "pebble", variant: 2 });
+  assert.equal(await prepareWelcomeChoice(choice, value => {
+    calls.push(value);
+    return new Promise(() => {});
+  }, { timeoutMs: 5 }), null);
+  assert.deepEqual(calls, [choice, choice]);
+});
+
+test("a failed pose uses a fallback pose of the same immutable appearance", () => {
+  const choice = createWelcomeRoster(["pebble"], [], 4, () => 0)();
+  assert.ok(Object.isFrozen(choice));
+  assert.throws(() => { choice.variant = 2; }, TypeError);
   const attempts = [], failures = [];
-  const choice = { key: "pebble", variant: 2 };
-  const drawn = drawWelcomeChoice(choice, candidate => {
-    attempts.push(candidate.variant);
-    if (candidate.variant) throw new Error("first pose rasterization failed");
-  }, { onError: (error, candidate) => failures.push(candidate.variant) });
-  assert.deepEqual(drawn, { key: "pebble", variant: 0 });
-  assert.deepEqual(attempts, [2, 0]);
-  assert.deepEqual(failures, [2]);
-  assert.equal(choice.variant, 2);
-  assert.deepEqual(drawWelcomeChoice({ key: "spring", variant: 1 }, () => {}), { key: "spring", variant: 1 });
-});
-
-test("unrenderable base or neutral appearances are skipped without inventing a different species", () => {
-  for (const choice of [{ key: "bean", variant: 0 }, { key: "dew-rabbit", variant: 0 }]) {
-    const attempts = [];
-    assert.equal(drawWelcomeChoice(choice, candidate => { attempts.push(candidate); throw new Error("source failed"); }), null);
-    assert.deepEqual(attempts, [choice]);
-  }
+  const variant = Object.freeze({ key: "pebble", variant: 2 });
+  const drawn = drawWelcomeChoice(variant, candidate => {
+    attempts.push(candidate);
+    throw new Error("jump rasterization failed");
+  }, { fallback: candidate => attempts.push(candidate), onError: error => failures.push(error) });
+  assert.equal(drawn, variant);
+  assert.deepEqual(attempts, [variant, variant]);
+  assert.equal(failures.length, 1);
+  assert.equal(drawWelcomeChoice(variant, () => { throw new Error("jump"); }, {
+    fallback: () => { throw new Error("idle"); }
+  }), null);
+  assert.equal(variant.variant, 2);
+  const next = Object.freeze({ key: "spring", variant: 1 });
+  assert.equal(drawWelcomeChoice(next, () => {}), next);
 });

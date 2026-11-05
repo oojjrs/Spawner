@@ -22,7 +22,7 @@ export function createWelcomeRoster(tribes, species, variants, random = Math.ran
     number++;
     recent.push(choice);
     if (recent.length > 2) recent.shift();
-    return { ...choice };
+    return Object.freeze({ ...choice });
   };
 }
 
@@ -74,24 +74,17 @@ export async function prepareWelcomeChoice(choice, prepare, { timeoutMs = 15000,
   try { return await attempt(choice); }
   catch (error) {
     onError(error, choice);
-    // Basic tribe art is already loaded before the rotation starts. Keep the
-    // character moving with that art; a later round may retry its lazy rig.
-    const fallback = ["bean", "spore", "pebble", "spring"].includes(choice.key) && choice.variant > 0 ? { ...choice, variant: 0 } : choice;
-    try { return await attempt(fallback); }
-    catch (retryError) { onError(retryError, fallback); return null; }
+    try { return await attempt(choice); }
+    catch (retryError) { onError(retryError, choice); return null; }
   }
 }
 
-// A lazy rig can decode successfully and still fail when its first pose is
-// rasterized. Keep that failure local to this appearance, just as preparation
-// failures are, so the next animation frame and character can still run.
-export function drawWelcomeChoice(choice, draw, { onError = () => {} } = {}) {
+export function drawWelcomeChoice(choice, draw, options) {
   try { draw(choice); return choice; }
-  catch (error) { onError(error, choice); }
-  if (["bean", "spore", "pebble", "spring"].includes(choice.key) && choice.variant > 0) {
-    const fallback = { ...choice, variant: 0 };
-    try { draw(fallback); return fallback; }
-    catch (error) { onError(error, fallback); }
+  catch (error) { options?.onError?.(error, choice); }
+  if (options?.fallback) {
+    try { options.fallback(choice); return choice; }
+    catch (error) { options.onError?.(error, choice); }
   }
   return null;
 }

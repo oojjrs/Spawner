@@ -2859,7 +2859,7 @@ function createWelcomeRoster(tribes, species, variants, random = Math.random) {
     number++;
     recent.push(choice);
     if (recent.length > 2) recent.shift();
-    return { ...choice };
+    return Object.freeze({ ...choice });
   };
 }
 
@@ -2911,24 +2911,17 @@ async function prepareWelcomeChoice(choice, prepare, { timeoutMs = 15000, onErro
   try { return await attempt(choice); }
   catch (error) {
     onError(error, choice);
-    // Basic tribe art is already loaded before the rotation starts. Keep the
-    // character moving with that art; a later round may retry its lazy rig.
-    const fallback = ["bean", "spore", "pebble", "spring"].includes(choice.key) && choice.variant > 0 ? { ...choice, variant: 0 } : choice;
-    try { return await attempt(fallback); }
-    catch (retryError) { onError(retryError, fallback); return null; }
+    try { return await attempt(choice); }
+    catch (retryError) { onError(retryError, choice); return null; }
   }
 }
 
-// A lazy rig can decode successfully and still fail when its first pose is
-// rasterized. Keep that failure local to this appearance, just as preparation
-// failures are, so the next animation frame and character can still run.
-function drawWelcomeChoice(choice, draw, { onError = () => {} } = {}) {
+function drawWelcomeChoice(choice, draw, options) {
   try { draw(choice); return choice; }
-  catch (error) { onError(error, choice); }
-  if (["bean", "spore", "pebble", "spring"].includes(choice.key) && choice.variant > 0) {
-    const fallback = { ...choice, variant: 0 };
-    try { draw(fallback); return fallback; }
-    catch (error) { onError(error, fallback); }
+  catch (error) { options?.onError?.(error, choice); }
+  if (options?.fallback) {
+    try { options.fallback(choice); return choice; }
+    catch (error) { options.onError?.(error, choice); }
   }
   return null;
 }
@@ -9801,7 +9794,64 @@ function createSproutRoots(createSurface) {
   return { pose, draw, drawRig, neutral };
 }
 
-return { createSpriteContour, sproutRootGeometry, createSproutRoots };
+function sproutIdlePose(elapsedMs, height) {
+  const phase = elapsedMs / 1000 % 6.8;
+  const shrugDuration = Math.PI * 2 / 7.2;
+  const shrug = phase / shrugDuration;
+  const body = shrug < 1 ? Math.sin(shrug * Math.PI) ** 2 : 0;
+  let flap = shrug < 1 ? -Math.sin(shrug * Math.PI * 2) * .24 : 0;
+  const rest = phase < 2.52 ? (phase - shrugDuration) / (2.52 - shrugDuration) : (phase - 2.84) / (6.8 - 2.84);
+  if (rest >= 0 && rest < 1) flap += Math.sin(rest * Math.PI) ** 2 * .1;
+  const flutter = (phase - 2.52) / .32;
+  if (flutter >= 0 && flutter < 1) flap -= Math.sin(flutter * Math.PI * 2) * Math.sin(flutter * Math.PI) * .34;
+  return { bodyOffset: -height * body * .02, flap };
+}
+
+function sproutJumpOffset(agent, appearance, position, height) {
+  return !agent.species && (agent.tribe || "bean") === "bean" && !appearance.feet ?
+    Math.sin(position.progress * Math.PI) * height * .18 : 0;
+}
+
+function sproutBodyPose(agent, appearance, time, height, delivery, lift, walk, bob, reducedMotion) {
+  const elapsed = agent.moveDuration ? time - agent.moveStartedAt : -1;
+  const launch = agent.moveDuration ? clampRoot(elapsed / (agent.moveDuration * .18)) : 0;
+  const landing = clampRoot((elapsed - (agent.moveDuration || 0) - .04) / .22);
+  const extension = appearance.feet || ["spore", "pebble", "spring"].includes(agent.tribe) || reducedMotion ? 0 :
+    rootEase(launch) * (1 - rootEase(landing));
+  const stretch = extension * .24;
+  return { pivot: (460 - lift) / 512, scaleX: delivery.scaleX * (1 - stretch * .35),
+    scaleY: delivery.scaleY * (1 + stretch) - (walk ? 0 : bob * (1 - extension)) / (height * 350 / 512) };
+}
+
+function sproutHeadPose(agent, appearance, time, landedAt, walk, idle, actionAge, reducedMotion) {
+  if (reducedMotion) return { leftRotation: 0, rightRotation: 0, leftScaleY: 1, rightScaleY: 1 };
+  const elapsed = agent.moveDuration ? Math.max(0, time - agent.moveStartedAt) : 0;
+  const progress = agent.moveDuration ? clampRoot(elapsed / agent.moveDuration) : 1;
+  const launch = progress < 1 ? clampRoot(progress / .18) : 0;
+  let flap = -.46 * rootEase(launch);
+  const landing = (time - landedAt) / .36;
+  if (landing >= 0 && landing < 1) flap -= .46 * Math.cos(landing * Math.PI * 3) * (1 - landing) ** 1.35;
+  if (appearance.feet) flap = walk ? Math.sin(walk.phase - .5) * .09 - (walk.sprint ? .18 : .05) : 0;
+  if (agent.mode === "harvest") {
+    const age = Math.max(0, time - agent.harvestStarted);
+    flap += Math.sin(age * Math.PI * 2 / .42) * .44 * clampRoot(age / .12);
+  }
+  if (actionAge >= 0 && actionAge < .3) flap -= Math.sin(actionAge / .3 * Math.PI) * .44 * (1 - actionAge / .3);
+  if (idle) flap += idle.flap;
+  flap = Math.max(-.75, Math.min(.75, flap));
+  const fold = 1 - Math.max(0, -flap) * .7;
+  return { leftRotation: flap, rightRotation: -flap, leftScaleY: fold, rightScaleY: fold };
+}
+
+function sproutBobOffset(id, now, height) {
+  const seconds = now / 1000;
+  const phase = Number(String(id).split(":").pop()) || 0;
+  return height * (Math.sin(seconds * 2.4 + phase) * .03 +
+    Math.sin(seconds * 4.1 + phase * 1.7) * .012 +
+    Math.sin(seconds * 6.8 + phase * .63) * .006);
+}
+
+return { createSpriteContour, sproutRootGeometry, createSproutRoots, sproutIdlePose, sproutJumpOffset, sproutBodyPose, sproutHeadPose, sproutBobOffset };
 })();
 modules["server/burrows.mjs"] = (() => {
 const BURROW_TYPES = Object.freeze({

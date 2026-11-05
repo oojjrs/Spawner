@@ -120,3 +120,20 @@ test("기본 콩 마지막 착지와 이전 셀 착지 좌표를 유지하고 �
   assert.equal(audio.update(playback, [], 3.1, animations).length, 0);
   assert.equal(playback.beans.size, 0);
 });
+
+test("종족 점프는 실제 클립 종료에 한 번 착지하고 초기의 지난 착지는 재생하지 않는다", () => {
+  for (const tribe of ["spore", "pebble", "spring"]) {
+    const unit = { id: tribe, tribe, health: 10, attributes: {}, mode: "jump", moveDuration: 0, jumpStartedAt: 10 };
+    const end = 10 + units.UNIT_ANIMATIONS[tribe].jump.durationMs / 1000;
+    const playback = audio.create(), played = [];
+    audio.update(playback, [unit], 10, animations);
+    for (let time = 10.05; time < end; time += .05) played.push(...audio.update(playback, [unit], time, animations));
+    assert.equal(played.length, 0);
+    assert.deepEqual(Array.from(audio.update(playback, [unit], end, animations), event => event.name),
+      [tribe === "spring" ? "spring-landing" : "move-" + tribe]);
+    assert.equal(audio.update(playback, [unit], end + .01, animations).length, 0);
+    audio.reset(playback);
+    assert.equal(audio.update(playback, [unit], end + .01, animations).length, 0);
+    assert.equal(audio.update(playback, [unit], end + .02, animations).length, 0);
+  }
+});
