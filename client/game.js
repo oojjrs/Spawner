@@ -4688,9 +4688,14 @@
     }
 
     function agentRangedImage(path) {
+      const previous = agentRangedImages.get(path);
+      const optionalIdle = path.includes("/SecretionIdleV1/");
+      if (optionalIdle && previous?.complete && !previous.naturalWidth && Date.now() >= (previous.idleRetryAt ?? Infinity))
+        agentRangedImages.delete(path);
       if (!agentRangedImages.has(path)) {
         const image = new Image();
         image.onload = () => scheduleRender();
+        if (optionalIdle) image.onerror = () => { image.idleRetryAt = Date.now() + 2000; };
         image.src = assetSource(path);
         agentRangedImages.set(path, image);
       }
@@ -4702,7 +4707,7 @@
       // Work/delivery reuse the selected secretion body's own source. Cargo,
       // release, yield and deposits are still drawn by the existing scene.
       if (agent.birth) return false;
-      const pose = Spawner.unitRangedPose(agent, state.simSeconds);
+      let pose = Spawner.unitRangedPose(agent, state.simSeconds);
       const lifecycle = pose && Spawner.unitRangedAppearance?.(agent)?.lifecycle;
       if (lifecycle) for (const clip of Object.values(lifecycle)) agentRangedImage(clip.image);
       if (!pose || ["harvest", "unload"].includes(agent.mode) && !pose.resourceRest && !["shoot", "hurt", "harvest", "throw"].includes(pose.action)) return false;
@@ -4712,6 +4717,10 @@
       if (bodyPose?.action === "hurt" && pose.action !== "hurt" ||
           !pose.resourceRest && !["shoot", "hurt", "walk", "harvest", "throw"].includes(pose.action) && (moving || bodyPose && bodyPose.action !== "idle")) return false;
       let sprite = agentRangedImage(pose.animation.image);
+      if (!sprite && pose.idleFallback) {
+        pose = { ...pose, animation: pose.idleFallback, frame: 0 };
+        sprite = agentRangedImage(pose.animation.image);
+      }
       if (!sprite) return false;
       if (pose.resource) {
         sprite = Spawner.unitRangedResourceFrame(sprite, pose, (width, height) => {
@@ -4720,7 +4729,8 @@
         if (!sprite) return false;
       }
       const animation = pose.animation, frame = idleMotion.matches ? 0 : pose.frame;
-      const size = Spawner.unitRangedDisplaySize(agent) / 100 * height / AGENT_HEIGHT / unitDisplayScale(agent);
+      const size = Spawner.unitRangedDisplaySize(agent) / 100 * height / AGENT_HEIGHT / unitDisplayScale(agent) *
+        (animation.secretionIdle ? animation.frameSize / animation.viewSize : 1);
       const left = -size * animation.pivotX / animation.frameSize, top = -size * animation.pivotY / animation.frameSize;
       const crop = { owner: sprite, index: frame, size: animation.frameSize,
         x: frame % animation.columns * animation.frameSize, y: Math.floor(frame / animation.columns) * animation.frameSize };

@@ -173,13 +173,20 @@ export function createCombatStage(canvas) {
     for (const animation of [animations?.idle, animations?.attack, animations?.hurt, animations?.death,
       agent.tribe === "bean" ? AGENT_DEATH_ANIMATION : null, agent.species === "spiny-back-beetle" ? beetleCorpse : null,
       CREATURE_IDLE_ANIMATIONS[agent.species], CREATURE_ATTACK_ANIMATIONS[agent.species], CREATURE_HURT_ANIMATIONS[agent.species], CREATURE_DEATH_ANIMATIONS[agent.species]]) if (animation) image(animation.image);
-    let pose = requested;
+    let pose = requested?.idleFallback && reducedMotion.matches ? { ...requested, frame: 0 } : requested;
     let source = pose?.animation.image || COMBAT_LAB_UNITS.find(unit => unit.key === agent.key)?.image || BEETLE_NEUTRAL_ASSET;
     let asset = image(source);
     if (!asset && requested?.animation.secretionLifecycle) {
       // A missing lifecycle sheet falls back to the same authored death frame,
       // never a cached living idle, hurt, or shot. Retry remains image-owned.
       pose = { ...requested, animation: agent.tribe === "bean" ? AGENT_DEATH_ANIMATION : UNIT_ANIMATIONS[agent.tribe].death };
+      source = pose.animation.image; asset = image(source);
+      if (asset) readyPoses.set(agent.id, { pose, source });
+      return { pose, source, asset };
+    }
+    if (!asset && requested?.idleFallback) {
+      // Optional idle loading must not retain the last shot/hurt pose.
+      pose = { ...requested, animation: requested.idleFallback, frame: 0 };
       source = pose.animation.image; asset = image(source);
       if (asset) readyPoses.set(agent.id, { pose, source });
       return { pose, source, asset };

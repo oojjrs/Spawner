@@ -1,3 +1,4 @@
+import { UNIT_SECRETION_IDLE_ASSETS, unitSecretionIdlePose } from "./secretion-idle.mjs";
 import { drawBeanSecretionBirth } from "./bean-secretion-birth.mjs";
 import { UNIT_SECRETION_WALK_ANIMATIONS, unitSecretionWalkPose } from "./secretion-walk.mjs";
 import { UNIT_SECRETION_LIFECYCLE_ANIMATIONS, UNIT_SECRETION_LIFECYCLE_ASSETS } from "./secretion-lifecycle.mjs";
@@ -28,7 +29,7 @@ export const UNIT_RANGED_FORMS = Object.freeze({
   reference: { width: 202, height: 206 },
   projectile: { image: root + "projectile.png", width: 62, height: 36, outletX: 368, outletY: 322 }
 }) });
-export const UNIT_RANGED_IMAGE_ASSETS = Object.freeze([...new Set([...UNIT_SECRETION_LIFECYCLE_ASSETS, ...Object.values(UNIT_RANGED_FORMS).flatMap(form => [form.idle.image, form.animation.image, form.projectile.image, ...(form.hurt ? [form.hurt.image] : []), ...(form.walk ? [form.walk.image] : [])])])]);
+export const UNIT_RANGED_IMAGE_ASSETS = Object.freeze([...new Set([...UNIT_SECRETION_IDLE_ASSETS, ...UNIT_SECRETION_LIFECYCLE_ASSETS, ...Object.values(UNIT_RANGED_FORMS).flatMap(form => [form.idle.image, form.animation.image, form.projectile.image, ...(form.hurt ? [form.hurt.image] : []), ...(form.walk ? [form.walk.image] : [])])])]);
 export const UNIT_RANGED_ANIMATIONS = Object.freeze(Object.fromEntries(Object.entries(UNIT_RANGED_FORMS).map(([key, form]) => [key, form.animation])));
 
 export function unitRangedAppearance(agent) {
@@ -121,7 +122,7 @@ function unitRangedCombatPose(agent, time) {
 export function unitRangedPose(agent, time) {
   const pose = unitRangedCombatPose(agent, time);
   const appearance = pose?.action === "idle" && unitRangedAppearance(agent);
-  return appearance ? unitSecretionResourcePose(agent, time, appearance) || unitSecretionWalkPose(agent, time, appearance) || pose : pose;
+  return appearance ? unitSecretionResourcePose(agent, time, appearance) || unitSecretionWalkPose(agent, time, appearance) || unitSecretionIdlePose(agent, time, appearance) || pose : pose;
 }
 
 export function unitRangedResourceFrame(image, pose, createSurface, reducedMotion = false) {

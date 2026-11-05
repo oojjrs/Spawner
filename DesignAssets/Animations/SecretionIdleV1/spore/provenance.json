@@ -1,0 +1,1253 @@
+{
+  "source": "DesignAssets/Animations/UnitRangedV1/spore/Source/neutral.png",
+  "sourceHash": "f4e2667b695119e422b0235edfdeb739801b358b5e55a24180fbc17ea5502f8d",
+  "motionSource": "DesignAssets/Tribes/spore/Animations/Attributes/v1/rig.json",
+  "motionSourceHash": "067b5cdb8b6d77a7b7bf522655d9d26b442cab755b1857b5ca9bb694f5666051",
+  "idleSource": "DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp",
+  "idleSourceHash": "fec5d88c1f0a6d1ddb69581948671da5477330b8a262cfb4219af25e62b9f8e7",
+  "atlas": "DesignAssets/Animations/SecretionIdleV1/spore/idle.webp",
+  "atlasHash": "3fcbf6fb13b4924ff663b5cbc5f217a3f2e51d8130c86249303b736dd22a32df",
+  "bytes": 134784,
+  "crop": [
+    153,
+    304,
+    208,
+    208
+  ],
+  "sourceCamera": [
+    512,
+    512
+  ],
+  "sourcePivot": [
+    256,
+    448
+  ],
+  "physicalFrames": 11,
+  "timedSamples": 64,
+  "decodedBytes": 2076672,
+  "neutralExact": true,
+  "loopExact": true,
+  "visiblePackedPixelsExact": true,
+  "standaloneReady": false,
+  "method": "conservative own-source cap/elastic idle channels with exact lower support",
+  "poses": [
+    {
+      "compression": 0,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0.007375469012808894,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0.01358406650278173,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0.026291402510027165,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0.04075640445076981,
+      "sweep": -0.0010799999999999998,
+      "angle": 0
+    },
+    {
+      "compression": 0.05362352827015138,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0.065,
+      "sweep": -0.0010799999999999998,
+      "angle": 0
+    },
+    {
+      "compression": 0.065,
+      "sweep": -0.0010799999999999998,
+      "angle": 0
+    },
+    {
+      "compression": 0.065,
+      "sweep": -0.0010799999999999998,
+      "angle": 0
+    },
+    {
+      "compression": 0.065,
+      "sweep": -0.0010799999999999998,
+      "angle": 0
+    },
+    {
+      "compression": 0.065,
+      "sweep": -0.0010799999999999998,
+      "angle": 0
+    },
+    {
+      "compression": 0.065,
+      "sweep": -0.0010799999999999998,
+      "angle": 0
+    },
+    {
+      "compression": 0.065,
+      "sweep": -0.0010799999999999998,
+      "angle": 0
+    },
+    {
+      "compression": 0.065,
+      "sweep": -0.0010799999999999998,
+      "angle": 0
+    },
+    {
+      "compression": 0.065,
+      "sweep": -0.0010799999999999998,
+      "angle": 0
+    },
+    {
+      "compression": 0.065,
+      "sweep": -0.0010799999999999998,
+      "angle": 0
+    },
+    {
+      "compression": 0.06439238581964032,
+      "sweep": 0.0057599999999999995,
+      "angle": 0
+    },
+    {
+      "compression": 0.058549618320610695,
+      "sweep": 0.01764,
+      "angle": 0
+    },
+    {
+      "compression": 0.05827839953422176,
+      "sweep": 0.018,
+      "angle": 0
+    },
+    {
+      "compression": 0.057778011385690255,
+      "sweep": 0.015119999999999998,
+      "angle": 0
+    },
+    {
+      "compression": 0.057778011385690255,
+      "sweep": 0.015119999999999998,
+      "angle": 0
+    },
+    {
+      "compression": 0.057778011385690255,
+      "sweep": 0.015119999999999998,
+      "angle": 0
+    },
+    {
+      "compression": 0.05827839953422176,
+      "sweep": 0.018,
+      "angle": 0
+    },
+    {
+      "compression": 0.058549618320610695,
+      "sweep": 0.01764,
+      "angle": 0
+    },
+    {
+      "compression": 0.06439238581964032,
+      "sweep": 0.0057599999999999995,
+      "angle": 0
+    },
+    {
+      "compression": 0.065,
+      "sweep": -0.0010799999999999998,
+      "angle": 0
+    },
+    {
+      "compression": 0.065,
+      "sweep": -0.0010799999999999998,
+      "angle": 0
+    },
+    {
+      "compression": 0.065,
+      "sweep": -0.0010799999999999998,
+      "angle": 0
+    },
+    {
+      "compression": 0.065,
+      "sweep": -0.0010799999999999998,
+      "angle": 0
+    },
+    {
+      "compression": 0.065,
+      "sweep": -0.0010799999999999998,
+      "angle": 0
+    },
+    {
+      "compression": 0.065,
+      "sweep": -0.0010799999999999998,
+      "angle": 0
+    },
+    {
+      "compression": 0.065,
+      "sweep": -0.0010799999999999998,
+      "angle": 0
+    },
+    {
+      "compression": 0.05362352827015138,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0.04075640445076981,
+      "sweep": -0.0010799999999999998,
+      "angle": 0
+    },
+    {
+      "compression": 0.026291402510027165,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0.01358406650278173,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0.007375469012808894,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0,
+      "sweep": 0,
+      "angle": 0
+    },
+    {
+      "compression": 0,
+      "sweep": 0,
+      "angle": 0
+    }
+  ],
+  "frames": [
+    {
+      "sample": 0,
+      "bounds": [
+        157,
+        308,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 0,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 1,
+      "bounds": [
+        157,
+        308,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 0,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 2,
+      "bounds": [
+        157,
+        308,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 0,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 3,
+      "bounds": [
+        157,
+        308,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 0,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 4,
+      "bounds": [
+        157,
+        308,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 0,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 5,
+      "bounds": [
+        157,
+        308,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 0,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 6,
+      "bounds": [
+        157,
+        308,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 0,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 7,
+      "bounds": [
+        157,
+        308,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 0,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 8,
+      "bounds": [
+        157,
+        308,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 0,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 9,
+      "bounds": [
+        157,
+        308,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 0,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 10,
+      "bounds": [
+        157,
+        308,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 0,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 11,
+      "bounds": [
+        157,
+        309,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 4238,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 12,
+      "bounds": [
+        157,
+        310,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 6285,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 13,
+      "bounds": [
+        157,
+        312,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 9694,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 14,
+      "bounds": [
+        157,
+        314,
+        356,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 13083,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 15,
+      "bounds": [
+        157,
+        315,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 12832,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 16,
+      "bounds": [
+        157,
+        316,
+        356,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 13216,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 17,
+      "bounds": [
+        157,
+        316,
+        356,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 13216,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 18,
+      "bounds": [
+        157,
+        316,
+        356,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 13216,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 19,
+      "bounds": [
+        157,
+        316,
+        356,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 13216,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 20,
+      "bounds": [
+        157,
+        316,
+        356,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 13216,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 21,
+      "bounds": [
+        157,
+        316,
+        356,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 13216,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 22,
+      "bounds": [
+        157,
+        316,
+        356,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 13216,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 23,
+      "bounds": [
+        157,
+        316,
+        356,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 13216,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 24,
+      "bounds": [
+        157,
+        316,
+        356,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 13216,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 25,
+      "bounds": [
+        157,
+        316,
+        356,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 13216,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 26,
+      "bounds": [
+        157,
+        316,
+        356,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 14128,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 27,
+      "bounds": [
+        157,
+        316,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 14157,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 28,
+      "bounds": [
+        157,
+        316,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 14076,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 29,
+      "bounds": [
+        157,
+        315,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 14038,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 30,
+      "bounds": [
+        157,
+        315,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 14038,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 31,
+      "bounds": [
+        157,
+        315,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 14038,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 32,
+      "bounds": [
+        157,
+        316,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 14076,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 33,
+      "bounds": [
+        157,
+        316,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 14157,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 34,
+      "bounds": [
+        157,
+        316,
+        356,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 14128,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 35,
+      "bounds": [
+        157,
+        316,
+        356,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 13216,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 36,
+      "bounds": [
+        157,
+        316,
+        356,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 13216,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 37,
+      "bounds": [
+        157,
+        316,
+        356,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 13216,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 38,
+      "bounds": [
+        157,
+        316,
+        356,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 13216,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 39,
+      "bounds": [
+        157,
+        316,
+        356,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 13216,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 40,
+      "bounds": [
+        157,
+        316,
+        356,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 13216,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 41,
+      "bounds": [
+        157,
+        316,
+        356,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 13216,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 42,
+      "bounds": [
+        157,
+        315,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 12832,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 43,
+      "bounds": [
+        157,
+        314,
+        356,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 13083,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 44,
+      "bounds": [
+        157,
+        312,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 9694,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 45,
+      "bounds": [
+        157,
+        310,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 6285,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 46,
+      "bounds": [
+        157,
+        309,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 4238,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 47,
+      "bounds": [
+        157,
+        308,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 0,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 48,
+      "bounds": [
+        157,
+        308,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 0,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 49,
+      "bounds": [
+        157,
+        308,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 0,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 50,
+      "bounds": [
+        157,
+        308,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 0,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 51,
+      "bounds": [
+        157,
+        308,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 0,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 52,
+      "bounds": [
+        157,
+        308,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 0,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 53,
+      "bounds": [
+        157,
+        308,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 0,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 54,
+      "bounds": [
+        157,
+        308,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 0,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 55,
+      "bounds": [
+        157,
+        308,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 0,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 56,
+      "bounds": [
+        157,
+        308,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 0,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 57,
+      "bounds": [
+        157,
+        308,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 0,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 58,
+      "bounds": [
+        157,
+        308,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 0,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 59,
+      "bounds": [
+        157,
+        308,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 0,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 60,
+      "bounds": [
+        157,
+        308,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 0,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 61,
+      "bounds": [
+        157,
+        308,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 0,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 62,
+      "bounds": [
+        157,
+        308,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 0,
+      "exactSupport": true,
+      "rigid": false
+    },
+    {
+      "sample": 63,
+      "bounds": [
+        157,
+        308,
+        357,
+        451
+      ],
+      "floor": 448,
+      "edgePixels": 0,
+      "changedPixels": 0,
+      "exactSupport": true,
+      "rigid": false
+    }
+  ]
+}

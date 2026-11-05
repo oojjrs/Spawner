@@ -17,7 +17,13 @@ export function rangedReviewState(data, time) {
   const outcome = impact?.kind === "hit" && impact.critical ? "critical" : impact?.kind;
   const phase = !launch ? "발사 기록 없음" : time < launch.at ? "발사 준비" : resolved ? rangedOutcomes[outcome] :
     time < launch.arrivesAt ? "비행 중" : "도착 판정 대기";
-  return { ...state, phase, sourcePose: unitRangedPose(data.source, time), targetPose: unitRangedPose(data.target, time),
+  // VFX review pages preload fixed neutral/shoot sources, not ambient atlases.
+  // Keep their existing source camera and avoid introducing an unloaded image.
+  const reviewPose = agent => {
+    const pose = unitRangedPose(agent, time);
+    return pose?.idleFallback ? { action: "idle", animation: pose.idleFallback, frame: 0, mirrorX: pose.mirrorX } : pose;
+  };
+  return { ...state, phase, sourcePose: reviewPose(data.source), targetPose: reviewPose(data.target),
     health: Math.max(0, data.target.health - (resolved ? damage : 0)), launch, impact, outcome };
 }
 
