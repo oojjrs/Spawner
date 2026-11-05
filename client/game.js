@@ -5366,17 +5366,23 @@
     }
 
     function drawAgentHeldHurt(context, agent, cell, x, y, outlineColor, externalScale = unitDisplayScale(agent)) {
-      const source = Spawner.beanHeldHurtSource?.(agent);
+      const beanSource = Spawner.beanHeldHurtSource?.(agent);
+      const speciesSource = !beanSource && Spawner.speciesHeldHurtSource?.(agent);
+      const source = beanSource || speciesSource;
       if (!source || cell < 8) return false;
       const scale = Math.max(.000001, externalScale), growth = unitDisplayScale(agent);
       let sourceScale;
       if (source.worldScale === "evolution") sourceScale = cell * AGENT_HEIGHT * 2 / 512 * growth / scale;
       else if (source.worldScale === "composed") sourceScale = cell * AGENT_HEIGHT / 512 * growth / scale;
-      else if (source.image.endsWith("/secretion.webp"))
+      else if (source.worldScale === "animation") {
+        const entry = unitAnimationSheets.get(agent.tribe)?.get("idle");
+        if (!(entry?.scale > 0)) return false;
+        sourceScale = cell * AGENT_HEIGHT * entry.scale / source.nativeFrameSize * growth / scale;
+      } else if (speciesSource || source.image.endsWith("/secretion.webp"))
         sourceScale = cell * Spawner.unitDisplaySize(agent) / source.referenceLength / scale;
       else sourceScale = cell * unitBodySize("bean", {}).width / source.bodyWidth * growth / scale;
       const facing = agent.combat ? agent.combat.side === 0 ? -1 : 1 : agent.facing || 1;
-      return Spawner.drawBeanHeldHurt(context, agent, state.simSeconds, agentRangedImage, {
+      return (speciesSource ? Spawner.drawSpeciesHeldHurt : Spawner.drawBeanHeldHurt)(context, agent, state.simSeconds, agentRangedImage, {
         x, y, sourceScale, mirror: facing < 0,
         beforeDraw: outlineColor && context === ctx ? (context, image, crop, destination) =>
           drawSelectionOutline(image, destination.x, destination.y, destination.width, destination.height,
@@ -5387,7 +5393,7 @@
     function drawAgentAppearance(ctx, now, agent, cell, topLeft, renderPosition, birth, outlineColor) {
       agent = displayedAgent(agent);
       const appearancePose = ctx.canvas === canvas && !birth && appearanceWorldPoses.get(String(agent.id));
-      if (!birth && Spawner.beanHeldHurtSource?.(agent) && drawAgentHeldHurt(ctx, agent, cell, topLeft.x + cell / 2,
+      if (!birth && (Spawner.beanHeldHurtSource?.(agent) || Spawner.speciesHeldHurtSource?.(agent)) && drawAgentHeldHurt(ctx, agent, cell, topLeft.x + cell / 2,
           topLeft.y + cell * (.5 + AGENT_HEIGHT * .44) - agentJumpOffset(agent, renderPosition) * cell,
           outlineColor, appearancePose ? 1 : unitDisplayScale(agent))) {
         drawAgentCarrying(ctx, agent, cell, topLeft, renderPosition); return;
@@ -5454,7 +5460,7 @@
     }
 
     function drawAgentAppearanceLayer(ctx, now, agent, cell, topLeft, renderPosition, birth, outlineColor) {
-      if (!birth && Spawner.beanHeldHurtSource?.(agent) && drawAgentHeldHurt(ctx, agent, cell, topLeft.x + cell / 2,
+      if (!birth && (Spawner.beanHeldHurtSource?.(agent) || Spawner.speciesHeldHurtSource?.(agent)) && drawAgentHeldHurt(ctx, agent, cell, topLeft.x + cell / 2,
           topLeft.y + cell * (.5 + AGENT_HEIGHT * .44), outlineColor)) return;
       const attributes = Spawner.unitDisplayAttributes(agent);
       if (birth || cell < 8 || !Spawner.combatAttributeKeys(attributes).length || !combatAttributeArt.ready(agent.tribe || "bean")) {
@@ -8397,7 +8403,7 @@
         context.save();
         context.fillStyle = "#13251e3d"; context.beginPath(); context.ellipse(x, y, Math.max(4, point.width * .28), Math.max(2, point.height * .035), 0, 0, Math.PI * 2); context.fill();
         const frozen = hit && age >= 0 && age < .055;
-        const visual = { ...agent, facing, hurtStartedAt: Number.isFinite(agent.hurtStartedAt) ? agent.hurtStartedAt + (frozen && (agent.tribe || "bean") !== "bean" ? age : 0) : agent.hurtStartedAt,
+        const visual = { ...agent, facing, hurtStartedAt: Number.isFinite(agent.hurtStartedAt) ? agent.hurtStartedAt + (frozen && (agent.tribe || "bean") !== "bean" && !Spawner.speciesHeldHurtSource?.(agent) ? age : 0) : agent.hurtStartedAt,
           combat: { ...agent.combat, side: facing > 0 ? 1 : 0 }, attack: attack ? { ...attack, directionX: facing,
             startedAt: attack.startedAt + (frozen ? age : 0), hitAt: attack.hitAt + (frozen ? age : 0), endsAt: attack.endsAt + (frozen ? age : 0),
             meleeContacts: Array.isArray(attack.meleeContacts) ? attack.meleeContacts.map(at => at + (frozen ? age : 0)) : undefined } : null };
@@ -8408,7 +8414,7 @@
           context.save(); context.translate(atX, atY); context.scale(appearancePose ? 1 : point.scale, appearancePose ? 1 : point.scale);
           if (agent.combat.stunnedUntil > state.simSeconds) context.globalAlpha *= .65;
           if (agent.species) drawCombatCreature(context, visual, 0, 0, cell);
-          else if (!(Spawner.beanHeldHurtSource?.(visual) && drawAgentHeldHurt(context, visual, cell, 0, 0, null, appearancePose ? 1 : point.scale)) &&
+          else if (!((Spawner.beanHeldHurtSource?.(visual) || Spawner.speciesHeldHurtSource?.(visual)) && drawAgentHeldHurt(context, visual, cell, 0, 0, null, appearancePose ? 1 : point.scale)) &&
               (!appearancePose || !appearanceWorld.draw(context, visual, appearancePose, { x: 0, y: 0 }, cell, facing < 0, pixelRatio)))
             drawAgentAppearanceLayer(context, now, visual, cell, { x:-cell / 2, y:-cell * (.5 + AGENT_HEIGHT * .44) }, null, null, null);
           context.restore();

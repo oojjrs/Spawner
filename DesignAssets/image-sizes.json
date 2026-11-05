@@ -9964,6 +9964,384 @@
           356
         ]
       }
+    },
+    "DesignAssets/Animations/SpeciesHeldHurtV1/spore-base.webp": {
+      "display": [
+        160,
+        160
+      ],
+      "grid": [
+        4,
+        7
+      ],
+      "nativeSource": {
+        "sha256": "ec0a44562b296663c8729f4c2a15dfbf98190ea42efe8de4978227d957ee6fe6",
+        "dimensions": [
+          1792,
+          2268
+        ],
+        "frame": [
+          448,
+          324
+        ]
+      }
+    },
+    "DesignAssets/Animations/SpeciesHeldHurtV1/spore-secretion.webp": {
+      "display": [
+        160,
+        160
+      ],
+      "grid": [
+        4,
+        7
+      ],
+      "nativeSource": {
+        "sha256": "762065a6d51247c96ee50773c791d0e2524813bc90391694f37128d98e46832a",
+        "dimensions": [
+          848,
+          1064
+        ],
+        "frame": [
+          212,
+          152
+        ]
+      }
+    },
+    "DesignAssets/Animations/SpeciesHeldHurtV1/spore-blade.webp": {
+      "display": [
+        160,
+        160
+      ],
+      "grid": [
+        4,
+        7
+      ],
+      "nativeSource": {
+        "sha256": "4c80d78c4c2903e65999e15190495f07965989e02a0c130711748bd24f8154b9",
+        "dimensions": [
+          1600,
+          1764
+        ],
+        "frame": [
+          400,
+          252
+        ]
+      }
+    },
+    "DesignAssets/Animations/SpeciesHeldHurtV1/spore-carapace.webp": {
+      "display": [
+        160,
+        160
+      ],
+      "grid": [
+        4,
+        7
+      ],
+      "nativeSource": {
+        "sha256": "d807edce326d89292e7fb34d451722558cbfcae54164c47228c69a7b47d23665",
+        "dimensions": [
+          1504,
+          1820
+        ],
+        "frame": [
+          376,
+          260
+        ]
+      }
+    },
+    "DesignAssets/Animations/MinorHeldHurtV1/spore-antenna.webp": {
+      "display": [
+        160,
+        160
+      ],
+      "grid": [
+        4,
+        7
+      ],
+      "nativeSource": {
+        "sha256": "778b92f18c587535e6d54401b026f5ec6ec0da1195bf9dc6884d82cd2aa52b86",
+        "dimensions": [
+          2144,
+          2212
+        ],
+        "frame": [
+          536,
+          316
+        ]
+      }
+    },
+    "DesignAssets/Animations/MinorHeldHurtV1/spore-feet.webp": {
+      "display": [
+        160,
+        160
+      ],
+      "grid": [
+        4,
+        7
+      ],
+      "nativeSource": {
+        "sha256": "5a9fd2bfc17420b854f62b378706fecec6a3ede2d55be76a4855916c173da695",
+        "dimensions": [
+          1792,
+          2240
+        ],
+        "frame": [
+          448,
+          320
+        ]
+      }
+    },
+    "DesignAssets/Animations/SpeciesHeldHurtV1/pebble-base.webp": {
+      "display": [
+        160,
+        160
+      ],
+      "grid": [
+        4,
+        7
+      ],
+      "nativeSource": {
+        "sha256": "98496a8aec84bbde180740b311365af87dde40a0a82a2a84d971f32ec3dccbc0",
+        "dimensions": [
+          2128,
+          2324
+        ],
+        "frame": [
+          532,
+          332
+        ]
+      }
+    },
+    "DesignAssets/Animations/SpeciesHeldHurtV1/pebble-secretion.webp": {
+      "display": [
+        160,
+        160
+      ],
+      "grid": [
+        4,
+        7
+      ],
+      "nativeSource": {
+        "sha256": "9a79a6294dc523f341e1afed18bec2b49a7ecfbeb90b499695b206ae2e3cb634",
+        "dimensions": [
+          1152,
+          1344
+        ],
+        "frame": [
+          288,
+          192
+        ]
+      }
+    },
+    "DesignAssets/Animations/SpeciesHeldHurtV1/pebble-blade.webp": {
+      "display": [
+        160,
+        160
+      ],
+      "grid": [
+        4,
+        7
+      ],
+      "nativeSource": {
+        "sha256": "645f1f1c5dce39456992a90baecca5780dd92c89c6da5e536cdb9a9c62bef0e5",
+        "dimensions": [
+          1728,
+          2044
+        ],
+        "frame": [
+          432,
+          292
+        ]
+      }
+    },
+    "DesignAssets/Animations/SpeciesHeldHurtV1/pebble-carapace.webp": {
+      "display": [
+        160,
+        160
+      ],
+      "grid": [
+        4,
+        7
+      ],
+      "nativeSource": {
+        "sha256": "e32e035c871b75195b29a4e8bfe254c24d758acba8505e182c0640ef31224f36",
+        "dimensions": [
+          1872,
+          2212
+        ],
+        "frame": [
+          468,
+          316
+        ]
+      }
+    },
+    "DesignAssets/Animations/MinorHeldHurtV1/pebble-antenna.webp": {
+      "display": [
+        160,
+        160
+      ],
+      "grid": [
+        4,
+        7
+      ],
+      "nativeSource": {
+        "sha256": "b3da697af5ecb038046bc8fbaf32d8ef33f6a92471c5a202862d4d4b029131b9",
+        "dimensions": [
+          2256,
+          2408
+        ],
+        "frame": [
+          564,
+          344
+        ]
+      }
+    },
+    "DesignAssets/Animations/MinorHeldHurtV1/pebble-feet.webp": {
+      "display": [
+        160,
+        160
+      ],
+      "grid": [
+        4,
+        7
+      ],
+      "nativeSource": {
+        "sha256": "b1623b39140f34fe7117a24b4297e2ab4d72798cb08989e63c089b5e58b950c2",
+        "dimensions": [
+          2112,
+          2324
+        ],
+        "frame": [
+          528,
+          332
+        ]
+      }
+    },
+    "DesignAssets/Animations/SpeciesHeldHurtV1/spring-base.webp": {
+      "display": [
+        160,
+        160
+      ],
+      "grid": [
+        4,
+        7
+      ],
+      "nativeSource": {
+        "sha256": "a336193e209958844d8000e39f2d4ad2d84822957cf2b90edd3bbf5c405cda35",
+        "dimensions": [
+          1216,
+          2156
+        ],
+        "frame": [
+          304,
+          308
+        ]
+      }
+    },
+    "DesignAssets/Animations/SpeciesHeldHurtV1/spring-secretion.webp": {
+      "display": [
+        160,
+        160
+      ],
+      "grid": [
+        4,
+        7
+      ],
+      "nativeSource": {
+        "sha256": "845ed4846f465903332341923da3ab02bd74b49c13d1dddd2c1201f7c942c653",
+        "dimensions": [
+          832,
+          1540
+        ],
+        "frame": [
+          208,
+          220
+        ]
+      }
+    },
+    "DesignAssets/Animations/SpeciesHeldHurtV1/spring-blade.webp": {
+      "display": [
+        160,
+        160
+      ],
+      "grid": [
+        4,
+        7
+      ],
+      "nativeSource": {
+        "sha256": "0d509ed840a1394e19e7b097332821447b5043694eb0affc7670de31d7a2ffc9",
+        "dimensions": [
+          1888,
+          2268
+        ],
+        "frame": [
+          472,
+          324
+        ]
+      }
+    },
+    "DesignAssets/Animations/SpeciesHeldHurtV1/spring-carapace.webp": {
+      "display": [
+        160,
+        160
+      ],
+      "grid": [
+        4,
+        7
+      ],
+      "nativeSource": {
+        "sha256": "3e3c32226c5c6e1c0c7d2a6b1ff0ce437e4c31feef1c46c56df72e9cecfcbc33",
+        "dimensions": [
+          1712,
+          2240
+        ],
+        "frame": [
+          428,
+          320
+        ]
+      }
+    },
+    "DesignAssets/Animations/MinorHeldHurtV1/spring-antenna.webp": {
+      "display": [
+        160,
+        160
+      ],
+      "grid": [
+        4,
+        7
+      ],
+      "nativeSource": {
+        "sha256": "9150ee0a84557a68b41b1b4473c1d59e01eb201b7890294cc32517250d088162",
+        "dimensions": [
+          1408,
+          2156
+        ],
+        "frame": [
+          352,
+          308
+        ]
+      }
+    },
+    "DesignAssets/Animations/MinorHeldHurtV1/spring-feet.webp": {
+      "display": [
+        160,
+        160
+      ],
+      "grid": [
+        4,
+        7
+      ],
+      "nativeSource": {
+        "sha256": "ae6f24b5814d5cd54ed5180e9163d35bda765900c40a3e8d7d77f887396ba943",
+        "dimensions": [
+          1248,
+          2184
+        ],
+        "frame": [
+          312,
+          312
+        ]
+      }
     }
   }
 }

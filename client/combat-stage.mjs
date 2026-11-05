@@ -1,3 +1,4 @@
+import { drawSpeciesHeldHurt } from "./species-held-hurt.mjs";
 import { beanHeldHurtSource, drawBeanHeldHurt } from "./bean-held-hurt.mjs";
 import { combatDodgePose, drawCombatDodgeTrails, drawCombatDodgeGhosts, drawCombatDodgeLabel } from "./combat-dodge-vfx.mjs";
 import { createCombatStageAppearance } from "./combat-stage-appearance.mjs";
@@ -235,7 +236,8 @@ export function createCombatStage(canvas) {
     const heldK = heldCell * unitDisplaySize(agent) / 247;
     const heldDrawn = drawBeanHeldHurt(context, agent, time, image, { cell: heldCell, mirror: index === 1,
       ...(composed ? { sourceScaleX: heldK * 194 / 239, sourceScaleY: heldK * 154 / (antenna ? 214 : 203),
-        nativePivotX: 256.1159793814433, nativePivotY: antenna ? 486.3336156597027 : 481.6334255599474 } : {}) });
+        nativePivotX: 256.1159793814433, nativePivotY: antenna ? 486.3336156597027 : 481.6334255599474 } : {}) }) ||
+      drawSpeciesHeldHurt(context, agent, time, image, { cell: heldCell, mirror: index === 1 });
     const appearanceDrawn = heldDrawn || appearancePose && appearanceWorld.draw(context, agent, appearancePose, { x: 0, y: 0 },
       100 * formationScale(width, height), index === 1, window.devicePixelRatio || 1);
     const representativeDrawn = !appearanceDrawn && representativeArt.draw(context, agent, time, deathAge,

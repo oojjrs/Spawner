@@ -1,3 +1,4 @@
+import { SPECIES_HELD_HURT_SOURCES } from "./species-held-hurt-assets.mjs";
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -61,7 +62,7 @@ test('actual laboratory renders spore secretion hurt, both mirrors, reset and im
  let missing=false,now=1000;const originalNow=Date.now;
  try {
   globalThis.window={matchMedia:()=>({matches:false}),devicePixelRatio:1};globalThis.SpawnerAssets=undefined;Date.now=()=>now;
-  globalThis.Image=class {complete=true;naturalWidth=2048;naturalHeight=2048;set src(path){this.path=path;this.naturalWidth=missing&&path.endsWith('/spore/hurt.png')?0:2048;}};
+  globalThis.Image=class {complete=true;naturalWidth=2048;naturalHeight=2048;set src(path){this.path=path;this.naturalWidth=missing&&(path.endsWith('/spore/hurt.png')||path.endsWith('/spore-secretion.webp'))?0:2048;}};
   for(const facing of [-1,1]) {
    const draws=[],stack=[];let scale=[1,1];
    const ctx=new Proxy({save(){stack.push([...scale])},restore(){scale=stack.pop()},scale(x,y){scale[0]*=x;scale[1]*=y},setTransform(){scale=[1,1]},drawImage(img,...args){draws.push({path:img.path,args,scale:[...scale]})} },{get:(o,k)=>o[k]||(()=>{})});
@@ -71,9 +72,9 @@ test('actual laboratory renders spore secretion hurt, both mirrors, reset and im
    const trial={agents:[unit,other],history:[],projectiles:[],time:1.05,result:()=>null};
    missing=true;stage.render(trial,1000,false);assert.ok(draws.some(x=>x.path===UNIT_RANGED_FORMS.spore.idle.image));
    missing=false;now+=2001;draws.length=0;stage.render(trial,1100,false);
-   const hurt=draws.find(x=>x.path===UNIT_RANGED_HURT_ANIMATIONS.spore.image);assert.ok(hurt);assert.equal(hurt.scale[0],facing);
+   const hurt=draws.find(x=>x.path===SPECIES_HELD_HURT_SOURCES.spore.secretion.image);assert.ok(hurt);assert.equal(hurt.scale[0],facing);
    trial.time=2;draws.length=0;stage.render(trial,1200,false);
-   assert.equal(draws.some(x=>x.path===UNIT_RANGED_HURT_ANIMATIONS.spore.image),false);
+   assert.equal(draws.some(x=>x.path===UNIT_RANGED_HURT_ANIMATIONS.spore.image||x.path===SPECIES_HELD_HURT_SOURCES.spore.secretion.image),false);
   }
  } finally {Object.assign(globalThis,saved);Date.now=originalNow;}
 });

@@ -1,0 +1,480 @@
+{
+  "sources": [
+    {
+      "tribe": "spore",
+      "form": "antenna",
+      "image": "DesignAssets/Animations/MinorHeldHurtV1/spore-antenna.webp",
+      "frameWidth": 536,
+      "frameHeight": 316,
+      "columns": 4,
+      "pivotX": 263.5,
+      "pivotY": 302.375,
+      "times": [
+        0,
+        0.5,
+        0.5333333333,
+        0.5666666667,
+        0.6,
+        0.6333333333,
+        0.66,
+        0.69,
+        0.72,
+        0.76,
+        0.8,
+        0.84,
+        0.86,
+        0.875
+      ],
+      "referenceLength": 423,
+      "worldScale": "animation",
+      "nativeFrameSize": 549,
+      "sourcePadding": 275,
+      "sourceAnimation": "DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp",
+      "sourceAnimationHash": "fec5d88c1f0a6d1ddb69581948671da5477330b8a262cfb4219af25e62b9f8e7",
+      "sourceImage": "tools/minor-held-hurt-20261105/spore-antenna-source.png",
+      "sourceHash": "4f2a64d375789107871973841f802df5370b75317223ec1e6132d764aa6d4c8b",
+      "sourceFrame": 0,
+      "material": "cap-flex",
+      "bytes": 1801194,
+      "atlasDimensions": [
+        2144,
+        2212
+      ],
+      "atlasSha256": "778b92f18c587535e6d54401b026f5ec6ec0da1195bf9dc6884d82cd2aa52b86",
+      "neutralExact": true,
+      "decodedAtlasExact": true,
+      "noEdgeClipping": true,
+      "minXDerivative": 0.9249999999999545,
+      "minYDerivative": 0.20000026773107038,
+      "rigidBody": false,
+      "fixedLowerPixelsExact": true,
+      "dependencies": {
+        "DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp": "fec5d88c1f0a6d1ddb69581948671da5477330b8a262cfb4219af25e62b9f8e7",
+        "DesignAssets/Tribes/spore/Animations/Attributes/v1/rig.json": "067b5cdb8b6d77a7b7bf522655d9d26b442cab755b1857b5ca9bb694f5666051",
+        "DesignAssets/Tribes/spore/Animations/Attributes/v2/Parts/cap-antenna.png": "83fce586487609710a7794c71f545043fed17a7ecd51780bac81e9e53788c4d7",
+        "DesignAssets/Tribes/spore/Animations/Attributes/v2/Parts/body-strength.png": "74361e456958025c50437fd5cf9bb3c2839225388425fdd67f77b8ce5e3c0098",
+        "DesignAssets/Tribes/spore/Animations/Attributes/v2/Parts/feet-left.png": "9b749987e9b340eb78a14db3fa101ba6a8367cb2126c93c2d54ef3531d12089f",
+        "DesignAssets/Tribes/spore/Animations/Attributes/v2/Parts/feet-right.png": "5f67ea39cdeb5ac9f78ec670a1b88720a304847240ab54b347e724a1b44bddee"
+      },
+      "compositorFiles": [
+        {
+          "path": "client/attribute-animation.mjs",
+          "sha256": "365dee7fb876d1cecddefac97764ed8bae0e45a1f0926aa23509118442744fda"
+        },
+        {
+          "path": "client/attribute-morphology.mjs",
+          "sha256": "9c6423c21657a93aa2c61cfd5dc1cb491a4b0e3071952a1136701a9911149a7a"
+        }
+      ],
+      "crop": [
+        286,
+        453,
+        536,
+        316
+      ],
+      "nativePivot": [
+        549.5,
+        755.375
+      ]
+    },
+    {
+      "tribe": "spore",
+      "form": "feet",
+      "image": "DesignAssets/Animations/MinorHeldHurtV1/spore-feet.webp",
+      "frameWidth": 448,
+      "frameHeight": 320,
+      "columns": 4,
+      "pivotX": 223.5,
+      "pivotY": 310.375,
+      "times": [
+        0,
+        0.5,
+        0.5333333333,
+        0.5666666667,
+        0.6,
+        0.6333333333,
+        0.66,
+        0.69,
+        0.72,
+        0.76,
+        0.8,
+        0.84,
+        0.86,
+        0.875
+      ],
+      "referenceLength": 423,
+      "worldScale": "animation",
+      "nativeFrameSize": 549,
+      "sourcePadding": 275,
+      "sourceAnimation": "DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp",
+      "sourceAnimationHash": "fec5d88c1f0a6d1ddb69581948671da5477330b8a262cfb4219af25e62b9f8e7",
+      "sourceImage": "tools/minor-held-hurt-20261105/spore-feet-source.png",
+      "sourceHash": "b9c412f3c639f0e56f5929087d5d40aaa7b64bb7cb86ed253b4c38ea74a04923",
+      "sourceFrame": 0,
+      "material": "cap-flex",
+      "bytes": 1459292,
+      "atlasDimensions": [
+        1792,
+        2240
+      ],
+      "atlasSha256": "5a9fd2bfc17420b854f62b378706fecec6a3ede2d55be76a4855916c173da695",
+      "neutralExact": true,
+      "decodedAtlasExact": true,
+      "noEdgeClipping": true,
+      "minXDerivative": 0.9249999999999545,
+      "minYDerivative": 0.20000044997686928,
+      "rigidBody": false,
+      "fixedLowerPixelsExact": true,
+      "dependencies": {
+        "DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp": "fec5d88c1f0a6d1ddb69581948671da5477330b8a262cfb4219af25e62b9f8e7",
+        "DesignAssets/Tribes/spore/Animations/Attributes/v1/rig.json": "067b5cdb8b6d77a7b7bf522655d9d26b442cab755b1857b5ca9bb694f5666051",
+        "DesignAssets/Tribes/spore/Animations/Attributes/v2/Parts/cap-antenna.png": "83fce586487609710a7794c71f545043fed17a7ecd51780bac81e9e53788c4d7",
+        "DesignAssets/Tribes/spore/Animations/Attributes/v2/Parts/body-strength.png": "74361e456958025c50437fd5cf9bb3c2839225388425fdd67f77b8ce5e3c0098",
+        "DesignAssets/Tribes/spore/Animations/Attributes/v2/Parts/feet-left.png": "9b749987e9b340eb78a14db3fa101ba6a8367cb2126c93c2d54ef3531d12089f",
+        "DesignAssets/Tribes/spore/Animations/Attributes/v2/Parts/feet-right.png": "5f67ea39cdeb5ac9f78ec670a1b88720a304847240ab54b347e724a1b44bddee"
+      },
+      "compositorFiles": [
+        {
+          "path": "client/attribute-animation.mjs",
+          "sha256": "365dee7fb876d1cecddefac97764ed8bae0e45a1f0926aa23509118442744fda"
+        },
+        {
+          "path": "client/attribute-morphology.mjs",
+          "sha256": "9c6423c21657a93aa2c61cfd5dc1cb491a4b0e3071952a1136701a9911149a7a"
+        }
+      ],
+      "crop": [
+        326,
+        445,
+        448,
+        320
+      ],
+      "nativePivot": [
+        549.5,
+        755.375
+      ]
+    },
+    {
+      "tribe": "pebble",
+      "form": "antenna",
+      "image": "DesignAssets/Animations/MinorHeldHurtV1/pebble-antenna.webp",
+      "frameWidth": 564,
+      "frameHeight": 344,
+      "columns": 4,
+      "pivotX": 283,
+      "pivotY": 336,
+      "times": [
+        0,
+        0.5,
+        0.5333333333,
+        0.5666666667,
+        0.6,
+        0.6333333333,
+        0.66,
+        0.69,
+        0.72,
+        0.76,
+        0.8,
+        0.84,
+        0.86,
+        0.875
+      ],
+      "referenceLength": 406,
+      "worldScale": "animation",
+      "nativeFrameSize": 512,
+      "sourcePadding": 256,
+      "sourceAnimation": "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp",
+      "sourceAnimationHash": "f34012e1cd157be0489e47b0c29b3107e37c5d3525363e30df642a588a004a37",
+      "sourceImage": "tools/minor-held-hurt-20261105/pebble-antenna-source.png",
+      "sourceHash": "0a0e375f969a3b5b5146366267b182c8b72b751236f3ec9c2ef69943c63cd123",
+      "sourceFrame": 0,
+      "material": "rigid-rock",
+      "bytes": 2070570,
+      "atlasDimensions": [
+        2256,
+        2408
+      ],
+      "atlasSha256": "b3da697af5ecb038046bc8fbaf32d8ef33f6a92471c5a202862d4d4b029131b9",
+      "neutralExact": true,
+      "decodedAtlasExact": true,
+      "noEdgeClipping": true,
+      "minXDerivative": 1,
+      "minYDerivative": 1,
+      "rigidBody": true,
+      "fixedLowerPixelsExact": false,
+      "dependencies": {
+        "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp": "f34012e1cd157be0489e47b0c29b3107e37c5d3525363e30df642a588a004a37",
+        "DesignAssets/Tribes/pebble/Animations/Attributes/v1/rig.json": "df5c21c05d09d5808256dfb7a369a12855d1566fb7519147e98c4848aef1f0d1",
+        "DesignAssets/Tribes/pebble/Animations/Attributes/v2/Parts/body-base.png": "e8744f4d6d8ebdd143545beef9569dee0b2da07df473ba0a96820afe028f5af1",
+        "DesignAssets/Tribes/pebble/Animations/Attributes/v2/Parts/body-antenna.png": "49a9928d8782514f7d4c1c2b8333993baa58139e14cd590b479e36782683ba70",
+        "DesignAssets/Tribes/pebble/Animations/Attributes/v2/Parts/body-strength.png": "9b1120b44485706ddb38735f5904500a51669d6b35f5fc5e655cb40cd0c3876e",
+        "DesignAssets/Tribes/pebble/Animations/Attributes/v2/Parts/body-antenna-strength.png": "4a870e1d71bf77ebc458a7cc6938de5b5dd68882743b547b47a2e055341b6420",
+        "DesignAssets/Tribes/pebble/Animations/Attributes/v2/Parts/feet-left.png": "e08a35c6dfff47e6c715e466a1cd1ca25ddfb7f371a0e41cc238681a99bcd0c1",
+        "DesignAssets/Tribes/pebble/Animations/Attributes/v2/Parts/feet-right.png": "2d7308b91162a3238c39f21bd27ac5b032b648d21f9d7e3f0fde501747023091"
+      },
+      "compositorFiles": [
+        {
+          "path": "client/attribute-animation.mjs",
+          "sha256": "365dee7fb876d1cecddefac97764ed8bae0e45a1f0926aa23509118442744fda"
+        },
+        {
+          "path": "client/attribute-morphology.mjs",
+          "sha256": "9c6423c21657a93aa2c61cfd5dc1cb491a4b0e3071952a1136701a9911149a7a"
+        }
+      ],
+      "crop": [
+        229,
+        368,
+        564,
+        344
+      ],
+      "nativePivot": [
+        512,
+        704
+      ]
+    },
+    {
+      "tribe": "pebble",
+      "form": "feet",
+      "image": "DesignAssets/Animations/MinorHeldHurtV1/pebble-feet.webp",
+      "frameWidth": 528,
+      "frameHeight": 332,
+      "columns": 4,
+      "pivotX": 270,
+      "pivotY": 324,
+      "times": [
+        0,
+        0.5,
+        0.5333333333,
+        0.5666666667,
+        0.6,
+        0.6333333333,
+        0.66,
+        0.69,
+        0.72,
+        0.76,
+        0.8,
+        0.84,
+        0.86,
+        0.875
+      ],
+      "referenceLength": 406,
+      "worldScale": "animation",
+      "nativeFrameSize": 512,
+      "sourcePadding": 256,
+      "sourceAnimation": "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp",
+      "sourceAnimationHash": "f34012e1cd157be0489e47b0c29b3107e37c5d3525363e30df642a588a004a37",
+      "sourceImage": "tools/minor-held-hurt-20261105/pebble-feet-source.png",
+      "sourceHash": "9a2852ba89a917ff15b917ee1c925b5b202b979988a3f42d111b9c9eb73bd659",
+      "sourceFrame": 0,
+      "material": "rigid-rock",
+      "bytes": 2037216,
+      "atlasDimensions": [
+        2112,
+        2324
+      ],
+      "atlasSha256": "b1623b39140f34fe7117a24b4297e2ab4d72798cb08989e63c089b5e58b950c2",
+      "neutralExact": true,
+      "decodedAtlasExact": true,
+      "noEdgeClipping": true,
+      "minXDerivative": 1,
+      "minYDerivative": 1,
+      "rigidBody": true,
+      "fixedLowerPixelsExact": false,
+      "dependencies": {
+        "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp": "f34012e1cd157be0489e47b0c29b3107e37c5d3525363e30df642a588a004a37",
+        "DesignAssets/Tribes/pebble/Animations/Attributes/v1/rig.json": "df5c21c05d09d5808256dfb7a369a12855d1566fb7519147e98c4848aef1f0d1",
+        "DesignAssets/Tribes/pebble/Animations/Attributes/v2/Parts/body-base.png": "e8744f4d6d8ebdd143545beef9569dee0b2da07df473ba0a96820afe028f5af1",
+        "DesignAssets/Tribes/pebble/Animations/Attributes/v2/Parts/body-antenna.png": "49a9928d8782514f7d4c1c2b8333993baa58139e14cd590b479e36782683ba70",
+        "DesignAssets/Tribes/pebble/Animations/Attributes/v2/Parts/body-strength.png": "9b1120b44485706ddb38735f5904500a51669d6b35f5fc5e655cb40cd0c3876e",
+        "DesignAssets/Tribes/pebble/Animations/Attributes/v2/Parts/body-antenna-strength.png": "4a870e1d71bf77ebc458a7cc6938de5b5dd68882743b547b47a2e055341b6420",
+        "DesignAssets/Tribes/pebble/Animations/Attributes/v2/Parts/feet-left.png": "e08a35c6dfff47e6c715e466a1cd1ca25ddfb7f371a0e41cc238681a99bcd0c1",
+        "DesignAssets/Tribes/pebble/Animations/Attributes/v2/Parts/feet-right.png": "2d7308b91162a3238c39f21bd27ac5b032b648d21f9d7e3f0fde501747023091"
+      },
+      "compositorFiles": [
+        {
+          "path": "client/attribute-animation.mjs",
+          "sha256": "365dee7fb876d1cecddefac97764ed8bae0e45a1f0926aa23509118442744fda"
+        },
+        {
+          "path": "client/attribute-morphology.mjs",
+          "sha256": "9c6423c21657a93aa2c61cfd5dc1cb491a4b0e3071952a1136701a9911149a7a"
+        }
+      ],
+      "crop": [
+        242,
+        380,
+        528,
+        332
+      ],
+      "nativePivot": [
+        512,
+        704
+      ]
+    },
+    {
+      "tribe": "spring",
+      "form": "antenna",
+      "image": "DesignAssets/Animations/MinorHeldHurtV1/spring-antenna.webp",
+      "frameWidth": 352,
+      "frameHeight": 308,
+      "columns": 4,
+      "pivotX": 159,
+      "pivotY": 305,
+      "times": [
+        0,
+        0.5,
+        0.5333333333,
+        0.5666666667,
+        0.6,
+        0.6333333333,
+        0.66,
+        0.69,
+        0.72,
+        0.76,
+        0.8,
+        0.84,
+        0.86,
+        0.875
+      ],
+      "referenceLength": 288,
+      "worldScale": "animation",
+      "nativeFrameSize": 512,
+      "sourcePadding": 256,
+      "sourceAnimation": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp",
+      "sourceAnimationHash": "42cc7532e8f6e7b6ab7c200eebe4f5513be370f20ca36b2bdcf2c53058291f86",
+      "sourceImage": "tools/minor-held-hurt-20261105/spring-antenna-source.png",
+      "sourceHash": "8ce3f30e32f3ec0d86c56026c2cba29ea5ea0eb35779c470853f166432064ac9",
+      "sourceFrame": 0,
+      "material": "elastic-compression",
+      "bytes": 1240180,
+      "atlasDimensions": [
+        1408,
+        2156
+      ],
+      "atlasSha256": "9150ee0a84557a68b41b1b4473c1d59e01eb201b7890294cc32517250d088162",
+      "neutralExact": true,
+      "decodedAtlasExact": true,
+      "noEdgeClipping": true,
+      "minXDerivative": 0.9647999999999683,
+      "minYDerivative": 0.6387525595533816,
+      "rigidBody": false,
+      "fixedLowerPixelsExact": true,
+      "dependencies": {
+        "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp": "42cc7532e8f6e7b6ab7c200eebe4f5513be370f20ca36b2bdcf2c53058291f86",
+        "DesignAssets/Tribes/spring/Animations/Attributes/v1/rig.json": "47c92c36214c5dafde434572142b25cd0b589dd851d86ade07555d227d30c74e",
+        "DesignAssets/Tribes/spring/Animations/Attributes/v2/Parts/body-base.png": "2072b0a4a4cd541b4ff5243c8957b603a0243f8460a9fc910b4f86c406de20c7",
+        "DesignAssets/Tribes/spring/Animations/Attributes/v2/Parts/body-antenna.png": "3d5bff483dc342914be77b2e59ea3cbad8457a82e4d1cf7bceb75234edc22fa9",
+        "DesignAssets/Tribes/spring/Animations/Attributes/v2/Parts/body-strength.png": "b4db454eafdf7f499e6afe7c62667592f5a45954e9b23729a2e7a3759b344b92",
+        "DesignAssets/Tribes/spring/Animations/Attributes/v2/Parts/body-antenna-strength.png": "c61d136f99b0f10f7f894842585e77c6e60f03d4bb336a6ebd64f368d0cc8501",
+        "DesignAssets/Tribes/spring/Animations/Attributes/v2/Parts/feet-left.png": "614518f82b9a3077b3f7f1ec78f8826c6fd96ac3c4d5abe176e9ca396db501d8",
+        "DesignAssets/Tribes/spring/Animations/Attributes/v2/Parts/feet-right.png": "567b2ce0d4f5405eb6b562c25caa7c106126c3258aa777827dcc3dc7e5d97f0d"
+      },
+      "compositorFiles": [
+        {
+          "path": "client/attribute-animation.mjs",
+          "sha256": "365dee7fb876d1cecddefac97764ed8bae0e45a1f0926aa23509118442744fda"
+        },
+        {
+          "path": "client/attribute-morphology.mjs",
+          "sha256": "9c6423c21657a93aa2c61cfd5dc1cb491a4b0e3071952a1136701a9911149a7a"
+        }
+      ],
+      "crop": [
+        353,
+        399,
+        352,
+        308
+      ],
+      "nativePivot": [
+        512,
+        704
+      ]
+    },
+    {
+      "tribe": "spring",
+      "form": "feet",
+      "image": "DesignAssets/Animations/MinorHeldHurtV1/spring-feet.webp",
+      "frameWidth": 312,
+      "frameHeight": 312,
+      "columns": 4,
+      "pivotX": 146,
+      "pivotY": 308,
+      "times": [
+        0,
+        0.5,
+        0.5333333333,
+        0.5666666667,
+        0.6,
+        0.6333333333,
+        0.66,
+        0.69,
+        0.72,
+        0.76,
+        0.8,
+        0.84,
+        0.86,
+        0.875
+      ],
+      "referenceLength": 288,
+      "worldScale": "animation",
+      "nativeFrameSize": 512,
+      "sourcePadding": 256,
+      "sourceAnimation": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp",
+      "sourceAnimationHash": "42cc7532e8f6e7b6ab7c200eebe4f5513be370f20ca36b2bdcf2c53058291f86",
+      "sourceImage": "tools/minor-held-hurt-20261105/spring-feet-source.png",
+      "sourceHash": "a70a120de990cb10a161e224227e800457749755e91314b4a7f23ed76a6b11ea",
+      "sourceFrame": 0,
+      "material": "elastic-compression",
+      "bytes": 1087422,
+      "atlasDimensions": [
+        1248,
+        2184
+      ],
+      "atlasSha256": "ae6f24b5814d5cd54ed5180e9163d35bda765900c40a3e8d7d77f887396ba943",
+      "neutralExact": true,
+      "decodedAtlasExact": true,
+      "noEdgeClipping": true,
+      "minXDerivative": 0.9647999999999683,
+      "minYDerivative": 0.6387527959274166,
+      "rigidBody": false,
+      "fixedLowerPixelsExact": true,
+      "dependencies": {
+        "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp": "42cc7532e8f6e7b6ab7c200eebe4f5513be370f20ca36b2bdcf2c53058291f86",
+        "DesignAssets/Tribes/spring/Animations/Attributes/v1/rig.json": "47c92c36214c5dafde434572142b25cd0b589dd851d86ade07555d227d30c74e",
+        "DesignAssets/Tribes/spring/Animations/Attributes/v2/Parts/body-base.png": "2072b0a4a4cd541b4ff5243c8957b603a0243f8460a9fc910b4f86c406de20c7",
+        "DesignAssets/Tribes/spring/Animations/Attributes/v2/Parts/body-antenna.png": "3d5bff483dc342914be77b2e59ea3cbad8457a82e4d1cf7bceb75234edc22fa9",
+        "DesignAssets/Tribes/spring/Animations/Attributes/v2/Parts/body-strength.png": "b4db454eafdf7f499e6afe7c62667592f5a45954e9b23729a2e7a3759b344b92",
+        "DesignAssets/Tribes/spring/Animations/Attributes/v2/Parts/body-antenna-strength.png": "c61d136f99b0f10f7f894842585e77c6e60f03d4bb336a6ebd64f368d0cc8501",
+        "DesignAssets/Tribes/spring/Animations/Attributes/v2/Parts/feet-left.png": "614518f82b9a3077b3f7f1ec78f8826c6fd96ac3c4d5abe176e9ca396db501d8",
+        "DesignAssets/Tribes/spring/Animations/Attributes/v2/Parts/feet-right.png": "567b2ce0d4f5405eb6b562c25caa7c106126c3258aa777827dcc3dc7e5d97f0d"
+      },
+      "compositorFiles": [
+        {
+          "path": "client/attribute-animation.mjs",
+          "sha256": "365dee7fb876d1cecddefac97764ed8bae0e45a1f0926aa23509118442744fda"
+        },
+        {
+          "path": "client/attribute-morphology.mjs",
+          "sha256": "9c6423c21657a93aa2c61cfd5dc1cb491a4b0e3071952a1136701a9911149a7a"
+        }
+      ],
+      "crop": [
+        366,
+        396,
+        312,
+        312
+      ],
+      "nativePivot": [
+        512,
+        704
+      ]
+    }
+  ],
+  "holdSeconds": 0.5,
+  "totalSeconds": 0.88,
+  "materialMap": "tools/species-held-hurt-20261105/build.py",
+  "materialMapSha256": "3673924f1a6d85be019e0dd1290acdc13cfa1473c2d9505ad8c689db8c9c2c46",
+  "runtimeClock": "beanHeldHurtAmount",
+  "scope": "six live minor dominant forms; no readiness promotions"
+}

@@ -1,0 +1,291 @@
+{
+  "sources": [
+    {
+      "tribe": "spore",
+      "form": "blade",
+      "sourceImage": "tools/weapons-held-hurt-20261105/spore-blade-source.png",
+      "sourceHash": "cf522a9438ecddb1d56f0dadde68c8e459c7ea00cf8b2ba1aa038adaa67e40f1",
+      "sourceRig": "DesignAssets/Animations/CombatAttributesV7/spore/blade/rig.json",
+      "rigHash": "9dc0279c07cbd70009392f760e588ff87f4c2dea64cfc1af213cfb1f17e54571",
+      "nativeFrameSize": 512,
+      "bodyBounds": [
+        158.59766541101396,
+        345.898,
+        290.68766541101394,
+        442.288
+      ],
+      "eyes": [
+        [
+          193.6176192153618,
+          390.62583152173914
+        ],
+        [
+          253.07399568624334,
+          390.84256880733943
+        ]
+      ],
+      "root": [
+        223.34580745080257,
+        448
+      ],
+      "cap": [
+        223.34580745080257,
+        340.75420016453927
+      ]
+    },
+    {
+      "tribe": "spore",
+      "form": "carapace",
+      "sourceImage": "tools/weapons-held-hurt-20261105/spore-carapace-source.png",
+      "sourceHash": "e0d2fbd28d3ed4fa302fdfac0b25ff4b56519ac976f1d930d1afbbba94c7c865",
+      "sourceRig": "DesignAssets/Animations/CombatAttributesV7/spore/carapace/rig.json",
+      "rigHash": "b15e82726a609a6ec275cb7c1656ec92cff60ca87cb956016d55d2c83549d6e2",
+      "nativeFrameSize": 512,
+      "bodyBounds": [
+        158.28246934204907,
+        347.326,
+        292.51446934204904,
+        442.288
+      ],
+      "eyes": [
+        [
+          193.06205672706878,
+          389.48296189224703
+        ],
+        [
+          253.62955817453636,
+          389.43840862944165
+        ]
+      ],
+      "root": [
+        223.34580745080257,
+        448
+      ],
+      "cap": [
+        223.34580745080257,
+        339.4806852608443
+      ]
+    },
+    {
+      "tribe": "pebble",
+      "form": "blade",
+      "sourceImage": "tools/weapons-held-hurt-20261105/pebble-blade-source.png",
+      "sourceHash": "06dc272e53c9da49c6c363c0dd093f83f6b7d44b6659e438ec871dcc2b7dcc93",
+      "sourceRig": "DesignAssets/Animations/CombatAttributesV7/pebble/blade/rig.json",
+      "rigHash": "1b996b8b8f4537013c8aa5748512317a646e38a4e93cb912d94fede9bf43e70d",
+      "nativeFrameSize": 512,
+      "bodyBounds": [
+        52.78518029734445,
+        180.288,
+        383.6651802973445,
+        444.992
+      ],
+      "eyes": [
+        [
+          170.38842160816867,
+          347.7233763654419
+        ],
+        [
+          283.1674414984884,
+          347.7940285986654
+        ]
+      ],
+      "root": [
+        226.77793155332853,
+        448
+      ],
+      "cap": null
+    },
+    {
+      "tribe": "pebble",
+      "form": "carapace",
+      "sourceImage": "tools/weapons-held-hurt-20261105/pebble-carapace-source.png",
+      "sourceHash": "95c1b93e7203a2c4f55b57058b3b93f0c0af4896663a9d57dbdb2aa5a56be3be",
+      "sourceRig": "DesignAssets/Animations/CombatAttributesV7/pebble/carapace/rig.json",
+      "rigHash": "9129e6026316e5fcfdb372122394405dfaf4eee5f7fac1f2073a7cf754f6449e",
+      "nativeFrameSize": 512,
+      "bodyBounds": [
+        56.87900525669522,
+        159.23199999999997,
+        417.83900525669526,
+        440.48
+      ],
+      "eyes": [
+        [
+          166.41500525669522,
+          347.46327272727274
+        ],
+        [
+          287.14085784996183,
+          347.84304276615103
+        ]
+      ],
+      "root": [
+        226.77793155332853,
+        448
+      ],
+      "cap": null
+    },
+    {
+      "tribe": "spring",
+      "form": "blade",
+      "sourceImage": "tools/weapons-held-hurt-20261105/spring-blade-source.png",
+      "sourceHash": "a6b622523f65c7e41f27c9abf7244324f2688de783a315c1b8bbffff105b49d2",
+      "sourceRig": "DesignAssets/Animations/CombatAttributesV7/spring/blade/rig.json",
+      "rigHash": "83f92db59ffd2412f7434296b3fdb573e7e537b8a4660cc52f55e8dd56600957",
+      "nativeFrameSize": 512,
+      "bodyBounds": [
+        73.44037364155679,
+        148.462,
+        403.16437364155684,
+        449.548
+      ],
+      "eyes": [
+        [
+          155.67587879619597,
+          357.5259934888768
+        ],
+        [
+          274.6495757357976,
+          357.34555392670154
+        ]
+      ],
+      "root": [
+        215.1627272659968,
+        448
+      ],
+      "cap": null
+    },
+    {
+      "tribe": "spring",
+      "form": "carapace",
+      "sourceImage": "tools/weapons-held-hurt-20261105/spring-carapace-source.png",
+      "sourceHash": "8e7c6fb2405156b045b10251443b36704b268d2fba83a61e0be28db67baa84e9",
+      "sourceRig": "DesignAssets/Animations/CombatAttributesV7/spring/carapace/rig.json",
+      "rigHash": "5979efd8e8077456acad4abf3598617097276724ad0f9588a5faa4914a2dab73",
+      "nativeFrameSize": 512,
+      "bodyBounds": [
+        62.535590347709615,
+        156.202,
+        376.0055903477096,
+        451.096
+      ],
+      "eyes": [
+        [
+          157.18864259045367,
+          329.9362047493404
+        ],
+        [
+          273.1368119415399,
+          329.7698087403599
+        ]
+      ],
+      "root": [
+        215.1627272659968,
+        448
+      ],
+      "cap": null
+    }
+  ],
+  "inputs": {
+    "DesignAssets/Animations/CombatAttributesV7/spore/blade/rig.json": "9dc0279c07cbd70009392f760e588ff87f4c2dea64cfc1af213cfb1f17e54571",
+    "DesignAssets/Animations/CombatAttributesV7/spore/piercing/rig.json": "3dc76d2e19bea1ee5667346f895482036667bdfa5c560f062f5e13413cc3b07c",
+    "DesignAssets/Animations/CombatAttributesV7/spore/carapace/rig.json": "b15e82726a609a6ec275cb7c1656ec92cff60ca87cb956016d55d2c83549d6e2",
+    "DesignAssets/Animations/CombatAttributesV7/spore/blade/Parts/body.png": "dcff15250ed0f522cb430150cec7d45ffffda1a022fcbf96f181373372465331",
+    "DesignAssets/Animations/CombatAttributesV7/spore/blade/Parts/cap-left.png": "431c89cc10c1aaf3ac5996446cd7908111d810123d7d09cc622b126d9c4ddd89",
+    "DesignAssets/Animations/CombatAttributesV7/spore/blade/Parts/eye-0.png": "980cc1a9d01845205ce54e477827552a6adf9bb7fbb7e1bf513451257664b68b",
+    "DesignAssets/Animations/CombatAttributesV7/spore/blade/Parts/eye-1.png": "956c7dd6c30ccd751f0ce68e6a121232b6b81b7a906b1a4ff0abd06f09955c56",
+    "DesignAssets/Animations/CombatAttributesV7/spore/blade/Parts/foot-0.png": "9f32710bad873bbb6df95f60e533c6216059f8c41b63f65191ede4b5e2b791b1",
+    "DesignAssets/Animations/CombatAttributesV7/spore/blade/Parts/foot-1.png": "31d8ed69d48e70e0742976244f7464780c7ff80af4e6f6391da6079ff29fdb1b",
+    "DesignAssets/Animations/CombatAttributesV7/spore/piercing/Parts/body.png": "0fa7d877ac3e4fe49857f16de838b2152b11af92329bf72a04fb06258cb9c6f2",
+    "DesignAssets/Animations/CombatAttributesV7/spore/piercing/Parts/cap-left.png": "c762c4e52af4a0b749916ba7b09846cb9b1ef63df26019cddcd490ee23fa0295",
+    "DesignAssets/Animations/CombatAttributesV7/spore/piercing/Parts/eye-0.png": "b79d9ecc85c3f4d1a19767841e2c3acd66790da50ee4eb3db29af9bd3c5dbe13",
+    "DesignAssets/Animations/CombatAttributesV7/spore/piercing/Parts/eye-1.png": "8c946845f9d86a2b0c2a2aa3861dd4d09ecd551459b6dd0e14c47b0e52bfd431",
+    "DesignAssets/Animations/CombatAttributesV7/spore/piercing/Parts/foot-0.png": "ef7d39e52b5b1d0395fc32a415a2925881abd214ec4edfcfe9c9920da476e4c7",
+    "DesignAssets/Animations/CombatAttributesV7/spore/piercing/Parts/foot-1.png": "3867f1002edfa3f285f6f8875b23cfbdf8cf8fd00d0a57050ca004c70eebab68",
+    "DesignAssets/Animations/CombatAttributesV7/spore/carapace/Parts/body.png": "98115f4ac7a99e10fbccce463585df168dd7fdde847362e38191ea52003aa6e7",
+    "DesignAssets/Animations/CombatAttributesV7/spore/carapace/Parts/cap-left.png": "4ca1499db551d75bda06718836489c4b5d48bed504c4be7267b755d37fa8ec1d",
+    "DesignAssets/Animations/CombatAttributesV7/spore/carapace/Parts/eye-0.png": "b12b7247caec16fb5e5def72520baf788cf3ae80d14a927bd6a8adc9c66ebf09",
+    "DesignAssets/Animations/CombatAttributesV7/spore/carapace/Parts/eye-1.png": "3d8fed8d07edd191f6764ddd265a32290f2cd4acbf53fbfb99bebe15b3d04eee",
+    "DesignAssets/Animations/CombatAttributesV7/spore/carapace/Parts/foot-0.png": "63ad728524e8fe7155286ef039d419a757d03e7d2faaaa9f92ad913ce987f612",
+    "DesignAssets/Animations/CombatAttributesV7/spore/carapace/Parts/foot-1.png": "b1ecab02cc34beb00eae3789c5dc2fa4ed65f1ebf089b112e41c0b77c6012f2a",
+    "DesignAssets/Animations/CombatAttributesV7/spore/blade/AttackParts/body.png": "dcff15250ed0f522cb430150cec7d45ffffda1a022fcbf96f181373372465331",
+    "DesignAssets/Animations/CombatAttributesV7/spore/blade/AttackParts/cap-left.png": "5c6a2d6f2a8aadd66539005ea6316d45a25af66cced9e100f3622fe8917645b9",
+    "DesignAssets/Animations/CombatAttributesV7/spore/piercing/AttackParts/body.png": "0fa7d877ac3e4fe49857f16de838b2152b11af92329bf72a04fb06258cb9c6f2",
+    "DesignAssets/Animations/CombatAttributesV7/spore/piercing/AttackParts/cap-left.png": "08b44961ef3abbc75c629990a0afdd2c3ffe7cd2682989d6cceacfa566c200cf",
+    "DesignAssets/Animations/CombatAttributesV7/spore/carapace/AttackParts/body.png": "98115f4ac7a99e10fbccce463585df168dd7fdde847362e38191ea52003aa6e7",
+    "DesignAssets/Animations/CombatAttributesV7/spore/carapace/AttackParts/cap-left.png": "7073687c7d75ce1bdc1538239900988669f747fdee1b02fec9b1a8e8d1810d72",
+    "DesignAssets/Animations/CombatAttributesV7/AttackEffects/spore-projectile.png": "d426bb4ca779a871eb020ad235ec03ade104267625c9c6b9f0f0f7cbab11e443",
+    "DesignAssets/Animations/CombatAttributesV7/AttackEffects/spore-impact.png": "60765fdfbe480163263aeb4beb6dc2bd2390b1fee962e1dcfb550ecc43f150b0",
+    "DesignAssets/Animations/CombatAttributesV7/RuntimeParts/spore-blade.png": "ce2be832745261992b1df8930df8e7d7fd4a72430d0ef1953da60f71cd385c0f",
+    "DesignAssets/Animations/CombatAttributesV7/RuntimeParts/spore-piercing.png": "b6d12ecf1a0c37abf1c3463d3cd58722da33eaccda2d5cf0abe736967f2c94f3",
+    "DesignAssets/Animations/CombatAttributesV7/RuntimeParts/spore-carapace.png": "b0eef219939d25fdbc445ae07456751ca396a03789addecacf0ba89f79d06915",
+    "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/blade/idle.webp": "5d601ee0fc077eeae526ad73537cbc6fe6bae29012bfcbeb96f759a9a7ef1672",
+    "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/blade/attack.webp": "748cd0ae9e0bb156a7a1eaba6ad8525742d63087a84a4eb3582e1eb38d83ba3c",
+    "DesignAssets/Animations/CombatDeathV1/spore/blade/death.webp": "6ca2a746d764f44681accc5d86fee653608df3a102815d9e376b50d0943ace68",
+    "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/idle.webp": "ea5cf1e85fd82026e36aa5e8ea8282cd5db90cc1eb999b04fe9ebd9ee1e1a1d5",
+    "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/attack.webp": "6242aae89dd04680804f0defe34448813aede01c02b747e5bd26ba90495a133a",
+    "DesignAssets/Animations/CombatDeathV1/spore/carapace/death.webp": "cb326f987d2d05a447aed6226d93a9c16d08278cd384cc9b4630ca7d44389a3e",
+    "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/piercing/idle.webp": "03d17ee777c44793ebdbec01967e9e8eb5443eb1ed35963a4bca469eeebd8cff",
+    "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/piercing/attack.webp": "71b89bd3d14c17d456ae84617cc3cc2345b16a12791781351f979cccaa33ceb4",
+    "DesignAssets/Animations/CombatDeathV1/spore/piercing/death.webp": "af7962315e0ef7457486e513658df28f96a97763f2b324eb1293f1b0849ceb30",
+    "DesignAssets/Animations/CombatAttributesV7/pebble/blade/rig.json": "1b996b8b8f4537013c8aa5748512317a646e38a4e93cb912d94fede9bf43e70d",
+    "DesignAssets/Animations/CombatAttributesV7/pebble/piercing/rig.json": "83c0692931df6c38632f5a056e278a696756b21304cc28a74bf86a329f1bbde9",
+    "DesignAssets/Animations/CombatAttributesV7/pebble/carapace/rig.json": "9129e6026316e5fcfdb372122394405dfaf4eee5f7fac1f2073a7cf754f6449e",
+    "DesignAssets/Animations/CombatAttributesV7/pebble/blade/Parts/body.png": "2d1bd05a17589acbadd49ad550da7741bd9c35aea522fd486973981bd7adadec",
+    "DesignAssets/Animations/CombatAttributesV7/pebble/blade/Parts/eye-0.png": "42f195802a62101edd05bf4449c1ecd6d5dc2033e15feaefb5b19b50ebd1fdaf",
+    "DesignAssets/Animations/CombatAttributesV7/pebble/blade/Parts/eye-1.png": "dcd671a4f5109a993758ff437340dbba8a34f24f94da5bd9553d7471a4da2320",
+    "DesignAssets/Animations/CombatAttributesV7/pebble/blade/Parts/foot-0.png": "ab7f16c7c98a6438bf71f362ddf64e8dcdc39a0537ded18ba1fa44e57398f25b",
+    "DesignAssets/Animations/CombatAttributesV7/pebble/blade/Parts/foot-1.png": "9fe8c092e15180bdd7f1a5b3ef141a003cb2c0159eab33d396a6f32c564053fd",
+    "DesignAssets/Animations/CombatAttributesV7/pebble/piercing/Parts/body.png": "fad457a30f560c376fa565d6b05793f43ac3cc7997ab1de6be99e6ee4d92314c",
+    "DesignAssets/Animations/CombatAttributesV7/pebble/piercing/Parts/eye-0.png": "7d7fc41ae8fbf550af315ff520119d4161b44ef7f9f148759fd1d3002eb7d12e",
+    "DesignAssets/Animations/CombatAttributesV7/pebble/piercing/Parts/eye-1.png": "8277e556082d80c4a51af2a382057f0340cda3f9539ef76c0dc17f46de022218",
+    "DesignAssets/Animations/CombatAttributesV7/pebble/piercing/Parts/foot-0.png": "fc08e32c196465e184b3b8043747aa851a57c441fb733951ca4f9eb86d1b3dbe",
+    "DesignAssets/Animations/CombatAttributesV7/pebble/piercing/Parts/foot-1.png": "c4f3ee421838728f561573646d2f770fea5169517af452ec719e00505b6cbc88",
+    "DesignAssets/Animations/CombatAttributesV7/pebble/carapace/Parts/body.png": "a2bc76442beaf9853e92f3498131f7e14292a7dacda7e65d2c454a2e34da21da",
+    "DesignAssets/Animations/CombatAttributesV7/pebble/carapace/Parts/eye-0.png": "697dbeab1efce2f6696e870c4cd8f943858f43fe2b3b75db4d7767e1be5fd462",
+    "DesignAssets/Animations/CombatAttributesV7/pebble/carapace/Parts/eye-1.png": "04942ca6327ddcd839e7574bf34356239fa7658eeef9406ec19ce25234080036",
+    "DesignAssets/Animations/CombatAttributesV7/pebble/carapace/Parts/foot-0.png": "06d518673dfc335793d00d27b063db2364a56f7c55a2bbdf84f1348eb97ce2f7",
+    "DesignAssets/Animations/CombatAttributesV7/pebble/carapace/Parts/foot-1.png": "6f68aa71291b868f84c078bd11422850f3a339d13df4ee1d12f59c10a265d493",
+    "DesignAssets/Animations/CombatAttributesV7/AttackEffects/pebble-projectile.png": "f582578a6edd094c435f630d155682562cce6b8b8bfde9e069d52674976493fe",
+    "DesignAssets/Animations/CombatAttributesV7/AttackEffects/pebble-impact.png": "aed73e1e56543034bc33ef2655bec4d7517e9561867c4d4df60f5e78b28f9d2a",
+    "DesignAssets/Animations/CombatAttributesV7/RuntimeParts/pebble-blade.png": "0fa6d9c4c84d23903879c7f05464f941af4d3ea058a8845c70ed5575fd17c5e7",
+    "DesignAssets/Animations/CombatAttributesV7/RuntimeParts/pebble-piercing.png": "b45c701dccf7a4745d8b25a6ecf5aa8e7fae28761bae3d7012dd7346d8f835e8",
+    "DesignAssets/Animations/CombatAttributesV7/RuntimeParts/pebble-carapace.png": "9769e933fefa5921e9abfd412cbdae655e0b29bc1d7fce3b24c1cd7004eb71e8",
+    "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/blade/idle.webp": "4fcfe0fd19205ab1859d1145a312fead63a5dcc0c7c47bef08506db6535da7e2",
+    "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/blade/attack.webp": "c9cf4c3faa5967dd7294a286ef6eaa7e2294ca063b21da656630fcdc0355471e",
+    "DesignAssets/Animations/CombatDeathV1/pebble/blade/death.webp": "99a8882e61a3583638e6c0327aaabca116a101eb93c6b17e9d309a63bfb53621",
+    "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/carapace/idle.webp": "d9e9ad58c28d7a842335315b718ace4824a8a40c028ed17e1fb5d178149649f8",
+    "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/carapace/attack.webp": "0af9bc135d45a694098601dca4cb03d198adbc2738429eb3d9dd17c1454a4af4",
+    "DesignAssets/Animations/CombatDeathV1/pebble/carapace/death.webp": "001ae71c79f3426bd9fb9df0034aec80746e393b954e6322e254e399daa26126",
+    "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/piercing/idle.webp": "98d025a04475fc4a70abc2d9c41b8f6b1e3684350cc6ba7f43167b648d8d6d54",
+    "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/piercing/attack.webp": "335706219bcba632466cbcebc566e398b4da51d30209bc0b58279aa34d719726",
+    "DesignAssets/Animations/CombatDeathV1/pebble/piercing/death.webp": "fc2127122929d4391445cea699528b618d98ebcf3608f60fef5d3afd98b93586",
+    "DesignAssets/Animations/CombatAttributesV7/spring/blade/rig.json": "83f92db59ffd2412f7434296b3fdb573e7e537b8a4660cc52f55e8dd56600957",
+    "DesignAssets/Animations/CombatAttributesV7/spring/piercing/rig.json": "13e56bd1ed6bded052d88b7d5754d33582cda5498fb830b582d94df435551b25",
+    "DesignAssets/Animations/CombatAttributesV7/spring/carapace/rig.json": "5979efd8e8077456acad4abf3598617097276724ad0f9588a5faa4914a2dab73",
+    "DesignAssets/Animations/CombatAttributesV7/spring/blade/Parts/body.png": "bc6519c2604c9429b6684cfb16915aba3b9cb94d3ec488af1e2225cf2d5b1124",
+    "DesignAssets/Animations/CombatAttributesV7/spring/blade/Parts/eye-0.png": "35c1ae9805f9679a9544e4471dd1f3c59b81827c84e714912fceda4f6ffbb4f3",
+    "DesignAssets/Animations/CombatAttributesV7/spring/blade/Parts/eye-1.png": "d740d7c5ec03f76b4afaa43dea9ee903cedec9d00599f547ff6186862af8f57e",
+    "DesignAssets/Animations/CombatAttributesV7/spring/piercing/Parts/body.png": "74f91244602cbe02881042fb719a814158df983a7f44b4402ad20e242f8ef38d",
+    "DesignAssets/Animations/CombatAttributesV7/spring/piercing/Parts/eye-0.png": "40c4659a2d0a82a66204fd5fe953b4a21b4a816709c5a1689866617515464e73",
+    "DesignAssets/Animations/CombatAttributesV7/spring/piercing/Parts/eye-1.png": "0a1d25ea6b1acfe34ffe25d72304690011976e5e385ff506116c3f29706e7073",
+    "DesignAssets/Animations/CombatAttributesV7/spring/carapace/Parts/body.png": "8768988912f42ae3a23ddcd50f34482413c4426af7402ae6057b2761286d4344",
+    "DesignAssets/Animations/CombatAttributesV7/spring/carapace/Parts/eye-0.png": "434228c42fab10cab7f6f38333a935c837269e524d06b50f213a5ed599114d51",
+    "DesignAssets/Animations/CombatAttributesV7/spring/carapace/Parts/eye-1.png": "bc7c2d4e2942a1634919f38692c9fdf329e69614a1571f3ac2c56f49642491dc",
+    "DesignAssets/Animations/CombatAttributesV7/AttackEffects/spring-projectile.png": "40190673911e9ddac4bed0bdf7a19dffa8e9e6a143639fb62f7ab5533efe1276",
+    "DesignAssets/Animations/CombatAttributesV7/AttackEffects/spring-impact.png": "a4d99ac55acc551802d1a3ae1f1b1ac24a7a7a766cfcdcb59942d583eb95c549",
+    "DesignAssets/Animations/CombatAttributesV7/RuntimeParts/spring-blade.png": "9f3f59fee5008e1eb15531760571e67d93ebed0e067c1ef9083008e972bda0b1",
+    "DesignAssets/Animations/CombatAttributesV7/RuntimeParts/spring-piercing.png": "564eedc3953bced583cfd64acba844fb785d7a1d883c397f7eccc18f75079475",
+    "DesignAssets/Animations/CombatAttributesV7/RuntimeParts/spring-carapace.png": "b9494aeb0007f6ff7104e74267530081b018506eb67eeaee8854fddd0be98c42",
+    "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/blade/idle.webp": "17d03d44a401f825c2d08636c5d52ab8546058e74b83f6bbebd4e445cbd297df",
+    "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/blade/attack.webp": "ecbf66dcad1f5d7ab1f3e893f78e834937b2776a0c85f32b5993035395e43e17",
+    "DesignAssets/Animations/CombatDeathV1/spring/blade/death.webp": "985c9346a820d136d9d12ab1a045c8881bf9f6109be357ff46171d37c7ddb055",
+    "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/piercing/idle.webp": "594f9f31a82b1c7d45fe2e0bb446a3e151dd35f62c4057dc22e5a20c8117c072",
+    "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/piercing/attack.webp": "d43c8ba8baa8519949bcf5fb749ee9b52dfbe07506d074fd10f30dcf623dfc30",
+    "DesignAssets/Animations/CombatDeathV1/spring/piercing/death.webp": "eda4e5ae90cce4e0e0217e2470c4129916931e51ef0a3bf8280fdcb144e2c6fe",
+    "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/carapace/idle.webp": "1fcb69c07d41f1c1c82e876bd81f1ba4a69acee6eaebf6d5dacdf5af01ad2307",
+    "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/carapace/attack.webp": "f298de5b32dd34138329bc0ae85709d6cc5c32cb23cbb682ce9e86d1e72217f7",
+    "DesignAssets/Animations/CombatDeathV1/spring/carapace/death.webp": "682aa12ba2a59ad413a12a90add2f70530f9b0d4c678729d5ad81dc4c0d875bf"
+  }
+}
