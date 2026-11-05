@@ -57,7 +57,7 @@ function bundle(entries) {
     for (const dependency of dependencies) visit(dependency.name);
     const names = [...source.matchAll(exports)].map(match => match[1]);
     let transformed = source;
-    for (const dependency of dependencies) transformed = transformed.replace(dependency.text, `const {${dependency.names}} = modules[${JSON.stringify(dependency.name)}];`);
+    for (const dependency of dependencies) transformed = transformed.replace(dependency.text, `const {${dependency.names.replace(/\s+as\s+/g, ": ")}} = modules[${JSON.stringify(dependency.name)}];`);
     transformed = transformed.replace(/^export\s+/gm, "");
     if (/^(import|export)\s/m.test(transformed)) throw new Error(`UNSUPPORTED CLIENT MODULE : ${name}`);
     chunks.push(`modules[${JSON.stringify(name)}] = (() => {\n${transformed}\nreturn { ${names.join(", ")} };\n})();`);

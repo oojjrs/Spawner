@@ -1252,7 +1252,7 @@ function createSporeDominantBirthArt(createSurface) {
 return { SPORE_DOMINANT_BIRTH_SETTLED_AT, sporeDominantBirthMotion, sporeDominantBirthForm, sporeDominantBirthPose, sporeDominantBirthRow, sporeDominantBirthPixels, createSporeDominantBirthArt };
 })();
 modules["client/spring-dominant-birth.mjs"] = (() => {
-const { SPRING_BIRTH_ANIMATION as birth } = modules["client/birth.mjs"];
+const { SPRING_BIRTH_ANIMATION: birth } = modules["client/birth.mjs"];
 const { unitDisplayAttributes } = modules["client/unit-display-appearance.mjs"];
 
 // Source-owned water-body birth for the two canonical spring combat forms.
