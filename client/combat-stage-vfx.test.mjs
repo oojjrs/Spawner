@@ -63,13 +63,19 @@ test("approved V4 flights and impacts follow four species, both directions and a
         assert.equal(canvas.width, 2080); assert.equal(canvas.height, 960);
         resolve(kind, amount);
         const hits = draw(trial);
-        assert.equal(hits.length, amount > 0 ? 1 : 0, tribe + kind + amount);
+        const defense = kind === "block" || kind === "parry";
+        assert.equal(hits.length, amount > 0 && !defense ? 1 : 0, tribe + kind + amount);
+        if (defense) {
+          assert.equal(calls.filter(call => call.name === "drawImage" && call.args[0]?.src.endsWith("CombatDefenseV1/" + kind + ".png")).length, 1, "approved defense replaces its impact");
+          assert.ok(calls.some(call => call.name === "fillText" && call.args[0] === (kind === "block" ? "방어" : "패링")), "defense label is explicit");
+        }
         if (amount > 0) {
-          assert.ok(hits[0].args[0].src.endsWith(root + tribe + ".png"));
-          assert.ok(hits[0].args[1] > 0, "impact cell rather than flight cell");
+          if (!defense) {
+            assert.ok(hits[0].args[0].src.endsWith(root + tribe + ".png"));
+            assert.ok(hits[0].args[1] > 0, "impact cell rather than flight cell");
+          }
           assert.ok(calls.some(call => call.name === "fillText" && call.args[0] === "−" + amount.toFixed(1)), "damage label preserved");
-          const lines = calls.filter(call => call.name === "lineTo");
-          assert.equal(lines.length, kind === "block" ? 7 : 0, "partial block keeps defense sparks, not duplicate hit slash");
+          assert.equal(calls.filter(call => call.name === "lineTo").length, 0, "no duplicate legacy hit or defense strokes at contact");
         }
       });
     }

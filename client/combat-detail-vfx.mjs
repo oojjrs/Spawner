@@ -9,7 +9,11 @@ export const DETAIL_COMBAT_VFX = Object.freeze({
   ...Object.fromEntries(["spore", "pebble", "spring"].map(key => [key,
     { image: speciesRoot + key + ".png", frames: [1,2,3,4,5,6], durations: [25,45,65,90,100,100] }]))
 });
-export const DETAIL_COMBAT_VFX_ASSETS = Object.values(DETAIL_COMBAT_VFX).map(clip => clip.image);
+export const DETAIL_DEFENSE_VFX = Object.freeze({
+  block: "DesignAssets/Animations/CombatDefenseV1/block.png",
+  parry: "DesignAssets/Animations/CombatDefenseV1/parry.png"
+});
+export const DETAIL_COMBAT_VFX_ASSETS = [...Object.values(DETAIL_COMBAT_VFX).map(clip => clip.image), ...Object.values(DETAIL_DEFENSE_VFX)];
 export function detailVfxFrame(clip, milliseconds) {
   if (!Number.isFinite(milliseconds) || milliseconds < 0) return null;
   for (let index = 0; index < clip.frames.length; index++) {
@@ -25,12 +29,22 @@ function projectileClip(agent) {
   return agent && !agent.species && ["bean", "spore", "pebble", "spring"].includes(tribe) ? DETAIL_COMBAT_VFX[tribe] : null;
 }
 export function createDetailCombatVfx() {
-  const impacts = new Map(), vitals = new Map(), deaths = new Map(), anchors = new Map(), flightAnchors = new Map();
+  const impacts = new Map(), vitals = new Map(), deaths = new Map(), anchors = new Map(), flightAnchors = new Map(), defenses = new Map();
   let viewScope;
   function clearView() { anchors.clear(); flightAnchors.clear(); viewScope = undefined; }
   let projectiles = [];
   function consume(frame, time) {
-    if (frame.reset) { impacts.clear(); vitals.clear(); deaths.clear(); clearView(); }
+    if (frame.reset) { impacts.clear(); vitals.clear(); deaths.clear(); defenses.clear(); clearView(); }
+    for (const cue of frame.started || []) if (cue.channel === "defense" && DETAIL_DEFENSE_VFX[cue.kind]) {
+      const damage = (frame.started || []).find(item => item.eventId === cue.eventId && item.channel === "impact" && item.amount > 0);
+      defenses.set(cue.eventId, { ...cue, endsAt: cue.at + .45, residualAmount: cue.kind === "block" ? damage?.amount || 0 : 0 });
+    }
+    for (const [id, cue] of defenses) {
+      if (time < cue.at || time >= cue.endsAt) { defenses.delete(id); continue; }
+      const current = (frame.active || []).find(item => item.channel === "defense" && item.eventId === id);
+      // Endpoint redaction may change during the same event without replaying it.
+      if (current) defenses.set(id, { ...cue, sourceId: current.sourceId, targetId: current.targetId });
+    }
     for (const cue of frame.started || []) if (cue.channel === "death") deaths.set(String(cue.targetId), cue.at);
     for (const [id, at] of deaths) if (time < at || time - at >= .85) deaths.delete(id);
     // Retain the last authored cells beyond the journal's shorter semantic cue.
@@ -137,7 +151,7 @@ export function createDetailCombatVfx() {
         age, lane, x: point.x, y: point.y - point.height * .5, bodyHeight: point.height }];
     });
   }
-  return { consume, commands, vitalCommands, vitalActive: time => [...vitals.values()].some(cue => time >= cue.at && time - cue.at < .85), clearView };
+  return { consume, commands, vitalCommands, defenseCommands: (positions, time) => detailDefenseCommands({ active: [...defenses.values()] }, positions, time), vitalActive: time => [...vitals.values()].some(cue => time >= cue.at && time - cue.at < .85), clearView };
 }
 
 // Reuse the laboratory's existing healing ring/plus and signed HP labels.
@@ -172,4 +186,85 @@ export function drawDetailVfxCell(context, image, command) {
   context.drawImage(image, command.frame % 4 * cell, Math.floor(command.frame / 4) * cell, cell, cell,
     -command.size / 2, -command.size / 2, command.size, command.size);
   context.restore(); return true;
+}
+
+// User-approved defense artwork, timed only by observed authoritative outcomes.
+export function detailDefenseCommands(frame, positions, time) {
+  const output = [], seen = new Set();
+  for (const cue of frame.active || []) {
+    const age = time - cue.at;
+    if (cue.channel !== 'defense' || !['block', 'parry'].includes(cue.kind) || !Number.isFinite(age) || age < 0 || age >= .45 || time >= cue.endsAt || seen.has(cue.eventId)) continue;
+    const target = positions.get(String(cue.targetId)), source = positions.get(String(cue.sourceId));
+    if (!target || ![target.x, target.y, target.width, target.height].every(Number.isFinite) || target.height <= 0) continue;
+    const directionKnown = !!source && [source.x, source.y].every(Number.isFinite);
+    seen.add(cue.eventId);
+    const damage = (frame.active || []).find(item => item.eventId === cue.eventId && item.channel === 'impact' && item.amount > 0);
+    output.push({ kind: cue.kind, eventId: cue.eventId, projectileId: cue.projectileId, targetId: cue.targetId, sourceId: cue.sourceId,
+      image: DETAIL_DEFENSE_VFX[cue.kind], directionKnown, age, at: cue.at, eventAt: cue.eventAt ?? cue.at, x: target.x, y: target.y - target.height * .5, bodyWidth: target.width, bodyHeight: target.height,
+      towardSource: directionKnown ? Math.sign(source.x - target.x) || target.direction || 1 : 1, amount: cue.kind === 'block' ? cue.residualAmount ?? damage?.amount ?? 0 : 0 });
+  }
+  return output;
+}
+export function detailDefenseImageReady(image, command) {
+  return !!(command?.directionKnown && DETAIL_DEFENSE_VFX[command.kind] && image?.complete && image.naturalWidth);
+}
+export function drawDetailDefenseEffect(context, command, image, { reducedMotion = false } = {}) {
+  if (!detailDefenseImageReady(image, command) || command.age < 0 || command.age >= .45) return false;
+  const t = command.age / .45;
+  const scale = reducedMotion ? 1 : t < .10 ? .66 + t / .10 * .45 : t < .24 ? 1.11 - (t - .10) / .14 * .11 : 1 + (t - .24) * .15;
+  const opacity = t < .35 ? 1 : Math.pow(1 - (t - .35) / .65, 1.2);
+  const size = Math.min(500, Math.max(32, command.bodyHeight * (command.kind === 'block' ? 2.12 : 2.25))) * scale;
+  const contactX = command.x + command.towardSource * command.bodyWidth * .40;
+  const originX = command.kind === 'block' ? .36 : .52, originY = command.kind === 'block' ? .50 : .57;
+  context.save(); context.translate(contactX, command.y); context.scale(-command.towardSource, 1);
+  context.globalAlpha = opacity;
+  context.drawImage(image, -size * originX, -size * originY, size, size);
+  // Only dissipating light fragments, never a reflected shot or additional hit.
+  if (!reducedMotion && t > .16) {
+    const spread = (t - .16) * command.bodyHeight * .75, fade = Math.max(0, 1 - t);
+    context.globalAlpha = fade * .85; context.lineCap = 'round';
+    for (let i = 0; i < 7; i++) {
+      const angle = command.kind === 'block' ? Math.PI * (.60 + i * .13) : Math.PI * (1.03 + i * .065);
+      const radius = command.bodyHeight * (.33 + (i % 3) * .12) + spread;
+      const x = Math.cos(angle) * radius, y = Math.sin(angle) * radius;
+      context.strokeStyle = command.kind === 'block' ? '#e0ffff' : '#fff1b1'; context.lineWidth = Math.max(1, command.bodyHeight * .025 * fade);
+      context.beginPath(); context.moveTo(x, y); context.lineTo(x + Math.cos(angle) * command.bodyHeight * .12 * fade, y + Math.sin(angle) * command.bodyHeight * .12 * fade); context.stroke();
+    }
+  }
+  context.restore(); return true;
+}
+
+export function drawDetailDefenseFallback(context, command) {
+  if (!command.directionKnown || command.age < 0 || command.age >= .45) return false;
+  context.save(); context.globalAlpha = 1 - command.age / .45; context.strokeStyle = "#c3f1ff"; context.lineWidth = 3;
+  context.beginPath(); context.ellipse(command.x + command.towardSource * command.bodyWidth * .4, command.y,
+    Math.max(6, command.bodyWidth * .16), command.bodyHeight * .65, 0, -Math.PI / 2, Math.PI / 2); context.stroke(); context.restore(); return true;
+}
+export function drawDetailDefenseLabels(context, commands, { width, height, reducedMotion = false, vitals = [], reservedLabels = [] }) {
+  const occupied = reservedLabels.map(label => ({ targetId: String(label.targetId), y: label.y }));
+  for (const vital of vitals) if (vital.kind !== "regeneration") occupied.push({ targetId: String(vital.targetId), y: Math.max(20, Math.min(height - 20,
+    vital.y - vital.bodyHeight * .5 - 20 - (reducedMotion ? 0 : Math.min(1, vital.age / .85) * 45) - vital.lane * 24)) });
+  const lanes = new Map();
+  for (const command of commands) {
+    if (command.age < 0 || command.age >= .45) continue;
+    const id = String(command.targetId), lane = lanes.get(id) || 0; lanes.set(id, lane + 1);
+    const floor = command.y + command.bodyHeight * .5, lift = reducedMotion ? 0 : command.age * 28;
+    let damageY = command.y - command.bodyHeight * .5 - 20 - lift;
+    while (occupied.some(label => label.targetId === id && Math.abs(label.y - damageY) < 26)) damageY -= 28;
+    damageY = Math.max(20, damageY);
+    let labelY = floor + 34 + lane * 26;
+    if (labelY > height - 18) labelY = Math.max(20, damageY - 30 - lane * 26);
+    context.save(); context.globalAlpha = 1 - (command.age / .45) ** 2;
+    context.textAlign = "center"; context.textBaseline = "middle"; context.lineJoin = "round";
+    context.font = '700 ' + Math.max(17, Math.min(30, width / 30)) + 'px "Malgun Gothic", sans-serif';
+    context.lineWidth = 4; context.strokeStyle = "#203125"; context.fillStyle = command.kind === "block" ? "#d3f1ff" : "#fff1ba";
+    const label = command.kind === "block" ? "방어" : "패링";
+    context.strokeText(label, command.x, labelY); context.fillText(label, command.x, labelY);
+    if (command.kind === "block" && command.amount > 0) {
+      const damage = "−" + (command.amount >= .1 ? command.amount.toFixed(1) : Number(command.amount.toPrecision(2)).toString());
+      context.fillStyle = "#fff9df"; context.strokeText(damage, command.x, damageY); context.fillText(damage, command.x, damageY);
+      occupied.push({ targetId: id, y: damageY });
+    }
+    occupied.push({ targetId: id, y: labelY }); context.restore();
+  }
 }

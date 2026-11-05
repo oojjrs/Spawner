@@ -30,7 +30,7 @@ function scene(tribe = "bean", initialize = true) {
 test("an ongoing flight becomes drawable when the server reveals either initially hidden endpoint", () => {
   for (const tribe of ["bean", "spore", "pebble", "spring"]) for (const hidden of ["source", "target"])
     for (const initialize of [false, true]) {
-      const { draw, launch } = scene(tribe, initialize), other = hidden === "source" ? "target" : "source";
+      const { draw, launch, environment } = scene(tribe, initialize), other = hidden === "source" ? "target" : "source";
       const partial = draw(1.1, [other]);
       assert.equal(partial.snapshot.events[0][hidden + "Id"], null);
       assert.equal(partial.commands.length, 0, "an unseen endpoint has no invented position");
@@ -45,7 +45,9 @@ test("an ongoing flight becomes drawable when the server reveals either initiall
       assert.equal(revealed.commands[0].launchedAt, launch.at);
       assert.equal(revealed.commands[0].arrivesAt, launch.arrivesAt);
       assert.deepEqual(draw(1.6).commands, revealed.commands, "repeating a snapshot never restarts the flight");
-      assert.equal(draw(2).commands.length, 0, "original arrival still ends the flight");
+      assert.equal(draw(2).commands.length, 1, "revealed flight remains pending until its actual result");
+      recordCombatVfx(environment, { ...launch, kind: "projectile-cancel", at: 2.1 });
+      assert.equal(draw(2.1).commands.length, 0, "observed cancellation ends the revealed flight");
     }
 });
 

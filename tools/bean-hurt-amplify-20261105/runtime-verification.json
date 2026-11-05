@@ -1,0 +1,172 @@
+{
+  "sources": [
+    {
+      "key": "base",
+      "minXDerivative": 0.17935117458496275,
+      "minYDerivative": 0.2813590084206794,
+      "fixedLowerPixelsMaxError": 0,
+      "frames": 24,
+      "image": "DesignAssets/Animations/BeanHeldHurtV1/base.webp",
+      "sha256": "3e5c00853cb975b588bbe8be03dd466fbad81f25640dacc674c97e7b34e6eb0b",
+      "grid": [
+        4,
+        6
+      ],
+      "dimensions": [
+        1072,
+        1296
+      ],
+      "frame": [
+        268,
+        216
+      ],
+      "bytes": 442470,
+      "source": "DesignAssets/Animations/UnitAppearanceV1/bean/00/Source/neutral.png",
+      "sourceSha256": "9c8893d8792c6d4e987ec0479463ebbd9085f89d38bb1c7db2580c3f4d230f73",
+      "exactAtlasRgba": true
+    },
+    {
+      "key": "secretion",
+      "minXDerivative": 0.1663738647883959,
+      "minYDerivative": 0.28058992845461717,
+      "fixedLowerPixelsMaxError": 0,
+      "frames": 24,
+      "image": "DesignAssets/Animations/BeanHeldHurtV1/secretion.webp",
+      "sha256": "630817f2e41525aeaa8df55e60dfcf7494e5d29f745ac07342727163abde528a",
+      "grid": [
+        4,
+        6
+      ],
+      "dimensions": [
+        1024,
+        1296
+      ],
+      "frame": [
+        256,
+        216
+      ],
+      "bytes": 470782,
+      "source": "DesignAssets/Animations/UnitAppearanceV1/bean/10/Source/neutral.png",
+      "sourceSha256": "65a547fbe1664cfa3e0fb534e94eae029cb9cb18a66518df670daa8e70533811",
+      "exactAtlasRgba": true
+    },
+    {
+      "key": "blade",
+      "minXDerivative": 0.23658911586891596,
+      "minYDerivative": 0.2807329686760909,
+      "fixedLowerPixelsMaxError": 0,
+      "frames": 24,
+      "image": "DesignAssets/Animations/BeanHeldHurtV1/blade.webp",
+      "sha256": "12001df2a05b180d6383d19132e1bb9de22adde9f8167aff2f2e3c0c0bb9a2d3",
+      "grid": [
+        4,
+        6
+      ],
+      "dimensions": [
+        1520,
+        1584
+      ],
+      "frame": [
+        380,
+        264
+      ],
+      "bytes": 1162854,
+      "source": "tools/bean-hurt-amplify-20261105/current-sources/01-neutral.png",
+      "sourceSha256": "ecf9e603dcdd560c80235983a1aa3e8b0199a47cfdcdbc7b49dbff661d18385f",
+      "exactAtlasRgba": true
+    },
+    {
+      "key": "carapace",
+      "minXDerivative": 0.23197769518596034,
+      "minYDerivative": 0.2803938487787718,
+      "fixedLowerPixelsMaxError": 0,
+      "frames": 24,
+      "image": "DesignAssets/Animations/BeanHeldHurtV1/carapace.webp",
+      "sha256": "0634022d5c01c9ee40de035bdf3e7fef6646b083cd58df19802f3df6de116318",
+      "grid": [
+        4,
+        6
+      ],
+      "dimensions": [
+        1440,
+        1632
+      ],
+      "frame": [
+        360,
+        272
+      ],
+      "bytes": 903404,
+      "source": "tools/bean-hurt-amplify-20261105/current-sources/02-neutral.png",
+      "sourceSha256": "a77b36135ea7e132f640882f1c58f486afc62e9e70c2436577d289de60b7fc76",
+      "exactAtlasRgba": true
+    },
+    {
+      "key": "antenna",
+      "minXDerivative": 0.252855358302065,
+      "minYDerivative": 0.28094058300683855,
+      "fixedLowerPixelsMaxError": 0,
+      "frames": 24,
+      "image": "DesignAssets/Animations/BeanHeldHurtV1/antenna.webp",
+      "sha256": "a6ea59ca582697bef68d5543e941617eac3f2d76d29201dde3dfcc7bc627c186",
+      "grid": [
+        4,
+        6
+      ],
+      "dimensions": [
+        1360,
+        2064
+      ],
+      "frame": [
+        340,
+        344
+      ],
+      "bytes": 830854,
+      "source": "tools/bean-hurt-amplify-20261105/current-sources/04-neutral.png",
+      "sourceSha256": "3b99b78cef52d1ccd80ebf55b971c7440b4e16d2c6de9fa21a7ed0b791a0b1b3",
+      "exactAtlasRgba": true
+    },
+    {
+      "key": "feet",
+      "minXDerivative": 0.2529166356757081,
+      "minYDerivative": 0.2807523993878931,
+      "fixedLowerPixelsMaxError": 0,
+      "frames": 24,
+      "image": "DesignAssets/Animations/BeanHeldHurtV1/feet.webp",
+      "sha256": "a5fd8f2876736f1955daff05dbfe68b9eddc933d4fd4edc93246a9d3d751cc86",
+      "grid": [
+        4,
+        6
+      ],
+      "dimensions": [
+        1360,
+        2136
+      ],
+      "frame": [
+        340,
+        356
+      ],
+      "bytes": 876920,
+      "source": "tools/bean-hurt-amplify-20261105/current-sources/08-neutral.png",
+      "sourceSha256": "dd5004eae2fb914810739a1a1e8ed622a1aadcd13dedece9558e599372094825",
+      "exactAtlasRgba": true
+    }
+  ],
+  "holdSeconds": 0.5,
+  "totalSeconds": 0.88,
+  "timing": [
+    0,
+    0.5,
+    0.5333333333,
+    0.5666666667,
+    0.6,
+    0.6333333333,
+    0.66,
+    0.69,
+    0.72,
+    0.76,
+    0.8,
+    0.84
+  ],
+  "approved00PixelSourceUnchanged": true,
+  "liveSourcesPreserved": true
+}

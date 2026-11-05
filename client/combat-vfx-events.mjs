@@ -71,7 +71,10 @@ export function combatVfxAt(inputs, time, scope) {
     closures.set(event.projectileId, Math.min(closures.get(event.projectileId) ?? Infinity, event.at));
   const projectiles = events.filter(event => event.kind === "shoot" && event.projectileId &&
     Number.isFinite(event.arrivesAt) && event.arrivesAt > event.at).flatMap(event => {
-      const closed = Math.min(event.arrivesAt, closures.get(event.projectileId) ?? Infinity);
+      // ETA positions the flight head, but is not evidence of a hit or miss.
+      // A delayed result must not make an unresolved shot disappear. Keep its
+      // head at the endpoint until an observed terminal event closes this shot.
+      const closed = closures.get(event.projectileId) ?? Infinity;
       if (time < event.at || time >= closed) return [];
       return [{ ...event, launchedAt: event.at, endsAt: closed, age: time - event.at,
         progress: Math.max(0, Math.min(1, (time - event.at) / (event.arrivesAt - event.at))) }];

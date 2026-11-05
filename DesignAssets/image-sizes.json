@@ -9796,6 +9796,174 @@
         516,
         516
       ]
+    },
+    "DesignAssets/Animations/CombatDefenseV1/block.png": {
+      "display": [
+        500,
+        500
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "966eeb0dee5ce0ec6f34f016b7dfbde99eebb6efb8d579bda864adfd9cbed3cf",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "frame": [
+          1254,
+          1254
+        ]
+      }
+    },
+    "DesignAssets/Animations/CombatDefenseV1/parry.png": {
+      "display": [
+        500,
+        500
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "04239820ad1e1d6184e54cbdb87ba07618815006e30c065282da4d5fe24e3659",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "frame": [
+          1254,
+          1254
+        ]
+      }
+    },
+    "DesignAssets/Animations/BeanHeldHurtV1/base.webp": {
+      "display": [
+        160,
+        160
+      ],
+      "grid": [
+        4,
+        6
+      ],
+      "nativeSource": {
+        "sha256": "3e5c00853cb975b588bbe8be03dd466fbad81f25640dacc674c97e7b34e6eb0b",
+        "dimensions": [
+          1072,
+          1296
+        ],
+        "frame": [
+          268,
+          216
+        ]
+      }
+    },
+    "DesignAssets/Animations/BeanHeldHurtV1/secretion.webp": {
+      "display": [
+        160,
+        160
+      ],
+      "grid": [
+        4,
+        6
+      ],
+      "nativeSource": {
+        "sha256": "630817f2e41525aeaa8df55e60dfcf7494e5d29f745ac07342727163abde528a",
+        "dimensions": [
+          1024,
+          1296
+        ],
+        "frame": [
+          256,
+          216
+        ]
+      }
+    },
+    "DesignAssets/Animations/BeanHeldHurtV1/blade.webp": {
+      "display": [
+        160,
+        160
+      ],
+      "grid": [
+        4,
+        6
+      ],
+      "nativeSource": {
+        "sha256": "12001df2a05b180d6383d19132e1bb9de22adde9f8167aff2f2e3c0c0bb9a2d3",
+        "dimensions": [
+          1520,
+          1584
+        ],
+        "frame": [
+          380,
+          264
+        ]
+      }
+    },
+    "DesignAssets/Animations/BeanHeldHurtV1/carapace.webp": {
+      "display": [
+        160,
+        160
+      ],
+      "grid": [
+        4,
+        6
+      ],
+      "nativeSource": {
+        "sha256": "0634022d5c01c9ee40de035bdf3e7fef6646b083cd58df19802f3df6de116318",
+        "dimensions": [
+          1440,
+          1632
+        ],
+        "frame": [
+          360,
+          272
+        ]
+      }
+    },
+    "DesignAssets/Animations/BeanHeldHurtV1/antenna.webp": {
+      "display": [
+        160,
+        160
+      ],
+      "grid": [
+        4,
+        6
+      ],
+      "nativeSource": {
+        "sha256": "a6ea59ca582697bef68d5543e941617eac3f2d76d29201dde3dfcc7bc627c186",
+        "dimensions": [
+          1360,
+          2064
+        ],
+        "frame": [
+          340,
+          344
+        ]
+      }
+    },
+    "DesignAssets/Animations/BeanHeldHurtV1/feet.webp": {
+      "display": [
+        160,
+        160
+      ],
+      "grid": [
+        4,
+        6
+      ],
+      "nativeSource": {
+        "sha256": "a5fd8f2876736f1955daff05dbfe68b9eddc933d4fd4edc93246a9d3d751cc86",
+        "dimensions": [
+          1360,
+          2136
+        ],
+        "frame": [
+          340,
+          356
+        ]
+      }
     }
   }
 }

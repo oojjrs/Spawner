@@ -65,10 +65,13 @@ test("launch, flight, arrival and cancellation are separate and never synthesize
   assert.equal(combatVfxAt([launch], .99).projectiles.length, 0);
   assert.equal(combatVfxAt([launch], 1).projectiles[0].progress, 0);
   assert.equal(combatVfxAt([launch], 1.5).projectiles[0].progress, .5);
-  assert.equal(combatVfxAt([launch], 2).projectiles.length, 0);
+  assert.equal(combatVfxAt([launch], 2).projectiles.length, 1);
+  assert.equal(combatVfxAt([launch], 2.1).projectiles[0].progress, 1,
+    "ETA clamps position but cannot invent a terminal outcome");
   assert.equal(combatVfxAt([launch], 2).active.length, 0);
   const blocked = event("parry", 2, { amount: 0, projectileId: "p" });
   assert.deepEqual(combatVfxAt([launch, blocked], 2).active.map(cue => cue.kind), ["parry"]);
+  assert.equal(combatVfxAt([launch, blocked], 2).projectiles.length, 0);
   const cancel = event("projectile-cancel", 1.2, { amount: 0, projectileId: "p" });
   assert.equal(combatVfxAt([launch, cancel], 1.3).projectiles.length, 0);
   assert.equal(combatVfxAt([launch, cancel], 1.3).active.length, 0);

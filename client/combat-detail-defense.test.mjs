@@ -1,0 +1,90 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { createContext, runInContext } from 'node:vm';
+import { createCombatVfxCursor } from './combat-vfx-events.mjs';
+import { createDetailCombatVfx, DETAIL_COMBAT_VFX, DETAIL_COMBAT_VFX_ASSETS, DETAIL_DEFENSE_VFX,
+  drawDetailVfxCell, drawDetailVitalEffect, detailDefenseCommands, detailDefenseImageReady,
+  drawDetailDefenseEffect, drawDetailDefenseFallback, drawDetailDefenseLabels } from './combat-detail-vfx.mjs';
+const source = readFileSync(new URL('./game.js', import.meta.url), 'utf8');
+const helperFile = readFileSync(new URL('./combat-detail-dodge.test.mjs', import.meta.url), 'utf8').split('const event = ')[0];
+const helper = helperFile.slice(helperFile.indexOf('function extract(')).replace('CREATURE_ATTACK_ANIMATIONS: {},',
+  'CREATURE_ATTACK_ANIMATIONS: {}, detailDefenseImageReady, drawDetailDefenseEffect, drawDetailDefenseFallback, drawDetailDefenseLabels,');
+const box = { assert, source, createContext, runInContext, createCombatVfxCursor, createDetailCombatVfx,
+  DETAIL_COMBAT_VFX_ASSETS, drawDetailVfxCell, drawDetailVitalEffect, detailDefenseImageReady,
+  drawDetailDefenseEffect, drawDetailDefenseFallback, drawDetailDefenseLabels };
+createContext(box); runInContext(helper, box);
+const event = (kind, extra = {}) => ({ id:kind, kind, at:1, sourceId:'source', targetId:'target', amount:0, ...extra });
+const points = new Map([['source',{x:100,y:250,width:70,height:90}],['target',{x:300,y:250,width:70,height:90}]]);
+const image = kind => ({complete:true,naturalWidth:1254,path:DETAIL_DEFENSE_VFX[kind]});
+test('actual modal replaces block impact with approved artwork and separated defense/damage labels',()=>{
+ const view=box.modal(), result=view.draw(1.08,[event('block',{amount:.7})]);
+ assert.ok(result.art.some(row=>row.image===DETAIL_DEFENSE_VFX.block));
+ assert.ok(!result.art.some(row=>row.image===DETAIL_COMBAT_VFX.hit.image));
+ const label=result.texts.find(t=>t.text==='방어'), damage=result.texts.find(t=>t.text==='−0.7');
+ assert.ok(label);assert.ok(damage);assert.ok(Math.abs(label.y-damage.y)>=26);
+});
+test('parry uses its approved image and label with no hit image, damage text or reflected shot',()=>{
+ const result=box.modal().draw(1.08,[event('parry')]);
+ assert.ok(result.art.some(row=>row.image===DETAIL_DEFENSE_VFX.parry));
+ assert.ok(result.texts.some(t=>t.text==='패링'));
+ assert.ok(!result.art.some(row=>row.image===DETAIL_COMBAT_VFX.hit.image));
+ assert.ok(!result.texts.some(t=>t.text.startsWith('−')));assert.equal(result.flights.length,0);
+});
+test('loading defense art keeps actual residual damage impact and readable label',()=>{
+ const result=box.modal({unavailable:[DETAIL_DEFENSE_VFX.block]}).draw(1.08,[event('block',{amount:.7})]);
+ assert.ok(result.art.some(row=>row.image===DETAIL_COMBAT_VFX.hit.image));
+ assert.ok(!result.art.some(row=>row.image===DETAIL_DEFENSE_VFX.block));
+ assert.ok(result.texts.some(t=>t.text==='방어'));assert.ok(result.texts.some(t=>t.text==='−0.7'));
+});
+test('same-target unrelated real hit survives exact defense event replacement',()=>{
+ const result=box.modal().draw(1.08,[event('block',{amount:.7}),event('hit',{id:'unrelated',amount:5})]);
+ assert.equal(result.art.filter(row=>row.image===DETAIL_DEFENSE_VFX.block).length,1);
+ assert.equal(result.art.filter(row=>row.image===DETAIL_COMBAT_VFX.hit.image).length,1);
+});
+test('defense uses observed outcome time, expires once, and redacted direction does not draw',()=>{
+ const cursor=createCombatVfxCursor(),detail=createDetailCombatVfx();cursor.consume({streamId:'a',events:[]},0);
+ const e=event('parry');
+ detail.consume(cursor.consume({streamId:'a',events:[e]},.99),.99);assert.equal(detail.defenseCommands(points,.99).length,0);
+ detail.consume(cursor.consume({streamId:'a',events:[e,e]},1.05),1.05);let commands=detail.defenseCommands(points,1.05);assert.equal(commands.length,1);assert.ok(detailDefenseImageReady(image('parry'),commands[0]));
+ detail.consume(cursor.consume({streamId:'a',events:[{...e,sourceId:null}]},1.1),1.1);commands=detail.defenseCommands(points,1.1);assert.equal(commands.length,1);assert.equal(detailDefenseImageReady(image('parry'),commands[0]),false);
+ detail.consume(cursor.consume({streamId:'a',events:[e]},1.45),1.45);assert.equal(detail.defenseCommands(points,1.45).length,0);
+ detail.consume(cursor.consume({streamId:'b',events:[e]},1.2),1.2);assert.equal(detail.defenseCommands(points,1.2).length,0);
+});
+test('lab stage-clock mapping keeps exact original event identity and residual amount',()=>{
+ const detail=createDetailCombatVfx(),cue={id:'block:defense',eventId:'block',kind:'block',channel:'defense',sourceId:'source',targetId:'target',at:10,eventAt:1,endsAt:1.45};
+ detail.consume({started:[cue,{...cue,kind:'hit',channel:'impact',amount:.7}],active:[]},10);
+ const c=detail.defenseCommands(points,10.1)[0];assert.ok(c);assert.equal(c.eventAt,1);assert.equal(c.amount,.7);assert.ok(Math.abs(c.age-.1)<1e-9);
+ detail.consume({started:[],active:[]},10.46);assert.equal(detail.defenseCommands(points,10.46).length,0);
+});
+test('labels avoid nearby actual healing amount and stay still in reduced motion',()=>{
+ const labels=[],ctx=new Proxy({fillText:(text,x,y)=>labels.push({text,x,y})},{get:(o,k)=>o[k]??(()=>{})});
+ const command={kind:'block',targetId:'target',x:300,y:200,bodyHeight:100,age:.1,amount:.7};
+ drawDetailDefenseLabels(ctx,[command],{width:1040,height:480,reducedMotion:true,vitals:[{kind:'heal',targetId:'target',y:200,bodyHeight:100,age:.1,lane:0}]});
+ const damage=labels.find(l=>l.text==='−0.7');assert.ok(Math.abs(damage.y-130)>=26);assert.ok(labels.find(l=>l.text==='방어').y>250);
+});
+
+test('actual lab stage replaces only defense impacts, keeps loading fallback, and shows the requested labels',async()=>{
+ const {createCombatStage}=await import('./combat-stage.mjs');
+ const previous={window:globalThis.window,Image:globalThis.Image,assets:globalThis.SpawnerAssets};
+ try {
+  globalThis.window={matchMedia:()=>({matches:false}),devicePixelRatio:1};delete globalThis.SpawnerAssets;
+  for(const unavailable of [false,true])for(const kind of ['block','parry']){
+   const draws=[],labels=[];
+   globalThis.Image=class{constructor(){this.complete=true;this.naturalWidth=4096;this.naturalHeight=4096;}set src(value){this.path=value;if(unavailable&&value===DETAIL_DEFENSE_VFX[kind])this.naturalWidth=0;}get src(){return this.path;}};
+   const context=new Proxy({drawImage:(image,...args)=>draws.push({image:image.src,args}),fillText:(text,x,y)=>labels.push({text,x,y})},{get:(o,k)=>o[k]??(()=>{})});
+   const canvas={clientWidth:1040,clientHeight:480,getContext:()=>context};
+   const agents=[0,1].map(side=>({id:side?'target':'source',tribe:'bean',health:100,stats:{health:100},attributes:{},combat:{side,stunnedUntil:0},animationStartedAt:0}));
+   const trial={agents,history:[],projectiles:[],time:0,result:()=>null,vfx:{version:1,streamId:'lab',events:[]}},stage=createCombatStage(canvas);
+   stage.render(trial,100,true);draws.length=0;labels.length=0;
+   trial.time=1.08;const e=event(kind,{amount:kind==='block'?.7:0});trial.vfx.events=[e];trial.history=[{kind,attackerId:'source',targetId:'target',time:1,damage:e.amount}];
+   stage.render(trial,1180,true);
+   assert.equal(draws.filter(d=>d.image===DETAIL_DEFENSE_VFX[kind]).length,unavailable?0:1);
+   assert.equal(draws.filter(d=>d.image===DETAIL_COMBAT_VFX.hit.image).length,unavailable&&kind==='block'?1:0);
+   assert.equal(labels.filter(l=>l.text===(kind==='block'?'방어':'패링')).length,1);
+   assert.equal(labels.filter(l=>l.text==='−0.7').length,kind==='block'?1:0);
+   stage.clear();draws.length=0;labels.length=0;stage.render(trial,1280,false);
+   assert.equal(draws.filter(d=>Object.values(DETAIL_DEFENSE_VFX).includes(d.image)).length,0,'reset does not replay old defense');
+  }
+ }finally{globalThis.window=previous.window;globalThis.Image=previous.Image;globalThis.SpawnerAssets=previous.assets;}
+});

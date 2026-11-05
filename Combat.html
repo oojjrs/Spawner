@@ -4613,6 +4613,175 @@ function unitDisplayAbilityMask(mask) {
 
 return { UNIT_DISPLAY_PRIORITY, UNIT_DISPLAY_MASKS, UNIT_DISPLAY_FORM_COUNT, unitDominantAppearanceMask, unitDisplayAttributesFrom, unitDisplayAttributes, unitDisplayAbilityMask };
 })();
+modules["client/unit-size.mjs"] = (() => {
+const UNIT_DISPLAY_SIZES = Object.freeze({
+  bean: .40, spore: .38, pebble: .42, spring: .39,
+  "flower-tail-bird": .26, "dew-rabbit": .29, "cotton-sheep": .32,
+  "soil-mole": .35, "bundle-snail": .38, "rolling-acorn": .38,
+  "bubble-toad": .52, "vine-turtle": .52, "spiny-back-beetle": .58,
+  "snare-vine": .62, "soil-boar": .66, "shadow-weasel": .72, "talon-owl": .78,
+  "spring-keeper": .88, "lantern-keeper": .92, "old-garden-snail": 1.00, "walking-forest": 1.12,
+  "spiny-back-leader": 1.24, "white-paw": 1.44
+});
+
+function unitDisplaySize(unit) {
+  const count = Array.isArray(unit.dna?.pieces) ? unit.dna.pieces.length :
+    Number.isFinite(unit.stats?.pieceCount) ? Math.max(0, unit.stats.pieceCount) : 0;
+  const scale = 1 + .01 * count;
+  return (UNIT_DISPLAY_SIZES[unit.species || unit.tribe || "bean"] || UNIT_DISPLAY_SIZES.bean)*scale;
+}
+
+return { UNIT_DISPLAY_SIZES, unitDisplaySize };
+})();
+modules["client/bean-held-hurt-assets.mjs"] = (() => {
+const BEAN_HELD_HURT_SOURCES = Object.freeze({"base":{"image":"DesignAssets/Animations/BeanHeldHurtV1/base.webp","frameWidth":268,"frameHeight":216,"columns":4,"pivotX":134,"pivotY":210,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84],"referenceLength":206,"bodyWidth":162,"worldScale":"source","sourceHash":"9c8893d8792c6d4e987ec0479463ebbd9085f89d38bb1c7db2580c3f4d230f73","sourceImage":"DesignAssets/Animations/UnitAppearanceV1/bean/00/Source/neutral.png"},"secretion":{"image":"DesignAssets/Animations/BeanHeldHurtV1/secretion.webp","frameWidth":256,"frameHeight":216,"columns":4,"pivotX":125,"pivotY":211,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84],"referenceLength":206,"bodyWidth":146,"worldScale":"source","sourceHash":"65a547fbe1664cfa3e0fb534e94eae029cb9cb18a66518df670daa8e70533811","sourceImage":"DesignAssets/Animations/UnitAppearanceV1/bean/10/Source/neutral.png"},"blade":{"image":"DesignAssets/Animations/BeanHeldHurtV1/blade.webp","frameWidth":380,"frameHeight":264,"columns":4,"pivotX":193,"pivotY":251,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84],"referenceLength":336,"bodyWidth":187.072,"worldScale":"evolution","sourceHash":"ecf9e603dcdd560c80235983a1aa3e8b0199a47cfdcdbc7b49dbff661d18385f","sourceImage":"tools/bean-hurt-amplify-20261105/current-sources/01-neutral.png"},"carapace":{"image":"DesignAssets/Animations/BeanHeldHurtV1/carapace.webp","frameWidth":360,"frameHeight":272,"columns":4,"pivotX":175,"pivotY":256,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84],"referenceLength":292,"bodyWidth":182.648,"worldScale":"evolution","sourceHash":"a77b36135ea7e132f640882f1c58f486afc62e9e70c2436577d289de60b7fc76","sourceImage":"tools/bean-hurt-amplify-20261105/current-sources/02-neutral.png"},"antenna":{"image":"DesignAssets/Animations/BeanHeldHurtV1/antenna.webp","frameWidth":340,"frameHeight":344,"columns":4,"pivotX":170,"pivotY":365.28,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84],"referenceLength":333,"bodyWidth":237.69230769230768,"worldScale":"composed","sourceHash":"3b99b78cef52d1ccd80ebf55b971c7440b4e16d2c6de9fa21a7ed0b791a0b1b3","sourceImage":"tools/bean-hurt-amplify-20261105/current-sources/04-neutral.png"},"feet":{"image":"DesignAssets/Animations/BeanHeldHurtV1/feet.webp","frameWidth":340,"frameHeight":356,"columns":4,"pivotX":170,"pivotY":349.28,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84],"referenceLength":339,"bodyWidth":237.69230769230768,"worldScale":"composed","sourceHash":"dd5004eae2fb914810739a1a1e8ed622a1aadcd13dedece9558e599372094825","sourceImage":"tools/bean-hurt-amplify-20261105/current-sources/08-neutral.png"}});
+
+return { BEAN_HELD_HURT_SOURCES };
+})();
+modules["client/bean-held-hurt.mjs"] = (() => {
+const { unitDisplayAttributes } = modules["client/unit-display-appearance.mjs"];
+const { unitDisplaySize } = modules["client/unit-size.mjs"];
+const { UNIT_APPEARANCE_LEGACY_VISUAL_KEYS } = modules["server/unit-appearance.mjs"];
+const { BEAN_HELD_HURT_SOURCES } = modules["client/bean-held-hurt-assets.mjs"];
+
+// Approved visual-only impact hold. The source body owns this interval while
+// attack clocks, launched projectiles, movement and all combat state continue.
+const BEAN_HURT_HOLD_SECONDS = .5;
+const BEAN_HURT_TOTAL_SECONDS = .88;
+const BEAN_HELD_HURT_ASSETS = Object.freeze(Object.values(BEAN_HELD_HURT_SOURCES).map(source => source.image));
+const recovery = [[.5,1],[.66,0],[.72,-.22],[.8,.07],[.88,0]];
+function beanHeldHurtAmount(age) {
+  if (!Number.isFinite(age) || age < 0 || age >= BEAN_HURT_TOTAL_SECONDS) return 0;
+  if (age <= BEAN_HURT_HOLD_SECONDS) return 1;
+  for (let i=1;i<recovery.length;i++) if (age <= recovery[i][0]) {
+    const [a,x]=recovery[i-1],[b,y]=recovery[i],t=(age-a)/(b-a),smooth=t*t*(3-2*t);
+    return x+(y-x)*smooth;
+  }
+  return 0;
+}
+function beanHeldHurtSource(agent) {
+  if (!agent || agent.species || (agent.tribe || agent.key || "bean") !== "bean") return null;
+  const attributes=unitDisplayAttributes(agent);
+  if (UNIT_APPEARANCE_LEGACY_VISUAL_KEYS.some(key=>attributes[key]>0)) return null;
+  const key=["blade","secretion","carapace","antenna","feet"].find(key=>attributes[key]>0) ||
+    (agent.stats?.ranged && !agent.stats?.melee ? "secretion" : "base");
+  return BEAN_HELD_HURT_SOURCES[key] || null;
+}
+function beanHeldHurtPose(agent,time) {
+  const source=beanHeldHurtSource(agent);
+  if (!source || agent.health<=0 || agent.birth || !Number.isFinite(time) || !Number.isFinite(agent.hurtStartedAt)) return null;
+  const age=time-agent.hurtStartedAt;
+  if (age<0 || age>=BEAN_HURT_TOTAL_SECONDS) return null;
+  let frame=0;
+  while (frame+1<source.times.length && age+1e-9>=source.times[frame+1]) frame++;
+  return {action:"hurt",source,age,frame,amount:beanHeldHurtAmount(age),hold:age<=BEAN_HURT_HOLD_SECONDS};
+}
+
+// Mirror the pose relative to the current facing, preserving the source's own
+// asymmetric organs. Native atlas has both struck sides, not mirrored artwork.
+// hitSide is the incoming source's side (-1 left/+1 right), when it is known.
+function drawBeanHeldHurt(context,agent,time,imageFor,options={}) {
+  const source=beanHeldHurtSource(agent);
+  if (!source || agent.health<=0 || agent.birth) return false;
+  const image=imageFor(source.image); // Preload on the normal living draw path.
+  const pose=beanHeldHurtPose(agent,time);
+  if (!pose || !image || image.complete===false || !(image.naturalWidth || image.width) || !(image.naturalHeight || image.height)) return false;
+  const mirror=!!options.mirror;
+  const screenSide=Number.isFinite(options.hitSide) && options.hitSide!==0 ? Math.sign(options.hitSide) : (mirror?-1:1);
+  const sourceSide=screenSide*(mirror?-1:1);
+  const index=pose.frame+(sourceSide>0?source.times.length:0);
+  const crop={x:index%source.columns*source.frameWidth,y:Math.floor(index/source.columns)*source.frameHeight,width:source.frameWidth,height:source.frameHeight};
+  if (crop.x+crop.width>(image.naturalWidth || image.width) || crop.y+crop.height>(image.naturalHeight || image.height)) return false;
+  const scale=options.sourceScale ?? (options.cell || 1)*unitDisplaySize(agent)/source.referenceLength;
+  if (!(scale>0) || !Number.isFinite(scale)) return false;
+  const sx=options.sourceScaleX ?? scale,sy=options.sourceScaleY ?? scale;
+  if (!(sx>0) || !(sy>0) || !Number.isFinite(sx) || !Number.isFinite(sy)) return false;
+  const px=source.pivotX+(options.nativePivotX===undefined?0:options.nativePivotX-256);
+  const nativeY=source.worldScale==="composed"?481.28:448;
+  const py=source.pivotY+(options.nativePivotY===undefined?0:options.nativePivotY-nativeY);
+  const destination={x:-px*sx,y:-py*sy,width:source.frameWidth*sx,height:source.frameHeight*sy};
+  context.save();
+  try {
+    context.translate(options.x || 0,options.y || 0);context.scale(mirror?-1:1,1);
+    options.beforeDraw?.(context,image,crop,destination);
+    context.drawImage(image,crop.x,crop.y,crop.width,crop.height,destination.x,destination.y,destination.width,destination.height);
+  } finally { context.restore(); }
+  return true;
+}
+
+return { BEAN_HURT_HOLD_SECONDS, BEAN_HURT_TOTAL_SECONDS, BEAN_HELD_HURT_ASSETS, beanHeldHurtAmount, beanHeldHurtSource, beanHeldHurtPose, drawBeanHeldHurt };
+})();
+modules["client/combat-dodge-vfx.mjs"] = (() => {
+// User-approved shared dodge: redraw the current body, never species-specific art.
+// Only eligible observed dodge cues drive this presentation. No future-outcome
+// filtering, projectile generation, damage, simulation movement, or RNG here.
+const clamp = (x, lo, hi) => Math.max(lo, Math.min(hi, x));
+const ease = x => 1 - (1 - clamp(x, 0, 1)) ** 3;
+
+function combatDodgePose(frame, positions, targetId, time, reducedMotion = false) {
+  const cues = (frame.active || []).filter(e => e.kind === 'dodge' && e.channel === 'defense' &&
+    String(e.targetId) === String(targetId) && time >= e.at && time < Math.min(e.endsAt, e.at + .4));
+  const cue = cues.sort((a,b) => b.at - a.at)[0];
+  if (!cue) return null;
+  const p = positions.get(String(cue.targetId)), source = positions.get(String(cue.sourceId));
+  if (!p || !source || ![p.x,p.y,p.width,p.height,source.x,source.y].every(Number.isFinite) || p.width <= 0 || p.height <= 0) return null;
+  const age = time - cue.at, t = age / .4;
+  const away = Math.sign(p.x - source.x) || 1;
+  const distance = clamp(p.height * .40, 20, 54);
+  const displacement = t < .23 ? ease(t / .23) : t < .5 ? 1 : 1 - ease((t - .5) / .5);
+  return { eventId: cue.eventId, targetId, age, t, x:p.x, y:p.y, width:p.width, height:p.height,
+    away, dx: reducedMotion ? 0 : away * distance * displacement,
+    dy: reducedMotion ? 0 : -distance * .65 * displacement,
+    maxX: away * distance, maxY: -distance * .65, alpha: (1-t) ** .55,
+    reducedMotion, ghosts: reducedMotion ? [] : [.08,.35,.66] };
+}
+
+function drawCombatDodgeTrails(ctx, p) {
+  if (!p) return;
+  const scale = clamp(p.height/108,.6,1.5);
+  ctx.save(); ctx.translate(p.x, p.y-p.height*.48); ctx.scale(p.away,1);
+  ctx.lineCap='round'; ctx.lineJoin='round';
+  // Open, parallel slipstreams. No star, ring, hit flash, projectile or sparks.
+  const progress = p.reducedMotion ? 1 : ease(p.t/.24);
+  for (const [row,weight,len] of [[-.37,6,1],[-.08,11,1.18],[.28,6,.86]]) {
+    ctx.globalAlpha=p.alpha*.92;
+    for (const [color,width] of [['#163c47',weight+6],['#63e9f0',weight],['#e0ffff',Math.max(1.8,weight*.3)]]) {
+      ctx.strokeStyle=color; ctx.lineWidth=width*scale;
+      ctx.beginPath();
+      ctx.moveTo(-p.width*.59, p.height*row);
+      ctx.bezierCurveTo(-p.width*.24, p.height*(row+.04), Math.abs(p.maxX)*.6*progress,
+        p.height*row+p.maxY*.76*progress, Math.abs(p.maxX)*len*progress, p.height*row+p.maxY*progress);
+      ctx.stroke();
+    }
+  }
+  ctx.restore();
+}
+
+function drawCombatDodgeGhosts(ctx, p, drawBody) {
+  if (!p || p.reducedMotion || p.t>.72) return;
+  for (const [i, fraction] of p.ghosts.entries()) {
+    ctx.save(); ctx.globalAlpha=p.alpha*(.12+i*.06);
+    ctx.shadowColor='#a4ffff'; ctx.shadowBlur=7;
+    drawBody(p.dx*fraction,p.dy*fraction);
+    ctx.restore();
+  }
+}
+
+function drawCombatDodgeLabel(ctx, p, point, { width, height, vitals = [] } = {}) {
+  if (!p || !point) return;
+  const labels = vitals.filter(c => c.kind !== "regeneration" && String(c.targetId) === String(p.targetId));
+  const top = Math.min(point.y - point.height - 20, ...labels.map(c =>
+    Math.max(20, Math.min(height - 20, c.y - c.bodyHeight * .5 - 20 -
+      (p.reducedMotion ? 0 : Math.min(1, c.age / .85) * 45) - c.lane * 24)) - 32));
+  const y = top < 20 ? Math.min(height - 20, point.y + 36) : top;
+  ctx.save(); ctx.globalAlpha = p.alpha; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.lineJoin = "round";
+  ctx.font = '700 ' + Math.max(17, Math.min(30, width / 30)) + 'px "Malgun Gothic", sans-serif';
+  ctx.lineWidth = 4; ctx.strokeStyle = "#203125"; ctx.fillStyle = "#d3f1ff";
+  ctx.strokeText("회피", point.x, y); ctx.fillText("회피", point.x, y); ctx.restore();
+}
+
+return { combatDodgePose, drawCombatDodgeTrails, drawCombatDodgeGhosts, drawCombatDodgeLabel };
+})();
 modules["client/pebble-dominant-swing.mjs"] = (() => {
 // Canonical pebble blade attack: an anchored overhead sweep, rather than a
 // complete body roll. Only the approved V7 body, eyes, and feet are sampled.
@@ -12508,26 +12677,6 @@ function createBeanCombatArt({ createSurface, imageFor }) {
 
 return { BEAN_COMBAT_ART_ASSETS, createBeanCombatArt };
 })();
-modules["client/unit-size.mjs"] = (() => {
-const UNIT_DISPLAY_SIZES = Object.freeze({
-  bean: .40, spore: .38, pebble: .42, spring: .39,
-  "flower-tail-bird": .26, "dew-rabbit": .29, "cotton-sheep": .32,
-  "soil-mole": .35, "bundle-snail": .38, "rolling-acorn": .38,
-  "bubble-toad": .52, "vine-turtle": .52, "spiny-back-beetle": .58,
-  "snare-vine": .62, "soil-boar": .66, "shadow-weasel": .72, "talon-owl": .78,
-  "spring-keeper": .88, "lantern-keeper": .92, "old-garden-snail": 1.00, "walking-forest": 1.12,
-  "spiny-back-leader": 1.24, "white-paw": 1.44
-});
-
-function unitDisplaySize(unit) {
-  const count = Array.isArray(unit.dna?.pieces) ? unit.dna.pieces.length :
-    Number.isFinite(unit.stats?.pieceCount) ? Math.max(0, unit.stats.pieceCount) : 0;
-  const scale = 1 + .01 * count;
-  return (UNIT_DISPLAY_SIZES[unit.species || unit.tribe || "bean"] || UNIT_DISPLAY_SIZES.bean)*scale;
-}
-
-return { UNIT_DISPLAY_SIZES, unitDisplaySize };
-})();
 modules["client/combat-stage-appearance.mjs"] = (() => {
 const { unitDisplayAttributes } = modules["client/unit-display-appearance.mjs"];
 const { UNIT_APPEARANCE_LEGACY_VISUAL_KEYS } = modules["server/unit-appearance.mjs"];
@@ -12715,7 +12864,10 @@ function combatVfxAt(inputs, time, scope) {
     closures.set(event.projectileId, Math.min(closures.get(event.projectileId) ?? Infinity, event.at));
   const projectiles = events.filter(event => event.kind === "shoot" && event.projectileId &&
     Number.isFinite(event.arrivesAt) && event.arrivesAt > event.at).flatMap(event => {
-      const closed = Math.min(event.arrivesAt, closures.get(event.projectileId) ?? Infinity);
+      // ETA positions the flight head, but is not evidence of a hit or miss.
+      // A delayed result must not make an unresolved shot disappear. Keep its
+      // head at the endpoint until an observed terminal event closes this shot.
+      const closed = closures.get(event.projectileId) ?? Infinity;
       if (time < event.at || time >= closed) return [];
       return [{ ...event, launchedAt: event.at, endsAt: closed, age: time - event.at,
         progress: Math.max(0, Math.min(1, (time - event.at) / (event.arrivesAt - event.at))) }];
@@ -13717,7 +13869,11 @@ const DETAIL_COMBAT_VFX = Object.freeze({
   ...Object.fromEntries(["spore", "pebble", "spring"].map(key => [key,
     { image: speciesRoot + key + ".png", frames: [1,2,3,4,5,6], durations: [25,45,65,90,100,100] }]))
 });
-const DETAIL_COMBAT_VFX_ASSETS = Object.values(DETAIL_COMBAT_VFX).map(clip => clip.image);
+const DETAIL_DEFENSE_VFX = Object.freeze({
+  block: "DesignAssets/Animations/CombatDefenseV1/block.png",
+  parry: "DesignAssets/Animations/CombatDefenseV1/parry.png"
+});
+const DETAIL_COMBAT_VFX_ASSETS = [...Object.values(DETAIL_COMBAT_VFX).map(clip => clip.image), ...Object.values(DETAIL_DEFENSE_VFX)];
 function detailVfxFrame(clip, milliseconds) {
   if (!Number.isFinite(milliseconds) || milliseconds < 0) return null;
   for (let index = 0; index < clip.frames.length; index++) {
@@ -13733,12 +13889,22 @@ function projectileClip(agent) {
   return agent && !agent.species && ["bean", "spore", "pebble", "spring"].includes(tribe) ? DETAIL_COMBAT_VFX[tribe] : null;
 }
 function createDetailCombatVfx() {
-  const impacts = new Map(), vitals = new Map(), deaths = new Map(), anchors = new Map(), flightAnchors = new Map();
+  const impacts = new Map(), vitals = new Map(), deaths = new Map(), anchors = new Map(), flightAnchors = new Map(), defenses = new Map();
   let viewScope;
   function clearView() { anchors.clear(); flightAnchors.clear(); viewScope = undefined; }
   let projectiles = [];
   function consume(frame, time) {
-    if (frame.reset) { impacts.clear(); vitals.clear(); deaths.clear(); clearView(); }
+    if (frame.reset) { impacts.clear(); vitals.clear(); deaths.clear(); defenses.clear(); clearView(); }
+    for (const cue of frame.started || []) if (cue.channel === "defense" && DETAIL_DEFENSE_VFX[cue.kind]) {
+      const damage = (frame.started || []).find(item => item.eventId === cue.eventId && item.channel === "impact" && item.amount > 0);
+      defenses.set(cue.eventId, { ...cue, endsAt: cue.at + .45, residualAmount: cue.kind === "block" ? damage?.amount || 0 : 0 });
+    }
+    for (const [id, cue] of defenses) {
+      if (time < cue.at || time >= cue.endsAt) { defenses.delete(id); continue; }
+      const current = (frame.active || []).find(item => item.channel === "defense" && item.eventId === id);
+      // Endpoint redaction may change during the same event without replaying it.
+      if (current) defenses.set(id, { ...cue, sourceId: current.sourceId, targetId: current.targetId });
+    }
     for (const cue of frame.started || []) if (cue.channel === "death") deaths.set(String(cue.targetId), cue.at);
     for (const [id, at] of deaths) if (time < at || time - at >= .85) deaths.delete(id);
     // Retain the last authored cells beyond the journal's shorter semantic cue.
@@ -13845,7 +14011,7 @@ function createDetailCombatVfx() {
         age, lane, x: point.x, y: point.y - point.height * .5, bodyHeight: point.height }];
     });
   }
-  return { consume, commands, vitalCommands, vitalActive: time => [...vitals.values()].some(cue => time >= cue.at && time - cue.at < .85), clearView };
+  return { consume, commands, vitalCommands, defenseCommands: (positions, time) => detailDefenseCommands({ active: [...defenses.values()] }, positions, time), vitalActive: time => [...vitals.values()].some(cue => time >= cue.at && time - cue.at < .85), clearView };
 }
 
 // Reuse the laboratory's existing healing ring/plus and signed HP labels.
@@ -13882,7 +14048,88 @@ function drawDetailVfxCell(context, image, command) {
   context.restore(); return true;
 }
 
-return { DETAIL_COMBAT_VFX, DETAIL_COMBAT_VFX_ASSETS, detailVfxFrame, createDetailCombatVfx, drawDetailVitalEffect, drawDetailVfxCell };
+// User-approved defense artwork, timed only by observed authoritative outcomes.
+function detailDefenseCommands(frame, positions, time) {
+  const output = [], seen = new Set();
+  for (const cue of frame.active || []) {
+    const age = time - cue.at;
+    if (cue.channel !== 'defense' || !['block', 'parry'].includes(cue.kind) || !Number.isFinite(age) || age < 0 || age >= .45 || time >= cue.endsAt || seen.has(cue.eventId)) continue;
+    const target = positions.get(String(cue.targetId)), source = positions.get(String(cue.sourceId));
+    if (!target || ![target.x, target.y, target.width, target.height].every(Number.isFinite) || target.height <= 0) continue;
+    const directionKnown = !!source && [source.x, source.y].every(Number.isFinite);
+    seen.add(cue.eventId);
+    const damage = (frame.active || []).find(item => item.eventId === cue.eventId && item.channel === 'impact' && item.amount > 0);
+    output.push({ kind: cue.kind, eventId: cue.eventId, projectileId: cue.projectileId, targetId: cue.targetId, sourceId: cue.sourceId,
+      image: DETAIL_DEFENSE_VFX[cue.kind], directionKnown, age, at: cue.at, eventAt: cue.eventAt ?? cue.at, x: target.x, y: target.y - target.height * .5, bodyWidth: target.width, bodyHeight: target.height,
+      towardSource: directionKnown ? Math.sign(source.x - target.x) || target.direction || 1 : 1, amount: cue.kind === 'block' ? cue.residualAmount ?? damage?.amount ?? 0 : 0 });
+  }
+  return output;
+}
+function detailDefenseImageReady(image, command) {
+  return !!(command?.directionKnown && DETAIL_DEFENSE_VFX[command.kind] && image?.complete && image.naturalWidth);
+}
+function drawDetailDefenseEffect(context, command, image, { reducedMotion = false } = {}) {
+  if (!detailDefenseImageReady(image, command) || command.age < 0 || command.age >= .45) return false;
+  const t = command.age / .45;
+  const scale = reducedMotion ? 1 : t < .10 ? .66 + t / .10 * .45 : t < .24 ? 1.11 - (t - .10) / .14 * .11 : 1 + (t - .24) * .15;
+  const opacity = t < .35 ? 1 : Math.pow(1 - (t - .35) / .65, 1.2);
+  const size = Math.min(500, Math.max(32, command.bodyHeight * (command.kind === 'block' ? 2.12 : 2.25))) * scale;
+  const contactX = command.x + command.towardSource * command.bodyWidth * .40;
+  const originX = command.kind === 'block' ? .36 : .52, originY = command.kind === 'block' ? .50 : .57;
+  context.save(); context.translate(contactX, command.y); context.scale(-command.towardSource, 1);
+  context.globalAlpha = opacity;
+  context.drawImage(image, -size * originX, -size * originY, size, size);
+  // Only dissipating light fragments, never a reflected shot or additional hit.
+  if (!reducedMotion && t > .16) {
+    const spread = (t - .16) * command.bodyHeight * .75, fade = Math.max(0, 1 - t);
+    context.globalAlpha = fade * .85; context.lineCap = 'round';
+    for (let i = 0; i < 7; i++) {
+      const angle = command.kind === 'block' ? Math.PI * (.60 + i * .13) : Math.PI * (1.03 + i * .065);
+      const radius = command.bodyHeight * (.33 + (i % 3) * .12) + spread;
+      const x = Math.cos(angle) * radius, y = Math.sin(angle) * radius;
+      context.strokeStyle = command.kind === 'block' ? '#e0ffff' : '#fff1b1'; context.lineWidth = Math.max(1, command.bodyHeight * .025 * fade);
+      context.beginPath(); context.moveTo(x, y); context.lineTo(x + Math.cos(angle) * command.bodyHeight * .12 * fade, y + Math.sin(angle) * command.bodyHeight * .12 * fade); context.stroke();
+    }
+  }
+  context.restore(); return true;
+}
+
+function drawDetailDefenseFallback(context, command) {
+  if (!command.directionKnown || command.age < 0 || command.age >= .45) return false;
+  context.save(); context.globalAlpha = 1 - command.age / .45; context.strokeStyle = "#c3f1ff"; context.lineWidth = 3;
+  context.beginPath(); context.ellipse(command.x + command.towardSource * command.bodyWidth * .4, command.y,
+    Math.max(6, command.bodyWidth * .16), command.bodyHeight * .65, 0, -Math.PI / 2, Math.PI / 2); context.stroke(); context.restore(); return true;
+}
+function drawDetailDefenseLabels(context, commands, { width, height, reducedMotion = false, vitals = [], reservedLabels = [] }) {
+  const occupied = reservedLabels.map(label => ({ targetId: String(label.targetId), y: label.y }));
+  for (const vital of vitals) if (vital.kind !== "regeneration") occupied.push({ targetId: String(vital.targetId), y: Math.max(20, Math.min(height - 20,
+    vital.y - vital.bodyHeight * .5 - 20 - (reducedMotion ? 0 : Math.min(1, vital.age / .85) * 45) - vital.lane * 24)) });
+  const lanes = new Map();
+  for (const command of commands) {
+    if (command.age < 0 || command.age >= .45) continue;
+    const id = String(command.targetId), lane = lanes.get(id) || 0; lanes.set(id, lane + 1);
+    const floor = command.y + command.bodyHeight * .5, lift = reducedMotion ? 0 : command.age * 28;
+    let damageY = command.y - command.bodyHeight * .5 - 20 - lift;
+    while (occupied.some(label => label.targetId === id && Math.abs(label.y - damageY) < 26)) damageY -= 28;
+    damageY = Math.max(20, damageY);
+    let labelY = floor + 34 + lane * 26;
+    if (labelY > height - 18) labelY = Math.max(20, damageY - 30 - lane * 26);
+    context.save(); context.globalAlpha = 1 - (command.age / .45) ** 2;
+    context.textAlign = "center"; context.textBaseline = "middle"; context.lineJoin = "round";
+    context.font = '700 ' + Math.max(17, Math.min(30, width / 30)) + 'px "Malgun Gothic", sans-serif';
+    context.lineWidth = 4; context.strokeStyle = "#203125"; context.fillStyle = command.kind === "block" ? "#d3f1ff" : "#fff1ba";
+    const label = command.kind === "block" ? "방어" : "패링";
+    context.strokeText(label, command.x, labelY); context.fillText(label, command.x, labelY);
+    if (command.kind === "block" && command.amount > 0) {
+      const damage = "−" + (command.amount >= .1 ? command.amount.toFixed(1) : Number(command.amount.toPrecision(2)).toString());
+      context.fillStyle = "#fff9df"; context.strokeText(damage, command.x, damageY); context.fillText(damage, command.x, damageY);
+      occupied.push({ targetId: id, y: damageY });
+    }
+    occupied.push({ targetId: id, y: labelY }); context.restore();
+  }
+}
+
+return { DETAIL_COMBAT_VFX, DETAIL_DEFENSE_VFX, DETAIL_COMBAT_VFX_ASSETS, detailVfxFrame, createDetailCombatVfx, drawDetailVitalEffect, drawDetailVfxCell, detailDefenseCommands, detailDefenseImageReady, drawDetailDefenseEffect, drawDetailDefenseFallback, drawDetailDefenseLabels };
 })();
 modules["client/unit-appearance-assets.mjs"] = (() => {
 const UNIT_APPEARANCE_ASSETS = Object.freeze({
@@ -19969,10 +20216,12 @@ function talonOwlIdleFrame(elapsedMs) {
 return { TALON_OWL_IDLE, talonOwlIdleFrame };
 })();
 modules["client/combat-stage.mjs"] = (() => {
+const { beanHeldHurtSource, drawBeanHeldHurt } = modules["client/bean-held-hurt.mjs"];
+const { combatDodgePose, drawCombatDodgeTrails, drawCombatDodgeGhosts, drawCombatDodgeLabel } = modules["client/combat-dodge-vfx.mjs"];
 const { createCombatStageAppearance } = modules["client/combat-stage-appearance.mjs"];
 const { attackAnimationElapsed } = modules["server/attack.mjs"];
 const { createCombatVfxCursor } = modules["client/combat-vfx-events.mjs"];
-const { createDetailCombatVfx, DETAIL_COMBAT_VFX_ASSETS, drawDetailVfxCell, drawDetailVitalEffect } = modules["client/combat-detail-vfx.mjs"];
+const { createDetailCombatVfx, DETAIL_COMBAT_VFX_ASSETS, drawDetailVfxCell, drawDetailVitalEffect, detailDefenseImageReady, drawDetailDefenseEffect, drawDetailDefenseFallback, drawDetailDefenseLabels } = modules["client/combat-detail-vfx.mjs"];
 const { COMBAT_LAB_UNITS } = modules["client/combat-lab.mjs"];
 const { createUnitAppearanceWorld } = modules["client/unit-appearance-world.mjs"];
 const { AGENT_DEATH_ANIMATION } = modules["client/agent-death.mjs"];
@@ -19985,7 +20234,7 @@ const { TALON_OWL_IDLE, talonOwlIdleFrame } = modules["client/talon-owl-idle.mjs
 const { BEETLE_SPRITE, BEETLE_ATTACK_SPRITE, BEETLE_ANIMATIONS, BEETLE_NEUTRAL_ASSET, beetleAnimationFrame, beetleAnimationPose } = modules["server/beetle-animation.mjs"];
 
 const colors = ["#c4e19c", "#efba90"];
-const reactionLabels = { dodge: "회피", parry: "패링", block: "블록", stun: "기절", counter: "반격", heal: "치유", shoot: "사격" };
+const reactionLabels = { dodge: "회피", parry: "패링", block: "방어", stun: "기절", counter: "반격", heal: "치유", shoot: "사격" };
 const beetleCorpse = imageAnimation({ image: "DesignAssets/Animations/BeetleDeath/dead-v2.png", frameSize: 185, columns: 1, pivotX: 95.5, pivotY: 163 });
 
 function stageAgent(agent) {
@@ -20066,7 +20315,7 @@ function createCombatStage(canvas) {
   const appearanceWorld = createUnitAppearanceWorld();
   const representativeArt = createCombatStageAppearance(image);
   const vfxCursor = createCombatVfxCursor(), detailVfx = createDetailCombatVfx();
-  let appearancePoses = new Map();
+  let appearancePoses = new Map(), dodgePositions = new Map(), dodgeCues = [];
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const deathStarted = new Map(), readyPoses = new Map();
   let currentTrial, previousTime = null, seen = 0, effects = [], clock = 0, lastNow = 0;
@@ -20112,7 +20361,7 @@ function createCombatStage(canvas) {
     }
     const recent = effects.filter(effect => effect.event.targetId === agent.id && clock - effect.born < .22);
     const impact = recent.find(effect => effect.event.damage > 0 && effect.event.kind !== "bleed");
-    const dodge = recent.find(effect => effect.event.kind === "dodge");
+    const dodge = currentTrial?.vfx?.version !== 1 && recent.find(effect => effect.event.kind === "dodge");
     const age = impact ? (clock - impact.born) / .22 : 1;
     const recoil = reducedMotion.matches ? 0 : impact ? Math.sin(age * Math.PI) * 16 : dodge ? 26 * Math.sin((clock - dodge.born) / .22 * Math.PI) : 0;
     const distance = currentTrial?.agents.every(entry => Number.isFinite(entry.x)) ? Math.abs(currentTrial.agents[1].x - currentTrial.agents[0].x) : 1;
@@ -20174,7 +20423,9 @@ function createCombatStage(canvas) {
   }
 
   function fighter(agent, index, width, height, time, ended) {
-    const point = position(agent, index, width, height, time), alive = agent.health > 0;
+    const originalPoint = position(agent, index, width, height, time), alive = agent.health > 0;
+    const evade = alive && combatDodgePose({ active: dodgeCues }, dodgePositions, agent.id, clock, reducedMotion.matches);
+    const point = { ...originalPoint, x: originalPoint.x + (evade?.dx || 0), y: originalPoint.y + (evade?.dy || 0) };
     agent = stageAgent(agent);
     if (!alive && !deathStarted.has(agent.id)) deathStarted.set(agent.id, clock);
     const deathAge = alive ? 0 : clock - deathStarted.get(agent.id);
@@ -20184,6 +20435,7 @@ function createCombatStage(canvas) {
     const size = displaySize(agent, pose) * formationScale(width, height), shadowScale = size / Math.min(width * .34, height * .72, 290);
     const radiusX = geometry?.groundRadiusX ? geometry.groundRadiusX * size : width * .054 * shadowScale;
     const radiusY = geometry?.groundRadiusY ? geometry.groundRadiusY * size : height * .023 * shadowScale;
+    if (evade) drawCombatDodgeTrails(context, evade);
     context.save(); context.translate(point.x, point.y);
     context.fillStyle = "#15261c55"; context.beginPath(); context.ellipse(0, 0, radiusX, radiusY, 0, 0, Math.PI * 2); context.fill();
     context.strokeStyle = colors[index] + (alive ? "a6" : "45"); context.lineWidth = 2;
@@ -20193,8 +20445,16 @@ function createCombatStage(canvas) {
       context.fillStyle = colors[index] + "24";
       context.beginPath(); context.ellipse(0, -height * .18, width * .09, height * .3, 0, 0, Math.PI * 2); context.fill();
     }
+    const drawBody = (dx = 0, dy = 0) => {
+      context.save(); context.translate(dx, dy);
     const appearancePose = appearancePoses.get(String(agent.id));
-    const appearanceDrawn = appearancePose && appearanceWorld.draw(context, agent, appearancePose, { x: 0, y: 0 },
+    const heldSource = beanHeldHurtSource(agent), heldCell = 100 * formationScale(width, height);
+    const composed = heldSource?.worldScale === "composed", antenna = heldSource?.image.endsWith("antenna.webp");
+    const heldK = heldCell * unitDisplaySize(agent) / 247;
+    const heldDrawn = drawBeanHeldHurt(context, agent, time, image, { cell: heldCell, mirror: index === 1,
+      ...(composed ? { sourceScaleX: heldK * 194 / 239, sourceScaleY: heldK * 154 / (antenna ? 214 : 203),
+        nativePivotX: 256.1159793814433, nativePivotY: antenna ? 486.3336156597027 : 481.6334255599474 } : {}) });
+    const appearanceDrawn = heldDrawn || appearancePose && appearanceWorld.draw(context, agent, appearancePose, { x: 0, y: 0 },
       100 * formationScale(width, height), index === 1, window.devicePixelRatio || 1);
     const representativeDrawn = !appearanceDrawn && representativeArt.draw(context, agent, time, deathAge,
       { pose, asset, geometry, size, sizeFor: current => displaySize(agent, current) * formationScale(width, height) }, 100 * formationScale(width, height), index === 1);
@@ -20214,6 +20474,10 @@ function createCombatStage(canvas) {
           asset.naturalWidth * scale, asset.naturalHeight * scale);
       }
     }
+      context.restore();
+    };
+    if (evade) drawCombatDodgeGhosts(context, evade, (dx, dy) => drawBody(dx - evade.dx, dy - evade.dy));
+    drawBody();
     context.restore();
     if (alive && agent.combat.stunnedUntil > currentTrial.time) {
       context.save(); context.strokeStyle = "#f6d983"; context.lineWidth = 2;
@@ -20352,7 +20616,7 @@ function createCombatStage(canvas) {
   function clear() {
     appearanceWorld.clear(); vfxCursor.reset(); detailVfx.consume({ reset: true }, 0);
     currentTrial = undefined; previousTime = null; seen = 0; effects = []; clock = 0; lastNow = 0;
-    deathStarted.clear(); readyPoses.clear(); appearancePoses = new Map();
+    deathStarted.clear(); readyPoses.clear(); appearancePoses = new Map(); dodgePositions = new Map(); dodgeCues = [];
   }
 
   function render(trial, now, playing) {
@@ -20361,7 +20625,7 @@ function createCombatStage(canvas) {
       clear(); currentTrial = trial; lastNow = now;
     }
     previousTime = trial?.time ?? null;
-    if (playing || !trial?.time || trial?.result()?.reason || effects.some(effect => clock - effect.born < .85) || detailVfx.vitalActive(clock)) clock += delta;
+    if (playing || !trial?.time || trial?.result()?.reason || effects.some(effect => clock - effect.born < .85) || detailVfx.vitalActive(clock) || dodgeCues.length) clock += delta;
     if (trial) {
       const unseen = trial.history.slice(seen);
       for (const event of unseen) if (event.kind === "death" && !deathStarted.has(event.targetId))
@@ -20378,15 +20642,25 @@ function createCombatStage(canvas) {
     if (canvas.width !== Math.round(width * ratio) || canvas.height !== Math.round(height * ratio)) { canvas.width = Math.round(width * ratio); canvas.height = Math.round(height * ratio); }
     context.setTransform(ratio, 0, 0, ratio, 0, 0); background(width, height);
     if (!trial) return;
-    const vfx = trial.vfx;
+    const vfx = trial.vfx, liveFlightKeys = new Set();
+    let liveFlights = [];
     if (vfx?.version === 1) {
       const frame = vfxCursor.consume(vfx, trial.time);
+      liveFlights = frame.projectiles;
+      if (frame.reset) dodgeCues = [];
+      for (const shot of frame.projectiles) liveFlightKeys.add(flightKey(shot.sourceId, shot.targetId, shot.launchedAt, shot.arrivesAt));
+      for (const cue of frame.started) if (cue.kind === "dodge" && cue.channel === "defense") {
+        const at = clock - Math.max(0, trial.time - cue.at);
+        dodgeCues.push({ ...cue, at, endsAt: at + Math.min(.4, cue.endsAt - cue.at) });
+      }
+      dodgeCues = dodgeCues.filter(cue => clock >= cue.at && clock < cue.endsAt);
       // Flights follow simulation time; authored impact tails use the stage clock,
       // so stepping, pausing or lethal resolution does not freeze the last cell.
       detailVfx.consume({ ...frame, started: frame.started.map(cue => ({ ...cue, eventAt: cue.at,
         at: clock - Math.max(0, trial.time - cue.at) })) }, clock);
       if (!reducedMotion.matches) for (const path of DETAIL_COMBAT_VFX_ASSETS) image(path);
     }
+    if (vfx?.version !== 1) dodgeCues = [];
     const ended = !!trial.result()?.reason;
     const time = trial.time || clock;
     appearancePoses = appearanceWorld.prepare(context, [...trial.agents, ...(trial.supportAgents || [])].map(entry => {
@@ -20399,13 +20673,20 @@ function createCombatStage(canvas) {
       const fade = 1 - (clock - impact.born) / .11;
       context.translate(Math.sin(clock * 150) * fade * (impact.event.critical ? 3 : 1.5), 0);
     }
+    dodgePositions = new Map(trial.agents.map(agent => {
+      const point = position(agent, agent.combat.side, width, height, time), bounds = bodyDimensions(agent), cell = 100 * formationScale(width, height);
+      return [String(agent.id), { ...point, width: bounds.width * cell, height: bounds.height * cell }];
+    }));
     const points = Object.fromEntries(trial.agents.map(agent => [agent.id, fighter(agent, agent.combat.side, width, height, time, ended)]));
     for (const agent of trial.supportAgents || []) points[agent.id] = supportArt(agent, points, width, height, time);
+    const defenseCommands = vfx?.version === 1 ? detailVfx.defenseCommands(new Map(Object.entries(points)), clock) : [];
+    const replacedDefenseIds = new Set(defenseCommands.filter(command => detailDefenseImageReady(image(command.image), command)).map(command => command.eventId));
     const drawnFlights = new Set(), drawnImpacts = new Set(), flightCommands = new Map();
     if (vfx?.version === 1 && !reducedMotion.matches) {
       const commands = detailVfx.commands(trial.agents.map(stageAgent), new Map(Object.entries(points)), clock,
         100 * formationScale(width, height), { scope: trial, width, height });
       for (const command of commands) {
+        if (command.kind === "impact" && replacedDefenseIds.has(command.eventId)) continue;
         const key = command.kind === "flight" && flightKey(command.sourceId, command.targetId, command.launchedAt, command.arrivesAt);
         if (key) flightCommands.set(key, command);
         if (drawDetailVfxCell(context, image(command.image), command)) {
@@ -20414,22 +20695,41 @@ function createCombatStage(canvas) {
         }
       }
     }
-    for (const projectile of trial.projectiles || []) {
+    // The observed journal owns flight lifetime, including loading fallback.
+    // A legacy transport list may have removed its object at ETA before the
+    // terminal packet arrived. Reuse only currently visible actual actors.
+    const fallbackProjectiles = vfx?.version === 1 ? liveFlights.flatMap(shot => {
+      const source = trial.agents.find(agent => String(agent.id) === String(shot.sourceId));
+      const target = trial.agents.find(agent => String(agent.id) === String(shot.targetId));
+      return source && target && points[source.id] && points[target.id] ?
+        [{ source, target, launchedAt: shot.launchedAt, at: shot.arrivesAt }] : [];
+    }) : trial.projectiles || [];
+    for (const projectile of fallbackProjectiles) {
       const key = flightKey(projectile.source.id, projectile.target.id, projectile.launchedAt, projectile.at);
+      // A stale legacy transport object must not resurrect a journal-closed
+      // miss, hit or cancellation. Before resolution the real flight remains.
+      if (vfx?.version === 1 && !liveFlightKeys.has(key)) continue;
       if (!drawnFlights.has(key)) projectileArt(projectile, points, time, height, flightCommands.get(key));
     }
     for (const effect of effects) if (clock - effect.born < .85) {
       const event = effect.event;
-      if (vfx?.version === 1 && ["heal", "drain", "regeneration", "bleed"].includes(event.kind)) continue;
+      if (vfx?.version === 1 && ["heal", "drain", "regeneration", "bleed", "block", "parry", "dodge", "miss", "evasion"].includes(event.kind)) continue;
       const covered = ["hit", "critical", "block", "area", "reflect"].includes(event.kind) &&
         drawnImpacts.has(impactKey(event.attackerId, event.targetId, event.time, event.damage));
       effectArt(effect, points, width, height, covered);
     }
+    for (const command of defenseCommands) if (!drawDetailDefenseEffect(context, command, image(command.image), { reducedMotion: reducedMotion.matches }))
+      drawDetailDefenseFallback(context, command);
     // Use actual HP changes, including drain (which has no history entry).
     // Support recipients use the same displayed position as their own sprite.
-    for (const command of detailVfx.vitalCommands([...trial.agents, ...(trial.supportAgents || [])].map(stageAgent),
-      new Map(Object.entries(points)), clock, { scope: trial, width, height }))
-      drawDetailVitalEffect(context, command, { width, height, reducedMotion: reducedMotion.matches });
+    const vitalCommands = detailVfx.vitalCommands([...trial.agents, ...(trial.supportAgents || [])].map(stageAgent),
+      new Map(Object.entries(points)), clock, { scope: trial, width, height });
+    for (const command of vitalCommands) drawDetailVitalEffect(context, command, { width, height, reducedMotion: reducedMotion.matches });
+    drawDetailDefenseLabels(context, defenseCommands, { width, height, reducedMotion: reducedMotion.matches, vitals: vitalCommands });
+    for (const agent of trial.agents) if (agent.health > 0) {
+      const evade = combatDodgePose({ active: dodgeCues }, dodgePositions, agent.id, clock, reducedMotion.matches);
+      if (evade) drawCombatDodgeLabel(context, evade, points[agent.id], { width, height, vitals: vitalCommands });
+    }
     context.restore();
   }
 

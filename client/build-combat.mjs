@@ -13,7 +13,7 @@ function bundle(name) {
     name: relative(root, resolve(dirname(path), match[2])).replaceAll("\\", "/") }));
   for (const dependency of dependencies) bundle(dependency.name);
   let transformed = source;
-  for (const dependency of dependencies) transformed = transformed.replace(dependency.text, `const {${dependency.names}} = modules[${JSON.stringify(dependency.name)}];`);
+  for (const dependency of dependencies) transformed = transformed.replace(dependency.text, `const {${dependency.names.replace(/\b([A-Za-z_$][\w$]*)\s+as\s+([A-Za-z_$][\w$]*)\b/g, "$1: $2")}} = modules[${JSON.stringify(dependency.name)}];`);
   const names = [...source.matchAll(exports)].map(match => match[1]);
   transformed = transformed.replace(/^export\s+/gm, "");
   if (/^(import|export)\s/m.test(transformed)) throw new Error("지원하지 않는 모듈: " + name);

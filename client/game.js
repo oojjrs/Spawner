@@ -2772,8 +2772,8 @@
 
     function selectionContour(sprite, frame) {
       const key = frame ? frame.owner : sprite;
-      const sourceWidth = frame ? frame.size : sprite.naturalWidth || sprite.width;
-      const sourceHeight = frame ? frame.size : sprite.naturalHeight || sprite.height;
+      const sourceWidth = frame ? frame.width || frame.size : sprite.naturalWidth || sprite.width;
+      const sourceHeight = frame ? frame.height || frame.size : sprite.naturalHeight || sprite.height;
       const scale = Math.min(1, 512 / Math.max(sourceWidth, sourceHeight));
       const sizeX = Math.max(1, Math.ceil(sourceWidth * scale));
       const sizeY = Math.max(1, Math.ceil(sourceHeight * scale));
@@ -2789,7 +2789,7 @@
       if (!entry.contours.has(index)) {
         const context = entry.context;
         context.clearRect(0, 0, sizeX, sizeY);
-        if (frame) context.drawImage(sprite, frame.x, frame.y, frame.size, frame.size, 0, 0, sizeX, sizeY);
+        if (frame) context.drawImage(sprite, frame.x, frame.y, sourceWidth, sourceHeight, 0, 0, sizeX, sizeY);
         else context.drawImage(sprite, 0, 0, sizeX, sizeY);
         entry.contours.set(index, createSelectionContour(entry.canvas));
       }
@@ -5365,9 +5365,33 @@
       Spawner.drawAgentLevelUp(ctx, agentLevelUpSprites, levelUp, levelUpAnchor, cell, true);
     }
 
+    function drawAgentHeldHurt(context, agent, cell, x, y, outlineColor, externalScale = unitDisplayScale(agent)) {
+      const source = Spawner.beanHeldHurtSource?.(agent);
+      if (!source || cell < 8) return false;
+      const scale = Math.max(.000001, externalScale), growth = unitDisplayScale(agent);
+      let sourceScale;
+      if (source.worldScale === "evolution") sourceScale = cell * AGENT_HEIGHT * 2 / 512 * growth / scale;
+      else if (source.worldScale === "composed") sourceScale = cell * AGENT_HEIGHT / 512 * growth / scale;
+      else if (source.image.endsWith("/secretion.webp"))
+        sourceScale = cell * Spawner.unitDisplaySize(agent) / source.referenceLength / scale;
+      else sourceScale = cell * unitBodySize("bean", {}).width / source.bodyWidth * growth / scale;
+      const facing = agent.combat ? agent.combat.side === 0 ? -1 : 1 : agent.facing || 1;
+      return Spawner.drawBeanHeldHurt(context, agent, state.simSeconds, agentRangedImage, {
+        x, y, sourceScale, mirror: facing < 0,
+        beforeDraw: outlineColor && context === ctx ? (context, image, crop, destination) =>
+          drawSelectionOutline(image, destination.x, destination.y, destination.width, destination.height,
+            { owner: image, index: crop.y * image.width + crop.x, x: crop.x, y: crop.y, size: crop.width, height: crop.height }, outlineColor) : null
+      });
+    }
+
     function drawAgentAppearance(ctx, now, agent, cell, topLeft, renderPosition, birth, outlineColor) {
       agent = displayedAgent(agent);
       const appearancePose = ctx.canvas === canvas && !birth && appearanceWorldPoses.get(String(agent.id));
+      if (!birth && Spawner.beanHeldHurtSource?.(agent) && drawAgentHeldHurt(ctx, agent, cell, topLeft.x + cell / 2,
+          topLeft.y + cell * (.5 + AGENT_HEIGHT * .44) - agentJumpOffset(agent, renderPosition) * cell,
+          outlineColor, appearancePose ? 1 : unitDisplayScale(agent))) {
+        drawAgentCarrying(ctx, agent, cell, topLeft, renderPosition); return;
+      }
       if (appearancePose) {
         const floor = topLeft.y + cell * (.5 + AGENT_HEIGHT * .44);
         const facing = agent.combat ? agent.combat.side === 0 ? -1 : 1 : agent.facing || 1;
@@ -5430,6 +5454,8 @@
     }
 
     function drawAgentAppearanceLayer(ctx, now, agent, cell, topLeft, renderPosition, birth, outlineColor) {
+      if (!birth && Spawner.beanHeldHurtSource?.(agent) && drawAgentHeldHurt(ctx, agent, cell, topLeft.x + cell / 2,
+          topLeft.y + cell * (.5 + AGENT_HEIGHT * .44), outlineColor)) return;
       const attributes = Spawner.unitDisplayAttributes(agent);
       if (birth || cell < 8 || !Spawner.combatAttributeKeys(attributes).length || !combatAttributeArt.ready(agent.tribe || "bean")) {
         drawAgentAppearanceBody(ctx, now, agent, cell, topLeft, renderPosition, birth, outlineColor);
@@ -8363,23 +8389,35 @@
         const recoil = hit && age >= 0 && age < .16 ? Math.sin(age / .16 * Math.PI) * 7 * width / 1200 : 0;
         const directionX = distance ? (opponent.x - point.x) / distance : facing;
         const directionY = distance ? (opponent.y - point.y) / distance : 0;
-        const x = point.x + directionX * (lunge - recoil), y = point.y + directionY * (lunge - recoil);
+        const originalX = point.x + directionX * (lunge - recoil), originalY = point.y + directionY * (lunge - recoil);
+        const evade = agent.health > 0 && Spawner.combatDodgePose?.(combatVfxFrame, positions, agent.id, state.simSeconds, idleMotion.matches);
+        const x = originalX + (evade?.dx || 0), y = originalY + (evade?.dy || 0);
         vfxPositions.set(String(agent.id), { ...point, x, y });
         const bodyY = y - point.height * .5;
         context.save();
         context.fillStyle = "#13251e3d"; context.beginPath(); context.ellipse(x, y, Math.max(4, point.width * .28), Math.max(2, point.height * .035), 0, 0, Math.PI * 2); context.fill();
         const frozen = hit && age >= 0 && age < .055;
-        const visual = { ...agent, facing, hurtStartedAt: Number.isFinite(agent.hurtStartedAt) ? agent.hurtStartedAt + (frozen ? age : 0) : agent.hurtStartedAt,
+        const visual = { ...agent, facing, hurtStartedAt: Number.isFinite(agent.hurtStartedAt) ? agent.hurtStartedAt + (frozen && (agent.tribe || "bean") !== "bean" ? age : 0) : agent.hurtStartedAt,
           combat: { ...agent.combat, side: facing > 0 ? 1 : 0 }, attack: attack ? { ...attack, directionX: facing,
             startedAt: attack.startedAt + (frozen ? age : 0), hitAt: attack.hitAt + (frozen ? age : 0), endsAt: attack.endsAt + (frozen ? age : 0),
             meleeContacts: Array.isArray(attack.meleeContacts) ? attack.meleeContacts.map(at => at + (frozen ? age : 0)) : undefined } : null };
         const appearancePose = appearancePoses.get(String(agent.id));
-        context.save(); context.translate(x, y); context.scale(appearancePose ? 1 : point.scale, appearancePose ? 1 : point.scale);
-        if (agent.combat.stunnedUntil > state.simSeconds) context.globalAlpha = .65;
-        if (agent.species) drawCombatCreature(context, visual, 0, 0, cell);
-        else if (!appearancePose || !appearanceWorld.draw(context, visual, appearancePose, { x: 0, y: 0 }, cell, facing < 0, pixelRatio))
-          drawAgentAppearanceLayer(context, now, visual, cell, { x:-cell / 2, y:-cell * (.5 + AGENT_HEIGHT * .44) }, null, null, null);
-        context.restore();
+        // Reuse the exact live body renderer for every echo, including unified
+        // appearance, dominant forms and creatures. Never author per-unit art.
+        const drawDodgeBody = (atX, atY) => {
+          context.save(); context.translate(atX, atY); context.scale(appearancePose ? 1 : point.scale, appearancePose ? 1 : point.scale);
+          if (agent.combat.stunnedUntil > state.simSeconds) context.globalAlpha *= .65;
+          if (agent.species) drawCombatCreature(context, visual, 0, 0, cell);
+          else if (!(Spawner.beanHeldHurtSource?.(visual) && drawAgentHeldHurt(context, visual, cell, 0, 0, null, appearancePose ? 1 : point.scale)) &&
+              (!appearancePose || !appearanceWorld.draw(context, visual, appearancePose, { x: 0, y: 0 }, cell, facing < 0, pixelRatio)))
+            drawAgentAppearanceLayer(context, now, visual, cell, { x:-cell / 2, y:-cell * (.5 + AGENT_HEIGHT * .44) }, null, null, null);
+          context.restore();
+        };
+        if (evade) {
+          Spawner.drawCombatDodgeTrails?.(context, { ...evade, x: originalX, y: originalY });
+          Spawner.drawCombatDodgeGhosts?.(context, evade, (dx, dy) => drawDodgeBody(originalX + dx, originalY + dy));
+        }
+        drawDodgeBody(x, y);
         const barWidth = clamp(point.width * .6, 32, 100), barY = y + 8;
         context.fillStyle = "#182323"; context.fillRect(x - barWidth / 2, barY, barWidth, 5);
         context.fillStyle = agent.combat.side ? "#e18c82" : "#83d6c1";
@@ -8408,8 +8446,18 @@
         context.restore();
       }
       // Only this modal receives V4 artwork. Map dust and world effects are unchanged.
+      const defenseCommands = Spawner.drawDetailDefenseEffect ? detailCombatVfx.defenseCommands(vfxPositions, state.simSeconds) : [];
+      const defenseImages = new Map(), replacedDefenseIds = new Set();
+      for (const command of defenseCommands) {
+        let image = detailVfxImages.get(command.image);
+        if (!image) { image = new Image(); image.src = assetSource(command.image); detailVfxImages.set(command.image, image); }
+        defenseImages.set(command.eventId, image);
+        if (Spawner.detailDefenseImageReady(image, command)) replacedDefenseIds.add(command.eventId);
+      }
       const drawnImpacts = new Set();
       for (const command of detailCombatVfx.commands(arenaUnits, vfxPositions, state.simSeconds, cell, { scope: combatWatch.id, width, height })) {
+        // Replace only the defended event, and only after its new image is ready.
+        if (command.kind === "impact" && replacedDefenseIds.has(command.eventId)) continue;
         let image = detailVfxImages.get(command.image);
         if (!image) {
           image = new Image(); image.src = assetSource(command.image);
@@ -8442,7 +8490,8 @@
       // sheet must not duplicate loaded art or suppress an unrepresented cue.
       for (const { impact, age, primary, x, bodyY, lineWidth } of fallbackImpacts) {
         const defense = impact.kind === "block" || impact.kind === "parry";
-        if (!defense && state.combatVfx?.version === 1 && drawnImpacts.has(impact.eventId)) continue;
+        if (defenseCommands.some(command => command.eventId === impact.eventId) ||
+          !defense && state.combatVfx?.version === 1 && drawnImpacts.has(impact.eventId)) continue;
         context.save(); context.globalAlpha = 1 - age / .25;
         context.strokeStyle = defense ? "#a6e4fa" : "#ffe1a0";
         context.lineWidth = lineWidth; context.beginPath();
@@ -8450,10 +8499,14 @@
         else context.arc(x, bodyY, 14 + age * 30, 0, primary === "carapace" ? Math.PI * 2 : Math.PI);
         context.stroke(); context.restore();
       }
+      for (const command of defenseCommands) if (!Spawner.drawDetailDefenseEffect(context, command, defenseImages.get(command.eventId), { reducedMotion: idleMotion.matches }))
+        Spawner.drawDetailDefenseFallback(context, command);
       const vitalCommands = detailCombatVfx.vitalCommands(arenaUnits, vfxPositions, state.simSeconds,
         { scope: combatWatch.id, width, height });
       for (const command of vitalCommands) Spawner.drawDetailVitalEffect(context, command,
         { width, height, reducedMotion: idleMotion.matches });
+      Spawner.drawDetailDefenseLabels?.(context, defenseCommands, { width, height, reducedMotion: idleMotion.matches,
+        vitals: vitalCommands, reservedLabels: dodgeLabels });
       for (const label of dodgeLabels) {
         // Keep independently triggered healing/bleed amounts readable as well.
         // Reserve a lane above their existing labels, or below the health bar

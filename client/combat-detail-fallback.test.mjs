@@ -193,7 +193,9 @@ test("missing detail projectile art retains a fallback at the authoritative flig
     assert.ok(Math.abs(y - flight.y - Math.sin(flight.angle) * flight.size * .25) < 1e-8);
     assert.ok(radius >= 2 && radius <= 6, "fallback stays readable without becoming a large burst");
     assert.equal(draw(1.25, [launch, launch]).flights.length, 1, "replayed launch does not duplicate flight");
-    assert.equal(draw(2, [launch]).flights.length, 0, "arrival ends flight without inventing damage");
+    assert.equal(draw(2, [launch]).flights.length, 1, "fallback remains visible while the outcome is pending");
+    const closed = draw(2.1, [launch, { ...launch, id: "cancel", kind: "projectile-cancel", at: 2.1 }]);
+    assert.equal(closed.flights.length, 0); assert.equal(closed.hits.length, 0);
   }
 });
 
@@ -225,7 +227,10 @@ test("each missing flight keeps its own fallback and authoritative outcomes clos
     assert.equal(result.flights.length, 1, kind + " closes only the matching flight");
     assert.equal(result.art.length, 0);
     assert.equal(result.hits.length, 0, "zero-damage resolution adds no impact fallback");
-    assert.equal(draw(2.2, [launch, second, outcome]).flights.length, 0);
+    assert.equal(draw(2.2, [launch, second, outcome]).flights.length, 1,
+      "the second shot's ETA is not a terminal result");
+    assert.equal(draw(2.2, [launch, second, outcome, { ...second, id: "second-cancel", at: 2.2,
+      kind: "projectile-cancel", amount: 0 }]).flights.length, 0);
   }
 });
 

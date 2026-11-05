@@ -9,11 +9,11 @@ function multiply(a, b) {
   return [a[0]*b[0]+a[2]*b[1], a[1]*b[0]+a[3]*b[1], a[0]*b[2]+a[2]*b[3],
     a[1]*b[2]+a[3]*b[3], a[0]*b[4]+a[2]*b[5]+a[4], a[1]*b[4]+a[3]*b[5]+a[5]];
 }
-function withStage(run, { width = 1040, height = 480, dpr = 2 } = {}) {
+function withStage(run, { width = 1040, height = 480, dpr = 2, reduced = false } = {}) {
   const saved = { window: globalThis.window, Image: globalThis.Image, assets: globalThis.SpawnerAssets };
   const unavailable = new Set(), calls = [], stack = [];
   let matrix = [1,0,0,1,0,0];
-  globalThis.window = { matchMedia: () => ({ matches: false }), devicePixelRatio: dpr };
+  globalThis.window = { matchMedia: () => ({ matches: reduced }), devicePixelRatio: dpr };
   globalThis.Image = class {
     set src(value) { this.source = value; }
     get src() { return this.source; }
@@ -125,6 +125,29 @@ test("missing legacy art also keeps the fallback on the approved path without in
     sameHead(missing, loaded, "all flight art unavailable");
     assert.equal(missing[0].kind, "arc");
     trial.time = 2; trial.projectiles = [];
-    assert.equal(flights(draw(trial, 1200)).length, 0, "arrival creates no flight or impact");
+    assert.equal(flights(draw(trial, 1200)).length, 1,
+      "the journal keeps the pending flight even if the legacy transport object was already removed");
+    trial.vfx.events.push({ id: "cancel-shot", kind: "projectile-cancel", sourceId: source.id,
+      targetId: "right", amount: 0, at: 2.1, projectileId: "shot" });
+    trial.time = 2.1;
+    assert.equal(flights(draw(trial, 1300)).length, 0, "only the received result closes it, without an impact");
   });
+});
+
+test("reduced motion retains only visible journal flights until their terminal result", () => {
+  for (const kind of ["block", "parry", "dodge", "projectile-cancel"]) withStage(({ draw }) => {
+    const { trial, shoot, source, target } = setup("spore");
+    draw(trial); shoot(); draw(trial);
+    trial.projectiles = []; trial.time = 2.05;
+    assert.equal(flights(draw(trial, 1100)).length, 1, "reduced motion does not hide an unresolved flight");
+    const original = trial.vfx.events[0];
+    trial.vfx.events[0] = { ...original, sourceId: null };
+    assert.equal(flights(draw(trial, 1150)).length, 0, "redacted origin cannot be reconstructed from the roster");
+    trial.vfx.events[0] = original;
+    assert.equal(flights(draw(trial, 1170)).length, 1);
+    trial.vfx.events.push({ id: "terminal", kind, sourceId: source.id, targetId: target.id,
+      amount: 0, projectileId: "shot", at: 2.1 });
+    trial.time = 2.1;
+    assert.equal(flights(draw(trial, 1200)).length, 0, kind + " closes the shot without a damage burst");
+  }, { reduced: true });
 });
