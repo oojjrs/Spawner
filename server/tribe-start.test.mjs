@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { createGame } from "./game.mjs";
 import { PLAYER_STARTING_POINTS, TRIBE_STARTING_UNITS } from "./tribe-start.mjs";
+import { NEST_LEVELS, nestUpgradeCost } from "./nests.mjs";
 
 function fixture(tribe = "bean", player = true) {
   const colony = { id:1, ownerId:player ? "player" : "rival", tribe, x:40, y:40,
@@ -67,4 +68,16 @@ test("AI 부족에는 새 게임과 기존 저장 모두 지원금을 지급하�
   assert.equal(game.snapshot().evolutionPoints,0);
   const legacy=JSON.parse(game.save());delete legacy.state.startingPointsGranted;legacy.state.evolutionPoints=7;
   assert.equal(createGame(environment,colony,JSON.stringify(legacy)).snapshot().evolutionPoints,7);
+});
+
+test("시작 지원금만으로는 어느 부족도 바로 성장하지 못하고 비용은 현재 보관한도 안에 있다",()=>{
+  for(const tribe of ["bean","spore","pebble","spring"]){
+    const {game}=fixture(tribe,true);
+    assert.equal(game.snapshot().evolutionPoints,PLAYER_STARTING_POINTS,tribe);
+    assert.ok(nestUpgradeCost(1,tribe)>PLAYER_STARTING_POINTS,tribe);
+    assert.throws(()=>game.command({type:"upgrade"}),/진화 포인트/,tribe);
+    assert.equal(game.snapshot().nestLevel,1,tribe);
+    assert.equal(game.snapshot().evolutionPoints,PLAYER_STARTING_POINTS,tribe);
+    for(const level of [1,2,3])assert.ok(nestUpgradeCost(level,tribe)<=NEST_LEVELS[level-1].pointCapacity,tribe+":"+level);
+  }
 });

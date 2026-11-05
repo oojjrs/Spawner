@@ -16,24 +16,24 @@ function fixture(tribe,level,points) {
   return game;
 }
 
-test("몽돌만 15·300·1500포인트로 성장하며 부족하면 차감하지 않고 다른 세 종족은 표준 비용을 쓴다",()=>{
-  for (const [tribe,costs] of [["pebble",[15,300,1500]],["bean",[20,400,2000]],
-    ["spring",[20,400,2000]],["spore",[20,400,2000]]]) {
+test("몽돌만 60·300·1500포인트로 성장하며 부족하면 차감하지 않고 다른 세 종족은 표준 비용을 쓴다",()=>{
+  for (const [tribe,costs] of [["pebble",[60,300,1500]],["bean",[80,400,2000]],
+    ["spring",[80,400,2000]],["spore",[80,400,2000]]]) {
     for (const [index,cost] of costs.entries()) {
-      const level=index+1,game=fixture(tribe,level,cost-.1);
+      const level=index+1,game=fixture(tribe,level,cost-1);
       assert.throws(()=>game.command({type:"upgrade"}),/진화 포인트/,tribe);
-      assert.equal(game.snapshot().evolutionPoints,cost-.1,tribe);
+      assert.equal(game.snapshot().evolutionPoints,cost-1,tribe);
       assert.equal(game.snapshot().nestLevel,level,tribe);
-      const saved=JSON.parse(game.save()); saved.state.evolutionPoints=cost+1.2;
+      const saved=JSON.parse(game.save()); saved.state.evolutionPoints=cost+2;
       game.restore(JSON.stringify(saved));
       const agents=game.agents.map(agent=>({id:agent.id,slots:[...agent.slots],lifespan:agent.lifespan}));
       game.command({type:"upgrade"});
-      assert.equal(game.snapshot().evolutionPoints,1.2,tribe);
+      assert.equal(game.snapshot().evolutionPoints,2,tribe);
       assert.equal(game.snapshot().nestLevel,level+1,tribe);
       assert.equal(game.snapshot().nestHealth,[200,400,800][index]-17,tribe);
       assert.deepEqual(game.agents.map(agent=>({id:agent.id,slots:agent.slots,lifespan:agent.lifespan})),agents);
       game.restore(game.save());
-      assert.equal(game.snapshot().evolutionPoints,1.2,tribe);
+      assert.equal(game.snapshot().evolutionPoints,2,tribe);
       assert.equal(game.snapshot().nestLevel,level+1,tribe);
     }
   }
