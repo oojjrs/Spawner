@@ -84,3 +84,7 @@ test("원거리 key-only 몸체와 탄체도 동일한 DNA 우선순위를 따�
   near(unitRangedDisplaySize(dna) / unitRangedDisplaySize(base), 1.05);
   near(unitRangedProjectile(dna).sourceScale / unitRangedProjectile(base).sourceScale, 1.05);
 });
+
+test("실제 엔진이 교전 상태를 해제한 생존자와 사망자를 계속 그린다", () => {
+  assert.ok(renderGrowth({combat:null,side:0,health:0},{combat:null,side:1}).length>0);
+});

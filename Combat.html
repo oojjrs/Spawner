@@ -156,7 +156,73 @@ function dnaHealAllocations(source, agents, team, distance) {
 
 return { DNA_ACTION_RULES, dnaAttackMode, dnaProjectileDuration, dnaHealTarget, dnaHealAmount, dnaProjectileValid, dnaAttackStats, dnaHealAllocations };
 })();
+modules["server/dna-combat-stats.mjs"] = (() => {
+const DNA_COMBAT_RULES = Object.freeze({
+  powerCurve: "linear", powerBase: 2, powerGain: 2, powerKnee: 2,
+  rangedPowerBase: 1.4, rangedPowerGain: 1.4, rangedPowerKnee: 2,
+  rangedAttackRateBase: .5, rangedHasteCap: 7, rangedHasteKnee: 70,
+  healthBase: 10, healthPerPoint: 10, armorPerPoint: 1, armorCap: 1, armorKnee: 100,
+  flatPenPerPoint: 1, percentPenCap: .8, percentPenKnee: 4,
+  attackRateBase: .5, hasteCap: 7, hasteKnee: 70, maxActionRate: 4,
+  windupBase: .3, focusPerPoint: .02, windupMinimum: .08,
+  hitGapBase: .12, hitSpeedPerPoint: .005, hitGapMinimum: .06, recovery: 0,
+  defensePreparation: 0, reactionCooldown: 0, counterCooldown: 0,
+  followupBase: .5, comboPerPoint: .05, followupCap: 1,
+  critCap: .75, critKnee: 18.75, critMultiplierBase: 1.5, critMultiplierCap: 4, critPowerKnee: 25,
+  accuracyCap: .6, accuracyKnee: 20, dodgeCap: .6, dodgeKnee: 20,
+  parryCap: .6, parryKnee: 15, blockCap: .75, blockKnee: 15,
+  blockReductionBase: .5, blockReductionCap: .9, blockPowerKnee: 10,
+  counterCap: 1, counterKnee: 10, counterMultiplierBase: 1, counterMultiplierCap: 2,
+  counterPowerKnee: 10, counterWindup: .12,
+  tenacityCap: .75, tenacityKnee: 15, stunCap: .3, stunKnee: 10,
+  stunDurationBase: .25, stunDurationPerPoint: .05, stunDurationCap: 1, stunImmunity: 2,
+  drainCap: .2, drainKnee: 20, jitter: .2
+});
+
+function dnaCombatStats(counts, weights, inputRules) {
+  const rules = inputRules || DNA_COMBAT_RULES, n = weights, c = counts;
+  const capped = (count, cap, knee) => count ? Math.min(cap, cap * count / (knee || 1)) : 0;
+  const powerGain = (count, gain, knee) => rules.powerCurve === "log" ?
+    gain * Math.log1p(count / knee) / Math.log1p(1 / knee) : gain * count;
+  const melee = !!c.blade, ranged = !!c.secretion, attack = melee || ranged;
+  const meleePower = melee ? rules.powerBase * c.blade + powerGain(n.power || 0, rules.powerGain, rules.powerKnee) : 0;
+  const rangedPower = ranged ? rules.rangedPowerBase * c.secretion + powerGain(n.rangedPower || 0, rules.rangedPowerGain, rules.rangedPowerKnee) : 0;
+  const meleeSpeed = melee ? Math.min(rules.maxActionRate, rules.attackRateBase * (1 + capped(n.speed || 0, rules.hasteCap, rules.hasteKnee))) : 0;
+  const rangedSpeed = ranged ? Math.min(rules.maxActionRate, rules.rangedAttackRateBase * (1 + capped(n.rangedSpeed || 0, rules.rangedHasteCap, rules.rangedHasteKnee))) : 0;
+  return { bladeCount: c.blade || 0, secretionCount: c.secretion || 0, healerCount: c.healer || 0,
+    melee, ranged, meleePower, meleeSpeed, rangedPower, rangedSpeed, healer: !!n.healer,
+    ...(rules.recovery ? { recovery: rules.recovery } : {}),
+    health: rules.healthBase + rules.healthPerPoint * (n.health || 0),
+    power: melee ? meleePower : rangedPower, hits: attack ? 1 + (n.combo || 0) : 0, speed: melee ? meleeSpeed : rangedSpeed,
+    armor: rules.armorPerPoint * ((n.armor || 0) + (n.carapace || 0)),
+    parry: 100 * capped(n.parry || 0, rules.parryCap, rules.parryKnee),
+    block: 100 * capped((n.carapace || 0) + (n.block || 0), rules.blockCap, rules.blockKnee),
+    evasion: 100 * capped((n.evasion || 0) + (n.legs || 0), rules.dodgeCap, rules.dodgeKnee),
+    comboPower: attack ? 100 * Math.min(rules.followupCap, rules.followupBase + rules.comboPerPoint * (n.comboPower || 0)) : 0,
+    critical: attack ? 100 * capped(n.critical || 0, rules.critCap, rules.critKnee) : 0,
+    criticalPower: attack ? 100 * (rules.critMultiplierBase + capped(n.criticalPower || 0, rules.critMultiplierCap - rules.critMultiplierBase, rules.critPowerKnee)) : 0,
+    accuracy: attack ? 100 * capped(n.accuracy || 0, rules.accuracyCap, rules.accuracyKnee) : 0,
+    penetration: attack ? rules.flatPenPerPoint * (n.penetration || 0) : 0,
+    ...(n.percentPen ? { armorPenetration: capped(n.percentPen, rules.percentPenCap, rules.percentPenKnee) } : {}),
+    blockPower: 100 * (rules.blockReductionBase + capped(n.blockPower || 0, rules.blockReductionCap - rules.blockReductionBase, rules.blockPowerKnee)),
+    counter: attack ? 100 * capped(n.counter || 0, rules.counterCap, rules.counterKnee) : 0,
+    counterPower: attack ? 100 * (rules.counterMultiplierBase + capped(n.counterPower || 0, rules.counterMultiplierCap - rules.counterMultiplierBase, rules.counterPowerKnee)) : 0,
+    tenacity: 100 * capped(n.tenacity || 0, rules.tenacityCap, rules.tenacityKnee), reduction: Math.min(40, 2 * (n.reduction || 0)),
+    healing: 10 * (n.healing || 0), stun: attack ? 100 * capped(n.stun || 0, rules.stunCap, rules.stunKnee) : 0,
+    stunTime: attack && n.stun ? Math.min(rules.stunDurationCap, rules.stunDurationBase + rules.stunDurationPerPoint * (n.stunTime || 0)) : 0,
+    bleed: attack ? Math.min(75, 5 * (n.bleed || 0)) : 0, bleedPower: attack && n.bleed ? 1 + (n.bleedPower || 0) : 0,
+    area: attack ? Math.min(5, n.area || 0) : 0, areaPower: attack && n.area ? Math.min(75, 35 + 5 * (n.areaPower || 0)) : 0,
+    lifesteal: attack ? 100 * capped(n.lifesteal || 0, rules.drainCap, rules.drainKnee) : 0,
+    reflection: Math.min(30, 3 * (n.reflection || 0)), regeneration: .1 * (n.regeneration || 0),
+    comboSpeed: attack ? Math.max(rules.hitGapMinimum, rules.hitGapBase - rules.hitSpeedPerPoint * (n.comboSpeed || 0)) : 0,
+    focus: attack ? Math.max(rules.windupMinimum, rules.windupBase - rules.focusPerPoint * (n.focus || 0)) : 0 };
+}
+
+return { DNA_COMBAT_RULES, dnaCombatStats };
+})();
 modules["server/dna.mjs"] = (() => {
+const { dnaCombatStats } = modules["server/dna-combat-stats.mjs"];
+
 const ATTRIBUTE_DNA = (() => {
   const directions = [[1,0],[0,1],[-1,1],[-1,0],[0,-1],[1,-1]];
   const colors = {organ:'#edba87',action:'#8fbbed',stat:'#87d7b8'};
@@ -215,13 +281,16 @@ const ATTRIBUTE_DNA = (() => {
     return {valid:!issue,reason:issue,nodes,paths,closed,occupied,outside};
   }
   function price(pieces){return pieces.reduce((sum,piece)=>{const gene=lookup.get(piece.gene),grade=piece.grade===undefined?1:piece.grade;return sum+Math.ceil((gene?.price||0)*(grade+2)/3);},0);}
+  function cost(pieces){return 3+price(pieces);}
   function counts(pieces){const result={};for(const piece of pieces)result[piece.gene]=(result[piece.gene]||0)+1;return result;}
   function weights(pieces){const result={};for(const piece of pieces)result[piece.gene]=(result[piece.gene]||0)+(piece.grade===undefined?1:piece.grade);return result;}
   function stats(pieces){
-    const n=weights(pieces),c=counts(pieces),melee=!!c.blade,ranged=!!c.secretion,attack=melee||ranged,gather=!!c.gather,
-      meleePower=melee?2*c.blade+2*(n.power||0):0,meleeSpeed=melee?Math.min(4,.5+.05*(n.speed||0)):0,
-      rangedPower=ranged?1.4*c.secretion+1.4*(n.rangedPower||0):0,rangedSpeed=ranged?Math.min(4,.5+.05*(n.rangedSpeed||0)):0;
-    return {gatherCount:c.gather||0,bladeCount:c.blade||0,antennaCount:c.antenna||0,healerCount:c.healer||0,secretionCount:c.secretion||0,melee,ranged,meleePower,meleeSpeed,rangedPower,rangedSpeed,healer:!!n.healer,health:10+10*(n.health||0),power:melee?meleePower:rangedPower,hits:attack?1+(n.combo||0):0,speed:melee?meleeSpeed:rangedSpeed,armor:(n.armor||0)+(n.carapace||0),parry:Math.min(60,4*(n.parry||0)),block:Math.min(75,5*(n.carapace||0)+5*(n.block||0)),evasion:Math.min(60,3*(n.evasion||0)+3*(n.legs||0)),capacity:gather?c.gather+(n.capacity||0):0,harvest:gather?Math.min(c.gather+(n.harvest||0),c.gather+(n.capacity||0)):0,harvestTime:gather?4/(1+.1*(n.harvestSpeed||0)):0,movement:.25+.04*(n.movement||0),vision:Math.min(12,1+(c.antenna||0)+.5*(n.vision||0)),scale:1+.01*pieces.length,roaming:!!n.antenna,comboPower:attack?Math.min(100,50+5*(n.comboPower||0)):0,critical:attack?Math.min(75,4*(n.critical||0)):0,criticalPower:attack?Math.min(400,150+10*(n.criticalPower||0)):0,accuracy:attack?Math.min(60,3*(n.accuracy||0)):0,penetration:attack?(n.penetration||0):0,blockPower:Math.min(90,50+4*(n.blockPower||0)),counter:attack?Math.min(100,10*(n.counter||0)):0,counterPower:attack?Math.min(200,100+10*(n.counterPower||0)):0,tenacity:Math.min(75,5*(n.tenacity||0)),reduction:Math.min(40,2*(n.reduction||0)),loadSpeed:gather?Math.min(100,75+5*(n.loadSpeed||0)):0,healing:10*(n.healing||0),stun:attack?Math.min(30,3*(n.stun||0)):0,stunTime:attack&&n.stun?Math.min(1,.25+.05*(n.stunTime||0)):0,bleed:attack?Math.min(75,5*(n.bleed||0)):0,bleedPower:attack&&n.bleed?1+(n.bleedPower||0):0,area:attack?Math.min(5,n.area||0):0,areaPower:attack&&n.area?Math.min(75,35+5*(n.areaPower||0)):0,lifesteal:attack?Math.min(20,n.lifesteal||0):0,reflection:Math.min(30,3*(n.reflection||0)),regeneration:.1*(n.regeneration||0),comboSpeed:attack?Math.max(.06,.12-.005*(n.comboSpeed||0)):0,focus:attack?Math.max(.08,.3-.02*(n.focus||0)):0};
+    const n=weights(pieces),c=counts(pieces),gather=!!c.gather;
+    return {...dnaCombatStats(c,n),gatherCount:c.gather||0,antennaCount:c.antenna||0,
+      capacity:gather?c.gather+(n.capacity||0):0,harvest:gather?Math.min(c.gather+(n.harvest||0),c.gather+(n.capacity||0)):0,
+      harvestTime:gather?4/(1+.1*(n.harvestSpeed||0)):0,movement:.25+.04*(n.movement||0),
+      vision:Math.min(12,1+(c.antenna||0)+.5*(n.vision||0)),scale:1+.01*pieces.length,roaming:!!n.antenna,
+      loadSpeed:gather?Math.min(100,75+5*(n.loadSpeed||0)):0};
   }
   function clonePiece(piece){return {gene:piece.gene,rotation:piece.rotation,grade:piece.grade,shape:piece.shape.slice()};}
   function validate(value){
@@ -240,7 +309,7 @@ const ATTRIBUTE_DNA = (() => {
     return {version:3,pieces,budget:Math.floor(value.budget),level};
   }
 
-  return {genes,catalog,lookup,trace,price,counts,weights,stats,validate,clonePiece,step,key,shape,route,boardRadius,inside};
+  return {genes,catalog,lookup,trace,price,cost,counts,weights,stats,validate,clonePiece,step,key,shape,route,boardRadius,inside};
 })();
 
 return { ATTRIBUTE_DNA };
@@ -476,7 +545,7 @@ function combatProfile(agent) {
     const attackInterval = selected.speed > 0 ? 1 / selected.speed : Infinity;
     return { primary: selected.power > 0 ? "blade" : null, attackPower: selected.power, defense: dna.armor,
       armorPenetration: 0, attackSpeed: selected.speed, attackInterval, windup: dna.focus,
-      recovery: Math.max(0, attackInterval - dna.focus - Math.max(0, dna.hits - 1) * dna.comboSpeed) };
+      recovery: Math.max(dna.recovery || 0, attackInterval - dna.focus - Math.max(0, dna.hits - 1) * dna.comboSpeed) };
   }
   const base = unitCombatStats(agent.species || agent.tribe);
   const equipped = key => Array.isArray(agent.slots) ? agent.slots.includes(key) : agent.attributes?.[key] > 0;
@@ -498,15 +567,16 @@ function combatProfile(agent) {
     recovery: (primary === "blade" ? .3 : .45) * timingScale };
 }
 
-function combatDamage(attacker, target, variation) {
+function combatDamage(attacker, target, variation, rules) {
   const source = combatProfile(attacker), defense = combatProfile(target);
   const multiplier = Number.isFinite(variation) ? .8 + .4 * Math.max(0, Math.min(1, variation)) : 1;
   if (attacker.stats?.dna || target.stats?.dna) {
     const dna = attacker.stats?.dna, heavy = !dna && attacker.attack?.heavy === true;
-    const armor = Math.max(0, defense.defense - (dna?.penetration || 0)) * (dna ? 1 : 1 - Math.min(.9, source.armorPenetration + (heavy ? .3 : 0)));
+    const armor = Math.max(0, defense.defense - (dna?.penetration || 0)) * (dna ? 1 - (dna.armorPenetration || 0) : 1 - Math.min(.9, source.armorPenetration + (heavy ? .3 : 0)));
     const power = source.attackPower * (dna ? attacker.attack?.counter ? dna.counterPower / 100 : 1 :
       (source.primary === "piercing" ? 1.25 : 1) * (heavy ? 1.5 : 1));
-    return Math.max(0, power * multiplier * 100 / (100 + armor) * (1 - (target.stats?.dna?.reduction || 0) / 100));
+    const reduction = (rules?.armorCap ?? 1) * armor / ((rules?.armorKnee ?? 100) + armor);
+    return Math.max(0, power * multiplier * (1 - reduction) * (1 - (target.stats?.dna?.reduction || 0) / 100));
   }
   const heavy = attacker.attack?.heavy === true;
   const penetration = Math.min(.9, source.armorPenetration + (heavy ? .3 : 0));
@@ -3196,8 +3266,39 @@ function snapshotCombatVfx(environment, time, visibility) {
 
 return { COMBAT_VFX_JOURNAL_LIMIT, COMBAT_VFX_JOURNAL_SECONDS, combatVfxToken, recordCombatVfx, snapshotCombatVfx };
 })();
+modules["server/creature-attack-role.mjs"] = (() => {
+const { DNA_ACTION_RULES } = modules["server/dna-actions.mjs"];
+
+const melee = { role: "melee", melee: true, ranged: false };
+const hybrid = { role: "hybrid", melee: true, ranged: true };
+const CREATURE_ATTACK_ROLES = Object.freeze(Object.fromEntries([
+  ["flower-tail-bird", { role: "ranged", melee: true, ranged: true }],
+  ["dew-rabbit", melee], ["soil-mole", hybrid], ["bundle-snail", melee],
+  ["cotton-sheep", melee], ["rolling-acorn", melee], ["bubble-toad", hybrid],
+  ["snare-vine", melee], ["spiny-back-beetle", hybrid], ["soil-boar", melee],
+  ["vine-turtle", hybrid], ["shadow-weasel", melee], ["talon-owl", melee],
+  ["spring-keeper", melee], ["lantern-keeper", { role: "ranged", melee: false, ranged: true }],
+  ["old-garden-snail", melee], ["walking-forest", melee], ["white-paw", melee],
+  ["spiny-back-leader", hybrid]
+].map(([key, value]) => [key, Object.freeze({ ...value })])));
+
+function creatureAttackRole(species) {
+  return CREATURE_ATTACK_ROLES[species] || null;
+}
+
+function creatureAttackMode(agent, separation) {
+  const role = creatureAttackRole(agent.species);
+  if (!role || !Number.isFinite(separation) || separation < 0) return null;
+  if (role.melee && separation <= DNA_ACTION_RULES.meleeRange) return "melee";
+  if (role.ranged && separation <= DNA_ACTION_RULES.rangedRange) return "ranged";
+  return null;
+}
+
+return { CREATURE_ATTACK_ROLES, creatureAttackRole, creatureAttackMode };
+})();
 modules["server/combat.mjs"] = (() => {
 const { DNA_ACTION_RULES, dnaAttackMode, dnaProjectileDuration, dnaHealTarget, dnaHealAmount, dnaHealAllocations, dnaProjectileValid } = modules["server/dna-actions.mjs"];
+const { creatureAttackRole, creatureAttackMode } = modules["server/creature-attack-role.mjs"];
 const { dnaCanMove } = modules["server/dna-unit.mjs"];
 const { worldSize } = modules["server/world-size.mjs"];
 const { dropCarriedResources } = modules["server/resources.mjs"];
@@ -3261,6 +3362,7 @@ function colonyDefenseTarget(agent, target, allies, structures) {
 function canPursueCombat(agent, target, time, defending) {
   if (agent === target || combatTeam(agent) === combatTeam(target) || target.health <= 0 || target.hidden ||
       creatureSpawning(agent, time) || creatureSpawning(target, time) ||
+      agent.birth && time < agent.birth.readyAt || target.birth && time < target.birth.readyAt ||
       time < (agent.escapeUntil || 0) || time < (target.escapeUntil || 0) || agent.retreat || combatDisposition(agent) === "peaceful") return false;
   if (agent.species && target.species) return false;
   if (target.combat) return target.combat.teams[1 - target.combat.side] === combatTeam(agent);
@@ -3276,6 +3378,14 @@ function createCombat(environment) {
   const processed = new Map(), projectiles = new Set();
   const attackCauses = new WeakMap(), bleedCauses = new WeakMap();
   let projectileTime = -Infinity;
+  function attackStats(agent) {
+    if (agent.stats?.dna) return agent.stats.dna;
+    const role = creatureAttackRole(agent.species);
+    if (!role?.ranged) return null;
+    const profile = combatProfile(agent);
+    return { melee: role.melee, ranged: true, focus: profile.windup, rangedSpeed: profile.attackSpeed,
+      hits: 1, comboSpeed: 0, accuracy: 0, critical: 0, lifesteal: 0, stun: 0, area: 0, bleed: 0 };
+  }
   function entries() {
     if (environment.unitIndex) return environment.unitIndex.entries();
     return [...environment.games.values()].flatMap(game => game.agents.map(agent => ({ agent, game })))
@@ -3458,12 +3568,13 @@ function createCombat(environment) {
   }
 
   function beginAttack(attacker, target, time, counter) {
-    const combat = attacker.combat, mode = attacker.stats?.dna ? dnaAttackMode(attacker.stats.dna, 0) : "melee";
+    const combat = attacker.combat, mode = attacker.stats?.dna ? dnaAttackMode(attacker.stats.dna, 0) :
+      creatureAttackMode(attacker, 0) || "melee";
     const profile = combatProfile({ ...attacker, attack: { attackMode: mode } });
     if (!counter) combat.attackCount++;
     if (attacker.stats?.dna && !profile.attackSpeed) { combat.nextAttackAt = Infinity; return; }
     const heavy = !counter && profile.primary === "piercing" && combat.attackCount % 3 === 0;
-    const windup = counter ? .12 : profile.windup + (heavy ? .15 : 0);
+    const windup = counter ? (environment.combatRules?.counterWindup ?? .12) : profile.windup + (heavy ? .15 : 0);
     const timing = CREATURE_ATTACK_TIMINGS[attacker.species] || (attacker.species === "spiny-back-beetle" ? BEETLE_ANIMATIONS.attack :
       { durationMs: AGENT_ATTACK_DURATION * 1000 });
     const duration = windup + profile.recovery;
@@ -3473,6 +3584,11 @@ function createCombat(environment) {
       resolved: false, hit: false, counter, heavy, attackMode: mode };
     if (attacker.stats?.dna) { attacker.attack.hitIndex = 0; attacker.attack.heavy = false; }
     if (attacker.stats?.dna && mode === "melee" && !counter) attacker.attack.meleeContacts = [attacker.attack.hitAt];
+    if (attacker.species && !attacker.stats?.dna && mode === "ranged") {
+      attacker.attack.dnaRanged = true;
+      attacker.attack.launchedAt = attacker.attack.hitAt;
+      attacker.attack.shotLaunches = [attacker.attack.hitAt];
+    }
     const causeId = combatVfxToken(environment, "attack");
     attackCauses.set(attacker.attack, causeId);
     if (!counter) vfx("attack", time, attacker, target, 0, { causeId, mode, endsAt: attacker.attack.hitAt });
@@ -3484,6 +3600,7 @@ function createCombat(environment) {
     attacker.attackStartedAt = time; attacker.animationStartedAt = time;
     attacker.attackTargetId = target.id; attacker.attackHit = false;
     attacker.mode = attacker.species === "spiny-back-beetle" ? "attack" : "fight";
+    if (counter && environment.combatRules?.counterCooldown) attacker.dnaCounterReadyAt = time + environment.combatRules.counterCooldown;
     if (counter) emit(combat, "counter", time, attacker, target, 0, { causeId, mode, endsAt: attacker.attack.hitAt });
   }
 
@@ -3500,12 +3617,12 @@ function createCombat(environment) {
     const random = environment.combatRandom || Math.random;
     attack.resolved = true; attacker.attackHit = true;
     if (defender.health <= 0 || defender.combat?.id !== combat.id) return;
-    let damage = combatDamage(attacker, defender, (environment.damageRandom || Math.random)());
+    let damage = combatDamage(attacker, defender, (environment.damageRandom || Math.random)(), environment.combatRules);
     let reaction = null;
     if (source && attack.hitIndex > 0) damage *= source.comboPower / 100;
     if (random() * 100 < Math.max(0, (shield?.evasion || 0) - (source?.accuracy || 0))) { damage = 0; reaction = "miss"; }
-    else if (!attack.counter && shield && random() * 100 < shield.parry) { damage = 0; reaction = "parry"; }
-    else if (!attack.counter && shield && random() * 100 < shield.block) { damage *= 1 - shield.blockPower / 100; reaction = "block"; }
+    else if (!attack.counter && shield && time >= (defender.dnaReactionReadyAt || 0) && random() * 100 < shield.parry) { damage = 0; reaction = "parry"; }
+    else if (!attack.counter && shield && time >= (defender.dnaReactionReadyAt || 0) && random() * 100 < shield.block) { damage *= 1 - shield.blockPower / 100; reaction = "block"; }
     else if (!shield && !attack.counter) {
       const profile = combatProfile(defender), defense = defender.combat;
       if (time < defense.parryUntil && time >= defense.parryReadyAt && profile.primary === "blade") {
@@ -3514,6 +3631,8 @@ function createCombat(environment) {
         damage = Math.max(1, Math.round(damage * (attack.heavy ? .55 : .2))); defense.blockReadyAt = time + 2.5; reaction = "block";
       }
     }
+    if (["parry", "block"].includes(reaction) && environment.combatRules?.reactionCooldown)
+      defender.dnaReactionReadyAt = time + environment.combatRules.reactionCooldown;
     const critical = !!(damage > 0 && source && random() * 100 < source.critical);
     if (critical) damage *= source.criticalPower / 100;
     attack.damage = damage; attack.hit = damage > 0;
@@ -3530,7 +3649,7 @@ function createCombat(environment) {
     if (source && damage > 0 && defender.health > 0) {
       if (random() * 100 < source.stun && time >= defender.combat.stunImmuneUntil) {
         const duration = source.stunTime * (1 - (shield?.tenacity || 0) / 100);
-        defender.combat.stunnedUntil = time + duration; defender.combat.stunImmuneUntil = time + duration + 2;
+        defender.combat.stunnedUntil = time + duration; defender.combat.stunImmuneUntil = time + duration + (environment.combatRules?.stunImmunity ?? 2);
         defender.attack = null; defender.attackTargetId = null;
         defender.combat.nextAttackAt = Math.max(defender.combat.nextAttackAt, time + duration);
         emit(combat, "stun", time, attacker, defender, damage, { causeId: hitEvent?.id, duration, endsAt: time + duration });
@@ -3548,7 +3667,7 @@ function createCombat(environment) {
     }
     if (!source && attack.heavy && reaction !== "parry" && defender.health > 0 && time >= defender.combat.stunImmuneUntil) {
       const duration = .5 * (1 - (shield?.tenacity || 0) / 100), defense = defender.combat;
-      defense.stunnedUntil = time + duration; defense.stunImmuneUntil = time + duration + 2; defense.parryUntil = 0;
+      defense.stunnedUntil = time + duration; defense.stunImmuneUntil = time + duration + (environment.combatRules?.stunImmunity ?? 2); defense.parryUntil = 0;
       defender.attack = null; defender.attackTargetId = null;
       defense.nextAttackAt = Math.max(defense.nextAttackAt, defense.stunnedUntil);
       defense.cycleStartedAt = defense.nextAttackAt;
@@ -3560,7 +3679,7 @@ function createCombat(environment) {
         { kind: "reflect", at: time, causeId: hitEvent?.id, fromId: defender.id, toId: attacker.id });
     }
     if (defender.health > 0 && attacker.health > 0 && !attack.counter && reaction && reaction !== "miss" &&
-        (shield ? shield.power > 0 && random() * 100 < shield.counter : true)) beginAttack(defender, attacker, time, true);
+        (shield ? shield.power > 0 && time >= (defender.dnaCounterReadyAt || 0) && random() * 100 < shield.counter : true)) beginAttack(defender, attacker, time, true);
     if (source && !attack.counter && attacker.health > 0 && defender.health > 0 && ++attack.hitIndex < source.hits) {
       attack.resolved = false; attack.hitAt = time + source.comboSpeed;
       if (attack.meleeContacts) attack.meleeContacts.push(attack.hitAt);
@@ -3587,12 +3706,24 @@ function createCombat(environment) {
   }
 
   function resolveHit(attacker, target, time) {
+    if (attacker.species && !attacker.stats?.dna && attacker.attack?.attackMode === "ranged") {
+      const attack = attacker.attack, combat = attacker.combat, defense = target.agent.combat;
+      attack.resolved = true; attacker.attackHit = true;
+      if (target.agent.health <= 0 || defense?.id !== combat.id) return;
+      const projectileId = combatVfxToken(environment, "projectile"), causeId = attackCauses.get(attack);
+      vfx("shoot", time, attacker, target.agent, 0, { projectileId, causeId, mode: "ranged", hitIndex: 0,
+        arrivesAt: time, from: { x: attacker.x, y: attacker.y }, to: { x: target.agent.x, y: target.agent.y } });
+      const outcome = projectileHit({ source: attacker, target, attack, hitIndex: 0, vfxId: projectileId }, time) || { damage: 0, kind: "miss" };
+      combat.completedExchanges++; defense.completedExchanges++;
+      emit(combat, outcome.kind, time, attacker, target.agent, outcome.damage, { causeId, mode: "ranged", projectileId });
+      return;
+    }
     if (attacker.stats?.dna || target.agent.stats?.dna) return dnaHit(attacker, target, time);
     const attack = attacker.attack, defender = target.agent, combat = attacker.combat;
     attack.resolved = true; attacker.attackHit = true;
     if (defender.health <= 0 || defender.combat?.id !== combat.id) return;
     const defense = defender.combat, profile = combatProfile(defender);
-    let damage = combatDamage(attacker, defender, (environment.damageRandom || Math.random)());
+    let damage = combatDamage(attacker, defender, (environment.damageRandom || Math.random)(), environment.combatRules);
     let reaction = null;
     if (!attack.counter && time < defense.parryUntil && time >= defense.parryReadyAt && profile.primary === "blade") {
       damage = 0; defense.parryReadyAt = time + 3; defense.parryUntil = 0; reaction = "parry";
@@ -3629,18 +3760,20 @@ function createCombat(environment) {
   function projectileHit(projectile, time) {
     const { source, target } = projectile, defender = target.agent;
     if (!dnaProjectileValid(source, defender)) return;
-    const offense = source.stats.dna, defense = defender.stats.dna, random = environment.combatRandom || Math.random;
-    let damage = combatDamage({ ...source, attack: projectile.attack }, defender, (environment.damageRandom || Math.random)());
+    const offense = attackStats(source), defense = defender.stats.dna, random = environment.combatRandom || Math.random;
+    let damage = combatDamage({ ...source, attack: projectile.attack }, defender, (environment.damageRandom || Math.random)(), environment.combatRules);
     let reaction = null;
     if (projectile.hitIndex > 0) damage *= offense.comboPower / 100;
     if (random() * 100 < Math.max(0, (defense?.evasion || 0) - offense.accuracy)) { damage = 0; reaction = "miss"; }
-    else if (random() * 100 < (defense?.parry || 0)) { damage = 0; reaction = "parry"; }
-    else if (random() * 100 < (defense?.block || 0)) { damage *= 1 - defense.blockPower / 100; reaction = "block"; }
+    else if (time >= (defender.dnaReactionReadyAt || 0) && random() * 100 < (defense?.parry || 0)) { damage = 0; reaction = "parry"; }
+    else if (time >= (defender.dnaReactionReadyAt || 0) && random() * 100 < (defense?.block || 0)) { damage *= 1 - defense.blockPower / 100; reaction = "block"; }
     else if (!defense) {
       const profile = combatProfile(defender), state = defender.combat || defender;
       if (time < (state.parryUntil || 0) && time >= (state.parryReadyAt || 0) && profile.primary === "blade") { damage = 0; state.parryReadyAt = time + 3; state.parryUntil = 0; reaction = "parry"; }
       else if (profile.primary === "carapace" && time >= (state.blockReadyAt || 0) && time >= (state.stunnedUntil || 0)) { damage = Math.max(1, Math.round(damage * .2)); state.blockReadyAt = time + 2.5; reaction = "block"; }
     }
+    if (["parry", "block"].includes(reaction) && environment.combatRules?.reactionCooldown)
+      defender.dnaReactionReadyAt = time + environment.combatRules.reactionCooldown;
     const critical = damage > 0 && random() * 100 < offense.critical;
     if (critical) damage *= offense.criticalPower / 100;
     const previous = defender.health;
@@ -3655,7 +3788,7 @@ function createCombat(environment) {
       { kind: "reflect", at: time, causeId: hitEvent?.id, fromId: defender.id, toId: source.id });
     if (defender.health > 0 && dealt > 0 && random() * 100 < offense.stun && time >= (defender.dnaStunImmuneUntil || defender.combat?.stunImmuneUntil || 0)) {
       const endsAt = time + offense.stunTime * (1 - (defense?.tenacity || 0) / 100);
-      defender.dnaStunnedUntil = endsAt; defender.dnaStunImmuneUntil = endsAt + 2;
+      defender.dnaStunnedUntil = endsAt; defender.dnaStunImmuneUntil = endsAt + (environment.combatRules?.stunImmunity ?? 2);
       if (defender.combat) { defender.combat.stunnedUntil = endsAt; defender.combat.nextAttackAt = Math.max(defender.combat.nextAttackAt, endsAt); }
       defender.attack = null; defender.attackTargetId = null;
       vfx("stun", time, source, defender, 0, { causeId: hitEvent?.id, duration: endsAt - time, endsAt });
@@ -3673,6 +3806,7 @@ function createCombat(environment) {
     source.dnaActionEvent = { kind: "ranged", at: time, sourceId: source.id, targetId: defender.id, damage: dealt, x: defender.x, y: defender.y };
     defender.dnaActionEvent = source.dnaActionEvent;
     if (source.attack === projectile.attack) { source.attack.hit = dealt > 0; source.attack.resolved = true; }
+    return { damage: dealt, kind: reaction || "hit" };
   }
 
   function updateDnaActions(agent, time) {
@@ -3701,7 +3835,7 @@ function createCombat(environment) {
         }
       }
     }
-    const stats = agent.stats?.dna;
+    const stats = attackStats(agent);
     if (!stats || !stats.healer && !stats.ranged || !settled(agent, time) || agent.retreat || time < (agent.dnaStunnedUntil || 0)) return false;
     if (stats.healer && time >= (agent.dnaHealReady || 0)) {
       agent.dnaHealReady = time + DNA_ACTION_RULES.healInterval;
@@ -3722,7 +3856,10 @@ function createCombat(environment) {
     const targets = nearby(agent, DNA_ACTION_RULES.rangedRange).filter(entry => {
       const target = entry.agent, defending = agent.utility?.action === "fight" && agent.utility.target?.id === target.id ||
         target.attack?.targetId === agent.id;
-      return dnaProjectileValid(agent, target) && canPursueCombat(agent, target, time, defending) &&
+      const actor = agent.species && !agent.stats?.dna && defending && combatDisposition(agent) === "peaceful" ?
+        { ...agent, combatDisposition: "passive" } : agent;
+      return dnaProjectileValid(agent, target) && canPursueCombat(actor, target, time, defending) &&
+        (!agent.species || agent.stats?.dna || creatureAttackMode(agent, distance(agent, target)) === "ranged") &&
         distance(agent, target) > 0 && distance(agent, target) <= DNA_ACTION_RULES.rangedRange;
     }).sort((a, b) => distance(agent, a.agent) - distance(agent, b.agent) || String(a.agent.id).localeCompare(String(b.agent.id)));
     const target = targets[0]; if (!target) return false;
@@ -3740,6 +3877,11 @@ function createCombat(environment) {
     attackCauses.set(agent.attack, causeId);
     vfx("attack", time, agent, target.agent, 0, { causeId, mode: "ranged", endsAt: launchedAt });
     agent.attackTargetId = target.agent.id;
+    if (agent.species && !agent.stats?.dna) {
+      agent.attackStartedAt = time; agent.animationStartedAt = time; agent.attackHit = false;
+      agent.facing = agent.attack.directionX;
+      agent.mode = agent.species === "spiny-back-beetle" ? "attack" : "fight";
+    }
     for (let hitIndex = 0; hitIndex < stats.hits; hitIndex++) {
       const shotLaunch = launchedAt + hitIndex * stats.comboSpeed, shotArrival = arrivesAt + hitIndex * stats.comboSpeed;
       // Keep the animation clock after a projectile arrives and its visual is removed.
@@ -3941,8 +4083,10 @@ function createCombatTrial(settings) {
 return { COMBAT_LAB_UNITS, createCombatTrial };
 })();
 modules["client/combat-simulation.mjs"] = (() => {
-const { DNA_ACTION_RULES, dnaAttackMode, dnaProjectileDuration, dnaProjectileValid, dnaHealAllocations, dnaAttackStats } = modules["server/dna-actions.mjs"];
-const { combatVfxToken, recordCombatVfx, snapshotCombatVfx } = modules["server/combat-vfx-journal.mjs"];
+const { createCombat } = modules["server/combat.mjs"];
+const { DNA_COMBAT_RULES, dnaCombatStats } = modules["server/dna-combat-stats.mjs"];
+const { snapshotCombatVfx } = modules["server/combat-vfx-journal.mjs"];
+
 
 const SIMULATION_STATS = Object.freeze([
   ["power", "근접 공격력", "공격"], ["rangedPower", "원거리 공격력", "공격"], ["vitality", "생명력", "생존"], ["armor", "방어력", "방어"],
@@ -3955,27 +4099,8 @@ const SIMULATION_STATS = Object.freeze([
   ["stunDuration", "기절 시간", "제어"], ["drain", "흡혈", "생존"]
 ].map(([key, label, group]) => Object.freeze({ key, label, group })));
 
-const DEFAULT_SIMULATION_RULES = Object.freeze({
-  powerCurve: "log", powerBase: 2, powerGain: 2, powerKnee: 2,
-  rangedPowerBase: 1.4, rangedPowerGain: 1.4, rangedPowerKnee: 2,
-  rangedAttackRateBase: .5, rangedHasteCap: 1.5, rangedHasteKnee: 4,
-  healthBase: 10, healthPerPoint: 10, armorPerPoint: 12, armorCap: .7, armorKnee: 60,
-  flatPenPerPoint: 4, percentPenCap: .8, percentPenKnee: 4,
-  attackRateBase: .5, hasteCap: 1.5, hasteKnee: 4, maxActionRate: 4,
-  windupBase: .3, focusPerPoint: .02, windupMinimum: .08,
-  hitGapBase: .12, hitSpeedPerPoint: .005, hitGapMinimum: .06, recovery: .3,
-  followupBase: .5, comboPerPoint: .05, followupCap: 1,
-  critCap: .75, critKnee: 4, critMultiplierBase: 1.5, critMultiplierCap: 3, critPowerKnee: 4,
-  accuracyCap: .75, accuracyKnee: 4, dodgeCap: .35, dodgeKnee: 4,
-  parryCap: .3, parryKnee: 4, blockCap: .65, blockKnee: 4,
-  blockReductionBase: .35, blockReductionCap: .8, blockPowerKnee: 4,
-  defensePreparation: .12, reactionCooldown: .6,
-  counterCap: .75, counterKnee: 4, counterMultiplierBase: .75, counterMultiplierCap: 1.75,
-  counterPowerKnee: 4, counterWindup: .08, counterCooldown: 1.2,
-  tenacityCap: .8, tenacityKnee: 4, stunCap: .5, stunKnee: 4,
-  stunDurationBase: .25, stunDurationPerPoint: .08, stunDurationCap: 1.5, stunImmunity: 2,
-  drainCap: .4, drainKnee: 4, jitter: .05, initiativeDelay: .15,
-  maxSeconds: 120, maxEvents: 20000
+const DEFAULT_SIMULATION_RULES = Object.freeze({ ...DNA_COMBAT_RULES,
+  initiativeDelay: .15, maxSeconds: 120, maxEvents: 20000
 });
 
 const statKeys = new Set([...SIMULATION_STATS.map(stat => stat.key), "rangedPower", "rangedHaste"]);
@@ -4044,67 +4169,36 @@ function normalizeBuild(input) {
   return { key: input.key, name: input.name || input.key, organs, counts, healing, pieceCount };
 }
 
-function saturation(count, cap, knee) {
-  return count === 0 ? 0 : cap * count / (knee + count);
-}
+const geneKeys = Object.freeze({ vitality: "health", flatPen: "penetration", haste: "speed", rangedHaste: "rangedSpeed",
+  multiHit: "combo", hitSpeed: "comboSpeed", combo: "comboPower", crit: "critical", critPower: "criticalPower",
+  stunDuration: "stunTime", drain: "lifesteal" });
 
 function derive(build, rules) {
-  const c = build.counts, organs = build.organs;
-  const power = rules.powerCurve === "linear" ? rules.powerGain * c.power :
-    rules.powerGain * Math.log1p(c.power / rules.powerKnee) / Math.log1p(1 / rules.powerKnee);
-  const attackPower = organs.attack ? rules.powerBase * organs.attack + power : 0;
-  const rangedGain = rules.powerCurve === "linear" ? rules.rangedPowerGain * c.rangedPower :
-    rules.rangedPowerGain * Math.log1p(c.rangedPower / rules.rangedPowerKnee) / Math.log1p(1 / rules.rangedPowerKnee);
-  const rangedPower = organs.ranged ? rules.rangedPowerBase * organs.ranged + rangedGain : 0;
-  const health = rules.healthBase + rules.healthPerPoint * c.vitality;
-  const hitCount = 1 + c.multiHit;
-  const windup = Math.max(rules.windupMinimum, rules.windupBase - c.focus * rules.focusPerPoint);
-  const hitGap = Math.max(rules.hitGapMinimum, rules.hitGapBase - c.hitSpeed * rules.hitSpeedPerPoint);
-  const targetAttackSpeed = Math.min(rules.maxActionRate, rules.attackRateBase * (1 + saturation(c.haste, rules.hasteCap, rules.hasteKnee)));
-  const attackInterval = Math.max(targetAttackSpeed > 0 ? 1 / targetAttackSpeed : Infinity, windup + (hitCount - 1) * hitGap + rules.recovery);
-  const targetRangedSpeed = Math.min(rules.maxActionRate, rules.rangedAttackRateBase * (1 + saturation(c.rangedHaste, rules.rangedHasteCap, rules.rangedHasteKnee)));
-  const rangedAttackInterval = Math.max(targetRangedSpeed > 0 ? 1 / targetRangedSpeed : Infinity, windup + (hitCount - 1) * hitGap + rules.recovery);
-  const melee = organs.attack > 0 && attackPower > 0 && targetAttackSpeed > 0, ranged = organs.ranged > 0 && rangedPower > 0 && targetRangedSpeed > 0;
-  const stunChance = saturation(c.stun, rules.stunCap, rules.stunKnee);
-  const stats = { HP: health, health, healing: build.healing, attackPower, defense: c.armor * rules.armorPerPoint,
-    attackSpeed: melee ? 1 / attackInterval : 0, meleePower: attackPower, meleeSpeed: melee ? 1 / attackInterval : 0, rangedPower, rangedSpeed: ranged ? 1 / rangedAttackInterval : 0,
-    rangedAttackInterval, targetRangedSpeed, attackInterval, targetAttackSpeed, windup, hitGap, hitCount, recovery: rules.recovery,
-    followupMultiplier: Math.min(rules.followupCap, rules.followupBase + c.combo * rules.comboPerPoint),
-    critChance: saturation(c.crit, rules.critCap, rules.critKnee),
-    critMultiplier: rules.critMultiplierBase + saturation(c.critPower, rules.critMultiplierCap - rules.critMultiplierBase, rules.critPowerKnee),
-    armorPenetration: saturation(c.percentPen, rules.percentPenCap, rules.percentPenKnee), flatPenetration: c.flatPen * rules.flatPenPerPoint,
-    accuracy: saturation(c.accuracy, rules.accuracyCap, rules.accuracyKnee),
-    evasion: saturation(c.evasion, rules.dodgeCap, rules.dodgeKnee),
-    parry: saturation(c.parry, rules.parryCap, rules.parryKnee),
-    block: saturation(c.block, rules.blockCap, rules.blockKnee),
-    blockReduction: rules.blockReductionBase + saturation(c.blockPower, rules.blockReductionCap - rules.blockReductionBase, rules.blockPowerKnee),
-    counter: saturation(c.counter, rules.counterCap, rules.counterKnee),
-    counterMultiplier: rules.counterMultiplierBase + saturation(c.counterPower, rules.counterMultiplierCap - rules.counterMultiplierBase, rules.counterPowerKnee),
-    tenacity: saturation(c.tenacity, rules.tenacityCap, rules.tenacityKnee), stunChance,
-    stunChancePerHit: -Math.expm1(Math.log1p(-stunChance) / hitCount),
-    stunDuration: Math.min(rules.stunDurationCap, rules.stunDurationBase + c.stunDuration * rules.stunDurationPerPoint),
-    drain: saturation(c.drain, rules.drainCap, rules.drainKnee),
-    pieceCount: build.pieceCount, melee, ranged, healer: !!organs.heal, healerCount: organs.heal, canAttack: melee || ranged };
-  for (const [key, value] of Object.entries(stats)) {
-    if (typeof value === "number" && !Number.isFinite(value) &&
-        !((key === "attackInterval" && value === Infinity && targetAttackSpeed === 0) ||
-          (key === "rangedAttackInterval" && value === Infinity && targetRangedSpeed === 0)))
-      throw new RangeError("Derived " + key + " must be finite; adjust counts or rules");
-  }
-  return stats;
+  const counts = Object.fromEntries(Object.entries(build.counts).map(([key, value]) => [geneKeys[key] || key, value]));
+  Object.assign(counts, { blade: build.organs.attack, secretion: build.organs.ranged, healer: build.organs.heal });
+  const dna = { ...dnaCombatStats(counts, counts, rules), movement: .25, vision: 1, roaming: true, healing: build.healing };
+  const interval = speed => speed > 0 ? 1 / speed : Infinity;
+  const result = { dna, HP: dna.health, health: dna.health, speed: dna.movement, loadedSpeed: dna.movement * .75, vision: dna.vision,
+    healing: dna.healing, attackPower: dna.meleePower, defense: dna.armor, meleePower: dna.meleePower, rangedPower: dna.rangedPower,
+    attackSpeed: dna.meleeSpeed, meleeSpeed: dna.meleeSpeed, rangedSpeed: dna.rangedSpeed,
+    attackInterval: interval(dna.meleeSpeed), rangedAttackInterval: interval(dna.rangedSpeed),
+    targetAttackSpeed: dna.meleeSpeed, targetRangedSpeed: dna.rangedSpeed, windup: dna.focus, hitGap: dna.comboSpeed,
+    hitCount: dna.hits, recovery: Math.max(dna.recovery || 0, interval(dna.speed) - dna.focus - Math.max(0, dna.hits - 1) * dna.comboSpeed),
+    followupMultiplier: dna.comboPower / 100, critChance: dna.critical / 100, critMultiplier: dna.criticalPower / 100,
+    armorPenetration: dna.armorPenetration || 0, flatPenetration: dna.penetration, accuracy: dna.accuracy / 100,
+    evasion: dna.evasion / 100, parry: dna.parry / 100, block: dna.block / 100, blockReduction: dna.blockPower / 100,
+    counter: dna.counter / 100, counterMultiplier: dna.counterPower / 100, tenacity: dna.tenacity / 100,
+    stunChance: dna.stun / 100, stunChancePerHit: dna.stun / 100, stunDuration: dna.stunTime, drain: dna.lifesteal / 100,
+    pieceCount: build.pieceCount, melee: dna.melee, ranged: dna.ranged, healer: dna.healer,
+    healerCount: dna.healerCount, canAttack: dna.meleePower > 0 && dna.meleeSpeed > 0 || dna.rangedPower > 0 && dna.rangedSpeed > 0 };
+  for (const [key, value] of Object.entries(result)) if (typeof value === "number" && !Number.isFinite(value) &&
+    !["attackInterval", "rangedAttackInterval", "recovery"].includes(key)) throw new RangeError("Derived " + key + " must be finite");
+  return result;
 }
+
 
 function deriveSimulationStats(build, rules) {
   return derive(normalizeBuild(build), normalizeRules(rules));
-}
-
-function keyedRandom(seed, actor, action, hit, channel) {
-  const text = JSON.stringify([seed, actor, action, hit, channel]);
-  let hash = 2166136261;
-  for (let i = 0; i < text.length; i++) hash = Math.imul(hash ^ text.charCodeAt(i), 16777619);
-  hash ^= hash >>> 16; hash = Math.imul(hash, 0x7feb352d); hash ^= hash >>> 15;
-  hash = Math.imul(hash, 0x846ca68b); hash ^= hash >>> 16;
-  return (hash >>> 0) / 4294967296;
 }
 
 function createSimulationTrial(settings) {
@@ -4116,345 +4210,131 @@ function createSimulationTrial(settings) {
     return builds.map(normalizeBuild);
   });
   const seed = settings.seed === undefined ? 1 : settings.seed;
-  if (!(typeof seed === "string" && seed.length <= 200 || typeof seed === "number" && Number.isFinite(seed))) throw new TypeError("seed must be a finite number or string up to 200 characters");
+  if (!(typeof seed === "string" && seed.length <= 200 || typeof seed === "number" && Number.isFinite(seed))) throw new TypeError("seed must be finite or a short string");
   if (settings.random !== undefined && typeof settings.random !== "boolean") throw new TypeError("random must be boolean");
   const first = settings.first === undefined ? "simultaneous" : settings.first;
-  if (!["simultaneous", "left", "right"].includes(first)) throw new RangeError("first must be simultaneous, left, or right");
+  if (!["simultaneous", "left", "right"].includes(first)) throw new RangeError("Invalid first side");
   const distance = settings.distance === undefined ? 1 : settings.distance;
   if (!Number.isFinite(distance) || distance < 0 || distance > 20) throw new RangeError("distance must be between 0 and 20");
   if (settings.support !== undefined && typeof settings.support !== "boolean") throw new TypeError("support must be boolean");
-  let time = 0, winner = null, reason = null, eventCount = 0;
-  const history = [], states = new Map(), projectiles = [];
-  const vfxEnvironment = {}, actionCauses = new WeakMap();
+  let state = 2166136261;
+  for (const char of String(seed)) state = Math.imul(state ^ char.charCodeAt(0), 16777619) >>> 0;
+  function random() {
+    state = (state + 0x6D2B79F5) >>> 0;
+    let value = Math.imul(state ^ state >>> 15, 1 | state);
+    value ^= value + Math.imul(value ^ value >>> 7, 61 | value);
+    return ((value ^ value >>> 14) >>> 0) / 4294967296;
+  }
+  let time = 0, tickIndex = 0, winner = null, reason = null;
+  const history = [];
   const entries = Array.from({ length: Math.max(...teams.map(team => team.length)) }, (_, slot) =>
     teams.flatMap((team, side) => team[slot] ? [{ build: team[slot], side, slot }] : [])).flat();
-  const agents = entries.map(({ build, side: index, slot }) => {
-    const ownerId = index === 0 ? "left" : "right", id = slot ? ownerId + "-" + (slot + 1) : ownerId, stats = derive(build, rules);
-    const delay = first !== "simultaneous" && first !== ownerId ? rules.initiativeDelay : 0;
-    const agent = { id, ownerId, slot, x: index * distance, y: slot * .35, dnaHealReady: DNA_ACTION_RULES.healInterval, key: build.key, name: build.name, health: stats.health, stats, attributes: {},
-      tribe: ["bean", "spore", "pebble", "spring"].includes(build.key) ? build.key : undefined,
-      species: ["bean", "spore", "pebble", "spring"].includes(build.key) ? undefined : build.key,
-      mode: "fight", facing: index === 0 ? 1 : -1, animationStartedAt: 0, hurtStartedAt: -Infinity,
-      combat: { version: 2, id: "simulation", side: index, cycleStartedAt: delay, nextAttackAt: delay,
-        targetId: index === 0 ? "right" : "left", stunnedUntil: 0, stunImmuneUntil: 0, parryReadyAt: delay + rules.defensePreparation,
-        blockReadyAt: delay + rules.defensePreparation, reactionReadyAt: delay + rules.defensePreparation, counterReadyAt: delay }, attack: null };
-    states.set(id, { action: null, ordinal: 0, build });
-    return agent;
+  const agents = entries.map(({ build, side, slot }) => {
+    const ownerId = side === 0 ? "left" : "right", stats = derive(build, rules);
+    const player = ["bean", "spore", "pebble", "spring"].includes(build.key);
+    return { id: slot ? ownerId + "-" + (slot + 1) : ownerId, ownerId, side, slot,
+      key: build.key, name: build.name, labAppearance: true, tribe: player ? build.key : "bean", species: undefined,
+      x: 100 + (distance > 1 ? side * distance : 0), y: 100, renderFromX: 100, renderFromY: 100,
+      moveStartedAt: 0, moveDuration: 0, health: stats.health, stats, attributes: {},
+      appearanceAttributes: player ? { ...(stats.melee ? { blade: 1 } : {}), ...(stats.ranged ? { secretion: 1 } : {}) } : undefined,
+      combatDisposition: "aggressive", mode: "fight", facing: side === 0 ? 1 : -1, animationStartedAt: 0,
+      hurtStartedAt: -Infinity, dnaHealReady: 2, dnaReactionReadyAt: rules.defensePreparation,
+      attackReady: first !== "simultaneous" && first !== ownerId ? rules.initiativeDelay : 0,
+      combat: null, attack: null, carrying: 0 };
   });
-
-  const supportAgents = settings.support ? agents.map(agent => ({ id: agent.id + "-support", ownerId: agent.ownerId,
-    key: agent.key, tribe: agent.tribe, species: agent.species, health: agent.stats.health / 2,
-    stats: { ...agent.stats, canAttack: false, healer: false }, x: agent.x, y: 1,
-    mode: "idle", combat: { side: agent.combat.side, stunnedUntil: 0 }, attack: null })) : [];
-  const team = agent => agent.ownerId;
-  const teamHealth = side => agents.filter(agent => agent.ownerId === side).reduce((sum, agent) => sum + agent.health, 0);
-  function targetFor(agent) {
-    const enemies = agents.filter(other => other.ownerId !== agent.ownerId && other.health > 0);
-    const current = enemies.find(other => other.id === agent.combat.targetId);
-    if (current) return current;
-    return enemies.sort((a, b) => separation(agent, a) - separation(agent, b) ||
-      a.id.localeCompare(b.id))[0] || null;
-  }
-  const separation = (source, target) => Math.hypot(source.x - target.x, source.y - target.y);
-  function updatePositions(at) {
-    let remaining = at - time;
-    if (agents.length > 2) {
-      const moves = agents.map(agent => {
-        const target = targetFor(agent), state = states.get(agent.id);
-        if (!target || agent.health <= 0 || !agent.stats.canAttack || agent.combat.stunnedUntil > time || state.action) return null;
-        const gap = separation(agent, target), range = agent.stats.ranged ? DNA_ACTION_RULES.rangedRange : DNA_ACTION_RULES.meleeRange;
-        const travel = Math.min(Math.max(0, gap - range + 1e-8), .25 * remaining);
-        return { agent, x: (target.x - agent.x) / Math.max(gap, 1e-9) * travel, y: (target.y - agent.y) / Math.max(gap, 1e-9) * travel };
-      });
-      for (const move of moves) if (move) { move.agent.x += move.x; move.agent.y += move.y; }
-      for (const agent of supportAgents) agent.x = agents.find(source => source.id === agent.id.replace(/-support$/, "")).x;
-      return;
+  const supportAgents = settings.support ? agents.map(agent => ({ ...structuredClone(agent),
+    id: agent.id + "-support", health: agent.stats.health / 2, mode: "idle",
+    stats: { ...agent.stats, canAttack: false, melee: false, ranged: false, healer: false,
+      dna: { ...agent.stats.dna, melee: false, ranged: false, healer: false, power: 0, meleePower: 0, rangedPower: 0,
+        speed: 0, meleeSpeed: 0, rangedSpeed: 0, hits: 0 } } })) : [];
+  const participants = [...agents, ...supportAgents];
+  const teamHealth = side => participants.filter(agent => agent.ownerId === side).reduce((sum, agent) => sum + agent.health, 0);
+  const environment = { games: new Map(), colonies: [], simSeconds: 0, combatRules: rules,
+    world: { size: 320, terrain: new Uint8Array(320 * 320) },
+    combatRandom: random, damageRandom: settings.random === false ? () => .5 : () => .5 + (random() - .5) * rules.jitter / .2,
+    onCombatEvent(event) {
+      const source = participants.find(agent => agent.id === event.sourceId);
+      history.push({ index: history.length, time: event.at, kind: event.kind, attackerId: event.sourceId,
+        targetId: event.targetId, damage: event.amount, critical: !!event.critical, counter: !!event.counter,
+        hitIndex: event.hitIndex, hitCount: source?.stats.dna.hits, stunDuration: event.duration,
+        leftHealth: teamHealth("left"), rightHealth: teamHealth("right") });
+    } };
+  for (const side of ["left", "right"]) environment.games.set(side, {
+    agents: participants.filter(agent => agent.ownerId === side),
+    receiveDamage(target, amount) {
+      const previous = target.health;
+      target.health = Math.max(0, target.health - amount);
+      if (target.health < previous) { target.hurtStartedAt = environment.simSeconds; target.hurtCount = (target.hurtCount || 0) + 1; }
     }
-    while (remaining > 1e-9) {
-      const current = agents[1].x - agents[0].x;
-      const ranges = agents.map(agent => agent.stats.melee ? 1 : 3);
-      const movement = agents.map((agent, index) => agent.health > 0 && agent.stats.canAttack && agent.combat.stunnedUntil <= time && !states.get(agent.id).action && current > ranges[index] + 1e-9 ? .25 : 0);
-      const speed = movement[0] + movement[1];
-      if (!speed) break;
-      const nextRange = Math.max(...ranges.filter((range, index) => movement[index] > 0));
-      const duration = Math.min(remaining, (current - nextRange) / speed);
-      agents[0].x += movement[0] * duration; agents[1].x -= movement[1] * duration;
-      remaining -= duration;
+  });
+  const combat = createCombat(environment);
+  function enroll() {
+    for (const agent of agents) {
+      if (agent.health <= 0 || agent.combat) continue;
+      const target = agents.find(other => other.ownerId !== agent.ownerId && other.health > 0 && other.x === agent.x && other.y === agent.y);
+      if (!target) continue;
+      const species = agent.species;
+      try { agent.species = undefined; combat.engage(agent, target, environment.simSeconds); }
+      finally { agent.species = species; }
     }
-    for (const agent of supportAgents) agent.x = agents[agent.combat.side].x;
   }
-  function movementEvent(agent) {
-    const target = targetFor(agent);
-    if (!target) return Infinity;
-    if (agents.length > 2) return time + .1;
-    const current = separation(agent, target);
-    const range = agent.stats.ranged ? DNA_ACTION_RULES.rangedRange : DNA_ACTION_RULES.meleeRange;
-    const speed = [agent, target].reduce((sum, other) => sum + (other.health > 0 && other.stats.canAttack && other.combat.stunnedUntil <= time && !states.get(other.id).action && current > (other.stats.melee ? 1 : 3) ? .25 : 0), 0);
-    return speed > 0 && current > range ? time + (current - range) / speed : Infinity;
-  }
-
-  function evidence(kind, source, target, amount, action, extra = {}) {
-    const causeId = action && actionCauses.get(action.origin || action);
-    return recordCombatVfx(vfxEnvironment, { kind, at: time, sourceId: source.id, targetId: target.id, amount,
-      from: { x: source.x, y: source.y }, to: { x: target.x, y: target.y },
-      mode: action?.mode, counter: !!action?.counter, hitIndex: action?.index || 0, causeId,
-      ...(action?.mode === "ranged" ? { projectileId: causeId + ":" + action.index } : {}), ...extra });
-  }
-
-  function record(kind, source, target, damage, action, critical, duration, extra = {}) {
-    const row = { index: history.length, time, kind, attackerId: source.id, targetId: target.id, damage,
-      critical, counter: !!action?.counter, hitIndex: action?.index || 0, hitCount: action?.count || 1,
-      leftHealth: teamHealth("left"), rightHealth: teamHealth("right") };
-    if (duration !== undefined) row.stunDuration = duration;
-    history.push(row);
-    const event = { id: "simulation:" + row.index, kind, at: time, sourceId: source.id, targetId: target.id, damage };
-    source.combat.lastEvent = event; target.combat.lastEvent = event;
-    if (["dodge", "parry", "block", "stun"].includes(kind)) target.combat.lastReaction = event;
-    return evidence(kind, source, target, Math.abs(damage), action, { critical: !!critical,
-      ...(duration === undefined ? {} : { duration, endsAt: time + duration }), ...extra });
-  }
-
-  function end(who, why) {
-    winner = who; reason = why;
-    for (const agent of agents) { states.get(agent.id).action = null; agent.attack = null; }
-    for (const projectile of projectiles) evidence("projectile-cancel", projectile.source, projectile.target, 0, projectile.action);
-    projectiles.length = 0;
-  }
-
-  function start(agent, at, counter) {
-    const state = states.get(agent.id), stats = agent.stats;
-    const target = targetFor(agent);
-    if (!target) return;
-    agent.combat.targetId = target.id;
-    const mode = dnaAttackMode(stats, separation(agent, target));
-    if (!mode) return;
-    const count = counter ? 1 : stats.hitCount, windup = counter ? rules.counterWindup : stats.windup;
-    const action = { ordinal: ++state.ordinal, startedAt: at, firstHitAt: at + windup, count, index: 0,
-      counter, mode, targetId: target.id, counterTriggered: false, stunApplied: false, endsAt: at + windup + (count - 1) * stats.hitGap + stats.recovery };
-    actionCauses.set(action, combatVfxToken(vfxEnvironment, "attack"));
-    state.action = action;
-    agent.combat.cycleStartedAt = at;
-    agent.combat.nextAttackAt = at + Math.max(mode === "ranged" ? stats.rangedAttackInterval : stats.attackInterval, action.endsAt - at);
-    agent.attack = { combatId: "simulation", startedAt: at, actionStartedAt: at, hitAt: action.firstHitAt, endsAt: action.endsAt,
-      speed: 1, directionX: agent.facing, targetId: agent.combat.targetId, targetKind: "agent", counter, mode,
-      hitIndex: 0, hitCount: count, resolved: false, hit: false, heavy: false };
-    // Preserve every launch cue for the approved ranged clip. Scheduling uses
-    // the private action state; rendering must not rewind after each shot.
-    if (mode === "ranged") {
-      agent.attack.launchedAt = action.firstHitAt;
-      agent.attack.shotLaunches = Array.from({ length: count }, (_, index) => action.firstHitAt + index * stats.hitGap);
-    } else {
-      agent.attack.meleeContacts = [action.firstHitAt];
-    }
-    agent.attackStartedAt = at; agent.animationStartedAt = at;
-    agent.mode = agent.species === "spiny-back-beetle" ? "attack" : "fight";
-    if (!counter) evidence("attack", agent, target, 0, action, { endsAt: action.firstHitAt });
-    if (counter) record("counter", agent, target, 0, action, false, undefined, { endsAt: action.firstHitAt });
-  }
-
-  function roll(agent, action, channel) {
-    return keyedRandom(seed, agent.id, action.ordinal, action.index, channel);
-  }
-
-  function evaluate(source, target, action) {
-    const offense = source.stats, defense = target.stats, combat = target.combat;
-    const ready = time >= combat.reactionReadyAt && time >= combat.stunnedUntil;
-    let kind = "hit", multiplier = 1;
-    if (ready && roll(source, action, "dodge") < defense.evasion * (1 - offense.accuracy)) { kind = "dodge"; multiplier = 0; }
-    else if (ready && time >= combat.parryReadyAt && roll(source, action, "parry") < defense.parry) { kind = "parry"; multiplier = 0; }
-    else if (ready && time >= combat.blockReadyAt && roll(source, action, "block") < defense.block) { kind = "block"; multiplier = 1 - defense.blockReduction; }
-    const critical = multiplier > 0 && roll(source, action, "critical") < offense.critChance;
-    const effectiveArmor = Math.max(0, defense.defense - offense.flatPenetration) * (1 - offense.armorPenetration);
-    const reduction = rules.armorCap * effectiveArmor / (effectiveArmor + rules.armorKnee);
-    const jitter = settings.random === false ? 1 : 1 + (roll(source, action, "damage") * 2 - 1) * rules.jitter;
-    const power = dnaAttackStats(offense, action.mode).power * (action.counter ? offense.counterMultiplier : action.index > 0 ? offense.followupMultiplier : 1);
-    const damage = Math.min(target.health, power * (1 - reduction) * multiplier * (critical ? offense.critMultiplier : 1) * jitter);
-    const canStun = damage > 0 && !(action.origin || action).stunApplied && time >= combat.stunImmuneUntil &&
-      roll(source, action, "stun") < (action.counter ? offense.stunChance : offense.stunChancePerHit);
-    const stunDuration = canStun ? offense.stunDuration * (1 - defense.tenacity) : 0;
-    const counter = !action.counter && !(action.origin || action).counterTriggered && ["parry", "block"].includes(kind) &&
-      time >= combat.counterReadyAt && defense.canAttack && dnaAttackMode(defense, separation(source, target)) && roll(source, action, "counter") < defense.counter;
-    return { source, target, action, kind, critical, damage, stunDuration, counter };
-  }
-
-  function nextEvent() {
-    const actions = agents.filter(agent => agent.health > 0).map(agent => {
-      const action = states.get(agent.id).action;
-      if (action) return action.index < action.count ? action.firstHitAt + action.index * agent.stats.hitGap : action.endsAt;
-      if (!agent.stats.canAttack) return Infinity;
-      if (agent.combat.stunnedUntil > time) return agent.combat.stunnedUntil;
-      const target = targetFor(agent);
-      return target && dnaAttackMode(agent.stats, separation(agent, target)) ? Math.max(agent.combat.nextAttackAt, agent.combat.stunnedUntil) : movementEvent(agent);
+  function approach(seconds) {
+    const living = agents.filter(agent => agent.health > 0);
+    const moves = living.flatMap(agent => {
+      if (agent.combat || agent.attack || !agent.stats.canAttack || environment.simSeconds < (agent.dnaStunnedUntil || 0)) return [];
+      const target = living.filter(other => other.ownerId !== agent.ownerId).sort((a, b) => Math.abs(a.x - agent.x) - Math.abs(b.x - agent.x) || a.id.localeCompare(b.id))[0];
+      if (!target || agent.stats.ranged && (!agent.stats.melee || Math.abs(agent.x - target.x) > 1) && Math.abs(agent.x - target.x) <= 3) return [];
+      return [{ agent, target, travel: Math.min(Math.abs(target.x - agent.x), agent.stats.dna.movement * seconds) }];
     });
-    return Math.min(...actions, ...agents.filter(agent => agent.health > 0 && agent.stats.healer).map(agent => agent.dnaHealReady),
-      ...projectiles.map(projectile => projectile.at));
+    const positions = new Map();
+    for (const move of moves) {
+      const other = moves.find(entry => entry.agent === move.target && entry.target === move.agent);
+      const gap = Math.abs(move.target.x - move.agent.x);
+      const x = gap <= move.travel + (other?.travel || 0) + 1e-8 ?
+        other ? (move.agent.x + move.target.x) / 2 : move.target.x : move.agent.x + Math.sign(move.target.x - move.agent.x) * move.travel;
+      positions.set(move.agent, x);
+    }
+    for (const [agent, x] of positions) { agent.x = x; agent.renderFromX = x; }
+    for (const agent of supportAgents) agent.x = agents.find(other => agent.id === other.id + "-support").x;
   }
-
-  function process(at) {
-    updatePositions(at);
-    time = at;
-    for (const source of agents) if (source.health > 0 && source.stats.healer && source.dnaHealReady <= time + 1e-9) {
-      source.dnaHealReady = time + DNA_ACTION_RULES.healInterval;
-      for (const { target, amount } of dnaHealAllocations(source, [...agents, ...supportAgents], team, separation)) {
-        target.health += amount; record("heal", source, target, -amount, null, false, undefined);
-      }
-    }
-    for (const agent of agents) {
-      const state = states.get(agent.id), action = state.action;
-      if (action && !agents.some(target => target.id === action.targetId && target.health > 0)) {
-        state.action = null; agent.attack = null;
-      }
-      if (state.action && action.index >= action.count && action.endsAt <= time + 1e-9) {
-        state.action = null; agent.attack = null;
-        agent.mode = agent.species === "spiny-back-beetle" ? "idle" : "fight";
-      }
-    }
-    for (const agent of agents) {
-      const state = states.get(agent.id);
-      if (agent.health > 0 && !state.action && agent.stats.canAttack && Math.max(agent.combat.nextAttackAt, agent.combat.stunnedUntil) <= time + 1e-9) start(agent, time, false);
-    }
-    const due = [];
-    for (let index = projectiles.length - 1; index >= 0; index--) if (projectiles[index].at <= time + 1e-9) {
-      const projectile = projectiles.splice(index, 1)[0];
-      if (dnaProjectileValid(projectile.source, projectile.target)) due.push(evaluate(projectile.source, projectile.target, projectile.action));
-      else evidence("projectile-cancel", projectile.source, projectile.target, 0, projectile.action);
-    }
-    const launched = [];
-    const outcomes = agents.flatMap(source => {
-      const action = states.get(source.id).action, target = agents.find(agent => agent.id === action?.targetId);
-      if (!(source.health > 0 && target?.health > 0 && action && action.index < action.count &&
-        action.firstHitAt + action.index * source.stats.hitGap <= time + 1e-9)) return [];
-      if (action.mode === "ranged") {
-        const shot = { source, target, action: { ...action, origin: action }, launchedAt: time,
-          at: time + dnaProjectileDuration(separation(source, target)) };
-        projectiles.push(shot); launched.push({ source, action });
-        record("shoot", source, target, 0, action, false, undefined, { arrivesAt: shot.at });
-        return [];
-      }
-      return [evaluate(source, target, action)];
-    }).concat(due);
-    for (const target of agents) {
-      const hits = outcomes.filter(hit => hit.target === target), total = hits.reduce((sum, hit) => sum + hit.damage, 0);
-      if (total > target.health) for (const hit of hits) hit.damage *= target.health / total;
-    }
-    const oldHealth = agents.map(agent => agent.health);
-    const restored = new Map();
-    const hitEvidence = new Map();
-    for (let i = 0; i < agents.length; i++) {
-      const agent = agents[i];
-      const incoming = outcomes.filter(hit => hit.target === agent).reduce((sum, hit) => sum + hit.damage, 0);
-      const healing = outcomes.filter(hit => hit.source === agent).reduce((sum, hit) => sum + hit.damage * agent.stats.drain, 0);
-      agent.health = Math.max(0, Math.min(agent.stats.health, oldHealth[i] - incoming + healing));
-      restored.set(agent.id, Math.max(0, agent.health - Math.max(0, oldHealth[i] - incoming)));
-    }
-    for (const hit of outcomes) {
-      const { source, target, action } = hit;
-      const hitEvent = record(hit.kind, source, target, hit.damage, action, hit.critical, undefined);
-      hitEvidence.set(hit, hitEvent);
-      const outgoing = outcomes.filter(other => other.source === source).reduce((sum, other) => sum + other.damage, 0);
-      const drain = outgoing > 0 ? restored.get(source.id) * hit.damage / outgoing : 0;
-      if (drain > 0) evidence("drain", source, source, drain, null, {
-        causeId: hitEvent?.id, fromId: target.id, toId: source.id, from: { x: target.x, y: target.y } });
-      if (hit.damage > 0) { target.hurtStartedAt = time; target.hurtCount = (target.hurtCount || 0) + 1; }
-      if (hit.kind !== "hit") {
-        target.combat.reactionReadyAt = time + rules.reactionCooldown;
-        target.combat.parryReadyAt = target.combat.reactionReadyAt;
-        target.combat.blockReadyAt = target.combat.reactionReadyAt;
-      }
-      if (action.mode !== "ranged") action.index++;
-      if (source.attack && states.get(source.id).action === action) {
-        source.attack.hit = true; source.attack.hitIndex = action.index - 1;
-        source.attack.resolved = action.index >= action.count;
-        if (!source.attack.resolved) {
-          // Keep the action epoch and prior contacts so a completed swing
-          // recovers before the next preparation instead of rewinding on hit.
-          source.attack.hitAt = action.firstHitAt + action.index * source.stats.hitGap;
-          source.attack.meleeContacts.push(source.attack.hitAt);
-          source.attack.hitIndex = action.index;
-        }
-      }
-    }
-    for (const { source, action } of launched) {
-      action.index++;
-      if (source.attack) { source.attack.resolved = action.index >= action.count; source.attack.hit = true;
-        source.attack.hitIndex = action.index - 1;
-        // Keep the original ranged clock through recovery and later launches.
-      }
-    }
-    for (const hit of outcomes) {
-      const { source, target, action } = hit;
-      if (target.health > 0 && hit.stunDuration > 0) {
-        (action.origin || action).stunApplied = true;
-        target.combat.stunnedUntil = time + hit.stunDuration;
-        target.combat.stunImmuneUntil = target.combat.stunnedUntil + rules.stunImmunity;
-        target.combat.nextAttackAt = Math.max(target.combat.nextAttackAt, target.combat.stunnedUntil);
-        states.get(target.id).action = null; target.attack = null;
-        record("stun", source, target, 0, { ...action, origin: action.origin || action,
-          index: action.index - (action.mode === "ranged" ? 0 : 1) }, false, hit.stunDuration,
-          { causeId: hitEvidence.get(hit)?.id });
-      }
-    }
-    for (const hit of outcomes) {
-      if (hit.counter && hit.target.health > 0 && hit.source.health > 0 && time >= hit.target.combat.stunnedUntil) {
-        (hit.action.origin || hit.action).counterTriggered = true;
-        hit.target.combat.counterReadyAt = time + rules.counterCooldown;
-        hit.target.combat.targetId = hit.source.id;
-        start(hit.target, time, true);
-      }
-    }
-    for (const agent of agents) if (agent.health <= 0 && oldHealth[agents.indexOf(agent)] > 0) {
-      states.get(agent.id).action = null; agent.attack = null;
-      agent.deathStartedAt = time; agent.diedAt = time; agent.mode = "death";
-      const fatal = outcomes.find(hit => hit.target === agent);
-      record("death", fatal?.source || agents.find(other => other.ownerId !== agent.ownerId), agent, 0, null, false, undefined,
-        { causeId: hitEvidence.get(fatal)?.id });
-    }
-    const alive = ["left", "right"].map(side => agents.some(agent => agent.ownerId === side && agent.health > 0));
-    if (!alive[0] || !alive[1]) end(!alive[0] && !alive[1] ? "draw" : alive[0] ? "left" : "right", "death");
-    eventCount++;
-    if (!reason && eventCount >= rules.maxEvents) end("draw", "event-limit");
+  function conclude() {
+    const alive = ["left", "right"].map(side => participants.some(agent => agent.ownerId === side && agent.health > 0));
+    if (!alive[0] || !alive[1]) { winner = alive[0] ? "left" : alive[1] ? "right" : "draw"; reason = "death"; }
+    else if (!participants.some(agent => agent.health > 0 && agent.stats.canAttack) &&
+      !participants.some(agent => agent.health > 0 && agent.dnaBleed || agent.dnaProjectiles?.length)) { winner = "draw"; reason = "no-offense"; }
+    else if (history.length >= rules.maxEvents) { winner = "draw"; reason = "event-limit"; }
+    else if (time >= rules.maxSeconds) { winner = "draw"; reason = "time-limit"; }
   }
-
+  function tick(at) {
+    const elapsed = at - environment.simSeconds;
+    environment.simSeconds = at; time = at;
+    approach(elapsed); enroll();
+    for (const agent of participants) combat.update(agent, at);
+    conclude();
+  }
   function advance(seconds) {
     if (!Number.isFinite(seconds) || seconds < 0) throw new RangeError("advance seconds must be finite and nonnegative");
-    if (reason) return result();
     const until = Math.min(rules.maxSeconds, time + seconds);
-    while (!reason) {
-      const at = nextEvent();
-      if (!Number.isFinite(at)) { end("draw", "no-offense"); break; }
-      if (at > until) break;
-      process(at);
-    }
-    if (!reason) {
-      updatePositions(until);
-      time = until;
-      if (time >= rules.maxSeconds) end("draw", "time-limit");
-    }
+    while (!reason && tickIndex / 60 <= until + 1e-9) tick(tickIndex++ / 60);
+    if (!reason) { time = until; if (time >= rules.maxSeconds) conclude(); }
     return result();
   }
-
   function step() {
-    if (reason) return result();
-    const startIndex = history.length;
-    while (!reason && history.length === startIndex) {
-      const at = nextEvent();
-      if (!Number.isFinite(at)) { end("draw", "no-offense"); break; }
-      if (at > rules.maxSeconds) { time = rules.maxSeconds; end("draw", "time-limit"); break; }
-      process(at);
+    const count = history.length;
+    while (!reason && history.length === count) {
+      const at = Math.min(rules.maxSeconds, tickIndex++ / 60);
+      tick(at);
     }
     return result();
   }
-
-  function finish() {
-    return advance(rules.maxSeconds - time);
-  }
-
-  function result() {
-    return { winner, reason, time, leftHealth: teamHealth("left"), rightHealth: teamHealth("right") };
-  }
-
-  return { agents, supportAgents, projectiles, history, advance, step, finish, result,
-    get vfx() { return snapshotCombatVfx(vfxEnvironment, time); },
+  function finish() { return advance(rules.maxSeconds - time); }
+  function result() { return { winner, reason, time, leftHealth: teamHealth("left"), rightHealth: teamHealth("right") }; }
+  enroll(); conclude();
+  return { agents, supportAgents, history, advance, step, finish, result,
+    get projectiles() { return participants.flatMap(source => (source.dnaProjectiles || []).map(visual => ({ source,
+      target: participants.find(agent => agent.id === source.attack?.targetId), launchedAt: visual.launchedAt, at: visual.hitAt,
+      fromX: visual.fromX, fromY: visual.fromY, targetX: visual.targetX, targetY: visual.targetY }))).filter(shot => shot.target); },
+    get vfx() { return snapshotCombatVfx(environment, time); },
     get time() { return time; }, get reason() { return reason; } };
 }
 
@@ -4473,7 +4353,7 @@ function validateBatch(count, seed) {
 function runSimulationBatch(settings, count, seed) {
   validateBatch(count, seed);
   const health = input => (Array.isArray(input) ? input : [input]).reduce((sum, build) => sum + deriveSimulationStats(build, settings.rules).health, 0);
-  const leftProfile = { health: health(settings.left) }, rightProfile = { health: health(settings.right) };
+  const leftProfile = { health: health(settings.left) * (settings.support ? 1.5 : 1) }, rightProfile = { health: health(settings.right) * (settings.support ? 1.5 : 1) };
   const report = { count, seed, leftWins: 0, rightWins: 0, draws: 0, timeouts: 0, noOffense: 0,
     meanDuration: 0, meanLeftHealth: 0, meanRightHealth: 0, meanLeftHealthRatio: 0, meanRightHealthRatio: 0,
     leftWinRate: 0, rightWinRate: 0, samples: [] };
@@ -21027,6 +20907,8 @@ const reactionLabels = { dodge: "회피", parry: "패링", block: "방어", stun
 const beetleCorpse = imageAnimation({ image: "DesignAssets/Animations/BeetleDeath/dead-v2.png", frameSize: 185, columns: 1, pivotX: 95.5, pivotY: 163 });
 
 function stageAgent(agent) {
+  if (agent.labAppearance) agent = { ...agent, tribe: UNIT_ANIMATIONS[agent.key] ? agent.key : undefined,
+    species: UNIT_ANIMATIONS[agent.key] ? undefined : agent.key };
   if (!agent.species && !agent.tribe && agent.key) agent = UNIT_ANIMATIONS[agent.key] ? { ...agent, tribe: agent.key } : { ...agent, species: agent.key };
   // Laboratory builds have capability flags rather than DNA appearance traits.
   // Keep this inference on a render-local copy, never on the simulation agent.
@@ -21155,7 +21037,7 @@ function createCombatStage(canvas) {
     const recoil = reducedMotion.matches ? 0 : impact ? Math.sin(age * Math.PI) * 16 : dodge ? 26 * Math.sin((clock - dodge.born) / .22 * Math.PI) : 0;
     const distance = currentTrial?.agents.every(entry => Number.isFinite(entry.x)) ? Math.abs(currentTrial.agents[1].x - currentTrial.agents[0].x) : 1;
     const gap = Math.min(.64, .2 * Math.max(1, distance));
-    const members = currentTrial.agents.filter(other => other.combat.side === index);
+    const members = currentTrial.agents.filter(other => (other.combat?.side ?? other.side) === index);
     if (currentTrial.agents.length > 2) {
       const slot = members.indexOf(agent), columns = Math.ceil(Math.sqrt(members.length)), rows = Math.ceil(members.length / columns);
       return { x: width * (index === 0 ? .12 + .28 * ((slot % columns + .5) / columns) : .88 - .28 * ((slot % columns + .5) / columns)) + direction * (lunge - recoil) * width / 1040,
@@ -21344,22 +21226,24 @@ function createCombatStage(canvas) {
 
   function supportArt(agent, points, width, height, time) {
     agent = stageAgent(agent);
-    const point = supportPoint(agent, points, width, height), requested = poseFor(agent, time, 0);
+    if (agent.health <= 0 && !deathStarted.has(agent.id)) deathStarted.set(agent.id, clock);
+    const deathAge = agent.health > 0 ? 0 : clock - deathStarted.get(agent.id);
+    const point = supportPoint(agent, points, width, height), requested = poseFor(agent, time, deathAge);
     const { pose, source, asset } = readyPose(agent, requested, time);
     const geometry = pose && imageFrameGeometry(pose.animation, pose.frame);
     const size = displaySize(agent, pose) * formationScale(width, height), shadowScale = size / Math.min(width * .34, height * .72, 290);
     context.save(); context.translate(point.x, point.y);
-    context.strokeStyle = colors[agent.combat.side]; context.lineWidth = 2;
+    context.strokeStyle = colors[(agent.combat?.side ?? agent.side)]; context.lineWidth = 2;
     context.beginPath(); context.ellipse(0, 0, geometry?.groundRadiusX ? geometry.groundRadiusX * size * 1.12 : width * .065 * shadowScale,
       geometry?.groundRadiusY ? geometry.groundRadiusY * size * 1.12 : height * .03 * shadowScale, 0, 0, Math.PI * 2); context.stroke();
     const appearancePose = appearancePoses.get(String(agent.id));
     const appearanceDrawn = appearancePose && appearanceWorld.draw(context, agent, appearancePose, { x: 0, y: 0 },
-      100 * formationScale(width, height), agent.combat.side === 1, window.devicePixelRatio || 1);
-    const representativeDrawn = !appearanceDrawn && representativeArt.draw(context, agent, time, 0,
-      { pose, asset, geometry, size, sizeFor: current => displaySize(agent, current) * formationScale(width, height) }, 100 * formationScale(width, height), agent.combat.side === 1);
+      100 * formationScale(width, height), (agent.combat?.side ?? agent.side) === 1, window.devicePixelRatio || 1);
+    const representativeDrawn = !appearanceDrawn && representativeArt.draw(context, agent, time, deathAge,
+      { pose, asset, geometry, size, sizeFor: current => displaySize(agent, current) * formationScale(width, height) }, 100 * formationScale(width, height), (agent.combat?.side ?? agent.side) === 1);
     if (!appearanceDrawn && !representativeDrawn && asset) {
-      const mirror = pose?.mirrorX !== undefined ? pose.mirrorX : agent.species === "spiny-back-beetle" ? pose?.action === "attack" ? agent.combat.side === 1 : agent.combat.side === 0 :
-        agent.species && CREATURE_ATTACK_ANIMATIONS[agent.species] ? agent.combat.side === 0 : agent.combat.side === 1;
+      const mirror = pose?.mirrorX !== undefined ? pose.mirrorX : agent.species === "spiny-back-beetle" ? pose?.action === "attack" ? (agent.combat?.side ?? agent.side) === 1 : (agent.combat?.side ?? agent.side) === 0 :
+        agent.species && CREATURE_ATTACK_ANIMATIONS[agent.species] ? (agent.combat?.side ?? agent.side) === 0 : (agent.combat?.side ?? agent.side) === 1;
       context.save(); context.scale(mirror ? -1 : 1, 1);
       if (pose) { const { frameSize, columns, pivotX, pivotY, viewSize, registrationScale } = geometry;
         const scale = size * (registrationScale || 1) / (viewSize || frameSize);
@@ -21464,10 +21348,10 @@ function createCombatStage(canvas) {
       context.translate(Math.sin(clock * 150) * fade * (impact.event.critical ? 3 : 1.5), 0);
     }
     dodgePositions = new Map(trial.agents.map(agent => {
-      const point = position(agent, agent.combat.side, width, height, time), bounds = bodyDimensions(agent), cell = 100 * formationScale(width, height);
+      const point = position(agent, (agent.combat?.side ?? agent.side), width, height, time), bounds = bodyDimensions(agent), cell = 100 * formationScale(width, height);
       return [String(agent.id), { ...point, width: bounds.width * cell, height: bounds.height * cell }];
     }));
-    const points = Object.fromEntries(trial.agents.map(agent => [agent.id, fighter(agent, agent.combat.side, width, height, time, ended)]));
+    const points = Object.fromEntries(trial.agents.map(agent => [agent.id, fighter(agent, (agent.combat?.side ?? agent.side), width, height, time, ended)]));
     for (const agent of trial.supportAgents || []) points[agent.id] = supportArt(agent, points, width, height, time);
     const defenseCommands = vfx?.version === 1 ? detailVfx.defenseCommands(new Map(Object.entries(points)), clock) : [];
     const replacedDefenseIds = new Set(defenseCommands.filter(command => detailDefenseImageReady(image(command.image), command)).map(command => command.eventId));
@@ -21721,12 +21605,12 @@ function render() {
       elements[side+"Pieces"].dataset.over=String(stats.pieceCount>Number(elements.pieceLimit.value));
       elements[side+"Hp"].textContent=(agent?agent.health:stats.health).toFixed(1)+" / "+stats.health.toFixed(1);
       elements[side+"Bar"].style.width=(100*(agent?agent.health:stats.health)/stats.health)+"%";
-      const start = agent?.combat.cycleStartedAt || 0, end = agent?.combat.nextAttackAt || 0;
+      const start = agent?.combat?.cycleStartedAt || 0, end = agent?.combat?.nextAttackAt || 0;
       const progress = agent?.health > 0 && agent.stats.canAttack && end > start ? Math.max(0, Math.min(1, (trial.time - start) / (end - start))) : 0;
       elements[side+"Gauge"].style.width=(100*progress)+"%";
-      const reaction = agent?.combat.lastReaction, event = agent?.combat.lastEvent;
+      const reaction = agent?.combat?.lastReaction, event = agent?.combat?.lastEvent;
       const labels = {dodge:"회피",parry:"패링",block:"블록",stun:"기절"};
-      elements[side+"Reaction"].textContent = !agent ? "" : agent.health <= 0 ? "사망" : agent.combat.stunnedUntil > trial.time ? "기절" : reaction && trial.time - reaction.at < .65 ? labels[reaction.kind] || "" : event?.kind === "counter" && trial.time - event.at < .45 ? "반격" : agent.attack && trial.time < agent.attack.hitAt ? "공격 준비" : "";
+      elements[side+"Reaction"].textContent = !agent ? "" : agent.health <= 0 ? "사망" : (agent.combat?.stunnedUntil || agent.dnaStunnedUntil || 0) > trial.time ? "기절" : reaction && trial.time - reaction.at < .65 ? labels[reaction.kind] || "" : event?.kind === "counter" && trial.time - event.at < .45 ? "반격" : agent.attack && trial.time < agent.attack.hitAt ? "공격 준비" : "";
       const values=[["근접 공격력",stats.attackPower.toFixed(2)],["원거리 공격력",stats.rangedPower.toFixed(2)],["방어",stats.defense.toFixed(2)],["근접 공속",stats.attackSpeed.toFixed(2)+"/초"],["원거리 공속",stats.rangedSpeed.toFixed(2)+"/초"],["준비 / 후딜",stats.windup.toFixed(2)+" / "+stats.recovery.toFixed(2)+"초"],["연타 / 간격",stats.hitCount+"타 / "+stats.hitGap.toFixed(2)+"초"],["후속타",percent(stats.followupMultiplier)],["관통",stats.flatPenetration.toFixed(1)+" + "+percent(stats.armorPenetration)],["치명",percent(stats.critChance)+" ×"+stats.critMultiplier.toFixed(2)],["정밀 / 회피",percent(stats.accuracy)+" / "+percent(stats.evasion)],["패링 / 블록",percent(stats.parry)+" / "+percent(stats.block)],["블록 경감",percent(stats.blockReduction)],["반격",percent(stats.counter)+" ×"+stats.counterMultiplier.toFixed(2)],["강인함",percent(stats.tenacity)],["기절 / 타격당",percent(stats.stunChance)+" / "+percent(stats.stunChancePerHit)],["기절 시간",stats.stunDuration.toFixed(2)+"초"],["흡혈",percent(stats.drain)]];
       elements[side+"Derived"].replaceChildren(...values.flatMap(([label,value])=>[node("dt",label),node("dd",value)]));
     } catch(error) { elements.status.textContent=settingError(error); }

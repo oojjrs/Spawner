@@ -121,11 +121,11 @@ test("small-screen recovery labels stay inside the canvas and reduced motion kee
 
 test("real laboratory drain and ally-heal evidence render without changing deterministic simulation", () => {
   withStage(({ draw }) => {
-    const settings = { left: { key: "bean", organs: { attack: 1, heal: 1 }, counts: { drain: 5 } },
-      right: { key: "pebble", organs: { attack: 1 }, counts: {} }, distance: 1, random: false,
+    const settings = { left: { key: "bean", organs: { attack: 1, heal: 1 }, counts: { drain: 5, vitality: 5 } },
+      right: { key: "pebble", organs: { attack: 1 }, counts: { vitality: 5 } }, distance: 1, random: false,
       support: true, rules: { maxSeconds: 6 } };
     const trial = createSimulationTrial(settings), control = createSimulationTrial(settings);
-    trial.agents[0].health = control.agents[0].health = 5;
+    trial.agents[0].health = control.agents[0].health = 45;
     draw(trial);
     const observed = new Set();
     for (let index = 0; index < 30 && !trial.result()?.reason; index++) {

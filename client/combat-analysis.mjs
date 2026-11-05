@@ -10,7 +10,7 @@ function validateBatch(count, seed) {
 export function runSimulationBatch(settings, count, seed) {
   validateBatch(count, seed);
   const health = input => (Array.isArray(input) ? input : [input]).reduce((sum, build) => sum + deriveSimulationStats(build, settings.rules).health, 0);
-  const leftProfile = { health: health(settings.left) }, rightProfile = { health: health(settings.right) };
+  const leftProfile = { health: health(settings.left) * (settings.support ? 1.5 : 1) }, rightProfile = { health: health(settings.right) * (settings.support ? 1.5 : 1) };
   const report = { count, seed, leftWins: 0, rightWins: 0, draws: 0, timeouts: 0, noOffense: 0,
     meanDuration: 0, meanLeftHealth: 0, meanRightHealth: 0, meanLeftHealthRatio: 0, meanRightHealthRatio: 0,
     leftWinRate: 0, rightWinRate: 0, samples: [] };
