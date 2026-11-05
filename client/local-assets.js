@@ -1,4 +1,6 @@
 globalThis.SpawnerLocalAssetFiles = Object.freeze([
+  "./client/local-assets/Animations/BeanDominantHopV1/blade/hop.webp.js",
+  "./client/local-assets/Animations/BeanDominantHopV1/carapace/hop.webp.js",
   "./client/local-assets/Animations/BeanHeldHurtV1/antenna.webp.js",
   "./client/local-assets/Animations/BeanHeldHurtV1/base.webp.js",
   "./client/local-assets/Animations/BeanHeldHurtV1/blade.webp.js",

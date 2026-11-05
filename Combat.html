@@ -4846,6 +4846,56 @@ function drawCombatDodgeLabel(ctx, p, point, { width, height, vitals = [] } = {}
 
 return { combatDodgePose, drawCombatDodgeTrails, drawCombatDodgeGhosts, drawCombatDodgeLabel };
 })();
+modules["client/bean-dominant-hop.mjs"] = (() => {
+const { unitDisplayAttributes } = modules["client/unit-display-appearance.mjs"];
+const { UNIT_APPEARANCE_LEGACY_VISUAL_KEYS } = modules["server/unit-appearance.mjs"];
+
+const BEAN_DOMINANT_HOP_ANIMATIONS = Object.freeze(Object.fromEntries(["blade", "carapace"].map(form => [form,
+  Object.freeze({ action: "walk", image: `DesignAssets/Animations/BeanDominantHopV1/${form}/hop.webp`,
+    frameSize: 512, columns: 4, frameCount: 11, pivotX: 256, pivotY: 448,
+    frames: Object.freeze([0,1,2,3,4,5,5,5,5,5,5,5,5,5,5,5,5,6,3,7,8,9,10,0]),
+    durationMs: 960, durationsMs: Object.freeze(Array(24).fill(40)), loop: false, leafOnlyHop: true })])));
+const BEAN_DOMINANT_HOP_ASSETS = Object.freeze(Object.values(BEAN_DOMINANT_HOP_ANIMATIONS).map(clip => clip.image));
+
+// Own-source leaf response only. The existing world renderer owns the full
+// jump/lift/body stretch and cargo, so these clips contain no second hop.
+function beanDominantHopPose(agent, time) {
+  if (!agent || agent.species || (agent.tribe || "bean") !== "bean" || !(agent.health > 0) || agent.birth ||
+      !Number.isFinite(time) || !Number.isFinite(agent.moveStartedAt) || !Number.isFinite(agent.moveDuration) ||
+      !(agent.moveDuration > 0) || time < agent.moveStartedAt || time >= agent.moveStartedAt + agent.moveDuration ||
+      ["harvest", "unload", "jump"].includes(agent.mode)) return null;
+  const attributes = unitDisplayAttributes(agent);
+  if (UNIT_APPEARANCE_LEGACY_VISUAL_KEYS.some(key => attributes[key] > 0)) return null;
+  const form = attributes.blade > 0 ? "blade" : attributes.carapace > 0 ? "carapace" : null;
+  const animation = BEAN_DOMINANT_HOP_ANIMATIONS[form];
+  if (!animation) return null;
+  const progress = (time - agent.moveStartedAt) / agent.moveDuration;
+  const index = Math.min(animation.frames.length - 1, Math.floor(progress * animation.frames.length + 1e-9));
+  const frame = animation.frames[index];
+  return { action: "walk", frame, elapsed: progress * animation.durationMs, sampleTime: index * 40, animation,
+    beanDominantHop: true, progress };
+}
+
+const hopFrames = new WeakMap();
+function beanDominantHopFrame(image, pose, createSurface) {
+  const animation = pose?.beanDominantHop && pose.animation, size = animation?.frameSize, frame = pose?.frame;
+  if (!image || image.complete === false || !animation || !Number.isInteger(frame) || frame < 0 || frame >= animation.frameCount) return null;
+  const x = frame % animation.columns * size, y = Math.floor(frame / animation.columns) * size;
+  if (x + size > (image.naturalWidth || image.width) || y + size > (image.naturalHeight || image.height)) return null;
+  let frames = hopFrames.get(image);
+  if (!frames) hopFrames.set(image, frames = new Map());
+  if (frames.has(frame)) return frames.get(frame);
+  try {
+    const surface = createSurface(size, size), context = surface?.getContext("2d");
+    if (!context) return null;
+    context.drawImage(image, x, y, size, size, 0, 0, size, size);
+    frames.set(frame, surface); if (frames.size > 4) frames.delete(frames.keys().next().value);
+    return surface;
+  } catch { return null; }
+}
+
+return { BEAN_DOMINANT_HOP_ANIMATIONS, BEAN_DOMINANT_HOP_ASSETS, beanDominantHopPose, beanDominantHopFrame };
+})();
 modules["client/pebble-dominant-swing.mjs"] = (() => {
 // Canonical pebble blade attack: an anchored overhead sweep, rather than a
 // complete body roll. Only the approved V7 body, eyes, and feet are sampled.
@@ -10434,6 +10484,7 @@ const UNIT_COMBAT_DEATH_ANIMATIONS = Object.freeze({
 return { UNIT_COMBAT_DEATH_ANIMATIONS };
 })();
 modules["client/combat-evolution.mjs"] = (() => {
+const { BEAN_DOMINANT_HOP_ANIMATIONS, beanDominantHopPose, beanDominantHopFrame } = modules["client/bean-dominant-hop.mjs"];
 const { pebbleDominantSwingAppearance, preparePebbleDominantSwing, samplePebbleDominantSwing, renderPebbleDominantSwing } = modules["client/pebble-dominant-swing.mjs"];
 const { dominantDeliveryPose, dominantDeliverySample, renderDominantDelivery } = modules["client/dominant-delivery-motion.mjs"];
 const { dominantResourceHarvestPose, dominantResourceHarvestSample, renderDominantResourceHarvest } = modules["client/dominant-resource-motion.mjs"];
@@ -10604,9 +10655,15 @@ function createCombatEvolutionArt(assetSource, createSurface, loadImage) {
     return pending.get(key);
   }
   function sheet(source, action) {
-    if (!source.loading.has(action)) source.loading.set(action, loadImage((action === "death" && source.deathAnimation || source.definition.animations[action]).image).then(image => {
+    // An absent optional hop atlas must not start a failed decode every paint.
+    if (action === "hop" && source.hopRetryAfter > Date.now()) return Promise.resolve(null);
+    if (!source.loading.has(action)) source.loading.set(action, loadImage((action === "hop" ? BEAN_DOMINANT_HOP_ANIMATIONS[source.rig.variant] : action === "death" && source.deathAnimation || source.definition.animations[action]).image).then(image => {
       source.sheets.set(action, image); frames.clear(); return image;
-    }).catch(error => { source.loading.delete(action); throw error; }));
+    }).catch(error => {
+      source.loading.delete(action);
+      if (action === "hop") source.hopRetryAfter = Date.now() + 1000;
+      throw error;
+    }));
     return source.loading.get(action);
   }
   function profile(keys, action) {
@@ -10878,6 +10935,19 @@ function createCombatEvolutionArt(assetSource, createSurface, loadImage) {
     const deathAnimation = keys.length === 1 && !replacement && !["antenna", "strength", "arms", "feet"].some(key => attributes[key] > 0) ? source.deathAnimation : null;
     const animations = deathAnimation ? { ...source.definition.animations, death: deathAnimation } : source.definition.animations;
     const requested = combatEvolutionPose(agent, time, animations, skipResourceMotion), ranged = requested.ranged;
+    // Only these two canonical bean silhouettes use the source-owned leaf
+    // response. Existing outer world hop, combat, legacy rigs and cargo stay put.
+    const hop = requested.action === "idle" && !skipResourceMotion && !skipIdleSheet && keys.length === 1 && !replacement ? beanDominantHopPose(agent, time) : null;
+    if (hop) {
+      const image = source.sheets.get("hop");
+      if (!image) sheet(source, "hop").catch(() => {});
+      else {
+        const sprite = beanDominantHopFrame(image, hop, createSurface);
+        if (sprite) return sprite;
+      }
+      // Keep the old own-form idle while the new atlas loads or cannot draw.
+    }
+
     const rangedBody = ranged && !skipRangedExpression && !skipIdleSheet && keys.length === 1 && !replacement ? bladeRangedSample(source, requested) : null;
     const resourceRequested = requested.action === "harvest" && !skipResourceMotion;
     const beanHarvest = resourceRequested && !requested.dominantResource ? resourceBeanSample(source, requested.sampleTime) : null;

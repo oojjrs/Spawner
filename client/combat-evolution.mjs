@@ -1,3 +1,4 @@
+import { BEAN_DOMINANT_HOP_ANIMATIONS, beanDominantHopPose, beanDominantHopFrame } from "./bean-dominant-hop.mjs";
 import { pebbleDominantSwingAppearance, preparePebbleDominantSwing, samplePebbleDominantSwing, renderPebbleDominantSwing } from "./pebble-dominant-swing.mjs";
 import { dominantDeliveryPose, dominantDeliverySample, renderDominantDelivery } from "./dominant-delivery-motion.mjs";
 import { dominantResourceHarvestPose, dominantResourceHarvestSample, renderDominantResourceHarvest } from "./dominant-resource-motion.mjs";
@@ -168,9 +169,15 @@ export function createCombatEvolutionArt(assetSource, createSurface, loadImage) 
     return pending.get(key);
   }
   function sheet(source, action) {
-    if (!source.loading.has(action)) source.loading.set(action, loadImage((action === "death" && source.deathAnimation || source.definition.animations[action]).image).then(image => {
+    // An absent optional hop atlas must not start a failed decode every paint.
+    if (action === "hop" && source.hopRetryAfter > Date.now()) return Promise.resolve(null);
+    if (!source.loading.has(action)) source.loading.set(action, loadImage((action === "hop" ? BEAN_DOMINANT_HOP_ANIMATIONS[source.rig.variant] : action === "death" && source.deathAnimation || source.definition.animations[action]).image).then(image => {
       source.sheets.set(action, image); frames.clear(); return image;
-    }).catch(error => { source.loading.delete(action); throw error; }));
+    }).catch(error => {
+      source.loading.delete(action);
+      if (action === "hop") source.hopRetryAfter = Date.now() + 1000;
+      throw error;
+    }));
     return source.loading.get(action);
   }
   function profile(keys, action) {
@@ -442,6 +449,19 @@ export function createCombatEvolutionArt(assetSource, createSurface, loadImage) 
     const deathAnimation = keys.length === 1 && !replacement && !["antenna", "strength", "arms", "feet"].some(key => attributes[key] > 0) ? source.deathAnimation : null;
     const animations = deathAnimation ? { ...source.definition.animations, death: deathAnimation } : source.definition.animations;
     const requested = combatEvolutionPose(agent, time, animations, skipResourceMotion), ranged = requested.ranged;
+    // Only these two canonical bean silhouettes use the source-owned leaf
+    // response. Existing outer world hop, combat, legacy rigs and cargo stay put.
+    const hop = requested.action === "idle" && !skipResourceMotion && !skipIdleSheet && keys.length === 1 && !replacement ? beanDominantHopPose(agent, time) : null;
+    if (hop) {
+      const image = source.sheets.get("hop");
+      if (!image) sheet(source, "hop").catch(() => {});
+      else {
+        const sprite = beanDominantHopFrame(image, hop, createSurface);
+        if (sprite) return sprite;
+      }
+      // Keep the old own-form idle while the new atlas loads or cannot draw.
+    }
+
     const rangedBody = ranged && !skipRangedExpression && !skipIdleSheet && keys.length === 1 && !replacement ? bladeRangedSample(source, requested) : null;
     const resourceRequested = requested.action === "harvest" && !skipResourceMotion;
     const beanHarvest = resourceRequested && !requested.dominantResource ? resourceBeanSample(source, requested.sampleTime) : null;

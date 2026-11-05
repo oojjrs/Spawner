@@ -10342,6 +10342,34 @@
           312
         ]
       }
+    },
+    "DesignAssets/Animations/BeanDominantHopV1/blade/hop.webp": {
+      "display": [
+        512,
+        512
+      ],
+      "grid": [
+        4,
+        3
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
+    },
+    "DesignAssets/Animations/BeanDominantHopV1/carapace/hop.webp": {
+      "display": [
+        512,
+        512
+      ],
+      "grid": [
+        4,
+        3
+      ],
+      "sourceMaximum": [
+        512,
+        512
+      ]
     }
   }
 }
