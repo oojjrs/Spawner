@@ -1,17 +1,34 @@
-import { combatVfxAt } from "./combat-vfx-events.mjs";
+import { combatVfxAt, normalizeCombatVfxEvent } from "./combat-vfx-events.mjs";
 import { unitRangedPose, unitRangedProjectile, unitRangedDisplaySize } from "./unit-ranged.mjs";
 
+const rangedOutcomes = Object.freeze({ hit: "명중 판정", critical: "치명타 판정", block: "막기 판정",
+  dodge: "회피 판정", parry: "패링 판정", "projectile-cancel": "발사체 취소" });
+
 export function rangedReviewState(data, time) {
-  const state = combatVfxAt(data.events, time), launch = data.events.find(event => event.kind === "shoot");
-  const impact = data.events.find(event => event.projectileId === launch?.projectileId && event.kind === "hit");
-  return { ...state, phase: time < launch.at ? "발사 준비" : time < impact.at ? "비행 중" : "명중 판정",
-    sourcePose: unitRangedPose(data.source, time), targetPose: unitRangedPose(data.target, time),
-    health: data.target.health - (time >= impact.at ? impact.amount : 0), launch, impact };
+  const events = data.events.map(event => normalizeCombatVfxEvent(event)).filter(Boolean);
+  const state = combatVfxAt(events, time), launch = events.find(event => event.kind === "shoot");
+  // Follow the first actual closing event, just as the flight mapper does. An ETA
+  // alone is not evidence of a hit, and a cancelled shot cannot later deal damage.
+  const impact = launch && events.filter(event => event.projectileId === launch.projectileId &&
+    Object.hasOwn(rangedOutcomes, event.kind)).sort((a, b) => a.at - b.at)[0];
+  const resolved = impact && time >= impact.at;
+  const damaging = impact && ["hit", "critical", "block"].includes(impact.kind);
+  const damage = damaging && Number.isFinite(impact.amount) ? Math.max(0, impact.amount) : 0;
+  const outcome = impact?.kind === "hit" && impact.critical ? "critical" : impact?.kind;
+  const phase = !launch ? "발사 기록 없음" : time < launch.at ? "발사 준비" : resolved ? rangedOutcomes[outcome] :
+    time < launch.arrivesAt ? "비행 중" : "도착 판정 대기";
+  return { ...state, phase, sourcePose: unitRangedPose(data.source, time), targetPose: unitRangedPose(data.target, time),
+    health: Math.max(0, data.target.health - (resolved ? damage : 0)), launch, impact, outcome };
 }
 
 function attach(data) {
   const canvas = document.getElementById("vfx-ranged-scene");
   if (!canvas) return;
+  const scenarios = data.scenarios || [data];
+  const selector = document.getElementById("vfx-ranged-scenario");
+  for (const [index, scenario] of scenarios.entries()) {
+    const option = document.createElement("option"); option.value = String(index); option.textContent = scenario.label || "명중"; selector.append(option);
+  }
   const images = new Map(), $ = id => document.getElementById(id), reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   let ready = false, playing = !reduced, time = 0, previous = null;
   const sources = [data.background, data.sourceForm.idle.image, data.sourceForm.animation.image,
@@ -64,8 +81,16 @@ function attach(data) {
     $("vfx-ranged-time").value = String(Math.round(time * 1000));
     $("vfx-ranged-time-value").textContent = Math.round(time * 1000) + "ms";
     $("vfx-ranged-status").textContent = scene.phase + " · 대상 HP " + scene.health.toFixed(1) + " / " + data.target.stats.health +
-      " · 발사 " + Math.round(scene.launch.at * 1000) + "ms → 명중 " + Math.round(scene.impact.at * 1000) + "ms";
+      (scene.launch ? " · 발사 " + Math.round(scene.launch.at * 1000) + "ms" : "") +
+      (scene.impact ? " → " + rangedOutcomes[scene.outcome] + " " + Math.round(scene.impact.at * 1000) + "ms" : "");
   }
+  selector.addEventListener("change", () => {
+    data = scenarios[Number(selector.value)]; time = 0; previous = null; playing = false; sync(); render();
+  });
+  $("vfx-ranged-resolve").addEventListener("click", () => {
+    const scene = rangedReviewState(data, 0); time = scene.impact?.at ?? scene.launch?.arrivesAt ?? 0;
+    playing = false; previous = null; sync(); render();
+  });
   $("vfx-ranged-play").addEventListener("click", () => { playing = !playing; previous = null; sync(); });
   $("vfx-ranged-replay").addEventListener("click", () => { time = 0; previous = null; playing = true; sync(); render(); });
   $("vfx-ranged-time").addEventListener("input", event => { time = Number(event.target.value) / 1000; playing = false; previous = null; sync(); render(); });

@@ -7,6 +7,13 @@
     while(frame<clip.durationsMs.length-1&&remaining>=clip.durationsMs[frame])remaining-=clip.durationsMs[frame++];
     return clip.frames?.[frame]??frame;
   }
+  function effectFrameTimes(offsetMs=0) {
+    let at=300+data.hitAtMs+offsetMs;
+    return data.effect.durationsMs.map(ms=>{const start=at;at+=ms;return start});
+  }
+  function nextEffectFrame(time,offsetMs=0) {
+    return effectFrameTimes(offsetMs).find(at=>at>time+1e-7)??effectFrameTimes(offsetMs)[0];
+  }
   function bodyScale(action,worldPixels) {
     const idle=data.clips.idle,clip=data.clips[action],reference=data.bounds[idle.image],bounds=data.bounds[clip.image];
     const idleRatio=idle.frameSize/reference.frameSize,actionRatio=clip.frameSize/bounds.frameSize;
@@ -23,7 +30,7 @@
       targetFrame:frameAt(data.clips[targetAction],targetAction==='hurt'?time-hitAt:time),hitAt,
       effectFrame:data.effect&&effectAge>=0&&effectAge<duration(data.effect)?frameAt(data.effect,effectAge):null};
   }
-  globalThis.SpawnerVfxHitPreview=Object.freeze({frameAt,bodyScale,sceneAt,duration});
+  globalThis.SpawnerVfxHitPreview=Object.freeze({frameAt,bodyScale,sceneAt,duration,effectFrameTimes,nextEffectFrame});
   if(!globalThis.document)return;
   const $=id=>document.getElementById(id),canvases=[$('vfx-baseline'),$('vfx-effect')],images=new Map();
   let playing=!matchMedia('(prefers-reduced-motion: reduce)').matches,time=0,previous=null,effectScale=1,offsetMs=0,ready=false;
@@ -59,7 +66,7 @@
   function createFrames(){
     const names=['발생','타격','분해','확산','잔여','미세 조각','소멸','빈 프레임'];
     for(let i=0;i<data.effect.frameCount;i++){
-      const item=document.createElement('div');item.className='frame';item.innerHTML='<canvas width="160" height="160"></canvas><span>'+String(i+1)+' · '+names[i]+'</span>';
+      const item=document.createElement('button');item.type='button';item.className='frame';item.setAttribute('aria-label',names[i]+' 프레임으로 이동');item.addEventListener('click',()=>{time=effectFrameTimes(offsetMs)[i];playing=false;previous=null;syncPlay();render()});item.innerHTML='<canvas width="160" height="160"></canvas><span>'+String(i+1)+' · '+names[i]+'<br>'+data.effect.durationsMs[i]+'ms</span>';
       const context=item.querySelector('canvas').getContext('2d'),source=loaded.get(data.effect.image),f=data.effect.frameSize;
       context.drawImage(source,i%data.effect.columns*f,Math.floor(i/data.effect.columns)*f,f,f,0,0,160,160);$('vfx-frames').append(item);
     }
@@ -72,7 +79,7 @@
   function syncPlay(){$('vfx-play').textContent=playing?'일시정지':'재생';$('vfx-play').setAttribute('aria-pressed',String(!playing))}
   $('vfx-play').addEventListener('click',()=>{playing=!playing;previous=null;syncPlay()});
   $('vfx-replay').addEventListener('click',()=>{time=Math.max(0,300+data.hitAtMs-100);playing=true;previous=null;syncPlay();render()});
-  $('vfx-step').addEventListener('click',()=>{playing=false;previous=null;time=(time+40)%1800;syncPlay();render()});
+  $('vfx-step').addEventListener('click',()=>{playing=false;previous=null;time=nextEffectFrame(time,offsetMs);syncPlay();render()});
   $('vfx-time').addEventListener('input',event=>{playing=false;time=Number(event.target.value);previous=null;syncPlay();render()});
   $('vfx-scale').addEventListener('input',event=>{effectScale=Number(event.target.value);$('vfx-scale-value').textContent=effectScale+'배';render()});
   $('vfx-offset').addEventListener('input',event=>{offsetMs=Number(event.target.value);$('vfx-offset-value').textContent=(offsetMs>0?'+':'')+offsetMs+'ms';render()});
