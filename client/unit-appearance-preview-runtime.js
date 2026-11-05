@@ -3053,7 +3053,7 @@ const UNIT_APPEARANCE_ASSETS = Object.freeze({
       "walk": {
         "sourceId": "unit-appearance-v1-spore-00-neutral-v1",
         "image": "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/walk-v2.webp",
-        "imageHash": "54cb430a848400e1f6742a737f135467de1852600b8555e42ae16c484d351682",
+        "imageHash": "368c1bb19b3355d26bd0a156637ee75e3f6781a81df457b1a34a43611661da2d",
         "frameSize": 512,
         "columns": 4,
         "frameCount": 16,
@@ -3080,7 +3080,7 @@ const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "pivotY": 448,
         "cameraMapping": {
           "verified": true,
-          "sourceHash": "54cb430a848400e1f6742a737f135467de1852600b8555e42ae16c484d351682",
+          "sourceHash": "368c1bb19b3355d26bd0a156637ee75e3f6781a81df457b1a34a43611661da2d",
           "pixelsPerWorld": 1112.2889190188587,
           "scale": 0.4603120567375886,
           "offsetX": 138.1601134751773,

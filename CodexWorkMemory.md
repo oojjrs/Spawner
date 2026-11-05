@@ -81,6 +81,50 @@
 ## 2026-11-05 포자버섯 원화 승인 반영
 
 - 사용자 「포자버섯 원화는 다 오케이」에 따라 검토된 포자 원화14종의 source 승인만 기록했다. 원본 픽셀/해시는 유지하며 실제 메시지 증거를 받아들이도록 승인 검사를 보완했다. 카메라 검수·동작 완성·worldReady는 올리지 않는다. 미승인 보관 이력은 포함하지 않고 공개 main의 8a4a8174에서 분리했다.
+## 포자버섯 이동 수정 커밋 범위 확정 · 01a1ab80
+
+- 기록 ID: spore-walk-commit-scope-20261105-01a1ab80. 기록 시각 2026-11-05T21:58:46+09:00. 기록·커밋범위분리 Codex /root, 커밋승인 사용자. 출처 현재채팅01a1ab80-f460-71f2-b106-ce21cfac6f23의최신「커밋해」,H:/Spawner Windows PowerShell/local. 원발언정확시각·항목ID불명.
+- 현재승인은직전완료한포자버섯이동의그림·메타데이터·원본/리그·오프라인사본·등록해시와본채팅작업기록을묶는로컬커밋이다. 푸시·배포와다른채팅의전투/DNA/웰컴/Design변경은포함하지않는다. 연결보드없음결과는앞선동일작업의조회근거를재사용한다.
+- 후보는애니관련17경로와메모리의01a1ab80관련기록6구간뿐이다. 메모리는다른미커밋기록을보존하고이채팅구간만HEAD기록에추가한별도인덱스로분리한다. 현재기본인덱스와다른작업파일은보존하며커밋후해당경로만새HEAD에맞춘다.
+- 기존최종검수결과와바이트를재사용한다. 마지막메타데이터정리에서stridePxPerCycle도현재리그의stance8px/반주기에서유도한16px/주기로맞췄고파일형식검사가통과했다. 이번커밋을위해게임재빌드·재생검사를반복하지않는다. 아직커밋성공을선기록하지않는다.
+
+## 포자버섯 이동 idle 기준 보정 완료 · 01a1ab80 현재 요약
+
+- 기록 ID: spore-walk-idle-harmonized-complete-20261105-01a1ab80. 기록·최종 실제 확인 시각 2026-11-05T21:53:12+09:00. 기록·제작·검수 Codex /root, 기준 승인·pull 후 잔여 보정 요청 사용자. 출처 현재 채팅01a1ab80-f460-71f2-b106-ce21cfac6f23,H:/Spawner Windows PowerShell/local. 원발언 정확시각·턴/항목ID 불명. spore-idle-walk-review의기준승인대기는사용자승인으로대체되고,spore-walk-approved-resume 및representative 기록의제작진행은이완료기록으로갱신한다.
+- 동기화: origin/main fetch와ff-only병합은Already up to date, 당시로컬/원격d736c2aa2a0952f439efb8c9951e374efd0503f8·차이0/0. 원래idle/walk자산해시가이전비교와같아선행수정없음을확인한뒤진행했다. 연결된GitHubProjects는nodes[]로없었다.
+- 실제변경: 승인idle0의갓·몸통·발원화와기존hidden-stem으로이동을재조립했다. 갓/몸통/좌우발을독립본·고정bind로구성하고camera변환을한번적용했다. 발윤곽마스크의위치·높이차이와파츠에섞인상대부위픽셀을정리하고갓/몸통2px겹침으로리샘플접합틈을막았다. 전체이미지흔들기·페이드전환·매프레임bbox맞춤은사용하지않았다. 원본idle는그대로이며다른동작/외형전체완성으로확대하지않는다.
+- 출력: DesignAssets/Tribes/spore/AnimationStudies/walk-v2/walk-v2.webp,2048×2048·512셀·16프레임·70ms/프레임·1.12초루프·피벗256/448. 최종SHA256368c1bb19b3355d26bd0a156637ee75e3f6781a81df457b1a34a43611661da2d,1377356bytes. Source/에실제승인키·4파츠·hiddenstem·rig.json·export.mjs·preview.gif를보존한다. export는SPAWNER_ART_NODE_MODULES와출력폴더를받고동일바이트WebP를재현했다.
+- 연결범위: 기존게임이쓰는같은image경로를교체해공유game/runtime동작코드는바꾸지않았다. walk-v2.json의과거108셀메타정보를실제512와승인원화/리그로맞췄다. spore/00/motions.json,unit-appearance-assets·preview-runtime·lazy-assets의해시/크기,일반local-assets및unit-appearance-files의해당이미지payload만동기화했다. 모션원형과래퍼바이트/해시일치확인. 이미진행중이던Design·game/runtime·오디오·웰컴·탄생미리보기등다른채팅변경은보존했다.
+- 실제검수: 보존리그재출력=설치본해시일치,idle해시fec5d88c1f0a6d1ddb69581948671da5477330b8a262cfb4219af25e62b9f8e7불변,local/appearancepayload·lazy/clip해시일치,프레임/시간/피벗계약,16프레임클리핑없음·눈간격83px±1 통과. 최종headlessChrome에서16프레임0~15 전부2루프관측,pageerror0. 최종installed-comparison.png를직접확인했다. 처음하네스는첫rAF타임스탬프가시작performance.now보다이른경우-1을세어16개조건에서시간초과했고,경과0하한으로검사기를바로잡아정상통과했다. 애니자산예외를은폐한수정이아니다. 실제게임전체플레이/모든속성조합검수로확대해보고하지않는다.
+- 근거: literal달러Trash/spore-idle-walk-20261105/production의final-qa.json·installed-comparison.png와before-install/작업원본. 로컬수정완료이며커밋·푸시·배포는요청없어미실행이다. 다음은사용자시각검토또는별도Git완료요청이다.
+
+## 포자버섯 idle·이동 비교 완료 · 기준 원화 확인 대기
+
+- 기록 ID: spore-idle-walk-review-20261105-01a1ab80. 기록·마지막 관찰 시각: 2026-11-05T20:45:47+09:00. 기록·관찰·수정안 판단 Codex /root, 문제 제보·최종 기준 승인 주체 사용자. 출처 현재 채팅 01a1ab80-f460-71f2-b106-ce21cfac6f23, H:/Spawner Windows PowerShell / local. 원발언 정확 시각·턴/항목 ID 불명. 자세한 원본/이력 진단은 spore-idle-walk-diagnosis-20261105-01a1ab80 참조.
+- 실제 비교 산출물은 literal $Trash/spore-idle-walk-20261105/current-comparison.png. 현행 unit-matrix-data의 배율·등록피벗·512기준 world카메라를 고정하고 현재 원본을 그대로 샘플링했다. 좌idle/우walk, 윗줄0프레임/아랫줄같은1600ms의idle16·walk6이다. PNG를 직접열어봤다. 걷기의몸통양옆은idle보다거칠고발·몸통비율도다르다. 단순전체배율보다idle낮춤동작과이동작화/파츠품질차이를분리해수정해야한다.
+- Codex 제안: 비교왼쪽위idle0을공통몸체원화로확인받고동일크기·비율·텍스처·바닥선으로이동을다시맞춘다. 기존idle눌림동작을폐기한다는결정은없다. oojjrs-2d-sprite-animation의기준원화실물확인규정때문에이제안을사용자에게제시하고확인을기다린다. 아직확인되지않았으므로파츠분리·리깅·중간프레임·전체재제작은미착수다.
+- 실제변경은진단비교PNG와이메모리뿐이며게임소스·애니원본·Design은수정하지않았다. 사용자작업/병행메모리는보존했다. 다음은기준확인후제작단계이며Git완료·배포·새유료생성으로확대하지않는다.
+
+## 포자버섯 idle·이동 크기/해상도 진단 · 01a1ab80 현재 요약
+
+- 기록 ID: spore-idle-walk-diagnosis-20261105-01a1ab80. 기록·마지막 확인 시각: 2026-11-05T20:44:17+09:00. 기록자·진단 Codex /root, 문제 제보 사용자. 출처 현재 채팅 01a1ab80-f460-71f2-b106-ce21cfac6f23, H:/Spawner Windows PowerShell / local 호스트. 원발언 정확 시각·턴/항목 ID 불명. 사용자는 포자버섯 이동·idle의 크기와 해상도 불일치를 제보했다.
+- 현재 소스/실제 이미지 읽기: idle-v8은 64프레임, 실제 셀549(2196×8784); walk-v2는16프레임, 셀512(2048×2048). 두 JSON의224/108은 과거 수치이며 현재 물리 크기로 오인하지 않는다. client/image-geometry와unit-sprite-registration이 실제셀549/512 및공통피벗으로변환한다. game.prepareUnitAnimationSheets의idle기준camera와Design.unit-matrix-preview의등록배율을대조했다.
+- 현재원본 복원 이력: git73f9542^는idle셀240·walk셀108, git9f9662c^는둘다셀512. tools/unit-animation-unification-20261104/art-resolution/restore.mjs는옛고해상도원본을복원하고등록여백을재적용했다. 현행walk512를108이미지의단순확대본이라고단정하지않는다.
+- 기존등록report와실제소스를대조한진단: idle첫폭423·높이306,walk첫폭428·높이297;현재공통카메라에서폭차약1.26%. idle16/36프레임은높이166으로처음보다약45.8%낮고walk높이는297~309. 기존idle갓내리기동작과이동몸통·얼굴비율차이를단순배율변경으로숨기지않는다. JPG기존비교도직접관찰했다. 최신요구는기존camera검증통과가시각일치승인은아님을분명히한다.
+- 현재작업판단: 원본해상도·여백차이와외형/포즈차이를구분해동일배율비교를먼저제시한다. 게임원본·등록메타데이터·Design·다른채팅작업을수정하지않았다. 동작/크기를새로잡아전체제작할경우oojjrs-2d-sprite-animation의실제키프레임확인이필요하며기존디자인승인을이번동작확인으로대체하지않는다. 새유료생성·커밋·푸시·배포승인없음. 기존메모리병행변경보존.
+
+## 포자버섯 이동 보정 재개 · pull 및 기준 원화 승인
+
+- 기록 ID: spore-walk-approved-resume-20261105-01a1ab80. 기록 시각 2026-11-05T21:25:56+09:00. 기록·동기화·구현 판단 Codex /root, 기준 원화·보정 승인/재개 주체 사용자. 출처 현재 채팅01a1ab80-f460-71f2-b106-ce21cfac6f23,H:/Spawner Windows PowerShell/local. 원발언 정확시각·턴/항목ID 불명.
+- 사용자 명시 승인: 비교의 왼쪽 위 idle 원화를 기준으로 이동 크기·체형·선명도를 맞춘다. 다른 곳 수정 가능성을 고려해 pull 먼저, 이후 푸시 대기로 잠시 중단했다가 최신 요청으로 재개했다. 기존 승인대기 상태를 이 승인으로 대체한다. idle의 눌림 동작을 새로 폐기하거나 다른 애니를 재작업하라는 범위는 아니다.
+- 실제 origin/main fetch 및 ff-only 병합 결과 Already up to date, HEAD/원격 d736c2aa2a0952f439efb8c9951e374efd0503f8, 앞섬/뒤짐0/0. idle SHA fec5d88c1f0a6d1ddb69581948671da5477330b8a262cfb4219af25e62b9f8e7 / walk SHA54cb430a848400e1f6742a737f135467de1852600b8555e42ae16c484d351682로 이전 관찰과 동일하여 선행 수정 없음. 현재 메모리/Design·탄생미리보기·오디오·웰컴·game/runtime·unit-matrix 등의 병행 변경은 보존한다. 연결된 GitHub Projects GraphQL 결과 nodes[]로 보드 없음.
+- 제작 판단: 기존512 원화와 완전한 stem/foot 파츠를 git9f9662c^에서 작업 폴더로 복구했고 실제 이미지를 직접 확인했다. 승인idle의 눈간격83px와 원본stem83px가 동일하다. 승인idle의cap/visiblebody와 기존hiddenstem·feet를 필요한 범위에 조합한 고해상도 파츠 리그로 외형을 유지하며 이동동작의카메라·바닥선·선명도를 맞춘다. 16×70ms/기존이동방향·루트모션없음 계약 유지, 대표 구간을 먼저 재생 확인한 뒤 전체 출력으로 진행한다. 전체 이미지 늘이기·페이드 교체는 사용하지 않는다.
+- 현재 권한상 H:/Spawner는 읽기만 가능하므로 요청에 필요한 작업폴더/애니 출력/메모리 쓰기는 경로를 한정한 도구 승격으로 수행한다. 커밋·푸시·배포는 이번 요청에 없고 실행하지 않는다.
+
+## 포자버섯 이동 대표 구간 통과 · 전체 출력 진행
+
+- 기록 ID: spore-walk-representative-20261105-01a1ab80. 기록 시각 2026-11-05T21:37:08+09:00. 기록·제작·검수 Codex /root, 기준 승인 사용자. 출처 현재 채팅01a1ab80-f460-71f2-b106-ce21cfac6f23,H:/Spawner/local. 대표8프레임을 실제 headless Chrome Canvas에서70ms 간격으로2회 반복했고8프레임 모두 진행·pageerror0을 관측했다. representative-playback.png와 후보 비교를 직접 열었다. 갓/몸통/발을 독립 파츠로 조립하며 발마스크의 y등록5px차이와높이20%차이를 바로잡아 남는 발윤곽을 제거했다. 현재 공통 sourceToOutput=512*(240/224)/549로 idle와walk의 기존camera차이를상쇄한다. 전체16프레임으로확대하고최종WebP·실사용wrapper·등록해시만국소동기화한다. 원본idle와공유runtime/game의병행수정은바꾸지않는범위다.
+
 ## welcome-arrival-timing-commit-freeze-20261105-01a1a12e
 
 - 기록 시각: 2026-11-05T21:47:30+09:00; 승인 주체: 사용자(최신 「커밋」), 범위 분리/Git 실행 주체: Codex /root; 출처 현재 채팅 01a1a12e-3f3f-72c1-95e2-0b5b349b5ffb. 원발언 정확시각/항목ID 불명.

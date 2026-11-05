@@ -1,0 +1,122 @@
+{
+  "source": "approved-idle-key.png",
+  "sourceHash": "f0283fc0996e528bfe73e91c705e4e55f90f045182344684203a8e2e1fc8ca11",
+  "frameSize": 512,
+  "frameCount": 16,
+  "durationsMs": [
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70
+  ],
+  "columns": 4,
+  "pivotX": 256,
+  "pivotY": 448,
+  "sourcePivot": {
+    "x": 274.5,
+    "y": 480.375
+  },
+  "sourceToOutput": 0.9992193598750976,
+  "bind": {
+    "body": [
+      274.5,
+      452
+    ],
+    "cap": [
+      274.5,
+      344
+    ],
+    "foot-left": [
+      216,
+      452
+    ],
+    "foot-right": [
+      328,
+      452
+    ]
+  },
+  "bones": {
+    "root": null,
+    "body": "root",
+    "cap": "body",
+    "foot-left": "root",
+    "foot-right": "root"
+  },
+  "drawOrder": [
+    "foot-right",
+    "body",
+    "cap",
+    "foot-left"
+  ],
+  "hiddenSurfaceSource": "hidden-stem-source.png",
+  "hiddenSurfaceOffset": [
+    18,
+    29
+  ],
+  "footMaskSourceOffset": [
+    18,
+    28
+  ],
+  "rootMotion": false,
+  "alphaCrossfade": false,
+  "parts": {
+    "body": "Parts/body.png",
+    "cap": "Parts/cap.png",
+    "foot-left": "Parts/foot-left.png",
+    "foot-right": "Parts/foot-right.png"
+  },
+  "approval": {
+    "sourceThread": "01a1ab80-f460-71f2-b106-ce21cfac6f23",
+    "speaker": "user",
+    "reference": "upper-left-idle-key",
+    "scope": [
+      "size",
+      "body-proportions",
+      "clarity"
+    ],
+    "sourceUtteranceTime": null
+  },
+  "footMaskSource": {
+    "gitRevision": "9f9662c^",
+    "paths": [
+      "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/Parts/foot-left.png",
+      "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/Parts/foot-right.png"
+    ],
+    "scaleY": 1.2,
+    "anchorSourceY": 419,
+    "anchorTargetY": 447,
+    "offsetX": 18,
+    "maskMargin": 3
+  },
+  "provenance": {
+    "kind": "approved-idle-parts-with-existing-hidden-stem",
+    "idleImage": "DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp",
+    "idleImageHash": "fec5d88c1f0a6d1ddb69581948671da5477330b8a262cfb4219af25e62b9f8e7",
+    "idleFrame": 0,
+    "previousMovementHash": "54cb430a848400e1f6742a737f135467de1852600b8555e42ae16c484d351682",
+    "hiddenStemRevision": "9f9662c^"
+  },
+  "motion": {
+    "bodySway": 0.65,
+    "bodyLift": 1.5,
+    "bodyTilt": 0.004,
+    "capLift": 0.45,
+    "capTilt": 0.006,
+    "footStride": 8,
+    "footLift": 6,
+    "footTilt": 0.09,
+    "footPhase": 0.25
+  }
+}

@@ -2,11 +2,11 @@
   "tribe": "spore",
   "action": "walk",
   "status": "approved",
-  "approvedDesignSource": "DesignAssets/Tribes/spore/BaseParts/neutral.png",
-  "sourceSha256": "9fc49e637333075efd88ff4b9ae0df5a2bf05f3bf3f792cd1f3594b4ad1f36c9",
+  "approvedDesignSource": "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/Source/approved-idle-key.png",
+  "sourceSha256": "f0283fc0996e528bfe73e91c705e4e55f90f045182344684203a8e2e1fc8ca11",
   "frameSize": [
-    108,
-    108
+    512,
+    512
   ],
   "columns": 4,
   "frameCount": 16,
@@ -31,29 +31,36 @@
   "loop": true,
   "rootMotion": false,
   "pivot": [
-    54,
-    94.5
+    256,
+    448
   ],
-  "stridePxPerCycle": 48,
-  "atlas": "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/walk-v2.png",
+  "stridePxPerCycle": 16,
+  "atlas": "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/walk-v2.webp",
   "runtimeAtlas": "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/walk-v2.webp",
-  "preview": "DesignAssets/Planning/Tribes/spore/AnimationStudies/walk-v2/walk-preview.gif",
-  "comparison": "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/walk-comparison-preview.gif",
+  "preview": "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/Source/preview.gif",
   "parts": [
-    "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/Parts/stem.png",
-    "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/Parts/cap-back.png",
-    "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/Parts/cap-front.png",
-    "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/Parts/face.png",
-    "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/Parts/foot-left.png",
-    "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/Parts/foot-right.png"
+    "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/Source/Parts/body.png",
+    "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/Source/Parts/cap.png",
+    "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/Source/Parts/foot-left.png",
+    "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/Source/Parts/foot-right.png"
   ],
   "motion": {
-    "stem": "small elastic rebound and alternating weight shift",
-    "cap": "delayed rocking and soft rim flex",
-    "joint": "hidden stem extension with a separate front occluder",
-    "face": "rigid rotation and translation",
-    "feet": "short linear stance with arced recovery",
-    "resampling": "bilinear premultiplied-alpha"
+    "body": "rigid idle body, small weight transfer",
+    "cap": "separate rigid cap, delayed rocking",
+    "feet": "alternating stance and arced recovery",
+    "resampling": "source-resolution parts, 2x rasterization, final Lanczos3"
   },
-  "approvedOn": "2026-10-23"
+  "approvedOn": "2026-11-05",
+  "rig": "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/Source/rig.json",
+  "approval": {
+    "sourceThread": "01a1ab80-f460-71f2-b106-ce21cfac6f23",
+    "speaker": "user",
+    "reference": "upper-left-idle-key",
+    "scope": [
+      "size",
+      "body-proportions",
+      "clarity"
+    ],
+    "sourceUtteranceTime": null
+  }
 }

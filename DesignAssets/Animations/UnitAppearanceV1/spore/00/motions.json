@@ -117,16 +117,22 @@
       "pivotX": 256,
       "pivotY": 448,
       "events": [],
-      "sourceHash": "54cb430a848400e1f6742a737f135467de1852600b8555e42ae16c484d351682",
+      "sourceHash": "368c1bb19b3355d26bd0a156637ee75e3f6781a81df457b1a34a43611661da2d",
       "cameraMapping": {
         "verified": true,
-        "sourceHash": "54cb430a848400e1f6742a737f135467de1852600b8555e42ae16c484d351682",
+        "sourceHash": "368c1bb19b3355d26bd0a156637ee75e3f6781a81df457b1a34a43611661da2d",
         "pixelsPerWorld": 1112.2889190188587,
         "scale": 0.4603120567375886,
         "offsetX": 138.1601134751773,
         "offsetY": 241.78019858156028,
         "method": "preserve-existing-game-fixed-native-camera",
-        "verification": "tools/native-appearance-registration-20261104/report.json"
+        "verification": "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/Source/rig.json"
+      },
+      "provenance": {
+        "kind": "approved-idle-part-rig",
+        "rig": "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/Source/rig.json",
+        "sourceImage": "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/Source/approved-idle-key.png",
+        "sourceHash": "f0283fc0996e528bfe73e91c705e4e55f90f045182344684203a8e2e1fc8ca11"
       }
     },
     "jump": {

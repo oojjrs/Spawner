@@ -247,8 +247,8 @@ globalThis.SpawnerUnitAppearanceFiles = Object.freeze({
   },
   "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/walk-v2.webp": {
     "script": "client/unit-appearance-files/Tribes/spore/AnimationStudies/walk-v2/walk-v2.webp.js",
-    "bytes": 1000380,
-    "hash": "54cb430a848400e1f6742a737f135467de1852600b8555e42ae16c484d351682",
+    "bytes": 1377356,
+    "hash": "368c1bb19b3355d26bd0a156637ee75e3f6781a81df457b1a34a43611661da2d",
     "mime": "image/webp"
   },
   "DesignAssets/Tribes/spore/Animations/Units/jump/jump.webp": {
