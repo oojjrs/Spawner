@@ -22,6 +22,8 @@ const reactionLabels = { dodge: "회피", parry: "패링", block: "방어", stun
 const beetleCorpse = imageAnimation({ image: "DesignAssets/Animations/BeetleDeath/dead-v2.png", frameSize: 185, columns: 1, pivotX: 95.5, pivotY: 163 });
 
 function stageAgent(agent) {
+  if (agent.labAppearance) agent = { ...agent, tribe: UNIT_ANIMATIONS[agent.key] ? agent.key : undefined,
+    species: UNIT_ANIMATIONS[agent.key] ? undefined : agent.key };
   if (!agent.species && !agent.tribe && agent.key) agent = UNIT_ANIMATIONS[agent.key] ? { ...agent, tribe: agent.key } : { ...agent, species: agent.key };
   // Laboratory builds have capability flags rather than DNA appearance traits.
   // Keep this inference on a render-local copy, never on the simulation agent.
@@ -150,7 +152,7 @@ export function createCombatStage(canvas) {
     const recoil = reducedMotion.matches ? 0 : impact ? Math.sin(age * Math.PI) * 16 : dodge ? 26 * Math.sin((clock - dodge.born) / .22 * Math.PI) : 0;
     const distance = currentTrial?.agents.every(entry => Number.isFinite(entry.x)) ? Math.abs(currentTrial.agents[1].x - currentTrial.agents[0].x) : 1;
     const gap = Math.min(.64, .2 * Math.max(1, distance));
-    const members = currentTrial.agents.filter(other => other.combat.side === index);
+    const members = currentTrial.agents.filter(other => (other.combat?.side ?? other.side) === index);
     if (currentTrial.agents.length > 2) {
       const slot = members.indexOf(agent), columns = Math.ceil(Math.sqrt(members.length)), rows = Math.ceil(members.length / columns);
       return { x: width * (index === 0 ? .12 + .28 * ((slot % columns + .5) / columns) : .88 - .28 * ((slot % columns + .5) / columns)) + direction * (lunge - recoil) * width / 1040,
@@ -339,22 +341,24 @@ export function createCombatStage(canvas) {
 
   function supportArt(agent, points, width, height, time) {
     agent = stageAgent(agent);
-    const point = supportPoint(agent, points, width, height), requested = poseFor(agent, time, 0);
+    if (agent.health <= 0 && !deathStarted.has(agent.id)) deathStarted.set(agent.id, clock);
+    const deathAge = agent.health > 0 ? 0 : clock - deathStarted.get(agent.id);
+    const point = supportPoint(agent, points, width, height), requested = poseFor(agent, time, deathAge);
     const { pose, source, asset } = readyPose(agent, requested, time);
     const geometry = pose && imageFrameGeometry(pose.animation, pose.frame);
     const size = displaySize(agent, pose) * formationScale(width, height), shadowScale = size / Math.min(width * .34, height * .72, 290);
     context.save(); context.translate(point.x, point.y);
-    context.strokeStyle = colors[agent.combat.side]; context.lineWidth = 2;
+    context.strokeStyle = colors[(agent.combat?.side ?? agent.side)]; context.lineWidth = 2;
     context.beginPath(); context.ellipse(0, 0, geometry?.groundRadiusX ? geometry.groundRadiusX * size * 1.12 : width * .065 * shadowScale,
       geometry?.groundRadiusY ? geometry.groundRadiusY * size * 1.12 : height * .03 * shadowScale, 0, 0, Math.PI * 2); context.stroke();
     const appearancePose = appearancePoses.get(String(agent.id));
     const appearanceDrawn = appearancePose && appearanceWorld.draw(context, agent, appearancePose, { x: 0, y: 0 },
-      100 * formationScale(width, height), agent.combat.side === 1, window.devicePixelRatio || 1);
-    const representativeDrawn = !appearanceDrawn && representativeArt.draw(context, agent, time, 0,
-      { pose, asset, geometry, size, sizeFor: current => displaySize(agent, current) * formationScale(width, height) }, 100 * formationScale(width, height), agent.combat.side === 1);
+      100 * formationScale(width, height), (agent.combat?.side ?? agent.side) === 1, window.devicePixelRatio || 1);
+    const representativeDrawn = !appearanceDrawn && representativeArt.draw(context, agent, time, deathAge,
+      { pose, asset, geometry, size, sizeFor: current => displaySize(agent, current) * formationScale(width, height) }, 100 * formationScale(width, height), (agent.combat?.side ?? agent.side) === 1);
     if (!appearanceDrawn && !representativeDrawn && asset) {
-      const mirror = pose?.mirrorX !== undefined ? pose.mirrorX : agent.species === "spiny-back-beetle" ? pose?.action === "attack" ? agent.combat.side === 1 : agent.combat.side === 0 :
-        agent.species && CREATURE_ATTACK_ANIMATIONS[agent.species] ? agent.combat.side === 0 : agent.combat.side === 1;
+      const mirror = pose?.mirrorX !== undefined ? pose.mirrorX : agent.species === "spiny-back-beetle" ? pose?.action === "attack" ? (agent.combat?.side ?? agent.side) === 1 : (agent.combat?.side ?? agent.side) === 0 :
+        agent.species && CREATURE_ATTACK_ANIMATIONS[agent.species] ? (agent.combat?.side ?? agent.side) === 0 : (agent.combat?.side ?? agent.side) === 1;
       context.save(); context.scale(mirror ? -1 : 1, 1);
       if (pose) { const { frameSize, columns, pivotX, pivotY, viewSize, registrationScale } = geometry;
         const scale = size * (registrationScale || 1) / (viewSize || frameSize);
@@ -459,10 +463,10 @@ export function createCombatStage(canvas) {
       context.translate(Math.sin(clock * 150) * fade * (impact.event.critical ? 3 : 1.5), 0);
     }
     dodgePositions = new Map(trial.agents.map(agent => {
-      const point = position(agent, agent.combat.side, width, height, time), bounds = bodyDimensions(agent), cell = 100 * formationScale(width, height);
+      const point = position(agent, (agent.combat?.side ?? agent.side), width, height, time), bounds = bodyDimensions(agent), cell = 100 * formationScale(width, height);
       return [String(agent.id), { ...point, width: bounds.width * cell, height: bounds.height * cell }];
     }));
-    const points = Object.fromEntries(trial.agents.map(agent => [agent.id, fighter(agent, agent.combat.side, width, height, time, ended)]));
+    const points = Object.fromEntries(trial.agents.map(agent => [agent.id, fighter(agent, (agent.combat?.side ?? agent.side), width, height, time, ended)]));
     for (const agent of trial.supportAgents || []) points[agent.id] = supportArt(agent, points, width, height, time);
     const defenseCommands = vfx?.version === 1 ? detailVfx.defenseCommands(new Map(Object.entries(points)), clock) : [];
     const replacedDefenseIds = new Set(defenseCommands.filter(command => detailDefenseImageReady(image(command.image), command)).map(command => command.eventId));

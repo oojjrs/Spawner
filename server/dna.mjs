@@ -1,3 +1,5 @@
+import { dnaCombatStats } from "./dna-combat-stats.mjs";
+
 export const ATTRIBUTE_DNA = (() => {
   const directions = [[1,0],[0,1],[-1,1],[-1,0],[0,-1],[1,-1]];
   const colors = {organ:'#edba87',action:'#8fbbed',stat:'#87d7b8'};
@@ -59,10 +61,12 @@ export const ATTRIBUTE_DNA = (() => {
   function counts(pieces){const result={};for(const piece of pieces)result[piece.gene]=(result[piece.gene]||0)+1;return result;}
   function weights(pieces){const result={};for(const piece of pieces)result[piece.gene]=(result[piece.gene]||0)+(piece.grade===undefined?1:piece.grade);return result;}
   function stats(pieces){
-    const n=weights(pieces),c=counts(pieces),melee=!!c.blade,ranged=!!c.secretion,attack=melee||ranged,gather=!!c.gather,
-      meleePower=melee?2*c.blade+2*(n.power||0):0,meleeSpeed=melee?Math.min(4,.5+.05*(n.speed||0)):0,
-      rangedPower=ranged?1.4*c.secretion+1.4*(n.rangedPower||0):0,rangedSpeed=ranged?Math.min(4,.5+.05*(n.rangedSpeed||0)):0;
-    return {gatherCount:c.gather||0,bladeCount:c.blade||0,antennaCount:c.antenna||0,healerCount:c.healer||0,secretionCount:c.secretion||0,melee,ranged,meleePower,meleeSpeed,rangedPower,rangedSpeed,healer:!!n.healer,health:10+10*(n.health||0),power:melee?meleePower:rangedPower,hits:attack?1+(n.combo||0):0,speed:melee?meleeSpeed:rangedSpeed,armor:(n.armor||0)+(n.carapace||0),parry:Math.min(60,4*(n.parry||0)),block:Math.min(75,5*(n.carapace||0)+5*(n.block||0)),evasion:Math.min(60,3*(n.evasion||0)+3*(n.legs||0)),capacity:gather?c.gather+(n.capacity||0):0,harvest:gather?Math.min(c.gather+(n.harvest||0),c.gather+(n.capacity||0)):0,harvestTime:gather?4/(1+.1*(n.harvestSpeed||0)):0,movement:.25+.04*(n.movement||0),vision:Math.min(12,1+(c.antenna||0)+.5*(n.vision||0)),scale:1+.01*pieces.length,roaming:!!n.antenna,comboPower:attack?Math.min(100,50+5*(n.comboPower||0)):0,critical:attack?Math.min(75,4*(n.critical||0)):0,criticalPower:attack?Math.min(400,150+10*(n.criticalPower||0)):0,accuracy:attack?Math.min(60,3*(n.accuracy||0)):0,penetration:attack?(n.penetration||0):0,blockPower:Math.min(90,50+4*(n.blockPower||0)),counter:attack?Math.min(100,10*(n.counter||0)):0,counterPower:attack?Math.min(200,100+10*(n.counterPower||0)):0,tenacity:Math.min(75,5*(n.tenacity||0)),reduction:Math.min(40,2*(n.reduction||0)),loadSpeed:gather?Math.min(100,75+5*(n.loadSpeed||0)):0,healing:10*(n.healing||0),stun:attack?Math.min(30,3*(n.stun||0)):0,stunTime:attack&&n.stun?Math.min(1,.25+.05*(n.stunTime||0)):0,bleed:attack?Math.min(75,5*(n.bleed||0)):0,bleedPower:attack&&n.bleed?1+(n.bleedPower||0):0,area:attack?Math.min(5,n.area||0):0,areaPower:attack&&n.area?Math.min(75,35+5*(n.areaPower||0)):0,lifesteal:attack?Math.min(20,n.lifesteal||0):0,reflection:Math.min(30,3*(n.reflection||0)),regeneration:.1*(n.regeneration||0),comboSpeed:attack?Math.max(.06,.12-.005*(n.comboSpeed||0)):0,focus:attack?Math.max(.08,.3-.02*(n.focus||0)):0};
+    const n=weights(pieces),c=counts(pieces),gather=!!c.gather;
+    return {...dnaCombatStats(c,n),gatherCount:c.gather||0,antennaCount:c.antenna||0,
+      capacity:gather?c.gather+(n.capacity||0):0,harvest:gather?Math.min(c.gather+(n.harvest||0),c.gather+(n.capacity||0)):0,
+      harvestTime:gather?4/(1+.1*(n.harvestSpeed||0)):0,movement:.25+.04*(n.movement||0),
+      vision:Math.min(12,1+(c.antenna||0)+.5*(n.vision||0)),scale:1+.01*pieces.length,roaming:!!n.antenna,
+      loadSpeed:gather?Math.min(100,75+5*(n.loadSpeed||0)):0};
   }
   function clonePiece(piece){return {gene:piece.gene,rotation:piece.rotation,grade:piece.grade,shape:piece.shape.slice()};}
   function validate(value){

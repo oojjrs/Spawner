@@ -1,264 +1,153 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { SIMULATION_STATS, DEFAULT_SIMULATION_RULES, deriveSimulationStats, createSimulationTrial } from "./combat-simulation.mjs";
+import { ATTRIBUTE_DNA } from "../server/dna.mjs";
+import { createCombat } from "../server/combat.mjs";
+import { createSimulationTrial, deriveSimulationStats } from "./combat-simulation.mjs";
 
-function build(counts) {
-  return { key: "bean", counts };
+const build = counts => ({ key: "bean", counts });
+const close = (a, b) => assert.ok(Math.abs(a - b) < 1e-9, a + " != " + b);
+
+function actualTrial(input, change) {
+  const trial = createSimulationTrial(input);
+  if (change) change([...trial.agents, ...trial.supportAgents]);
+  const agents = structuredClone([...trial.agents, ...trial.supportAgents]), events = [];
+  const environment = { world: { size: 320, terrain: new Uint8Array(320 * 320) }, games: new Map(), colonies: [],
+    simSeconds: 0, damageRandom: () => .5, combatRandom: () => .99,
+    onCombatEvent(event) { events.push({ kind: event.kind, time: event.at, source: event.sourceId, target: event.targetId, damage: event.amount,
+      health: agents.map(agent => agent.health) }); } };
+  for (const side of ["left", "right"]) environment.games.set(side, { agents: agents.filter(agent => agent.ownerId === side),
+    receiveDamage(agent, amount) { agent.health = Math.max(0, agent.health - amount); } });
+  const engine = createCombat(environment);
+  for (let tick = 0; tick <= 60 * 120; tick++) {
+    environment.simSeconds = tick / 60;
+    for (const agent of agents) engine.update(agent, environment.simSeconds);
+    if (!["left", "right"].every(side => agents.some(agent => agent.ownerId === side && agent.health > 0))) break;
+  }
+  trial.finish();
+  assert.deepEqual(trial.history.map(event => ({kind:event.kind,time:event.time,source:event.attackerId,target:event.targetId,damage:event.damage})),
+    events.map(({health,...event})=>event));
+  assert.deepEqual([...trial.agents,...trial.supportAgents].map(agent=>agent.health), agents.map(agent=>agent.health));
+  return trial;
 }
 
-function close(actual, expected) {
-  assert.ok(Math.abs(actual - expected) < 1e-10, actual + " differs from " + expected);
-}
-
-test("log first point equals configured gain and later marginal gains diminish", () => {
-  const zero = deriveSimulationStats(build({ power: 0 }));
-  const one = deriveSimulationStats(build({ power: 1 }));
-  const two = deriveSimulationStats(build({ power: 2 }));
-  const three = deriveSimulationStats(build({ power: 3 }));
-  close(one.attackPower - zero.attackPower, DEFAULT_SIMULATION_RULES.powerGain);
-  assert.ok(two.attackPower - one.attackPower < one.attackPower - zero.attackPower);
-  assert.ok(three.attackPower - two.attackPower < two.attackPower - one.attackPower);
-  close(deriveSimulationStats(build({ power: 80 }), { powerCurve: "linear" }).attackPower, 162);
-  close(deriveSimulationStats(build({ vitality: 3 })).health, 40);
-});
-
-test("saturating probabilities and defense approach their explicit caps without exceeding them", () => {
-  const stats = deriveSimulationStats(build(Object.fromEntries(SIMULATION_STATS.map(stat => [stat.key, 80]))));
-  for (const [field, rule] of [["critChance", "critCap"], ["armorPenetration", "percentPenCap"], ["evasion", "dodgeCap"],
-    ["parry", "parryCap"], ["block", "blockCap"], ["counter", "counterCap"], ["tenacity", "tenacityCap"], ["drain", "drainCap"]]) {
-    assert.ok(stats[field] > 0 && stats[field] < DEFAULT_SIMULATION_RULES[rule]);
+test("실험실 기본 수치는 실제 DNA의 같은 투자량과 일치한다", () => {
+  const map = {power:"power",rangedPower:"rangedPower",vitality:"health",armor:"armor",flatPen:"penetration",haste:"speed",rangedHaste:"rangedSpeed",
+    focus:"focus",multiHit:"combo",hitSpeed:"comboSpeed",combo:"comboPower",crit:"critical",critPower:"criticalPower",accuracy:"accuracy",evasion:"evasion",
+    parry:"parry",block:"block",blockPower:"blockPower",counter:"counter",counterPower:"counterPower",tenacity:"tenacity",stun:"stun",stunDuration:"stunTime",drain:"lifesteal"};
+  for (const count of [0,1,5,20,80]) {
+    const counts = Object.fromEntries(Object.keys(map).map(key=>[key,count]));
+    const pieces=[{gene:"blade",grade:1},{gene:"secretion",grade:1},{gene:"healer",grade:1},
+      ...Object.values(map).flatMap(gene=>Array.from({length:count},()=>({gene,grade:1})))];
+    const expected=ATTRIBUTE_DNA.stats(pieces), actual=deriveSimulationStats({key:"bean",counts,organs:{attack:1,ranged:1,heal:1}}).dna;
+    for(const key of ["health","power","speed","hits","focus","comboSpeed","armor","critical","criticalPower","accuracy","evasion","parry","block","blockPower","counter","counterPower","tenacity","stun","stunTime","lifesteal","meleePower","rangedPower","meleeSpeed","rangedSpeed"])
+      close(actual[key],expected[key]);
   }
-  assert.ok(stats.critMultiplier < 3);
-  assert.ok(stats.followupMultiplier <= 1);
-  const left = build({ power: 1 }), right = build({ armor: 1 });
-  const trial = createSimulationTrial({ left, right, random: false, rules: { maxSeconds: 1 } }); trial.step();
-  const hit = trial.history.find(row => row.attackerId === "left" && row.kind === "hit");
-  close(hit.damage, 4 * (1 - .7 * 12 / (12 + 60)));
 });
 
-test("timing floors and multi-hit cycle budget prevent independent speed multipliers", () => {
-  const stats = deriveSimulationStats(build({ focus: 80, hitSpeed: 80, multiHit: 80, haste: 80 }));
-  close(stats.windup, .08); close(stats.hitGap, .06);
-  assert.equal(stats.hitCount, 81);
-  assert.ok(stats.attackInterval >= stats.windup + 80 * stats.hitGap + stats.recovery);
-  assert.ok(stats.attackSpeed <= stats.targetAttackSpeed && stats.attackSpeed <= 4);
-  assert.equal(stats.pieceCount, 321);
-});
-
-test("per-hit stun allocation preserves action-level probability and has one proc per action", () => {
-  const stats = deriveSimulationStats(build({ stun: 4, multiHit: 7 }));
-  close(1 - Math.pow(1 - stats.stunChancePerHit, stats.hitCount), stats.stunChance);
-  const trial = createSimulationTrial({ left: build({ stun: 1, multiHit: 2, vitality: 80 }), right: build({ vitality: 80 }), random: false,
-    rules: { stunCap: 1, stunKnee: 0, stunDurationBase: .2, stunDurationCap: .2, stunImmunity: 2, maxSeconds: 1 } });
-  trial.finish();
-  assert.equal(trial.history.filter(row => row.kind === "stun").length, 1);
-  const stun = trial.history.find(row => row.kind === "stun"); close(stun.stunDuration, .2);
-  assert.ok(trial.agents[1].combat.stunImmuneUntil >= 2.5);
-});
-
-test("seeded outcomes replay exactly with jitter disabled while chance rolls remain active", () => {
-  const settings = { left: build({ crit: 3, stun: 2, multiHit: 3, vitality: 4 }), right: build({ armor: 2, block: 3, vitality: 4 }), seed: "replay", random: false };
-  const first = createSimulationTrial(settings), second = createSimulationTrial(settings), stepped = createSimulationTrial(settings);
-  first.finish(); second.finish();
-  while (!stepped.reason) stepped.step();
-  assert.deepEqual(first.history, second.history);
-  assert.deepEqual(first.history, stepped.history);
-  assert.deepEqual(first.result(), second.result());
-  const forced = createSimulationTrial({ left: build({ crit: 1 }), right: build({}), random: false,
-    rules: { critCap: 1, critKnee: 0, maxSeconds: 1 } }); forced.step();
-  assert.equal(forced.history.find(row => row.attackerId === "left").critical, true);
-});
-
-test("exact simultaneous lethal hits apply to the same alive snapshot", () => {
-  const trial = createSimulationTrial({ left: build({}), right: build({}), random: false, first: "simultaneous", rules: { healthBase: 2 } });
-  assert.equal(trial.finish().winner, "draw"); assert.equal(trial.reason, "death");
-  assert.equal(trial.agents[0].health, 0); assert.equal(trial.agents[1].health, 0);
-  assert.equal(trial.history.filter(row => row.kind === "hit").length, 2);
-  close(trial.time, .3);
-});
-
-test("death cancels later hits and finish cannot produce postmortem attacks", () => {
-  const trial = createSimulationTrial({ left: build({ power: 80, multiHit: 4 }), right: build({ power: 80 }), random: false, first: "left", rules: { powerCurve: "linear" } });
-  const outcome = trial.finish(); assert.equal(outcome.winner, "left");
-  assert.equal(trial.history.filter(row => row.kind === "hit").length, 1);
-  assert.ok(trial.history.every(row => row.time <= outcome.time));
-  const previous = trial.history.length; trial.advance(100); trial.step(); trial.finish();
-  assert.equal(trial.history.length, previous);
-  assert.ok(trial.agents.every(agent => agent.attack === null));
-});
-
-test("defensive counter replaces a prepared action and cannot chain or repeat for the same incoming action", () => {
-  const left = { ...build({ vitality: 80, multiHit: 3, focus: 1 }), organs: { attack: true, armor: false, legs: false } };
-  const right = build({ vitality: 80, parry: 1, counter: 1 });
-  const trial = createSimulationTrial({ left, right, random: false,
-    rules: { parryCap: 1, parryKnee: 0, counterCap: 1, counterKnee: 0, reactionCooldown: 0, counterCooldown: 0, maxSeconds: 1 } });
-  trial.advance(.28);
-  assert.equal(trial.agents[1].attack.counter, true);
-  assert.equal(trial.agents[1].attack.hitCount, 1);
-  close(trial.agents[1].combat.nextAttackAt, 2.28);
-  trial.finish();
-  assert.equal(trial.history.filter(row => row.kind === "counter").length, 1);
-  assert.ok(trial.history.filter(row => row.attackerId === "right" && row.damage > 0).every(row => row.counter));
-  const both = createSimulationTrial({ left: right, right, random: false,
-    rules: { parryCap: 1, parryKnee: 0, counterCap: 1, counterKnee: 0, reactionCooldown: 0, counterCooldown: 0, maxSeconds: 1 } });
-  both.finish(); assert.equal(both.history.filter(row => row.kind === "counter").length, 2);
-});
-
-test("attack organs gate offense while defense remains a stat and zero-offense trials terminate immediately", () => {
-  const full = Object.fromEntries(SIMULATION_STATS.map(stat => [stat.key, 80]));
-  const gated = { key: "bean", counts: full, organs: { attack: false, armor: false, legs: false } };
-  const stats = deriveSimulationStats(gated);
-  assert.equal(stats.attackPower, 0); assert.ok(stats.defense > 0); assert.ok(stats.parry > 0);
-  assert.ok(stats.block > 0); assert.ok(stats.evasion > 0); assert.equal(stats.canAttack, false);
-  const trial = createSimulationTrial({ left: gated, right: gated });
-  assert.deepEqual(trial.finish(), { winner: "draw", reason: "no-offense", time: 0, leftHealth: 810, rightHealth: 810 });
-  assert.equal(trial.history.length, 0);
-  assert.equal(deriveSimulationStats({ key: "bean" }).pieceCount, 1);
-});
-
-test("invalid counts, organs, probabilities, rule names, clocks and settings fail clearly", () => {
-  for (const count of [-1, .5, Number.MAX_SAFE_INTEGER + 1, NaN, Infinity, "1"]) assert.throws(() => deriveSimulationStats(build({ power: count })), /count/);
-  assert.throws(() => deriveSimulationStats(build({ unknown: 1 })), /Unknown count/);
-  assert.throws(() => deriveSimulationStats({ key: "bean", organs: { armor: 1 } }), /boolean/);
-  assert.throws(() => deriveSimulationStats(build({}), { dodgeCap: 1.1 }), /between 0 and 1/);
-  assert.throws(() => deriveSimulationStats(build({}), { jitter: .21 }), /jitter/);
-  assert.throws(() => deriveSimulationStats(build({}), { powerKnee: 0 }), /positive/);
-  assert.throws(() => deriveSimulationStats(build({}), { invented: 1 }), /Unknown rule/);
-  assert.throws(() => createSimulationTrial({ left: build({}), right: build({}), first: "random" }), /first/);
-  const trial = createSimulationTrial({ left: build({}), right: build({}) });
-  assert.throws(() => trial.advance(-1), /nonnegative/);
-});
-
-test("fractional armor and follow-up damage have no artificial one-damage floor", () => {
-  const trial = createSimulationTrial({ left: build({ multiHit: 1 }), right: build({ armor: 80, vitality: 80 }), random: false,
-    rules: { maxSeconds: 1, followupBase: .01, followupCap: .01 } }); trial.finish();
-  const hits = trial.history.filter(row => row.attackerId === "left" && row.kind === "hit");
-  assert.equal(hits.length, 2); assert.ok(hits[1].damage > 0 && hits[1].damage < .02);
-  close(hits[1].damage / hits[0].damage, .01);
-});
-
-
-test("DNA piece counts accept 81 and 160 while guarding JS safe totals and finite derived values", () => {
-  for (const count of [81, 160]) {
-    const stats = deriveSimulationStats(build({ power: count, multiHit: count }));
-    assert.equal(stats.pieceCount, count * 2 + 1);
-    assert.equal(stats.hitCount, count + 1);
-    assert.ok(Number.isFinite(stats.attackPower));
-    assert.ok(Number.isFinite(stats.attackInterval));
-    assert.equal(Object.hasOwn(stats, "slotCount"), false);
+test("4:4 자동 전투의 타격·타깃·사망·최종 HP는 실전 엔진 직접 실행과 같다", () => {
+  const b=build({power:4,vitality:5,armor:2,multiHit:1});
+  const trial=actualTrial({left:[b,b,b,b],right:[b,b,b,b],random:false});
+  const larger=actualTrial({left:Array(8).fill(b),right:Array(8).fill(b),random:false});
+  assert.equal(larger.reason,"death");
+  assert.equal(trial.reason,"death");
+  const targets=new Map();
+  for(const event of trial.history.filter(event=>event.kind==="attack")) {
+    if(!targets.has(event.attackerId))targets.set(event.attackerId,new Set());
+    targets.get(event.attackerId).add(event.targetId);
   }
-  const maximum = Number.MAX_SAFE_INTEGER;
-  assert.equal(deriveSimulationStats(build({ power: maximum - 1 })).pieceCount, maximum);
-  const manyHits = deriveSimulationStats(build({ multiHit: maximum - 4, stun: 1 }));
-  assert.ok(manyHits.stunChancePerHit > 0);
-  assert.throws(() => deriveSimulationStats(build({ power: maximum + 1 })), /safe integer/);
-  assert.throws(() => deriveSimulationStats(build({ power: maximum })), /Total piece count/);
-  assert.throws(() => deriveSimulationStats(build({ power: maximum - 3, vitality: 4 })), /Total piece count/);
-  assert.throws(() => deriveSimulationStats(build({ power: 160 }), { powerKnee: Number.MIN_VALUE }), /Derived attackPower must be finite/);
-  assert.throws(() => deriveSimulationStats(build({}), { attackRateBase: Number.MIN_VALUE }), /Derived attackInterval must be finite/);
-  const noRate = deriveSimulationStats(build({}), { attackRateBase: 0 });
-  assert.equal(noRate.attackInterval, Infinity); assert.equal(noRate.canAttack, false);
+  assert.ok([...targets.values()].some(values=>values.size>1));
 });
 
-test("ranged shots share a cycle with blades and retain travel delay", () => {
-  const left = { key: "bean", organs: { attack: true, ranged: true }, counts: { vitality: 20 } };
-  const right = { key: "spore", organs: { attack: false }, counts: { vitality: 20 } };
-  const trial = createSimulationTrial({ left, right, distance: 3, random: false, rules: { maxSeconds: 20 } });
-  trial.finish();
-  const shots = trial.history.filter(event => event.kind === "shoot");
-  const hits = trial.history.filter(event => event.kind === "hit");
-  assert.ok(shots.length > 0); assert.ok(hits[0].time > shots[0].time);
-  close(hits[0].damage, 1.4);
-  assert.ok(hits.some(event => event.damage === 2));
-  assert.ok(shots.every((event, index) => !index || event.time - shots[index - 1].time >= 2 - 1e-9));
-  const onlyRanged = createSimulationTrial({ left: { ...left, organs: { attack: false, ranged: true } }, right, distance: 1,
-    random: false, rules: { maxSeconds: 1 } });
-  onlyRanged.finish(); assert.ok(onlyRanged.history.some(event => event.kind === "shoot"));
-  close(onlyRanged.history.find(event => event.kind === "hit").damage, 1.4);
+test("N:N의 광역·출혈·흡혈·반사도 실전 경로의 사건과 HP를 그대로 따른다", () => {
+  const b=build({power:4,vitality:6});
+  const trial=actualTrial({left:[b,b,b],right:[b,b,b],random:false}, agents=>{
+    for(const agent of agents)Object.assign(agent.stats.dna,{bleed:100,bleedPower:1,area:2,areaPower:35,lifesteal:20,reflection:10});
+  });
+  for(const kind of ["area","bleed","drain","reflect"])assert.ok(trial.history.some(event=>event.kind===kind),kind);
 });
 
-test("support healing excludes the healer and runs beside the attack cycle", () => {
-  const trial = createSimulationTrial({ left: { key: "bean", organs: { attack: true, heal: true }, healing: 50, counts: { vitality: 20 } },
-    right: { key: "spore", organs: { attack: false }, counts: { vitality: 20 } }, support: true, random: false, rules: { maxSeconds: 5 } });
-  trial.finish();
-  assert.deepEqual(trial.history.filter(event => event.kind === "heal").map(event => [event.time, event.targetId, event.damage]),
-    [[2, "left-support", -1.5], [4, "left-support", -1.5]]);
-  assert.ok(trial.history.some(event => event.kind === "hit" && event.time > 2));
-  assert.equal(trial.supportAgents[0].health, 108); assert.equal(trial.agents.length, 2);
+test("막기·반격·기절·연타는 같은 실전 판정을 사용한다", () => {
+  const b=build({power:3,vitality:8,multiHit:2});
+  const trial=actualTrial({left:[b,b],right:[b,b],random:false},agents=>{
+    for(const agent of agents)Object.assign(agent.stats.dna,{block:100,counter:100,stun:100,stunTime:.25});
+  });
+  for(const kind of ["block","counter","stun"])assert.ok(trial.history.some(event=>event.kind===kind),kind);
 });
 
-test("independent melee and ranged investment does not cross profiles", () => {
-  const build = { key: "bean", organs: { attack: true, ranged: true }, counts: { power: 3, haste: 4, rangedPower: 2, rangedHaste: 1 } };
-  const original = deriveSimulationStats(build);
-  const melee = deriveSimulationStats({ ...build, counts: { ...build.counts, power: 4, haste: 5 } });
-  const ranged = deriveSimulationStats({ ...build, counts: { ...build.counts, rangedPower: 3, rangedHaste: 2 } });
-  assert.ok(melee.attackPower > original.attackPower); assert.ok(melee.attackSpeed > original.attackSpeed);
-  close(melee.rangedPower, original.rangedPower); close(melee.rangedSpeed, original.rangedSpeed);
-  assert.ok(ranged.rangedPower > original.rangedPower); assert.ok(ranged.rangedSpeed > original.rangedSpeed);
-  close(ranged.attackPower, original.attackPower); close(ranged.attackSpeed, original.attackSpeed);
-  const changedRules = deriveSimulationStats(build, { rangedPowerBase: 10, rangedAttackRateBase: 1 });
-  close(changedRules.attackPower, original.attackPower); close(changedRules.attackSpeed, original.attackSpeed);
-  const empty = deriveSimulationStats({ ...build, counts: {} });
-  close(empty.attackPower, 2); close(empty.rangedPower, 1.4); close(empty.attackSpeed, .5); close(empty.rangedSpeed, .5);
+test("동시 치명타는 실전의 사건 순서대로 적용되며 사후 타격하지 않는다", () => {
+  const b=build({});
+  const trial=actualTrial({left:b,right:b,random:false,rules:{healthBase:2}});
+  assert.equal(trial.result().winner,"left");
+  assert.equal(trial.history.filter(row=>row.kind==="hit").length,1);
+  assert.equal(trial.agents[1].attack,null);
 });
 
-test("ranged damage reads its own power without another efficiency multiplier", () => {
-  const right = { key: "spore", organs: { attack: false }, counts: { vitality: 20 } };
-  const shoot = counts => {
-    const trial = createSimulationTrial({ left: { key: "bean", organs: { attack: false, ranged: true }, counts }, right,
-      distance: 3, random: false, rules: { maxSeconds: 1 } }); trial.finish();
-    return trial.history.find(event => event.kind === "hit").damage;
-  };
-  close(shoot({}), 1.4); close(shoot({ power: 80, haste: 80 }), 1.4); close(shoot({ rangedPower: 1 }), 2.8);
+test("같은 시드는 자동·단계·잘게 나눈 재생에서 같은 결과를 낸다", () => {
+  const b=build({power:2,vitality:3,crit:3,block:2,stun:1});
+  const settings={left:[b,b,b],right:[b,b,b],seed:"replay",random:true};
+  const first=createSimulationTrial(settings),stepped=createSimulationTrial(settings),chunked=createSimulationTrial(settings);
+  first.finish();while(!stepped.reason)stepped.step();while(!chunked.reason)chunked.advance(.037);
+  assert.deepEqual(first.history,stepped.history);assert.deepEqual(first.history,chunked.history);
+  assert.deepEqual(first.result(),stepped.result());assert.deepEqual(first.result(),chunked.result());
 });
 
-test("weapon changes preserve reserved shared cooldown and use the selected next rate", () => {
-  const right = { key: "spore", organs: { attack: false }, counts: { vitality: 20 } };
-  const build = { key: "bean", organs: { attack: true, ranged: true }, counts: { haste: 4 } };
-  const trial = createSimulationTrial({ left: build, right, distance: 3, random: false });
-  trial.advance(0); assert.equal(trial.agents[0].attack.mode, "ranged"); close(trial.agents[0].combat.nextAttackAt, 2);
-  trial.agents[1].x = 1;
-  trial.advance(1.9); close(trial.agents[0].combat.nextAttackAt, 2);
-  trial.advance(.1); assert.equal(trial.agents[0].attack.mode, "melee");
-  close(trial.agents[0].combat.nextAttackAt, 2 + deriveSimulationStats(build).attackInterval);
-  const inverse = { ...build, counts: { rangedHaste: 4 } };
-  const other = createSimulationTrial({ left: inverse, right, distance: 1, random: false });
-  other.advance(.7); other.agents[1].x = 3;
-  close(other.agents[0].combat.nextAttackAt, 2); other.advance(1.3);
-  assert.equal(other.agents[0].attack.mode, "ranged");
-  close(other.agents[0].combat.nextAttackAt, 2 + deriveSimulationStats(inverse).rangedAttackInterval);
+test("지원군 치유는 실제 대상·기관 수·수용 HP를 사용한다", () => {
+  const healer={key:"bean",counts:{vitality:5},organs:{attack:1,heal:3}};
+  const trial=actualTrial({left:[healer,healer],right:[build({power:2,vitality:5}),build({power:2,vitality:5})],support:true,random:false});
+  assert.ok(trial.history.some(event=>event.kind==="heal"&&event.attackerId!==event.targetId));
+  for(const agent of [...trial.agents,...trial.supportAgents])assert.ok(agent.health>=0&&agent.health<=agent.stats.health);
 });
 
-test("physical organ copies scale base output and piece budget without scaling rate", () => {
-  const one = deriveSimulationStats({ key: "bean", organs: { attack: 1, ranged: 1, heal: 1 } });
-  const six = deriveSimulationStats({ key: "bean", organs: { attack: 6, ranged: 6, heal: 6 } });
-  close(one.meleePower, 2); close(one.rangedPower, 1.4); close(six.meleePower, 12); close(six.rangedPower, 8.4);
-  close(six.meleeSpeed, .5); close(six.rangedSpeed, .5); assert.equal(six.healerCount, 6); assert.equal(six.pieceCount, 18);
-  close(six.meleePower * six.meleeSpeed, 6 * one.meleePower * one.meleeSpeed);
-  close(six.rangedPower * six.rangedSpeed, 6 * one.rangedPower * one.rangedSpeed);
-  const upgraded = deriveSimulationStats({ key: "bean", organs: { attack: 6, ranged: 6 }, counts: { power: 1, rangedPower: 1 } });
-  close(upgraded.meleePower - six.meleePower, 2); close(upgraded.rangedPower - six.rangedPower, 1.4);
-  const legacy = deriveSimulationStats({ key: "bean", organs: { attack: true, ranged: false, heal: true } });
-  assert.equal(legacy.pieceCount, 2); close(legacy.meleePower, 2); close(legacy.rangedPower, 0); close(legacy.rangedSpeed, 0);
-  for (const count of [-1, .5, Number.MAX_SAFE_INTEGER + 1]) assert.throws(() => deriveSimulationStats({ key: "bean", organs: { attack: count } }), /safe integer/);
+test("원거리 N:N은 실제 투사체 발사·도착·대상 사망 취소를 사용한다", () => {
+  const b={key:"bean",counts:{rangedPower:8,vitality:1,multiHit:2},organs:{attack:0,ranged:1}};
+  const trial=createSimulationTrial({left:[b,b,b],right:[b,b,b],distance:3,random:false});trial.finish();
+  assert.equal(trial.reason,"death");
+  for(const kind of ["shoot","hit","projectile-cancel"])assert.ok(trial.history.some(event=>event.kind===kind),kind);
+  const launch=trial.history.find(event=>event.kind==="shoot"),hit=trial.history.find(event=>event.kind==="hit");
+  close(hit.time-launch.time,.5);
 });
 
-test("stacked healing distributes one budget across injured allies while attacking", () => {
-  const trial = createSimulationTrial({ left: { key: "bean", organs: { attack: 1, heal: 6 }, counts: { vitality: 5 } },
-    right: { key: "spore", organs: { attack: 0 }, counts: { vitality: 5 } }, support: true, random: false });
-  const first = trial.supportAgents[0]; first.health = 59;
-  const second = { ...first, id: "left-support-2", health: 55, stats: { ...first.stats }, combat: { ...first.combat } };
-  trial.supportAgents.push(second); trial.advance(2);
-  const events = trial.history.filter(event => event.kind === "heal");
-  assert.deepEqual(events.map(event => [event.targetId, event.damage]), [[second.id, -5], [first.id, -1]]);
-  close(first.health, 60); close(second.health, 60); assert.ok(trial.history.some(event => event.kind === "hit"));
-  trial.advance(2); assert.equal(trial.history.filter(event => event.kind === "heal").length, 2);
+test("시작 거리 편집과 근접 접근은 N:N 교전으로 이어진다", () => {
+  const b=build({power:8,vitality:1});
+  const trial=createSimulationTrial({left:[b,b,b],right:[b,b,b],distance:4,random:false});trial.finish();
+  assert.equal(trial.reason,"death");assert.ok(trial.history.find(event=>event.kind==="hit").time>4);
 });
 
-test("stacked healing applies recipient recovery and clamps scarce missing health", () => {
-  const trial = createSimulationTrial({ left: { key: "bean", organs: { attack: 0, heal: 6 }, counts: { vitality: 5 } },
-    right: { key: "spore", organs: { attack: 0 }, counts: { vitality: 5 } }, support: true });
-  const target = trial.supportAgents[0]; target.stats.healing = 100; target.health = 40;
-  trial.advance(2); close(target.health, 52); close(trial.history[0].damage, -12);
-  trial.advance(2); close(target.health, 60); close(trial.history[1].damage, -8);
+test("기관·수치·규칙·예산 편집은 유지되고 잘못된 입력은 거절한다", () => {
+  close(deriveSimulationStats(build({power:2}),{powerCurve:"log"}).attackPower,2+2*Math.log(2)/Math.log(1.5));
+  close(deriveSimulationStats(build({vitality:3}),{healthPerPoint:20}).health,70);
+  assert.equal(deriveSimulationStats({key:"bean",organs:{attack:4,ranged:2,heal:3}}).pieceCount,9);
+  for(const count of [-1,.5,NaN,Infinity,"1"])assert.throws(()=>deriveSimulationStats(build({power:count})),/count/);
+  assert.throws(()=>deriveSimulationStats(build({unknown:1})),/Unknown count/);
+  assert.throws(()=>deriveSimulationStats(build({}),{dodgeCap:1.1}),/between/);
+  assert.throws(()=>createSimulationTrial({left:[],right:build({})}),/team/);
+  assert.throws(()=>createSimulationTrial({left:build({}),right:build({}),distance:21}),/distance/);
+  assert.throws(()=>createSimulationTrial({left:build({}),right:build({})}).advance(-1),/nonnegative/);
+});
+
+test("무공격·시간·사건 한도에서 편집 실험이 멈춘다", () => {
+  const b={key:"bean",organs:{attack:0},counts:{vitality:5}};
+  assert.equal(createSimulationTrial({left:[b,b],right:[b,b]}).reason,"no-offense");
+  const slow=build({vitality:80});
+  assert.equal(createSimulationTrial({left:slow,right:slow,rules:{maxSeconds:.1}}).finish().reason,"time-limit");
+  assert.equal(createSimulationTrial({left:slow,right:slow,rules:{maxEvents:1}}).finish().reason,"event-limit");
+});
+
+test("기존 방어 준비·재준비·반격 재준비·후딜 편집도 공통 엔진 입력으로 작동한다", () => {
+  const trial=createSimulationTrial({left:build({vitality:5}),right:build({vitality:5,parry:1,counter:1}),random:false,
+    rules:{defensePreparation:1,reactionCooldown:3,counterCooldown:5,recovery:3,parryCap:1,parryKnee:1,counterCap:1,counterKnee:1,maxSeconds:12}});
+  trial.advance(.1);assert.ok(trial.agents.every(agent=>agent.attack.endsAt-agent.attack.startedAt>=3));
+  trial.finish();const first=trial.history.find(event=>event.kind==="hit"&&event.attackerId==="left");
+  close(first.time,.3);const parries=trial.history.filter(event=>event.kind==="parry");assert.ok(parries.length>0);
+  for(let i=1;i<parries.length;i++)assert.ok(parries[i].time-parries[i-1].time>=3);
+  const counters=trial.history.filter(event=>event.kind==="counter");assert.ok(counters.length>0);
+  for(let i=1;i<counters.length;i++)assert.ok(counters[i].time-counters[i-1].time>=5);
+});
+
+test("중립종 외형도 편집한 DNA 원거리 능력으로 N:N 전투하고 외형은 규칙을 바꾸지 않는다",()=>{
+  const b={key:"bean",organs:{attack:0,ranged:1},counts:{rangedPower:8,vitality:1}};
+  const input={left:[b,b,b],right:[b,b,b],distance:3,random:false};
+  const players=createSimulationTrial(input);players.finish();
+  const neutral={...b,key:"dew-rabbit"};const creatures=createSimulationTrial({...input,left:[neutral,neutral,neutral],right:[neutral,neutral,neutral]});creatures.finish();
+  assert.equal(creatures.reason,"death");assert.deepEqual(creatures.history,players.history);assert.deepEqual(creatures.result(),players.result());
 });

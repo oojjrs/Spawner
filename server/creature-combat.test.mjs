@@ -4,6 +4,8 @@ import { createCreatures } from "./creatures.mjs";
 import { createUnitIndex } from "./unit-index.mjs";
 import { BEETLE_ANIMATIONS } from "./beetle-animation.mjs";
 import { CREATURE_ATTACK_TIMINGS } from "./creature-attack.mjs";
+import { DNA_ACTION_RULES } from "./dna-actions.mjs";
+import { canPursueCombat } from "./combat.mjs";
 
 const attackers = ["spiny-back-beetle", "soil-boar", "bubble-toad", "vine-turtle", "shadow-weasel",
   "snare-vine", "talon-owl", "white-paw", "spiny-back-leader"];
@@ -80,11 +82,17 @@ test("더 가까운 둥지보다 공격 가능한 유닛을 우선 추적한다"
   for (const species of ["spiny-back-beetle", "vine-turtle"]) for (const indexed of [false, true]) {
     const context = fixture(species, indexed);
     nest(context, "nest", 101, 100);
-    unit(context, 100, 103);
+    const target = unit(context, 100, 100 + DNA_ACTION_RULES.rangedRange + (species === "spiny-back-beetle" ? 1 : 0));
     tick(context, 720);
-    assert.equal(context.agent.mode, "walk", species);
-    assert.equal(context.agent.y, 101, species);
-    assert.equal(context.agent.attackTargetId ?? null, null, species);
+    if (species === "spiny-back-beetle") {
+      assert.equal(context.agent.mode, "walk", species);
+      assert.equal(context.agent.y, 101, species);
+      assert.equal(context.agent.attackTargetId ?? null, null, species);
+    } else {
+      assert.equal(context.agent.attack?.attackMode, "ranged", species);
+      assert.equal(context.agent.attack.targetId, target.id, species);
+      assert.equal(context.agent.y, 100, species);
+    }
     assert.equal(context.hits.length, 0, species);
   }
 });
@@ -103,16 +111,16 @@ test("둥지 타격 직전 유닛이 접근하면 타격을 취소하고 유닛�
 });
 
 test("죽거나 숨거나 등장·탄생·도주 중이거나 도달 불가능한 유닛은 둥지 공격을 막지 않는다", () => {
-  for (const species of ["spiny-back-beetle", "vine-turtle"]) for (const condition of ["dead", "hidden", "spawn", "birth", "escape", "blocked"]) {
-    const context = fixture(species, false);
+  for (const species of ["spiny-back-beetle", "vine-turtle"]) for (const indexed of [false, true]) for (const condition of ["dead", "hidden", "spawn", "birth", "escape", "blocked"]) {
+    const context = fixture(species, indexed);
     nest(context, "nest", 101, 100);
-    const target = unit(context, 100, 103);
+    const target = unit(context, 100, 100 + DNA_ACTION_RULES.rangedRange + (condition === "blocked" ? 1 : 0));
     if (condition === "dead") target.health = 0;
     if (condition === "hidden") target.hidden = true;
     if (condition === "spawn") target.spawn = { startedAt: 720, readyAt: 730 };
     if (condition === "birth") target.birth = { readyAt: 730 };
     if (condition === "escape") target.escapeUntil = 730;
-    if (condition === "blocked") for (const [x, y] of [[99, 103], [101, 103], [100, 102], [100, 104]])
+    if (condition === "blocked") for (const [x, y] of [[target.x - 1, target.y], [target.x + 1, target.y], [target.x, target.y - 1], [target.x, target.y + 1]])
       context.room.world.terrain[y * 320 + x] = 0;
     beginNestAttack(context);
   }
@@ -167,7 +175,7 @@ test("추적하던 마지막 유닛이 죽으면 이동 완료 뒤 둥지 공격
   for (const species of ["spiny-back-beetle", "vine-turtle"]) {
     const context = fixture(species, true);
     nest(context, "nest", 101, 100);
-    const target = unit(context, 100, 102);
+    const target = unit(context, 100, 100 + (species === "spiny-back-beetle" ? DNA_ACTION_RULES.rangedRange + 1 : DNA_ACTION_RULES.meleeRange));
     tick(context, 720);
     assert.equal(context.agent.mode, "walk", species);
     target.health = 0;
@@ -231,4 +239,39 @@ test("둥지 주변 배회 제한 안에서도 유닛을 우선 추적하고 둥
   assert.equal(context.agent.returningHome, true);
   assert.equal(context.agent.mode, "walk");
   assert.equal(context.agent.x, 104);
+});
+
+
+test("겸용 중립은 사거리 안에서 둥지보다 유닛을 먼저 사격하고 근접 경로 차단에도 타격한다", () => {
+  for (const species of ["spiny-back-beetle", "vine-turtle"]) for (const indexed of [false, true]) for (const blocked of [false, true]) {
+    const context = fixture(species, indexed), building = nest(context, "nest", 101, 100);
+    const target = unit(context, 100, 100 + DNA_ACTION_RULES.rangedRange);
+    if (blocked) for (const [x, y] of [[target.x - 1, target.y], [target.x + 1, target.y], [target.x, target.y - 1], [target.x, target.y + 1]])
+      context.room.world.terrain[y * 320 + x] = 0;
+    tick(context, 720);
+    const attack = context.agent.attack;
+    assert.equal(attack?.attackMode, "ranged", species);
+    assert.equal(attack.targetKind, "agent", species);
+    assert.equal(attack.targetId, target.id, species);
+    assert.equal(context.agent.x, 100); assert.equal(context.agent.y, 100);
+    assert.equal(target.health, 100); assert.equal(building.health, 120);
+    tick(context, attack.launchedAt);
+    tick(context, attack.hitAt - .001); assert.equal(target.health, 100);
+    tick(context, attack.hitAt); assert.ok(target.health < 100, species);
+    const health = target.health; tick(context, attack.hitAt);
+    assert.equal(target.health, health); assert.equal(building.health, 120); assert.equal(context.hits.length, 0);
+  }
+});
+
+test("탄생 준비 중인 개체는 공통 추적·원거리 선정에서 제외하고 완료 시각부터 허용한다", () => {
+  for (const species of ["spiny-back-beetle", "vine-turtle"]) for (const participant of ["source", "target"]) {
+    const context = fixture(species, true), target = unit(context, 100, 103);
+    const source = context.agent, pending = participant === "source" ? source : target;
+    source.nextActionAt = 730;
+    pending.birth = { readyAt: 730 };
+    assert.equal(canPursueCombat(source, target, 730 - .001), false, participant);
+    assert.equal(canPursueCombat(source, target, 730), true, participant);
+    tick(context, 720); assert.ok(!source.attack, participant);
+    tick(context, 730); assert.equal(source.attack?.targetId, target.id, participant);
+  }
 });

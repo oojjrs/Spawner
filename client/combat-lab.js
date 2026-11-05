@@ -190,12 +190,12 @@ function render() {
       elements[side+"Pieces"].dataset.over=String(stats.pieceCount>Number(elements.pieceLimit.value));
       elements[side+"Hp"].textContent=(agent?agent.health:stats.health).toFixed(1)+" / "+stats.health.toFixed(1);
       elements[side+"Bar"].style.width=(100*(agent?agent.health:stats.health)/stats.health)+"%";
-      const start = agent?.combat.cycleStartedAt || 0, end = agent?.combat.nextAttackAt || 0;
+      const start = agent?.combat?.cycleStartedAt || 0, end = agent?.combat?.nextAttackAt || 0;
       const progress = agent?.health > 0 && agent.stats.canAttack && end > start ? Math.max(0, Math.min(1, (trial.time - start) / (end - start))) : 0;
       elements[side+"Gauge"].style.width=(100*progress)+"%";
-      const reaction = agent?.combat.lastReaction, event = agent?.combat.lastEvent;
+      const reaction = agent?.combat?.lastReaction, event = agent?.combat?.lastEvent;
       const labels = {dodge:"회피",parry:"패링",block:"블록",stun:"기절"};
-      elements[side+"Reaction"].textContent = !agent ? "" : agent.health <= 0 ? "사망" : agent.combat.stunnedUntil > trial.time ? "기절" : reaction && trial.time - reaction.at < .65 ? labels[reaction.kind] || "" : event?.kind === "counter" && trial.time - event.at < .45 ? "반격" : agent.attack && trial.time < agent.attack.hitAt ? "공격 준비" : "";
+      elements[side+"Reaction"].textContent = !agent ? "" : agent.health <= 0 ? "사망" : (agent.combat?.stunnedUntil || agent.dnaStunnedUntil || 0) > trial.time ? "기절" : reaction && trial.time - reaction.at < .65 ? labels[reaction.kind] || "" : event?.kind === "counter" && trial.time - event.at < .45 ? "반격" : agent.attack && trial.time < agent.attack.hitAt ? "공격 준비" : "";
       const values=[["근접 공격력",stats.attackPower.toFixed(2)],["원거리 공격력",stats.rangedPower.toFixed(2)],["방어",stats.defense.toFixed(2)],["근접 공속",stats.attackSpeed.toFixed(2)+"/초"],["원거리 공속",stats.rangedSpeed.toFixed(2)+"/초"],["준비 / 후딜",stats.windup.toFixed(2)+" / "+stats.recovery.toFixed(2)+"초"],["연타 / 간격",stats.hitCount+"타 / "+stats.hitGap.toFixed(2)+"초"],["후속타",percent(stats.followupMultiplier)],["관통",stats.flatPenetration.toFixed(1)+" + "+percent(stats.armorPenetration)],["치명",percent(stats.critChance)+" ×"+stats.critMultiplier.toFixed(2)],["정밀 / 회피",percent(stats.accuracy)+" / "+percent(stats.evasion)],["패링 / 블록",percent(stats.parry)+" / "+percent(stats.block)],["블록 경감",percent(stats.blockReduction)],["반격",percent(stats.counter)+" ×"+stats.counterMultiplier.toFixed(2)],["강인함",percent(stats.tenacity)],["기절 / 타격당",percent(stats.stunChance)+" / "+percent(stats.stunChancePerHit)],["기절 시간",stats.stunDuration.toFixed(2)+"초"],["흡혈",percent(stats.drain)]];
       elements[side+"Derived"].replaceChildren(...values.flatMap(([label,value])=>[node("dt",label),node("dd",value)]));
     } catch(error) { elements.status.textContent=settingError(error); }

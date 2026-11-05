@@ -70,7 +70,7 @@ export function combatProfile(agent) {
     const attackInterval = selected.speed > 0 ? 1 / selected.speed : Infinity;
     return { primary: selected.power > 0 ? "blade" : null, attackPower: selected.power, defense: dna.armor,
       armorPenetration: 0, attackSpeed: selected.speed, attackInterval, windup: dna.focus,
-      recovery: Math.max(0, attackInterval - dna.focus - Math.max(0, dna.hits - 1) * dna.comboSpeed) };
+      recovery: Math.max(dna.recovery || 0, attackInterval - dna.focus - Math.max(0, dna.hits - 1) * dna.comboSpeed) };
   }
   const base = unitCombatStats(agent.species || agent.tribe);
   const equipped = key => Array.isArray(agent.slots) ? agent.slots.includes(key) : agent.attributes?.[key] > 0;
@@ -92,15 +92,16 @@ export function combatProfile(agent) {
     recovery: (primary === "blade" ? .3 : .45) * timingScale };
 }
 
-export function combatDamage(attacker, target, variation) {
+export function combatDamage(attacker, target, variation, rules) {
   const source = combatProfile(attacker), defense = combatProfile(target);
   const multiplier = Number.isFinite(variation) ? .8 + .4 * Math.max(0, Math.min(1, variation)) : 1;
   if (attacker.stats?.dna || target.stats?.dna) {
     const dna = attacker.stats?.dna, heavy = !dna && attacker.attack?.heavy === true;
-    const armor = Math.max(0, defense.defense - (dna?.penetration || 0)) * (dna ? 1 : 1 - Math.min(.9, source.armorPenetration + (heavy ? .3 : 0)));
+    const armor = Math.max(0, defense.defense - (dna?.penetration || 0)) * (dna ? 1 - (dna.armorPenetration || 0) : 1 - Math.min(.9, source.armorPenetration + (heavy ? .3 : 0)));
     const power = source.attackPower * (dna ? attacker.attack?.counter ? dna.counterPower / 100 : 1 :
       (source.primary === "piercing" ? 1.25 : 1) * (heavy ? 1.5 : 1));
-    return Math.max(0, power * multiplier * 100 / (100 + armor) * (1 - (target.stats?.dna?.reduction || 0) / 100));
+    const reduction = (rules?.armorCap ?? 1) * armor / ((rules?.armorKnee ?? 100) + armor);
+    return Math.max(0, power * multiplier * (1 - reduction) * (1 - (target.stats?.dna?.reduction || 0) / 100));
   }
   const heavy = attacker.attack?.heavy === true;
   const penetration = Math.min(.9, source.armorPenetration + (heavy ? .3 : 0));

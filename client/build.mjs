@@ -108,7 +108,10 @@ if (process.argv.includes("--design-world-only")) {
 
 function writeAttributeDna() {
   const path = resolve(root, "Attribute.html");
-  const source = readFileSync(resolve(root, "server/dna.mjs"), "utf8").replace("export const ATTRIBUTE_DNA =", "window.AttributeDna =");
+  const source = `(() => {
+${bundle(["server/dna.mjs"])}
+window.AttributeDna = modules["server/dna.mjs"].ATTRIBUTE_DNA;
+})();`;
   const original = readFileSync(path, "utf8");
   const updated = original.replace(/(<script id="dna-model">)[\s\S]*?(<\/script>)/, (match, start, end) => start + "\r\n" + source + end).replace(/\r?\n/g, "\r\n");
   if (updated !== original) writeGenerated(path, updated);
