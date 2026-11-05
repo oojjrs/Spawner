@@ -8456,6 +8456,9 @@
           Spawner.drawCombatDodgeGhosts?.(context, evade, (dx, dy) => drawDodgeBody(originalX + dx, originalY + dy));
         }
         drawDodgeBody(x, y);
+        // Persistent stun reads current status, never a replayed impact event.
+        Spawner.drawCombatStun?.(context, agent, { ...point, x, y }, state.simSeconds,
+          { width, height, reducedMotion: idleMotion.matches });
         const barWidth = clamp(point.width * .6, 32, 100), barY = y + 8;
         context.fillStyle = "#182323"; context.fillRect(x - barWidth / 2, barY, barWidth, 5);
         context.fillStyle = agent.combat.side ? "#e18c82" : "#83d6c1";

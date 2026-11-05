@@ -1,3 +1,4 @@
+import { drawCombatStun } from "./combat-stun-vfx.mjs";
 import { drawSpeciesHeldHurt } from "./species-held-hurt.mjs";
 import { beanHeldHurtSource, drawBeanHeldHurt } from "./bean-held-hurt.mjs";
 import { combatDodgePose, drawCombatDodgeTrails, drawCombatDodgeGhosts, drawCombatDodgeLabel } from "./combat-dodge-vfx.mjs";
@@ -270,15 +271,6 @@ export function createCombatStage(canvas) {
     if (evade) drawCombatDodgeGhosts(context, evade, (dx, dy) => drawBody(dx - evade.dx, dy - evade.dy));
     drawBody();
     context.restore();
-    if (alive && agent.combat.stunnedUntil > currentTrial.time) {
-      context.save(); context.strokeStyle = "#f6d983"; context.lineWidth = 2;
-      context.beginPath(); context.ellipse(point.x, point.y - height * .47, width * .035, 8, 0, 0, Math.PI * 2); context.stroke();
-      for (let i = 0; i < 3; i++) {
-        const angle = clock * 3 + i * Math.PI * 2 / 3;
-        context.fillStyle = "#ffe9a7"; context.fillRect(point.x + Math.cos(angle) * width * .035 - 2, point.y - height * .47 + Math.sin(angle) * 8 - 2, 4, 4);
-      }
-      context.restore();
-    }
     if (currentTrial.agents.length > 2) {
       context.save(); context.font = '600 11px "Malgun Gothic", sans-serif'; context.textAlign = "center";
       context.fillStyle = colors[index]; context.fillText(agent.name, point.x, point.y + 16);
@@ -287,7 +279,9 @@ export function createCombatStage(canvas) {
       context.restore();
     }
     const dimensions = bodyDimensions(agent), cell = 100 * formationScale(width, height);
-    return { ...point, width: dimensions.width * cell, height: dimensions.height * cell };
+    const bodyPoint = { ...point, width: dimensions.width * cell, height: dimensions.height * cell };
+    drawCombatStun(context, agent, bodyPoint, currentTrial.time, { width, height, reducedMotion: reducedMotion.matches });
+    return bodyPoint;
   }
 
   function effectArt(effect, points, width, height, impactCovered = false) {
