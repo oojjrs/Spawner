@@ -8281,8 +8281,11 @@
       if (state.combatVfx?.version === 1) {
         const matches = combatVfxFrame.active.filter(cue => ["impact", "defense", "prepare", "status"].includes(cue.channel) &&
           ["hit", "critical", "followup", "area", "reflect", "counter", "dodge", "parry", "block", "stun"].includes(cue.kind) &&
-          (cue.kind !== "dodge" || String(cue.targetId) === String(agent.id)) &&
-          (String(cue.sourceId) === String(agent.id) || String(cue.targetId) === String(agent.id)));
+          // Preparation belongs to its actor; defense/status belongs to the
+          // recipient. A zero-damage counter windup is not a hit on its target.
+          (cue.channel === "prepare" ? String(cue.sourceId) === String(agent.id) :
+            ["defense", "status"].includes(cue.channel) ? String(cue.targetId) === String(agent.id) :
+              String(cue.sourceId) === String(agent.id) || String(cue.targetId) === String(agent.id)));
         // A fighter can deal and receive damage in the same tick. Its outgoing
         // event must not hide the incoming recoil or the missing-art fallback.
         const cue = matches.findLast(cue => ["defense", "status"].includes(cue.channel) && cue.kind !== "dodge" && String(cue.targetId) === String(agent.id)) ||
@@ -8290,7 +8293,10 @@
           matches.findLast(cue => cue.kind === "dodge") || matches.at(-1);
         return cue ? { ...cue, kind: ["critical", "followup", "area", "reflect"].includes(cue.kind) ? "hit" : cue.kind, damage: cue.amount } : null;
       }
-      const relevant = event => event && (String(event.sourceId) === String(agent.id) || String(event.targetId) === String(agent.id)) && ["hit", "counter", "parry", "block", "stun"].includes(event.kind);
+      const relevant = event => event && ["hit", "counter", "parry", "block", "stun"].includes(event.kind) &&
+        (event.kind === "counter" ? String(event.sourceId) === String(agent.id) :
+          ["parry", "block", "stun"].includes(event.kind) ? String(event.targetId) === String(agent.id) :
+            String(event.sourceId) === String(agent.id) || String(event.targetId) === String(agent.id));
       const reaction = agent.combat.lastReaction;
       if (relevant(reaction) && String(reaction.targetId) === String(agent.id) && state.simSeconds >= reaction.at && state.simSeconds - reaction.at < .5) return reaction;
       const event = agent.combat.lastEvent;
@@ -8435,7 +8441,7 @@
       for (const agent of [...arenaUnits].sort((a, b) => positions.get(String(a.id)).y - positions.get(String(b.id)).y)) {
         const point = positions.get(String(agent.id)), primary = Spawner.combatPrimary(agent), attack = agent.attack;
         const impact = combatVisualEvent(agent), age = impact ? state.simSeconds - impact.at : Infinity;
-        const hit = impact && String(impact.targetId) === String(agent.id) && ["hit", "counter", "stun"].includes(impact.kind);
+        const hit = impact && String(impact.targetId) === String(agent.id) && ["hit", "stun"].includes(impact.kind);
         const opponent = positions.get(String(attack?.targetId ?? agent.combat.targetId));
         const facing = opponent ? Math.sign(opponent.x - point.x) || (agent.combat.side ? -1 : 1) : agent.combat.side ? -1 : 1;
         const progress = attack ? clamp((state.simSeconds - attack.startedAt) / (attack.endsAt - attack.startedAt), 0, 1) : 0;
@@ -8500,7 +8506,7 @@
           cue.kind === "dodge" && cue.channel === "defense" && String(cue.targetId) === String(agent.id));
         if (dodge && state.simSeconds >= dodge.at && state.simSeconds < dodge.endsAt)
           dodgeLabels.push({ targetId: agent.id, x, y: Math.max(20, y - point.height - 20), floor: y, age: state.simSeconds - dodge.at });
-        if (impact && impact.kind !== "dodge" && String(impact.targetId) === String(agent.id) && age >= 0 && age < .25)
+        if (impact && !["dodge", "counter"].includes(impact.kind) && String(impact.targetId) === String(agent.id) && age >= 0 && age < .25)
           fallbackImpacts.push({ impact, age, primary, x, bodyY, lineWidth: context.lineWidth });
         context.restore();
       }
