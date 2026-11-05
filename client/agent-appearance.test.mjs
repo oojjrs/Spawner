@@ -30,7 +30,7 @@ function rendering(action) {
     sproutCombatFrame: () => sheet, agentAttackFrame: () => -1,
     Spawner: { unitDisplayAttributes, imageFrameGeometry, sproutRootGeometry: () => ({ height: 76 }), combatHurtFrame: () => -1, unitAnimationPose: () => ({ action, frame: 0, animation: { frameSize: 512, columns: 4, pivotX: 256, pivotY: 448 } }), unitAnimationFrame },
     unitAnimationSheets: new Map([["bean", new Map([[action, { sprite: sheet, scale: 1 }]])]]),
-    drawAgentRanged: () => false, drawSelectionOutline() {},
+    drawAgentRanged: () => false, drawAgentBaseResource: () => false, drawSelectionOutline() {},
     drawing: { save() {}, restore() {}, beginPath() {}, rect() {}, clip() {}, ellipse() {}, fill() {},
       translate() {}, scale() {}, rotate() {}, drawImage(image) { draws.push(image.name); } }
   });

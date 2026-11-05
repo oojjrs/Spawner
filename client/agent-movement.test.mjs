@@ -3,7 +3,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
-import { sproutRootGeometry } from "./sprout-roots.mjs";
+import { sproutRootGeometry, sproutJumpOffset, sproutBodyPose } from "./sprout-roots.mjs";
 import { ATTRIBUTES, COMBAT_ATTRIBUTE_KEYS } from "../server/attributes.mjs";
 import { UNIT_ANIMATIONS, unitAnimationPose, unitMovementPosition } from "./unit-animation.mjs";
 import { SPORE_BIRTH_ANIMATION } from "./birth.mjs";
@@ -24,7 +24,7 @@ function movement() {
     constructor() { this.complete = true; this.naturalWidth = 2048; }
     async decode() {}
   }
-  const context = createContext({ canvas: {}, Image, performance, Spawner: { unitDisplayAttributes, UNIT_ANIMATIONS, combatAttributeKeys, hasCombatEvolution, unitAnimationPose, unitMovementPosition, sproutRootGeometry }, assetSource: path => path,
+  const context = createContext({ canvas: {}, Image, performance, Spawner: { unitDisplayAttributes, UNIT_ANIMATIONS, combatAttributeKeys, hasCombatEvolution, unitAnimationPose, unitMovementPosition, sproutRootGeometry, sproutJumpOffset, sproutBodyPose }, assetSource: path => path,
     unitAnimationSheets: new Map(), combatAttributeArt: { ready: () => true, frame: () => ({ width: 512, height: 512 }) },
     drawAgentFeet() {}, drawAgentTail() {}, drawAgentHead() {},
     state: { simSeconds: .5 }, idleMotion: { matches: false }, AGENT_JUMP_PREPARATION: .2, AGENT_HEIGHT: .7,

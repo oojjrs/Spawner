@@ -1,3 +1,4 @@
+import { sproutJumpOffset } from "./sprout-roots.mjs";
 import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
 import { imageFrameGeometry } from "./image-geometry.mjs";
 import test from "node:test";
@@ -18,9 +19,9 @@ function rendering() {
     tribeArt: { animationPose: (agent, pose) => pose },
     agentBodyPose: () => ({ pivot: .94, scaleX: 1, scaleY: 1 }), agentWalkPose: () => null,
     agentSprite: () => sprite("body"), drawAgentHead() {}, drawAgentFeet() {}, drawAgentTail() {},
-    drawAgentRanged: () => false, drawAgentAttack: () => false, drawAgentMovement: () => false, drawSelectionOutline() {},
+    drawAgentRanged: () => false, drawAgentBaseResource: () => false, drawAgentAttack: () => false, drawAgentMovement: () => false, drawSelectionOutline() {},
     foodCellMap: new Map(), foodCellAt: () => ({ x: 1, y: 2, resourceType: "honey-mushrooms", amount: 5 }),
-    worldMap: {}, Spawner: { unitDisplayAttributes, imageFrameGeometry, unitAnimationPose, resourceTypeForCell, combatAttributeKeys: () => [] },
+    worldMap: {}, Spawner: { sproutJumpOffset, unitDisplayAttributes, imageFrameGeometry, unitAnimationPose, resourceTypeForCell, combatAttributeKeys: () => [] },
     unitAnimationSheets: new Map(Object.entries(UNIT_ANIMATIONS).map(([tribe, animations]) => [tribe,
       new Map(Object.entries(animations).map(([action, animation]) => [action, {
         animation, sprite: sprite(tribe + ":" + action), scale: 1

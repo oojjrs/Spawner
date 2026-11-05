@@ -4733,8 +4733,30 @@
       ctx.restore(); return true;
     }
 
+    function drawAgentBaseResource(ctx, agent, centerX, floor, height, outlineColor) {
+      const pose = Spawner.unitBaseResourcePose(agent, state.simSeconds);
+      if (!pose) return false;
+      const entry = unitAnimationSheets.get(agent.tribe)?.get("idle");
+      if (!entry?.sprite.complete || !entry.sprite.naturalWidth || !(entry.scale > 0)) return false;
+      const sprite = Spawner.unitBaseResourceFrame(entry.sprite, pose, (width, height) => {
+        const surface = document.createElement("canvas"); surface.width = width; surface.height = height; return surface;
+      }, idleMotion.matches);
+      if (!sprite) return false;
+      const animation = pose.animation, size = height * entry.scale;
+      const left = -size * animation.pivotX / animation.frameSize, top = -size * animation.pivotY / animation.frameSize;
+      const crop = { owner: sprite, index: 0, size: sprite.width, x: 0, y: 0 };
+      const facing = agent.combat ? agent.combat.side === 0 ? -1 : 1 : agent.facing || 1;
+      ctx.save(); ctx.translate(centerX, floor); ctx.scale(facing < 0 ? -1 : 1, 1);
+      if (outlineColor) drawSelectionOutline(sprite, left, top, size, size, crop, outlineColor);
+      ctx.drawImage(sprite, 0, 0, sprite.width, sprite.height, left, top, size, size);
+      ctx.restore();
+      return pose;
+    }
+
     function drawAgentAnimation(ctx, agent, centerX, floor, height, outlineColor) {
       if (drawAgentRanged(ctx, agent, centerX, floor, height, outlineColor)) return true;
+      const resourcePose = drawAgentBaseResource(ctx, agent, centerX, floor, height, outlineColor);
+      if (resourcePose) return resourcePose;
       const attributes = Spawner.unitDisplayAttributes(agent);
       let pose = Spawner.unitAnimationPose(agent, state.simSeconds);
       if (!pose) return false;
