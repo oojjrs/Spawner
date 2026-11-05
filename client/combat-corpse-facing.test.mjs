@@ -5,6 +5,7 @@ import { createContext, runInContext } from "node:vm";
 import { createGame } from "../server/game.mjs";
 import { createCreatures } from "../server/creatures.mjs";
 import { saveRoom, restoreRoom } from "./room.mjs";
+import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
 import { hasCombatEvolution } from "./combat-attributes.mjs";
 
 function fixture(tribe) {
@@ -55,7 +56,7 @@ function corpseRenderer() {
   const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
   const sprite = { width: 512, height: 512 }, calls = [];
   const scope = createContext({
-    Spawner: { hasCombatEvolution, COMBAT_ATTRIBUTE_KEYS: ["blade", "piercing", "carapace"] },
+    Spawner: { unitDisplayAttributes, hasCombatEvolution, COMBAT_ATTRIBUTE_KEYS: ["blade", "piercing", "carapace"] },
     combatAttributeArt: { ready: () => true, frame: () => sprite },
     corpsePlaybackTime: () => 10, AGENT_HEIGHT: .8,
     agentDeathFrame: () => -1,

@@ -1,4 +1,6 @@
 import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
+import { imageFrameGeometry } from "./image-geometry.mjs";
+import { imageDimensions } from "./image-audit.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -25,9 +27,11 @@ test("승인한 16프레임과 피벗·재생 시간을 런타임에서도 그�
   assert.deepEqual(AGENT_DEATH_ANIMATION.durationsMs, metadata.durationsMs);
   assert.equal(AGENT_DEATH_ANIMATION.frameCount, metadata.frameCount);
   assert.equal(AGENT_DEATH_ANIMATION.image, metadata.runtimeAtlas);
-  assert.equal(AGENT_DEATH_ANIMATION.frameSize, metadata.runtimeFrameSize[0]);
-  assert.equal(AGENT_DEATH_ANIMATION.pivotX, metadata.runtimePivot[0]);
-  assert.equal(AGENT_DEATH_ANIMATION.pivotY, metadata.runtimePivot[1]);
+  const dimensions = imageDimensions(new URL("../" + AGENT_DEATH_ANIMATION.image, import.meta.url));
+  assert.equal(dimensions[0], AGENT_DEATH_ANIMATION.frameSize * AGENT_DEATH_ANIMATION.columns);
+  assert.equal(dimensions[1], AGENT_DEATH_ANIMATION.frameSize * AGENT_DEATH_ANIMATION.columns);
+  assert.equal(AGENT_DEATH_ANIMATION.pivotX / AGENT_DEATH_ANIMATION.frameSize, metadata.runtimePivot[0] / metadata.runtimeFrameSize[0]);
+  assert.equal(AGENT_DEATH_ANIMATION.pivotY / AGENT_DEATH_ANIMATION.frameSize, metadata.runtimePivot[1] / metadata.runtimeFrameSize[1]);
   const corpse = { kind: "corpse", tribe: "bean", diedAt: 20 };
   let elapsed = 0;
   for (const [index, duration] of metadata.durationsMs.entries()) {
@@ -72,7 +76,7 @@ test("월드 사체 렌더러와 목록 아이콘이 같은 애셋을 사용하�
   const corpse = { id: "corpse:1", agentId: "1", kind: "corpse", tribe: "bean", x: 5, y: 5, diedAt: 10, decaysAt: 13 };
   const sheet = { complete: true, naturalWidth: 1024 };
   const scope = createContext({ AGENT_DEATH_ANIMATION, agentDeathFrame, AGENT_HEIGHT: 0.7, agentDeathSheet: sheet,
-    Spawner: { unitDisplayAttributes, agentDeathAnimation, hasCombatEvolution }, unitAnimationSheets: new Map(["bean", "spore", "pebble", "spring"].map(tribe =>
+    Spawner: { unitDisplayAttributes, imageFrameGeometry, agentDeathAnimation, hasCombatEvolution }, unitAnimationSheets: new Map(["bean", "spore", "pebble", "spring"].map(tribe =>
       [tribe, new Map([["death", { sprite: sheet, scale: .8 }]])])),
     corpsePlaybackTime: () => scope.state.simSeconds,
     state: { corpses: [corpse], agents: [], rivals: [], simSeconds: 10, camera: { zoom: 100 }, lastFrame: 0 }, idleMotion: { matches: false },
@@ -122,6 +126,7 @@ test("모든 부족의 사망 첫 자세는 256·512 프레임 해상도와 무�
     unitAnimationReady: new Map(), starterObjectSprite: starter, prepareSproutCombatFrames() {},
     tribeArt: {
       prepareUnit: async () => ({ box: { width: 240, height: 350 } }),
+      async prepareBounds(sprite, frame) { return this.bounds(sprite, frame); },
       bounds(sprite, frame) {
         if (sprite === starter) return { width: 512, height: 512 };
         const size = sheets.get(sprite.src).frameSize;
@@ -168,7 +173,7 @@ test("중립·유니크의 사망 첫 자세는 원본 프레임 크기와 무�
       drawImage(sprite, x, y, width, height, left, top, outputWidth) {
         renderedLength = outputWidth * Math.max(bounds.width, bounds.height) / frameSize * displayScale;
       } };
-    const scope = createContext({ Spawner: { unitDisplayAttributes, UNIT_DISPLAY_SIZES, unitAnimationFrame: () => 0 },
+    const scope = createContext({ Spawner: { unitDisplayAttributes, imageFrameGeometry, UNIT_DISPLAY_SIZES, unitAnimationFrame: () => 0 },
       tribeArt: { bounds: () => bounds }, unitDisplayScales: new Map([[species, displayScale]]),
       creatureDeathSheets: new Map([[species, entry]]), idleMotion: { matches: false }, state: { simSeconds: 0 }, corpsePlaybackTime: () => 0 });
     for (const name of ["prepareCreatureDeathSize", "drawCreatureDeath"])

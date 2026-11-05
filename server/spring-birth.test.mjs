@@ -53,7 +53,10 @@ test("샘방울 앞쪽이 막혀도 양옆의 빈 칸에서 탄생한다", () =>
 
 test("샘방울은 앞쪽과 양옆 11칸에 분산하고 모두 차면 비용을 차감하지 않는다", () => {
   const { game, colony } = fixture();
-  game.agents.splice(0);
+  const saved = JSON.parse(game.save());
+  saved.state.nestLevel = 4; // Keep the population cap above the 11 landing cells under test.
+  saved.state.agents = [];
+  game.restore(JSON.stringify(saved));
   game.command({ type: "design", templateId: null, name: "샘방울", slots: [], birth: false });
   const positions = [];
   const random = Math.random;

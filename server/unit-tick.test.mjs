@@ -99,7 +99,7 @@ test("시야 밖 군락 근처에 다른 군락 유닛이 오면 예약 시각 �
   assert.equal(ticks, 2);
 });
 
-test("시야 밖 유닛의 수명 만료는 다음 정기 갱신까지 미루지 않는다", () => {
+test("시야 밖 유닛도 폐기된 수명 값 때문에 사망하지 않는다", () => {
   const room = fixture(), hidden = room.games.get("spore");
   hidden.produce = () => null;
   for (const agent of hidden.agents) Object.assign(agent, { bornAt: 0, lifespan: 1, cost: 10, birth: null, utility: null,
@@ -108,8 +108,10 @@ test("시야 밖 유닛의 수명 만료는 다음 정기 갱신까지 미루지
   for (let step = 0; step < 9; step++) tickRoom(room, .1);
   assert.equal(hidden.agents.length, count);
   tickRoom(room, .100000001);
-  assert.equal(hidden.agents.length, 0);
-  assert.equal([...room.food.values()].filter(cell => cell.kind === "corpse" && cell.colonyId === 2).length, count);
+  assert.equal(hidden.agents.length, count);
+  assert.equal([...room.food.values()].filter(cell => cell.kind === "corpse" && cell.colonyId === 2).length, 0);
+  hidden.restore(hidden.save());
+  assert.ok(hidden.agents.every(agent => !("lifespan" in agent)));
 });
 
 test("저장·복원은 비가시 군락의 미처리 경과 시간과 갱신 예약을 보존한다", () => {

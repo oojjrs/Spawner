@@ -18,7 +18,7 @@ function firstStep(tribe, load, slots) {
   const {agentId}=game.command({type:"design",templateId:null,name:"이동",slots:slots || [],birth:true});
   const agent=game.agents.find(entry=>entry.id===agentId);
   Object.assign(agent,{x:48,y:42,renderFromX:48,renderFromY:42,birth:null,moveStartedAt:0,moveDuration:0,
-    carrying:agent.stats.capacity*load,carryingType:load>0?"nutrients":null});
+    carrying:agent.stats.capacity*load,carryingType:load>0?"clay":null});
   for (let step=0;step<80 && !agent.stepCount;step++) {
     environment.simSeconds+=.1; game.prepare(environment.simSeconds); game.tick(.1);
   }
@@ -59,7 +59,7 @@ test("AI는 빈손 출발과 예상 적재 귀환을 따로 계산하고 샘방�
   for (const [tribe,empty,loaded,expectedCargo] of [["bean",1,.8,4],["spring",1.8,.55,3],
     ["pebble",.7,.6,4],["spore",1,.8,4]]) {
     const size=14,agent=worker(tribe,"worker");
-    const home={x:1,y:1},food={x:11,y:1,key:"11,1",resourceType:"nutrients",amount:20};
+    const home={x:1,y:1},food={x:11,y:1,key:"11,1",resourceType:"clay",amount:20};
     const state={simSeconds:0,evolutionPoints:0,colonyFood:0,lastFoodAt:0,nestLevel:1,agents:[agent],
       knownFood:new Map([[food.key,food]]),resourceInventory:{},markers:[],
       explored:new Set(Array.from({length:size*size},(_,index)=>index))};
@@ -70,10 +70,10 @@ test("AI는 빈손 출발과 예상 적재 귀환을 따로 계산하고 샘방�
     assert.ok(collect,tribe);
     assert.equal(collect.plannedCargo,expectedCargo,tribe);
     const returning=empty+(loaded-empty)*expectedCargo/4;
-    const expected=10/(.5*empty)+1+expectedCargo*1.5+10/(.5*returning)+1;
+    const expected=10/(.5*empty)+1+expectedCargo*4+10/(.5*returning)+1;
     assert.ok(Math.abs(collect.deliverySeconds-expected)<1e-10,tribe);
     for (const load of [.5,1]) {
-      Object.assign(agent,{x:11,carrying:4*load,carryingType:"nutrients",utility:null});
+      Object.assign(agent,{x:11,carrying:4*load,carryingType:"clay",utility:null});
       const returning=ai.evaluate(agent,false).find(candidate=>candidate.action==="return");
       assert.ok(returning,tribe);
       const speed=.5*(empty+(loaded-empty)*load);
@@ -83,8 +83,8 @@ test("AI는 빈손 출발과 예상 적재 귀환을 따로 계산하고 샘방�
 });
 
 test("기본 자원 한 개의 AI 왕복 시간에 종족 속도·채집 시간·레벨 보너스를 반영한다",()=>{
-  for (const [tribe,type,empty,loaded,harvest] of [["bean","clay",.5,.4,2],["spring","dew",.9,.275,.8],
-    ["spore","tree",.5,.4,1],["pebble","pebbles",.35,.3,4]]) {
+  for (const [tribe,type,empty,loaded,harvest] of [["bean","clay",.5,.4,4],["spring","dew",.9,.275,2],
+    ["spore","tree",.5,.4,6],["pebble","pebbles",.35,.3,6]]) {
     for (const ranks of [0,5]) {
       const size=14,agent=worker(tribe,"native-worker"),home={x:1,y:1};
       agent.stats.capacity=1;
@@ -107,7 +107,7 @@ test("기본 자원 한 개의 AI 왕복 시간에 종족 속도·채집 시간�
   }
 });
 
-test("긴급 수급 인원은 샘방울의 빠른 출발보다 느린 만재 귀환을 포함한 남은 수명을 기준으로 고른다",()=>{
+test("긴급 수급 인원은 나이 대신 빈손 출발과 만재 귀환의 운반 효율로 고른다",()=>{
   const spring=worker("spring","1"),bean=worker("bean","2");
   for (const agent of [spring,bean]) { agent.x=0; agent.stats.capacity=1; }
   spring.bornAt=-132; bean.bornAt=-129;

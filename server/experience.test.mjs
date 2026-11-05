@@ -34,11 +34,11 @@ test("출생 시야는 경험치가 없고 새로운 탐색·종류별 발견만
   assert.ok(game.agents.every(agent => agent.growthActivity === 0));
   const before = game.snapshot().explored.length;
   Object.assign(agent, { x: 100, y: 100, renderFromX: 100, renderFromY: 100, moveDuration: 0 });
-  environment.food.set("100,100", { x: 100, y: 100, amount: 2, initialAmount: 2, kind: "resource", resourceType: "quartz" });
+  environment.food.set("100,100", { x: 100, y: 100, amount: 2, initialAmount: 2, kind: "resource", resourceType: "pebbles" });
   const after = game.snapshot();
   assert.equal(agent.growthActivity, (after.explored.length - before) / 10 + 5);
   const earned = agent.growthActivity;
-  environment.food.set("100,101", { x: 100, y: 101, amount: 2, initialAmount: 2, kind: "resource", resourceType: "quartz" });
+  environment.food.set("100,101", { x: 100, y: 101, amount: 2, initialAmount: 2, kind: "resource", resourceType: "pebbles" });
   game.snapshot();
   assert.equal(agent.growthActivity, earned);
   const saved = game.save();
@@ -60,17 +60,18 @@ test("채집과 납품은 실제 수량에 각각 2점과 3점을 지급한다",
   environment.food.set("46,42", { x: 46, y: 42, amount: 2, initialAmount: 2, kind: "resource", resourceType: "clay" });
   game.restore(JSON.stringify(saved));
   game.prepare(1); game.tick(1);
-  game.prepare(5); game.tick(4);
+  // Two clay harvests take four seconds each after preparation.
+  game.prepare(9); game.tick(8);
   assert.equal(game.agents[0].carrying, 2);
   assert.equal(game.agents[0].growthActivity, 4);
-  game.prepare(5); game.tick(0);
+  game.prepare(9); game.tick(0);
   const beforeDelivery = game.agents[0].growthActivity;
   const delivery = game.agents[0].utility.route.at(-1);
   const unloading = JSON.parse(game.save());
   Object.assign(unloading.state.agents[0], { x: delivery.x, y: delivery.y, renderFromX: delivery.x, renderFromY: delivery.y,
-    mode: "unload", moveDuration: 0, unloadReady: 5, decisionPending: null, nextDecisionAt: 1000 });
+    mode: "unload", moveDuration: 0, unloadReady: 9, decisionPending: null, nextDecisionAt: 1000 });
   game.restore(JSON.stringify(unloading));
-  game.prepare(5); game.tick(0);
+  game.prepare(9); game.tick(0);
   assert.equal(game.agents[0].carrying, 0);
   assert.equal(game.agents[0].growthActivity, beforeDelivery + 6);
 });

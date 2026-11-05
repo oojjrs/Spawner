@@ -24,12 +24,13 @@ test("기본 전투력과 별도로 칼날의 공격 보너스와 관통의 갑�
   const plain = unit("plain", "a", []), blade = unit("blade", "a", ["blade"]);
   const shell = unit("shell", "b", ["carapace"]);
   const piercer = unit("piercer", "a", ["piercing"]);
-  for (const agent of [blade, shell, piercer]) agent.stats.combatStrength = plain.stats.combatStrength;
+  // unitStats includes attribute strength bonuses; combatProfile removes those
+  // legacy aggregate bonuses before applying each RPG attack/defense effect.
   assert.ok(combatDamage(blade, plain, .5) > combatDamage(plain, plain, .5));
   assert.equal(combatDamage(plain, blade, .5), combatDamage(plain, plain, .5));
   assert.ok(combatDamage(plain, shell, .5) < combatDamage(plain, plain, .5));
   assert.ok(combatDamage(piercer, shell, .5) > combatDamage(plain, shell, .5));
-  assert.ok(combatDamage(piercer, shell, .5) < combatDamage(plain, plain, .5));
+  assert.ok(combatDamage(piercer, shell, .5) < combatDamage(piercer, plain, .5));
   assert.equal(piercer.stats.armorPenetration, .5);
   assert.ok(combatDamage(plain, unit("armor", "b", ["carapace"]), .5) >= 1);
 });
@@ -85,8 +86,7 @@ test("이전 저장의 분비 속성과 전투 강화는 제거하고 나머지 
   assert.deepEqual(restored.slots, slots);
   assert.equal(Object.hasOwn(restored.attributes, "secretion"), false);
   assert.equal(Object.hasOwn(restored.stats, "secretionBonus"), false);
-  assert.equal(Object.hasOwn(restored.combat, "secretionBonus"), false);
-  assert.equal(Object.hasOwn(restored.combat, "secretionActive"), false);
+  assert.equal(restored.combat, null); // Legacy support combat is discarded on restore.
   assert.equal(Object.hasOwn(restored, "support"), false);
   assert.deepEqual(template.slots, ["carapace"]);
   assert.equal(Object.hasOwn(template.attributeLevels, "secretion"), false);

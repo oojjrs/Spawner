@@ -1,3 +1,4 @@
+import { imageFrameGeometry } from "./image-geometry.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -75,7 +76,7 @@ test("사망 렌더러가 연결된 시트의 마지막 프레임을 유효한 �
     const draws = [], sprite = { complete: true, naturalWidth: animation.columns * animation.frameSize };
     const context = { globalAlpha: 1, save() {}, restore() {}, translate() {}, scale() {}, drawImage(...args) { draws.push(args); } };
     const scope = createContext({ creatureDeathSheets: new Map([["test", { sprite, animation, scale: 1 }]]),
-      idleMotion: { matches: false }, Spawner: { unitAnimationFrame }, corpsePlaybackTime: () => 100,
+      idleMotion: { matches: false }, Spawner: { imageFrameGeometry, unitAnimationFrame }, corpsePlaybackTime: () => 100,
       state: { simSeconds: 100 }, clamp: (value, low, high) => Math.max(low, Math.min(high, value)) });
     runInContext(source.match(/^    function drawCreatureDeath\([^]*?^    }/m)[0], scope);
     assert.equal(scope.drawCreatureDeath(context, { species: "test", diedAt: 0 }, 0, 0, 100, null, 1), true);

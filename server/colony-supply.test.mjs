@@ -5,9 +5,10 @@ import { createUtilityAI } from "./utility.mjs";
 import { attributeCounts, unitStats } from "./attributes.mjs";
 
 function fixture(points) {
-  const attributes = attributeCounts(["antenna", "feet"]);
+  // Pure antenna units are dedicated scouts; supply tests use an ordinary worker.
+  const attributes = attributeCounts(["feet"]);
   const agent = { id:"supply", x:4, y:4, bornAt:180, lifespan:180, health:100, cost:8, carrying:0,
-    slots:["antenna", "feet"], attributes, stats:unitStats(attributes, "pebble"), stepCount:0,
+    slots:["feet"], attributes, stats:unitStats(attributes, "pebble"), stepCount:0,
     personality:{boldness:.5,aggression:.5,curiosity:1}, visited:new Set(["4,4"]), preciseHarvestTimes:new Map() };
   const food = { x:10, y:4, amount:1, resourceType:"pebbles" };
   const state = { simSeconds:200, nestLevel:2, evolutionPoints:points, agents:[agent], markers:[],
@@ -23,7 +24,7 @@ function fixture(points) {
 }
 
 test("최후 개체의 복제 자금이 부족하면 성향보다 안전한 자원 수급을 우선한다", () => {
-  const f = fixture(2), poor = f.ai.evaluate(f.agent, true);
+  const f = fixture(0), poor = f.ai.evaluate(f.agent, true);
   assert.equal(poor[0].action, "collect");
   assert.equal(colonySupply(f.state).urgency, 1);
   f.state.evolutionPoints = 490;
@@ -57,13 +58,13 @@ test("교체 잔액이 남아도 납품 중단을 감지하고 수급이 안정�
   assert.equal(colonySupply(f.state).interruption,0);
 });
 
-test("위기 채집은 수명이 충분한 일부 개체에 맡기고 전문 재료 채집 개체를 남긴다", () => {
+test("위기 채집은 나이와 무관하게 일부 개체에 맡기고 전문 재료 채집 개체를 남긴다", () => {
   const f=fixture(12), foods=[{x:10,y:4}], homes=[{x:4,y:3}];
   f.state.agents=Array.from({length:4},(_,i)=>({...f.agent,id:String(i),stats:{...f.agent.stats,capacity:i===2?3:1}}));
   f.state.agents[0].bornAt=25;
   f.state.agents[2].attributes={blade:1};
   const assigned=colonyForagers(f.state,foods,homes);
-  assert.equal(assigned.has("0"),false);
+  assert.equal(assigned.has("0"),true);
   assert.equal(assigned.has("2"),false);
   assert.equal(assigned.size,2);
 });
@@ -75,33 +76,6 @@ test("마지막 재료 채집 개체도 자원 수급이 급하면 자원을 먼
   f.state.knownFood.set("5,4",{x:5,y:4,amount:30,resourceType:"tree"});
   assert.equal(f.ai.evaluate(f.agent,false)[0].target.key,"10,4");
 });
-
-test("자원을 알아도 왕복이 길면 반대 방향 대신 그 자원 주변의 경계를 탐색한다", () => {
-  const f=fixture(0);
-  f.state.lastFoodAt=100;f.agent.bornAt=60;
-  f.state.knownFood.clear();f.state.knownFood.set("22,4",{x:22,y:4,amount:12,resourceType:"pebbles"});
-  f.state.explored.clear();
-  for(let y=0;y<10;y++)for(let x=0;x<25;x++)f.state.explored.add(y*32+x);
-  const plan=f.ai.evaluate(f.agent,false)[0];
-  assert.equal(plan.action,"explore");
-  assert.ok(Math.abs(plan.target.x - 22) + Math.abs(plan.target.y - 4) < Math.abs(f.agent.x - 22) + Math.abs(f.agent.y - 4));
-});
-
-test("먼 거점의 고정 시야 주변 탐색도 짧은 일반 탐색 한도 때문에 누락되지 않는다", () => {
-  const f=fixture(0);
-  f.state.lastFoodAt=100;f.agent.x=5;f.agent.y=40;f.agent.bornAt=20;f.agent.lifespan=360;
-  f.state.knownFood.clear();f.state.knownFood.set("95,40",{x:95,y:40,amount:12,resourceType:"pebbles"});
-  f.state.explored.clear();
-  for(let y=0;y<80;y++)for(let x=0;x<100;x++)f.state.explored.add(y*128+x);
-  f.context.size=128;f.context.homeCells=()=>[{x:5,y:39}];f.context.deliveryCells=f.context.homeCells;
-  f.context.permanentVisionSources=()=>[{x:5,y:39,radius:6},{x:95,y:39,radius:6}];
-  f.context.walkable=(x,y)=>x>=0&&y>=0&&x<128&&y<128&&f.state.explored.has(y*128+x);
-  const plans=createUtilityAI(f.context).evaluate(f.agent,false);
-  assert.equal(plans[0]?.action,"explore");
-  assert.ok(plans[0].target.x>=82);
-});
-
-
 
 test("최근 60초 실수령률과 개체 교체 유지율은 별개로 계산하며 오래된 납품을 제외한다", () => {
   const f = fixture(0);

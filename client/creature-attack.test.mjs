@@ -1,3 +1,4 @@
+import { imageFrameGeometry } from "./image-geometry.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -62,7 +63,7 @@ test("실제 게임은 피격 다음에 새 공격을 그리며 공격 원화는
   context.drawAgentUnscaledBody(0, { species: "dew-rabbit", mode: "fight" });
   assert.deepEqual(calls, ["hurt", "attack"]);
   const animation = CREATURE_ATTACK_ANIMATIONS["dew-rabbit"], mirrors = [];
-  const renderer = createContext({ Spawner: { creatureAttackPose }, state: { simSeconds: 10, camera: { zoom: 64 } },
+  const renderer = createContext({ Spawner: { imageFrameGeometry, creatureAttackPose }, state: { simSeconds: 10, camera: { zoom: 64 } },
     creatureAttackSheets: new Map([["dew-rabbit", { animation, sprite: { complete: true, naturalWidth: animation.frameSize * animation.columns }, scale: 1 }]]),
     worldToScreen: () => ({ x: 0, y: 0 }), objectOutlineColor: () => null,
     ctx: { save() {}, restore() {}, translate() {}, scale(x) { mirrors.push(x); }, drawImage() {} } });

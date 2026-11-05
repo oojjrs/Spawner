@@ -2,6 +2,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { colonyRaidCadence } from "./raid-pressure.mjs";
 import { createCreatures } from "./creatures.mjs";
+import { CORPSE_LIFETIME } from "./corpses.mjs";
+import { BEETLE_ANIMATIONS } from "./beetle-animation.mjs";
 import { createCombat } from "./combat.mjs";
 import { createUtilityAI } from "./utility.mjs";
 import { createRoom, saveRoom, restoreRoom } from "../client/room.mjs";
@@ -144,9 +146,12 @@ test("출발 굴 파괴는 습격을 끝내지 않고 대상 군락 소멸은 �
 test("둥지 안전권 안에서 처치한 습격 개체도 사체를 한 번만 남긴다", () => {
   const setup = fixture(false), { room, system } = setup, agent = start(setup);
   until(room, system, () => agent.raid?.phase === "active", 400);
-  system.receiveDamage(agent, 100); advance(room, system, room.simSeconds + 5);
+  system.receiveDamage(agent, 100); const diedAt = room.simSeconds;
+  advance(room, system, diedAt + BEETLE_ANIMATIONS.death.durationMs / 1000);
   assert.equal([...room.food.values()].filter(cell => cell.kind === "corpse").length, 1);
   system.tick(); assert.equal([...room.food.values()].filter(cell => cell.kind === "corpse").length, 1);
+  advance(room, system, diedAt + CORPSE_LIFETIME);
+  assert.equal([...room.food.values()].filter(cell => cell.kind === "corpse").length, 0);
 });
 
 test("이전 버전 4 저장은 개체·굴 체력·증식 시각을 보존하고 습격은 불러온 시점 이후에 시작한다", () => {
@@ -156,7 +161,7 @@ test("이전 버전 4 저장은 개체·굴 체력·증식 시각을 보존하�
   room.simSeconds = 900;
   const restored = createCreatures(room, saved);
   assert.equal(restored.save().version, 5); assert.deepEqual(restored.agents, saved.agents);
-  assert.equal(restored.save().burrows[0].health, 60); assert.equal(restored.save().burrows[0].nextSpawnAt, 30);
+  assert.equal(restored.save().burrows[0].health, 60); assert.equal(restored.save().burrows[0].nextSpawnAt, saved.burrows[0].nextSpawnAt);
   assert.ok(restored.save().burrows[0].nextRaidAt >= 900 && restored.save().burrows[0].nextRaidAt <= 930);
   const invalid = JSON.parse(JSON.stringify(restored.save())); invalid.raidCooldowns = null;
   assert.throws(() => createCreatures(room, invalid), /습격 저장 형식/);
@@ -259,13 +264,17 @@ test("습격벌레는 출정·활동 중 붙잡혀도 공격과 반격이 끝나
     assert.equal(agent.combat?.id, combatId, phase);
     assert.equal(agent.raid.phase, phase, phase);
     assert.deepEqual({ x: agent.x, y: agent.y }, position, phase);
-    advance(room, system, victim.attack.hitAt);
-    advance(room, system, victim.attack.exchangeEndsAt);
+    const hitAt = agent.attack.hitAt, endsAt = agent.attack.endsAt, before = victim.health;
+    advance(room, system, hitAt - 1e-6);
+    assert.equal(victim.health, before, phase);
+    advance(room, system, hitAt);
     assert.equal(agent.combat?.id, combatId, phase);
-    assert.ok(agent.attack?.counter, phase);
-    const before = victim.health;
-    advance(room, system, agent.attack.hitAt);
+    assert.equal(agent.attack.counter, false, phase);
     assert.ok(victim.health < before, phase);
+    advance(room, system, endsAt);
+    assert.equal(agent.combat?.id, combatId, phase);
+    assert.equal(agent.raid.phase, phase, phase);
+    assert.deepEqual({ x: agent.x, y: agent.y }, position, phase);
     victim.health = 0;
     until(room, system, () => !agent.combat, room.simSeconds + 10);
     room.simSeconds += .25; system.tick();

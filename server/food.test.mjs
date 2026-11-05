@@ -56,21 +56,21 @@ test("새싹콩은 비옥토를 수확하고 둥지 식량으로 운반한다", 
   for (const [terrain, kind] of [["grassland", undefined]]) {
     const f = fixture(terrain, kind, ["strength", "antenna"]);
     f.food.resourceType = "clay";
-    advance(f, 20);
+    advance(f, 45);
     assert.ok(f.food.amount < 20);
     assert.ok(f.game.snapshot().colonyFood > 0);
   }
 });
 
-test("무속성 새싹콩은 비옥토만 자동 채집하고 다른 자원·사체는 선택하지 않는다", () => {
+test("무속성 새싹콩은 비옥토·이슬을 채집할 수 있고 잠긴 자원·사체는 선택하지 않는다", () => {
   const world = { hazards: new Uint8Array(320 * 320) };
   assert.equal(canHarvestResource(null, world), false);
   assert.equal(canHarvestResource({ x: 43, y: 42, terrain: "grassland", resourceType: "unknown" }, world), false);
   assert.equal(canHarvestResource({ x: 43, y: 42, terrain: "forest", resourceType: "honey-mushrooms" }, world), false);
   for (const definition of RESOURCE_TYPES) {
     assert.equal(canHarvestResource({ x: 43, y: 42, terrain: "grassland", resourceType: definition.key }, world),
-      definition.key === "clay");
-    if (definition.key === "clay") continue;
+      ["clay", "dew"].includes(definition.key));
+    if (["clay", "dew"].includes(definition.key)) continue;
     const f = fixture("grassland", undefined, []);
     f.food.resourceType = definition.key;
     f.food.kind = definition.key === "nutrients" ? "corpse" : "resource";

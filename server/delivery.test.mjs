@@ -73,14 +73,14 @@ test("기존 저장에서 둥지 바깥의 하역을 복원해도 모퉁이에 �
 
 test("재료는 포인트 창고가 가득 차도 이동·하역하고 저장 복원 중 종류와 재고를 보존한다", () => {
   const f = fixture(46, 42);
-  f.agent.carryingType = "iron-ore";
+  f.agent.carryingType = "pebbles";
   const saved = JSON.parse(f.game.save());
   saved.state.evolutionPoints = 100;
   saved.state.resourceInventory = { dew: 3 };
   f.game.restore(JSON.stringify(saved));
   f.agent = f.game.agents[0];
   let throwing = false;
-  for (let step = 0; step < 200 && !f.game.snapshot().resourceInventory["iron-ore"]; step++) {
+  for (let step = 0; step < 200 && !f.game.snapshot().resourceInventory["pebbles"]; step++) {
     const saved = f.game.save();
     f.game = createGame(f.environment, f.environment.colonies[0]);
     f.game.restore(saved);
@@ -89,18 +89,18 @@ test("재료는 포인트 창고가 가득 차도 이동·하역하고 저장 �
     advance(f);
     if (f.agent.foodDelivery?.receivedAt === null) {
       throwing = true;
-      assert.equal(f.agent.foodDelivery.resourceType, "iron-ore");
-      assert.equal(f.agent.carryingType, "iron-ore");
+      assert.equal(f.agent.foodDelivery.resourceType, "pebbles");
+      assert.equal(f.agent.carryingType, "pebbles");
     }
   }
   const snapshot = f.game.snapshot();
   assert.ok(throwing);
-  assert.deepEqual(snapshot.resourceInventory, { dew: 3, "iron-ore": 2 });
+  assert.deepEqual(snapshot.resourceInventory, { dew: 3, "pebbles": 2 });
   assert.equal(snapshot.evolutionPoints, 100);
   assert.equal(snapshot.colonyFood, 0);
   assert.equal(f.agent.carrying, 0);
   assert.equal(f.agent.carryingType, null);
-  assert.equal(f.agent.foodDelivery.resourceType, "iron-ore");
+  assert.equal(f.agent.foodDelivery.resourceType, "pebbles");
   f.game.restore(f.game.save());
   assert.deepEqual(f.game.snapshot().resourceInventory, snapshot.resourceInventory);
 });
@@ -137,7 +137,7 @@ test("식량 창고가 가득 차도 잠긴 재료를 채집하거나 운반하�
 });
 
 test("수확 중 다른 종류로 바뀐 목표는 음식끼리도 섞지 않고 적재물을 반납한다", () => {
-  for (const [carryingType, resourceType] of [["honey-mushrooms", "berry-bush"], ["iron-ore", "bark"]]) {
+  for (const [carryingType, resourceType] of [["honey-mushrooms", "berry-bush"], ["pebbles", "bark"]]) {
     const f = fixture(46, 42);
     const node = { x: 46, y: 42, amount: 8, terrain: "grassland", resourceType };
     f.environment.food.set("46,42", node);
@@ -164,16 +164,17 @@ test("옛 저장의 적재물은 버섯으로 복원하고 새 재료 재고가 
 });
 
 test("사망한 운반자의 재료는 같은 종류로 떨어지고 고기량이나 식량 포인트로 변환되지 않는다", () => {
-  for (const [cost, amount] of [[3, 0], [10, 2]]) {
+  for (const cost of [3, 10]) {
     const f = fixture(46, 42);
-    Object.assign(f.agent, { cost, carrying: 3, carryingType: "iron-ore" });
+    Object.assign(f.agent, { cost, carrying: 3, carryingType: "pebbles" });
     const points = f.game.snapshot().evolutionPoints;
     f.game.receiveDamage(f.agent, f.agent.health);
     const nodes = [...f.environment.food.values()];
-    assert.equal(nodes.filter(node => node.resourceType === "iron-ore").reduce((sum, node) => sum + node.amount, 0), 3);
+    assert.equal(nodes.filter(node => node.resourceType === "pebbles").reduce((sum, node) => sum + node.amount, 0), 3);
     const corpse = nodes.find(node => node.kind === "corpse");
-    assert.equal(corpse.resourceType, "nutrients");
-    assert.equal(corpse.amount, amount);
+    assert.equal(corpse.resourceType, undefined);
+    assert.equal(corpse.amount, undefined);
+    assert.equal(corpse.decaysAt - corpse.diedAt, 3);
     assert.equal(f.game.snapshot().evolutionPoints, points);
     assert.equal(f.game.snapshot().colonyFood, 0);
   }

@@ -19,7 +19,7 @@ function fixture(type) {
     moveStartedAt:0, moveDuration:0, moveBudget:0, mode:"fight", decisionPending:null, nextDecisionAt:100,
     knownEnemyIds:new Set([burrow.id]), combatDisposition:"aggressive", personality:{ boldness:1, aggression:1, curiosity:0 }, actionPriorities:["fight"],
     utility:{ action:"fight", target:{ id:burrow.id, key:burrow.id, kind:"burrow", x:burrow.x, y:burrow.y }, route:[] } });
-  agent.stats.attack = 5; agent.stats.speed = 1;
+  agent.stats.speed = 1;
   return { room, game, burrow, agent, system:room.creatureSystem };
 }
 
@@ -42,12 +42,14 @@ test("큰 굴의 오른쪽 칸에 붙어 명중 프레임에 한 번만 피해�
   const { room, game, system, burrow, agent } = fixture("large");
   room.simSeconds = 10; game.prepare(10); game.tick(.01);
   assert.equal(agent.attack.targetKind, "burrow"); assert.equal(agent.attack.targetId, burrow.id);
-  room.simSeconds = 10.299; game.prepare(room.simSeconds); game.tick(.299);
+  const { damage, hitAt } = agent.attack;
+  assert.ok(damage > 0);
+  room.simSeconds = hitAt - .001; game.prepare(room.simSeconds); game.tick(.299);
   assert.equal(system.burrows[0].health, 60);
-  room.simSeconds = 10.3; game.prepare(room.simSeconds); game.tick(.001);
-  assert.equal(system.burrows[0].health, 55); assert.equal(agent.attack.hit, true);
-  game.restore(game.save()); game.prepare(10.31); game.tick(.01);
-  assert.equal(system.burrows[0].health, 55);
+  room.simSeconds = hitAt; game.prepare(room.simSeconds); game.tick(.001);
+  assert.equal(system.burrows[0].health, 60 - damage); assert.equal(agent.attack.hit, true);
+  game.restore(game.save()); game.prepare(hitAt + .01); game.tick(.01);
+  assert.equal(system.burrows[0].health, 60 - damage);
 });
 
 test("발견한 굴을 자율 전투 후보로 고르며 보이지 않는 굴을 추적하지 않는다", () => {

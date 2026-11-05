@@ -4,6 +4,8 @@ import { readFileSync } from "node:fs";
 import { createCreatures } from "./creatures.mjs";
 import { BURROW_TYPES } from "./burrows.mjs";
 import { BEETLE_ANIMATIONS, beetleAnimationPose } from "./beetle-animation.mjs";
+import { worldSize } from "./world-size.mjs";
+import { CORPSE_LIFETIME } from "./corpses.mjs";
 import { combatDamage } from "./combat-stats.mjs";
 import { createGame } from "./game.mjs";
 import { generateWorld, WORLD_GENERATION_VERSION } from "./world.mjs";
@@ -75,19 +77,20 @@ test("턱이 닫히는 프레임에서 한 번만 피해를 주고 공격을 마
   const { room, beetle, victim, hits } = encounter();
   room.creatureSystem.tick();
   assert.equal(beetle.mode, "attack");
-  const health = victim.health;
-  room.simSeconds = attack.hitTimeMs / 1000 - 0.001;
+  const health = victim.health, activeAttack = beetle.attack;
+  room.simSeconds = activeAttack.hitAt - 0.001;
   room.creatureSystem.tick();
   assert.equal(victim.health, health);
-  room.simSeconds = attack.hitTimeMs / 1000;
+  room.simSeconds = activeAttack.hitAt;
   room.creatureSystem.tick();
   room.creatureSystem.tick();
   assert.equal(hits.length, 1);
   assert.equal(victim.health, health - combatDamage(beetle, victim, .5));
-  room.simSeconds = attack.durationMs / 1000;
+  room.simSeconds = activeAttack.endsAt;
   room.creatureSystem.tick();
   assert.equal(beetleAnimationPose(beetle, room.simSeconds).action, "idle");
-  assert.ok(beetle.attack.exchangeEndsAt > room.simSeconds);
+  assert.equal(beetle.attack, null);
+  assert.ok(beetle.combat.nextAttackAt > room.simSeconds);
 });
 
 test("공격 준비 중 전투 셀에서 사라진 개체는 맞지 않는다", () => {
@@ -140,7 +143,11 @@ test("시야 안에서만 표시하고 처치 시 사체를 한 번 남긴다", 
   assert.equal(room.creatureSystem.agents.length, 0);
   const corpses = [...room.food.values()].filter(cell => cell.species === "spiny-back-beetle");
   assert.equal(corpses.length, 1);
-  assert.equal(corpses[0].amount, 4);
+  assert.equal("amount" in corpses[0], false);
+  assert.equal("resourceType" in corpses[0], false);
+  assert.equal(corpses[0].decaysAt, corpses[0].diedAt + CORPSE_LIFETIME);
+  room.simSeconds = corpses[0].decaysAt; room.creatureSystem.tick();
+  assert.equal([...room.food.values()].filter(cell => cell.kind === "corpse").length, 0);
   assert.equal(game.snapshot().evolutionPoints, points);
   const restored = createCreatures(room, JSON.parse(JSON.stringify(room.creatureSystem.save())));
   assert.equal(restored.agents.length, 0);
@@ -213,11 +220,12 @@ test("밀도 대신 생성된 굴을 개체 생성 기준으로 삼고 월드 �
       assert.ok(!burrow.creature?.unique);
       assert.ok(room.world.sites.every(site => Math.hypot(agent.x - site[0], agent.y - site[1]) >= safeRadius));
     }
-    for (let y = 0; y < 320; y++) for (let x = 0; x < 320; x++) {
-      if (room.world.sites.some(site => Math.hypot(x - site[0], y - site[1]) < safeRadius)) assert.equal(room.world.creatureDensity[y * 320 + x], 0);
+    const size = worldSize(room.world);
+    for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+      if (room.world.sites.some(site => Math.hypot(x - site[0], y - site[1]) < safeRadius)) assert.equal(room.world.creatureDensity[y * size + x], 0);
     }
     assert.deepEqual(createCreatures(room, null).save(), system.save());
-    const withoutDensity = { ...room, world: { ...room.world, creatureDensity: new Uint8Array(320 * 320) } };
+    const withoutDensity = { ...room, world: { ...room.world, creatureDensity: new Uint8Array(size * size) } };
     assert.deepEqual(createCreatures(withoutDensity, null).save(), system.save());
   }
 });

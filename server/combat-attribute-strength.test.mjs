@@ -1,19 +1,28 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { ATTRIBUTES, COMBAT_ATTRIBUTE_KEYS, attributeCounts, unitStats } from "./attributes.mjs";
-import { combatDamage, migrateCombatStats, unitCombatStats } from "./combat-stats.mjs";
+import { combatDamage, combatProfile, migrateCombatStats, unitCombatStats } from "./combat-stats.mjs";
 import { applyAgentGrowth } from "./growth.mjs";
 import { codexAttributeEffect } from "../client/codex-content.mjs";
 
 for (const tribe of ["bean", "spore", "pebble", "spring"]) {
-  test(tribe + "의 단일 전투 속성은 기본 개체보다 공격·방어가 모두 높고 교환 피해 비율이 2.5배 이상이다", () => {
-    const plain = { health: 100, stats: unitStats(attributeCounts([]), tribe) };
+  test(tribe + "의 전투 속성은 공격력·관통·방어 역할을 각각 적용한다", () => {
+    const plain = { tribe, health: 100, attributes: attributeCounts([]), stats: unitStats(attributeCounts([]), tribe) };
+    const base = combatProfile(plain);
     for (const key of COMBAT_ATTRIBUTE_KEYS) {
-      const soldier = { health: 100, stats: unitStats(attributeCounts([key]), tribe) };
-      assert.ok(soldier.stats.combatStrength > plain.stats.combatStrength, key);
-      assert.ok(combatDamage(soldier, plain, .5) > combatDamage(plain, plain, .5), key);
-      assert.ok(combatDamage(plain, soldier, .5) < combatDamage(plain, plain, .5), key);
-      assert.ok(combatDamage(soldier, plain, .5) >= 2.5 * combatDamage(plain, soldier, .5), key);
+      const attributes = attributeCounts([key]);
+      const soldier = { tribe, health: 100, attributes, stats: unitStats(attributes, tribe) };
+      const profile = combatProfile(soldier);
+      assert.equal(profile.attackPower, base.attackPower + (key === "blade" ? 12 : 0), key);
+      assert.equal(profile.armorPenetration, key === "piercing" ? .5 : 0, key);
+      assert.ok(Math.abs(profile.defense - base.defense - (key === "carapace" ? 100 * .45 / .55 : 0)) < 1e-10, key);
+      if (key === "carapace") {
+        assert.equal(combatDamage(soldier, plain, .5), combatDamage(plain, plain, .5));
+        assert.ok(combatDamage(plain, soldier, .5) < combatDamage(plain, plain, .5));
+      } else {
+        assert.ok(combatDamage(soldier, plain, .5) > combatDamage(plain, plain, .5), key);
+        assert.equal(combatDamage(plain, soldier, .5), combatDamage(plain, plain, .5));
+      }
       for (const field of ["health", "speed", "vision", "capacity", "lifespan"]) {
         assert.equal(soldier.stats[field], plain.stats[field], key + ":" + field);
       }

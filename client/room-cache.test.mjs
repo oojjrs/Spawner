@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
+import { expireCorpses } from "../server/corpses.mjs";
 
 const source = readFileSync(new URL("./room.mjs", import.meta.url), "utf8").replace(/^import .*;\r?\n/gm, "").replace(/^export /gm, "");
 
@@ -18,7 +19,7 @@ function fixture() {
     creatureSystem: { save: () => ({ version: 5, agents: [] }) } };
   let generations = 0, forests = 0;
   const context = createContext({
-    structuredClone, Uint8Array,
+    structuredClone, Uint8Array, expireCorpses,
     generateWorld() { generations++; return structuredClone(world); },
     populateResourceNodes() {}, clearResourceHazards() {}, populateColonyFood() {},
     populateForestResources(room) { forests++; room.world.treeCells = new Uint8Array(world.treeCells); },

@@ -2,6 +2,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { generateTribes } from "./tribes.mjs";
 import { generateWorld } from "./world.mjs";
+import { worldSize } from "./world-size.mjs";
+import { tribeTerrainWalkable } from "./tribe-environment.mjs";
 
 function flatWorld(sites) {
   return { seed: 731047, sites, terrain: new Uint8Array(320 * 320).fill(4), hazards: new Uint8Array(320 * 320), burrows: [] };
@@ -110,33 +112,33 @@ test("다른 후보가 없는 고립된 시작 생활권에서도 안전하고 �
 
 test("기본·예시·양 끝 시드 모두 세 부족이 재현되며 실제 경로와 둥지 안전을 지킨다", () => {
   for (const seed of [0, 397, 731047, 4294967295]) {
-    const world = generateWorld(seed), tribes = world.tribes;
+    const world = generateWorld(seed), tribes = world.tribes, size = worldSize(world);
     assert.equal(tribes.length, 3, "시드 " + seed);
     assert.equal(new Set(tribes.map(tribe => tribe.id)).size, 3);
     assert.deepEqual(tribes, world.camps.slice(1));
     assert.deepEqual(generateWorld(seed).tribes, tribes);
-    const blocked = new Uint8Array(320 * 320);
+    const blocked = new Uint8Array(size * size);
     for (const burrow of world.burrows) for (let dy = 0; dy < burrow.height; dy++) for (let dx = 0; dx < burrow.width; dx++) {
-      blocked[(burrow.y + dy) * 320 + burrow.x + dx] = 1;
+      blocked[(burrow.y + dy) * size + burrow.x + dx] = 1;
     }
-    const distances = new Int32Array(320 * 320).fill(-1), queue = [world.origin.y * 320 + world.origin.x];
+    const distances = new Int32Array(size * size).fill(-1), queue = [world.origin.y * size + world.origin.x];
     distances[queue[0]] = 0;
     for (let cursor = 0; cursor < queue.length; cursor++) {
-      const index = queue[cursor], x = index % 320, y = Math.floor(index / 320);
+      const index = queue[cursor], x = index % size, y = Math.floor(index / size);
       for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
-        const nx = x + dx, ny = y + dy, next = ny * 320 + nx;
-        if (nx < 0 || ny < 0 || nx >= 320 || ny >= 320 || distances[next] >= 0 || blocked[next] ||
-            world.terrain[next] < 2 || world.terrain[next] > 9) continue;
+        const nx = x + dx, ny = y + dy, next = ny * size + nx;
+        if (nx < 0 || ny < 0 || nx >= size || ny >= size || distances[next] >= 0 || blocked[next] ||
+            !tribeTerrainWalkable("bean", world.terrain[next])) continue;
         distances[next] = distances[index] + 1; queue.push(next);
       }
     }
     for (const tribe of tribes) {
       assert.notEqual(tribe.id, world.camps[0].id);
-      assert.ok(distances[tribe.y * 320 + tribe.x] > 0);
+      assert.ok(distances[tribe.y * size + tribe.x] > 0);
       for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++) {
         if (Math.abs(dx) === 2 && Math.abs(dy) === 2) continue;
-        const index = (tribe.y + dy) * 320 + tribe.x + dx;
-        assert.ok(world.terrain[index] >= 2 && world.terrain[index] <= 9);
+        const index = (tribe.y + dy) * size + tribe.x + dx;
+        assert.ok(tribeTerrainWalkable(tribe.tribe, world.terrain[index]));
         assert.equal(world.hazards[index], 0);
         assert.equal(blocked[index], 0);
       }

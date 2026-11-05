@@ -1,4 +1,5 @@
 import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
+import { imageFrameGeometry } from "./image-geometry.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -12,14 +13,14 @@ const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
 function rendering() {
   const draws = [];
   const sprite = name => ({ name, complete: true, naturalWidth: 512, naturalHeight: 512 });
-  const context = createContext({     state: { simSeconds: .1 }, AGENT_HEIGHT: .7, idleMotion: { matches: false },
+  const context = createContext({ canvas: {}, performance: { now: () => 100 }, state: { simSeconds: .1 }, AGENT_HEIGHT: .7, idleMotion: { matches: false },
     displayedAgent: value => value, foodDeliveryPose: () => ({}),
     tribeArt: { animationPose: (agent, pose) => pose },
     agentBodyPose: () => ({ pivot: .94, scaleX: 1, scaleY: 1 }), agentWalkPose: () => null,
     agentSprite: () => sprite("body"), drawAgentHead() {}, drawAgentFeet() {}, drawAgentTail() {},
-    drawAgentAttack: () => false, drawAgentMovement: () => false, drawAgentRanged: () => false, drawSelectionOutline() {},
+    drawAgentRanged: () => false, drawAgentAttack: () => false, drawAgentMovement: () => false, drawSelectionOutline() {},
     foodCellMap: new Map(), foodCellAt: () => ({ x: 1, y: 2, resourceType: "honey-mushrooms", amount: 5 }),
-    worldMap: {}, Spawner: { unitDisplayAttributes, unitAnimationPose, resourceTypeForCell },
+    worldMap: {}, Spawner: { unitDisplayAttributes, imageFrameGeometry, unitAnimationPose, resourceTypeForCell, combatAttributeKeys: () => [] },
     unitAnimationSheets: new Map(Object.entries(UNIT_ANIMATIONS).map(([tribe, animations]) => [tribe,
       new Map(Object.entries(animations).map(([action, animation]) => [action, {
         animation, sprite: sprite(tribe + ":" + action), scale: 1
@@ -27,10 +28,11 @@ function rendering() {
     resourceCarrySprites: new Map(RESOURCE_TYPES.map(type => [type.key, sprite(type.carryImage)])),
     foodCarryPlacement: () => ({ x: 0, y: 0, width: .2, height: .2, pivotY: 1,
       crop: { x: 0, y: 0, width: 512, height: 512 } }),
-    drawing: { save() {}, restore() {}, beginPath() {}, rect() {}, clip() {}, ellipse() {}, fill() {},
+    drawing: { getTransform: () => ({ a: 1, b: 0 }), save() {}, restore() {}, beginPath() {}, rect() {}, clip() {}, ellipse() {}, fill() {},
       translate() {}, scale() {}, rotate() {}, drawImage(image) { draws.push(image.name); } }
   });
-  for (const name of ["drawAgentAnimation", "drawAgentAppearance"]) {
+  for (const name of ["drawAgentAnimation", "agentJumpOffset", "agentAppearanceBodyPose", "drawAgentAppearance",
+    "drawAgentAppearanceSurface", "drawAgentAppearanceLayer", "drawAgentAppearanceBody", "drawAgentCarrying"]) {
     const declaration = source.match(new RegExp("^    function " + name + "\\([^]*?^    }", "m"));
     assert.ok(declaration, name);
     runInContext(declaration[0], context);
@@ -38,7 +40,7 @@ function rendering() {
   return { context, draws };
 }
 
-test("4종족·12자원의 채집·운반·투척은 실제 자원과 다른 소품을 그리지 않는다", () => {
+test("4종족·현행 자원의 채집·운반·투척은 실제 자원과 다른 소품을 그리지 않는다", () => {
   const render = rendering();
   for (const tribe of ["bean", "spore", "pebble", "spring"]) for (const type of RESOURCE_TYPES) {
     for (const mode of ["harvest", "return", "unload"]) {
@@ -119,7 +121,7 @@ test("기획서의 네 종족 작업 미리보기는 현재 기본 자원과 게
       assert.equal(metadata.resourceImage, type.carryImage, label);
       assert.equal(metadata.rendering, "runtime-composite", label);
       assert.equal(metadata.sheet, cell.match(/data-preview="([^"]+)"/)[1], label);
-      assert.equal(metadata.thumbnail, cell.match(/<img src="([^"]+)"/)[1], label);
+      assert.equal(metadata.thumbnail, cell.match(/<img[^>]*data-original-src="([^"]+)"/)[1], label);
       assert.deepEqual(metadata.durationsMs, cell.match(/data-durations="([^"]+)"/)[1].split(",").map(Number), label);
       assert.equal(metadata.loop, cell.includes('data-loop="true"'), label);
       for (const file of [metadata.sheet, metadata.preview, metadata.thumbnail]) readFileSync(new URL("../" + file, import.meta.url));

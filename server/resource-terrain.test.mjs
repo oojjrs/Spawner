@@ -37,7 +37,7 @@ test("나무·나무 열매·사체를 제외한 자원을 공터로 전달한�
     world: { terrain: new Uint8Array(320 * 320).fill(5), hazards: new Uint8Array(320 * 320), burrows: [],
       camps: [{ tribe: "bean", x: 42, y: 42 }, { tribe: "spore", x: 102, y: 102 }, { tribe: "pebble", x: 162, y: 162 }, { tribe: "spring", x: 222, y: 222 }] },
     colonies: [{ id: 1, ownerId: "test", occupiedCells: new Set() }],
-    games: new Map([["test", { prepare() {}, snapshot() { return {}; }, colonyKnown() { return true; }, nestLevel: 1,
+    games: new Map([["test", { prepare() {}, snapshot() { return { agents: [], rivals: [] }; }, colonyKnown() { return true; }, nestLevel: 1,
       nest: { health: 1, maxHealth: 1 } }]]),
     food: new Map(cells.map(cell => [cell.x + "," + cell.y, cell]))
   };

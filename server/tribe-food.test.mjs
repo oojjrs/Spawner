@@ -41,7 +41,7 @@ function queuedDelivery(count) {
   saved.state.evolutionPoints = 100;
   saved.state.resourceInventory = { tree: result.game.snapshot().resourceCapacity - 2 };
   for (const [index, agent] of saved.state.agents.entries()) Object.assign(agent, {
-    x: 40, y: 40, renderFromX: 40, renderFromY: 40, carrying: 2, carryingType: index ? "dew" : "clay",
+    x: 40, y: 40, renderFromX: 40, renderFromY: 40, carrying: 2, carryingType: index ? "dew" : "pebbles",
     mode: index ? "unload" : "return", unloadReady: 120.3, birth: null, bornAt: 0, survivalState: "stable",
     moveDuration: 0, moveStartedAt: 0, decisionPending: null, nextDecisionAt: 1000, returnPath: [],
     utility: { action: "return", target: { x: 40, y: 40, key: "home" }, route: [{ x: 40, y: 40 }] }
@@ -69,7 +69,7 @@ test("원재료 납품 대기는 포인트 한도 때문에 재판단하지 않�
     assert.equal(agent.decisionCount, decisions);
     assert.equal(agent.unloadReady, arrival);
     deliveryTick(context, arrival, indexed);
-    assert.equal(context.game.snapshot().resourceInventory.clay, 2);
+    assert.equal(context.game.snapshot().resourceInventory.pebbles, 2);
     assert.equal(agent.carrying, 0);
   }
 });
@@ -100,26 +100,25 @@ test("새싹콩의 기본 자원은 비옥토이며 버섯은 누구도 채집�
   assert.equal(canHarvestResource({ resourceType: "honey-mushrooms" }, {}, { harvest: 2, digging: 2, strength: 2 }), false);
 });
 
-test("비옥토는 원재료로 보관하고 진화 포인트의 한도만 별도로 적용한다", () => {
+test("비옥토는 포인트 여유만큼 전환하고 초과 적재물을 보존한다", () => {
   for (const indexed of [false, true]) {
     const game = deliver("clay", 99, "bean", null, indexed), state = game.snapshot();
     assert.equal(state.evolutionPoints, 100);
-    assert.equal(state.colonyFood, 2);
-    assert.equal(game.agents[0].carrying, 0);
-    assert.equal(game.agents[0].carryingType, null);
-    assert.equal(state.resourceInventory.clay, 2);
+    assert.equal(state.colonyFood, 1);
+    assert.equal(game.agents[0].carrying, 1);
+    assert.equal(game.agents[0].carryingType, "clay");
+    assert.equal(state.resourceInventory.clay, undefined);
   }
 });
 
-test("진화 포인트가 가득 차도 원재료 창고가 비어 있으면 예약한 시각에 납품한다", () => {
+test("진화 포인트가 가득 차면 기본 자원을 창고에 우회 납품하지 않는다", () => {
   for (const indexed of [false, true]) {
     const game = deliver("clay", 100, "bean", null, indexed), state = game.snapshot();
     assert.equal(state.evolutionPoints, 100);
-    assert.equal(state.resourceInventory.clay, 2);
-    assert.equal(state.colonyFood, 2);
-    assert.equal(game.agents[0].carrying, 0);
-    assert.equal(game.agents[0].foodDelivery.arrivesAt, 120);
-    assert.equal(game.agents[0].foodDelivery.receivedAt, 120.1);
+    assert.equal(state.resourceInventory.clay, undefined);
+    assert.equal(state.colonyFood, 0);
+    assert.equal(game.agents[0].carrying, 2);
+    assert.ok(!game.agents[0].foodDelivery);
   }
 });
 

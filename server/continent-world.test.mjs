@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { generateWorld } from "./world.mjs";
 import { measureCampExpansion, campResourceTravel } from "./resource-camps.mjs";
-import { populateResourceNodes, populateForestResources, isFoodHabitat } from "./resources.mjs";
+import { populateResourceNodes, populateForestResources, isFoodHabitat, REMOVED_RESOURCE_TYPES } from "./resources.mjs";
 import { hydrologyResourceSuitability } from "./hydrology.mjs";
 
 function totals(world) {
@@ -73,6 +73,7 @@ for (const seed of [1, 13, 4294967295]) test("대륙·분산 산지·하구·자
   populateResourceNodes(room); populateForestResources(room);
   const actual = {};
   for (const cell of room.food.values()) actual[cell.resourceType] = (actual[cell.resourceType] || 0) + cell.amount;
-  assert.deepEqual(actual, totals(previous));
+  assert.deepEqual(actual, Object.fromEntries(Object.entries(totals(previous)).filter(([key]) => !REMOVED_RESOURCE_TYPES.includes(key))));
+  assert.ok([...room.food.values()].every(cell => !REMOVED_RESOURCE_TYPES.includes(cell.resourceType)));
   assert.equal(world.treeCells.filter(Boolean).length, trees.size);
 });

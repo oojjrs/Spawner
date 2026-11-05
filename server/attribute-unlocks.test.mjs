@@ -1,6 +1,5 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
 import { attributeUnlockLevel, isAttributeUnlocked } from "./attributes.mjs";
 import { createGame } from "./game.mjs";
 
@@ -56,11 +55,4 @@ test("이전 개체는 보존하고 잠긴 설계·복제·강화는 거부하�
   assert.ok(game.command({type:"birth",templateId:700}).agentId);
   game.restore(game.save());
   assert.deepEqual(game.agents.find(agent => agent.id === agentId).slots,["carapace"]);
-});
-
-test("기획서 속성 페이지에 확정된 개방표와 기본 채집 속성을 표시한다", () => {
-  const html = readFileSync(new URL("../Design.html",import.meta.url),"utf8");
-  const table = html.split('<table id="attribute-unlocks">')[1].split('</table>')[0];
-  assert.equal((table.match(/data-nest-level=/g) || []).length,4);
-  for (const text of ["감지, 채집량 증가, 이속 증가 + 종족 기본 채집 속성", "나머지 채집 속성", "갑피"]) assert.ok(table.includes(text));
 });

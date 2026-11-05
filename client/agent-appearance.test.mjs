@@ -5,6 +5,7 @@ import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
 import { createGame } from "../server/game.mjs";
 import { unitAnimationPose, unitAnimationFrame } from "./unit-animation.mjs";
+import { imageFrameGeometry } from "./image-geometry.mjs";
 
 const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
 
@@ -27,7 +28,7 @@ function rendering(action) {
     agentParts: new Map(), interpolatedAgentPosition: () => ({}),
     sproutRoots: { pose: () => null, drawRig() { draws.push("feet-left", "feet-right"); } },
     sproutCombatFrame: () => sheet, agentAttackFrame: () => -1,
-    Spawner: { unitDisplayAttributes, sproutRootGeometry: () => ({ height: 76 }), combatHurtFrame: () => -1, unitAnimationPose: () => ({ action, frame: 0, animation: { frameSize: 512, columns: 4, pivotX: 256, pivotY: 448 } }), unitAnimationFrame },
+    Spawner: { unitDisplayAttributes, imageFrameGeometry, sproutRootGeometry: () => ({ height: 76 }), combatHurtFrame: () => -1, unitAnimationPose: () => ({ action, frame: 0, animation: { frameSize: 512, columns: 4, pivotX: 256, pivotY: 448 } }), unitAnimationFrame },
     unitAnimationSheets: new Map([["bean", new Map([[action, { sprite: sheet, scale: 1 }]])]]),
     drawAgentRanged: () => false, drawSelectionOutline() {},
     drawing: { save() {}, restore() {}, beginPath() {}, rect() {}, clip() {}, ellipse() {}, fill() {},

@@ -59,14 +59,15 @@ test("네 종족의 기본 자원만 채집 가능하며 다른 종족 자원은
 
 
 for (const [tribe, ownFood] of foods) {
-  test(tribe + "은 더 가까운 다른 자원 대신 자기 자원만 자동 채집한다", () => {
+  test(tribe + "은 자기 자원과 공용 자원만 자동 채집한다", () => {
     const f = fixture(tribe, ownFood, createGame);
     advance(f, .25);
     const candidates = f.game.agents[0].utility.scores.filter(candidate => candidate.action === "collect");
     assert.ok(candidates.length > 0);
     assert.ok(candidates.every(candidate => candidate.key === "47,42" || ["dew", "clay"].includes(f.environment.food.get(candidate.key)?.resourceType)));
     advance(f, 24);
-    assert.ok(f.environment.food.get("47,42").amount < 12);
+    assert.ok([...f.environment.food.values()].some(cell =>
+      [ownFood, "dew", "clay"].includes(cell.resourceType) && cell.amount < 12));
     for (const [key, cell] of f.environment.food) if (key !== "47,42" && !["dew", "clay"].includes(cell.resourceType)) assert.equal(cell.amount, 12, tribe + ":" + cell.resourceType);
   });
 

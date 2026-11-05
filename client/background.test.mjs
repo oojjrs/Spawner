@@ -30,7 +30,7 @@ function worker() {
     async setting(key) { return settings.get(key); },
     async setSetting(key, value) { settings.set(key, value); }
   };
-  const context = createContext({ createStateEncoder,
+  const context = createContext({ createStateEncoder, createDecisionPool: room => ({ room, dispose() {} }),
     Date: { now: () => now },
     performance: { now: () => cpu, timeOrigin: 1000000 },
     crypto: { getRandomValues: values => values.fill(1) },
@@ -59,7 +59,7 @@ function worker() {
     const id = ++nextId;
     context.self.onmessage({ data: { id, type, data } });
     await runInContext("queue", context);
-    const response = messages.find(message => message.id === id);
+    const response = messages.find(message => message.id === id && !message.type);
     assert.ok(response, "worker replies to each request");
     if (response.error) throw new Error(response.error);
     return response.result;

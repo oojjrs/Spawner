@@ -17,7 +17,7 @@ function worker() {
   const saves = [];
   const room = { id: "ending-room", hostId: "host", simSeconds: 0, revision: 0,
     colonies: [{ ownerId: "host", tribe: "bean" }], games: new Map([["host", { ending: null }]]) };
-  const context = createContext({ createStateEncoder,
+  const context = createContext({ createStateEncoder, createDecisionPool: room => ({ room, dispose() {} }),
     Date: { now: () => now }, performance: { timeOrigin: 0, now: () => now },
     navigator: { locks: { request: (name, options, action) => action({}) } },
     openStorage: async () => ({
@@ -50,7 +50,7 @@ function worker() {
     const id = ++nextId;
     context.self.onmessage({ data: { id, type, data } });
     await runInContext("queue", context);
-    const reply = messages.find(message => message.id === id);
+    const reply = messages.find(message => message.id === id && !message.type);
     if (reply.error) throw new Error(reply.error);
     return reply.result;
   }
@@ -106,7 +106,7 @@ function presentation() {
   const report = { open: false, showModal() { this.open = true; }, close() { this.open = false; } };
   const state = { simSeconds: 180, ending: { endedAt: 180, reason: "extinction", bornCount: 2,
     exploredCells: 32, discoveryCount: 3, nestLevel: 1, colonyFood: 0 } };
-  const context = createContext({ state, connection: { roomId: "test", colonyId: 1, active: true },
+  const context = createContext({ Spawner: { hasCombatEvolution: () => false }, state, connection: { roomId: "test", colonyId: 1, active: true },
     endingReport: report, endingToolbar: { hidden: true },
     endingRoomId: null, endingPlayback: { elapsedMs: 0, pending: false },
     canvas: { style: { setProperty: (key, value) => properties.set(key, value), removeProperty: key => properties.delete(key) } },
@@ -188,13 +188,14 @@ test("엔딩 진입은 재생 중인 브금을 정지하거나 다른 곡으로 
     pause() { this.pauses++; }
     play() { this.plays++; return Promise.resolve(); }
   }
-  const context = createContext({ Audio: Sound, SpawnerMusicCatalog: {
+  const context = createContext({ location: { protocol: "https:" }, Audio: Sound, SpawnerMusicCatalog: {
     peace: [{ file: "peace.mp3" }], combat: [{ file: "combat.mp3" }] },
     setInterval: () => 1, clearInterval() {}, setTimeout: () => 1, clearTimeout() {} });
   runInContext(readFileSync(new URL("./music.js", import.meta.url), "utf8"), context);
   const music = context.SpawnerMusic.create();
   music.update({ simSeconds: 1, agents: [{ id: "last", health: 1, action: "fight" }], rivals: [] });
-  music.unlock({ currentTime: 0, state: "running" });
+  music.unlock({ currentTime: 0, state: "running", destination: {},
+    createGain: () => ({ connect() {} }), createMediaElementSource: () => ({ connect() {} }) });
   await Promise.resolve();
   await Promise.resolve();
   const before = sounds.map(sound => [sound.src, sound.pauses, sound.plays]);

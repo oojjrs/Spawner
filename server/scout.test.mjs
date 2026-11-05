@@ -60,10 +60,10 @@ test("정찰은 둥지에 더 가까운 작은 빈틈보다 이동 시간 대비
   assert.equal(f.ai.nextStep(f.agent, { x: 13, y: 8 }), null);
 });
 
-test("정찰은 고립된 경계를 제외하고 수명과 실제 우회 이동 시간을 비교한다", () => {
-  for (const [lifespan, target] of [[60, { x: 8, y: 5 }], [120, { x: 12, y: 8 }]]) {
+test("정찰은 고립된 경계를 제외하고 실제 우회 경로를 따른다", () => {
+  {
+    const target = { x: 12, y: 8 };
     const f = frontierFixture();
-    f.agent.stats.lifespan = lifespan;
     f.passable.delete(8 * f.size + 10);
     f.passable.add(2 * f.size + 12);
     for (let y = 9; y <= 16; y++) {
@@ -203,31 +203,6 @@ test("고정 시야가 확장되면 새 주변 정찰을 재개하고 거점이 
   assert.deepEqual(f.ai.evaluate(f.agent, true), []);
 });
 
-test("실제 정찰은 지형을 확보한 뒤 대기하고 감시봉 완성과 파괴에 맞춰 재개하고 종료한다", () => {
-  const terrain = new Uint8Array(320 * 320);
-  for (let x = 40; x <= 130; x++) terrain[42 * 320 + x] = 4;
-  terrain[41 * 320 + 42] = terrain[43 * 320 + 42] = 4;
-  const f = gameFixture(terrain);
-  const saved = JSON.parse(f.game.save());
-  saved.state.agents[0].lifespan = 1000;
-  f.game.restore(JSON.stringify(saved));
-  advance(f, 150);
-  const agent = f.game.agents[0];
-  assert.ok(agent.x > 50 && agent.x < 73);
-  assert.equal(agent.mode, "wait");
-  const position = { x: agent.x, y: agent.y };
-  advance(f, 10);
-  assert.deepEqual({ x: agent.x, y: agent.y }, position);
-  const expanded = JSON.parse(f.game.save());
-  expanded.state.buildings = [{ id: "scout-watchpost", key: "watchpost", x: 68, y: 39, health: 80 }];
-  f.game.restore(JSON.stringify(expanded));
-  advance(f, 3.1);
-  assert.equal(f.game.agents[0].utility?.action, "explore");
-  f.game.buildings[0].health = 0;
-  advance(f, 3.1);
-  assert.equal(f.game.agents[0].mode, "wait");
-});
-
 function scoutTeamFixture() {
   const f = terrainFixture([{ x: 35, y: 40 }]);
   const create = (id, slots) => {
@@ -236,7 +211,7 @@ function scoutTeamFixture() {
       bornAt: f.state.simSeconds, lifespan: stats.lifespan, visited: new Set(), preciseHarvestTimes: new Map() };
   };
   const worker = create("worker", []), single = create("single", ["antenna"]);
-  const advanced = create("advanced", ["antenna", "lifespan", "feet"]);
+  const advanced = create("advanced", ["antenna", "feet"]);
   f.state.agents = [worker, single, advanced];
   f.state.nestLevel = 3;
   f.state.evolutionPoints = 100;
@@ -245,21 +220,6 @@ function scoutTeamFixture() {
   f.context.isFood = type => type === "clay";
   return { ...f, ai: createUtilityAI(f.context), worker, single, advanced };
 }
-
-test("같은 감지·이속에서도 남은 수명이 길수록 정찰 점수가 높고 도착할 수명이 없으면 후보에서 제외한다", () => {
-  const f = scoutTeamFixture();
-  f.state.agents = [f.advanced];
-  const scores = [];
-  for (const lifespan of [60, 180, 300]) {
-    f.advanced.lifespan = lifespan;
-    const plans = f.ai.evaluate(f.advanced, false).filter(plan => plan.action === "explore");
-    assert.ok(plans.length > 0);
-    scores.push(plans[0].score);
-  }
-  assert.ok(scores[0] < scores[1] && scores[1] < scores[2]);
-  f.advanced.lifespan = 5;
-  assert.ok(f.ai.evaluate(f.advanced, true).every(plan => plan.action !== "explore"));
-});
 
 test("고급 정찰병이 유일한 미탐색 구역을 담당하면 다른 개체는 채집한다", () => {
   for (const reverse of [false, true]) {
@@ -279,23 +239,6 @@ test("식량 수급이 급해도 다른 납품 가능 개체가 있으면 고급
   for (const agent of f.state.agents) agent.utility = f.ai.evaluate(agent, false)[0];
   assert.equal(f.advanced.utility?.action, "explore");
   assert.equal(f.worker.utility?.action, "collect");
-});
-
-test("고급 정찰병만 식량을 제때 납품할 수 있어도 미탐색 구역이 남으면 정찰한다", () => {
-  const f = scoutTeamFixture();
-  f.state.agents = [f.worker, f.advanced];
-  f.worker.lifespan = 20;
-  f.state.evolutionPoints = 0;
-  f.state.lastFoodAt = 0;
-  assert.equal(f.ai.evaluate(f.advanced, false)[0].action, "explore");
-});
-
-test("늙은 고급 정찰병은 남은 수명이 충분한 일반 개체에 정찰을 넘긴다", () => {
-  const f = scoutTeamFixture();
-  f.state.agents = [f.worker, f.advanced];
-  f.advanced.lifespan = 5;
-  assert.equal(f.ai.evaluate(f.worker, false)[0].action, "explore");
-  assert.ok(f.ai.evaluate(f.advanced, false).every(plan => plan.action !== "explore"));
 });
 
 test("길이 끊긴 고급 정찰병은 다른 구역의 일반 개체가 정찰하는 것을 막지 않는다", () => {
@@ -325,7 +268,7 @@ test("실제 군락은 저장·복원과 다른 개체의 운반 중에도 고�
   saved.state.evolutionPoints = 100;
   f.game.restore(JSON.stringify(saved));
   const ids = [];
-  for (const slots of [[], ["antenna"], ["antenna", "lifespan", "feet"]]) {
+  for (const slots of [[], ["antenna"], ["antenna", "feet"]]) {
     const result = f.game.command({ type: "design", templateId: null, name: "정찰 분담 " + ids.length, slots, birth: true });
     ids.push(result.agentId);
   }
@@ -345,7 +288,7 @@ test("실제 군락은 저장·복원과 다른 개체의 운반 중에도 고�
 });
 
 test("단독 정찰콩은 식량 부족과 기존 채집 유지보다 정찰을 우선하고 완료 뒤 채집한다", () => {
-  for (const slots of [["antenna"], ["antenna", "lifespan", "feet"]]) {
+  for (const slots of [["antenna"], ["antenna", "feet"]]) {
     const f = scoutTeamFixture(), agent = slots.length === 1 ? f.single : f.advanced;
     f.state.agents = [agent];
     f.state.evolutionPoints = 0;

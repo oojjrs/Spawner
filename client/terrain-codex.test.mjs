@@ -32,9 +32,9 @@ test("미탐색 칸과 맵 밖에는 지형 정보를 노출하지 않고 제거
 });
 
 test("현재 자연 자원 분포를 안내하고 삭제된 먹이와 사체 자원을 섞지 않는다", () => {
-  const expected = [[], [], ["pebbles", "sand"], ["clay", "pebbles"],
-    ["clay", "dew", "grass-fiber", "pebbles"], ["clay", "grass-fiber", "tree"],
-    ["copper-ore", "iron-ore", "pebbles", "quartz"], [], [], ["clay"]];
+  const expected = [[], [], ["pebbles"], ["clay", "pebbles"],
+    ["clay", "dew", "pebbles"], ["clay", "tree"],
+    ["pebbles"], [], [], ["clay"], []];
   for (let type = 0; type < expected.length; type++) {
     assert.deepEqual(terrainCodexResources(type, 12).map(resource => resource.key).sort(), expected[type], TERRAIN_CODEX[type].name);
   }
@@ -47,7 +47,7 @@ test("실제 지도 클릭 처리에서 빈 땅·위험 요소를 열고 개체 
   const state = { agents: [], rivals: [], buildings: [], corpses: [], explored: new Set([0, 1, 2]), camera: { zoom: 1 }, flashes: [], dragging: false, didDrag: false };
   const food = { x: 2, y: 0, amount: 4, kind: "resource" };
   const context = createContext({ WORLD_SIZE: 4, worldMap, state, terrainCodexCell,
-    connection: { active: true, roomId: "test" }, colonyAt: () => null,
+    visibleAgents: () => [], connection: { active: true, roomId: "test" }, colonyAt: () => null,
     foodCellAt: (x, y) => x === 2 && y === 0 ? food : null,
     forest: { cells: new Map() }, hazardCells: [], screenToWorld: (x, y) => ({ x, y }),
     canvas: { getBoundingClientRect: () => ({ left: 0, top: 0 }), addEventListener: (name, handler) => { click = handler; } },
@@ -141,7 +141,7 @@ test("Esc는 유닛·지형·둥지 선택과 정보 패널을 함께 닫는다"
   const context = createContext({ state, unitPanel,
     canvas: { focus() { focused++; } }, helpTooltip: { hidden: true }, codex: { open: false },
     evolutionPanel: { hidden: true }, colonyMenu: { hidden: true },
-    endingReport: { open: false }, templateDeleteDialog: { open: false },
+    combatPanel: { open: false }, endingReport: { open: false }, templateDeleteDialog: { open: false },
     closeColonyMenu() { context.colonyMenu.hidden = true; },
     selectObject(kind, target) { state.selection = target ? { kind, target } : null; unitPanel.hidden = !target; },
     document: { addEventListener(name, handler) { keydown = handler; },

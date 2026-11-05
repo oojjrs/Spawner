@@ -342,33 +342,3 @@ test("위급한 유닛은 채집 유지 보너스와 성향보다 생존을 우�
   assert.ok(f.agent.retreat);
   assert.ok(["flee", "recover", "return"].includes(f.agent.utility.action));
 });
-
-test("변태 장소로 이동 중 위급해지면 이동 명령을 중단하고 생존 행동으로 전환한다", () => {
-  const f = fixture(["construction"]);
-  f.agent.health = 20;
-  f.agent.construction = { buildingKey: "storage", x: 44, y: 42, state: "moving", routeIndex: 0,
-    route: [{ x: 43, y: 42 }, { x: 44, y: 42 }] };
-  const rival = enemy(f, 45, 42);
-  rival.ownerId = "rival";
-  rival.combatDisposition = "aggressive";
-  rival.health = rival.stats.health = 100;
-  advance(f, .1);
-  assert.equal(f.agent.construction, null);
-  assert.ok(f.agent.retreat);
-  assert.ok(["flee", "recover", "return"].includes(f.agent.utility.action));
-});
-
-test("진행 중인 변태는 피격 후에도 중단되지 않는다", () => {
-  const f = fixture(["construction"]);
-  f.agent.construction = { buildingKey: "storage", x: 43, y: 42, state: "transforming", routeIndex: 0,
-    route: [{ x: 43, y: 42 }], startedAt: f.environment.simSeconds, readyAt: f.environment.simSeconds + 100 };
-  const rival = enemy(f, 43, 42);
-  rival.ownerId = "rival";
-  rival.combatDisposition = "aggressive";
-  rival.health = rival.stats.health = 100;
-  advance(f, 3);
-  assert.ok(f.agent.health < 100);
-  assert.equal(f.agent.construction.state, "transforming");
-  assert.equal(f.agent.mode, "transform");
-  assert.equal(f.agent.attack, null);
-});

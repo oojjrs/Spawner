@@ -29,6 +29,8 @@ function verifyGrants(create) {
   for (const tribe of ["bean", "spore", "pebble", "spring"]) {
     const game = fixture(tribe, create);
     const before = game.snapshot().resourceInventory;
+    assert.equal(before.tree, 3);
+    assert.equal(before.clay, 4); // Former warehouse material migrates into the nest.
     for (const count of [1, 2]) {
       game.command({ type: "cheat-resources" });
       const inventory = game.snapshot().resourceInventory;
@@ -40,8 +42,8 @@ function verifyGrants(create) {
         assert.equal(saved.state.resourceStores.filter(store => store.kind !== "remains")
           .reduce((amount, store) => amount + (store.inventory[resource.key] || 0), 0), expected, tribe + resource.key);
       }
-      assert.equal(JSON.stringify(saved.state.resourceStores.find(store => store.id === "warehouse").inventory), JSON.stringify({ clay: 4, sand: 7 }));
-      assert.equal(JSON.stringify(saved.state.resourceStores.find(store => store.id === "remains:fixture").inventory), JSON.stringify({ tree: 9, dew: 11 }));
+      assert.equal(saved.state.resourceStores.some(store => store.id === "warehouse"), false);
+      assert.equal(saved.state.resourceStores.some(store => store.id === "remains:fixture"), false);
       game.restore(JSON.stringify(saved));
       const restored = game.snapshot().resourceInventory;
       for (const resource of RESOURCE_TYPES) assert.equal(restored[resource.key] || 0, inventory[resource.key] || 0, tribe + resource.key);
@@ -49,7 +51,7 @@ function verifyGrants(create) {
   }
 }
 
-test("재료 치트는 네 종족의 창고별 재고를 갱신하고 재지급·저장·복원 시 지급분을 보존한다", () => {
+test("재료 치트는 폐기된 창고를 복원하지 않고 네 종족의 둥지 재고와 지급분을 보존한다", () => {
   verifyGrants(createGame);
 });
 
