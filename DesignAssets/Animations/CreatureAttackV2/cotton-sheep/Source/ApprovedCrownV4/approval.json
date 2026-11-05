@@ -1,0 +1,100 @@
+{
+  "status": "user-approved",
+  "artworkRevision": 4,
+  "recordedAt": "2026-11-05T20:00:29.963Z",
+  "userApprovalQuote": "솜양 공격 통과.",
+  "publicationAuthorizationQuote": "다 게시해. 승인된 애셋을 올릴 땐 굳이 승인을 요청하지 않아도 된다",
+  "scope": "Cotton sheep V4 attack only. Other species candidates are not included.",
+  "approvedReviewVideoSha256": "741e0d290aa4314440cc942538bc9fb00e8b194a75b9d4d7375297e33e2d20d9",
+  "sourceRuntimePngSha256": "bc99c5dacce492c6d745d8025f9d3cf283c4848826461a362178fd680947c3d6",
+  "sourceCelsPngSha256": "35a2533e716333df9c8d6e901b5aeb611aace3ea05e85eb05bae3122fea0664e",
+  "runtimeWebpSha256": "65635c630fc512af7be917c11a40a04be88a22c5d395c5fabe48226ff6604d73",
+  "previousRuntimeSha256": "48b2c6d997191befc5caa44ca9f095cc7f6ea7d0465f6c5eac055f0b2bf112b6",
+  "runtimeRawRgbaSha256": "37b88f3cd2e8335c7c6dffdc30260d06cad0ba9181c5883fe22a4753dea762c9",
+  "runtimeImage": "DesignAssets/Animations/CreatureAttackV2/cotton-sheep/runtime.webp",
+  "sourceCels": "source-cels.png",
+  "sourceRuntime": "runtime.png",
+  "previousRuntime": "previous-runtime.webp",
+  "editedCels": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "unchangedCels": [
+    1,
+    2,
+    3,
+    8
+  ],
+  "sourceFrameSize": 512,
+  "frameSize": 290,
+  "columns": 4,
+  "frameCount": 8,
+  "durationsMs": [
+    100,
+    110,
+    120,
+    40,
+    240,
+    90,
+    140,
+    190
+  ],
+  "impactAtMs": 370,
+  "impactHoldMs": 240,
+  "durationMs": 1030,
+  "registration": {
+    "frameSize": 290,
+    "pivotX": 159.54366,
+    "pivotY": 234.441284,
+    "viewSize": 256.7708333333333,
+    "registrationScale": 1,
+    "groundRadiusX": 0.244141,
+    "groundRadiusY": 0.064453,
+    "frameGeometry": {
+      "0": {
+        "pivotX": 159.54366,
+        "pivotY": 234.441284
+      },
+      "1": {
+        "pivotX": 156.04366,
+        "pivotY": 234.441284
+      },
+      "2": {
+        "pivotX": 158.54366,
+        "pivotY": 236.441284
+      },
+      "3": {
+        "pivotX": 174.04366,
+        "pivotY": 248.441284
+      },
+      "4": {
+        "pivotX": 199.54366,
+        "pivotY": 240.441284
+      },
+      "5": {
+        "pivotX": 166.54366,
+        "pivotY": 238.441284
+      },
+      "6": {
+        "pivotX": 158.04366,
+        "pivotY": 235.441284
+      },
+      "7": {
+        "pivotX": 159.54366,
+        "pivotY": 234.441284
+      }
+    },
+    "fixedSupport": true
+  },
+  "sourceToRuntime": {
+    "scale": 0.56640625,
+    "offset": [
+      -10,
+      11
+    ]
+  },
+  "encoding": "Exact lossless WebP. No pixel resampling. Existing V2 path retained for world/detail/lab.",
+  "browserValidation": "Not performed in this integration pass."
+}

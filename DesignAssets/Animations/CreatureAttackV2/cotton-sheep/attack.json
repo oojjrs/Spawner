@@ -53,5 +53,14 @@
     "Frames/07.png", 
     "Frames/08.png"
   ], 
-  "spineCompatibilityVerified": false
+  "spineCompatibilityVerified": false,
+  "runtimeArtwork": {
+    "revision": 4,
+    "status": "user-approved",
+    "approval": "Source/ApprovedCrownV4/approval.json",
+    "source": "Source/ApprovedCrownV4/runtime.png",
+    "sourceCels": "Source/ApprovedCrownV4/source-cels.png",
+    "image": "DesignAssets/Animations/CreatureAttackV2/cotton-sheep/runtime.webp",
+    "legacySourceNotice": "The V2 attack.webp, Frames and original generation sources are retained unchanged as historical authoring inputs. The game uses the approved V4 runtime artwork."
+  }
 }

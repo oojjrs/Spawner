@@ -25,5 +25,6 @@
     190
   ],
   "loop": false,
-  "facing": "left"
+  "facing": "left",
+  "approvedRuntimeExporter": "export-approved-crown.py"
 }

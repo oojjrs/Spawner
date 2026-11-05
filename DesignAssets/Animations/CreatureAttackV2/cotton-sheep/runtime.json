@@ -26,9 +26,11 @@
   ], 
   "loop": false, 
   "facing": "left", 
-  "source": "attack.webp", 
-  "exporter": "../export-runtime.py", 
-  "processing": "One common whole-cel scale for every frame. Original artwork, timing and source registration remain unchanged; runtime pivot aligns the exact seed to its accepted idle appearance.",
+  "source": "Source/ApprovedCrownV4/runtime.png",
+  "exporter": "export-approved-crown.py",
+  "processing": "User-approved V4 crown-first head/neck cels 04–07 on the existing registered body. Exact lossless source export; original timing, canvas, pivots, both-facing support and source cels 01–03/08 retained.",
   "groundRadiusX": 0.244141,
-  "groundRadiusY": 0.064453
+  "groundRadiusY": 0.064453,
+  "artworkRevision": 4,
+  "approval": "Source/ApprovedCrownV4/approval.json"
 }

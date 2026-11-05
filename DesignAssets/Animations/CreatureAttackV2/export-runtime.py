@@ -1,11 +1,21 @@
 from pathlib import Path
 import json
+import subprocess
+import sys
 from PIL import Image, _webp
 
 folder = Path(__file__).resolve().parent
 for path in sorted(folder.glob('*/Source/runtime-registration.json')):
     config = json.loads(path.read_text('utf-8'))
     species = path.parent.parent
+    approved_exporter = config.get('approvedRuntimeExporter')
+    if approved_exporter:
+        exporter = (species / approved_exporter).resolve()
+        if exporter.parent != species.resolve() or exporter.suffix != '.py':
+            raise ValueError('Approved runtime exporter must be a local Python file')
+        subprocess.run([sys.executable, str(exporter)], check=True)
+        print(species.name, 'approved runtime override')
+        continue
     source = Image.open(species/'attack.webp').convert('RGBA')
     size = config['frameSize']
     columns = config['columns']
