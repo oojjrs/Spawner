@@ -1,3 +1,24 @@
+## 몽돌 발형 V4 적용·검수 완료 및 커밋 후보 · 01a1b0eb 현재 요약
+
+- 기록 ID: assets-followup-pebble-freeze-20261106-01a1b0eb. 기록 시각: 2026-11-06T23:00:05+09:00. 기록자·구현/검수판단 Codex /root, 추가pull/재배포승인 사용자. 출처현재채팅01a1b0eb-5c79-76a2-96c3-b18db3b182c7 및직접도구. 원발언정확시각·항목ID·PC식별불명,H:/Spawner Windows PowerShell.
+- 실제구현: 승인420셀시트를128셀/4열2행으로단순축소해TribeMinorV1/pebble/feet/walk.webp에연결했다. 이동·운반공통위상과idle=walk000을사용하며실제속도/능력수치는유지한다. 생성기는선택클립만재생성하고기존15클립을보존한다. 기획서는새승인시트원본링크를유지하고미리보기만96pxanimatedWebP로교체,새문구/레이아웃없음. 공유data/bundle/Combat·localasset/policy를동기화했다.
+- 직접검수: 승인manifest와8프레임/각100ms/800ms일치·실제walk/carry/idle selector·0/100/799/800ms프레임0/1/7/0·런타임512x256치수·원본100%목표정책2항목통과. 원본GIF/96WebP의8프레임별duration과loop바이너리일치,localpayload원본byte동일·runtime/Combat구문확인. 첫/중간/끝contactPNG를직접확인했다. 이전전체애셋검사는반복하지않았다.
+- 후보: HEAD85108c6008d25f8fe1de50cf0d0be7c8f3dbd231 위이번12경로와관련메모리를분리하며기존서버/UI/삭제/공유메모리dirty는보존한다. 앞선v40의커밋후성공영수증은이번관련후속커밋에함께포함한다. 직후최종형식/staged검수·커밋push·기존publicSites재배포는아직성공전. 근거 literal $Trash/assets-followup-pebble-85108c6/{scope.json,sync.json,verification.json}.
+
+## 추가 pull·몽돌 발형 V4 재배포 착수 · 01a1b0eb 현재 요약
+
+- 기록 ID: assets-followup-pebble-start-20261106-01a1b0eb. 기록 시각: 2026-11-06T22:56:45+09:00. 기록자·적용판단 Codex /root, 추가pull/재배포 승인 사용자. 출처현재채팅01a1b0eb-5c79-76a2-96c3-b18db3b182c7 최신요청「더 올라간 거 있으면 추가로 풀받고 다시 배포」. 원발언정확시각·항목ID·PC식별불명,H:/Spawner Windows PowerShell.
+- 직접확인: origin/main85108c6008d25f8fe1de50cf0d0be7c8f3dbd231에몽돌발형직립이동V4 420셀/4열2행/8프레임·각100ms·800ms와기획서원본링크가추가됐다. 기존dirty/index/untracked를stash·refs/codex/backups/pebble-v4-pull에보존후main을ff하고복원했다. index/미해결0·main=원격85108c6 확인. 근거 literal $Trash/assets-followup-pebble-85108c6/sync.json.
+- 결정/범위: 새이동을기존minor native모듈에추가하여이동/운반에연결하고기존정지walk000규칙도적용한다. 런타임128셀·기획서96미리보기만단순등비축소하며기존*.875피벗규칙/실제이동위상을유지한다. 원본이미지·게임수치·새문구는변경하지않는다. 생성기에단일클립선택재생성경로를추가해이미검수한15클립의바이트재생성을피한다. 이번변경만분리커밋push후기존public Sites재배포한다. 아직적용/검수/커밋/배포완료전.
+
+## 최신 애셋 적용·main 푸시·Sites v40 배포 완료 · 01a1b0eb 현재 요약
+
+- 기록 ID: assets-all-apply-published-20261106-01a1b0eb. 기록 시각: 2026-11-06T22:53:50+09:00. 기록자·최종readback확인 Codex /root, 최신pull·기획서/게임전부적용·배포 승인 사용자. 출처현재채팅01a1b0eb-5c79-76a2-96c3-b18db3b182c7·실제Git/publish tool결과. 원발언정확시각·항목ID·PC식별불명,H:/Spawner Windows PowerShell.
+- 실제완료: 원격최신청록a3acd65까지통합하고애니메이션29클립·분비형원화1개·기획서96px미리보기15개를적용했다. 이번최종main51b9334bd8e6deee713bbef106b4068e2e389f1b를origin/main에push하고ls-remote로동일tip확인. 마지막local/추적remote는각51b9334bd8e6deee713bbef106b4068e2e389f1b/51b9334bd8e6deee713bbef106b4068e2e389f1b로직접확인. 기존병행dirty/삭제/메모리와보존stash/backuprefs를유지했으며무관한미커밋변경을게시하지않았다.
+- Sites실제완료: project appgprj_6ada1cedf2848191938f196c4f346ee9,기존public유지. 고정게임커밋51b9334의코드/자산으로source b67b3b01c333deaffc22cd7bb9c4f041cb71a9b2 「승인 애셋 배포본 갱신」을만들고공식helper의sourcepush/ls-remote/package확인완료. 저장v40 id appgprj_6ada1cedf2848191938f196c4f346ee9~appgver_93b4dd8878d88191acb7ab96eeb3a72e,배포appgdep_6aeddb8b9df081919d85477637b9ae7a가succeeded·failure_message=null·https://spawner.oojjrs.chatgpt.site 를반환했다. 별도브라우저/상태반복호출은하지않았다.
+- 검수근거: 원본SHA/프레임/재생시간/loop/카메라/경계·기획서원본링크와문구·native실제birth/corpse crop/물효과1회·4VFX imagecallback·로컬내장asset byte정합·JS/Combat구문·커밋후보형식/공백검수완료. 게시assets717개481,276,200bytes(신규30개모두커밋원본과동일),최대8,698,897bytes,archive147files/95,201,280bytes의SHA-256 e078d3bbf1efbab752bac702bba66e8f2338b3609c53289133699071ab76c447 확인. 배포source7텍스트는기존CRLF로복원검증, runtime은기존과동일Mixed줄바꿈이어서checker NeedsReview를보존했고구문/게시성공을확인했다.
+- 한계/상태: 앞선VFX회귀4건은기존fixture의drawUnitHealthRing누락으로실패했으며무관fixture수정/전체게임수동플레이완료로주장하지않는다. 요청한적용/기획서/커밋push/배포는완료. 본성공영수증은커밋이후에만확정돼로컬메모리에남기고메모리전용후속커밋이나공개이력수정은하지않는다. 근거 literal $Trash/assets-all-apply-01a1b0eb/{push-result.json,site-prepared.json,late-verification.json,minor,creature-final,vfx,spawner-release.tar.gz}.
+
 ## 몽돌 발형 이동 V4 승인 · 2026-11-06T13:51:33+00:00
 
 - 기록자 Codex, 결정 주체 사용자. 출처 채팅 6ae7a6f41c94819380facdaa018ca2b0, 부모 전달 “몽돌 발형은 승인하고, 안테나형은 해상도 문제 있는데”. 원 발언 시각/항목 ID 불명. 승인 시트 libfile_0cfee0af093081918c6f3b9a87380d9d와 GIF libfile_bf5ddf0d73408191a95e9ad98faa11cd 원본 보존. 420셀4열2행8프레임100ms씩800ms. 안테나형 기각본 제외.

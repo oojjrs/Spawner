@@ -603,5 +603,41 @@
       512,
       768
     ]
+  },
+  {
+    "name": "pebble-feet-walk-v4",
+    "source": "AnimationCandidates/pebble-feet-upright-v4/mongdol-feet-upright-v4-sheet.png",
+    "sourceSha256": "e3d02b76ad660a39b55a4820484fd3ef0d1e7230b2e02eb3f018f3760f7c411c",
+    "image": "DesignAssets/Animations/TribeMinorV1/pebble/feet/walk.webp",
+    "frameSize": 128,
+    "columns": 4,
+    "frameCount": 8,
+    "durationsMs": [
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100
+    ],
+    "loop": true,
+    "pivotX": 64,
+    "pivotY": 112,
+    "durationMs": 800,
+    "sha256": "d558b3ededa671c543011951d7caf85cceca93d1e416c78a1facc8d842d7bf1c",
+    "grid": [
+      4,
+      2
+    ],
+    "display": [
+      128,
+      128
+    ],
+    "dimensions": [
+      512,
+      256
+    ]
   }
 ]

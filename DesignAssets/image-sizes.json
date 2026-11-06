@@ -11297,6 +11297,26 @@
         1,
         1
       ]
+    },
+    "DesignAssets/Animations/TribeMinorV1/pebble/feet/walk.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
+    "DesignAssets/Planning/ApprovedAnimations96/pebble-feet-upright-v4--walk.webp": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
     }
   }
 }

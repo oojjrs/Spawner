@@ -389,6 +389,7 @@ globalThis.SpawnerLocalAssetFiles = Object.freeze([
   "./client/local-assets/Animations/TribeMinorV1/pebble/antenna/birth.webp.js",
   "./client/local-assets/Animations/TribeMinorV1/pebble/antenna/death.webp.js",
   "./client/local-assets/Animations/TribeMinorV1/pebble/feet/birth.webp.js",
+  "./client/local-assets/Animations/TribeMinorV1/pebble/feet/walk.webp.js",
   "./client/local-assets/Animations/TribeMinorV1/spore/antenna/birth.webp.js",
   "./client/local-assets/Animations/TribeMinorV1/spore/antenna/death.webp.js",
   "./client/local-assets/Animations/TribeMinorV1/spore/antenna/walk.webp.js",

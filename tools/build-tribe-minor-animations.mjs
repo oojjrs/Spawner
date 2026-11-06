@@ -9,9 +9,14 @@ const clips=records.map(item=>{const [tribe,form,action]=item.name.split("-");re
 const foot=JSON.parse(readFileSync(resolve(root,"AnimationCandidates/spring-feet-v13/manifest.json"),"utf8"));
 clips.push({name:"spring-feet-walk-v13",tribe:"spring",form:"feet",action:"walk",source:"AnimationCandidates/spring-feet-v13/"+foot.sourceSheet,cellSize:foot.cellSize,columns:foot.grid[0],rows:foot.grid[1],frameCount:foot.frames,durationsMs:Array(foot.frames).fill(foot.durationMsEach),pivot:[foot.cellSize[0]/2,foot.cellSize[1]*.875],actionLoop:true});
 for(const form of ["antenna","feet"]){const folder="AnimationCandidates/spore-birth-calibrated-v7/",contract=JSON.parse(readFileSync(resolve(root,folder+form+"-body-contract.json"),"utf8"));clips.push({name:"spore-"+form+"-birth-v7",tribe:"spore",form,action:"birth",source:folder+form+"-birth-body-sheet.png",cellSize:[contract.frameSize,contract.frameSize],columns:contract.columns,rows:Math.ceil(contract.frameCount/contract.columns),frameCount:contract.frameCount,durationsMs:contract.durationsMs,pivot:contract.pivot,actionLoop:false,worldScaleContract:contract.worldScaleContract});}
-const definitions={},manifest=[];
+const pebbleFeetFolder="AnimationCandidates/pebble-feet-upright-v4/",pebbleFeet=JSON.parse(readFileSync(resolve(root,pebbleFeetFolder,"manifest.json"),"utf8"));
+clips.push({name:"pebble-feet-walk-v4",tribe:"pebble",form:"feet",action:"walk",source:pebbleFeetFolder+pebbleFeet.sheet,cellSize:pebbleFeet.frameSize,columns:pebbleFeet.columns,rows:pebbleFeet.rows,frameCount:pebbleFeet.frameCount,durationsMs:pebbleFeet.durationsMs,pivot:[pebbleFeet.frameSize[0]/2,pebbleFeet.frameSize[1]*.875],actionLoop:true});
+const selected=process.argv[2],targets=selected?clips.filter(clip=>clip.name===selected):clips;
+if(!targets.length)throw new Error("Unknown animation: "+selected);
+const definitions=selected?JSON.parse(readFileSync(resolve(root,"client/tribe-minor-animations.mjs"),"utf8").match(/Object\.freeze\(([\s\S]+)\);/)[1]):{};
+const manifest=selected?JSON.parse(readFileSync(resolve(root,out,"manifest.json"),"utf8")).filter(clip=>clip.name!==selected):[];
 const crlf = value => value.replace(/\r?\n/g,"\r\n");
-for(const clip of clips){
+for(const clip of targets){
  const directory=resolve(base,clip.name);mkdirSync(directory,{recursive:true});const images=[];
  for(let index=0;index<clip.frameCount;index++){const destination=resolve(directory,String(index).padStart(3,"0")+".png");execFileSync("magick",[resolve(root,clip.source),"-crop",clip.cellSize[0]+"x"+clip.cellSize[1]+"+"+(index%clip.columns*clip.cellSize[0])+"+"+(Math.floor(index/clip.columns)*clip.cellSize[1]),"+repage","-filter","Lanczos","-resize",size+"x"+size+"!",destination]);images.push(destination);}
  const image=out+clip.tribe+"/"+clip.form+"/"+clip.action+".webp";mkdirSync(dirname(resolve(root,image)),{recursive:true});execFileSync("magick",["montage",...images,"-tile",clip.columns+"x"+clip.rows,"-geometry",size+"x"+size+"+0+0","-background","none","-define","webp:lossless=true",resolve(root,image)]);
