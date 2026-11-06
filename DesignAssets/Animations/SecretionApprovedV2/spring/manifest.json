@@ -16,9 +16,9 @@
     "rangedBody": true,
     "secretionIdle": true,
     "nativeSecretionIdle": true,
-    "source": "AnimationCandidates/spring-secretion-v2/secretion-design.png",
-    "sourceSha256": "81f596ddcf0cee4d374d6569af8301e814c525cdd9ea48ef2946765f7387b492",
-    "sha256": "4abf4466d304c38c9b4ab53aa27cb55f5204e6cb5f8f694712dfc599dc427a4f",
+    "source": "AnimationCandidates/spring-secretion-cyan-v3/secretion-design.png",
+    "sourceSha256": "58aa335871c82cd89cab67a45e5f49059155608897b963f52936f9e11b18732d",
+    "sha256": "e6b6d9089e4e8eef480f611b156a1a5947acfba3c4e4455aa1084239eb0ebc9a",
     "grid": [
       1,
       1
@@ -34,10 +34,10 @@
     "calibration": {
       "referenceFrame": 0,
       "sourceBounds": [
-        575,
-        713,
-        346,
-        397
+        582,
+        714,
+        336,
+        401
       ],
       "uniformScale": 0.07017543859649122,
       "offset": [
@@ -77,9 +77,9 @@
     "rangedBody": true,
     "secretionLifecycle": true,
     "nativeSecretionLifecycle": true,
-    "source": "AnimationCandidates/spring-secretion-v2/birth-sheet.png",
-    "sourceSha256": "409e15dfd649d6d814aad354b80d470bacbf37c94d6e495a299dda24dc4c5d90",
-    "sha256": "e431e13a8bd897b7680091da6557bf8fa6e646efed618026926a989653f62588",
+    "source": "AnimationCandidates/spring-secretion-cyan-v3/birth-sheet.png",
+    "sourceSha256": "0eae33d2fa138723f92c191337778ec81eaaf55e56a343fea3a432a7a7c1b82a",
+    "sha256": "d02126491d0dbc9ec8f6c9b2834251ab8c6c724c70964536faacc010a690b32e",
     "grid": [
       4,
       4
@@ -95,15 +95,15 @@
     "calibration": {
       "referenceFrame": 12,
       "sourceBounds": [
-        200,
-        238,
-        192,
-        218
+        205,
+        244,
+        189,
+        216
       ],
-      "uniformScale": 0.2109375,
+      "uniformScale": 0.205078125,
       "offset": [
-        2,
-        16
+        4,
+        18
       ],
       "referenceHeight": 201,
       "canonicalCamera": 512
@@ -133,9 +133,9 @@
     "rangedBody": true,
     "secretionLifecycle": true,
     "nativeSecretionLifecycle": true,
-    "source": "AnimationCandidates/spring-secretion-v2/death-sheet.png",
-    "sourceSha256": "56564590e0d6131a2f8c6b3ad29136b5df1405f8d39989c6c381e08229a4dca8",
-    "sha256": "049542138b4e94fec7ed2226422a7cb78cd6c5d44fda5b3b22cae48e4fd29f2d",
+    "source": "AnimationCandidates/spring-secretion-cyan-v3/death-sheet.png",
+    "sourceSha256": "dd1d6b5668b936f121839c81e9547bb5c833513901121b1bfc4e6a7c5688291c",
+    "sha256": "ba9650ff353f799542b953b10d79816edca10a90dcda4f878aa086652698fbac",
     "grid": [
       4,
       2
@@ -151,15 +151,15 @@
     "calibration": {
       "referenceFrame": 0,
       "sourceBounds": [
-        238,
-        294,
-        138,
-        157
+        242,
+        298,
+        136,
+        155
       ],
-      "uniformScale": 0.171875,
+      "uniformScale": 0.16796875,
       "offset": [
-        20,
-        34
+        21,
+        36
       ],
       "referenceHeight": 201,
       "canonicalCamera": 512

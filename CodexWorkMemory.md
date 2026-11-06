@@ -1,3 +1,15 @@
+## 청록 V3 교체 완료 및 최종 게시 후보 · 01a1b0eb 현재 요약
+
+- 기록 ID: assets-all-apply-cyan-final-20261106-01a1b0eb. 기록 시각: 2026-11-06T22:45:45+09:00. 기록자·통합판단 Codex /root, 최신전부적용/배포승인 사용자. 출처현재채팅01a1b0eb-5c79-76a2-96c3-b18db3b182c7·실제a3acd65원본/worker검수. 원발언정확시각·항목ID·PC식별불명,H:/Spawner Windows PowerShell.
+- 실제완료: stable runtime idle/birth/death3개와기획서96px3개를청록V3로교체하고기존3셀의원본참조를spring-secretion-cyan-v3로치환했다. 제너레이터는source문자열한개만변경,게임dataAPI/client/spring-secretion-assets.mjs는SHA동일이어서bundle재생성없음. 신규runtime3개83,640bytes·새원본SHA·128camera·13/8프레임/타이밍·전체canvas/높이오차0.3px이내·sourcegate를검수하고기획서frame/delay/loop정확일치확인. 보라V2선택은이기록의청록V3로대체,원본이력은보존.
+- 동작29/원화1·기획서미리보기15 합계는동일. 이번13경로만후속커밋후전용mainpush와기존public Sites에게시하며기존dirty/삭제/공유메모리는보존한다. push/배포성공은실제tool결과이후기록한다. 근거 literal $Trash/assets-all-apply-01a1b0eb/{minor/spring-secretion-cyan/result.json,vfx/cyan-result.json,cyan-sync.json}.
+
+## 샘방울 청록 V3 최신 원격 교체 · 01a1b0eb 현재 요약
+
+- 기록 ID: assets-all-apply-cyan-source-20261106-01a1b0eb. 기록 시각: 2026-11-06T22:44:20+09:00. 기록자·최신원격교체판단 Codex /root, 최신pull/전부적용·배포요청 사용자. 출처 현재채팅01a1b0eb-5c79-76a2-96c3-b18db3b182c7 및실제fetch/rebase. 원발언정확시각·항목ID·PC식별불명, H:/Spawner Windows PowerShell.
+- 관측/교체: 마지막push전fetch에서9ba7c82·a3acd65 청록분비형V3 원화/탄생/사망을발견했다. 원화·13탄생·8사망의청록소스를이번선택으로하고이전5737f69 보라V2의런타임/기획서선택만대체한다. 프레임/타이밍/호출API는같아기존29클립회귀는재실행하지않고새3시트·3미리보기·출처/바이트만확인한다. 원화/새3동작개수를더하지않으며합계29클립·원화1개는동일하다.
+- Git실제통합: dirty/index를cyan-sync.json의stash와refs/codex/backups/assets-before-cyan-sync에보존하고원격a3acd65위로기존5로컬커밋을rebase했다. 현재main76c68b82527fad112a523d86e47a15d4015481b4,메모리union임시속성은복원했고stash apply--index성공·미해결0/index0을확인했다. 앞선후속커밋8e9b70f도이로컬rebase이력에보존되며원격push/게시성공전이다.
+
 ## 샘방울 청록 탄생 사망 승인 · 2026-11-06T13:32:22+00:00
 
 - 기록자 Codex, 결정 주체 사용자. 출처 채팅 6ae7a6f41c94819380facdaa018ca2b0, 부모 전달 “좋아 둘 다 승인”. 원 발언 시각/항목 ID 불명. 청록 원화에 이어 탄생13프레임/1790ms와 사망8프레임/1440ms의 시트·GIF·규격5파일 승인. 직전 청록 원화만 승인/애니 미승인 상태를 이 결정이 대체한다.

@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
-const root=process.cwd(),size=128,targetHeight=201/512*size,source="AnimationCandidates/spring-secretion-v2/",base=resolve(root,"$Trash/assets-all-apply-01a1b0eb/minor/spring-secretion/build"),output="DesignAssets/Animations/SecretionApprovedV2/spring/";
+const root=process.cwd(),size=128,targetHeight=201/512*size,source="AnimationCandidates/spring-secretion-cyan-v3/",base=resolve(root,"$Trash/assets-all-apply-01a1b0eb/minor/spring-secretion/build"),output="DesignAssets/Animations/SecretionApprovedV2/spring/";
 const approved=JSON.parse(readFileSync(resolve(root,source+"manifest.json"),"utf8")),specs={idle:{frameSize:1254,columns:1,frameCount:1,durationsMs:[600],sheet:"secretion-design.png"},...approved},clips={},assets=[];
 const crlf=value=>value.replace(/\r?\n/g,"\r\n");
 for(const [action,spec]of Object.entries(specs)){
