@@ -1,0 +1,28 @@
+{
+  "bleed": {
+    "frames": 16,
+    "unique_frames": 16,
+    "alpha": [
+      0,
+      255
+    ],
+    "fps": 12,
+    "source_size": [
+      1272,
+      1236
+    ]
+  },
+  "drain": {
+    "frames": 16,
+    "unique_frames": 16,
+    "alpha": [
+      0,
+      255
+    ],
+    "fps": 12,
+    "source_size": [
+      1292,
+      1218
+    ]
+  }
+}
