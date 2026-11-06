@@ -8069,7 +8069,6 @@
       templateListSignature = signature;
       const fragment = document.createDocumentFragment();
       for (const template of state.templates) {
-        prepareAgentTemplate(template).catch(() => {});
         const card = document.createElement("div");
         card.className = "template-card";
         card.dataset.templateId = template.id;
@@ -8078,7 +8077,11 @@
         button.className = "template-spawn";
         button.setAttribute("aria-label", template.name + " 탄생, 진화 포인트 " + birthCost(template, state.tribe) + "점");
         const image = document.createElement("img");
-        image.src = agentImageSource({ tribe: template.tribe, attributes: template.dna ? Spawner.dnaAppearance(template.dna) : attributeCounts(template.slots, template.attributeLevels), carrying: 0 });
+        const agent = { tribe: template.tribe, dna: template.dna, attributes: template.dna ? Spawner.dnaAppearance(template.dna) : attributeCounts(template.slots, template.attributeLevels), carrying: 0 };
+        image.src = agentImageSource(agent);
+        prepareAgentTemplate(template).then(() => {
+          image.src = agentImageSource(agent);
+        }).catch(() => {});
         image.alt = "";
         const name = document.createElement("strong");
         name.textContent = template.name;

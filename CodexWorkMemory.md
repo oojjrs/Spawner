@@ -17,6 +17,25 @@
 
 - 기록자 Codex, 결정 주체 사용자. 출처 채팅 6ae7a6f41c94819380facdaa018ca2b0, 부모 전달 “새싹콩 사망 칼날형, 갑피형, 분비형 다 합격”. 원 발언 시각/항목 ID 불명. 승인 시트와 같은 시트 GIF 및 규격 9파일만 보존. 분비형 최종 프레임은 직전 안정된 프레임과 동일한 수정본.
 - 원격 최신 fb261403까지 fast-forward, 이전 미커밋 기록 복원. 최신 기획서가 역할별 표로 변경돼 갑피/분비형 전용 행 부재. 기본형에 혼합 표기하거나 사용자 구조를 되돌리지 않고 기획서 정확한 위치 확인 대기. 게임 적용·배포 없음.
+## 둥지 카드 미리보기 로컬 커밋 범위 확정 · 01a1b0fb
+
+- 기록 ID: nest-template-preview-freeze-20261106-01a1b0fb. 기록 시각: 2026-11-06T22:23:08+09:00. 기록자·분리/Git 판단 Codex /root, 커밋 승인 사용자. 출처 현재 채팅 01a1b0fb-74ce-7de0-abb9-8527c45c9d55의 ‘커밋’. 원 발언 정확 시각·턴/항목 ID·딥링크·PC 식별 불명, H:/Spawner Windows PowerShell.
+- 확정 범위: client/game.js의 renderUnitTemplates 1함수에 DNA 전달·준비 완료 이미지 갱신, 관련 메모리 start/result/본 freeze 3절만 HEAD에 투영한 정확2경로다. 다른 최초 설계·전투/외형·스탯 tooltip·다른 메모리 변경은 작업파일에 보존하고 커밋에서 제외한다. 연결 ProjectsV2 nodes=[] 확인을 재사용한다.
+- 검수 근거: 기존 game.js 구문 및 2텍스트 UTF8NoBom/CRLF 정상, 정확 함수 diff의 2hunk를 확인했다. 임시 동작 검사는 baseline fixture 기대 불일치로 미완료이며 통과로 확대하지 않는다. 추가 기능/검사 없이 최종 후보 형식·staged 범위/본문/공백만 확인한다. 첫 후보 가드는 Git 저장 LF와 작업파일 CRLF 차이로 제품/메모리쓰기 전 중단됐고 동일 줄바꿈 기준에서 함수가 정확히 일치함을 확인했다. 메시지 ‘둥지 설계 카드 속성 미리보기 수정’. 로컬 커밋만 승인되었으며 push/배포는 실행하지 않는다. 아직 커밋 성공 전이다.
+
+## 둥지 설계 카드 속성 미리보기 로컬 반영 · 01a1b0fb 현재 요약
+
+- 기록 ID: nest-template-preview-result-20261106-01a1b0fb. 기록·직접 확인 시각: 2026-11-06T22:16:07+09:00. 기록자·구현/검수 판단 Codex /root, 요청·결정 주체 사용자. 출처 현재 채팅 01a1b0fb-74ce-7de0-abb9-8527c45c9d55 및 직접 소스/Node 결과. 원 발언 정확 시각·턴/항목 ID·딥링크·PC 식별 불명, H:/Spawner Windows PowerShell.
+- 변경: client/game.js의 renderUnitTemplates에서 template.dna를 카드 이미지의 agent에 전달하고 기존 prepareAgentTemplate 완료 후 같은 이미지 소스를 갱신한다. 공통 unitDisplayAttributes가 gather 조각을 DNA에서 읽어 strength 외형을 부여하므로 기초 채집의 속성 누락을 해결한다. 기존 외형 선택·카드 레이아웃/문구·탄생/편집/삭제를 유지한다. 제품 변경은 이 함수 1곳이다.
+- 실제 검수/한계: node --check client/game.js 통과. 임시 DOM 어댑터 검사는 수정 전 코드의 불일치4개라는 사전 기대와 실제8개가 달라 두 차례 중단됐다. 두 번째에0키를 제외했지만 동일해 레거시 fixture의 기대를 확정하지 못했다. 이 검사의 통과나 브라우저 시각 검수를 주장하지 않으며 추가 검사로 범위를 늘리지 않는다. 최종 공유 형식2파일과 정확 함수 국소 diff는 직후 실제 출력으로 확인한다. 근거 literal루트 $Trash/nest-template-preview-01a1b0fb/game.before.js. 임시 검사의 실패를 제품 회귀라고 단정하지 않는다.
+- 현재 상태: 로컬 코드 반영·미스테이징·미커밋·미배포. 연결 ProjectsV2 nodes=[]로 보드 없음. 추가 페이지·문서 문구·레이아웃·서버 변경 없음, 병행 작업 보존. start 기록의 구현 전 상태를 이 결과로 대체하고 원기록은 유지한다.
+
+## 둥지 설계 카드 속성 미리보기 착수 · 01a1b0fb
+
+- 기록 ID: nest-template-preview-start-20261106-01a1b0fb. 기록 시각: 2026-11-06T22:12:57.864+09:00. 기록자·수정 판단 Codex /root, 원 발언자·요청 결정 주체 사용자. 출처 현재 채팅 01a1b0fb-74ce-7de0-abb9-8527c45c9d55 및 첨부 둥지 정보창 이미지. 원 발언 정확 시각·턴/항목 ID·딥링크·PC 식별 불명, H:/Spawner Windows PowerShell.
+- 사용자 요청: 둥지 정보창의 저장 유닛 카드도 유닛이 장착한 속성에 맞는 미리보기로 표시한다. 직접 관측: renderUnitTemplates는 dnaAppearance로 만든 attributes만 넘기며 DNA를 누락한다. 공통 unitDisplayAttributes는 gather 조각을 DNA에서 확인해 strength 외형을 부여하므로 기초 채집 카드가 기본 외형으로 떨어진다.
+- 최소 수정 판단: client/game.js의 카드에 실제 template.dna를 함께 넘기고 기존 prepareAgentTemplate 완료 후 같은 카드 이미지 소스를 갱신한다. 기존 외형 우선순위·설계창·게임플레이·문구·CSS·기획서 및 모든 병행 변경은 유지한다. 추가 페이지/검토 도구는 만들지 않는다. 연결 ProjectsV2 직접 조회 nodes=[]로 보드 없음. 커밋·푸시·배포 승인/실행 없음.
+
 ## 정찰 제거 커밋의 동시 이력 반영 · 01a1b0e7
 
 - 기록 ID: organ-behavior-commit-concurrent-base-20261106-01a1b0e7. 기록 시각 2026-11-06T22:18:03+09:00. 기록자 Codex /root, 커밋승인 사용자. 출처 현재채팅01a1b0e7-b518-7b82-8149-5388a043a100 및 실제HEAD/update-ref전가드. 원발언 정확시각·항목ID·PC식별 불명. H:/Spawner Windows PowerShell host local.
