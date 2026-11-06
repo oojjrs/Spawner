@@ -1,0 +1,310 @@
+{
+  "status": "user-approved",
+  "tribe": "bean",
+  "form": "gather",
+  "action": "hurt",
+  "frameSize": 512,
+  "columns": 8,
+  "frameCount": 16,
+  "durationsMs": [
+    20,
+    30,
+    30,
+    30,
+    500,
+    30,
+    30,
+    30,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    40
+  ],
+  "durationMs": 880,
+  "loop": false,
+  "pivotX": 256,
+  "pivotY": 448,
+  "rootMotion": false,
+  "firstAndLastMatchApprovedSource": true,
+  "method": "Constant camera per action; original authored base frames with body-tracked existing gathering arms/bowl. No frame-by-frame generation. Sprite-to-sheet RGBA copy, not alpha recomposition.",
+  "notes": "Eyes shut with 500ms hold at frame 4, then recover. Includes exact approved neutral frame at both boundaries.",
+  "records": [
+    {
+      "frame": 0,
+      "bodyBounds": [
+        174,
+        297,
+        458,
+        524
+      ],
+      "organ": {
+        "cx": 256,
+        "cy": 403.696,
+        "w": 214.656,
+        "h": 88.608,
+        "angle": 0
+      }
+    },
+    {
+      "frame": 1,
+      "bodyBounds": [
+        171,
+        294,
+        455,
+        522
+      ],
+      "organ": {
+        "cx": 254.07111198660496,
+        "cy": 400.6913086858452,
+        "w": 214.656,
+        "h": 88.9983436123348,
+        "angle": -0.02617993877991494
+      }
+    },
+    {
+      "frame": 2,
+      "bodyBounds": [
+        166,
+        292,
+        451,
+        521
+      ],
+      "organ": {
+        "cx": 251.17777996651236,
+        "cy": 396.7303675475554,
+        "w": 215.4118309859155,
+        "h": 89.38868722466961,
+        "angle": -0.061086523819801536
+      }
+    },
+    {
+      "frame": 3,
+      "bodyBounds": [
+        164,
+        286,
+        449,
+        516
+      ],
+      "organ": {
+        "cx": 249.891854624249,
+        "cy": 391.25777265944924,
+        "w": 215.4118309859155,
+        "h": 89.77903083700441,
+        "angle": -0.08028514559173915
+      }
+    },
+    {
+      "frame": 4,
+      "bodyBounds": [
+        163,
+        285,
+        448,
+        516
+      ],
+      "organ": {
+        "cx": 249.2488919531173,
+        "cy": 390.3133103565668,
+        "w": 215.4118309859155,
+        "h": 90.1693744493392,
+        "angle": -0.08726646259971647
+      }
+    },
+    {
+      "frame": 5,
+      "bodyBounds": [
+        164,
+        285,
+        448,
+        516
+      ],
+      "organ": {
+        "cx": 249.57037328868316,
+        "cy": 390.906203165427,
+        "w": 214.656,
+        "h": 90.1693744493392,
+        "angle": -0.08203047484373349
+      }
+    },
+    {
+      "frame": 6,
+      "bodyBounds": [
+        166,
+        292,
+        451,
+        521
+      ],
+      "organ": {
+        "cx": 251.17777996651236,
+        "cy": 396.7303675475554,
+        "w": 215.4118309859155,
+        "h": 89.38868722466961,
+        "angle": -0.061086523819801536
+      }
+    },
+    {
+      "frame": 7,
+      "bodyBounds": [
+        169,
+        294,
+        454,
+        522
+      ],
+      "organ": {
+        "cx": 253.10666797990743,
+        "cy": 399.3662340722924,
+        "w": 215.4118309859155,
+        "h": 88.9983436123348,
+        "angle": -0.038397243543875255
+      }
+    },
+    {
+      "frame": 8,
+      "bodyBounds": [
+        171,
+        295,
+        456,
+        523
+      ],
+      "organ": {
+        "cx": 254.3925933221708,
+        "cy": 401.4331500850507,
+        "w": 215.4118309859155,
+        "h": 88.9983436123348,
+        "angle": -0.019198621771937627
+      }
+    },
+    {
+      "frame": 9,
+      "bodyBounds": [
+        173,
+        296,
+        458,
+        524
+      ],
+      "organ": {
+        "cx": 255.67851866443416,
+        "cy": 402.93688391588154,
+        "w": 215.4118309859155,
+        "h": 88.9983436123348,
+        "angle": -0.005235987755982988
+      }
+    },
+    {
+      "frame": 10,
+      "bodyBounds": [
+        174,
+        297,
+        458,
+        524
+      ],
+      "organ": {
+        "cx": 256,
+        "cy": 403.696,
+        "w": 214.656,
+        "h": 88.608,
+        "angle": 0
+      }
+    },
+    {
+      "frame": 11,
+      "bodyBounds": [
+        174,
+        297,
+        458,
+        524
+      ],
+      "organ": {
+        "cx": 256,
+        "cy": 403.696,
+        "w": 214.656,
+        "h": 88.608,
+        "angle": 0
+      }
+    },
+    {
+      "frame": 12,
+      "bodyBounds": [
+        174,
+        297,
+        458,
+        524
+      ],
+      "organ": {
+        "cx": 256,
+        "cy": 403.696,
+        "w": 214.656,
+        "h": 88.608,
+        "angle": 0
+      }
+    },
+    {
+      "frame": 13,
+      "bodyBounds": [
+        174,
+        297,
+        458,
+        524
+      ],
+      "organ": {
+        "cx": 256,
+        "cy": 403.696,
+        "w": 214.656,
+        "h": 88.608,
+        "angle": 0
+      }
+    },
+    {
+      "frame": 14,
+      "bodyBounds": [
+        174,
+        297,
+        458,
+        524
+      ],
+      "organ": {
+        "cx": 256,
+        "cy": 403.696,
+        "w": 214.656,
+        "h": 88.608,
+        "angle": 0
+      }
+    },
+    {
+      "frame": 15,
+      "bodyBounds": [
+        174,
+        297,
+        458,
+        524
+      ],
+      "organ": {
+        "cx": 256,
+        "cy": 403.696,
+        "w": 214.656,
+        "h": 88.608,
+        "angle": 0
+      }
+    }
+  ],
+  "sourceDescription": "Approved bean-gather source; original high-resolution authored base hurt frames; original high-resolution strength organ",
+  "candidate": false,
+  "sheet": "bean-gather-hurt-v1-sheet.png",
+  "preview": "bean-gather-hurt-v1-preview.gif",
+  "previewLoop": true,
+  "approvedNeutralSHA256": "f7ad5bd858150b62c7683c48745021b1e13f1b23fd42f5a86831be995518e16b",
+  "verification": {
+    "allFramesMatchSheet": true,
+    "previewRegeneratedFromSheetMatchesExactly": true,
+    "gifDecodedFrames": 16,
+    "gifDurationMs": 880,
+    "singleConnectedBodyOver8px": true,
+    "clippedFrames": 0,
+    "neutralBoundaryMatch": true,
+    "sheetSHA256": "95657f2fd28ee1c62bfa29469bd7acaf9ca4536d6481fd0dab1106cca7038715",
+    "previewSHA256": "7e8bea1fc10ca2fa42be7513b359d46677fe1e3636082307cd57f93c8549df3c"
+  }
+}
