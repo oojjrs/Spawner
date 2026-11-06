@@ -1,3 +1,4 @@
+import { unitPresentationTestSource } from "./unit-presentation-fixture.mjs";
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -24,11 +25,15 @@ const cases = [
     idleBounds: {x:10,y:33,width:220,height:191}, deathBounds: {x:11,y:49,width:203,height:176},
     runtimeHash: '2c15d5441d1f1ac514d9593c5a29be49ca165e696b0471c4c87e7cf4889f4255', sourceHash: 'f86aff28f6b8e9015e00227aff83e7b671bb45cf939bc0008a56989ac9518e77' }
 ];
-const source = readFileSync(new URL('./game.js', import.meta.url), 'utf8');
+const source = unitPresentationTestSource(readFileSync(new URL('./game.js', import.meta.url), 'utf8'));
 const extract = name => { const value=source.match(new RegExp('^    function '+name+'\\([^]*?^    }','m'))?.[0];assert.ok(value,name);return value; };
 const baseTest = readFileSync(new URL('./combat-detail-creature-death.test.mjs',import.meta.url),'utf8');
 const fixture = baseTest.slice(baseTest.indexOf('const source ='),baseTest.indexOf('// The approved list'));
-const box = { assert,readFileSync,createContext,runInContext,structuredClone,URL,createDetailCombatDeath,detailDeathForm,DETAIL_DEATH_CREATURES,detailCreatureDeathShadow,
+const fixtureRead = (path, encoding) => {
+  const value = readFileSync(path, encoding);
+  return typeof value === "string" && String(path).replaceAll("\\", "/").endsWith("/client/game.js") ? unitPresentationTestSource(value) : value;
+};
+const box = { assert,readFileSync:fixtureRead,createContext,runInContext,structuredClone,URL,createDetailCombatDeath,detailDeathForm,DETAIL_DEATH_CREATURES,detailCreatureDeathShadow,
   createCombatVfxCursor,createDetailCombatVfx,DETAIL_COMBAT_VFX_ASSETS,drawDetailVfxCell,drawDetailVitalEffect,CREATURE_IDLE_ANIMATIONS,CREATURE_DEATH_ANIMATIONS,
   CREATURE_ATTACK_ANIMATIONS,unitAnimationFrame,creatureHurtPose,creatureAttackPose,imageFrameGeometry,imageDimensions };
 createContext(box);runInContext(fixture.replaceAll('import.meta.url',JSON.stringify(new URL('./combat-detail-creature-death.test.mjs',import.meta.url).href)),box);

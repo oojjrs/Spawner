@@ -22,6 +22,61 @@
 - 승인된 PNG 아틀라스 4개, 대응 프레임·원본 시트·검토 영상 및 필요한 재생정보를 보존한다. Design.html 기존 포자 안테나/발형 셀의 원화와 자료 참조만 갱신하며 새 문구·새 페이지는 추가하지 않는다. 게임 코드·실제 게임 연결·배포는 하지 않는다.
 - 시작 checkout은 Spawner-spring-lifecycle-publish, dedicated origin oojjrs/Spawner. fetch main 및 fast-forward 확인 결과 기존 HEAD와 원격 일치. GitHub Projects 조회는 read:project 권한 부족, 인증 변경하지 않았다. 대용량 복구 아카이브는 승인 대기 상태로 이번 작업에 포함하지 않는다.
 - 실제 확인: 승인 원본과 아틀라스 4개 바이트 일치, 각 2048×1024·8프레임 및 32개 프레임 참조 확인. 기획서 기존 표시 문구와 줄바꿈 형식 유지, 추가 참조 파일 존재, diff 공백 검사 통과. 공통 형식 검사기는 checkout에 없어 실행하지 못했다. 게임 빌드·브라우저 검수는 하지 않았다. 게시 결과는 아직 확인 전이다.
+## welcome-native-parity-commit-freeze-20261106-01a1a12e
+
+- 기록 시각 2026-11-06T20:32:35+09:00; 기록자·범위분리/Git판단 Codex /root, 로컬커밋 승인 사용자. 출처 현재채팅 01a1a12e-3f3f-72c1-95e2-0b5b349b5ffb 최신 「커밋」. 원발언 정확시각/항목ID/PC식별 불명. H:/Spawner Windows PowerShell.
+- 현재부모 e2ec880fd234f388ef3767d67c5e558776b31e59 기준 앞서보고한 웰컴/native 렌더·크기/바닥/전체속성형 방향교정·관련검사25경로와 이채팅의진단부터완료까지6절+본범위기록만묶는26경로커밋이다. Game의별개군락메뉴·최초설계버튼·카드선택등 UI hunk와다른UI/Design/속성표·다른메모리/이미staged변경은제외한다. runtime의공통3모듈·welcome모듈·해당exports 외차이가없는지정확본문으로분리확인한다. 실제대조에서게임워커/중첩워커의기존moveAnimationStartedAt구세이브복원차이가남아있음을확인했으며,해당workerSource와별개지형렌더cache해시3개는HEAD원문을후보에사용해이커밋에서제외한다.
+- 기존840픽셀대조·현재제품초기화/64상태/152중립외곽/1038가장자리정지표본·welcome8통과와원본에서도실패하는회귀3건한계는재사용한다. 메모리예외에따라관련기록을코드와원자적으로포함하고현재공유index/작업파일은보존한다. 임시별도index에서최종경로·본문·공백을검토한뒤기대HEAD/index가드로로컬커밋한다. 아직커밋성공전이며push/배포는요청되지않았다. 연결Projects없음결과재사용. 메시지 「웰컴 유닛 렌더와 방향 및 크기 수정」.
+
+## welcome-native-parity-complete-20261106-01a1a12e 현재 요약
+
+- 기록·최종 실행근거 확인 시각: 2026-11-06T20:26:21+09:00. 기록자·구현/검수판단 Codex /root, 요청·확대/바닥/전체 속성외형 방향교정 결정 사용자. 출처 현재채팅 01a1a12e-3f3f-72c1-95e2-0b5b349b5ffb 및 두 native worker·실제 격리검수결과. 원발언 정확시각/항목ID/PC식별 불명. H:/Spawner Windows PowerShell.
+- 완료내용: Game의 실제22개 종족 렌더·몸통/머리/다리/합성 함수와 rootless bean 바깥 hop/stretch를 unit-presentation으로 추출하여 Game/Header가 같은 구현을 호출한다. 중립19종은 같은 creature-presentation, 기준크기/시트등록/외형배율은 unit-presentation-assets의 공통 계산을 사용한다. Header의 별도손조립/임의포즈·배율 경로는 제거했다. Game의 정상시트/방향예외는 그대로 보존했고 unit-animation.mjs는 작업전사본과 byte 일치함을 확인했다. Design/원본 이미지·음원은 이번 작업으로 수정하지 않았다.
+- 헤더 전용교정: 일반종족은 실제 평상시 native 방향기본값1, 중립은 좌행 이동부호-1을 넣는다. 모든속성형에 동일적용하여 몽돌 walk예외와jump/idle-1 충돌에 의한 조명면 뒤집힘을 없앴다. 최신 사용자 「기본형만이아니라속성형도」를 4종x4외형x4상태64경우에 반영했다. 새싹콩.40/포자.38의5.26% 기본크기차이는 native 기준대로 유지한다.
+- 화면교정: 480x280에서셀364(직전252보다44% 확대), 바닥246.4(기존214보다32.4px 아래), 배경높이115%·상단정렬이다. 중립은 native 전체동작/실제작성프레임을 작은 canvas에 모아 측정한 외곽으로 그 유닛의 일정셀배율을 정해 큰동작도헤더안에 맞춘다. native beetle의 바깥기준1/안쪽기준.86 차이도Header에 그대로적용했다. 등장/퇴장에같은외형·배율을유지하고 셀사이정지는화면밖에서발생한다.
+- 실제검수: 저장한 작업전Game+같은시점runtime을 기준으로 새공통모듈만주입한 독립oracle에서35외형x3상태x2방향x4시각=840경우 비교,780완전일치·빈프레임0·형상/크기/반전불일치0. 나머지는 투영/antialias 경계오차로 premultiplied 채널최대2.9765/255였다. 앞선허용2초과1pixel 사례를 확인하고3/255로명시하여검사했으며 큰오차를숨기지않았다. 원본Game을현재runtime과섞어검사한 중간시도는 병행레벨업제거로초기화실패했고 oracle를동일시점쌍으로수정했다.
+- 현재제품실행검수: 현재Game/runtime의실제초기화성공, pageerror/Welcome경고0. 네기본종족의도착직후동작→2초대기→퇴장과 다음등장겹침을확인했고 공용Movement/CombatAudio 경로에서 move-spore/pebble/spring 및spring-landing을관측했다. 녹음/청음검수는아니다. 16종족외형x4상태64연결·중립19종x2동작x4시각152외곽검사통과. PC1440x1000/모바일390x844 캡처확인·가로넘침없음. 16외형의입퇴장32경로에서셀간정지1038표본검사·화면에보이는정지0.
+- 회귀/한계: welcome8검사통과(35전체풀/서로다른셔플/매바퀴중복없음·cue stamps·동일외형복구·속성형방향회귀 포함). worker native중립10520경우·자산573경우통과근거재사용. 추출후기존VM fixture13개의실제함수의존성을맞췄고기대값은변경하지않았다. 남은3개 assertion(mixed ranged spring-thrust idle draw53/1, harvest+active shot의false기대, legacy combat birth body/full기대)은 작업전Game·unit-animation read-only override에서도동일실패함을확인했으며 범위밖제품/기대값수정은하지않았다. 이를전체테스트성공으로보고하지않는다.
+- 범위/다음상태: 제품10경로·검사15경로·메모리1의26텍스트가관련범위다. runtime은공통3모듈과welcome 이동모듈만국소동기화했고전체빌드·자산재생성·사용자활성브라우저조작없음. 다른채팅의서버/Design/외형/레벨업제거/공유메모리·번들변경보존. Git stage/commit/push/배포는요청되지않아수행하지않는다. 구현완료·26텍스트 UTF8NoBom/CRLF 및 국소 git diff --check 통과(8.39초), 미stage/미commit 리뷰대기. 최종형식결과 기록시각 2026-11-06T20:27:01+09:00. 증거 literal $Trash/welcome-native-parity-20261106의native-pixel-result.json·current-integration.json·edge-pauses.json·두worker결과·current-desktop/mobile.png 및scope.json.
+
+## welcome-header-size-floor-followup-20261106-01a1a12e
+
+- 기록 시각 2026-11-06T20:14:33+09:00; 요청·방향/크기문제 제보 사용자, 구현판단 Codex /root. 출처 현재채팅 「조금 더 키우고…바닥을 조금 더 아래」「끄트머리에 딱 서서 쉬는」「몽돌…색깔이 반전」「샘방울…오른쪽」. 원발언 정확시각/항목ID 불명.
+- 확대 초안252를 추가 확대요구에 맞춰 최대480/width*.8/height*1.3으로 조정한다(480x280에서364, 이전252대비44% 확대). 바닥은214/280에서.88height로32px가량 내리고 배경도 높이115%·상단정렬로 같은 지면에 맞춘다. 종족의 중간셀 착지가 화면 밖에 놓이게 해 가장자리 셀간휴식 노출을 줄인다. 중립은 native 동작 외곽으로 헤더에 맞는 일정배율을 적용한다.
+- 직접 source contact3종x4프레임에서 idle/walk/jump 원본의 조명면은 같은 방향이다. 몽돌은 native walk만facing1 예외인데 헤더 공통-1로 jump/idle을 뒤집었던 충돌이 확인됐다. 공통 native 원본은 보존하고 헤더가 일반종족의 native 방향1을 사용해 조명·외형 방향을 유지한다. 이전 원본 방향결함 단정은 철회한 상태다.
+- unit-size.mjs 직접수치는 bean.40/spore.38/pebble.42/spring.39다. bean이spore보다5.26% 큰 것은 기준값과 일치하며, 별도종족 크기재설정은 하지 않는다. 새싹콩 등장은 기본 뿌리없는 외형, 이후35외형 큐와 2초대기는 유지한다.
+
+## welcome-header-facing-correction-20261106-01a1a12e
+
+- 기록 시각: 2026-11-06T20:10:00+09:00; 기록자·구현판단 Codex /root, 정상 기획서/인게임 보존·헤더만 방향수정 결정 사용자. 출처 현재 채팅 최신 「기획서 상으론 문제가 없었어. 웰컴 헤더에서만 문제였지」. 원발언 정확시각·항목ID 불명.
+- 앞선 welcome-native-size-facing-decision의 spring/pebble 원본 및 인게임 방향결함 단정은 철회한다. 실제 서버 일반 종족 이동에는 facing 대입이 없고 native renderer는 미지정값을1로 처리한다. 반면 중립 이동은 x변화부호를 facing에 넣는다. 헤더가 양쪽 모두 -1로 합성한 상태 차이를 헤더에서 바로잡고, 공통으로 추출한 Game 렌더 함수의 원래 반전규칙·애니 메타데이터를 그대로 보존한다. 앞서1578행을 snapshot으로 해석한 것도 오독이며 실제로는 corpse 생성행이다.
+- 공통 native 코드 추출/호출과 확대 요구는 유지한다. 헤더 기본셀은 최대288/480x280에서252로 확대하되, 큰 중립은 준비 중 native renderer의 실제 전체 동작 외곽을 작은 별도 canvas로 측정해 헤더 안에 맞는 일정 카메라배율을 사용한다. 애니 프레임/FPS/원본이미지/Design 문서는 변경하지 않는다.
+- 검수근거: creature worker가 기존 Game과10520경우, 자산worker가573경우를 대조했다. 원본기준 픽셀oracle는 native 반전규칙 복구 후 같은 스냅샷으로 재검사한다. 미세 투영 antialias 차이는 premultiplied channel 최대2 이하와 실제 유효pixel/bounds로 구분하며 큰 형상차이를 허용하지 않는다. 동시 다른작업의 Design/서버/번들 내용은 보존한다.
+
+## welcome-native-size-facing-decision-20261106-01a1a12e
+
+- 기록 시각: 2026-11-06T19:51:20+09:00; 크기 확대·역방향 보행 수정 요구 사용자, 구현 판단 Codex /root; 출처 현재 채팅 최신 「보이지 않는 셀의 크기를 키우면 … 유닛 표현도 키울겸」「오른쪽을 향하고 왼쪽으로 걸어오는건 고쳐라」. 원발언 정확시각/항목ID 불명.
+- 앞선144px/cell 초안은 최신 확대 요구로 대체한다. 헤더는 공통 camera zoom 최대288을 기준으로 width×.75/height×.9에 맞추어 적용(현재480×280이면252px/cell, 이전144대비1.75배)해 셀과 유닛을 함께 키운다. 실제 셀당 이동시간/기존 이동·보행 함수를 유지하며, 화면 px/s와 크기는 같은 카메라 배율로 함께 환산한다.
+- 방향 소스 직접 확인: spring flow-v4는 몸/흐름 꼬리가 오른쪽에 놓인 왼쪽 진행 원본이며 native Game은 종족 스프라이트를 오른쪽 원본으로 가정해 좌향 이동 때 뒤집고 있었다. pebble walk-in-place도 왼쪽 원본인데 기존 Game은 walk 방향을 무조건1로 고정했다. 두 walk 메타데이터에 source facing left를 명시하고 공통 renderer가 실제 진행방향과 소스 기본방향으로 반전을 계산하게 해 Game/Header를 함께 수정한다.
+- 중립 worker가 기존 atlas19개를 눈으로 확인한 결과17종은 명확한 left, rolling-acorn/snare-vine는 front다. 기존 creature 좌향 원본 규칙은17종과 일치하므로 임의로 모두 반전시키지 않는다. 도토리 얼굴방향과 구름 회전방향도 혼동하지 않는다.
+- 35개 외형×3상태×4시각=420개 실제 원본 Game/신규 Header 픽셀 비교에서 빈 프레임0,387개 완전일치,33개는 주로 spring 다리형의 매우 작은 경계 차이가 관측되었다(현재 alpha 차이최대1; RGB 최대값은 후속 확인). 불일치를 숨기지 않고 투영 부동소수점/안티앨리어싱 차이를 더 분리해 확인한다. 원래 재생 지연 설명 대신 같은 native 코드 경로와 실제 렌더 증거로 검증한다.
+
+## welcome-native-parity-start-20261106-01a1a12e
+
+- 기록 시각: 2026-11-06T19:24:08+09:00; 요구·결정 주체 사용자, 원인 확인·공통화 설계 Codex /root; 출처 현재 채팅 01a1a12e-3f3f-72c1-95e2-0b5b349b5ffb 최신 「새싹콩 … 왼쪽으로 갈 때 이미지 이상 … 싹 고쳐놔」「다른 것도 … 인게임 이동, 애니 재생하고 완전히 맞춰놔」. 사용자 원발언 정확시각/항목ID 불명.
+- 진단 정정: 현재 spore/pebble/spring jump 모두 실제 등록후16프레임×70ms=1120ms로 같고, 샘방울만 별도 느린 재생 배율은 소스에서 발견하지 못했다. 직전 「헤더 이동과 jump 시간 분리」 설명은 화면 이동/재생 기준 설명에만 해당하며 샘방울 고유 느림의 원인 확정이 아니었다. 이미지 atlas/메타와 실제 native renderer를 더 비교하며 임의 FPS 변경으로 덮지 않는다. 원본 contact 경로3개는 파일이 없었고 기존 runtime webp atlas3개를 실제로 확인했다.
+- 확인된 헤더 차이: 별도 drawBean이 인게임과 달리 body/head를 합성하고 body pose의 적용 순서·rootless 내부 scale 처리도 다르다. native drawAgentAppearance의 바깥 홉/스케일과 drawAgentAppearanceBody의 안쪽 pose를 헤더가 재현한 것이 일치하지 않는다. 또한 native action별 reference bounds/scale·외형 보정/중립 hop·mirroring과 헤더 별도 크기/그리기 코드를 제거해야 한다.
+- 구현 판단: 새 공통 unit-presentation 모듈로 실제 game.js의 관련 pose/compose/그리기 함수를 이동하고 Game은 같은 함수를 호출하도록 연결한다. Header도 동일한 자산 준비/시트 scale·unitDisplayScale·renderer를 사용한다. 이동은 실제 unitTravelSpeed 및 unitMovementPosition과 한 개의 native camera cell을 사용해 같은 상태의 화면 속도를 맞춘다. Header만 캐릭터별 cell/임의 배속/중복 body변형을 쓰지 않는다. 카메라 기본은 인게임 근접 단계144px/cell을 기준으로 헤더에 맞게 공통 적용한다.
+- 병렬 독립 분담: 현재 메인 모델/effort를 상속한 shared_creature_rendering은 새 creature-presentation 모듈, shared_unit_assets는 새 unit-presentation-assets 모듈과 자체 native oracle 검수를 담당한다. Game/header/runtime 통합과 bean/tribe native rendering은 메인 소유다. 단일 공유 파일의 동시 수정은 금지했다. Assets worker 판단대로 native ATTRIBUTES equipped 판정을 그대로 보존해 legacy strength를 임의 scale 대상으로 추가하지 않는다.
+- 검수 목표: 변경 전 실제 Game 함수를 독립 reference로 보존하고 동일 agent/time/now/camera scale에서 프레임 crop/행렬/가능한 실제 픽셀을 대조한다. 최초4종 우선 준비, 35개 중복 없는 큐, 자기 도착 즉시 동작1회·종료후2초·독립 입퇴장, 외형 고정·동일 외형 복구, 기존 실제 SFX 경로는 유지한다. 새 그림·애니·음원 생성 없음. 현재는 수정 지시이며 추가 Git 완료는 요청되지 않았다.
+
+## welcome-spring-entry-jump-tempo-diagnosis-20261106-01a1a12e
+
+- 기록 시각: 2026-11-06T19:09:54+09:00; 질문/관측 주체 사용자, 소스 확인·원인 판단 Codex /root; 출처 현재 채팅 01a1a12e-3f3f-72c1-95e2-0b5b349b5ffb, 클라이언트2026-11-06 최신 「샘방울 정작 나오는 건 … 빨리 나와서 점프는 … 느리게 … 원인이 뭐야」. 원발언 정확시각/항목ID 불명.
+- 읽기 확인 HEAD5e39fe3: welcomeTravelMotion은 종족 unitStats의 speed, 중립 creatureAnimationSpeed를 그대로 쓰고 cell=종족 size/.7(기본 샘방울 약262.857px), duration=steps/speed를 사용한다. 샘방울 기본 speed .9이므로 그 크기에서 횡이동 약236.571px/s, 다리형은 movementBonus .3을 더한다. 몽돌 기본 .35와도 차이가 크다. 입장 lead는 화면 밖 시간을 생략하고 elapsed/startedAt를 같이 옮기며 이동률을 추가 배속하지 않는다.
+- 실제 unitAnimationPose의 walk 프레임은 셀 이동 progress에 동기화하지만 jump는 (time-jumpStartedAt)*1000으로 원본 클립을 재생한다. 현재 샘방울 jump16프레임×70ms=1120ms 고정이며 이동 스탯 배율을 사용하지 않는다. 기본형 걷기 프레임의 재생 배속이 점프보다 크게 빠르다고 단정하지 않는다. 직접 원인은 큰 헤더의 화면 횡이동 속도와 점프 클립 재생시간이 각각 계산되고 웰컴 연출의 체감 템포를 맞추지 않은 구조다.
+- 직전 도착 후 대기 수정은 이전 퇴장/다음 준비와 자기 동작 타이머를 분리한 것으로, 위 이동 속도/점프 클립 길이를 조정하지 않았다. 현재는 원인 질문의 읽기 조사만 수행했고 제품·애셋 수정, 테스트/브라우저 실행, Git 완료는 하지 않았다.
+
 ## 채집 DNA 미리보기 수정 커밋 범위 확정 · 01a1b095
 
 - 기록 ID: dna-design-preview-freeze-20261106-01a1b095. 기록 시각: 2026-11-06T20:28:27+09:00. 기록자·분리/Git 판단 Codex /root, 로컬 커밋 결정 사용자. 출처 현재 채팅 01a1b095-4dff-7b02-ad0f-79812397761c의 ‘커밋’. 원발언 정확시각·항목 ID·PC식별 불명, H:/Spawner Windows PowerShell host local.

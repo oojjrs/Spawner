@@ -1,3 +1,4 @@
+import { unitPresentationTestSource } from "./unit-presentation-fixture.mjs";
 import { unitRangedAppearance } from "./unit-ranged.mjs";
 import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
 import test from "node:test";
@@ -7,7 +8,7 @@ import { createContext, runInContext } from "node:vm";
 import { attributeCounts, COMBAT_ATTRIBUTE_KEYS } from "../server/attributes.mjs";
 import { hasCombatEvolution } from "./combat-attributes.mjs";
 
-const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
+const source = unitPresentationTestSource(readFileSync(new URL("./game.js", import.meta.url), "utf8"));
 
 function declaration(name) {
   const match = source.match(new RegExp("^    (?:async )?function " + name + "\\([^]*?^    }", "m"));

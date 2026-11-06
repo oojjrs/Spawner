@@ -132,3 +132,20 @@ test("a failed pose uses a fallback pose of the same immutable appearance", () =
   const next = Object.freeze({ key: "spring", variant: 1 });
   assert.equal(drawWelcomeChoice(next, () => {}), next);
 });
+
+
+test("welcome tribe forms preserve native facing across entry, action and exit", () => {
+  const model = { unitStats, creatureAnimationSpeed, unitMovementPosition };
+  const variants = [{}, { feet: 1 }, { feet: 2, antenna: 1 }, { feet: 1, strength: 1 }];
+  for (const key of ["bean", "spore", "pebble", "spring"]) for (const attributes of variants)
+    for (const phase of ["enter", "perform", "rest", "exit"]) {
+      const motion = welcomeTravelMotion(model, { key, attributes, width: 480, size: 146, worldPixels: 364,
+        elapsedMs: 250, timeline: 10.25, startedAt: 10, phase, reducedMotion: false, id: "native-facing" });
+      assert.equal(motion.agent.facing, 1);
+      assert.equal(motion.cell, 364);
+      assert.deepEqual(motion.agent.attributes, attributes);
+    }
+  const neutral = welcomeTravelMotion(model, { key: "talon-owl", attributes: {}, width: 480, size: 146, worldPixels: 364,
+    elapsedMs: 250, timeline: 10.25, startedAt: 10, phase: "enter", reducedMotion: false, id: "native-flight" });
+  assert.equal(neutral.agent.facing, -1);
+});

@@ -1,3 +1,4 @@
+import { unitPresentationTestSource } from "./unit-presentation-fixture.mjs";
 import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -10,7 +11,7 @@ import { SPORE_BIRTH_ANIMATION } from "./birth.mjs";
 import { combatAttributeKeys, hasCombatEvolution } from "./combat-attributes.mjs";
 import { createNestGrowthPlayback, nestGrowthSounds } from "./nest-growth.mjs";
 
-const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
+const source = unitPresentationTestSource(readFileSync(new URL("./game.js", import.meta.url), "utf8"));
 
 function declaration(name) {
   const match = source.match(new RegExp("^    (?:async )?function " + name + "\\([^]*?^    }", "m"));

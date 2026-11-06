@@ -1,3 +1,4 @@
+import { unitPresentationTestSource } from "./unit-presentation-fixture.mjs";
 import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -99,7 +100,7 @@ test("invalid or unavailable body sockets keep the ordinary attachment fallback 
 });
 
 function gameHarness(ready,frameCamera=SPRING_THRUST_CAMERA){
-  const source=readFileSync(new URL("./game.js",import.meta.url),"utf8"),match=source.match(/^    function drawAgentAppearanceLayer\([^]*?^    }/m);
+  const source=unitPresentationTestSource(readFileSync(new URL("./game.js",import.meta.url),"utf8")),match=source.match(/^    function drawAgentAppearanceLayer\([^]*?^    }/m);
   const calls=[],flags=[],sockets=[],motions=[],outlines=[],layers=[],sprite={width:frameCamera?.width||512,height:frameCamera?.height||512,...(frameCamera?{combatCamera:frameCamera}:{})};
   const sheet={sprite:{complete:ready,naturalWidth:ready?2064:0}},scope={
     Spawner:{unitDisplayAttributes,combatAttributeKeys,hasCombatEvolution,unitAnimationPose:()=>({action:"attack"})},state:{simSeconds:10.3},idleMotion:{matches:false},AGENT_HEIGHT:.7,

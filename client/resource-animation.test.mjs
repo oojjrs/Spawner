@@ -1,3 +1,4 @@
+import { unitPresentationTestSource } from "./unit-presentation-fixture.mjs";
 import { sproutJumpOffset } from "./sprout-roots.mjs";
 import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
 import { imageFrameGeometry } from "./image-geometry.mjs";
@@ -9,7 +10,7 @@ import { UNIT_ANIMATIONS, unitAnimationPose } from "./unit-animation.mjs";
 import { RESOURCE_TYPES, resourceTypeForCell } from "../server/resources.mjs";
 import { RESOURCE_ECONOMY } from "../server/economy.mjs";
 
-const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
+const source = unitPresentationTestSource(readFileSync(new URL("./game.js", import.meta.url), "utf8"));
 
 function rendering() {
   const draws = [];

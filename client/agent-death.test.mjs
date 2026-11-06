@@ -1,3 +1,4 @@
+import { unitPresentationTestSource } from "./unit-presentation-fixture.mjs";
 import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
 import { imageFrameGeometry } from "./image-geometry.mjs";
 import { imageDimensions } from "./image-audit.mjs";
@@ -12,7 +13,7 @@ import { hasCombatEvolution } from "./combat-attributes.mjs";
 import { UNIT_DISPLAY_SIZES } from "./unit-size.mjs";
 
 const metadata = JSON.parse(readFileSync(new URL("../DesignAssets/Tribes/sprout/AnimationStudies/death-v1/sequence.json", import.meta.url), "utf8"));
-const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
+const source = unitPresentationTestSource(readFileSync(new URL("./game.js", import.meta.url), "utf8"));
 
 function fixture() {
   const colony = { id: 1, ownerId: "death-animation-test", tribe: "bean", x: 40, y: 40, occupiedCells: new Set(["2,2"]) };
@@ -121,7 +122,7 @@ test("모든 부족의 사망 첫 자세는 256·512 프레임 해상도와 무�
   const scope = createContext({
     Spawner: { unitDisplayAttributes, UNIT_ANIMATIONS, AGENT_DEATH_ANIMATIONS, agentDeathAnimation },
     Image: class { complete = true; naturalWidth = 2048; async decode() {} },
-    assetSource: path => path, combatSheets: new Map(),
+    assetSource: path => path, combatSheets: new Map(), sharedPresentation: null,
     agentMovementSheets: new Map(["spore", "pebble", "spring"].map(tribe => [tribe, {}])),
     unitAnimationReady: new Map(), starterObjectSprite: starter, prepareSproutCombatFrames() {},
     tribeArt: {

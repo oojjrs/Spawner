@@ -1,3 +1,4 @@
+import { unitPresentationTestSource } from "./unit-presentation-fixture.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -54,7 +55,7 @@ test("피격 시작·프레임 경계·종료와 재피격은 시뮬레이션 �
 });
 
 test("게임은 이동·대기보다 피격을 먼저 그린다", () => {
-  const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
+  const source = unitPresentationTestSource(readFileSync(new URL("./game.js", import.meta.url), "utf8"));
   const declaration = source.match(/^    function drawAgentUnscaledBody\([^]*?^    }/m)[0];
   const calls = [];
   const context = createContext({ displayedAgent: agent => agent, state: { camera: { zoom: 64 } }, viewport: { width: 500, height: 500 },

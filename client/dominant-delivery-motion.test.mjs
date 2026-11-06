@@ -1,3 +1,4 @@
+import { unitPresentationTestSource } from "./unit-presentation-fixture.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -124,7 +125,7 @@ test("production art uses one own body, distinct idle/phase caches and safe retr
 });
 
 test("existing world wrapper applies bean delivery scale once and keeps exact partial cargo release", () => {
-  const code = readFileSync(new URL("./game.js", import.meta.url), "utf8"), draws = [], scales = [], cargo = [];
+  const code = unitPresentationTestSource(readFileSync(new URL("./game.js", import.meta.url), "utf8")), draws = [], scales = [], cargo = [];
   const context = createContext({ state: { simSeconds: 10.23 }, canvas: {}, appearanceWorldPoses: new Map(),
     Spawner: { unitDisplayAttributes }, displayedAgent: value => value, AGENT_HEIGHT: .7, performance: { now: () => 0 },
     agentBodyPose: () => ({ scaleX: .98, scaleY: 1.07 }), foodDeliveryPose: () => ({}), agentJumpOffset: () => 0,

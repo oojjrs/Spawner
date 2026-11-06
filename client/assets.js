@@ -4,11 +4,13 @@
   globalThis.SpawnerLocalAssetSources = sources;
   const presentation = globalThis.SpawnerWelcomeLoading;
   const priorityPaths = presentation ? [
+    "DesignAssets/Units/starter-sprout-bean.png",
+    ...globalThis.Spawner.PLAYER_TRIBES.filter(tribe => tribe.key !== "bean").map(tribe => tribe.starter),
     ...Object.values(globalThis.Spawner.UNIT_ANIMATIONS).flatMap(animations => Object.entries(animations)
       .filter(([action]) => action === "idle" || action === "walk" || action === "jump")
       .map(([, animation]) => animation.image)),
     ...["body", "sprout-left", "sprout-right", "sprout-stem", "green-foot"].map(name => "DesignAssets/Units/BaseParts/" + name + ".png"),
-    ...["bean-root-rig", "antenna-1", "strength-1"].map(name => "DesignAssets/Units/Parts/" + name + ".png"),
+    ...["bean-root-rig", "feet-1", "antenna-1", "strength-1"].map(name => "DesignAssets/Units/Parts/" + name + ".png"),
     "DesignAssets/Audio/bean-footstep.mp3", "DesignAssets/Audio/bean-landing.mp3", "DesignAssets/Audio/spring-landing.mp3",
     "DesignAssets/Audio/ui-click.wav", "DesignAssets/Audio/new-discovery.mp3",
     ...["move-spore", "move-pebble", "move-spring"].map(name => globalThis.SpawnerMovementAudio.sources[name])

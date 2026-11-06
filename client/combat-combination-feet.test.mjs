@@ -1,3 +1,4 @@
+import { unitPresentationTestSource } from "./unit-presentation-fixture.mjs";
 import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -111,7 +112,7 @@ test("세 종족 7개 전투 속성 조합은 피격에서 발과 몸을 한 번
 });
 
 test("실제 게임 콜백은 등록된 발·몸 레이어를 요청하고 기존 분리되지 않은 콜백도 지원한다", () => {
-  const game = readFileSync(new URL("./game.js",import.meta.url),"utf8");
+  const game = unitPresentationTestSource(readFileSync(new URL("./game.js",import.meta.url),"utf8"));
   const start=game.indexOf("    function drawAgentAppearanceLayer("), end=game.indexOf("    function drawCombatAgentAttributes(",start);
   const requests=[];
   const box={AGENT_HEIGHT:.8,state:{simSeconds:10.3},idleMotion:{matches:false},unitAnimationSheets:new Map(),

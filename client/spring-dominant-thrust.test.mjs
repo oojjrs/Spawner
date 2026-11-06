@@ -1,3 +1,4 @@
+import { unitPresentationTestSource } from "./unit-presentation-fixture.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -127,7 +128,7 @@ test("a draw exception unwinds transforms, discards the private frame and retrie
 });
 
 test("the real world/detail draw function preserves padded pivot, facing, size and outline coordinates",async()=>{
-  const {renderer,surface}=await art(),source=readFileSync(new URL("./game.js",import.meta.url),"utf8"),outlines=[];
+  const {renderer,surface}=await art(),source=unitPresentationTestSource(readFileSync(new URL("./game.js",import.meta.url),"utf8")),outlines=[];
   const scope={Spawner:{unitDisplayAttributes,combatAttributeKeys,hasCombatEvolution,unitAnimationPose:()=>({action:"attack"})},state:{simSeconds:10.3},idleMotion:{matches:false},AGENT_HEIGHT:.7,
     unitAnimationSheets:new Map(),drawCombatAgentAttributes(){},drawAgentAppearanceBody(){throw Error("Unexpected base fallback");},drawSelectionOutline:(...args)=>outlines.push(args),
     combatAttributeArt:{ready:()=>true,frame:(agent,time,scale,drawBody,drawAttributes)=>renderer.frame(agent,time,drawAttributes,drawBody)}};

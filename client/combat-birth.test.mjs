@@ -1,3 +1,4 @@
+import { unitPresentationTestSource } from "./unit-presentation-fixture.mjs";
 import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -8,7 +9,7 @@ import { agentBirthDuration, agentBirthMotion } from "../server/birth.mjs";
 import { SPORE_BIRTH_ANIMATION, sporeBirthPlacement, SPRING_BIRTH_ANIMATION, springBirthPlacement,
   PEBBLE_BIRTH_ANIMATION, pebbleBirthPlacement } from "./birth.mjs";
 
-const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
+const source = unitPresentationTestSource(readFileSync(new URL("./game.js", import.meta.url), "utf8"));
 const tribes = ["bean", "spore", "pebble", "spring"];
 const combatKeys = ["blade", "piercing", "carapace", "guard", "regeneration"];
 const ordinaryKeys = ["strength", "feet", "antenna"];
@@ -85,7 +86,7 @@ test("전사 새싹콩은 공통 탄생 동작에 완성 외형을 한 번만 �
     drawBirthSeed() {}, drawBirthFragments() {}, drawBirthImpact() {},
     drawAgentFeet() { assert.fail("중복 발"); }, drawAgentTail() { assert.fail("중복 꼬리"); },
     drawAgentHead() { assert.fail("중복 머리"); }, drawSelectionOutline() {} });
-  runInContext(declaration("drawAgentBirth"), context);
+  runInContext(declaration("drawAgentRangedBirth") + "\n" + declaration("drawAgentBirth"), context);
   const drawing = { save() {}, restore() {}, translate(...values) { transforms.push(["translate", ...values]); },
     rotate(...values) { transforms.push(["rotate", ...values]); }, scale(...values) { transforms.push(["scale", ...values]); },
     drawImage(...values) { draws.push(values); } };

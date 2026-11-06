@@ -1,3 +1,4 @@
+import { unitPresentationTestSource } from "./unit-presentation-fixture.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -125,7 +126,7 @@ test("render-only observation preserves deterministic mixed-build combat, true e
 });
 
 test("actual world/detail renderer selects only the dominant combat layer and keeps actual attributes", () => {
-  const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
+  const source = unitPresentationTestSource(readFileSync(new URL("./game.js", import.meta.url), "utf8"));
   const code = source.match(/^    function drawAgentAppearanceLayer\([^]*?^    }/m)[0];
   const forwarded = [], fallbacks = [], scope = createContext({
     Spawner: { unitDisplayAttributes, combatAttributeKeys, hasCombatEvolution, unitAnimationPose: () => ({ action: "attack" }) },
@@ -144,7 +145,7 @@ test("actual world/detail renderer selects only the dominant combat layer and ke
 });
 
 test("world secretion draw preserves facing, one growth scale, load fallback and unfinished resource actions", () => {
-  const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
+  const source = unitPresentationTestSource(readFileSync(new URL("./game.js", import.meta.url), "utf8"));
   const code = source.match(/^    function drawAgentRanged\([^]*?^    }/m)[0];
   const draws = [], scales = [], state = { simSeconds: .2 };
   let ready = true;
@@ -174,7 +175,7 @@ test("world secretion draw preserves facing, one growth scale, load fallback and
 
 
 test("design and template portrait sources accept loaded secretion Images and existing canvases", () => {
-  const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
+  const source = unitPresentationTestSource(readFileSync(new URL("./game.js", import.meta.url), "utf8"));
   const code = source.match(/^    function agentImageSource\([^]*?^    }/m)[0];
   let sprite = { currentSrc: "approved-secretion.png", src: "fallback.png" }, encodes = 0;
   const scope = createContext({ Spawner: { unitRangedAppearance }, assetSource: path => "assets/" + path,

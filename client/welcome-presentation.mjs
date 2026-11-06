@@ -40,10 +40,12 @@ export function welcomeCreatureScale(animation, bounds, top, displaySize, width,
 
 // Construct the same cell moves used by the game; a complete move always lands
 // before switching to an idle/attack pose in the middle of the header.
-export function welcomeTravelMotion(model, { key, attributes = {}, width, size, elapsedMs, timeline, phase, startedAt, reducedMotion = false, id = "welcome" }) {
+export function welcomeTravelMotion(model, { key, attributes = {}, width, size, elapsedMs, timeline, phase, startedAt, reducedMotion = false, id = "welcome", worldPixels }) {
   const neutral = !["bean", "spore", "pebble", "spring"].includes(key);
-  const speed = neutral ? model.creatureAnimationSpeed(key) : model.unitStats(attributes, key).speed;
-  const cell = neutral ? Math.min(240, width * .75) : size / .7;
+  const stats = neutral ? null : model.unitStats(attributes, key);
+  const speed = neutral ? model.creatureAnimationSpeed(key) : model.unitTravelSpeed ?
+    model.unitTravelSpeed({ tribe: key, stats }, 0) : stats.speed;
+  const cell = Number.isFinite(worldPixels) ? worldPixels : neutral ? Math.min(240, width * .75) : size / .7;
   const steps = Math.max(1, Math.ceil((width / 2 + size) / cell));
   const durationMs = (neutral ? steps / speed : (steps - 1) / speed + Math.min(1, 1 / speed)) * 1000;
   const moving = !reducedMotion && (phase === "enter" || phase === "exit");
@@ -53,7 +55,7 @@ export function welcomeTravelMotion(model, { key, attributes = {}, width, size, 
   while (step < steps - 1 && timeline >= origin + (step + 1) / speed) step++;
   const moveStartedAt = origin + step / speed;
   const moveEndedAt = origin + (step + 1) / speed;
-  const agent = { id, attributes, health: 1, facing: -1, mode: moving ? "walk" : "idle",
+  const agent = { id, attributes, stats, carrying: 0, straightSteps: 0, health: stats?.health || 1, facing: neutral ? -1 : 1, mode: moving ? "walk" : "idle",
     ...(neutral ? { species: key } : { tribe: key }), stepCount: step + 1,
     moveDuration: moving ? neutral ? moveEndedAt - moveStartedAt : Math.min(1, 1 / speed) : 0, moveStartedAt,
     ...(!neutral ? { moveAnimationStartedAt: speed >= 1 ? origin : moveStartedAt } : {}),
