@@ -251,7 +251,7 @@
     </figcaption>
     <aside class="map-logic" id="map-logic" aria-label="배치 로직 설명" hidden><span class="map-logic-current">현재 미리보기</span><h3 id="map-logic-title"></h3><div id="map-logic-body"></div></aside>
   </figure>
-  <table class="map-legend-table" id="conquest-rules" style="word-break:keep-all"><colgroup><col style="width:92px"><col></colgroup><tbody><tr><th>새싹콩</th><td>0–120초 · 중립 ≈300초 · 종족 420초+ · 정찰 &lt;420초</td></tr><tr><th>둥지</th><td>Lv.2 80P · Lv.3 400P · Lv.4 2000P · AI ≥1200초</td></tr><tr><th>일꾼:군사</th><td>80:20 → 30:70 · 30–40 · 60–70</td></tr></tbody></table>
+  <table class="map-legend-table" id="conquest-rules" style="word-break:keep-all"><colgroup><col style="width:92px"><col></colgroup><tbody><tr><th>새싹콩</th><td>0–120초 · 중립 ≈300초 · 종족 420초+ · 정찰 &lt;420초</td></tr><tr><th>둥지</th><td>Lv.2 20P · Lv.3 400P · Lv.4 2000P · AI ≥1200초</td></tr><tr><th>일꾼:군사</th><td>80:20 → 30:70 · 30–40 · 60–70</td></tr></tbody></table>
 <details class="map-encounter-rules" id="world-encounter-rules"><summary>중립 유닛 등장·개체 수·재등장 규칙 · 19종</summary>
     <ul class="map-encounter-common">
       <li>지형·물가·둥지 보호 조건을 따르며, 딱정벌레 외 일반종은 첫 결원부터 주기마다 1마리씩 정원까지 보충한다.</li>
@@ -2797,7 +2797,7 @@ return { generateHydrology, hydrologyResourceSuitability, populateWatershedResou
 modules["server/conquest-pacing.mjs"] = (() => {
 const CONQUEST_PACING = Object.freeze({ quietUntil:120, guidanceAt:160, neutralConflictAt:300, tribeContactAt:420,
   expertLevelFourAt:600, aiLevelFourAt:1200, activePopulation:36, inefficientPopulation:70,
-  workerShare:Object.freeze([.8,.65,.45,.3]), nestCosts:Object.freeze([80,400,2000,null]),
+  workerShare:Object.freeze([.8,.65,.45,.3]), nestCosts:Object.freeze([20,400,2000,null]),
   attributeCosts:Object.freeze([0,0,8,16,24]), aiUpgradeAt:Object.freeze([0,270,690,1200]),
   productionInterval:3, frontierSamples:48, preferredScouts:4 });
 
@@ -4477,7 +4477,7 @@ const ATTRIBUTE_DNA = (() => {
   const genes = definitions.map((entry,index) => ({id:entry[0],category:entry[1],turn:entry[2],price:entry[3]/2,code:alphabet[Math.floor(index/16)]+alphabet[Math.floor(index/4)%4]+alphabet[index%4],color:colors[entry[1]]}));
   const lookup = new Map(genes.map(gene=>[gene.id,gene]));
   const specification=[{"gene":"gather","grade":1,"steps":[0,1],"order":1},{"gene":"health","grade":1,"steps":[0,4],"order":3},{"gene":"blade","grade":2,"steps":[0,1,5],"order":5},{"gene":"power","grade":2,"steps":[0,0,0],"order":3},{"gene":"speed","grade":2,"steps":[0,0,1],"order":4},{"gene":"capacity","grade":1,"steps":[0,0],"order":0},{"gene":"movement","grade":1,"steps":[0,5],"order":4},{"gene":"antenna","grade":2,"steps":[0,1,2],"order":7},{"gene":"carapace","grade":2,"steps":[0,1,0],"order":8},{"gene":"combo","grade":3,"steps":[0,1,5,0],"order":9},{"gene":"legs","grade":3,"steps":[0,1,0,4],"order":10},{"gene":"armor","grade":3,"steps":[0,1,2,0],"order":11},{"gene":"vision","grade":3,"steps":[0,1,2,4],"order":12},{"gene":"harvest","grade":3,"steps":[0,1,0,5],"order":13},{"gene":"harvestSpeed","grade":1,"steps":[0,2],"order":2},{"gene":"loadSpeed","grade":3,"steps":[0,1,2,3],"order":15},{"gene":"accuracy","grade":3,"steps":[0,1,0,2],"order":16},{"gene":"tenacity","grade":3,"steps":[0,1,0,1],"order":17},{"gene":"healing","grade":3,"steps":[0,2,1,3],"order":18},{"gene":"block","grade":3,"steps":[0,0,1,5],"order":19},{"gene":"evasion","grade":3,"steps":[0,1,1,2],"order":20},{"gene":"parry","grade":4,"steps":[0,1,2,0,1],"order":21},{"gene":"counter","grade":4,"steps":[0,1,0,4,0],"order":22},{"gene":"critical","grade":4,"steps":[0,2,1,0,2],"order":23},{"gene":"criticalPower","grade":4,"steps":[0,1,3,1,0],"order":24},{"gene":"penetration","grade":4,"steps":[0,1,2,0,2],"order":25},{"gene":"comboPower","grade":4,"steps":[0,1,3,1,2],"order":26},{"gene":"blockPower","grade":4,"steps":[0,1,2,3,1],"order":27},{"gene":"counterPower","grade":4,"steps":[0,1,5,1,0],"order":28},{"gene":"reduction","grade":4,"steps":[0,1,0,5,1],"order":29},{"gene":"stun","grade":4,"steps":[0,1,5,4,0],"order":30},{"gene":"stunTime","grade":4,"steps":[0,1,0,5,0],"order":31},{"gene":"bleed","grade":4,"steps":[0,1,2,1,0],"order":32},{"gene":"bleedPower","grade":4,"steps":[0,1,2,3,5],"order":33},{"gene":"area","grade":4,"steps":[0,1,0,1,3],"order":34},{"gene":"areaPower","grade":4,"steps":[0,1,0,2,3],"order":35},{"gene":"lifesteal","grade":4,"steps":[0,1,0,5,4],"order":36},{"gene":"reflection","grade":4,"steps":[0,1,2,1,3],"order":37},{"gene":"regeneration","grade":4,"steps":[0,1,0,1,2],"order":38},{"gene":"comboSpeed","grade":4,"steps":[0,1,2,3,4],"order":39},{"gene":"focus","grade":4,"steps":[0,2,0,1,5],"order":40},{"gene":"healer","grade":2,"steps":[0,1,3],"order":6},{"gene":"secretion","grade":2,"steps":[0,0,2],"order":9},{"gene":"rangedPower","grade":3,"steps":[0,5,4,4],"order":41},{"gene":"rangedSpeed","grade":3,"steps":[0,5,5,0],"order":42}];
-  for(const entry of specification){const gene=lookup.get(entry.gene);gene.grade=entry.grade;gene.steps=entry.steps;gene.order=entry.order;}
+  for(const entry of specification){const gene=lookup.get(entry.gene);gene.grade=entry.grade;gene.steps=entry.steps;gene.order=entry.order;if(gene.grade<=2)gene.price/=2;}
   const catalog=genes.slice().sort((a,b)=>a.grade-b.grade||a.order-b.order);
 
   const boardRadii=[2,3,4,5],profiles=new Map(),shapeCache=new Map();
@@ -5027,7 +5027,7 @@ return { recordColonyIncome, restoreColonyIncome, colonySupply, colonyForagers }
 modules["server/tribe-start.mjs"] = (() => {
 const { ATTRIBUTE_DNA } = modules["server/dna.mjs"];
 
-const PLAYER_STARTING_POINTS = 30;
+const PLAYER_STARTING_POINTS = 50;
 
 const TRIBE_STARTING_UNITS = Object.freeze({
   bean: Object.freeze([["antenna"], ["strength"], [], []].map(slots => Object.freeze(slots))),
