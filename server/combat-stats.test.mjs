@@ -106,6 +106,7 @@ test("실제 4종족의 생성·이전 저장·성장·재복원에 종족별 �
     room.games.set(colony.ownerId, game);
     const saved = JSON.parse(game.save());
     for (const agent of saved.state.agents) {
+      agent.dna = null; delete agent.stats.dna; // Explicit old-save migration.
       delete agent.stats.combatStrength;
       agent.stats.health = 12;
       agent.health = 6;
@@ -177,7 +178,7 @@ test("실제 군락의 마지막 방어자 사망은 즉시 엔딩을 확정하�
     const game = createGame(room, colony);
     room.games.set(ownerId, game);
     game.agents.splice(1);
-    Object.assign(game.agents[0], { x: 100, y: 100, renderFromX: 100, renderFromY: 100,
+    Object.assign(game.agents[0], { dna:null, attributes:{}, stats:unitStats({}, "bean"), x: 100, y: 100, renderFromX: 100, renderFromY: 100,
       health: 1, moveStartedAt: 0, moveDuration: 0, combatDisposition: index ? "passive" : "aggressive" });
     return game;
   });

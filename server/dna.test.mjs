@@ -123,7 +123,7 @@ test("DNA 저장·탄생·수정·복제·복원은 원본 개체의 서열과 �
   assert.equal(unitDisplaySize(restored),unitDisplaySize({tribe:"bean"})*1.02);
 });
 
-test("새 DNA는 기관으로 행동을 열고 기존 시작 개체는 원래 채집을 유지한다",()=>{
+test("DNA는 기관으로 행동을 열고 시작 개체도 같은 채집 DNA를 사용한다",()=>{
   const {game,colony,environment}=fixture(1),cell={x:40,y:38,resourceType:"clay",amount:10};
   assert.equal(canHarvestResource(cell,environment.world,{dnaGather:false},"bean"),false);
   assert.equal(canHarvestResource(cell,environment.world,{dnaGather:true},"bean"),true);
@@ -131,7 +131,7 @@ test("새 DNA는 기관으로 행동을 열고 기존 시작 개체는 원래 �
   const dna=design(["gather"],1),unit={dna,stats:dnaUnitStats(dna)};
   assert.equal(dnaCanMove(unit,42,37,[colony]),true);assert.equal(dnaCanMove(unit,42,36,[colony]),false);
   const roaming=design(["antenna"],2);assert.equal(dnaCanMove({dna:roaming,stats:dnaUnitStats(roaming)},100,100,[colony]),true);
-  assert.ok(game.agents.every(agent=>!agent.dna&&agent.stats.capacity>=1));
+  assert.ok(game.agents.every(agent=>agent.dna&&agent.stats.capacity>=1));
 });
 
 function combatFixture(sourceStats,targetStats) {

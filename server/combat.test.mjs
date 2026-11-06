@@ -314,6 +314,7 @@ test("네 종족 모두 실제 게임에서 성향을 적용하고 전투 상태
     game.agents.splice(1);
     const agent = game.agents[0], saved = JSON.parse(game.save());
     saved.state.agents[0].combatDisposition = "aggressive";
+    saved.state.agents[0].dna = null; // Explicit legacy combat migration fixture, not a starting worker.
     // Construction metamorphosis was removed; legacy saves must not freeze combat.
     saved.state.agents[0].construction = { state: "transforming", buildingKey: "storage" };
     saved.state.agents[0].mode = "transform";
@@ -371,7 +372,7 @@ test("중립으로 표시된 비선공 유니크도 실제 전투에 붙잡히�
   environment.games.set(colony.ownerId, game);
   game.agents.splice(1);
   const data = JSON.parse(game.save());
-  Object.assign(data.state.agents[0], { combatDisposition: "aggressive", x: 140, y: 140, renderFromX: 140, renderFromY: 140 });
+  Object.assign(data.state.agents[0], { dna: null, combatDisposition: "aggressive", x: 140, y: 140, renderFromX: 140, renderFromY: 140 });
   game.restore(JSON.stringify(data));
   game.agents[0].x = 139;
   environment.creatureSystem = createCreatures(environment, null);
@@ -403,6 +404,7 @@ test("방어 반격의 저장 복원은 명중을 한 번 처리하고 일반 �
 
 test("후퇴 저장은 명중 횟수와 탈출 대기 시각을 유지하고 다음 공격 전에 탈출한다", () => {
   const f = pair(); f.a.health = 20;
+  f.a.attributes.antenna = 1; // This fixture fights far from any nest.
   f.a.stats.attackPower = f.b.stats.attackPower = 1;
   f.tick(0); f.tick(.4);
   assert.ok(f.a.retreat); assert.equal(f.a.combat.completedExchanges, 2);
@@ -418,6 +420,7 @@ test("후퇴 저장은 명중 횟수와 탈출 대기 시각을 유지하고 다
 
 test("후퇴 탈출 실패 뒤에도 공격을 계속하고 같은 시각에 재시도하지 않는다", () => {
   const f = pair(); f.a.health = 20;
+  f.a.attributes.antenna = 1; // This fixture fights far from any nest.
   f.a.stats.attackPower = f.b.stats.attackPower = 1;
   let rolls = 0; f.environment.combatRandom = () => { rolls++; return .99; };
   f.tick(0); f.tick(2.5);

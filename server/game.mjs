@@ -6,7 +6,7 @@ import { worldSize } from "./world-size.mjs";
 import { ATTRIBUTES, ATTRIBUTE_SYNERGIES_ENABLED, isAttributeUnlocked, attributeCounts, migrateAttributeSlots, migrateAttributeLevels, attributeUpgradeCost, attributeUpgradeIssue, unitStats, unitCarryCapacity, unitTravelSpeed, unitTerrainSpeedMultiplier, birthCost, hasSynergy } from "./attributes.mjs";
 import { createPersonality, personalityLabels, createUtilityAI } from "./utility.mjs";
 import { NEST_LEVELS, nestUpgradeCost } from "./nests.mjs";
-import { TRIBE_STARTING_UNITS, PLAYER_STARTING_POINTS } from "./tribe-start.mjs";
+import { TRIBE_STARTING_UNITS, PLAYER_STARTING_POINTS, startingWorkerDna } from "./tribe-start.mjs";
 import { colonySupply, recordColonyIncome, restoreColonyIncome } from "./colony-supply.mjs";
 import { agentBirthDuration } from "./birth.mjs";
 import { CORPSE_LIFETIME, placeCorpse, expireCorpses } from "./corpses.mjs";
@@ -2171,8 +2171,8 @@ export function createGame(environment, colony, savedGame) {
     if (savedGame !== undefined) restore(savedGame);
     else {
       grantStartingPoints();
-      for (const slots of TRIBE_STARTING_UNITS[colony.tribe] || TRIBE_STARTING_UNITS.bean) {
-        const agent = spawnAgent({ id: null, name: suggestTemplateName(slots, state.templates), slots: [...slots], revision: 1 }, "colony");
+      for (const _ of TRIBE_STARTING_UNITS[colony.tribe] || TRIBE_STARTING_UNITS.bean) {
+        const agent = spawnAgent({ id: null, name: "기초 채집", slots: [], dna: startingWorkerDna(colony.tribe), revision: 1 }, "colony");
         if (!agent) throw new Error("둥지 주변에 초기 개체를 배치할 공간이 없습니다.");
         agent.appearanceAttributes = agentAppearanceAttributes(agent);
       }

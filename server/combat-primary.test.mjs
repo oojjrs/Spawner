@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createGame } from "./game.mjs";
+import { unitStats } from "./attributes.mjs";
 import { createCombat } from "./combat.mjs";
 
 function fixture() {
@@ -76,6 +77,8 @@ test("새 전투 예약은 저장 복원 뒤 한 번 명중하고 같은 시각 
   const enemy = createGame(environment, colony);
   environment.games.set(colony.ownerId, enemy);
   const source = game.agents[0], target = enemy.agents[0];
+  // Use explicit legacy combatants; new starting workers have no attack gene.
+  for (const agent of [source,target]) Object.assign(agent,{dna:null,attributes:{},stats:unitStats({},agent.tribe),health:100});
   for (const agent of [...game.agents, ...enemy.agents]) { agent.x = 10; agent.y = 10; }
   source.x = target.x = 60; source.y = target.y = 60;
   source.combatPrimary = target.combatPrimary = null;
