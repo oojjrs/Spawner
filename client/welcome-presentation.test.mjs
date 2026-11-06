@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createWelcomeRoster, welcomeCreatureScale, prepareWelcomeChoice, welcomeTravelMotion, drawWelcomeChoice } from "./welcome-presentation.mjs";
-import { CREATURE_IDLE_ANIMATIONS, unitMovementPosition, creatureAnimationSpeed } from "./unit-animation.mjs";
+import { CREATURE_IDLE_ANIMATIONS, unitMovementPosition, creatureAnimationSpeed, unitAnimationPose } from "./unit-animation.mjs";
 import { unitStats } from "../server/attributes.mjs";
 
 test("opening base forms consume four identities from a full appearance bag", () => {
@@ -148,4 +148,36 @@ test("welcome tribe forms preserve native facing across entry, action and exit",
   const neutral = welcomeTravelMotion(model, { key: "talon-owl", attributes: {}, width: 480, size: 146, worldPixels: 364,
     elapsedMs: 250, timeline: 10.25, startedAt: 10, phase: "enter", reducedMotion: false, id: "native-flight" });
   assert.equal(neutral.agent.facing, -1);
+});
+
+test("slow welcome entries and exits keep walking between native cell moves", () => {
+  const model = { unitStats, creatureAnimationSpeed, unitMovementPosition };
+  for (const key of ["spore", "pebble", "spring"]) for (const phase of ["enter", "exit"]) {
+    for (const elapsedMs of [1150, 1450, 1750, 2150, 2450]) {
+      const motion = welcomeTravelMotion(model, { key, attributes: {}, width: 480, size: 100, worldPixels: 144,
+        elapsedMs, timeline: 20 + elapsedMs / 1000, startedAt: 20, phase, reducedMotion: false, id: "continuous" });
+      assert.ok(motion.agent.moveStartedAt + motion.agent.moveDuration > 20 + elapsedMs / 1000);
+      assert.equal(unitAnimationPose(motion.agent, 20 + elapsedMs / 1000).action, "walk");
+      assert.ok(motion.position.progress < 1);
+      assert.equal(motion.agent.moveAnimationStartedAt, 20);
+    }
+  }
+});
+
+test("welcome entry and exit share native pose clocks and finish fully landed", () => {
+  const model = { unitStats, creatureAnimationSpeed, unitMovementPosition };
+  for (const key of ["bean", "spore", "pebble", "spring", "talon-owl", "old-garden-snail"]) {
+    const request = { key, attributes: {}, width: 480, size: 100, worldPixels: 144, elapsedMs: 0,
+      timeline: 30, startedAt: 30, reducedMotion: false, id: "same-pose" };
+    const start = welcomeTravelMotion(model, { ...request, phase: "enter" });
+    for (const ratio of [0, .17, .39, .64, .99, 1]) {
+      const sample = { ...request, elapsedMs: start.durationMs * ratio, timeline: 30 + start.durationMs * ratio / 1000 };
+      const enter = welcomeTravelMotion(model, { ...sample, phase: "enter" });
+      const exit = welcomeTravelMotion(model, { ...sample, phase: "exit" });
+      assert.deepEqual(enter.agent, exit.agent);
+      assert.equal(enter.durationMs, exit.durationMs);
+      assert.ok(Math.abs(enter.x - exit.x - (start.x - request.width / 2)) < 1e-8);
+      if (ratio === 1) { assert.ok(Math.abs(enter.x - 240) < 1e-8); assert.ok(Math.abs(enter.position.progress - 1) < 1e-8); }
+    }
+  }
 });

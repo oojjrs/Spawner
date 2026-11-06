@@ -85,7 +85,6 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
   const neutralSpecies = [...Object.keys(globalThis.Spawner.CREATURE_IDLE_ANIMATIONS), "talon-owl", "spiny-back-beetle"];
   const nextChoice = globalThis.Spawner.createWelcomeRoster(tribes, neutralSpecies, appearances.length);
   const preparedCreatures = new Set();
-  const creatureEnvelopes = new Map();
   let appearanceNumber = 0;
   let current = nextChoice();
   let upcoming = null;
@@ -151,45 +150,9 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
         nativeAssets.prepareDisplaySize(choice.key, sprite, idle, 1.4 * scale * (idle.registrationScale || 1));
       }
       for (const action of ["walk", "attack"]) creatureResources[action].set(choice.key, { animation: poses[action], sprite: images.get(action), scale });
-      creatureEnvelopes.set(choice.key, measureCreatureEnvelope(choice.key, poses));
       preparedCreatures.add(choice.key);
     }
     prepareFrame(choice);
-  }
-  function measureCreatureEnvelope(species, poses) {
-    const surface = createSurface(192, 192), pixels = surface.getContext("2d", { willReadFrequently: true });
-    const agent = { species, attributes: {}, health: 1, facing: -1, animationStartedAt: 0, stepCount: 1,
-      moveStartedAt: 0, moveDuration: 0, flightStartedAt: 0, mode: "idle" };
-    const scale = nativeAssets.displayScale(agent), cell = 48;
-    pixels.translate(96, 160);
-    pixels.scale(scale, scale);
-    for (const [action, animation] of Object.entries(poses)) {
-      const period = action === "walk" ? 1 / model.creatureAnimationSpeed(species) : duration(animation) / 1000;
-      const samples = Math.max(64, animation.durationsMs.length * 2);
-      agent.mode = action === "attack" ? "attack" : action === "walk" ? "walk" : "idle";
-      agent.attack = action === "attack" ? { startedAt: 0, speed: 1, directionX: -1 } : null;
-      agent.attackStartedAt = action === "attack" ? 0 : undefined;
-      const times = Array.from({ length: samples }, (_, index) => period * (index + .5) / samples);
-      let stamp = 0;
-      for (const milliseconds of animation.durationsMs) {
-        times.push(period * (stamp + milliseconds / 2) / duration(animation));
-        stamp += milliseconds;
-      }
-      for (const time of times) {
-        agent.moveDuration = action === "walk" ? period : 0;
-        const pose = model.creaturePresentationPose(model, agent, time, false, creatureResources, null);
-        if (pose) model.drawCreaturePresentation(pixels, pose, 0, species === "spiny-back-beetle" ? -.14 * cell : 0, cell, null, null);
-      }
-    }
-    const envelope = { left: 0, right: 0, top: 0, bottom: 0 };
-    const data = pixels.getImageData(0, 0, 192, 192).data;
-    for (let y = 0; y < 192; y++) for (let x = 0; x < 192; x++) if (data[(y * 192 + x) * 4 + 3] >= 8) {
-      envelope.left = Math.min(envelope.left, (x - 97) / cell);
-      envelope.right = Math.max(envelope.right, (x - 94) / cell);
-      envelope.top = Math.min(envelope.top, (y - 161) / cell);
-      envelope.bottom = Math.max(envelope.bottom, (y - 158) / cell);
-    }
-    return envelope;
   }
   function prepareUpcoming() {
     const choice = nextChoice();
@@ -222,7 +185,7 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
     }
     audioPrimed = true;
     const motions = Array.isArray(motion) ? motion : [motion];
-    const agents = motions.filter(value => value && value.x + motionSize() / 2 >= 0 && value.x - motionSize() / 2 <= width).map(value => value.agent);
+    const agents = motions.filter(value => value && value.x + value.size / 2 >= 0 && value.x - value.size / 2 <= width).map(value => value.agent);
     const events = [...globalThis.SpawnerMovementAudio.update(movementPlayback, agents, time, globalThis.Spawner),
       ...globalThis.SpawnerCombatAudio.update(combatPlayback, agents, [], time)];
     for (const event of events) audioConnection.playWelcome(event.name, 1);
@@ -239,12 +202,7 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
     return animation.durationsMs.reduce((total, value) => total + value, 0);
   }
   function groundY() { return height * .88; }
-  function worldPixels() {
-    const zoom = Math.min(480, width * .8, height * 1.3), envelope = creatureEnvelopes.get(current.key);
-    if (!envelope) return zoom;
-    return Math.min(zoom, (width / 2 - 8) / Math.max(.001, -envelope.left, envelope.right),
-      (groundY() - 34) / Math.max(.001, -envelope.top), (height - groundY() - 6) / Math.max(.001, envelope.bottom));
-  }
+  function worldPixels() { return Math.min(288, width * .58, height * .54); }
   function motionSize() { return (model.UNIT_DISPLAY_SIZES[current.key] || .4) * worldPixels(); }
   function travelMotion(atElapsed, atTime) {
     const size = motionSize();
@@ -252,15 +210,7 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
       attributes: appearances[current.variant][current.key === "bean" ? "bean" : "others"], width, size, elapsedMs: Number.isFinite(atElapsed) ? atElapsed : elapsed,
       timeline: Number.isFinite(atTime) ? atTime : timeline, phase, startedAt: phaseStartedAt, reducedMotion: reducedMotion.matches,
       id: "welcome-" + current.key + ":" + appearanceNumber, worldPixels: worldPixels() };
-    let lead = 0;
-    if (phase === "enter" && !reducedMotion.matches) {
-      const initial = globalThis.Spawner.welcomeTravelMotion(globalThis.Spawner, { ...request, elapsedMs: 0, timeline: phaseStartedAt });
-      lead = Math.max(0, initial.x - width - size / 2) / initial.cell * initial.agent.moveDuration * 1000;
-      request.elapsedMs += lead;
-      request.startedAt -= lead / 1000;
-    }
     const motion = globalThis.Spawner.welcomeTravelMotion(globalThis.Spawner, request);
-    motion.durationMs -= lead;
     motion.agent.animationStartedAt = phaseStartedAt;
     if (phase === "perform" && tribes.includes(current.key) && animations[current.key].jump) {
       motion.agent.mode = "jump";

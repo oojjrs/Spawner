@@ -5709,23 +5709,24 @@ function welcomeTravelMotion(model, { key, attributes = {}, width, size, elapsed
   const speed = neutral ? model.creatureAnimationSpeed(key) : model.unitTravelSpeed ?
     model.unitTravelSpeed({ tribe: key, stats }, 0) : stats.speed;
   const cell = Number.isFinite(worldPixels) ? worldPixels : neutral ? Math.min(240, width * .75) : size / .7;
-  const steps = Math.max(1, Math.ceil((width / 2 + size) / cell));
-  const durationMs = (neutral ? steps / speed : (steps - 1) / speed + Math.min(1, 1 / speed)) * 1000;
+  const steps = Math.max(1, Math.ceil((width / 2 + size / 2) / cell));
+  const moveDuration = neutral ? 1 / speed : Math.min(1, 1 / speed);
+  const durationMs = steps * moveDuration * 1000;
   const moving = !reducedMotion && (phase === "enter" || phase === "exit");
   const origin = Number.isFinite(startedAt) ? startedAt : timeline - elapsedMs / 1000;
-  let step = Math.max(0, Math.min(steps - 1, Math.floor(elapsedMs / 1000 * speed)));
-  while (step > 0 && timeline < origin + step / speed) step--;
-  while (step < steps - 1 && timeline >= origin + (step + 1) / speed) step++;
-  const moveStartedAt = origin + step / speed;
-  const moveEndedAt = origin + (step + 1) / speed;
+  let step = Math.max(0, Math.min(steps - 1, Math.floor(elapsedMs / 1000 / moveDuration)));
+  while (step > 0 && timeline < origin + step * moveDuration) step--;
+  while (step < steps - 1 && timeline >= origin + (step + 1) * moveDuration) step++;
+  const moveStartedAt = origin + step * moveDuration;
+  const moveEndedAt = origin + (step + 1) * moveDuration;
   const agent = { id, attributes, stats, carrying: 0, straightSteps: 0, health: stats?.health || 1, facing: neutral ? -1 : 1, mode: moving ? "walk" : "idle",
     ...(neutral ? { species: key } : { tribe: key }), stepCount: step + 1,
-    moveDuration: moving ? neutral ? moveEndedAt - moveStartedAt : Math.min(1, 1 / speed) : 0, moveStartedAt,
-    ...(!neutral ? { moveAnimationStartedAt: speed >= 1 ? origin : moveStartedAt } : {}),
+    moveDuration: moving ? moveEndedAt - moveStartedAt : 0, moveStartedAt,
+    ...(!neutral ? { moveAnimationStartedAt: origin } : {}),
     flightStartedAt: origin, renderFromX: -step, renderFromY: 0, x: -step - 1, y: 0 };
   const position = model.unitMovementPosition(agent, timeline, reducedMotion);
   const x = moving ? width / 2 + (phase === "enter" ? steps * cell : 0) + position.x * cell : width / 2;
-  return { agent, position, x, durationMs, cell };
+  return { agent, position, x, durationMs, cell, size };
 }
 
 // A rejected decode or lazy rig must not leave the rotation waiting forever.

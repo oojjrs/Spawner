@@ -12,6 +12,53 @@
 
 - 기록자 Codex, 결정 주체 사용자. 출처 채팅6ae7a6f41c94819380facdaa018ca2b0, 부모 승인·즉시푸시 요청 인계. 원 발언 시각/항목 ID 불명. 이전 다리 결함 기각본을 제외하고 승인된 넝쿨거북 connected-v2 및 그늘족제비 four-paws-v7 시트/GIF·규격만 보존한다. 기존 기획서 공격 셀 링크만 변경, 문구유지. 게임 적용·배포 없음.
 - latestmain4ec7af35 fetch 확인, 6프레임 RGBA시트와 GIF 읽기 확인. GIF에는 검토용 정지시간이 포함될 수 있으며 실제동작시간은 각attack.json에 보존한다.
+## 웰컴 헤더 회귀 수정 로컬 커밋 범위 확정 · 01a1b13a
+
+- 기록 ID: welcome-complete-repair-commit-freeze-20261107-01a1b13a. 기록 시각 2026-11-07T00:15:48+09:00; 기록자·분리/로컬Git판단 Codex /root, 커밋승인 사용자. 출처현재채팅01a1b13a-d56e-7223-9c1b-a82747d2de3f의 「커밋」,H:/Spawner Windows PowerShell local. 원발언정확시각·항목ID·PC식별불명.
+- 동결6경로: client/welcome-header.js / welcome-presentation.mjs / welcome-presentation.test.mjs, client/game.css의welcome-stage selector1개,client/runtime.js의welcome-presentation module1개,관련메모리6절이다. 현행HEAD 2e2eee840b6748ef91c1575e06acb13b8f82cb22의CSS/runtime/메모리에이번대상만투영한후보를stage하고실제작업파일과동시변경을보존한다. header/helper/회귀는최종작업바이트전체가이번요청/필수지원범위다. CSS최초설계안내제거·다른runtime/메모리와중립애셋정리/포자/게임/서버/다른HTML수정은제외한다.
+- 누락점검·검수재사용: 전체5제품의현재SHA256이마지막final-hashes.json과전부같음을직접확인했다. 따라서앞선10회귀·35외형280입퇴장/420렌더·공통151.2배율/280높이·PC/mobile·첫4순환/동시입퇴장·SFXhelper호출/오류0·직접PNG확인/소스모듈정합을재사용한다. 새브라우저/게임/테스트는반복하지않고분리후보형식과최종staged내용/경로/공백만확인한다. 원래HEAD의height도280이므로CSS후보diff는background framing만남지만최종결과의고정높이는280유지다.
+- 메모리범위: 원인조사1절+높이복원착수/완료2절+전체수정착수/완료2절+이번동결1절을같은커밋에포함한다. 원발언과정정·실행결과/한계를보존한다. 현재index0,전용origin oojjrs/Spawner와이번Projects0조회결과재사용. 메시지 「웰컴 헤더 높이와 입퇴장 동작 수정」,현재로컬커밋전이며push/배포는승인·실행없음.
+
+## 웰컴 헤더 높이·입퇴장 회귀 수정 완료 · 01a1b13a 현재 요약
+
+- 기록 ID: welcome-complete-repair-complete-20261107-01a1b13a. 기록 시각 2026-11-07T00:13:02+09:00; 기록자·실제수정/검수 Codex /root, 전체수정지시 사용자. 출처현재채팅01a1b13a-d56e-7223-9c1b-a82747d2de3f의 「다 고치라고」와실제도구결과,H:/Spawner Windows PowerShell local. 원발언정확시각·항목ID·PC식별불명.
+- 실제수정: 높이고정280px 유지·공통camera min288/width*.58/height*.54(PC/mobile 모두151.2)·바닥.88height. 모든35외형에동일화면배율을적용해종간원래비율을보존하며종별auto-fit은없다. welcomeTravelMotion은native한셀이동duration을입퇴장양쪽에같이사용하고셀간시뮬레이션대기만제거해연속걷는다. moveAnimationStartedAt는연속epoch를유지하여프레임초반리셋을방지하고마지막한셀의native착지후중앙동작으로넘긴다. 게임의unitStats/unitTravelSpeed/AI/원본애니/SFX함수는수정하지않는다. 헤더이동의화면내추가대기를제거한것이므로인게임의평균이동주기까지동일하다고확대하지않는다.
+- 추가보완: 음원가시성판정에현재유닛공통size를쓰던부분을각motion.size로바꿔동시퇴장중인큰유닛의가시성을새작은유닛기준으로오판하지않게했다. source모듈과runtime의welcome-presentation사본1개를정확동기화했으며기존게임/외형/서버병행수정은좁은치환으로보존한다. 이번소스시점원본render/기준크기·방향/셀내도약·걷기프레임시계는공유한다.
+- 실제검수: 표적welcome회귀10/10통과. 격리HTTP/실제runtime/현재header/실제CSS·welcome DOM/공용native renderer와원본이미지로실행했다. 게임부트/전체수동플레이는생략한헤더전용실행면이다. 35외형×입퇴장8시각=280조건에서양쪽agent/frame동일·추가셀대기0·평행이동오차<1e-7·최종중앙착지통과. 35외형×대기/소개2상태×6시각=420실제canvas표본에서상단30px/하단3px/양끝3px검사잘림0·빈프레임0이다. 모든애니프레임의전수증명으로확대하지않는다. 첫4종족순서/동시입퇴장과move-spore/landing/move-pebble/move-spring/spring-landing 실제공용helper호출관측,페이지오류/Welcome경고0이다. 오디오청음검수는아니다.
+- 화면직접확인: desktop.png의stage480x280, mobile.png의stage366x280/문서폭390,35외형의native-35-contact.png를직접열어큰가시등대장/부엉이·유니크와기본/속성외형을함께확인했다. 중앙소개동작/기존2초대기스케줄유지. 280이실제선택되는현재header경로에서검사했으며원본cell을검사쪽에서강제주입하지않았다. 새싹콩소개약0.873초(SPROUT_IDLE_SHRUG_DURATION_MS)후2초대기규칙도소스에서확인했다.
+- 형식/범위: 제품5텍스트UTF8NoBom/CRLF·source4경로diff--check통과. 공유메모리는검수도중Mixed NeedsReview가관측됐으나범위밖기록을일괄변환하지않았다. 최종제품각loneLF0과runtime.source정확일치를확인했다. 검수도구라운드반환은15.991초였으며headless자체는10.5초내완료한성공결과를다음poll에서수신했다. 이후새실행검사나브라우저재검수는하지않았다. actual코드diff와최종hash는literal $Trash/welcome-complete-repair-01a1b13a/{verification.json,final-hashes.json,desktop.png,mobile.png,native-35-contact.png}에보존했다.
+- 상태/누락점검: 사용자가지적한높이/양끝셀간대기/입퇴장차이를이제실제제품에서수정하고한표면에서같이확인했다. 앞선welcome-height-restore-complete의이동미해결상태를본실제결과로대체하며원기록보존. 변경은client/game.css,welcome-header.js,welcome-presentation.mjs,welcome-presentation.test.mjs,runtime.js 및관련메모리로미스테이징/미커밋이다. 이번새Git완료지시는없어자동commit/push/배포하지않는다. 다른작업자가고친포자문제나중립전체정리·인게임전반완료로확대하지않는다.
+
+## 웰컴 헤더 전체 회귀 수정 착수 · 01a1b13a 현재 요약
+
+- 기록 ID: welcome-complete-repair-start-20261107-01a1b13a. 기록 시각 2026-11-07T00:06:50+09:00; 기록자·전체수정판단 Codex /root, 수정결정 사용자. 출처현재채팅01a1b13a-d56e-7223-9c1b-a82747d2de3f의 「다 고치라고」「왜 손을 대면 댈수록…」. 원발언정확시각·항목ID·PC식별불명,H:/Spawner Windows PowerShell local.
+- 현재전체목표: 280px높이유지,양끝에걸리는셀간대기제거,4종족/속성외형/중립/유니크의원본렌더·종간비율·프레임·공용SFX유지,오른쪽입장/왼쪽퇴장동일기준,중앙도착직후기존동작1회/종료후2초/동시입퇴장이다. 포자버섯별도문제는사용자의타작업자수정/넘기기지시를유지한다.
+- 구현판단: native한셀의실제이동duration/걷기·도약내부타이밍을쓰되헤더의보이는입퇴장경로에서셀사이시뮬레이션대기만빼연속재생한다. 느린기본형도걷기클립을늘이거나1초대기를드러내지않고한셀도착후다음셀을바로시작한다. 입퇴장양쪽에동일계산을적용하며한쪽만시간을건너뛰는lead/종별속도배수는넣지않는다. 원본게임의이속/경제/격자AI를수정하지않는다.
+- 화면판단: 280높이에서종별자동축소를재도입하지않고모든35외형에같은camera=min(288,width*.58,height*.54)를적용한다. 바닥을.88height로내려기존배경지면에맞춘다. 이같은화면배율에서유니크의최대동작과작은기본형의원래상대크기를함께검사한다. 이전520높이/151개스냅샷근거로현재280의안잘림을추정하지않는다.
+- 수정범위: welcome-header의공통화면/음원가시성, welcome-presentation의연속cell시간축및native프레임epoch,그모듈의runtime사본1개와표적회귀다. 기존280CSS는유지한다. 공유runtime/게임/다른애셋의병행수정은정확모듈치환과before가드로보존한다. 실제제품DOM/CSS/현재runtime/공용native함수를격리header표면에서사용해35외형입퇴장/중앙동작·공통비율·경계/PC/mobile와SFX이벤트를확인한다. 원본게임전체수동검수로확대하지않는다. 임시자료 literal $Trash/welcome-complete-repair-01a1b13a,새stage/commit/push/배포없음.
+
+## 웰컴 헤더 높이 280px 복원 완료 · 01a1b13a 현재 요약
+
+- 기록 ID: welcome-height-restore-complete-20261106-01a1b13a. 기록 시각 2026-11-06T23:57:03+09:00; 기록자·구현/실측확인 Codex /root, 높이복원결정 사용자. 출처현재채팅01a1b13a-d56e-7223-9c1b-a82747d2de3f의 「고쳤다면서? 헤더 높이는 왜 안 바꿨어?」와직접도구결과,H:/Spawner Windows PowerShell local. 원발언정확시각·항목ID·PC식별불명.
+- 실제수정: client/game.css의welcome-stage높이 auto/max520/aspect12/13 선언만고정280px로복원했다. 이번치환을역으로되돌리면작업직전CSS와정확일치하여기존protectedhunk와나머지CSS/배경설정보존을확인했다. 게임/서버/애셋/문구/유닛크기·이동변경없음.
+- 실제검수: 사용자창과독립headless에서실제Spawner.html/CSS를불러오고앱JS를차단한뒤실제welcome DOM에제품과동일한stage/title/canvas구조만구성해레이아웃을측정했다. PC1440의stage480x280,모바일390의stage366x280·문서폭각1440/390,가로넘침0이다. 이는전체게임/실제유닛애니검수가아닌높이복원검수다. 형식2텍스트UTF8NoBom/CRLF·CSS공백검사통과,병렬검수6.487초. 근거 literal $Trash/welcome-height-restore-01a1b13a/{game.css.before,verification.json,desktop.png,mobile.png}.
+- 범위/상태: 헤더높이복원은이제실제반영완료이며미스테이징/미커밋이다. 앞선cf48344는외형표커밋이므로헤더복원을포함했다고보고하지않는다. 양끝셀간정지회귀·큰유닛전프레임클리핑·인게임전체정상여부는이번높이검수로해결/확인했다고확대하지않는다. 앞선start절검수대기를실제결과로대체하고기존기록을보존한다.
+
+## 웰컴 헤더 높이 누락 정정·280px 복원 착수 · 01a1b13a 현재 요약
+
+- 기록 ID: welcome-height-restore-start-20261106-01a1b13a. 기록 시각 2026-11-06T23:55:32+09:00; 기록자·누락정정/구현판단 Codex /root, 높이복원요구 주체 사용자. 출처현재채팅01a1b13a-d56e-7223-9c1b-a82747d2de3f의 「고쳤다면서? 헤더 높이는 왜 안 바꿨어?」,H:/Spawner Windows PowerShell local. 원발언정확시각·항목ID·PC식별불명.
+- 누락정정: 앞선 cf48344는 외형표/썸네일/관련메모리만 커밋했으며헤더높이는변경하지않았다. 사용자최신교정은헤더높이도복원하라는수정지시로해석하고이번CSS반영을진행한다. 앞선원인조사만으로충분하다는작업완료해석은이교정으로대체한다.
+- 구현범위: client/game.css의welcome-stage높이만auto/max520/aspect12/13에서원래고정280px로복원했다. 기존background/camera/ground/외형·이동함수와게임/서버의동시수정은이번범위로바꾸지않는다. 다른CSS의최초설계안내제거등protectedhunk는보존한다. 웰컴양끝셀간정지회귀를이높이수정만으로해결했다고주장하지않으며기존원인기록을유지한다.
+- 검수계획: 실제Spawner의welcome DOM과실제공유CSS를격리headless에서사용해PC1440/모바일390의stage높이가정확280px인지확인한다. 게임/자산전체로드나인게임정상판정은하지않는다. 이전로드한검증지침을재사용하고제품1텍스트/메모리의형식및이번selector변경을최종확인한다. 임시자료는literal $Trash/welcome-height-restore-01a1b13a. 현재신규Git완료지시는없어stage/commit/push/배포하지않는다.
+
+## 웰컴 헤더 높이·가장자리 정지 회귀 조사 · 01a1b13a 현재 요약
+
+- 기록 ID: welcome-header-regression-forensics-20261106-01a1b13a. 기록 시각: 2026-11-06T23:23:44+09:00. 기록자·조사 판단 Codex /root, 원 발언자·교정 결정 주체 사용자. 출처 현재 채팅 [01a1b13a-d56e-7223-9c1b-a82747d2de3f](codex://threads/01a1b13a-d56e-7223-9c1b-a82747d2de3f)의 「웰컴 헤더…왜…위아래 크기를 늘리고…왼쪽 오른쪽 끄트머리에서 걸려」「그거 걸리지 말라고 제작한 건데」와 사용자가 연결한 [웰컴 페이지 헤더 제작](codex://threads/01a1a12e-3f3f-72c1-95e2-0b5b349b5ffb). 현재 발언 정확시각·항목ID·PC식별 불명, H:/Spawner Windows PowerShell local.
+- 사용자 조건 재확인: 원 채팅 실제 user message 2026-11-06T11:10:15.514Z(20:10:15+09:00)는 유닛/배경 확대·바닥 하향과 양끝 셀간 휴식 노출 해결을 요청했다. 후속 인게임 크기비/공통 동작 요청이 이 가장자리 조건을 철회한 기록은 없다. 현재 사용자는 헤더 높이 확대와 정지 재발을 문제 삼았으며, 이번은 원인 조사/설명 범위로 해석해 제품을 수정하지 않는다.
+- 직접 확인: 원 채팅 로컬 rollout 7,079 JSONL 레코드 전체를 읽어 사용자 메시지·관련 tool call/result를 대조했다. read_thread 최신 1턴도 확인했고 다수턴 includeOutputs 요청은 크기제한으로 실패하여 로컬 원본으로 전환했다. 파일에는 compacted 4개가 있어 생략 이전 문맥까지 완전 복원했다고 주장하지 않는다. 사건 직접 수정은 해당 원 채팅 root의 repair.cjs와 common-view.cjs 실행이며 이 단계 이후 별도 worker 호출은 없다. 21:58:59+09:00 repair 첫 성공 뒤 작업 상태가 이전으로 돌아온 원인은 원 기록에서도 미확정이나, 22:05:36+09:00 재실행 성공 및 22:09:35+09:00 common-view 성공과 현재 byte가 최종 변경의 실행을 뒷받침한다.
+- 원인/근거: root가 부엉이·유니크를 종별 자동축소하지 않고 공통비율로 담으려다 .welcome-stage를 height280px에서 aspect12/13·max-height520px로 바꾸고 worldPixels를480폭 기준364에서278.4(min288,width*.58)로 낮췄다. welcome-presentation은 원본 셀간 휴식을 유지한다. 480폭에서 중간 셀 중심이 입장518.4/퇴장-38.4가 되어 작은 유닛 일부가 화면 양끝에 남는 구조다. unit-stats의 기본 bean/spore speed.5는 셀간격2초/이동1초이므로 중간셀에1초 머문다. 기존 camera364의 중간 셀 중심604/-124와 차이가 난다. 현재 source/CSS/runtime diff 및 원 실행 스크립트와 기존 contact-result의480x520/cell278.4를 읽어 확인했으며 새 실행/브라우저 재현이나 새 픽셀 표본은 만들지 않았다.
+- 검수 누락/판정 정정: 당시 245조건 검사는 동일camera/입퇴장agent·프레임,152조건 검사는 대기/동작의중립외곽이며 가장자리 셀간 정지 회귀를 검사하지 않았다. 따라서 welcome-common-scale-repair-complete-20261106-01a1a12e의 완료판정을 현재 사용자의 가장자리 정지 조건까지 충족한 것으로 해석하지 않는다. 주원인은 이미 명시된 가장자리 조건을 후속 크기비 교정에서 유지하지 않은 구현/검수 판단 실패다. 헤더 높이 확대는 root가 큰유닛을 담는 해법으로 선택했으며 별도 사용자 크기변경 지시로 확인되지 않았다. 종별축소 재도입으로 문제를 덮는 수정은 권고하지 않는다.
+- 이번 상태/범위: 현재 제품·기획서·다른dirty/index 보존. 원인 조사와 본 메모리만 갱신, build/test/server/browser/Git/배포 실행 없음. 실제 수정·새 화면검수는 미실행이며 현재 회귀가 해결됐다고 보고하지 않는다.
 
 ## 승인 네발 공격7종 보존 · 2026-11-06T14:49:17+00:00
 
