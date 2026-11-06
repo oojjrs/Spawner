@@ -1,0 +1,45 @@
+{
+  "birth": {
+    "frameSize": 512,
+    "columns": 4,
+    "frameCount": 13,
+    "durationsMs": [
+      130,
+      120,
+      100,
+      100,
+      80,
+      260,
+      80,
+      90,
+      90,
+      100,
+      100,
+      130,
+      410
+    ],
+    "sheet": "birth-sheet.png",
+    "preview": "birth-preview.gif",
+    "status": "user-approved",
+    "sourceGeneration": "exec-f3300405-1901-4c6a-a57b-c069504e3ec1.png"
+  },
+  "death": {
+    "frameSize": 512,
+    "columns": 4,
+    "frameCount": 8,
+    "durationsMs": [
+      120,
+      100,
+      140,
+      120,
+      140,
+      100,
+      120,
+      600
+    ],
+    "sheet": "death-sheet.png",
+    "preview": "death-preview.gif",
+    "status": "user-approved",
+    "sourceGeneration": "exec-16334c06-d446-44b5-bda9-39475df2de04.png"
+  }
+}
