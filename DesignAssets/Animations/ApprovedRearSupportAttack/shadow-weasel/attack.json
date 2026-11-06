@@ -1,0 +1,52 @@
+{
+  "character": "shadow-weasel",
+  "status": "user-approved",
+  "frameWidth": 576,
+  "frameHeight": 576,
+  "columns": 3,
+  "rows": 2,
+  "frameCount": 6,
+  "durationsMs": [
+    100,
+    100,
+    70,
+    240,
+    140,
+    150
+  ],
+  "previewEndHoldExtraMs": 600,
+  "rearSupportAnchor": [
+    430,
+    450
+  ],
+  "sourceAnchors": [
+    [
+      382,
+      365
+    ],
+    [
+      358,
+      365
+    ],
+    [
+      362,
+      365
+    ],
+    [
+      396,
+      358
+    ],
+    [
+      372,
+      358
+    ],
+    [
+      362,
+      358
+    ]
+  ],
+  "facing": "left",
+  "method": "New whole-body imagegen drawings; whole-cel integer translation to rear-foot contact. No per-limb transforms, no scaling; last frame exactly first. GIF extracted from final PNG sheet.",
+  "alpha": true,
+  "correction": "Frame4 far front leg re-drawn visibly separated and attached, all other five frames byte-identical to V6. Full frame resampled once from generator 512 to established576 cell."
+}
