@@ -159,7 +159,7 @@
     }
 
     function scheduleHelpTooltipHide() {
-      if (!helpTooltip.querySelector(".codex-resource-link")) { hideHelpTooltip(); return; }
+      if (!helpTooltip.querySelector(".codex-resource-link, .unit-dna-list")) { hideHelpTooltip(); return; }
       clearTimeout(helpTooltipTimer);
       helpTooltipTimer = setTimeout(hideHelpTooltip, 180);
     }
@@ -187,7 +187,16 @@
       const width = helpTooltip.offsetWidth;
       const left = rect.right + 8 + width <= right ? rect.right + 8 : rect.left - width - 8;
       const x = clamp(left, 10, Math.max(10, right - width));
+      helpTooltip.style.maxHeight = "";
+      const overlapsTarget = x < rect.right && x + width > rect.left;
+      if (helpTooltipTarget.dataset.helpDna === "true" && overlapsTarget) {
+        helpTooltip.style.maxHeight = Math.max(80, Math.max(window.innerHeight - rect.bottom - 18, rect.top - 18)) + "px";
+      }
       let top = clamp(rect.top, 10, Math.max(10, window.innerHeight - helpTooltip.offsetHeight - 10));
+      if (helpTooltipTarget.dataset.helpDna === "true" && overlapsTarget) {
+        const below = rect.bottom + 8, above = rect.top - helpTooltip.offsetHeight - 8;
+        top = below + helpTooltip.offsetHeight <= window.innerHeight - 10 ? below : above >= 10 ? above : top;
+      }
       const notifications = discoveryToasts.childElementCount ? discoveryToasts.getBoundingClientRect() : null;
       if (notifications && x + width > notifications.left && x < notifications.right &&
           top + helpTooltip.offsetHeight > notifications.top && top < notifications.bottom) {
@@ -231,7 +240,8 @@
       const host = button.closest("dialog[open]") || document.body;
       if (helpTooltip.parentElement !== host) host.append(helpTooltip);
       helpTooltip.setAttribute("role", button.dataset.helpResources === "true" ? "group" : "tooltip");
-      if (button.dataset.helpResources === "true") setCodexResourceText(helpTooltip, button.dataset.help);
+      if (button.dataset.helpDna === "true") renderAgentDnaHelp(helpTooltip, state.selection.target, button.parentElement);
+      else if (button.dataset.helpResources === "true") setCodexResourceText(helpTooltip, button.dataset.help);
       else setEvolutionText(helpTooltip, button.dataset.help);
       if (button.dataset.helpHint) {
         const hint = document.createElement("span");
@@ -6949,6 +6959,28 @@
       if (helpTooltipTarget && foreignColonyDetails.contains(helpTooltipTarget) && previousHelp !== helpTooltipTarget.dataset.help) showHelpTooltip(helpTooltipTarget);
     }
 
+    function renderAgentDnaHelp(container, agent, composition) {
+      const list = composition.querySelector(".unit-dna-list").cloneNode(true);
+      const stats = agent.stats?.dna || Spawner.ATTRIBUTE_DNA.stats(agent.dna.pieces);
+      const values = document.createElement("dl");
+      values.className = "unit-dna-stats";
+      Spawner.renderDnaDesignStats(values, stats, stats, false);
+      for (const key of ["melee", "ranged", "healer", "roaming", "harvestTime"]) {
+        for (const row of values.querySelectorAll('[data-stat="' + key + '"]')) row.remove();
+      }
+      const harvest = values.querySelector('dd[data-stat="harvest"]');
+      if (harvest) harvest.textContent = Number((stats.harvestTime > 0 ? stats.harvest / stats.harvestTime : 0).toFixed(3)) + "개/초";
+      const capacity = values.querySelector('dt[data-stat="capacity"]');
+      if (capacity) capacity.textContent = "운반량";
+      const { base } = Spawner.dnaDesignStats(Spawner.ATTRIBUTE_DNA, agent.dna.pieces);
+      for (const row of values.querySelectorAll("[data-stat]")) {
+        const key = row.dataset.stat;
+        const difference = Number((Number(stats[key]) - Number(base[key])).toFixed(3));
+        row.classList.toggle("design-stat-changed", Number.isFinite(difference) && difference !== 0);
+      }
+      container.replaceChildren(list, values);
+    }
+
     function updateUnitPanel() {
       const agent = state.selection?.kind === "agent" ? state.selection.target : null;
       const target = state.selection?.target;
@@ -6988,6 +7020,15 @@
         if (helpTooltipTarget && attributes.contains(helpTooltipTarget)) hideHelpTooltip();
         if (agent.dna) {
           Spawner.renderDnaComposition(attributes, Spawner.ATTRIBUTE_DNA, agent.dna);
+          const board = attributes.querySelector(".unit-dna-board");
+          board.setAttribute("tabindex", "0");
+          board.dataset.help = "DNA";
+          board.dataset.helpDna = "true";
+          board.addEventListener("pointerenter", () => showHelpTooltip(board));
+          board.addEventListener("pointerleave", scheduleHelpTooltipHide);
+          board.addEventListener("focus", () => showHelpTooltip(board));
+          board.addEventListener("blur", scheduleHelpTooltipHide);
+          board.addEventListener("click", () => showHelpTooltip(board));
         } else {
           const fragment = document.createDocumentFragment();
           for (const slot of slots) {

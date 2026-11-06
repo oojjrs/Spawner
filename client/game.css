@@ -218,6 +218,11 @@
     .help-button:hover, .help-button:focus-visible { border-color: var(--accent); background: #75c4b618; outline: 1px solid var(--accent); outline-offset: 2px; }
     .help-tooltip { position: fixed; z-index: 20; width: min(280px, calc(100vw - 20px)); padding: 12px; border: 1px solid #75c4b64a; border-radius: 8px; background: #101719fa; box-shadow: 0 8px 24px #0009; color: #d7e0df; font-size: 0.76rem; line-height: 1.65; white-space: pre-line; overflow-wrap: anywhere; pointer-events: none; }
     .help-tooltip:has(.codex-resource-link) { pointer-events: auto; }
+    .help-tooltip:has(.unit-dna-list) { width: min(320px, calc(100vw - 20px)); max-height: calc(100dvh - 20px); overflow-y: auto; pointer-events: auto; }
+    .unit-dna-stats { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 3px 12px; margin: 10px 0 0; padding-top: 10px; border-top: 1px solid #303e43; white-space: normal; }
+    .unit-dna-stats > dt, .unit-dna-stats > dd { margin: 0; }
+    .unit-dna-stats > dd { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .unit-dna-stats > .design-stat-changed, .unit-dna-stats > .design-stat-changed .design-stat-value { color: #39ff78; font-weight: 700; }
     .codex-resource-link { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; margin: 0 2px; padding: 3px; border: 1px solid var(--line); border-radius: 5px; background: #0d1416; vertical-align: middle; cursor: pointer; }
     .codex-resource-link > img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
     .codex-resource-link:hover { border-color: var(--accent); }
@@ -266,6 +271,8 @@
     .unit-dna-board { display: block; width: 100%; height: 148px; min-width: 0; padding: 8px; border-radius: 6px; background: #102326; }
     .unit-dna-list { display: grid; gap: 4px; min-width: 0; }
     .unit-dna-list:empty { display: none; }
+    #agent-attributes > .unit-dna-list { display: none; }
+    .unit-dna-board:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
     .unit-dna-gene { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; align-items: center; gap: 8px; min-width: 0; padding: 3px 7px 3px 3px; border-radius: 6px; background: #17282b; }
     .unit-dna-gene > svg { display: block; width: 44px; height: 38px; }
     .unit-dna-name { min-width: 0; font-size: .8rem; line-height: 1.4; overflow-wrap: anywhere; }
@@ -1104,7 +1111,7 @@
 .has-dna-editor .design-preview dl { align-content:start; align-self:stretch; min-height:0; overflow:auto; scrollbar-width:thin; padding-right:6px; gap:6px 8px; font-size:12px; }
 .has-dna-editor .design-preview dt,.has-dna-editor .design-preview dd { color:#8d9c96; }
 .has-dna-editor .design-stat-value,.has-dna-editor .design-stat-delta { color:#8d9c96; font-weight:400; }
-.has-dna-editor .design-preview dt.design-stat-changed,.has-dna-editor .design-stat-value.design-stat-changed { color:#92daa5; font-weight:700; }
+.has-dna-editor .design-preview dt.design-stat-changed,.has-dna-editor .design-stat-value.design-stat-changed { color:#39ff78; font-weight:700; }
 .has-dna-editor .design-footer { margin-top:6px; padding-top:6px; gap:0; }
 .has-dna-editor .design-status { margin:0; }
 .has-dna-editor .dna-editor-host { margin-top:0; }

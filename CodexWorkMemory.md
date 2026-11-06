@@ -1,3 +1,54 @@
+## DNA 툴팁·설계창 강조 로컬 커밋 범위 확정 · 01a1b05f
+
+- 기록 ID: dna-highlight-local-commit-freeze-20261106-01a1b05f. 기록 시각: 2026-11-06T22:10:19+09:00. 기록자·분리/마감판단 Codex /root, 로컬커밋승인 사용자. 출처 현재채팅01a1b05f-25b9-7033-82fb-9d3934ec1b64의 ‘좋아 커밋’. 원발언 정확시각·항목ID·PC식별 불명, H:/Spawner Windows PowerShell host local.
+- 확정범위4경로: game.js의DNA툴팁연결/구성·실제스탯표시/기본값변경강조5hunk, game.css의해당툴팁·숨김/포커스·설계강조3hunk, attribute-editor.css의강조색1hunk, 본기록포함관련메모리8절이다. 녹색강조의대상인기존01a1b095 DNA툴팁도아직미커밋이므로독립적으로동작하는이번결과의필요한지원범위로함께묶고그기록3절을포함한다. 기관중복안내/최초설계/웰컴/서버/다른메모리는제외한다.
+- 기존실제툴팁5경우/기존수치불변/세화면RGB57,255,120·700/직접PNG확인과형식결과를재사용한다. 현재HEAD기반별도index후보의구문·형식·staged범위/diff/check만확인하고추가게임실행은하지않는다. 전용main의기대HEAD/ref/index가드로커밋하고실제작업파일을덮지않는다. 메시지 ‘DNA 툴팁과 설계창 변경 속성 강조 수정’. 연결Projects0재사용. 아직커밋성공전이며push/배포승인은없다.
+
+## DNA 변경 항목 선명한 녹색 통일 완료 · 01a1b05f 현재 요약
+
+- 기록 ID: dna-highlight-vivid-complete-20261106-01a1b05f. 기록·실제확인 시각: 2026-11-06T22:07:10+09:00. 기록자·수정/검수 Codex /root, 선명한색·세화면통일교정 사용자. 출처 현재채팅01a1b05f-25b9-7033-82fb-9d3934ec1b64의색상교정과실제qa-result.json·PNG. 원발언 정확시각·항목ID·PC식별 불명, H:/Spawner Windows PowerShell host local.
+- 실제수정: game.css의유닛DNA툴팁·인게임속성설계2규칙과attribute-editor.css의Attribute.html속성표1규칙에서변경항목강조를#92daa5에서#39ff78로통일했다. 채도높은형광녹색을선택했고굵기700·변경판정·표시문구/수치·HTML/JS/런타임과다른색은유지했다. 앞선green-complete의#92daa5와vivid-scope의대기를이번완료상태로대체하며기록보존.
+- 실제검수: 격리headless Edge에서현재runtime의공통스탯renderer와해당실제CSS/툴팁함수를사용해세화면의체력명칭·수치모두RGB57/255/120·굵기700을관측했다. 두CSS전체가작업전사본의세색토큰만치환한결과와정확히같음·JS오류0을확인했고실제툴팁PNG를직접열어선명도를확인했다. Attribute.html은연결된attribute-editor.css의실제stats표구조를검수했으며전체편집동작재검수로확대하지않는다. 두CSS UTF8NoBom/CRLF·국소diff통과, no-index diff의exit1은차이존재의정상반환이다.
+- 상태: 두CSS와본채팅메모리만이번변경이며기존공유작업보존, 미스테이징·미커밋·미배포다. blocker없음. 근거 H:/Spawner/$Trash/dna-highlight-vivid-20261106/qa-result.json·tooltip-vivid.png·두before사본. 전달용 D:/.codex/visualizations/2026/11/06/01a1b05f-25b9-7033-82fb-9d3934ec1b64/tooltip-vivid.png.
+
+## DNA 변경 항목 선명한 녹색 통일 착수 · 01a1b05f
+
+- 기록 ID: dna-highlight-vivid-scope-20261106-01a1b05f. 기록 시각: 2026-11-06T22:05:35+09:00. 기록자·색상선택/수정판단 Codex /root, 선명도교정·세화면통일요청 사용자. 출처 현재채팅01a1b05f-25b9-7033-82fb-9d3934ec1b64의 ‘글자..색이 너무 연해. 확 티나는 색으로 하자. 그리고 Attribute.html … 인게임 속성 설계창 둘 다 마찬가지 색으로 바꾸자’. 원발언 정확시각·항목ID·PC식별 불명, H:/Spawner Windows PowerShell host local.
+- 사용자교정에따라이전green-complete의옅은#92daa5 선택을대체하고채도가높은형광녹색#39ff78로통일한다. 변경판정/수치/굵기700은유지한다. game.css의DNA툴팁/인게임설계규칙2곳과Attribute.html이연결한attribute-editor.css의변경항목1곳만색상치환한다. HTML본문·JS·runtime·다른색/병행작업은보존한다. 이번은추가수정이며새커밋/푸시승인은없다.
+
+## 유닛 DNA 툴팁 변경 속성 녹색 강조 완료 · 01a1b05f 현재 요약
+
+- 기록 ID: unit-dna-tooltip-green-complete-20261106-01a1b05f. 기록·직접결과 확인 시각: 2026-11-06T22:00:58+09:00. 기록자·구현/검수 Codex /root, 강조요청 사용자. 출처 현재채팅01a1b05f-25b9-7033-82fb-9d3934ec1b64의 ‘그 툴팁에서, 변화가 일어난 속성은 속성 설계창처럼 녹색으로 표시해’ 및 qa-result.json/직접PNG. 원발언 정확시각·항목ID·PC식별 불명. H:/Spawner Windows PowerShell host local.
+- 완료: client/game.js renderAgentDnaHelp에서 공통dnaDesignStats의base와 실제최종stats를 소수3자리의 설계창동일기준으로비교해변경dt/dd에기존design-stat-changed를지정한다. client/game.css의툴팁전용1규칙이설계창과같은#92daa5/700으로이름/수치를강조한다. 기존실제수치·개/초·운반량·기관플래그제외·증감괄호없음을유지했다. runtime/HTML/서버/기계데이터는이번수정범위가아니다.
+- 직접검수: 격리headless Edge에서현재실제runtime·game.css·renderAgentDnaHelp를실행해시작4종/빈DNA 5경우의강조대상이설계창공통renderer와일치,실제RGB146/218/165·굵기700,각값자식span색상상속을확인했다. 네종족/빈DNA 모두수정전tooltip textContent와정확히같고증감괄호0·pageerror0이다. 실제PNG를메인이열어체력/운반량/채집량녹색및이동/시야기본색을확인했다. game.js구문과두제품파일UTF8NoBom/CRLF통과. 전체게임플레이나새모바일레이아웃검수로확대하지않는다.
+- 병행통합: 첫적용전rebase로툴팁함수가없어anchor guard에서제품쓰기전에중단했다. 복원후적용했으나추가원격rebase에서다시코드가잠시사라져첫QA는함수추출경계에서중단됐다. Git/다른채팅의복원을조작하지않고기다렸으며두번째복원에서이번녹색코드가보존됨을확인한뒤위5경우를성공검수했다. 이전중단을제품회귀실패로기록하지않는다.
+- 상태: 이번녹색강조는미스테이징·미커밋이고커밋/푸시/배포요청은없다. 기존01a1b095의미커밋툴팁과다른채팅변경을보존했다. blocker없음. 근거 H:/Spawner/$Trash/unit-dna-tooltip-green-20261106/qa-result.json·tooltip-green.png·두before사본. 전달용PNG D:/.codex/visualizations/2026/11/06/01a1b05f-25b9-7033-82fb-9d3934ec1b64/tooltip-green.png. green-scope의대기상태를이완료기록으로대체하고원기록보존.
+
+## 유닛 DNA 툴팁 변경 속성 녹색 강조 착수 · 01a1b05f
+
+- 기록 ID: unit-dna-tooltip-green-scope-20261106-01a1b05f. 기록 시각: 2026-11-06T21:55:12+09:00. 기록자·원인확인/표시판단 Codex /root, 강조요청 사용자. 출처 현재채팅01a1b05f-25b9-7033-82fb-9d3934ec1b64의 ‘그 툴팁에서, 변화가 일어난 속성은 속성 설계창처럼 녹색으로 표시해’. 원발언 정확시각·항목ID·PC식별 불명. H:/Spawner Windows PowerShell host local.
+- 현재툴팁은 별도채팅01a1b095의 미커밋renderAgentDnaHelp/스타일이며 stats와stats를비교해증감괄호/강조를생략한다. 공통dnaDesignStats의base와 실제agent.stats.dna의차이를설계창과같은소수3자리비교기준으로판별하고 이름dt/수치dd에기존design-stat-changed를지정한다. 색상/굵기는설계창의#92daa5/700을재사용한다.
+- 기존최종수치·채집량개/초·운반량·한항목한줄·증감괄호없음과기관플래그숨김을보존하고색상만추가한다. 실제제품범위는client/game.js의해당함수와client/game.css의툴팁규칙1줄, 본메모리다. 다른채팅의기존툴팁/최초설계/이동/runtime/서버/HTML변경은보존한다. 새커밋/푸시승인은없으므로이번변경은미커밋으로남긴다. 연결Projects0을재사용한다.
+
+## 유닛 정보창 DNA 툴팁 구현 완료 · 01a1b095 현재 요약
+
+- 기록 ID: unit-dna-tooltip-complete-20261106-01a1b095. 기록·직접 확인 시각: 2026-11-06T20:38:12+09:00. 기록자·구현/검수판단 Codex /root, 변경 요구 사용자. 출처 현재 채팅 01a1b095-4dff-7b02-ad0f-79812397761c의 첨부 요청과 실제 도구 결과. 원발언 정확시각·항목 ID·PC식별 불명, H:/Spawner Windows PowerShell host local.
+- 실제 수정: client/game.js의 유닛 DNA 그림에 hover/focus/click 툴팁을 연결하고 기존 조각 구성 DOM과 공통 스탯 renderer를 재사용해 최종 스탯을 한 줄씩 표시한다. 실제 agent.stats.dna 기준 채집량/채집시간을 개/초로 환산하고 운반량을 표시하며 기관 플래그·중복 채집시간·증감괄호·크기는 생략한다. 통계가 변하면 캐시를 갱신한다. game.css는 정보창 아래 목록만 숨기고 툴팁 안의 목록/스탯·키보드 포커스·화면 최대높이/스크롤을 연결한다. 공통 bundle/HTML/기계데이터는 수정하지 않았다.
+- 직접 headless Edge: 실제 패널 markup·runtime 공통 renderer·현재 game.js의 tooltip/목록갱신 함수를 실행했다. 시작 네 종족의 조각 목록 숨김, 실제 최종 채집량/초·운반량, 각 스탯 한 줄 배치·중복 증감/크기 없음, hover/focus/click/leave/대상변경/빈DNA 유한값과 JS오류0을 확인했다. PC1440×900·모바일390×844의 툴팁 화면 안 배치와 가로넘침0, 실제 PNG를 저장했다. 전체 게임 선택 동작을 끝까지 플레이한 결과로 확대하지 않는다.
+- 상태: 새 툴팁 UI 변경은 미스테이징·미커밋·미배포이며 앞선 미리보기 수정 커밋 e2ec880은 그대로 보존한다. 이 완료기록은 unit-dna-tooltip-scope-20261106-01a1b095의 검수 대기를 대체하며 원기록은 보존한다. 근거 현재 채팅 writable루트 literal $Trash/dna-tooltip의 qa-result.json·desktop.png·mobile.png·before 사본. 최종 공유 형식/구문/국소diff 결과는 직후 실행출력 기준이다.
+
+## DNA 툴팁 좁은 화면 배치 보완 · 01a1b095
+
+- 기록 ID: unit-dna-tooltip-position-20261106-01a1b095. 기록 시각: 2026-11-06T20:37:49+09:00. 기록자·보완 판단 Codex /root, 기대 표시 요구 사용자. 출처 현재 채팅 01a1b095-4dff-7b02-ad0f-79812397761c와 첫 headless 결과. 원발언 정확시각·항목 ID·PC식별 불명, H:/Spawner Windows PowerShell host local.
+- 첫 실행에서 네 종족의 실제 스탯/조각구성·각 행 정렬 확인과 PC 화면은 통과했으나 모바일 폭으로 바꿀 때 기존 툴팁이 그림을 덮어 hover를 막았다. Playwright hover timeout으로 중단되어 전체 검수 성공이 아니었다. 좁은 화면의 위치를 그림 아래/위로 분기하고 남은 세로공간에 높이를 제한해 스크롤하도록 실제 UI를 보완한다. 성공한 수치 검사는 반복하지 않고 바뀐 좁은 배치와 미실행 상호작용만 이어 확인한다.
+
+## 유닛 정보창 DNA 툴팁 구현 착수 · 01a1b095 현재 요약
+
+- 기록 ID: unit-dna-tooltip-scope-20261106-01a1b095. 기록 시각: 2026-11-06T20:34:03+09:00. 기록자·구현판단 Codex /root, 표시 변경 결정 사용자. 출처 현재 채팅 01a1b095-4dff-7b02-ad0f-79812397761c의 유닛 정보창 첨부와 ‘밑에 있는 dna 조각 상세 정보는 … 툴팁 … 채집량 N/s 운반량 … 한줄에 하나씩’. 원발언 정확시각·항목 ID·PC식별 불명, H:/Spawner Windows PowerShell host local.
+- 앞선 미리보기 수정 로컬 커밋 실제 완료: e2ec880fd234f388ef3767d67c5e558776b31e59, parent b6b46ffb5e6a23811425e107087809c7bce7c86b, tree 56bef1e07bd9c6dc8687d61c2caaf279b9f4ccf9, 제목 ‘채집 DNA 설계 미리보기 외형 수정’. 실제 readback에서 client/game.js 한 줄·관련 메모리17줄 추가의 정확 두 경로, 커밋 중 작업파일 불변·공유 staged 빈 상태를 확인했다. 자동승인 검토 첫 거부는 공유 index를 커밋 원본으로 오해한 위험 지적이었고 실제 고정트리에 메모리 삭제0임을 읽기 증명한 후 동일 실행이 승인·성공했다. 이 결과가 freeze 기록의 커밋 전 상태를 대체한다. push·배포 없음.
+- 새 범위 판단: 아래 상시 조각 목록을 DNA 그림 hover/focus/tap 툴팁으로 옮기고 조각 구성과 유닛 최종 스탯을 한 항목 한 줄로 표시한다. 실제 agent.stats.dna와 기존 공통 스탯 formatter를 사용하며 채집량은 실제 실행계약 harvest/harvestTime으로 초당 환산한다. 단순 순간 최적 채집률이고 이동·하역을 포함한 순생산률이라고 표시하지 않는다. 런타임/HTML/기계스탯은 수정하지 않고 client/game.js·game.css만 국소 수정한다. 새 요청의 커밋은 승인되지 않았으므로 이번 UI수정은 미커밋으로 남긴다.
+- 검수 계획: 기존 실제 유닛패널 markup·공통renderer·현재game.js tooltip 함수를 격리 headless Edge에서 실행해 목록 숨김/hover·focus·tap/채집 단위·용량/선택 변경/뷰포트 경계와 실제 PNG를 확인한다. 이전 검수 결과를 새 UI 검수로 확대하지 않는다. 근거는 현재 채팅 writable루트 literal $Trash/dna-tooltip.
+
 ## 저장 설계 이력 커밋 범위 확정 · 01a1b0e9
 
 - 기록 ID: dna-loaded-history-freeze-20261106-01a1b0e9. 기록 시각: 2026-11-06T22:08:25+09:00. 기록자·범위/검수판단 Codex /root, 검사정리·커밋·배포 승인 사용자. 출처 현재채팅01a1b0e9-16d7-7e73-b55e-026feea987ff 최신요청과 candidate 직접검수. 원발언 정확시각·턴/항목ID·딥링크·PC식별불명, H:/Spawner Windows PowerShell.
