@@ -1,4 +1,4 @@
-import { UNIT_ANIMATIONS, unitAnimationPose, unitAnimationFrame } from "./unit-animation.mjs";
+import { UNIT_ANIMATIONS, unitAnimationPose, unitAnimationFrame, unitMovementElapsedMs } from "./unit-animation.mjs";
 
 // Source-owned surfaces share one gait-transfer recipe. These are individual
 // action clips, not a claim that a complete dominant-form world rig is ready.
@@ -26,8 +26,7 @@ export function unitSecretionWalkPose(agent, time, appearance) {
   // retain any other active body action rather than hiding it with locomotion.
   const body = unitAnimationPose(agent, time);
   if (body && body.action !== "walk") return null;
-  const progress = Math.max(0, (agent.stepCount || 1) - 1) + elapsed / agent.moveDuration;
   return { action: "walk", animation,
-    frame: unitAnimationFrame(animation, progress * animation.cyclesPerCell * animation.durationMs),
+    frame: unitAnimationFrame(animation, unitMovementElapsedMs(agent, time)),
     mirrorX: agent.facing < 0 };
 }

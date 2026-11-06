@@ -273,6 +273,7 @@ export function createGame(environment, colony, savedGame) {
 
     function initializeAgent(agent) {
       agent.dna = cloneDna(agent.dna);
+      agent.moveAnimationStartedAt ??= agent.moveStartedAt;
       if (agent.attack?.dnaRanged) { agent.attack = null; agent.attackTargetId = null; }
       agent.dnaHealEvent = null; agent.dnaActionEvent = null; agent.dnaProjectiles = [];
       agent.attributeLevels = migrateAttributeLevels(agent.slots, agent.attributeLevels, state.nestLevel);
@@ -611,11 +612,13 @@ export function createGame(environment, colony, savedGame) {
       const rendered = interpolatedAgentPosition(agent);
       agent.renderFromX = rendered.x;
       agent.renderFromY = rendered.y;
+      const previousEnd = agent.moveStartedAt + agent.moveDuration;
+      agent.moveAnimationStartedAt = agent.moveDuration > 0 && Math.abs(startedAt - previousEnd) <= 1e-8 ?
+        agent.moveAnimationStartedAt ?? agent.moveStartedAt : startedAt;
       agent.moveStartedAt = startedAt;
       agent.x = destination.x;
       agent.y = destination.y;
-      const appearance = agent.appearanceAttributes || agent.attributes;
-      agent.moveDuration = (appearance.feet ? 1 : .5) / agentSpeed(agent);
+      agent.moveDuration = Math.min(1, 1 / agentSpeed(agent));
       agent.stepCount += 1;
       const footprintKey = agent.x + "," + agent.y;
       let footprint = state.footprints.get(footprintKey);

@@ -5029,8 +5029,8 @@
       const elapsed = state.simSeconds - agent.moveStartedAt;
       if (!animation || !agent.moveDuration || elapsed < 0 || elapsed >= agent.moveDuration ||
         !animation.sprite.complete || !animation.sprite.naturalWidth) return false;
-      const progress = elapsed / agent.moveDuration;
-      const index = idleMotion.matches ? 0 : Math.floor((agent.stepCount - 1 + progress) * (animation.cyclesPerCell || 1) * animation.frameCount) % animation.frameCount;
+      const pose = Spawner.unitAnimationPose(agent, state.simSeconds);
+      const index = idleMotion.matches || pose?.action !== "walk" ? 0 : pose.frame;
       const sprite = animation.sprite;
       const size = height * animation.scale;
       const frameSize = animation.frameSize;

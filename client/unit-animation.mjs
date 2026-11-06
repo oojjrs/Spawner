@@ -199,6 +199,11 @@ export function creatureHurtPose(agent, time) {
   return { action: "hurt", animation, frame: unitAnimationFrame(animation, elapsed) };
 }
 
+export function unitMovementElapsedMs(agent, time) {
+  const start = Number.isFinite(agent.moveAnimationStartedAt) ? agent.moveAnimationStartedAt : agent.moveStartedAt;
+  return Number.isFinite(time) && Number.isFinite(start) ? Math.max(0, time - start) * 1000 : 0;
+}
+
 export function unitAnimationPose(agent, time) {
   if (agent.species || agent.birth || agent.health <= 0) return null;
   const animations = UNIT_ANIMATIONS[agent.tribe || "bean"];
@@ -216,7 +221,7 @@ export function unitAnimationPose(agent, time) {
   else if (agent.mode === "jump") { action = "jump"; elapsed = (time - (agent.jumpStartedAt ?? agent.moveStartedAt)) * 1000; }
   else if (moving) {
     action = "walk";
-    elapsed = (Math.max(0, (agent.stepCount || 1) - 1) + (time - agent.moveStartedAt) / agent.moveDuration) * (animations[action]?.cyclesPerCell || 1) * (animations[action]?.durationMs || 0);
+    elapsed = unitMovementElapsedMs(agent, time);
   }
   const attributes = unitDisplayAttributes(agent);
   let animation = animations[action] || ((agent.tribe || "bean") !== "bean" && ["harvest", "throw"].includes(action) &&

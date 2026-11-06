@@ -2,7 +2,7 @@ import test from'node:test';import assert from'node:assert/strict';
 import{unitActionState,unitAppearanceStatePose,createUnitAppearanceEventPlayback}from'./unit-appearance-state.mjs';
 const clip=(ms,events=[],loop=false)=>({sourceId:'same-source',durationsMs:[ms],events,loop});
 const clips={idle:clip(1000,[],true),walk:clip(1000,[{type:'contact',atMs:0},{type:'contact',atMs:500}],true),carry:clip(1000,[],true),ranged:{...clip(600,[{type:'launch',atMs:200}]),launchAtMs:200},attack:{...clip(1000),hitTimeMs:300},hurt:clip(760),death:clip(1800),birth:clip(2000),throw:clip(450),harvest:clip(1000,[],true),jump:clip(1100)};
-const agent=()=>({id:'one',tribe:'bean',health:10,bornAt:0,moveDuration:1,moveStartedAt:0,stepCount:1,mode:'walk',carrying:0});
+const agent=()=>({id:'one',tribe:'bean',health:10,bornAt:0,moveDuration:1,moveStartedAt:0,moveAnimationStartedAt:0,stepCount:1,mode:'walk',carrying:0});
 const state=(a,t,options={})=>unitActionState(a,t,{animations:clips,...options});
 test('same priority handles death/birth, RPG attack, hurt, throw, harvest, preview, carry and idle',()=>{
  const a={...agent(),attack:{startedAt:0,endsAt:1,hitAt:.3},hurtStartedAt:0,combat:{version:2}};

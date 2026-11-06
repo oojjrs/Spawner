@@ -109,7 +109,8 @@ test("지면 이동 부족에는 콩 착지음이 붙지 않고 새싹콩 점프
   const sound = gameAudio();
   sound.state.agents = ["bean", "spore", "pebble", "spring"].map(tribe => ({ id: tribe, tribe,
     health: 1, attributes: {}, x: 1, y: 1, mode: "search", moveStartedAt: 0, moveDuration: 1, stepCount: 1 }));
-  for (const time of [.2, .6, 1.05]) {
+  for (let frame = 0; frame <= 64; frame++) {
+    const time = frame / 60;
     sound.state.simSeconds = time;
     sound.context.updateAudio();
   }

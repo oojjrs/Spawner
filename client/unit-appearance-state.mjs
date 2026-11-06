@@ -1,4 +1,4 @@
-import { UNIT_ANIMATIONS } from './unit-animation.mjs';
+import { UNIT_ANIMATIONS, unitMovementElapsedMs } from './unit-animation.mjs';
 import { unitAppearanceForAgent, unitAppearancePose } from './unit-appearance.mjs';
 
 const finite = (...values) => values.find(Number.isFinite);
@@ -41,6 +41,7 @@ export function unitActionState(agent, time, options = {}) {
   if(options.preview?.action==='jump')return state('jump',finite(options.preview.startedAt,time));
   if(agent.moveDuration>0&&Number.isFinite(agent.moveStartedAt)&&time>=agent.moveStartedAt&&time<agent.moveStartedAt+agent.moveDuration){
     const action=agent.carrying>0?'carry':'walk',ms=duration(action),cycles=clips[action]?.cyclesPerCell||clips.walk?.cyclesPerCell||1,start=agent.moveStartedAt,step=Math.max(0,(agent.stepCount||1)-1);
+    if(!agent.species){const elapsed=unitMovementElapsedMs(agent,start);return state(action,start,[[start,elapsed],[start+agent.moveDuration,elapsed+agent.moveDuration*1000]])}
     return state(action,start,[[start,step*cycles*ms],[start+agent.moveDuration,(step+1)*cycles*ms]]);
   }
   return state('idle',finite(agent.animationStartedAt,agent.bornAt,0));

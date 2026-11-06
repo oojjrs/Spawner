@@ -45,7 +45,7 @@ export function welcomeTravelMotion(model, { key, attributes = {}, width, size, 
   const speed = neutral ? model.creatureAnimationSpeed(key) : model.unitStats(attributes, key).speed;
   const cell = neutral ? Math.min(240, width * .75) : size / .7;
   const steps = Math.max(1, Math.ceil((width / 2 + size) / cell));
-  const durationMs = steps / speed * 1000;
+  const durationMs = (neutral ? steps / speed : (steps - 1) / speed + Math.min(1, 1 / speed)) * 1000;
   const moving = !reducedMotion && (phase === "enter" || phase === "exit");
   const origin = Number.isFinite(startedAt) ? startedAt : timeline - elapsedMs / 1000;
   let step = Math.max(0, Math.min(steps - 1, Math.floor(elapsedMs / 1000 * speed)));
@@ -55,7 +55,8 @@ export function welcomeTravelMotion(model, { key, attributes = {}, width, size, 
   const moveEndedAt = origin + (step + 1) / speed;
   const agent = { id, attributes, health: 1, facing: -1, mode: moving ? "walk" : "idle",
     ...(neutral ? { species: key } : { tribe: key }), stepCount: step + 1,
-    moveDuration: moving ? moveEndedAt - moveStartedAt : 0, moveStartedAt,
+    moveDuration: moving ? neutral ? moveEndedAt - moveStartedAt : Math.min(1, 1 / speed) : 0, moveStartedAt,
+    ...(!neutral ? { moveAnimationStartedAt: speed >= 1 ? origin : moveStartedAt } : {}),
     flightStartedAt: origin, renderFromX: -step, renderFromY: 0, x: -step - 1, y: 0 };
   const position = model.unitMovementPosition(agent, timeline, reducedMotion);
   const x = moving ? width / 2 + (phase === "enter" ? steps * cell : 0) + position.x * cell : width / 2;

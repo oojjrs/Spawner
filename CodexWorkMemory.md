@@ -22,6 +22,28 @@
 - 승인된 PNG 아틀라스 4개, 대응 프레임·원본 시트·검토 영상 및 필요한 재생정보를 보존한다. Design.html 기존 포자 안테나/발형 셀의 원화와 자료 참조만 갱신하며 새 문구·새 페이지는 추가하지 않는다. 게임 코드·실제 게임 연결·배포는 하지 않는다.
 - 시작 checkout은 Spawner-spring-lifecycle-publish, dedicated origin oojjrs/Spawner. fetch main 및 fast-forward 확인 결과 기존 HEAD와 원격 일치. GitHub Projects 조회는 read:project 권한 부족, 인증 변경하지 않았다. 대용량 복구 아카이브는 승인 대기 상태로 이번 작업에 포함하지 않는다.
 - 실제 확인: 승인 원본과 아틀라스 4개 바이트 일치, 각 2048×1024·8프레임 및 32개 프레임 참조 확인. 기획서 기존 표시 문구와 줄바꿈 형식 유지, 추가 참조 파일 존재, diff 공백 검사 통과. 공통 형식 검사기는 checkout에 없어 실행하지 못했다. 게임 빌드·브라우저 검수는 하지 않았다. 게시 결과는 아직 확인 전이다.
+## playable-movement-native-clock-commit-request-20261106-01a1a0bf
+
+- 기록 시각: 2026-11-06T19:39:53+09:00. 이속 수정 메모리 정리·로컬 커밋 요청 및 승인 사용자, 범위 분리·Git 판단 Codex 메인. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d의 「이번 이속 수정도 메모리에 정리하고 커밋해」. 원발언 정확시각·항목ID 미확인.
+- 확정 범위: 플레이어4종 이동1초/휴지시간 분리·1배속시계/epoch·운반/이동음/웰컴시계, 해당서버/클라이언트회귀, 실제실행용runtime/appearance/Combat사본, 이채팅관련메모리만 로컬 커밋한다. 기존49개 고유대상검사(서버14/클라이언트35)와 실제4종16포즈 검수결과를 재사용하며 Git을이유로재실행하지 않는다. 푸시·배포는 요청되지 않았다.
+- 범위 분리 판단: 현재game.js·runtime·welcome에는동시렌더공통화/DNA선택표시수정이 섞여있다. 실제작업본문을쓰거나되돌리지않고, HEAD의기존렌더함수에 이번native프레임선택만적용한 후보를 만들고 생성사본도 해당소스모듈만치환한다. 공통화용새 unit-presentation/creature-presentation/assets 모듈과그들에대한build참조는 독립후속작업이며 이번독립커밋후보의기존렌더경로에는불필요하므로 제외·그대로보존한다. 웰컴의동시카메라/모델조회변경·DNA표시/스타일·다른메모리는제외한다.
+- 필수 검토: 후보가이번이동수정만포함하고모든실행사본이후보소스와정합하는지최종staged로확인한다. 검수본과같은기능을보존한독립후보이며 새로운제품기능·문구·이미지를추가하지않는다. 이미확인한origin https://github.com/oojjrs/Spawner 및 연결Projects0개 결과 재사용. 아직커밋성공전이며최종실제해시는확인후기록한다.
+## playable-movement-native-clock-complete-20261106-01a1a0bf
+
+- 기록 시각: 2026-11-06T19:34:43+09:00. 수정 기준·재수정 요청 사용자, 클라이언트/연결·실제 렌더 검수 Codex 메인, 서버/서버회귀 구현·자체검수 Newton(01a1b05a-b39c-70f2-ad44-bcf01a22d3f1). 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d와 해당워커 결과. 원발언 정확시각·항목ID 미확인.
+- 완료: server/game.mjs의 (feet?1:.5)/agentSpeed 대신 min(1,1/agentSpeed)로 한칸 기본1초를 복구하고 기존1/speed주기·moveBudget·틱보정으로 다음이동까지 쉰다. 네종족·운반·지형·속성의 실제이속수치는 바꾸지 않았다. 연속이동epoch는 moveAnimationStartedAt로 유지하고 실제휴식뒤리셋, 구세이브누락은moveStartedAt fallback. 기존view의 ...visible 및 JSON으로전달되어별도 wire필드수정은불필요함을 확인했다.
+- 클라이언트: unitMovementElapsedMs라는 실제 시뮬레이션 경과시계를 도입해 플레이어 walk/운반 appearance상태/분비형 보행/분리기본렌더/이동음의 원본프레임이 이동시간에맞춰늘어나지않게 했다. 웰컴도1초이동+주기중대기를 따르고 마지막단계는 실제착지때끝난다. 원래중립 시계·공격·원화·배율·피벗은 유지한다. 높은이속에서는 이동을주기안으로만끝내되 시트재생1배속epoch를연속유지해초반프레임재시작을막는다.
+- 검증: 서버14개 고유검사 통과(최초12/14 후 fixture둥지레벨·부동소수기대값만보정해실패대상재확인), 서버3텍스트형식/diff검수통과. 클라이언트대상35개중최초33성공, 희소3틱이동음fixture와웰컴최종착지시점계약을고친뒤영향3개만재실행해3성공했다. 운반/기본/속성시계, .2/.5/1/4초이동에서도실제70ms/40ms 프레임, 연속epoch·대기/착지·우선순위를검사했다. 이후다른채팅렌더공통화가진행중이므로 이35개결과를새공통화전체테스트성공으로확대하지 않는다.
+- 실행본: 정상 client/build.mjs --runtime-only, tools/build-appearance-preview.mjs, client/build-combat.mjs로 실제runtime(browser/worker)·appearance런타임·Combat inline을동기화했다. 임의자산배속이나시트타이밍수정은없다. 실제격리headless Edge의현재game.js에서네종족을각140/420/700/950ms에그려16장모두본체픽셀존재·JS오류0을확인했다. 포자/샘방울프레임2/6/10/13,몽돌3/10/17/3으로원본시간일치,콩은1초원래홉/위치보간을확인했다.
+- 동시변경보존: 마감중 다른채팅welcome-native-parity의unit-presentation/creature-presentation/assets분리와game.js래퍼가들어왔다. 새 unit-presentation의 drawAgentMovement에도 이번 native unitAnimationPose 프레임선택이 그대로보존됨을직접확인했다. 호출에필요한 createUnitPresentation이기존generatedAPI에는없어, client/build.mjs의browser입력·공개exports에이모듈1개참조만더하고runtime을다시생성했다. 다른새모듈본문/공통화로직은수정하지않았다. 이새실행경로에서다시같은16포즈·오류0을검수해확인했고, 공통화전체완료로보고하지않는다.
+- 근거: literal루트 $Trash/playable-movement-native-clock-20261106/의원문백업, client-tests.txt(최초실패도보존), render-qa.json·16PNG·native-walk-contact.png·render-alpha.json, 빌드출력/동기화recipe. 마지막포즈JSON은공통화이후실행경로결과다. 최신본문의회귀·렌더수정은완료했으며관련변경은커밋전이다. 커밋/푸시/배포수행없음; 다른채팅의분리모듈·메모리와기존변경은보존한다.
+## playable-movement-native-clock-start-20261106-01a1a0bf
+
+- 기록 시각: 2026-11-06T19:14:56+09:00. 네 플레이어 종족 이동 애니1배속 및 다음 이동 간격으로 이속조절 재수정 요청·결정 사용자, 원인 확인/구현 판단 Codex 메인. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d의 느려진 이속 재수정 및 「rㅗ쳐」. 원발언 정확시각·항목 ID 미확인.
+- 직접 확인: server/game.mjs618은 moveDuration=(feet?1:.5)/agentSpeed로 이속이 낮을수록 이동자체를 늘린다. client/unit-animation의보행프레임·unit-appearance-state의 walk/carry 시계 및 game의분리이동렌더도 이동진척율로 클립전체를 늘여 재생한다. 이전 평균속도 유지 테스트 일부도 이 잘못된 duration비례를 기대한다.
+- 유효 기준: 과거 이동 복구 기록 thread01a1955c의 사용자 msg_01a1955d-19f1-7763-b651-24c36dffa762는 원래속도로 이동하고 휴지시간으로 전체이속 판정하라는 것이며, 당시 명시된 기본1초이동/1초휴식을 현재요청의1배속/간격분리와 함께 적용한다. 원인규명은현재호출/계산확인 범위이며 새 작업자 귀속조사로 넓히지 않는다.
+- 구현: 기본 한칸 동작1초를 복구하고 1/유효이속 주기에서 남은시간을 기다린다. 높은이속에서주기가1초보다짧으면 이동을겹치지않도록 통과시간만주기이내로하며 애니시계는계속1배속으로 흐르게 분리한다. 연속이동의moveAnimationStartedAt를 유지하고 실제쉼뒤에는새epoch로 시작해 빠른이동때프레임이매번초반으로초기화되지 않게 한다. 원종/대표형/운반 및관련소리·웰컴의재사용이동시계를 필요한부분만 맞추며 중립/공격/원화/크기/프레임길이는 변경하지 않는다.
+- 독립분담: 메인이 클라이언트1배속 시계/실행본 및검수통합을 맡고 부모와동일모델·추론강도 워커가 서버이동시간/새epoch전달·기존이동검사 보정을 맡는다. 겹치는파일수정은하지 않는다. current작업트리시작상태는clean이며 새동시변경을보존한다. 임시산출물은literal루트 $Trash/playable-movement-native-clock-20261106. 현재구현수정은커밋/푸시/배포승인이 아니다.
 ## 채집 접시 외형 수정 커밋 범위 확정 · 01a1b058
 
 - 기록 ID: gather-plate-local-commit-freeze-20261106-01a1b058. 기록 시각 2026-11-06T19:38:57+09:00. 기록자·분리/마감 판단 Codex /root, 이번수정만 로컬커밋 결정 사용자. 출처 현재채팅01a1b058-b678-7c82-b53d-f7118079bd4d의 ‘수정한 것만 커밋해’. 원발언 정확시각·항목ID 불명. H:/Spawner Windows PowerShell host local.

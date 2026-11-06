@@ -274,8 +274,9 @@
         return { key, definition, phase: flight.phase, rate: flight.rate, elapsed };
       }
       const cycles = animation.cyclesPerCell || 1;
-      rate = cycles / unit.moveDuration;
-      phase = Math.max(0, (unit.stepCount || 1) - 1) * cycles + elapsed * rate;
+      rate = unit.species ? cycles / unit.moveDuration : 1000 / animation.durationMs;
+      phase = unit.species ? Math.max(0, (unit.stepCount || 1) - 1) * cycles + elapsed * rate :
+        Math.max(0, time - (unit.moveAnimationStartedAt ?? unit.moveStartedAt)) * rate;
     }
     return { key, definition, phase, rate, elapsed };
   }
