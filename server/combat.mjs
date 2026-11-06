@@ -537,7 +537,8 @@ export function createCombat(environment) {
       }
     }
     const stats = attackStats(agent);
-    if (!stats || !stats.healer && !stats.ranged || !settled(agent, time) || agent.retreat || time < (agent.dnaStunnedUntil || 0)) return false;
+    if (!stats || !stats.healer && !stats.ranged || !settled(agent, time) || agent.retreat ||
+        time < Math.max(agent.dnaStunnedUntil || 0, agent.combat?.stunnedUntil || 0)) return false;
     if (stats.healer && time >= (agent.dnaHealReady || 0)) {
       agent.dnaHealReady = time + DNA_ACTION_RULES.healInterval;
       const allocations = dnaHealAllocations(agent, nearby(agent, DNA_ACTION_RULES.healRange).map(entry => entry.agent), combatTeam, distance);
