@@ -22,7 +22,7 @@
   $('zoom-out').onclick=()=>{editor.zoom(1/1.2);$('editor').querySelector('.dna-editor').focus({preventScroll:true});};
   $('fit').onclick=()=>{editor.fit();$('editor').querySelector('.dna-editor').focus({preventScroll:true});};
   $('zoom-in').onclick=()=>{editor.zoom(1.2);$('editor').querySelector('.dna-editor').focus({preventScroll:true});};
-  $('save-template').onclick=()=>{const name=$('template-name').value.trim();if(!name){$('template-name').focus();return;}const existing=library.findIndex(entry=>entry.name===name),entry={name,design:editor.getDesign()};if(existing<0)library.unshift(entry);else library[existing]=entry;library=library.slice(0,60);persist(editor.getDesign());editor.clearHistory();renderTemplates();};
+  $('save-template').onclick=()=>{const name=$('template-name').value.trim();if(!name){$('template-name').focus();return;}const existing=library.findIndex(entry=>entry.name===name),entry={name,design:editor.getDesign()};if(existing<0)library.unshift(entry);else library[existing]=entry;library=library.slice(0,60);persist(editor.getDesign());editor.load(editor.getDesign(),false);renderTemplates();};
   $('export').onclick=()=>{const blob=new Blob([JSON.stringify(editor.getDesign(),null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='Attribute-DNA.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),0);};
   $('import').onclick=()=>$('file').click();
   $('file').onchange=async()=>{const file=$('file').files[0];if(!file)return;try{if(file.size>300000)throw new Error();if(!loadDesign(JSON.parse(await file.text())))throw new Error();}catch{$('file-status').textContent='파일을 읽을 수 없습니다';$('file-status').hidden=false;}$('file').value='';};

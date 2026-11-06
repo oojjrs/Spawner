@@ -1,3 +1,33 @@
+## 저장 설계 이력 커밋 범위 확정 · 01a1b0e9
+
+- 기록 ID: dna-loaded-history-freeze-20261106-01a1b0e9. 기록 시각: 2026-11-06T22:08:25+09:00. 기록자·범위/검수판단 Codex /root, 검사정리·커밋·배포 승인 사용자. 출처 현재채팅01a1b0e9-16d7-7e73-b55e-026feea987ff 최신요청과 candidate 직접검수. 원발언 정확시각·턴/항목ID·딥링크·PC식별불명, H:/Spawner Windows PowerShell.
+- 실제검수: 후보의 공통편집기22+승인1렙DNA계약3=25검사 전부통과. 초기설계undo/redo·경계·읽기전용·공통module정합과 현재가격8을 확인했다. 앞선result의21/22·가격실패는이번검사수정/25통과로대체한다.
+- 동결: HEAD 71b3e65629ebc3ee11478394bcccead995d5ee97 위에 editor.load 한줄·제작기저장재로드 한줄·신규회귀2개/기대8·runtime/Attribute 해당load 한줄과 이번채팅 관련기록만 투영하는 정확6경로다. 원래working tree의 기관제한안내·CSS·서버/웰컴/툴팁·다른메모리 및 index를 보존한다. 새브랜치·전체build 없이 별도index에서 최종staged를 검수한다. 메시지는 한국어 「저장 설계 편집 이력과 가격 검사 수정」.
+- 이후: 전용origin main에push/readback하고그고정커밋으로기존public Sites 소스를준비·게시한다. 사이트source helper는열기실행중이며Git/배포성공은선기록하지않는다.
+
+## 저장 설계 이력·가격 검사 커밋 및 배포 승인 · 01a1b0e9
+
+- 기록 ID: dna-loaded-history-publish-scope-20261106-01a1b0e9. 기록 시각: 2026-11-06T22:05:49+09:00. 기록자·검사판단 Codex /root, 테스트 제거/수정·커밋·배포 승인 사용자. 출처 현재 채팅 01a1b0e9-16d7-7e73-b55e-026feea987ff의 최신 요청. 원발언 정확시각·턴/항목ID·딥링크·PC식별 불명, H:/Spawner Windows PowerShell.
+- 판단: 검사는 편집 비용·실제 탄생 비용·공통 가격 일치를 확인하므로 유지한다. 현재 server/dna.mjs의 1~2렙 추가절반계수에 따라 채집기관5P+기본3P=8P이며 server/dna-level-one.test.mjs의 승인 등급 가격/기초공식 계약과 일치한다. 이전 13 기대값만8로 수정한다. 새 가격 정책/제품 가격 변경은 하지 않는다. 이 요청은 앞선 result의 가격 검사 미수정 결정을 대체한다.
+- 범위: 앞선 결과의5제품/검사 경로와 이번 test 기대값·관련 메모리만 원자적커밋하고 전용 origin/main push 후 기존 public Sites에 배포한다. 병행 기관 제한 안내가 공통editor/Attribute/runtime에 생겼으므로 해당변경은 working tree에 보존하고 HEAD기준 이번 load 한줄만 투영한 후보로 분리한다. 다른 서버·웰컴·툴팁·CSS·미지정메모리는 제외한다.
+- 원격근거: 시작 main/origin main 71b3e65629ebc3ee11478394bcccead995d5ee97 일치, origin=https://github.com/oojjrs/Spawner; 이번 작업의 Projects0 확인 재사용. 검증·커밋·게시 성공은 실제결과 이후 기록한다.
+
+## 저장 설계 우클릭·조각 이력 수정 완료 · 01a1b0e9 현재 요약
+
+- 기록 ID: dna-loaded-history-result-20261106-01a1b0e9. 기록·직접 검수 시각: 2026-11-06T22:00:25+09:00. 기록자·구현/검수 Codex /root, 저장 설계 편집·전체 이력 요청 사용자. 출처 현재 채팅 01a1b0e9-16d7-7e73-b55e-026feea987ff와 실제 Node 출력. 원발언 정확시각·턴/항목 ID·딥링크·PC 식별 불명, H:/Spawner Windows PowerShell.
+- 완료: 공통 load가 저장 DNA의 조각 순서대로 빈 설계→각 접두 설계의 undo snapshot을 만든다. 기존 조각을 우클릭으로 하나씩 제거하고 redo로 회전·등급·저장 shape까지 복구한다. 제작기 저장은 현재 DNA를 재로드해 이력을 새로 만들고 다른 설계의 편집 이력은 넘기지 않는다. 초기화·빈 설계·readonly·일반 새 배치의 redo 폐기 경계는 유지했다. 인게임 runtime와 Attribute의 해당 module만 동기화했고 새 문구·레이아웃/서버 변경은 없다.
+- 실제 검수: 기존 코드에서 신규2회귀 실패를 확인했고 최종 공통 편집기22검사 중21통과/가격1실패다. 신규2회귀(8조각 전체우클릭/정확redo·설계전환/저장재로드/새배치의redo폐기), 기존 초기화·readonly·입력·source/실행module정합을 통과했다. adapter 구문 parse도 성공했다. 새 분기 fixture가 capacity 끝점에서 배치 불가능한 health를 가정한 실패는 알려진 유효 movement 분기로 교정해 통과했다.
+- 기존 실패 분리: 가격 검사의 기대13/실제8은 수정 전 editor 사본과 기존 test로도 동일 실패를 직접 확인했다. 이번 load/저장 변경과 무관한 기존 가격 기대값을 임의 수정하지 않는다. 사용자 브라우저의 실제 조작을 관측한 것으로 확대하지 않는다.
+- 병행보호: 다른 작업의 rebase가 21:54:05 및21:57:42에 시작된 reflog와 rebase-merge를 확인했다. 이 기간 working tree에서 이번 source/test가 임시로 사라져 추가 편집을 중지하고 task 사본/적용script를 literal $Trash/dna-loaded-history-01a1b0e9에 보존했다. rebase 종료 후 현재 내용에 다섯 task 파일의 필요한 hunk만 guard로 재적용했다. 다른 Git작업·원격/미지정수정은 실행하지 않았다.
+- 변경 범위: client/dna-editor.mjs·client/attribute-editor.js·client/dna-editor.test.mjs·client/runtime.js·Attribute.html 및 관련 메모리다. 초기 scope 기록의 구현 전 상태를 이번 결과로 대체하고 원기록 보존. Git stage/commit/push/배포 없음. 최종 공유형식/국소diff는 바로 다음 출력에 따른다.
+
+## 저장 설계 조각 이력 재구성 착수 · 01a1b0e9 현재 요약
+
+- 기록 ID: dna-loaded-history-scope-20261106-01a1b0e9. 기록 시각: 2026-11-06T21:53:42+09:00. 기록자·구현판단 Codex /root, 기존 설계 우클릭 변경/취소와 전체 이력 요청 사용자. 출처 현재 채팅 01a1b0e9-16d7-7e73-b55e-026feea987ff 최신 요청. 원발언 정확시각·턴/항목 ID·딥링크·PC 식별 불명, H:/Spawner Windows PowerShell.
+- 확인: 공통 createDnaEditor.load가 pieces를 복원하고 history/future를 비워 저장·초기 지급 설계의 기존 조각을 우클릭으로 되돌리지 못한다. 인게임 openUnitDesign과 제작기 loadDesign이 이 API를 사용하고 제작기 저장도 clearHistory를 호출한다.
+- 결정: 로드한 DNA의 저장 조각 순서를 따라 빈 설계부터 각 접두 상태를 현재 설계 안의 undo 이력으로 재구성한다. redo는 정확한 원래 조각/회전/등급/도형을 복구하며 새 배치 시 redo를 폐기한다. 제작기 저장도 현재 설계를 다시 로드해 같은 경계를 적용한다. 다른 설계로 넘어가는 이력과 초기화 후 복원은 계속 차단하고 읽기 전용을 유지한다. 이는 dna-undo-boundary-start-20261104-01a1a129의 다른 설계 복원 금지는 유지하면서 로드 직후 조각 이력 비움만 최신 요청에 따라 대체한다.
+- 범위: client/dna-editor.mjs·표적 회귀·client/attribute-editor.js 및 runtime.js/Attribute.html의 해당 공통모듈만 동기화한다. 기존 dirty 제품·공유메모리 보호, 전체 build·새 문구·Git 완료·배포 없음. 연결 GitHub Projects 직접 조회 nodes=[]로 보드 없음. 검수는 우클릭/redo·설계 전환/초기화 경계·읽기 전용 및 공통모듈 정합의 기존 좁은 실행면을 사용한다. 임시 근거 literal $Trash/dna-loaded-history-01a1b0e9.
+
 ## 포자 탄생 V7 승인 보존 · 2026-11-06T12:54:06+00:00
 
 - 기록 ID: spore-birth-v7-2026-11-06T12:54:06+00:00. 기록자 Codex, 결정 주체 사용자. 출처 채팅 6ae7a6f41c94819380facdaa018ca2b0, 부모 전달 승인 “합격”. 원 발언 시각과 항목 ID 불명. 승인 몸체 시트는 안테나형과 발형 각각 512셀·4열·22프레임·3120ms이며 둥지·줄기는 몸체에 포함되지 않는다. 검수 장면은 704×640셀·8열·94프레임·3120ms이고 둥지·줄기·이동을 포함한다. 이 둘을 구별해서 보존하며 게임 적용·배포는 하지 않는다.

@@ -191,9 +191,38 @@ test("초기화·불러오기·저장 이력 경계에서 이전 설계가 되�
   editor.load(design([]),false);root.dispatch('contextmenu',{});root.dispatch('keydown',{key:'y',ctrlKey:true});assert.equal(editor.getDesign().pieces.length,0);
 });
 
+test("불러온 설계는 모든 조각을 우클릭으로 되돌리고 원래 도형으로 다시 실행한다",t=>{
+  const {editor,root,changes}=fixture(t),pieces=blockedPieces(),saved=design(pieces),original=structuredClone(saved);
+  assert.equal(editor.load(saved,false),true);assert.equal(changes.length,0);
+  const [undo,redo]=root.querySelector('.dna-tools').children;
+  assert.equal(undo.disabled,false);assert.equal(redo.disabled,true);
+  saved.pieces[0].shape[0]=5;
+  for(let count=pieces.length-1;count>=0;count--){
+    root.dispatch('contextmenu',{});assert.deepEqual(editor.getDesign(),{...original,pieces:original.pieces.slice(0,count)});
+  }
+  assert.equal(undo.disabled,true);root.dispatch('contextmenu',{});assert.equal(editor.getDesign().pieces.length,0);
+  for(let count=1;count<=pieces.length;count++){
+    root.dispatch('keydown',{key:'y',ctrlKey:true});assert.deepEqual(editor.getDesign(),{...original,pieces:original.pieces.slice(0,count)});
+  }
+  assert.equal(redo.disabled,true);assert.equal(changes.length,pieces.length*2);
+});
+
+test("설계 전환과 저장 재로드는 현재 설계 안에서만 이력을 만들고 새 배치는 redo를 지운다",t=>{
+  const {editor,root}=fixture(t),first=design([piece('gather',0)]),second=design(blockedPieces().slice(0,2));
+  editor.load(first,false);root.dispatch('contextmenu',{});editor.load(second,false);
+  root.dispatch('keydown',{key:'y',ctrlKey:true});assert.deepEqual(editor.getDesign(),second);
+  root.dispatch('contextmenu',{});root.dispatch('contextmenu',{});root.dispatch('contextmenu',{});assert.equal(editor.getDesign().pieces.length,0);
+  root.dispatch('keydown',{key:'y',ctrlKey:true});assert.deepEqual(editor.getDesign().pieces,second.pieces.slice(0,1));
+  selectGene(root,'movement');place(root);const current=editor.getDesign();assert.equal(current.pieces.length,2);assert.equal(root.querySelector('.dna-tools').children[1].disabled,true);
+  root.dispatch('keydown',{key:'y',ctrlKey:true});assert.deepEqual(editor.getDesign(),current);
+  editor.load(current,false);root.dispatch('contextmenu',{});assert.deepEqual(editor.getDesign().pieces,current.pieces.slice(0,1));
+  root.dispatch('keydown',{key:'y',ctrlKey:true});assert.deepEqual(editor.getDesign(),current);
+  editor.load(design([]),false);root.dispatch('contextmenu',{});root.dispatch('keydown',{key:'y',ctrlKey:true});assert.equal(editor.getDesign().pieces.length,0);
+});
+
 test("공통 가격은 빈 설계·실제 탄생비·표시 비용에 동일하게 적용된다",t=>{
   const {editor,root}=fixture(t);assert.equal(ATTRIBUTE_DNA.cost([]),3);assert.equal(root.querySelector('.dna-cost strong').textContent,'3');
-  selectGene(root,'gather');place(root);const dna=editor.getDesign();assert.equal(ATTRIBUTE_DNA.cost(dna.pieces),13);
+  selectGene(root,'gather');place(root);const dna=editor.getDesign();assert.equal(ATTRIBUTE_DNA.cost(dna.pieces),8);
   for(const tribe of ['bean','spore','pebble','spring'])assert.equal(birthCost({dna},tribe),ATTRIBUTE_DNA.cost(dna.pieces));
   assert.equal(root.querySelector('.dna-cost strong').textContent,String(ATTRIBUTE_DNA.cost(dna.pieces)));
 });

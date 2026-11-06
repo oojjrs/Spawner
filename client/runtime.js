@@ -5413,7 +5413,7 @@ function createDnaEditor(container, dnaModel, onChange) {
   const observer=new ResizeObserver(resize);observer.observe(board);
   state();resize();
   return {
-    load(design,locked){const value=M.validate(design);if(!value)return false;pieces=value.pieces.map(M.clonePiece);if(!contextSet){level=value.level;budget=value.budget;}readOnly=locked===true;history=[];future=[];insertion=pieces.length;notice='';selected=M.catalog.find(gene=>gene.id===pieces[pieces.length-1]?.gene&&gene.grade<=level)?.id||M.catalog[0].id;state();fit();return true;},
+    load(design,locked){const value=M.validate(design);if(!value)return false;pieces=value.pieces.map(M.clonePiece);if(!contextSet){level=value.level;budget=value.budget;}readOnly=locked===true;history=pieces.map((_,index)=>({pieces:pieces.slice(0,index).map(M.clonePiece),insertion:index}));future=[];insertion=pieces.length;notice='';selected=M.catalog.find(gene=>gene.id===pieces[pieces.length-1]?.gene&&gene.grade<=level)?.id||M.catalog[0].id;state();fit();return true;},
     context(nextLevel,nextBudget,locked){const previousLevel=level,previousBudget=budget,previousReadOnly=readOnly;if(Number.isInteger(nextLevel)&&nextLevel>=1&&nextLevel<=4)level=nextLevel;if(Number.isFinite(nextBudget)&&nextBudget>=0)budget=Math.floor(nextBudget);contextSet=true;readOnly=locked===true;if(M.lookup.get(selected).grade>level)selected=M.catalog[0].id;if(previousLevel===level&&previousBudget===budget&&previousReadOnly===readOnly)return;notice='';state();if(previousLevel!==level)fit();},
     getDesign,
     clearHistory,
