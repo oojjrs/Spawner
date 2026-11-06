@@ -7523,31 +7523,36 @@
       unitPanelTitle.textContent = agent.name + " · Lv." + (agent.level || 1);
       const attributes = document.getElementById("agent-attributes");
       const slots = agent.activeSlots || agent.slots || [];
-      const signature = JSON.stringify([agent.tribe, agent.species, slots, agent.attributeLevels, agent.attributes]);
+      const signature = JSON.stringify([agent.tribe, agent.species, slots, agent.attributeLevels, agent.attributes, agent.dna]);
       if (attributes.dataset.signature !== signature) {
         attributes.dataset.signature = signature;
-        const fragment = document.createDocumentFragment();
-        for (const slot of slots) {
-          const attribute = ATTRIBUTES.find(candidate => candidate.key === slot);
-          if (!attribute) continue;
-          const icon = document.createElement("span");
-          icon.className = "unit-attribute";
-          icon.tabIndex = 0;
-          icon.setAttribute("role", "img");
-          icon.setAttribute("aria-label", attribute.name);
-          const image = document.createElement("img");
-          image.src = attribute.image;
-          image.alt = "";
-          const level = document.createElement("small");
-          level.textContent = "Lv." + (agent.attributes[slot] || 1);
-          icon.append(image, level);
-          attachAttributeHelp(icon, attribute, agent.attributes[slot] || 1, agent.tribe || agent.species || state.tribe);
-          fragment.append(icon);
-        }
+        attributes.classList.toggle("unit-dna-composition", !!agent.dna);
         if (helpTooltipTarget && attributes.contains(helpTooltipTarget)) hideHelpTooltip();
-        attributes.replaceChildren(fragment);
+        if (agent.dna) {
+          Spawner.renderDnaComposition(attributes, Spawner.ATTRIBUTE_DNA, agent.dna);
+        } else {
+          const fragment = document.createDocumentFragment();
+          for (const slot of slots) {
+            const attribute = ATTRIBUTES.find(candidate => candidate.key === slot);
+            if (!attribute) continue;
+            const icon = document.createElement("span");
+            icon.className = "unit-attribute";
+            icon.tabIndex = 0;
+            icon.setAttribute("role", "img");
+            icon.setAttribute("aria-label", attribute.name);
+            const image = document.createElement("img");
+            image.src = attribute.image;
+            image.alt = "";
+            const level = document.createElement("small");
+            level.textContent = "Lv." + (agent.attributes[slot] || 1);
+            icon.append(image, level);
+            attachAttributeHelp(icon, attribute, agent.attributes[slot] || 1, agent.tribe || agent.species || state.tribe);
+            fragment.append(icon);
+          }
+          if (helpTooltipTarget && attributes.contains(helpTooltipTarget)) hideHelpTooltip();
+          attributes.replaceChildren(fragment);
+        }
       }
-      updateCombatUnitStats(agent);
       const template = selectedAgentTemplate();
       const cost = template ? birthCost(template, state.tribe) : Infinity;
       agentBirth.disabled = !!state.ending || !template || connection.busy || !connection.online || !hasBirthplace() || state.agents.filter(agent => agent.health > 0).length >= unitCapacity() || state.evolutionPoints < cost ||
@@ -8198,9 +8203,6 @@
       }
       combatPrimarySelect.value = unitDraft.combatPrimary || "";
     }
-    const combatUnitStats = document.createElement("p");
-    combatUnitStats.className = "combat-unit-stats";
-    document.getElementById("agent-attributes").after(combatUnitStats);
     function combatStatsText(agent) {
       const profile = Spawner.combatProfile(agent), dna = agent.stats?.dna;
       if (dna) return "HP " + Math.ceil(Math.max(0, agent.health ?? agent.stats.health)) + "/" + agent.stats.health +
@@ -8208,9 +8210,6 @@
         " · 원거리 공격력 " + Number(dna.rangedPower.toFixed(2)) + " · 원거리 공속 " + Number(dna.rangedSpeed.toFixed(2)) + " · 방어 " + Number(dna.armor.toFixed(2));
       return "HP " + Math.ceil(Math.max(0, agent.health ?? agent.stats?.health ?? 100)) + "/" + (agent.stats?.health || 100) +
         " · 공격 " + Math.round(profile.attackPower) + " · 방어 " + Math.round(profile.defense) + " · 공속 " + profile.attackSpeed.toFixed(2);
-    }
-    function updateCombatUnitStats(agent) {
-      if (agent) combatUnitStats.textContent = combatStatsText(agent);
     }
     const combatOpen = document.createElement("button");
     combatOpen.type = "button";

@@ -4357,9 +4357,59 @@ function dnaEditorViewport(M,level,start,gene,width,height) {
   return {scale,x:width/2-(minX+maxX)*scale/2,y:top+(height-top-bottom)/2-(minY+maxY)*scale/2};
 }
 
+const dnaGeneNames={blade:'칼날',carapace:'갑각',antenna:'안테나',gather:'채집기관',legs:'다리',power:'근접 공격력',combo:'연타',speed:'근접 공속',comboPower:'연격숙련',critical:'치명',criticalPower:'치명위력',accuracy:'정밀',penetration:'예리함',health:'체력',armor:'경화',evasion:'회피',parry:'패링',block:'방어본능',blockPower:'방어숙련',counter:'반격',counterPower:'반격위력',tenacity:'강인함',reduction:'완충',movement:'이속',capacity:'운반',harvest:'채집량',harvestSpeed:'채집속도',vision:'시야',loadSpeed:'하중적응',healing:'회복력',stun:'기절',stunTime:'기절연장',bleed:'출혈',bleedPower:'출혈강도',area:'범위공격',areaPower:'확산위력',lifesteal:'흡혈',reflection:'반사',regeneration:'재생',comboSpeed:'연타속도',focus:'집중',healer:'치유기관',secretion:'분비기관',rangedPower:'원거리 공격력',rangedSpeed:'원거리 공속'};
+
+function dnaGeneShape(M,gene){const points=M.route({q:0,r:0},gene,gene.grade,0).map(point=>({x:34*Math.sqrt(3)*(point.q+point.r/2),y:51*point.r})),minX=Math.min(...points.map(p=>p.x)),maxX=Math.max(...points.map(p=>p.x)),minY=Math.min(...points.map(p=>p.y)),maxY=Math.max(...points.map(p=>p.y)),scale=Math.min(30/Math.max(1,maxX-minX),24/Math.max(1,maxY-minY));return points.map(p=>[(p.x-(minX+maxX)/2)*scale+22,(p.y-(minY+maxY)/2)*scale+19]);}
+
+function dnaGeneShapeSvg(M,gene){const points=dnaGeneShape(M,gene),organ=gene.category==='organ';return '<polyline points="'+points.map(p=>p.join(',')).join(' ')+'" fill="none" stroke="'+gene.color+'" stroke-width="'+(organ?4.5:2)+'" stroke-linejoin="round"/>'+points.slice(1,-1).map(p=>'<circle cx="'+p[0]+'" cy="'+p[1]+'" r="'+(organ?3:1.8)+'" fill="#fff" stroke="none"/>').join('')+'<circle cx="'+points[0][0]+'" cy="'+points[0][1]+'" r="'+(organ?5:4)+'" fill="#14252a" stroke="'+gene.color+'" stroke-width="1.5"/><circle cx="'+points[points.length-1][0]+'" cy="'+points[points.length-1][1]+'" r="'+(organ?5:4)+'" fill="#14252a" stroke="'+gene.color+'" stroke-width="1.5"/>';}
+
+function renderDnaComposition(container, M, dna) {
+  const fragment = document.createDocumentFragment();
+  const model = M.trace(dna.pieces, dna.level);
+  const world = point => ({ x: 34 * Math.sqrt(3) * (point.q + point.r / 2), y: 51 * point.r });
+  const nodes = model.nodes.map(world);
+  const points = [...nodes, ...model.paths.flatMap(path => path.points.map(world))];
+  const minX = Math.min(...points.map(point => point.x)) - 22, maxX = Math.max(...points.map(point => point.x)) + 22;
+  const minY = Math.min(...points.map(point => point.y)) - 22, maxY = Math.max(...points.map(point => point.y)) + 22;
+  const board = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  board.classList.add('unit-dna-board');
+  board.setAttribute('viewBox', [minX, minY, maxX - minX, maxY - minY].join(' '));
+  board.setAttribute('role', 'img');
+  board.setAttribute('aria-label', 'DNA');
+  board.innerHTML = model.paths.map(path => {
+    const gene = M.lookup.get(path.gene), organ = gene.category === 'organ';
+    return '<polyline data-gene="' + gene.id + '" points="' + path.points.map(world).map(point => point.x + ',' + point.y).join(' ') + '" fill="none" stroke="' + gene.color + '" stroke-width="' + (organ ? 7 : 4) + '" stroke-linecap="round" stroke-linejoin="round"/>' +
+      path.points.slice(1, -1).map(world).map(point => '<circle cx="' + point.x + '" cy="' + point.y + '" r="' + (organ ? 4 : 2.5) + '" fill="#fff"/>').join('');
+  }).join('') + nodes.map((point, index) => '<circle cx="' + point.x + '" cy="' + point.y + '" r="6" fill="' + (index === 0 ? '#e8f0e9' : '#14252a') + '" stroke="#9fcab6" stroke-width="2"/>').join('');
+  fragment.append(board);
+  const list = document.createElement('div');
+  list.className = 'unit-dna-list';
+  const counts = M.counts(dna.pieces);
+  for (const gene of M.catalog) {
+    if (!counts[gene.id]) continue;
+    const item = document.createElement('span');
+    item.className = 'unit-dna-gene';
+    item.dataset.gene = gene.id;
+    item.dataset.category = gene.category;
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('viewBox', '0 0 44 38');
+    svg.setAttribute('aria-hidden', 'true');
+    svg.innerHTML = dnaGeneShapeSvg(M, gene);
+    const name = document.createElement('span');
+    name.className = 'unit-dna-name';
+    name.textContent = dnaGeneNames[gene.id];
+    const count = document.createElement('strong');
+    count.textContent = '×' + counts[gene.id];
+    item.append(svg, name, count);
+    list.append(item);
+  }
+  fragment.append(list);
+  container.replaceChildren(fragment);
+}
+
 function createDnaEditor(container, dnaModel, onChange) {
   const M=dnaModel;
-  const names={blade:'칼날',carapace:'갑각',antenna:'안테나',gather:'채집기관',legs:'다리',power:'근접 공격력',combo:'연타',speed:'근접 공속',comboPower:'연격숙련',critical:'치명',criticalPower:'치명위력',accuracy:'정밀',penetration:'예리함',health:'체력',armor:'경화',evasion:'회피',parry:'패링',block:'방어본능',blockPower:'방어숙련',counter:'반격',counterPower:'반격위력',tenacity:'강인함',reduction:'완충',movement:'이속',capacity:'운반',harvest:'채집량',harvestSpeed:'채집속도',vision:'시야',loadSpeed:'하중적응',healing:'회복력',stun:'기절',stunTime:'기절연장',bleed:'출혈',bleedPower:'출혈강도',area:'범위공격',areaPower:'확산위력',lifesteal:'흡혈',reflection:'반사',regeneration:'재생',comboSpeed:'연타속도',focus:'집중',healer:'치유기관',secretion:'분비기관',rangedPower:'원거리 공격력',rangedSpeed:'원거리 공속'};
+  const names=dnaGeneNames;
   const root=document.createElement('section');root.className='dna-editor';root.tabIndex=0;
   root.innerHTML='<div class="dna-board"><canvas aria-label="DNA 편집 영역" tabindex="0"></canvas><div class="dna-legend" hidden></div><div class="dna-tools"></div><details class="dna-guide"><summary>조작 안내</summary><dl><dt>DNA 선택</dt><dd><kbd>휠 클릭</kbd></dd><dt>회전</dt><dd><kbd>휠 위·아래 / Q·E</kbd></dd><dt>배치</dt><dd><kbd>좌클릭 / Enter</kbd></dd><dt>되돌리기</dt><dd><kbd>우클릭 / Ctrl+Z</kbd></dd></dl></details><output class="dna-cost">비용 <strong></strong></output></div><aside class="dna-catalog"><div class="dna-filters"></div><div class="dna-list"></div></aside><div class="dna-dock"><div class="dna-rotation"></div><button class="dna-add" type="button">조각 추가</button><output class="dna-status" aria-live="polite"></output></div>';
   container.replaceChildren(root);
@@ -4409,8 +4459,7 @@ function createDnaEditor(container, dnaModel, onChange) {
   function requestDraw(){if(!frame&&!destroyed)frame=requestAnimationFrame(()=>{frame=0;if(!destroyed)draw();});}
   function world(point){return {x:34*Math.sqrt(3)*(point.q+point.r/2),y:51*point.r};}
   function screen(point){const p=world(point);return {x:p.x*view.scale+view.x,y:p.y*view.scale+view.y};}
-  function shape(gene){const points=M.route({q:0,r:0},gene,gene.grade,0).map(world),minX=Math.min(...points.map(p=>p.x)),maxX=Math.max(...points.map(p=>p.x)),minY=Math.min(...points.map(p=>p.y)),maxY=Math.max(...points.map(p=>p.y)),scale=Math.min(30/Math.max(1,maxX-minX),24/Math.max(1,maxY-minY));return points.map(p=>[(p.x-(minX+maxX)/2)*scale+22,(p.y-(minY+maxY)/2)*scale+19]);}
-  function shapeSvg(gene){const points=shape(gene),organ=gene.category==='organ';return '<polyline points="'+points.map(p=>p.join(',')).join(' ')+'" fill="none" stroke="'+gene.color+'" stroke-width="'+(organ?4.5:2)+'" stroke-linejoin="round"/>'+points.slice(1,-1).map(p=>'<circle cx="'+p[0]+'" cy="'+p[1]+'" r="'+(organ?3:1.8)+'" fill="#fff" stroke="none"/>').join('')+'<circle cx="'+points[0][0]+'" cy="'+points[0][1]+'" r="'+(organ?5:4)+'" fill="#14252a" stroke="'+gene.color+'" stroke-width="1.5"/><circle cx="'+points[points.length-1][0]+'" cy="'+points[points.length-1][1]+'" r="'+(organ?5:4)+'" fill="#14252a" stroke="'+gene.color+'" stroke-width="1.5"/>';}
+  function shapeSvg(gene){return dnaGeneShapeSvg(M,gene);}
   function line(points,color,width,alpha){context.save();context.strokeStyle=color;context.lineWidth=width;context.globalAlpha=alpha;context.lineCap='round';context.lineJoin='round';context.beginPath();points.forEach((p,index)=>index?context.lineTo(p.x,p.y):context.moveTo(p.x,p.y));context.stroke();context.restore();}
   function dnaPath(path,color,alpha){
     const organ=M.lookup.get(path.gene).category==='organ',points=path.points.map(screen),samples=[];
@@ -4474,7 +4523,7 @@ function createDnaEditor(container, dnaModel, onChange) {
   };
 }
 
-return { dnaDesignStats, renderDnaDesignStats, dnaEditorViewport, createDnaEditor };
+return { dnaDesignStats, renderDnaDesignStats, dnaEditorViewport, renderDnaComposition, createDnaEditor };
 })();
 modules["server/dna-combat-stats.mjs"] = (() => {
 const DNA_COMBAT_RULES = Object.freeze({

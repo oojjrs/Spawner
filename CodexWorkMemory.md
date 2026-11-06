@@ -22,6 +22,48 @@
 - 승인된 PNG 아틀라스 4개, 대응 프레임·원본 시트·검토 영상 및 필요한 재생정보를 보존한다. Design.html 기존 포자 안테나/발형 셀의 원화와 자료 참조만 갱신하며 새 문구·새 페이지는 추가하지 않는다. 게임 코드·실제 게임 연결·배포는 하지 않는다.
 - 시작 checkout은 Spawner-spring-lifecycle-publish, dedicated origin oojjrs/Spawner. fetch main 및 fast-forward 확인 결과 기존 HEAD와 원격 일치. GitHub Projects 조회는 read:project 권한 부족, 인증 변경하지 않았다. 대용량 복구 아카이브는 승인 대기 상태로 이번 작업에 포함하지 않는다.
 - 실제 확인: 승인 원본과 아틀라스 4개 바이트 일치, 각 2048×1024·8프레임 및 32개 프레임 참조 확인. 기획서 기존 표시 문구와 줄바꿈 형식 유지, 추가 참조 파일 존재, diff 공백 검사 통과. 공통 형식 검사기는 checkout에 없어 실행하지 못했다. 게임 빌드·브라우저 검수는 하지 않았다. 게시 결과는 아직 확인 전이다.
+## 유닛 선택창 하단 수치 요약문 제거 확정 · 01a1b05f 현재 수정
+
+- 기록 ID: unit-selection-dna-bottom-text-removal-20261106-01a1b05f. 기록 시각: 2026-11-06T19:47:23+09:00. 기록자·구현/범위보완 Codex /root, 제거요청·최종선택창확정 사용자. 출처 현재채팅01a1b05f-25b9-7033-82fb-9d3934ec1b64의 첨부PNG와 ‘다 좋은데, 맨 밑에 쓸데없이 붙은 텍스트 지워’. 원발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell host local.
+- 사용자첨부에서 지정한 맨밑 텍스트는 HP/근접·원거리공격력·공속·방어의 combat-unit-stats 요약문이다. game.js의 선택창 전용p생성3줄·갱신호출1줄·전용함수3줄을 제거했다. combatStatsText는 전투상세에서도 쓰므로 보존한다. DNA모양/구성·기존이름·중첩수와 하단동작버튼을 유지한다. 기존 ‘선택창수정만커밋’의 연속교정으로 이번제거까지 같은커밋에포함한다. 아직 커밋은 수행하지 않았다.
+- 앞선 freeze의5메모리절 범위는 이번사용자교정기록을더한6절로보완한다. 파일은기존6경로동일이며 새제품기능/다른병행변경을추가하지않는다. 실제선택창에는더이상 combatUnitStats생성·호출·대입이없고 전투상세호출은남는것을소스에서확인했다. 검수는 바뀐game후보구문/형식·최종staged범위와관련메모리만확인한다.
+
+## 유닛 선택창 수정만 로컬 커밋 범위 확정 · 01a1b05f
+
+- 기록 ID: unit-selection-dna-local-commit-freeze-20261106-01a1b05f. 기록 시각: 2026-11-06T19:42:57+09:00. 기록자·분리/마감 판단 Codex /root, 이번선택창수정만 로컬커밋 결정 사용자. 출처 현재채팅01a1b05f-25b9-7033-82fb-9d3934ec1b64의 ‘유닛 선택창 수정한 것만 커밋해’. 원발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell host local.
+- 확정범위6경로: client/dna-editor.mjs 공통모양과DNA구성렌더, client/game.css 선택창레이아웃8줄, client/game.js의updateUnitPanel속성블록만, client/runtime.js와Attribute.html의동일dna-editor모듈, 본채팅관련메모리5절이다. 공유game/runtime/메모리의 이동·웰컴·접시외형과다른작업은제외한다. 실제제품작업파일을덮지않고 현재HEAD에이번변경만대입한후보와별도index를사용한다. 커밋직전HEAD경합을가드하며 새브랜치는만들지않는다.
+- 재사용검수: 실제45종조각SVG기존편집기일치·시작4종/45종단일조각/빈DNA의50경우·PC/mobile겹침없음·관련3회귀/구문/형식통과. 후보구문·후보형식과최종staged범위/diff/check만확인하고기능/브라우저검사를반복하지않는다. 연결Projects0결과재사용. 메시지 ‘유닛 선택창 DNA 구성 표시 수정’. 아직커밋성공전이며push/배포요청없음.
+
+## 유닛 선택창 DNA 모양·구성 표시 복구 완료 · 01a1b05f 현재 요약
+
+- 기록 ID: unit-selection-dna-info-complete-20261106-01a1b05f. 기록·실제 결과 마지막 확인 시각: 2026-11-06T19:35:16+09:00. 기록자·구현/검수 Codex /root, 요구·표시의도 확정 사용자. 출처 현재채팅01a1b05f-25b9-7033-82fb-9d3934ec1b64의 비동기 답변과 이번 직접파일변경/검수결과. H:/Spawner Windows PowerShell, host local. 원발언 정확시각·항목ID·딥링크·PC식별 불명.
+- 완료 범위: client/dna-editor.mjs는 기존 조각 모양/이름을 편집기와 선택창에서 공통사용하고 실제 agent.dna 전체 연결모양과 종류별 조각모양·기존이름·중첩수를 읽기전용 표시한다. client/game.js는 DNA를 선택창 signature에 포함하고 DNA없는 개체의 기존아이콘 경로를 유지한다. client/game.css는 좁은패널에서도 목록 이름/수가 겹치지 않게 배치한다. runtime.js와 Attribute.html은 공통 dna-editor모듈만 동기화했다. 별도 새제품테스트·게임데이터·밸런스·외형자산 변경없음.
+- 실제검수: 격리 headless Edge에서 실제 runtime·game.css·Spawner 선택패널markup과 game.js의 실제 속성갱신블록을 사용했다. 시작4종+현카탈로그45종의단일조각+빈DNA=50경우에서 구성개수/저장순서별배치경로/캐시/원본DNA불변/유한SVG/구형아이콘혼입없음 확인. 모든45종 조각SVG는 작업전 editor의 실제렌더와 정확히일치했다. 구형 DNA없는 칼날Lv.2 표시와 DNA선택복귀도 성공했다. 실제1440x900/390x844의 시작콩패널캡처에서 겹침/가로넘침없음·pageerror0을 관측하고 두PNG를 직접확인했다. 실제게임전체 세션을 실행한 검수로 확대하지 않는다.
+- 기존표적검사3/3 통과: 읽기전용불변·설치범례와편집이력·runtime/Attribute공통소스동일. game.js/runtime구문검사 및 변경6파일 UTF8NoBom/CRLF검사도통과했다. routine검수 첫batch7.3초이며 후속직접이미지열람/이번표시diff검토를 마쳤다. no-index diff명령의 exit1은 차이존재의정상반환이며 검사실패가아니다. 변경전사본과비교 중 새 creature렌더공통화 변경은 병행작업으로 식별해 보존했다.
+- 근거 H:/Spawner/$Trash/unit-selection-dna-20261106/qa-result.json 및 unit-dna-desktop.png/mobile.png. 사용자전달용 동일PNG는 D:/.codex/visualizations/2026/11/06/01a1b05f-25b9-7033-82fb-9d3934ec1b64/. 구현/검수 blocker없음. 미스테이징·미커밋 상태이며 게시/배포는 요청되지 않았다. 선행 diagnosis의미수정·의도미확정과implementation의검수대기 상태는 이완료기록으로대체하고 원기록을보존한다.
+
+## 유닛 선택창 DNA 표시 구현·공통 모듈 동기화 · 01a1b05f
+
+- 기록 ID: unit-selection-dna-info-implemented-20261106-01a1b05f. 기록 시각: 2026-11-06T19:33:46+09:00. 구현/범위 판단 Codex /root, 표시 요구와확정 사용자. 출처 현재채팅01a1b05f-25b9-7033-82fb-9d3934ec1b64 및 이번 직접 파일변경 결과. H:/Spawner Windows PowerShell, 원발언 정확시각/항목ID 불명.
+- 실제 구현: dna-editor의 기존 이름·shape/shapeSvg를 같은 모듈 내부 공통 함수로 꺼내 편집기와 새 renderDnaComposition에서 재사용한다. 실제 저장 DNA의 trace 경로와 회전/연결점으로 전체배치를 표시하고 종류별 모양/기존이름/수량을 제공한다. game.js의 선택창 cache에 dna를 포함하고 DNA있음/없음 분기를 나눴으며 game.css에 해당 레이아웃만 추가했다. 런타임은 dna-editor 모듈만 교체해 다른 worker/미커밋 모듈을 전체 재생성하지 않았다.
+- 범위 보완: 기존 dna-editor.test.mjs의 공통소스 일치 계약이 Attribute.html과 runtime.js 모두를 요구함을 확인했다. Attribute.html도 같은 dna-editor 모듈만 동기화했으며 기존 문서 문구·편집기 출력/동작은 바꾸지 않는다. 이는 앞선 implementation 기록의 네제품경로 범위에 Attribute.html의 공통코드 동기화 1경로를 더하는 필요한 지원 변경이다. 새 문서 문구나 기획내용 추가는 없다.
+- 구현완료와 검수완료를 구분하며 아직 화면 검수 성공은 주장하지 않는다. 검수준비는 기존 Spawner.html 선택패널 markup·game.css·runtime, 실제 game.js의 선택창 갱신 블록을 쓰는 격리 headless 환경이다. 시작4종 및 현재45종각조각/빈DNA/선택캐시/구형슬롯, 기존수정전편집기의45종 SVG를 독립기준으로 대조하고 PC/모바일 화면을 캡처할 예정이다. 다른제품파일과 병행메모리는 보존했다.
+
+## 유닛 선택창 DNA 구성 표시 복구 착수 · 01a1b05f
+
+- 기록 ID: unit-selection-dna-info-implementation-20261106-01a1b05f. 기록 시각: 2026-11-06T19:28:44+09:00. 기록자·표시 설계/구현 Codex /root, 표시 의도 확정 사용자. 출처 현재 채팅01a1b05f-25b9-7033-82fb-9d3934ec1b64 비동기 질문 답변 ‘현재 DNA의 조각 모양과 구성 표시’. 원발언 정확시각/항목ID 불명, H:/Spawner Windows PowerShell host local.
+- 직전 unit-selection-dna-info-diagnosis의 표시 의도 미확정 상태를 이번 답변으로 대체한다. 실제 agent.dna에서 전체 연결 형태와 종류별 현재 조각 모양/기존 이름/중첩 개수를 읽기 전용으로 표시한다. DNA 편집기의 기존 이름/조각 SVG를 공통으로 재사용하고 DNA 없는 개체의 기존 속성 표시는 보존한다. 선택창 캐시에 DNA를 포함한다. 게임 밸런스/저장 데이터/외형 자산은 이번 범위가 아니다.
+- 제품 수정은 client/dna-editor.mjs·client/game.js·client/game.css와 해당 runtime 모듈 동기화에 한정한다. 병행 game.js 렌더 공통화·이동과 runtime/메모리 변경을 보존하고 전체 build로 다른 미커밋 소스를 재생성하지 않는다. 대상 부분을 수정 직전에 재독해 최소 치환한다. 연결 GitHub Projects는 조회 결과0개다. Git 완료/배포 요청은 없다.
+- 렌더 검수는 변경된 표시의 PC/모바일 및 시작 일꾼/상위 DNA/빈 DNA/선택 변경을 대상으로 실제 모듈·CSS·선택창 코드를 격리 headless 브라우저에서 확인한다. 원래 편집기 조각 표현과 현재 DNA 데이터가 oracle이며 새 제품 테스트를 늘리지 않는다. 아직 구현/검수 완료 아님. 임시자료는 literal root $Trash/unit-selection-dna-20261106에 둔다.
+
+## 유닛 선택창 DNA 속성 표시 누락 조사 · 01a1b05f 현재 요약
+
+- 기록 ID: unit-selection-dna-info-diagnosis-20261106-01a1b05f. 기록·근거 마지막 확인 시각: 2026-11-06T19:23:25+09:00. 기록자·소스/이력 조사와 판단 Codex /root, 원 발언자 사용자. 출처 현재 채팅01a1b05f-25b9-7033-82fb-9d3934ec1b64의 ‘유닛 선택창이 맘대로 수정된 것 같은데, 유닛의 속성이 어떻게 생겼는지 표현하는 게 없어졌는데? dna 구조가 바뀌면서’. 정확한 원 발언 시각·항목 ID·딥링크·PC 식별은 불명이며 확인 환경은 H:/Spawner Windows PowerShell, host local이다.
+- 직접 확인: client/game.js:updateUnitPanel은 agent.activeSlots/slots를 구형 ATTRIBUTES로 찾아 이미지와 agent.attributes의 Lv.를 표시한다. signature에도 agent.dna는 없다. server/game.mjs의 design은 DNA에서 dnaAppearance에 잡히는 키만 slots로 만들며, 시작 일꾼은 slots:[]로 spawnAgent에 전달한다. server/dna-unit.mjs:dnaAppearance는 blade/carapace/antenna/legs→feet/secretion만 반환해 gather/capacity/harvestSpeed/health/movement 등을 포함하지 않는다. client/game.css의 .unit-attributes:empty는 빈 목록을 감춘다. DNA의 조각 형태/구성/중첩 개수는 선택창에 직접 연결되지 않았다.
+- 결과 전투 수치만 따로 표시하는 combatStatsText는 HP·근접/원거리 공격력·공속·방어에 한정된다. DNA 편집기는 기존 renderLegend/shapeSvg로 조각 모양과 수량을 그리지만 선택창에서 재사용하지 않는다. 현재 소스 호출·데이터 흐름으로 표시 연결 누락을 확인했으며 실제 브라우저 화면을 새로 실행한 결과로 확대하지 않는다.
+- 이력: a8ab58f ‘DNA 속성 제작기와 게임 연동 추가’의 game.js에도 구형 선택창 루프가 남아 있다. 1d8c795는 activeSlots/slots 뒤 빈 배열 fallback만 추가한 변경이다. 이 근거만으로 사용자가 표시 삭제를 승인했다거나 특정 작업자가 무단 변경했다고 귀속하지 않는다.
+- 상태: 이번 발언을 속성 표시 누락 조사로 처리했고 제품 코드는 수정하지 않았다. 모양·구성 표시와 구형 아이콘·레벨 중 사용자 의도를 구체화하는 비동기 질문을 보냈으며 기록 시점 답변은 아직 없다. 현재 DNA의 모양·이름·중첩 수 표시가 가능한 수정 방향이나 최종 표시 구성은 확정하지 않았다. 빌드/테스트/서버/브라우저/스테이징/커밋/푸시는 수행하지 않았다. 기존 병행 이동 작업 및 다른 메모리 기록을 보존한다.
+
 ## playable-movement-native-clock-commit-request-20261106-01a1a0bf
 
 - 기록 시각: 2026-11-06T19:39:53+09:00. 이속 수정 메모리 정리·로컬 커밋 요청 및 승인 사용자, 범위 분리·Git 판단 Codex 메인. 출처 현재채팅01a1a0bf-603b-7ac3-8ef5-611ee5f7ec9d의 「이번 이속 수정도 메모리에 정리하고 커밋해」. 원발언 정확시각·항목ID 미확인.

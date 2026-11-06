@@ -262,6 +262,14 @@
     .terrain-details [data-help]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
     .unit-attributes { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 12px; padding: 10px; border: 1px solid #303e43; border-radius: 10px; background: #101719; }
     .unit-attributes:empty { display: none; }
+    .unit-attributes.unit-dna-composition { display: grid; gap: 10px; }
+    .unit-dna-board { display: block; width: 100%; height: 148px; min-width: 0; padding: 8px; border-radius: 6px; background: #102326; }
+    .unit-dna-list { display: grid; gap: 4px; min-width: 0; }
+    .unit-dna-list:empty { display: none; }
+    .unit-dna-gene { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; align-items: center; gap: 8px; min-width: 0; padding: 3px 7px 3px 3px; border-radius: 6px; background: #17282b; }
+    .unit-dna-gene > svg { display: block; width: 44px; height: 38px; }
+    .unit-dna-name { min-width: 0; font-size: .8rem; line-height: 1.4; overflow-wrap: anywhere; }
+    .unit-dna-gene > strong { color: #e5efdd; font-size: .85rem; font-variant-numeric: tabular-nums; }
     .unit-attribute { display: grid; place-items: center; flex: none; width: 52px; height: 52px; }
     .unit-attribute > img { width: 100%; height: 100%; object-fit: contain; }
     .unit-attribute:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
