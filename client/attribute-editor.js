@@ -7,7 +7,7 @@
   function icon(name){return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="'+icons[name]+'"/></svg>';}
   function button(id,glyph,label){$(id).innerHTML=icon(glyph);$(id).setAttribute('aria-label',copy[label]);$(id).title=copy[label];}
   function persist(design){try{localStorage.setItem(storage,JSON.stringify(design));localStorage.setItem(libraryStorage,JSON.stringify(library));}catch{}}
-  function refresh(design){const {stats,base}=shared.dnaDesignStats(M,design.pieces);shared.renderDnaDesignStats($('stats'),stats,base,false);$('sequence').textContent=design.pieces.map(piece=>M.lookup.get(piece.gene).code).join(' ');$('nest-level').value=String(design.level);persist(design);}
+  function refresh(design){const {stats,base}=shared.dnaDesignStats(M,design.pieces);shared.renderDnaDesignStats($('stats'),{...stats,loadSpeed:undefined},base,false);$('sequence').textContent=design.pieces.map(piece=>M.lookup.get(piece.gene).code).join(' ');$('nest-level').value=String(design.level);persist(design);}
   const editor=shared.createDnaEditor($('editor'),M,refresh);
   $('editor').querySelector('.dna-catalog').prepend($('progression'));
   $('progression').hidden=false;
