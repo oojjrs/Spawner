@@ -1,3 +1,29 @@
+## 기관 제한 안내·카메라 고정 로컬 커밋 범위 확정 · 01a1b0f0
+
+- 기록 ID: organ-limit-camera-commit-freeze-20261106-01a1b0f0. 기록 시각: 2026-11-06T22:14:13+09:00. 기록자·범위 분리/커밋 판단 Codex /root, 로컬 커밋 승인 사용자. 출처 현재 채팅 01a1b0f0-a0b1-7dc3-b974-5dbe0014e36a의 “커밋”. 원 발언 정확 시각·항목 ID·PC 식별 불명, H:/Spawner Windows PowerShell.
+- 확정 범위: 공통 DNA 편집기의 기관별 하나 제한 상단 안내·비활성 호버와 조각 편집 중 카메라 위치/배율 보존, 두 CSS의 해당 안내 규칙, Attribute.html/client/runtime.js의 해당 모듈 및 본 채팅 관련 기록을 묶은 6경로. HEAD 기반 별도 index 후보로 분리하며 첫 설계/웰컴/AI·효과/다른 메모리 등 동시 변경은 제외한다.
+- 검수: 기존 실제 제작기·인게임 마크업/런타임 격리 검수의 기관 5종·호버/해제·중복 금지·우클릭/redo 카메라 좌표 불변·PC/390px 상단 중앙·JS 오류 0을 재사용한다. 최종 후보 형식·정확 staged 범위/diff/check를 확인하고 기대 HEAD와 index 가드로 로컬 커밋한다. 메시지 “기관 배치 제한 안내와 편집 카메라 고정 수정”. 연결 Projects nodes=[]를 재사용하며 push/배포는 요청되지 않았다. 아직 커밋 성공 전이다.
+
+## 기관 제한 안내·편집 카메라 수정 검수 · 01a1b0f0
+
+- 기록 ID: organ-limit-camera-verification-20261106-01a1b0f0. 기록 시각: 2026-11-06T22:09:45+09:00. 기록자·검수 판단 Codex /root, 두 요청 결정 주체 사용자. 출처 현재 채팅 01a1b0f0-a0b1-7dc3-b974-5dbe0014e36a와 직접 도구 결과. 원 발언 정확 시각·항목 ID·PC 식별 불명. H:/Spawner Windows PowerShell.
+- 실제 변경: client/dna-editor.mjs에서 기관 중복 사유를 경로 충돌과 구분하고 판 중앙 상단 전용 툴팁·비활성 목록 pointerover/out을 연결했다. 두 CSS와 Attribute.html/client/runtime.js의 해당 공통 모듈만 갱신했다. state의 자동 fit과 fit의 선택 조각 추적을 제거해 편집 중 위치/확대율을 보존한다. 새 주석·제품 문서 문구·Git 완료·배포는 없다.
+- 검수: 격리 headless Chrome에서 실제 Attribute.html의 기관 전종 배치 직후 안내·비활성 호버·우클릭 해제·중복 차단과 사용자 확대 후 편집 시 grid 좌표 불변을 확인했다. 인게임은 실제 Spawner.html 설계창 마크업/CSS와 runtime 안 공통 편집기 모듈을 격리 실행하여 우클릭 undo/redo 카메라 좌표 불변·읽기 전용 안내 숨김·PC/390px 상단 중앙 배치/판 내부 수용을 확인했다. 전체 게임 진행을 재현한 검수는 아니다. JS pageerror 0. 근거 literal $Trash/organ-limit-01a1b0f0/verification.json 및 실제 PNG 3개.
+- 기존 제품 staged/unstaged·기존 메모리 충돌 표식과 타 채팅 기록을 유지한다. 보드는 nodes=[]이고, 본 수정은 미스테이징·미커밋이다. 직후 정확 6텍스트 공유 형식 검사와 작업 전 사본 대비 국소 diff를 확인한다.
+
+## DNA 편집 중 카메라 자동 추적 제거 요청 · 01a1b0f0
+
+- 기록 ID: dna-camera-fixed-request-20261106-01a1b0f0. 기록 시각: 2026-11-06T22:08:13+09:00. 기록자·원인 확인 Codex /root, 자동 카메라 이동 제거 지시 사용자. 출처 현재 채팅 01a1b0f0-a0b1-7dc3-b974-5dbe0014e36a의 우클릭 때 카메라 이동·DNA 조각 추적 불필요 교정. 원 발언 정확 시각·항목 ID·PC 식별 불명, H:/Spawner Windows PowerShell.
+- 직접 확인: 공통 state()가 매번 fit()을 호출하고 fit()은 삽입 위치와 선택 조각의 모든 회전 경로를 포함하는 dnaEditorViewport를 계산한다. undo/remove/commit/select/rotate의 state 호출마다 육각판 중심·배율을 다시 산정하는 경로다. 실제 드래그가 아니라 자동 화면 맞춤이다.
+- 최신 결정: 두 화면에서 조각 선택·배치·회전·삭제·우클릭 되돌리기·다시 실행·초기화는 현재 카메라 위치와 배율을 보존한다. fit은 조각을 추적하지 않고 육각판 전체만 기준으로 삼는다. 화면 열기·창 크기/둥지 레벨 변경·명시적 전체보기만 판 기준 재정렬한다. 원 요청 기관 제한 툴팁도 계속 완료한다. 아직 검증하지 않았다.
+
+## 기관 중복 배치 안내 통일 착수 · 01a1b0f0
+
+- 기록 ID: organ-limit-tooltip-start-20261106-01a1b0f0. 기록 시각: 2026-11-06T22:02:59+09:00. 기록자·표시 구현 판단 Codex /root, 제한 안내 요청·문구 결정 사용자. 출처 현재 채팅 01a1b0f0-a0b1-7dc3-b974-5dbe0014e36a. 원 발언 정확 시각·항목 ID·PC 식별 불명. H:/Spawner Windows PowerShell.
+- 사용자 요청: 속성 제작기와 인게임 속성 설계창에 동일하게 기관 종류별 하나 제한을 안내하고, 육각판 중앙 상단에 'xx 기관은 하나만 배치할 수 있습니다' 형태의 툴팁을 표시한다. 확인 사실: 두 화면의 공통 createDnaEditor는 중복 기관을 collision으로 처리하고 목록을 disabled로 만들지만 전용 안내가 없다.
+- 구현 판단: 선택한 기관을 배치한 직후 중복 제한이 걸리면 상단 안내를 표시하고, 다른 조각을 선택한 상태에서도 비활성 기관 hover에 해당 안내를 표시한다. 이름에 이미 기관이 있으면 기관을 중복해 붙이지 않는다. 다른 선택·되돌리기·읽기 전용에서 현재 상태를 재계산한다. 실제 배치 금지·다른 종류 겸업·스탯 반복은 유지한다.
+- 최소 범위: client/dna-editor.mjs와 두 CSS, Attribute.html/client/runtime.js 안 해당 모듈만 갱신. 기존 staged/unstaged·메모리 충돌 표식과 다른 채팅 코드는 그대로 보호한다. GitHub 연결 Projects 직접 조회 nodes=[]; 보드 없음. 검증·Git 완료·배포는 아직 하지 않았다. 새 Git 승인이 없어 미커밋으로 남긴다.
+
 ## DNA 툴팁·설계창 강조 로컬 커밋 범위 확정 · 01a1b05f
 
 - 기록 ID: dna-highlight-local-commit-freeze-20261106-01a1b05f. 기록 시각: 2026-11-06T22:10:19+09:00. 기록자·분리/마감판단 Codex /root, 로컬커밋승인 사용자. 출처 현재채팅01a1b05f-25b9-7033-82fb-9d3934ec1b64의 ‘좋아 커밋’. 원발언 정확시각·항목ID·PC식별 불명, H:/Spawner Windows PowerShell host local.

@@ -5315,7 +5315,8 @@ function createDnaEditor(container, dnaModel, onChange) {
   container.replaceChildren(root);
   const find=selector=>root.querySelector(selector),canvas=find('canvas'),board=find('.dna-board'),context=canvas.getContext('2d');
   const catalog=find('.dna-catalog'),geneName=document.createElement('div');geneName.className='dna-gene-name';geneName.setAttribute('role','tooltip');geneName.hidden=true;board.append(geneName);
-  let geneHold=null,geneTimer=0,geneClick=null,geneTouch=null;
+  const organLimit=document.createElement('output');organLimit.className='dna-organ-limit';organLimit.setAttribute('role','tooltip');organLimit.setAttribute('aria-live','polite');organLimit.hidden=true;board.append(organLimit);
+  let geneHold=null,geneTimer=0,geneClick=null,geneTouch=null,hoveredGene=null;
   const mobileQuery=typeof globalThis.matchMedia==='function'?globalThis.matchMedia('(max-width:700px)'):null;
   const view={x:0,y:0,scale:1,width:0,height:0};
   let pieces=[],level=1,budget=0,readOnly=false,contextSet=false,filter='all',selected=M.catalog[0].id,rotation=0,insertion=0,history=[],future=[],notice='',model=M.trace([],1),preview,frame=0,destroyed=false,pointer=null,moved=false;
@@ -5327,12 +5328,17 @@ function createDnaEditor(container, dnaModel, onChange) {
   const leftButton=button(find('.dna-rotation'),'왼쪽 회전','m8 3-5 5 5 5M3 8h10a7 7 0 1 1-6 11',()=>rotate(-1));
   const rightButton=button(find('.dna-rotation'),'오른쪽 회전','m16 3 5 5-5 5m5-5H11a7 7 0 1 0 6 11',()=>rotate(1));
   const addButton=find('.dna-add');addButton.onclick=commit;
+  function renderOrganLimit(){const id=hoveredGene||selected,gene=M.lookup.get(id),blocked=!readOnly&&gene?.category==='organ'&&pieces.some(piece=>piece.gene===id);organLimit.textContent=blocked?names[id]+(names[id].endsWith('기관')?'은':' 기관은')+' 하나만 배치할 수 있습니다':'';organLimit.hidden=!blocked;}
+  function genePointerOver(event){const item=event.target.closest('.dna-gene');hoveredGene=item?.disabled?item.dataset.gene:null;renderOrganLimit();}
+  function genePointerOut(event){if(event.target.closest('.dna-gene')===event.relatedTarget?.closest('.dna-gene'))return;hoveredGene=null;renderOrganLimit();}
   function hideGeneName(){if(geneTimer)clearTimeout(geneTimer);geneTimer=0;geneHold=null;geneName.hidden=true;geneName.textContent='';}
   function genePointerDown(event){if((event.pointerType!=='touch'&&event.pointerType!=='pen')||!mobileQuery?.matches)return;const item=event.target.closest('.dna-gene');if(!item)return;hideGeneName();geneClick=null;geneTouch={item,time:Date.now()};geneHold={item,id:event.pointerId,x:event.clientX,y:event.clientY};geneTimer=setTimeout(()=>{geneTimer=0;if(!geneHold||!item.isConnected)return;geneClick=item;geneName.textContent=names[item.dataset.gene];geneName.hidden=false;geneName.style.left='50%';},480);}
   function genePointerMove(event){if(geneHold&&event.pointerId===geneHold.id&&Math.hypot(event.clientX-geneHold.x,event.clientY-geneHold.y)>9)hideGeneName();}
   function genePointerEnd(event){if(geneHold&&event.pointerId===geneHold.id)hideGeneName();}
   function geneClickCapture(event){if(!geneClick)return;const item=event.target.closest('.dna-gene');if(item===geneClick){event.preventDefault();event.stopImmediatePropagation();}geneClick=null;}
   function geneContextMenu(event){const item=event.target.closest('.dna-gene');if(item&&(event.pointerType==='touch'||event.pointerType==='pen'||event.sourceCapabilities?.firesTouchEvents||(geneHold&&geneHold.item===item)||(geneTouch&&geneTouch.item===item&&Date.now()-geneTouch.time<1500&&event.pointerType!=='mouse'))){event.preventDefault();event.stopPropagation();}}
+  catalog.addEventListener('pointerover',genePointerOver);
+  catalog.addEventListener('pointerout',genePointerOut);
   catalog.addEventListener('pointerdown',genePointerDown);
   catalog.addEventListener('pointermove',genePointerMove);
   catalog.addEventListener('pointerup',genePointerEnd);
@@ -5343,19 +5349,19 @@ function createDnaEditor(container, dnaModel, onChange) {
   function snapshot(){return {pieces:pieces.map(M.clonePiece),insertion};}
   function checkpoint(){history.push(snapshot());if(history.length>200)history.shift();future=[];}
   function clearHistory(){history=[];future=[];renderControls();}
-  function candidate(){const gene=M.lookup.get(selected),proposed=pieces.map(M.clonePiece),start=model.nodes[insertion],points=M.route(start,gene,gene.grade,rotation),path={gene:selected,points,start,end:points[points.length-1]};proposed.splice(insertion,0,{gene:selected,grade:gene.grade,rotation,shape:[...M.shape(gene,gene.grade)]});const result=M.trace(proposed,level);if(gene.category==='organ'&&pieces.some(piece=>piece.gene===selected)){result.valid=false;result.reason='collision';}const cost=M.cost(proposed);return {pieces:proposed,result,path,cost,valid:result.valid,reason:result.valid?'ready':result.reason};}
+  function candidate(){const gene=M.lookup.get(selected),proposed=pieces.map(M.clonePiece),start=model.nodes[insertion],points=M.route(start,gene,gene.grade,rotation),path={gene:selected,points,start,end:points[points.length-1]};proposed.splice(insertion,0,{gene:selected,grade:gene.grade,rotation,shape:[...M.shape(gene,gene.grade)]});const result=M.trace(proposed,level);if(gene.category==='organ'&&pieces.some(piece=>piece.gene===selected)){result.valid=false;result.reason='organ-limit';}const cost=M.cost(proposed);return {pieces:proposed,result,path,cost,valid:result.valid,reason:result.valid?'ready':result.reason};}
   function changed(){notice='';state();if(typeof onChange==='function')onChange(getDesign());}
   function previewState(){const previous=rotation,initial=candidate();if(initial.result.valid)return initial;for(let step=1;step<6;step++){rotation=(previous+step)%6;const next=candidate();if(next.result.valid)return next;}rotation=previous;return initial;}
-  function state(){model=M.trace(pieces,level);preview=readOnly?candidate():previewState();renderCatalog();renderLegend();renderControls();fit();requestDraw();}
+  function state(){model=M.trace(pieces,level);preview=readOnly?candidate():previewState();renderCatalog();renderLegend();renderControls();requestDraw();}
   function renderLegend(){const legend=find('.dna-legend'),counts=M.counts(pieces);legend.replaceChildren();for(const gene of [...M.catalog,...M.genes.filter(gene=>gene.retired)]){if(!counts[gene.id])continue;const item=document.createElement('span');item.dataset.gene=gene.id;const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 44 38');const piece=pieces.find(piece=>piece.gene===gene.id);svg.innerHTML=shapeSvg({...gene,grade:piece.grade===undefined?gene.grade:piece.grade,steps:piece.shape||gene.steps});const count=document.createElement('span');count.textContent='×'+counts[gene.id];item.append(svg,count);legend.append(item);}legend.hidden=!legend.children.length;}
   function renderCatalog(){
-    hideGeneName();geneClick=null;
+    hideGeneName();geneClick=null;hoveredGene=null;renderOrganLimit();
     const filters=find('.dna-filters');filters.replaceChildren();
     for(const [type,label] of [['all','전체'],['organ','기관'],['action','기능'],['stat','스탯']]){const item=document.createElement('button');item.type='button';item.textContent=label;item.dataset.category=type;item.setAttribute('aria-pressed',String(filter===type));item.onclick=()=>{filter=type;renderCatalog();root.focus({preventScroll:true});};filters.append(item);}
     const list=find('.dna-list');list.replaceChildren();
     for(const gene of M.catalog){if(gene.grade>level||(!mobileQuery?.matches&&filter!=='all'&&gene.category!==filter))continue;const item=document.createElement('button');item.type='button';item.className='dna-gene';item.setAttribute('aria-label',names[gene.id]);item.dataset.gene=gene.id;item.dataset.category=gene.category;item.disabled=gene.grade>level||(gene.category==='organ'&&pieces.some(piece=>piece.gene===gene.id));item.setAttribute('aria-pressed',String(selected===gene.id));item.style.setProperty('--dna-gene-color',gene.color);const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 44 38');svg.innerHTML=shapeSvg(gene);const name=document.createElement('strong');name.textContent=names[gene.id];const cost=document.createElement('span');cost.className='dna-gene-cost';const proposed=pieces.map(M.clonePiece);proposed.splice(insertion,0,{gene:gene.id,grade:gene.grade,rotation,shape:[...gene.steps]});cost.textContent=String(M.price(proposed)-M.price(pieces));cost.title='진화포인트';item.append(svg,name,cost);item.onclick=()=>{if(item.disabled)return;selected=gene.id;notice='';state();root.focus({preventScroll:true});};list.append(item);}
   }
-  function renderControls(){addButton.disabled=readOnly||!preview.valid;leftButton.disabled=readOnly;rightButton.disabled=readOnly;undoButton.disabled=readOnly||!history.length;redoButton.disabled=readOnly||!future.length;removeButton.disabled=readOnly||!pieces.length;clearButton.disabled=readOnly||!pieces.length;const reason=notice||preview.reason;const labels={ready:'',collision:'경로가 겹칩니다',closed:'경로가 닫혔습니다',boundary:'판을 벗어납니다',level:'둥지 레벨이 부족합니다'};find('.dna-status').textContent=readOnly?'':labels[reason]||'';find('.dna-status').dataset.kind=reason;find('.dna-cost strong').textContent=String(M.cost(pieces));root.dataset.readonly=String(readOnly);root.dataset.preview=String(preview.valid);}
+  function renderControls(){addButton.disabled=readOnly||!preview.valid;leftButton.disabled=readOnly;rightButton.disabled=readOnly;undoButton.disabled=readOnly||!history.length;redoButton.disabled=readOnly||!future.length;removeButton.disabled=readOnly||!pieces.length;clearButton.disabled=readOnly||!pieces.length;const reason=notice||preview.reason;const labels={ready:'',collision:'경로가 겹칩니다',closed:'경로가 닫혔습니다',boundary:'판을 벗어납니다',level:'둥지 레벨이 부족합니다'};find('.dna-status').textContent=readOnly?'':labels[reason]||'';find('.dna-status').dataset.kind=reason;find('.dna-cost strong').textContent=String(M.cost(pieces));root.dataset.readonly=String(readOnly);root.dataset.preview=String(preview.valid);renderOrganLimit();}
   function requestDraw(){if(!frame&&!destroyed)frame=requestAnimationFrame(()=>{frame=0;if(!destroyed)draw();});}
   function world(point){return {x:34*Math.sqrt(3)*(point.q+point.r/2),y:51*point.r};}
   function screen(point){const p=world(point);return {x:p.x*view.scale+view.x,y:p.y*view.scale+view.y};}
@@ -5395,7 +5401,7 @@ function createDnaEditor(container, dnaModel, onChange) {
   function undo(){if(readOnly||!history.length)return;future.push(snapshot());const previous=history.pop();pieces=previous.pieces;insertion=previous.insertion;changed();}
   function redo(){if(readOnly||!future.length)return;history.push(snapshot());const next=future.pop();pieces=next.pieces;insertion=next.insertion;changed();}
   function remove(){if(readOnly||!pieces.length)return;const index=Math.max(0,insertion-1),next=pieces.map(M.clonePiece);next.splice(index,1);const result=M.trace(next,level);if(!result.valid){notice=result.reason;renderControls();return;}checkpoint();pieces=next;insertion=index;changed();}
-  function fit(){if(!view.width||!view.height)return;Object.assign(view,dnaEditorViewport(M,level,readOnly?null:model.nodes[insertion],readOnly?null:M.lookup.get(selected),view.width,view.height));requestDraw();}
+  function fit(){if(!view.width||!view.height)return;Object.assign(view,dnaEditorViewport(M,level,null,null,view.width,view.height));requestDraw();}
   function zoom(factor){if(!Number.isFinite(factor)||factor<=0||!view.width||!view.height)return;const next=Math.max(.005,Math.min(2.7,view.scale*factor)),ratio=next/view.scale,x=view.width/2,y=view.height/2;view.x=x-(x-view.x)*ratio;view.y=y-(y-view.y)*ratio;view.scale=next;requestDraw();}
   function resize(){const bounds=board.getBoundingClientRect();if(!bounds.width||!bounds.height)return;view.width=bounds.width;view.height=bounds.height;canvas.width=Math.ceil(bounds.width*devicePixelRatio);canvas.height=Math.ceil(bounds.height*devicePixelRatio);fit();}
   canvas.addEventListener('pointerdown',event=>{if(event.button===1){event.preventDefault();event.stopPropagation();cycleGene();return;}if(event.button!==0||pointer)return;root.focus({preventScroll:true});pointer={id:event.pointerId,x:event.clientX,y:event.clientY};moved=false;canvas.setPointerCapture(event.pointerId);});
@@ -5419,7 +5425,7 @@ function createDnaEditor(container, dnaModel, onChange) {
     clearHistory,
     fit,
     zoom,
-    destroy(){destroyed=true;if(mobileQuery)mobileQuery.removeEventListener('change',mobileChange);hideGeneName();geneClick=null;geneTouch=null;catalog.removeEventListener('pointerdown',genePointerDown);catalog.removeEventListener('pointermove',genePointerMove);catalog.removeEventListener('pointerup',genePointerEnd);catalog.removeEventListener('pointercancel',genePointerEnd);catalog.removeEventListener('click',geneClickCapture,true);catalog.removeEventListener('contextmenu',geneContextMenu);observer.disconnect();if(frame)cancelAnimationFrame(frame);root.remove();}
+    destroy(){destroyed=true;if(mobileQuery)mobileQuery.removeEventListener('change',mobileChange);hideGeneName();geneClick=null;geneTouch=null;catalog.removeEventListener('pointerover',genePointerOver);catalog.removeEventListener('pointerout',genePointerOut);catalog.removeEventListener('pointerdown',genePointerDown);catalog.removeEventListener('pointermove',genePointerMove);catalog.removeEventListener('pointerup',genePointerEnd);catalog.removeEventListener('pointercancel',genePointerEnd);catalog.removeEventListener('click',geneClickCapture,true);catalog.removeEventListener('contextmenu',geneContextMenu);observer.disconnect();if(frame)cancelAnimationFrame(frame);root.remove();}
   };
 }
 
