@@ -174630,3 +174630,23 @@ Text: none. No lettering, labels, logo, watermark, UI, borders, health bars, peo
 - 피크관찰: 씨앗껍질깨짐+0.6dBTP·샘방울착지+1.1dBTP로월드/거리gain1에서피크여유가없다. 실제플레이에서항상클리핑됐다는증거는아니며씨앗깨짐은-3dB추가후보로보고한다. 그외음량후보와함께이번에는조사만했고추가변경하지않았다.
 - 동결범위는client/audio.js의19공격gain과이채팅관련메모리3절뿐이다. 과거survey기록은아직HEAD에없으면같은커밋에포함하고다른채팅기록/제품파일/공유index는보존한다. 별도index와기대HEAD가드로같은현재브랜치에로컬커밋하며메시지 '유닛 공격 효과음 볼륨 균등 조정'. 원격push/배포없음,연결Projects0결과재사용. 전체빌드/새테스트를추가하지않고최종후보형식·audio구문·staged범위/공백만확인한다. 아직커밋완료전이다.
 - 근거파일은현재쓰기허용루트literal $Trash/attack-sfx/implementation.json 및all-sfx-levels.json이다. 시행전표·현재실제cue/source/gain·FFmpeg80개실측을비교해완료범위와후속미적용제안을구분했다.
+
+## 공격 효과음 볼륨 조정 로컬 커밋·추가 조사 완료 · 01a1b074 현재 요약
+
+- 기록 ID: attack-sfx-local-commit-result-20261106-01a1b074. 기록·실제readback시각: 2026-11-06T19:58:55+09:00. 기록자·Git실행/검수 Codex /root, 조정·로컬커밋·추가조사결정 사용자. 출처 현재채팅과실제commit-result.json. 작업공간식별자01a1b074-a5a2-76f0-bdf1-2c7d2e38db9d,H:/Spawner Windows PowerShell. 원발언정확시각·턴/항목ID·별도스레드ID/딥링크/PC식별불명.
+- 실제완료: 577c51fdc846e10810f3042f44e1512b5359ab76 '유닛 공격 효과음 볼륨 균등 조정', parent 8c85447b307d7fd4c5b5dc0fbfa0f5a477c148aa, tree 7ccb236800598be906d80da50d376bf4c315bb32. client/audio.js의19공격gain과이채팅메모리3절만2경로로커밋했다. 실제commit의경로/parent/tree/제목을후보와readback대조했다. 공유작업파일은교체하지않았고다른제품작업/다른채팅메모리는그대로보존했다. 공유index대상2경로동기화=true,audio작업바이트보존=true,대상staged차이=''.
+- 실제검수: 등록SFX80개의현행gain반영FFmpeg실측에서공격20개-19.2~-18.8LUFS M(솜양-19.1)을확인했다. audio구문검사와후보2텍스트UTF8NoBom/CRLF,최종staged범위/diff/공백검사를통과했다. 공격음원/다른효과음은변경하지않았고push/배포는하지않았다. 직접청음전의측정기반균등화다.
+- 다른효과음60개조사는완료이며앞선freeze기록의11음량후보와씨앗깨짐피크후보는미적용제안이다. 최종사용자응답에서주요큰소리와권장감쇠량을보고한다. 선행scope/freeze의커밋대기상태는이실제완료기록으로대체하고원기록보존. 근거는현재쓰기허용루트literal $Trash/attack-sfx/implementation.json,all-sfx-levels.json,stage.json,staged.diff,commit-result.json이다. 이커밋뒤확인한결과는로컬메모리에기록하며이를위한메모리전용추가커밋/amend는자동수행하지않는다.
+
+## 추가 유닛 효과음 12개 권장값 조정·커밋 승인 · 01a1b074
+
+- 기록 ID: other-sfx-adjust-scope-20261106-01a1b074. 기록 시각: 2026-11-06T20:04:59+09:00. 기록자·구현/검수/커밋범위 판단 Codex /root, 권장값12개조정·로컬커밋 결정 사용자. 출처 현재채팅의 ‘이것들도 권장값대로 조정하고 커밋해’, 작업공간식별자01a1b074-a5a2-76f0-bdf1-2c7d2e38db9d,H:/Spawner Windows PowerShell. 원발언정확시각·턴항목ID·별도스레드ID/딥링크/PC식별불명.
+- 사용자승인은앞선표11개와같은응답의씨앗껍질깨짐-3dB까지12개에적용한다. 조정량은샘방울착지-10,벌목-6,씨앗발사/샘방울둥지성장각-5.5,흙채집/몽돌사망/걸어가는산이동각-4.5,보따리달팽이이동-3.5,몽돌둥지성장/씨앗껍질깨짐각-3,딱정벌레피격-2.5,샘방울탄생-2dB다.
+- client/audio.js의12개재생gain만현재대비배율로수정하며원본음원과앞선공격균등화·타이밍·거리/줌·다른코드는유지한다. 새gain은현재설정과기존실측기준gain이같은지확인한뒤적용했다. 공유메모리의다른채팅기록/제품파일/공유index는보존하고이번변경과이채팅의미커밋관련기록만분리커밋한다. 연결Projects0근거를재사용하며push/배포는요청되지않았다.
+
+## 추가 효과음 12개 실측 및 커밋 범위 확정 · 01a1b074
+
+- 기록 ID: other-sfx-adjust-freeze-20261106-01a1b074. 기록 시각: 2026-11-06T20:05:00+09:00. 기록자·구현/검수/커밋범위 판단 Codex /root, 권장값12개조정·로컬커밋 결정 사용자. 출처 현재채팅의 ‘이것들도 권장값대로 조정하고 커밋해’, 작업공간식별자01a1b074-a5a2-76f0-bdf1-2c7d2e38db9d,H:/Spawner Windows PowerShell. 원발언정확시각·턴항목ID·별도스레드ID/딥링크/PC식별불명.
+- 실제실측: spring-landing -21→-31LUFS M、harvest-wood -17.5→-23.5LUFS M、seed-eject -14.9→-20.4LUFS M、nest-growth-spring -20.3→-25.8LUFS M、harvest-soil -19.1→-23.6LUFS M、pebble-death -19.7→-24.2LUFS M、move-walking-forest -27→-31.5LUFS M、move-bundle-snail -28.1→-31.6LUFS M、nest-growth-pebble -22.7→-25.7LUFS M、beetle-hurt -18.4→-20.9LUFS M、spring-birth -17.7→-19.7LUFS M、seed-crack -19.4→-22.4LUFS M。12개모두권장dB변화와0.2LU이내로일치한다. 샘방울착지truepeak는-8.9dBTP,씨앗껍질깨짐은-2.4dBTP로내려갔다. 직접청음은하지않았으며단일개체/월드·화면중앙gain1의측정결과다.
+- 동결범위는client/audio.js의12개gain과이채팅관련메모리다. 앞선577c51f실제완료기록의미커밋영수증도관련지원으로함께포함하고다른채팅기록은제외한다. 커밋메시지는 ‘유닛 효과음 추가 볼륨 조정’,최신main기반별도index·기대HEAD가드로현재공유작업을보존한다. 최종후보형식/audio구문/staged범위·공백확인뒤로컬커밋예정이며아직커밋성공전이다.
+- 근거는현재쓰기허용루트literal $Trash/other-sfx/implementation.json과앞선attack-sfx/all-sfx-levels.json이다. 사용자요청12개모두조정/측정완료이며추가원본가공·전체빌드·다른코드변경은없다.

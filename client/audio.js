@@ -59,12 +59,19 @@
     let prepared = false;
     const voices = new Set();
     const lastPlayed = new Map();
-    const levels = { harvest: 0.8, "harvest-soil": 0.8, landing: 1.2, footstep: 0.6, throw: 1.5, catch: 2, "seed-eject": 1, "seed-crack": 1, "sprout-pop": 1, "spring-birth": 0.7, "pebble-birth": 1, "spore-birth": 0.3, "spring-landing": 1.2, "spring-footstep": 0.6,
+    const levels = { harvest: 0.8, "harvest-soil": 0.4765297, landing: 1.2, footstep: 0.6, throw: 1.5, catch: 2, "seed-eject": 0.5308844, "seed-crack": 0.7079458, "sprout-pop": 1, "spring-birth": 0.5560298, "pebble-birth": 1, "spore-birth": 0.3, "spring-landing": 0.3794733, "spring-footstep": 0.6,
       "move-spiny-back-beetle": 0.2140069,
       "move-spiny-back-leader": 0.2107398,
       "move-lantern-keeper": 0.4101223,
       "move-pebble": 0.2307903,
       "move-spore": 0.1847738,
+      "harvest-wood": 0.4009498,
+      "nest-growth-spring": 0.5308844,
+      "pebble-death": 0.5956621,
+      "move-walking-forest": 0.2358822,
+      "move-bundle-snail": 0.2867195,
+      "nest-growth-pebble": 0.7079458,
+      "beetle-hurt": 0.7498942,
       "beetle-attack": 0.5623413,
       "flower-tail-bird-attack": 0.7079458,
       "dew-rabbit-attack": 0.9440609,
