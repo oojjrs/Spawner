@@ -1,0 +1,774 @@
+{
+  "idle": {
+    "sheet": "(4096, 4096)",
+    "frames": 64,
+    "gifDecodedFrames": 17,
+    "gifDurationMs": 6400,
+    "durationMatches": true,
+    "allFramesMatchSheet": true,
+    "frameStats": [
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          140,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          155,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          175,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          199,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          223,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          244,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          259,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          264,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          264,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          264,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          264,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          264,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          264,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          264,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          264,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          264,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          264,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          264,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          264,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          264,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          264,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          264,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          264,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          264,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          264,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          264,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          264,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          264,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          264,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          264,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          259,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          244,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          223,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          199,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          175,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          155,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          140,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      }
+    ],
+    "sheetSHA256": "bb57a1947a72b9da92790fbc51cb25907efc1126e5c254ddc61fc21f44eba910",
+    "clippedFrames": 0,
+    "floorYs": [
+      448
+    ],
+    "allFramesSingleConnectedBody": true,
+    "bodyLeftRightExtent": [
+      [
+        43
+      ],
+      [
+        469
+      ]
+    ],
+    "loopBoundaryMeanAbsDifference": 0.0,
+    "reviewState": "Not submitted to user; not approved; not pushed"
+  },
+  "walk": {
+    "sheet": "(4096, 1024)",
+    "frames": 16,
+    "gifDecodedFrames": 16,
+    "gifDurationMs": 1120,
+    "durationMatches": true,
+    "allFramesMatchSheet": true,
+    "frameStats": [
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          133,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          132,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          132,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          132,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          133,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          133,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          132,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          132,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          132,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          133,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      },
+      {
+        "bbox": [
+          43,
+          134,
+          469,
+          448
+        ],
+        "componentsOver8px": 1
+      }
+    ],
+    "sheetSHA256": "2071af19b58a3031532157f64ad106b590cd901020f2fc3510405a4d006d7390",
+    "clippedFrames": 0,
+    "floorYs": [
+      448
+    ],
+    "allFramesSingleConnectedBody": true,
+    "bodyLeftRightExtent": [
+      [
+        43
+      ],
+      [
+        469
+      ]
+    ],
+    "loopBoundaryMeanAbsDifference": 0.6840133666992188,
+    "reviewState": "Not submitted to user; not approved; not pushed"
+  }
+}
