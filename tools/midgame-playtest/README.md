@@ -1,5 +1,12 @@
 # Midgame world playtest (2026-11-06)
 
+**Opening correction:** These historical runs began with50P against a20P upgrade.
+The imposed120-second upgrade click was not proof that gathering funded level two.
+See `../opening-earned/README.md` for the corrected earned-progression experiment.
+The historical7/8 result and separate recovery run must not be presented as
+validation of the new opening economy.
+
+
 ## Scope
 Actual `createRoom` / `tickRoom`, 0.25-second simulation steps, all four colonies,
 world resources, pathfinding, wildlife, raids, combat and endings. Seeds 13 and

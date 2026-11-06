@@ -64,7 +64,7 @@ export const ATTRIBUTE_DNA = (() => {
   function stats(pieces){
     const n=weights(pieces),c=counts(pieces),gather=!!c.gather;
     return {...dnaCombatStats(c,n),gatherCount:c.gather||0,antennaCount:c.antenna||0,
-      capacity:gather?c.gather+(n.capacity||0):0,harvest:gather?Math.min(c.gather+(n.harvest||0),c.gather+(n.capacity||0)):0,
+      capacity:gather?c.gather+(n.capacity||0):0,harvest:gather?Math.min(2*c.gather+(n.harvest||0),c.gather+(n.capacity||0)):0,
       harvestTime:gather?4/(1+.1*(n.harvestSpeed||0)):0,movement:.25+.04*(n.movement||0),
       vision:Math.min(12,1+(c.antenna||0)+.5*(n.vision||0)),scale:1+.01*pieces.length,roaming:!!n.antenna,
       loadSpeed:gather?Math.min(100,75+5*(n.loadSpeed||0)):0};

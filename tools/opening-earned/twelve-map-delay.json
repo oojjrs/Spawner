@@ -1,0 +1,386 @@
+[
+  {
+    "seed": 731047,
+    "tribe": "bean",
+    "policy": "worker",
+    "delay": 30,
+    "armyCost": 19,
+    "start": 12,
+    "cost": 20,
+    "upgrade": 150,
+    "births": [
+      210,
+      270
+    ],
+    "ready": [
+      {
+        "id": "1:6",
+        "time": 214
+      },
+      {
+        "id": "1:7",
+        "time": 274
+      }
+    ],
+    "snapshots": [
+      {
+        "time": 60,
+        "food": 7,
+        "points": 2,
+        "level": 1,
+        "hp": 100,
+        "units": 5
+      },
+      {
+        "time": 120,
+        "food": 18,
+        "points": 13,
+        "level": 1,
+        "hp": 100,
+        "units": 5
+      },
+      {
+        "time": 180,
+        "food": 39,
+        "points": 14,
+        "level": 2,
+        "hp": 200,
+        "units": 5
+      },
+      {
+        "time": 240,
+        "food": 55,
+        "points": 11,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 300,
+        "food": 87,
+        "points": 24,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 360,
+        "food": 112,
+        "points": 49,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 420,
+        "food": 140,
+        "points": 77,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 480,
+        "food": 151,
+        "points": 88,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      }
+    ],
+    "errors": [],
+    "instantUpgrade": false,
+    "workerAt": 60,
+    "firstRaidDeparture": 323.5,
+    "firstRaidArrival": 355,
+    "firstAffordable": 138.75
+  },
+  {
+    "seed": 731047,
+    "tribe": "spore",
+    "policy": "worker",
+    "delay": 30,
+    "armyCost": 19,
+    "start": 12,
+    "cost": 20,
+    "upgrade": 150,
+    "births": [
+      210,
+      270
+    ],
+    "ready": [
+      {
+        "id": "2:6",
+        "time": 213.25
+      },
+      {
+        "id": "2:7",
+        "time": 273.25
+      }
+    ],
+    "snapshots": [
+      {
+        "time": 60,
+        "food": 3,
+        "points": 15,
+        "level": 1,
+        "hp": 100,
+        "units": 4
+      },
+      {
+        "time": 120,
+        "food": 21,
+        "points": 16,
+        "level": 1,
+        "hp": 100,
+        "units": 5
+      },
+      {
+        "time": 180,
+        "food": 39,
+        "points": 14,
+        "level": 2,
+        "hp": 200,
+        "units": 5
+      },
+      {
+        "time": 240,
+        "food": 60,
+        "points": 16,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 300,
+        "food": 84,
+        "points": 21,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 360,
+        "food": 111,
+        "points": 48,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 420,
+        "food": 132,
+        "points": 69,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 480,
+        "food": 153,
+        "points": 90,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      }
+    ],
+    "errors": [],
+    "instantUpgrade": false,
+    "workerAt": 90,
+    "firstRaidDeparture": 329.25,
+    "firstRaidArrival": 354.5,
+    "firstAffordable": 71.25
+  },
+  {
+    "seed": 731047,
+    "tribe": "pebble",
+    "policy": "worker",
+    "delay": 30,
+    "armyCost": 19,
+    "start": 12,
+    "cost": 15,
+    "upgrade": 120,
+    "births": [
+      210,
+      270
+    ],
+    "ready": [
+      {
+        "id": "3:6",
+        "time": 212.75
+      },
+      {
+        "id": "3:7",
+        "time": 272.75
+      }
+    ],
+    "snapshots": [
+      {
+        "time": 60,
+        "food": 6,
+        "points": 1,
+        "level": 1,
+        "hp": 100,
+        "units": 5
+      },
+      {
+        "time": 120,
+        "food": 21,
+        "points": 1,
+        "level": 2,
+        "hp": 200,
+        "units": 5
+      },
+      {
+        "time": 180,
+        "food": 33,
+        "points": 13,
+        "level": 2,
+        "hp": 200,
+        "units": 5
+      },
+      {
+        "time": 240,
+        "food": 54,
+        "points": 15,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 300,
+        "food": 72,
+        "points": 14,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 360,
+        "food": 90,
+        "points": 32,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 420,
+        "food": 114,
+        "points": 56,
+        "level": 2,
+        "hp": 199.39999999999998,
+        "units": 5
+      },
+      {
+        "time": 480,
+        "food": 126,
+        "points": 68,
+        "level": 2,
+        "hp": 199.39999999999998,
+        "units": 5
+      }
+    ],
+    "errors": [],
+    "instantUpgrade": false,
+    "workerAt": 60,
+    "firstRaidDeparture": 311.25,
+    "firstRaidArrival": 348.5,
+    "firstAffordable": 45.75
+  },
+  {
+    "seed": 731047,
+    "tribe": "spring",
+    "policy": "worker",
+    "delay": 30,
+    "armyCost": 19,
+    "start": 12,
+    "cost": 20,
+    "upgrade": 120,
+    "births": [
+      180,
+      210
+    ],
+    "ready": [
+      {
+        "id": "4:6",
+        "time": 182
+      },
+      {
+        "id": "4:7",
+        "time": 212
+      }
+    ],
+    "snapshots": [
+      {
+        "time": 60,
+        "food": 6,
+        "points": 1,
+        "level": 1,
+        "hp": 100,
+        "units": 5
+      },
+      {
+        "time": 120,
+        "food": 31,
+        "points": 6,
+        "level": 2,
+        "hp": 200,
+        "units": 5
+      },
+      {
+        "time": 180,
+        "food": 50,
+        "points": 6,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 240,
+        "food": 81,
+        "points": 18,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 300,
+        "food": 115,
+        "points": 52,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 360,
+        "food": 148,
+        "points": 85,
+        "level": 2,
+        "hp": 199.09999999999997,
+        "units": 7
+      },
+      {
+        "time": 420,
+        "food": 176,
+        "points": 113,
+        "level": 2,
+        "hp": 198.19999999999993,
+        "units": 6
+      },
+      {
+        "time": 480,
+        "food": 201,
+        "points": 138,
+        "level": 2,
+        "hp": 198.19999999999993,
+        "units": 6
+      }
+    ],
+    "errors": [],
+    "instantUpgrade": false,
+    "workerAt": 60,
+    "firstRaidDeparture": 325.25,
+    "firstRaidArrival": 352,
+    "firstAffordable": 103
+  }
+]

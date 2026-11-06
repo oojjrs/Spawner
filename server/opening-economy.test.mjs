@@ -5,12 +5,27 @@ import { nestUpgradeCost } from './nests.mjs';
 import { PLAYER_STARTING_POINTS, startingWorkerDna } from './tribe-start.mjs';
 const soldier=[{"gene":"blade","grade":2,"shape":[0,1,5],"rotation":0},{"gene":"power","grade":2,"shape":[0,0,0],"rotation":4},{"gene":"health","grade":1,"shape":[0,4],"rotation":3},{"gene":"health","grade":1,"shape":[0,4],"rotation":3},{"gene":"movement","grade":1,"shape":[0,5],"rotation":2}];
 test('opening budget supports real level-two modest military without changing combat stats',()=>{
- assert.equal(PLAYER_STARTING_POINTS,50);assert.equal(M.cost(soldier),23);
+ assert.equal(PLAYER_STARTING_POINTS,30);assert.equal(M.cost(soldier),23);
  assert.equal(M.stats(soldier).health,30);
  for(const tribe of ['bean','spore','pebble','spring']){
   assert.equal(M.cost(startingWorkerDna(tribe).pieces),17);
-  assert.equal(nestUpgradeCost(1,tribe),tribe==='pebble'?15:20);
+  assert.equal(nestUpgradeCost(1,tribe),tribe==='pebble'?60:80);
+  assert.ok(PLAYER_STARTING_POINTS<nestUpgradeCost(1,tribe));
   const additionalIncome=17+nestUpgradeCost(1,tribe)+2*M.cost(soldier)-PLAYER_STARTING_POINTS;
-  assert.equal(additionalIncome,tribe==='pebble'?28:33);
+  assert.equal(additionalIncome,tribe==='pebble'?93:113);
+ }
+});
+
+test('basic gathering improves real hauling throughput without bypassing capacity or changing DNA prices',()=>{
+ const pieces=genes=>genes.map(gene=>({gene,grade:M.lookup.get(gene).grade}));
+ const basic=pieces(['gather']),hauler=pieces(['gather','capacity','capacity','health']);
+ assert.equal(M.cost(basic),8);assert.equal(M.stats(basic).capacity,1);assert.equal(M.stats(basic).harvest,1);
+ assert.equal(M.cost(hauler),17);assert.equal(M.stats(hauler).capacity,3);assert.equal(M.stats(hauler).harvest,2);
+ assert.equal(M.stats(hauler).harvestTime,4);
+ const advanced=pieces(['gather','capacity','capacity','capacity','harvest']);
+ assert.equal(M.stats(advanced).capacity,4);assert.equal(M.stats(advanced).harvest,4);
+ for(const tribe of ['bean','spore','pebble','spring']) {
+  assert.equal(nestUpgradeCost(2,tribe),tribe==='pebble'?150:200);
+  assert.equal(nestUpgradeCost(3,tribe),tribe==='pebble'?375:500);
  }
 });

@@ -1,0 +1,1864 @@
+[
+  {
+    "seed": 413,
+    "tribe": "spring",
+    "policy": "save",
+    "delay": 0,
+    "start": 10,
+    "cost": 20,
+    "upgrade": 80,
+    "births": [
+      155,
+      200
+    ],
+    "ready": [
+      {
+        "id": "4:5",
+        "time": 157
+      },
+      {
+        "id": "4:6",
+        "time": 202
+      }
+    ],
+    "snapshots": [
+      {
+        "time": 60,
+        "food": 3,
+        "points": 13,
+        "level": 1,
+        "hp": 100,
+        "units": 4
+      },
+      {
+        "time": 120,
+        "food": 21,
+        "points": 11,
+        "level": 2,
+        "hp": 200,
+        "units": 4
+      },
+      {
+        "time": 180,
+        "food": 39,
+        "points": 10,
+        "level": 2,
+        "hp": 200,
+        "units": 5
+      },
+      {
+        "time": 240,
+        "food": 61,
+        "points": 13,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 300,
+        "food": 79,
+        "points": 31,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 360,
+        "food": 95,
+        "points": 47,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 420,
+        "food": 101,
+        "points": 53,
+        "level": 2,
+        "hp": 200,
+        "units": 5
+      },
+      {
+        "time": 480,
+        "food": 110,
+        "points": 62,
+        "level": 2,
+        "hp": 200,
+        "units": 5
+      }
+    ],
+    "errors": [],
+    "instantUpgrade": false,
+    "firstAffordable": 75.25
+  },
+  {
+    "seed": 413,
+    "tribe": "spring",
+    "policy": "save",
+    "delay": 30,
+    "start": 10,
+    "cost": 20,
+    "upgrade": 90,
+    "births": [
+      180,
+      240
+    ],
+    "ready": [
+      {
+        "id": "4:5",
+        "time": 182
+      },
+      {
+        "id": "4:6",
+        "time": 242
+      }
+    ],
+    "snapshots": [
+      {
+        "time": 60,
+        "food": 3,
+        "points": 13,
+        "level": 1,
+        "hp": 100,
+        "units": 4
+      },
+      {
+        "time": 120,
+        "food": 19,
+        "points": 9,
+        "level": 2,
+        "hp": 200,
+        "units": 4
+      },
+      {
+        "time": 180,
+        "food": 34,
+        "points": 5,
+        "level": 2,
+        "hp": 200,
+        "units": 5
+      },
+      {
+        "time": 240,
+        "food": 55,
+        "points": 7,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 300,
+        "food": 76,
+        "points": 28,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 360,
+        "food": 94,
+        "points": 46,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 420,
+        "food": 97,
+        "points": 49,
+        "level": 2,
+        "hp": 199.7,
+        "units": 5
+      },
+      {
+        "time": 480,
+        "food": 109,
+        "points": 61,
+        "level": 2,
+        "hp": 198.79999999999995,
+        "units": 5
+      }
+    ],
+    "errors": [],
+    "instantUpgrade": false,
+    "firstAffordable": 75.25
+  },
+  {
+    "seed": 413,
+    "tribe": "spring",
+    "policy": "worker",
+    "delay": 0,
+    "start": 10,
+    "cost": 20,
+    "upgrade": 130,
+    "births": [
+      200,
+      245
+    ],
+    "ready": [
+      {
+        "id": "4:6",
+        "time": 202
+      },
+      {
+        "id": "4:7",
+        "time": 247
+      }
+    ],
+    "snapshots": [
+      {
+        "time": 60,
+        "food": 3,
+        "points": 13,
+        "level": 1,
+        "hp": 100,
+        "units": 4
+      },
+      {
+        "time": 120,
+        "food": 24,
+        "points": 17,
+        "level": 1,
+        "hp": 100,
+        "units": 5
+      },
+      {
+        "time": 180,
+        "food": 42,
+        "points": 15,
+        "level": 2,
+        "hp": 200,
+        "units": 5
+      },
+      {
+        "time": 240,
+        "food": 64,
+        "points": 18,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 300,
+        "food": 88,
+        "points": 23,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 360,
+        "food": 116,
+        "points": 51,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 420,
+        "food": 122,
+        "points": 57,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 480,
+        "food": 145,
+        "points": 80,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      }
+    ],
+    "errors": [],
+    "instantUpgrade": false,
+    "workerAt": 70,
+    "firstAffordable": 125.5
+  },
+  {
+    "seed": 413,
+    "tribe": "spring",
+    "policy": "worker",
+    "delay": 30,
+    "start": 10,
+    "cost": 20,
+    "upgrade": 180,
+    "births": [
+      270,
+      300
+    ],
+    "ready": [
+      {
+        "id": "4:6",
+        "time": 272
+      },
+      {
+        "id": "4:7",
+        "time": 302
+      }
+    ],
+    "snapshots": [
+      {
+        "time": 60,
+        "food": 3,
+        "points": 13,
+        "level": 1,
+        "hp": 100,
+        "units": 4
+      },
+      {
+        "time": 120,
+        "food": 19,
+        "points": 12,
+        "level": 1,
+        "hp": 100,
+        "units": 5
+      },
+      {
+        "time": 180,
+        "food": 31,
+        "points": 4,
+        "level": 2,
+        "hp": 200,
+        "units": 5
+      },
+      {
+        "time": 240,
+        "food": 43,
+        "points": 16,
+        "level": 2,
+        "hp": 200,
+        "units": 5
+      },
+      {
+        "time": 300,
+        "food": 67,
+        "points": 2,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 360,
+        "food": 91,
+        "points": 26,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 420,
+        "food": 112,
+        "points": 47,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 480,
+        "food": 133,
+        "points": 68,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      }
+    ],
+    "errors": [],
+    "instantUpgrade": false,
+    "workerAt": 90,
+    "firstAffordable": 75.25
+  },
+  {
+    "seed": 413,
+    "tribe": "spring",
+    "policy": "cheap",
+    "delay": 0,
+    "start": 10,
+    "cost": 20,
+    "upgrade": 100,
+    "births": [
+      165,
+      220
+    ],
+    "ready": [
+      {
+        "id": "4:6",
+        "time": 167
+      },
+      {
+        "id": "4:7",
+        "time": 222
+      }
+    ],
+    "snapshots": [
+      {
+        "time": 60,
+        "food": 4,
+        "points": 6,
+        "level": 1,
+        "hp": 100,
+        "units": 5
+      },
+      {
+        "time": 120,
+        "food": 21,
+        "points": 3,
+        "level": 2,
+        "hp": 200,
+        "units": 5
+      },
+      {
+        "time": 180,
+        "food": 41,
+        "points": 4,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 240,
+        "food": 64,
+        "points": 8,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 300,
+        "food": 87,
+        "points": 31,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 360,
+        "food": 102,
+        "points": 46,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 420,
+        "food": 114,
+        "points": 58,
+        "level": 2,
+        "hp": 200,
+        "units": 4
+      },
+      {
+        "time": 480,
+        "food": 125,
+        "points": 69,
+        "level": 2,
+        "hp": 200,
+        "units": 4
+      }
+    ],
+    "errors": [],
+    "instantUpgrade": false,
+    "workerAt": 5,
+    "firstAffordable": 97
+  },
+  {
+    "seed": 413,
+    "tribe": "spring",
+    "policy": "cheap",
+    "delay": 30,
+    "start": 10,
+    "cost": 20,
+    "upgrade": 120,
+    "births": [
+      180,
+      240
+    ],
+    "ready": [
+      {
+        "id": "4:6",
+        "time": 182
+      },
+      {
+        "id": "4:7",
+        "time": 242
+      }
+    ],
+    "snapshots": [
+      {
+        "time": 60,
+        "food": 4,
+        "points": 6,
+        "level": 1,
+        "hp": 100,
+        "units": 5
+      },
+      {
+        "time": 120,
+        "food": 22,
+        "points": 4,
+        "level": 2,
+        "hp": 200,
+        "units": 5
+      },
+      {
+        "time": 180,
+        "food": 38,
+        "points": 1,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 240,
+        "food": 64,
+        "points": 8,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 300,
+        "food": 78,
+        "points": 22,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 360,
+        "food": 102,
+        "points": 46,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 420,
+        "food": 115,
+        "points": 59,
+        "level": 2,
+        "hp": 200,
+        "units": 5
+      },
+      {
+        "time": 480,
+        "food": 123,
+        "points": 67,
+        "level": 2,
+        "hp": 200,
+        "units": 5
+      }
+    ],
+    "errors": [],
+    "instantUpgrade": false,
+    "workerAt": 30,
+    "firstAffordable": 102
+  },
+  {
+    "seed": 13,
+    "tribe": "bean",
+    "policy": "worker",
+    "delay": 0,
+    "start": 10,
+    "cost": 20,
+    "upgrade": 110,
+    "births": [
+      170,
+      225
+    ],
+    "ready": [
+      {
+        "id": "1:6",
+        "time": 174
+      },
+      {
+        "id": "1:7",
+        "time": 229
+      }
+    ],
+    "snapshots": [
+      {
+        "time": 60,
+        "food": 9,
+        "points": 2,
+        "level": 1,
+        "hp": 100,
+        "units": 5
+      },
+      {
+        "time": 120,
+        "food": 30,
+        "points": 3,
+        "level": 2,
+        "hp": 200,
+        "units": 5
+      },
+      {
+        "time": 180,
+        "food": 48,
+        "points": 2,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 240,
+        "food": 73,
+        "points": 8,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 300,
+        "food": 103,
+        "points": 38,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 360,
+        "food": 133,
+        "points": 68,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 420,
+        "food": 154,
+        "points": 89,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 480,
+        "food": 169,
+        "points": 104,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      }
+    ],
+    "errors": [],
+    "instantUpgrade": false,
+    "workerAt": 60,
+    "firstAffordable": 108.75
+  },
+  {
+    "seed": 13,
+    "tribe": "spore",
+    "policy": "worker",
+    "delay": 0,
+    "start": 10,
+    "cost": 20,
+    "upgrade": 190,
+    "births": [
+      260,
+      290
+    ],
+    "ready": [
+      {
+        "id": "2:6",
+        "time": 263.25
+      },
+      {
+        "id": "2:7",
+        "time": 293.25
+      }
+    ],
+    "snapshots": [
+      {
+        "time": 60,
+        "food": 3,
+        "points": 13,
+        "level": 1,
+        "hp": 100,
+        "units": 4
+      },
+      {
+        "time": 120,
+        "food": 12,
+        "points": 5,
+        "level": 1,
+        "hp": 100,
+        "units": 5
+      },
+      {
+        "time": 180,
+        "food": 24,
+        "points": 17,
+        "level": 1,
+        "hp": 100,
+        "units": 5
+      },
+      {
+        "time": 240,
+        "food": 42,
+        "points": 15,
+        "level": 2,
+        "hp": 200,
+        "units": 5
+      },
+      {
+        "time": 300,
+        "food": 69,
+        "points": 4,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 360,
+        "food": 99,
+        "points": 34,
+        "level": 2,
+        "hp": 198.19999999999993,
+        "units": 7
+      },
+      {
+        "time": 420,
+        "food": 129,
+        "points": 64,
+        "level": 2,
+        "hp": 192.79999999999973,
+        "units": 6
+      },
+      {
+        "time": 480,
+        "food": 159,
+        "points": 94,
+        "level": 2,
+        "hp": 184.69999999999942,
+        "units": 6
+      }
+    ],
+    "errors": [],
+    "instantUpgrade": false,
+    "workerAt": 115,
+    "firstAffordable": 112.75
+  },
+  {
+    "seed": 13,
+    "tribe": "pebble",
+    "policy": "worker",
+    "delay": 0,
+    "start": 10,
+    "cost": 15,
+    "upgrade": 145,
+    "births": [
+      180,
+      210
+    ],
+    "ready": [
+      {
+        "id": "3:6",
+        "time": 182.75
+      },
+      {
+        "id": "3:7",
+        "time": 212.75
+      }
+    ],
+    "snapshots": [
+      {
+        "time": 60,
+        "food": 2,
+        "points": 12,
+        "level": 1,
+        "hp": 100,
+        "units": 4
+      },
+      {
+        "time": 120,
+        "food": 14,
+        "points": 7,
+        "level": 1,
+        "hp": 100,
+        "units": 5
+      },
+      {
+        "time": 180,
+        "food": 50,
+        "points": 9,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 240,
+        "food": 82,
+        "points": 22,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 300,
+        "food": 110,
+        "points": 50,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 360,
+        "food": 116,
+        "points": 56,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 420,
+        "food": 124,
+        "points": 64,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 480,
+        "food": 136,
+        "points": 76,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      }
+    ],
+    "errors": [],
+    "instantUpgrade": false,
+    "workerAt": 90,
+    "firstAffordable": 88.25
+  },
+  {
+    "seed": 413,
+    "tribe": "bean",
+    "policy": "worker",
+    "delay": 0,
+    "start": 10,
+    "cost": 20,
+    "upgrade": 130,
+    "births": [
+      175,
+      210
+    ],
+    "ready": [
+      {
+        "id": "1:6",
+        "time": 179
+      },
+      {
+        "id": "1:7",
+        "time": 214
+      }
+    ],
+    "snapshots": [
+      {
+        "time": 60,
+        "food": 10,
+        "points": 3,
+        "level": 1,
+        "hp": 100,
+        "units": 5
+      },
+      {
+        "time": 120,
+        "food": 24,
+        "points": 17,
+        "level": 1,
+        "hp": 100,
+        "units": 5
+      },
+      {
+        "time": 180,
+        "food": 50,
+        "points": 4,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 240,
+        "food": 82,
+        "points": 17,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 300,
+        "food": 112,
+        "points": 47,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 360,
+        "food": 131,
+        "points": 66,
+        "level": 2,
+        "hp": 200,
+        "units": 5
+      },
+      {
+        "time": 420,
+        "food": 137,
+        "points": 72,
+        "level": 2,
+        "hp": 200,
+        "units": 4
+      },
+      {
+        "time": 480,
+        "food": 151,
+        "points": 86,
+        "level": 2,
+        "hp": 200,
+        "units": 4
+      }
+    ],
+    "errors": [],
+    "instantUpgrade": false,
+    "workerAt": 55,
+    "firstAffordable": 125.75
+  },
+  {
+    "seed": 413,
+    "tribe": "spore",
+    "policy": "worker",
+    "delay": 0,
+    "start": 10,
+    "cost": 20,
+    "upgrade": 130,
+    "births": [
+      195,
+      230
+    ],
+    "ready": [
+      {
+        "id": "2:6",
+        "time": 198.25
+      },
+      {
+        "id": "2:7",
+        "time": 233.25
+      }
+    ],
+    "snapshots": [
+      {
+        "time": 60,
+        "food": 3,
+        "points": 13,
+        "level": 1,
+        "hp": 100,
+        "units": 4
+      },
+      {
+        "time": 120,
+        "food": 24,
+        "points": 17,
+        "level": 1,
+        "hp": 100,
+        "units": 5
+      },
+      {
+        "time": 180,
+        "food": 45,
+        "points": 18,
+        "level": 2,
+        "hp": 200,
+        "units": 5
+      },
+      {
+        "time": 240,
+        "food": 75,
+        "points": 10,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 300,
+        "food": 105,
+        "points": 40,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 360,
+        "food": 129,
+        "points": 64,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 420,
+        "food": 156,
+        "points": 91,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 480,
+        "food": 168,
+        "points": 103,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      }
+    ],
+    "errors": [],
+    "instantUpgrade": false,
+    "workerAt": 75,
+    "firstAffordable": 71.75
+  },
+  {
+    "seed": 413,
+    "tribe": "pebble",
+    "policy": "worker",
+    "delay": 0,
+    "start": 10,
+    "cost": 15,
+    "upgrade": 125,
+    "births": [
+      160,
+      195
+    ],
+    "ready": [
+      {
+        "id": "3:6",
+        "time": 162.75
+      },
+      {
+        "id": "3:7",
+        "time": 197.75
+      }
+    ],
+    "snapshots": [
+      {
+        "time": 60,
+        "food": 6,
+        "points": 16,
+        "level": 1,
+        "hp": 100,
+        "units": 4
+      },
+      {
+        "time": 120,
+        "food": 21,
+        "points": 14,
+        "level": 1,
+        "hp": 100,
+        "units": 5
+      },
+      {
+        "time": 180,
+        "food": 51,
+        "points": 10,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 240,
+        "food": 81,
+        "points": 21,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 300,
+        "food": 105,
+        "points": 45,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 360,
+        "food": 129,
+        "points": 69,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 420,
+        "food": 144,
+        "points": 84,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 480,
+        "food": 174,
+        "points": 114,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      }
+    ],
+    "errors": [],
+    "instantUpgrade": false,
+    "workerAt": 70,
+    "firstAffordable": 59
+  },
+  {
+    "seed": 731047,
+    "tribe": "bean",
+    "policy": "worker",
+    "delay": 30,
+    "start": 10,
+    "cost": 20,
+    "upgrade": 150,
+    "births": [
+      210,
+      270
+    ],
+    "ready": [
+      {
+        "id": "1:6",
+        "time": 214
+      },
+      {
+        "id": "1:7",
+        "time": 274
+      }
+    ],
+    "snapshots": [
+      {
+        "time": 60,
+        "food": 7,
+        "points": 0,
+        "level": 1,
+        "hp": 100,
+        "units": 5
+      },
+      {
+        "time": 120,
+        "food": 18,
+        "points": 11,
+        "level": 1,
+        "hp": 100,
+        "units": 5
+      },
+      {
+        "time": 180,
+        "food": 39,
+        "points": 12,
+        "level": 2,
+        "hp": 200,
+        "units": 5
+      },
+      {
+        "time": 240,
+        "food": 58,
+        "points": 12,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 300,
+        "food": 84,
+        "points": 19,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 360,
+        "food": 112,
+        "points": 47,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 420,
+        "food": 135,
+        "points": 70,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 480,
+        "food": 158,
+        "points": 93,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      }
+    ],
+    "errors": [],
+    "instantUpgrade": false,
+    "workerAt": 60,
+    "firstAffordable": 138.75
+  },
+  {
+    "seed": 731047,
+    "tribe": "spore",
+    "policy": "worker",
+    "delay": 30,
+    "start": 10,
+    "cost": 20,
+    "upgrade": 150,
+    "births": [
+      210,
+      270
+    ],
+    "ready": [
+      {
+        "id": "2:6",
+        "time": 213.25
+      },
+      {
+        "id": "2:7",
+        "time": 273.25
+      }
+    ],
+    "snapshots": [
+      {
+        "time": 60,
+        "food": 3,
+        "points": 13,
+        "level": 1,
+        "hp": 100,
+        "units": 4
+      },
+      {
+        "time": 120,
+        "food": 21,
+        "points": 14,
+        "level": 1,
+        "hp": 100,
+        "units": 5
+      },
+      {
+        "time": 180,
+        "food": 39,
+        "points": 12,
+        "level": 2,
+        "hp": 200,
+        "units": 5
+      },
+      {
+        "time": 240,
+        "food": 60,
+        "points": 14,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 300,
+        "food": 84,
+        "points": 19,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 360,
+        "food": 114,
+        "points": 49,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 420,
+        "food": 131,
+        "points": 66,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 480,
+        "food": 155,
+        "points": 90,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      }
+    ],
+    "errors": [],
+    "instantUpgrade": false,
+    "workerAt": 90,
+    "firstAffordable": 71.75
+  },
+  {
+    "seed": 731047,
+    "tribe": "pebble",
+    "policy": "worker",
+    "delay": 30,
+    "start": 10,
+    "cost": 15,
+    "upgrade": 150,
+    "births": [
+      210,
+      270
+    ],
+    "ready": [
+      {
+        "id": "3:6",
+        "time": 212.75
+      },
+      {
+        "id": "3:7",
+        "time": 272.75
+      }
+    ],
+    "snapshots": [
+      {
+        "time": 60,
+        "food": 6,
+        "points": 16,
+        "level": 1,
+        "hp": 100,
+        "units": 4
+      },
+      {
+        "time": 120,
+        "food": 21,
+        "points": 14,
+        "level": 1,
+        "hp": 100,
+        "units": 5
+      },
+      {
+        "time": 180,
+        "food": 30,
+        "points": 8,
+        "level": 2,
+        "hp": 200,
+        "units": 5
+      },
+      {
+        "time": 240,
+        "food": 57,
+        "points": 16,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 300,
+        "food": 75,
+        "points": 15,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 360,
+        "food": 93,
+        "points": 33,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 420,
+        "food": 114,
+        "points": 54,
+        "level": 2,
+        "hp": 194.8999999999998,
+        "units": 6
+      },
+      {
+        "time": 480,
+        "food": 123,
+        "points": 63,
+        "level": 2,
+        "hp": 189.1999999999996,
+        "units": 6
+      }
+    ],
+    "errors": [],
+    "instantUpgrade": false,
+    "workerAt": 90,
+    "firstAffordable": 49.75
+  },
+  {
+    "seed": 731047,
+    "tribe": "spring",
+    "policy": "worker",
+    "delay": 30,
+    "start": 10,
+    "cost": 20,
+    "upgrade": 150,
+    "births": [
+      210,
+      240
+    ],
+    "ready": [
+      {
+        "id": "4:6",
+        "time": 212
+      },
+      {
+        "id": "4:7",
+        "time": 242
+      }
+    ],
+    "snapshots": [
+      {
+        "time": 60,
+        "food": 6,
+        "points": 16,
+        "level": 1,
+        "hp": 100,
+        "units": 4
+      },
+      {
+        "time": 120,
+        "food": 18,
+        "points": 11,
+        "level": 1,
+        "hp": 100,
+        "units": 5
+      },
+      {
+        "time": 180,
+        "food": 43,
+        "points": 16,
+        "level": 2,
+        "hp": 200,
+        "units": 5
+      },
+      {
+        "time": 240,
+        "food": 80,
+        "points": 15,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 300,
+        "food": 111,
+        "points": 46,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 360,
+        "food": 144,
+        "points": 79,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 420,
+        "food": 170,
+        "points": 105,
+        "level": 2,
+        "hp": 199.09999999999997,
+        "units": 6
+      },
+      {
+        "time": 480,
+        "food": 210,
+        "points": 145,
+        "level": 2,
+        "hp": 199.09999999999997,
+        "units": 6
+      }
+    ],
+    "errors": [],
+    "instantUpgrade": false,
+    "workerAt": 90,
+    "firstAffordable": 74.25
+  },
+  {
+    "seed": 13,
+    "tribe": "spore",
+    "policy": "worker",
+    "delay": 30,
+    "armyCost": 19,
+    "start": 10,
+    "cost": 20,
+    "upgrade": 210,
+    "births": [
+      300,
+      330
+    ],
+    "ready": [
+      {
+        "id": "2:6",
+        "time": 303.25
+      },
+      {
+        "id": "2:7",
+        "time": 333.25
+      }
+    ],
+    "snapshots": [
+      {
+        "time": 60,
+        "food": 3,
+        "points": 13,
+        "level": 1,
+        "hp": 100,
+        "units": 4
+      },
+      {
+        "time": 120,
+        "food": 12,
+        "points": 5,
+        "level": 1,
+        "hp": 100,
+        "units": 5
+      },
+      {
+        "time": 180,
+        "food": 24,
+        "points": 17,
+        "level": 1,
+        "hp": 100,
+        "units": 5
+      },
+      {
+        "time": 240,
+        "food": 36,
+        "points": 9,
+        "level": 2,
+        "hp": 200,
+        "units": 5
+      },
+      {
+        "time": 300,
+        "food": 57,
+        "points": 11,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 360,
+        "food": 90,
+        "points": 25,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 420,
+        "food": 117,
+        "points": 52,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 480,
+        "food": 144,
+        "points": 79,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      }
+    ],
+    "errors": [],
+    "instantUpgrade": false,
+    "workerAt": 120,
+    "firstAffordable": 112.75
+  },
+  {
+    "seed": 413,
+    "tribe": "spore",
+    "policy": "worker",
+    "delay": 30,
+    "armyCost": 19,
+    "start": 10,
+    "cost": 20,
+    "upgrade": 150,
+    "births": [
+      210,
+      240
+    ],
+    "ready": [
+      {
+        "id": "2:6",
+        "time": 213.25
+      },
+      {
+        "id": "2:7",
+        "time": 243.25
+      }
+    ],
+    "snapshots": [
+      {
+        "time": 60,
+        "food": 3,
+        "points": 13,
+        "level": 1,
+        "hp": 100,
+        "units": 4
+      },
+      {
+        "time": 120,
+        "food": 21,
+        "points": 14,
+        "level": 1,
+        "hp": 100,
+        "units": 5
+      },
+      {
+        "time": 180,
+        "food": 36,
+        "points": 9,
+        "level": 2,
+        "hp": 200,
+        "units": 5
+      },
+      {
+        "time": 240,
+        "food": 66,
+        "points": 1,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 300,
+        "food": 99,
+        "points": 34,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 360,
+        "food": 126,
+        "points": 61,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 420,
+        "food": 147,
+        "points": 82,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 480,
+        "food": 162,
+        "points": 97,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      }
+    ],
+    "errors": [],
+    "instantUpgrade": false,
+    "workerAt": 90,
+    "firstAffordable": 71.75
+  },
+  {
+    "seed": 13,
+    "tribe": "spring",
+    "policy": "worker",
+    "delay": 30,
+    "armyCost": 19,
+    "start": 10,
+    "cost": 20,
+    "upgrade": 120,
+    "births": [
+      180,
+      210
+    ],
+    "ready": [
+      {
+        "id": "4:6",
+        "time": 182
+      },
+      {
+        "id": "4:7",
+        "time": 212
+      }
+    ],
+    "snapshots": [
+      {
+        "time": 60,
+        "food": 7,
+        "points": 0,
+        "level": 1,
+        "hp": 100,
+        "units": 5
+      },
+      {
+        "time": 120,
+        "food": 27,
+        "points": 0,
+        "level": 2,
+        "hp": 200,
+        "units": 5
+      },
+      {
+        "time": 180,
+        "food": 55,
+        "points": 9,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 240,
+        "food": 87,
+        "points": 22,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 300,
+        "food": 116,
+        "points": 51,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 360,
+        "food": 136,
+        "points": 71,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 420,
+        "food": 154,
+        "points": 89,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 480,
+        "food": 178,
+        "points": 113,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      }
+    ],
+    "errors": [],
+    "instantUpgrade": false,
+    "workerAt": 60,
+    "firstAffordable": 119.75
+  },
+  {
+    "seed": 13,
+    "tribe": "pebble",
+    "policy": "worker",
+    "delay": 30,
+    "armyCost": 19,
+    "start": 10,
+    "cost": 15,
+    "upgrade": 150,
+    "births": [
+      180,
+      240
+    ],
+    "ready": [
+      {
+        "id": "3:6",
+        "time": 182.75
+      },
+      {
+        "id": "3:7",
+        "time": 242.75
+      }
+    ],
+    "snapshots": [
+      {
+        "time": 60,
+        "food": 2,
+        "points": 12,
+        "level": 1,
+        "hp": 100,
+        "units": 4
+      },
+      {
+        "time": 120,
+        "food": 14,
+        "points": 7,
+        "level": 1,
+        "hp": 100,
+        "units": 5
+      },
+      {
+        "time": 180,
+        "food": 42,
+        "points": 1,
+        "level": 2,
+        "hp": 200,
+        "units": 6
+      },
+      {
+        "time": 240,
+        "food": 65,
+        "points": 5,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 300,
+        "food": 97,
+        "points": 37,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 360,
+        "food": 119,
+        "points": 59,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 420,
+        "food": 123,
+        "points": 63,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      },
+      {
+        "time": 480,
+        "food": 147,
+        "points": 87,
+        "level": 2,
+        "hp": 200,
+        "units": 7
+      }
+    ],
+    "errors": [],
+    "instantUpgrade": false,
+    "workerAt": 90,
+    "firstAffordable": 88.25
+  }
+]

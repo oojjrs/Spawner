@@ -251,7 +251,7 @@
     </figcaption>
     <aside class="map-logic" id="map-logic" aria-label="배치 로직 설명" hidden><span class="map-logic-current">현재 미리보기</span><h3 id="map-logic-title"></h3><div id="map-logic-body"></div></aside>
   </figure>
-  <table class="map-legend-table" id="conquest-rules" style="word-break:keep-all"><colgroup><col style="width:92px"><col></colgroup><tbody><tr><th>새싹콩</th><td>0–120초 · 중립 ≈300초 · 종족 420초+ · 정찰 &lt;420초</td></tr><tr><th>둥지</th><td>Lv.2 20P · Lv.3 400P · Lv.4 2000P · AI ≥1200초</td></tr><tr><th>일꾼:군사</th><td>80:20 → 30:70 · 30–40 · 60–70</td></tr></tbody></table>
+  <table class="map-legend-table" id="conquest-rules" style="word-break:keep-all"><colgroup><col style="width:92px"><col></colgroup><tbody><tr><th>새싹콩</th><td>0–120초 · 중립 ≈300초 · 종족 420초+ · 정찰 &lt;420초</td></tr><tr><th>둥지</th><td>Lv.2 80P · Lv.3 200P · Lv.4 500P · AI ≥1200초</td></tr><tr><th>일꾼:군사</th><td>80:20 → 30:70 · 30–40 · 60–70</td></tr></tbody></table>
 <details class="map-encounter-rules" id="world-encounter-rules"><summary>중립 유닛 등장·개체 수·재등장 규칙 · 19종</summary>
     <ul class="map-encounter-common">
       <li>지형·물가·둥지 보호 조건을 따르며, 딱정벌레 외 일반종은 첫 결원부터 주기마다 1마리씩 정원까지 보충한다.</li>
@@ -2797,7 +2797,7 @@ return { generateHydrology, hydrologyResourceSuitability, populateWatershedResou
 modules["server/conquest-pacing.mjs"] = (() => {
 const CONQUEST_PACING = Object.freeze({ quietUntil:120, guidanceAt:160, neutralConflictAt:300, tribeContactAt:420,
   expertLevelFourAt:600, aiLevelFourAt:1200, activePopulation:36, inefficientPopulation:70,
-  workerShare:Object.freeze([.8,.65,.45,.3]), nestCosts:Object.freeze([20,400,2000,null]),
+  workerShare:Object.freeze([.8,.65,.45,.3]), nestCosts:Object.freeze([80,200,500,null]),
   attributeCosts:Object.freeze([0,0,8,16,24]), aiUpgradeAt:Object.freeze([0,270,690,1200]),
   productionInterval:3, frontierSamples:48, preferredScouts:4 });
 
@@ -4527,7 +4527,7 @@ const ATTRIBUTE_DNA = (() => {
   function stats(pieces){
     const n=weights(pieces),c=counts(pieces),gather=!!c.gather;
     return {...dnaCombatStats(c,n),gatherCount:c.gather||0,antennaCount:c.antenna||0,
-      capacity:gather?c.gather+(n.capacity||0):0,harvest:gather?Math.min(c.gather+(n.harvest||0),c.gather+(n.capacity||0)):0,
+      capacity:gather?c.gather+(n.capacity||0):0,harvest:gather?Math.min(2*c.gather+(n.harvest||0),c.gather+(n.capacity||0)):0,
       harvestTime:gather?4/(1+.1*(n.harvestSpeed||0)):0,movement:.25+.04*(n.movement||0),
       vision:Math.min(12,1+(c.antenna||0)+.5*(n.vision||0)),scale:1+.01*pieces.length,roaming:!!n.antenna,
       loadSpeed:gather?Math.min(100,75+5*(n.loadSpeed||0)):0};
@@ -5027,22 +5027,23 @@ return { recordColonyIncome, restoreColonyIncome, colonySupply, colonyForagers }
 modules["server/tribe-start.mjs"] = (() => {
 const { ATTRIBUTE_DNA } = modules["server/dna.mjs"];
 
-const PLAYER_STARTING_POINTS = 50;
+// Worker production is affordable immediately; gathering funds nest growth.
+const PLAYER_STARTING_POINTS = 30;
 
 const TRIBE_STARTING_UNITS = Object.freeze({
   bean: Object.freeze([["antenna"], ["strength"], [], []].map(slots => Object.freeze(slots))),
   spore: Object.freeze([["strength"], ["blade"], [], []].map(slots => Object.freeze(slots))),
-  pebble: Object.freeze([["strength"], ["strength"], ["antenna"]].map(slots => Object.freeze(slots))),
-  spring: Object.freeze([["feet"], ["feet"], ["antenna"]].map(slots => Object.freeze(slots)))
+  pebble: Object.freeze([["strength"], ["strength"], ["antenna"], []].map(slots => Object.freeze(slots))),
+  spring: Object.freeze([["feet"], ["feet"], ["antenna"], []].map(slots => Object.freeze(slots)))
 });
 
 // Each tribe gets a modest legal level-one worker, priced through the same
-// DNA catalog as user designs (currently 28P each, including birth cost).
+// DNA catalog as user designs (currently 17P each, including birth cost).
 const STARTING_WORKER_GENES = Object.freeze({
   bean: Object.freeze(["gather", "capacity", "capacity", "capacity"]),
-  spore: Object.freeze(["gather", "harvestSpeed", "capacity", "health"]),
-  pebble: Object.freeze(["gather", "health", "capacity", "movement"]),
-  spring: Object.freeze(["gather", "movement", "movement", "health"])
+  spore: Object.freeze(["gather", "harvestSpeed", "capacity", "capacity"]),
+  pebble: Object.freeze(["gather", "health", "capacity", "capacity"]),
+  spring: Object.freeze(["gather", "movement", "capacity", "capacity"])
 });
 
 function startingWorkerDna(tribe = "bean") {
@@ -5172,7 +5173,16 @@ function dnaCanMove(agent, x, y, colonies) {
     nextDistance < distanceFromHome(agent.x, agent.y);
 }
 
-return { cloneDna, validateDna, dnaAppearance, dnaUnitStats, dnaCanMove };
+// The cheapest productive DNA design, not an empty non-gathering body.
+// Keep recovery checks tied to the current catalog and validation rules.
+function basicGathererDna(nestLevel = 1) {
+  const gene = ATTRIBUTE_DNA.lookup.get("gather");
+  const design = { version: 3, level: nestLevel, budget: 999999999,
+    pieces: [{ gene: gene.id, grade: gene.grade, rotation: 0, shape: [...gene.steps] }] };
+  return validateDna(design, nestLevel, design.budget);
+}
+
+return { cloneDna, validateDna, dnaAppearance, dnaUnitStats, dnaCanMove, basicGathererDna };
 })();
 modules["server/growth.mjs"] = (() => {
 const { dnaAppearance, dnaUnitStats } = modules["server/dna-unit.mjs"];

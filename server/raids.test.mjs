@@ -220,7 +220,7 @@ test("각 군락이 담당 굴에서 첫 습격을 받고 다음 출정도 자�
 
 test("초기 출정은 5분대로 제한하고 교체 여력에 따라 다른 출정 주기를 유지한다", () => {
   const outcomes = [];
-  for (const delivered of [20,40]) {
+  for (const delivered of [20,160]) {
     const {room,system} = fixture(false);
     room.games.get("owner").colonyFood = delivered;
     advance(room, system, 120);
