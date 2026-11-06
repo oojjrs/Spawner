@@ -1,3 +1,32 @@
+## 유닛 외형 연결 정리 커밋·푸시 범위 · 01a1b330 현재 요약
+
+- 기록 ID: appearance-link-cleanup-finish-scope-20261107-01a1b330. 기록 시각 2026-11-07T08:38:35+09:00. 기록자·범위분리/Git판단 Codex /root, 커밋·푸시 승인 사용자. 출처 현재 채팅 01a1b330-4e8e-74d2-9980-301f0e6378ae의 「커밋하고 푸시해」 및 실제 Git/후보 결과. 원발언시각·항목ID·PC식별 불명,H:/Spawner Windows PowerShell.
+- 승인범위·누락점검: 직전 보고한 Design.html 외형27칸 정리와 관련 착수/판정/완료/본범위4개 메모리절만 원자적 커밋하고 전용origin/main에 푸시한다. 기존 판정정정·빈칸20·원화4·재생교정3·정상 승인본 유지와 원본보존을 대조했다. 실제 구조/참조/문구/페이지밖 보존 검수 결과는 재사용하고 새 문구/게임수정·배포는 추가하지 않는다.
+- 동시 Git 상태: 시작HEAD e2b24ea7521979e59a0c0912a0382ec09eaea54b에서 다른채팅의 stash복원 Design 충돌과 여러 기존 staged경로를 확인했다. 같은저장소 재정렬이 진행중임을 wait_threads로 확인하여 그 conflict/index는 건드리지 않는다. fetch한origin/main9018cfe65174f8faa2d785f77cbdfad8d4c69542가1commit앞서며 새 포자채집 공격·샘방울채집 원화/대기/이동이 들어왔다. 최신HEAD에서27개 정확셀만 바꾼 임시후보를 준비했고 새 승인셀이 보존됐다. 진행중 작업 종료 뒤 최신branch/index를 기준으로 후보와보존상태를 확정한다.
+- 최신 통합·동결(2026-11-07T08:46:50+09:00, Codex /root): 기본index가비어있던상태에서다른채팅의6e31175를신규origin/main eba450a위로rebase해현재fe4e5bfa6b62a40a603581ea8a8f8e471b699cd6로보존했다. autostash a8ce025 복원충돌은 포자채집 동일행1곳이었으며 최신승인 공격/피격/사망과 병행작업의원화/idle/walkruntime연결을모두남겨해소했고원래index0을복구했다. 실패한앞선부분stash fed413989ac4e4161cee65f2abc9d60937441ed8와복구근거도유지한다. 최종후보는이HEAD의두파일에이번27셀/관련4절만투영하므로신규승인자료와다른작업을커밋에추가하지않고보존한다. 최종문구·검수한계·빈칸작업상태·사용자Git승인을대조했고이제내용을동결한다.
+- 분리방식·검수: project-finish-work와dirty-worktree-scope-split을 적용하여 기본index의다른경로/메모리변경을보존한별도index로두경로만준비한다. 메모리후보는HEAD의기존바이트에이번4절만추가하고기존줄바꿈은유지한다. 현재commit/push성공은아직아니며, 보드는앞선ProjectsV2 nodes=[]결과를재사용한다.
+
+## 유닛 외형 잘못된 연결 정리 완료 · 01a1b330 현재 요약
+
+- 기록 ID: appearance-link-cleanup-complete-20261107-01a1b330. 기록·직접파일검수 시각 2026-11-07T08:34:43+09:00. 기록자·실제수정/검수 Codex /root, 제거·빈칸 요청 사용자. 출처 현재 채팅 01a1b330-4e8e-74d2-9980-301f0e6378ae와 literal $Trash/appearance-link-cleanup-01a1b330의 before.html/after.html/changes.json/verification.json. 원발언 정확 시각·항목ID·PC식별 불명, H:/Spawner Windows PowerShell.
+- 실제완료: Design.html 외형표27칸만 변경했다. 원화4칸(포자채집 최신 ApprovedGatherV1, 분비형 콩/포자/몽돌의 자기 종족 neutral)을 교체하고, 구형 관통형/칼날형 대용 동작 및 샘방울 정적원화 idle20칸을 비웠다. 콩 분비형 대기는 승인V4 시트/GIF로 바로 연결, 샘방울 분비형 탄생/사망은 승인 cyanV3를 old piercing으로 덮던 data-combat-clip 연결을 제거했다. 승인된 포자채집 idle/walk와 다른 DNA 기존 유효 이미지는 유지했다.
+- 직접검수: 5묶음×4행·9열과 HTML태그 균형/ID중복없음, 페이지 참조경로 전부 존재, 분비기관 old piercing/CombatAttributesV7 동적 연결0·빈칸20, 본문문구와 페이지밖 바이트가 작업직전과 동일함을 확인했다. 모든 애니메이션의 전프레임 재생이나 게임 실행을 검수했다고 확대하지 않는다. 내용/연결 수정이며 레이아웃·코드/원본 에셋 변경·새 자산 생성은 없다.
+- 마감 도구결과(2026-11-07T08:35:24+09:00, Codex /root): 공통 형식 검사에서 Design.html은 UTF8NoBom/CRLF OK다. 메모리는 현재 CRLF와 HEAD의 Mixed 기준 차이로 NeedsReview이며 기존 본문은 변경·정규화하지 않았다. git diff --check의 Design 오류는 없고 메모리는 HEAD 기준 CRLF를 trailing whitespace로 대량 표시하여 전체 성공으로 기록하지 않는다. 제품 연결/구조/범위 검수의 실제 성공 근거는 verification.json이며, 검사를 다시 늘리지 않고 완료한다.
+- 누락점검·상태: 요청/판정정정/실제변경/검수/다음작업을 대조했다. 빈칸은 해당 현재외형 동작 작업이 남은 상태로 유지한다. 사용자에게 요구하지 않은 안내문구/기획추가 없이 미stage·미commit·미게시로 완료하며, 기존/동시 변경·index를 보존했다. 형식/최종범위 검사는 이 기록 뒤 같은 호출에서 수행하고 실제 도구결과를 근거로 한다. 연결 GitHub Projects는 nodes=[]로 관리할 보드가 없다.
+
+## 유닛 외형 연결 판정·정리 범위 확정 · 01a1b330
+
+- 기록 ID: appearance-link-cleanup-decision-20261107-01a1b330. 기록 시각 2026-11-07T08:33:29+09:00. 기록자·작업 판단 Codex /root, 제거·빈칸 결정 사용자. 출처 현재 채팅 01a1b330-4e8e-74d2-9980-301f0e6378ae 및 현행 Design/원본/manifest/재생 선택 코드, H:/Spawner Windows PowerShell. 원발언시각·항목ID·PC식별 불명.
+- 판정 정정: 초기에는 포자 채집 idle/walk를 이전 시안으로 의심했으나 두 JSON의 user-approved·source·sourceSHA256이 최신 ApprovedGatherV1과 일치한다. 두 동작은 유효하므로 유지하며, 원화만 구형 strength/96썸네일에서 승인 source.png로 바꾼다. 초기 의심을 잘못된 연결 확정으로 취급하지 않는다.
+- 전수 대조: 5DNA×4종족의 이미지칸을 원본 접촉도판과 경로·재생선택으로 대조했다. 분비형 bean/spore/pebble 원화는 구형 piercing이며 실제 UnitRangedV1 자기 종족 neutral 원화로 교체한다. 샘방울 분비형 원화는 현재 cyan V3가 맞다. old piercing 동작 bean4/spore6/pebble6/spring3과 샘방울 static 원화를 넣은 idle1칸, 합계20칸을 비운다. 일반 런타임 시트가 있다는 이유로 새 승인 동작으로 간주해 빈칸을 다시 채우지 않는다.
+- 유지·복구: bean 분비형 사망 승인본은 그대로, 대기는 user-approved bean-secretion-idle-v4로 연결한다. spring 분비형 탄생/사망은 승인 cyan V3 링크/GIF를 유지하되 data-combat-clip을 제거해 unit-matrix-preview.initializeAppearance가 old piercing으로 덮지 못하게 한다. 다른 DNA의 형상이 맞는 기존 연결/승인 동작·20행/9열·문구/레이아웃·게임 코드는 유지한다. 변경27칸 예상이며 아직 실제수정/최종검수 전이다.
+
+## 유닛 외형 잘못된 이미지 연결 정리 착수 · 01a1b330 현재 요약
+
+- 기록 ID: appearance-link-cleanup-start-20261107-01a1b330. 기록 시각 2026-11-07T08:28:58+09:00. 기록자·연결 판정 Codex /root, 요청·빈칸 결정 사용자. 출처 현재 채팅 01a1b330-4e8e-74d2-9980-301f0e6378ae의 포자버섯 채집기관 구형 원화·샘방울 분비기관 칼날 연결 지적과 잘못된 연결 제거 요청. 원발언 정확 시각·항목ID·딥링크·PC식별 불명, H:/Spawner Windows PowerShell.
+- 확정 범위: Design.html 유닛 외형 페이지의 실제 기관/종족/동작에 맞지 않는 이미지 연결을 제거하고 필요한 작업 칸은 비운다. 확정 최신 원본이 확인된 원화는 그 원본에 맞추고, 타 기관/구형 동작의 임시 대용 연결은 유지하지 않는다. 새 원화·동작 제작, 게임 코드/원본 에셋 수정·삭제, 새 안내 문구, commit/push/배포는 요청 범위가 아니다. 기존·동시 Design/메모리 및 다른 파일 변경과 index를 보존한다.
+- 직접 확인: 현재 gather/spore 원화는 spore-strength.png, idle/walk는 spore-gather-motion-v1 시안이다. 현재 표 5DNA×4종족을 실제 원본/재생 선택 경로와 대조하는 중이며 완료로 기록하지 않는다. 연결 저장소 origin=https://github.com/oojjrs/Spawner, ProjectsV2 nodes=[]·hasNextPage=false로 관리할 연결 보드가 없다.
+
 ## 속성 범례 효과명 교정 · 01a1b31e 현재 요약
 
 - 기록 ID: attribute-effect-labels-start-01a1b31e. 기록 시각 2026-11-07T08:22:17+09:00. 기록자·수정판단 Codex /root, 원발언·교정주체 사용자. 출처 현재채팅01a1b31e-b378-7f51-acd5-e392aa4a0603의 숫자만 있는 범례 첨부와 '어떤 스탯이 변하는지/채집 기능 해금 이런 식으로' 교정. 원발언시각·항목ID·PC식별 불명, H:/Spawner Windows PowerShell.
