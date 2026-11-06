@@ -1,0 +1,24 @@
+{
+  "status": "user-approved",
+  "sheet": "mongdol-feet-upright-v4-sheet.png",
+  "preview": "mongdol-feet-upright-v4.gif",
+  "frameSize": [
+    420,
+    420
+  ],
+  "columns": 4,
+  "rows": 2,
+  "frameCount": 8,
+  "durationsMs": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+  ],
+  "durationMs": 800,
+  "gameIntegration": false
+}
