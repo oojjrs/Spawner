@@ -92,9 +92,12 @@ export function creaturePresentationPose(model, agent, time, reducedMotion, reso
   }
   if (action !== "idle") return null;
   const entry = resources.idle.get(agent.species);
-  if (!entry || !["idle", "fight"].includes(agent.mode) || !entry.sprite.complete || !entry.sprite.naturalWidth) return null;
-  const frame = reducedMotion ? 0 : model.unitAnimationFrame(entry.animation,
-    (time - (agent.animationStartedAt ?? agent.moveStartedAt ?? 0)) * 1000);
+  const movementEndedAt = agent.moveStartedAt + agent.moveDuration;
+  const settledWalk = agent.mode === "walk" && agent.moveDuration > 0 &&
+    Number.isFinite(movementEndedAt) && time >= movementEndedAt;
+  if (!entry || !["idle", "fight"].includes(agent.mode) && !settledWalk || !entry.sprite.complete || !entry.sprite.naturalWidth) return null;
+  const startedAt = settledWalk ? movementEndedAt : agent.animationStartedAt ?? agent.moveStartedAt ?? 0;
+  const frame = reducedMotion ? 0 : model.unitAnimationFrame(entry.animation, (time - startedAt) * 1000);
   const animation = model.imageFrameGeometry(entry.animation, frame);
   const descriptor = sheetDescriptor(model, agent, animation, frame, entry.sprite,
     1.4 * entry.scale * (animation.registrationScale || 1), agent.facing > 0, action);

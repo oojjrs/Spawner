@@ -1,0 +1,152 @@
+{
+  "assets": [
+    {
+      "action": "birth",
+      "image": "DesignAssets/Animations/SporeCombatBirthV9/blade/birth.webp",
+      "frameSize": 128,
+      "columns": 4,
+      "frameCount": 22,
+      "pivotX": 64,
+      "pivotY": 112,
+      "durationsMs": [
+        180,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        80,
+        80,
+        80,
+        80,
+        700
+      ],
+      "durationMs": 3120,
+      "loop": false,
+      "contactMs": null,
+      "nativeToCanonicalRatio": 0.5364004935660144,
+      "sourceFrameSize": 512,
+      "handoffAt": 2.42,
+      "source": "AnimationCandidates/spore-combat-birth-v9/blade-birth-body-sheet.png",
+      "sourceSha256": "d36b42c234be5406cc5a8aff3ad4d7150ffaf4bf475b5b2105689cfc77bfdd12",
+      "sha256": "90405150cab6166e4072bbbec37f4b47f5f209b83e470c3468916f5d3380cbaf",
+      "grid": [
+        4,
+        6
+      ],
+      "dimensions": [
+        512,
+        768
+      ],
+      "display": [
+        128,
+        128
+      ]
+    },
+    {
+      "image": "DesignAssets/Planning/ApprovedAnimations96/spore-combat-birth-v9-blade.webp",
+      "source": "AnimationCandidates/spore-combat-birth-v9/blade-birth-scene-preview.gif",
+      "sourceSha256": "708ae8cbb651df8013a20aeec9709b1d36448b6ed8538bcacf60f547a0e16887",
+      "sha256": "783de3a263f1e0e771105c7faac33525f78e9a5631047f4a8dad647d6aa1f3e2",
+      "grid": [
+        1,
+        1
+      ],
+      "dimensions": [
+        96,
+        96
+      ],
+      "display": [
+        96,
+        96
+      ]
+    },
+    {
+      "action": "birth",
+      "image": "DesignAssets/Animations/SporeCombatBirthV9/carapace/birth.webp",
+      "frameSize": 128,
+      "columns": 4,
+      "frameCount": 22,
+      "pivotX": 64,
+      "pivotY": 112,
+      "durationsMs": [
+        180,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        80,
+        80,
+        80,
+        80,
+        700
+      ],
+      "durationMs": 3120,
+      "loop": false,
+      "contactMs": null,
+      "nativeToCanonicalRatio": 0.5364004935660144,
+      "sourceFrameSize": 512,
+      "handoffAt": 2.42,
+      "source": "AnimationCandidates/spore-combat-birth-v9/carapace-birth-body-sheet.png",
+      "sourceSha256": "292a3a15c447127b4aba270e0b87bd8674891335bd64525049e0f3d604cf0deb",
+      "sha256": "9ebc9ecb2055b941f6c609c864864c0f4cedfb5416d9aad808d4afb96ba9ac32",
+      "grid": [
+        4,
+        6
+      ],
+      "dimensions": [
+        512,
+        768
+      ],
+      "display": [
+        128,
+        128
+      ]
+    },
+    {
+      "image": "DesignAssets/Planning/ApprovedAnimations96/spore-combat-birth-v9-carapace.webp",
+      "source": "AnimationCandidates/spore-combat-birth-v9/carapace-birth-scene-preview.gif",
+      "sourceSha256": "8c067c947cbbfe10dec1a08e98137e092254bce69d90f828233dff411cc40b35",
+      "sha256": "1b210f655b64c4f78ea283ba9c49c0713d0a983d6bda09cb13def803b7fd2bc6",
+      "grid": [
+        1,
+        1
+      ],
+      "dimensions": [
+        96,
+        96
+      ],
+      "display": [
+        96,
+        96
+      ]
+    }
+  ],
+  "previewMap": {
+    "AnimationCandidates/spore-combat-birth-v9/blade-birth-scene-preview.gif": "DesignAssets/Planning/ApprovedAnimations96/spore-combat-birth-v9-blade.webp",
+    "AnimationCandidates/spore-combat-birth-v9/carapace-birth-scene-preview.gif": "DesignAssets/Planning/ApprovedAnimations96/spore-combat-birth-v9-carapace.webp"
+  }
+}

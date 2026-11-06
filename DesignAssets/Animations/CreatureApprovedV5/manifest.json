@@ -1,0 +1,1070 @@
+[
+  {
+    "species": "bubble-toad",
+    "action": "attack",
+    "metadata": "DesignAssets/Animations/ApprovedRearSupportAttack/bubble-toad/attack.json",
+    "metadataSha256": "5f5749ff2b0ea62e238d7929249718b86dc64ae277665057fbc24d41ee00f361",
+    "source": "DesignAssets/Animations/ApprovedRearSupportAttack/bubble-toad/attack-sheet.png",
+    "sourceSha256": "47f44702a5b4f36b62d73f0aa123f6eb175c3edc236d339357f84d8c4a4074d4",
+    "sourceSize": 536,
+    "columns": 4,
+    "rows": 2,
+    "frameCount": 6,
+    "durationsMs": [
+      70,
+      210,
+      50,
+      300,
+      170,
+      220
+    ],
+    "loop": false,
+    "image": "DesignAssets/Animations/CreatureApprovedV5/bubble-toad/attack.webp",
+    "previewSource": "DesignAssets/Animations/ApprovedRearSupportAttack/bubble-toad/attack-preview.gif",
+    "previewImage": "DesignAssets/Planning/ApprovedAnimations96/rear-support-attack--bubble-toad.webp",
+    "camera": {
+      "frameSize": 128,
+      "pivotX": 73.7181701397773,
+      "pivotY": 99.67266996572693,
+      "viewSize": 122.62249221100252,
+      "registrationScale": 1,
+      "groundRadiusX": 0.34626,
+      "groundRadiusY": 0.027701,
+      "supportAnchor": [
+        101.49253731343283,
+        99.5820895522388
+      ]
+    },
+    "reference": {
+      "frameSize": 258,
+      "pivotX": 131.859905,
+      "pivotY": 218.850236,
+      "viewSize": 258.10648584905664,
+      "registrationScale": 1,
+      "rawToReference": 0.5026595744680851,
+      "firstBounds": {
+        "x": 35,
+        "y": 94,
+        "width": 189,
+        "height": 133
+      },
+      "sourceFirstBounds": {
+        "x": 116,
+        "y": 169,
+        "width": 376,
+        "height": 264
+      },
+      "sha256": "0562fbc6b8ac0782f0d636822496a14792849850ac78cfa7c9cc8170306faa60"
+    },
+    "impactFrame": 3,
+    "serverTiming": {
+      "hitTimeMs": 330,
+      "durationMs": 1020
+    },
+    "runtime": {
+      "image": "DesignAssets/Animations/CreatureApprovedV5/bubble-toad/attack.webp",
+      "frameSize": 128,
+      "pivotX": 73.7181701397773,
+      "pivotY": 99.67266996572693,
+      "viewSize": 122.62249221100252,
+      "registrationScale": 1,
+      "groundRadiusX": 0.34626,
+      "groundRadiusY": 0.027701,
+      "supportAnchor": [
+        101.49253731343283,
+        99.5820895522388
+      ],
+      "columns": 4,
+      "frameCount": 6,
+      "durationsMs": [
+        70,
+        210,
+        50,
+        300,
+        170,
+        220
+      ],
+      "durationMs": 1020,
+      "loop": false,
+      "facing": "left",
+      "impactFrame": 3,
+      "hitTimeMs": 330,
+      "fixedSupport": true
+    },
+    "runtimeSha256": "e5d67a46aacb0c80b294eafdb0a0ddc0b0ac70b4a6584e975625340f161fcff0",
+    "previewSha256": "6b774b4e3068912b3ee87b8a04c1337fcfcb94ae38cf8a302d7ce00ce11f7d15"
+  },
+  {
+    "species": "dew-rabbit",
+    "action": "attack",
+    "metadata": "DesignAssets/Animations/ApprovedRearSupportAttack/dew-rabbit/attack.json",
+    "metadataSha256": "c1cae87397b7e4ba741c69ab894249b9da17357339348c2e4ff287203cc10e12",
+    "source": "DesignAssets/Animations/ApprovedRearSupportAttack/dew-rabbit/attack-sheet.png",
+    "sourceSha256": "d2fa896592220c2ca3bfd68533fecc78153785370d18d84ab8dfe650f551cf03",
+    "sourceSize": 592,
+    "columns": 4,
+    "rows": 2,
+    "frameCount": 8,
+    "durationsMs": [
+      100,
+      110,
+      110,
+      40,
+      200,
+      90,
+      130,
+      190
+    ],
+    "loop": false,
+    "image": "DesignAssets/Animations/CreatureApprovedV5/dew-rabbit/attack.webp",
+    "previewSource": "DesignAssets/Animations/ApprovedRearSupportAttack/dew-rabbit/attack-preview.gif",
+    "previewImage": "DesignAssets/Planning/ApprovedAnimations96/rear-support-attack--dew-rabbit.webp",
+    "camera": {
+      "frameSize": 128,
+      "pivotX": 88.43302298870299,
+      "pivotY": 92.07242947061347,
+      "viewSize": 114.68932699420773,
+      "registrationScale": 1.0287769784172662,
+      "groundRadiusX": 0.199041,
+      "groundRadiusY": 0.03717,
+      "supportAnchor": [
+        98.5945945945946,
+        95.56756756756758
+      ]
+    },
+    "reference": {
+      "frameSize": 286,
+      "pivotX": 148.35678,
+      "pivotY": 239.621239,
+      "viewSize": 287.2573293948763,
+      "registrationScale": 1.0287769784172662,
+      "rawToReference": 0.5415472779369628,
+      "firstBounds": {
+        "x": 59,
+        "y": 61,
+        "width": 172,
+        "height": 189
+      },
+      "sourceFirstBounds": {
+        "x": 244,
+        "y": 96,
+        "width": 316,
+        "height": 349
+      },
+      "sha256": "3f4478b894e40c06e776519fab0c1844d348840e8aed190174af8c19e73c6d52"
+    },
+    "impactFrame": 4,
+    "serverTiming": {
+      "hitTimeMs": 360,
+      "durationMs": 970
+    },
+    "runtime": {
+      "image": "DesignAssets/Animations/CreatureApprovedV5/dew-rabbit/attack.webp",
+      "frameSize": 128,
+      "pivotX": 88.43302298870299,
+      "pivotY": 92.07242947061347,
+      "viewSize": 114.68932699420773,
+      "registrationScale": 1.0287769784172662,
+      "groundRadiusX": 0.199041,
+      "groundRadiusY": 0.03717,
+      "supportAnchor": [
+        98.5945945945946,
+        95.56756756756758
+      ],
+      "columns": 4,
+      "frameCount": 8,
+      "durationsMs": [
+        100,
+        110,
+        110,
+        40,
+        200,
+        90,
+        130,
+        190
+      ],
+      "durationMs": 970,
+      "loop": false,
+      "facing": "left",
+      "impactFrame": 4,
+      "hitTimeMs": 360,
+      "fixedSupport": true
+    },
+    "runtimeSha256": "bd474b7fe3639e9bbdc8ecf2002ec03f58a4fbf2526e2b546222ec36b6a8ce95",
+    "previewSha256": "221e80ab29ec796a7c762a2a8af45d73dd44e45038024236ebbff646175392cb"
+  },
+  {
+    "species": "lantern-keeper",
+    "action": "attack",
+    "metadata": "DesignAssets/Animations/ApprovedRearSupportAttack/lantern-keeper/attack.json",
+    "metadataSha256": "095360a2fb42cdb800a1349b179df028b04b733e3f935018efb87c193e9b677e",
+    "source": "DesignAssets/Animations/ApprovedRearSupportAttack/lantern-keeper/attack-sheet.png",
+    "sourceSha256": "b1ee921e15e4e5caa346d6e32956c924788917f39ab9f76827778de4718911c1",
+    "sourceSize": 512,
+    "columns": 4,
+    "rows": 2,
+    "frameCount": 8,
+    "durationsMs": [
+      70,
+      100,
+      120,
+      40,
+      260,
+      110,
+      160,
+      140
+    ],
+    "loop": false,
+    "image": "DesignAssets/Animations/CreatureApprovedV5/lantern-keeper/attack.webp",
+    "previewSource": "DesignAssets/Animations/ApprovedRearSupportAttack/lantern-keeper/attack-preview.gif",
+    "previewImage": "DesignAssets/Planning/ApprovedAnimations96/rear-support-attack--lantern-keeper.webp",
+    "camera": {
+      "frameSize": 128,
+      "pivotX": 71.91820815789474,
+      "pivotY": 98.65081821052632,
+      "viewSize": 122.88818130736094,
+      "registrationScale": 1,
+      "groundRadiusX": 0.182292,
+      "groundRadiusY": 0.033854,
+      "supportAnchor": [
+        89.25,
+        101.25
+      ]
+    },
+    "reference": {
+      "frameSize": 270,
+      "pivotX": 128.243995,
+      "pivotY": 228.568394,
+      "viewSize": 259.43060498220643,
+      "registrationScale": 1,
+      "rawToReference": 0.5277777777777778,
+      "firstBounds": {
+        "x": 35,
+        "y": 62,
+        "width": 190,
+        "height": 174
+      },
+      "sourceFirstBounds": {
+        "x": 111,
+        "y": 79,
+        "width": 360,
+        "height": 329
+      },
+      "sha256": "f731cfeaaef6f1431e8c7eef8853a4a69a7be12b3a32d1a62255f5c7f66f6598"
+    },
+    "impactFrame": 4,
+    "serverTiming": {
+      "hitTimeMs": 330,
+      "durationMs": 1000
+    },
+    "runtime": {
+      "image": "DesignAssets/Animations/CreatureApprovedV5/lantern-keeper/attack.webp",
+      "frameSize": 128,
+      "pivotX": 71.91820815789474,
+      "pivotY": 98.65081821052632,
+      "viewSize": 122.88818130736094,
+      "registrationScale": 1,
+      "groundRadiusX": 0.182292,
+      "groundRadiusY": 0.033854,
+      "supportAnchor": [
+        89.25,
+        101.25
+      ],
+      "columns": 4,
+      "frameCount": 8,
+      "durationsMs": [
+        70,
+        100,
+        120,
+        40,
+        260,
+        110,
+        160,
+        140
+      ],
+      "durationMs": 1000,
+      "loop": false,
+      "facing": "left",
+      "impactFrame": 4,
+      "hitTimeMs": 330,
+      "fixedSupport": true
+    },
+    "runtimeSha256": "8d0235f6f62ec398d6898cb62e5f67c55c1bb5c1fae95d6e82be4dabb2e1cd81",
+    "previewSha256": "ae2bc6f14b4d6ec7e4bfbaa051b5c676c54b6b6c69d00822a517f00851b6a4af"
+  },
+  {
+    "species": "soil-boar",
+    "action": "attack",
+    "metadata": "DesignAssets/Animations/ApprovedRearSupportAttack/soil-boar/attack.json",
+    "metadataSha256": "cdd3aad1ca32ce5c5d2fb6028fb9531ca9d0069a6f6ff9972b40fa7480d44ede",
+    "source": "DesignAssets/Animations/ApprovedRearSupportAttack/soil-boar/attack-sheet.png",
+    "sourceSha256": "b1a22268094acf1185309d2f9d49e3bc9e8967d3333c4ddf418f4a78019ff5e5",
+    "sourceSize": 520,
+    "columns": 4,
+    "rows": 2,
+    "frameCount": 6,
+    "durationsMs": [
+      70,
+      210,
+      50,
+      300,
+      170,
+      220
+    ],
+    "loop": false,
+    "image": "DesignAssets/Animations/CreatureApprovedV5/soil-boar/attack.webp",
+    "previewSource": "DesignAssets/Animations/ApprovedRearSupportAttack/soil-boar/attack-preview.gif",
+    "previewImage": "DesignAssets/Planning/ApprovedAnimations96/rear-support-attack--soil-boar.webp",
+    "camera": {
+      "frameSize": 128,
+      "pivotX": 73.01615647049246,
+      "pivotY": 90.91383687944646,
+      "viewSize": 125.94803856520835,
+      "registrationScale": 1,
+      "groundRadiusX": 0.325203,
+      "groundRadiusY": 0.04607,
+      "supportAnchor": [
+        108.30769230769232,
+        92.06153846153846
+      ]
+    },
+    "reference": {
+      "frameSize": 264,
+      "pivotX": 139.14092,
+      "pivotY": 218.860437,
+      "viewSize": 263.4999410377358,
+      "registrationScale": 1,
+      "rawToReference": 0.5149863760217984,
+      "firstBounds": {
+        "x": 42,
+        "y": 92,
+        "width": 189,
+        "height": 140
+      },
+      "sourceFirstBounds": {
+        "x": 108,
+        "y": 123,
+        "width": 367,
+        "height": 271
+      },
+      "sha256": "e95087e77e76edde31908007f5ad244208a595fb6131f110043f164ea6bce14b"
+    },
+    "impactFrame": 3,
+    "serverTiming": {
+      "hitTimeMs": 330,
+      "durationMs": 1020
+    },
+    "runtime": {
+      "image": "DesignAssets/Animations/CreatureApprovedV5/soil-boar/attack.webp",
+      "frameSize": 128,
+      "pivotX": 73.01615647049246,
+      "pivotY": 90.91383687944646,
+      "viewSize": 125.94803856520835,
+      "registrationScale": 1,
+      "groundRadiusX": 0.325203,
+      "groundRadiusY": 0.04607,
+      "supportAnchor": [
+        108.30769230769232,
+        92.06153846153846
+      ],
+      "columns": 4,
+      "frameCount": 6,
+      "durationsMs": [
+        70,
+        210,
+        50,
+        300,
+        170,
+        220
+      ],
+      "durationMs": 1020,
+      "loop": false,
+      "facing": "left",
+      "impactFrame": 3,
+      "hitTimeMs": 330,
+      "fixedSupport": true
+    },
+    "runtimeSha256": "c18308f219f5c1922089196355da0e81e4fad8f46091ebb58bbb360e4cf7d0fd",
+    "previewSha256": "ca11a8b90c9d3adf43a4cdcac1aa71f08bb0d95471eb3bdc22efbe24340b514a"
+  },
+  {
+    "species": "soil-mole",
+    "action": "attack",
+    "metadata": "DesignAssets/Animations/ApprovedRearSupportAttack/soil-mole/attack.json",
+    "metadataSha256": "050100f9ee328db6fef05acdfa32498f9540bb1d4239c67bf16436f7765a967d",
+    "source": "DesignAssets/Animations/ApprovedRearSupportAttack/soil-mole/attack-sheet.png",
+    "sourceSha256": "1ea1190d33cf0ff85daab431432310a71a59f3a8bc6167f3bcc67681273d49c0",
+    "sourceSize": 504,
+    "columns": 4,
+    "rows": 2,
+    "frameCount": 8,
+    "durationsMs": [
+      100,
+      110,
+      120,
+      40,
+      220,
+      90,
+      130,
+      190
+    ],
+    "loop": false,
+    "image": "DesignAssets/Animations/CreatureApprovedV5/soil-mole/attack.webp",
+    "previewSource": "DesignAssets/Animations/ApprovedRearSupportAttack/soil-mole/attack-preview.gif",
+    "previewImage": "DesignAssets/Planning/ApprovedAnimations96/rear-support-attack--soil-mole.webp",
+    "camera": {
+      "frameSize": 128,
+      "pivotX": 72.94630339128246,
+      "pivotY": 70.09282788275803,
+      "viewSize": 113.68334782654499,
+      "registrationScale": 1.0036630036630036,
+      "groundRadiusX": 0.387324,
+      "groundRadiusY": 0.087324,
+      "supportAnchor": [
+        110.22222222222221,
+        68.06349206349206
+      ]
+    },
+    "reference": {
+      "frameSize": 274,
+      "pivotX": 143.354161,
+      "pivotY": 219.26537,
+      "viewSize": 238.31472228356887,
+      "registrationScale": 1.0036630036630036,
+      "rawToReference": 0.532394366197183,
+      "firstBounds": {
+        "x": 49,
+        "y": 108,
+        "width": 189,
+        "height": 133
+      },
+      "sourceFirstBounds": {
+        "x": 110,
+        "y": 67,
+        "width": 355,
+        "height": 249
+      },
+      "sha256": "86b187128c38a28d79a256b016c7dbce0d3343dca597d99f810be7998e0f91bb"
+    },
+    "impactFrame": 4,
+    "serverTiming": {
+      "hitTimeMs": 370,
+      "durationMs": 1000
+    },
+    "runtime": {
+      "image": "DesignAssets/Animations/CreatureApprovedV5/soil-mole/attack.webp",
+      "frameSize": 128,
+      "pivotX": 72.94630339128246,
+      "pivotY": 70.09282788275803,
+      "viewSize": 113.68334782654499,
+      "registrationScale": 1.0036630036630036,
+      "groundRadiusX": 0.387324,
+      "groundRadiusY": 0.087324,
+      "supportAnchor": [
+        110.22222222222221,
+        68.06349206349206
+      ],
+      "columns": 4,
+      "frameCount": 8,
+      "durationsMs": [
+        100,
+        110,
+        120,
+        40,
+        220,
+        90,
+        130,
+        190
+      ],
+      "durationMs": 1000,
+      "loop": false,
+      "facing": "left",
+      "impactFrame": 4,
+      "hitTimeMs": 370,
+      "fixedSupport": true
+    },
+    "runtimeSha256": "ab82378a2f828995830792b03420591ff767858c99cca9943b8c940b5010f285",
+    "previewSha256": "bdab534cedff96f059413f00d9beed35b1b0c5a7ab5762f8e11e303a5bcc0938"
+  },
+  {
+    "species": "walking-forest",
+    "action": "attack",
+    "metadata": "DesignAssets/Animations/ApprovedRearSupportAttack/walking-forest/attack.json",
+    "metadataSha256": "0598838bac806edef35d334ef6df042afeecdb179d443364a94ce114dfde61b2",
+    "source": "DesignAssets/Animations/ApprovedRearSupportAttack/walking-forest/attack-sheet.png",
+    "sourceSha256": "6dbffbcb9fecf2d476b3a93d0d8c4b8f0800990fc8162ac820ae5270170e0317",
+    "sourceSize": 496,
+    "columns": 4,
+    "rows": 2,
+    "frameCount": 8,
+    "durationsMs": [
+      100,
+      180,
+      220,
+      60,
+      320,
+      180,
+      220,
+      180
+    ],
+    "loop": false,
+    "image": "DesignAssets/Animations/CreatureApprovedV5/walking-forest/attack.webp",
+    "previewSource": "DesignAssets/Animations/ApprovedRearSupportAttack/walking-forest/attack-preview.gif",
+    "previewImage": "DesignAssets/Planning/ApprovedAnimations96/rear-support-attack--walking-forest.webp",
+    "camera": {
+      "frameSize": 128,
+      "pivotX": 58.252199483870974,
+      "pivotY": 112.2815249032258,
+      "viewSize": 109.79472140762462,
+      "registrationScale": 1.015625,
+      "groundRadiusX": 0.414063,
+      "groundRadiusY": 0.0625,
+      "supportAnchor": [
+        96,
+        113.29032258064515
+      ]
+    },
+    "reference": {
+      "frameSize": 520,
+      "pivotX": 256.727273,
+      "pivotY": 432.090909,
+      "viewSize": 425.45454545454544,
+      "registrationScale": 1.015625,
+      "rawToReference": 1,
+      "firstBounds": {
+        "x": 76,
+        "y": 150,
+        "width": 360,
+        "height": 306
+      },
+      "sourceFirstBounds": {
+        "x": 45,
+        "y": 153,
+        "width": 360,
+        "height": 306
+      },
+      "sha256": "32c7a3fe2abf22bce3808aa8686e4472f23a62671a702b228fce3ba38dc22121"
+    },
+    "impactFrame": 4,
+    "serverTiming": {
+      "hitTimeMs": 560,
+      "durationMs": 1460
+    },
+    "runtime": {
+      "image": "DesignAssets/Animations/CreatureApprovedV5/walking-forest/attack.webp",
+      "frameSize": 128,
+      "pivotX": 58.252199483870974,
+      "pivotY": 112.2815249032258,
+      "viewSize": 109.79472140762462,
+      "registrationScale": 1.015625,
+      "groundRadiusX": 0.414063,
+      "groundRadiusY": 0.0625,
+      "supportAnchor": [
+        96,
+        113.29032258064515
+      ],
+      "columns": 4,
+      "frameCount": 8,
+      "durationsMs": [
+        100,
+        180,
+        220,
+        60,
+        320,
+        180,
+        220,
+        180
+      ],
+      "durationMs": 1460,
+      "loop": false,
+      "facing": "left",
+      "impactFrame": 4,
+      "hitTimeMs": 560,
+      "fixedSupport": true
+    },
+    "runtimeSha256": "e22ca0886981c450cdef5baae8fd2aa2e9266a29f417af5893fb4dae9f3134e3",
+    "previewSha256": "0cd4ad65b78431ca02beb0b3251de4b736759472bb8c808f78f6994c1a843309"
+  },
+  {
+    "species": "white-paw",
+    "action": "attack",
+    "metadata": "DesignAssets/Animations/ApprovedRearSupportAttack/white-paw/attack.json",
+    "metadataSha256": "db310c4f21a522ab8df3434426c1b60162932cde32beb67100d77f92ccf1b71f",
+    "source": "DesignAssets/Animations/ApprovedRearSupportAttack/white-paw/attack-sheet.png",
+    "sourceSha256": "02985c059a0d444b94405ad3aa36d099d7bc6050bb0882fce17e866822d00edb",
+    "sourceSize": 576,
+    "columns": 3,
+    "rows": 2,
+    "frameCount": 6,
+    "durationsMs": [
+      100,
+      100,
+      70,
+      240,
+      140,
+      150
+    ],
+    "loop": false,
+    "image": "DesignAssets/Animations/CreatureApprovedV5/white-paw/attack.webp",
+    "previewSource": "DesignAssets/Animations/ApprovedRearSupportAttack/white-paw/attack-preview.gif",
+    "previewImage": "DesignAssets/Planning/ApprovedAnimations96/rear-support-attack--white-paw.webp",
+    "camera": {
+      "frameSize": 128,
+      "pivotX": 61.707070707070706,
+      "pivotY": 93.9040404040404,
+      "viewSize": 132.36363636363637,
+      "registrationScale": 1,
+      "groundRadiusX": 0.267361,
+      "groundRadiusY": 0.048611,
+      "supportAnchor": [
+        95.55555555555556,
+        100
+      ]
+    },
+    "reference": {
+      "frameSize": 312,
+      "pivotX": 152,
+      "pivotY": 259,
+      "viewSize": 312,
+      "registrationScale": 1.0833333333333333,
+      "rawToReference": 0.4835164835164835,
+      "firstBounds": {
+        "x": 54,
+        "y": 148,
+        "width": 220,
+        "height": 125
+      },
+      "sourceFirstBounds": {
+        "x": 75,
+        "y": 193,
+        "width": 455,
+        "height": 270
+      },
+      "sha256": "e88b846299b44cad98f9edd089d40caaf2729d53863ea0ddc38a12732e827e16"
+    },
+    "impactFrame": 3,
+    "serverTiming": {
+      "hitTimeMs": 300,
+      "durationMs": 920
+    },
+    "runtime": {
+      "image": "DesignAssets/Animations/CreatureApprovedV5/white-paw/attack.webp",
+      "frameSize": 128,
+      "pivotX": 61.707070707070706,
+      "pivotY": 93.9040404040404,
+      "viewSize": 132.36363636363637,
+      "registrationScale": 1,
+      "groundRadiusX": 0.267361,
+      "groundRadiusY": 0.048611,
+      "supportAnchor": [
+        95.55555555555556,
+        100
+      ],
+      "columns": 3,
+      "frameCount": 6,
+      "durationsMs": [
+        100,
+        100,
+        70,
+        240,
+        140,
+        150
+      ],
+      "durationMs": 800,
+      "loop": false,
+      "facing": "left",
+      "impactFrame": 3,
+      "hitTimeMs": 270,
+      "fixedSupport": true
+    },
+    "runtimeSha256": "a74b66da446293d7f77eb7a2db1b8fafc847ce07b6c5b43313d54cfc7801e504",
+    "previewSha256": "aa2636f214ce5aac5c6a4a390bc81f83f050f3a93f0196e3831a53241d226de5"
+  },
+  {
+    "species": "cotton-sheep",
+    "action": "walk",
+    "metadata": "DesignAssets/Animations/CottonSheepWalk/ApprovedV4/manifest.json",
+    "metadataSha256": "9bc7858894cf21606c32870e7a4d63b271e9efc262089288acc718371c49a16f",
+    "source": "DesignAssets/Animations/CottonSheepWalk/ApprovedV4/walk.png",
+    "sourceSha256": "b136fa34db0a7f104beac38533ca08e9b4c2648803fe32281af71af9e735cdda",
+    "sourceSize": 640,
+    "columns": 8,
+    "rows": 8,
+    "frameCount": 64,
+    "durationsMs": [
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125,
+      4.8828125
+    ],
+    "loop": true,
+    "image": "DesignAssets/Animations/CreatureApprovedV5/cotton-sheep/walk.webp",
+    "previewSource": "DesignAssets/Animations/CottonSheepWalk/ApprovedV4/preview-quarter-speed.gif",
+    "previewImage": "DesignAssets/Planning/ApprovedAnimations96/cotton-sheep-walk-v4.webp",
+    "camera": {
+      "frameSize": 128,
+      "pivotX": 70.4,
+      "pivotY": 86.4,
+      "viewSize": 102.4,
+      "registrationScale": 1,
+      "groundRadiusX": 0.244141,
+      "groundRadiusY": 0.064453
+    },
+    "reference": {
+      "frameSize": 256,
+      "pivotX": 142.5,
+      "pivotY": 204.5,
+      "viewSize": 256,
+      "registrationScale": 1,
+      "rawToReference": 0.5,
+      "firstBounds": {
+        "x": 29,
+        "y": 50,
+        "width": 192,
+        "height": 175
+      },
+      "sourceFirstBounds": {
+        "x": 125,
+        "y": 123,
+        "width": 384,
+        "height": 344
+      },
+      "sha256": "e1c3736d1a27d65f2de6762d337dbb833b07705363b49434924f56105cc6028e"
+    },
+    "impactFrame": null,
+    "serverTiming": null,
+    "runtime": {
+      "image": "DesignAssets/Animations/CreatureApprovedV5/cotton-sheep/walk.webp",
+      "frameSize": 128,
+      "pivotX": 70.4,
+      "pivotY": 86.4,
+      "viewSize": 102.4,
+      "registrationScale": 1,
+      "groundRadiusX": 0.244141,
+      "groundRadiusY": 0.064453,
+      "columns": 8,
+      "frameCount": 64,
+      "durationsMs": [
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125,
+        4.8828125
+      ],
+      "durationMs": 312.5,
+      "loop": true,
+      "temporalCadenceHz": 3.2
+    },
+    "runtimeSha256": "c7ba92e2ae53ffb87abdf6d56d554cdc10824cf7e1af8edcf9e929a5d1ff3768",
+    "previewSha256": "17ac3b9c9289db21f51f5c972200f7e54860f851441db5301e1d871ffdcae49c"
+  },
+  {
+    "species": "vine-turtle",
+    "action": "attack",
+    "metadata": "DesignAssets/Animations/ApprovedRearSupportAttack/vine-turtle/attack.json",
+    "metadataSha256": "5485f9bcb832e47c3e60a6678c3f417623fda31977816f6d960238e783a5b33f",
+    "source": "DesignAssets/Animations/ApprovedRearSupportAttack/vine-turtle/attack-sheet.png",
+    "sourceSha256": "ecb623b44c9258576047a507c058dba663270fd481ae3e66fbeb043d0ce0edca",
+    "sourceSize": 560,
+    "columns": 3,
+    "rows": 2,
+    "frameCount": 6,
+    "durationsMs": [
+      70,
+      210,
+      50,
+      300,
+      170,
+      220
+    ],
+    "loop": false,
+    "image": "DesignAssets/Animations/CreatureApprovedV5/vine-turtle/attack.webp",
+    "previewSource": "DesignAssets/Animations/ApprovedRearSupportAttack/vine-turtle/attack-preview.gif",
+    "previewImage": "DesignAssets/Planning/ApprovedAnimations96/rear-support-attack--vine-turtle.webp",
+    "camera": {
+      "frameSize": 128,
+      "pivotX": 68.97122665320545,
+      "pivotY": 87.6737004688541,
+      "viewSize": 109.82574457344775,
+      "registrationScale": 1,
+      "groundRadiusX": 0.401734,
+      "groundRadiusY": 0.028902,
+      "supportAnchor": [
+        101.94285714285714,
+        91.88571428571429
+      ]
+    },
+    "reference": {
+      "sha256": "6528cf28b11e4ccbb500afff22f9e3404079ede7ffb149e02136fc94158354f4",
+      "frameSize": 346,
+      "pivotX": 173,
+      "pivotY": 293.000001,
+      "viewSize": 346,
+      "registrationScale": 1,
+      "rawToReference": 0.7201017811704835,
+      "firstBounds": {
+        "x": 27,
+        "y": 96,
+        "width": 283,
+        "height": 207
+      },
+      "sourceFirstBounds": {
+        "x": 99,
+        "y": 110,
+        "width": 393,
+        "height": 312
+      }
+    },
+    "impactFrame": 3,
+    "serverTiming": {
+      "durationMs": 1020,
+      "hitTimeMs": 330
+    },
+    "runtime": {
+      "image": "DesignAssets/Animations/CreatureApprovedV5/vine-turtle/attack.webp",
+      "frameSize": 128,
+      "pivotX": 68.97122665320545,
+      "pivotY": 87.6737004688541,
+      "viewSize": 109.82574457344775,
+      "registrationScale": 1,
+      "groundRadiusX": 0.401734,
+      "groundRadiusY": 0.028902,
+      "supportAnchor": [
+        101.94285714285714,
+        91.88571428571429
+      ],
+      "columns": 3,
+      "frameCount": 6,
+      "durationsMs": [
+        70,
+        210,
+        50,
+        300,
+        170,
+        220
+      ],
+      "durationMs": 1020,
+      "loop": false,
+      "facing": "left",
+      "impactFrame": 3,
+      "hitTimeMs": 330,
+      "fixedSupport": true
+    },
+    "runtimeSha256": "92463dae42f1301b9de08869ca2d4127902e292abb0653ec82947a07b7033459",
+    "previewSha256": "71b7b9eb1d387e2497f78ecf79aed9dbc7762d2bec84c4f2747813c1000ca2ea"
+  },
+  {
+    "species": "shadow-weasel",
+    "action": "attack",
+    "metadata": "DesignAssets/Animations/ApprovedRearSupportAttack/shadow-weasel/attack.json",
+    "metadataSha256": "315d2c66c17b263b9b09d19ed57e4bee7522c19fc191cc30b9fc9cf1daf04362",
+    "source": "DesignAssets/Animations/ApprovedRearSupportAttack/shadow-weasel/attack-sheet.png",
+    "sourceSha256": "ca75ab4ed0c6f9d42b2746ee3a68a58d05cb88eaa6dbd61482717ac9901a6642",
+    "sourceSize": 576,
+    "columns": 3,
+    "rows": 2,
+    "frameCount": 6,
+    "durationsMs": [
+      100,
+      100,
+      70,
+      240,
+      140,
+      150
+    ],
+    "loop": false,
+    "image": "DesignAssets/Animations/CreatureApprovedV5/shadow-weasel/attack.webp",
+    "previewSource": "DesignAssets/Animations/ApprovedRearSupportAttack/shadow-weasel/attack-preview.gif",
+    "previewImage": "DesignAssets/Planning/ApprovedAnimations96/rear-support-attack--shadow-weasel.webp",
+    "camera": {
+      "frameSize": 128,
+      "pivotX": 66.350167983165,
+      "pivotY": 91.74410847811447,
+      "viewSize": 117.07407407407405,
+      "registrationScale": 1,
+      "groundRadiusX": 0.285266,
+      "groundRadiusY": 0.037618,
+      "supportAnchor": [
+        95.55555555555556,
+        100
+      ]
+    },
+    "reference": {
+      "sha256": "8ac9881ed82fc1a587f552be975fe0c8a8f03b17bb63879efc72b1995f2461f2",
+      "frameSize": 414,
+      "pivotX": 200.999999,
+      "pivotY": 350.000002,
+      "viewSize": 414.00000000000006,
+      "registrationScale": 1.297805642633229,
+      "rawToReference": 0.6055045871559633,
+      "firstBounds": {
+        "x": 85,
+        "y": 252,
+        "width": 264,
+        "height": 111
+      },
+      "sourceFirstBounds": {
+        "x": 107,
+        "y": 251,
+        "width": 436,
+        "height": 206
+      }
+    },
+    "impactFrame": 3,
+    "serverTiming": {
+      "durationMs": 1020,
+      "hitTimeMs": 330
+    },
+    "runtime": {
+      "image": "DesignAssets/Animations/CreatureApprovedV5/shadow-weasel/attack.webp",
+      "frameSize": 128,
+      "pivotX": 66.350167983165,
+      "pivotY": 91.74410847811447,
+      "viewSize": 117.07407407407405,
+      "registrationScale": 1,
+      "groundRadiusX": 0.285266,
+      "groundRadiusY": 0.037618,
+      "supportAnchor": [
+        95.55555555555556,
+        100
+      ],
+      "columns": 3,
+      "frameCount": 6,
+      "durationsMs": [
+        100,
+        100,
+        70,
+        240,
+        140,
+        150
+      ],
+      "durationMs": 800,
+      "loop": false,
+      "facing": "left",
+      "impactFrame": 3,
+      "hitTimeMs": 270,
+      "fixedSupport": true
+    },
+    "runtimeSha256": "17f54525fb6fa65e2deb9428a6cd5730f4c896f661508f2cadf7886b21cb3f2c",
+    "previewSha256": "5077266abfa25f2537b704dd101349b2570c5161fa8392eadf6d458d3252ae27"
+  }
+]

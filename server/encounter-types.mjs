@@ -4,7 +4,7 @@ export const ENCOUNTER_TYPES = Object.freeze([
   {
     "key": "flower-tail-bird",
     "name": "꽃꼬리새",
-    "image": "DesignAssets/CreatureConcepts/v3/flower-tail-bird.png",
+    "image": "DesignAssets/CreaturePortraits/NativeV1/flower-tail-bird.webp",
     "populationLimit": 3,
     "respawnSeconds": 180,
     "firstSpawnAt": 0,
@@ -16,7 +16,7 @@ export const ENCOUNTER_TYPES = Object.freeze([
   {
     "key": "dew-rabbit",
     "name": "이슬토끼",
-    "image": "DesignAssets/CreatureConcepts/v3/dew-rabbit.png",
+    "image": "DesignAssets/CreaturePortraits/NativeV1/dew-rabbit.webp",
     "populationLimit": 3,
     "respawnSeconds": 240,
     "firstSpawnAt": 0,
@@ -28,7 +28,7 @@ export const ENCOUNTER_TYPES = Object.freeze([
   {
     "key": "soil-mole",
     "name": "흙두더지",
-    "image": "DesignAssets/CreatureConcepts/v3/soil-mole.png",
+    "image": "DesignAssets/CreaturePortraits/NativeV1/soil-mole.webp",
     "populationLimit": 1,
     "respawnSeconds": 300,
     "firstSpawnAt": 0,
@@ -40,7 +40,7 @@ export const ENCOUNTER_TYPES = Object.freeze([
   {
     "key": "bundle-snail",
     "name": "보따리달팽이",
-    "image": "DesignAssets/CreatureConcepts/v3/bundle-snail.png",
+    "image": "DesignAssets/CreaturePortraits/NativeV1/bundle-snail.webp",
     "populationLimit": 1,
     "respawnSeconds": 480,
     "firstSpawnAt": 0,
@@ -52,7 +52,7 @@ export const ENCOUNTER_TYPES = Object.freeze([
   {
     "key": "cotton-sheep",
     "name": "솜양",
-    "image": "DesignAssets/CreatureConcepts/v3/cotton-sheep.png",
+    "image": "DesignAssets/CreaturePortraits/NativeV1/cotton-sheep.webp",
     "populationLimit": 4,
     "respawnSeconds": 300,
     "firstSpawnAt": 0,
@@ -64,7 +64,7 @@ export const ENCOUNTER_TYPES = Object.freeze([
   {
     "key": "rolling-acorn",
     "name": "굴림도토리",
-    "image": "DesignAssets/CreatureConcepts/v3/rolling-acorn.png",
+    "image": "DesignAssets/CreaturePortraits/NativeV1/rolling-acorn.webp",
     "populationLimit": 3,
     "respawnSeconds": 180,
     "firstSpawnAt": 0,
@@ -76,7 +76,7 @@ export const ENCOUNTER_TYPES = Object.freeze([
   {
     "key": "soil-boar",
     "name": "흙멧돼지",
-    "image": "DesignAssets/CreatureConcepts/v3/soil-boar.png",
+    "image": "DesignAssets/CreaturePortraits/NativeV1/soil-boar.webp",
     "populationLimit": 2,
     "respawnSeconds": 360,
     "firstSpawnAt": 0,
@@ -88,7 +88,7 @@ export const ENCOUNTER_TYPES = Object.freeze([
   {
     "key": "bubble-toad",
     "name": "방울두꺼비",
-    "image": "DesignAssets/CreatureConcepts/v3/bubble-toad.png",
+    "image": "DesignAssets/CreaturePortraits/NativeV1/bubble-toad.webp",
     "populationLimit": 2,
     "respawnSeconds": 300,
     "firstSpawnAt": 0,
@@ -100,7 +100,7 @@ export const ENCOUNTER_TYPES = Object.freeze([
   {
     "key": "vine-turtle",
     "name": "넝쿨거북",
-    "image": "DesignAssets/CreatureConcepts/v3/vine-turtle.png",
+    "image": "DesignAssets/CreaturePortraits/NativeV1/vine-turtle.webp",
     "populationLimit": 1,
     "respawnSeconds": 600,
     "firstSpawnAt": 0,
@@ -112,7 +112,7 @@ export const ENCOUNTER_TYPES = Object.freeze([
   {
     "key": "shadow-weasel",
     "name": "그늘족제비",
-    "image": "DesignAssets/CreatureConcepts/v3/shadow-weasel.png",
+    "image": "DesignAssets/CreaturePortraits/NativeV1/shadow-weasel.webp",
     "populationLimit": 1,
     "respawnSeconds": 480,
     "firstSpawnAt": 300,
@@ -124,7 +124,7 @@ export const ENCOUNTER_TYPES = Object.freeze([
   {
     "key": "snare-vine",
     "name": "올가미덩굴",
-    "image": "DesignAssets/CreatureConcepts/v3/snare-vine.png",
+    "image": "DesignAssets/CreaturePortraits/NativeV1/snare-vine.webp",
     "populationLimit": 1,
     "respawnSeconds": 360,
     "firstSpawnAt": 0,
@@ -136,7 +136,7 @@ export const ENCOUNTER_TYPES = Object.freeze([
   {
     "key": "talon-owl",
     "name": "갈퀴부엉이",
-    "image": "DesignAssets/CreatureConcepts/v3/talon-owl.png",
+    "image": "DesignAssets/CreaturePortraits/NativeV1/talon-owl.webp",
     "populationLimit": 1,
     "respawnSeconds": 600,
     "firstSpawnAt": 0,
@@ -148,7 +148,7 @@ export const ENCOUNTER_TYPES = Object.freeze([
   {
     "key": "spring-keeper",
     "name": "봄지기",
-    "image": "DesignAssets/CreatureConcepts/v3/spring-keeper.png",
+    "image": "DesignAssets/CreaturePortraits/NativeV1/spring-keeper.webp",
     "populationLimit": 1,
     "respawnSeconds": 180,
     "firstSpawnAt": 0,
@@ -160,7 +160,7 @@ export const ENCOUNTER_TYPES = Object.freeze([
   {
     "key": "lantern-keeper",
     "name": "등불지기",
-    "image": "DesignAssets/CreatureConcepts/v3/lantern-keeper.png",
+    "image": "DesignAssets/CreaturePortraits/NativeV1/lantern-keeper.webp",
     "populationLimit": 1,
     "respawnSeconds": 240,
     "firstSpawnAt": 0,
@@ -172,7 +172,7 @@ export const ENCOUNTER_TYPES = Object.freeze([
   {
     "key": "old-garden-snail",
     "name": "오래된 등짐",
-    "image": "DesignAssets/CreatureConcepts/v3/old-garden-snail.png",
+    "image": "DesignAssets/CreaturePortraits/NativeV1/old-garden-snail.webp",
     "populationLimit": 1,
     "respawnSeconds": 240,
     "firstSpawnAt": 0,
@@ -184,7 +184,7 @@ export const ENCOUNTER_TYPES = Object.freeze([
   {
     "key": "walking-forest",
     "name": "걸어가는 산",
-    "image": "DesignAssets/CreatureConcepts/v3/walking-forest.png",
+    "image": "DesignAssets/CreaturePortraits/NativeV1/walking-forest.webp",
     "populationLimit": 1,
     "respawnSeconds": 300,
     "firstSpawnAt": 0,
@@ -196,7 +196,7 @@ export const ENCOUNTER_TYPES = Object.freeze([
   {
     "key": "white-paw",
     "name": "흰발",
-    "image": "DesignAssets/CreatureConcepts/v3/white-paw.png",
+    "image": "DesignAssets/CreaturePortraits/NativeV1/white-paw.webp",
     "populationLimit": 1,
     "respawnSeconds": 300,
     "firstSpawnAt": 0,
@@ -208,7 +208,7 @@ export const ENCOUNTER_TYPES = Object.freeze([
   {
     "key": "spiny-back-leader",
     "name": "가시등 우두머리",
-    "image": "DesignAssets/CreatureConcepts/v3/spiny-back-leader.png",
+    "image": "DesignAssets/CreaturePortraits/NativeV1/spiny-back-leader.webp",
     "populationLimit": 1,
     "respawnSeconds": 300,
     "firstSpawnAt": 0,

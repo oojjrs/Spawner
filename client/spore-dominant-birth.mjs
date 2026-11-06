@@ -1,3 +1,4 @@
+import { SPORE_COMBAT_BIRTH_ANIMATIONS } from "./spore-combat-birth-assets.mjs";
 import { SPORE_BIRTH_ANIMATION, sporeBirthMotion } from "./birth.mjs";
 import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
 
@@ -104,12 +105,34 @@ export function sporeDominantBirthPixels(source,pose,bounds=boundsOf(source),den
 // Only the detached body changes ownership. This short original stalk stays
 // in its native scene camera behind the cap during frames 3–8.
 const SPORE_STALK_BOXES=Object.freeze([[117,101,22,19],[116,103,26,27],[115,103,30,29],[115,105,26,29],[114,108,18,28],[114,106,23,29]].map(Object.freeze));
-export function createSporeDominantBirthArt(createSurface) {
+export function createSporeDominantBirthArt(createSurface, loadNativeImage) {
   const sources=new Map(),frames=new Map(),stalks=new Map();let serial=0;
   const keep=(map,key,value)=>{map.set(key,value);if(map.size>4)map.delete(map.keys().next().value);return value;};
+  function authoredFrame(form, sprite, elapsed, nativePixelScale, facing, birthFacing) {
+    const clip = SPORE_COMBAT_BIRTH_ANIMATIONS[form];
+    if (!clip || typeof loadNativeImage !== "function") return null;
+    if (elapsed >= clip.handoffAt) return sprite;
+    const image = loadNativeImage(clip.image);
+    if (!image || image.complete === false || !(image.naturalWidth || image.width)) return null;
+    let clock = Math.max(0, elapsed * 1000), index = 0, sampleTime = 0;
+    while (index < clip.frameCount - 1 && clock >= clip.durationsMs[index]) { clock -= clip.durationsMs[index]; sampleTime += clip.durationsMs[index++] / 1000; }
+    const key = ["native", form, index, nativePixelScale, facing < 0, birthFacing < 0].join("|");
+    if (frames.has(key)) return frames.get(key);
+    const surface = createSurface(clip.frameSize, clip.frameSize), context = surface.getContext("2d");
+    context.drawImage(image, index % clip.columns * clip.frameSize, Math.floor(index / clip.columns) * clip.frameSize,
+      clip.frameSize, clip.frameSize, 0, 0, clip.frameSize, clip.frameSize);
+    const actual = sporeDominantBirthPose(form, sampleTime, nativePixelScale, facing, birthFacing);
+    const reference = sporeDominantBirthPose(form, sampleTime, nativePixelScale, 1, 1);
+    const ratio = clip.sourceFrameSize / clip.frameSize, offset = (actual.rootX - reference.rootX) / ratio;
+    surface.combatCamera = { width: clip.frameSize, height: clip.frameSize,
+      units: 1.4 / (nativePixelScale * clip.nativeToCanonicalRatio * ratio), pivotX: clip.pivotX - offset, pivotY: clip.pivotY };
+    return keep(frames, key, surface);
+  }
   function frame(sprite,agent,elapsed,nativePixelScale,facing=1,birthFacing=1) {
     const form=sporeDominantBirthForm(agent),pose=sporeDominantBirthPose(form,elapsed,nativePixelScale,facing,birthFacing);
     if(!pose||!sprite||sprite.width!==512||sprite.height!==512)return null;
+    const authored=authoredFrame(form,sprite,elapsed,nativePixelScale,facing,birthFacing);
+    if(authored)return authored;
     if(pose.neutral)return sprite;
     try{
       let source=sources.get(sprite);

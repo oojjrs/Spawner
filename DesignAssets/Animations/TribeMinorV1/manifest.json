@@ -639,5 +639,41 @@
       512,
       256
     ]
+  },
+  {
+    "name": "pebble-antenna-walk-stable-v6",
+    "source": "AnimationCandidates/pebble-antenna-walk-stable-v6/walk-sheet.png",
+    "sourceSha256": "fde8061b9f85dd5cb5f5e979a57f52cce21dba3f28d623056f7f29ebda60d31b",
+    "image": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/walk.webp",
+    "frameSize": 128,
+    "columns": 4,
+    "frameCount": 8,
+    "durationsMs": [
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100
+    ],
+    "loop": true,
+    "pivotX": 64,
+    "pivotY": 112,
+    "durationMs": 800,
+    "sha256": "7b270f83cbc550e5b5aa65fab3a40c9b7ea4a48d43dfe0d97c0f571640a79252",
+    "grid": [
+      4,
+      2
+    ],
+    "display": [
+      128,
+      128
+    ],
+    "dimensions": [
+      512,
+      256
+    ]
   }
 ]

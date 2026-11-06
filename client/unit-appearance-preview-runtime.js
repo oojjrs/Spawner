@@ -59,10 +59,11 @@ function unitDisplayAttributesFrom(attributes = {}) {
 function unitDisplayAttributes(agent) {
   const attributes = agent?.appearanceAttributes || agent?.attributes;
   if (agent?.species) return attributes || {};
-  if (attributes) return unitDisplayAttributesFrom(attributes);
-  const mask = unitAppearanceMaskFromDna(agent?.dna);
-  return mask === null ? {} : unitDisplayAttributesFrom(Object.fromEntries(
+  const mask = attributes ? null : unitAppearanceMaskFromDna(agent?.dna);
+  const display = attributes ? unitDisplayAttributesFrom(attributes) : mask === null ? {} : unitDisplayAttributesFrom(Object.fromEntries(
     Object.entries(UNIT_APPEARANCE_BITS).filter(([, bit]) => mask & bit).map(([key]) => [key, 1])));
+  return agent?.dna?.pieces?.some(piece => piece.gene === "gather") && !UNIT_DISPLAY_PRIORITY.some(key => display[key] > 0) ?
+    { ...display, strength: display.strength || display.arms || 1 } : display;
 }
 
 // A shared blade silhouette can also shoot. Production readiness must include
@@ -76,6 +77,7 @@ function unitDisplayAbilityMask(mask) {
 
 return {UNIT_DISPLAY_PRIORITY,UNIT_DISPLAY_MASKS,UNIT_DISPLAY_FORM_COUNT,unitDominantAppearanceMask,unitDisplayAttributesFrom,unitDisplayAttributes,unitDisplayAbilityMask};
 })();
+
 modules["client/unit-appearance-assets.mjs"]=(()=>{
 const UNIT_APPEARANCE_ASSETS = Object.freeze({
   "bean/00": {

@@ -301,16 +301,6 @@
         7
       ]
     },
-    "DesignAssets/Animations/BubbleToadDeath/RebuildV3/runtime.webp": {
-      "display": [
-        201.8219859917066,
-        201.8219859917066
-      ],
-      "grid": [
-        4,
-        7
-      ]
-    },
     "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/runtime.webp": {
       "display": [
         265.8461538461538,
@@ -3710,36 +3700,6 @@
         1
       ]
     },
-    "DesignAssets/Animations/CreatureWalkV2/soil-mole/walk.webp": {
-      "display": [
-        237.08480565371025,
-        237.08480565371025
-      ],
-      "grid": [
-        4,
-        2
-      ]
-    },
-    "DesignAssets/Animations/CreatureWalkV2/soil-mole/thumb.webp": {
-      "display": [
-        64,
-        64
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CreatureWalkV2/soil-mole/preview.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
     "DesignAssets/Animations/CreatureWalkV2/bundle-snail/walk.webp": {
       "display": [
         265.80212014134275,
@@ -3761,36 +3721,6 @@
       ]
     },
     "DesignAssets/Animations/CreatureWalkV2/bundle-snail/preview.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CreatureWalkV2/cotton-sheep/walk.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        4,
-        2
-      ]
-    },
-    "DesignAssets/Animations/CreatureWalkV2/cotton-sheep/thumb.webp": {
-      "display": [
-        64,
-        64
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CreatureWalkV2/cotton-sheep/preview.webp": {
       "display": [
         256,
         256
@@ -3911,36 +3841,6 @@
       ]
     },
     "DesignAssets/Animations/CreatureWalkV2/vine-turtle/preview.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CreatureWalkV2/shadow-weasel/walk.webp": {
-      "display": [
-        228.375,
-        228.375
-      ],
-      "grid": [
-        8,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CreatureWalkV2/shadow-weasel/thumb.webp": {
-      "display": [
-        64,
-        64
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CreatureWalkV2/shadow-weasel/preview.webp": {
       "display": [
         256,
         256
@@ -4091,66 +3991,6 @@
       ]
     },
     "DesignAssets/Animations/CreatureWalkV2/old-garden-snail/preview.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CreatureWalkV2/walking-forest/walk.webp": {
-      "display": [
-        439.8545454545454,
-        439.8545454545454
-      ],
-      "grid": [
-        6,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CreatureWalkV2/walking-forest/thumb.webp": {
-      "display": [
-        64,
-        64
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CreatureWalkV2/walking-forest/preview.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CreatureWalkV2/white-paw/walk.webp": {
-      "display": [
-        247.4181818181818,
-        247.4181818181818
-      ],
-      "grid": [
-        6,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CreatureWalkV2/white-paw/thumb.webp": {
-      "display": [
-        64,
-        64
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CreatureWalkV2/white-paw/preview.webp": {
       "display": [
         256,
         256
@@ -4640,26 +4480,6 @@
         2
       ]
     },
-    "DesignAssets/Animations/CreatureAttackV2/dew-rabbit/runtime.webp": {
-      "display": [
-        277.27220630372494,
-        277.27220630372494
-      ],
-      "grid": [
-        4,
-        2
-      ]
-    },
-    "DesignAssets/Animations/CreatureAttackV2/soil-mole/runtime.webp": {
-      "display": [
-        272.5859154929578,
-        272.5859154929578
-      ],
-      "grid": [
-        4,
-        2
-      ]
-    },
     "DesignAssets/Animations/CreatureAttackV2/bundle-snail/runtime.webp": {
       "display": [
         292.35045317220545,
@@ -4688,46 +4508,6 @@
       "grid": [
         4,
         2
-      ]
-    },
-    "DesignAssets/Animations/CreatureAttackV2/soil-boar/runtime.webp": {
-      "display": [
-        263.6730245231608,
-        263.6730245231608
-      ],
-      "grid": [
-        6,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CreatureAttackV2/bubble-toad/runtime.webp": {
-      "display": [
-        257.36170212765956,
-        257.36170212765956
-      ],
-      "grid": [
-        6,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CreatureAttackV2/vine-turtle/runtime.webp": {
-      "display": [
-        230.4,
-        230.4
-      ],
-      "grid": [
-        6,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CreatureAttackV2/shadow-weasel/runtime.webp": {
-      "display": [
-        228.7659574468085,
-        228.7659574468085
-      ],
-      "grid": [
-        6,
-        1
       ]
     },
     "DesignAssets/Animations/CreatureAttackV2/snare-vine/runtime.webp": {
@@ -4760,40 +4540,10 @@
         2
       ]
     },
-    "DesignAssets/Animations/CreatureAttackV2/lantern-keeper/runtime.webp": {
-      "display": [
-        269.55185185185184,
-        269.55185185185184
-      ],
-      "grid": [
-        4,
-        2
-      ]
-    },
     "DesignAssets/Animations/CreatureAttackV2/old-garden-snail/runtime.webp": {
       "display": [
         263.6242424242424,
         263.6242424242424
-      ],
-      "grid": [
-        4,
-        2
-      ]
-    },
-    "DesignAssets/Animations/CreatureAttackV2/walking-forest/runtime.webp": {
-      "display": [
-        537.6,
-        537.6
-      ],
-      "grid": [
-        4,
-        2
-      ]
-    },
-    "DesignAssets/Animations/CreatureAttackV2/white-paw/runtime.webp": {
-      "display": [
-        268.8,
-        268.8
       ],
       "grid": [
         4,
@@ -6870,16 +6620,6 @@
         2
       ]
     },
-    "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/blade/birth.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        10
-      ]
-    },
     "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/blade/death.webp": {
       "display": [
         256,
@@ -7168,16 +6908,6 @@
       "grid": [
         8,
         2
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/birth.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        10
       ]
     },
     "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/death.webp": {
@@ -11309,6 +11039,506 @@
       ]
     },
     "DesignAssets/Planning/ApprovedAnimations96/pebble-feet-upright-v4--walk.webp": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreaturePortraits/NativeV1/flower-tail-bird.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreaturePortraits/NativeV1/dew-rabbit.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreaturePortraits/NativeV1/soil-mole.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreaturePortraits/NativeV1/bundle-snail.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreaturePortraits/NativeV1/cotton-sheep.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreaturePortraits/NativeV1/rolling-acorn.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreaturePortraits/NativeV1/soil-boar.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreaturePortraits/NativeV1/bubble-toad.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreaturePortraits/NativeV1/vine-turtle.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreaturePortraits/NativeV1/shadow-weasel.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreaturePortraits/NativeV1/snare-vine.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreaturePortraits/NativeV1/talon-owl.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreaturePortraits/NativeV1/spring-keeper.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreaturePortraits/NativeV1/lantern-keeper.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreaturePortraits/NativeV1/old-garden-snail.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreaturePortraits/NativeV1/walking-forest.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreaturePortraits/NativeV1/white-paw.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/CreaturePortraits/NativeV1/spiny-back-leader.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Animations/TribeMinorV1/pebble/antenna/walk.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
+    "DesignAssets/Planning/ApprovedAnimations96/pebble-antenna-walk-stable-v6.webp": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Planning/ApprovedAnimations96/SheetGifHandoff-20261106--mole-walk-v2-preview.webp": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Planning/ApprovedAnimations96/SheetGifHandoff-20261106--mountain-walk-v2-preview.webp": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Planning/ApprovedAnimations96/SheetGifHandoff-20261106--weasel-brown-walk-v4-preview.webp": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Planning/ApprovedAnimations96/SheetGifHandoff-20261106--weasel-white-walk-v4-preview.webp": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Planning/ApprovedAnimations96/SheetGifHandoff-20261106--toad-death-v6-preview.webp": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Animations/CreatureApprovedV5/bubble-toad/attack.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
+    "DesignAssets/Animations/CreatureApprovedV5/dew-rabbit/attack.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
+    "DesignAssets/Animations/CreatureApprovedV5/lantern-keeper/attack.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
+    "DesignAssets/Animations/CreatureApprovedV5/soil-boar/attack.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
+    "DesignAssets/Animations/CreatureApprovedV5/soil-mole/attack.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
+    "DesignAssets/Animations/CreatureApprovedV5/walking-forest/attack.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
+    "DesignAssets/Animations/CreatureApprovedV5/white-paw/attack.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        3,
+        2
+      ]
+    },
+    "DesignAssets/Animations/CreatureApprovedV5/cotton-sheep/walk.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        8,
+        8
+      ]
+    },
+    "DesignAssets/Tribes/spore/ApprovedGatherV1/idle.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Planning/ApprovedAnimations96/rear-support-attack--bubble-toad.webp": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Planning/ApprovedAnimations96/rear-support-attack--dew-rabbit.webp": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Planning/ApprovedAnimations96/rear-support-attack--lantern-keeper.webp": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Planning/ApprovedAnimations96/rear-support-attack--soil-boar.webp": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Planning/ApprovedAnimations96/rear-support-attack--soil-mole.webp": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Planning/ApprovedAnimations96/rear-support-attack--walking-forest.webp": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Planning/ApprovedAnimations96/rear-support-attack--white-paw.webp": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Planning/ApprovedAnimations96/cotton-sheep-walk-v4.webp": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Animations/CreatureApprovedV5/vine-turtle/attack.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        3,
+        2
+      ]
+    },
+    "DesignAssets/Animations/CreatureApprovedV5/shadow-weasel/attack.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        3,
+        2
+      ]
+    },
+    "DesignAssets/Planning/ApprovedAnimations96/rear-support-attack--vine-turtle.webp": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Planning/ApprovedAnimations96/rear-support-attack--shadow-weasel.webp": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Animations/SporeCombatBirthV9/blade/birth.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        4,
+        6
+      ]
+    },
+    "DesignAssets/Animations/SporeCombatBirthV9/carapace/birth.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        4,
+        6
+      ]
+    },
+    "DesignAssets/Planning/ApprovedAnimations96/spore-combat-birth-v9-blade.webp": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Planning/ApprovedAnimations96/spore-combat-birth-v9-carapace.webp": {
       "display": [
         96,
         96

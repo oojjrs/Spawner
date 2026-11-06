@@ -31,7 +31,6 @@ export const UNIT_IMAGE_BOUNDS = Object.freeze({
   "DesignAssets/Animations/RollingAcornIdle/v1/idle.webp": Object.freeze({"frameSize":428,"width":283,"height":272}),
   "DesignAssets/Animations/CreatureDeathV4/rolling-acorn/runtime.webp": Object.freeze({"frameSize":262,"width":172,"height":167}),
   "DesignAssets/Animations/BubbleToadIdle/BreathV1/idle.webp": Object.freeze({"frameSize":362,"width":265,"height":186}),
-  "DesignAssets/Animations/BubbleToadDeath/RebuildV3/runtime.webp": Object.freeze({"frameSize":256,"width":187,"height":131}),
   "DesignAssets/Animations/CreatureIdleStudies/V1/snare-vine/idle.webp": Object.freeze({"frameSize":456,"width":239,"height":283}),
   "DesignAssets/Animations/CreatureDeathV4/snare-vine/runtime.webp": Object.freeze({"frameSize":276,"width":144,"height":170}),
   "DesignAssets/Animations/Beetle/atlas.webp": Object.freeze({"frameSize":346,"width":245,"height":195}),

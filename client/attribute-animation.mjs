@@ -1,3 +1,4 @@
+import { createSporeGatherArt, SPORE_GATHER_ASSETS } from "./spore-gather-art.mjs";
 import { createTribeMinorAnimation, TRIBE_MINOR_ANIMATION_ASSETS, tribeMinorAnimation } from "./tribe-minor-animation.mjs";
 import { minorTraitResourcePose, minorTraitResourceFrame } from "./minor-trait-resource-motion.mjs";
 import { unitDisplayAttributes, unitDisplayAttributesFrom } from "./unit-display-appearance.mjs";
@@ -11,7 +12,7 @@ export const TRIBE_ATTRIBUTE_ASSETS = Object.freeze(["spore", "pebble", "spring"
     ["strength", "feet"].includes(attribute) || attribute === "antenna" && tribe !== "spring" ?
       [root + "Parts/" + attribute + "-left.png", root + "Parts/" + attribute + "-right.png"] :
       [root + "Parts/" + attribute + ".png"])];
-}).concat(TRIBE_MORPHOLOGY_ASSETS, TRIBE_MINOR_ANIMATION_ASSETS));
+}).concat(TRIBE_MORPHOLOGY_ASSETS, TRIBE_MINOR_ANIMATION_ASSETS, SPORE_GATHER_ASSETS));
 
 const attachments = {
   spore: {
@@ -99,6 +100,7 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
   const rigs = new Map(), pending = new Map(), frames = TRIBE_CANVAS_CACHE_BUDGET.createCache(), motions = new Map();
   const morphology = createTribeMorphology(createSurface, loadImage);
   const minor = createTribeMinorAnimation(createSurface, loadImage);
+  const gather = createSporeGatherArt(createSurface, loadImage);
   const reducedMotion = globalThis.matchMedia?.("(prefers-reduced-motion: reduce)");
 
   function neutralDistance(tribe, track, reference) {
@@ -193,7 +195,7 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
         }
       })));
       rig.idle = await loadImage(rig.animations.idle.image);
-      await Promise.all([morphology.prepare(rig), minor.prepare(tribe)]);
+      await Promise.all([morphology.prepare(rig), minor.prepare(tribe), gather.prepare(tribe)]);
       rig.bodyFrames = new Map();
       rigs.set(tribe, rig);
       return rig;
@@ -205,6 +207,8 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
     attributes = unitDisplayAttributesFrom(attributes);
     const rig = rigs.get(tribe);
     if (!rig || !hasTribeAttributes(attributes) && !replacement) return null;
+    const staticGather = !replacement && gather.frame(tribe, attributes, animation, action, layer);
+    if (staticGather) return staticGather;
     const authored = !replacement && minor.frame(sourceAgent, attributes, animation, index, action, time, motion, layer);
     if (authored) return authored;
     const bodyAction = motion?.sourceAction || action;
@@ -365,6 +369,8 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
     attributes = unitDisplayAttributesFrom(attributes);
     const rig = rigs.get(tribe);
     if (!rig) return null;
+    const staticGather = gather.portrait(tribe, attributes, width, height, box, layer);
+    if (staticGather) return staticGather;
     const surface = createSurface(width, height), context = surface.getContext("2d");
     if (layer && !["full", "body", "combat-body", "combat-feet"].includes(layer)) return surface;
     const animation = rig.animations.idle;

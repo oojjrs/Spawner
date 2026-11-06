@@ -1,6 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
-import { mkdirSync, readFileSync, writeFileSync, existsSync, readdirSync, unlinkSync, rmdirSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync, existsSync, readdirSync, unlinkSync, rmdirSync, realpathSync } from "node:fs";
 import { dirname, resolve, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { productionRuntime } from "../client/production.mjs";
@@ -55,11 +55,25 @@ export function prepareSite(destination, readSource, revision, assetDirectory) {
     createHash("sha256").update(bytes).digest("hex") + "." + name.split(".").at(-1)]));
   // Ship revised sprites with the Site so source updates reach production
   // together without requiring a separate asset CDN publication.
-  const localAssets = new Set(["DesignAssets/Welcome/spore-jump.webp", "DesignAssets/Welcome/pebble-jump.webp", "DesignAssets/Animations/CreatureWalkV2/shadow-weasel/walk.webp", ...["charge", "muzzle", "projectile", "impact"].map(stage => "DesignAssets/Animations/CreatureRangedV1/lantern-keeper/" + stage + "-atlas.webp")]);
+  const localAssets = new Set(["DesignAssets/Welcome/spore-jump.webp", "DesignAssets/Welcome/pebble-jump.webp", ...["charge", "muzzle", "projectile", "impact"].map(stage => "DesignAssets/Animations/CreatureRangedV1/lantern-keeper/" + stage + "-atlas.webp")]);
   const publishedAssets = execFileSync("git", ["show", "HEAD:dist/client/assets.js"], { cwd: destination, encoding: "utf8", maxBuffer: 128 * 1024 * 1024 });
   for (const [name, file] of assetFiles) if (!publishedAssets.includes(assetBase + file)) localAssets.add(name);
   const assetPaths = new Map([...assetFiles].map(([name, file]) => [name,
     localAssets.has(name) ? "./welcome-assets/" + file : assetBase + file]));
+  const referencedLocalAssets = new Set([...assetPaths.values()].filter(value => value.startsWith("./welcome-assets/"))
+    .map(value => value.slice("./welcome-assets/".length).toLowerCase()));
+  const localAssetDirectory = resolve(output, "welcome-assets");
+  if (existsSync(localAssetDirectory)) {
+    const directory = realpathSync(localAssetDirectory), outputDirectory = realpathSync(output);
+    if (directory !== resolve(outputDirectory, "welcome-assets")) throw new Error("잘못된 자산 경로입니다.");
+    for (const entry of readdirSync(directory, { withFileTypes: true })) {
+      if (!entry.isFile() || !/^[a-f0-9]{64}\.[a-z0-9]+$/i.test(entry.name) || referencedLocalAssets.has(entry.name.toLowerCase())) continue;
+      const target = realpathSync(join(directory, entry.name));
+      if (dirname(target) !== directory) throw new Error("잘못된 자산 경로입니다.");
+      if (createHash("sha256").update(readFileSync(target)).digest("hex") !== entry.name.slice(0, 64).toLowerCase()) continue;
+      unlinkSync(target);
+    }
+  }
   for (const name of localAssets) if (assets.has(name)) write("welcome-assets/" + assetFiles.get(name), assets.get(name));
   write("index.html", html);
   for (const [name, page] of pages) write(name, page);

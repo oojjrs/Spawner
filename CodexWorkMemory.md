@@ -1,3 +1,70 @@
+## 최신 승인 애셋·구형114개 정리 최종 동결 · 01a1b0eb 현재 요약
+
+- 기록 ID: assets-refresh-final-freeze-20261107-01a1b0eb. 기록 시각 2026-11-07T08:18:19+09:00; 기록자·최종통합/범위검수 Codex /root, pull/적용/구형삭제/배포 결정 사용자. 출처 현재채팅01a1b0eb-5c79-76a2-96c3-b18db3b182c7·분담3명실제결과·root integration-verification.json,H:/Spawner Windows PowerShell. 원발언정확시각·항목ID불명.
+- 최종 실제변경: 승인대체된실행/로더/기술/미리보기114파일삭제,중립몹18종대표를현재idle첫프레임으로통일,이동끝구형정적그림fallback수정,혼합DNA채집파생strength가현대표외형을밀던선택오류수정. 새공격9종·솜양walkV4·몽돌안테나V6·포자채집형정적idle/portrait·포자blade/carapace birthV9를연결했다. 원본source/검수scene·승인대체없는동작은유지한다.
+- 실제검수: 중립10clip 실제canvas30draw(원본8계약재사용/새2source확인)선택/디코드/오류/누락/최종경계통과및PNG직접열람. 흰발server920/300ms·그늘1020/330ms유지,솜양게임312.5ms/검수GIF1250ms구분. V9actualgame drawSporeBirth .5/2.419에서새body선택·2.42에서현재idle정확handoff,다른catalog행/기존1argfactory호환유지·카메라단절없음. 리샘플링source대조가RGBA byte동일이라는주장은하지않는다.
+- 통합검수: 청정HEADef859b37+taskhunk로runtime/Combat/appearance/VFXbundle생성,outer및JSONencodedworker의taskmodule만이식하여protectedmodule보존. JSparse통과/삭제asset활성참조0/nativewrapper32바이트일치/정책50 source·outputSHA·치수·registry/matrix검수성공. canonicalruntimeasset534개로재구성하여옛registry41키를제거했고new32등록. hosting은미참조정상contenthashlocal파일을정리한다. game.js는callback정확1hunk,hosting은exact3edit만HEAD투영,다른dirty는커밋/배포에미포함.
+- 범위/다음: 정확233경로(삭제114포함)와관련메모리만분리커밋·전용origin main push·기존publicSite v41후속배포예정. latesthistoryc4c6c44까지3localcommit을보존rebase/dirtyrestore했고conflicts0/index0확인. 게임적용cutoffe6d98be를유지하여그뒤원본업로드새싹콩분비형idleV4는이번적용에포함하지않았다. 실제commit/push/배포결과는아직성공으로기록하지않으며검증뒤로컬영수증을남긴다. 관련요청/결정/변경/검수/한계/남은단계누락점검완료.
+
+## 구형 애셋 정리 재개·적용 범위 동결 · 01a1b0eb 현재 요약
+
+- 기록 ID: assets-refresh-resumed-20261107-01a1b0eb. 기록 시각 2026-11-07T08:06:13+09:00; 기록자·복원/범위판단 Codex /root, 재개지시 사용자. 출처 현재채팅01a1b0eb-5c79-76a2-96c3-b18db3b182c7의 ‘언제 끝나냐?’와‘재개하자’ 및직접Git/복원결과,H:/Spawner Windows PowerShell. 원발언정확시각·항목ID불명.
+- 완료범위유지: 앞선구형10+기술5+preview9+후속61=실제85삭제가완료되어있고공격7/솜양walk연결·metadata검수성공을재사용한다. 현재수신된e6d98be까지승인본을적용범위로동결하여거북/그늘공격2·포자V9body2만추가하고배포를마감한다. 이후업로드를계속붙여작업을늘리지않는다고사용자에게알렸다.
+- 복원사실: 중단된rebase의Design충돌은승인된DNA표구조/문구를유지하고remote포자V9의원본/검수GIF링크두쌍을같은birth셀로이전해해결했다. rebaseHEAD488c4b16,stash4928f954복구후conflicts0/index0. 이동중동시편집된메모리/전투test/game.js도별도보존·3way정합하여원래stash와동시수정을함께복원했다. 근거sync-second-result.json/during-rebase-restoration.json·backuprefs유지.
+- 원격freshness: 재개후fetch에서origin/main c4c6c44(새싹콩분비형대기V4승인원본추가)1개를더확인했다. 이는동결후추가입력이므로이번게임적용목록에확대하지않고최종Git전진시원본history를보존한다. 아직새sourceV4가이번게임에적용됐다고보고하지않는다. 최종commit/push/배포완료는아직아니며분담최종렌더/통합후실제결과로갱신한다.
+
+## 배포 전 추가 승인 공격2·포자 탄생V9 확인 · 01a1b0eb 현재 요약
+
+- 기록 ID: assets-refresh-new-approved-second-20261107-01a1b0eb. 기록 시각 2026-11-07T00:21:08+09:00; 기록자·통합판단 Codex /root, 최신pull/전부적용/배포·구형삭제 결정 사용자. 출처 현재채팅01a1b0eb-5c79-76a2-96c3-b18db3b182c7 및직접git fetch,H:/Spawner Windows PowerShell. 원발언정확시각·항목ID불명.
+- 사실: origin/main e6d98be는추가3120c94거북/그늘족제비ApprovedRearSupportAttack공격2와e6d98be포자combatbirthV9승인시트를포함한다. 거북metadata는새전체몸체6frame/1020ms/user-approved로앞선registration-only6종과같은그림으로오해하지않는다. local30351e6는별도채팅승인웰컴수정커밋이며정상history로보존한다.
+- 판단/현재상태: 현재중립8등록·검수마감후제품write를멈추고dirty/index/untracked보존rebase/pull2를수행한뒤공격2를기존새native생성기·시계계약에추가한다. 포자V9는delivery/scene/bodycontract와실제승인범위를읽고진짜몸체교체인지검수캡처인지구분하여적용한다. 현재새2+V9는아직적용완료가아니며앞선완료분을재시작하거나검수없이성공으로보고하지않는다.
+
+## 추가 원화 적용 범위·재생 계약 확정 · 01a1b0eb 현재 요약
+
+- 기록 ID: assets-refresh-contracts-20261107-01a1b0eb. 기록 시각 2026-11-07T00:18:24+09:00; 기록자·범위/계약판단 Codex /root, 최신승인애셋적용/구형제거/재배포 결정 사용자. 출처 현재채팅01a1b0eb-5c79-76a2-96c3-b18db3b182c7 및 /root/minor_traits·creature_assets 실제소스/렌더근거,H:/Spawner Windows PowerShell. 원발언정확시각·항목ID불명.
+- 포자버섯 채집형: 신규ApprovedGatherV1은전체원화만승인되어128정적idle/portrait만연결했다. 기존body-strength부위만바꾸면갓/얼굴이중복되므로전체승인원화를전용정적factory로사용한다. 실제world unit-presentation→tribe-art.animationFrame→attribute-animation.frame는layer undefined라해당분기로진입하며,publicportrait와idle투영RGBA일치검수및대표PNG직접열람을완료했다. TRIBE_ATTRIBUTE_ASSETS에새image등록. walk/harvest/hurt/birth/death의새애니는만들지않고여전히필요한기존부위는삭제하지않는다.
+- 중립8동작: source8과runtime128/Planning96출력8생성. 공격6종은승인registration-only동일픽셀의지지점정합,흰발은새6frame800ms원화다. 흰발은기존server impact300ms/전체920ms를유지하고원화시계만매핑하여게임수치를바꾸지않는다. 솜양은공식게임용312.5ms/3.2Hz와느린검수GIF1250ms를구분한다. 메타데이터/실제선택연결최종검수는진행중이며결과를미리완료로기록하지않는다.
+- 통합: root2e2eee8까지remote추가3commit+기존local2commit을rebase하고dirty/index/untracked를stash8e7712d복구,conflicts0/index0확인했다. backuprefs보존. 생성runtime의outermodule뿐아니라JSONencoded workerSource내taskmodule도선택적으로동기화하여다른동시server수정을보존하기로했다. Site준비기는참조없어진정상SHAhash파일만dist/welcome-assets에서제거하고unknown/바깥경로는보존한다.
+
+## 추가 승인 중립 공격·솜양 걷기 수신 대기 · 01a1b0eb 현재 요약
+
+- 기록 ID: assets-refresh-new-approved-20261107-01a1b0eb. 기록 시각 2026-11-07T00:03:15+09:00; 기록자·통합판단 Codex /root, 최신pull/전부적용/재배포·구형삭제결정 사용자. 출처 현재채팅01a1b0eb-5c79-76a2-96c3-b18db3b182c7 및 직접 git fetch origin main, H:/Spawner Windows PowerShell. 원발언정확시각·항목ID불명.
+- 원격사실: origin/main 4ec7af3에서새공격7종(soil-mole/dew-rabbit/bubble-toad/soil-boar/lantern-keeper/walking-forest/white-paw),솜양ApprovedV4걷기,sporeApprovedGatherV1원화가추가확인되었다. 현재local21414ba는다른채팅에서승인커밋한Design DNA표cf48344와전투5:5 21414ba를포함하여remote와2/3분기했다. 관련다른채팅커밋은지우지않고정상rebase통합한다.
+- 판정: 새attack.json은approved·registrationOnly·pixelEqualityVerified이며기존CreatureAttackV2승인픽셀을새지지점으로재등록한source다. 신규그림창작으로해석하지않고현승인시트/pivot/timing을런타임에반영한다. 솜양manifest는64frame/312.5ms/previewquarter-rate로게임용시점과느린미리보기를구분한다. 현재cleanup분담을마감해write를멈춘뒤dirty/index/untracked를복구가능하게보존하고rebase/pull,그후새source를적용한다. 아직통합/삭제/배포성공으로기록하지않는다.
+
+## 중립몹 구형 선택 원인 확정·폐기 범위 · 01a1b0eb 현재 요약
+
+- 기록 ID: assets-refresh-neutral-rootcause-20261107-01a1b0eb. 기록 시각 2026-11-07T00:00:56+09:00; 기록자·조사/분류 판단 Codex /root, 구형 애셋 제거 및 기존 pull/적용/배포 결정 사용자. 출처 현재 채팅01a1b0eb-5c79-76a2-96c3-b18db3b182c7의 중립몹/두더지 구형 지적과 ‘구형 애셋 좀 다 싸그리 지워버리면 안될까?’, H:/Spawner Windows PowerShell. 원발언 정확시각·항목ID·PC식별 불명.
+- 직접 확인: 공개v41 JS는저장된배포본과동일하여이번구형표현의원인을캐시로단정하지않는다. 중립몹걷기종료시snapshot mode가walk인약0.3초에walk와idle선택이모두거절되어옛Concept정적그림으로fall back했다. creature-presentation의완료walk를서버finishCreatureMove와같은epoch의현idle로이어주었다. 17종계약대조와두더지18시점실제draw함수렌더에서현source선택/오류0을확인하고PNG직접열람했다. 전체게임플레이검수로확대하지않는다.
+- 별도 구형 노출: encounter-types의18종image가Concept/v3원화를직접가리켜도감/목록/정보/최종fallback에서옛몸체를보였다. 현idle첫셀(owl별도idle포함)에서trim/등비128대표WebP18개를파생하고image필드18개만교체했다. 원본대조픽셀차0,실제game encounterSprites로더18/18및캡처직접열람. 원화Concept원본은출처자료로유지하되게임바인딩/배포registry에서분리한다.
+- 폐기 결정: 승인CreatureApprovedV4로대체된두더지/걷는숲/그림자족제비/흰발walk4와거품두꺼비death1의구형runtime5개,동일base64wrapper5개및무효technicalmetadata를참조정리후삭제한다. Design에남은같은구형walkpreview/thumb도현승인미리보기로교체후삭제한다. 최신승인없는idle/attack/hurt/death,승인후보원본/frames/검수전용캡처를버전폴더이름만으로삭제하지않는다. spring blade/carapace birth 새업로드는현runtime의reviewcapture라고manifest에명시되어대체source로쓰지않는다.
+- 함께 적용: 새pebble안테나walkV6 8프레임800ms/기존16clip불변,채집DNA파생strength가대표외형을밀어내는선택오류수정. 전부생성bundle/로더/정책/기획서의해당참조까지동기화한후범위분리커밋·push·기존Site에재배포할예정이다. 실제삭제/최종배포는아직완료로기록하지않는다. 근거literal $Trash/assets-refresh-c9130bb/{routes,neutrals,neutral-render,portraits,cleanup,pebble,spring}.
+
+## 중립몹 구형 렌더 전수 대조·구형 삭제 승인 · 01a1b0eb 현재 요약
+
+- 기록 ID: assets-refresh-neutrals-delete-authorized-20261106-01a1b0eb. 기록 시각: 2026-11-06T23:44:34+09:00. 기록자·범위/분담판단 Codex /root, 삭제요청·문제제기 주체 사용자. 출처현재채팅01a1b0eb-5c79-76a2-96c3-b18db3b182c7의「구형 애셋 너무 많은데, 특히 중립몹들…두더지…눈에 보이는게 죄다 이상」「구형 애셋 좀 다 싸그리 지워버리면 안될까?」. 원발언정확시각·항목ID·PC식별불명,H:/Spawner Windows PowerShell.
+- 최신범위: 앞선gather대표외형수정은현행DNA재현으로확인했으나species중립몹은이투영을우회하므로중립문제의원인으로확대하지않는다. 두더지우선으로19종의idle/walk/attack/hurt/death·fallback·portrait/codex와현재승인원본/실제drawImage를대조한다. 새upload등록만으로완료라고하지않고실제선택·body일치·로딩실패를확인한다.
+- 삭제명시승인: 사용자요청은구형애셋삭제까지포함한다. 이름V숫자만보고지우지않고승인최신본으로대체가능한구형참조를전부교체한뒤그파일/내장래퍼/등록·정책·배포잔재를제거한다. 삭제후구형이fallback이나기획서에서다시선택되지않도록참조graph를확인한다. 현재approvedauthoring원본·review-only현행검수캡처·미정본과다른채팅의dirty/untracked를구형으로자동분류하지않는다. 대체본없는현재동작은별도구분하며아직그림생성/paidgen허가로해석하지않는다.
+- 분담: creatureworker는중립승인목록/현재행동/런타임교체·삭제가능분류,minorworker는중립구형파일/코드·JSON·문서·래퍼·정책의역참조/삭제후보graph(readonly),routesworker는실제isolatedheadless게임presentation경로/PNG/src관측(readonly)을담당. 메인은조율·삭제범위최종대조·실제그림확인/통합검수·삭제/커밋push/Sites게시. 실제사용자탭제어/CUA금지,백그라운드headless표면만사용.
+- 상태: 구형삭제실행전이며현재공통DNA조건1곳수정과몽돌안테나V6만완료/검수보고,중립rootcause와승인별대체가능목록은아직조사중이다. 병행기획서표개편을보존하고그수정전체를이번커밋에동봉하지않는다. 근거 literal $Trash/assets-refresh-c9130bb/{neutrals,cleanup,neutral-render,routes}.
+
+## 구형 애셋 노출 재현·선택 경로 수정 착수 · 01a1b0eb 현재 요약
+
+- 기록 ID: assets-refresh-render-start-20261106-01a1b0eb. 기록 시각: 2026-11-06T23:37:02+09:00. 기록자·진단/분담판단 Codex /root, 재시도·구형노출수정요청 사용자. 출처현재채팅01a1b0eb-5c79-76a2-96c3-b18db3b182c7 최신「함더해봐 왤케 구형 애셋들이 보이지?」와직접도구/workercaller조사. 원발언정확시각·항목ID·PC식별불명,H:/Spawner Windows PowerShell.
+- 직접원격통합: origin/main에6666b95 몽돌안테나이동V6와c9130bb 샘방울칼날/갑피탄생검수캡처2개가추가됐다. 기존dirty/index/untracked를stash/refs/codex/backups/assets-refresh-c9130bb로보존후main c9130bb029b8d87d821d5e8e3a85937f470a73bf로ff하고복원,미해결/index0확인. 표개편진행중다른채팅Design/메모리·게임/서버/헤더dirty는보존한다.
+- 라이브관측: public Sites현재v41. 실제HTTP runtime.js/assets.js/game.js 모두status200·text/javascript·Cache-Control public,must-revalidate,max-age0이며다운로드SHA가직전게시artifact와각각완전일치한다. 서버가구버전파일을내려주는증거는없으며사용자의열린탭/특정DNA/장면은아직직접확인하지않았다. formalunitAppearance24singlemask모두ready=false를직접실행해formalready우선렌더가현재덮는다는가설은제외했다.
+- 실제caller결함: 공통unitDisplayAttributes가현행DNA gather를대표기관유무와무관하게strength1로추가한다. unitRangedAppearance의strength배제와상세/실험실createCombatStageAppearance의legacy검사에걸려분비형·칼날/갑피/안테나등이구형fallback으로내려갈수있다. routerworker가현행DNA조합으로재현/최소조건수정/순수채집과명시legacyrig보존검수중. 앞선배포는새파일포함/순수form연결을확인했지만이복합DNA대표외형선택경로를놓쳤으며이번에구체경로를수정한다.
+- 분담/근거: 공통규칙19에따라상속동일모델/effort의독립3분담(router/몽돌V6/spring출처검토),main은live비교/조율/통합검수GitSites담당. 몽돌V6는128native·96preview신규1클립만생성해기존16클립불변확인완료. spring2시트는manifest와기존승인이명시한기존proceduralruntime의body-only36샘플검수캡처로새게임원본이아니다. 새runtime베이크/문서중복미리보기는제외하고원격원본보존,해당worker제품변경0확인. 원본game교체금지와불명확한1024camera를generic최신화요청으로덮지않는다.
+- 상태: selector실제재현/수정·몽돌V6통합·국소검수·분리커밋push·재배포는아직미완료. 기획서새문구/기계수치변경없음. 근거 literal $Trash/assets-refresh-c9130bb/{sync.json,live,pebble,routes,spring}.
+
+## 추가 몽돌 발형 V4·Sites v41 재배포 완료 · 01a1b0eb 현재 요약
+
+- 기록 ID: assets-followup-pebble-published-20261106-01a1b0eb. 기록 시각: 2026-11-06T23:07:43+09:00. 기록자·최종readback확인 Codex /root, 추가pull/재배포승인 사용자. 출처현재채팅01a1b0eb-5c79-76a2-96c3-b18db3b182c7 및실제Git/Sites도구결과. 원발언정확시각·항목ID·PC식별불명,H:/Spawner Windows PowerShell.
+- 실제완료: 새원격85108c6의몽돌발형이동V4를게임이동/운반·정지첫프레임·기획서96미리보기·런타임번들/내장asset에연결하고12경로를efe39e5196f18dbd23909513035d979f5364900b 「몽돌 발형 직립 이동 애니메이션 적용」으로분리커밋했다. 원격push후ls-remote동일tip확인,마지막main/추적remote각efe39e5196f18dbd23909513035d979f5364900b/efe39e5196f18dbd23909513035d979f5364900b,index0직접확인. 기존dirty/삭제/메모리·보존stash/backuprefs유지. 최초sandbox직접index.lock생성EPERM은읽기확인후동일scope승격커밋으로해결했고잠금파일임의제거없음.
+- 게시실제완료: 고정efe39e5에서기존public Sites source0a52558740fd8afbe65cdad85ab45faa05d95556 「몽돌 발형 V4 배포본 갱신」,공식helper의push/readback/package완료. 저장v41 id appgprj_6ada1cedf2848191938f196c4f346ee9~appgver_32dbfca4fe888191a3697e7a24ae163d,배포appgdep_6aeddedc40408191989f20e03ac71fd1이succeeded/failure_message=null/https://spawner.oojjrs.chatgpt.site 반환. 기존audience public유지·별도브라우저열기/반복상태호출없음.
+- 검수/한계: 승인8프레임·800ms/loop·0/100/799/800ms프레임경계/selector·128셀/96미리보기·원본byte/GIFtiming/루프·공유구문·형식10파일/최종staged공백검수통과. 게시새walk원본92454bytes직접대조,기존717assetcache재사용/신규1개로합718asset481,368,654bytes. 배포source5경로staged검수·원래CRLF3파일복원,기존runtime의Mixed/Mixed NeedsReview상태는보존. archive148files/95,283,200bytes sha2560ea38ac8b4088ffad022dc9a8b2c495eb24ef0a1bfe8ab4070b75aa13d1de5a0 확인. 전체게임수동플레이나기존다른회귀재실행완료로주장하지않는다.
+- 상태: 이번추가pull/적용/커밋push/재배포요청완료. 커밋후확정된본영수증은로컬메모리에남기며메모리전용후속커밋/공개이력수정없음. 근거 literal $Trash/assets-followup-pebble-85108c6/{verification.json,push-result.json,site-prepared.json,spawner-followup.tar.gz}.
+
 ## 새싹콩 분비형 대기 V4 승인 · 2026-11-06T15:27:30+00:00
 
 - 기록자 Codex, 결정 주체 사용자. 출처 채팅6ae7a6f41c94819380facdaa018ca2b0 부모 전달 “좋아”, 직전 sheet libfile_4e90b1ea0ff881919273c0e144136db2/GIF libfile_cb32ee4fcd488191ae6e9f741ccdb510. 원 발언 시각/항목 ID 불명. V4 승인 시트/GIF/규격3파일만 게시. 512셀8×8,64프레임50ms씩3200ms, pivot256/448. PNG4096×4096 RGBA 및 GIF3200ms 확인.

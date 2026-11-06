@@ -1,0 +1,35 @@
+{
+  "image": "DesignAssets/Tribes/spore/ApprovedGatherV1/idle.webp",
+  "frameSize": 128,
+  "pivotX": 64,
+  "pivotY": 112,
+  "bounds": {
+    "x": 13,
+    "y": 36,
+    "width": 103,
+    "height": 76
+  },
+  "source": "DesignAssets/Tribes/spore/ApprovedGatherV1/source.png",
+  "sourceSha256": "b217fe52093f84c86be77e203afadfb998ea03523553f0cbdd7d5e35e8b92bd6",
+  "sha256": "f1c42e606fe8febf898d7313d54d4d9a4281dd1a8fe45021b9a0bdbf30f467f0",
+  "grid": [
+    1,
+    1
+  ],
+  "dimensions": [
+    128,
+    128
+  ],
+  "display": [
+    128,
+    128
+  ],
+  "sourceBounds": [
+    215,
+    350,
+    825,
+    609
+  ],
+  "uniformScale": 0.12552453931764276,
+  "staticOnly": true
+}

@@ -1,3 +1,4 @@
+import { APPROVED_REAR_SUPPORT_ATTACK_ANIMATIONS, APPROVED_COTTON_SHEEP_WALK_ANIMATION } from "./creature-approved-actions.mjs";
 import { APPROVED_CREATURE_WALK_ANIMATIONS, APPROVED_CREATURE_DEATH_ANIMATIONS } from "./creature-approved-animations.mjs";
 import { CREATURE_RANGED_ANIMATIONS, CREATURE_RANGED_ASSETS, creatureRangedPose } from "./creature-ranged.mjs";
 import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
@@ -64,7 +65,7 @@ export const CREATURE_WALK_ANIMATIONS = Object.freeze({
   "dew-rabbit": {"image":"DesignAssets/Animations/CreatureWalkV2/dew-rabbit/walk.webp","frameSize":433,"viewSize":417,"columns":4,"durationsMs":[100,80,100,180,100,100,150,190],"loop":true,"pivotX":216.5,"pivotY":442.9627192982456,"cyclesPerCell":2},
   "soil-mole": { ...APPROVED_CREATURE_WALK_ANIMATIONS["soil-mole"] },
   "bundle-snail": {"image":"DesignAssets/Animations/CreatureWalkV2/bundle-snail/walk.webp","frameSize":398,"columns":4,"durationsMs":[200,250,250,250,300,250,250,250],"loop":true,"pivotX":199,"pivotY":348.25,"cyclesPerCell":1},
-  "cotton-sheep": {"image":"DesignAssets/Animations/CreatureWalkV2/cotton-sheep/walk.webp","frameSize":256,"columns":4,"durationsMs":[125,125,125,125,125,125,125,125],"loop":true,"pivotX":128,"pivotY":224,"cyclesPerCell":2},
+  "cotton-sheep": { ...APPROVED_COTTON_SHEEP_WALK_ANIMATION },
   "rolling-acorn": {"image":"DesignAssets/Animations/CreatureWalkV2/rolling-acorn/walk.webp","frameSize":420,"columns":8,"durationsMs":[78,78,78,78,79,78,78,78,78,78,78,79,78,78,78,78,78,78,78,78,79,78,78,78,78,78,78,79,78,78,78,78,78,78,78,78,79,78,78,78,78,78,78,79,78,78,78,78,78,78,78,78,79,78,78,78,78,78,78,79,78,78,78,78],"loop":true,"pivotX":210,"pivotY":349.453125,"cyclesPerCell":0.4},
   "soil-boar": {"image":"DesignAssets/Animations/CreatureWalkApprovedV3/soil-boar/walk.webp","frameSize":640,"viewSize":506.85283,"columns":8,"durationsMs":Array(64).fill(4.8828125),"loop":true,"pivotX":326.154716,"pivotY":425.490566,"cyclesPerCell":2,"registrationScale":1},
   "bubble-toad": {"image":"DesignAssets/Animations/CreatureWalkV2/bubble-toad/walk.webp","frameSize":288,"viewSize":256,"columns":8,"durationsMs":[110,120,80,110,130,90,90,150],"loop":true,"pivotX":145.5,"pivotY":222.26,"cyclesPerCell":2},
@@ -82,21 +83,21 @@ export const CREATURE_WALK_ANIMATIONS = Object.freeze({
 
 export const CREATURE_ATTACK_ANIMATIONS = Object.freeze({
   "spring-keeper": {"image":"DesignAssets/Animations/CreatureAttackV2/spring-keeper/runtime.webp","frameSize":269,"viewSize":274.07547169811323,"columns":4,"pivotX":101.66804245283019,"pivotY":235.25604363207546,"durationsMs":[70,90,100,35,240,100,140,130],"loop":false,"facing":"left","impactFrame":4},
-  "lantern-keeper": {"image":"DesignAssets/Animations/CreatureAttackV2/lantern-keeper/runtime.webp","frameSize":270,"viewSize":259.43060498220643,"columns":4,"pivotX":141.5871052046263,"pivotY":235.53874277135233,"durationsMs":[70,100,120,40,260,110,160,140],"loop":false,"facing":"left","impactFrame":4},
-  "white-paw": {"image":"DesignAssets/Animations/CreatureAttackV2/white-paw/runtime.webp","frameSize":269,"viewSize":247.60227272727272,"columns":4,"pivotX":183.07475142045453,"pivotY":223.09996448863635,"durationsMs":[70,100,90,40,260,110,130,120],"loop":false,"facing":"left","impactFrame":4},
+  "lantern-keeper": { ...APPROVED_REAR_SUPPORT_ATTACK_ANIMATIONS["lantern-keeper"] },
+  "white-paw": { ...APPROVED_REAR_SUPPORT_ATTACK_ANIMATIONS["white-paw"] },
   "old-garden-snail": {"image":"DesignAssets/Animations/CreatureAttackV2/old-garden-snail/runtime.webp","frameSize":264,"viewSize":239.34065934065933,"columns":4,"pivotX":133.57237293956044,"pivotY":230.11323832417582,"durationsMs":[110,180,220,80,300,220,260,200],"loop":false,"facing":"left","impactFrame":4},
   "cotton-sheep": {"image":"DesignAssets/Animations/CreatureAttackV2/cotton-sheep/runtime.webp","frameSize":290,"viewSize":256.7708333333333,"columns":4,"pivotX":145.43660481770834,"pivotY":249.0771484375,"durationsMs":[100,110,120,40,240,90,140,190],"loop":false,"facing":"left","impactFrame":4},
-  "walking-forest": {"image":"DesignAssets/Animations/CreatureAttackV2/walking-forest/runtime.webp","frameSize":512,"viewSize":418.9090909090909,"columns":4,"pivotX":255.99999999999997,"pivotY":447,"durationsMs":[100,180,220,60,320,180,220,180],"loop":false,"facing":"left","impactFrame":4},
+  "walking-forest": { ...APPROVED_REAR_SUPPORT_ATTACK_ANIMATIONS["walking-forest"] },
   "spiny-back-leader": {"image":"DesignAssets/Animations/CreatureAttackV2/spiny-back-leader/runtime.webp","frameSize":512,"viewSize":418.9090909090909,"columns":4,"pivotX":255.99999999999997,"pivotY":449.5454545454545,"durationsMs":[90,170,220,50,340,180,220,170],"loop":false,"facing":"left","impactFrame":4},
-  "vine-turtle": {"image":"DesignAssets/Animations/CreatureAttackV2/vine-turtle/runtime.webp","frameSize":231,"viewSize":231.67596068904592,"columns":6,"pivotX":118.58627518832472,"pivotY":199.84869689941402,"durationsMs":[70,210,50,300,170,220],"loop":false,"facing":"left","impactFrame":3},
-  "shadow-weasel": {"image":"DesignAssets/Animations/CreatureAttackV2/shadow-weasel/runtime.webp","frameSize":229,"viewSize":228.608642578125,"columns":6,"pivotX":115.25907893614335,"pivotY":189.22680542512376,"durationsMs":[70,210,50,300,170,220],"loop":false,"facing":"left","impactFrame":3},
+  "vine-turtle": { ...APPROVED_REAR_SUPPORT_ATTACK_ANIMATIONS["vine-turtle"] },
+  "shadow-weasel": { ...APPROVED_REAR_SUPPORT_ATTACK_ANIMATIONS["shadow-weasel"] },
   "snare-vine": {"image":"DesignAssets/Animations/CreatureAttackV2/snare-vine/runtime.webp","frameSize":283,"viewSize":283.21875,"columns":6,"pivotX":141.23318481445312,"pivotY":259.8811083984375,"durationsMs":[70,210,50,300,170,220],"loop":false,"facing":"left","impactFrame":3},
   "rolling-acorn": {"image":"DesignAssets/Animations/CreatureAttackV2/rolling-acorn/runtime.webp","frameSize":312,"viewSize":281.2599381625442,"columns":4,"pivotX":157.38239840989397,"pivotY":270.69152788896866,"durationsMs":[100,110,130,40,220,90,140,190],"loop":false,"facing":"left","impactFrame":4},
-  "bubble-toad": {"image":"DesignAssets/Animations/CreatureAttackV2/bubble-toad/runtime.webp","frameSize":258,"viewSize":258.10648584905664,"columns":6,"pivotX":130.59410861033314,"pivotY":191.8959035874853,"durationsMs":[70,210,50,300,170,220],"loop":false,"facing":"left","impactFrame":3},
-  "soil-boar": {"image":"DesignAssets/Animations/CreatureAttackV2/soil-boar/runtime.webp","frameSize":264,"viewSize":263.4999410377358,"columns":6,"pivotX":132.09826061320754,"pivotY":202.63912768094045,"durationsMs":[70,210,50,300,170,220],"loop":false,"facing":"left","impactFrame":3},
+  "bubble-toad": { ...APPROVED_REAR_SUPPORT_ATTACK_ANIMATIONS["bubble-toad"] },
+  "soil-boar": { ...APPROVED_REAR_SUPPORT_ATTACK_ANIMATIONS["soil-boar"] },
   "flower-tail-bird": {"image":"DesignAssets/Animations/CreatureAttackV2/flower-tail-bird/runtime.webp","frameSize":283,"viewSize":276.77600235849053,"columns":4,"pivotX":138.03967423349056,"pivotY":259.49940300707544,"durationsMs":[100,110,110,40,220,80,130,180],"loop":false,"facing":"left","impactFrame":4},
-  "dew-rabbit": {"image":"DesignAssets/Animations/CreatureAttackV2/dew-rabbit/runtime.webp","frameSize":278,"viewSize":279.2221593418728,"columns":4,"pivotX":146.09600679107774,"pivotY":248.90296661053443,"durationsMs":[100,110,110,40,200,90,130,190],"loop":false,"facing":"left","impactFrame":4},
-  "soil-mole": {"image":"DesignAssets/Animations/CreatureAttackV2/soil-mole/runtime.webp","frameSize":273,"viewSize":237.44496052340986,"columns":4,"pivotX":136.9022574812279,"pivotY":246.37352221593417,"durationsMs":[100,110,120,40,220,90,130,190],"loop":false,"facing":"left","impactFrame":4},
+  "dew-rabbit": { ...APPROVED_REAR_SUPPORT_ATTACK_ANIMATIONS["dew-rabbit"] },
+  "soil-mole": { ...APPROVED_REAR_SUPPORT_ATTACK_ANIMATIONS["soil-mole"] },
   "bundle-snail": {"image":"DesignAssets/Animations/CreatureAttackV2/bundle-snail/runtime.webp","frameSize":293,"viewSize":266.3926816475265,"columns":4,"pivotX":146.9266715437279,"pivotY":270.04213884441253,"durationsMs":[100,130,120,45,220,100,140,210],"loop":false,"facing":"left","impactFrame":4},
   "talon-owl": {"image":"DesignAssets/Animations/CreatureAttackV2/talon-owl/runtime.webp","frameSize":288,"viewSize":288.1672862453532,"columns":6,"pivotX":131.6345405436803,"pivotY":225.24361059479554,"durationsMs":[70,210,50,300,170,220],"loop":false,"facing":"left","impactFrame":3},
 });
@@ -185,7 +186,12 @@ export function creatureAttackPose(agent, time) {
   if (CREATURE_RANGED_ANIMATIONS[agent.species] && (agent.attack?.dnaRanged || agent.attack?.mode === "ranged" || agent.attack?.attackMode === "ranged")) return creatureRangedPose(agent, time);
   const animation = CREATURE_ATTACK_ANIMATIONS[agent.species], attack = agent.attack;
   if (!animation || !attack || agent.health <= 0 || !Number.isFinite(attack.startedAt)) return null;
-  const elapsed = attackAnimationElapsed(attack, time, CREATURE_ATTACK_TIMINGS[agent.species].hitTimeMs / 1000, animation.durationMs / 1000) * 1000;
+  const timing = CREATURE_ATTACK_TIMINGS[agent.species];
+  let elapsed = attackAnimationElapsed(attack, time, timing.hitTimeMs / 1000, timing.durationMs / 1000) * 1000;
+  if (Number.isFinite(animation.hitTimeMs) && (animation.hitTimeMs !== timing.hitTimeMs || animation.durationMs !== timing.durationMs)) {
+    elapsed = elapsed <= timing.hitTimeMs ? elapsed / timing.hitTimeMs * animation.hitTimeMs :
+      animation.hitTimeMs + (elapsed - timing.hitTimeMs) / (timing.durationMs - timing.hitTimeMs) * (animation.durationMs - animation.hitTimeMs);
+  }
   if (!Number.isFinite(elapsed) || elapsed < 0 || elapsed + 1e-6 >= animation.durationMs) return null;
   const direction = attack.directionX || agent.facing || -1;
   return { action: "attack", animation, frame: unitAnimationFrame(animation, elapsed), mirrorX: direction > 0 };
@@ -241,6 +247,10 @@ export function creatureWalkPose(agent, time) {
   if (agent.species === "bubble-toad") {
     const hop=toadHopMotion(elapsed / agent.moveDuration);
     return { animation, frame:hop.frame, hop };
+  }
+  if (Number.isFinite(animation.temporalCadenceHz)) {
+    const startedAt = Number.isFinite(agent.animationStartedAt) ? agent.animationStartedAt : agent.moveStartedAt;
+    return { animation, frame: unitAnimationFrame(animation, (time - startedAt) * 1000) };
   }
   const progress = Math.max(0, (agent.stepCount || 1) - 1) + elapsed / agent.moveDuration;
   return { animation, frame: unitAnimationFrame(animation, progress * (animation.cyclesPerCell || 1) * animation.durationMs) };

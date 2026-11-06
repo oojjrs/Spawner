@@ -263,6 +263,26 @@ export const TRIBE_MINOR_ANIMATIONS = Object.freeze({
         "pivotX": 64,
         "pivotY": 112,
         "durationMs": 1440
+      },
+      "walk": {
+        "image": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/walk.webp",
+        "frameSize": 128,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true,
+        "pivotX": 64,
+        "pivotY": 112,
+        "durationMs": 800
       }
     }
   },

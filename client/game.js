@@ -28,7 +28,7 @@
     });
     const sporeDominantBirthArt = Spawner.createSporeDominantBirthArt((width, height) => {
       const surface = document.createElement("canvas"); surface.width = width; surface.height = height; return surface;
-    });
+    }, agentRangedImage);
     const springDominantBirthArt = Spawner.createSpringDominantBirthArt((width, height) => {
       const surface = document.createElement("canvas"); surface.width = width; surface.height = height; return surface;
     });

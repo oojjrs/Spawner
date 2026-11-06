@@ -30,7 +30,7 @@ export function unitDisplayAttributes(agent) {
   const mask = attributes ? null : unitAppearanceMaskFromDna(agent?.dna);
   const display = attributes ? unitDisplayAttributesFrom(attributes) : mask === null ? {} : unitDisplayAttributesFrom(Object.fromEntries(
     Object.entries(UNIT_APPEARANCE_BITS).filter(([, bit]) => mask & bit).map(([key]) => [key, 1])));
-  return agent?.dna?.pieces?.some(piece => piece.gene === "gather") ?
+  return agent?.dna?.pieces?.some(piece => piece.gene === "gather") && !UNIT_DISPLAY_PRIORITY.some(key => display[key] > 0) ?
     { ...display, strength: display.strength || display.arms || 1 } : display;
 }
 
