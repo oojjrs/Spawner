@@ -1,4 +1,4 @@
-import { cloneDna, validateDna, dnaAppearance, dnaUnitStats, dnaCanMove } from "./dna-unit.mjs";
+import { cloneDna, validateDna, dnaAppearance, dnaUnitStats, dnaCanMove, basicGathererDna } from "./dna-unit.mjs";
 import { CONQUEST_PACING, militaryAgent } from "./conquest-pacing.mjs";
 import { isTemplateNameEdited, suggestTemplateName } from "./unit-template-names.mjs";
 import { tribeProductionTemplate } from "./tribe-production.mjs";
@@ -1853,9 +1853,20 @@ export function createGame(environment, colony, savedGame) {
       return null;
     }
 
+    function recoveryBirthCost() {
+      const dna = basicGathererDna(state.nestLevel);
+      let cost = dna ? birthCost({ dna }, colony.tribe) : Infinity;
+      // Existing legacy templates can still be edited to a plain gatherer.
+      // Autonomous tribes also retain their legacy production fallback.
+      const legacyRecovery = state.templates.some(template => !template.dna) ||
+        environment.hostId && colony.ownerId !== environment.hostId;
+      if (legacyRecovery) cost = Math.min(cost, birthCost({ slots: [] }, colony.tribe));
+      return cost;
+    }
+
     function checkEnding() {
       if (state.ending || colony.tribe === null || state.agents.some(agent => agent.health > 0) ||
-          hasActiveNest() && state.evolutionPoints >= birthCost({ slots: [] }, colony.tribe)) return state.ending;
+          hasActiveNest() && state.evolutionPoints >= recoveryBirthCost()) return state.ending;
       state.ending = { endedAt: state.simSeconds,
         reason: !hasActiveNest() ? "nest-destroyed" : "extinction",
         bornCount: state.nextAgentId - 1, exploredCells: state.explored.size,

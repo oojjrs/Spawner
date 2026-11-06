@@ -1,10 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { basicGathererDna } from "./dna-unit.mjs";
+import { birthCost } from "./attributes.mjs";
 import { createGame } from "./game.mjs";
 import { createRoom, saveRoom, restoreRoom, tickRoom, commandRoom, snapshotRoom } from "../client/room.mjs";
 
-function fixture(points) {
-  const colony = { id: 1, ownerId: "ending-test", tribe: "bean", x: 40, y: 40, occupiedCells: new Set(["2,2"]) };
+function fixture(points, tribe = "bean") {
+  const colony = { id: 1, ownerId: "ending-test", tribe, x: 40, y: 40, occupiedCells: new Set(["2,2"]) };
   const environment = { simSeconds: 0, world: { seed: 13, terrain: new Uint8Array(320 * 320).fill(4),
     hazards: new Uint8Array(320 * 320) }, colonies: [colony], games: new Map(), food: new Map(), foodSpots: new Map() };
   const game = createGame(environment, colony);
@@ -16,7 +18,7 @@ function fixture(points) {
 }
 
 test("생존 유닛이 없고 기본 탄생 비용도 없으면 잔여 포인트와 사체에 관계없이 엔딩이다", () => {
-  for (const points of [0, 2]) {
+  for (const points of [0, 2, 3, birthCost({dna:basicGathererDna()}) - 1]) {
     const game = fixture(points);
     const bornCount = game.agents.length;
     for (const agent of [...game.agents]) game.receiveDamage(agent, 1000);
@@ -29,11 +31,12 @@ test("생존 유닛이 없고 기본 탄생 비용도 없으면 잔여 포인트
   }
 });
 
-test("템플릿이 없어도 3포인트면 기본 유닛을 설계하고 생성해 회복할 수 있다", () => {
-  const game = fixture(3);
+test("템플릿이 없어도 최소 채집 DNA 비용이면 설계하고 생성해 회복할 수 있다", () => {
+  const dna=basicGathererDna(),cost=birthCost({dna});
+  const game = fixture(cost);
   game.agents.splice(0);
   assert.equal(game.checkEnding(), null);
-  const result = game.command({ type: "design", templateId: null, name: "새 생명", slots: [], birth: true });
+  const result = game.command({ type: "design", templateId: null, name: "새 생명", dna, birth: true });
   assert.ok(result.agentId);
   assert.equal(game.snapshot().evolutionPoints, 0);
   assert.equal(game.checkEnding(), null);
@@ -98,4 +101,44 @@ test("부족을 선택하기 전에는 엔딩을 판정하지 않는다", () => 
   assert.equal(room.games.get(room.hostId).checkEnding(), null);
   tickRoom(room, 10);
   assert.equal(room.simSeconds, 0);
+});
+
+
+test("기존 legacy 설계가 있으면 저비용 채집 회생 경로를 보존한다",()=>{
+  const game=fixture(3);
+  const {templateId}=game.command({type:"design",templateId:null,name:"옛 일꾼",slots:[],birth:false});
+  game.agents.splice(0);
+  assert.equal(game.checkEnding(),null);
+  const {agentId}=game.command({type:"birth",templateId});
+  const worker=game.agents.find(agent=>agent.id===agentId);
+  assert.ok(worker && !worker.dna && worker.stats.capacity>0);
+});
+
+test("채집 없는 빈 DNA 템플릿은 전멸 후 수입 회생 수단으로 세지 않는다",()=>{
+  const game=fixture(3);
+  game.command({type:"design",templateId:null,name:"빈 DNA",dna:{version:3,level:1,budget:3,pieces:[]},birth:false});
+  game.agents.splice(0);
+  assert.equal(game.checkEnding().reason,"extinction");
+});
+
+test("DNA 군락 전멸의 부족한 회생비 판정은 저장·복원 후에도 같다",()=>{
+  const game=fixture(3);game.agents.splice(0);
+  const restored=fixture(0);restored.restore(game.save());
+  assert.equal(restored.checkEnding().reason,"extinction");
+  restored.restore(restored.save());
+  assert.equal(restored.checkEnding().reason,"extinction");
+});
+
+
+test("네 종족의 DNA 전멸 회생 경계는 종족별 구형 비용이 아닌 같은 DNA 비용이다",()=>{
+  const dna=basicGathererDna(),cost=birthCost({dna});
+  for(const tribe of ["bean","spore","pebble","spring"]){
+    const poor=fixture(cost-1,tribe);poor.agents.splice(0);
+    assert.equal(poor.checkEnding().reason,"extinction",tribe);
+    const enough=fixture(cost,tribe);enough.agents.splice(0);
+    assert.equal(enough.checkEnding(),null,tribe);
+    const {agentId}=enough.command({type:"design",templateId:null,name:"회생",dna,birth:true});
+    assert.ok(enough.agents.find(agent=>agent.id===agentId)?.stats.dna.harvest>0,tribe);
+    assert.equal(enough.snapshot().evolutionPoints,0,tribe);
+  }
 });

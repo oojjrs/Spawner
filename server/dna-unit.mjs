@@ -57,3 +57,12 @@ export function dnaCanMove(agent, x, y, colonies) {
   return Number.isFinite(agent.x) && Number.isFinite(agent.y) &&
     nextDistance < distanceFromHome(agent.x, agent.y);
 }
+
+// The cheapest productive DNA design, not an empty non-gathering body.
+// Keep recovery checks tied to the current catalog and validation rules.
+export function basicGathererDna(nestLevel = 1) {
+  const gene = ATTRIBUTE_DNA.lookup.get("gather");
+  const design = { version: 3, level: nestLevel, budget: 999999999,
+    pieces: [{ gene: gene.id, grade: gene.grade, rotation: 0, shape: [...gene.steps] }] };
+  return validateDna(design, nestLevel, design.budget);
+}
