@@ -1,0 +1,100 @@
+[
+  {
+    "form": "antenna",
+    "action": "walk",
+    "durationsMs": [
+      140,
+      140,
+      140,
+      140,
+      140,
+      140,
+      140,
+      140
+    ],
+    "source": "antenna-walk-wide.png",
+    "frameCount": 8,
+    "status": "approved",
+    "atlas": "Atlases/antenna-walk.png",
+    "frameSize": 512,
+    "columns": 4,
+    "root": [
+      256,
+      448
+    ]
+  },
+  {
+    "form": "antenna",
+    "action": "death",
+    "durationsMs": [
+      120,
+      100,
+      140,
+      120,
+      140,
+      100,
+      120,
+      600
+    ],
+    "source": "antenna-death-wide.png",
+    "frameCount": 8,
+    "status": "approved",
+    "atlas": "Atlases/antenna-death.png",
+    "frameSize": 512,
+    "columns": 4,
+    "root": [
+      256,
+      448
+    ]
+  },
+  {
+    "form": "feet",
+    "action": "walk",
+    "durationsMs": [
+      140,
+      140,
+      140,
+      140,
+      140,
+      140,
+      140,
+      140
+    ],
+    "source": "feet-walk8-generated.png",
+    "frameCount": 8,
+    "status": "approved",
+    "atlas": "Atlases/feet-walk.png",
+    "frameSize": 512,
+    "columns": 4,
+    "root": [
+      256,
+      448
+    ],
+    "uniquePoses": 4,
+    "sequence": "generated cells 0,1,2,4 repeated twice; no mirroring"
+  },
+  {
+    "form": "feet",
+    "action": "death",
+    "durationsMs": [
+      120,
+      100,
+      140,
+      120,
+      140,
+      100,
+      120,
+      600
+    ],
+    "source": "feet-death-generated.png",
+    "frameCount": 8,
+    "status": "approved",
+    "atlas": "Atlases/feet-death.png",
+    "frameSize": 512,
+    "columns": 4,
+    "root": [
+      256,
+      448
+    ]
+  }
+]
