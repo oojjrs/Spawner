@@ -4,7 +4,7 @@ import { recordPlacementMap } from "./placement-maps.mjs";
 import { campResourceTravel } from "./resource-camps.mjs";
 import { generateHydrology } from "./hydrology.mjs";
 import { createResourceHabitats, resourceHabitatSuitability } from "./resource-habitats.mjs";
-import { placeResourceCamps } from "./resource-camps.mjs";
+import { placeResourceCamps, increaseStarterFood } from "./resource-camps.mjs";
 import { generateWildlife, generateResourceAreas } from "./ecology.mjs";
 import { RESOURCE_ECONOMY } from "./economy.mjs";
 import { measureStartingEconomy } from "./start-economy.mjs";
@@ -147,8 +147,9 @@ function clearCampFootprints(world, version) {
     if (terrain[index] === 5) terrain[index] = 4;
   }
   if (version >= 39) for (const camp of world.camps.filter(camp => camp.tribe === "spore")) {
-    for (let dy = -4; dy <= 4; dy++) for (let dx = -4; dx <= 4; dx++) {
-      if (dx * dx + dy * dy > 16) continue;
+    const radius = version >= 41 ? 3 : 4;
+    for (let dy = -radius; dy <= radius; dy++) for (let dx = -radius; dx <= radius; dx++) {
+      if (dx * dx + dy * dy > radius * radius) continue;
       const index = (camp.y + dy) * size + camp.x + dx;
       clearedTrees[index] = 1; h.forestMask[index] = 0;
       if (terrain[index] === 5) terrain[index] = 4;
@@ -163,7 +164,7 @@ function clearCampFootprints(world, version) {
 }
 
 export function generateLandscapeWorld(seed, baseline, onProgress, tribes, encounterPlans, version, capturePlacementMaps) {
-  const generationVersion = version === undefined ? 40 : version;
+  const generationVersion = version === undefined ? 41 : version;
   const size = generationVersion >= 35 ? WORLD_SIZE : 320;
   const terrain = new Uint8Array(size * size), moisture = new Float32Array(terrain.length), height = new Float32Array(terrain.length);
   const hydrology = generateHydrology(terrain, moisture, height, size, seed, baseline, generationVersion, capturePlacementMaps);
@@ -175,6 +176,7 @@ export function generateLandscapeWorld(seed, baseline, onProgress, tribes, encou
   onProgress?.(.5);
   world.camps = placeResourceCamps(world, tribes, generationVersion);
   if (generationVersion >= 32) clearCampFootprints(world, generationVersion);
+  if (generationVersion >= 41) increaseStarterFood(world);
   const occupied = new Set([...world.food, ...world.resources].map(([x, y]) => y * size + x));
   populateBurrows(world, occupied);
   if (generationVersion >= 31) for (const site of world.frontierSites) site.contenders = [];

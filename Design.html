@@ -2949,7 +2949,7 @@ function starterResourceIndex(world) {
 // Level-one DNA workers cannot leave the three-cell nest boundary range.
 // Count only natural food that survives footprint/tree clearing and has a
 // safe path inside that range. Do not manufacture resources or move old maps.
-function starterFoodAccess(world, camp, key, resourceIndex = starterResourceIndex(world)) {
+function starterFoodCells(world, camp, key, resourceIndex) {
   const {size, terrain, hazards} = world, boundary = [];
   for(let dy=-2;dy<=2;dy++)for(let dx=-2;dx<=2;dx++) {
     if(Math.abs(dx)===2 && Math.abs(dy)===2)continue;
@@ -2967,9 +2967,31 @@ function starterFoodAccess(world, camp, key, resourceIndex = starterResourceInde
     if(x<0||y<0||x>=size||y>=size||plot(x,y)||!inside(x,y)||seen.has(i)||!tribeSafeTerrain(camp.tribe,terrain[i],hazards[i]))continue;
     seen.add(i);queue.push([x,y]);
   }
-  const cells=[...seen].flatMap(i=>resourceIndex.get(i)||[]).filter(([x,y,amount,type])=>type===key&&amount>0&&!plot(x,y)&&
-    !(key==='tree'&&camp.tribe==='spore'&&(x-camp.x)**2+(y-camp.y)**2<=16));
+  const treeClearRadius=(world.generationVersion??world.hydrology?.generationVersion??40)>=41?3:4;
+  return [...seen].flatMap(i=>resourceIndex.get(i)||[]).filter(([x,y,amount,type])=>type===key&&amount>0&&!plot(x,y)&&
+    !(key==='tree'&&camp.tribe==='spore'&&(x-camp.x)**2+(y-camp.y)**2<=treeClearRadius**2));
+}
+
+function starterFoodAccess(world, camp, key, resourceIndex = starterResourceIndex(world)) {
+  const cells=starterFoodCells(world,camp,key,resourceIndex);
   return {nodes:cells.length,amount:cells.reduce((sum,cell)=>sum+cell[2],0)};
+}
+
+function increaseStarterFood(world) {
+  const resourceIndex=starterResourceIndex(world), increased=new Set();
+  const foods={sprout:'clay',bean:'clay',spore:'tree',pebble:'pebbles',spring:'dew'};
+  for(const camp of world.camps) {
+    for(const cell of starterFoodCells(world,camp,foods[camp.tribe],resourceIndex)) {
+      if(increased.has(cell))continue;
+      cell[2]*=2000;increased.add(cell);
+    }
+  }
+  for(const field of world.hydrology?.placementMaps||[]) {
+    if(!field.values)continue;
+    for(const [x,y,amount,key] of increased) {
+      if(field.id==='resource:amount'||field.id==='resource:'+key+':amount')field.values[y*world.size+x]=amount;
+    }
+  }
 }
 
 function placeResourceCamps(world, tribes, version = world.hydrology?.generationVersion) {
@@ -3081,7 +3103,7 @@ function placeResourceCamps(world, tribes, version = world.hydrology?.generation
     y: best[order].y, playable: true, controller: order === 0 ? "player" : "ai", expansion: best[order].expansion }));
 }
 
-return { campResourceTravel, measureCampExpansion, starterFoodAccess, placeResourceCamps };
+return { campResourceTravel, measureCampExpansion, starterFoodAccess, increaseStarterFood, placeResourceCamps };
 })();
 modules["server/natural-resources.mjs"] = (() => {
 const { quantizeLandscapeValue } = modules["server/landscape-processes.mjs"];
@@ -3297,7 +3319,7 @@ const { recordPlacementMap } = modules["server/placement-maps.mjs"];
 const { campResourceTravel } = modules["server/resource-camps.mjs"];
 const { generateHydrology } = modules["server/hydrology.mjs"];
 const { createResourceHabitats, resourceHabitatSuitability } = modules["server/resource-habitats.mjs"];
-const { placeResourceCamps } = modules["server/resource-camps.mjs"];
+const { placeResourceCamps, increaseStarterFood } = modules["server/resource-camps.mjs"];
 const { generateWildlife, generateResourceAreas } = modules["server/ecology.mjs"];
 const { RESOURCE_ECONOMY } = modules["server/economy.mjs"];
 const { measureStartingEconomy } = modules["server/start-economy.mjs"];
@@ -3440,8 +3462,9 @@ function clearCampFootprints(world, version) {
     if (terrain[index] === 5) terrain[index] = 4;
   }
   if (version >= 39) for (const camp of world.camps.filter(camp => camp.tribe === "spore")) {
-    for (let dy = -4; dy <= 4; dy++) for (let dx = -4; dx <= 4; dx++) {
-      if (dx * dx + dy * dy > 16) continue;
+    const radius = version >= 41 ? 3 : 4;
+    for (let dy = -radius; dy <= radius; dy++) for (let dx = -radius; dx <= radius; dx++) {
+      if (dx * dx + dy * dy > radius * radius) continue;
       const index = (camp.y + dy) * size + camp.x + dx;
       clearedTrees[index] = 1; h.forestMask[index] = 0;
       if (terrain[index] === 5) terrain[index] = 4;
@@ -3456,7 +3479,7 @@ function clearCampFootprints(world, version) {
 }
 
 function generateLandscapeWorld(seed, baseline, onProgress, tribes, encounterPlans, version, capturePlacementMaps) {
-  const generationVersion = version === undefined ? 40 : version;
+  const generationVersion = version === undefined ? 41 : version;
   const size = generationVersion >= 35 ? WORLD_SIZE : 320;
   const terrain = new Uint8Array(size * size), moisture = new Float32Array(terrain.length), height = new Float32Array(terrain.length);
   const hydrology = generateHydrology(terrain, moisture, height, size, seed, baseline, generationVersion, capturePlacementMaps);
@@ -3468,6 +3491,7 @@ function generateLandscapeWorld(seed, baseline, onProgress, tribes, encounterPla
   onProgress?.(.5);
   world.camps = placeResourceCamps(world, tribes, generationVersion);
   if (generationVersion >= 32) clearCampFootprints(world, generationVersion);
+  if (generationVersion >= 41) increaseStarterFood(world);
   const occupied = new Set([...world.food, ...world.resources].map(([x, y]) => y * size + x));
   populateBurrows(world, occupied);
   if (generationVersion >= 31) for (const site of world.frontierSites) site.contenders = [];

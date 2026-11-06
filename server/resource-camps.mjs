@@ -84,7 +84,7 @@ function starterResourceIndex(world) {
 // Level-one DNA workers cannot leave the three-cell nest boundary range.
 // Count only natural food that survives footprint/tree clearing and has a
 // safe path inside that range. Do not manufacture resources or move old maps.
-export function starterFoodAccess(world, camp, key, resourceIndex = starterResourceIndex(world)) {
+function starterFoodCells(world, camp, key, resourceIndex) {
   const {size, terrain, hazards} = world, boundary = [];
   for(let dy=-2;dy<=2;dy++)for(let dx=-2;dx<=2;dx++) {
     if(Math.abs(dx)===2 && Math.abs(dy)===2)continue;
@@ -102,9 +102,31 @@ export function starterFoodAccess(world, camp, key, resourceIndex = starterResou
     if(x<0||y<0||x>=size||y>=size||plot(x,y)||!inside(x,y)||seen.has(i)||!tribeSafeTerrain(camp.tribe,terrain[i],hazards[i]))continue;
     seen.add(i);queue.push([x,y]);
   }
-  const cells=[...seen].flatMap(i=>resourceIndex.get(i)||[]).filter(([x,y,amount,type])=>type===key&&amount>0&&!plot(x,y)&&
-    !(key==='tree'&&camp.tribe==='spore'&&(x-camp.x)**2+(y-camp.y)**2<=16));
+  const treeClearRadius=(world.generationVersion??world.hydrology?.generationVersion??40)>=41?3:4;
+  return [...seen].flatMap(i=>resourceIndex.get(i)||[]).filter(([x,y,amount,type])=>type===key&&amount>0&&!plot(x,y)&&
+    !(key==='tree'&&camp.tribe==='spore'&&(x-camp.x)**2+(y-camp.y)**2<=treeClearRadius**2));
+}
+
+export function starterFoodAccess(world, camp, key, resourceIndex = starterResourceIndex(world)) {
+  const cells=starterFoodCells(world,camp,key,resourceIndex);
   return {nodes:cells.length,amount:cells.reduce((sum,cell)=>sum+cell[2],0)};
+}
+
+export function increaseStarterFood(world) {
+  const resourceIndex=starterResourceIndex(world), increased=new Set();
+  const foods={sprout:'clay',bean:'clay',spore:'tree',pebble:'pebbles',spring:'dew'};
+  for(const camp of world.camps) {
+    for(const cell of starterFoodCells(world,camp,foods[camp.tribe],resourceIndex)) {
+      if(increased.has(cell))continue;
+      cell[2]*=2000;increased.add(cell);
+    }
+  }
+  for(const field of world.hydrology?.placementMaps||[]) {
+    if(!field.values)continue;
+    for(const [x,y,amount,key] of increased) {
+      if(field.id==='resource:amount'||field.id==='resource:'+key+':amount')field.values[y*world.size+x]=amount;
+    }
+  }
 }
 
 export function placeResourceCamps(world, tribes, version = world.hydrology?.generationVersion) {

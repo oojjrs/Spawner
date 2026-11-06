@@ -6,7 +6,7 @@ const primary={bean:'clay',spore:'tree',pebble:'pebbles',spring:'dew'};
 test('new maps provide two safe level-one food nodes for every tribe after clearing',()=>{
  for(const seed of [13,413,731047,1165626204,1,2,3,4,5,42]){
   const world=generateWorld(seed);
-  assert.equal(world.generationVersion,40);
+  assert.equal(world.generationVersion,41);
   for(const camp of world.camps){const a=starterFoodAccess(world,camp,primary[camp.tribe]);assert.ok(a.nodes>=2,`${seed} ${camp.tribe}: ${JSON.stringify(a)}`);}
  }
 });
