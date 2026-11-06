@@ -1,6 +1,7 @@
 import { cloneDna, validateDna, dnaAppearance, dnaUnitStats, dnaCanMove, basicGathererDna } from "./dna-unit.mjs";
 import { CONQUEST_PACING, militaryAgent } from "./conquest-pacing.mjs";
 import { isTemplateNameEdited, suggestTemplateName } from "./unit-template-names.mjs";
+import { suggestAgentName } from "./agent-names.mjs";
 import { tribeProductionTemplate } from "./tribe-production.mjs";
 import { worldSize } from "./world-size.mjs";
 import { ATTRIBUTES, ATTRIBUTE_SYNERGIES_ENABLED, isAttributeUnlocked, attributeCounts, migrateAttributeSlots, migrateAttributeLevels, attributeUpgradeCost, attributeUpgradeIssue, unitStats, unitCarryCapacity, unitTravelSpeed, unitTerrainSpeedMultiplier, birthCost, hasSynergy } from "./attributes.mjs";
@@ -1508,7 +1509,7 @@ export function createGame(environment, colony, savedGame) {
         tribe: colony.tribe || "bean",
         id: colony.id + ":" + state.nextAgentId,
         ownerId: colony.ownerId,
-        name: template.name + " " + state.nextAgentId,
+        name: suggestAgentName(colony.tribe, state.agents, state.nextAgentId),
         templateId: template.id,
         templateName: template.name,
         templateRevision: template.revision,
