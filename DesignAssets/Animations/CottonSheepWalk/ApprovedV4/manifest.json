@@ -1,0 +1,16 @@
+{
+  "image": "walk.webp",
+  "png": "walk.png",
+  "frameSize": 640,
+  "columns": 8,
+  "frameCount": 64,
+  "loop": true,
+  "frameDurationMs": 4.8828125,
+  "durationMs": 312.5,
+  "temporalCadenceHz": 3.2,
+  "previewGif": "preview-quarter-speed.gif",
+  "previewPlaybackRate": 0.25,
+  "previewDurationMs": 1250,
+  "gameIntegrated": false,
+  "sourceSha256": "f4f5a4000e9d4a520a61d805564ab19756192c350a49db21926298e4b66581bd"
+}

@@ -1,0 +1,60 @@
+{
+  "source": "approved-source.png",
+  "method": "Rigid clipped reuse of the approved concept pixels, no generated replacement limbs and no limb stretching",
+  "frameSize": 640,
+  "frameCount": 64,
+  "temporalCadenceHz": 3.2,
+  "supportFraction": 0.54,
+  "strokeOriginalPixels": 35,
+  "sourceScale": 1.45,
+  "legs": [
+    {
+      "name": "far-hind",
+      "path": "M215 254L226 255L242 250L241 259L234 269L224 274L209 269L207 261Z",
+      "anchor": [
+        224,
+        271
+      ],
+      "offset": 0.04,
+      "far": true,
+      "stroke": 35
+    },
+    {
+      "name": "far-front",
+      "path": "M116 254L128 257L145 256L153 252L154 263L147 283L138 289L120 289L107 280L109 268Z",
+      "anchor": [
+        130,
+        288
+      ],
+      "offset": 0.5,
+      "far": true,
+      "stroke": 35
+    },
+    {
+      "name": "near-hind",
+      "path": "M252 246L269 246L283 238L291 251L289 267L280 278L264 282L250 276L245 266Z",
+      "anchor": [
+        267,
+        279
+      ],
+      "offset": 0.54,
+      "far": false,
+      "stroke": 35
+    },
+    {
+      "name": "near-front",
+      "path": "M159 265L171 269L192 269L204 261L206 273L199 293L187 301L172 302L156 295L154 281Z",
+      "anchor": [
+        180,
+        300
+      ],
+      "offset": 0,
+      "far": false,
+      "stroke": 35
+    }
+  ],
+  "worldSpeedContactValidated": false,
+  "active": false,
+  "bodySource": "body-source.png",
+  "bodySourceNote": "Unchanged existing completed torso, placed 2 original pixels lower to occlude joins"
+}

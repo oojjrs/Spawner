@@ -1,3 +1,8 @@
+## 솜양 승인 걷기 V4 누락 복구 · 2026-11-06T14:37:09+00:00
+
+- 기록자 Codex /root/investigate_sheep_walk, 결정 주체 사용자. 출처 채팅6ae7a6f41c94819380facdaa018ca2b0, 승인 Sentinel_fb11b9e0cb40819180dd21aa7bbcbc25, 재진단 Sentinel_7733ed56ac208191b68f2a64487ebf5c. 원발언 시각 불명. 승인64프레임은 임시검토본으로만 남고 main/기획서는 11월4일 구형8프레임을 참조했음을 확인했다.
+- 승인 시트 원본 SHA f4f5a4000e9d4a520a61d805564ab19756192c350a49db21926298e4b66581bd 그대로 보존하고 PNG·sheet추출GIF·manifest를 추가한다. 640셀8열64장,3.2Hz/312.5ms. GIF는 시간해상도 때문에64장 전부0.25배/1250ms, planning WebP는 누적ms반올림312ms. 기획서 기존 이동 셀 링크·재생정보만 교체, 문구·게임소스·배포 변경 없음. GitHub project 조회는 gh인증 없음으로 미확인.
+
 ## 샘방울 칼날 갑피 몸체 탄생 승인 · 2026-11-06T14:19:19+00:00
 
 - 기록자 Codex, 결정 주체 사용자. 출처 채팅6ae7a6f41c94819380facdaa018ca2b0, 부모 전달 “샘방울 칼날형 갑피형 승인”. 원 발언 시각/항목 ID 불명. 기존 springDominantBirthPixels body-only 캡처 두쌍을 검수 자료로 보존한다. 게임소스 idle.webp 두종은 이미main에 존재한다. 이 시트를 게임원본으로 교체하지 않는다. 1024셀6×6/36프레임,40ms 캡처와 최종700ms 확인hold로 총2100ms.
