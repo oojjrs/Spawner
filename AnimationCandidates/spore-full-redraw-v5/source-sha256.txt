@@ -1,0 +1,2 @@
+4935d2a036815f831b7f9800b01fa9892db6bd89ad27d5fac0afe101b6413a5a  AnimationCandidates/spore-full-redraw-v5/Source/antenna-full-redraw.png
+3512dbd83888aefe486a8872545ff79ae2ef9f3b7f0c962a771695341338c26f  AnimationCandidates/spore-full-redraw-v5/Source/feet-full-redraw.png
