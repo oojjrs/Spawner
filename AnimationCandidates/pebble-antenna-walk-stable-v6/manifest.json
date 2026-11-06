@@ -1,0 +1,29 @@
+{
+  "image": "walk-sheet.png",
+  "frameSize": 444,
+  "columns": 4,
+  "frameCount": 8,
+  "durationsMs": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+  ],
+  "loop": true,
+  "status": "user-approved",
+  "gif": "walk-from-sheet.gif",
+  "contourMaxDeltaPixels": [
+    0,
+    1,
+    1,
+    1,
+    1,
+    2,
+    1,
+    1
+  ]
+}
