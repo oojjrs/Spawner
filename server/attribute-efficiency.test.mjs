@@ -6,7 +6,6 @@ import { runInNewContext } from "node:vm";
 import { attributeCounts, attributeUpgradeCost, birthCost, unitCarryCapacity, unitStats, unitTravelSpeed } from "./attributes.mjs";
 import { resourceHarvestMultiplier } from "./resources.mjs";
 import { createGame } from "./game.mjs";
-import { applyAgentGrowth } from "./growth.mjs";
 
 const native = { bean: ["clay", null], spring: ["dew", null], pebble: ["pebbles", "piercing"], spore: ["tree", "blade"] };
 
@@ -55,7 +54,6 @@ test("네 종족의 단속성 개체는 실제 생산비와 정해진 개별 효
       const { agent } = fixture(tribe, [key], 1, 8, false);
       const context = tribe + ":" + key;
       assert.equal(agent.cost, prices[tribe][1], context);
-      assert.equal(agent.level, 1, context);
       assert.equal(agent.stats.capacity, key === "strength" ? 2 : 1, context);
       assert.ok(Math.abs(agent.stats.speed - speeds[tribe][0] - (key === "feet" ? .3 : 0)) < 1e-12, context);
       assert.equal(resourceHarvestMultiplier(native[tribe][0], agent.attributes, tribe), key === native[tribe][1] ? .75 : 1, context);
@@ -73,14 +71,12 @@ test("복합 속성 개체는 개수별 생산비와 개별 효과만 적용하�
       assert.ok(Math.abs(agent.stats.speed - speeds[tribe][0] - .3) < 1e-12, context);
       assert.ok(Math.abs(unitTravelSpeed(agent, 2, native[tribe][0]) - speeds[tribe][1] - .3) < 1e-12, context);
       assert.equal(agent.stats.vision, slots.includes("antenna") ? 6 : 3, context);
-      assert.equal(agent.stats.movementMultiplier, 1, context);
-      assert.equal(agent.stats.harvestSpeedMultiplier, 1, context);
       assert.equal(resourceHarvestMultiplier(native[tribe][0], agent.attributes, tribe), native[tribe][1] && slots.includes(native[tribe][1]) ? .75 : 1, context);
     }
   }
 });
 
-test("이전 강화 설계는 1단계로 생산하고 개체 숙성은 10레벨에서 멈춘다", () => {
+test("이전 강화 설계는 1단계로 생산하고 모든 장착 속성을 유지한다", () => {
   const slots = ["strength", "feet", "antenna"];
   const baseline = fixture("bean", slots, 1, 12, false).agent;
   for (const grade of [1, 2, 3, 4]) {
@@ -91,13 +87,7 @@ test("이전 강화 설계는 1단계로 생산하고 개체 숙성은 10레벨�
     const template = JSON.parse(game.save()).state.templates[0];
     assert.deepEqual(template.attributeLevels, { strength: 1, feet: 1, antenna: 1 });
     for (const key of slots) for (const targetLevel of [2, 3, 4]) assert.equal(attributeUpgradeCost(key, targetLevel), null);
-    agent.growthActivity = Number.MAX_SAFE_INTEGER;
-    applyAgentGrowth(agent, 0);
-    assert.equal(agent.level, 10);
-    assert.deepEqual(agent.activeSlots, slots);
-    const matureStats = { ...agent.stats };
-    assert.equal(applyAgentGrowth(agent, 1), false);
-    assert.deepEqual(agent.stats, matureStats);
+    assert.deepEqual(agent.slots, slots);
   }
 });
 

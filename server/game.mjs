@@ -11,8 +11,6 @@ import { TRIBE_STARTING_UNITS, PLAYER_STARTING_POINTS, startingWorkerDna } from 
 import { colonySupply, recordColonyIncome, restoreColonyIncome } from "./colony-supply.mjs";
 import { agentBirthDuration } from "./birth.mjs";
 import { CORPSE_LIFETIME, placeCorpse, expireCorpses } from "./corpses.mjs";
-import { applyAgentGrowth } from "./growth.mjs";
-import { AGENT_EXPERIENCE, addAgentExperience, recordCombatExperience } from "./experience.mjs";
 import { AGENT_ATTACK_DURATION, AGENT_ATTACK_HIT_TIME } from "./attack.mjs";
 import { createRoadOptimizer } from "./roads.mjs";
 import { createCombat, combatDisposition, canPursueCombat, colonyDefenseTarget, suspendDefenseWork } from "./combat.mjs";
@@ -152,7 +150,6 @@ export function createGame(environment, colony, savedGame) {
     function recordDiscovery(key, kind, name, target, observer) {
       if (state.discoveredKinds.has(key)) return;
       state.discoveredKinds.add(key);
-      if (observer?.perceptionExperienceReady) addAgentExperience(observer, AGENT_EXPERIENCE.discovery);
       state.discoveries.push({ key, kind, name, x: target.x, y: target.y,
         discoveredAt: state.simSeconds, discoveredBy: observer?.name || "둥지" });
     }
@@ -198,7 +195,6 @@ export function createGame(environment, colony, savedGame) {
           const index = cy * WORLD_SIZE + cx;
           if (visibleCells.has(index)) continue;
           visibleCells.add(index);
-          if (!state.explored.has(index) && observer?.perceptionExperienceReady) addAgentExperience(observer, AGENT_EXPERIENCE.exploration);
           state.explored.add(index);
           const key = cx + "," + cy;
           if (worldMap.treeCells?.[index]) discoverResource({ x: cx, y: cy, resourceType: "tree", kind: "tree" }, observer);
@@ -263,9 +259,6 @@ export function createGame(environment, colony, savedGame) {
       }
       state.markers = [...markers.values()];
       discoverObjects();
-      for (const agent of state.agents) {
-        if (agent.health > 0 && !(agent.birth && state.simSeconds < agent.birth.readyAt)) agent.perceptionExperienceReady = true;
-      }
     }
 
     function agentAppearanceAttributes(agent) {
@@ -351,11 +344,11 @@ export function createGame(environment, colony, savedGame) {
       agent.knownEnemyIds = agent.knownEnemyIds instanceof Set ? agent.knownEnemyIds : new Set();
       if (agent.decisionPending === undefined) agent.decisionPending = "birth";
       agent.nextDecisionAt = Number.isFinite(agent.nextDecisionAt) ? agent.nextDecisionAt : state.simSeconds;
-      agent.growthActivity = Number.isFinite(agent.growthActivity) && agent.growthActivity >= 0 ? agent.growthActivity : 0;
-      agent.perceptionExperienceReady = false;
+      for (const key of ["level", "growthActivity", "activeSlots", "perceptionExperienceReady", "experienceContributions", "experienceKillAwarded"]) delete agent[key];
       migrateCombatStats(agent);
-      agent.level = 0;
-      applyAgentGrowth(agent, state.simSeconds);
+      agent.stats = agent.dna ? dnaUnitStats(agent.dna) : unitStats(attributeCounts(agent.slots, agent.attributeLevels), agent.tribe);
+      agent.attributes = agent.dna ? { ...dnaAppearance(agent.dna), dnaGather: agent.stats.harvest > 0 } : attributeCounts(agent.slots, agent.attributeLevels);
+      agent.health = Math.min(agent.health, agent.stats.health);
       agent.appearanceAttributes = agentAppearanceAttributes(agent);
       agent.stats.resistance = 1;
       agent.shield = 0;
@@ -1101,7 +1094,6 @@ export function createGame(environment, colony, savedGame) {
         const collected = Math.min(amount, Math.max(0, capacity - agent.carrying), Math.max(0, food?.amount || 0));
         if (collected > 0) {
           food.amount = Math.round((food.amount - collected) * 10) / 10;
-          addAgentExperience(agent, collected * AGENT_EXPERIENCE.harvest);
           agent.carrying = Math.round((agent.carrying + collected) * 10) / 10;
           agent.carryingType = resourceType;
           agent.harvestResult = {
@@ -1200,7 +1192,6 @@ export function createGame(environment, colony, savedGame) {
         recordColonyIncome(state, Math.floor(Math.min(deposited, availablePoints)));
         state.evolutionPoints += Math.floor(Math.min(deposited, availablePoints));
       }
-      addAgentExperience(agent, deposited * AGENT_EXPERIENCE.delivery);
       agent.carrying = Math.round((agent.carrying - deposited) * 10) / 10;
       if (agent.carrying <= 0) agent.carryingType = null;
       if (deposited > 0) registerRoadJourney(agent);
@@ -1245,7 +1236,7 @@ export function createGame(environment, colony, savedGame) {
       if (agent.decisionPending || agent.retreat || hazardAt(agent.x, agent.y) || targets.some(target => !target.kind || target.kind === "agent") ||
           state.simSeconds >= agent.nextDecisionAt) return decisionEvent(agent);
       const plan = agent.utility, food = plan?.action === "collect" ? state.knownFood.get(plan.target.key) : null;
-      const signature = [agent.x, agent.y, agent.health, agent.stats.health, agent.level, agent.mode, agent.carrying, agent.carryingType,
+      const signature = [agent.x, agent.y, agent.health, agent.stats.health, agent.mode, agent.carrying, agent.carryingType,
         state.evolutionPoints, state.nestLevel, colonySupply(state, colony.tribe).urgency,
         agent.carrying > 0 ? deliveryCapacity(agent.carryingType || "honey-mushrooms") : 0,
         food?.amount, food?.resourceType, plan?.action, plan?.plannedCargo, plan?.recoverHealth,
@@ -1583,7 +1574,7 @@ export function createGame(environment, colony, savedGame) {
     function dropCorpse(agent) {
       ensureFoodAround(agent.x, agent.y, 4);
       const drops = [{ id: "corpse:" + agent.id, agentId: agent.id, colonyId: colony.id, name: agent.name,
-        level: agent.level, tribe: agent.tribe, bornAt: agent.bornAt, diedAt: state.simSeconds, decaysAt: state.simSeconds + CORPSE_LIFETIME,
+        tribe: agent.tribe, bornAt: agent.bornAt, diedAt: state.simSeconds, decaysAt: state.simSeconds + CORPSE_LIFETIME,
         facing: agent.combat ? agent.combat.side === 0 ? -1 : 1 : agent.facing || 1,
         hurtStartedAt: agent.hurtStartedAt, hurtCount: agent.hurtCount,
         cost: agent.cost, kind: "corpse",
@@ -1657,10 +1648,7 @@ export function createGame(environment, colony, savedGame) {
           attack.hit = true;
           const remaining = attack.targetKind === "burrow" ? environment.creatureSystem.receiveBurrowDamage(target.id, damage) :
             attack.targetKind === "nest" ? owner.receiveNestDamage(damage) : null;
-          const previousHealth = target.health;
           target.health = remaining ?? target.health;
-          recordCombatExperience(agent, target, Math.max(0, previousHealth - target.health),
-            target.health <= 0 ? [...environment.games.values()].flatMap(game => game.agents) : []);
           if (target.health <= 0) agent.decisionPending = "targetLost";
         }
       }
@@ -1689,10 +1677,6 @@ export function createGame(environment, colony, savedGame) {
           agent.birth = null;
           agent.moveBudget = 0;
           agent.decisionPending = "birth";
-        }
-        if (applyAgentGrowth(agent, state.simSeconds)) {
-          agent.appearanceAttributes = agentAppearanceAttributes(agent);
-          agent.decisionPending = "growth";
         }
         updateEnvironment(agent, elapsed);
         if (agent.health <= 0) continue;
@@ -2069,7 +2053,7 @@ export function createGame(environment, colony, savedGame) {
         value?.collection === "Set" ? new Set(value.entries) : value) : saved;
       Object.assign(state, data.state);
       state.startingPointsGranted = data.state.startingPointsGranted === true;
-      for (const key of ["buildings", "nextBuildingId", "constructionProductionReadyAt", "constructionHelpResult", "constructionHelpBuildings", "constructionMaterialNeeds", "foragerMemory"]) delete state[key];
+      for (const key of ["buildings", "nextBuildingId", "constructionProductionReadyAt", "constructionHelpResult", "constructionHelpBuildings", "constructionMaterialNeeds", "foragerMemory", "nestExperienceContributions"]) delete state[key];
       state.corpses = [];
       removedFoodKeys = new Set([...foodCellMap].filter(([, cell]) => cell.kind === "corpse" ||
         migrateResourceType(cell.resourceType) === null).map(([key]) => key));
@@ -2207,7 +2191,7 @@ export function createGame(environment, colony, savedGame) {
         const explored = state.explored;
         for (const index of saved.state.explored) explored.add(index);
         Object.assign(state,saved.state,{explored});
-        for (const key of ["buildings", "nextBuildingId", "constructionProductionReadyAt", "constructionHelpResult", "constructionHelpBuildings", "constructionMaterialNeeds", "foragerMemory"]) delete state[key];
+        for (const key of ["buildings", "nextBuildingId", "constructionProductionReadyAt", "constructionHelpResult", "constructionHelpBuildings", "constructionMaterialNeeds", "foragerMemory", "nestExperienceContributions"]) delete state[key];
         for (const agent of state.agents) {
           for (const key of ["lifespan", "construction", "constructionIntent", "constructionError", "constructionRetryAt", "transport", "transportCargo", "transportReadyAt"]) delete agent[key];
           delete agent.stats.lifespan;
@@ -2241,8 +2225,7 @@ export function createGame(environment, colony, savedGame) {
       isVisible(x, y) { return visibleCells.has(y * WORLD_SIZE + x); },
       get nestLevel() { return state.nestLevel; },
       get nest() { return { id: "nest:" + colony.id, colonyId: colony.id, kind: "nest", x: colony.x, y: colony.y,
-        width: COLONY_SIZE, height: COLONY_SIZE, health: state.nestHealth, maxHealth: NEST_LEVELS[state.nestLevel - 1].health,
-        experienceContributions: (state.nestExperienceContributions ||= []) }; },
+        width: COLONY_SIZE, height: COLONY_SIZE, health: state.nestHealth, maxHealth: NEST_LEVELS[state.nestLevel - 1].health }; },
       receiveNestDamage(amount) {
         if (state.nestHealth <= 0 || !Number.isFinite(amount) || amount <= 0) return state.nestHealth;
         state.nestHealth = Math.max(0, state.nestHealth - amount);

@@ -62,7 +62,7 @@ test("비가시 종족의 정기 재판단은 틱당 네 개로 분산하고 대
   saved.state.agents = Array.from({ length: 24 }, (_, index) => ({ ...structuredClone(base), id: "2:" + (index + 1) }));
   game.restore(JSON.stringify(saved));
   for (const agent of game.agents) Object.assign(agent, { birth: null, utility: null, mode: "wait", decisionPending: null,
-    nextDecisionAt: 0, lastDecisionAt: -1, knownEnemyIds: new Set(), survivalState: "stable", growthActivity: 0 });
+    nextDecisionAt: 0, lastDecisionAt: -1, knownEnemyIds: new Set(), survivalState: "stable" });
   tickRoom(room, .1);
   assert.ok(game.agents.filter(agent => agent.lastDecisionAt >= 0).length <= 4);
   for (let step = 0; step < 8; step++) tickRoom(room, .1);

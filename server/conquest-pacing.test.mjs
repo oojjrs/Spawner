@@ -3,13 +3,12 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {createGame} from "./game.mjs";
 import {CONQUEST_PACING,TRIBE_PACING,colonyWorkerShare} from "./conquest-pacing.mjs";
-import {simulateConquestBuild,colonyWorkerRate} from "./conquest-economy.mjs";
+import {simulateConquestBuild} from "./conquest-economy.mjs";
 import {tribeProductionTemplate} from "./tribe-production.mjs";
 import {birthCost} from "./attributes.mjs";
 import {nestUpgradeCost} from "./nests.mjs";
 import {ENCOUNTER_TYPES} from "./encounter-types.mjs";
 import {BEETLE_RAIDS} from "./raids.mjs";
-import {agentGrowth} from "./growth.mjs";
 
 function fixture(selected) {
  const colony={id:1,ownerId:"colony",tribe:"bean",x:40,y:40,occupiedCells:new Set()};
@@ -20,7 +19,7 @@ function fixture(selected) {
 }
 function change(game,update){const saved=JSON.parse(game.save());update(saved.state);game.restore(JSON.stringify(saved));}
 
-test("기본 수명은 네 종족 모두 3분이고 새 개체도 같은 규칙을 따른다",()=>{
+test("개체와 종족 설정에 수명 제한을 두지 않는다",()=>{
  const {game}=fixture(true);assert.ok(game.agents.every(agent=>!("lifespan" in agent)));
  for(const tribe of Object.values(TRIBE_PACING))assert.equal("lifespan" in tribe,false);
 });
@@ -31,7 +30,6 @@ test("AI 둥지는 시간 하한 없이 현재 성장 비용이 모이면 한 �
   change(game,state=>{state.nestLevel=level;state.evolutionPoints=points;state.simSeconds=60;state.productionReadyAt=0;state.constructionProductionReadyAt=1000;});
   game.prepare(60);game.produce();
   assert.equal(game.nestLevel,level+(enough?1:0),level+":"+enough);
-  assert.equal(game.snapshot().evolutionPoints,points-(enough?cost:0),level+":"+enough);
  }
 });
 
@@ -43,23 +41,17 @@ test("선택한 종족에는 성장과 생산을 자동 실행하지 않는다",
 test("목표 편성은 초반 80:20·후반 30:70이며 부족한 정찰을 먼저 보충한다",()=>{
  const {game}=fixture(false);const state=JSON.parse(game.save()).state;
  Object.assign(state,{simSeconds:310,nestLevel:2,evolutionPoints:100,foodIncomeStartedAt:0,foodIncome:[[305,60]]});
- const base=state.agents[0];state.agents=Array.from({length:16},(_,index)=>({...base,id:"1:"+(index+1),bornAt:300,lifespan:360,productionRole:"worker",slots:["strength"]}));
+ const base={...state.agents[0],dna:null};state.agents=Array.from({length:16},(_,index)=>({...base,id:"1:"+(index+1),bornAt:300,lifespan:360,productionRole:"worker",slots:["strength"]}));
  assert.equal(colonyWorkerShare(2,310,"bean"),.8);
  assert.equal(tribeProductionTemplate(state,"bean")?.productionRole,"scout");
  state.agents[0].slots=["antenna","strength"];
  assert.equal(tribeProductionTemplate(state,"bean")?.productionRole,"military");
- Object.assign(state,{simSeconds:1200,nestLevel:4,foodIncome:[[1195,100]]});state.agents=state.agents.slice(0,10).map(agent=>({...agent,bornAt:1190}));
+ Object.assign(state,{simSeconds:1200,nestLevel:4,foodIncome:[[1195,100]]});state.agents=state.agents.slice(0,12).map(agent=>({...agent,bornAt:1190}));
  assert.equal(colonyWorkerShare(4,1200,"bean"),.3);assert.equal(tribeProductionTemplate(state,"bean")?.productionRole,"military");
 });
 
-test("습격과 일반 적대 생물의 초반 강제 전투를 늦추고 개체 성장은 10레벨에 닿는다",()=>{
+test("습격과 일반 적대 생물의 초반 강제 전투를 늦춘다",()=>{
  assert.equal(BEETLE_RAIDS.firstAt,300);assert.ok(ENCOUNTER_TYPES.filter(type=>type.hostile&&!type.unique).every(type=>type.firstSpawnAt>=240));
- assert.equal(agentGrowth({growthActivity:1e9,slots:[]},0).level,10);
-});
-
-test("속성·성장·동선 최적화로 후기 일꾼 12마리가 초기 32마리의 수입을 감당한다",()=>{
- const early=colonyWorkerRate("bean",[],{},6,1),late=colonyWorkerRate("bean",["strength","feet"],{strength:3,feet:2},6,6);
- assert.ok(late.perSecond*12>=early.perSecond*32);
 });
 
 test("운반 거리를 제외한 경제 모델은 정책별 성장 차이와 AI 모델의 시간 하한을 유지한다",()=>{

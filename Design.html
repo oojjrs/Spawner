@@ -5208,58 +5208,6 @@ function basicGathererDna(nestLevel = 1) {
 
 return { cloneDna, validateDna, dnaAppearance, dnaUnitStats, dnaCanMove, basicGathererDna };
 })();
-modules["server/growth.mjs"] = (() => {
-const { dnaAppearance, dnaUnitStats } = modules["server/dna-unit.mjs"];
-const { attributeCounts, unitStats } = modules["server/attributes.mjs"];
-
-const AGENT_GROWTH_BONUSES = Object.freeze([
-  { movementMultiplier: 1, harvestSpeedMultiplier: 1, combatStrengthBonus: 0 },
-  { movementMultiplier: 1.02, harvestSpeedMultiplier: 1.05, combatStrengthBonus: .5 },
-  { movementMultiplier: 1.04, harvestSpeedMultiplier: 1.1, combatStrengthBonus: 1 },
-  { movementMultiplier: 1.06, harvestSpeedMultiplier: 1.15, combatStrengthBonus: 1.5 },
-  { movementMultiplier: 1.08, harvestSpeedMultiplier: 1.2, combatStrengthBonus: 2 },
-  { movementMultiplier: 1.1, harvestSpeedMultiplier: 1.25, combatStrengthBonus: 2.5 },
-  { movementMultiplier: 1.12, harvestSpeedMultiplier: 1.3, combatStrengthBonus: 3 },
-  { movementMultiplier: 1.14, harvestSpeedMultiplier: 1.35, combatStrengthBonus: 3.5 },
-  { movementMultiplier: 1.16, harvestSpeedMultiplier: 1.4, combatStrengthBonus: 4 },
-  { movementMultiplier: 1.18, harvestSpeedMultiplier: 1.45, combatStrengthBonus: 4.5 }
-].map(bonus => Object.freeze(bonus)));
-
-const AGENT_GROWTH_THRESHOLDS = Object.freeze([0, 15, 33, 54, 78, 105, 135, 168, 204, 243, 285]);
-
-function agentGrowth(agent, simSeconds) {
-  const experience = Math.max(0, Number.isFinite(agent.growthActivity) ? agent.growthActivity : 0);
-  let level = 1;
-  while (level < AGENT_GROWTH_BONUSES.length && experience >= growthThreshold(level + 1)) level++;
-  return { level, experience, activeSlots: [...agent.slots] };
-}
-
-function growthThreshold(level) {
-  return AGENT_GROWTH_THRESHOLDS[level - 1] ?? Infinity;
-}
-
-function applyAgentGrowth(agent, simSeconds) {
-  const growth = agentGrowth(agent, simSeconds);
-  if (agent.level === growth.level && agent.activeSlots?.join(",") === growth.activeSlots.join(",")) return false;
-  const previousHealth = agent.stats.health;
-  agent.level = growth.level;
-  agent.activeSlots = growth.activeSlots;
-  agent.attributes = agent.dna ? { ...dnaAppearance(agent.dna), dnaGather: dnaUnitStats(agent.dna).harvest > 0 } : attributeCounts(agent.activeSlots, agent.attributeLevels);
-  agent.stats = agent.dna ? dnaUnitStats(agent.dna) : unitStats(agent.attributes, agent.tribe);
-  const bonus = AGENT_GROWTH_BONUSES[growth.level - 1];
-  if (agent.dna) {
-    agent.health = Math.min(agent.stats.health, agent.health + Math.max(0, agent.stats.health - previousHealth));
-    return true;
-  }
-  agent.stats.movementMultiplier = (agent.stats.movementMultiplier ?? 1) * bonus.movementMultiplier;
-  agent.stats.harvestSpeedMultiplier = bonus.harvestSpeedMultiplier;
-  agent.stats.combatStrength += bonus.combatStrengthBonus;
-  agent.health = Math.min(agent.stats.health, agent.health + Math.max(0, agent.stats.health - previousHealth));
-  return true;
-}
-
-return { AGENT_GROWTH_BONUSES, AGENT_GROWTH_THRESHOLDS, agentGrowth, growthThreshold, applyAgentGrowth };
-})();
 modules["server/food.mjs"] = (() => {
 const { worldSize } = modules["server/world-size.mjs"];
 function isTreeFood(food, world) {
@@ -5545,19 +5493,15 @@ const { CONQUEST_PACING, TRIBE_PACING, colonyWorkerShare, aiUpgradeReadyAt } = m
 const { NEST_LEVELS, nestUpgradeCost } = modules["server/nests.mjs"];
 const { birthCost, attributeUpgradeCost, attributeLevelLimit } = modules["server/attributes.mjs"];
 const { TRIBE_STARTING_UNITS } = modules["server/tribe-start.mjs"];
-const { growthThreshold } = modules["server/growth.mjs"];
 const { attributeCounts, unitStats, unitCarryCapacity, unitTravelSpeed } = modules["server/attributes.mjs"];
 const { RESOURCE_ECONOMY } = modules["server/economy.mjs"];
 const { resourceHarvestMultiplier } = modules["server/resources.mjs"];
-const { AGENT_GROWTH_BONUSES } = modules["server/growth.mjs"];
 
-function colonyWorkerRate(tribe,slots,levels,distance,unitLevel) {
+function colonyWorkerRate(tribe,slots,levels,distance) {
  const resource=RESOURCE_ECONOMY.find(entry=>entry.tribe===tribe),attributes=attributeCounts(slots,levels),stats=unitStats(attributes,tribe);
- const bonus=AGENT_GROWTH_BONUSES[unitLevel-1];
- stats.movementMultiplier=(stats.movementMultiplier??1)*bonus.movementMultiplier;
  const agent={tribe,attributes,stats,carryingType:resource.key};
  const capacity=unitCarryCapacity(agent,resource.key),outward=distance/unitTravelSpeed(agent,0,resource.key),inward=distance/unitTravelSpeed(agent,capacity,resource.key);
- const harvest=capacity*resource.harvestSeconds*resourceHarvestMultiplier(resource.key,attributes,tribe)/bonus.harvestSpeedMultiplier;
+ const harvest=capacity*resource.harvestSeconds*resourceHarvestMultiplier(resource.key,attributes,tribe);
  return {capacity,seconds:outward+inward+harvest+2,perSecond:capacity/(outward+inward+harvest+2)};
 }
 
@@ -5565,16 +5509,15 @@ function simulateConquestBuild(tribe,policy,distance) {
  const profile=TRIBE_PACING[tribe],expert=policy==="expert",basic=policy==="basic",tempo=profile.tempo;
  const units=[],milestones=[{level:1,seconds:0}],history=[],purchases=new Set();let points=0,level=1,spent=0,delivered=0,nextBirth=0;
  const make=(slots,attributeLevels,role,now)=>{
-  const stats=unitStats(attributeCounts(slots,attributeLevels),tribe),unit={slots,attributeLevels,role,bornAt:now,growthActivity:0};
-  const rate=colonyWorkerRate(tribe,slots,attributeLevels,distance,1);unit.nextDeliveryAt=now+rate.seconds;units.push(unit);
+  const unit={slots,attributeLevels,role,bornAt:now};
+  const rate=colonyWorkerRate(tribe,slots,attributeLevels,distance);unit.nextDeliveryAt=now+rate.seconds;units.push(unit);
  };
  for(const slots of TRIBE_STARTING_UNITS[tribe])make(slots,{},"worker",0);
  for(let now=1;now<=2400;now++){
   const carryDistance=distance*(level>=3?(expert?.55:.7):1);
   for(const unit of units){if(unit.role!=="worker"||now<unit.nextDeliveryAt)continue;
-   let unitLevel=1;while(unitLevel<10&&unit.growthActivity>=growthThreshold(unitLevel+1))unitLevel++;
-   const rate=colonyWorkerRate(tribe,unit.slots,unit.attributeLevels,carryDistance,unitLevel);
-   points=Math.min(NEST_LEVELS[level-1].pointCapacity,points+rate.capacity);delivered+=rate.capacity;unit.growthActivity+=rate.capacity*5;
+   const rate=colonyWorkerRate(tribe,unit.slots,unit.attributeLevels,carryDistance);
+   points=Math.min(NEST_LEVELS[level-1].pointCapacity,points+rate.capacity);delivered+=rate.capacity;
    unit.nextDeliveryAt=now+rate.seconds/(basic?.45:expert?.9:.75);
   }
   const young=units,workers=young.filter(unit=>unit.role==="worker");

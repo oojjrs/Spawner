@@ -43,7 +43,7 @@ test("이전 개체는 보존하고 잠긴 설계·복제·강화는 거부하�
   const saved = JSON.parse(game.save());
   const agentId = saved.state.agents[0].id;
   saved.state.templates = [{id:700, name:"이전 갑피", slots:["carapace"], attributeLevels:{carapace:1}, revision:1}];
-  Object.assign(saved.state.agents[0], {slots:["carapace"], attributeLevels:{carapace:1}, activeSlots:["carapace"]});
+  Object.assign(saved.state.agents[0], {dna:null, slots:["carapace"], attributeLevels:{carapace:1}});
   game.restore(JSON.stringify(saved));
   assert.deepEqual(game.agents[0].slots,["carapace"]);
   assert.equal(game.agents[0].attributes.carapace,1);

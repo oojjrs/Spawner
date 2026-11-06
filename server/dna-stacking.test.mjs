@@ -55,7 +55,7 @@ function gameFixture(n){
   game.restore(JSON.stringify(saved));
   const agent=game.agents[0];assert.equal(game.snapshot().evolutionPoints,500-(3+5*n));assert.deepEqual(agent.dna,build(n));
   const food={key:"38,40",x:38,y:40,resourceType:"clay",kind:"resource",amount:20,initialAmount:20};environment.food.set(food.key,food);
-  Object.assign(agent,{x:38,y:40,renderFromX:38,renderFromY:40,birth:null,level:1,activeSlots:[...agent.slots],moveStartedAt:0,moveDuration:0,mode:"harvest",harvestReady:1,harvestPrepared:false,harvestStarted:0,nextDecisionAt:100000,decisionPending:null,utility:{action:"collect",target:{key:food.key,x:38,y:40},plannedCargo:n,route:[]}});
+  Object.assign(agent,{x:38,y:40,renderFromX:38,renderFromY:40,birth:null,moveStartedAt:0,moveDuration:0,mode:"harvest",harvestReady:1,harvestPrepared:false,harvestStarted:0,nextDecisionAt:100000,decisionPending:null,utility:{action:"collect",target:{key:food.key,x:38,y:40},plannedCargo:n,route:[]}});
   const tick=at=>{environment.simSeconds=at;game.prepare(at);game.tick(1);};return {game,agent,food,tick,environment};
 }
 

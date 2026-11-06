@@ -2,7 +2,6 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { createCombat } from "./combat.mjs";
 import { combatPrimary, combatProfile, combatDamage } from "./combat-stats.mjs";
-import { applyAgentGrowth } from "./growth.mjs";
 
 function unit(id, ownerId, primary) {
   return { id, ownerId, tribe: "bean", combatDisposition: "aggressive", combatPrimary: primary,
@@ -103,17 +102,13 @@ test("chronological combat is independent of update order and step subdivision",
 });
 
 
-test("growth increases RPG attack without injury penalty or attribute double counting", () => {
+test("RPG attack applies attributes once without injury penalty", () => {
   const agent = unit("a", "left", "blade"), target = unit("b", "right", null);
   agent.slots = ["blade"]; agent.attributeLevels = { blade: 1 };
-  applyAgentGrowth(agent, 0);
   const before = combatProfile(agent), damage = combatDamage(agent, target, .5);
   assert.equal(before.attackPower, 12 + 20 * .35 + 12);
-  agent.growthActivity = 243; applyAgentGrowth(agent, 0);
-  assert.ok(combatProfile(agent).attackPower > before.attackPower);
-  assert.ok(combatDamage(agent, target, .5) > damage);
-  const grownDamage = combatDamage(agent, target, .5); agent.health = 1;
-  assert.equal(combatDamage(agent, target, .5), grownDamage);
+  agent.health = 1;
+  assert.equal(combatDamage(agent, target, .5), damage);
   agent.stats.attackSpeed = 100; assert.equal(combatProfile(agent).attackSpeed, 4);
   agent.stats.attackSpeed = -1; assert.ok(Math.abs(combatProfile(agent).attackInterval - .95) < 1e-12);
 });

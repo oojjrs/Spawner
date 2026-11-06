@@ -6,7 +6,6 @@ import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
 import { attributeCounts, COMBAT_ATTRIBUTE_KEYS } from "../server/attributes.mjs";
 import { hasCombatEvolution } from "./combat-attributes.mjs";
-import { agentGrowth, AGENT_GROWTH_THRESHOLDS } from "../server/growth.mjs";
 
 const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
 
@@ -49,14 +48,13 @@ function rendering() {
   return { context, counts, strokes, contourTurns };
 }
 
-test("첫 탄생과 성장 단계의 첫 표시에서는 이미지 합성과 윤곽 계산을 반복하지 않는다", async () => {
+test("첫 탄생과 반복 표시에서는 이미지 합성과 윤곽 계산을 반복하지 않는다", async () => {
   const render = rendering();
   const template = { slots: ["feet", "antenna", "strength"] };
   await render.context.prepareAgentTemplate(template);
   const prepared = { ...render.counts };
-  for (const time of AGENT_GROWTH_THRESHOLDS) {
-    const growth = agentGrowth({ slots: template.slots, bornAt: 0, growthActivity: 0 }, time);
-    const attributes = attributeCounts(growth.activeSlots);
+  for (let frame = 0; frame < 10; frame++) {
+    const attributes = attributeCounts(template.slots);
     const layers = ["body", ...(attributes.feet ? ["feet-left", "feet-right"] : []),
       ...(attributes.antenna ? ["antenna"] : ["sprout-left", "sprout-right", "sprout-stem"])];
     for (const layer of layers) {

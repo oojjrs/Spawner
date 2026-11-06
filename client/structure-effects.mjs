@@ -1,5 +1,10 @@
 import { nestGrowthAnimation } from "./nest-growth.mjs";
 
+export const STRUCTURE_EFFECT_ASSETS = Object.freeze({
+  ring: "DesignAssets/Effects/LevelUp/ring.png",
+  sparkle: "DesignAssets/Effects/LevelUp/sparkle.png"
+});
+
 const durations = { complete: 1.35, damage: .32, destroy: 1.05 };
 
 export function createStructureEffectPlayback() {

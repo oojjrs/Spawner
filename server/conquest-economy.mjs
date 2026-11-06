@@ -2,19 +2,15 @@ import { CONQUEST_PACING, TRIBE_PACING, colonyWorkerShare, aiUpgradeReadyAt } fr
 import { NEST_LEVELS, nestUpgradeCost } from "./nests.mjs";
 import { birthCost, attributeUpgradeCost, attributeLevelLimit } from "./attributes.mjs";
 import { TRIBE_STARTING_UNITS } from "./tribe-start.mjs";
-import { growthThreshold } from "./growth.mjs";
 import { attributeCounts, unitStats, unitCarryCapacity, unitTravelSpeed } from "./attributes.mjs";
 import { RESOURCE_ECONOMY } from "./economy.mjs";
 import { resourceHarvestMultiplier } from "./resources.mjs";
-import { AGENT_GROWTH_BONUSES } from "./growth.mjs";
 
-export function colonyWorkerRate(tribe,slots,levels,distance,unitLevel) {
+export function colonyWorkerRate(tribe,slots,levels,distance) {
  const resource=RESOURCE_ECONOMY.find(entry=>entry.tribe===tribe),attributes=attributeCounts(slots,levels),stats=unitStats(attributes,tribe);
- const bonus=AGENT_GROWTH_BONUSES[unitLevel-1];
- stats.movementMultiplier=(stats.movementMultiplier??1)*bonus.movementMultiplier;
  const agent={tribe,attributes,stats,carryingType:resource.key};
  const capacity=unitCarryCapacity(agent,resource.key),outward=distance/unitTravelSpeed(agent,0,resource.key),inward=distance/unitTravelSpeed(agent,capacity,resource.key);
- const harvest=capacity*resource.harvestSeconds*resourceHarvestMultiplier(resource.key,attributes,tribe)/bonus.harvestSpeedMultiplier;
+ const harvest=capacity*resource.harvestSeconds*resourceHarvestMultiplier(resource.key,attributes,tribe);
  return {capacity,seconds:outward+inward+harvest+2,perSecond:capacity/(outward+inward+harvest+2)};
 }
 
@@ -22,16 +18,15 @@ export function simulateConquestBuild(tribe,policy,distance) {
  const profile=TRIBE_PACING[tribe],expert=policy==="expert",basic=policy==="basic",tempo=profile.tempo;
  const units=[],milestones=[{level:1,seconds:0}],history=[],purchases=new Set();let points=0,level=1,spent=0,delivered=0,nextBirth=0;
  const make=(slots,attributeLevels,role,now)=>{
-  const stats=unitStats(attributeCounts(slots,attributeLevels),tribe),unit={slots,attributeLevels,role,bornAt:now,growthActivity:0};
-  const rate=colonyWorkerRate(tribe,slots,attributeLevels,distance,1);unit.nextDeliveryAt=now+rate.seconds;units.push(unit);
+  const unit={slots,attributeLevels,role,bornAt:now};
+  const rate=colonyWorkerRate(tribe,slots,attributeLevels,distance);unit.nextDeliveryAt=now+rate.seconds;units.push(unit);
  };
  for(const slots of TRIBE_STARTING_UNITS[tribe])make(slots,{},"worker",0);
  for(let now=1;now<=2400;now++){
   const carryDistance=distance*(level>=3?(expert?.55:.7):1);
   for(const unit of units){if(unit.role!=="worker"||now<unit.nextDeliveryAt)continue;
-   let unitLevel=1;while(unitLevel<10&&unit.growthActivity>=growthThreshold(unitLevel+1))unitLevel++;
-   const rate=colonyWorkerRate(tribe,unit.slots,unit.attributeLevels,carryDistance,unitLevel);
-   points=Math.min(NEST_LEVELS[level-1].pointCapacity,points+rate.capacity);delivered+=rate.capacity;unit.growthActivity+=rate.capacity*5;
+   const rate=colonyWorkerRate(tribe,unit.slots,unit.attributeLevels,carryDistance);
+   points=Math.min(NEST_LEVELS[level-1].pointCapacity,points+rate.capacity);delivered+=rate.capacity;
    unit.nextDeliveryAt=now+rate.seconds/(basic?.45:expert?.9:.75);
   }
   const young=units,workers=young.filter(unit=>unit.role==="worker");

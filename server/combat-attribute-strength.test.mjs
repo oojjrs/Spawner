@@ -2,7 +2,6 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { ATTRIBUTES, COMBAT_ATTRIBUTE_KEYS, attributeCounts, unitStats } from "./attributes.mjs";
 import { combatDamage, combatProfile, migrateCombatStats, unitCombatStats } from "./combat-stats.mjs";
-import { applyAgentGrowth } from "./growth.mjs";
 import { codexAttributeEffect } from "../client/codex-content.mjs";
 
 for (const tribe of ["bean", "spore", "pebble", "spring"]) {
@@ -41,22 +40,17 @@ test("속성 조합은 순서·중복·옛 강화 단계에 따라 기본 전투
   assert.equal(unitStats(attributeCounts(["antenna", "feet", "strength", "lifespan"]), "bean").combatStrength, unitCombatStats("bean").combatStrength);
 });
 
-test("이전 저장 마이그레이션과 성장 재산출이 전투 속성 보너스·부상 체력을 보존한다", () => {
+test("이전 저장 마이그레이션이 전투 속성 보너스·부상 체력을 보존한다", () => {
   for (const key of COMBAT_ATTRIBUTE_KEYS) {
     const attributes = attributeCounts([key]), stats = unitStats(attributes, "bean");
     const agent = { tribe: "bean", slots: [key], attributes, attributeLevels: { [key]: 1 },
-      health: 43, lifespan: stats.lifespan, growthActivity: 100, stats: { ...stats, combatStrength: 20 } };
+      health: 43, lifespan: stats.lifespan, stats: { ...stats, combatStrength: 20 } };
     migrateCombatStats(agent);
     assert.equal(agent.stats.combatStrength, stats.combatStrength);
     assert.equal(agent.health, 43);
     migrateCombatStats(agent);
     assert.equal(agent.stats.combatStrength, stats.combatStrength);
     assert.equal(agent.health, 43);
-    applyAgentGrowth(agent, 0);
-    assert.ok(agent.stats.combatStrength > stats.combatStrength);
-    const grown = agent.stats.combatStrength;
-    assert.equal(applyAgentGrowth(agent, 1), false);
-    assert.equal(agent.stats.combatStrength, grown);
     assert.equal(agent.health, 43);
   }
   const creature = { species: "talon-owl", attributes: { blade: 1 }, health: 43, stats: { health: 100, combatStrength: 0 } };

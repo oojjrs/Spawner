@@ -3136,50 +3136,6 @@ const CREATURE_ATTACK_TIMINGS = Object.freeze({
 
 return { CREATURE_ATTACK_TIMINGS };
 })();
-modules["server/experience.mjs"] = (() => {
-const { ENCOUNTER_TYPES } = modules["server/encounter-types.mjs"];
-const { unitCombatStats } = modules["server/combat-stats.mjs"];
-
-const AGENT_EXPERIENCE = Object.freeze({ exploration: .1, discovery: 5, harvest: 2, delivery: 3, damage: .1, kill: 5 });
-
-const encounters = new Map(ENCOUNTER_TYPES.map(type => [type.key, type]));
-
-function addAgentExperience(agent, amount) {
-  if (!agent || !Number.isFinite(amount) || amount <= 0) return;
-  const previous = Number.isFinite(agent.growthActivity) ? Math.max(0, agent.growthActivity) : 0;
-  agent.growthActivity = Math.round((previous + amount) * 1e9) / 1e9;
-}
-
-function combatExperienceMultiplier(target) {
-  if (!target.species) return 1;
-  if (encounters.get(target.species)?.unique) return 4;
-  const strength = unitCombatStats(target.species).combatStrength;
-  return strength <= 15 ? .5 : strength >= 36 ? 2 : 1;
-}
-
-function recordCombatExperience(attacker, target, damage, agents) {
-  if (!attacker || !Number.isFinite(damage) || damage <= 0 ||
-    attacker.ownerId && attacker.ownerId === target.ownerId) return;
-  const multiplier = combatExperienceMultiplier(target);
-  if (attacker.ownerId && !attacker.species) addAgentExperience(attacker, damage * AGENT_EXPERIENCE.damage * multiplier);
-  if (!Array.isArray(target.experienceContributions)) target.experienceContributions = [];
-  let contribution = target.experienceContributions.find(entry => entry.agentId === attacker.id);
-  if (!contribution) {
-    contribution = { agentId: attacker.id, damage: 0 };
-    target.experienceContributions.push(contribution);
-  }
-  contribution.damage += damage;
-  if (target.health > 0 || target.experienceKillAwarded) return;
-  target.experienceKillAwarded = true;
-  const total = target.experienceContributions.reduce((sum, entry) => sum + entry.damage, 0);
-  for (const entry of target.experienceContributions) {
-    const agent = agents.find(agent => agent.id === entry.agentId && agent.ownerId && !agent.species && agent.health > 0);
-    if (agent) addAgentExperience(agent, AGENT_EXPERIENCE.kill * multiplier * entry.damage / total);
-  }
-}
-
-return { AGENT_EXPERIENCE, addAgentExperience, combatExperienceMultiplier, recordCombatExperience };
-})();
 modules["server/survival.mjs"] = (() => {
 const { combatDamage } = modules["server/combat-stats.mjs"];
 const { unitTravelSpeed } = modules["server/attributes.mjs"];
@@ -3321,7 +3277,6 @@ const { BEETLE_ANIMATIONS } = modules["server/beetle-animation.mjs"];
 const { CREATURE_ATTACK_TIMINGS } = modules["server/creature-attack.mjs"];
 const { unitTravelSpeed, unitTerrainSpeedMultiplier } = modules["server/attributes.mjs"];
 const { combatDamage, combatProfile } = modules["server/combat-stats.mjs"];
-const { recordCombatExperience } = modules["server/experience.mjs"];
 const { beginRetreat, combatSurvival, retreatEscapeChance } = modules["server/survival.mjs"];
 const { combatVfxToken, recordCombatVfx } = modules["server/combat-vfx-journal.mjs"];
 
@@ -3552,8 +3507,6 @@ function createCombat(environment) {
     const previousHealth = entry.agent.health;
     if (entry.game) entry.game.receiveDamage(entry.agent, damage);
     else environment.creatureSystem.receiveDamage(entry.agent, damage);
-    recordCombatExperience(attacker, entry.agent, Math.max(0, previousHealth - entry.agent.health),
-      entry.agent.health <= 0 ? entries().map(entry => entry.agent) : []);
     if (entry.agent.health <= 0) { entry.agent.attack = null; entry.agent.attackTargetId = null; }
     if (evidence) {
       const amount = Math.max(0, previousHealth - entry.agent.health);

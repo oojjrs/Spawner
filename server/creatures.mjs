@@ -157,12 +157,15 @@ export function createCreatures(environment, saved) {
             !Number.isFinite(record.nextSpawnAt) || record.nextSpawnAt < 0 ||
             !Number.isSafeInteger(record.spawnCount) || record.spawnCount < 0) throw new Error("굴 저장 형식이 올바르지 않습니다.");
       }
+      for (const record of saved.burrows) delete record.experienceContributions;
       state.burrows = saved.burrows;
       burrowRecords.clear();
       for (const record of state.burrows) burrowRecords.set(record.id, record);
       if (saved.version === 5) state.raidCooldowns = saved.raidCooldowns;
     }
     for (const agent of saved.agents) {
+      delete agent.experienceContributions;
+      delete agent.experienceKillAwarded;
       if (saved.version === 1) {
         agent.health = Math.min(stats.health, agent.health / agent.stats.health * stats.health);
         agent.stats = { ...stats };
@@ -385,6 +388,5 @@ export function createCreatures(environment, saved) {
     get agents() { return [...state.agents, ...encounters.agents]; },
     get signals() { return encounters.signals; },
     get burrows() { return state.burrows.map(record => ({ ...burrowSites.get(record.id), kind: "burrow", health: record.health,
-      experienceContributions: (record.experienceContributions ||= []),
       maxHealth: BURROW_TYPES[burrowSites.get(record.id).type].health })); } };
 }

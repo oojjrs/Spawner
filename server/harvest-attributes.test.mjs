@@ -63,7 +63,7 @@ test("통합한 저장 속성은 중복 슬롯을 합치고 삭제 속성과 옛
   const saved = JSON.parse(game.save());
   saved.state.nestLevel = 4;
   saved.state.templates = [{ id: 99, name: "이전 설계", slots, attributeLevels: levels, unlockedAttributeLevels: levels, revision: 1 }];
-  Object.assign(saved.state.agents[0], { slots, attributeLevels: levels });
+  Object.assign(saved.state.agents[0], { dna: null, slots, attributeLevels: levels });
   game.restore(JSON.stringify(saved));
   const template = game.snapshot().templates[0];
   assert.deepEqual(template.slots, ["blade", "piercing"]);
@@ -86,9 +86,9 @@ function harvesting(tribe, resourceType, slots) {
   const saved = JSON.parse(game.save());
   saved.state.agents.splice(1);
   saved.state.nestLevel = 4;
-  Object.assign(saved.state.agents[0], { x: 46, y: 42, renderFromX: 46, renderFromY: 42, slots, attributeLevels: {},
+  Object.assign(saved.state.agents[0], { dna: null, health: 100, x: 46, y: 42, renderFromX: 46, renderFromY: 42, slots, attributeLevels: {},
     bornAt: 120, birth: null, mode: "approach", moveStartedAt: 0, moveDuration: 0, moveBudget: 0,
-    carrying: 0, carryingType: null, growthActivity: 0, harvestResult: null, decisionPending: null, nextDecisionAt: 1000,
+    carrying: 0, carryingType: null, harvestResult: null, decisionPending: null, nextDecisionAt: 1000,
     utility: { action: "collect", target: { x: 46, y: 42, key: "46,42" }, route: [{ x: 46, y: 42 }], plannedCargo: 1 } });
   game.restore(JSON.stringify(saved));
   return { environment, game, food, agent: game.agents[0] };

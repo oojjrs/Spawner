@@ -87,6 +87,8 @@ export function createEncounters(environment, saved, residents) {
   state.version = 3;
 
   for (const agent of state.agents) {
+    delete agent.experienceContributions;
+    delete agent.experienceKillAwarded;
     if (["soil-mole", "snare-vine"].includes(agent.spawn?.kind)) {
       if (agent.mode === "spawn") { agent.mode = "idle"; agent.nextActionAt = environment.simSeconds; }
       delete agent.spawn;

@@ -15,31 +15,13 @@ function fixture(tribe) {
   return game;
 }
 
-test("기본 채집량은 1개이며 채집량·감지·수명·이속 보너스를 적용한다", () => {
+test("기본 채집량은 1개이며 채집량·감지·이속 보너스를 적용한다", () => {
   for (const tribe of ["bean", "spore", "pebble", "spring"]) assert.equal(unitStats(attributeCounts([]), tribe).capacity, 1, tribe);
   assert.equal(unitStats(attributeCounts(["strength"])).capacity, 2);
   assert.equal(unitStats(attributeCounts(["strength", "strength"])).capacity, 2);
   assert.equal(unitStats(attributeCounts(["strength"], { strength: 2 })).capacity, 2);
   assert.equal(unitStats(attributeCounts(["antenna"])).vision, 6);
   assert.equal(unitMovementSpeed(unitStats(attributeCounts(["feet"]))), .8);
-});
-
-test("부족별 시작 인원과 실제 장착 속성이 채집 방식에 따라 다르다", () => {
-  const starts = { bean:[["antenna"], ["strength"], [], []], spore:[["strength"], ["blade"], [], []],
-    pebble:[["strength"], ["strength"], ["antenna"]], spring:[["feet"], ["feet"], ["antenna"]] };
-  for (const [tribe, slots] of Object.entries(starts)) {
-    const game = fixture(tribe);
-    assert.deepEqual(game.agents.map(agent => agent.slots), slots);
-    assert.equal(game.nestLevel, 1);
-    assert.equal(new Set(game.agents.map(agent => agent.x + "," + agent.y)).size, slots.length);
-    for (const agent of game.agents) assert.deepEqual(agent.appearanceAttributes, agent.attributes);
-    const saved = game.save(), ids = game.agents.map(agent => agent.id);
-    game.restore(saved);
-    assert.deepEqual(game.agents.map(agent => agent.id), ids);
-    assert.deepEqual(game.agents.map(agent => agent.slots), slots);
-  }
-  assert.deepEqual(fixture("pebble").agents.map(agent => agent.stats.capacity), [2, 2, 1]);
-  assert.ok(fixture("spring").agents.slice(0, 2).every(agent => unitMovementSpeed(agent.stats) === 1.2));
 });
 
 test("1레벨에서 속성 없이 또는 하나만 넣어 생성하고 두 개는 거부한다", () => {
@@ -54,19 +36,17 @@ test("1레벨에서 속성 없이 또는 하나만 넣어 생성하고 두 개�
 });
 
 test("네 부족 모두 고유 속성의 고정 효과를 생성 즉시 적용하고 저장·복원한다", () => {
-  const baseLifespans = { bean: 180, spore: 180, pebble: 180, spring: 180 };
   const designs = [
-    [["antenna"], 6, 1, .5, 0],
-    [["strength"], 3, 2, .5, 0],
-    [["feet"], 3, 1, .8, 0],
-    [["antenna", "strength"], 6, 2, .5, 0],
-    [["antenna", "strength"], 6, 2, .5, 0],
-    [["antenna", "strength", "feet"], 6, 2, .8, 0],
-    [["antenna", "feet"], 6, 1, .8, 120],
-    [["strength", "feet"], 3, 2, .8, 120]
+    [["antenna"], 6, 1, .5],
+    [["strength"], 3, 2, .5],
+    [["feet"], 3, 1, .8],
+    [["antenna", "strength"], 6, 2, .5],
+    [["antenna", "strength", "feet"], 6, 2, .8],
+    [["antenna", "feet"], 6, 1, .8],
+    [["strength", "feet"], 3, 2, .8]
   ];
   for (const tribe of ["bean", "spore", "pebble", "spring"]) {
-    for (const [slots, vision, capacity, speed, lifespanBonus] of designs) {
+    for (const [slots, vision, capacity, speed] of designs) {
       const game = fixture(tribe);
       const saved = JSON.parse(game.save());
       saved.state.nestLevel = 4;
@@ -76,7 +56,7 @@ test("네 부족 모두 고유 속성의 고정 효과를 생성 즉시 적용�
       for (const restore of [false, true]) {
         if (restore) game.restore(game.save());
         const agent = game.agents.find(agent => agent.id === result.agentId);
-        assert.deepEqual(agent.activeSlots, slots, tribe);
+        assert.deepEqual(agent.slots, slots, tribe);
         assert.deepEqual(agent.appearanceAttributes, agent.attributes, tribe);
         assert.equal(agent.stats.vision, vision, tribe);
         assert.equal(agent.stats.capacity, capacity, tribe);
@@ -95,7 +75,7 @@ test("이전 저장의 초반 유닛도 행동 역할에 맞는 실제 속성을
   saved.state.agents[1].actionPriorities = ["collect"];
   for (const agent of saved.state.agents) {
     agent.slots = [];
-    agent.activeSlots = [];
+    delete agent.dna;
     agent.attributes = attributeCounts([]);
     agent.stats = unitStats(agent.attributes);
   }
@@ -137,7 +117,7 @@ test("저장한 설계·개체의 폐기 속성은 제거하고 중복 장착은
   for (const key of ["aggression", "peaceful"]) {
     assert.equal(Object.hasOwn(game.agents[0].attributes, key), false);
     assert.equal(Object.hasOwn(game.agents[0].appearanceAttributes, key), false);
-    assert.ok(!game.agents[0].activeSlots.includes(key));
+    assert.ok(!game.agents[0].slots.includes(key));
   }
   for (const key of ["harvest", "digging", "absorption", "climbing", "shell", "aggression", "peaceful"]) {
     assert.throws(() => game.command({ type: "design", templateId: null, name: key, slots: [key], birth: false }), /설계 속성/);

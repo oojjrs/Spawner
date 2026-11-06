@@ -11,7 +11,6 @@ import { BEETLE_ANIMATIONS } from "./beetle-animation.mjs";
 import { CREATURE_ATTACK_TIMINGS } from "./creature-attack.mjs";
 import { unitTravelSpeed, unitTerrainSpeedMultiplier } from "./attributes.mjs";
 import { combatDamage, combatProfile } from "./combat-stats.mjs";
-import { recordCombatExperience } from "./experience.mjs";
 import { beginRetreat, combatSurvival, retreatEscapeChance } from "./survival.mjs";
 import { combatVfxToken, recordCombatVfx } from "./combat-vfx-journal.mjs";
 
@@ -242,8 +241,6 @@ export function createCombat(environment) {
     const previousHealth = entry.agent.health;
     if (entry.game) entry.game.receiveDamage(entry.agent, damage);
     else environment.creatureSystem.receiveDamage(entry.agent, damage);
-    recordCombatExperience(attacker, entry.agent, Math.max(0, previousHealth - entry.agent.health),
-      entry.agent.health <= 0 ? entries().map(entry => entry.agent) : []);
     if (entry.agent.health <= 0) { entry.agent.attack = null; entry.agent.attackTargetId = null; }
     if (evidence) {
       const amount = Math.max(0, previousHealth - entry.agent.health);

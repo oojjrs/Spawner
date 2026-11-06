@@ -1,7 +1,7 @@
 import { createUnitIndex } from "../server/unit-index.mjs";
 
 function decisionSignature(agent) {
-  return JSON.stringify([agent.x, agent.y, agent.carrying, agent.carryingType, agent.level, agent.attributes,
+  return JSON.stringify([agent.x, agent.y, agent.carrying, agent.carryingType, agent.attributes,
     agent.utility?.action, agent.utility?.target?.key, agent.utility?.defending, agent.defenseRevision || 0,
     agent.survivalState, Boolean(agent.retreat), agent.retreat?.recoverHealth, agent.suspendedWork?.target?.key, agent.birth?.readyAt]);
 }

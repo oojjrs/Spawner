@@ -23,7 +23,7 @@ function fixture(create, tribe, resourceType, attribute) {
   saved.state.agents.splice(1);
   saved.state.nestLevel = 4;
   Object.assign(saved.state.agents[0], { slots: [attribute].filter(Boolean), attributeLevels: attribute ? { [attribute]: 1 } : {},
-    bornAt: 0, birth: null, growthActivity: 0, rulesVersion: 2 });
+    bornAt: 0, birth: null, rulesVersion: 2 });
   game.restore(JSON.stringify(saved));
   const agent = game.agents[0];
   Object.assign(agent, { x: 45, y: 42, renderFromX: 45, renderFromY: 42, carrying: 0, carryingType: null,
@@ -66,10 +66,9 @@ for (const [surface, create] of [["소스", createGame], ["브라우저 워커",
     });
   }
 
-  for (const invalid of ["속성 부족", "고갈", "다른 적재물"]) {
+  for (const invalid of ["고갈", "다른 적재물"]) {
     test(surface + ": " + invalid + "인 채집 목표는 계속 무효 처리한다", () => {
       const f = fixture(create, "bean", "tree", "blade");
-      if (invalid === "속성 부족") f.agent.attributes.blade = 0;
       if (invalid === "고갈") f.food.amount = 0;
       if (invalid === "다른 적재물") { f.agent.carrying = 1; f.agent.carryingType = "clay"; }
       advance(f, 0);

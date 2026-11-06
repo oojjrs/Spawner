@@ -304,7 +304,6 @@
       sprite.src = assetSource(animation.image);
       return [animation.resourceType, { ...animation, sprite }];
     }));
-    const agentLevelUpPlayback = Spawner.createAgentLevelUpPlayback();
     const harvestPlayback = Spawner.createHarvestPlayback();
     const harvestDisplay = { time: null, agents: null, rivals: null, cells: new Map(), poses: new Map() };
     const burrowAppearances = new Map([
@@ -468,9 +467,9 @@
     }));
     const attackSheet = new Image();
     attackSheet.src = assetSource(AGENT_ATTACK_ASSET);
-    const agentLevelUpSprites = Object.fromEntries(["ring", "sparkle"].map(key => {
+    const structureEffectSprites = Object.fromEntries(["ring", "sparkle"].map(key => {
       const sprite = new Image();
-      sprite.src = assetSource(Spawner.AGENT_LEVEL_UP[key]);
+      sprite.src = assetSource(Spawner.STRUCTURE_EFFECT_ASSETS[key]);
       return [key, sprite];
     }));
     const sporeBirthSheet = new Image();
@@ -3501,7 +3500,7 @@
         const effect = structureEffectPlayback.effects.get(key + suffix);
         if (!effect) continue;
         const pose = Spawner.structureEffectPose(effect, time, idleMotion.matches);
-        structureEffectRendering.draw(ctx, agentLevelUpSprites, pose, sprite, frame, x, y, width, height, foreground);
+        structureEffectRendering.draw(ctx, structureEffectSprites, pose, sprite, frame, x, y, width, height, foreground);
       }
     }
 
@@ -5447,11 +5446,7 @@
         ctx.restore();
         return;
       }
-      const levelUp = Spawner.agentLevelUpPose(agentLevelUpPlayback, agent, state.simSeconds, idleMotion.matches);
-      const levelUpAnchor = { x: topLeft.x + cell / 2, y: topLeft.y + cell * .82 };
-      Spawner.drawAgentLevelUp(ctx, agentLevelUpSprites, levelUp, levelUpAnchor, cell, false);
       drawAgentAppearance(ctx, now, agent, cell, topLeft, renderPosition, birth, objectOutlineColor("agent", agent));
-      Spawner.drawAgentLevelUp(ctx, agentLevelUpSprites, levelUp, levelUpAnchor, cell, true);
     }
 
     function drawAgentHeldHurt(context, agent, cell, x, y, outlineColor, externalScale = unitDisplayScale(agent)) {
@@ -7119,7 +7114,7 @@
         openCodex("nest:colony");
         return;
       }
-      const slots = selected.target.activeSlots || selected.target.slots || [];
+      const slots = selected.target.slots || [];
       const attribute = slots.find(key => ATTRIBUTES.some(value => value.key === key)) || ATTRIBUTES[0].key;
       openCodex("attribute:" + attribute);
     });
@@ -7520,9 +7515,9 @@
       if (unitPanel.hidden) return;
       collapseControlsGuide();
       if (!agent) return;
-      unitPanelTitle.textContent = agent.name + " · Lv." + (agent.level || 1);
+      unitPanelTitle.textContent = agent.name;
       const attributes = document.getElementById("agent-attributes");
-      const slots = agent.activeSlots || agent.slots || [];
+      const slots = agent.slots || [];
       const signature = JSON.stringify([agent.tribe, agent.species, slots, agent.attributeLevels, agent.attributes, agent.dna]);
       if (attributes.dataset.signature !== signature) {
         attributes.dataset.signature = signature;
@@ -7657,11 +7652,7 @@
         const birth = agentBirthPose(agent, true);
         const cell = size * (birth?.seedVisible ? .38 : .75) * scale;
         const topLeft = { x: (bounds.width - cell) / 2, y: bounds.height * .93 - cell * (.5 + AGENT_HEIGHT * .44) };
-        const levelUp = Spawner.agentLevelUpPose(agentLevelUpPlayback, agent, state.simSeconds, idleMotion.matches);
-        const levelUpAnchor = { x: bounds.width / 2, y: bounds.height * .88 };
-        Spawner.drawAgentLevelUp(context, agentLevelUpSprites, levelUp, levelUpAnchor, size * .55, false);
         drawAgentAppearance(context, now, agent, cell, topLeft, interpolatedAgentPosition(agent), birth, null);
-        Spawner.drawAgentLevelUp(context, agentLevelUpSprites, levelUp, levelUpAnchor, size * .55, true);
       }
     }
 
@@ -7723,7 +7714,7 @@
         if (corpse) {
           button.setAttribute("aria-label", agent.name + "의 사체 위치 보기");
           updatePanelText(entry.name, agent.name);
-          updatePanelText(entry.mode, "Lv." + (agent.level || 1) + " · 사체");
+          updatePanelText(entry.mode, "사체");
           entry.mode.title = "";
           updatePanelText(entry.carry, "");
           continue;
@@ -7731,7 +7722,7 @@
 
         button.setAttribute("aria-label", agent.name + " 선택");
         updatePanelText(entry.name, agent.name);
-        updatePanelText(entry.mode, "Lv." + (agent.level || 1) + " · " + (AGENT_MODE_LABELS[agent.mode] || agent.mode));
+        updatePanelText(entry.mode, AGENT_MODE_LABELS[agent.mode] || agent.mode);
         entry.mode.title = "";
         updatePanelText(entry.carry, (agent.carrying > 0 ? Spawner.resourceDefinition(agent.carryingType || "honey-mushrooms").name + " " : "운반 ") +
           agent.carrying + "/" + (Spawner.unitCarryCapacity(agent, agent.carryingType) + (hasSynergy(agent.attributes, ["strength", "strength"]) ? 4 : 0)));
@@ -10483,7 +10474,6 @@
       Object.assign(state, view);
       if (!firstSnapshot && !state.ending) state.simSeconds = renderedAt;
       syncAgentMovements([...state.agents, ...state.rivals], packet.state.simSeconds, firstSnapshot);
-      Spawner.syncAgentLevelUpPlayback(agentLevelUpPlayback, [...state.agents, ...state.rivals], packet.state.simSeconds, firstSnapshot);
       Spawner.syncNestGrowthPlayback(nestGrowthPlayback, colonyEntries, state.simSeconds, firstSnapshot);
       Spawner.syncStructureEffectPlayback(structureEffectPlayback, colonyEntries,
         view.burrows || worldMap.burrows, state.simSeconds, firstSnapshot, packet.state.simSeconds);

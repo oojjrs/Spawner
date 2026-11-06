@@ -4,7 +4,6 @@ import { ATTRIBUTE_DNA } from "./dna.mjs";
 import { validateDna, cloneDna, dnaUnitStats, dnaCanMove } from "./dna-unit.mjs";
 import { createGame } from "./game.mjs";
 import { birthCost } from "./attributes.mjs";
-import { applyAgentGrowth } from "./growth.mjs";
 import { canHarvestResource } from "./resources.mjs";
 import { createCombat } from "./combat.mjs";
 import { unitDisplaySize } from "../client/unit-size.mjs";
@@ -119,7 +118,7 @@ test("DNA 저장·탄생·수정·복제·복원은 원본 개체의 서열과 �
   assert.deepEqual(agent.dna,original);
   const copy=game.command({type:"birth",agentId});assert.deepEqual(game.agents.find(item=>item.id===copy.agentId).dna,original);
   game.restore(game.save());const restored=game.agents.find(item=>item.id===agentId);assert.deepEqual(restored.dna,original);
-  restored.growthActivity=100;applyAgentGrowth(restored,0);assert.deepEqual(restored.stats.dna,ATTRIBUTE_DNA.stats(dna.pieces));
+  assert.deepEqual(restored.stats.dna,ATTRIBUTE_DNA.stats(dna.pieces));
   assert.equal(unitDisplaySize(restored),unitDisplaySize({tribe:"bean"})*1.02);
 });
 

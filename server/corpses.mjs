@@ -1,7 +1,7 @@
 export const CORPSE_LIFETIME = 3;
 
 export function placeCorpse(food, corpse) {
-  for (const key of ["resourceType", "amount", "initialAmount", "carapaceAmount"]) delete corpse[key];
+  for (const key of ["resourceType", "amount", "initialAmount", "carapaceAmount", "level", "growthActivity", "experienceContributions", "experienceKillAwarded"]) delete corpse[key];
   for (const key of ["attributes", "appearanceAttributes"]) {
     if (!corpse[key]) continue;
     delete corpse[key].butchery;

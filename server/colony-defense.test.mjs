@@ -18,7 +18,7 @@ for (const [name, source, entry] of [["게임 워커", worker, "client/worker.mj
 }
 
 function fixture(api, mode, victim) {
-  const colony = { id: 1, ownerId: "defenders", tribe: "bean", x: 10, y: 10, occupiedCells: new Set(["2,2"]) };
+  const colony = { id: 1, ownerId: "defenders", tribe: "bean", x: 11, y: 10, occupiedCells: new Set(["2,2"]) };
   const tree = { x: 18, y: 12, amount: 12, initialAmount: 12, resourceType: "tree", kind: "resource" };
   const environment = { simSeconds: 0, hostId: colony.ownerId, colonies: [colony], games: new Map(),
     food: new Map([["18,12", tree]]), foodSpots: new Map(),
@@ -30,13 +30,13 @@ function fixture(api, mode, victim) {
   saved.state.nestLevel = 2;
   saved.state.evolutionPoints = 20;
   saved.state.agents.splice(2);
-  Object.assign(saved.state.agents[0], { slots: ["feet", "blade"], attributeLevels: { feet: 1, blade: 1 },
+  Object.assign(saved.state.agents[0], { dna: null, slots: ["feet", "blade"], attributeLevels: { feet: 1, blade: 1 },
     rulesVersion: 2, productionRole: "military" });
   game.restore(JSON.stringify(saved));
   const [soldier, ally] = game.agents;
   for (const agent of game.agents) Object.assign(agent, { birth: null, bornAt: 0, lifespan: 360,
     health: agent.stats.health, decisionPending: null, nextDecisionAt: 1000, knownEnemyIds: new Set(["beetle"]),
-    survivalState: "stable", moveStartedAt: 0, moveDuration: 0, moveBudget: 0, growthActivity: 0 });
+    survivalState: "stable", moveStartedAt: 0, moveDuration: 0, moveBudget: 0 });
   Object.assign(ally, { x: 13, y: 13, renderFromX: 13, renderFromY: 13, utility: null });
   Object.assign(soldier, { x: 18, y: 12, renderFromX: 18, renderFromY: 12, mode,
     carrying: mode === "return" ? 1 : 0, carryingType: mode === "return" ? "tree" : null,
@@ -225,7 +225,7 @@ for (const [surface, api] of surfaces) {
 }
 
 test("일반 전투와 같은 목표라도 방어 전환 전의 판단 결과는 적용하지 않는다", () => {
-  const agent = { id: "one", x: 1, y: 1, health: 100, carrying: 0, attributes: {}, level: 1,
+  const agent = { id: "one", x: 1, y: 1, health: 100, carrying: 0, attributes: {},
     utility: { action: "fight", target: { key: "beetle" }, defending: false } };
   let candidates = [{ action: "return" }], calls = 0;
   const game = { agents: [agent], planDecisions(requests) {
@@ -249,7 +249,7 @@ test("일반 전투와 같은 목표라도 방어 전환 전의 판단 결과는
 
 
 test("방어 전의 판단 결과는 같은 채집 작업에 복귀한 뒤에도 적용하지 않는다", () => {
-  const agent = { id: "one", x: 1, y: 1, health: 100, carrying: 0, attributes: {}, level: 1,
+  const agent = { id: "one", x: 1, y: 1, health: 100, carrying: 0, attributes: {},
     utility: { action: "collect", target: { key: "18,12" } }, defenseRevision: 0 };
   let candidates = [{ action: "explore" }], calls = 0;
   const game = { agents: [agent], planDecisions(requests) {
