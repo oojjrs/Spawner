@@ -1,3 +1,7 @@
+## 포자버섯 채집형 승인 원화 보존 · 2026-11-06T14:38:27+00:00
+
+- 기록자 Codex /root/investigate_sheep_walk, 결정 주체 사용자. 출처 채팅6ae7a6f41c94819380facdaa018ca2b0, 승인 Sentinel_e2778201088c8191be73cae3eee1acfb 및 대상정정 Sentinel_99231086cb8c8191b346bd5cecbaa3b1, 부모/count_all_assets 인계. 원발언시각 불명. 승인 원화1254×1254 PNG만 보존, 애니 승인 아님. 기존 기획서 채집량은 다종족 공용속성행이며 이 원화 전용셀을 확인하지 못해 임의 위치추가·기존 공용이미지 교체하지 않음. 게임소스·배포 변경 없음.
+
 ## 솜양 승인 걷기 V4 누락 복구 · 2026-11-06T14:37:09+00:00
 
 - 기록자 Codex /root/investigate_sheep_walk, 결정 주체 사용자. 출처 채팅6ae7a6f41c94819380facdaa018ca2b0, 승인 Sentinel_fb11b9e0cb40819180dd21aa7bbcbc25, 재진단 Sentinel_7733ed56ac208191b68f2a64487ebf5c. 원발언 시각 불명. 승인64프레임은 임시검토본으로만 남고 main/기획서는 11월4일 구형8프레임을 참조했음을 확인했다.
