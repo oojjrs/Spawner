@@ -1,0 +1,2 @@
+import fs from 'node:fs';import {springBirthMotion,springBirthPlacement,SPRING_BIRTH_ANIMATION} from '../../Spawner-publish-current/client/birth.mjs';
+const frames=[];for(let i=0;i<60;i++){const t=Math.min(i/30,1.78);frames.push({t,motion:springBirthMotion(t),placement:springBirthPlacement(t,{x:256-(320-86)*180/224,y:310-(448-105)*180/224},{x:256,y:430},180)})}fs.writeFileSync(new URL('birth-runtime-samples.json',import.meta.url),JSON.stringify({source:'client/birth.mjs springBirthMotion + springBirthPlacement',frames},null,2));

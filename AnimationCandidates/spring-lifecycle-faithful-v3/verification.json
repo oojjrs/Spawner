@@ -1,0 +1,299 @@
+{
+  "checks": [
+    {
+      "form": "antenna",
+      "action": "birth",
+      "frame": 10,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 2308
+    },
+    {
+      "form": "antenna",
+      "action": "birth",
+      "frame": 8,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 1646
+    },
+    {
+      "form": "antenna",
+      "action": "birth",
+      "frame": 2,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 0
+    },
+    {
+      "form": "antenna",
+      "action": "birth",
+      "frame": 3,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 0
+    },
+    {
+      "form": "antenna",
+      "action": "birth",
+      "frame": 9,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 2076
+    },
+    {
+      "form": "antenna",
+      "action": "birth",
+      "frame": 7,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 1211
+    },
+    {
+      "form": "antenna",
+      "action": "birth",
+      "frame": 12,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 1858
+    },
+    {
+      "form": "antenna",
+      "action": "birth",
+      "frame": 4,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 0
+    },
+    {
+      "form": "antenna",
+      "action": "birth",
+      "frame": 1,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 0
+    },
+    {
+      "form": "antenna",
+      "action": "birth",
+      "frame": 5,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 0
+    },
+    {
+      "form": "antenna",
+      "action": "birth",
+      "frame": 11,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 1957
+    },
+    {
+      "form": "antenna",
+      "action": "birth",
+      "frame": 0,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 0
+    },
+    {
+      "form": "antenna",
+      "action": "birth",
+      "frame": 6,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 0
+    },
+    {
+      "form": "feet",
+      "action": "birth",
+      "frame": 10,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 678
+    },
+    {
+      "form": "feet",
+      "action": "birth",
+      "frame": 8,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 788
+    },
+    {
+      "form": "feet",
+      "action": "birth",
+      "frame": 2,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 0
+    },
+    {
+      "form": "feet",
+      "action": "birth",
+      "frame": 3,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 0
+    },
+    {
+      "form": "feet",
+      "action": "birth",
+      "frame": 9,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 678
+    },
+    {
+      "form": "feet",
+      "action": "birth",
+      "frame": 7,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 933
+    },
+    {
+      "form": "feet",
+      "action": "birth",
+      "frame": 12,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 596
+    },
+    {
+      "form": "feet",
+      "action": "birth",
+      "frame": 4,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 0
+    },
+    {
+      "form": "feet",
+      "action": "birth",
+      "frame": 1,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 0
+    },
+    {
+      "form": "feet",
+      "action": "birth",
+      "frame": 5,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 0
+    },
+    {
+      "form": "feet",
+      "action": "birth",
+      "frame": 11,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 698
+    },
+    {
+      "form": "feet",
+      "action": "birth",
+      "frame": 0,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 0
+    },
+    {
+      "form": "feet",
+      "action": "birth",
+      "frame": 6,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 0
+    },
+    {
+      "form": "antenna",
+      "action": "death",
+      "frame": 2,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 0
+    },
+    {
+      "form": "antenna",
+      "action": "death",
+      "frame": 3,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 0
+    },
+    {
+      "form": "antenna",
+      "action": "death",
+      "frame": 7,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 0
+    },
+    {
+      "form": "antenna",
+      "action": "death",
+      "frame": 4,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 0
+    },
+    {
+      "form": "antenna",
+      "action": "death",
+      "frame": 1,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 11457
+    },
+    {
+      "form": "antenna",
+      "action": "death",
+      "frame": 5,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 0
+    },
+    {
+      "form": "antenna",
+      "action": "death",
+      "frame": 0,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 11247
+    },
+    {
+      "form": "antenna",
+      "action": "death",
+      "frame": 6,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 0
+    },
+    {
+      "form": "feet",
+      "action": "death",
+      "frame": 2,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 0
+    },
+    {
+      "form": "feet",
+      "action": "death",
+      "frame": 3,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 0
+    },
+    {
+      "form": "feet",
+      "action": "death",
+      "frame": 7,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 0
+    },
+    {
+      "form": "feet",
+      "action": "death",
+      "frame": 4,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 0
+    },
+    {
+      "form": "feet",
+      "action": "death",
+      "frame": 1,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 5317
+    },
+    {
+      "form": "feet",
+      "action": "death",
+      "frame": 5,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 0
+    },
+    {
+      "form": "feet",
+      "action": "death",
+      "frame": 0,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 5328
+    },
+    {
+      "form": "feet",
+      "action": "death",
+      "frame": 6,
+      "bodyChangesOutsideAttachmentRegion": 0,
+      "changedPixels": 0
+    }
+  ],
+  "scope": "Base pixels preserved outside attachment region. Original birth motion sampled; comparison framing differs."
+}

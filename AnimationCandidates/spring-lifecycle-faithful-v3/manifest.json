@@ -1,0 +1,350 @@
+[
+  {
+    "form": "antenna",
+    "action": "birth",
+    "frames": [
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/antenna-birth/000.png",
+        "duration": 130,
+        "size": 236,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/antenna-birth/001.png",
+        "duration": 120,
+        "size": 236,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/antenna-birth/002.png",
+        "duration": 100,
+        "size": 236,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/antenna-birth/003.png",
+        "duration": 100,
+        "size": 236,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/antenna-birth/004.png",
+        "duration": 80,
+        "size": 236,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/antenna-birth/005.png",
+        "duration": 260,
+        "size": 236,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/antenna-birth/006.png",
+        "duration": 80,
+        "size": 236,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/antenna-birth/007.png",
+        "duration": 90,
+        "size": 236,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/antenna-birth/008.png",
+        "duration": 90,
+        "size": 236,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/antenna-birth/009.png",
+        "duration": 100,
+        "size": 236,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/antenna-birth/010.png",
+        "duration": 100,
+        "size": 236,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/antenna-birth/011.png",
+        "duration": 130,
+        "size": 236,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/antenna-birth/012.png",
+        "duration": 410,
+        "size": 236,
+        "patches": []
+      }
+    ]
+  },
+  {
+    "form": "antenna",
+    "action": "death",
+    "frames": [
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/antenna-death/000.png",
+        "duration": 120,
+        "size": 516,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/antenna-death/001.png",
+        "duration": 100,
+        "size": 516,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/antenna-death/002.png",
+        "duration": 140,
+        "size": 516,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/antenna-death/003.png",
+        "duration": 120,
+        "size": 516,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/antenna-death/004.png",
+        "duration": 140,
+        "size": 516,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/antenna-death/005.png",
+        "duration": 100,
+        "size": 516,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/antenna-death/006.png",
+        "duration": 120,
+        "size": 516,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/antenna-death/007.png",
+        "duration": 600,
+        "size": 516,
+        "patches": []
+      }
+    ]
+  },
+  {
+    "form": "feet",
+    "action": "birth",
+    "frames": [
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/feet-birth/000.png",
+        "duration": 130,
+        "size": 236,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/feet-birth/001.png",
+        "duration": 120,
+        "size": 236,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/feet-birth/002.png",
+        "duration": 100,
+        "size": 236,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/feet-birth/003.png",
+        "duration": 100,
+        "size": 236,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/feet-birth/004.png",
+        "duration": 80,
+        "size": 236,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/feet-birth/005.png",
+        "duration": 260,
+        "size": 236,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/feet-birth/006.png",
+        "duration": 80,
+        "size": 236,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/feet-birth/007.png",
+        "duration": 90,
+        "size": 236,
+        "patches": [
+          {
+            "left": 107,
+            "top": 192
+          },
+          {
+            "left": 151,
+            "top": 192
+          }
+        ]
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/feet-birth/008.png",
+        "duration": 90,
+        "size": 236,
+        "patches": [
+          {
+            "left": 110,
+            "top": 194
+          },
+          {
+            "left": 150,
+            "top": 194
+          }
+        ]
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/feet-birth/009.png",
+        "duration": 100,
+        "size": 236,
+        "patches": [
+          {
+            "left": 113,
+            "top": 195
+          },
+          {
+            "left": 151,
+            "top": 195
+          }
+        ]
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/feet-birth/010.png",
+        "duration": 100,
+        "size": 236,
+        "patches": [
+          {
+            "left": 113,
+            "top": 195
+          },
+          {
+            "left": 150,
+            "top": 195
+          }
+        ]
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/feet-birth/011.png",
+        "duration": 130,
+        "size": 236,
+        "patches": [
+          {
+            "left": 112,
+            "top": 195
+          },
+          {
+            "left": 150,
+            "top": 195
+          }
+        ]
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/feet-birth/012.png",
+        "duration": 410,
+        "size": 236,
+        "patches": [
+          {
+            "left": 116,
+            "top": 195
+          },
+          {
+            "left": 153,
+            "top": 195
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "form": "feet",
+    "action": "death",
+    "frames": [
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/feet-death/000.png",
+        "duration": 120,
+        "size": 516,
+        "patches": [
+          {
+            "left": 162,
+            "top": 420
+          },
+          {
+            "left": 268,
+            "top": 420
+          }
+        ]
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/feet-death/001.png",
+        "duration": 100,
+        "size": 516,
+        "patches": [
+          {
+            "left": 160,
+            "top": 421
+          },
+          {
+            "left": 266,
+            "top": 421
+          }
+        ]
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/feet-death/002.png",
+        "duration": 140,
+        "size": 516,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/feet-death/003.png",
+        "duration": 120,
+        "size": 516,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/feet-death/004.png",
+        "duration": 140,
+        "size": 516,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/feet-death/005.png",
+        "duration": 100,
+        "size": 516,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/feet-death/006.png",
+        "duration": 120,
+        "size": 516,
+        "patches": []
+      },
+      {
+        "file": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3/feet-death/007.png",
+        "duration": 600,
+        "size": 516,
+        "patches": []
+      }
+    ]
+  }
+]
