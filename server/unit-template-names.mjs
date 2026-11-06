@@ -6,8 +6,6 @@ const UNIT_TEMPLATE_ROLES = [
   [["piercing"], "관통병"],
   [["strength"], "수송꾼"],
   [["carapace"], "파수꾼"],
-  [["antenna"], "정찰병"],
-  [["feet"], "척후병"],
   [[], "일꾼"]
 ];
 

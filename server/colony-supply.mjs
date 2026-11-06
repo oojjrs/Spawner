@@ -34,7 +34,7 @@ export function colonySupply(state, tribe) {
     incomeObserved:observedSeconds >= 30, forecastBalance:state.evolutionPoints + incomeRate * 120 - reserve };
 }
 
-export function colonyForagers(state, foods, homes, scouts) {
+export function colonyForagers(state, foods, homes) {
   let workers = state.agents.filter(agent => !militaryAgent(agent,agent.tribe) && agent.health >= agent.stats.health * .6 && !agent.retreat && !agent.combat &&
     !(agent.birth?.readyAt > state.simSeconds));
   const ordinary = workers.filter(agent => !HARVEST_ATTRIBUTE_KEYS.some(key => agent.attributes?.[key] > 0));
@@ -54,7 +54,5 @@ export function colonyForagers(state, foods, homes, scouts) {
     return { agent, feasible:Number.isFinite(travel), reachable:Number.isFinite(outward / speed), efficiency };
   }).sort((a,b) => a.efficiency - b.efficiency || String(a.agent.id).localeCompare(String(b.agent.id)));
   const feasible = ranked.filter(entry=>entry.feasible), assigned = feasible.length ? feasible : ranked.filter(entry=>entry.reachable);
-  const unreserved = assigned.filter(entry => !scouts?.has(entry.agent.id));
-  const selected = unreserved.length ? unreserved : assigned;
-  return new Set(selected.slice(0, Math.max(1, Math.ceil(workers.length / 2))).map(entry => entry.agent.id));
+  return new Set(assigned.slice(0, Math.max(1, Math.ceil(workers.length / 2))).map(entry => entry.agent.id));
 }

@@ -120,7 +120,7 @@ test("AI는 알림 확인과 이름 복구에도 같은 관리 명령과 소유�
   assert.throws(()=>game.command({type:"rename-colony",colonyId:2,name:"Other"}),/자신의 둥지/);
 });
 
-test("정찰 개체가 사라지면 정찰 설계를 보충하고 군사는 공격과 지원 조합을 모두 선택한다", () => {
+test("안테나 개체 유무로 정찰을 생산하지 않고 부족한 군사 조합을 선택한다", () => {
   const {game} = fixture("bean",500);
   change(game,state => {
     state.nestLevel=4;state.evolutionPoints=100;state.foodIncomeStartedAt=0;state.foodIncome=[[490,100]];
@@ -128,7 +128,7 @@ test("정찰 개체가 사라지면 정찰 설계를 보충하고 군사는 공�
     state.agents=Array.from({length:12},(_,index)=>({...structuredClone(state.agents[index%state.agents.length]),id:"1:"+(index+1),bornAt:450,productionRole:"worker"}));
   });
   const state=JSON.parse(game.save()).state;
-  assert.equal(tribeProductionTemplate(state,"bean").productionRole,"scout");
+  assert.equal(tribeProductionTemplate(state,"bean").productionRole,"military");
   state.agents[0].slots=["antenna","feet"];
   const military=tribeProductionTemplate(state,"bean");
   assert.equal(military.productionRole,"military");

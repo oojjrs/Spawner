@@ -38,12 +38,12 @@ test("선택한 종족에는 성장과 생산을 자동 실행하지 않는다",
  const before=game.agents.length;assert.equal(game.produce(),null);assert.equal(game.nestLevel,1);assert.equal(game.agents.length,before);
 });
 
-test("목표 편성은 초반 80:20·후반 30:70이며 부족한 정찰을 먼저 보충한다",()=>{
+test("목표 편성은 정찰 전담 없이 초반 80:20·후반 30:70을 따른다",()=>{
  const {game}=fixture(false);const state=JSON.parse(game.save()).state;
  Object.assign(state,{simSeconds:310,nestLevel:2,evolutionPoints:100,foodIncomeStartedAt:0,foodIncome:[[305,60]]});
  const base={...state.agents[0],dna:null};state.agents=Array.from({length:16},(_,index)=>({...base,id:"1:"+(index+1),bornAt:300,lifespan:360,productionRole:"worker",slots:["strength"]}));
  assert.equal(colonyWorkerShare(2,310,"bean"),.8);
- assert.equal(tribeProductionTemplate(state,"bean")?.productionRole,"scout");
+ assert.equal(tribeProductionTemplate(state,"bean")?.productionRole,"military");
  state.agents[0].slots=["antenna","strength"];
  assert.equal(tribeProductionTemplate(state,"bean")?.productionRole,"military");
  Object.assign(state,{simSeconds:1200,nestLevel:4,foodIncome:[[1195,100]]});state.agents=state.agents.slice(0,12).map(agent=>({...agent,bornAt:1190}));
@@ -72,19 +72,5 @@ test("운반 거리를 제외한 경제 모델은 정책별 성장 차이와 AI 
    assert.equal(result.delivered,0);assert.equal(result.spent,0);assert.equal(result.points,0);
    assert.equal(result.workers+result.military,4);
   }
- }
-});
-
-test("고급 정찰과 군사는 정해진 단계 이후 거점 시야 밖 경계로 나갈 수 있다",()=>{
- for(const role of ["scout","military"]){const size=64,explored=new Set();for(let y=0;y<size;y++)for(let x=0;x<50;x++)explored.add(y*size+x);
-  const attributes=role==="scout"?{antenna:1,feet:1}:{blade:1,feet:1};
-  const agent={id:"test",tribe:"bean",productionRole:role==="military"?"military":null,slots:Object.keys(attributes),attributes,
-   x:48,y:32,health:100,cost:5,carrying:0,stepCount:0,bornAt:100,lifespan:360,visited:new Set(),
-   stats:{health:100,speed:1.5,capacity:1,vision:3,attack:1,resistance:1},personality:{boldness:.5,aggression:.5,curiosity:.5}};
-  const at=role==="scout"?160:300,state={simSeconds:at-1,nestLevel:2,evolutionPoints:100,explored,knownFood:new Map(),agents:[agent],markers:[]};
-  const ai=createUtilityAI({state,size,tribe:"bean",permanentVisionSources:()=>[{x:3,y:32,radius:1}],homeCells:()=>[{x:3,y:32}],deliveryCells:()=>[{x:3,y:32}],
-   walkable:(x,y)=>x>=0&&y>=0&&x<50&&y<size,hazardAt:()=>0,enemies:()=>[],synergy:()=>false,canHarvest:()=>true});
-  assert.ok(!ai.evaluate(agent,false).some(plan=>plan.action==="explore"));state.simSeconds=at;
-  assert.ok(ai.evaluate(agent,false).some(plan=>plan.action==="explore"),role);
  }
 });

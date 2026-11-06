@@ -267,6 +267,12 @@ export function createGame(environment, colony, savedGame) {
 
     function initializeAgent(agent) {
       agent.dna = cloneDna(agent.dna);
+      if (agent.productionRole === "scout") agent.productionRole = null;
+      if (agent.utility?.action === "explore" && !/^(enemy|resource)-search:/.test(agent.utility.target?.key || "")) {
+        agent.utility = null;
+        agent.mode = "search";
+        agent.decisionPending = "restore";
+      }
       agent.moveAnimationStartedAt ??= agent.moveStartedAt;
       if (agent.attack?.dnaRanged) { agent.attack = null; agent.attackTargetId = null; }
       agent.dnaHealEvent = null; agent.dnaActionEvent = null; agent.dnaProjectiles = [];
@@ -2077,6 +2083,7 @@ export function createGame(environment, colony, savedGame) {
       state.ending = data.state.ending ? { ...data.state.ending,
         evolutionPoints: Math.floor(data.state.ending.evolutionPoints), colonyFood: Math.floor(data.state.ending.colonyFood) } : null;
       for (const template of state.templates) {
+        if (template.productionRole === "scout") template.productionRole = null;
         template.dna = cloneDna(template.dna);
         template.attributeLevels = migrateAttributeLevels(template.slots, template.attributeLevels, state.nestLevel);
         template.slots = migrateAttributeSlots(template.slots);

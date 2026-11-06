@@ -2,7 +2,7 @@ export const CONQUEST_PACING = Object.freeze({ quietUntil:120, guidanceAt:160, n
   expertLevelFourAt:600, aiLevelFourAt:1200, activePopulation:36, inefficientPopulation:70,
   workerShare:Object.freeze([.8,.65,.45,.3]), nestCosts:Object.freeze([80,200,500,null]),
   attributeCosts:Object.freeze([0,0,8,16,24]), aiUpgradeAt:Object.freeze([0,270,690,1200]),
-  productionInterval:3, frontierSamples:48, preferredScouts:4 });
+  productionInterval:3, frontierSamples:48 });
 
 export const TRIBE_PACING = Object.freeze({
   bean:Object.freeze({tempo:1,population:36,native:null,army:Object.freeze(["blade","carapace","feet"])}),

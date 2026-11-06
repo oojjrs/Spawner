@@ -5,7 +5,6 @@ import { createUtilityAI } from "./utility.mjs";
 import { attributeCounts, unitStats } from "./attributes.mjs";
 
 function fixture(points) {
-  // Pure antenna units are dedicated scouts; supply tests use an ordinary worker.
   const attributes = attributeCounts(["feet"]);
   const agent = { id:"supply", x:4, y:4, bornAt:180, lifespan:180, health:100, cost:8, carrying:0,
     slots:["feet"], attributes, stats:unitStats(attributes, "pebble"), stepCount:0,
@@ -31,7 +30,8 @@ test("최후 개체의 복제 자금이 부족하면 성향보다 안전한 자�
   const rich = f.ai.evaluate(f.agent, true);
   assert.equal(colonySupply(f.state).urgency, 0);
   assert.ok(poor.find(candidate=>candidate.action==="collect").score > rich.find(candidate=>candidate.action==="collect").score);
-  assert.ok(poor.filter(candidate=>candidate.action==="explore")[0].score < rich.filter(candidate=>candidate.action==="explore")[0].score);
+  assert.ok(poor.every(candidate=>candidate.action!=="explore"));
+  assert.ok(rich.every(candidate=>candidate.action!=="explore"));
 });
 
 test("자원을 모르면 수급 위기에도 탐색을 중단하지 않는다", () => {

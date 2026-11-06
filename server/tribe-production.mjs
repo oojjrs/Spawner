@@ -23,8 +23,7 @@ export function tribeProductionTemplate(state,tribe) {
  const workerTarget=militaryAllowed?Math.floor(target*colonyWorkerShare(state.nestLevel,state.simSeconds,tribe)):target;
  const workers=young.filter(agent=>!militaryAgent(agent,tribe)),soldiers=young.filter(agent=>militaryAgent(agent,tribe));
  let role=null;
- if(workers.length>=Math.max(2,Math.floor(workerTarget/2))&&!workers.some(agent=>agent.slots.includes("antenna")))role="scout";
- else if(workers.length<workerTarget)role="worker";
+ if(workers.length<workerTarget)role="worker";
  else if(militaryAllowed&&soldiers.length<target-workerTarget)role="military";
  if(!role)return null;
  const supply=colonySupply(state,tribe),replacing=living.length<initial.length;
@@ -33,7 +32,7 @@ export function tribeProductionTemplate(state,tribe) {
   ["carapace",profile.army[0]]].map(slots=>[...new Set(slots.filter(key=>isAttributeUnlocked(key,state.nestLevel,tribe)))].slice(0,state.nestLevel));
  const count=slots=>soldiers.filter(agent=>slots.every(key=>agent.slots.includes(key))).length;
  const army=armies.filter(slots=>slots.length).sort((first,second)=>count(first)-count(second))[0];
- const slots=role==="scout"?["antenna","feet",profile.native]:role==="worker"?[profile.native,"strength","feet"]:army;
+ const slots=role==="worker"?[profile.native,"strength","feet"]:army;
  const allowed=[...new Set(slots.filter(key=>isAttributeUnlocked(key,state.nestLevel,tribe)))].slice(0,state.nestLevel);
  const template=productionTemplate(allowed,role,state);
  const reserve=replacing?0:supply.reserve;
