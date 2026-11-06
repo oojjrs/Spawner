@@ -1338,7 +1338,7 @@ export function createGame(environment, colony, savedGame) {
       let plan = agent.utility;
       if (agent.stats?.dna?.healer && !agent.stats.dna.melee && !agent.stats.dna.ranged && !agent.carrying && !agent.retreat && !["flee", "recover"].includes(plan?.action)) {
         const supportAgents = environment.unitIndex ? environment.unitIndex.nearby(agent.x, agent.y, agent.stats.vision).map(entry => entry.agent).filter(other => other.ownerId === agent.ownerId) : state.agents;
-        const target = supportAgents.filter(other => other !== agent && other.health > 0 && !other.hidden && other.health < other.stats.health &&
+        const target = supportAgents.filter(other => other !== agent && other.health > 0 && !other.hidden && !other.retreat && other.health < other.stats.health &&
           Math.hypot(other.x - agent.x, other.y - agent.y) <= agent.stats.vision).sort((a, b) => a.health / a.stats.health - b.health / b.stats.health)[0];
         if (target) {
           if (Math.hypot(target.x - agent.x, target.y - agent.y) <= 2) return false;
