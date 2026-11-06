@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { colonyRaidPressure } from "./raid-pressure.mjs";
 
 test("같은 접근로에서는 수급이 느릴수록 첫 도착이 늦고 출정 간격이 길어진다", () => {
-  const slow = colonyRaidPressure(20, 120, [20,40], 120);
+  const slow = colonyRaidPressure(10, 120, [20,40], 120);
   const fast = colonyRaidPressure(40, 120, [20,40], 120);
   assert.ok(slow.arrivalAt > fast.arrivalAt);
   assert.ok(slow.interval > fast.interval);

@@ -1,11 +1,12 @@
 import { nestUpgradeCost } from "./nests.mjs";
-import { birthCost } from "./attributes.mjs";
+import { ATTRIBUTE_DNA } from "./dna.mjs";
+import { PLAYER_STARTING_POINTS } from "./tribe-start.mjs";
 import { CONQUEST_PACING } from "./conquest-pacing.mjs";
 
 export const COLONY_RAID_CADENCE = Object.freeze([
-  Object.freeze({ elapsed:0, fastInterval:120, slowInterval:150, concurrent:2 }),
-  Object.freeze({ elapsed:180, fastInterval:90, slowInterval:120, concurrent:3 }),
-  Object.freeze({ elapsed:420, fastInterval:60, slowInterval:90, concurrent:4 })
+  Object.freeze({ elapsed:0, fastInterval:120, slowInterval:150, concurrent:1 }),
+  Object.freeze({ elapsed:180, fastInterval:90, slowInterval:120, concurrent:2 }),
+  Object.freeze({ elapsed:420, fastInterval:60, slowInterval:90, concurrent:3 })
 ]);
 
 export function colonyRaidCadence(seconds, pressure) {
@@ -20,7 +21,9 @@ export const COLONY_RAID_PRESSURE = Object.freeze({ openingSeconds:120, nearbySe
   fastInterval:60, slowInterval:120, arrivalGrace:35, slowArrivalGrace:105, fundingGrace:20, maximumArrivalAt:300 });
 
 export function colonyRaidPressure(delivered, seconds, approaches, firstAt, tribe) {
-  const investment = nestUpgradeCost(1, tribe) + birthCost({slots:["antenna", "feet"]}, tribe) + birthCost({slots:["strength"]}, tribe);
+  const cost = ids => ATTRIBUTE_DNA.cost(ids.map(gene => ({ gene, grade:ATTRIBUTE_DNA.lookup.get(gene).grade })));
+  const investment = Math.max(1, nestUpgradeCost(1, tribe) + cost(["gather", "capacity", "capacity", "health"]) +
+    2 * cost(["blade", "power", "health", "health", "movement"]) - PLAYER_STARTING_POINTS);
   const rate = delivered * 60 / Math.max(1, seconds);
   const low = investment * 60 / (COLONY_RAID_PRESSURE.openingSeconds * 1.5), high = investment * 60 / COLONY_RAID_PRESSURE.openingSeconds;
   const production = Math.max(0, Math.min(1, (rate - low) / (high - low)));

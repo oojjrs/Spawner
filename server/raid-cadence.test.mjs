@@ -14,7 +14,7 @@ function fixture(restoring) {
 }
 
 test("단계 경계와 압력 양끝·중간은 고정된 간격과 상한을 반환한다",()=>{
-  for(const [time,low,middle,high,concurrent] of [[300,150,135,120,2],[479.999,150,135,120,2],[480,120,105,90,3],[719.999,120,105,90,3],[720,90,75,60,4]]){
+  for(const [time,low,middle,high,concurrent] of [[300,150,135,120,1],[479.999,150,135,120,1],[480,120,105,90,2],[719.999,120,105,90,2],[720,90,75,60,3]]){
     for(const [pressure,interval] of [[0,low],[.5,middle],[1,high],[undefined,middle]])assert.deepEqual(colonyRaidCadence(time,pressure),{interval,concurrent});
   }
   assert.equal(colonyRaidCadence(300,.3).interval,140);
@@ -29,15 +29,15 @@ test("구저장 예약 시각은 보존하며 300초 전에는 실제 출정하�
   assert.equal(state.raidCooldowns[0].nextRaidAt,435);
 });
 
-test("이동 중 개체를 포함한 생존 습격 상한은 2·3·4이며 사망 뒤에만 자리가 빈다",()=>{
+test("이동 중 개체를 포함한 생존 습격 상한은 1·2·3이며 사망 뒤에만 자리가 빈다",()=>{
   const {environment,state,raids}=fixture(false);
-  for(const [time,count] of [[300,1],[305,2],[310,2],[480,3],[485,3],[720,4],[725,4]]){
+  for(const [time,count] of [[300,1],[305,1],[310,1],[480,2],[485,2],[720,3],[725,3]]){
     state.raidCooldowns[0].nextRaidAt=0;environment.simSeconds=time;raids.dispatch();
     assert.equal(state.agents.filter(agent=>agent.health>0&&agent.raid).length,count);
   }
   state.agents.find(agent=>agent.raid).health=0;
   state.raidCooldowns[0].nextRaidAt=0;environment.simSeconds=730;raids.dispatch();
-  assert.equal(state.agents.filter(agent=>agent.health>0&&agent.raid).length,4);
+  assert.equal(state.agents.filter(agent=>agent.health>0&&agent.raid).length,3);
   assert.equal(state.raidCooldowns[0].nextRaidAt,805);
 });
 

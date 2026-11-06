@@ -1,3 +1,4 @@
+import { applyRaidCombatScale } from "./raid-combat-scale.mjs";
 import { CONQUEST_PACING } from "./conquest-pacing.mjs";
 import { worldSize } from "./world-size.mjs";
 import { COLONY_RAID_PRESSURE, colonyRaidPressure, colonyRaidCadence } from "./raid-pressure.mjs";
@@ -147,6 +148,7 @@ export function createBeetleRaids(environment, state, actions, restoring) {
       const cells = path(agent, boundary(colony), false);
       if (!cells) continue;
       agent.raid = { colonyId:colony.id, phase:"outbound", departedAt:now };
+      applyRaidCombatScale(agent, now);
       agent.attackTargetId = null; agent.attackHit = true;
       if (now >= agent.moveStartedAt + agent.moveDuration) actions.idle(agent, 0);
       routes.set(agent.id, { phase:"outbound", path:cells, cursor:1, retryAt:now });

@@ -75,6 +75,7 @@ test("여러 큰 굴이 있어도 한 둥지에는 단계별 간격으로 1마�
     if (!killed) assert.ok(["outbound", "active"].includes(active[0].raid.phase));
     advance(room, system, cooldown);
     const next = system.agents.filter(agent => agent.health > 0 && agent.raid?.departedAt > departed);
+    if (!killed) { assert.equal(next.length, 0); continue; } // Initial phase allows one living raider.
     assert.equal(next.length, 1); assert.equal(next[0].raid.departedAt, cooldown);
     assert.ok(system.agents.filter(agent => agent.health > 0 && !agent.raid && agent.burrowId === next[0].burrowId).length >= 3);
   }
@@ -211,6 +212,7 @@ test("각 군락이 담당 굴에서 첫 습격을 받고 다음 출정도 자�
   assert.deepEqual(first.map(agent => agent.raid.colonyId).sort(), [1, 2]);
   assert.equal(new Set(first.map(agent => agent.burrowId)).size, 2);
   const departures = first.map(agent => ({ colonyId:agent.raid.colonyId, time:agent.raid.departedAt }));
+  for (const agent of first) system.receiveDamage(agent, 100);
   advance(room, system, 465);
   for (const departure of departures) assert.ok(system.agents.some(agent => agent.raid?.colonyId === departure.colonyId &&
     Math.abs(agent.raid.departedAt - departure.time - 135) < 1e-8));
