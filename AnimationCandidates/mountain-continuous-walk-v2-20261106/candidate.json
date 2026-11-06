@@ -1,0 +1,21 @@
+{
+  "status": "unapproved-art-review-not-integrated",
+  "species": "walking-forest",
+  "displayName": "걸어가는 산",
+  "atlas": "walk-candidate.webp",
+  "columns": 8,
+  "rows": 8,
+  "frameWidth": 640,
+  "frameHeight": 640,
+  "frameCount": 64,
+  "durationMs": 1323.3044160879215,
+  "frameDurationMs": 20.676631501373773,
+  "loop": true,
+  "padding": 64,
+  "sourceCanvas": 512,
+  "sourceView": 496.64,
+  "referenceWorldSpeed": 0.3,
+  "referenceDisplaySize": 1.12,
+  "imagesUnchanged": true,
+  "method": "Continuous anchored skin above a rigid toe pad. No game registration."
+}
