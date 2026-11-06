@@ -253,7 +253,7 @@ export function createTribeArt(definitions, assetSource) {
   }
 
   function animationFrame(agent, source, animation, index, action, time, pose) {
-    return attributes.frame(agent.tribe, unitDisplayAttributes(agent), source, animation, index, action, time, pose);
+    return attributes.frame(agent.tribe, unitDisplayAttributes(agent), source, animation, index, action, time, pose, undefined, undefined, agent);
   }
 
   function combatAttackSprite(tribe, appearance, source, elapsed) {

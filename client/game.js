@@ -10,6 +10,13 @@
     const combatVfxCursor = Spawner.createCombatVfxCursor();
     const detailCombatVfx = Spawner.createDetailCombatVfx();
     const detailVfxImages = new Map();
+    function detailVfxImage(path) {
+      if (!detailVfxImages.has(path)) {
+        const image = new Image(); image.src = assetSource(path);
+        detailVfxImages.set(path, image);
+      }
+      return detailVfxImages.get(path);
+    }
     const agentRangedImages = new Map();
     const worldRangedFlights = new Map(), worldRangedImpacts = new Map();
     let combatVfxFrame = { active: [], projectiles: [] };
@@ -4403,10 +4410,13 @@
       }
       const frameSize = attributeFrame ? sprite.width : shape.frameSize;
       const padding = (frameSize - shape.frameSize) / 2;
-      const size = frameSize * birth.scale * cell;
-      const x = -(shape.pivotX + padding) * birth.scale * cell;
+      const pixel = attributeFrame?.minorWorldPerPixel ?? birth.scale;
+      const pivotX = attributeFrame?.minorPivotX ?? shape.pivotX + padding;
+      const pivotY = attributeFrame?.minorPivotY ?? shape.pivotY + padding;
+      const size = frameSize * pixel * cell;
+      const x = -pivotX * pixel * cell;
       const height = shape.unitHeight * Spawner.imageScale(shape.image) * birth.scale * cell;
-      const y = -(shape.pivotY + padding) * birth.scale * cell;
+      const y = -pivotY * pixel * cell;
       const motion = Spawner.sporeBirthMotion(idleMotion.matches ? shape.duration : birth.elapsed);
       ctx.save();
       ctx.translate(topLeft.x + cell / 2, topLeft.y + cell / 2 + cell * AGENT_HEIGHT * .44);
@@ -7929,7 +7939,7 @@
         deathPresentation?.observe(agent, { ...point, x, y }, { scale: point.scale, facing });
         // Persistent stun reads current status, never a replayed impact event.
         Spawner.drawCombatStun?.(context, agent, { ...point, x, y }, state.simSeconds,
-          { width, height, reducedMotion: idleMotion.matches });
+          { width, height, reducedMotion: idleMotion.matches, image: detailVfxImage });
         // A hidden feet trait can still evade on any dominant silhouette. Use
         // the laboratory's existing semantic label, not a hit or shield burst.
         // Read all current cues so a simultaneous received hit keeps its recoil.
@@ -8005,7 +8015,7 @@
         { width, height, reducedMotion: idleMotion.matches, positions: vfxPositions });
       if (labelLayout) ({ vitals: vitalCommands, defenses: defenseCommands, dodges: dodgeLabels } = labelLayout);
       for (const command of vitalCommands) Spawner.drawDetailVitalEffect(context, command,
-        { width, height, reducedMotion: idleMotion.matches });
+        { width, height, reducedMotion: idleMotion.matches, image: detailVfxImage });
       Spawner.drawDetailDefenseLabels?.(context, defenseCommands, { width, height, reducedMotion: idleMotion.matches,
         vitals: vitalCommands, reservedLabels: dodgeLabels });
       for (const label of dodgeLabels) {

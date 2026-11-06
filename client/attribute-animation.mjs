@@ -1,3 +1,4 @@
+import { createTribeMinorAnimation, TRIBE_MINOR_ANIMATION_ASSETS, tribeMinorAnimation } from "./tribe-minor-animation.mjs";
 import { minorTraitResourcePose, minorTraitResourceFrame } from "./minor-trait-resource-motion.mjs";
 import { unitDisplayAttributes, unitDisplayAttributesFrom } from "./unit-display-appearance.mjs";
 import { TRIBE_CANVAS_CACHE_BUDGET } from "./canvas-cache.mjs";
@@ -10,7 +11,7 @@ export const TRIBE_ATTRIBUTE_ASSETS = Object.freeze(["spore", "pebble", "spring"
     ["strength", "feet"].includes(attribute) || attribute === "antenna" && tribe !== "spring" ?
       [root + "Parts/" + attribute + "-left.png", root + "Parts/" + attribute + "-right.png"] :
       [root + "Parts/" + attribute + ".png"])];
-}).concat(TRIBE_MORPHOLOGY_ASSETS));
+}).concat(TRIBE_MORPHOLOGY_ASSETS, TRIBE_MINOR_ANIMATION_ASSETS));
 
 const attachments = {
   spore: {
@@ -97,6 +98,7 @@ function drawAttachment(context, part, spec, x, y, scale, rotation, bend, flatte
 export function createTribeAttributeAnimation(assetSource, createSurface, loadImage) {
   const rigs = new Map(), pending = new Map(), frames = TRIBE_CANVAS_CACHE_BUDGET.createCache(), motions = new Map();
   const morphology = createTribeMorphology(createSurface, loadImage);
+  const minor = createTribeMinorAnimation(createSurface, loadImage);
   const reducedMotion = globalThis.matchMedia?.("(prefers-reduced-motion: reduce)");
 
   function neutralDistance(tribe, track, reference) {
@@ -111,6 +113,8 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
   function pose(agent, current, time) {
     const rig = rigs.get(agent.tribe), attributes = unitDisplayAttributes(agent);
     if (!rig || !hasTribeAttributes(attributes) || !current) return current;
+    if (tribeMinorAnimation(agent, attributes, current.action)) return { ...current, sourceAction: current.action, sourceFrame: current.frame,
+      sourceAnimation: current.animation, sampleTime: time, motionPhase: current.frame / current.animation.frameCount };
     const action = ["harvest", "throw"].includes(current.action) ? "idle" : current.action;
     let motion = motions.get(agent.id);
     if (!motion || time < motion.seenAt || time - motion.seenAt > .4) {
@@ -189,7 +193,7 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
         }
       })));
       rig.idle = await loadImage(rig.animations.idle.image);
-      await morphology.prepare(rig);
+      await Promise.all([morphology.prepare(rig), minor.prepare(tribe)]);
       rig.bodyFrames = new Map();
       rigs.set(tribe, rig);
       return rig;
@@ -197,10 +201,12 @@ export function createTribeAttributeAnimation(assetSource, createSurface, loadIm
     return pending.get(tribe);
   }
 
-  function frame(tribe, attributes, source, animation, index, action, time, motion, replacement, layer) {
+  function frame(tribe, attributes, source, animation, index, action, time, motion, replacement, layer, sourceAgent) {
     attributes = unitDisplayAttributesFrom(attributes);
     const rig = rigs.get(tribe);
     if (!rig || !hasTribeAttributes(attributes) && !replacement) return null;
+    const authored = !replacement && minor.frame(sourceAgent, attributes, animation, index, action, time, motion, layer);
+    if (authored) return authored;
     const bodyAction = motion?.sourceAction || action;
     const trackAction = bodyAction === "carry" ? "walk" : rig.animations[bodyAction] ? bodyAction : "idle";
     const sequence = rig.animations[trackAction];

@@ -1,5 +1,5 @@
-// Reuse the laboratory's existing gold halo and three orbiting squares.
-// This is current authoritative status, not an impact/shot or a replayed event.
+import { COMBAT_EFFECT_ANIMATIONS, combatEffectFrame, drawCombatEffect } from "./combat-effect-assets.mjs";
+
 const clamp = (value, lo, hi) => Math.max(lo, Math.min(hi, value));
 export function combatStunPose(agent, point, time, { width, height, reducedMotion = false } = {}) {
   if (!agent || !(agent.health > 0) || agent.birth || agent.kind === "corpse" ||
@@ -28,6 +28,13 @@ export function drawCombatStun(context, agent, point, time, options) {
   if (!pose) return false;
   context.save();
   try {
+    const animation = COMBAT_EFFECT_ANIMATIONS.stun;
+    const frame = combatEffectFrame(animation, time * 1000, options.reducedMotion);
+    const width = Math.min(animation.frameWidth, pose.radiusX * 3, options.width - 2);
+    const height = Math.min(width * animation.frameHeight / animation.frameWidth, options.height - 2);
+    const x = clamp(pose.x, width / 2 + 1, options.width - width / 2 - 1);
+    const y = clamp(pose.y - height * .1, height / 2 + 1, options.height - height / 2 - 1);
+    if (drawCombatEffect(context, options.image?.(animation.image), animation, frame, x, y, width, height)) return true;
     context.strokeStyle = "#f6d983"; context.lineWidth = pose.lineWidth;
     context.beginPath(); context.ellipse(pose.x, pose.y, pose.radiusX, pose.radiusY, 0, 0, Math.PI * 2); context.stroke();
     context.fillStyle = "#ffe9a7";

@@ -281,7 +281,7 @@ export function createCombatStage(canvas) {
     }
     const dimensions = bodyDimensions(agent), cell = 100 * formationScale(width, height);
     const bodyPoint = { ...point, width: dimensions.width * cell, height: dimensions.height * cell };
-    drawCombatStun(context, agent, bodyPoint, currentTrial.time, { width, height, reducedMotion: reducedMotion.matches });
+    drawCombatStun(context, agent, bodyPoint, currentTrial.time, { width, height, reducedMotion: reducedMotion.matches, image });
     return bodyPoint;
   }
 
@@ -511,7 +511,7 @@ export function createCombatStage(canvas) {
     // Support recipients use the same displayed position as their own sprite.
     const vitalCommands = detailVfx.vitalCommands([...trial.agents, ...(trial.supportAgents || [])].map(stageAgent),
       new Map(Object.entries(points)), clock, { scope: trial, width, height });
-    for (const command of vitalCommands) drawDetailVitalEffect(context, command, { width, height, reducedMotion: reducedMotion.matches });
+    for (const command of vitalCommands) drawDetailVitalEffect(context, command, { width, height, reducedMotion: reducedMotion.matches, image });
     drawDetailDefenseLabels(context, defenseCommands, { width, height, reducedMotion: reducedMotion.matches, vitals: vitalCommands });
     for (const agent of trial.agents) if (agent.health > 0) {
       const evade = combatDodgePose({ active: dodgeCues }, dodgePositions, agent.id, clock, reducedMotion.matches);

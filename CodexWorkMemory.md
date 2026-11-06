@@ -17,6 +17,28 @@
 
 - 기록자 Codex, 결정 주체 사용자. 출처 채팅 6ae7a6f41c94819380facdaa018ca2b0, 부모 전달 “새싹콩 사망 칼날형, 갑피형, 분비형 다 합격”. 원 발언 시각/항목 ID 불명. 승인 시트와 같은 시트 GIF 및 규격 9파일만 보존. 분비형 최종 프레임은 직전 안정된 프레임과 동일한 수정본.
 - 원격 최신 fb261403까지 fast-forward, 이전 미커밋 기록 복원. 최신 기획서가 역할별 표로 변경돼 갑피/분비형 전용 행 부재. 기본형에 혼합 표기하거나 사용자 구조를 되돌리지 않고 기획서 정확한 위치 확인 대기. 게임 적용·배포 없음.
+## 최신 승인 애셋 24클립·기획서 통합 완료 및 커밋 후보 · 01a1b0eb 현재 요약
+
+- 기록 ID: assets-all-apply-content-freeze-20261106-01a1b0eb. 기록 시각: 2026-11-06T22:23:35+09:00. 기록자·통합검수판단 Codex /root, 전부적용/배포 승인 사용자. 출처 현재채팅01a1b0eb-5c79-76a2-96c3-b18db3b182c7와직접도구/worker원본근거. 원발언정확시각·항목ID·PC식별불명, H:/Spawner Windows PowerShell.
+- 구현: 종족안테나/발15클립·중립생물4이동/두꺼비사망5클립·치유/출혈/흡혈/기절4효과=24개를무손실런타임시트로연결했다. 기존이동위상/시뮬레이션과HP숫자 .85초/기절만료조건은유지. idle은승인walk000,포자V7는BODY만사용하고정확worldScaleContract로외부둥지·회전·성장을중복하지않는다. DNA없는사체경로와레거시fallback을보존했다.
+- 기획서: 새9개animated96미리보기는프레임수·프레임별duration·loop가원본GIF와정확일치하며원본링크와문구는보존. 생물5행의공유메타데이터도새시트로동기화. source/runtime contactPNG를메인이직접확인했다. 게임24개별local-asset payload와목록/정책33항목을추가했다.
+- 확인: worker원본SHA/치수/프레임/loop·source카메라/경계검수와형식통과근거를재사용. main후보번들·게임JS·Combat내장script구문,24개asset등록/내장payload원본byte동일,4개새VFX imagecallback의실제drawImage호출,root/후보호출부치환정합을직접확인했다. VFX기존회귀15중11통과·4실패는기존fixture의drawUnitHealthRing누락으로제품VFX진입전실패이며무관fixture는수정하지않았다. 전체게임플레이완료로주장하지않는다.
+- 후보: 고정HEAD 5b4e0972de941a4e274809565a7e557bd67e7d8e에서이번76경로와이번메모리만투영한다. 기존dirty/삭제·다른worker/채팅변경은보존/미포함. 메인최종형식·별도index staged검토/커밋/전용origin main push·기존public Sites source패키징/배포/readback은직후진행하며성공을선기록하지않는다. 근거 literal $Trash/assets-all-apply-01a1b0eb/{scope.json,integration-verification.json,creature,minor,vfx}.
+
+## 최신 애셋 추가 pull·이력 통합 및 분담 · 01a1b0eb 현재 요약
+
+- 기록 ID: assets-all-apply-sync-20261106-01a1b0eb. 기록 시각: 2026-11-06T22:07:47+09:00. 기록자·통합판단 Codex /root, 최신 pull 재요청 및 기획서/게임/배포 승인 사용자. 출처 현재 채팅 01a1b0eb-5c79-76a2-96c3-b18db3b182c7의 추가 pull 요청과 실제 Git 도구. 원발언 정확시각·항목ID·PC 식별 불명. H:/Spawner Windows PowerShell.
+- 실제통합: 추가 fetch로 origin/main da648ef 포자 안테나·발 탄생 V7를 확인하고 로컬 외형96 커밋을 rebase하여 main71b3e65629ebc3ee11478394bcccead995d5ee97에 통합했다. Design 충돌은 기존96px 썸네일과 새V7 BODY원본/SCENE검토GIF링크를 모두 유지해 해결했다. 원격5a44e61도 부모에 포함한다.
+- 보존: 기존 dirty를34f5d10e1b7229eee417726e9770b537eb6c94a9와refs/codex/backups/assets-all-apply-01a1b0eb에 보관, rebase 중 새 dirty는41fb4a35aea7038d017390c33d83f03c9d72a3fb에도 보관했다. 첫stash복원의 메모리충돌은 양쪽기록 보존. 현재index/미해결충돌0. 두번째stash는더새동시작업때문에일괄apply거절되어덮지않았고 DNAload/save·웰컴 scale/걸음추가행이현재에포함됨을직접확인했다. 백업은그대로유지하며미확인복원성공을주장하지않는다.
+- 분담: 공통규칙19의독립영역분담으로동일상속모델/effort worker3개가종족native동작·중립생물이동/사망·상세전투VFX를각구현/자체검수한다. 메인은조율·기획서/호출부/번들·scope통합과전용Git/기존Sites배포를담당. 새문구추가없음. 기존Sites public/owner/version38·https://spawner.oojjrs.chatgpt.site 직접확인, sourcehelper opening진행중.
+
+## 최신 애셋 통합·기획서·게임·배포 착수 · 01a1b0eb 현재 요약
+
+- 기록 ID: assets-all-apply-start-20261106-01a1b0eb. 기록 시각: 2026-11-06T21:54:29+09:00. 기록자·통합판단 Codex /root, 적용·배포 요청 사용자. 출처 현재 채팅 01a1b0eb-5c79-76a2-96c3-b18db3b182c7. 원발언 정확시각·항목 ID·PC 식별 불명. H:/Spawner Windows PowerShell.
+- 사용자 요청: 원격 최신 애셋을 pull하여 기획서·게임 전부 적용하고 기존 Sites까지 배포한다. 새 문구는 추가하지 않고 기존 승인 애셋의 참조·재생·적정 표시 크기를 동기화한다.
+- 관측: 시작 main ed7036c, origin/main 5a44e61로 각1커밋 분기. 기존 게임UI·DNA·서버·공유메모리 dirty 및 동시작업이 있어 전체 보존 후 원격 위로 rebase하고 복원한다. 관련 없는 dirty는 이번 커밋·게시에서 제외하며 기존 main 커밋은 유지한다. 연결 Projects nodes=[]로 보드 없음.
+- 진행: 이력 통합·승인 manifest와 게임 연결 대조·기획서 자산 동기화·좁은 검증·범위 커밋/원격push·기존 Sites 게시 및 readback은 아직 미완료. 임시 근거는 literal $Trash/assets-all-apply-01a1b0eb.
+
 ## 둥지 카드 미리보기 로컬 커밋 범위 확정 · 01a1b0fb
 
 - 기록 ID: nest-template-preview-freeze-20261106-01a1b0fb. 기록 시각: 2026-11-06T22:23:08+09:00. 기록자·분리/Git 판단 Codex /root, 커밋 승인 사용자. 출처 현재 채팅 01a1b0fb-74ce-7de0-abb9-8527c45c9d55의 ‘커밋’. 원 발언 정확 시각·턴/항목 ID·딥링크·PC 식별 불명, H:/Spawner Windows PowerShell.

@@ -1,3 +1,4 @@
+import { APPROVED_CREATURE_WALK_ANIMATIONS, APPROVED_CREATURE_DEATH_ANIMATIONS } from "./creature-approved-animations.mjs";
 import { CREATURE_RANGED_ANIMATIONS, CREATURE_RANGED_ASSETS, creatureRangedPose } from "./creature-ranged.mjs";
 import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
 import { toadHopMotion } from "./toad-hop.mjs";
@@ -61,21 +62,21 @@ export const CREATURE_IDLE_ANIMATIONS = Object.freeze({
 export const CREATURE_WALK_ANIMATIONS = Object.freeze({
   "flower-tail-bird": {"image":"DesignAssets/Animations/CreatureWalkV2/flower-tail-bird/walk.webp","frameSize":388,"columns":4,"durationsMs":[80,80,80,90,90,80,80,87],"loop":true,"pivotX":194,"pivotY":357.0086206896552,"cyclesPerCell":3},
   "dew-rabbit": {"image":"DesignAssets/Animations/CreatureWalkV2/dew-rabbit/walk.webp","frameSize":433,"viewSize":417,"columns":4,"durationsMs":[100,80,100,180,100,100,150,190],"loop":true,"pivotX":216.5,"pivotY":442.9627192982456,"cyclesPerCell":2},
-  "soil-mole": {"image":"DesignAssets/Animations/CreatureWalkV2/soil-mole/walk.webp","frameSize":355,"columns":4,"durationsMs":[80,80,90,80,80,90,80,87],"loop":true,"pivotX":177.5,"pivotY":310.625,"cyclesPerCell":3},
+  "soil-mole": { ...APPROVED_CREATURE_WALK_ANIMATIONS["soil-mole"] },
   "bundle-snail": {"image":"DesignAssets/Animations/CreatureWalkV2/bundle-snail/walk.webp","frameSize":398,"columns":4,"durationsMs":[200,250,250,250,300,250,250,250],"loop":true,"pivotX":199,"pivotY":348.25,"cyclesPerCell":1},
   "cotton-sheep": {"image":"DesignAssets/Animations/CreatureWalkV2/cotton-sheep/walk.webp","frameSize":256,"columns":4,"durationsMs":[125,125,125,125,125,125,125,125],"loop":true,"pivotX":128,"pivotY":224,"cyclesPerCell":2},
   "rolling-acorn": {"image":"DesignAssets/Animations/CreatureWalkV2/rolling-acorn/walk.webp","frameSize":420,"columns":8,"durationsMs":[78,78,78,78,79,78,78,78,78,78,78,79,78,78,78,78,78,78,78,78,79,78,78,78,78,78,78,79,78,78,78,78,78,78,78,78,79,78,78,78,78,78,78,79,78,78,78,78,78,78,78,78,79,78,78,78,78,78,78,79,78,78,78,78],"loop":true,"pivotX":210,"pivotY":349.453125,"cyclesPerCell":0.4},
   "soil-boar": {"image":"DesignAssets/Animations/CreatureWalkApprovedV3/soil-boar/walk.webp","frameSize":640,"viewSize":506.85283,"columns":8,"durationsMs":Array(64).fill(4.8828125),"loop":true,"pivotX":326.154716,"pivotY":425.490566,"cyclesPerCell":2,"registrationScale":1},
   "bubble-toad": {"image":"DesignAssets/Animations/CreatureWalkV2/bubble-toad/walk.webp","frameSize":288,"viewSize":256,"columns":8,"durationsMs":[110,120,80,110,130,90,90,150],"loop":true,"pivotX":145.5,"pivotY":222.26,"cyclesPerCell":2},
   "vine-turtle": {"image":"DesignAssets/Animations/CreatureWalkV2/vine-turtle/walk.webp","frameSize":256,"viewSize":256,"columns":8,"durationsMs":[170,130,120,140,170,130,120,140],"loop":true,"pivotX":131.25,"pivotY":220.81,"cyclesPerCell":1.5},
-  "shadow-weasel": {"image":"DesignAssets/Animations/CreatureWalkV2/shadow-weasel/walk.webp","frameSize":256,"viewSize":256,"columns":8,"durationsMs":[85,80,85,100,85,80,85,100],"loop":true,"pivotX":128.5,"pivotY":211.78,"cyclesPerCell":2.5},
+  "shadow-weasel": { ...APPROVED_CREATURE_WALK_ANIMATIONS["shadow-weasel"] },
   "snare-vine": {"image":"DesignAssets/Animations/CreatureWalkV2/snare-vine/walk.webp","frameSize":256,"viewSize":256,"columns":6,"durationsMs":[180,140,140,160,140,180],"loop":true,"pivotX":127.75,"pivotY":235.08,"cyclesPerCell":1.5},
   "talon-owl": {"image":"DesignAssets/Animations/CreatureWalkV2/talon-owl/walk.webp","frameSize":432,"viewSize":256,"columns":8,"durationsMs":[70,80,80,85,80,70,70,65],"loop":true,"pivotX":205,"pivotY":288,"cyclesPerCell":3},
   "spring-keeper": {"image":"DesignAssets/Animations/CreatureWalkV2/spring-keeper/walk.webp","frameSize":512,"viewSize":384,"columns":4,"durationsMs":[60,60,80,120,80,80,80,80,80,80,80,80,80,80,80,80],"loop":true,"pivotX":221.5,"pivotY":371.5,"cyclesPerCell":3,"takeoffDurationMs":320,"flightDurationMs":640,"landingDurationMs":320},
   "lantern-keeper": {"image":"DesignAssets/Animations/CreatureWalkV2/lantern-keeper/walk.webp","frameSize":384,"columns":6,"durationsMs":[140,100,140,100,120,140],"loop":true,"pivotX":203.25,"pivotY":324.75,"cyclesPerCell":2},
   "old-garden-snail": {"image":"DesignAssets/Animations/CreatureWalkV2/old-garden-snail/walk.webp","frameSize":352,"columns":6,"durationsMs":[220,220,260,220,220,260],"loop":true,"pivotX":180.8125,"pivotY":304.5625,"cyclesPerCell":1},
-  "walking-forest": {"image":"DesignAssets/Animations/CreatureWalkV2/walking-forest/walk.webp","frameSize":256,"columns":6,"durationsMs":[200,180,180,200,180,180],"loop":true,"pivotX":128,"pivotY":224,"cyclesPerCell":1.4},
-  "white-paw": {"image":"DesignAssets/Animations/CreatureWalkV2/white-paw/walk.webp","frameSize":288,"columns":6,"durationsMs":[110,85,125,110,85,125],"loop":true,"pivotX":192.5,"pivotY":242,"cyclesPerCell":2.5},
+  "walking-forest": { ...APPROVED_CREATURE_WALK_ANIMATIONS["walking-forest"] },
+  "white-paw": { ...APPROVED_CREATURE_WALK_ANIMATIONS["white-paw"] },
   "spiny-back-leader": {"image":"DesignAssets/Animations/CreatureWalkV2/spiny-back-leader/walk.webp","frameSize":256,"columns":6,"durationsMs":[110,100,100,110,100,100],"loop":true,"pivotX":128,"pivotY":224,"cyclesPerCell":2.5}
 });
 
@@ -135,7 +136,7 @@ export const CREATURE_DEATH_ANIMATIONS = Object.freeze({
   "walking-forest": {"image": "DesignAssets/Animations/CreatureDeathV12/walking-forest/runtime.webp", "frameSize": 256, "viewSize": 256, "pivotX": 128.0, "pivotY": 224.0, "columns": 8, "durationsMs": [33, 34, 33, 33, 34, 33, 33, 34, 33, 33, 34, 33, 33, 34, 33, 33, 34, 33, 33, 34, 33, 33, 34, 33, 33, 17, 1000], "loop": false},
   "bundle-snail": {"image":"DesignAssets/Animations/SnailDeathV1/bundle-snail/runtime.webp","frameSize":256,"viewSize":255.95759717314488,"pivotX":128.03533568904592,"pivotY":248.9558303886926,"columns":8,"durationsMs":[40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,1000],"loop":false},
   "old-garden-snail": {"image":"DesignAssets/Animations/SnailDeathV1/old-garden-snail/runtime.webp","frameSize":256,"viewSize":256.5860805860806,"pivotX":131.1856684981685,"pivotY":223.95215201465203,"columns":8,"durationsMs":[40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,1000],"loop":false},
-  "bubble-toad": {"image": "DesignAssets/Animations/BubbleToadDeath/RebuildV3/runtime.webp", "frameSize": 256, "viewSize": 255.71842307666503, "pivotX": 129.06362738388998, "pivotY": 220.82812188553496, "columns": 4, "durationsMs": [60, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 70, 40, 40, 40, 40, 40, 40, 40, 40, 40, 60, 1000], "loop": false},
+  "bubble-toad": { ...APPROVED_CREATURE_DEATH_ANIMATIONS["bubble-toad"] },
   "soil-mole": {"image": "DesignAssets/Animations/CreatureDeathV6/soil-mole/runtime.webp", "frameSize": 256, "viewSize": 256.0707637189895, "pivotX": 128.02064407200112, "pivotY": 231.56069494440834, "columns": 4, "durationsMs": [120, 90, 90, 90, 90, 90, 140, 1000], "loop": false},
   "shadow-weasel": {"image": "DesignAssets/Animations/CreatureDeathV6/shadow-weasel/runtime.webp", "frameSize": 256, "viewSize": 243.62312045574424, "pivotX": 128.35099274270337, "pivotY": 171.4882831172111, "columns": 4, "durationsMs": [120, 90, 90, 100, 100, 100, 160, 1000], "loop": false},
   "lantern-keeper": {"image":"DesignAssets/Animations/CreatureDeathV10/lantern-keeper/runtime.webp","frameSize":256,"viewSize":248.71174377224202,"pivotX":135.3149466192171,"pivotY":223.83807829181495,"columns":6,"durationsMs":[33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,17,17,33,33,34,33,33,34,33,33,34,33,770],"loop":false},

@@ -1,6 +1,7 @@
 import { CREATURE_RANGED_EFFECTS, CREATURE_RANGED_EFFECT_ASSETS, creatureRangedEffectCommand, creatureRangedBodyCanvas, creatureRangedFlightPoint, creatureRangedChargeCommand } from "./creature-ranged-vfx.mjs";
 import { CREATURE_RANGED_ANIMATIONS, creatureRangedOutlet } from "./creature-ranged.mjs";
 import { unitRangedProjectile } from "./unit-ranged.mjs";
+import { COMBAT_EFFECT_ANIMATIONS, COMBAT_EFFECT_ASSETS, combatEffectFrame, drawCombatEffect } from "./combat-effect-assets.mjs";
 
 // User-approved V4 artwork. Detailed combat only; never the world-cell renderer.
 const root = "DesignAssets/Animations/CombatVfxV4/";
@@ -15,7 +16,7 @@ export const DETAIL_DEFENSE_VFX = Object.freeze({
   block: "DesignAssets/Animations/CombatDefenseV1/block.png",
   parry: "DesignAssets/Animations/CombatDefenseV1/parry.png"
 });
-export const DETAIL_COMBAT_VFX_ASSETS = [...Object.values(DETAIL_COMBAT_VFX).map(clip => clip.image), ...Object.values(DETAIL_DEFENSE_VFX), ...CREATURE_RANGED_EFFECT_ASSETS];
+export const DETAIL_COMBAT_VFX_ASSETS = [...Object.values(DETAIL_COMBAT_VFX).map(clip => clip.image), ...Object.values(DETAIL_DEFENSE_VFX), ...CREATURE_RANGED_EFFECT_ASSETS, ...COMBAT_EFFECT_ASSETS];
 export function detailVfxFrame(clip, milliseconds) {
   if (!Number.isFinite(milliseconds) || milliseconds < 0) return null;
   for (let index = 0; index < clip.frames.length; index++) {
@@ -301,11 +302,16 @@ export function layoutDetailVitalLabels(context, commands, options) {
 
 // Reuse the laboratory's existing healing ring/plus and signed HP labels.
 // Bleed is damage over time, not a new collision, projectile or attack recoil.
-export function drawDetailVitalEffect(context, command, { width, height, reducedMotion = false }) {
+export function drawDetailVitalEffect(context, command, options) {
+  const { width, height, reducedMotion } = options;
   const progress = Math.max(0, Math.min(1, command.age / .85)), restore = command.channel === "restore";
   const scale = Math.max(.65, Math.min(1, width / 1040));
   context.save(); context.globalAlpha = 1 - progress ** 2;
-  if (restore) {
+  const animation = !command.directDamage && COMBAT_EFFECT_ANIMATIONS[command.kind];
+  const frame = animation && combatEffectFrame(animation, progress * animation.durationMs, reducedMotion);
+  const artwork = animation && drawCombatEffect(context, options.image?.(animation.image), animation, frame,
+    command.x, command.y, animation.frameWidth * scale, animation.frameHeight * scale);
+  if (restore && !artwork) {
     context.strokeStyle = "#c1ffc4"; context.lineWidth = 3 * scale;
     context.beginPath(); context.arc(command.x, command.y, (15 + (reducedMotion ? 0 : progress * 30)) * scale, 0, Math.PI * 2); context.stroke();
     context.beginPath(); context.moveTo(command.x - 8 * scale, command.y); context.lineTo(command.x + 8 * scale, command.y);
