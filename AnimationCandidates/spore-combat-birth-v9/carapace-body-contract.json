@@ -1,0 +1,513 @@
+{
+  "form": "carapace",
+  "frameSize": 512,
+  "columns": 4,
+  "frameCount": 22,
+  "pivot": [
+    256,
+    448
+  ],
+  "durationsMs": [
+    180,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    160,
+    160,
+    160,
+    160,
+    160,
+    160,
+    160,
+    160,
+    80,
+    80,
+    80,
+    80,
+    700
+  ],
+  "method": "approved original pixels; independently authored cap folding and stalk stretch on existing continuous-row rig",
+  "gameCodeChanged": false,
+  "record": [
+    {
+      "frame": 2,
+      "t": 0.26,
+      "pose": {
+        "form": "carapace",
+        "elapsed": 0.26,
+        "profile": {
+          "centerX": 223.34580745080254,
+          "neckY": 339.4806852602443,
+          "eyeY": 389.4606852602443,
+          "stemWidth": 134.232,
+          "stemHeight": 94.962,
+          "top": 202
+        },
+        "neutral": false,
+        "growth": 0.4305429319629209,
+        "bodyY": 0.938404074702886,
+        "capX": 0.6039227186475764,
+        "capY": 1.3400173905666781,
+        "lean": 0.16315000000000002,
+        "open": 0.2,
+        "rootX": 27.372069644169564,
+        "rootY": -80.1639829116004
+      }
+    },
+    {
+      "frame": 3,
+      "t": 0.34,
+      "pose": {
+        "form": "carapace",
+        "elapsed": 0.34,
+        "profile": {
+          "centerX": 223.34580745080254,
+          "neckY": 339.4806852602443,
+          "eyeY": 389.4606852602443,
+          "stemWidth": 134.232,
+          "stemHeight": 94.962,
+          "top": 202
+        },
+        "neutral": false,
+        "growth": 0.4305429319629209,
+        "bodyY": 1.2140853926932025,
+        "capX": 0.7414717907290153,
+        "capY": 0.8460221389853219,
+        "lean": 0.25025000000000003,
+        "open": 0.2,
+        "rootX": 53.471971057248766,
+        "rootY": -22.3713440683536
+      }
+    },
+    {
+      "frame": 4,
+      "t": 0.42,
+      "pose": {
+        "form": "carapace",
+        "elapsed": 0.42,
+        "profile": {
+          "centerX": 223.34580745080254,
+          "neckY": 339.4806852602443,
+          "eyeY": 389.4606852602443,
+          "stemWidth": 134.232,
+          "stemHeight": 94.962,
+          "top": 202
+        },
+        "neutral": false,
+        "growth": 0.4860968586678139,
+        "bodyY": 1.11661693917333,
+        "capX": 0.864587533970369,
+        "capY": 0.968784639746635,
+        "lean": 0.12675,
+        "open": 0.2,
+        "rootX": 68.38620043615117,
+        "rootY": 0
+      }
+    },
+    {
+      "frame": 5,
+      "t": 0.5,
+      "pose": {
+        "form": "carapace",
+        "elapsed": 0.5,
+        "profile": {
+          "centerX": 223.34580745080254,
+          "neckY": 339.4806852602443,
+          "eyeY": 389.4606852602443,
+          "stemWidth": 134.232,
+          "stemHeight": 94.962,
+          "top": 202
+        },
+        "neutral": false,
+        "growth": 0.45831989531536743,
+        "bodyY": 1.280747322852586,
+        "capX": 0.8942305070517572,
+        "capY": 0.9450164443632376,
+        "lean": 0.156,
+        "open": 0.2,
+        "rootX": 72.11475778087677,
+        "rootY": 9.321393361814
+      }
+    },
+    {
+      "frame": 6,
+      "t": 0.58,
+      "pose": {
+        "form": "carapace",
+        "elapsed": 0.58,
+        "profile": {
+          "centerX": 223.34580745080254,
+          "neckY": 339.4806852602443,
+          "eyeY": 389.4606852602443,
+          "stemWidth": 134.232,
+          "stemHeight": 94.962,
+          "top": 202
+        },
+        "neutral": false,
+        "growth": 0.45831989531536743,
+        "bodyY": 1.2592508206543296,
+        "capX": 0.8893502788421115,
+        "capY": 0.904965030351016,
+        "lean": 0.19175,
+        "open": 0.2,
+        "rootX": 60.92908574669996,
+        "rootY": 13.0499507065396
+      }
+    },
+    {
+      "frame": 7,
+      "t": 0.66,
+      "pose": {
+        "form": "carapace",
+        "elapsed": 0.66,
+        "profile": {
+          "centerX": 223.34580745080254,
+          "neckY": 339.4806852602443,
+          "eyeY": 389.4606852602443,
+          "stemWidth": 134.232,
+          "stemHeight": 94.962,
+          "top": 202
+        },
+        "neutral": false,
+        "growth": 0.4722083769915907,
+        "bodyY": 1.2722574409880913,
+        "capX": 0.6345083561998871,
+        "capY": 0.9793019266297175,
+        "lean": 0.1248,
+        "open": 0.2,
+        "rootX": 52.53983172106736,
+        "rootY": 20.5070653959908
+      }
+    },
+    {
+      "frame": 8,
+      "t": 0.74,
+      "pose": {
+        "form": "carapace",
+        "elapsed": 0.74,
+        "profile": {
+          "centerX": 223.34580745080254,
+          "neckY": 339.4806852602443,
+          "eyeY": 389.4606852602443,
+          "stemWidth": 134.232,
+          "stemHeight": 94.962,
+          "top": 202
+        },
+        "neutral": false,
+        "growth": 0.45831989531536743,
+        "bodyY": 1.4992025518341308,
+        "capX": 0.5919675637766284,
+        "capY": 0.7558176217339668,
+        "lean": 0.2561,
+        "open": 0.2,
+        "rootX": 49.743413712523164,
+        "rootY": 20.5070653959908
+      }
+    },
+    {
+      "frame": 9,
+      "t": 0.82,
+      "pose": {
+        "form": "carapace",
+        "elapsed": 0.82,
+        "profile": {
+          "centerX": 223.34580745080254,
+          "neckY": 339.4806852602443,
+          "eyeY": 389.4606852602443,
+          "stemWidth": 134.232,
+          "stemHeight": 94.962,
+          "top": 202
+        },
+        "neutral": false,
+        "growth": 0.4860968586678139,
+        "bodyY": 1.4838365755658989,
+        "capX": 0.7408372183978741,
+        "capY": 0.8586085357443873,
+        "lean": 0.182,
+        "open": 0.2,
+        "rootX": 44.15057769543476,
+        "rootY": 7.4571146894512
+      }
+    },
+    {
+      "frame": 10,
+      "t": 0.98,
+      "pose": {
+        "form": "carapace",
+        "elapsed": 0.98,
+        "profile": {
+          "centerX": 223.34580745080254,
+          "neckY": 339.4806852602443,
+          "eyeY": 389.4606852602443,
+          "stemWidth": 134.232,
+          "stemHeight": 94.962,
+          "top": 202
+        },
+        "neutral": false,
+        "growth": 0.5522367982689403,
+        "bodyY": 1.1804793765890844,
+        "capX": 0.8244946547134032,
+        "capY": 0.8898316879453683,
+        "lean": 0.1469,
+        "open": 0.2,
+        "rootX": 32.14027494221925,
+        "rootY": 1.7676593668616896
+      }
+    },
+    {
+      "frame": 11,
+      "t": 1.14,
+      "pose": {
+        "form": "carapace",
+        "elapsed": 1.14,
+        "profile": {
+          "centerX": 223.34580745080254,
+          "neckY": 339.4806852602443,
+          "eyeY": 389.4606852602443,
+          "stemWidth": 134.232,
+          "stemHeight": 94.962,
+          "top": 202
+        },
+        "neutral": false,
+        "growth": 0.6383483027014646,
+        "bodyY": 1.1352065534289617,
+        "capX": 0.9006566143596038,
+        "capY": 0.9053795076657309,
+        "lean": 0.12414999999999998,
+        "open": 0.2,
+        "rootX": 18.479937531507876,
+        "rootY": 0
+      }
+    },
+    {
+      "frame": 12,
+      "t": 1.3,
+      "pose": {
+        "form": "carapace",
+        "elapsed": 1.3,
+        "profile": {
+          "centerX": 223.34580745080254,
+          "neckY": 339.4806852602443,
+          "eyeY": 389.4606852602443,
+          "stemWidth": 134.232,
+          "stemHeight": 94.962,
+          "top": 202
+        },
+        "neutral": false,
+        "growth": 0.703421017906394,
+        "bodyY": 1.1429033209146378,
+        "capX": 0.9447647566360454,
+        "capY": 0.84424260418916,
+        "lean": 0.13715,
+        "open": 0.8272000000000006,
+        "rootX": 10.750938144431899,
+        "rootY": -2.341642250570421
+      }
+    },
+    {
+      "frame": 13,
+      "t": 1.46,
+      "pose": {
+        "form": "carapace",
+        "elapsed": 1.46,
+        "profile": {
+          "centerX": 223.34580745080254,
+          "neckY": 339.4806852602443,
+          "eyeY": 389.4606852602443,
+          "stemWidth": 134.232,
+          "stemHeight": 94.962,
+          "top": 202
+        },
+        "neutral": false,
+        "growth": 0.8121306451272059,
+        "bodyY": 1.0851737363417564,
+        "capX": 0.9603554834750592,
+        "capY": 0.8993817241861115,
+        "lean": 0.0481,
+        "open": 1,
+        "rootX": 8.81186990220532,
+        "rootY": 0.7880129908314444
+      }
+    },
+    {
+      "frame": 14,
+      "t": 1.62,
+      "pose": {
+        "form": "carapace",
+        "elapsed": 1.62,
+        "profile": {
+          "centerX": 223.34580745080254,
+          "neckY": 339.4806852602443,
+          "eyeY": 389.4606852602443,
+          "stemWidth": 134.232,
+          "stemHeight": 94.962,
+          "top": 202
+        },
+        "neutral": false,
+        "growth": 0.9013297670107379,
+        "bodyY": 1.0394611929719695,
+        "capX": 0.9100180248756115,
+        "capY": 0.9241062072097248,
+        "lean": 0.14755,
+        "open": 1,
+        "rootX": 3.2820666178364757,
+        "rootY": 0.42721938168172874
+      }
+    },
+    {
+      "frame": 15,
+      "t": 1.78,
+      "pose": {
+        "form": "carapace",
+        "elapsed": 1.78,
+        "profile": {
+          "centerX": 223.34580745080254,
+          "neckY": 339.4806852602443,
+          "eyeY": 389.4606852602443,
+          "stemWidth": 134.232,
+          "stemHeight": 94.962,
+          "top": 202
+        },
+        "neutral": false,
+        "growth": 0.9627267388829281,
+        "bodyY": 1.0179597109591092,
+        "capX": 0.9319097691629795,
+        "capY": 0.8772740768732454,
+        "lean": 0.1365,
+        "open": 1,
+        "rootX": 1.645440834391814,
+        "rootY": 0.14714569864686466
+      }
+    },
+    {
+      "frame": 16,
+      "t": 1.94,
+      "pose": {
+        "form": "carapace",
+        "elapsed": 1.94,
+        "profile": {
+          "centerX": 223.34580745080254,
+          "neckY": 339.4806852602443,
+          "eyeY": 389.4606852602443,
+          "stemWidth": 134.232,
+          "stemHeight": 94.962,
+          "top": 202
+        },
+        "neutral": false,
+        "growth": 0.9984025715181714,
+        "bodyY": 1.0005570102852959,
+        "capX": 0.9546895406104665,
+        "capY": 0.9241737492577198,
+        "lean": 0.04745,
+        "open": 1,
+        "rootX": 0.08889918539519978,
+        "rootY": 0.03248671268826818
+      }
+    },
+    {
+      "frame": 17,
+      "t": 2.1,
+      "pose": {
+        "form": "carapace",
+        "elapsed": 2.1,
+        "profile": {
+          "centerX": 223.34580745080254,
+          "neckY": 339.4806852602443,
+          "eyeY": 389.4606852602443,
+          "stemWidth": 134.232,
+          "stemHeight": 94.962,
+          "top": 202
+        },
+        "neutral": false,
+        "growth": 1,
+        "bodyY": 1,
+        "capX": 0.9681077408608748,
+        "capY": 1.0671596046279976,
+        "lean": 0.0949,
+        "open": 1,
+        "rootX": 0,
+        "rootY": 0
+      }
+    },
+    {
+      "frame": 18,
+      "t": 2.18,
+      "pose": {
+        "form": "carapace",
+        "elapsed": 2.18,
+        "profile": {
+          "centerX": 223.34580745080254,
+          "neckY": 339.4806852602443,
+          "eyeY": 389.4606852602443,
+          "stemWidth": 134.232,
+          "stemHeight": 94.962,
+          "top": 202
+        },
+        "neutral": false,
+        "growth": 1,
+        "bodyY": 1,
+        "capX": 0.9472534772748421,
+        "capY": 0.9901889775736752,
+        "lean": 0.002084548104956261,
+        "open": 1,
+        "rootX": 0,
+        "rootY": 0
+      }
+    },
+    {
+      "frame": 19,
+      "t": 2.26,
+      "pose": {
+        "form": "carapace",
+        "elapsed": 2.26,
+        "profile": {
+          "centerX": 223.34580745080254,
+          "neckY": 339.4806852602443,
+          "eyeY": 389.4606852602443,
+          "stemWidth": 134.232,
+          "stemHeight": 94.962,
+          "top": 202
+        },
+        "neutral": false,
+        "growth": 1,
+        "bodyY": 1,
+        "capX": 0.9696730680663511,
+        "capY": 1.0070627536304648,
+        "lean": -0.010489067055393628,
+        "open": 1,
+        "rootX": 0,
+        "rootY": 0
+      }
+    },
+    {
+      "frame": 20,
+      "t": 2.34,
+      "pose": {
+        "form": "carapace",
+        "elapsed": 2.34,
+        "profile": {
+          "centerX": 223.34580745080254,
+          "neckY": 339.4806852602443,
+          "eyeY": 389.4606852602443,
+          "stemWidth": 134.232,
+          "stemHeight": 94.962,
+          "top": 202
+        },
+        "neutral": false,
+        "growth": 1,
+        "bodyY": 1,
+        "capX": 0.9980740688866562,
+        "capY": 1.002676900447755,
+        "lean": -0.0012602040816326703,
+        "open": 1,
+        "rootX": 0,
+        "rootY": 0
+      }
+    }
+  ]
+}
