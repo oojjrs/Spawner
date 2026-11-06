@@ -1,0 +1,61 @@
+{
+  "status": "user-approved",
+  "sourceApproval": "user-approved",
+  "tribe": "spring",
+  "form": "gather",
+  "action": "walk",
+  "frameSize": 512,
+  "columns": 8,
+  "frameCount": 16,
+  "durationsMs": [
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70
+  ],
+  "durationMs": 1120,
+  "loop": true,
+  "pivotX": 256,
+  "pivotY": 448,
+  "rootMotion": false,
+  "source": "DesignAssets/Tribes/spring/ApprovedGatherV1/source.png",
+  "sourceSHA256": "1b1d411adf398832e7c9e0b7ce7a8412e0ff3c0953a6c3860d1c2e343d49f201",
+  "sourcePixelSize": [
+    1254,
+    1254
+  ],
+  "sourceOpaqueBounds": [
+    277,
+    432,
+    972,
+    1103
+  ],
+  "sheet": "spring-gather-walk-v1-sheet.png",
+  "preview": "spring-gather-walk-v1-preview.gif",
+  "method": "Existing native mesh-animation workflow adapted to one continuous high-resolution full-body texture. All visible anatomy, including eyes, organs and feet, remains on one continuous surface; no separated body parts. Bilinear alpha-aware texture sampling with 2x antialiasing.",
+  "timingReference": "Existing spring flow-v4: 16 x 70ms, grounded fluid locomotion, no airborne frames.",
+  "motionNote": "Gentle grounded flow: lower body widens and recovers; tip follows with a delayed response. Approved V1 motion, not an exact copy of the previous runtime motion.",
+  "candidate": false,
+  "verification": {
+    "allFramesMatchSheet": true,
+    "previewRegeneratedFromSheetMatchesExactly": true,
+    "gifDecodedFrames": 16,
+    "gifDurationMs": 1120,
+    "singleConnectedBody": true,
+    "clippedFrames": 0,
+    "sheetSHA256": "07fb978c09e8bbd78ffda229dae0aff084ca0714a531f15b2cb695f8ac460b5f",
+    "previewSHA256": "31faa5f57c4749c8d64c1f183ef297da229417a4aa7e826b2dd85ea14f9e16e3"
+  }
+}
