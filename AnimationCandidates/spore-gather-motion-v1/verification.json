@@ -599,7 +599,7 @@
       ]
     ],
     "loopBoundaryMeanAbsDifference": 0.0,
-    "reviewState": "Not submitted to user; not approved; not pushed"
+    "reviewState": "User approved idle and walk V1; game integration and deployment excluded"
   },
   "walk": {
     "sheet": "(4096, 1024)",
@@ -769,6 +769,6 @@
       ]
     ],
     "loopBoundaryMeanAbsDifference": 0.6840133666992188,
-    "reviewState": "Not submitted to user; not approved; not pushed"
+    "reviewState": "User approved idle and walk V1; game integration and deployment excluded"
   }
 }
